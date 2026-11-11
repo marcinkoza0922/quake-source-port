@@ -63,6 +63,8 @@ pub struct World {
     pub lm_surfs: Vec<LmSurf>,
     pub samples: Vec<u32>,
     pub atlas_layers: u32,
+    /// Coloured (.lit) lighting was loaded for the world model.
+    pub lit: bool,
     /// Per texture: primary and alternate animation sequences (texture indices).
     pub anims: Vec<(Vec<u32>, Vec<u32>, bool)>,
     pub submodels: Vec<SubModel>,
@@ -155,6 +157,7 @@ impl World {
             lm_surfs: Vec::new(),
             samples: Vec::new(),
             atlas_layers: 1,
+            lit: lit.is_some_and(|l| !l.is_empty() && l.len() == bsp.lighting.len() * 3),
             anims: Vec::new(),
             submodels: Vec::new(),
             bsp_nodes: bsp.nodes.clone(),

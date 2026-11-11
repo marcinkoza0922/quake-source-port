@@ -19,6 +19,26 @@ struct FrameUbo {
     skybox0: [u32; 4],
     skybox1: [u32; 4],
     alphas: [f32; 4],
+    soft: [f32; 4],
+    softf: [u32; 4],
+}
+
+/// ironwail NOISESCALE.
+const NOISESCALE: f32 = 9.0 / 255.0;
+
+/// R_SetupView / R_ChooseBModelProgram / alias mode selection for r_softemu:
+/// (screen dither, texture dither, world dither level, alias mode).
+fn softemu_params(st: &Settings) -> (f32, f32, u32, u32) {
+    let (screen, texture) = match st.softemu {
+        0 => (st.dither / 255.0, 0.0),
+        2 => (NOISESCALE * st.dither * st.dither_screen, NOISESCALE * st.dither * st.dither_texture),
+        _ => (0.0, 0.0), // fine dithers in post; banded doesn't dither
+    };
+    let banding = if st.softemu == 3 { st.lightmap_banding != 0.0 } else { st.lightmap_banding > 0.0 };
+    let world = if banding { 2 } else if st.softemu >= 2 { 1 } else { 0 };
+    let warp = if st.softemu == 3 { st.mdl_warp != 0.0 } else { st.mdl_warp > 0.0 };
+    let alias = if warp { 2 } else if st.softemu == 2 { 1 } else { 0 };
+    (screen, texture, world, alias)
 }
 
 #[repr(C)]
@@ -52,6 +72,9 @@ struct PostPush {
     gamma: f32,
     contrast: f32,
     scene: u32,
+    dither: f32,
+    mode: u32,
+    scale: f32,
 }
 
 #[repr(C)]
@@ -792,6 +815,7 @@ impl Renderer {
         // UBO + lightmap dynamic data
         if let Some(vs) = &view {
             let sky = self.skybox;
+            let soft = softemu_params(st);
             let ubo = FrameUbo {
                 viewproj: vs.vp,
                 eye: [vs.eye[0], vs.eye[1], vs.eye[2], time as f32],
@@ -818,6 +842,8 @@ impl Renderer {
                     self.sky_layers[1],
                 ],
                 alphas,
+                soft: [soft.0, soft.1, 0.0, 0.0],
+                softf: [soft.2, soft.3, 0, 0],
             };
             dynw.write_at(0, &[ubo]);
             let mut lmd = LmDyn {
@@ -1159,6 +1185,13 @@ impl Renderer {
                 gamma: st.gamma.clamp(0.1, 4.0),
                 contrast: st.contrast.clamp(0.1, 4.0),
                 scene: t.color_slot,
+                dither: match st.softemu {
+                    0 => st.dither / 255.0,
+                    1 => NOISESCALE * st.dither * st.dither_screen,
+                    _ => 0.0,
+                },
+                mode: st.softemu.min(2),
+                scale: self.render_scale,
             }]));
             dev.cmd_draw(cmd, 3, 1, 0, 0);
             // 2D on top at output resolution, unaffected by render scale

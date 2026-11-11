@@ -142,8 +142,9 @@ pub fn sky_layers(pal: &Palette, t: &MipTex, q64: bool) -> Option<(u32, u32, Vec
 }
 
 /// Alias skin: (base, fullbright or None, colormap mask or None).
-/// The mask holds ramp position+1 for shirt (r, range 16..32) and pants (g, 96..112);
-/// those texels are zeroed in base so the shader can re-add them translated.
+/// The mask holds ramp position+1 for shirt (r, range 16..32) and pants (g, 96..112).
+/// Base keeps the original colours so it filters cleanly; translated entities
+/// add (translated - original) ramp colour where the mask is set.
 pub fn alias_skin(
     pal: &Palette,
     src: &[u8],
@@ -166,7 +167,7 @@ pub fn alias_skin(
         let bot = (96..112).contains(&i);
         if transparent {
             base.extend_from_slice(&[0, 0, 0, 0]);
-        } else if full || top || bot {
+        } else if full {
             base.extend_from_slice(&[0, 0, 0, 255]);
         } else {
             base.extend_from_slice(&px(pal, i, 255));
@@ -285,5 +286,112 @@ mod downsample_tests {
         assert_eq!(downsample_rgba(&[1; 8], 4, 4, true).len(), 16);
         // odd sizes clamp at the edge
         assert_eq!(downsample_rgba(&[10, 20, 30, 255], 1, 1, true), vec![10, 20, 30, 255]);
+    }
+}
+
+/// Size of the softemu palette lookup table (128^3 palette indices).
+pub const LUT_BYTES: usize = 128 * 128 * 128;
+
+/// GLPalette_UpdateLookupTable: nearest palette index for every 7-bit RGB
+/// cell, indexed `r + g*128 + b*128*128`. `metric`: 0 naive RGB,
+/// 1 Riemersma (linear RGB), 2 weighted OKLab.
+pub fn palette_lut(pal: &Palette, metric: u32) -> Vec<u8> {
+    fn srgb_to_linear(v: f32) -> f32 {
+        if v > 0.04045 { ((v + 0.055) / 1.055).powf(2.4) } else { v / 12.92 }
+    }
+    fn oklab(c: [f32; 3]) -> [f32; 3] {
+        let l = (0.412_221_46 * c[0] + 0.536_332_55 * c[1] + 0.051_445_995 * c[2]).cbrt();
+        let m = (0.211_903_5 * c[0] + 0.680_699_5 * c[1] + 0.107_396_96 * c[2]).cbrt();
+        let s = (0.088_302_46 * c[0] + 0.281_718_85 * c[1] + 0.629_978_7 * c[2]).cbrt();
+        [
+            0.210_454_26 * l + 0.793_617_8 * m - 0.004_072_047 * s,
+            1.977_998_5 * l - 2.428_592_2 * m + 0.450_593_7 * s,
+            0.025_904_037 * l + 0.782_771_77 * m - 0.808_675_77 * s,
+        ]
+    }
+    let norm = |c: [u32; 3]| {
+        let mut v = c.map(|x| x as f32 / 255.0);
+        if metric >= 1 {
+            v = v.map(srgb_to_linear);
+        }
+        if metric >= 2 {
+            v = oklab(v);
+        }
+        v
+    };
+    let dist = |a: [f32; 3], b: [f32; 3]| {
+        let mut d = [b[0] - a[0], b[1] - a[1], b[2] - a[2]];
+        match metric {
+            1 => {
+                let rmean = (a[0] + b[0]) * 0.5;
+                d[0] * d[0] * (2.0 + rmean) + d[1] * d[1] * 4.0 + d[2] * d[2] * (3.0 - rmean)
+            }
+            2 => {
+                d[0] *= 1.25;
+                d[2] *= 1.5;
+                d[0] * d[0] + d[1] * d[1] + d[2] * d[2]
+            }
+            _ => d[0] * d[0] + d[1] * d[1] + d[2] * d[2],
+        }
+    };
+    let cands: Vec<[f32; 3]> = pal.iter().map(|c| norm([c[0] as u32, c[1] as u32, c[2] as u32])).collect();
+    let mut out = vec![0u8; LUT_BYTES];
+    let threads = std::thread::available_parallelism().map_or(4, |n| n.get()).min(16);
+    let slab = 128 / threads.next_power_of_two().min(128);
+    std::thread::scope(|sc| {
+        for (bi, chunk) in out.chunks_mut(128 * 128 * slab).enumerate() {
+            let cands = &cands;
+            sc.spawn(move || {
+                for (i, o) in chunk.iter_mut().enumerate() {
+                    let i = i + bi * 128 * 128 * slab;
+                    let g = [i & 127, (i >> 7) & 127, i >> 14].map(|x| ((x << 1) + (x >> 6)) as u32);
+                    let t = norm(g);
+                    let mut best = (0u8, f32::MAX);
+                    for (k, c) in cands.iter().enumerate() {
+                        let d = dist(t, *c);
+                        if d < best.1 {
+                            best = (k as u8, d);
+                        }
+                    }
+                    *o = best.0;
+                }
+            });
+        }
+    });
+    out
+}
+
+#[cfg(test)]
+mod lut_tests {
+    use super::*;
+    use crate::types::parse_texture_mode;
+
+    #[test]
+    fn palette_lut_maps_cells_to_nearest_entry() {
+        // greyscale ramp in the first 64 entries, everything else saturated red
+        let mut pal = [[255u8, 0, 0]; 256];
+        for (i, c) in pal.iter_mut().take(64).enumerate() {
+            *c = [(i * 4) as u8; 3];
+        }
+        for metric in 0..3 {
+            let t = std::time::Instant::now();
+            let lut = palette_lut(&pal, metric);
+            assert!(t.elapsed().as_secs_f32() < 5.0, "metric {metric} took {:?}", t.elapsed());
+            assert_eq!(lut.len(), LUT_BYTES);
+            assert_eq!(lut[0], 0, "black");
+            let at = |r: usize, g: usize, b: usize| lut[r + g * 128 + b * 16384];
+            assert_eq!(at(127, 0, 0), 64, "pure red -> first red entry");
+            let mid = at(64, 64, 64) as usize;
+            assert!((30..=34).contains(&mid), "mid grey -> {mid}");
+        }
+    }
+
+    #[test]
+    fn texture_mode_names_and_indices() {
+        assert_eq!(parse_texture_mode("GL_NEAREST"), Some(0));
+        assert_eq!(parse_texture_mode("gl_linear_mipmap_linear"), Some(5));
+        assert_eq!(parse_texture_mode("3"), Some(2));
+        assert_eq!(parse_texture_mode(""), None);
+        assert_eq!(parse_texture_mode("7"), None);
     }
 }
