@@ -25,6 +25,9 @@ use crate::view::{ViewCvars, ViewState};
 /// Server tic rate when rendering faster (ironwail-style decoupling).
 const SERVER_TIC: f64 = 1.0 / 72.0;
 
+/// Virtual rows taken by the classic status bar + inventory bar.
+const CLASSIC_SBAR_LINES: f32 = 48.0;
+
 const HOST_CVARS: &[(&str, &str, u32)] = &[
     ("host_maxfps", "250", CVAR_ARCHIVE),
     ("fov", "90", CVAR_ARCHIVE),
@@ -36,6 +39,9 @@ const HOST_CVARS: &[(&str, &str, u32)] = &[
     ("v_kickpitch", "0.6", 0),
     ("v_gunkick", "1", CVAR_ARCHIVE),
     ("r_drawviewmodel", "1", 0),
+    ("r_lerpmodels", "1", CVAR_ARCHIVE),
+    ("r_lerpmove", "1", CVAR_ARCHIVE),
+    ("scr_hudstyle", "1", CVAR_ARCHIVE),
     ("crosshair", "0", CVAR_ARCHIVE),
     ("scr_centertime", "2", 0),
     ("scr_printspeed", "8", 0),
@@ -325,6 +331,21 @@ impl Host {
                 }
             }
             HostEvent::Focus => {}
+            HostEvent::MousePos { x, y } => {
+                if !self.menu.active() {
+                    return;
+                }
+                let Some(win) = &self.window else { return };
+                let (pw, ph) = win.drawable_size();
+                let (ww, wh) = win.window_size();
+                let (px, py) = (x * pw as f32 / ww.max(1) as f32, y * ph as f32 / wh.max(1) as f32);
+                let mut c = Canvas::new(pw, ph);
+                c.center_320x200();
+                let pos = (px / c.scale - c.ox, py / c.scale - c.oy);
+                if let Some(snd) = self.menu.mouse_move(pos) {
+                    self.local_sound(snd);
+                }
+            }
             HostEvent::Input(ie) => {
                 if let InputEvent::Key { key, down: true } = ie
                     && key == b'`' as i32
@@ -545,6 +566,11 @@ impl Host {
         self.con.print(&format!("loaded {} in {:.2}s\n", self.level.mapname, t0.elapsed().as_secs_f32()));
     }
 
+    /// scr_hudstyle 0: classic full-width status bar below the 3D view.
+    fn classic_hud(&self) -> bool {
+        self.cv("scr_hudstyle") == 0.0
+    }
+
     fn view_cvars(&self) -> ViewCvars {
         let v = |n: &str| self.cv(n);
         ViewCvars {
@@ -559,6 +585,8 @@ impl Host {
             fov: v("fov").clamp(10.0, 170.0),
             gunkick: v("v_gunkick") != 0.0,
             drawviewmodel: v("r_drawviewmodel") != 0.0,
+            lerp_models: v("r_lerpmodels") != 0.0,
+            lerp_move: v("r_lerpmove") != 0.0,
         }
     }
 
@@ -715,7 +743,12 @@ impl Host {
 
         let (view, gun) = if self.cl.signon == 4 && !self.level.mapname.is_empty() {
             let cv = self.view_cvars();
-            let (v, g) = self.view.calc_refdef(&self.cl, &cv, &self.level, ft);
+            let (mut v, g) = self.view.calc_refdef(&self.cl, &cv, &self.level, ft);
+            self.cl.viewent.lerpflags &= !qclient::LERP_RESETANIM;
+            if self.classic_hud() && self.cl.intermission == 0 {
+                let (_, h) = self.r.size();
+                v.reserve_bottom = (CLASSIC_SBAR_LINES * crate::draw::Canvas::new(1, h).scale) as u32;
+            }
             (Some(v), g)
         } else {
             (None, None)
@@ -767,7 +800,8 @@ impl Host {
         let mut blend = [0.0; 4];
         if let Some(v) = &view {
             let fs = &self.server.core.fs;
-            self.view.entities(&mut self.cl, &mut self.level, fs, &mut self.r, &mut ents);
+            let cv = self.view_cvars();
+            self.view.entities(&mut self.cl, &cv, &mut self.level, fs, &mut self.r, &mut ents);
             if let Some(g) = gun {
                 ents.push(g);
             }
@@ -779,6 +813,7 @@ impl Host {
         // 2D
         let crosshair = self.cv("crosshair") != 0.0;
         let showfps = self.cv("scr_showfps") != 0.0;
+        let classic = self.classic_hud();
         {
             let fs = &self.server.core.fs;
             let pics = &mut self.pics;
@@ -795,11 +830,18 @@ impl Host {
                     3 => self.con.draw_center(&mut c, usize::MAX),
                     _ => {
                         if crosshair {
-                            let (x, y) = ((c.vw() / 2.0).floor() - 4.0, (c.vh() / 2.0).floor() - 4.0);
+                            let scene_h = c.vh() - if classic { CLASSIC_SBAR_LINES } else { 0.0 };
+                            let (x, y) = ((c.vw() / 2.0).floor() - 4.0, (scene_h / 2.0).floor() - 4.0);
                             c.ch(x, y, b'+');
                         }
                         let face = self.view.face_anim_time > self.cl.time;
-                        crate::sbar::Sbar::new(&mut c, &mut pf).draw(&self.cl, self.show_scores, face);
+                        let mut sb = crate::sbar::Sbar::new(&mut c, &mut pf);
+                        if classic {
+                            sb.backtile(CLASSIC_SBAR_LINES);
+                            sb.draw(&self.cl, self.show_scores, face);
+                        } else {
+                            sb.draw_modern(&self.cl, self.show_scores, face);
+                        }
                     }
                 }
             }

@@ -416,7 +416,8 @@ impl Renderer {
         let mut trans: Vec<(f32, Trans)> = Vec::new();
         let mut lm_vis: Vec<u32> = Vec::new();
         let mut particles = Range::default();
-        let view = fr.view.map(|v| setup_view(&v, w, h));
+        let scene_h = fr.view.map_or(h, |v| h.saturating_sub(v.reserve_bottom).max(1));
+        let view = fr.view.map(|v| setup_view(&v, w, scene_h));
         let fog = fr.fog;
 
         if let Some(vs) = &view {
@@ -941,8 +942,19 @@ impl Renderer {
                 min_depth: 0.0,
                 max_depth: 1.0,
             };
-            dev.cmd_set_viewport(cmd, 0, &[vp_full]);
-            dev.cmd_set_scissor(cmd, 0, &[area]);
+            let vp_scene = vk::Viewport {
+                height: scene_h as f32,
+                ..vp_full
+            };
+            let area_scene = vk::Rect2D {
+                extent: vk::Extent2D {
+                    width: w,
+                    height: scene_h,
+                },
+                ..area
+            };
+            dev.cmd_set_viewport(cmd, 0, &[vp_scene]);
+            dev.cmd_set_scissor(cmd, 0, &[area_scene]);
             let gfx = vk::PipelineBindPoint::GRAPHICS;
             let all = vk::ShaderStageFlags::VERTEX | vk::ShaderStageFlags::FRAGMENT;
             let push = |data: &[u8]| dev.cmd_push_constants(cmd, p.layout, all, 0, data);
@@ -1037,7 +1049,7 @@ impl Renderer {
                         0,
                         &[vk::Viewport {
                             max_depth: 0.3,
-                            ..vp_full
+                            ..vp_scene
                         }],
                     );
                     for a in vm {
@@ -1050,9 +1062,10 @@ impl Renderer {
                             },
                         );
                     }
-                    dev.cmd_set_viewport(cmd, 0, &[vp_full]);
                 }
             }
+            dev.cmd_set_viewport(cmd, 0, &[vp_full]);
+            dev.cmd_set_scissor(cmd, 0, &[area]);
             if let Some(ofs) = ui_ofs {
                 dev.cmd_bind_descriptor_sets(cmd, gfx, p.layout, 0, &set, &[]);
                 dev.cmd_bind_pipeline(cmd, gfx, p.ui);

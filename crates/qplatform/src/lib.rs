@@ -364,6 +364,14 @@ impl Window {
         (w.max(0) as u32, h.max(0) as u32)
     }
 
+    /// Window size in points (the coordinate space of mouse events).
+    pub fn window_size(&self) -> (u32, u32) {
+        let (mut w, mut h) = (0, 0);
+        // SAFETY: raw is a live window; out pointers valid.
+        unsafe { sys::SDL_GetWindowSize(self.raw, &mut w, &mut h) };
+        (w.max(0) as u32, h.max(0) as u32)
+    }
+
     /// Relative mouse mode (hidden cursor, unbounded deltas).
     pub fn set_relative_mouse(&self, on: bool) -> Result<()> {
         // SAFETY: raw is a live window.

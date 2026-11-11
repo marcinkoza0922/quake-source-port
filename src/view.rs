@@ -1,7 +1,7 @@
 //! V_CalcRefdef (view.c): bob, roll, view height, punch, damage kick,
 //! colour shifts and the view model; plus building the render entity list.
 
-use qclient::{ClientEntity, ClientState, LERP_RESETANIM};
+use qclient::{ClientEntity, ClientState, LERP_FINISH, LERP_MOVESTEP, LERP_RESETANIM, LERP_RESETMOVE};
 use qcore::math::{Vec3, angle_vectors};
 use qnet::protocol::*;
 use qrender::{DLight, Particle, RenderEntity, View};
@@ -27,6 +27,10 @@ pub struct ViewCvars {
     pub fov: f32,
     pub gunkick: bool,
     pub drawviewmodel: bool,
+    /// r_lerpmodels: blend alias frames.
+    pub lerp_models: bool,
+    /// r_lerpmove: smooth MOVESTEP (monster) movement over 0.1s.
+    pub lerp_move: bool,
 }
 
 #[derive(Clone, Copy, Default)]
@@ -42,6 +46,12 @@ struct Anim {
     frame: i32,
     prev: i32,
     start: f64,
+    // R_SetupEntityTransform state
+    move_start: f64,
+    prev_origin: [f32; 3],
+    cur_origin: [f32; 3],
+    prev_angles: [f32; 3],
+    cur_angles: [f32; 3],
 }
 
 #[derive(Default)]
@@ -159,7 +169,7 @@ impl ViewState {
     /// view model entity, if one should be drawn.
     pub fn calc_refdef(&mut self, cl: &ClientState, cv: &ViewCvars, lv: &Level, ft: f32) -> (View, Option<RenderEntity>) {
         let ent = cl.entities.get(cl.viewentity).cloned().unwrap_or_default();
-        let mut view = View { origin: ent.origin, angles: cl.viewangles, fov_x: cv.fov };
+        let mut view = View { origin: ent.origin, angles: cl.viewangles, fov_x: cv.fov, reserve_bottom: 0 };
         if cl.intermission != 0 {
             view.angles = ent.angles;
             return (view, None);
@@ -216,7 +226,7 @@ impl ViewState {
         let gun = lv.models.get(wmodel).copied().flatten().filter(|_| show).map(|m| {
             let frame = cl.stats[STAT_WEAPONFRAME];
             let a = &mut self.view_anim;
-            if a.model != wmodel || cl.viewent.lerpflags & LERP_RESETANIM != 0 && a.frame != frame {
+            if a.model != wmodel || cl.viewent.lerpflags & LERP_RESETANIM != 0 {
                 if a.model != wmodel {
                     a.prev = frame;
                 } else {
@@ -230,7 +240,7 @@ impl ViewState {
                 a.frame = frame;
                 a.start = cl.time;
             }
-            let lerp = (((cl.time - a.start) / 0.1) as f32).clamp(0.0, 1.0);
+            let lerp = if cv.lerp_models { (((cl.time - a.start) / 0.1) as f32).clamp(0.0, 1.0) } else { 1.0 };
             RenderEntity {
                 model: m.id,
                 origin: gorg,
@@ -246,25 +256,75 @@ impl ViewState {
         (view, gun)
     }
 
-    fn anim_lerp(a: &mut Anim, e: &ClientEntity, time: f64) -> (u32, u32, f32) {
+    /// R_SetupAliasFrame: (frame, prev_frame, blend). Consumes LERP_RESETANIM.
+    fn anim_lerp(a: &mut Anim, e: &mut ClientEntity, time: f64, enabled: bool) -> (u32, u32, f32) {
         if a.model != e.model || e.lerpflags & LERP_RESETANIM != 0 {
-            *a = Anim { model: e.model, frame: e.frame, prev: e.frame, start: time - 1.0 };
+            a.model = e.model;
+            a.frame = e.frame;
+            a.prev = e.frame;
+            a.start = time - 1.0;
+            e.lerpflags &= !LERP_RESETANIM;
         } else if a.frame != e.frame {
             a.prev = a.frame;
             a.frame = e.frame;
             a.start = time;
         }
-        let lerp = (((time - a.start) / 0.1) as f32).clamp(0.0, 1.0);
-        (a.frame.max(0) as u32, a.prev.max(0) as u32, lerp)
+        if !enabled {
+            return (a.frame.max(0) as u32, a.frame.max(0) as u32, 1.0);
+        }
+        let blend = if e.lerpflags & LERP_FINISH != 0 && e.lerpfinish > a.start {
+            ((time - a.start) / (e.lerpfinish - a.start)) as f32
+        } else {
+            ((time - a.start) / 0.1) as f32
+        };
+        (a.frame.max(0) as u32, a.prev.max(0) as u32, blend.clamp(0.0, 1.0))
+    }
+
+    /// R_SetupEntityTransform: smoothed (origin, angles). Consumes LERP_RESETMOVE.
+    fn move_lerp(a: &mut Anim, e: &mut ClientEntity, time: f64, enabled: bool) -> ([f32; 3], [f32; 3]) {
+        if e.lerpflags & LERP_RESETMOVE != 0 {
+            a.move_start = 0.0;
+            (a.prev_origin, a.cur_origin) = (e.origin, e.origin);
+            (a.prev_angles, a.cur_angles) = (e.angles, e.angles);
+            e.lerpflags &= !LERP_RESETMOVE;
+        } else if e.origin != a.cur_origin || e.angles != a.cur_angles {
+            a.move_start = time;
+            a.prev_origin = a.cur_origin;
+            a.cur_origin = e.origin;
+            a.prev_angles = a.cur_angles;
+            a.cur_angles = e.angles;
+        }
+        if !enabled || e.lerpflags & LERP_MOVESTEP == 0 {
+            return (e.origin, e.angles);
+        }
+        let blend = if e.lerpflags & LERP_FINISH != 0 && e.lerpfinish > a.move_start {
+            ((time - a.move_start) / (e.lerpfinish - a.move_start)) as f32
+        } else {
+            ((time - a.move_start) / 0.1) as f32
+        }
+        .clamp(0.0, 1.0);
+        let mut o = [0.0; 3];
+        let mut ang = [0.0; 3];
+        for i in 0..3 {
+            o[i] = a.prev_origin[i] + (a.cur_origin[i] - a.prev_origin[i]) * blend;
+            let mut d = a.cur_angles[i] - a.prev_angles[i];
+            if d > 180.0 {
+                d -= 360.0;
+            } else if d < -180.0 {
+                d += 360.0;
+            }
+            ang[i] = a.prev_angles[i] + d * blend;
+        }
+        (o, ang)
     }
 
     /// Render entities: visedicts, statics, temp entities (beams).
-    pub fn entities(&mut self, cl: &mut ClientState, lv: &mut Level, fs: &qcore::fs::Fs, r: &mut qrender::Renderer, out: &mut Vec<RenderEntity>) {
+    pub fn entities(&mut self, cl: &mut ClientState, cv: &ViewCvars, lv: &mut Level, fs: &qcore::fs::Fs, r: &mut qrender::Renderer, out: &mut Vec<RenderEntity>) {
         let time = cl.time;
         if self.anims.len() < cl.entities.len() {
             self.anims.resize(cl.entities.len(), Anim::default());
         }
-        let mk = |e: &ClientEntity, m: crate::assets::Model, f: (u32, u32, f32), idx: usize, cl: &ClientState| {
+        let mk = |e: &ClientEntity, m: crate::assets::Model, f: (u32, u32, f32), t: ([f32; 3], [f32; 3]), idx: usize, cl: &ClientState| {
             let colormap = (m.kind == Kind::Alias && e.colormap > 0 && (e.colormap as usize) <= cl.scores.len()).then(|| {
                 let c = cl.scores[e.colormap as usize - 1].colors;
                 [((c >> 4) & 15) as u8, (c & 15) as u8]
@@ -272,8 +332,8 @@ impl ViewState {
             let player = idx >= 1 && idx <= cl.maxclients;
             RenderEntity {
                 model: m.id,
-                origin: e.origin,
-                angles: e.angles,
+                origin: t.0,
+                angles: t.1,
                 frame: f.0,
                 prev_frame: f.1,
                 lerp: f.2,
@@ -288,18 +348,22 @@ impl ViewState {
         };
         for k in 0..cl.visedicts.len() {
             let i = cl.visedicts[k];
-            let e = &cl.entities[i];
-            let Some(m) = lv.models.get(e.model).copied().flatten() else { continue };
-            let f = if m.kind == Kind::Brush { (e.frame.max(0) as u32, 0, 1.0) } else { Self::anim_lerp(&mut self.anims[i], e, time) };
-            out.push(mk(e, m, f, i, cl));
+            let Some(m) = lv.models.get(cl.entities[i].model).copied().flatten() else { continue };
+            let e = &mut cl.entities[i];
+            let a = &mut self.anims[i];
+            let t = Self::move_lerp(a, e, time, cv.lerp_move);
+            let f = if m.kind == Kind::Brush { (e.frame.max(0) as u32, 0, 1.0) } else { Self::anim_lerp(a, e, time, cv.lerp_models) };
+            out.push(mk(&cl.entities[i], m, f, t, i, cl));
         }
         if self.static_anims.len() < cl.static_entities.len() {
             self.static_anims.resize(cl.static_entities.len(), Anim::default());
         }
-        for (i, e) in cl.static_entities.iter().enumerate() {
-            let Some(m) = lv.models.get(e.model).copied().flatten() else { continue };
-            let f = if m.kind == Kind::Brush { (e.frame.max(0) as u32, 0, 1.0) } else { Self::anim_lerp(&mut self.static_anims[i], e, time) };
-            out.push(mk(e, m, f, 0, cl));
+        for i in 0..cl.static_entities.len() {
+            let Some(m) = lv.models.get(cl.static_entities[i].model).copied().flatten() else { continue };
+            let e = &mut cl.static_entities[i];
+            let f = if m.kind == Kind::Brush { (e.frame.max(0) as u32, 0, 1.0) } else { Self::anim_lerp(&mut self.static_anims[i], e, time, cv.lerp_models) };
+            let t = (e.origin, e.angles);
+            out.push(mk(&cl.static_entities[i], m, f, t, 0, cl));
         }
         for t in &cl.temp_entities {
             if let Some(m) = lv.named(fs, r, t.model) {

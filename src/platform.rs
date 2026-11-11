@@ -104,6 +104,8 @@ pub enum HostEvent {
     Quit,
     Resize,
     Focus,
+    /// Absolute cursor position in window points (menus).
+    MousePos { x: f32, y: f32 },
 }
 
 pub fn convert(e: Event) -> Vec<HostEvent> {
@@ -118,15 +120,15 @@ pub fn convert(e: Event) -> Vec<HostEvent> {
             }
         }
         Event::Text(s) => s.chars().map(|c| HostEvent::Input(InputEvent::Text(c))).collect(),
-        Event::MouseMotion { dx, dy, .. } => one(InputEvent::MouseMotion { dx, dy }),
-        Event::MouseButton { button, down, .. } => {
+        Event::MouseMotion { x, y, dx, dy } => vec![HostEvent::MousePos { x, y }, HostEvent::Input(InputEvent::MouseMotion { dx, dy })],
+        Event::MouseButton { button, down, x, y } => {
             // SDL: 1 left, 2 middle, 3 right; Quake: MOUSE1 left, MOUSE2 right, MOUSE3 middle
             let b = match button {
                 2 => 3,
                 3 => 2,
                 b => b,
             };
-            one(InputEvent::MouseButton { button: b, down })
+            vec![HostEvent::MousePos { x, y }, HostEvent::Input(InputEvent::MouseButton { button: b, down })]
         }
         Event::MouseWheel { dy, .. } => one(InputEvent::MouseWheel { y: dy }),
         Event::GamepadAxis { axis, value, .. } => {

@@ -31,6 +31,9 @@ pub struct View {
     pub angles: Vec3,
     /// Horizontal field of view in degrees; vertical is derived from the aspect.
     pub fov_x: f32,
+    /// Pixel rows reserved at the bottom of the screen (classic status bar);
+    /// the 3D scene is drawn above them.
+    pub reserve_bottom: u32,
 }
 
 /// One entity to draw.

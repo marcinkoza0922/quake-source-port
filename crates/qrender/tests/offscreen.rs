@@ -49,6 +49,7 @@ fn start_bsp_renders_non_black() {
         origin: [o[0], o[1], o[2] + 22.0],
         angles: [0.0, yaw, 0.0],
         fov_x: 90.0,
+        ..Default::default()
     };
     let frame = RenderFrame {
         time: 0.5,

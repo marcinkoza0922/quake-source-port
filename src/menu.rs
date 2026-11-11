@@ -35,7 +35,12 @@ pub struct Menu {
     /// Comment line of each save slot (`None` = unused).
     pub saves: Vec<Option<String>>,
     prev: Screen,
+    /// Cursor position in 320x200 menu units, when the mouse has moved.
+    mouse: Option<(f32, f32)>,
 }
+
+/// Slider track in options, menu x units.
+const SLIDER_X: (f32, f32) = (168.0, 248.0);
 
 /// (label, cvar, min, max, step); step 0 = toggle.
 const OPTIONS: &[(&str, &str, f32, f32, f32)] = &[
@@ -52,6 +57,9 @@ const OPTIONS: &[(&str, &str, f32, f32, f32)] = &[
     ("Aim Slowdown", "aim_slowdown", 0.0, 1.0, 0.1),
     ("Aim Rotation", "aim_rotation", 0.0, 1.0, 0.1),
     ("Gyro", "gyro_enable", 0.0, 1.0, 0.0),
+    ("Modern HUD", "scr_hudstyle", 0.0, 1.0, 0.0),
+    ("Interpolate Anim", "r_lerpmodels", 0.0, 1.0, 0.0),
+    ("Interpolate Move", "r_lerpmove", 0.0, 1.0, 0.0),
 ];
 
 impl Menu {
@@ -64,6 +72,7 @@ impl Menu {
             opt_cursor: 0,
             saves: vec![None; MAX_SAVEGAMES],
             prev: Screen::None,
+            mouse: None,
         }
     }
 
@@ -76,8 +85,67 @@ impl Menu {
         self.screen = s;
     }
 
+    /// Item under the menu-space point for the current screen.
+    fn item_at(&self, (x, y): (f32, f32)) -> Option<usize> {
+        let row = |top: f32, h: f32, n: usize, x0: f32| {
+            (x >= x0 && x < 312.0 && y >= top && y < top + h * n as f32).then(|| ((y - top) / h) as usize)
+        };
+        match self.screen {
+            Screen::Main => row(32.0, 20.0, 5, 54.0),
+            Screen::SinglePlayer => row(32.0, 20.0, 3, 54.0),
+            Screen::Load | Screen::Save => row(32.0, 8.0, MAX_SAVEGAMES, 8.0),
+            Screen::Options => row(32.0, 8.0, OPTIONS.len(), 16.0),
+            Screen::Quit | Screen::None => None,
+        }
+    }
+
+    fn cursor_mut(&mut self) -> Option<&mut usize> {
+        match self.screen {
+            Screen::Main => Some(&mut self.main_cursor),
+            Screen::SinglePlayer => Some(&mut self.sp_cursor),
+            Screen::Load | Screen::Save => Some(&mut self.load_cursor),
+            Screen::Options => Some(&mut self.opt_cursor),
+            Screen::Quit | Screen::None => None,
+        }
+    }
+
+    /// Mouse hover: moves the cursor onto the item under the pointer.
+    /// Returns a sound to play when the selection changed.
+    pub fn mouse_move(&mut self, pos: (f32, f32)) -> Option<&'static str> {
+        self.mouse = Some(pos);
+        let i = self.item_at(pos)?;
+        let c = self.cursor_mut()?;
+        (*c != i).then(|| {
+            *c = i;
+            "misc/menu1.wav"
+        })
+    }
+
     pub fn key(&mut self, key: i32, cv: &mut Cvars, server_active: bool) -> Vec<Action> {
         let mut out = Vec::new();
+        // left click acts on the item under the pointer, never on a stale cursor
+        if key == K_MOUSE1 && self.screen != Screen::Quit {
+            let Some(pos) = self.mouse else { return out };
+            let Some(i) = self.item_at(pos) else { return out };
+            if let Some(c) = self.cursor_mut() {
+                *c = i;
+            }
+            if self.screen == Screen::Options {
+                let (_, name, min, max, step) = OPTIONS[i];
+                if step != 0.0 && pos.0 >= SLIDER_X.0 - 8.0 && pos.0 < SLIDER_X.1 + 8.0 {
+                    let f = ((pos.0 - SLIDER_X.0) / (SLIDER_X.1 - SLIDER_X.0 - 8.0)).clamp(0.0, 1.0);
+                    let v = min + ((f * (max - min)) / step).round() * step;
+                    cv.set(name, &qcore::cvar::format_float((v.clamp(min, max) * 1000.0).round() / 1000.0));
+                    out.push(Action::Sound("misc/menu3.wav"));
+                    return out;
+                }
+            }
+        }
+        let key = match key {
+            K_MWHEELUP => K_UPARROW,
+            K_MWHEELDOWN => K_DOWNARROW,
+            k => k,
+        };
         let up = matches!(key, K_UPARROW | K_DPAD_UP);
         let down = matches!(key, K_DOWNARROW | K_DPAD_DOWN);
         let left = matches!(key, K_LEFTARROW | K_DPAD_LEFT);
@@ -178,7 +246,7 @@ impl Menu {
                 }
             }
             Screen::Quit => {
-                if matches!(key, K_ENTER | K_ABUTTON) || key == b'y' as i32 {
+                if matches!(key, K_ENTER | K_ABUTTON | K_MOUSE1) || key == b'y' as i32 {
                     out.push(Action::Command("quit\n".into()));
                 } else if back || key == b'n' as i32 {
                     self.screen = if self.prev == Screen::Quit { Screen::Main } else { self.prev };
@@ -258,7 +326,7 @@ impl Menu {
                 }
             }
             Screen::Quit => {
-                let msg = ["  Really quit?  ", "", " Press Y or Enter ", "   to quit, N or   ", "   Escape to stay  "];
+                let msg = ["  Really quit?  ", "", " Y, Enter or click ", "   to quit, N or   ", "  Escape/right-click"];
                 c.fill(56.0, 76.0, 208.0, 56.0, [0.0, 0.0, 0.0, 0.85]);
                 for (i, l) in msg.iter().enumerate() {
                     c.string(64.0, 80.0 + i as f32 * 8.0, l);
