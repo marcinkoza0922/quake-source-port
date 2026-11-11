@@ -88,6 +88,15 @@ const HOST_CVARS: &[(&str, &str, u32)] = &[
     ("sv_aimassist", "0", CVAR_SERVERINFO),
     ("_cl_name", "player", CVAR_ARCHIVE),
     ("_cl_color", "0", CVAR_ARCHIVE),
+    // Multiplayer menu (Join / Host Game).
+    ("_mp_address", "localhost", CVAR_ARCHIVE),
+    ("_mp_maxplayers", "8", CVAR_ARCHIVE),
+    ("_mp_coop", "0", CVAR_ARCHIVE),
+    ("_mp_teamplay", "0", CVAR_ARCHIVE),
+    ("_mp_skill", "1", CVAR_ARCHIVE),
+    ("_mp_fraglimit", "0", CVAR_ARCHIVE),
+    ("_mp_timelimit", "0", CVAR_ARCHIVE),
+    ("_mp_map", "", CVAR_ARCHIVE),
     ("scr_showfps", "0", CVAR_ARCHIVE),
     ("cl_startdemos", "1", CVAR_ARCHIVE),
     ("viewsize", "100", CVAR_ARCHIVE),
@@ -219,6 +228,8 @@ pub struct Host {
     pub net_port: u16,
     /// `-dedicated`: no local client.
     pub dedicated: bool,
+    /// Running `slist`.
+    lan_search: Option<crate::net::LanSearch>,
 }
 
 impl CmdContext for Host {
@@ -304,6 +315,7 @@ impl Host {
             last_server: None,
             net_port: crate::net::DEFAULT_PORT,
             dedicated: false,
+            lan_search: None,
         };
         qinput::register_commands(&mut h.cmds);
         register_commands(&mut h.cmds);
@@ -544,6 +556,7 @@ impl Host {
                         }
                     }
                     Some(Routed::Text { ch, dest: KeyDest::Console }) => self.con.text(ch),
+                    Some(Routed::Text { ch, dest: KeyDest::Menu }) => self.menu.text(ch, &mut self.server.core.cvars),
                     Some(Routed::Key { key, dest: KeyDest::Menu }) => {
                         let active = self.server.active();
                         let acts = self.menu.key(key, &mut self.server.core.cvars, active);
@@ -699,6 +712,37 @@ impl Host {
                 self.con.print(&format!("Connection failed: {why}"));
                 self.disconnect_client();
             }
+        }
+    }
+
+    fn poll_lan_search(&mut self) {
+        let Some(ls) = &mut self.lan_search else { return };
+        if ls.poll() {
+            self.menu.servers = ls
+                .found
+                .iter()
+                .filter_map(|(a, r)| match r {
+                    qnet::Ccrep::ServerInfo { hostname, level, players, max_players, .. } => Some(crate::menu::ServerEntry {
+                        address: a.to_string(),
+                        hostname: hostname.clone(),
+                        map: level.clone(),
+                        players: *players,
+                        max_players: *max_players,
+                    }),
+                    _ => None,
+                })
+                .collect();
+        }
+        if ls.done(self.realtime) {
+            let n = ls.found.len();
+            self.lan_search = None;
+            self.menu.searching = false;
+            let mut out = String::new();
+            for s in &self.menu.servers {
+                out.push_str(&format!("{:<15.15} {:<15.15} {:>2}/{:<2} {}\n", s.hostname, s.map, s.players, s.max_players, s.address));
+            }
+            out.push_str(&format!("{n} server(s) found\n"));
+            self.con.print(&out);
         }
     }
 
@@ -1220,6 +1264,7 @@ impl Host {
             self.feed_client();
         }
         self.poll_remote();
+        self.poll_lan_search();
         self.read_demo(dt);
         self.check_local_client();
         if self.cl.signon > 0 {
@@ -1918,6 +1963,32 @@ fn register_commands(c: &mut Commands<Host>) {
         {
             h.connect_remote(&a.to_string());
         }
+    });
+    c.add("menu_multiplayer", |h, a| {
+        let page = a.argv(1).to_ascii_lowercase();
+        if let Some(Action::Command(c)) = h.menu.open_multiplayer(&page) {
+            h.cbuf.add_text(&c);
+        }
+    });
+    c.add("slist", |h, _| {
+        if h.lan_search.is_some() {
+            return;
+        }
+        match crate::net::LanSearch::start(h.net_port, h.realtime) {
+            Ok(ls) => {
+                h.print("Looking for Quake servers...\n");
+                h.lan_search = Some(ls);
+                h.menu.servers.clear();
+                h.menu.searching = true;
+            }
+            Err(e) => h.print(&format!("slist: {e}\n")),
+        }
+    });
+    // Maps for the Host Game page: the running game dir's own maps.
+    c.add("_netmaps", |h, _| {
+        let base = h.fs().basedir().to_path_buf();
+        let game = h.game_name().to_string();
+        h.menu.net_maps = qui::mods::maps(&base, &game);
     });
     c.add("port", |h, a| {
         if a.argc() < 2 {
