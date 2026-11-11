@@ -73,7 +73,7 @@ impl Level {
             }
             match Bsp::parse(&d) {
                 Ok(b) => {
-                    let lit = fs.open(&format!("{}.lit", name.trim_end_matches(".bsp"))).and_then(|d| qformats::bsp::parse_lit(&d).ok()).or_else(|| b.rgb_lighting.clone());
+                    let lit = load_lit(fs, name, &b);
                     brush_names.push(name.clone());
                     brushes.push((b, lit));
                 }
@@ -82,8 +82,7 @@ impl Level {
         }
         let mut brush_models = HashMap::new();
         if let Some(b) = &bsp {
-            let base = world.trim_end_matches(".bsp");
-            let lit = fs.open(&format!("{base}.lit")).and_then(|d| qformats::bsp::parse_lit(&d).ok()).or_else(|| b.rgb_lighting.clone());
+            let lit = load_lit(fs, &world, b);
             let refs: Vec<_> = brushes.iter().map(|(b, l)| (b, l.as_deref())).collect();
             match r.load_level(b, lit.as_deref(), &refs) {
                 Ok((s, ext)) => {
@@ -149,4 +148,14 @@ impl Level {
         self.by_name.insert(name.to_string(), m);
         m
     }
+}
+
+/// Mod_LoadLighting: a `.lit` only applies when it comes from the same or a
+/// higher-priority game dir than the map (so id1's start.lit never lights
+/// another game's start.bsp). Falls back to embedded RGB (Quake64).
+fn load_lit(fs: &qcore::fs::Fs, bsp_path: &str, b: &Bsp) -> Option<Vec<u8>> {
+    fs.open_companion(bsp_path, &format!("{}.lit", bsp_path.trim_end_matches(".bsp")))
+        .and_then(|d| qformats::bsp::parse_lit(&d).ok())
+        .filter(|l| l.len() == b.lighting.len() * 3)
+        .or_else(|| b.rgb_lighting.clone())
 }

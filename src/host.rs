@@ -647,6 +647,11 @@ impl Host {
         let fs = &self.server.core.fs;
         let con = &mut self.con;
         self.level = Level::load(fs, &mut self.r, self.snd.as_mut(), &mut self.cl, &mut |s| con.print(s));
+        // Fog_ParseWorldspawn; an svc_fog parsed in the same batch wins.
+        if self.cl.fog == qclient::Fog::default() {
+            let w = self.level.world_fog;
+            self.cl.fog = qclient::Fog { density: w.density, color: w.color, time: 0.0 };
+        }
         self.view.reset();
         self.con.print(&format!("loaded {} in {:.2}s\n", self.level.mapname, t0.elapsed().as_secs_f32()));
     }
@@ -1011,11 +1016,7 @@ impl Host {
             }
         }
         let styles: Vec<i32> = (0..qnet::protocol::MAX_LIGHTSTYLES).map(|i| self.cl.lightstyle_value(i)).collect();
-        let fog = if self.cl.fog.density > 0.0 {
-            qrender::Fog { density: self.cl.fog.density, color: self.cl.fog.color }
-        } else {
-            self.level.world_fog
-        };
+        let fog = qrender::Fog { density: self.cl.fog.density, color: self.cl.fog.color };
         let v = |n: &str| self.cv(n);
         let settings = Settings {
             gamma: v("gamma").clamp(0.3, 3.0),
@@ -1191,10 +1192,11 @@ fn register_commands(c: &mut Commands<Host>) {
     c.add("bf", |h, _| h.view.bonus_flash());
     c.add("+showscores", |h, _| h.show_scores = true);
     c.add("-showscores", |h, _| h.show_scores = false);
-    for n in ["startdemos", "demos", "stopdemo", "playdemo", "sizeup", "sizedown", "cd", "fog", "help", "scr_autoscale", "togglezoom", "messagemode", "messagemode2", "menu_multiplayer"] {
+    for n in ["startdemos", "demos", "stopdemo", "playdemo", "sizeup", "sizedown", "cd", "help", "scr_autoscale", "togglezoom", "messagemode", "messagemode2", "menu_multiplayer"] {
         c.add(n, |_, _| {});
     }
     c.add("cfg_unbindall", |_, _| {});
+    c.add("fog", cmd_fog);
     // Host_Name_f / Host_Color_f: set the archived cvar, then tell the server.
     c.add("name", |h, a| {
         if a.argc() < 2 {
@@ -1311,4 +1313,23 @@ fn register_commands(c: &mut Commands<Host>) {
         }
         h.drain_server_log();
     });
+}
+
+/// Fog_FogCommand_f. Fades (the time argument) apply instantly.
+fn cmd_fog(h: &mut Host, a: &Args) {
+    let f = h.cl.fog;
+    let n = |i: usize| qcore::cvar::q_atof(a.argv(i));
+    let (d, [r, g, b]) = match a.argc() {
+        2 | 3 => (n(1), f.color),
+        4 => (f.density, [n(1), n(2), n(3)]),
+        5 | 6 => (n(1), [n(2), n(3), n(4)]),
+        _ => {
+            h.print(&format!(
+                "usage:\n   fog <density>\n   fog <red> <green> <blue>\n   fog <density> <red> <green> <blue>\ncurrent values:\n   \"density\" is \"{}\"\n   \"red\"     is \"{}\"\n   \"green\"   is \"{}\"\n   \"blue\"    is \"{}\"\n",
+                f.density, f.color[0], f.color[1], f.color[2]
+            ));
+            return;
+        }
+    };
+    h.cl.fog = qclient::Fog { density: d.max(0.0), color: [r, g, b].map(|c| c.clamp(0.0, 1.0)), time: 0.0 };
 }

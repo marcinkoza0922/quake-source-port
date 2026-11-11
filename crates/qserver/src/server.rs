@@ -452,7 +452,7 @@ impl Server {
 
         let mut ents = bsp.entities.clone();
         if c.cvars.value_of("external_ents") != 0.0
-            && let Some(e) = c.fs.open(&format!("maps/{mapname}.ent"))
+            && let Some(e) = c.fs.open_companion(&format!("maps/{mapname}.bsp"), &format!("maps/{mapname}.ent"))
         {
             ents = String::from_utf8_lossy(&e).into_owned();
         }

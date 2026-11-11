@@ -305,6 +305,15 @@ impl Fs {
         })
     }
 
+    /// Open `companion` (e.g. a `.lit` or `.ent` next to a map) only if it
+    /// comes from the same or a higher-priority game dir than `main`, like
+    /// ironwail's `path_id` check.
+    pub fn open_companion(&self, main: &str, companion: &str) -> Option<Vec<u8>> {
+        let m = self.find_path(main)?.game;
+        let c = self.find_path(companion)?.game;
+        if c >= m { self.open(companion) } else { None }
+    }
+
     /// COM_LoadFile: first match from the highest-priority search path.
     pub fn open(&self, path: &str) -> Option<Vec<u8>> {
         let path = path.replace('\\', "/");
@@ -453,6 +462,26 @@ mod tests {
         assert_eq!(fs.open("progs/DEMONPLUSH.mdl").as_deref(), Some(&b"m"[..]));
         assert_eq!(fs.open("PROGS/demonplush.MDL").as_deref(), Some(&b"m"[..]));
         assert!(fs.open("progs/missing.mdl").is_none());
+        let _ = std::fs::remove_dir_all(&b);
+    }
+
+    #[test]
+    fn companion_needs_same_or_higher_priority() {
+        let b = tmpdir("companion");
+        std::fs::create_dir_all(b.join("id1/maps")).unwrap();
+        std::fs::create_dir_all(b.join("q64/maps")).unwrap();
+        std::fs::create_dir_all(b.join("lit/maps")).unwrap();
+        std::fs::write(b.join("id1/maps/start.bsp"), "id").unwrap();
+        std::fs::write(b.join("id1/maps/start.lit"), "idlit").unwrap();
+        std::fs::write(b.join("q64/maps/start.bsp"), "q").unwrap();
+        let mut fs = Fs::new(&b);
+        fs.add_game_dir("id1");
+        assert_eq!(fs.open_companion("maps/start.bsp", "maps/start.lit").as_deref(), Some(&b"idlit"[..]));
+        fs.add_game_dir("q64");
+        assert!(fs.open_companion("maps/start.bsp", "maps/start.lit").is_none());
+        std::fs::write(b.join("lit/maps/start.lit"), "modlit").unwrap();
+        fs.add_game_dir("lit");
+        assert_eq!(fs.open_companion("maps/start.bsp", "maps/start.lit").as_deref(), Some(&b"modlit"[..]));
         let _ = std::fs::remove_dir_all(&b);
     }
 
