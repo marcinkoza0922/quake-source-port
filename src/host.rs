@@ -689,6 +689,19 @@ impl Host {
         }
     }
 
+    /// The base game's user config text, when the running mod has none of
+    /// its own yet: (game dir it came from, text).
+    fn inherited_config(&self) -> Option<(String, String)> {
+        if self.user_dir().join("config.cfg").is_file() {
+            return None;
+        }
+        let dirs = &self.fs_snapshot.1;
+        dirs.iter().rev().skip(1).find_map(|g| {
+            let t = std::fs::read(crate::user_dir(g).join("config.cfg")).ok()?;
+            Some((g.clone(), String::from_utf8_lossy(&t).into_owned()))
+        })
+    }
+
     /// Name of the top gamedir ("id1" when no mod is mounted).
     pub fn game_name(&self) -> &str {
         self.fs_snapshot.1.last().map_or("id1", String::as_str)
@@ -1258,6 +1271,20 @@ fn register_commands(c: &mut Commands<Host>) {
             return;
         }
         let name = a.argv(1);
+        // A mod without its own user config starts from the base game's
+        // (nearest pack below it first, then id1); runs after any config.cfg
+        // the mod ships in its data, and is saved as the mod's own on quit.
+        if name.eq_ignore_ascii_case("config.cfg")
+            && let Some((g, t)) = h.inherited_config()
+        {
+            h.cbuf.insert_text(&t);
+            h.print(&format!("execing config.cfg (inherited from {g})\n"));
+            if let Some(d) = h.fs().open(name).filter(|_| h.fs().origin(name).is_some_and(|o| o.game.eq_ignore_ascii_case(h.game_name()))) {
+                h.cbuf.insert_text(&String::from_utf8_lossy(&d));
+                h.print("execing config.cfg (mod defaults)\n");
+            }
+            return;
+        }
         match h.fs().open(name) {
             Some(d) => {
                 let t = String::from_utf8_lossy(&d).into_owned();
