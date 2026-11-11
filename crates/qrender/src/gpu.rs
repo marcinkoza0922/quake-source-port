@@ -205,6 +205,8 @@ pub struct Gpu {
     pub max_samples: u32,
     /// Max sampler anisotropy (1 = unsupported).
     pub max_anisotropy: f32,
+    /// sampleRateShading is enabled (supersampling).
+    pub sample_shading: bool,
 }
 
 impl Gpu {
@@ -317,8 +319,10 @@ impl Gpu {
         let supported = unsafe { instance.get_physical_device_features(pdev) };
         let aniso = supported.sampler_anisotropy == vk::TRUE;
         let max_anisotropy = if aniso { lim.max_sampler_anisotropy.max(1.0) } else { 1.0 };
+        let sample_shading = supported.sample_rate_shading == vk::TRUE;
         let features = vk::PhysicalDeviceFeatures::default()
             .sampler_anisotropy(aniso)
+            .sample_rate_shading(sample_shading)
             .multi_draw_indirect(true)
             .draw_indirect_first_instance(true);
         let mut f12 = vk::PhysicalDeviceVulkan12Features::default()
@@ -361,6 +365,7 @@ impl Gpu {
             upload_pool,
             max_samples,
             max_anisotropy,
+            sample_shading,
         })
     }
 

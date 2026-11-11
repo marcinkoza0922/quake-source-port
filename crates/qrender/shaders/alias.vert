@@ -13,6 +13,7 @@ layout(push_constant) uniform P {
 layout(location = 0) out vec2 o_st;
 layout(location = 1) out vec3 o_shade;
 layout(location = 2) out vec3 o_wpos;
+layout(location = 3) noperspective out vec2 o_st_affine; // r_softemu_mdl_warp
 
 float shadedot(vec3 n) {
     float d = dot(n, pc.shadevec.xyz);
@@ -28,6 +29,7 @@ void main() {
     float sh = mix(shadedot(ANORMS[min(a >> 24, 161u)]), shadedot(ANORMS[min(b >> 24, 161u)]), blend);
     vec4 w = pc.model * vec4(p, 1.0);
     o_st = in_st;
+    o_st_affine = in_st;
     o_shade = (pc.texs.w & 2u) != 0u ? vec3(1.0) : pc.light.rgb * sh;
     o_wpos = w.xyz;
     gl_Position = fr.viewproj * w;

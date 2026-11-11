@@ -83,6 +83,7 @@ const MSAA: &[(&str, f32)] = &[("off", 1.0), ("2x", 2.0), ("4x", 4.0), ("8x", 8.
 const SCALE: &[(&str, f32)] = &[("50%", 0.5), ("75%", 0.75), ("100%", 1.0), ("125%", 1.25), ("150%", 1.5), ("200%", 2.0)];
 const FILTER: &[(&str, f32)] = &[("nearest", 0.0), ("linear", 1.0)];
 const ANISO: &[(&str, f32)] = &[("off", 1.0), ("2x", 2.0), ("4x", 4.0), ("8x", 8.0), ("16x", 16.0)];
+const SOFTEMU: &[(&str, f32)] = &[("off", 0.0), ("fine", 1.0), ("coarse", 2.0), ("banded", 3.0)];
 const MODES: [&str; 3] = ["windowed", "fullscreen", "borderless"];
 
 const GRAPHICS: &[Item] = &[
@@ -92,9 +93,12 @@ const GRAPHICS: &[Item] = &[
     toggle("VSync", "vid_vsync"),
     slider("Max FPS", "host_maxfps", 60.0, 500.0, 10.0),
     Item::Choice { label: "Anti-aliasing", cvar: "r_msaa", choices: MSAA },
+    toggle("Supersampling", "vid_fsaamode"),
     Item::Choice { label: "Render Scale", cvar: "r_renderscale", choices: SCALE },
     Item::Choice { label: "Texture Filter", cvar: "r_texfilter", choices: FILTER },
     Item::Choice { label: "Anisotropic", cvar: "r_anisotropy", choices: ANISO },
+    Item::Choice { label: "8-bit Color", cvar: "r_softemu", choices: SOFTEMU },
+    toggle("Dithering", "r_dither"),
     Item::Slider { label: "Brightness", cvar: "gamma", min: 0.5, max: 1.5, step: 0.05, invert: true },
     slider("Contrast", "contrast", 1.0, 2.0, 0.1),
     slider("Water Opacity", "r_wateralpha", 0.0, 1.0, 0.1),

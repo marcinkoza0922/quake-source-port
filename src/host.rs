@@ -63,7 +63,16 @@ const HOST_CVARS: &[(&str, &str, u32)] = &[
     ("r_msaa", "4", CVAR_ARCHIVE),
     ("r_renderscale", "1", CVAR_ARCHIVE),
     ("r_texfilter", "0", CVAR_ARCHIVE),
-    ("r_anisotropy", "1", CVAR_ARCHIVE),
+    ("r_anisotropy", "16", CVAR_ARCHIVE),
+    ("gl_lodbias", "auto", CVAR_ARCHIVE),
+    ("vid_fsaamode", "0", CVAR_ARCHIVE),
+    ("r_dither", "1", CVAR_ARCHIVE),
+    ("r_softemu", "0", CVAR_ARCHIVE),
+    ("r_softemu_metric", "-1", CVAR_ARCHIVE),
+    ("r_softemu_lightmap_banding", "-1", CVAR_ARCHIVE),
+    ("r_softemu_mdl_warp", "-1", CVAR_ARCHIVE),
+    ("r_softemu_dither_screen", "1", CVAR_ARCHIVE),
+    ("r_softemu_dither_texture", "1", CVAR_ARCHIVE),
     ("cl_forwardspeed", "200", CVAR_ARCHIVE),
     ("cl_backspeed", "200", CVAR_ARCHIVE),
     ("cl_sidespeed", "350", 0),
@@ -119,7 +128,7 @@ const COMPAT_CVARS: &[(&str, &str, u32)] = &[
     ("gl_overbright_models", "1", 0),
     ("gl_subdivide_size", "128", 0),
     ("gl_texture_anisotropy", "1", 0),
-    ("gl_texturemode", "", 0),
+    ("gl_texturemode", "", CVAR_ARCHIVE),
     ("gl_triplebuffer", "1", 0),
     ("joy_deadzone", "0.175", 0),
     ("lookspring", "0", 0),
@@ -278,6 +287,10 @@ impl Host {
 
     fn cv(&self, name: &str) -> f32 {
         self.server.core.cvars.value_of(name)
+    }
+
+    fn cvs(&self, name: &str) -> &str {
+        self.server.core.cvars.by_name(name).map_or("", |c| c.string.as_str())
     }
 
     /// Cmd_ExecuteString with server-command forwarding.
@@ -1041,6 +1054,19 @@ impl Host {
             render_scale: v("r_renderscale").clamp(0.25, 2.0),
             texture_linear: v("r_texfilter") != 0.0,
             anisotropy: v("r_anisotropy").clamp(1.0, 16.0),
+            texture_mode: qrender::parse_texture_mode(self.cvs("gl_texturemode")),
+            lod_bias: {
+                let s = self.cvs("gl_lodbias");
+                if s.eq_ignore_ascii_case("auto") { None } else { s.trim().parse().ok() }
+            },
+            supersample: v("vid_fsaamode") != 0.0,
+            dither: v("r_dither").max(0.0),
+            softemu: v("r_softemu").clamp(0.0, 3.0) as u32,
+            softemu_metric: v("r_softemu_metric") as i32,
+            lightmap_banding: v("r_softemu_lightmap_banding"),
+            mdl_warp: v("r_softemu_mdl_warp"),
+            dither_screen: v("r_softemu_dither_screen"),
+            dither_texture: v("r_softemu_dither_texture"),
             ..Settings::default()
         };
         let frame = qrender::RenderFrame {
