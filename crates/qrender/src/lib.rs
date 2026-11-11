@@ -53,6 +53,7 @@ struct FrameRes {
     dynbuf: Buffer,
     set: vk::DescriptorSet,
     comp_set: vk::DescriptorSet,
+    cull_set: vk::DescriptorSet,
 }
 
 struct Swapchain {
@@ -107,6 +108,27 @@ struct WorldGpu {
     /// Per BSP texture: kind and material flags.
     tex_info: Vec<(TextureKind, u32)>,
     submodel_ids: Vec<ModelId>,
+    cull: WorldCull,
+}
+
+/// GPU world culling (cull.comp) resources.
+struct WorldCull {
+    marks: Buffer,
+    surfs: Buffer,
+    src: Buffer,
+    surf_frame: Buffer,
+    /// Output index buffer per frame in flight.
+    out: Vec<Buffer>,
+    /// Draw commands + lightmap dispatch args per frame in flight
+    /// (device-local: cull.comp updates them with atomics).
+    cmdbuf: Vec<Buffer>,
+    nmarks: u32,
+    /// Per draw command: batch texture and first index of its region.
+    cmd_tex: Vec<u32>,
+    cmd_first: Vec<u32>,
+    /// Command index ranges: opaque, sky, then liquids of type 1..=4.
+    cats: [std::ops::Range<u32>; 6],
+    framecount: u32,
 }
 
 struct AliasModel {
@@ -244,7 +266,7 @@ impl Renderer {
             },
             vk::DescriptorPoolSize {
                 ty: vk::DescriptorType::STORAGE_BUFFER,
-                descriptor_count: 32,
+                descriptor_count: 64,
             },
             vk::DescriptorPoolSize {
                 ty: vk::DescriptorType::STORAGE_IMAGE,
@@ -267,7 +289,7 @@ impl Renderer {
                 .command_pool(cmd_pool)
                 .level(vk::CommandBufferLevel::PRIMARY)
                 .command_buffer_count(1);
-            let layouts = [pipes.set_layout, pipes.comp_set_layout];
+            let layouts = [pipes.set_layout, pipes.comp_set_layout, pipes.cull_set_layout];
             let dai = vk::DescriptorSetAllocateInfo::default()
                 .descriptor_pool(desc_pool)
                 .set_layouts(&layouts);
@@ -299,6 +321,7 @@ impl Renderer {
                 dynbuf,
                 set: sets[0],
                 comp_set: sets[1],
+                cull_set: sets[2],
             });
         }
         let sampler =
@@ -461,7 +484,34 @@ impl Renderer {
             image_view: lightmap.view,
             image_layout: vk::ImageLayout::GENERAL,
         }];
-        for f in &self.frames {
+        for (fi, f) in self.frames.iter().enumerate() {
+            let d = self.dummy.buf;
+            let cull_bufs = match &self.world {
+                Some(w) => [
+                    w.cull.marks.buf,
+                    w.cull.surfs.buf,
+                    w.cull.src.buf,
+                    w.cull.out[fi].buf,
+                    f.dynbuf.buf,
+                    w.cull.surf_frame.buf,
+                    w.cull.cmdbuf[fi].buf,
+                ],
+                None => [d, d, d, d, f.dynbuf.buf, d, d],
+            };
+            let cull_info: Vec<_> = cull_bufs.iter().map(|&b| whole(b)).collect();
+            let cull_writes: Vec<_> = cull_info
+                .iter()
+                .enumerate()
+                .map(|(i, info)| {
+                    vk::WriteDescriptorSet::default()
+                        .dst_set(f.cull_set)
+                        .dst_binding(i as u32)
+                        .descriptor_type(vk::DescriptorType::STORAGE_BUFFER)
+                        .buffer_info(info)
+                })
+                .collect();
+            // SAFETY: device idle or sets not in use; all handles valid.
+            unsafe { dev.update_descriptor_sets(&cull_writes, &[]) };
             let ubo = [vk::DescriptorBufferInfo {
                 buffer: f.dynbuf.buf,
                 offset: 0,
@@ -686,6 +736,10 @@ impl Renderer {
             self.gpu.free_buffer(w.samples);
             self.gpu.free_buffer(w.surfs);
             self.gpu.free_buffer(w.materials);
+            let c = w.cull;
+            for b in [c.marks, c.surfs, c.src, c.surf_frame].into_iter().chain(c.out).chain(c.cmdbuf) {
+                self.gpu.free_buffer(b);
+            }
         }
         self.alias_cpu.clear();
         self.sky_layers = [NO_TEX; 2];
@@ -810,6 +864,7 @@ impl Renderer {
             .buffer((materials.len() * 16) as u64, usage, false)?;
         self.gpu
             .upload_buffer(&mut up, mats.buf, 0, bytes_of(&materials))?;
+        let cull = self.build_world_cull(&mut up, &cpu, &tex_info)?;
         self.gpu.end_upload(up)?;
         if let Some(old) = self.lightmap.take() {
             self.gpu.free_image(old);
@@ -833,9 +888,94 @@ impl Renderer {
             materials: mats,
             tex_info,
             submodel_ids: ids.clone(),
+            cull,
         });
         self.write_static_descriptors();
         Ok((ids, brush_ids))
+    }
+
+    /// Uploads cull.comp's static inputs. Draw commands are one per batch
+    /// texture used by world leaf surfaces, ordered opaque, sky, liquids by
+    /// type, each owning a region of the output index buffer sized for all
+    /// its surfaces.
+    fn build_world_cull(
+        &mut self,
+        up: &mut gpu::Upload,
+        cpu: &world::World,
+        tex_info: &[(TextureKind, u32)],
+    ) -> Result<WorldCull> {
+        let (marks, mut surfs) = cpu.gpu_cull(|_| 0);
+        let mut seen = vec![false; cpu.surfaces.len()];
+        let mut cap: std::collections::BTreeMap<u32, u32> = Default::default();
+        for &[_, si] in &marks {
+            if !std::mem::replace(&mut seen[si as usize], true) {
+                *cap.entry(cpu.slot_texture(si)).or_default() += cpu.surfaces[si as usize].num_indices;
+            }
+        }
+        let cat = |t: u32| match tex_info.get(t as usize).map_or(TextureKind::Normal, |i| i.0) {
+            TextureKind::Sky => 1,
+            TextureKind::Liquid => 1 + (tex_info[t as usize].1 & 0xf).clamp(1, 4) as usize,
+            _ => 0,
+        };
+        let mut order: Vec<u32> = cap.keys().copied().collect();
+        order.sort_by_key(|&t| (cat(t), t));
+        let cats: [std::ops::Range<u32>; 6] = std::array::from_fn(|c| {
+            let a = order.iter().position(|&t| cat(t) >= c).unwrap_or(order.len()) as u32;
+            let b = order.iter().position(|&t| cat(t) > c).unwrap_or(order.len()) as u32;
+            a..b
+        });
+        let mut cmd_of = std::collections::HashMap::new();
+        let mut cmd_first = Vec::with_capacity(order.len());
+        let mut total = 0u32;
+        for (i, &t) in order.iter().enumerate() {
+            cmd_of.insert(t, i as u32);
+            cmd_first.push(total);
+            total += cap[&t];
+        }
+        for (si, s) in surfs.iter_mut().enumerate() {
+            if seen[si] {
+                s.center[3] = f32::from_bits(cmd_of[&cpu.slot_texture(si as u32)]);
+            }
+        }
+        let usage = vk::BufferUsageFlags::STORAGE_BUFFER | vk::BufferUsageFlags::TRANSFER_DST;
+        let mut make = |data: &[u8]| -> Result<Buffer> {
+            let b = self.gpu.buffer(data.len() as u64, usage, false)?;
+            self.gpu.upload_buffer(up, b.buf, 0, data)?;
+            Ok(b)
+        };
+        let marks_b = make(bytes_of(&marks))?;
+        let surfs_b = make(bytes_of(&surfs))?;
+        let src_b = make(bytes_of(&cpu.indices))?;
+        let frame_b = make(&vec![0u8; cpu.surfaces.len().max(1) * 4])?;
+        let mut out = Vec::new();
+        let mut cmdbuf = Vec::new();
+        for _ in 0..FRAMES {
+            cmdbuf.push(self.gpu.buffer(
+                order.len() as u64 * 20 + 16 + cpu.leafs_len().div_ceil(32) as u64 * 4,
+                vk::BufferUsageFlags::STORAGE_BUFFER
+                    | vk::BufferUsageFlags::INDIRECT_BUFFER
+                    | vk::BufferUsageFlags::TRANSFER_DST,
+                false,
+            )?);
+            out.push(self.gpu.buffer(
+                total.max(1) as u64 * 4,
+                vk::BufferUsageFlags::STORAGE_BUFFER | vk::BufferUsageFlags::INDEX_BUFFER,
+                false,
+            )?);
+        }
+        Ok(WorldCull {
+            marks: marks_b,
+            surfs: surfs_b,
+            src: src_b,
+            surf_frame: frame_b,
+            out,
+            cmdbuf,
+            nmarks: marks.len() as u32,
+            cmd_tex: order,
+            cmd_first,
+            cats,
+            framecount: 0,
+        })
     }
 
     /// Id of world submodel `*n` (n >= 1).

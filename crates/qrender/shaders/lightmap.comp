@@ -24,6 +24,9 @@ layout(set = 0, binding = 3) readonly buffer Visible { uint visible[]; };
 layout(set = 0, binding = 4, rgba16f) uniform writeonly image2DArray atlas;
 
 void main() {
+    // The dispatch size comes from the cull shader's counter, which can run
+    // past the list's capacity.
+    if (gl_WorkGroupID.x >= uint(visible.length())) return;
     Surf s = surfs[visible[gl_WorkGroupID.x]];
     uint w = s.size & 0xffffu, h = s.size >> 16;
     uint ax = s.atlas & 0xffffu, ay = s.atlas >> 16;

@@ -79,17 +79,9 @@ pub struct World {
     marksurfaces: Vec<u32>,
     visdata: Vec<u8>,
     numleafs: usize,
-    surf_frame: Vec<u32>,
-    frame: u32,
-    /// R_MarkLeaves state: the PVS leaves of `vis_leaf` (leaf indices with
-    /// marksurfaces), rebuilt only when the view leaf changes.
+    /// R_MarkLeaves state: the PVS leaves of `vis_leaf` that have surfaces.
     vis_leaves: Vec<VisLeaf>,
-    /// Cull records of each vis leaf's surfaces, contiguous per leaf
-    /// (a surface in several leaves appears once per leaf).
-    vis_surfs: Vec<SurfCull>,
     vis_leaf: usize,
-    /// Hot per-surface culling data, parallel to `surfaces`.
-    cull: Vec<SurfCull>,
     pub has_light: bool,
     packer: Packer,
 }
@@ -181,12 +173,8 @@ impl World {
             marksurfaces: bsp.marksurfaces.clone(),
             visdata: bsp.visdata.clone(),
             numleafs,
-            surf_frame: Vec::new(),
-            frame: 0,
             vis_leaves: Vec::new(),
-            vis_surfs: Vec::new(),
             vis_leaf: usize::MAX,
-            cull: Vec::new(),
             has_light,
             packer: Packer {
                 allocated: vec![0; ATLAS as usize],
@@ -379,8 +367,6 @@ impl World {
             let off = |v: Vec<u32>| v.into_iter().map(|x| x + tex_base).collect();
             w.anims.push((off(p), off(a), r));
         }
-        w.surf_frame.resize(w.surfaces.len(), 0);
-        w.cull = w.surfaces.iter().enumerate().map(|(i, s)| SurfCull::new(s, i as u32)).collect();
         for m in &bsp.models {
             w.submodels.push(SubModel {
                 first_surface: m.first_face.max(0) as u32 + surf_base,
@@ -427,48 +413,83 @@ impl World {
         }
     }
 
-    /// Marks world surfaces visible from `eye` (PVS + frustum + backface).
-    pub fn mark_visible(&mut self, eye: [f32; 3], frustum: &[[f32; 4]; 4], out: &mut Vec<u32>) {
-        self.frame = self.frame.wrapping_add(1);
-        if self.frame == 0 {
-            self.surf_frame.iter_mut().for_each(|f| *f = 0);
-            self.frame = 1;
-        }
+    /// Per-frame leaf bitset for GPU culling: PVS leaves of the eye's leaf
+    /// (with surfaces) whose box touches the frustum. `out` gets one bit per
+    /// leaf index.
+    pub fn leaf_bits(&mut self, eye: [f32; 3], frustum: &[[f32; 4]; 4], out: &mut Vec<u32>) {
         let leaf = self.point_leaf(eye);
         if leaf != self.vis_leaf {
             self.mark_leaves(leaf);
         }
+        out.clear();
+        out.resize(self.leafs.len().div_ceil(32), 0);
         let planes = Planes::new(frustum);
         for l in &self.vis_leaves {
-            let Some(clip) = planes.clip(0b1111, l.center, l.extent) else { continue };
-            let first = l.first as usize;
-            for c in &self.vis_surfs[first..first + l.count as usize] {
-                let si = c.surf as usize;
-                if self.surf_frame[si] == self.frame {
-                    continue;
-                }
-                let d = dot(eye, c.normal) - c.dist;
-                if (d < 0.0) != (c.flags & CULL_FLIPPED != 0) && c.flags & CULL_SKY == 0 {
-                    // Back-facing is the same in every leaf: done with it.
-                    self.surf_frame[si] = self.frame;
-                    continue;
-                }
-                // Not marked when outside the frustum: the leaf's clip bits
-                // differ per leaf, so a copy in another leaf may still pass.
-                if clip != 0 && planes.clip(clip, c.center, c.extent).is_none() {
-                    continue;
-                }
-                self.surf_frame[si] = self.frame;
-                out.push(si as u32);
+            if planes.clip(0b1111, l.center, l.extent).is_some() {
+                out[(l.leaf >> 5) as usize] |= 1 << (l.leaf & 31);
             }
         }
     }
 
+    pub fn leafs_len(&self) -> usize {
+        self.leafs.len()
+    }
+
+    /// Texture a surface is batched under: its own texture, or for random
+    /// animations (`-0..-9`) the frame picked for that surface.
+    pub fn slot_texture(&self, si: u32) -> u32 {
+        let t = self.surfaces[si as usize].texture;
+        match self.anims.get(t as usize) {
+            Some((_, _, true)) => self.resolve_texture(t, false, 0.0, si),
+            _ => t,
+        }
+    }
+
+    /// Static inputs of cull.comp: (leaf, surface) pairs for every world leaf
+    /// and one record per surface. `cmd_of(si)` is the draw command index a
+    /// surface's triangles go to.
+    pub fn gpu_cull(&self, cmd_of: impl Fn(u32) -> u32) -> (Vec<[u32; 2]>, Vec<GpuCullSurf>) {
+        let surfs = self
+            .surfaces
+            .iter()
+            .enumerate()
+            .map(|(si, s)| {
+                let (center, extent) = center_extent(s.mins, s.maxs);
+                let plane = if s.kind == TextureKind::Sky {
+                    [0.0, 0.0, 0.0, -1.0] // never back-face culled
+                } else if s.flipped {
+                    [-s.normal[0], -s.normal[1], -s.normal[2], -s.dist]
+                } else {
+                    [s.normal[0], s.normal[1], s.normal[2], s.dist]
+                };
+                let cmd = if s.num_indices > 0 { cmd_of(si as u32) } else { 0 };
+                GpuCullSurf {
+                    plane,
+                    center: [center[0], center[1], center[2], f32::from_bits(cmd)],
+                    extent: [extent[0], extent[1], extent[2], f32::from_bits(s.lm)],
+                    idx: [s.first_index, s.num_indices, 0, 0],
+                }
+            })
+            .collect();
+        let mut marks = Vec::new();
+        for li in 1..=self.numleafs.min(self.leafs.len().saturating_sub(1)) {
+            let l = &self.leafs[li];
+            let ms = l.first_marksurface as usize;
+            for k in ms..ms + l.num_marksurfaces as usize {
+                let Some(&si) = self.marksurfaces.get(k) else { break };
+                if self.surfaces.get(si as usize).is_some_and(|s| s.num_indices > 0) {
+                    marks.push([li as u32, si]);
+                }
+            }
+        }
+        (marks, surfs)
+    }
+
     /// R_MarkLeaves: list the PVS leaves of `leaf` that have surfaces.
+    /// Rebuilt only when the view leaf changes.
     fn mark_leaves(&mut self, leaf: usize) {
         self.vis_leaf = leaf;
         self.vis_leaves.clear();
-        self.vis_surfs.clear();
         let novis = leaf == 0
             || self.leafs.get(leaf).is_none_or(|l| l.visofs < 0)
             || self.visdata.is_empty();
@@ -482,24 +503,9 @@ impl World {
                 continue;
             }
             let l = &self.leafs[i + 1];
-            let first = self.vis_surfs.len();
-            let ms = l.first_marksurface as usize;
-            for k in ms..ms + l.num_marksurfaces as usize {
-                let Some(c) = self.marksurfaces.get(k).and_then(|&si| self.cull.get(si as usize)) else {
-                    continue;
-                };
-                if c.flags & CULL_EMPTY == 0 {
-                    self.vis_surfs.push(*c);
-                }
-            }
-            if self.vis_surfs.len() > first {
+            if l.num_marksurfaces > 0 {
                 let (center, extent) = center_extent(l.mins, l.maxs);
-                self.vis_leaves.push(VisLeaf {
-                    center,
-                    extent,
-                    first: first as u32,
-                    count: (self.vis_surfs.len() - first) as u32,
-                });
+                self.vis_leaves.push(VisLeaf { leaf: i as u32 + 1, center, extent });
             }
         }
     }
@@ -624,45 +630,22 @@ impl World {
     }
 }
 
+/// cull.comp surface record.
+#[repr(C)]
+#[derive(Clone, Copy, Debug)]
+pub struct GpuCullSurf {
+    pub plane: [f32; 4],
+    pub center: [f32; 4],
+    pub extent: [f32; 4],
+    pub idx: [u32; 4],
+}
+
 /// A PVS leaf with surfaces, copied out so the per-frame loop is linear.
 #[derive(Clone, Copy, Debug)]
 struct VisLeaf {
+    leaf: u32,
     center: [f32; 3],
     extent: [f32; 3],
-    first: u32,
-    count: u32,
-}
-
-const CULL_EMPTY: u32 = 1;
-const CULL_FLIPPED: u32 = 2;
-const CULL_SKY: u32 = 4;
-
-/// The fields of a [`Surface`] that `mark_visible` reads (48 bytes).
-#[derive(Clone, Copy, Debug)]
-struct SurfCull {
-    normal: [f32; 3],
-    dist: f32,
-    center: [f32; 3],
-    extent: [f32; 3],
-    flags: u32,
-    surf: u32,
-}
-
-impl SurfCull {
-    fn new(s: &Surface, surf: u32) -> Self {
-        let mut flags = 0;
-        if s.num_indices == 0 {
-            flags |= CULL_EMPTY;
-        }
-        if s.flipped {
-            flags |= CULL_FLIPPED;
-        }
-        if s.kind == TextureKind::Sky {
-            flags |= CULL_SKY;
-        }
-        let (center, extent) = center_extent(s.mins, s.maxs);
-        SurfCull { normal: s.normal, dist: s.dist, center, extent, flags, surf }
-    }
 }
 
 /// Result of a light trace (ironwail's lightcache_t.surfidx/ds/dt).

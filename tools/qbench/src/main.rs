@@ -1,5 +1,8 @@
 //! qbench: timedemo fps comparison against ironwail and vkQuake.
 //!
+//! Each engine gets the same GPU-relevant settings on the command line
+//! (MSAA off, 8x anisotropy, render scale 1; see `settings`).
+//!
 //! Usage: qbench [-basedir <dir>] [-game <dir>] [-width W] [-height H]
 //!               [-runs N] [-secs S] [-engines ours,ironwail,vkquake]
 //!               [-rerecord] [map ...]
@@ -168,6 +171,20 @@ fn scan(out: Box<dyn std::io::Read + Send>, tx: std::sync::mpsc::Sender<(u32, f6
     }
 }
 
+/// Pins the settings that cost GPU time to the same values in every engine
+/// (otherwise each uses its saved config): no MSAA, 8x anisotropy, full
+/// render scale.
+fn settings(bin: &Path) -> Vec<&'static str> {
+    let name = bin.file_name().unwrap_or_default().to_string_lossy().to_ascii_lowercase();
+    if name.contains("ironwail") {
+        vec!["+vid_fsaa", "0", "+gl_texture_anisotropy", "8", "+r_scale", "1"]
+    } else if name.contains("vkquake") {
+        vec!["+vid_fsaa", "0", "+r_scale", "1"]
+    } else {
+        vec!["+r_msaa", "0", "+r_anisotropy", "8", "+r_renderscale", "1"]
+    }
+}
+
 /// One timedemo run; kills the engine once the fps line appears.
 fn run_timedemo(bin: &Path, o: &Opts, base: &Path, map: &str) -> Result<(u32, f64, f64), String> {
     use std::os::unix::process::CommandExt;
@@ -181,7 +198,9 @@ fn run_timedemo(bin: &Path, o: &Opts, base: &Path, map: &str) -> Result<(u32, f6
         .current_dir(base)
         .args(["-basedir", ".", "-game", &o.game, "-window"])
         .args(["-width", &o.width.to_string(), "-height", &o.height.to_string()])
-        .args(["+vid_vsync", "0", "+timedemo", &format!("qbench/{map}")])
+        .args(["+vid_vsync", "0"])
+        .args(settings(bin))
+        .args(["+timedemo", &format!("qbench/{map}")])
         .stdin(Stdio::null())
         .stdout(Stdio::piped())
         .stderr(Stdio::piped())
