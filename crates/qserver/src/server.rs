@@ -241,7 +241,7 @@ fn register_cvars(cv: &mut Cvars) {
         ("sv_altnoclip", "1", CVAR_ARCHIVE),
         ("sv_gameplayfix_elevators", "2", 0),
         ("sv_freezenonclients", "0", 0),
-        ("sv_protocol", "666", 0),
+        ("sv_protocol", "999", 0),
         ("max_edicts", "16384", 0),
         ("cl_rollangle", "2.0", 0),
         ("cl_rollspeed", "200", 0),

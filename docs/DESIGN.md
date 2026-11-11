@@ -158,7 +158,7 @@ All parsers take `&[u8]` and return `qformats::Result<T>`; bad input gives an `E
 
 ### qserver
 - `Server::new(fs, cvars, maxclients)` holds `core` (fs, cvars, cbuf, clients, level state) and `level` (VM + World). `spawn_server(map)` follows SV_SpawnServer (including `.ent` overrides). `frame(dt)` runs cbuf, then client input, then SV_Physics, then sends.
-- Clients are in-memory slots. `connect_local()` runs the full signon and redoes it after changelevel. `set_move(i, ClientMove)`, `client_command`. Output via `take_reliable(i)` / `take_datagrams(i)`, which are protocol 15/666/999 byte streams.
+- Clients are in-memory slots. `connect_local()` runs the full signon and redoes it after changelevel. `set_move(i, ClientMove)`, `client_command`. Output via `take_reliable(i)` / `take_datagrams(i)`, which are protocol 15/666/999 byte streams. `sv_protocol` defaults to 999 (INT32COORD, like ironwail/vkQuake): 666 coords wrap past ±4096, which breaks large maps (e.g. Mjolnir start2).
 - `stats() -> LevelStats { total/found secrets, total/killed monsters }`, used by qbot.
 - qworld `CollisionModel::submodels` mins/maxs are spread by ±1 as in Mod_LoadSubmodels; precache dispatches on file magic (alias models named `.bsp` load as alias).
 - Localization (`loc.rs`, `Core::loc`): `localization/loc_english*.txt` loaded in `Server::new`. bprint/sprint/centerprint use PF_VarString with LOC_GetString + LOC_Format (`{}`/`{N}` filled from the following args, each translated), WriteString translates `$key` as ironwail. `Localization::translate` is the client-side LOC_GetString for whole print strings.
