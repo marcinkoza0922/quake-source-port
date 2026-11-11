@@ -8,3 +8,8 @@ license.workspace = true
 workspace = true
 
 [dependencies]
+qcore = { path = "../../crates/qcore" }
+qserver = { path = "../../crates/qserver" }
+qvm = { path = "../../crates/qvm" }
+qworld = { path = "../../crates/qworld" }
+qui = { path = "../../crates/qui" }
