@@ -51,6 +51,10 @@ const HOST_CVARS: &[(&str, &str, u32)] = &[
     ("contrast", "1", CVAR_ARCHIVE),
     ("r_wateralpha", "1", CVAR_ARCHIVE),
     ("r_skyfog", "0.5", 0),
+    ("r_drawentities", "1", 0),
+    ("r_lavaalpha", "0", 0),
+    ("r_slimealpha", "0", 0),
+    ("r_telealpha", "0", 0),
     ("r_dynamic", "1", 0),
     ("vid_vsync", "0", CVAR_ARCHIVE),
     ("vid_fullscreen", "0", CVAR_ARCHIVE),
@@ -948,6 +952,9 @@ impl Host {
             let fs = &self.server.core.fs;
             let cv = self.view_cvars();
             self.view.entities(&mut self.cl, &cv, &mut self.level, fs, &mut self.r, &mut ents);
+            if self.cv("r_drawentities") == 0.0 {
+                ents.clear();
+            }
             if let Some(g) = gun {
                 ents.push(g);
             }
@@ -1021,7 +1028,12 @@ impl Host {
         let settings = Settings {
             gamma: v("gamma").clamp(0.3, 3.0),
             contrast: v("contrast").clamp(0.5, 3.0),
-            wateralpha: v("r_wateralpha").clamp(0.0, 1.0),
+            // GL_WaterAlphaForTextureType: map keys win; per-type values of
+            // 0 fall back to r_wateralpha.
+            wateralpha: self.level.liquid_alpha[0].unwrap_or(v("r_wateralpha")).clamp(0.0, 1.0),
+            lavaalpha: self.level.liquid_alpha[1].or(Some(v("r_lavaalpha"))).filter(|&a| a > 0.0).map(|a| a.min(1.0)),
+            slimealpha: self.level.liquid_alpha[2].or(Some(v("r_slimealpha"))).filter(|&a| a > 0.0).map(|a| a.min(1.0)),
+            telealpha: self.level.liquid_alpha[3].or(Some(v("r_telealpha"))).filter(|&a| a > 0.0).map(|a| a.min(1.0)),
             skyfog: v("r_skyfog"),
             dynamic: v("r_dynamic") != 0.0,
             vsync: v("vid_vsync") != 0.0,

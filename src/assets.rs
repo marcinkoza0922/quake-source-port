@@ -36,6 +36,9 @@ pub struct Level {
     pub bsp: Option<Bsp>,
     pub world_fog: Fog,
     pub world_sky: String,
+    /// Worldspawn `[_]wateralpha`/`lavaalpha`/`slimealpha`/`telealpha`
+    /// (R_ParseWorldspawn), in that order.
+    pub liquid_alpha: [Option<f32>; 4],
 }
 
 fn load_model(fs: &Fs, r: &mut Renderer, name: &str) -> Option<Model> {
@@ -96,6 +99,11 @@ impl Level {
             {
                 if let Some(f) = w.get("fog") {
                     lv.world_fog = qrender::parse_fog(f);
+                }
+                for (i, k) in ["wateralpha", "lavaalpha", "slimealpha", "telealpha"].iter().enumerate() {
+                    if let Some(v) = w.get(k).or_else(|| w.get(&format!("_{k}"))) {
+                        lv.liquid_alpha[i] = Some(qcore::cvar::q_atof(v));
+                    }
                 }
                 if let Some(s) = w.get("sky").or(w.get("skyname")) {
                     lv.world_sky = s.to_string();
