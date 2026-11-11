@@ -61,7 +61,7 @@ pub struct World {
     /// floored to whole units -> trace result. Entities that don't move skip
     /// the BSP trace; the colour is re-read from the lightmap each call so
     /// lightstyles still animate.
-    light_cache: std::sync::Mutex<std::collections::HashMap<[i32; 3], LightHit>>,
+    light_cache: std::sync::Mutex<std::collections::HashMap<[i32; 3], LightHit, PointHash>>,
     pub vertices: Vec<WorldVertex>,
     pub indices: Vec<u32>,
     pub surfaces: Vec<Surface>,
@@ -646,6 +646,40 @@ struct VisLeaf {
     leaf: u32,
     center: [f32; 3],
     extent: [f32; 3],
+}
+
+/// Multiplicative hash for integer points (the default SipHash showed up in
+/// profiles; these keys need no DoS resistance).
+#[derive(Default, Clone, Copy)]
+pub struct PointHash;
+
+impl std::hash::BuildHasher for PointHash {
+    type Hasher = PointHasher;
+    fn build_hasher(&self) -> PointHasher {
+        PointHasher(0)
+    }
+}
+
+pub struct PointHasher(u64);
+
+impl std::hash::Hasher for PointHasher {
+    fn finish(&self) -> u64 {
+        self.0
+    }
+    fn write(&mut self, bytes: &[u8]) {
+        for &b in bytes {
+            self.write_u32(b as u32);
+        }
+    }
+    fn write_u32(&mut self, v: u32) {
+        self.0 = (self.0.rotate_left(5) ^ v as u64).wrapping_mul(0x51_7c_c1_b7_27_22_0a_95);
+    }
+    fn write_i32(&mut self, v: i32) {
+        self.write_u32(v as u32);
+    }
+    fn write_usize(&mut self, v: usize) {
+        self.write_u32(v as u32);
+    }
 }
 
 /// Result of a light trace (ironwail's lightcache_t.surfidx/ds/dt).

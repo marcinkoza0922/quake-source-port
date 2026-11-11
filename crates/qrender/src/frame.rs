@@ -424,27 +424,26 @@ fn gpu_world_draw(
     alphas: [f32; 4],
     fi: usize,
 ) -> Option<(WorldDraw, CullFrame)> {
-    let mut bits = Vec::new();
+    let mut bits = std::mem::take(&mut wg.scratch_bits);
     wg.cpu.leaf_bits(vs.eye, &vs.frustum, &mut bits);
     let ntex = wg.tex_info.len().max(1) as u32;
     let c = &mut wg.cull;
     c.framecount = c.framecount.wrapping_add(1).max(1);
-    let cmds: Vec<vk::DrawIndexedIndirectCommand> = c
-        .cmd_tex
-        .iter()
-        .zip(&c.cmd_first)
-        .map(|(&t, &first)| {
-            let random = wg.cpu.anims.get(t as usize).is_some_and(|a| a.2);
-            let tex = if random { t } else { wg.cpu.resolve_texture(t, false, time, 0) };
-            vk::DrawIndexedIndirectCommand {
-                index_count: 0,
-                instance_count: 1,
-                first_index: first,
-                vertex_offset: 0,
-                first_instance: tex.min(ntex - 1),
-            }
-        })
-        .collect();
+    let mut cmds = std::mem::take(&mut wg.scratch_cmds);
+    cmds.clear();
+    cmds.extend(c.cmd_tex.iter().zip(&c.cmd_first).map(|(&t, &first)| {
+        let tex = match wg.cpu.anims.get(t as usize) {
+            Some(a) if !a.2 && !a.0.is_empty() => wg.cpu.resolve_texture(t, false, time, 0),
+            _ => t,
+        };
+        vk::DrawIndexedIndirectCommand {
+            index_count: 0,
+            instance_count: 1,
+            first_index: first,
+            vertex_offset: 0,
+            first_instance: tex.min(ntex - 1),
+        }
+    }));
     // Staged as commands then dispatch args, copied to cmdbuf on the GPU.
     let disp_ofs = cmds.len() as u64 * 20;
     let stage_ofs = dynw.push(&cmds, 16)?;
@@ -494,6 +493,8 @@ fn gpu_world_draw(
         disp_ofs,
         cmdbuf: c.cmdbuf[fi].buf,
     };
+    wg.scratch_bits = bits;
+    wg.scratch_cmds = cmds;
     Some((wd, cf))
 }
 
@@ -521,6 +522,8 @@ impl Renderer {
         );
         // SAFETY: fence owned by this frame.
         unsafe { dev.wait_for_fences(&[fence], true, u64::MAX)? };
+        self.init_gpu_times();
+        self.collect_gpu_times(fi);
         let mut img_idx = 0u32;
         if let (Some(s), Some(f)) = (&self.swap, &self.gpu.swapchain_fn) {
             // SAFETY: valid swapchain/semaphore.
@@ -985,6 +988,17 @@ impl Renderer {
         }
 
         // ---- record ----
+        let tsq = self.gpu_times.as_ref().map(|t| t.pool);
+        if let Some(t) = &mut self.gpu_times {
+            t.written[fi] = true;
+        }
+        let ts_base = fi as u32 * GPU_TS;
+        // SAFETY: recording into `cmd`; query index within the pool.
+        let ts = |k: u32| unsafe {
+            if let Some(q) = tsq {
+                dev.cmd_write_timestamp(cmd, vk::PipelineStageFlags::BOTTOM_OF_PIPE, q, ts_base + k);
+            }
+        };
         let f = &self.frames[fi];
         let dynbuf = f.dynbuf.buf;
         let set = [f.set];
@@ -1005,6 +1019,10 @@ impl Renderer {
                 &vk::CommandBufferBeginInfo::default()
                     .flags(vk::CommandBufferUsageFlags::ONE_TIME_SUBMIT),
             )?;
+            if let Some(q) = tsq {
+                dev.cmd_reset_query_pool(cmd, q, ts_base, GPU_TS);
+            }
+            ts(0);
             let lm_rng = gpu::range(vk::ImageAspectFlags::COLOR, 1, lightmap.layers);
             if let Some(c) = &cull {
                 let cs = vk::PipelineBindPoint::COMPUTE;
@@ -1049,6 +1067,7 @@ impl Renderer {
                     &[],
                 );
             }
+            ts(1);
             if (!lm_vis.is_empty() || cull.is_some()) && self.world.is_some() {
                 gpu::barrier(
                     &dev,
@@ -1080,6 +1099,7 @@ impl Renderer {
                     vk::ImageLayout::GENERAL,
                 );
             }
+            ts(2);
             let crng = gpu::range(vk::ImageAspectFlags::COLOR, 1, 1);
             let drng = gpu::range(vk::ImageAspectFlags::DEPTH, 1, 1);
             gpu::barrier(
@@ -1161,6 +1181,7 @@ impl Renderer {
                 .color_attachments(&catt)
                 .depth_attachment(&datt);
             dev.cmd_begin_rendering(cmd, &ri);
+            ts(3);
             let vp_full = vk::Viewport {
                 x: 0.0,
                 y: 0.0,
@@ -1226,6 +1247,7 @@ impl Renderer {
                         );
                     }
                 }
+                ts(4);
                 let draw_alias = |a: &AliasDraw, pipe: vk::Pipeline| {
                     let Some(Model::Alias(am)) = self.models.get(a.model) else {
                         return;
@@ -1242,6 +1264,7 @@ impl Renderer {
                 {
                     draw_alias(a, p.alias);
                 }
+                ts(5);
                 // translucent: world liquids first, then sorted entities
                 if let Some(wg) = &self.world {
                     dev.cmd_bind_vertex_buffers(cmd, 0, &[wg.vbuf.buf], &[0]);
@@ -1282,6 +1305,7 @@ impl Renderer {
                         }
                     }
                 }
+                ts(6);
                 if particles.count > 0 {
                     dev.cmd_bind_pipeline(cmd, gfx, p.particle);
                     dev.cmd_bind_vertex_buffers(cmd, 0, &[dynbuf], &[particles.ofs]);
@@ -1310,6 +1334,7 @@ impl Renderer {
                 }
             }
             dev.cmd_end_rendering(cmd);
+            ts(7);
             gpu::barrier(
                 &dev,
                 cmd,
@@ -1361,6 +1386,7 @@ impl Renderer {
                 scale: self.render_scale,
             }]));
             dev.cmd_draw(cmd, 3, 1, 0, 0);
+            ts(8);
             // 2D on top at output resolution, unaffected by render scale
             if let Some(ofs) = ui_ofs {
                 dev.cmd_bind_pipeline(cmd, gfx, p.ui);
@@ -1445,6 +1471,7 @@ impl Renderer {
                     &region,
                 );
             }
+            ts(9);
             dev.end_command_buffer(cmd)?;
 
             let cmds = [cmd];

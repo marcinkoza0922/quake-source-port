@@ -109,6 +109,9 @@ struct WorldGpu {
     tex_info: Vec<(TextureKind, u32)>,
     submodel_ids: Vec<ModelId>,
     cull: WorldCull,
+    /// Per-frame scratch reused by `gpu_world_draw`.
+    scratch_bits: Vec<u32>,
+    scratch_cmds: Vec<vk::DrawIndexedIndirectCommand>,
 }
 
 /// GPU world culling (cull.comp) resources.
@@ -179,6 +182,8 @@ pub struct Renderer {
     cmd_pool: vk::CommandPool,
     frames: Vec<FrameRes>,
     cur: usize,
+    /// GPU pass timing (QSP_GPUTIMES=1): printed as averages on drop.
+    gpu_times: Option<GpuTimes>,
     swap: Option<Swapchain>,
     surface_size: Box<dyn Fn() -> (u32, u32)>,
     width: u32,
@@ -274,7 +279,7 @@ impl Renderer {
             },
         ];
         let pci = vk::DescriptorPoolCreateInfo::default()
-            .max_sets(8)
+            .max_sets(4 * FRAMES as u32)
             .pool_sizes(&sizes);
         // SAFETY: valid device.
         let desc_pool = unsafe { dev.create_descriptor_pool(&pci, None)? };
@@ -369,6 +374,7 @@ impl Renderer {
             cmd_pool,
             frames,
             cur: 0,
+            gpu_times: None,
             swap: None,
             surface_size: Box::new(move || (width, height)),
             width,
@@ -889,6 +895,8 @@ impl Renderer {
             tex_info,
             submodel_ids: ids.clone(),
             cull,
+            scratch_bits: Vec::new(),
+            scratch_cmds: Vec::new(),
         });
         self.write_static_descriptors();
         Ok((ids, brush_ids))
@@ -1454,8 +1462,79 @@ impl Renderer {
     }
 }
 
+/// Timestamp queries around each render stage, per frame in flight.
+struct GpuTimes {
+    pool: vk::QueryPool,
+    written: [bool; FRAMES],
+    sum_ns: [f64; GPU_STAGES.len()],
+    frames: u64,
+}
+
+/// Stage names; timestamp k+1 ends stage k (timestamp 0 is the start).
+const GPU_STAGES: [&str; 9] =
+    ["cull", "lightmap", "targets", "world", "models", "translucent", "particles+vm", "post", "ui+present"];
+const GPU_TS: u32 = GPU_STAGES.len() as u32 + 1;
+
+impl Renderer {
+    fn init_gpu_times(&mut self) {
+        if std::env::var_os("QSP_GPUTIMES").is_none() || self.gpu_times.is_some() {
+            return;
+        }
+        let ci = vk::QueryPoolCreateInfo::default()
+            .query_type(vk::QueryType::TIMESTAMP)
+            .query_count(GPU_TS * FRAMES as u32);
+        // SAFETY: valid device.
+        let Ok(pool) = (unsafe { self.gpu.device.create_query_pool(&ci, None) }) else { return };
+        self.gpu_times = Some(GpuTimes { pool, written: [false; FRAMES], sum_ns: [0.0; GPU_STAGES.len()], frames: 0 });
+    }
+
+    /// Accumulates frame `fi`'s timestamps (its fence has been waited on).
+    fn collect_gpu_times(&mut self, fi: usize) {
+        let period = self.gpu.timestamp_period as f64;
+        let Some(t) = &mut self.gpu_times else { return };
+        if !std::mem::take(&mut t.written[fi]) {
+            return;
+        }
+        let mut v = [0u64; GPU_TS as usize];
+        // SAFETY: queries written by a completed submission.
+        let ok = unsafe {
+            self.gpu.device.get_query_pool_results(
+                t.pool,
+                fi as u32 * GPU_TS,
+                &mut v,
+                vk::QueryResultFlags::TYPE_64,
+            )
+        };
+        if ok.is_ok() {
+            for k in 0..GPU_STAGES.len() {
+                t.sum_ns[k] += v[k + 1].saturating_sub(v[k]) as f64 * period;
+            }
+            t.frames += 1;
+        }
+    }
+}
+
 impl Drop for Renderer {
     fn drop(&mut self) {
+        if let Some(t) = self.gpu_times.take() {
+            let n = t.frames.max(1) as f64;
+            let total: f64 = t.sum_ns.iter().sum();
+            eprintln!("GPU times over {} frames (avg us/frame):", t.frames);
+            for (k, name) in GPU_STAGES.iter().enumerate() {
+                eprintln!("  {name:<14} {:8.1}", t.sum_ns[k] / n / 1000.0);
+            }
+            eprintln!("  {:<14} {:8.1}", "total", total / n / 1000.0);
+            self.idle();
+            // SAFETY: device idle; the pool is no longer used.
+            unsafe { self.gpu.device.destroy_query_pool(t.pool, None) };
+        }
+        self.drop_inner();
+    }
+}
+
+impl Renderer {
+    fn drop_inner(&mut self) {
+
         self.idle();
         self.free_level();
         self.destroy_targets();
