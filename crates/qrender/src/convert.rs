@@ -32,6 +32,9 @@ pub fn to_rgba(pal: &Palette, src: &[u8], transparent: Option<u8>) -> Vec<u8> {
 /// cut-out edges don't bleed black.
 pub fn downsample_rgba(src: &[u8], w: usize, h: usize, alpha_weighted: bool) -> Vec<u8> {
     let (nw, nh) = ((w / 2).max(1), (h / 2).max(1));
+    if w == 0 || h == 0 || src.len() < w * h * 4 {
+        return vec![0; nw * nh * 4];
+    }
     let mut out = Vec::with_capacity(nw * nh * 4);
     for y in 0..nh {
         for x in 0..nw {
@@ -277,6 +280,9 @@ mod downsample_tests {
         assert_eq!(downsample_rgba(&src, 2, 2, false), vec![63, 191, 0, 63]);
         // fully transparent block stays transparent black
         assert_eq!(downsample_rgba(&[0; 16], 2, 2, true), vec![0, 0, 0, 0]);
+        // short or empty input doesn't panic
+        assert_eq!(downsample_rgba(&[], 0, 4, true), vec![0; 8]);
+        assert_eq!(downsample_rgba(&[1; 8], 4, 4, true).len(), 16);
         // odd sizes clamp at the edge
         assert_eq!(downsample_rgba(&[10, 20, 30, 255], 1, 1, true), vec![10, 20, 30, 255]);
     }
