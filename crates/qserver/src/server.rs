@@ -601,8 +601,9 @@ impl Server {
         }
     }
 
-    /// Drain the delivered reliable stream of client `i`.
-    pub fn take_reliable(&mut self, i: usize) -> Vec<u8> {
+    /// Drain the delivered reliable messages of client `i`, in order. Each is
+    /// one network message (never merged, so demos stay under MAX_MSGLEN).
+    pub fn take_reliable(&mut self, i: usize) -> Vec<Vec<u8>> {
         self.core.clients.get_mut(i).map(|c| std::mem::take(&mut c.reliable_out)).unwrap_or_default()
     }
 
@@ -625,7 +626,7 @@ impl Server {
             let cl = &mut self.core.clients[i];
             cl.message.byte(SVC_DISCONNECT);
             let m = std::mem::take(&mut cl.message.data);
-            cl.reliable_out.extend_from_slice(&m);
+            cl.reliable_out.push(m);
             if cl.spawned
                 && let Some(l) = &mut self.level
             {
