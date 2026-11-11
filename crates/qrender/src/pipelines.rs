@@ -74,6 +74,8 @@ struct Desc<'a> {
     color: vk::Format,
     depth: bool,
     samples: u32,
+    /// Cull back faces (alias models; Quake winding is clockwise-front).
+    cull: bool,
 }
 
 fn attr(
@@ -123,7 +125,8 @@ fn graphics(gpu: &Gpu, layout: vk::PipelineLayout, d: &Desc) -> Result<vk::Pipel
         .scissor_count(1);
     let rs = vk::PipelineRasterizationStateCreateInfo::default()
         .polygon_mode(vk::PolygonMode::FILL)
-        .cull_mode(vk::CullModeFlags::NONE)
+        .cull_mode(if d.cull { vk::CullModeFlags::BACK } else { vk::CullModeFlags::NONE })
+        .front_face(vk::FrontFace::CLOCKWISE)
         .depth_bias_enable(d.depth)
         .line_width(1.0);
     let ms = vk::PipelineMultisampleStateCreateInfo::default()
@@ -394,6 +397,7 @@ impl Pipelines {
             color: COLOR_FORMAT,
             depth: true,
             samples,
+            cull: false,
         };
         let g = |d: Desc| graphics(gpu, layout, &d);
         let world = g(d(world_vs, world_fs, &wb, &wa, Blend::None, true, true))?;
@@ -401,8 +405,8 @@ impl Pipelines {
         let water = g(d(world_vs, water_fs, &wb, &wa, Blend::None, true, true))?;
         let water_alpha = g(d(world_vs, water_fs, &wb, &wa, Blend::Alpha, true, false))?;
         let sky = g(d(world_vs, sky_fs, &wb, &wa, Blend::None, true, true))?;
-        let alias = g(d(alias_vs, alias_fs, &ab, &aa, Blend::None, true, true))?;
-        let alias_alpha = g(d(alias_vs, alias_fs, &ab, &aa, Blend::Alpha, true, false))?;
+        let alias = g(Desc { cull: true, ..d(alias_vs, alias_fs, &ab, &aa, Blend::None, true, true) })?;
+        let alias_alpha = g(Desc { cull: true, ..d(alias_vs, alias_fs, &ab, &aa, Blend::Alpha, true, false) })?;
         let poly = g(d(poly_vs, poly_fs, &pb, &pa, Blend::Alpha, true, true))?;
         let particle = g(d(part_vs, part_fs, &qb, &qa, Blend::Alpha, true, false))?;
         // UI is drawn in the output pass, after post-processing
@@ -430,6 +434,7 @@ impl Pipelines {
                 color: post_format,
                 depth: false,
                 samples: 1,
+                cull: false,
             },
         )?;
         (

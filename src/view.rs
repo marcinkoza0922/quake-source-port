@@ -198,7 +198,7 @@ impl ViewState {
         for k in 0..3 {
             gorg[k] += fwd[k] * bob * 0.4;
         }
-        gorg[2] += bob + 2.0;
+        gorg[2] += bob;
         // punch
         if cv.gunkick {
             let t = (((cl.time - cl.punchtime) / 0.1) as f32).clamp(0.0, 1.0);
