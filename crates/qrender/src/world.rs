@@ -83,8 +83,10 @@ pub struct World {
     frame: u32,
     /// R_MarkLeaves state: the PVS leaves of `vis_leaf` (leaf indices with
     /// marksurfaces), rebuilt only when the view leaf changes.
-    vis_leaves: Vec<u32>,
+    vis_leaves: Vec<VisLeaf>,
     vis_leaf: usize,
+    /// Hot per-surface culling data, parallel to `surfaces`.
+    cull: Vec<SurfCull>,
     pub has_light: bool,
     packer: Packer,
 }
@@ -180,6 +182,7 @@ impl World {
             frame: 0,
             vis_leaves: Vec::new(),
             vis_leaf: usize::MAX,
+            cull: Vec::new(),
             has_light,
             packer: Packer {
                 allocated: vec![0; ATLAS as usize],
@@ -373,6 +376,7 @@ impl World {
             w.anims.push((off(p), off(a), r));
         }
         w.surf_frame.resize(w.surfaces.len(), 0);
+        w.cull = w.surfaces.iter().map(SurfCull::new).collect();
         for m in &bsp.models {
             w.submodels.push(SubModel {
                 first_surface: m.first_face.max(0) as u32 + surf_base,
@@ -430,28 +434,27 @@ impl World {
         if leaf != self.vis_leaf {
             self.mark_leaves(leaf);
         }
-        for &li in &self.vis_leaves {
-            let l = &self.leafs[li as usize];
+        for l in &self.vis_leaves {
             let Some(clip) = clip_box(frustum, 0b1111, l.mins, l.maxs) else { continue };
-            let ms = l.first_marksurface as usize;
-            for k in ms..ms + l.num_marksurfaces as usize {
+            let ms = l.first as usize;
+            for k in ms..ms + l.count as usize {
                 let Some(&si) = self.marksurfaces.get(k) else {
                     break;
                 };
                 let si = si as usize;
-                if si >= self.surfaces.len() || self.surf_frame[si] == self.frame {
+                if si >= self.cull.len() || self.surf_frame[si] == self.frame {
                     continue;
                 }
                 self.surf_frame[si] = self.frame;
-                let s = &self.surfaces[si];
-                if s.num_indices == 0 {
+                let c = &self.cull[si];
+                if c.flags & CULL_EMPTY != 0 {
                     continue;
                 }
-                let d = dot(eye, s.normal) - s.dist;
-                if (d < 0.0) != s.flipped && s.kind != TextureKind::Sky {
+                let d = dot(eye, c.normal) - c.dist;
+                if (d < 0.0) != (c.flags & CULL_FLIPPED != 0) && c.flags & CULL_SKY == 0 {
                     continue;
                 }
-                if clip != 0 && clip_box(frustum, clip, s.mins, s.maxs).is_none() {
+                if clip != 0 && clip_box(frustum, clip, c.mins, c.maxs).is_none() {
                     continue;
                 }
                 out.push(si as u32);
@@ -475,8 +478,14 @@ impl World {
             if !novis && pvs.get(i >> 3).is_none_or(|b| b & (1 << (i & 7)) == 0) {
                 continue;
             }
-            if self.leafs[i + 1].num_marksurfaces > 0 {
-                self.vis_leaves.push(i as u32 + 1);
+            let l = &self.leafs[i + 1];
+            if l.num_marksurfaces > 0 {
+                self.vis_leaves.push(VisLeaf {
+                    mins: l.mins,
+                    maxs: l.maxs,
+                    first: l.first_marksurface,
+                    count: l.num_marksurfaces,
+                });
             }
         }
     }
@@ -598,6 +607,45 @@ impl World {
             node = n.children[1 - side];
             start = mid;
         }
+    }
+}
+
+/// A PVS leaf with surfaces, copied out so the per-frame loop is linear.
+#[derive(Clone, Copy, Debug)]
+struct VisLeaf {
+    mins: [f32; 3],
+    maxs: [f32; 3],
+    first: u32,
+    count: u32,
+}
+
+const CULL_EMPTY: u32 = 1;
+const CULL_FLIPPED: u32 = 2;
+const CULL_SKY: u32 = 4;
+
+/// The fields of a [`Surface`] that `mark_visible` reads (44 bytes).
+#[derive(Clone, Copy, Debug)]
+struct SurfCull {
+    normal: [f32; 3],
+    dist: f32,
+    mins: [f32; 3],
+    maxs: [f32; 3],
+    flags: u32,
+}
+
+impl SurfCull {
+    fn new(s: &Surface) -> Self {
+        let mut flags = 0;
+        if s.num_indices == 0 {
+            flags |= CULL_EMPTY;
+        }
+        if s.flipped {
+            flags |= CULL_FLIPPED;
+        }
+        if s.kind == TextureKind::Sky {
+            flags |= CULL_SKY;
+        }
+        SurfCull { normal: s.normal, dist: s.dist, mins: s.mins, maxs: s.maxs, flags }
     }
 }
 
