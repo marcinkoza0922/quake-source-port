@@ -207,6 +207,8 @@ pub struct Gpu {
     pub max_anisotropy: f32,
     /// sampleRateShading is enabled (supersampling).
     pub sample_shading: bool,
+    /// Nanoseconds per timestamp tick.
+    pub timestamp_period: f32,
 }
 
 impl Gpu {
@@ -365,6 +367,7 @@ impl Gpu {
             upload_pool,
             max_samples,
             max_anisotropy,
+            timestamp_period: lim.timestamp_period,
             sample_shading,
         })
     }

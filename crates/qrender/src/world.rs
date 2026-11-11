@@ -57,6 +57,11 @@ pub struct SubModel {
 }
 
 pub struct World {
+    /// R_LightPoint cache (ironwail's per-entity lightcache_t): sample point
+    /// floored to whole units -> trace result. Entities that don't move skip
+    /// the BSP trace; the colour is re-read from the lightmap each call so
+    /// lightstyles still animate.
+    light_cache: std::sync::Mutex<std::collections::HashMap<[i32; 3], LightHit, PointHash>>,
     pub vertices: Vec<WorldVertex>,
     pub indices: Vec<u32>,
     pub surfaces: Vec<Surface>,
@@ -74,8 +79,9 @@ pub struct World {
     marksurfaces: Vec<u32>,
     visdata: Vec<u8>,
     numleafs: usize,
-    surf_frame: Vec<u32>,
-    frame: u32,
+    /// R_MarkLeaves state: the PVS leaves of `vis_leaf` that have surfaces.
+    vis_leaves: Vec<VisLeaf>,
+    vis_leaf: usize,
     pub has_light: bool,
     packer: Packer,
 }
@@ -151,6 +157,7 @@ impl World {
         let numleafs = bsp.models.first().map_or(0, |m| m.visleafs.max(0) as usize);
         let has_light = !bsp.lighting.is_empty();
         let mut w = World {
+            light_cache: Default::default(),
             vertices: Vec::new(),
             indices: Vec::new(),
             surfaces: Vec::with_capacity(bsp.faces.len()),
@@ -166,8 +173,8 @@ impl World {
             marksurfaces: bsp.marksurfaces.clone(),
             visdata: bsp.visdata.clone(),
             numleafs,
-            surf_frame: Vec::new(),
-            frame: 0,
+            vis_leaves: Vec::new(),
+            vis_leaf: usize::MAX,
             has_light,
             packer: Packer {
                 allocated: vec![0; ATLAS as usize],
@@ -360,7 +367,6 @@ impl World {
             let off = |v: Vec<u32>| v.into_iter().map(|x| x + tex_base).collect();
             w.anims.push((off(p), off(a), r));
         }
-        w.surf_frame.resize(w.surfaces.len(), 0);
         for m in &bsp.models {
             w.submodels.push(SubModel {
                 first_surface: m.first_face.max(0) as u32 + surf_base,
@@ -407,54 +413,99 @@ impl World {
         }
     }
 
-    /// Marks world surfaces visible from `eye` (PVS + frustum + backface).
-    pub fn mark_visible(&mut self, eye: [f32; 3], frustum: &[[f32; 4]; 4], out: &mut Vec<u32>) {
-        self.frame = self.frame.wrapping_add(1);
-        if self.frame == 0 {
-            self.surf_frame.iter_mut().for_each(|f| *f = 0);
-            self.frame = 1;
-        }
+    /// Per-frame leaf bitset for GPU culling: PVS leaves of the eye's leaf
+    /// (with surfaces) whose box touches the frustum. `out` gets one bit per
+    /// leaf index.
+    pub fn leaf_bits(&mut self, eye: [f32; 3], frustum: &[[f32; 4]; 4], out: &mut Vec<u32>) {
         let leaf = self.point_leaf(eye);
+        if leaf != self.vis_leaf {
+            self.mark_leaves(leaf);
+        }
+        out.clear();
+        out.resize(self.leafs.len().div_ceil(32), 0);
+        let planes = Planes::new(frustum);
+        for l in &self.vis_leaves {
+            if planes.clip(0b1111, l.center, l.extent).is_some() {
+                out[(l.leaf >> 5) as usize] |= 1 << (l.leaf & 31);
+            }
+        }
+    }
+
+    pub fn leafs_len(&self) -> usize {
+        self.leafs.len()
+    }
+
+    /// Texture a surface is batched under: its own texture, or for random
+    /// animations (`-0..-9`) the frame picked for that surface.
+    pub fn slot_texture(&self, si: u32) -> u32 {
+        let t = self.surfaces[si as usize].texture;
+        match self.anims.get(t as usize) {
+            Some((_, _, true)) => self.resolve_texture(t, false, 0.0, si),
+            _ => t,
+        }
+    }
+
+    /// Static inputs of cull.comp: (leaf, surface) pairs for every world leaf
+    /// and one record per surface. `cmd_of(si)` is the draw command index a
+    /// surface's triangles go to.
+    pub fn gpu_cull(&self, cmd_of: impl Fn(u32) -> u32) -> (Vec<[u32; 2]>, Vec<GpuCullSurf>) {
+        let surfs = self
+            .surfaces
+            .iter()
+            .enumerate()
+            .map(|(si, s)| {
+                let (center, extent) = center_extent(s.mins, s.maxs);
+                let plane = if s.kind == TextureKind::Sky {
+                    [0.0, 0.0, 0.0, -1.0] // never back-face culled
+                } else if s.flipped {
+                    [-s.normal[0], -s.normal[1], -s.normal[2], -s.dist]
+                } else {
+                    [s.normal[0], s.normal[1], s.normal[2], s.dist]
+                };
+                let cmd = if s.num_indices > 0 { cmd_of(si as u32) } else { 0 };
+                GpuCullSurf {
+                    plane,
+                    center: [center[0], center[1], center[2], f32::from_bits(cmd)],
+                    extent: [extent[0], extent[1], extent[2], f32::from_bits(s.lm)],
+                    idx: [s.first_index, s.num_indices, 0, 0],
+                }
+            })
+            .collect();
+        let mut marks = Vec::new();
+        for li in 1..=self.numleafs.min(self.leafs.len().saturating_sub(1)) {
+            let l = &self.leafs[li];
+            let ms = l.first_marksurface as usize;
+            for k in ms..ms + l.num_marksurfaces as usize {
+                let Some(&si) = self.marksurfaces.get(k) else { break };
+                if self.surfaces.get(si as usize).is_some_and(|s| s.num_indices > 0) {
+                    marks.push([li as u32, si]);
+                }
+            }
+        }
+        (marks, surfs)
+    }
+
+    /// R_MarkLeaves: list the PVS leaves of `leaf` that have surfaces.
+    /// Rebuilt only when the view leaf changes.
+    fn mark_leaves(&mut self, leaf: usize) {
+        self.vis_leaf = leaf;
+        self.vis_leaves.clear();
         let novis = leaf == 0
             || self.leafs.get(leaf).is_none_or(|l| l.visofs < 0)
             || self.visdata.is_empty();
         let pvs = if novis {
-            vec![0xff; self.numleafs.div_ceil(8)]
+            Vec::new()
         } else {
             qformats::bsp::decompress_vis(&self.visdata, self.leafs[leaf].visofs, self.numleafs)
         };
-        for i in 0..self.numleafs {
-            if pvs[i >> 3] & (1 << (i & 7)) == 0 {
+        for i in 0..self.numleafs.min(self.leafs.len().saturating_sub(1)) {
+            if !novis && pvs.get(i >> 3).is_none_or(|b| b & (1 << (i & 7)) == 0) {
                 continue;
             }
-            let Some(l) = self.leafs.get(i + 1) else {
-                break;
-            };
-            if !box_in_frustum(frustum, l.mins, l.maxs) {
-                continue;
-            }
-            let ms = l.first_marksurface as usize;
-            for k in ms..ms + l.num_marksurfaces as usize {
-                let Some(&si) = self.marksurfaces.get(k) else {
-                    break;
-                };
-                let si = si as usize;
-                if si >= self.surfaces.len() || self.surf_frame[si] == self.frame {
-                    continue;
-                }
-                self.surf_frame[si] = self.frame;
-                let s = &self.surfaces[si];
-                if s.num_indices == 0 {
-                    continue;
-                }
-                let d = dot(eye, s.normal) - s.dist;
-                if (d < 0.0) != s.flipped && s.kind != TextureKind::Sky {
-                    continue;
-                }
-                if !box_in_frustum(frustum, s.mins, s.maxs) {
-                    continue;
-                }
-                out.push(si as u32);
+            let l = &self.leafs[i + 1];
+            if l.num_marksurfaces > 0 {
+                let (center, extent) = center_extent(l.mins, l.maxs);
+                self.vis_leaves.push(VisLeaf { leaf: i as u32 + 1, center, extent });
             }
         }
     }
@@ -464,9 +515,54 @@ impl World {
         if !self.has_light || self.bsp_nodes.is_empty() {
             return Some([255.0; 3]);
         }
-        let end = [p[0], p[1], p[2] - 8192.0];
-        let mut maxdist = 8192.0f32;
-        self.recursive_light(0, p, p, end, &mut maxdist, styles)
+        let key = p.map(|v| v.floor() as i32);
+        let cached = self.light_cache.lock().ok().and_then(|c| c.get(&key).copied());
+        let hit = cached.unwrap_or_else(|| {
+            let end = [p[0], p[1], p[2] - 8192.0];
+            let mut maxdist = 8192.0f32;
+            let h = self.recursive_light(0, p, p, end, &mut maxdist);
+            if let Ok(mut c) = self.light_cache.lock() {
+                // Moving entities add a new key each frame; keep it bounded.
+                if c.len() >= 8192 {
+                    c.clear();
+                }
+                c.insert(key, h);
+            }
+            h
+        });
+        match hit {
+            LightHit::Miss => None,
+            LightHit::Black => Some([0.0; 3]),
+            LightHit::Surf { surf, ds, dt } => Some(self.interpolate_light(surf as usize, ds, dt, styles)),
+        }
+    }
+
+    /// InterpolateLightmap: bilinear between the four nearest luxels.
+    fn interpolate_light(&self, si: usize, ds: i32, dt: i32, styles: &[i32]) -> [f32; 3] {
+        let Some(s) = self.surfaces.get(si) else { return [0.0; 3] };
+        let w = ((s.extents[0] >> 4) + 1) as usize;
+        let h = ((s.extents[1] >> 4) + 1) as usize;
+        let (x, y) = ((ds >> 4) as usize, (dt >> 4) as usize);
+        let (x1, y1) = ((x + 1).min(w - 1), (y + 1).min(h - 1));
+        let (fs, ft) = (ds & 15, dt & 15);
+        let mut acc = [[0i32; 3]; 4];
+        let mut base = s.samples as usize;
+        for &st in s.styles.iter().take_while(|&&st| st != 255) {
+            let scale = styles.get(st as usize).copied().unwrap_or(256);
+            for (a, (cx, cy)) in acc.iter_mut().zip([(x, y), (x1, y), (x, y1), (x1, y1)]) {
+                let v = self.samples.get(base + cy * w + cx).copied().unwrap_or(0);
+                for (k, ak) in a.iter_mut().enumerate() {
+                    *ak += ((v >> (k * 8)) & 0xff) as i32 * scale;
+                }
+            }
+            base += w * h;
+        }
+        let [c00, c01, c10, c11] = acc;
+        std::array::from_fn(|k| {
+            let top = (((c01[k] - c00[k]) * fs) >> 4) + c00[k];
+            let bot = (((c11[k] - c10[k]) * fs) >> 4) + c10[k];
+            ((((bot - top) * ft) >> 4) + top) as f32 / 256.0
+        })
     }
 
     fn recursive_light(
@@ -476,16 +572,15 @@ impl World {
         start: [f32; 3],
         end: [f32; 3],
         maxdist: &mut f32,
-        styles: &[i32],
-    ) -> Option<[f32; 3]> {
+    ) -> LightHit {
         let mut node = node;
         let mut start = start;
         loop {
             if node < 0 {
-                return None;
+                return LightHit::Miss;
             }
-            let n = self.bsp_nodes.get(node as usize)?;
-            let pl = self.planes.get(n.plane.max(0) as usize)?;
+            let Some(n) = self.bsp_nodes.get(node as usize) else { return LightHit::Miss };
+            let Some(pl) = self.planes.get(n.plane.max(0) as usize) else { return LightHit::Miss };
             let front = dot(start, pl.normal) - pl.dist;
             let back = dot(end, pl.normal) - pl.dist;
             let side = (front < 0.0) as usize;
@@ -495,10 +590,9 @@ impl World {
             }
             let frac = front / (front - back);
             let mid = [0, 1, 2].map(|i| start[i] + (end[i] - start[i]) * frac);
-            if let Some(c) =
-                self.recursive_light(n.children[side], rayorg, start, mid, maxdist, styles)
-            {
-                return Some(c);
+            let r = self.recursive_light(n.children[side], rayorg, start, mid, maxdist);
+            if r != LightHit::Miss {
+                return r;
             }
             for si in n.first_face..n.first_face + n.num_faces {
                 let Some(s) = self.surfaces.get(si as usize) else {
@@ -516,37 +610,84 @@ impl World {
                 if ds > s.extents[0] || dt > s.extents[1] {
                     continue;
                 }
-                if s.samples == NO_LM {
-                    continue;
-                }
                 let sfront = dot(rayorg, s.normal) - s.dist;
                 let sback = dot(end, s.normal) - s.dist;
-                let len = (0..3)
-                    .map(|i| (end[i] - rayorg[i]).powi(2))
-                    .sum::<f32>()
-                    .sqrt();
+                let len = (0..3).map(|i| (end[i] - rayorg[i]).powi(2)).sum::<f32>().sqrt();
                 let dist = sfront / (sfront - sback) * len;
+                if s.samples == NO_LM {
+                    // Lightmapped flag but no data: keep looking nearby (DOTM fix).
+                    *maxdist = maxdist.min(dist + 8.0);
+                    continue;
+                }
                 if dist >= *maxdist {
-                    return Some([0.0; 3]);
+                    return LightHit::Black;
                 }
-                let w = ((s.extents[0] >> 4) + 1) as usize;
-                let h = ((s.extents[1] >> 4) + 1) as usize;
-                let mut idx = s.samples as usize + (dt as usize >> 4) * w + (ds as usize >> 4);
-                let mut c = [0.0f32; 3];
-                for &st in s.styles.iter().take_while(|&&st| st != 255) {
-                    let scale = styles.get(st as usize).copied().unwrap_or(256) as f32;
-                    let v = self.samples.get(idx).copied().unwrap_or(0);
-                    for (k, ck) in c.iter_mut().enumerate() {
-                        *ck += ((v >> (k * 8)) & 0xff) as f32 * scale;
-                    }
-                    idx += w * h;
-                }
-                return Some(c.map(|x| x / 256.0));
+                return LightHit::Surf { surf: si, ds, dt };
             }
             node = n.children[1 - side];
             start = mid;
         }
     }
+}
+
+/// cull.comp surface record.
+#[repr(C)]
+#[derive(Clone, Copy, Debug)]
+pub struct GpuCullSurf {
+    pub plane: [f32; 4],
+    pub center: [f32; 4],
+    pub extent: [f32; 4],
+    pub idx: [u32; 4],
+}
+
+/// A PVS leaf with surfaces, copied out so the per-frame loop is linear.
+#[derive(Clone, Copy, Debug)]
+struct VisLeaf {
+    leaf: u32,
+    center: [f32; 3],
+    extent: [f32; 3],
+}
+
+/// Multiplicative hash for integer points (the default SipHash showed up in
+/// profiles; these keys need no DoS resistance).
+#[derive(Default, Clone, Copy)]
+pub struct PointHash;
+
+impl std::hash::BuildHasher for PointHash {
+    type Hasher = PointHasher;
+    fn build_hasher(&self) -> PointHasher {
+        PointHasher(0)
+    }
+}
+
+pub struct PointHasher(u64);
+
+impl std::hash::Hasher for PointHasher {
+    fn finish(&self) -> u64 {
+        self.0
+    }
+    fn write(&mut self, bytes: &[u8]) {
+        for &b in bytes {
+            self.write_u32(b as u32);
+        }
+    }
+    fn write_u32(&mut self, v: u32) {
+        self.0 = (self.0.rotate_left(5) ^ v as u64).wrapping_mul(0x51_7c_c1_b7_27_22_0a_95);
+    }
+    fn write_i32(&mut self, v: i32) {
+        self.write_u32(v as u32);
+    }
+    fn write_usize(&mut self, v: usize) {
+        self.write_u32(v as u32);
+    }
+}
+
+/// Result of a light trace (ironwail's lightcache_t.surfidx/ds/dt).
+#[derive(Clone, Copy, PartialEq, Eq, Debug)]
+enum LightHit {
+    Miss,
+    Black,
+    Surf { surf: u32, ds: i32, dt: i32 },
 }
 
 fn build_anims(bsp: &Bsp) -> Vec<(Vec<u32>, Vec<u32>, bool)> {
@@ -591,7 +732,44 @@ fn dot64(a: [f32; 3], b: [f32; 4]) -> f64 {
     a[0] as f64 * b[0] as f64 + a[1] as f64 * b[1] as f64 + a[2] as f64 * b[2] as f64
 }
 
-/// Frustum planes as (normal, dist): inside when dot(n, p) + d >= 0.
+/// Frustum planes prepared for center/extent box tests.
+struct Planes {
+    p: [[f32; 4]; 4],
+    abs: [[f32; 3]; 4],
+}
+
+impl Planes {
+    fn new(f: &[[f32; 4]; 4]) -> Self {
+        Planes { p: *f, abs: f.map(|p| [p[0].abs(), p[1].abs(), p[2].abs()]) }
+    }
+
+    /// Like [`clip_box`] for a box given as center `c` and half-size `e`.
+    #[inline(always)]
+    fn clip(&self, clip: u8, c: [f32; 3], e: [f32; 3]) -> Option<u8> {
+        let mut out = clip;
+        for j in 0..4 {
+            if clip & (1 << j) == 0 {
+                continue;
+            }
+            let p = &self.p[j];
+            let a = &self.abs[j];
+            let d = p[0] * c[0] + p[1] * c[1] + p[2] * c[2] + p[3];
+            let r = a[0] * e[0] + a[1] * e[1] + a[2] * e[2];
+            if d + r < 0.0 {
+                return None;
+            }
+            if d - r >= 0.0 {
+                out &= !(1 << j);
+            }
+        }
+        Some(out)
+    }
+}
+
+fn center_extent(mins: [f32; 3], maxs: [f32; 3]) -> ([f32; 3], [f32; 3]) {
+    (std::array::from_fn(|i| (mins[i] + maxs[i]) * 0.5), std::array::from_fn(|i| (maxs[i] - mins[i]) * 0.5))
+}
+
 pub fn box_in_frustum(f: &[[f32; 4]; 4], mins: [f32; 3], maxs: [f32; 3]) -> bool {
     f.iter().all(|p| {
         let v = [0, 1, 2].map(|i| if p[i] >= 0.0 { maxs[i] } else { mins[i] });

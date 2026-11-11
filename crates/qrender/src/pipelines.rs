@@ -21,6 +21,10 @@ pub struct Pipelines {
     pub comp_set_layout: vk::DescriptorSetLayout,
     pub comp_layout: vk::PipelineLayout,
     pub lightmap: vk::Pipeline,
+    /// World surface culling (cull.comp): 7 storage buffers + push constants.
+    pub cull_set_layout: vk::DescriptorSetLayout,
+    pub cull_layout: vk::PipelineLayout,
+    pub cull: vk::Pipeline,
     pub world: vk::Pipeline,
     pub world_alpha: vk::Pipeline,
     pub water: vk::Pipeline,
@@ -250,6 +254,16 @@ impl Pipelines {
         // SAFETY: valid device.
         let comp_layout = unsafe { dev.create_pipeline_layout(&clci, None)? };
 
+        let cullbind: Vec<_> = (0..7).map(|i| cb(i, vk::DescriptorType::STORAGE_BUFFER)).collect();
+        let cci = vk::DescriptorSetLayoutCreateInfo::default().bindings(&cullbind);
+        // SAFETY: valid device.
+        let cull_set_layout = unsafe { dev.create_descriptor_set_layout(&cci, None)? };
+        let csl2 = [cull_set_layout];
+        let cpcr = [vk::PushConstantRange { stage_flags: vk::ShaderStageFlags::COMPUTE, offset: 0, size: 112 }];
+        let clci = vk::PipelineLayoutCreateInfo::default().set_layouts(&csl2).push_constant_ranges(&cpcr);
+        // SAFETY: valid device.
+        let cull_layout = unsafe { dev.create_pipeline_layout(&clci, None)? };
+
         let mut modules = Vec::new();
         let mut m = |spv: &[u8]| -> Result<vk::ShaderModule> {
             let s = gpu.shader(spv)?;
@@ -283,6 +297,15 @@ impl Pipelines {
         let lightmap =
             unsafe { dev.create_compute_pipelines(vk::PipelineCache::null(), &cpci, None) }
                 .map_err(|(_, e)| e)?[0];
+        let cull_cs = m(spv!("cull.comp"))?;
+        let stage = vk::PipelineShaderStageCreateInfo::default()
+            .stage(vk::ShaderStageFlags::COMPUTE)
+            .module(cull_cs)
+            .name(c"main");
+        let cpci = [vk::ComputePipelineCreateInfo::default().stage(stage).layout(cull_layout)];
+        // SAFETY: valid module/layout.
+        let cull = unsafe { dev.create_compute_pipelines(vk::PipelineCache::null(), &cpci, None) }
+            .map_err(|(_, e)| e)?[0];
 
         let sh = Shaders {
             world_vs,
@@ -307,6 +330,9 @@ impl Pipelines {
             comp_set_layout,
             comp_layout,
             lightmap,
+            cull_set_layout,
+            cull_layout,
+            cull,
             world: null,
             world_alpha: null,
             water: null,
@@ -469,7 +495,7 @@ impl Pipelines {
     pub fn destroy(&mut self, dev: &ash::Device) {
         // SAFETY: device idle at teardown.
         unsafe {
-            for p in self.graphics_pipes().into_iter().chain([self.lightmap]) {
+            for p in self.graphics_pipes().into_iter().chain([self.lightmap, self.cull]) {
                 dev.destroy_pipeline(p, None);
             }
             for m in self.modules.drain(..) {
@@ -477,6 +503,8 @@ impl Pipelines {
             }
             dev.destroy_pipeline_layout(self.layout, None);
             dev.destroy_pipeline_layout(self.comp_layout, None);
+            dev.destroy_pipeline_layout(self.cull_layout, None);
+            dev.destroy_descriptor_set_layout(self.cull_set_layout, None);
             dev.destroy_descriptor_set_layout(self.set_layout, None);
             dev.destroy_descriptor_set_layout(self.comp_set_layout, None);
         }

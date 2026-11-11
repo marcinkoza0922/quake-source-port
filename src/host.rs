@@ -589,11 +589,7 @@ impl Host {
     /// Delivers the server's reliable stream and datagrams to the client.
     fn feed_client(&mut self) {
         let Some(i) = self.local else { return };
-        let rel = self.server.take_reliable(i);
-        let mut msgs = Vec::new();
-        if !rel.is_empty() {
-            msgs.push(rel);
-        }
+        let mut msgs = self.server.take_reliable(i);
         msgs.extend(self.server.take_datagrams(i));
         for m in msgs {
             if let Some(w) = &mut self.recording

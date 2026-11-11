@@ -511,7 +511,7 @@ fn flush(c: &mut Core, i: usize) -> bool {
     }
     if !cl.message.is_empty() {
         let d = std::mem::take(&mut cl.message.data);
-        cl.reliable_out.extend_from_slice(&d);
+        cl.reliable_out.push(d);
         if cl.sendsignon == Signon::Flush {
             cl.sendsignon = Signon::Done;
         }

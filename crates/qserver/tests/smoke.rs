@@ -164,7 +164,7 @@ fn e1m1_state() {
     sv.command("skill 3");
     sv.spawn_server("e1m1").unwrap();
     let c = sv.connect_local().unwrap();
-    let rel = sv.take_reliable(c);
+    let rel = sv.take_reliable(c).concat();
     assert!(rel.len() > 1000, "signon stream {}", rel.len());
     let st = sv.stats();
     assert!(st.total_monsters > 0 && st.total_secrets > 0, "{st:?}");

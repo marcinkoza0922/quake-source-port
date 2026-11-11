@@ -15,8 +15,7 @@ fn basedir() -> Option<PathBuf> {
 }
 
 fn feed(sv: &mut Server, cl: &mut ClientState, c: usize) {
-    let rel = sv.take_reliable(c);
-    if !rel.is_empty() {
+    for rel in sv.take_reliable(c) {
         cl.parse_server_message(&rel).unwrap();
     }
     for d in sv.take_datagrams(c) {

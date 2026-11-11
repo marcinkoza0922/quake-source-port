@@ -1,0 +1,64 @@
+#version 460
+// World surface culling on the GPU (port of ironwail's cull_mark compute
+// shader). One thread per (leaf, surface) pair of the world: the leaf must be
+// set in the per-frame leaf bitset (PVS and leaf frustum, from the CPU), the
+// surface must face the eye and touch the frustum. The first thread to accept
+// a surface this frame appends its triangles to its texture slot's region of
+// the output index buffer, bumps that slot's indirect draw count, and adds
+// its lightmap to the list the lightmap pass reads (indirect dispatch).
+layout(local_size_x = 64) in;
+
+struct CullSurf {
+    vec4 plane;   // facing test: visible when dot(xyz, eye) - w >= 0
+    vec4 center;  // xyz; w = draw command index (uint bits)
+    vec4 extent;  // xyz; w = lightmap index or 0xffffffff (uint bits)
+    uvec4 idx;    // first source index, index count, pad, pad
+};
+
+layout(set = 0, binding = 0) readonly buffer Marks { uvec2 marks[]; };  // leaf, surface
+layout(set = 0, binding = 1) readonly buffer Surfs { CullSurf surfs[]; };
+layout(set = 0, binding = 2) readonly buffer Src { uint src[]; };
+layout(set = 0, binding = 3) writeonly buffer Out { uint outidx[]; };
+// Per-frame host buffer: lightmap list.
+layout(set = 0, binding = 4) buffer Dyn { uint dyn[]; };
+// Per-frame device buffer: draw commands, lightmap dispatch args, leaf bits.
+layout(set = 0, binding = 6) buffer Cmds { uint cmds[]; };
+layout(set = 0, binding = 5) buffer Frame { uint surf_frame[]; };
+
+layout(push_constant) uniform Push {
+    vec4 frustum[4];
+    vec4 eye;
+    uint framecount;
+    uint nmarks;
+    uint ncmds;      // 5 uints per command: count, instances, first, vofs, first instance
+    uint ofs_vis;    // leaf bitset
+    uint ofs_lm;     // lightmap index list
+    uint pad;
+    uint max_lm;
+};
+
+void main() {
+    uint t = gl_GlobalInvocationID.x;
+    if (t >= nmarks) return;
+    uvec2 m = marks[t];
+    if ((cmds[ofs_vis + (m.x >> 5u)] & (1u << (m.x & 31u))) == 0u) return;
+    CullSurf s = surfs[m.y];
+    if (dot(s.plane.xyz, eye.xyz) - s.plane.w < 0.0) return;
+    vec3 c = s.center.xyz, e = s.extent.xyz;
+    for (uint i = 0u; i < 4u; i++) {
+        vec4 p = frustum[i];
+        if (dot(p.xyz, c) + p.w + dot(abs(p.xyz), e) < 0.0) return;
+    }
+    if (atomicExchange(surf_frame[m.y], framecount) == framecount) return;
+
+    uint cmd = floatBitsToUint(s.center.w) * 5u;
+    uint n = s.idx.y;
+    uint o = cmds[cmd + 2u] + atomicAdd(cmds[cmd], n);
+    for (uint i = 0u; i < n; i++) outidx[o + i] = src[s.idx.x + i];
+
+    uint lm = floatBitsToUint(s.extent.w);
+    if (lm != 0xffffffffu) {
+        uint k = atomicAdd(cmds[ncmds * 5u], 1u);
+        if (k < max_lm) dyn[ofs_lm + k] = lm;
+    }
+}

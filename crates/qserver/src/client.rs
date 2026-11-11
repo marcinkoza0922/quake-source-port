@@ -45,8 +45,9 @@ pub struct Client {
     pub max_datagram: usize,
     pub sendsignon: Signon,
     pub signonidx: usize,
-    /// Delivered reliable stream (consumer drains with [`crate::Server::take_reliable`]).
-    pub reliable_out: Vec<u8>,
+    /// Delivered reliable messages, one per flush, each at most MAX_MSGLEN
+    /// (consumer drains with [`crate::Server::take_reliable`]).
+    pub reliable_out: Vec<Vec<u8>>,
     /// Delivered unreliable datagrams.
     pub datagrams: VecDeque<Vec<u8>>,
     /// Last move received (applied every frame like `host_client->cmd`).
