@@ -103,6 +103,9 @@ pub struct Core {
     pub clients: Vec<Client>,
     pub serverflags: f32,
     pub changelevel_issued: bool,
+    /// Skip the per-frame entity updates in client datagrams (tools that
+    /// drive a local client and throw its datagrams away, like qbot).
+    pub skip_entity_updates: bool,
     /// False for hipnotic/rogue (weapon stat is sent as a bit index).
     pub standard_quake: bool,
     /// Console output.
@@ -272,6 +275,7 @@ impl Server {
                 clients: (0..maxclients.max(1)).map(|_| Client::default()).collect(),
                 serverflags: 0.0,
                 changelevel_issued: false,
+                skip_entity_updates: false,
                 standard_quake,
                 log: Vec::new(),
                 sv: Sv::default(),
