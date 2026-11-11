@@ -71,6 +71,20 @@ impl Canvas {
         self.ox = ((self.vw() - 320.0) / 2.0).floor();
         self.oy = ((self.vh() - 200.0) / 2.0).floor();
     }
+    /// Switch to the 16:9 menu layout: a centred 640×360 area at the largest
+    /// integer scale that fits (3x at 1080p). Callers restore `scale`.
+    pub fn menu_layout(&mut self) {
+        self.scale = (self.h / 360.0).min(self.w / 640.0).floor().clamp(1.0, 8.0);
+        self.ox = ((self.vw() - 640.0) / 2.0).floor();
+        self.oy = ((self.vh() - 360.0) / 2.0).floor();
+    }
+    /// Outline of a rectangle, one virtual pixel thick.
+    pub fn frame(&mut self, x: f32, y: f32, w: f32, h: f32, color: [f32; 4]) {
+        self.fill(x, y, w, 1.0, color);
+        self.fill(x, y + h - 1.0, w, 1.0, color);
+        self.fill(x, y + 1.0, 1.0, h - 2.0, color);
+        self.fill(x + w - 1.0, y + 1.0, 1.0, h - 2.0, color);
+    }
     pub fn reset_origin(&mut self) {
         self.ox = 0.0;
         self.oy = 0.0;

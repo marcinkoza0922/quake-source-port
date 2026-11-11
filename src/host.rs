@@ -436,7 +436,7 @@ impl Host {
                 let (ww, wh) = win.window_size();
                 let (px, py) = (x * pw as f32 / ww.max(1) as f32, y * ph as f32 / wh.max(1) as f32);
                 let mut c = Canvas::new(pw, ph);
-                c.center_320x200();
+                c.menu_layout();
                 let pos = (px / c.scale - c.ox, py / c.scale - c.oy);
                 if let Some(snd) = self.menu.mouse_move(pos) {
                     self.local_sound(snd);
