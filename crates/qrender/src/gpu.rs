@@ -201,6 +201,10 @@ pub struct Gpu {
     pub surface: vk::SurfaceKHR,
     pub alloc: Allocator,
     pub upload_pool: vk::CommandPool,
+    /// Highest MSAA sample count usable for colour+depth targets.
+    pub max_samples: u32,
+    /// Max sampler anisotropy (1 = unsupported).
+    pub max_anisotropy: f32,
 }
 
 impl Gpu {
@@ -303,7 +307,18 @@ impl Gpu {
         if surface_fn.is_some() {
             dev_exts.push(ash::khr::swapchain::NAME.as_ptr());
         }
+        let lim = props.limits;
+        let counts = lim.framebuffer_color_sample_counts & lim.framebuffer_depth_sample_counts;
+        let max_samples = [8u32, 4, 2]
+            .into_iter()
+            .find(|&n| counts.contains(vk::SampleCountFlags::from_raw(n)))
+            .unwrap_or(1);
+        // SAFETY: valid pdev.
+        let supported = unsafe { instance.get_physical_device_features(pdev) };
+        let aniso = supported.sampler_anisotropy == vk::TRUE;
+        let max_anisotropy = if aniso { lim.max_sampler_anisotropy.max(1.0) } else { 1.0 };
         let features = vk::PhysicalDeviceFeatures::default()
+            .sampler_anisotropy(aniso)
             .multi_draw_indirect(true)
             .draw_indirect_first_instance(true);
         let mut f12 = vk::PhysicalDeviceVulkan12Features::default()
@@ -344,6 +359,8 @@ impl Gpu {
             surface,
             alloc: Allocator::default(),
             upload_pool,
+            max_samples,
+            max_anisotropy,
         })
     }
 
@@ -387,6 +404,22 @@ impl Gpu {
         usage: vk::ImageUsageFlags,
         aspect: vk::ImageAspectFlags,
     ) -> Result<Image> {
+        self.image_ms(w, h, layers, mips, format, usage, aspect, 1)
+    }
+
+    /// [`Gpu::image`] with a sample count (1 = single-sampled).
+    #[allow(clippy::too_many_arguments)]
+    pub fn image_ms(
+        &mut self,
+        w: u32,
+        h: u32,
+        layers: u32,
+        mips: u32,
+        format: vk::Format,
+        usage: vk::ImageUsageFlags,
+        aspect: vk::ImageAspectFlags,
+        samples: u32,
+    ) -> Result<Image> {
         let ci = vk::ImageCreateInfo::default()
             .image_type(vk::ImageType::TYPE_2D)
             .format(format)
@@ -397,7 +430,7 @@ impl Gpu {
             })
             .mip_levels(mips)
             .array_layers(layers)
-            .samples(vk::SampleCountFlags::TYPE_1)
+            .samples(vk::SampleCountFlags::from_raw(samples.max(1)))
             .tiling(vk::ImageTiling::OPTIMAL)
             .usage(usage)
             .initial_layout(vk::ImageLayout::UNDEFINED);

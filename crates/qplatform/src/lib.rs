@@ -355,6 +355,16 @@ pub struct Window {
     _sdl: Rc<SdlGuard>,
 }
 
+/// Window presentation mode for [`Window::set_display`].
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub enum DisplayMode {
+    Windowed,
+    /// Exclusive fullscreen (changes the display mode).
+    Fullscreen,
+    /// Fullscreen window at desktop resolution.
+    Borderless,
+}
+
 impl Window {
     /// Drawable size in pixels.
     pub fn drawable_size(&self) -> (u32, u32) {
@@ -388,6 +398,75 @@ impl Window {
         let t = cstring(title)?;
         // SAFETY: raw is live; t valid for the call (SDL copies it).
         check(unsafe { sys::SDL_SetWindowTitle(self.raw, t.as_ptr()) })
+    }
+
+    /// Fullscreen resolutions of the window's display, largest first,
+    /// deduplicated by size (refresh rates collapsed).
+    pub fn display_modes(&self) -> Vec<(u32, u32)> {
+        let mut out = Vec::new();
+        // SAFETY: raw is live; the returned array is freed with SDL_free.
+        unsafe {
+            let id = sys::SDL_GetDisplayForWindow(self.raw);
+            let mut n: c_int = 0;
+            let modes = sys::SDL_GetFullscreenDisplayModes(id, &mut n);
+            if modes.is_null() {
+                return out;
+            }
+            for i in 0..n.max(0) as usize {
+                let m = *modes.add(i);
+                if !m.is_null() {
+                    let s = ((*m).w.max(0) as u32, (*m).h.max(0) as u32);
+                    if !out.contains(&s) {
+                        out.push(s);
+                    }
+                }
+            }
+            sys::SDL_free(modes as *mut std::ffi::c_void);
+        }
+        out
+    }
+
+    /// Desktop resolution of the window's display.
+    pub fn desktop_size(&self) -> Option<(u32, u32)> {
+        // SAFETY: raw is live; returned pointer owned by SDL.
+        unsafe {
+            let m = sys::SDL_GetDesktopDisplayMode(sys::SDL_GetDisplayForWindow(self.raw));
+            (!m.is_null()).then(|| ((*m).w.max(0) as u32, (*m).h.max(0) as u32))
+        }
+    }
+
+    /// Switches between windowed (`size` = window size in points),
+    /// exclusive fullscreen at the closest mode to `size`, and borderless
+    /// fullscreen at desktop resolution.
+    pub fn set_display(&self, mode: DisplayMode, size: (u32, u32)) -> Result<()> {
+        let (w, h) = (size.0.max(320) as c_int, size.1.max(200) as c_int);
+        // SAFETY: raw is live; mode struct is valid for the calls.
+        unsafe {
+            match mode {
+                DisplayMode::Windowed => {
+                    check(sys::SDL_SetWindowFullscreen(self.raw, false))?;
+                    // leaving fullscreen is asynchronous on some platforms
+                    let _ = sys::SDL_SyncWindow(self.raw);
+                    check(sys::SDL_SetWindowSize(self.raw, w, h))?;
+                    let c = sys::SDL_WINDOWPOS_CENTERED;
+                    let _ = sys::SDL_SetWindowPosition(self.raw, c, c);
+                }
+                DisplayMode::Fullscreen => {
+                    let id = sys::SDL_GetDisplayForWindow(self.raw);
+                    let mut m = std::mem::MaybeUninit::<sys::SDL_DisplayMode>::zeroed();
+                    check(sys::SDL_GetClosestFullscreenDisplayMode(id, w, h, 0.0, false, m.as_mut_ptr()))?;
+                    check(sys::SDL_SetWindowFullscreenMode(self.raw, m.as_ptr()))?;
+                    check(sys::SDL_SetWindowFullscreen(self.raw, true))?;
+                }
+                DisplayMode::Borderless => {
+                    check(sys::SDL_SetWindowFullscreenMode(self.raw, ptr::null()))?;
+                    check(sys::SDL_SetWindowFullscreen(self.raw, true))?;
+                }
+            }
+        }
+        // SAFETY: raw is live.
+        let _ = unsafe { sys::SDL_SyncWindow(self.raw) };
+        Ok(())
     }
 
     pub fn set_fullscreen(&self, on: bool) -> Result<()> {

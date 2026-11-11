@@ -53,6 +53,13 @@ const HOST_CVARS: &[(&str, &str, u32)] = &[
     ("r_skyfog", "0.5", 0),
     ("r_dynamic", "1", 0),
     ("vid_vsync", "0", CVAR_ARCHIVE),
+    ("vid_fullscreen", "0", CVAR_ARCHIVE),
+    ("vid_width", "1280", CVAR_ARCHIVE),
+    ("vid_height", "720", CVAR_ARCHIVE),
+    ("r_msaa", "4", CVAR_ARCHIVE),
+    ("r_renderscale", "1", CVAR_ARCHIVE),
+    ("r_texfilter", "0", CVAR_ARCHIVE),
+    ("r_anisotropy", "1", CVAR_ARCHIVE),
     ("cl_forwardspeed", "200", CVAR_ARCHIVE),
     ("cl_backspeed", "200", CVAR_ARCHIVE),
     ("cl_sidespeed", "350", 0),
@@ -158,6 +165,12 @@ impl Host {
             cvars.register(n, d, f);
         }
         let input = Input::new(&mut cvars);
+        // everything the options menu edits persists in config.cfg
+        for n in crate::menu::option_cvars() {
+            if let Some(d) = cvars.by_name(n).map(|c| c.default.clone()) {
+                cvars.register(n, &d, CVAR_ARCHIVE);
+            }
+        }
         let fs_snapshot = (fs.basedir().to_path_buf(), fs.game_dirs().to_vec());
         let pics = Pics::new(&fs, &mut r);
         let server = Server::new(fs, cvars, 1);
@@ -325,9 +338,16 @@ impl Host {
         match ev {
             HostEvent::Quit => self.quit = true,
             HostEvent::Resize => {
-                if let Some(w) = &self.window {
-                    let (w, h) = w.drawable_size();
+                if let Some(win) = &self.window {
+                    let (w, h) = win.drawable_size();
                     self.r.resize(w, h);
+                    // remember user-resized window size
+                    if self.cv("vid_fullscreen") == 0.0 {
+                        let (ww, wh) = win.window_size();
+                        let cv = &mut self.server.core.cvars;
+                        cv.set("vid_width", &ww.to_string());
+                        cv.set("vid_height", &wh.to_string());
+                    }
                 }
             }
             HostEvent::Focus => {}
@@ -566,6 +586,58 @@ impl Host {
         self.con.print(&format!("loaded {} in {:.2}s\n", self.level.mapname, t0.elapsed().as_secs_f32()));
     }
 
+    /// After config.cfg: command-line -width/-height/-fullscreen/-window
+    /// override the vid_* cvars, then the display is applied.
+    fn startup_video(&mut self) {
+        let arg = |n: &str| self.cmdline.iter().position(|a| a == n).and_then(|i| self.cmdline.get(i + 1)).cloned();
+        let has = |n: &str| self.cmdline.iter().any(|a| a == n);
+        let cv = &mut self.server.core.cvars;
+        if let Some(w) = arg("-width") {
+            cv.set("vid_width", &w);
+        }
+        if let Some(h) = arg("-height") {
+            cv.set("vid_height", &h);
+        }
+        if has("-window") {
+            cv.set("vid_fullscreen", "0");
+        } else if has("-fullscreen") {
+            cv.set("vid_fullscreen", "1");
+        }
+        self.vid_apply();
+    }
+
+    /// Applies vid_fullscreen / vid_width / vid_height to the window.
+    pub fn vid_apply(&mut self) {
+        let Some(win) = &self.window else { return };
+        let mode = match self.cv("vid_fullscreen") as i32 {
+            1 => qplatform::DisplayMode::Fullscreen,
+            2 => qplatform::DisplayMode::Borderless,
+            _ => qplatform::DisplayMode::Windowed,
+        };
+        let size = (self.cv("vid_width").max(320.0) as u32, self.cv("vid_height").max(200.0) as u32);
+        if let Err(e) = win.set_display(mode, size) {
+            self.con.print(&format!("vid_apply: {e:?}\n"));
+            return;
+        }
+        let (w, h) = win.drawable_size();
+        self.r.resize(w, h);
+    }
+
+    /// Fills the Graphics page's pending display state from the cvars.
+    fn vid_menu(&mut self) {
+        let mut res = self.window.as_ref().map(|w| w.display_modes()).unwrap_or_default();
+        let cur = (self.cv("vid_width") as u32, self.cv("vid_height") as u32);
+        if !res.contains(&cur) {
+            res.push(cur);
+            res.sort_by_key(|r| std::cmp::Reverse(r.0 * r.1));
+        }
+        let m = &mut self.menu;
+        m.resolutions = res;
+        m.pending_res = cur;
+        m.pending_mode = (self.server.core.cvars.value_of("vid_fullscreen") as usize).min(2);
+        m.max_msaa = self.r.max_msaa();
+    }
+
     /// scr_hudstyle 0: classic full-width status bar below the 3D view.
     fn classic_hud(&self) -> bool {
         self.cv("scr_hudstyle") == 0.0
@@ -659,6 +731,7 @@ impl Host {
         if self.startup < 2 {
             self.startup += 1;
             if self.startup == 1 {
+                self.startup_video();
                 self.stuff_cmds();
                 self.exec_cbuf();
             }
@@ -882,6 +955,10 @@ impl Host {
             skyfog: v("r_skyfog"),
             dynamic: v("r_dynamic") != 0.0,
             vsync: v("vid_vsync") != 0.0,
+            msaa: v("r_msaa").max(1.0) as u32,
+            render_scale: v("r_renderscale").clamp(0.25, 2.0),
+            texture_linear: v("r_texfilter") != 0.0,
+            anisotropy: v("r_anisotropy").clamp(1.0, 16.0),
             ..Settings::default()
         };
         let frame = qrender::RenderFrame {
@@ -1027,14 +1104,30 @@ fn register_commands(c: &mut Commands<Host>) {
     });
     c.add("menu_main", |h, _| h.menu.open(Screen::Main));
     c.add("menu_quit", |h, _| h.menu.open(Screen::Quit));
-    c.add("menu_options", |h, _| h.menu.open(Screen::Options));
+    c.add("menu_options", |h, a| {
+        use crate::menu::Page;
+        let page = match a.argv(1).to_ascii_lowercase().as_str() {
+            "gameplay" => Some(Page::Gameplay),
+            "input" => Some(Page::Input),
+            "graphics" => Some(Page::Graphics),
+            "audio" => Some(Page::Audio),
+            _ => None,
+        };
+        if page == Some(Page::Graphics) {
+            h.vid_menu();
+        }
+        h.menu.open(page.map_or(Screen::Options, Screen::OptionsPage));
+    });
     c.add("clear", |h, _| h.con.lines.clear());
     c.add("bf", |h, _| h.view.bonus_flash());
     c.add("+showscores", |h, _| h.show_scores = true);
     c.add("-showscores", |h, _| h.show_scores = false);
-    for n in ["startdemos", "demos", "stopdemo", "playdemo", "sizeup", "sizedown", "cd", "fog", "vid_restart", "help", "scr_autoscale", "togglezoom", "messagemode", "messagemode2", "menu_multiplayer"] {
+    for n in ["startdemos", "demos", "stopdemo", "playdemo", "sizeup", "sizedown", "cd", "fog", "help", "scr_autoscale", "togglezoom", "messagemode", "messagemode2", "menu_multiplayer"] {
         c.add(n, |_, _| {});
     }
+    c.add("vid_apply", |h, _| h.vid_apply());
+    c.add("vid_restart", |h, _| h.vid_apply());
+    c.add("_vid_menu", |h, _| h.vid_menu());
     c.add("force_centerview", |h, _| h.cl.viewangles[0] = 0.0);
     c.add("centerview", |h, _| h.cl.viewangles[0] = 0.0);
     c.add("menu_load", |h, _| {

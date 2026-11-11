@@ -94,9 +94,6 @@ fn main() {
             eprintln!("window creation failed: {e:?}");
             std::process::exit(1)
         });
-        if o.has("-fullscreen") && !o.has("-window") {
-            let _ = win.set_fullscreen(true);
-        }
         let r = qrender::Renderer::new(&platform::Surface(&win), &pal);
         platform = Some(p);
         window = Some(win);

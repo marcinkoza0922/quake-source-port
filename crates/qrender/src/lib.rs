@@ -67,8 +67,14 @@ struct Swapchain {
 }
 
 struct Targets {
+    /// Single-sampled scene colour (MSAA resolve target), sampled by post.
     color: Image,
+    /// Multisampled scene colour when MSAA is on.
+    color_ms: Option<Image>,
     depth: Image,
+    /// Scene size in pixels (output size × render scale).
+    scene_w: u32,
+    scene_h: u32,
     color_slot: u32,
     /// Headless output image + readback buffer.
     out: Option<(Image, Buffer)>,
@@ -78,6 +84,18 @@ struct Tex {
     /// None: slot reserved for a render target owned elsewhere.
     image: Option<Image>,
     level: bool,
+    sampling: Sampling,
+}
+
+/// How a texture is sampled.
+#[derive(Clone, Copy, PartialEq, Eq, Debug)]
+enum Sampling {
+    /// World/model surfaces: follows the texture filter + anisotropy setting.
+    World,
+    /// Always nearest, repeat (UI pictures, colormap index textures).
+    Nearest,
+    /// Nearest, clamp to edge (sprites, skybox faces).
+    Clamp,
 }
 
 struct WorldGpu {
@@ -147,6 +165,13 @@ pub struct Renderer {
     sampler_repeat: vk::Sampler,
     sampler_clamp: vk::Sampler,
     sampler_linear: vk::Sampler,
+    /// Sampler for [`Sampling::World`] textures, rebuilt when filtering changes.
+    sampler_world: vk::Sampler,
+    /// (linear, anisotropy) of `sampler_world`.
+    world_filter: (bool, f32),
+    /// Scene MSAA sample count and render scale in effect.
+    msaa: u32,
+    render_scale: f32,
     textures: Vec<Option<Tex>>,
     palette: Palette,
     palette_buf: Buffer,
@@ -204,7 +229,7 @@ impl Renderer {
     }
 
     fn init(mut gpu: Gpu, palette: &Palette, width: u32, height: u32) -> Result<Renderer> {
-        let pipes = Pipelines::new(&gpu, COLOR_FORMAT)?;
+        let pipes = Pipelines::new(&gpu, COLOR_FORMAT, 1)?;
         let dev = gpu.device.clone();
         let sizes = [
             vk::DescriptorPoolSize {
@@ -327,6 +352,10 @@ impl Renderer {
             sampler_repeat,
             sampler_clamp,
             sampler_linear,
+            sampler_world: sampler_repeat,
+            world_filter: (false, 1.0),
+            msaa: 1,
+            render_scale: 1.0,
             textures: Vec::new(),
             palette: *palette,
             palette_buf,
@@ -492,6 +521,76 @@ impl Renderer {
         }
     }
 
+    fn sampler_for(&self, s: Sampling) -> vk::Sampler {
+        match s {
+            Sampling::World => self.sampler_world,
+            Sampling::Nearest => self.sampler_repeat,
+            Sampling::Clamp => self.sampler_clamp,
+        }
+    }
+
+    /// Highest MSAA sample count the device supports for scene targets.
+    pub fn max_msaa(&self) -> u32 {
+        self.gpu.max_samples
+    }
+
+    /// Highest anisotropy the device supports (1 = none).
+    pub fn max_anisotropy(&self) -> f32 {
+        self.gpu.max_anisotropy
+    }
+
+    /// Applies MSAA / render scale / texture filtering from `st`, rebuilding
+    /// targets, pipelines or samplers when they changed.
+    fn apply_settings(&mut self, st: &Settings) -> Result<()> {
+        let msaa = match st.msaa {
+            0 | 1 => 1,
+            n => n.next_power_of_two().min(self.gpu.max_samples).max(1),
+        };
+        let scale = st.render_scale.clamp(0.25, 2.0);
+        if msaa != self.msaa {
+            self.idle();
+            self.msaa = msaa;
+            let fmt = self.pipes.post_format;
+            self.pipes.build(&self.gpu, fmt, msaa)?;
+            self.destroy_targets();
+        }
+        if scale != self.render_scale {
+            self.render_scale = scale;
+            self.idle();
+            self.destroy_targets();
+        }
+        let aniso = st.anisotropy.clamp(1.0, self.gpu.max_anisotropy);
+        let filter = (st.texture_linear, aniso);
+        if filter != self.world_filter {
+            self.idle();
+            let linear = if filter.0 { vk::Filter::LINEAR } else { vk::Filter::NEAREST };
+            let ci = vk::SamplerCreateInfo::default()
+                .mag_filter(linear)
+                .min_filter(linear)
+                .mipmap_mode(vk::SamplerMipmapMode::LINEAR)
+                .address_mode_u(vk::SamplerAddressMode::REPEAT)
+                .address_mode_v(vk::SamplerAddressMode::REPEAT)
+                .address_mode_w(vk::SamplerAddressMode::REPEAT)
+                .anisotropy_enable(aniso > 1.0)
+                .max_anisotropy(aniso)
+                .max_lod(vk::LOD_CLAMP_NONE);
+            // SAFETY: valid device.
+            let new = unsafe { self.gpu.device.create_sampler(&ci, None)? };
+            let old = std::mem::replace(&mut self.sampler_world, new);
+            if old != self.sampler_repeat {
+                // SAFETY: device idle; descriptors are rewritten below.
+                unsafe { self.gpu.device.destroy_sampler(old, None) };
+            }
+            self.world_filter = filter;
+            for i in 0..self.textures.len() {
+                if let Some(Tex { image: Some(img), sampling: Sampling::World, .. }) = &self.textures[i] {
+                    self.write_texture_descriptor(i as u32, img.view, new);
+                }
+            }
+        }
+        Ok(())
+    }
+
     fn alloc_slot(&mut self) -> Result<u32> {
         if let Some(i) = self.textures.iter().position(|t| t.is_none()) {
             return Ok(i as u32);
@@ -511,7 +610,7 @@ impl Renderer {
         h: u32,
         mips: &[&[u8]],
         level: bool,
-        clamp: bool,
+        sampling: Sampling,
     ) -> Result<u32> {
         let slot = self.alloc_slot()?;
         let img = self.gpu.image(
@@ -524,18 +623,11 @@ impl Renderer {
             vk::ImageAspectFlags::COLOR,
         )?;
         self.gpu.upload_image(up, &img, mips)?;
-        self.write_texture_descriptor(
-            slot,
-            img.view,
-            if clamp {
-                self.sampler_clamp
-            } else {
-                self.sampler_repeat
-            },
-        );
+        self.write_texture_descriptor(slot, img.view, self.sampler_for(sampling));
         self.textures[slot as usize] = Some(Tex {
             image: Some(img),
             level,
+            sampling,
         });
         Ok(slot)
     }
@@ -606,17 +698,17 @@ impl Renderer {
                 && self.sky_layers[0] == NO_TEX
                 && let Some((w, h, solid, alpha)) = convert::sky_layers(&pal, &t)
             {
-                let s = self.add_texture(up, w, h, &[&solid], true, false)?;
-                let a = self.add_texture(up, w, h, &[&alpha], true, false)?;
+                let s = self.add_texture(up, w, h, &[&solid], true, Sampling::World)?;
+                let a = self.add_texture(up, w, h, &[&alpha], true, Sampling::World)?;
                 self.sky_layers = [s, a];
             }
             let (base, fb) = convert::world_texture(&pal, &t);
             let bm: Vec<&[u8]> = base.iter().map(|m| m.as_slice()).collect();
-            let b = self.add_texture(up, t.width, t.height, &bm, true, false)?;
+            let b = self.add_texture(up, t.width, t.height, &bm, true, Sampling::World)?;
             let f = match &fb {
                 Some(fb) => {
                     let fm: Vec<&[u8]> = fb.iter().map(|m| m.as_slice()).collect();
-                    self.add_texture(up, t.width, t.height, &fm, true, false)?
+                    self.add_texture(up, t.width, t.height, &fm, true, Sampling::World)?
                 }
                 None => NO_TEX,
             };
@@ -736,7 +828,7 @@ impl Renderer {
         let mut up = self.gpu.begin_upload()?;
         let mut slots = [NO_TEX; 6];
         for (i, f) in faces.iter().enumerate() {
-            slots[i] = self.add_texture(&mut up, f.width, f.height, &[&f.pixels], true, true)?;
+            slots[i] = self.add_texture(&mut up, f.width, f.height, &[&f.pixels], true, Sampling::Clamp)?;
         }
         self.gpu.end_upload(up)?;
         self.skybox = Some(slots);
@@ -757,13 +849,13 @@ impl Renderer {
             for img in &s.images {
                 let (b, fb, cm) = convert::alias_skin(&pal, img, holey);
                 let (w, h) = (mdl.skin_width, mdl.skin_height);
-                let bs = self.add_texture(&mut up, w, h, &[&b], true, false)?;
+                let bs = self.add_texture(&mut up, w, h, &[&b], true, Sampling::World)?;
                 let fs = match fb {
-                    Some(fb) => self.add_texture(&mut up, w, h, &[&fb], true, false)?,
+                    Some(fb) => self.add_texture(&mut up, w, h, &[&fb], true, Sampling::World)?,
                     None => NO_TEX,
                 };
                 let cs = match cm {
-                    Some(cm) => self.add_texture(&mut up, w, h, &[&cm], true, false)?,
+                    Some(cm) => self.add_texture(&mut up, w, h, &[&cm], true, Sampling::Nearest)?,
                     None => NO_TEX,
                 };
                 imgs.push([bs, fs, cs]);
@@ -851,7 +943,7 @@ impl Renderer {
                 } else {
                     convert::to_rgba(&pal, &im.pixels, Some(255))
                 };
-                let slot = self.add_texture(&mut up, im.width, im.height, &[&rgba], true, true)?;
+                let slot = self.add_texture(&mut up, im.width, im.height, &[&rgba], true, Sampling::Clamp)?;
                 let left = im.origin[0] as f32;
                 let up_ = im.origin[1] as f32;
                 images.push((
@@ -882,7 +974,7 @@ impl Renderer {
     pub fn register_pic_rgba(&mut self, width: u32, height: u32, rgba: &[u8]) -> Result<PicId> {
         self.idle();
         let mut up = self.gpu.begin_upload()?;
-        let slot = self.add_texture(&mut up, width, height, &[rgba], false, false)?;
+        let slot = self.add_texture(&mut up, width, height, &[rgba], false, Sampling::Nearest)?;
         self.gpu.end_upload(up)?;
         self.pics.push(PicInfo {
             slot,
@@ -917,6 +1009,9 @@ impl Renderer {
             self.textures[t.color_slot as usize] = None;
             self.gpu.free_image(t.color);
             self.gpu.free_image(t.depth);
+            if let Some(m) = t.color_ms {
+                self.gpu.free_image(m);
+            }
             if let Some((i, b)) = t.out {
                 self.gpu.free_image(i);
                 self.gpu.free_buffer(b);
@@ -928,26 +1023,50 @@ impl Renderer {
         self.idle();
         self.destroy_targets();
         let (w, h) = (self.width.max(1), self.height.max(1));
+        let scale = self.render_scale;
+        let sw = ((w as f32 * scale).round() as u32).clamp(1, 16384);
+        let shh = ((h as f32 * scale).round() as u32).clamp(1, 16384);
         let color = self.gpu.image(
-            w,
-            h,
+            sw,
+            shh,
             1,
             1,
             COLOR_FORMAT,
             vk::ImageUsageFlags::COLOR_ATTACHMENT | vk::ImageUsageFlags::SAMPLED,
             vk::ImageAspectFlags::COLOR,
         )?;
-        let depth = self.gpu.image(
-            w,
-            h,
+        let color_ms = if self.msaa > 1 {
+            Some(self.gpu.image_ms(
+                sw,
+                shh,
+                1,
+                1,
+                COLOR_FORMAT,
+                vk::ImageUsageFlags::COLOR_ATTACHMENT
+                    | vk::ImageUsageFlags::TRANSIENT_ATTACHMENT,
+                vk::ImageAspectFlags::COLOR,
+                self.msaa,
+            )?)
+        } else {
+            None
+        };
+        let depth = self.gpu.image_ms(
+            sw,
+            shh,
             1,
             1,
             DEPTH_FORMAT,
             vk::ImageUsageFlags::DEPTH_STENCIL_ATTACHMENT,
             vk::ImageAspectFlags::DEPTH,
+            self.msaa,
         )?;
         let slot = self.alloc_slot()?;
-        self.write_texture_descriptor(slot, color.view, self.sampler_clamp);
+        let post_sampler = if (scale - 1.0).abs() < 1e-3 {
+            self.sampler_clamp
+        } else {
+            self.sampler_linear
+        };
+        self.write_texture_descriptor(slot, color.view, post_sampler);
         let out = if self.swap.is_none() {
             let img = self.gpu.image(
                 w,
@@ -968,10 +1087,14 @@ impl Renderer {
         self.textures[slot as usize] = Some(Tex {
             image: None,
             level: false,
+            sampling: Sampling::Clamp,
         });
         self.targets = Some(Targets {
             color,
+            color_ms,
             depth,
+            scene_w: sw,
+            scene_h: shh,
             color_slot: slot,
             out,
         });
@@ -1086,8 +1209,7 @@ impl Renderer {
                 .contains(vk::ImageUsageFlags::TRANSFER_SRC),
         });
         if self.pipes.post_format != fmt.format {
-            self.pipes.destroy(&self.gpu.device);
-            self.pipes = Pipelines::new(&self.gpu, fmt.format)?;
+            self.pipes.build(&self.gpu, fmt.format, self.msaa)?;
         }
         self.width = extent.width;
         self.height = extent.height;
@@ -1192,6 +1314,9 @@ impl Drop for Renderer {
             dev.destroy_sampler(self.sampler_repeat, None);
             dev.destroy_sampler(self.sampler_clamp, None);
             dev.destroy_sampler(self.sampler_linear, None);
+            if self.sampler_world != self.sampler_repeat {
+                dev.destroy_sampler(self.sampler_world, None);
+            }
             dev.destroy_descriptor_pool(self.desc_pool, None);
             dev.destroy_command_pool(self.cmd_pool, None);
         }

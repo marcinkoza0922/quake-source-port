@@ -359,7 +359,9 @@ impl Renderer {
             && (self.needs_resize || s.vsync != fr.settings.vsync)
         {
             self.create_swapchain(fr.settings.vsync)?;
-        } else if self.swap.is_none() && self.targets.is_none() {
+        }
+        self.apply_settings(&fr.settings)?;
+        if self.targets.is_none() && (self.swap.is_some() || self.width > 0) {
             self.create_targets()?;
         }
         if self.width == 0 || self.height == 0 {
@@ -416,8 +418,16 @@ impl Renderer {
         let mut trans: Vec<(f32, Trans)> = Vec::new();
         let mut lm_vis: Vec<u32> = Vec::new();
         let mut particles = Range::default();
-        let scene_h = fr.view.map_or(h, |v| h.saturating_sub(v.reserve_bottom).max(1));
-        let view = fr.view.map(|v| setup_view(&v, w, scene_h));
+        // scene target size (render scale) and the 3D view height in it
+        let (sw, sh) = self
+            .targets
+            .as_ref()
+            .map_or((w, h), |t| (t.scene_w, t.scene_h));
+        let scene_h = fr.view.map_or(sh, |v| {
+            let px = h.saturating_sub(v.reserve_bottom) as f32 * sh as f32 / h.max(1) as f32;
+            (px.round() as u32).clamp(1, sh)
+        });
+        let view = fr.view.map(|v| setup_view(&v, sw, scene_h));
         let fog = fr.fog;
 
         if let Some(vs) = &view {
@@ -899,24 +909,52 @@ impl Renderer {
                 vk::ImageLayout::UNDEFINED,
                 vk::ImageLayout::DEPTH_ATTACHMENT_OPTIMAL,
             );
-            let extent = vk::Extent2D {
-                width: w,
-                height: h,
-            };
+            if let Some(ms) = &t.color_ms {
+                gpu::barrier(
+                    &dev,
+                    cmd,
+                    ms.image,
+                    crng,
+                    vk::ImageLayout::UNDEFINED,
+                    vk::ImageLayout::COLOR_ATTACHMENT_OPTIMAL,
+                );
+            }
             let area = vk::Rect2D {
                 offset: vk::Offset2D::default(),
-                extent,
+                extent: vk::Extent2D {
+                    width: w,
+                    height: h,
+                },
             };
-            let catt = [vk::RenderingAttachmentInfo::default()
-                .image_view(t.color.view)
-                .image_layout(vk::ImageLayout::COLOR_ATTACHMENT_OPTIMAL)
-                .load_op(vk::AttachmentLoadOp::CLEAR)
-                .store_op(vk::AttachmentStoreOp::STORE)
-                .clear_value(vk::ClearValue {
-                    color: vk::ClearColorValue {
-                        float32: [0.0, 0.0, 0.0, 1.0],
-                    },
-                })];
+            let area_target = vk::Rect2D {
+                offset: vk::Offset2D::default(),
+                extent: vk::Extent2D {
+                    width: sw,
+                    height: sh,
+                },
+            };
+            let clear = vk::ClearValue {
+                color: vk::ClearColorValue {
+                    float32: [0.0, 0.0, 0.0, 1.0],
+                },
+            };
+            let catt = [match &t.color_ms {
+                Some(ms) => vk::RenderingAttachmentInfo::default()
+                    .image_view(ms.view)
+                    .image_layout(vk::ImageLayout::COLOR_ATTACHMENT_OPTIMAL)
+                    .resolve_mode(vk::ResolveModeFlags::AVERAGE)
+                    .resolve_image_view(t.color.view)
+                    .resolve_image_layout(vk::ImageLayout::COLOR_ATTACHMENT_OPTIMAL)
+                    .load_op(vk::AttachmentLoadOp::CLEAR)
+                    .store_op(vk::AttachmentStoreOp::DONT_CARE)
+                    .clear_value(clear),
+                None => vk::RenderingAttachmentInfo::default()
+                    .image_view(t.color.view)
+                    .image_layout(vk::ImageLayout::COLOR_ATTACHMENT_OPTIMAL)
+                    .load_op(vk::AttachmentLoadOp::CLEAR)
+                    .store_op(vk::AttachmentStoreOp::STORE)
+                    .clear_value(clear),
+            }];
             let datt = vk::RenderingAttachmentInfo::default()
                 .image_view(t.depth.view)
                 .image_layout(vk::ImageLayout::DEPTH_ATTACHMENT_OPTIMAL)
@@ -929,7 +967,7 @@ impl Renderer {
                     },
                 });
             let ri = vk::RenderingInfo::default()
-                .render_area(area)
+                .render_area(area_target)
                 .layer_count(1)
                 .color_attachments(&catt)
                 .depth_attachment(&datt);
@@ -943,12 +981,13 @@ impl Renderer {
                 max_depth: 1.0,
             };
             let vp_scene = vk::Viewport {
+                width: sw as f32,
                 height: scene_h as f32,
                 ..vp_full
             };
             let area_scene = vk::Rect2D {
                 extent: vk::Extent2D {
-                    width: w,
+                    width: sw,
                     height: scene_h,
                 },
                 ..area
@@ -1064,15 +1103,6 @@ impl Renderer {
                     }
                 }
             }
-            dev.cmd_set_viewport(cmd, 0, &[vp_full]);
-            dev.cmd_set_scissor(cmd, 0, &[area]);
-            if let Some(ofs) = ui_ofs {
-                dev.cmd_bind_descriptor_sets(cmd, gfx, p.layout, 0, &set, &[]);
-                dev.cmd_bind_pipeline(cmd, gfx, p.ui);
-                dev.cmd_bind_vertex_buffers(cmd, 0, &[dynbuf], &[ofs]);
-                push(bytes_of(&[[1.0 / w as f32, 1.0 / h as f32]]));
-                dev.cmd_draw(cmd, ui.len() as u32, 1, 0, 0);
-            }
             dev.cmd_end_rendering(cmd);
             gpu::barrier(
                 &dev,
@@ -1118,6 +1148,13 @@ impl Renderer {
                 scene: t.color_slot,
             }]));
             dev.cmd_draw(cmd, 3, 1, 0, 0);
+            // 2D on top at output resolution, unaffected by render scale
+            if let Some(ofs) = ui_ofs {
+                dev.cmd_bind_pipeline(cmd, gfx, p.ui);
+                dev.cmd_bind_vertex_buffers(cmd, 0, &[dynbuf], &[ofs]);
+                push(bytes_of(&[[1.0 / w as f32, 1.0 / h as f32]]));
+                dev.cmd_draw(cmd, ui.len() as u32, 1, 0, 0);
+            }
             dev.cmd_end_rendering(cmd);
             if let Some(sw) = &self.swap {
                 let mut last = vk::ImageLayout::COLOR_ATTACHMENT_OPTIMAL;

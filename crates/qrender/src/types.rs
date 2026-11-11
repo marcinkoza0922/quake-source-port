@@ -163,6 +163,14 @@ pub struct Settings {
     pub skyalpha: f32,
     pub dynamic: bool,
     pub vsync: bool,
+    /// Scene MSAA samples (1 = off); clamped to the device maximum.
+    pub msaa: u32,
+    /// Scene resolution relative to the output (0.25..=2).
+    pub render_scale: f32,
+    /// Bilinear/trilinear world and model textures (false = nearest).
+    pub texture_linear: bool,
+    /// Max anisotropy for world/model textures (1 = off).
+    pub anisotropy: f32,
 }
 
 impl Default for Settings {
@@ -178,6 +186,10 @@ impl Default for Settings {
             skyalpha: 1.0,
             dynamic: true,
             vsync: true,
+            msaa: 1,
+            render_scale: 1.0,
+            texture_linear: false,
+            anisotropy: 1.0,
         }
     }
 }

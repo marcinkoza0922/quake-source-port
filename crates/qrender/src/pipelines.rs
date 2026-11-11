@@ -33,7 +33,28 @@ pub struct Pipelines {
     pub ui: vk::Pipeline,
     pub post: vk::Pipeline,
     pub post_format: vk::Format,
+    /// MSAA sample count of the scene pipelines.
+    pub samples: u32,
+    sh: Shaders,
     modules: Vec<vk::ShaderModule>,
+}
+
+#[derive(Clone, Copy)]
+struct Shaders {
+    world_vs: vk::ShaderModule,
+    world_fs: vk::ShaderModule,
+    water_fs: vk::ShaderModule,
+    sky_fs: vk::ShaderModule,
+    alias_vs: vk::ShaderModule,
+    alias_fs: vk::ShaderModule,
+    poly_vs: vk::ShaderModule,
+    poly_fs: vk::ShaderModule,
+    part_vs: vk::ShaderModule,
+    part_fs: vk::ShaderModule,
+    ui_vs: vk::ShaderModule,
+    ui_fs: vk::ShaderModule,
+    post_vs: vk::ShaderModule,
+    post_fs: vk::ShaderModule,
 }
 
 #[derive(Clone, Copy, PartialEq)]
@@ -52,6 +73,7 @@ struct Desc<'a> {
     depth_write: bool,
     color: vk::Format,
     depth: bool,
+    samples: u32,
 }
 
 fn attr(
@@ -104,7 +126,7 @@ fn graphics(gpu: &Gpu, layout: vk::PipelineLayout, d: &Desc) -> Result<vk::Pipel
         .cull_mode(vk::CullModeFlags::NONE)
         .line_width(1.0);
     let ms = vk::PipelineMultisampleStateCreateInfo::default()
-        .rasterization_samples(vk::SampleCountFlags::TYPE_1);
+        .rasterization_samples(vk::SampleCountFlags::from_raw(d.samples.max(1)));
     let ds = vk::PipelineDepthStencilStateCreateInfo::default()
         .depth_test_enable(d.depth_test)
         .depth_write_enable(d.depth_write)
@@ -149,7 +171,7 @@ fn graphics(gpu: &Gpu, layout: vk::PipelineLayout, d: &Desc) -> Result<vk::Pipel
 }
 
 impl Pipelines {
-    pub fn new(gpu: &Gpu, post_format: vk::Format) -> Result<Pipelines> {
+    pub fn new(gpu: &Gpu, post_format: vk::Format, samples: u32) -> Result<Pipelines> {
         let dev = &gpu.device;
         let all = vk::ShaderStageFlags::VERTEX | vk::ShaderStageFlags::FRAGMENT;
         let b = |i: u32, ty: vk::DescriptorType, n: u32| {
@@ -249,6 +271,91 @@ impl Pipelines {
             unsafe { dev.create_compute_pipelines(vk::PipelineCache::null(), &cpci, None) }
                 .map_err(|(_, e)| e)?[0];
 
+        let sh = Shaders {
+            world_vs,
+            world_fs,
+            water_fs,
+            sky_fs,
+            alias_vs,
+            alias_fs,
+            poly_vs,
+            poly_fs,
+            part_vs,
+            part_fs,
+            ui_vs,
+            ui_fs,
+            post_vs,
+            post_fs,
+        };
+        let null = vk::Pipeline::null();
+        let mut p = Pipelines {
+            set_layout,
+            layout,
+            comp_set_layout,
+            comp_layout,
+            lightmap,
+            world: null,
+            world_alpha: null,
+            water: null,
+            water_alpha: null,
+            sky: null,
+            alias: null,
+            alias_alpha: null,
+            poly: null,
+            particle: null,
+            ui: null,
+            post: null,
+            post_format,
+            samples,
+            sh,
+            modules,
+        };
+        p.build(gpu, post_format, samples)?;
+        Ok(p)
+    }
+
+    fn graphics_pipes(&self) -> [vk::Pipeline; 11] {
+        [
+            self.world,
+            self.world_alpha,
+            self.water,
+            self.water_alpha,
+            self.sky,
+            self.alias,
+            self.alias_alpha,
+            self.poly,
+            self.particle,
+            self.ui,
+            self.post,
+        ]
+    }
+
+    /// (Re)creates the graphics pipelines for an output format and scene
+    /// sample count. The device must be idle.
+    pub fn build(&mut self, gpu: &Gpu, post_format: vk::Format, samples: u32) -> Result<()> {
+        for p in self.graphics_pipes() {
+            if p != vk::Pipeline::null() {
+                // SAFETY: device idle (caller contract).
+                unsafe { gpu.device.destroy_pipeline(p, None) };
+            }
+        }
+        let Shaders {
+            world_vs,
+            world_fs,
+            water_fs,
+            sky_fs,
+            alias_vs,
+            alias_fs,
+            poly_vs,
+            poly_fs,
+            part_vs,
+            part_fs,
+            ui_vs,
+            ui_fs,
+            post_vs,
+            post_fs,
+        } = self.sh;
+        let layout = self.layout;
         let f32x3 = vk::Format::R32G32B32_SFLOAT;
         let f32x2 = vk::Format::R32G32_SFLOAT;
         let wb = [bind(0, 32, false)];
@@ -283,6 +390,7 @@ impl Pipelines {
             depth_write: dw,
             color: COLOR_FORMAT,
             depth: true,
+            samples,
         };
         let g = |d: Desc| graphics(gpu, layout, &d);
         let world = g(d(world_vs, world_fs, &wb, &wa, Blend::None, true, true))?;
@@ -294,7 +402,17 @@ impl Pipelines {
         let alias_alpha = g(d(alias_vs, alias_fs, &ab, &aa, Blend::Alpha, true, false))?;
         let poly = g(d(poly_vs, poly_fs, &pb, &pa, Blend::Alpha, true, true))?;
         let particle = g(d(part_vs, part_fs, &qb, &qa, Blend::Alpha, true, false))?;
-        let ui = g(d(ui_vs, ui_fs, &ub, &ua, Blend::Alpha, false, false))?;
+        // UI is drawn in the output pass, after post-processing
+        let ui = graphics(
+            gpu,
+            layout,
+            &Desc {
+                color: post_format,
+                depth: false,
+                samples: 1,
+                ..d(ui_vs, ui_fs, &ub, &ua, Blend::Alpha, false, false)
+            },
+        )?;
         let post = graphics(
             gpu,
             layout,
@@ -308,47 +426,31 @@ impl Pipelines {
                 depth_write: false,
                 color: post_format,
                 depth: false,
+                samples: 1,
             },
         )?;
-        Ok(Pipelines {
-            set_layout,
-            layout,
-            comp_set_layout,
-            comp_layout,
-            lightmap,
-            world,
-            world_alpha,
-            water,
-            water_alpha,
-            sky,
-            alias,
-            alias_alpha,
-            poly,
-            particle,
-            ui,
-            post,
-            post_format,
-            modules,
-        })
+        (
+            self.world,
+            self.world_alpha,
+            self.water,
+            self.water_alpha,
+            self.sky,
+            self.alias,
+            self.alias_alpha,
+            self.poly,
+            self.particle,
+            self.ui,
+            self.post,
+        ) = (world, world_alpha, water, water_alpha, sky, alias, alias_alpha, poly, particle, ui, post);
+        self.post_format = post_format;
+        self.samples = samples;
+        Ok(())
     }
 
     pub fn destroy(&mut self, dev: &ash::Device) {
         // SAFETY: device idle at teardown.
         unsafe {
-            for p in [
-                self.lightmap,
-                self.world,
-                self.world_alpha,
-                self.water,
-                self.water_alpha,
-                self.sky,
-                self.alias,
-                self.alias_alpha,
-                self.poly,
-                self.particle,
-                self.ui,
-                self.post,
-            ] {
+            for p in self.graphics_pipes().into_iter().chain([self.lightmap]) {
                 dev.destroy_pipeline(p, None);
             }
             for m in self.modules.drain(..) {
