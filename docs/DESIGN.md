@@ -107,7 +107,7 @@ Headless server, `skill 3`, `god` on. For each map:
 2. qvm + qworld + qserver headless: load start.bsp, run frames, no errors on all installed maps (smoke test across every mod).
 3. qnet loopback + qclient.
 4. qplatform + qrender (world, models, 2D) + qsound + qinput → playable id1.
-5. AD / MG1 / MG3 / hipnotic / rogue compat pass. Status (2026-11-11): `qsmoke` loads all 611 playable maps across 32 installed gamedirs with no errors (Quake64 BSP support and the miptex tolerance fix were needed). Hipnotic/rogue status bars are done. Remaining: visual spot checks against vkQuake, and KEX font/localization (`scr_usekfont`).
+5. AD / MG1 / MG3 / hipnotic / rogue compat pass. Status (2026-11-11): `qsmoke` loads all 611 playable maps across 32 installed gamedirs with no errors (Quake64 BSP support and the miptex tolerance fix were needed). Hipnotic/rogue status bars are done. `scr_usekfont` works as in ironwail: it only word-wraps centerprints (`console::word_wrap`, a port of COM_WordWrap, wrapping to `center_wrap_cols`), and it is set to 1 at startup when mg3 is mounted. ironwail doesn't draw the KEX font either, and localization (`qserver::loc`) was already in place. Remaining: visual spot checks against vkQuake.
 6. qui console/menus/mod menu; aim assist.
 7. qbot; qbench perf parity.
 8. Network play protocols 15/666/999.

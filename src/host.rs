@@ -253,6 +253,9 @@ impl Host {
         register_commands(&mut h.cmds);
         h.con.forced = true;
         h.con.frac = 1.0;
+        // 2026 update compat (ironwail host.c): word-wrap centerprints for mg3.
+        let mg3 = h.server.core.fs.game_dirs().iter().any(|d| d.eq_ignore_ascii_case("mg3"));
+        h.server.core.cvars.set("scr_usekfont", if mg3 { "1" } else { "0" });
         h.cbuf.add_text("exec quake.rc\n");
         h
     }
@@ -561,7 +564,13 @@ impl Host {
                 ClientEvent::CenterPrint(s) => {
                     let t = self.cv("scr_centertime") as f64;
                     let s = self.server.core.loc.translate(&s);
-                    self.con.center_print(&s, t);
+                    let cols = if self.cv("scr_usekfont") != 0.0 {
+                        let (w, h) = self.r.size();
+                        crate::console::center_wrap_cols(Canvas::new(w, h).vw())
+                    } else {
+                        0
+                    };
+                    self.con.center_print(&s, t, cols);
                 }
                 ClientEvent::StuffText(s) => self.cbuf.add_text(&s),
                 ClientEvent::Sound { ent, channel, sound, origin, volume, attenuation } => {

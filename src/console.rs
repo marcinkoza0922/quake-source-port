@@ -83,7 +83,9 @@ impl Console {
         self.notify.clear();
     }
 
-    pub fn center_print(&mut self, s: &str, centertime: f64) {
+    /// SCR_CenterPrint. `wrap_cols` > 0 word-wraps (scr_usekfont).
+    pub fn center_print(&mut self, s: &str, centertime: f64, wrap_cols: usize) {
+        let s = word_wrap(s, wrap_cols);
         self.centerprint = s.split('\n').map(str::to_string).collect();
         while self.centerprint.last().is_some_and(String::is_empty) {
             self.centerprint.pop();
@@ -271,5 +273,68 @@ impl Console {
             }
             y += 8.0;
         }
+    }
+}
+
+/// SCR_GetCenterPrintWrapLimit: columns for a menu canvas `vw` units wide.
+pub fn center_wrap_cols(vw: f32) -> usize {
+    let w = 320.0 + (vw - 320.0) * 0.25;
+    (w.clamp(320.0, 400.0) as usize) >> 3
+}
+
+/// COM_WordWrap: break `src` into lines of at most `maxcols` chars, moving
+/// words that don't fit to the next line and splitting longer ones.
+pub fn word_wrap(src: &str, maxcols: usize) -> String {
+    if maxcols == 0 {
+        return src.to_string();
+    }
+    let b = src.as_bytes();
+    let sp = |c: u8| c.is_ascii_whitespace();
+    let mut out = Vec::with_capacity(b.len() + 8);
+    let mut p = 0;
+    while p < b.len() {
+        let s = &b[p..];
+        // COM_AdvanceLineWrapped
+        let mut i = 0;
+        let (len, adv) = 'line: {
+            while i < maxcols && i < s.len() {
+                if s[i] == b'\n' {
+                    break 'line (i, i + 1);
+                }
+                if !sp(s[i]) && (i == 0 || sp(s[i - 1])) {
+                    let wl = s[i..].iter().take_while(|&&c| !sp(c)).count();
+                    if wl > maxcols {
+                        break 'line (maxcols, maxcols);
+                    }
+                    if i + wl > maxcols {
+                        break 'line (i, i);
+                    }
+                    i += wl;
+                } else {
+                    i += 1;
+                }
+            }
+            (i, i + usize::from(s.get(i).is_some_and(|&c| sp(c))))
+        };
+        out.extend_from_slice(&s[..len]);
+        p += adv.max(1).min(s.len());
+        if p < b.len() {
+            out.push(b'\n');
+        }
+    }
+    String::from_utf8_lossy(&out).into_owned()
+}
+
+#[cfg(test)]
+mod wrap_tests {
+    use super::word_wrap;
+
+    #[test]
+    fn wraps_words() {
+        // as COM_AdvanceLineWrapped, the space before a pushed word stays
+        assert_eq!(word_wrap("the quick brown fox", 10), "the quick \nbrown fox");
+        assert_eq!(word_wrap("abcdefghijkl xy", 5), "abcde\nfghij\nkl xy");
+        assert_eq!(word_wrap("one\ntwo", 40), "one\ntwo");
+        assert_eq!(word_wrap("no wrap", 0), "no wrap");
     }
 }
