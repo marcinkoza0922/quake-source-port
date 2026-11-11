@@ -323,6 +323,12 @@ impl Server {
         }
     }
 
+    /// Take queued console text (QC `localcmd`, changelevel) so a host with
+    /// a single shared command buffer can run it.
+    pub fn take_text(&mut self) -> String {
+        self.core.cbuf.take_text()
+    }
+
     /// Queue console text (Cbuf_AddText).
     pub fn add_text(&mut self, text: &str) {
         self.core.cbuf.add_text(text);

@@ -11,7 +11,13 @@ pub enum BspVersion {
     Bsp2Rmq,
     /// "BSP2": 32-bit indices, float bounds.
     Bsp2,
+    /// Quake64 re-release: BSP29 layout, `miptex64_t` texture headers (extra
+    /// `shift`), 16-bit RGB lightmap samples.
+    Quake64,
 }
+
+/// `('Q' << 24) | ('6' << 16) | ('4' << 8) | ' '`
+pub const BSPVERSION_QUAKE64: i32 = 0x5136_3420;
 
 pub const LUMP_ENTITIES: usize = 0;
 pub const LUMP_PLANES: usize = 1;
@@ -142,6 +148,9 @@ pub struct MipTex {
     pub kind: TextureKind,
     /// Up to 4 mip levels of 8-bit palette indices (level i is (w>>i)*(h>>i)).
     pub mips: Vec<Vec<u8>>,
+    /// Quake64 texture shift: texture coordinates are divided by `2 * shift`
+    /// when > 0. Always 0 elsewhere.
+    pub shift: u32,
 }
 
 #[derive(Debug, Clone, Default)]
@@ -156,7 +165,11 @@ pub struct Bsp {
     pub nodes: Vec<Node>,
     pub texinfo: Vec<TexInfo>,
     pub faces: Vec<Face>,
+    /// Mono samples, one byte each; `Face::lightofs` indexes this.
     pub lighting: Vec<u8>,
+    /// Embedded RGB samples (3 bytes per mono sample), like a `.lit` file.
+    /// Only Quake64 maps carry these.
+    pub rgb_lighting: Option<Vec<u8>>,
     pub clipnodes: Vec<ClipNode>,
     pub leafs: Vec<Leaf>,
     pub marksurfaces: Vec<u32>,
@@ -195,6 +208,7 @@ impl Bsp {
             b"2PSB" => BspVersion::Bsp2Rmq,
             _ => match i32::from_le_bytes(ident) {
                 29 => BspVersion::Bsp29,
+                BSPVERSION_QUAKE64 => BspVersion::Quake64,
                 v => return Err(r.err(format!("unsupported version {v}"))),
             },
         };
@@ -210,7 +224,8 @@ impl Bsp {
                 .get(ofs..ofs.saturating_add(len))
                 .ok_or_else(|| r.err(format!("lump {i} ({ofs}+{len}) out of bounds")))?;
         }
-        let wide = version != BspVersion::Bsp29;
+        let q64 = version == BspVersion::Quake64;
+        let wide = !matches!(version, BspVersion::Bsp29 | BspVersion::Quake64);
         let fbounds = version == BspVersion::Bsp2;
 
         let planes = lump_records(lumps[LUMP_PLANES], "planes", 20, |r| {
@@ -253,7 +268,7 @@ impl Bsp {
         })?;
 
         let (node_size, leaf_size, face_size, clip_size, mark_size, edge_size) = match version {
-            BspVersion::Bsp29 => (24, 28, 20, 8, 2, 4),
+            BspVersion::Bsp29 | BspVersion::Quake64 => (24, 28, 20, 8, 2, 4),
             BspVersion::Bsp2Rmq => (32, 32, 28, 12, 4, 8),
             BspVersion::Bsp2 => (44, 44, 28, 12, 4, 8),
         };
@@ -333,7 +348,11 @@ impl Bsp {
                 num_edges,
                 texinfo,
                 styles: r.arr()?,
-                lightofs: r.i32()?,
+                // Q64 samples are 16 bits; offsets index the converted data.
+                lightofs: match r.i32()? {
+                    o if q64 && o > 0 => o / 2,
+                    o => o,
+                },
             })
         })?;
         let clipnodes = lump_records(lumps[LUMP_CLIPNODES], "clipnodes", clip_size, |r| {
@@ -364,17 +383,24 @@ impl Bsp {
             }
         })?;
 
+        let (lighting, rgb_lighting) = if q64 {
+            let (mono, rgb) = q64_lighting(lumps[LUMP_LIGHTING]);
+            (mono, Some(rgb))
+        } else {
+            (lumps[LUMP_LIGHTING].to_vec(), None)
+        };
         Ok(Bsp {
             version: Some(version),
             entities: cstr(lumps[LUMP_ENTITIES]),
             planes,
-            textures: parse_textures(lumps[LUMP_TEXTURES])?,
+            textures: parse_textures(lumps[LUMP_TEXTURES], q64)?,
             vertexes,
             visdata: lumps[LUMP_VISIBILITY].to_vec(),
             nodes,
             texinfo,
             faces,
-            lighting: lumps[LUMP_LIGHTING].to_vec(),
+            lighting,
+            rgb_lighting,
             clipnodes,
             leafs,
             marksurfaces,
@@ -395,7 +421,21 @@ impl Bsp {
     }
 }
 
-fn parse_textures(lump: &[u8]) -> Result<Vec<Option<MipTex>>> {
+/// Quake64 lightmaps: 16-bit samples packed RRRRRGGG GGBBBBBB (first byte
+/// high bits), expanded like ironwail. Returns (mono, rgb).
+fn q64_lighting(lump: &[u8]) -> (Vec<u8>, Vec<u8>) {
+    let n = lump.len() / 2;
+    let mut mono = Vec::with_capacity(n);
+    let mut rgb = Vec::with_capacity(n * 3);
+    for &[b0, b1] in lump.as_chunks::<2>().0 {
+        let c = [b0 & 0xf8, ((b0 & 0x07) << 5) + ((b1 & 0xc0) >> 5), (b1 & 0x3f) << 2];
+        rgb.extend_from_slice(&c);
+        mono.push(((c[0] as u32 + c[1] as u32 + c[2] as u32) / 3) as u8);
+    }
+    (mono, rgb)
+}
+
+fn parse_textures(lump: &[u8], q64: bool) -> Result<Vec<Option<MipTex>>> {
     if lump.is_empty() {
         return Ok(Vec::new());
     }
@@ -414,6 +454,7 @@ fn parse_textures(lump: &[u8]) -> Result<Vec<Option<MipTex>>> {
         let name = t.name::<16>()?;
         let width = t.u32()?;
         let height = t.u32()?;
+        let shift = if q64 { t.u32()? } else { 0 };
         let offsets = [t.u32()?, t.u32()?, t.u32()?, t.u32()?];
         if width > 16384 || height > 16384 {
             return Err(Error::new(
@@ -423,13 +464,26 @@ fn parse_textures(lump: &[u8]) -> Result<Vec<Option<MipTex>>> {
         }
         let mut mips = Vec::new();
         if offsets[0] != 0 {
+            // Texel data past the end of the lump appears in the wild
+            // (e.g. jam2_tronyn, qbj_grue). Like ironwail, clamp mip 0 to the
+            // lump (zero-filling the rest) and derive broken smaller mips by
+            // point sampling the previous level.
             for (lvl, &o) in offsets.iter().enumerate() {
-                let sz = ((width >> lvl) as usize) * ((height >> lvl) as usize);
+                let (w, h) = ((width >> lvl) as usize, (height >> lvl) as usize);
+                let sz = w * h;
                 let start = ofs as usize + o as usize;
-                let px = lump.get(start..start + sz).ok_or_else(|| {
-                    Error::new(FMT, format!("miptex {name} mip {lvl} out of bounds"))
-                })?;
-                mips.push(px.to_vec());
+                // Quake64 stores only mip 0 (every offset points at it).
+                let own = lvl == 0 || !q64;
+                if let Some(px) = lump.get(start..start + sz).filter(|_| own) {
+                    mips.push(px.to_vec());
+                } else if let Some(prev) = mips.last() {
+                    let pw = (width >> (lvl - 1)) as usize;
+                    mips.push((0..sz).map(|i| prev[(i / w) * 2 * pw + (i % w) * 2]).collect());
+                } else {
+                    let mut px = lump.get(start.min(lump.len())..).unwrap_or(&[]).to_vec();
+                    px.resize(sz, 0);
+                    mips.push(px);
+                }
             }
         }
         let kind = TextureKind::from_name(&name);
@@ -439,6 +493,7 @@ fn parse_textures(lump: &[u8]) -> Result<Vec<Option<MipTex>>> {
             height,
             kind,
             mips,
+            shift,
         }));
     }
     Ok(out)

@@ -684,6 +684,7 @@ impl Renderer {
                 height: 16,
                 kind: TextureKind::Normal,
                 mips: vec![checker],
+                shift: 0,
             };
             let mut t = t.clone().unwrap_or_else(|| fallback.clone());
             if t.mips.is_empty() {
@@ -696,7 +697,7 @@ impl Renderer {
             let flags = world::material_flags(&t.name, t.kind);
             if t.kind == TextureKind::Sky
                 && self.sky_layers[0] == NO_TEX
-                && let Some((w, h, solid, alpha)) = convert::sky_layers(&pal, &t)
+                && let Some((w, h, solid, alpha)) = convert::sky_layers(&pal, &t, bsp.version == Some(qformats::bsp::BspVersion::Quake64))
             {
                 let s = self.add_texture(up, w, h, &[&solid], true, Sampling::World)?;
                 let a = self.add_texture(up, w, h, &[&alpha], true, Sampling::World)?;

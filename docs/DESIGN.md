@@ -99,6 +99,7 @@ Headless server, `skill 3`, `god` on. For each map:
 - `cargo nextest run` — quiet default profile; `--profile verbose` for debugging.
 - `cargo clippy --message-format=short`.
 - `tools/qinspect`, `tools/qbot`, `tools/qbench` as above.
+- `tools/qsmoke`: the every-map smoke sweep (M5). Build with `cargo build --release`, then `target/release/qsmoke [-j N] [-time S] [mod[:map] ...]`. It runs each playable map (one with an `info_player_*` entity) of each gamedir in its own headless engine process at skill 3 and classifies console output: Host_Error, QC errors, panic/crash, timeout, unknown commands, missing assets. Output goes to `target/qsmoke/report.json` (per map) and `summary.txt` (issues grouped by message). Exit code 1 if any map has an error. A full run over the local data takes about 4 minutes.
 
 ## Work plan (milestones)
 
@@ -106,7 +107,7 @@ Headless server, `skill 3`, `god` on. For each map:
 2. qvm + qworld + qserver headless: load start.bsp, run frames, no errors on all installed maps (smoke test across every mod).
 3. qnet loopback + qclient.
 4. qplatform + qrender (world, models, 2D) + qsound + qinput → playable id1.
-5. AD / MG1 / MG3 / hipnotic / rogue compat pass.
+5. AD / MG1 / MG3 / hipnotic / rogue compat pass. Status (2026-11-11): `qsmoke` loads all 611 playable maps across 32 installed gamedirs with no errors (Quake64 BSP support and the miptex tolerance fix were needed). Remaining: visual spot checks against vkQuake, hipnotic/rogue status bars, and KEX font/localization (`scr_usekfont`).
 6. qui console/menus/mod menu; aim assist.
 7. qbot; qbench perf parity.
 8. Network play protocols 15/666/999.
@@ -123,7 +124,9 @@ Subagent split: crates with frozen interfaces (qformats, qvm interpreter, qsound
 
 ### qformats
 All parsers take `&[u8]` and return `qformats::Result<T>`; bad input gives an `Error { format, msg }` with the byte offset, never a panic. Vectors are `[f32;3]`.
-- `Bsp::parse`: BSP29/BSP2/2PSB normalised into one set of structs (i32 children: a node child < 0 is leaf `-(i+1)`, a clipnode child < 0 is a contents value). Also `decompress_vis`, `leaf_pvs`, `parse_lit`.
+- `Bsp::parse`: BSP29/BSP2/2PSB/Quake64 normalised into one set of structs (i32 children: a node child < 0 is leaf `-(i+1)`, a clipnode child < 0 is a contents value). Also `decompress_vis`, `leaf_pvs`, `parse_lit`.
+- Miptex texel data that runs past the end of the lump (seen in qbj, retrojam2) is tolerated: mip 0 is clamped and zero-filled, as in ironwail, and smaller mips that are out of bounds are point-sampled from the previous level.
+- Quake64 (`q64`): `miptex64_t` adds `MipTex::shift` (the renderer divides st by `2*shift`), only mip 0 is stored, and the 16-bit RGB lightmap is expanded into `Bsp::rgb_lighting` (used like a `.lit` when no `.lit` file is present) plus mono `lighting`. `lightofs` is halved to index the expanded data. Skies are 32×64 with the front layer on top at alpha 128 (`convert::sky_layers(.., q64)`).
 - `parse_entities` keeps key order and duplicate keys.
 - `Mdl`, `Spr` (v1 and SPR32), `Wad` (WAD2/WAD3), `parse_pic`/`parse_palette`/`parse_colormap`/`parse_pcx`/`parse_tga`, `Wav` (with loop points as in GetWavinfo).
 - Known gaps: maps inside .pk3 are not covered by tests yet (qcore's zip reader will fix that). For stereo WAV, the frame count is length / (width × channels), whereas Quake divides by width only; the mixer must take this into account.
@@ -216,4 +219,6 @@ All parsers take `&[u8]` and return `qformats::Result<T>`; bad input gives an `E
 - Options: `-basedir`, `-game`, `-hipnotic/-rogue/-quoth`, `-width/-height`, `-fullscreen`, `-headless` (offscreen renderer, simulated `1/host_maxfps` steps, no audio), `-autoquit <s>`, `-nosound`, `+cmd` (an argument may contain spaces: `"+delay 2 +forward"`). Extra host command `delay <s> <cmd>` for scripting. `screenshot [path]` writes PNG (headless offscreen image, or windowed via `request_capture` + `read_pixels`). Prints are passed through `server.core.loc.translate` (server already formatted them).
 - Example: `quake-source-port -headless -game ad -autoquit 6 +map ad_sepulcher "+delay 4 screenshot target/shots/ad"`.
 - Savegames: `Server::save_game`/`load_game` (qserver `save.rs`, version 5 text format as ironwail); `Sv::loadgame` makes connect/spawn keep the saved edicts and parms.
+- One shared command buffer, as in Quake: the server's Cbuf text (QC `localcmd`, changelevel) is moved into the host Cbuf before each server frame and at each `exec_cbuf`, so it reaches host commands and cvars too. `name`/`color` are host commands that set `_cl_name`/`_cl_color` and forward to the server, which has server-side `name`/`color` (svc_updatename/updatecolors).
+- `COMPAT_CVARS` (host.rs) registers cvars from other engines without effect (gl_*, r_*_list, scr_usekfont, ...), so vkQuake.cfg and mod configs load quietly. `gamecfg`/`savedgamecfg` are real: QC reads them.
 - Gaps: hipnotic/rogue status bars, demos, multiplayer menu, `sizeup/down` are stubs.

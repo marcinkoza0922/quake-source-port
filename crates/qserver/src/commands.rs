@@ -26,6 +26,8 @@ pub(crate) fn register(s: &mut Server) {
     s.add_cmd("setpos", cmd_setpos);
     s.add_cmd("give", cmd_give);
     s.add_cmd("kill", cmd_kill);
+    s.add_cmd("color", cmd_color);
+    s.add_cmd("name", cmd_name);
     s.add_cmd("prespawn", cmd_prespawn);
     s.add_cmd("spawn", cmd_spawn);
     s.add_cmd("begin", cmd_begin);
@@ -171,6 +173,58 @@ fn cmd_kill(s: &mut Server, _: &Args) {
     l.vm.set_g_f(g.time, l.vm.time as f32);
     l.vm.set_self(e);
     { let fnum = l.vm.g_i(g.f_client_kill); exec(&mut l.vm, &mut s.core, &mut l.world, fnum); }
+}
+
+/// Host_Color_f, server side: `color <top> [bottom]` from a client.
+fn cmd_color(s: &mut Server, a: &Args) {
+    if a.argc() < 2 {
+        return;
+    }
+    let i = s.core.cmd_client.unwrap_or(0);
+    if i >= s.core.clients.len() {
+        return;
+    }
+    let p = |k: usize| (q_atof(a.argv(k)) as i32 & 15).min(13);
+    let top = p(1);
+    let bottom = if a.argc() == 2 { top } else { p(2) };
+    let colors = top * 16 + bottom;
+    s.core.clients[i].colors = colors;
+    if let Some(l) = s.level.as_mut()
+        && s.core.clients[i].spawned
+    {
+        l.vm.set_ent_f(i as u32 + 1, s.core.sv.fields.team, (bottom + 1) as f32);
+    }
+    let m = &mut s.core.sv.reliable_datagram;
+    m.byte(crate::msg::SVC_UPDATECOLORS);
+    m.byte(i as i32);
+    m.byte(colors);
+}
+
+/// Host_Name_f, server side.
+fn cmd_name(s: &mut Server, a: &Args) {
+    if a.argc() < 2 {
+        return;
+    }
+    let i = s.core.cmd_client.unwrap_or(0);
+    if i >= s.core.clients.len() {
+        return;
+    }
+    let raw = if a.argc() == 2 { a.argv(1) } else { a.args() };
+    let name: String = raw.chars().take(15).collect();
+    let old = std::mem::replace(&mut s.core.clients[i].name, name.clone());
+    if !old.is_empty() && old != name {
+        s.core.print(&format!("{old} renamed to {name}\n"));
+    }
+    if let Some(l) = s.level.as_mut()
+        && s.core.clients[i].spawned
+    {
+        let h = l.vm.strings.engine(name.as_bytes());
+        l.vm.set_ent_i(i as u32 + 1, s.core.sv.fields.netname, h);
+    }
+    let m = &mut s.core.sv.reliable_datagram;
+    m.byte(crate::msg::SVC_UPDATENAME);
+    m.byte(i as i32);
+    m.string(name.as_bytes());
 }
 
 /// Host_Give_f (id1 items; mission-pack special cases not handled).

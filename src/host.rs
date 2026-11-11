@@ -92,6 +92,48 @@ const HOST_CVARS: &[(&str, &str, u32)] = &[
     ("scr_sbaralpha", "0.75", CVAR_ARCHIVE),
 ];
 
+/// Cvars other engines register that mod configs (vkQuake.cfg, AD/KEX
+/// configs) set. Registered without effect so loading those configs is
+/// quiet; `gamecfg`/`savedgamecfg` are read and written by QC (pr_edict.c).
+const COMPAT_CVARS: &[(&str, &str, u32)] = &[
+    ("gamecfg", "0", 0),
+    ("savedgamecfg", "0", CVAR_ARCHIVE),
+    ("scr_usekfont", "0", 0),
+    ("cl_beams_polygons", "1", 0),
+    ("r_noshadow_list", "", 0),
+    ("r_noEntityCastShadowList", "", 0),
+    ("r_useportalculling", "1", 0),
+    ("r_nolerp_list", "", 0),
+    ("_snd_mixahead", "0.1", 0),
+    ("bgm_extmusic", "1", 0),
+    ("chase_active", "0", 0),
+    ("fov_adapt", "1", 0),
+    ("gl_clear", "0", 0),
+    ("gl_farclip", "16384", 0),
+    ("gl_fullbrights", "1", 0),
+    ("gl_overbright", "1", 0),
+    ("gl_overbright_models", "1", 0),
+    ("gl_subdivide_size", "128", 0),
+    ("gl_texture_anisotropy", "1", 0),
+    ("gl_texturemode", "", 0),
+    ("gl_triplebuffer", "1", 0),
+    ("joy_deadzone", "0.175", 0),
+    ("lookspring", "0", 0),
+    ("r_clearcolor", "2", 0),
+    ("r_novis", "0", 0),
+    ("r_part_density", "1", 0),
+    ("r_particles", "1", 0),
+    ("r_quadparticles", "1", 0),
+    ("r_scale", "1", 0),
+    ("r_shadows", "0", 0),
+    ("r_viewmodel_quake", "0", 0),
+    ("scr_conscale", "1", 0),
+    ("scr_menuscale", "1", 0),
+    ("scr_sbarscale", "1", 0),
+    ("sys_throttle", "0.02", 0),
+    ("vid_minsize", "0", 0),
+];
+
 /// Quakespasm's default.cfg for games without one (the 2021 re-release).
 const DEFAULT_CFG: &str = include_str!("default.cfg");
 
@@ -161,7 +203,7 @@ impl InputHost for Host {
 impl Host {
     pub fn new(fs: qcore::fs::Fs, mut r: Renderer, snd: Option<SoundSystem>, cmdline: Vec<String>) -> Self {
         let mut cvars = Cvars::new();
-        for &(n, d, f) in HOST_CVARS {
+        for &(n, d, f) in HOST_CVARS.iter().chain(COMPAT_CVARS) {
             cvars.register(n, d, f);
         }
         let input = Input::new(&mut cvars);
@@ -219,6 +261,14 @@ impl Host {
         &self.server.core.fs
     }
 
+    /// Send a name/color change to the server for the local client.
+    fn send_userinfo(&mut self, cmd: &str) {
+        if let Some(i) = self.local.filter(|_| self.server.active()) {
+            self.server.client_command(i, cmd);
+            self.drain_server_log();
+        }
+    }
+
     fn cv(&self, name: &str) -> f32 {
         self.server.core.cvars.value_of(name)
     }
@@ -245,6 +295,12 @@ impl Host {
 
     fn exec_cbuf(&mut self) {
         loop {
+            // One shared Cbuf as in Quake: QC localcmd text runs here, so it
+            // reaches host commands too.
+            let t = self.server.take_text();
+            if !t.is_empty() {
+                self.cbuf.add_text(&t);
+            }
             if self.cbuf.take_wait() {
                 break;
             }
@@ -797,6 +853,9 @@ impl Host {
                 }
             }
             self.forward_client_cmds();
+            // Keep QC localcmd text for the shared host Cbuf (see exec_cbuf).
+            let t = self.server.take_text();
+            self.cbuf.add_text(&t);
             self.server.frame(sdt);
             if let Some(e) = self.server.error() {
                 let msg = format!("Host_Error: {e}\n");
@@ -1125,6 +1184,30 @@ fn register_commands(c: &mut Commands<Host>) {
     for n in ["startdemos", "demos", "stopdemo", "playdemo", "sizeup", "sizedown", "cd", "fog", "help", "scr_autoscale", "togglezoom", "messagemode", "messagemode2", "menu_multiplayer"] {
         c.add(n, |_, _| {});
     }
+    c.add("cfg_unbindall", |_, _| {});
+    // Host_Name_f / Host_Color_f: set the archived cvar, then tell the server.
+    c.add("name", |h, a| {
+        if a.argc() < 2 {
+            let n = h.server.core.cvars.by_name("_cl_name").map(|c| c.string.clone()).unwrap_or_default();
+            h.print(&format!("\"name\" is \"{n}\"\n"));
+            return;
+        }
+        let n = if a.argc() == 2 { a.argv(1).to_string() } else { a.args().to_string() };
+        h.server.core.cvars.set("_cl_name", &n);
+        h.send_userinfo(&format!("name \"{n}\""));
+    });
+    c.add("color", |h, a| {
+        if a.argc() < 2 {
+            let c = h.cv("_cl_color") as i32;
+            h.print(&format!("\"color\" is \"{} {}\"\ncolor <0-13> [0-13]\n", c >> 4, c & 15));
+            return;
+        }
+        let p = |i: usize| a.argv(i).parse::<f32>().unwrap_or(0.0) as i32 & 15;
+        let top = p(1).min(13);
+        let bottom = if a.argc() == 2 { top } else { p(2).min(13) };
+        h.server.core.cvars.set("_cl_color", &(top * 16 + bottom).to_string());
+        h.send_userinfo(&format!("color {top} {bottom}"));
+    });
     c.add("vid_apply", |h, _| h.vid_apply());
     c.add("vid_restart", |h, _| h.vid_apply());
     c.add("_vid_menu", |h, _| h.vid_menu());

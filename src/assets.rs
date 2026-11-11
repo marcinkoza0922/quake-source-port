@@ -73,7 +73,7 @@ impl Level {
             }
             match Bsp::parse(&d) {
                 Ok(b) => {
-                    let lit = fs.open(&format!("{}.lit", name.trim_end_matches(".bsp"))).and_then(|d| qformats::bsp::parse_lit(&d).ok());
+                    let lit = fs.open(&format!("{}.lit", name.trim_end_matches(".bsp"))).and_then(|d| qformats::bsp::parse_lit(&d).ok()).or_else(|| b.rgb_lighting.clone());
                     brush_names.push(name.clone());
                     brushes.push((b, lit));
                 }
@@ -83,7 +83,7 @@ impl Level {
         let mut brush_models = HashMap::new();
         if let Some(b) = &bsp {
             let base = world.trim_end_matches(".bsp");
-            let lit = fs.open(&format!("{base}.lit")).and_then(|d| qformats::bsp::parse_lit(&d).ok());
+            let lit = fs.open(&format!("{base}.lit")).and_then(|d| qformats::bsp::parse_lit(&d).ok()).or_else(|| b.rgb_lighting.clone());
             let refs: Vec<_> = brushes.iter().map(|(b, l)| (b, l.as_deref())).collect();
             match r.load_level(b, lit.as_deref(), &refs) {
                 Ok((s, ext)) => {

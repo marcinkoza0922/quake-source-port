@@ -169,3 +169,76 @@ fn fuzz_real_data() {
     }
     assert_eq!(n, want.len());
 }
+
+/// Minimal BSP with only a texture lump and a lighting lump.
+fn synth_bsp(version: i32, textures: &[u8], lighting: &[u8]) -> Vec<u8> {
+    let mut d = version.to_le_bytes().to_vec();
+    let hdr = 4 + 15 * 8;
+    let tex_ofs = hdr;
+    let light_ofs = hdr + textures.len();
+    for i in 0..15 {
+        let (o, l) = match i {
+            bsp::LUMP_TEXTURES => (tex_ofs, textures.len()),
+            bsp::LUMP_LIGHTING => (light_ofs, lighting.len()),
+            _ => (hdr, 0),
+        };
+        d.extend_from_slice(&(o as i32).to_le_bytes());
+        d.extend_from_slice(&(l as i32).to_le_bytes());
+    }
+    d.extend_from_slice(textures);
+    d.extend_from_slice(lighting);
+    d
+}
+
+fn miptex_lump(name: &str, w: u32, h: u32, shift: Option<u32>, offsets: [u32; 4], px: &[u8]) -> Vec<u8> {
+    let mut l = 1i32.to_le_bytes().to_vec();
+    l.extend_from_slice(&8i32.to_le_bytes());
+    let mut n = [0u8; 16];
+    n[..name.len()].copy_from_slice(name.as_bytes());
+    l.extend_from_slice(&n);
+    l.extend_from_slice(&w.to_le_bytes());
+    l.extend_from_slice(&h.to_le_bytes());
+    if let Some(s) = shift {
+        l.extend_from_slice(&s.to_le_bytes());
+    }
+    for o in offsets {
+        l.extend_from_slice(&o.to_le_bytes());
+    }
+    l.extend_from_slice(px);
+    l
+}
+
+#[test]
+fn miptex_past_lump_end_is_clamped() {
+    // 16x16 texture claiming 4 mips but only 100 texels present.
+    let px: Vec<u8> = (0..100).map(|i| i as u8 + 1).collect();
+    let lump = miptex_lump("broken", 16, 16, None, [40, 296, 360, 376], &px);
+    let b = Bsp::parse(&synth_bsp(29, &lump, &[])).unwrap();
+    let t = b.textures[0].as_ref().unwrap();
+    assert_eq!(t.mips.len(), 4);
+    assert_eq!(t.mips[0].len(), 256);
+    assert_eq!(&t.mips[0][..100], &px[..]);
+    assert!(t.mips[0][100..].iter().all(|&p| p == 0));
+    // Derived by point sampling: mip1 texel (1,1) = mip0 texel (2,2).
+    assert_eq!(t.mips[1].len(), 64);
+    assert_eq!(t.mips[1][8 + 1], t.mips[0][2 * 16 + 2]);
+    assert_eq!(t.mips[3].len(), 4);
+}
+
+#[test]
+fn quake64_bsp() {
+    let px: Vec<u8> = (0..64).map(|i| i as u8).collect();
+    // miptex64 header is 44 bytes; all offsets point at mip 0.
+    let lump = miptex_lump("wall", 8, 8, Some(2), [44; 4], &px);
+    // One 16-bit sample: R=0b11111 G=0b00000 B=0b111111 -> f8 00 fc
+    let light = [0b1111_1000, 0b0011_1111];
+    let b = Bsp::parse(&synth_bsp(bsp::BSPVERSION_QUAKE64, &lump, &light)).unwrap();
+    assert_eq!(b.version, Some(bsp::BspVersion::Quake64));
+    let t = b.textures[0].as_ref().unwrap();
+    assert_eq!(t.shift, 2);
+    assert_eq!(t.mips[0], px);
+    assert_eq!(t.mips[1][0], px[0]);
+    assert_eq!(t.mips[1][1], px[2]);
+    assert_eq!(b.rgb_lighting.as_deref(), Some(&[0xf8, 0x00, 0xfc][..]));
+    assert_eq!(b.lighting.len(), 1);
+}

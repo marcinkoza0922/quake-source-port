@@ -110,6 +110,10 @@ impl Cbuf {
     pub fn take_wait(&mut self) -> bool {
         std::mem::take(&mut self.wait)
     }
+    /// Remove and return all queued text.
+    pub fn take_text(&mut self) -> String {
+        std::mem::take(&mut self.text)
+    }
     pub fn is_empty(&self) -> bool {
         self.text.is_empty()
     }

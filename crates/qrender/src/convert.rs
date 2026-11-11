@@ -64,8 +64,19 @@ pub fn world_texture(pal: &Palette, t: &MipTex) -> (Vec<Vec<u8>>, Option<Vec<Vec
 }
 
 /// Sky texture halves: (solid back layer, alpha front layer), each (w/2)×h.
-pub fn sky_layers(pal: &Palette, t: &MipTex) -> Option<(u32, u32, Vec<u8>, Vec<u8>)> {
+/// Quake64 skies (`q64`) are stacked vertically instead: front on top with a
+/// constant alpha of 128, back below (Sky_LoadTextureQ64).
+pub fn sky_layers(pal: &Palette, t: &MipTex, q64: bool) -> Option<(u32, u32, Vec<u8>, Vec<u8>)> {
     let m = t.mips.first()?;
+    if q64 {
+        let (w, h) = (t.width as usize, t.height as usize / 2);
+        if w == 0 || h == 0 || m.len() < w * h * 2 {
+            return None;
+        }
+        let alpha = m[..w * h].iter().flat_map(|&i| px(pal, i, 128)).collect();
+        let solid = m[w * h..w * h * 2].iter().flat_map(|&i| px(pal, i, 255)).collect();
+        return Some((w as u32, h as u32, solid, alpha));
+    }
     let (w, h) = (t.width as usize, t.height as usize);
     let hw = w / 2;
     if hw == 0 || m.len() < w * h {
