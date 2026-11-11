@@ -89,6 +89,7 @@ const HOST_CVARS: &[(&str, &str, u32)] = &[
     ("_cl_name", "player", CVAR_ARCHIVE),
     ("_cl_color", "0", CVAR_ARCHIVE),
     ("scr_showfps", "0", CVAR_ARCHIVE),
+    ("cl_startdemos", "1", CVAR_ARCHIVE),
     ("viewsize", "100", CVAR_ARCHIVE),
     ("campaign", "0", 0),
     ("horde", "0", 0),
@@ -193,6 +194,21 @@ pub struct Host {
     stuffed: bool,
     /// The current level's exit was already written to qsp_stats.json.
     stats_recorded: bool,
+    /// The demo being played (cls.demoplayback).
+    demo: Option<crate::demo::Demo>,
+    /// The startdemos loop (cls.demos) and the next index in it; -1 stops the loop.
+    demos: Vec<String>,
+    demonum: i32,
+    /// cls.demorecording.
+    recording: Option<crate::demo::DemoWriter>,
+    /// `record <name> <map> [track]`: starts when the new map connects.
+    pending_record: Option<(PathBuf, i32)>,
+    /// Messages up to signon 2 (demo_head), so `record` works mid-game,
+    /// and the signon they reach (loopback may batch several stages).
+    demo_head: Vec<Vec<u8>>,
+    demo_head_signon: u32,
+    /// timedemo: frame count and wall-clock start at the second frame.
+    timedemo: Option<(u32, std::time::Instant)>,
 }
 
 impl CmdContext for Host {
@@ -265,6 +281,14 @@ impl Host {
             fs_snapshot,
             stuffed: false,
             stats_recorded: false,
+            demo: None,
+            demos: Vec::new(),
+            demonum: 0,
+            recording: None,
+            pending_record: None,
+            demo_head: Vec::new(),
+            demo_head_signon: 0,
+            timedemo: None,
         };
         qinput::register_commands(&mut h.cmds);
         register_commands(&mut h.cmds);
@@ -459,6 +483,16 @@ impl Host {
                 {
                     return;
                 }
+                // Key_Event: in a demo, a key in game mode brings up the menu.
+                if let InputEvent::Key { key, down: true } = ie
+                    && self.demo.is_some()
+                    && self.key_dest() == KeyDest::Game
+                    && key != qinput::keys::K_TAB
+                {
+                    self.menu.open(Screen::Main);
+                    self.sync_key_dest();
+                    return;
+                }
                 let routed = qinput::handle_event(self, ie);
                 match routed {
                     Some(Routed::Escape) => self.menu.open(Screen::Main),
@@ -507,6 +541,9 @@ impl Host {
     /// Connects the local client when a server is running without one.
     fn check_local_client(&mut self) {
         if !self.server.active() {
+            if self.demo.is_some() {
+                return;
+            }
             if self.local.take().is_some() || self.cl.signon != 0 {
                 self.disconnect_client();
             }
@@ -514,6 +551,16 @@ impl Host {
         }
         let ok = self.local.is_some_and(|i| self.server.core.clients.get(i).is_some_and(|c| c.active));
         if !ok {
+            // Host_Map_f: a local game stops demo playback and the demo loop.
+            if self.demo.take().is_some() {
+                self.demonum = -1;
+            }
+            // CL_Disconnect stops a recording; `record <name> <map>` starts here.
+            self.stop_recording();
+            self.demo_head.clear();
+            if let Some((path, track)) = self.pending_record.take() {
+                self.start_recording(&path, track);
+            }
             self.cl = ClientState::new();
             self.cl.name = self.server.core.cvars.by_name("_cl_name").map_or("player".into(), |c| c.string.clone());
             self.local = self.server.connect_local();
@@ -523,6 +570,11 @@ impl Host {
     }
 
     fn disconnect_client(&mut self) {
+        if self.demo.take().is_some() {
+            self.finish_timedemo();
+        }
+        self.stop_recording();
+        self.demo_head.clear();
         self.cl = ClientState::new();
         self.local = None;
         self.level = Level::default();
@@ -544,7 +596,25 @@ impl Host {
         }
         msgs.extend(self.server.take_datagrams(i));
         for m in msgs {
-            if let Err(e) = self.cl.parse_server_message(&m) {
+            if let Some(w) = &mut self.recording
+                && let Err(e) = w.write(self.cl.viewangles, &m)
+            {
+                self.con.print(&format!("demo write failed: {e}\n"));
+                self.recording = None;
+            }
+            let before = self.cl.signon;
+            let r = self.cl.parse_server_message(&m);
+            // demo_head: what a client needs to reach signon 2. A new
+            // serverinfo (changelevel) starts it over.
+            let after = self.cl.signon;
+            if before >= 2 && after < 2 {
+                self.demo_head.clear();
+            }
+            if before < 2 || after < 2 {
+                self.demo_head.push(m);
+                self.demo_head_signon = after;
+            }
+            if let Err(e) = r {
                 self.con.print(&format!("Host_Error: {e:?}\n"));
                 self.server.level = None;
                 self.disconnect_client();
@@ -653,9 +723,14 @@ impl Host {
                     self.con.forced = false;
                     self.con.open = false;
                     self.con.clear_notify();
-                    self.menu.screen = Screen::None;
+                    // A demo plays behind the menu; only a real game closes it.
+                    if self.demo.is_none() {
+                        self.menu.screen = Screen::None;
+                    }
                     self.sync_key_dest();
                 }
+                // Host_EndGame during playback moves on to the next demo.
+                ClientEvent::Disconnect if self.demo.is_some() => self.end_demo(),
                 ClientEvent::Disconnect => self.con.print("Server disconnected\n"),
                 _ => {}
             }
@@ -670,7 +745,7 @@ impl Host {
     /// the mod's qsp_stats.json. Not for deathmatch or headless tool runs.
     fn record_level_stats(&mut self) {
         use qnet::protocol::{STAT_MONSTERS, STAT_SECRETS, STAT_TOTALMONSTERS, STAT_TOTALSECRETS};
-        if self.headless || self.cv("deathmatch") != 0.0 || self.level.mapname.is_empty() {
+        if self.headless || self.demo.is_some() || self.cv("deathmatch") != 0.0 || self.level.mapname.is_empty() {
             return;
         }
         let st = |i: usize| self.cl.stats[i].max(0) as u32;
@@ -1000,7 +1075,9 @@ impl Host {
             // Keep QC localcmd text for the shared host Cbuf (see exec_cbuf).
             let t = self.server.take_text();
             self.cbuf.add_text(&t);
-            self.server.frame(sdt);
+            // Ironwail: single player only advances while not in the menu.
+            let hold = self.server.core.maxclients() == 1 && self.menu.active();
+            self.server.frame_held(sdt, hold);
             if let Some(e) = self.server.error() {
                 let msg = format!("Host_Error: {e}\n");
                 self.con.print(&msg);
@@ -1010,6 +1087,7 @@ impl Host {
             self.drain_server_log();
             self.feed_client();
         }
+        self.read_demo(dt);
         self.check_local_client();
         if self.cl.signon > 0 {
             self.cl.frame(dt);
@@ -1052,9 +1130,8 @@ impl Host {
             l.origin = v.origin;
             let (_, r, _) = angle_vectors(Vec3::from_array(v.angles));
             l.right = r.to_array();
-            if let (Some(sl), Some(bsp)) = (&self.server.level, &self.level.bsp) {
-                let _ = sl;
-                let leaf = self.server.core.sv.vis.point_in_leaf(Vec3::from_array(v.origin));
+            if let Some(bsp) = &self.level.bsp {
+                let leaf = bsp_leaf(bsp, v.origin);
                 l.ambient_levels = bsp.leafs.get(leaf).map(|lf| lf.ambient_level);
             }
             l.underwater = self.contents(v.origin) <= crate::view::CONTENTS_WATER;
@@ -1064,7 +1141,233 @@ impl Host {
     }
 
     fn contents(&self, p: [f32; 3]) -> i32 {
-        self.server.level.as_ref().map_or(-1, |l| l.world.point_contents(Vec3::from_array(p)))
+        if let Some(l) = &self.server.level {
+            return l.world.point_contents(Vec3::from_array(p));
+        }
+        // Demo playback has no server world: use the client's BSP leaves.
+        self.level.bsp.as_ref().and_then(|b| b.leafs.get(bsp_leaf(b, p))).map_or(-1, |l| l.contents)
+    }
+
+    /// CL_GetMessage for demos: feed recorded messages until the client
+    /// clock catches up with the newest one (everything before signon).
+    fn read_demo(&mut self, dt: f64) {
+        let mut ended = false;
+        let mut n = 0;
+        while self.demo.is_some() {
+            if self.cl.signon == 4 {
+                if let Some(td) = &mut self.timedemo {
+                    // One message per frame; frame 1 (loading) doesn't count.
+                    if n > 0 {
+                        break;
+                    }
+                    td.0 += 1;
+                    if td.0 == 2 {
+                        td.1 = std::time::Instant::now();
+                    }
+                } else if self.cl.time + dt <= self.cl.mtime[0] {
+                    break;
+                }
+            }
+            n += 1;
+            let Some((angles, data)) = self.demo.as_mut().and_then(|d| d.next_message()).map(|m| (m.angles, m.data.to_vec())) else {
+                ended = true;
+                break;
+            };
+            self.cl.mviewangles[1] = self.cl.mviewangles[0];
+            self.cl.mviewangles[0] = angles;
+            let r = self.cl.parse_server_message(&data);
+            self.cl.take_reliable_out();
+            if let Err(e) = r {
+                self.con.print(&format!("demo: bad message: {e:?}\n"));
+                ended = true;
+                break;
+            }
+            // NewMap must load models before entities parsed later use them.
+            self.process_client_events();
+            if self.demo.is_none() {
+                return;
+            }
+        }
+        if ended {
+            self.end_demo();
+        }
+    }
+
+    /// CL_StopPlayback + CL_NextDemo.
+    fn end_demo(&mut self) {
+        self.demo = None;
+        self.finish_timedemo();
+        self.cl.demoplayback = false;
+        if !self.next_demo() {
+            self.disconnect_client();
+        }
+    }
+
+    /// CL_NextDemo: queue the next demo of the loop; false when there is none.
+    fn next_demo(&mut self) -> bool {
+        if self.demonum < 0 {
+            return false;
+        }
+        if self.demonum as usize >= self.demos.len() {
+            self.demonum = 0;
+            if self.demos.is_empty() {
+                self.con.print("No demos listed with startdemos\n");
+                self.demonum = -1;
+                return false;
+            }
+        }
+        let name = self.demos[self.demonum as usize].clone();
+        self.cbuf.insert_text(&format!("playdemo {name}\n"));
+        self.demonum += 1;
+        true
+    }
+
+    /// CL_PlayDemo_f: drop any game and start reading `name`(.dem).
+    fn play_demo(&mut self, name: &str) {
+        self.stop_game();
+        let file = if name.contains('.') { name.to_string() } else { format!("{name}.dem") };
+        // Recorded demos live in the user dir, which isn't a search path.
+        let data = self.server.core.fs.open(&file).or_else(|| std::fs::read(self.user_dir().join(&file)).ok());
+        let Some(data) = data else {
+            self.con.print(&format!("ERROR: couldn't open {file}.\n"));
+            self.demonum = -1;
+            return;
+        };
+        self.con.print(&format!("Playing demo from {file}.\n"));
+        self.cl = ClientState::new();
+        self.cl.demoplayback = true;
+        self.demo = Some(crate::demo::Demo::new(data));
+        self.con.forced = false;
+    }
+
+    /// CL_FinishTimeDemo.
+    fn finish_timedemo(&mut self) {
+        let Some((frames, start)) = self.timedemo.take() else { return };
+        let frames = frames.saturating_sub(1);
+        let t = start.elapsed().as_secs_f64().max(1e-6);
+        self.con.print(&format!("{frames} frames {t:5.1} seconds {:5.1} fps\n", frames as f64 / t));
+    }
+
+    /// True while a timedemo runs: the main loop drops its frame cap.
+    pub fn timedemo_active(&self) -> bool {
+        self.timedemo.is_some()
+    }
+
+    fn start_recording(&mut self, path: &std::path::Path, track: i32) {
+        match crate::demo::DemoWriter::create(path, track) {
+            Ok(w) => {
+                self.con.print(&format!("Recording to {}.\n", path.display()));
+                self.recording = Some(w);
+            }
+            Err(e) => self.con.print(&format!("ERROR: couldn't create {}: {e}\n", path.display())),
+        }
+    }
+
+    /// CL_Stop_f: end with svc_disconnect.
+    fn stop_recording(&mut self) {
+        let Some(mut w) = self.recording.take() else { return };
+        let r = w.write(self.cl.viewangles, &[qnet::protocol::SVC_DISCONNECT]).and_then(|_| w.finish());
+        self.con.print(&match r {
+            Ok(()) => "Completed demo\n".to_string(),
+            Err(e) => format!("demo write failed: {e}\n"),
+        });
+    }
+
+    /// CL_Record_f (with ProQuake's mid-game start).
+    fn record(&mut self, a: &Args) {
+        use qnet::protocol::*;
+        if self.demo.is_some() {
+            self.print("Can't record during demo playback\n");
+            return;
+        }
+        if self.recording.is_some() {
+            self.stop_recording();
+        }
+        let c = a.argc();
+        if !(2..=4).contains(&c) {
+            self.print("record <demoname> [<map> [cd track]]\n");
+            return;
+        }
+        let name = a.argv(1);
+        if name.contains("..") {
+            self.print("Relative pathnames are not allowed.\n");
+            return;
+        }
+        let connected = self.local.is_some() && self.server.active();
+        if c == 2 && connected && self.cl.signon < 2 {
+            self.print("Can't record - try again when connected\n");
+            return;
+        }
+        let track = if c == 4 { a.argv(3).parse().unwrap_or(-1) } else { -1 };
+        let file = if name.ends_with(".dem") { name.to_string() } else { format!("{name}.dem") };
+        let path = self.user_dir().join(file);
+        if c > 2 {
+            self.pending_record = Some((path, track));
+            self.cbuf.insert_text(&format!("map {}\n", a.argv(2)));
+            return;
+        }
+        self.start_recording(&path, track);
+        if !connected {
+            return;
+        }
+        let Some(mut w) = self.recording.take() else { return };
+        let ang = self.cl.viewangles;
+        let mut res = self.demo_head.iter().try_for_each(|m| w.write(ang, m));
+        let mut b = qnet::msg::SizeBuf::new(1 << 20);
+        for (i, sc) in self.cl.scores.iter().enumerate() {
+            b.byte(SVC_UPDATENAME as i32);
+            b.byte(i as i32);
+            b.string(sc.name.as_bytes());
+            b.byte(SVC_UPDATEFRAGS as i32);
+            b.byte(i as i32);
+            b.short(sc.frags);
+            b.byte(SVC_UPDATECOLORS as i32);
+            b.byte(i as i32);
+            b.byte(sc.colors);
+        }
+        for (i, ls) in self.cl.lightstyles.iter().enumerate() {
+            b.byte(SVC_LIGHTSTYLE as i32);
+            b.byte(i as i32);
+            b.string(ls.as_bytes());
+        }
+        for (i, &v) in self.cl.stats.iter().enumerate() {
+            if v == 0 {
+                continue;
+            }
+            if b.len() > 4096 {
+                res = res.and_then(|_| w.write(ang, &b.data));
+                b.clear();
+            }
+            if i < 32 {
+                b.byte(SVC_UPDATESTAT as i32);
+                b.byte(i as i32);
+                b.long(v);
+            } else {
+                b.byte(SVC_STUFFTEXT as i32);
+                b.string(format!("//st {i} {v}\n").as_bytes());
+            }
+        }
+        b.byte(SVC_SETVIEW as i32);
+        b.short(self.cl.viewentity as i32);
+        if self.demo_head_signon < 3 {
+            b.byte(SVC_SIGNONNUM as i32);
+            b.byte(3);
+        }
+        res = res.and_then(|_| w.write(ang, &b.data));
+        match res {
+            Ok(()) => self.recording = Some(w),
+            Err(e) => self.con.print(&format!("demo write failed: {e}\n")),
+        }
+    }
+
+    /// CL_Disconnect: shut down the local server and the client.
+    fn stop_game(&mut self) {
+        if let Some(i) = self.local {
+            self.server.drop_client(i, false);
+        }
+        self.server.level = None;
+        self.server.core.sv.active = false;
+        self.disconnect_client();
     }
 
     fn render(&mut self, view: Option<qrender::View>, gun: Option<qrender::RenderEntity>, ft: f32) {
@@ -1357,7 +1660,57 @@ fn register_commands(c: &mut Commands<Host>) {
     c.add("bf", |h, _| h.view.bonus_flash());
     c.add("+showscores", |h, _| h.show_scores = true);
     c.add("-showscores", |h, _| h.show_scores = false);
-    for n in ["startdemos", "demos", "stopdemo", "playdemo", "sizeup", "sizedown", "cd", "help", "scr_autoscale", "togglezoom", "messagemode", "messagemode2", "menu_multiplayer"] {
+    c.add("startdemos", |h, a| {
+        h.demos = (1..a.argc()).map(|i| a.argv(i).to_string()).collect();
+        h.print(&format!("{} demo(s) in loop\n", h.demos.len()));
+        if !h.server.active() && h.demonum != -1 && h.demo.is_none() {
+            h.demonum = 0;
+            if h.cv("cl_startdemos") == 0.0 {
+                h.demonum = -1;
+                return;
+            }
+            h.next_demo();
+        } else {
+            h.demonum = -1;
+        }
+    });
+    c.add("demos", |h, _| {
+        if h.demonum == -1 {
+            h.demonum = 1;
+        }
+        h.stop_game();
+        h.next_demo();
+    });
+    c.add("record", |h, a| h.record(a));
+    c.add("stop", |h, _| {
+        if h.recording.is_none() {
+            h.print("Not recording a demo.\n");
+        }
+        h.stop_recording();
+    });
+    c.add("timedemo", |h, a| {
+        if a.argc() != 2 {
+            h.print("timedemo <demoname> : gets demo speeds\n");
+            return;
+        }
+        h.play_demo(a.argv(1));
+        if h.demo.is_some() {
+            h.timedemo = Some((0, std::time::Instant::now()));
+        }
+    });
+    c.add("stopdemo", |h, _| {
+        if h.demo.is_some() {
+            h.disconnect_client();
+        }
+    });
+    c.add("playdemo", |h, a| {
+        if a.argc() < 2 {
+            h.print("playdemo <demoname> : plays a demo\n");
+            return;
+        }
+        h.play_demo(a.argv(1));
+    });
+    for n in ["sizeup", "sizedown", "cd", "help", "scr_autoscale", "togglezoom", "messagemode", "messagemode2", "menu_multiplayer"] {
         c.add(n, |_, _| {});
     }
     c.add("cfg_unbindall", |_, _| {});
@@ -1408,14 +1761,7 @@ fn register_commands(c: &mut Commands<Host>) {
             h.print(if p { "paused\n" } else { "unpaused\n" });
         }
     });
-    c.add("disconnect", |h, _| {
-        if let Some(i) = h.local {
-            h.server.drop_client(i, false);
-        }
-        h.server.level = None;
-        h.server.core.sv.active = false;
-        h.disconnect_client();
-    });
+    c.add("disconnect", |h, _| h.stop_game());
     c.add("music", |h, a| {
         if let Some(s) = &mut h.snd
             && !s.play_music(a.argv(1), true)
@@ -1555,4 +1901,16 @@ mod relaunch_tests {
         assert_eq!(out, v("-basedir /q -width 800 -height 600"));
         assert_eq!(super::relaunch_args(&v("+delay 3 screenshot x -window")), v("-window"));
     }
+}
+
+/// Mod_PointInLeaf on the client's copy of the world.
+fn bsp_leaf(bsp: &qformats::bsp::Bsp, p: [f32; 3]) -> usize {
+    let mut n = 0i32;
+    while n >= 0 {
+        let Some(node) = bsp.nodes.get(n as usize) else { return 0 };
+        let Some(pl) = bsp.planes.get(node.plane as usize) else { return 0 };
+        let d = Vec3::from(pl.normal).dot(Vec3::from_array(p)) - pl.dist;
+        n = node.children[(d <= 0.0) as usize];
+    }
+    (-(n + 1)) as usize
 }

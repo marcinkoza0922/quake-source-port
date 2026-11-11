@@ -7,6 +7,7 @@
 
 mod assets;
 mod console;
+mod demo;
 mod draw;
 mod host;
 mod menu;
@@ -137,7 +138,8 @@ fn main() {
 
     let mut last = Instant::now();
     loop {
-        let maxfps = host.server.core.cvars.value_of("host_maxfps");
+        // Host_FilterTime: timedemo runs uncapped.
+        let maxfps = if host.timedemo_active() { 0.0 } else { host.server.core.cvars.value_of("host_maxfps") };
         let dt = if headless {
             1.0 / if maxfps > 0.0 { maxfps.min(1000.0) as f64 } else { 72.0 }
         } else {

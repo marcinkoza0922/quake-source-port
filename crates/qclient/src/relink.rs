@@ -72,6 +72,17 @@ impl ClientState {
         for i in 0..3 {
             self.velocity[i] = self.mvelocity[1][i] + frac * (self.mvelocity[0][i] - self.mvelocity[1][i]);
         }
+        if self.demoplayback {
+            for i in 0..3 {
+                let mut d = self.mviewangles[0][i] - self.mviewangles[1][i];
+                if d > 180.0 {
+                    d -= 360.0;
+                } else if d < -180.0 {
+                    d += 360.0;
+                }
+                self.viewangles[i] = self.mviewangles[1][i] + frac * d;
+            }
+        }
         let bobjrotate = angle_mod(100.0 * self.time as f32);
         let t = self.time;
         for i in 1..self.entities.len() {

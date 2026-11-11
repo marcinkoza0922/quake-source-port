@@ -172,6 +172,10 @@ pub struct ClientState {
     pub viewent: ClientEntity,
 
     pub mtime: [f64; 2],
+    /// cls.demoplayback: view angles come from the demo (`mviewangles`).
+    pub demoplayback: bool,
+    /// Demo view angles for the last two messages (cl.mviewangles).
+    pub mviewangles: [[f32; 3]; 2],
     pub time: f64,
     pub oldtime: f64,
     /// Skip interpolation (local server without netinterval, timedemo, cl_nolerp).
@@ -253,6 +257,8 @@ impl ClientState {
             viewentity: 0,
             viewent: ClientEntity::default(),
             mtime: [0.0; 2],
+            demoplayback: false,
+            mviewangles: [[0.0; 3]; 2],
             time: 0.0,
             oldtime: 0.0,
             nolerp: false,
@@ -300,11 +306,11 @@ impl ClientState {
 
     /// CL_ClearState (keeps connection-level settings).
     pub fn clear_state(&mut self) {
-        let keep = (self.standard_quake, self.nolerp, self.name.clone(), self.color, self.sv_gravity, self.signon);
+        let keep = (self.standard_quake, self.nolerp, self.name.clone(), self.color, self.sv_gravity, self.signon, self.demoplayback);
         let out = std::mem::take(&mut self.out_reliable);
         let events = std::mem::take(&mut self.events);
         *self = Self::new();
-        (self.standard_quake, self.nolerp, self.name, self.color, self.sv_gravity, self.signon) = keep;
+        (self.standard_quake, self.nolerp, self.name, self.color, self.sv_gravity, self.signon, self.demoplayback) = keep;
         self.out_reliable = out;
         self.events = events;
     }
