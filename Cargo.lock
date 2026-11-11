@@ -188,6 +188,13 @@ dependencies = [
 ]
 
 [[package]]
+name = "qsmoke"
+version = "0.1.0"
+dependencies = [
+ "qcore",
+]
+
+[[package]]
 name = "qsound"
 version = "0.1.0"
 dependencies = [

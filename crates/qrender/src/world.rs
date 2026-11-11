@@ -316,6 +316,13 @@ impl World {
                 });
             }
             let base = w.vertices.len() as u32;
+            // Quake64 re-release texture shift (not for sky/liquids).
+            let tex_div = match bsp.textures.get(ti.miptex.max(0) as usize) {
+                Some(Some(t)) if t.shift > 0 && matches!(t.kind, TextureKind::Normal | TextureKind::Fence) => {
+                    2.0 * t.shift as f32
+                }
+                _ => 1.0,
+            };
             for v in &verts {
                 let st = [0, 1].map(|j| {
                     let t = &ti.vecs[j];
@@ -332,6 +339,7 @@ impl World {
                 } else {
                     [0.0; 3]
                 };
+                let st = st.map(|c| c / tex_div);
                 w.vertices.push(WorldVertex { pos: *v, st, lm });
             }
             for i in 1..verts.len() as u32 - 1 {

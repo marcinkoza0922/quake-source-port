@@ -99,6 +99,7 @@ Headless server, `skill 3`, `god` on. For each map:
 - `cargo nextest run` — quiet default profile; `--profile verbose` for debugging.
 - `cargo clippy --message-format=short`.
 - `tools/qinspect`, `tools/qbot`, `tools/qbench` as above.
+- `tools/qsmoke`: the every-map smoke sweep (M5). Build with `cargo build --release`, then `target/release/qsmoke [-j N] [-time S] [mod[:map] ...]`. It runs each playable map (one with an `info_player_*` entity) of each gamedir in its own headless engine process at skill 3 and classifies console output: Host_Error, QC errors, panic/crash, timeout, unknown commands, missing assets. Output goes to `target/qsmoke/report.json` (per map) and `summary.txt` (issues grouped by message). Exit code 1 if any map has an error. A full run over the local data takes about 4 minutes.
 
 ## Work plan (milestones)
 
@@ -106,7 +107,7 @@ Headless server, `skill 3`, `god` on. For each map:
 2. qvm + qworld + qserver headless: load start.bsp, run frames, no errors on all installed maps (smoke test across every mod).
 3. qnet loopback + qclient.
 4. qplatform + qrender (world, models, 2D) + qsound + qinput → playable id1.
-5. AD / MG1 / MG3 / hipnotic / rogue compat pass.
+5. AD / MG1 / MG3 / hipnotic / rogue compat pass. Status (2026-11-11): `qsmoke` loads all 611 playable maps across 32 installed gamedirs with no errors (Quake64 BSP support and the miptex tolerance fix were needed). Hipnotic/rogue status bars are done. `scr_usekfont` works as in ironwail: it only word-wraps centerprints (`console::word_wrap`, a port of COM_WordWrap, wrapping to `center_wrap_cols`), and it is set to 1 at startup when mg3 is mounted. ironwail doesn't draw the KEX font either, and localization (`qserver::loc`) was already in place. Visual spot checks against vkQuake 1.34.1 (2026-11-11) on e1m1, q64 start, mg1 start and ad_sepulcher: e1m1 matches apart from texture filtering. Q64 needed the `.lit` priority fix (it was picking up id1's start.lit and losing its RGB lighting) and now matches. MG1 needed the `fog` command. MG1's grates glowed because we used the mips embedded in the BSP: the compiler filled the see-through texels of mips 1–3 with index 240, a fullbright orange. Fixed: like ironwail, only mip 0 is used and `convert::downsample_rgba` builds the rest (alpha-weighted for fences). AD comparison still open: vkQuake shows its main menu over AD because AD's quake.rc has no `stuffcmds`, and it can't be closed from the command line. To capture vkQuake: it only runs `map` once its command buffer is empty, so scripted waits never work. Launch `vkquake.AppImage -basedir . -game G -window +map M` in the background, then grab the window with `spectacle -b -n -a -o out.png`.
 6. qui console/menus/mod menu; aim assist.
 7. qbot; qbench perf parity.
 8. Network play protocols 15/666/999.
@@ -123,7 +124,9 @@ Subagent split: crates with frozen interfaces (qformats, qvm interpreter, qsound
 
 ### qformats
 All parsers take `&[u8]` and return `qformats::Result<T>`; bad input gives an `Error { format, msg }` with the byte offset, never a panic. Vectors are `[f32;3]`.
-- `Bsp::parse`: BSP29/BSP2/2PSB normalised into one set of structs (i32 children: a node child < 0 is leaf `-(i+1)`, a clipnode child < 0 is a contents value). Also `decompress_vis`, `leaf_pvs`, `parse_lit`.
+- `Bsp::parse`: BSP29/BSP2/2PSB/Quake64 normalised into one set of structs (i32 children: a node child < 0 is leaf `-(i+1)`, a clipnode child < 0 is a contents value). Also `decompress_vis`, `leaf_pvs`, `parse_lit`.
+- Miptex texel data that runs past the end of the lump (seen in qbj, retrojam2) is tolerated: mip 0 is clamped and zero-filled, as in ironwail, and smaller mips that are out of bounds are point-sampled from the previous level.
+- Quake64 (`q64`): `miptex64_t` adds `MipTex::shift` (the renderer divides st by `2*shift`), only mip 0 is stored, and the 16-bit RGB lightmap is expanded into `Bsp::rgb_lighting` (used like a `.lit` when no `.lit` file is present) plus mono `lighting`. `lightofs` is halved to index the expanded data. Skies are 32×64 with the front layer on top at alpha 128 (`convert::sky_layers(.., q64)`).
 - `parse_entities` keeps key order and duplicate keys.
 - `Mdl`, `Spr` (v1 and SPR32), `Wad` (WAD2/WAD3), `parse_pic`/`parse_palette`/`parse_colormap`/`parse_pcx`/`parse_tga`, `Wav` (with loop points as in GetWavinfo).
 - Known gaps: maps inside .pk3 are not covered by tests yet (qcore's zip reader will fix that). For stereo WAV, the frame count is length / (width × channels), whereas Quake divides by width only; the mixer must take this into account.
@@ -216,4 +219,11 @@ All parsers take `&[u8]` and return `qformats::Result<T>`; bad input gives an `E
 - Options: `-basedir`, `-game`, `-hipnotic/-rogue/-quoth`, `-width/-height`, `-fullscreen`, `-headless` (offscreen renderer, simulated `1/host_maxfps` steps, no audio), `-autoquit <s>`, `-nosound`, `+cmd` (an argument may contain spaces: `"+delay 2 +forward"`). Extra host command `delay <s> <cmd>` for scripting. `screenshot [path]` writes PNG (headless offscreen image, or windowed via `request_capture` + `read_pixels`). Prints are passed through `server.core.loc.translate` (server already formatted them).
 - Example: `quake-source-port -headless -game ad -autoquit 6 +map ad_sepulcher "+delay 4 screenshot target/shots/ad"`.
 - Savegames: `Server::save_game`/`load_game` (qserver `save.rs`, version 5 text format as ironwail); `Sv::loadgame` makes connect/spawn keep the saved edicts and parms.
-- Gaps: hipnotic/rogue status bars, demos, multiplayer menu, `sizeup/down` are stubs.
+- One shared command buffer, as in Quake: the server's Cbuf text (QC `localcmd`, changelevel) is moved into the host Cbuf before each server frame and at each `exec_cbuf`, so it reaches host commands and cvars too. `name`/`color` are host commands that set `_cl_name`/`_cl_color` and forward to the server, which has server-side `name`/`color` (svc_updatename/updatecolors).
+- `.lit` and `.ent` files load through `Fs::open_companion`, which only accepts them from the same or a higher-priority game dir than the map (ironwail's `path_id` check), so id1's `start.lit` never lights another game's `start.bsp`.
+- Fog has a single current state, `cl.fog`. Worldspawn sets it at map load (unless an svc_fog arrived first), and svc_fog or the `fog` console command (Fog_FogCommand_f) change it; MG1 sets fog through QC. Fade times apply instantly.
+- Liquid alpha (GL_WaterAlphaForTextureType): worldspawn `[_]wateralpha/lavaalpha/slimealpha/telealpha` override `r_wateralpha` and `r_lavaalpha/r_slimealpha/r_telealpha`; a per-type value of 0 falls back to water alpha. Not ported: ironwail's check that the map was vised for transparent water (`contentstransparent`).
+- `r_drawentities 0` hides all entities except the view model (for debugging).
+- `COMPAT_CVARS` (host.rs) registers cvars from other engines without effect (gl_*, r_*_list, scr_usekfont, ...), so vkQuake.cfg and mod configs load quietly. `gamecfg`/`savedgamecfg` are real: QC reads them.
+- `sbar::Pack` (Id/Hipnotic/Rogue, from the mounted game dirs as in ironwail: rogue, hipnotic or quoth) selects the mission-pack status bar rules in both HUD styles: hipnotic laser/Mjolnir/proximity weapons, keys on the main bar, wetsuit/empathy shield items; rogue RIT_* ammo and armor bits, r_invbar1/2, powered-up weapon pics and shield/antigrav items, and no sigils. Rogue's CTF team-colour face is not done.
+- Gaps: demos, multiplayer menu, `sizeup/down` are stubs.

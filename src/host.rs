@@ -51,6 +51,10 @@ const HOST_CVARS: &[(&str, &str, u32)] = &[
     ("contrast", "1", CVAR_ARCHIVE),
     ("r_wateralpha", "1", CVAR_ARCHIVE),
     ("r_skyfog", "0.5", 0),
+    ("r_drawentities", "1", 0),
+    ("r_lavaalpha", "0", 0),
+    ("r_slimealpha", "0", 0),
+    ("r_telealpha", "0", 0),
     ("r_dynamic", "1", 0),
     ("vid_vsync", "0", CVAR_ARCHIVE),
     ("vid_fullscreen", "0", CVAR_ARCHIVE),
@@ -90,6 +94,48 @@ const HOST_CVARS: &[(&str, &str, u32)] = &[
     ("con_notifytime", "3", 0),
     ("scr_conspeed", "500", CVAR_ARCHIVE),
     ("scr_sbaralpha", "0.75", CVAR_ARCHIVE),
+];
+
+/// Cvars other engines register that mod configs (vkQuake.cfg, AD/KEX
+/// configs) set. Registered without effect so loading those configs is
+/// quiet; `gamecfg`/`savedgamecfg` are read and written by QC (pr_edict.c).
+const COMPAT_CVARS: &[(&str, &str, u32)] = &[
+    ("gamecfg", "0", 0),
+    ("savedgamecfg", "0", CVAR_ARCHIVE),
+    ("scr_usekfont", "0", 0),
+    ("cl_beams_polygons", "1", 0),
+    ("r_noshadow_list", "", 0),
+    ("r_noEntityCastShadowList", "", 0),
+    ("r_useportalculling", "1", 0),
+    ("r_nolerp_list", "", 0),
+    ("_snd_mixahead", "0.1", 0),
+    ("bgm_extmusic", "1", 0),
+    ("chase_active", "0", 0),
+    ("fov_adapt", "1", 0),
+    ("gl_clear", "0", 0),
+    ("gl_farclip", "16384", 0),
+    ("gl_fullbrights", "1", 0),
+    ("gl_overbright", "1", 0),
+    ("gl_overbright_models", "1", 0),
+    ("gl_subdivide_size", "128", 0),
+    ("gl_texture_anisotropy", "1", 0),
+    ("gl_texturemode", "", 0),
+    ("gl_triplebuffer", "1", 0),
+    ("joy_deadzone", "0.175", 0),
+    ("lookspring", "0", 0),
+    ("r_clearcolor", "2", 0),
+    ("r_novis", "0", 0),
+    ("r_part_density", "1", 0),
+    ("r_particles", "1", 0),
+    ("r_quadparticles", "1", 0),
+    ("r_scale", "1", 0),
+    ("r_shadows", "0", 0),
+    ("r_viewmodel_quake", "0", 0),
+    ("scr_conscale", "1", 0),
+    ("scr_menuscale", "1", 0),
+    ("scr_sbarscale", "1", 0),
+    ("sys_throttle", "0.02", 0),
+    ("vid_minsize", "0", 0),
 ];
 
 /// Quakespasm's default.cfg for games without one (the 2021 re-release).
@@ -161,7 +207,7 @@ impl InputHost for Host {
 impl Host {
     pub fn new(fs: qcore::fs::Fs, mut r: Renderer, snd: Option<SoundSystem>, cmdline: Vec<String>) -> Self {
         let mut cvars = Cvars::new();
-        for &(n, d, f) in HOST_CVARS {
+        for &(n, d, f) in HOST_CVARS.iter().chain(COMPAT_CVARS) {
             cvars.register(n, d, f);
         }
         let input = Input::new(&mut cvars);
@@ -211,12 +257,23 @@ impl Host {
         register_commands(&mut h.cmds);
         h.con.forced = true;
         h.con.frac = 1.0;
+        // 2026 update compat (ironwail host.c): word-wrap centerprints for mg3.
+        let mg3 = h.server.core.fs.game_dirs().iter().any(|d| d.eq_ignore_ascii_case("mg3"));
+        h.server.core.cvars.set("scr_usekfont", if mg3 { "1" } else { "0" });
         h.cbuf.add_text("exec quake.rc\n");
         h
     }
 
     pub fn fs(&self) -> &qcore::fs::Fs {
         &self.server.core.fs
+    }
+
+    /// Send a name/color change to the server for the local client.
+    fn send_userinfo(&mut self, cmd: &str) {
+        if let Some(i) = self.local.filter(|_| self.server.active()) {
+            self.server.client_command(i, cmd);
+            self.drain_server_log();
+        }
     }
 
     fn cv(&self, name: &str) -> f32 {
@@ -245,6 +302,12 @@ impl Host {
 
     fn exec_cbuf(&mut self) {
         loop {
+            // One shared Cbuf as in Quake: QC localcmd text runs here, so it
+            // reaches host commands too.
+            let t = self.server.take_text();
+            if !t.is_empty() {
+                self.cbuf.add_text(&t);
+            }
             if self.cbuf.take_wait() {
                 break;
             }
@@ -505,7 +568,13 @@ impl Host {
                 ClientEvent::CenterPrint(s) => {
                     let t = self.cv("scr_centertime") as f64;
                     let s = self.server.core.loc.translate(&s);
-                    self.con.center_print(&s, t);
+                    let cols = if self.cv("scr_usekfont") != 0.0 {
+                        let (w, h) = self.r.size();
+                        crate::console::center_wrap_cols(Canvas::new(w, h).vw())
+                    } else {
+                        0
+                    };
+                    self.con.center_print(&s, t, cols);
                 }
                 ClientEvent::StuffText(s) => self.cbuf.add_text(&s),
                 ClientEvent::Sound { ent, channel, sound, origin, volume, attenuation } => {
@@ -582,6 +651,11 @@ impl Host {
         let fs = &self.server.core.fs;
         let con = &mut self.con;
         self.level = Level::load(fs, &mut self.r, self.snd.as_mut(), &mut self.cl, &mut |s| con.print(s));
+        // Fog_ParseWorldspawn; an svc_fog parsed in the same batch wins.
+        if self.cl.fog == qclient::Fog::default() {
+            let w = self.level.world_fog;
+            self.cl.fog = qclient::Fog { density: w.density, color: w.color, time: 0.0 };
+        }
         self.view.reset();
         self.con.print(&format!("loaded {} in {:.2}s\n", self.level.mapname, t0.elapsed().as_secs_f32()));
     }
@@ -797,6 +871,9 @@ impl Host {
                 }
             }
             self.forward_client_cmds();
+            // Keep QC localcmd text for the shared host Cbuf (see exec_cbuf).
+            let t = self.server.take_text();
+            self.cbuf.add_text(&t);
             self.server.frame(sdt);
             if let Some(e) = self.server.error() {
                 let msg = format!("Host_Error: {e}\n");
@@ -875,6 +952,9 @@ impl Host {
             let fs = &self.server.core.fs;
             let cv = self.view_cvars();
             self.view.entities(&mut self.cl, &cv, &mut self.level, fs, &mut self.r, &mut ents);
+            if self.cv("r_drawentities") == 0.0 {
+                ents.clear();
+            }
             if let Some(g) = gun {
                 ents.push(g);
             }
@@ -908,7 +988,8 @@ impl Host {
                             c.ch(x, y, b'+');
                         }
                         let face = self.view.face_anim_time > self.cl.time;
-                        let mut sb = crate::sbar::Sbar::new(&mut c, &mut pf);
+                        let pack = crate::sbar::Pack::from_game_dirs(self.server.core.fs.game_dirs().iter().map(String::as_str));
+                        let mut sb = crate::sbar::Sbar::new(&mut c, &mut pf, pack);
                         if classic {
                             sb.backtile(CLASSIC_SBAR_LINES);
                             sb.draw(&self.cl, self.show_scores, face);
@@ -942,16 +1023,17 @@ impl Host {
             }
         }
         let styles: Vec<i32> = (0..qnet::protocol::MAX_LIGHTSTYLES).map(|i| self.cl.lightstyle_value(i)).collect();
-        let fog = if self.cl.fog.density > 0.0 {
-            qrender::Fog { density: self.cl.fog.density, color: self.cl.fog.color }
-        } else {
-            self.level.world_fog
-        };
+        let fog = qrender::Fog { density: self.cl.fog.density, color: self.cl.fog.color };
         let v = |n: &str| self.cv(n);
         let settings = Settings {
             gamma: v("gamma").clamp(0.3, 3.0),
             contrast: v("contrast").clamp(0.5, 3.0),
-            wateralpha: v("r_wateralpha").clamp(0.0, 1.0),
+            // GL_WaterAlphaForTextureType: map keys win; per-type values of
+            // 0 fall back to r_wateralpha.
+            wateralpha: self.level.liquid_alpha[0].unwrap_or(v("r_wateralpha")).clamp(0.0, 1.0),
+            lavaalpha: self.level.liquid_alpha[1].or(Some(v("r_lavaalpha"))).filter(|&a| a > 0.0).map(|a| a.min(1.0)),
+            slimealpha: self.level.liquid_alpha[2].or(Some(v("r_slimealpha"))).filter(|&a| a > 0.0).map(|a| a.min(1.0)),
+            telealpha: self.level.liquid_alpha[3].or(Some(v("r_telealpha"))).filter(|&a| a > 0.0).map(|a| a.min(1.0)),
             skyfog: v("r_skyfog"),
             dynamic: v("r_dynamic") != 0.0,
             vsync: v("vid_vsync") != 0.0,
@@ -1122,9 +1204,34 @@ fn register_commands(c: &mut Commands<Host>) {
     c.add("bf", |h, _| h.view.bonus_flash());
     c.add("+showscores", |h, _| h.show_scores = true);
     c.add("-showscores", |h, _| h.show_scores = false);
-    for n in ["startdemos", "demos", "stopdemo", "playdemo", "sizeup", "sizedown", "cd", "fog", "help", "scr_autoscale", "togglezoom", "messagemode", "messagemode2", "menu_multiplayer"] {
+    for n in ["startdemos", "demos", "stopdemo", "playdemo", "sizeup", "sizedown", "cd", "help", "scr_autoscale", "togglezoom", "messagemode", "messagemode2", "menu_multiplayer"] {
         c.add(n, |_, _| {});
     }
+    c.add("cfg_unbindall", |_, _| {});
+    c.add("fog", cmd_fog);
+    // Host_Name_f / Host_Color_f: set the archived cvar, then tell the server.
+    c.add("name", |h, a| {
+        if a.argc() < 2 {
+            let n = h.server.core.cvars.by_name("_cl_name").map(|c| c.string.clone()).unwrap_or_default();
+            h.print(&format!("\"name\" is \"{n}\"\n"));
+            return;
+        }
+        let n = if a.argc() == 2 { a.argv(1).to_string() } else { a.args().to_string() };
+        h.server.core.cvars.set("_cl_name", &n);
+        h.send_userinfo(&format!("name \"{n}\""));
+    });
+    c.add("color", |h, a| {
+        if a.argc() < 2 {
+            let c = h.cv("_cl_color") as i32;
+            h.print(&format!("\"color\" is \"{} {}\"\ncolor <0-13> [0-13]\n", c >> 4, c & 15));
+            return;
+        }
+        let p = |i: usize| a.argv(i).parse::<f32>().unwrap_or(0.0) as i32 & 15;
+        let top = p(1).min(13);
+        let bottom = if a.argc() == 2 { top } else { p(2).min(13) };
+        h.server.core.cvars.set("_cl_color", &(top * 16 + bottom).to_string());
+        h.send_userinfo(&format!("color {top} {bottom}"));
+    });
     c.add("vid_apply", |h, _| h.vid_apply());
     c.add("vid_restart", |h, _| h.vid_apply());
     c.add("_vid_menu", |h, _| h.vid_menu());
@@ -1218,4 +1325,23 @@ fn register_commands(c: &mut Commands<Host>) {
         }
         h.drain_server_log();
     });
+}
+
+/// Fog_FogCommand_f. Fades (the time argument) apply instantly.
+fn cmd_fog(h: &mut Host, a: &Args) {
+    let f = h.cl.fog;
+    let n = |i: usize| qcore::cvar::q_atof(a.argv(i));
+    let (d, [r, g, b]) = match a.argc() {
+        2 | 3 => (n(1), f.color),
+        4 => (f.density, [n(1), n(2), n(3)]),
+        5 | 6 => (n(1), [n(2), n(3), n(4)]),
+        _ => {
+            h.print(&format!(
+                "usage:\n   fog <density>\n   fog <red> <green> <blue>\n   fog <density> <red> <green> <blue>\ncurrent values:\n   \"density\" is \"{}\"\n   \"red\"     is \"{}\"\n   \"green\"   is \"{}\"\n   \"blue\"    is \"{}\"\n",
+                f.density, f.color[0], f.color[1], f.color[2]
+            ));
+            return;
+        }
+    };
+    h.cl.fog = qclient::Fog { density: d.max(0.0), color: [r, g, b].map(|c| c.clamp(0.0, 1.0)), time: 0.0 };
 }

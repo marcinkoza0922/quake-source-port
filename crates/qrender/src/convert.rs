@@ -27,6 +27,36 @@ pub fn to_rgba(pal: &Palette, src: &[u8], transparent: Option<u8>) -> Vec<u8> {
     out
 }
 
+/// 2x2 box filter of an RGBA image (`w`x`h`, halved, min 1). With
+/// `alpha_weighted`, colour is averaged over texels with alpha only, so
+/// cut-out edges don't bleed black.
+pub fn downsample_rgba(src: &[u8], w: usize, h: usize, alpha_weighted: bool) -> Vec<u8> {
+    let (nw, nh) = ((w / 2).max(1), (h / 2).max(1));
+    if w == 0 || h == 0 || src.len() < w * h * 4 {
+        return vec![0; nw * nh * 4];
+    }
+    let mut out = Vec::with_capacity(nw * nh * 4);
+    for y in 0..nh {
+        for x in 0..nw {
+            let (mut rgb, mut a, mut wsum) = ([0u32; 3], 0u32, 0u32);
+            for (dx, dy) in [(0, 0), (1, 0), (0, 1), (1, 1)] {
+                let (sx, sy) = ((x * 2 + dx).min(w - 1), (y * 2 + dy).min(h - 1));
+                let p = &src[(sy * w + sx) * 4..][..4];
+                let pa = p[3] as u32;
+                let wt = if alpha_weighted { pa } else { 1 };
+                for c in 0..3 {
+                    rgb[c] += p[c] as u32 * wt;
+                }
+                a += pa;
+                wsum += wt;
+            }
+            let c = |v: u32| v.checked_div(wsum).unwrap_or(0) as u8;
+            out.extend_from_slice(&[c(rgb[0]), c(rgb[1]), c(rgb[2]), (a / 4) as u8]);
+        }
+    }
+    out
+}
+
 /// World texture mips: (base, fullbright) where base has fullbright texels
 /// zeroed and fullbright is `None` when the texture has none.
 pub fn world_texture(pal: &Palette, t: &MipTex) -> (Vec<Vec<u8>>, Option<Vec<Vec<u8>>>) {
@@ -38,7 +68,10 @@ pub fn world_texture(pal: &Palette, t: &MipTex) -> (Vec<Vec<u8>>, Option<Vec<Vec
             .is_some_and(|m| m.iter().any(|&i| is_fullbright(i) && !(fence && i == 255)));
     let mut base = Vec::new();
     let mut fb = Vec::new();
-    for m in &t.mips {
+    // Like ironwail, only mip 0 is used; smaller levels are built from its
+    // RGBA. Compiler-made mips can't be trusted: fence textures in the wild
+    // (MG1 {mgrate4) fill their transparent texels with an opaque colour.
+    if let Some(m) = t.mips.first() {
         let mut b = Vec::with_capacity(m.len() * 4);
         let mut f = Vec::with_capacity(if has_fb { m.len() * 4 } else { 0 });
         for &i in m {
@@ -60,12 +93,33 @@ pub fn world_texture(pal: &Palette, t: &MipTex) -> (Vec<Vec<u8>>, Option<Vec<Vec
         base.push(b);
         fb.push(f);
     }
+    let (w, h) = (t.width as usize, t.height as usize);
+    for lvl in 1..t.mips.len() {
+        let (pw, ph) = ((w >> (lvl - 1)).max(1), (h >> (lvl - 1)).max(1));
+        base.push(downsample_rgba(&base[lvl - 1], pw, ph, fence));
+        if has_fb {
+            fb.push(downsample_rgba(&fb[lvl - 1], pw, ph, false));
+        } else {
+            fb.push(Vec::new());
+        }
+    }
     (base, has_fb.then_some(fb))
 }
 
 /// Sky texture halves: (solid back layer, alpha front layer), each (w/2)×h.
-pub fn sky_layers(pal: &Palette, t: &MipTex) -> Option<(u32, u32, Vec<u8>, Vec<u8>)> {
+/// Quake64 skies (`q64`) are stacked vertically instead: front on top with a
+/// constant alpha of 128, back below (Sky_LoadTextureQ64).
+pub fn sky_layers(pal: &Palette, t: &MipTex, q64: bool) -> Option<(u32, u32, Vec<u8>, Vec<u8>)> {
     let m = t.mips.first()?;
+    if q64 {
+        let (w, h) = (t.width as usize, t.height as usize / 2);
+        if w == 0 || h == 0 || m.len() < w * h * 2 {
+            return None;
+        }
+        let alpha = m[..w * h].iter().flat_map(|&i| px(pal, i, 128)).collect();
+        let solid = m[w * h..w * h * 2].iter().flat_map(|&i| px(pal, i, 255)).collect();
+        return Some((w as u32, h as u32, solid, alpha));
+    }
     let (w, h) = (t.width as usize, t.height as usize);
     let hw = w / 2;
     if hw == 0 || m.len() < w * h {
@@ -212,4 +266,24 @@ pub fn group_index(intervals: &[f32], n: usize, time: f64) -> usize {
         .position(|&iv| iv as f64 > t)
         .unwrap_or(n - 1)
         .min(n - 1)
+}
+
+#[cfg(test)]
+mod downsample_tests {
+    use super::downsample_rgba;
+
+    #[test]
+    fn alpha_weighted_ignores_transparent_colour() {
+        // 2x2: one opaque red texel, three transparent (garbage colour).
+        let src = [255, 0, 0, 255, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0];
+        assert_eq!(downsample_rgba(&src, 2, 2, true), vec![255, 0, 0, 63]);
+        assert_eq!(downsample_rgba(&src, 2, 2, false), vec![63, 191, 0, 63]);
+        // fully transparent block stays transparent black
+        assert_eq!(downsample_rgba(&[0; 16], 2, 2, true), vec![0, 0, 0, 0]);
+        // short or empty input doesn't panic
+        assert_eq!(downsample_rgba(&[], 0, 4, true), vec![0; 8]);
+        assert_eq!(downsample_rgba(&[1; 8], 4, 4, true).len(), 16);
+        // odd sizes clamp at the edge
+        assert_eq!(downsample_rgba(&[10, 20, 30, 255], 1, 1, true), vec![10, 20, 30, 255]);
+    }
 }
