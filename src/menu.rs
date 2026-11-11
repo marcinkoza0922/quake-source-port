@@ -20,6 +20,7 @@ pub enum Screen {
     Quit,
     Mods,
     ModMaps,
+    Multiplayer,
 }
 
 /// Options sub-pages.
@@ -29,6 +30,10 @@ pub enum Page {
     Input,
     Graphics,
     Audio,
+    /// Multiplayer pages (reached from Screen::Multiplayer).
+    Join,
+    Host,
+    Setup,
 }
 
 const PAGES: [(&str, Page); 4] = [
@@ -50,7 +55,65 @@ enum Item {
     DisplayMode,
     Resolution,
     Apply,
+    /// Editable text cvar.
+    Text { label: &'static str, cvar: &'static str, max: usize },
+    /// Shirt (`high`) or pants nibble of `_cl_color`.
+    Color { label: &'static str, high: bool },
+    /// Map for a hosted game (`_mp_map`), from the host's map list.
+    Map,
+    Run { label: &'static str, run: Run },
+    /// A found LAN server (index into `Menu::servers`).
+    Server(usize),
 }
+
+#[derive(Clone, Copy, PartialEq, Eq)]
+enum Run {
+    Connect,
+    Search,
+    Start,
+}
+
+/// A server answering the LAN search.
+#[derive(Clone, Debug, PartialEq)]
+pub struct ServerEntry {
+    pub address: String,
+    pub hostname: String,
+    pub map: String,
+    pub players: u8,
+    pub max_players: u8,
+}
+
+const JOIN: &[Item] = &[
+    Item::Text { label: "Address", cvar: "_mp_address", max: 40 },
+    Item::Run { label: "Connect", run: Run::Connect },
+    Item::Run { label: "Search LAN", run: Run::Search },
+];
+
+const PLAYERS: &[(&str, f32)] = &[("2", 2.0), ("3", 3.0), ("4", 4.0), ("6", 6.0), ("8", 8.0), ("12", 12.0), ("16", 16.0)];
+const GAMETYPE: &[(&str, f32)] = &[("deathmatch", 0.0), ("cooperative", 1.0)];
+const TEAMPLAY: &[(&str, f32)] = &[("off", 0.0), ("no team damage", 1.0), ("team damage", 2.0)];
+const SKILL: &[(&str, f32)] = &[("easy", 0.0), ("normal", 1.0), ("hard", 2.0), ("nightmare", 3.0)];
+const FRAGS: &[(&str, f32)] =
+    &[("none", 0.0), ("10", 10.0), ("20", 20.0), ("30", 30.0), ("50", 50.0), ("75", 75.0), ("100", 100.0)];
+const MINUTES: &[(&str, f32)] =
+    &[("none", 0.0), ("5", 5.0), ("10", 10.0), ("15", 15.0), ("20", 20.0), ("30", 30.0), ("45", 45.0), ("60", 60.0)];
+
+const HOST: &[Item] = &[
+    Item::Choice { label: "Max Players", cvar: "_mp_maxplayers", choices: PLAYERS },
+    Item::Choice { label: "Game Type", cvar: "_mp_coop", choices: GAMETYPE },
+    Item::Choice { label: "Teamplay", cvar: "_mp_teamplay", choices: TEAMPLAY },
+    Item::Choice { label: "Skill", cvar: "_mp_skill", choices: SKILL },
+    Item::Choice { label: "Frag Limit", cvar: "_mp_fraglimit", choices: FRAGS },
+    Item::Choice { label: "Time Limit", cvar: "_mp_timelimit", choices: MINUTES },
+    Item::Map,
+    Item::Run { label: "Start Game", run: Run::Start },
+];
+
+const SETUP: &[Item] = &[
+    Item::Text { label: "Name", cvar: "_cl_name", max: 15 },
+    Item::Color { label: "Shirt Color", high: true },
+    Item::Color { label: "Pants Color", high: false },
+];
 
 const fn slider(label: &'static str, cvar: &'static str, min: f32, max: f32, step: f32) -> Item {
     Item::Slider { label, cvar, min, max, step, invert: false }
@@ -119,7 +182,23 @@ fn page_items(p: Page) -> &'static [Item] {
         Page::Input => INPUT,
         Page::Graphics => GRAPHICS,
         Page::Audio => AUDIO,
+        Page::Join => JOIN,
+        Page::Host => HOST,
+        Page::Setup => SETUP,
     }
+}
+
+fn page_name(p: Page) -> &'static str {
+    match p {
+        Page::Join => "Join Game",
+        Page::Host => "Host Game",
+        Page::Setup => "Player Setup",
+        _ => PAGES.iter().find(|x| x.1 == p).map_or("", |x| x.0),
+    }
+}
+
+fn is_net_page(p: Page) -> bool {
+    matches!(p, Page::Join | Page::Host | Page::Setup)
 }
 
 /// Every cvar the options pages edit (the host marks them archived).
@@ -161,6 +240,12 @@ pub struct Menu {
     /// Open dropdown on an options page.
     drop: Option<Drop>,
     pub mods: ModMenu,
+    mp_cursor: usize,
+    /// Maps offered on the Host Game page (filled by the host).
+    pub net_maps: Vec<qui::mods::MapInfo>,
+    /// LAN search results and whether a search is running.
+    pub servers: Vec<ServerEntry>,
+    pub searching: bool,
 }
 
 /// Open dropdown list: the page row it belongs to, highlighted entry and
@@ -211,6 +296,10 @@ impl Menu {
             mouse: None,
             drop: None,
             mods: ModMenu::default(),
+            mp_cursor: 0,
+            net_maps: Vec::new(),
+            servers: Vec::new(),
+            searching: false,
         }
     }
 
@@ -220,6 +309,102 @@ impl Menu {
 
     pub fn set_mod_maps(&mut self, maps: Vec<qui::mods::MapInfo>, stats: qui::stats::Stats) {
         self.mods.set_maps(maps, stats);
+    }
+
+    /// `menu_multiplayer [join|host|setup]`.
+    pub fn open_multiplayer(&mut self, page: &str) -> Option<Action> {
+        let p = match page {
+            "join" => Page::Join,
+            "host" => Page::Host,
+            "setup" => Page::Setup,
+            _ => {
+                self.open(Screen::Multiplayer);
+                return None;
+            }
+        };
+        self.open(Screen::OptionsPage(p));
+        self.opt_cursor = 0;
+        (p == Page::Host).then(|| Action::Command("_netmaps\n".into()))
+    }
+
+    /// Rows on a page: its static items, plus found servers on Join.
+    fn page_len(&self, p: Page) -> usize {
+        page_items(p).len() + if p == Page::Join { self.servers.len() } else { 0 }
+    }
+
+    fn page_item(&self, p: Page, i: usize) -> Item {
+        let items = page_items(p);
+        items.get(i).copied().unwrap_or(Item::Server(i.saturating_sub(items.len())))
+    }
+
+    /// Typed text goes to a text field under the cursor.
+    pub fn text(&mut self, ch: char, cv: &mut Cvars) {
+        let Screen::OptionsPage(p) = self.screen else { return };
+        if self.drop.is_some() || !(' '..='~').contains(&ch) || ch == '"' || ch == ';' {
+            return;
+        }
+        if let Item::Text { cvar, max, .. } = self.page_item(p, self.opt_cursor) {
+            let mut v = cv.by_name(cvar).map_or(String::new(), |c| c.string.clone());
+            if v.len() < max {
+                v.push(ch);
+                cv.set(cvar, &v);
+            }
+        }
+    }
+
+    /// Commands that apply Player Setup (name and colours).
+    fn setup_commands(cv: &Cvars) -> String {
+        let name = cv.by_name("_cl_name").map_or("player", |c| c.string.as_str());
+        let c = cv.value_of("_cl_color") as i32;
+        format!("name \"{name}\"\ncolor {} {}\n", c >> 4, c & 15)
+    }
+
+    /// `_mp_map`, or a sensible default from the list (a dm map if any).
+    fn host_map(&self, cv: &Cvars) -> Option<String> {
+        let cur = cv.by_name("_mp_map").map_or("", |c| c.string.as_str());
+        if self.net_maps.iter().any(|m| m.name == cur) {
+            return Some(cur.to_string());
+        }
+        let m = self.net_maps.iter().find(|m| m.name.starts_with("dm")).or(self.net_maps.first())?;
+        Some(m.name.clone())
+    }
+
+    fn run(&mut self, run: Run, cv: &mut Cvars, out: &mut Vec<Action>) {
+        match run {
+            Run::Connect => {
+                let a = cv.by_name("_mp_address").map_or(String::new(), |c| c.string.trim().to_string());
+                if a.is_empty() {
+                    return;
+                }
+                self.screen = Screen::None;
+                out.push(Action::Close);
+                out.push(Action::Command(format!("connect {a}\n")));
+            }
+            Run::Search => {
+                if !self.searching {
+                    out.push(Action::Command("slist\n".into()));
+                }
+            }
+            Run::Start => {
+                let Some(map) = self.host_map(cv) else { return };
+                let n = |c: &str| cv.value_of(c) as i32;
+                let coop = n("_mp_coop");
+                let cmd = format!(
+                    "disconnect\nmaxplayers {}\ncoop {coop}\ndeathmatch {}\nteamplay {}\nskill {}\nfraglimit {}\ntimelimit {}\nmap {map}\n",
+                    n("_mp_maxplayers").max(2),
+                    (coop == 0) as i32,
+                    n("_mp_teamplay"),
+                    n("_mp_skill"),
+                    n("_mp_fraglimit"),
+                    n("_mp_timelimit"),
+                );
+                cv.set("_mp_map", &map);
+                self.screen = Screen::None;
+                out.push(Action::Close);
+                out.push(Action::Command(cmd));
+            }
+        }
+        out.push(Action::Sound("misc/menu2.wav"));
     }
 
     pub fn active(&self) -> bool {
@@ -244,7 +429,8 @@ impl Menu {
             Screen::SinglePlayer => row(cy + 32.0, 20.0, 3, cx + 54.0, cx + 312.0),
             Screen::Load | Screen::Save => row(cy + 32.0, 8.0, MAX_SAVEGAMES, cx + 8.0, cx + 312.0),
             Screen::Options => row(ROW0, ROW_H, PAGES.len(), PANEL_X, PANEL_X + PANEL_W),
-            Screen::OptionsPage(p) => row(PAGE_ROW0, ROW_H, page_items(p).len(), PANEL_X, PANEL_X + PANEL_W),
+            Screen::OptionsPage(p) => row(PAGE_ROW0, ROW_H, self.page_len(p), PANEL_X, PANEL_X + PANEL_W),
+            Screen::Multiplayer => row(cy + 32.0, 20.0, 3, cx + 54.0, cx + 312.0),
             Screen::Quit => QUIT_BUTTONS
                 .iter()
                 .position(|&bx| x >= bx && x < bx + QUIT_BTN.0 && y >= QUIT_BTN_Y && y < QUIT_BTN_Y + QUIT_BTN.1),
@@ -258,6 +444,7 @@ impl Menu {
         match self.screen {
             Screen::Main => Some(&mut self.main_cursor),
             Screen::SinglePlayer => Some(&mut self.sp_cursor),
+            Screen::Multiplayer => Some(&mut self.mp_cursor),
             Screen::Load | Screen::Save => Some(&mut self.load_cursor),
             Screen::Options => Some(&mut self.page_cursor),
             Screen::OptionsPage(_) => Some(&mut self.opt_cursor),
@@ -291,7 +478,8 @@ impl Menu {
     pub fn key(&mut self, key: i32, cv: &mut Cvars, server_active: bool) -> Vec<Action> {
         let mut out = Vec::new();
         if let (Some(d), Screen::OptionsPage(p)) = (self.drop, self.screen) {
-            self.drop_key(key, d, page_items(p)[d.item], cv, &mut out);
+            let item = self.page_item(p, d.item);
+            self.drop_key(key, d, item, cv, &mut out);
             return out;
         }
         // left click acts on the item under the pointer, never on a stale cursor
@@ -302,7 +490,7 @@ impl Menu {
                 *c = i;
             }
             if let Screen::OptionsPage(p) = self.screen
-                && let Item::Slider { cvar, min, max, step, invert, .. } = page_items(p)[i]
+                && let Item::Slider { cvar, min, max, step, invert, .. } = self.page_item(p, i)
                 && pos.0 >= SLIDER_X.0 - 8.0
                 && pos.0 < SLIDER_X.1 + 8.0
             {
@@ -350,6 +538,7 @@ impl Menu {
                     out.push(Action::Sound("misc/menu2.wav"));
                     match self.main_cursor {
                         0 => self.screen = Screen::SinglePlayer,
+                        1 => self.screen = Screen::Multiplayer,
                         2 => self.screen = Screen::Options,
                         4 => self.open(Screen::Quit),
                         5 => {
@@ -385,6 +574,22 @@ impl Menu {
                             }
                         }
                     }
+                }
+            }
+            Screen::Multiplayer => {
+                if back {
+                    self.screen = Screen::Main;
+                    return out;
+                }
+                wrap(&mut self.mp_cursor, 3, &mut out);
+                if enter {
+                    out.push(Action::Sound("misc/menu2.wav"));
+                    let p = [Page::Join, Page::Host, Page::Setup][self.mp_cursor];
+                    if p == Page::Host {
+                        out.push(Action::Command("_netmaps\n".into()));
+                    }
+                    self.opt_cursor = 0;
+                    self.screen = Screen::OptionsPage(p);
                 }
             }
             Screen::Load | Screen::Save => {
@@ -426,12 +631,41 @@ impl Menu {
             }
             Screen::OptionsPage(p) => {
                 if back {
-                    self.screen = Screen::Options;
+                    if p == Page::Setup {
+                        out.push(Action::Command(Self::setup_commands(cv)));
+                    }
+                    self.screen = if is_net_page(p) { Screen::Multiplayer } else { Screen::Options };
                     return out;
                 }
-                let items = page_items(p);
-                wrap(&mut self.opt_cursor, items.len(), &mut out);
-                let item = items[self.opt_cursor];
+                let n = self.page_len(p);
+                self.opt_cursor = self.opt_cursor.min(n - 1);
+                wrap(&mut self.opt_cursor, n, &mut out);
+                let item = self.page_item(p, self.opt_cursor);
+                match item {
+                    Item::Text { cvar, .. } => {
+                        if key == K_BACKSPACE {
+                            let mut v = cv.by_name(cvar).map_or(String::new(), |c| c.string.clone());
+                            v.pop();
+                            cv.set(cvar, &v);
+                        } else if enter && cvar == "_mp_address" {
+                            self.run(Run::Connect, cv, &mut out);
+                        }
+                        return out;
+                    }
+                    Item::Run { run, .. } if enter => {
+                        self.run(run, cv, &mut out);
+                        return out;
+                    }
+                    Item::Server(k) if enter => {
+                        if let Some(sv) = self.servers.get(k) {
+                            cv.set("_mp_address", &sv.address.clone());
+                            self.run(Run::Connect, cv, &mut out);
+                        }
+                        return out;
+                    }
+                    Item::Run { .. } | Item::Server(_) => return out,
+                    _ => {}
+                }
                 if enter && self.options(item).len() > 2 {
                     let cur = self.option_index(item, cv);
                     let mut d = Drop { item: self.opt_cursor, cursor: cur, scroll: 0 };
@@ -441,7 +675,7 @@ impl Menu {
                     return out;
                 }
                 let dir = if left { -1 } else if right || enter { 1 } else { 0 };
-                if dir != 0 && self.adjust(items[self.opt_cursor], dir, enter, cv, &mut out) {
+                if dir != 0 && self.adjust(item, dir, enter, cv, &mut out) {
                     out.push(Action::Sound("misc/menu3.wav"));
                 }
             }
@@ -509,6 +743,23 @@ impl Menu {
                 };
                 self.pending_res = self.resolutions[i as usize];
             }
+            Item::Color { high, .. } => {
+                let c = cv.value_of("_cl_color") as i32;
+                let (mut t, mut b) = (c >> 4, c & 15);
+                let v = if high { &mut t } else { &mut b };
+                *v = (*v + dir).rem_euclid(14);
+                cv.set("_cl_color", &(t * 16 + b).to_string());
+            }
+            Item::Map => {
+                let n = self.net_maps.len() as i32;
+                if n == 0 {
+                    return false;
+                }
+                let cur = self.host_map(cv).and_then(|m| self.net_maps.iter().position(|x| x.name == m)).unwrap_or(0);
+                let i = (cur as i32 + dir).rem_euclid(n) as usize;
+                cv.set("_mp_map", &self.net_maps[i].name.clone());
+            }
+            Item::Text { .. } | Item::Run { .. } | Item::Server(_) => return false,
             Item::Apply => {
                 if !enter {
                     return false;
@@ -528,6 +779,14 @@ impl Menu {
             Item::Choice { cvar, choices, .. } => choices[..self.choice_count(cvar, choices)].iter().map(|c| c.0.to_string()).collect(),
             Item::DisplayMode => MODES.iter().map(|m| m.to_string()).collect(),
             Item::Resolution if self.pending_mode != 2 => self.resolutions.iter().map(|(w, h)| format!("{w}x{h}")).collect(),
+            Item::Map => self
+                .net_maps
+                .iter()
+                .map(|m| {
+                    let t = format!("{:<8} {}", m.name, m.title);
+                    t.chars().take(36).collect::<String>().trim_end().to_string()
+                })
+                .collect(),
             _ => Vec::new(),
         }
     }
@@ -539,6 +798,7 @@ impl Menu {
             Item::Choice { cvar, choices, .. } => nearest_choice(cv.value_of(cvar), &choices[..self.choice_count(cvar, choices)]),
             Item::DisplayMode => self.pending_mode.min(MODES.len() - 1),
             Item::Resolution => self.resolutions.iter().position(|&r| r == self.pending_res).unwrap_or(0),
+            Item::Map => self.host_map(cv).and_then(|m| self.net_maps.iter().position(|x| x.name == m)).unwrap_or(0),
             _ => 0,
         }
     }
@@ -551,6 +811,11 @@ impl Menu {
             Item::Choice { cvar, choices, .. } => set_num(cv, cvar, choices[i].1),
             Item::DisplayMode => self.pending_mode = i,
             Item::Resolution => self.pending_res = self.resolutions[i],
+            Item::Map => {
+                if let Some(m) = self.net_maps.get(i) {
+                    cv.set("_mp_map", &m.name.clone());
+                }
+            }
             _ => {}
         }
     }
@@ -569,7 +834,7 @@ impl Menu {
     /// Dropdown entry under the point.
     fn drop_at(&self, (x, y): (f32, f32), d: Drop) -> Option<usize> {
         let Screen::OptionsPage(p) = self.screen else { return None };
-        let opts = self.options(page_items(p)[d.item]);
+        let opts = self.options(self.page_item(p, d.item));
         let (bx, by, bw, vis) = self.drop_geom(d, &opts);
         let k = ((y - by - 1.0) / ROW_H).floor();
         (x >= bx && x < bx + bw && k >= 0.0 && (k as usize) < vis).then(|| d.scroll + k as usize)
@@ -679,6 +944,15 @@ impl Menu {
                 let d = dot(pic);
                 c.pic(54.0, 32.0 + self.sp_cursor as f32 * 20.0, d);
             }
+            Screen::Multiplayer => {
+                let p = pic("gfx/qplaque.lmp");
+                c.pic(16.0, 4.0, p);
+                title(c, pic, "gfx/p_multi.lmp");
+                let p = pic("gfx/mp_menu.lmp");
+                c.pic(72.0, 32.0, p);
+                let d = dot(pic);
+                c.pic(54.0, 32.0 + self.mp_cursor as f32 * 20.0, d);
+            }
             Screen::Load | Screen::Save => {
                 title(c, pic, if self.screen == Screen::Load { "gfx/p_load.lmp" } else { "gfx/p_save.lmp" });
                 for (i, s) in self.saves.iter().enumerate() {
@@ -702,17 +976,33 @@ impl Menu {
             Screen::OptionsPage(page) => {
                 let p = pic("gfx/qplaque.lmp");
                 c.pic(PANEL_X - 40.0, 16.0, p);
-                title_c(c, pic, "gfx/p_option.lmp");
-                let name = PAGES.iter().find(|x| x.1 == page).map_or("", |x| x.0);
+                title_c(c, pic, if is_net_page(page) { "gfx/p_multi.lmp" } else { "gfx/p_option.lmp" });
+                let name = page_name(page);
                 gold(c, ((640.0 - name.len() as f32 * 8.0) / 2.0).floor(), PAGE_ROW0 - 16.0, name);
-                let items = page_items(page);
-                panel(c, PAGE_ROW0, items.len());
+                let n = self.page_len(page);
+                panel(c, PAGE_ROW0, n);
                 highlight(c, PAGE_ROW0 + self.opt_cursor as f32 * ROW_H);
-                for (i, item) in items.iter().enumerate() {
-                    self.draw_item(c, cv, *item, PAGE_ROW0 + i as f32 * ROW_H + 1.0);
+                for i in 0..n {
+                    let blink = (realtime * 4.0) as i64 & 1 == 0 && i == self.opt_cursor;
+                    self.draw_item(c, cv, self.page_item(page, i), PAGE_ROW0 + i as f32 * ROW_H + 1.0, blink);
+                }
+                if page == Page::Setup {
+                    // M_Setup_Draw: the player in a box, in the chosen colours.
+                    let v = cv.value_of("_cl_color") as i32;
+                    let y0 = PAGE_ROW0 + n as f32 * ROW_H + 12.0;
+                    let bx = pic("gfx/bigbox.lmp");
+                    let bw = bx.map_or(64.0, |b| b.1 as f32);
+                    c.pic(((640.0 - bw) / 2.0).floor(), y0, bx);
+                    let p = pic(&format!("gfx/menuplyr.lmp#{},{}", (v >> 4) & 15, v & 15));
+                    let pw = p.map_or(48.0, |p| p.1 as f32);
+                    c.pic(((640.0 - pw) / 2.0).floor(), y0 + 8.0, p);
+                }
+                if page == Page::Join && self.servers.is_empty() && !self.searching {
+                    let s = "no servers found yet";
+                    c.string(((640.0 - s.len() as f32 * 8.0) / 2.0).floor(), PAGE_ROW0 + n as f32 * ROW_H + 8.0, s);
                 }
                 if let Some(d) = self.drop {
-                    self.draw_drop(c, cv, items[d.item], d);
+                    self.draw_drop(c, cv, self.page_item(page, d.item), d);
                 }
             }
             Screen::Quit => {
@@ -767,7 +1057,7 @@ impl Menu {
         }
     }
 
-    fn draw_item(&self, c: &mut Canvas, cv: &Cvars, item: Item, y: f32) {
+    fn draw_item(&self, c: &mut Canvas, cv: &Cvars, item: Item, y: f32, blink: bool) {
         let label = |c: &mut Canvas, l: &str| c.string(LABEL_R - l.len() as f32 * 8.0, y, l);
         // values with a dropdown get a combo box
         if self.options(item).len() > 2 {
@@ -812,6 +1102,46 @@ impl Menu {
                     format!("{}x{}", self.pending_res.0, self.pending_res.1)
                 };
                 c.string(VALUE_X, y, &s);
+            }
+            Item::Text { label: l, cvar, max } => {
+                label(c, l);
+                let v = cv.by_name(cvar).map_or("", |c| c.string.as_str());
+                // fits inside the panel: 20 visible characters at most
+                let w = (max.min(20) as f32 * 8.0 + 14.0).min(PANEL_X + PANEL_W - VALUE_X - 4.0);
+                c.fill(VALUE_X - 3.0, y - 1.0, w, ROW_H, [0.0, 0.0, 0.0, 0.5]);
+                let shown: String = v.chars().skip(v.len().saturating_sub(20)).collect();
+                c.string(VALUE_X, y, &shown);
+                if blink {
+                    c.ch(VALUE_X + shown.len() as f32 * 8.0, y, 11);
+                }
+            }
+            Item::Color { label: l, high } => {
+                label(c, l);
+                let v = cv.value_of("_cl_color") as i32;
+                let k = if high { v >> 4 } else { v & 15 }.clamp(0, 13) as usize;
+                let [r, g, b] = crate::draw::PLAYER_COLORS[k].map(|x| x as f32 / 255.0);
+                c.fill(VALUE_X, y - 1.0, 40.0, ROW_H - 1.0, [r, g, b, 1.0]);
+                c.frame(VALUE_X, y - 1.0, 40.0, ROW_H - 1.0, BORDER);
+                c.string(VALUE_X + 48.0, y, &k.to_string());
+            }
+            Item::Map => {
+                label(c, "Map");
+                let m = self.host_map(cv).unwrap_or_else(|| "(none)".into());
+                let t = self.net_maps.iter().find(|x| x.name == m).map_or(String::new(), |x| x.title.clone());
+                let s: String = format!("{m} {t}").chars().take(13).collect();
+                c.string(VALUE_X, y, &s);
+            }
+            Item::Run { label: l, run } => {
+                let l = if run == Run::Search && self.searching { "Searching..." } else { l };
+                gold(c, ((640.0 - l.len() as f32 * 8.0) / 2.0).floor(), y, l);
+            }
+            Item::Server(k) => {
+                if let Some(s) = self.servers.get(k) {
+                    let name: String = s.hostname.chars().take(20).collect();
+                    label(c, &name);
+                    let m: String = s.map.chars().take(10).collect();
+                    c.string(VALUE_X, y, &format!("{m:<10} {}/{}", s.players, s.max_players));
+                }
             }
             Item::Apply => {
                 let dirty = self.display_dirty(cv);
@@ -943,5 +1273,103 @@ mod quit_tests {
         m.key(K_RIGHTARROW, &mut cv, false);
         assert!(!quits(&m.key(K_ENTER, &mut cv, false)));
         assert_eq!(m.screen, Screen::Main);
+    }
+}
+
+#[cfg(test)]
+mod multiplayer_tests {
+    use super::*;
+
+    fn cvars() -> Cvars {
+        let mut cv = Cvars::default();
+        for (n, d) in [
+            ("_cl_name", "player"),
+            ("_cl_color", "0"),
+            ("_mp_address", ""),
+            ("_mp_maxplayers", "8"),
+            ("_mp_coop", "0"),
+            ("_mp_teamplay", "0"),
+            ("_mp_skill", "1"),
+            ("_mp_fraglimit", "0"),
+            ("_mp_timelimit", "0"),
+            ("_mp_map", ""),
+        ] {
+            cv.register(n, d, 0);
+        }
+        cv
+    }
+
+    fn commands(acts: &[Action]) -> String {
+        acts.iter().filter_map(|a| if let Action::Command(c) = a { Some(c.as_str()) } else { None }).collect()
+    }
+
+    #[test]
+    fn join_by_typed_address() {
+        let mut cv = cvars();
+        let mut m = Menu::new();
+        m.open(Screen::Main);
+        m.main_cursor = 1;
+        m.key(K_ENTER, &mut cv, false);
+        assert_eq!(m.screen, Screen::Multiplayer);
+        m.key(K_ENTER, &mut cv, false);
+        assert_eq!(m.screen, Screen::OptionsPage(Page::Join));
+        for ch in "10.0.0.9:x".chars() {
+            m.text(ch, &mut cv);
+        }
+        m.key(K_BACKSPACE, &mut cv, false);
+        m.text('7', &mut cv);
+        let acts = m.key(K_ENTER, &mut cv, false);
+        assert_eq!(commands(&acts), "connect 10.0.0.9:7\n");
+        assert_eq!(m.screen, Screen::None);
+    }
+
+    #[test]
+    fn join_found_server_and_search() {
+        let mut cv = cvars();
+        let mut m = Menu::new();
+        m.open_multiplayer("join");
+        m.opt_cursor = 2;
+        assert_eq!(commands(&m.key(K_ENTER, &mut cv, false)), "slist\n");
+        m.servers = vec![ServerEntry { address: "192.168.1.5:26000".into(), hostname: "h".into(), map: "dm3".into(), players: 1, max_players: 8 }];
+        m.key(K_DOWNARROW, &mut cv, false);
+        assert!(matches!(m.page_item(Page::Join, m.opt_cursor), Item::Server(0)));
+        assert_eq!(commands(&m.key(K_ENTER, &mut cv, false)), "connect 192.168.1.5:26000\n");
+    }
+
+    #[test]
+    fn host_game_start() {
+        let mut cv = cvars();
+        let mut m = Menu::new();
+        assert!(m.open_multiplayer("host").is_some());
+        m.net_maps = ["e1m1", "dm1", "dm2"].iter().map(|n| qui::mods::MapInfo { name: n.to_string(), title: String::new() }).collect();
+        m.key(K_RIGHTARROW, &mut cv, false); // 8 -> 12 players
+        m.opt_cursor = 4;
+        m.key(K_RIGHTARROW, &mut cv, false); // frag limit 10
+        m.opt_cursor = 6;
+        m.key(K_RIGHTARROW, &mut cv, false); // dm1 (default) -> dm2
+        m.opt_cursor = 7;
+        let c = commands(&m.key(K_ENTER, &mut cv, false));
+        assert_eq!(c, "disconnect\nmaxplayers 12\ncoop 0\ndeathmatch 1\nteamplay 0\nskill 1\nfraglimit 10\ntimelimit 0\nmap dm2\n");
+        assert_eq!(cv.by_name("_mp_map").unwrap().string, "dm2");
+    }
+
+    #[test]
+    fn setup_applies_name_and_colors_on_back() {
+        let mut cv = cvars();
+        let mut m = Menu::new();
+        m.open_multiplayer("setup");
+        for _ in 0..6 {
+            m.key(K_BACKSPACE, &mut cv, false);
+        }
+        for ch in "Ranger".chars() {
+            m.text(ch, &mut cv);
+        }
+        m.opt_cursor = 1;
+        m.key(K_LEFTARROW, &mut cv, false); // shirt 0 -> 13
+        m.opt_cursor = 2;
+        m.key(K_RIGHTARROW, &mut cv, false); // pants 0 -> 1
+        let c = commands(&m.key(K_ESCAPE, &mut cv, false));
+        assert_eq!(c, "name \"Ranger\"\ncolor 13 1\n");
+        assert_eq!(m.screen, Screen::Multiplayer);
     }
 }

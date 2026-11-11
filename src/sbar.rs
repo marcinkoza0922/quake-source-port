@@ -481,6 +481,34 @@ pub fn intermission(c: &mut Canvas, pic: &mut PicFn, cl: &ClientState) {
     c.reset_origin();
 }
 
+/// Sbar_DeathmatchOverlay, with QuakeSpasm's ping column: players by
+/// frags, each with a shirt/pants box, the viewer's row bracketed.
+pub fn deathmatch_overlay(c: &mut Canvas, pic: &mut PicFn, cl: &ClientState) {
+    c.center_320x200();
+    let p = pic("gfx/ranking.lmp");
+    if let Some((_, w, _)) = p {
+        c.pic(((320 - w as i32) / 2) as f32, 8.0, p);
+    }
+    let mut order: Vec<usize> = (0..cl.scores.len()).filter(|&k| !cl.scores[k].name.is_empty()).collect();
+    order.sort_by_key(|&k| std::cmp::Reverse(cl.scores[k].frags));
+    let me = cl.viewentity.wrapping_sub(1);
+    let mut y = 40.0;
+    for k in order {
+        let s = &cl.scores[k];
+        c.string(40.0, y, &format!("{:4}", s.ping.clamp(0, 9999)));
+        c.fill(80.0, y, 40.0, 4.0, crate::draw::player_color((s.colors >> 4) & 15));
+        c.fill(80.0, y + 4.0, 40.0, 4.0, crate::draw::player_color(s.colors & 15));
+        c.string(88.0, y, &format!("{:3}", s.frags));
+        if k == me {
+            c.ch(80.0, y, 16);
+            c.ch(112.0, y, 17);
+        }
+        c.string(128.0, y, &s.name);
+        y += 10.0;
+    }
+    c.reset_origin();
+}
+
 /// Sbar_FinaleOverlay.
 pub fn finale(c: &mut Canvas, pic: &mut PicFn) {
     let p = pic("gfx/finale.lmp");

@@ -88,6 +88,15 @@ const HOST_CVARS: &[(&str, &str, u32)] = &[
     ("sv_aimassist", "0", CVAR_SERVERINFO),
     ("_cl_name", "player", CVAR_ARCHIVE),
     ("_cl_color", "0", CVAR_ARCHIVE),
+    // Multiplayer menu (Join / Host Game).
+    ("_mp_address", "localhost", CVAR_ARCHIVE),
+    ("_mp_maxplayers", "8", CVAR_ARCHIVE),
+    ("_mp_coop", "0", CVAR_ARCHIVE),
+    ("_mp_teamplay", "0", CVAR_ARCHIVE),
+    ("_mp_skill", "1", CVAR_ARCHIVE),
+    ("_mp_fraglimit", "0", CVAR_ARCHIVE),
+    ("_mp_timelimit", "0", CVAR_ARCHIVE),
+    ("_mp_map", "", CVAR_ARCHIVE),
     ("scr_showfps", "0", CVAR_ARCHIVE),
     ("cl_startdemos", "1", CVAR_ARCHIVE),
     ("viewsize", "100", CVAR_ARCHIVE),
@@ -209,6 +218,22 @@ pub struct Host {
     demo_head_signon: u32,
     /// timedemo: frame count and wall-clock start at the second frame.
     timedemo: Option<(u32, std::time::Instant)>,
+    /// UDP listen socket while maxplayers > 1 (listen or dedicated server).
+    net_server: Option<crate::net::NetServer>,
+    /// Connection to a remote server (`connect`).
+    net_client: Option<crate::net::NetClient>,
+    /// Last server address, for `reconnect`.
+    last_server: Option<std::net::SocketAddr>,
+    /// UDP port to listen on (`-port`, `port`).
+    pub net_port: u16,
+    /// `-dedicated`: no local client.
+    pub dedicated: bool,
+    /// Remote scoreboard pings: next `ping` request time, and the reply
+    /// deadline while one is expected (cl.expectingpingtimes).
+    ping_next: f64,
+    ping_expect: Option<f64>,
+    /// Running `slist`.
+    lan_search: Option<crate::net::LanSearch>,
 }
 
 impl CmdContext for Host {
@@ -289,6 +314,14 @@ impl Host {
             demo_head: Vec::new(),
             demo_head_signon: 0,
             timedemo: None,
+            net_server: None,
+            net_client: None,
+            last_server: None,
+            net_port: crate::net::DEFAULT_PORT,
+            dedicated: false,
+            lan_search: None,
+            ping_next: 0.0,
+            ping_expect: None,
         };
         qinput::register_commands(&mut h.cmds);
         register_commands(&mut h.cmds);
@@ -307,6 +340,12 @@ impl Host {
 
     /// Send a name/color change to the server for the local client.
     fn send_userinfo(&mut self, cmd: &str) {
+        if self.net_client.is_some() {
+            if self.cl.signon > 0 {
+                self.cl.send_string_cmd(cmd);
+            }
+            return;
+        }
         if let Some(i) = self.local.filter(|_| self.server.active()) {
             self.server.client_command(i, cmd);
             self.drain_server_log();
@@ -331,6 +370,13 @@ impl Host {
         let known = self.cmds.exists(&name) || self.cmds.alias(&name).is_some() || self.server.core.cvars.find(&name).is_some();
         if known {
             qcore::cmd::execute_string(self, line);
+        } else if self.net_client.is_some() && !matches!(name.as_str(), "map" | "maxplayers" | "restart" | "changelevel") {
+            // Cmd_ForwardToServer. A typed `ping` prints its reply.
+            if name == "ping" {
+                self.ping_expect = None;
+                self.ping_next = self.realtime + 3.0;
+            }
+            self.cl.send_string_cmd(line);
         } else if self.server.has_command(&name) {
             self.server.command(line);
         } else if let Some(i) = self.local.filter(|_| self.server.active()) {
@@ -364,7 +410,7 @@ impl Host {
         // Most server log lines are also sent to the client (bprint, sprint);
         // echo only diagnostics unless `developer` is set.
         let log = std::mem::take(&mut self.server.core.log);
-        let dev = self.cv("developer") != 0.0;
+        let dev = self.dedicated || self.cv("developer") != 0.0;
         for s in log {
             if dev || ["rror", "ouldn't", "not ", "nknown", "valid", "usage", "<"].iter().any(|k| s.contains(k)) {
                 let s = self.server.core.loc.translate(&s);
@@ -520,6 +566,7 @@ impl Host {
                         }
                     }
                     Some(Routed::Text { ch, dest: KeyDest::Console }) => self.con.text(ch),
+                    Some(Routed::Text { ch, dest: KeyDest::Menu }) => self.menu.text(ch, &mut self.server.core.cvars),
                     Some(Routed::Key { key, dest: KeyDest::Menu }) => {
                         let active = self.server.active();
                         let acts = self.menu.key(key, &mut self.server.core.cvars, active);
@@ -540,6 +587,14 @@ impl Host {
 
     /// Connects the local client when a server is running without one.
     fn check_local_client(&mut self) {
+        self.update_listen();
+        if self.net_client.is_some() {
+            if !self.server.active() {
+                return;
+            }
+            // A local `map` ends the remote game.
+            self.disconnect_client();
+        }
         if !self.server.active() {
             if self.demo.is_some() {
                 return;
@@ -549,7 +604,7 @@ impl Host {
             }
             return;
         }
-        let ok = self.local.is_some_and(|i| self.server.core.clients.get(i).is_some_and(|c| c.active));
+        let ok = self.dedicated || self.local.is_some_and(|i| self.server.core.clients.get(i).is_some_and(|c| c.active));
         if !ok {
             // Host_Map_f: a local game stops demo playback and the demo loop.
             if self.demo.take().is_some() {
@@ -570,6 +625,9 @@ impl Host {
     }
 
     fn disconnect_client(&mut self) {
+        if let Some(mut n) = self.net_client.take() {
+            n.disconnect(self.realtime);
+        }
         if self.demo.take().is_some() {
             self.finish_timedemo();
         }
@@ -591,6 +649,11 @@ impl Host {
         let Some(i) = self.local else { return };
         let mut msgs = self.server.take_reliable(i);
         msgs.extend(self.server.take_datagrams(i));
+        self.deliver(msgs);
+    }
+
+    /// Parse server messages (loopback or network) into the client.
+    fn deliver(&mut self, msgs: Vec<Vec<u8>>) {
         for m in msgs {
             if let Some(w) = &mut self.recording
                 && let Err(e) = w.write(self.cl.viewangles, &m)
@@ -612,7 +675,9 @@ impl Host {
             }
             if let Err(e) = r {
                 self.con.print(&format!("Host_Error: {e:?}\n"));
-                self.server.level = None;
+                if self.net_client.is_none() {
+                    self.server.level = None;
+                }
                 self.disconnect_client();
                 return;
             }
@@ -620,9 +685,156 @@ impl Host {
         self.process_client_events();
     }
 
+    /// Open the listen socket while a multiplayer server runs; close it
+    /// when back to single player.
+    fn update_listen(&mut self) {
+        let want = self.server.core.maxclients() > 1 && self.server.active();
+        if want && self.net_server.is_none() {
+            match crate::net::NetServer::listen(self.net_port) {
+                Ok(n) => {
+                    self.con.print(&format!("UDP listening on port {}\n", n.port()));
+                    self.net_server = Some(n);
+                }
+                Err(e) => {
+                    self.con.print(&format!("UDP bind on port {} failed: {e}\n", self.net_port));
+                    self.net_port = 0; // don't retry every frame; next try takes any port
+                }
+            }
+        } else if !want && let Some(mut n) = self.net_server.take() {
+            n.shutdown(&mut self.server, self.realtime);
+        }
+    }
+
+    /// Read the remote server's messages (client side).
+    fn poll_remote(&mut self) {
+        let now = self.realtime;
+        let Some(n) = &mut self.net_client else { return };
+        let was = n.connected();
+        match n.poll(now) {
+            crate::net::ClientPoll::Messages(m) => {
+                if !was && n.connected() {
+                    let a = n.server;
+                    self.con.print(&format!("Connection accepted by {a}\n"));
+                }
+                self.deliver(m);
+            }
+            crate::net::ClientPoll::Failed(why) => {
+                self.con.print(&format!("Connection failed: {why}"));
+                self.disconnect_client();
+            }
+        }
+    }
+
+    /// Scoreboard pings while it is shown in multiplayer: straight from a
+    /// local server, else by asking a remote one every 2 s.
+    fn update_pings(&mut self) {
+        if self.ping_expect.is_some_and(|t| self.realtime > t) {
+            self.ping_expect = None;
+        }
+        if !self.show_scores || self.cl.maxclients < 2 || self.cl.signon != 4 {
+            return;
+        }
+        if self.net_client.is_none() {
+            if self.server.active() {
+                for (k, s) in self.cl.scores.iter_mut().enumerate() {
+                    s.ping = self.server.core.clients.get(k).map_or(0, |c| (c.ping() * 1000.0).round() as i32);
+                }
+            }
+            return;
+        }
+        if self.realtime >= self.ping_next && self.ping_expect.is_none() {
+            self.cl.send_string_cmd("ping");
+            self.ping_next = self.realtime + 2.0;
+            self.ping_expect = Some(self.realtime + 1.5);
+        }
+    }
+
+    /// Consume a `ping` reply (header and "  ms name" lines, in one print or
+    /// one per line). False when `s` isn't part of it, which ends the reply.
+    fn take_ping_reply(&mut self, s: &str) -> bool {
+        let mut any = false;
+        for line in s.lines() {
+            if line.starts_with("Client ping times:") {
+                any = true;
+                continue;
+            }
+            let t = line.trim_start();
+            let Some((ms, name)) = t.split_once(' ') else { break };
+            let Ok(ms) = ms.parse::<i32>() else { break };
+            let name = name.trim();
+            if let Some(sc) = self.cl.scores.iter_mut().find(|sc| sc.name.trim() == name) {
+                sc.ping = ms;
+            }
+            any = true;
+        }
+        if !any {
+            self.ping_expect = None;
+        }
+        any
+    }
+
+    fn poll_lan_search(&mut self) {
+        let Some(ls) = &mut self.lan_search else { return };
+        if ls.poll() {
+            self.menu.servers = ls
+                .found
+                .iter()
+                .filter_map(|(a, r)| match r {
+                    qnet::Ccrep::ServerInfo { hostname, level, players, max_players, .. } => Some(crate::menu::ServerEntry {
+                        address: a.to_string(),
+                        hostname: hostname.clone(),
+                        map: level.clone(),
+                        players: *players,
+                        max_players: *max_players,
+                    }),
+                    _ => None,
+                })
+                .collect();
+        }
+        if ls.done(self.realtime) {
+            let n = ls.found.len();
+            self.lan_search = None;
+            self.menu.searching = false;
+            let mut out = String::new();
+            for s in &self.menu.servers {
+                out.push_str(&format!("{:<15.15} {:<15.15} {:>2}/{:<2} {}\n", s.hostname, s.map, s.players, s.max_players, s.address));
+            }
+            out.push_str(&format!("{n} server(s) found\n"));
+            self.con.print(&out);
+        }
+    }
+
+    /// `connect <address>`.
+    fn connect_remote(&mut self, addr: &str) {
+        let Some(a) = crate::net::resolve(addr) else {
+            self.con.print(&format!("Couldn't resolve {addr}\n"));
+            return;
+        };
+        self.stop_game();
+        // CL_EstablishConnection: no demo loop while connected.
+        self.demonum = -1;
+        self.cl = ClientState::new();
+        self.cl.name = self.cvs("_cl_name").to_string();
+        self.cl.color = self.cv("_cl_color") as i32;
+        self.con.print(&format!("Connecting to {a}...\n"));
+        match crate::net::NetClient::connect(a, self.realtime) {
+            Ok(n) => {
+                self.net_client = Some(n);
+                self.last_server = Some(a);
+            }
+            Err(e) => self.con.print(&format!("Connection failed: {e}\n")),
+        }
+    }
+
     /// Client string commands (clc_stringcmd) back to the server.
     fn forward_client_cmds(&mut self) {
         let out = self.cl.take_reliable_out();
+        if let Some(n) = &mut self.net_client {
+            if !out.is_empty() {
+                n.send_reliable(&out, self.realtime);
+            }
+            return;
+        }
         let Some(i) = self.local else { return };
         let mut p = 0;
         while p < out.len() {
@@ -645,6 +857,9 @@ impl Host {
         for e in evs {
             match e {
                 ClientEvent::Print(s) => {
+                    if self.ping_expect.is_some() && self.take_ping_reply(&s) {
+                        continue;
+                    }
                     let s = self.server.core.loc.translate(&s);
                     self.con.print(&s)
                 }
@@ -727,7 +942,13 @@ impl Host {
                 }
                 // Host_EndGame during playback moves on to the next demo.
                 ClientEvent::Disconnect if self.demo.is_some() => self.end_demo(),
-                ClientEvent::Disconnect => self.con.print("Server disconnected\n"),
+                ClientEvent::Disconnect => {
+                    self.con.print("Server disconnected\n");
+                    if self.net_client.is_some() {
+                        self.disconnect_client();
+                        return;
+                    }
+                }
                 _ => {}
             }
         }
@@ -1067,7 +1288,24 @@ impl Host {
                     self.pend_impulse = 0;
                 }
             }
+            if self.net_client.is_some() && self.local.is_none() {
+                let mut cmd = self.last_cmd;
+                cmd.buttons = self.pend_attack as u8 | (self.pend_jump as u8) << 1;
+                cmd.impulse = self.pend_impulse;
+                if let Some(m) = self.cl.build_move(&cmd)
+                    && let Some(n) = &mut self.net_client
+                {
+                    n.send_unreliable(&m, self.realtime);
+                    self.pend_attack = false;
+                    self.pend_jump = false;
+                    self.pend_impulse = 0;
+                }
+            }
             self.forward_client_cmds();
+            if let Some(n) = &mut self.net_server {
+                let host = self.server.core.cvars.by_name("hostname").map_or(String::new(), |c| c.string.clone());
+                n.receive(&mut self.server, self.realtime, &host);
+            }
             // Keep QC localcmd text for the shared host Cbuf (see exec_cbuf).
             let t = self.server.take_text();
             self.cbuf.add_text(&t);
@@ -1080,9 +1318,15 @@ impl Host {
                 self.server.level = None;
                 self.server.core.sv.active = false;
             }
+            if let Some(n) = &mut self.net_server {
+                n.send(&mut self.server, self.realtime);
+            }
             self.drain_server_log();
             self.feed_client();
         }
+        self.poll_remote();
+        self.poll_lan_search();
+        self.update_pings();
         self.read_demo(dt);
         self.check_local_client();
         if self.cl.signon > 0 {
@@ -1107,7 +1351,9 @@ impl Host {
         if self.screenshot.is_some() {
             self.r.request_capture();
         }
-        self.render(view, gun, ft);
+        if !self.dedicated {
+            self.render(view, gun, ft);
+        }
         if let Some(name) = self.screenshot.take() {
             self.write_screenshot(&name);
         }
@@ -1358,6 +1604,9 @@ impl Host {
 
     /// CL_Disconnect: shut down the local server and the client.
     fn stop_game(&mut self) {
+        if let Some(n) = &mut self.net_server {
+            n.shutdown(&mut self.server, self.realtime);
+        }
         if let Some(i) = self.local {
             self.server.drop_client(i, false);
         }
@@ -1399,6 +1648,8 @@ impl Host {
             let mut pf = |n: &str| pics.get(fs, r, n);
             if view.is_some() {
                 match self.cl.intermission {
+                    // GAME_DEATHMATCH: the ranking instead of level stats.
+                    1 if self.cl.gametype == 1 => crate::sbar::deathmatch_overlay(&mut c, &mut pf, &self.cl),
                     1 => crate::sbar::intermission(&mut c, &mut pf, &self.cl),
                     2 => {
                         crate::sbar::finale(&mut c, &mut pf);
@@ -1420,6 +1671,9 @@ impl Host {
                             sb.draw(&self.cl, self.show_scores, face);
                         } else {
                             sb.draw_modern(&self.cl, self.show_scores, face);
+                        }
+                        if self.show_scores && self.cl.gametype == 1 {
+                            crate::sbar::deathmatch_overlay(&mut c, &mut pf, &self.cl);
                         }
                     }
                 }
@@ -1659,7 +1913,7 @@ fn register_commands(c: &mut Commands<Host>) {
     c.add("startdemos", |h, a| {
         h.demos = (1..a.argc()).map(|i| a.argv(i).to_string()).collect();
         h.print(&format!("{} demo(s) in loop\n", h.demos.len()));
-        if !h.server.active() && h.demonum != -1 && h.demo.is_none() {
+        if !h.server.active() && !h.dedicated && h.net_client.is_none() && h.demonum != -1 && h.demo.is_none() {
             h.demonum = 0;
             if h.cv("cl_startdemos") == 0.0 {
                 h.demonum = -1;
@@ -1758,6 +2012,66 @@ fn register_commands(c: &mut Commands<Host>) {
         }
     });
     c.add("disconnect", |h, _| h.stop_game());
+    c.add("connect", |h, a| {
+        if a.argc() < 2 {
+            h.print("usage: connect <server>\n");
+            return;
+        }
+        // COM_Parse splits "host:port" at the colon.
+        let addr: String = a.args().split_whitespace().collect();
+        h.connect_remote(&addr);
+    });
+    // CL_Reconnect_f: our client restarts the signon on the next serverinfo
+    // by itself, so only a dropped connection needs action.
+    c.add("reconnect", |h, _| {
+        if h.net_client.is_none()
+            && h.local.is_none()
+            && let Some(a) = h.last_server
+        {
+            h.connect_remote(&a.to_string());
+        }
+    });
+    c.add("menu_multiplayer", |h, a| {
+        let page = a.argv(1).to_ascii_lowercase();
+        if let Some(Action::Command(c)) = h.menu.open_multiplayer(&page) {
+            h.cbuf.add_text(&c);
+        }
+    });
+    c.add("slist", |h, _| {
+        if h.lan_search.is_some() {
+            return;
+        }
+        match crate::net::LanSearch::start(h.net_port, h.realtime) {
+            Ok(ls) => {
+                h.print("Looking for Quake servers...\n");
+                h.lan_search = Some(ls);
+                h.menu.servers.clear();
+                h.menu.searching = true;
+            }
+            Err(e) => h.print(&format!("slist: {e}\n")),
+        }
+    });
+    // Maps for the Host Game page: the running game dir's own maps.
+    c.add("_netmaps", |h, _| {
+        let base = h.fs().basedir().to_path_buf();
+        let game = h.game_name().to_string();
+        h.menu.net_maps = qui::mods::maps(&base, &game);
+    });
+    c.add("port", |h, a| {
+        if a.argc() < 2 {
+            h.print(&format!("\"port\" is \"{}\"\n", h.net_port));
+            return;
+        }
+        match a.argv(1).parse::<u16>() {
+            Ok(p) if p > 0 => {
+                h.net_port = p;
+                if let Some(mut n) = h.net_server.take() {
+                    n.shutdown(&mut h.server, h.realtime);
+                }
+            }
+            _ => h.print("Bad value, must be between 1 and 65534\n"),
+        }
+    });
     c.add("music", |h, a| {
         if let Some(s) = &mut h.snd
             && !s.play_music(a.argv(1), true)

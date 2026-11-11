@@ -31,6 +31,177 @@ pub(crate) fn register(s: &mut Server) {
     s.add_cmd("prespawn", cmd_prespawn);
     s.add_cmd("spawn", cmd_spawn);
     s.add_cmd("begin", cmd_begin);
+    s.add_cmd("maxplayers", cmd_maxplayers);
+    s.add_cmd("say", |s, a| cmd_say(s, a, false));
+    s.add_cmd("say_team", |s, a| cmd_say(s, a, true));
+    s.add_cmd("tell", cmd_tell);
+    s.add_cmd("status", cmd_status);
+    s.add_cmd("kick", cmd_kick);
+    s.add_cmd("ping", cmd_ping);
+}
+
+/// Host_MaxPlayers_f: slot count for the next server (1..=16); more than
+/// one turns deathmatch on, one turns it off.
+fn cmd_maxplayers(s: &mut Server, a: &Args) {
+    if s.core.cmd_client.is_some() {
+        return;
+    }
+    if a.argc() != 2 {
+        s.core.print(&format!("\"maxplayers\" is \"{}\"\n", s.core.maxclients()));
+        return;
+    }
+    let n = (q_atof(a.argv(1)) as usize).clamp(1, crate::server::MAX_SCOREBOARD);
+    if n == s.core.maxclients() {
+        return;
+    }
+    if s.active() {
+        s.core.print("maxplayers can not be changed while a server is running.\n");
+        return;
+    }
+    s.set_maxclients(n);
+    s.core.cvars.set("deathmatch", if n == 1 { "0" } else { "1" });
+}
+
+/// Text after the command, without surrounding quotes (Host_Say_f).
+fn say_text(a: &Args) -> String {
+    let t = a.args();
+    let t = t.strip_prefix('"').and_then(|t| t.strip_suffix('"')).unwrap_or(t);
+    t.to_string()
+}
+
+/// Name of the sender: the client, the listen server's local player, or
+/// `<hostname>` from a dedicated console.
+fn sender(s: &Server) -> (Option<usize>, String) {
+    let i = s.core.cmd_client.or_else(|| s.core.clients.iter().position(|c| c.active && c.local));
+    match i {
+        Some(i) => (Some(i), s.core.clients[i].name.clone()),
+        None => (None, format!("<{}>", s.core.cvars.by_name("hostname").map_or("", |c| c.string.as_str()))),
+    }
+}
+
+/// Host_Say_f.
+fn cmd_say(s: &mut Server, a: &Args, team: bool) {
+    if a.argc() < 2 || !s.active() {
+        return;
+    }
+    let (from, name) = sender(s);
+    let text = say_text(a);
+    let msg = if from.is_some() { format!("\x01{name}: {text}\n") } else { format!("\x01{name} {text}\n") };
+    let teamplay = team && s.core.cvars.value_of("teamplay") != 0.0;
+    let my_team = from.and_then(|i| s.level.as_ref().map(|l| l.vm.ent_f(i as u32 + 1, s.core.sv.fields.team)));
+    for j in 0..s.core.maxclients() {
+        let c = &s.core.clients[j];
+        if !c.active || !c.spawned {
+            continue;
+        }
+        if teamplay
+            && let (Some(t), Some(l)) = (my_team, s.level.as_ref())
+            && l.vm.ent_f(j as u32 + 1, s.core.sv.fields.team) != t
+        {
+            continue;
+        }
+        let m = &mut s.core.clients[j].message;
+        m.byte(crate::msg::SVC_PRINT);
+        m.string(msg.as_bytes());
+    }
+    if !s.core.clients.iter().any(|c| c.active && c.local) {
+        s.core.print(&msg.replace('\x01', ""));
+    }
+}
+
+/// Host_Tell_f: `tell <name> <text>`.
+fn cmd_tell(s: &mut Server, a: &Args) {
+    if a.argc() < 3 || !s.active() {
+        return;
+    }
+    let (_, name) = sender(s);
+    let rest = a.args();
+    let text = rest.split_once(char::is_whitespace).map_or("", |(_, t)| t).trim();
+    let text = text.strip_prefix('"').and_then(|t| t.strip_suffix('"')).unwrap_or(text);
+    let msg = format!("{name}: {text}\n");
+    let to = a.argv(1).to_string();
+    for j in 0..s.core.maxclients() {
+        let c = &s.core.clients[j];
+        if c.active && c.spawned && c.name.eq_ignore_ascii_case(&to) {
+            let m = &mut s.core.clients[j].message;
+            m.byte(crate::msg::SVC_PRINT);
+            m.string(msg.as_bytes());
+            break;
+        }
+    }
+}
+
+/// Print to whoever ran the command: a client's console or the server's.
+fn reply(s: &mut Server, text: &str) {
+    // The listen server's console is the local player's.
+    let to = s.core.cmd_client.or_else(|| s.core.clients.iter().position(|c| c.active && c.local));
+    match to {
+        Some(i) => {
+            let m = &mut s.core.clients[i].message;
+            m.byte(crate::msg::SVC_PRINT);
+            m.string(text.as_bytes());
+        }
+        None => s.core.print(text),
+    }
+}
+
+/// Host_Status_f.
+fn cmd_status(s: &mut Server, _a: &Args) {
+    if !s.active() {
+        return;
+    }
+    let host = s.core.cvars.by_name("hostname").map_or(String::new(), |c| c.string.clone());
+    let active = s.core.clients.iter().filter(|c| c.active).count();
+    let mut out = format!("host:    {host}\nmap:     {}\nplayers: {active} active ({} max)\n\n", s.core.sv.name, s.core.maxclients());
+    for j in 0..s.core.maxclients() {
+        let c = &s.core.clients[j];
+        if !c.active {
+            continue;
+        }
+        let frags = s.level.as_ref().map_or(0, |l| l.vm.ent_f(j as u32 + 1, s.core.sv.fields.frags) as i32);
+        let ms = (c.ping() * 1000.0).round() as i32;
+        out.push_str(&format!("#{:<2} {:<16.16}  {frags:3}  {ms:4} ms\n", j + 1, c.name));
+    }
+    reply(s, &out);
+}
+
+/// Host_Kick_f: `kick <name>` or `kick # <slot>`, optional message. Console only.
+fn cmd_kick(s: &mut Server, a: &Args) {
+    if s.core.cmd_client.is_some_and(|i| !s.core.clients[i].local) || !s.active() || a.argc() < 2 {
+        return;
+    }
+    let (target, msg_at) = if a.argv(1) == "#" {
+        let n = q_atof(a.argv(2)) as usize;
+        (n.checked_sub(1).filter(|&i| i < s.core.maxclients() && s.core.clients[i].active), 3)
+    } else {
+        (s.core.clients.iter().position(|c| c.active && c.name.eq_ignore_ascii_case(a.argv(1))), 2)
+    };
+    let Some(i) = target else { return };
+    if s.core.clients[i].local {
+        s.core.print("You can't kick yourself!\n");
+        return;
+    }
+    let (_, who) = sender(s);
+    let mut text = format!("Kicked by {who}");
+    if a.argc() > msg_at {
+        let rest: Vec<&str> = (msg_at..a.argc()).map(|k| a.argv(k)).collect();
+        text.push_str(": ");
+        text.push_str(&rest.join(" "));
+    }
+    text.push('\n');
+    let m = &mut s.core.clients[i].message;
+    m.byte(crate::msg::SVC_PRINT);
+    m.string(text.as_bytes());
+    s.drop_client(i, false);
+}
+
+/// Host_Ping_f: average round trip per player, in ms.
+fn cmd_ping(s: &mut Server, _a: &Args) {
+    let mut out = String::from("Client ping times:\n");
+    for c in s.core.clients.iter().filter(|c| c.active) {
+        out.push_str(&format!("{:4} {}\n", (c.ping() * 1000.0).round() as i32, c.name));
+    }
+    reply(s, &out);
 }
 
 impl Server {
