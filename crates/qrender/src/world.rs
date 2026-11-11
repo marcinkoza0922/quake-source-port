@@ -57,6 +57,11 @@ pub struct SubModel {
 }
 
 pub struct World {
+    /// R_LightPoint cache (ironwail's per-entity lightcache_t): sample point
+    /// floored to whole units -> trace result. Entities that don't move skip
+    /// the BSP trace; the colour is re-read from the lightmap each call so
+    /// lightstyles still animate.
+    light_cache: std::sync::Mutex<std::collections::HashMap<[i32; 3], LightHit>>,
     pub vertices: Vec<WorldVertex>,
     pub indices: Vec<u32>,
     pub surfaces: Vec<Surface>,
@@ -151,6 +156,7 @@ impl World {
         let numleafs = bsp.models.first().map_or(0, |m| m.visleafs.max(0) as usize);
         let has_light = !bsp.lighting.is_empty();
         let mut w = World {
+            light_cache: Default::default(),
             vertices: Vec::new(),
             indices: Vec::new(),
             surfaces: Vec::with_capacity(bsp.faces.len()),
@@ -464,9 +470,54 @@ impl World {
         if !self.has_light || self.bsp_nodes.is_empty() {
             return Some([255.0; 3]);
         }
-        let end = [p[0], p[1], p[2] - 8192.0];
-        let mut maxdist = 8192.0f32;
-        self.recursive_light(0, p, p, end, &mut maxdist, styles)
+        let key = p.map(|v| v.floor() as i32);
+        let cached = self.light_cache.lock().ok().and_then(|c| c.get(&key).copied());
+        let hit = cached.unwrap_or_else(|| {
+            let end = [p[0], p[1], p[2] - 8192.0];
+            let mut maxdist = 8192.0f32;
+            let h = self.recursive_light(0, p, p, end, &mut maxdist);
+            if let Ok(mut c) = self.light_cache.lock() {
+                // Moving entities add a new key each frame; keep it bounded.
+                if c.len() >= 8192 {
+                    c.clear();
+                }
+                c.insert(key, h);
+            }
+            h
+        });
+        match hit {
+            LightHit::Miss => None,
+            LightHit::Black => Some([0.0; 3]),
+            LightHit::Surf { surf, ds, dt } => Some(self.interpolate_light(surf as usize, ds, dt, styles)),
+        }
+    }
+
+    /// InterpolateLightmap: bilinear between the four nearest luxels.
+    fn interpolate_light(&self, si: usize, ds: i32, dt: i32, styles: &[i32]) -> [f32; 3] {
+        let Some(s) = self.surfaces.get(si) else { return [0.0; 3] };
+        let w = ((s.extents[0] >> 4) + 1) as usize;
+        let h = ((s.extents[1] >> 4) + 1) as usize;
+        let (x, y) = ((ds >> 4) as usize, (dt >> 4) as usize);
+        let (x1, y1) = ((x + 1).min(w - 1), (y + 1).min(h - 1));
+        let (fs, ft) = (ds & 15, dt & 15);
+        let mut acc = [[0i32; 3]; 4];
+        let mut base = s.samples as usize;
+        for &st in s.styles.iter().take_while(|&&st| st != 255) {
+            let scale = styles.get(st as usize).copied().unwrap_or(256);
+            for (a, (cx, cy)) in acc.iter_mut().zip([(x, y), (x1, y), (x, y1), (x1, y1)]) {
+                let v = self.samples.get(base + cy * w + cx).copied().unwrap_or(0);
+                for (k, ak) in a.iter_mut().enumerate() {
+                    *ak += ((v >> (k * 8)) & 0xff) as i32 * scale;
+                }
+            }
+            base += w * h;
+        }
+        let [c00, c01, c10, c11] = acc;
+        std::array::from_fn(|k| {
+            let top = (((c01[k] - c00[k]) * fs) >> 4) + c00[k];
+            let bot = (((c11[k] - c10[k]) * fs) >> 4) + c10[k];
+            ((((bot - top) * ft) >> 4) + top) as f32 / 256.0
+        })
     }
 
     fn recursive_light(
@@ -476,16 +527,15 @@ impl World {
         start: [f32; 3],
         end: [f32; 3],
         maxdist: &mut f32,
-        styles: &[i32],
-    ) -> Option<[f32; 3]> {
+    ) -> LightHit {
         let mut node = node;
         let mut start = start;
         loop {
             if node < 0 {
-                return None;
+                return LightHit::Miss;
             }
-            let n = self.bsp_nodes.get(node as usize)?;
-            let pl = self.planes.get(n.plane.max(0) as usize)?;
+            let Some(n) = self.bsp_nodes.get(node as usize) else { return LightHit::Miss };
+            let Some(pl) = self.planes.get(n.plane.max(0) as usize) else { return LightHit::Miss };
             let front = dot(start, pl.normal) - pl.dist;
             let back = dot(end, pl.normal) - pl.dist;
             let side = (front < 0.0) as usize;
@@ -495,10 +545,9 @@ impl World {
             }
             let frac = front / (front - back);
             let mid = [0, 1, 2].map(|i| start[i] + (end[i] - start[i]) * frac);
-            if let Some(c) =
-                self.recursive_light(n.children[side], rayorg, start, mid, maxdist, styles)
-            {
-                return Some(c);
+            let r = self.recursive_light(n.children[side], rayorg, start, mid, maxdist);
+            if r != LightHit::Miss {
+                return r;
             }
             for si in n.first_face..n.first_face + n.num_faces {
                 let Some(s) = self.surfaces.get(si as usize) else {
@@ -516,37 +565,32 @@ impl World {
                 if ds > s.extents[0] || dt > s.extents[1] {
                     continue;
                 }
-                if s.samples == NO_LM {
-                    continue;
-                }
                 let sfront = dot(rayorg, s.normal) - s.dist;
                 let sback = dot(end, s.normal) - s.dist;
-                let len = (0..3)
-                    .map(|i| (end[i] - rayorg[i]).powi(2))
-                    .sum::<f32>()
-                    .sqrt();
+                let len = (0..3).map(|i| (end[i] - rayorg[i]).powi(2)).sum::<f32>().sqrt();
                 let dist = sfront / (sfront - sback) * len;
+                if s.samples == NO_LM {
+                    // Lightmapped flag but no data: keep looking nearby (DOTM fix).
+                    *maxdist = maxdist.min(dist + 8.0);
+                    continue;
+                }
                 if dist >= *maxdist {
-                    return Some([0.0; 3]);
+                    return LightHit::Black;
                 }
-                let w = ((s.extents[0] >> 4) + 1) as usize;
-                let h = ((s.extents[1] >> 4) + 1) as usize;
-                let mut idx = s.samples as usize + (dt as usize >> 4) * w + (ds as usize >> 4);
-                let mut c = [0.0f32; 3];
-                for &st in s.styles.iter().take_while(|&&st| st != 255) {
-                    let scale = styles.get(st as usize).copied().unwrap_or(256) as f32;
-                    let v = self.samples.get(idx).copied().unwrap_or(0);
-                    for (k, ck) in c.iter_mut().enumerate() {
-                        *ck += ((v >> (k * 8)) & 0xff) as f32 * scale;
-                    }
-                    idx += w * h;
-                }
-                return Some(c.map(|x| x / 256.0));
+                return LightHit::Surf { surf: si, ds, dt };
             }
             node = n.children[1 - side];
             start = mid;
         }
     }
+}
+
+/// Result of a light trace (ironwail's lightcache_t.surfidx/ds/dt).
+#[derive(Clone, Copy, PartialEq, Eq, Debug)]
+enum LightHit {
+    Miss,
+    Black,
+    Surf { surf: u32, ds: i32, dt: i32 },
 }
 
 fn build_anims(bsp: &Bsp) -> Vec<(Vec<u32>, Vec<u32>, bool)> {
