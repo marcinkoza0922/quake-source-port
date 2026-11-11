@@ -7,6 +7,7 @@
 
 mod assets;
 mod console;
+mod demo;
 mod draw;
 mod host;
 mod menu;
