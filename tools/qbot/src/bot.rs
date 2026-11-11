@@ -43,6 +43,9 @@ pub struct Options {
     pub routes: Option<PathBuf>,
     /// Ignore cached routes (still record new ones).
     pub fresh: bool,
+    /// Variant seed: 0 is the plain bot; others vary goal order, routes and
+    /// lift patience, deterministically per seed.
+    pub seed: u64,
 }
 
 #[derive(Default)]
@@ -67,6 +70,14 @@ pub struct Report {
     pub stranded: bool,
     /// Cached route: "replayed", "diverged t=…", "recorded" or empty.
     pub route: String,
+    /// Finished by game means only: exit reached, no noclip, no error.
+    pub clean: bool,
+    /// A clean run's recording, for the caller to cache.
+    pub recording: Option<Route>,
+    pub seed: u64,
+    /// Runs made for this map, and how many finished cleanly.
+    pub variants: u32,
+    pub clean_variants: u32,
     pub errors: Vec<String>,
 }
 
@@ -466,15 +477,20 @@ fn add_movers_pass(nav: &mut Nav, cm: &Geo, vm: &Vm, o: &Ofs, lifts: &mut HashMa
     }
 }
 
+/// Where a map's cached route lives.
+pub fn route_file(dir: &std::path::Path, map: &str) -> PathBuf {
+    dir.join(format!("{map}.qbr"))
+}
+
 pub fn run(fs: Fs, map: &str, opt: &Options) -> Report {
     let wall = Instant::now();
     let mut rep = Report::default();
-    let route_path = opt.routes.as_ref().map(|d| d.join(format!("{map}.qbr")));
+    let route_path = opt.routes.as_ref().map(|d| route_file(d, map));
     let key = match (fs.open(&format!("maps/{map}.bsp")), fs.open("progs.dat")) {
         (Some(b), Some(p)) => route::key(&b, &p, opt.skill),
         _ => 0,
     };
-    let replay = route_path.as_ref().filter(|_| !opt.fresh && key != 0).and_then(|p| Route::load(p, key));
+    let replay = route_path.as_ref().filter(|_| !opt.fresh && key != 0 && opt.seed == 0).and_then(|p| Route::load(p, key));
     let mut sv = Server::new(fs, Cvars::new(), 1);
     // Nobody reads the client's datagrams.
     sv.core.skip_entity_updates = true;
@@ -598,18 +614,12 @@ pub fn run(fs: Fs, map: &str, opt: &Options) -> Report {
     // Big maps get more time: 900 s, or 15 s per goal.
     bot.max_time = opt.max_time.unwrap_or_else(|| (bot.goals.len() as f64 * 15.0).max(900.0));
     bot.main_loop(map);
-    // Finished by game means only: cache the route (a replay that held is
-    // already in the cache).
-    let ok = bot.rep.exited && bot.rep.noclip_uses == 0 && bot.rep.errors.is_empty() && !bot.rep.stranded;
-    if ok
-        && key != 0
-        && bot.rep.route != "replayed"
-        && let Some(p) = &route_path
-    {
-        match bot.rec.save(p) {
-            Ok(()) => bot.rep.route = if bot.rep.route.is_empty() { "recorded".into() } else { format!("{}, recorded", bot.rep.route) },
-            Err(e) => bot.rep.errors.push(format!("saving route {}: {e}", p.display())),
-        }
+    // Finished by game means only: hand back the recording for the route
+    // cache (a replay that held is already in it).
+    bot.rep.clean = bot.rep.exited && bot.rep.noclip_uses == 0 && bot.rep.errors.is_empty() && !bot.rep.stranded;
+    bot.rep.seed = opt.seed;
+    if bot.rep.clean && key != 0 && bot.rep.route != "replayed" {
+        bot.rep.recording = Some(std::mem::take(&mut bot.rec));
     }
     let st = bot.sv.stats();
     let mut rep = bot.rep;
@@ -905,7 +915,7 @@ impl Bot<'_> {
         let mut choice = None;
         self.update_views();
         for _ in 0..2 {
-            let (dist, prev) = self.nav.dijkstra(src, &self.blocked);
+            let (dist, prev) = self.nav.dijkstra(src, &self.blocked, self.opt.seed);
             let mut best: Option<(f32, usize, u32)> = None;
             for (i, g) in self.goals.iter().enumerate() {
                 if !Self::pending(g) || g.deferred || (g.kind == Kind::Exit && others_left) || self.dormant(g) {
@@ -914,7 +924,11 @@ impl Bot<'_> {
                 let n = self.goal_node(g).into_iter().chain(g.views.iter().copied()).filter(|&n| dist[n as usize].is_finite()).min_by(|&a, &b| dist[a as usize].total_cmp(&dist[b as usize]));
                 if let Some(n) = n {
                     // Prefer finishing the current goal unless something is much closer.
-                    let bias = if Some(i) == self.cur { 0.7 } else { 1.0 };
+                    let mut bias = if Some(i) == self.cur { 0.7 } else { 1.0 };
+                    if self.opt.seed != 0 {
+                        // A fixed preference per goal and variant: another goal order.
+                        bias *= 1.0 + 0.6 * nav::unit_hash(self.opt.seed, 1, g.ent as u64);
+                    }
                     let d = dist[n as usize] * bias;
                     if best.is_none_or(|b| d < b.0) {
                         best = Some((d, i, n));
@@ -1290,7 +1304,8 @@ impl Bot<'_> {
         };
         // Progress is measured by the lift arriving, not by distance.
         self.best_time = t;
-        if t - since > RIDE_TIME {
+        let patience = if self.opt.seed == 0 { RIDE_TIME } else { RIDE_TIME * (0.6 + 0.9 * nav::unit_hash(self.opt.seed, 2, 0) as f64) };
+        if t - since > patience {
             if self.opt.verbose {
                 eprintln!("  t={t:.1} lift #{} never came", lift.ent);
             }

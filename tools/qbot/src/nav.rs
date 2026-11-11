@@ -417,8 +417,10 @@ impl Nav {
         out
     }
 
-    /// Dijkstra from `src` skipping `blocked` edges: (cost, previous node) per node.
-    pub fn dijkstra(&self, src: u32, blocked: &Blocked) -> (Vec<f32>, Vec<u32>) {
+    /// Dijkstra from `src` skipping `blocked` edges: (cost, previous node) per
+    /// node. A nonzero `noise` seed scales each edge's cost by a fixed factor
+    /// in 1..1.5, so seeded variants take different routes.
+    pub fn dijkstra(&self, src: u32, blocked: &Blocked, noise: u64) -> (Vec<f32>, Vec<u32>) {
         let n = self.pos.len();
         let mut dist = vec![f32::INFINITY; n];
         let mut prev = vec![u32::MAX; n];
@@ -434,7 +436,8 @@ impl Nav {
                 if !blocked.is_empty() && blocked.contains(&(u, e.to)) {
                     continue;
                 }
-                let nd = d + e.cost;
+                let cost = if noise == 0 { e.cost } else { e.cost * (1.0 + 0.5 * unit_hash(noise, u as u64, e.to as u64)) };
+                let nd = d + cost;
                 if nd < dist[e.to as usize] {
                     dist[e.to as usize] = nd;
                     prev[e.to as usize] = u;
@@ -449,6 +452,22 @@ impl Nav {
     pub fn edge(&self, a: u32, b: u32) -> Option<&Edge> {
         self.edges[a as usize].iter().find(|e| e.to == b)
     }
+}
+
+/// A fixed pseudo-random number in 0..1 for (seed, a, b).
+pub fn unit_hash(seed: u64, a: u64, b: u64) -> f32 {
+    let mut h = Fx::default();
+    h.write_u64(seed);
+    h.write_u64(a);
+    h.write_u64(b);
+    // Final avalanche (splitmix64) so neighbouring inputs differ.
+    let mut x = h.finish();
+    x ^= x >> 30;
+    x = x.wrapping_mul(0xbf58_476d_1ce4_e5b9);
+    x ^= x >> 27;
+    x = x.wrapping_mul(0x94d0_49bb_1331_11eb);
+    x ^= x >> 31;
+    (x >> 40) as f32 / (1u64 << 24) as f32
 }
 
 pub fn path_to(prev: &[u32], dst: u32) -> Vec<u32> {
