@@ -81,6 +81,10 @@ pub struct World {
     numleafs: usize,
     surf_frame: Vec<u32>,
     frame: u32,
+    /// R_MarkLeaves state: the PVS leaves of `vis_leaf` (leaf indices with
+    /// marksurfaces), rebuilt only when the view leaf changes.
+    vis_leaves: Vec<u32>,
+    vis_leaf: usize,
     pub has_light: bool,
     packer: Packer,
 }
@@ -174,6 +178,8 @@ impl World {
             numleafs,
             surf_frame: Vec::new(),
             frame: 0,
+            vis_leaves: Vec::new(),
+            vis_leaf: usize::MAX,
             has_light,
             packer: Packer {
                 allocated: vec![0; ATLAS as usize],
@@ -421,24 +427,12 @@ impl World {
             self.frame = 1;
         }
         let leaf = self.point_leaf(eye);
-        let novis = leaf == 0
-            || self.leafs.get(leaf).is_none_or(|l| l.visofs < 0)
-            || self.visdata.is_empty();
-        let pvs = if novis {
-            vec![0xff; self.numleafs.div_ceil(8)]
-        } else {
-            qformats::bsp::decompress_vis(&self.visdata, self.leafs[leaf].visofs, self.numleafs)
-        };
-        for i in 0..self.numleafs {
-            if pvs[i >> 3] & (1 << (i & 7)) == 0 {
-                continue;
-            }
-            let Some(l) = self.leafs.get(i + 1) else {
-                break;
-            };
-            if !box_in_frustum(frustum, l.mins, l.maxs) {
-                continue;
-            }
+        if leaf != self.vis_leaf {
+            self.mark_leaves(leaf);
+        }
+        for &li in &self.vis_leaves {
+            let l = &self.leafs[li as usize];
+            let Some(clip) = clip_box(frustum, 0b1111, l.mins, l.maxs) else { continue };
             let ms = l.first_marksurface as usize;
             for k in ms..ms + l.num_marksurfaces as usize {
                 let Some(&si) = self.marksurfaces.get(k) else {
@@ -457,10 +451,32 @@ impl World {
                 if (d < 0.0) != s.flipped && s.kind != TextureKind::Sky {
                     continue;
                 }
-                if !box_in_frustum(frustum, s.mins, s.maxs) {
+                if clip != 0 && clip_box(frustum, clip, s.mins, s.maxs).is_none() {
                     continue;
                 }
                 out.push(si as u32);
+            }
+        }
+    }
+
+    /// R_MarkLeaves: list the PVS leaves of `leaf` that have surfaces.
+    fn mark_leaves(&mut self, leaf: usize) {
+        self.vis_leaf = leaf;
+        self.vis_leaves.clear();
+        let novis = leaf == 0
+            || self.leafs.get(leaf).is_none_or(|l| l.visofs < 0)
+            || self.visdata.is_empty();
+        let pvs = if novis {
+            Vec::new()
+        } else {
+            qformats::bsp::decompress_vis(&self.visdata, self.leafs[leaf].visofs, self.numleafs)
+        };
+        for i in 0..self.numleafs.min(self.leafs.len().saturating_sub(1)) {
+            if !novis && pvs.get(i >> 3).is_none_or(|b| b & (1 << (i & 7)) == 0) {
+                continue;
+            }
+            if self.leafs[i + 1].num_marksurfaces > 0 {
+                self.vis_leaves.push(i as u32 + 1);
             }
         }
     }
@@ -636,6 +652,31 @@ fn dot64(a: [f32; 3], b: [f32; 4]) -> f64 {
 }
 
 /// Frustum planes as (normal, dist): inside when dot(n, p) + d >= 0.
+/// Frustum test against the planes still set in `clip` (bit j = plane j).
+/// None if the box is outside; otherwise the planes it still straddles.
+#[inline]
+pub fn clip_box(f: &[[f32; 4]; 4], clip: u8, mins: [f32; 3], maxs: [f32; 3]) -> Option<u8> {
+    let mut out = clip;
+    for (j, p) in f.iter().enumerate() {
+        if clip & (1 << j) == 0 {
+            continue;
+        }
+        let (mut pos, mut neg) = (p[3], p[3]);
+        for i in 0..3 {
+            let (hi, lo) = if p[i] >= 0.0 { (maxs[i], mins[i]) } else { (mins[i], maxs[i]) };
+            pos += p[i] * hi;
+            neg += p[i] * lo;
+        }
+        if pos < 0.0 {
+            return None;
+        }
+        if neg >= 0.0 {
+            out &= !(1 << j);
+        }
+    }
+    Some(out)
+}
+
 pub fn box_in_frustum(f: &[[f32; 4]; 4], mins: [f32; 3], maxs: [f32; 3]) -> bool {
     f.iter().all(|p| {
         let v = [0, 1, 2].map(|i| if p[i] >= 0.0 { maxs[i] } else { mins[i] });
