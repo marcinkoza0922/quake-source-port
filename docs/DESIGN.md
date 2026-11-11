@@ -236,4 +236,5 @@ All parsers take `&[u8]` and return `qformats::Result<T>`; bad input gives an `E
 - `r_drawentities 0` hides all entities except the view model (for debugging).
 - `COMPAT_CVARS` (host.rs) registers cvars from other engines without effect (gl_*, r_*_list, scr_usekfont, ...), so vkQuake.cfg and mod configs load quietly. `gamecfg`/`savedgamecfg` are real: QC reads them.
 - `sbar::Pack` (Id/Hipnotic/Rogue, from the mounted game dirs as in ironwail: rogue, hipnotic or quoth) selects the mission-pack status bar rules in both HUD styles: hipnotic laser/Mjolnir/proximity weapons, keys on the main bar, wetsuit/empathy shield items; rogue RIT_* ammo and armor bits, r_invbar1/2, powered-up weapon pics and shield/antigrav items, and no sigils. Rogue's CTF team-colour face is not done.
+- Menu pause: in single player the host calls `Server::frame_held(dt, true)` while the menu is open, which skips physics like ironwail's `key_dest == key_game` check, without setting `sv.paused`.
 - Gaps: demos, multiplayer menu, `sizeup/down` are stubs.

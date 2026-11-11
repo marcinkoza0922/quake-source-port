@@ -647,6 +647,12 @@ impl Server {
     /// Host_ServerFrame for a frame of `dt` seconds: console buffer, client
     /// input, physics, then client messages.
     pub fn frame(&mut self, dt: f64) {
+        self.frame_held(dt, false);
+    }
+
+    /// Host_ServerFrame: `hold` freezes physics without toggling `sv.paused`
+    /// (single player with the menu open; no pause plaque, no svc_setpause).
+    pub fn frame_held(&mut self, dt: f64, hold: bool) {
         self.execute();
         if self.level.is_none() || self.core.sv.error.is_some() || !self.core.sv.active {
             return;
@@ -658,7 +664,7 @@ impl Server {
         }
         self.core.sv.datagram.clear();
         self.run_clients(ft);
-        if !self.core.sv.paused {
+        if !self.core.sv.paused && !hold {
             self.physics(ft);
         }
         if self.core.sv.error.is_some() || self.level.is_none() {

@@ -1000,7 +1000,9 @@ impl Host {
             // Keep QC localcmd text for the shared host Cbuf (see exec_cbuf).
             let t = self.server.take_text();
             self.cbuf.add_text(&t);
-            self.server.frame(sdt);
+            // Ironwail: single player only advances while not in the menu.
+            let hold = self.server.core.maxclients() == 1 && self.menu.active();
+            self.server.frame_held(sdt, hold);
             if let Some(e) = self.server.error() {
                 let msg = format!("Host_Error: {e}\n");
                 self.con.print(&msg);
