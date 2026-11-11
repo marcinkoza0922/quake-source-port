@@ -967,7 +967,8 @@ impl Host {
                             c.ch(x, y, b'+');
                         }
                         let face = self.view.face_anim_time > self.cl.time;
-                        let mut sb = crate::sbar::Sbar::new(&mut c, &mut pf);
+                        let pack = crate::sbar::Pack::from_game_dirs(self.server.core.fs.game_dirs().iter().map(String::as_str));
+                        let mut sb = crate::sbar::Sbar::new(&mut c, &mut pf, pack);
                         if classic {
                             sb.backtile(CLASSIC_SBAR_LINES);
                             sb.draw(&self.cl, self.show_scores, face);

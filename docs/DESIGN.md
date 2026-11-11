@@ -107,7 +107,7 @@ Headless server, `skill 3`, `god` on. For each map:
 2. qvm + qworld + qserver headless: load start.bsp, run frames, no errors on all installed maps (smoke test across every mod).
 3. qnet loopback + qclient.
 4. qplatform + qrender (world, models, 2D) + qsound + qinput → playable id1.
-5. AD / MG1 / MG3 / hipnotic / rogue compat pass. Status (2026-11-11): `qsmoke` loads all 611 playable maps across 32 installed gamedirs with no errors (Quake64 BSP support and the miptex tolerance fix were needed). Remaining: visual spot checks against vkQuake, hipnotic/rogue status bars, and KEX font/localization (`scr_usekfont`).
+5. AD / MG1 / MG3 / hipnotic / rogue compat pass. Status (2026-11-11): `qsmoke` loads all 611 playable maps across 32 installed gamedirs with no errors (Quake64 BSP support and the miptex tolerance fix were needed). Hipnotic/rogue status bars are done. Remaining: visual spot checks against vkQuake, and KEX font/localization (`scr_usekfont`).
 6. qui console/menus/mod menu; aim assist.
 7. qbot; qbench perf parity.
 8. Network play protocols 15/666/999.
@@ -221,4 +221,5 @@ All parsers take `&[u8]` and return `qformats::Result<T>`; bad input gives an `E
 - Savegames: `Server::save_game`/`load_game` (qserver `save.rs`, version 5 text format as ironwail); `Sv::loadgame` makes connect/spawn keep the saved edicts and parms.
 - One shared command buffer, as in Quake: the server's Cbuf text (QC `localcmd`, changelevel) is moved into the host Cbuf before each server frame and at each `exec_cbuf`, so it reaches host commands and cvars too. `name`/`color` are host commands that set `_cl_name`/`_cl_color` and forward to the server, which has server-side `name`/`color` (svc_updatename/updatecolors).
 - `COMPAT_CVARS` (host.rs) registers cvars from other engines without effect (gl_*, r_*_list, scr_usekfont, ...), so vkQuake.cfg and mod configs load quietly. `gamecfg`/`savedgamecfg` are real: QC reads them.
-- Gaps: hipnotic/rogue status bars, demos, multiplayer menu, `sizeup/down` are stubs.
+- `sbar::Pack` (Id/Hipnotic/Rogue, from the mounted game dirs as in ironwail: rogue, hipnotic or quoth) selects the mission-pack status bar rules in both HUD styles: hipnotic laser/Mjolnir/proximity weapons, keys on the main bar, wetsuit/empathy shield items; rogue RIT_* ammo and armor bits, r_invbar1/2, powered-up weapon pics and shield/antigrav items, and no sigils. Rogue's CTF team-colour face is not done.
+- Gaps: demos, multiplayer menu, `sizeup/down` are stubs.
