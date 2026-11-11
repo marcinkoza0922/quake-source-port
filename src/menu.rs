@@ -141,6 +141,8 @@ pub struct Menu {
     load_cursor: usize,
     opt_cursor: usize,
     page_cursor: usize,
+    /// Quit prompt button: 0 = yes, 1 = no.
+    quit_cursor: usize,
     /// Display settings being edited on the Graphics page (mode 0..=2, size).
     pub pending_mode: usize,
     pub pending_res: (u32, u32),
@@ -150,18 +152,40 @@ pub struct Menu {
     /// Comment line of each save slot (`None` = unused).
     pub saves: Vec<Option<String>>,
     prev: Screen,
-    /// Cursor position in 320x200 menu units, when the mouse has moved.
+    /// Cursor position in 640x360 menu units, when the mouse has moved.
     mouse: Option<(f32, f32)>,
+    /// Open dropdown on an options page.
+    drop: Option<Drop>,
 }
 
-/// Slider track in options, menu x units.
-const SLIDER_X: (f32, f32) = (168.0, 248.0);
+/// Open dropdown list: the page row it belongs to, highlighted entry and
+/// first visible entry.
+#[derive(Clone, Copy, Debug)]
+struct Drop {
+    item: usize,
+    cursor: usize,
+    scroll: usize,
+}
 
-/// Value column / first row of the options pages.
-const VALUE_X: f32 = 160.0;
-const ROW0: f32 = 32.0;
-/// First row on an options page (below the page heading).
-const PAGE_ROW0: f32 = 44.0;
+/// Menus are laid out in a 640x360 (16:9) virtual area. The classic
+/// 320x200 screens (main, single player, load/save, quit) sit centred in it.
+const MENU_H: f32 = 360.0;
+const CLASSIC: (f32, f32) = (160.0, 80.0);
+
+/// Options panel: background box, label column (right-aligned), value column.
+const PANEL_X: f32 = 136.0;
+const PANEL_W: f32 = 368.0;
+const LABEL_R: f32 = 304.0;
+const VALUE_X: f32 = 320.0;
+const ROW_H: f32 = 10.0;
+/// First row of the options hub / of an options page (below its heading).
+const ROW0: f32 = 64.0;
+const PAGE_ROW0: f32 = 72.0;
+/// Slider track in options, menu x units.
+const SLIDER_X: (f32, f32) = (VALUE_X + 8.0, VALUE_X + 88.0);
+/// Dropdown value box minimum width and visible entries.
+const DROP_W: f32 = 120.0;
+const DROP_ROWS: usize = 10;
 
 impl Menu {
     pub fn new() -> Self {
@@ -172,6 +196,7 @@ impl Menu {
             load_cursor: 0,
             opt_cursor: 0,
             page_cursor: 0,
+            quit_cursor: 0,
             pending_mode: 0,
             pending_res: (1280, 720),
             resolutions: Vec::new(),
@@ -179,6 +204,7 @@ impl Menu {
             saves: vec![None; MAX_SAVEGAMES],
             prev: Screen::None,
             mouse: None,
+            drop: None,
         }
     }
 
@@ -189,20 +215,26 @@ impl Menu {
     pub fn open(&mut self, s: Screen) {
         self.prev = self.screen;
         self.screen = s;
+        self.drop = None;
+        self.quit_cursor = 0;
     }
 
     /// Item under the menu-space point for the current screen.
     fn item_at(&self, (x, y): (f32, f32)) -> Option<usize> {
-        let row = |top: f32, h: f32, n: usize, x0: f32| {
-            (x >= x0 && x < 312.0 && y >= top && y < top + h * n as f32).then(|| ((y - top) / h) as usize)
+        let row = |top: f32, h: f32, n: usize, x0: f32, x1: f32| {
+            (x >= x0 && x < x1 && y >= top && y < top + h * n as f32).then(|| ((y - top) / h) as usize)
         };
+        let (cx, cy) = CLASSIC;
         match self.screen {
-            Screen::Main => row(32.0, 20.0, 5, 54.0),
-            Screen::SinglePlayer => row(32.0, 20.0, 3, 54.0),
-            Screen::Load | Screen::Save => row(32.0, 8.0, MAX_SAVEGAMES, 8.0),
-            Screen::Options => row(ROW0, 8.0, PAGES.len(), 16.0),
-            Screen::OptionsPage(p) => row(PAGE_ROW0, 8.0, page_items(p).len(), 16.0),
-            Screen::Quit | Screen::None => None,
+            Screen::Main => row(cy + 32.0, 20.0, 5, cx + 54.0, cx + 312.0),
+            Screen::SinglePlayer => row(cy + 32.0, 20.0, 3, cx + 54.0, cx + 312.0),
+            Screen::Load | Screen::Save => row(cy + 32.0, 8.0, MAX_SAVEGAMES, cx + 8.0, cx + 312.0),
+            Screen::Options => row(ROW0, ROW_H, PAGES.len(), PANEL_X, PANEL_X + PANEL_W),
+            Screen::OptionsPage(p) => row(PAGE_ROW0, ROW_H, page_items(p).len(), PANEL_X, PANEL_X + PANEL_W),
+            Screen::Quit => QUIT_BUTTONS
+                .iter()
+                .position(|&bx| x >= bx && x < bx + QUIT_BTN.0 && y >= QUIT_BTN_Y && y < QUIT_BTN_Y + QUIT_BTN.1),
+            Screen::None => None,
         }
     }
 
@@ -213,7 +245,8 @@ impl Menu {
             Screen::Load | Screen::Save => Some(&mut self.load_cursor),
             Screen::Options => Some(&mut self.page_cursor),
             Screen::OptionsPage(_) => Some(&mut self.opt_cursor),
-            Screen::Quit | Screen::None => None,
+            Screen::Quit => Some(&mut self.quit_cursor),
+            Screen::None => None,
         }
     }
 
@@ -221,6 +254,14 @@ impl Menu {
     /// Returns a sound to play when the selection changed.
     pub fn mouse_move(&mut self, pos: (f32, f32)) -> Option<&'static str> {
         self.mouse = Some(pos);
+        if let Some(d) = self.drop {
+            let i = self.drop_at(pos, d)?;
+            let dc = &mut self.drop.as_mut()?.cursor;
+            return (*dc != i).then(|| {
+                *dc = i;
+                "misc/menu1.wav"
+            });
+        }
         let i = self.item_at(pos)?;
         let c = self.cursor_mut()?;
         (*c != i).then(|| {
@@ -231,8 +272,12 @@ impl Menu {
 
     pub fn key(&mut self, key: i32, cv: &mut Cvars, server_active: bool) -> Vec<Action> {
         let mut out = Vec::new();
+        if let (Some(d), Screen::OptionsPage(p)) = (self.drop, self.screen) {
+            self.drop_key(key, d, page_items(p)[d.item], cv, &mut out);
+            return out;
+        }
         // left click acts on the item under the pointer, never on a stale cursor
-        if key == K_MOUSE1 && self.screen != Screen::Quit {
+        if key == K_MOUSE1 {
             let Some(pos) = self.mouse else { return out };
             let Some(i) = self.item_at(pos) else { return out };
             if let Some(c) = self.cursor_mut() {
@@ -364,15 +409,30 @@ impl Menu {
                 }
                 let items = page_items(p);
                 wrap(&mut self.opt_cursor, items.len(), &mut out);
+                let item = items[self.opt_cursor];
+                if enter && self.options(item).len() > 2 {
+                    let cur = self.option_index(item, cv);
+                    let mut d = Drop { item: self.opt_cursor, cursor: cur, scroll: 0 };
+                    clamp_scroll(&mut d);
+                    self.drop = Some(d);
+                    out.push(Action::Sound("misc/menu2.wav"));
+                    return out;
+                }
                 let dir = if left { -1 } else if right || enter { 1 } else { 0 };
                 if dir != 0 && self.adjust(items[self.opt_cursor], dir, enter, cv, &mut out) {
                     out.push(Action::Sound("misc/menu3.wav"));
                 }
             }
             Screen::Quit => {
-                if matches!(key, K_ENTER | K_ABUTTON | K_MOUSE1) || key == b'y' as i32 {
+                if left || right {
+                    self.quit_cursor ^= 1;
+                    out.push(Action::Sound("misc/menu1.wav"));
+                }
+                let yes = matches!(key, 0x79 | 0x59) || (enter && self.quit_cursor == 0);
+                let no = matches!(key, 0x6e | 0x4e) || back || (enter && self.quit_cursor == 1);
+                if yes {
                     out.push(Action::Command("quit\n".into()));
-                } else if back || key == b'n' as i32 {
+                } else if no {
                     self.screen = if self.prev == Screen::Quit { Screen::Main } else { self.prev };
                     if self.screen == Screen::None {
                         out.push(Action::Close);
@@ -428,6 +488,100 @@ impl Menu {
         true
     }
 
+    /// Display names of an item's discrete values (empty for sliders/Apply).
+    /// Items with more than two get a dropdown.
+    fn options(&self, item: Item) -> Vec<String> {
+        match item {
+            Item::Toggle { .. } => vec!["off".into(), "on".into()],
+            Item::Choice { cvar, choices, .. } => choices[..self.choice_count(cvar, choices)].iter().map(|c| c.0.to_string()).collect(),
+            Item::DisplayMode => MODES.iter().map(|m| m.to_string()).collect(),
+            Item::Resolution if self.pending_mode != 2 => self.resolutions.iter().map(|(w, h)| format!("{w}x{h}")).collect(),
+            _ => Vec::new(),
+        }
+    }
+
+    /// Index of the item's current value in `options`.
+    fn option_index(&self, item: Item, cv: &Cvars) -> usize {
+        match item {
+            Item::Toggle { cvar, .. } => (cv.value_of(cvar) != 0.0) as usize,
+            Item::Choice { cvar, choices, .. } => nearest_choice(cv.value_of(cvar), &choices[..self.choice_count(cvar, choices)]),
+            Item::DisplayMode => self.pending_mode.min(MODES.len() - 1),
+            Item::Resolution => self.resolutions.iter().position(|&r| r == self.pending_res).unwrap_or(0),
+            _ => 0,
+        }
+    }
+
+    fn set_option(&mut self, item: Item, i: usize, cv: &mut Cvars) {
+        match item {
+            Item::Toggle { cvar, .. } => {
+                cv.set(cvar, if i != 0 { "1" } else { "0" });
+            }
+            Item::Choice { cvar, choices, .. } => set_num(cv, cvar, choices[i].1),
+            Item::DisplayMode => self.pending_mode = i,
+            Item::Resolution => self.pending_res = self.resolutions[i],
+            _ => {}
+        }
+    }
+
+    /// Dropdown box: (x, y, w) and visible entry count. Opens below its row,
+    /// or above when it would run off the bottom.
+    fn drop_geom(&self, d: Drop, opts: &[String]) -> (f32, f32, f32, usize) {
+        let vis = opts.len().min(DROP_ROWS);
+        let w = opts.iter().map(|o| o.len() as f32 * 8.0 + 20.0).fold(DROP_W, f32::max);
+        let row_y = PAGE_ROW0 + d.item as f32 * ROW_H;
+        let h = vis as f32 * ROW_H + 2.0;
+        let y = if row_y + ROW_H + h > MENU_H - 4.0 { row_y - h } else { row_y + ROW_H };
+        (VALUE_X - 3.0, y, w, vis)
+    }
+
+    /// Dropdown entry under the point.
+    fn drop_at(&self, (x, y): (f32, f32), d: Drop) -> Option<usize> {
+        let Screen::OptionsPage(p) = self.screen else { return None };
+        let opts = self.options(page_items(p)[d.item]);
+        let (bx, by, bw, vis) = self.drop_geom(d, &opts);
+        let k = ((y - by - 1.0) / ROW_H).floor();
+        (x >= bx && x < bx + bw && k >= 0.0 && (k as usize) < vis).then(|| d.scroll + k as usize)
+    }
+
+    /// Keys while a dropdown is open: navigate, pick, or close.
+    fn drop_key(&mut self, key: i32, mut d: Drop, item: Item, cv: &mut Cvars, out: &mut Vec<Action>) {
+        let n = self.options(item).len();
+        if n == 0 {
+            self.drop = None;
+            return;
+        }
+        let pick = |m: &mut Self, i: usize, cv: &mut Cvars, out: &mut Vec<Action>| {
+            m.set_option(item, i, cv);
+            m.drop = None;
+            out.push(Action::Sound("misc/menu3.wav"));
+        };
+        match key {
+            K_MOUSE1 => match self.mouse.and_then(|p| self.drop_at(p, d)) {
+                Some(i) => pick(self, i, cv, out),
+                None => self.drop = None,
+            },
+            K_ENTER | K_KP_ENTER | K_ABUTTON => pick(self, d.cursor, cv, out),
+            K_ESCAPE | K_BBUTTON | K_MOUSE2 => self.drop = None,
+            K_UPARROW | K_DPAD_UP | K_DOWNARROW | K_DPAD_DOWN => {
+                let up = matches!(key, K_UPARROW | K_DPAD_UP);
+                d.cursor = if up { d.cursor.saturating_sub(1) } else { (d.cursor + 1).min(n - 1) };
+                clamp_scroll(&mut d);
+                self.drop = Some(d);
+                out.push(Action::Sound("misc/menu1.wav"));
+            }
+            K_MWHEELUP | K_MWHEELDOWN => {
+                let max = n.saturating_sub(DROP_ROWS);
+                d.scroll = if key == K_MWHEELUP { d.scroll.saturating_sub(1) } else { (d.scroll + 1).min(max) };
+                // keep the highlight on the entry under the pointer
+                if let Some(i) = self.mouse.and_then(|p| self.drop_at(p, d)) {
+                    d.cursor = i;
+                }
+                self.drop = Some(d);
+            }
+            _ => {}
+        }
+    }
+
     /// Choices usable on this device (MSAA limited by the GPU).
     fn choice_count(&self, cvar: &str, choices: &[(&str, f32)]) -> usize {
         if cvar == "r_msaa" {
@@ -448,7 +602,18 @@ impl Menu {
             return;
         }
         c.fade_screen();
-        c.center_320x200();
+        let base_scale = c.scale;
+        c.menu_layout();
+        if !matches!(self.screen, Screen::Options | Screen::OptionsPage(_) | Screen::Quit) {
+            c.ox += CLASSIC.0;
+            c.oy += CLASSIC.1;
+        }
+        let title_c = |c: &mut Canvas, pic: &mut PicFn, name: &str| {
+            let p = pic(name);
+            if let Some((_, w, _)) = p {
+                c.pic(((640 - w as i32) / 2) as f32, 16.0, p);
+            }
+        };
         let dot = |pic: &mut PicFn| pic(&format!("gfx/menudot{}.lmp", (realtime * 10.0) as i64 % 6 + 1));
         let title = |c: &mut Canvas, pic: &mut PicFn, name: &str| {
             let p = pic(name);
@@ -486,44 +651,91 @@ impl Menu {
             }
             Screen::Options => {
                 let p = pic("gfx/qplaque.lmp");
-                c.pic(16.0, 4.0, p);
-                title(c, pic, "gfx/p_option.lmp");
+                c.pic(PANEL_X - 40.0, 16.0, p);
+                title_c(c, pic, "gfx/p_option.lmp");
+                panel(c, ROW0, PAGES.len());
+                highlight(c, ROW0 + self.page_cursor as f32 * ROW_H);
                 for (i, (label, _)) in PAGES.iter().enumerate() {
-                    c.string(VALUE_X - 8.0 * 9.0, ROW0 + i as f32 * 8.0, label);
-                }
-                if (realtime * 4.0) as i64 & 1 == 0 {
-                    c.ch(VALUE_X - 8.0 * 11.0, ROW0 + self.page_cursor as f32 * 8.0, 13);
+                    let y = ROW0 + i as f32 * ROW_H + 1.0;
+                    c.string(((640.0 - label.len() as f32 * 8.0) / 2.0).floor(), y, label);
                 }
             }
             Screen::OptionsPage(page) => {
-                // no plaque here: long labels need the left margin
-                title(c, pic, "gfx/p_option.lmp");
+                let p = pic("gfx/qplaque.lmp");
+                c.pic(PANEL_X - 40.0, 16.0, p);
+                title_c(c, pic, "gfx/p_option.lmp");
                 let name = PAGES.iter().find(|x| x.1 == page).map_or("", |x| x.0);
-                let hx = ((320.0 - name.len() as f32 * 8.0) / 2.0).floor();
-                for (k, b) in name.bytes().enumerate() {
-                    c.ch(hx + k as f32 * 8.0, PAGE_ROW0 - 12.0, b | 128);
+                gold(c, ((640.0 - name.len() as f32 * 8.0) / 2.0).floor(), PAGE_ROW0 - 16.0, name);
+                let items = page_items(page);
+                panel(c, PAGE_ROW0, items.len());
+                highlight(c, PAGE_ROW0 + self.opt_cursor as f32 * ROW_H);
+                for (i, item) in items.iter().enumerate() {
+                    self.draw_item(c, cv, *item, PAGE_ROW0 + i as f32 * ROW_H + 1.0);
                 }
-                for (i, item) in page_items(page).iter().enumerate() {
-                    self.draw_item(c, cv, *item, PAGE_ROW0 + i as f32 * 8.0);
-                }
-                if (realtime * 4.0) as i64 & 1 == 0 {
-                    c.ch(VALUE_X - 8.0, PAGE_ROW0 + self.opt_cursor as f32 * 8.0, 13);
+                if let Some(d) = self.drop {
+                    self.draw_drop(c, cv, items[d.item], d);
                 }
             }
             Screen::Quit => {
-                let msg = ["  Really quit?  ", "", " Y, Enter or click ", "   to quit, N or   ", "  Escape/right-click"];
-                c.fill(56.0, 76.0, 208.0, 56.0, [0.0, 0.0, 0.0, 0.85]);
-                for (i, l) in msg.iter().enumerate() {
-                    c.string(64.0, 80.0 + i as f32 * 8.0, l);
+                let (bx, by, bw, bh) = QUIT_BOX;
+                c.fill(bx, by, bw, bh, [0.05, 0.04, 0.03, 0.92]);
+                c.frame(bx, by, bw, bh, BORDER);
+                let msg = "Really quit?";
+                c.string(((640.0 - msg.len() as f32 * 8.0) / 2.0).floor(), by + 12.0, msg);
+                for (i, (&x, label)) in QUIT_BUTTONS.iter().zip(["(Y)es", "(N)o"]).enumerate() {
+                    let (w, h) = QUIT_BTN;
+                    if i == self.quit_cursor {
+                        c.fill(x, QUIT_BTN_Y, w, h, HILITE);
+                    }
+                    c.frame(x, QUIT_BTN_Y, w, h, BORDER);
+                    let tx = x + ((w - label.len() as f32 * 8.0) / 2.0).floor();
+                    // gold hotkey letter
+                    c.string(tx, QUIT_BTN_Y + 3.0, "(");
+                    gold(c, tx + 8.0, QUIT_BTN_Y + 3.0, &label[1..2]);
+                    c.string(tx + 16.0, QUIT_BTN_Y + 3.0, &label[2..]);
                 }
             }
             Screen::None => {}
         }
         c.reset_origin();
+        c.scale = base_scale;
+    }
+
+    fn draw_drop(&self, c: &mut Canvas, cv: &Cvars, item: Item, d: Drop) {
+        let opts = self.options(item);
+        let (x, y, w, vis) = self.drop_geom(d, &opts);
+        let h = vis as f32 * ROW_H + 2.0;
+        c.fill(x, y, w, h, [0.05, 0.04, 0.03, 0.97]);
+        c.frame(x, y, w, h, BORDER);
+        let cur = self.option_index(item, cv);
+        for (k, o) in opts.iter().enumerate().skip(d.scroll).take(vis) {
+            let ry = y + 1.0 + (k - d.scroll) as f32 * ROW_H;
+            if k == d.cursor {
+                c.fill(x + 1.0, ry, w - 2.0, ROW_H, HILITE);
+            }
+            if k == cur {
+                gold(c, x + 4.0, ry + 1.0, o);
+            } else {
+                c.string(x + 4.0, ry + 1.0, o);
+            }
+        }
+        // scroll hints
+        if d.scroll > 0 {
+            c.ch(x + w - 10.0, y + 2.0, b'^' | 128);
+        }
+        if d.scroll + vis < opts.len() {
+            c.ch(x + w - 10.0, y + h - 10.0, b'v' | 128);
+        }
     }
 
     fn draw_item(&self, c: &mut Canvas, cv: &Cvars, item: Item, y: f32) {
-        let label = |c: &mut Canvas, l: &str| c.string(VALUE_X - 16.0 - l.len() as f32 * 8.0, y, l);
+        let label = |c: &mut Canvas, l: &str| c.string(LABEL_R - l.len() as f32 * 8.0, y, l);
+        // values with a dropdown get a combo box
+        if self.options(item).len() > 2 {
+            c.fill(VALUE_X - 3.0, y - 1.0, DROP_W, ROW_H, [0.0, 0.0, 0.0, 0.5]);
+            c.frame(VALUE_X - 3.0, y - 1.0, DROP_W, ROW_H, BORDER);
+            c.ch(VALUE_X + DROP_W - 13.0, y, b'v' | 128);
+        }
         match item {
             Item::Slider { label: l, cvar, min, max, invert, .. } => {
                 label(c, l);
@@ -576,6 +788,41 @@ impl Menu {
     }
 }
 
+/// Quit prompt: box (x, y, w, h), button size, button row and left edges.
+const QUIT_BOX: (f32, f32, f32, f32) = (224.0, 144.0, 192.0, 64.0);
+const QUIT_BTN: (f32, f32) = (64.0, 14.0);
+const QUIT_BTN_Y: f32 = 178.0;
+const QUIT_BUTTONS: [f32; 2] = [248.0, 328.0];
+
+const BORDER: [f32; 4] = [0.55, 0.42, 0.25, 1.0];
+const HILITE: [f32; 4] = [0.6, 0.38, 0.12, 0.45];
+
+/// Brown/gold conchars text.
+fn gold(c: &mut Canvas, x: f32, y: f32, s: &str) {
+    for (k, b) in s.bytes().enumerate() {
+        c.ch(x + k as f32 * 8.0, y, b | 128);
+    }
+}
+
+/// Translucent box behind `n` option rows starting at `top`.
+fn panel(c: &mut Canvas, top: f32, n: usize) {
+    let h = n as f32 * ROW_H + 8.0;
+    c.fill(PANEL_X, top - 4.0, PANEL_W, h, [0.0, 0.0, 0.0, 0.55]);
+    c.frame(PANEL_X, top - 4.0, PANEL_W, h, [0.35, 0.27, 0.16, 0.9]);
+}
+
+fn highlight(c: &mut Canvas, y: f32) {
+    c.fill(PANEL_X + 2.0, y, PANEL_W - 4.0, ROW_H, HILITE);
+}
+
+fn clamp_scroll(d: &mut Drop) {
+    if d.cursor < d.scroll {
+        d.scroll = d.cursor;
+    } else if d.cursor >= d.scroll + DROP_ROWS {
+        d.scroll = d.cursor + 1 - DROP_ROWS;
+    }
+}
+
 fn set_num(cv: &mut Cvars, name: &str, v: f32) {
     cv.set(name, &qcore::cvar::format_float((v * 1000.0).round() / 1000.0));
 }
@@ -589,4 +836,70 @@ fn nearest_choice(v: f32, choices: &[(&str, f32)]) -> usize {
         }
     }
     best
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn dropdown_picks_value() {
+        let mut cv = Cvars::default();
+        cv.register("r_anisotropy", "1", 0);
+        let mut m = Menu::new();
+        m.open(Screen::OptionsPage(Page::Graphics));
+        let row = GRAPHICS.iter().position(|i| matches!(i, Item::Choice { cvar: "r_anisotropy", .. })).unwrap();
+        m.opt_cursor = row;
+        m.key(K_ENTER, &mut cv, false);
+        assert!(m.drop.is_some());
+        m.key(K_DOWNARROW, &mut cv, false);
+        m.key(K_DOWNARROW, &mut cv, false);
+        m.key(K_ENTER, &mut cv, false);
+        assert!(m.drop.is_none());
+        assert_eq!(cv.value_of("r_anisotropy"), 4.0);
+        // escape closes without changing
+        m.key(K_ENTER, &mut cv, false);
+        m.key(K_DOWNARROW, &mut cv, false);
+        m.key(K_ESCAPE, &mut cv, false);
+        assert!(m.drop.is_none());
+        assert_eq!(m.screen, Screen::OptionsPage(Page::Graphics));
+        assert_eq!(cv.value_of("r_anisotropy"), 4.0);
+        // two-value choices still cycle
+        let filt = GRAPHICS.iter().position(|i| matches!(i, Item::Choice { cvar: "r_texfilter", .. })).unwrap();
+        m.opt_cursor = filt;
+        m.key(K_ENTER, &mut cv, false);
+        assert!(m.drop.is_none());
+    }
+}
+
+#[cfg(test)]
+mod quit_tests {
+    use super::*;
+
+    fn quits(acts: &[Action]) -> bool {
+        acts.iter().any(|a| matches!(a, Action::Command(c) if c == "quit\n"))
+    }
+
+    #[test]
+    fn quit_prompt_buttons_and_keys() {
+        let mut cv = Cvars::default();
+        let mut m = Menu::new();
+        m.open(Screen::Main);
+        m.open(Screen::Quit);
+        assert!(quits(&m.key(b'y' as i32, &mut cv, false)));
+        // click "No"
+        m.mouse_move((QUIT_BUTTONS[1] + 4.0, QUIT_BTN_Y + 4.0));
+        assert!(!quits(&m.key(K_MOUSE1, &mut cv, false)));
+        assert_eq!(m.screen, Screen::Main);
+        // click "Yes"
+        m.open(Screen::Quit);
+        m.mouse_move((QUIT_BUTTONS[0] + 4.0, QUIT_BTN_Y + 4.0));
+        assert!(quits(&m.key(K_MOUSE1, &mut cv, false)));
+        // keyboard: right then enter = No
+        m.mouse = None;
+        m.quit_cursor = 0;
+        m.key(K_RIGHTARROW, &mut cv, false);
+        assert!(!quits(&m.key(K_ENTER, &mut cv, false)));
+        assert_eq!(m.screen, Screen::Main);
+    }
 }
