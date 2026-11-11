@@ -12,6 +12,7 @@ mod draw;
 mod host;
 mod menu;
 mod modmenu;
+mod net;
 mod platform;
 mod png;
 mod sbar;
@@ -74,7 +75,10 @@ fn main() {
     }
     // User config/saves live outside the game data and override it.
     fs.add_user_dir(user_dir(fs.game_dir().unwrap_or("id1")));
-    let headless = o.has("-headless");
+    // -dedicated [n]: no window, no local client, real-time pacing.
+    let dedicated = o.has("-dedicated");
+    let realtime = dedicated || o.has("-realtime");
+    let headless = o.has("-headless") || dedicated;
     let w: u32 = o.val("-width").and_then(|s| s.parse().ok()).unwrap_or(1280);
     let h: u32 = o.val("-height").and_then(|s| s.parse().ok()).unwrap_or(720);
     let autoquit: Option<f64> = o.val("-autoquit").and_then(|s| s.parse().ok());
@@ -131,6 +135,17 @@ fn main() {
 
     let mut host = host::Host::new(fs, renderer, snd, o.args.clone());
     host.headless = headless;
+    host.dedicated = dedicated;
+    if let Some(p) = o.val("-port").and_then(|s| s.parse().ok()) {
+        host.net_port = p;
+    }
+    // -listen [n] / -dedicated [n]: slots for the first map (default 8 / 16).
+    for (flag, def) in [("-listen", 8), ("-dedicated", 16)] {
+        if o.has(flag) {
+            let n = o.val(flag).and_then(|s| s.parse::<usize>().ok()).unwrap_or(def);
+            host.exec_line(&format!("maxplayers {n}"));
+        }
+    }
     if let Some(win) = window {
         let _ = win.set_text_input(true);
         host.window = Some(win);
@@ -139,8 +154,8 @@ fn main() {
     let mut last = Instant::now();
     loop {
         // Host_FilterTime: timedemo runs uncapped.
-        let maxfps = if host.timedemo_active() { 0.0 } else { host.server.core.cvars.value_of("host_maxfps") };
-        let dt = if headless {
+        let maxfps = if dedicated { 72.0 } else if host.timedemo_active() { 0.0 } else { host.server.core.cvars.value_of("host_maxfps") };
+        let dt = if headless && !realtime {
             1.0 / if maxfps > 0.0 { maxfps.min(1000.0) as f64 } else { 72.0 }
         } else {
             let min = if maxfps > 0.0 { 1.0 / maxfps as f64 } else { 0.0 };

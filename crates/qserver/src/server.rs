@@ -253,6 +253,9 @@ fn register_cvars(cv: &mut Cvars) {
     }
 }
 
+/// MAX_SCOREBOARD: most client slots.
+pub const MAX_SCOREBOARD: usize = 16;
+
 impl Server {
     /// A server with `maxclients` slots (1 for single player).
     pub fn new(fs: Fs, mut cvars: Cvars, maxclients: usize) -> Self {
@@ -281,6 +284,11 @@ impl Server {
         };
         crate::commands::register(&mut s);
         s
+    }
+
+    /// Resize the client slots (no server may be running).
+    pub fn set_maxclients(&mut self, n: usize) {
+        self.core.clients = (0..n.clamp(1, MAX_SCOREBOARD)).map(|_| Client::default()).collect();
     }
 
     pub(crate) fn add_cmd(&mut self, name: &str, f: qcore::cmd::CmdFn<Server>) {
