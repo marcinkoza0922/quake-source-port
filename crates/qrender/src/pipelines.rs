@@ -1,0 +1,363 @@
+//! Descriptor layouts and pipelines.
+
+use crate::Result;
+use crate::gpu::Gpu;
+use ash::vk;
+
+macro_rules! spv {
+    ($n:literal) => {
+        include_bytes!(concat!(env!("OUT_DIR"), "/", $n, ".spv"))
+    };
+}
+
+pub const MAX_TEXTURES: u32 = 4096;
+pub const COLOR_FORMAT: vk::Format = vk::Format::R8G8B8A8_UNORM;
+pub const DEPTH_FORMAT: vk::Format = vk::Format::D32_SFLOAT;
+pub const LM_FORMAT: vk::Format = vk::Format::R16G16B16A16_SFLOAT;
+
+pub struct Pipelines {
+    pub set_layout: vk::DescriptorSetLayout,
+    pub layout: vk::PipelineLayout,
+    pub comp_set_layout: vk::DescriptorSetLayout,
+    pub comp_layout: vk::PipelineLayout,
+    pub lightmap: vk::Pipeline,
+    pub world: vk::Pipeline,
+    pub world_alpha: vk::Pipeline,
+    pub water: vk::Pipeline,
+    pub water_alpha: vk::Pipeline,
+    pub sky: vk::Pipeline,
+    pub alias: vk::Pipeline,
+    pub alias_alpha: vk::Pipeline,
+    pub poly: vk::Pipeline,
+    pub particle: vk::Pipeline,
+    pub ui: vk::Pipeline,
+    pub post: vk::Pipeline,
+    pub post_format: vk::Format,
+    modules: Vec<vk::ShaderModule>,
+}
+
+#[derive(Clone, Copy, PartialEq)]
+enum Blend {
+    None,
+    Alpha,
+}
+
+struct Desc<'a> {
+    vs: vk::ShaderModule,
+    fs: vk::ShaderModule,
+    bindings: &'a [vk::VertexInputBindingDescription],
+    attrs: &'a [vk::VertexInputAttributeDescription],
+    blend: Blend,
+    depth_test: bool,
+    depth_write: bool,
+    color: vk::Format,
+    depth: bool,
+}
+
+fn attr(
+    loc: u32,
+    binding: u32,
+    format: vk::Format,
+    offset: u32,
+) -> vk::VertexInputAttributeDescription {
+    vk::VertexInputAttributeDescription {
+        location: loc,
+        binding,
+        format,
+        offset,
+    }
+}
+
+fn bind(binding: u32, stride: u32, instance: bool) -> vk::VertexInputBindingDescription {
+    vk::VertexInputBindingDescription {
+        binding,
+        stride,
+        input_rate: if instance {
+            vk::VertexInputRate::INSTANCE
+        } else {
+            vk::VertexInputRate::VERTEX
+        },
+    }
+}
+
+fn graphics(gpu: &Gpu, layout: vk::PipelineLayout, d: &Desc) -> Result<vk::Pipeline> {
+    let stages = [
+        vk::PipelineShaderStageCreateInfo::default()
+            .stage(vk::ShaderStageFlags::VERTEX)
+            .module(d.vs)
+            .name(c"main"),
+        vk::PipelineShaderStageCreateInfo::default()
+            .stage(vk::ShaderStageFlags::FRAGMENT)
+            .module(d.fs)
+            .name(c"main"),
+    ];
+    let vi = vk::PipelineVertexInputStateCreateInfo::default()
+        .vertex_binding_descriptions(d.bindings)
+        .vertex_attribute_descriptions(d.attrs);
+    let ia = vk::PipelineInputAssemblyStateCreateInfo::default()
+        .topology(vk::PrimitiveTopology::TRIANGLE_LIST);
+    let vp = vk::PipelineViewportStateCreateInfo::default()
+        .viewport_count(1)
+        .scissor_count(1);
+    let rs = vk::PipelineRasterizationStateCreateInfo::default()
+        .polygon_mode(vk::PolygonMode::FILL)
+        .cull_mode(vk::CullModeFlags::NONE)
+        .line_width(1.0);
+    let ms = vk::PipelineMultisampleStateCreateInfo::default()
+        .rasterization_samples(vk::SampleCountFlags::TYPE_1);
+    let ds = vk::PipelineDepthStencilStateCreateInfo::default()
+        .depth_test_enable(d.depth_test)
+        .depth_write_enable(d.depth_write)
+        .depth_compare_op(vk::CompareOp::LESS_OR_EQUAL);
+    let att = [vk::PipelineColorBlendAttachmentState {
+        blend_enable: (d.blend == Blend::Alpha).into(),
+        src_color_blend_factor: vk::BlendFactor::SRC_ALPHA,
+        dst_color_blend_factor: vk::BlendFactor::ONE_MINUS_SRC_ALPHA,
+        color_blend_op: vk::BlendOp::ADD,
+        src_alpha_blend_factor: vk::BlendFactor::ONE,
+        dst_alpha_blend_factor: vk::BlendFactor::ONE_MINUS_SRC_ALPHA,
+        alpha_blend_op: vk::BlendOp::ADD,
+        color_write_mask: vk::ColorComponentFlags::RGBA,
+    }];
+    let cb = vk::PipelineColorBlendStateCreateInfo::default().attachments(&att);
+    let dyn_states = [vk::DynamicState::VIEWPORT, vk::DynamicState::SCISSOR];
+    let dy = vk::PipelineDynamicStateCreateInfo::default().dynamic_states(&dyn_states);
+    let formats = [d.color];
+    let mut ri = vk::PipelineRenderingCreateInfo::default().color_attachment_formats(&formats);
+    if d.depth {
+        ri = ri.depth_attachment_format(DEPTH_FORMAT);
+    }
+    let ci = [vk::GraphicsPipelineCreateInfo::default()
+        .stages(&stages)
+        .vertex_input_state(&vi)
+        .input_assembly_state(&ia)
+        .viewport_state(&vp)
+        .rasterization_state(&rs)
+        .multisample_state(&ms)
+        .depth_stencil_state(&ds)
+        .color_blend_state(&cb)
+        .dynamic_state(&dy)
+        .layout(layout)
+        .push_next(&mut ri)];
+    // SAFETY: all referenced state lives until the call returns.
+    let p = unsafe {
+        gpu.device
+            .create_graphics_pipelines(vk::PipelineCache::null(), &ci, None)
+    }
+    .map_err(|(_, e)| e)?;
+    Ok(p[0])
+}
+
+impl Pipelines {
+    pub fn new(gpu: &Gpu, post_format: vk::Format) -> Result<Pipelines> {
+        let dev = &gpu.device;
+        let all = vk::ShaderStageFlags::VERTEX | vk::ShaderStageFlags::FRAGMENT;
+        let b = |i: u32, ty: vk::DescriptorType, n: u32| {
+            vk::DescriptorSetLayoutBinding::default()
+                .binding(i)
+                .descriptor_type(ty)
+                .descriptor_count(n)
+                .stage_flags(all)
+        };
+        let bindings = [
+            b(0, vk::DescriptorType::UNIFORM_BUFFER, 1),
+            b(1, vk::DescriptorType::COMBINED_IMAGE_SAMPLER, MAX_TEXTURES),
+            b(2, vk::DescriptorType::STORAGE_BUFFER, 1),
+            b(3, vk::DescriptorType::COMBINED_IMAGE_SAMPLER, 1),
+            b(4, vk::DescriptorType::STORAGE_BUFFER, 1),
+            b(5, vk::DescriptorType::STORAGE_BUFFER, 1),
+        ];
+        let flags = [
+            vk::DescriptorBindingFlags::empty(),
+            vk::DescriptorBindingFlags::PARTIALLY_BOUND,
+            vk::DescriptorBindingFlags::empty(),
+            vk::DescriptorBindingFlags::empty(),
+            vk::DescriptorBindingFlags::empty(),
+            vk::DescriptorBindingFlags::empty(),
+        ];
+        let mut fi = vk::DescriptorSetLayoutBindingFlagsCreateInfo::default().binding_flags(&flags);
+        let ci = vk::DescriptorSetLayoutCreateInfo::default()
+            .bindings(&bindings)
+            .push_next(&mut fi);
+        // SAFETY: valid device and create info.
+        let set_layout = unsafe { dev.create_descriptor_set_layout(&ci, None)? };
+        let pcr = [vk::PushConstantRange {
+            stage_flags: all,
+            offset: 0,
+            size: 128,
+        }];
+        let sl = [set_layout];
+        let lci = vk::PipelineLayoutCreateInfo::default()
+            .set_layouts(&sl)
+            .push_constant_ranges(&pcr);
+        // SAFETY: valid device.
+        let layout = unsafe { dev.create_pipeline_layout(&lci, None)? };
+
+        let cb = |i: u32, ty: vk::DescriptorType| {
+            vk::DescriptorSetLayoutBinding::default()
+                .binding(i)
+                .descriptor_type(ty)
+                .descriptor_count(1)
+                .stage_flags(vk::ShaderStageFlags::COMPUTE)
+        };
+        let cbind = [
+            cb(0, vk::DescriptorType::STORAGE_BUFFER),
+            cb(1, vk::DescriptorType::STORAGE_BUFFER),
+            cb(2, vk::DescriptorType::STORAGE_BUFFER),
+            cb(3, vk::DescriptorType::STORAGE_BUFFER),
+            cb(4, vk::DescriptorType::STORAGE_IMAGE),
+        ];
+        let cci = vk::DescriptorSetLayoutCreateInfo::default().bindings(&cbind);
+        // SAFETY: valid device.
+        let comp_set_layout = unsafe { dev.create_descriptor_set_layout(&cci, None)? };
+        let csl = [comp_set_layout];
+        let clci = vk::PipelineLayoutCreateInfo::default().set_layouts(&csl);
+        // SAFETY: valid device.
+        let comp_layout = unsafe { dev.create_pipeline_layout(&clci, None)? };
+
+        let mut modules = Vec::new();
+        let mut m = |spv: &[u8]| -> Result<vk::ShaderModule> {
+            let s = gpu.shader(spv)?;
+            modules.push(s);
+            Ok(s)
+        };
+        let lm_cs = m(spv!("lightmap.comp"))?;
+        let world_vs = m(spv!("world.vert"))?;
+        let world_fs = m(spv!("world.frag"))?;
+        let water_fs = m(spv!("water.frag"))?;
+        let sky_fs = m(spv!("sky.frag"))?;
+        let alias_vs = m(spv!("alias.vert"))?;
+        let alias_fs = m(spv!("alias.frag"))?;
+        let poly_vs = m(spv!("poly.vert"))?;
+        let poly_fs = m(spv!("poly.frag"))?;
+        let part_vs = m(spv!("particle.vert"))?;
+        let part_fs = m(spv!("particle.frag"))?;
+        let ui_vs = m(spv!("ui.vert"))?;
+        let ui_fs = m(spv!("ui.frag"))?;
+        let post_vs = m(spv!("post.vert"))?;
+        let post_fs = m(spv!("post.frag"))?;
+
+        let stage = vk::PipelineShaderStageCreateInfo::default()
+            .stage(vk::ShaderStageFlags::COMPUTE)
+            .module(lm_cs)
+            .name(c"main");
+        let cpci = [vk::ComputePipelineCreateInfo::default()
+            .stage(stage)
+            .layout(comp_layout)];
+        // SAFETY: valid module/layout.
+        let lightmap =
+            unsafe { dev.create_compute_pipelines(vk::PipelineCache::null(), &cpci, None) }
+                .map_err(|(_, e)| e)?[0];
+
+        let f32x3 = vk::Format::R32G32B32_SFLOAT;
+        let f32x2 = vk::Format::R32G32_SFLOAT;
+        let wb = [bind(0, 32, false)];
+        let wa = [
+            attr(0, 0, f32x3, 0),
+            attr(1, 0, f32x2, 12),
+            attr(2, 0, f32x3, 20),
+        ];
+        let ab = [bind(0, 12, false)];
+        let aa = [attr(0, 0, vk::Format::R32_UINT, 0), attr(1, 0, f32x2, 4)];
+        let pb = [bind(0, 20, false)];
+        let pa = [attr(0, 0, f32x3, 0), attr(1, 0, f32x2, 12)];
+        let qb = [bind(0, 16, true)];
+        let qa = [
+            attr(0, 0, f32x3, 0),
+            attr(1, 0, vk::Format::R8G8B8A8_UNORM, 12),
+        ];
+        let ub = [bind(0, 24, false)];
+        let ua = [
+            attr(0, 0, f32x2, 0),
+            attr(1, 0, f32x2, 8),
+            attr(2, 0, vk::Format::R8G8B8A8_UNORM, 16),
+            attr(3, 0, vk::Format::R32_UINT, 20),
+        ];
+        let d = |vs, fs, bindings, attrs, blend, dt, dw| Desc {
+            vs,
+            fs,
+            bindings,
+            attrs,
+            blend,
+            depth_test: dt,
+            depth_write: dw,
+            color: COLOR_FORMAT,
+            depth: true,
+        };
+        let g = |d: Desc| graphics(gpu, layout, &d);
+        let world = g(d(world_vs, world_fs, &wb, &wa, Blend::None, true, true))?;
+        let world_alpha = g(d(world_vs, world_fs, &wb, &wa, Blend::Alpha, true, false))?;
+        let water = g(d(world_vs, water_fs, &wb, &wa, Blend::None, true, true))?;
+        let water_alpha = g(d(world_vs, water_fs, &wb, &wa, Blend::Alpha, true, false))?;
+        let sky = g(d(world_vs, sky_fs, &wb, &wa, Blend::None, true, true))?;
+        let alias = g(d(alias_vs, alias_fs, &ab, &aa, Blend::None, true, true))?;
+        let alias_alpha = g(d(alias_vs, alias_fs, &ab, &aa, Blend::Alpha, true, false))?;
+        let poly = g(d(poly_vs, poly_fs, &pb, &pa, Blend::Alpha, true, true))?;
+        let particle = g(d(part_vs, part_fs, &qb, &qa, Blend::Alpha, true, false))?;
+        let ui = g(d(ui_vs, ui_fs, &ub, &ua, Blend::Alpha, false, false))?;
+        let post = graphics(
+            gpu,
+            layout,
+            &Desc {
+                vs: post_vs,
+                fs: post_fs,
+                bindings: &[],
+                attrs: &[],
+                blend: Blend::None,
+                depth_test: false,
+                depth_write: false,
+                color: post_format,
+                depth: false,
+            },
+        )?;
+        Ok(Pipelines {
+            set_layout,
+            layout,
+            comp_set_layout,
+            comp_layout,
+            lightmap,
+            world,
+            world_alpha,
+            water,
+            water_alpha,
+            sky,
+            alias,
+            alias_alpha,
+            poly,
+            particle,
+            ui,
+            post,
+            post_format,
+            modules,
+        })
+    }
+
+    pub fn destroy(&mut self, dev: &ash::Device) {
+        // SAFETY: device idle at teardown.
+        unsafe {
+            for p in [
+                self.lightmap,
+                self.world,
+                self.world_alpha,
+                self.water,
+                self.water_alpha,
+                self.sky,
+                self.alias,
+                self.alias_alpha,
+                self.poly,
+                self.particle,
+                self.ui,
+                self.post,
+            ] {
+                dev.destroy_pipeline(p, None);
+            }
+            for m in self.modules.drain(..) {
+                dev.destroy_shader_module(m, None);
+            }
+            dev.destroy_pipeline_layout(self.layout, None);
+            dev.destroy_pipeline_layout(self.comp_layout, None);
+            dev.destroy_descriptor_set_layout(self.set_layout, None);
+            dev.destroy_descriptor_set_layout(self.comp_set_layout, None);
+        }
+    }
+}

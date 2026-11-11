@@ -1,0 +1,6 @@
+/target
+/ironwail/
+/vkQuake/
+/vkQuake directory with maps
+*.pak
+*.pk3

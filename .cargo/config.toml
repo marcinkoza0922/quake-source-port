@@ -1,0 +1,7 @@
+[term]
+quiet = true
+progress.when = "never"
+color = "never"
+
+[profile.dev.package."*"]
+opt-level = 2

@@ -1,0 +1,65 @@
+#version 460
+// Builds lightmap atlas texels for visible surfaces from raw samples,
+// lightstyles and dynamic lights (R_BuildLightMap + R_AddDynamicLights).
+layout(local_size_x = 8, local_size_y = 8) in;
+struct Surf {
+    uint sample_ofs;  // 0xffffffff: no light data (fullbright)
+    uint styles;      // 4 x u8, 255 = none
+    uint size;        // w | h << 16 (in samples)
+    uint atlas;       // x | y << 16
+    vec4 vecs0;
+    vec4 vecs1;
+    vec4 plane;       // normal, dist
+    vec4 tmins;       // texturemins.xy, layer, pad
+};
+struct DLight { vec4 origin_radius; vec4 color_minlight; };
+layout(set = 0, binding = 0) readonly buffer Samples { uint samples[]; };
+layout(set = 0, binding = 1) readonly buffer Surfs { Surf surfs[]; };
+layout(set = 0, binding = 2) readonly buffer Dyn {
+    float styles[256];
+    uint num_dlights; uint pad0, pad1, pad2;
+    DLight dl[64];
+};
+layout(set = 0, binding = 3) readonly buffer Visible { uint visible[]; };
+layout(set = 0, binding = 4, rgba16f) uniform writeonly image2DArray atlas;
+
+void main() {
+    Surf s = surfs[visible[gl_WorkGroupID.x]];
+    uint w = s.size & 0xffffu, h = s.size >> 16;
+    uint ax = s.atlas & 0xffffu, ay = s.atlas >> 16;
+    int layer = int(s.tmins.z);
+    uint nst = w * h;
+    for (uint y = gl_LocalInvocationID.y; y < h; y += 8u) {
+        for (uint x = gl_LocalInvocationID.x; x < w; x += 8u) {
+            vec3 l = vec3(0.0);
+            if (s.sample_ofs == 0xffffffffu) {
+                l = vec3(1.0);
+            } else {
+                uint i = s.sample_ofs + y * w + x;
+                for (uint k = 0u; k < 4u; k++) {
+                    uint st = (s.styles >> (k * 8u)) & 0xffu;
+                    if (st == 255u) break;
+                    l += unpackUnorm4x8(samples[i]).rgb * 255.0 * styles[st];
+                    i += nst;
+                }
+                l /= 256.0 * 128.0;
+            }
+            for (uint d = 0u; d < num_dlights; d++) {
+                vec3 org = dl[d].origin_radius.xyz;
+                float dist = dot(org, s.plane.xyz) - s.plane.w;
+                float rad = dl[d].origin_radius.w - abs(dist);
+                float minlight = dl[d].color_minlight.w;
+                if (rad < minlight) continue;
+                minlight = rad - minlight;
+                vec3 impact = org - s.plane.xyz * dist;
+                float ls = dot(impact, s.vecs0.xyz) + s.vecs0.w - s.tmins.x;
+                float lt = dot(impact, s.vecs1.xyz) + s.vecs1.w - s.tmins.y;
+                float sd = abs(ls - float(x * 16u));
+                float td = abs(lt - float(y * 16u));
+                float dd = sd > td ? sd + td * 0.5 : td + sd * 0.5;
+                if (dd < minlight) l += (rad - dd) / 128.0 * dl[d].color_minlight.rgb;
+            }
+            imageStore(atlas, ivec3(int(ax + x), int(ay + y), layer), vec4(min(l, vec3(2.0)), 1.0));
+        }
+    }
+}

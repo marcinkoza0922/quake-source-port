@@ -1,0 +1,10 @@
+[profile.default]
+status-level = "fail"
+final-status-level = "fail"
+failure-output = "immediate-final"
+success-output = "never"
+
+[profile.verbose]
+status-level = "all"
+final-status-level = "all"
+failure-output = "immediate"

@@ -1,0 +1,52 @@
+[package]
+name = "quake-source-port"
+version = "0.1.0"
+edition = "2024"
+license = "GPL-2.0-or-later"
+
+[workspace]
+members = ["crates/*", "tools/*"]
+default-members = [".", "crates/*", "tools/*"]
+
+[workspace.package]
+edition = "2024"
+license = "GPL-2.0-or-later"
+
+[workspace.lints.clippy]
+correctness = { level = "deny", priority = -1 }
+suspicious = { level = "warn", priority = -1 }
+perf = { level = "warn", priority = -1 }
+dbg_macro = "warn"
+todo = "warn"
+unimplemented = "warn"
+mem_forget = "warn"
+undocumented_unsafe_blocks = "warn"
+cast_possible_wrap = "allow"
+large_stack_arrays = "warn"
+rc_buffer = "warn"
+unwrap_used = "allow"
+
+[workspace.lints.rust]
+unsafe_op_in_unsafe_fn = "deny"
+
+[lints]
+workspace = true
+
+[dependencies]
+qcore = { path = "crates/qcore" }
+qformats = { path = "crates/qformats" }
+qclient = { path = "crates/qclient" }
+qserver = { path = "crates/qserver" }
+qworld = { path = "crates/qworld" }
+qvm = { path = "crates/qvm" }
+qnet = { path = "crates/qnet" }
+qrender = { path = "crates/qrender" }
+qsound = { path = "crates/qsound" }
+qplatform = { path = "crates/qplatform" }
+qinput = { path = "crates/qinput" }
+miniz_oxide = "0.8"
+
+[profile.release]
+lto = "thin"
+codegen-units = 1
+panic = "abort"

@@ -1,0 +1,15 @@
+[package]
+name = "qsound"
+version = "0.1.0"
+edition.workspace = true
+license.workspace = true
+
+[lints]
+workspace = true
+
+[dependencies]
+qformats = { version = "0.1.0", path = "../qformats" }
+symphonia = { version = "0.5", default-features = false, features = ["ogg", "vorbis", "mp3", "flac", "wav", "pcm"] }
+
+[dev-dependencies]
+qcore = { path = "../qcore" }
