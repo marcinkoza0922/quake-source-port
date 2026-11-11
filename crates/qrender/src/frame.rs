@@ -1463,6 +1463,20 @@ impl Renderer {
                     },
                     ..Default::default()
                 }];
+                // The readback buffer is shared by frames in flight: order
+                // this copy after the previous frame's copy and host read.
+                let rb = [vk::MemoryBarrier::default()
+                    .src_access_mask(vk::AccessFlags::TRANSFER_WRITE)
+                    .dst_access_mask(vk::AccessFlags::TRANSFER_WRITE)];
+                dev.cmd_pipeline_barrier(
+                    cmd,
+                    vk::PipelineStageFlags::TRANSFER,
+                    vk::PipelineStageFlags::TRANSFER,
+                    vk::DependencyFlags::empty(),
+                    &rb,
+                    &[],
+                    &[],
+                );
                 dev.cmd_copy_image_to_buffer(
                     cmd,
                     out_img,

@@ -316,7 +316,8 @@ impl Renderer {
                     | vk::BufferUsageFlags::STORAGE_BUFFER
                     | vk::BufferUsageFlags::VERTEX_BUFFER
                     | vk::BufferUsageFlags::INDEX_BUFFER
-                    | vk::BufferUsageFlags::INDIRECT_BUFFER,
+                    | vk::BufferUsageFlags::INDIRECT_BUFFER
+                    | vk::BufferUsageFlags::TRANSFER_SRC,
                 true,
             )?;
             frames.push(FrameRes {
@@ -1534,7 +1535,6 @@ impl Drop for Renderer {
 
 impl Renderer {
     fn drop_inner(&mut self) {
-
         self.idle();
         self.free_level();
         self.destroy_targets();
@@ -1558,6 +1558,9 @@ impl Renderer {
                 dev.destroy_semaphore(f.acquire, None);
             }
             self.gpu.free_buffer(f.dynbuf);
+        }
+        for b in [&self.palette_buf, &self.dummy, &self.alias_buf] {
+            self.gpu.free_buffer_ref(b);
         }
         if let Some(lm) = self.lightmap.take() {
             self.gpu.free_image(lm);
