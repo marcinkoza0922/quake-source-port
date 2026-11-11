@@ -159,7 +159,8 @@ fn cmd_status(s: &mut Server, _a: &Args) {
             continue;
         }
         let frags = s.level.as_ref().map_or(0, |l| l.vm.ent_f(j as u32 + 1, s.core.sv.fields.frags) as i32);
-        out.push_str(&format!("#{:<2} {:<16.16}  {frags:3}\n", j + 1, c.name));
+        let ms = (c.ping() * 1000.0).round() as i32;
+        out.push_str(&format!("#{:<2} {:<16.16}  {frags:3}  {ms:4} ms\n", j + 1, c.name));
     }
     reply(s, &out);
 }
@@ -194,11 +195,11 @@ fn cmd_kick(s: &mut Server, a: &Args) {
     s.drop_client(i, false);
 }
 
-/// Host_Ping_f (ping times aren't tracked; lists the players).
+/// Host_Ping_f: average round trip per player, in ms.
 fn cmd_ping(s: &mut Server, _a: &Args) {
     let mut out = String::from("Client ping times:\n");
     for c in s.core.clients.iter().filter(|c| c.active) {
-        out.push_str(&format!("   0 {}\n", c.name));
+        out.push_str(&format!("{:4} {}\n", (c.ping() * 1000.0).round() as i32, c.name));
     }
     reply(s, &out);
 }

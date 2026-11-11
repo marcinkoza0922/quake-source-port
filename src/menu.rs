@@ -115,12 +115,6 @@ const SETUP: &[Item] = &[
     Item::Color { label: "Pants Color", high: false },
 ];
 
-/// Player colour rows 0..=13 (a mid entry of each palette row).
-const PLAYER_COLORS: [[u8; 3]; 14] = [
-    [123, 123, 123], [83, 59, 27], [79, 79, 115], [55, 55, 7], [71, 0, 0], [95, 71, 7], [143, 67, 51],
-    [127, 83, 63], [95, 63, 75], [107, 59, 75], [123, 99, 83], [55, 75, 63], [139, 115, 7], [47, 47, 143],
-];
-
 const fn slider(label: &'static str, cvar: &'static str, min: f32, max: f32, step: f32) -> Item {
     Item::Slider { label, cvar, min, max, step, invert: false }
 }
@@ -992,6 +986,17 @@ impl Menu {
                     let blink = (realtime * 4.0) as i64 & 1 == 0 && i == self.opt_cursor;
                     self.draw_item(c, cv, self.page_item(page, i), PAGE_ROW0 + i as f32 * ROW_H + 1.0, blink);
                 }
+                if page == Page::Setup {
+                    // M_Setup_Draw: the player in a box, in the chosen colours.
+                    let v = cv.value_of("_cl_color") as i32;
+                    let y0 = PAGE_ROW0 + n as f32 * ROW_H + 12.0;
+                    let bx = pic("gfx/bigbox.lmp");
+                    let bw = bx.map_or(64.0, |b| b.1 as f32);
+                    c.pic(((640.0 - bw) / 2.0).floor(), y0, bx);
+                    let p = pic(&format!("gfx/menuplyr.lmp#{},{}", (v >> 4) & 15, v & 15));
+                    let pw = p.map_or(48.0, |p| p.1 as f32);
+                    c.pic(((640.0 - pw) / 2.0).floor(), y0 + 8.0, p);
+                }
                 if page == Page::Join && self.servers.is_empty() && !self.searching {
                     let s = "no servers found yet";
                     c.string(((640.0 - s.len() as f32 * 8.0) / 2.0).floor(), PAGE_ROW0 + n as f32 * ROW_H + 8.0, s);
@@ -1114,7 +1119,7 @@ impl Menu {
                 label(c, l);
                 let v = cv.value_of("_cl_color") as i32;
                 let k = if high { v >> 4 } else { v & 15 }.clamp(0, 13) as usize;
-                let [r, g, b] = PLAYER_COLORS[k].map(|x| x as f32 / 255.0);
+                let [r, g, b] = crate::draw::PLAYER_COLORS[k].map(|x| x as f32 / 255.0);
                 c.fill(VALUE_X, y - 1.0, 40.0, ROW_H - 1.0, [r, g, b, 1.0]);
                 c.frame(VALUE_X, y - 1.0, 40.0, ROW_H - 1.0, BORDER);
                 c.string(VALUE_X + 48.0, y, &k.to_string());

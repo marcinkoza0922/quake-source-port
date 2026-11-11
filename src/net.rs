@@ -246,7 +246,7 @@ fn read_client_message(sv: &mut Server, slot: usize, m: &[u8]) -> bool {
                 sv.queue_client_command(slot, s.trim_end_matches('\n'));
             }
             CLC_MOVE => {
-                let _time = r.float();
+                let time = r.float();
                 let mut angles = [0.0; 3];
                 for a in &mut angles {
                     *a = if protocol == PROTOCOL_NETQUAKE { r.angle(flags) } else { r.angle16(flags) };
@@ -259,6 +259,7 @@ fn read_client_message(sv: &mut Server, slot: usize, m: &[u8]) -> bool {
                 if r.badread {
                     return false;
                 }
+                sv.record_ping(slot, time);
                 sv.set_move(slot, ClientMove { angles, forward, side, up, buttons, impulse });
             }
             _ => return false,
@@ -547,6 +548,9 @@ mod tests {
         assert!(b.prints.contains("alice: hello bob"), "chat: {:?}", b.prints);
         let names: Vec<_> = sv.core.clients.iter().filter(|c| c.spawned).map(|c| c.name.clone()).collect();
         assert_eq!(names, ["alice", "bob"]);
+        // clc_move timestamps give round trips (sv.time - cl.mtime[0]).
+        let b = &sv.core.clients[1];
+        assert!(b.num_pings > 10 && (0.0..0.5).contains(&b.ping()), "{} {}", b.num_pings, b.ping());
         // forwardmove moved alice.
         let start = start.unwrap();
         let now_at = sv.level.as_ref().unwrap().vm.ent_v(1, sv.core.sv.fields.origin);

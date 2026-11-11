@@ -31,6 +31,18 @@ impl Pics {
         if let Some(p) = self.cache.get(name) {
             return *p;
         }
+        // "path#top,bottom": the picture with player colours (menuplyr.lmp).
+        if let Some((base, cols)) = name.split_once('#') {
+            let (t, b) = cols.split_once(',').unwrap_or((cols, cols));
+            let (t, b) = (t.parse().unwrap_or(0), b.parse().unwrap_or(0));
+            let pic = fs.open(base).and_then(|d| parse_pic(&d).ok()).map(|mut p| {
+                translate_player(&mut p.pixels, t, b);
+                p
+            });
+            let v = pic.and_then(|p| r.register_pic(&p).ok().map(|id| (id, p.width, p.height)));
+            self.cache.insert(name.to_string(), v);
+            return v;
+        }
         let pic: Option<Pic> = if name.contains('/') {
             fs.open(name).and_then(|d| parse_pic(&d).ok())
         } else {
@@ -39,6 +51,45 @@ impl Pics {
         let v = pic.and_then(|p| r.register_pic(&p).ok().map(|id| (id, p.width, p.height)));
         self.cache.insert(name.to_string(), v);
         v
+    }
+}
+
+/// Player colour rows 0..=13 (a mid entry of each palette row).
+pub const PLAYER_COLORS: [[u8; 3]; 14] = [
+    [123, 123, 123], [83, 59, 27], [79, 79, 115], [55, 55, 7], [71, 0, 0], [95, 71, 7], [143, 67, 51],
+    [127, 83, 63], [95, 63, 75], [107, 59, 75], [123, 99, 83], [55, 75, 63], [139, 115, 7], [47, 47, 143],
+];
+
+/// M_BuildTranslationTable: palette rows 1 (shirt) and 6 (pants) take the
+/// player's colour rows; rows 8 and up run backwards.
+pub fn translate_player(pixels: &mut [u8], top: u8, bottom: u8) {
+    let row = |c: u8, j: u8| if c < 8 { c * 16 + j } else { c * 16 + 15 - j };
+    let (top, bottom) = (top.min(13), bottom.min(13));
+    for p in pixels {
+        match *p {
+            16..=31 => *p = row(top, *p - 16),
+            96..=111 => *p = row(bottom, *p - 96),
+            _ => {}
+        }
+    }
+}
+
+/// RGBA of player colour row `c` (scoreboard boxes, setup swatches).
+pub fn player_color(c: i32) -> [f32; 4] {
+    let [r, g, b] = PLAYER_COLORS[c.clamp(0, 13) as usize].map(|x| x as f32 / 255.0);
+    [r, g, b, 1.0]
+}
+
+#[cfg(test)]
+mod translate_tests {
+    #[test]
+    fn rows_map_like_the_original() {
+        let mut px = [16u8, 31, 96, 111, 5, 255];
+        super::translate_player(&mut px, 2, 9);
+        assert_eq!(px, [32, 47, 159, 144, 5, 255]);
+        let mut px = [16u8, 96];
+        super::translate_player(&mut px, 1, 6);
+        assert_eq!(px, [16, 96]);
     }
 }
 

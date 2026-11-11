@@ -98,6 +98,8 @@ pub struct Score {
     pub name: String,
     pub frags: i32,
     pub colors: i32,
+    /// Round trip in ms, filled by the host (local server or `ping` replies).
+    pub ping: i32,
 }
 
 #[derive(Debug, Clone, Copy, Default, PartialEq)]

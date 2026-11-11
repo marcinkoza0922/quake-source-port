@@ -565,7 +565,7 @@ impl Server {
             return;
         }
         let cl = &mut self.core.clients[i];
-        *cl = Client { active: true, ..Client::default() };
+        *cl = Client { active: true, name: "unconnected".into(), ..Client::default() };
         let l = self.level.as_mut().unwrap();
         let c = &mut self.core;
         let g = c.sv.globals.clone();
@@ -599,6 +599,17 @@ impl Server {
         if let Some(c) = self.core.clients.get_mut(i) {
             c.cmd = mv;
             c.new_move = true;
+        }
+    }
+
+    /// SV_ReadClientMove's ping: `client_time` is the server time the client
+    /// had last received (cl.mtime[0]) when it sent the move.
+    pub fn record_ping(&mut self, i: usize, client_time: f32) {
+        let now = self.level.as_ref().map_or(0.0, |l| l.vm.time) as f32;
+        if let Some(c) = self.core.clients.get_mut(i) {
+            let k = c.num_pings % crate::client::NUM_PING_TIMES;
+            c.ping_times[k] = (now - client_time).max(0.0);
+            c.num_pings += 1;
         }
     }
 

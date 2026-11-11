@@ -228,6 +228,10 @@ pub struct Host {
     pub net_port: u16,
     /// `-dedicated`: no local client.
     pub dedicated: bool,
+    /// Remote scoreboard pings: next `ping` request time, and the reply
+    /// deadline while one is expected (cl.expectingpingtimes).
+    ping_next: f64,
+    ping_expect: Option<f64>,
     /// Running `slist`.
     lan_search: Option<crate::net::LanSearch>,
 }
@@ -316,6 +320,8 @@ impl Host {
             net_port: crate::net::DEFAULT_PORT,
             dedicated: false,
             lan_search: None,
+            ping_next: 0.0,
+            ping_expect: None,
         };
         qinput::register_commands(&mut h.cmds);
         register_commands(&mut h.cmds);
@@ -365,7 +371,11 @@ impl Host {
         if known {
             qcore::cmd::execute_string(self, line);
         } else if self.net_client.is_some() && !matches!(name.as_str(), "map" | "maxplayers" | "restart" | "changelevel") {
-            // Cmd_ForwardToServer.
+            // Cmd_ForwardToServer. A typed `ping` prints its reply.
+            if name == "ping" {
+                self.ping_expect = None;
+                self.ping_next = self.realtime + 3.0;
+            }
             self.cl.send_string_cmd(line);
         } else if self.server.has_command(&name) {
             self.server.command(line);
@@ -715,6 +725,54 @@ impl Host {
         }
     }
 
+    /// Scoreboard pings while it is shown in multiplayer: straight from a
+    /// local server, else by asking a remote one every 2 s.
+    fn update_pings(&mut self) {
+        if self.ping_expect.is_some_and(|t| self.realtime > t) {
+            self.ping_expect = None;
+        }
+        if !self.show_scores || self.cl.maxclients < 2 || self.cl.signon != 4 {
+            return;
+        }
+        if self.net_client.is_none() {
+            if self.server.active() {
+                for (k, s) in self.cl.scores.iter_mut().enumerate() {
+                    s.ping = self.server.core.clients.get(k).map_or(0, |c| (c.ping() * 1000.0).round() as i32);
+                }
+            }
+            return;
+        }
+        if self.realtime >= self.ping_next && self.ping_expect.is_none() {
+            self.cl.send_string_cmd("ping");
+            self.ping_next = self.realtime + 2.0;
+            self.ping_expect = Some(self.realtime + 1.5);
+        }
+    }
+
+    /// Consume a `ping` reply (header and "  ms name" lines, in one print or
+    /// one per line). False when `s` isn't part of it, which ends the reply.
+    fn take_ping_reply(&mut self, s: &str) -> bool {
+        let mut any = false;
+        for line in s.lines() {
+            if line.starts_with("Client ping times:") {
+                any = true;
+                continue;
+            }
+            let t = line.trim_start();
+            let Some((ms, name)) = t.split_once(' ') else { break };
+            let Ok(ms) = ms.parse::<i32>() else { break };
+            let name = name.trim();
+            if let Some(sc) = self.cl.scores.iter_mut().find(|sc| sc.name.trim() == name) {
+                sc.ping = ms;
+            }
+            any = true;
+        }
+        if !any {
+            self.ping_expect = None;
+        }
+        any
+    }
+
     fn poll_lan_search(&mut self) {
         let Some(ls) = &mut self.lan_search else { return };
         if ls.poll() {
@@ -799,6 +857,9 @@ impl Host {
         for e in evs {
             match e {
                 ClientEvent::Print(s) => {
+                    if self.ping_expect.is_some() && self.take_ping_reply(&s) {
+                        continue;
+                    }
                     let s = self.server.core.loc.translate(&s);
                     self.con.print(&s)
                 }
@@ -1265,6 +1326,7 @@ impl Host {
         }
         self.poll_remote();
         self.poll_lan_search();
+        self.update_pings();
         self.read_demo(dt);
         self.check_local_client();
         if self.cl.signon > 0 {
@@ -1586,6 +1648,8 @@ impl Host {
             let mut pf = |n: &str| pics.get(fs, r, n);
             if view.is_some() {
                 match self.cl.intermission {
+                    // GAME_DEATHMATCH: the ranking instead of level stats.
+                    1 if self.cl.gametype == 1 => crate::sbar::deathmatch_overlay(&mut c, &mut pf, &self.cl),
                     1 => crate::sbar::intermission(&mut c, &mut pf, &self.cl),
                     2 => {
                         crate::sbar::finale(&mut c, &mut pf);
@@ -1607,6 +1671,9 @@ impl Host {
                             sb.draw(&self.cl, self.show_scores, face);
                         } else {
                             sb.draw_modern(&self.cl, self.show_scores, face);
+                        }
+                        if self.show_scores && self.cl.gametype == 1 {
+                            crate::sbar::deathmatch_overlay(&mut c, &mut pf, &self.cl);
                         }
                     }
                 }

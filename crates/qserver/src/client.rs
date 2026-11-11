@@ -54,6 +54,19 @@ pub struct Client {
     pub cmd: ClientMove,
     pub(crate) new_move: bool,
     pub(crate) stringcmds: VecDeque<String>,
+    /// Round trips from clc_move timestamps (NUM_PING_TIMES ring).
+    pub ping_times: [f32; NUM_PING_TIMES],
+    pub num_pings: usize,
+}
+
+pub const NUM_PING_TIMES: usize = 16;
+
+impl Client {
+    /// Average of the recorded ping times, in seconds (0 before any).
+    pub fn ping(&self) -> f32 {
+        let n = self.num_pings.min(NUM_PING_TIMES);
+        if n == 0 { 0.0 } else { self.ping_times[..n].iter().sum::<f32>() / n as f32 }
+    }
 }
 
 impl Default for Client {
@@ -62,7 +75,8 @@ impl Default for Client {
             active: false,
             spawned: false,
             local: false,
-            name: "unconnected".into(),
+            // Empty slots have no name; SV_ConnectClient sets "unconnected".
+            name: String::new(),
             colors: 0,
             spawn_parms: [0.0; 16],
             old_frags: 0,
@@ -75,6 +89,8 @@ impl Default for Client {
             cmd: ClientMove::default(),
             new_move: false,
             stringcmds: VecDeque::new(),
+            ping_times: [0.0; NUM_PING_TIMES],
+            num_pings: 0,
         }
     }
 }
