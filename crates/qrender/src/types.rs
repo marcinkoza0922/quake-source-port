@@ -171,6 +171,45 @@ pub struct Settings {
     pub texture_linear: bool,
     /// Max anisotropy for world/model textures (1 = off).
     pub anisotropy: f32,
+    /// gl_texturemode index into [`TEXTURE_MODES`]; `None` derives it from
+    /// `texture_linear` (nearest/linear with linear mips).
+    pub texture_mode: Option<usize>,
+    /// gl_lodbias; `None` = auto (-log2(samples)/2 when supersampling).
+    pub lod_bias: Option<f32>,
+    /// Shade every MSAA sample (vid_fsaamode 1).
+    pub supersample: bool,
+    /// r_dither strength.
+    pub dither: f32,
+    /// r_softemu: 0 off, 1 fine (screen dither), 2 coarse (world dither), 3 banded.
+    pub softemu: u32,
+    /// r_softemu_metric: <0 auto, 0 naive RGB, 1 Riemersma, 2 OKLab.
+    pub softemu_metric: i32,
+    /// r_softemu_lightmap_banding: <0 auto (banded mode), 0 off, >0 on.
+    pub lightmap_banding: f32,
+    /// r_softemu_mdl_warp: <0 auto (banded mode), 0 off, >0 on.
+    pub mdl_warp: f32,
+    /// r_softemu_dither_screen / r_softemu_dither_texture scales.
+    pub dither_screen: f32,
+    pub dither_texture: f32,
+}
+
+/// gl_texturemode names (ironwail order): (name, linear mag/min, mipmapped, linear mips).
+pub const TEXTURE_MODES: [(&str, bool, bool, bool); 6] = [
+    ("GL_NEAREST", false, false, false),
+    ("GL_NEAREST_MIPMAP_NEAREST", false, true, false),
+    ("GL_NEAREST_MIPMAP_LINEAR", false, true, true),
+    ("GL_LINEAR", true, false, false),
+    ("GL_LINEAR_MIPMAP_NEAREST", true, true, false),
+    ("GL_LINEAR_MIPMAP_LINEAR", true, true, true),
+];
+
+/// Parses a gl_texturemode string (name, any case, or 1-based index).
+pub fn parse_texture_mode(s: &str) -> Option<usize> {
+    let s = s.trim();
+    TEXTURE_MODES
+        .iter()
+        .position(|m| m.0.eq_ignore_ascii_case(s))
+        .or_else(|| s.parse::<usize>().ok().filter(|i| (1..=6).contains(i)).map(|i| i - 1))
 }
 
 impl Default for Settings {
@@ -190,6 +229,16 @@ impl Default for Settings {
             render_scale: 1.0,
             texture_linear: false,
             anisotropy: 1.0,
+            texture_mode: None,
+            lod_bias: None,
+            supersample: false,
+            dither: 1.0,
+            softemu: 0,
+            softemu_metric: -1,
+            lightmap_banding: -1.0,
+            mdl_warp: -1.0,
+            dither_screen: 1.0,
+            dither_texture: 1.0,
         }
     }
 }

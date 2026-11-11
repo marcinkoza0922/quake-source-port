@@ -35,6 +35,8 @@ pub struct Pipelines {
     pub post_format: vk::Format,
     /// MSAA sample count of the scene pipelines.
     pub samples: u32,
+    /// Scene pipelines shade per sample (set before `build`).
+    pub supersample: bool,
     sh: Shaders,
     modules: Vec<vk::ShaderModule>,
 }
@@ -74,8 +76,11 @@ struct Desc<'a> {
     color: vk::Format,
     depth: bool,
     samples: u32,
-    /// Cull back faces (alias models; Quake winding is clockwise-front).
+    /// Cull back faces (alias models). Quake triangles are clockwise-front in
+    /// GL; our Vulkan projection flips Y, so they arrive counter-clockwise.
     cull: bool,
+    /// Per-sample shading (supersampling) when multisampled.
+    sample_shading: bool,
 }
 
 fn attr(
@@ -130,7 +135,9 @@ fn graphics(gpu: &Gpu, layout: vk::PipelineLayout, d: &Desc) -> Result<vk::Pipel
         .depth_bias_enable(d.depth)
         .line_width(1.0);
     let ms = vk::PipelineMultisampleStateCreateInfo::default()
-        .rasterization_samples(vk::SampleCountFlags::from_raw(d.samples.max(1)));
+        .rasterization_samples(vk::SampleCountFlags::from_raw(d.samples.max(1)))
+        .sample_shading_enable(d.sample_shading && d.samples > 1)
+        .min_sample_shading(1.0);
     let ds = vk::PipelineDepthStencilStateCreateInfo::default()
         .depth_test_enable(d.depth_test)
         .depth_write_enable(d.depth_write)
@@ -313,6 +320,7 @@ impl Pipelines {
             post: null,
             post_format,
             samples,
+            supersample: false,
             sh,
             modules,
         };
@@ -345,6 +353,7 @@ impl Pipelines {
                 unsafe { gpu.device.destroy_pipeline(p, None) };
             }
         }
+        let supersample = self.supersample && gpu.sample_shading;
         let Shaders {
             world_vs,
             world_fs,
@@ -398,6 +407,7 @@ impl Pipelines {
             depth: true,
             samples,
             cull: false,
+            sample_shading: supersample,
         };
         let g = |d: Desc| graphics(gpu, layout, &d);
         let world = g(d(world_vs, world_fs, &wb, &wa, Blend::None, true, true))?;
@@ -435,6 +445,7 @@ impl Pipelines {
                 depth: false,
                 samples: 1,
                 cull: false,
+                sample_shading: false,
             },
         )?;
         (

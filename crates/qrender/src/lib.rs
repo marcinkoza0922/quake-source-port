@@ -168,7 +168,9 @@ pub struct Renderer {
     /// Sampler for [`Sampling::World`] textures, rebuilt when filtering changes.
     sampler_world: vk::Sampler,
     /// (linear, anisotropy) of `sampler_world`.
-    world_filter: (bool, f32),
+    world_filter: (usize, f32, f32),
+    /// Colour metric the palette LUT was built with (-1 = not built).
+    lut_metric: i32,
     /// Scene MSAA sample count and render scale in effect.
     msaa: u32,
     render_scale: f32,
@@ -328,7 +330,7 @@ impl Renderer {
             vk::SamplerMipmapMode::NEAREST,
         )?;
         let storage = vk::BufferUsageFlags::STORAGE_BUFFER | vk::BufferUsageFlags::TRANSFER_DST;
-        let mut palette_buf = gpu.buffer(1024, vk::BufferUsageFlags::STORAGE_BUFFER, true)?;
+        let mut palette_buf = gpu.buffer(1024 + convert::LUT_BYTES as u64, vk::BufferUsageFlags::STORAGE_BUFFER, true)?;
         let pal: Vec<u32> = palette
             .iter()
             .map(|c| c[0] as u32 | (c[1] as u32) << 8 | (c[2] as u32) << 16 | 0xff << 24)
@@ -353,7 +355,8 @@ impl Renderer {
             sampler_clamp,
             sampler_linear,
             sampler_world: sampler_repeat,
-            world_filter: (false, 1.0),
+            world_filter: (usize::MAX, 0.0, 0.0),
+            lut_metric: -1,
             msaa: 1,
             render_scale: 1.0,
             textures: Vec::new(),
@@ -547,9 +550,11 @@ impl Renderer {
             n => n.next_power_of_two().min(self.gpu.max_samples).max(1),
         };
         let scale = st.render_scale.clamp(0.25, 2.0);
-        if msaa != self.msaa {
+        let supersample = st.supersample && self.gpu.sample_shading;
+        if msaa != self.msaa || supersample != self.pipes.supersample {
             self.idle();
             self.msaa = msaa;
+            self.pipes.supersample = supersample;
             let fmt = self.pipes.post_format;
             self.pipes.build(&self.gpu, fmt, msaa)?;
             self.destroy_targets();
@@ -559,21 +564,33 @@ impl Renderer {
             self.idle();
             self.destroy_targets();
         }
-        let aniso = st.anisotropy.clamp(1.0, self.gpu.max_anisotropy);
-        let filter = (st.texture_linear, aniso);
+        // TexMgr_ApplySettings: gl_texturemode (r_texfilter picks the default),
+        // anisotropy, lod bias; softemu 2/3 or lightmap banding force nearest
+        // with linear mips and at least 8x anisotropy.
+        let mut mode = st.texture_mode.unwrap_or(if st.texture_linear { 5 } else { 2 });
+        let mut aniso = st.anisotropy;
+        if mode != 0 && (st.softemu >= 2 || st.lightmap_banding > 0.0) {
+            mode = 2;
+            aniso = aniso.max(8.0);
+        }
+        let aniso = aniso.clamp(1.0, self.gpu.max_anisotropy);
+        let bias = st.lod_bias.unwrap_or(if supersample && msaa > 1 { -(msaa as f32).log2() / 2.0 } else { 0.0 });
+        let filter = (mode, aniso, bias);
         if filter != self.world_filter {
             self.idle();
-            let linear = if filter.0 { vk::Filter::LINEAR } else { vk::Filter::NEAREST };
+            let (_, lin, mipped, lin_mips) = TEXTURE_MODES[mode];
+            let f = if lin { vk::Filter::LINEAR } else { vk::Filter::NEAREST };
             let ci = vk::SamplerCreateInfo::default()
-                .mag_filter(linear)
-                .min_filter(linear)
-                .mipmap_mode(vk::SamplerMipmapMode::LINEAR)
+                .mag_filter(f)
+                .min_filter(f)
+                .mipmap_mode(if lin_mips { vk::SamplerMipmapMode::LINEAR } else { vk::SamplerMipmapMode::NEAREST })
                 .address_mode_u(vk::SamplerAddressMode::REPEAT)
                 .address_mode_v(vk::SamplerAddressMode::REPEAT)
                 .address_mode_w(vk::SamplerAddressMode::REPEAT)
-                .anisotropy_enable(aniso > 1.0)
+                .mip_lod_bias(bias)
+                .anisotropy_enable(aniso > 1.0 && mipped)
                 .max_anisotropy(aniso)
-                .max_lod(vk::LOD_CLAMP_NONE);
+                .max_lod(if mipped { vk::LOD_CLAMP_NONE } else { 0.0 });
             // SAFETY: valid device.
             let new = unsafe { self.gpu.device.create_sampler(&ci, None)? };
             let old = std::mem::replace(&mut self.sampler_world, new);
@@ -586,6 +603,22 @@ impl Renderer {
                 if let Some(Tex { image: Some(img), sampling: Sampling::World, .. }) = &self.textures[i] {
                     self.write_texture_descriptor(i as u32, img.view, new);
                 }
+            }
+        }
+        // GLPalette_UpdateLookupTable: auto metric is OKLab except in banded
+        // mode on maps without coloured light.
+        if st.softemu > 0 {
+            let lit = self.world.as_ref().is_some_and(|w| w.cpu.lit);
+            let metric = if st.softemu_metric < 0 {
+                if st.softemu != 3 || lit { 2 } else { 0 }
+            } else {
+                st.softemu_metric.min(2)
+            };
+            if metric != self.lut_metric {
+                self.idle();
+                let lut = convert::palette_lut(&self.palette, metric as u32);
+                self.palette_buf.bytes_mut()[1024..1024 + lut.len()].copy_from_slice(&lut);
+                self.lut_metric = metric;
             }
         }
         Ok(())

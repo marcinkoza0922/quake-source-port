@@ -190,8 +190,11 @@ impl ViewState {
             view.angles[2] = 80.0;
         }
         // view model
+        // CalcGunAngle: yaw/pitch follow the view, roll comes from
+        // cl.viewangles (normally 0), so strafe/damage roll doesn't tilt the gun.
         let mut gun_angles = view.angles;
         gun_angles[0] = -view.angles[0];
+        gun_angles[2] = cl.viewangles[2];
         let (fwd, _, _) = angle_vectors(Vec3::from_array([-ent.angles[0], ent.angles[1], 0.0]));
         let mut gorg = ent.origin;
         gorg[2] += cl.viewheight;
@@ -240,7 +243,14 @@ impl ViewState {
                 a.frame = frame;
                 a.start = cl.time;
             }
-            let lerp = if cv.lerp_models { (((cl.time - a.start) / 0.1) as f32).clamp(0.0, 1.0) } else { 1.0 };
+            // view->lerpfinish = ent->lerpfinish when the server sent one
+            let lerp = if !cv.lerp_models {
+                1.0
+            } else if ent.lerpflags & LERP_FINISH != 0 && ent.lerpfinish > a.start {
+                (((cl.time - a.start) / (ent.lerpfinish - a.start)) as f32).clamp(0.0, 1.0)
+            } else {
+                (((cl.time - a.start) / 0.1) as f32).clamp(0.0, 1.0)
+            };
             RenderEntity {
                 model: m.id,
                 origin: gorg,
