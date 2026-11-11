@@ -332,7 +332,11 @@ impl Gpu {
             .runtime_descriptor_array(true)
             .descriptor_binding_partially_bound(true)
             .shader_sampled_image_array_non_uniform_indexing(true);
-        let mut f13 = vk::PhysicalDeviceVulkan13Features::default().dynamic_rendering(true);
+        // glslc maps `discard` to OpDemoteToHelperInvocation for Vulkan 1.3
+        // (core feature, required to be supported by 1.3 devices).
+        let mut f13 = vk::PhysicalDeviceVulkan13Features::default()
+            .dynamic_rendering(true)
+            .shader_demote_to_helper_invocation(true);
         let dci = vk::DeviceCreateInfo::default()
             .queue_create_infos(&qci)
             .enabled_extension_names(&dev_exts)
@@ -393,6 +397,14 @@ impl Gpu {
                 .bind_buffer_memory(buf, mem.memory, mem.offset)?
         };
         Ok(Buffer { buf, mem, size })
+    }
+
+    /// Frees a buffer that lives as long as the renderer (teardown only;
+    /// `b` must not be used afterwards).
+    pub fn free_buffer_ref(&mut self, b: &Buffer) {
+        // SAFETY: caller guarantees the GPU no longer uses it.
+        unsafe { self.device.destroy_buffer(b.buf, None) };
+        self.alloc.free(&b.mem);
     }
 
     pub fn free_buffer(&mut self, b: Buffer) {
