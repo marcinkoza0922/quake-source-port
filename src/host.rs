@@ -199,6 +199,16 @@ pub struct Host {
     /// The startdemos loop (cls.demos) and the next index in it; -1 stops the loop.
     demos: Vec<String>,
     demonum: i32,
+    /// cls.demorecording.
+    recording: Option<crate::demo::DemoWriter>,
+    /// `record <name> <map> [track]`: starts when the new map connects.
+    pending_record: Option<(PathBuf, i32)>,
+    /// Messages up to signon 2 (demo_head), so `record` works mid-game,
+    /// and the signon they reach (loopback may batch several stages).
+    demo_head: Vec<Vec<u8>>,
+    demo_head_signon: u32,
+    /// timedemo: frame count and wall-clock start at the second frame.
+    timedemo: Option<(u32, std::time::Instant)>,
 }
 
 impl CmdContext for Host {
@@ -274,6 +284,11 @@ impl Host {
             demo: None,
             demos: Vec::new(),
             demonum: 0,
+            recording: None,
+            pending_record: None,
+            demo_head: Vec::new(),
+            demo_head_signon: 0,
+            timedemo: None,
         };
         qinput::register_commands(&mut h.cmds);
         register_commands(&mut h.cmds);
@@ -540,6 +555,12 @@ impl Host {
             if self.demo.take().is_some() {
                 self.demonum = -1;
             }
+            // CL_Disconnect stops a recording; `record <name> <map>` starts here.
+            self.stop_recording();
+            self.demo_head.clear();
+            if let Some((path, track)) = self.pending_record.take() {
+                self.start_recording(&path, track);
+            }
             self.cl = ClientState::new();
             self.cl.name = self.server.core.cvars.by_name("_cl_name").map_or("player".into(), |c| c.string.clone());
             self.local = self.server.connect_local();
@@ -549,7 +570,11 @@ impl Host {
     }
 
     fn disconnect_client(&mut self) {
-        self.demo = None;
+        if self.demo.take().is_some() {
+            self.finish_timedemo();
+        }
+        self.stop_recording();
+        self.demo_head.clear();
         self.cl = ClientState::new();
         self.local = None;
         self.level = Level::default();
@@ -571,7 +596,25 @@ impl Host {
         }
         msgs.extend(self.server.take_datagrams(i));
         for m in msgs {
-            if let Err(e) = self.cl.parse_server_message(&m) {
+            if let Some(w) = &mut self.recording
+                && let Err(e) = w.write(self.cl.viewangles, &m)
+            {
+                self.con.print(&format!("demo write failed: {e}\n"));
+                self.recording = None;
+            }
+            let before = self.cl.signon;
+            let r = self.cl.parse_server_message(&m);
+            // demo_head: what a client needs to reach signon 2. A new
+            // serverinfo (changelevel) starts it over.
+            let after = self.cl.signon;
+            if before >= 2 && after < 2 {
+                self.demo_head.clear();
+            }
+            if before < 2 || after < 2 {
+                self.demo_head.push(m);
+                self.demo_head_signon = after;
+            }
+            if let Err(e) = r {
                 self.con.print(&format!("Host_Error: {e:?}\n"));
                 self.server.level = None;
                 self.disconnect_client();
@@ -1109,10 +1152,23 @@ impl Host {
     /// clock catches up with the newest one (everything before signon).
     fn read_demo(&mut self, dt: f64) {
         let mut ended = false;
+        let mut n = 0;
         while self.demo.is_some() {
-            if self.cl.signon == 4 && self.cl.time + dt <= self.cl.mtime[0] {
-                break;
+            if self.cl.signon == 4 {
+                if let Some(td) = &mut self.timedemo {
+                    // One message per frame; frame 1 (loading) doesn't count.
+                    if n > 0 {
+                        break;
+                    }
+                    td.0 += 1;
+                    if td.0 == 2 {
+                        td.1 = std::time::Instant::now();
+                    }
+                } else if self.cl.time + dt <= self.cl.mtime[0] {
+                    break;
+                }
             }
+            n += 1;
             let Some((angles, data)) = self.demo.as_mut().and_then(|d| d.next_message()).map(|m| (m.angles, m.data.to_vec())) else {
                 ended = true;
                 break;
@@ -1140,6 +1196,7 @@ impl Host {
     /// CL_StopPlayback + CL_NextDemo.
     fn end_demo(&mut self) {
         self.demo = None;
+        self.finish_timedemo();
         self.cl.demoplayback = false;
         if !self.next_demo() {
             self.disconnect_client();
@@ -1169,7 +1226,9 @@ impl Host {
     fn play_demo(&mut self, name: &str) {
         self.stop_game();
         let file = if name.contains('.') { name.to_string() } else { format!("{name}.dem") };
-        let Some(data) = self.server.core.fs.open(&file) else {
+        // Recorded demos live in the user dir, which isn't a search path.
+        let data = self.server.core.fs.open(&file).or_else(|| std::fs::read(self.user_dir().join(&file)).ok());
+        let Some(data) = data else {
             self.con.print(&format!("ERROR: couldn't open {file}.\n"));
             self.demonum = -1;
             return;
@@ -1179,6 +1238,126 @@ impl Host {
         self.cl.demoplayback = true;
         self.demo = Some(crate::demo::Demo::new(data));
         self.con.forced = false;
+    }
+
+    /// CL_FinishTimeDemo.
+    fn finish_timedemo(&mut self) {
+        let Some((frames, start)) = self.timedemo.take() else { return };
+        let frames = frames.saturating_sub(1);
+        let t = start.elapsed().as_secs_f64().max(1e-6);
+        self.con.print(&format!("{frames} frames {t:5.1} seconds {:5.1} fps\n", frames as f64 / t));
+    }
+
+    /// True while a timedemo runs: the main loop drops its frame cap.
+    pub fn timedemo_active(&self) -> bool {
+        self.timedemo.is_some()
+    }
+
+    fn start_recording(&mut self, path: &std::path::Path, track: i32) {
+        match crate::demo::DemoWriter::create(path, track) {
+            Ok(w) => {
+                self.con.print(&format!("Recording to {}.\n", path.display()));
+                self.recording = Some(w);
+            }
+            Err(e) => self.con.print(&format!("ERROR: couldn't create {}: {e}\n", path.display())),
+        }
+    }
+
+    /// CL_Stop_f: end with svc_disconnect.
+    fn stop_recording(&mut self) {
+        let Some(mut w) = self.recording.take() else { return };
+        let r = w.write(self.cl.viewangles, &[qnet::protocol::SVC_DISCONNECT]).and_then(|_| w.finish());
+        self.con.print(&match r {
+            Ok(()) => "Completed demo\n".to_string(),
+            Err(e) => format!("demo write failed: {e}\n"),
+        });
+    }
+
+    /// CL_Record_f (with ProQuake's mid-game start).
+    fn record(&mut self, a: &Args) {
+        use qnet::protocol::*;
+        if self.demo.is_some() {
+            self.print("Can't record during demo playback\n");
+            return;
+        }
+        if self.recording.is_some() {
+            self.stop_recording();
+        }
+        let c = a.argc();
+        if !(2..=4).contains(&c) {
+            self.print("record <demoname> [<map> [cd track]]\n");
+            return;
+        }
+        let name = a.argv(1);
+        if name.contains("..") {
+            self.print("Relative pathnames are not allowed.\n");
+            return;
+        }
+        let connected = self.local.is_some() && self.server.active();
+        if c == 2 && connected && self.cl.signon < 2 {
+            self.print("Can't record - try again when connected\n");
+            return;
+        }
+        let track = if c == 4 { a.argv(3).parse().unwrap_or(-1) } else { -1 };
+        let file = if name.ends_with(".dem") { name.to_string() } else { format!("{name}.dem") };
+        let path = self.user_dir().join(file);
+        if c > 2 {
+            self.pending_record = Some((path, track));
+            self.cbuf.insert_text(&format!("map {}\n", a.argv(2)));
+            return;
+        }
+        self.start_recording(&path, track);
+        if !connected {
+            return;
+        }
+        let Some(mut w) = self.recording.take() else { return };
+        let ang = self.cl.viewangles;
+        let mut res = self.demo_head.iter().try_for_each(|m| w.write(ang, m));
+        let mut b = qnet::msg::SizeBuf::new(1 << 20);
+        for (i, sc) in self.cl.scores.iter().enumerate() {
+            b.byte(SVC_UPDATENAME as i32);
+            b.byte(i as i32);
+            b.string(sc.name.as_bytes());
+            b.byte(SVC_UPDATEFRAGS as i32);
+            b.byte(i as i32);
+            b.short(sc.frags);
+            b.byte(SVC_UPDATECOLORS as i32);
+            b.byte(i as i32);
+            b.byte(sc.colors);
+        }
+        for (i, ls) in self.cl.lightstyles.iter().enumerate() {
+            b.byte(SVC_LIGHTSTYLE as i32);
+            b.byte(i as i32);
+            b.string(ls.as_bytes());
+        }
+        for (i, &v) in self.cl.stats.iter().enumerate() {
+            if v == 0 {
+                continue;
+            }
+            if b.len() > 4096 {
+                res = res.and_then(|_| w.write(ang, &b.data));
+                b.clear();
+            }
+            if i < 32 {
+                b.byte(SVC_UPDATESTAT as i32);
+                b.byte(i as i32);
+                b.long(v);
+            } else {
+                b.byte(SVC_STUFFTEXT as i32);
+                b.string(format!("//st {i} {v}\n").as_bytes());
+            }
+        }
+        b.byte(SVC_SETVIEW as i32);
+        b.short(self.cl.viewentity as i32);
+        if self.demo_head_signon < 3 {
+            b.byte(SVC_SIGNONNUM as i32);
+            b.byte(3);
+        }
+        res = res.and_then(|_| w.write(ang, &b.data));
+        match res {
+            Ok(()) => self.recording = Some(w),
+            Err(e) => self.con.print(&format!("demo write failed: {e}\n")),
+        }
     }
 
     /// CL_Disconnect: shut down the local server and the client.
@@ -1501,6 +1680,23 @@ fn register_commands(c: &mut Commands<Host>) {
         }
         h.stop_game();
         h.next_demo();
+    });
+    c.add("record", |h, a| h.record(a));
+    c.add("stop", |h, _| {
+        if h.recording.is_none() {
+            h.print("Not recording a demo.\n");
+        }
+        h.stop_recording();
+    });
+    c.add("timedemo", |h, a| {
+        if a.argc() != 2 {
+            h.print("timedemo <demoname> : gets demo speeds\n");
+            return;
+        }
+        h.play_demo(a.argv(1));
+        if h.demo.is_some() {
+            h.timedemo = Some((0, std::time::Instant::now()));
+        }
     });
     c.add("stopdemo", |h, _| {
         if h.demo.is_some() {

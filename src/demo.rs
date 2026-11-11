@@ -42,6 +42,39 @@ impl Demo {
     }
 }
 
+/// A demo being recorded (cls.demofile with cls.demorecording).
+pub struct DemoWriter {
+    file: std::io::BufWriter<std::fs::File>,
+}
+
+impl DemoWriter {
+    /// Creates the file and writes the CD track header.
+    pub fn create(path: &std::path::Path, track: i32) -> std::io::Result<Self> {
+        use std::io::Write;
+        if let Some(d) = path.parent() {
+            std::fs::create_dir_all(d)?;
+        }
+        let mut file = std::io::BufWriter::new(std::fs::File::create(path)?);
+        writeln!(file, "{track}")?;
+        Ok(DemoWriter { file })
+    }
+
+    /// CL_WriteDemoMessage.
+    pub fn write(&mut self, angles: [f32; 3], data: &[u8]) -> std::io::Result<()> {
+        use std::io::Write;
+        self.file.write_all(&(data.len() as i32).to_le_bytes())?;
+        for a in angles {
+            self.file.write_all(&a.to_le_bytes())?;
+        }
+        self.file.write_all(data)
+    }
+
+    pub fn finish(mut self) -> std::io::Result<()> {
+        use std::io::Write;
+        self.file.flush()
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -66,6 +99,21 @@ mod tests {
         assert_eq!((m.angles, m.data), ([1.0, 2.0, 3.0], &[7u8, 8][..]));
         assert!(demo.next_message().unwrap().data.is_empty());
         assert!(demo.next_message().is_none());
+    }
+
+    #[test]
+    fn writer_round_trips() {
+        let dir = std::env::temp_dir().join(format!("qsp-demo-{}", std::process::id()));
+        let path = dir.join("t.dem");
+        let mut w = DemoWriter::create(&path, 3).unwrap();
+        w.write([4.0, 5.0, 6.0], &[1, 2, 3]).unwrap();
+        w.finish().unwrap();
+        let data = std::fs::read(&path).unwrap();
+        let _ = std::fs::remove_dir_all(&dir);
+        assert!(data.starts_with(b"3\n"));
+        let mut d = Demo::new(data);
+        let m = d.next_message().unwrap();
+        assert_eq!((m.angles, m.data), ([4.0, 5.0, 6.0], &[1u8, 2, 3][..]));
     }
 
     #[test]
