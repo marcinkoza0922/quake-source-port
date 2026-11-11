@@ -1,10 +1,11 @@
 //! Basic menus (menu.c subset): main, single player, load/save, options,
-//! quit. The mod menu is a later milestone and will live elsewhere.
+//! quit, plus the mod menu entry (`crate::modmenu`).
 
 use qcore::cvar::Cvars;
 use qinput::keys::*;
 
 use crate::draw::Canvas;
+use crate::modmenu::{self, ModMenu};
 use crate::sbar::PicFn;
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
@@ -17,6 +18,8 @@ pub enum Screen {
     Options,
     OptionsPage(Page),
     Quit,
+    Mods,
+    ModMaps,
 }
 
 /// Options sub-pages.
@@ -65,6 +68,7 @@ const GAMEPLAY: &[Item] = &[
     toggle("Show Weapon", "r_drawviewmodel"),
     toggle("Modern HUD", "scr_hudstyle"),
     toggle("Show FPS", "scr_showfps"),
+    toggle("Level Select", "ui_levelselect"),
 ];
 
 const INPUT: &[Item] = &[
@@ -156,6 +160,7 @@ pub struct Menu {
     mouse: Option<(f32, f32)>,
     /// Open dropdown on an options page.
     drop: Option<Drop>,
+    pub mods: ModMenu,
 }
 
 /// Open dropdown list: the page row it belongs to, highlighted entry and
@@ -205,7 +210,16 @@ impl Menu {
             prev: Screen::None,
             mouse: None,
             drop: None,
+            mods: ModMenu::default(),
         }
+    }
+
+    pub fn set_mods(&mut self, mods: Vec<qui::mods::ModInfo>, current: &str) {
+        self.mods.set_mods(mods, current);
+    }
+
+    pub fn set_mod_maps(&mut self, maps: Vec<qui::mods::MapInfo>, stats: qui::stats::Stats) {
+        self.mods.set_maps(maps, stats);
     }
 
     pub fn active(&self) -> bool {
@@ -226,7 +240,7 @@ impl Menu {
         };
         let (cx, cy) = CLASSIC;
         match self.screen {
-            Screen::Main => row(cy + 32.0, 20.0, 5, cx + 54.0, cx + 312.0),
+            Screen::Main => row(cy + 32.0, 20.0, MAIN_ITEMS, cx + 54.0, cx + 312.0),
             Screen::SinglePlayer => row(cy + 32.0, 20.0, 3, cx + 54.0, cx + 312.0),
             Screen::Load | Screen::Save => row(cy + 32.0, 8.0, MAX_SAVEGAMES, cx + 8.0, cx + 312.0),
             Screen::Options => row(ROW0, ROW_H, PAGES.len(), PANEL_X, PANEL_X + PANEL_W),
@@ -234,6 +248,8 @@ impl Menu {
             Screen::Quit => QUIT_BUTTONS
                 .iter()
                 .position(|&bx| x >= bx && x < bx + QUIT_BTN.0 && y >= QUIT_BTN_Y && y < QUIT_BTN_Y + QUIT_BTN.1),
+            Screen::Mods => self.mods.item_at(modmenu::Page::List, (x, y)),
+            Screen::ModMaps => self.mods.item_at(modmenu::Page::Maps, (x, y)),
             Screen::None => None,
         }
     }
@@ -246,6 +262,8 @@ impl Menu {
             Screen::Options => Some(&mut self.page_cursor),
             Screen::OptionsPage(_) => Some(&mut self.opt_cursor),
             Screen::Quit => Some(&mut self.quit_cursor),
+            Screen::Mods => Some(self.mods.cursor_mut(modmenu::Page::List)),
+            Screen::ModMaps => Some(self.mods.cursor_mut(modmenu::Page::Maps)),
             Screen::None => None,
         }
     }
@@ -327,13 +345,17 @@ impl Menu {
                     out.push(Action::Sound("misc/menu3.wav"));
                     return out;
                 }
-                wrap(&mut self.main_cursor, 5, &mut out);
+                wrap(&mut self.main_cursor, MAIN_ITEMS, &mut out);
                 if enter {
                     out.push(Action::Sound("misc/menu2.wav"));
                     match self.main_cursor {
                         0 => self.screen = Screen::SinglePlayer,
                         2 => self.screen = Screen::Options,
                         4 => self.open(Screen::Quit),
+                        5 => {
+                            out.push(Action::Command("_mods\n".into()));
+                            self.screen = Screen::Mods;
+                        }
                         _ => {}
                     }
                 }
@@ -422,6 +444,16 @@ impl Menu {
                 if dir != 0 && self.adjust(items[self.opt_cursor], dir, enter, cv, &mut out) {
                     out.push(Action::Sound("misc/menu3.wav"));
                 }
+            }
+            Screen::Mods | Screen::ModMaps => {
+                self.mods.level_select = cv.value_of("ui_levelselect") != 0.0;
+                let page = if self.screen == Screen::Mods { modmenu::Page::List } else { modmenu::Page::Maps };
+                self.screen = match self.mods.key(page, key, &mut out) {
+                    Some(modmenu::Page::List) => Screen::Mods,
+                    Some(modmenu::Page::Maps) => Screen::ModMaps,
+                    None if out.iter().any(|a| matches!(a, Action::Close)) => Screen::None,
+                    None => Screen::Main,
+                };
             }
             Screen::Quit => {
                 if left || right {
@@ -604,7 +636,7 @@ impl Menu {
         c.fade_screen();
         let base_scale = c.scale;
         c.menu_layout();
-        if !matches!(self.screen, Screen::Options | Screen::OptionsPage(_) | Screen::Quit) {
+        if !matches!(self.screen, Screen::Options | Screen::OptionsPage(_) | Screen::Quit | Screen::Mods | Screen::ModMaps) {
             c.ox += CLASSIC.0;
             c.oy += CLASSIC.1;
         }
@@ -628,9 +660,16 @@ impl Menu {
                 title(c, pic, "gfx/ttl_main.lmp");
                 let p = pic("gfx/mainmenu.lmp");
                 c.pic(72.0, 32.0, p);
+                // extra entry under the classic graphic
+                let (y, w) = (32.0 + 5.0 * 20.0 + 2.0, 112.0);
+                c.fill(72.0, y, w, 16.0, [0.0, 0.0, 0.0, 0.55]);
+                c.frame(72.0, y, w, 16.0, BORDER);
+                gold(c, 72.0 + (w - 32.0) / 2.0, y + 4.0, "Mods");
                 let d = dot(pic);
                 c.pic(54.0, 32.0 + self.main_cursor as f32 * 20.0, d);
             }
+            Screen::Mods => self.mods.draw(c, modmenu::Page::List),
+            Screen::ModMaps => self.mods.draw(c, modmenu::Page::Maps),
             Screen::SinglePlayer => {
                 let p = pic("gfx/qplaque.lmp");
                 c.pic(16.0, 4.0, p);
@@ -794,11 +833,14 @@ const QUIT_BTN: (f32, f32) = (64.0, 14.0);
 const QUIT_BTN_Y: f32 = 178.0;
 const QUIT_BUTTONS: [f32; 2] = [248.0, 328.0];
 
-const BORDER: [f32; 4] = [0.55, 0.42, 0.25, 1.0];
-const HILITE: [f32; 4] = [0.6, 0.38, 0.12, 0.45];
+/// Main menu rows: the five of mainmenu.lmp plus Mods.
+const MAIN_ITEMS: usize = 6;
+
+pub const BORDER: [f32; 4] = [0.55, 0.42, 0.25, 1.0];
+pub const HILITE: [f32; 4] = [0.6, 0.38, 0.12, 0.45];
 
 /// Brown/gold conchars text.
-fn gold(c: &mut Canvas, x: f32, y: f32, s: &str) {
+pub fn gold(c: &mut Canvas, x: f32, y: f32, s: &str) {
     for (k, b) in s.bytes().enumerate() {
         c.ch(x + k as f32 * 8.0, y, b | 128);
     }

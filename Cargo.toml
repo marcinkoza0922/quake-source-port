@@ -45,6 +45,7 @@ qrender = { path = "crates/qrender" }
 qsound = { path = "crates/qsound" }
 qplatform = { path = "crates/qplatform" }
 qinput = { path = "crates/qinput" }
+qui = { path = "crates/qui" }
 miniz_oxide = "0.8"
 
 [profile.release]

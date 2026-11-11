@@ -10,6 +10,7 @@ mod console;
 mod draw;
 mod host;
 mod menu;
+mod modmenu;
 mod platform;
 mod png;
 mod sbar;

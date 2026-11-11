@@ -217,6 +217,7 @@ dependencies = [
  "qrender",
  "qserver",
  "qsound",
+ "qui",
  "qvm",
  "qworld",
 ]
@@ -224,6 +225,10 @@ dependencies = [
 [[package]]
 name = "qui"
 version = "0.1.0"
+dependencies = [
+ "qcore",
+ "qformats",
+]
 
 [[package]]
 name = "qvm"

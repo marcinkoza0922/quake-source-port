@@ -43,6 +43,7 @@ const HOST_CVARS: &[(&str, &str, u32)] = &[
     ("r_lerpmove", "1", CVAR_ARCHIVE),
     ("scr_hudstyle", "1", CVAR_ARCHIVE),
     ("crosshair", "0", CVAR_ARCHIVE),
+    ("ui_levelselect", "0", CVAR_ARCHIVE),
     ("scr_centertime", "2", 0),
     ("scr_printspeed", "8", 0),
     ("volume", "0.7", CVAR_ARCHIVE),
@@ -190,6 +191,8 @@ pub struct Host {
     fps: (f64, u32, f32),
     fs_snapshot: (PathBuf, Vec<String>),
     stuffed: bool,
+    /// The current level's exit was already written to qsp_stats.json.
+    stats_recorded: bool,
 }
 
 impl CmdContext for Host {
@@ -261,6 +264,7 @@ impl Host {
             fps: (0.0, 0, 0.0),
             fs_snapshot,
             stuffed: false,
+            stats_recorded: false,
         };
         qinput::register_commands(&mut h.cmds);
         register_commands(&mut h.cmds);
@@ -641,7 +645,10 @@ impl Host {
                     self.level.set_sky(fs, &mut self.r, &name);
                 }
                 ClientEvent::BonusFlash => self.view.bonus_flash(),
-                ClientEvent::NewMap => self.new_map(),
+                ClientEvent::NewMap => {
+                    self.stats_recorded = false;
+                    self.new_map()
+                }
                 ClientEvent::Signon(4) => {
                     self.con.forced = false;
                     self.con.open = false;
@@ -653,6 +660,112 @@ impl Host {
                 _ => {}
             }
         }
+        if self.cl.intermission != 0 && !self.stats_recorded {
+            self.stats_recorded = true;
+            self.record_level_stats();
+        }
+    }
+
+    /// Level exit (intermission or finale): merge kills/secrets/time into
+    /// the mod's qsp_stats.json. Not for deathmatch or headless tool runs.
+    fn record_level_stats(&mut self) {
+        use qnet::protocol::{STAT_MONSTERS, STAT_SECRETS, STAT_TOTALMONSTERS, STAT_TOTALSECRETS};
+        if self.headless || self.cv("deathmatch") != 0.0 || self.level.mapname.is_empty() {
+            return;
+        }
+        let st = |i: usize| self.cl.stats[i].max(0) as u32;
+        let run = qui::stats::MapStats {
+            kills: st(STAT_MONSTERS),
+            total_kills: st(STAT_TOTALMONSTERS),
+            secrets: st(STAT_SECRETS),
+            total_secrets: st(STAT_TOTALSECRETS),
+            best_time: self.cl.completed_time as f32,
+            completions: 0,
+        };
+        let dir = self.user_dir();
+        let mut stats = qui::stats::Stats::load(&dir);
+        stats.record(&self.level.mapname, run);
+        if let Err(e) = stats.save(&dir) {
+            self.con.print(&format!("couldn't write {}: {e}\n", qui::stats::FILE_NAME));
+        }
+    }
+
+    /// The base game's user config text, when the running mod has none of
+    /// its own yet: (game dir it came from, text).
+    fn inherited_config(&self) -> Option<(String, String)> {
+        if self.user_dir().join("config.cfg").is_file() {
+            return None;
+        }
+        let dirs = &self.fs_snapshot.1;
+        dirs.iter().rev().skip(1).find_map(|g| {
+            let t = std::fs::read(crate::user_dir(g).join("config.cfg")).ok()?;
+            Some((g.clone(), String::from_utf8_lossy(&t).into_owned()))
+        })
+    }
+
+    /// Name of the top gamedir ("id1" when no mod is mounted).
+    pub fn game_name(&self) -> &str {
+        self.fs_snapshot.1.last().map_or("id1", String::as_str)
+    }
+
+    /// `game <dir> [map]`: switch to another mod. The renderer, sound and
+    /// file system are built for one gamedir at startup, so this saves the
+    /// config and re-executes the engine with the mod's launch flags (and
+    /// `+map`); the current mod only needs the `map` command.
+    fn switch_game(&mut self, dir: &str, map: Option<&str>) {
+        let basedir = self.fs_snapshot.0.clone();
+        if dir.eq_ignore_ascii_case(self.game_name()) {
+            if let Some(m) = map {
+                self.cbuf.add_text(&format!("maxplayers 1\ndeathmatch 0\ncoop 0\nmap {m}\n"));
+            }
+            return;
+        }
+        let Some(info) = qui::mods::scan(&basedir).into_iter().find(|m| m.dir.eq_ignore_ascii_case(dir)) else {
+            self.con.print(&format!("game: no game dir \"{dir}\" in {}\n", basedir.display()));
+            return;
+        };
+        let mut args = relaunch_args(&self.cmdline);
+        args.extend(info.launch_args());
+        if let Some(m) = map {
+            args.extend(["+map".to_string(), m.to_string()]);
+        }
+        self.write_config();
+        let Ok(exe) = std::env::current_exe() else {
+            self.con.print("game: can't find the engine executable\n");
+            return;
+        };
+        self.con.print(&format!("Switching to {}...\n", info.title));
+        let mut cmd = std::process::Command::new(exe);
+        cmd.args(&args);
+        #[cfg(unix)]
+        {
+            use std::os::unix::process::CommandExt;
+            // drop the window and audio device before the new image opens its own
+            self.window = None;
+            self.snd = None;
+            let e = cmd.exec();
+            self.con.print(&format!("game: exec failed: {e}\n"));
+        }
+        #[cfg(not(unix))]
+        match cmd.spawn() {
+            Ok(_) => self.quit = true,
+            Err(e) => self.con.print(&format!("game: launch failed: {e}\n")),
+        }
+    }
+
+    /// Fills the mod menu's list (`_mods`).
+    fn scan_mods(&mut self) {
+        let mods = qui::mods::scan(&self.fs_snapshot.0);
+        let cur = self.game_name().to_string();
+        self.menu.set_mods(mods, &cur);
+        self.menu.mods.level_select = self.cv("ui_levelselect") != 0.0;
+    }
+
+    /// Fills the mod menu's map page for one mod (`_modmaps <dir>`).
+    fn scan_mod_maps(&mut self, dir: &str) {
+        let maps = qui::mods::maps(&self.fs_snapshot.0, dir);
+        let stats = qui::stats::Stats::load(&crate::user_dir(dir));
+        self.menu.set_mod_maps(maps, stats);
     }
 
     fn new_map(&mut self) {
@@ -1160,6 +1273,20 @@ fn register_commands(c: &mut Commands<Host>) {
             return;
         }
         let name = a.argv(1);
+        // A mod without its own user config starts from the base game's
+        // (nearest pack below it first, then id1); runs after any config.cfg
+        // the mod ships in its data, and is saved as the mod's own on quit.
+        if name.eq_ignore_ascii_case("config.cfg")
+            && let Some((g, t)) = h.inherited_config()
+        {
+            h.cbuf.insert_text(&t);
+            h.print(&format!("execing config.cfg (inherited from {g})\n"));
+            if let Some(d) = h.fs().open(name).filter(|_| h.fs().origin(name).is_some_and(|o| o.game.eq_ignore_ascii_case(h.game_name()))) {
+                h.cbuf.insert_text(&String::from_utf8_lossy(&d));
+                h.print("execing config.cfg (mod defaults)\n");
+            }
+            return;
+        }
         match h.fs().open(name) {
             Some(d) => {
                 let t = String::from_utf8_lossy(&d).into_owned();
@@ -1312,6 +1439,27 @@ fn register_commands(c: &mut Commands<Host>) {
     });
     c.add("version", |h, _| h.print("quake-source-port 0.1.0\n"));
     c.add("_scansaves", |h, _| h.scan_saves());
+    c.add("_mods", |h, _| h.scan_mods());
+    c.add("_modmaps", |h, a| h.scan_mod_maps(a.argv(1)));
+    // menu_mods [dir]: the mod list, or one mod's maps
+    c.add("menu_mods", |h, a| {
+        h.scan_mods();
+        if a.argc() > 1 && h.menu.mods.select(a.argv(1)) {
+            h.scan_mod_maps(a.argv(1));
+            h.menu.open(Screen::ModMaps);
+        } else {
+            h.menu.open(Screen::Mods);
+        }
+    });
+    c.add("game", |h, a| {
+        if a.argc() < 2 {
+            let g = h.game_name().to_string();
+            h.print(&format!("\"game\" is \"{g}\"\ngame <dir> [map] : switch to another mod\n"));
+            return;
+        }
+        let map = (a.argc() > 2).then(|| a.argv(2).to_string());
+        h.switch_game(a.argv(1), map.as_deref());
+    });
     c.add("save", |h, a| {
         if a.argc() != 2 {
             h.print("save <savename> : save a game\n");
@@ -1370,4 +1518,41 @@ fn cmd_fog(h: &mut Host, a: &Args) {
         }
     };
     h.cl.fog = qclient::Fog { density: d.max(0.0), color: [r, g, b].map(|c| c.clamp(0.0, 1.0)), time: 0.0 };
+}
+
+/// The original command line without the mod selection (`-game x`,
+/// `-hipnotic`/`-rogue`/`-quoth`) and without `+command` sequences, which
+/// belong to the first launch.
+fn relaunch_args(cmdline: &[String]) -> Vec<String> {
+    let mut out = Vec::new();
+    let mut it = cmdline.iter();
+    let mut in_cmd = false;
+    while let Some(a) = it.next() {
+        let l = a.to_ascii_lowercase();
+        if l == "-game" {
+            it.next();
+            in_cmd = false;
+        } else if matches!(l.as_str(), "-hipnotic" | "-rogue" | "-quoth") {
+            in_cmd = false;
+        } else if a.starts_with('+') {
+            in_cmd = true;
+        } else if a.starts_with('-') && a.len() > 1 && a.parse::<f64>().is_err() {
+            in_cmd = false;
+            out.push(a.clone());
+        } else if !in_cmd {
+            out.push(a.clone());
+        }
+    }
+    out
+}
+
+#[cfg(test)]
+mod relaunch_tests {
+    #[test]
+    fn strips_game_and_commands() {
+        let v = |s: &str| s.split(' ').map(String::from).collect::<Vec<_>>();
+        let out = super::relaunch_args(&v("-basedir /q -hipnotic -game foo +map e1m1 +skill 3 -width 800 -height 600"));
+        assert_eq!(out, v("-basedir /q -width 800 -height 600"));
+        assert_eq!(super::relaunch_args(&v("+delay 3 screenshot x -window")), v("-window"));
+    }
 }
