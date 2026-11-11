@@ -434,8 +434,9 @@ impl World {
         if leaf != self.vis_leaf {
             self.mark_leaves(leaf);
         }
+        let planes = Planes::new(frustum);
         for l in &self.vis_leaves {
-            let Some(clip) = clip_box(frustum, 0b1111, l.mins, l.maxs) else { continue };
+            let Some(clip) = planes.clip(0b1111, l.center, l.extent) else { continue };
             let ms = l.first as usize;
             for k in ms..ms + l.count as usize {
                 let Some(&si) = self.marksurfaces.get(k) else {
@@ -454,7 +455,7 @@ impl World {
                 if (d < 0.0) != (c.flags & CULL_FLIPPED != 0) && c.flags & CULL_SKY == 0 {
                     continue;
                 }
-                if clip != 0 && clip_box(frustum, clip, c.mins, c.maxs).is_none() {
+                if clip != 0 && planes.clip(clip, c.center, c.extent).is_none() {
                     continue;
                 }
                 out.push(si as u32);
@@ -480,9 +481,10 @@ impl World {
             }
             let l = &self.leafs[i + 1];
             if l.num_marksurfaces > 0 {
+                let (center, extent) = center_extent(l.mins, l.maxs);
                 self.vis_leaves.push(VisLeaf {
-                    mins: l.mins,
-                    maxs: l.maxs,
+                    center,
+                    extent,
                     first: l.first_marksurface,
                     count: l.num_marksurfaces,
                 });
@@ -613,8 +615,8 @@ impl World {
 /// A PVS leaf with surfaces, copied out so the per-frame loop is linear.
 #[derive(Clone, Copy, Debug)]
 struct VisLeaf {
-    mins: [f32; 3],
-    maxs: [f32; 3],
+    center: [f32; 3],
+    extent: [f32; 3],
     first: u32,
     count: u32,
 }
@@ -628,8 +630,8 @@ const CULL_SKY: u32 = 4;
 struct SurfCull {
     normal: [f32; 3],
     dist: f32,
-    mins: [f32; 3],
-    maxs: [f32; 3],
+    center: [f32; 3],
+    extent: [f32; 3],
     flags: u32,
 }
 
@@ -645,7 +647,8 @@ impl SurfCull {
         if s.kind == TextureKind::Sky {
             flags |= CULL_SKY;
         }
-        SurfCull { normal: s.normal, dist: s.dist, mins: s.mins, maxs: s.maxs, flags }
+        let (center, extent) = center_extent(s.mins, s.maxs);
+        SurfCull { normal: s.normal, dist: s.dist, center, extent, flags }
     }
 }
 
@@ -699,30 +702,42 @@ fn dot64(a: [f32; 3], b: [f32; 4]) -> f64 {
     a[0] as f64 * b[0] as f64 + a[1] as f64 * b[1] as f64 + a[2] as f64 * b[2] as f64
 }
 
-/// Frustum planes as (normal, dist): inside when dot(n, p) + d >= 0.
-/// Frustum test against the planes still set in `clip` (bit j = plane j).
-/// None if the box is outside; otherwise the planes it still straddles.
-#[inline]
-pub fn clip_box(f: &[[f32; 4]; 4], clip: u8, mins: [f32; 3], maxs: [f32; 3]) -> Option<u8> {
-    let mut out = clip;
-    for (j, p) in f.iter().enumerate() {
-        if clip & (1 << j) == 0 {
-            continue;
-        }
-        let (mut pos, mut neg) = (p[3], p[3]);
-        for i in 0..3 {
-            let (hi, lo) = if p[i] >= 0.0 { (maxs[i], mins[i]) } else { (mins[i], maxs[i]) };
-            pos += p[i] * hi;
-            neg += p[i] * lo;
-        }
-        if pos < 0.0 {
-            return None;
-        }
-        if neg >= 0.0 {
-            out &= !(1 << j);
-        }
+/// Frustum planes prepared for center/extent box tests.
+struct Planes {
+    p: [[f32; 4]; 4],
+    abs: [[f32; 3]; 4],
+}
+
+impl Planes {
+    fn new(f: &[[f32; 4]; 4]) -> Self {
+        Planes { p: *f, abs: f.map(|p| [p[0].abs(), p[1].abs(), p[2].abs()]) }
     }
-    Some(out)
+
+    /// Like [`clip_box`] for a box given as center `c` and half-size `e`.
+    #[inline(always)]
+    fn clip(&self, clip: u8, c: [f32; 3], e: [f32; 3]) -> Option<u8> {
+        let mut out = clip;
+        for j in 0..4 {
+            if clip & (1 << j) == 0 {
+                continue;
+            }
+            let p = &self.p[j];
+            let a = &self.abs[j];
+            let d = p[0] * c[0] + p[1] * c[1] + p[2] * c[2] + p[3];
+            let r = a[0] * e[0] + a[1] * e[1] + a[2] * e[2];
+            if d + r < 0.0 {
+                return None;
+            }
+            if d - r >= 0.0 {
+                out &= !(1 << j);
+            }
+        }
+        Some(out)
+    }
+}
+
+fn center_extent(mins: [f32; 3], maxs: [f32; 3]) -> ([f32; 3], [f32; 3]) {
+    (std::array::from_fn(|i| (mins[i] + maxs[i]) * 0.5), std::array::from_fn(|i| (maxs[i] - mins[i]) * 0.5))
 }
 
 pub fn box_in_frustum(f: &[[f32; 4]; 4], mins: [f32; 3], maxs: [f32; 3]) -> bool {
