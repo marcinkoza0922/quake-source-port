@@ -1,6 +1,8 @@
 //! Mod menu: installed mods (left list + info panel) and a per-mod map
 //! browser with completion stats from qsp_stats.json. The host fills the
-//! data (`_mods`, `_modmaps <dir>`); picking a map runs `game <dir> <map>`.
+//! data (`_mods`, `_modmaps <dir>`). Enter launches the mod (`game <dir>`);
+//! the map page is a hidden level selector, reached with Right only when
+//! `ui_levelselect` is on.
 
 use qinput::keys::*;
 use qui::mods::{MapInfo, ModInfo};
@@ -36,6 +38,8 @@ pub struct ModMenu {
     sel: usize,
     pub maps: Vec<MapInfo>,
     pub stats: Stats,
+    /// `ui_levelselect`: the map page is reachable.
+    pub level_select: bool,
     /// Map page cursor: 0 = "Start", 1.. = maps.
     map_cursor: usize,
     map_scroll: usize,
@@ -140,7 +144,17 @@ impl ModMenu {
         let back = matches!(key, K_ESCAPE | K_BBUTTON | K_MOUSE2);
         match page {
             Page::List if back => None,
-            Page::List if enter || matches!(key, K_RIGHTARROW | K_DPAD_RIGHT) => {
+            Page::List if enter => {
+                let Some(m) = self.mods.get(self.cursor) else { return Some(page) };
+                out.push(Action::Sound("misc/menu2.wav"));
+                out.push(Action::Close);
+                // the running mod is already loaded: just return to it
+                if !m.dir.eq_ignore_ascii_case(&self.current) {
+                    out.push(Action::Command(format!("game \"{}\"\n", m.dir)));
+                }
+                None
+            }
+            Page::List if self.level_select && matches!(key, K_RIGHTARROW | K_DPAD_RIGHT) => {
                 let Some(m) = self.mods.get(self.cursor) else { return Some(page) };
                 self.sel = self.cursor;
                 self.maps.clear();
@@ -217,6 +231,10 @@ impl ModMenu {
         }
         if m.dir.eq_ignore_ascii_case(&self.current) {
             gold(c, ix + 8.0, y, "(running)");
+            y += ROW_H;
+        }
+        if self.level_select {
+            c.string(ix + 8.0, y, "right arrow: levels");
             y += ROW_H;
         }
         y += 6.0;
@@ -339,6 +357,7 @@ mod tests {
         let m = |d: &str| ModInfo { dir: d.into(), title: d.into(), base: Base::Id, blurb: vec![] };
         let mut mm = ModMenu::default();
         mm.set_mods(vec![m("id1"), m("ad"), m("mg1")], "ad");
+        mm.level_select = true;
         mm
     }
 
@@ -352,7 +371,7 @@ mod tests {
         assert_eq!(mm.cursor, 1, "starts on the running mod");
         let mut out = Vec::new();
         assert_eq!(mm.key(Page::List, K_DOWNARROW, &mut out), Some(Page::List));
-        assert_eq!(mm.key(Page::List, K_ENTER, &mut out), Some(Page::Maps));
+        assert_eq!(mm.key(Page::List, K_RIGHTARROW, &mut out), Some(Page::Maps));
         assert_eq!(cmds(&out), ["_modmaps \"mg1\"\n"]);
         let maps = ["start", "mg1m1"].map(|n| MapInfo { name: n.into(), title: String::new() }).to_vec();
         mm.set_maps(maps, Stats::default());
@@ -369,6 +388,23 @@ mod tests {
         assert_eq!(cmds(&out), ["game \"mg1\"\n"]);
         assert_eq!(mm.key(Page::Maps, K_ESCAPE, &mut out), Some(Page::List));
         assert_eq!(mm.key(Page::List, K_ESCAPE, &mut out), None);
+    }
+
+    #[test]
+    fn enter_launches_and_selector_is_hidden() {
+        let mut mm = menu();
+        mm.level_select = false;
+        let mut out = Vec::new();
+        assert_eq!(mm.key(Page::List, K_RIGHTARROW, &mut out), Some(Page::List));
+        mm.key(Page::List, K_DOWNARROW, &mut out);
+        out.clear();
+        assert_eq!(mm.key(Page::List, K_ENTER, &mut out), None);
+        assert_eq!(cmds(&out), ["game \"mg1\"\n"]);
+        // the running mod just closes the menu
+        mm.cursor = 1;
+        out.clear();
+        mm.key(Page::List, K_ENTER, &mut out);
+        assert!(cmds(&out).is_empty() && out.iter().any(|a| matches!(a, Action::Close)));
     }
 
     #[test]

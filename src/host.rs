@@ -43,6 +43,7 @@ const HOST_CVARS: &[(&str, &str, u32)] = &[
     ("r_lerpmove", "1", CVAR_ARCHIVE),
     ("scr_hudstyle", "1", CVAR_ARCHIVE),
     ("crosshair", "0", CVAR_ARCHIVE),
+    ("ui_levelselect", "0", CVAR_ARCHIVE),
     ("scr_centertime", "2", 0),
     ("scr_printspeed", "8", 0),
     ("volume", "0.7", CVAR_ARCHIVE),
@@ -757,6 +758,7 @@ impl Host {
         let mods = qui::mods::scan(&self.fs_snapshot.0);
         let cur = self.game_name().to_string();
         self.menu.set_mods(mods, &cur);
+        self.menu.mods.level_select = self.cv("ui_levelselect") != 0.0;
     }
 
     /// Fills the mod menu's map page for one mod (`_modmaps <dir>`).

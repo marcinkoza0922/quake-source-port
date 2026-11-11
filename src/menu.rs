@@ -68,6 +68,7 @@ const GAMEPLAY: &[Item] = &[
     toggle("Show Weapon", "r_drawviewmodel"),
     toggle("Modern HUD", "scr_hudstyle"),
     toggle("Show FPS", "scr_showfps"),
+    toggle("Level Select", "ui_levelselect"),
 ];
 
 const INPUT: &[Item] = &[
@@ -445,6 +446,7 @@ impl Menu {
                 }
             }
             Screen::Mods | Screen::ModMaps => {
+                self.mods.level_select = cv.value_of("ui_levelselect") != 0.0;
                 let page = if self.screen == Screen::Mods { modmenu::Page::List } else { modmenu::Page::Maps };
                 self.screen = match self.mods.key(page, key, &mut out) {
                     Some(modmenu::Page::List) => Screen::Mods,
