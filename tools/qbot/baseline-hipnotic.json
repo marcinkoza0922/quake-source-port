@@ -1,0 +1,20 @@
+{
+  "hip1m1": {"kills": 67, "secrets": 5},
+  "hip1m2": {"kills": 66, "secrets": 3},
+  "hip1m3": {"kills": 70, "secrets": 3},
+  "hip1m4": {"kills": 61, "secrets": 3},
+  "hip1m5": {"kills": 94, "secrets": 7},
+  "hip2m1": {"kills": 59, "secrets": 8},
+  "hip2m2": {"kills": 99, "secrets": 5},
+  "hip2m3": {"kills": 99, "secrets": 4},
+  "hip2m4": {"kills": 48, "secrets": 6},
+  "hip2m5": {"kills": 0, "secrets": 0},
+  "hip2m6": {"kills": 96, "secrets": 5},
+  "hip3m1": {"kills": 51, "secrets": 6},
+  "hip3m2": {"kills": 59, "secrets": 5},
+  "hip3m3": {"kills": 68, "secrets": 4},
+  "hip3m4": {"kills": 83, "secrets": 6},
+  "hipdm1": {"kills": 19, "secrets": 0},
+  "hipend": {"kills": 0, "secrets": 0},
+  "start": {"kills": 0, "secrets": 0}
+}

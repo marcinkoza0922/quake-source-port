@@ -1,0 +1,19 @@
+{
+  "ctf1": {"kills": 0, "secrets": 0},
+  "r1m1": {"kills": 39, "secrets": 4},
+  "r1m2": {"kills": 51, "secrets": 4},
+  "r1m3": {"kills": 85, "secrets": 6},
+  "r1m4": {"kills": 90, "secrets": 2},
+  "r1m5": {"kills": 0, "secrets": 0},
+  "r1m6": {"kills": 86, "secrets": 5},
+  "r1m7": {"kills": 102, "secrets": 4},
+  "r2m1": {"kills": 81, "secrets": 3},
+  "r2m2": {"kills": 54, "secrets": 2},
+  "r2m3": {"kills": 78, "secrets": 1},
+  "r2m4": {"kills": 142, "secrets": 5},
+  "r2m5": {"kills": 110, "secrets": 4},
+  "r2m6": {"kills": 62, "secrets": 5},
+  "r2m7": {"kills": 123, "secrets": 5},
+  "r2m8": {"kills": 0, "secrets": 0},
+  "start": {"kills": 0, "secrets": 0}
+}

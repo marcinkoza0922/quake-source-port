@@ -117,6 +117,13 @@ version = "0.1.0"
 [[package]]
 name = "qbot"
 version = "0.1.0"
+dependencies = [
+ "qcore",
+ "qserver",
+ "qui",
+ "qvm",
+ "qworld",
+]
 
 [[package]]
 name = "qclient"
