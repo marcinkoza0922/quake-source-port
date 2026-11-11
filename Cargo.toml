@@ -3,6 +3,7 @@ name = "quake-source-port"
 version = "0.1.0"
 edition = "2024"
 license = "GPL-2.0-or-later"
+default-run = "quake-source-port"
 
 [workspace]
 members = ["crates/*", "tools/*"]

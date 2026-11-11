@@ -35,6 +35,15 @@ impl Opts {
     }
 }
 
+/// `$XDG_DATA_HOME/quake-source-port/<game>` (default `~/.local/share/...`).
+pub fn user_dir(game: &str) -> PathBuf {
+    let root = std::env::var_os("XDG_DATA_HOME")
+        .map(PathBuf::from)
+        .or_else(|| std::env::var_os("HOME").map(|h| PathBuf::from(h).join(".local/share")))
+        .unwrap_or_else(|| PathBuf::from("."));
+    root.join("quake-source-port").join(game.to_ascii_lowercase())
+}
+
 fn main() {
     let o = Opts { args: std::env::args().skip(1).collect() };
     let basedir = o
@@ -61,6 +70,8 @@ fn main() {
     {
         eprintln!("game dir {g} not found");
     }
+    // User config/saves live outside the game data and override it.
+    fs.add_user_dir(user_dir(fs.game_dir().unwrap_or("id1")));
     let headless = o.has("-headless");
     let w: u32 = o.val("-width").and_then(|s| s.parse().ok()).unwrap_or(1280);
     let h: u32 = o.val("-height").and_then(|s| s.parse().ok()).unwrap_or(720);

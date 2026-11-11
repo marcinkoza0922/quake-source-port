@@ -225,6 +225,13 @@ impl Fs {
         self.paths.iter().rev()
     }
 
+    /// Adds a loose directory at top priority, attributed to the current top
+    /// gamedir (ironwail `-userdir` style: user configs/saves override data).
+    pub fn add_user_dir(&mut self, dir: impl Into<PathBuf>) {
+        let game = self.game_dirs.len().saturating_sub(1);
+        self.paths.push(SearchPath { game, source: Source::Dir(dir.into()) });
+    }
+
     /// COM_AddGameDirectory. Ignored if already added (case-insensitive).
     /// Returns false if the directory doesn't exist.
     pub fn add_game_dir(&mut self, name: &str) -> bool {
