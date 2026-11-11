@@ -107,6 +107,9 @@ struct Range {
 
 struct WorldDraw {
     model: Mat4,
+    /// Brush entity: drawn with a depth bias toward the viewer so it wins
+    /// over coplanar world faces (vkQuake gl_zfix).
+    zfix: bool,
     alpha: f32,
     opaque: Range,
     sky: Range,
@@ -344,6 +347,7 @@ fn build_world_draw(
     };
     WorldDraw {
         model,
+        zfix: false,
         alpha: ent_alpha,
         opaque: put(&cats[0]),
         sky: put(&cats[1]),
@@ -499,7 +503,7 @@ impl Renderer {
                             surfs.push(si);
                         }
                         let alpha = e.alpha.clamp(0.0, 1.0);
-                        let wd = build_world_draw(
+                        let mut wd = build_world_draw(
                             wg,
                             &mut self.buckets,
                             &mut dynw,
@@ -511,6 +515,7 @@ impl Renderer {
                             affine(rot, e.origin),
                             &mut lm_vis,
                         );
+                        wd.zfix = true;
                         if alpha < 1.0 {
                             trans.push((dist, Trans::World(world_draws.len())));
                         }
@@ -999,16 +1004,24 @@ impl Renderer {
             let push = |data: &[u8]| dev.cmd_push_constants(cmd, p.layout, all, 0, data);
             if view.is_some() {
                 dev.cmd_bind_descriptor_sets(cmd, gfx, p.layout, 0, &set, &[]);
+                dev.cmd_set_depth_bias(cmd, 0.0, 0.0, 0.0);
                 let draw_world = |wd: &WorldDraw, cats: &[(Range, vk::Pipeline)]| {
                     push(bytes_of(&[WorldPush {
                         model: wd.model,
                         params: [wd.alpha, 0.0, 0.0, 0.0],
                     }]));
+                    // vkQuake gl_zfix values for a D32F depth buffer
+                    if wd.zfix {
+                        dev.cmd_set_depth_bias(cmd, -4.0, 0.0, -0.125);
+                    }
                     for (r, pipe) in cats {
                         if r.count > 0 {
                             dev.cmd_bind_pipeline(cmd, gfx, *pipe);
                             dev.cmd_draw_indexed_indirect(cmd, dynbuf, r.ofs, r.count, 20);
                         }
+                    }
+                    if wd.zfix {
+                        dev.cmd_set_depth_bias(cmd, 0.0, 0.0, 0.0);
                     }
                 };
                 if let Some(wg) = &self.world {

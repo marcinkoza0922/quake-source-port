@@ -124,6 +124,7 @@ fn graphics(gpu: &Gpu, layout: vk::PipelineLayout, d: &Desc) -> Result<vk::Pipel
     let rs = vk::PipelineRasterizationStateCreateInfo::default()
         .polygon_mode(vk::PolygonMode::FILL)
         .cull_mode(vk::CullModeFlags::NONE)
+        .depth_bias_enable(d.depth)
         .line_width(1.0);
     let ms = vk::PipelineMultisampleStateCreateInfo::default()
         .rasterization_samples(vk::SampleCountFlags::from_raw(d.samples.max(1)));
@@ -142,8 +143,10 @@ fn graphics(gpu: &Gpu, layout: vk::PipelineLayout, d: &Desc) -> Result<vk::Pipel
         color_write_mask: vk::ColorComponentFlags::RGBA,
     }];
     let cb = vk::PipelineColorBlendStateCreateInfo::default().attachments(&att);
-    let dyn_states = [vk::DynamicState::VIEWPORT, vk::DynamicState::SCISSOR];
-    let dy = vk::PipelineDynamicStateCreateInfo::default().dynamic_states(&dyn_states);
+    // scene pipelines take a dynamic depth bias (gl_zfix for brush entities)
+    let dyn_states = [vk::DynamicState::VIEWPORT, vk::DynamicState::SCISSOR, vk::DynamicState::DEPTH_BIAS];
+    let n = if d.depth { 3 } else { 2 };
+    let dy = vk::PipelineDynamicStateCreateInfo::default().dynamic_states(&dyn_states[..n]);
     let formats = [d.color];
     let mut ri = vk::PipelineRenderingCreateInfo::default().color_attachment_formats(&formats);
     if d.depth {

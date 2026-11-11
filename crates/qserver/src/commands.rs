@@ -23,6 +23,7 @@ pub(crate) fn register(s: &mut Server) {
     s.add_cmd("god", |s, a| toggle_flag(s, a, FL_GODMODE, "godmode"));
     s.add_cmd("notarget", |s, a| toggle_flag(s, a, FL_NOTARGET, "notarget"));
     s.add_cmd("noclip", cmd_noclip);
+    s.add_cmd("setpos", cmd_setpos);
     s.add_cmd("give", cmd_give);
     s.add_cmd("kill", cmd_kill);
     s.add_cmd("prespawn", cmd_prespawn);
@@ -134,6 +135,28 @@ fn cmd_noclip(s: &mut Server, a: &Args) {
     };
     l.vm.set_ent_f(e, mo, if on { MOVETYPE_NOCLIP } else { MOVETYPE_WALK } as f32);
     s.client_print(i, &format!("noclip {}\n", if on { "ON" } else { "OFF" }));
+}
+
+/// setpos x y z [pitch yaw roll]: teleport the player (debug).
+fn cmd_setpos(s: &mut Server, a: &Args) {
+    let Some((_, e)) = s.cmd_player() else { return };
+    if s.deathmatch() {
+        return;
+    }
+    if a.argc() != 4 && a.argc() != 7 {
+        s.core.print("setpos x y z [pitch yaw roll]\n");
+        return;
+    }
+    let f = s.core.sv.fields.clone();
+    let v = |o: usize| [q_atof(a.argv(o)), q_atof(a.argv(o + 1)), q_atof(a.argv(o + 2))];
+    let l = s.level.as_mut().unwrap();
+    l.vm.set_ent_v(e, f.origin, v(1));
+    l.vm.set_ent_v(e, f.velocity, [0.0; 3]);
+    if a.argc() == 7 {
+        l.vm.set_ent_v(e, f.angles, v(4));
+        l.vm.set_ent_f(e, f.fixangle, 1.0);
+    }
+    l.world.link_edict(&mut crate::ents::Ents { vm: &mut l.vm, c: &mut s.core }, e, false);
 }
 
 fn cmd_kill(s: &mut Server, _: &Args) {
