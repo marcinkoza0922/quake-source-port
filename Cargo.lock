@@ -198,6 +198,7 @@ name = "qpart"
 version = "0.1.0"
 dependencies = [
  "qcore",
+ "qformats",
 ]
 
 [[package]]
@@ -254,6 +255,7 @@ dependencies = [
  "qformats",
  "qinput",
  "qnet",
+ "qpart",
  "qplatform",
  "qrender",
  "qserver",

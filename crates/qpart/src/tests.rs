@@ -208,6 +208,8 @@ fn effectinfo_via_load_set_with_font() {
     let mut f = files(&[
         ("effectinfo.txt", "effect x\ntex 3 3\n"),
         ("particles/particlefont.txt", "3 0.1 0.2 0.3 0.4\n"),
+        // Any content: resolve_textures only checks that it exists.
+        ("particles/particlefont.tga", "x"),
     ]);
     let id = r.find("effectinfo.x", &mut f).unwrap();
     let t = &r.types[id];

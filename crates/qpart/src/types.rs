@@ -230,6 +230,8 @@ pub struct PartType {
 
     pub loaded: Loaded,
     pub flags: u32,
+    /// Index into [`crate::Registry::textures`], set by `resolve_textures`.
+    pub tex: Option<usize>,
     pub fluidmask: u32,
 }
 
@@ -317,6 +319,7 @@ impl PartType {
             ramp: Vec::new(),
             loaded: Loaded::No,
             flags: 0,
+            tex: None,
             fluidmask: 0,
         }
     }

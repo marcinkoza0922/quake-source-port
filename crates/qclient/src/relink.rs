@@ -95,6 +95,7 @@ impl ClientState {
                 e.lerpflags |= LERP_RESETMOVE | LERP_RESETANIM;
                 continue;
             }
+            let oldorg = e.origin;
             if e.forcelink {
                 e.origin = e.msg_origins[0];
                 e.angles = e.msg_angles[0];
@@ -163,7 +164,36 @@ impl ClientState {
                     dl.color = color;
                 }
             }
-            if mflags & MF_GIB != 0 {
+            // FTE trails run every frame from the previous origin
+            // (PScript_EntParticleTrail); classic ones are rate limited.
+            let fte_trail = [
+                (MF_GIB, "TR_BLOOD"),
+                (MF_ZOMGIB, "TR_SLIGHTBLOOD"),
+                (MF_TRACER, "TR_WIZSPIKE"),
+                (MF_TRACER2, "TR_KNIGHTSPIKE"),
+                (MF_ROCKET, "TR_ROCKET"),
+                (MF_GRENADE, "TR_GRENADE"),
+                (MF_TRACER3, "TR_VORESPIKE"),
+            ]
+            .into_iter()
+            .find(|(f, _)| mflags & f != 0)
+            .map(|(_, n)| n);
+            let relinked = self.entities[i].forcelink || self.entities[i].lerpflags & LERP_RESETMOVE != 0;
+            if let Some(name) = fte_trail
+                && self.fte_names.has(name)
+            {
+                // A teleported entity draws no trail this frame.
+                if !relinked {
+                    self.fte_trail(name, oldorg, origin, key);
+                }
+                Self::reset_trail(&mut self.entities[i]);
+                if mflags & MF_ROCKET != 0 {
+                    let dl = self.alloc_dlight(key);
+                    dl.origin = origin;
+                    dl.radius = 200.0;
+                    dl.die = t + 0.01;
+                }
+            } else if mflags & MF_GIB != 0 {
                 self.ent_trail(i, 2);
             } else if mflags & MF_ZOMGIB != 0 {
                 self.ent_trail(i, 4);

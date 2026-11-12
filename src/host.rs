@@ -187,6 +187,8 @@ const COMPAT_CVARS: &[(&str, &str, u32)] = &[
     ("r_clearcolor", "2", 0),
     ("r_novis", "0", 0),
     ("r_part_density", "1", 0),
+    ("r_particledesc", "classic", 0),
+    ("r_fteparticles", "1", CVAR_ARCHIVE),
     ("r_particles", "1", 0),
     ("r_quadparticles", "1", 0),
     ("r_scale", "1", 0),
@@ -307,6 +309,8 @@ pub struct Host {
     /// Running `slist`.
     lan_search: Option<crate::net::LanSearch>,
     autosave: crate::autosave::Tracker,
+    /// FTE scripted particles.
+    fte: crate::fte::Fte,
 }
 
 impl CmdContext for Host {
@@ -349,6 +353,7 @@ impl Host {
         let mut h = Host {
             server,
             autosave: Default::default(),
+            fte: crate::fte::Fte::new(),
             cl: ClientState::new(),
             local: None,
             cmds: Commands::with_builtins(),
@@ -1663,6 +1668,7 @@ impl Host {
         self.update_pings();
         self.read_demo(dt);
         self.check_local_client();
+        self.sync_fte();
         if self.cl.signon > 0 {
             self.cl.frame(dt * timescale);
             self.apply_qw_prediction();
@@ -1967,6 +1973,15 @@ impl Host {
         }
     }
 
+    /// Loads FTE effects for `r_particledesc` and the current map
+    /// (R_ParticleDesc_Callback); `r_fteparticles 0` turns them off.
+    fn sync_fte(&mut self) {
+        let desc = if self.cv("r_fteparticles") != 0.0 { self.cvs("r_particledesc").to_string() } else { String::new() };
+        let map = self.level.mapname.clone();
+        let con = &mut self.con;
+        self.fte.sync(&desc, &map, &self.server.core.fs, &mut self.cl, &mut |s| con.print(s));
+    }
+
     fn render(&mut self, view: Option<qrender::View>, gun: Option<qrender::RenderEntity>, ft: f32) {
         let (w, h) = self.r.size();
         let mut c = Canvas::new(w, h);
@@ -1980,6 +1995,7 @@ impl Host {
         let mut ents = Vec::new();
         let mut parts = Vec::new();
         let mut dls = Vec::new();
+        let mut fte = (Vec::new(), Vec::new(), Vec::new());
         let mut blend = [0.0; 4];
         if let Some(v) = &view {
             let fs = &self.server.core.fs;
@@ -1992,6 +2008,15 @@ impl Host {
                 ents.push(g);
             }
             crate::view::particles(&self.cl, &mut parts);
+            fte = self.fte.frame(
+                &mut self.cl,
+                self.level.bsp.as_ref(),
+                &self.server.core.fs,
+                &mut self.r,
+                self.snd.as_mut(),
+                v,
+                &self.level.mapname,
+            );
             crate::view::dlights(&self.cl, &mut dls);
             let contents = self.contents(v.origin);
             blend = self.view.blend(&self.cl, contents, ft, cv.flash);
@@ -2134,6 +2159,9 @@ impl Host {
             view,
             entities: &ents,
             particles: &parts,
+            fte_vertices: &fte.0,
+            fte_indices: &fte.1,
+            fte_batches: &fte.2,
             dlights: &dls,
             lightstyles: &styles,
             fog,
@@ -2437,6 +2465,18 @@ fn register_commands(c: &mut Commands<Host>) {
     }
     c.add("cfg_unbindall", |_, _| {});
     c.add("fog", cmd_fog);
+    // Debug: run an FTE effect 128 units in front of the view.
+    c.add("fte_spawn", |h, a| {
+        if a.argc() < 2 {
+            h.con.print("fte_spawn <effect> [count]\n");
+            return;
+        }
+        let (f, _, _) = qcore::math::angle_vectors(qcore::math::Vec3::from(h.cl.viewangles));
+        let e = &h.cl.entities.get(h.cl.viewentity).map_or([0.0; 3], |e| e.origin);
+        let org = [e[0] + f.x * 128.0, e[1] + f.y * 128.0, e[2] + 22.0 + f.z * 128.0];
+        let count = if a.argc() > 2 { qpart::num::atof(a.argv(2)) } else { 1.0 };
+        h.cl.fte_queue.push(qclient::FteRequest::Effect { name: a.argv(1).to_string(), org, dir: None, count });
+    });
     // Host_Name_f / Host_Color_f: set the archived cvar, then tell the server.
     c.add("name", |h, a| {
         if a.argc() < 2 {

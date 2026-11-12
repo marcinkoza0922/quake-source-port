@@ -123,6 +123,9 @@ impl Dyn {
     }
 }
 
+/// FTE particles: vertex offset, index offset, (pipeline, texture slot, batch).
+type FteDraw = (u64, u64, Vec<(usize, u32, crate::FteBatch)>);
+
 #[derive(Clone, Copy, Default)]
 struct Range {
     ofs: u64,
@@ -568,6 +571,8 @@ impl Renderer {
         let mut lm_vis: Vec<u32> = Vec::new();
         let mut cull: Option<CullFrame> = None;
         let mut particles = Range::default();
+        // FTE particles: (vertex offset, index offset, batches with texture slots)
+        let mut fte: Option<FteDraw> = None;
         // scene target size (render scale) and the 3D view height in it
         let (sw, sh) = self
             .targets
@@ -833,6 +838,19 @@ impl Renderer {
                         ofs,
                         count: data.len() as u32,
                     };
+                }
+            }
+            if !fr.fte_batches.is_empty() && !fr.fte_indices.is_empty() {
+                let batches: Vec<_> = fr
+                    .fte_batches
+                    .iter()
+                    .filter_map(|b| {
+                        let slot = self.pics.get(b.pic.0 as usize)?.slot;
+                        Some((crate::pipelines::fte_index(b.blend, b.lines), slot, *b))
+                    })
+                    .collect();
+                if let (Some(v), Some(i)) = (dynw.push(fr.fte_vertices, 16), dynw.push(fr.fte_indices, 4)) {
+                    fte = Some((v, i, batches));
                 }
             }
             trans.sort_by(|a, b| b.0.total_cmp(&a.0));
@@ -1311,6 +1329,16 @@ impl Renderer {
                     dev.cmd_bind_pipeline(cmd, gfx, p.particle);
                     dev.cmd_bind_vertex_buffers(cmd, 0, &[dynbuf], &[particles.ofs]);
                     dev.cmd_draw(cmd, 6, particles.count, 0, 0);
+                }
+                if let Some((vofs, iofs, batches)) = &fte {
+                    dev.cmd_bind_vertex_buffers(cmd, 0, &[dynbuf], &[*vofs]);
+                    dev.cmd_bind_index_buffer(cmd, dynbuf, *iofs, vk::IndexType::UINT32);
+                    for (pipe, slot, b) in batches {
+                        dev.cmd_bind_pipeline(cmd, gfx, p.fte[*pipe]);
+                        let fogmix = if matches!(b.blend, crate::FteBlend::Blend | crate::FteBlend::BlendColour) { 1.0 } else { 0.0 };
+                        push(bytes_of(&[PolyPush { color: [fogmix, 0.0, 0.0, 0.0], tex: *slot }]));
+                        dev.cmd_draw_indexed(cmd, b.num_indices, 1, b.first_index, 0, 0);
+                    }
                 }
                 let vm: Vec<&AliasDraw> = alias_draws.iter().filter(|a| a.viewmodel).collect();
                 if !vm.is_empty() {

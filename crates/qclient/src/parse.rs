@@ -548,17 +548,24 @@ impl ClientState {
         match ty {
             TE_WIZSPIKE => {
                 let pos = pos_of(m);
-                self.run_particle_effect(pos, [0.0; 3], 20, 30);
+                if !self.fte_effect("TE_WIZSPIKE", pos, 1.0) {
+                    self.run_particle_effect(pos, [0.0; 3], 20, 30);
+                }
                 self.tsound("wizard/hit.wav", pos);
             }
             TE_KNIGHTSPIKE => {
                 let pos = pos_of(m);
-                self.run_particle_effect(pos, [0.0; 3], 226, 20);
+                if !self.fte_effect("TE_KNIGHTSPIKE", pos, 1.0) {
+                    self.run_particle_effect(pos, [0.0; 3], 226, 20);
+                }
                 self.tsound("hknight/hit.wav", pos);
             }
             TE_SPIKE | TE_SUPERSPIKE => {
                 let pos = pos_of(m);
-                self.run_particle_effect(pos, [0.0; 3], 0, if ty == TE_SPIKE { 10 } else { 20 });
+                let name = if ty == TE_SPIKE { "TE_SPIKE" } else { "TE_SUPERSPIKE" };
+                if !self.fte_effect(name, pos, 1.0) {
+                    self.run_particle_effect(pos, [0.0; 3], 0, if ty == TE_SPIKE { 10 } else { 20 });
+                }
                 if self.rng.rand() % 5 != 0 {
                     self.tsound("weapons/tink1.wav", pos);
                 } else {
@@ -572,17 +579,23 @@ impl ClientState {
             }
             TE_GUNSHOT => {
                 let pos = pos_of(m);
-                self.run_particle_effect(pos, [0.0; 3], 0, 20);
+                if !self.fte_effect("TE_GUNSHOT", pos, 20.0) {
+                    self.run_particle_effect(pos, [0.0; 3], 0, 20);
+                }
             }
             TE_EXPLOSION => {
                 let pos = pos_of(m);
-                self.particle_explosion(pos);
+                if !self.fte_effect("TE_EXPLOSION", pos, 1.0) {
+                    self.particle_explosion(pos);
+                }
                 self.explosion_light(pos);
                 self.tsound("weapons/r_exp3.wav", pos);
             }
             TE_TAREXPLOSION => {
                 let pos = pos_of(m);
-                self.blob_explosion(pos);
+                if !self.fte_effect("TE_TAREXPLOSION", pos, 1.0) {
+                    self.blob_explosion(pos);
+                }
                 self.tsound("weapons/r_exp3.wav", pos);
             }
             TE_LIGHTNING1 => self.parse_beam(m, "progs/bolt.mdl"),
@@ -591,17 +604,23 @@ impl ClientState {
             TE_BEAM => self.parse_beam(m, "progs/beam.mdl"),
             TE_LAVASPLASH => {
                 let pos = pos_of(m);
-                self.lava_splash(pos);
+                if !self.fte_effect("TE_LAVASPLASH", pos, 1.0) {
+                    self.lava_splash(pos);
+                }
             }
             TE_TELEPORT => {
                 let pos = pos_of(m);
-                self.teleport_splash(pos);
+                if !self.fte_effect("TE_TELEPORT", pos, 1.0) {
+                    self.teleport_splash(pos);
+                }
             }
             TE_EXPLOSION2 => {
                 let pos = pos_of(m);
                 let start = m.byte();
                 let len = m.byte();
-                self.particle_explosion2(pos, start, len);
+                if !self.fte_effect(&format!("TE_EXPLOSION2_{start}_{len}"), pos, 1.0) {
+                    self.particle_explosion2(pos, start, len);
+                }
                 self.explosion_light(pos);
                 self.tsound("weapons/r_exp3.wav", pos);
             }

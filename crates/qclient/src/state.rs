@@ -221,6 +221,10 @@ pub struct ClientState {
     pub(crate) tracercount: i32,
     pub rng: QRand,
     pub sv_gravity: f32,
+    /// Effects handled by FTE scripted particles (set by the host).
+    pub fte_names: crate::fte::FteNames,
+    /// Scripted effects to run this frame (drained by the host).
+    pub fte_queue: Vec<crate::fte::FteRequest>,
 
     pub events: Vec<ClientEvent>,
     pub(crate) stuffcmdbuf: Vec<u8>,
@@ -297,6 +301,8 @@ impl ClientState {
             tracercount: 0,
             rng: QRand::default(),
             sv_gravity: 800.0,
+            fte_names: Default::default(),
+            fte_queue: Vec::new(),
             events: Vec::new(),
             stuffcmdbuf: Vec::new(),
             out_reliable: SizeBuf::new(MAX_MSGLEN),

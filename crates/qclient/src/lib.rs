@@ -9,6 +9,7 @@
 
 use qcore::anorms;
 mod effects;
+mod fte;
 mod input;
 mod parse;
 pub mod qw;
@@ -16,6 +17,7 @@ mod relink;
 mod state;
 
 pub use effects::{Beam, Dlight, PT_BLOB, PT_BLOB2, PT_EXPLODE, PT_EXPLODE2, PT_FIRE, PT_GRAV, PT_SLOWGRAV, PT_STATIC, QRand, TempEntity};
+pub use fte::{FteNames, FteRequest};
 pub use input::{InputState, MoveSpeeds, UserCmd};
 pub use parse::ParseError;
 pub use state::*;

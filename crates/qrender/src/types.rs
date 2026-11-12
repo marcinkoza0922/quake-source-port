@@ -91,6 +91,61 @@ pub struct Particle {
     pub alpha: f32,
 }
 
+/// FTE particle blend modes (source, destination factors).
+#[derive(Clone, Copy, Debug, Default, PartialEq, Eq, Hash)]
+pub enum FteBlend {
+    /// SRC_ALPHA, ONE_MINUS_SRC_ALPHA
+    #[default]
+    Blend,
+    /// SRC_COLOR, ONE_MINUS_SRC_COLOR
+    BlendColour,
+    /// SRC_ALPHA, ONE
+    AddA,
+    /// SRC_COLOR, ONE
+    AddC,
+    /// SRC_ALPHA, ONE_MINUS_SRC_COLOR
+    Subtract,
+    /// ZERO, ONE_MINUS_SRC_ALPHA
+    InvModA,
+    /// ZERO, ONE_MINUS_SRC_COLOR
+    InvModC,
+    /// ONE, ONE_MINUS_SRC_ALPHA
+    Premul,
+}
+
+impl FteBlend {
+    pub const ALL: [FteBlend; 8] = [
+        FteBlend::Blend,
+        FteBlend::BlendColour,
+        FteBlend::AddA,
+        FteBlend::AddC,
+        FteBlend::Subtract,
+        FteBlend::InvModA,
+        FteBlend::InvModC,
+        FteBlend::Premul,
+    ];
+}
+
+/// World-space particle vertex (FTE scripted particles).
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct FteVertex {
+    pub pos: [f32; 3],
+    pub uv: [f32; 2],
+    pub color: [u8; 4],
+}
+
+/// Indexed draw of FTE particle geometry; drawn in slice order.
+#[derive(Clone, Copy, Debug, PartialEq)]
+pub struct FteBatch {
+    pub pic: PicId,
+    pub blend: FteBlend,
+    /// Line list instead of triangles.
+    pub lines: bool,
+    pub first_index: u32,
+    pub num_indices: u32,
+}
+
 #[derive(Clone, Copy, Debug)]
 pub struct DLight {
     pub origin: Vec3,
@@ -255,6 +310,10 @@ pub struct RenderFrame<'a> {
     pub view: Option<View>,
     pub entities: &'a [RenderEntity],
     pub particles: &'a [Particle],
+    /// FTE particle geometry (indices are absolute into `fte_vertices`).
+    pub fte_vertices: &'a [FteVertex],
+    pub fte_indices: &'a [u32],
+    pub fte_batches: &'a [FteBatch],
     pub dlights: &'a [DLight],
     /// d_lightstylevalue-style values (256 = normal, 'm' = 264); missing = 256.
     pub lightstyles: &'a [i32],
@@ -272,6 +331,9 @@ impl Default for RenderFrame<'_> {
             view: None,
             entities: &[],
             particles: &[],
+            fte_vertices: &[],
+            fte_indices: &[],
+            fte_batches: &[],
             dlights: &[],
             lightstyles: &[],
             fog: Fog::default(),

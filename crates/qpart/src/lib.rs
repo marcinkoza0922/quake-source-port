@@ -5,6 +5,7 @@
 //! effect lookup with namespaces / redirects / legacy names, and model
 //! effect associations (`r_effect` / `r_trail`).
 mod effectinfo;
+pub mod geom;
 pub mod num;
 mod parse;
 pub mod system;
@@ -92,6 +93,8 @@ pub struct Registry {
     /// 256-entry RGB palette used by `rampindex` / `colorindex`.
     pub palette: Option<Box<[u8; 768]>>,
     pub opts: RenderOptions,
+    /// Textures referenced by types (`PartType::tex`).
+    pub textures: Vec<geom::TexRef>,
     /// Console messages produced while loading (drained by the caller).
     pub messages: Vec<String>,
     /// Set when effect definitions changed (r_plooksdirty).
@@ -259,6 +262,7 @@ impl Registry {
         let data = files.load(&format!("particles/{name}.cfg")).or_else(|| files.load(&format!("{name}.cfg")));
         if let Some(data) = data {
             self.parse_fte(name, implicit, &String::from_utf8_lossy(&data));
+            self.resolve_textures(files);
             return true;
         }
         if name == "effectinfo" || name.starts_with("effectinfo_") {
@@ -270,6 +274,7 @@ impl Registry {
                 }
                 None => self.msg(format!("{name}.txt not found")),
             }
+            self.resolve_textures(files);
             return true;
         }
         if showwarning {
