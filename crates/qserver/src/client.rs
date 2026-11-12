@@ -57,6 +57,12 @@ pub struct Client {
     /// Round trips from clc_move timestamps (NUM_PING_TIMES ring).
     pub ping_times: [f32; NUM_PING_TIMES],
     pub num_pings: usize,
+    /// The client answered (or never needed) the `cmd pext` query.
+    pub pext_known: bool,
+    /// Active FTE protocol extensions (PEXT2_*).
+    pub pext2: u32,
+    /// Replacement-delta state while PEXT2_REPLACEMENTDELTAS is active.
+    pub delta: Option<Box<crate::delta::DeltaState>>,
 }
 
 pub const NUM_PING_TIMES: usize = 16;
@@ -91,6 +97,9 @@ impl Default for Client {
             stringcmds: VecDeque::new(),
             ping_times: [0.0; NUM_PING_TIMES],
             num_pings: 0,
+            pext_known: false,
+            pext2: 0,
+            delta: None,
         }
     }
 }

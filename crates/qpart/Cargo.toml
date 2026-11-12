@@ -1,0 +1,15 @@
+[package]
+name = "qpart"
+version = "0.1.0"
+edition.workspace = true
+license.workspace = true
+
+[lints]
+workspace = true
+
+[dependencies]
+qcore = { path = "../qcore" }
+qformats = { path = "../qformats" }
+png = "0.18"
+zune-jpeg = "0.5"
+zune-core = "0.5"

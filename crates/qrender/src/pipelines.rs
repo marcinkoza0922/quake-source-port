@@ -34,6 +34,9 @@ pub struct Pipelines {
     pub alias_alpha: vk::Pipeline,
     pub poly: vk::Pipeline,
     pub particle: vk::Pipeline,
+    /// FTE particles: 8 blend modes of triangles, then the same as lines
+    /// (see [`fte_index`]).
+    pub fte: [vk::Pipeline; 16],
     pub ui: vk::Pipeline,
     pub post: vk::Pipeline,
     pub post_format: vk::Format,
@@ -57,6 +60,8 @@ struct Shaders {
     poly_fs: vk::ShaderModule,
     part_vs: vk::ShaderModule,
     part_fs: vk::ShaderModule,
+    fte_vs: vk::ShaderModule,
+    fte_fs: vk::ShaderModule,
     ui_vs: vk::ShaderModule,
     ui_fs: vk::ShaderModule,
     post_vs: vk::ShaderModule,
@@ -67,6 +72,29 @@ struct Shaders {
 enum Blend {
     None,
     Alpha,
+    /// Colour factors (src, dst); destination alpha is preserved.
+    Factors(vk::BlendFactor, vk::BlendFactor),
+}
+
+/// Colour blend factors of an FTE blend mode.
+fn fte_factors(b: crate::FteBlend) -> (vk::BlendFactor, vk::BlendFactor) {
+    use crate::FteBlend as F;
+    use vk::BlendFactor as B;
+    match b {
+        F::Blend => (B::SRC_ALPHA, B::ONE_MINUS_SRC_ALPHA),
+        F::BlendColour => (B::SRC_COLOR, B::ONE_MINUS_SRC_COLOR),
+        F::AddA => (B::SRC_ALPHA, B::ONE),
+        F::AddC => (B::SRC_COLOR, B::ONE),
+        F::Subtract => (B::SRC_ALPHA, B::ONE_MINUS_SRC_COLOR),
+        F::InvModA => (B::ZERO, B::ONE_MINUS_SRC_ALPHA),
+        F::InvModC => (B::ZERO, B::ONE_MINUS_SRC_COLOR),
+        F::Premul => (B::ONE, B::ONE_MINUS_SRC_ALPHA),
+    }
+}
+
+/// Index of an FTE pipeline in [`Pipelines::fte`].
+pub fn fte_index(b: crate::FteBlend, lines: bool) -> usize {
+    crate::FteBlend::ALL.iter().position(|x| *x == b).unwrap_or(0) + if lines { 8 } else { 0 }
 }
 
 struct Desc<'a> {
@@ -85,6 +113,7 @@ struct Desc<'a> {
     cull: bool,
     /// Per-sample shading (supersampling) when multisampled.
     sample_shading: bool,
+    topology: vk::PrimitiveTopology,
 }
 
 fn attr(
@@ -128,7 +157,7 @@ fn graphics(gpu: &Gpu, layout: vk::PipelineLayout, d: &Desc) -> Result<vk::Pipel
         .vertex_binding_descriptions(d.bindings)
         .vertex_attribute_descriptions(d.attrs);
     let ia = vk::PipelineInputAssemblyStateCreateInfo::default()
-        .topology(vk::PrimitiveTopology::TRIANGLE_LIST);
+        .topology(d.topology);
     let vp = vk::PipelineViewportStateCreateInfo::default()
         .viewport_count(1)
         .scissor_count(1);
@@ -146,13 +175,22 @@ fn graphics(gpu: &Gpu, layout: vk::PipelineLayout, d: &Desc) -> Result<vk::Pipel
         .depth_test_enable(d.depth_test)
         .depth_write_enable(d.depth_write)
         .depth_compare_op(vk::CompareOp::LESS_OR_EQUAL);
+    let (src, dst, src_a, dst_a) = match d.blend {
+        Blend::Factors(s, t) => (s, t, vk::BlendFactor::ZERO, vk::BlendFactor::ONE),
+        _ => (
+            vk::BlendFactor::SRC_ALPHA,
+            vk::BlendFactor::ONE_MINUS_SRC_ALPHA,
+            vk::BlendFactor::ONE,
+            vk::BlendFactor::ONE_MINUS_SRC_ALPHA,
+        ),
+    };
     let att = [vk::PipelineColorBlendAttachmentState {
-        blend_enable: (d.blend == Blend::Alpha).into(),
-        src_color_blend_factor: vk::BlendFactor::SRC_ALPHA,
-        dst_color_blend_factor: vk::BlendFactor::ONE_MINUS_SRC_ALPHA,
+        blend_enable: (d.blend != Blend::None).into(),
+        src_color_blend_factor: src,
+        dst_color_blend_factor: dst,
         color_blend_op: vk::BlendOp::ADD,
-        src_alpha_blend_factor: vk::BlendFactor::ONE,
-        dst_alpha_blend_factor: vk::BlendFactor::ONE_MINUS_SRC_ALPHA,
+        src_alpha_blend_factor: src_a,
+        dst_alpha_blend_factor: dst_a,
         alpha_blend_op: vk::BlendOp::ADD,
         color_write_mask: vk::ColorComponentFlags::RGBA,
     }];
@@ -205,6 +243,10 @@ impl Pipelines {
             b(3, vk::DescriptorType::COMBINED_IMAGE_SAMPLER, 1),
             b(4, vk::DescriptorType::STORAGE_BUFFER, 1),
             b(5, vk::DescriptorType::STORAGE_BUFFER, 1),
+            // scene depth for soft particles: single-sampled / MSAA (only the
+            // one matching the targets is written)
+            b(6, vk::DescriptorType::COMBINED_IMAGE_SAMPLER, 1),
+            b(7, vk::DescriptorType::COMBINED_IMAGE_SAMPLER, 1),
         ];
         let flags = [
             vk::DescriptorBindingFlags::empty(),
@@ -213,6 +255,8 @@ impl Pipelines {
             vk::DescriptorBindingFlags::empty(),
             vk::DescriptorBindingFlags::empty(),
             vk::DescriptorBindingFlags::empty(),
+            vk::DescriptorBindingFlags::PARTIALLY_BOUND,
+            vk::DescriptorBindingFlags::PARTIALLY_BOUND,
         ];
         let mut fi = vk::DescriptorSetLayoutBindingFlagsCreateInfo::default().binding_flags(&flags);
         let ci = vk::DescriptorSetLayoutCreateInfo::default()
@@ -281,6 +325,8 @@ impl Pipelines {
         let poly_fs = m(spv!("poly.frag"))?;
         let part_vs = m(spv!("particle.vert"))?;
         let part_fs = m(spv!("particle.frag"))?;
+        let fte_vs = m(spv!("fte.vert"))?;
+        let fte_fs = m(spv!("fte.frag"))?;
         let ui_vs = m(spv!("ui.vert"))?;
         let ui_fs = m(spv!("ui.frag"))?;
         let post_vs = m(spv!("post.vert"))?;
@@ -318,6 +364,8 @@ impl Pipelines {
             poly_fs,
             part_vs,
             part_fs,
+            fte_vs,
+            fte_fs,
             ui_vs,
             ui_fs,
             post_vs,
@@ -342,6 +390,7 @@ impl Pipelines {
             alias_alpha: null,
             poly: null,
             particle: null,
+            fte: [null; 16],
             ui: null,
             post: null,
             post_format,
@@ -354,8 +403,8 @@ impl Pipelines {
         Ok(p)
     }
 
-    fn graphics_pipes(&self) -> [vk::Pipeline; 11] {
-        [
+    fn graphics_pipes(&self) -> Vec<vk::Pipeline> {
+        let mut v = vec![
             self.world,
             self.world_alpha,
             self.water,
@@ -367,7 +416,9 @@ impl Pipelines {
             self.particle,
             self.ui,
             self.post,
-        ]
+        ];
+        v.extend(self.fte);
+        v
     }
 
     /// (Re)creates the graphics pipelines for an output format and scene
@@ -391,6 +442,8 @@ impl Pipelines {
             poly_fs,
             part_vs,
             part_fs,
+            fte_vs,
+            fte_fs,
             ui_vs,
             ui_fs,
             post_vs,
@@ -434,6 +487,7 @@ impl Pipelines {
             samples,
             cull: false,
             sample_shading: supersample,
+            topology: vk::PrimitiveTopology::TRIANGLE_LIST,
         };
         let g = |d: Desc| graphics(gpu, layout, &d);
         let world = g(d(world_vs, world_fs, &wb, &wa, Blend::None, true, true))?;
@@ -445,6 +499,20 @@ impl Pipelines {
         let alias_alpha = g(Desc { cull: true, ..d(alias_vs, alias_fs, &ab, &aa, Blend::Alpha, true, false) })?;
         let poly = g(d(poly_vs, poly_fs, &pb, &pa, Blend::Alpha, true, true))?;
         let particle = g(d(part_vs, part_fs, &qb, &qa, Blend::Alpha, true, false))?;
+        let fb = [bind(0, 24, false)];
+        let fa = [
+            attr(0, 0, f32x3, 0),
+            attr(1, 0, f32x2, 12),
+            attr(2, 0, vk::Format::R8G8B8A8_UNORM, 20),
+        ];
+        let mut fte = [vk::Pipeline::null(); 16];
+        for (i, slot) in fte.iter_mut().enumerate() {
+            let (src, dst) = fte_factors(crate::FteBlend::ALL[i % 8]);
+            *slot = g(Desc {
+                topology: if i >= 8 { vk::PrimitiveTopology::LINE_LIST } else { vk::PrimitiveTopology::TRIANGLE_LIST },
+                ..d(fte_vs, fte_fs, &fb, &fa, Blend::Factors(src, dst), true, false)
+            })?;
+        }
         // UI is drawn in the output pass, after post-processing
         let ui = graphics(
             gpu,
@@ -472,6 +540,7 @@ impl Pipelines {
                 samples: 1,
                 cull: false,
                 sample_shading: false,
+                topology: vk::PrimitiveTopology::TRIANGLE_LIST,
             },
         )?;
         (
@@ -487,6 +556,7 @@ impl Pipelines {
             self.ui,
             self.post,
         ) = (world, world_alpha, water, water_alpha, sky, alias, alias_alpha, poly, particle, ui, post);
+        self.fte = fte;
         self.post_format = post_format;
         self.samples = samples;
         Ok(())

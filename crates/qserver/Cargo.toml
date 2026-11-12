@@ -11,6 +11,7 @@ workspace = true
 qcore = { path = "../qcore" }
 qecs = { path = "../qecs" }
 qformats = { path = "../qformats" }
+qnet = { path = "../qnet" }
 qvm = { path = "../qvm" }
 qworld = { path = "../qworld" }
 

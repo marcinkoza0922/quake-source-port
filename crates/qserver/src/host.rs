@@ -853,11 +853,24 @@ impl Host for Ctx<'_> {
                     _ => self.c.print("PF_clientcommand: not a client\n"),
                 }
             }
+            "particleeffectnum" => self.c.pf_particleeffectnum(vm)?,
+            "trailparticles" => self.c.pf_trailparticles(vm)?,
+            "pointparticles" => self.c.pf_pointparticles(vm)?,
+            "te_particlerain" => self.c.pf_te_weather(vm, false)?,
+            "te_particlesnow" => self.c.pf_te_weather(vm, true)?,
             "checkbuiltin" => vm.ret_f(0.0),
             "ex_CheckPlayerEXFlags" | "ex_walkpathtogoal" => vm.ret_f(0.0),
             _ => return Err(vm.run_error(format!("unimplemented builtin {name}"))),
         }
         Ok(())
+    }
+
+    fn particle_effect_index(&mut self, name: &str) -> Option<f32> {
+        self.c.fte_particles().then(|| self.c.particle_precache(name) as f32)
+    }
+
+    fn has_extension(&self, name: &str) -> bool {
+        self.c.fte_particles() && crate::particles::EXTENSIONS.contains(&name)
     }
 
     fn dprint(&mut self, msg: &str) {

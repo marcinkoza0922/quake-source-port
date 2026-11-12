@@ -40,7 +40,10 @@ offsets!(Fields, field_ofs,
         yaw_speed = "yaw_speed", goalentity = "goalentity", dmg_take = "dmg_take",
         dmg_save = "dmg_save", dmg_inflictor = "dmg_inflictor", owner = "owner", movedir = "movedir",
     }
-    opt { gravity = "gravity", items2 = "items2", alpha = "alpha", scale = "scale" }
+    opt {
+        gravity = "gravity", items2 = "items2", alpha = "alpha", scale = "scale",
+        traileffectnum = "traileffectnum", emiteffectnum = "emiteffectnum",
+    }
 );
 
 offsets!(Globals, global_ofs,

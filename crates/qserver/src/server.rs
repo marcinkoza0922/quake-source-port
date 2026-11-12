@@ -73,6 +73,8 @@ pub struct Sv {
     pub model_precache: Vec<String>,
     pub models: Vec<Option<ModelInfo>>,
     pub sound_precache: Vec<String>,
+    /// particleeffectnum names (index 0 unused).
+    pub particle_precache: Vec<String>,
     pub lightstyles: Vec<Vec<u8>>,
     pub datagram: SizeBuf,
     pub reliable_datagram: SizeBuf,
@@ -144,6 +146,13 @@ impl Core {
 
     pub fn maxclients(&self) -> usize {
         self.clients.len()
+    }
+
+    /// Particle extensions on: `sv_fteparticles` and a single-player
+    /// server (our svcdp_* messages would break other clients; vkQuake
+    /// gates them on the client's protocol extensions).
+    pub fn fte_particles(&self) -> bool {
+        self.cvars.value_of("sv_fteparticles") != 0.0 && self.clients.len() == 1
     }
 
     /// Record a Host_Error (first one wins).
@@ -252,6 +261,11 @@ fn register_cvars(cv: &mut Cvars) {
         ("external_ents", "1", CVAR_ARCHIVE),
         ("registered", "1", 0),
         ("pr_checkextension", "1", 0),
+        // FTE/DP particle builtins + svcdp_* messages (single player only).
+        ("sv_fteparticles", "1", 0),
+        // FTE protocol extensions offered to clients (PEXT2_* mask; 8 =
+        // replacement deltas). 0 keeps the plain 15/666/999 protocol.
+        ("sv_protocol_pext2", "8", 0),
     ] {
         cv.register(n, d, f);
     }
@@ -416,6 +430,7 @@ impl Server {
             model_precache: vec![String::new(), modelname.clone()],
             models: vec![None, None],
             sound_precache: vec![String::new()],
+            particle_precache: vec![String::new()],
             lightstyles: vec![Vec::new(); MAX_LIGHTSTYLES],
             datagram: SizeBuf::new(MAX_DATAGRAM),
             reliable_datagram: SizeBuf::new(MAX_DATAGRAM),
@@ -528,9 +543,34 @@ impl Server {
         let c = &mut self.core;
         let sv = &c.sv;
         let mut m = std::mem::take(&mut c.clients[i].message);
+        // FTE extension handshake (SV_SendServerinfo): ask a remote client
+        // with `cmd pext` first; it answers with `pext`, which resends this.
+        let offer = c.cvars.value_of("sv_protocol_pext2") as u32 & qnet::delta::PEXT2_SUPPORTED;
+        let cl = &mut c.clients[i];
+        if offer == 0 {
+            cl.pext_known = false;
+            cl.pext2 = 0;
+        } else if cl.local {
+            cl.pext_known = true;
+            cl.pext2 = offer;
+        } else if !cl.pext_known {
+            m.byte(SVC_STUFFTEXT);
+            m.string(b"cmd pext\n");
+            cl.message = m;
+            cl.sendsignon = Signon::Flush;
+            cl.spawned = false;
+            return;
+        }
+        cl.pext2 &= offer;
+        let pext2 = cl.pext2;
+        cl.delta = (pext2 & qnet::delta::PEXT2_REPLACEMENTDELTAS != 0).then(Box::default);
         m.byte(SVC_PRINT);
         m.string(format!("\x02\nFITZQUAKE 0.85 SERVER ({} CRC)\n", l.vm.progs.crc).as_bytes());
         m.byte(SVC_SERVERINFO);
+        if pext2 != 0 {
+            m.long(qnet::delta::PROTOCOL_FTE_PEXT2 as i32);
+            m.long(pext2 as i32);
+        }
         m.long(sv.protocol as i32);
         if sv.protocol == PROTOCOL_RMQ {
             m.long(sv.protocolflags as i32);
@@ -553,6 +593,11 @@ impl Server {
             }
         }
         m.byte(0);
+        if c.fte_particles() {
+            for (k, name) in sv.particle_precache.iter().enumerate().skip(1) {
+                crate::particles::write_precache(&mut m, k, name);
+            }
+        }
         let sounds = l.vm.field_ofs("sounds").map_or(0, |o| l.vm.ent_f(0, o) as i32);
         m.byte(SVC_CDTRACK);
         m.byte(sounds);
@@ -569,11 +614,15 @@ impl Server {
 
     /// SV_ConnectClient for slot `i`.
     pub fn connect_client(&mut self, i: usize) {
+        self.connect_slot(i, false);
+    }
+
+    fn connect_slot(&mut self, i: usize, local: bool) {
         if i >= self.core.maxclients() || self.level.is_none() {
             return;
         }
         let cl = &mut self.core.clients[i];
-        *cl = Client { active: true, name: "unconnected".into(), ..Client::default() };
+        *cl = Client { active: true, local, name: "unconnected".into(), ..Client::default() };
         let l = self.level.as_mut().unwrap();
         let c = &mut self.core;
         let g = c.sv.globals.clone();
@@ -592,11 +641,10 @@ impl Server {
     /// (prespawn/spawn/begin). Returns the slot.
     pub fn connect_local(&mut self) -> Option<usize> {
         let i = self.core.clients.iter().position(|c| !c.active)?;
-        self.connect_client(i);
+        self.connect_slot(i, true);
         if !self.core.clients[i].active {
             return None;
         }
-        self.core.clients[i].local = true;
         self.core.clients[i].name = "player".into();
         self.local_signon(i);
         Some(i)
@@ -1040,6 +1088,10 @@ impl Server {
             return;
         }
         let low = s.trim_start().to_ascii_lowercase();
+        if low == "pext" || low.starts_with("pext ") {
+            self.client_pext(i, &low);
+            return;
+        }
         let is_signon = low.starts_with("spawn") || low.starts_with("begin") || low.starts_with("prespawn");
         if !is_signon
             && let (Some(fnum), Some(l)) = (self.core.sv.parse_client_command, &mut self.level)
@@ -1054,6 +1106,51 @@ impl Server {
             return;
         }
         self.exec_client_string(i, s);
+    }
+
+    /// SV_Pext_f: the client's `key value` list of protocol extensions, in
+    /// reply to `cmd pext`. Answers once per connection with the serverinfo.
+    fn client_pext(&mut self, i: usize, args: &str) {
+        let cl = &mut self.core.clients[i];
+        if cl.pext_known || cl.spawned {
+            return;
+        }
+        let num = |s: &str| {
+            let s = s.trim();
+            match s.strip_prefix("0x").or_else(|| s.strip_prefix("0X")) {
+                Some(h) => u32::from_str_radix(h, 16).ok(),
+                None => s.parse::<i64>().ok().map(|v| v as u32),
+            }
+            .unwrap_or(0)
+        };
+        let words: Vec<&str> = args.split_whitespace().skip(1).collect();
+        for kv in words.chunks(2) {
+            if num(kv[0]) == qnet::delta::PROTOCOL_FTE_PEXT2 {
+                cl.pext2 = kv.get(1).map_or(0, |v| num(v)) & qnet::delta::PEXT2_SUPPORTED;
+            }
+        }
+        cl.pext_known = true;
+        self.send_serverinfo(i);
+    }
+
+    /// clcdp_ackframe from client `i` (`-1` requests a full entity resend).
+    pub fn ack_frame(&mut self, i: usize, seq: i32) {
+        if let Some(d) = self.core.clients.get_mut(i).and_then(|c| c.delta.as_mut()) {
+            d.ack(seq);
+        }
+    }
+
+    /// The network sequence the next datagram of client `i` goes out with
+    /// (replacement deltas log frames by it).
+    pub fn set_datagram_sequence(&mut self, i: usize, seq: u32) {
+        if let Some(d) = self.core.clients.get_mut(i).and_then(|c| c.delta.as_mut()) {
+            d.next_sequence = seq as i32;
+        }
+    }
+
+    /// Active PEXT2_* extensions of client `i`.
+    pub fn client_pext2(&self, i: usize) -> u32 {
+        self.core.clients.get(i).map_or(0, |c| c.pext2)
     }
 
     /// Cmd_ExecuteString(s, src_client) restricted to the commands clients may run.

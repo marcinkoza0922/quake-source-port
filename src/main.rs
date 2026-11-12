@@ -12,6 +12,7 @@ mod console;
 mod demo;
 mod draw;
 mod font;
+mod fte;
 mod glyphs;
 mod host;
 mod menu;

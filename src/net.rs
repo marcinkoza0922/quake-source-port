@@ -94,6 +94,11 @@ impl NetServer {
                 sv.drop_client(slot, false);
             }
         }
+        // Replacement deltas log each frame under the sequence its datagram
+        // is sent with; `send` ships every datagram built until then.
+        for r in &self.remotes {
+            sv.set_datagram_sequence(r.slot, r.conn.unreliable_sequence_out());
+        }
     }
 
     fn reply(&mut self, to: SocketAddr, p: Ccrep) {
@@ -203,8 +208,14 @@ impl NetServer {
                     let _ = r.conn.send_reliable(&m, now);
                 }
                 let dg = sv.take_datagrams(slot);
-                if let Some(d) = dg.last() {
-                    r.conn.send_unreliable(d);
+                // A delta snapshot may span several datagrams (all needed);
+                // otherwise only the newest state matters.
+                let all = sv.client_pext2(slot) & qnet::delta::PEXT2_REPLACEMENTDELTAS != 0;
+                let start = if all { 0 } else { dg.len().saturating_sub(1) };
+                if !dg.is_empty() {
+                    for d in &dg[start..] {
+                        r.conn.send_unreliable(d);
+                    }
                     r.last_send = now;
                 } else if now - r.last_send > NOP_INTERVAL {
                     r.conn.send_unreliable(&[qnet::protocol::SVC_NOP]);
@@ -244,6 +255,10 @@ fn read_client_message(sv: &mut Server, slot: usize, m: &[u8]) -> bool {
             CLC_STRINGCMD => {
                 let s = r.string_lossy();
                 sv.queue_client_command(slot, s.trim_end_matches('\n'));
+            }
+            qnet::delta::CLCDP_ACKFRAME => {
+                let seq = r.long();
+                sv.ack_frame(slot, seq);
             }
             CLC_MOVE => {
                 let time = r.float();
@@ -288,7 +303,9 @@ pub enum ClientNet {
 
 /// What [`NetClient::poll`] produced.
 pub enum ClientPoll {
-    Messages(Vec<Vec<u8>>),
+    /// Complete messages; datagrams carry their sequence number (acked by
+    /// replacement deltas).
+    Messages(Vec<(Vec<u8>, Option<u32>)>),
     Failed(String),
 }
 
@@ -351,8 +368,10 @@ impl NetClient {
                     if from != self.server {
                         continue;
                     }
-                    if let Some(Received::Reliable(m) | Received::Unreliable(m)) = c.handle_packet(pkt, now) {
-                        msgs.push(m);
+                    match c.handle_packet(pkt, now) {
+                        Some(Received::Reliable(m)) => msgs.push((m, None)),
+                        Some(Received::Unreliable(m)) => msgs.push((m, Some(c.unreliable_sequence_in()))),
+                        None => {}
                     }
                 }
             }
@@ -482,27 +501,36 @@ mod tests {
         net: NetClient,
         cl: ClientState,
         prints: String,
+        /// Extensions answered to `cmd pext`.
+        pext2: u32,
     }
 
     impl Peer {
-        fn new(name: &str, port: u16, now: f64) -> Self {
+        fn new(name: &str, port: u16, now: f64, pext2: u32) -> Self {
             let mut cl = ClientState::new();
             cl.name = name.into();
             let a = SocketAddr::from((Ipv4Addr::LOCALHOST, port));
-            Self { net: NetClient::connect(a, now).unwrap(), cl, prints: String::new() }
+            Self { net: NetClient::connect(a, now).unwrap(), cl, prints: String::new(), pext2 }
         }
         fn step(&mut self, now: f64) {
             match self.net.poll(now) {
                 ClientPoll::Messages(m) => {
-                    for m in m {
+                    for (m, seq) in m {
+                        self.cl.net_sequence = seq;
                         self.cl.parse_server_message(&m).unwrap();
                     }
                 }
                 ClientPoll::Failed(e) => panic!("connect failed: {e}"),
             }
             for e in self.cl.take_events() {
-                if let ClientEvent::Print(s) = e {
-                    self.prints.push_str(&s);
+                match e {
+                    ClientEvent::Print(s) => self.prints.push_str(&s),
+                    // A vanilla client forwards a bare `pext`.
+                    ClientEvent::StuffText(s) if s.trim() == "cmd pext" => self.cl.send_string_cmd(&match self.pext2 {
+                        0 => "pext".to_string(),
+                        p => format!("pext {:#x} {p:#x}", qnet::delta::PROTOCOL_FTE_PEXT2),
+                    }),
+                    _ => {}
                 }
             }
             let out = self.cl.take_reliable_out();
@@ -520,8 +548,9 @@ mod tests {
     fn play(protocol: &str) {
         let Some(mut sv) = server(4, protocol) else { return };
         let mut ns = NetServer::listen(0).unwrap();
-        let mut a = Peer::new("alice", ns.port(), 0.0);
-        let mut b = Peer::new("bob", ns.port(), 0.0);
+        // alice negotiates replacement deltas, bob is vanilla.
+        let mut a = Peer::new("alice", ns.port(), 0.0, qnet::delta::PEXT2_REPLACEMENTDELTAS);
+        let mut b = Peer::new("bob", ns.port(), 0.0, 0);
         let mut now = 0.0;
         let mut said = false;
         let mut start = None;
@@ -548,6 +577,12 @@ mod tests {
         assert!(b.prints.contains("alice: hello bob"), "chat: {:?}", b.prints);
         let names: Vec<_> = sv.core.clients.iter().filter(|c| c.spawned).map(|c| c.name.clone()).collect();
         assert_eq!(names, ["alice", "bob"]);
+        assert_eq!((a.cl.pext2, b.cl.pext2), (qnet::delta::PEXT2_REPLACEMENTDELTAS, 0));
+        assert_eq!((sv.client_pext2(0), sv.client_pext2(1)), (qnet::delta::PEXT2_REPLACEMENTDELTAS, 0));
+        // alice's entities arrive as deltas and track the server.
+        assert!(a.cl.entities.iter().filter(|e| e.delta_live).count() > 3);
+        let (so, co) = (sv.level.as_ref().unwrap().vm.ent_v(1, sv.core.sv.fields.origin), a.cl.entities[1].netstate.origin);
+        assert!((0..3).all(|k| (so[k] - co[k]).abs() < 16.0), "{so:?} vs {co:?}");
         // clc_move timestamps give round trips (sv.time - cl.mtime[0]).
         let b = &sv.core.clients[1];
         assert!(b.num_pings > 10 && (0.0..0.5).contains(&b.ping()), "{} {}", b.num_pings, b.ping());

@@ -1,4 +1,5 @@
 //! qcore — math, byte reader, filesystem, cvars and commands. See docs/DESIGN.md.
+pub mod anorms;
 pub mod cmd;
 pub mod cvar;
 pub mod fs;

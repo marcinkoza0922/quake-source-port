@@ -269,7 +269,7 @@ impl Renderer {
             },
             vk::DescriptorPoolSize {
                 ty: vk::DescriptorType::COMBINED_IMAGE_SAMPLER,
-                descriptor_count: (MAX_TEXTURES + 1) * FRAMES as u32,
+                descriptor_count: (MAX_TEXTURES + 3) * FRAMES as u32,
             },
             vk::DescriptorPoolSize {
                 ty: vk::DescriptorType::STORAGE_BUFFER,
@@ -1280,10 +1280,26 @@ impl Renderer {
             1,
             1,
             DEPTH_FORMAT,
-            vk::ImageUsageFlags::DEPTH_STENCIL_ATTACHMENT,
+            vk::ImageUsageFlags::DEPTH_STENCIL_ATTACHMENT | vk::ImageUsageFlags::SAMPLED,
             vk::ImageAspectFlags::DEPTH,
             self.msaa,
         )?;
+        // Soft particles read scene depth with texelFetch while the depth
+        // attachment is read-only.
+        let dinfo = [vk::DescriptorImageInfo {
+            sampler: self.sampler_clamp,
+            image_view: depth.view,
+            image_layout: vk::ImageLayout::DEPTH_STENCIL_READ_ONLY_OPTIMAL,
+        }];
+        for f in &self.frames {
+            let w = [vk::WriteDescriptorSet::default()
+                .dst_set(f.set)
+                .dst_binding(if self.msaa > 1 { 7 } else { 6 })
+                .descriptor_type(vk::DescriptorType::COMBINED_IMAGE_SAMPLER)
+                .image_info(&dinfo)];
+            // SAFETY: device idle (create_targets); handles valid.
+            unsafe { self.gpu.device.update_descriptor_sets(&w, &[]) };
+        }
         let slot = self.alloc_slot()?;
         let post_sampler = if (scale - 1.0).abs() < 1e-3 {
             self.sampler_clamp

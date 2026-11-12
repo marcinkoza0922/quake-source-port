@@ -93,6 +93,18 @@ impl Connection {
         }
     }
 
+    /// Sequence number the next unreliable datagram is sent with
+    /// (NET_QSocketGetSequenceOut).
+    pub fn unreliable_sequence_out(&self) -> u32 {
+        self.unreliable_send_seq
+    }
+
+    /// Sequence number of the last unreliable datagram received
+    /// (NET_QSocketGetSequenceIn).
+    pub fn unreliable_sequence_in(&self) -> u32 {
+        self.unreliable_receive_seq.wrapping_sub(1)
+    }
+
     /// NET_CanSendMessage: no reliable message in flight.
     pub fn can_send(&self) -> bool {
         self.can_send

@@ -49,6 +49,10 @@ pub struct EntityState {
     pub effects: i32,
     pub alpha: u8,
     pub scale: u8,
+    /// Particle precache indices (DP_ENT_TRAILEFFECTNUM; baselines from
+    /// svcfte_spawnbaseline2 / spawnstatic2 only).
+    pub traileffect: u16,
+    pub emiteffect: u16,
 }
 
 impl Default for EntityState {
@@ -63,6 +67,8 @@ impl Default for EntityState {
             effects: 0,
             alpha: ENTALPHA_DEFAULT,
             scale: ENTSCALE_DEFAULT,
+            traileffect: 0,
+            emiteffect: 0,
         }
     }
 }
@@ -91,6 +97,14 @@ pub struct ClientEntity {
     pub syncbase: f32,
     pub trailorg: [f32; 3],
     pub traildelay: f32,
+    /// Particle precache index of the entity's trail / per-frame emitter
+    /// (0 = none; replacement deltas only).
+    pub traileffect: u16,
+    pub emiteffect: u16,
+    /// Replacement deltas: last received state, and whether the entity is
+    /// in the server's snapshot.
+    pub netstate: qnet::delta::EntState,
+    pub delta_live: bool,
 }
 
 #[derive(Debug, Clone, Default, PartialEq)]
@@ -221,6 +235,18 @@ pub struct ClientState {
     pub(crate) tracercount: i32,
     pub rng: QRand,
     pub sv_gravity: f32,
+    /// Effects handled by FTE scripted particles (set by the host).
+    pub fte_names: crate::fte::FteNames,
+    /// Scripted effects to run this frame (drained by the host).
+    pub fte_queue: Vec<crate::fte::FteRequest>,
+    /// svcdp_precache particle effect names (index 0 unused).
+    pub particle_precache: Vec<String>,
+    /// Active FTE protocol extensions (PEXT2_*) from svc_serverinfo.
+    pub pext2: u32,
+    /// Sequence of the datagram being parsed (network play), for acks.
+    pub net_sequence: Option<u32>,
+    /// clcdp_ackframe values to send with the next move (-1 = resend all).
+    pub ack_frames: Vec<i32>,
 
     pub events: Vec<ClientEvent>,
     pub(crate) stuffcmdbuf: Vec<u8>,
@@ -297,6 +323,12 @@ impl ClientState {
             tracercount: 0,
             rng: QRand::default(),
             sv_gravity: 800.0,
+            fte_names: Default::default(),
+            fte_queue: Vec::new(),
+            particle_precache: Vec::new(),
+            pext2: 0,
+            net_sequence: None,
+            ack_frames: Vec::new(),
             events: Vec::new(),
             stuffcmdbuf: Vec::new(),
             out_reliable: SizeBuf::new(MAX_MSGLEN),
@@ -311,7 +343,9 @@ impl ClientState {
         let keep = (self.standard_quake, self.nolerp, self.name.clone(), self.color, self.sv_gravity, self.signon, self.demoplayback);
         let out = std::mem::take(&mut self.out_reliable);
         let events = std::mem::take(&mut self.events);
+        let fte_names = std::mem::take(&mut self.fte_names);
         *self = Self::new();
+        self.fte_names = fte_names;
         (self.standard_quake, self.nolerp, self.name, self.color, self.sv_gravity, self.signon, self.demoplayback) = keep;
         self.out_reliable = out;
         self.events = events;

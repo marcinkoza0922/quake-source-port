@@ -101,6 +101,18 @@ impl Vm {
             if key == "alpha" {
                 out.alpha = Some(atof(v.as_bytes()));
             }
+            if let Some(field) = match key {
+                "traileffect" => Some("traileffectnum"),
+                "emiteffect" => Some("emiteffectnum"),
+                _ => None,
+            } && let Some(&def) = self.progs.find_field(field)
+                && let Some(idx) = host.particle_effect_index(v)
+            {
+                if !self.parse_epair(Base::Edict(ent), def, &idx.to_string()) {
+                    return Err(VmError::new("ED_ParseEdict: parse error"));
+                }
+                continue;
+            }
             let Some(&def) = self.progs.find_field(key) else {
                 if !key.starts_with("sky") && key != "fog" && key != "alpha" {
                     host.dprint(&format!("\"{key}\" is not a field\n"));

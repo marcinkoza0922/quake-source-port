@@ -133,9 +133,17 @@ impl ClientState {
         if self.signon < SIGNONS {
             return None;
         }
-        let m = self.encode_move(cmd);
+        let mut m = self.encode_move(cmd);
         self.movemessages += 1;
-        (self.movemessages > 2).then_some(m)
+        if self.movemessages <= 2 {
+            return None;
+        }
+        // Replacement-delta acks ride along (CL_SendMove).
+        for a in self.ack_frames.drain(..) {
+            m.push(crate::delta::CLCDP_ACKFRAME);
+            m.extend_from_slice(&a.to_le_bytes());
+        }
+        Some(m)
     }
 }
 

@@ -39,6 +39,7 @@ qformats = { path = "crates/qformats" }
 qclient = { path = "crates/qclient" }
 qserver = { path = "crates/qserver" }
 qworld = { path = "crates/qworld" }
+qpart = { path = "crates/qpart" }
 qvm = { path = "crates/qvm" }
 qnet = { path = "crates/qnet" }
 qrender = { path = "crates/qrender" }

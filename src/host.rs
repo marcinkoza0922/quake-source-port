@@ -187,6 +187,24 @@ const COMPAT_CVARS: &[(&str, &str, u32)] = &[
     ("r_clearcolor", "2", 0),
     ("r_novis", "0", 0),
     ("r_part_density", "1", 0),
+    ("r_part_contentswitch", "1", 0),
+    ("r_part_rain", "1", 0),
+    ("r_part_rain_quantity", "1", 0),
+    ("r_part_sparks", "1", 0),
+    ("r_part_sparks_textured", "1", 0),
+    ("r_part_sparks_trifan", "1", 0),
+    ("r_part_beams", "1", 0),
+    ("r_part_maxparticles", "65536", 0),
+    ("r_part_maxdecals", "8192", 0),
+    ("r_softparticles", "1", CVAR_ARCHIVE),
+    ("cl_nopext", "0", CVAR_ARCHIVE),
+    ("r_softparticledistance", "4", CVAR_ARCHIVE),
+    ("r_bouncysparks", "1", 0),
+    ("r_decal_noperpendicular", "1", 0),
+    ("r_particle_tracelimit", "16777216", 0),
+    ("r_lightflicker", "1", 0),
+    ("r_particledesc", "classic", 0),
+    ("r_fteparticles", "1", CVAR_ARCHIVE),
     ("r_particles", "1", 0),
     ("r_quadparticles", "1", 0),
     ("r_scale", "1", 0),
@@ -307,6 +325,8 @@ pub struct Host {
     /// Running `slist`.
     lan_search: Option<crate::net::LanSearch>,
     autosave: crate::autosave::Tracker,
+    /// FTE scripted particles.
+    fte: crate::fte::Fte,
 }
 
 impl CmdContext for Host {
@@ -349,6 +369,7 @@ impl Host {
         let mut h = Host {
             server,
             autosave: Default::default(),
+            fte: crate::fte::Fte::new(),
             cl: ClientState::new(),
             local: None,
             cmds: Commands::with_builtins(),
@@ -858,7 +879,13 @@ impl Host {
 
     /// Parse server messages (loopback or network) into the client.
     fn deliver(&mut self, msgs: Vec<Vec<u8>>) {
-        for m in msgs {
+        self.deliver_seq(msgs.into_iter().map(|m| (m, None)).collect());
+    }
+
+    /// [`Self::deliver`] with each datagram's network sequence (acks).
+    fn deliver_seq(&mut self, msgs: Vec<(Vec<u8>, Option<u32>)>) {
+        for (m, seq) in msgs {
+            self.cl.net_sequence = seq;
             if let Some(w) = &mut self.recording
                 && let Err(e) = w.write(self.cl.viewangles, &m)
             {
@@ -920,7 +947,7 @@ impl Host {
                     let a = n.server;
                     self.con.print(&format!("Connection accepted by {a}\n"));
                 }
-                self.deliver(m);
+                self.deliver_seq(m);
             }
             crate::net::ClientPoll::Failed(why) => {
                 self.con.print(&format!("Connection failed: {why}"));
@@ -1588,6 +1615,13 @@ impl Host {
                 let mut cmd = self.last_cmd;
                 cmd.buttons = self.pend_attack as u8 | (self.pend_jump as u8) << 1;
                 cmd.impulse = self.pend_impulse;
+                // The server acks the lossless local client's frames itself;
+                // only full-resend requests (-1) go back.
+                for a in self.cl.ack_frames.drain(..) {
+                    if a == -1 {
+                        self.server.ack_frame(i, -1);
+                    }
+                }
                 if self.cl.build_move(&cmd).is_some() {
                     self.server.set_move(i, ClientMove {
                         angles: cmd.viewangles,
@@ -1663,6 +1697,7 @@ impl Host {
         self.update_pings();
         self.read_demo(dt);
         self.check_local_client();
+        self.sync_fte();
         if self.cl.signon > 0 {
             self.cl.frame(dt * timescale);
             self.apply_qw_prediction();
@@ -1889,6 +1924,11 @@ impl Host {
         if !connected {
             return;
         }
+        // Replacement deltas only send changes: ask for every entity again
+        // so the demo starts from a complete state.
+        if self.cl.pext2 & qclient::delta::PEXT2_REPLACEMENTDELTAS != 0 {
+            self.cl.ack_frames.push(-1);
+        }
         let Some(mut w) = self.recording.take() else { return };
         let ang = self.cl.viewangles;
         let mut res = self.demo_head.iter().try_for_each(|m| w.write(ang, m));
@@ -1967,6 +2007,33 @@ impl Host {
         }
     }
 
+    /// Loads FTE effects for `r_particledesc` and the current map
+    /// (R_ParticleDesc_Callback); `r_fteparticles 0` turns them off.
+    fn sync_fte(&mut self) {
+        let desc = if self.cv("r_fteparticles") != 0.0 { self.cvs("r_particledesc").to_string() } else { String::new() };
+        let map = self.level.mapname.clone();
+        let opts = qpart::RenderOptions {
+            sparks: self.cv("r_part_sparks"),
+            sparks_textured: self.cv("r_part_sparks_textured") != 0.0,
+            sparks_trifan: self.cv("r_part_sparks_trifan") != 0.0,
+            beams: self.cv("r_part_beams"),
+        };
+        let settings = qpart::Settings {
+            density: self.cv("r_part_density"),
+            contentswitch: self.cv("r_part_contentswitch") != 0.0,
+            bouncysparks: self.cv("r_bouncysparks") != 0.0,
+            trace_limit: self.cv("r_particle_tracelimit").max(0.0) as u32,
+            rain: self.cv("r_part_rain") != 0.0,
+            rain_quantity: self.cv("r_part_rain_quantity"),
+            decal_noperpendicular: self.cv("r_decal_noperpendicular") != 0.0,
+            lightflicker: self.cv("r_lightflicker") != 0.0,
+            max_particles: self.cv("r_part_maxparticles").max(1.0) as usize,
+            max_decals: self.cv("r_part_maxdecals").max(1.0) as usize,
+        };
+        let con = &mut self.con;
+        self.fte.sync(&desc, &map, opts, settings, &self.server.core.fs, &mut self.cl, &mut |s| con.print(s));
+    }
+
     fn render(&mut self, view: Option<qrender::View>, gun: Option<qrender::RenderEntity>, ft: f32) {
         let (w, h) = self.r.size();
         let mut c = Canvas::new(w, h);
@@ -1980,10 +2047,12 @@ impl Host {
         let mut ents = Vec::new();
         let mut parts = Vec::new();
         let mut dls = Vec::new();
+        let mut fte = (Vec::new(), Vec::new(), Vec::new());
         let mut blend = [0.0; 4];
         if let Some(v) = &view {
             let fs = &self.server.core.fs;
             let cv = self.view_cvars();
+            self.view.replaced_models = self.fte.replaced_models(&self.cl, fs);
             self.view.entities(&mut self.cl, &cv, &mut self.level, fs, &mut self.r, &mut ents);
             if self.cv("r_drawentities") == 0.0 {
                 ents.clear();
@@ -1992,6 +2061,15 @@ impl Host {
                 ents.push(g);
             }
             crate::view::particles(&self.cl, &mut parts);
+            fte = self.fte.frame(
+                &mut self.cl,
+                self.level.bsp.as_ref(),
+                &self.server.core.fs,
+                &mut self.r,
+                self.snd.as_mut(),
+                v,
+                &self.level.mapname,
+            );
             crate::view::dlights(&self.cl, &mut dls);
             let contents = self.contents(v.origin);
             blend = self.view.blend(&self.cl, contents, ft, cv.flash);
@@ -2031,6 +2109,7 @@ impl Host {
                         let face = self.view.face_anim_time > self.cl.time;
                         let pack = crate::sbar::Pack::from_game_dirs(self.server.core.fs.game_dirs().iter().map(String::as_str));
                         let mut sb = crate::sbar::Sbar::new(&mut c, &mut pf, pack);
+                        sb.teamplay = self.server.core.cvars.value_of("teamplay");
                         if classic {
                             sb.backtile(CLASSIC_SBAR_LINES);
                             sb.draw(&self.cl, self.show_scores, face);
@@ -2115,6 +2194,7 @@ impl Host {
             dither_screen: v("r_softemu_dither_screen"),
             dither_texture: v("r_softemu_dither_texture"),
             colorblind: v("r_colorblind").clamp(0.0, 3.0) as u32,
+            soft_particle_distance: if v("r_softparticles") != 0.0 { v("r_softparticledistance").max(0.01) } else { 0.0 },
             ..Settings::default()
         };
         {
@@ -2133,6 +2213,9 @@ impl Host {
             view,
             entities: &ents,
             particles: &parts,
+            fte_vertices: &fte.0,
+            fte_indices: &fte.1,
+            fte_batches: &fte.2,
             dlights: &dls,
             lightstyles: &styles,
             fog,
@@ -2436,6 +2519,22 @@ fn register_commands(c: &mut Commands<Host>) {
     }
     c.add("cfg_unbindall", |_, _| {});
     c.add("fog", cmd_fog);
+    c.add("r_partinfo", |h, _| {
+        let s = h.fte.info(&h.cl);
+        h.con.print(&s);
+    });
+    // Debug: run an FTE effect 128 units in front of the view.
+    c.add("fte_spawn", |h, a| {
+        if a.argc() < 2 {
+            h.con.print("fte_spawn <effect> [count]\n");
+            return;
+        }
+        let (f, _, _) = qcore::math::angle_vectors(qcore::math::Vec3::from(h.cl.viewangles));
+        let e = &h.cl.entities.get(h.cl.viewentity).map_or([0.0; 3], |e| e.origin);
+        let org = [e[0] + f.x * 128.0, e[1] + f.y * 128.0, e[2] + 22.0 + f.z * 128.0];
+        let count = if a.argc() > 2 { qpart::num::atof(a.argv(2)) } else { 1.0 };
+        h.cl.fte_queue.push(qclient::FteRequest::Effect { name: a.argv(1).to_string(), org, dir: None, count });
+    });
     // Host_Name_f / Host_Color_f: set the archived cvar, then tell the server.
     c.add("name", |h, a| {
         if a.argc() < 2 {
@@ -2509,7 +2608,17 @@ fn register_commands(c: &mut Commands<Host>) {
             h.print("Can't \"cmd\", not connected\n");
             return;
         }
-        if a.argc() > 1 {
+        if a.args().trim() == "pext" {
+            // The server's extension query: reply with what we support.
+            let p2 = if h.cv("cl_nopext") != 0.0 { 0 } else { qclient::delta::PEXT2_SUPPORTED };
+            let s = format!(
+                "pext {:#x} 0 {:#x} {:#x}",
+                qclient::delta::PROTOCOL_FTE_PEXT1,
+                qclient::delta::PROTOCOL_FTE_PEXT2,
+                p2
+            );
+            h.cl.send_string_cmd(&s);
+        } else if a.argc() > 1 {
             let s = a.args().to_string();
             h.cl.send_string_cmd(&s);
         }

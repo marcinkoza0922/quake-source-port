@@ -19,9 +19,9 @@ impl fmt::Display for ParseError {
 }
 impl std::error::Error for ParseError {}
 
-type R<T = ()> = Result<T, ParseError>;
+pub(crate) type R<T = ()> = Result<T, ParseError>;
 
-fn err<T>(s: impl Into<String>) -> R<T> {
+pub(crate) fn err<T>(s: impl Into<String>) -> R<T> {
     Err(ParseError(s.into()))
 }
 
@@ -135,21 +135,40 @@ impl ClientState {
                         return err("Too many static entities");
                     }
                     let b = self.parse_baseline(&mut m, if cmd == SVC_SPAWNSTATIC { 1 } else { 2 });
-                    self.static_entities.push(ClientEntity {
-                        baseline: b,
-                        model: b.modelindex,
-                        lerpflags: LERP_RESETANIM,
-                        frame: b.frame,
-                        skin: b.skin,
-                        effects: b.effects,
-                        alpha: b.alpha,
-                        scale: b.scale,
-                        origin: b.origin,
-                        angles: b.angles,
-                        msg_origins: [b.origin; 2],
-                        msg_angles: [b.angles; 2],
-                        ..Default::default()
-                    });
+                    self.static_entities.push(static_entity(b));
+                }
+                crate::delta::SVCFTE_SPAWNBASELINE2 if self.pext2 & crate::delta::PEXT2_REPLACEMENTDELTAS != 0 => {
+                    let i = crate::delta::read_entity(&mut m, self.pext2);
+                    let b = self.parse_baseline_fte(&mut m)?;
+                    self.entity_num(i as i32)?.baseline = b;
+                }
+                crate::delta::SVCFTE_SPAWNSTATIC2 if self.pext2 & crate::delta::PEXT2_REPLACEMENTDELTAS != 0 => {
+                    if self.static_entities.len() >= MAX_STATIC_ENTITIES {
+                        return err("Too many static entities");
+                    }
+                    let b = self.parse_baseline_fte(&mut m)?;
+                    self.static_entities.push(static_entity(b));
+                }
+                crate::delta::SVCFTE_UPDATEENTITIES if self.pext2 & crate::delta::PEXT2_REPLACEMENTDELTAS != 0 => {
+                    self.parse_entities_update(&mut m)?;
+                }
+                crate::delta::SVCDP_UPDATESTATBYTE | crate::delta::SVCFTE_UPDATESTATFLOAT | crate::delta::SVCFTE_UPDATESTATSTRING
+                    if self.pext2 & crate::delta::PEXT2_REPLACEMENTDELTAS != 0 =>
+                {
+                    let i = m.byte();
+                    let v = match cmd {
+                        crate::delta::SVCDP_UPDATESTATBYTE => Some(m.byte()),
+                        crate::delta::SVCFTE_UPDATESTATFLOAT => Some(m.float() as i32),
+                        _ => {
+                            m.string();
+                            None
+                        }
+                    };
+                    if let Some(v) = v
+                        && (0..MAX_CL_STATS as i32).contains(&i)
+                    {
+                        self.stats[i as usize] = v;
+                    }
                 }
                 SVC_TEMP_ENTITY => self.parse_tent(&mut m)?,
                 SVC_SETPAUSE => {
@@ -223,6 +242,10 @@ impl ClientState {
                     }
                     self.events.push(ClientEvent::LocalSound { sound });
                 }
+                crate::fte::SVCDP_PRECACHE => self.parse_dp_precache(&mut m),
+                crate::fte::SVCDP_TRAILPARTICLES | crate::fte::SVCDP_POINTPARTICLES | crate::fte::SVCDP_POINTPARTICLES1 => {
+                    self.parse_dp_particles(&mut m, cmd)
+                }
                 _ => return err(format!("Illegible server message {cmd} (previous was {lastcmd})")),
             }
             lastcmd = cmd;
@@ -270,7 +293,28 @@ impl ClientState {
     /// CL_ParseServerInfo.
     fn parse_serverinfo(&mut self, m: &mut MsgReader<'_>) -> R {
         self.clear_state();
-        let p = m.long() as u32;
+        let mut p = m.long() as u32;
+        // FTE extension prefixes ahead of the base protocol.
+        loop {
+            match p {
+                crate::delta::PROTOCOL_FTE_PEXT1 => {
+                    if m.long() != 0 {
+                        return err("Server returned FTE1 protocol extensions that are not supported");
+                    }
+                }
+                crate::delta::PROTOCOL_FTE_PEXT2 => {
+                    self.pext2 = m.long() as u32;
+                    if self.pext2 & !crate::delta::PEXT2_SUPPORTED != 0 {
+                        return err(format!("Server returned FTE2 protocol extensions that are not supported ({:#x})", self.pext2));
+                    }
+                }
+                _ => break,
+            }
+            p = m.long() as u32;
+        }
+        if self.pext2 & crate::delta::PEXT2_REPLACEMENTDELTAS != 0 {
+            self.ack_frames.push(-1);
+        }
         check_protocol(p)?;
         self.protocol = p;
         self.protocolflags = if p == PROTOCOL_RMQ { m.long() as u32 } else { 0 };
@@ -325,7 +369,7 @@ impl ClientState {
         }
         let alpha = if bits & B_ALPHA != 0 { m.byte() as u8 } else { ENTALPHA_DEFAULT };
         let scale = if bits & B_SCALE != 0 { m.byte() as u8 } else { ENTSCALE_DEFAULT };
-        EntityState { origin, angles, modelindex, frame, colormap, skin, effects: 0, alpha, scale }
+        EntityState { origin, angles, modelindex, frame, colormap, skin, effects: 0, alpha, scale, ..EntityState::default() }
     }
 
     /// CL_ParseUpdate.
@@ -500,9 +544,30 @@ impl ClientState {
 
     /// CL_ParseStartSoundPacket.
     fn parse_start_sound(&mut self, m: &mut MsgReader<'_>) -> R {
-        let fm = m.byte() as u32;
+        let mut fm = m.byte() as u32;
+        let fte = self.pext2 & crate::delta::PEXT2_REPLACEMENTDELTAS != 0;
+        if fte && fm & SND_FTE_MOREFLAGS != 0 {
+            fm |= (m.byte() as u32 & 0xff) << 8;
+        }
         let volume = if fm & SND_VOLUME != 0 { m.byte() } else { DEFAULT_SOUND_PACKET_VOLUME };
         let attenuation = if fm & SND_ATTENUATION != 0 { m.byte() as f32 / 64.0 } else { DEFAULT_SOUND_PACKET_ATTENUATION };
+        if fte {
+            // FTE/DP sound extras the mixer doesn't use: pitch, offset, velocity.
+            if fm & SND_FTE_PITCHADJ != 0 {
+                m.byte();
+            }
+            if fm & SND_FTE_TIMEOFS != 0 {
+                m.short();
+            }
+            if fm & SND_FTE_VELOCITY != 0 {
+                m.short();
+                m.short();
+                m.short();
+            }
+            if fm & SND_DP_PITCH != 0 {
+                m.short();
+            }
+        }
         let (ent, channel) = if fm & SND_LARGEENTITY != 0 {
             let e = m.short() as u16 as i32;
             (e, m.byte())
@@ -548,17 +613,24 @@ impl ClientState {
         match ty {
             TE_WIZSPIKE => {
                 let pos = pos_of(m);
-                self.run_particle_effect(pos, [0.0; 3], 20, 30);
+                if !self.fte_effect("TE_WIZSPIKE", pos, 1.0) {
+                    self.run_particle_effect(pos, [0.0; 3], 20, 30);
+                }
                 self.tsound("wizard/hit.wav", pos);
             }
             TE_KNIGHTSPIKE => {
                 let pos = pos_of(m);
-                self.run_particle_effect(pos, [0.0; 3], 226, 20);
+                if !self.fte_effect("TE_KNIGHTSPIKE", pos, 1.0) {
+                    self.run_particle_effect(pos, [0.0; 3], 226, 20);
+                }
                 self.tsound("hknight/hit.wav", pos);
             }
             TE_SPIKE | TE_SUPERSPIKE => {
                 let pos = pos_of(m);
-                self.run_particle_effect(pos, [0.0; 3], 0, if ty == TE_SPIKE { 10 } else { 20 });
+                let name = if ty == TE_SPIKE { "TE_SPIKE" } else { "TE_SUPERSPIKE" };
+                if !self.fte_effect(name, pos, 1.0) {
+                    self.run_particle_effect(pos, [0.0; 3], 0, if ty == TE_SPIKE { 10 } else { 20 });
+                }
                 if self.rng.rand() % 5 != 0 {
                     self.tsound("weapons/tink1.wav", pos);
                 } else {
@@ -572,17 +644,23 @@ impl ClientState {
             }
             TE_GUNSHOT => {
                 let pos = pos_of(m);
-                self.run_particle_effect(pos, [0.0; 3], 0, 20);
+                if !self.fte_effect("TE_GUNSHOT", pos, 20.0) {
+                    self.run_particle_effect(pos, [0.0; 3], 0, 20);
+                }
             }
             TE_EXPLOSION => {
                 let pos = pos_of(m);
-                self.particle_explosion(pos);
+                if !self.fte_effect("TE_EXPLOSION", pos, 1.0) {
+                    self.particle_explosion(pos);
+                }
                 self.explosion_light(pos);
                 self.tsound("weapons/r_exp3.wav", pos);
             }
             TE_TAREXPLOSION => {
                 let pos = pos_of(m);
-                self.blob_explosion(pos);
+                if !self.fte_effect("TE_TAREXPLOSION", pos, 1.0) {
+                    self.blob_explosion(pos);
+                }
                 self.tsound("weapons/r_exp3.wav", pos);
             }
             TE_LIGHTNING1 => self.parse_beam(m, "progs/bolt.mdl"),
@@ -591,20 +669,28 @@ impl ClientState {
             TE_BEAM => self.parse_beam(m, "progs/beam.mdl"),
             TE_LAVASPLASH => {
                 let pos = pos_of(m);
-                self.lava_splash(pos);
+                if !self.fte_effect("TE_LAVASPLASH", pos, 1.0) {
+                    self.lava_splash(pos);
+                }
             }
             TE_TELEPORT => {
                 let pos = pos_of(m);
-                self.teleport_splash(pos);
+                if !self.fte_effect("TE_TELEPORT", pos, 1.0) {
+                    self.teleport_splash(pos);
+                }
             }
             TE_EXPLOSION2 => {
                 let pos = pos_of(m);
                 let start = m.byte();
                 let len = m.byte();
-                self.particle_explosion2(pos, start, len);
+                if !self.fte_effect(&format!("TE_EXPLOSION2_{start}_{len}"), pos, 1.0) {
+                    self.particle_explosion2(pos, start, len);
+                }
                 self.explosion_light(pos);
                 self.tsound("weapons/r_exp3.wav", pos);
             }
+            crate::fte::TEDP_PARTICLERAIN => self.parse_dp_weather(m, false),
+            crate::fte::TEDP_PARTICLESNOW => self.parse_dp_weather(m, true),
             _ => return err(format!("CL_ParseTEnt: bad type {ty}")),
         }
         Ok(())
@@ -623,6 +709,34 @@ impl ClientState {
         dl.decay = 300.0;
     }
 }
+
+/// A static entity from its baseline (CL_ParseStatic).
+fn static_entity(b: EntityState) -> ClientEntity {
+    ClientEntity {
+        baseline: b,
+        model: b.modelindex,
+        lerpflags: LERP_RESETANIM,
+        frame: b.frame,
+        skin: b.skin,
+        effects: b.effects,
+        alpha: b.alpha,
+        scale: b.scale,
+        origin: b.origin,
+        angles: b.angles,
+        msg_origins: [b.origin; 2],
+        msg_angles: [b.angles; 2],
+        traileffect: b.traileffect,
+        emiteffect: b.emiteffect,
+        ..Default::default()
+    }
+}
+
+/// FTE sound flags (parsed, not used).
+const SND_FTE_MOREFLAGS: u32 = 1 << 2;
+const SND_DP_PITCH: u32 = 1 << 5;
+const SND_FTE_TIMEOFS: u32 = 1 << 6;
+const SND_FTE_PITCHADJ: u32 = 1 << 7;
+const SND_FTE_VELOCITY: u32 = 1 << 8;
 
 fn check_protocol(p: u32) -> R {
     if p != PROTOCOL_NETQUAKE && p != PROTOCOL_FITZQUAKE && p != PROTOCOL_RMQ {

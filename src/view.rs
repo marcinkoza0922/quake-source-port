@@ -72,6 +72,9 @@ struct Anim {
 
 #[derive(Default)]
 pub struct ViewState {
+    /// Model indices not drawn because an `r_effect ... replace` emitter
+    /// stands in for them (MOD_EMITREPLACE).
+    pub replaced_models: Vec<bool>,
     dmg_time: f32,
     dmg_roll: f32,
     dmg_pitch: f32,
@@ -377,6 +380,9 @@ impl ViewState {
         };
         for k in 0..cl.visedicts.len() {
             let i = cl.visedicts[k];
+            if self.replaced_models.get(cl.entities[i].model).copied().unwrap_or(false) {
+                continue;
+            }
             let Some(m) = lv.models.get(cl.entities[i].model).copied().flatten() else { continue };
             let e = &mut cl.entities[i];
             let a = &mut self.anims[i];
