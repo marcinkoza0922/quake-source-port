@@ -19,6 +19,7 @@ pub(super) fn tooltip(item: Item) -> Option<&'static str> {
         "r_ssao" => "Darkens corners and contact areas where geometry meets",
         "r_motionblur" => "Blurs fast-moving monsters, projectiles and doors (not camera turns)",
         "r_motionblur_amount" => "Length of the motion blur streaks",
+        "r_debris" => "Corpses go limp as ragdolls, gibs tumble and barrels throw shrapnel; shots and blasts push them (cosmetic only)",
         "r_enhancedwater" => "Turns on the extra liquid effects; Water Settings controls each one",
         "r_wateralpha" => "How see-through water surfaces are",
         "r_waterripples_amount" => "Strength of the surface swell and rings",

@@ -215,6 +215,7 @@ pub(super) const GRAPHICS: &[Item] = &[
     slider("Motion Blur Amount", "r_motionblur_amount", 0.1, 2.0, 0.1),
     toggle("Enhanced Water", "r_enhancedwater"),
     Item::Sub { label: "Water Settings", page: Page::Water },
+    toggle("Ragdolls & Debris", "r_debris"),
     toggle("Interpolate Animation", "r_lerpmodels"),
     toggle("Interpolate Movement", "r_lerpmove"),
 ];

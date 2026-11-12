@@ -182,6 +182,9 @@ pub struct ClientState {
     pub static_sounds: Vec<StaticSound>,
     /// Entity indices to draw this frame (CL_RelinkEntities).
     pub visedicts: Vec<usize>,
+    /// Entities the host's debris physics draws itself (ragdolls, gibs):
+    /// skipped when drawing and get no model trail. Empty when unused.
+    pub debris_owned: Vec<bool>,
     pub temp_entities: Vec<TempEntity>,
     pub viewentity: usize,
     /// Weapon model state (cl.viewent).
@@ -285,6 +288,7 @@ impl ClientState {
             static_entities: Vec::new(),
             static_sounds: Vec::new(),
             visedicts: Vec::new(),
+            debris_owned: Vec::new(),
             temp_entities: Vec::new(),
             viewentity: 0,
             viewent: ClientEntity::default(),

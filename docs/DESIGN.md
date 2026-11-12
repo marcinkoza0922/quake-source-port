@@ -113,6 +113,15 @@ Custom immediate-mode UI (`qui`) drawing through the renderer's 2D batch, concha
   wheel slowdown in `wheel_timescale`.
 - The engine has no underwater screen warp, so there is no toggle for it.
 
+### Ragdolls and debris (`r_debris`, Graphics › "Ragdolls & Debris"; `src/debris/`)
+Client-only and cosmetic: the server never sees it, and bodies collide only with the world (hull 0 traces), not with entities. When it is off, `Debris::update` returns at once and owns nothing.
+- **Ownership**: a replaced server entity is flagged in `ClientState::debris_owned`. `view::entities` skips it, and relink gives it no model trail. The flag is released as soon as the server changes the entity (model, death frame, or removal), so QC state always wins.
+- **Ragdolls**: a corpse is taken over once it holds a death frame. Death frames are found by name ("death", "deth", "dth", "die", "dead"), which makes it work for mod monsters. The trigger is the last frame of the sequence for 0.12 s, or any death frame for 1 s. Players (`<= maxclients`) are skipped. `rig.rs` builds a skeleton from the pose: k-means clusters (5–12, seeded by farthest-point sampling), with links between clusters that share a triangle and soft two-ring links against folding. Each vertex is skinned to two bones. `ragdoll.rs` runs Verlet particles with distance constraints. Bone rotations come from shape matching (Müller's rotation extraction, warm-started). The mesh is packed into the MDL vertex format and sent as `RenderEntity::dyn_pose` / `RenderFrame::dyn_verts`. The renderer copies these into the dynbuf (set 0 binding 9), and `alias.vert` reads them when flag 16 is set. A ragdoll goes to sleep after 1 s still, and its packed pose is cached while it sleeps.
+- **Gibs**: entities whose model has `EF_GIB` become tumbling `Body`s, keeping the throw velocity from the last two messages. A gib lives while its server entity exists and draws its own blood trail.
+- **Barrels**: an external brush model named `*expl*`/`*exbox*`/`*barrel*` that changes model (or vanishes next to an explosion) throws 14 shards. The shards use a procedural MDL (`fragment.rs`) and live 8–12 s.
+- **Pushes**: `shot_impacts` drive them. A bullet or nail pushes what lies on the ray from the view to its impact. An explosion pushes everything within 200 units. One within 28 units of a ragdoll's bones gibs it (gib models, blood and `udeath`) after 0.1 s, so a server-side gib wins. Explosions in the last 0.6 s also fling corpses as they are taken over.
+- Fixed 60 Hz steps (at most 6 per frame), driven by `cl.time` so pause and slow motion apply. Caps: 48 ragdolls, 128 gibs, 96 shards.
+
 ### Gameplay assists (Options → Gameplay → Assists; `qserver::assists`)
 Engine-side so they work with any progs; all off in deathmatch.
 - qvm resolves QC `T_Damage` at load; each QC→QC call to it first runs

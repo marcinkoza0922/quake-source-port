@@ -72,6 +72,7 @@ impl Renderer {
                 range: MAX_VIS * 4,
             }];
             let alias = whole(self.alias_buf.buf);
+            let dynv = whole(f.dynbuf.buf);
             let mats = whole(materials);
             let pal = whole(self.palette_buf.buf);
             let smp = whole(samples);
@@ -89,6 +90,7 @@ impl Renderer {
                 w(f.set, 3, vk::DescriptorType::COMBINED_IMAGE_SAMPLER).image_info(&lm_img),
                 w(f.set, 4, sb).buffer_info(&mats),
                 w(f.set, 5, sb).buffer_info(&pal),
+                w(f.set, 9, sb).buffer_info(&dynv),
                 w(f.comp_set, 0, sb).buffer_info(&smp),
                 w(f.comp_set, 1, sb).buffer_info(&srf),
                 w(f.comp_set, 2, sb).buffer_info(&lmdyn),

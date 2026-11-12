@@ -120,6 +120,8 @@ impl Renderer {
             let m = affine(entity_rotation(pa), po);
             Some(rows3(&local.map_or(m, |l| mul(&m, l))))
         };
+        // CPU-built alias poses (ragdolls), indexed in u32s from the buffer start
+        let dyn_base = if fr.dyn_verts.is_empty() { None } else { dynw.push(fr.dyn_verts, 4).map(|o| (o / 4) as u32) };
         let mut alias_draws: Vec<AliasDraw> = Vec::new();
         let mut sprite_draws: Vec<SpriteDraw> = Vec::new();
         let mut trans: Vec<(f32, Trans)> = Vec::new();
@@ -225,7 +227,15 @@ impl Renderer {
                         if am.frames.is_empty() || am.num_indices == 0 {
                             continue;
                         }
-                        if !e.viewmodel && !sphere_in_frustum(&vs.frustum, e.origin, am.radius) {
+                        let dynp = match e.dyn_pose {
+                            Some(d) => match dyn_base {
+                                Some(base) => Some((base + d.ofs, d)),
+                                None => continue,
+                            },
+                            None => None,
+                        };
+                        let radius = dynp.map_or(am.radius, |(_, d)| d.radius);
+                        if !e.viewmodel && !sphere_in_frustum(&vs.frustum, e.origin, radius) {
                             continue;
                         }
                         let t = time + e.syncbase as f64;
@@ -233,8 +243,10 @@ impl Renderer {
                             let (first, n, iv) = &am.frames[(f as usize).min(am.frames.len() - 1)];
                             first + group_index(iv, *n as usize, t) as u32
                         };
-                        let p1 = am.verts_base + pose(e.prev_frame) * am.num_verts;
-                        let p2 = am.verts_base + pose(e.frame) * am.num_verts;
+                        let (p1, p2) = match dynp {
+                            Some((p, _)) => (p, p),
+                            None => (am.verts_base + pose(e.prev_frame) * am.num_verts, am.verts_base + pose(e.frame) * am.num_verts),
+                        };
                         let skin = if am.skins.is_empty() {
                             [NO_TEX; 3]
                         } else {
@@ -249,7 +261,13 @@ impl Renderer {
                             ],
                             am.scale_origin,
                         );
-                        let model = mul(&affine(rot, e.origin), &local);
+                        let model = match dynp {
+                            Some((_, d)) => affine(
+                                [[d.scale[0], 0.0, 0.0], [0.0, d.scale[1], 0.0], [0.0, 0.0, d.scale[2]]],
+                                d.origin,
+                            ),
+                            None => mul(&affine(rot, e.origin), &local),
+                        };
                         // R_SetupAliasLighting
                         let wl = self.world.as_ref().map(|w| &w.cpu);
                         let mut lc = wl
@@ -302,6 +320,9 @@ impl Renderer {
                         let [top, bot] = e.colormap.unwrap_or([1, 6]);
                         if e.colormap.is_some() {
                             flags |= 4;
+                        }
+                        if dynp.is_some() {
+                            flags |= 16;
                         }
                         let push = AliasPush {
                             model,
