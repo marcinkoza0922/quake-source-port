@@ -241,7 +241,7 @@ pub(super) const DEBRIS: &[Item] = &[
     toggle("Gibs", "r_debris_gibs"),
     toggle("Shrapnel", "r_debris_shrapnel"),
     toggle("Hit Doors & Lifts", "r_debris_movers"),
-    slider("Push Strength", "r_debris_force", 0.0, 2.0, 0.25),
+    slider("Push Strength", "r_debris_force", 0.0, 6.0, 0.25),
 ];
 
 pub(super) const COLORBLIND: &[(&str, f32)] =

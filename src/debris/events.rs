@@ -87,6 +87,15 @@ impl Debris {
                     doll.blast(p, 220.0, 450.0 * set.force);
                 }
             }
+            // the killing hit: the latest volley that strikes the body
+            let hits = |&&(from, p, t): &&(Vec3, Vec3, f64)| time - t < SHOT_MEMORY && doll.ray_gap(from, p).is_some_and(|(g, _)| g < 12.0);
+            if let Some(last) = self.shots.iter().filter(hits).map(|s| s.2).max_by(f64::total_cmp) {
+                let volley: Vec<_> = self.shots.iter().filter(hits).filter(|s| s.2 == last).copied().collect();
+                for (from, p, _) in volley {
+                    doll.shot(from, p, set.force);
+                    doll.fling(from, p, set.force);
+                }
+            }
             let colormap = (e.colormap > 0 && (e.colormap as usize) <= cl.scores.len()).then(|| {
                 let c = cl.scores[e.colormap as usize - 1].colors;
                 [((c >> 4) & 15) as u8, (c & 15) as u8]
@@ -206,12 +215,10 @@ impl Debris {
             }
             let from = self.shot_origin(view, p);
             let dir = (p - from).normalize();
+            self.shots.push((from, p, time));
             for c in &mut self.corpses {
-                if let Some((gap, i)) = c.doll.ray_gap(from, p)
-                    && gap < 0.0
-                {
-                    let at = c.doll.pos[i];
-                    c.doll.push(at, 20.0, (dir * 260.0 + Vec3::new(0.0, 0.0, 40.0)) * force);
+                if c.doll.ray_gap(from, p).is_some_and(|(gap, _)| gap < 0.0) {
+                    c.doll.shot(from, p, force);
                 }
             }
             for b in &mut self.bodies {
@@ -222,5 +229,6 @@ impl Debris {
         }
         self.rng = Some(rng);
         self.booms.retain(|b| time - b.1 < BOOM_MEMORY);
+        self.shots.retain(|s| time - s.2 < SHOT_MEMORY);
     }
 }

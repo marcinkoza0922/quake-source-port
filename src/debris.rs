@@ -51,6 +51,9 @@ const HOLD_FINAL: f64 = 0.12;
 const HOLD_ANY: f64 = 1.0;
 /// Explosions this recent fling corpses that are taken over.
 const BOOM_MEMORY: f64 = 0.6;
+/// Bullet and nail hits are remembered this long, so the killing shot
+/// still pushes a corpse taken over at death.
+const SHOT_MEMORY: f64 = 0.3;
 /// Client-side gibbing waits this long so a server-side gib wins.
 const GIB_DELAY: f64 = 0.1;
 const BLOOD: i32 = 73;
@@ -137,6 +140,8 @@ pub struct Debris {
     brushes: HashMap<usize, (usize, Vec3, Vec3)>,
     brush_bounds: HashMap<usize, Option<(Vec3, Vec3)>>,
     booms: Vec<(Vec3, f64)>,
+    /// Recent bullet/nail hits: (line-of-fire origin, impact, time).
+    shots: Vec<(Vec3, Vec3, f64)>,
     shard: Option<ModelId>,
     /// The game's gib models: (name stem, model).
     gib_models: Option<Rc<[(String, ModelId)]>>,

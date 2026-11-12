@@ -181,7 +181,7 @@ pub(super) const COMPAT_CVARS: &[(&str, &str, u32)] = &[
     ("r_debris_gibs", "1", CVAR_ARCHIVE),
     ("r_debris_shrapnel", "1", CVAR_ARCHIVE),
     ("r_debris_movers", "1", CVAR_ARCHIVE),
-    ("r_debris_force", "1", CVAR_ARCHIVE),
+    ("r_debris_force", "1.25", CVAR_ARCHIVE),
     ("r_waterripples", "0", CVAR_ARCHIVE),
     ("r_watersplash", "0", CVAR_ARCHIVE),
     ("r_watercaustics", "0", CVAR_ARCHIVE),
