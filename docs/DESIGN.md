@@ -382,3 +382,13 @@ and secrets), followed by disconnected-region investigation. Synthetic tests
 cover evidence classification, alternate openers, chains, cycles, touch/firing
 priority, execution blocks and depth bounds; report serialization checks escaped
 entity names. Game-data traversal tests skip when assets are absent.
+
+## FTE scripted particles (port plan, 2026-11-11, not started in code)
+Port of vkQuake `r_part_fte.c` as a new crate `qpart`:
+- `types`: part_type_t/plooks_t/ramp_t, flags PT_*, spawn modes SM_*, blend modes.
+- `parse`: FTE `r_part` cfg parser (`particles/<name>.cfg`, namespaces, `+name` chains, `r_effect`/`r_trail`/`r_partredirect`) and the DP `effectinfo.txt` importer (AD needs it: its progs checks `FTE_PART_NAMESPACE_EFFECTINFO` and uses `effectinfo.*` names).
+- `system`: one particle arena with index-linked per-type lists and a free list (beams reference particles by index, killed particles are freed only at the end of the frame, as in C), trailstates (ring of 1024), run list, decals, sky-tri rain emitters (`_texpart_*` worldspawn keys, `tex_<texture>`).
+- Spawn: RunParticleEffectState, ParticleTrailSpawn, RunParticleWeather; update: UpdateParticle + UpdateParticleTypes (single-threaded is fine).
+- A world trait for trace_line / point_contents / decal clipping against BSP.
+- Geometry: builds vertex batches (texture, blend mode) for qrender: textured quads, line/fan/textured sparks, beams, decals. Fallback textures: white, beam, ptri, ball, fuzzy.
+- Hooks: `r_particledesc` default "classic" loads no FTE configs, so classic effects stay unless an effect resolves. Server: builtins particleeffectnum #335, trailparticles #336, pointparticles #337, te_particlerain #409 / te_particlesnow #410, advertise FTE_SV_POINTPARTICLES, DP_SV_POINTPARTICLES, DP_TE_PARTICLERAIN/SNOW, FTE_PART_NAMESPACE_EFFECTINFO; messages svcdp_precache (54, 0x4000|idx), svcdp_trailparticles 60, pointparticles 61, pointparticles1 62, TEDP 55/56. Entity emit/trail effect fields need replacement deltas; skip at first.
