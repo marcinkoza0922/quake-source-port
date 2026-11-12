@@ -140,7 +140,7 @@ fn json_str(s: &str) -> String {
 fn report_json(r: &bot::Report) -> String {
     let errs: Vec<String> = r.errors.iter().map(|e| json_str(e)).collect();
     format!(
-        "{{\"kills\": {}, \"total_monsters\": {}, \"secrets\": {}, \"total_secrets\": {}, \"noclip_uses\": {}, \"goals_failed\": {}, \"triggers_missed\": {}, \"nav_nodes\": {}, \"has_exit\": {}, \"exited\": {}, \"stranded\": {}, \"route\": {}, \"seed\": {}, \"variants\": {}, \"clean_variants\": {}, \"sim_time\": {:.1}, \"wall_time\": {:.1}, \"errors\": [{}]}}",
+        "{{\"kills\": {}, \"total_monsters\": {}, \"secrets\": {}, \"total_secrets\": {}, \"noclip_uses\": {}, \"goals_failed\": {}, \"triggers_missed\": {}, \"monster_noclips\": {}, \"nav_nodes\": {}, \"has_exit\": {}, \"exited\": {}, \"stranded\": {}, \"route\": {}, \"seed\": {}, \"variants\": {}, \"clean_variants\": {}, \"sim_time\": {:.1}, \"wall_time\": {:.1}, \"errors\": [{}]}}",
         r.kills,
         r.total_monsters,
         r.secrets,
@@ -148,6 +148,7 @@ fn report_json(r: &bot::Report) -> String {
         r.noclip_uses,
         r.goals_failed,
         r.triggers_missed,
+        r.monster_noclips,
         r.nav_nodes,
         r.has_exit,
         r.exited,
@@ -200,13 +201,14 @@ fn run_jobs(o: &Opts, jobs: Vec<(String, u64)>, print: bool) -> Vec<(String, bot
                     if print {
                         let name = if *seed == 0 { map.clone() } else { format!("{map}#{seed}") };
                         eprintln!(
-                            "{:<16} kills {:>3}/{:<3} secrets {:>2}/{:<2} noclip {:>2} failed {:>2}{}{}{}{} ({:.0}s sim, {:.1}s wall)",
+                            "{:<16} kills {:>3}/{:<3} secrets {:>2}/{:<2} noclip {:>2} ({:>2} monster) failed {:>2}{}{}{}{} ({:.0}s sim, {:.1}s wall)",
                             name,
                             r.kills,
                             r.total_monsters,
                             r.secrets,
                             r.total_secrets,
                             r.noclip_uses,
+                            r.monster_noclips,
                             r.goals_failed,
                             if r.exited { " exit" } else if r.has_exit { " NO-EXIT" } else { "" },
                             if r.stranded { " STRANDED" } else { "" },

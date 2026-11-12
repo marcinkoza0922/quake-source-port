@@ -59,6 +59,9 @@ pub struct Report {
     pub goals_failed: u32,
     /// Triggers the bot never got into (often monster-only or decorative).
     pub triggers_missed: u32,
+    /// Noclips to monsters (included in `noclip_uses`): coverage, not
+    /// navigation; the rest went to goals a player has to reach.
+    pub monster_noclips: u32,
     pub nav_nodes: usize,
     pub sim_time: f64,
     pub wall_time: f64,
@@ -224,6 +227,9 @@ struct Bot<'a> {
     weapon: u8,
     max_time: f64,
     blocked: Blocked,
+    /// Nodes the bot couldn't walk onto from where it stood; not used as the
+    /// start of a path until blocks are lifted.
+    bad_src: std::collections::HashSet<u32, FxBuild>,
     /// A goal was finished since blocks and deferrals were last lifted.
     progress: bool,
     lifts: HashMap<(u32, u32), Lift, FxBuild>,
@@ -317,7 +323,7 @@ fn add_entry(nav: &mut Nav, cm: &Geo, mins: Vec3, maxs: Vec3) -> Option<u32> {
     let g = spots
         .iter()
         .filter(|&&p| nav::clear(cm, p, p))
-        .find_map(|&p| nav::ground(cm, p, (p.z - mins.z) + 64.0).filter(|g| g.z > mins.z - 40.0))
+        .find_map(|&p| nav::ground(cm, p, (p.z - mins.z) + 64.0).filter(|g| g.z > mins.z - 80.0))
         .or_else(|| spots.iter().copied().find(|&p| nav::clear(cm, p, p)));
     if debug() && g.is_none() {
         eprintln!("entry {mins:?}-{maxs:?}: no spot");
@@ -427,6 +433,9 @@ fn add_movers_pass(nav: &mut Nav, cm: &Geo, vm: &Vm, o: &Ofs, lifts: &mut HashMa
         if cls == "trigger_teleport" {
             // Teleporters with a targetname only work while triggered.
             let target = ent_str(vm, e, o.target);
+            if debug() {
+                eprintln!("teleport #{e} {mins:?}-{maxs:?} target {:?} targetname {:?}", String::from_utf8_lossy(&target), String::from_utf8_lossy(&ent_str(vm, e, o.targetname)));
+            }
             if target.is_empty() || !ent_str(vm, e, o.targetname).is_empty() {
                 continue;
             }
@@ -438,13 +447,57 @@ fn add_movers_pass(nav: &mut Nav, cm: &Geo, vm: &Vm, o: &Ofs, lifts: &mut HashMa
             let (Some(dn), Some(en)) = (nav.nearest(dest, 96.0), add_entry(nav, cm, mins, maxs)) else { continue };
             nav.link(en, dn, EdgeKind::Teleport, 64.0);
             done.insert(e);
+        } else if cls == "trigger_push" && vm.ent_i(e, o.touch) != 0 {
+            let Some(md) = vm.field_ofs("movedir") else { continue };
+            let dir = v(vm.ent_v(e, md));
+            if dir.length_sq() < 0.5 {
+                continue;
+            }
+            let c = (mins + maxs) * 0.5;
+            let land: Vec<u32> = if dir.z > 0.7 {
+                // Updraft: blown out of the top onto a ledge beside it.
+                let top = Vec3::new(c.x, c.y, maxs.z + 40.0);
+                let h = (maxs - mins) * 0.5 + Vec3::splat(40.0);
+                for s in [Vec3::new(h.x, 0.0, 0.0), Vec3::new(-h.x, 0.0, 0.0), Vec3::new(0.0, h.y, 0.0), Vec3::new(0.0, -h.y, 0.0)] {
+                    let q = top + s;
+                    if nav::clear(cm, q, q) && nav::ground(cm, q, 200.0).is_some() {
+                        nav.extend(cm, q);
+                    }
+                }
+                nav.around(mins, maxs, 96.0, maxs.z + 40.0, 120.0)
+            } else {
+                // Wind tunnel: carried out of the far end.
+                let e2 = (maxs - mins) * 0.5;
+                let half = e2.x * dir.x.abs() + e2.y * dir.y.abs() + e2.z * dir.z.abs();
+                let q = c + dir * (half + 48.0);
+                match nav::ground(cm, q, 512.0) {
+                    Some(g) => {
+                        nav.extend(cm, g + Vec3::new(0.0, 0.0, 1.0));
+                        nav.nearest(g, 96.0).into_iter().collect()
+                    }
+                    None => Vec::new(),
+                }
+            };
+            if debug() {
+                eprintln!("push #{e} {mins:?}-{maxs:?} dir {dir:?}: {} landing nodes", land.len());
+            }
+            if land.is_empty() {
+                continue;
+            }
+            let Some(en) = add_entry(nav, cm, mins, maxs) else { continue };
+            for n in land {
+                let cost = (nav.pos[n as usize] - nav.pos[en as usize]).length() * 0.5 + 64.0;
+                nav.link(en, n, EdgeKind::Teleport, cost);
+            }
+            done.insert(e);
         } else if let Some(lift) = lift_of(vm, o, e, &ents) {
             let Lift { lo, hi, mins, maxs, .. } = lift;
             let c = (mins + maxs) * 0.5;
             let (bp, tp) = (Vec3::new(c.x, c.y, lo + 25.0), Vec3::new(c.x, c.y, hi + 25.0));
             if !nav::clear(cm, bp, bp + Vec3::new(0.0, 0.0, 1.0)) || !nav::clear(cm, tp, tp + Vec3::new(0.0, 0.0, 1.0)) {
                 if debug() {
-                    eprintln!("lift #{e} {} lo {lo} hi {hi}: stop in solid", vm.classname(e));
+                    let (a, b) = (cm.trace(1, bp, bp + Vec3::new(0.0, 0.0, 1.0)), cm.trace(1, tp, tp + Vec3::new(0.0, 0.0, 1.0)));
+                    eprintln!("lift #{e} {} lo {lo} hi {hi} box {mins:?}-{maxs:?}: stop in solid (bottom {} top {}, world bottom {} top {})", vm.classname(e), a.startsolid, b.startsolid, cm.world.hull(0, 1).trace(bp, bp).startsolid, cm.world.hull(0, 1).trace(tp, tp).startsolid);
                 }
                 continue;
             }
@@ -595,6 +648,7 @@ pub fn run(fs: Fs, map: &str, opt: &Options) -> Report {
         weapon: 5,
         max_time: 0.0,
         blocked: Blocked::default(),
+        bad_src: Default::default(),
         progress: false,
         lifts,
         ride_since: None,
@@ -610,6 +664,49 @@ pub fn run(fs: Fs, map: &str, opt: &Options) -> Report {
     };
     if bot.replay.is_some() {
         bot.rep.route = "replayed".into();
+    }
+    if std::env::var_os("QBOT_PROBE").is_some() {
+        let v: Vec<f32> = std::env::var("QBOT_PROBE").unwrap().split(',').map(|x| x.parse().unwrap()).collect();
+        let p = Vec3::new(v[0], v[1], v[2]);
+        let tr = bot.geo.floor_trace(1, p, p - Vec3::new(0.0, 0.0, 4096.0));
+        let mut z = p.z;
+        let mut layers = String::new();
+        while z > tr.endpos.z - 30.0 {
+            layers += &format!(" {z:.0}:{}", bot.cm.point_contents(Vec3::new(p.x, p.y, z)));
+            z -= 32.0;
+        }
+        eprintln!("probe {p:?}: floor {:?} normal {:?} start_solid {}; contents{layers}", tr.endpos, tr.plane_normal, tr.startsolid);
+    }
+    if debug() {
+        let p = bot.me_origin();
+        if let Some(src) = bot.nav.nearest(p, 96.0) {
+            let (dist, _) = bot.nav.dijkstra(src, &Blocked::default(), 0);
+            let reach: Vec<usize> = (0..dist.len()).filter(|&i| dist[i].is_finite()).collect();
+            let (mut lo, mut hi) = (Vec3::splat(f32::INFINITY), Vec3::splat(f32::NEG_INFINITY));
+            for &i in &reach {
+                lo = lo.min(bot.nav.pos[i]);
+                hi = hi.max(bot.nav.pos[i]);
+            }
+            eprintln!("reachable from start: {} of {} nodes, box {lo:?}-{hi:?}", reach.len(), bot.nav.pos.len());
+            for g in bot.goals.iter().filter(|g| g.kind == Kind::Exit) {
+                eprintln!("  exit #{} node {:?} reachable {}", g.ent, g.node.map(|n| bot.nav.pos[n as usize]), g.node.is_some_and(|n| dist[n as usize].is_finite()));
+            }
+            let vm = bot.vm();
+            for e in 1..vm.num_edicts() as u32 {
+                if vm.is_free(e) || vm.ent_f(e, bot.o.solid) as i32 == SOLID_NOT {
+                    continue;
+                }
+                let (a, b) = (v(vm.ent_v(e, bot.o.absmin)), v(vm.ent_v(e, bot.o.absmax)));
+                let cls = vm.classname(e);
+                if (cls.starts_with("func") || cls.starts_with("trigger") || cls == "door" || cls == "plat") && a.x < hi.x + 64.0 && b.x > lo.x - 64.0 && a.y < hi.y + 64.0 && b.y > lo.y - 64.0 && a.z < hi.z + 64.0 && b.z > lo.z - 64.0 {
+                    eprintln!("  in reach: #{e} {cls} {a:?}-{b:?}");
+                }
+            }
+        }
+    }
+    if opt.verbose {
+        let p = bot.me_origin();
+        eprintln!("  start at {p:?}{}", bot.ents_near(p));
     }
     // Big maps get more time: 900 s, or 15 s per goal.
     bot.max_time = opt.max_time.unwrap_or_else(|| (bot.goals.len() as f64 * 15.0).max(900.0));
@@ -852,6 +949,7 @@ impl Bot<'_> {
         self.path.clear();
         self.step = 0;
         self.ride_since = None;
+        self.bad_src.clear();
         self.rep.nav_nodes = self.rep.nav_nodes.max(self.nav.pos.len());
         if self.opt.verbose {
             eprintln!("  t={:.1} nav rebuilt: {} nodes", self.sv.time(), self.nav.pos.len());
@@ -868,6 +966,7 @@ impl Bot<'_> {
             eprintln!("  t={:.1} lifting {} blocked edges and deferrals", self.sv.time(), self.blocked.len());
         }
         self.blocked.clear();
+        self.bad_src.clear();
         for g in &mut self.goals {
             g.deferred = false;
         }
@@ -890,7 +989,7 @@ impl Bot<'_> {
             let tr = self.geo.trace(1, here, here - Vec3::new(0.0, 0.0, 1024.0));
             (!tr.startsolid && tr.fraction < 1.0).then_some(tr.endpos).and_then(|g| self.nav.nearest(g, 48.0))
         };
-        let Some(src) = self.nav.nearest_clear(&self.geo, here, 96.0).or_else(below) else {
+        let Some(src) = self.nav.nearest_clear_except(&self.geo, here, 96.0, &self.bad_src).or_else(below) else {
             // Off the graph (after a noclip or a fall): back to the nearest node.
             self.path.clear();
             self.returns += 1;
@@ -966,12 +1065,15 @@ impl Bot<'_> {
                     self.rep.triggers_missed += 1;
                 }
             }
+            // In entity order, which tends to follow the level's layout;
+            // goals not deferred first.
             let pick = |deferred: bool| {
                 self.goals
                     .iter()
                     .position(|g| Self::pending(g) && !self.dormant(g) && g.deferred == deferred && (g.kind != Kind::Exit || !others_left))
             };
-            match pick(false).or_else(|| pick(true)) {
+            let pick = pick(false).or_else(|| pick(true));
+            match pick {
                 Some(i) => {
                     if self.goals[i].noclips >= 3 {
                         self.fail(i, "given up after 3 noclips");
@@ -986,6 +1088,9 @@ impl Bot<'_> {
                         (_, None) => self.center(g.ent),
                     };
                     self.goals[i].deferred = false;
+                    if self.opt.verbose {
+                        eprintln!("    near goal:{}", self.ents_near(to));
+                    }
                     self.noclip(to, "unreachable");
                 }
                 None => self.cur = None,
@@ -1079,8 +1184,8 @@ impl Bot<'_> {
                 continue;
             }
             let (a, b) = (v(vm.ent_v(e, self.o.absmin)), v(vm.ent_v(e, self.o.absmax)));
-            if a.x < p.x + 64.0 && b.x > p.x - 64.0 && a.y < p.y + 64.0 && b.y > p.y - 64.0 && a.z < p.z + 64.0 && b.z > p.z - 64.0 {
-                out += &format!(" [#{e} {}]", vm.classname(e));
+            if a.x < p.x + 128.0 && b.x > p.x - 128.0 && a.y < p.y + 128.0 && b.y > p.y - 128.0 && a.z < p.z + 128.0 && b.z > p.z - 128.0 {
+                out += &format!(" [#{e} {} {a:?}-{b:?}]", vm.classname(e));
             }
         }
         out
@@ -1108,6 +1213,9 @@ impl Bot<'_> {
             }
         }
         self.rep.noclip_uses += 1;
+        if self.cur.is_some_and(|i| self.goals[i].kind == Kind::Monster) {
+            self.rep.monster_noclips += 1;
+        }
         if self.opt.verbose {
             let g = self.cur.map(|i| (self.goals[i].kind, self.goals[i].ent, self.vm().classname(self.goals[i].ent)));
             eprintln!("  t={t:.1} NOCLIP ({why}) {:?} -> {to:?} (goal {g:?})", self.me_origin());
@@ -1392,6 +1500,13 @@ impl Bot<'_> {
                 {
                     jump = e.kind == EdgeKind::Jump;
                 }
+                // Jump into teleporters and updrafts (some start above head height).
+                if self.step + 1 < self.path.len()
+                    && (d.x * d.x + d.y * d.y) < 48.0 * 48.0
+                    && self.nav.edge(self.path[self.step], self.path[self.step + 1]).is_some_and(|e| e.kind == EdgeKind::Teleport)
+                {
+                    jump = true;
+                }
                 break;
             }
         }
@@ -1445,6 +1560,12 @@ impl Bot<'_> {
                 }
                 if self.step > 0 && self.step < self.path.len() {
                     self.block_here();
+                    self.last_replan = -100.0;
+                    self.best_dist = f32::INFINITY;
+                    self.best_time = t;
+                } else if self.bad_src.len() < 64 && !self.path.is_empty() {
+                    // Couldn't get onto the first node: plan from another one.
+                    self.bad_src.insert(self.path[0]);
                     self.last_replan = -100.0;
                     self.best_dist = f32::INFINITY;
                     self.best_time = t;

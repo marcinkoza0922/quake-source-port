@@ -7,7 +7,7 @@
 use qcore::math::Vec3;
 use qworld::hull::{CollisionModel, Trace};
 use std::sync::Arc;
-use qworld::{CONTENTS_LAVA, CONTENTS_SKY, CONTENTS_SLIME, CONTENTS_SOLID};
+use qworld::{CONTENTS_LAVA, CONTENTS_SKY, CONTENTS_SLIME, CONTENTS_SOLID, CONTENTS_WATER};
 use std::cmp::Reverse;
 use std::collections::{BinaryHeap, HashMap, HashSet};
 use std::hash::{BuildHasherDefault, Hasher};
@@ -15,7 +15,8 @@ use std::hash::{BuildHasherDefault, Hasher};
 pub const GRID: f32 = 32.0;
 const STEP: f32 = 18.0;
 const JUMP: f32 = 40.0;
-const MAX_DROP: f32 = 640.0;
+/// The bot is in god mode, so falls never hurt; only the trace length limits drops.
+const MAX_DROP: f32 = 2048.0;
 const MAX_NODES: usize = 400_000;
 
 #[derive(Clone, Copy, PartialEq, Eq, Debug)]
@@ -203,6 +204,20 @@ impl Geo {
     }
 }
 
+/// How high a player standing at `p` in water can get: up to the surface plus
+/// a jump out (0 when not in water or no higher than a plain jump).
+fn swim_rise(cm: &Geo, p: Vec3) -> f32 {
+    if cm.point_contents(p) != CONTENTS_WATER {
+        return 0.0;
+    }
+    let mut z = 8.0;
+    while z < 2048.0 && cm.point_contents(p + Vec3::new(0.0, 0.0, z)) == CONTENTS_WATER {
+        z += 8.0;
+    }
+    let rise = z + 24.0;
+    if rise > JUMP { rise } else { 0.0 }
+}
+
 fn hazard(cm: &Geo, p: Vec3) -> bool {
     let feet = cm.point_contents(p - Vec3::new(0.0, 0.0, 23.0));
     let waist = cm.point_contents(p);
@@ -256,10 +271,19 @@ impl Nav {
         while i < nav.pos.len() && nav.pos.len() < MAX_NODES {
             let p = nav.pos[i];
             let (cx, cy) = nav.cell(p);
+            // In water a player can swim up to the surface and jump out.
+            let swim = swim_rise(cm, p);
             for (dx, dy) in dirs {
                 let tx = nav.origin.x + (cx + dx) as f32 * GRID;
                 let ty = nav.origin.y + (cy + dy) as f32 * GRID;
-                for (kind, rise) in [(EdgeKind::Walk, STEP), (EdgeKind::Jump, JUMP)] {
+                // Walk, jump, then (in water) swim up in growing steps as far
+                // as the surface: the first height that gets over is used.
+                let mut tries = vec![(EdgeKind::Walk, STEP), (EdgeKind::Jump, JUMP)];
+                if swim > JUMP {
+                    tries.extend([64.0, 128.0, 256.0, 512.0, 1024.0].into_iter().filter(|&h| h < swim).map(|h| (EdgeKind::Jump, h)));
+                    tries.push((EdgeKind::Jump, swim));
+                }
+                for (kind, rise) in tries {
                     let up = p + Vec3::new(0.0, 0.0, rise);
                     if kind == EdgeKind::Jump && !clear(cm, p, up) {
                         break;
@@ -269,6 +293,9 @@ impl Nav {
                         continue;
                     }
                     let Some(g) = ground(cm, t, MAX_DROP) else { break };
+                    if g.z - p.z > rise + 0.5 && swim > rise {
+                        continue;
+                    }
                     if g.z - p.z > rise + 0.5 || hazard(cm, g) || nav.forbid.iter().any(|f| f.contains(g)) {
                         break;
                     }
@@ -336,6 +363,11 @@ impl Nav {
     /// The nearest node within `radius` that a player can move to in a
     /// straight line from `p` (so not one behind a wall).
     pub fn nearest_clear(&self, cm: &Geo, p: Vec3, radius: f32) -> Option<u32> {
+        self.nearest_clear_except(cm, p, radius, &HashSet::default())
+    }
+
+    /// `nearest_clear` skipping the nodes in `skip`.
+    pub fn nearest_clear_except(&self, cm: &Geo, p: Vec3, radius: f32, skip: &HashSet<u32, FxBuild>) -> Option<u32> {
         let (cx, cy) = self.cell(p);
         let r = (radius / GRID).ceil() as i32;
         let mut cands: Vec<(f32, u32)> = Vec::new();
@@ -344,7 +376,7 @@ impl Nav {
                 for &n in self.cells.get(&(x, y)).into_iter().flatten() {
                     let d = self.pos[n as usize] - p;
                     let score = d.x * d.x + d.y * d.y + 4.0 * d.z * d.z;
-                    if score <= radius * radius * 4.0 {
+                    if score <= radius * radius * 4.0 && !skip.contains(&n) {
                         cands.push((score, n));
                     }
                 }
