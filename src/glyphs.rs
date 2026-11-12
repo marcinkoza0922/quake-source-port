@@ -38,6 +38,8 @@ impl Family {
 
 /// Glyph height in virtual units.
 pub const H: f32 = 10.0;
+/// Fraction of its slot a glyph fills (leaves a small gap at the edges).
+const GLYPH_FILL: f32 = 0.9;
 
 #[derive(Clone, Copy)]
 enum Sym {
@@ -189,8 +191,17 @@ impl Glyphs {
         self.key_h(c, x, y, key, H)
     }
 
-    /// Draws `key` `h` tall; returns the width used.
+    /// Draws `key` in a slot `h` tall; returns the slot width. The glyph is
+    /// drawn slightly smaller, centred, so neighbours never touch.
     pub fn key_h(&self, c: &mut Canvas, x: f32, y: f32, key: i32, h: f32) -> f32 {
+        let w = width(c, key, self.family, h);
+        let ih = h * GLYPH_FILL;
+        let iw = width(c, key, self.family, ih);
+        self.key_raw(c, x + (w - iw) / 2.0, y + (h - ih) / 2.0, key, ih);
+        w
+    }
+
+    fn key_raw(&self, c: &mut Canvas, x: f32, y: f32, key: i32, h: f32) -> f32 {
         let em = h * LABEL;
         let ty = center_text_y(y, h, em);
         match shape(key, self.family) {

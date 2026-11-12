@@ -1110,11 +1110,16 @@ impl Menu {
             }
             Item::Text { .. } | Item::Run { .. } | Item::Server(_) | Item::Bind { .. } | Item::ResetBinds | Item::Sub { .. } => return false,
             Item::Apply => {
-                if !enter {
+                if !enter || !self.display_dirty(cv) {
                     return false;
                 }
-                let (w, h) = self.pending_res;
-                out.push(Action::Command(format!("vid_fullscreen {}\nvid_width {w}\nvid_height {h}\nvid_apply\n", self.pending_mode)));
+                let mut cmd = format!("vid_fullscreen {}\n", self.pending_mode);
+                // borderless always uses the desktop size; keep the windowed size
+                if self.pending_mode != 2 {
+                    let (w, h) = self.pending_res;
+                    cmd += &format!("vid_width {w}\nvid_height {h}\n");
+                }
+                out.push(Action::Command(cmd + "vid_apply\n"));
             }
         }
         true
@@ -1240,7 +1245,7 @@ impl Menu {
     /// True when the pending display settings differ from the cvars.
     fn display_dirty(&self, cv: &Cvars) -> bool {
         self.pending_mode != cv.value_of("vid_fullscreen") as usize
-            || self.pending_res != (cv.value_of("vid_width") as u32, cv.value_of("vid_height") as u32)
+            || self.pending_mode != 2 && self.pending_res != (cv.value_of("vid_width") as u32, cv.value_of("vid_height") as u32)
     }
 
     pub fn draw(&self, c: &mut Canvas, pic: &mut PicFn, cv: &Cvars, realtime: f64) {
@@ -1567,7 +1572,11 @@ impl Menu {
             }
             Item::Toggle { label: l, cvar } => {
                 label(c, l);
-                { txt(c, VALUE_X, y, if cv.value_of(cvar) != 0.0 { "on" } else { "off" }); }
+                let on = cv.value_of(cvar) != 0.0;
+                c.round_box(VALUE_X, y - 0.5, 9.0, 9.0, 1.5, [0.0, 0.0, 0.0, 0.5], Some(BORDER));
+                if on {
+                    c.round_box(VALUE_X + 2.0, y + 1.5, 5.0, 5.0, 1.0, GOLD_FG, None);
+                }
             }
             Item::Choice { label: l, cvar, choices } => {
                 label(c, l);
@@ -1664,12 +1673,9 @@ impl Menu {
                 c.text_center(320.0, y, "Reset to Defaults", TXT, GOLD_FG);
             }
             Item::Apply => {
-                let dirty = self.display_dirty(cv);
-                label(c, "Apply Display");
-                if dirty {
-                    // gold text: pending changes
-                    txt_gold(c, VALUE_X, y, "press enter");
-                }
+                // a button, live only while there are pending changes
+                let col = if self.display_dirty(cv) { GOLD_FG } else { MUTED };
+                c.text_center(320.0, y, "Apply Display Changes", TXT, col);
             }
         }
     }
