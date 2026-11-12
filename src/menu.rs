@@ -188,7 +188,7 @@ const AUTOSAVE: &[Item] = &[
 const INPUT: &[Item] = &[
     Item::Sub { label: "Mouse & Keyboard", page: Page::Mouse },
     Item::Sub { label: "Controller", page: Page::Controller },
-    Item::Choice { label: "Wheel Slow Motion", cvar: "cl_wheel_timescale", choices: WHEEL_TIME },
+    Item::Choice { label: "Weapon Wheel Slowdown", cvar: "cl_wheel_timescale", choices: WHEEL_TIME },
 ];
 
 const MOUSE: &[Item] = &[
@@ -209,7 +209,7 @@ const CONTROLLER: &[Item] = &[
 ];
 
 const GLYPHS: &[(&str, f32)] = &[("auto", 0.0), ("xbox", 1.0), ("playstation", 2.0), ("nintendo", 3.0)];
-const WHEEL_TIME: &[(&str, f32)] = &[("off", 1.0), ("50%", 0.5), ("25%", 0.25), ("10%", 0.1)];
+const WHEEL_TIME: &[(&str, f32)] = &[("off", 1.0), ("half speed", 0.5), ("quarter speed", 0.25), ("10% speed", 0.1)];
 
 const MSAA: &[(&str, f32)] = &[("off", 1.0), ("2x", 2.0), ("4x", 4.0), ("8x", 8.0)];
 const SCALE: &[(&str, f32)] = &[("50%", 0.5), ("75%", 0.75), ("100%", 1.0), ("125%", 1.25), ("150%", 1.5), ("200%", 2.0)];
@@ -235,11 +235,33 @@ const GRAPHICS: &[Item] = &[
     slider("Contrast", "contrast", 1.0, 2.0, 0.1),
     slider("Water Opacity", "r_wateralpha", 0.0, 1.0, 0.1),
     toggle("Dynamic Lights", "r_dynamic"),
-    toggle("Interpolate Anim", "r_lerpmodels"),
-    toggle("Interpolate Move", "r_lerpmove"),
+    toggle("Interpolate Animation", "r_lerpmodels"),
+    toggle("Interpolate Movement", "r_lerpmove"),
 ];
 
 const AUDIO: &[Item] = &[slider("Sound Volume", "volume", 0.0, 1.0, 0.1), slider("Music Volume", "bgmvolume", 0.0, 1.0, 0.1)];
+
+/// Help line shown under an options page for the selected item.
+fn tooltip(item: Item) -> Option<&'static str> {
+    let cvar = match item {
+        Item::Slider { cvar, .. } | Item::Toggle { cvar, .. } | Item::Choice { cvar, .. } => cvar,
+        _ => return None,
+    };
+    Some(match cvar {
+        "cl_wheel_timescale" => "Slows the game down while the weapon wheel is open",
+        "r_texfilter" => "Nearest keeps crisp classic pixels; linear smooths textures",
+        "r_anisotropy" => "Keeps textures sharp on floors and walls seen at steep angles",
+        "r_lerpmodels" => "Blends between animation frames of monsters and weapons",
+        "r_lerpmove" => "Smooths the stepped movement of monsters",
+        "r_softemu" => "Emulates the original 8-bit palette of software rendering",
+        "vid_fsaamode" => "Shades every anti-aliasing sample; needs Anti-aliasing on",
+        "r_renderscale" => "3D resolution relative to the window; the UI stays sharp",
+        "r_dither" => "Adds fine noise to hide color banding",
+        "aim_slowdown" => "Slows stick look while the crosshair is over an enemy",
+        "aim_rotation" => "Turns the view to follow a moving enemy you are aiming at",
+        _ => return None,
+    })
+}
 
 fn page_items(p: Page) -> &'static [Item] {
     match p {
@@ -1385,6 +1407,7 @@ impl Menu {
             Screen::None => {}
         }
         c.menu_layout();
+        self.draw_tooltip(c);
         self.draw_hints(c);
         c.reset_origin();
         c.scale = base_scale;
@@ -1492,6 +1515,27 @@ impl Menu {
     }
 
     /// Bottom row of button prompts, for the device in use.
+    /// One-line explanation of the selected option, just below the panel.
+    fn draw_tooltip(&self, c: &mut Canvas) {
+        let Screen::OptionsPage(page) = self.screen else { return };
+        if self.drop.is_some() || self.osk.is_some() || self.capturing() || self.opt_cursor >= self.page_len(page) {
+            return;
+        }
+        let Some(s) = tooltip(self.page_item(page, self.opt_cursor)) else { return };
+        let w = c.text_w(s, TXT);
+        let y = PAGE_ROW0 + self.page_len(page) as f32 * ROW_H + 10.0;
+        c.round_box(320.0 - w / 2.0 - 8.0, y - 3.0, w + 16.0, 14.0, 4.0, [0.0, 0.0, 0.0, 0.7], Some(BORDER));
+        c.text(320.0 - w / 2.0, y, s, TXT, MUTED);
+    }
+
+    /// Menu hint row, centred in a bordered box.
+    fn boxed_hints(&self, c: &mut Canvas, y: f32, items: &[(i32, &str)]) {
+        let w = self.glyphs.hints(c, 0.0, y, items, false);
+        let h = crate::glyphs::HINT_H;
+        c.round_box(320.0 - w / 2.0 - 8.0, y - 3.0, w + 16.0, h + 6.0, 4.0, [0.0, 0.0, 0.0, 0.7], Some(BORDER));
+        self.glyphs.hints_centered(c, 320.0, y, items);
+    }
+
     fn draw_hints(&self, c: &mut Canvas) {
         let pad = self.pad_ui;
         let (sel, back) = if pad { (K_ABUTTON, K_BBUTTON) } else { (K_ENTER, K_ESCAPE) };
@@ -1499,13 +1543,13 @@ impl Menu {
         if self.capturing() {
             let s = if pad { "Press a button or key to bind" } else { "Press a key or button to bind" };
             let w = c.text_w(s, TXT);
-            c.round_box(320.0 - w / 2.0 - 8.0, y - 3.0, w + 16.0, 18.0, 4.0, [0.0, 0.0, 0.0, 0.8], None);
+            c.round_box(320.0 - w / 2.0 - 8.0, y - 3.0, w + 16.0, 18.0, 4.0, [0.0, 0.0, 0.0, 0.8], Some(BORDER));
             c.text(320.0 - w / 2.0, y + 2.0, s, TXT, GOLD_FG);
             return;
         }
         if self.osk.is_some() {
             let items = [(K_ABUTTON, "Type"), (K_XBUTTON, "Delete"), (K_YBUTTON, "Shift"), (K_BBUTTON, "Done")];
-            self.glyphs.hints_centered(c, 320.0, y, &items);
+            self.boxed_hints(c, y, &items);
             return;
         }
         let action = match self.screen {
@@ -1521,7 +1565,7 @@ impl Menu {
         if matches!(self.screen, Screen::Quit) {
             items = vec![(sel, "Confirm"), (back, "Cancel")];
         }
-        self.glyphs.hints_centered(c, 320.0, y, &items);
+        self.boxed_hints(c, y, &items);
     }
 
     fn draw_drop(&self, c: &mut Canvas, cv: &Cvars, item: Item, d: Drop) {
