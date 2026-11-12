@@ -14,6 +14,9 @@ layout(set = 0, binding = 0, std140) uniform Frame {
     vec4 alphas;    // water lava slime tele
     vec4 soft;      // x screen dither, y texture dither (r_softemu/r_dither)
     uvec4 softf;    // x world dither level (0 off, 1 coarse, 2 banded lightmap), y alias mode (0 std, 1 dither, 2 affine)
+    vec4 water;     // x ripple strength, y caustics strength, z ripple count
+    vec4 ripples[32];   // xy centre, z liquid surface height, w start time
+    vec4 ripple_amp[8]; // amplitudes, 4 per vec4
 } fr;
 
 layout(set = 0, binding = 1) uniform sampler2D textures[];
@@ -67,3 +70,67 @@ float tri(float x) {
 #define DITHER_NOISE(uv) tri(bayer01(ivec2(uv)))
 #define SCREEN_SPACE_NOISE() DITHER_NOISE(floor(gl_FragCoord.xy) + 0.5)
 #define SUPPRESS_BANDING() bayer(ivec2(gl_FragCoord.xy))
+
+// Liquid surface slope (dh/dx, dh/dy) at world point p on a surface at
+// height p.z: optional gentle swell plus the expanding ripple rings.
+vec2 water_grad(vec3 p, float t, float swell, float rings) {
+    vec2 g = vec2(0.0);
+    if (swell > 0.0) {
+        // a few long, slow directional waves
+        const vec4 W[3] = vec4[3](vec4(0.80, 0.60, 0.090, 1.3),
+                                  vec4(-0.45, 0.89, 0.130, -1.7),
+                                  vec4(0.31, -0.95, 0.210, 2.1));
+        for (int i = 0; i < 3; i++) {
+            float ph = dot(W[i].xy, p.xy) * W[i].z + t * W[i].w;
+            g += W[i].xy * (cos(ph) * W[i].z * 0.9 / (1.0 + float(i)));
+        }
+        g *= swell;
+    }
+    int n = rings > 0.0 ? int(fr.water.z) : 0;
+    vec2 gr = vec2(0.0);
+    for (int i = 0; i < n; i++) {
+        vec4 r = fr.ripples[i];
+        float age = t - r.w;
+        if (age < 0.0 || age > 2.5 || abs(p.z - r.z) > 24.0) continue;
+        vec2 d = p.xy - r.xy;
+        float dist = length(d);
+        float front = age * 85.0;
+        float x = dist - front;
+        float sig = 5.0 + age * 7.0;
+        if (abs(x) > 3.0 * sig) continue;
+        float env = exp(-x * x / (2.0 * sig * sig));
+        float fade = (1.0 - age / 2.5);
+        float amp = fr.ripple_amp[i >> 2][i & 3] * fade * fade / (1.0 + front * 0.03);
+        const float k = 0.4;
+        // h = amp * env * cos(k x); slope along the ring's radius
+        float dh = amp * env * (-k * sin(k * x) - cos(k * x) * x / (sig * sig));
+        gr += dh * d / max(dist, 1e-3);
+    }
+    return g + gr * rings;
+}
+
+// Caustic light network: two drifting Worley edge layers.
+vec2 caustic_hash(vec2 p) {
+    p = vec2(dot(p, vec2(127.1, 311.7)), dot(p, vec2(269.5, 183.3)));
+    return fract(sin(p) * 43758.5453);
+}
+float caustic_layer(vec2 p, float t) {
+    vec2 i = floor(p), f = fract(p);
+    float d1 = 8.0, d2 = 8.0;
+    for (int y = -1; y <= 1; y++)
+        for (int x = -1; x <= 1; x++) {
+            vec2 o = vec2(x, y);
+            vec2 h = caustic_hash(i + o);
+            vec2 q = o + 0.5 + 0.38 * sin(t * (0.6 + 0.5 * h.yx) + 6.2831853 * h) - f;
+            float d = dot(q, q);
+            if (d < d1) { d2 = d1; d1 = d; } else if (d < d2) d2 = d;
+        }
+    float e = sqrt(d2) - sqrt(d1); // 0 on cell borders
+    return pow(1.0 - smoothstep(0.0, 0.26, e), 4.0);
+}
+float caustic(vec2 p, float t) {
+    p += 0.22 * vec2(sin(p.y * 1.7 + t * 0.8), sin(p.x * 1.9 - t * 0.7));
+    float a = caustic_layer(p, t);
+    float b = caustic_layer(p * 1.31 + vec2(5.2, 1.3), t * 1.15 + 3.0);
+    return clamp(0.55 * (a + b) + 0.9 * a * b, 0.0, 1.5);
+}

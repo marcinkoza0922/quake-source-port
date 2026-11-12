@@ -493,11 +493,12 @@ impl Pipelines {
         let layout = self.layout;
         let f32x3 = vk::Format::R32G32B32_SFLOAT;
         let f32x2 = vk::Format::R32G32_SFLOAT;
-        let wb = [bind(0, 32, false)];
+        let wb = [bind(0, 40, false)];
         let wa = [
             attr(0, 0, f32x3, 0),
             attr(1, 0, f32x2, 12),
             attr(2, 0, f32x3, 20),
+            attr(3, 0, f32x2, 32),
         ];
         let ab = [bind(0, 12, false)];
         let aa = [attr(0, 0, vk::Format::R32_UINT, 0), attr(1, 0, f32x2, 4)];

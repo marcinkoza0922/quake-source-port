@@ -201,6 +201,9 @@ const COMPAT_CVARS: &[(&str, &str, u32)] = &[
     ("r_ssao_radius", "32", CVAR_ARCHIVE),
     ("r_motionblur", "0", CVAR_ARCHIVE),
     ("r_motionblur_amount", "0.5", CVAR_ARCHIVE),
+    ("r_waterripples", "0", CVAR_ARCHIVE),
+    ("r_watersplash", "0", CVAR_ARCHIVE),
+    ("r_watercaustics", "0", CVAR_ARCHIVE),
     ("cl_nopext", "0", CVAR_ARCHIVE),
     ("r_softparticledistance", "4", CVAR_ARCHIVE),
     ("r_bouncysparks", "1", 0),
@@ -2207,6 +2210,9 @@ impl Host {
             } else {
                 v("r_motionblur_amount").clamp(0.0, 4.0)
             },
+            water_ripples: v("r_waterripples").clamp(0.0, 4.0),
+            water_splashes: v("r_watersplash") != 0.0,
+            water_caustics: v("r_watercaustics").clamp(0.0, 4.0),
             ..Settings::default()
         };
         {
@@ -2234,6 +2240,7 @@ impl Host {
             blend,
             draw2d: &c.list,
             settings,
+            player: self.cl.entities.get(self.cl.viewentity).filter(|_| self.cl.viewentity > 0).map(|e| e.origin),
         };
         if let Err(e) = self.r.render(&frame) {
             self.con.print(&format!("render error: {e:?}\n"));

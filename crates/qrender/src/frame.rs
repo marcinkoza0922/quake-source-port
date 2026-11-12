@@ -21,6 +21,11 @@ struct FrameUbo {
     alphas: [f32; 4],
     soft: [f32; 4],
     softf: [u32; 4],
+    /// x ripple strength, y caustics strength, z ripple count.
+    water: [f32; 4],
+    /// xy centre, z liquid surface height, w start time.
+    ripples: [[f32; 4]; crate::water::MAX_RIPPLES],
+    ripple_amp: [[f32; 4]; crate::water::MAX_RIPPLES / 4],
 }
 
 /// ironwail NOISESCALE.
@@ -599,6 +604,26 @@ impl Renderer {
         }
         let style_ints: Vec<i32> = styles.iter().map(|&v| v as i32).collect();
 
+        // liquid ripples/splashes (CPU side); droplets join the particles
+        let mut water_parts = Vec::new();
+        if let Some(wg) = &self.world
+            && fr.view.is_some()
+        {
+            let models = &self.models;
+            let movers = fr.entities.iter().filter_map(|e| {
+                let alias = matches!(models.get(e.model.0 as usize), Some(Model::Alias(_)));
+                (alias && e.key != 0 && !e.viewmodel).then_some((e.key, e.origin))
+            });
+            water_parts = self.water_fx.update(
+                &wg.cpu,
+                time,
+                movers,
+                fr.player,
+                st.water_ripples > 0.0,
+                st.water_splashes,
+            );
+        }
+
         let mut world_draws: Vec<WorldDraw> = Vec::new();
         // per-object motion blur: last frame's transforms by entity key
         let mb_on = st.motion_blur > 0.0 && fr.view.is_some();
@@ -883,10 +908,11 @@ impl Renderer {
                     }
                 }
             }
-            if !fr.particles.is_empty() {
+            if !fr.particles.is_empty() || !water_parts.is_empty() {
                 let data: Vec<([f32; 3], u32)> = fr
                     .particles
                     .iter()
+                    .chain(water_parts.iter())
                     .map(|p| {
                         let c = self.palette[p.color as usize];
                         let a = (p.alpha.clamp(0.0, 1.0) * 255.0) as u32;
@@ -1037,6 +1063,26 @@ impl Renderer {
                 alphas,
                 soft: [soft.0, soft.1, 0.0, 0.0],
                 softf: [soft.2, soft.3, 0, 0],
+                water: [
+                    st.water_ripples.clamp(0.0, 4.0),
+                    st.water_caustics.clamp(0.0, 4.0),
+                    if st.water_ripples > 0.0 || st.water_caustics > 0.0 { self.water_fx.ripples.len() as f32 } else { 0.0 },
+                    0.0,
+                ],
+                ripples: {
+                    let mut r = [[0.0; 4]; crate::water::MAX_RIPPLES];
+                    for (d, w) in r.iter_mut().zip(&self.water_fx.ripples) {
+                        *d = [w.pos[0], w.pos[1], w.pos[2], w.t0];
+                    }
+                    r
+                },
+                ripple_amp: {
+                    let mut a = [[0.0; 4]; crate::water::MAX_RIPPLES / 4];
+                    for (i, w) in self.water_fx.ripples.iter().enumerate() {
+                        a[i / 4][i % 4] = w.amp;
+                    }
+                    a
+                },
             };
             dynw.write_at(0, &[ubo]);
             let mut lmd = LmDyn {

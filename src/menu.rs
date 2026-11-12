@@ -238,6 +238,7 @@ const SCALE: &[(&str, f32)] = &[("50%", 0.5), ("75%", 0.75), ("100%", 1.0), ("12
 const FILTER: &[(&str, f32)] = &[("nearest", 0.0), ("linear", 1.0)];
 const ANISO: &[(&str, f32)] = &[("off", 1.0), ("2x", 2.0), ("4x", 4.0), ("8x", 8.0), ("16x", 16.0)];
 const SOFTEMU: &[(&str, f32)] = &[("off", 0.0), ("fine", 1.0), ("coarse", 2.0), ("banded", 3.0)];
+const WATERFX: &[(&str, f32)] = &[("off", 0.0), ("subtle", 0.5), ("normal", 1.0), ("strong", 2.0)];
 const SSAO: &[(&str, f32)] = &[("off", 0.0), ("low", 0.5), ("medium", 1.0), ("high", 2.0)];
 const MODES: [&str; 3] = ["windowed", "fullscreen", "borderless"];
 
@@ -261,6 +262,9 @@ const GRAPHICS: &[Item] = &[
     Item::Choice { label: "Ambient Occlusion", cvar: "r_ssao", choices: SSAO },
     toggle("Motion Blur", "r_motionblur"),
     slider("Motion Blur Amount", "r_motionblur_amount", 0.1, 2.0, 0.1),
+    Item::Choice { label: "Water Ripples", cvar: "r_waterripples", choices: WATERFX },
+    toggle("Water Splashes", "r_watersplash"),
+    Item::Choice { label: "Water Caustics", cvar: "r_watercaustics", choices: WATERFX },
     toggle("Interpolate Animation", "r_lerpmodels"),
     toggle("Interpolate Movement", "r_lerpmove"),
 ];
@@ -368,6 +372,9 @@ fn tooltip(item: Item) -> Option<&'static str> {
         "r_ssao" => "Darkens corners and contact areas where geometry meets",
         "r_motionblur" => "Blurs fast-moving monsters, projectiles and doors (not camera turns)",
         "r_motionblur_amount" => "Length of the motion blur streaks",
+        "r_waterripples" => "Liquid surfaces swell and ring out where things move through them",
+        "r_watersplash" => "Droplets spray up when things enter or leave water, slime or lava",
+        "r_watercaustics" => "Rippling light patterns on surfaces under water and slime",
         "aim_slowdown" => "Slows stick look while the crosshair is over an enemy",
         "aim_rotation" => "Turns the view to follow a moving enemy you are aiming at",
         "a11y_reducemotion" => "Turns off view bob, strafe tilt and the camera kick when hit or firing",
