@@ -619,6 +619,8 @@ impl Renderer {
                 time,
                 movers,
                 fr.player,
+                fr.view.map(|v| v.origin),
+                fr.shot_impacts,
                 st.water_ripples > 0.0,
                 st.water_splashes,
             );

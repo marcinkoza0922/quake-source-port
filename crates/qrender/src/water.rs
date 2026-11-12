@@ -128,15 +128,58 @@ impl WaterFx {
         }
     }
 
+    /// A bullet, nail or explosion impact at `hit`: splashes where the line
+    /// from the view to it crosses a liquid surface (the shooter is unknown;
+    /// the view is right for the player's own shots), and explosions just
+    /// under a surface throw up a big splash above them.
+    fn shot(&mut self, world: &World, eye: [f32; 3], hit: [f32; 3], time: f64, ripples: bool, splashes: bool) {
+        let wet = |p: [f32; 3]| world.liquid_surface(p).map_or(0, |(_, k)| k & 3);
+        let (we, wh) = (wet(eye), wet(hit));
+        let emit = |fx: &mut Self, at: [f32; 3], k: u32, strength: f32| {
+            if ripples {
+                fx.add_ripple(at, time, 1.2 * strength);
+            }
+            if splashes {
+                fx.splash(at, k, strength, time);
+            }
+        };
+        if we != wh {
+            // bisect the segment for the crossing
+            let (mut a, mut b) = (eye, hit);
+            for _ in 0..12 {
+                let m = [0.5 * (a[0] + b[0]), 0.5 * (a[1] + b[1]), 0.5 * (a[2] + b[2])];
+                if wet(m) == we { a = m } else { b = m }
+            }
+            let (dry, wetp) = if we == 0 { (a, b) } else { (b, a) };
+            // only horizontal surfaces: the crossing must be vertical-ish
+            if let Some((z, k)) = world.liquid_surface(wetp)
+                && k & 4 == 0
+                && (z - dry[2]).abs() < 4.0
+            {
+                emit(self, [wetp[0], wetp[1], z], k & 3, 0.35);
+            }
+        } else if wh != 0
+            && let Some((z, k)) = world.liquid_surface(hit)
+            && k & 4 == 0
+            && z - hit[2] < 2.0
+        {
+            // impact right at the surface (e.g. shot along it)
+            emit(self, [hit[0], hit[1], z], k & 3, 0.35);
+        }
+    }
+
     /// Advances tracks, ripples and droplets; returns droplet particles.
     /// `movers` are (key, origin) of alias entities; `player` is the view
     /// entity origin.
+    #[allow(clippy::too_many_arguments)]
     pub fn update(
         &mut self,
         world: &World,
         time: f64,
         movers: impl Iterator<Item = (u32, [f32; 3])>,
         player: Option<[f32; 3]>,
+        eye: Option<[f32; 3]>,
+        shots: &[[f32; 3]],
         ripples: bool,
         splashes: bool,
     ) -> Vec<Particle> {
@@ -196,6 +239,13 @@ impl WaterFx {
                     self.tracks.get_mut(&key).unwrap().last_wake = time;
                     self.add_ripple([o[0], o[1], z], time, (hs / 320.0).clamp(0.2, 0.6));
                 }
+            }
+        }
+        if dt > 0.0
+            && let Some(eye) = eye
+        {
+            for &hit in shots {
+                self.shot(world, eye, hit, time, ripples, splashes);
             }
         }
         let frame = self.frame;

@@ -355,6 +355,10 @@ pub struct RenderFrame<'a> {
     /// The player's (view entity's) origin, for splashes and wakes; the view
     /// entity is usually not in `entities`.
     pub player: Option<Vec3>,
+    /// Shot impact points this frame (bullets, nails, explosions; never
+    /// beams): a splash where the line from the view to the impact crosses
+    /// a liquid surface.
+    pub shot_impacts: &'a [Vec3],
 }
 
 impl Default for RenderFrame<'_> {
@@ -374,6 +378,7 @@ impl Default for RenderFrame<'_> {
             draw2d: &[],
             settings: Settings::default(),
             player: None,
+            shot_impacts: &[],
         }
     }
 }

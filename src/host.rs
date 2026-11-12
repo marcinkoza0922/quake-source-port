@@ -2231,6 +2231,7 @@ impl Host {
                 ui.after_upload();
             }
         }
+        let impacts = std::mem::take(&mut self.cl.shot_impacts);
         let frame = qrender::RenderFrame {
             time: self.cl.time,
             view,
@@ -2245,6 +2246,7 @@ impl Host {
             blend,
             draw2d: &c.list,
             settings,
+            shot_impacts: &impacts,
             player: self.cl.entities.get(self.cl.viewentity).filter(|_| self.cl.viewentity > 0).map(|e| e.origin),
         };
         if let Err(e) = self.r.render(&frame) {

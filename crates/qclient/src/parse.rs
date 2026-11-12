@@ -613,6 +613,7 @@ impl ClientState {
         match ty {
             TE_WIZSPIKE => {
                 let pos = pos_of(m);
+                self.shot_impacts.push(pos);
                 if !self.fte_effect("TE_WIZSPIKE", pos, 1.0) {
                     self.run_particle_effect(pos, [0.0; 3], 20, 30);
                 }
@@ -620,6 +621,7 @@ impl ClientState {
             }
             TE_KNIGHTSPIKE => {
                 let pos = pos_of(m);
+                self.shot_impacts.push(pos);
                 if !self.fte_effect("TE_KNIGHTSPIKE", pos, 1.0) {
                     self.run_particle_effect(pos, [0.0; 3], 226, 20);
                 }
@@ -628,6 +630,7 @@ impl ClientState {
             TE_SPIKE | TE_SUPERSPIKE => {
                 let pos = pos_of(m);
                 let name = if ty == TE_SPIKE { "TE_SPIKE" } else { "TE_SUPERSPIKE" };
+                self.shot_impacts.push(pos);
                 if !self.fte_effect(name, pos, 1.0) {
                     self.run_particle_effect(pos, [0.0; 3], 0, if ty == TE_SPIKE { 10 } else { 20 });
                 }
@@ -644,12 +647,14 @@ impl ClientState {
             }
             TE_GUNSHOT => {
                 let pos = pos_of(m);
+                self.shot_impacts.push(pos);
                 if !self.fte_effect("TE_GUNSHOT", pos, 20.0) {
                     self.run_particle_effect(pos, [0.0; 3], 0, 20);
                 }
             }
             TE_EXPLOSION => {
                 let pos = pos_of(m);
+                self.shot_impacts.push(pos);
                 if !self.fte_effect("TE_EXPLOSION", pos, 1.0) {
                     self.particle_explosion(pos);
                 }
@@ -658,6 +663,7 @@ impl ClientState {
             }
             TE_TAREXPLOSION => {
                 let pos = pos_of(m);
+                self.shot_impacts.push(pos);
                 if !self.fte_effect("TE_TAREXPLOSION", pos, 1.0) {
                     self.blob_explosion(pos);
                 }
@@ -683,6 +689,7 @@ impl ClientState {
                 let pos = pos_of(m);
                 let start = m.byte();
                 let len = m.byte();
+                self.shot_impacts.push(pos);
                 if !self.fte_effect(&format!("TE_EXPLOSION2_{start}_{len}"), pos, 1.0) {
                     self.particle_explosion2(pos, start, len);
                 }
