@@ -59,7 +59,7 @@ impl ClientState {
         true
     }
 
-    pub(crate) fn fte_trail(&mut self, name: &str, start: [f32; 3], end: [f32; 3], entity: i32) -> bool {
+    pub fn fte_trail(&mut self, name: &str, start: [f32; 3], end: [f32; 3], entity: i32) -> bool {
         if !self.fte_names.has(name) {
             return false;
         }

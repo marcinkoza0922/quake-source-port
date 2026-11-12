@@ -64,6 +64,21 @@ pub struct RenderEntity {
     /// Stable identity across frames for per-object motion blur (the client
     /// entity number); 0 = none (statics, temp entities, the view entity).
     pub key: u32,
+    /// Alias model drawn from a CPU-built pose in [`RenderFrame::dyn_verts`]
+    /// instead of its own frames (ragdolls).
+    pub dyn_pose: Option<DynPose>,
+}
+
+/// A per-frame alias pose: `num_verts` packed vertices (x, y, z bytes and an
+/// anorm index) at `ofs` in [`RenderFrame::dyn_verts`], placed in world space
+/// as `origin + v * scale` (no entity rotation).
+#[derive(Clone, Copy, Debug, PartialEq)]
+pub struct DynPose {
+    pub ofs: u32,
+    pub origin: Vec3,
+    pub scale: Vec3,
+    /// Culling radius around the entity origin.
+    pub radius: f32,
 }
 
 impl Default for RenderEntity {
@@ -83,6 +98,7 @@ impl Default for RenderEntity {
             fullbright: false,
             player: false,
             key: 0,
+            dyn_pose: None,
         }
     }
 }
@@ -359,6 +375,8 @@ pub struct RenderFrame<'a> {
     /// beams): a splash where the line from the view to the impact crosses
     /// a liquid surface. The flag marks explosions (big splash underwater).
     pub shot_impacts: &'a [(Vec3, bool)],
+    /// Packed alias vertices referenced by [`RenderEntity::dyn_pose`].
+    pub dyn_verts: &'a [u32],
 }
 
 impl Default for RenderFrame<'_> {
@@ -379,6 +397,7 @@ impl Default for RenderFrame<'_> {
             settings: Settings::default(),
             player: None,
             shot_impacts: &[],
+            dyn_verts: &[],
         }
     }
 }

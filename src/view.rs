@@ -378,11 +378,14 @@ impl ViewState {
                 player,
                 // motion blur identity; the view entity moves with the camera
                 key: if idx > 0 && idx != cl.viewentity { idx as u32 } else { 0 },
+                dyn_pose: None,
             }
         };
         for k in 0..cl.visedicts.len() {
             let i = cl.visedicts[k];
-            if self.replaced_models.get(cl.entities[i].model).copied().unwrap_or(false) {
+            if self.replaced_models.get(cl.entities[i].model).copied().unwrap_or(false)
+                || cl.debris_owned.get(i).copied().unwrap_or(false)
+            {
                 continue;
             }
             let Some(m) = lv.models.get(cl.entities[i].model).copied().flatten() else { continue };

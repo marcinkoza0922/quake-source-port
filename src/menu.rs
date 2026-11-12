@@ -56,6 +56,7 @@ pub enum Page {
     HudLayout,
     Messages,
     Water,
+    Debris,
     /// Multiplayer pages (reached from Screen::Multiplayer).
     Join,
     Host,

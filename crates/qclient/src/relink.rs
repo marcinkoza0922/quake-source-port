@@ -180,6 +180,7 @@ impl ClientState {
             .find(|(f, _)| mflags & f != 0)
             .map(|(_, n)| n);
             let relinked = self.entities[i].forcelink || self.entities[i].lerpflags & LERP_RESETMOVE != 0;
+            let owned = self.debris_owned.get(i).copied().unwrap_or(false);
             // .traileffectnum (replacement deltas) replaces the model's trail.
             let net_trail = self.entities[i].traileffect;
             if net_trail > 0
@@ -190,7 +191,7 @@ impl ClientState {
                     self.fte_queue.push(r);
                 }
                 Self::reset_trail(&mut self.entities[i]);
-            } else if let Some(name) = fte_trail
+            } else if let Some(name) = fte_trail.filter(|_| !owned)
                 && self.fte_names.has(name)
             {
                 // A teleported entity draws no trail this frame.
@@ -204,6 +205,8 @@ impl ClientState {
                     dl.radius = 200.0;
                     dl.die = t + 0.01;
                 }
+            } else if owned {
+                Self::reset_trail(&mut self.entities[i]);
             } else if mflags & MF_GIB != 0 {
                 self.ent_trail(i, 2);
             } else if mflags & MF_ZOMGIB != 0 {

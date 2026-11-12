@@ -215,6 +215,8 @@ pub(super) const GRAPHICS: &[Item] = &[
     slider("Motion Blur Amount", "r_motionblur_amount", 0.1, 2.0, 0.1),
     toggle("Enhanced Water", "r_enhancedwater"),
     Item::Sub { label: "Water Settings", page: Page::Water },
+    toggle("Ragdolls & Debris", "r_debris"),
+    Item::Sub { label: "Debris Settings", page: Page::Debris },
     toggle("Interpolate Animation", "r_lerpmodels"),
     toggle("Interpolate Movement", "r_lerpmove"),
 ];
@@ -227,6 +229,20 @@ pub(super) const WATER: &[Item] = &[
     toggle("Splashes", "r_watersplash"),
     toggle("Caustics", "r_watercaustics"),
     slider("Caustic Intensity", "r_watercaustics_amount", 0.1, 2.0, 0.1),
+];
+
+pub(super) const RAGDOLL_START: &[(&str, f32)] = &[("after animation", 0.0), ("at death", 1.0), ("mixed", 2.0)];
+
+/// Reached from Graphics; unavailable while `r_debris` is off.
+pub(super) const DEBRIS: &[Item] = &[
+    toggle("Ragdolls", "r_debris_ragdolls"),
+    Item::Choice { label: "Ragdoll Start", cvar: "r_debris_ragdollstart", choices: RAGDOLL_START },
+    slider("Max Ragdolls", "r_debris_maxragdolls", 8.0, 64.0, 8.0),
+    toggle("Gibs", "r_debris_gibs"),
+    toggle("Shrapnel", "r_debris_shrapnel"),
+    toggle("Hit Doors & Lifts", "r_debris_movers"),
+    slider("Push Strength", "r_debris_force", 0.0, 6.0, 0.25),
+    toggle("Kill Lift", "r_debris_killlift"),
 ];
 
 pub(super) const COLORBLIND: &[(&str, f32)] =

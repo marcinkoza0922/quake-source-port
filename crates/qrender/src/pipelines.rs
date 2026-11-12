@@ -139,6 +139,8 @@ impl Pipelines {
             b(7, vk::DescriptorType::COMBINED_IMAGE_SAMPLER, 1),
             // MSAA scene colour, read by SSAO (alpha = AO mask)
             b(8, vk::DescriptorType::COMBINED_IMAGE_SAMPLER, 1),
+            // the per-frame dynamic buffer, for CPU-built alias poses
+            b(9, vk::DescriptorType::STORAGE_BUFFER, 1),
         ];
         let flags = [
             vk::DescriptorBindingFlags::empty(),
@@ -150,6 +152,7 @@ impl Pipelines {
             vk::DescriptorBindingFlags::PARTIALLY_BOUND,
             vk::DescriptorBindingFlags::PARTIALLY_BOUND,
             vk::DescriptorBindingFlags::PARTIALLY_BOUND,
+            vk::DescriptorBindingFlags::empty(),
         ];
         let mut fi = vk::DescriptorSetLayoutBindingFlagsCreateInfo::default().binding_flags(&flags);
         let ci = vk::DescriptorSetLayoutCreateInfo::default()

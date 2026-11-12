@@ -182,6 +182,9 @@ pub struct ClientState {
     pub static_sounds: Vec<StaticSound>,
     /// Entity indices to draw this frame (CL_RelinkEntities).
     pub visedicts: Vec<usize>,
+    /// Entities the host's debris physics draws itself (ragdolls, gibs):
+    /// skipped when drawing and get no model trail. Empty when unused.
+    pub debris_owned: Vec<bool>,
     pub temp_entities: Vec<TempEntity>,
     pub viewentity: usize,
     /// Weapon model state (cl.viewent).
@@ -233,6 +236,9 @@ pub struct ClientState {
     /// them (water splashes where the shot crossed a liquid surface); the
     /// flag marks explosions.
     pub shot_impacts: Vec<([f32; 3], bool)>,
+    /// Where shots drew blood this frame (`svc_particle` in blood colour:
+    /// QC's SpawnBlood), so client effects know a body was hit.
+    pub blood_hits: Vec<[f32; 3]>,
     pub dlights: Pool<Dlight>,
     pub particles: ParticlePool,
     pub(crate) avelocities: Vec<[f32; 3]>,
@@ -285,6 +291,7 @@ impl ClientState {
             static_entities: Vec::new(),
             static_sounds: Vec::new(),
             visedicts: Vec::new(),
+            debris_owned: Vec::new(),
             temp_entities: Vec::new(),
             viewentity: 0,
             viewent: ClientEntity::default(),
@@ -322,6 +329,7 @@ impl ClientState {
             fog: Fog::default(),
             beams: Pool::with_max(MAX_BEAMS),
             shot_impacts: Vec::new(),
+            blood_hits: Vec::new(),
             dlights: Pool::with_max(MAX_DLIGHTS),
             particles: ParticlePool::new(MAX_PARTICLES),
             avelocities: Vec::new(),

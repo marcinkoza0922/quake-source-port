@@ -12,6 +12,7 @@ impl Host {
         self.sync_ui_text();
         c.ui = Some(self.ui_text.clone());
         let mut ents = Vec::new();
+        let mut dyn_verts = Vec::new();
         let mut parts = Vec::new();
         let mut dls = Vec::new();
         let mut fte = (Vec::new(), Vec::new(), Vec::new());
@@ -21,6 +22,31 @@ impl Host {
             let cv = self.view_cvars();
             self.view.replaced_models = self.fte.replaced_models(&self.cl, fs);
             self.view.entities(&mut self.cl, &cv, &mut self.level, fs, &mut self.r, &mut ents);
+            let debris_on = self.cv("r_debris") != 0.0;
+            let gravity = self.cv("sv_gravity");
+            let set = crate::debris::Settings {
+                ragdolls: self.cv("r_debris_ragdolls") != 0.0,
+                start: crate::debris::Start::from_cvar(self.cv("r_debris_ragdollstart")),
+                max_ragdolls: self.cv("r_debris_maxragdolls").clamp(1.0, 128.0) as usize,
+                gibs: self.cv("r_debris_gibs") != 0.0,
+                shrapnel: self.cv("r_debris_shrapnel") != 0.0,
+                movers: self.cv("r_debris_movers") != 0.0,
+                force: self.cv("r_debris_force").clamp(0.0, 6.0),
+                kill_lift: self.cv("r_debris_killlift") != 0.0,
+            };
+            self.debris.update(
+                debris_on,
+                crate::debris::Frame {
+                    cl: &mut self.cl,
+                    lv: &mut self.level,
+                    fs: &self.server.core.fs,
+                    r: &mut self.r,
+                    view: v.origin.into(),
+                    gravity: if gravity > 0.0 { gravity } else { 800.0 },
+                    set,
+                },
+            );
+            self.debris.entities(&mut ents, &mut dyn_verts);
             if self.cv("r_drawentities") == 0.0 {
                 ents.clear();
             }
@@ -187,6 +213,7 @@ impl Host {
             }
         }
         let impacts = std::mem::take(&mut self.cl.shot_impacts);
+        self.cl.blood_hits.clear();
         let frame = qrender::RenderFrame {
             time: self.cl.time,
             view,
@@ -202,6 +229,7 @@ impl Host {
             draw2d: &c.list,
             settings,
             shot_impacts: &impacts,
+            dyn_verts: &dyn_verts,
             player: self.cl.entities.get(self.cl.viewentity).filter(|_| self.cl.viewentity > 0).map(|e| e.origin),
         };
         if let Err(e) = self.r.render(&frame) {

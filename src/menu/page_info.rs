@@ -19,6 +19,15 @@ pub(super) fn tooltip(item: Item) -> Option<&'static str> {
         "r_ssao" => "Darkens corners and contact areas where geometry meets",
         "r_motionblur" => "Blurs fast-moving monsters, projectiles and doors (not camera turns)",
         "r_motionblur_amount" => "Length of the motion blur streaks",
+        "r_debris" => "Corpses go limp as ragdolls, gibs tumble and barrels throw shrapnel; shots and blasts push them (cosmetic only)",
+        "r_debris_ragdolls" => "Corpses go limp and fall as ragdolls",
+        "r_debris_ragdollstart" => "After animation keeps the death animations; at death goes limp the moment a monster dies; mixed goes limp on a hard hit, and the weaker the killing hit the likelier the animation plays",
+        "r_debris_maxragdolls" => "How many ragdolls can lie around at once",
+        "r_debris_gibs" => "Gibs and heads tumble and bounce; blasts can gib ragdolls",
+        "r_debris_shrapnel" => "Exploding boxes throw metal shards",
+        "r_debris_movers" => "Debris lands on and is carried or shoved by doors, lifts and platforms",
+        "r_debris_killlift" => "With ragdolls starting at death, a killing shot also lifts the body off its feet",
+        "r_debris_force" => "How hard shots and explosions push debris around",
         "r_enhancedwater" => "Turns on the extra liquid effects; Water Settings controls each one",
         "r_wateralpha" => "How see-through water surfaces are",
         "r_waterripples_amount" => "Strength of the surface swell and rings",
@@ -73,6 +82,7 @@ pub(super) fn page_items(p: Page) -> &'static [Item] {
         Page::HudLayout => HUD_LAYOUT,
         Page::Messages => MESSAGES,
         Page::Water => WATER,
+        Page::Debris => DEBRIS,
         Page::Mouse => MOUSE,
         Page::Controller => CONTROLLER,
         Page::Autosave => AUTOSAVE,
@@ -95,6 +105,7 @@ pub(super) fn page_name(p: Page) -> &'static str {
         Page::HudLayout => "Modern HUD Layout",
         Page::Messages => "Messages & Captions",
         Page::Water => "Water Settings",
+        Page::Debris => "Debris Settings",
         _ => PAGES.iter().find(|x| x.1 == p).map_or("", |x| x.0),
     }
 }
@@ -111,6 +122,7 @@ pub(super) fn sub_disabled(page: Page, cv: &Cvars) -> bool {
     (page == Page::Autosave && cv.value_of("sv_autosave") == 0.0)
         || (page == Page::HudLayout && cv.value_of("scr_hudstyle") == 0.0)
         || (page == Page::Water && cv.value_of("r_enhancedwater") == 0.0)
+        || (page == Page::Debris && cv.value_of("r_debris") == 0.0)
 }
 
 pub(super) fn is_net_page(p: Page) -> bool {

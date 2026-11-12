@@ -9,6 +9,7 @@ mod assets;
 mod autosave;
 mod captions;
 mod console;
+mod debris;
 mod demo;
 mod draw;
 mod font;

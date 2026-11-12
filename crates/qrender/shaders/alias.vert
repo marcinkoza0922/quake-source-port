@@ -20,8 +20,10 @@ float shadedot(vec3 n) {
     return d < 0.0 ? 1.0 + d * (13.0 / 44.0) : 1.0 + d;
 }
 void main() {
-    uint a = alias_verts[pc.poses.x + in_vert];
-    uint b = alias_verts[pc.poses.y + in_vert];
+    // flag 16: a CPU-built pose in the per-frame buffer (ragdolls)
+    bool dyn = (pc.texs.w & 16u) != 0u;
+    uint a = dyn ? dyn_verts[pc.poses.x + in_vert] : alias_verts[pc.poses.x + in_vert];
+    uint b = dyn ? a : alias_verts[pc.poses.y + in_vert];
     vec3 pa = vec3(a & 0xffu, (a >> 8) & 0xffu, (a >> 16) & 0xffu);
     vec3 pb = vec3(b & 0xffu, (b >> 8) & 0xffu, (b >> 16) & 0xffu);
     float blend = pc.shadevec.w;
