@@ -264,6 +264,13 @@ pub struct Settings {
     /// r_motionblur: per-object motion blur; the blur covers this fraction of
     /// the motion over 1/60 s (0 = off). Camera motion is not blurred.
     pub motion_blur: f32,
+    /// r_waterripples: ripple rings and gentle swell on liquid surfaces
+    /// (strength, 0 = classic flat warp).
+    pub water_ripples: f32,
+    /// r_watersplash: droplet splashes when things enter or leave liquids.
+    pub water_splashes: bool,
+    /// r_watercaustics: animated caustics on submerged world faces (strength).
+    pub water_caustics: f32,
 }
 
 /// gl_texturemode names (ironwail order): (name, linear mag/min, mipmapped, linear mips).
@@ -317,6 +324,9 @@ impl Default for Settings {
             ssao: 0.0,
             ssao_radius: 32.0,
             motion_blur: 0.0,
+            water_ripples: 0.0,
+            water_splashes: false,
+            water_caustics: 0.0,
         }
     }
 }
@@ -342,6 +352,13 @@ pub struct RenderFrame<'a> {
     pub blend: [f32; 4],
     pub draw2d: &'a [Draw2D],
     pub settings: Settings,
+    /// The player's (view entity's) origin, for splashes and wakes; the view
+    /// entity is usually not in `entities`.
+    pub player: Option<Vec3>,
+    /// Shot impact points this frame (bullets, nails, explosions; never
+    /// beams): a splash where the line from the view to the impact crosses
+    /// a liquid surface. The flag marks explosions (big splash underwater).
+    pub shot_impacts: &'a [(Vec3, bool)],
 }
 
 impl Default for RenderFrame<'_> {
@@ -360,6 +377,8 @@ impl Default for RenderFrame<'_> {
             blend: [0.0; 4],
             draw2d: &[],
             settings: Settings::default(),
+            player: None,
+            shot_impacts: &[],
         }
     }
 }

@@ -12,6 +12,9 @@ pub struct WorldVertex {
     pub pos: [f32; 3],
     pub st: [f32; 2],
     pub lm: [f32; 3],
+    /// Underwater faces: height of the liquid surface above and liquid kind
+    /// (1 water, 2 lava, 3 slime; +4 when the column is roofed). 0 kind = dry.
+    pub liquid: [f32; 2],
 }
 
 /// GPU layout of `Surf` in lightmap.comp (std430, 96 bytes).
@@ -182,6 +185,9 @@ impl World {
             },
         };
         w.append(bsp, lit, 0);
+        if let Some(m) = bsp.models.first() {
+            w.bake_liquid(m.first_face.max(0) as usize, m.num_faces.max(0) as usize);
+        }
         w
     }
 
@@ -350,7 +356,7 @@ impl World {
                     [0.0; 3]
                 };
                 let st = st.map(|c| c / tex_div);
-                w.vertices.push(WorldVertex { pos: *v, st, lm });
+                w.vertices.push(WorldVertex { pos: *v, st, lm, liquid: [0.0; 2] });
             }
             for i in 1..verts.len() as u32 - 1 {
                 w.indices.extend_from_slice(&[base, base + i, base + i + 1]);
@@ -392,6 +398,80 @@ impl World {
             ((time * 5.0) as i64).rem_euclid(seq.len() as i64) as usize
         };
         seq[i]
+    }
+
+    /// Leaf contents at a point (world model hull 0).
+    pub fn point_contents(&self, p: [f32; 3]) -> i32 {
+        self.leafs.get(self.point_leaf(p)).map_or(qformats::bsp::CONTENTS_SOLID, |l| l.contents)
+    }
+
+    /// Liquid at `p`: (surface height above it, kind 1 water/2 lava/3 slime,
+    /// +4 if something solid caps the column instead of open air).
+    pub fn liquid_surface(&self, p: [f32; 3]) -> Option<(f32, u32)> {
+        use qformats::bsp::{CONTENTS_LAVA, CONTENTS_SLIME, CONTENTS_SOLID, CONTENTS_WATER};
+        let c = self.point_contents(p);
+        let kind = match c {
+            CONTENTS_WATER => 1,
+            CONTENTS_LAVA => 2,
+            CONTENTS_SLIME => 3,
+            _ => return None,
+        };
+        let at = |z: f32| self.point_contents([p[0], p[1], z]);
+        let (mut lo, mut hi) = (p[2], p[2]);
+        loop {
+            hi += 16.0;
+            if hi - p[2] > 4096.0 {
+                return Some((hi, kind));
+            }
+            if at(hi) != c {
+                break;
+            }
+            lo = hi;
+        }
+        for _ in 0..6 {
+            let mid = 0.5 * (lo + hi);
+            if at(mid) == c { lo = mid } else { hi = mid }
+        }
+        let capped = at(hi + 1.0) == CONTENTS_SOLID;
+        Some((0.5 * (lo + hi), kind + if capped { 4 } else { 0 }))
+    }
+
+    /// Stores the liquid surface above each submerged world face in its
+    /// vertices (caustics). Probes just off the face at its corners and centre.
+    fn bake_liquid(&mut self, first: usize, count: usize) {
+        for si in first..(first + count).min(self.surfaces.len()) {
+            let s = &self.surfaces[si];
+            if s.num_indices == 0 || !matches!(s.kind, TextureKind::Normal | TextureKind::Fence) {
+                continue;
+            }
+            let base = self.indices[s.first_index as usize] as usize;
+            let n = s.num_indices as usize / 3 + 2;
+            let nrm = if s.flipped { s.normal.map(|c| -c) } else { s.normal };
+            let mut cen = [0.0f32; 3];
+            for v in &self.vertices[base..base + n] {
+                for (c, p) in cen.iter_mut().zip(v.pos) {
+                    *c += p / n as f32;
+                }
+            }
+            let mut best: Option<(f32, u32)> = None;
+            let probes = self.vertices[base..base + n].iter().map(|v| v.pos).chain(std::iter::once(cen));
+            for v in probes {
+                let d = [cen[0] - v[0], cen[1] - v[1], cen[2] - v[2]];
+                let l = dot(d, d).sqrt();
+                let inward = if l > 1.0 { 1.0 / l } else { 0.0 };
+                let p = [0, 1, 2].map(|k| v[k] + d[k] * inward + nrm[k]);
+                if let Some(h) = self.liquid_surface(p)
+                    && best.is_none_or(|b| h.0 > b.0)
+                {
+                    best = Some(h);
+                }
+            }
+            if let Some((z, k)) = best {
+                for v in &mut self.vertices[base..base + n] {
+                    v.liquid = [z, k as f32];
+                }
+            }
+        }
     }
 
     pub fn point_leaf(&self, p: [f32; 3]) -> usize {

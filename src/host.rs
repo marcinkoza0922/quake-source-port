@@ -201,6 +201,12 @@ const COMPAT_CVARS: &[(&str, &str, u32)] = &[
     ("r_ssao_radius", "32", CVAR_ARCHIVE),
     ("r_motionblur", "0", CVAR_ARCHIVE),
     ("r_motionblur_amount", "0.5", CVAR_ARCHIVE),
+    ("r_enhancedwater", "0", CVAR_ARCHIVE),
+    ("r_waterripples", "0", CVAR_ARCHIVE),
+    ("r_watersplash", "0", CVAR_ARCHIVE),
+    ("r_watercaustics", "0", CVAR_ARCHIVE),
+    ("r_waterripples_amount", "1", CVAR_ARCHIVE),
+    ("r_watercaustics_amount", "1", CVAR_ARCHIVE),
     ("cl_nopext", "0", CVAR_ARCHIVE),
     ("r_softparticledistance", "4", CVAR_ARCHIVE),
     ("r_bouncysparks", "1", 0),
@@ -630,6 +636,9 @@ impl Host {
                 }
             }
             HostEvent::Input(ie) => {
+                if let InputEvent::MouseButton { button: 1, down: false } = ie {
+                    self.menu.mouse_up();
+                }
                 if let InputEvent::Key { key, down: true } = ie
                     && key == b'`' as i32
                 {
@@ -2207,6 +2216,9 @@ impl Host {
             } else {
                 v("r_motionblur_amount").clamp(0.0, 4.0)
             },
+            water_ripples: if v("r_enhancedwater") != 0.0 && v("r_waterripples") != 0.0 { v("r_waterripples_amount").clamp(0.0, 4.0) } else { 0.0 },
+            water_splashes: v("r_enhancedwater") != 0.0 && v("r_watersplash") != 0.0,
+            water_caustics: if v("r_enhancedwater") != 0.0 && v("r_watercaustics") != 0.0 { v("r_watercaustics_amount").clamp(0.0, 4.0) } else { 0.0 },
             ..Settings::default()
         };
         {
@@ -2220,6 +2232,7 @@ impl Host {
                 ui.after_upload();
             }
         }
+        let impacts = std::mem::take(&mut self.cl.shot_impacts);
         let frame = qrender::RenderFrame {
             time: self.cl.time,
             view,
@@ -2234,6 +2247,8 @@ impl Host {
             blend,
             draw2d: &c.list,
             settings,
+            shot_impacts: &impacts,
+            player: self.cl.entities.get(self.cl.viewentity).filter(|_| self.cl.viewentity > 0).map(|e| e.origin),
         };
         if let Err(e) = self.r.render(&frame) {
             self.con.print(&format!("render error: {e:?}\n"));

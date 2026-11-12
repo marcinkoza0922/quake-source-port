@@ -21,6 +21,11 @@ struct FrameUbo {
     alphas: [f32; 4],
     soft: [f32; 4],
     softf: [u32; 4],
+    /// x ripple strength, y caustics strength, z ripple count.
+    water: [f32; 4],
+    /// xy centre, z liquid surface height, w start time.
+    ripples: [[f32; 4]; crate::water::MAX_RIPPLES],
+    ripple_amp: [[f32; 4]; crate::water::MAX_RIPPLES / 4],
 }
 
 /// ironwail NOISESCALE.
@@ -599,6 +604,28 @@ impl Renderer {
         }
         let style_ints: Vec<i32> = styles.iter().map(|&v| v as i32).collect();
 
+        // liquid ripples/splashes (CPU side); droplets join the particles
+        let mut water_parts = Vec::new();
+        if let Some(wg) = &self.world
+            && fr.view.is_some()
+        {
+            let models = &self.models;
+            let movers = fr.entities.iter().filter_map(|e| {
+                let alias = matches!(models.get(e.model.0 as usize), Some(Model::Alias(_)));
+                (alias && e.key != 0 && !e.viewmodel).then_some((e.key, e.origin))
+            });
+            water_parts = self.water_fx.update(
+                &wg.cpu,
+                time,
+                movers,
+                fr.player,
+                fr.view.map(|v| v.origin),
+                fr.shot_impacts,
+                st.water_ripples > 0.0,
+                st.water_splashes,
+            );
+        }
+
         let mut world_draws: Vec<WorldDraw> = Vec::new();
         // per-object motion blur: last frame's transforms by entity key
         let mb_on = st.motion_blur > 0.0 && fr.view.is_some();
@@ -903,16 +930,67 @@ impl Renderer {
                     };
                 }
             }
-            if !fr.fte_batches.is_empty() && !fr.fte_indices.is_empty() {
-                let batches: Vec<_> = fr
-                    .fte_batches
+            // water spray puffs: camera-facing quads appended to the FTE geometry
+            let mut spray_v: Vec<FteVertex> = Vec::new();
+            let mut spray_i: Vec<u32> = Vec::new();
+            let mut spray_b: Vec<FteBatch> = Vec::new();
+            if let Some(pic) = self.splash_pic {
+                let base = fr.fte_vertices.len() as u32;
+                // splash droplets: small soft dots (classic particles are too
+                // coarse), kept at least ~1.5 px wide in the distance
+                let px = 2.0 * vs.tan[1] / scene_h.max(1) as f32;
+                let drops = water_parts.iter().map(|d| {
+                    let c = self.palette[d.color as usize];
+                    let dist = dot(sub(d.origin, vs.eye), vs.fwd).max(1.0);
+                    crate::water::SprayPuff {
+                        pos: d.origin,
+                        radius: (0.75f32).max(0.75 * px * dist),
+                        color: [c[0], c[1], c[2], (d.alpha.clamp(0.0, 1.0) * 255.0) as u8],
+                    }
+                });
+                for p in self.water_fx.spray(time).chain(drops) {
+                    if p.color[3] == 0 {
+                        continue;
+                    }
+                    let (r, u) = (vs.right, vs.up);
+                    let corner = |sr: f32, su: f32| {
+                        std::array::from_fn(|k| p.pos[k] + (r[k] * sr + u[k] * su) * p.radius)
+                    };
+                    let n = base + spray_v.len() as u32;
+                    for (sr, su, uv) in [(-1.0, -1.0, [0.0, 1.0]), (1.0, -1.0, [1.0, 1.0]), (1.0, 1.0, [1.0, 0.0]), (-1.0, 1.0, [0.0, 0.0])] {
+                        spray_v.push(FteVertex { pos: corner(sr, su), uv, color: p.color });
+                    }
+                    spray_i.extend_from_slice(&[n, n + 1, n + 2, n, n + 2, n + 3]);
+                }
+                if !spray_i.is_empty() {
+                    spray_b.push(FteBatch {
+                        pic,
+                        blend: FteBlend::Blend,
+                        lines: false,
+                        first_index: fr.fte_indices.len() as u32,
+                        num_indices: spray_i.len() as u32,
+                        soft: true,
+                    });
+                }
+            }
+            let (fte_v, fte_i, fte_b);
+            let (fte_vertices, fte_indices, fte_batches) = if spray_b.is_empty() {
+                (fr.fte_vertices, fr.fte_indices, fr.fte_batches)
+            } else {
+                fte_v = [fr.fte_vertices, &spray_v].concat();
+                fte_i = [fr.fte_indices, &spray_i].concat();
+                fte_b = [fr.fte_batches, &spray_b].concat();
+                (&fte_v[..], &fte_i[..], &fte_b[..])
+            };
+            if !fte_batches.is_empty() && !fte_indices.is_empty() {
+                let batches: Vec<_> = fte_batches
                     .iter()
                     .filter_map(|b| {
                         let slot = self.pics.get(b.pic.0 as usize)?.slot;
                         Some((crate::pipelines::fte_index(b.blend, b.lines), slot, *b))
                     })
                     .collect();
-                if let (Some(v), Some(i)) = (dynw.push(fr.fte_vertices, 16), dynw.push(fr.fte_indices, 4)) {
+                if let (Some(v), Some(i)) = (dynw.push(fte_vertices, 16), dynw.push(fte_indices, 4)) {
                     fte = Some((v, i, batches));
                 }
             }
@@ -1037,6 +1115,26 @@ impl Renderer {
                 alphas,
                 soft: [soft.0, soft.1, 0.0, 0.0],
                 softf: [soft.2, soft.3, 0, 0],
+                water: [
+                    st.water_ripples.clamp(0.0, 4.0),
+                    st.water_caustics.clamp(0.0, 4.0),
+                    if st.water_ripples > 0.0 || st.water_caustics > 0.0 { self.water_fx.ripples.len() as f32 } else { 0.0 },
+                    0.0,
+                ],
+                ripples: {
+                    let mut r = [[0.0; 4]; crate::water::MAX_RIPPLES];
+                    for (d, w) in r.iter_mut().zip(&self.water_fx.ripples) {
+                        *d = [w.pos[0], w.pos[1], w.pos[2], w.t0];
+                    }
+                    r
+                },
+                ripple_amp: {
+                    let mut a = [[0.0; 4]; crate::water::MAX_RIPPLES / 4];
+                    for (i, w) in self.water_fx.ripples.iter().enumerate() {
+                        a[i / 4][i % 4] = w.amp;
+                    }
+                    a
+                },
             };
             dynw.write_at(0, &[ubo]);
             let mut lmd = LmDyn {

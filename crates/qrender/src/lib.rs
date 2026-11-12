@@ -10,6 +10,7 @@ mod frame;
 mod gpu;
 mod pipelines;
 pub mod types;
+pub(crate) mod water;
 mod world;
 
 pub use types::*;
@@ -212,6 +213,8 @@ pub struct Renderer {
     /// Last frame's entity transforms by `RenderEntity::key` (motion blur).
     prev_xforms: std::collections::HashMap<u32, ([f32; 3], [f32; 3])>,
     prev_xform_time: f64,
+    /// Ripples, splashes and wakes on liquids (r_waterripples/r_watersplash).
+    water_fx: water::WaterFx,
     textures: Vec<Option<Tex>>,
     palette: Palette,
     palette_buf: Buffer,
@@ -220,6 +223,8 @@ pub struct Renderer {
     world: Option<WorldGpu>,
     models: Vec<Model>,
     pics: Vec<PicInfo>,
+    /// Soft round blob for water spray puffs (big underwater-blast splashes).
+    splash_pic: Option<PicId>,
     conchars: Option<PicId>,
     alias_cpu: Vec<u32>,
     alias_buf: Buffer,
@@ -402,6 +407,11 @@ impl Renderer {
             render_scale: 1.0,
             prev_xforms: Default::default(),
             prev_xform_time: 0.0,
+            water_fx: {
+                let mut w = water::WaterFx::default();
+                w.set_palette(palette);
+                w
+            },
             textures: Vec::new(),
             palette: *palette,
             palette_buf,
@@ -410,6 +420,7 @@ impl Renderer {
             world: None,
             models: Vec::new(),
             pics: Vec::new(),
+            splash_pic: None,
             conchars: None,
             alias_cpu: Vec::new(),
             alias_buf,
@@ -422,6 +433,7 @@ impl Renderer {
             capture: None,
         };
         r.write_static_descriptors();
+        r.splash_pic = r.register_pic_rgba_linear(32, 32, &water::spray_blob(32)).ok();
         Ok(r)
     }
 
@@ -535,7 +547,7 @@ impl Renderer {
             let ubo = [vk::DescriptorBufferInfo {
                 buffer: f.dynbuf.buf,
                 offset: 0,
-                range: 256,
+                range: 1024,
             }];
             let lmdyn = [vk::DescriptorBufferInfo {
                 buffer: f.dynbuf.buf,
@@ -847,6 +859,7 @@ impl Renderer {
         brushes: &[(&Bsp, Option<&[u8]>)],
     ) -> Result<(Vec<ModelId>, Vec<ModelId>)> {
         self.free_level();
+        self.water_fx.reset();
         let mut cpu = world::World::build(bsp, lit);
         let world_subs = cpu.submodels.len();
         let mut up = self.gpu.begin_upload()?;

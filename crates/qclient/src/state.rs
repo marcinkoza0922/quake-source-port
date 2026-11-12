@@ -229,6 +229,10 @@ pub struct ClientState {
     pub fog: Fog,
 
     pub beams: Pool<Beam>,
+    /// Bullet/nail/explosion impact points since the renderer last took
+    /// them (water splashes where the shot crossed a liquid surface); the
+    /// flag marks explosions.
+    pub shot_impacts: Vec<([f32; 3], bool)>,
     pub dlights: Pool<Dlight>,
     pub particles: ParticlePool,
     pub(crate) avelocities: Vec<[f32; 3]>,
@@ -317,6 +321,7 @@ impl ClientState {
             skybox: String::new(),
             fog: Fog::default(),
             beams: Pool::with_max(MAX_BEAMS),
+            shot_impacts: Vec::new(),
             dlights: Pool::with_max(MAX_DLIGHTS),
             particles: ParticlePool::new(MAX_PARTICLES),
             avelocities: Vec::new(),
