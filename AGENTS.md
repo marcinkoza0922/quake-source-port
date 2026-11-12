@@ -1,6 +1,12 @@
 # AGENTS.md
 - Language: Rust.
 - Specs: `PROPOSAL.md` (what), `docs/DESIGN.md` (how; keep updated).
+- File length: strive to keep Rust files under 500 lines, and keep
+  `docs/DESIGN.md` under 500 lines. Split a file only where there is a
+  logical seam (e.g. a cohesive group of types, a subsystem, or a distinct
+  `impl` concern); do not split arbitrarily just to hit the number.
+  A single function over 500 lines that cannot be split logically is left
+  as it is.
 - Tests: `cargo nextest run` (quiet profile in `.config/nextest.toml`). Never
   run verbose test output unless debugging a specific failure.
 - Lint/build: `cargo clippy --message-format=short`; `.cargo/config.toml` is
