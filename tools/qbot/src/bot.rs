@@ -1236,7 +1236,14 @@ impl Bot<'_> {
                     && let Some(&o) = gates.openers.get(m).into_iter().flatten().find(|&&o| Self::pending(&self.goals[o]) && self.goals[o].noclips < 3)
                 {
                     let og = &self.goals[o];
-                    let reach = self.goal_node(og).filter(|&n| dist[n as usize].is_finite());
+                    // Shootable openers can be activated from a visible
+                    // approach node even when their touch node is unreachable.
+                    let views: Vec<u32> = if og.kind == Kind::Button && self.shootable(og) && !og.deferred {
+                        og.views.iter().copied().filter(|&n| self.clear_shot(
+                            self.nav.pos[n as usize] + Vec3::new(0.0, 0.0, 22.0), self.center(og.ent), og.ent,
+                        )).collect()
+                    } else { Vec::new() };
+                    let reach = opener_node(self.goal_node(og), &views, &dist);
                     if self.opt.verbose && self.cur != Some(o) {
                         eprintln!("  t={:.1} door #{m} locked on the way to #{}: opener #{} first", self.sv.time(), self.goals[i].ent, og.ent);
                     }
@@ -2158,5 +2165,39 @@ impl Bot<'_> {
             Some(&n) => Some(self.nav.pos[n as usize]),
             None => Some(self.center(g.ent)),
         }
+    }
+}
+
+/// Keep the ordinary approach when reachable; a shootable opener on an
+/// inaccessible ledge can instead be activated from a reachable view node.
+fn opener_node(touch: Option<u32>, views: &[u32], dist: &[f32]) -> Option<u32> {
+    touch.filter(|&n| dist[n as usize].is_finite()).or_else(|| {
+        views.iter().copied().filter(|&n| dist[n as usize].is_finite())
+            .min_by(|&a, &b| dist[a as usize].total_cmp(&dist[b as usize]))
+    })
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn shootable_opener_on_disconnected_ledge() {
+        let mut nav = Nav::empty(Vec3::ZERO, Vec::new());
+        let start = nav.add(Vec3::ZERO);
+        let ledge = nav.add(Vec3::new(0.0, 0.0, 128.0));
+        let near = nav.add(Vec3::new(32.0, 0.0, 0.0));
+        let far = nav.add(Vec3::new(64.0, 0.0, 0.0));
+        nav.link(start, near, EdgeKind::Walk, 32.0);
+        nav.link(near, far, EdgeKind::Walk, 32.0);
+        let (dist, _) = nav.dijkstra(start, &Blocked::default(), 0);
+        assert_eq!(opener_node(Some(ledge), &[ledge, far, near], &dist), Some(near));
+        assert_eq!(opener_node(None, &[far, near], &dist), Some(near));
+        assert_eq!(opener_node(Some(far), &[near], &dist), Some(far));
+        assert_eq!(opener_node(Some(ledge), &[], &dist), None);
+        // Blocking the corridor must not leave a stale shooting approach.
+        let blocked = Blocked::from_iter([(start, near)]);
+        let (dist, _) = nav.dijkstra(start, &blocked, 0);
+        assert_eq!(opener_node(Some(ledge), &[far, near], &dist), None);
     }
 }

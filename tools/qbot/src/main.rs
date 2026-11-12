@@ -402,7 +402,8 @@ mod tests {
     }
 
     /// The raised touch triggers in hip2m2 must be reached by jumping, rather
-    /// than repeatedly returning to their floor nodes by noclip.
+    /// than repeatedly returning to their floor nodes by noclip. Shootable
+    /// door buttons should use reachable firing positions during recovery.
     #[test]
     fn hip2m2_raised_triggers() {
         let base = std::env::var_os("QUAKE_BASEDIR").map_or_else(
@@ -419,7 +420,7 @@ mod tests {
         assert_eq!(r.kills, r.total_monsters, "kills {}/{}", r.kills, r.total_monsters);
         assert_eq!(r.secrets, r.total_secrets, "secrets {}/{}", r.secrets, r.total_secrets);
         assert!(r.exited, "never reached the exit");
-        assert!(r.noclip_uses <= 12, "{} noclips; raised triggers regressed", r.noclip_uses);
+        assert!(r.noclip_uses <= 4, "{} noclips; trigger/button navigation regressed", r.noclip_uses);
     }
 
 }
