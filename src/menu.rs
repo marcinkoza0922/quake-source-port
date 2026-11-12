@@ -41,6 +41,7 @@ pub enum Page {
     Assists,
     HudLayout,
     Messages,
+    Water,
     /// Multiplayer pages (reached from Screen::Multiplayer).
     Join,
     Host,
@@ -256,16 +257,24 @@ const GRAPHICS: &[Item] = &[
     toggle("Dithering", "r_dither"),
     Item::Slider { label: "Brightness", cvar: "gamma", min: 0.5, max: 1.5, step: 0.05, invert: true },
     slider("Contrast", "contrast", 1.0, 2.0, 0.1),
-    slider("Water Opacity", "r_wateralpha", 0.0, 1.0, 0.1),
     toggle("Dynamic Lights", "r_dynamic"),
     Item::Choice { label: "Ambient Occlusion", cvar: "r_ssao", choices: SSAO },
     toggle("Motion Blur", "r_motionblur"),
     slider("Motion Blur Amount", "r_motionblur_amount", 0.1, 2.0, 0.1),
-    toggle("Water Ripples", "r_waterripples"),
-    toggle("Water Splashes", "r_watersplash"),
-    toggle("Water Caustics", "r_watercaustics"),
+    toggle("Enhanced Water", "r_enhancedwater"),
+    Item::Sub { label: "Water Settings", page: Page::Water },
     toggle("Interpolate Animation", "r_lerpmodels"),
     toggle("Interpolate Movement", "r_lerpmove"),
+];
+
+/// Reached from Graphics; unavailable while `r_enhancedwater` is off.
+const WATER: &[Item] = &[
+    slider("Water Opacity", "r_wateralpha", 0.0, 1.0, 0.1),
+    toggle("Ripples", "r_waterripples"),
+    slider("Ripple Intensity", "r_waterripples_amount", 0.1, 2.0, 0.1),
+    toggle("Splashes", "r_watersplash"),
+    toggle("Caustics", "r_watercaustics"),
+    slider("Caustic Intensity", "r_watercaustics_amount", 0.1, 2.0, 0.1),
 ];
 
 const COLORBLIND: &[(&str, f32)] =
@@ -371,6 +380,10 @@ fn tooltip(item: Item) -> Option<&'static str> {
         "r_ssao" => "Darkens corners and contact areas where geometry meets",
         "r_motionblur" => "Blurs fast-moving monsters, projectiles and doors (not camera turns)",
         "r_motionblur_amount" => "Length of the motion blur streaks",
+        "r_enhancedwater" => "Turns on the extra liquid effects; Water Settings controls each one",
+        "r_wateralpha" => "How see-through water surfaces are",
+        "r_waterripples_amount" => "Strength of the surface swell and rings",
+        "r_watercaustics_amount" => "Brightness of the underwater light patterns",
         "r_waterripples" => "Liquid surfaces swell and ring out where things move through them",
         "r_watersplash" => "Droplets spray up when things enter or leave water, slime or lava",
         "r_watercaustics" => "Rippling light patterns on surfaces under water and slime",
@@ -420,6 +433,7 @@ fn page_items(p: Page) -> &'static [Item] {
         Page::Hud => HUD,
         Page::HudLayout => HUD_LAYOUT,
         Page::Messages => MESSAGES,
+        Page::Water => WATER,
         Page::Mouse => MOUSE,
         Page::Controller => CONTROLLER,
         Page::Autosave => AUTOSAVE,
@@ -441,15 +455,23 @@ fn page_name(p: Page) -> &'static str {
         Page::Assists => "Assists",
         Page::HudLayout => "Modern HUD Layout",
         Page::Messages => "Messages & Captions",
+        Page::Water => "Water Settings",
         _ => PAGES.iter().find(|x| x.1 == p).map_or("", |x| x.0),
     }
 }
 
 /// The page an `Item::Sub` page returns to, with that row's index.
 fn parent_page(p: Page) -> Option<(Page, usize)> {
-    [Page::Gameplay, Page::Input, Page::Hud, Page::Accessibility].into_iter().find_map(|parent| {
+    [Page::Gameplay, Page::Input, Page::Hud, Page::Accessibility, Page::Graphics].into_iter().find_map(|parent| {
         page_items(parent).iter().position(|i| matches!(i, Item::Sub { page, .. } if *page == p)).map(|i| (parent, i))
     })
+}
+
+/// Sub-pages that are switched off by their parent setting.
+fn sub_disabled(page: Page, cv: &Cvars) -> bool {
+    (page == Page::Autosave && cv.value_of("sv_autosave") == 0.0)
+        || (page == Page::HudLayout && cv.value_of("scr_hudstyle") == 0.0)
+        || (page == Page::Water && cv.value_of("r_enhancedwater") == 0.0)
 }
 
 fn is_net_page(p: Page) -> bool {
@@ -458,7 +480,7 @@ fn is_net_page(p: Page) -> bool {
 
 /// Every cvar the options pages edit (the host marks them archived).
 pub fn option_cvars() -> impl Iterator<Item = &'static str> {
-    [GAMEPLAY, HUD, HUD_LAYOUT, MESSAGES, AUTOSAVE, ASSISTS, INPUT, MOUSE, CONTROLLER, GRAPHICS, AUDIO, ACCESSIBILITY].into_iter().flatten().filter_map(|i| match *i {
+    [GAMEPLAY, HUD, HUD_LAYOUT, MESSAGES, WATER, AUTOSAVE, ASSISTS, INPUT, MOUSE, CONTROLLER, GRAPHICS, AUDIO, ACCESSIBILITY].into_iter().flatten().filter_map(|i| match *i {
         Item::Slider { cvar, .. } | Item::Toggle { cvar, .. } | Item::Choice { cvar, .. } => Some(cvar),
         _ => None,
     })
@@ -1293,7 +1315,9 @@ impl Menu {
                         return out;
                     }
                     Item::Sub { page, .. } => {
-                        if enter || right {
+                        if (enter || right) && sub_disabled(page, cv) {
+                            out.push(Action::Sound("misc/menu3.wav"));
+                        } else if enter || right {
                             self.sub_return = Some((p, page, self.opt_cursor));
                             self.opt_cursor = 0;
                             self.screen = Screen::OptionsPage(page);
@@ -2006,8 +2030,7 @@ impl Menu {
             }
             Item::Sub { label: l, page } => {
                 label(c, l);
-                let dim = (page == Page::Autosave && cv.value_of("sv_autosave") == 0.0)
-                    || (page == Page::HudLayout && cv.value_of("scr_hudstyle") == 0.0);
+                let dim = sub_disabled(page, cv);
                 { txt(c, VALUE_X, y, if dim { "(off) >" } else { ">" }); }
             }
             Item::ResetBinds => {

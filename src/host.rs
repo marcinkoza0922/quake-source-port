@@ -201,6 +201,7 @@ const COMPAT_CVARS: &[(&str, &str, u32)] = &[
     ("r_ssao_radius", "32", CVAR_ARCHIVE),
     ("r_motionblur", "0", CVAR_ARCHIVE),
     ("r_motionblur_amount", "0.5", CVAR_ARCHIVE),
+    ("r_enhancedwater", "0", CVAR_ARCHIVE),
     ("r_waterripples", "0", CVAR_ARCHIVE),
     ("r_watersplash", "0", CVAR_ARCHIVE),
     ("r_watercaustics", "0", CVAR_ARCHIVE),
@@ -2215,9 +2216,9 @@ impl Host {
             } else {
                 v("r_motionblur_amount").clamp(0.0, 4.0)
             },
-            water_ripples: if v("r_waterripples") != 0.0 { v("r_waterripples_amount").clamp(0.0, 4.0) } else { 0.0 },
-            water_splashes: v("r_watersplash") != 0.0,
-            water_caustics: if v("r_watercaustics") != 0.0 { v("r_watercaustics_amount").clamp(0.0, 4.0) } else { 0.0 },
+            water_ripples: if v("r_enhancedwater") != 0.0 && v("r_waterripples") != 0.0 { v("r_waterripples_amount").clamp(0.0, 4.0) } else { 0.0 },
+            water_splashes: v("r_enhancedwater") != 0.0 && v("r_watersplash") != 0.0,
+            water_caustics: if v("r_enhancedwater") != 0.0 && v("r_watercaustics") != 0.0 { v("r_watercaustics_amount").clamp(0.0, 4.0) } else { 0.0 },
             ..Settings::default()
         };
         {
