@@ -112,7 +112,7 @@ impl Server {
         if c.cvars.value_of("external_ents") != 0.0
             && let Some(e) = c.fs.open_companion(&format!("maps/{mapname}.bsp"), &format!("maps/{mapname}.ent"))
         {
-            ents = String::from_utf8_lossy(&e).into_owned();
+            ents = qcore::text::decode(&e);
         }
         let filter = SpawnFilter {
             deathmatch: c.cvars.value_of("deathmatch") != 0.0,

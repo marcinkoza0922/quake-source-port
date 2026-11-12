@@ -1,6 +1,6 @@
 //! BSP29 / BSP2 / 2PSB map parsing. All variants normalize into the same structs.
 
-use crate::{Error, Reader, Result, Vec3, cstr};
+use crate::{Error, Reader, Result, Vec3};
 mod textures;
 use textures::*;
 
@@ -158,6 +158,7 @@ pub struct MipTex {
 #[derive(Debug, Clone, Default)]
 pub struct Bsp {
     pub version: Option<BspVersion>,
+    /// Entity bytes carried as same-valued Unicode scalars (`qcore::text`).
     pub entities: String,
     pub planes: Vec<Plane>,
     /// One entry per miptex slot; `None` for missing (-1 offset) textures.
@@ -393,7 +394,7 @@ impl Bsp {
         };
         Ok(Bsp {
             version: Some(version),
-            entities: cstr(lumps[LUMP_ENTITIES]),
+            entities: qcore::text::decode(lumps[LUMP_ENTITIES].split(|&b| b == 0).next().unwrap_or_default()),
             planes,
             textures: parse_textures(lumps[LUMP_TEXTURES], q64)?,
             vertexes,
