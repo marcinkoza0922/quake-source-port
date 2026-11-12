@@ -302,6 +302,28 @@ pub struct Menu {
     /// Prompts show gamepad glyphs (the pad was used last).
     pub pad_ui: bool,
     pub glyphs: Glyphs,
+    /// On-screen keyboard over a text field (gamepad typing).
+    osk: Option<Osk>,
+}
+
+/// On-screen keyboard cursor: `row` 0..=4 (4 = action row), `col` 0..10.
+#[derive(Clone, Copy, Debug, Default)]
+struct Osk {
+    row: usize,
+    col: usize,
+    shift: bool,
+}
+
+const OSK_ROWS: [&str; 4] = ["1234567890", "qwertyuiop", "asdfghjkl.", "zxcvbnm-_:"];
+const OSK_ACTIONS: [&str; 4] = ["Shift", "Space", "Del", "Done"];
+const OSK_KEY: (f32, f32) = (20.0, 14.0);
+const OSK_Y: f32 = 240.0;
+
+impl Osk {
+    /// Action under the cursor on the bottom row.
+    fn action(&self) -> usize {
+        self.col * OSK_ACTIONS.len() / 10
+    }
 }
 
 /// Keys bound to exactly `cmd` (whitespace/case-insensitive).
@@ -379,6 +401,7 @@ impl Menu {
             capture: None,
             pad_ui: false,
             glyphs: Glyphs { atlas: None, family: Family::Xbox },
+            osk: None,
         }
     }
 
@@ -427,6 +450,97 @@ impl Menu {
             if v.len() < max {
                 v.push(ch);
                 cv.set(cvar, &v);
+            }
+        }
+    }
+
+    /// Whether the on-screen keyboard is open.
+    #[cfg(test)]
+    fn osk_open(&self) -> bool {
+        self.osk.is_some()
+    }
+
+    fn osk_key(&mut self, key: i32, mut o: Osk, cv: &mut Cvars, out: &mut Vec<Action>) {
+        let Screen::OptionsPage(p) = self.screen else {
+            self.osk = None;
+            return;
+        };
+        let Item::Text { cvar, .. } = self.page_item(p, self.opt_cursor) else {
+            self.osk = None;
+            return;
+        };
+        let backspace = |cv: &mut Cvars| {
+            let mut v = cv.by_name(cvar).map_or(String::new(), |c| c.string.clone());
+            v.pop();
+            cv.set(cvar, &v);
+        };
+        let n = OSK_ACTIONS.len();
+        match key {
+            K_UPARROW | K_DPAD_UP => o.row = (o.row + 4) % 5,
+            K_DOWNARROW | K_DPAD_DOWN => o.row = (o.row + 1) % 5,
+            K_LEFTARROW | K_DPAD_LEFT if o.row == 4 => o.col = ((o.action() + n - 1) % n * 10).div_ceil(n),
+            K_RIGHTARROW | K_DPAD_RIGHT if o.row == 4 => o.col = ((o.action() + 1) % n * 10).div_ceil(n),
+            K_LEFTARROW | K_DPAD_LEFT => o.col = (o.col + 9) % 10,
+            K_RIGHTARROW | K_DPAD_RIGHT => o.col = (o.col + 1) % 10,
+            K_XBUTTON | K_BACKSPACE => backspace(cv),
+            K_YBUTTON => o.shift = !o.shift,
+            K_BBUTTON | K_ESCAPE | K_START => {
+                self.osk = None;
+                out.push(Action::Sound("misc/menu3.wav"));
+                return;
+            }
+            K_ABUTTON | K_ENTER | K_KP_ENTER => {
+                if o.row < 4 {
+                    let ch = OSK_ROWS[o.row].as_bytes()[o.col] as char;
+                    self.text(if o.shift { ch.to_ascii_uppercase() } else { ch }, cv);
+                } else {
+                    match o.action() {
+                        0 => o.shift = !o.shift,
+                        1 => self.text(' ', cv),
+                        2 => backspace(cv),
+                        _ => {
+                            self.osk = None;
+                            out.push(Action::Sound("misc/menu2.wav"));
+                            return;
+                        }
+                    }
+                }
+            }
+            _ => return,
+        }
+        out.push(Action::Sound("misc/menu1.wav"));
+        self.osk = Some(o);
+    }
+
+    fn draw_osk(&self, c: &mut Canvas, o: Osk) {
+        let (kw, kh) = OSK_KEY;
+        let x0 = 320.0 - kw * 5.0;
+        c.fill(x0 - 6.0, OSK_Y - 6.0, kw * 10.0 + 12.0, kh * 5.0 + 12.0, [0.05, 0.04, 0.03, 0.95]);
+        c.frame(x0 - 6.0, OSK_Y - 6.0, kw * 10.0 + 12.0, kh * 5.0 + 12.0, BORDER);
+        for (r, row) in OSK_ROWS.iter().enumerate() {
+            for (k, ch) in row.bytes().enumerate() {
+                let (x, y) = (x0 + k as f32 * kw, OSK_Y + r as f32 * kh);
+                if o.row == r && o.col == k {
+                    c.fill(x, y, kw, kh, HILITE);
+                }
+                c.frame(x + 1.0, y + 1.0, kw - 2.0, kh - 2.0, [0.35, 0.27, 0.16, 0.9]);
+                let ch = if o.shift { ch.to_ascii_uppercase() } else { ch };
+                c.ch(x + (kw - 8.0) / 2.0, y + (kh - 8.0) / 2.0, ch);
+            }
+        }
+        let aw = kw * 10.0 / OSK_ACTIONS.len() as f32;
+        let y = OSK_Y + 4.0 * kh;
+        for (i, label) in OSK_ACTIONS.iter().enumerate() {
+            let x = x0 + i as f32 * aw;
+            if o.row == 4 && o.action() == i {
+                c.fill(x, y, aw, kh, HILITE);
+            }
+            c.frame(x + 1.0, y + 1.0, aw - 2.0, kh - 2.0, [0.35, 0.27, 0.16, 0.9]);
+            let lx = x + ((aw - label.len() as f32 * 8.0) / 2.0).floor();
+            if i == 0 && o.shift {
+                gold(c, lx, y + 3.0, label);
+            } else {
+                c.string(lx, y + 3.0, label);
             }
         }
     }
@@ -500,6 +614,7 @@ impl Menu {
         self.screen = s;
         self.drop = None;
         self.capture = None;
+        self.osk = None;
         self.quit_cursor = 0;
         if matches!(s, Screen::Load | Screen::Save) { self.load_cursor = 0; }
     }
@@ -600,6 +715,10 @@ impl Menu {
                 }
                 out.push(Action::Sound("misc/menu1.wav"));
             }
+            return out;
+        }
+        if let Some(o) = self.osk {
+            self.osk_key(key, o, cv, &mut out);
             return out;
         }
         if let (Some(d), Screen::OptionsPage(p)) = (self.drop, self.screen) {
@@ -787,7 +906,10 @@ impl Menu {
                 let item = self.page_item(p, self.opt_cursor);
                 match item {
                     Item::Text { cvar, .. } => {
-                        if key == K_BACKSPACE {
+                        if key == K_ABUTTON {
+                            self.osk = Some(Osk::default());
+                            out.push(Action::Sound("misc/menu2.wav"));
+                        } else if key == K_BACKSPACE {
                             let mut v = cv.by_name(cvar).map_or(String::new(), |c| c.string.clone());
                             v.pop();
                             cv.set(cvar, &v);
@@ -1222,6 +1344,9 @@ impl Menu {
                 if let Some(d) = self.drop {
                     self.draw_drop(c, cv, self.page_item(page, d.item), d);
                 }
+                if let Some(o) = self.osk {
+                    self.draw_osk(c, o);
+                }
             }
             Screen::Quit => {
                 let (bx, by, bw, bh) = QUIT_BOX;
@@ -1260,6 +1385,11 @@ impl Menu {
             let w = s.len() as f32 * 8.0;
             c.fill(320.0 - w / 2.0 - 8.0, y - 4.0, w + 16.0, 18.0, [0.0, 0.0, 0.0, 0.8]);
             gold(c, 320.0 - w / 2.0, y + 1.0, s);
+            return;
+        }
+        if self.osk.is_some() {
+            let items = [(K_ABUTTON, "Type"), (K_XBUTTON, "Delete"), (K_YBUTTON, "Shift"), (K_BBUTTON, "Done")];
+            self.glyphs.hints_centered(c, 320.0, y, &items);
             return;
         }
         let action = match self.screen {
@@ -1733,5 +1863,32 @@ mod save_menu_tests {
         let c = commands(&m.key(K_XBUTTON, &mut cv, false));
         assert_eq!(c, "unbind \"RTRIGGER\"\n");
         assert_eq!(keys_for(&m.bindings, "+attack"), vec![b'g' as i32]);
+    }
+
+    #[test]
+    fn onscreen_keyboard_types_into_field() {
+        use super::multiplayer_tests::cvars;
+        let mut cv = cvars();
+        cv.set("_cl_name", "");
+        let mut m = Menu::new();
+        m.open(Screen::OptionsPage(Page::Setup));
+        m.opt_cursor = 0;
+        m.key(K_ABUTTON, &mut cv, false);
+        assert!(m.osk_open());
+        m.key(K_DPAD_DOWN, &mut cv, false); // q row
+        m.key(K_ABUTTON, &mut cv, false); // q
+        m.key(K_YBUTTON, &mut cv, false); // shift
+        m.key(K_DPAD_RIGHT, &mut cv, false);
+        m.key(K_ABUTTON, &mut cv, false); // W
+        m.key(K_DPAD_UP, &mut cv, false);
+        m.key(K_DPAD_UP, &mut cv, false); // action row (wraps)
+        m.key(K_DPAD_RIGHT, &mut cv, false); // shift -> space
+        m.key(K_ABUTTON, &mut cv, false);
+        assert_eq!(cv.by_name("_cl_name").unwrap().string, "qW ");
+        m.key(K_XBUTTON, &mut cv, false);
+        assert_eq!(cv.by_name("_cl_name").unwrap().string, "qW");
+        m.key(K_BBUTTON, &mut cv, false);
+        assert!(!m.osk_open());
+        assert_eq!(m.screen, Screen::OptionsPage(Page::Setup));
     }
 }
