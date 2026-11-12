@@ -75,11 +75,13 @@ pub struct Settings {
     pub movers: bool,
     /// Scale for shot and explosion pushes.
     pub force: f32,
+    /// A killing volley also lifts the body.
+    pub kill_lift: bool,
 }
 
 impl Default for Settings {
     fn default() -> Self {
-        Settings { ragdolls: true, at_death: false, max_ragdolls: 48, gibs: true, shrapnel: true, movers: true, force: 1.0 }
+        Settings { ragdolls: true, at_death: false, max_ragdolls: 48, gibs: true, shrapnel: true, movers: true, force: 1.0, kill_lift: false }
     }
 }
 

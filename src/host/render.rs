@@ -32,6 +32,7 @@ impl Host {
                 shrapnel: self.cv("r_debris_shrapnel") != 0.0,
                 movers: self.cv("r_debris_movers") != 0.0,
                 force: self.cv("r_debris_force").clamp(0.0, 6.0),
+                kill_lift: self.cv("r_debris_killlift") != 0.0,
             };
             self.debris.update(
                 debris_on,

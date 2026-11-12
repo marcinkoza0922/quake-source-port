@@ -93,7 +93,7 @@ impl Debris {
                 let volley: Vec<_> = self.shots.iter().filter(hits).filter(|s| s.2 == last).copied().collect();
                 for (from, p, _) in volley {
                     doll.shot(from, p, set.force);
-                    doll.fling(from, p, set.force);
+                    doll.fling(from, p, set.force, set.kill_lift);
                 }
             }
             let colormap = (e.colormap > 0 && (e.colormap as usize) <= cl.scores.len()).then(|| {

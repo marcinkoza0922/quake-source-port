@@ -89,10 +89,11 @@ impl Ragdoll {
 
     /// A killing blow knocks the whole body back along the shot, in
     /// proportion to the hit, so a good shot throws it instead of only
-    /// twitching the bone it struck.
-    pub fn fling(&mut self, from: Vec3, to: Vec3, force: f32) {
+    /// twitching the bone it struck; `lift` also raises it.
+    pub fn fling(&mut self, from: Vec3, to: Vec3, force: f32, lift: bool) {
         let flat = Vec3::new(to.x - from.x, to.y - from.y, 0.0).normalize();
-        let dv = flat * (KILL_BACK * force);
+        let up = if lift { KILL_LIFT } else { 0.0 };
+        let dv = (flat * KILL_BACK + Vec3::new(0.0, 0.0, up)) * force;
         for p in &mut self.prev {
             *p -= dv * STEP;
         }
@@ -302,9 +303,10 @@ impl Ragdoll {
 }
 
 /// Rotation matrix to quaternion (Shepperd).
-/// Per-pellet knock-back (units/s) a killing volley adds to the whole
-/// body; a shotgun's pellets add up.
+/// Per-pellet knock-back and optional lift (units/s) a killing volley adds
+/// to the whole body; a shotgun's pellets add up.
 const KILL_BACK: f32 = 25.0;
+const KILL_LIFT: f32 = 30.0;
 
 pub fn mat_to_quat(m: &Mat3) -> Quat {
     let t = m[0][0] + m[1][1] + m[2][2];

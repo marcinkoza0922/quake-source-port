@@ -26,6 +26,7 @@ pub(super) fn tooltip(item: Item) -> Option<&'static str> {
         "r_debris_gibs" => "Gibs and heads tumble and bounce; blasts can gib ragdolls",
         "r_debris_shrapnel" => "Exploding boxes throw metal shards",
         "r_debris_movers" => "Debris lands on and is carried or shoved by doors, lifts and platforms",
+        "r_debris_killlift" => "With ragdolls starting at death, a killing shot also lifts the body off its feet",
         "r_debris_force" => "How hard shots and explosions push debris around",
         "r_enhancedwater" => "Turns on the extra liquid effects; Water Settings controls each one",
         "r_wateralpha" => "How see-through water surfaces are",
