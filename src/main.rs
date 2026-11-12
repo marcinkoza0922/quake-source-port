@@ -10,6 +10,7 @@ mod autosave;
 mod console;
 mod demo;
 mod draw;
+mod font;
 mod glyphs;
 mod host;
 mod menu;

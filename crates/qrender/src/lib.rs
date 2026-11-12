@@ -15,7 +15,7 @@ mod world;
 pub use types::*;
 
 use ash::vk;
-use convert::Palette;
+pub use convert::{Palette, downsample_rgba};
 use gpu::{Buffer, Gpu, Image};
 use pipelines::{COLOR_FORMAT, DEPTH_FORMAT, LM_FORMAT, MAX_TEXTURES, Pipelines};
 use qformats::bsp::{Bsp, TextureKind};
@@ -355,10 +355,11 @@ impl Renderer {
             vk::SamplerAddressMode::CLAMP_TO_EDGE,
             vk::SamplerMipmapMode::NEAREST,
         )?;
+        // trilinear: only the mipped hi-res UI pictures have more than one level
         let sampler_linear = sampler(
             vk::Filter::LINEAR,
             vk::SamplerAddressMode::CLAMP_TO_EDGE,
-            vk::SamplerMipmapMode::NEAREST,
+            vk::SamplerMipmapMode::LINEAR,
         )?;
         let storage = vk::BufferUsageFlags::STORAGE_BUFFER | vk::BufferUsageFlags::TRANSFER_DST;
         let mut palette_buf = gpu.buffer(1024 + convert::LUT_BYTES as u64, vk::BufferUsageFlags::STORAGE_BUFFER, true)?;
@@ -1186,6 +1187,29 @@ impl Renderer {
         let id = self.register_pic_rgba(128, 128, &rgba)?;
         self.conchars = Some(id);
         Ok(id)
+    }
+
+    /// Sets a hi-res RGBA conchars atlas (16×16 cells) with its mip chain,
+    /// bilinear filtered.
+    pub fn set_conchars_mips(&mut self, width: u32, height: u32, mips: &[&[u8]]) -> Result<PicId> {
+        let id = self.register_pic_mips(width, height, mips)?;
+        self.conchars = Some(id);
+        Ok(id)
+    }
+
+    /// Registers a bilinear-filtered RGBA picture with a mip chain (base
+    /// first), for pictures drawn smaller than their texels.
+    pub fn register_pic_mips(&mut self, width: u32, height: u32, mips: &[&[u8]]) -> Result<PicId> {
+        self.idle();
+        let mut up = self.gpu.begin_upload()?;
+        let slot = self.add_texture(&mut up, width, height, mips, false, Sampling::Linear)?;
+        self.gpu.end_upload(up)?;
+        self.pics.push(PicInfo { slot, width, height });
+        Ok(PicId(self.pics.len() as u32 - 1))
+    }
+
+    pub fn palette(&self) -> &Palette {
+        &self.palette
     }
 
     pub fn pic_size(&self, pic: PicId) -> Option<(u32, u32)> {

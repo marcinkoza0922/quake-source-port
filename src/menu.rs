@@ -237,7 +237,12 @@ const GRAPHICS: &[Item] = &[
     toggle("Dynamic Lights", "r_dynamic"),
     toggle("Interpolate Anim", "r_lerpmodels"),
     toggle("Interpolate Move", "r_lerpmove"),
+    Item::Choice { label: "UI Font", cvar: "ui_font", choices: UI_FONT },
+    toggle("Smooth UI Pictures", "ui_smoothpics"),
 ];
+
+/// `ui_font`: Custom uses the TTF/OTF named by `ui_fontfile`.
+const UI_FONT: &[(&str, f32)] = &[("classic", 0.0), ("smooth", 1.0), ("custom", 2.0)];
 
 const AUDIO: &[Item] = &[slider("Sound Volume", "volume", 0.0, 1.0, 0.1), slider("Music Volume", "bgmvolume", 0.0, 1.0, 0.1)];
 

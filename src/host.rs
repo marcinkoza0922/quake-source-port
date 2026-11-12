@@ -53,6 +53,9 @@ const HOST_CVARS: &[(&str, &str, u32)] = &[
     ("scr_hudstyle", "1", CVAR_ARCHIVE),
     ("crosshair", "0", CVAR_ARCHIVE),
     ("ui_levelselect", "0", CVAR_ARCHIVE),
+    ("ui_font", "1", CVAR_ARCHIVE),
+    ("ui_fontfile", "", CVAR_ARCHIVE),
+    ("ui_smoothpics", "1", CVAR_ARCHIVE),
     ("scr_centertime", "2", 0),
     ("scr_printspeed", "8", 0),
     ("volume", "0.7", CVAR_ARCHIVE),
@@ -219,6 +222,8 @@ pub struct Host {
     /// Label family of the last connected gamepad.
     pad_family: crate::glyphs::Family,
     glyph_atlas: Option<Option<qrender::PicId>>,
+    /// (`ui_font`, `ui_fontfile`) the conchars atlas was last built with.
+    font_state: (i32, String),
     /// Rumble to play this frame (low, high, ms), taken by the main loop.
     rumble: Option<(u16, u16, u32)>,
     /// Last seen (weapon, ammo, weaponframe, punch) for fire rumble.
@@ -336,6 +341,7 @@ impl Host {
             wheel: Default::default(),
             pad_family: Default::default(),
             glyph_atlas: None,
+            font_state: (1, String::new()),
             rumble: None,
             fire_track: (0, 0, 0, [0.0; 3]),
             nav_hold: None,
@@ -1911,7 +1917,23 @@ impl Host {
         self.disconnect_client();
     }
 
+    /// Rebuilds the UI font / picture style when `ui_font`, `ui_fontfile`
+    /// or `ui_smoothpics` change.
+    fn sync_ui_font(&mut self) {
+        self.pics.smooth = self.cv("ui_smoothpics") != 0.0;
+        let want = (self.cv("ui_font") as i32, self.cvs("ui_fontfile").to_string());
+        if want == self.font_state {
+            return;
+        }
+        let fs = &self.server.core.fs;
+        if let Some(w) = crate::font::apply(&mut self.r, fs, &self.pics.conchars, want.0, &want.1) {
+            self.con.print(&w);
+        }
+        self.font_state = want;
+    }
+
     fn render(&mut self, view: Option<qrender::View>, gun: Option<qrender::RenderEntity>, ft: f32) {
+        self.sync_ui_font();
         let (w, h) = self.r.size();
         let mut c = Canvas::new(w, h);
         let mut ents = Vec::new();

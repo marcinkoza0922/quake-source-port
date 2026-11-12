@@ -13,22 +13,41 @@ use qrender::{Draw2D, PicId, Renderer};
 pub struct Pics {
     wad: Option<Wad>,
     cache: HashMap<String, Option<(PicId, u32, u32)>>,
+    /// conchars indices (128×128), kept so `ui_font` can rebuild the atlas.
+    pub conchars: Vec<u8>,
+    /// Upscale pictures with [`crate::font::smooth_pic`] (`ui_smoothpics`).
+    pub smooth: bool,
 }
 
 impl Pics {
     pub fn new(fs: &Fs, r: &mut Renderer) -> Self {
         let wad = fs.open("gfx.wad").and_then(|d| Wad::parse(&d).ok());
+        let mut conchars = Vec::new();
         if let Some(c) = wad.as_ref().and_then(|w| w.get("conchars"))
             && c.data.len() >= 128 * 128
         {
-            let _ = r.set_conchars(&c.data[..128 * 128]);
+            conchars = c.data[..128 * 128].to_vec();
+            let _ = crate::font::apply(r, fs, &conchars, 1, "");
         }
-        Self { wad, cache: HashMap::new() }
+        Self { wad, cache: HashMap::new(), conchars, smooth: true }
+    }
+
+    fn register(&self, r: &mut Renderer, p: &Pic) -> Option<(PicId, u32, u32)> {
+        let id = if self.smooth {
+            let (w, h, mips) = crate::font::smooth_pic(r.palette(), p.width, p.height, &p.pixels);
+            let refs: Vec<&[u8]> = mips.iter().map(|m| m.as_slice()).collect();
+            r.register_pic_mips(w, h, &refs).ok()
+        } else {
+            r.register_pic(p).ok()
+        };
+        id.map(|id| (id, p.width, p.height))
     }
 
     /// Picture by wad lump name, or by path when it contains '/'.
     pub fn get(&mut self, fs: &Fs, r: &mut Renderer, name: &str) -> Option<(PicId, u32, u32)> {
-        if let Some(p) = self.cache.get(name) {
+        // smooth and classic copies are cached apart, so toggling reuses both
+        let key = if self.smooth { format!("~{name}") } else { name.to_string() };
+        if let Some(p) = self.cache.get(&key) {
             return *p;
         }
         // "path#top,bottom": the picture with player colours (menuplyr.lmp).
@@ -39,8 +58,8 @@ impl Pics {
                 translate_player(&mut p.pixels, t, b);
                 p
             });
-            let v = pic.and_then(|p| r.register_pic(&p).ok().map(|id| (id, p.width, p.height)));
-            self.cache.insert(name.to_string(), v);
+            let v = pic.and_then(|p| self.register(r, &p));
+            self.cache.insert(key, v);
             return v;
         }
         let pic: Option<Pic> = if name.contains('/') {
@@ -48,8 +67,8 @@ impl Pics {
         } else {
             self.wad.as_ref().and_then(|w| w.get(name)).and_then(|l| parse_pic(&l.data).ok())
         };
-        let v = pic.and_then(|p| r.register_pic(&p).ok().map(|id| (id, p.width, p.height)));
-        self.cache.insert(name.to_string(), v);
+        let v = pic.and_then(|p| self.register(r, &p));
+        self.cache.insert(key, v);
         v
     }
 }
