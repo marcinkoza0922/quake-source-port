@@ -225,6 +225,8 @@ pub struct ClientState {
     pub fte_names: crate::fte::FteNames,
     /// Scripted effects to run this frame (drained by the host).
     pub fte_queue: Vec<crate::fte::FteRequest>,
+    /// svcdp_precache particle effect names (index 0 unused).
+    pub particle_precache: Vec<String>,
 
     pub events: Vec<ClientEvent>,
     pub(crate) stuffcmdbuf: Vec<u8>,
@@ -303,6 +305,7 @@ impl ClientState {
             sv_gravity: 800.0,
             fte_names: Default::default(),
             fte_queue: Vec::new(),
+            particle_precache: Vec::new(),
             events: Vec::new(),
             stuffcmdbuf: Vec::new(),
             out_reliable: SizeBuf::new(MAX_MSGLEN),
@@ -317,7 +320,9 @@ impl ClientState {
         let keep = (self.standard_quake, self.nolerp, self.name.clone(), self.color, self.sv_gravity, self.signon, self.demoplayback);
         let out = std::mem::take(&mut self.out_reliable);
         let events = std::mem::take(&mut self.events);
+        let fte_names = std::mem::take(&mut self.fte_names);
         *self = Self::new();
+        self.fte_names = fte_names;
         (self.standard_quake, self.nolerp, self.name, self.color, self.sv_gravity, self.signon, self.demoplayback) = keep;
         self.out_reliable = out;
         self.events = events;

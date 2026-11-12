@@ -73,6 +73,8 @@ pub struct Sv {
     pub model_precache: Vec<String>,
     pub models: Vec<Option<ModelInfo>>,
     pub sound_precache: Vec<String>,
+    /// particleeffectnum names (index 0 unused).
+    pub particle_precache: Vec<String>,
     pub lightstyles: Vec<Vec<u8>>,
     pub datagram: SizeBuf,
     pub reliable_datagram: SizeBuf,
@@ -144,6 +146,13 @@ impl Core {
 
     pub fn maxclients(&self) -> usize {
         self.clients.len()
+    }
+
+    /// Particle extensions on: `sv_fteparticles` and a single-player
+    /// server (our svcdp_* messages would break other clients; vkQuake
+    /// gates them on the client's protocol extensions).
+    pub fn fte_particles(&self) -> bool {
+        self.cvars.value_of("sv_fteparticles") != 0.0 && self.clients.len() == 1
     }
 
     /// Record a Host_Error (first one wins).
@@ -252,6 +261,8 @@ fn register_cvars(cv: &mut Cvars) {
         ("external_ents", "1", CVAR_ARCHIVE),
         ("registered", "1", 0),
         ("pr_checkextension", "1", 0),
+        // FTE/DP particle builtins + svcdp_* messages (single player only).
+        ("sv_fteparticles", "1", 0),
     ] {
         cv.register(n, d, f);
     }
@@ -416,6 +427,7 @@ impl Server {
             model_precache: vec![String::new(), modelname.clone()],
             models: vec![None, None],
             sound_precache: vec![String::new()],
+            particle_precache: vec![String::new()],
             lightstyles: vec![Vec::new(); MAX_LIGHTSTYLES],
             datagram: SizeBuf::new(MAX_DATAGRAM),
             reliable_datagram: SizeBuf::new(MAX_DATAGRAM),
@@ -553,6 +565,11 @@ impl Server {
             }
         }
         m.byte(0);
+        if c.fte_particles() {
+            for (k, name) in sv.particle_precache.iter().enumerate().skip(1) {
+                crate::particles::write_precache(&mut m, k, name);
+            }
+        }
         let sounds = l.vm.field_ofs("sounds").map_or(0, |o| l.vm.ent_f(0, o) as i32);
         m.byte(SVC_CDTRACK);
         m.byte(sounds);

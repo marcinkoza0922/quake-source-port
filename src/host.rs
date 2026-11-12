@@ -2465,6 +2465,10 @@ fn register_commands(c: &mut Commands<Host>) {
     }
     c.add("cfg_unbindall", |_, _| {});
     c.add("fog", cmd_fog);
+    c.add("r_partinfo", |h, _| {
+        let s = h.fte.info(&h.cl);
+        h.con.print(&s);
+    });
     // Debug: run an FTE effect 128 units in front of the view.
     c.add("fte_spawn", |h, a| {
         if a.argc() < 2 {

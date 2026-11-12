@@ -78,7 +78,16 @@ pub(crate) enum Dispatch {
 }
 
 /// Host-side extension builtins that have fixed numbers.
-const HOST_EXT_NUMS: &[(&str, i32)] = &[("clientstat", 232), ("checkcommand", 294), ("clientcommand", 440)];
+const HOST_EXT_NUMS: &[(&str, i32)] = &[
+    ("clientstat", 232),
+    ("checkcommand", 294),
+    ("particleeffectnum", 335),
+    ("trailparticles", 336),
+    ("pointparticles", 337),
+    ("te_particlerain", 409),
+    ("te_particlesnow", 410),
+    ("clientcommand", 440),
+];
 
 /// Extension names the VM-internal builtins implement (for documentation /
 /// host `checkextension` policy). Like ironwail, `checkextension` only

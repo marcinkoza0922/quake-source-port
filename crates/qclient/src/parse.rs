@@ -223,6 +223,10 @@ impl ClientState {
                     }
                     self.events.push(ClientEvent::LocalSound { sound });
                 }
+                crate::fte::SVCDP_PRECACHE => self.parse_dp_precache(&mut m),
+                crate::fte::SVCDP_TRAILPARTICLES | crate::fte::SVCDP_POINTPARTICLES | crate::fte::SVCDP_POINTPARTICLES1 => {
+                    self.parse_dp_particles(&mut m, cmd)
+                }
                 _ => return err(format!("Illegible server message {cmd} (previous was {lastcmd})")),
             }
             lastcmd = cmd;
@@ -624,6 +628,8 @@ impl ClientState {
                 self.explosion_light(pos);
                 self.tsound("weapons/r_exp3.wav", pos);
             }
+            crate::fte::TEDP_PARTICLERAIN => self.parse_dp_weather(m, false),
+            crate::fte::TEDP_PARTICLESNOW => self.parse_dp_weather(m, true),
             _ => return err(format!("CL_ParseTEnt: bad type {ty}")),
         }
         Ok(())

@@ -134,10 +134,18 @@ pub struct Fte {
     /// Trail state per entity number.
     trails: HashMap<i32, Option<TrailHandle>>,
     /// Collision model of the current map.
-    cm: Option<(String, CollisionModel)>,
+    cm: Option<(String, std::rc::Rc<CollisionModel>)>,
     /// r_particledesc and map the effects were loaded for.
     loaded_for: Option<(String, String)>,
     palette: Option<Vec<u8>>,
+    /// Client requests processed (r_partinfo).
+    requests: u64,
+    /// `r_effect` / `r_trail` effects by model name (PScript_UpdateModelEffects).
+    model_fx: HashMap<String, qpart::ModelEffects>,
+    /// Per entity: previous origin (model trails) and emitter state.
+    ent_fx: HashMap<i32, ([f32; 3], Option<TrailHandle>)>,
+    /// Sky triangles need rebuilding (effects or map changed).
+    sky_dirty: bool,
 }
 
 impl Fte {
@@ -150,6 +158,10 @@ impl Fte {
             cm: None,
             loaded_for: None,
             palette: None,
+            requests: 0,
+            model_fx: HashMap::new(),
+            ent_fx: HashMap::new(),
+            sky_dirty: true,
         }
     }
 
@@ -175,7 +187,33 @@ impl Fte {
             print(&format!("{m}\n"));
         }
         self.publish(cl);
+        self.model_fx.clear();
+        self.ent_fx.clear();
+        self.sky_dirty = true;
         self.loaded_for = Some(key);
+    }
+
+    /// `r_partinfo`: loaded configs, types and live particles per type.
+    pub fn info(&self, cl: &ClientState) -> String {
+        let mut o = format!(
+            "configs: {:?}\ntypes: {} ({} loaded), textures: {}\nprecached: {}\nparticles: {}, beams: {}, decals: {}\n",
+            self.reg.loaded_configs,
+            self.reg.types.len(),
+            self.reg.types.iter().filter(|t| t.is_loaded()).count(),
+            self.reg.textures.len(),
+            cl.particle_precache.iter().filter(|n| !n.is_empty()).count(),
+            self.sys.num_particles(),
+            self.sys.num_beams(),
+            self.sys.num_decals(),
+        );
+        let pre: Vec<_> = cl.particle_precache.iter().filter(|n| !n.is_empty()).take(8).collect();
+        o.push_str(&format!("first precaches: {pre:?}\nrequests: {}\n", self.requests));
+        for &t in self.sys.run_list() {
+            let n = self.sys.particles_of(t).count();
+            let ty = &self.reg.types[t];
+            o.push_str(&format!("  {}.{}: {n}\n", ty.config, ty.name));
+        }
+        o
     }
 
     /// Tells the client which effect names are scripted.
@@ -198,17 +236,25 @@ impl Fte {
         mapname: &str,
     ) -> (Vec<FteVertex>, Vec<u32>, Vec<FteBatch>) {
         let queue = std::mem::take(&mut cl.fte_queue);
+        self.requests += queue.len() as u64;
         if self.reg.types.is_empty() && queue.is_empty() && self.sys.run_list().is_empty() {
             return Default::default();
         }
         let Some(bsp) = bsp else { return Default::default() };
         if self.cm.as_ref().is_none_or(|(n, _)| n != mapname) {
-            self.cm = Some((mapname.to_string(), CollisionModel::from_bsp(bsp)));
+            self.cm = Some((mapname.to_string(), std::rc::Rc::new(CollisionModel::from_bsp(bsp))));
             self.trails.clear();
+            self.ent_fx.clear();
+            self.sky_dirty = true;
         }
-        let cm = &self.cm.as_ref().unwrap().1;
-        let world = BspWorld { bsp, cm };
+        let Some(cm) = self.cm.as_ref().map(|c| c.1.clone()) else { return Default::default() };
+        let world = BspWorld { bsp, cm: &cm };
         let mut f = files(fs);
+        // CL_ForceProtocolParticles: a server using particleeffectnum gets
+        // effectinfo.txt loaded implicitly (weakly), for un-namespaced names.
+        if !cl.particle_precache.is_empty() && !self.reg.loaded_configs.iter().any(|c| c == "effectinfo") {
+            self.reg.load_set("effectinfo", true, false, &mut f);
+        }
         let ft = (cl.time - cl.oldtime).max(0.0) as f32;
         for q in queue {
             match q {
@@ -218,23 +264,52 @@ impl Fte {
                         self.sys.run_effect(&self.reg, &world, org.into(), d, count, t, None);
                     }
                 }
-                FteRequest::Trail { name, start, end, entity } => {
+                FteRequest::Trail { name, start, end, entity, interval } => {
                     if let Some(t) = self.reg.find(&name, &mut f) {
                         let slot = self.trails.entry(entity).or_insert(None);
-                        self.sys.trail(&self.reg, &world, start.into(), end.into(), t, ft, entity, Some(slot));
+                        let dt = interval.unwrap_or(ft);
+                        self.sys.trail(&self.reg, &world, start.into(), end.into(), t, dt, entity, Some(slot));
                     }
+                }
+                FteRequest::Weather { min, max, dir, count, colour, snow } => {
+                    let name = if snow { "snow" } else { "rain" };
+                    let (lo, hi, d) = (min.into(), max.into(), dir.into());
+                    self.sys.run_weather(&mut self.reg, &mut f, &world, lo, hi, d, count, colour, name);
                 }
             }
         }
-        // Effects may have loaded new types (namespaces on demand).
+        // Effects may have loaded new configs (namespaces on demand, e.g.
+        // `effectinfo.foo`); scripted names then replace classic effects.
         self.reg.resolve_textures(&mut f);
+        if self.reg.dirty {
+            self.reg.dirty = false;
+            self.sys.refresh_pe(&mut self.reg, &mut f);
+            self.publish(cl);
+            self.model_fx.clear();
+            self.sky_dirty = true;
+        }
+        if self.sky_dirty {
+            self.sky_dirty = false;
+            self.sys.clear_sky_tris();
+            let tris = sky_tris(bsp, &mut self.reg, &mut f);
+            if !tris.is_empty() {
+                self.sys.set_sky_tris(1, tris);
+            }
+        }
+        self.model_effects(cl, &world, &mut f, ft);
         upload_textures(&self.reg, &mut self.pics, r, &mut f);
 
         let (fwd, right, up) = qcore::math::angle_vectors(view.angles.into());
         let vi = ViewInfo { origin: view.origin.into(), forward: fwd, right, up };
         let eo = |_: i32| None;
         let mut g = Geometry::new(&self.reg, vi, self.sys.particletime, &eo);
-        let input = FrameInput { cl_time: cl.time, vieworg: view.origin.into(), rain: Vec::new() };
+        // The world is model 1 at the origin (brush entities don't rain yet).
+        let rain = vec![qpart::RainEmitter {
+            model: 1,
+            axis: [Vec3::new(1.0, 0.0, 0.0), Vec3::new(0.0, -1.0, 0.0), Vec3::new(0.0, 0.0, 1.0)],
+            origin: Vec3::ZERO,
+        }];
+        let input = FrameInput { cl_time: cl.time, vieworg: view.origin.into(), rain };
         self.sys.frame(&self.reg, &world, &input, &mut g);
 
         for d in self.sys.dlights.drain(..) {
@@ -277,6 +352,105 @@ impl Fte {
             .collect();
         (verts, g.indices, batches)
     }
+}
+
+impl Fte {
+    /// `r_effect` / `r_trail` effects of visible entities (CL_RelinkEntities).
+    fn model_effects(&mut self, cl: &ClientState, world: &BspWorld<'_>, f: &mut dyn qpart::FileSource, ft: f32) {
+        if self.reg.associated.is_empty() {
+            return;
+        }
+        for &i in &cl.visedicts {
+            let Some(e) = cl.entities.get(i) else { continue };
+            let Some(name) = cl.model_name(e.model) else { continue };
+            let me = match self.model_fx.get(name) {
+                Some(m) => *m,
+                None => {
+                    let m = self.reg.model_effects(name, f);
+                    self.model_fx.insert(name.to_string(), m);
+                    m
+                }
+            };
+            if me.trail.is_none() && me.emit.is_none() {
+                continue;
+            }
+            let key = i as i32;
+            let entry = self.ent_fx.entry(key).or_insert((e.origin, None));
+            let oldorg = std::mem::replace(&mut entry.0, e.origin);
+            if let Some(t) = me.trail {
+                let slot = self.trails.entry(key).or_insert(None);
+                self.sys.trail(&self.reg, world, oldorg.into(), e.origin.into(), t, ft, key, Some(slot));
+            }
+            if let Some(t) = me.emit {
+                let (fwd, _, up) = qcore::math::angle_vectors(e.angles.into());
+                let dir = if me.flags & qpart::EMIT_FORWARDS != 0 {
+                    // the "stupid vanilla bug": alias models pitch the other way
+                    if name.ends_with(".mdl") { Vec3::new(fwd.x, fwd.y, -fwd.z) } else { fwd }
+                } else {
+                    up * -1.0
+                };
+                let mut slot = self.ent_fx.get(&key).and_then(|x| x.1);
+                self.sys.run_effect(&self.reg, world, e.origin.into(), Some(dir), ft, t, Some(&mut slot));
+                if let Some(x) = self.ent_fx.get_mut(&key) {
+                    x.1 = slot;
+                }
+            }
+        }
+    }
+}
+
+/// Sky-triangle rain emitters of the world (PScript_RecalculateSkyTris):
+/// worldspawn `[_]texpart_<texture>` keys, else effects named `tex_<texture>`.
+fn sky_tris(bsp: &Bsp, reg: &mut Registry, f: &mut dyn qpart::FileSource) -> Vec<qpart::SkyTri> {
+    let mut remap: HashMap<usize, qpart::TypeId> = HashMap::new();
+    let mut s = bsp.entities.as_str();
+    if let Some(("{", rest)) = qcore::cmd::com_parse(s) {
+        s = rest;
+        while let Some((k, rest)) = qcore::cmd::com_parse(s) {
+            if k == "}" {
+                break;
+            }
+            let Some((v, rest)) = qcore::cmd::com_parse(rest) else { break };
+            s = rest;
+            let key = k.strip_prefix('_').unwrap_or(k).trim_end();
+            if key.len() > 8 && key[..8].eq_ignore_ascii_case("texpart_") {
+                for (t, tex) in bsp.textures.iter().enumerate() {
+                    if tex.as_ref().is_some_and(|m| m.name.eq_ignore_ascii_case(&key[8..]))
+                        && let Some(ty) = reg.find(v, f)
+                    {
+                        remap.insert(t, ty);
+                    }
+                }
+            }
+        }
+    }
+    let mut out = Vec::new();
+    let Some(m) = bsp.models.first() else { return out };
+    let mut by_tex: HashMap<usize, Option<qpart::TypeId>> = HashMap::new();
+    for fi in m.first_face.max(0) as usize..(m.first_face + m.num_faces).max(0) as usize {
+        let Some(face) = bsp.faces.get(fi) else { continue };
+        let Some(ti) = bsp.texinfo.get(face.texinfo as usize) else { continue };
+        let t = ti.miptex.max(0) as usize;
+        let ty = *by_tex.entry(t).or_insert_with(|| {
+            remap.get(&t).copied().or_else(|| {
+                let name = bsp.textures.get(t).and_then(|x| x.as_ref())?.name.clone();
+                reg.find(&format!("tex_{name}"), f)
+            })
+        });
+        let Some(ty) = ty else { continue };
+        let mut verts = Vec::new();
+        for e in face.first_edge..face.first_edge + face.num_edges {
+            let Some(&se) = bsp.surfedges.get(e as usize) else { break };
+            let v = if se >= 0 { bsp.edges.get(se as usize).map(|e| e[0]) } else { bsp.edges.get((-se) as usize).map(|e| e[1]) };
+            if let Some(p) = v.and_then(|v| bsp.vertexes.get(v as usize)) {
+                verts.push(Vec3::from(*p));
+            }
+        }
+        let pn = bsp.planes.get(face.plane as usize).map_or(Vec3::ZERO, |p| Vec3::from(p.normal));
+        let normal = if face.side != 0 { pn * -1.0 } else { pn };
+        out.extend(qpart::sky_tris_for_polygon(&verts, normal, ty));
+    }
+    out
 }
 
 /// Uploads textures added to the registry since the last call.

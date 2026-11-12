@@ -17,6 +17,7 @@ pub mod fields;
 mod host;
 pub mod loc;
 pub mod msg;
+pub mod particles;
 mod send;
 mod save;
 mod server;
