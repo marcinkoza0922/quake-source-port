@@ -264,6 +264,8 @@ const GRAPHICS: &[Item] = &[
 const COLORBLIND: &[(&str, f32)] =
     &[("off", 0.0), ("protanopia", 1.0), ("deuteranopia", 2.0), ("tritanopia", 3.0)];
 const XHAIR_SIZE: &[(&str, f32)] = &[("small", 0.75), ("normal", 1.0), ("large", 1.5), ("huge", 2.5)];
+const XHAIR_SHAPE: &[(&str, f32)] =
+    &[("cross", 0.0), ("gap cross", 1.0), ("dot", 2.0), ("cross + dot", 3.0), ("T", 4.0), ("box", 5.0)];
 const XHAIR_COLOR: &[(&str, f32)] =
     &[("white", 0.0), ("yellow", 1.0), ("green", 2.0), ("cyan", 3.0), ("magenta", 4.0), ("red", 5.0)];
 const TEXT_SIZE: &[(&str, f32)] = &[("normal", 1.0), ("large", 1.5), ("larger", 2.0), ("largest", 3.0)];
@@ -298,6 +300,7 @@ const HUD: &[Item] = &[
     Item::Choice { label: "HUD Style", cvar: "scr_hudstyle", choices: HUD_STYLE },
     Item::Sub { label: "Modern HUD Layout", page: Page::HudLayout },
     toggle("Crosshair", "crosshair"),
+    Item::Choice { label: "Crosshair Shape", cvar: "crosshair_shape", choices: XHAIR_SHAPE },
     Item::Choice { label: "Crosshair Size", cvar: "crosshair_size", choices: XHAIR_SIZE },
     Item::Choice { label: "Crosshair Color", cvar: "crosshair_color", choices: XHAIR_COLOR },
     toggle("Crosshair Outline", "crosshair_outline"),

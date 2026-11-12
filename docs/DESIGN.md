@@ -101,8 +101,8 @@ Custom immediate-mode UI (`qui`) drawing through the renderer's 2D batch, concha
 - `v_flashscale`: scales damage/bonus/powerup cshifts in `ViewState::blend`;
   liquid tints stay.
 - `r_colorblind` 0–3: daltonize in `post.frag` after the polyblend.
-- `crosshair_size`/`crosshair_color`/`crosshair_outline`: pixel-drawn "+"
-  (`draw_crosshair` in host.rs).
+- `crosshair_shape` (0 cross, 1 gap cross, 2 dot, 3 cross+dot, 4 T, 5 box)/`crosshair_size`/`crosshair_color`/`crosshair_outline`: pixel-drawn
+  rects (`draw_crosshair` in host.rs).
 - `cl_captions`: `src/captions.rs` maps sound path prefixes to captions,
   merged as "xN", 2.5 s hold, drawn above the HUD.
 - `scr_textscale`/`scr_textbg`: scale and backdrop for notify, centerprint
