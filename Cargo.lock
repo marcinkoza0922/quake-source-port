@@ -134,6 +134,7 @@ dependencies = [
  "qformats",
  "qnet",
  "qserver",
+ "qworld",
 ]
 
 [[package]]
@@ -226,6 +227,7 @@ dependencies = [
  "qsound",
  "qui",
  "qvm",
+ "qwfake",
  "qworld",
 ]
 
@@ -244,6 +246,16 @@ dependencies = [
  "qcore",
  "qecs",
  "qformats",
+]
+
+[[package]]
+name = "qwfake"
+version = "0.1.0"
+dependencies = [
+ "qcore",
+ "qformats",
+ "qnet",
+ "qworld",
 ]
 
 [[package]]

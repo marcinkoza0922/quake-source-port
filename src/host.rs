@@ -105,6 +105,7 @@ const HOST_CVARS: &[(&str, &str, u32)] = &[
     ("_mp_map", "", CVAR_ARCHIVE),
     ("scr_showfps", "0", CVAR_ARCHIVE),
     ("cl_startdemos", "1", CVAR_ARCHIVE),
+    ("cl_nopred", "0", 0),
     ("viewsize", "100", CVAR_ARCHIVE),
     ("campaign", "0", 0),
     ("horde", "0", 0),
@@ -228,8 +229,10 @@ pub struct Host {
     net_server: Option<crate::net::NetServer>,
     /// Connection to a remote server (`connect`).
     net_client: Option<crate::net::NetClient>,
-    /// Last server address, for `reconnect`.
-    last_server: Option<std::net::SocketAddr>,
+    /// Connection to a QuakeWorld server (`connect qw://...`).
+    qw_client: Option<crate::qw::QwClient>,
+    /// Last server address, for `reconnect` (true: QuakeWorld).
+    last_server: Option<(std::net::SocketAddr, bool)>,
     /// UDP port to listen on (`-port`, `port`).
     pub net_port: u16,
     /// `-dedicated`: no local client.
@@ -324,6 +327,7 @@ impl Host {
             timedemo: None,
             net_server: None,
             net_client: None,
+            qw_client: None,
             last_server: None,
             net_port: crate::net::DEFAULT_PORT,
             dedicated: false,
@@ -348,6 +352,10 @@ impl Host {
 
     /// Send a name/color change to the server for the local client.
     fn send_userinfo(&mut self, cmd: &str) {
+        if let Some(q) = &mut self.qw_client {
+            qw_userinfo(q, cmd);
+            return;
+        }
         if self.net_client.is_some() {
             if self.cl.signon > 0 {
                 self.cl.send_string_cmd(cmd);
@@ -378,7 +386,7 @@ impl Host {
         let known = self.cmds.exists(&name) || self.cmds.alias(&name).is_some() || self.server.core.cvars.find(&name).is_some();
         if known {
             qcore::cmd::execute_string(self, line);
-        } else if self.net_client.is_some() && !matches!(name.as_str(), "map" | "maxplayers" | "restart" | "changelevel") {
+        } else if self.remote() && !matches!(name.as_str(), "map" | "maxplayers" | "restart" | "changelevel") {
             // Cmd_ForwardToServer. A typed `ping` prints its reply.
             if name == "ping" {
                 self.ping_expect = None;
@@ -596,7 +604,7 @@ impl Host {
     /// Connects the local client when a server is running without one.
     fn check_local_client(&mut self) {
         self.update_listen();
-        if self.net_client.is_some() {
+        if self.remote() {
             if !self.server.active() {
                 return;
             }
@@ -635,6 +643,9 @@ impl Host {
     fn disconnect_client(&mut self) {
         if let Some(mut n) = self.net_client.take() {
             n.disconnect(self.realtime);
+        }
+        if let Some(mut q) = self.qw_client.take() {
+            q.disconnect();
         }
         if self.demo.take().is_some() {
             self.finish_timedemo();
@@ -684,7 +695,7 @@ impl Host {
             }
             if let Err(e) = r {
                 self.con.print(&format!("Host_Error: {e:?}\n"));
-                if self.net_client.is_none() {
+                if !self.remote() {
                     self.server.level = None;
                 }
                 self.disconnect_client();
@@ -829,15 +840,104 @@ impl Host {
         match crate::net::NetClient::connect(a, self.realtime) {
             Ok(n) => {
                 self.net_client = Some(n);
-                self.last_server = Some(a);
+                self.last_server = Some((a, false));
             }
             Err(e) => self.con.print(&format!("Connection failed: {e}\n")),
         }
     }
 
+    /// Connected (or connecting) to a remote NetQuake or QuakeWorld server.
+    fn remote(&self) -> bool {
+        self.net_client.is_some() || self.qw_client.is_some()
+    }
+
+    /// `connect qw://<address>` / `qwconnect <address>`.
+    fn connect_qw(&mut self, addr: &str) {
+        let Some(a) = crate::qw::resolve(addr) else {
+            self.con.print(&format!("Couldn't resolve {addr}\n"));
+            return;
+        };
+        self.stop_game();
+        self.demonum = -1;
+        self.cl = ClientState::new();
+        self.cl.name = self.cvs("_cl_name").to_string();
+        self.cl.color = self.cv("_cl_color") as i32;
+        let mut ui = String::new();
+        let color = self.cl.color;
+        for (k, v) in [
+            ("name", self.cl.name.clone()),
+            ("topcolor", (color >> 4).to_string()),
+            ("bottomcolor", (color & 15).to_string()),
+            ("rate", "25000".into()),
+            ("msg", "1".into()),
+        ] {
+            qnet::qw::info_set(&mut ui, k, &v);
+        }
+        self.con.print(&format!("Connecting to QuakeWorld server {a}...\n"));
+        match crate::qw::QwClient::connect(a, ui, self.realtime) {
+            Ok(q) => {
+                self.qw_client = Some(q);
+                self.last_server = Some((a, true));
+            }
+            Err(e) => self.con.print(&format!("Connection failed: {e}\n")),
+        }
+    }
+
+    /// Read the QuakeWorld server's messages.
+    fn poll_qw(&mut self) {
+        let now = self.realtime;
+        let Some(q) = &mut self.qw_client else { return };
+        match q.poll(&mut self.server.core.fs, now) {
+            crate::qw::QwPoll::Messages(m, prints) => {
+                for p in prints {
+                    self.con.print(&p);
+                }
+                self.deliver(m);
+            }
+            crate::qw::QwPoll::Failed(why) => {
+                self.con.print(&format!("Disconnected: {why}"));
+                self.disconnect_client();
+            }
+        }
+    }
+
+    /// QW: the predicted local player replaces the server's position, and
+    /// the scoreboard takes the server's pings.
+    fn apply_qw_prediction(&mut self) {
+        let nopred = self.cv("cl_nopred") != 0.0;
+        let Some(q) = &mut self.qw_client else { return };
+        q.predict(self.realtime, nopred);
+        let qw = &q.qw;
+        for (i, s) in self.cl.scores.iter_mut().enumerate() {
+            s.ping = qw.ping(i);
+        }
+        if !qw.predicted {
+            return;
+        }
+        if let Some(e) = self.cl.entities.get_mut(self.cl.viewentity) {
+            e.origin = qw.simorg;
+        }
+        self.cl.velocity = qw.simvel;
+        self.cl.onground = qw.sim_onground;
+    }
+
     /// Client string commands (clc_stringcmd) back to the server.
     fn forward_client_cmds(&mut self) {
         let out = self.cl.take_reliable_out();
+        if let Some(q) = &mut self.qw_client {
+            for s in string_cmds(&out) {
+                let low = s.trim_start().to_ascii_lowercase();
+                let word = low.split_whitespace().next().unwrap_or("");
+                // The NQ signon replies; QW runs its own signon, and name
+                // and colour are in the userinfo (changes go through
+                // send_userinfo as setinfo).
+                if matches!(word, "prespawn" | "spawn" | "begin" | "name" | "color") {
+                    continue;
+                }
+                q.stringcmd(s.trim_end());
+            }
+            return;
+        }
         if let Some(n) = &mut self.net_client {
             if !out.is_empty() {
                 n.send_reliable(&out, self.realtime);
@@ -954,7 +1054,7 @@ impl Host {
                 ClientEvent::Disconnect if self.demo.is_some() => self.end_demo(),
                 ClientEvent::Disconnect => {
                     self.con.print("Server disconnected\n");
-                    if self.net_client.is_some() {
+                    if self.remote() {
                         self.disconnect_client();
                         return;
                     }
@@ -1298,6 +1398,25 @@ impl Host {
                     self.pend_impulse = 0;
                 }
             }
+            if let Some(q) = &mut self.qw_client {
+                let c = self.last_cmd;
+                let cmd = qnet::qw::UserCmd {
+                    msec: 0,
+                    angles: c.viewangles,
+                    forwardmove: c.forwardmove.clamp(-32768.0, 32767.0) as i16,
+                    sidemove: c.sidemove.clamp(-32768.0, 32767.0) as i16,
+                    upmove: c.upmove.clamp(-32768.0, 32767.0) as i16,
+                    buttons: self.pend_attack as u8 | (self.pend_jump as u8) << 1,
+                    impulse: self.pend_impulse,
+                };
+                let active = self.cl.signon == 4;
+                q.send_cmd(cmd, self.realtime);
+                if active {
+                    self.pend_attack = false;
+                    self.pend_jump = false;
+                    self.pend_impulse = 0;
+                }
+            }
             if self.net_client.is_some() && self.local.is_none() {
                 let mut cmd = self.last_cmd;
                 cmd.buttons = self.pend_attack as u8 | (self.pend_jump as u8) << 1;
@@ -1335,12 +1454,14 @@ impl Host {
             self.feed_client();
         }
         self.poll_remote();
+        self.poll_qw();
         self.poll_lan_search();
         self.update_pings();
         self.read_demo(dt);
         self.check_local_client();
         if self.cl.signon > 0 {
             self.cl.frame(dt);
+            self.apply_qw_prediction();
         }
         self.process_client_events();
         self.update_autosave();
@@ -1957,7 +2078,7 @@ fn register_commands(c: &mut Commands<Host>) {
     c.add("startdemos", |h, a| {
         h.demos = (1..a.argc()).map(|i| a.argv(i).to_string()).collect();
         h.print(&format!("{} demo(s) in loop\n", h.demos.len()));
-        if !h.server.active() && !h.dedicated && h.net_client.is_none() && h.demonum != -1 && h.demo.is_none() {
+        if !h.server.active() && !h.dedicated && !h.remote() && h.demonum != -1 && h.demo.is_none() {
             h.demonum = 0;
             if h.cv("cl_startdemos") == 0.0 {
                 h.demonum = -1;
@@ -2070,16 +2191,43 @@ fn register_commands(c: &mut Commands<Host>) {
         }
         // COM_Parse splits "host:port" at the colon.
         let addr: String = a.args().split_whitespace().collect();
-        h.connect_remote(&addr);
+        if addr.starts_with("qw://") {
+            h.connect_qw(&addr);
+        } else {
+            h.connect_remote(&addr);
+        }
+    });
+    // Cmd_ForwardToServer_f.
+    c.add("cmd", |h, a| {
+        if !h.remote() && h.local.is_none() {
+            h.print("Can't \"cmd\", not connected\n");
+            return;
+        }
+        if a.argc() > 1 {
+            let s = a.args().to_string();
+            h.cl.send_string_cmd(&s);
+        }
+    });
+    c.add("qwconnect", |h, a| {
+        if a.argc() < 2 {
+            h.print("usage: qwconnect <server[:port]>\n");
+            return;
+        }
+        let addr: String = a.args().split_whitespace().collect();
+        h.connect_qw(&addr);
     });
     // CL_Reconnect_f: our client restarts the signon on the next serverinfo
     // by itself, so only a dropped connection needs action.
     c.add("reconnect", |h, _| {
-        if h.net_client.is_none()
+        if !h.remote()
             && h.local.is_none()
-            && let Some(a) = h.last_server
+            && let Some((a, qw)) = h.last_server
         {
-            h.connect_remote(&a.to_string());
+            if qw {
+                h.connect_qw(&a.to_string());
+            } else {
+                h.connect_remote(&a.to_string());
+            }
         }
     });
     c.add("menu_multiplayer", |h, a| {
@@ -2251,6 +2399,33 @@ fn relaunch_args(cmdline: &[String]) -> Vec<String> {
         }
     }
     out
+}
+
+/// The strings of the clc_stringcmd messages in `out`.
+fn string_cmds(out: &[u8]) -> Vec<String> {
+    let mut v = Vec::new();
+    let mut p = 0;
+    while p < out.len() && out[p] == CLC_STRINGCMD {
+        let end = out[p + 1..].iter().position(|&b| b == 0).map_or(out.len(), |e| p + 1 + e);
+        v.push(String::from_utf8_lossy(&out[p + 1..end]).into_owned());
+        p = end + 1;
+    }
+    v
+}
+
+/// NQ `name`/`color` commands as QW userinfo changes.
+fn qw_userinfo(q: &mut crate::qw::QwClient, cmd: &str) {
+    let a = Args::tokenize(cmd);
+    match a.argv(0).to_ascii_lowercase().as_str() {
+        "name" => q.setinfo("name", a.argv(1)),
+        "color" => {
+            let top = a.argv(1).to_string();
+            let bottom = if a.argc() > 2 { a.argv(2).to_string() } else { top.clone() };
+            q.setinfo("topcolor", &top);
+            q.setinfo("bottomcolor", &bottom);
+        }
+        _ => q.stringcmd(cmd.trim_end()),
+    }
 }
 
 #[cfg(test)]
