@@ -29,6 +29,7 @@ const SERVER_TIC: f64 = 1.0 / 72.0;
 const CLASSIC_SBAR_LINES: f32 = 48.0;
 
 const HOST_CVARS: &[(&str, &str, u32)] = &[
+    ("sv_autosave", "1", CVAR_ARCHIVE),
     ("sv_autosave_keep", "5", CVAR_ARCHIVE),
     ("sv_autosave_entry", "1", CVAR_ARCHIVE),
     ("sv_autosave_secret", "0", CVAR_ARCHIVE),
@@ -2132,7 +2133,8 @@ impl Host {
             return;
         }
         let cv = &self.server.core.cvars;
-        let keep = cv.value_of("sv_autosave_keep").clamp(0.0, crate::autosave::MAX as f32) as usize;
+        let on = cv.value_of("sv_autosave") != 0.0;
+        let keep = if on { cv.value_of("sv_autosave_keep").clamp(0.0, crate::autosave::MAX as f32) as usize } else { 0 };
         let flags = ["entry", "secret", "monsters", "secrets"].map(|n| cv.value_of(&format!("sv_autosave_{n}")) != 0.0);
         let interval = cv.value_of("sv_autosave_interval").max(0.0) as f64 * 60.0;
         let reason = self.autosave.update(self.server.time(), self.server.stats(), self.server.core.sv.loadgame, flags, interval);
@@ -2279,6 +2281,9 @@ fn register_commands(c: &mut Commands<Host>) {
             "gameplay" => Some(Page::Gameplay),
             "controls" => Some(Page::Controls),
             "input" => Some(Page::Input),
+            "mouse" | "keyboard" => Some(Page::Mouse),
+            "controller" | "gamepad" => Some(Page::Controller),
+            "autosave" => Some(Page::Autosave),
             "graphics" => Some(Page::Graphics),
             "audio" => Some(Page::Audio),
             _ => None,

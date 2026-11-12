@@ -32,6 +32,10 @@ pub enum Page {
     Input,
     Graphics,
     Audio,
+    /// Sub-pages reached from an `Item::Sub` row.
+    Mouse,
+    Controller,
+    Autosave,
     /// Multiplayer pages (reached from Screen::Multiplayer).
     Join,
     Host,
@@ -71,6 +75,8 @@ enum Item {
     Bind { label: &'static str, cmd: &'static str },
     /// Restore the default bindings.
     ResetBinds,
+    /// Opens a nested options page.
+    Sub { label: &'static str, page: Page },
 }
 
 #[derive(Clone, Copy, PartialEq, Eq)]
@@ -166,7 +172,12 @@ const GAMEPLAY: &[Item] = &[
     toggle("Modern HUD", "scr_hudstyle"),
     toggle("Show FPS", "scr_showfps"),
     toggle("Level Select", "ui_levelselect"),
-    slider("Autosaves to Keep (0 = off)", "sv_autosave_keep", 0.0, 10.0, 1.0),
+    toggle("Autosave", "sv_autosave"),
+    Item::Sub { label: "Autosave Settings", page: Page::Autosave },
+];
+
+const AUTOSAVE: &[Item] = &[
+    slider("Autosaves to Keep", "sv_autosave_keep", 1.0, 10.0, 1.0),
     toggle("Save on Level Entry", "sv_autosave_entry"),
     Item::Choice { label: "Autosave Timer", cvar: "sv_autosave_interval", choices: MINUTES },
     toggle("Save on Secret Found", "sv_autosave_secret"),
@@ -175,8 +186,17 @@ const GAMEPLAY: &[Item] = &[
 ];
 
 const INPUT: &[Item] = &[
+    Item::Sub { label: "Mouse & Keyboard", page: Page::Mouse },
+    Item::Sub { label: "Controller", page: Page::Controller },
+    Item::Choice { label: "Wheel Slow Motion", cvar: "cl_wheel_timescale", choices: WHEEL_TIME },
+];
+
+const MOUSE: &[Item] = &[
     slider("Mouse Speed", "sensitivity", 1.0, 11.0, 0.5),
     toggle("Invert Mouse", "m_invert"),
+];
+
+const CONTROLLER: &[Item] = &[
     slider("Stick Look Yaw", "joy_sensitivity_yaw", 60.0, 480.0, 20.0),
     slider("Stick Look Pitch", "joy_sensitivity_pitch", 40.0, 300.0, 10.0),
     toggle("Invert Stick", "joy_invert"),
@@ -186,7 +206,6 @@ const INPUT: &[Item] = &[
     toggle("Gyro", "gyro_enable"),
     slider("Rumble", "joy_rumble", 0.0, 1.0, 0.25),
     Item::Choice { label: "Button Glyphs", cvar: "joy_glyphs", choices: GLYPHS },
-    Item::Choice { label: "Wheel Slow Motion", cvar: "cl_wheel_timescale", choices: WHEEL_TIME },
 ];
 
 const GLYPHS: &[(&str, f32)] = &[("auto", 0.0), ("xbox", 1.0), ("playstation", 2.0), ("nintendo", 3.0)];
@@ -229,6 +248,9 @@ fn page_items(p: Page) -> &'static [Item] {
         Page::Input => INPUT,
         Page::Graphics => GRAPHICS,
         Page::Audio => AUDIO,
+        Page::Mouse => MOUSE,
+        Page::Controller => CONTROLLER,
+        Page::Autosave => AUTOSAVE,
         Page::Join => JOIN,
         Page::Host => HOST,
         Page::Setup => SETUP,
@@ -240,8 +262,18 @@ fn page_name(p: Page) -> &'static str {
         Page::Join => "Join Game",
         Page::Host => "Host Game",
         Page::Setup => "Player Setup",
+        Page::Mouse => "Mouse & Keyboard",
+        Page::Controller => "Controller",
+        Page::Autosave => "Autosave",
         _ => PAGES.iter().find(|x| x.1 == p).map_or("", |x| x.0),
     }
+}
+
+/// The page an `Item::Sub` page returns to, with that row's index.
+fn parent_page(p: Page) -> Option<(Page, usize)> {
+    [Page::Gameplay, Page::Input].into_iter().find_map(|parent| {
+        page_items(parent).iter().position(|i| matches!(i, Item::Sub { page, .. } if *page == p)).map(|i| (parent, i))
+    })
 }
 
 fn is_net_page(p: Page) -> bool {
@@ -250,7 +282,7 @@ fn is_net_page(p: Page) -> bool {
 
 /// Every cvar the options pages edit (the host marks them archived).
 pub fn option_cvars() -> impl Iterator<Item = &'static str> {
-    [GAMEPLAY, INPUT, GRAPHICS, AUDIO].into_iter().flatten().filter_map(|i| match *i {
+    [GAMEPLAY, AUTOSAVE, INPUT, MOUSE, CONTROLLER, GRAPHICS, AUDIO].into_iter().flatten().filter_map(|i| match *i {
         Item::Slider { cvar, .. } | Item::Toggle { cvar, .. } | Item::Choice { cvar, .. } => Some(cvar),
         _ => None,
     })
@@ -897,7 +929,14 @@ impl Menu {
                     if p == Page::Setup {
                         out.push(Action::Command(Self::setup_commands(cv)));
                     }
-                    self.screen = if is_net_page(p) { Screen::Multiplayer } else { Screen::Options };
+                    self.screen = if is_net_page(p) {
+                        Screen::Multiplayer
+                    } else if let Some((parent, row)) = parent_page(p) {
+                        self.opt_cursor = row;
+                        Screen::OptionsPage(parent)
+                    } else {
+                        Screen::Options
+                    };
                     return out;
                 }
                 let n = self.page_len(p);
@@ -942,6 +981,14 @@ impl Menu {
                                 self.bindings[k as usize] = None;
                             }
                             out.push(Action::Sound("misc/menu3.wav"));
+                        }
+                        return out;
+                    }
+                    Item::Sub { page, .. } => {
+                        if enter || right {
+                            self.opt_cursor = 0;
+                            self.screen = Screen::OptionsPage(page);
+                            out.push(Action::Sound("misc/menu2.wav"));
                         }
                         return out;
                     }
@@ -1047,7 +1094,7 @@ impl Menu {
                 let i = (cur as i32 + dir).rem_euclid(n) as usize;
                 cv.set("_mp_map", &self.net_maps[i].name.clone());
             }
-            Item::Text { .. } | Item::Run { .. } | Item::Server(_) | Item::Bind { .. } | Item::ResetBinds => return false,
+            Item::Text { .. } | Item::Run { .. } | Item::Server(_) | Item::Bind { .. } | Item::ResetBinds | Item::Sub { .. } => return false,
             Item::Apply => {
                 if !enter {
                     return false;
@@ -1549,6 +1596,11 @@ impl Menu {
                     c.string(BIND_PAD_X, y, "---");
                 }
             }
+            Item::Sub { label: l, page } => {
+                label(c, l);
+                let dim = page == Page::Autosave && cv.value_of("sv_autosave") == 0.0;
+                c.string(VALUE_X, y, if dim { "(off) >" } else { ">" });
+            }
             Item::ResetBinds => {
                 let l = "Reset to Defaults";
                 gold(c, ((640.0 - l.len() as f32 * 8.0) / 2.0).floor(), y, l);
@@ -1800,6 +1852,23 @@ mod multiplayer_tests {
 #[cfg(test)]
 mod save_menu_tests {
     use super::*;
+    #[test]
+    fn options_subpages_open_and_return_to_parent_row() {
+        let mut m = Menu::new();
+        let mut cv = Cvars::new();
+        m.open(Screen::OptionsPage(Page::Input));
+        m.key(K_DOWNARROW, &mut cv, false);
+        m.key(K_ENTER, &mut cv, false);
+        assert_eq!(m.screen, Screen::OptionsPage(Page::Controller));
+        assert_eq!(m.opt_cursor, 0);
+        m.key(K_ESCAPE, &mut cv, false);
+        assert_eq!(m.screen, Screen::OptionsPage(Page::Input));
+        assert_eq!(m.opt_cursor, 1);
+        assert_eq!(parent_page(Page::Autosave).map(|p| p.0), Some(Page::Gameplay));
+        assert!(option_cvars().any(|c| c == "sv_autosave"));
+        assert!(option_cvars().any(|c| c == "joy_invert"));
+    }
+
     #[test]
     fn autosave_submenu_navigation_and_slot_mapping() {
         let mut m = Menu::new();
