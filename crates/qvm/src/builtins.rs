@@ -52,9 +52,10 @@ builtin_enum! {
 }
 
 impl Builtin {
-    /// Name lookup incl. the 2021 re-release `ex_*` aliases.
+    /// Name lookup incl. the 2021 re-release `ex_*` aliases. The aliases are
+    /// matched case-insensitively: rogue's progs declare `ex_finaleFinished`.
     pub fn from_name(s: &str) -> Option<Self> {
-        Some(match s {
+        Some(match s.to_ascii_lowercase().as_str() {
             "ex_centerprint" => Self::Centerprint,
             "ex_bprint" => Self::Bprint,
             "ex_sprint" => Self::Sprint,
@@ -685,3 +686,15 @@ fn pf_sprintf(vm: &mut Vm, _: &mut dyn Host) -> Result<()> {
     Ok(())
 }
 
+
+#[cfg(test)]
+mod name_tests {
+    use super::Builtin;
+
+    #[test]
+    fn rerelease_aliases_ignore_case() {
+        assert_eq!(Builtin::from_name("ex_finaleFinished"), Some(Builtin::FinaleFinished));
+        assert_eq!(Builtin::from_name("ex_finalefinished"), Some(Builtin::FinaleFinished));
+        assert_eq!(Builtin::from_name("finaleFinished"), Some(Builtin::FinaleFinished));
+    }
+}

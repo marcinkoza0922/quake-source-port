@@ -447,7 +447,9 @@ impl Server {
                 msg.float(l.vm.time as f32);
                 let e = i as u32 + 1;
                 write_clientdata(&mut l.vm, c, &mut l.world, e, &mut msg);
-                write_entities(&mut l.vm, c, e, &mut msg, &mut pvs);
+                if !c.skip_entity_updates {
+                    write_entities(&mut l.vm, c, e, &mut msg, &mut pvs);
+                }
                 if msg.len() + c.sv.datagram.len() < msg.maxsize {
                     msg.write(&c.sv.datagram.data);
                 }
