@@ -312,6 +312,8 @@ pub struct Sbar<'a, 'b> {
     x0: f32,
     /// Opacity for the element being drawn (immersive fade).
     alpha: f32,
+    /// Local `teamplay` cvar (rogue CTF modes 4..6 replace the face).
+    pub teamplay: f32,
 }
 
 impl<'a, 'b> Sbar<'a, 'b> {
@@ -319,7 +321,7 @@ impl<'a, 'b> Sbar<'a, 'b> {
         c.reset_origin();
         let x0 = ((c.vw() - 320.0) / 2.0).floor();
         let y0 = c.vh() - 24.0;
-        Self { c, pack, pic, y0, x0, alpha: 1.0 }
+        Self { c, pack, pic, y0, x0, alpha: 1.0, teamplay: 0.0 }
     }
     /// Classic layout: fills the strip below the 3D view (`lines` virtual
     /// rows) edge to edge with the backtile before drawing the bar.
@@ -665,14 +667,41 @@ impl<'a, 'b> Sbar<'a, 'b> {
                 self.draw_pic(0.0, 0.0, n);
             }
         }
-        // face
-        let face = Self::face_name(cl, face_anim);
-        self.draw_pic(112.0, 0.0, &face);
+        // face (rogue CTF: team colour swatch with frags instead)
+        if !self.rogue_team_face(cl) {
+            let face = Self::face_name(cl, face_anim);
+            self.draw_pic(112.0, 0.0, &face);
+        }
         self.draw_num(136.0, 0.0, st[STAT_HEALTH], 3, st[STAT_HEALTH] <= 25);
         if let Some(n) = self.pack.ammo_pic(items) {
             self.draw_pic(224.0, 0.0, n);
         }
         self.draw_num(248.0, 0.0, st[STAT_AMMO], 3, st[STAT_AMMO] <= 10);
+    }
+
+    /// Rogue's Sbar_DrawFace team swatch: r_teambord, shirt over pants,
+    /// and the frag count (gold digits on a white shirt). Only in
+    /// multiplayer with teamplay 4..6 (the CTF modes).
+    fn rogue_team_face(&mut self, cl: &ClientState) -> bool {
+        if self.pack != Pack::Rogue || cl.maxclients <= 1 || !(self.teamplay > 3.0 && self.teamplay < 7.0) {
+            return false;
+        }
+        let Some(s) = cl.scores.get(cl.viewentity.wrapping_sub(1)) else { return false };
+        let (top, bottom) = ((s.colors >> 4) & 15, s.colors & 15);
+        let frags = s.frags;
+        self.draw_pic(112.0, 0.0, "r_teambord");
+        let (x, y) = (self.x0 + 113.0, self.y0);
+        self.c.fill(x, y + 3.0, 22.0, 9.0, crate::draw::player_color(top));
+        self.c.fill(x, y + 12.0, 22.0, 9.0, crate::draw::player_color(bottom));
+        let num = format!("{frags:3}");
+        for (i, b) in num.bytes().take(3).enumerate() {
+            let ch = if top == 0 && b.is_ascii_digit() { 18 + b - b'0' } else { b };
+            if top == 0 && b == b' ' {
+                continue;
+            }
+            self.draw_char(113.0 + i as f32 * 7.0, 3.0, ch);
+        }
+        true
     }
 
     fn solo_scoreboard(&mut self, cl: &ClientState) {
@@ -760,5 +789,45 @@ pub fn finale(c: &mut Canvas, pic: &mut PicFn) {
         c.reset_origin();
         let x = ((c.vw() - w as f32) / 2.0).floor();
         c.pic(x, 16.0, p);
+    }
+}
+
+#[cfg(test)]
+mod team_face_tests {
+    use super::*;
+    use qrender::Draw2D;
+
+    fn draw(pack: Pack, teamplay: f32, maxclients: usize) -> (Vec<String>, usize) {
+        let mut cl = ClientState::new();
+        cl.maxclients = maxclients;
+        cl.scores = vec![Default::default(); maxclients];
+        cl.scores[0].colors = 0x4d;
+        cl.scores[0].frags = 7;
+        cl.viewentity = 1;
+        cl.stats[STAT_HEALTH] = 100;
+        let mut c = Canvas::new(640, 480);
+        let mut names = Vec::new();
+        let mut pf = |n: &str| {
+            names.push(n.to_string());
+            None
+        };
+        let mut sb = Sbar::new(&mut c, &mut pf, pack);
+        sb.teamplay = teamplay;
+        sb.draw(&cl, false, false);
+        let fills = c.list.iter().filter(|d| matches!(d, Draw2D::Fill { .. })).count();
+        (names, fills)
+    }
+
+    #[test]
+    fn rogue_ctf_swaps_face_for_team_colours() {
+        let (names, fills) = draw(Pack::Rogue, 4.0, 2);
+        assert!(names.iter().any(|n| n == "r_teambord"), "{names:?}");
+        assert!(!names.iter().any(|n| n.starts_with("face")));
+        assert_eq!(fills, 2);
+        // Not in single player, outside teamplay 4..6, or without rogue.
+        for (pack, tp, mc) in [(Pack::Rogue, 4.0, 1), (Pack::Rogue, 3.0, 2), (Pack::Rogue, 7.0, 2), (Pack::Id, 4.0, 2)] {
+            let (names, _) = draw(pack, tp, mc);
+            assert!(names.iter().any(|n| n.starts_with("face")), "{pack:?} {tp} {mc}");
+        }
     }
 }
