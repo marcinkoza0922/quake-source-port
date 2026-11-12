@@ -18,6 +18,7 @@
 
 mod actions;
 mod bot;
+mod diagnostics;
 mod hints;
 mod movement;
 mod nav;
@@ -152,8 +153,14 @@ fn json_str(s: &str) -> String {
 
 fn report_json(r: &bot::Report) -> String {
     let errs: Vec<String> = r.errors.iter().map(|e| json_str(e)).collect();
+    let assists = r.assists.iter().map(|a| format!(
+        "{{\"time\":{:.2},\"cause\":{},\"goal\":{},\"kind\":{},\"classname\":{},\"reason\":{},\"from\":[{},{},{}],\"to\":[{},{},{}],\"door\":{}}}",
+        a.time, json_str(a.cause.name()), a.goal.map_or_else(|| "null".into(), |e| e.to_string()),
+        json_str(&a.kind), json_str(&a.classname), json_str(&a.reason), a.from.x, a.from.y, a.from.z, a.to.x, a.to.y, a.to.z,
+        a.door.map_or_else(|| "null".into(), |e| e.to_string()),
+    )).collect::<Vec<_>>().join(",");
     format!(
-        "{{\"kills\": {}, \"total_monsters\": {}, \"secrets\": {}, \"total_secrets\": {}, \"noclip_uses\": {}, \"goals_failed\": {}, \"triggers_missed\": {}, \"monster_noclips\": {}, \"exit_noclips\": {}, \"nav_nodes\": {}, \"jump_links\": {}, \"jumps_completed\": {}, \"jump_failures\": {}, \"lift_detours\": {}, \"has_exit\": {}, \"exited\": {}, \"stranded\": {}, \"route\": {}, \"seed\": {}, \"variants\": {}, \"clean_variants\": {}, \"sim_time\": {:.1}, \"wall_time\": {:.1}, \"errors\": [{}]}}",
+        "{{\"kills\": {}, \"total_monsters\": {}, \"secrets\": {}, \"total_secrets\": {}, \"noclip_uses\": {}, \"goals_failed\": {}, \"triggers_missed\": {}, \"monster_noclips\": {}, \"exit_noclips\": {}, \"nav_nodes\": {}, \"jump_links\": {}, \"jumps_completed\": {}, \"jump_failures\": {}, \"lift_detours\": {}, \"prerequisite_actions\": {}, \"has_exit\": {}, \"exited\": {}, \"stranded\": {}, \"route\": {}, \"seed\": {}, \"variants\": {}, \"clean_variants\": {}, \"sim_time\": {:.1}, \"wall_time\": {:.1}, \"errors\": [{}], \"assists\": [{}]}}",
         r.kills,
         r.total_monsters,
         r.secrets,
@@ -168,6 +175,7 @@ fn report_json(r: &bot::Report) -> String {
         r.jumps_completed,
         r.jump_failures,
         r.lift_detours,
+        r.prerequisite_actions,
         r.has_exit,
         r.exited,
         r.stranded,
@@ -177,7 +185,8 @@ fn report_json(r: &bot::Report) -> String {
         r.clean_variants,
         r.sim_time,
         r.wall_time,
-        errs.join(", ")
+        errs.join(", "),
+        assists
     )
 }
 
@@ -374,6 +383,12 @@ fn main() {
     for s in &soft {
         eprintln!("SOFT {s}");
     }
+    for cause in diagnostics::Cause::ALL {
+        let count = results.iter().flat_map(|(_, r)| &r.assists).filter(|a| a.cause == cause).count();
+        let non_monster = results.iter().flat_map(|(_, r)| &r.assists)
+            .filter(|a| a.cause == cause && a.kind != "Monster").count();
+        if count > 0 { eprintln!("qbot: assists {}: {count} ({non_monster} non-monster)", cause.name()); }
+    }
     eprintln!("qbot: {} maps, report {}", results.len(), out.display());
     if !regressions.is_empty() {
         for r in &regressions {
@@ -386,6 +401,24 @@ fn main() {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn assist_report_preserves_evidence_and_escapes_entity_names() {
+        use qui::json::Value;
+        let mut r = bot::Report { noclip_uses: 1, ..Default::default() };
+        r.assists.push(diagnostics::Assist {
+            time: 3.5, cause: diagnostics::Cause::Prerequisite, goal: Some(42),
+            kind: "Button".into(), classname: "custom\"button\n".into(), reason: "unreachable".into(),
+            from: qcore::math::Vec3::ZERO, to: qcore::math::Vec3::new(1.0, 2.0, 3.0), door: Some(7),
+        });
+        let j = qui::json::parse(&report_json(&r)).unwrap();
+        let Value::Arr(assists) = j.get("assists").unwrap() else { panic!("expected assists array") };
+        assert_eq!(assists.len(), 1);
+        assert_eq!(assists[0].get("classname"), Some(&Value::Str("custom\"button\n".into())));
+        assert_eq!(assists[0].get("cause"), Some(&Value::Str("prerequisite".into())));
+        assert_eq!(assists[0].get("door").and_then(Value::num), Some(7.0));
+        assert_eq!(j.get("noclip_uses").and_then(Value::num), Some(1.0));
+    }
 
     /// e1m1 at skill 3: the bot should kill nearly every monster, find most
     /// secrets and leave through the exit.

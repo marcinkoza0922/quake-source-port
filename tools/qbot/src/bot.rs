@@ -10,7 +10,7 @@
 
 use crate::hints;
 use crate::movement::{Jump, Probe};
-use crate::actions::{ButtonTrip, LiftAction, LiftStage};
+use crate::actions::{Approach, ButtonTrip, LiftAction, LiftStage};
 use crate::nav::{self, Blocked, EdgeKind, Forbid, FxBuild, Geo, Nav, path_to};
 use crate::route::{self, Route};
 use qcore::cvar::Cvars;
@@ -61,6 +61,7 @@ pub struct Report {
     pub total_secrets: i32,
     /// Soft failures: places the bot could not reach by game means.
     pub noclip_uses: u32,
+    pub assists: Vec<crate::diagnostics::Assist>,
     pub goals_failed: u32,
     /// Triggers the bot never got into (often monster-only or decorative).
     pub triggers_missed: u32,
@@ -74,6 +75,7 @@ pub struct Report {
     pub jumps_completed: u32,
     pub jump_failures: u32,
     pub lift_detours: u32,
+    pub prerequisite_actions: u32,
     pub sim_time: f64,
     pub wall_time: f64,
     /// The level has a trigger_changelevel.
@@ -1274,21 +1276,38 @@ impl Bot<'_> {
                     && let Some(m) = path.windows(2).find_map(|w| gates.door.get(&(w[0], w[1])))
                     && let Some(&o) = gates.openers.get(m).into_iter().flatten().find(|&&o| Self::pending(&self.goals[o]) && self.goals[o].noclips < 3)
                 {
-                    let og = &self.goals[o];
-                    // Shootable openers can be activated from a visible
-                    // approach node even when their touch node is unreachable.
-                    let views: Vec<u32> = if og.kind == Kind::Button && self.shootable(og) && !og.deferred {
-                        og.views.iter().copied().filter(|&n| self.clear_shot(
-                            self.nav.pos[n as usize] + Vec3::new(0.0, 0.0, 22.0), self.center(og.ent), og.ent,
-                        )).collect()
-                    } else { Vec::new() };
-                    let reach = opener_node(self.goal_node(og), &views, &dist);
-                    if self.opt.verbose && self.cur != Some(o) {
-                        eprintln!("  t={:.1} door #{m} locked on the way to #{}: opener #{} first", self.sv.time(), self.goals[i].ent, og.ent);
-                    }
-                    match reach {
-                        Some(n) => choice = Some((o, path_to(&prev, n))),
-                        None => opener = Some(o),
+                    // Search all alternatives and prerequisite chains under
+                    // actual gates before choosing a walking action.
+                    let approaches: Vec<Approach> = self.goals.iter().map(|g| {
+                        if !Self::pending(g) || g.noclips >= 3 || self.dormant(g) { return Approach { touch: None, views: Vec::new() }; }
+                        let mut views = Vec::new();
+                        if g.kind == Kind::Button && self.shootable(g) && !g.deferred {
+                            views.extend(g.views.iter().copied().filter(|&n| self.clear_shot(
+                                self.nav.pos[n as usize] + Vec3::new(0.0, 0.0, 22.0), self.center(g.ent), g.ent,
+                            )));
+                        }
+                        Approach { touch: self.goal_node(g), views }
+                    }).collect();
+                    let planner = crate::actions::Prerequisites {
+                        nav: &self.nav, gates: &gates.edges, doors: &gates.door,
+                        openers: &gates.openers, approaches: &approaches, blocked: &self.blocked,
+                    };
+                    if let Some(action) = planner.first_step(src, *m, self.opt.seed) {
+                        if self.cur != Some(action.goal) { self.rep.prerequisite_actions += 1; }
+                        if self.opt.verbose && self.cur != Some(action.goal) {
+                            eprintln!("  t={:.1} prerequisites {:?}: opener #{} first", self.sv.time(), action.doors, self.goals[action.goal].ent);
+                        }
+                        choice = Some((action.goal, action.path));
+                    } else {
+                        // Gate inference is incomplete for scripted maps.
+                        // Preserve the existing ungated recovery if no verified
+                        // prerequisite leaf exists, rather than forcing assists.
+                        let og = &self.goals[o];
+                        let reach = crate::actions::opener_node(self.goal_node(og), &approaches[o].views, &dist);
+                        match reach {
+                            Some(n) => choice = Some((o, path_to(&prev, n))),
+                            None => opener = Some(o),
+                        }
                     }
                     break;
                 }
@@ -1703,6 +1722,21 @@ impl Bot<'_> {
                 return;
             }
         }
+        let gates = self.gates();
+        let src = if why == "off the nav graph" { None } else {
+            self.nav.nearest_clear_except(&self.geo, self.me_origin(), 96.0, &self.bad_src)
+        };
+        let targets: Vec<u32> = self.cur.map(|i| &self.goals[i]).into_iter()
+            .flat_map(|g| self.goal_node(g).into_iter().chain(g.views.iter().copied())).collect();
+        let (cause, edge) = crate::diagnostics::classify(&self.nav, src, &targets, &gates.edges, &self.blocked);
+        let to = self.free_spot(to);
+        self.rep.assists.push(crate::diagnostics::Assist {
+            time: t, cause, goal: self.cur.map(|i| self.goals[i].ent),
+            kind: self.cur.map_or_else(|| "none".into(), |i| format!("{:?}", self.goals[i].kind)),
+            classname: self.cur.map_or_else(String::new, |i| self.vm().classname(self.goals[i].ent)),
+            reason: why.into(),
+            from: self.me_origin(), to, door: edge.and_then(|e| gates.door.get(&e).copied()),
+        });
         self.rep.noclip_uses += 1;
         if self.cur.is_some_and(|i| self.goals[i].kind == Kind::Monster) {
             self.rep.monster_noclips += 1;
@@ -1714,7 +1748,6 @@ impl Bot<'_> {
             let g = self.cur.map(|i| (self.goals[i].kind, self.goals[i].ent, self.vm().classname(self.goals[i].ent)));
             eprintln!("  t={t:.1} NOCLIP ({why}) {:?} -> {to:?} (goal {g:?})", self.me_origin());
         }
-        let to = self.free_spot(to);
         self.sv.command(&format!("setpos {} {} {}", to.x, to.y, to.z));
         self.noclip_at = t;
         self.noclip_to_goal = why != "off the nav graph";
@@ -2636,18 +2669,10 @@ impl Bot<'_> {
     }
 }
 
-/// Keep the ordinary approach when reachable; a shootable opener on an
-/// inaccessible ledge can instead be activated from a reachable view node.
-fn opener_node(touch: Option<u32>, views: &[u32], dist: &[f32]) -> Option<u32> {
-    touch.filter(|&n| dist[n as usize].is_finite()).or_else(|| {
-        views.iter().copied().filter(|&n| dist[n as usize].is_finite())
-            .min_by(|&a, &b| dist[a as usize].total_cmp(&dist[b as usize]))
-    })
-}
-
 #[cfg(test)]
 mod tests {
     use super::*;
+    use crate::actions::opener_node;
 
     #[test]
     fn shootable_opener_on_disconnected_ledge() {

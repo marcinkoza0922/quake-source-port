@@ -279,3 +279,55 @@ Qbot shootable-button recovery (2026-11-11): when a locked door's button has no 
 Qbot action/jump validation (2026-11-11): fresh, route-disabled skill-3 runs of all 77 installed maps (id1 42, hipnotic 18, rogue 17) preserve or improve kills, secrets and exit completion on every map. Compared with the committed shootable-button recovery, noclips total 952 → 937 (navigation-only assists, excluding monsters: 458 → 451): id1 540 → 536, hipnotic 197 → 196, rogue 215 → 205. Highlights: e3m7 13 → 7 assists and 2 → 3 secrets; r1m3 14 → 10 assists and all six secrets; r2m2 57 → 60 kills (all monsters) and 14 → 13 assists. Tradeoffs: e2m6 and e3m1 each use two extra assists, with coverage unchanged. Baselines are refreshed to the validated behavior. Unit and integration coverage includes the bounded lift detour planner, directed basin search, isolated movement probes and an actual executed jump; game-data checks return early when the assets are absent.
 
 Validation for the action/jump changes: `cargo nextest run` with game data passed 149 tests (one skipped); `cargo clippy --message-format=short` was clean. The final 77-map sweeps built 27 verified jump links, completed 23 jump traversals and reported 12 bounded jump failures plus one lift-caller detour; rebuilt/reused links mean these counters do not form a partition. A repeated eight-worker timing sample, each game run separately, measured before/after wall time of id1 2.88/3.40 s, hipnotic 2.21/2.31 s and rogue 4.59/5.01 s. Physics searches add work only during recovery, but fresh full-game runs are modestly slower; these single samples are not a statistical benchmark. Repeated final runs matched coverage and noclip counts exactly against the refreshed baselines.
+
+Qbot assist audit and prerequisite planning (2026-11-11): every actual `setpos`
+assist now appends evidence to `report.json`'s `assists` array: simulation time,
+goal entity and kind, classname, recovery reason, source/destination player
+origins and (when identified) the first blocking door. Its length equals
+`noclip_uses`; clean route replays have no events. Classification compares all known
+touch/firing approaches under three graph searches: no restrictions, door gates,
+and gates plus execution blocks. Categories are `off_graph`, `missing_approach`,
+`disconnected`, `prerequisite`, `mover_blocked`, `execution_blocked` and
+`reachable_unfinished`. These describe current graph evidence, not definitive
+root causes: cached firing candidates may be stale, disconnected geometry can
+hide an interaction, and a blocked Ride edge does not establish a mover timing
+bug. Off-graph recovery retains the current goal's identity, so use `reason` to
+distinguish returns from direct goal assists. Console summaries count each
+category and its non-monster subset (including returns with no current goal).
+
+Reproduce a fresh audit with game data installed:
+`cargo run --release -p qbot -- -basedir "$QUAKE_BASEDIR" -game id1 -no-routes -out target/qbot-audit/id1`
+(and repeat for hipnotic/rogue). No game assets are written into the repository.
+The initial 77-map seed-0 skill-3 audit matched every committed map baseline.
+Among 441 events associated with non-monster goals or no goal, categories were:
+
+| Evidence | Assists |
+| --- | ---: |
+| Missing approach | 195 |
+| Disconnected graph | 137 |
+| Off graph | 48 |
+| Execution blocked | 32 |
+| Known prerequisite | 12 |
+| Reachable but unfinished | 12 |
+| Mover blocked | 5 |
+
+`actions::Prerequisites` searches alternative door openers and their prerequisite
+chains before ordinary ungated opener recovery. It uses routes under actual
+known gates and execution blocks, checks current shot clearance for firing
+approaches, retains touch priority, rejects cycles, and bounds search to eight
+doors deep and 64 search states. It executes one reachable leaf goal and then
+observes/replans through the existing goal loop; it never assumes that a button
+has already opened a door. `prerequisite_actions` counts changes to such a leaf
+goal. Existing ungated recovery remains when no valid leaf is found: removing
+it regressed scripted-map coverage in trial sweeps. This is an incremental
+prerequisite planner, not a model of arbitrary QC state or future mover motion.
+
+Final validation: fresh route-disabled sweeps preserve each of the 77 maps'
+kills, secrets, exits and assist totals exactly, without baseline changes.
+The prerequisite planner selected 17 actions across these maps.
+The audit therefore does not demonstrate an assist reduction from prerequisite
+search on this corpus. It points next to approach generation (especially buttons
+and secrets), followed by disconnected-region investigation. Synthetic tests
+cover evidence classification, alternate openers, chains, cycles, touch/firing
+priority, execution blocks and depth bounds; report serialization checks escaped
+entity names. Game-data traversal tests skip when assets are absent.
