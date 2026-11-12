@@ -204,6 +204,8 @@ const COMPAT_CVARS: &[(&str, &str, u32)] = &[
     ("r_waterripples", "0", CVAR_ARCHIVE),
     ("r_watersplash", "0", CVAR_ARCHIVE),
     ("r_watercaustics", "0", CVAR_ARCHIVE),
+    ("r_waterripples_amount", "1", CVAR_ARCHIVE),
+    ("r_watercaustics_amount", "1", CVAR_ARCHIVE),
     ("cl_nopext", "0", CVAR_ARCHIVE),
     ("r_softparticledistance", "4", CVAR_ARCHIVE),
     ("r_bouncysparks", "1", 0),
@@ -633,6 +635,9 @@ impl Host {
                 }
             }
             HostEvent::Input(ie) => {
+                if let InputEvent::MouseButton { button: 1, down: false } = ie {
+                    self.menu.mouse_up();
+                }
                 if let InputEvent::Key { key, down: true } = ie
                     && key == b'`' as i32
                 {
@@ -2210,9 +2215,9 @@ impl Host {
             } else {
                 v("r_motionblur_amount").clamp(0.0, 4.0)
             },
-            water_ripples: v("r_waterripples").clamp(0.0, 4.0),
+            water_ripples: if v("r_waterripples") != 0.0 { v("r_waterripples_amount").clamp(0.0, 4.0) } else { 0.0 },
             water_splashes: v("r_watersplash") != 0.0,
-            water_caustics: v("r_watercaustics").clamp(0.0, 4.0),
+            water_caustics: if v("r_watercaustics") != 0.0 { v("r_watercaustics_amount").clamp(0.0, 4.0) } else { 0.0 },
             ..Settings::default()
         };
         {

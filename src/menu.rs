@@ -238,7 +238,6 @@ const SCALE: &[(&str, f32)] = &[("50%", 0.5), ("75%", 0.75), ("100%", 1.0), ("12
 const FILTER: &[(&str, f32)] = &[("nearest", 0.0), ("linear", 1.0)];
 const ANISO: &[(&str, f32)] = &[("off", 1.0), ("2x", 2.0), ("4x", 4.0), ("8x", 8.0), ("16x", 16.0)];
 const SOFTEMU: &[(&str, f32)] = &[("off", 0.0), ("fine", 1.0), ("coarse", 2.0), ("banded", 3.0)];
-const WATERFX: &[(&str, f32)] = &[("off", 0.0), ("subtle", 0.5), ("normal", 1.0), ("strong", 2.0)];
 const SSAO: &[(&str, f32)] = &[("off", 0.0), ("low", 0.5), ("medium", 1.0), ("high", 2.0)];
 const MODES: [&str; 3] = ["windowed", "fullscreen", "borderless"];
 
@@ -262,9 +261,9 @@ const GRAPHICS: &[Item] = &[
     Item::Choice { label: "Ambient Occlusion", cvar: "r_ssao", choices: SSAO },
     toggle("Motion Blur", "r_motionblur"),
     slider("Motion Blur Amount", "r_motionblur_amount", 0.1, 2.0, 0.1),
-    Item::Choice { label: "Water Ripples", cvar: "r_waterripples", choices: WATERFX },
+    toggle("Water Ripples", "r_waterripples"),
     toggle("Water Splashes", "r_watersplash"),
-    Item::Choice { label: "Water Caustics", cvar: "r_watercaustics", choices: WATERFX },
+    toggle("Water Caustics", "r_watercaustics"),
     toggle("Interpolate Animation", "r_lerpmodels"),
     toggle("Interpolate Movement", "r_lerpmove"),
 ];
@@ -499,6 +498,8 @@ pub struct Menu {
     prev: Screen,
     /// Cursor position in 640x360 menu units, when the mouse has moved.
     mouse: Option<(f32, f32)>,
+    /// Options scrollbar being dragged: pointer offset from the thumb top.
+    drag: Option<f32>,
     /// Open dropdown on an options page.
     drop: Option<Drop>,
     /// Page and row an open sub-page was entered from (sub-pages reachable
@@ -588,6 +589,8 @@ const VALUE_X: f32 = 320.0;
 const ROW_H: f32 = 12.0;
 /// Height of value boxes inside a row, and of entries in an open dropdown.
 const BOX_H: f32 = 10.0;
+/// Clickable Back button, menu units.
+const BACK_BTN: (f32, f32, f32, f32) = (12.0, 341.0, 60.0, 16.0);
 /// First row of the options hub / of an options page (below its heading).
 const ROW0: f32 = 64.0;
 const PAGE_ROW0: f32 = 72.0;
@@ -622,6 +625,7 @@ impl Menu {
             save_inventory: Default::default(),
             prev: Screen::None,
             mouse: None,
+            drag: None,
             drop: None,
             sub_return: None,
             mods: ModMenu::default(),
@@ -684,6 +688,50 @@ impl Menu {
         }
         self.opt_scroll.set(sc);
         sc
+    }
+
+    /// Scrollbar of a long options page: (x, track top, track h, thumb y, thumb h).
+    fn scrollbar(&self, p: Page) -> Option<(f32, f32, f32, f32, f32)> {
+        let (total, n) = (self.page_len(p), self.page_vis(p));
+        if total <= n {
+            return None;
+        }
+        let sc = self.page_scroll(p);
+        let (x, top, h) = (PANEL_X + PANEL_W - 5.0, PAGE_ROW0, n as f32 * ROW_H);
+        let th = (h * n as f32 / total as f32).max(8.0);
+        let ty = top + (h - th) * sc as f32 / (total - n) as f32;
+        Some((x, top, h, ty, th))
+    }
+
+    /// Sets the first visible row, pulling the cursor into view.
+    fn set_page_scroll(&mut self, p: Page, sc: usize) {
+        let (total, vis) = (self.page_len(p), self.page_vis(p));
+        if vis == 0 {
+            return;
+        }
+        let sc = sc.min(total - vis);
+        self.opt_scroll.set(sc);
+        self.opt_cursor = self.opt_cursor.clamp(sc, sc + vis - 1);
+    }
+
+    /// Scrollbar drag: thumb top follows the pointer.
+    fn drag_to(&mut self, p: Page, y: f32, grab: f32) {
+        let Some((_, top, h, _, th)) = self.scrollbar(p) else { return };
+        let max = self.page_len(p) - self.page_vis(p);
+        let f = ((y - grab - top) / (h - th).max(1.0)).clamp(0.0, 1.0);
+        self.set_page_scroll(p, (f * max as f32).round() as usize);
+    }
+
+    /// Clickable Back button in the bottom-left corner (x, y, w, h).
+    fn back_button(&self) -> Option<(f32, f32, f32, f32)> {
+        let hidden = matches!(self.screen, Screen::None | Screen::Main | Screen::Quit)
+            || self.capturing()
+            || self.osk.is_some();
+        (!hidden).then_some(BACK_BTN)
+    }
+
+    pub fn mouse_up(&mut self) {
+        self.drag = None;
     }
 
     /// Menu y of a page row (may be off the visible window).
@@ -866,6 +914,7 @@ impl Menu {
         self.prev = self.screen;
         self.screen = s;
         self.drop = None;
+        self.drag = None;
         self.capture = None;
         self.osk = None;
         self.quit_cursor = 0;
@@ -934,6 +983,10 @@ impl Menu {
     /// Returns a sound to play when the selection changed.
     pub fn mouse_move(&mut self, pos: (f32, f32)) -> Option<&'static str> {
         self.mouse = Some(pos);
+        if let (Some(g), Screen::OptionsPage(p)) = (self.drag, self.screen) {
+            self.drag_to(p, pos.1, g);
+            return None;
+        }
         if let Some(d) = self.drop {
             let i = self.drop_at(pos, d)?;
             let dc = &mut self.drop.as_mut()?.cursor;
@@ -984,8 +1037,32 @@ impl Menu {
             return out;
         }
         // left click acts on the item under the pointer, never on a stale cursor
+        if let (K_MWHEELUP | K_MWHEELDOWN, Screen::OptionsPage(p)) = (key, self.screen) {
+            let sc = self.page_scroll(p);
+            self.set_page_scroll(p, if key == K_MWHEELUP { sc.saturating_sub(2) } else { sc + 2 });
+            if let Some(i) = self.mouse.and_then(|pos| self.item_at(pos)) {
+                self.opt_cursor = i;
+            }
+            return out;
+        }
         if key == K_MOUSE1 {
             let Some(pos) = self.mouse else { return out };
+            if let Some((bx, by, bw, bh)) = self.back_button()
+                && (bx..bx + bw).contains(&pos.0)
+                && (by..by + bh).contains(&pos.1)
+            {
+                return self.key(K_ESCAPE, cv, server_active);
+            }
+            if let Screen::OptionsPage(p) = self.screen
+                && let Some((x, top, h, ty, th)) = self.scrollbar(p)
+                && (x - 4.0..x + 7.0).contains(&pos.0)
+                && (top..top + h).contains(&pos.1)
+            {
+                let grab = if (ty..ty + th).contains(&pos.1) { pos.1 - ty } else { th / 2.0 };
+                self.drag_to(p, pos.1, grab);
+                self.drag = Some(grab);
+                return out;
+            }
             let Some(i) = self.item_at(pos) else { return out };
             if let Some(c) = self.cursor_mut() {
                 *c = i;
@@ -1561,13 +1638,11 @@ impl Menu {
                     let blink = (realtime * 4.0) as i64 & 1 == 0 && i == self.opt_cursor;
                     self.draw_item(c, cv, self.page_item(page, i), self.page_row_y(page, i) + 2.0, blink);
                 }
-                if total > n {
+                if let Some((x, top, h, ty, th)) = self.scrollbar(page) {
                     // scrollbar along the panel's right edge
-                    let (x, top, h) = (PANEL_X + PANEL_W - 5.0, PAGE_ROW0, n as f32 * ROW_H);
                     c.fill(x, top, 3.0, h, [1.0, 1.0, 1.0, 0.12]);
-                    let th = (h * n as f32 / total as f32).max(8.0);
-                    let ty = top + (h - th) * sc as f32 / (total - n) as f32;
-                    c.fill(x, ty, 3.0, th, [0.85, 0.65, 0.3, 0.9]);
+                    let a = if self.drag.is_some() { 1.0 } else { 0.9 };
+                    c.fill(x, ty, 3.0, th, [0.85, 0.65, 0.3, a]);
                 }
                 if page == Page::Setup {
                     // M_Setup_Draw: the player in a box, in the chosen colours.
@@ -1620,6 +1695,7 @@ impl Menu {
         c.menu_layout();
         self.draw_tooltip(c);
         self.draw_hints(c);
+        self.draw_back(c);
         c.reset_origin();
         c.scale = base_scale;
     }
@@ -1737,6 +1813,15 @@ impl Menu {
         let y = PAGE_ROW0 + self.page_vis(page) as f32 * ROW_H + 10.0;
         c.round_box(320.0 - w / 2.0 - 8.0, y - 3.0, w + 16.0, 14.0, 4.0, [0.0, 0.0, 0.0, 0.7], Some(BORDER));
         c.text(320.0 - w / 2.0, y, s, TXT, MUTED);
+    }
+
+    fn draw_back(&self, c: &mut Canvas) {
+        let Some((x, y, w, h)) = self.back_button() else { return };
+        let hover = self.mouse.is_some_and(|(mx, my)| (x..x + w).contains(&mx) && (y..y + h).contains(&my));
+        let bg = if hover { HILITE } else { [0.0, 0.0, 0.0, 0.7] };
+        c.round_box(x, y, w, h, 4.0, bg, Some(BORDER));
+        let s = "< Back";
+        c.text(x + ((w - c.text_w(s, TXT)) / 2.0).floor(), y + 4.0, s, TXT, if hover { GOLD_FG } else { FG });
     }
 
     /// Menu hint row, centred in a bordered box.
