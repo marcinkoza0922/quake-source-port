@@ -529,6 +529,9 @@ impl Ctx<'_> {
 }
 
 impl Host for Ctx<'_> {
+    fn before_damage(&mut self, vm: &mut Vm) -> Result<bool> {
+        crate::assists::before_damage(vm, self.c)
+    }
     fn builtin(&mut self, vm: &mut Vm, b: Builtin) -> Result<()> {
         if let Some(e) = &self.c.sv.error {
             return Err(e.clone());

@@ -95,6 +95,42 @@ Target selection: live monsters (`FL_MONSTER`, health > 0) and DM opponents if a
 
 Custom immediate-mode UI (`qui`) drawing through the renderer's 2D batch, conchars + scalable bitmap font. Mod menu: scans basedir for gamedirs (has pak/pk3/progs/maps), reads metadata (`modinfo.txt`, readme, `maps/*.bsp` names, worldspawn `message`), thumbnail from screenshot cache, launches with correct base game flags. Per-mod profile = `config.cfg` in `<basedir>/<mod>/`, with per-mod stats file (`qsp_stats.json`) storing kills/secrets/completion per map.
 
+### Accessibility (Options → Accessibility)
+- `a11y_reducemotion`: `ViewCvars::reduce_motion` zeroes bob, strafe roll,
+  damage kick and gun kick (cvars untouched).
+- `v_flashscale`: scales damage/bonus/powerup cshifts in `ViewState::blend`;
+  liquid tints stay.
+- `r_colorblind` 0–3: daltonize in `post.frag` after the polyblend.
+- `crosshair_size`/`crosshair_color`/`crosshair_outline`: pixel-drawn "+"
+  (`draw_crosshair` in host.rs).
+- `cl_captions`: `src/captions.rs` maps sound path prefixes to captions,
+  merged as "xN", 2.5 s hold, drawn above the HUD.
+- `scr_textscale`/`scr_textbg`: scale and backdrop for notify, centerprint
+  and captions; `scr_centertime`, `con_notifytime` exposed.
+- `in_toggleattack`/`in_togglerun`: `+attack`/`+speed` latch (qinput
+  `toggle_press`).
+- `a11y_gamespeed`: single-player time scale, multiplied with the weapon
+  wheel slowdown in `wheel_timescale`.
+- The engine has no underwater screen warp, so there is no toggle for it.
+
+### Gameplay assists (Options → Gameplay → Assists; `qserver::assists`)
+Engine-side so they work with any progs; all off in deathmatch.
+- qvm resolves QC `T_Damage` at load; each QC→QC call to it first runs
+  `Host::before_damage`, which may change the damage parm or skip the call.
+  `assist_damagetaken` scales damage to clients, `assist_enemyhealth`
+  divides damage to `FL_MONSTER`s. `assist_nofalldamage` /
+  `assist_nodrown` skip world damage (and `assist_noselfdamage` any
+  damage whose attacker is the target, applying the id1 knockback
+  itself so rocket jumps still work) whose caller is `PlayerPostThink` /
+  `WaterMove` (in water, not slime/lava), so no pain flinch either.
+- After each physics frame, per-client state on `Level`: ammo increases
+  scaled by `assist_ammo` (capped at the id1 limits or the QC value),
+  decreases undone by `assist_infiniteammo` (`currentammo` kept in step);
+  `assist_regen` heals 5 hp/s to 100 after 5 s without losing health;
+  `assist_jumps` 2/3 gives air jumps on a fresh press, using QC's
+  `FL_JUMPRELEASED` to tell presses apart.
+- Tests: `crates/qserver/tests/assists.rs` (needs game data).
+
 ### Test bot (`tools/qbot`)
 
 An integrity test, not a balance test: it checks that every level can be traversed by game means and runs without errors. In-process headless `qserver::Server` (no engine binary) ticking at 20 Hz like a dedicated server (`sys_ticrate 0.05`), `skill 3`, `god`, one local client driven by `set_move`; the client's entity updates are skipped (`ServerCore::skip_entity_updates`) since nobody reads them. Per map:

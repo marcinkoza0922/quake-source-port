@@ -123,6 +123,7 @@ pub struct Core {
 pub struct Level {
     pub vm: Vm,
     pub world: World,
+    pub(crate) assist: Vec<crate::assists::ClientAssist>,
 }
 
 pub struct Server {
@@ -252,6 +253,9 @@ fn register_cvars(cv: &mut Cvars) {
         ("registered", "1", 0),
         ("pr_checkextension", "1", 0),
     ] {
+        cv.register(n, d, f);
+    }
+    for &(n, d, f) in crate::assists::CVARS {
         cv.register(n, d, f);
     }
 }
@@ -486,7 +490,7 @@ impl Server {
         c.sv.active = true;
         c.sv.loading = false;
         vm.protect_world = true;
-        self.level = Some(Level { vm, world });
+        self.level = Some(Level { vm, world, assist: Vec::new() });
 
         // run two frames to allow everything to settle
         self.physics(0.1);
@@ -834,6 +838,9 @@ impl Server {
         }
         if !freeze {
             vm.time += ft;
+        }
+        if c.sv.error.is_none() {
+            crate::assists::frame(l, c);
         }
         self.process_queued_client_cmds();
     }

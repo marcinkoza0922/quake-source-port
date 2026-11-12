@@ -7,6 +7,7 @@
 
 mod assets;
 mod autosave;
+mod captions;
 mod console;
 mod demo;
 mod draw;

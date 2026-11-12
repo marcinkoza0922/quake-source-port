@@ -210,6 +210,8 @@ cvars! {
     aim_snap = "aim_snap", "0";
     aim_weight_dist = "aim_weight_dist", "0.3";
     aim_target_players = "aim_target_players", "1";
+    in_toggleattack = "in_toggleattack", "0";
+    in_togglerun = "in_togglerun", "0";
 }
 
 /// Host context for qinput commands.
@@ -302,6 +304,24 @@ impl Input {
 
 use qcore::cmd::Commands;
 
+/// `+name`/`-name` for a button that latches on each press while its toggle
+/// cvar is set (accessibility: no need to hold attack or run).
+macro_rules! toggle_button_cmds {
+    ($c:expr, $i:expr, $cvar:ident) => {{
+        $c.add(&format!("+{}", btn::NAMES[$i]), |ctx, a| {
+            let on = { let id = ctx.input().cv.$cvar; ctx.cvars().value(id) != 0.0 };
+            toggle_press(&mut ctx.input().buttons[$i], key_arg(a), on);
+        });
+        $c.add(&format!("-{}", btn::NAMES[$i]), |ctx, a| {
+            let on = { let id = ctx.input().cv.$cvar; ctx.cvars().value(id) != 0.0 };
+            if !on {
+                ctx.input().buttons[$i].release(key_arg(a));
+            }
+        });
+    }};
+}
+
+
 macro_rules! button_cmds {
     ($c:expr, $($i:expr),*) => {$(
         $c.add(&format!("+{}", btn::NAMES[$i]), |ctx, a| ctx.input().buttons[$i].press(key_arg(a)));
@@ -311,7 +331,9 @@ macro_rules! button_cmds {
 
 /// Register bind/unbind/unbindall/bindlist, +/- buttons and impulse.
 pub fn register_commands<C: InputHost>(c: &mut Commands<C>) {
-    button_cmds!(c, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18);
+    button_cmds!(c, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 13, 14, 15, 16, 17, 18);
+    toggle_button_cmds!(c, btn::ATTACK, in_toggleattack);
+    toggle_button_cmds!(c, btn::SPEED, in_togglerun);
     c.add("impulse", |ctx, a| ctx.input().impulse = a.argv(1).parse().unwrap_or(0));
     c.add("bind", cmd_bind);
     c.add("unbind", |ctx, a| {
@@ -340,6 +362,18 @@ pub fn register_commands<C: InputHost>(c: &mut Commands<C>) {
         }
         ctx.print(&format!("{} bindings\n", lines.len()));
     });
+}
+
+fn toggle_press(b: &mut KButton, key: i32, toggle: bool) {
+    if !toggle {
+        b.press(key);
+    } else if b.is_down() {
+        b.release(-1);
+    } else {
+        b.press(key);
+        // Latch: forget the key so its release doesn't let go.
+        b.down = [-1, 0];
+    }
 }
 
 fn cmd_bind<C: InputHost>(ctx: &mut C, a: &Args) {
@@ -693,3 +727,20 @@ impl Input {
 
 #[cfg(test)]
 mod tests;
+
+#[cfg(test)]
+mod toggle_tests {
+    use super::*;
+    #[test]
+    fn toggle_press_latches() {
+        let mut b = KButton::default();
+        toggle_press(&mut b, 10, true);
+        b.release(10); // key up is ignored while latched
+        assert!(b.is_down());
+        toggle_press(&mut b, 10, true);
+        assert!(!b.is_down());
+        toggle_press(&mut b, 10, false);
+        b.release(10);
+        assert!(!b.is_down());
+    }
+}

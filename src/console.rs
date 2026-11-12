@@ -9,6 +9,8 @@ use crate::draw::Canvas;
 
 const MAX_LINES: usize = 4096;
 const NUM_NOTIFY: usize = 4;
+/// Backdrop colour behind messages when `text_bg` is on.
+pub const TEXT_BG: [f32; 4] = [0.0, 0.0, 0.0, 0.65];
 
 #[derive(Default)]
 pub struct Console {
@@ -34,11 +36,17 @@ pub struct Console {
     pub realtime: f64,
     /// Width in characters used for wrapping.
     pub width: usize,
+    /// con_notifytime: seconds notify lines stay up.
+    pub notify_time: f64,
+    /// scr_textbg: dark backdrop behind notify and centerprint text.
+    pub text_bg: bool,
+    /// scr_textscale: size multiplier for notify and centerprint text.
+    pub text_scale: f32,
 }
 
 impl Console {
     pub fn new() -> Self {
-        Self { width: 78, ..Default::default() }
+        Self { width: 78, notify_time: 3.0, text_scale: 1.0, ..Default::default() }
     }
 
     /// Con_Print: appends text, wrapping at `width`.
@@ -240,16 +248,22 @@ impl Console {
                 row -= 8.0;
             }
         } else if show_notify {
+            let base = c.scale;
+            c.scale = (base * self.text_scale.clamp(1.0, 3.0)).round().max(1.0);
             let mut y = 0.0;
             for (t, l) in &self.notify {
-                if self.realtime - t > 3.0 {
+                if self.realtime - t > self.notify_time {
                     continue;
+                }
+                if self.text_bg && !l.is_empty() {
+                    c.fill(6.0, y - 1.0, l.len() as f32 * 8.0 + 4.0, 10.0, TEXT_BG);
                 }
                 for (i, &b) in l.iter().enumerate() {
                     c.ch(8.0 + i as f32 * 8.0, y, b);
                 }
                 y += 8.0;
             }
+            c.scale = base;
         }
         if centerprint && lines_h <= 0.0 && self.realtime < self.center_time {
             self.draw_center(c, usize::MAX);
@@ -258,9 +272,20 @@ impl Console {
 
     /// SCR_DrawCenterString; `max_chars` limits revealed characters (finale).
     pub fn draw_center(&self, c: &mut Canvas, max_chars: usize) {
+        let base = c.scale;
+        c.scale = (base * self.text_scale.clamp(1.0, 3.0)).round().max(1.0);
+        self.draw_center_scaled(c, max_chars);
+        c.scale = base;
+    }
+
+    fn draw_center_scaled(&self, c: &mut Canvas, max_chars: usize) {
         let (vw, vh) = (c.vw(), c.vh());
         let n = self.centerprint.len();
         let mut y = if n <= 4 { (vh * 0.35).floor() } else { 48.0 };
+        if self.text_bg && n > 0 {
+            let w = self.centerprint.iter().map(|l| l.len()).max().unwrap_or(0) as f32 * 8.0;
+            c.fill(((vw - w) / 2.0).floor() - 4.0, y - 3.0, w + 8.0, n as f32 * 8.0 + 6.0, TEXT_BG);
+        }
         let mut left = max_chars;
         for l in &self.centerprint {
             let x = ((vw - l.len() as f32 * 8.0) / 2.0).floor();

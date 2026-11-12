@@ -191,6 +191,8 @@ pub struct Settings {
     /// r_softemu_dither_screen / r_softemu_dither_texture scales.
     pub dither_screen: f32,
     pub dither_texture: f32,
+    /// r_colorblind: 0 off, 1 protanopia, 2 deuteranopia, 3 tritanopia filter.
+    pub colorblind: u32,
 }
 
 /// gl_texturemode names (ironwail order): (name, linear mag/min, mipmapped, linear mips).
@@ -239,6 +241,7 @@ impl Default for Settings {
             mdl_warp: -1.0,
             dither_screen: 1.0,
             dither_texture: 1.0,
+            colorblind: 0,
         }
     }
 }

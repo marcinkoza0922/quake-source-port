@@ -126,6 +126,17 @@ const HOST_CVARS: &[(&str, &str, u32)] = &[
     ("con_notifytime", "3", 0),
     ("scr_conspeed", "500", CVAR_ARCHIVE),
     ("scr_sbaralpha", "0.75", CVAR_ARCHIVE),
+    // Accessibility page.
+    ("a11y_reducemotion", "0", CVAR_ARCHIVE),
+    ("a11y_gamespeed", "1", CVAR_ARCHIVE),
+    ("v_flashscale", "1", CVAR_ARCHIVE),
+    ("crosshair_size", "1", CVAR_ARCHIVE),
+    ("crosshair_color", "0", CVAR_ARCHIVE),
+    ("crosshair_outline", "1", CVAR_ARCHIVE),
+    ("r_colorblind", "0", CVAR_ARCHIVE),
+    ("cl_captions", "0", CVAR_ARCHIVE),
+    ("scr_textbg", "0", CVAR_ARCHIVE),
+    ("scr_textscale", "1", CVAR_ARCHIVE),
 ];
 
 /// Cvars other engines register that mod configs (vkQuake.cfg, AD/KEX
@@ -218,6 +229,7 @@ pub struct Host {
     pend_jump: bool,
     pend_impulse: u8,
     wheel: crate::wheel::Wheel,
+    captions: crate::captions::Captions,
     /// Label family of the last connected gamepad.
     pad_family: crate::glyphs::Family,
     /// Modern menu text/shape atlas (`crate::font`).
@@ -337,6 +349,7 @@ impl Host {
             pend_jump: false,
             pend_impulse: 0,
             wheel: Default::default(),
+            captions: Default::default(),
             pad_family: Default::default(),
             ui_text: Default::default(),
             rumble: None,
@@ -745,12 +758,11 @@ impl Host {
     }
 
     /// Time scale for the world while the weapon wheel is open (single player only).
+    /// Also applies the accessibility game speed (`a11y_gamespeed`).
     fn wheel_timescale(&self) -> f32 {
-        if self.wheel.open && self.local.is_some() && self.server.core.maxclients() == 1 && self.demo.is_none() {
-            self.cv("cl_wheel_timescale").clamp(0.05, 1.0)
-        } else {
-            1.0
-        }
+        let sp = self.local.is_some() && self.server.core.maxclients() == 1 && self.demo.is_none();
+        let speed = if sp { self.cv("a11y_gamespeed").clamp(0.25, 1.0) } else { 1.0 };
+        if self.wheel.open && sp { self.cv("cl_wheel_timescale").clamp(0.05, 1.0) * speed } else { speed }
     }
 
     /// Connects the local client when a server is running without one.
@@ -1137,11 +1149,19 @@ impl Host {
                 }
                 ClientEvent::StuffText(s) => self.cbuf.add_text(&s),
                 ClientEvent::Sound { ent, channel, sound, origin, volume, attenuation } => {
+                    if self.cv("cl_captions") != 0.0
+                        && let Some(n) = self.cl.sound_precache.get(sound)
+                    {
+                        self.captions.sound(n, self.realtime);
+                    }
                     if let (Some(snd), Some(Some(sfx))) = (&self.snd, self.level.sounds.get(sound)) {
                         snd.event(SoundEvent::Start { entity: ent, channel, sfx: sfx.clone(), origin, volume, attenuation });
                     }
                 }
                 ClientEvent::TempSound { name, origin } => {
+                    if self.cv("cl_captions") != 0.0 {
+                        self.captions.sound(name, self.realtime);
+                    }
                     if let Some(snd) = &mut self.snd
                         && let Some(sfx) = snd.precache(name)
                     {
@@ -1415,7 +1435,9 @@ impl Host {
             drawviewmodel: v("r_drawviewmodel") != 0.0,
             lerp_models: v("r_lerpmodels") != 0.0,
             lerp_move: v("r_lerpmove") != 0.0,
+            flash: v("v_flashscale").clamp(0.0, 1.0),
         }
+        .reduce_motion(v("a11y_reducemotion") != 0.0)
     }
 
     fn move_speeds(&self) -> MoveSpeeds {
@@ -1928,6 +1950,9 @@ impl Host {
     fn render(&mut self, view: Option<qrender::View>, gun: Option<qrender::RenderEntity>, ft: f32) {
         let (w, h) = self.r.size();
         let mut c = Canvas::new(w, h);
+        self.con.notify_time = self.cv("con_notifytime").max(0.0) as f64;
+        self.con.text_bg = self.cv("scr_textbg") != 0.0;
+        self.con.text_scale = self.cv("scr_textscale");
         self.sync_ui_text();
         c.ui = Some(self.ui_text.clone());
         let mut ents = Vec::new();
@@ -1947,7 +1972,7 @@ impl Host {
             crate::view::particles(&self.cl, &mut parts);
             crate::view::dlights(&self.cl, &mut dls);
             let contents = self.contents(v.origin);
-            blend = self.view.blend(&self.cl, contents, ft);
+            blend = self.view.blend(&self.cl, contents, ft, cv.flash);
         }
         // 2D
         let glyphs = self.glyphs();
@@ -1976,10 +2001,9 @@ impl Host {
                     }
                     3 => self.con.draw_center(&mut c, usize::MAX),
                     _ => {
+                        let scene_h = c.vh() - if classic { CLASSIC_SBAR_LINES } else { 0.0 };
                         if crosshair {
-                            let scene_h = c.vh() - if classic { CLASSIC_SBAR_LINES } else { 0.0 };
-                            let (x, y) = ((c.vw() / 2.0).floor() - 4.0, (scene_h / 2.0).floor() - 4.0);
-                            c.ch(x, y, b'+');
+                            draw_crosshair(&mut c, scene_h, &self.server.core.cvars);
                         }
                         let face = self.view.face_anim_time > self.cl.time;
                         let pack = crate::sbar::Pack::from_game_dirs(self.server.core.fs.game_dirs().iter().map(String::as_str));
@@ -1994,6 +2018,11 @@ impl Host {
                             crate::sbar::deathmatch_overlay(&mut c, &mut pf, &self.cl);
                         }
                         self.wheel.draw(&mut c, &mut pf, &glyphs, &self.cl, pad_ui, wheel_key);
+                        if self.server.core.cvars.value_of("cl_captions") != 0.0 {
+                            let bottom = if classic { scene_h - 4.0 } else { c.vh() - 44.0 };
+                            let ts = self.server.core.cvars.value_of("scr_textscale");
+                            self.captions.draw(&mut c, self.realtime, bottom, ts);
+                        }
                     }
                 }
                 // QC accepts the exit after 2 s (5 s in deathmatch).
@@ -2062,6 +2091,7 @@ impl Host {
             mdl_warp: v("r_softemu_mdl_warp"),
             dither_screen: v("r_softemu_dither_screen"),
             dither_texture: v("r_softemu_dither_texture"),
+            colorblind: v("r_colorblind").clamp(0.0, 3.0) as u32,
             ..Settings::default()
         };
         {
@@ -2711,4 +2741,38 @@ mod pad_default_tests {
         assert!(b.contains(&(K_LSHOULDER, "impulse 12".into())));
         assert_eq!(b.len(), 11);
     }
+}
+
+/// Crosshair colours (`crosshair_color` index).
+const CROSSHAIR_COLORS: [[f32; 4]; 6] = [
+    [1.0, 1.0, 1.0, 1.0],
+    [1.0, 0.85, 0.1, 1.0],
+    [0.2, 1.0, 0.3, 1.0],
+    [0.2, 0.9, 1.0, 1.0],
+    [1.0, 0.3, 0.9, 1.0],
+    [1.0, 0.25, 0.2, 1.0],
+];
+
+/// A "+" crosshair at the scene centre, sized by `crosshair_size` with an
+/// optional dark outline (`crosshair_outline`) so it reads on any wall.
+fn draw_crosshair(c: &mut Canvas, scene_h: f32, cv: &qcore::cvar::Cvars) {
+    let size = cv.value_of("crosshair_size").clamp(0.5, 4.0);
+    let color = CROSSHAIR_COLORS[(cv.value_of("crosshair_color").max(0.0) as usize).min(CROSSHAIR_COLORS.len() - 1)];
+    let base = c.scale;
+    // Work in whole pixels so thin strokes stay crisp at any size.
+    c.scale = 1.0;
+    let (cx, cy) = ((c.w / 2.0).floor(), (scene_h * base / 2.0).floor());
+    let arm = (3.5 * size * base).round().max(2.0);
+    let t = (size * base * 0.5).round().max(1.0);
+    let bars = [(cx - arm, cy - (t / 2.0).floor(), arm * 2.0 + t, t), (cx - (t / 2.0).floor(), cy - arm, t, arm * 2.0 + t)];
+    if cv.value_of("crosshair_outline") != 0.0 {
+        let o = (base * 0.5).round().max(1.0);
+        for (x, y, w, h) in bars {
+            c.fill(x - o, y - o, w + 2.0 * o, h + 2.0 * o, [0.0, 0.0, 0.0, 0.85]);
+        }
+    }
+    for (x, y, w, h) in bars {
+        c.fill(x, y, w, h, color);
+    }
+    c.scale = base;
 }

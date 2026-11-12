@@ -32,22 +32,25 @@ pub enum Page {
     Input,
     Graphics,
     Audio,
+    Accessibility,
     /// Sub-pages reached from an `Item::Sub` row.
     Mouse,
     Controller,
     Autosave,
+    Assists,
     /// Multiplayer pages (reached from Screen::Multiplayer).
     Join,
     Host,
     Setup,
 }
 
-const PAGES: [(&str, Page); 5] = [
+const PAGES: [(&str, Page); 6] = [
     ("Gameplay", Page::Gameplay),
     ("Controls", Page::Controls),
     ("Input", Page::Input),
     ("Graphics", Page::Graphics),
     ("Audio", Page::Audio),
+    ("Accessibility", Page::Accessibility),
 ];
 
 /// One options row.
@@ -174,6 +177,25 @@ const GAMEPLAY: &[Item] = &[
     toggle("Level Select", "ui_levelselect"),
     toggle("Autosave", "sv_autosave"),
     Item::Sub { label: "Autosave Settings", page: Page::Autosave },
+    Item::Sub { label: "Assists", page: Page::Assists },
+];
+
+const PERCENT: &[(&str, f32)] = &[
+    ("25%", 0.25), ("50%", 0.5), ("75%", 0.75), ("100%", 1.0), ("125%", 1.25), ("150%", 1.5), ("200%", 2.0),
+];
+const AMMO_MULT: &[(&str, f32)] = &[("100%", 1.0), ("150%", 1.5), ("200%", 2.0), ("300%", 3.0)];
+const JUMPS: &[(&str, f32)] = &[("single", 1.0), ("double", 2.0), ("triple", 3.0)];
+
+const ASSISTS: &[Item] = &[
+    Item::Choice { label: "Damage Taken", cvar: "assist_damagetaken", choices: PERCENT },
+    Item::Choice { label: "Enemy Health", cvar: "assist_enemyhealth", choices: PERCENT },
+    Item::Choice { label: "Ammo Pickups", cvar: "assist_ammo", choices: AMMO_MULT },
+    toggle("Infinite Ammo", "assist_infiniteammo"),
+    toggle("No Fall Damage", "assist_nofalldamage"),
+    toggle("No Drowning", "assist_nodrown"),
+    toggle("No Self Damage", "assist_noselfdamage"),
+    toggle("Health Regeneration", "assist_regen"),
+    Item::Choice { label: "Jumps", cvar: "assist_jumps", choices: JUMPS },
 ];
 
 const AUTOSAVE: &[Item] = &[
@@ -239,6 +261,32 @@ const GRAPHICS: &[Item] = &[
     toggle("Interpolate Movement", "r_lerpmove"),
 ];
 
+const COLORBLIND: &[(&str, f32)] =
+    &[("off", 0.0), ("protanopia", 1.0), ("deuteranopia", 2.0), ("tritanopia", 3.0)];
+const XHAIR_SIZE: &[(&str, f32)] = &[("small", 0.75), ("normal", 1.0), ("large", 1.5), ("huge", 2.5)];
+const XHAIR_COLOR: &[(&str, f32)] =
+    &[("white", 0.0), ("yellow", 1.0), ("green", 2.0), ("cyan", 3.0), ("magenta", 4.0), ("red", 5.0)];
+const TEXT_SIZE: &[(&str, f32)] = &[("normal", 1.0), ("large", 1.5), ("larger", 2.0), ("largest", 3.0)];
+const GAME_SPEED: &[(&str, f32)] = &[("100%", 1.0), ("90%", 0.9), ("75%", 0.75), ("60%", 0.6), ("50%", 0.5)];
+
+const ACCESSIBILITY: &[Item] = &[
+    toggle("Reduce Motion", "a11y_reducemotion"),
+    slider("Screen Flashes", "v_flashscale", 0.0, 1.0, 0.1),
+    Item::Choice { label: "Color Filter", cvar: "r_colorblind", choices: COLORBLIND },
+    toggle("Crosshair", "crosshair"),
+    Item::Choice { label: "Crosshair Size", cvar: "crosshair_size", choices: XHAIR_SIZE },
+    Item::Choice { label: "Crosshair Color", cvar: "crosshair_color", choices: XHAIR_COLOR },
+    toggle("Crosshair Outline", "crosshair_outline"),
+    toggle("Sound Captions", "cl_captions"),
+    Item::Choice { label: "Message Text Size", cvar: "scr_textscale", choices: TEXT_SIZE },
+    toggle("Message Background", "scr_textbg"),
+    slider("Center Message Time", "scr_centertime", 1.0, 10.0, 1.0),
+    slider("Notify Message Time", "con_notifytime", 1.0, 10.0, 1.0),
+    toggle("Toggle Attack", "in_toggleattack"),
+    toggle("Toggle Run", "in_togglerun"),
+    Item::Choice { label: "Game Speed", cvar: "a11y_gamespeed", choices: GAME_SPEED },
+];
+
 const AUDIO: &[Item] = &[slider("Sound Volume", "volume", 0.0, 1.0, 0.1), slider("Music Volume", "bgmvolume", 0.0, 1.0, 0.1)];
 
 /// Help line shown under an options page for the selected item.
@@ -259,6 +307,25 @@ fn tooltip(item: Item) -> Option<&'static str> {
         "r_dither" => "Adds fine noise to hide color banding",
         "aim_slowdown" => "Slows stick look while the crosshair is over an enemy",
         "aim_rotation" => "Turns the view to follow a moving enemy you are aiming at",
+        "a11y_reducemotion" => "Turns off view bob, strafe tilt and the camera kick when hit or firing",
+        "v_flashscale" => "Strength of the full-screen flashes for damage, pickups and powerups",
+        "r_colorblind" => "Shifts colors so they stay distinct for the chosen color blindness",
+        "crosshair_outline" => "Dark border keeps the crosshair visible on any background",
+        "cl_captions" => "Shows text for important sounds: doors, alerted enemies, secrets, pickups",
+        "scr_textscale" => "Size of on-screen messages and captions",
+        "scr_textbg" => "Dark backdrop behind on-screen messages for readability",
+        "scr_centertime" => "Seconds a center-screen message stays up",
+        "con_notifytime" => "Seconds messages at the top of the screen stay up",
+        "in_toggleattack" => "Press attack once to keep firing, again to stop",
+        "in_togglerun" => "Press run once to switch between running and walking",
+        "assist_damagetaken" => "Scales all damage you take; not in deathmatch",
+        "assist_enemyhealth" => "Monsters take proportionally less damage at higher values",
+        "assist_ammo" => "Multiplies ammo from pickups (up to the normal carry limit)",
+        "assist_infiniteammo" => "Firing never uses up ammo",
+        "assist_noselfdamage" => "Your own rockets and grenades don't hurt you; rocket jumps still work",
+        "assist_regen" => "Slowly heals up to 100 health after 5 seconds without being hit",
+        "assist_jumps" => "Jump again in mid-air",
+        "a11y_gamespeed" => "Slows the whole game down; single player only",
         _ => return None,
     })
 }
@@ -270,9 +337,11 @@ fn page_items(p: Page) -> &'static [Item] {
         Page::Input => INPUT,
         Page::Graphics => GRAPHICS,
         Page::Audio => AUDIO,
+        Page::Accessibility => ACCESSIBILITY,
         Page::Mouse => MOUSE,
         Page::Controller => CONTROLLER,
         Page::Autosave => AUTOSAVE,
+        Page::Assists => ASSISTS,
         Page::Join => JOIN,
         Page::Host => HOST,
         Page::Setup => SETUP,
@@ -287,6 +356,7 @@ fn page_name(p: Page) -> &'static str {
         Page::Mouse => "Mouse & Keyboard",
         Page::Controller => "Controller",
         Page::Autosave => "Autosave",
+        Page::Assists => "Assists",
         _ => PAGES.iter().find(|x| x.1 == p).map_or("", |x| x.0),
     }
 }
@@ -304,7 +374,7 @@ fn is_net_page(p: Page) -> bool {
 
 /// Every cvar the options pages edit (the host marks them archived).
 pub fn option_cvars() -> impl Iterator<Item = &'static str> {
-    [GAMEPLAY, AUTOSAVE, INPUT, MOUSE, CONTROLLER, GRAPHICS, AUDIO].into_iter().flatten().filter_map(|i| match *i {
+    [GAMEPLAY, AUTOSAVE, ASSISTS, INPUT, MOUSE, CONTROLLER, GRAPHICS, AUDIO, ACCESSIBILITY].into_iter().flatten().filter_map(|i| match *i {
         Item::Slider { cvar, .. } | Item::Toggle { cvar, .. } | Item::Choice { cvar, .. } => Some(cvar),
         _ => None,
     })
