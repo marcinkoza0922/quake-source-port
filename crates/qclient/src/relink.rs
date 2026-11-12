@@ -2,6 +2,7 @@
 
 use qcore::math::{Vec3, angle_mod, angle_vectors};
 
+use crate::fte::FteRequest;
 use crate::state::*;
 
 impl ClientState {
@@ -179,7 +180,17 @@ impl ClientState {
             .find(|(f, _)| mflags & f != 0)
             .map(|(_, n)| n);
             let relinked = self.entities[i].forcelink || self.entities[i].lerpflags & LERP_RESETMOVE != 0;
-            if let Some(name) = fte_trail
+            // .traileffectnum (replacement deltas) replaces the model's trail.
+            let net_trail = self.entities[i].traileffect;
+            if net_trail > 0
+                && let Some(name) = self.precached(net_trail as i32)
+            {
+                if !relinked {
+                    let r = FteRequest::Trail { name, start: oldorg, end: origin, entity: key, interval: None };
+                    self.fte_queue.push(r);
+                }
+                Self::reset_trail(&mut self.entities[i]);
+            } else if let Some(name) = fte_trail
                 && self.fte_names.has(name)
             {
                 // A teleported entity draws no trail this frame.

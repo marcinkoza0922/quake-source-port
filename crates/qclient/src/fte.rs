@@ -67,7 +67,7 @@ impl ClientState {
         true
     }
 
-    fn precached(&self, ef: i32) -> Option<String> {
+    pub(crate) fn precached(&self, ef: i32) -> Option<String> {
         self.particle_precache.get(ef as usize).filter(|n| !n.is_empty()).cloned()
     }
 

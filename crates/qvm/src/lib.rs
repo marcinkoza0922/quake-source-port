@@ -70,6 +70,12 @@ pub trait Host {
     fn ext_builtin(&mut self, vm: &mut Vm, name: &str) -> Result<()> {
         Err(vm.run_error(format!("unimplemented builtin {name}")))
     }
+    /// Particle effect index for an entity's `traileffect` / `emiteffect`
+    /// spawn key (vkQuake ED_ParseEdict; DP_ENT_TRAILEFFECTNUM). `None`
+    /// leaves the key unhandled.
+    fn particle_effect_index(&mut self, _name: &str) -> Option<f32> {
+        None
+    }
     /// Extra extension names `checkextension` should report as supported.
     fn has_extension(&self, _name: &str) -> bool {
         false

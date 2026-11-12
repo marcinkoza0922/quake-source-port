@@ -234,6 +234,8 @@ pub struct Fte {
     ent_fx: HashMap<i32, ([f32; 3], Option<TrailHandle>)>,
     /// Sky triangles need rebuilding (effects or map changed).
     sky_dirty: bool,
+    /// Submodels (0 = world) that have rain sky triangles.
+    sky_models: std::collections::HashSet<usize>,
 }
 
 impl Fte {
@@ -250,6 +252,7 @@ impl Fte {
             model_fx: HashMap::new(),
             ent_fx: HashMap::new(),
             sky_dirty: true,
+            sky_models: Default::default(),
         }
     }
 
@@ -312,6 +315,12 @@ impl Fte {
         );
         let pre: Vec<_> = cl.particle_precache.iter().filter(|n| !n.is_empty()).take(8).collect();
         o.push_str(&format!("first precaches: {pre:?}\nrequests: {}\n", self.requests));
+        if !self.sky_models.is_empty() {
+            let mut models: Vec<_> = self.sky_models.iter().copied().collect();
+            models.sort_unstable();
+            let emitting: Vec<_> = self.rain_emitters(cl).iter().map(|e| e.model).collect();
+            o.push_str(&format!("rain submodels: {models:?}, emitting: {emitting:?}\n"));
+        }
         for &t in self.sys.run_list() {
             let n = self.sys.particles_of(t).count();
             let ty = &self.reg.types[t];
@@ -396,9 +405,10 @@ impl Fte {
         if self.sky_dirty {
             self.sky_dirty = false;
             self.sys.clear_sky_tris();
-            let tris = sky_tris(bsp, &mut self.reg, &mut f);
-            if !tris.is_empty() {
-                self.sys.set_sky_tris(1, tris);
+            self.sky_models.clear();
+            for (sub, tris) in sky_tris(bsp, &mut self.reg, &mut f) {
+                self.sky_models.insert(sub);
+                self.sys.set_sky_tris(sub, tris);
             }
         }
         self.model_effects(cl, &world, &mut f, ft);
@@ -408,12 +418,7 @@ impl Fte {
         let vi = ViewInfo { origin: view.origin.into(), forward: fwd, right, up };
         let eo = |e: i32| world.entity_origin(e);
         let mut g = Geometry::new(&self.reg, vi, self.sys.particletime, &eo);
-        // The world is model 1 at the origin (brush entities don't rain yet).
-        let rain = vec![qpart::RainEmitter {
-            model: 1,
-            axis: [Vec3::new(1.0, 0.0, 0.0), Vec3::new(0.0, -1.0, 0.0), Vec3::new(0.0, 0.0, 1.0)],
-            origin: Vec3::ZERO,
-        }];
+        let rain = self.rain_emitters(cl);
         let input = FrameInput { cl_time: cl.time, vieworg: view.origin.into(), rain };
         self.sys.frame(&self.reg, &world, &input, &mut g);
 
@@ -452,6 +457,7 @@ impl Fte {
                     lines: b.lines,
                     first_index: b.first_index,
                     num_indices: b.num_indices,
+                    soft: b.soft,
                 })
             })
             .collect();
@@ -486,45 +492,94 @@ impl Fte {
     }
 
     /// `r_effect` / `r_trail` effects of visible entities (CL_RelinkEntities).
+    /// Rain emitters keyed by BSP submodel: the world at the origin plus
+    /// every active inline brush entity with sky triangles (P_AddRainParticles
+    /// over cl.entities, with the entity's angles and origin).
+    fn rain_emitters(&self, cl: &ClientState) -> Vec<qpart::RainEmitter> {
+        let mut out = Vec::new();
+        if self.sky_models.contains(&0) {
+            let (f, r, u) = qcore::math::angle_vectors(Vec3::ZERO);
+            out.push(qpart::RainEmitter { model: 0, axis: [f, r, u], origin: Vec3::ZERO });
+        }
+        if self.sky_models.len() <= usize::from(self.sky_models.contains(&0)) {
+            return out;
+        }
+        for (_, e) in cl.active_entities() {
+            let Some(sub) = cl.model_name(e.model).and_then(|n| n.strip_prefix('*')).and_then(|n| n.parse::<usize>().ok())
+            else {
+                continue;
+            };
+            if sub != 0 && self.sky_models.contains(&sub) {
+                let (f, r, u) = qcore::math::angle_vectors(Vec3::from(e.angles));
+                out.push(qpart::RainEmitter { model: sub, axis: [f, r, u], origin: Vec3::from(e.origin) });
+            }
+        }
+        out
+    }
+
+    /// Per-entity effects (CL_RelinkEntities / R_StoreEfrags): `r_trail` /
+    /// `r_effect` model associations, overridden by the entity's
+    /// `.traileffectnum` / `.emiteffectnum` (DP_ENT_TRAILEFFECTNUM). Netstate
+    /// trails run in the client's relink. Static entities only emit their
+    /// netstate effect.
     fn model_effects(&mut self, cl: &ClientState, world: &BspWorld<'_>, f: &mut dyn qpart::FileSource, ft: f32) {
-        if self.reg.associated.is_empty() {
+        let net_type = |reg: &mut Registry, f: &mut dyn qpart::FileSource, n: u16| {
+            let name = cl.particle_precache.get(n as usize).filter(|s| !s.is_empty())?;
+            reg.find(name, f)
+        };
+        let has_net = cl.entities.iter().any(|e| e.emiteffect > 0 || e.traileffect > 0);
+        if self.reg.associated.is_empty() && !has_net && !cl.static_entities.iter().any(|e| e.emiteffect > 0) {
             return;
         }
         for &i in &cl.visedicts {
             let Some(e) = cl.entities.get(i) else { continue };
             let Some(name) = cl.model_name(e.model) else { continue };
-            let me = self.model_fx_of(name, f);
-            if me.trail.is_none() && me.emit.is_none() {
+            let me = if self.reg.associated.is_empty() { qpart::ModelEffects::default() } else { self.model_fx_of(name, f) };
+            let trail = if e.traileffect > 0 { None } else { me.trail };
+            let (fwd, _, up) = qcore::math::angle_vectors(e.angles.into());
+            // the "stupid vanilla bug": alias models pitch the other way
+            let forward = if name.ends_with(".mdl") { Vec3::new(fwd.x, fwd.y, -fwd.z) } else { fwd };
+            let emit = match e.emiteffect {
+                0 => me.emit.map(|t| (t, if me.flags & qpart::EMIT_FORWARDS != 0 { forward } else { up * -1.0 })),
+                n => net_type(&mut self.reg, f, n).map(|t| (t, forward)),
+            };
+            if trail.is_none() && emit.is_none() {
                 continue;
             }
             let key = i as i32;
             let entry = self.ent_fx.entry(key).or_insert((e.origin, None));
             let oldorg = std::mem::replace(&mut entry.0, e.origin);
-            if let Some(t) = me.trail {
+            if let Some(t) = trail {
                 let slot = self.trails.entry(key).or_insert(None);
                 self.sys.trail(&self.reg, world, oldorg.into(), e.origin.into(), t, ft, key, Some(slot));
             }
-            if let Some(t) = me.emit {
-                let (fwd, _, up) = qcore::math::angle_vectors(e.angles.into());
-                let dir = if me.flags & qpart::EMIT_FORWARDS != 0 {
-                    // the "stupid vanilla bug": alias models pitch the other way
-                    if name.ends_with(".mdl") { Vec3::new(fwd.x, fwd.y, -fwd.z) } else { fwd }
-                } else {
-                    up * -1.0
-                };
-                let mut slot = self.ent_fx.get(&key).and_then(|x| x.1);
-                self.sys.run_effect(&self.reg, world, e.origin.into(), Some(dir), ft, t, Some(&mut slot));
-                if let Some(x) = self.ent_fx.get_mut(&key) {
-                    x.1 = slot;
-                }
+            if let Some((t, dir)) = emit {
+                self.emit(world, key, e.origin.into(), dir, ft, t);
             }
         }
+        // Static entities, keyed below the dynamic ones.
+        let ft = ft.clamp(0.0, 0.1);
+        for (k, e) in cl.static_entities.iter().enumerate().filter(|(_, e)| e.emiteffect > 0) {
+            let Some(t) = net_type(&mut self.reg, f, e.emiteffect) else { continue };
+            let (fwd, _, _) = qcore::math::angle_vectors(e.angles.into());
+            let alias = cl.model_name(e.model).is_some_and(|n| n.ends_with(".mdl"));
+            let dir = if alias { Vec3::new(fwd.x, fwd.y, -fwd.z) } else { fwd };
+            self.emit(world, -2 - k as i32, e.origin.into(), dir, ft, t);
+        }
+    }
+
+    /// PScript_RunParticleEffectState with the emit state kept per `key`.
+    fn emit(&mut self, world: &BspWorld<'_>, key: i32, org: Vec3, dir: Vec3, ft: f32, t: qpart::TypeId) {
+        let mut slot = self.ent_fx.get(&key).and_then(|x| x.1);
+        self.sys.run_effect(&self.reg, world, org, Some(dir), ft, t, Some(&mut slot));
+        self.ent_fx.entry(key).or_insert(([org.x, org.y, org.z], None)).1 = slot;
     }
 }
 
-/// Sky-triangle rain emitters of the world (PScript_RecalculateSkyTris):
-/// worldspawn `[_]texpart_<texture>` keys, else effects named `tex_<texture>`.
-fn sky_tris(bsp: &Bsp, reg: &mut Registry, f: &mut dyn qpart::FileSource) -> Vec<qpart::SkyTri> {
+/// Sky-triangle rain emitters of the world and its inline brush models
+/// (PScript_RecalculateSkyTris), keyed by submodel index: worldspawn
+/// `[_]texpart_<texture>` keys, else effects named `tex_<texture>`.
+fn sky_tris(bsp: &Bsp, reg: &mut Registry, f: &mut dyn qpart::FileSource) -> Vec<(usize, Vec<qpart::SkyTri>)> {
     let mut remap: HashMap<usize, qpart::TypeId> = HashMap::new();
     let mut s = bsp.entities.as_str();
     if let Some(("{", rest)) = qcore::cmd::com_parse(s) {
@@ -548,8 +603,25 @@ fn sky_tris(bsp: &Bsp, reg: &mut Registry, f: &mut dyn qpart::FileSource) -> Vec
         }
     }
     let mut out = Vec::new();
-    let Some(m) = bsp.models.first() else { return out };
     let mut by_tex: HashMap<usize, Option<qpart::TypeId>> = HashMap::new();
+    for (sub, m) in bsp.models.iter().enumerate() {
+        let tris = model_sky_tris(bsp, m, &remap, &mut by_tex, reg, f);
+        if !tris.is_empty() {
+            out.push((sub, tris));
+        }
+    }
+    out
+}
+
+fn model_sky_tris(
+    bsp: &Bsp,
+    m: &qformats::bsp::Model,
+    remap: &HashMap<usize, qpart::TypeId>,
+    by_tex: &mut HashMap<usize, Option<qpart::TypeId>>,
+    reg: &mut Registry,
+    f: &mut dyn qpart::FileSource,
+) -> Vec<qpart::SkyTri> {
+    let mut out = Vec::new();
     for fi in m.first_face.max(0) as usize..(m.first_face + m.num_faces).max(0) as usize {
         let Some(face) = bsp.faces.get(fi) else { continue };
         let Some(ti) = bsp.texinfo.get(face.texinfo as usize) else { continue };

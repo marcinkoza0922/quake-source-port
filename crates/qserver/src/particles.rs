@@ -25,6 +25,8 @@ pub const EXTENSIONS: &[&str] = &[
     "FTE_PART_SCRIPT",
     "FTE_PART_NAMESPACES",
     "FTE_PART_NAMESPACE_EFFECTINFO",
+    // .traileffectnum / .emiteffectnum, sent with replacement deltas
+    "DP_ENT_TRAILEFFECTNUM",
 ];
 
 /// DP's built-in effect names, precached first (COM_Effectinfo_Enumerate).
@@ -50,7 +52,7 @@ fn p(i: usize) -> usize {
 impl Core {
     /// Index of `name`, adding it if new (PF_SV_ForceParticlePrecache).
     /// After loading, new names are also sent to clients. 0 when full.
-    fn particle_precache(&mut self, name: &str) -> usize {
+    pub(crate) fn particle_precache(&mut self, name: &str) -> usize {
         if let Some(i) = self.sv.particle_precache.iter().skip(1).position(|n| n == name) {
             return i + 1;
         }

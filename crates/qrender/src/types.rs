@@ -144,6 +144,8 @@ pub struct FteBatch {
     pub lines: bool,
     pub first_index: u32,
     pub num_indices: u32,
+    /// Fades out near scene depth when soft particles are on.
+    pub soft: bool,
 }
 
 #[derive(Clone, Copy, Debug)]
@@ -248,6 +250,9 @@ pub struct Settings {
     pub dither_texture: f32,
     /// r_colorblind: 0 off, 1 protanopia, 2 deuteranopia, 3 tritanopia filter.
     pub colorblind: u32,
+    /// r_softparticles ? r_softparticledistance : 0. Soft FTE particles fade
+    /// over this many units in front of scene depth; 0 disables.
+    pub soft_particle_distance: f32,
 }
 
 /// gl_texturemode names (ironwail order): (name, linear mag/min, mipmapped, linear mips).
@@ -297,6 +302,7 @@ impl Default for Settings {
             dither_screen: 1.0,
             dither_texture: 1.0,
             colorblind: 0,
+            soft_particle_distance: 4.0,
         }
     }
 }

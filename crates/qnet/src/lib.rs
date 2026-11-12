@@ -4,6 +4,7 @@
 //! - [`msg`]: [`SizeBuf`] writer and [`MsgReader`] with protocol 15/666/999
 //!   coord/angle encodings.
 //! - [`protocol`]: svc_*/clc_*/TE_*/U_*/SU_* constants.
+//! - [`delta`]: FTE replacement deltas (PEXT2_REPLACEMENTDELTAS).
 //! - [`dgram`]: [`Connection`], the reliable/unreliable datagram state
 //!   machine (sequence, ack, EOM fragmentation, resend).
 //! - [`control`]: CCREQ/CCREP connection-control packets.
@@ -11,6 +12,7 @@
 //!   [`LoopbackTransport`].
 
 pub mod control;
+pub mod delta;
 pub mod dgram;
 pub mod msg;
 pub mod protocol;

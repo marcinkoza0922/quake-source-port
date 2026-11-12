@@ -1166,40 +1166,66 @@ impl Renderer {
                     float32: [0.0, 0.0, 0.0, 1.0],
                 },
             };
-            let catt = [match &t.color_ms {
-                Some(ms) => vk::RenderingAttachmentInfo::default()
-                    .image_view(ms.view)
-                    .image_layout(vk::ImageLayout::COLOR_ATTACHMENT_OPTIMAL)
-                    .resolve_mode(vk::ResolveModeFlags::AVERAGE)
-                    .resolve_image_view(t.color.view)
-                    .resolve_image_layout(vk::ImageLayout::COLOR_ATTACHMENT_OPTIMAL)
-                    .load_op(vk::AttachmentLoadOp::CLEAR)
-                    .store_op(vk::AttachmentStoreOp::DONT_CARE)
-                    .clear_value(clear),
-                None => vk::RenderingAttachmentInfo::default()
-                    .image_view(t.color.view)
-                    .image_layout(vk::ImageLayout::COLOR_ATTACHMENT_OPTIMAL)
-                    .load_op(vk::AttachmentLoadOp::CLEAR)
-                    .store_op(vk::AttachmentStoreOp::STORE)
-                    .clear_value(clear),
-            }];
-            let datt = vk::RenderingAttachmentInfo::default()
-                .image_view(t.depth.view)
-                .image_layout(vk::ImageLayout::DEPTH_ATTACHMENT_OPTIMAL)
-                .load_op(vk::AttachmentLoadOp::CLEAR)
-                .store_op(vk::AttachmentStoreOp::DONT_CARE)
-                .clear_value(vk::ClearValue {
-                    depth_stencil: vk::ClearDepthStencilValue {
-                        depth: 1.0,
-                        stencil: 0,
-                    },
-                });
-            let ri = vk::RenderingInfo::default()
-                .render_area(area_target)
-                .layer_count(1)
-                .color_attachments(&catt)
-                .depth_attachment(&datt);
-            dev.cmd_begin_rendering(cmd, &ri);
+            // Soft particles sample scene depth, so the FTE particles get a
+            // pass of their own with the depth attachment read-only; the
+            // viewmodel then resumes with depth writes.
+            let soft_dist = st.soft_particle_distance;
+            let split = soft_dist > 0.0
+                && view.is_some()
+                && fte.as_ref().is_some_and(|(_, _, b)| b.iter().any(|(_, _, b)| b.soft && !b.lines));
+            // load: keep earlier contents; last: the final scene pass (MSAA
+            // resolves only there); ro: depth attachment read-only.
+            let begin = |load: bool, last: bool, ro: bool| {
+                let lop = if load { vk::AttachmentLoadOp::LOAD } else { vk::AttachmentLoadOp::CLEAR };
+                let catt = [match &t.color_ms {
+                    Some(ms) if last => vk::RenderingAttachmentInfo::default()
+                        .image_view(ms.view)
+                        .image_layout(vk::ImageLayout::COLOR_ATTACHMENT_OPTIMAL)
+                        .resolve_mode(vk::ResolveModeFlags::AVERAGE)
+                        .resolve_image_view(t.color.view)
+                        .resolve_image_layout(vk::ImageLayout::COLOR_ATTACHMENT_OPTIMAL)
+                        .load_op(lop)
+                        .store_op(vk::AttachmentStoreOp::DONT_CARE)
+                        .clear_value(clear),
+                    Some(ms) => vk::RenderingAttachmentInfo::default()
+                        .image_view(ms.view)
+                        .image_layout(vk::ImageLayout::COLOR_ATTACHMENT_OPTIMAL)
+                        .load_op(lop)
+                        .store_op(vk::AttachmentStoreOp::STORE)
+                        .clear_value(clear),
+                    None => vk::RenderingAttachmentInfo::default()
+                        .image_view(t.color.view)
+                        .image_layout(vk::ImageLayout::COLOR_ATTACHMENT_OPTIMAL)
+                        .load_op(lop)
+                        .store_op(vk::AttachmentStoreOp::STORE)
+                        .clear_value(clear),
+                }];
+                let datt = vk::RenderingAttachmentInfo::default()
+                    .image_view(t.depth.view)
+                    .image_layout(if ro {
+                        vk::ImageLayout::DEPTH_STENCIL_READ_ONLY_OPTIMAL
+                    } else {
+                        vk::ImageLayout::DEPTH_ATTACHMENT_OPTIMAL
+                    })
+                    .load_op(lop)
+                    .store_op(if last { vk::AttachmentStoreOp::DONT_CARE } else { vk::AttachmentStoreOp::STORE })
+                    .clear_value(vk::ClearValue {
+                        depth_stencil: vk::ClearDepthStencilValue {
+                            depth: 1.0,
+                            stencil: 0,
+                        },
+                    });
+                let ri = vk::RenderingInfo::default()
+                    .render_area(area_target)
+                    .layer_count(1)
+                    .color_attachments(&catt)
+                    .depth_attachment(&datt);
+                dev.cmd_begin_rendering(cmd, &ri);
+            };
+            let depth_layout = |old: vk::ImageLayout, new: vk::ImageLayout| {
+                gpu::barrier(&dev, cmd, t.depth.image, drng, old, new);
+            };
+            begin(false, !split, false);
             ts(3);
             let vp_full = vk::Viewport {
                 x: 0.0,
@@ -1330,17 +1356,44 @@ impl Renderer {
                     dev.cmd_bind_vertex_buffers(cmd, 0, &[dynbuf], &[particles.ofs]);
                     dev.cmd_draw(cmd, 6, particles.count, 0, 0);
                 }
+                let vm: Vec<&AliasDraw> = alias_draws.iter().filter(|a| a.viewmodel).collect();
                 if let Some((vofs, iofs, batches)) = &fte {
+                    let restore = |vp| {
+                        dev.cmd_set_viewport(cmd, 0, &[vp]);
+                        dev.cmd_set_scissor(cmd, 0, &[area_scene]);
+                        dev.cmd_bind_descriptor_sets(cmd, gfx, p.layout, 0, &set, &[]);
+                        dev.cmd_set_depth_bias(cmd, 0.0, 0.0, 0.0);
+                    };
+                    if split {
+                        dev.cmd_end_rendering(cmd);
+                        depth_layout(
+                            vk::ImageLayout::DEPTH_ATTACHMENT_OPTIMAL,
+                            vk::ImageLayout::DEPTH_STENCIL_READ_ONLY_OPTIMAL,
+                        );
+                        begin(true, vm.is_empty(), true);
+                        restore(vp_scene);
+                    }
+                    let samples = t.color_ms.as_ref().map_or(1, |_| self.msaa);
                     dev.cmd_bind_vertex_buffers(cmd, 0, &[dynbuf], &[*vofs]);
                     dev.cmd_bind_index_buffer(cmd, dynbuf, *iofs, vk::IndexType::UINT32);
                     for (pipe, slot, b) in batches {
                         dev.cmd_bind_pipeline(cmd, gfx, p.fte[*pipe]);
                         let fogmix = if matches!(b.blend, crate::FteBlend::Blend | crate::FteBlend::BlendColour) { 1.0 } else { 0.0 };
-                        push(bytes_of(&[PolyPush { color: [fogmix, 0.0, 0.0, 0.0], tex: *slot }]));
+                        let soft = if split && b.soft { 1.0 / soft_dist } else { 0.0 };
+                        let color = [fogmix, soft, samples as f32, b.blend as u32 as f32];
+                        push(bytes_of(&[PolyPush { color, tex: *slot }]));
                         dev.cmd_draw_indexed(cmd, b.num_indices, 1, b.first_index, 0, 0);
                     }
+                    if split && !vm.is_empty() {
+                        dev.cmd_end_rendering(cmd);
+                        depth_layout(
+                            vk::ImageLayout::DEPTH_STENCIL_READ_ONLY_OPTIMAL,
+                            vk::ImageLayout::DEPTH_ATTACHMENT_OPTIMAL,
+                        );
+                        begin(true, true, false);
+                        restore(vp_scene);
+                    }
                 }
-                let vm: Vec<&AliasDraw> = alias_draws.iter().filter(|a| a.viewmodel).collect();
                 if !vm.is_empty() {
                     dev.cmd_set_viewport(
                         cmd,

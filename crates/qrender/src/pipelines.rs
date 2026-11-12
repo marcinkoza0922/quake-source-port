@@ -243,6 +243,10 @@ impl Pipelines {
             b(3, vk::DescriptorType::COMBINED_IMAGE_SAMPLER, 1),
             b(4, vk::DescriptorType::STORAGE_BUFFER, 1),
             b(5, vk::DescriptorType::STORAGE_BUFFER, 1),
+            // scene depth for soft particles: single-sampled / MSAA (only the
+            // one matching the targets is written)
+            b(6, vk::DescriptorType::COMBINED_IMAGE_SAMPLER, 1),
+            b(7, vk::DescriptorType::COMBINED_IMAGE_SAMPLER, 1),
         ];
         let flags = [
             vk::DescriptorBindingFlags::empty(),
@@ -251,6 +255,8 @@ impl Pipelines {
             vk::DescriptorBindingFlags::empty(),
             vk::DescriptorBindingFlags::empty(),
             vk::DescriptorBindingFlags::empty(),
+            vk::DescriptorBindingFlags::PARTIALLY_BOUND,
+            vk::DescriptorBindingFlags::PARTIALLY_BOUND,
         ];
         let mut fi = vk::DescriptorSetLayoutBindingFlagsCreateInfo::default().binding_flags(&flags);
         let ci = vk::DescriptorSetLayoutCreateInfo::default()

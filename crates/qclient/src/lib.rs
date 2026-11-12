@@ -8,6 +8,7 @@
 //! build input with [`ClientState::build_move`].
 
 use qcore::anorms;
+pub mod delta;
 mod effects;
 mod fte;
 mod input;

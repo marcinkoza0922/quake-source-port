@@ -196,6 +196,9 @@ const COMPAT_CVARS: &[(&str, &str, u32)] = &[
     ("r_part_beams", "1", 0),
     ("r_part_maxparticles", "65536", 0),
     ("r_part_maxdecals", "8192", 0),
+    ("r_softparticles", "1", CVAR_ARCHIVE),
+    ("cl_nopext", "0", CVAR_ARCHIVE),
+    ("r_softparticledistance", "4", CVAR_ARCHIVE),
     ("r_bouncysparks", "1", 0),
     ("r_decal_noperpendicular", "1", 0),
     ("r_particle_tracelimit", "16777216", 0),
@@ -876,7 +879,13 @@ impl Host {
 
     /// Parse server messages (loopback or network) into the client.
     fn deliver(&mut self, msgs: Vec<Vec<u8>>) {
-        for m in msgs {
+        self.deliver_seq(msgs.into_iter().map(|m| (m, None)).collect());
+    }
+
+    /// [`Self::deliver`] with each datagram's network sequence (acks).
+    fn deliver_seq(&mut self, msgs: Vec<(Vec<u8>, Option<u32>)>) {
+        for (m, seq) in msgs {
+            self.cl.net_sequence = seq;
             if let Some(w) = &mut self.recording
                 && let Err(e) = w.write(self.cl.viewangles, &m)
             {
@@ -938,7 +947,7 @@ impl Host {
                     let a = n.server;
                     self.con.print(&format!("Connection accepted by {a}\n"));
                 }
-                self.deliver(m);
+                self.deliver_seq(m);
             }
             crate::net::ClientPoll::Failed(why) => {
                 self.con.print(&format!("Connection failed: {why}"));
@@ -1606,6 +1615,13 @@ impl Host {
                 let mut cmd = self.last_cmd;
                 cmd.buttons = self.pend_attack as u8 | (self.pend_jump as u8) << 1;
                 cmd.impulse = self.pend_impulse;
+                // The server acks the lossless local client's frames itself;
+                // only full-resend requests (-1) go back.
+                for a in self.cl.ack_frames.drain(..) {
+                    if a == -1 {
+                        self.server.ack_frame(i, -1);
+                    }
+                }
                 if self.cl.build_move(&cmd).is_some() {
                     self.server.set_move(i, ClientMove {
                         angles: cmd.viewangles,
@@ -1908,6 +1924,11 @@ impl Host {
         if !connected {
             return;
         }
+        // Replacement deltas only send changes: ask for every entity again
+        // so the demo starts from a complete state.
+        if self.cl.pext2 & qclient::delta::PEXT2_REPLACEMENTDELTAS != 0 {
+            self.cl.ack_frames.push(-1);
+        }
         let Some(mut w) = self.recording.take() else { return };
         let ang = self.cl.viewangles;
         let mut res = self.demo_head.iter().try_for_each(|m| w.write(ang, m));
@@ -2173,6 +2194,7 @@ impl Host {
             dither_screen: v("r_softemu_dither_screen"),
             dither_texture: v("r_softemu_dither_texture"),
             colorblind: v("r_colorblind").clamp(0.0, 3.0) as u32,
+            soft_particle_distance: if v("r_softparticles") != 0.0 { v("r_softparticledistance").max(0.01) } else { 0.0 },
             ..Settings::default()
         };
         {
@@ -2586,7 +2608,17 @@ fn register_commands(c: &mut Commands<Host>) {
             h.print("Can't \"cmd\", not connected\n");
             return;
         }
-        if a.argc() > 1 {
+        if a.args().trim() == "pext" {
+            // The server's extension query: reply with what we support.
+            let p2 = if h.cv("cl_nopext") != 0.0 { 0 } else { qclient::delta::PEXT2_SUPPORTED };
+            let s = format!(
+                "pext {:#x} 0 {:#x} {:#x}",
+                qclient::delta::PROTOCOL_FTE_PEXT1,
+                qclient::delta::PROTOCOL_FTE_PEXT2,
+                p2
+            );
+            h.cl.send_string_cmd(&s);
+        } else if a.argc() > 1 {
             let s = a.args().to_string();
             h.cl.send_string_cmd(&s);
         }

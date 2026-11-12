@@ -5,6 +5,8 @@
 use qvm::Vm;
 use qworld::{FL_ONGROUND, MOVETYPE_STEP, Vec3, World};
 
+use qnet::delta::EntState;
+
 use crate::client::{MAX_QUEUED_DATAGRAMS, Signon};
 use crate::ents::Ents;
 use crate::msg::*;
@@ -243,14 +245,13 @@ pub(crate) fn write_clientdata(vm: &mut Vm, c: &mut Core, w: &mut World, e: u32,
     }
 }
 
-/// SV_WriteEntitiesToClient.
-fn write_entities(vm: &mut Vm, c: &mut Core, clent: u32, msg: &mut SizeBuf, pvs: &mut Vec<u8>) {
+/// Entities `clent` may see: itself, then every entity with a model that
+/// touches its fat PVS (the SV_WriteEntitiesToClient filter).
+fn visible_entities(vm: &Vm, c: &mut Core, clent: u32, pvs: &mut Vec<u8>) -> Vec<u32> {
     let f = c.sv.fields.clone();
     let org = Vec3::from_array(vm.ent_v(clent, f.origin)) + Vec3::from_array(vm.ent_v(clent, f.view_ofs));
     c.sv.vis.fat_pvs(org, pvs);
     let protocol = c.sv.protocol;
-    let pf = c.sv.protocolflags;
-    let mask = c.sv.effects_mask;
     let mut list = vec![clent];
     for e in 1..vm.num_edicts() as u32 {
         if e == clent || vm.is_free(e) {
@@ -269,6 +270,118 @@ fn write_entities(vm: &mut Vm, c: &mut Core, clent: u32, msg: &mut SizeBuf, pvs:
         }
         list.push(e);
     }
+    list
+}
+
+/// Baseline as the client holds it (an entity without svc_spawnbaseline
+/// has the default state, scale 16).
+fn baseline_state(b: &crate::server::Baseline) -> EntState {
+    EntState {
+        origin: b.origin,
+        angles: b.angles,
+        modelindex: b.modelindex as u32,
+        frame: b.frame as u32,
+        skin: b.skin as u32,
+        colormap: b.colormap as u8,
+        effects: b.effects as u32,
+        alpha: b.alpha,
+        scale: if b.scale == 0 { ENTSCALE_DEFAULT } else { b.scale },
+        ..EntState::default()
+    }
+}
+
+/// SVFTE_BuildSnapshotForClient + SV_BuildEntityState: the visible
+/// entities' states, sorted by number.
+fn snapshot(vm: &Vm, c: &mut Core, clent: u32, pvs: &mut Vec<u8>) -> Vec<(u32, EntState)> {
+    let f = c.sv.fields.clone();
+    let mask = c.sv.effects_mask;
+    let mut list = visible_entities(vm, c, clent, pvs);
+    list.sort_unstable();
+    let effect = |o: Option<usize>, e: u32| {
+        o.map_or(0, |o| vm.ent_f(e, o) as i32).clamp(0, qnet::delta::MAX_PARTICLETYPES as i32 - 1) as u16
+    };
+    let mut out = Vec::with_capacity(list.len());
+    for e in list {
+        let effects = vm.ent_f(e, f.effects) as i32 & mask;
+        let x = c.ext(e);
+        if let Some(o) = f.alpha {
+            x.alpha = entalpha_encode(vm.ent_f(e, o));
+        }
+        let alpha = x.alpha;
+        if e != clent && alpha == ENTALPHA_ZERO && effects == 0 {
+            continue;
+        }
+        out.push((
+            e,
+            EntState {
+                origin: vm.ent_v(e, f.origin),
+                angles: vm.ent_v(e, f.angles),
+                modelindex: vm.ent_f(e, f.modelindex) as u32,
+                frame: vm.ent_f(e, f.frame) as u32,
+                skin: vm.ent_f(e, f.skin) as u32,
+                colormap: vm.ent_f(e, f.colormap) as u8,
+                effects: effects as u32,
+                eflags: if vm.ent_f(e, f.movetype) as i32 == MOVETYPE_STEP { qnet::delta::EFLAGS_STEP } else { 0 },
+                alpha,
+                scale: f.scale.map_or(ENTSCALE_DEFAULT, |o| entscale_encode(vm.ent_f(e, o))),
+                traileffect: effect(f.traileffectnum, e),
+                emiteffect: effect(f.emiteffectnum, e),
+                ..EntState::default()
+            },
+        ));
+    }
+    out
+}
+
+/// One frame of replacement deltas for client `i` (SV_SendClientDatagram
+/// with PEXT2_REPLACEMENTDELTAS): client data, then svcfte_updateentities
+/// (more datagrams when the snapshot doesn't fit), then the server datagram.
+/// The local client is lossless, so its frames are acked as written.
+fn send_deltas(vm: &mut Vm, c: &mut Core, w: &mut World, i: usize, pvs: &mut Vec<u8>) {
+    let Some(mut d) = c.clients[i].delta.take() else { return };
+    let e = i as u32 + 1;
+    let max = c.clients[i].max_datagram;
+    let mut msg = SizeBuf::new(max);
+    write_clientdata(vm, c, w, e, &mut msg);
+    let snap = snapshot(vm, c, e, pvs);
+    d.calc(snap, vm.num_edicts());
+    let (time, pf, local) = (vm.time as f32, c.sv.protocolflags, c.clients[i].local);
+    loop {
+        let ext = &c.sv.ext;
+        let base = |n: u32| ext.get(n as usize).map_or_else(EntState::default, |x| baseline_state(&x.baseline));
+        let mut q = qnet::SizeBuf::new(max);
+        d.write(&mut q, max.saturating_sub(msg.len()).max(64), time, pf, &base);
+        msg.write(&q.data);
+        if local {
+            d.ack(d.next_sequence.wrapping_sub(1));
+        }
+        if !d.more() {
+            break;
+        }
+        push_datagram(c, i, std::mem::replace(&mut msg, SizeBuf::new(max)).data);
+    }
+    if msg.len() + c.sv.datagram.len() < msg.maxsize {
+        msg.write(&c.sv.datagram.data);
+    }
+    push_datagram(c, i, msg.data);
+    c.clients[i].delta = Some(d);
+}
+
+fn push_datagram(c: &mut Core, i: usize, data: Vec<u8>) {
+    let q = &mut c.clients[i].datagrams;
+    if q.len() >= MAX_QUEUED_DATAGRAMS {
+        q.pop_front();
+    }
+    q.push_back(data);
+}
+
+/// SV_WriteEntitiesToClient.
+fn write_entities(vm: &mut Vm, c: &mut Core, clent: u32, msg: &mut SizeBuf, pvs: &mut Vec<u8>) {
+    let f = c.sv.fields.clone();
+    let protocol = c.sv.protocol;
+    let pf = c.sv.protocolflags;
+    let mask = c.sv.effects_mask;
+    let list = visible_entities(vm, c, clent, pvs);
     for e in list {
         if msg.len() + 40 > msg.maxsize {
             break;
@@ -441,7 +554,9 @@ impl Server {
             if !c.clients[i].active {
                 continue;
             }
-            if c.clients[i].spawned {
+            if c.clients[i].spawned && c.clients[i].delta.is_some() && !c.skip_entity_updates {
+                send_deltas(&mut l.vm, c, &mut l.world, i, &mut pvs);
+            } else if c.clients[i].spawned {
                 let mut msg = SizeBuf::new(c.clients[i].max_datagram);
                 msg.byte(SVC_TIME);
                 msg.float(l.vm.time as f32);
@@ -453,11 +568,7 @@ impl Server {
                 if msg.len() + c.sv.datagram.len() < msg.maxsize {
                     msg.write(&c.sv.datagram.data);
                 }
-                let q = &mut c.clients[i].datagrams;
-                if q.len() >= MAX_QUEUED_DATAGRAMS {
-                    q.pop_front();
-                }
-                q.push_back(msg.data);
+                push_datagram(c, i, msg.data);
             }
             if flush(c, i) {
                 drop.push(i);

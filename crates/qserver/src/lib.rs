@@ -12,6 +12,7 @@
 pub mod assists;
 mod client;
 mod commands;
+pub mod delta;
 mod ents;
 pub mod fields;
 mod host;

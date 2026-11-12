@@ -10,3 +10,6 @@ workspace = true
 [dependencies]
 qcore = { path = "../qcore" }
 qformats = { path = "../qformats" }
+png = "0.18"
+zune-jpeg = "0.5"
+zune-core = "0.5"

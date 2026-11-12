@@ -31,7 +31,7 @@ pub enum TexRef {
     Builtin(BuiltinTex),
 }
 
-const IMAGE_EXTS: &[&str] = &["tga", "pcx", "lmp"];
+const IMAGE_EXTS: &[&str] = &["png", "tga", "jpg", "pcx", "lmp"];
 
 /// RGBA pixels for a texture.
 pub struct Image {
@@ -94,7 +94,7 @@ pub fn builtin_image(b: BuiltinTex) -> Image {
     }
 }
 
-/// Loads an image file as RGBA (Image_LoadImage subset: tga, pcx, lmp).
+/// Loads an image file as RGBA (Image_LoadImage: tga, png, jpg, pcx, lmp).
 /// `path` must include the extension.
 pub fn load_image(files: &mut dyn FileSource, path: &str, palette: Option<&[u8; 768]>, premul: bool) -> Option<Image> {
     let data = files.load(path)?;
@@ -120,6 +120,8 @@ pub fn load_image(files: &mut dyn FileSource, path: &str, palette: Option<&[u8; 
             let (p, pal) = qformats::image::parse_pcx(&data).ok()?;
             Image { width: p.width, height: p.height, rgba: pal_rgba(&p.pixels, &pal) }
         }
+        "png" => decode_png(&data)?,
+        "jpg" | "jpeg" => decode_jpeg(&data)?,
         "lmp" => {
             let p = qformats::image::parse_pic(&data).ok()?;
             Image { width: p.width, height: p.height, rgba: pal_rgba(&p.pixels, &game_pal()) }
@@ -135,6 +137,47 @@ pub fn load_image(files: &mut dyn FileSource, path: &str, palette: Option<&[u8; 
         }
     }
     Some(img)
+}
+
+/// Decodes a PNG of any colour type / bit depth to 8-bit RGBA.
+fn decode_png(data: &[u8]) -> Option<Image> {
+    let mut dec = png::Decoder::new(std::io::Cursor::new(data));
+    dec.set_transformations(png::Transformations::normalize_to_color8());
+    let mut reader = dec.read_info().ok()?;
+    let mut buf = vec![0; reader.output_buffer_size()?];
+    let info = reader.next_frame(&mut buf).ok()?;
+    buf.truncate(info.buffer_size());
+    let rgba = expand_to_rgba(&buf, match info.color_type {
+        png::ColorType::Grayscale => 1,
+        png::ColorType::GrayscaleAlpha => 2,
+        png::ColorType::Rgb => 3,
+        png::ColorType::Rgba => 4,
+        png::ColorType::Indexed => return None, // EXPAND removes palettes
+    });
+    Some(Image { width: info.width, height: info.height, rgba })
+}
+
+/// Decodes a baseline or progressive JPEG to RGBA (alpha 255).
+fn decode_jpeg(data: &[u8]) -> Option<Image> {
+    use zune_core::{bytestream::ZCursor, colorspace::ColorSpace, options::DecoderOptions};
+    let opts = DecoderOptions::default().jpeg_set_out_colorspace(ColorSpace::RGBA);
+    let mut dec = zune_jpeg::JpegDecoder::new_with_options(ZCursor::new(data), opts);
+    let rgba = dec.decode().ok()?;
+    let info = dec.info()?;
+    let (width, height) = (info.width as u32, info.height as u32);
+    (rgba.len() == (width * height * 4) as usize).then_some(Image { width, height, rgba })
+}
+
+/// Expands 1/2/3/4-channel 8-bit pixels to RGBA.
+fn expand_to_rgba(px: &[u8], channels: usize) -> Vec<u8> {
+    px.chunks_exact(channels)
+        .flat_map(|c| match channels {
+            1 => [c[0], c[0], c[0], 255],
+            2 => [c[0], c[0], c[0], c[1]],
+            3 => [c[0], c[1], c[2], 255],
+            _ => [c[0], c[1], c[2], c[3]],
+        })
+        .collect()
 }
 
 fn find_image(files: &mut dyn FileSource, base: &str) -> Option<String> {
@@ -227,6 +270,9 @@ pub struct Batch {
     pub lines: bool,
     pub first_index: u32,
     pub num_indices: u32,
+    /// Soft particle: fades where it meets scene depth (BEF_SOFT, set for
+    /// textured `normal` particles only).
+    pub soft: bool,
 }
 
 /// Draw pass of a blend mode: 0 subtractive/modulating, 1 alpha, 2 additive
@@ -302,16 +348,18 @@ impl<'a> Geometry<'a> {
         self.vertices.extend_from_slice(verts);
         self.indices.extend(idx.iter().map(|i| i + base));
         let n = idx.len() as u32;
+        let soft = !lines && t.looks.kind == RenderType::Normal;
         if let Some(last) = self.batches.last_mut()
             && last.tex == tex
             && last.blend == t.looks.blendmode
             && last.lines == lines
+            && last.soft == soft
             && last.first_index + last.num_indices == first
         {
             last.num_indices += n;
             return;
         }
-        self.batches.push(Batch { tex, blend: t.looks.blendmode, lines, first_index: first, num_indices: n });
+        self.batches.push(Batch { tex, blend: t.looks.blendmode, lines, first_index: first, num_indices: n, soft });
     }
 
     fn view_scale(&self, p: &Particle, l: &Looks, base: f32, k: f32) -> f32 {
@@ -528,6 +576,32 @@ mod tests {
         let ball = builtin_image(BuiltinTex::Ball);
         assert_eq!(ball.rgba[(32 * 64 + 32) * 4 + 3], 255);
         assert_eq!(ball.rgba[3], 0);
+    }
+
+    #[test]
+    fn png_and_jpg_textures() {
+        // Grey+alpha PNG, expanded to RGBA.
+        let mut png_bytes = Vec::new();
+        {
+            let mut enc = png::Encoder::new(&mut png_bytes, 2, 1);
+            enc.set_color(png::ColorType::GrayscaleAlpha);
+            enc.set_depth(png::BitDepth::Eight);
+            enc.write_header().unwrap().write_image_data(&[100, 255, 50, 0]).unwrap();
+        }
+        let jpg = include_bytes!("../testdata/red8.jpg").to_vec();
+        let mut files = |p: &str| match p {
+            "textures/a.png" => Some(png_bytes.clone()),
+            "textures/b.jpg" => Some(jpg.clone()),
+            _ => None,
+        };
+        let img = load_image(&mut files, "textures/a.png", None, false).unwrap();
+        assert_eq!((img.width, img.height), (2, 1));
+        assert_eq!(img.rgba, [100, 100, 100, 255, 50, 50, 50, 0]);
+        let img = load_image(&mut files, "textures/b.jpg", None, false).unwrap();
+        assert_eq!((img.width, img.height), (8, 8));
+        let px = &img.rgba[..4];
+        assert!(px[0] > 180 && px[1] < 70 && px[2] < 70 && px[3] == 255, "{px:?}");
+        assert_eq!(find_image(&mut files, "textures/b").as_deref(), Some("textures/b.jpg"));
     }
 
     #[test]

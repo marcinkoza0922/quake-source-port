@@ -865,6 +865,10 @@ impl Host for Ctx<'_> {
         Ok(())
     }
 
+    fn particle_effect_index(&mut self, name: &str) -> Option<f32> {
+        self.c.fte_particles().then(|| self.c.particle_precache(name) as f32)
+    }
+
     fn has_extension(&self, name: &str) -> bool {
         self.c.fte_particles() && crate::particles::EXTENSIONS.contains(&name)
     }
