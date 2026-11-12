@@ -58,6 +58,30 @@ struct WorldPush {
     params: [f32; 4],
 }
 
+/// Velocity pass push constants (velalias.vert / velworld.vert): current
+/// model matrix, rows of last frame's model transform, and
+/// [pose1, pose2, blend bits, MSAA samples] (world: only samples is used).
+#[repr(C)]
+#[derive(Clone, Copy)]
+struct VelPush {
+    model: Mat4,
+    prev: [[f32; 4]; 3],
+    misc: [u32; 4],
+}
+
+/// A moving entity drawn into the velocity target.
+enum VelDraw {
+    Alias(usize, [[f32; 4]; 3]),
+    World(usize, [[f32; 4]; 3]),
+}
+
+#[repr(C)]
+#[derive(Clone, Copy)]
+struct AoPush {
+    proj: [f32; 4],
+    size: [f32; 4],
+}
+
 #[repr(C)]
 #[derive(Clone, Copy)]
 struct PolyPush {
@@ -76,6 +100,9 @@ struct PostPush {
     mode: u32,
     scale: f32,
     colorblind: u32,
+    vel_tex: u32,
+    mbx: f32,
+    mby: f32,
 }
 
 #[repr(C)]
@@ -285,6 +312,13 @@ struct ViewSetup {
     right: [f32; 3],
     up: [f32; 3],
     frustum: [[f32; 4]; 4],
+    /// Tangents of the half field of view (x, y).
+    tan: [f32; 2],
+}
+
+/// Rows of the 3x4 part of a column-major matrix.
+fn rows3(m: &Mat4) -> [[f32; 4]; 3] {
+    std::array::from_fn(|r| [m[r], m[4 + r], m[8 + r], m[12 + r]])
 }
 
 fn setup_view(v: &View, w: u32, h: u32) -> ViewSetup {
@@ -330,6 +364,7 @@ fn setup_view(v: &View, w: u32, h: u32) -> ViewSetup {
         right,
         up,
         frustum,
+        tan: [tx, ty],
     }
 }
 
@@ -565,6 +600,29 @@ impl Renderer {
         let style_ints: Vec<i32> = styles.iter().map(|&v| v as i32).collect();
 
         let mut world_draws: Vec<WorldDraw> = Vec::new();
+        // per-object motion blur: last frame's transforms by entity key
+        let mb_on = st.motion_blur > 0.0 && fr.view.is_some();
+        let prev_xforms = std::mem::take(&mut self.prev_xforms);
+        let mb_dt = time - self.prev_xform_time;
+        let prev_ok = mb_on && mb_dt > 0.0 && mb_dt < 0.25;
+        let mut xforms = std::collections::HashMap::new();
+        let mut vel_draws: Vec<VelDraw> = Vec::new();
+        // last frame's model transform rows, when the entity moved
+        let prev_rows = |e: &RenderEntity, local: Option<&Mat4>| -> Option<[[f32; 4]; 3]> {
+            if !prev_ok || e.key == 0 || e.viewmodel {
+                return None;
+            }
+            let &(po, pa) = prev_xforms.get(&e.key)?;
+            if po == e.origin && pa == e.angles {
+                return None;
+            }
+            let d = sub(e.origin, po);
+            if dot(d, d) > 256.0 * 256.0 {
+                return None; // teleported
+            }
+            let m = affine(entity_rotation(pa), po);
+            Some(rows3(&local.map_or(m, |l| mul(&m, l))))
+        };
         let mut alias_draws: Vec<AliasDraw> = Vec::new();
         let mut sprite_draws: Vec<SpriteDraw> = Vec::new();
         let mut trans: Vec<(f32, Trans)> = Vec::new();
@@ -596,6 +654,9 @@ impl Renderer {
                 let Some(m) = self.models.get(e.model.0 as usize) else {
                     continue;
                 };
+                if mb_on && e.key != 0 && !e.viewmodel {
+                    xforms.insert(e.key, (e.origin, e.angles));
+                }
                 let rot = entity_rotation(e.angles);
                 let dist = dot(sub(e.origin, vs.eye), vs.fwd);
                 match m {
@@ -658,6 +719,8 @@ impl Renderer {
                         wd.zfix = true;
                         if alpha < 1.0 {
                             trans.push((dist, Trans::World(world_draws.len())));
+                        } else if let Some(r) = prev_rows(e, None) {
+                            vel_draws.push(VelDraw::World(world_draws.len(), r));
                         }
                         world_draws.push(wd);
                     }
@@ -681,17 +744,15 @@ impl Renderer {
                             let (imgs, iv) = &am.skins[e.skin as usize % am.skins.len()];
                             imgs[group_index(iv, imgs.len(), t)]
                         };
-                        let model = mul(
-                            &affine(rot, e.origin),
-                            &affine(
-                                [
-                                    [am.scale[0], 0.0, 0.0],
-                                    [0.0, am.scale[1], 0.0],
-                                    [0.0, 0.0, am.scale[2]],
-                                ],
-                                am.scale_origin,
-                            ),
+                        let local = affine(
+                            [
+                                [am.scale[0], 0.0, 0.0],
+                                [0.0, am.scale[1], 0.0],
+                                [0.0, 0.0, am.scale[2]],
+                            ],
+                            am.scale_origin,
                         );
+                        let model = mul(&affine(rot, e.origin), &local);
                         // R_SetupAliasLighting
                         let wl = self.world.as_ref().map(|w| &w.cpu);
                         let mut lc = wl
@@ -754,6 +815,8 @@ impl Renderer {
                         };
                         if alpha < 1.0 && !e.viewmodel {
                             trans.push((dist, Trans::Alias(alias_draws.len())));
+                        } else if let Some(r) = prev_rows(e, Some(&local)) {
+                            vel_draws.push(VelDraw::Alias(alias_draws.len(), r));
                         }
                         alias_draws.push(AliasDraw {
                             model: e.model.0 as usize,
@@ -1006,6 +1069,13 @@ impl Renderer {
             }
         }
 
+        self.prev_xforms = xforms;
+        self.prev_xform_time = time;
+        let ao_on = st.ssao > 0.0 && view.is_some();
+        // the AO and velocity passes read scene depth after the scene passes
+        // (SSAO runs inside the scene, between opaque and translucent draws)
+        let keep_depth = !vel_draws.is_empty();
+
         // ---- record ----
         let tsq = self.gpu_times.as_ref().map(|t| t.pool);
         if let Some(t) = &mut self.gpu_times {
@@ -1208,7 +1278,7 @@ impl Renderer {
                         vk::ImageLayout::DEPTH_ATTACHMENT_OPTIMAL
                     })
                     .load_op(lop)
-                    .store_op(if last { vk::AttachmentStoreOp::DONT_CARE } else { vk::AttachmentStoreOp::STORE })
+                    .store_op(if last && !keep_depth { vk::AttachmentStoreOp::DONT_CARE } else { vk::AttachmentStoreOp::STORE })
                     .clear_value(vk::ClearValue {
                         depth_stencil: vk::ClearDepthStencilValue {
                             depth: 1.0,
@@ -1225,7 +1295,7 @@ impl Renderer {
             let depth_layout = |old: vk::ImageLayout, new: vk::ImageLayout| {
                 gpu::barrier(&dev, cmd, t.depth.image, drng, old, new);
             };
-            begin(false, !split, false);
+            begin(false, !split && !ao_on, false);
             ts(3);
             let vp_full = vk::Viewport {
                 x: 0.0,
@@ -1252,6 +1322,32 @@ impl Renderer {
             let gfx = vk::PipelineBindPoint::GRAPHICS;
             let all = vk::ShaderStageFlags::VERTEX | vk::ShaderStageFlags::FRAGMENT;
             let push = |data: &[u8]| dev.cmd_push_constants(cmd, p.layout, all, 0, data);
+            let samples = t.color_ms.as_ref().map_or(1, |_| self.msaa);
+            // fullscreen pass into a single-sampled effect target
+            let fx_pass = |img: &Image, clear: [f32; 4], body: &dyn Fn()| {
+                gpu::barrier(&dev, cmd, img.image, crng, vk::ImageLayout::UNDEFINED, vk::ImageLayout::COLOR_ATTACHMENT_OPTIMAL);
+                let att = [vk::RenderingAttachmentInfo::default()
+                    .image_view(img.view)
+                    .image_layout(vk::ImageLayout::COLOR_ATTACHMENT_OPTIMAL)
+                    .load_op(vk::AttachmentLoadOp::CLEAR)
+                    .store_op(vk::AttachmentStoreOp::STORE)
+                    .clear_value(vk::ClearValue { color: vk::ClearColorValue { float32: clear } })];
+                let ri = vk::RenderingInfo::default().render_area(area_target).layer_count(1).color_attachments(&att);
+                dev.cmd_begin_rendering(cmd, &ri);
+                dev.cmd_set_viewport(cmd, 0, &[vp_scene]);
+                dev.cmd_set_scissor(cmd, 0, &[area_scene]);
+                dev.cmd_bind_descriptor_sets(cmd, gfx, p.layout, 0, &set, &[]);
+                body();
+                dev.cmd_end_rendering(cmd);
+                gpu::barrier(
+                    &dev,
+                    cmd,
+                    img.image,
+                    crng,
+                    vk::ImageLayout::COLOR_ATTACHMENT_OPTIMAL,
+                    vk::ImageLayout::SHADER_READ_ONLY_OPTIMAL,
+                );
+            };
             if view.is_some() {
                 dev.cmd_bind_descriptor_sets(cmd, gfx, p.layout, 0, &set, &[]);
                 dev.cmd_set_depth_bias(cmd, 0.0, 0.0, 0.0);
@@ -1310,6 +1406,43 @@ impl Renderer {
                     draw_alias(a, p.alias);
                 }
                 ts(5);
+                if ao_on && let Some(vs) = &view {
+                    // SSAO between the opaque and translucent draws, so water,
+                    // particles and the viewmodel are not darkened
+                    dev.cmd_end_rendering(cmd);
+                    let scene_img = t.color_ms.as_ref().unwrap_or(&t.color);
+                    gpu::barrier(&dev, cmd, scene_img.image, crng, vk::ImageLayout::COLOR_ATTACHMENT_OPTIMAL, vk::ImageLayout::SHADER_READ_ONLY_OPTIMAL);
+                    depth_layout(vk::ImageLayout::DEPTH_ATTACHMENT_OPTIMAL, vk::ImageLayout::DEPTH_STENCIL_READ_ONLY_OPTIMAL);
+                    fx_pass(&t.ao, [1.0, 0.0, 0.0, 0.0], &|| {
+                        dev.cmd_bind_pipeline(cmd, gfx, p.ao);
+                        push(bytes_of(&[AoPush {
+                            proj: [vs.tan[0], vs.tan[1], samples as f32, st.ssao_radius.clamp(4.0, 256.0)],
+                            size: [sw as f32, scene_h as f32, st.ssao.min(4.0), t.color_slot as f32],
+                        }]));
+                        dev.cmd_draw(cmd, 3, 1, 0, 0);
+                    });
+                    gpu::barrier(&dev, cmd, scene_img.image, crng, vk::ImageLayout::SHADER_READ_ONLY_OPTIMAL, vk::ImageLayout::COLOR_ATTACHMENT_OPTIMAL);
+                    // multiply the blurred AO into the scene colour (all samples)
+                    let att = [vk::RenderingAttachmentInfo::default()
+                        .image_view(scene_img.view)
+                        .image_layout(vk::ImageLayout::COLOR_ATTACHMENT_OPTIMAL)
+                        .load_op(vk::AttachmentLoadOp::LOAD)
+                        .store_op(vk::AttachmentStoreOp::STORE)];
+                    let ri = vk::RenderingInfo::default().render_area(area_target).layer_count(1).color_attachments(&att);
+                    dev.cmd_begin_rendering(cmd, &ri);
+                    dev.cmd_set_viewport(cmd, 0, &[vp_scene]);
+                    dev.cmd_set_scissor(cmd, 0, &[area_scene]);
+                    dev.cmd_bind_pipeline(cmd, gfx, p.ao_apply);
+                    push(bytes_of(&[t.ao_slot]));
+                    dev.cmd_draw(cmd, 3, 1, 0, 0);
+                    dev.cmd_end_rendering(cmd);
+                    depth_layout(vk::ImageLayout::DEPTH_STENCIL_READ_ONLY_OPTIMAL, vk::ImageLayout::DEPTH_ATTACHMENT_OPTIMAL);
+                    begin(true, !split, false);
+                    dev.cmd_set_viewport(cmd, 0, &[vp_scene]);
+                    dev.cmd_set_scissor(cmd, 0, &[area_scene]);
+                    dev.cmd_bind_descriptor_sets(cmd, gfx, p.layout, 0, &set, &[]);
+                    dev.cmd_set_depth_bias(cmd, 0.0, 0.0, 0.0);
+                }
                 // translucent: world liquids first, then sorted entities
                 if let Some(wg) = &self.world {
                     dev.cmd_bind_vertex_buffers(cmd, 0, &[wg.vbuf.buf], &[0]);
@@ -1417,6 +1550,54 @@ impl Renderer {
             }
             dev.cmd_end_rendering(cmd);
             ts(7);
+            if keep_depth && view.is_some() {
+                // the last scene pass leaves depth read-only only when it was
+                // the soft-particle pass (no viewmodel after it)
+                let vm_any = alias_draws.iter().any(|a| a.viewmodel);
+                let end_layout = if split && !vm_any {
+                    vk::ImageLayout::DEPTH_STENCIL_READ_ONLY_OPTIMAL
+                } else {
+                    vk::ImageLayout::DEPTH_ATTACHMENT_OPTIMAL
+                };
+                depth_layout(end_layout, vk::ImageLayout::DEPTH_STENCIL_READ_ONLY_OPTIMAL);
+                if !vel_draws.is_empty() {
+                    fx_pass(&t.vel, [0.0; 4], &|| {
+                        for vd in &vel_draws {
+                            match *vd {
+                                VelDraw::Alias(i, prev) => {
+                                    let a = &alias_draws[i];
+                                    let Some(Model::Alias(am)) = self.models.get(a.model) else {
+                                        continue;
+                                    };
+                                    dev.cmd_bind_pipeline(cmd, gfx, p.vel_alias);
+                                    dev.cmd_bind_vertex_buffers(cmd, 0, &[am.vbuf.buf], &[0]);
+                                    dev.cmd_bind_index_buffer(cmd, am.ibuf.buf, 0, vk::IndexType::UINT32);
+                                    let pp = a.push.poses;
+                                    push(bytes_of(&[VelPush {
+                                        model: a.push.model,
+                                        prev,
+                                        misc: [pp[0], pp[1], a.push.shadevec[3].to_bits(), samples],
+                                    }]));
+                                    dev.cmd_draw_indexed(cmd, am.num_indices, 1, 0, 0, 0);
+                                }
+                                VelDraw::World(i, prev) => {
+                                    let Some(wg) = &self.world else { continue };
+                                    let wd = &world_draws[i];
+                                    dev.cmd_bind_pipeline(cmd, gfx, p.vel_world);
+                                    dev.cmd_bind_vertex_buffers(cmd, 0, &[wg.vbuf.buf], &[0]);
+                                    dev.cmd_bind_index_buffer(cmd, wd.ibuf.unwrap_or(dynbuf), 0, vk::IndexType::UINT32);
+                                    push(bytes_of(&[VelPush { model: wd.model, prev, misc: [0, 0, 0, samples] }]));
+                                    for r in [wd.opaque, wd.water[0], wd.water[1], wd.water[2], wd.water[3]] {
+                                        if r.count > 0 {
+                                            dev.cmd_draw_indexed_indirect(cmd, wd.cbuf.unwrap_or(dynbuf), r.ofs, r.count, 20);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    });
+                }
+            }
             gpu::barrier(
                 &dev,
                 cmd,
@@ -1467,6 +1648,14 @@ impl Renderer {
                 mode: st.softemu.min(2),
                 scale: self.render_scale,
                 colorblind: st.colorblind.min(3),
+                vel_tex: t.vel_slot,
+                // blur length: r_motionblur × the motion over 1/60 s
+                mbx: if vel_draws.is_empty() { 0.0 } else { st.motion_blur.min(4.0) / (60.0 * mb_dt as f32) },
+                mby: if vel_draws.is_empty() {
+                    0.0
+                } else {
+                    st.motion_blur.min(4.0) / (60.0 * mb_dt as f32) * scene_h as f32 / sh as f32
+                },
             }]));
             dev.cmd_draw(cmd, 3, 1, 0, 0);
             ts(8);

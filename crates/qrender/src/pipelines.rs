@@ -14,6 +14,9 @@ pub const MAX_TEXTURES: u32 = 4096;
 pub const COLOR_FORMAT: vk::Format = vk::Format::R8G8B8A8_UNORM;
 pub const DEPTH_FORMAT: vk::Format = vk::Format::D32_SFLOAT;
 pub const LM_FORMAT: vk::Format = vk::Format::R16G16B16A16_SFLOAT;
+/// SSAO target (visibility, view depth) and per-object velocity target.
+pub const AO_FORMAT: vk::Format = vk::Format::R16G16_SFLOAT;
+pub const VEL_FORMAT: vk::Format = vk::Format::R16G16_SFLOAT;
 
 pub struct Pipelines {
     pub set_layout: vk::DescriptorSetLayout,
@@ -39,6 +42,13 @@ pub struct Pipelines {
     pub fte: [vk::Pipeline; 16],
     pub ui: vk::Pipeline,
     pub post: vk::Pipeline,
+    /// SSAO pass (fullscreen, scene resolution).
+    pub ao: vk::Pipeline,
+    /// Multiplies the blurred AO into the scene colour (scene samples).
+    pub ao_apply: vk::Pipeline,
+    /// Velocity pass for moving alias models / brush entities.
+    pub vel_alias: vk::Pipeline,
+    pub vel_world: vk::Pipeline,
     pub post_format: vk::Format,
     /// MSAA sample count of the scene pipelines.
     pub samples: u32,
@@ -66,6 +76,11 @@ struct Shaders {
     ui_fs: vk::ShaderModule,
     post_vs: vk::ShaderModule,
     post_fs: vk::ShaderModule,
+    ao_fs: vk::ShaderModule,
+    ao_apply_fs: vk::ShaderModule,
+    vel_alias_vs: vk::ShaderModule,
+    vel_world_vs: vk::ShaderModule,
+    vel_fs: vk::ShaderModule,
 }
 
 #[derive(Clone, Copy, PartialEq)]
@@ -247,6 +262,8 @@ impl Pipelines {
             // one matching the targets is written)
             b(6, vk::DescriptorType::COMBINED_IMAGE_SAMPLER, 1),
             b(7, vk::DescriptorType::COMBINED_IMAGE_SAMPLER, 1),
+            // MSAA scene colour, read by SSAO (alpha = AO mask)
+            b(8, vk::DescriptorType::COMBINED_IMAGE_SAMPLER, 1),
         ];
         let flags = [
             vk::DescriptorBindingFlags::empty(),
@@ -255,6 +272,7 @@ impl Pipelines {
             vk::DescriptorBindingFlags::empty(),
             vk::DescriptorBindingFlags::empty(),
             vk::DescriptorBindingFlags::empty(),
+            vk::DescriptorBindingFlags::PARTIALLY_BOUND,
             vk::DescriptorBindingFlags::PARTIALLY_BOUND,
             vk::DescriptorBindingFlags::PARTIALLY_BOUND,
         ];
@@ -331,6 +349,11 @@ impl Pipelines {
         let ui_fs = m(spv!("ui.frag"))?;
         let post_vs = m(spv!("post.vert"))?;
         let post_fs = m(spv!("post.frag"))?;
+        let ao_fs = m(spv!("ao.frag"))?;
+        let ao_apply_fs = m(spv!("aoapply.frag"))?;
+        let vel_alias_vs = m(spv!("velalias.vert"))?;
+        let vel_world_vs = m(spv!("velworld.vert"))?;
+        let vel_fs = m(spv!("vel.frag"))?;
 
         let stage = vk::PipelineShaderStageCreateInfo::default()
             .stage(vk::ShaderStageFlags::COMPUTE)
@@ -370,6 +393,11 @@ impl Pipelines {
             ui_fs,
             post_vs,
             post_fs,
+            ao_fs,
+            ao_apply_fs,
+            vel_alias_vs,
+            vel_world_vs,
+            vel_fs,
         };
         let null = vk::Pipeline::null();
         let mut p = Pipelines {
@@ -393,6 +421,10 @@ impl Pipelines {
             fte: [null; 16],
             ui: null,
             post: null,
+            ao: null,
+            ao_apply: null,
+            vel_alias: null,
+            vel_world: null,
             post_format,
             samples,
             supersample: false,
@@ -416,6 +448,10 @@ impl Pipelines {
             self.particle,
             self.ui,
             self.post,
+            self.ao,
+            self.ao_apply,
+            self.vel_alias,
+            self.vel_world,
         ];
         v.extend(self.fte);
         v
@@ -448,6 +484,11 @@ impl Pipelines {
             ui_fs,
             post_vs,
             post_fs,
+            ao_fs,
+            ao_apply_fs,
+            vel_alias_vs,
+            vel_world_vs,
+            vel_fs,
         } = self.sh;
         let layout = self.layout;
         let f32x3 = vk::Format::R32G32B32_SFLOAT;
@@ -543,6 +584,27 @@ impl Pipelines {
                 topology: vk::PrimitiveTopology::TRIANGLE_LIST,
             },
         )?;
+        // post-effect passes: single-sampled, no depth attachment
+        let fx = |vs, fs, bindings, attrs, color, cull| Desc {
+            color,
+            depth: false,
+            samples: 1,
+            cull,
+            sample_shading: false,
+            ..d(vs, fs, bindings, attrs, Blend::None, false, false)
+        };
+        self.ao = graphics(gpu, layout, &fx(post_vs, ao_fs, &[], &[], AO_FORMAT, false))?;
+        self.ao_apply = graphics(
+            gpu,
+            layout,
+            &Desc {
+                depth: false,
+                sample_shading: false,
+                ..d(post_vs, ao_apply_fs, &[], &[], Blend::Factors(vk::BlendFactor::ZERO, vk::BlendFactor::SRC_COLOR), false, false)
+            },
+        )?;
+        self.vel_alias = graphics(gpu, layout, &fx(vel_alias_vs, vel_fs, &ab, &aa, VEL_FORMAT, true))?;
+        self.vel_world = graphics(gpu, layout, &fx(vel_world_vs, vel_fs, &wb, &wa, VEL_FORMAT, false))?;
         (
             self.world,
             self.world_alpha,

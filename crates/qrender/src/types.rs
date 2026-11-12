@@ -61,6 +61,9 @@ pub struct RenderEntity {
     pub fullbright: bool,
     /// Entity is a player (minimum light 8).
     pub player: bool,
+    /// Stable identity across frames for per-object motion blur (the client
+    /// entity number); 0 = none (statics, temp entities, the view entity).
+    pub key: u32,
 }
 
 impl Default for RenderEntity {
@@ -79,6 +82,7 @@ impl Default for RenderEntity {
             viewmodel: false,
             fullbright: false,
             player: false,
+            key: 0,
         }
     }
 }
@@ -253,6 +257,13 @@ pub struct Settings {
     /// r_softparticles ? r_softparticledistance : 0. Soft FTE particles fade
     /// over this many units in front of scene depth; 0 disables.
     pub soft_particle_distance: f32,
+    /// r_ssao: screen-space ambient occlusion strength (0 = off).
+    pub ssao: f32,
+    /// r_ssao_radius: occlusion radius in world units.
+    pub ssao_radius: f32,
+    /// r_motionblur: per-object motion blur; the blur covers this fraction of
+    /// the motion over 1/60 s (0 = off). Camera motion is not blurred.
+    pub motion_blur: f32,
 }
 
 /// gl_texturemode names (ironwail order): (name, linear mag/min, mipmapped, linear mips).
@@ -303,6 +314,9 @@ impl Default for Settings {
             dither_texture: 1.0,
             colorblind: 0,
             soft_particle_distance: 4.0,
+            ssao: 0.0,
+            ssao_radius: 32.0,
+            motion_blur: 0.0,
         }
     }
 }

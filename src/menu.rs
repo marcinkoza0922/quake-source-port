@@ -238,6 +238,7 @@ const SCALE: &[(&str, f32)] = &[("50%", 0.5), ("75%", 0.75), ("100%", 1.0), ("12
 const FILTER: &[(&str, f32)] = &[("nearest", 0.0), ("linear", 1.0)];
 const ANISO: &[(&str, f32)] = &[("off", 1.0), ("2x", 2.0), ("4x", 4.0), ("8x", 8.0), ("16x", 16.0)];
 const SOFTEMU: &[(&str, f32)] = &[("off", 0.0), ("fine", 1.0), ("coarse", 2.0), ("banded", 3.0)];
+const SSAO: &[(&str, f32)] = &[("off", 0.0), ("low", 0.5), ("medium", 1.0), ("high", 2.0)];
 const MODES: [&str; 3] = ["windowed", "fullscreen", "borderless"];
 
 const GRAPHICS: &[Item] = &[
@@ -257,6 +258,9 @@ const GRAPHICS: &[Item] = &[
     slider("Contrast", "contrast", 1.0, 2.0, 0.1),
     slider("Water Opacity", "r_wateralpha", 0.0, 1.0, 0.1),
     toggle("Dynamic Lights", "r_dynamic"),
+    Item::Choice { label: "Ambient Occlusion", cvar: "r_ssao", choices: SSAO },
+    toggle("Motion Blur", "r_motionblur"),
+    slider("Motion Blur Amount", "r_motionblur_amount", 0.1, 2.0, 0.1),
     toggle("Interpolate Animation", "r_lerpmodels"),
     toggle("Interpolate Movement", "r_lerpmove"),
 ];
@@ -361,6 +365,9 @@ fn tooltip(item: Item) -> Option<&'static str> {
         "vid_fsaamode" => "Shades every anti-aliasing sample; needs Anti-aliasing on",
         "r_renderscale" => "3D resolution relative to the window; the UI stays sharp",
         "r_dither" => "Adds fine noise to hide color banding",
+        "r_ssao" => "Darkens corners and contact areas where geometry meets",
+        "r_motionblur" => "Blurs fast-moving monsters, projectiles and doors (not camera turns)",
+        "r_motionblur_amount" => "Length of the motion blur streaks",
         "aim_slowdown" => "Slows stick look while the crosshair is over an enemy",
         "aim_rotation" => "Turns the view to follow a moving enemy you are aiming at",
         "a11y_reducemotion" => "Turns off view bob, strafe tilt and the camera kick when hit or firing",
@@ -467,6 +474,8 @@ pub struct Menu {
     /// First card shown on the save/load screens.
     save_scroll: usize,
     opt_cursor: usize,
+    /// First visible row of a long options page (follows the cursor).
+    opt_scroll: std::cell::Cell<usize>,
     page_cursor: usize,
     /// Quit prompt button: 0 = yes, 1 = no.
     quit_cursor: usize,
@@ -575,6 +584,8 @@ const BOX_H: f32 = 10.0;
 /// First row of the options hub / of an options page (below its heading).
 const ROW0: f32 = 64.0;
 const PAGE_ROW0: f32 = 72.0;
+/// Rows shown at once on an options page; longer pages scroll.
+const PAGE_ROWS: usize = 20;
 /// Slider track in options, menu x units.
 const SLIDER_X: (f32, f32) = (VALUE_X + 8.0, VALUE_X + 88.0);
 /// Dropdown value box minimum width and visible entries.
@@ -592,6 +603,7 @@ impl Menu {
             load_cursor: 0,
             save_scroll: 0,
             opt_cursor: 0,
+            opt_scroll: Default::default(),
             page_cursor: 0,
             quit_cursor: 0,
             pending_mode: 0,
@@ -645,6 +657,31 @@ impl Menu {
     /// Rows on a page: its static items, plus found servers on Join.
     fn page_len(&self, p: Page) -> usize {
         page_items(p).len() + if p == Page::Join { self.servers.len() } else { 0 }
+    }
+
+    /// Visible rows of a page.
+    fn page_vis(&self, p: Page) -> usize {
+        self.page_len(p).min(PAGE_ROWS)
+    }
+
+    /// First visible row, moved just enough to keep the cursor on screen.
+    fn page_scroll(&self, p: Page) -> usize {
+        let n = self.page_len(p);
+        let vis = n.min(PAGE_ROWS);
+        let mut sc = self.opt_scroll.get().min(n - vis);
+        let cur = self.opt_cursor.min(n.saturating_sub(1));
+        if cur < sc {
+            sc = cur;
+        } else if cur >= sc + vis {
+            sc = cur + 1 - vis;
+        }
+        self.opt_scroll.set(sc);
+        sc
+    }
+
+    /// Menu y of a page row (may be off the visible window).
+    fn page_row_y(&self, p: Page, i: usize) -> f32 {
+        PAGE_ROW0 + (i as f32 - self.page_scroll(p) as f32) * ROW_H
     }
 
     fn page_item(&self, p: Page, i: usize) -> Item {
@@ -858,7 +895,9 @@ impl Menu {
                 (inside && i < self.save_rows()).then_some(i)
             },
             Screen::Options => row(ROW0, ROW_H, PAGES.len(), PANEL_X, PANEL_X + PANEL_W),
-            Screen::OptionsPage(p) => row(PAGE_ROW0, ROW_H, self.page_len(p), PANEL_X, PANEL_X + PANEL_W),
+            Screen::OptionsPage(p) => {
+                row(PAGE_ROW0, ROW_H, self.page_vis(p), PANEL_X, PANEL_X + PANEL_W).map(|r| r + self.page_scroll(p))
+            }
             Screen::Multiplayer => row(cy + 32.0, 20.0, 3, cx + 54.0, cx + 312.0),
             Screen::Quit => QUIT_BUTTONS
                 .iter()
@@ -1351,7 +1390,10 @@ impl Menu {
     fn drop_geom(&self, d: Drop, opts: &[String]) -> (f32, f32, f32, usize) {
         let vis = opts.len().min(DROP_ROWS);
         let w = opts.iter().map(|o| o.len() as f32 * 8.0 + 20.0).fold(DROP_W, f32::max);
-        let row_y = PAGE_ROW0 + d.item as f32 * ROW_H;
+        let row_y = match self.screen {
+            Screen::OptionsPage(p) => self.page_row_y(p, d.item),
+            _ => PAGE_ROW0 + d.item as f32 * ROW_H,
+        };
         let h = vis as f32 * BOX_H + 2.0;
         let y = if row_y + ROW_H + h > MENU_H - 4.0 { row_y + 1.0 - h } else { row_y + ROW_H - 1.0 };
         (VALUE_X - 3.0, y, w, vis)
@@ -1501,12 +1543,24 @@ impl Menu {
                 } else {
                     c.text_center(320.0, PAGE_ROW0 - 16.0, name, TXT, GOLD_FG);
                 }
-                let n = self.page_len(page);
+                let total = self.page_len(page);
+                let n = self.page_vis(page);
+                let sc = self.page_scroll(page);
                 panel(c, PAGE_ROW0, n);
-                highlight(c, PAGE_ROW0 + self.opt_cursor as f32 * ROW_H);
-                for i in 0..n {
+                if self.opt_cursor < total {
+                    highlight(c, self.page_row_y(page, self.opt_cursor));
+                }
+                for i in sc..sc + n {
                     let blink = (realtime * 4.0) as i64 & 1 == 0 && i == self.opt_cursor;
-                    self.draw_item(c, cv, self.page_item(page, i), PAGE_ROW0 + i as f32 * ROW_H + 2.0, blink);
+                    self.draw_item(c, cv, self.page_item(page, i), self.page_row_y(page, i) + 2.0, blink);
+                }
+                if total > n {
+                    // scrollbar along the panel's right edge
+                    let (x, top, h) = (PANEL_X + PANEL_W - 5.0, PAGE_ROW0, n as f32 * ROW_H);
+                    c.fill(x, top, 3.0, h, [1.0, 1.0, 1.0, 0.12]);
+                    let th = (h * n as f32 / total as f32).max(8.0);
+                    let ty = top + (h - th) * sc as f32 / (total - n) as f32;
+                    c.fill(x, ty, 3.0, th, [0.85, 0.65, 0.3, 0.9]);
                 }
                 if page == Page::Setup {
                     // M_Setup_Draw: the player in a box, in the chosen colours.
@@ -1673,7 +1727,7 @@ impl Menu {
         }
         let Some(s) = tooltip(self.page_item(page, self.opt_cursor)) else { return };
         let w = c.text_w(s, TXT);
-        let y = PAGE_ROW0 + self.page_len(page) as f32 * ROW_H + 10.0;
+        let y = PAGE_ROW0 + self.page_vis(page) as f32 * ROW_H + 10.0;
         c.round_box(320.0 - w / 2.0 - 8.0, y - 3.0, w + 16.0, 14.0, 4.0, [0.0, 0.0, 0.0, 0.7], Some(BORDER));
         c.text(320.0 - w / 2.0, y, s, TXT, MUTED);
     }
@@ -1959,6 +2013,22 @@ fn nearest_choice(v: f32, choices: &[(&str, f32)]) -> usize {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn long_page_scrolls_with_cursor() {
+        let mut m = Menu::new();
+        m.open(Screen::OptionsPage(Page::Graphics));
+        let n = m.page_len(Page::Graphics);
+        assert!(n > PAGE_ROWS, "Graphics page should be long enough to scroll");
+        assert_eq!(m.page_scroll(Page::Graphics), 0);
+        m.opt_cursor = n - 1;
+        assert_eq!(m.page_scroll(Page::Graphics), n - PAGE_ROWS);
+        // the top visible row maps to the first scrolled-in item
+        assert_eq!(m.item_at((320.0, PAGE_ROW0 + 1.0)), Some(n - PAGE_ROWS));
+        // moving back up past the window scrolls up
+        m.opt_cursor = 0;
+        assert_eq!(m.page_scroll(Page::Graphics), 0);
+    }
 
     #[test]
     fn dropdown_picks_value() {
