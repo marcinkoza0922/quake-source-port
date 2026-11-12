@@ -198,3 +198,54 @@ fn cvar_list_registered() {
     }
     assert!(h.input.archive_bindings()[0] == "unbindall");
 }
+
+#[test]
+fn last_device_follows_input() {
+    let mut h = host();
+    handle_event(&mut h, InputEvent::GamepadConnected(true));
+    assert_eq!(h.input.last_device, Device::KeyboardMouse);
+    handle_event(&mut h, InputEvent::GamepadButton { button: GamepadButton::South, down: true });
+    assert_eq!(h.input.last_device, Device::Gamepad);
+    // resting-mouse jitter keeps the pad
+    handle_event(&mut h, InputEvent::MouseMotion { dx: 1.0, dy: 0.0 });
+    assert_eq!(h.input.last_device, Device::Gamepad);
+    handle_event(&mut h, InputEvent::Key { key: b'w' as i32, down: true });
+    assert_eq!(h.input.last_device, Device::KeyboardMouse);
+    handle_event(&mut h, InputEvent::GamepadAxis { axis: GamepadAxis::LeftX, value: 0.9 });
+    assert_eq!(h.input.last_device, Device::Gamepad);
+    handle_event(&mut h, InputEvent::GamepadConnected(false));
+    assert_eq!(h.input.last_device, Device::KeyboardMouse);
+}
+
+#[test]
+fn wheel_takes_look_stick() {
+    let mut h = host();
+    handle_event(&mut h, InputEvent::GamepadConnected(true));
+    run(&mut h, "bind XBUTTON +weaponwheel\n");
+    handle_event(&mut h, InputEvent::GamepadButton { button: GamepadButton::West, down: true });
+    execute(&mut h);
+    assert!(h.input.wheel_held());
+    handle_event(&mut h, InputEvent::GamepadAxis { axis: GamepadAxis::RightX, value: 1.0 });
+    let s = h.input.frame(&h.cvars, [0.0; 3], 0.1, None);
+    assert_eq!(s.look_delta, [0.0, 0.0]);
+    assert_eq!(h.input.wheel_aim, [1.0, 0.0]);
+    // the left stick works too, and doesn't move the player
+    handle_event(&mut h, InputEvent::GamepadAxis { axis: GamepadAxis::RightX, value: 0.0 });
+    handle_event(&mut h, InputEvent::GamepadAxis { axis: GamepadAxis::LeftY, value: -1.0 });
+    let s = h.input.frame(&h.cvars, [0.0; 3], 0.1, None);
+    assert_eq!(h.input.wheel_aim, [0.0, -1.0]);
+    assert_eq!(s.forward, 0.0);
+    handle_event(&mut h, InputEvent::GamepadAxis { axis: GamepadAxis::LeftY, value: 0.0 });
+    handle_event(&mut h, InputEvent::GamepadAxis { axis: GamepadAxis::RightX, value: 1.0 });
+    handle_event(&mut h, InputEvent::GamepadButton { button: GamepadButton::West, down: false });
+    execute(&mut h);
+    let s = h.input.frame(&h.cvars, [0.0; 3], 0.1, None);
+    assert!(s.look_delta[0] < 0.0);
+    assert_eq!(h.input.wheel_aim, [0.0, 0.0]);
+}
+
+#[test]
+fn back_button_is_bindable() {
+    assert_eq!(GamepadButton::Back.key(), keys::K_BACK);
+    assert_eq!(keys::string_to_keynum("BACK"), keys::K_BACK);
+}

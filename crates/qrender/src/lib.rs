@@ -97,6 +97,8 @@ enum Sampling {
     Nearest,
     /// Nearest, clamp to edge (sprites, skybox faces).
     Clamp,
+    /// Bilinear, clamp to edge (smooth UI shapes).
+    Linear,
 }
 
 struct WorldGpu {
@@ -586,6 +588,7 @@ impl Renderer {
             Sampling::World => self.sampler_world,
             Sampling::Nearest => self.sampler_repeat,
             Sampling::Clamp => self.sampler_clamp,
+            Sampling::Linear => self.sampler_linear,
         }
     }
 
@@ -1155,9 +1158,19 @@ impl Renderer {
     }
 
     pub fn register_pic_rgba(&mut self, width: u32, height: u32, rgba: &[u8]) -> Result<PicId> {
+        self.register_pic_sampled(width, height, rgba, Sampling::Nearest)
+    }
+
+    /// Like [`register_pic_rgba`](Self::register_pic_rgba) but bilinear
+    /// filtered (smooth shapes drawn larger than their texels).
+    pub fn register_pic_rgba_linear(&mut self, width: u32, height: u32, rgba: &[u8]) -> Result<PicId> {
+        self.register_pic_sampled(width, height, rgba, Sampling::Linear)
+    }
+
+    fn register_pic_sampled(&mut self, width: u32, height: u32, rgba: &[u8], sampling: Sampling) -> Result<PicId> {
         self.idle();
         let mut up = self.gpu.begin_upload()?;
-        let slot = self.add_texture(&mut up, width, height, &[rgba], false, Sampling::Nearest)?;
+        let slot = self.add_texture(&mut up, width, height, &[rgba], false, sampling)?;
         self.gpu.end_upload(up)?;
         self.pics.push(PicInfo {
             slot,

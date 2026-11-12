@@ -68,6 +68,41 @@ pub mod button {
     pub const DPAD_RIGHT: u8 = 14;
 }
 
+/// Gamepad button-label families (see [`Event::GamepadAdded`]).
+pub mod family {
+    pub const XBOX: u8 = 0;
+    pub const PLAYSTATION: u8 = 1;
+    pub const NINTENDO: u8 = 2;
+}
+
+/// Label family from SDL's gamepad type, then vendor id and name.
+pub fn pad_family(sdl_type: i32, vendor: u16, name: &str) -> u8 {
+    use sys::SDL_GamepadType as G;
+    let t = G(sdl_type);
+    if [G::PS3, G::PS4, G::PS5].contains(&t) {
+        return family::PLAYSTATION;
+    }
+    if [G::NINTENDO_SWITCH_PRO, G::NINTENDO_SWITCH_JOYCON_LEFT, G::NINTENDO_SWITCH_JOYCON_RIGHT, G::NINTENDO_SWITCH_JOYCON_PAIR]
+        .contains(&t)
+    {
+        return family::NINTENDO;
+    }
+    match vendor {
+        0x054c => return family::PLAYSTATION,
+        0x057e => return family::NINTENDO,
+        _ => {}
+    }
+    let n = name.to_lowercase();
+    let has = |l: &[&str]| l.iter().any(|w| n.contains(w));
+    if has(&["dualsense", "dualshock", "playstation", "sony", "ps4", "ps5"]) {
+        family::PLAYSTATION
+    } else if has(&["nintendo", "pro controller", "joy-con", "switch"]) {
+        family::NINTENDO
+    } else {
+        family::XBOX
+    }
+}
+
 /// Platform event. Key codes are raw SDL values: `scancode` is
 /// `SDL_Scancode` (layout independent), `key` is `SDL_Keycode`, `modifiers`
 /// is `SDL_Keymod`. Mouse buttons: 1 left, 2 middle, 3 right, 4/5 X1/X2.
@@ -82,8 +117,10 @@ pub enum Event {
     /// Gamepad axis; value in -32768..=32767 (triggers 0..=32767).
     GamepadAxis { id: u32, axis: u8, value: i16 },
     GamepadButton { id: u32, button: u8, down: bool },
-    /// Gamepad opened (hotplug or present at startup).
-    GamepadAdded { id: u32, name: String },
+    /// Gamepad opened (hotplug or present at startup). `family` is the
+    /// button-label family: [`family::XBOX`], [`family::PLAYSTATION`] or
+    /// [`family::NINTENDO`].
+    GamepadAdded { id: u32, name: String, family: u8 },
     GamepadRemoved { id: u32 },
     /// Gyro in rad/s (x pitch, y yaw, z roll), only if enabled.
     GamepadGyro { id: u32, data: [f32; 3], timestamp_ns: u64 },
@@ -278,8 +315,11 @@ impl Platform {
         };
         // SAFETY: raw is a valid open gamepad.
         let has_gyro = unsafe { sys::SDL_GamepadHasSensor(raw, sys::SDL_SENSOR_GYRO) };
+        // SAFETY: raw is a valid open gamepad.
+        let (ty, vendor) = unsafe { (sys::SDL_GetGamepadType(raw).0, sys::SDL_GetGamepadVendor(raw)) };
+        let family = pad_family(ty, vendor, &name);
         self.gamepads.insert(id.0, Gamepad { raw, has_gyro });
-        Some(Event::GamepadAdded { id: id.0, name })
+        Some(Event::GamepadAdded { id: id.0, name, family })
     }
 
     fn pad(&self, id: u32) -> Result<&Gamepad> {
@@ -296,6 +336,14 @@ impl Platform {
         let g = self.pad(id)?;
         // SAFETY: g.raw is a valid open gamepad.
         check(unsafe { sys::SDL_RumbleGamepad(g.raw, low, high, duration_ms) })
+    }
+
+    /// Rumble every opened gamepad (errors from pads without motors ignored).
+    pub fn rumble_all(&self, low: u16, high: u16, duration_ms: u32) {
+        for g in self.gamepads.values() {
+            // SAFETY: g.raw is a valid open gamepad.
+            unsafe { sys::SDL_RumbleGamepad(g.raw, low, high, duration_ms) };
+        }
     }
 
     /// Whether the gamepad has a gyroscope.

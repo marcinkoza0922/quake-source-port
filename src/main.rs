@@ -10,6 +10,7 @@ mod autosave;
 mod console;
 mod demo;
 mod draw;
+mod glyphs;
 mod host;
 mod menu;
 mod modmenu;
@@ -21,6 +22,7 @@ mod sbar;
 mod saveinfo;
 mod save_inventory;
 mod view;
+mod wheel;
 
 use std::path::PathBuf;
 use std::time::{Duration, Instant};
@@ -182,6 +184,9 @@ fn main() {
             None => Vec::new(),
         };
         host.frame(dt, events);
+        if let (Some(p), Some((lo, hi, ms))) = (&platform, host.take_rumble()) {
+            p.rumble_all(lo, hi, ms);
+        }
         if autoquit.is_some_and(|t| host.realtime >= t) {
             host.quit = true;
         }
