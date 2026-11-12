@@ -40,7 +40,8 @@ pub enum GamepadButton {
 }
 
 impl GamepadButton {
-    /// Key number (Start/Back map to ESCAPE/TAB like ironwail).
+    /// Key number (Start/Guide map to ESCAPE like ironwail; Back is its own
+    /// bindable key).
     pub fn key(self) -> i32 {
         use GamepadButton::*;
         match self {
@@ -48,7 +49,7 @@ impl GamepadButton {
             East => K_BBUTTON,
             West => K_XBUTTON,
             North => K_YBUTTON,
-            Back => K_TAB,
+            Back => K_BACK,
             Guide | Start => K_ESCAPE,
             LeftStick => K_LTHUMB,
             RightStick => K_RTHUMB,
@@ -105,6 +106,14 @@ pub enum Routed {
     Escape,
 }
 
+/// Which device the player used last (prompts and glyphs follow it).
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Default)]
+pub enum Device {
+    #[default]
+    KeyboardMouse,
+    Gamepad,
+}
+
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Default)]
 pub enum LookDevice {
     #[default]
@@ -132,10 +141,11 @@ pub mod btn {
     pub const KLOOK: usize = 15;
     pub const USE: usize = 16;
     pub const GYRO: usize = 17;
-    pub const COUNT: usize = 18;
+    pub const WHEEL: usize = 18;
+    pub const COUNT: usize = 19;
     pub const NAMES: [&str; COUNT] = [
         "forward", "back", "moveleft", "moveright", "moveup", "movedown", "left", "right", "lookup", "lookdown",
-        "speed", "strafe", "attack", "jump", "mlook", "klook", "use", "gyroaction",
+        "speed", "strafe", "attack", "jump", "mlook", "klook", "use", "gyroaction", "weaponwheel",
     ];
 }
 
@@ -180,6 +190,8 @@ cvars! {
     joy_accel_threshold = "joy_accel_threshold", "0.95";
     joy_accel_delay = "joy_accel_delay", "0.15";
     joy_accel_ramp = "joy_accel_ramp", "0.35";
+    joy_rumble = "joy_rumble", "1";
+    joy_glyphs = "joy_glyphs", "0";
     joy_flick = "joy_flick", "0";
     joy_flick_time = "joy_flick_time", "0.125";
     joy_flick_deadzone = "joy_flick_deadzone", "0.9";
@@ -221,6 +233,14 @@ pub struct Input {
     gyro: [f32; 2],
     pub gamepad_connected: bool,
     pub last_look: LookDevice,
+    /// Device of the last deliberate input (buttons, sticks, keys, mouse).
+    pub last_device: Device,
+    /// A menu is waiting for a key to bind: sticks don't emulate arrows.
+    pub capture: bool,
+    /// Weapon wheel direction this frame (unit vector, +y down), or zero
+    /// while the stick/mouse is centred. Only set while the wheel is held.
+    pub wheel_aim: [f32; 2],
+    wheel_mouse: [f32; 2],
     accel: AccelRamp,
     flick: FlickStick,
     /// Last aim assist result (for HUD/debug).
@@ -243,6 +263,10 @@ impl Input {
             gyro: [0.0; 2],
             gamepad_connected: false,
             last_look: LookDevice::Mouse,
+            last_device: Device::KeyboardMouse,
+            capture: false,
+            wheel_aim: [0.0; 2],
+            wheel_mouse: [0.0; 2],
             accel: AccelRamp::default(),
             flick: FlickStick::default(),
             last_aim: AimResult::NONE,
@@ -256,6 +280,10 @@ impl Input {
     }
     pub fn binding(&self, key: i32) -> Option<&str> {
         self.bindings.get(key as usize)?.as_deref()
+    }
+    /// Weapon wheel button held (and in game).
+    pub fn wheel_held(&self) -> bool {
+        self.buttons[btn::WHEEL].is_down() && self.dest == KeyDest::Game
     }
     pub fn key_down(&self, key: i32) -> bool {
         self.keydown.get(key as usize).copied().unwrap_or(false)
@@ -283,7 +311,7 @@ macro_rules! button_cmds {
 
 /// Register bind/unbind/unbindall/bindlist, +/- buttons and impulse.
 pub fn register_commands<C: InputHost>(c: &mut Commands<C>) {
-    button_cmds!(c, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17);
+    button_cmds!(c, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18);
     c.add("impulse", |ctx, a| ctx.input().impulse = a.argv(1).parse().unwrap_or(0));
     c.add("bind", cmd_bind);
     c.add("unbind", |ctx, a| {
@@ -398,6 +426,19 @@ const STICK_KEY_THRESH: f32 = 0.5;
 
 /// Feed one platform event.
 pub fn handle_event<C: InputHost>(ctx: &mut C, ev: InputEvent) -> Option<Routed> {
+    let dev = match ev {
+        InputEvent::Key { down: true, .. } | InputEvent::MouseButton { down: true, .. } | InputEvent::MouseWheel { .. } => {
+            Some(Device::KeyboardMouse)
+        }
+        // small jitter from a resting mouse doesn't switch away from the pad
+        InputEvent::MouseMotion { dx, dy } if dx.abs() + dy.abs() > 4.0 => Some(Device::KeyboardMouse),
+        InputEvent::GamepadButton { down: true, .. } => Some(Device::Gamepad),
+        InputEvent::GamepadAxis { value, .. } if value.abs() > 0.5 => Some(Device::Gamepad),
+        _ => None,
+    };
+    if let Some(d) = dev {
+        ctx.input().last_device = d;
+    }
     match ev {
         InputEvent::Key { key, down } => key_event(ctx, key, down),
         InputEvent::Text(ch) => {
@@ -440,7 +481,7 @@ pub fn handle_event<C: InputHost>(ctx: &mut C, ev: InputEvent) -> Option<Routed>
                 if was != is {
                     out = key_event(ctx, TRIGGER_KEYS[i - 4], is);
                 }
-            } else if i < 2 && ctx.input().dest != KeyDest::Game {
+            } else if i < 2 && ctx.input().dest != KeyDest::Game && !ctx.input().capture {
                 // left stick emulates arrows in menus/console
                 for (j, sign) in [(0usize, -1.0f32), (1, 1.0)] {
                     let k = MENU_ARROWS[i * 2 + j];
@@ -462,6 +503,7 @@ pub fn handle_event<C: InputHost>(ctx: &mut C, ev: InputEvent) -> Option<Routed>
             if !c {
                 inp.axes = [0.0; 6];
                 inp.gyro = [0.0; 2];
+                inp.last_device = Device::KeyboardMouse;
             }
             None
         }
@@ -507,7 +549,14 @@ impl Input {
 
         if self.dest != KeyDest::Game {
             self.mouse = [0.0; 2];
+            self.wheel_aim = [0.0; 2];
+            self.wheel_mouse = [0.0; 2];
             return s;
+        }
+        let wheel = b[btn::WHEEL].is_down();
+        if !wheel {
+            self.wheel_aim = [0.0; 2];
+            self.wheel_mouse = [0.0; 2];
         }
 
         // gamepad
@@ -518,6 +567,17 @@ impl Input {
             let (mut mv, mut lk) = ([self.axes[0], self.axes[1]], [self.axes[2], self.axes[3]]);
             if v(c.joy_swapmovelook) != 0.0 {
                 std::mem::swap(&mut mv, &mut lk);
+            }
+            if wheel {
+                // either stick picks a wheel slot (the stronger one) instead
+                // of moving or turning
+                let pick = if gamepad::magnitude(mv) > gamepad::magnitude(lk) { mv } else { lk };
+                let m = gamepad::magnitude(pick);
+                if m > 0.5 {
+                    self.wheel_aim = [pick[0] / m, pick[1] / m];
+                }
+                mv = [0.0; 2];
+                lk = [0.0; 2];
             }
             let mv = gamepad::apply_easing(
                 gamepad::apply_deadzone(mv, v(c.joy_deadzone_move), v(c.joy_outer_threshold_move)),
@@ -593,6 +653,17 @@ impl Input {
 
         // mouse
         let mut m = std::mem::take(&mut self.mouse);
+        if wheel {
+            // the mouse steers a virtual cursor on the wheel
+            const R: f32 = 120.0;
+            let w = [self.wheel_mouse[0] + m[0], self.wheel_mouse[1] + m[1]];
+            let mag = gamepad::magnitude(w);
+            self.wheel_mouse = if mag > R { [w[0] * R / mag, w[1] * R / mag] } else { w };
+            if mag > 30.0 {
+                self.wheel_aim = [w[0] / mag, w[1] / mag];
+            }
+            m = [0.0; 2];
+        }
         if v(c.m_filter) != 0.0 {
             let cur = m;
             m = [(m[0] + self.old_mouse[0]) * 0.5, (m[1] + self.old_mouse[1]) * 0.5];

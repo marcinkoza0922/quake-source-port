@@ -106,6 +106,8 @@ pub enum HostEvent {
     Focus,
     /// Absolute cursor position in window points (menus).
     MousePos { x: f32, y: f32 },
+    /// Button-label family of a newly connected gamepad (`qplatform::family`).
+    PadFamily(u8),
 }
 
 pub fn convert(e: Event) -> Vec<HostEvent> {
@@ -147,7 +149,9 @@ pub fn convert(e: Event) -> Vec<HostEvent> {
             Some(b) => one(InputEvent::GamepadButton { button: b, down }),
             None => vec![],
         },
-        Event::GamepadAdded { .. } => one(InputEvent::GamepadConnected(true)),
+        Event::GamepadAdded { family, .. } => {
+            vec![HostEvent::Input(InputEvent::GamepadConnected(true)), HostEvent::PadFamily(family)]
+        }
         Event::GamepadRemoved { .. } => one(InputEvent::GamepadConnected(false)),
         Event::GamepadGyro { data, .. } => one(InputEvent::Gyro { pitch: data[0], yaw: data[1] }),
         Event::Resize { .. } => vec![HostEvent::Resize],

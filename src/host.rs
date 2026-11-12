@@ -9,8 +9,8 @@ use qcore::cvar::{CVAR_ARCHIVE, CVAR_SERVERINFO, Cvars};
 use qcore::math::{Vec3, angle_vectors};
 use qinput::aim::{AimContext, AimTarget, TargetKind, Visibility, aim_assist_allowed};
 use qinput::keys::{K_ESCAPE, KeyDest};
-use qinput::{Input, InputEvent, InputHost, Routed};
-use qnet::protocol::{CLC_STRINGCMD, STAT_HEALTH};
+use qinput::{Device, Input, InputEvent, InputHost, Routed};
+use qnet::protocol::{CLC_STRINGCMD, STAT_ACTIVEWEAPON, STAT_AMMO, STAT_HEALTH, STAT_WEAPONFRAME};
 use qrender::{Renderer, Settings};
 use qserver::{ClientMove, Server};
 use qsound::{Listener, SoundEvent, SoundSystem};
@@ -38,6 +38,8 @@ const HOST_CVARS: &[(&str, &str, u32)] = &[
     ("host_maxfps", "250", CVAR_ARCHIVE),
     ("fov", "90", CVAR_ARCHIVE),
     ("cl_bob", "0.02", 0),
+    ("cl_wheel_timescale", "0.25", CVAR_ARCHIVE),
+    ("cl_paddefaults", "0", CVAR_ARCHIVE),
     ("cl_bobcycle", "0.6", 0),
     ("cl_bobup", "0.5", 0),
     ("v_kicktime", "0.5", 0),
@@ -167,6 +169,22 @@ const COMPAT_CVARS: &[(&str, &str, u32)] = &[
 
 /// Quakespasm's default.cfg for games without one (the 2021 re-release).
 const DEFAULT_CFG: &str = include_str!("default.cfg");
+/// Gamepad bindings applied after any default.cfg (id1's has none), and
+/// after a config.cfg that binds no gamepad key at all.
+const PAD_DEFAULTS: &str = include_str!("pad_defaults.cfg");
+
+/// (key, command) pairs of [`PAD_DEFAULTS`].
+fn pad_default_binds() -> Vec<(i32, String)> {
+    PAD_DEFAULTS
+        .lines()
+        .filter_map(|l| {
+            let rest = l.trim().strip_prefix("bind ")?.trim();
+            let (k, cmd) = rest.split_once(char::is_whitespace)?;
+            let k = qinput::keys::string_to_keynum(k);
+            (k >= 0).then(|| (k, cmd.trim().trim_matches('"').to_string()))
+        })
+        .collect()
+}
 
 /// Line-of-sight through the map's hull 0.
 struct WorldVis<'a>(&'a qworld::hull::CollisionModel);
@@ -196,6 +214,16 @@ pub struct Host {
     pend_attack: bool,
     pend_jump: bool,
     pend_impulse: u8,
+    wheel: crate::wheel::Wheel,
+    /// Label family of the last connected gamepad.
+    pad_family: crate::glyphs::Family,
+    glyph_atlas: Option<Option<qrender::PicId>>,
+    /// Rumble to play this frame (low, high, ms), taken by the main loop.
+    rumble: Option<(u16, u16, u32)>,
+    /// Last seen (weapon, ammo, weaponframe, punch) for fire rumble.
+    fire_track: (i32, i32, i32, [f32; 3]),
+    /// Held menu navigation key and when it repeats next (gamepad).
+    nav_hold: Option<(i32, f64)>,
     last_cmd: UserCmd,
     screenshot: Option<String>,
     delayed: Vec<(f64, String)>,
@@ -304,6 +332,12 @@ impl Host {
             pend_attack: false,
             pend_jump: false,
             pend_impulse: 0,
+            wheel: Default::default(),
+            pad_family: Default::default(),
+            glyph_atlas: None,
+            rumble: None,
+            fire_track: (0, 0, 0, [0.0; 3]),
+            nav_hold: None,
             last_cmd: UserCmd::default(),
             screenshot: None,
             delayed: Vec::new(),
@@ -517,6 +551,7 @@ impl Host {
                 }
             }
             HostEvent::Focus => {}
+            HostEvent::PadFamily(f) => self.pad_family = crate::glyphs::Family::from_platform(f),
             HostEvent::MousePos { x, y } => {
                 if !self.menu.active() {
                     return;
@@ -555,6 +590,19 @@ impl Host {
                     self.sync_key_dest();
                     return;
                 }
+                // Level complete: any key or button moves on (QC exits the
+                // intermission on attack/jump/use).
+                if self.cl.intermission != 0 && self.key_dest() == KeyDest::Game {
+                    let press = match ie {
+                        InputEvent::Key { key, down: true } => key != K_ESCAPE,
+                        InputEvent::MouseButton { down: true, .. } => true,
+                        InputEvent::GamepadButton { button, down: true } => button.key() != K_ESCAPE,
+                        _ => false,
+                    };
+                    if press {
+                        self.pend_attack = true;
+                    }
+                }
                 let routed = qinput::handle_event(self, ie);
                 match routed {
                     Some(Routed::Escape) => self.menu.open(Screen::Main),
@@ -583,21 +631,125 @@ impl Host {
                     }
                     Some(Routed::Text { ch, dest: KeyDest::Console }) => self.con.text(ch),
                     Some(Routed::Text { ch, dest: KeyDest::Menu }) => self.menu.text(ch, &mut self.server.core.cvars),
-                    Some(Routed::Key { key, dest: KeyDest::Menu }) => {
-                        let active = self.server.active();
-                        let acts = self.menu.key(key, &mut self.server.core.cvars, active);
-                        for a in acts {
-                            match a {
-                                Action::Command(c) => self.cbuf.add_text(&c),
-                                Action::Sound(s) => self.local_sound(s),
-                                Action::Close => {}
-                            }
-                        }
-                    }
+                    Some(Routed::Key { key, dest: KeyDest::Menu }) => self.menu_key(key),
                     _ => {}
                 }
                 self.sync_key_dest();
             }
+        }
+    }
+
+    fn menu_key(&mut self, key: i32) {
+        let active = self.server.active();
+        let acts = self.menu.key(key, &mut self.server.core.cvars, active);
+        for a in acts {
+            match a {
+                Action::Command(c) => self.cbuf.add_text(&c),
+                Action::Sound(s) => self.local_sound(s),
+                Action::Close => {}
+            }
+        }
+    }
+
+    /// Whether prompts should show gamepad glyphs.
+    fn pad_ui(&self) -> bool {
+        self.input.gamepad_connected && self.input.last_device == Device::Gamepad
+    }
+
+    /// Glyph drawer (registers the atlas on first use).
+    fn glyphs(&mut self) -> crate::glyphs::Glyphs {
+        let atlas = *self.glyph_atlas.get_or_insert_with(|| {
+            let (w, h, px) = crate::glyphs::atlas_rgba();
+            self.r.register_pic_rgba_linear(w, h, &px).ok()
+        });
+        let family = self.pad_family.with_override(self.cv("joy_glyphs"));
+        crate::glyphs::Glyphs { atlas, family }
+    }
+
+    /// Menu state that follows the input devices and bindings.
+    fn sync_menu_ui(&mut self) {
+        self.menu.pad_ui = self.pad_ui();
+        self.menu.glyphs = self.glyphs();
+        if self.menu.active() {
+            self.menu.bindings.clone_from(&self.input.bindings);
+        }
+        self.input.capture = self.menu.capturing();
+    }
+
+    /// Gamepad auto-repeat for held menu directions (keyboards repeat themselves).
+    fn menu_nav_repeat(&mut self) {
+        use qinput::keys::*;
+        if !self.menu.active() || self.menu.capturing() || self.input.last_device != Device::Gamepad {
+            self.nav_hold = None;
+            return;
+        }
+        let held = [K_DPAD_UP, K_DPAD_DOWN, K_DPAD_LEFT, K_DPAD_RIGHT, K_UPARROW, K_DOWNARROW, K_LEFTARROW, K_RIGHTARROW]
+            .into_iter()
+            .find(|&k| self.input.key_down(k));
+        match (held, self.nav_hold) {
+            (None, _) => self.nav_hold = None,
+            (Some(k), Some((h, t))) if h == k => {
+                if self.realtime >= t {
+                    self.nav_hold = Some((k, t.max(self.realtime - 0.1) + 0.09));
+                    self.menu_key(k);
+                }
+            }
+            (Some(k), _) => self.nav_hold = Some((k, self.realtime + 0.35)),
+        }
+    }
+
+    /// Queue a rumble (strengths 0..1), scaled by `joy_rumble`; only while
+    /// the gamepad is the device in use.
+    fn add_rumble(&mut self, low: f32, high: f32, ms: u32) {
+        let k = self.cv("joy_rumble").clamp(0.0, 1.0);
+        if k <= 0.0 || !self.pad_ui() {
+            return;
+        }
+        let m = |v: f32| (v.clamp(0.0, 1.0) * k * 65535.0) as u16;
+        let (lo, hi) = (m(low), m(high));
+        self.rumble = Some(match self.rumble {
+            Some((a, b, t)) => (a.max(lo), b.max(hi), t.max(ms)),
+            None => (lo, hi, ms),
+        });
+    }
+
+    pub fn take_rumble(&mut self) -> Option<(u16, u16, u32)> {
+        self.rumble.take()
+    }
+
+    /// Rumble on firing (ammo spent, axe swing) and on view punches.
+    fn track_rumble(&mut self) {
+        let st = &self.cl.stats;
+        let (w, ammo, wf, punch) = (st[STAT_ACTIVEWEAPON], st[STAT_AMMO], st[STAT_WEAPONFRAME], self.cl.punchangle);
+        let (pw, pa, pwf, pp) = std::mem::replace(&mut self.fire_track, (w, ammo, wf, punch));
+        if self.cl.signon != 4 || self.cl.intermission != 0 || self.demo.is_some() {
+            return;
+        }
+        if (w == pw && ammo < pa) || (w == 4096 && pwf == 0 && wf != 0) {
+            let (lo, hi, ms) = match w {
+                1 => (0.35, 0.2, 90),
+                2 => (0.7, 0.4, 140),
+                4 => (0.12, 0.2, 50),
+                8 => (0.2, 0.3, 60),
+                16 => (0.5, 0.2, 120),
+                32 => (0.8, 0.35, 160),
+                64 => (0.15, 0.4, 60),
+                _ => (0.2, 0.15, 60),
+            };
+            self.add_rumble(lo, hi, ms);
+        }
+        if punch != pp && punch != [0.0; 3] {
+            let m = (punch.iter().fold(0.0f32, |a, x| a.max(x.abs())) / 6.0).min(1.0);
+            self.add_rumble(0.6 * m, 0.3 * m, 100);
+        }
+    }
+
+    /// Time scale for the world while the weapon wheel is open (single player only).
+    fn wheel_timescale(&self) -> f32 {
+        if self.wheel.open && self.local.is_some() && self.server.core.maxclients() == 1 && self.demo.is_none() {
+            self.cv("cl_wheel_timescale").clamp(0.05, 1.0)
+        } else {
+            1.0
         }
     }
 
@@ -1024,6 +1176,8 @@ impl Host {
                 ClientEvent::Damage { armor, blood, from } => {
                     let cv = self.view_cvars();
                     self.view.parse_damage(&self.cl, &cv, armor, blood, from);
+                    let s = ((armor + blood) as f32 / 30.0).min(1.0);
+                    self.add_rumble(0.4 + 0.6 * s, 0.2 + 0.3 * s, 120 + (s * 250.0) as u32);
                 }
                 ClientEvent::Pause(p) => {
                     if let Some(snd) = &self.snd {
@@ -1343,6 +1497,8 @@ impl Host {
         }
         self.check_local_client();
         self.sync_key_dest();
+        self.sync_menu_ui();
+        self.menu_nav_repeat();
 
         // input (every frame, for smooth view angles)
         let ft = dt as f32;
@@ -1368,6 +1524,12 @@ impl Host {
         if inp.impulse != 0 {
             self.pend_impulse = inp.impulse;
         }
+        let alive = self.cl.stats[STAT_HEALTH] > 0;
+        let (held, aim) = (self.input.wheel_held(), self.input.wheel_aim);
+        if let Some(imp) = self.wheel.update(held, in_game && alive && self.demo.is_none(), aim, &self.cl) {
+            self.pend_impulse = imp;
+        }
+        let timescale = self.wheel_timescale() as f64;
         if self.cl.signon == 4 {
             let sp = self.move_speeds();
             self.last_cmd = self.cl.base_move(&InputState { attack: false, jump: false, impulse: 0, ..inp }, &sp, ft);
@@ -1378,7 +1540,7 @@ impl Host {
         let maxfps = self.cv("host_maxfps");
         let tic = if maxfps > 0.0 && maxfps <= 72.0 { 0.0 } else { SERVER_TIC };
         if self.accum >= tic {
-            let sdt = self.accum.min(0.1);
+            let sdt = self.accum.min(0.1) * timescale;
             self.accum = 0.0;
             if let Some(i) = self.local {
                 let mut cmd = self.last_cmd;
@@ -1460,10 +1622,11 @@ impl Host {
         self.read_demo(dt);
         self.check_local_client();
         if self.cl.signon > 0 {
-            self.cl.frame(dt);
+            self.cl.frame(dt * timescale);
             self.apply_qw_prediction();
         }
         self.process_client_events();
+        self.track_rumble();
         self.update_autosave();
         self.con.update(ft);
 
@@ -1770,6 +1933,12 @@ impl Host {
             blend = self.view.blend(&self.cl, contents, ft);
         }
         // 2D
+        let glyphs = self.glyphs();
+        let pad_ui = self.pad_ui();
+        let wheel_key = crate::menu::keys_for(&self.input.bindings, "+weaponwheel")
+            .into_iter()
+            .find(|&k| crate::glyphs::is_pad_key(k))
+            .unwrap_or(qinput::keys::K_XBUTTON);
         let crosshair = self.cv("crosshair") != 0.0;
         let showfps = self.cv("scr_showfps") != 0.0;
         let classic = self.classic_hud();
@@ -1807,7 +1976,18 @@ impl Host {
                         if self.show_scores && self.cl.gametype == 1 {
                             crate::sbar::deathmatch_overlay(&mut c, &mut pf, &self.cl);
                         }
+                        self.wheel.draw(&mut c, &mut pf, &glyphs, &self.cl, pad_ui, wheel_key);
                     }
+                }
+                // QC accepts the exit after 2 s (5 s in deathmatch).
+                let wait = if self.cl.gametype == 1 { 5.0 } else { 2.0 };
+                if self.cl.intermission == 1 && self.cl.time - self.cl.completed_time >= wait && !self.menu.active() {
+                    let s = if pad_ui { "Press any button to continue..." } else { "Press any key to continue..." };
+                    c.center_320x200();
+                    let x = ((320.0 - s.len() as f32 * 8.0) / 2.0).floor();
+                    c.fill(x - 6.0, 185.0, s.len() as f32 * 8.0 + 12.0, 14.0, [0.0, 0.0, 0.0, 0.6]);
+                    crate::menu::gold(&mut c, x, 188.0, s);
+                    c.reset_origin();
                 }
             }
             let conback = pf("gfx/conback.lmp");
@@ -1997,6 +2177,7 @@ fn register_commands(c: &mut Commands<Host>) {
         if name.eq_ignore_ascii_case("config.cfg")
             && let Some((g, t)) = h.inherited_config()
         {
+            h.cbuf.insert_text("_paddefaults_merge\n");
             h.cbuf.insert_text(&t);
             h.print(&format!("execing config.cfg (inherited from {g})\n"));
             if let Some(d) = h.fs().open(name).filter(|_| h.fs().origin(name).is_some_and(|o| o.game.eq_ignore_ascii_case(h.game_name()))) {
@@ -2008,10 +2189,16 @@ fn register_commands(c: &mut Commands<Host>) {
         match h.fs().open(name) {
             Some(d) => {
                 let t = String::from_utf8_lossy(&d).into_owned();
+                if name.eq_ignore_ascii_case("default.cfg") {
+                    h.cbuf.insert_text(PAD_DEFAULTS);
+                } else if name.eq_ignore_ascii_case("config.cfg") {
+                    h.cbuf.insert_text("_paddefaults_merge\n");
+                }
                 h.cbuf.insert_text(&t);
                 h.print(&format!("execing {name}\n"));
             }
             None if name.eq_ignore_ascii_case("default.cfg") => {
+                h.cbuf.insert_text(PAD_DEFAULTS);
                 h.cbuf.insert_text(DEFAULT_CFG);
                 h.print("execing default.cfg (built-in)\n");
             }
@@ -2019,6 +2206,35 @@ fn register_commands(c: &mut Commands<Host>) {
         }
     });
     c.add("stuffcmds", |h, _| h.stuff_cmds());
+    // Once per config (cl_paddefaults): fill in default pad binds whose key
+    // is still unbound, so configs saved before the pad
+    // defaults existed gain them without losing the player's own choices.
+    c.add("_paddefaults_merge", |h, _| {
+        if h.cv("cl_paddefaults") >= 1.0 {
+            return;
+        }
+        for (key, cmd) in pad_default_binds() {
+            if h.input.binding(key).is_none() {
+                h.input.set_binding(key, Some(&cmd));
+            }
+        }
+        h.server.core.cvars.set("cl_paddefaults", "1");
+    });
+    // Options > Controls > Reset: default.cfg's binds plus the pad defaults
+    // (its cvars are left alone).
+    c.add("_resetbinds", |h, _| {
+        let text = h.fs().open("default.cfg").map_or_else(|| DEFAULT_CFG.to_string(), |d| String::from_utf8_lossy(&d).into_owned());
+        let mut binds = String::from("unbindall\n");
+        for l in text.lines() {
+            let t = l.trim_start().to_ascii_lowercase();
+            if t.starts_with("bind ") || t.starts_with("alias ") {
+                binds.push_str(l);
+                binds.push('\n');
+            }
+        }
+        h.cbuf.insert_text(PAD_DEFAULTS);
+        h.cbuf.insert_text(&binds);
+    });
     c.add("cvarlist", |h, a| {
         let p = a.argv(1).to_ascii_lowercase();
         let mut l: Vec<String> = h
@@ -2061,6 +2277,7 @@ fn register_commands(c: &mut Commands<Host>) {
         use crate::menu::Page;
         let page = match a.argv(1).to_ascii_lowercase().as_str() {
             "gameplay" => Some(Page::Gameplay),
+            "controls" => Some(Page::Controls),
             "input" => Some(Page::Input),
             "graphics" => Some(Page::Graphics),
             "audio" => Some(Page::Audio),
@@ -2449,4 +2666,17 @@ fn bsp_leaf(bsp: &qformats::bsp::Bsp, p: [f32; 3]) -> usize {
         n = node.children[(d <= 0.0) as usize];
     }
     (-(n + 1)) as usize
+}
+
+#[cfg(test)]
+mod pad_default_tests {
+    #[test]
+    fn pad_defaults_parse() {
+        use qinput::keys::*;
+        let b = super::pad_default_binds();
+        assert!(b.contains(&(K_RTRIGGER, "+attack".into())));
+        assert!(b.contains(&(K_XBUTTON, "+weaponwheel".into())));
+        assert!(b.contains(&(K_LSHOULDER, "impulse 12".into())));
+        assert_eq!(b.len(), 11);
+    }
 }

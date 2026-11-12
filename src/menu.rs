@@ -5,6 +5,7 @@ use qcore::cvar::Cvars;
 use qinput::keys::*;
 
 use crate::draw::Canvas;
+use crate::glyphs::{Family, Glyphs, is_pad_key};
 use crate::modmenu::{self, ModMenu};
 use crate::sbar::PicFn;
 
@@ -27,6 +28,7 @@ pub enum Screen {
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum Page {
     Gameplay,
+    Controls,
     Input,
     Graphics,
     Audio,
@@ -36,8 +38,9 @@ pub enum Page {
     Setup,
 }
 
-const PAGES: [(&str, Page); 4] = [
+const PAGES: [(&str, Page); 5] = [
     ("Gameplay", Page::Gameplay),
+    ("Controls", Page::Controls),
     ("Input", Page::Input),
     ("Graphics", Page::Graphics),
     ("Audio", Page::Audio),
@@ -64,6 +67,10 @@ enum Item {
     Run { label: &'static str, run: Run },
     /// A found LAN server (index into `Menu::servers`).
     Server(usize),
+    /// Rebindable action: keyboard/mouse and gamepad keys bound to `cmd`.
+    Bind { label: &'static str, cmd: &'static str },
+    /// Restore the default bindings.
+    ResetBinds,
 }
 
 #[derive(Clone, Copy, PartialEq, Eq)]
@@ -87,6 +94,33 @@ const JOIN: &[Item] = &[
     Item::Text { label: "Address", cvar: "_mp_address", max: 40 },
     Item::Run { label: "Connect", run: Run::Connect },
     Item::Run { label: "Search LAN", run: Run::Search },
+];
+
+const fn bind(label: &'static str, cmd: &'static str) -> Item {
+    Item::Bind { label, cmd }
+}
+
+const CONTROLS: &[Item] = &[
+    bind("Attack", "+attack"),
+    bind("Jump / Swim Up", "+jump"),
+    bind("Weapon Wheel", "+weaponwheel"),
+    bind("Next Weapon", "impulse 10"),
+    bind("Previous Weapon", "impulse 12"),
+    bind("Move Forward", "+forward"),
+    bind("Move Back", "+back"),
+    bind("Strafe Left", "+moveleft"),
+    bind("Strafe Right", "+moveright"),
+    bind("Swim Down", "+movedown"),
+    bind("Run", "+speed"),
+    bind("Turn Left", "+left"),
+    bind("Turn Right", "+right"),
+    bind("Look Up", "+lookup"),
+    bind("Look Down", "+lookdown"),
+    bind("Center View", "centerview"),
+    bind("Scoreboard", "+showscores"),
+    bind("Quick Save", "echo Quicksaving...; wait; save quick"),
+    bind("Quick Load", "echo Quickloading...; wait; load quick"),
+    Item::ResetBinds,
 ];
 
 const PLAYERS: &[(&str, f32)] = &[("2", 2.0), ("3", 3.0), ("4", 4.0), ("6", 6.0), ("8", 8.0), ("12", 12.0), ("16", 16.0)];
@@ -150,7 +184,13 @@ const INPUT: &[Item] = &[
     slider("Aim Slowdown", "aim_slowdown", 0.0, 1.0, 0.1),
     slider("Aim Rotation", "aim_rotation", 0.0, 1.0, 0.1),
     toggle("Gyro", "gyro_enable"),
+    slider("Rumble", "joy_rumble", 0.0, 1.0, 0.25),
+    Item::Choice { label: "Button Glyphs", cvar: "joy_glyphs", choices: GLYPHS },
+    Item::Choice { label: "Wheel Slow Motion", cvar: "cl_wheel_timescale", choices: WHEEL_TIME },
 ];
+
+const GLYPHS: &[(&str, f32)] = &[("auto", 0.0), ("xbox", 1.0), ("playstation", 2.0), ("nintendo", 3.0)];
+const WHEEL_TIME: &[(&str, f32)] = &[("off", 1.0), ("50%", 0.5), ("25%", 0.25), ("10%", 0.1)];
 
 const MSAA: &[(&str, f32)] = &[("off", 1.0), ("2x", 2.0), ("4x", 4.0), ("8x", 8.0)];
 const SCALE: &[(&str, f32)] = &[("50%", 0.5), ("75%", 0.75), ("100%", 1.0), ("125%", 1.25), ("150%", 1.5), ("200%", 2.0)];
@@ -185,6 +225,7 @@ const AUDIO: &[Item] = &[slider("Sound Volume", "volume", 0.0, 1.0, 0.1), slider
 fn page_items(p: Page) -> &'static [Item] {
     match p {
         Page::Gameplay => GAMEPLAY,
+        Page::Controls => CONTROLS,
         Page::Input => INPUT,
         Page::Graphics => GRAPHICS,
         Page::Audio => AUDIO,
@@ -254,6 +295,28 @@ pub struct Menu {
     /// LAN search results and whether a search is running.
     pub servers: Vec<ServerEntry>,
     pub searching: bool,
+    /// Key bindings snapshot (host refreshes it while the menu is open).
+    pub bindings: Vec<Option<String>>,
+    /// Controls row waiting for a key to bind.
+    capture: Option<usize>,
+    /// Prompts show gamepad glyphs (the pad was used last).
+    pub pad_ui: bool,
+    pub glyphs: Glyphs,
+}
+
+/// Keys bound to exactly `cmd` (whitespace/case-insensitive).
+pub fn keys_for(bindings: &[Option<String>], cmd: &str) -> Vec<i32> {
+    bindings
+        .iter()
+        .enumerate()
+        .filter(|(_, b)| b.as_deref().is_some_and(|b| b.trim().eq_ignore_ascii_case(cmd)))
+        .map(|(k, _)| k as i32)
+        .collect()
+}
+
+fn bind_cmd(key: i32, cmd: &str) -> String {
+    let name = keynum_to_string(key);
+    format!("bind \"{name}\" \"{cmd}\"\n")
 }
 
 /// Open dropdown list: the page row it belongs to, highlighted entry and
@@ -284,6 +347,8 @@ const SLIDER_X: (f32, f32) = (VALUE_X + 8.0, VALUE_X + 88.0);
 /// Dropdown value box minimum width and visible entries.
 const DROP_W: f32 = 120.0;
 const DROP_ROWS: usize = 10;
+/// Controls page: gamepad column.
+const BIND_PAD_X: f32 = 424.0;
 
 impl Menu {
     pub fn new() -> Self {
@@ -310,6 +375,10 @@ impl Menu {
             net_maps: Vec::new(),
             servers: Vec::new(),
             searching: false,
+            bindings: vec![None; MAX_KEYS],
+            capture: None,
+            pad_ui: false,
+            glyphs: Glyphs { atlas: None, family: Family::Xbox },
         }
     }
 
@@ -417,6 +486,11 @@ impl Menu {
         out.push(Action::Sound("misc/menu2.wav"));
     }
 
+    /// Waiting for a key to bind (the host keeps sticks from moving the cursor).
+    pub fn capturing(&self) -> bool {
+        self.capture.is_some() && self.screen == Screen::OptionsPage(Page::Controls)
+    }
+
     pub fn active(&self) -> bool {
         self.screen != Screen::None
     }
@@ -425,6 +499,7 @@ impl Menu {
         self.prev = self.screen;
         self.screen = s;
         self.drop = None;
+        self.capture = None;
         self.quit_cursor = 0;
         if matches!(s, Screen::Load | Screen::Save) { self.load_cursor = 0; }
     }
@@ -505,6 +580,28 @@ impl Menu {
 
     pub fn key(&mut self, key: i32, cv: &mut Cvars, server_active: bool) -> Vec<Action> {
         let mut out = Vec::new();
+        if let Some(row) = self.capture.take() {
+            if self.screen != Screen::OptionsPage(Page::Controls) || key == K_ESCAPE {
+                out.push(Action::Sound("misc/menu3.wav"));
+                return out;
+            }
+            if let Item::Bind { cmd, .. } = page_items(Page::Controls)[row] {
+                // two keys per device kind: a third replaces both
+                let same: Vec<i32> = keys_for(&self.bindings, cmd).into_iter().filter(|&k| is_pad_key(k) == is_pad_key(key)).collect();
+                if same.len() >= 2 && !same.contains(&key) {
+                    for k in same {
+                        out.push(Action::Command(format!("unbind \"{}\"\n", keynum_to_string(k))));
+                        self.bindings[k as usize] = None;
+                    }
+                }
+                out.push(Action::Command(bind_cmd(key, cmd)));
+                if let Some(b) = self.bindings.get_mut(key as usize) {
+                    *b = Some(cmd.to_string());
+                }
+                out.push(Action::Sound("misc/menu1.wav"));
+            }
+            return out;
+        }
         if let (Some(d), Screen::OptionsPage(p)) = (self.drop, self.screen) {
             let item = self.page_item(p, d.item);
             self.drop_key(key, d, item, cv, &mut out);
@@ -711,6 +808,28 @@ impl Menu {
                         return out;
                     }
                     Item::Run { .. } | Item::Server(_) => return out,
+                    Item::Bind { cmd, .. } => {
+                        if enter {
+                            self.capture = Some(self.opt_cursor);
+                            out.push(Action::Sound("misc/menu2.wav"));
+                        } else if matches!(key, K_BACKSPACE | K_DEL | K_XBUTTON) {
+                            // clear this device kind's keys for the action
+                            let pad = key == K_XBUTTON;
+                            for k in keys_for(&self.bindings, cmd).into_iter().filter(|&k| is_pad_key(k) == pad) {
+                                out.push(Action::Command(format!("unbind \"{}\"\n", keynum_to_string(k))));
+                                self.bindings[k as usize] = None;
+                            }
+                            out.push(Action::Sound("misc/menu3.wav"));
+                        }
+                        return out;
+                    }
+                    Item::ResetBinds => {
+                        if enter {
+                            out.push(Action::Command("_resetbinds\n".into()));
+                            out.push(Action::Sound("misc/menu2.wav"));
+                        }
+                        return out;
+                    }
                     _ => {}
                 }
                 if enter && self.options(item).len() > 2 {
@@ -806,7 +925,7 @@ impl Menu {
                 let i = (cur as i32 + dir).rem_euclid(n) as usize;
                 cv.set("_mp_map", &self.net_maps[i].name.clone());
             }
-            Item::Text { .. } | Item::Run { .. } | Item::Server(_) => return false,
+            Item::Text { .. } | Item::Run { .. } | Item::Server(_) | Item::Bind { .. } | Item::ResetBinds => return false,
             Item::Apply => {
                 if !enter {
                     return false;
@@ -1051,10 +1170,9 @@ impl Menu {
                             else if self.screen == Screen::Load && i == 0 { "No autosave yet".into() }
                             else { format!("Empty manual slot {}", if self.screen == Screen::Load { i - 1 } else { i + 1 }) };
                         line(c, 0, &label);
-                        if self.screen == Screen::Save { line(c, 2, "Enter to save here"); }
+                        if self.screen == Screen::Save { line(c, 2, "Select to save here"); }
                     }
                 }
-                c.string(24.0, 338.0, &format!("Arrows: select  Enter: {}  Esc: back", if self.screen == Screen::Save { "save" } else { "load" }));
                 c.string(520.0, 338.0, &format!("Page {}/{}", page + 1, self.save_rows().div_ceil(4)));
             }
             Screen::Options => {
@@ -1073,7 +1191,8 @@ impl Menu {
                 c.pic(PANEL_X - 40.0, 16.0, p);
                 title_c(c, pic, if is_net_page(page) { "gfx/p_multi.lmp" } else { "gfx/p_option.lmp" });
                 let name = page_name(page);
-                gold(c, ((640.0 - name.len() as f32 * 8.0) / 2.0).floor(), PAGE_ROW0 - 16.0, name);
+                let nx = if page == Page::Controls { LABEL_R - name.len() as f32 * 8.0 } else { ((640.0 - name.len() as f32 * 8.0) / 2.0).floor() };
+                gold(c, nx, PAGE_ROW0 - 16.0, name);
                 let n = self.page_len(page);
                 panel(c, PAGE_ROW0, n);
                 highlight(c, PAGE_ROW0 + self.opt_cursor as f32 * ROW_H);
@@ -1095,6 +1214,10 @@ impl Menu {
                 if page == Page::Join && self.servers.is_empty() && !self.searching {
                     let s = "no servers found yet";
                     c.string(((640.0 - s.len() as f32 * 8.0) / 2.0).floor(), PAGE_ROW0 + n as f32 * ROW_H + 8.0, s);
+                }
+                if page == Page::Controls {
+                    c.string(VALUE_X, PAGE_ROW0 - 16.0, "Keyboard");
+                    c.string(BIND_PAD_X, PAGE_ROW0 - 16.0, "Controller");
                 }
                 if let Some(d) = self.drop {
                     self.draw_drop(c, cv, self.page_item(page, d.item), d);
@@ -1121,8 +1244,38 @@ impl Menu {
             }
             Screen::None => {}
         }
+        c.menu_layout();
+        self.draw_hints(c);
         c.reset_origin();
         c.scale = base_scale;
+    }
+
+    /// Bottom row of button prompts, for the device in use.
+    fn draw_hints(&self, c: &mut Canvas) {
+        let pad = self.pad_ui;
+        let (sel, back) = if pad { (K_ABUTTON, K_BBUTTON) } else { (K_ENTER, K_ESCAPE) };
+        let y = 344.0;
+        if self.capturing() {
+            let s = if pad { "Press a button or key to bind" } else { "Press a key or button to bind" };
+            let w = s.len() as f32 * 8.0;
+            c.fill(320.0 - w / 2.0 - 8.0, y - 4.0, w + 16.0, 18.0, [0.0, 0.0, 0.0, 0.8]);
+            gold(c, 320.0 - w / 2.0, y + 1.0, s);
+            return;
+        }
+        let action = match self.screen {
+            Screen::Save => "Save",
+            Screen::Load => "Load",
+            Screen::OptionsPage(Page::Controls) => "Bind",
+            _ => "Select",
+        };
+        let mut items = vec![(sel, action), (back, "Back")];
+        if self.screen == Screen::OptionsPage(Page::Controls) && self.drop.is_none() {
+            items.insert(1, (if pad { K_XBUTTON } else { K_BACKSPACE }, "Clear"));
+        }
+        if matches!(self.screen, Screen::Quit) {
+            items = vec![(sel, "Confirm"), (back, "Cancel")];
+        }
+        self.glyphs.hints_centered(c, 320.0, y, &items);
     }
 
     fn draw_drop(&self, c: &mut Canvas, cv: &Cvars, item: Item, d: Drop) {
@@ -1237,6 +1390,38 @@ impl Menu {
                     let m: String = s.map.chars().take(10).collect();
                     c.string(VALUE_X, y, &format!("{m:<10} {}/{}", s.players, s.max_players));
                 }
+            }
+            Item::Bind { label: l, cmd } => {
+                label(c, l);
+                let keys = keys_for(&self.bindings, cmd);
+                let capturing = self.capture.is_some_and(|r| matches!(page_items(Page::Controls).get(r), Some(Item::Bind { cmd: c2, .. }) if *c2 == cmd));
+                if capturing {
+                    if blink {
+                        gold(c, VALUE_X, y, "press a key...");
+                    }
+                    return;
+                }
+                let g = self.glyphs;
+                let (mut x, mut px) = (VALUE_X, BIND_PAD_X);
+                for &k in &keys {
+                    if is_pad_key(k) {
+                        if px + crate::glyphs::width(k, g.family) < PANEL_X + PANEL_W - 2.0 {
+                            px += g.key(c, px, y - 1.0, k) + 3.0;
+                        }
+                    } else if x + crate::glyphs::width(k, g.family) < BIND_PAD_X - 4.0 {
+                        x += g.key(c, x, y - 1.0, k) + 3.0;
+                    }
+                }
+                if x == VALUE_X {
+                    c.string(VALUE_X, y, "---");
+                }
+                if px == BIND_PAD_X {
+                    c.string(BIND_PAD_X, y, "---");
+                }
+            }
+            Item::ResetBinds => {
+                let l = "Reset to Defaults";
+                gold(c, ((640.0 - l.len() as f32 * 8.0) / 2.0).floor(), y, l);
             }
             Item::Apply => {
                 let dirty = self.display_dirty(cv);
@@ -1388,7 +1573,7 @@ mod quit_tests {
 mod multiplayer_tests {
     use super::*;
 
-    fn cvars() -> Cvars {
+    pub(super) fn cvars() -> Cvars {
         let mut cv = Cvars::default();
         for (n, d) in [
             ("_cl_name", "player"),
@@ -1407,7 +1592,7 @@ mod multiplayer_tests {
         cv
     }
 
-    fn commands(acts: &[Action]) -> String {
+    pub(super) fn commands(acts: &[Action]) -> String {
         acts.iter().filter_map(|a| if let Action::Command(c) = a { Some(c.as_str()) } else { None }).collect()
     }
 
@@ -1519,5 +1704,34 @@ mod save_menu_tests {
         m.load_cursor = 4;
         assert_eq!(m.item_at((40.0, 64.0)), Some(4));
         assert_eq!(m.item_at((20.0, 64.0)), None);
+    }
+
+    #[test]
+    fn controls_rebind_and_clear() {
+        use super::multiplayer_tests::{commands, cvars};
+        let mut cv = cvars();
+        let mut m = Menu::new();
+        m.bindings[K_MOUSE1 as usize] = Some("+attack".into());
+        m.bindings[K_RTRIGGER as usize] = Some("+attack".into());
+        m.open(Screen::OptionsPage(Page::Controls));
+        m.opt_cursor = 0;
+        m.key(K_ENTER, &mut cv, false);
+        assert!(m.capturing());
+        let c = commands(&m.key(b'f' as i32, &mut cv, false));
+        assert_eq!(c, "bind \"f\" \"+attack\"\n");
+        assert!(!m.capturing());
+        // a third keyboard key replaces both keyboard keys, pad untouched
+        m.key(K_ENTER, &mut cv, false);
+        let c = commands(&m.key(b'g' as i32, &mut cv, false));
+        assert!(c.contains("unbind \"MOUSE1\"") && c.contains("unbind \"f\"") && c.ends_with("bind \"g\" \"+attack\"\n"), "{c}");
+        assert_eq!(keys_for(&m.bindings, "+attack"), vec![b'g' as i32, K_RTRIGGER]);
+        // escape cancels capture
+        m.key(K_ENTER, &mut cv, false);
+        assert!(commands(&m.key(K_ESCAPE, &mut cv, false)).is_empty());
+        assert_eq!(m.screen, Screen::OptionsPage(Page::Controls));
+        // X clears the pad keys only
+        let c = commands(&m.key(K_XBUTTON, &mut cv, false));
+        assert_eq!(c, "unbind \"RTRIGGER\"\n");
+        assert_eq!(keys_for(&m.bindings, "+attack"), vec![b'g' as i32]);
     }
 }
