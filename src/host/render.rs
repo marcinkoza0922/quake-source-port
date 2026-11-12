@@ -24,6 +24,15 @@ impl Host {
             self.view.entities(&mut self.cl, &cv, &mut self.level, fs, &mut self.r, &mut ents);
             let debris_on = self.cv("r_debris") != 0.0;
             let gravity = self.cv("sv_gravity");
+            let set = crate::debris::Settings {
+                ragdolls: self.cv("r_debris_ragdolls") != 0.0,
+                at_death: self.cv("r_debris_ragdollstart") != 0.0,
+                max_ragdolls: self.cv("r_debris_maxragdolls").clamp(1.0, 128.0) as usize,
+                gibs: self.cv("r_debris_gibs") != 0.0,
+                shrapnel: self.cv("r_debris_shrapnel") != 0.0,
+                movers: self.cv("r_debris_movers") != 0.0,
+                force: self.cv("r_debris_force").clamp(0.0, 4.0),
+            };
             self.debris.update(
                 debris_on,
                 crate::debris::Frame {
@@ -33,6 +42,7 @@ impl Host {
                     r: &mut self.r,
                     view: v.origin.into(),
                     gravity: if gravity > 0.0 { gravity } else { 800.0 },
+                    set,
                 },
             );
             self.debris.entities(&mut ents, &mut dyn_verts);

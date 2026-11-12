@@ -2,9 +2,12 @@
 //! gibs, and metal shards from exploding boxes. Purely cosmetic: the server
 //! never sees any of it. Server entities that a ragdoll or gib replaces are
 //! hidden through [`ClientState::debris_owned`] and released (shown again)
-//! as soon as the server changes them. Nothing here collides with entities;
-//! bodies collide with the world only. Bullets, nails and explosions push
-//! things around; an explosion right on a ragdoll gibs it.
+//! as soon as the server changes them. Bodies collide with the world and,
+//! optionally, with moving brush entities (doors, lifts), which also carry
+//! them ([`scene`]). Bullets, nails and explosions push things along the
+//! inferred line of fire ([`fire`]); an explosion right on a ragdoll gibs it
+//! with the game's own gib models ([`gibs`]). [`Settings`] holds the
+//! `r_debris_*` sub-options.
 //!
 //! When `r_debris` is 0, [`Debris::update`] returns at once and owns nothing.
 use std::collections::HashMap;
@@ -19,11 +22,14 @@ use crate::assets::{Kind, Level};
 
 mod body;
 mod events;
+mod fire;
 mod fragment;
+mod gibs;
 mod info;
 mod math;
 mod ragdoll;
 mod rig;
+mod scene;
 #[cfg(test)]
 mod tests;
 
@@ -32,11 +38,11 @@ use info::ModelInfo;
 use math::{Quat, Rng, entity_rotation};
 use ragdoll::{Ragdoll, mat_to_quat};
 use rig::Rig;
+use scene::{Mover, Scene};
 
 /// Fixed simulation step.
 pub const STEP: f32 = 1.0 / 60.0;
 const MAX_STEPS: usize = 6;
-const MAX_RAGDOLLS: usize = 48;
 const MAX_GIBS: usize = 128;
 const MAX_SHARDS: usize = 96;
 /// A corpse is taken over after holding a death frame this long (seconds),
@@ -52,6 +58,27 @@ const BLOOD: i32 = 73;
 const TRAIL_KEYS: i32 = 0x4000_0000;
 /// An explosion this close to a ragdoll's bones gibs it.
 const DIRECT_HIT: f32 = 28.0;
+
+/// The `r_debris_*` sub-options.
+#[derive(Clone, Copy)]
+pub struct Settings {
+    pub ragdolls: bool,
+    /// Go limp on the first death frame instead of after the animation.
+    pub at_death: bool,
+    pub max_ragdolls: usize,
+    pub gibs: bool,
+    pub shrapnel: bool,
+    /// Collide with and ride on moving brush entities.
+    pub movers: bool,
+    /// Scale for shot and explosion pushes.
+    pub force: f32,
+}
+
+impl Default for Settings {
+    fn default() -> Self {
+        Settings { ragdolls: true, at_death: false, max_ragdolls: 48, gibs: true, shrapnel: true, movers: true, force: 1.0 }
+    }
+}
 
 /// World collision for the simulation: (fraction, endpos, normal).
 pub trait Collide {
@@ -111,7 +138,16 @@ pub struct Debris {
     brush_bounds: HashMap<usize, Option<(Vec3, Vec3)>>,
     booms: Vec<(Vec3, f64)>,
     shard: Option<ModelId>,
-    gib_models: Option<Vec<ModelId>>,
+    /// The game's gib models: (name stem, model).
+    gib_models: Option<Rc<[(String, ModelId)]>>,
+    /// Head model per corpse model index.
+    heads: HashMap<usize, Option<ModelId>>,
+    /// Inline brush entities this frame.
+    movers: Vec<Mover>,
+    /// Fast projectiles last frame: (origin, velocity).
+    missiles: Vec<(Vec3, Vec3)>,
+    /// Recent muzzle flashes: (eye, or None for the player's view; time; entity).
+    flashes: Vec<(Option<Vec3>, f64, usize)>,
     rng: Option<Rng>,
     acc: f32,
     last_time: f64,
@@ -125,6 +161,7 @@ pub struct Frame<'a> {
     pub r: &'a mut Renderer,
     pub view: Vec3,
     pub gravity: f32,
+    pub set: Settings,
 }
 
 impl Debris {
@@ -150,7 +187,7 @@ impl Debris {
             }
             return;
         }
-        let Frame { cl, lv, fs, r, view, gravity } = f;
+        let Frame { cl, lv, fs, r, view, gravity, set } = f;
         if self.cm.is_none() {
             let Some(bsp) = lv.bsp.as_ref() else { return };
             self.cm = Some(Rc::new(CollisionModel::from_bsp(bsp)));
@@ -163,10 +200,19 @@ impl Debris {
         if cl.debris_owned.len() < cl.entities.len() {
             cl.debris_owned.resize(cl.entities.len(), false);
         }
+        if !set.ragdolls {
+            for c in self.corpses.drain(..) {
+                cl.debris_owned[c.ent] = false;
+            }
+        }
         self.release(cl);
-        self.take_over(cl, lv, fs, time);
-        self.brush_breaks(cl, lv, fs, r);
-        self.impacts(cl, view, time);
+        self.take_over(cl, lv, fs, time, &set);
+        self.update_movers(cl, set.movers);
+        if set.shrapnel {
+            self.brush_breaks(cl, lv, fs, r);
+        }
+        self.impacts(cl, view, time, &set);
+        self.track_shooters(cl, lv, time);
         self.gib_pending(cl, lv, fs, r, time);
         self.simulate(cl, dt, gravity);
     }
@@ -218,14 +264,15 @@ impl Debris {
 
     fn simulate(&mut self, cl: &mut ClientState, dt: f32, gravity: f32) {
         let Some(cm) = self.cm.clone() else { return };
+        let scene = Scene { cm: &cm, movers: &self.movers };
         self.acc = (self.acc + dt).min(STEP * MAX_STEPS as f32);
         while self.acc >= STEP {
             self.acc -= STEP;
             for c in &mut self.corpses {
-                c.doll.step(gravity, &*cm);
+                c.doll.step(gravity, &scene);
             }
             for b in &mut self.bodies {
-                b.step(gravity, &*cm);
+                b.step(gravity, &scene);
             }
         }
         for (k, b) in self.bodies.iter_mut().enumerate() {

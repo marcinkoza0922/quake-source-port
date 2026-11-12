@@ -60,6 +60,11 @@ impl Body {
         self.still = 0.0;
     }
 
+    pub fn wake(&mut self) {
+        self.asleep = false;
+        self.still = 0.0;
+    }
+
     pub fn step(&mut self, gravity: f32, cm: &dyn Collide) {
         self.life -= STEP;
         if self.asleep {

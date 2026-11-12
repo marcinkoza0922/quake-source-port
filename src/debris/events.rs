@@ -28,7 +28,7 @@ fn segment_dist(a: Vec3, b: Vec3, p: Vec3) -> f32 {
 
 impl Debris {
     /// Starts simulating corpses that finished dying and new gibs.
-    pub(super) fn take_over(&mut self, cl: &mut ClientState, lv: &Level, fs: &qcore::fs::Fs, time: f64) {
+    pub(super) fn take_over(&mut self, cl: &mut ClientState, lv: &Level, fs: &qcore::fs::Fs, time: f64, set: &Settings) {
         let Some(cm) = self.cm.clone() else { return };
         let mut gibs = self.bodies.iter().filter(|b| b.ent.is_some()).count();
         for k in 0..cl.visedicts.len() {
@@ -52,6 +52,9 @@ impl Debris {
             let held = time - tr.since;
             let e = &cl.entities[i];
             if info.gib {
+                if !set.gibs {
+                    continue;
+                }
                 // wait for a second update so the throw velocity is known
                 if gibs >= MAX_GIBS || (e.msg_origins[0] == e.msg_origins[1] && held < 0.3) {
                     continue;
@@ -71,8 +74,8 @@ impl Debris {
                 cl.debris_owned[i] = true;
                 continue;
             }
-            let ready = (info.is_last(frame) && held >= HOLD_FINAL) || held >= HOLD_ANY;
-            if !ready || i <= cl.maxclients || self.corpses.len() >= MAX_RAGDOLLS {
+            let ready = set.at_death || (info.is_last(frame) && held >= HOLD_FINAL) || held >= HOLD_ANY;
+            if !set.ragdolls || !ready || i <= cl.maxclients || self.corpses.len() >= set.max_ragdolls {
                 continue;
             }
             let rig = self.rigs.entry((model, frame)).or_insert_with(|| Rig::build(&info.mdl, frame as usize).map(Rc::new));
@@ -81,7 +84,7 @@ impl Debris {
             let mut doll = Ragdoll::new(rig, Vec3::from(e.origin), e.angles, vel, &*cm);
             for &(p, t) in &self.booms {
                 if time - t < BOOM_MEMORY {
-                    doll.blast(p, 220.0, 450.0);
+                    doll.blast(p, 220.0, 450.0 * set.force);
                 }
             }
             let colormap = (e.colormap > 0 && (e.colormap as usize) <= cl.scores.len()).then(|| {
@@ -179,84 +182,45 @@ impl Debris {
 
     /// Bullets and nails nudge what they pass through; explosions fling
     /// everything nearby and gib ragdolls they land on.
-    pub(super) fn impacts(&mut self, cl: &ClientState, view: Vec3, time: f64) {
+    pub(super) fn impacts(&mut self, cl: &ClientState, view: Vec3, time: f64, set: &Settings) {
+        let force = set.force;
         let mut rng = self.rng.take().unwrap_or(Rng(0x9e37_79b9));
         for &(p, boom) in &cl.shot_impacts {
             let p = Vec3::from(p);
             if boom {
                 self.booms.push((p, time));
                 for c in &mut self.corpses {
-                    if c.doll.gap(p) < DIRECT_HIT {
+                    if set.gibs && c.doll.gap(p) < DIRECT_HIT {
                         c.gib.get_or_insert((time + GIB_DELAY, p));
                     } else {
-                        c.doll.blast(p, 220.0, 520.0);
+                        c.doll.blast(p, 220.0, 520.0 * force);
                     }
                 }
                 for b in &mut self.bodies {
                     let (dir, d) = (b.pos - p).normalize_len();
                     if d < 200.0 {
-                        b.push((dir + Vec3::new(0.0, 0.0, 0.5)) * ((1.0 - d / 200.0) * 500.0), &mut rng);
+                        b.push((dir + Vec3::new(0.0, 0.0, 0.5)) * ((1.0 - d / 200.0) * 500.0 * force), &mut rng);
                     }
                 }
                 continue;
             }
-            let dir = (p - view).normalize();
+            let from = self.shot_origin(view, p);
+            let dir = (p - from).normalize();
             for c in &mut self.corpses {
-                if let Some((gap, i)) = c.doll.ray_gap(view, p)
+                if let Some((gap, i)) = c.doll.ray_gap(from, p)
                     && gap < 0.0
                 {
                     let at = c.doll.pos[i];
-                    c.doll.push(at, 20.0, dir * 260.0 + Vec3::new(0.0, 0.0, 40.0));
+                    c.doll.push(at, 20.0, (dir * 260.0 + Vec3::new(0.0, 0.0, 40.0)) * force);
                 }
             }
             for b in &mut self.bodies {
-                if segment_dist(view, p, b.pos) < b.radius + 6.0 {
-                    b.push(dir * 200.0 + Vec3::new(0.0, 0.0, 60.0), &mut rng);
+                if segment_dist(from, p, b.pos) < b.radius + 6.0 {
+                    b.push((dir * 200.0 + Vec3::new(0.0, 0.0, 60.0)) * force, &mut rng);
                 }
             }
         }
         self.rng = Some(rng);
         self.booms.retain(|b| time - b.1 < BOOM_MEMORY);
-    }
-
-    /// Gibs ragdolls hit directly by an explosion (unless the server gibbed
-    /// them meanwhile, which releases the ragdoll first).
-    pub(super) fn gib_pending(&mut self, cl: &mut ClientState, lv: &mut Level, fs: &qcore::fs::Fs, r: &mut Renderer, time: f64) {
-        if !self.corpses.iter().any(|c| c.gib.is_some_and(|g| g.0 <= time)) {
-            return;
-        }
-        let gib_ids: Vec<ModelId> = self
-            .gib_models
-            .get_or_insert_with(|| {
-                ["progs/gib1.mdl", "progs/gib2.mdl", "progs/gib3.mdl"].iter().filter_map(|n| lv.named(fs, r, n)).map(|m| m.id).collect()
-            })
-            .clone();
-        let mut rng = self.rng.take().unwrap_or(Rng(0x9e37_79b9));
-        let mut k = 0;
-        while k < self.corpses.len() {
-            let Some((_, center)) = self.corpses[k].gib.filter(|g| g.0 <= time) else {
-                k += 1;
-                continue;
-            };
-            let c = self.corpses.swap_remove(k);
-            let frame = cl.entities[c.ent].frame;
-            self.gibbed.insert(c.ent, (c.model, frame));
-            let mid = c.doll.pos.iter().fold(Vec3::ZERO, |s, p| s + *p) / c.doll.pos.len() as f32;
-            cl.events.push(qclient::ClientEvent::TempSound { name: "player/udeath.wav", origin: mid.to_array() });
-            for (n, p) in c.doll.pos.iter().enumerate() {
-                cl.run_particle_effect(p.to_array(), [0.0; 3], BLOOD, 24);
-                if gib_ids.is_empty() || n >= 6 {
-                    continue;
-                }
-                let out = (*p - center).normalize() + Vec3::new(rng.signed(), rng.signed(), rng.signed()) * 0.5;
-                let vel = out.normalize() * (200.0 + rng.unit() * 250.0) + Vec3::new(0.0, 0.0, 200.0 + rng.unit() * 150.0);
-                let mut b = Body::new(gib_ids[n % gib_ids.len()], *p, vel, Quat::IDENTITY, 3.0);
-                b.life = 10.0 + rng.unit() * 10.0;
-                b.trail = true;
-                b.random_spin(&mut rng, 10.0);
-                self.bodies.push(b);
-            }
-        }
-        self.rng = Some(rng);
     }
 }

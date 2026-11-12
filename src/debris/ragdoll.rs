@@ -113,6 +113,17 @@ impl Ragdoll {
         (0..self.pos.len()).map(|i| (self.pos[i] - p).length() - self.radius(i)).fold(f32::MAX, f32::min)
     }
 
+    pub fn radius_of(&self, i: usize) -> f32 {
+        self.radii[i]
+    }
+
+    /// Moves one particle without giving it velocity (carried by a mover).
+    pub fn translate(&mut self, i: usize, d: Vec3) {
+        self.pos[i] += d;
+        self.prev[i] += d;
+        self.packed = None;
+    }
+
     pub fn wake(&mut self) {
         self.asleep = false;
         self.still = 0.0;
