@@ -1142,6 +1142,7 @@ impl Bot<'_> {
                     let g = &self.goals[i];
                     let to = match (g.kind, self.goal_node(g)) {
                         (Kind::Monster, _) => self.monster_spot(g.ent),
+                        (Kind::Button, None) => self.touch_spot(g.ent).unwrap_or_else(|| self.center(g.ent)),
                         (_, Some(n)) => self.nav.pos[n as usize],
                         (_, None) => self.center(g.ent),
                     };
@@ -1175,7 +1176,7 @@ impl Bot<'_> {
         active
     }
 
-    /// Edges through closed doors the bot can't open by walking into them:
+    /// Edges (walk, jump, lift rides) through closed doors the bot can't open by walking into them:
     /// key doors while it lacks the key, and doors opened only by a button or
     /// trigger (the master door has a targetname and no health) that a
     /// pending goal still fires, directly or through relays. The key, button
@@ -1234,7 +1235,7 @@ impl Bot<'_> {
             for n in self.nav.around(lo, hi, 64.0, zc, dz) {
                 let pa = self.nav.pos[n as usize];
                 for ed in &self.nav.edges[n as usize] {
-                    if !matches!(ed.kind, EdgeKind::Walk | EdgeKind::Jump) {
+                    if ed.kind == EdgeKind::Teleport {
                         continue;
                     }
                     let pb = self.nav.pos[ed.to as usize];
@@ -1267,6 +1268,35 @@ impl Bot<'_> {
         let mut ns = self.nav.around(here - r, here + r, 0.0, here.z, 2048.0);
         ns.sort_by(|&a, &b| (self.nav.pos[a as usize] - here).length_sq().total_cmp(&(self.nav.pos[b as usize] - here).length_sq()));
         ns.into_iter().take(64).find(|&n| ok(n))
+    }
+
+    /// Where a player stands pressing a brush entity off the graph (a button
+    /// on a high wall): just off one of its faces, body overlapping it in
+    /// height, standing on a floor if any face has one.
+    fn touch_spot(&self, e: u32) -> Option<Vec3> {
+        let vm = self.vm();
+        let (lo, hi) = (v(vm.ent_v(e, self.o.absmin)), v(vm.ent_v(e, self.o.absmax)));
+        let c = (lo + hi) * 0.5;
+        let sides = [
+            Vec3::new(lo.x - 17.0, c.y, c.z),
+            Vec3::new(hi.x + 17.0, c.y, c.z),
+            Vec3::new(c.x, lo.y - 17.0, c.z),
+            Vec3::new(c.x, hi.y + 17.0, c.z),
+        ];
+        let mut floating = None;
+        for p in sides {
+            if !self.fits(p) {
+                continue;
+            }
+            // Lowest origin whose body still reaches the button (body -24..+32).
+            let tr = self.geo.trace(1, p, Vec3::new(p.x, p.y, lo.z - 31.0));
+            let ground = tr.fraction < 1.0 && !tr.startsolid;
+            if ground && self.fits(tr.endpos) {
+                return Some(tr.endpos);
+            }
+            floating.get_or_insert(p);
+        }
+        floating
     }
 
     /// A nav node with a view of the monster, else a spot 72 units from it.
