@@ -107,7 +107,11 @@ fn crosses(p: Vec3, q: Vec3, a: Vec3, b: Vec3) -> bool {
     let side = |o: Vec3, s: Vec3, t: Vec3| (s.x - o.x) * (t.y - o.y) - (s.y - o.y) * (t.x - o.x);
     let (d1, d2) = (side(a, b, p), side(a, b, q));
     let (d3, d4) = (side(p, q, a), side(p, q, b));
-    d1 * d2 < 0.0 && d3 * d4 < 0.0
+    // Fine nodes can lie exactly on the barrier. Include endpoint contact
+    // so splitting a crossing into two edges cannot bypass a block hint.
+    d1 * d2 <= 0.0 && d3 * d4 <= 0.0
+        && p.x.min(q.x) <= a.x.max(b.x) && a.x.min(b.x) <= p.x.max(q.x)
+        && p.y.min(q.y) <= a.y.max(b.y) && a.y.min(b.y) <= p.y.max(q.y)
 }
 
 /// Remove the edges crossing the wall a..b; returns how many.
@@ -124,6 +128,21 @@ fn block(nav: &mut Nav, a: Vec3, b: Vec3) -> usize {
         nav.edges[n as usize] = keep;
     }
     cut
+}
+
+/// Preserve explicit map barriers when runtime refinement adds new edges.
+pub fn reapply_blocks(nav: &mut Nav, hints: &[Line]) {
+    for h in hints {
+        if let Hint::Block { a, b } = h.hint { block(nav, a, b); }
+    }
+}
+
+pub fn allows_motion(positions: &[Vec3], hints: &[Line]) -> bool {
+    !hints.iter().any(|h| {
+        let Hint::Block { a, b } = h.hint else { return false; };
+        positions.windows(2).any(|p| (p[0].z - (a.z + b.z) * 0.5).abs() <= (a.z - b.z).abs() * 0.5 + 40.0
+            && crosses(p[0], p[1], a, b))
+    })
 }
 
 /// Apply hints to a freshly built graph; returns the lines that failed.
@@ -195,6 +214,22 @@ mod tests {
         let v = |x, y| Vec3::new(x, y, 0.0);
         assert!(crosses(v(0.0, -1.0), v(0.0, 1.0), v(-1.0, 0.0), v(1.0, 0.0)));
         assert!(!crosses(v(0.0, 1.0), v(0.0, 2.0), v(-1.0, 0.0), v(1.0, 0.0)));
+    }
+
+    #[test]
+    fn runtime_edges_and_probes_respect_hint_barriers() {
+        let hints = parse("block 0 -64 24 -> 0 64 24").unwrap();
+        let from = Vec3::new(-16.0, 0.0, 24.0);
+        let to = Vec3::new(16.0, 0.0, 24.0);
+        let mut nav = Nav::empty(from, vec![]);
+        let a = nav.add(from);
+        let b = nav.add(to);
+        nav.link(a, b, EdgeKind::Walk, 32.0);
+        reapply_blocks(&mut nav, &hints);
+        assert!(nav.edge(a, b).is_none());
+        assert!(!allows_motion(&[from, to], &hints));
+        assert!(!allows_motion(&[from, Vec3::new(0.0, 0.0, 24.0), to], &hints));
+        assert!(allows_motion(&[from + Vec3::new(0.0, 0.0, 128.0), to + Vec3::new(0.0, 0.0, 128.0)], &hints));
     }
 
     #[test]

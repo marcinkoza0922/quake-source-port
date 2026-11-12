@@ -446,7 +446,7 @@ mod tests {
         let from = qcore::math::Vec3::from_array(level.vm.ent_v(1, sv.core.sv.fields.origin));
         let mut probe = movement::Probe::snapshot(&sv, 270.0).unwrap();
         for d in [qcore::math::Vec3::new(104.0, 0.0, 0.0), qcore::math::Vec3::new(0.0, 104.0, 40.0)] {
-            let _ = probe.jump(from, from + d, &[]);
+            let _ = probe.recover(from, from + d, &[]);
         }
         assert_eq!(sv.time(), time);
         assert_eq!(sv.save_game(), before, "probe altered live QC globals or edicts");
@@ -464,9 +464,29 @@ mod tests {
         let r = bot::run(fs, "e3m7", &opt);
         assert!(r.errors.is_empty(), "{:?}", r.errors);
         assert!(r.exited);
-        assert!(r.kills >= 40 && r.secrets >= 3);
-        assert!(r.noclip_uses <= 7, "{} navigation assists", r.noclip_uses);
+        assert!(r.kills >= 40);
+        assert_eq!(r.secrets, r.total_secrets, "all four secrets should be collected");
+        assert!(r.noclip_uses - r.monster_noclips <= 5, "navigation assists regressed");
+        assert!(r.noclip_uses <= 8, "{} total assists", r.noclip_uses);
         assert!(r.jump_links > 0 && r.jumps_completed > 0, "no verified jump was executed");
+    }
+
+    #[test]
+    fn failed_approaches_and_trigger_contacts_recover_coverage() {
+        let base = std::env::var_os("QUAKE_BASEDIR").map_or_else(
+            || Path::new(env!("CARGO_MANIFEST_DIR")).join("../../vkQuake directory with maps"), PathBuf::from,
+        );
+        let fs = mount(&base, "id1");
+        if fs.open("progs.dat").is_none() { return; }
+        let opt = bot::Options { skill: 3, max_time: None, verbose: false, routes: None, fresh: true, seed: 0, hints: None };
+        for (map, kills, secrets) in [("e1m3", 65, 3), ("e3m3", 47, 1), ("e4m2", 40, 4), ("e1m6", 30, 4), ("e3m6", 61, 2)] {
+            if fs.open(&format!("maps/{map}.bsp")).is_none() { continue; }
+            let r = bot::run(mount(&base, "id1"), map, &opt);
+            assert!(r.errors.is_empty(), "{map}: {:?}", r.errors);
+            assert!(r.exited, "{map}: exit lost");
+            assert!(r.kills >= kills && r.secrets >= secrets,
+                "{map}: kills {}/{}, secrets {}/{}", r.kills, r.total_monsters, r.secrets, r.total_secrets);
+        }
     }
 
 }

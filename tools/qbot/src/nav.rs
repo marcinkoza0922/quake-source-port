@@ -1,8 +1,7 @@
-//! Navigation graph: flood fill over a 32-unit XY grid from the spawn point,
-//! using world-only hull 1 traces (brush entities such as doors and lifts are
-//! ignored, so closed doors count as open and lift shafts as drops). Lifts
-//! and teleporters are added afterwards as extra nodes with `Ride` and
-//! `Teleport` edges (see `bot::add_movers`).
+//! Navigation graph: a coarse 32-unit XY flood using player-hull traces
+//! through world and static brush geometry, with bounded local refinement.
+//! Movers and teleporter connections are added by `bot::add_movers`.
+
 
 use qcore::math::Vec3;
 use qworld::hull::{CollisionModel, Trace};
@@ -71,6 +70,9 @@ pub struct Nav {
     cells: HashMap<(i32, i32), Vec<u32>, FxBuild>,
     origin: Vec3,
     forbid: Vec<Forbid>,
+    refined: HashSet<(i32, i32, i32), FxBuild>,
+    refined_nodes: usize,
+    fine: HashSet<u32, FxBuild>,
 }
 
 /// A box the bot must not enter (level exits).
@@ -238,19 +240,44 @@ pub fn ground(cm: &Geo, p: Vec3, max: f32) -> Option<Vec3> {
     Some(tr.endpos)
 }
 
+// Fine patches must not create additional paths over frozen mover floors.
+fn static_ground(cm: &Geo, p: Vec3, max: f32) -> Option<Vec3> {
+    let tr = cm.trace(1, p, p - Vec3::new(0.0, 0.0, max));
+    (!tr.startsolid && !tr.allsolid && tr.fraction < 1.0 && tr.plane_normal.z >= 0.7).then_some(tr.endpos)
+}
+
 pub fn clear(cm: &Geo, a: Vec3, b: Vec3) -> bool {
     let tr = cm.trace(1, a, b);
     !tr.startsolid && !tr.allsolid && tr.fraction >= 1.0
 }
 
+/// Conservative short walking connection, checking clearance and floor
+/// every four units so a fine sample cannot invent a walk over a pit.
+fn supported_walk(cm: &Geo, from: Vec3, to: Vec3) -> bool {
+    let steps = ((to - from).length() / 4.0).ceil().max(1.0) as usize;
+    let mut previous = from;
+    for i in 1..=steps {
+        let t = i as f32 / steps as f32;
+        let xy = from + (to - from) * t;
+        let rise = if clear(cm, previous, previous + Vec3::new(0.0, 0.0, STEP)) { STEP } else { 0.5 };
+        let up = previous + Vec3::new(0.0, 0.0, rise);
+        let next = Vec3::new(xy.x, xy.y, up.z);
+        if !clear(cm, previous, up) || !clear(cm, up, next) { return false; }
+        let Some(g) = static_ground(cm, next, rise + STEP) else { return false; };
+        if hazard(cm, g) || (g.z - previous.z).abs() > STEP + 0.5 { return false; }
+        previous = g;
+    }
+    (previous.z - to.z).abs() < 1.0
+}
+
 impl Nav {
     /// A graph with no nodes (replaying a cached route needs none).
     pub fn empty(start: Vec3, forbid: Vec<Forbid>) -> Nav {
-        Nav { pos: Vec::new(), edges: Vec::new(), cells: HashMap::default(), origin: start, forbid }
+        Nav { pos: Vec::new(), edges: Vec::new(), cells: HashMap::default(), origin: start, forbid, refined: HashSet::default(), refined_nodes: 0, fine: HashSet::default() }
     }
 
     pub fn build(cm: &Geo, start: Vec3, forbid: Vec<Forbid>) -> Nav {
-        let mut nav = Nav { pos: Vec::new(), edges: Vec::new(), cells: HashMap::default(), origin: start, forbid };
+        let mut nav = Nav { pos: Vec::new(), edges: Vec::new(), cells: HashMap::default(), origin: start, forbid, refined: HashSet::default(), refined_nodes: 0, fine: HashSet::default() };
         nav.extend(cm, start);
         nav
     }
@@ -329,6 +356,58 @@ impl Nav {
         }
         true
     }
+
+    /// Refine only a requested 192-unit patch on an 8-unit lattice. Regions
+    /// are attempted once per graph; all patches together add at most 8192
+    /// nodes. New walk links require support throughout, never bridge gaps.
+    pub fn refine(&mut self, cm: &Geo, center: Vec3) -> bool {
+        let key = ((center.x / 64.0).floor() as i32, (center.y / 64.0).floor() as i32,
+            (center.z / 64.0).floor() as i32);
+        if self.refined_nodes >= 8192 || !self.refined.insert(key) { return false; }
+        let first = self.pos.len();
+        let mut local = Vec::new();
+        for x in -12..=12 {
+            for y in -12..=12 {
+                if self.refined_nodes >= 8192 || self.pos.len() >= MAX_NODES { break; }
+                let p = Vec3::new((center.x / 8.0).round() * 8.0 + x as f32 * 8.0,
+                    (center.y / 8.0).round() * 8.0 + y as f32 * 8.0, center.z + STEP);
+                let Some(g) = static_ground(cm, p, 2.0 * STEP) else { continue; };
+                if hazard(cm, g) || self.forbid.iter().any(|f| f.contains(g)) { continue; }
+                let n = match self.cells.get(&self.cell(g)).into_iter().flatten().copied().find(|&n| (self.pos[n as usize] - g).length() < 1.0) {
+                    Some(n) => n,
+                    None => { self.refined_nodes += 1; let n = self.add(g); self.fine.insert(n); n }
+                };
+                local.push(n);
+            }
+        }
+        for a in local {
+            let p = self.pos[a as usize];
+            for b in self.around(p, p, 25.0, p.z, STEP) {
+                if a == b || ((a as usize) < first && (b as usize) < first) { continue; }
+                let q = self.pos[b as usize];
+                if (q - p).length() > 32.0 { continue; }
+                for (u, v) in [(a, b), (b, a)] {
+                    if self.edge(u, v).is_none()
+                        && !(0..=8).any(|i| {
+                            let p = self.pos[u as usize] + (self.pos[v as usize] - self.pos[u as usize]) * (i as f32 / 8.0);
+                            self.forbid.iter().any(|f| f.contains(p))
+                        }) && supported_walk(cm, self.pos[u as usize], self.pos[v as usize]) {
+                        self.link(u, v, EdgeKind::Walk, (q - p).length());
+                    }
+                }
+            }
+        }
+        self.pos.len() > first
+    }
+
+    /// Discard a failed tentative patch while remembering its work budget.
+    pub fn rollback(&mut self, mut checkpoint: Nav) {
+        checkpoint.refined.extend(self.refined.iter().copied());
+        checkpoint.refined_nodes = self.refined_nodes;
+        *self = checkpoint;
+    }
+
+    pub fn is_fine(&self, n: u32) -> bool { self.fine.contains(&n) }
 
     fn cell(&self, p: Vec3) -> (i32, i32) {
         (((p.x - self.origin.x) / GRID).round() as i32, ((p.y - self.origin.y) / GRID).round() as i32)

@@ -101,6 +101,8 @@ enum Kind {
     Monster,
     Button,
     Key,
+    /// Runes that fire progression targets.
+    Pickup,
     /// A brush entity that opens when shot (secret doors).
     Shoot,
     /// trigger_once / trigger_multiple: walk through it (fires the level's
@@ -264,6 +266,7 @@ struct Bot<'a> {
     jump_links: HashMap<(u32, u32), Jump, FxBuild>,
     jump_tried: std::collections::HashSet<(u32, u32), FxBuild>,
     jump_action: Option<JumpAction>,
+    local_recovery_goals: std::collections::HashSet<u32, FxBuild>,
     jump_failed_goals: std::collections::HashSet<u32, FxBuild>,
     /// QC's jump impulse, measured from an ordinary successful jump.
     jump_speed: Option<f32>,
@@ -687,6 +690,7 @@ pub fn run(fs: Fs, map: &str, opt: &Options) -> Report {
             "trigger_once" | "trigger_multiple" if l.vm.ent_f(e, o.solid) as i32 == SOLID_TRIGGER && l.vm.ent_i(e, o.touch) != 0 => Kind::Trigger,
             "func_button" => Kind::Button,
             c if c.starts_with("item_") && c.contains("key") => Kind::Key,
+            "item_sigil" => Kind::Pickup,
             _ if l.vm.ent_f(e, o.solid) as i32 == SOLID_BSP && l.vm.ent_f(e, o.takedamage) != 0.0 && l.vm.ent_f(e, o.health) > 0.0 => Kind::Shoot,
             _ if l.vm.ent_f(e, o.flags) as i32 & FL_MONSTER != 0 => Kind::Monster,
             _ => continue,
@@ -755,6 +759,7 @@ pub fn run(fs: Fs, map: &str, opt: &Options) -> Report {
         jump_links: HashMap::default(),
         jump_tried: Default::default(),
         jump_action: None,
+        local_recovery_goals: Default::default(),
         jump_failed_goals: Default::default(),
         jump_speed: None,
         call: None,
@@ -946,7 +951,7 @@ impl Bot<'_> {
             Kind::Secret => vm.ent_i(e, self.o.touch) == 0 || vm.ent_f(e, self.o.solid) as i32 != SOLID_TRIGGER,
             // Keys spawn SOLID_NOT until PlaceItem runs: taken once placed
             // and not solid again.
-            Kind::Key => g.armed && vm.ent_f(e, self.o.solid) as i32 == SOLID_NOT,
+            Kind::Key | Kind::Pickup => g.armed && vm.ent_f(e, self.o.solid) as i32 == SOLID_NOT,
             Kind::Button => self.o.state.is_some_and(|s| vm.ent_f(e, s) != g.initial_state),
             Kind::Shoot => vm.ent_f(e, self.o.takedamage) == 0.0 || vm.ent_f(e, self.o.health) <= 0.0,
             Kind::Trigger => {
@@ -1030,7 +1035,7 @@ impl Bot<'_> {
         let vm = self.vm();
         let (mins, maxs) = (v(vm.ent_v(g.ent, self.o.absmin)), v(vm.ent_v(g.ent, self.o.absmax)));
         match g.kind {
-            Kind::Secret | Kind::Key | Kind::Trigger => self.nav.inside(mins, maxs),
+            Kind::Secret | Kind::Key | Kind::Pickup | Kind::Trigger => self.nav.inside(mins, maxs),
             Kind::Monster => self.nav.nearest(v(vm.ent_v(g.ent, self.o.origin)), 256.0),
             Kind::Button => self.nav.inside(mins - Vec3::splat(24.0), maxs + Vec3::splat(24.0)),
             // Anywhere in the open within 128 units, shooting it from there.
@@ -1108,7 +1113,9 @@ impl Bot<'_> {
         if self.opt.verbose {
             eprintln!("  t={:.1} goal #{} deferred: {why}", self.sv.time(), g.ent);
         }
-        if g.defers > 3 {
+        // A failed walking/firing approach is not an exhausted monster.
+        // Keep its bounded assist budget available after other goals finish.
+        if g.defers > 3 && (g.kind != Kind::Monster || g.noclips >= 3) {
             self.fail(i, "deferred too often");
         }
         if self.cur == Some(i) {
@@ -1389,7 +1396,7 @@ impl Bot<'_> {
             .collect();
         let mut fires: Vec<(usize, std::collections::HashSet<Vec<u8>>)> = Vec::new();
         for (i, g) in self.goals.iter().enumerate() {
-            if !Self::pending(g) || !matches!(g.kind, Kind::Button | Kind::Trigger | Kind::Shoot | Kind::Secret) {
+            if !Self::pending(g) || !matches!(g.kind, Kind::Button | Kind::Trigger | Kind::Shoot | Kind::Secret | Kind::Pickup) {
                 continue;
             }
             let t = ent_str(vm, g.ent, self.o.target);
@@ -1519,6 +1526,7 @@ impl Bot<'_> {
         let g = &self.goals[i];
         let to = match (g.kind, self.goal_node(g)) {
             (Kind::Monster, _) => self.monster_spot(g.ent),
+            (Kind::Secret | Kind::Key | Kind::Pickup | Kind::Trigger | Kind::Exit, node) => self.trigger_spot(g.ent, node.map(|n| self.nav.pos[n as usize])).unwrap_or_else(|| self.center(g.ent)),
             (Kind::Button, None) => self.touch_spot(g.ent).unwrap_or_else(|| self.center(g.ent)),
             (_, Some(n)) => self.nav.pos[n as usize],
             (_, None) => self.center(g.ent),
@@ -1528,6 +1536,33 @@ impl Bot<'_> {
             eprintln!("    near goal:{}", self.ents_near(to));
         }
         self.noclip(to, "unreachable");
+    }
+
+    /// A touch goal needs actual hull overlap after fitting around current
+    /// doors and bodies. A generic nearest free node can land outside it.
+    fn trigger_spot(&self, e: u32, preferred: Option<Vec3>) -> Option<Vec3> {
+        let vm = self.vm();
+        let lo = v(vm.ent_v(e, self.o.absmin));
+        let hi = v(vm.ent_v(e, self.o.absmax));
+        let c = (lo + hi) * 0.5;
+        let inside = |p: Vec3| p.x + 16.0 > lo.x && p.x - 16.0 < hi.x
+            && p.y + 16.0 > lo.y && p.y - 16.0 < hi.y
+            && p.z + 32.0 > lo.z && p.z - 24.0 < hi.z;
+        if let Some(p) = preferred.filter(|&p| inside(p) && self.fits(p)) { return Some(p); }
+        let mut candidates = self.nav.around(lo, hi, 16.0, c.z, (hi.z - lo.z) * 0.5 + 32.0)
+            .into_iter().map(|n| self.nav.pos[n as usize]).filter(|&p| inside(p)).collect::<Vec<_>>();
+        for x in [c.x, lo.x + 1.0, hi.x - 1.0, lo.x - 15.0, hi.x + 15.0] {
+            for y in [c.y, lo.y + 1.0, hi.y - 1.0, lo.y - 15.0, hi.y + 15.0] {
+                for z in [c.z, lo.z - 31.0, hi.z + 23.0] {
+                    let p = Vec3::new(x, y, z);
+                    if let Some(g) = nav::ground(&self.geo, p + Vec3::new(0.0, 0.0, 24.0), 128.0)
+                        && inside(g) { candidates.push(g); }
+                    if inside(p) { candidates.push(p); }
+                }
+            }
+        }
+        candidates.sort_by(|a, b| (*a - c).length_sq().total_cmp(&(*b - c).length_sq()));
+        candidates.into_iter().find(|&p| self.fits(p))
     }
 
     /// Where a player stands pressing a brush entity off the graph (a button
@@ -1565,10 +1600,24 @@ impl Bot<'_> {
         let r = Vec3::splat(384.0);
         let mut ns = self.nav.around(c - r, c + r, 0.0, c.z, 384.0);
         ns.sort_by(|&a, &b| (self.nav.pos[a as usize] - c).length_sq().total_cmp(&(self.nav.pos[b as usize] - c).length_sq()));
-        for &n in ns.iter().take(64) {
+        for &n in &ns {
             let p = self.nav.pos[n as usize];
-            if self.visible(p + Vec3::new(0.0, 0.0, 22.0), c) {
+            let eye = p + Vec3::new(0.0, 0.0, 22.0);
+            if self.fits(p) && self.clear_shot(eye, c, e) {
                 return p;
+            }
+        }
+        // A moving monster may have entered a region absent from the graph.
+        // Find a supported, unobstructed firing position near its live origin
+        // instead of repeatedly assisting to a distant node behind a door.
+        for radius in [72.0, 128.0, 192.0, 256.0] {
+            for i in 0..16 {
+                let angle = i as f32 * std::f32::consts::TAU / 16.0;
+                let point = c + Vec3::new(angle.cos() * radius, angle.sin() * radius, 32.0);
+                if let Some(p) = nav::ground(&self.geo, point, 256.0)
+                    && self.fits(p) && self.clear_shot(p + Vec3::new(0.0, 0.0, 22.0), c, e) {
+                    return p;
+                }
             }
         }
         let here = self.me_origin();
@@ -1647,7 +1696,7 @@ impl Bot<'_> {
     /// Last resort: jump straight to `to` (a soft failure in the report).
     fn noclip(&mut self, to: Vec3, why: &str) {
         let t = self.sv.time();
-        if let Some(i) = self.cur {
+        if why != "off the nav graph" && let Some(i) = self.cur {
             self.goals[i].noclips += 1;
             if self.goals[i].noclips > 3 {
                 self.fail(i, "given up after 3 noclips");
@@ -1717,7 +1766,7 @@ impl Bot<'_> {
                 break;
             }
             for i in 0..self.goals.len() {
-                if self.goals[i].kind == Kind::Key && !self.goals[i].armed && self.vm().ent_f(self.goals[i].ent, self.o.solid) as i32 == SOLID_TRIGGER {
+                if matches!(self.goals[i].kind, Kind::Key | Kind::Pickup) && !self.goals[i].armed && self.vm().ent_f(self.goals[i].ent, self.o.solid) as i32 == SOLID_TRIGGER {
                     self.goals[i].armed = true;
                 }
                 if !self.goals[i].done && self.goal_done(&self.goals[i]) {
@@ -1895,22 +1944,39 @@ impl Bot<'_> {
         if weapon != self.weapon { self.weapon = weapon; self.impulses.push(weapon); }
     }
 
+    fn refine_local(&mut self, center: Vec3) -> bool {
+        let changed = self.nav.refine(&self.geo, center);
+        if changed {
+            hints::reapply_blocks(&mut self.nav, &self.hints);
+            self.rep.nav_nodes = self.rep.nav_nodes.max(self.nav.pos.len());
+        }
+        changed
+    }
+
     /// Last walking recovery before an assist: bridge a nearby graph gap only
     /// after the real movement code lands the player on its far side.
     fn jump_route(&mut self, goal: usize) -> Option<Vec<u32>> {
         if self.jump_failed_goals.contains(&self.goals[goal].ent) { return None; }
-        let checkpoint = self.goal_node(&self.goals[goal]).is_none().then(|| self.nav.clone());
+        let checkpoint = self.nav.clone();
         let route = self.jump_route_inner(goal);
-        if route.is_none() && let Some(nav) = checkpoint {
-            let count = nav.pos.len() as u32;
-            self.nav = nav;
+        if route.is_none() {
+            let count = checkpoint.pos.len() as u32;
+            self.nav.rollback(checkpoint);
             self.jump_tried.retain(|&(a, b)| a < count && b < count);
         }
         route
     }
 
     fn jump_route_inner(&mut self, goal: usize) -> Option<Vec<u32>> {
-        let jump_speed = self.jump_speed?;
+        let here = self.me_origin();
+        let goal_center = self.center(self.goals[goal].ent);
+        // A reachable goal that failed its interaction needs the existing
+        // fallback, not more samples or another identical walking route.
+        if let (Some(src), Some(dst)) = (self.nav.nearest_clear(&self.geo, here, 96.0), self.goal_node(&self.goals[goal])) {
+            let blocked: Blocked = self.blocked.union(&self.gates().edges).copied().collect();
+            if self.nav.dijkstra(src, &blocked, self.opt.seed).0[dst as usize].is_finite() { return None; }
+        }
+        let refined = self.refine_local(here) | self.refine_local(goal_center);
         let vm = self.vm();
         let fields = &self.sv.core.sv.fields;
         if v(vm.ent_v(self.me, fields.mins)) != qworld::hull::HULL_MINS[1]
@@ -1927,8 +1993,10 @@ impl Bot<'_> {
         }
         let dst = self.goal_node(&self.goals[goal])?;
         let blocked: Blocked = self.blocked.union(&self.gates().edges).copied().collect();
-        let (dist, _) = self.nav.dijkstra(src, &blocked, self.opt.seed);
-        if dist[dst as usize].is_finite() { return None; }
+        let (dist, prev) = self.nav.dijkstra(src, &blocked, self.opt.seed);
+        if dist[dst as usize].is_finite() {
+            return refined.then(|| path_to(&prev, dst));
+        }
         let basin = self.nav.reaching(dst, &blocked);
         let mut candidates = Vec::new();
         for (a, &d) in dist.iter().enumerate() {
@@ -1946,11 +2014,25 @@ impl Bot<'_> {
         }
         candidates.sort_by(|a, b| a.0.total_cmp(&b.0).then_with(|| (a.1, a.2).cmp(&(b.1, b.2))));
         if candidates.is_empty() { return None; }
-        let mut probe = Probe::snapshot(&self.sv, jump_speed)?;
+        // The missing passage may be far from both endpoints of the overall
+        // route. Refine the best two reachable/basin boundary pairs as well.
+        let mut added = false;
+        for &(_, a, b) in candidates.iter().take(2) {
+            let center = (self.nav.pos[a as usize] + self.nav.pos[b as usize]) * 0.5;
+            added |= self.refine_local(center);
+        }
+        if added {
+            let refined_blocked: Blocked = self.blocked.union(&self.gates().edges).copied().collect();
+            let (cost, prev) = self.nav.dijkstra(src, &refined_blocked, self.opt.seed);
+            if cost[dst as usize].is_finite() { return Some(path_to(&prev, dst)); }
+        }
+        let blocked: Blocked = self.blocked.union(&self.gates().edges).copied().collect();
+        let mut probe = Probe::snapshot(&self.sv, self.jump_speed?)?;
         for (_, a, b) in candidates.into_iter().take(24) {
             self.jump_tried.insert((a, b));
             let (from, to) = (self.nav.pos[a as usize], self.nav.pos[b as usize]);
-            if let Some(jump) = probe.jump(from, to, &self.forbid) {
+            if let Some(jump) = probe.jump(from, to, &self.forbid).or_else(|| probe.recover(from, to, &self.forbid))
+                && hints::allows_motion(&jump.positions, &self.hints) {
                 let cost = jump.moves.len() as f32 * 16.0 + 64.0;
                 self.nav.link(a, b, EdgeKind::Jump, cost);
                 self.jump_links.insert((a, b), jump);
@@ -1966,6 +2048,43 @@ impl Bot<'_> {
             }
         }
         None
+    }
+
+    /// Try a verified short maneuver to the current waypoint before
+    /// blocking it. Use the same alignment, revalidation and replay checks
+    /// as gap recovery, and never bypass a gate or special mover edge.
+    fn try_local_recovery(&mut self, here: Vec3, t: f64) -> bool {
+        let Some(i) = self.cur else { return false; };
+        let goal = self.goals[i].ent;
+        if self.local_recovery_goals.contains(&goal) { return false; }
+        let Some(&dst) = self.path.get(self.step) else { return false; };
+        if self.step == 0 || self.jump_failed_goals.contains(&goal) { return false; }
+        let edge = (self.path[self.step - 1], dst);
+        if self.gates().edges.contains(&edge) || self.jump_tried.contains(&edge)
+            || self.nav.edge(edge.0, edge.1).is_none_or(|e| !matches!(e.kind, EdgeKind::Walk | EdgeKind::Jump)) {
+            return false;
+        }
+        let to = self.nav.pos[dst as usize];
+        let velocity = v(self.vm().ent_v(self.me, self.sv.core.sv.fields.velocity));
+        if velocity.x.hypot(velocity.y) > 16.0 || nav::clear(&self.geo, here, to) { return false; }
+        if (to - here).length() > 192.0 || self.vm().ent_f(self.me, self.o.waterlevel) >= 2.0 { return false; }
+        let fields = &self.sv.core.sv.fields;
+        if v(self.vm().ent_v(self.me, fields.mins)) != qworld::hull::HULL_MINS[1]
+            || v(self.vm().ent_v(self.me, fields.maxs)) != qworld::hull::HULL_MAXS[1] { return false; }
+        let Some(mut probe) = self.jump_speed.and_then(|speed| Probe::snapshot(&self.sv, speed)) else { return false; };
+        self.jump_tried.insert(edge);
+        self.local_recovery_goals.insert(goal);
+        let Some(plan) = probe.detour(here, to, &self.forbid) else { return false; };
+        if !hints::allows_motion(&plan.positions, &self.hints) { return false; }
+        let src = self.nav.add(here);
+        self.nav.link(src, dst, EdgeKind::Jump, plan.moves.len() as f32 * 16.0);
+        self.jump_links.insert((src, dst), plan);
+        self.rep.jump_links += 1;
+        self.path = std::iter::once(src).chain(self.path[self.step..].iter().copied()).collect();
+        self.step = 1;
+        self.best_time = t;
+        self.jump_action = Some(JumpAction { edge: (src, dst), since: t, tick: None, released: false });
+        true
     }
 
     /// Align and stop before replaying a verified jump. Abort on divergence;
@@ -1998,7 +2117,10 @@ impl Bot<'_> {
                         // Doors, monsters and movers may have changed while
                         // approaching. Verify again from the actual launch.
                         refreshed = self.jump_speed.and_then(|speed| Probe::snapshot(&self.sv, speed))
-                            .and_then(|mut probe| probe.jump(here, self.nav.pos[a.edge.1 as usize], &self.forbid));
+                            .and_then(|mut probe| if jump.recovery {
+                                probe.recover(here, self.nav.pos[a.edge.1 as usize], &self.forbid)
+                            } else { probe.jump(here, self.nav.pos[a.edge.1 as usize], &self.forbid) })
+                            .filter(|plan| hints::allows_motion(&plan.positions, &self.hints));
                         if refreshed.is_some() { a.tick = Some(0); } else { failed = true; }
                     }
                     a.released = true;
@@ -2307,12 +2429,13 @@ impl Bot<'_> {
 
         // Skip ahead when a later path node is already reached (teleporters,
         // lifts and drops move the bot past nodes).
-        let close = |p: Vec3| {
-            let d = p - here;
-            (d.x * d.x + d.y * d.y) < REACH * REACH && d.z.abs() < 30.0
+        let close = |nav: &Nav, n: u32| {
+            let d = nav.pos[n as usize] - here;
+            let reach = if nav.is_fine(n) { 4.0 } else { REACH };
+            (d.x * d.x + d.y * d.y) < reach * reach && d.z.abs() < 30.0
         };
         for k in (self.step + 1..self.path.len().min(self.step + 6)).rev() {
-            if close(self.nav.pos[self.path[k] as usize]) {
+            if close(&self.nav, self.path[k]) {
                 self.step = k;
                 break;
             }
@@ -2328,7 +2451,7 @@ impl Bot<'_> {
             if self.path.is_empty() {
                 return mv;
             }
-            if close(self.nav.pos[self.path[self.step] as usize]) && self.step + 1 < self.path.len() {
+            if close(&self.nav, self.path[self.step]) && self.step + 1 < self.path.len() {
                 self.step += 1;
                 self.ride_since = None;
             }
@@ -2336,7 +2459,7 @@ impl Bot<'_> {
             while self.step < self.path.len() {
                 let p = self.nav.pos[self.path[self.step] as usize];
                 let d = p - here;
-                if close(p) && self.step + 1 < self.path.len() {
+                if close(&self.nav, self.path[self.step]) && self.step + 1 < self.path.len() {
                     self.step += 1;
                     if self.lifts.contains_key(&(self.path[self.step - 1], self.path[self.step])) {
                         break;
@@ -2365,7 +2488,7 @@ impl Bot<'_> {
             && riding.is_none()
         {
             let g = &self.goals[i];
-            if matches!(g.kind, Kind::Button | Kind::Secret | Kind::Key | Kind::Exit | Kind::Trigger) {
+            if matches!(g.kind, Kind::Button | Kind::Secret | Kind::Key | Kind::Pickup | Kind::Exit | Kind::Trigger) {
                 let c = self.center(g.ent);
                 let d = c - here;
                 if (d.x * d.x + d.y * d.y) > 4.0 {
@@ -2420,6 +2543,7 @@ impl Bot<'_> {
                 if self.opt.verbose {
                     eprintln!("  t={t:.1} stuck at {here:?}{}", self.ents_near(here));
                 }
+                if self.try_local_recovery(here, t) { return mv; }
                 if self.step > 0 && self.step < self.path.len() {
                     self.block_here();
                     self.last_replan = -100.0;
@@ -2471,7 +2595,9 @@ impl Bot<'_> {
         }
         if wish.length_sq() > 1.0 {
             // Wish direction relative to the view yaw; slow down near a lift's middle.
-            let speed = if riding.is_some() { (wish.length() * 8.0).min(320.0) } else { 320.0 };
+            let fine = self.path.get(self.step).is_some_and(|&n| self.nav.is_fine(n));
+            let speed = if riding.is_some() { (wish.length() * 8.0).min(320.0) }
+                else if fine { (wish.length() * 8.0).min(160.0) } else { 320.0 };
             let w = wish.normalize() * speed;
             let (s, c) = mv.angles[1].to_radians().sin_cos();
             mv.forward = w.x * c + w.y * s;
