@@ -194,6 +194,13 @@ name = "qnet"
 version = "0.1.0"
 
 [[package]]
+name = "qpart"
+version = "0.1.0"
+dependencies = [
+ "qcore",
+]
+
+[[package]]
 name = "qplatform"
 version = "0.1.0"
 dependencies = [

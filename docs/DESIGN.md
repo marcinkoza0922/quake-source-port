@@ -383,8 +383,9 @@ cover evidence classification, alternate openers, chains, cycles, touch/firing
 priority, execution blocks and depth bounds; report serialization checks escaped
 entity names. Game-data traversal tests skip when assets are absent.
 
-## FTE scripted particles (port plan, 2026-11-11, not started in code)
+## FTE scripted particles (port in progress)
 Port of vkQuake `r_part_fte.c` as a new crate `qpart`:
+Status: phase 1 done (`crates/qpart`: `types`, `parse` (FTE cfg), `effectinfo`, `Registry` in `lib.rs`, `num` for C atof/strtoul). Files come through the `FileSource` trait (any `FnMut(&str) -> Option<Vec<u8>>`); console output is collected in `Registry::messages`, and sound names in `sounds_to_precache`. Type links (`assoc`, `cliptype`, `inwater`, `emit`) are `Option<TypeId>` indices. Tests cover synthetic configs and parse every `particles/*.cfg` / `effectinfo.txt` in the game data (20 files). Next: `system` (simulation), then geometry/qrender, then the client/server hooks.
 - `types`: part_type_t/plooks_t/ramp_t, flags PT_*, spawn modes SM_*, blend modes.
 - `parse`: FTE `r_part` cfg parser (`particles/<name>.cfg`, namespaces, `+name` chains, `r_effect`/`r_trail`/`r_partredirect`) and the DP `effectinfo.txt` importer (AD needs it: its progs checks `FTE_PART_NAMESPACE_EFFECTINFO` and uses `effectinfo.*` names).
 - `system`: one particle arena with index-linked per-type lists and a free list (beams reference particles by index, killed particles are freed only at the end of the frame, as in C), trailstates (ring of 1024), run list, decals, sky-tri rain emitters (`_texpart_*` worldspawn keys, `tex_<texture>`).
