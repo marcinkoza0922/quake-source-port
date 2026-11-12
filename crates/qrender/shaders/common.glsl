@@ -23,6 +23,7 @@ layout(set = 0, binding = 4) readonly buffer Materials { uvec4 materials[]; };
 layout(set = 0, binding = 5) readonly buffer Palette { uint palette[]; };
 layout(set = 0, binding = 6) uniform sampler2D scene_depth;
 layout(set = 0, binding = 7) uniform sampler2DMS scene_depth_ms;
+layout(set = 0, binding = 8) uniform sampler2DMS scene_color_ms;
 
 const uint NO_TEX = 0xffffffffu;
 

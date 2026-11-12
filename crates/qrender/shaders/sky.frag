@@ -44,5 +44,5 @@ void main() {
         rgb = mix(solid.rgb, alpha.rgb, alpha.a);
     }
     if (fr.fog.w > 0.0) rgb = mix(rgb, fr.fog.rgb, fr.sky.x);
-    o_color = vec4(rgb, 1.0);
+    o_color = vec4(rgb, 0.0); // alpha 0: no SSAO on sky
 }

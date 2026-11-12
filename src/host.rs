@@ -197,6 +197,10 @@ const COMPAT_CVARS: &[(&str, &str, u32)] = &[
     ("r_part_maxparticles", "65536", 0),
     ("r_part_maxdecals", "8192", 0),
     ("r_softparticles", "1", CVAR_ARCHIVE),
+    ("r_ssao", "0", CVAR_ARCHIVE),
+    ("r_ssao_radius", "32", CVAR_ARCHIVE),
+    ("r_motionblur", "0", CVAR_ARCHIVE),
+    ("r_motionblur_amount", "0.5", CVAR_ARCHIVE),
     ("cl_nopext", "0", CVAR_ARCHIVE),
     ("r_softparticledistance", "4", CVAR_ARCHIVE),
     ("r_bouncysparks", "1", 0),
@@ -2195,6 +2199,14 @@ impl Host {
             dither_texture: v("r_softemu_dither_texture"),
             colorblind: v("r_colorblind").clamp(0.0, 3.0) as u32,
             soft_particle_distance: if v("r_softparticles") != 0.0 { v("r_softparticledistance").max(0.01) } else { 0.0 },
+            ssao: v("r_ssao").max(0.0),
+            ssao_radius: v("r_ssao_radius"),
+            // Reduce Motion turns motion blur off
+            motion_blur: if v("a11y_reducemotion") != 0.0 || v("r_motionblur") == 0.0 {
+                0.0
+            } else {
+                v("r_motionblur_amount").clamp(0.0, 4.0)
+            },
             ..Settings::default()
         };
         {

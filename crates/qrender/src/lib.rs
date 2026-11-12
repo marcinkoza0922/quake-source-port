@@ -77,6 +77,12 @@ struct Targets {
     scene_w: u32,
     scene_h: u32,
     color_slot: u32,
+    /// SSAO target (visibility, view depth) and per-object velocity target,
+    /// both single-sampled at scene size, sampled by post.
+    ao: Image,
+    ao_slot: u32,
+    vel: Image,
+    vel_slot: u32,
     /// Headless output image + readback buffer.
     out: Option<(Image, Buffer)>,
 }
@@ -203,6 +209,9 @@ pub struct Renderer {
     /// Scene MSAA sample count and render scale in effect.
     msaa: u32,
     render_scale: f32,
+    /// Last frame's entity transforms by `RenderEntity::key` (motion blur).
+    prev_xforms: std::collections::HashMap<u32, ([f32; 3], [f32; 3])>,
+    prev_xform_time: f64,
     textures: Vec<Option<Tex>>,
     palette: Palette,
     palette_buf: Buffer,
@@ -269,7 +278,7 @@ impl Renderer {
             },
             vk::DescriptorPoolSize {
                 ty: vk::DescriptorType::COMBINED_IMAGE_SAMPLER,
-                descriptor_count: (MAX_TEXTURES + 3) * FRAMES as u32,
+                descriptor_count: (MAX_TEXTURES + 4) * FRAMES as u32,
             },
             vk::DescriptorPoolSize {
                 ty: vk::DescriptorType::STORAGE_BUFFER,
@@ -391,6 +400,8 @@ impl Renderer {
             lut_metric: -1,
             msaa: 1,
             render_scale: 1.0,
+            prev_xforms: Default::default(),
+            prev_xform_time: 0.0,
             textures: Vec::new(),
             palette: *palette,
             palette_buf,
@@ -1231,6 +1242,10 @@ impl Renderer {
     fn destroy_targets(&mut self) {
         if let Some(t) = self.targets.take() {
             self.textures[t.color_slot as usize] = None;
+            self.textures[t.ao_slot as usize] = None;
+            self.textures[t.vel_slot as usize] = None;
+            self.gpu.free_image(t.ao);
+            self.gpu.free_image(t.vel);
             self.gpu.free_image(t.color);
             self.gpu.free_image(t.depth);
             if let Some(m) = t.color_ms {
@@ -1266,8 +1281,8 @@ impl Renderer {
                 1,
                 1,
                 COLOR_FORMAT,
-                vk::ImageUsageFlags::COLOR_ATTACHMENT
-                    | vk::ImageUsageFlags::TRANSIENT_ATTACHMENT,
+                // sampled by the SSAO pass (scene alpha masks the sky)
+                vk::ImageUsageFlags::COLOR_ATTACHMENT | vk::ImageUsageFlags::SAMPLED,
                 vk::ImageAspectFlags::COLOR,
                 self.msaa,
             )?)
@@ -1299,6 +1314,20 @@ impl Renderer {
                 .image_info(&dinfo)];
             // SAFETY: device idle (create_targets); handles valid.
             unsafe { self.gpu.device.update_descriptor_sets(&w, &[]) };
+            if let Some(ms) = &color_ms {
+                let cinfo = [vk::DescriptorImageInfo {
+                    sampler: self.sampler_clamp,
+                    image_view: ms.view,
+                    image_layout: vk::ImageLayout::SHADER_READ_ONLY_OPTIMAL,
+                }];
+                let w = [vk::WriteDescriptorSet::default()
+                    .dst_set(f.set)
+                    .dst_binding(8)
+                    .descriptor_type(vk::DescriptorType::COMBINED_IMAGE_SAMPLER)
+                    .image_info(&cinfo)];
+                // SAFETY: as above.
+                unsafe { self.gpu.device.update_descriptor_sets(&w, &[]) };
+            }
         }
         let slot = self.alloc_slot()?;
         let post_sampler = if (scale - 1.0).abs() < 1e-3 {
@@ -1329,6 +1358,23 @@ impl Renderer {
             level: false,
             sampling: Sampling::Clamp,
         });
+        let fx_target = |r: &mut Self, format| -> Result<(Image, u32)> {
+            let img = r.gpu.image(
+                sw,
+                shh,
+                1,
+                1,
+                format,
+                vk::ImageUsageFlags::COLOR_ATTACHMENT | vk::ImageUsageFlags::SAMPLED,
+                vk::ImageAspectFlags::COLOR,
+            )?;
+            let slot = r.alloc_slot()?;
+            r.write_texture_descriptor(slot, img.view, r.sampler_clamp);
+            r.textures[slot as usize] = Some(Tex { image: None, level: false, sampling: Sampling::Clamp });
+            Ok((img, slot))
+        };
+        let (ao, ao_slot) = fx_target(self, pipelines::AO_FORMAT)?;
+        let (vel, vel_slot) = fx_target(self, pipelines::VEL_FORMAT)?;
         self.targets = Some(Targets {
             color,
             color_ms,
@@ -1336,6 +1382,10 @@ impl Renderer {
             scene_w: sw,
             scene_h: shh,
             color_slot: slot,
+            ao,
+            ao_slot,
+            vel,
+            vel_slot,
             out,
         });
         Ok(())

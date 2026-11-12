@@ -10,6 +10,9 @@ layout(push_constant) uniform P {
     uint mode;      // 0 truecolour, 1 palettize + dither, 2 palettize
     float scale;    // scene pixels per output pixel (noise follows scene pixels)
     uint colorblind; // r_colorblind: 0 off, 1 protan, 2 deutan, 3 tritan
+    uint vel_tex;   // per-object motion target (uv displacement per frame)
+    float mbx;      // motion blur scale (0 = off), x and y (reserved rows)
+    float mby;
 } pc;
 layout(location = 0) out vec4 o_color;
 
@@ -29,8 +32,41 @@ vec3 daltonize(vec3 c, uint m) {
     vec3 shift = vec3(0.0, 0.7 * err.r + err.g, 0.7 * err.r + err.b);
     return clamp(c + shift, 0.0, 1.0);
 }
+vec2 vel_at(vec2 uv) {
+    return texture(textures[nonuniformEXT(pc.vel_tex)], uv).xy * vec2(pc.mbx, pc.mby);
+}
+// Per-object motion blur: average along the strongest motion nearby, so
+// moving objects also smear over the static background around them.
+vec3 motion_blur(vec3 c, vec2 uv) {
+    vec2 sz = vec2(textureSize(textures[nonuniformEXT(pc.vel_tex)], 0));
+    vec2 v = vel_at(uv);
+    float best = dot(v * sz, v * sz);
+    if (best < 0.25) {
+        vec2 r = 24.0 / sz;
+        for (int i = 0; i < 8; i++) {
+            float a = float(i) * 0.78539816;
+            vec2 t = vel_at(uv + vec2(cos(a), sin(a)) * r);
+            float l = dot(t * sz, t * sz);
+            if (l > best) { best = l; v = t; }
+        }
+    }
+    if (best < 0.25) return c;
+    float l = length(v);
+    if (l > 0.06) v *= 0.06 / l;
+    const int N = 12;
+    float j = bayer01(ivec2(gl_FragCoord.xy)) - 0.5;
+    vec3 acc = vec3(0.0);
+    for (int i = 0; i < N; i++) {
+        float t = (float(i) + 0.5 + j) / float(N) - 0.5;
+        acc += texture(textures[nonuniformEXT(pc.scene)], uv - v * t).rgb;
+    }
+    return acc / float(N);
+}
 void main() {
-    vec3 c = texture(textures[nonuniformEXT(pc.scene)], i_uv).rgb;
+    vec4 sc = texture(textures[nonuniformEXT(pc.scene)], i_uv);
+    vec3 c = sc.rgb;
+    if (pc.mbx > 0.0)
+        c = motion_blur(c, i_uv);
     if (pc.mode != 0u) {
         if (pc.mode == 1u) {
             vec2 noiseuv = floor(gl_FragCoord.xy * pc.scale) + 0.5;
