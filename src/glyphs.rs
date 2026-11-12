@@ -4,12 +4,9 @@
 //! position (south shows B), other buttons are rounded tags, the D-pad is a
 //! small cross with the pressed arm lit. Keyboard keys are square tags.
 //!
-//! Discs and the PlayStation symbols come from a small RGBA atlas rasterised
-//! at startup ([`atlas_rgba`]).
+//! Shapes and labels are rasterised at the drawn pixel size ([`crate::font`]).
 
 use qinput::keys::*;
-use qrender::{Draw2D, PicId};
-
 use crate::draw::Canvas;
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Default)]
@@ -42,63 +39,12 @@ impl Family {
 /// Glyph height in virtual units.
 pub const H: f32 = 10.0;
 
-/// Atlas cells (CELL×CELL each, in a row).
-const CELL: u32 = 64;
-const CELLS: u32 = 5;
 #[derive(Clone, Copy)]
 enum Sym {
-    Disc = 0,
-    Cross = 1,
-    Circle = 2,
-    Square = 3,
-    Triangle = 4,
-}
-
-/// Rasterise the atlas: white shapes on transparent, 4×4 supersampled.
-pub fn atlas_rgba() -> (u32, u32, Vec<u8>) {
-    let (w, h) = (CELL * CELLS, CELL);
-    let mut px = vec![0u8; (w * h * 4) as usize];
-    let seg = |p: (f32, f32), a: (f32, f32), b: (f32, f32)| {
-        let (dx, dy) = (b.0 - a.0, b.1 - a.1);
-        let t = (((p.0 - a.0) * dx + (p.1 - a.1) * dy) / (dx * dx + dy * dy)).clamp(0.0, 1.0);
-        let (qx, qy) = (a.0 + t * dx - p.0, a.1 + t * dy - p.1);
-        (qx * qx + qy * qy).sqrt()
-    };
-    let inside = |cell: u32, x: f32, y: f32| -> bool {
-        // centred coordinates, cell spans -16..16
-        let (x, y) = (x * 32.0 / CELL as f32 - 16.0, y * 32.0 / CELL as f32 - 16.0);
-        let st = 2.4;
-        match cell {
-            0 => x * x + y * y <= 15.5 * 15.5,
-            1 => seg((x, y), (-7.0, -7.0), (7.0, 7.0)) <= st || seg((x, y), (-7.0, 7.0), (7.0, -7.0)) <= st,
-            2 => ((x * x + y * y).sqrt() - 8.0).abs() <= st,
-            3 => {
-                let m = x.abs().max(y.abs());
-                (m - 7.5).abs() <= st
-            }
-            _ => {
-                let (a, b, c) = ((0.0, -9.0), (-9.0, 7.0), (9.0, 7.0));
-                seg((x, y), a, b) <= st || seg((x, y), b, c) <= st || seg((x, y), c, a) <= st
-            }
-        }
-    };
-    for cell in 0..CELLS {
-        for y in 0..CELL {
-            for x in 0..CELL {
-                let mut n = 0;
-                for sy in 0..4 {
-                    for sx in 0..4 {
-                        if inside(cell, x as f32 + (sx as f32 + 0.5) / 4.0, y as f32 + (sy as f32 + 0.5) / 4.0) {
-                            n += 1;
-                        }
-                    }
-                }
-                let i = ((y * w + cell * CELL + x) * 4) as usize;
-                px[i..i + 4].copy_from_slice(&[255, 255, 255, (n * 255 / 16) as u8]);
-            }
-        }
-    }
-    (w, h, px)
+    Cross,
+    Circle,
+    Square,
+    Triangle,
 }
 
 fn rgb(c: [u8; 3]) -> [f32; 4] {
@@ -204,88 +150,89 @@ fn shape(key: i32, f: Family) -> Shape {
     pad_shape(key, f).unwrap_or_else(|| Shape::Key(key_name(key)))
 }
 
-/// Width of a key's glyph in virtual units.
-pub fn width(key: i32, f: Family) -> f32 {
+/// Label em size as a share of the glyph height (padwight: 13 px on 24).
+const LABEL: f32 = 13.0 / 24.0;
+const LABEL_FG: [f32; 4] = [0.79, 0.82, 0.85, 1.0];
+/// Hint row: glyph height and label size.
+pub const HINT_H: f32 = 13.0;
+pub const HINT_TEXT: f32 = 9.0;
+pub const HINT_FG: [f32; 4] = [0.86, 0.84, 0.80, 1.0];
+
+/// Top of a text em box that centres capitals in a box `h` tall at `y`.
+pub fn center_text_y(y: f32, h: f32, em: f32) -> f32 {
+    y + h / 2.0 - 0.435 * em
+}
+
+/// Width of a key's glyph `h` tall, in virtual units.
+pub fn width(c: &Canvas, key: i32, f: Family, h: f32) -> f32 {
     match shape(key, f) {
-        Shape::Face(..) => H,
-        Shape::Dpad(_) => H,
-        Shape::Tag(t) | Shape::Key(t) => t.len() as f32 * 8.0 + 6.0,
+        Shape::Face(..) | Shape::Dpad(_) => h,
+        Shape::Tag(t) | Shape::Key(t) => (c.text_w(&t, h * LABEL) + h * 14.0 / 24.0).max(h),
     }
 }
 
-/// Draws glyphs onto a canvas with the atlas picture.
-#[derive(Clone, Copy)]
+/// Draws button glyphs (padwight's look: coloured discs for face buttons,
+/// rounded tags for the rest), rasterised at the drawn pixel size.
+#[derive(Clone, Copy, Default)]
 pub struct Glyphs {
-    pub atlas: Option<PicId>,
     pub family: Family,
 }
 
 impl Glyphs {
-    fn sym(&self, c: &mut Canvas, x: f32, y: f32, s: f32, sym: Sym, color: [f32; 4]) {
-        let Some(pic) = self.atlas else {
-            c.fill(x, y, s, s, color);
-            return;
-        };
-        let u0 = sym as u32 as f32 / CELLS as f32;
-        let uv = [u0, 0.0, u0 + 1.0 / CELLS as f32, 1.0];
-        let (px, py) = ((x + c.ox) * c.scale, (y + c.oy) * c.scale);
-        c.list.push(Draw2D::Pic { x: px, y: py, w: s * c.scale, h: s * c.scale, pic, uv, color });
-    }
-
     /// Filled disc of diameter `s` with its top-left at (x, y).
     pub fn disc(&self, c: &mut Canvas, x: f32, y: f32, s: f32, color: [f32; 4]) {
-        self.sym(c, x, y, s, Sym::Disc, color);
+        c.round_box(x, y, s, s, s / 2.0, color, None);
     }
 
-    /// Half disc (left or right) for rounded tag ends.
-    fn cap(&self, c: &mut Canvas, x: f32, y: f32, right: bool, color: [f32; 4]) {
-        let Some(pic) = self.atlas else {
-            c.fill(x, y, H / 2.0, H, color);
-            return;
-        };
-        let cw = 1.0 / CELLS as f32;
-        let uv = if right { [cw * 0.5, 0.0, cw, 1.0] } else { [0.0, 0.0, cw * 0.5, 1.0] };
-        let (px, py) = ((x + c.ox) * c.scale, (y + c.oy) * c.scale);
-        c.list.push(Draw2D::Pic { x: px, y: py, w: H / 2.0 * c.scale, h: H * c.scale, pic, uv, color });
-    }
-
-    /// Draws `key` with its top-left at (x, y); returns the width used.
+    /// Draws `key` `H` tall with its top-left at (x, y); returns the width.
     pub fn key(&self, c: &mut Canvas, x: f32, y: f32, key: i32) -> f32 {
+        self.key_h(c, x, y, key, H)
+    }
+
+    /// Draws `key` `h` tall; returns the width used.
+    pub fn key_h(&self, c: &mut Canvas, x: f32, y: f32, key: i32, h: f32) -> f32 {
+        let em = h * LABEL;
+        let ty = center_text_y(y, h, em);
         match shape(key, self.family) {
             Shape::Face(fill, label) => {
-                self.sym(c, x, y, H, Sym::Disc, fill);
+                let fg = if fill == NEUTRAL { LABEL_FG } else { [1.0; 4] };
+                c.round_box(x, y, h, h, h / 2.0, fill, Some([fg[0], fg[1], fg[2], 0.2]));
+                let t = c.upx(h * 0.1).max(1);
                 match label {
-                    Ok(t) => c.string(x + 1.0, y + 1.0, t),
-                    Err(s) => self.sym(c, x + 1.0, y + 1.0, H - 2.0, s, [1.0; 4]),
+                    Ok(l) => c.text_center(x + h / 2.0, ty, l, em, fg),
+                    Err(sym) => {
+                        let sh = match sym {
+                            Sym::Cross => crate::font::Shape::Cross { t },
+                            Sym::Circle => crate::font::Shape::Ring { t },
+                            Sym::Square => crate::font::Shape::Square { t },
+                            _ => crate::font::Shape::Triangle { t },
+                        };
+                        c.shape(x, y, h, h, sh, [1.0; 4]);
+                    }
                 }
-                H
+                h
             }
-            Shape::Tag(t) => {
-                let w = t.len() as f32 * 8.0 + 6.0;
-                self.cap(c, x - 2.0, y, false, NEUTRAL);
-                c.fill(x + 3.0, y, w - 6.0, H, NEUTRAL);
-                self.cap(c, x + w - 3.0, y, true, NEUTRAL);
-                c.string(x + 3.0, y + 1.0, &t);
+            Shape::Tag(t) | Shape::Key(t) => {
+                let is_key = !is_pad_key(key);
+                let w = width(c, key, self.family, h);
+                let (bg, edge) = if is_key { (KEY_BG, TAG_EDGE) } else { (NEUTRAL, [LABEL_FG[0], LABEL_FG[1], LABEL_FG[2], 0.2]) };
+                c.round_box(x, y, w, h, h * 6.0 / 24.0, bg, Some(edge));
+                c.text_center(x + w / 2.0, ty, &t, em, LABEL_FG);
                 w
             }
             Shape::Dpad(lit) => {
-                let a = 10.0 / 3.0;
+                let a = h / 3.0;
+                let r = (h * 1.5 / 24.0).max(0.34);
                 let arm = |c: &mut Canvas, cx: f32, cy: f32, on: bool| {
-                    c.fill(x + cx * a, y + cy * a, a, a, if on { [0.85, 0.6, 0.2, 1.0] } else { [0.45, 0.45, 0.48, 1.0] });
+                    let col = if on { [0.85, 0.6, 0.2, 1.0] } else { [0.30, 0.31, 0.35, 0.95] };
+                    c.round_box(x + cx * a, y + cy * a, a, a, r, col, Some([0.79, 0.82, 0.85, 0.35]));
                 };
                 arm(c, 1.0, 0.0, lit[0]);
                 arm(c, 1.0, 2.0, lit[1]);
                 arm(c, 0.0, 1.0, lit[2]);
                 arm(c, 2.0, 1.0, lit[3]);
                 arm(c, 1.0, 1.0, false);
-                H
-            }
-            Shape::Key(t) => {
-                let w = t.len() as f32 * 8.0 + 6.0;
-                c.fill(x, y, w, H, KEY_BG);
-                c.frame(x, y, w, H, TAG_EDGE);
-                c.string(x + 3.0, y + 1.0, &t);
-                w
+                h
             }
         }
     }
@@ -296,14 +243,14 @@ impl Glyphs {
         let mut cx = x;
         for (i, (k, label)) in items.iter().enumerate() {
             if i > 0 {
-                cx += 12.0;
+                cx += 14.0;
             }
-            cx += if draw { self.key(c, cx, y, *k) } else { width(*k, self.family) };
-            cx += 4.0;
+            cx += if draw { self.key_h(c, cx, y, *k, HINT_H) } else { width(c, *k, self.family, HINT_H) };
+            cx += 5.0;
             if draw {
-                c.string(cx, y + 1.0, label);
+                c.text(cx, center_text_y(y, HINT_H, HINT_TEXT), label, HINT_TEXT, HINT_FG);
             }
-            cx += label.len() as f32 * 8.0;
+            cx += c.text_w(label, HINT_TEXT);
         }
         cx - x
     }
@@ -327,13 +274,5 @@ mod tests {
         assert!(matches!(pad_shape(K_LTRIGGER, Family::Nintendo), Some(Shape::Tag(t)) if t == "ZL"));
         assert!(pad_shape(b'w' as i32, Family::Xbox).is_none());
         assert_eq!(key_name(b'w' as i32), "W");
-    }
-    #[test]
-    fn atlas_has_shapes() {
-        let (w, h, px) = atlas_rgba();
-        assert_eq!(px.len(), (w * h * 4) as usize);
-        // disc centre opaque, cell corner transparent
-        assert_eq!(px[((CELL / 2 * w + CELL / 2) * 4 + 3) as usize], 255);
-        assert_eq!(px[3], 0);
     }
 }

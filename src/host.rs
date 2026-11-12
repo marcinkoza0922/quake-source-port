@@ -53,9 +53,8 @@ const HOST_CVARS: &[(&str, &str, u32)] = &[
     ("scr_hudstyle", "1", CVAR_ARCHIVE),
     ("crosshair", "0", CVAR_ARCHIVE),
     ("ui_levelselect", "0", CVAR_ARCHIVE),
-    ("ui_font", "1", CVAR_ARCHIVE),
+    ("ui_menufont", "0", CVAR_ARCHIVE),
     ("ui_fontfile", "", CVAR_ARCHIVE),
-    ("ui_smoothpics", "1", CVAR_ARCHIVE),
     ("scr_centertime", "2", 0),
     ("scr_printspeed", "8", 0),
     ("volume", "0.7", CVAR_ARCHIVE),
@@ -221,9 +220,8 @@ pub struct Host {
     wheel: crate::wheel::Wheel,
     /// Label family of the last connected gamepad.
     pad_family: crate::glyphs::Family,
-    glyph_atlas: Option<Option<qrender::PicId>>,
-    /// (`ui_font`, `ui_fontfile`) the conchars atlas was last built with.
-    font_state: (i32, String),
+    /// Modern menu text/shape atlas (`crate::font`).
+    ui_text: std::rc::Rc<std::cell::RefCell<crate::font::UiText>>,
     /// Rumble to play this frame (low, high, ms), taken by the main loop.
     rumble: Option<(u16, u16, u32)>,
     /// Last seen (weapon, ammo, weaponframe, punch) for fire rumble.
@@ -340,8 +338,7 @@ impl Host {
             pend_impulse: 0,
             wheel: Default::default(),
             pad_family: Default::default(),
-            glyph_atlas: None,
-            font_state: (1, String::new()),
+            ui_text: Default::default(),
             rumble: None,
             fire_track: (0, 0, 0, [0.0; 3]),
             nav_hold: None,
@@ -663,14 +660,10 @@ impl Host {
         self.input.gamepad_connected && self.input.last_device == Device::Gamepad
     }
 
-    /// Glyph drawer (registers the atlas on first use).
+    /// Glyph drawer for the controller family in use.
     fn glyphs(&mut self) -> crate::glyphs::Glyphs {
-        let atlas = *self.glyph_atlas.get_or_insert_with(|| {
-            let (w, h, px) = crate::glyphs::atlas_rgba();
-            self.r.register_pic_rgba_linear(w, h, &px).ok()
-        });
         let family = self.pad_family.with_override(self.cv("joy_glyphs"));
-        crate::glyphs::Glyphs { atlas, family }
+        crate::glyphs::Glyphs { family }
     }
 
     /// Menu state that follows the input devices and bindings.
@@ -1917,25 +1910,26 @@ impl Host {
         self.disconnect_client();
     }
 
-    /// Rebuilds the UI font / picture style when `ui_font`, `ui_fontfile`
-    /// or `ui_smoothpics` change.
-    fn sync_ui_font(&mut self) {
-        self.pics.smooth = self.cv("ui_smoothpics") != 0.0;
-        let want = (self.cv("ui_font") as i32, self.cvs("ui_fontfile").to_string());
-        if want == self.font_state {
-            return;
+    /// Registers the modern text atlas and follows `ui_menufont`/`ui_fontfile`.
+    fn sync_ui_text(&mut self) {
+        let want = (self.cv("ui_menufont") as i32, self.cvs("ui_fontfile").to_string());
+        let mut ui = self.ui_text.borrow_mut();
+        if ui.pic.is_none() {
+            let n = crate::font::UiText::atlas_size();
+            ui.pic = self.r.register_pic_rgba(n, n, &ui.px).ok();
         }
-        let fs = &self.server.core.fs;
-        if let Some(w) = crate::font::apply(&mut self.r, fs, &self.pics.conchars, want.0, &want.1) {
+        let warn = if ui.source != want { ui.set_font(&self.server.core.fs, want.0, &want.1) } else { None };
+        drop(ui);
+        if let Some(w) = warn {
             self.con.print(&w);
         }
-        self.font_state = want;
     }
 
     fn render(&mut self, view: Option<qrender::View>, gun: Option<qrender::RenderEntity>, ft: f32) {
-        self.sync_ui_font();
         let (w, h) = self.r.size();
         let mut c = Canvas::new(w, h);
+        self.sync_ui_text();
+        c.ui = Some(self.ui_text.clone());
         let mut ents = Vec::new();
         let mut parts = Vec::new();
         let mut dls = Vec::new();
@@ -2070,6 +2064,17 @@ impl Host {
             dither_texture: v("r_softemu_dither_texture"),
             ..Settings::default()
         };
+        {
+            let mut ui = self.ui_text.borrow_mut();
+            if ui.dirty
+                && let Some(pic) = ui.pic
+            {
+                if let Err(e) = self.r.update_pic(pic, &ui.px) {
+                    self.con.print(&format!("ui text upload: {e:?}\n"));
+                }
+                ui.after_upload();
+            }
+        }
         let frame = qrender::RenderFrame {
             time: self.cl.time,
             view,

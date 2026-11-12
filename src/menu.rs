@@ -237,12 +237,7 @@ const GRAPHICS: &[Item] = &[
     toggle("Dynamic Lights", "r_dynamic"),
     toggle("Interpolate Anim", "r_lerpmodels"),
     toggle("Interpolate Move", "r_lerpmove"),
-    Item::Choice { label: "UI Font", cvar: "ui_font", choices: UI_FONT },
-    toggle("Smooth UI Pictures", "ui_smoothpics"),
 ];
-
-/// `ui_font`: Custom uses the TTF/OTF named by `ui_fontfile`.
-const UI_FONT: &[(&str, f32)] = &[("classic", 0.0), ("smooth", 1.0), ("custom", 2.0)];
 
 const AUDIO: &[Item] = &[slider("Sound Volume", "volume", 0.0, 1.0, 0.1), slider("Music Volume", "bgmvolume", 0.0, 1.0, 0.1)];
 
@@ -306,6 +301,8 @@ pub struct Menu {
     main_cursor: usize,
     sp_cursor: usize,
     load_cursor: usize,
+    /// First card shown on the save/load screens.
+    save_scroll: usize,
     opt_cursor: usize,
     page_cursor: usize,
     /// Quit prompt button: 0 = yes, 1 = no.
@@ -391,6 +388,15 @@ struct Drop {
 /// 320x200 screens (main, single player, load/save, quit) sit centred in it.
 const MENU_H: f32 = 360.0;
 const CLASSIC: (f32, f32) = (160.0, 80.0);
+/// Save/load cards: left edge, size, first top, pitch, clip bottom (above
+/// the hint row) and how many fit whole (the next one shows cut off).
+const CARD_X: f32 = 24.0;
+const CARD_W: f32 = 592.0;
+const CARD_H: f32 = 62.0;
+const CARD_Y0: f32 = 40.0;
+const CARD_PITCH: f32 = 66.0;
+const CARD_BOTTOM: f32 = 338.0;
+const CARDS_FULL: usize = 4;
 
 /// Options panel: background box, label column (right-aligned), value column.
 const PANEL_X: f32 = 136.0;
@@ -416,6 +422,7 @@ impl Menu {
             main_cursor: 0,
             sp_cursor: 0,
             load_cursor: 0,
+            save_scroll: 0,
             opt_cursor: 0,
             page_cursor: 0,
             quit_cursor: 0,
@@ -437,7 +444,7 @@ impl Menu {
             bindings: vec![None; MAX_KEYS],
             capture: None,
             pad_ui: false,
-            glyphs: Glyphs { atlas: None, family: Family::Xbox },
+            glyphs: Glyphs { family: Family::Xbox },
             osk: None,
         }
     }
@@ -562,7 +569,7 @@ impl Menu {
                 }
                 c.frame(x + 1.0, y + 1.0, kw - 2.0, kh - 2.0, [0.35, 0.27, 0.16, 0.9]);
                 let ch = if o.shift { ch.to_ascii_uppercase() } else { ch };
-                c.ch(x + (kw - 8.0) / 2.0, y + (kh - 8.0) / 2.0, ch);
+                c.text_center(x + kw / 2.0, crate::glyphs::center_text_y(y, kh, TXT), &(ch as char).to_string(), TXT, FG);
             }
         }
         let aw = kw * 10.0 / OSK_ACTIONS.len() as f32;
@@ -573,12 +580,8 @@ impl Menu {
                 c.fill(x, y, aw, kh, HILITE);
             }
             c.frame(x + 1.0, y + 1.0, aw - 2.0, kh - 2.0, [0.35, 0.27, 0.16, 0.9]);
-            let lx = x + ((aw - label.len() as f32 * 8.0) / 2.0).floor();
-            if i == 0 && o.shift {
-                gold(c, lx, y + 3.0, label);
-            } else {
-                c.string(lx, y + 3.0, label);
-            }
+            let col = if i == 0 && o.shift { GOLD_FG } else { FG };
+            c.text_center(x + aw / 2.0, crate::glyphs::center_text_y(y, kh, TXT), label, TXT, col);
         }
     }
 
@@ -653,7 +656,7 @@ impl Menu {
         self.capture = None;
         self.osk = None;
         self.quit_cursor = 0;
-        if matches!(s, Screen::Load | Screen::Save) { self.load_cursor = 0; }
+        if matches!(s, Screen::Load | Screen::Save) { self.load_cursor = 0; self.save_scroll = 0; }
     }
 
     fn save_rows(&self) -> usize {
@@ -678,10 +681,12 @@ impl Menu {
             Screen::Main => row(cy + 32.0, 20.0, MAIN_ITEMS, cx + 54.0, cx + 312.0),
             Screen::SinglePlayer => row(cy + 32.0, 20.0, 3, cx + 54.0, cx + 312.0),
             Screen::Load | Screen::Save => {
-                let col = ((x - 24.0) / 300.0).floor() as usize;
-                let row = ((y - 56.0) / 128.0).floor() as usize;
-                let i = self.load_cursor / 4 * 4 + row * 2 + col;
-                ((24.0..616.0).contains(&x) && (56.0..312.0).contains(&y) && col < 2 && row < 2 && i < self.save_rows()).then_some(i)
+                let row = ((y - CARD_Y0) / CARD_PITCH).floor();
+                let inside = (CARD_X..CARD_X + CARD_W).contains(&x)
+                    && (CARD_Y0..CARD_BOTTOM).contains(&y)
+                    && y - CARD_Y0 - row * CARD_PITCH < CARD_H;
+                let i = self.save_scroll + row as usize;
+                (inside && i < self.save_rows()).then_some(i)
             },
             Screen::Options => row(ROW0, ROW_H, PAGES.len(), PANEL_X, PANEL_X + PANEL_W),
             Screen::OptionsPage(p) => row(PAGE_ROW0, ROW_H, self.page_len(p), PANEL_X, PANEL_X + PANEL_W),
@@ -880,6 +885,7 @@ impl Menu {
                     if self.autosaves && self.screen == Screen::Load {
                         self.autosaves = false;
                         self.load_cursor = 1;
+                        self.save_scroll = 0;
                         out.push(Action::Command("_scansaves\n".into()));
                     } else {
                         self.screen = Screen::SinglePlayer;
@@ -888,10 +894,12 @@ impl Menu {
                 }
                 let count = self.save_rows();
                 self.load_cursor = self.load_cursor.min(count - 1);
-                if up { self.load_cursor = (self.load_cursor + count - (2 % count)) % count; }
-                if down { self.load_cursor = (self.load_cursor + 2) % count; }
-                if left { self.load_cursor = (self.load_cursor + count - 1) % count; }
-                if right { self.load_cursor = (self.load_cursor + 1) % count; }
+                if up { self.load_cursor = (self.load_cursor + count - 1) % count; }
+                if down { self.load_cursor = (self.load_cursor + 1) % count; }
+                // left/right page by the visible cards
+                if left { self.load_cursor = self.load_cursor.saturating_sub(CARDS_FULL); }
+                if right { self.load_cursor = (self.load_cursor + CARDS_FULL).min(count - 1); }
+                self.fix_card_scroll();
                 if up || down || left || right { out.push(Action::Sound("misc/menu1.wav")); }
                 if enter {
                     let i = self.load_cursor;
@@ -899,6 +907,7 @@ impl Menu {
                         if !self.autosaves && i == 1 {
                             self.autosaves = true;
                             self.load_cursor = 0;
+                            self.save_scroll = 0;
                             out.push(Action::Command("_scansaves\n".into()));
                         } else if self.saves[i].is_some() {
                             let name = self.save_slot_name(i).unwrap();
@@ -1293,62 +1302,7 @@ impl Menu {
                 let d = dot(pic);
                 c.pic(54.0, 32.0 + self.mp_cursor as f32 * 20.0, d);
             }
-            Screen::Load | Screen::Save => {
-                let heading = if self.screen == Screen::Save { "SAVE GAME" } else if self.autosaves { "AUTOSAVES - NEWEST FIRST" } else { "LOAD GAME" };
-                c.string(24.0, 24.0, heading);
-                let page = self.load_cursor / 4;
-                for i in page * 4..((page + 1) * 4).min(self.save_rows()) {
-                    let x = 24.0 + (i % 2) as f32 * 300.0;
-                    let y = 56.0 + (i % 4 / 2) as f32 * 128.0;
-                    let selected = i == self.load_cursor;
-                    c.fill(x, y, 292.0, 126.0, if selected { [0.30, 0.20, 0.09, 0.98] } else { [0.08, 0.07, 0.06, 0.96] });
-                    if selected { c.fill(x, y, 3.0, 126.0, [0.85, 0.59, 0.22, 1.0]); }
-                    let line = |c: &mut Canvas, row: usize, text: &str| {
-                        let text: String = text.chars().map(|ch| if ch.is_ascii_graphic() || ch == ' ' { ch } else { '?' }).take(34).collect();
-                        c.string(x + 10.0, y + 7.0 + row as f32 * 10.0, &text);
-                    };
-                    if self.screen == Screen::Load && !self.autosaves && i == 1 {
-                        line(c, 0, "Browse Autosaves >");
-                        line(c, 2, "All retained autosaves");
-                        line(c, 3, "Newest to oldest");
-                        continue;
-                    }
-                    if let Some(s) = &self.saves[i] {
-                        line(c, 0, &s.level);
-                        line(c, 1, &s.timestamp);
-                        line(c, 2, &format!("Health {}   Armor {}", s.health, s.armor));
-                        let keys = self.save_inventory.keys(s);
-                        line(c, 9, if keys.is_empty() { "Keys: none" } else { "Keys:" });
-                        for (j, icon) in keys.iter().enumerate() {
-                            draw_inventory_icon(c, pic, x + 60.0 + j as f32 * 32.0, y + 94.0, 28.0, 16.0, icon);
-                        }
-                        line(c, 3, &format!("Kills {}/{}   Secrets {}/{}", s.kills.0, s.kills.1, s.secrets.0, s.secrets.1));
-                        let icons = self.save_inventory.weapons(s);
-                        if icons.is_empty() { line(c, 4, "Weapons: none"); }
-                        let columns = if icons.len() <= 20 { 10 } else { 14 };
-                        let cell = if columns == 10 { 27.0 } else { 19.0 };
-                        for (j, icon) in icons.iter().take(42).enumerate() {
-                            draw_inventory_icon(c, pic, x + 10.0 + (j % columns) as f32 * cell,
-                                y + 47.0 + (j / columns) as f32 * 14.0, cell - 2.0, 13.0, icon);
-                        }
-                        let label = if self.autosaves { format!("Auto {}: {}", i + 1, s.reason.as_deref().unwrap_or("Unknown trigger")) }
-                            else if self.screen == Screen::Load && i == 0 { format!("Latest auto: {}", s.reason.as_deref().unwrap_or("Unknown")) }
-                            else { format!("Manual slot {}", if self.screen == Screen::Load { i - 1 } else { i + 1 }) };
-                        let missing_weapons: Vec<_> = icons.iter().filter(|icon| pic(&icon.name).is_none()).map(|icon| icon.fallback.as_str()).collect();
-                        if !missing_weapons.is_empty() { line(c, 8, &missing_weapons.join(", ")); }
-                        let missing_keys: Vec<_> = keys.iter().filter(|icon| pic(&icon.name).is_none()).map(|icon| icon.fallback.as_str()).collect();
-                        if !missing_keys.is_empty() { line(c, 10, &missing_keys.join(", ")); }
-                        line(c, 11, &label);
-                    } else {
-                        let label = if self.screen == Screen::Load && self.autosaves { "No autosaves yet".into() }
-                            else if self.screen == Screen::Load && i == 0 { "No autosave yet".into() }
-                            else { format!("Empty manual slot {}", if self.screen == Screen::Load { i - 1 } else { i + 1 }) };
-                        line(c, 0, &label);
-                        if self.screen == Screen::Save { line(c, 2, "Select to save here"); }
-                    }
-                }
-                c.string(520.0, 338.0, &format!("Page {}/{}", page + 1, self.save_rows().div_ceil(4)));
-            }
+            Screen::Load | Screen::Save => self.draw_cards(c, pic),
             Screen::Options => {
                 let p = pic("gfx/qplaque.lmp");
                 c.pic(PANEL_X - 40.0, 16.0, p);
@@ -1357,7 +1311,7 @@ impl Menu {
                 highlight(c, ROW0 + self.page_cursor as f32 * ROW_H);
                 for (i, (label, _)) in PAGES.iter().enumerate() {
                     let y = ROW0 + i as f32 * ROW_H + 1.0;
-                    c.string(((640.0 - label.len() as f32 * 8.0) / 2.0).floor(), y, label);
+                    c.text_center(320.0, y, label, TXT, FG);
                 }
             }
             Screen::OptionsPage(page) => {
@@ -1365,8 +1319,11 @@ impl Menu {
                 c.pic(PANEL_X - 40.0, 16.0, p);
                 title_c(c, pic, if is_net_page(page) { "gfx/p_multi.lmp" } else { "gfx/p_option.lmp" });
                 let name = page_name(page);
-                let nx = if page == Page::Controls { LABEL_R - name.len() as f32 * 8.0 } else { ((640.0 - name.len() as f32 * 8.0) / 2.0).floor() };
-                gold(c, nx, PAGE_ROW0 - 16.0, name);
+                if page == Page::Controls {
+                    c.text_right(LABEL_R, PAGE_ROW0 - 16.0, name, TXT, GOLD_FG);
+                } else {
+                    c.text_center(320.0, PAGE_ROW0 - 16.0, name, TXT, GOLD_FG);
+                }
                 let n = self.page_len(page);
                 panel(c, PAGE_ROW0, n);
                 highlight(c, PAGE_ROW0 + self.opt_cursor as f32 * ROW_H);
@@ -1387,11 +1344,11 @@ impl Menu {
                 }
                 if page == Page::Join && self.servers.is_empty() && !self.searching {
                     let s = "no servers found yet";
-                    c.string(((640.0 - s.len() as f32 * 8.0) / 2.0).floor(), PAGE_ROW0 + n as f32 * ROW_H + 8.0, s);
+                    c.text_center(320.0, PAGE_ROW0 + n as f32 * ROW_H + 8.0, s, TXT, MUTED);
                 }
                 if page == Page::Controls {
-                    c.string(VALUE_X, PAGE_ROW0 - 16.0, "Keyboard");
-                    c.string(BIND_PAD_X, PAGE_ROW0 - 16.0, "Controller");
+                    c.text(VALUE_X, PAGE_ROW0 - 16.0, "Keyboard", TXT, MUTED);
+                    c.text(BIND_PAD_X, PAGE_ROW0 - 16.0, "Controller", TXT, MUTED);
                 }
                 if let Some(d) = self.drop {
                     self.draw_drop(c, cv, self.page_item(page, d.item), d);
@@ -1405,18 +1362,19 @@ impl Menu {
                 c.fill(bx, by, bw, bh, [0.05, 0.04, 0.03, 0.92]);
                 c.frame(bx, by, bw, bh, BORDER);
                 let msg = "Really quit?";
-                c.string(((640.0 - msg.len() as f32 * 8.0) / 2.0).floor(), by + 12.0, msg);
+                c.text_center(320.0, by + 12.0, msg, TXT * 1.2, FG);
                 for (i, (&x, label)) in QUIT_BUTTONS.iter().zip(["(Y)es", "(N)o"]).enumerate() {
                     let (w, h) = QUIT_BTN;
                     if i == self.quit_cursor {
                         c.fill(x, QUIT_BTN_Y, w, h, HILITE);
                     }
                     c.frame(x, QUIT_BTN_Y, w, h, BORDER);
-                    let tx = x + ((w - label.len() as f32 * 8.0) / 2.0).floor();
+                    let tx = x + ((w - c.text_w(label, TXT)) / 2.0).floor();
                     // gold hotkey letter
-                    c.string(tx, QUIT_BTN_Y + 3.0, "(");
-                    gold(c, tx + 8.0, QUIT_BTN_Y + 3.0, &label[1..2]);
-                    c.string(tx + 16.0, QUIT_BTN_Y + 3.0, &label[2..]);
+                    let ty = QUIT_BTN_Y + 3.0;
+                    let mut cx = tx + txt(c, tx, ty, "(");
+                    cx += txt_gold(c, cx, ty, &label[1..2]);
+                    txt(c, cx, ty, &label[2..]);
                 }
             }
             Screen::None => {}
@@ -1427,6 +1385,107 @@ impl Menu {
         c.scale = base_scale;
     }
 
+    /// Save/load cards: one column, scrolled so the cursor is in view, with
+    /// the next card cut off at the bottom to show the list goes on.
+    fn draw_cards(&self, c: &mut Canvas, pic: &mut PicFn) {
+        let heading = if self.screen == Screen::Save { "Save Game" } else if self.autosaves { "Autosaves" } else { "Load Game" };
+        c.text(CARD_X, 20.0, heading, 13.0, GOLD_FG);
+        if self.autosaves {
+            c.text(CARD_X + c.text_w(heading, 13.0) + 10.0, 23.0, "newest first", TXT, MUTED);
+        }
+        let n = self.save_rows();
+        c.text_right(CARD_X + CARD_W, 23.0, &format!("{} / {}", self.load_cursor + 1, n), TXT, MUTED);
+        c.clip_rows(Some((CARD_Y0, CARD_BOTTOM)));
+        let small = 8.5;
+        for i in self.save_scroll..n {
+            let y = CARD_Y0 + (i - self.save_scroll) as f32 * CARD_PITCH;
+            if y >= CARD_BOTTOM {
+                break;
+            }
+            let x = CARD_X;
+            let selected = i == self.load_cursor;
+            let bg = if selected { [0.30, 0.20, 0.09, 0.97] } else { [0.08, 0.07, 0.06, 0.94] };
+            let edge = if selected { [0.85, 0.59, 0.22, 0.9] } else { [0.35, 0.27, 0.16, 0.7] };
+            c.round_box(x, y, CARD_W, CARD_H, 4.0, bg, Some(edge));
+            if selected {
+                c.round_box(x + 3.0, y + 6.0, 2.5, CARD_H - 12.0, 1.25, [0.95, 0.66, 0.26, 1.0], None);
+            }
+            let (lx, rx) = (x + 14.0, x + CARD_W - 12.0);
+            let clean = |t: &str| -> String { t.chars().map(|ch| if ch.is_control() { '?' } else { ch }).collect() };
+            if self.screen == Screen::Load && !self.autosaves && i == 1 {
+                c.text(lx, y + 9.0, "Browse Autosaves", 11.0, FG);
+                c.text(lx, y + 27.0, "Every retained autosave, newest first", small, MUTED);
+                c.shape(rx - 10.0, y + CARD_H / 2.0 - 5.0, 10.0, 10.0, crate::font::Shape::ArrowRight, GOLD_FG);
+                continue;
+            }
+            let Some(sv) = &self.saves[i] else {
+                let label = if self.screen == Screen::Load && self.autosaves { "No autosaves yet".into() }
+                    else if self.screen == Screen::Load && i == 0 { "No autosave yet".into() }
+                    else { format!("Empty slot {}", if self.screen == Screen::Load { i - 1 } else { i + 1 }) };
+                c.text(lx, y + 9.0, &label, 11.0, MUTED);
+                if self.screen == Screen::Save {
+                    c.text(lx, y + 27.0, "Select to save here", small, MUTED);
+                }
+                continue;
+            };
+            let label = if self.autosaves { format!("Autosave {}: {}", i + 1, sv.reason.as_deref().unwrap_or("unknown trigger")) }
+                else if self.screen == Screen::Load && i == 0 { format!("Latest autosave: {}", sv.reason.as_deref().unwrap_or("unknown")) }
+                else { format!("Slot {}", if self.screen == Screen::Load { i - 1 } else { i + 1 }) };
+            c.text_right(rx, y + 7.0, &clean(&label), small, GOLD_FG);
+            // title, cut to the space left of the label
+            let room = CARD_W - 40.0 - c.text_w(&label, small) - 20.0;
+            let mut title = clean(&sv.level);
+            while c.text_w(&title, 11.0) > room && title.pop().is_some() {}
+            if title.len() < sv.level.len() {
+                title.push('…');
+            }
+            c.text(lx, y + 5.0, &title, 11.0, FG);
+            c.text(lx, y + 20.0, &sv.timestamp, small, MUTED);
+            c.text(lx, y + 32.0, &format!("Health {}   Armor {}", sv.health, sv.armor), small, FG);
+            let stats = format!("Kills {}/{}   Secrets {}/{}", sv.kills.0, sv.kills.1, sv.secrets.0, sv.secrets.1);
+            let sw = c.text(lx, y + 44.0, &stats, small, FG);
+            // keys after the stats line, weapons in the right half
+            let keys = self.save_inventory.keys(sv);
+            let mut kx = lx + sw + 12.0;
+            for icon in &keys {
+                if pic(&icon.name).is_some() {
+                    draw_inventory_icon(c, pic, kx, y + 42.0, 24.0, 12.0, icon);
+                    kx += 26.0;
+                } else {
+                    kx += c.text(kx, y + 44.0, &icon.fallback, small, GOLD_FG) + 6.0;
+                }
+            }
+            let icons = self.save_inventory.weapons(sv);
+            let wx = x + 320.0;
+            if icons.is_empty() {
+                c.text(wx, y + 26.0, "No weapons", small, MUTED);
+            }
+            let columns = if icons.len() <= 20 { 10 } else { 14 };
+            let cell = if columns == 10 { 26.0 } else { 18.5 };
+            let mut missing = Vec::new();
+            for (j, icon) in icons.iter().take(columns * 2).enumerate() {
+                if pic(&icon.name).is_none() {
+                    missing.push(icon.fallback.as_str());
+                    continue;
+                }
+                draw_inventory_icon(c, pic, wx + (j % columns) as f32 * cell, y + 22.0 + (j / columns) as f32 * 15.0, cell - 2.0, 13.0, icon);
+            }
+            if !missing.is_empty() {
+                c.text(wx, y + 44.0, &missing.join(", "), small, MUTED);
+            }
+        }
+        c.clip = None;
+    }
+
+    /// Keeps the card cursor within the fully visible cards.
+    fn fix_card_scroll(&mut self) {
+        if self.load_cursor < self.save_scroll {
+            self.save_scroll = self.load_cursor;
+        } else if self.load_cursor >= self.save_scroll + CARDS_FULL {
+            self.save_scroll = self.load_cursor + 1 - CARDS_FULL;
+        }
+    }
+
     /// Bottom row of button prompts, for the device in use.
     fn draw_hints(&self, c: &mut Canvas) {
         let pad = self.pad_ui;
@@ -1434,9 +1493,9 @@ impl Menu {
         let y = 344.0;
         if self.capturing() {
             let s = if pad { "Press a button or key to bind" } else { "Press a key or button to bind" };
-            let w = s.len() as f32 * 8.0;
-            c.fill(320.0 - w / 2.0 - 8.0, y - 4.0, w + 16.0, 18.0, [0.0, 0.0, 0.0, 0.8]);
-            gold(c, 320.0 - w / 2.0, y + 1.0, s);
+            let w = c.text_w(s, TXT);
+            c.round_box(320.0 - w / 2.0 - 8.0, y - 3.0, w + 16.0, 18.0, 4.0, [0.0, 0.0, 0.0, 0.8], None);
+            c.text(320.0 - w / 2.0, y + 2.0, s, TXT, GOLD_FG);
             return;
         }
         if self.osk.is_some() {
@@ -1472,28 +1531,24 @@ impl Menu {
             if k == d.cursor {
                 c.fill(x + 1.0, ry, w - 2.0, ROW_H, HILITE);
             }
-            if k == cur {
-                gold(c, x + 4.0, ry + 1.0, o);
-            } else {
-                c.string(x + 4.0, ry + 1.0, o);
-            }
+            c.text(x + 4.0, ry + 1.0, o, TXT, if k == cur { GOLD_FG } else { FG });
         }
         // scroll hints
         if d.scroll > 0 {
-            c.ch(x + w - 10.0, y + 2.0, b'^' | 128);
+            c.shape(x + w - 10.0, y + 2.0, 7.0, 7.0, crate::font::Shape::ArrowUp, GOLD_FG);
         }
         if d.scroll + vis < opts.len() {
-            c.ch(x + w - 10.0, y + h - 10.0, b'v' | 128);
+            c.shape(x + w - 10.0, y + h - 9.0, 7.0, 7.0, crate::font::Shape::ArrowDown, GOLD_FG);
         }
     }
 
     fn draw_item(&self, c: &mut Canvas, cv: &Cvars, item: Item, y: f32, blink: bool) {
-        let label = |c: &mut Canvas, l: &str| c.string(LABEL_R - l.len() as f32 * 8.0, y, l);
+        let label = |c: &mut Canvas, l: &str| c.text_right(LABEL_R, y, l, TXT, FG);
         // values with a dropdown get a combo box
         if self.options(item).len() > 2 {
             c.fill(VALUE_X - 3.0, y - 1.0, DROP_W, ROW_H, [0.0, 0.0, 0.0, 0.5]);
             c.frame(VALUE_X - 3.0, y - 1.0, DROP_W, ROW_H, BORDER);
-            c.ch(VALUE_X + DROP_W - 13.0, y, b'v' | 128);
+            c.shape(VALUE_X + DROP_W - 13.0, y + 1.0, 7.0, 7.0, crate::font::Shape::ArrowDown, GOLD_FG);
         }
         match item {
             Item::Slider { label: l, cvar, min, max, invert, .. } => {
@@ -1503,26 +1558,25 @@ impl Menu {
                 if invert {
                     f = 1.0 - f;
                 }
-                c.ch(VALUE_X, y, 128);
-                for k in 0..10 {
-                    c.ch(VALUE_X + 8.0 + k as f32 * 8.0, y, 129);
-                }
-                c.ch(VALUE_X + 88.0, y, 130);
-                c.ch(VALUE_X + 8.0 + 72.0 * f, y, 131);
-                c.string(VALUE_X + 100.0, y, &qcore::cvar::format_float((v * 1000.0).round() / 1000.0));
+                // track, filled part, knob
+                let (tx, tw) = (VALUE_X, 92.0);
+                c.round_box(tx, y + 3.0, tw, 3.0, 1.5, [0.25, 0.22, 0.19, 1.0], None);
+                c.round_box(tx, y + 3.0, (tw * f).max(3.0), 3.0, 1.5, [0.80, 0.55, 0.22, 1.0], None);
+                c.round_box(tx + (tw - 8.0) * f, y + 0.5, 8.0, 8.0, 4.0, [0.95, 0.80, 0.55, 1.0], Some([0.2, 0.12, 0.05, 0.8]));
+                txt(c, VALUE_X + 100.0, y, &qcore::cvar::format_float((v * 1000.0).round() / 1000.0));
             }
             Item::Toggle { label: l, cvar } => {
                 label(c, l);
-                c.string(VALUE_X, y, if cv.value_of(cvar) != 0.0 { "on" } else { "off" });
+                { txt(c, VALUE_X, y, if cv.value_of(cvar) != 0.0 { "on" } else { "off" }); }
             }
             Item::Choice { label: l, cvar, choices } => {
                 label(c, l);
                 let n = self.choice_count(cvar, choices);
-                c.string(VALUE_X, y, choices[nearest_choice(cv.value_of(cvar), &choices[..n])].0);
+                { txt(c, VALUE_X, y, choices[nearest_choice(cv.value_of(cvar), &choices[..n])].0); }
             }
             Item::DisplayMode => {
                 label(c, "Display Mode");
-                c.string(VALUE_X, y, MODES[self.pending_mode.min(2)]);
+                { txt(c, VALUE_X, y, MODES[self.pending_mode.min(2)]); }
             }
             Item::Resolution => {
                 label(c, "Resolution");
@@ -1531,18 +1585,18 @@ impl Menu {
                 } else {
                     format!("{}x{}", self.pending_res.0, self.pending_res.1)
                 };
-                c.string(VALUE_X, y, &s);
+                { txt(c, VALUE_X, y, &s); }
             }
             Item::Text { label: l, cvar, max } => {
                 label(c, l);
                 let v = cv.by_name(cvar).map_or("", |c| c.string.as_str());
                 // fits inside the panel: 20 visible characters at most
-                let w = (max.min(20) as f32 * 8.0 + 14.0).min(PANEL_X + PANEL_W - VALUE_X - 4.0);
+                let w = (max.min(20) as f32 * 7.0 + 14.0).min(PANEL_X + PANEL_W - VALUE_X - 4.0);
                 c.fill(VALUE_X - 3.0, y - 1.0, w, ROW_H, [0.0, 0.0, 0.0, 0.5]);
                 let shown: String = v.chars().skip(v.len().saturating_sub(20)).collect();
-                c.string(VALUE_X, y, &shown);
+                let tw = txt(c, VALUE_X, y, &shown);
                 if blink {
-                    c.ch(VALUE_X + shown.len() as f32 * 8.0, y, 11);
+                    c.fill(VALUE_X + tw + 1.0, y, 1.0, 8.0, FG);
                 }
             }
             Item::Color { label: l, high } => {
@@ -1552,25 +1606,25 @@ impl Menu {
                 let [r, g, b] = crate::draw::PLAYER_COLORS[k].map(|x| x as f32 / 255.0);
                 c.fill(VALUE_X, y - 1.0, 40.0, ROW_H - 1.0, [r, g, b, 1.0]);
                 c.frame(VALUE_X, y - 1.0, 40.0, ROW_H - 1.0, BORDER);
-                c.string(VALUE_X + 48.0, y, &k.to_string());
+                { txt(c, VALUE_X + 48.0, y, &k.to_string()); }
             }
             Item::Map => {
                 label(c, "Map");
                 let m = self.host_map(cv).unwrap_or_else(|| "(none)".into());
                 let t = self.net_maps.iter().find(|x| x.name == m).map_or(String::new(), |x| x.title.clone());
                 let s: String = format!("{m} {t}").chars().take(13).collect();
-                c.string(VALUE_X, y, &s);
+                { txt(c, VALUE_X, y, &s); }
             }
             Item::Run { label: l, run } => {
                 let l = if run == Run::Search && self.searching { "Searching..." } else { l };
-                gold(c, ((640.0 - l.len() as f32 * 8.0) / 2.0).floor(), y, l);
+                c.text_center(320.0, y, l, TXT, GOLD_FG);
             }
             Item::Server(k) => {
                 if let Some(s) = self.servers.get(k) {
                     let name: String = s.hostname.chars().take(20).collect();
                     label(c, &name);
                     let m: String = s.map.chars().take(10).collect();
-                    c.string(VALUE_X, y, &format!("{m:<10} {}/{}", s.players, s.max_players));
+                    { txt(c, VALUE_X, y, &format!("{m:<10} {}/{}", s.players, s.max_players)); }
                 }
             }
             Item::Bind { label: l, cmd } => {
@@ -1579,7 +1633,7 @@ impl Menu {
                 let capturing = self.capture.is_some_and(|r| matches!(page_items(Page::Controls).get(r), Some(Item::Bind { cmd: c2, .. }) if *c2 == cmd));
                 if capturing {
                     if blink {
-                        gold(c, VALUE_X, y, "press a key...");
+                        txt_gold(c, VALUE_X, y, "press a key...");
                     }
                     return;
                 }
@@ -1587,37 +1641,34 @@ impl Menu {
                 let (mut x, mut px) = (VALUE_X, BIND_PAD_X);
                 for &k in &keys {
                     if is_pad_key(k) {
-                        if px + crate::glyphs::width(k, g.family) < PANEL_X + PANEL_W - 2.0 {
+                        if px + crate::glyphs::width(c, k, g.family, crate::glyphs::H) < PANEL_X + PANEL_W - 2.0 {
                             px += g.key(c, px, y - 1.0, k) + 3.0;
                         }
-                    } else if x + crate::glyphs::width(k, g.family) < BIND_PAD_X - 4.0 {
+                    } else if x + crate::glyphs::width(c, k, g.family, crate::glyphs::H) < BIND_PAD_X - 4.0 {
                         x += g.key(c, x, y - 1.0, k) + 3.0;
                     }
                 }
                 if x == VALUE_X {
-                    c.string(VALUE_X, y, "---");
+                    { txt(c, VALUE_X, y, "---"); }
                 }
                 if px == BIND_PAD_X {
-                    c.string(BIND_PAD_X, y, "---");
+                    { txt(c, BIND_PAD_X, y, "---"); }
                 }
             }
             Item::Sub { label: l, page } => {
                 label(c, l);
                 let dim = page == Page::Autosave && cv.value_of("sv_autosave") == 0.0;
-                c.string(VALUE_X, y, if dim { "(off) >" } else { ">" });
+                { txt(c, VALUE_X, y, if dim { "(off) >" } else { ">" }); }
             }
             Item::ResetBinds => {
-                let l = "Reset to Defaults";
-                gold(c, ((640.0 - l.len() as f32 * 8.0) / 2.0).floor(), y, l);
+                c.text_center(320.0, y, "Reset to Defaults", TXT, GOLD_FG);
             }
             Item::Apply => {
                 let dirty = self.display_dirty(cv);
                 label(c, "Apply Display");
                 if dirty {
                     // gold text: pending changes
-                    for (k, b) in "press enter".bytes().enumerate() {
-                        c.ch(VALUE_X + k as f32 * 8.0, y, b | 128);
-                    }
+                    txt_gold(c, VALUE_X, y, "press enter");
                 }
             }
         }
@@ -1648,6 +1699,20 @@ const MAIN_ITEMS: usize = 6;
 
 pub const BORDER: [f32; 4] = [0.55, 0.42, 0.25, 1.0];
 pub const HILITE: [f32; 4] = [0.6, 0.38, 0.12, 0.45];
+
+/// Modern menu text: em size and colours.
+pub const TXT: f32 = 9.0;
+pub const FG: [f32; 4] = [0.88, 0.86, 0.82, 1.0];
+pub const GOLD_FG: [f32; 4] = [0.95, 0.70, 0.34, 1.0];
+pub const MUTED: [f32; 4] = [0.62, 0.59, 0.54, 1.0];
+
+/// Modern text at the conchars position (x, y); returns its width.
+pub fn txt(c: &mut Canvas, x: f32, y: f32, s: &str) -> f32 {
+    c.text(x, y, s, TXT, FG)
+}
+pub fn txt_gold(c: &mut Canvas, x: f32, y: f32, s: &str) -> f32 {
+    c.text(x, y, s, TXT, GOLD_FG)
+}
 
 /// Brown/gold conchars text.
 pub fn gold(c: &mut Canvas, x: f32, y: f32, s: &str) {
@@ -1881,7 +1946,7 @@ mod save_menu_tests {
         m.open(Screen::Load);
         assert_eq!(m.save_slot_name(0).as_deref(), Some("autosave0"));
         assert_eq!(m.save_slot_name(2).as_deref(), Some("s0"));
-        m.key(K_RIGHTARROW, &mut cv, true);
+        m.key(K_DOWNARROW, &mut cv, true);
         assert_eq!(m.load_cursor, 1);
         let actions = m.key(K_ENTER, &mut cv, true);
         assert!(m.autosaves);
@@ -1900,14 +1965,28 @@ mod save_menu_tests {
         assert_eq!(m.save_rows(), MAX_SAVEGAMES);
     }
     #[test]
-    fn card_mouse_coordinates_follow_keyboard_pages() {
+    fn card_mouse_coordinates_follow_scrolling() {
         let mut m = Menu::new();
         m.open(Screen::Load);
-        assert_eq!(m.item_at((40.0, 64.0)), Some(0));
-        assert_eq!(m.item_at((340.0, 200.0)), Some(3));
-        m.load_cursor = 4;
-        assert_eq!(m.item_at((40.0, 64.0)), Some(4));
-        assert_eq!(m.item_at((20.0, 64.0)), None);
+        assert_eq!(m.item_at((40.0, CARD_Y0 + 4.0)), Some(0));
+        assert_eq!(m.item_at((400.0, CARD_Y0 + 3.0 * CARD_PITCH + 4.0)), Some(3));
+        // the cut-off fifth card is still clickable, the gap between cards isn't
+        assert_eq!(m.item_at((400.0, CARD_Y0 + 4.0 * CARD_PITCH + 4.0)), Some(4));
+        assert_eq!(m.item_at((400.0, CARD_Y0 + CARD_H + 1.0)), None);
+        assert_eq!(m.item_at((20.0, CARD_Y0 + 4.0)), None);
+        // moving down past the fourth card scrolls by one
+        let mut cv = Cvars::default();
+        for _ in 0..5 {
+            m.key(K_DOWNARROW, &mut cv, false);
+        }
+        assert_eq!((m.load_cursor, m.save_scroll), (5, 2));
+        assert_eq!(m.item_at((40.0, CARD_Y0 + 4.0)), Some(2));
+        m.key(K_UPARROW, &mut cv, false);
+        m.key(K_UPARROW, &mut cv, false);
+        m.key(K_UPARROW, &mut cv, false);
+        assert_eq!((m.load_cursor, m.save_scroll), (2, 2));
+        m.key(K_UPARROW, &mut cv, false);
+        assert_eq!((m.load_cursor, m.save_scroll), (1, 1));
     }
 
     #[test]

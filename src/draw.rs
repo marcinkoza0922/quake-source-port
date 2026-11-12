@@ -1,7 +1,11 @@
 //! 2D drawing helpers over `qrender::Draw2D` (draw.c equivalents) and the
 //! picture cache (gfx.wad lumps and gfx/*.lmp files).
 
+use std::cell::RefCell;
 use std::collections::HashMap;
+use std::rc::Rc;
+
+use crate::font::{Shape, UiText};
 
 use qcore::fs::Fs;
 use qformats::Wad;
@@ -13,41 +17,22 @@ use qrender::{Draw2D, PicId, Renderer};
 pub struct Pics {
     wad: Option<Wad>,
     cache: HashMap<String, Option<(PicId, u32, u32)>>,
-    /// conchars indices (128×128), kept so `ui_font` can rebuild the atlas.
-    pub conchars: Vec<u8>,
-    /// Upscale pictures with [`crate::font::smooth_pic`] (`ui_smoothpics`).
-    pub smooth: bool,
 }
 
 impl Pics {
     pub fn new(fs: &Fs, r: &mut Renderer) -> Self {
         let wad = fs.open("gfx.wad").and_then(|d| Wad::parse(&d).ok());
-        let mut conchars = Vec::new();
         if let Some(c) = wad.as_ref().and_then(|w| w.get("conchars"))
             && c.data.len() >= 128 * 128
         {
-            conchars = c.data[..128 * 128].to_vec();
-            let _ = crate::font::apply(r, fs, &conchars, 1, "");
+            let _ = r.set_conchars(&c.data[..128 * 128]);
         }
-        Self { wad, cache: HashMap::new(), conchars, smooth: true }
-    }
-
-    fn register(&self, r: &mut Renderer, p: &Pic) -> Option<(PicId, u32, u32)> {
-        let id = if self.smooth {
-            let (w, h, mips) = crate::font::smooth_pic(r.palette(), p.width, p.height, &p.pixels);
-            let refs: Vec<&[u8]> = mips.iter().map(|m| m.as_slice()).collect();
-            r.register_pic_mips(w, h, &refs).ok()
-        } else {
-            r.register_pic(p).ok()
-        };
-        id.map(|id| (id, p.width, p.height))
+        Self { wad, cache: HashMap::new() }
     }
 
     /// Picture by wad lump name, or by path when it contains '/'.
     pub fn get(&mut self, fs: &Fs, r: &mut Renderer, name: &str) -> Option<(PicId, u32, u32)> {
-        // smooth and classic copies are cached apart, so toggling reuses both
-        let key = if self.smooth { format!("~{name}") } else { name.to_string() };
-        if let Some(p) = self.cache.get(&key) {
+        if let Some(p) = self.cache.get(name) {
             return *p;
         }
         // "path#top,bottom": the picture with player colours (menuplyr.lmp).
@@ -58,8 +43,8 @@ impl Pics {
                 translate_player(&mut p.pixels, t, b);
                 p
             });
-            let v = pic.and_then(|p| self.register(r, &p));
-            self.cache.insert(key, v);
+            let v = pic.and_then(|p| r.register_pic(&p).ok().map(|id| (id, p.width, p.height)));
+            self.cache.insert(name.to_string(), v);
             return v;
         }
         let pic: Option<Pic> = if name.contains('/') {
@@ -67,8 +52,8 @@ impl Pics {
         } else {
             self.wad.as_ref().and_then(|w| w.get(name)).and_then(|l| parse_pic(&l.data).ok())
         };
-        let v = pic.and_then(|p| self.register(r, &p));
-        self.cache.insert(key, v);
+        let v = pic.and_then(|p| r.register_pic(&p).ok().map(|id| (id, p.width, p.height)));
+        self.cache.insert(name.to_string(), v);
         v
     }
 }
@@ -120,6 +105,10 @@ pub struct Canvas {
     pub scale: f32,
     pub ox: f32,
     pub oy: f32,
+    /// Modern text/shape atlas ([`crate::font`]); without it text is skipped.
+    pub ui: Option<Rc<RefCell<UiText>>>,
+    /// Vertical clip in pixels (top, bottom) for everything pushed.
+    pub clip: Option<(f32, f32)>,
 }
 
 pub const WHITE: [f32; 4] = [1.0; 4];
@@ -127,7 +116,7 @@ pub const WHITE: [f32; 4] = [1.0; 4];
 impl Canvas {
     pub fn new(w: u32, h: u32) -> Self {
         let scale = (h as f32 / 240.0).floor().clamp(1.0, 8.0);
-        Self { list: Vec::new(), w: w as f32, h: h as f32, scale, ox: 0.0, oy: 0.0 }
+        Self { list: Vec::new(), w: w as f32, h: h as f32, scale, ox: 0.0, oy: 0.0, ui: None, clip: None }
     }
     /// Virtual width/height at the current scale.
     pub fn vw(&self) -> f32 {
@@ -168,7 +157,7 @@ impl Canvas {
     pub fn pic_color(&mut self, x: f32, y: f32, p: Option<(PicId, u32, u32)>, color: [f32; 4]) {
         let Some((pic, w, h)) = p else { return };
         let (px, py) = self.px(x, y);
-        self.list.push(Draw2D::Pic {
+        self.push(Draw2D::Pic {
             x: px,
             y: py,
             w: w as f32 * self.scale,
@@ -191,7 +180,7 @@ impl Canvas {
             return;
         }
         let (px, py) = self.px(x, y);
-        self.list.push(Draw2D::Char { x: px, y: py, size: 8.0 * self.scale, ch: c, color });
+        self.push(Draw2D::Char { x: px, y: py, size: 8.0 * self.scale, ch: c, color });
     }
     /// Plain string.
     pub fn string(&mut self, x: f32, y: f32, s: &str) {
@@ -201,7 +190,179 @@ impl Canvas {
     }
     pub fn fill(&mut self, x: f32, y: f32, w: f32, h: f32, color: [f32; 4]) {
         let (px, py) = self.px(x, y);
-        self.list.push(Draw2D::Fill { x: px, y: py, w: w * self.scale, h: h * self.scale, color });
+        self.push(Draw2D::Fill { x: px, y: py, w: w * self.scale, h: h * self.scale, color });
+    }
+
+    /// Adds a draw, cut to [`Self::clip`].
+    pub fn push(&mut self, d: Draw2D) {
+        let Some((top, bot)) = self.clip else {
+            self.list.push(d);
+            return;
+        };
+        match d {
+            Draw2D::Fill { x, y, w, h, color } => {
+                let (y0, y1) = (y.max(top), (y + h).min(bot));
+                if y1 > y0 {
+                    self.list.push(Draw2D::Fill { x, y: y0, w, h: y1 - y0, color });
+                }
+            }
+            Draw2D::Pic { x, y, w, h, pic, uv, color } => {
+                let (y0, y1) = (y.max(top), (y + h).min(bot));
+                if y1 > y0 && h > 0.0 {
+                    let dv = uv[3] - uv[1];
+                    let v0 = uv[1] + (y0 - y) / h * dv;
+                    let v1 = uv[1] + (y1 - y) / h * dv;
+                    self.list.push(Draw2D::Pic { x, y: y0, w, h: y1 - y0, pic, uv: [uv[0], v0, uv[2], v1], color });
+                }
+            }
+            Draw2D::Char { y, size, .. } => {
+                if y >= top && y + size <= bot {
+                    self.list.push(d);
+                }
+            }
+            other => self.list.push(other),
+        }
+    }
+
+    /// Sets the clip to virtual rows `y0..y1` (None clears).
+    pub fn clip_rows(&mut self, rows: Option<(f32, f32)>) {
+        self.clip = rows.map(|(a, b)| ((a + self.oy) * self.scale, (b + self.oy) * self.scale));
+    }
+
+    fn em_px(&self, size: f32) -> f32 {
+        (size * self.scale).round().max(4.0)
+    }
+
+    /// Width in virtual units of modern text `s` at em size `size`.
+    pub fn text_w(&self, s: &str, size: f32) -> f32 {
+        self.ui.as_ref().map_or(s.len() as f32 * size * 0.6, |u| u.borrow().measure(s, self.em_px(size)) / self.scale)
+    }
+
+    /// Modern text with its em box top at (x, y), drawn at native pixel
+    /// size. Returns the width in virtual units.
+    pub fn text(&mut self, x: f32, y: f32, s: &str, size: f32, color: [f32; 4]) -> f32 {
+        let Some(ui) = self.ui.clone() else { return 0.0 };
+        let mut ui = ui.borrow_mut();
+        let px = self.em_px(size);
+        let Some(pic) = ui.pic else { return 0.0 };
+        let (x0, y0) = self.px(x, y);
+        let (x0, base) = (x0.round(), (y0 + px * 0.8).round());
+        let a = crate::font::UiText::atlas_size() as f32;
+        let lay = ui.layout(s, px);
+        let width = lay.last().map_or(0.0, |&(_, x, adv)| x + adv);
+        for (ch, pen, _) in lay {
+            if ch == ' ' {
+                continue;
+            }
+            if let Some(g) = ui.glyph(ch, px as u16) {
+                let (gx, gy) = (x0 + pen + g.ox as f32, base + g.oy as f32);
+                let uv = [g.x as f32 / a, g.y as f32 / a, (g.x + g.w) as f32 / a, (g.y + g.h) as f32 / a];
+                self.push(Draw2D::Pic { x: gx, y: gy, w: g.w as f32, h: g.h as f32, pic, uv, color });
+            }
+        }
+        width / self.scale
+    }
+
+    /// Text right-aligned to `x`.
+    pub fn text_right(&mut self, x: f32, y: f32, s: &str, size: f32, color: [f32; 4]) {
+        let w = self.text_w(s, size);
+        self.text(x - w, y, s, size, color);
+    }
+
+    /// Text centred on `cx`.
+    pub fn text_center(&mut self, cx: f32, y: f32, s: &str, size: f32, color: [f32; 4]) {
+        let w = self.text_w(s, size);
+        self.text(cx - w / 2.0, y, s, size, color);
+    }
+
+    /// A vector shape filling the virtual rectangle, rasterised at its pixel
+    /// size. `r`/`t` in [`Shape`] are given in pixels by the caller; use
+    /// [`Self::upx`] to convert.
+    pub fn shape(&mut self, x: f32, y: f32, w: f32, h: f32, s: Shape, color: [f32; 4]) {
+        let Some(ui) = self.ui.clone() else {
+            self.fill(x, y, w, h, color);
+            return;
+        };
+        let mut ui = ui.borrow_mut();
+        let Some(pic) = ui.pic else { return };
+        let (px, py) = self.px(x, y);
+        let (px, py) = (px.round(), py.round());
+        let (pw, ph) = ((w * self.scale).round().max(1.0), (h * self.scale).round().max(1.0));
+        if let Some(g) = ui.shape(s, pw as u16, ph as u16) {
+            let a = crate::font::UiText::atlas_size() as f32;
+            let uv = [g.x as f32 / a, g.y as f32 / a, (g.x + g.w) as f32 / a, (g.y + g.h) as f32 / a];
+            self.push(Draw2D::Pic { x: px, y: py, w: pw, h: ph, pic, uv, color });
+        }
+    }
+
+    /// Virtual units to whole pixels (at least 1), for shape radii/strokes.
+    pub fn upx(&self, v: f32) -> u16 {
+        (v * self.scale).round().max(1.0) as u16
+    }
+
+    /// Rounded box: fill plus an optional 1 px edge. Drawn as nine slices
+    /// (corners cut from a small 2r×2r shape, the rest as flat fills), so
+    /// big panels don't need big atlas entries.
+    #[allow(clippy::too_many_arguments)]
+    pub fn round_box(&mut self, x: f32, y: f32, w: f32, h: f32, r: f32, fill: [f32; 4], edge: Option<[f32; 4]>) {
+        let (px, py) = self.px(x, y);
+        let (x0, y0) = (px.round(), py.round());
+        let (x1, y1) = ((px + w * self.scale).round(), (py + h * self.scale).round());
+        let (pw, ph) = (x1 - x0, y1 - y0);
+        if pw < 1.0 || ph < 1.0 {
+            return;
+        }
+        let r = (r * self.scale).round().min((pw / 2.0).floor()).min((ph / 2.0).floor()).max(0.0);
+        let t = 1.0;
+        self.slices(x0, y0, pw, ph, r, Shape::Round { r: r as u16 }, fill, None);
+        if let Some(e) = edge {
+            self.slices(x0, y0, pw, ph, r, Shape::RoundEdge { r: r as u16, t: 1 }, e, Some(t));
+        }
+    }
+
+    /// Nine-slice draw in pixels. `edge` = Some(thickness): only the border
+    /// strips are filled between the corners.
+    #[allow(clippy::too_many_arguments)]
+    fn slices(&mut self, x: f32, y: f32, w: f32, h: f32, r: f32, s: Shape, color: [f32; 4], edge: Option<f32>) {
+        let fill_px = |c: &mut Self, fx: f32, fy: f32, fw: f32, fh: f32| {
+            if fw > 0.0 && fh > 0.0 {
+                c.push(Draw2D::Fill { x: fx, y: fy, w: fw, h: fh, color });
+            }
+        };
+        if r >= 1.0 {
+            let Some(ui) = self.ui.clone() else { return };
+            let corner = {
+                let mut ui = ui.borrow_mut();
+                ui.pic.zip(ui.shape(s, (2.0 * r) as u16, (2.0 * r) as u16))
+            };
+            if let Some((pic, g)) = corner {
+                let a = crate::font::UiText::atlas_size() as f32;
+                let (u0, v0) = (g.x as f32 / a, g.y as f32 / a);
+                let (um, vm) = ((g.x as f32 + r) / a, (g.y as f32 + r) / a);
+                let (u1, v1) = ((g.x + g.w) as f32 / a, (g.y + g.h) as f32 / a);
+                for (cx, cy, uv) in [
+                    (x, y, [u0, v0, um, vm]),
+                    (x + w - r, y, [um, v0, u1, vm]),
+                    (x, y + h - r, [u0, vm, um, v1]),
+                    (x + w - r, y + h - r, [um, vm, u1, v1]),
+                ] {
+                    self.push(Draw2D::Pic { x: cx, y: cy, w: r, h: r, pic, uv, color });
+                }
+            }
+        }
+        match edge {
+            None => {
+                fill_px(self, x + r, y, w - 2.0 * r, r);
+                fill_px(self, x, y + r, w, h - 2.0 * r);
+                fill_px(self, x + r, y + h - r, w - 2.0 * r, r);
+            }
+            Some(t) => {
+                fill_px(self, x + r, y, w - 2.0 * r, t);
+                fill_px(self, x + r, y + h - t, w - 2.0 * r, t);
+                fill_px(self, x, y + r, t, h - 2.0 * r);
+                fill_px(self, x + w - t, y + r, t, h - 2.0 * r);
+            }
+        }
     }
     /// Whole-screen fade (Draw_FadeScreen).
     pub fn fade_screen(&mut self) {
