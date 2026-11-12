@@ -52,3 +52,6 @@ miniz_oxide = "0.8"
 lto = "thin"
 codegen-units = 1
 panic = "abort"
+
+[dev-dependencies]
+qwfake = { path = "tools/qwfake" }

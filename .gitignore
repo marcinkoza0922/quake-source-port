@@ -4,3 +4,4 @@
 /vkQuake directory with maps
 *.pak
 *.pk3
+/refs/

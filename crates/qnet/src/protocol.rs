@@ -177,4 +177,6 @@ pub const MAX_DATAGRAM: usize = 64000;
 pub const MAX_MODELS: usize = 4096;
 pub const MAX_SOUNDS: usize = 2048;
 pub const MAX_LIGHTSTYLES: usize = 64;
-pub const MAX_SCOREBOARD: usize = 16;
+/// Client-side scoreboard limit: NQ servers send at most 16 slots, QuakeWorld
+/// (translated by `qclient::qw`) 32.
+pub const MAX_SCOREBOARD: usize = 32;

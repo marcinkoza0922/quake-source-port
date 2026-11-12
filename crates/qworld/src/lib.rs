@@ -5,6 +5,7 @@ pub mod ents;
 pub mod hull;
 pub mod monster;
 pub mod phys;
+pub mod pmove;
 pub mod user;
 pub mod world;
 

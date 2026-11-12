@@ -16,6 +16,7 @@ mod modmenu;
 mod net;
 mod platform;
 mod png;
+mod qw;
 mod sbar;
 mod saveinfo;
 mod save_inventory;

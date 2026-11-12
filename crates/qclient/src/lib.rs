@@ -11,6 +11,7 @@ mod anorms;
 mod effects;
 mod input;
 mod parse;
+pub mod qw;
 mod relink;
 mod state;
 

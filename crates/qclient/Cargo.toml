@@ -12,6 +12,7 @@ qcore = { path = "../qcore" }
 qecs = { path = "../qecs" }
 qformats = { path = "../qformats" }
 qnet = { path = "../qnet" }
+qworld = { path = "../qworld" }
 
 [dev-dependencies]
 qserver = { path = "../qserver" }
