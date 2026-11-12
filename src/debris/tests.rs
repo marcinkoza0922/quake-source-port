@@ -70,3 +70,14 @@ fn bodies_bounce_and_rest() {
     assert!((b.pos.z - 3.0).abs() < 0.5, "{:?}", b.pos);
     assert!(b.pos.x > 10.0);
 }
+
+#[test]
+fn mixed_start_odds() {
+    use super::events::animation_chance;
+    assert_eq!(animation_chance(0.0), 1.0);
+    assert_eq!(animation_chance(6.0), 0.0);
+    assert_eq!(animation_chance(14.0), 0.0);
+    assert!(animation_chance(1.0) > animation_chance(4.0));
+    assert_eq!(Start::from_cvar(2.0), Start::Mixed);
+    assert_eq!(Start::from_cvar(0.0), Start::Animation);
+}

@@ -26,7 +26,35 @@ fn segment_dist(a: Vec3, b: Vec3, p: Vec3) -> f32 {
     (a + dir * t - p).length()
 }
 
+/// Killing-hit strength (in shotgun pellets) at or above which the mixed
+/// ragdoll start always goes limp at death.
+const MIXED_HARD: f32 = 6.0;
+/// A point-blank explosion counts as this many pellets.
+const BOOM_IMPACT: f32 = 12.0;
+
+/// Mixed start: chance that a kill of strength `impact` plays the death
+/// animation; it grows the further the hit falls below `MIXED_HARD`.
+pub(super) fn animation_chance(impact: f32) -> f32 {
+    (1.0 - impact / MIXED_HARD).clamp(0.0, 1.0)
+}
+
 impl Debris {
+    /// Strength of the hit that just killed the monster at `origin`: the
+    /// pellets of the latest volley passing near it plus nearby explosions.
+    fn kill_impact(&self, origin: Vec3, time: f64) -> f32 {
+        let body = origin + Vec3::new(0.0, 0.0, 8.0);
+        let near = |s: &&(Vec3, Vec3, f64)| time - s.2 < SHOT_MEMORY && segment_dist(s.0, s.1, body) < 40.0;
+        let last = self.shots.iter().filter(near).map(|s| s.2).max_by(f64::total_cmp);
+        let pellets = last.map_or(0, |t| self.shots.iter().filter(near).filter(|s| s.2 == t).count()) as f32;
+        let booms: f32 = self
+            .booms
+            .iter()
+            .filter(|b| time - b.1 < BOOM_MEMORY)
+            .map(|b| (1.0 - (b.0 - body).length() / 220.0).max(0.0) * BOOM_IMPACT)
+            .sum();
+        pellets + booms
+    }
+
     /// Starts simulating corpses that finished dying and new gibs.
     pub(super) fn take_over(&mut self, cl: &mut ClientState, lv: &Level, fs: &qcore::fs::Fs, time: f64, set: &Settings) {
         let Some(cm) = self.cm.clone() else { return };
@@ -45,11 +73,11 @@ impl Debris {
             if !info.gib && !info.is_death(frame) {
                 continue;
             }
-            let tr = self.tracks.entry(i).or_insert(Track { model, frame, since: time });
+            let tr = self.tracks.entry(i).or_insert(Track { model, frame, since: time, limp: None });
             if tr.model != model || tr.frame != frame {
-                *tr = Track { model, frame, since: time };
+                *tr = Track { model, frame, since: time, limp: tr.limp.filter(|_| tr.model == model) };
             }
-            let held = time - tr.since;
+            let (held, limp) = (time - tr.since, tr.limp);
             let e = &cl.entities[i];
             if info.gib {
                 if !set.gibs {
@@ -74,7 +102,20 @@ impl Debris {
                 cl.debris_owned[i] = true;
                 continue;
             }
-            let ready = set.at_death || (info.is_last(frame) && held >= HOLD_FINAL) || held >= HOLD_ANY;
+            let at_death = match set.start {
+                Start::Animation => false,
+                Start::AtDeath => true,
+                Start::Mixed => match limp {
+                    Some(l) => l,
+                    None => {
+                        let l = self.rng().unit() >= animation_chance(self.kill_impact(Vec3::from(e.origin), time));
+                        self.tracks.get_mut(&i).unwrap().limp = Some(l);
+                        l
+                    }
+                },
+            };
+            let e = &cl.entities[i];
+            let ready = at_death || (info.is_last(frame) && held >= HOLD_FINAL) || held >= HOLD_ANY;
             if !set.ragdolls || !ready || i <= cl.maxclients || self.corpses.len() >= set.max_ragdolls {
                 continue;
             }

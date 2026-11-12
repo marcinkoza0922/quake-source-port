@@ -26,7 +26,7 @@ impl Host {
             let gravity = self.cv("sv_gravity");
             let set = crate::debris::Settings {
                 ragdolls: self.cv("r_debris_ragdolls") != 0.0,
-                at_death: self.cv("r_debris_ragdollstart") != 0.0,
+                start: crate::debris::Start::from_cvar(self.cv("r_debris_ragdollstart")),
                 max_ragdolls: self.cv("r_debris_maxragdolls").clamp(1.0, 128.0) as usize,
                 gibs: self.cv("r_debris_gibs") != 0.0,
                 shrapnel: self.cv("r_debris_shrapnel") != 0.0,

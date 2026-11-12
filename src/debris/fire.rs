@@ -14,6 +14,9 @@ const MISSILE_REACH: f32 = 160.0;
 const FLASH_MEMORY: f64 = 0.15;
 /// Eye height above an entity's origin.
 const EYE: f32 = 16.0;
+/// A flashing entity this close to the impact is the one hit (a monster
+/// shot while firing), not the shooter.
+const SELF_HIT: f32 = 56.0;
 
 fn velocity(cl: &ClientState, e: &qclient::ClientEntity) -> Vec3 {
     let dt = cl.mtime[0] - cl.mtime[1];
@@ -64,7 +67,7 @@ impl Debris {
         self.flashes
             .iter()
             .map(|f| f.0.unwrap_or(view))
-            .filter(|&eye| clear(eye))
+            .filter(|&eye| (eye - p).length() > SELF_HIT && clear(eye))
             .min_by(|a, b| (*a - p).length_sq().total_cmp(&(*b - p).length_sq()))
             .unwrap_or(view)
     }

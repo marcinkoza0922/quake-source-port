@@ -62,12 +62,33 @@ const TRAIL_KEYS: i32 = 0x4000_0000;
 /// An explosion this close to a ragdoll's bones gibs it.
 const DIRECT_HIT: f32 = 28.0;
 
+/// `r_debris_ragdollstart`: when a dying monster becomes a ragdoll.
+#[derive(Clone, Copy, PartialEq, Eq, Debug)]
+pub enum Start {
+    /// After the death animation (0).
+    Animation,
+    /// On the first death frame (1).
+    AtDeath,
+    /// At death for a hard killing hit; a weaker one may play the animation (2).
+    Mixed,
+}
+
+impl Start {
+    pub fn from_cvar(v: f32) -> Start {
+        match v as i32 {
+            1 => Start::AtDeath,
+            2 => Start::Mixed,
+            _ => Start::Animation,
+        }
+    }
+}
+
 /// The `r_debris_*` sub-options.
 #[derive(Clone, Copy)]
 pub struct Settings {
     pub ragdolls: bool,
-    /// Go limp on the first death frame instead of after the animation.
-    pub at_death: bool,
+    /// When a dying monster goes limp.
+    pub start: Start,
     pub max_ragdolls: usize,
     pub gibs: bool,
     pub shrapnel: bool,
@@ -81,7 +102,7 @@ pub struct Settings {
 
 impl Default for Settings {
     fn default() -> Self {
-        Settings { ragdolls: true, at_death: false, max_ragdolls: 48, gibs: true, shrapnel: true, movers: true, force: 1.0, kill_lift: false }
+        Settings { ragdolls: true, start: Start::Mixed, max_ragdolls: 48, gibs: true, shrapnel: true, movers: true, force: 1.0, kill_lift: false }
     }
 }
 
@@ -125,6 +146,8 @@ struct Track {
     model: usize,
     frame: i32,
     since: f64,
+    /// Mixed start: decided on the first death frame whether to go limp.
+    limp: Option<bool>,
 }
 
 #[derive(Default)]

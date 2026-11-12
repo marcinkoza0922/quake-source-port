@@ -21,7 +21,7 @@ pub(super) fn tooltip(item: Item) -> Option<&'static str> {
         "r_motionblur_amount" => "Length of the motion blur streaks",
         "r_debris" => "Corpses go limp as ragdolls, gibs tumble and barrels throw shrapnel; shots and blasts push them (cosmetic only)",
         "r_debris_ragdolls" => "Corpses go limp and fall as ragdolls",
-        "r_debris_ragdollstart" => "After animation keeps the death animations; at death goes limp the moment a monster dies",
+        "r_debris_ragdollstart" => "After animation keeps the death animations; at death goes limp the moment a monster dies; mixed goes limp on a hard hit, and the weaker the killing hit the likelier the animation plays",
         "r_debris_maxragdolls" => "How many ragdolls can lie around at once",
         "r_debris_gibs" => "Gibs and heads tumble and bounce; blasts can gib ragdolls",
         "r_debris_shrapnel" => "Exploding boxes throw metal shards",

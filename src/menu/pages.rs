@@ -231,7 +231,7 @@ pub(super) const WATER: &[Item] = &[
     slider("Caustic Intensity", "r_watercaustics_amount", 0.1, 2.0, 0.1),
 ];
 
-pub(super) const RAGDOLL_START: &[(&str, f32)] = &[("after animation", 0.0), ("at death", 1.0)];
+pub(super) const RAGDOLL_START: &[(&str, f32)] = &[("after animation", 0.0), ("at death", 1.0), ("mixed", 2.0)];
 
 /// Reached from Graphics; unavailable while `r_debris` is off.
 pub(super) const DEBRIS: &[Item] = &[
