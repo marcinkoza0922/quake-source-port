@@ -16,8 +16,11 @@
 //! `-baseline`, exits 1 if any map has errors or fewer kills/secrets than the
 //! baseline; `-save-baseline` writes the current results as the new baseline.
 
+mod actions;
 mod bot;
+mod diagnostics;
 mod hints;
+mod movement;
 mod nav;
 mod route;
 
@@ -150,8 +153,14 @@ fn json_str(s: &str) -> String {
 
 fn report_json(r: &bot::Report) -> String {
     let errs: Vec<String> = r.errors.iter().map(|e| json_str(e)).collect();
+    let assists = r.assists.iter().map(|a| format!(
+        "{{\"time\":{:.2},\"cause\":{},\"goal\":{},\"kind\":{},\"classname\":{},\"reason\":{},\"from\":[{},{},{}],\"to\":[{},{},{}],\"door\":{}}}",
+        a.time, json_str(a.cause.name()), a.goal.map_or_else(|| "null".into(), |e| e.to_string()),
+        json_str(&a.kind), json_str(&a.classname), json_str(&a.reason), a.from.x, a.from.y, a.from.z, a.to.x, a.to.y, a.to.z,
+        a.door.map_or_else(|| "null".into(), |e| e.to_string()),
+    )).collect::<Vec<_>>().join(",");
     format!(
-        "{{\"kills\": {}, \"total_monsters\": {}, \"secrets\": {}, \"total_secrets\": {}, \"noclip_uses\": {}, \"goals_failed\": {}, \"triggers_missed\": {}, \"monster_noclips\": {}, \"nav_nodes\": {}, \"has_exit\": {}, \"exited\": {}, \"stranded\": {}, \"route\": {}, \"seed\": {}, \"variants\": {}, \"clean_variants\": {}, \"sim_time\": {:.1}, \"wall_time\": {:.1}, \"errors\": [{}]}}",
+        "{{\"kills\": {}, \"total_monsters\": {}, \"secrets\": {}, \"total_secrets\": {}, \"noclip_uses\": {}, \"goals_failed\": {}, \"triggers_missed\": {}, \"monster_noclips\": {}, \"exit_noclips\": {}, \"nav_nodes\": {}, \"jump_links\": {}, \"jumps_completed\": {}, \"jump_failures\": {}, \"lift_detours\": {}, \"prerequisite_actions\": {}, \"has_exit\": {}, \"exited\": {}, \"stranded\": {}, \"route\": {}, \"seed\": {}, \"variants\": {}, \"clean_variants\": {}, \"sim_time\": {:.1}, \"wall_time\": {:.1}, \"errors\": [{}], \"assists\": [{}]}}",
         r.kills,
         r.total_monsters,
         r.secrets,
@@ -160,7 +169,13 @@ fn report_json(r: &bot::Report) -> String {
         r.goals_failed,
         r.triggers_missed,
         r.monster_noclips,
+        r.exit_noclips,
         r.nav_nodes,
+        r.jump_links,
+        r.jumps_completed,
+        r.jump_failures,
+        r.lift_detours,
+        r.prerequisite_actions,
         r.has_exit,
         r.exited,
         r.stranded,
@@ -170,7 +185,8 @@ fn report_json(r: &bot::Report) -> String {
         r.clean_variants,
         r.sim_time,
         r.wall_time,
-        errs.join(", ")
+        errs.join(", "),
+        assists
     )
 }
 
@@ -367,6 +383,12 @@ fn main() {
     for s in &soft {
         eprintln!("SOFT {s}");
     }
+    for cause in diagnostics::Cause::ALL {
+        let count = results.iter().flat_map(|(_, r)| &r.assists).filter(|a| a.cause == cause).count();
+        let non_monster = results.iter().flat_map(|(_, r)| &r.assists)
+            .filter(|a| a.cause == cause && a.kind != "Monster").count();
+        if count > 0 { eprintln!("qbot: assists {}: {count} ({non_monster} non-monster)", cause.name()); }
+    }
     eprintln!("qbot: {} maps, report {}", results.len(), out.display());
     if !regressions.is_empty() {
         for r in &regressions {
@@ -379,6 +401,24 @@ fn main() {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn assist_report_preserves_evidence_and_escapes_entity_names() {
+        use qui::json::Value;
+        let mut r = bot::Report { noclip_uses: 1, ..Default::default() };
+        r.assists.push(diagnostics::Assist {
+            time: 3.5, cause: diagnostics::Cause::Prerequisite, goal: Some(42),
+            kind: "Button".into(), classname: "custom\"button\n".into(), reason: "unreachable".into(),
+            from: qcore::math::Vec3::ZERO, to: qcore::math::Vec3::new(1.0, 2.0, 3.0), door: Some(7),
+        });
+        let j = qui::json::parse(&report_json(&r)).unwrap();
+        let Value::Arr(assists) = j.get("assists").unwrap() else { panic!("expected assists array") };
+        assert_eq!(assists.len(), 1);
+        assert_eq!(assists[0].get("classname"), Some(&Value::Str("custom\"button\n".into())));
+        assert_eq!(assists[0].get("cause"), Some(&Value::Str("prerequisite".into())));
+        assert_eq!(assists[0].get("door").and_then(Value::num), Some(7.0));
+        assert_eq!(j.get("noclip_uses").and_then(Value::num), Some(1.0));
+    }
 
     /// e1m1 at skill 3: the bot should kill nearly every monster, find most
     /// secrets and leave through the exit.
@@ -399,4 +439,87 @@ mod tests {
         assert!(r.kills * 10 >= r.total_monsters * 9, "kills {}/{}", r.kills, r.total_monsters);
         assert!(r.exited, "never reached the exit");
     }
+
+    /// The raised touch triggers in hip2m2 must be reached by jumping, rather
+    /// than repeatedly returning to their floor nodes by noclip. Shootable
+    /// door buttons should use reachable firing positions during recovery.
+    #[test]
+    fn hip2m2_raised_triggers() {
+        let base = std::env::var_os("QUAKE_BASEDIR").map_or_else(
+            || Path::new(env!("CARGO_MANIFEST_DIR")).join("../../vkQuake directory with maps"),
+            PathBuf::from,
+        );
+        let fs = mount(&base, "hipnotic");
+        if fs.open("maps/hip2m2.bsp").is_none() || !base.join("hipnotic").is_dir() {
+            return;
+        }
+        let opt = bot::Options { skill: 3, max_time: None, verbose: false, routes: None, fresh: true, seed: 0, hints: None };
+        let r = bot::run(fs, "hip2m2", &opt);
+        assert!(r.errors.is_empty(), "{:?}", r.errors);
+        assert_eq!(r.kills, r.total_monsters, "kills {}/{}", r.kills, r.total_monsters);
+        assert_eq!(r.secrets, r.total_secrets, "secrets {}/{}", r.secrets, r.total_secrets);
+        assert!(r.exited, "never reached the exit");
+        assert!(r.noclip_uses <= 4, "{} noclips; trigger/button navigation regressed", r.noclip_uses);
+    }
+
+    #[test]
+    fn jump_probe_does_not_advance_live_game() {
+        let base = std::env::var_os("QUAKE_BASEDIR").map_or_else(
+            || Path::new(env!("CARGO_MANIFEST_DIR")).join("../../vkQuake directory with maps"), PathBuf::from,
+        );
+        let fs = mount(&base, "id1");
+        if fs.open("maps/e1m1.bsp").is_none() || fs.open("progs.dat").is_none() { return; }
+        let mut sv = qserver::Server::new(fs, qcore::cvar::Cvars::new(), 1);
+        sv.spawn_server("e1m1").unwrap();
+        sv.connect_local().unwrap();
+        for _ in 0..10 { sv.frame(movement::DT); }
+        let before = sv.save_game();
+        let time = sv.time();
+        let level = sv.level.as_ref().unwrap();
+        let from = qcore::math::Vec3::from_array(level.vm.ent_v(1, sv.core.sv.fields.origin));
+        let mut probe = movement::Probe::snapshot(&sv, 270.0).unwrap();
+        for d in [qcore::math::Vec3::new(104.0, 0.0, 0.0), qcore::math::Vec3::new(0.0, 104.0, 40.0)] {
+            let _ = probe.recover(from, from + d, &[]);
+        }
+        assert_eq!(sv.time(), time);
+        assert_eq!(sv.save_game(), before, "probe altered live QC globals or edicts");
+        assert!(sv.error().is_none());
+    }
+
+    #[test]
+    fn e3m7_physics_jump_recovery() {
+        let base = std::env::var_os("QUAKE_BASEDIR").map_or_else(
+            || Path::new(env!("CARGO_MANIFEST_DIR")).join("../../vkQuake directory with maps"), PathBuf::from,
+        );
+        let fs = mount(&base, "id1");
+        if fs.open("maps/e3m7.bsp").is_none() || fs.open("progs.dat").is_none() { return; }
+        let opt = bot::Options { skill: 3, max_time: None, verbose: false, routes: None, fresh: true, seed: 0, hints: None };
+        let r = bot::run(fs, "e3m7", &opt);
+        assert!(r.errors.is_empty(), "{:?}", r.errors);
+        assert!(r.exited);
+        assert!(r.kills >= 40);
+        assert_eq!(r.secrets, r.total_secrets, "all four secrets should be collected");
+        assert!(r.noclip_uses - r.monster_noclips <= 5, "navigation assists regressed");
+        assert!(r.noclip_uses <= 8, "{} total assists", r.noclip_uses);
+        assert!(r.jump_links > 0 && r.jumps_completed > 0, "no verified jump was executed");
+    }
+
+    #[test]
+    fn failed_approaches_and_trigger_contacts_recover_coverage() {
+        let base = std::env::var_os("QUAKE_BASEDIR").map_or_else(
+            || Path::new(env!("CARGO_MANIFEST_DIR")).join("../../vkQuake directory with maps"), PathBuf::from,
+        );
+        let fs = mount(&base, "id1");
+        if fs.open("progs.dat").is_none() { return; }
+        let opt = bot::Options { skill: 3, max_time: None, verbose: false, routes: None, fresh: true, seed: 0, hints: None };
+        for (map, kills, secrets) in [("e1m3", 65, 3), ("e3m3", 47, 1), ("e4m2", 40, 4), ("e1m6", 30, 4), ("e3m6", 61, 2)] {
+            if fs.open(&format!("maps/{map}.bsp")).is_none() { continue; }
+            let r = bot::run(mount(&base, "id1"), map, &opt);
+            assert!(r.errors.is_empty(), "{map}: {:?}", r.errors);
+            assert!(r.exited, "{map}: exit lost");
+            assert!(r.kills >= kills && r.secrets >= secrets,
+                "{map}: kills {}/{}, secrets {}/{}", r.kills, r.total_monsters, r.secrets, r.total_secrets);
+        }
+    }
+
 }

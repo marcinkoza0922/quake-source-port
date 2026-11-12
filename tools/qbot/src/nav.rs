@@ -1,8 +1,7 @@
-//! Navigation graph: flood fill over a 32-unit XY grid from the spawn point,
-//! using world-only hull 1 traces (brush entities such as doors and lifts are
-//! ignored, so closed doors count as open and lift shafts as drops). Lifts
-//! and teleporters are added afterwards as extra nodes with `Ride` and
-//! `Teleport` edges (see `bot::add_movers`).
+//! Navigation graph: a coarse 32-unit XY flood using player-hull traces
+//! through world and static brush geometry, with bounded local refinement.
+//! Movers and teleporter connections are added by `bot::add_movers`.
+
 
 use qcore::math::Vec3;
 use qworld::hull::{CollisionModel, Trace};
@@ -63,6 +62,7 @@ pub struct Edge {
     pub kind: EdgeKind,
 }
 
+#[derive(Clone)]
 pub struct Nav {
     /// Player origins standing on the floor.
     pub pos: Vec<Vec3>,
@@ -70,6 +70,9 @@ pub struct Nav {
     cells: HashMap<(i32, i32), Vec<u32>, FxBuild>,
     origin: Vec3,
     forbid: Vec<Forbid>,
+    refined: HashSet<(i32, i32, i32), FxBuild>,
+    refined_nodes: usize,
+    fine: HashSet<u32, FxBuild>,
 }
 
 /// A box the bot must not enter (level exits).
@@ -80,14 +83,18 @@ pub struct Forbid {
 }
 
 impl Forbid {
-    fn contains(&self, p: Vec3) -> bool {
+    pub fn contains(&self, p: Vec3) -> bool {
+        self.contains_margin(p, 0.0)
+    }
+
+    pub fn contains_margin(&self, p: Vec3, margin: f32) -> bool {
         // Expand by the player hull (16 wide, -24..32 tall).
-        p.x > self.mins.x - 16.0
-            && p.x < self.maxs.x + 16.0
-            && p.y > self.mins.y - 16.0
-            && p.y < self.maxs.y + 16.0
-            && p.z > self.mins.z - 32.0
-            && p.z < self.maxs.z + 24.0
+        p.x > self.mins.x - 16.0 - margin
+            && p.x < self.maxs.x + 16.0 + margin
+            && p.y > self.mins.y - 16.0 - margin
+            && p.y < self.maxs.y + 16.0 + margin
+            && p.z > self.mins.z - 32.0 - margin
+            && p.z < self.maxs.z + 24.0 + margin
     }
 }
 
@@ -233,19 +240,44 @@ pub fn ground(cm: &Geo, p: Vec3, max: f32) -> Option<Vec3> {
     Some(tr.endpos)
 }
 
+// Fine patches must not create additional paths over frozen mover floors.
+fn static_ground(cm: &Geo, p: Vec3, max: f32) -> Option<Vec3> {
+    let tr = cm.trace(1, p, p - Vec3::new(0.0, 0.0, max));
+    (!tr.startsolid && !tr.allsolid && tr.fraction < 1.0 && tr.plane_normal.z >= 0.7).then_some(tr.endpos)
+}
+
 pub fn clear(cm: &Geo, a: Vec3, b: Vec3) -> bool {
     let tr = cm.trace(1, a, b);
     !tr.startsolid && !tr.allsolid && tr.fraction >= 1.0
 }
 
+/// Conservative short walking connection, checking clearance and floor
+/// every four units so a fine sample cannot invent a walk over a pit.
+fn supported_walk(cm: &Geo, from: Vec3, to: Vec3) -> bool {
+    let steps = ((to - from).length() / 4.0).ceil().max(1.0) as usize;
+    let mut previous = from;
+    for i in 1..=steps {
+        let t = i as f32 / steps as f32;
+        let xy = from + (to - from) * t;
+        let rise = if clear(cm, previous, previous + Vec3::new(0.0, 0.0, STEP)) { STEP } else { 0.5 };
+        let up = previous + Vec3::new(0.0, 0.0, rise);
+        let next = Vec3::new(xy.x, xy.y, up.z);
+        if !clear(cm, previous, up) || !clear(cm, up, next) { return false; }
+        let Some(g) = static_ground(cm, next, rise + STEP) else { return false; };
+        if hazard(cm, g) || (g.z - previous.z).abs() > STEP + 0.5 { return false; }
+        previous = g;
+    }
+    (previous.z - to.z).abs() < 1.0
+}
+
 impl Nav {
     /// A graph with no nodes (replaying a cached route needs none).
     pub fn empty(start: Vec3, forbid: Vec<Forbid>) -> Nav {
-        Nav { pos: Vec::new(), edges: Vec::new(), cells: HashMap::default(), origin: start, forbid }
+        Nav { pos: Vec::new(), edges: Vec::new(), cells: HashMap::default(), origin: start, forbid, refined: HashSet::default(), refined_nodes: 0, fine: HashSet::default() }
     }
 
     pub fn build(cm: &Geo, start: Vec3, forbid: Vec<Forbid>) -> Nav {
-        let mut nav = Nav { pos: Vec::new(), edges: Vec::new(), cells: HashMap::default(), origin: start, forbid };
+        let mut nav = Nav { pos: Vec::new(), edges: Vec::new(), cells: HashMap::default(), origin: start, forbid, refined: HashSet::default(), refined_nodes: 0, fine: HashSet::default() };
         nav.extend(cm, start);
         nav
     }
@@ -325,6 +357,58 @@ impl Nav {
         true
     }
 
+    /// Refine only a requested 192-unit patch on an 8-unit lattice. Regions
+    /// are attempted once per graph; all patches together add at most 8192
+    /// nodes. New walk links require support throughout, never bridge gaps.
+    pub fn refine(&mut self, cm: &Geo, center: Vec3) -> bool {
+        let key = ((center.x / 64.0).floor() as i32, (center.y / 64.0).floor() as i32,
+            (center.z / 64.0).floor() as i32);
+        if self.refined_nodes >= 8192 || !self.refined.insert(key) { return false; }
+        let first = self.pos.len();
+        let mut local = Vec::new();
+        for x in -12..=12 {
+            for y in -12..=12 {
+                if self.refined_nodes >= 8192 || self.pos.len() >= MAX_NODES { break; }
+                let p = Vec3::new((center.x / 8.0).round() * 8.0 + x as f32 * 8.0,
+                    (center.y / 8.0).round() * 8.0 + y as f32 * 8.0, center.z + STEP);
+                let Some(g) = static_ground(cm, p, 2.0 * STEP) else { continue; };
+                if hazard(cm, g) || self.forbid.iter().any(|f| f.contains(g)) { continue; }
+                let n = match self.cells.get(&self.cell(g)).into_iter().flatten().copied().find(|&n| (self.pos[n as usize] - g).length() < 1.0) {
+                    Some(n) => n,
+                    None => { self.refined_nodes += 1; let n = self.add(g); self.fine.insert(n); n }
+                };
+                local.push(n);
+            }
+        }
+        for a in local {
+            let p = self.pos[a as usize];
+            for b in self.around(p, p, 25.0, p.z, STEP) {
+                if a == b || ((a as usize) < first && (b as usize) < first) { continue; }
+                let q = self.pos[b as usize];
+                if (q - p).length() > 32.0 { continue; }
+                for (u, v) in [(a, b), (b, a)] {
+                    if self.edge(u, v).is_none()
+                        && !(0..=8).any(|i| {
+                            let p = self.pos[u as usize] + (self.pos[v as usize] - self.pos[u as usize]) * (i as f32 / 8.0);
+                            self.forbid.iter().any(|f| f.contains(p))
+                        }) && supported_walk(cm, self.pos[u as usize], self.pos[v as usize]) {
+                        self.link(u, v, EdgeKind::Walk, (q - p).length());
+                    }
+                }
+            }
+        }
+        self.pos.len() > first
+    }
+
+    /// Discard a failed tentative patch while remembering its work budget.
+    pub fn rollback(&mut self, mut checkpoint: Nav) {
+        checkpoint.refined.extend(self.refined.iter().copied());
+        checkpoint.refined_nodes = self.refined_nodes;
+        *self = checkpoint;
+    }
+
+    pub fn is_fine(&self, n: u32) -> bool { self.fine.contains(&n) }
+
     fn cell(&self, p: Vec3) -> (i32, i32) {
         (((p.x - self.origin.x) / GRID).round() as i32, ((p.y - self.origin.y) / GRID).round() as i32)
     }
@@ -366,11 +450,17 @@ impl Nav {
     /// The nearest node within `radius` that a player can move to in a
     /// straight line from `p` (so not one behind a wall).
     pub fn nearest_clear(&self, cm: &Geo, p: Vec3, radius: f32) -> Option<u32> {
-        self.nearest_clear_except(cm, p, radius, &HashSet::default())
+        self.nearest_clear_candidates(cm, p, radius, &HashSet::default(), usize::MAX)
     }
 
-    /// `nearest_clear` skipping the nodes in `skip`.
+    /// Best-effort local route start, skipping nodes in `skip`. Tests the
+    /// closest twelve candidates before falling back to the nearest node;
+    /// keep this recovery policy separate from exhaustive goal lookup.
     pub fn nearest_clear_except(&self, cm: &Geo, p: Vec3, radius: f32, skip: &HashSet<u32, FxBuild>) -> Option<u32> {
+        self.nearest_clear_candidates(cm, p, radius, skip, 12)
+    }
+
+    fn nearest_clear_candidates(&self, cm: &Geo, p: Vec3, radius: f32, skip: &HashSet<u32, FxBuild>, limit: usize) -> Option<u32> {
         let (cx, cy) = self.cell(p);
         let r = (radius / GRID).ceil() as i32;
         let mut cands: Vec<(f32, u32)> = Vec::new();
@@ -387,10 +477,12 @@ impl Nav {
         }
         cands.sort_by(|a, b| a.0.total_cmp(&b.0));
         let up = Vec3::new(0.0, 0.0, 1.0);
-        cands.iter().take(12).find(|&&(_, n)| {
+        // Goal lookup tries every candidate: the closest dozen can all be
+        // across a wall while a usable approach lies farther away.
+        cands.iter().take(limit).find(|&&(_, n)| {
             let q = self.pos[n as usize];
             let tr = cm.trace(1, p + up, Vec3::new(q.x, q.y, p.z.max(q.z) + 1.0));
-            !tr.startsolid && tr.fraction >= 1.0
+            !tr.startsolid && !tr.allsolid && tr.fraction >= 1.0
         }).or(cands.first()).map(|c| c.1)
     }
 
@@ -489,6 +581,25 @@ impl Nav {
         (dist, prev)
     }
 
+    /// Nodes with a route to `dst`, respecting directed edges and gates.
+    pub fn reaching(&self, dst: u32, blocked: &Blocked) -> Vec<bool> {
+        let mut reverse = vec![Vec::new(); self.pos.len()];
+        for (a, edges) in self.edges.iter().enumerate() {
+            for e in edges {
+                if !blocked.contains(&(a as u32, e.to)) { reverse[e.to as usize].push(a); }
+            }
+        }
+        let mut seen = vec![false; self.pos.len()];
+        seen[dst as usize] = true;
+        let mut todo = vec![dst as usize];
+        while let Some(n) = todo.pop() {
+            for &a in &reverse[n] {
+                if !seen[a] { seen[a] = true; todo.push(a); }
+            }
+        }
+        seen
+    }
+
     pub fn edge(&self, a: u32, b: u32) -> Option<&Edge> {
         self.edges[a as usize].iter().find(|e| e.to == b)
     }
@@ -519,4 +630,48 @@ pub fn path_to(prev: &[u32], dst: u32) -> Vec<u32> {
     }
     p.reverse();
     p
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use qworld::CONTENTS_EMPTY;
+    use qworld::hull::{CNode, HPlane};
+
+    #[test]
+    fn clear_node_beyond_twelve_obstructed_candidates() {
+        // A wall at x=0 separates the closest nodes from the player.
+        let nodes = vec![CNode { plane: 0, children: [CONTENTS_SOLID, CONTENTS_EMPTY] }];
+        let geo = Geo::new(Arc::new(CollisionModel {
+            planes: vec![HPlane { normal: Vec3::new(1.0, 0.0, 0.0), dist: 0.0, kind: 0 }],
+            hull0: nodes.clone(),
+            clipnodes: nodes,
+            ..Default::default()
+        }));
+        let here = Vec3::new(-1.0, 0.0, 0.0);
+        let mut nav = Nav::empty(here, Vec::new());
+        for y in 0..12 {
+            nav.add(Vec3::new(1.0, y as f32, 0.0));
+        }
+        let reachable = nav.add(Vec3::new(-32.0, 0.0, 0.0));
+        assert_eq!(nav.nearest_clear(&geo, here, 96.0), Some(reachable));
+        let mut skip = HashSet::default();
+        skip.insert(reachable);
+        // Keep the existing best-effort fallback when every candidate is blocked.
+        assert_eq!(nav.nearest_clear_except(&geo, here, 96.0, &skip), Some(0));
+    }
+    #[test]
+    fn basin_respects_one_way_edges_and_gates() {
+        let mut nav = Nav::empty(Vec3::ZERO, Vec::new());
+        let a = nav.add(Vec3::ZERO);
+        let b = nav.add(Vec3::new(32.0, 0.0, 0.0));
+        let goal = nav.add(Vec3::new(64.0, 0.0, 0.0));
+        let drop = nav.add(Vec3::new(64.0, 0.0, -128.0));
+        nav.link(a, b, EdgeKind::Walk, 32.0);
+        nav.link(b, goal, EdgeKind::Walk, 32.0);
+        nav.link(goal, drop, EdgeKind::Walk, 128.0);
+        assert_eq!(nav.reaching(goal, &Blocked::default()), vec![true, true, true, false]);
+        assert_eq!(nav.reaching(goal, &Blocked::from_iter([(b, goal)])), vec![false, false, true, false]);
+    }
+
 }
