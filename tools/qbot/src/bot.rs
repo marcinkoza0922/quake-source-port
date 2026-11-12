@@ -356,6 +356,15 @@ fn add_entry(nav: &mut Nav, cm: &Geo, mins: Vec3, maxs: Vec3) -> Option<u32> {
     Some(e)
 }
 
+/// Edges through locked doors, the door (master) of each, and the goals
+/// that open each door (buttons, triggers, keys).
+#[derive(Default)]
+struct Gates {
+    edges: Blocked,
+    door: HashMap<(u32, u32), u32, FxBuild>,
+    openers: HashMap<u32, Vec<usize>, FxBuild>,
+}
+
 const IT_KEY1: i32 = 131072;
 const IT_KEY2: i32 = 262144;
 
@@ -1030,7 +1039,11 @@ impl Bot<'_> {
             (!tr.startsolid && tr.fraction < 1.0).then_some(tr.endpos).and_then(|g| self.nav.nearest(g, 48.0))
         };
         let Some(src) = self.nav.nearest_clear_except(&self.geo, here, 96.0, &self.bad_src).or_else(below) else {
-            // Off the graph (after a noclip or a fall): back to the nearest node.
+            // Off the graph (after a noclip or a fall): back to the nearest
+            // node, and don't walk the edge it fell from again.
+            if self.sv.time() - self.noclip_at > 1.0 {
+                self.block_here();
+            }
             self.path.clear();
             self.returns += 1;
             if self.returns > 8 {
@@ -1052,15 +1065,16 @@ impl Bot<'_> {
         let others_left = self.goals.iter().any(|g| g.kind != Kind::Exit && Self::pending(g) && !self.dormant(g));
         let prev_goal = self.cur;
         let mut choice = None;
+        let mut opener = None;
         self.update_views();
         let gates = self.gates();
-        if gates.len() != self.gated && self.opt.verbose {
-            eprintln!("  t={:.1} {} edges gated by locked doors", self.sv.time(), gates.len());
+        if gates.edges.len() != self.gated && self.opt.verbose {
+            eprintln!("  t={:.1} {} edges gated by locked doors", self.sv.time(), gates.edges.len());
         }
-        self.gated = gates.len();
+        self.gated = gates.edges.len();
         // Gates are a preference: with them first, then without (the opener
         // may have fired already), then with blocks lifted.
-        let gated = (!gates.is_empty()).then(|| self.blocked.union(&gates).copied().collect::<Blocked>());
+        let gated = (!gates.edges.is_empty()).then(|| self.blocked.union(&gates.edges).copied().collect::<Blocked>());
         for pass in 0..3 {
             let blocked = match (&gated, pass) {
                 (Some(g), 0) => g,
@@ -1088,7 +1102,25 @@ impl Bot<'_> {
                 }
             }
             if let Some((_, i, n)) = best {
-                choice = Some((i, path_to(&prev, n)));
+                let path = path_to(&prev, n);
+                // Ungated plan through a locked door: go for its opener
+                // instead (walking there if possible, else by noclip).
+                if pass > 0 && gated.is_some()
+                    && let Some(m) = path.windows(2).find_map(|w| gates.door.get(&(w[0], w[1])))
+                    && let Some(&o) = gates.openers.get(m).into_iter().flatten().find(|&&o| Self::pending(&self.goals[o]) && self.goals[o].noclips < 3)
+                {
+                    let og = &self.goals[o];
+                    let reach = self.goal_node(og).filter(|&n| dist[n as usize].is_finite());
+                    if self.opt.verbose && self.cur != Some(o) {
+                        eprintln!("  t={:.1} door #{m} locked on the way to #{}: opener #{} first", self.sv.time(), self.goals[i].ent, og.ent);
+                    }
+                    match reach {
+                        Some(n) => choice = Some((o, path_to(&prev, n))),
+                        None => opener = Some(o),
+                    }
+                    break;
+                }
+                choice = Some((i, path));
                 break;
             }
             if pass == 0 && gated.is_some() {
@@ -1104,7 +1136,13 @@ impl Bot<'_> {
                 return true;
             }
         }
-        if let Some((i, path)) = choice {
+        if let Some(o) = opener {
+            if self.cur != Some(o) {
+                self.returns = 0;
+            }
+            self.cur = Some(o);
+            self.noclip_goal(o);
+        } else if let Some((i, path)) = choice {
             if self.cur != Some(i) {
                 self.returns = 0;
             }
@@ -1138,19 +1176,7 @@ impl Bot<'_> {
                         return true;
                     }
                     self.cur = Some(i);
-                    self.path.clear();
-                    let g = &self.goals[i];
-                    let to = match (g.kind, self.goal_node(g)) {
-                        (Kind::Monster, _) => self.monster_spot(g.ent),
-                        (Kind::Button, None) => self.touch_spot(g.ent).unwrap_or_else(|| self.center(g.ent)),
-                        (_, Some(n)) => self.nav.pos[n as usize],
-                        (_, None) => self.center(g.ent),
-                    };
-                    self.goals[i].deferred = false;
-                    if self.opt.verbose {
-                        eprintln!("    near goal:{}", self.ents_near(to));
-                    }
-                    self.noclip(to, "unreachable");
+                    self.noclip_goal(i);
                 }
                 None => self.cur = None,
             }
@@ -1183,32 +1209,39 @@ impl Bot<'_> {
     /// or trigger is an ordinary goal, so the bot fetches it first; the edges
     /// open again once the key is held or the door has moved. Doors nothing
     /// pending opens (delayed, opened by a monster's death) stay walkable.
-    fn gates(&self) -> Blocked {
-        let mut out = Blocked::default();
+    fn gates(&self) -> Gates {
+        let mut out = Gates::default();
         let vm = self.vm();
         let (Some(owner), Some(items), Some(pos1)) = (self.o.owner, self.o.items, self.o.pos1) else { return out };
         let have = vm.ent_f(self.me, items) as i32;
         let velocity = vm.field_ofs("velocity");
-        // Names fired by pending goals, through any chain of relays.
-        let mut names: std::collections::HashSet<Vec<u8>> = self
-            .goals
-            .iter()
-            .filter(|g| Self::pending(g) && matches!(g.kind, Kind::Button | Kind::Trigger | Kind::Shoot | Kind::Secret))
-            .map(|g| ent_str(vm, g.ent, self.o.target))
-            .filter(|t| !t.is_empty())
+        // Names each pending goal fires, through any chain of relays.
+        let relays: Vec<(Vec<u8>, Vec<u8>)> = (1..vm.num_edicts() as u32)
+            .filter(|&e| !vm.is_free(e))
+            .map(|e| (ent_str(vm, e, self.o.targetname), ent_str(vm, e, self.o.target)))
+            .filter(|(n, t)| !n.is_empty() && !t.is_empty())
             .collect();
-        let mut grew = !names.is_empty();
-        while grew {
-            grew = false;
-            for e in 1..vm.num_edicts() as u32 {
-                if vm.is_free(e) || !names.contains(&ent_str(vm, e, self.o.targetname)) {
-                    continue;
-                }
-                let t = ent_str(vm, e, self.o.target);
-                if !t.is_empty() && names.insert(t) {
-                    grew = true;
+        let mut fires: Vec<(usize, std::collections::HashSet<Vec<u8>>)> = Vec::new();
+        for (i, g) in self.goals.iter().enumerate() {
+            if !Self::pending(g) || !matches!(g.kind, Kind::Button | Kind::Trigger | Kind::Shoot | Kind::Secret) {
+                continue;
+            }
+            let t = ent_str(vm, g.ent, self.o.target);
+            if t.is_empty() {
+                continue;
+            }
+            let mut names = std::collections::HashSet::from([t]);
+            let mut grew = true;
+            while grew {
+                grew = false;
+                for (n, t) in &relays {
+                    if names.contains(n) && !names.contains(t) {
+                        names.insert(t.clone());
+                        grew = true;
+                    }
                 }
             }
+            fires.push((i, names));
         }
         for e in 1..vm.num_edicts() as u32 {
             if vm.is_free(e) || vm.ent_f(e, self.o.solid) as i32 != SOLID_BSP || !matches!(vm.classname(e).as_str(), "door" | "func_door") {
@@ -1224,10 +1257,18 @@ impl Bot<'_> {
                 m => m,
             };
             let need = vm.ent_f(m, items) as i32 & (IT_KEY1 | IT_KEY2) & !have;
-            let remote = vm.ent_f(m, self.o.health) <= 0.0 && names.contains(&ent_str(vm, m, self.o.targetname));
+            let name = ent_str(vm, m, self.o.targetname);
+            let remote = vm.ent_f(m, self.o.health) <= 0.0 && fires.iter().any(|f| f.1.contains(&name));
             if need == 0 && !remote {
                 continue;
             }
+            out.openers.entry(m).or_insert_with(|| {
+                let mut o: Vec<usize> = fires.iter().filter(|f| remote && f.1.contains(&name)).map(|f| f.0).collect();
+                o.extend(self.goals.iter().enumerate().filter(|(_, g)| {
+                    g.kind == Kind::Key && Self::pending(g) && vm.ent_f(g.ent, items) as i32 & need != 0
+                }).map(|(i, _)| i));
+                o
+            });
             let (lo, hi) = (v(vm.ent_v(e, self.o.absmin)), v(vm.ent_v(e, self.o.absmax)));
             let (zc, dz) = ((lo.z + hi.z) * 0.5, (hi.z - lo.z) * 0.5 + 64.0);
             // Slightly under the player's half width: edges grazing the frame stay.
@@ -1244,8 +1285,10 @@ impl Bot<'_> {
                         continue;
                     }
                     if seg_hits_box_xy(pa, pb, bl, bh) {
-                        out.insert((n, ed.to));
-                        out.insert((ed.to, n));
+                        out.edges.insert((n, ed.to));
+                        out.edges.insert((ed.to, n));
+                        out.door.insert((n, ed.to), m);
+                        out.door.insert((ed.to, n), m);
                     }
                 }
             }
@@ -1268,6 +1311,23 @@ impl Bot<'_> {
         let mut ns = self.nav.around(here - r, here + r, 0.0, here.z, 2048.0);
         ns.sort_by(|&a, &b| (self.nav.pos[a as usize] - here).length_sq().total_cmp(&(self.nav.pos[b as usize] - here).length_sq()));
         ns.into_iter().take(64).find(|&n| ok(n))
+    }
+
+    /// Noclip to goal `i` (the current goal).
+    fn noclip_goal(&mut self, i: usize) {
+        self.path.clear();
+        let g = &self.goals[i];
+        let to = match (g.kind, self.goal_node(g)) {
+            (Kind::Monster, _) => self.monster_spot(g.ent),
+            (Kind::Button, None) => self.touch_spot(g.ent).unwrap_or_else(|| self.center(g.ent)),
+            (_, Some(n)) => self.nav.pos[n as usize],
+            (_, None) => self.center(g.ent),
+        };
+        self.goals[i].deferred = false;
+        if self.opt.verbose {
+            eprintln!("    near goal:{}", self.ents_near(to));
+        }
+        self.noclip(to, "unreachable");
     }
 
     /// Where a player stands pressing a brush entity off the graph (a button
