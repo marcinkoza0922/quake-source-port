@@ -6,6 +6,7 @@
 //! console commands.
 
 mod assets;
+mod autosave;
 mod console;
 mod demo;
 mod draw;
@@ -16,6 +17,8 @@ mod net;
 mod platform;
 mod png;
 mod sbar;
+mod saveinfo;
+mod save_inventory;
 mod view;
 
 use std::path::PathBuf;

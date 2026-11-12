@@ -13,3 +13,10 @@ Performance is key. It should at worst be within spitting distance of ironwail o
 Build a testing framework to automatically traverse each level in a way that finds each secret and kills every enemy on the hardest difficulty, though god mode can be enabled during this.
 
 Give discrete tasks that do not interfere with each other to subagents.
+
+
+## Save usability
+
+Single-player autosaves rotate independently of manual/quicksaves. Gameplay settings control retention (default five, zero disables) and level-entry (on by default), timer, secret discovery, all enemies killed, and all secrets found triggers. Loading a save does not itself trigger an autosave.
+
+Save/load screens use cards showing level name, save timestamp, health, armor, owned weapons and keys, and kills/secrets against their totals. The Load screen shows only the latest autosave, with a dedicated submenu listing the rotating history newest to oldest and each save's trigger. Inventory art comes from the active mod; adapters cover custom inventory fields and use names when a mod supplies no corresponding icon.

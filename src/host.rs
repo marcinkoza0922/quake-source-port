@@ -29,6 +29,12 @@ const SERVER_TIC: f64 = 1.0 / 72.0;
 const CLASSIC_SBAR_LINES: f32 = 48.0;
 
 const HOST_CVARS: &[(&str, &str, u32)] = &[
+    ("sv_autosave_keep", "5", CVAR_ARCHIVE),
+    ("sv_autosave_entry", "1", CVAR_ARCHIVE),
+    ("sv_autosave_secret", "0", CVAR_ARCHIVE),
+    ("sv_autosave_monsters", "0", CVAR_ARCHIVE),
+    ("sv_autosave_secrets", "0", CVAR_ARCHIVE),
+    ("sv_autosave_interval", "0", CVAR_ARCHIVE),
     ("host_maxfps", "250", CVAR_ARCHIVE),
     ("fov", "90", CVAR_ARCHIVE),
     ("cl_bob", "0.02", 0),
@@ -234,6 +240,7 @@ pub struct Host {
     ping_expect: Option<f64>,
     /// Running `slist`.
     lan_search: Option<crate::net::LanSearch>,
+    autosave: crate::autosave::Tracker,
 }
 
 impl CmdContext for Host {
@@ -275,6 +282,7 @@ impl Host {
         let server = Server::new(fs, cvars, 1);
         let mut h = Host {
             server,
+            autosave: Default::default(),
             cl: ClientState::new(),
             local: None,
             cmds: Commands::with_builtins(),
@@ -632,6 +640,7 @@ impl Host {
             self.finish_timedemo();
         }
         self.stop_recording();
+        self.autosave.reset();
         self.demo_head.clear();
         self.cl = ClientState::new();
         self.local = None;
@@ -928,6 +937,7 @@ impl Host {
                 ClientEvent::BonusFlash => self.view.bonus_flash(),
                 ClientEvent::NewMap => {
                     self.stats_recorded = false;
+                    self.autosave.reset();
                     self.new_map()
                 }
                 ClientEvent::Signon(4) => {
@@ -1333,6 +1343,7 @@ impl Host {
             self.cl.frame(dt);
         }
         self.process_client_events();
+        self.update_autosave();
         self.con.update(ft);
 
         let (view, gun) = if self.cl.signon == 4 && !self.level.mapname.is_empty() {
@@ -1680,7 +1691,7 @@ impl Host {
             }
             let conback = pf("gfx/conback.lmp");
             let ingame = view.is_some() && self.cl.intermission == 0;
-            self.con.draw(&mut c, conback, ingame, ingame);
+            self.con.draw(&mut c, conback, ingame && !self.menu.active(), ingame && !self.menu.active());
             if self.server.core.sv.paused && view.is_some() {
                 let p = pf("gfx/pause.lmp");
                 if let Some((_, pw, _)) = p {
@@ -1811,10 +1822,43 @@ impl Host {
         self.user_dir().join(n)
     }
 
+    fn update_autosave(&mut self) {
+        if self.dedicated || self.demo.is_some() || self.local.is_none()
+            || !self.server.active() || self.server.core.maxclients() != 1
+            || self.server.core.cvars.value_of("deathmatch") != 0.0
+            || self.cl.signon != 4 || self.cl.intermission != 0
+            || self.cl.stats[STAT_HEALTH] <= 0 || self.menu.active() || self.server.core.sv.paused {
+            return;
+        }
+        let cv = &self.server.core.cvars;
+        let keep = cv.value_of("sv_autosave_keep").clamp(0.0, crate::autosave::MAX as f32) as usize;
+        let flags = ["entry", "secret", "monsters", "secrets"].map(|n| cv.value_of(&format!("sv_autosave_{n}")) != 0.0);
+        let interval = cv.value_of("sv_autosave_interval").max(0.0) as f64 * 60.0;
+        let reason = self.autosave.update(self.server.time(), self.server.stats(), self.server.core.sv.loadgame, flags, interval);
+        if let Some(reason) = reason.filter(|_| keep > 0) {
+            let text = self.server.save_game();
+            let mut lines = text.splitn(3, '\n');
+            let version = lines.next().unwrap_or("5");
+            lines.next();
+            // The v5 description is ignored by the loader; preserve the trigger in the save itself.
+            let text = format!("{version}\nAUTOSAVE_{}\n{}", reason.replace(' ', "_"), lines.next().unwrap_or(""));
+            match crate::autosave::rotate(&self.user_dir(), keep, &text) {
+                Ok(()) => self.print("Autosaved.\n"),
+                Err(e) => self.print(&format!("ERROR: autosave failed: {e}\n")),
+            }
+        }
+    }
+
     fn scan_saves(&mut self) {
-        for i in 0..crate::menu::MAX_SAVEGAMES {
-            let p = self.savegame_path(&format!("s{i}"));
-            self.menu.saves[i] = std::fs::read_to_string(p).ok().and_then(|t| t.lines().nth(1).map(|l| l.replace('_', " ").trim_end().to_string()));
+        self.menu.saves.fill(None);
+        self.menu.save_inventory = crate::save_inventory::Inventory::new(self.fs(), crate::sbar::Pack::from_game_dirs(self.fs_snapshot.1.iter().map(String::as_str)));
+        let count = if self.menu.autosaves { crate::autosave::MAX } else { crate::menu::MAX_SAVEGAMES + 2 };
+        for i in 0..count {
+            let Some(name) = self.menu.save_slot_name(i) else { continue };
+            let p = self.savegame_path(&name);
+            self.menu.saves[i] = std::fs::read_to_string(&p).ok().and_then(|text| {
+                crate::saveinfo::SaveInfo::parse(&text, std::fs::metadata(&p).ok().and_then(|m| m.modified().ok()))
+            });
         }
     }
 }
@@ -1994,13 +2038,20 @@ fn register_commands(c: &mut Commands<Host>) {
     c.add("force_centerview", |h, _| h.cl.viewangles[0] = 0.0);
     c.add("centerview", |h, _| h.cl.viewangles[0] = 0.0);
     c.add("menu_load", |h, _| {
-        h.scan_saves();
+        h.menu.autosaves = false;
         h.menu.open(Screen::Load);
+        h.scan_saves();
+    });
+    c.add("menu_autosaves", |h, _| {
+        h.menu.autosaves = true;
+        h.menu.open(Screen::Load);
+        h.scan_saves();
     });
     c.add("menu_save", |h, _| {
+        h.menu.autosaves = false;
         if h.server.active() {
-            h.scan_saves();
             h.menu.open(Screen::Save);
+            h.scan_saves();
         }
     });
     c.add("pause", |h, _| {

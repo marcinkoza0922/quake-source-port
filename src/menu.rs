@@ -132,6 +132,12 @@ const GAMEPLAY: &[Item] = &[
     toggle("Modern HUD", "scr_hudstyle"),
     toggle("Show FPS", "scr_showfps"),
     toggle("Level Select", "ui_levelselect"),
+    slider("Autosaves to Keep (0 = off)", "sv_autosave_keep", 0.0, 10.0, 1.0),
+    toggle("Save on Level Entry", "sv_autosave_entry"),
+    Item::Choice { label: "Autosave Timer", cvar: "sv_autosave_interval", choices: MINUTES },
+    toggle("Save on Secret Found", "sv_autosave_secret"),
+    toggle("Save on All Enemies Killed", "sv_autosave_monsters"),
+    toggle("Save on All Secrets Found", "sv_autosave_secrets"),
 ];
 
 const INPUT: &[Item] = &[
@@ -232,8 +238,10 @@ pub struct Menu {
     /// Available resolutions (filled by the host) and device MSAA limit.
     pub resolutions: Vec<(u32, u32)>,
     pub max_msaa: u32,
-    /// Comment line of each save slot (`None` = unused).
-    pub saves: Vec<Option<String>>,
+    /// Parsed preview of each save slot (`None` = unused or unreadable).
+    pub saves: Vec<Option<crate::saveinfo::SaveInfo>>,
+    pub autosaves: bool,
+    pub save_inventory: crate::save_inventory::Inventory,
     prev: Screen,
     /// Cursor position in 640x360 menu units, when the mouse has moved.
     mouse: Option<(f32, f32)>,
@@ -291,7 +299,9 @@ impl Menu {
             pending_res: (1280, 720),
             resolutions: Vec::new(),
             max_msaa: 8,
-            saves: vec![None; MAX_SAVEGAMES],
+            saves: vec![None; MAX_SAVEGAMES + 2],
+            autosaves: false,
+            save_inventory: Default::default(),
             prev: Screen::None,
             mouse: None,
             drop: None,
@@ -416,6 +426,19 @@ impl Menu {
         self.screen = s;
         self.drop = None;
         self.quit_cursor = 0;
+        if matches!(s, Screen::Load | Screen::Save) { self.load_cursor = 0; }
+    }
+
+    fn save_rows(&self) -> usize {
+        if self.screen == Screen::Load {
+            if self.autosaves { self.saves.iter().take(crate::autosave::MAX).rposition(Option::is_some).map_or(1, |i| i + 1) } else { MAX_SAVEGAMES + 2 }
+        } else { MAX_SAVEGAMES }
+    }
+
+    pub fn save_slot_name(&self, i: usize) -> Option<String> {
+        if self.screen == Screen::Save { Some(format!("s{i}")) }
+        else if self.autosaves { Some(format!("autosave{i}")) }
+        else { match i { 0 => Some("autosave0".into()), 1 => None, _ => Some(format!("s{}", i - 2)) } }
     }
 
     /// Item under the menu-space point for the current screen.
@@ -427,7 +450,12 @@ impl Menu {
         match self.screen {
             Screen::Main => row(cy + 32.0, 20.0, MAIN_ITEMS, cx + 54.0, cx + 312.0),
             Screen::SinglePlayer => row(cy + 32.0, 20.0, 3, cx + 54.0, cx + 312.0),
-            Screen::Load | Screen::Save => row(cy + 32.0, 8.0, MAX_SAVEGAMES, cx + 8.0, cx + 312.0),
+            Screen::Load | Screen::Save => {
+                let col = ((x - 24.0) / 300.0).floor() as usize;
+                let row = ((y - 56.0) / 128.0).floor() as usize;
+                let i = self.load_cursor / 4 * 4 + row * 2 + col;
+                ((24.0..616.0).contains(&x) && (56.0..312.0).contains(&y) && col < 2 && row < 2 && i < self.save_rows()).then_some(i)
+            },
             Screen::Options => row(ROW0, ROW_H, PAGES.len(), PANEL_X, PANEL_X + PANEL_W),
             Screen::OptionsPage(p) => row(PAGE_ROW0, ROW_H, self.page_len(p), PANEL_X, PANEL_X + PANEL_W),
             Screen::Multiplayer => row(cy + 32.0, 20.0, 3, cx + 54.0, cx + 312.0),
@@ -565,12 +593,14 @@ impl Menu {
                         }
                         1 => {
                             out.push(Action::Command("_scansaves\n".into()));
-                            self.screen = Screen::Load;
+                            self.autosaves = false;
+                            self.open(Screen::Load);
                         }
                         _ => {
                             if server_active {
+                                self.autosaves = false;
                                 out.push(Action::Command("_scansaves\n".into()));
-                                self.screen = Screen::Save;
+                                self.open(Screen::Save);
                             }
                         }
                     }
@@ -594,17 +624,34 @@ impl Menu {
             }
             Screen::Load | Screen::Save => {
                 if back {
-                    self.screen = Screen::SinglePlayer;
+                    if self.autosaves && self.screen == Screen::Load {
+                        self.autosaves = false;
+                        self.load_cursor = 1;
+                        out.push(Action::Command("_scansaves\n".into()));
+                    } else {
+                        self.screen = Screen::SinglePlayer;
+                    }
                     return out;
                 }
-                wrap(&mut self.load_cursor, MAX_SAVEGAMES, &mut out);
+                let count = self.save_rows();
+                self.load_cursor = self.load_cursor.min(count - 1);
+                if up { self.load_cursor = (self.load_cursor + count - (2 % count)) % count; }
+                if down { self.load_cursor = (self.load_cursor + 2) % count; }
+                if left { self.load_cursor = (self.load_cursor + count - 1) % count; }
+                if right { self.load_cursor = (self.load_cursor + 1) % count; }
+                if up || down || left || right { out.push(Action::Sound("misc/menu1.wav")); }
                 if enter {
                     let i = self.load_cursor;
                     if self.screen == Screen::Load {
-                        if self.saves[i].is_some() {
+                        if !self.autosaves && i == 1 {
+                            self.autosaves = true;
+                            self.load_cursor = 0;
+                            out.push(Action::Command("_scansaves\n".into()));
+                        } else if self.saves[i].is_some() {
+                            let name = self.save_slot_name(i).unwrap();
                             self.screen = Screen::None;
                             out.push(Action::Close);
-                            out.push(Action::Command(format!("load s{i}\n")));
+                            out.push(Action::Command(format!("load {name}\n")));
                         }
                     } else {
                         self.screen = Screen::None;
@@ -901,7 +948,7 @@ impl Menu {
         c.fade_screen();
         let base_scale = c.scale;
         c.menu_layout();
-        if !matches!(self.screen, Screen::Options | Screen::OptionsPage(_) | Screen::Quit | Screen::Mods | Screen::ModMaps) {
+        if !matches!(self.screen, Screen::Options | Screen::OptionsPage(_) | Screen::Quit | Screen::Mods | Screen::ModMaps | Screen::Load | Screen::Save) {
             c.ox += CLASSIC.0;
             c.oy += CLASSIC.1;
         }
@@ -954,13 +1001,61 @@ impl Menu {
                 c.pic(54.0, 32.0 + self.mp_cursor as f32 * 20.0, d);
             }
             Screen::Load | Screen::Save => {
-                title(c, pic, if self.screen == Screen::Load { "gfx/p_load.lmp" } else { "gfx/p_save.lmp" });
-                for (i, s) in self.saves.iter().enumerate() {
-                    c.string(16.0, 32.0 + 8.0 * i as f32, s.as_deref().unwrap_or("--- UNUSED SLOT ---"));
+                let heading = if self.screen == Screen::Save { "SAVE GAME" } else if self.autosaves { "AUTOSAVES - NEWEST FIRST" } else { "LOAD GAME" };
+                c.string(24.0, 24.0, heading);
+                let page = self.load_cursor / 4;
+                for i in page * 4..((page + 1) * 4).min(self.save_rows()) {
+                    let x = 24.0 + (i % 2) as f32 * 300.0;
+                    let y = 56.0 + (i % 4 / 2) as f32 * 128.0;
+                    let selected = i == self.load_cursor;
+                    c.fill(x, y, 292.0, 126.0, if selected { [0.30, 0.20, 0.09, 0.98] } else { [0.08, 0.07, 0.06, 0.96] });
+                    if selected { c.fill(x, y, 3.0, 126.0, [0.85, 0.59, 0.22, 1.0]); }
+                    let line = |c: &mut Canvas, row: usize, text: &str| {
+                        let text: String = text.chars().map(|ch| if ch.is_ascii_graphic() || ch == ' ' { ch } else { '?' }).take(34).collect();
+                        c.string(x + 10.0, y + 7.0 + row as f32 * 10.0, &text);
+                    };
+                    if self.screen == Screen::Load && !self.autosaves && i == 1 {
+                        line(c, 0, "Browse Autosaves >");
+                        line(c, 2, "All retained autosaves");
+                        line(c, 3, "Newest to oldest");
+                        continue;
+                    }
+                    if let Some(s) = &self.saves[i] {
+                        line(c, 0, &s.level);
+                        line(c, 1, &s.timestamp);
+                        line(c, 2, &format!("Health {}   Armor {}", s.health, s.armor));
+                        let keys = self.save_inventory.keys(s);
+                        line(c, 9, if keys.is_empty() { "Keys: none" } else { "Keys:" });
+                        for (j, icon) in keys.iter().enumerate() {
+                            draw_inventory_icon(c, pic, x + 60.0 + j as f32 * 32.0, y + 94.0, 28.0, 16.0, icon);
+                        }
+                        line(c, 3, &format!("Kills {}/{}   Secrets {}/{}", s.kills.0, s.kills.1, s.secrets.0, s.secrets.1));
+                        let icons = self.save_inventory.weapons(s);
+                        if icons.is_empty() { line(c, 4, "Weapons: none"); }
+                        let columns = if icons.len() <= 20 { 10 } else { 14 };
+                        let cell = if columns == 10 { 27.0 } else { 19.0 };
+                        for (j, icon) in icons.iter().take(42).enumerate() {
+                            draw_inventory_icon(c, pic, x + 10.0 + (j % columns) as f32 * cell,
+                                y + 47.0 + (j / columns) as f32 * 14.0, cell - 2.0, 13.0, icon);
+                        }
+                        let label = if self.autosaves { format!("Auto {}: {}", i + 1, s.reason.as_deref().unwrap_or("Unknown trigger")) }
+                            else if self.screen == Screen::Load && i == 0 { format!("Latest auto: {}", s.reason.as_deref().unwrap_or("Unknown")) }
+                            else { format!("Manual slot {}", if self.screen == Screen::Load { i - 1 } else { i + 1 }) };
+                        let missing_weapons: Vec<_> = icons.iter().filter(|icon| pic(&icon.name).is_none()).map(|icon| icon.fallback.as_str()).collect();
+                        if !missing_weapons.is_empty() { line(c, 8, &missing_weapons.join(", ")); }
+                        let missing_keys: Vec<_> = keys.iter().filter(|icon| pic(&icon.name).is_none()).map(|icon| icon.fallback.as_str()).collect();
+                        if !missing_keys.is_empty() { line(c, 10, &missing_keys.join(", ")); }
+                        line(c, 11, &label);
+                    } else {
+                        let label = if self.screen == Screen::Load && self.autosaves { "No autosaves yet".into() }
+                            else if self.screen == Screen::Load && i == 0 { "No autosave yet".into() }
+                            else { format!("Empty manual slot {}", if self.screen == Screen::Load { i - 1 } else { i + 1 }) };
+                        line(c, 0, &label);
+                        if self.screen == Screen::Save { line(c, 2, "Enter to save here"); }
+                    }
                 }
-                if (realtime * 4.0) as i64 & 1 == 0 {
-                    c.ch(8.0, 32.0 + self.load_cursor as f32 * 8.0, 13);
-                }
+                c.string(24.0, 338.0, &format!("Arrows: select  Enter: {}  Esc: back", if self.screen == Screen::Save { "save" } else { "load" }));
+                c.string(520.0, 338.0, &format!("Page {}/{}", page + 1, self.save_rows().div_ceil(4)));
             }
             Screen::Options => {
                 let p = pic("gfx/qplaque.lmp");
@@ -1164,6 +1259,19 @@ const QUIT_BTN_Y: f32 = 178.0;
 const QUIT_BUTTONS: [f32; 2] = [248.0, 328.0];
 
 /// Main menu rows: the five of mainmenu.lmp plus Mods.
+fn draw_inventory_icon(c: &mut Canvas, pic: &mut PicFn, x: f32, y: f32, max_w: f32, max_h: f32, icon: &crate::save_inventory::Icon) {
+    if let Some((id, w, h)) = pic(&icon.name) {
+        let frame = icon.frame;
+        let width = if frame.is_some() { w / 16 } else { w };
+        let scale = (max_w / width.max(1) as f32).min(max_h / h.max(1) as f32).min(1.0);
+        let px = (c.ox + x) * c.scale;
+        let py = (c.oy + y) * c.scale;
+        let uv = frame.map_or([0.0,0.0,1.0,1.0], |n| [n as f32 / 16.0,0.0,(n+1) as f32 / 16.0,1.0]);
+        c.list.push(qrender::Draw2D::Pic { x: px, y: py, w: width as f32 * scale * c.scale,
+            h: h as f32 * scale * c.scale, pic: id, uv, color: [1.0; 4] });
+    }
+}
+
 const MAIN_ITEMS: usize = 6;
 
 pub const BORDER: [f32; 4] = [0.55, 0.42, 0.25, 1.0];
@@ -1371,5 +1479,45 @@ mod multiplayer_tests {
         let c = commands(&m.key(K_ESCAPE, &mut cv, false));
         assert_eq!(c, "name \"Ranger\"\ncolor 13 1\n");
         assert_eq!(m.screen, Screen::Multiplayer);
+    }
+}
+
+#[cfg(test)]
+mod save_menu_tests {
+    use super::*;
+    #[test]
+    fn autosave_submenu_navigation_and_slot_mapping() {
+        let mut m = Menu::new();
+        let mut cv = Cvars::new();
+        m.open(Screen::Load);
+        assert_eq!(m.save_slot_name(0).as_deref(), Some("autosave0"));
+        assert_eq!(m.save_slot_name(2).as_deref(), Some("s0"));
+        m.key(K_RIGHTARROW, &mut cv, true);
+        assert_eq!(m.load_cursor, 1);
+        let actions = m.key(K_ENTER, &mut cv, true);
+        assert!(m.autosaves);
+        assert!(actions.iter().any(|a| matches!(a, Action::Command(s) if s == "_scansaves\n")));
+        // An empty archive still handles every direction without underflow.
+        for key in [K_UPARROW, K_DOWNARROW, K_LEFTARROW, K_RIGHTARROW] {
+            m.key(key, &mut cv, true);
+            assert_eq!(m.load_cursor, 0);
+        }
+        m.key(K_ESCAPE, &mut cv, true);
+        assert!(!m.autosaves);
+        assert_eq!(m.screen, Screen::Load);
+        assert_eq!(m.load_cursor, 1);
+        m.open(Screen::Save);
+        assert_eq!(m.save_slot_name(0).as_deref(), Some("s0"));
+        assert_eq!(m.save_rows(), MAX_SAVEGAMES);
+    }
+    #[test]
+    fn card_mouse_coordinates_follow_keyboard_pages() {
+        let mut m = Menu::new();
+        m.open(Screen::Load);
+        assert_eq!(m.item_at((40.0, 64.0)), Some(0));
+        assert_eq!(m.item_at((340.0, 200.0)), Some(3));
+        m.load_cursor = 4;
+        assert_eq!(m.item_at((40.0, 64.0)), Some(4));
+        assert_eq!(m.item_at((20.0, 64.0)), None);
     }
 }
