@@ -279,6 +279,7 @@ const ACCESSIBILITY: &[Item] = &[
     toggle("Toggle Attack", "in_toggleattack"),
     toggle("Toggle Run", "in_togglerun"),
     Item::Choice { label: "Game Speed", cvar: "a11y_gamespeed", choices: GAME_SPEED },
+    Item::Sub { label: "Assists", page: Page::Assists },
 ];
 
 const HUD_MODE: &[(&str, f32)] = &[("off", 0.0), ("on", 1.0), ("immersive", 2.0)];
