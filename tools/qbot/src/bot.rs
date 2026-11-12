@@ -2022,7 +2022,12 @@ impl Bot<'_> {
                 if (d.x * d.x + d.y * d.y) > 4.0 {
                     wish = Vec3::new(d.x, d.y, 0.0);
                 }
-                if g.kind == Kind::Secret && d.z > 40.0 {
+                let bottom = self.vm().ent_v(g.ent, self.o.absmin)[2];
+                // Trigger centers can be above the player's head even though
+                // a jump reaches their lower face.
+                if (matches!(g.kind, Kind::Trigger | Kind::Exit) && bottom > here.z + 31.0 && bottom <= here.z + 72.0)
+                    || (g.kind == Kind::Secret && d.z > 40.0)
+                {
                     jump = true;
                 }
             }

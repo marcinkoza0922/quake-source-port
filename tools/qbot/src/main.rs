@@ -400,4 +400,26 @@ mod tests {
         assert!(r.kills * 10 >= r.total_monsters * 9, "kills {}/{}", r.kills, r.total_monsters);
         assert!(r.exited, "never reached the exit");
     }
+
+    /// The raised touch triggers in hip2m2 must be reached by jumping, rather
+    /// than repeatedly returning to their floor nodes by noclip.
+    #[test]
+    fn hip2m2_raised_triggers() {
+        let base = std::env::var_os("QUAKE_BASEDIR").map_or_else(
+            || Path::new(env!("CARGO_MANIFEST_DIR")).join("../../vkQuake directory with maps"),
+            PathBuf::from,
+        );
+        let fs = mount(&base, "hipnotic");
+        if fs.open("maps/hip2m2.bsp").is_none() || !base.join("hipnotic").is_dir() {
+            return;
+        }
+        let opt = bot::Options { skill: 3, max_time: None, verbose: false, routes: None, fresh: true, seed: 0, hints: None };
+        let r = bot::run(fs, "hip2m2", &opt);
+        assert!(r.errors.is_empty(), "{:?}", r.errors);
+        assert_eq!(r.kills, r.total_monsters, "kills {}/{}", r.kills, r.total_monsters);
+        assert_eq!(r.secrets, r.total_secrets, "secrets {}/{}", r.secrets, r.total_secrets);
+        assert!(r.exited, "never reached the exit");
+        assert!(r.noclip_uses <= 12, "{} noclips; raised triggers regressed", r.noclip_uses);
+    }
+
 }
