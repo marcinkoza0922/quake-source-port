@@ -211,12 +211,14 @@ impl Debris {
             }
         }
         self.release(cl);
+        // impacts first: a killing hit arrives with the death frame, and
+        // take_over replays remembered hits on the new ragdoll
+        self.impacts(cl, view, time, &set);
         self.take_over(cl, lv, fs, time, &set);
         self.update_movers(cl, set.movers);
         if set.shrapnel {
             self.brush_breaks(cl, lv, fs, r);
         }
-        self.impacts(cl, view, time, &set);
         self.track_shooters(cl, lv, time);
         self.gib_pending(cl, lv, fs, r, time);
         self.simulate(cl, dt, gravity);

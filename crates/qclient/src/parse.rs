@@ -125,6 +125,9 @@ impl ClientState {
                     let msgcount = m.byte();
                     let color = m.byte();
                     let count = if msgcount == 255 { 1024 } else { msgcount };
+                    if color == 73 {
+                        self.blood_hits.push(org);
+                    }
                     self.run_particle_effect(org, dir, color, count);
                 }
                 SVC_SPAWNBASELINE | SVC_SPAWNBASELINE2 => {

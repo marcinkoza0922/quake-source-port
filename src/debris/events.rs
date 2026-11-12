@@ -227,6 +227,12 @@ impl Debris {
                 }
             }
         }
+        // hits that drew blood: on a living body, which may die this frame
+        for &p in &cl.blood_hits {
+            let p = Vec3::from(p);
+            let from = self.shot_origin(view, p);
+            self.shots.push((from, p, time));
+        }
         self.rng = Some(rng);
         self.booms.retain(|b| time - b.1 < BOOM_MEMORY);
         self.shots.retain(|s| time - s.2 < SHOT_MEMORY);

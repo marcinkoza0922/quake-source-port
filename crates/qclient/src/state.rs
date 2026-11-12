@@ -236,6 +236,9 @@ pub struct ClientState {
     /// them (water splashes where the shot crossed a liquid surface); the
     /// flag marks explosions.
     pub shot_impacts: Vec<([f32; 3], bool)>,
+    /// Where shots drew blood this frame (`svc_particle` in blood colour:
+    /// QC's SpawnBlood), so client effects know a body was hit.
+    pub blood_hits: Vec<[f32; 3]>,
     pub dlights: Pool<Dlight>,
     pub particles: ParticlePool,
     pub(crate) avelocities: Vec<[f32; 3]>,
@@ -326,6 +329,7 @@ impl ClientState {
             fog: Fog::default(),
             beams: Pool::with_max(MAX_BEAMS),
             shot_impacts: Vec::new(),
+            blood_hits: Vec::new(),
             dlights: Pool::with_max(MAX_DLIGHTS),
             particles: ParticlePool::new(MAX_PARTICLES),
             avelocities: Vec::new(),

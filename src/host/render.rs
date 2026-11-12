@@ -212,6 +212,7 @@ impl Host {
             }
         }
         let impacts = std::mem::take(&mut self.cl.shot_impacts);
+        self.cl.blood_hits.clear();
         let frame = qrender::RenderFrame {
             time: self.cl.time,
             view,
