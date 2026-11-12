@@ -8,6 +8,7 @@
 //! once something changed. Noclip (an instant `setpos`) is the last resort and
 //! is reported as a soft failure.
 
+use crate::hints;
 use crate::nav::{self, Blocked, EdgeKind, Forbid, FxBuild, Geo, Nav, path_to};
 use crate::route::{self, Route};
 use qcore::cvar::Cvars;
@@ -46,6 +47,8 @@ pub struct Options {
     /// Variant seed: 0 is the plain bot; others vary goal order, routes and
     /// lift patience, deterministically per seed.
     pub seed: u64,
+    /// Where per-map hint files live (`<dir>/<map>.txt`); `None`: no hints.
+    pub hints: Option<PathBuf>,
 }
 
 #[derive(Default)]
@@ -241,6 +244,8 @@ struct Bot<'a> {
     lifts: HashMap<(u32, u32), Lift, FxBuild>,
     /// Waiting on a lift edge (path step) since.
     ride_since: Option<(usize, f64)>,
+    /// A shootable button being shot to call the lift the bot waits on.
+    call: Option<u32>,
     /// Time of the last noclip, for goals reached that way.
     noclip_at: f64,
     /// Whether the last noclip went to the current goal (not back to the graph).
@@ -261,6 +266,8 @@ struct Bot<'a> {
     replay: Option<Route>,
     /// Edges gated by locked doors at the last replan (for the log).
     gated: usize,
+    /// This map's navigation hints, applied on every graph build.
+    hints: Vec<hints::Line>,
 }
 
 struct Built {
@@ -269,6 +276,8 @@ struct Built {
     lifts: HashMap<(u32, u32), Lift, FxBuild>,
     exit_nodes: Vec<Option<u32>>,
     sig: u64,
+    /// Hint lines that couldn't be applied.
+    bad_hints: Vec<String>,
 }
 
 /// Hash of where every mover is.
@@ -288,7 +297,8 @@ fn mover_sig(vm: &Vm, o: &Ofs) -> u64 {
 /// Nav graph from the world, static brush entities (no `blocked` function,
 /// which every mover has) and movers as floors where they are now; then
 /// lifts, teleporters and exit entries.
-fn build_nav(vm: &Vm, world: &qworld::world::World, o: &Ofs, cm: &Arc<CollisionModel>, start: Vec3, forbid: &[Forbid], exits: &[u32]) -> Built {
+#[allow(clippy::too_many_arguments)]
+fn build_nav(vm: &Vm, world: &qworld::world::World, o: &Ofs, cm: &Arc<CollisionModel>, start: Vec3, forbid: &[Forbid], exits: &[u32], hints: &[hints::Line]) -> Built {
     let mut geo = Geo::new(cm.clone());
     let blocked_fn = vm.field_ofs("blocked");
     let modelindex = vm.field_ofs("modelindex");
@@ -303,6 +313,12 @@ fn build_nav(vm: &Vm, world: &qworld::world::World, o: &Ofs, cm: &Arc<CollisionM
         if mover && !resting {
             continue;
         }
+        // A mover thinner than a player is a door panel, not a floor: landing
+        // on top of a closed door in a corridor would cut the corridor off.
+        let size = v(vm.ent_v(e, o.absmax)) - v(vm.ent_v(e, o.absmin));
+        if mover && size.x.min(size.y) < 32.0 {
+            continue;
+        }
         let Some(mi) = modelindex else { continue };
         if let Some((m, sub)) = world.model(vm.ent_f(e, mi) as usize) {
             geo.add_solid(m.clone(), *sub, v(vm.ent_v(e, o.origin)), v(vm.ent_v(e, o.absmin)), v(vm.ent_v(e, o.absmax)), mover);
@@ -311,11 +327,12 @@ fn build_nav(vm: &Vm, world: &qworld::world::World, o: &Ofs, cm: &Arc<CollisionM
     let mut nav = Nav::build(&geo, start, forbid.to_vec());
     let mut lifts = HashMap::default();
     add_movers(&mut nav, &geo, vm, o, &mut lifts);
+    let bad_hints = hints::apply(&mut nav, &geo, hints);
     let exit_nodes = exits
         .iter()
         .map(|&e| add_entry(&mut nav, &geo, v(vm.ent_v(e, o.absmin)), v(vm.ent_v(e, o.absmax))))
         .collect();
-    Built { geo, nav, lifts, exit_nodes, sig: mover_sig(vm, o) }
+    Built { geo, nav, lifts, exit_nodes, sig: mover_sig(vm, o), bad_hints }
 }
 
 /// Node standing in the middle of a trigger box (teleporter, exit), linked
@@ -589,6 +606,14 @@ pub fn run(fs: Fs, map: &str, opt: &Options) -> Report {
         _ => 0,
     };
     let replay = route_path.as_ref().filter(|_| !opt.fresh && key != 0 && opt.seed == 0).and_then(|p| Route::load(p, key));
+    let hints = match opt.hints.as_ref().map(|d| hints::load(d, map)) {
+        Some(Ok(h)) => h,
+        Some(Err(e)) => {
+            rep.errors.push(e);
+            Vec::new()
+        }
+        None => Vec::new(),
+    };
     let mut sv = Server::new(fs, Cvars::new(), 1);
     // Nobody reads the client's datagrams.
     sv.core.skip_entity_updates = true;
@@ -650,10 +675,15 @@ pub fn run(fs: Fs, map: &str, opt: &Options) -> Report {
     let exit_ents: Vec<u32> = exits.iter().map(|x| x.0).collect();
     // A replayed route needs no graph; one is built if the replay diverges.
     let built = if replay.is_some() {
-        Built { geo: Geo::new(cm.clone()), nav: Nav::empty(start, forbid.clone()), lifts: HashMap::default(), exit_nodes: vec![None; exit_ents.len()], sig: 0 }
+        Built { geo: Geo::new(cm.clone()), nav: Nav::empty(start, forbid.clone()), lifts: HashMap::default(), exit_nodes: vec![None; exit_ents.len()], sig: 0, bad_hints: Vec::new() }
     } else {
-        build_nav(&l.vm, &l.world, &o, &cm, start, &forbid, &exit_ents)
+        build_nav(&l.vm, &l.world, &o, &cm, start, &forbid, &exit_ents, &hints)
     };
+    // A hint that doesn't fit the map is an authoring error: fail loudly.
+    rep.errors.extend(built.bad_hints);
+    if opt.verbose && !hints.is_empty() {
+        eprintln!("{map}: {} navigation hints", hints.len());
+    }
     let (geo, nav, lifts, sig) = (built.geo, built.nav, built.lifts, built.sig);
     for ((e, touch), node) in exits.into_iter().zip(built.exit_nodes) {
         goals.push(Goal { ent: e, kind: Kind::Exit, done: false, failed: false, deferred: false, defers: 0, initial_state: 0.0, noclips: 0, node, touch, views: Vec::new(), views_at: None, armed: false });
@@ -697,6 +727,7 @@ pub fn run(fs: Fs, map: &str, opt: &Options) -> Report {
         progress: false,
         lifts,
         ride_since: None,
+        call: None,
         noclip_at: -100.0,
         noclip_to_goal: false,
         intermission,
@@ -708,6 +739,7 @@ pub fn run(fs: Fs, map: &str, opt: &Options) -> Report {
         rec: Route { key, ..Default::default() },
         replay,
         gated: 0,
+        hints,
     };
     if bot.replay.is_some() {
         bot.rep.route = "replayed".into();
@@ -723,6 +755,89 @@ pub fn run(fs: Fs, map: &str, opt: &Options) -> Report {
             z -= 32.0;
         }
         eprintln!("probe {p:?}: floor {:?} normal {:?} start_solid {}; contents{layers}", tr.endpos, tr.plane_normal, tr.startsolid);
+    }
+    // `QBOT_PATH=x,y,z;x,y,z`: print the graph's path between two spots
+    // (for writing hints: where does the plan go, and on which edges).
+    if let Ok(s) = std::env::var("QBOT_PATH") {
+        let pts: Vec<Vec3> = s.split(';').map(|p| { let v: Vec<f32> = p.split(',').map(|x| x.trim().parse().unwrap()).collect(); Vec3::new(v[0], v[1], v[2]) }).collect();
+        let (a, b) = (bot.nav.nearest(pts[0], 128.0), bot.nav.nearest(pts[1], 128.0));
+        eprintln!("path {:?} -> {:?}: nodes {:?} -> {:?}", pts[0], pts[1], a.map(|n| bot.nav.pos[n as usize]), b.map(|n| bot.nav.pos[n as usize]));
+        if let (Some(a), Some(b)) = (a, b) {
+            let (dist, prev) = bot.nav.dijkstra(a, &Blocked::default(), 0);
+            if dist[b as usize].is_finite() {
+                let p = path_to(&prev, b);
+                for w in p.windows(2) {
+                    let k = bot.nav.edge(w[0], w[1]).unwrap().kind;
+                    if k != EdgeKind::Walk || (bot.nav.pos[w[1] as usize].z - bot.nav.pos[w[0] as usize].z).abs() > 20.0 || std::env::var_os("QBOT_PATH_ALL").is_some() {
+                        eprintln!("  {k:?} {:?} -> {:?}", bot.nav.pos[w[0] as usize], bot.nav.pos[w[1] as usize]);
+                    }
+                }
+                eprintln!("  cost {:.0}, {} nodes", dist[b as usize], p.len());
+            } else {
+                eprintln!("  unreachable");
+            }
+        }
+    }
+    if let Ok(s) = std::env::var("QBOT_SEG") {
+        let v: Vec<f32> = s.split(',').map(|x| x.trim().parse().unwrap()).collect();
+        let (a, b) = (Vec3::new(v[0], v[1], v[2]), Vec3::new(v[3], v[4], v[5]));
+        let t = bot.geo.trace(1, a, b);
+        let w = bot.cm.hull(0, 1).trace(a, b);
+        eprintln!("seg geo frac {} end {:?} start_solid {}; world frac {} start_solid {}; ground at b {:?}", t.fraction, t.endpos, t.startsolid, w.fraction, w.startsolid, nav::ground(&bot.geo, b, 512.0));
+    }
+    // `QBOT_INTO=x,y,z`: the nodes that can reach that spot (its basin), as
+    // extremes per axis: where the area leading there ends.
+    if let Ok(s) = std::env::var("QBOT_INTO") {
+        let v: Vec<f32> = s.split(',').map(|x| x.trim().parse().unwrap()).collect();
+        if let Some(t) = bot.nav.nearest(Vec3::new(v[0], v[1], v[2]), 128.0) {
+            let n = bot.nav.pos.len();
+            let mut rev: Vec<Vec<u32>> = vec![Vec::new(); n];
+            for (a, es) in bot.nav.edges.iter().enumerate() {
+                for e in es {
+                    rev[e.to as usize].push(a as u32);
+                }
+            }
+            let mut seen = vec![false; n];
+            let mut q = vec![t];
+            seen[t as usize] = true;
+            while let Some(a) = q.pop() {
+                for &b in &rev[a as usize] {
+                    if !seen[b as usize] {
+                        seen[b as usize] = true;
+                        q.push(b);
+                    }
+                }
+            }
+            let basin: Vec<Vec3> = (0..n).filter(|&i| seen[i]).map(|i| bot.nav.pos[i]).collect();
+            eprintln!("into {:?}: {} nodes", bot.nav.pos[t as usize], basin.len());
+            for (name, k) in [("x", 0), ("y", 1), ("z", 2)] {
+                let key = |p: &Vec3| p.to_array()[k];
+                let lo = basin.iter().min_by(|a, b| key(a).total_cmp(&key(b))).unwrap();
+                let hi = basin.iter().max_by(|a, b| key(a).total_cmp(&key(b))).unwrap();
+                eprintln!("  min {name} {lo:?}  max {name} {hi:?}");
+            }
+            // Where the start's reach comes closest to the basin: the gap to bridge.
+            if let Some(src) = bot.nav.nearest(start, 96.0) {
+                let (dist, _) = bot.nav.dijkstra(src, &Blocked::default(), 0);
+                if dist[t as usize].is_finite() {
+                    eprintln!("  reachable from the start");
+                } else {
+                    let fwd: Vec<Vec3> = (0..n).filter(|&i| dist[i].is_finite()).map(|i| bot.nav.pos[i]).collect();
+                    let mut pairs: Vec<(f32, Vec3, Vec3)> = basin.iter().filter_map(|&b| fwd.iter().map(|&f| ((f - b).length(), f, b)).min_by(|x, y| x.0.total_cmp(&y.0))).collect();
+                    pairs.sort_by(|x, y| x.0.total_cmp(&y.0));
+                    let mut shown: Vec<Vec3> = Vec::new();
+                    for (d, f, b) in pairs {
+                        if shown.iter().all(|s| (*s - b).length() > 192.0) {
+                            eprintln!("  gap {d:.0}: {f:?} -> {b:?}");
+                            shown.push(b);
+                            if shown.len() >= 8 {
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
     if debug() {
         let p = bot.me_origin();
@@ -979,7 +1094,12 @@ impl Bot<'_> {
             return;
         }
         let exits: Vec<u32> = self.goals.iter().filter(|g| g.kind == Kind::Exit).map(|g| g.ent).collect();
-        let b = build_nav(&l.vm, &l.world, &self.o, &self.cm, self.start, &self.forbid, &exits);
+        let b = build_nav(&l.vm, &l.world, &self.o, &self.cm, self.start, &self.forbid, &exits, &self.hints);
+        for e in b.bad_hints {
+            if !self.rep.errors.contains(&e) {
+                self.rep.errors.push(e);
+            }
+        }
         // Seed from where the bot is too, in case the start is cut off now.
         let mut nav = b.nav;
         nav.extend(&b.geo, self.me_origin());
@@ -1069,7 +1189,11 @@ impl Bot<'_> {
         self.update_views();
         let gates = self.gates();
         if gates.edges.len() != self.gated && self.opt.verbose {
-            eprintln!("  t={:.1} {} edges gated by locked doors", self.sv.time(), gates.edges.len());
+            let mut doors: Vec<u32> = gates.door.values().copied().collect();
+            doors.sort_unstable();
+            doors.dedup();
+            let ds: Vec<String> = doors.iter().map(|&d| format!("#{d} {} opened by {:?}", self.vm().classname(d), gates.openers.get(&d).map(|o| o.iter().map(|&i| self.goals[i].ent).collect::<Vec<_>>()))).collect();
+            eprintln!("  t={:.1} {} edges gated by locked doors: {}", self.sv.time(), gates.edges.len(), ds.join(", "));
         }
         self.gated = gates.edges.len();
         // Gates are a preference: with them first, then without (the opener
@@ -1243,32 +1367,58 @@ impl Bot<'_> {
             }
             fires.push((i, names));
         }
+        let oldorigin = vm.field_ofs("oldorigin");
         for e in 1..vm.num_edicts() as u32 {
-            if vm.is_free(e) || vm.ent_f(e, self.o.solid) as i32 != SOLID_BSP || !matches!(vm.classname(e).as_str(), "door" | "func_door") {
+            if vm.is_free(e) || vm.ent_f(e, self.o.solid) as i32 != SOLID_BSP {
                 continue;
             }
-            // Closed: resting where it spawned.
-            if (v(vm.ent_v(e, self.o.origin)) - v(vm.ent_v(e, pos1))).length() > 1.0 || velocity.is_some_and(|f| v(vm.ent_v(e, f)).length_sq() > 0.0) {
-                continue;
-            }
-            let m = match vm.ent_i(e, owner) as u32 {
-                0 => e,
-                m if vm.is_free(m) => e,
-                m => m,
+            let secret = match vm.classname(e).as_str() {
+                "door" | "func_door" => false,
+                "func_door_secret" => true,
+                _ => continue,
             };
-            let need = vm.ent_f(m, items) as i32 & (IT_KEY1 | IT_KEY2) & !have;
-            let name = ent_str(vm, m, self.o.targetname);
-            let remote = vm.ent_f(m, self.o.health) <= 0.0 && fires.iter().any(|f| f.1.contains(&name));
-            if need == 0 && !remote {
+            if velocity.is_some_and(|f| v(vm.ent_v(e, f)).length_sq() > 0.0) {
                 continue;
             }
-            out.openers.entry(m).or_insert_with(|| {
-                let mut o: Vec<usize> = fires.iter().filter(|f| remote && f.1.contains(&name)).map(|f| f.0).collect();
-                o.extend(self.goals.iter().enumerate().filter(|(_, g)| {
-                    g.kind == Kind::Key && Self::pending(g) && vm.ent_f(g.ent, items) as i32 & need != 0
-                }).map(|(i, _)| i));
-                o
-            });
+            let m = if secret {
+                // Closed: where it spawned (oldorigin); opened by its
+                // trigger, or by shooting it (then it is its own goal).
+                if oldorigin.is_none_or(|f| (v(vm.ent_v(e, self.o.origin)) - v(vm.ent_v(e, f))).length() > 1.0) {
+                    continue;
+                }
+                let name = ent_str(vm, e, self.o.targetname);
+                let shoot = self.goals.iter().position(|g| g.ent == e && g.kind == Kind::Shoot && Self::pending(g));
+                let remote: Vec<usize> = if name.is_empty() { Vec::new() } else { fires.iter().filter(|f| f.1.contains(&name)).map(|f| f.0).collect() };
+                if shoot.is_none() && remote.is_empty() {
+                    continue;
+                }
+                out.openers.entry(e).or_insert_with(|| shoot.into_iter().chain(remote).collect());
+                e
+            } else {
+                // Closed: resting where it spawned.
+                if (v(vm.ent_v(e, self.o.origin)) - v(vm.ent_v(e, pos1))).length() > 1.0 {
+                    continue;
+                }
+                let m = match vm.ent_i(e, owner) as u32 {
+                    0 => e,
+                    m if vm.is_free(m) => e,
+                    m => m,
+                };
+                let need = vm.ent_f(m, items) as i32 & (IT_KEY1 | IT_KEY2) & !have;
+                let name = ent_str(vm, m, self.o.targetname);
+                let remote = vm.ent_f(m, self.o.health) <= 0.0 && fires.iter().any(|f| f.1.contains(&name));
+                if need == 0 && !remote {
+                    continue;
+                }
+                out.openers.entry(m).or_insert_with(|| {
+                    let mut o: Vec<usize> = fires.iter().filter(|f| remote && f.1.contains(&name)).map(|f| f.0).collect();
+                    o.extend(self.goals.iter().enumerate().filter(|(_, g)| {
+                        g.kind == Kind::Key && Self::pending(g) && vm.ent_f(g.ent, items) as i32 & need != 0
+                    }).map(|(i, _)| i));
+                    o
+                });
+                m
+            };
             let (lo, hi) = (v(vm.ent_v(e, self.o.absmin)), v(vm.ent_v(e, self.o.absmax)));
             let (zc, dz) = ((lo.z + hi.z) * 0.5, (hi.z - lo.z) * 0.5 + 64.0);
             // Slightly under the player's half width: edges grazing the frame stay.
@@ -1683,8 +1833,19 @@ impl Bot<'_> {
             self.path.clear();
             return Some(Vec3::ZERO);
         }
+        self.call = None;
         let surf = self.vm().ent_v(lift.ent, self.o.absmax)[2];
         let c = (lift.mins + lift.maxs) * 0.5;
+        let still = self.vm().field_ofs("velocity").is_none_or(|f| v(self.vm().ent_v(lift.ent, f)).length_sq() == 0.0);
+        let (up0, up1) = (self.nav.pos[key.0 as usize].z, self.nav.pos[key.1 as usize].z);
+        let arrived = (surf - if up1 > up0 { lift.hi } else { lift.lo }).abs() < 4.0;
+        // A lift that only moves when called: press (or shoot) a button that
+        // fires it, once it has kept still for a moment.
+        if still && !arrived && t - since > 1.5
+            && let Some(w) = self.call_lift(lift.ent, here)
+        {
+            return Some(w);
+        }
         let inside = here.x > lift.mins.x - 16.0 && here.x < lift.maxs.x + 16.0 && here.y > lift.mins.y - 16.0 && here.y < lift.maxs.y + 16.0;
         let on = inside && (here.z - 24.0 - surf).abs() < 6.0;
         let up = self.nav.pos[key.1 as usize].z > self.nav.pos[key.0 as usize].z;
@@ -1702,6 +1863,80 @@ impl Bot<'_> {
         } else {
             Some(Vec3::ZERO)
         }
+    }
+
+    /// A shootable brush entity (secret door, button) right in front of the
+    /// bot in the direction it wants to go.
+    fn shootable_ahead(&self, here: Vec3, wish: Vec3) -> Option<u32> {
+        if wish.length_sq() < 1.0 {
+            return None;
+        }
+        let ahead = here + wish.normalize() * 48.0;
+        let vm = self.vm();
+        (1..vm.num_edicts() as u32).find(|&e| {
+            if vm.is_free(e) || vm.ent_f(e, self.o.solid) as i32 != SOLID_BSP || vm.ent_f(e, self.o.takedamage) == 0.0 || vm.ent_f(e, self.o.health) <= 0.0 {
+                return false;
+            }
+            let (lo, hi) = (v(vm.ent_v(e, self.o.absmin)), v(vm.ent_v(e, self.o.absmax)));
+            ahead.x + 16.0 > lo.x && ahead.x - 16.0 < hi.x && ahead.y + 16.0 > lo.y && ahead.y - 16.0 < hi.y && here.z + 32.0 > lo.z && here.z - 24.0 < hi.z
+        })
+    }
+
+    /// Unpressed buttons that fire `lift` (directly or through relays).
+    fn lift_callers(&self, lift: u32) -> Vec<u32> {
+        let vm = self.vm();
+        let owner = self.o.owner.map_or(0, |f| vm.ent_i(lift, f) as u32);
+        let m = if owner != 0 && !vm.is_free(owner) { owner } else { lift };
+        let mut names = vec![ent_str(vm, m, self.o.targetname)];
+        if names[0].is_empty() {
+            return Vec::new();
+        }
+        // Walk relays backwards: anything targeting a name we want, with a name itself.
+        let mut i = 0;
+        while i < names.len() && names.len() < 16 {
+            for e in 1..vm.num_edicts() as u32 {
+                if !vm.is_free(e) && ent_str(vm, e, self.o.target) == names[i] && vm.classname(e) != "func_button" {
+                    let n = ent_str(vm, e, self.o.targetname);
+                    if !n.is_empty() && !names.contains(&n) {
+                        names.push(n);
+                    }
+                }
+            }
+            i += 1;
+        }
+        (1..vm.num_edicts() as u32)
+            .filter(|&e| !vm.is_free(e) && vm.classname(e) == "func_button" && names.contains(&ent_str(vm, e, self.o.target)))
+            // STATE_BOTTOM: out, ready to press.
+            .filter(|&e| self.o.state.is_none_or(|s| vm.ent_f(e, s) == 1.0))
+            .collect()
+    }
+
+    /// Move (or aim) to press a button calling `lift`; `None` when there is none in reach.
+    fn call_lift(&mut self, lift: u32, here: Vec3) -> Option<Vec3> {
+        let eye = self.eye();
+        let mut best: Option<(f32, u32)> = None;
+        for b in self.lift_callers(lift) {
+            let d = (self.center(b) - here).length();
+            if d < 640.0 && best.is_none_or(|x| d < x.0) {
+                best = Some((d, b));
+            }
+        }
+        let (_, b) = best?;
+        let c = self.center(b);
+        let vm = self.vm();
+        if vm.ent_f(b, self.o.health) > 0.0 && vm.ent_f(b, self.o.takedamage) != 0.0 && self.clear_shot(eye, c, b) {
+            self.call = Some(b);
+            return Some(Vec3::ZERO);
+        }
+        // Walk into it if it is within a jump of the floor and nothing is in between.
+        let spot = self.touch_spot(b).unwrap_or(c);
+        if (spot.z - here.z).abs() > 48.0 || !nav::clear(&self.geo, here, Vec3::new(spot.x, spot.y, here.z)) {
+            return None;
+        }
+        if self.opt.verbose && self.frame.is_multiple_of(20) {
+            eprintln!("  t={:.1} calling lift #{lift} with button #{b}", self.sv.time());
+        }
+        Some(Vec3::new(c.x - here.x, c.y - here.y, 0.0))
     }
 
     fn think(&mut self) -> ClientMove {
@@ -1812,8 +2047,16 @@ impl Bot<'_> {
             if d < self.best_dist - 16.0 || d < 32.0 {
                 self.best_dist = self.best_dist.min(d);
                 self.best_time = t;
+                if self.ride_since.is_none() {
+                    self.call = None;
+                }
             } else if t - self.best_time > STUCK_TIME * 0.5 && t - self.best_time <= STUCK_TIME {
                 unstick = true;
+                // Up against something that opens when shot (a secret door
+                // that closed again): shoot it, as a player would.
+                if self.call.is_none() {
+                    self.call = self.shootable_ahead(here, wish);
+                }
             } else if t - self.best_time > STUCK_TIME {
                 if self.opt.verbose {
                     eprintln!("  t={t:.1} stuck at {here:?}{}", self.ents_near(here));
@@ -1839,8 +2082,11 @@ impl Bot<'_> {
         if self.frame.is_multiple_of(2) || self.target_cache.is_some_and(|(_, e)| self.vm().is_free(e) || self.vm().ent_f(e, self.o.health) <= 0.0) {
             self.target_cache = self.target();
         }
-        // Aim at where the cached target is now.
-        let target = self.target_cache.map(|(_, e)| (self.center(e), e));
+        if self.call.is_some_and(|e| self.vm().is_free(e) || self.vm().ent_f(e, self.o.takedamage) == 0.0 || self.vm().ent_f(e, self.o.health) <= 0.0) {
+            self.call = None;
+        }
+        // Aim at where the cached target is now (a lift's button first).
+        let target = self.call.map(|e| (self.center(e), e)).or_else(|| self.target_cache.map(|(_, e)| (self.center(e), e)));
         if let Some((tg, e)) = target {
             mv.angles = look_angles(tg - self.eye());
             mv.buttons |= 1;

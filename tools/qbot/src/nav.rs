@@ -278,7 +278,10 @@ impl Nav {
                 let ty = nav.origin.y + (cy + dy) as f32 * GRID;
                 // Walk, jump, then (in water) swim up in growing steps as far
                 // as the surface: the first height that gets over is used.
-                let mut tries = vec![(EdgeKind::Walk, STEP), (EdgeKind::Jump, JUMP)];
+                // Low ceilings (crawlways, door frames): no room to probe a
+                // stair step up, so walk level.
+                let step = if clear(cm, p, p + Vec3::new(0.0, 0.0, STEP)) { STEP } else { 0.5 };
+                let mut tries = vec![(EdgeKind::Walk, step), (EdgeKind::Jump, JUMP)];
                 if swim > JUMP {
                     tries.extend([64.0, 128.0, 256.0, 512.0, 1024.0].into_iter().filter(|&h| h < swim).map(|h| (EdgeKind::Jump, h)));
                     tries.push((EdgeKind::Jump, swim));
@@ -430,6 +433,11 @@ impl Nav {
         if a != b && self.edge(a, b).is_none() {
             self.edges[a as usize].push(Edge { to: b, cost, kind });
         }
+    }
+
+    /// Remove the edge from `a` to `b`, if any.
+    pub fn unlink(&mut self, a: u32, b: u32) {
+        self.edges[a as usize].retain(|e| e.to != b);
     }
 
     /// Nodes within `pad` (XY) of the box and within `dz` of height `z`.

@@ -2,7 +2,7 @@
 //!
 //! Usage: qbot [-basedir <dir>] [-game <dir>] [-skill N] [-time <sim s>] [-j N]
 //!             [-out <dir>] [-baseline <file>] [-save-baseline] [-routes <dir>]
-//!             [-no-routes] [-fresh] [-variants N] [-v] [map ...]
+//!             [-no-routes] [-hints DIR] [-no-hints] [-fresh] [-variants N] [-v] [map ...]
 //!
 //! Each map runs on an in-process headless server at skill 3 with god mode.
 //! The bot paths to secrets, monsters, buttons and keys over a nav graph built
@@ -17,6 +17,7 @@
 //! baseline; `-save-baseline` writes the current results as the new baseline.
 
 mod bot;
+mod hints;
 mod nav;
 mod route;
 
@@ -37,6 +38,7 @@ struct Opts {
     save_baseline: bool,
     verbose: bool,
     routes: Option<PathBuf>,
+    hints: Option<PathBuf>,
     fresh: bool,
     variants: u32,
     maps: Vec<String>,
@@ -55,11 +57,13 @@ fn parse_args() -> Opts {
         save_baseline: false,
         verbose: false,
         routes: None,
+        hints: None,
         fresh: false,
         variants: 1,
         maps: Vec::new(),
     };
     let mut no_routes = false;
+    let mut no_hints = false;
     let mut a = std::env::args().skip(1);
     while let Some(x) = a.next() {
         let mut val = || a.next().unwrap_or_else(|| panic!("{x} needs a value"));
@@ -75,6 +79,8 @@ fn parse_args() -> Opts {
             "-v" => o.verbose = true,
             "-routes" => o.routes = Some(val().into()),
             "-no-routes" => no_routes = true,
+            "-hints" => o.hints = Some(val().into()),
+            "-no-hints" => no_hints = true,
             "-fresh" => o.fresh = true,
             "-variants" => o.variants = val().parse::<u32>().expect("-variants N").max(1),
             "-h" | "--help" => {
@@ -89,13 +95,18 @@ fn parse_args() -> Opts {
     } else if o.routes.is_none() {
         o.routes = Some(PathBuf::from(format!("target/qbot/routes/{}", o.game)));
     }
+    if no_hints {
+        o.hints = None;
+    } else if o.hints.is_none() {
+        o.hints = Some(PathBuf::from(format!("tools/qbot/hints/{}", o.game)));
+    }
     if o.baseline.is_none() {
         o.baseline = Some(PathBuf::from(format!("tools/qbot/baseline-{}.json", o.game)));
     }
     o
 }
 
-const USAGE: &str = "qbot [-basedir D] [-game G] [-skill N] [-time S] [-j N] [-out DIR] [-baseline F] [-save-baseline] [-routes DIR] [-no-routes] [-fresh] [-variants N] [-v] [map ...]";
+const USAGE: &str = "qbot [-basedir D] [-game G] [-skill N] [-time S] [-j N] [-out DIR] [-baseline F] [-save-baseline] [-routes DIR] [-no-routes] [-hints DIR] [-no-hints] [-fresh] [-variants N] [-v] [map ...]";
 
 fn mount(basedir: &Path, game: &str) -> Fs {
     let mut fs = Fs::new(basedir);
@@ -164,7 +175,7 @@ fn report_json(r: &bot::Report) -> String {
 }
 
 fn run_one(o: &Opts, map: &str, seed: u64) -> bot::Report {
-    let opt = bot::Options { skill: o.skill, max_time: o.time, verbose: o.verbose, routes: o.routes.clone(), fresh: o.fresh, seed };
+    let opt = bot::Options { skill: o.skill, max_time: o.time, verbose: o.verbose, routes: o.routes.clone(), fresh: o.fresh, seed, hints: o.hints.clone() };
     let fs = mount(&o.basedir, &o.game);
     match catch_unwind(AssertUnwindSafe(|| bot::run(fs, map, &opt))) {
         Ok(r) => r,
@@ -381,7 +392,7 @@ mod tests {
             eprintln!("no game data; skipping");
             return;
         }
-        let opt = bot::Options { skill: 3, max_time: None, verbose: false, routes: None, fresh: false, seed: 0 };
+        let opt = bot::Options { skill: 3, max_time: None, verbose: false, routes: None, fresh: false, seed: 0, hints: None };
         let r = bot::run(mount(&base, "id1"), "e1m1", &opt);
         assert!(r.errors.is_empty(), "{:?}", r.errors);
         assert!(r.secrets + 1 >= r.total_secrets, "secrets {}/{}", r.secrets, r.total_secrets);
