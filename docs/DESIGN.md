@@ -406,7 +406,13 @@ Phase 4 done (server + remaining client hooks):
   - Rain/snow: world faces whose texture has a worldspawn `[_]texpart_<tex>` key or a `tex_<tex>` effect become sky triangles, rebuilt on map/effect changes. Brush entities don't emit.
   - `r_partinfo` prints configs, precaches, request count and live particles per type.
   - Checks: AD `start` with defaults runs about 4.5k effectinfo particles (flames, portals, pillars). `-game xmasjam2021 +map start "+r_particledesc xmas_weather"` snows.
-Remaining: DP_ENT_TRAILEFFECTNUM / emiteffectnum entity fields (need delta support), brush-entity traces/decals/rain, soft particles, png/jpg particle textures, honouring EMIT_REPLACE, `r_part_*` cvars wired to `Settings`/`RenderOptions`.
+Phase 5 done:
+- Cvars (host, read every frame into `qpart::Settings`): r_part_density, r_part_contentswitch, r_bouncysparks, r_particle_tracelimit, r_part_rain, r_part_rain_quantity, r_decal_noperpendicular, r_lightflicker, r_part_maxparticles, r_part_maxdecals.
+  - Changing a pool size clears the system.
+  - r_part_sparks / _textured / _trifan and r_part_beams are `RenderOptions` used by FinishParticleType, so changing them reloads the effects.
+- `r_effect ... replace`: `Fte::replaced_models` fills `ViewState::replaced_models`, and those entities aren't drawn while their emitter runs.
+- Brush entities: `BspWorld` traces the world, then inline `*N` brush entities whose bounds overlap the remaining segment (CL_TraceLine). Rotated ones use the renderer's axis convention (right negated). Particles bounce off and splat on doors/lifts. Clipped decals stick to unrotated brush entities and follow their origin; rotated ones get none, as in vkQuake. Point contents is world-only, as in C. External `.bsp` brush models are not traced.
+Remaining: DP_ENT_TRAILEFFECTNUM / emiteffectnum entity fields (need delta support), soft particles, png/jpg particle textures, rain from brush entities.
 - `types`: part_type_t/plooks_t/ramp_t, flags PT_*, spawn modes SM_*, blend modes.
 - `parse`: FTE `r_part` cfg parser (`particles/<name>.cfg`, namespaces, `+name` chains, `r_effect`/`r_trail`/`r_partredirect`) and the DP `effectinfo.txt` importer (AD needs it: its progs checks `FTE_PART_NAMESPACE_EFFECTINFO` and uses `effectinfo.*` names).
 - `system`: one particle arena with index-linked per-type lists and a free list (beams reference particles by index, killed particles are freed only at the end of the frame, as in C), trailstates (ring of 1024), run list, decals, sky-tri rain emitters (`_texpart_*` worldspawn keys, `tex_<texture>`).

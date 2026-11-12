@@ -16,6 +16,62 @@ use qworld::hull::CollisionModel;
 struct BspWorld<'a> {
     bsp: &'a Bsp,
     cm: &'a CollisionModel,
+    /// Inline brush entities (doors, lifts) for traces and decals.
+    ents: &'a [BrushEnt],
+}
+
+/// A visible inline brush model entity (CL_PrepareTraceLineEntities).
+#[derive(Clone, Copy, Debug)]
+struct BrushEnt {
+    entity: i32,
+    submodel: usize,
+    origin: Vec3,
+    /// forward, right, up when rotated.
+    axis: Option<[Vec3; 3]>,
+    mins: Vec3,
+    maxs: Vec3,
+}
+
+impl BrushEnt {
+    /// Entity-space point (the renderer's brush rotation, right negated).
+    fn local(&self, p: Vec3) -> Vec3 {
+        let d = p - self.origin;
+        match self.axis {
+            Some(a) => Vec3::new(d.dot(a[0]), -d.dot(a[1]), d.dot(a[2])),
+            None => d,
+        }
+    }
+    fn dir_to_world(&self, v: Vec3) -> Vec3 {
+        match self.axis {
+            Some(a) => a[0] * v.x - a[1] * v.y + a[2] * v.z,
+            None => v,
+        }
+    }
+}
+
+/// Brush entities of the client's frame.
+fn brush_ents(cl: &ClientState, cm: &CollisionModel) -> Vec<BrushEnt> {
+    let mut out = Vec::new();
+    for (i, e) in cl.active_entities() {
+        let Some(sub) = cl.model_name(e.model).and_then(|n| n.strip_prefix('*')).and_then(|n| n.parse::<usize>().ok()) else {
+            continue;
+        };
+        let Some(m) = cm.submodels.get(sub) else { continue };
+        let origin = Vec3::from(e.origin);
+        let rotated = e.angles != [0.0; 3];
+        let (mins, maxs) = if rotated {
+            let r = m.mins.length().max(m.maxs.length());
+            (origin - Vec3::splat(r), origin + Vec3::splat(r))
+        } else {
+            (origin + m.mins, origin + m.maxs)
+        };
+        let axis = rotated.then(|| {
+            let (f, r, u) = qcore::math::angle_vectors(Vec3::from(e.angles));
+            [f, r, u]
+        });
+        out.push(BrushEnt { entity: i as i32, submodel: sub, origin, axis, mins, maxs });
+    }
+    out
 }
 
 fn fte_contents(c: i32) -> u32 {
@@ -27,16 +83,43 @@ fn fte_contents(c: i32) -> u32 {
         -4 => FTECONTENTS_SLIME,
         -5 => FTECONTENTS_LAVA,
         -6 => FTECONTENTS_SKY,
-        // currents count as water (cont_qtof)
-        _ if c <= -9 => FTECONTENTS_WATER,
-        _ => FTECONTENTS_EMPTY,
+        // anything else (currents, clip) is assumed water (cont_qtof)
+        _ => FTECONTENTS_WATER,
     }
 }
 
 impl World for BspWorld<'_> {
+    /// CL_TraceLine: the world first, then brush entities overlapping the
+    /// remaining segment.
     fn trace_line(&self, start: Vec3, end: Vec3) -> Trace {
         let tr = self.cm.hull(0, 0).trace(start, end);
-        Trace { frac: tr.fraction, endpos: tr.endpos, normal: tr.plane_normal, entity: 0 }
+        let mut best = Trace { frac: 1.0, endpos: end, normal: Vec3::new(0.0, 0.0, 1.0), entity: 0 };
+        if tr.fraction < 1.0 {
+            best = Trace { frac: tr.fraction, endpos: tr.endpos, normal: tr.plane_normal, entity: 0 };
+            if best.frac <= 0.0 {
+                return best;
+            }
+        }
+        for be in self.ents {
+            let (lo, hi) = (start.min(best.endpos) - Vec3::splat(1.0), start.max(best.endpos) + Vec3::splat(1.0));
+            if (0..3).any(|k| be.mins[k] > hi[k] || be.maxs[k] < lo[k]) {
+                continue;
+            }
+            let tr = self.cm.hull(be.submodel, 0).trace(be.local(start), be.local(end));
+            if tr.fraction < best.frac {
+                let endpos = be.dir_to_world(tr.endpos) + be.origin;
+                best = Trace { frac: tr.fraction, endpos, normal: be.dir_to_world(tr.plane_normal), entity: be.entity };
+                if best.frac <= 0.0 {
+                    break;
+                }
+            }
+        }
+        best
+    }
+
+    fn entity_origin(&self, entity: i32) -> Option<Vec3> {
+        // Rotated brush decals aren't supported (vkQuake drops them too).
+        self.ents.iter().find(|b| b.entity == entity && b.axis.is_none()).map(|b| b.origin)
     }
 
     fn point_contents(&self, p: Vec3) -> u32 {
@@ -44,10 +127,15 @@ impl World for BspWorld<'_> {
     }
 
     fn decal_polys(&self, entity: i32, center: Vec3, radius: f32, normal: Vec3, noperp: bool, out: &mut dyn FnMut(&[Vec3])) {
-        if entity != 0 {
-            return;
-        }
-        let Some(m) = self.bsp.models.first() else { return };
+        let sub = if entity == 0 {
+            0
+        } else {
+            match self.ents.iter().find(|b| b.entity == entity && b.axis.is_none()) {
+                Some(b) => b.submodel,
+                None => return,
+            }
+        };
+        let Some(m) = self.bsp.models.get(sub) else { return };
         let mut stack = vec![m.headnode[0]];
         let mut poly = Vec::with_capacity(32);
         while let Some(n) = stack.pop() {
@@ -136,7 +224,7 @@ pub struct Fte {
     /// Collision model of the current map.
     cm: Option<(String, std::rc::Rc<CollisionModel>)>,
     /// r_particledesc and map the effects were loaded for.
-    loaded_for: Option<(String, String)>,
+    loaded_for: Option<(String, String, String)>,
     palette: Option<Vec<u8>>,
     /// Client requests processed (r_partinfo).
     requests: u64,
@@ -167,11 +255,27 @@ impl Fte {
 
     /// Reloads effects when `r_particledesc` or the map changed, then
     /// republishes the scripted effect names to the client.
-    pub fn sync(&mut self, desc: &str, map: &str, fs: &qcore::fs::Fs, cl: &mut ClientState, print: &mut dyn FnMut(&str)) {
-        let key = (desc.to_string(), map.to_string());
-        if self.loaded_for.as_ref() == Some(&key) {
+    #[allow(clippy::too_many_arguments)]
+    pub fn sync(
+        &mut self,
+        desc: &str,
+        map: &str,
+        opts: qpart::RenderOptions,
+        settings: qpart::Settings,
+        fs: &qcore::fs::Fs,
+        cl: &mut ClientState,
+        print: &mut dyn FnMut(&str),
+    ) {
+        // Pool sizes take effect on the next reload (PScript_Startup).
+        let resize = settings.max_particles != self.sys.settings.max_particles
+            || settings.max_decals != self.sys.settings.max_decals;
+        self.sys.settings = settings;
+        // FinishParticleType applies the spark/beam cvars, so they reload.
+        let key = (desc.to_string(), map.to_string(), format!("{opts:?}"));
+        if self.loaded_for.as_ref() == Some(&key) && !resize {
             return;
         }
+        self.reg.opts = opts;
         if self.palette.is_none() {
             self.palette = fs.open("gfx/palette.lmp");
         }
@@ -248,7 +352,8 @@ impl Fte {
             self.sky_dirty = true;
         }
         let Some(cm) = self.cm.as_ref().map(|c| c.1.clone()) else { return Default::default() };
-        let world = BspWorld { bsp, cm: &cm };
+        let ents = brush_ents(cl, &cm);
+        let world = BspWorld { bsp, cm: &cm, ents: &ents };
         let mut f = files(fs);
         // CL_ForceProtocolParticles: a server using particleeffectnum gets
         // effectinfo.txt loaded implicitly (weakly), for un-namespaced names.
@@ -301,7 +406,7 @@ impl Fte {
 
         let (fwd, right, up) = qcore::math::angle_vectors(view.angles.into());
         let vi = ViewInfo { origin: view.origin.into(), forward: fwd, right, up };
-        let eo = |_: i32| None;
+        let eo = |e: i32| world.entity_origin(e);
         let mut g = Geometry::new(&self.reg, vi, self.sys.particletime, &eo);
         // The world is model 1 at the origin (brush entities don't rain yet).
         let rain = vec![qpart::RainEmitter {
@@ -355,6 +460,31 @@ impl Fte {
 }
 
 impl Fte {
+    fn model_fx_of(&mut self, name: &str, f: &mut dyn qpart::FileSource) -> qpart::ModelEffects {
+        if let Some(m) = self.model_fx.get(name) {
+            return *m;
+        }
+        let m = self.reg.model_effects(name, f);
+        self.model_fx.insert(name.to_string(), m);
+        m
+    }
+
+    /// Per model index: drawn by its `replace` emitter instead.
+    pub fn replaced_models(&mut self, cl: &ClientState, fs: &qcore::fs::Fs) -> Vec<bool> {
+        if self.reg.associated.iter().all(|a| a.flags & qpart::EMIT_REPLACE == 0) {
+            return Vec::new();
+        }
+        let mut f = files(fs);
+        (0..cl.model_precache.len())
+            .map(|i| {
+                cl.model_name(i).is_some_and(|n| {
+                    let m = self.model_fx_of(n, &mut f);
+                    m.emit.is_some() && m.flags & qpart::EMIT_REPLACE != 0
+                })
+            })
+            .collect()
+    }
+
     /// `r_effect` / `r_trail` effects of visible entities (CL_RelinkEntities).
     fn model_effects(&mut self, cl: &ClientState, world: &BspWorld<'_>, f: &mut dyn qpart::FileSource, ft: f32) {
         if self.reg.associated.is_empty() {
@@ -363,14 +493,7 @@ impl Fte {
         for &i in &cl.visedicts {
             let Some(e) = cl.entities.get(i) else { continue };
             let Some(name) = cl.model_name(e.model) else { continue };
-            let me = match self.model_fx.get(name) {
-                Some(m) => *m,
-                None => {
-                    let m = self.reg.model_effects(name, f);
-                    self.model_fx.insert(name.to_string(), m);
-                    m
-                }
-            };
+            let me = self.model_fx_of(name, f);
             if me.trail.is_none() && me.emit.is_none() {
                 continue;
             }
@@ -470,5 +593,73 @@ fn upload_textures(reg: &Registry, pics: &mut Vec<Option<PicId>>, r: &mut Render
             }
         });
         pics.push(pic);
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use qworld::hull::{CNode, HPlane, SubModel};
+
+    /// World: empty. Submodel 1: solid box x ±16, y ±4, z ±16.
+    fn box_model() -> CollisionModel {
+        let pl = |n: [f32; 3], d: f32| HPlane { normal: Vec3::from(n), dist: d, kind: 3 };
+        let planes = vec![
+            pl([1.0, 0.0, 0.0], 100_000.0),
+            pl([1.0, 0.0, 0.0], 16.0),
+            pl([-1.0, 0.0, 0.0], 16.0),
+            pl([0.0, 1.0, 0.0], 4.0),
+            pl([0.0, -1.0, 0.0], 4.0),
+            pl([0.0, 0.0, 1.0], 16.0),
+            pl([0.0, 0.0, -1.0], 16.0),
+        ];
+        // node 0: world (all empty); nodes 1..=6: front empty, back next, last back solid
+        let mut hull0 = vec![CNode { plane: 0, children: [-1, -1] }];
+        for i in 1..=6 {
+            hull0.push(CNode { plane: i, children: [-1, if i == 6 { -2 } else { i as i32 + 1 }] });
+        }
+        let sub = |h: i32, mins: [f32; 3], maxs: [f32; 3]| SubModel {
+            mins: Vec3::from(mins),
+            maxs: Vec3::from(maxs),
+            origin: Vec3::ZERO,
+            headnode: [h, 0, 0, 0],
+        };
+        CollisionModel {
+            planes,
+            hull0,
+            submodels: vec![sub(0, [-1e5; 3], [1e5; 3]), sub(1, [-16.0, -4.0, -16.0], [16.0, 4.0, 16.0])],
+            ..Default::default()
+        }
+    }
+
+    fn ent(yaw: f32) -> BrushEnt {
+        let origin = Vec3::new(100.0, 0.0, 0.0);
+        let axis = (yaw != 0.0).then(|| {
+            let (f, r, u) = qcore::math::angle_vectors(Vec3::new(0.0, yaw, 0.0));
+            [f, r, u]
+        });
+        BrushEnt { entity: 7, submodel: 1, origin, axis, mins: origin - Vec3::splat(17.0), maxs: origin + Vec3::splat(17.0) }
+    }
+
+    #[test]
+    fn traces_hit_brush_entities() {
+        let cm = box_model();
+        let bsp = Bsp::default();
+        for (yaw, hit_x) in [(0.0, 84.0), (90.0, 96.0)] {
+            let ents = [ent(yaw)];
+            let w = BspWorld { bsp: &bsp, cm: &cm, ents: &ents };
+            let t = w.trace_line(Vec3::ZERO, Vec3::new(200.0, 0.0, 0.0));
+            assert_eq!(t.entity, 7, "yaw {yaw}");
+            assert!((t.endpos.x - hit_x).abs() < 0.1, "yaw {yaw}: {:?}", t.endpos);
+            assert!((t.normal - Vec3::new(-1.0, 0.0, 0.0)).length() < 1e-3, "yaw {yaw}: {:?}", t.normal);
+            // Missing it entirely.
+            let t = w.trace_line(Vec3::new(0.0, 50.0, 0.0), Vec3::new(200.0, 50.0, 0.0));
+            assert_eq!((t.frac, t.entity), (1.0, 0));
+        }
+        let ents = [ent(0.0)];
+        let w = BspWorld { bsp: &bsp, cm: &cm, ents: &ents };
+        assert_eq!(w.entity_origin(7), Some(Vec3::new(100.0, 0.0, 0.0)));
+        assert_eq!(fte_contents(-3), qpart::FTECONTENTS_WATER);
+        assert_eq!(fte_contents(-2), qpart::FTECONTENTS_SOLID);
     }
 }
