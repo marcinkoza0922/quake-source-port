@@ -9,7 +9,7 @@ use qui::mods::{MapInfo, ModInfo};
 use qui::stats::Stats;
 
 use crate::draw::Canvas;
-use crate::menu::{Action, BORDER, HILITE, gold};
+use crate::menu::{Action, BORDER, FG, GOLD_FG, HILITE, MUTED, TXT, txt, txt_gold};
 
 /// Which page is showing.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
@@ -202,13 +202,13 @@ impl ModMenu {
             if i == self.cursor {
                 c.fill(x + 2.0, y, w - 4.0, ROW_H, HILITE);
             }
-            let cols = ((w - 24.0) / 8.0) as usize;
+            let cols = ((w - 60.0) / 6.0) as usize;
             let t = clip(&m.title, cols);
             if m.dir.eq_ignore_ascii_case(&self.current) {
-                gold(c, x + 6.0, y + 1.0, &t);
-                c.ch(x + w - 14.0, y + 1.0, b'*' | 128);
+                txt_gold(c, x + 6.0, y + 1.0, &t);
+                c.text_right(x + w - 8.0, y + 1.0, "running", TXT, MUTED);
             } else {
-                c.string(x + 6.0, y + 1.0, &t);
+                txt(c, x + 6.0, y + 1.0, &t);
             }
         }
         scroll_hints(c, x, w, self.scroll, self.mods.len());
@@ -216,25 +216,25 @@ impl ModMenu {
         let Some(m) = self.mods.get(self.cursor) else { return };
         let (ix, iw) = INFO;
         box_(c, ix, iw, ROWS);
-        let cols = ((iw - 16.0) / 8.0) as usize;
+        let cols = ((iw - 16.0) / 6.0) as usize;
         let mut y = TOP + 1.0;
         for l in wrap(&m.title, cols).iter().take(2) {
-            gold(c, ix + 8.0, y, l);
+            txt_gold(c, ix + 8.0, y, l);
             y += ROW_H;
         }
         y += 4.0;
-        c.string(ix + 8.0, y, &clip(&format!("dir: {}", m.dir), cols));
+        txt(c, ix + 8.0, y, &clip(&format!("dir: {}", m.dir), cols));
         y += ROW_H;
         if let Some(b) = m.base.dir() {
-            c.string(ix + 8.0, y, &format!("base: {b}"));
+            txt(c, ix + 8.0, y, &format!("base: {b}"));
             y += ROW_H;
         }
         if m.dir.eq_ignore_ascii_case(&self.current) {
-            gold(c, ix + 8.0, y, "(running)");
+            txt_gold(c, ix + 8.0, y, "(running)");
             y += ROW_H;
         }
         if self.level_select {
-            c.string(ix + 8.0, y, "right arrow: levels");
+            c.text(ix + 8.0, y, "Right: levels", TXT, MUTED);
             y += ROW_H;
         }
         y += 6.0;
@@ -244,7 +244,7 @@ impl ModMenu {
                 if y > bottom {
                     break 'blurb;
                 }
-                c.string(ix + 8.0, y, &l);
+                txt(c, ix + 8.0, y, &l);
                 y += ROW_H;
             }
         }
@@ -265,26 +265,22 @@ impl ModMenu {
             }
             if i == 0 {
                 let running = m.dir.eq_ignore_ascii_case(&self.current);
-                gold(c, x + 6.0, y + 1.0, if running { "Start first map" } else { "Launch mod" });
+                txt_gold(c, x + 6.0, y + 1.0, if running { "Start first map" } else { "Launch mod" });
                 continue;
             }
             let map = &self.maps[i - 1];
-            c.string(x + 6.0, y + 1.0, &clip(&map.name, 14));
-            let tcols = ((stat_x - x - 128.0) / 8.0) as usize;
-            c.string(x + 120.0, y + 1.0, &clip(&map.title, tcols));
+            txt(c, x + 6.0, y + 1.0, &clip(&map.name, 14));
+            let tcols = ((stat_x - x - 128.0) / 6.0) as usize;
+            txt(c, x + 120.0, y + 1.0, &clip(&map.title, tcols));
             if let Some(s) = self.stats.get(&map.name) {
                 let k = format!("K{:>3}/{:<3}", s.kills, s.total_kills);
                 let sec = format!("S{:>2}/{:<2}", s.secrets, s.total_secrets);
                 let t = s.best_time as u32;
                 let parts = [(k, s.all_kills()), (sec, s.all_secrets()), (format!("{:>2}:{:02}", t / 60, t % 60), false)];
                 let mut sx = stat_x;
-                for (txt, full) in parts {
-                    if full {
-                        gold(c, sx, y + 1.0, &txt);
-                    } else {
-                        c.string(sx, y + 1.0, &txt);
-                    }
-                    sx += (txt.len() + 1) as f32 * 8.0;
+                for (t, full) in parts {
+                    c.text(sx, y + 1.0, &t, TXT, if full { GOLD_FG } else { FG });
+                    sx += 60.0;
                 }
             }
         }
@@ -303,19 +299,19 @@ fn box_(c: &mut Canvas, x: f32, w: f32, rows: usize) {
 
 fn scroll_hints(c: &mut Canvas, x: f32, w: f32, scroll: usize, n: usize) {
     if scroll > 0 {
-        c.ch(x + w - 10.0, TOP - 2.0, b'^' | 128);
+        c.shape(x + w - 10.0, TOP - 2.0, 7.0, 7.0, crate::font::Shape::ArrowUp, GOLD_FG);
     }
     if scroll + ROWS < n {
-        c.ch(x + w - 10.0, TOP + ROWS as f32 * ROW_H - 6.0, b'v' | 128);
+        c.shape(x + w - 10.0, TOP + ROWS as f32 * ROW_H - 4.0, 7.0, 7.0, crate::font::Shape::ArrowDown, GOLD_FG);
     }
 }
 
 fn center(c: &mut Canvas, y: f32, s: &str) {
-    c.string(((640.0 - s.len() as f32 * 8.0) / 2.0).floor(), y, s);
+    c.text_center(320.0, y, s, TXT, MUTED);
 }
 
 fn center_gold(c: &mut Canvas, y: f32, s: &str) {
-    gold(c, ((640.0 - s.len() as f32 * 8.0) / 2.0).floor(), y, s);
+    c.text_center(320.0, y, s, 13.0, GOLD_FG);
 }
 
 /// ASCII-only, at most `n` columns (with a trailing `~` when cut).

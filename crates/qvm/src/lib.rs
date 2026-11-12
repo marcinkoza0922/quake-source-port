@@ -78,6 +78,12 @@ pub trait Host {
     fn dprint(&mut self, _msg: &str) {}
     /// Console print (warnings, "No spawn function for", ...).
     fn print(&mut self, _msg: &str) {}
+    /// Called just before QC calls `T_Damage(targ, inflictor, attacker,
+    /// damage)`; the args are in the parm globals and may be changed.
+    /// Returning `true` skips the call.
+    fn before_damage(&mut self, _vm: &mut Vm) -> Result<bool> {
+        Ok(false)
+    }
 }
 
 pub use exec::Vm;

@@ -29,6 +29,7 @@ const SERVER_TIC: f64 = 1.0 / 72.0;
 const CLASSIC_SBAR_LINES: f32 = 48.0;
 
 const HOST_CVARS: &[(&str, &str, u32)] = &[
+    ("sv_autosave", "1", CVAR_ARCHIVE),
     ("sv_autosave_keep", "5", CVAR_ARCHIVE),
     ("sv_autosave_entry", "1", CVAR_ARCHIVE),
     ("sv_autosave_secret", "0", CVAR_ARCHIVE),
@@ -52,6 +53,8 @@ const HOST_CVARS: &[(&str, &str, u32)] = &[
     ("scr_hudstyle", "1", CVAR_ARCHIVE),
     ("crosshair", "0", CVAR_ARCHIVE),
     ("ui_levelselect", "0", CVAR_ARCHIVE),
+    ("ui_menufont", "0", CVAR_ARCHIVE),
+    ("ui_fontfile", "", CVAR_ARCHIVE),
     ("scr_centertime", "2", 0),
     ("scr_printspeed", "8", 0),
     ("volume", "0.7", CVAR_ARCHIVE),
@@ -123,6 +126,35 @@ const HOST_CVARS: &[(&str, &str, u32)] = &[
     ("con_notifytime", "3", 0),
     ("scr_conspeed", "500", CVAR_ARCHIVE),
     ("scr_sbaralpha", "0.75", CVAR_ARCHIVE),
+    // Accessibility page.
+    ("a11y_reducemotion", "0", CVAR_ARCHIVE),
+    ("a11y_gamespeed", "1", CVAR_ARCHIVE),
+    ("v_flashscale", "1", CVAR_ARCHIVE),
+    ("crosshair_size", "1", CVAR_ARCHIVE),
+    // HUD page: modern HUD elements (0 off, 1 on, 2 immersive) and anchors
+    // (sbar::HudAnchor), face, message placement.
+    ("hud_health", "1", CVAR_ARCHIVE),
+    ("hud_health_pos", "0", CVAR_ARCHIVE),
+    ("hud_armor", "1", CVAR_ARCHIVE),
+    ("hud_armor_pos", "0", CVAR_ARCHIVE),
+    ("hud_ammo", "1", CVAR_ARCHIVE),
+    ("hud_ammo_pos", "2", CVAR_ARCHIVE),
+    ("hud_ammolist", "1", CVAR_ARCHIVE),
+    ("hud_ammolist_pos", "2", CVAR_ARCHIVE),
+    ("hud_weapons", "1", CVAR_ARCHIVE),
+    ("hud_weapons_pos", "2", CVAR_ARCHIVE),
+    ("hud_items", "1", CVAR_ARCHIVE),
+    ("hud_items_pos", "2", CVAR_ARCHIVE),
+    ("hud_face", "1", CVAR_ARCHIVE),
+    ("scr_centerpos", "0", CVAR_ARCHIVE),
+    ("con_notifypos", "0", CVAR_ARCHIVE),
+    ("crosshair_color", "0", CVAR_ARCHIVE),
+    ("crosshair_outline", "1", CVAR_ARCHIVE),
+    ("crosshair_shape", "0", CVAR_ARCHIVE),
+    ("r_colorblind", "0", CVAR_ARCHIVE),
+    ("cl_captions", "0", CVAR_ARCHIVE),
+    ("scr_textbg", "0", CVAR_ARCHIVE),
+    ("scr_textscale", "1", CVAR_ARCHIVE),
 ];
 
 /// Cvars other engines register that mod configs (vkQuake.cfg, AD/KEX
@@ -215,9 +247,12 @@ pub struct Host {
     pend_jump: bool,
     pend_impulse: u8,
     wheel: crate::wheel::Wheel,
+    captions: crate::captions::Captions,
+    hud_fade: crate::sbar::HudFade,
     /// Label family of the last connected gamepad.
     pad_family: crate::glyphs::Family,
-    glyph_atlas: Option<Option<qrender::PicId>>,
+    /// Modern menu text/shape atlas (`crate::font`).
+    ui_text: std::rc::Rc<std::cell::RefCell<crate::font::UiText>>,
     /// Rumble to play this frame (low, high, ms), taken by the main loop.
     rumble: Option<(u16, u16, u32)>,
     /// Last seen (weapon, ammo, weaponframe, punch) for fire rumble.
@@ -333,8 +368,10 @@ impl Host {
             pend_jump: false,
             pend_impulse: 0,
             wheel: Default::default(),
+            captions: Default::default(),
+            hud_fade: Default::default(),
             pad_family: Default::default(),
-            glyph_atlas: None,
+            ui_text: Default::default(),
             rumble: None,
             fire_track: (0, 0, 0, [0.0; 3]),
             nav_hold: None,
@@ -656,14 +693,10 @@ impl Host {
         self.input.gamepad_connected && self.input.last_device == Device::Gamepad
     }
 
-    /// Glyph drawer (registers the atlas on first use).
+    /// Glyph drawer for the controller family in use.
     fn glyphs(&mut self) -> crate::glyphs::Glyphs {
-        let atlas = *self.glyph_atlas.get_or_insert_with(|| {
-            let (w, h, px) = crate::glyphs::atlas_rgba();
-            self.r.register_pic_rgba_linear(w, h, &px).ok()
-        });
         let family = self.pad_family.with_override(self.cv("joy_glyphs"));
-        crate::glyphs::Glyphs { atlas, family }
+        crate::glyphs::Glyphs { family }
     }
 
     /// Menu state that follows the input devices and bindings.
@@ -745,12 +778,11 @@ impl Host {
     }
 
     /// Time scale for the world while the weapon wheel is open (single player only).
+    /// Also applies the accessibility game speed (`a11y_gamespeed`).
     fn wheel_timescale(&self) -> f32 {
-        if self.wheel.open && self.local.is_some() && self.server.core.maxclients() == 1 && self.demo.is_none() {
-            self.cv("cl_wheel_timescale").clamp(0.05, 1.0)
-        } else {
-            1.0
-        }
+        let sp = self.local.is_some() && self.server.core.maxclients() == 1 && self.demo.is_none();
+        let speed = if sp { self.cv("a11y_gamespeed").clamp(0.25, 1.0) } else { 1.0 };
+        if self.wheel.open && sp { self.cv("cl_wheel_timescale").clamp(0.05, 1.0) * speed } else { speed }
     }
 
     /// Connects the local client when a server is running without one.
@@ -1137,11 +1169,19 @@ impl Host {
                 }
                 ClientEvent::StuffText(s) => self.cbuf.add_text(&s),
                 ClientEvent::Sound { ent, channel, sound, origin, volume, attenuation } => {
+                    if self.cv("cl_captions") != 0.0
+                        && let Some(n) = self.cl.sound_precache.get(sound)
+                    {
+                        self.captions.sound(n, self.realtime);
+                    }
                     if let (Some(snd), Some(Some(sfx))) = (&self.snd, self.level.sounds.get(sound)) {
                         snd.event(SoundEvent::Start { entity: ent, channel, sfx: sfx.clone(), origin, volume, attenuation });
                     }
                 }
                 ClientEvent::TempSound { name, origin } => {
+                    if self.cv("cl_captions") != 0.0 {
+                        self.captions.sound(name, self.realtime);
+                    }
                     if let Some(snd) = &mut self.snd
                         && let Some(sfx) = snd.precache(name)
                     {
@@ -1415,7 +1455,9 @@ impl Host {
             drawviewmodel: v("r_drawviewmodel") != 0.0,
             lerp_models: v("r_lerpmodels") != 0.0,
             lerp_move: v("r_lerpmove") != 0.0,
+            flash: v("v_flashscale").clamp(0.0, 1.0),
         }
+        .reduce_motion(v("a11y_reducemotion") != 0.0)
     }
 
     fn move_speeds(&self) -> MoveSpeeds {
@@ -1910,9 +1952,31 @@ impl Host {
         self.disconnect_client();
     }
 
+    /// Registers the modern text atlas and follows `ui_menufont`/`ui_fontfile`.
+    fn sync_ui_text(&mut self) {
+        let want = (self.cv("ui_menufont") as i32, self.cvs("ui_fontfile").to_string());
+        let mut ui = self.ui_text.borrow_mut();
+        if ui.pic.is_none() {
+            let n = crate::font::UiText::atlas_size();
+            ui.pic = self.r.register_pic_rgba(n, n, &ui.px).ok();
+        }
+        let warn = if ui.source != want { ui.set_font(&self.server.core.fs, want.0, &want.1) } else { None };
+        drop(ui);
+        if let Some(w) = warn {
+            self.con.print(&w);
+        }
+    }
+
     fn render(&mut self, view: Option<qrender::View>, gun: Option<qrender::RenderEntity>, ft: f32) {
         let (w, h) = self.r.size();
         let mut c = Canvas::new(w, h);
+        self.con.notify_time = self.cv("con_notifytime").max(0.0) as f64;
+        self.con.text_bg = self.cv("scr_textbg") != 0.0;
+        self.con.text_scale = self.cv("scr_textscale");
+        self.con.center_pos = self.cv("scr_centerpos").clamp(0.0, 2.0) as u8;
+        self.con.notify_pos = self.cv("con_notifypos").clamp(0.0, 2.0) as u8;
+        self.sync_ui_text();
+        c.ui = Some(self.ui_text.clone());
         let mut ents = Vec::new();
         let mut parts = Vec::new();
         let mut dls = Vec::new();
@@ -1930,7 +1994,7 @@ impl Host {
             crate::view::particles(&self.cl, &mut parts);
             crate::view::dlights(&self.cl, &mut dls);
             let contents = self.contents(v.origin);
-            blend = self.view.blend(&self.cl, contents, ft);
+            blend = self.view.blend(&self.cl, contents, ft, cv.flash);
         }
         // 2D
         let glyphs = self.glyphs();
@@ -1942,6 +2006,7 @@ impl Host {
         let crosshair = self.cv("crosshair") != 0.0;
         let showfps = self.cv("scr_showfps") != 0.0;
         let classic = self.classic_hud();
+        let hud_cfg = crate::sbar::HudConfig::from_cvars(&self.server.core.cvars);
         {
             let fs = &self.server.core.fs;
             let pics = &mut self.pics;
@@ -1959,10 +2024,9 @@ impl Host {
                     }
                     3 => self.con.draw_center(&mut c, usize::MAX),
                     _ => {
+                        let scene_h = c.vh() - if classic { CLASSIC_SBAR_LINES } else { 0.0 };
                         if crosshair {
-                            let scene_h = c.vh() - if classic { CLASSIC_SBAR_LINES } else { 0.0 };
-                            let (x, y) = ((c.vw() / 2.0).floor() - 4.0, (scene_h / 2.0).floor() - 4.0);
-                            c.ch(x, y, b'+');
+                            draw_crosshair(&mut c, scene_h, &self.server.core.cvars);
                         }
                         let face = self.view.face_anim_time > self.cl.time;
                         let pack = crate::sbar::Pack::from_game_dirs(self.server.core.fs.game_dirs().iter().map(String::as_str));
@@ -1971,12 +2035,17 @@ impl Host {
                             sb.backtile(CLASSIC_SBAR_LINES);
                             sb.draw(&self.cl, self.show_scores, face);
                         } else {
-                            sb.draw_modern(&self.cl, self.show_scores, face);
+                            sb.draw_modern(&self.cl, self.show_scores, face, &hud_cfg, &mut self.hud_fade, self.realtime);
                         }
                         if self.show_scores && self.cl.gametype == 1 {
                             crate::sbar::deathmatch_overlay(&mut c, &mut pf, &self.cl);
                         }
                         self.wheel.draw(&mut c, &mut pf, &glyphs, &self.cl, pad_ui, wheel_key);
+                        if self.server.core.cvars.value_of("cl_captions") != 0.0 {
+                            let bottom = if classic { scene_h - 4.0 } else { c.vh() - 44.0 };
+                            let ts = self.server.core.cvars.value_of("scr_textscale");
+                            self.captions.draw(&mut c, self.realtime, bottom, ts);
+                        }
                     }
                 }
                 // QC accepts the exit after 2 s (5 s in deathmatch).
@@ -2045,8 +2114,20 @@ impl Host {
             mdl_warp: v("r_softemu_mdl_warp"),
             dither_screen: v("r_softemu_dither_screen"),
             dither_texture: v("r_softemu_dither_texture"),
+            colorblind: v("r_colorblind").clamp(0.0, 3.0) as u32,
             ..Settings::default()
         };
+        {
+            let mut ui = self.ui_text.borrow_mut();
+            if ui.dirty
+                && let Some(pic) = ui.pic
+            {
+                if let Err(e) = self.r.update_pic(pic, &ui.px) {
+                    self.con.print(&format!("ui text upload: {e:?}\n"));
+                }
+                ui.after_upload();
+            }
+        }
         let frame = qrender::RenderFrame {
             time: self.cl.time,
             view,
@@ -2132,7 +2213,8 @@ impl Host {
             return;
         }
         let cv = &self.server.core.cvars;
-        let keep = cv.value_of("sv_autosave_keep").clamp(0.0, crate::autosave::MAX as f32) as usize;
+        let on = cv.value_of("sv_autosave") != 0.0;
+        let keep = if on { cv.value_of("sv_autosave_keep").clamp(0.0, crate::autosave::MAX as f32) as usize } else { 0 };
         let flags = ["entry", "secret", "monsters", "secrets"].map(|n| cv.value_of(&format!("sv_autosave_{n}")) != 0.0);
         let interval = cv.value_of("sv_autosave_interval").max(0.0) as f64 * 60.0;
         let reason = self.autosave.update(self.server.time(), self.server.stats(), self.server.core.sv.loadgame, flags, interval);
@@ -2279,6 +2361,13 @@ fn register_commands(c: &mut Commands<Host>) {
             "gameplay" => Some(Page::Gameplay),
             "controls" => Some(Page::Controls),
             "input" => Some(Page::Input),
+            "mouse" | "keyboard" => Some(Page::Mouse),
+            "controller" | "gamepad" => Some(Page::Controller),
+            "autosave" => Some(Page::Autosave),
+            "hud" => Some(Page::Hud),
+            "hudlayout" | "layout" => Some(Page::HudLayout),
+            "messages" => Some(Page::Messages),
+            "accessibility" => Some(Page::Accessibility),
             "graphics" => Some(Page::Graphics),
             "audio" => Some(Page::Audio),
             _ => None,
@@ -2679,4 +2768,80 @@ mod pad_default_tests {
         assert!(b.contains(&(K_LSHOULDER, "impulse 12".into())));
         assert_eq!(b.len(), 11);
     }
+}
+
+/// Crosshair colours (`crosshair_color` index).
+const CROSSHAIR_COLORS: [[f32; 4]; 6] = [
+    [1.0, 1.0, 1.0, 1.0],
+    [1.0, 0.85, 0.1, 1.0],
+    [0.2, 1.0, 0.3, 1.0],
+    [0.2, 0.9, 1.0, 1.0],
+    [1.0, 0.3, 0.9, 1.0],
+    [1.0, 0.25, 0.2, 1.0],
+];
+
+/// A crosshair at the scene centre: shape from `crosshair_shape` (0 cross,
+/// 1 gap cross, 2 dot, 3 cross + dot, 4 T, 5 box), sized by `crosshair_size`
+/// with an optional dark outline (`crosshair_outline`) so it reads on any wall.
+fn draw_crosshair(c: &mut Canvas, scene_h: f32, cv: &qcore::cvar::Cvars) {
+    let size = cv.value_of("crosshair_size").clamp(0.5, 4.0);
+    let color = CROSSHAIR_COLORS[(cv.value_of("crosshair_color").max(0.0) as usize).min(CROSSHAIR_COLORS.len() - 1)];
+    let base = c.scale;
+    // Work in whole pixels so thin strokes stay crisp at any size.
+    c.scale = 1.0;
+    let (cx, cy) = ((c.w / 2.0).floor(), (scene_h * base / 2.0).floor());
+    let arm = (3.5 * size * base).round().max(2.0);
+    let t = (size * base * 0.5).round().max(1.0);
+    let h = (t / 2.0).floor();
+    let gap = (arm * 0.45).round().max(t + 1.0);
+    let dot = (t + 1.0).max((size * base).round());
+    let dh = (dot / 2.0).floor();
+    let full_h = (cx - arm, cy - h, arm * 2.0 + t, t);
+    let full_v = (cx - h, cy - arm, t, arm * 2.0 + t);
+    let center_dot = (cx - dh, cy - dh, dot, dot);
+    let gapped = |down: bool| {
+        let mut v = vec![
+            (cx - arm, cy - h, arm - gap, t),
+            (cx + gap + t, cy - h, arm - gap, t),
+            (cx - h, cy + gap + t, t, arm - gap),
+        ];
+        if !down {
+            v.push((cx - h, cy - arm, t, arm - gap));
+        }
+        v
+    };
+    let bars: Vec<(f32, f32, f32, f32)> = match cv.value_of("crosshair_shape") as i32 {
+        1 => gapped(false),
+        2 => vec![center_dot],
+        3 => {
+            let mut v = gapped(false);
+            v.push(center_dot);
+            v
+        }
+        4 => {
+            let mut v = gapped(true);
+            v.push(center_dot);
+            v
+        }
+        5 => {
+            let b = (arm * 0.6).round().max(t + 2.0);
+            vec![
+                (cx - b, cy - b, b * 2.0 + t, t),
+                (cx - b, cy + b, b * 2.0 + t, t),
+                (cx - b, cy - b + t, t, b * 2.0 - t),
+                (cx + b, cy - b + t, t, b * 2.0 - t),
+            ]
+        }
+        _ => vec![full_h, full_v],
+    };
+    if cv.value_of("crosshair_outline") != 0.0 {
+        let o = (base * 0.5).round().max(1.0);
+        for &(x, y, w, h) in &bars {
+            c.fill(x - o, y - o, w + 2.0 * o, h + 2.0 * o, [0.0, 0.0, 0.0, 0.85]);
+        }
+    }
+    for (x, y, w, h) in bars {
+        c.fill(x, y, w, h, color);
+    }
+    c.scale = base;
 }

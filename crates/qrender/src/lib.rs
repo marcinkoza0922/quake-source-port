@@ -1188,6 +1188,34 @@ impl Renderer {
         Ok(id)
     }
 
+    /// Replaces a picture's texels (same size it was registered with), for
+    /// CPU-built atlases such as the UI text cache. Waits for the GPU.
+    pub fn update_pic(&mut self, pic: PicId, rgba: &[u8]) -> Result<()> {
+        let Some(&PicInfo { slot, width, height }) = self.pics.get(pic.0 as usize) else {
+            return Err(Error::new("no such picture"));
+        };
+        self.idle();
+        let mut up = self.gpu.begin_upload()?;
+        let img = self.gpu.image(
+            width,
+            height,
+            1,
+            1,
+            vk::Format::R8G8B8A8_UNORM,
+            vk::ImageUsageFlags::SAMPLED | vk::ImageUsageFlags::TRANSFER_DST,
+            vk::ImageAspectFlags::COLOR,
+        )?;
+        self.gpu.upload_image(&mut up, &img, &[rgba])?;
+        self.gpu.end_upload(up)?;
+        let sampling = self.textures[slot as usize].as_ref().map_or(Sampling::Nearest, |t| t.sampling);
+        self.write_texture_descriptor(slot, img.view, self.sampler_for(sampling));
+        let old = self.textures[slot as usize].replace(Tex { image: Some(img), level: false, sampling });
+        if let Some(img) = old.and_then(|t| t.image) {
+            self.gpu.free_image(img);
+        }
+        Ok(())
+    }
+
     pub fn pic_size(&self, pic: PicId) -> Option<(u32, u32)> {
         self.pics.get(pic.0 as usize).map(|p| (p.width, p.height))
     }

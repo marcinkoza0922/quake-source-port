@@ -31,6 +31,22 @@ pub struct ViewCvars {
     pub lerp_models: bool,
     /// r_lerpmove: smooth MOVESTEP (monster) movement over 0.1s.
     pub lerp_move: bool,
+    /// v_flashscale: strength of damage, pickup and powerup screen flashes.
+    pub flash: f32,
+}
+
+impl ViewCvars {
+    /// a11y_reducemotion: no bob, strafe roll, damage kick or gun kick.
+    pub fn reduce_motion(mut self, on: bool) -> Self {
+        if on {
+            self.bob = 0.0;
+            self.rollangle = 0.0;
+            self.kickroll = 0.0;
+            self.kickpitch = 0.0;
+            self.gunkick = false;
+        }
+        self
+    }
 }
 
 #[derive(Clone, Copy, Default)]
@@ -106,7 +122,8 @@ impl ViewState {
     }
 
     /// V_UpdateBlend: decays shifts and returns the polyblend.
-    pub fn blend(&mut self, cl: &ClientState, contents: i32, ft: f32) -> [f32; 4] {
+    /// `flash` scales the damage/bonus/powerup shifts (accessibility).
+    pub fn blend(&mut self, cl: &ClientState, contents: i32, ft: f32, flash: f32) -> [f32; 4] {
         let content = match contents {
             CONTENTS_LAVA => CShift { color: [255.0, 80.0, 0.0], percent: 150.0 },
             CONTENTS_SLIME => CShift { color: [0.0, 25.0, 5.0], percent: 150.0 },
@@ -126,7 +143,9 @@ impl ViewState {
             CShift::default()
         };
         let (mut r, mut g, mut b, mut a) = (0.0f32, 0.0f32, 0.0f32, 0.0f32);
-        for s in [content, self.damage, self.bonus, power] {
+        let flash = flash.clamp(0.0, 1.0);
+        let scaled = |s: CShift| CShift { percent: s.percent * flash, ..s };
+        for s in [content, scaled(self.damage), scaled(self.bonus), scaled(power)] {
             let a2 = s.percent / 255.0;
             if a2 <= 0.0 {
                 continue;

@@ -62,6 +62,9 @@ pub struct Vm {
     localstack: Vec<u32>,
     xfunction: usize,
     xstatement: usize,
+    /// `T_Damage` QC function (0 if the progs has none); calls to it go
+    /// through [`Host::before_damage`] first.
+    damage_fn: usize,
 }
 
 impl Vm {
@@ -100,10 +103,12 @@ impl Vm {
             localstack: Vec::with_capacity(LOCALSTACK_SIZE),
             xfunction: 0,
             xstatement: 0,
+            damage_fn: 0,
             progs,
         };
         vm.dispatch = builtins::resolve(&vm.progs);
         vm.clear_edicts();
+        vm.damage_fn = vm.progs.find_function("T_Damage").filter(|&f| vm.progs.functions[f].first_statement > 0).unwrap_or(0);
         Ok(vm)
     }
 
@@ -263,6 +268,12 @@ impl Vm {
         self.stack.pop();
         self.xfunction = fr.f;
         Ok(fr.s)
+    }
+
+    /// Name of the QC function currently running (the caller, inside a
+    /// [`Host::before_damage`] hook).
+    pub fn current_function_name(&self) -> String {
+        self.progs.function_name(self.xfunction)
     }
 
     /// Call a function by name.
@@ -467,7 +478,10 @@ impl Vm {
                         return Err(self.run_error(format!("bad function {fnum}")));
                     }
                     if matches!(self.dispatch[fnum], Dispatch::Qc) {
-                        next = self.enter_function(fnum)?;
+                        // a skipped T_Damage falls through to the next statement
+                        if fnum != self.damage_fn || !host.before_damage(self)? {
+                            next = self.enter_function(fnum)?;
+                        }
                     } else {
                         self.call_builtin(host, fnum)?;
                     }

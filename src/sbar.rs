@@ -160,6 +160,149 @@ fn hip_weapons(cl: &ClientState) -> Vec<(usize, String, bool)> {
 const WEAPONS: [&str; 7] = ["shotgun", "sshotgun", "nailgun", "snailgun", "rlaunch", "srlaunch", "lightng"];
 const ITEMS: [&str; 6] = ["sb_key1", "sb_key2", "sb_invis", "sb_invuln", "sb_suit", "sb_quad"];
 
+/// Modern HUD elements, in stacking order.
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub enum HudElem {
+    Health,
+    Armor,
+    Ammo,
+    AmmoList,
+    Weapons,
+    Items,
+}
+
+impl HudElem {
+    pub const ALL: [HudElem; 6] =
+        [HudElem::Health, HudElem::Armor, HudElem::Ammo, HudElem::AmmoList, HudElem::Weapons, HudElem::Items];
+    /// Cvar suffix: `hud_<name>` (mode) and `hud_<name>_pos` (anchor).
+    pub fn name(self) -> &'static str {
+        ["health", "armor", "ammo", "ammolist", "weapons", "items"][self as usize]
+    }
+}
+
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub enum HudMode {
+    Off,
+    On,
+    /// Shown only briefly after the element's value changes.
+    Immersive,
+}
+
+impl HudMode {
+    pub fn from_cvar(v: f32) -> Self {
+        match v as i32 {
+            0 => HudMode::Off,
+            2 => HudMode::Immersive,
+            _ => HudMode::On,
+        }
+    }
+}
+
+/// Screen anchor; cvar value is the discriminant.
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub enum HudAnchor {
+    BottomLeft,
+    BottomCenter,
+    BottomRight,
+    TopLeft,
+    TopCenter,
+    TopRight,
+    MiddleLeft,
+    MiddleRight,
+}
+
+impl HudAnchor {
+    pub const COUNT: usize = 8;
+    pub fn from_cvar(v: f32) -> Self {
+        use HudAnchor::*;
+        [BottomLeft, BottomCenter, BottomRight, TopLeft, TopCenter, TopRight, MiddleLeft, MiddleRight]
+            [(v.max(0.0) as usize).min(7)]
+    }
+    /// 0 left, 1 center, 2 right.
+    fn col(self) -> u8 {
+        use HudAnchor::*;
+        match self {
+            BottomLeft | TopLeft | MiddleLeft => 0,
+            BottomCenter | TopCenter => 1,
+            _ => 2,
+        }
+    }
+    /// 0 top, 1 middle, 2 bottom.
+    fn row(self) -> u8 {
+        use HudAnchor::*;
+        match self {
+            TopLeft | TopCenter | TopRight => 0,
+            MiddleLeft | MiddleRight => 1,
+            _ => 2,
+        }
+    }
+}
+
+/// Modern HUD settings (from `hud_*` cvars).
+#[derive(Clone, Debug)]
+pub struct HudConfig {
+    pub mode: [HudMode; 6],
+    pub anchor: [HudAnchor; 6],
+    pub face: bool,
+}
+
+impl HudConfig {
+    pub fn from_cvars(cv: &qcore::cvar::Cvars) -> Self {
+        let mut c = HudConfig { mode: [HudMode::On; 6], anchor: [HudAnchor::BottomLeft; 6], face: cv.value_of("hud_face") != 0.0 };
+        for e in HudElem::ALL {
+            c.mode[e as usize] = HudMode::from_cvar(cv.value_of(&format!("hud_{}", e.name())));
+            c.anchor[e as usize] = HudAnchor::from_cvar(cv.value_of(&format!("hud_{}_pos", e.name())));
+        }
+        c
+    }
+}
+
+/// Seconds an immersive element stays fully visible, then fades.
+const IMMERSIVE_HOLD: f64 = 3.0;
+const IMMERSIVE_FADE: f64 = 0.5;
+
+/// Change tracking for immersive HUD elements.
+#[derive(Default)]
+pub struct HudFade {
+    last: [Option<i64>; 6],
+    changed: [f64; 6],
+}
+
+impl HudFade {
+    fn signature(cl: &ClientState, e: HudElem) -> i64 {
+        let st = &cl.stats;
+        let it = cl.items as i64 & 0xffff_ffff;
+        match e {
+            HudElem::Health => st[STAT_HEALTH] as i64,
+            HudElem::Armor => (st[STAT_ARMOR] as i64) << 32 | it,
+            HudElem::Ammo => (st[STAT_AMMO] as i64) << 32 | st[STAT_ACTIVEWEAPON] as i64 & 0xffff_ffff,
+            HudElem::AmmoList => (0..4).fold(0i64, |h, i| h << 16 | (st[STAT_SHELLS + i] as i64 & 0xffff)),
+            HudElem::Weapons => it << 32 ^ st[STAT_ACTIVEWEAPON] as i64,
+            HudElem::Items => it,
+        }
+    }
+
+    /// Records value changes; the first sighting counts as a change.
+    pub fn update(&mut self, cl: &ClientState, now: f64) {
+        for e in HudElem::ALL {
+            let s = Self::signature(cl, e);
+            if self.last[e as usize] != Some(s) {
+                self.last[e as usize] = Some(s);
+                self.changed[e as usize] = now;
+            }
+        }
+    }
+
+    pub fn alpha(&self, e: HudElem, now: f64) -> f32 {
+        let t = now - self.changed[e as usize];
+        if t < IMMERSIVE_HOLD {
+            1.0
+        } else {
+            (1.0 - (t - IMMERSIVE_HOLD) / IMMERSIVE_FADE).max(0.0) as f32
+        }
+    }
+}
+
 pub struct Sbar<'a, 'b> {
     pub c: &'a mut Canvas,
     pub pack: Pack,
@@ -167,6 +310,8 @@ pub struct Sbar<'a, 'b> {
     /// Top of the status bar in virtual units.
     y0: f32,
     x0: f32,
+    /// Opacity for the element being drawn (immersive fade).
+    alpha: f32,
 }
 
 impl<'a, 'b> Sbar<'a, 'b> {
@@ -174,7 +319,7 @@ impl<'a, 'b> Sbar<'a, 'b> {
         c.reset_origin();
         let x0 = ((c.vw() - 320.0) / 2.0).floor();
         let y0 = c.vh() - 24.0;
-        Self { c, pack, pic, y0, x0 }
+        Self { c, pack, pic, y0, x0, alpha: 1.0 }
     }
     /// Classic layout: fills the strip below the 3D view (`lines` virtual
     /// rows) edge to edge with the backtile before drawing the bar.
@@ -193,63 +338,161 @@ impl<'a, 'b> Sbar<'a, 'b> {
         }
     }
 
-    /// Modern corner HUD: armor + health bottom-left, ammo bottom-right,
-    /// keys/powerups/sigils above the ammo, weapon inventory bottom-centre.
-    pub fn draw_modern(&mut self, cl: &ClientState, show_scores: bool, face_anim: bool) {
+    /// Modern HUD: each element (`HudElem`) is drawn in a box at its
+    /// configured anchor; elements sharing an anchor stack away from the
+    /// screen edge in `HudElem::ALL` order. Immersive elements show only for
+    /// a few seconds after their value changes.
+    pub fn draw_modern(&mut self, cl: &ClientState, show_scores: bool, face_anim: bool, cfg: &HudConfig, fade: &mut HudFade, now: f64) {
         let st = &cl.stats;
-        let items = cl.items;
         if show_scores || st[STAT_HEALTH] <= 0 {
             self.draw_pic(0.0, 0.0, "scorebar");
             self.solo_scoreboard(cl);
             return;
         }
         let (vw, vh) = (self.c.vw(), self.c.vh());
-        // switch to screen-corner coordinates
+        // screen-corner coordinates
         self.x0 = 0.0;
         self.y0 = 0.0;
+        let weapons = self.weapon_row(cl);
+        let items = self.item_row(cl);
+        fade.update(cl, now);
         let m = 8.0;
-        let y = vh - 24.0 - m;
-        // health with face
-        let face = Self::face_name(cl, face_anim);
-        self.draw_pic(m, y, &face);
-        self.draw_num(m + 28.0, y, st[STAT_HEALTH], 3, st[STAT_HEALTH] <= 25);
-        // armor above health
-        let armor_pic = self.pack.armor_pic(items);
-        if let Some(p) = armor_pic {
-            let ya = y - 28.0;
-            self.draw_pic(m, ya, p);
-            if items & IT_INVULNERABILITY != 0 {
-                self.draw_num(m + 28.0, ya, 666, 3, true);
-            } else {
-                self.draw_num(m + 28.0, ya, st[STAT_ARMOR], 3, st[STAT_ARMOR] <= 25);
+        let gap = 4.0;
+        // per-anchor offset from the edge consumed so far
+        let mut used = [0.0f32; HudAnchor::COUNT];
+        // middle anchors stack downward from a centered start: precompute heights
+        let mut mid_total = [0.0f32; HudAnchor::COUNT];
+        let mut boxes = Vec::new();
+        for e in HudElem::ALL {
+            let mode = cfg.mode[e as usize];
+            let mut alpha = match mode {
+                HudMode::Off => continue,
+                HudMode::On => 1.0,
+                HudMode::Immersive => fade.alpha(e, now),
+            };
+            // low health / armor always visible
+            if matches!(e, HudElem::Health) && st[STAT_HEALTH] <= 25 {
+                alpha = 1.0;
+            }
+            let (w, h) = match e {
+                HudElem::Health => (if cfg.face { 100.0 } else { 72.0 }, 24.0),
+                HudElem::Armor => {
+                    if self.pack.armor_pic(cl.items).is_none() {
+                        continue;
+                    }
+                    (100.0, 24.0)
+                }
+                HudElem::Ammo => {
+                    if self.pack.ammo_pic(cl.items).is_none() {
+                        continue;
+                    }
+                    (100.0, 24.0)
+                }
+                HudElem::AmmoList => (88.0, 36.0),
+                HudElem::Weapons => (weapons.len() as f32 * 24.0, 16.0),
+                HudElem::Items => (items.iter().map(|i| i.1).sum::<f32>(), 16.0),
+            };
+            if w <= 0.0 || alpha <= 0.0 {
+                continue;
+            }
+            let a = cfg.anchor[e as usize];
+            mid_total[a as usize] += h + gap;
+            boxes.push((e, a, w, h, alpha));
+        }
+        for (e, a, w, h, alpha) in boxes {
+            let ai = a as usize;
+            let x = match a.col() {
+                0 => m,
+                1 => ((vw - w) / 2.0).floor(),
+                _ => vw - m - w,
+            };
+            let y = match a.row() {
+                0 => m + used[ai],
+                1 => ((vh - mid_total[ai] + gap) / 2.0).floor() + used[ai],
+                _ => vh - m - h - used[ai],
+            };
+            used[ai] += h + gap;
+            let right = a.col() == 2;
+            self.alpha = alpha;
+            self.draw_elem(cl, e, x, y, w, right, face_anim, cfg.face, &weapons, &items);
+        }
+        self.alpha = 1.0;
+    }
+
+    #[allow(clippy::too_many_arguments)]
+    fn draw_elem(&mut self, cl: &ClientState, e: HudElem, x: f32, y: f32, w: f32, right: bool, face_anim: bool, face: bool, weapons: &[String], items: &[(String, f32, f32)]) {
+        let st = &cl.stats;
+        match e {
+            HudElem::Health => {
+                let mut nx = x;
+                if face {
+                    let f = Self::face_name(cl, face_anim);
+                    self.draw_pic(x, y, &f);
+                    nx += 28.0;
+                }
+                self.draw_num(nx, y, st[STAT_HEALTH], 3, st[STAT_HEALTH] <= 25);
+            }
+            HudElem::Armor => {
+                if let Some(p) = self.pack.armor_pic(cl.items) {
+                    self.draw_pic(x, y, p);
+                }
+                if cl.items & IT_INVULNERABILITY != 0 {
+                    self.draw_num(x + 28.0, y, 666, 3, true);
+                } else {
+                    self.draw_num(x + 28.0, y, st[STAT_ARMOR], 3, st[STAT_ARMOR] <= 25);
+                }
+            }
+            HudElem::Ammo => {
+                let p = self.pack.ammo_pic(cl.items).unwrap_or("sb_shells");
+                if right {
+                    self.draw_num(x, y, st[STAT_AMMO], 3, st[STAT_AMMO] <= 10);
+                    self.draw_pic(x + 76.0, y, p);
+                } else {
+                    self.draw_pic(x, y, p);
+                    self.draw_num(x + 28.0, y, st[STAT_AMMO], 3, st[STAT_AMMO] <= 10);
+                }
+            }
+            HudElem::AmmoList => {
+                let bits = if self.pack == Pack::Rogue {
+                    [RIT_SHELLS, RIT_NAILS, RIT_ROCKETS, RIT_CELLS]
+                } else {
+                    [IT_SHELLS, IT_NAILS, IT_ROCKETS, IT_CELLS]
+                };
+                let names = ["shells", "nails", "rockets", "cells"];
+                for i in 0..4 {
+                    let s = if right {
+                        format!("{:>7} {:>3}", names[i], st[STAT_SHELLS + i])
+                    } else {
+                        format!("{:<7} {:>3}", names[i], st[STAT_SHELLS + i])
+                    };
+                    let sx = if right { x + w - s.len() as f32 * 8.0 } else { x };
+                    let gold = cl.items & bits[i] != 0;
+                    for (k, b) in s.bytes().enumerate() {
+                        // conchars: +128 is the gold/brown alternate set
+                        let ch = if gold && b != b' ' { b | 128 } else { b };
+                        self.c.ch_color(sx + k as f32 * 8.0, y + i as f32 * 9.0, ch, [1.0, 1.0, 1.0, self.alpha]);
+                    }
+                }
+            }
+            HudElem::Weapons => {
+                for (i, p) in weapons.iter().enumerate() {
+                    self.draw_pic(x + i as f32 * 24.0, y, p);
+                }
+            }
+            HudElem::Items => {
+                let mut ix = x;
+                for (p, adv, dx) in items {
+                    self.draw_pic(ix + dx, y, p);
+                    ix += adv;
+                }
             }
         }
-        // current ammo bottom-right
-        let ammo_pic = self.pack.ammo_pic(items);
-        let xr = vw - m - 24.0 * 3.0;
-        if let Some(p) = ammo_pic {
-            self.draw_num(xr - 28.0, y, st[STAT_AMMO], 3, st[STAT_AMMO] <= 10);
-            self.draw_pic(vw - m - 24.0, y, p);
-        }
-        // all ammo counts (small), current type highlighted, above the ammo
-        let ammo_bits = if self.pack == Pack::Rogue {
-            [RIT_SHELLS, RIT_NAILS, RIT_ROCKETS, RIT_CELLS]
-        } else {
-            [IT_SHELLS, IT_NAILS, IT_ROCKETS, IT_CELLS]
-        };
-        let names = ["shells", "nails", "rockets", "cells"];
-        for i in 0..4 {
-            let yy = y - 8.0 - (4 - i) as f32 * 9.0;
-            let s = format!("{} {:>3}", names[i], st[STAT_SHELLS + i]);
-            let x = vw - m - s.len() as f32 * 8.0;
-            let gold = items & ammo_bits[i] != 0;
-            for (k, b) in s.bytes().enumerate() {
-                // conchars: +128 is the gold/brown alternate set
-                let ch = if gold { b | 128 } else { b };
-                self.c.ch(x + k as f32 * 8.0, yy, ch);
-            }
-        }
-        // owned weapons, small icons in a row above the ammo list
+    }
+
+    /// Owned weapon icons, left to right.
+    fn weapon_row(&self, cl: &ClientState) -> Vec<String> {
+        let st = &cl.stats;
+        let items = cl.items;
         let mut row: Vec<String> = Vec::new();
         let hip = if self.pack == Pack::Hipnotic { hip_weapons(cl) } else { Vec::new() };
         for (i, w) in WEAPONS.iter().enumerate() {
@@ -273,35 +516,36 @@ impl<'a, 'b> Sbar<'a, 'b> {
         for h in hip.iter().filter(|h| h.0 < 2) {
             row.push(h.1.clone());
         }
-        let yw = y - 8.0 - 4.0 * 9.0 - 20.0;
-        let mut x = vw - m - row.len() as f32 * 24.0;
-        for p in &row {
-            self.draw_pic(x, yw, p);
-            x += 24.0;
-        }
-        // keys, powerups, sigils: row above the weapons
-        let mut x = vw - m - 16.0;
-        let yi = yw - 20.0;
-        for &(bit, n) in self.pack.extra_items().iter().rev() {
-            if items & (1 << bit) != 0 {
-                self.draw_pic(x, yi, n);
-                x -= 18.0;
-            }
-        }
-        for (i, n) in ITEMS.iter().enumerate().rev() {
-            if items & (1 << (17 + i)) != 0 {
-                self.draw_pic(x, yi, n);
-                x -= 18.0;
-            }
-        }
-        // rogue reuses the sigil bits for its own items
+        row
+    }
+
+    /// Keys, powerups, pack items and sigils: (pic, advance, x offset).
+    fn item_row(&self, cl: &ClientState) -> Vec<(String, f32, f32)> {
+        let items = cl.items;
+        let mut row = Vec::new();
         let sigils = if self.pack == Pack::Rogue { 0 } else { 4 };
-        for i in (0..sigils).rev() {
+        for i in 0..sigils {
             if items & (1 << (28 + i)) != 0 {
-                self.draw_pic(x + 8.0, yi, &format!("sb_sigil{}", i + 1));
-                x -= 10.0;
+                row.push((format!("sb_sigil{}", i + 1), 10.0, 0.0));
             }
         }
+        if !row.is_empty() {
+            row.last_mut().unwrap().1 = 18.0;
+        }
+        for (i, n) in ITEMS.iter().enumerate() {
+            if items & (1 << (17 + i)) != 0 {
+                row.push(((*n).into(), 18.0, 0.0));
+            }
+        }
+        for &(bit, n) in self.pack.extra_items() {
+            if items & (1 << bit) != 0 {
+                row.push((n.into(), 18.0, 0.0));
+            }
+        }
+        if let Some(l) = row.last_mut() {
+            l.1 = 16.0;
+        }
+        row
     }
 
     fn face_name(cl: &ClientState, face_anim: bool) -> String {
@@ -322,7 +566,7 @@ impl<'a, 'b> Sbar<'a, 'b> {
 
     fn draw_pic(&mut self, x: f32, y: f32, name: &str) {
         let p = (self.pic)(name);
-        self.c.pic(self.x0 + x, self.y0 + y, p);
+        self.c.pic_color(self.x0 + x, self.y0 + y, p, [1.0, 1.0, 1.0, self.alpha]);
     }
     fn draw_char(&mut self, x: f32, y: f32, ch: u8) {
         self.c.ch(self.x0 + x + 4.0, self.y0 + y, ch);

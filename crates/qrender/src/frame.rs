@@ -75,6 +75,7 @@ struct PostPush {
     dither: f32,
     mode: u32,
     scale: f32,
+    colorblind: u32,
 }
 
 #[repr(C)]
@@ -1384,6 +1385,7 @@ impl Renderer {
                 },
                 mode: st.softemu.min(2),
                 scale: self.render_scale,
+                colorblind: st.colorblind.min(3),
             }]));
             dev.cmd_draw(cmd, 3, 1, 0, 0);
             ts(8);

@@ -7,9 +7,11 @@
 
 mod assets;
 mod autosave;
+mod captions;
 mod console;
 mod demo;
 mod draw;
+mod font;
 mod glyphs;
 mod host;
 mod menu;
