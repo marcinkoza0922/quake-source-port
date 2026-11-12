@@ -116,6 +116,8 @@ struct Goal {
     /// target was when they were found.
     views: Vec<u32>,
     views_at: Option<Vec3>,
+    /// Keys: placed in the world (became a trigger) at least once.
+    armed: bool,
 }
 
 struct Ofs {
@@ -136,6 +138,8 @@ struct Ofs {
     pos1: Option<usize>,
     pos2: Option<usize>,
     maxs: usize,
+    owner: Option<usize>,
+    items: Option<usize>,
 }
 
 impl Ofs {
@@ -159,6 +163,8 @@ impl Ofs {
             pos1: f("pos1"),
             pos2: f("pos2"),
             maxs: f("maxs")?,
+            owner: f("owner"),
+            items: f("items"),
         })
     }
 }
@@ -237,6 +243,8 @@ struct Bot<'a> {
     ride_since: Option<(usize, f64)>,
     /// Time of the last noclip, for goals reached that way.
     noclip_at: f64,
+    /// Whether the last noclip went to the current goal (not back to the graph).
+    noclip_to_goal: bool,
     intermission: Option<usize>,
     /// For rebuilding the nav graph.
     forbid: Vec<Forbid>,
@@ -251,6 +259,8 @@ struct Bot<'a> {
     rec: Route,
     /// The cached route being replayed.
     replay: Option<Route>,
+    /// Edges gated by locked doors at the last replan (for the log).
+    gated: usize,
 }
 
 struct Built {
@@ -344,6 +354,32 @@ fn add_entry(nav: &mut Nav, cm: &Geo, mins: Vec3, maxs: Vec3) -> Option<u32> {
         }
     }
     Some(e)
+}
+
+const IT_KEY1: i32 = 131072;
+const IT_KEY2: i32 = 262144;
+
+/// Whether segment a-b crosses the box in XY (slab test).
+fn seg_hits_box_xy(a: Vec3, b: Vec3, lo: Vec3, hi: Vec3) -> bool {
+    let (mut t0, mut t1) = (0.0f32, 1.0f32);
+    for (s, d, l, h) in [(a.x, b.x - a.x, lo.x, hi.x), (a.y, b.y - a.y, lo.y, hi.y)] {
+        if d.abs() < 1e-6 {
+            if s <= l || s >= h {
+                return false;
+            }
+            continue;
+        }
+        let (mut u, mut w) = ((l - s) / d, (h - s) / d);
+        if u > w {
+            std::mem::swap(&mut u, &mut w);
+        }
+        t0 = t0.max(u);
+        t1 = t1.min(w);
+        if t0 >= t1 {
+            return false;
+        }
+    }
+    true
 }
 
 fn ent_str(vm: &Vm, e: u32, ofs: Option<usize>) -> Vec<u8> {
@@ -599,7 +635,7 @@ pub fn run(fs: Fs, map: &str, opt: &Options) -> Report {
             _ => continue,
         };
         let initial_state = o.state.map_or(0.0, |s| l.vm.ent_f(e, s));
-        goals.push(Goal { ent: e, kind, done: false, failed: false, deferred: false, defers: 0, initial_state, noclips: 0, node: None, touch: 0, views: Vec::new(), views_at: None });
+        goals.push(Goal { ent: e, kind, done: false, failed: false, deferred: false, defers: 0, initial_state, noclips: 0, node: None, touch: 0, views: Vec::new(), views_at: None, armed: false });
     }
     rep.has_exit = !exits.is_empty();
     let exit_ents: Vec<u32> = exits.iter().map(|x| x.0).collect();
@@ -611,7 +647,7 @@ pub fn run(fs: Fs, map: &str, opt: &Options) -> Report {
     };
     let (geo, nav, lifts, sig) = (built.geo, built.nav, built.lifts, built.sig);
     for ((e, touch), node) in exits.into_iter().zip(built.exit_nodes) {
-        goals.push(Goal { ent: e, kind: Kind::Exit, done: false, failed: false, deferred: false, defers: 0, initial_state: 0.0, noclips: 0, node, touch, views: Vec::new(), views_at: None });
+        goals.push(Goal { ent: e, kind: Kind::Exit, done: false, failed: false, deferred: false, defers: 0, initial_state: 0.0, noclips: 0, node, touch, views: Vec::new(), views_at: None, armed: false });
     }
     rep.nav_nodes = nav.pos.len();
     if debug() {
@@ -653,6 +689,7 @@ pub fn run(fs: Fs, map: &str, opt: &Options) -> Report {
         lifts,
         ride_since: None,
         noclip_at: -100.0,
+        noclip_to_goal: false,
         intermission,
         forbid,
         start,
@@ -661,6 +698,7 @@ pub fn run(fs: Fs, map: &str, opt: &Options) -> Report {
         target_cache: None,
         rec: Route { key, ..Default::default() },
         replay,
+        gated: 0,
     };
     if bot.replay.is_some() {
         bot.rep.route = "replayed".into();
@@ -752,7 +790,9 @@ impl Bot<'_> {
         match g.kind {
             Kind::Monster => vm.ent_f(e, self.o.health) <= 0.0 || vm.ent_f(e, self.o.flags) as i32 & FL_MONSTER == 0,
             Kind::Secret => vm.ent_i(e, self.o.touch) == 0 || vm.ent_f(e, self.o.solid) as i32 != SOLID_TRIGGER,
-            Kind::Key => vm.ent_f(e, self.o.solid) as i32 == SOLID_NOT,
+            // Keys spawn SOLID_NOT until PlaceItem runs: taken once placed
+            // and not solid again.
+            Kind::Key => g.armed && vm.ent_f(e, self.o.solid) as i32 == SOLID_NOT,
             Kind::Button => self.o.state.is_some_and(|s| vm.ent_f(e, s) != g.initial_state),
             Kind::Shoot => vm.ent_f(e, self.o.takedamage) == 0.0 || vm.ent_f(e, self.o.health) <= 0.0,
             Kind::Trigger => {
@@ -1001,7 +1041,7 @@ impl Bot<'_> {
                 self.stranded = true;
                 return false;
             }
-            if let Some(n) = self.nav.nearest(here, 2048.0).or_else(|| self.nav.nearest_any(here)) {
+            if let Some(n) = self.landing(here).or_else(|| self.nav.nearest(here, 2048.0)).or_else(|| self.nav.nearest_any(here)) {
                 let to = self.nav.pos[n as usize];
                 self.noclip(to, "off the nav graph");
             } else if let Some(i) = self.cur {
@@ -1013,8 +1053,21 @@ impl Bot<'_> {
         let prev_goal = self.cur;
         let mut choice = None;
         self.update_views();
-        for _ in 0..2 {
-            let (dist, prev) = self.nav.dijkstra(src, &self.blocked, self.opt.seed);
+        let gates = self.gates();
+        if gates.len() != self.gated && self.opt.verbose {
+            eprintln!("  t={:.1} {} edges gated by locked doors", self.sv.time(), gates.len());
+        }
+        self.gated = gates.len();
+        // Gates are a preference: with them first, then without (the opener
+        // may have fired already), then with blocks lifted.
+        let gated = (!gates.is_empty()).then(|| self.blocked.union(&gates).copied().collect::<Blocked>());
+        for pass in 0..3 {
+            let blocked = match (&gated, pass) {
+                (Some(g), 0) => g,
+                (None, 2) => break,
+                _ => &self.blocked,
+            };
+            let (dist, prev) = self.nav.dijkstra(src, blocked, self.opt.seed);
             let mut best: Option<(f32, usize, u32)> = None;
             for (i, g) in self.goals.iter().enumerate() {
                 if !Self::pending(g) || g.deferred || (g.kind == Kind::Exit && others_left) || self.dormant(g) {
@@ -1037,6 +1090,9 @@ impl Bot<'_> {
             if let Some((_, i, n)) = best {
                 choice = Some((i, path_to(&prev, n)));
                 break;
+            }
+            if pass == 0 && gated.is_some() {
+                continue;
             }
             let sig = self.mover_sig;
             if !self.reset_blocks() {
@@ -1072,7 +1128,9 @@ impl Bot<'_> {
                     .iter()
                     .position(|g| Self::pending(g) && !self.dormant(g) && g.deferred == deferred && (g.kind != Kind::Exit || !others_left))
             };
-            let pick = pick(false).or_else(|| pick(true));
+            // Keys first: a key door can cut off much of the level.
+            let key = self.goals.iter().position(|g| g.kind == Kind::Key && Self::pending(g));
+            let pick = key.or_else(|| pick(false)).or_else(|| pick(true));
             match pick {
                 Some(i) => {
                     if self.goals[i].noclips >= 3 {
@@ -1115,6 +1173,100 @@ impl Bot<'_> {
             }
         }
         active
+    }
+
+    /// Edges through closed doors the bot can't open by walking into them:
+    /// key doors while it lacks the key, and doors opened only by a button or
+    /// trigger (the master door has a targetname and no health) that a
+    /// pending goal still fires, directly or through relays. The key, button
+    /// or trigger is an ordinary goal, so the bot fetches it first; the edges
+    /// open again once the key is held or the door has moved. Doors nothing
+    /// pending opens (delayed, opened by a monster's death) stay walkable.
+    fn gates(&self) -> Blocked {
+        let mut out = Blocked::default();
+        let vm = self.vm();
+        let (Some(owner), Some(items), Some(pos1)) = (self.o.owner, self.o.items, self.o.pos1) else { return out };
+        let have = vm.ent_f(self.me, items) as i32;
+        let velocity = vm.field_ofs("velocity");
+        // Names fired by pending goals, through any chain of relays.
+        let mut names: std::collections::HashSet<Vec<u8>> = self
+            .goals
+            .iter()
+            .filter(|g| Self::pending(g) && matches!(g.kind, Kind::Button | Kind::Trigger | Kind::Shoot | Kind::Secret))
+            .map(|g| ent_str(vm, g.ent, self.o.target))
+            .filter(|t| !t.is_empty())
+            .collect();
+        let mut grew = !names.is_empty();
+        while grew {
+            grew = false;
+            for e in 1..vm.num_edicts() as u32 {
+                if vm.is_free(e) || !names.contains(&ent_str(vm, e, self.o.targetname)) {
+                    continue;
+                }
+                let t = ent_str(vm, e, self.o.target);
+                if !t.is_empty() && names.insert(t) {
+                    grew = true;
+                }
+            }
+        }
+        for e in 1..vm.num_edicts() as u32 {
+            if vm.is_free(e) || vm.ent_f(e, self.o.solid) as i32 != SOLID_BSP || !matches!(vm.classname(e).as_str(), "door" | "func_door") {
+                continue;
+            }
+            // Closed: resting where it spawned.
+            if (v(vm.ent_v(e, self.o.origin)) - v(vm.ent_v(e, pos1))).length() > 1.0 || velocity.is_some_and(|f| v(vm.ent_v(e, f)).length_sq() > 0.0) {
+                continue;
+            }
+            let m = match vm.ent_i(e, owner) as u32 {
+                0 => e,
+                m if vm.is_free(m) => e,
+                m => m,
+            };
+            let need = vm.ent_f(m, items) as i32 & (IT_KEY1 | IT_KEY2) & !have;
+            let remote = vm.ent_f(m, self.o.health) <= 0.0 && names.contains(&ent_str(vm, m, self.o.targetname));
+            if need == 0 && !remote {
+                continue;
+            }
+            let (lo, hi) = (v(vm.ent_v(e, self.o.absmin)), v(vm.ent_v(e, self.o.absmax)));
+            let (zc, dz) = ((lo.z + hi.z) * 0.5, (hi.z - lo.z) * 0.5 + 64.0);
+            // Slightly under the player's half width: edges grazing the frame stay.
+            let (bl, bh) = (lo - Vec3::new(14.0, 14.0, 0.0), hi + Vec3::new(14.0, 14.0, 0.0));
+            for n in self.nav.around(lo, hi, 64.0, zc, dz) {
+                let pa = self.nav.pos[n as usize];
+                for ed in &self.nav.edges[n as usize] {
+                    if !matches!(ed.kind, EdgeKind::Walk | EdgeKind::Jump) {
+                        continue;
+                    }
+                    let pb = self.nav.pos[ed.to as usize];
+                    // The body spans origin -24..+32; standing on top of the door is fine.
+                    if pa.z.min(pb.z) - 23.0 >= hi.z || pa.z.max(pb.z) + 32.0 <= lo.z {
+                        continue;
+                    }
+                    if seg_hits_box_xy(pa, pb, bl, bh) {
+                        out.insert((n, ed.to));
+                        out.insert((ed.to, n));
+                    }
+                }
+            }
+        }
+        out
+    }
+
+    /// The nearest node within 2048 units with room to stand and a floor
+    /// under it now (nodes built on a plat float once it has moved away), or
+    /// in water.
+    fn landing(&self, here: Vec3) -> Option<u32> {
+        let ok = |n: u32| {
+            let p = self.nav.pos[n as usize];
+            self.fits(p) && (self.geo.point_contents(p) == CONTENTS_WATER || !self.fits(p - Vec3::new(0.0, 0.0, 4.0)))
+        };
+        if let Some(n) = self.nav.nearest(here, 2048.0).filter(|&n| ok(n)) {
+            return Some(n);
+        }
+        let r = Vec3::splat(2048.0);
+        let mut ns = self.nav.around(here - r, here + r, 0.0, here.z, 2048.0);
+        ns.sort_by(|&a, &b| (self.nav.pos[a as usize] - here).length_sq().total_cmp(&(self.nav.pos[b as usize] - here).length_sq()));
+        ns.into_iter().take(64).find(|&n| ok(n))
     }
 
     /// A nav node with a view of the monster, else a spot 72 units from it.
@@ -1223,6 +1375,7 @@ impl Bot<'_> {
         let to = self.free_spot(to);
         self.sv.command(&format!("setpos {} {} {}", to.x, to.y, to.z));
         self.noclip_at = t;
+        self.noclip_to_goal = why != "off the nav graph";
         self.best_dist = f32::INFINITY;
         self.best_time = t;
         self.ride_since = None;
@@ -1269,9 +1422,15 @@ impl Bot<'_> {
                 break;
             }
             for i in 0..self.goals.len() {
+                if self.goals[i].kind == Kind::Key && !self.goals[i].armed && self.vm().ent_f(self.goals[i].ent, self.o.solid) as i32 == SOLID_TRIGGER {
+                    self.goals[i].armed = true;
+                }
                 if !self.goals[i].done && self.goal_done(&self.goals[i]) {
                     self.goals[i].done = true;
                     self.progress = true;
+                    if self.opt.verbose && self.goals[i].kind == Kind::Key {
+                        eprintln!("  t={t:.1} got key #{}", self.goals[i].ent);
+                    }
                     if self.cur == Some(i) {
                         self.cur = None;
                     }
@@ -1300,8 +1459,19 @@ impl Bot<'_> {
             }
             self.rec.moves.push(mv);
             self.frame += 1;
+            // impulse 9 (ammo) also hands out every key in id1: strip the
+            // keys it added, so key doors stay locked until the key is taken.
+            let keys_before = (mv.impulse == 9).then(|| self.o.items.map(|it| (it, self.vm().ent_f(self.me, it) as i32))).flatten();
             self.sv.set_move(self.c, mv);
             self.sv.frame(DT);
+            if let Some((it, before)) = keys_before {
+                let vm = &mut self.sv.level.as_mut().unwrap().vm;
+                let now = vm.ent_f(self.me, it) as i32;
+                let added = now & (IT_KEY1 | IT_KEY2) & !before;
+                if added != 0 {
+                    vm.set_ent_f(self.me, it, (now & !added) as f32);
+                }
+            }
             let _ = self.sv.take_reliable(self.c);
             let _ = self.sv.take_datagrams(self.c);
         }
@@ -1357,7 +1527,7 @@ impl Bot<'_> {
             if t - self.goal_start > GOAL_TIMEOUT {
                 self.goal_start = t;
                 self.defer(i, "timed out");
-            } else if self.path.is_empty() && g.kind != Kind::Monster && g.kind != Kind::Exit && t - self.noclip_at > 4.0 && t - self.noclip_at < 5.0 {
+            } else if self.path.is_empty() && g.kind != Kind::Monster && g.kind != Kind::Exit && self.noclip_to_goal && t - self.noclip_at > 4.0 && t - self.noclip_at < 5.0 {
                 // Noclipped onto a goal that still isn't done: it won't be.
                 self.fail(i, "not done after noclip");
             }

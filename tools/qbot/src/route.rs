@@ -14,7 +14,7 @@ use std::path::Path;
 
 const MAGIC: &[u8; 4] = b"QBR1";
 /// Bump when the recording changes meaning.
-const VERSION: u64 = 1;
+const VERSION: u64 = 2;
 
 #[derive(Default)]
 pub struct Route {
