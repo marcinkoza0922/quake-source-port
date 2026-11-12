@@ -7,8 +7,14 @@
 mod effectinfo;
 pub mod num;
 mod parse;
+pub mod system;
 pub mod types;
+pub mod util;
 
+pub use system::{
+    DlightSpawn, EmptyWorld, FrameInput, NullSink, Particle, RainEmitter, Settings, Sink, SkyTri, SoundSpawn, System,
+    Trace, TrailHandle, World, sky_tris_for_polygon,
+};
 pub use types::*;
 
 /// Supplies game files (COM_LoadFile).

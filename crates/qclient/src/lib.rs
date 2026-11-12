@@ -7,7 +7,7 @@
 //! (time advance, CL_RelinkEntities, beams, dlights, particles), then
 //! build input with [`ClientState::build_move`].
 
-mod anorms;
+use qcore::anorms;
 mod effects;
 mod input;
 mod parse;
