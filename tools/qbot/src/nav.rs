@@ -63,6 +63,7 @@ pub struct Edge {
     pub kind: EdgeKind,
 }
 
+#[derive(Clone)]
 pub struct Nav {
     /// Player origins standing on the floor.
     pub pos: Vec<Vec3>,
@@ -80,14 +81,18 @@ pub struct Forbid {
 }
 
 impl Forbid {
-    fn contains(&self, p: Vec3) -> bool {
+    pub fn contains(&self, p: Vec3) -> bool {
+        self.contains_margin(p, 0.0)
+    }
+
+    pub fn contains_margin(&self, p: Vec3, margin: f32) -> bool {
         // Expand by the player hull (16 wide, -24..32 tall).
-        p.x > self.mins.x - 16.0
-            && p.x < self.maxs.x + 16.0
-            && p.y > self.mins.y - 16.0
-            && p.y < self.maxs.y + 16.0
-            && p.z > self.mins.z - 32.0
-            && p.z < self.maxs.z + 24.0
+        p.x > self.mins.x - 16.0 - margin
+            && p.x < self.maxs.x + 16.0 + margin
+            && p.y > self.mins.y - 16.0 - margin
+            && p.y < self.maxs.y + 16.0 + margin
+            && p.z > self.mins.z - 32.0 - margin
+            && p.z < self.maxs.z + 24.0 + margin
     }
 }
 
@@ -497,6 +502,25 @@ impl Nav {
         (dist, prev)
     }
 
+    /// Nodes with a route to `dst`, respecting directed edges and gates.
+    pub fn reaching(&self, dst: u32, blocked: &Blocked) -> Vec<bool> {
+        let mut reverse = vec![Vec::new(); self.pos.len()];
+        for (a, edges) in self.edges.iter().enumerate() {
+            for e in edges {
+                if !blocked.contains(&(a as u32, e.to)) { reverse[e.to as usize].push(a); }
+            }
+        }
+        let mut seen = vec![false; self.pos.len()];
+        seen[dst as usize] = true;
+        let mut todo = vec![dst as usize];
+        while let Some(n) = todo.pop() {
+            for &a in &reverse[n] {
+                if !seen[a] { seen[a] = true; todo.push(a); }
+            }
+        }
+        seen
+    }
+
     pub fn edge(&self, a: u32, b: u32) -> Option<&Edge> {
         self.edges[a as usize].iter().find(|e| e.to == b)
     }
@@ -557,4 +581,18 @@ mod tests {
         // Keep the existing best-effort fallback when every candidate is blocked.
         assert_eq!(nav.nearest_clear_except(&geo, here, 96.0, &skip), Some(0));
     }
+    #[test]
+    fn basin_respects_one_way_edges_and_gates() {
+        let mut nav = Nav::empty(Vec3::ZERO, Vec::new());
+        let a = nav.add(Vec3::ZERO);
+        let b = nav.add(Vec3::new(32.0, 0.0, 0.0));
+        let goal = nav.add(Vec3::new(64.0, 0.0, 0.0));
+        let drop = nav.add(Vec3::new(64.0, 0.0, -128.0));
+        nav.link(a, b, EdgeKind::Walk, 32.0);
+        nav.link(b, goal, EdgeKind::Walk, 32.0);
+        nav.link(goal, drop, EdgeKind::Walk, 128.0);
+        assert_eq!(nav.reaching(goal, &Blocked::default()), vec![true, true, true, false]);
+        assert_eq!(nav.reaching(goal, &Blocked::from_iter([(b, goal)])), vec![false, false, true, false]);
+    }
+
 }
