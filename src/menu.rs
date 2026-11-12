@@ -565,7 +565,9 @@ const PANEL_X: f32 = 136.0;
 const PANEL_W: f32 = 368.0;
 const LABEL_R: f32 = 304.0;
 const VALUE_X: f32 = 320.0;
-const ROW_H: f32 = 10.0;
+const ROW_H: f32 = 12.0;
+/// Height of value boxes inside a row, and of entries in an open dropdown.
+const BOX_H: f32 = 10.0;
 /// First row of the options hub / of an options page (below its heading).
 const ROW0: f32 = 64.0;
 const PAGE_ROW0: f32 = 72.0;
@@ -1346,8 +1348,8 @@ impl Menu {
         let vis = opts.len().min(DROP_ROWS);
         let w = opts.iter().map(|o| o.len() as f32 * 8.0 + 20.0).fold(DROP_W, f32::max);
         let row_y = PAGE_ROW0 + d.item as f32 * ROW_H;
-        let h = vis as f32 * ROW_H + 2.0;
-        let y = if row_y + ROW_H + h > MENU_H - 4.0 { row_y - h } else { row_y + ROW_H };
+        let h = vis as f32 * BOX_H + 2.0;
+        let y = if row_y + ROW_H + h > MENU_H - 4.0 { row_y + 1.0 - h } else { row_y + ROW_H - 1.0 };
         (VALUE_X - 3.0, y, w, vis)
     }
 
@@ -1356,7 +1358,7 @@ impl Menu {
         let Screen::OptionsPage(p) = self.screen else { return None };
         let opts = self.options(self.page_item(p, d.item));
         let (bx, by, bw, vis) = self.drop_geom(d, &opts);
-        let k = ((y - by - 1.0) / ROW_H).floor();
+        let k = ((y - by - 1.0) / BOX_H).floor();
         (x >= bx && x < bx + bw && k >= 0.0 && (k as usize) < vis).then(|| d.scroll + k as usize)
     }
 
@@ -1481,7 +1483,7 @@ impl Menu {
                 panel(c, ROW0, PAGES.len());
                 highlight(c, ROW0 + self.page_cursor as f32 * ROW_H);
                 for (i, (label, _)) in PAGES.iter().enumerate() {
-                    let y = ROW0 + i as f32 * ROW_H + 1.0;
+                    let y = ROW0 + i as f32 * ROW_H + 2.0;
                     c.text_center(320.0, y, label, TXT, FG);
                 }
             }
@@ -1500,7 +1502,7 @@ impl Menu {
                 highlight(c, PAGE_ROW0 + self.opt_cursor as f32 * ROW_H);
                 for i in 0..n {
                     let blink = (realtime * 4.0) as i64 & 1 == 0 && i == self.opt_cursor;
-                    self.draw_item(c, cv, self.page_item(page, i), PAGE_ROW0 + i as f32 * ROW_H + 1.0, blink);
+                    self.draw_item(c, cv, self.page_item(page, i), PAGE_ROW0 + i as f32 * ROW_H + 2.0, blink);
                 }
                 if page == Page::Setup {
                     // M_Setup_Draw: the player in a box, in the chosen colours.
@@ -1715,14 +1717,14 @@ impl Menu {
     fn draw_drop(&self, c: &mut Canvas, cv: &Cvars, item: Item, d: Drop) {
         let opts = self.options(item);
         let (x, y, w, vis) = self.drop_geom(d, &opts);
-        let h = vis as f32 * ROW_H + 2.0;
+        let h = vis as f32 * BOX_H + 2.0;
         c.fill(x, y, w, h, [0.05, 0.04, 0.03, 0.97]);
         c.frame(x, y, w, h, BORDER);
         let cur = self.option_index(item, cv);
         for (k, o) in opts.iter().enumerate().skip(d.scroll).take(vis) {
-            let ry = y + 1.0 + (k - d.scroll) as f32 * ROW_H;
+            let ry = y + 1.0 + (k - d.scroll) as f32 * BOX_H;
             if k == d.cursor {
-                c.fill(x + 1.0, ry, w - 2.0, ROW_H, HILITE);
+                c.fill(x + 1.0, ry, w - 2.0, BOX_H, HILITE);
             }
             c.text(x + 4.0, ry + 1.0, o, TXT, if k == cur { GOLD_FG } else { FG });
         }
@@ -1739,8 +1741,8 @@ impl Menu {
         let label = |c: &mut Canvas, l: &str| c.text_right(LABEL_R, y, l, TXT, FG);
         // values with a dropdown get a combo box
         if self.options(item).len() > 2 {
-            c.fill(VALUE_X - 3.0, y - 1.0, DROP_W, ROW_H, [0.0, 0.0, 0.0, 0.5]);
-            c.frame(VALUE_X - 3.0, y - 1.0, DROP_W, ROW_H, BORDER);
+            c.fill(VALUE_X - 3.0, y - 1.0, DROP_W, BOX_H, [0.0, 0.0, 0.0, 0.5]);
+            c.frame(VALUE_X - 3.0, y - 1.0, DROP_W, BOX_H, BORDER);
             c.shape(VALUE_X + DROP_W - 13.0, y + 1.0, 7.0, 7.0, crate::font::Shape::ArrowDown, GOLD_FG);
         }
         match item {
@@ -1789,7 +1791,7 @@ impl Menu {
                 let v = cv.by_name(cvar).map_or("", |c| c.string.as_str());
                 // fits inside the panel: 20 visible characters at most
                 let w = (max.min(20) as f32 * 7.0 + 14.0).min(PANEL_X + PANEL_W - VALUE_X - 4.0);
-                c.fill(VALUE_X - 3.0, y - 1.0, w, ROW_H, [0.0, 0.0, 0.0, 0.5]);
+                c.fill(VALUE_X - 3.0, y - 1.0, w, BOX_H, [0.0, 0.0, 0.0, 0.5]);
                 let shown: String = v.chars().skip(v.len().saturating_sub(20)).collect();
                 let tw = txt(c, VALUE_X, y, &shown);
                 if blink {
@@ -1801,8 +1803,8 @@ impl Menu {
                 let v = cv.value_of("_cl_color") as i32;
                 let k = if high { v >> 4 } else { v & 15 }.clamp(0, 13) as usize;
                 let [r, g, b] = crate::draw::PLAYER_COLORS[k].map(|x| x as f32 / 255.0);
-                c.fill(VALUE_X, y - 1.0, 40.0, ROW_H - 1.0, [r, g, b, 1.0]);
-                c.frame(VALUE_X, y - 1.0, 40.0, ROW_H - 1.0, BORDER);
+                c.fill(VALUE_X, y - 1.0, 40.0, BOX_H - 1.0, [r, g, b, 1.0]);
+                c.frame(VALUE_X, y - 1.0, 40.0, BOX_H - 1.0, BORDER);
                 { txt(c, VALUE_X + 48.0, y, &k.to_string()); }
             }
             Item::Map => {
