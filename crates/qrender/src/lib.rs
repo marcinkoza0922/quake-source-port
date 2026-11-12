@@ -10,7 +10,7 @@ mod frame;
 mod gpu;
 mod pipelines;
 pub mod types;
-mod water;
+pub(crate) mod water;
 mod world;
 
 pub use types::*;
@@ -223,6 +223,8 @@ pub struct Renderer {
     world: Option<WorldGpu>,
     models: Vec<Model>,
     pics: Vec<PicInfo>,
+    /// Soft round blob for water spray puffs (big underwater-blast splashes).
+    splash_pic: Option<PicId>,
     conchars: Option<PicId>,
     alias_cpu: Vec<u32>,
     alias_buf: Buffer,
@@ -418,6 +420,7 @@ impl Renderer {
             world: None,
             models: Vec::new(),
             pics: Vec::new(),
+            splash_pic: None,
             conchars: None,
             alias_cpu: Vec::new(),
             alias_buf,
@@ -430,6 +433,7 @@ impl Renderer {
             capture: None,
         };
         r.write_static_descriptors();
+        r.splash_pic = r.register_pic_rgba_linear(32, 32, &water::spray_blob(32)).ok();
         Ok(r)
     }
 

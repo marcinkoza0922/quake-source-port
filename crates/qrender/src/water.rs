@@ -1,7 +1,8 @@
 //! Optional liquid effects, CPU side: watches entities cross liquid surfaces
 //! (and wade through them), keeps the ripple events the water and world
-//! shaders read from the frame UBO, and simulates splash droplets that are
-//! drawn as classic palette particles.
+//! shaders read from the frame UBO, and simulates splash droplets (drawn as
+//! small soft dots) plus spray puffs (larger textured billboards) that give
+//! big splashes a solid body.
 
 use crate::Particle;
 use crate::world::World;
@@ -13,6 +14,8 @@ pub const MAX_RIPPLES: usize = 32;
 pub const RIPPLE_LIFE: f32 = 2.5;
 const MAX_DROPS: usize = 2048;
 const GRAVITY: f32 = 800.0;
+/// Explosions deeper than this under a liquid surface don't splash it.
+const BLAST_MAX_DEPTH: f32 = 200.0;
 /// Key used for the player (view entity) track.
 const PLAYER_KEY: u32 = u32::MAX;
 
@@ -40,8 +43,49 @@ struct Drop {
     die: f64,
 }
 
+/// A soft billboard of spray: rises, swells and fades.
+struct Puff {
+    pos: [f32; 3],
+    vel: [f32; 3],
+    r0: f32,
+    kind: u32,
+    t0: f64,
+    life: f32,
+    surface: f32,
+}
+
+/// A spray puff to draw: centre, radius and straight RGBA.
+#[derive(Clone, Copy, Debug)]
+pub struct SprayPuff {
+    pub pos: [f32; 3],
+    pub radius: f32,
+    pub color: [u8; 4],
+}
+
+const MAX_PUFFS: usize = 512;
+
+/// RGBA of a soft round blob with a slightly lumpy edge (`n`×`n`).
+pub fn spray_blob(n: u32) -> Vec<u8> {
+    let mut out = Vec::with_capacity((n * n * 4) as usize);
+    for y in 0..n {
+        for x in 0..n {
+            let u = (x as f32 + 0.5) / n as f32 * 2.0 - 1.0;
+            let v = (y as f32 + 0.5) / n as f32 * 2.0 - 1.0;
+            let a = v.atan2(u);
+            let edge = 0.85 + 0.08 * (a * 5.0).sin() + 0.05 * (a * 9.0 + 1.3).sin();
+            let d = (u * u + v * v).sqrt() / edge;
+            let alpha = (1.0 - d * d).clamp(0.0, 1.0).powf(0.7);
+            // brighter core so overlapping puffs read as foam
+            let l = (200.0 + 55.0 * (1.0 - d).clamp(0.0, 1.0)) as u8;
+            out.extend_from_slice(&[l, l, l, (alpha * 255.0) as u8]);
+        }
+    }
+    out
+}
+
 #[derive(Default)]
 pub struct WaterFx {
+    puffs: Vec<Puff>,
     tracks: HashMap<u32, Track>,
     pub ripples: Vec<Ripple>,
     drops: Vec<Drop>,
@@ -82,6 +126,7 @@ impl WaterFx {
         self.tracks.clear();
         self.ripples.clear();
         self.drops.clear();
+        self.puffs.clear();
         self.last_time = 0.0;
     }
 
@@ -128,11 +173,109 @@ impl WaterFx {
         }
     }
 
+    /// An underwater explosion `depth` units below the surface at `at`: a
+    /// tall column plus a wide crown, both shrinking with depth; nothing
+    /// past `BLAST_MAX_DEPTH`.
+    fn blast(&mut self, at: [f32; 3], kind: u32, depth: f32, time: f64) {
+        let f = 1.0 - (depth.max(0.0) / BLAST_MAX_DEPTH);
+        if f <= 0.0 {
+            return;
+        }
+        // the body: a column of spray puffs and a crown spreading at the base
+        let column = (8.0 + 24.0 * f) as usize;
+        let crown = (14.0 + 30.0 * f) as usize;
+        for i in 0..column + crown {
+            if self.puffs.len() >= MAX_PUFFS {
+                break;
+            }
+            let a = self.rand() * std::f32::consts::TAU;
+            let (r, hs, vz, r0) = if i < column {
+                // faster puffs go higher and are slimmer: a tapering plume
+                let t = i as f32 / column as f32;
+                (
+                    (4.0 + 14.0 * (1.0 - t)) * f * self.rand().sqrt(),
+                    (10.0 + 50.0 * (1.0 - t)) * self.rand(),
+                    (90.0 + 420.0 * t + 60.0 * self.rand()) * (0.35 + 0.65 * f),
+                    (16.0 - 7.0 * t + 6.0 * self.rand()) * (0.5 + 0.5 * f),
+                )
+            } else {
+                // low skirt all around the base
+                let a = (i - column) as f32 / crown as f32 * std::f32::consts::TAU + 0.3 * self.rand();
+                let hs = (50.0 + 110.0 * self.rand()) * (0.4 + 0.6 * f);
+                let vz = (30.0 + 110.0 * self.rand()) * (0.4 + 0.6 * f);
+                let r0 = (10.0 + 8.0 * self.rand()) * (0.5 + 0.5 * f);
+                let r = 6.0 + 10.0 * f * self.rand();
+                let life = 0.7 + 0.5 * self.rand();
+                self.puffs.push(Puff {
+                    pos: [at[0] + a.cos() * r, at[1] + a.sin() * r, at[2] + 2.0],
+                    vel: [a.cos() * hs, a.sin() * hs, vz],
+                    r0,
+                    kind,
+                    t0: time,
+                    life,
+                    surface: at[2],
+                });
+                continue;
+            };
+            let life = 0.9 + 0.6 * self.rand();
+            self.puffs.push(Puff {
+                pos: [at[0] + a.cos() * r, at[1] + a.sin() * r, at[2] + 2.0],
+                vel: [a.cos() * hs, a.sin() * hs, vz],
+                r0,
+                kind,
+                t0: time,
+                life,
+                surface: at[2],
+            });
+        }
+        let shades = self.shades[(kind as usize).clamp(1, 3) - 1];
+        let n = (20.0 + 100.0 * f) as usize;
+        for i in 0..n {
+            if self.drops.len() >= MAX_DROPS {
+                break;
+            }
+            let column = i % 3 != 0;
+            let a = self.rand() * std::f32::consts::TAU;
+            let (r, hs, vz) = if column {
+                (12.0 * f * self.rand(), 40.0 * self.rand(), (200.0 + 400.0 * self.rand()) * (0.35 + 0.65 * f))
+            } else {
+                (8.0 + 24.0 * f * self.rand(), (80.0 + 180.0 * self.rand()) * f, (120.0 + 160.0 * self.rand()) * f)
+            };
+            let color = shades[(self.rand() * 4.0) as usize & 3];
+            let life = 1.0 + 0.8 * self.rand() as f64;
+            self.drops.push(Drop {
+                pos: [at[0] + a.cos() * r, at[1] + a.sin() * r, at[2] + 1.0],
+                vel: [a.cos() * hs, a.sin() * hs, vz],
+                color,
+                surface: at[2],
+                die: time + life,
+            });
+        }
+    }
+
     /// A bullet, nail or explosion impact at `hit`: splashes where the line
     /// from the view to it crosses a liquid surface (the shooter is unknown;
-    /// the view is right for the player's own shots), and explosions just
-    /// under a surface throw up a big splash above them.
-    fn shot(&mut self, world: &World, eye: [f32; 3], hit: [f32; 3], time: f64, ripples: bool, splashes: bool) {
+    /// the view is right for the player's own shots); explosions under a
+    /// surface throw up a big splash above them, smaller the deeper they are.
+    #[allow(clippy::too_many_arguments)]
+    fn shot(&mut self, world: &World, eye: [f32; 3], hit: [f32; 3], explosion: bool, time: f64, ripples: bool, splashes: bool) {
+        if explosion
+            && let Some((z, k)) = world.liquid_surface(hit)
+            && k & 4 == 0
+        {
+            let depth = z - hit[2];
+            let f = 1.0 - depth / BLAST_MAX_DEPTH;
+            if f > 0.0 {
+                let at = [hit[0], hit[1], z];
+                if ripples {
+                    self.add_ripple(at, time, 2.5 * f);
+                }
+                if splashes {
+                    self.blast(at, k & 3, depth, time);
+                }
+            }
+            return;
+        }
         let wet = |p: [f32; 3]| world.liquid_surface(p).map_or(0, |(_, k)| k & 3);
         let (we, wh) = (wet(eye), wet(hit));
         let emit = |fx: &mut Self, at: [f32; 3], k: u32, strength: f32| {
@@ -179,7 +322,7 @@ impl WaterFx {
         movers: impl Iterator<Item = (u32, [f32; 3])>,
         player: Option<[f32; 3]>,
         eye: Option<[f32; 3]>,
-        shots: &[[f32; 3]],
+        shots: &[([f32; 3], bool)],
         ripples: bool,
         splashes: bool,
     ) -> Vec<Particle> {
@@ -189,6 +332,7 @@ impl WaterFx {
             self.tracks.clear();
             self.ripples.clear();
             self.drops.clear();
+            self.puffs.clear();
         }
         self.last_time = time;
         self.frame += 1;
@@ -244,8 +388,8 @@ impl WaterFx {
         if dt > 0.0
             && let Some(eye) = eye
         {
-            for &hit in shots {
-                self.shot(world, eye, hit, time, ripples, splashes);
+            for &(hit, explosion) in shots {
+                self.shot(world, eye, hit, explosion, time, ripples, splashes);
             }
         }
         let frame = self.frame;
@@ -265,6 +409,18 @@ impl WaterFx {
             }
             time < p.die
         });
+        // spray puffs: lighter than droplets (air drag), sink back and vanish
+        self.puffs.retain_mut(|p| {
+            p.vel[2] -= GRAVITY * 0.8 * dt;
+            let drag = (1.0 - 1.5 * dt).max(0.0);
+            p.vel[0] *= drag;
+            p.vel[1] *= drag;
+            for k in 0..3 {
+                p.pos[k] += p.vel[k] * dt;
+            }
+            let age = (time - p.t0) as f32;
+            age < p.life && !(p.pos[2] < p.surface - 4.0 && p.vel[2] < 0.0)
+        });
         if ripples {
             for at in landed.into_iter().take(2) {
                 if self.ripples.len() < MAX_RIPPLES {
@@ -273,5 +429,21 @@ impl WaterFx {
             }
         }
         self.drops.iter().map(|p| Particle { origin: p.pos, color: p.color, alpha: 1.0 }).collect()
+    }
+
+    /// Spray puffs to draw at `time` (after [`update`](Self::update)).
+    pub fn spray(&self, time: f64) -> impl Iterator<Item = SprayPuff> + '_ {
+        const TINT: [[f32; 3]; 3] = [[190.0, 205.0, 215.0], [255.0, 140.0, 40.0], [120.0, 180.0, 60.0]];
+        self.puffs.iter().map(move |p| {
+            let t = ((time - p.t0) as f32 / p.life).clamp(0.0, 1.0);
+            let tint = TINT[(p.kind as usize).clamp(1, 3) - 1];
+            // quick fade-in, slow fade-out
+            let alpha = (t / 0.08).min(1.0) * (1.0 - t).powf(1.5) * 0.85;
+            SprayPuff {
+                pos: p.pos,
+                radius: p.r0 * (1.0 + 1.3 * t),
+                color: [tint[0] as u8, tint[1] as u8, tint[2] as u8, (alpha * 255.0) as u8],
+            }
+        })
     }
 }

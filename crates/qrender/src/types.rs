@@ -357,8 +357,8 @@ pub struct RenderFrame<'a> {
     pub player: Option<Vec3>,
     /// Shot impact points this frame (bullets, nails, explosions; never
     /// beams): a splash where the line from the view to the impact crosses
-    /// a liquid surface.
-    pub shot_impacts: &'a [Vec3],
+    /// a liquid surface. The flag marks explosions (big splash underwater).
+    pub shot_impacts: &'a [(Vec3, bool)],
 }
 
 impl Default for RenderFrame<'_> {

@@ -230,8 +230,9 @@ pub struct ClientState {
 
     pub beams: Pool<Beam>,
     /// Bullet/nail/explosion impact points since the renderer last took
-    /// them (water splashes where the shot crossed a liquid surface).
-    pub shot_impacts: Vec<[f32; 3]>,
+    /// them (water splashes where the shot crossed a liquid surface); the
+    /// flag marks explosions.
+    pub shot_impacts: Vec<([f32; 3], bool)>,
     pub dlights: Pool<Dlight>,
     pub particles: ParticlePool,
     pub(crate) avelocities: Vec<[f32; 3]>,

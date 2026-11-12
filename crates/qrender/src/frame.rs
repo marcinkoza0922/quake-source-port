@@ -910,11 +910,10 @@ impl Renderer {
                     }
                 }
             }
-            if !fr.particles.is_empty() || !water_parts.is_empty() {
+            if !fr.particles.is_empty() {
                 let data: Vec<([f32; 3], u32)> = fr
                     .particles
                     .iter()
-                    .chain(water_parts.iter())
                     .map(|p| {
                         let c = self.palette[p.color as usize];
                         let a = (p.alpha.clamp(0.0, 1.0) * 255.0) as u32;
@@ -931,16 +930,67 @@ impl Renderer {
                     };
                 }
             }
-            if !fr.fte_batches.is_empty() && !fr.fte_indices.is_empty() {
-                let batches: Vec<_> = fr
-                    .fte_batches
+            // water spray puffs: camera-facing quads appended to the FTE geometry
+            let mut spray_v: Vec<FteVertex> = Vec::new();
+            let mut spray_i: Vec<u32> = Vec::new();
+            let mut spray_b: Vec<FteBatch> = Vec::new();
+            if let Some(pic) = self.splash_pic {
+                let base = fr.fte_vertices.len() as u32;
+                // splash droplets: small soft dots (classic particles are too
+                // coarse), kept at least ~1.5 px wide in the distance
+                let px = 2.0 * vs.tan[1] / scene_h.max(1) as f32;
+                let drops = water_parts.iter().map(|d| {
+                    let c = self.palette[d.color as usize];
+                    let dist = dot(sub(d.origin, vs.eye), vs.fwd).max(1.0);
+                    crate::water::SprayPuff {
+                        pos: d.origin,
+                        radius: (0.75f32).max(0.75 * px * dist),
+                        color: [c[0], c[1], c[2], (d.alpha.clamp(0.0, 1.0) * 255.0) as u8],
+                    }
+                });
+                for p in self.water_fx.spray(time).chain(drops) {
+                    if p.color[3] == 0 {
+                        continue;
+                    }
+                    let (r, u) = (vs.right, vs.up);
+                    let corner = |sr: f32, su: f32| {
+                        std::array::from_fn(|k| p.pos[k] + (r[k] * sr + u[k] * su) * p.radius)
+                    };
+                    let n = base + spray_v.len() as u32;
+                    for (sr, su, uv) in [(-1.0, -1.0, [0.0, 1.0]), (1.0, -1.0, [1.0, 1.0]), (1.0, 1.0, [1.0, 0.0]), (-1.0, 1.0, [0.0, 0.0])] {
+                        spray_v.push(FteVertex { pos: corner(sr, su), uv, color: p.color });
+                    }
+                    spray_i.extend_from_slice(&[n, n + 1, n + 2, n, n + 2, n + 3]);
+                }
+                if !spray_i.is_empty() {
+                    spray_b.push(FteBatch {
+                        pic,
+                        blend: FteBlend::Blend,
+                        lines: false,
+                        first_index: fr.fte_indices.len() as u32,
+                        num_indices: spray_i.len() as u32,
+                        soft: true,
+                    });
+                }
+            }
+            let (fte_v, fte_i, fte_b);
+            let (fte_vertices, fte_indices, fte_batches) = if spray_b.is_empty() {
+                (fr.fte_vertices, fr.fte_indices, fr.fte_batches)
+            } else {
+                fte_v = [fr.fte_vertices, &spray_v].concat();
+                fte_i = [fr.fte_indices, &spray_i].concat();
+                fte_b = [fr.fte_batches, &spray_b].concat();
+                (&fte_v[..], &fte_i[..], &fte_b[..])
+            };
+            if !fte_batches.is_empty() && !fte_indices.is_empty() {
+                let batches: Vec<_> = fte_batches
                     .iter()
                     .filter_map(|b| {
                         let slot = self.pics.get(b.pic.0 as usize)?.slot;
                         Some((crate::pipelines::fte_index(b.blend, b.lines), slot, *b))
                     })
                     .collect();
-                if let (Some(v), Some(i)) = (dynw.push(fr.fte_vertices, 16), dynw.push(fr.fte_indices, 4)) {
+                if let (Some(v), Some(i)) = (dynw.push(fte_vertices, 16), dynw.push(fte_indices, 4)) {
                     fte = Some((v, i, batches));
                 }
             }
