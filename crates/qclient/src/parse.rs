@@ -68,11 +68,11 @@ impl ClientState {
                     return Ok(());
                 }
                 SVC_PRINT => {
-                    let s = m.string_lossy();
+                    let s = qcore::text::decode(m.string());
                     self.events.push(ClientEvent::Print(s));
                 }
                 SVC_CENTERPRINT => {
-                    let s = m.string_lossy();
+                    let s = qcore::text::decode(m.string());
                     self.center_print(s);
                 }
                 SVC_STUFFTEXT => {
@@ -219,7 +219,7 @@ impl ClientState {
                 SVC_FINALE | SVC_CUTSCENE => {
                     self.intermission = if cmd == SVC_FINALE { 2 } else { 3 };
                     self.completed_time = self.time;
-                    let s = m.string_lossy();
+                    let s = qcore::text::decode(m.string());
                     self.center_print(s);
                 }
                 SVC_SELLSCREEN => self.events.push(ClientEvent::SellScreen),

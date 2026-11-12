@@ -5,6 +5,7 @@ pub mod cvar;
 pub mod fs;
 pub mod math;
 pub mod reader;
+pub mod text;
 
 pub use math::{Plane, Vec3};
 pub use reader::{ReadError, Reader};

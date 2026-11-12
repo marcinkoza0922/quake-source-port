@@ -95,8 +95,8 @@ impl Host {
         for i in 0..count {
             let Some(name) = self.menu.save_slot_name(i) else { continue };
             let p = self.savegame_path(&name);
-            self.menu.saves[i] = std::fs::read_to_string(&p).ok().and_then(|text| {
-                crate::saveinfo::SaveInfo::parse(&text, std::fs::metadata(&p).ok().and_then(|m| m.modified().ok()))
+            self.menu.saves[i] = std::fs::read(&p).ok().and_then(|bytes| {
+                crate::saveinfo::SaveInfo::parse(&qcore::text::decode(&bytes), std::fs::metadata(&p).ok().and_then(|m| m.modified().ok()))
             });
         }
     }

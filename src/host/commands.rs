@@ -415,7 +415,7 @@ pub(super) fn register_commands(c: &mut Commands<Host>) {
         if let Some(d) = p.parent() {
             let _ = std::fs::create_dir_all(d);
         }
-        match std::fs::write(&p, text) {
+        match std::fs::write(&p, qcore::text::encode(&text)) {
             Ok(()) => h.print(&format!("Saved {}\n", p.display())),
             Err(e) => h.print(&format!("ERROR: couldn't write {}: {e}\n", p.display())),
         }
@@ -426,10 +426,11 @@ pub(super) fn register_commands(c: &mut Commands<Host>) {
             return;
         }
         let p = h.savegame_path(a.argv(1));
-        let Ok(text) = std::fs::read_to_string(&p) else {
+        let Ok(bytes) = std::fs::read(&p) else {
             h.print(&format!("ERROR: couldn't open {}\n", p.display()));
             return;
         };
+        let text = qcore::text::decode(&bytes);
         h.print(&format!("Loading game from {}...\n", p.display()));
         if let Some(i) = h.local.take() {
             h.server.drop_client(i, false);

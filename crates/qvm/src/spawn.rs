@@ -53,7 +53,7 @@ impl Vm {
         let set = |vm: &mut Vm, i: usize, v: u32| *vm.base_slot(&base, o + i) = v;
         match key.etype() {
             EType::String => {
-                let h = self.strings.new_string(s.as_bytes());
+                let h = self.strings.new_string(&qcore::text::encode(s));
                 set(self, 0, h as u32);
             }
             EType::Float => set(self, 0, atof(s.as_bytes()).to_bits()),
@@ -82,6 +82,7 @@ impl Vm {
     }
 
     /// ED_ParseEdict on already-tokenised pairs (from `qformats::parse_entities`).
+    /// String values carry Quake bytes as scalars using `qcore::text`.
     pub fn parse_edict(&mut self, host: &mut dyn Host, ent: u32, pairs: &[(String, String)]) -> Result<ParsedEdict> {
         if ent != 0 {
             self.edict_mut(ent).fill(0);

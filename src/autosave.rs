@@ -43,7 +43,7 @@ pub fn rotate(dir: &Path, keep: usize, text: &str) -> io::Result<()> {
     let staged = dir.join("autosave.tmp");
     let mut file = fs::File::create(&staged)?;
     use io::Write;
-    file.write_all(text.as_bytes())?;
+    file.write_all(&qcore::text::encode(text))?;
     file.sync_all()?;
     for i in (1..keep).rev() {
         let from = dir.join(format!("autosave{}.sav", i - 1));

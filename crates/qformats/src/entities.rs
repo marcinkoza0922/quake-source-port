@@ -74,7 +74,8 @@ impl Lexer<'_> {
     }
 }
 
-/// Parse an entity lump string into entities.
+/// Parse an entity lump string into entities. Raw entity files must first be
+/// decoded with `qcore::text::decode` to preserve 8-bit Quake strings.
 pub fn parse_entities(text: &str) -> Result<Vec<Entity>> {
     let mut lx = Lexer {
         s: text.as_bytes(),
