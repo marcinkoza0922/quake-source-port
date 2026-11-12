@@ -151,7 +151,7 @@ fn json_str(s: &str) -> String {
 fn report_json(r: &bot::Report) -> String {
     let errs: Vec<String> = r.errors.iter().map(|e| json_str(e)).collect();
     format!(
-        "{{\"kills\": {}, \"total_monsters\": {}, \"secrets\": {}, \"total_secrets\": {}, \"noclip_uses\": {}, \"goals_failed\": {}, \"triggers_missed\": {}, \"monster_noclips\": {}, \"nav_nodes\": {}, \"has_exit\": {}, \"exited\": {}, \"stranded\": {}, \"route\": {}, \"seed\": {}, \"variants\": {}, \"clean_variants\": {}, \"sim_time\": {:.1}, \"wall_time\": {:.1}, \"errors\": [{}]}}",
+        "{{\"kills\": {}, \"total_monsters\": {}, \"secrets\": {}, \"total_secrets\": {}, \"noclip_uses\": {}, \"goals_failed\": {}, \"triggers_missed\": {}, \"monster_noclips\": {}, \"exit_noclips\": {}, \"nav_nodes\": {}, \"has_exit\": {}, \"exited\": {}, \"stranded\": {}, \"route\": {}, \"seed\": {}, \"variants\": {}, \"clean_variants\": {}, \"sim_time\": {:.1}, \"wall_time\": {:.1}, \"errors\": [{}]}}",
         r.kills,
         r.total_monsters,
         r.secrets,
@@ -160,6 +160,7 @@ fn report_json(r: &bot::Report) -> String {
         r.goals_failed,
         r.triggers_missed,
         r.monster_noclips,
+        r.exit_noclips,
         r.nav_nodes,
         r.has_exit,
         r.exited,

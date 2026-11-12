@@ -65,6 +65,8 @@ pub struct Report {
     /// Noclips to monsters (included in `noclip_uses`): coverage, not
     /// navigation; the rest went to goals a player has to reach.
     pub monster_noclips: u32,
+    /// Noclips directly to exit goals (excludes returns to the graph).
+    pub exit_noclips: u32,
     pub nav_nodes: usize,
     pub sim_time: f64,
     pub wall_time: f64,
@@ -1607,6 +1609,9 @@ impl Bot<'_> {
         self.rep.noclip_uses += 1;
         if self.cur.is_some_and(|i| self.goals[i].kind == Kind::Monster) {
             self.rep.monster_noclips += 1;
+        }
+        if why != "off the nav graph" && self.cur.is_some_and(|i| self.goals[i].kind == Kind::Exit) {
+            self.rep.exit_noclips += 1;
         }
         if self.opt.verbose {
             let g = self.cur.map(|i| (self.goals[i].kind, self.goals[i].ent, self.vm().classname(self.goals[i].ent)));

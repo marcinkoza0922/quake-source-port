@@ -366,11 +366,17 @@ impl Nav {
     /// The nearest node within `radius` that a player can move to in a
     /// straight line from `p` (so not one behind a wall).
     pub fn nearest_clear(&self, cm: &Geo, p: Vec3, radius: f32) -> Option<u32> {
-        self.nearest_clear_except(cm, p, radius, &HashSet::default())
+        self.nearest_clear_candidates(cm, p, radius, &HashSet::default(), usize::MAX)
     }
 
-    /// `nearest_clear` skipping the nodes in `skip`.
+    /// Best-effort local route start, skipping nodes in `skip`. Tests the
+    /// closest twelve candidates before falling back to the nearest node;
+    /// keep this recovery policy separate from exhaustive goal lookup.
     pub fn nearest_clear_except(&self, cm: &Geo, p: Vec3, radius: f32, skip: &HashSet<u32, FxBuild>) -> Option<u32> {
+        self.nearest_clear_candidates(cm, p, radius, skip, 12)
+    }
+
+    fn nearest_clear_candidates(&self, cm: &Geo, p: Vec3, radius: f32, skip: &HashSet<u32, FxBuild>, limit: usize) -> Option<u32> {
         let (cx, cy) = self.cell(p);
         let r = (radius / GRID).ceil() as i32;
         let mut cands: Vec<(f32, u32)> = Vec::new();
@@ -387,10 +393,12 @@ impl Nav {
         }
         cands.sort_by(|a, b| a.0.total_cmp(&b.0));
         let up = Vec3::new(0.0, 0.0, 1.0);
-        cands.iter().take(12).find(|&&(_, n)| {
+        // Goal lookup tries every candidate: the closest dozen can all be
+        // across a wall while a usable approach lies farther away.
+        cands.iter().take(limit).find(|&&(_, n)| {
             let q = self.pos[n as usize];
             let tr = cm.trace(1, p + up, Vec3::new(q.x, q.y, p.z.max(q.z) + 1.0));
-            !tr.startsolid && tr.fraction >= 1.0
+            !tr.startsolid && !tr.allsolid && tr.fraction >= 1.0
         }).or(cands.first()).map(|c| c.1)
     }
 
@@ -519,4 +527,34 @@ pub fn path_to(prev: &[u32], dst: u32) -> Vec<u32> {
     }
     p.reverse();
     p
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use qworld::CONTENTS_EMPTY;
+    use qworld::hull::{CNode, HPlane};
+
+    #[test]
+    fn clear_node_beyond_twelve_obstructed_candidates() {
+        // A wall at x=0 separates the closest nodes from the player.
+        let nodes = vec![CNode { plane: 0, children: [CONTENTS_SOLID, CONTENTS_EMPTY] }];
+        let geo = Geo::new(Arc::new(CollisionModel {
+            planes: vec![HPlane { normal: Vec3::new(1.0, 0.0, 0.0), dist: 0.0, kind: 0 }],
+            hull0: nodes.clone(),
+            clipnodes: nodes,
+            ..Default::default()
+        }));
+        let here = Vec3::new(-1.0, 0.0, 0.0);
+        let mut nav = Nav::empty(here, Vec::new());
+        for y in 0..12 {
+            nav.add(Vec3::new(1.0, y as f32, 0.0));
+        }
+        let reachable = nav.add(Vec3::new(-32.0, 0.0, 0.0));
+        assert_eq!(nav.nearest_clear(&geo, here, 96.0), Some(reachable));
+        let mut skip = HashSet::default();
+        skip.insert(reachable);
+        // Keep the existing best-effort fallback when every candidate is blocked.
+        assert_eq!(nav.nearest_clear_except(&geo, here, 96.0, &skip), Some(0));
+    }
 }
