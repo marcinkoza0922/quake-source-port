@@ -33,19 +33,23 @@ pub enum Page {
     Graphics,
     Audio,
     Accessibility,
+    Hud,
     /// Sub-pages reached from an `Item::Sub` row.
     Mouse,
     Controller,
     Autosave,
     Assists,
+    HudLayout,
+    Messages,
     /// Multiplayer pages (reached from Screen::Multiplayer).
     Join,
     Host,
     Setup,
 }
 
-const PAGES: [(&str, Page); 6] = [
+const PAGES: [(&str, Page); 7] = [
     ("Gameplay", Page::Gameplay),
+    ("HUD", Page::Hud),
     ("Controls", Page::Controls),
     ("Input", Page::Input),
     ("Graphics", Page::Graphics),
@@ -168,12 +172,9 @@ const fn toggle(label: &'static str, cvar: &'static str) -> Item {
 const GAMEPLAY: &[Item] = &[
     slider("Field of View", "fov", 60.0, 130.0, 5.0),
     toggle("Always Run", "cl_alwaysrun"),
-    toggle("Crosshair", "crosshair"),
     slider("View Bob", "cl_bob", 0.0, 0.02, 0.002),
     toggle("Gun Kick", "v_gunkick"),
     toggle("Show Weapon", "r_drawviewmodel"),
-    toggle("Modern HUD", "scr_hudstyle"),
-    toggle("Show FPS", "scr_showfps"),
     toggle("Level Select", "ui_levelselect"),
     toggle("Autosave", "sv_autosave"),
     Item::Sub { label: "Autosave Settings", page: Page::Autosave },
@@ -210,7 +211,6 @@ const AUTOSAVE: &[Item] = &[
 const INPUT: &[Item] = &[
     Item::Sub { label: "Mouse & Keyboard", page: Page::Mouse },
     Item::Sub { label: "Controller", page: Page::Controller },
-    Item::Choice { label: "Weapon Wheel Slowdown", cvar: "cl_wheel_timescale", choices: WHEEL_TIME },
 ];
 
 const MOUSE: &[Item] = &[
@@ -273,18 +273,70 @@ const ACCESSIBILITY: &[Item] = &[
     toggle("Reduce Motion", "a11y_reducemotion"),
     slider("Screen Flashes", "v_flashscale", 0.0, 1.0, 0.1),
     Item::Choice { label: "Color Filter", cvar: "r_colorblind", choices: COLORBLIND },
+    Item::Sub { label: "Messages & Captions", page: Page::Messages },
+    toggle("Toggle Attack", "in_toggleattack"),
+    toggle("Toggle Run", "in_togglerun"),
+    Item::Choice { label: "Game Speed", cvar: "a11y_gamespeed", choices: GAME_SPEED },
+];
+
+const HUD_MODE: &[(&str, f32)] = &[("off", 0.0), ("on", 1.0), ("immersive", 2.0)];
+const HUD_POS: &[(&str, f32)] = &[
+    ("bottom left", 0.0),
+    ("bottom center", 1.0),
+    ("bottom right", 2.0),
+    ("top left", 3.0),
+    ("top center", 4.0),
+    ("top right", 5.0),
+    ("middle left", 6.0),
+    ("middle right", 7.0),
+];
+const HUD_STYLE: &[(&str, f32)] = &[("classic", 0.0), ("modern", 1.0)];
+const CENTER_POS: &[(&str, f32)] = &[("upper", 0.0), ("middle", 1.0), ("lower", 2.0)];
+const NOTIFY_POS: &[(&str, f32)] = &[("top left", 0.0), ("top center", 1.0), ("bottom left", 2.0)];
+
+const HUD: &[Item] = &[
+    Item::Choice { label: "HUD Style", cvar: "scr_hudstyle", choices: HUD_STYLE },
+    Item::Sub { label: "Modern HUD Layout", page: Page::HudLayout },
     toggle("Crosshair", "crosshair"),
     Item::Choice { label: "Crosshair Size", cvar: "crosshair_size", choices: XHAIR_SIZE },
     Item::Choice { label: "Crosshair Color", cvar: "crosshair_color", choices: XHAIR_COLOR },
     toggle("Crosshair Outline", "crosshair_outline"),
-    toggle("Sound Captions", "cl_captions"),
+    Item::Choice { label: "Weapon Wheel Slowdown", cvar: "cl_wheel_timescale", choices: WHEEL_TIME },
+    Item::Sub { label: "Messages & Captions", page: Page::Messages },
+    toggle("Show FPS", "scr_showfps"),
+];
+
+const MESSAGES: &[Item] = &[
+    Item::Choice { label: "Center Message Position", cvar: "scr_centerpos", choices: CENTER_POS },
+    slider("Center Message Time", "scr_centertime", 1.0, 10.0, 1.0),
+    Item::Choice { label: "Notify Message Position", cvar: "con_notifypos", choices: NOTIFY_POS },
+    slider("Notify Message Time", "con_notifytime", 1.0, 10.0, 1.0),
     Item::Choice { label: "Message Text Size", cvar: "scr_textscale", choices: TEXT_SIZE },
     toggle("Message Background", "scr_textbg"),
-    slider("Center Message Time", "scr_centertime", 1.0, 10.0, 1.0),
-    slider("Notify Message Time", "con_notifytime", 1.0, 10.0, 1.0),
-    toggle("Toggle Attack", "in_toggleattack"),
-    toggle("Toggle Run", "in_togglerun"),
-    Item::Choice { label: "Game Speed", cvar: "a11y_gamespeed", choices: GAME_SPEED },
+    toggle("Sound Captions", "cl_captions"),
+];
+
+const fn hud_mode(label: &'static str, cvar: &'static str) -> Item {
+    Item::Choice { label, cvar, choices: HUD_MODE }
+}
+const fn hud_pos(label: &'static str, cvar: &'static str) -> Item {
+    Item::Choice { label, cvar, choices: HUD_POS }
+}
+
+const HUD_LAYOUT: &[Item] = &[
+    hud_mode("Health", "hud_health"),
+    hud_pos("Health Position", "hud_health_pos"),
+    toggle("Show Face", "hud_face"),
+    hud_mode("Armor", "hud_armor"),
+    hud_pos("Armor Position", "hud_armor_pos"),
+    hud_mode("Current Ammo", "hud_ammo"),
+    hud_pos("Current Ammo Position", "hud_ammo_pos"),
+    hud_mode("Ammo Counts", "hud_ammolist"),
+    hud_pos("Ammo Counts Position", "hud_ammolist_pos"),
+    hud_mode("Weapons", "hud_weapons"),
+    hud_pos("Weapons Position", "hud_weapons_pos"),
+    hud_mode("Keys & Powerups", "hud_items"),
+    hud_pos("Keys & Powerups Position", "hud_items_pos"),
 ];
 
 const AUDIO: &[Item] = &[slider("Sound Volume", "volume", 0.0, 1.0, 0.1), slider("Music Volume", "bgmvolume", 0.0, 1.0, 0.1)];
@@ -325,6 +377,16 @@ fn tooltip(item: Item) -> Option<&'static str> {
         "assist_noselfdamage" => "Your own rockets and grenades don't hurt you; rocket jumps still work",
         "assist_regen" => "Slowly heals up to 100 health after 5 seconds without being hit",
         "assist_jumps" => "Jump again in mid-air",
+        "scr_hudstyle" => "Classic: the original status bar; modern: compact elements at the screen edges",
+        "scr_centerpos" => "Where center-screen messages appear",
+        "con_notifypos" => "Where pickup and event messages appear",
+        "hud_face" => "Shows the player face next to the health number",
+        "hud_health" | "hud_armor" | "hud_ammo" | "hud_ammolist" | "hud_weapons" | "hud_items" => {
+            "Immersive: appears for a few seconds only when its value changes"
+        }
+        "hud_health_pos" | "hud_armor_pos" | "hud_ammo_pos" | "hud_ammolist_pos" | "hud_weapons_pos" | "hud_items_pos" => {
+            "Screen edge for this element; elements on the same spot stack"
+        }
         "a11y_gamespeed" => "Slows the whole game down; single player only",
         _ => return None,
     })
@@ -338,6 +400,9 @@ fn page_items(p: Page) -> &'static [Item] {
         Page::Graphics => GRAPHICS,
         Page::Audio => AUDIO,
         Page::Accessibility => ACCESSIBILITY,
+        Page::Hud => HUD,
+        Page::HudLayout => HUD_LAYOUT,
+        Page::Messages => MESSAGES,
         Page::Mouse => MOUSE,
         Page::Controller => CONTROLLER,
         Page::Autosave => AUTOSAVE,
@@ -357,13 +422,15 @@ fn page_name(p: Page) -> &'static str {
         Page::Controller => "Controller",
         Page::Autosave => "Autosave",
         Page::Assists => "Assists",
+        Page::HudLayout => "Modern HUD Layout",
+        Page::Messages => "Messages & Captions",
         _ => PAGES.iter().find(|x| x.1 == p).map_or("", |x| x.0),
     }
 }
 
 /// The page an `Item::Sub` page returns to, with that row's index.
 fn parent_page(p: Page) -> Option<(Page, usize)> {
-    [Page::Gameplay, Page::Input].into_iter().find_map(|parent| {
+    [Page::Gameplay, Page::Input, Page::Hud, Page::Accessibility].into_iter().find_map(|parent| {
         page_items(parent).iter().position(|i| matches!(i, Item::Sub { page, .. } if *page == p)).map(|i| (parent, i))
     })
 }
@@ -374,7 +441,7 @@ fn is_net_page(p: Page) -> bool {
 
 /// Every cvar the options pages edit (the host marks them archived).
 pub fn option_cvars() -> impl Iterator<Item = &'static str> {
-    [GAMEPLAY, AUTOSAVE, ASSISTS, INPUT, MOUSE, CONTROLLER, GRAPHICS, AUDIO, ACCESSIBILITY].into_iter().flatten().filter_map(|i| match *i {
+    [GAMEPLAY, HUD, HUD_LAYOUT, MESSAGES, AUTOSAVE, ASSISTS, INPUT, MOUSE, CONTROLLER, GRAPHICS, AUDIO, ACCESSIBILITY].into_iter().flatten().filter_map(|i| match *i {
         Item::Slider { cvar, .. } | Item::Toggle { cvar, .. } | Item::Choice { cvar, .. } => Some(cvar),
         _ => None,
     })
@@ -414,6 +481,9 @@ pub struct Menu {
     mouse: Option<(f32, f32)>,
     /// Open dropdown on an options page.
     drop: Option<Drop>,
+    /// Page and row an open sub-page was entered from (sub-pages reachable
+    /// from several pages return there; otherwise `parent_page`).
+    sub_return: Option<(Page, Page, usize)>,
     pub mods: ModMenu,
     mp_cursor: usize,
     /// Maps offered on the Host Game page (filled by the host).
@@ -528,6 +598,7 @@ impl Menu {
             prev: Screen::None,
             mouse: None,
             drop: None,
+            sub_return: None,
             mods: ModMenu::default(),
             mp_cursor: 0,
             net_maps: Vec::new(),
@@ -1037,7 +1108,9 @@ impl Menu {
                     }
                     self.screen = if is_net_page(p) {
                         Screen::Multiplayer
-                    } else if let Some((parent, row)) = parent_page(p) {
+                    } else if let Some((parent, row)) =
+                        self.sub_return.take().filter(|r| r.1 == p).map(|r| (r.0, r.2)).or_else(|| parent_page(p))
+                    {
                         self.opt_cursor = row;
                         Screen::OptionsPage(parent)
                     } else {
@@ -1092,6 +1165,7 @@ impl Menu {
                     }
                     Item::Sub { page, .. } => {
                         if enter || right {
+                            self.sub_return = Some((p, page, self.opt_cursor));
                             self.opt_cursor = 0;
                             self.screen = Screen::OptionsPage(page);
                             out.push(Action::Sound("misc/menu2.wav"));
@@ -1780,7 +1854,8 @@ impl Menu {
             }
             Item::Sub { label: l, page } => {
                 label(c, l);
-                let dim = page == Page::Autosave && cv.value_of("sv_autosave") == 0.0;
+                let dim = (page == Page::Autosave && cv.value_of("sv_autosave") == 0.0)
+                    || (page == Page::HudLayout && cv.value_of("scr_hudstyle") == 0.0);
                 { txt(c, VALUE_X, y, if dim { "(off) >" } else { ">" }); }
             }
             Item::ResetBinds => {

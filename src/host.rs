@@ -131,6 +131,23 @@ const HOST_CVARS: &[(&str, &str, u32)] = &[
     ("a11y_gamespeed", "1", CVAR_ARCHIVE),
     ("v_flashscale", "1", CVAR_ARCHIVE),
     ("crosshair_size", "1", CVAR_ARCHIVE),
+    // HUD page: modern HUD elements (0 off, 1 on, 2 immersive) and anchors
+    // (sbar::HudAnchor), face, message placement.
+    ("hud_health", "1", CVAR_ARCHIVE),
+    ("hud_health_pos", "0", CVAR_ARCHIVE),
+    ("hud_armor", "1", CVAR_ARCHIVE),
+    ("hud_armor_pos", "0", CVAR_ARCHIVE),
+    ("hud_ammo", "1", CVAR_ARCHIVE),
+    ("hud_ammo_pos", "2", CVAR_ARCHIVE),
+    ("hud_ammolist", "1", CVAR_ARCHIVE),
+    ("hud_ammolist_pos", "2", CVAR_ARCHIVE),
+    ("hud_weapons", "1", CVAR_ARCHIVE),
+    ("hud_weapons_pos", "2", CVAR_ARCHIVE),
+    ("hud_items", "1", CVAR_ARCHIVE),
+    ("hud_items_pos", "2", CVAR_ARCHIVE),
+    ("hud_face", "1", CVAR_ARCHIVE),
+    ("scr_centerpos", "0", CVAR_ARCHIVE),
+    ("con_notifypos", "0", CVAR_ARCHIVE),
     ("crosshair_color", "0", CVAR_ARCHIVE),
     ("crosshair_outline", "1", CVAR_ARCHIVE),
     ("r_colorblind", "0", CVAR_ARCHIVE),
@@ -230,6 +247,7 @@ pub struct Host {
     pend_impulse: u8,
     wheel: crate::wheel::Wheel,
     captions: crate::captions::Captions,
+    hud_fade: crate::sbar::HudFade,
     /// Label family of the last connected gamepad.
     pad_family: crate::glyphs::Family,
     /// Modern menu text/shape atlas (`crate::font`).
@@ -350,6 +368,7 @@ impl Host {
             pend_impulse: 0,
             wheel: Default::default(),
             captions: Default::default(),
+            hud_fade: Default::default(),
             pad_family: Default::default(),
             ui_text: Default::default(),
             rumble: None,
@@ -1953,6 +1972,8 @@ impl Host {
         self.con.notify_time = self.cv("con_notifytime").max(0.0) as f64;
         self.con.text_bg = self.cv("scr_textbg") != 0.0;
         self.con.text_scale = self.cv("scr_textscale");
+        self.con.center_pos = self.cv("scr_centerpos").clamp(0.0, 2.0) as u8;
+        self.con.notify_pos = self.cv("con_notifypos").clamp(0.0, 2.0) as u8;
         self.sync_ui_text();
         c.ui = Some(self.ui_text.clone());
         let mut ents = Vec::new();
@@ -1984,6 +2005,7 @@ impl Host {
         let crosshair = self.cv("crosshair") != 0.0;
         let showfps = self.cv("scr_showfps") != 0.0;
         let classic = self.classic_hud();
+        let hud_cfg = crate::sbar::HudConfig::from_cvars(&self.server.core.cvars);
         {
             let fs = &self.server.core.fs;
             let pics = &mut self.pics;
@@ -2012,7 +2034,7 @@ impl Host {
                             sb.backtile(CLASSIC_SBAR_LINES);
                             sb.draw(&self.cl, self.show_scores, face);
                         } else {
-                            sb.draw_modern(&self.cl, self.show_scores, face);
+                            sb.draw_modern(&self.cl, self.show_scores, face, &hud_cfg, &mut self.hud_fade, self.realtime);
                         }
                         if self.show_scores && self.cl.gametype == 1 {
                             crate::sbar::deathmatch_overlay(&mut c, &mut pf, &self.cl);
@@ -2341,6 +2363,10 @@ fn register_commands(c: &mut Commands<Host>) {
             "mouse" | "keyboard" => Some(Page::Mouse),
             "controller" | "gamepad" => Some(Page::Controller),
             "autosave" => Some(Page::Autosave),
+            "hud" => Some(Page::Hud),
+            "hudlayout" | "layout" => Some(Page::HudLayout),
+            "messages" => Some(Page::Messages),
+            "accessibility" => Some(Page::Accessibility),
             "graphics" => Some(Page::Graphics),
             "audio" => Some(Page::Audio),
             _ => None,
