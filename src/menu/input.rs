@@ -116,7 +116,7 @@ impl Menu {
                 *c = i;
             }
             if let Screen::OptionsPage(p) = self.screen
-                && let item @ Item::Slider { .. } = self.page_item(p, i)
+                && let item @ (Item::Slider { .. } | Item::ShaderParam(_)) = self.page_item(p, i)
                 && pos.0 >= SLIDER_X.0 - 8.0
                 && pos.0 < SLIDER_X.1 + 8.0
             {
@@ -352,6 +352,13 @@ impl Menu {
                             self.sub_return = Some((p, page, self.opt_cursor));
                             self.opt_cursor = 0;
                             self.screen = Screen::OptionsPage(page);
+                            out.push(Action::Sound("misc/menu2.wav"));
+                        }
+                        return out;
+                    }
+                    Item::ResetShaderParams => {
+                        if enter {
+                            cv.set("r_shader_params", "");
                             out.push(Action::Sound("misc/menu2.wav"));
                         }
                         return out;

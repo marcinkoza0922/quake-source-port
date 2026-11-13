@@ -393,3 +393,51 @@ fn enhancements_hub_and_subpages_navigate_back_to_their_parent() {
         assert!(option_cvars().any(|name| name==cvar));
     }
 }
+
+mod shader_tests {
+    use super::*;
+
+    #[test]
+    fn screen_shader_preset_and_params() {
+        let mut cv = Cvars::default();
+        for n in ["r_shader_preset", "r_shader_params"] {
+            cv.register(n, "", 0);
+        }
+        cv.register("r_shader_scope", "0", 0);
+        let mut m = Menu::new();
+        m.shader_presets = vec!["crt/a".into(), "crt/b".into()];
+        m.shader_params = vec![qrender::ShaderParam {
+            id: "MASK".into(),
+            description: "Mask".into(),
+            initial: 0.5,
+            min: 0.0,
+            max: 1.0,
+            step: 0.25,
+        }];
+        m.screen = Screen::OptionsPage(Page::ScreenShader);
+        m.opt_cursor = 0;
+        m.key(K_RIGHTARROW, &mut cv, false);
+        assert_eq!(cv.by_name("r_shader_preset").unwrap().string, "crt/a");
+        // the param row follows the static rows
+        m.opt_cursor = 3;
+        assert!(matches!(m.page_item(Page::ScreenShader, 3), Item::ShaderParam(0)));
+        m.key(K_RIGHTARROW, &mut cv, false);
+        assert_eq!(cv.by_name("r_shader_params").unwrap().string, "MASK=0.75");
+        // the reset row drops every override
+        m.opt_cursor = 2;
+        m.key(K_ENTER, &mut cv, false);
+        assert_eq!(cv.by_name("r_shader_params").unwrap().string, "");
+        m.opt_cursor = 3;
+        m.key(K_RIGHTARROW, &mut cv, false);
+        assert_eq!(cv.by_name("r_shader_params").unwrap().string, "MASK=0.75");
+        // back to the default drops the override
+        m.key(K_LEFTARROW, &mut cv, false);
+        assert_eq!(cv.by_name("r_shader_params").unwrap().string, "");
+        // picking another preset clears overrides
+        m.key(K_RIGHTARROW, &mut cv, false);
+        m.opt_cursor = 0;
+        m.key(K_RIGHTARROW, &mut cv, false);
+        assert_eq!(cv.by_name("r_shader_preset").unwrap().string, "crt/b");
+        assert_eq!(cv.by_name("r_shader_params").unwrap().string, "");
+    }
+}

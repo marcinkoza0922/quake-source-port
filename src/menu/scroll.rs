@@ -3,7 +3,12 @@ use super::*;
 impl Menu {
     /// Rows on a page: its static items, plus found servers on Join.
     pub(super) fn page_len(&self, p: Page) -> usize {
-        page_items(p).len() + if p == Page::Join { self.servers.len() } else { 0 }
+        page_items(p).len()
+            + match p {
+                Page::Join => self.servers.len(),
+                Page::ScreenShader => self.shader_params.len(),
+                _ => 0,
+            }
     }
 
     /// Visible rows of a page.
@@ -73,6 +78,9 @@ impl Menu {
 
     /// Sets a slider from a pointer x (the knob centres on it), snapped to its step.
     pub(super) fn set_slider(&self, item: Item, x: f32, cv: &mut Cvars) {
+        if let Item::ShaderParam(k) = item {
+            return self.drag_shader_param(k, x, cv);
+        }
         let Item::Slider { cvar, min, max, step, invert, .. } = item else { return };
         let mut f = ((x - SLIDER_X.0 - 4.0) / (SLIDER_X.1 - SLIDER_X.0 - 8.0)).clamp(0.0, 1.0);
         if invert {
@@ -89,7 +97,8 @@ impl Menu {
 
     pub(super) fn page_item(&self, p: Page, i: usize) -> Item {
         let items = page_items(p);
-        items.get(i).copied().unwrap_or(Item::Server(i.saturating_sub(items.len())))
+        let k = i.saturating_sub(items.len());
+        items.get(i).copied().unwrap_or(if p == Page::ScreenShader { Item::ShaderParam(k) } else { Item::Server(k) })
     }
 }
 

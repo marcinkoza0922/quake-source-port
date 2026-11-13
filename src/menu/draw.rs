@@ -424,6 +424,12 @@ impl Menu {
                 c.frame(VALUE_X, y - 1.0, 40.0, BOX_H - 1.0, BORDER);
                 { txt(c, VALUE_X + 48.0, y, &k.to_string()); }
             }
+            Item::ShaderPreset => {
+                label(c, "Preset");
+                let s: String = self.preset_options()[self.preset_index(cv)].chars().take(13).collect();
+                { txt(c, VALUE_X, y, &s); }
+            }
+            Item::ShaderParam(k) => self.draw_shader_param(c, y, k, cv),
             Item::Map => {
                 label(c, "Map");
                 let m = self.host_map(cv).unwrap_or_else(|| "(none)".into());
@@ -482,6 +488,11 @@ impl Menu {
             }
             Item::ResetBinds => {
                 c.text_center(320.0, y, "Reset to Defaults", TXT, GOLD_FG);
+            }
+            Item::ResetShaderParams => {
+                // live only while some parameter differs from the preset
+                let dirty = cv.by_name("r_shader_params").is_some_and(|c| !c.string.trim().is_empty());
+                c.text_center(320.0, y, "Reset Shader Settings", TXT, if dirty { GOLD_FG } else { MUTED });
             }
             Item::Apply => {
                 // a button, live only while there are pending changes

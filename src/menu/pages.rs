@@ -36,6 +36,12 @@ pub(super) enum Item {
     Bind { label: &'static str, cmd: &'static str },
     /// Restore the default bindings.
     ResetBinds,
+    /// Slang preset (`r_shader_preset`) from `Menu::shader_presets`.
+    ShaderPreset,
+    /// k-th parameter of the loaded slang preset.
+    ShaderParam(usize),
+    /// Clears `r_shader_params` (the preset's own defaults).
+    ResetShaderParams,
     /// Opens a nested options page.
     Sub { label: &'static str, page: Page },
 }
@@ -223,6 +229,7 @@ pub(super) const ENHANCEMENTS: &[Item] = &[
     toggle("Enhanced Water", "r_enhancedwater"),
     toggle("See-through Teleporters", "r_teleportwindows"),
     Item::Sub { label: "Water Settings", page: Page::Water },
+    Item::Sub { label: "Screen Shader", page: Page::ScreenShader },
     Item::Sub { label: "Impact Effects", page: Page::Impacts },
     toggle("Enhanced Blood Splatter", "r_blood"),
     Item::Sub { label: "Blood Splatter Settings", page: Page::Blood },
@@ -355,3 +362,11 @@ pub(super) const BLOOD: &[Item] = &[
     toggle("Enemy Wounds", "r_blood_wounds"),
     toggle("Gib Surface Painting", "r_blood_gibs"),
 ];
+
+/// Screen Shader page; the preset's parameter sliders follow these rows.
+pub(super) const SCREEN_SHADER: &[Item] = &[
+    Item::ShaderPreset,
+    Item::Choice { label: "Apply To", cvar: "r_shader_scope", choices: SHADER_SCOPE },
+    Item::ResetShaderParams,
+];
+pub(super) const SHADER_SCOPE: &[(&str, f32)] = &[("3D view", 0.0), ("whole screen", 1.0)];

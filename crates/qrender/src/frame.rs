@@ -33,6 +33,7 @@ impl Renderer {
         if self.width == 0 || self.height == 0 {
             return Ok(());
         }
+        self.prepare_shader()?;
         let dev = self.gpu.device.clone();
         let fi = self.cur;
         let (fence, acquire, cmd) = (
@@ -1274,26 +1275,33 @@ impl Renderer {
                 (None, Some((o, _))) => (o.image, o.view),
                 _ => return Ok(()),
             };
+            // with a slang preset, post (and UI in scope 1) render to its
+            // input at scene size; the chain then draws onto the output
+            let slang_src = self.slang.as_ref().and_then(|s| s.src.as_ref()).map(|i| (i.image, i.view, i.width, i.height));
+            let ui_in_src = st.shader_scope == 1;
+            let (post_img, post_view, pw, ph) = slang_src.unwrap_or((out_img, out_view, w, h));
+            let post_area = vk::Rect2D { offset: vk::Offset2D::default(), extent: vk::Extent2D { width: pw, height: ph } };
+            let vp_post = vk::Viewport { width: pw as f32, height: ph as f32, ..vp_full };
             gpu::barrier(
                 &dev,
                 cmd,
-                out_img,
+                post_img,
                 crng,
                 vk::ImageLayout::UNDEFINED,
                 vk::ImageLayout::COLOR_ATTACHMENT_OPTIMAL,
             );
             let oatt = [vk::RenderingAttachmentInfo::default()
-                .image_view(out_view)
+                .image_view(post_view)
                 .image_layout(vk::ImageLayout::COLOR_ATTACHMENT_OPTIMAL)
                 .load_op(vk::AttachmentLoadOp::DONT_CARE)
                 .store_op(vk::AttachmentStoreOp::STORE)];
             let ri = vk::RenderingInfo::default()
-                .render_area(area)
+                .render_area(post_area)
                 .layer_count(1)
                 .color_attachments(&oatt);
             dev.cmd_begin_rendering(cmd, &ri);
-            dev.cmd_set_viewport(cmd, 0, &[vp_full]);
-            dev.cmd_set_scissor(cmd, 0, &[area]);
+            dev.cmd_set_viewport(cmd, 0, &[vp_post]);
+            dev.cmd_set_scissor(cmd, 0, &[post_area]);
             dev.cmd_bind_descriptor_sets(cmd, gfx, p.layout, 0, &set, &[0]);
             dev.cmd_bind_pipeline(cmd, gfx, p.post);
             push(bytes_of(&[PostPush {
@@ -1307,7 +1315,7 @@ impl Renderer {
                     _ => 0.0,
                 },
                 mode: st.softemu.min(2),
-                scale: self.render_scale,
+                scale: if slang_src.is_some() { 1.0 } else { self.render_scale },
                 colorblind: st.colorblind.min(3),
                 vel_tex: t.vel_slot,
                 // blur length: r_motionblur × the motion over 1/60 s
@@ -1320,12 +1328,59 @@ impl Renderer {
             }]));
             dev.cmd_draw(cmd, 3, 1, 0, 0);
             ts(8);
+            let draw_ui = |vp: vk::Viewport| {
+                if let Some(ofs) = ui_ofs {
+                    dev.cmd_set_viewport(cmd, 0, &[vp]);
+                    dev.cmd_bind_pipeline(cmd, gfx, p.ui);
+                    dev.cmd_bind_vertex_buffers(cmd, 0, &[dynbuf], &[ofs]);
+                    push(bytes_of(&[[1.0 / w as f32, 1.0 / h as f32]]));
+                    dev.cmd_draw(cmd, ui.len() as u32, 1, 0, 0);
+                }
+            };
             // 2D on top at output resolution, unaffected by render scale
-            if let Some(ofs) = ui_ofs {
-                dev.cmd_bind_pipeline(cmd, gfx, p.ui);
-                dev.cmd_bind_vertex_buffers(cmd, 0, &[dynbuf], &[ofs]);
-                push(bytes_of(&[[1.0 / w as f32, 1.0 / h as f32]]));
-                dev.cmd_draw(cmd, ui.len() as u32, 1, 0, 0);
+            if slang_src.is_none() || ui_in_src {
+                draw_ui(vp_post);
+            }
+            if let Some((src_img, ..)) = slang_src {
+                dev.cmd_end_rendering(cmd);
+                gpu::barrier(
+                    &dev,
+                    cmd,
+                    src_img,
+                    crng,
+                    vk::ImageLayout::COLOR_ATTACHMENT_OPTIMAL,
+                    vk::ImageLayout::SHADER_READ_ONLY_OPTIMAL,
+                );
+                gpu::barrier(
+                    &dev,
+                    cmd,
+                    out_img,
+                    crng,
+                    vk::ImageLayout::UNDEFINED,
+                    vk::ImageLayout::COLOR_ATTACHMENT_OPTIMAL,
+                );
+                let out_fmt = p.post_format;
+                if let Some(sl) = self.slang.as_mut()
+                    && let Err(e) = sl.record(cmd, out_img, out_fmt, (w, h), self.frame_count)
+                {
+                    eprintln!("{e}");
+                }
+                // the chain binds its own state; restore ours for the UI
+                let oatt = [vk::RenderingAttachmentInfo::default()
+                    .image_view(out_view)
+                    .image_layout(vk::ImageLayout::COLOR_ATTACHMENT_OPTIMAL)
+                    .load_op(vk::AttachmentLoadOp::LOAD)
+                    .store_op(vk::AttachmentStoreOp::STORE)];
+                let ri = vk::RenderingInfo::default()
+                    .render_area(area)
+                    .layer_count(1)
+                    .color_attachments(&oatt);
+                dev.cmd_begin_rendering(cmd, &ri);
+                dev.cmd_set_scissor(cmd, 0, &[area]);
+                dev.cmd_bind_descriptor_sets(cmd, gfx, p.layout, 0, &set, &[0]);
+                if !ui_in_src {
+                    draw_ui(vp_full);
+                }
             }
             dev.cmd_end_rendering(cmd);
             if let Some(sw) = &self.swap {

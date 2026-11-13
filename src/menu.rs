@@ -22,6 +22,7 @@ mod page_info;
 use page_info::*;
 mod scroll;
 mod actions;
+pub(crate) mod shader;
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum Screen {
@@ -61,6 +62,7 @@ pub enum Page {
     Debris,
     Blood,
     Impacts,
+    ScreenShader,
     /// Multiplayer pages (reached from Screen::Multiplayer).
     Join,
     Host,
@@ -123,6 +125,10 @@ pub struct Menu {
     mp_cursor: usize,
     /// Maps offered on the Host Game page (filled by the host).
     pub net_maps: Vec<qui::mods::MapInfo>,
+    /// Slang presets for the Screen Shader page and the loaded preset's
+    /// parameters (both filled by the host).
+    pub shader_presets: Vec<String>,
+    pub shader_params: Vec<qrender::ShaderParam>,
     /// LAN search results and whether a search is running.
     pub servers: Vec<ServerEntry>,
     pub searching: bool,
@@ -217,6 +223,8 @@ impl Menu {
             mods: ModMenu::default(),
             mp_cursor: 0,
             net_maps: Vec::new(),
+            shader_presets: Vec::new(),
+            shader_params: Vec::new(),
             servers: Vec::new(),
             searching: false,
             bindings: vec![None; MAX_KEYS],
