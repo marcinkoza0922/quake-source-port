@@ -169,3 +169,38 @@ kills, gibs and mod rules apply. Refire timers live on `Level::rails`
 - Menu: Add-ons → Railgun toggle (`addon_railgun`) and Railgun Settings
   (Damage slider, Trail Colour); `menu railgun` opens it.
 - Tests: `crates/qserver/tests/railgun.rs` (e1m1: ammo, refire, dry click).
+### Hookshot (`qserver::addons::hookshot`, `hook_surface`; `src/addons/hook_fx.rs`)
+Zelda homage. Fire sends a hook head out at 1600 u/s (trace `Normal`, so
+monsters block it) up to `addon_hook_range` (default 1024). A hit latches
+when its target is allowed: monsters (FL_MONSTER, alive) by
+`addon_hook_enemies`; world and SOLID_BSP brushes by the material of the
+face hit (`addon_hook_wood/metal/stone`, all default 1). Anything else, or
+the range limit, retracts it (2200 u/s). Latched on a monster or mover, the
+point follows the entity's origin.
+- Materials: `hook_surface::Surfaces` holds every face (plane, polygon,
+  class) per submodel, built from the BSP at spawn; `classify` maps texture
+  names: wood (`wood`, `wizwood`, `crate`, `plank`, `door03/04`, ...),
+  metal (`metal`, `met`, `wizmet`, `tech`, `comp`, `cop`, `slip`, `plat_`,
+  ...), never (`sky*`, `*` liquids, `clip`, `trigger`), else stone
+  (unknown counts as stone). Test: `texture_names_classify_like_id1_and_mods`.
+- Pull: each frame sets the player's velocity to 750 u/s at the hook and
+  clears FL_ONGROUND; normal player physics moves and collides, so the pull
+  can't push anyone into geometry. It ends (keeping 45% of the speed plus a
+  180 u/s hop) on arrival, a 0.2 s stall, a blocked line of sight, the
+  hooked monster dying, or 3 s; fire/alt-fire or putting the toy away lets
+  go without the hop.
+- Sync: `//qsp_hook owner state x y z` every frame the hook is out
+  (0 idle, 1 out, 2 latched, 3 back); `qclient::HookView`, `ClientEvent::Hook`
+  on state changes. Hooks are transient: saves keep only `toy hookshot`.
+- Presentation: chain links and a barbed head as FTE quads from the view
+  model's muzzle (other players: their origin); cues synthesised in
+  `qsound::hookshot` (launch clank + rattle, latch thunk, retract rattle,
+  miss clink). Menu: Add-ons → Hookshot Settings (`Page::Hookshot`,
+  `menu_options hookshot`).
+- Model: `assets/hookshot/` from Meshy (nano-banana concept, meshy-t2
+  1,342 tris + meshy-n1 texture, task `01a1d66e-1a99-7656-a692-de203abb1792`),
+  converted by `blender -b --factory-startup --python
+  tools/import_toy_model.py -- SRC.zip assets/hookshot --length 30` (generic
+  copy of the portal importer: longest axis to +X, texture scaled by 0.5 for
+  alias overbright, no mask); `hook_model.rs` palette-quantises it.
+- Tests: `crates/qserver/tests/hookshot.rs` (e1m1, game data).

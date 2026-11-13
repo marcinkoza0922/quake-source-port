@@ -381,6 +381,7 @@ impl Host {
                     let choice = self.cv("addon_rail_color").max(0.0) as usize;
                     self.rail_fx.receive(fx, self.cl.time, choice, self.snd.as_ref());
                 }
+                ClientEvent::Hook(h) => self.hook_fx.receive(h, self.cl.time, self.snd.as_ref()),
                 ClientEvent::HitFeedback { kill } => {
                     feedback = Some(feedback.unwrap_or(false) || kill);
                 }
@@ -460,6 +461,7 @@ impl Host {
                 ClientEvent::NewMap => {
                     self.portal_fx.clear();
                     self.rail_fx.clear();
+                    self.hook_fx.clear();
                     feedback = None;
                     self.feedback = Default::default();
                     self.stats_recorded = false;

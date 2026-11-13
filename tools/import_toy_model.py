@@ -1,11 +1,24 @@
-"""Generic Blender importer for a Meshy toy view-weapon FBX (see docs/ADDONS.md).
+"""Generic Blender importer for Meshy toy models (see docs/ADDONS.md).
 
-blender -b --factory-startup --python tools/import_toy_model.py -- SOURCE.zip \
-    --out assets/railgun --name railgun --length 44 --back 14
-Like tools/import_portal_gun.py (muzzle along -X in the source, turned to +X),
-but with a simple glow mask: skin index 1 marks bright saturated "energy"
-pixels (drawn fullbright), 0 everything else. Writes <name>.mdl.zlib,
-texture.rgb.zlib and import.json. No Quake palette or game data is needed.
+blender -b --factory-startup --python tools/import_toy_model.py -- \
+    SOURCE(.zip|dir|.fbx) [OUT] [NAME] [--out DIR] [--name NAME] [--length 36]
+    [--anchor bbox|centroid|origin] [--back B] [--forward F] [--flip] [--flat]
+    [--size 512] [--gain 0.5] [--glow]
+
+Generalised from tools/import_portal_gun.py. Writes OUT/NAME.mdl.zlib (MDL v6,
+one pose; NAME defaults to "model"), OUT/texture.rgb.zlib (top-down RGB8,
+palette-converted at load) and OUT/import.json. Placement: the model is scaled
+so its longest axis is --length units along +X (muzzle forward), +Z up.
+  --flip    source muzzle faces -X: turn half a turn about Z.
+  --flat    thinnest axis becomes Z (thrown props such as the boomerang).
+  --anchor  bbox: centred on the bounding box, or with --back the rear end
+            sits B units behind the origin; centroid: centred on the vertex
+            centroid, moved --forward units (default 6) forward; origin: y/z
+            kept as in the source, rear end at --back (default 6) behind.
+  --gain    texture multiplier (alias overbright); --glow marks bright
+            saturated "energy" texels as fullbright (skin index 1) at full
+            brightness and applies --gain only to the rest.
+No Quake palette or game data is needed.
 """
 import argparse
 import array
@@ -25,37 +38,82 @@ from mathutils import Vector
 ROOT = Path(__file__).resolve().parents[1]
 SIZE = 512
 TRIANGLES = 4000
-METAL_GAIN = 0.6
+
+
+
+def place(obj, opts):
+    """Scale and orient the mesh in place (world space)."""
+    pts = [obj.matrix_world @ v.co for v in obj.data.vertices]
+    lo = [min(p[i] for p in pts) for i in range(3)]
+    hi = [max(p[i] for p in pts) for i in range(3)]
+    dims = [hi[i] - lo[i] for i in range(3)]
+    if opts.flat:
+        axes = sorted(range(3), key=lambda i: -dims[i])
+    else:
+        # longest horizontal axis -> X, Z stays up
+        axes = [1, 0, 2] if dims[1] > dims[0] else [0, 1, 2]
+    ysign = -1.0 if axes[0] == 1 and not opts.flat else 1.0
+    factor = opts.length / dims[axes[0]]
+    sign = -1.0 if opts.flip else 1.0
+    if opts.anchor == 'centroid':
+        centre = [sum(p[i] for p in pts) / len(pts) for i in range(3)]
+        shift = opts.forward
+    elif opts.anchor == 'origin':
+        centre = [0.0, 0.0, 0.0]
+        centre[axes[0]] = hi[axes[0]] if sign < 0 else lo[axes[0]]
+        shift = -(6.0 if opts.back is None else opts.back)
+    else:
+        centre = [(hi[i] + lo[i]) / 2 for i in range(3)]
+        shift = 0.0 if opts.back is None else opts.length / 2 - opts.back
+    for vertex, p in zip(obj.data.vertices, pts):
+        x = (p[axes[0]] - centre[axes[0]]) * factor
+        y = (p[axes[1]] - centre[axes[1]]) * factor * ysign
+        z = (p[axes[2]] - centre[axes[2]]) * factor
+        vertex.co = (sign * x + shift, sign * y, z)
 
 
 def main():
     args = argparse.ArgumentParser(description=__doc__)
     args.add_argument('archive', type=Path)
-    args.add_argument('--out', required=True)
-    args.add_argument('--name', required=True)
+    args.add_argument('pos_out', nargs='?')
+    args.add_argument('pos_name', nargs='?')
+    args.add_argument('--out')
+    args.add_argument('--name')
     args.add_argument('--length', type=float, default=36.0)
-    args.add_argument('--back', type=float, default=6.0, help='units behind the origin')
+    args.add_argument('--anchor', choices=('bbox', 'centroid', 'origin'), default='bbox')
+    args.add_argument('--back', type=float, help='units behind the origin')
+    args.add_argument('--forward', type=float, default=6.0)
+    args.add_argument('--flip', action='store_true', help='source muzzle faces -X')
+    args.add_argument('--flat', action='store_true', help='thinnest axis becomes Z')
+    args.add_argument('--size', type=int, default=512)
+    args.add_argument('--gain', type=float, default=0.5)
+    args.add_argument('--glow', action='store_true')
     opts = args.parse_args(sys.argv[sys.argv.index('--') + 1:])
-    out = ROOT / opts.out
+    opts.out = opts.out or opts.pos_out
+    opts.name = opts.name or opts.pos_name or 'model'
+    if not opts.out:
+        args.error('an output directory is required (OUT or --out)')
+    global SIZE
+    SIZE = opts.size
+    out = Path(opts.out) if Path(opts.out).is_absolute() else ROOT / opts.out
     out.mkdir(parents=True, exist_ok=True)
     with tempfile.TemporaryDirectory(prefix='quake-toy-') as directory:
-        with zipfile.ZipFile(opts.archive) as archive:
-            archive.extractall(directory)
-        fbx = next(Path(directory).rglob('*.fbx'))
+        if opts.archive.suffix.lower() == '.fbx':
+            fbx = opts.archive
+        else:
+            if opts.archive.is_dir():
+                directory = str(opts.archive)
+            else:
+                with zipfile.ZipFile(opts.archive) as archive:
+                    archive.extractall(directory)
+            fbx = next(Path(directory).rglob('*.fbx'))
         bpy.ops.import_scene.fbx(filepath=str(fbx))
         objects = [o for o in bpy.context.selected_objects if o.type == 'MESH']
         if len(objects) != 1:
             raise ValueError('Expected the supplied single-mesh Meshy export')
         obj = objects[0]
         bpy.context.view_layer.objects.active = obj
-        # Source muzzle faces -X; rotate half a turn, keeping +Z upright.
-        length = obj.dimensions.x
-        factor = opts.length / length
-        xs = [(obj.matrix_world @ v.co).x for v in obj.data.vertices]
-        shift = max(xs) * factor - opts.back
-        for vertex in obj.data.vertices:
-            p = obj.matrix_world @ vertex.co
-            vertex.co = (-p.x * factor + shift, -p.y * factor, p.z * factor)
+        place(obj, opts)
         obj.matrix_world.identity()
         obj.data.update()
         # Load the supplied PNG explicitly, avoiding FBX extracted JPEG copies.
@@ -158,20 +216,19 @@ def main():
                 continue
             # Native aliases use clockwise winding.
             triangles.append(struct.pack('<4i', 1, corners[0], corners[2], corners[1]))
-        # Glow mask: pixels with one clearly dominant channel are energy (fullbright).
         mask = bytearray(SIZE * SIZE)
         rgb = bytearray(rgb)
         for i in range(SIZE * SIZE):
-            r, g, b = rgb[i * 3:i * 3 + 3]
-            top = max(r, g, b)
-            if top > 60 and sorted((r, g, b))[1] * 1.4 < top:
+            px = rgb[i * 3:i * 3 + 3]
+            top = max(px)
+            if opts.glow and top > 60 and sorted(px)[1] * 1.4 < top:
                 # one dominant channel: energy; brighten it to full glow
                 mask[i] = 1
-                for c in range(3):
-                    rgb[i * 3 + c] = round(rgb[i * 3 + c] * 255 / top)
+                gain = 255 / top
             else:
-                for c in range(3):
-                    rgb[i * 3 + c] = round(rgb[i * 3 + c] * METAL_GAIN)
+                gain = opts.gain
+            for c in range(3):
+                rgb[i * 3 + c] = min(255, round(px[c] * gain))
         rgb = bytes(rgb)
         bboxmin, bboxmax = bytes(4), bytes((255, 255, 255, 0))
         header = b'IDPO' + struct.pack('<i3f3ff3f8if', 6, *scale, *lo,
@@ -184,7 +241,8 @@ def main():
         info = dict(source=opts.archive.name, source_triangles=original,
                     triangles=len(triangles), vertices=len(verts), texture_size=SIZE,
                     removed_packed_degenerates=collapsed, bounds=[lo, hi],
-                    glow_texels=mask.count(1))
+                    glow_texels=mask.count(1), length=opts.length,
+                    anchor=opts.anchor, flip=opts.flip, flat=opts.flat, gain=opts.gain)
         (out / 'import.json').write_text(json.dumps(info, indent=2) + '\n')
         print(json.dumps(info))
 

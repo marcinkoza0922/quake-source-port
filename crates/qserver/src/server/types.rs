@@ -117,6 +117,8 @@ pub struct Level {
     pub(crate) falls: crate::addons::fall::Falls,
     /// Railgun refire timers.
     pub(crate) rails: crate::addons::railgun::Rails,
+    /// Hookshot state and the map's surface materials.
+    pub hooks: crate::addons::hookshot::Hooks,
 }
 
 pub struct Server {

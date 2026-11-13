@@ -117,6 +117,13 @@ impl Host {
                     weapon.origin = (Vec3::from(weapon.origin) + cv.viewmodel.offset(v.angles)).to_array();
                     ents.push(RenderEntity { views: bit, ..weapon });
                 }
+                if g.toy.held == Some(qserver::addons::Toy::Hookshot) && g.cl.intermission == 0 && g.cl.stats[0] > 0
+                    && cv.viewmodel.visible() && g.cl.items & crate::sbar::IT_INVISIBILITY == 0
+                    && let Some(mut weapon) = self.hook_fx.weapon(g.cl.viewentity.saturating_sub(1), self.cl.time, v,
+                        &mut self.level, &self.server.core.fs, &mut self.r) {
+                    weapon.origin = (Vec3::from(weapon.origin) + cv.viewmodel.offset(v.angles)).to_array();
+                    ents.push(RenderEntity { views: bit, ..weapon });
+                }
                 if let Some(gun) = gun {
                     ents.push(RenderEntity { views: bit, ..gun });
                 }

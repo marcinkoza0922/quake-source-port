@@ -77,6 +77,7 @@ pub enum Page {
     NewGameAddons,
     PortalGun,
     Railgun,
+    Hookshot,
     /// Multiplayer pages (reached from Screen::Multiplayer).
     Join,
     Host,

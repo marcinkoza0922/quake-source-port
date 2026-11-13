@@ -13,6 +13,8 @@ use crate::ents::Ents;
 use crate::server::{Core, Level};
 
 pub mod fall;
+pub mod hook_surface;
+pub mod hookshot;
 pub mod portal;
 pub mod portal_move;
 pub mod railgun;
@@ -36,6 +38,13 @@ pub const CVARS: &[(&str, &str, u32)] = &[
     ("addon_rail_damage", "100", CVAR_ARCHIVE),
     // trail colour: 0 blue, 1 green, 2 red, 3 yellow, 4 purple, 5 white
     ("addon_rail_color", "0", CVAR_ARCHIVE),
+    // hookshot: range and which targets latch
+    ("addon_hookshot", "1", CVAR_ARCHIVE),
+    ("addon_hook_range", "1024", CVAR_ARCHIVE),
+    ("addon_hook_wood", "1", CVAR_ARCHIVE),
+    ("addon_hook_metal", "1", CVAR_ARCHIVE),
+    ("addon_hook_stone", "1", CVAR_ARCHIVE),
+    ("addon_hook_enemies", "1", CVAR_ARCHIVE),
 ];
 
 /// Usercmd button bits (bit 0 attack and bit 1 jump are QC's).
@@ -48,11 +57,12 @@ pub const TOY_SHIFT: u8 = 4;
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum Toy {
     PortalGun,
+    Hookshot,
     Railgun,
 }
 
 impl Toy {
-    pub const ALL: [Toy; 2] = [Toy::PortalGun, Toy::Railgun];
+    pub const ALL: [Toy; 3] = [Toy::PortalGun, Toy::Hookshot, Toy::Railgun];
 
     /// Wire id (1..=15).
     pub fn id(self) -> u8 {
@@ -65,6 +75,7 @@ impl Toy {
         match self {
             Toy::PortalGun => "Portal Gun",
             Toy::Railgun => "Railgun",
+            Toy::Hookshot => "Hookshot",
         }
     }
     /// Name in savegame headers.
@@ -72,6 +83,7 @@ impl Toy {
         match self {
             Toy::PortalGun => "portalgun",
             Toy::Railgun => "railgun",
+            Toy::Hookshot => "hookshot",
         }
     }
     pub fn from_key(key: &str) -> Option<Toy> {
@@ -82,6 +94,7 @@ impl Toy {
         match self {
             Toy::PortalGun => "addon_portalgun",
             Toy::Railgun => "addon_railgun",
+            Toy::Hookshot => "addon_hookshot",
         }
     }
     /// The toys switched on in the menu.
@@ -150,6 +163,12 @@ pub(crate) fn frame(l: &mut Level, c: &mut Core) {
         railgun::frame(&mut rails, l, c);
         l.rails = rails;
     }
+    let hook = c.cvars.value_of(Toy::Hookshot.cvar()) != 0.0;
+    let rules = hookshot::Rules::read(&c.cvars);
+    let time = l.vm.time;
+    let mut clients = std::mem::take(&mut c.clients);
+    hookshot::frame(&mut l.hooks, &l.world, &mut Ents { vm: &mut l.vm, c: &mut *c }, &mut clients, rules, hook, time);
+    c.clients = clients;
     if gun {
         fall::frame(&mut l.falls, &mut l.vm, c, &mut l.world);
     } else {
@@ -186,6 +205,7 @@ pub(crate) fn shut_down(l: &mut Level, c: &mut Core) {
     }
     st.send(&mut c.clients);
     *st = Default::default();
+    l.hooks.reset();
 }
 
 /// No remote client is connected.

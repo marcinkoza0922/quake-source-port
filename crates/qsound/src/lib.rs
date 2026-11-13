@@ -5,6 +5,7 @@
 
 pub mod music;
 pub mod feedback;
+pub mod hookshot;
 pub mod portal;
 pub mod rail;
 

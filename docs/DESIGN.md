@@ -211,8 +211,8 @@ weapon eight camera-right units for side placement, independently per split view
 The portal gun uses negated alias pitch and a camera-relative origin with no yaw
 cant. Its Meshy FBX is converted by `tools/import_portal_gun.py` to embedded native MDL
 and a 512×512 atlas; `addons::portal_model`/`portal_skin` apply owner colors and
-the active palette. See ADDONS.md for conversion, materials and ownership. Railgun: ADDONS.md;
-`tools/import_toy_model.py` is the generic Meshy→MDL importer for other toys.
+the active palette. See ADDONS.md for conversion, materials and ownership.
+Other toys: see ADDONS.md; `tools/import_toy_model.py` is the generic Meshy→MDL importer.
 
 ### Test bot (`tools/qbot`)
 
