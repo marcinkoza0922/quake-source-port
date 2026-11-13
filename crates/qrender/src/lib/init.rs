@@ -6,7 +6,7 @@ impl Renderer {
         let dev = gpu.device.clone();
         let sizes = [
             vk::DescriptorPoolSize {
-                ty: vk::DescriptorType::UNIFORM_BUFFER,
+                ty: vk::DescriptorType::UNIFORM_BUFFER_DYNAMIC,
                 descriptor_count: 8,
             },
             vk::DescriptorPoolSize {
@@ -146,6 +146,9 @@ impl Renderer {
             lightmap,
             dummy,
             world: None,
+            isolated_portal: None,
+            isolated_distance: None,
+            hidden_entities: Default::default(),
             models: Vec::new(),
             pics: Vec::new(),
             splash_pic: None,

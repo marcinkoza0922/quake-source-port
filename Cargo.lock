@@ -252,6 +252,8 @@ name = "qinspect"
 version = "0.1.0"
 dependencies = [
  "qcore",
+ "qformats",
+ "qrender",
  "qvm",
 ]
 

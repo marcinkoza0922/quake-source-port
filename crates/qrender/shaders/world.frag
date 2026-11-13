@@ -8,6 +8,7 @@ layout(location = 4) flat in vec2 i_liq;
 layout(push_constant) uniform P { mat4 model; vec4 params; } pc;
 layout(location = 0) out vec4 o_color;
 void main() {
+    if (dot(fr.portal_clip.xyz, i_wpos) + fr.portal_clip.w < 0.0) discard;
     uvec4 m = materials[i_mat];
     vec2 size = vec2(textureSize(textures[nonuniformEXT(m.x)], 0));
     vec2 uv = i_st / size;
