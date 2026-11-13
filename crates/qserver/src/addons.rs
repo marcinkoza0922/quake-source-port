@@ -12,6 +12,7 @@ use qcore::cvar::{CVAR_ARCHIVE, CVAR_ROM, Cvars};
 use crate::ents::Ents;
 use crate::server::{Core, Level};
 
+pub mod boomerang;
 pub mod fall;
 pub mod hook_surface;
 pub mod hookshot;
@@ -35,6 +36,10 @@ pub const CVARS: &[(&str, &str, u32)] = &[
     ("addon_portal_max", "4", CVAR_ARCHIVE),
     ("addon_portal_dist", "4096", CVAR_ARCHIVE),
     ("addon_portal_depth", "3", CVAR_ARCHIVE),
+    // boomerang: on/off, stun seconds, flight speed (units/s)
+    ("addon_boomerang", "1", CVAR_ARCHIVE),
+    ("addon_boomerang_stun", "4", CVAR_ARCHIVE),
+    ("addon_boomerang_speed", "700", CVAR_ARCHIVE),
     ("addon_railgun", "1", CVAR_ARCHIVE),
     // railgun damage per entity pierced (Quake III: 100)
     ("addon_rail_damage", "100", CVAR_ARCHIVE),
@@ -59,13 +64,14 @@ pub const TOY_SHIFT: u8 = 4;
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum Toy {
     PortalGun,
+    Boomerang,
     Sticky,
     Hookshot,
     Railgun,
 }
 
 impl Toy {
-    pub const ALL: [Toy; 4] = [Toy::PortalGun, Toy::Sticky, Toy::Hookshot, Toy::Railgun];
+    pub const ALL: [Toy; 5] = [Toy::PortalGun, Toy::Boomerang, Toy::Sticky, Toy::Hookshot, Toy::Railgun];
 
     /// Wire id (1..=15).
     pub fn id(self) -> u8 {
@@ -77,6 +83,7 @@ impl Toy {
     pub fn name(self) -> &'static str {
         match self {
             Toy::PortalGun => "Portal Gun",
+            Toy::Boomerang => "Boomerang",
             Toy::Sticky => "Stickybomb Launcher",
             Toy::Railgun => "Railgun",
             Toy::Hookshot => "Hookshot",
@@ -86,6 +93,7 @@ impl Toy {
     pub fn key(self) -> &'static str {
         match self {
             Toy::PortalGun => "portalgun",
+            Toy::Boomerang => "boomerang",
             Toy::Sticky => "sticky",
             Toy::Railgun => "railgun",
             Toy::Hookshot => "hookshot",
@@ -98,6 +106,7 @@ impl Toy {
     pub fn cvar(self) -> &'static str {
         match self {
             Toy::PortalGun => "addon_portalgun",
+            Toy::Boomerang => "addon_boomerang",
             Toy::Sticky => "addon_sticky",
             Toy::Railgun => "addon_railgun",
             Toy::Hookshot => "addon_hookshot",
@@ -164,6 +173,7 @@ pub(crate) fn frame(l: &mut Level, c: &mut Core) {
         }
     }
     st.send(&mut c.clients);
+    boomerang_frame(l, c);
     if c.cvars.value_of(Toy::Sticky.cvar()) != 0.0 {
         sticky::frame(&mut l.stickies, &mut l.vm, c, &mut l.world);
         l.stickies.send(&mut c.clients);
@@ -206,6 +216,23 @@ impl crate::Server {
     }
 }
 
+fn boomerang_frame(l: &mut Level, c: &mut Core) {
+    let on = c.cvars.value_of(Toy::Boomerang.cvar()) != 0.0;
+    if !on && l.boomerangs.is_empty() {
+        return;
+    }
+    let tune = boomerang::Tuning {
+        stun: c.cvars.value_of("addon_boomerang_stun").clamp(0.5, 30.0),
+        speed: c.cvars.value_of("addon_boomerang_speed").clamp(200.0, 2000.0),
+    };
+    let (time, dt) = (l.vm.time, l.vm.g_f(c.sv.globals.frametime));
+    let clients = std::mem::take(&mut c.clients);
+    let mut ents = Ents { vm: &mut l.vm, c: &mut *c };
+    l.boomerangs.frame(&l.world, &mut ents, &clients, time, dt, tune, on);
+    c.clients = clients;
+    l.boomerangs.send(&mut c.clients);
+}
+
 /// Add-ons were switched off (or a remote client joined): remove every
 /// portal from the level and the clients.
 pub(crate) fn shut_down(l: &mut Level, c: &mut Core) {
@@ -219,6 +246,7 @@ pub(crate) fn shut_down(l: &mut Level, c: &mut Core) {
     }
     st.send(&mut c.clients);
     *st = Default::default();
+    l.boomerangs.clear(&mut c.clients);
     l.stickies.clear(&mut c.clients);
     l.hooks.reset();
 }

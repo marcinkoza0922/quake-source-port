@@ -234,3 +234,44 @@ A player leaving detonates theirs; the toy switched off removes all.
   energy mask: `blender -b --factory-startup --python
   tools/import_toy_model.py -- DIR_OR_ZIP --out assets/stickybomb`), skin
   quantized to the active palette's non-fullbright colours.
+### Boomerang (`addons/boomerang.rs`, `src/addons/boomerang_fx.rs`)
+Zelda-style homing boomerang (`addon_boomerang`, default 1). Holding fire
+marks monsters: each server frame the monster nearest along the aim (centre
+within its half-size + 4 + 2% of distance of the aim ray, in sight, ≤2048 u)
+is appended to the queue (max 32); alt-fire clears it, putting the toy away
+cancels it. Releasing fire throws a virtual projectile (no edict, so no QC
+sees it) from the right hand, starting 30° off to the right; it steers
+towards the current target (turn rate 4 + 6·age rad/s, so it curves and
+never orbits), slides along walls, and stuns every live monster whose box
+(+6) its path crosses, each once per throw. A queued target is done when hit;
+dead/removed targets and ones not reached within 3 s are skipped. No marks:
+it flies to the aim point (≤640 u) and back. After the queue (or 15 s) it
+returns to the thrower's chest, flying through walls after 1.5 s of return
+and caught at 40 u (forced after 8 s). One boomerang per player; fire does
+nothing until it is caught.
+- Stun (`addon_boomerang_stun`, default 4 s, 0.5–30): while stunned, a
+  scheduled `nextthink` is pushed to the stun's end (so the AI resumes by
+  itself; nextthink 0 is left alone) and horizontal speed is zeroed every
+  frame (all speed for flyers/swimmers). Dying ends the stun. Speed:
+  `addon_boomerang_speed` (default 700 u/s, 200–2000). Menu: Add-ons →
+  Boomerang Settings (`menu_options boomerang`).
+- Sync (`//qsp_boom`, reliable stufftext, parsed into
+  `ClientEvent::Boomerang`): `m owner [ent headz]...` marks, `t owner x y z`
+  throw, `f owner x y z` position every frame in flight, `c owner` caught,
+  `s ent secs headz` stun. Not saved: a save mid-flight loads with the
+  boomerang in hand, and stunned monsters keep their pushed `nextthink`
+  (still frozen until then, without stars).
+- Client: the held model is a view weapon (hidden while thrown), the flying
+  one spins flat at 1080°/s. Markers are FTE billboards above the head: a
+  pulsing red ring plus the queue number (procedural 3×5 digit atlas in
+  `boomerang_model::atlas`); stunned monsters get five yellow stars circling
+  over the head. `qsound::boomerang` synthesises throw whoosh, stun (wooden
+  bonk + three warbling "tweety bird" chirp voices), catch clack and a swish
+  repeated every 0.2 s in flight.
+- Model: Meshy nano-banana concept → meshy-t2 Smart Topology (target 1000,
+  990 tris) + meshy-n1 texture, task `01a1d66c-46a1-72b3-a95b-549075c70824`
+  (18 credits). Imported with `blender -b --factory-startup --python-exit-code 1
+  --python tools/import_toy_model.py -- model.fbx assets/boomerang boomerang
+  --flat` (28 u long, thinnest axis Z, 256² atlas darkened ×0.75, converted to
+  the mod palette at load, no fullbrights). The FBX stays external.
+- Audition: `rustc --edition=2024 tools/boomerang_cues.rs -o target/boomerang-cues && target/boomerang-cues target/boomerang-audio` writes the four cues as 48 kHz WAVs.

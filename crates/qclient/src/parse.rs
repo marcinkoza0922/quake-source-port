@@ -323,6 +323,10 @@ impl ClientState {
                 self.parse_sticky(&String::from_utf8_lossy(args));
                 continue;
             }
+            if let Some(args) = line.strip_prefix(b"//qsp_boom ") {
+                self.events.push(ClientEvent::Boomerang(String::from_utf8_lossy(args).trim_end().to_owned()));
+                continue;
+            }
             if let Some(args) = line.strip_prefix(b"//qsp_portal ") {
                 self.parse_portal(&String::from_utf8_lossy(args));
                 continue;

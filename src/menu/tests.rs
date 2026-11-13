@@ -402,6 +402,7 @@ fn addon_cvars() -> Cvars {
     cv.register("addons_enable", "0", 0);
     cv.register("addons_active", "0", 0);
     cv.register("addon_portalgun", "1", 0);
+    cv.register("addon_boomerang", "1", 0);
     cv
 }
 

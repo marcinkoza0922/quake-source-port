@@ -120,6 +120,8 @@ pub struct Level {
     pub(crate) rails: crate::addons::railgun::Rails,
     /// Hookshot state and the map's surface materials.
     pub hooks: crate::addons::hookshot::Hooks,
+    /// Boomerang flights, marks and stunned monsters.
+    pub boomerangs: crate::addons::boomerang::Boomerangs,
 }
 
 pub struct Server {

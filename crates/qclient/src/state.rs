@@ -150,6 +150,8 @@ pub enum ClientEvent {
     RailEffect(crate::RailEffect),
     /// A hookshot changed state (`hooks` holds the live heads).
     Hook(crate::hook::HookView),
+    /// Add-on boomerang line (`//qsp_boom ...` without the prefix).
+    Boomerang(String),
     StopSound { ent: i32, channel: i32 },
     StaticSound(StaticSound),
     CdTrack { track: u8, loop_track: u8 },

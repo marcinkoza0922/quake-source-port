@@ -109,6 +109,7 @@ pub struct Host {
     portal_fx: crate::addons::portal_fx::Presentation,
     rail_fx: crate::addons::rail_fx::Presentation,
     hook_fx: crate::addons::hook_fx::HookFx,
+    boomerang_fx: crate::addons::boomerang_fx::Presentation,
     /// Split-screen players 2..6 (`cl_splitscreen`); player 1 is `cl`.
     pub guests: Vec<crate::splitscreen::Guest>,
     /// Player 1's gamepad (the first pad used); other pads can join.
@@ -234,6 +235,7 @@ impl Host {
             portal_fx: Default::default(),
             rail_fx: Default::default(),
             hook_fx: Default::default(),
+            boomerang_fx: Default::default(),
             guests: Vec::new(),
             p1_pad: None,
             input_target: None,

@@ -4,6 +4,8 @@
 
 pub mod hook_fx;
 mod hook_model;
+pub mod boomerang_fx;
+mod boomerang_model;
 pub mod portal_draw;
 pub mod portal_fx;
 pub mod portal_model;
