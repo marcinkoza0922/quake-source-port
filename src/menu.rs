@@ -17,6 +17,7 @@ pub use osk::*;
 mod osk_draw;
 mod draw;
 mod options;
+mod autoaim;
 mod input;
 mod page_info;
 use page_info::*;
@@ -137,6 +138,9 @@ pub struct Menu {
     /// Key bindings snapshot (host refreshes it while the menu is open).
     pub bindings: Vec<Option<String>>,
     /// Conditional Controls row, refreshed from cvars before draw/input.
+    autoaim_conflicts: Vec<i32>,
+    autoaim_prompt: bool,
+    autoaim_yes: bool,
     autoaim_mapping: std::cell::Cell<u8>,
     /// Controls row waiting for a key to bind.
     capture: Option<usize>,
@@ -232,6 +236,9 @@ impl Menu {
             servers: Vec::new(),
             searching: false,
             bindings: vec![None; MAX_KEYS],
+            autoaim_conflicts: Vec::new(),
+            autoaim_prompt: false,
+            autoaim_yes: false,
             autoaim_mapping: std::cell::Cell::new(0),
             capture: None,
             pad_ui: false,

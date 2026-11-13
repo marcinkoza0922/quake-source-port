@@ -137,14 +137,18 @@ Damage/movement assists are engine-side so they work with any progs; off in deat
   toggle acquires near the crosshair and stays enabled to reacquire after loss.
   A stable entity ID retains the target while tracking. Clicking the look stick
   cycles visible enemies (left stick when move/look are swapped), suppressing
-  its usual binding while locked. Four crosshair corner ticks indicate a lock.
+  its usual binding while locked. Corner ticks indicate a lock even with the
+  crosshair disabled (`assist_autoaim_indicator`, default on). Hold mode requires
+  a fresh press after target loss unless `assist_autoaim_reacquire` is enabled.
+  Enabling assigns free RMB/LT defaults; conflicts prompt on Back and Yes opens
+  Controls with Lock-on highlighted, preserving existing bindings.
 - The host rejects auto-aim for remote clients and whenever any nonlocal player
   joins its server, including coop. Local split-screen is allowed, including
   deathmatch (players are targets there; coop targets monsters). Each player
   has independent lock state. Death, intermission, menus, demos and disabling
-  the assist clear the lock. Targets must be alive, in range, on screen and
-  visible through the map and inline brush doors/lifts (`host::aim_vis`). FOV follows the renderer's 4:3 adaptation and local
-  viewport. Tests cover acquisition, tracking, cycling, toggling, occlusion,
+  the assist clear the lock. Targets must stay alive and in range. Acquisition
+  additionally requires on-screen visibility through the map and inline brush doors/lifts (`host::aim_vis`). FOV follows the renderer's 4:3 adaptation and local
+  viewport. Acquired locks persist through occlusion and leaving the viewport. Tests cover acquisition, tracking, cycling, toggling, occlusion,
   gating and conditional menu bindings.
 - qvm resolves QC `T_Damage` at load; each QC→QC call to it first runs
   `Host::before_damage`, which may change the damage parm or skip the call.

@@ -59,6 +59,8 @@ pub(super) fn tooltip(item: Item) -> Option<&'static str> {
         "r_watercaustics" => "Rippling light patterns on surfaces under water and slime",
         "assist_autoaim" => "Snap and track enemies in local play, including split-screen; unavailable online",
         "assist_autoaim_mode" => "Hold: keep Lock-on held. Toggle: press Auto-aim Toggle to enable automatic acquisition. Click look stick to switch targets",
+        "assist_autoaim_indicator" => "Show corner ticks at screen centre while locked, even with Crosshair off",
+        "assist_autoaim_reacquire" => "Automatically acquire another enemy while holding Lock-on after losing a target",
         "assist_autoaim_cone" => "How close an enemy must be to the crosshair for automatic acquisition in toggle mode (degrees)",
         "assist_autoaim_range" => "Maximum distance for acquiring and keeping an enemy locked",
         "aim_slowdown" => "Slows stick look while the crosshair is over an enemy",

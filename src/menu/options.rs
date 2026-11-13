@@ -12,6 +12,10 @@ impl Menu {
             Item::Toggle { cvar, .. } => {
                 let v = cv.value_of(cvar);
                 cv.set(cvar, if v != 0.0 { "0" } else { "1" });
+                if cvar == "assist_autoaim" {
+                    if v == 0.0 { self.autoaim_defaults(out); }
+                    else { self.autoaim_conflicts.clear(); }
+                }
             }
             Item::Choice { cvar, choices, .. } => {
                 let n = self.choice_count(cvar, choices);

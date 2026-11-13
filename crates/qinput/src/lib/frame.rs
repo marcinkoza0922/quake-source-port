@@ -201,6 +201,7 @@ impl Input {
             enabled: v(c.autoaim) != 0.0 && !wheel,
             allowed: self.autoaim_allowed,
             toggle: v(c.autoaim_mode) != 0.0,
+            reacquire: v(c.autoaim_reacquire) != 0.0,
             cone: v(c.autoaim_cone),
             range: v(c.autoaim_range),
             fov: self.autoaim_fov,

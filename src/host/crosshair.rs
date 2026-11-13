@@ -40,7 +40,7 @@ pub(super) fn draw_crosshair(c: &mut Canvas, scene_h: f32, cv: &qcore::cvar::Cva
         }
         v
     };
-    let bars: Vec<(f32, f32, f32, f32)> = match cv.value_of("crosshair_shape") as i32 {
+    let mut bars: Vec<(f32, f32, f32, f32)> = match cv.value_of("crosshair_shape") as i32 {
         1 => gapped(false),
         2 => vec![center_dot],
         3 => {
@@ -64,6 +64,7 @@ pub(super) fn draw_crosshair(c: &mut Canvas, scene_h: f32, cv: &qcore::cvar::Cva
         }
         _ => vec![full_h, full_v],
     };
+    if cv.value_of("crosshair") == 0.0 { bars.clear(); }
     if cv.value_of("crosshair_outline") != 0.0 {
         let o = (base * 0.5).round().max(1.0);
         for &(x, y, w, h) in &bars {
@@ -73,7 +74,7 @@ pub(super) fn draw_crosshair(c: &mut Canvas, scene_h: f32, cv: &qcore::cvar::Cva
     for (x, y, w, h) in bars {
         c.fill(x, y, w, h, color);
     }
-    if locked {
+    if locked && cv.value_of("assist_autoaim_indicator") != 0.0 {
         // Four small corner ticks preserve the chosen shape and colour.
         let r = arm + 3.0 * base;
         let tick = (2.0 * base).round().max(2.0);

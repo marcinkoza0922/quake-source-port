@@ -167,6 +167,8 @@ pub(super) const ASSISTS: &[Item] = &[
 
 pub(super) const AUTOAIM: &[Item] = &[
     Item::Choice { label: "Mode", cvar: "assist_autoaim_mode", choices: &[("Hold lock-on", 0.0), ("Toggle auto-aim", 1.0)] },
+    toggle("Lock Indicator", "assist_autoaim_indicator"),
+    toggle("Reacquire While Held", "assist_autoaim_reacquire"),
     slider("Acquisition Cone", "assist_autoaim_cone", 1.0, 30.0, 1.0),
     slider("Maximum Range", "assist_autoaim_range", 128.0, 4096.0, 128.0),
 ];

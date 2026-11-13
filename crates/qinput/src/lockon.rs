@@ -9,6 +9,7 @@ pub struct LockOnParams {
     /// The host must reject online games, including locally hosted ones.
     pub allowed: bool,
     pub toggle: bool,
+    pub reacquire: bool,
     /// Acquisition cone half-angle in degrees, for continuous mode only.
     pub cone: f32,
     pub range: f32,
@@ -19,7 +20,7 @@ pub struct LockOnParams {
 
 impl Default for LockOnParams {
     fn default() -> Self {
-        Self { enabled: false, allowed: false, toggle: false, cone: 8.0, range: 2048.0, fov: [90.0, 74.0], target_players: false }
+        Self { enabled: false, allowed: false, toggle: false, reacquire: false, cone: 8.0, range: 2048.0, fov: [90.0, 74.0], target_players: false }
     }
 }
 
@@ -31,6 +32,7 @@ pub struct LockOn {
     held: bool,
     cycle: bool,
     toggle: bool,
+    spent: bool,
 }
 
 fn dot(a: V3, b: V3) -> f32 {
@@ -95,12 +97,21 @@ impl LockOn {
         } else {
             self.active = held;
         }
+        if !held || pressed { self.spent = false; }
         if !self.active {
             self.target = None;
             return None;
         }
         // IDs survive compaction of the host's live-target list.
-        let current = self.target.and_then(|id| ctx.targets.iter().find(|t| t.id == id && geometry(p, ctx, angles, t).is_some()));
+        let previous = self.target;
+        let current = previous.and_then(|id| ctx.targets.iter().find(|t| t.id == id && {
+            let d = [0, 1, 2].map(|i| t.center()[i] - ctx.eye[i]);
+            dot(d, d).sqrt() <= p.range.max(0.0)
+                && (t.kind != TargetKind::Player || p.target_players)
+        }));
+        if previous.is_some() && current.is_none() && !p.toggle && !p.reacquire {
+            self.spent = true;
+        }
         self.target = current.map(|t| t.id);
         if cycle_pressed && let Some(current) = self.target {
             // Stable ID order means repeated presses visit every visible enemy.
@@ -108,6 +119,7 @@ impl LockOn {
             self.target = eligible().filter(|t| t.id > current).min_by_key(|t| t.id)
                 .or_else(|| eligible().min_by_key(|t| t.id)).map(|t| t.id).or(Some(current));
         }
+        if self.spent && !p.toggle && !p.reacquire { return None; }
         if self.target.is_none() {
             self.target = ctx.targets.iter().filter_map(|t| {
                 let (distance, angle) = geometry(p, ctx, angles, t)?;
@@ -199,7 +211,7 @@ mod tests {
         assert!(!s.active);
     }
     #[test]
-    fn occlusion_and_death_clear_target() {
+    fn occlusion_keeps_lock_and_death_requires_fresh_press() {
         struct Wall;
         impl Visibility for Wall {
             fn visible(&self, _: V3, _: V3) -> bool { false }
@@ -209,11 +221,23 @@ mod tests {
         let mut s = LockOn::default();
         s.update(&params(), Some(&c), [0.0; 3], true, false);
         c.vis = &Wall;
-        assert!(s.update(&params(), Some(&c), [0.0; 3], true, false).is_none());
+        assert!(s.update(&params(), Some(&c), [0.0; 3], true, false).is_some());
+        assert_eq!(s.target, Some(1));
         c.vis = &NoWorld;
         s.update(&params(), Some(&c), [0.0; 3], true, false);
         assert!(s.update(&params(), Some(&ctx(&[])), [0.0; 3], true, false).is_none());
         assert_eq!(s.target, None);
+        assert!(s.update(&params(), Some(&c), [0.0; 3], true, false).is_none());
+        s.update(&params(), Some(&c), [0.0; 3], false, false);
+        assert!(s.update(&params(), Some(&c), [0.0; 3], true, false).is_some());
+    }
+    #[test]
+    fn hold_can_opt_into_reacquisition() {
+        let p = LockOnParams { reacquire: true, ..params() };
+        let mut s = LockOn::default();
+        s.update(&p, Some(&ctx(&[target(1, [100.0, 0.0, 0.0])])), [0.0; 3], true, false);
+        s.update(&p, Some(&ctx(&[target(2, [150.0, 0.0, 0.0])])), [0.0; 3], true, false);
+        assert_eq!(s.target, Some(2));
     }
     #[test]
     fn follows_motion_without_switching_to_closer_enemy() {

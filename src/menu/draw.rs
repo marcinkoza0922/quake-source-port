@@ -163,6 +163,7 @@ impl Menu {
         self.draw_hints(c);
         self.draw_back(c);
         c.reset_origin();
+        if self.autoaim_prompt { self.draw_autoaim_prompt(c); }
         c.scale = base_scale;
     }
 

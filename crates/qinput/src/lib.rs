@@ -216,6 +216,8 @@ cvars! {
     autoaim = "assist_autoaim", "0";
     autoaim_mode = "assist_autoaim_mode", "0";
     autoaim_cone = "assist_autoaim_cone", "8";
+    autoaim_indicator = "assist_autoaim_indicator", "1";
+    autoaim_reacquire = "assist_autoaim_reacquire", "0";
     autoaim_range = "assist_autoaim_range", "2048";
     aim_assist = "aim_assist", "1";
     aim_cone = "aim_cone", "6";

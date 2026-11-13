@@ -6,6 +6,7 @@ impl Menu {
     pub fn mouse_move(&mut self, pos: (f32, f32), cv: &mut Cvars) -> Option<&'static str> {
         self.sync_autoaim_mapping(cv);
         self.mouse = Some(pos);
+        if self.autoaim_prompt { return None; }
         if let (Some(i), Screen::OptionsPage(p)) = (self.slider_drag, self.screen) {
             self.set_slider(self.page_item(p, i), pos.0, cv);
             return None;
@@ -37,6 +38,10 @@ impl Menu {
     pub fn key(&mut self, key: i32, cv: &mut Cvars, server_active: bool) -> Vec<Action> {
         self.sync_autoaim_mapping(cv);
         let mut out = Vec::new();
+        if self.autoaim_prompt {
+            self.autoaim_prompt_key(key, cv, &mut out);
+            return out;
+        }
         if let Some(row) = self.capture.take() {
             if self.screen != Screen::OptionsPage(Page::Controls) || key == K_ESCAPE {
                 out.push(Action::Sound("misc/menu3.wav"));
@@ -286,6 +291,11 @@ impl Menu {
                 }
             }
             Screen::OptionsPage(p) => {
+                if back && !self.autoaim_conflicts.is_empty() && cv.value_of("assist_autoaim") != 0.0 {
+                    self.autoaim_prompt = true;
+                    self.autoaim_yes = false;
+                    return out;
+                }
                 if back {
                     if p == Page::Setup {
                         out.push(Action::Command(Self::setup_commands(cv)));
