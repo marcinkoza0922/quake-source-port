@@ -41,26 +41,6 @@ impl Host {
         }
     }
 
-    /// Join or drop split-screen guests to match `cl_splitscreen` once
-    /// player 1 is on the local server.
-    fn sync_guests(&mut self) {
-        let on = self.local.is_some_and(|i| self.server.core.clients.get(i).is_some_and(|c| c.active));
-        if !on {
-            return;
-        }
-        let want = self.cv("cl_splitscreen").max(1.0) as usize;
-        if want == 1 && self.guests.is_empty() {
-            return;
-        }
-        if let Some(w) = crate::splitscreen::sync(&mut self.guests, &mut self.server, want) {
-            self.con.print(&w);
-            // Don't retry every frame: settle on what fits.
-            let n = (self.guests.len() + 1).to_string();
-            self.server.core.cvars.set("cl_splitscreen", &n);
-        }
-        self.drain_server_log();
-    }
-
     pub(super) fn disconnect_client(&mut self) {
         if let Some(mut n) = self.net_client.take() {
             n.disconnect(self.realtime);

@@ -4,6 +4,37 @@ use super::*;
 use qrender::{RenderEntity, SplitView};
 
 impl Host {
+    /// Join or drop split-screen guests to match `cl_splitscreen` once
+    /// player 1 is on the local server.
+    pub(super) fn sync_guests(&mut self) {
+        let on = self.local.is_some_and(|i| self.server.core.clients.get(i).is_some_and(|c| c.active));
+        if !on {
+            return;
+        }
+        let mut want = self.cv("cl_splitscreen").max(1.0) as usize;
+        if self.server.core.maxclients() == 1 && want > 1 {
+            // Single player after a split-screen game: back to one player.
+            self.server.core.cvars.set("cl_splitscreen", "1");
+            want = 1;
+        }
+        if want == 1 && self.guests.is_empty() {
+            return;
+        }
+        let warn = crate::splitscreen::sync(&mut self.guests, &mut self.server, want);
+        for g in self.guests.iter_mut().filter(|g| g.input.bindings.iter().all(Option::is_none)) {
+            // Guests share player 1's binds (gamepad binds in practice).
+            g.input.bindings = self.input.bindings.clone();
+            g.input.gamepad_connected = true;
+        }
+        if let Some(w) = warn {
+            self.con.print(&w);
+            // Don't retry every frame: settle on what fits.
+            let n = (self.guests.len() + 1).to_string();
+            self.server.core.cvars.set("cl_splitscreen", &n);
+        }
+        self.drain_server_log();
+    }
+
     /// One view per local player once a guest is in the game. `ents` holds
     /// player 1's entities (drawn in every view); entities only a guest's
     /// client knows about (outside player 1's PVS, or player 1's own body)

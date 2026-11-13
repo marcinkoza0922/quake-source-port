@@ -138,6 +138,7 @@ impl Host {
         if let Some(imp) = self.wheel.update(held, in_game && alive && self.demo.is_none(), aim, &self.cl) {
             self.pend_impulse = imp;
         }
+        self.guest_moves(ft);
         let timescale = self.wheel_timescale() as f64;
         if self.cl.signon == 4 {
             let sp = self.move_speeds();
@@ -236,6 +237,7 @@ impl Host {
             for g in &mut self.guests {
                 g.feed(&mut self.server);
             }
+            self.guest_sounds();
         }
         self.poll_remote();
         self.poll_qw();
@@ -302,6 +304,13 @@ impl Host {
                 l.ambient_levels = bsp.leafs.get(leaf).map(|lf| lf.ambient_level);
             }
             l.underwater = self.contents(v.origin) <= crate::view::CONTENTS_WATER;
+        }
+        // Split-screen: every other local player is a listener too.
+        for g in self.guests.iter().filter(|g| g.cl.signon == 4).take(qsound::MAX_OTHER_LISTENERS) {
+            let Some(e) = g.cl.entities.get(g.cl.viewentity) else { continue };
+            let ear = [e.origin[0], e.origin[1], e.origin[2] + g.cl.viewheight];
+            l.others[l.num_others] = (ear, g.cl.viewentity as i32);
+            l.num_others += 1;
         }
         snd.set_water_fx(l.underwater);
         snd.update(l);

@@ -5,7 +5,6 @@
 //! dropped to match `cl_splitscreen` (total local players, 1..6).
 
 use qclient::{ClientEvent, ClientState, UserCmd};
-use qnet::protocol::CLC_STRINGCMD;
 use qserver::{ClientMove, Server};
 
 pub const MAX_LOCAL_PLAYERS: usize = 6;
@@ -20,6 +19,14 @@ pub struct Guest {
     pub view: crate::view::ViewState,
     /// Damage and bonus-flash events for `view`, applied by the host.
     pub view_events: Vec<ClientEvent>,
+    /// This player's binds and button state (driven by `pad`).
+    pub input: qinput::Input,
+    /// SDL id of the gamepad that plays this guest; `None` until one joins.
+    pub pad: Option<u32>,
+    pub hud_fade: crate::sbar::HudFade,
+    /// Sound events this frame; the host plays those player 1's client
+    /// can't have heard.
+    pub sounds: Vec<ClientEvent>,
 }
 
 impl Guest {
@@ -30,7 +37,18 @@ impl Guest {
         // Distinct shirt/pants so local players tell each other apart.
         let c = ((n * 2) % 14) as i32;
         let slot = sv.connect_local_as(&cl.name, c * 16 + c)?;
-        let mut g = Self { slot, cl, cmd: UserCmd::default(), view: Default::default(), view_events: Vec::new() };
+        let input = qinput::Input::new(&mut sv.core.cvars);
+        let mut g = Self {
+            slot,
+            cl,
+            cmd: UserCmd::default(),
+            view: Default::default(),
+            view_events: Vec::new(),
+            input,
+            pad: None,
+            hud_fade: Default::default(),
+            sounds: Vec::new(),
+        };
         g.feed(sv);
         Some(g)
     }
@@ -51,12 +69,12 @@ impl Guest {
                 return;
             }
         }
-        // Prints, sounds and stufftext belong to player 1's host for now;
-        // per-player HUD and messages come later.
+        // Prints and stufftext belong to player 1's host.
         for e in self.cl.take_events() {
             match e {
                 ClientEvent::Disconnect => self.cl = ClientState::new(),
                 ClientEvent::Damage { .. } | ClientEvent::BonusFlash => self.view_events.push(e),
+                ClientEvent::Sound { .. } | ClientEvent::TempSound { .. } => self.sounds.push(e),
                 _ => {}
             }
         }
@@ -65,7 +83,7 @@ impl Guest {
     /// Send queued string commands and this tic's move to the server.
     pub fn send(&mut self, sv: &mut Server) {
         let out = self.cl.take_reliable_out();
-        for s in string_cmds(&out) {
+        for s in crate::host::string_cmds(&out) {
             let low = s.trim_start().to_ascii_lowercase();
             // connect_local runs the signon itself.
             if !["prespawn", "spawn", "begin"].iter().any(|p| low.starts_with(p)) {
@@ -91,17 +109,6 @@ impl Guest {
             self.cmd.impulse = 0;
         }
     }
-}
-
-fn string_cmds(out: &[u8]) -> Vec<String> {
-    let mut v = Vec::new();
-    let mut p = 0;
-    while p < out.len() && out[p] as i32 == CLC_STRINGCMD as i32 {
-        let end = out[p + 1..].iter().position(|&b| b == 0).map_or(out.len(), |e| p + 1 + e);
-        v.push(String::from_utf8_lossy(&out[p + 1..end]).into_owned());
-        p = end + 1;
-    }
-    v
 }
 
 /// Join or drop guests so there are `want - 1` of them (player 1 is the

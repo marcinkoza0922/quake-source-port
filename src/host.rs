@@ -28,6 +28,9 @@ mod demo;
 mod mapswitch;
 mod render;
 mod split;
+mod split_input;
+#[cfg(test)]
+mod split_tests;
 mod shader;
 mod saves;
 mod death;
@@ -102,6 +105,11 @@ pub struct Host {
     hud_fade: crate::sbar::HudFade,
     /// Split-screen players 2..6 (`cl_splitscreen`); player 1 is `cl`.
     pub guests: Vec<crate::splitscreen::Guest>,
+    /// Player 1's gamepad (the first pad used); other pads can join.
+    p1_pad: Option<u32>,
+    /// While a guest pad's event runs: binds act on that guest's input.
+    input_target: Option<usize>,
+    guest_cbuf: Cbuf,
     /// Label family of the last connected gamepad.
     pad_family: crate::glyphs::Family,
     /// Modern menu text/shape atlas (`crate::font`).
@@ -212,6 +220,9 @@ impl Host {
             captions: Default::default(),
             hud_fade: Default::default(),
             guests: Vec::new(),
+            p1_pad: None,
+            input_target: None,
+            guest_cbuf: Cbuf::new(),
             pad_family: Default::default(),
             ui_text: Default::default(),
             rumble: None,
@@ -439,7 +450,7 @@ fn relaunch_args(cmdline: &[String]) -> Vec<String> {
 }
 
 /// The strings of the clc_stringcmd messages in `out`.
-fn string_cmds(out: &[u8]) -> Vec<String> {
+pub(crate) fn string_cmds(out: &[u8]) -> Vec<String> {
     let mut v = Vec::new();
     let mut p = 0;
     while p < out.len() && out[p] == CLC_STRINGCMD {
@@ -465,17 +476,6 @@ fn qw_userinfo(q: &mut crate::qw::QwClient, cmd: &str) {
     }
 }
 
-#[cfg(test)]
-mod relaunch_tests {
-    #[test]
-    fn strips_game_and_commands() {
-        let v = |s: &str| s.split(' ').map(String::from).collect::<Vec<_>>();
-        let out = super::relaunch_args(&v("-basedir /q -hipnotic -game foo +map e1m1 +skill 3 -width 800 -height 600"));
-        assert_eq!(out, v("-basedir /q -width 800 -height 600"));
-        assert_eq!(super::relaunch_args(&v("+delay 3 screenshot x -window")), v("-window"));
-    }
-}
-
 /// Mod_PointInLeaf on the client's copy of the world.
 fn bsp_leaf(bsp: &qformats::bsp::Bsp, p: [f32; 3]) -> usize {
     let mut n = 0i32;
@@ -489,14 +489,4 @@ fn bsp_leaf(bsp: &qformats::bsp::Bsp, p: [f32; 3]) -> usize {
 }
 
 #[cfg(test)]
-mod pad_default_tests {
-    #[test]
-    fn pad_defaults_parse() {
-        use qinput::keys::*;
-        let b = super::pad_default_binds();
-        assert!(b.contains(&(K_RTRIGGER, "+attack".into())));
-        assert!(b.contains(&(K_XBUTTON, "+weaponwheel".into())));
-        assert!(b.contains(&(K_LSHOULDER, "impulse 12".into())));
-        assert_eq!(b.len(), 11);
-    }
-}
+mod tests;

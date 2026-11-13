@@ -81,6 +81,7 @@ pub(super) const HOST_CVARS: &[(&str, &str, u32)] = &[
     // Multiplayer menu (Join / Host Game).
     ("_mp_address", "localhost", CVAR_ARCHIVE),
     ("_mp_maxplayers", "8", CVAR_ARCHIVE),
+    ("_mp_localplayers", "1", CVAR_ARCHIVE),
     ("_mp_coop", "0", CVAR_ARCHIVE),
     ("_mp_teamplay", "0", CVAR_ARCHIVE),
     ("_mp_skill", "1", CVAR_ARCHIVE),

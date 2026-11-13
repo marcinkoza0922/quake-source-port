@@ -113,6 +113,15 @@ pub struct Canvas {
 
 pub const WHITE: [f32; 4] = [1.0; 4];
 
+/// Move draws by (`dx`, `dy`) pixels (a split-screen cell's HUD into place).
+pub fn translate(list: &mut [Draw2D], dx: f32, dy: f32) {
+    for d in list {
+        let (Draw2D::Pic { x, y, .. } | Draw2D::Char { x, y, .. } | Draw2D::Fill { x, y, .. } | Draw2D::Tile { x, y, .. }) = d;
+        *x += dx;
+        *y += dy;
+    }
+}
+
 impl Canvas {
     pub fn new(w: u32, h: u32) -> Self {
         let scale = (h as f32 / 240.0).floor().clamp(1.0, 8.0);

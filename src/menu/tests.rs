@@ -92,6 +92,7 @@ mod multiplayer_tests {
             ("_cl_color", "0"),
             ("_mp_address", ""),
             ("_mp_maxplayers", "8"),
+            ("_mp_localplayers", "1"),
             ("_mp_coop", "0"),
             ("_mp_teamplay", "0"),
             ("_mp_skill", "1"),
@@ -148,13 +149,15 @@ mod multiplayer_tests {
         assert!(m.open_multiplayer("host").is_some());
         m.net_maps = ["e1m1", "dm1", "dm2"].iter().map(|n| qui::mods::MapInfo { name: n.to_string(), title: String::new() }).collect();
         m.key(K_RIGHTARROW, &mut cv, false); // 8 -> 12 players
-        m.opt_cursor = 4;
+        m.opt_cursor = 1;
+        m.key(K_RIGHTARROW, &mut cv, false); // 2 local players
+        m.opt_cursor = 5;
         m.key(K_RIGHTARROW, &mut cv, false); // frag limit 10
-        m.opt_cursor = 6;
-        m.key(K_RIGHTARROW, &mut cv, false); // dm1 (default) -> dm2
         m.opt_cursor = 7;
+        m.key(K_RIGHTARROW, &mut cv, false); // dm1 (default) -> dm2
+        m.opt_cursor = 8;
         let c = commands(&m.key(K_ENTER, &mut cv, false));
-        assert_eq!(c, "disconnect\nmaxplayers 12\ncoop 0\ndeathmatch 1\nteamplay 0\nskill 1\nfraglimit 10\ntimelimit 0\nmap dm2\n");
+        assert_eq!(c, "disconnect\nmaxplayers 12\ncl_splitscreen 2\ncoop 0\ndeathmatch 1\nteamplay 0\nskill 1\nfraglimit 10\ntimelimit 0\nmap dm2\n");
         assert_eq!(cv.by_name("_mp_map").unwrap().string, "dm2");
     }
 
