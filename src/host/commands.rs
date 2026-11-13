@@ -136,6 +136,7 @@ pub(super) fn register_commands(c: &mut Commands<Host>) {
             "graphics" => Some(Page::Graphics),
             "enhancements" => Some(Page::Enhancements),
             "impacts" => Some(Page::Impacts),
+            "shader" | "screenshader" => Some(Page::ScreenShader),
             "audio" => Some(Page::Audio),
             _ => None,
         };

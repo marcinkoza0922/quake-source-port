@@ -42,6 +42,12 @@ impl Menu {
                 *v = (*v + dir).rem_euclid(14);
                 cv.set("_cl_color", &(t * 16 + b).to_string());
             }
+            Item::ShaderPreset => {
+                let n = self.shader_presets.len() as i32 + 1;
+                let i = (self.preset_index(cv) as i32 + dir).rem_euclid(n) as usize;
+                self.set_preset(i, cv);
+            }
+            Item::ShaderParam(k) => return self.adjust_shader_param(k, dir, cv),
             Item::Map => {
                 let n = self.net_maps.len() as i32;
                 if n == 0 {
@@ -84,6 +90,7 @@ impl Menu {
                     t.chars().take(36).collect::<String>().trim_end().to_string()
                 })
                 .collect(),
+            Item::ShaderPreset => self.preset_options(),
             _ => Vec::new(),
         }
     }
@@ -96,6 +103,7 @@ impl Menu {
             Item::DisplayMode => self.pending_mode.min(MODES.len() - 1),
             Item::Resolution => self.resolutions.iter().position(|&r| r == self.pending_res).unwrap_or(0),
             Item::Map => self.host_map(cv).and_then(|m| self.net_maps.iter().position(|x| x.name == m)).unwrap_or(0),
+            Item::ShaderPreset => self.preset_index(cv),
             _ => 0,
         }
     }
@@ -113,6 +121,7 @@ impl Menu {
                     cv.set("_mp_map", &m.name.clone());
                 }
             }
+            Item::ShaderPreset => self.set_preset(i, cv),
             _ => {}
         }
     }

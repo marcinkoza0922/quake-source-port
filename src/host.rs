@@ -27,6 +27,7 @@ mod net;
 mod demo;
 mod mapswitch;
 mod render;
+mod shader;
 mod saves;
 mod death;
 mod console;
@@ -118,6 +119,7 @@ pub struct Host {
     cmdline: Vec<String>,
     last_vol: (f32, f32),
     fps: (f64, u32, f32),
+    shader: shader::ShaderState,
     fs_snapshot: (PathBuf, Vec<String>),
     stuffed: bool,
     /// The current level's exit was already written to qsp_stats.json.
@@ -221,6 +223,7 @@ impl Host {
             cmdline,
             last_vol: (-1.0, -1.0),
             fps: (0.0, 0, 0.0),
+            shader: Default::default(),
             fs_snapshot,
             stuffed: false,
             stats_recorded: false,
@@ -244,6 +247,7 @@ impl Host {
         };
         qinput::register_commands(&mut h.cmds);
         register_commands(&mut h.cmds);
+        shader::register_shader_commands(&mut h.cmds);
         h.con.forced = true;
         h.con.frac = 1.0;
         // 2026 update compat (ironwail host.c): word-wrap centerprints for mg3.

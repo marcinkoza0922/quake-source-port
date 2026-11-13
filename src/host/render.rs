@@ -2,6 +2,7 @@ use super::*;
 
 impl Host {
     pub(super) fn render(&mut self, view: Option<qrender::View>, gun: Option<qrender::RenderEntity>, ft: f32) {
+        self.sync_shader();
         let (w, h) = self.r.size();
         let mut c = Canvas::new(w, h);
         self.con.notify_time = self.cv("con_notifytime").max(0.0) as f64;
@@ -212,6 +213,7 @@ impl Host {
             water_ripples: if v("r_enhancedwater") != 0.0 && v("r_waterripples") != 0.0 { v("r_waterripples_amount").clamp(0.0, 4.0) } else { 0.0 },
             water_splashes: v("r_enhancedwater") != 0.0 && v("r_watersplash") != 0.0,
             water_caustics: if v("r_enhancedwater") != 0.0 && v("r_watercaustics") != 0.0 { v("r_watercaustics_amount").clamp(0.0, 4.0) } else { 0.0 },
+            shader_scope: v("r_shader_scope").clamp(0.0, 1.0) as u32,
             ..Settings::default()
         };
         {

@@ -162,6 +162,7 @@ impl Renderer {
             frame_count: 0,
             capture_requested: false,
             capture: None,
+            slang: None,
         };
         r.write_static_descriptors();
         r.splash_pic = r.register_pic_rgba_linear(32, 32, &water::spray_blob(32)).ok();

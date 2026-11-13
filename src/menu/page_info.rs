@@ -4,6 +4,8 @@ use super::*;
 pub(super) fn tooltip(item: Item) -> Option<&'static str> {
     let cvar = match item {
         Item::Slider { cvar, .. } | Item::Toggle { cvar, .. } | Item::Choice { cvar, .. } => cvar,
+        Item::ShaderPreset => "RetroArch slang shader on the final image: CRT, scanlines, NTSC, sharpening; add your own in <game>/shaders",
+        Item::ShaderParam(_) => "A setting of the chosen shader; arrows step it, Enter is not needed",
         _ => return None,
     };
     Some(match cvar {
@@ -49,6 +51,7 @@ pub(super) fn tooltip(item: Item) -> Option<&'static str> {
         "aim_rotation" => "Turns the view to follow a moving enemy you are aiming at",
         "a11y_reducemotion" => "Turns off view bob, strafe tilt and the camera kick when hit or firing",
         "v_flashscale" => "Strength of the full-screen flashes for damage, pickups and powerups",
+        "r_shader_scope" => "3D view keeps the HUD and menus sharp; whole screen runs them through the shader too",
         "r_colorblind" => "Shifts colors so they stay distinct for the chosen color blindness",
         "crosshair_outline" => "Dark border keeps the crosshair visible on any background",
         "cl_captions" => "Shows text for important sounds: doors, alerted enemies, secrets, pickups",
@@ -96,6 +99,7 @@ pub(super) fn page_items(p: Page) -> &'static [Item] {
         Page::Water => WATER,
         Page::Debris => DEBRIS,
         Page::Blood => BLOOD,
+        Page::ScreenShader => SCREEN_SHADER,
         Page::Mouse => MOUSE,
         Page::Controller => CONTROLLER,
         Page::Autosave => AUTOSAVE,
@@ -121,6 +125,7 @@ pub(super) fn page_name(p: Page) -> &'static str {
         Page::Impacts => "Impact Effects",
         Page::Debris => "Debris Settings",
         Page::Blood => "Blood Splatter Settings",
+        Page::ScreenShader => "Screen Shader",
         _ => PAGES.iter().find(|x| x.1 == p).map_or("", |x| x.0),
     }
 }

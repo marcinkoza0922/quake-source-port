@@ -424,6 +424,12 @@ impl Menu {
                 c.frame(VALUE_X, y - 1.0, 40.0, BOX_H - 1.0, BORDER);
                 { txt(c, VALUE_X + 48.0, y, &k.to_string()); }
             }
+            Item::ShaderPreset => {
+                label(c, "Preset");
+                let s: String = self.preset_options()[self.preset_index(cv)].chars().take(13).collect();
+                { txt(c, VALUE_X, y, &s); }
+            }
+            Item::ShaderParam(k) => self.draw_shader_param(c, y, k, cv),
             Item::Map => {
                 label(c, "Map");
                 let m = self.host_map(cv).unwrap_or_else(|| "(none)".into());

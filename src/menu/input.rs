@@ -116,7 +116,7 @@ impl Menu {
                 *c = i;
             }
             if let Screen::OptionsPage(p) = self.screen
-                && let item @ Item::Slider { .. } = self.page_item(p, i)
+                && let item @ (Item::Slider { .. } | Item::ShaderParam(_)) = self.page_item(p, i)
                 && pos.0 >= SLIDER_X.0 - 8.0
                 && pos.0 < SLIDER_X.1 + 8.0
             {

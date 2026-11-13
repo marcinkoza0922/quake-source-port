@@ -10,6 +10,8 @@ mod convert;
 mod frame;
 mod gpu;
 mod pipelines;
+mod slang;
+pub use slang::ShaderParam;
 pub mod types;
 pub(crate) mod water;
 mod world;
@@ -121,6 +123,8 @@ pub struct Renderer {
     capture_requested: bool,
     /// (buffer, width, height) of the last captured swapchain image.
     capture: Option<(Buffer, u32, u32)>,
+    /// Loaded slang preset (r_shader_preset).
+    slang: Option<slang::Slang>,
 }
 
 /// Raw byte view of plain-old-data slices.
@@ -334,6 +338,7 @@ impl Drop for Renderer {
 impl Renderer {
     fn drop_inner(&mut self) {
         self.idle();
+        self.drop_shader();
         self.free_level();
         self.destroy_targets();
         if let Some((b, _, _)) = self.capture.take() {

@@ -289,6 +289,9 @@ pub struct Settings {
     pub water_splashes: bool,
     /// r_watercaustics: animated caustics on submerged world faces (strength).
     pub water_caustics: f32,
+    /// r_shader_scope: 0 = slang preset on the 3D view only (UI drawn after
+    /// it), 1 = on the whole frame including the UI.
+    pub shader_scope: u32,
 }
 
 /// gl_texturemode names (ironwail order): (name, linear mag/min, mipmapped, linear mips).
@@ -346,6 +349,7 @@ impl Default for Settings {
             water_ripples: 0.0,
             water_splashes: false,
             water_caustics: 0.0,
+            shader_scope: 0,
         }
     }
 }
