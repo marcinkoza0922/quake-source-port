@@ -40,6 +40,8 @@ mod frame;
 mod ctx;
 mod cvars;
 use cvars::*;
+pub(crate) mod feedback;
+mod hitmarker;
 mod crosshair;
 use crosshair::*;
 mod video;
@@ -102,6 +104,8 @@ pub struct Host {
     toy: crate::addons::ToySlot,
     captions: crate::captions::Captions,
     hud_fade: crate::sbar::HudFade,
+    feedback: feedback::Feedback,
+    feedback_sounds: feedback::CueCache,
     /// Split-screen players 2..6 (`cl_splitscreen`); player 1 is `cl`.
     pub guests: Vec<crate::splitscreen::Guest>,
     /// Player 1's gamepad (the first pad used); other pads can join.
@@ -222,6 +226,8 @@ impl Host {
             toy: Default::default(),
             captions: Default::default(),
             hud_fade: Default::default(),
+            feedback: Default::default(),
+            feedback_sounds: Default::default(),
             guests: Vec::new(),
             p1_pad: None,
             input_target: None,

@@ -18,6 +18,8 @@ mod osk_draw;
 mod draw;
 mod options;
 mod autoaim;
+mod hitfeedback;
+use hitfeedback::{HIT_SOUND, KILL_SOUND};
 mod input;
 mod page_info;
 use page_info::*;
@@ -51,6 +53,8 @@ pub enum Page {
     Graphics,
     Enhancements,
     Audio,
+    HitSound,
+    KillSound,
     Accessibility,
     Hud,
     /// Sub-pages reached from an `Item::Sub` row.
@@ -80,7 +84,7 @@ pub enum Page {
 
 /// Every cvar the options pages edit (the host marks them archived).
 pub fn option_cvars() -> impl Iterator<Item = &'static str> {
-    [ADDONS, NEW_GAME_ADDONS, PORTAL_GUN, GAMEPLAY, HUD, HUD_LAYOUT, MESSAGES, ENHANCEMENTS, WATER, BLOOD, DEBRIS, IMPACTS, AUTOSAVE, ASSISTS, AUTOAIM, INPUT, MOUSE, CONTROLLER, GRAPHICS, AUDIO, ACCESSIBILITY].into_iter().flatten().filter_map(|i| match *i {
+    [ADDONS, NEW_GAME_ADDONS, PORTAL_GUN, GAMEPLAY, HUD, HUD_LAYOUT, MESSAGES, ENHANCEMENTS, WATER, BLOOD, DEBRIS, IMPACTS, AUTOSAVE, ASSISTS, AUTOAIM, INPUT, MOUSE, CONTROLLER, GRAPHICS, AUDIO, HIT_SOUND, KILL_SOUND, ACCESSIBILITY].into_iter().flatten().filter_map(|i| match *i {
         Item::Slider { cvar, .. } | Item::Toggle { cvar, .. } | Item::Choice { cvar, .. } => Some(cvar),
         _ => None,
     })

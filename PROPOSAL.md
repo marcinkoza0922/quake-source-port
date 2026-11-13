@@ -15,6 +15,17 @@ Build a testing framework to automatically traverse each level in a way that fin
 Give discrete tasks that do not interfere with each other to subagents.
 
 
+## Combat feedback
+
+HUD settings offer optional hit markers alongside crosshair controls. Each
+crosshair shape has a distinct hit marker; kills use a different color.
+Only confirmed damage to living enemies counts, including projectile and
+explosive damage. Audio settings offer hit sounds, disabled by default,
+with separate hit/kill cue editors and previews. Include a selection of the
+owner's synthesized Padwight cues, with independent volume, time stretch,
+speed, pitch, bass, treble, drive, echo and reverb for each cue. Save settings
+with the user's config and support each local split-screen player's feedback.
+
 ## Save usability
 
 Single-player autosaves rotate independently of manual/quicksaves. Gameplay settings control retention (default five, zero disables) and level-entry (on by default), timer, secret discovery, all enemies killed, and all secrets found triggers. Loading a save does not itself trigger an autosave.

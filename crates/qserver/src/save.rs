@@ -165,14 +165,14 @@ impl Server {
         l.vm.clear_edicts();
         let mut it = blocks.into_iter();
         if let Some(g) = it.next() {
-            let mut h = crate::host::Ctx { c: &mut *c, w: &mut l.world };
+            let mut h = crate::host::Ctx::new(&mut *c, &mut l.world);
             l.vm.parse_globals(&mut h, &g).map_err(|e| e.to_string())?;
         }
         let mut live = Vec::new();
         for (e, pairs) in it.enumerate() {
             let e = e as u32;
             l.vm.ed_alloc_at(e).map_err(|e| e.to_string())?;
-            let mut h = crate::host::Ctx { c: &mut *c, w: &mut l.world };
+            let mut h = crate::host::Ctx::new(&mut *c, &mut l.world);
             let p = l.vm.parse_edict(&mut h, e, &pairs).map_err(|e| e.to_string())?;
             if p.init {
                 live.push(e);
@@ -230,7 +230,7 @@ mod tests {
         // Exercise the entity parser as well as save serialization, as with
         // a colored label from a BSP or an external .ent override.
         let pairs = vec![("message".into(), qcore::text::decode(message).replace('\n', "\\n"))];
-        let mut h = crate::host::Ctx { c: &mut sv.core, w: &mut l.world };
+        let mut h = crate::host::Ctx::new(&mut sv.core, &mut l.world);
         l.vm.parse_edict(&mut h, 0, &pairs).unwrap();
         assert_eq!(l.vm.ent_str(0, ofs).unwrap(), message);
         let text = sv.save_game();

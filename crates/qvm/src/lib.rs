@@ -91,6 +91,11 @@ pub trait Host {
     fn before_damage(&mut self, _vm: &mut Vm) -> Result<bool> {
         Ok(false)
     }
+    /// Called when a non-skipped QC `T_Damage` returns, before its locals
+    /// are restored. Pair with `before_damage` to observe actual results.
+    fn after_damage(&mut self, _vm: &mut Vm) -> Result<()> {
+        Ok(())
+    }
 }
 
 pub use exec::Vm;
