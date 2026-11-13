@@ -216,6 +216,8 @@ pub(super) const GRAPHICS: &[Item] = &[
     slider("Motion Blur Amount", "r_motionblur_amount", 0.1, 2.0, 0.1),
     toggle("Enhanced Water", "r_enhancedwater"),
     Item::Sub { label: "Water Settings", page: Page::Water },
+    toggle("Enhanced Blood Splatter", "r_blood"),
+    Item::Sub { label: "Blood Splatter Settings", page: Page::Blood },
     toggle("Ragdolls & Debris", "r_debris"),
     Item::Sub { label: "Debris Settings", page: Page::Debris },
     toggle("Interpolate Animation", "r_lerpmodels"),
@@ -329,3 +331,13 @@ pub(super) const HUD_LAYOUT: &[Item] = &[
 ];
 
 pub(super) const AUDIO: &[Item] = &[slider("Sound Volume", "volume", 0.0, 1.0, 0.1), slider("Music Volume", "bgmvolume", 0.0, 1.0, 0.1)];
+
+/// Independent of the debris toggle and particle scripts.
+pub(super) const BLOOD: &[Item] = &[
+    slider("Splatter Amount", "r_blood_amount", 1.0, 12.0, 1.0),
+    slider("Splatter Size", "r_blood_size", 0.25, 3.0, 0.25),
+    slider("Lifetime (seconds)", "r_blood_lifetime", 5.0, 600.0, 5.0),
+    slider("Maximum Marks", "r_blood_maxmarks", 32.0, 2048.0, 32.0),
+    toggle("Enemy Wounds", "r_blood_wounds"),
+    toggle("Gib Surface Painting", "r_blood_gibs"),
+];

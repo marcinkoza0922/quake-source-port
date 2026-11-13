@@ -58,6 +58,7 @@ pub enum Page {
     Messages,
     Water,
     Debris,
+    Blood,
     /// Multiplayer pages (reached from Screen::Multiplayer).
     Join,
     Host,
@@ -66,7 +67,7 @@ pub enum Page {
 
 /// Every cvar the options pages edit (the host marks them archived).
 pub fn option_cvars() -> impl Iterator<Item = &'static str> {
-    [GAMEPLAY, HUD, HUD_LAYOUT, MESSAGES, WATER, AUTOSAVE, ASSISTS, INPUT, MOUSE, CONTROLLER, GRAPHICS, AUDIO, ACCESSIBILITY].into_iter().flatten().filter_map(|i| match *i {
+    [GAMEPLAY, HUD, HUD_LAYOUT, MESSAGES, WATER, BLOOD, AUTOSAVE, ASSISTS, INPUT, MOUSE, CONTROLLER, GRAPHICS, AUDIO, ACCESSIBILITY].into_iter().flatten().filter_map(|i| match *i {
         Item::Slider { cvar, .. } | Item::Toggle { cvar, .. } | Item::Choice { cvar, .. } => Some(cvar),
         _ => None,
     })

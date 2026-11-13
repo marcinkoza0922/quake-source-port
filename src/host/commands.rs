@@ -194,6 +194,14 @@ pub(super) fn register_commands(c: &mut Commands<Host>) {
         let s = h.fte.info(&h.cl);
         h.con.print(&s);
     });
+    // Cosmetic diagnostic: exercise the real blood path without a QC hit.
+    c.add("blood_test", |h, a| {
+        let distance = a.argv(1).parse::<f32>().unwrap_or(64.0).clamp(1.0, 1024.0);
+        let (forward, _, _) = qcore::math::angle_vectors(h.cl.viewangles.into());
+        let eye = qcore::math::Vec3::from(h.cl.entities.get(h.cl.viewentity).map_or([0.0; 3], |e| e.origin))
+            + qcore::math::Vec3::new(0.0, 0.0, h.cl.viewheight);
+        h.blood.debug_hits.push((eye + forward * distance, a.argv(2) == "burst"));
+    });
     // Debug: run an FTE effect 128 units in front of the view.
     c.add("fte_spawn", |h, a| {
         if a.argc() < 2 {

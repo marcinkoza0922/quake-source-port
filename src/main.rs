@@ -10,6 +10,7 @@ mod autosave;
 mod captions;
 mod console;
 mod debris;
+mod blood;
 mod demo;
 mod draw;
 mod font;

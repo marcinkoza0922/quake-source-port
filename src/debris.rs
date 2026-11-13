@@ -181,6 +181,7 @@ pub struct Debris {
     rng: Option<Rng>,
     acc: f32,
     last_time: f64,
+    blood_bursts: Vec<Vec3>,
 }
 
 /// Per-frame inputs from the host.
@@ -211,6 +212,7 @@ impl Debris {
     }
 
     pub fn update(&mut self, enabled: bool, f: Frame<'_>) {
+        self.blood_bursts.clear();
         if !enabled {
             if self.active {
                 self.clear(f.cl);
@@ -319,6 +321,17 @@ impl Debris {
         }
     }
 
+    /// Explosive dismemberments performed by the cosmetic simulation.
+    pub fn blood_bursts(&self) -> impl Iterator<Item = Vec3> + '_ {
+        self.blood_bursts.iter().copied()
+    }
+
+    /// Moving fleshy debris, including client-created gibs without an edict.
+    pub fn blood_sources(&self) -> impl Iterator<Item = (u32, Vec3)> + '_ {
+        self.bodies.iter().enumerate().filter(|(_, b)| b.trail && !b.asleep)
+            .map(|(i, b)| (0x8000_0000 + i as u32, b.pos))
+    }
+
     /// Render entities for everything simulated; ragdoll poses go to `verts`.
     pub fn entities(&mut self, out: &mut Vec<RenderEntity>, verts: &mut Vec<u32>) {
         if !self.active {
@@ -330,6 +343,7 @@ impl Debris {
             verts.extend_from_slice(&p.verts);
             out.push(RenderEntity {
                 model: c.id,
+                key: c.ent as u32,
                 origin: p.center.to_array(),
                 skin: c.skin,
                 colormap: c.colormap,
@@ -341,6 +355,7 @@ impl Debris {
         for b in &self.bodies {
             out.push(RenderEntity {
                 model: b.model,
+                key: b.ent.map_or(0, |(i, _)| i as u32),
                 origin: b.pos.to_array(),
                 angles: b.angles(),
                 frame: b.frame,

@@ -2,35 +2,35 @@ use super::*;
 
 /// Particle world over the client's map: hull-0 traces, contents, and the
 /// render faces for decal clipping.
-pub(super) struct BspWorld<'a> {
-    pub(super) bsp: &'a Bsp,
-    pub(super) cm: &'a CollisionModel,
+pub(crate) struct BspWorld<'a> {
+    pub(crate) bsp: &'a Bsp,
+    pub(crate) cm: &'a CollisionModel,
     /// Inline brush entities (doors, lifts) for traces and decals.
-    pub(super) ents: &'a [BrushEnt],
+    pub(crate) ents: &'a [BrushEnt],
 }
 
 /// A visible inline brush model entity (CL_PrepareTraceLineEntities).
 #[derive(Clone, Copy, Debug)]
-pub(super) struct BrushEnt {
-    pub(super) entity: i32,
-    pub(super) submodel: usize,
-    pub(super) origin: Vec3,
+pub(crate) struct BrushEnt {
+    pub(crate) entity: i32,
+    pub(crate) submodel: usize,
+    pub(crate) origin: Vec3,
     /// forward, right, up when rotated.
-    pub(super) axis: Option<[Vec3; 3]>,
-    pub(super) mins: Vec3,
-    pub(super) maxs: Vec3,
+    pub(crate) axis: Option<[Vec3; 3]>,
+    pub(crate) mins: Vec3,
+    pub(crate) maxs: Vec3,
 }
 
 impl BrushEnt {
     /// Entity-space point (the renderer's brush rotation, right negated).
-    pub(super) fn local(&self, p: Vec3) -> Vec3 {
+    pub(crate) fn local(&self, p: Vec3) -> Vec3 {
         let d = p - self.origin;
         match self.axis {
             Some(a) => Vec3::new(d.dot(a[0]), -d.dot(a[1]), d.dot(a[2])),
             None => d,
         }
     }
-    pub(super) fn dir_to_world(&self, v: Vec3) -> Vec3 {
+    pub(crate) fn dir_to_world(&self, v: Vec3) -> Vec3 {
         match self.axis {
             Some(a) => a[0] * v.x - a[1] * v.y + a[2] * v.z,
             None => v,
@@ -39,7 +39,7 @@ impl BrushEnt {
 }
 
 /// Brush entities of the client's frame.
-pub(super) fn brush_ents(cl: &ClientState, cm: &CollisionModel) -> Vec<BrushEnt> {
+pub(crate) fn brush_ents(cl: &ClientState, cm: &CollisionModel) -> Vec<BrushEnt> {
     let mut out = Vec::new();
     for (i, e) in cl.active_entities() {
         let Some(sub) = cl.model_name(e.model).and_then(|n| n.strip_prefix('*')).and_then(|n| n.parse::<usize>().ok()) else {
@@ -63,7 +63,7 @@ pub(super) fn brush_ents(cl: &ClientState, cm: &CollisionModel) -> Vec<BrushEnt>
     out
 }
 
-pub(super) fn fte_contents(c: i32) -> u32 {
+pub(crate) fn fte_contents(c: i32) -> u32 {
     use qpart::*;
     match c {
         -1 => FTECONTENTS_EMPTY,
