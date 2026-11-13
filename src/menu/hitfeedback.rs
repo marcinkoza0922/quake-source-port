@@ -82,3 +82,28 @@ mod tests {
         assert!(option_cvars().any(|c| c == "hud_hitmarkers"));
     }
 }
+
+#[cfg(test)]
+mod crosshair_tests {
+    use super::*;
+
+    #[test]
+    fn crosshair_editor_returns_to_hud_and_owns_all_reticle_settings() {
+        let mut menu = Menu::new();
+        let mut cv = Cvars::new();
+        let row = HUD.iter().position(|i| matches!(i, Item::Sub { page: Page::Crosshair, .. })).unwrap();
+        menu.open(Screen::OptionsPage(Page::Hud));
+        menu.opt_cursor = row;
+        menu.key(K_ENTER, &mut cv, false);
+        assert_eq!(menu.screen, Screen::OptionsPage(Page::Crosshair));
+        menu.key(K_ESCAPE, &mut cv, false);
+        assert_eq!(menu.screen, Screen::OptionsPage(Page::Hud));
+        assert_eq!(menu.opt_cursor, row);
+        for name in ["crosshair", "crosshair_shape", "crosshair_size", "crosshair_color",
+            "crosshair_outline", "hud_hitmarkers", "hitmarker_shape", "hitmarker_size",
+            "crosshair_ontarget", "crosshair_onkill", "crosshair_targetcolor", "crosshair_killcolor"] {
+            assert!(CROSSHAIR.iter().any(|i| matches!(i, Item::Toggle { cvar, .. } | Item::Choice { cvar, .. } if *cvar == name)));
+            assert!(option_cvars().any(|c| c == name));
+        }
+    }
+}

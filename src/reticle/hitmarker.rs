@@ -6,26 +6,28 @@ use qcore::cvar::Cvars;
 type Segment = ([f32; 2], [f32; 2]);
 
 /// `remaining` is the unexpired fraction of the confirmation's lifetime.
-pub(super) fn draw_hitmarker(c: &mut Canvas, scene_h: f32, cv: &Cvars, remaining: f32, kill: bool) {
-    if cv.value_of("hud_hitmarkers") == 0.0 || !remaining.is_finite() || remaining <= 0.0 {
+pub(crate) fn draw_hitmarker(c: &mut Canvas, scene_h: f32, cv: &Cvars, remaining: f32, color: [f32; 4]) {
+    if cv.value_of("hud_hitmarkers") == 0.0 { return; }
+    draw_preview(c, scene_h, cv, remaining, color);
+}
+
+/// Preview can demonstrate the configured marker while gameplay feedback is off.
+pub(crate) fn draw_preview(c: &mut Canvas, scene_h: f32, cv: &Cvars, remaining: f32, mut color: [f32; 4]) {
+    if !remaining.is_finite() || remaining <= 0.0 {
         return;
     }
     let remaining = remaining.min(1.0);
     let base = c.scale;
-    let size = cv.value_of("crosshair_size").clamp(0.5, 4.0);
+    let size = cv.value_of("hitmarker_size").clamp(0.5, 4.0);
     let center = [(c.w * 0.5).floor(), (scene_h * base * 0.5).floor()];
     let unit = size * base;
     // An outward drift helps separate each confirmation from the static reticle.
     let radius = 6.0 + (1.0 - remaining) * 2.0;
-    let segments = marker_segments(cv.value_of("crosshair_shape") as i32, radius);
+    let segments = marker_segments(cv.value_of("hitmarker_shape") as i32, radius);
     let thickness = (0.65 * unit).round().max(1.0);
     let outline = (0.5 * base).round().max(1.0);
     let alpha = (remaining * 3.0).min(1.0);
-    let color = if kill {
-        [1.0, 0.22, 0.08, alpha]
-    } else {
-        [1.0, 1.0, 1.0, alpha]
-    };
+    color[3] = alpha;
     c.scale = 1.0;
     // Paint every outline before the foreground, so adjacent strokes join cleanly.
     for (width, color) in [
@@ -44,16 +46,16 @@ pub(super) fn draw_hitmarker(c: &mut Canvas, scene_h: f32, cv: &Cvars, remaining
 fn marker_segments(shape: i32, r: f32) -> Vec<Segment> {
     let mut lines = Vec::with_capacity(8);
     match shape {
-        // Gap cross: four compact outward-facing corner brackets.
+        // Short diagonals: streaks between the separated arms.
         1 => {
+            let r = r - 4.0;
             for x in [-1.0, 1.0] {
                 for y in [-1.0, 1.0] {
-                    lines.push(([x * r, y * (r + 3.0)], [x * (r + 3.0), y * (r + 3.0)]));
-                    lines.push(([x * (r + 3.0), y * r], [x * (r + 3.0), y * (r + 3.0)]));
+                    lines.push(([x * r, y * r], [x * (r + 2.5), y * (r + 2.5)]));
                 }
             }
         }
-        // Dot: a diamond surrounding the aiming point.
+        // Diamond surrounding the aiming point.
         2 => {
             for x in [-1.0, 1.0] {
                 for y in [-1.0, 1.0] {
@@ -61,7 +63,7 @@ fn marker_segments(shape: i32, r: f32) -> Vec<Segment> {
                 }
             }
         }
-        // Cross + dot: a pair of diagonal ticks at each corner.
+        // Double diagonals: a pair of ticks at each corner.
         3 => {
             for x in [-1.0, 1.0] {
                 for y in [-1.0, 1.0] {
@@ -74,7 +76,7 @@ fn marker_segments(shape: i32, r: f32) -> Vec<Segment> {
                 }
             }
         }
-        // T: two chevrons below the otherwise open top of the reticle.
+        // Double chevrons below the aiming point.
         4 => {
             for offset in [0.0, 3.0] {
                 for x in [-1.0, 1.0] {
@@ -82,14 +84,14 @@ fn marker_segments(shape: i32, r: f32) -> Vec<Segment> {
                 }
             }
         }
-        // Box: a larger broken square, with gaps at all four corners.
+        // Broken square, with gaps at all four corners.
         5 => {
             for sign in [-1.0, 1.0] {
                 lines.push(([-r + 2.0, sign * r], [r - 2.0, sign * r]));
                 lines.push(([sign * r, -r + 2.0], [sign * r, r - 2.0]));
             }
         }
-        // Cross: diagonal ticks tucked between the + arms. Keep the same
+        // Diagonal streaks tucked between the + arms. Keep the same
         // outward drift, but start near the center rather than beyond the arms.
         _ => {
             let r = r - 3.5;
@@ -160,11 +162,11 @@ mod tests {
     fn confirmation_respects_scene_center_and_restores_scale() {
         let mut cv = Cvars::new();
         cv.register("hud_hitmarkers", "1", 0);
-        cv.register("crosshair_size", "1", 0);
-        cv.register("crosshair_shape", "0", 0);
+        cv.register("hitmarker_size", "1", 0);
+        cv.register("hitmarker_shape", "0", 0);
         let mut c = Canvas::new(960, 720);
         let scale = c.scale;
-        draw_hitmarker(&mut c, 192.0, &cv, 1.0, true);
+        draw_hitmarker(&mut c, 192.0, &cv, 1.0, [1.0; 4]);
         assert_eq!(c.scale, scale);
         let mut bounds = [f32::MAX, f32::MAX, f32::MIN, f32::MIN];
         for d in &c.list {
@@ -178,7 +180,7 @@ mod tests {
         assert!(((bounds[0] + bounds[2]) * 0.5 - 480.0).abs() <= 1.0);
         assert!(((bounds[1] + bounds[3]) * 0.5 - 288.0).abs() <= 1.0);
         c.list.clear();
-        draw_hitmarker(&mut c, 192.0, &cv, 0.0, false);
+        draw_hitmarker(&mut c, 192.0, &cv, 0.0, [1.0; 4]);
         assert!(c.list.is_empty());
     }
 }

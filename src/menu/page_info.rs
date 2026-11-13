@@ -92,7 +92,7 @@ pub(super) fn tooltip(item: Item) -> Option<&'static str> {
         "hud_damageindicator" => "Red screen edges show where damage came from: top is front, bottom is behind; Screen Flashes controls their strength",
         "r_shader_scope" => "3D view keeps the HUD and menus sharp; whole screen runs them through the shader too",
         "r_colorblind" => "Shifts colors so they stay distinct for the chosen color blindness",
-        "hud_hitmarkers" => "Flash a marker on confirmed hits; kills use a different color, and the shape follows your crosshair",
+        "hud_hitmarkers" => "Flash the selected marker on confirmed hits; colors are shared with the crosshair",
         "s_hitfeedback" => "Play your chosen hit or kill cue when you damage an enemy",
         "s_hit_length" | "s_kill_length" => "Stretch or shorten the sound while keeping its pitch",
         "s_hit_speed" | "s_kill_speed" => "Playback speed: faster sounds shorter and higher",
@@ -163,6 +163,7 @@ pub(super) fn page_items(p: Page) -> &'static [Item] {
         Page::KillSound => KILL_SOUND,
         Page::Accessibility => ACCESSIBILITY,
         Page::Hud => HUD,
+        Page::Crosshair => CROSSHAIR,
         Page::HudLayout => HUD_LAYOUT,
         Page::Messages => MESSAGES,
         Page::Water => WATER,
@@ -183,6 +184,7 @@ pub(super) fn page_items(p: Page) -> &'static [Item] {
 
 pub(super) fn page_name(p: Page) -> &'static str {
     match p {
+        Page::Crosshair => "Crosshair",
         Page::HitSound => "Hit Sound",
         Page::KillSound => "Kill Sound",
         Page::Join => "Join Game",

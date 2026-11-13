@@ -20,6 +20,7 @@ mod fte;
 mod glyphs;
 mod host;
 mod menu;
+mod reticle;
 mod modmenu;
 mod net;
 mod platform;
