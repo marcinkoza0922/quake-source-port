@@ -170,7 +170,8 @@ pub struct Bsp {
     pub faces: Vec<Face>,
     /// Mono samples, one byte each; `Face::lightofs` indexes this.
     pub lighting: Vec<u8>,
-    /// Embedded RGB samples (3 bytes per mono sample), like a `.lit` file.
+    /// Embedded RGB samples (3 bytes per mono sample), like a `.lit` file:
+    /// Quake64 lighting or a BSPX `RGBLIGHTING` lump.
     /// Only Quake64 maps carry these.
     pub rgb_lighting: Option<Vec<u8>>,
     pub clipnodes: Vec<ClipNode>,
@@ -390,7 +391,9 @@ impl Bsp {
             let (mono, rgb) = q64_lighting(lumps[LUMP_LIGHTING]);
             (mono, Some(rgb))
         } else {
-            (lumps[LUMP_LIGHTING].to_vec(), None)
+            let mono = lumps[LUMP_LIGHTING].to_vec();
+            let rgb = crate::bspx::find_lump(data, "RGBLIGHTING").filter(|l| l.len() == mono.len() * 3).map(<[u8]>::to_vec);
+            (mono, rgb)
         };
         Ok(Bsp {
             version: Some(version),

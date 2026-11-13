@@ -20,7 +20,7 @@ Living design doc. `PROPOSAL.md` says *what*; this says *how*. Update when decis
 Everything ironwail/vkQuake load: id1, hipnotic/rogue (`-hipnotic`/`-rogue` builtins quirks), MG1/MG3 (Machine Games re-release `progs`, `mg1`/`mg3` dirs, KEX extensions where the references handle them), Arcane Dimensions (fog, skyfog, `alpha`, BSP2, `colormod`-free, large entity counts, particle-heavy, func_illusionary etc.). Formats:
 
 - Archives: PAK, PK3/zip (store + deflate).
-- BSP29, BSP2, 2PSB, lit/colored (`.lit`), external `.ent` overrides, `.vis` not required.
+- BSP29, BSP2, 2PSB, lit/colored (`.lit`, else BSPX `RGBLIGHTING` via `qformats::bspx::find_lump`, else Quake64 RGB), external `.ent` overrides, `.vis` not required.
 - MDL (incl. `QuakeForge` flags, MD5 replacement models from re-release optional later), SPR/SPR32, WAD2, LMP, TGA/PCX external textures, `.skybox` (`sky` worldspawn key).
 - QuakeC progs.dat v6, FTE/QSS extensions used by AD/MG (checkextension, string builtins, `sv_protocol 999` limits).
 - Audio: WAV, OGG/FLAC/MP3 music in `music/` (decoders: `lewton` ok as a "solved" crate; mp3 via `minimp3`-class crate).
@@ -69,7 +69,7 @@ Debug visibility (`r_visibility`, session-only): `list [texture substring]` prin
 - Vulkan 1.2 baseline + dynamic rendering when available; ash, hand-written allocator (big-block suballocation; few resource types).
 - World: BSP surfaces batched into one big vertex buffer at load; per-frame visible face set from PVS + frustum culled on CPU (multithreaded mark-leaves), drawn via indirect indexed draws grouped by texture+lightmap atlas. GPU lightmap update for lightstyles (compute shader, like ironwail's approach) to avoid CPU uploads.
 - Alias models: GPU vertex lerp from packed frame buffers; instanced by model.
-- Water warp, sky (scrolling + skybox), fog (AD `fog` / worldspawn), alpha surfaces sorted, r_wateralpha / per-entity alpha, fullbrights, colored lighting, palette-accurate shading option (`r_softemu`-style).
+- Water warp, sky (scrolling + skybox), fog (AD `fog` / worldspawn), alpha surfaces sorted, r_wateralpha / per-entity alpha, fullbrights, colored lighting, palette-accurate shading option (`r_softemu`-style). Graphics menu toggles: `r_coloredlight` (default 1, archived; 0 loads only the mono lightmap, applied on the next map load) and `r_fog` (default 1, archived; 0 renders with fog density 0 but keeps the map/mod fog in `cl.fog`, so it returns immediately), plus a Sky Fog slider for `r_skyfog` (0–1, now archived).
 - Shaders: GLSL compiled with `glslc` in `build.rs` to SPIR-V, embedded.
 - Target: ≥ ironwail fps on AD large maps (ad_sepulcher, ad_tears) measured by `qbench`.
 

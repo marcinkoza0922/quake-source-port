@@ -218,6 +218,9 @@ pub(super) const GRAPHICS: &[Item] = &[
     Item::Slider { label: "Brightness", cvar: "gamma", min: 0.5, max: 1.5, step: 0.05, invert: true },
     slider("Contrast", "contrast", 1.0, 2.0, 0.1),
     toggle("Dynamic Lights", "r_dynamic"),
+    toggle("Colored Lighting", "r_coloredlight"),
+    toggle("Fog", "r_fog"),
+    slider("Sky Fog", "r_skyfog", 0.0, 1.0, 0.1),
     toggle("Interpolate Animation", "r_lerpmodels"),
     toggle("Interpolate Movement", "r_lerpmove"),
 ];

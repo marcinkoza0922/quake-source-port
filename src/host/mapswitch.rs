@@ -86,9 +86,10 @@ impl Host {
             s.event(SoundEvent::ClearStatic);
         }
         let t0 = std::time::Instant::now();
+        let colored = self.cv("r_coloredlight") != 0.0;
         let fs = &self.server.core.fs;
         let con = &mut self.con;
-        self.level = Level::load(fs, &mut self.r, self.snd.as_mut(), &mut self.cl, &mut |s| con.print(s));
+        self.level = Level::load(fs, &mut self.r, self.snd.as_mut(), &mut self.cl, colored, &mut |s| con.print(s));
         // Fog_ParseWorldspawn; an svc_fog parsed in the same batch wins.
         if self.cl.fog == qclient::Fog::default() {
             let w = self.level.world_fog;
