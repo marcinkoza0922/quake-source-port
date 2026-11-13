@@ -44,6 +44,19 @@ fn frame(h: &mut Host, aim: Option<&AimContext>) -> InputState {
 }
 
 #[test]
+fn weapon_slots_are_local_and_leave_mod_impulses_available() {
+    let mut h = host();
+    for (arg, expected) in [("1",1),("9",9),("0",10)] {
+        run(&mut h, &format!("weapon_slot {arg}\nimpulse 240\n"));
+        let state = frame(&mut h, None);
+        assert_eq!((state.weapon_slot,state.impulse),(expected,240));
+        assert_eq!(frame(&mut h,None).weapon_slot,0);
+    }
+    run(&mut h,"weapon_slot 11\n");
+    assert_eq!(frame(&mut h,None).weapon_slot,0);
+}
+
+#[test]
 fn bind_and_buttons() {
     let mut h = host();
     run(&mut h, "bind w +forward\nbind MOUSE1 +attack\nbind SPACE \"impulse 7\"\n");

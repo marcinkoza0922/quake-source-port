@@ -14,6 +14,7 @@ pub(super) const HOST_CVARS: &[(&str, &str, u32)] = &[
     ("cl_bob", "0.02", 0),
     ("cl_wheel_timescale", "0.25", CVAR_ARCHIVE),
     ("cl_paddefaults", "0", CVAR_ARCHIVE),
+    ("cl_addonslotdefaults", "0", CVAR_ARCHIVE),
     ("cl_bobcycle", "0.6", 0),
     ("cl_bobup", "0.5", 0),
     ("v_kicktime", "0.5", 0),

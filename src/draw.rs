@@ -11,6 +11,7 @@ use qcore::fs::Fs;
 use qformats::Wad;
 use qformats::image::{Pic, parse_pic};
 use qrender::{Draw2D, PicId, Renderer};
+pub(crate) mod addon_video;
 
 /// Loaded pictures by name ("sbar", "gfx/qplaque.lmp", ...).
 #[derive(Default)]
@@ -34,6 +35,15 @@ impl Pics {
     pub fn get(&mut self, fs: &Fs, r: &mut Renderer, name: &str) -> Option<(PicId, u32, u32)> {
         if let Some(p) = self.cache.get(name) {
             return *p;
+        }
+        if name.ends_with(".tga") {
+            let v = fs.open(name).and_then(|d| qformats::image::parse_tga(&d).ok())
+                .or_else(|| addon_video::frame(name))
+                .filter(|p| p.width <= 1024 && p.height <= 1024)
+                .and_then(|p| r.register_pic_rgba_linear(p.width, p.height, &p.pixels)
+                    .ok().map(|id| (id, p.width, p.height)));
+            self.cache.insert(name.to_string(), v);
+            return v;
         }
         // "path#top,bottom": the picture with player colours (menuplyr.lmp).
         if let Some((base, cols)) = name.split_once('#') {

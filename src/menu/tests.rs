@@ -428,8 +428,7 @@ fn new_game_starts_directly_unless_the_addons_box_is_ticked() {
     menu.key(K_ENTER, &mut cv, false);
     assert_eq!(cv.value_of("addon_portalgun"), 0.0);
     // Start New Game is the last row
-    menu.opt_cursor = super::pages::NEW_GAME_ADDONS.len() - 1;
-    let acts = menu.key(K_ENTER, &mut cv, false);
+    let acts = menu.key(K_F1 + 9, &mut cv, false);
     assert!(acts.iter().any(|a| matches!(a, Action::Command(c) if c.contains("map start"))));
     assert_eq!(menu.screen, Screen::None);
 
@@ -476,11 +475,11 @@ fn a_game_without_addons_cannot_gain_them_but_an_addon_game_can_adjust() {
     menu.key(K_ENTER, &mut cv, false);
     assert_eq!(cv.value_of("addon_portalgun"), 1.0);
     // portal settings stay reachable either way
-    menu.opt_cursor = 1;
+    for _ in 0..5 { menu.key(K_TAB, &mut cv, true); }
     menu.key(K_ENTER, &mut cv, true);
     assert_eq!(menu.screen, Screen::OptionsPage(Page::PortalGun));
     menu.key(K_ESCAPE, &mut cv, true);
-    assert_eq!((menu.screen, menu.opt_cursor), (Screen::OptionsPage(Page::Addons), 1));
+    assert_eq!(menu.screen, Screen::OptionsPage(Page::Addons));
     menu.key(K_ESCAPE, &mut cv, true);
     assert_eq!(menu.screen, Screen::Main);
 }

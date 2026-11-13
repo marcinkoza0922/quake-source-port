@@ -6,7 +6,8 @@ impl Menu {
     pub fn mouse_move(&mut self, pos: (f32, f32), cv: &mut Cvars) -> Option<&'static str> {
         self.sync_autoaim_mapping(cv);
         self.mouse = Some(pos);
-        if self.autoaim_prompt { return None; }
+        if self.autoaim_prompt || self.capturing() { return None; }
+        if self.addon_mouse(pos) { return None; }
         if let (Some(i), Screen::OptionsPage(p)) = (self.slider_drag, self.screen) {
             self.set_slider(self.page_item(p, i), pos.0, cv);
             return None;
@@ -40,6 +41,8 @@ impl Menu {
         sync_addon_binds(cv, server_active);
         self.sync_autoaim_mapping(cv);
         let mut out = Vec::new();
+        if self.binding_key(key, &mut out) { return out; }
+        if self.addon_key(key, cv, &mut out) { return out; }
         if self.autoaim_prompt {
             self.autoaim_prompt_key(key, cv, &mut out);
             return out;
@@ -50,19 +53,7 @@ impl Menu {
                 return out;
             }
             if let Item::Bind { cmd, .. } = self.page_item(Page::Controls, row) {
-                // two keys per device kind: a third replaces both
-                let same: Vec<i32> = keys_for(&self.bindings, cmd).into_iter().filter(|&k| is_pad_key(k) == is_pad_key(key)).collect();
-                if same.len() >= 2 && !same.contains(&key) {
-                    for k in same {
-                        out.push(Action::Command(format!("unbind \"{}\"\n", keynum_to_string(k))));
-                        self.bindings[k as usize] = None;
-                    }
-                }
-                out.push(Action::Command(bind_cmd(key, cmd)));
-                if let Some(b) = self.bindings.get_mut(key as usize) {
-                    *b = Some(cmd.to_string());
-                }
-                out.push(Action::Sound("misc/menu1.wav"));
+                self.request_binding(key, cmd, &mut out);
             }
             return out;
         }

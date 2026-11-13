@@ -23,6 +23,7 @@ use qserver::addons::{BUTTON_TOY_ALT, BUTTON_TOY_FIRE, TOY_SHIFT, Toy};
 #[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
 pub struct ToySlot {
     pub held: Option<Toy>,
+    last_slot: Option<u8>,
 }
 
 impl ToySlot {
@@ -48,6 +49,39 @@ impl ToySlot {
         self.held
     }
 
+    /// Select a weapon slot independently of its key binding. Slots 1..8
+    /// include the QC weapon first; slots 9/0 contain add-ons only. Only
+    /// real QC selections reach the server, so slot 9 never grants weapons.
+    pub fn update_slots(
+        &mut self, cv: &qcore::cvar::Cvars, enabled: &[Toy], toy_pressed: bool,
+        selection: (u8, &mut u8), active_weapon: i32,
+    ) -> Option<Toy> {
+        let (requested, impulse) = selection;
+        let explicit_slot = (1..=10).contains(&requested);
+        let slot = if explicit_slot { requested } else { *impulse };
+        if !(1..=8).contains(&slot) && !explicit_slot {
+            if *impulse != 0 || toy_pressed { self.last_slot = None; }
+            return self.update(enabled, toy_pressed, *impulse);
+        }
+        if self.held.is_some_and(|t| !enabled.contains(&t)) { self.held = None; }
+        let assigned: Vec<_> = enabled.iter().copied()
+            .filter(|t| cv.value_of(t.slot_cvar()).clamp(1.0, 10.0) as u8 == slot).collect();
+        let same_slot = self.last_slot == Some(slot);
+        let holding_here = self.held.filter(|t| assigned.contains(t));
+        let base_selected = self.held.is_none() && slot <= 8
+            && (same_slot || active_weapon == if slot == 1 { 4096 } else { 1 << (slot - 2) });
+        self.held = if let Some(t) = holding_here {
+            let next = assigned.iter().position(|&a| a == t).and_then(|i| assigned.get(i + 1)).copied();
+            // The two extra slots have no empty/base weapon entry.
+            next.or_else(|| if slot > 8 { assigned.first().copied() } else { None })
+        } else if slot > 8 || base_selected {
+            assigned.first().copied()
+        } else { None };
+        self.last_slot = Some(slot);
+        *impulse = if slot <= 8 && self.held.is_none() { slot } else { 0 };
+        self.held
+    }
+
     /// Usercmd buttons: QC's attack bit is withheld while a toy is held.
     pub fn buttons(&self, attack: bool, attack2: bool, jump: bool) -> u8 {
         let jump = (jump as u8) << 1;
@@ -65,6 +99,65 @@ impl ToySlot {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+
+    fn slot_cvars() -> qcore::cvar::Cvars {
+        let mut cv = qcore::cvar::Cvars::new();
+        for &(name, default, flags) in qserver::addons::CVARS { cv.register(name, default, flags); }
+        cv
+    }
+
+    #[test]
+    fn shared_slot_cycles_base_then_assigned_addons() {
+        let cv = slot_cvars();
+        let enabled = [Toy::Boomerang, Toy::Hookshot];
+        let mut s = ToySlot::default();
+        let mut impulse = 1;
+        assert_eq!(s.update_slots(&cv, &enabled, false, (0, &mut impulse), 4096), Some(Toy::Boomerang));
+        assert_eq!(impulse, 0);
+        impulse = 1;
+        assert_eq!(s.update_slots(&cv, &enabled, false, (0, &mut impulse), 4096), Some(Toy::Hookshot));
+        impulse = 1;
+        assert_eq!(s.update_slots(&cv, &enabled, false, (0, &mut impulse), 4096), None);
+        assert_eq!(impulse, 1);
+    }
+
+    #[test]
+    fn another_slot_selects_its_base_before_addons() {
+        let cv = slot_cvars();
+        let mut s = ToySlot::default();
+        let mut impulse = 1;
+        assert_eq!(s.update_slots(&cv, &[Toy::Boomerang], false, (0, &mut impulse), 1), None);
+        assert_eq!(impulse, 1);
+        impulse = 1;
+        assert_eq!(s.update_slots(&cv, &[Toy::Boomerang], false, (0, &mut impulse), 1), Some(Toy::Boomerang));
+        assert_eq!(impulse, 0);
+    }
+
+    #[test]
+    fn extra_slots_are_consumed_and_never_send_cheats_or_cycle_impulses() {
+        let mut cv = slot_cvars();
+        let mut s = ToySlot::default();
+        for slot in [9, 10] {
+            cv.set(Toy::PortalGun.slot_cvar(), &slot.to_string());
+            for _ in 0..2 {
+                let mut impulse = 0;
+                assert_eq!(s.update_slots(&cv, &[Toy::PortalGun], false, (slot, &mut impulse), 4096), Some(Toy::PortalGun));
+                assert_eq!(impulse, 0);
+            }
+            let mut impulse = 0;
+            s.update_slots(&cv, &[], false, (slot, &mut impulse), 4096);
+            assert_eq!((s.held, impulse), (None, 0));
+        }
+        let mut impulse = 9;
+        s.update_slots(&cv, &[], false, (0, &mut impulse), 4096);
+        assert_eq!(impulse, 9); // Explicit console cheat remains QC-owned.
+        for value in 240..=249 {
+            let mut impulse = value;
+            s.update_slots(&cv, &[], false, (0, &mut impulse), 4096);
+            assert_eq!(impulse, value); // Mods retain their entire impulse space.
+        }
+    }
 
     #[test]
     fn toy_slot_cycles_and_weapons_put_it_away() {

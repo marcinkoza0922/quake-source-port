@@ -189,6 +189,10 @@ Damage/movement assists are engine-side so they work with any progs; off in deat
 See [ADDONS.md](ADDONS.md) for the toys (`Toy` cycle order: portal gun,
 boomerang, stickybomb launcher, hookshot, railgun, then the QC weapon), goggles
 and equipment wheel, models, effects, synthesized cues, settings and commands.
+The two-column add-on browser combines looping previews, descriptions, shared
+and unique action remapping, weapon-slot assignments and parameter submenus.
+`tools/capture_addon_previews.py` regenerates embedded gameplay loops; format,
+playback and capture instructions are in [ADDONS.md](ADDONS.md).
 
 Gameplay → Viewmodels archives `r_drawviewmodel`: 0 Off, 1 Center (default),
 2 Right, 3 Left. `view::weapon::Alignment` translates every stock/mod/add-on

@@ -77,6 +77,9 @@ impl Menu {
                     c.text_center(320.0, y, label, TXT, FG);
                 }
             }
+            Screen::OptionsPage(page) if matches!(page, Page::Addons | Page::NewGameAddons) => {
+                self.draw_addon_browser(c, pic, cv, realtime, page);
+            }
             Screen::OptionsPage(page) => {
                 let p = pic("gfx/qplaque.lmp");
                 c.pic(PANEL_X - 40.0, 16.0, p);
@@ -165,11 +168,14 @@ impl Menu {
             Screen::None => {}
         }
         c.menu_layout();
-        self.draw_tooltip(c);
-        self.draw_hints(c);
+        if !matches!(self.screen, Screen::OptionsPage(Page::Addons | Page::NewGameAddons)) {
+            self.draw_tooltip(c);
+            self.draw_hints(c);
+        }
         self.draw_back(c);
         c.reset_origin();
         if self.autoaim_prompt { self.draw_autoaim_prompt(c); }
+        self.draw_binding_prompt(c);
         c.scale = base_scale;
     }
 

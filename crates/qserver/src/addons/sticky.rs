@@ -28,8 +28,6 @@ const REFIRE: f64 = 0.6;
 pub const CHARGE: f64 = 2.0;
 const SPEED_MIN: f32 = 600.0;
 const SPEED_MAX: f32 = 1400.0;
-/// Explosion damage (a rocket's 120).
-const DAMAGE: f32 = 120.0;
 const SOLID_BSP: f32 = 4.0;
 const SOLID_NOT: f32 = 0.0;
 const IT_GRENADE_LAUNCHER: f32 = 32.0;
@@ -281,7 +279,7 @@ fn step<D: Edicts + ?Sized>(b: &mut Bomb, w: &World, ents: &D, dt: f32, gravity:
     true
 }
 
-/// Rocket explosion at a bomb: QC `T_RadiusDamage(tmp, owner, 120, world)`
+/// Rocket explosion at a bomb: QC `T_RadiusDamage(tmp, owner, damage, world)`
 /// from a temporary edict, then TE_EXPLOSION and `weapons/r_exp3.wav`.
 fn explode(vm: &mut Vm, c: &mut Core, w: &mut World, b: Bomb) {
     let Ok(tmp) = vm.ed_alloc() else { return };
@@ -292,7 +290,7 @@ fn explode(vm: &mut Vm, c: &mut Core, w: &mut World, b: Bomb) {
     if rd > 0 {
         vm.set_g_i(OFS_PARM0, tmp as i32);
         vm.set_g_i(OFS_PARM0 + 3, b.owner as i32 + 1);
-        vm.set_g_f(OFS_PARM0 + 6, DAMAGE);
+        vm.set_g_f(OFS_PARM0 + 6, c.cvars.value_of("addon_sticky_damage").clamp(25.0, 300.0));
         vm.set_g_i(OFS_PARM0 + 9, 0);
         exec(vm, c, w, rd);
     }

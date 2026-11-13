@@ -495,3 +495,6 @@ pub(super) const GOGGLES: &[Item] = &[
     slider("Goggle Intensity", "addon_goggles_intensity", 0.25, 3.0, 0.25),
     slider("Goggle Noise", "addon_goggles_noise", 0.0, 2.0, 0.25),
 ];
+
+/// Stickybomb explosion balance; action mapping lives in the browser.
+pub(super) const STICKY: &[Item] = &[slider("Explosion Damage", "addon_sticky_damage", 25.0, 300.0, 25.0)];

@@ -195,7 +195,7 @@ impl Host {
             if let Some(imp) = g.wheel.update(g.input.wheel_held(), allowed, g.input.wheel_aim, &g.cl) {
                 fresh = imp;
             }
-            if let Some(t) = g.toy.update(&toys, inp.toy, fresh) {
+            if let Some(t) = g.toy.update_slots(cvars, &toys, inp.toy, (inp.weapon_slot, &mut fresh), g.cl.stats[qnet::protocol::STAT_WEAPON]) {
                 g.center_prints.push(t.name().to_string());
             }
             let buttons = g.cmd.buttons | g.toy.buttons(inp.attack, inp.attack2, inp.jump);

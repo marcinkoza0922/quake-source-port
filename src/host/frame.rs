@@ -170,15 +170,13 @@ impl Host {
         if let Some(imp) = self.wheel.update(held, in_game && alive && self.demo.is_none(), aim, &self.cl) {
             impulse = imp;
         }
-        if impulse != 0 {
-            self.pend_impulse = impulse;
-        }
         self.goggles_frame(in_game, alive);
         let toys = if self.local.is_some() { self.allowed_toys() } else { Vec::new() };
-        if let Some(t) = self.toy.update(&toys, inp.toy, impulse) {
+        if let Some(t) = self.toy.update_slots(&self.server.core.cvars, &toys, inp.toy, (inp.weapon_slot, &mut impulse), self.cl.stats[qnet::protocol::STAT_WEAPON]) {
             let (s, t, cols) = self.center_args(t.name());
             self.con.center_print(&s, t, cols);
         }
+        if impulse != 0 { self.pend_impulse = impulse; }
         self.guest_moves(ft);
         let timescale = self.wheel_timescale() as f64;
         if self.cl.signon == 4 {

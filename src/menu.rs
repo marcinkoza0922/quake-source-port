@@ -26,6 +26,9 @@ use page_info::*;
 mod scroll;
 mod actions;
 mod addons;
+mod addon_browser;
+mod addon_preview;
+mod addon_bindings;
 pub(crate) mod shader;
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
@@ -80,6 +83,7 @@ pub enum Page {
     Boomerang,
     Railgun,
     Hookshot,
+    Sticky,
     Goggles,
     /// Multiplayer pages (reached from Screen::Multiplayer).
     Join,
@@ -89,7 +93,7 @@ pub enum Page {
 
 /// Every cvar the options pages edit (the host marks them archived).
 pub fn option_cvars() -> impl Iterator<Item = &'static str> {
-    [ADDONS, NEW_GAME_ADDONS, PORTAL_GUN, BOOMERANG, HOOKSHOT, RAILGUN, GOGGLES, GAMEPLAY, HUD, CROSSHAIR, HUD_LAYOUT, MESSAGES, ENHANCEMENTS, WATER, BLOOD, DEBRIS, IMPACTS, AUTOSAVE, ASSISTS, AUTOAIM, INPUT, MOUSE, CONTROLLER, GRAPHICS, AUDIO, HIT_SOUND, KILL_SOUND, ACCESSIBILITY].into_iter().flatten().filter_map(|i| match *i {
+    [ADDONS, NEW_GAME_ADDONS, PORTAL_GUN, BOOMERANG, HOOKSHOT, RAILGUN, STICKY, GOGGLES, GAMEPLAY, HUD, CROSSHAIR, HUD_LAYOUT, MESSAGES, ENHANCEMENTS, WATER, BLOOD, DEBRIS, IMPACTS, AUTOSAVE, ASSISTS, AUTOAIM, INPUT, MOUSE, CONTROLLER, GRAPHICS, AUDIO, HIT_SOUND, KILL_SOUND, ACCESSIBILITY].into_iter().flatten().filter_map(|i| match *i {
         Item::Slider { cvar, .. } | Item::Toggle { cvar, .. } | Item::Choice { cvar, .. } => Some(cvar),
         _ => None,
     })
@@ -159,6 +163,9 @@ pub struct Menu {
     autoaim_mapping: std::cell::Cell<u8>,
     /// Controls row waiting for a key to bind.
     capture: Option<usize>,
+    addon_ui: addon_browser::Browser,
+    bind_pending: Option<(i32, &'static str)>,
+    addon_capture: Option<&'static str>,
     /// Prompts show gamepad glyphs (the pad was used last).
     /// A game is running (set by the host); add-ons are then fixed per game.
     pub game_running: bool,
@@ -258,6 +265,9 @@ impl Menu {
             autoaim_yes: false,
             autoaim_mapping: std::cell::Cell::new(0),
             capture: None,
+            addon_ui: Default::default(),
+            bind_pending: None,
+            addon_capture: None,
             game_running: false,
             pad_ui: false,
             glyphs: Glyphs { family: Family::Xbox },
@@ -306,7 +316,7 @@ impl Menu {
 
     /// Waiting for a key to bind (the host keeps sticks from moving the cursor).
     pub fn capturing(&self) -> bool {
-        self.capture.is_some() && self.screen == Screen::OptionsPage(Page::Controls)
+        self.capture.is_some() || self.addon_capture.is_some() || self.bind_pending.is_some()
     }
 
     pub fn active(&self) -> bool {
@@ -320,6 +330,8 @@ impl Menu {
         self.drag = None;
         self.slider_drag = None;
         self.capture = None;
+        self.addon_capture = None;
+        self.bind_pending = None;
         self.osk = None;
         self.quit_cursor = 0;
         self.death_cursor = 0;

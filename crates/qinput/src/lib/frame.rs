@@ -38,6 +38,7 @@ impl Input {
         s.toy = b[btn::TOY].state & 2 != 0;
         b[btn::TOY].state &= !2;
         s.impulse = std::mem::take(&mut self.impulse);
+        s.weapon_slot = std::mem::take(&mut self.weapon_slot);
         let gyro_btn = b[btn::GYRO].is_down();
         let mlook = b[btn::MLOOK].is_down() || v(c.freelook) != 0.0;
 
