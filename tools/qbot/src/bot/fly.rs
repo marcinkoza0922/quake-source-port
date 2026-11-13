@@ -268,7 +268,8 @@ impl Bot<'_> {
         ];
         for (n, face) in faces {
             'face: for dist in [17.0, 24.0, 32.0] {
-                for z in [c.z, lo.z + 24.0, hi.z - 32.0] {
+                // The last: standing on a floor flush with its top (a sill).
+                for z in [c.z, lo.z + 24.0, hi.z - 32.0, hi.z + 25.0] {
                     let p = Vec3::new(face.x, face.y, z) + n * dist;
                     // The face must look into open space, not through a wall.
                     if !self.fits(p, e, true) || self.cm.hull(0, 0).trace(p, Vec3::new(face.x, face.y, z.clamp(lo.z, hi.z))).fraction < 1.0 {

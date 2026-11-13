@@ -1,10 +1,10 @@
 {
   "ctf1": {"kills": 0, "secrets": 0, "events": 1, "exited": true},
   "r1m1": {"kills": 51, "secrets": 4, "events": 29, "exited": true},
-  "r1m2": {"kills": 60, "secrets": 4, "events": 22, "exited": true},
+  "r1m2": {"kills": 60, "secrets": 4, "events": 24, "exited": true},
   "r1m3": {"kills": 93, "secrets": 6, "events": 26, "exited": true},
-  "r1m4": {"kills": 116, "secrets": 4, "events": 50, "exited": true},
-  "r1m5": {"kills": 98, "secrets": 7, "events": 45, "exited": true},
+  "r1m4": {"kills": 116, "secrets": 4, "events": 51, "exited": true},
+  "r1m5": {"kills": 98, "secrets": 7, "events": 46, "exited": true},
   "r1m6": {"kills": 86, "secrets": 5, "events": 29, "exited": true},
   "r1m7": {"kills": 111, "secrets": 4, "events": 20, "exited": true},
   "r2m1": {"kills": 101, "secrets": 3, "events": 33, "exited": true},

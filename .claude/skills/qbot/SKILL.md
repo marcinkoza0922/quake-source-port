@@ -75,7 +75,14 @@ never just to make a regression go away.
 4. Decide: a bot gap (fix generally in `fly.rs`/`goals.rs`, rerun all three
    games) or a real level/engine problem (that's a finding: report it).
 
+hipnotic `func_spawn` keeps dormant template monsters (`spawnfunction` set)
+that never wake; they are skipped. A spawner fired by `item_hornofconjuring`
+makes a charmed ally and leaves `total_monsters` one higher (hip2m1 62/63 is
+that, not a bot gap). Doors that fire a `target` when touched open are goals
+pressed like buttons. No QC source for a mod? Disassemble the function from
+`vm.progs` (statements + `global_at_ofs` names): that's how func_spawn and the
+horn were worked out.
+
 Known residuals (2026-11-12): e1m7 closet zombies that get knocked down where
-no open spot sees them; hipnotic spawn-on-trigger monsters that never wake
-(hip2m5, hip2m6); a few buttons in id1/rogue; Shub-Niggurath in `end`
-(killed by a telefrag the bot doesn't perform).
+no open spot sees them; a few buttons in id1/rogue/hipnotic; hip1m5 shootable
+door; Shub-Niggurath in `end` (killed by a telefrag the bot doesn't perform).

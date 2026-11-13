@@ -21,9 +21,17 @@ impl Bot<'_> {
                 "trigger_changelevel" => Kind::Exit,
                 "trigger_secret" => Kind::Secret,
                 "func_button" => Kind::Button,
-                c if c.starts_with("item_") && c.contains("key") || c == "item_sigil" => Kind::Pickup,
+                // Doors opened by touch (key doors) that fire targets when
+                // they open: noclip never touches them, so press like a button.
+                "door" | "func_door" if !shootable && self.has_str(e, o.target) && !self.has_str(e, o.targetname) => Kind::Button,
+                c if c.starts_with("item_") && c.contains("key") || c == "item_sigil" || c == "item_hornofconjuring" => Kind::Pickup,
                 _ if vm.ent_f(e, o.flags) as i32 & FL_MONSTER != 0 => {
-                    if vm.ent_f(e, o.health) <= 0.0 {
+                    // hipnotic func_spawn keeps dormant templates (with
+                    // `spawnfunction` set) and only ever spawns copies.
+                    let template = solid == SOLID_NOT
+                        && vm.ent_f(e, o.takedamage) == 0.0
+                        && o.spawnfunction.is_some_and(|f| vm.ent_i(e, f) != 0);
+                    if vm.ent_f(e, o.health) <= 0.0 || template {
                         continue;
                     }
                     Kind::Monster
@@ -52,6 +60,11 @@ impl Bot<'_> {
             }
             self.goals.push(g);
         }
+    }
+
+    /// Whether string field `f` of edict `e` is set and not empty.
+    fn has_str(&self, e: u32, f: Option<usize>) -> bool {
+        f.is_some_and(|f| self.vm().ent_str(e, f).is_ok_and(|s| !s.is_empty()))
     }
 
     /// Whether the player's box overlaps edict `e`'s bounds.

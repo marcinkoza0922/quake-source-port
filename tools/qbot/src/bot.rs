@@ -115,6 +115,9 @@ struct Ofs {
     state: Option<usize>,
     items: Option<usize>,
     modelindex: Option<usize>,
+    spawnfunction: Option<usize>,
+    target: Option<usize>,
+    targetname: Option<usize>,
     attack_finished: Option<usize>,
 }
 
@@ -135,6 +138,9 @@ impl Ofs {
             state: f("state"),
             items: f("items"),
             modelindex: f("modelindex"),
+            spawnfunction: f("spawnfunction"),
+            target: f("target"),
+            targetname: f("targetname"),
             attack_finished: f("attack_finished"),
         })
     }
