@@ -32,14 +32,22 @@ Flags: `-basedir D -game G -skill N -time S -j N -out DIR -baseline F
 Output `target/qbot/report.json` per map: kills, secrets, triggers, buttons
 (incl. shootable brushes), pickups (keys, runes) as done/total, `has_exit`,
 `exited`, `failed` (one line per goal given up on: `Kind classname #ent at
-pos: why`), sim/wall time, `errors`. `cargo nextest run -p qbot` checks e1m1
+pos: why`), sim/wall time, `errors`, `unusual` (developer-log lines, see
+below). `cargo nextest run -p qbot` checks e1m1
 and e1m3 (every monster, every secret, exit); skips without data.
 
 ## Baselines
 
 `tools/qbot/baseline-<game>.json`: `{kills, secrets, events, exited}` per map
 (`events` = triggers + buttons + pickups). Fewer of anything, a lost exit, or
-any engine error prints `REGRESSION` and exits 1. Engine errors and QC errors
+any engine error prints `REGRESSION` and exits 1. Each entry also has
+`log`: the map's known developer-log lines (qbot runs `developer 1`;
+`bot/devlog.rs` drops lines every level prints). A line not in `log` prints
+`NEW-LOG map: text` and is a regression: read it before re-saving. Most
+known lines are vanilla spawn complaints (`"property 1" is not a field`,
+`walkmonster in wall`, `Bonus item fell out of level`, OBJECT ERROR dumps
+for missing targets); add a pattern to `EXPECTED` only for noise every
+level prints. Engine errors and QC errors
 are the point of the tool: treat them as real bugs.
 
 Any change to the bot can reorder goals and move a count by one or two

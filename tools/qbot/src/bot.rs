@@ -16,6 +16,7 @@ use qworld::{FL_MONSTER, MOVETYPE_NOCLIP, SOLID_BBOX, SOLID_BSP, SOLID_NOT, SOLI
 use std::collections::HashSet;
 use std::sync::Arc;
 use std::time::Instant;
+pub mod devlog;
 mod fly;
 mod goals;
 
@@ -59,6 +60,8 @@ pub struct Report {
     pub sim_time: f64,
     pub wall_time: f64,
     pub errors: Vec<String>,
+    /// Developer-log lines a level doesn't normally print (see devlog.rs).
+    pub unusual: Vec<String>,
 }
 
 impl Report {
@@ -176,6 +179,7 @@ struct Bot<'a> {
     pinned: u32,
     /// Last `setpos` to a goal that flight didn't reach.
     warped_at: f64,
+    devlog: devlog::DevLog,
     weapon: u8,
     impulses: Vec<u8>,
     intermission: Option<usize>,
@@ -192,6 +196,7 @@ pub fn run(fs: Fs, map: &str, opt: &Options) -> Report {
     // independently of where the bot aims.
     sv.command("sv_altnoclip 0");
     sv.command(&format!("sv_maxspeed {SPEED}"));
+    sv.command("developer 1");
     if let Err(e) = sv.spawn_server(map) {
         rep.errors.push(format!("spawn: {e}"));
         return rep;
@@ -227,10 +232,12 @@ pub fn run(fs: Fs, map: &str, opt: &Options) -> Report {
         pushes: 0,
         pinned: 0,
         warped_at: -100.0,
+        devlog: devlog::DevLog::default(),
         weapon: 5,
         impulses: Vec::new(),
         intermission,
     };
+    bot.drain_log();
     bot.set_noclip(true);
     bot.scan();
     bot.rep.has_exit = bot.goals.iter().any(|g| g.kind == Kind::Exit);
@@ -244,8 +251,10 @@ pub fn run(fs: Fs, map: &str, opt: &Options) -> Report {
         let line = format!("{:?} {} #{} at {:?}: {why}", g.kind, g.class, g.ent, bot.center(g.ent));
         bot.rep.failed.push(line);
     }
+    bot.drain_log();
     let st = bot.sv.stats();
     let mut rep = bot.rep;
+    rep.unusual = std::mem::take(&mut bot.devlog).finish(bot.sv.time());
     for g in &bot.goals {
         let (done, total) = match g.kind {
             Kind::Trigger => (&mut rep.triggers, &mut rep.total_triggers),
@@ -266,6 +275,13 @@ pub fn run(fs: Fs, map: &str, opt: &Options) -> Report {
 }
 
 impl Bot<'_> {
+    fn drain_log(&mut self) {
+        let t = self.sv.time();
+        for s in std::mem::take(&mut self.sv.core.log) {
+            self.devlog.feed(&s, t);
+        }
+    }
+
     fn vm(&self) -> &Vm {
         &self.sv.level.as_ref().unwrap().vm
     }
@@ -394,6 +410,7 @@ impl Bot<'_> {
         let before = self.me_origin();
         self.sv.set_move(self.c, mv);
         self.sv.frame(DT);
+        self.drain_log();
         if self.sv.level.is_none() {
             return;
         }
