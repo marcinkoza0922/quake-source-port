@@ -85,10 +85,12 @@ run with no deathmatch and no remote client (`addons::allowed`/`all_local`).
 ### Portal gun presentation
 `src/addons/portal_model.rs` loads the owner's supplied Meshy retro portal-gun
 FBX as an embedded native alias model. `assets/portal-gun/` contains compressed
-MDL geometry, a 512×512 RGB atlas and import statistics. The source's 301,018
-triangles are decimated to a 16,000-triangle budget, with triangles collapsed by
-MDL position quantization removed. The source color is baked onto a fresh UV
-layout before palette conversion; smooth lighting normals survive. The muzzle
+MDL geometry, a 512×512 RGB atlas and import statistics. The source is a
+1,354-triangle meshy-t2 Smart Topology mesh. Its hard, faceted shape is kept as is:
+the importer only decimates sources over 4,000 triangles, so this one is not
+decimated. Triangles collapsed by
+MDL position quantization are removed. The source color is baked onto a fresh UV
+layout; non-energy metal is scaled by 0.6 (`METAL_GAIN`) so overbright model lighting matches the concept, then palette-converted; smooth lighting normals survive. The muzzle
 points along +X and the full model spans 36 Quake units.
 `portal_skin.rs` remaps the imported texture to the active mod's palette once
 per level. Metal excludes fullbright indices; a source-color/UV mask supplies

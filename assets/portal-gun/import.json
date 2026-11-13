@@ -1,28 +1,28 @@
 {
-  "source": "Meshy_AI_retro_portal_gun_20261113_image-to-3d-texture_fbx.zip",
-  "source_triangles": 301018,
-  "triangles": 13603,
-  "vertices": 14661,
+  "source": "meshy_t2_portal_gun.zip",
+  "source_triangles": 1354,
+  "triangles": 1354,
+  "vertices": 1807,
   "texture_size": 512,
-  "removed_packed_degenerates": 2397,
+  "removed_packed_degenerates": 0,
   "bounds": [
     [
-      -11.989950180053711,
-      -8.3226900100708,
-      -8.845012664794922
+      -12.0,
+      -9.60066032409668,
+      -9.360288619995117
     ],
     [
-      24.0033016204834,
-      8.282045364379883,
-      8.80264949798584
+      24.0,
+      9.64958381652832,
+      9.352583885192871
     ]
   ],
   "mask_counts": {
-    "0": 257723,
-    "1": 1199,
-    "2": 620,
-    "3": 389,
-    "4": 1856,
-    "5": 357
+    "0": 253541,
+    "1": 480,
+    "2": 621,
+    "3": 109,
+    "4": 5518,
+    "5": 1875
   }
 }

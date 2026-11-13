@@ -1,5 +1,8 @@
-The project owner supplied the Meshy-generated retro portal gun on 2026-11-13
-as `Meshy_AI_retro_portal_gun_20261113_image-to-3d-texture_fbx.zip`.
+The portal gun was regenerated on 2026-11-13 with Meshy image-to-3D from the owner's
+concept render: meshy-t2 Smart Topology (target 1,500 tris, result 1,354)
+plus the meshy-n1 texture, task `01a1d654-2976-739b-adcb-b14454690097`.
+`model.fbx` and `model_base_color.png` were zipped as `meshy_t2_portal_gun.zip`
+before import, which leaves the low-poly faceted shape untouched.
 These are its converted game assets, not Quake or Valve game data.
 
 - `projector.mdl.zlib`: zlib-compressed Quake MDL v6, single pose. Its temporary
