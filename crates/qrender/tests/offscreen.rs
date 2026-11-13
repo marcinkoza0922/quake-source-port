@@ -70,6 +70,101 @@ fn start_bsp_renders_non_black() {
     // light sampling works at the start position
     let l = r.light_point(view.origin, &[]);
     assert!(l.iter().any(|&c| c > 0.0), "{l:?}");
+    // Isolation must preserve a destination view and restore the source scene
+    // exactly at a fixed camera/time, including the normal GPU culling path.
+    let portal = &qrender::portals::inspect(&bsp)[0];
+    let portal_frame = RenderFrame {
+        view: Some(View {
+            origin: std::array::from_fn(|k| portal.center[k] + portal.normal[k] * 110.0),
+            angles: [
+                0.0,
+                (-portal.normal[1]).atan2(-portal.normal[0]).to_degrees(),
+                0.0,
+            ],
+            ..view
+        }),
+        settings: Settings {
+            teleport_windows: true,
+            msaa: 2,
+            ..Default::default()
+        },
+        ..frame
+    };
+    r.render(&portal_frame).unwrap();
+    let baseline = r.read_pixels().unwrap();
+    let cmd = |words: &[&str]| words.iter().map(|w| w.to_string()).collect::<Vec<_>>();
+    assert!(
+        r.debug_visibility(&cmd(&["isolate", "0"]))
+            .contains("Isolated portal 0")
+    );
+    r.render(&portal_frame).unwrap();
+    let isolated = r.read_pixels().unwrap();
+    assert_ne!(baseline, isolated, "isolation should remove source scenery");
+    assert!(
+        isolated
+            .as_chunks::<4>()
+            .0
+            .iter()
+            .any(|p| p[..3].iter().any(|&v| v > 30)),
+        "isolation removed the portal destination"
+    );
+    r.debug_visibility(&cmd(&["isolate", "0", "110"]));
+    let relocated_frame = RenderFrame {
+        time: portal_frame.time,
+        view: Some(View {
+            origin: [0.0; 3],
+            angles: [0.0; 3],
+            ..view
+        }),
+        settings: portal_frame.settings,
+        ..Default::default()
+    };
+    r.render(&relocated_frame).unwrap();
+    assert_eq!(
+        isolated,
+        r.read_pixels().unwrap(),
+        "fixed camera followed player relocation"
+    );
+    // Suppressing soft particles must still resolve the main MSAA image.
+    // Otherwise the portal pass's scratch colour can fill the whole screen.
+    let pic = r.register_pic_rgba(1, 1, &[255; 4]).unwrap();
+    let vertices = [FteVertex::default(); 3];
+    let indices = [0, 1, 2];
+    let batches = [FteBatch {
+        pic,
+        blend: FteBlend::Blend,
+        lines: false,
+        first_index: 0,
+        num_indices: 3,
+        soft: true,
+    }];
+    let soft_frame = RenderFrame {
+        time: portal_frame.time,
+        view: portal_frame.view,
+        settings: Settings {
+            teleport_windows: true,
+            msaa: 2,
+            soft_particle_distance: 4.0,
+            ..Default::default()
+        },
+        fte_vertices: &vertices,
+        fte_indices: &indices,
+        fte_batches: &batches,
+        ..Default::default()
+    };
+    r.render(&soft_frame).unwrap();
+    assert_eq!(
+        isolated,
+        r.read_pixels().unwrap(),
+        "soft particles broke isolated scene resolve"
+    );
+    r.debug_visibility(&cmd(&["reset"]));
+    r.render(&portal_frame).unwrap();
+    assert_eq!(
+        baseline,
+        r.read_pixels().unwrap(),
+        "reset must restore source scenery"
+    );
     // 2D only frame
     r.render(&RenderFrame::default()).unwrap();
 }

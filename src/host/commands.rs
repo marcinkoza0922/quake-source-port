@@ -98,6 +98,17 @@ pub(super) fn register_commands(c: &mut Commands<Host>) {
         h.print(&format!("{} commands\n", l.len()));
     });
     c.add("quit", |h, _| h.quit = true);
+    c.add("r_visibility", |h, a| {
+        let message = h.r.debug_visibility(&a.all()[1..]);
+        h.print(&message);
+        if a.argv(1) == "isolate"
+            && let Some(entity) = h.cl.entities.get(h.cl.viewentity)
+        {
+            let mut eye = entity.origin;
+            eye[2] += h.cl.viewheight;
+            h.print(&format!("Client eye {eye:?}, angles {:?}\n", h.cl.viewangles));
+        }
+    });
     c.add("screenshot", |h, a| h.screenshot = Some(a.argv(1).to_string()));
     c.add("toggleconsole", |h, _| h.toggle_console());
     c.add("togglemenu", |h, _| {

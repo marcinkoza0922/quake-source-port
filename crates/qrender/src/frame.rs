@@ -145,7 +145,16 @@ impl Renderer {
             let px = h.saturating_sub(v.reserve_bottom) as f32 * sh as f32 / h.max(1) as f32;
             (px.round() as u32).clamp(1, sh)
         });
-        let view = fr.view.map(|v| setup_view(&v, sw, scene_h));
+        let view = fr.view.map(|mut v| {
+            if let (Some(index), Some(distance), Some(w)) =
+                (self.isolated_portal, self.isolated_distance, self.world.as_ref())
+            {
+                let p = &w.portals[index];
+                v.origin = std::array::from_fn(|k| p.center[k] + p.normal[k] * distance);
+                v.angles = [0.0, (-p.normal[1]).atan2(-p.normal[0]).to_degrees(), 0.0];
+            }
+            setup_view(&v, sw, scene_h)
+        });
         let fog = fr.fog;
         let mut portal_draws = if fr.settings.teleport_windows {
             self.prepare_portals(view.as_ref(), &mut dynw, time, alphas, &mut lm_vis)
@@ -154,13 +163,33 @@ impl Renderer {
         };
 
         if let Some(vs) = &view {
-            if let Some(wg) = self.world.as_mut()
-                && let Some((wd, cf)) = gpu_world_draw(wg, &mut dynw, vs, time, alphas, fi)
-            {
-                world_draws.push(wd);
-                cull = Some(cf);
+            if let Some(wg) = self.world.as_mut() {
+                if let Some(index) = self.isolated_portal {
+                    let p = &wg.portals[index];
+                    let surfs: Vec<_> = wg.cpu.surfaces.iter().enumerate().filter_map(|(i, s)| {
+                        let normal = if s.flipped { s.normal.map(|x| -x) } else { s.normal };
+                        (s.mins == p.mins && s.maxs == p.maxs && normal == p.normal)
+                            .then_some(i as u32)
+                    }).collect();
+                    world_draws.push(build_world_draw(
+                        wg, &mut self.buckets, &mut dynw, &surfs, false, time,
+                        alphas, 1.0, ident(), &mut lm_vis,
+                    ));
+                } else if wg.cpu.hidden_surfaces.is_empty() {
+                    if let Some((wd, cf)) = gpu_world_draw(wg, &mut dynw, vs, time, alphas, fi) {
+                        world_draws.push(wd);
+                        cull = Some(cf);
+                    }
+                } else {
+                    let surfs = wg.cpu.portal_surfaces(vs.eye);
+                    world_draws.push(build_world_draw(
+                        wg, &mut self.buckets, &mut dynw, &surfs, false, time,
+                        alphas, 1.0, ident(), &mut lm_vis,
+                    ));
+                }
             }
             for e in fr.entities {
+                if self.hidden_entities.contains(&e.key) { continue; }
                 let Some(m) = self.models.get(e.model.0 as usize) else {
                     continue;
                 };
@@ -860,7 +889,7 @@ impl Renderer {
             // pass of their own with the depth attachment read-only; the
             // viewmodel then resumes with depth writes.
             let soft_dist = st.soft_particle_distance;
-            let split = soft_dist > 0.0
+            let split = self.isolated_portal.is_none() && soft_dist > 0.0
                 && view.is_some()
                 && fte.as_ref().is_some_and(|(_, _, b)| b.iter().any(|(_, _, b)| b.soft && !b.lines));
             // load: keep earlier contents; last: the final scene pass (MSAA
@@ -916,6 +945,17 @@ impl Renderer {
                 gpu::barrier(&dev, cmd, t.depth.image, drng, old, new);
             };
             self.draw_portals(cmd, &portal_draws, &world_draws, &alias_draws, fi, scene_h);
+            if self.isolated_portal.is_some() {
+                // Destination draws above retain their scenery and entities. Only
+                // the source sheet survives in the main diagnostic view below.
+                world_draws.truncate(1);
+                alias_draws.clear();
+                sprite_draws.clear();
+                trans.clear();
+                vel_draws.clear();
+                particles = Range::default();
+                fte = None;
+            }
             begin(false, !split && !ao_on, false);
             ts(3);
             let vp_full = vk::Viewport {

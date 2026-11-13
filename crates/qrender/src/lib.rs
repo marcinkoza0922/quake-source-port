@@ -5,6 +5,7 @@
 //! one the renderer draws to an offscreen image readable with
 //! [`Renderer::read_pixels`].
 
+mod debug_visibility;
 mod convert;
 mod frame;
 mod gpu;
@@ -101,6 +102,9 @@ pub struct Renderer {
     lightmap: Option<Image>,
     dummy: Buffer,
     world: Option<WorldGpu>,
+    isolated_portal: Option<usize>,
+    isolated_distance: Option<f32>,
+    hidden_entities: std::collections::HashSet<u32>,
     models: Vec<Model>,
     pics: Vec<PicInfo>,
     /// Soft round blob for water spray puffs (big underwater-blast splashes).

@@ -19,11 +19,13 @@ impl Renderer {
         let mut portals: Vec<_> = w
             .portals
             .iter()
-            .filter(|p| {
+            .enumerate()
+            .filter(|(i, p)| {
+                self.isolated_portal.is_none_or(|index| index == *i) &&
                 dot(sub(v.eye, p.center), p.normal) > 1.0
                     && box_in_frustum(&v.frustum, p.mins, p.maxs)
             })
-            .cloned()
+            .map(|(_, p)| p.clone())
             .collect();
         portals.sort_by(|a, b| {
             dot(sub(a.center, v.eye), sub(a.center, v.eye))

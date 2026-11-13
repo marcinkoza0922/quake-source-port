@@ -5,6 +5,8 @@ impl World {
         let numleafs = bsp.models.first().map_or(0, |m| m.visleafs.max(0) as usize);
         let has_light = !bsp.lighting.is_empty();
         let mut w = World {
+            hidden_surfaces: Default::default(),
+            texture_names: bsp.textures.iter().map(|t| t.as_ref().map_or_else(String::new, |t| t.name.clone())).collect(),
             light_cache: Default::default(),
             vertices: Vec::new(),
             indices: Vec::new(),
@@ -42,6 +44,11 @@ impl World {
     /// `submodels`.
     pub fn add_brush(&mut self, bsp: &Bsp, lit: Option<&[u8]>, tex_base: u32) -> u32 {
         let first = self.submodels.len() as u32;
+        self.texture_names.resize(tex_base as usize + bsp.textures.len(), String::new());
+        for (i, texture) in bsp.textures.iter().enumerate() {
+            self.texture_names[tex_base as usize + i] =
+                texture.as_ref().map_or_else(String::new, |t| t.name.clone());
+        }
         self.append(bsp, lit, tex_base);
         first
     }
