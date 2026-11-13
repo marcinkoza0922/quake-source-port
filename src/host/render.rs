@@ -67,6 +67,13 @@ impl Host {
                 g.origin = (Vec3::from(g.origin) + cv.viewmodel.offset(v.angles)).to_array();
                 ents.push(g);
             }
+            if self.toy.held == Some(qserver::addons::Toy::Hookshot) && self.cl.intermission == 0 && self.cl.stats[0] > 0
+                && cv.viewmodel.visible() && self.cl.items & crate::sbar::IT_INVISIBILITY == 0
+                && let Some(mut g) = self.hook_fx.weapon(self.cl.viewentity.saturating_sub(1), self.cl.time, *v,
+                    &mut self.level, &self.server.core.fs, &mut self.r) {
+                g.origin = (Vec3::from(g.origin) + cv.viewmodel.offset(v.angles)).to_array();
+                ents.push(g);
+            }
             if let Some(g) = gun {
                 ents.push(g);
             }
@@ -81,6 +88,7 @@ impl Host {
                 &self.level.mapname,
             );
             self.portal_fx.frame(self.cl.time, v, &mut self.r, self.snd.as_ref(), &mut fte);
+            self.hook_fx.frame(&self.cl, self.cl.viewentity.saturating_sub(1), v, &mut self.r, &mut fte);
             self.blood.frame(
                 crate::blood::Settings::read(&self.server.core.cvars), &self.cl, &self.level,
                 &self.server.core.fs, &mut self.r, &ents, &dyn_verts,

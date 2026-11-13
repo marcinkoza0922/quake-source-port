@@ -13,6 +13,8 @@ use crate::ents::Ents;
 use crate::server::{Core, Level};
 
 pub mod fall;
+pub mod hook_surface;
+pub mod hookshot;
 pub mod portal;
 pub mod portal_move;
 pub mod save;
@@ -30,6 +32,13 @@ pub const CVARS: &[(&str, &str, u32)] = &[
     ("addon_portal_max", "4", CVAR_ARCHIVE),
     ("addon_portal_dist", "4096", CVAR_ARCHIVE),
     ("addon_portal_depth", "3", CVAR_ARCHIVE),
+    // hookshot: range and which targets latch
+    ("addon_hookshot", "1", CVAR_ARCHIVE),
+    ("addon_hook_range", "1024", CVAR_ARCHIVE),
+    ("addon_hook_wood", "1", CVAR_ARCHIVE),
+    ("addon_hook_metal", "1", CVAR_ARCHIVE),
+    ("addon_hook_stone", "1", CVAR_ARCHIVE),
+    ("addon_hook_enemies", "1", CVAR_ARCHIVE),
 ];
 
 /// Usercmd button bits (bit 0 attack and bit 1 jump are QC's).
@@ -42,10 +51,11 @@ pub const TOY_SHIFT: u8 = 4;
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum Toy {
     PortalGun,
+    Hookshot,
 }
 
 impl Toy {
-    pub const ALL: [Toy; 1] = [Toy::PortalGun];
+    pub const ALL: [Toy; 2] = [Toy::PortalGun, Toy::Hookshot];
 
     /// Wire id (1..=15).
     pub fn id(self) -> u8 {
@@ -57,12 +67,14 @@ impl Toy {
     pub fn name(self) -> &'static str {
         match self {
             Toy::PortalGun => "Portal Gun",
+            Toy::Hookshot => "Hookshot",
         }
     }
     /// Name in savegame headers.
     pub fn key(self) -> &'static str {
         match self {
             Toy::PortalGun => "portalgun",
+            Toy::Hookshot => "hookshot",
         }
     }
     pub fn from_key(key: &str) -> Option<Toy> {
@@ -72,6 +84,7 @@ impl Toy {
     pub fn cvar(self) -> &'static str {
         match self {
             Toy::PortalGun => "addon_portalgun",
+            Toy::Hookshot => "addon_hookshot",
         }
     }
     /// The toys switched on in the menu.
@@ -135,6 +148,12 @@ pub(crate) fn frame(l: &mut Level, c: &mut Core) {
         }
     }
     st.send(&mut c.clients);
+    let hook = c.cvars.value_of(Toy::Hookshot.cvar()) != 0.0;
+    let rules = hookshot::Rules::read(&c.cvars);
+    let time = l.vm.time;
+    let mut clients = std::mem::take(&mut c.clients);
+    hookshot::frame(&mut l.hooks, &l.world, &mut Ents { vm: &mut l.vm, c: &mut *c }, &mut clients, rules, hook, time);
+    c.clients = clients;
     if gun {
         fall::frame(&mut l.falls, &mut l.vm, c, &mut l.world);
     } else {
@@ -171,6 +190,7 @@ pub(crate) fn shut_down(l: &mut Level, c: &mut Core) {
     }
     st.send(&mut c.clients);
     *st = Default::default();
+    l.hooks.reset();
 }
 
 /// No remote client is connected.

@@ -158,6 +158,7 @@ impl Server {
                 crate::addons::frame(l, c);
             } else {
                 l.falls.clear();
+                l.hooks.reset();
                 if !l.portals.pairs.is_empty() {
                     crate::addons::shut_down(l, c);
                 }

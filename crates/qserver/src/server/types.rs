@@ -115,6 +115,8 @@ pub struct Level {
     pub portals: crate::addons::portal::Portals,
     /// Monster fall damage while the portal gun is on.
     pub(crate) falls: crate::addons::fall::Falls,
+    /// Hookshot state and the map's surface materials.
+    pub hooks: crate::addons::hookshot::Hooks,
 }
 
 pub struct Server {

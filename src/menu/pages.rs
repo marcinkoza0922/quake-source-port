@@ -109,12 +109,16 @@ pub(super) const CONTROLS: &[Item] = CONTROLS_ALL.split_at(CONTROLS_ALL.len() - 
 pub(super) const ADDONS: &[Item] = &[
     toggle("Portal Gun", "addon_portalgun"),
     Item::Sub { label: "Portal Gun Settings", page: Page::PortalGun },
+    toggle("Hookshot", "addon_hookshot"),
+    Item::Sub { label: "Hookshot Settings", page: Page::Hookshot },
 ];
 
 /// New Game with Add-ons ticked: choose the toys, then start.
 pub(super) const NEW_GAME_ADDONS: &[Item] = &[
     toggle("Portal Gun", "addon_portalgun"),
     Item::Sub { label: "Portal Gun Settings", page: Page::PortalGun },
+    toggle("Hookshot", "addon_hookshot"),
+    Item::Sub { label: "Hookshot Settings", page: Page::Hookshot },
     Item::Run { label: "Start New Game", run: Run::NewGame },
 ];
 
@@ -124,6 +128,14 @@ pub(super) const PORTAL_GUN: &[Item] = &[
     Item::Choice { label: "Live Portal Views", cvar: "addon_portal_max", choices: PORTAL_MAX },
     slider("Live View Distance", "addon_portal_dist", 512.0, 8192.0, 512.0),
     Item::Choice { label: "Portal Recursion", cvar: "addon_portal_depth", choices: PORTAL_DEPTH },
+];
+/// Reached from the Add-ons pages: hookshot range and what it latches onto.
+pub(super) const HOOKSHOT: &[Item] = &[
+    slider("Hookshot Range", "addon_hook_range", 256.0, 4096.0, 128.0),
+    toggle("Hook Wood", "addon_hook_wood"),
+    toggle("Hook Metal", "addon_hook_metal"),
+    toggle("Hook Stone", "addon_hook_stone"),
+    toggle("Hook Enemies", "addon_hook_enemies"),
 ];
 pub(super) const PORTAL_DEPTH: &[(&str, f32)] =
     &[("Off", 0.0), ("1", 1.0), ("2", 2.0), ("3", 3.0), ("4", 4.0), ("6", 6.0)];

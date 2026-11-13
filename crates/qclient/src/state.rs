@@ -147,6 +147,8 @@ pub enum ClientEvent {
     /// Server-confirmed damage dealt to a living enemy; kills supersede hits.
     HitFeedback { kill: bool },
     PortalEffect(PortalEffect),
+    /// A hookshot changed state (`hooks` holds the live heads).
+    Hook(crate::hook::HookView),
     StopSound { ent: i32, channel: i32 },
     StaticSound(StaticSound),
     CdTrack { track: u8, loop_track: u8 },
@@ -267,6 +269,8 @@ pub struct ClientState {
     pub(crate) stuffcmdbuf: Vec<u8>,
     /// Add-on portals from `//qsp_portal` stufftext (this engine only).
     pub portals: Vec<PortalView>,
+    /// Add-on hookshot heads from `//qsp_hook` stufftext.
+    pub hooks: Vec<crate::hook::HookView>,
     /// Reliable clc_* bytes to send (signon replies, string commands).
     pub out_reliable: SizeBuf,
     pub movemessages: u32,
@@ -353,6 +357,7 @@ impl ClientState {
             events: Vec::new(),
             stuffcmdbuf: Vec::new(),
             portals: Vec::new(),
+            hooks: Vec::new(),
             out_reliable: SizeBuf::new(MAX_MSGLEN),
             movemessages: 0,
             name: "player".into(),

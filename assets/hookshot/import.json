@@ -1,0 +1,20 @@
+{
+  "source": "meshy_t2_hookshot.zip",
+  "source_triangles": 1342,
+  "triangles": 1342,
+  "vertices": 1662,
+  "texture_size": 512,
+  "removed_packed_degenerates": 0,
+  "bounds": [
+    [
+      -4.088327884674072,
+      -3.3941495418548584,
+      -8.401894569396973
+    ],
+    [
+      25.911672592163086,
+      3.411740779876709,
+      5.3954949378967285
+    ]
+  ]
+}

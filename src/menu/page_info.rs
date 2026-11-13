@@ -35,6 +35,12 @@ pub(super) fn tooltip(item: Item) -> Option<&'static str> {
         "addon_portal_max" => "How many portals per screen show a live view; each one redraws the scene, so lower this on slow machines or in split-screen",
         "addon_portal_depth" => "How deep portals seen through other portals keep showing a live view (a hall of mirrors between facing portals); each level redraws the scene",
         "addon_portal_dist" => "Portals farther away than this are drawn as flat discs",
+        "addon_hookshot" => "A Zelda-style hookshot: fire sends a chain hook out; it latches onto hookable surfaces or enemies and reels you in; fire again to let go",
+        "addon_hook_range" => "How far the hook flies before it retracts",
+        "addon_hook_wood" => "The hook latches onto wooden surfaces (texture names like wood, crate, plank)",
+        "addon_hook_metal" => "The hook latches onto metal surfaces (metal, tech, computer panels, copper)",
+        "addon_hook_stone" => "The hook latches onto stone, brick, rock and any surface not recognised as wood or metal",
+        "addon_hook_enemies" => "Hooking an enemy pulls you to it",
         "addon_portalgun" => "A two-portal gun: fire and alt-fire place linked portals on flat walls; pick it with the Toy Slot bind (Controls)",
         "r_debris" => "Corpses go limp as ragdolls, gibs tumble and barrels throw shrapnel; shots and blasts push them (cosmetic only)",
         "r_debris_ragdolls" => "Corpses go limp and fall as ragdolls",
@@ -133,6 +139,7 @@ pub(super) fn page_items(p: Page) -> &'static [Item] {
         Page::Addons => ADDONS,
         Page::NewGameAddons => NEW_GAME_ADDONS,
         Page::PortalGun => PORTAL_GUN,
+        Page::Hookshot => HOOKSHOT,
         Page::Input => INPUT,
         Page::Graphics => GRAPHICS,
         Page::Enhancements => ENHANCEMENTS,
@@ -183,6 +190,7 @@ pub(super) fn page_name(p: Page) -> &'static str {
         Page::Addons => "Add-ons",
         Page::NewGameAddons => "New Game: Add-ons",
         Page::PortalGun => "Portal Gun",
+        Page::Hookshot => "Hookshot",
         _ => PAGES.iter().find(|x| x.1 == p).map_or("", |x| x.0),
     }
 }
