@@ -58,7 +58,7 @@ fn load_model(fs: &Fs, r: &mut Renderer, name: &str) -> Option<Model> {
 
 impl Level {
     /// Loads everything in `cl`'s precache lists; sets `cl.model_flags`.
-    pub fn load(fs: &Fs, r: &mut Renderer, snd: Option<&mut SoundSystem>, cl: &mut ClientState, print: &mut dyn FnMut(&str)) -> Level {
+    pub fn load(fs: &Fs, r: &mut Renderer, snd: Option<&mut SoundSystem>, cl: &mut ClientState, colored: bool, print: &mut dyn FnMut(&str)) -> Level {
         let mut lv = Level { mapname: cl.mapname.clone(), ..Default::default() };
         let world = cl.model_precache.get(1).cloned().unwrap_or_default();
         let bsp = fs.open(&world).and_then(|d| Bsp::parse(&d).map_err(|e| print(&format!("{world}: {e}\n"))).ok());
@@ -76,7 +76,7 @@ impl Level {
             }
             match Bsp::parse(&d) {
                 Ok(b) => {
-                    let lit = load_lit(fs, name, &b);
+                    let lit = load_lit(fs, name, &b, colored);
                     brush_names.push(name.clone());
                     brushes.push((b, lit));
                 }
@@ -85,7 +85,7 @@ impl Level {
         }
         let mut brush_models = HashMap::new();
         if let Some(b) = &bsp {
-            let lit = load_lit(fs, &world, b);
+            let lit = load_lit(fs, &world, b, colored);
             let refs: Vec<_> = brushes.iter().map(|(b, l)| (b, l.as_deref())).collect();
             match r.load_level(b, lit.as_deref(), &refs) {
                 Ok((s, ext)) => {
@@ -160,8 +160,12 @@ impl Level {
 
 /// Mod_LoadLighting: a `.lit` only applies when it comes from the same or a
 /// higher-priority game dir than the map (so id1's start.lit never lights
-/// another game's start.bsp). Falls back to embedded RGB (Quake64).
-fn load_lit(fs: &qcore::fs::Fs, bsp_path: &str, b: &Bsp) -> Option<Vec<u8>> {
+/// another game's start.bsp). Falls back to embedded RGB (Quake64, BSPX
+/// RGBLIGHTING). `colored` false (r_coloredlight 0) keeps the mono lightmap.
+fn load_lit(fs: &qcore::fs::Fs, bsp_path: &str, b: &Bsp, colored: bool) -> Option<Vec<u8>> {
+    if !colored {
+        return None;
+    }
     fs.open_companion(bsp_path, &format!("{}.lit", bsp_path.trim_end_matches(".bsp")))
         .and_then(|d| qformats::bsp::parse_lit(&d).ok())
         .filter(|l| l.len() == b.lighting.len() * 3)

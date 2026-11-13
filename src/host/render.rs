@@ -168,7 +168,10 @@ impl Host {
             }
         }
         let styles: Vec<i32> = (0..qnet::protocol::MAX_LIGHTSTYLES).map(|i| self.cl.lightstyle_value(i)).collect();
-        let fog = qrender::Fog { density: self.cl.fog.density, color: self.cl.fog.color };
+        // r_fog 0 hides fog without touching the map/mod values, so it comes back
+        // as soon as the option is turned on again.
+        let fog_on = self.cv("r_fog") != 0.0;
+        let fog = qrender::Fog { density: if fog_on { self.cl.fog.density } else { 0.0 }, color: self.cl.fog.color };
         let v = |n: &str| self.cv(n);
         let settings = Settings {
             gamma: v("gamma").clamp(0.3, 3.0),

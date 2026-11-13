@@ -4,6 +4,7 @@
 //! [`Error`], never a panic.
 
 pub mod bsp;
+pub mod bspx;
 pub mod entities;
 pub mod image;
 pub mod mdl;
