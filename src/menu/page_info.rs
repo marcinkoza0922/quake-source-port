@@ -10,6 +10,11 @@ pub(super) fn tooltip(item: Item) -> Option<&'static str> {
         _ => return None,
     };
     Some(match cvar {
+        "touch_enable" => "On-screen stick and buttons: auto shows them after a touch and hides them when another device is used",
+        "touch_sensitivity" => "How far the view turns when you drag on the right half of the screen",
+        "touch_invert" => "Dragging up looks down instead of up",
+        "touch_size" => "Size of the on-screen buttons and move stick",
+        "touch_opacity" => "How visible the on-screen controls are",
         "cl_wheel_timescale" => "Slows the game down while the weapon wheel is open",
         "r_texfilter" => "Nearest keeps crisp classic pixels; linear smooths textures",
         "r_anisotropy" => "Keeps textures sharp on floors and walls seen at steep angles",
@@ -107,6 +112,7 @@ pub(super) fn page_items(p: Page) -> &'static [Item] {
         Page::ScreenShader => SCREEN_SHADER,
         Page::Mouse => MOUSE,
         Page::Controller => CONTROLLER,
+        Page::Touch => TOUCH,
         Page::Autosave => AUTOSAVE,
         Page::Assists => ASSISTS,
         Page::Join => JOIN,
@@ -122,6 +128,7 @@ pub(super) fn page_name(p: Page) -> &'static str {
         Page::Setup => "Player Setup",
         Page::Mouse => "Mouse & Keyboard",
         Page::Controller => "Controller",
+        Page::Touch => "Touchscreen",
         Page::Autosave => "Autosave",
         Page::Assists => "Assists",
         Page::HudLayout => "Modern HUD Layout",

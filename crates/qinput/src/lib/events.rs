@@ -82,6 +82,7 @@ pub fn set_key_dest<C: InputHost>(ctx: &mut C, dest: KeyDest) {
                 key_event(ctx, k, false);
             }
         }
+        release_touch(ctx);
         let inp = ctx.input();
         inp.mouse = [0.0; 2];
         inp.accel.reset();
@@ -108,6 +109,10 @@ pub fn handle_event<C: InputHost>(ctx: &mut C, ev: InputEvent) -> Option<Routed>
     };
     if let Some(d) = dev {
         ctx.input().last_device = d;
+        if ctx.input().touch_shown {
+            ctx.input().touch_shown = false;
+            release_touch(ctx);
+        }
     }
     match ev {
         InputEvent::Key { key, down } => key_event(ctx, key, down),
@@ -167,6 +172,22 @@ pub fn handle_event<C: InputHost>(ctx: &mut C, ev: InputEvent) -> Option<Routed>
             ctx.input().gyro = [pitch, yaw];
             None
         }
+        InputEvent::Touch { id, phase, x, y, aspect } => {
+            let cvars_on = { let id = ctx.input().cv.touch_enable; ctx.cvars().value(id) != 0.0 };
+            if !cvars_on || ctx.input().dest != KeyDest::Game {
+                return None;
+            }
+            let inp = ctx.input();
+            inp.touch_shown = true;
+            inp.touch_aspect = aspect.max(0.1);
+            let size_id = inp.cv.touch_size;
+            let lay = touch::TouchLayout { aspect: aspect.max(0.1), size: ctx.cvars().value(size_id) };
+            let cmds = ctx.input().touch.event(id, phase, [x, y], &lay);
+            for c in cmds {
+                ctx.cbuf().add_text(&c);
+            }
+            None
+        }
         InputEvent::GamepadConnected(c) => {
             let inp = ctx.input();
             inp.gamepad_connected = c;
@@ -177,5 +198,12 @@ pub fn handle_event<C: InputHost>(ctx: &mut C, ev: InputEvent) -> Option<Routed>
             }
             None
         }
+    }
+}
+
+/// Lift every finger, releasing held on-screen buttons.
+pub(super) fn release_touch<C: InputHost>(ctx: &mut C) {
+    for c in ctx.input().touch.release_all() {
+        ctx.cbuf().add_text(&c);
     }
 }

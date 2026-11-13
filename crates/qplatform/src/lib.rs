@@ -127,10 +127,20 @@ pub enum Event {
     GamepadRemoved { id: u32 },
     /// Gyro in rad/s (x pitch, y yaw, z roll), only if enabled.
     GamepadGyro { id: u32, data: [f32; 3], timestamp_ns: u64 },
+    /// Touchscreen finger; `x`/`y` normalised to the window (0..1). Touches
+    /// no longer also arrive as mouse events.
+    Finger { id: u64, phase: FingerPhase, x: f32, y: f32 },
     /// Drawable (pixel) size changed.
     Resize { width: u32, height: u32 },
     FocusGained,
     FocusLost,
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum FingerPhase {
+    Down,
+    Move,
+    Up,
 }
 
 /// SDL context. Owns subsystems and opened gamepads. `!Send`/`!Sync`.
@@ -164,7 +174,9 @@ impl Platform {
     /// Like [`init`](Self::init) but sets SDL hints first, e.g.
     /// `("SDL_VIDEO_DRIVER", "dummy")`, `("SDL_AUDIO_DRIVER", "dummy")`.
     pub fn init_with_hints(hints: &[(&str, &str)]) -> Result<Self> {
-        for (k, v) in hints {
+        // touches arrive as Event::Finger; synthesised mouse clicks would
+        // fire and turn the view behind the on-screen controls
+        for (k, v) in [("SDL_TOUCH_MOUSE_EVENTS", "0")].iter().chain(hints) {
             let (k, v) = (cstring(k)?, cstring(v)?);
             // SAFETY: both pointers are valid NUL-terminated strings for the call.
             unsafe { sys::SDL_SetHint(k.as_ptr(), v.as_ptr()) };
@@ -287,6 +299,17 @@ impl Platform {
                     return None;
                 }
                 Event::GamepadGyro { id: s.which.0, data: s.data, timestamp_ns: s.sensor_timestamp }
+            }
+            T::FINGER_DOWN | T::FINGER_MOTION | T::FINGER_UP | T::FINGER_CANCELED => {
+                // SAFETY: tag is a touch finger event.
+                let f = unsafe { ev.tfinger };
+                let phase = match ty {
+                    T::FINGER_DOWN => FingerPhase::Down,
+                    T::FINGER_MOTION => FingerPhase::Move,
+                    _ => FingerPhase::Up,
+                };
+                let id = f.touchID.0.rotate_left(32) ^ f.fingerID.0;
+                Event::Finger { id, phase, x: f.x, y: f.y }
             }
             T::WINDOW_PIXEL_SIZE_CHANGED => {
                 // SAFETY: tag is a window event.

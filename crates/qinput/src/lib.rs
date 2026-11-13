@@ -5,6 +5,7 @@ pub mod aim;
 pub mod button;
 pub mod gamepad;
 pub mod keys;
+pub mod touch;
 
 use aim::{AimContext, AimParams, AimResult};
 use button::{KButton, key_arg};
@@ -100,6 +101,9 @@ pub enum InputEvent {
     /// Angular rates in rad/s: pitch (+ = tilt up), yaw (+ = turn left).
     Gyro { pitch: f32, yaw: f32 },
     GamepadConnected(bool),
+    /// Finger on the touchscreen: window-normalised position, window
+    /// width/height.
+    Touch { id: u64, phase: touch::TouchPhase, x: f32, y: f32, aspect: f32 },
 }
 
 /// Events the console/menu must handle (not routed to binds).
@@ -217,6 +221,11 @@ cvars! {
     aim_target_players = "aim_target_players", "1";
     in_toggleattack = "in_toggleattack", "0";
     in_togglerun = "in_togglerun", "0";
+    touch_enable = "touch_enable", "1";
+    touch_sensitivity = "touch_sensitivity", "1";
+    touch_size = "touch_size", "1";
+    touch_opacity = "touch_opacity", "0.5";
+    touch_invert = "touch_invert", "0";
 }
 
 /// Host context for qinput commands.
@@ -252,6 +261,12 @@ pub struct Input {
     flick: FlickStick,
     /// Last aim assist result (for HUD/debug).
     pub last_aim: AimResult,
+    pub touch: touch::TouchOverlay,
+    /// On-screen controls showing (`touch_enable 1`: since the last touch,
+    /// until another device is used).
+    pub touch_shown: bool,
+    /// Window width/height from the last touch, for the stick.
+    pub touch_aspect: f32,
 }
 
 impl Input {
@@ -277,6 +292,9 @@ impl Input {
             accel: AccelRamp::default(),
             flick: FlickStick::default(),
             last_aim: AimResult::NONE,
+            touch: touch::TouchOverlay::default(),
+            touch_shown: false,
+            touch_aspect: 16.0 / 9.0,
         }
     }
 
@@ -291,6 +309,18 @@ impl Input {
     /// Weapon wheel button held (and in game).
     pub fn wheel_held(&self) -> bool {
         self.buttons[btn::WHEEL].is_down() && self.dest == KeyDest::Game
+    }
+    /// Layout of the on-screen controls.
+    pub fn touch_layout(&self, cvars: &Cvars) -> touch::TouchLayout {
+        touch::TouchLayout { aspect: self.touch_aspect, size: cvars.value(self.cv.touch_size) }
+    }
+    /// Whether the on-screen controls should be drawn and used.
+    pub fn touch_visible(&self, cvars: &Cvars) -> bool {
+        match cvars.value(self.cv.touch_enable) as i32 {
+            0 => false,
+            1 => self.touch_shown,
+            _ => true,
+        }
     }
     pub fn key_down(&self, key: i32) -> bool {
         self.keydown.get(key as usize).copied().unwrap_or(false)
@@ -369,8 +399,6 @@ pub fn register_commands<C: InputHost>(c: &mut Commands<C>) {
     });
 }
 
-impl Input {
-}
 
 #[cfg(test)]
 mod tests;

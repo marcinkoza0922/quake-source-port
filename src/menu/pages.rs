@@ -175,6 +175,7 @@ pub(super) const AUTOSAVE: &[Item] = &[
 pub(super) const INPUT: &[Item] = &[
     Item::Sub { label: "Mouse & Keyboard", page: Page::Mouse },
     Item::Sub { label: "Controller", page: Page::Controller },
+    Item::Sub { label: "Touchscreen", page: Page::Touch },
 ];
 
 pub(super) const MOUSE: &[Item] = &[
@@ -194,6 +195,15 @@ pub(super) const CONTROLLER: &[Item] = &[
     Item::Choice { label: "Button Glyphs", cvar: "joy_glyphs", choices: GLYPHS },
 ];
 
+pub(super) const TOUCH: &[Item] = &[
+    Item::Choice { label: "Touch Controls", cvar: "touch_enable", choices: TOUCH_MODE },
+    slider("Look Speed", "touch_sensitivity", 0.25, 3.0, 0.25),
+    toggle("Invert Look", "touch_invert"),
+    slider("Button Size", "touch_size", 0.5, 2.0, 0.25),
+    slider("Opacity", "touch_opacity", 0.1, 1.0, 0.1),
+];
+
+pub(super) const TOUCH_MODE: &[(&str, f32)] = &[("off", 0.0), ("auto", 1.0), ("always", 2.0)];
 pub(super) const GLYPHS: &[(&str, f32)] = &[("auto", 0.0), ("xbox", 1.0), ("playstation", 2.0), ("nintendo", 3.0)];
 pub(super) const WHEEL_TIME: &[(&str, f32)] = &[("off", 1.0), ("half speed", 0.5), ("quarter speed", 0.25), ("10% speed", 0.1)];
 

@@ -43,6 +43,7 @@ use cvars::*;
 mod crosshair;
 use crosshair::*;
 mod video;
+mod touch;
 
 /// Server tic rate when rendering faster (ironwail-style decoupling).
 const SERVER_TIC: f64 = 1.0 / 72.0;
@@ -120,6 +121,8 @@ pub struct Host {
     fire_track: (i32, i32, i32, [f32; 3]),
     /// Held menu navigation key and when it repeats next (gamepad).
     nav_hold: Option<(i32, f64)>,
+    /// Finger working the menu (tap/drag-scroll).
+    menu_touch: Option<touch::MenuTouch>,
     last_cmd: UserCmd,
     screenshot: Option<String>,
     delayed: Vec<(f64, String)>,
@@ -228,6 +231,7 @@ impl Host {
             rumble: None,
             fire_track: (0, 0, 0, [0.0; 3]),
             nav_hold: None,
+            menu_touch: None,
             last_cmd: UserCmd::default(),
             screenshot: None,
             delayed: Vec::new(),
