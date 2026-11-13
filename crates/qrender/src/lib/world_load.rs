@@ -3,6 +3,9 @@ use super::*;
 impl Renderer {
     pub(super) fn free_level(&mut self) {
         self.idle();
+        self.hidden_entities.clear();
+        self.isolated_portal = None;
+        self.isolated_distance = None;
         for i in 0..self.textures.len() {
             if self.textures[i].as_ref().is_some_and(|t| t.level)
                 && let Some(t) = self.textures[i].take()
@@ -168,6 +171,7 @@ impl Renderer {
         }
         self.buckets = vec![Vec::new(); tex_info.len()];
         self.world = Some(WorldGpu {
+            portals: crate::portals::discover(bsp, &cpu),
             cpu,
             vbuf,
             samples,

@@ -221,6 +221,7 @@ pub(super) const ENHANCEMENTS: &[Item] = &[
     toggle("Motion Blur", "r_motionblur"),
     slider("Motion Blur Amount", "r_motionblur_amount", 0.1, 2.0, 0.1),
     toggle("Enhanced Water", "r_enhancedwater"),
+    toggle("See-through Teleporters", "r_teleportwindows"),
     Item::Sub { label: "Water Settings", page: Page::Water },
     Item::Sub { label: "Impact Effects", page: Page::Impacts },
     toggle("Enhanced Blood Splatter", "r_blood"),

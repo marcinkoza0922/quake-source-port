@@ -127,7 +127,7 @@ impl Pipelines {
                 .stage_flags(all)
         };
         let bindings = [
-            b(0, vk::DescriptorType::UNIFORM_BUFFER, 1),
+            b(0, vk::DescriptorType::UNIFORM_BUFFER_DYNAMIC, 1),
             b(1, vk::DescriptorType::COMBINED_IMAGE_SAMPLER, MAX_TEXTURES),
             b(2, vk::DescriptorType::STORAGE_BUFFER, 1),
             b(3, vk::DescriptorType::COMBINED_IMAGE_SAMPLER, 1),

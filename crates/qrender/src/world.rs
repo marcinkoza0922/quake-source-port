@@ -74,6 +74,8 @@ pub struct World {
     pub vertices: Vec<WorldVertex>,
     pub indices: Vec<u32>,
     pub surfaces: Vec<Surface>,
+    pub hidden_surfaces: std::collections::HashSet<u32>,
+    pub texture_names: Vec<String>,
     pub lm_surfs: Vec<LmSurf>,
     pub samples: Vec<u32>,
     pub atlas_layers: u32,

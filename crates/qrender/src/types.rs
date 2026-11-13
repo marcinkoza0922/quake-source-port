@@ -234,6 +234,8 @@ pub struct Settings {
     pub lavaalpha: Option<f32>,
     pub slimealpha: Option<f32>,
     pub telealpha: Option<f32>,
+    /// Opt-in destination views on linked teleporter surfaces.
+    pub teleport_windows: bool,
     /// Sky blend toward fog colour (r_skyfog).
     pub skyfog: f32,
     /// Alpha of the front sky layer (r_skyalpha).
@@ -317,6 +319,7 @@ impl Default for Settings {
             lavaalpha: None,
             slimealpha: None,
             telealpha: None,
+            teleport_windows: false,
             skyfog: 0.5,
             skyalpha: 1.0,
             dynamic: true,

@@ -3,6 +3,7 @@
 use crate::convert::group_index;
 use crate::world::{NO_LM, box_in_frustum, dot};
 use crate::*;
+mod portals;
 mod types;
 use types::*;
 mod math;
@@ -21,6 +22,11 @@ impl Renderer {
             self.create_swapchain(fr.settings.vsync)?;
         }
         self.apply_settings(&fr.settings)?;
+        if self.targets.as_ref().is_some_and(|t| t.portals.is_empty())
+            && self.world.as_ref().is_some_and(|w| !w.portals.is_empty())
+        {
+            self.create_targets()?;
+        }
         if self.targets.is_none() && (self.swap.is_some() || self.width > 0) {
             self.create_targets()?;
         }
@@ -139,17 +145,51 @@ impl Renderer {
             let px = h.saturating_sub(v.reserve_bottom) as f32 * sh as f32 / h.max(1) as f32;
             (px.round() as u32).clamp(1, sh)
         });
-        let view = fr.view.map(|v| setup_view(&v, sw, scene_h));
+        let view = fr.view.map(|mut v| {
+            if let (Some(index), Some(distance), Some(w)) =
+                (self.isolated_portal, self.isolated_distance, self.world.as_ref())
+            {
+                let p = &w.portals[index];
+                v.origin = std::array::from_fn(|k| p.center[k] + p.normal[k] * distance);
+                v.angles = [0.0, (-p.normal[1]).atan2(-p.normal[0]).to_degrees(), 0.0];
+            }
+            setup_view(&v, sw, scene_h)
+        });
         let fog = fr.fog;
+        let mut portal_draws = if fr.settings.teleport_windows {
+            self.prepare_portals(view.as_ref(), &mut dynw, time, alphas, &mut lm_vis)
+        } else {
+            Vec::new()
+        };
 
         if let Some(vs) = &view {
-            if let Some(wg) = self.world.as_mut()
-                && let Some((wd, cf)) = gpu_world_draw(wg, &mut dynw, vs, time, alphas, fi)
-            {
-                world_draws.push(wd);
-                cull = Some(cf);
+            if let Some(wg) = self.world.as_mut() {
+                if let Some(index) = self.isolated_portal {
+                    let p = &wg.portals[index];
+                    let surfs: Vec<_> = wg.cpu.surfaces.iter().enumerate().filter_map(|(i, s)| {
+                        let normal = if s.flipped { s.normal.map(|x| -x) } else { s.normal };
+                        (s.mins == p.mins && s.maxs == p.maxs && normal == p.normal)
+                            .then_some(i as u32)
+                    }).collect();
+                    world_draws.push(build_world_draw(
+                        wg, &mut self.buckets, &mut dynw, &surfs, false, time,
+                        alphas, 1.0, ident(), &mut lm_vis,
+                    ));
+                } else if wg.cpu.hidden_surfaces.is_empty() {
+                    if let Some((wd, cf)) = gpu_world_draw(wg, &mut dynw, vs, time, alphas, fi) {
+                        world_draws.push(wd);
+                        cull = Some(cf);
+                    }
+                } else {
+                    let surfs = wg.cpu.portal_surfaces(vs.eye);
+                    world_draws.push(build_world_draw(
+                        wg, &mut self.buckets, &mut dynw, &surfs, false, time,
+                        alphas, 1.0, ident(), &mut lm_vis,
+                    ));
+                }
             }
             for e in fr.entities {
+                if self.hidden_entities.contains(&e.key) { continue; }
                 let Some(m) = self.models.get(e.model.0 as usize) else {
                     continue;
                 };
@@ -174,13 +214,13 @@ impl Renderer {
                                 .map(|x| x * x)
                                 .sum::<f32>()
                                 .sqrt();
-                            if !sphere_in_frustum(&vs.frustum, e.origin, r) {
+                            if portal_draws.is_empty() && !sphere_in_frustum(&vs.frustum, e.origin, r) {
                                 continue;
                             }
                         } else {
                             let mn = [0, 1, 2].map(|i| sub_.mins[i] + e.origin[i]);
                             let mx = [0, 1, 2].map(|i| sub_.maxs[i] + e.origin[i]);
-                            if !box_in_frustum(&vs.frustum, mn, mx) {
+                            if portal_draws.is_empty() && !box_in_frustum(&vs.frustum, mn, mx) {
                                 continue;
                             }
                         }
@@ -235,7 +275,7 @@ impl Renderer {
                             None => None,
                         };
                         let radius = dynp.map_or(am.radius, |(_, d)| d.radius);
-                        if !e.viewmodel && !sphere_in_frustum(&vs.frustum, e.origin, radius) {
+                        if portal_draws.is_empty() && !e.viewmodel && !sphere_in_frustum(&vs.frustum, e.origin, radius) {
                             continue;
                         }
                         let t = time + e.syncbase as f64;
@@ -578,7 +618,11 @@ impl Renderer {
         if let Some(vs) = &view {
             let sky = self.skybox;
             let soft = softemu_params(st);
-            let ubo = FrameUbo {
+            let mut ubo = FrameUbo {
+                portal_clip: [0.0; 4],
+                portal_plane: [[0.0; 4]; 4],
+                portal_min: [[0.0; 4]; 4],
+                portal_max: [[0.0; 4]; 4],
                 viewproj: vs.vp,
                 eye: [vs.eye[0], vs.eye[1], vs.eye[2], time as f32],
                 fog: [
@@ -627,6 +671,22 @@ impl Renderer {
                     a
                 },
             };
+            for (i, portal) in portal_draws.iter_mut().enumerate() {
+                ubo.portal_plane[i] = portal.portal.plane();
+                ubo.portal_min[i] = [portal.portal.mins[0], portal.portal.mins[1], portal.portal.mins[2], self.targets.as_ref().unwrap().portals[i].1 as f32];
+                ubo.portal_max[i] = [portal.portal.maxs[0], portal.portal.maxs[1], portal.portal.maxs[2], 1.0];
+                let mut pu = ubo;
+                pu.portal_min = [[0.0; 4]; 4];
+                pu.portal_clip = portal.portal.clip();
+                pu.viewproj = mul(&vs.vp, &portal.portal.to_source());
+                let eye = portal.portal.to_destination(vs.eye);
+                pu.eye[..3].copy_from_slice(&eye);
+                let rotate = |v: [f32; 3]| { let q = portal.portal.rotate(v); [q[0], q[1], q[2], 0.0] };
+                pu.vright = rotate(vs.right);
+                pu.vup = rotate(vs.up);
+                pu.vfwd = rotate(vs.fwd);
+                dynw.write_at(portal.ubo as u64, &[pu]);
+            }
             dynw.write_at(0, &[ubo]);
             let mut lmd = LmDyn {
                 styles,
@@ -829,7 +889,7 @@ impl Renderer {
             // pass of their own with the depth attachment read-only; the
             // viewmodel then resumes with depth writes.
             let soft_dist = st.soft_particle_distance;
-            let split = soft_dist > 0.0
+            let split = self.isolated_portal.is_none() && soft_dist > 0.0
                 && view.is_some()
                 && fte.as_ref().is_some_and(|(_, _, b)| b.iter().any(|(_, _, b)| b.soft && !b.lines));
             // load: keep earlier contents; last: the final scene pass (MSAA
@@ -884,6 +944,18 @@ impl Renderer {
             let depth_layout = |old: vk::ImageLayout, new: vk::ImageLayout| {
                 gpu::barrier(&dev, cmd, t.depth.image, drng, old, new);
             };
+            self.draw_portals(cmd, &portal_draws, &world_draws, &alias_draws, fi, scene_h);
+            if self.isolated_portal.is_some() {
+                // Destination draws above retain their scenery and entities. Only
+                // the source sheet survives in the main diagnostic view below.
+                world_draws.truncate(1);
+                alias_draws.clear();
+                sprite_draws.clear();
+                trans.clear();
+                vel_draws.clear();
+                particles = Range::default();
+                fte = None;
+            }
             begin(false, !split && !ao_on, false);
             ts(3);
             let vp_full = vk::Viewport {
@@ -925,7 +997,7 @@ impl Renderer {
                 dev.cmd_begin_rendering(cmd, &ri);
                 dev.cmd_set_viewport(cmd, 0, &[vp_scene]);
                 dev.cmd_set_scissor(cmd, 0, &[area_scene]);
-                dev.cmd_bind_descriptor_sets(cmd, gfx, p.layout, 0, &set, &[]);
+                dev.cmd_bind_descriptor_sets(cmd, gfx, p.layout, 0, &set, &[0]);
                 body();
                 dev.cmd_end_rendering(cmd);
                 gpu::barrier(
@@ -938,7 +1010,7 @@ impl Renderer {
                 );
             };
             if view.is_some() {
-                dev.cmd_bind_descriptor_sets(cmd, gfx, p.layout, 0, &set, &[]);
+                dev.cmd_bind_descriptor_sets(cmd, gfx, p.layout, 0, &set, &[0]);
                 dev.cmd_set_depth_bias(cmd, 0.0, 0.0, 0.0);
                 let draw_world = |wd: &WorldDraw, cats: &[(Range, vk::Pipeline)]| {
                     dev.cmd_bind_index_buffer(cmd, wd.ibuf.unwrap_or(dynbuf), 0, vk::IndexType::UINT32);
@@ -1029,7 +1101,7 @@ impl Renderer {
                     begin(true, !split, false);
                     dev.cmd_set_viewport(cmd, 0, &[vp_scene]);
                     dev.cmd_set_scissor(cmd, 0, &[area_scene]);
-                    dev.cmd_bind_descriptor_sets(cmd, gfx, p.layout, 0, &set, &[]);
+                    dev.cmd_bind_descriptor_sets(cmd, gfx, p.layout, 0, &set, &[0]);
                     dev.cmd_set_depth_bias(cmd, 0.0, 0.0, 0.0);
                 }
                 // translucent: world liquids first, then sorted entities
@@ -1083,7 +1155,7 @@ impl Renderer {
                     let restore = |vp| {
                         dev.cmd_set_viewport(cmd, 0, &[vp]);
                         dev.cmd_set_scissor(cmd, 0, &[area_scene]);
-                        dev.cmd_bind_descriptor_sets(cmd, gfx, p.layout, 0, &set, &[]);
+                        dev.cmd_bind_descriptor_sets(cmd, gfx, p.layout, 0, &set, &[0]);
                         dev.cmd_set_depth_bias(cmd, 0.0, 0.0, 0.0);
                     };
                     if split {
@@ -1222,7 +1294,7 @@ impl Renderer {
             dev.cmd_begin_rendering(cmd, &ri);
             dev.cmd_set_viewport(cmd, 0, &[vp_full]);
             dev.cmd_set_scissor(cmd, 0, &[area]);
-            dev.cmd_bind_descriptor_sets(cmd, gfx, p.layout, 0, &set, &[]);
+            dev.cmd_bind_descriptor_sets(cmd, gfx, p.layout, 0, &set, &[0]);
             dev.cmd_bind_pipeline(cmd, gfx, p.post);
             push(bytes_of(&[PostPush {
                 blend: fr.blend,

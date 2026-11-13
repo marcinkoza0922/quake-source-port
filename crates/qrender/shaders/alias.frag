@@ -23,6 +23,7 @@ vec4 stex(uint i, vec2 st, bool affine) {
     return tex(i, st);
 }
 void main() {
+    if (dot(fr.portal_clip.xyz, i_wpos) + fr.portal_clip.w < 0.0) discard;
     uint mode = fr.softf.y;
     bool affine = mode == 2u;
     vec2 st = affine ? i_st_affine : i_st;

@@ -59,7 +59,7 @@ impl Renderer {
             let ubo = [vk::DescriptorBufferInfo {
                 buffer: f.dynbuf.buf,
                 offset: 0,
-                range: 1024,
+                range: 2048,
             }];
             let lmdyn = [vk::DescriptorBufferInfo {
                 buffer: f.dynbuf.buf,
@@ -85,7 +85,7 @@ impl Renderer {
             };
             let sb = vk::DescriptorType::STORAGE_BUFFER;
             let writes = [
-                w(f.set, 0, vk::DescriptorType::UNIFORM_BUFFER).buffer_info(&ubo),
+                w(f.set, 0, vk::DescriptorType::UNIFORM_BUFFER_DYNAMIC).buffer_info(&ubo),
                 w(f.set, 2, sb).buffer_info(&alias),
                 w(f.set, 3, vk::DescriptorType::COMBINED_IMAGE_SAMPLER).image_info(&lm_img),
                 w(f.set, 4, sb).buffer_info(&mats),
