@@ -1,6 +1,6 @@
 ---
 name: portal-gun
-description: Work on the Add-ons portal gun of this Quake port — placement and surface checks, crossing/teleporting movers, the //qsp_portal client sync and save sidecar, see-through portal views and their recursion (portals seen in portals), particles in portal views, the portal options (addon_portal_*), and reproducing portal scenes headlessly with the portal_set command. Use whenever the task mentions the portal gun, portals placed by the player, "+toy", Add-ons, see-through or recursive portals, a portal that won't place, a player or object that crosses wrong, portal rendering glitches, or when you need a screenshot of portals.
+description: Work on the Add-ons portal gun of this Quake port — placement and surface checks, crossing/teleporting movers, the //qsp_portal client sync and `.qsa` save header (`addons/save.rs`), see-through portal views and their recursion (portals seen in portals), particles in portal views, the portal options (addon_portal_*), and reproducing portal scenes headlessly with the portal_set command. Use whenever the task mentions the portal gun, portals placed by the player, "+toy", Add-ons, see-through or recursive portals, a portal that won't place, a player or object that crosses wrong, portal rendering glitches, or when you need a screenshot of portals.
 ---
 
 # Portal gun (Add-ons)
@@ -12,7 +12,7 @@ first; this skill is the practical map and the recipes.
 
 | Concern | File |
 |---|---|
-| Master switch, toy ids, cvars (`addon_portal_*`), save sidecar text | `crates/qserver/src/addons.rs` |
+| Master switch, toy ids, cvars (`addon_portal_*`), `.qsa` save header (`addons/save.rs`) text | `crates/qserver/src/addons.rs` |
 | Placement (trace, 9-sample rectangle check, nudging), `Portals` state, stufftext outbox | `crates/qserver/src/addons/portal.rs` |
 | Crossing: pre-physics snapshot, `carry` (rotation), exit placement | `crates/qserver/src/addons/portal_move.rs` |
 | `portal_set` debug command | `crates/qserver/src/commands.rs` |
@@ -47,7 +47,7 @@ first; this skill is the practical map and the recipes.
 
 ## Settings
 
-`addons_enable` (master, default 0), `addon_portalgun`, `addon_portal_view`
+`addons_enable` (New Game checkbox; `map` copies it into the game's fixed `addons_on`), `addon_portalgun`, `addon_portal_view`
 (see-through), `addon_portal_max` (top-level live views, 1–4),
 `addon_portal_dist`, `addon_portal_depth` (recursion levels, 0–6, default 3).
 Flow: cvar → `src/host/render.rs` → `qrender::Settings::gun_portal_*`.

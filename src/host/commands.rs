@@ -119,6 +119,7 @@ pub(super) fn register_commands(c: &mut Commands<Host>) {
         }
     });
     c.add("menu_main", |h, _| h.menu.open(Screen::Main));
+    c.add("menu_singleplayer", |h, _| h.menu.open(Screen::SinglePlayer));
     c.add("menu_quit", |h, _| h.menu.open(Screen::Quit));
     c.add("menu_options", |h, a| {
         use crate::menu::Page;
@@ -142,6 +143,7 @@ pub(super) fn register_commands(c: &mut Commands<Host>) {
             "shader" | "screenshader" => Some(Page::ScreenShader),
             "audio" => Some(Page::Audio),
             "addons" => Some(Page::Addons),
+            "newgame" => Some(Page::NewGameAddons),
             "portalgun" => Some(Page::PortalGun),
             _ => None,
         };
@@ -471,13 +473,14 @@ pub(super) fn register_commands(c: &mut Commands<Host>) {
         if let Some(d) = p.parent() {
             let _ = std::fs::create_dir_all(d);
         }
-        let side = crate::addons::sidecar(&p);
-        let _ = match h.server.addon_save_text() {
-            Some(s) => std::fs::write(&side, s),
-            None => std::fs::remove_file(&side),
-        };
         match std::fs::write(&p, qcore::text::encode(&text)) {
-            Ok(()) => h.print(&format!("Saved {}\n", p.display())),
+            Ok(()) => {
+                // the slot is one save: drop a same-named file of the other format
+                if let (Some(d), Some(stem)) = (p.parent(), p.file_stem().and_then(|s| s.to_str())) {
+                    let _ = crate::autosave::remove_other_exts(d, stem, p.extension().and_then(|e| e.to_str()));
+                }
+                h.print(&format!("Saved {}\n", p.display()));
+            }
             Err(e) => h.print(&format!("ERROR: couldn't write {}: {e}\n", p.display())),
         }
     });
@@ -486,7 +489,10 @@ pub(super) fn register_commands(c: &mut Commands<Host>) {
             h.print("load <savename> : load a game\n");
             return;
         }
-        let p = h.savegame_path(a.argv(1));
+        let Some(p) = h.find_save(a.argv(1)) else {
+            h.print(&format!("ERROR: couldn't open {}\n", h.savegame_path(a.argv(1)).display()));
+            return;
+        };
         let Ok(bytes) = std::fs::read(&p) else {
             h.print(&format!("ERROR: couldn't open {}\n", p.display()));
             return;
@@ -499,8 +505,6 @@ pub(super) fn register_commands(c: &mut Commands<Host>) {
         h.disconnect_client();
         if let Err(e) = h.server.load_game(&text) {
             h.print(&format!("load failed: {e}\n"));
-        } else if let Ok(s) = std::fs::read_to_string(crate::addons::sidecar(&p)) {
-            h.server.addon_load_text(&s);
         }
         h.drain_server_log();
     });

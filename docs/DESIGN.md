@@ -170,15 +170,28 @@ Damage/movement assists are engine-side so they work with any progs; off in deat
 - Tests: `crates/qserver/tests/assists.rs` (needs game data).
 
 ### Add-ons (main menu → Add-ons; `qserver::addons`, `src/addons.rs`)
-Optional engine-side toys, so they work with any progs. `addons_enable`
-(default 0) is the master switch; each toy has its own cvar
-(`addon_portalgun`, default 1) and options page, dimmed while the master is
-off. Toys are only allowed with no deathmatch and no remote client
-(`addons::allowed`/`all_local`); otherwise every slot empties.
+Optional engine-side toys, so they work with any progs. A game has add-ons
+only if it was *started* with them: `Core::addons_on`, set by `map` from
+`addons_enable` (the archived New Game checkbox) or by `load_game` from the
+save, mirrored in read-only `addons_active` for the menu. It never changes
+mid-game, so a game started without add-ons can't gain them. Which toys are on
+is the per-toy cvar (`addon_portalgun`, default 1), editable live in an
+add-on game (Main menu → Add-ons) and fixed (dimmed) otherwise. Toys only
+run with no deathmatch and no remote client (`addons::allowed`/`all_local`).
+- New Game: single-player menu has an "Add-ons" checkbox (left/right or
+  click). Ticked, New Game opens `Page::NewGameAddons` (toy toggles, portal
+  settings, Start New Game) with a warning about other ports.
+- Saves (`addons/save.rs`): add-on games save as `.qsa` (never `.sav`) with a
+  `QSPADDONS 1 <n>` header (toys, portals) before the v5 body, so other ports
+  neither list nor parse them. `savegame_path` picks the extension, `find_save`
+  loads either (newer wins), saving removes the same-named other-format file,
+  autosave rotation carries each file's extension. Load/Save cards show an
+  "ADD-ONS: …" badge (`SaveInfo::addons`). A plain `.sav` load turns add-ons off.
 - Input: `+toy` cycles a player's slot through the enabled toys and back to
   the QC weapon; any weapon impulse (1–8, 10, 12, incl. the wheel) puts the
   toy away. `+attack2` is alt-fire. Both binds appear on Controls only
-  while `addons_enable` is on (`ADDON_BINDS`, synced on menu key/draw).
+  while the game has add-ons, or with none running while the checkbox is
+  ticked (`ADDON_BINDS`, synced on menu key/draw).
 - While a toy is held, `ToySlot::buttons` keeps QC's attack bit at 0 and
   sends usercmd bit 2 (fire), bit 3 (alt) and the toy id in bits 4–7; QC
   only reads bits 0/1. The view model is hidden for that player (player 1
@@ -208,7 +221,7 @@ off. Toys are only allowed with no deathmatch and no remote client
   when a client spawns. `qclient` swallows these into `ClientState::portals`;
   other engines ignore `//` lines, so demos still play elsewhere.
   `portal_draw::gun_portals` turns them into `qrender::GunPortal`s (owner
-  colour pair, linked exit). Saves write portals to `<save>.qsp` beside the
+  colour pair, linked exit). Saves write portals into the `.qsa` header (see above) beside the
   untouched `.sav` (manual saves only, not autosaves).
 - See-through (qrender, reusing teleporter windows): `portals::Portal`
   carries a full `rot` matrix and a `pvs` point; `portals::gun` builds the
@@ -412,7 +425,7 @@ Port of vkQuake/QSS's entity delta protocol, layered on 15/666/999. It is needed
 - Example: `quake-source-port -headless -game ad -autoquit 6 +map ad_sepulcher "+delay 4 screenshot target/shots/ad"`.
 - Savegames: `Server::save_game`/`load_game` (qserver `save.rs`, version 5 text format as ironwail); `Sv::loadgame` makes connect/spawn keep the saved edicts and parms.
 - Autosaves (`src/autosave.rs`, host frame after server/client events): local single-player only, after signon with a living player, outside menus, pause, intermission and demos. Gameplay has an `sv_autosave` toggle (default 1; 0 disables) and an Autosave Settings sub-page archiving `sv_autosave_keep` (default 5; 0 also disables, menu range 1–10), `sv_autosave_entry` (default 1), `sv_autosave_secret`, `sv_autosave_monsters`, `sv_autosave_secrets` (default 0), and `sv_autosave_interval` (minutes; default 0). Timer uses server simulation time; any autosave restarts it. Per-level baselines prevent repeats at completion and prevent level-entry saves on loading a save. Coincident triggers produce one save. `autosave0.sav` is newest; complete text is staged and synced before rotating older slots, and excess slots are pruned after the new save is installed. Manual/quicksaves are separate. Trigger descriptions are encoded as a single underscore-separated v5 comment token, retaining external-engine compatibility. Save failures are reported in the console.
-- Save/load cards: one centred column of cards (480×62 in the 640×360 canvas, pitch 66). On Load the newest save (row 0) is pinned at the top above a divider; the other cards scroll in pixels beneath it, clipped above the hint row, with a draggable scrollbar right of the column (`menu/scroll.rs`: `card_y`, `card_at`, `fix_card_scroll`). The wheel scrolls the list itself (24 px per notch, no wrap) and the card under the pointer becomes the cursor; before, the wheel was mapped to Up/Down, so it moved the highlight and the list only followed once the cursor left the window. Up/Down move (scrolling just enough to show the cursor card), Left/Right jump 3, mouse hover/click picks the card under the pointer. Load shows the newest autosave and Browse Autosaves first; its submenu (also `menu_autosaves`) lists retained slots newest first and Escape returns to Load. Save only edits the twelve manual slots. `src/saveinfo.rs` reads v5 headers, globals, worldspawn and player fields without loading a level; cards show the worldspawn level title, filesystem modification timestamp (UTC), health, armor, kills/total, secrets/total, inventory and autosave reason. Legacy v5 saves work without sidecars. Missing/truncated saves are treated as unused slots.
+- Save/load cards: one centred column of cards (480×62 in the 640×360 canvas, pitch 66). On Load the newest save (row 0) is pinned at the top above a divider; the other cards scroll in pixels beneath it, clipped above the hint row, with a draggable scrollbar right of the column (`menu/scroll.rs`: `card_y`, `card_at`, `fix_card_scroll`). The wheel scrolls the list itself (24 px per notch, no wrap) and the card under the pointer becomes the cursor; before, the wheel was mapped to Up/Down, so it moved the highlight and the list only followed once the cursor left the window. Up/Down move (scrolling just enough to show the cursor card), Left/Right jump 3, mouse hover/click picks the card under the pointer. Load shows the newest autosave and Browse Autosaves first; its submenu (also `menu_autosaves`) lists retained slots newest first and Escape returns to Load. Save only edits the twelve manual slots. `src/saveinfo.rs` reads v5 headers, globals, worldspawn and player fields without loading a level; cards show the worldspawn level title, filesystem modification timestamp (UTC), health, armor, kills/total, secrets/total, inventory and autosave reason. Plain v5 saves need nothing extra. Missing/truncated saves are treated as unused slots.
 - `src/save_inventory.rs` reads inventory masks from the active mounted `progs.dat`, resolves art through the mod filesystem/WAD, and handles Hipnotic/Rogue, AD upgrades/custom-key skins, Keep/Mjolnir's separate inventory banks, QBJ3's wrench and themed counted-key strips, Dwell's extra weapons, and MG3's native weapon pictures. Missing icons retain textual names; no game art is bundled. Installed-mod inspection and limitations are recorded in `docs/SAVE_INVENTORY_AUDIT.md`.
 - One shared command buffer, as in Quake: the server's Cbuf text (QC `localcmd`, changelevel) is moved into the host Cbuf before each server frame and at each `exec_cbuf`, so it reaches host commands and cvars too. `name`/`color` are host commands that set `_cl_name`/`_cl_color` and forward to the server, which has server-side `name`/`color` (svc_updatename/updatecolors).
 - `.lit` and `.ent` files load through `Fs::open_companion`, which only accepts them from the same or a higher-priority game dir than the map (ironwail's `path_id` check), so id1's `start.lit` never lights another game's `start.bsp`.

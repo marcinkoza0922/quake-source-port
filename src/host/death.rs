@@ -62,7 +62,7 @@ impl Host {
 fn latest_save(dir: &std::path::Path) -> Option<String> {
     std::fs::read_dir(dir).ok()?.filter_map(Result::ok).filter_map(|entry| {
         let path = entry.path();
-        if path.extension()?.to_str()? != "sav" { return None; }
+        if !matches!(path.extension()?.to_str()?, crate::autosave::SAVE_EXT | crate::autosave::ADDON_EXT) { return None; }
         let name = path.file_stem()?.to_str()?.to_owned();
         if name.chars().any(|c| c.is_control() || matches!(c, '"' | ';' | '\\')) { return None; }
         let modified = entry.metadata().ok()?.modified().ok()?;

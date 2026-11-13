@@ -88,6 +88,8 @@ pub struct Core {
     pub clients: Vec<Client>,
     pub serverflags: f32,
     pub changelevel_issued: bool,
+    /// This game was started with add-ons (fixed until the next new game or load).
+    pub addons_on: bool,
     /// Skip the per-frame entity updates in client datagrams (tools that
     /// drive a local client and throw its datagrams away, like qbot).
     pub skip_entity_updates: bool,
