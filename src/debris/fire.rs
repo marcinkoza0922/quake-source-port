@@ -30,7 +30,7 @@ fn velocity(cl: &ClientState, e: &qclient::ClientEntity) -> Vec3 {
 impl Debris {
     /// Remembers this frame's projectiles and muzzle flashes for the next
     /// frame's impacts (a projectile is gone by the time its impact arrives).
-    pub(super) fn track_shooters(&mut self, cl: &ClientState, lv: &Level, time: f64) {
+    pub(crate) fn track_shooters(&mut self, cl: &ClientState, lv: &Level, time: f64) {
         self.missiles.clear();
         self.flashes.retain(|f| time - f.1 < FLASH_MEMORY);
         for (i, e) in cl.active_entities() {
@@ -50,7 +50,7 @@ impl Debris {
     }
 
     /// A point on the line of fire behind impact `p`.
-    pub(super) fn shot_origin(&self, view: Vec3, p: Vec3) -> Vec3 {
+    pub(crate) fn shot_origin(&self, view: Vec3, p: Vec3) -> Vec3 {
         let cm = self.cm.as_deref();
         let missile = self
             .missiles

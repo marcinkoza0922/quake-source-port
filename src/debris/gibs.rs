@@ -82,6 +82,7 @@ impl Debris {
             let frame = cl.entities[c.ent].frame;
             self.gibbed.insert(c.ent, (c.model, frame));
             let mid = c.doll.pos.iter().fold(Vec3::ZERO, |s, p| s + *p) / c.doll.pos.len() as f32;
+            self.blood_bursts.push(mid);
             cl.events.push(qclient::ClientEvent::TempSound { name: "player/udeath.wav", origin: mid.to_array() });
             let top = (0..c.doll.pos.len()).max_by(|&a, &b| c.doll.pos[a].z.total_cmp(&c.doll.pos[b].z));
             let mut rng = self.rng.take().unwrap_or(Rng(0x9e37_79b9));

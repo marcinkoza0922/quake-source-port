@@ -96,6 +96,7 @@ impl Host {
         }
         self.view.reset();
         self.debris.new_map(&mut self.cl);
+        self.blood.clear();
         self.con.print(&format!("loaded {} in {:.2}s\n", self.level.mapname, t0.elapsed().as_secs_f32()));
     }
 }

@@ -46,6 +46,9 @@ impl Host {
                     set,
                 },
             );
+            if self.cv("r_blood") != 0.0 {
+                self.debris.track_shooters(&self.cl, &self.level, self.cl.time);
+            }
             self.debris.entities(&mut ents, &mut dyn_verts);
             if self.cv("r_drawentities") == 0.0 {
                 ents.clear();
@@ -62,6 +65,11 @@ impl Host {
                 self.snd.as_mut(),
                 v,
                 &self.level.mapname,
+            );
+            self.blood.frame(
+                crate::blood::Settings::read(&self.server.core.cvars), &self.cl, &self.level,
+                &self.server.core.fs, &mut self.r, &ents, &dyn_verts,
+                v.origin.into(), &self.debris, &mut fte,
             );
             crate::view::dlights(&self.cl, &mut dls);
             let contents = self.contents(v.origin);

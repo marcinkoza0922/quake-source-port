@@ -25,6 +25,11 @@ pub(super) fn tooltip(item: Item) -> Option<&'static str> {
         "r_debris_maxragdolls" => "How many ragdolls can lie around at once",
         "r_debris_gibs" => "Gibs and heads tumble and bounce; blasts can gib ragdolls",
         "r_debris_shrapnel" => "Exploding boxes throw metal shards",
+        "r_blood" => "Blood stains surfaces and bodies; cosmetic, independent of ragdolls and particle packs",
+        "r_blood_amount" => "Number of splatter rays per blood impact",
+        "r_blood_lifetime" => "Marks fade out before expiring; oldest marks are recycled at the limit",
+        "r_blood_wounds" => "Local red wounds follow enemy animation and ragdoll deformation",
+        "r_blood_gibs" => "Moving gibs leave blood on surfaces they touch",
         "r_debris_movers" => "Debris lands on and is carried or shoved by doors, lifts and platforms",
         "r_debris_killlift" => "With ragdolls starting at death, a killing shot also lifts the body off its feet",
         "r_debris_force" => "How hard shots and explosions push debris around",
@@ -83,6 +88,7 @@ pub(super) fn page_items(p: Page) -> &'static [Item] {
         Page::Messages => MESSAGES,
         Page::Water => WATER,
         Page::Debris => DEBRIS,
+        Page::Blood => BLOOD,
         Page::Mouse => MOUSE,
         Page::Controller => CONTROLLER,
         Page::Autosave => AUTOSAVE,
@@ -106,6 +112,7 @@ pub(super) fn page_name(p: Page) -> &'static str {
         Page::Messages => "Messages & Captions",
         Page::Water => "Water Settings",
         Page::Debris => "Debris Settings",
+        Page::Blood => "Blood Splatter Settings",
         _ => PAGES.iter().find(|x| x.1 == p).map_or("", |x| x.0),
     }
 }
@@ -122,6 +129,7 @@ pub(super) fn sub_disabled(page: Page, cv: &Cvars) -> bool {
     (page == Page::Autosave && cv.value_of("sv_autosave") == 0.0)
         || (page == Page::HudLayout && cv.value_of("scr_hudstyle") == 0.0)
         || (page == Page::Water && cv.value_of("r_enhancedwater") == 0.0)
+        || (page == Page::Blood && cv.value_of("r_blood") == 0.0)
         || (page == Page::Debris && cv.value_of("r_debris") == 0.0)
 }
 

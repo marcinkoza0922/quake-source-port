@@ -20,3 +20,12 @@ Give discrete tasks that do not interfere with each other to subagents.
 Single-player autosaves rotate independently of manual/quicksaves. Gameplay settings control retention (default five, zero disables) and level-entry (on by default), timer, secret discovery, all enemies killed, and all secrets found triggers. Loading a save does not itself trigger an autosave.
 
 Save/load screens use cards showing level name, save timestamp, health, armor, owned weapons and keys, and kills/secrets against their totals. The Load screen shows only the latest autosave, with a dedicated submenu listing the rotating history newest to oldest and each save's trigger. Inventory art comes from the active mod; adapters cover custom inventory fields and use names when a mod supplies no corresponding icon.
+
+## Enhanced blood
+
+An optional enhanced blood toggle and settings submenu add surface splatters
+when enemies or corpses are shot, localized red wounds that follow enemies
+and ragdolls, and contact painting from moving giblets. Settings control
+splatter amount, size, lifetime, mark limit, wounds, and gib painting.
+Blood decals vary in shape, orientation and proportions. Wall and trigger hits
+produce no blood; explosive dismemberments throw dense splatter across a room.
