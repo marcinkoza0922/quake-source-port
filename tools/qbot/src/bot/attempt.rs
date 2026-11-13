@@ -47,6 +47,10 @@ impl Attempt {
         self.inside += inside as u32;
     }
 
+    pub(super) fn inside_secs(&self) -> f64 {
+        Attempt::secs(self.inside)
+    }
+
     fn reached(&self) -> bool {
         self.closest < REACHED
     }

@@ -18,6 +18,7 @@ impl Bot<'_> {
         let vm = &self.sv.level.as_ref().unwrap().vm;
         let o = &self.o;
         let mut new = Vec::new();
+        let first = self.known.is_empty();
         for e in 1..vm.num_edicts() as u32 {
             if vm.is_free(e) || e == self.me || self.known.contains(&e) {
                 continue;
@@ -32,13 +33,20 @@ impl Bot<'_> {
                 // Doors opened by touch (key doors) that fire targets when
                 // they open: noclip never touches them, so press like a button.
                 "door" | "func_door" if !shootable && self.has_str(e, o.target) && !self.has_str(e, o.targetname) => Kind::Button,
-                c if c.starts_with("item_") && c.contains("key") || c == "item_sigil" || c == "item_hornofconjuring" => Kind::Pickup,
-                _ if vm.ent_f(e, o.flags) as i32 & FL_MONSTER != 0 => {
+                // Chthon never gets FL_MONSTER (mgend's can be killed); rogue's
+                // item_time_machine is a monster.
+                c if vm.ent_f(e, o.flags) as i32 & FL_MONSTER != 0 || c.starts_with("monster_") => {
                     if vm.ent_f(e, o.health) <= 0.0 || spawn_template(vm, o, e) {
                         continue;
                     }
                     Kind::Monster
                 }
+                c if c.starts_with("item_") && c.contains("key") || c == "item_sigil" || c == "item_hornofconjuring" => Kind::Pickup,
+                // Every item the map places: weapons, ammo, health, armor,
+                // powerups. Some fire a target when taken (mgend's thunderbolt
+                // raises Chthon); impulse 9 alone never touches them. Later
+                // ones (backpacks, horde waves) only when they fire a target.
+                c if (c.starts_with("item_") || c.starts_with("weapon_")) && (first || self.has_str(e, o.target)) => Kind::Pickup,
                 c if c.starts_with("trigger_") && solid == SOLID_TRIGGER && vm.ent_i(e, o.touch) != 0 => Kind::Trigger,
                 _ if shootable && (solid == SOLID_BSP || solid == SOLID_BBOX) => Kind::Shoot,
                 _ => continue,
@@ -54,6 +62,7 @@ impl Bot<'_> {
                 initial_state: o.state.map_or(0.0, |s| vm.ent_f(e, s)),
                 touch: vm.ent_i(e, o.touch),
                 again: false,
+                late: kind == Kind::Pickup && self.has_str(e, o.target),
             });
         }
         for g in new {
@@ -115,7 +124,9 @@ impl Bot<'_> {
         }
         let o = &self.o;
         match g.kind {
-            Kind::Monster => vm.ent_f(e, o.health) <= 0.0 || vm.ent_f(e, o.flags) as i32 & FL_MONSTER == 0,
+            Kind::Monster => {
+                vm.ent_f(e, o.health) <= 0.0 || vm.ent_f(e, o.flags) as i32 & FL_MONSTER == 0 && !vm.classname(e).starts_with("monster_")
+            }
             Kind::Secret | Kind::Trigger => vm.ent_f(e, o.solid) as i32 != SOLID_TRIGGER || self.inside(e),
             // Keys spawn SOLID_NOT until PlaceItem runs: taken once placed
             // and not solid again.
@@ -129,11 +140,40 @@ impl Bot<'_> {
     /// Monsters that can't be hurt yet: waiting to be spawned by a trigger
     /// (hipnotic, AD; not solid) or rogue statues (solid stone until their
     /// targetname fires). Chasing them only burns the goal timeout.
+    /// A lock tried before its key was in hand has failed for good: give
+    /// failed buttons and key doors another go whenever a key is taken.
+    fn reopen_locks(&mut self) {
+        let Some(it) = self.o.items else { return };
+        const KEYS: i32 = 0x20000 | 0x40000; // IT_KEY1 | IT_KEY2
+        let keys = self.vm().ent_f(self.me, it) as i32 & KEYS;
+        let gained = keys & !self.keys_held != 0;
+        self.keys_held = keys;
+        if gained {
+            for g in self.goals.iter_mut().filter(|g| g.kind == Kind::Button && !g.done && g.failed.is_some()) {
+                (g.failed, g.tries) = (None, 0);
+            }
+        }
+    }
+
+    /// Items never yet touchable: waiting for a trigger to enable them
+    /// (mg3 map5).
     pub(super) fn dormant(&self, g: &Goal) -> bool {
-        g.kind == Kind::Monster && self.vm().ent_f(g.ent, self.o.takedamage) == 0.0
+        let vm = self.vm();
+        match g.kind {
+            Kind::Monster => vm.ent_f(g.ent, self.o.takedamage) == 0.0,
+            Kind::Pickup => {
+                // A key the bot holds refuses a second copy (mg3 map5 has
+                // two of each for two locks of each): wait until it's used.
+                let held = g.class.contains("key")
+                    && self.o.items.is_some_and(|it| vm.ent_f(self.me, it) as i32 & vm.ent_f(g.ent, it) as i32 != 0);
+                held || !g.armed && vm.ent_f(g.ent, self.o.solid) as i32 == SOLID_NOT
+            }
+            _ => false,
+        }
     }
 
     pub(super) fn update_goals(&mut self) {
+        self.reopen_locks();
         for i in 0..self.goals.len() {
             let g = &self.goals[i];
             if g.done {
@@ -150,6 +190,9 @@ impl Bot<'_> {
             }
             if self.goal_done(&self.goals[i]) {
                 let freed = self.vm().is_free(self.goals[i].ent);
+                if self.goals[i].late {
+                    self.late_until = self.sv.time() + 5.0;
+                }
                 let g = &self.goals[i];
                 let msg = format!("done {:?} {} #{}", g.kind, g.class, g.ent);
                 self.note(&msg);
@@ -242,11 +285,20 @@ impl Bot<'_> {
         // be up before the lightning button), then the rest.
         let movers_first = self.goals.iter().any(|g| g.again && !g.done && g.failed.is_none() && self.fires_mover(g.ent));
         let open = |g: &Goal| !g.done && g.failed.is_none() && !self.dormant(g) && (!movers_first || g.again && self.fires_mover(g.ent));
+        // Pickups that fire targets go last: mgend's keys each raise Chthon
+        // for another stage, which only works once the stage before is over.
+        let late = |g: &Goal| g.late;
+        let any_early = self.goals.iter().any(|g| open(g) && g.kind != Kind::Exit && !late(g));
+        // Nothing to do but late pickups or the exit: let the last pickup's
+        // script run (spawn its monsters) first.
+        if !any_early && self.sv.time() < self.late_until {
+            return None;
+        }
         let best = |exit: bool| {
             self.goals
                 .iter()
                 .enumerate()
-                .filter(|(_, g)| open(g) && (g.kind == Kind::Exit) == exit)
+                .filter(|(_, g)| open(g) && (g.kind == Kind::Exit) == exit && !(any_early && late(g)))
                 .min_by(|a, b| (self.center(a.1.ent) - here).length_sq().total_cmp(&(self.center(b.1.ent) - here).length_sq()))
                 .map(|(i, _)| i)
         };

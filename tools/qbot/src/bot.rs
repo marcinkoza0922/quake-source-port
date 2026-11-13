@@ -109,6 +109,8 @@ struct Goal {
     /// Buttons: pressed before and re-armed to press again (see
     /// `repress`); counts as done in the report whatever happens next.
     again: bool,
+    /// Pickups that fire targets: taken last (see `pick`).
+    late: bool,
 }
 
 struct Ofs {
@@ -196,6 +198,11 @@ struct Bot<'a> {
     /// Rounds of re-pressing repeatable buttons so far.
     repressed: u32,
     impulses: Vec<u8>,
+    /// No pickup that fires targets before this: the last one's script
+    /// (a boss rising) gets time to run first.
+    late_until: f64,
+    /// IT_KEY1/IT_KEY2 bits held at the last update (see `reopen_locks`).
+    keys_held: i32,
     intermission: Option<usize>,
 }
 
@@ -253,6 +260,8 @@ pub fn run(fs: Fs, map: &str, opt: &Options) -> Report {
         weapon: 5,
         repressed: 0,
         impulses: Vec::new(),
+        late_until: 0.0,
+        keys_held: 0,
         intermission,
     };
     bot.drain_log();
@@ -367,6 +376,11 @@ impl Bot<'_> {
                     // All weapons and ammo, then back to the current weapon.
                     self.impulses = vec![self.weapon, 9];
                     last_refill = t;
+                    // Health items are taken at 1 health (see `empty_ammo_for`).
+                    if self.vm().ent_f(self.me, self.o.health) < 100.0 {
+                        let (me, h) = (self.me, self.o.health);
+                        self.sv.level.as_mut().unwrap().vm.set_ent_f(me, h, 100.0);
+                    }
                 }
                 if self.cur.is_none() {
                     self.cur = self.pick();
@@ -379,6 +393,12 @@ impl Bot<'_> {
                     }
                 }
                 let Some(i) = self.cur else {
+                    if t < self.late_until {
+                        // Waiting on a pickup's script; fight what it brings.
+                        self.fire_at_will(&mut mv);
+                        self.step(mv);
+                        continue;
+                    }
                     // Nothing left and no exit to take.
                     break;
                 };

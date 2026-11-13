@@ -21,7 +21,7 @@ client driven by `set_move`. Runs are deterministic. A release build has
 ```sh
 cargo build --release -p qbot
 target/release/qbot                       # every playable id1 map, all cores
-target/release/qbot -game hipnotic        # baselines exist for id1, hipnotic, rogue
+target/release/qbot -game hipnotic        # baselines: id1, hipnotic, rogue, dopa, mg1, mg3
 target/release/qbot e1m3 e2m5 -v          # specific maps, verbose log
 target/release/qbot -game ad ad_sepulcher -time 1200
 ```
@@ -30,7 +30,7 @@ Flags: `-basedir D -game G -skill N -time S -j N -out DIR -baseline F
 -save-baseline -v`.
 
 Output `target/qbot/report.json` per map: kills, secrets, triggers, buttons
-(incl. shootable brushes), pickups (keys, runes) as done/total, `has_exit`,
+(incl. shootable brushes), pickups (every placed item; keys etc. that spawn later) as done/total, `has_exit`,
 `exited`, `failed` (one line per goal given up on: `Kind classname #ent at
 pos: why`), sim/wall time, `errors`, `unusual` (developer-log lines, see
 below). `cargo nextest run -p qbot` checks e1m1
@@ -101,6 +101,15 @@ goals stay alive: that's how e1m7's Chthon dies.
 
 A kill shortfall no failed goal explains is listed at the end ("alive but
 never a goal" / "neither killed nor alive").
+
+Every placed item is a goal (2026-11-13). Refused items get the matching
+stat lowered (`empty_ammo_for` in fly.rs; rogue keeps ammo in `ammo_shells1` and similar fields);
+zeroing all ammo leaves the axe, whose frame names dopa's progs print. Items
+with a `target` go last with a 5 s pause after each (mgend Chthon stages).
+Check FL_MONSTER before the item rule: rogue's `item_time_machine` is a monster.
+`item_key1` is the silver key, `item_key2` gold (door spawnflags 16 / 8). A key
+the bot already holds is dormant (a second copy refuses it) and any key taken
+reopens failed buttons/key doors (mg3 map5: two keys and two locks of each).
 
 Known residuals (2026-11-13): e1m7 closet zombies placed in the floor (`walkmonster
 in wall`): once splash knocks one down it can never get up or be hit, in

@@ -49,20 +49,83 @@ impl Bot<'_> {
                 }
             }
             Kind::Secret | Kind::Trigger | Kind::Pickup | Kind::Exit => {
-                self.fire_at_will(&mut mv);
+                let inside = self.inside(ent);
+                if inside && kind == Kind::Pickup {
+                    // Ammo just emptied may leave only the axe: don't swing it.
+                    self.empty_ammo_for(ent);
+                } else {
+                    self.fire_at_will(&mut mv);
+                }
                 if self.spot.is_none() || t - self.spot_at > 1.0 {
                     self.spot = Some(self.touch_point(ent));
                     self.spot_at = t;
                 }
                 let c = self.spot.unwrap();
                 self.att.frame(Some((c - here).length()));
-                let inside = self.inside(ent);
                 self.att.touching(inside);
+                let cls = &self.goals[i].class;
+                let plain = !self.goals[i].late && !cls.contains("key") && cls != "item_sigil" && cls != "item_hornofconjuring";
+                if kind == Kind::Pickup && plain && self.att.inside_secs() > 3.0 {
+                    // The touch refuses the bot: don't burn the goal timeout.
+                    let vm = self.vm();
+                    let touch = vm.ent_i(ent, self.o.touch);
+                    let why = format!(
+                        "inside it 3s, touch refused (touch {}, solid {}, health {})",
+                        if touch > 0 { vm.progs.function_name(touch as usize) } else { "none".into() },
+                        vm.ent_f(ent, self.o.solid),
+                        vm.ent_f(self.me, self.o.health)
+                    );
+                    self.fail(i, &why);
+                    return mv;
+                }
                 self.warp_if_slow(t, c);
                 fly_towards(&mut mv, here, c);
             }
         }
         mv
+    }
+
+    /// Items refuse a player who doesn't need them: ammo at the cap (where
+    /// impulse 9 keeps the bot), health at max, armor as good or better.
+    /// Lower that stat so the touch takes it (god mode covers low health,
+    /// impulse 9 refills ammo). Only the matching ammo, in each field a mod
+    /// keeps it (rogue: `ammo_shells1`, ...): emptying all of it leaves the
+    /// axe. Backpacks and id1's `item_weapon` hold several kinds.
+    fn empty_ammo_for(&mut self, e: u32) {
+        const ALL: &[(&str, f32)] = &[
+            ("ammo_shells", 0.0),
+            ("ammo_nails", 0.0),
+            ("ammo_rockets", 0.0),
+            ("ammo_cells", 0.0),
+            ("ammo_shells1", 0.0),
+            ("ammo_nails1", 0.0),
+            ("ammo_lava_nails", 0.0),
+            ("ammo_rockets1", 0.0),
+            ("ammo_multi_rockets", 0.0),
+            ("ammo_cells1", 0.0),
+            ("ammo_plasma", 0.0),
+        ];
+        let cls = self.vm().classname(e);
+        let set: &[(&str, f32)] = match cls.as_str() {
+            "item_shells" => &[("ammo_shells", 0.0), ("ammo_shells1", 0.0)],
+            "item_spikes" => &[("ammo_nails", 0.0), ("ammo_nails1", 0.0)],
+            "item_lava_spikes" => &[("ammo_nails", 0.0), ("ammo_lava_nails", 0.0)],
+            "item_rockets" => &[("ammo_rockets", 0.0), ("ammo_rockets1", 0.0)],
+            "item_multi_rockets" => &[("ammo_rockets", 0.0), ("ammo_multi_rockets", 0.0)],
+            "item_cells" => &[("ammo_cells", 0.0), ("ammo_cells1", 0.0)],
+            "item_plasma" => &[("ammo_cells", 0.0), ("ammo_plasma", 0.0)],
+            "item_weapon" | "item_backpack" => ALL,
+            "item_health" => &[("health", 1.0)],
+            c if c.starts_with("item_armor") => &[("armorvalue", 0.0), ("armortype", 0.0)],
+            _ => return,
+        };
+        let me = self.me;
+        let vm = &mut self.sv.level.as_mut().unwrap().vm;
+        for &(name, val) in set {
+            if let Some(f) = vm.field_ofs(name) {
+                vm.set_ent_f(me, f, val);
+            }
+        }
     }
 
     /// A point where the player's box overlaps trigger `e` but no other
@@ -79,8 +142,11 @@ impl Bot<'_> {
         if others.is_empty() {
             return c;
         }
+        // The engine pads the player's linked box by 1 unit too (the other
+        // boxes' padding is already in their absmin/absmax): a spot 1 unit
+        // short grazes a teleporter (e4m7's secret under door #74).
         let clear = |p: Vec3| {
-            others.iter().all(|(a, b)| !(p.x + 16.0 > a.x && p.x - 16.0 < b.x && p.y + 16.0 > a.y && p.y - 16.0 < b.y && p.z + 32.0 > a.z && p.z - 24.0 < b.z))
+            others.iter().all(|(a, b)| !(p.x + 17.0 > a.x && p.x - 17.0 < b.x && p.y + 17.0 > a.y && p.y - 17.0 < b.y && p.z + 33.0 > a.z && p.z - 25.0 < b.z))
         };
         let mut best: Option<(f32, Vec3)> = None;
         // The player's box just touching each part of the trigger.
@@ -141,11 +207,15 @@ impl Bot<'_> {
         }
         self.att.frame(self.found_spot.then_some(dist));
         self.att.shot(clear, mv.buttons & 1 != 0);
+        if self.found_spot && dist >= 32.0 && !clear {
+            // Flying can't get there (e4m5's closet shalrath): put it there.
+            self.warp_if_slow(t, spot);
+        }
         fly_towards(mv, self.me_origin(), spot);
     }
 
     /// Fire at the nearest live monster in sight while flying elsewhere.
-    fn fire_at_will(&mut self, mv: &mut ClientMove) {
+    pub(super) fn fire_at_will(&mut self, mv: &mut ClientMove) {
         let (eye, here) = (self.eye(), self.me_origin());
         let mut cands: Vec<(f32, u32, Vec3)> = self
             .goals
@@ -176,9 +246,10 @@ impl Bot<'_> {
         // beyond it. Never the lightning gun underwater: it discharges
         // instead of firing (e1m1's secret panel is shot from the pool).
         let wet = self.vm().ent_f(self.me, self.o.waterlevel) > 1.0;
-        let w = if self.vm().classname(e).contains("zombie") {
+        let cls = self.vm().classname(e);
+        let w = if cls.contains("zombie") {
             7
-        } else if d.length() < 560.0 && !wet {
+        } else if (d.length() < 560.0 || cls == "monster_boss") && !wet {
             8
         } else {
             5
