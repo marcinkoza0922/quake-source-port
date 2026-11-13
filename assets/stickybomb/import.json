@@ -1,20 +1,26 @@
 {
-  "source": "sticky",
-  "source_triangles": 1330,
-  "triangles": 1328,
-  "vertices": 1777,
+  "source": "model.fbx",
+  "source_triangles": 1805,
+  "triangles": 1805,
+  "vertices": 3470,
   "texture_size": 512,
-  "removed_packed_degenerates": 2,
+  "removed_packed_degenerates": 0,
   "bounds": [
     [
       -12.0,
-      -3.4145100116729736,
-      -8.3096284866333
+      -7.554455757141113,
+      -12.740274429321289
     ],
     [
       24.0,
-      3.4145100116729736,
-      8.3096284866333
+      7.554455757141113,
+      12.740274429321289
     ]
-  ]
+  ],
+  "glow_texels": 0,
+  "length": 36.0,
+  "anchor": "bbox",
+  "flip": false,
+  "flat": false,
+  "gain": 0.6
 }

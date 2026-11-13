@@ -15,7 +15,7 @@ fn model(key: &str, build: fn(&[u8]) -> qformats::mdl::Mdl, lv: &mut crate::asse
 
 /// Forward push past the portal gun's spot and drop below it.
 const PULL: f32 = 6.0;
-const DROP: f32 = 5.0;
+const DROP: f32 = 7.0;
 
 /// The held launcher, placed like the portal gun.
 pub fn weapon(time: f64, view: View, lv: &mut crate::assets::Level, fs: &qcore::fs::Fs, r: &mut Renderer) -> Option<RenderEntity> {
