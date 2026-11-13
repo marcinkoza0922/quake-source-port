@@ -50,6 +50,7 @@ impl Bot<'_> {
                 armed: false,
                 initial_state: o.state.map_or(0.0, |s| vm.ent_f(e, s)),
                 touch: vm.ent_i(e, o.touch),
+                again: false,
             });
         }
         for g in new {
@@ -137,10 +138,75 @@ impl Bot<'_> {
         self.cur = None;
     }
 
+    /// Everything is done but monsters are still alive that aren't goals
+    /// (e1m7's Chthon: undamageable, killed by `event_lightning` only while
+    /// two doors raised by other buttons are up, three times): press every
+    /// button that has popped back out again, for a few rounds.
+    fn repress(&mut self) -> bool {
+        let st = self.sv.stats();
+        if st.killed_monsters >= st.total_monsters || self.repressed >= 12 {
+            return false;
+        }
+        self.repressed += 1;
+        let Some(state) = self.o.state else { return false };
+        let mut any = false;
+        for i in 0..self.goals.len() {
+            let g = &self.goals[i];
+            if g.kind == Kind::Button && g.done && self.vm().ent_f(g.ent, state) == g.initial_state {
+                let g = &mut self.goals[i];
+                (g.done, g.again, g.failed, g.tries) = (false, true, None, 0);
+                any = true;
+            }
+        }
+        if any && self.opt.verbose {
+            eprintln!("  t={:.1} re-pressing buttons (round {})", self.sv.time(), self.repressed);
+        }
+        any
+    }
+
+    /// Doors, plats and trains that edict `e` targets.
+    fn movers(&self, e: u32) -> Vec<u32> {
+        let vm = self.vm();
+        let (Some(t), Some(tn)) = (self.o.target, self.o.targetname) else { return Vec::new() };
+        let Ok(target) = vm.ent_str(e, t) else { return Vec::new() };
+        if target.is_empty() {
+            return Vec::new();
+        }
+        (1..vm.num_edicts() as u32)
+            .filter(|&o| {
+                !vm.is_free(o)
+                    && vm.ent_str(o, tn).is_ok_and(|n| n == target)
+                    && matches!(vm.classname(o).as_str(), "door" | "func_door" | "plat" | "func_plat" | "train" | "func_train")
+            })
+            .collect()
+    }
+
+    pub(super) fn fires_mover(&self, e: u32) -> bool {
+        !self.movers(e).is_empty()
+    }
+
+    /// Re-pressing: a door moved by a re-pressed button is still on its
+    /// way (`state` 2 up, 3 down); the other buttons wait for it.
+    pub(super) fn movers_moving(&self) -> bool {
+        let Some(st) = self.o.state else { return false };
+        self.goals
+            .iter()
+            .filter(|g| g.again && g.done)
+            .flat_map(|g| self.movers(g.ent))
+            .any(|m| matches!(self.vm().ent_f(m, st) as i32, 2 | 3))
+    }
+
     /// Nearest open goal (the exit only once nothing else is left).
     pub(super) fn pick(&mut self) -> Option<usize> {
+        let idle = self.goals.iter().all(|g| g.kind == Kind::Exit || g.done || self.dormant(g) || g.failed.is_some() && g.tries >= 2);
+        if idle && self.repress() {
+            return self.pick();
+        }
         let here = self.me_origin();
-        let open = |g: &Goal| !g.done && g.failed.is_none() && !self.dormant(g);
+        // Re-pressing: buttons that move doors first (e1m7's electrodes must
+        // be up before the lightning button), then the rest.
+        let movers_first = self.goals.iter().any(|g| g.again && !g.done && g.failed.is_none() && self.fires_mover(g.ent));
+        let open = |g: &Goal| !g.done && g.failed.is_none() && !self.dormant(g) && (!movers_first || g.again && self.fires_mover(g.ent));
         let best = |exit: bool| {
             self.goals
                 .iter()

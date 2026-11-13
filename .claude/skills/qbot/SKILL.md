@@ -94,6 +94,10 @@ pressed like buttons. No QC source for a mod? Disassemble the function from
 `vm.progs` (statements + `global_at_ofs` names): that's how func_spawn and the
 horn were worked out.
 
-Known residuals (2026-11-12): e1m7 closet zombies that get knocked down where
-no open spot sees them; a few buttons in id1/rogue/hipnotic; hip1m5 shootable
+Repeatable buttons are re-pressed (movers first) while monsters that aren't
+goals stay alive: that's how e1m7's Chthon dies.
+
+Known residuals (2026-11-12): e1m7 closet zombies placed in the floor (`walkmonster
+in wall`): once splash knocks one down it can never get up or be hit, in
+vanilla too; reported as "knocked down inside the world". A few buttons in id1/rogue/hipnotic; hip1m5 shootable
 door; Shub-Niggurath in `end` (killed by a telefrag the bot doesn't perform).

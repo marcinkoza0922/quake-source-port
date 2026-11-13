@@ -36,6 +36,10 @@ impl Bot<'_> {
         }
         let mut mv = ClientMove::default();
         let shootable = self.vm().ent_f(ent, self.o.health) > 0.0 && self.vm().ent_f(ent, self.o.takedamage) != 0.0;
+        if kind == Kind::Monster && self.stuck_down(ent) {
+            self.fail(i, "knocked down inside the world: can never get up or be hit");
+            return mv;
+        }
         match kind {
             Kind::Monster | Kind::Shoot => self.shoot(&mut mv, ent, t),
             Kind::Button if shootable => self.shoot(&mut mv, ent, t),
@@ -103,6 +107,15 @@ impl Bot<'_> {
             }
             self.sv.command(&format!("setpos {} {} {}", to.x, to.y, to.z));
         }
+    }
+
+    /// A knocked-down zombie is not solid (shots and splash pass it by) and
+    /// gets up only when `walkmove(0,0)` succeeds; one placed in the floor
+    /// (e1m7's closets, "walkmonster in wall") never does. Unkillable in
+    /// vanilla too: a level finding, not something to keep shooting at.
+    fn stuck_down(&self, ent: u32) -> bool {
+        let o = v(self.vm().ent_v(ent, self.o.origin));
+        self.vm().ent_f(ent, self.o.solid) as i32 == SOLID_NOT && self.cm.hull(0, 1).trace(o, o).startsolid
     }
 
     /// Fly to a spot with a clear shot at `ent` and fire at it.
@@ -179,6 +192,11 @@ impl Bot<'_> {
         }
         if self.pushes >= 3 {
             return false;
+        }
+        if self.goals[i].again && !self.fires_mover(ent) && self.movers_moving() {
+            // Stay put until the doors the other buttons moved have arrived.
+            self.goal_start = t;
+            return true;
         }
         if self.spot.is_none() || t - self.spot_at > 1.0 {
             // Try another face on each attempt. Nothing free (a monster in

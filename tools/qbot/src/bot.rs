@@ -102,6 +102,9 @@ struct Goal {
     initial_state: f32,
     /// Exits: the touch function, cleared until the exit becomes the goal.
     touch: i32,
+    /// Buttons: pressed before and re-armed to press again (see
+    /// `repress`); counts as done in the report whatever happens next.
+    again: bool,
 }
 
 struct Ofs {
@@ -181,6 +184,8 @@ struct Bot<'a> {
     warped_at: f64,
     devlog: devlog::DevLog,
     weapon: u8,
+    /// Rounds of re-pressing repeatable buttons so far.
+    repressed: u32,
     impulses: Vec<u8>,
     intermission: Option<usize>,
 }
@@ -234,6 +239,7 @@ pub fn run(fs: Fs, map: &str, opt: &Options) -> Report {
         warped_at: -100.0,
         devlog: devlog::DevLog::default(),
         weapon: 5,
+        repressed: 0,
         impulses: Vec::new(),
         intermission,
     };
@@ -246,7 +252,7 @@ pub fn run(fs: Fs, map: &str, opt: &Options) -> Report {
     }
     let max_time = opt.max_time.unwrap_or_else(|| (bot.goals.len() as f64 * 10.0).max(600.0));
     bot.main_loop(map, max_time);
-    for g in bot.goals.iter().filter(|g| !g.done && g.kind != Kind::Exit) {
+    for g in bot.goals.iter().filter(|g| !g.done && !g.again && g.kind != Kind::Exit) {
         let why = g.failed.as_deref().unwrap_or(if bot.dormant(g) { "never activated" } else { "out of time" });
         let line = format!("{:?} {} #{} at {:?}: {why}", g.kind, g.class, g.ent, bot.center(g.ent));
         bot.rep.failed.push(line);
@@ -263,7 +269,7 @@ pub fn run(fs: Fs, map: &str, opt: &Options) -> Report {
             _ => continue,
         };
         *total += 1;
-        *done += g.done as u32;
+        *done += (g.done || g.again) as u32;
     }
     rep.kills = st.killed_monsters;
     rep.total_monsters = st.total_monsters;
