@@ -80,3 +80,38 @@ fn add_ons_off_ignores_the_gun() {
     assert!(!sv.level.as_ref().unwrap().portals.any_linked());
 }
 
+
+/// Two floor portals: a player standing still bobs straight up and down
+/// between them, even after drifting sideways into the first one.
+#[test]
+fn idle_player_bobs_in_place_between_floor_portals() {
+    let Some((mut sv, c)) = start(&["addons_enable 1"]) else { return };
+    run(&mut sv, c, 30, ClientMove::default());
+    sv.command("setpos 480 600 24");
+    run(&mut sv, c, 10, ClientMove::default());
+    let down = [75.0, 30.0, 0.0];
+    run(&mut sv, c, 2, gun(down, 0));
+    run(&mut sv, c, 2, gun(down, BUTTON_TOY_ALT));
+    sv.command("setpos 470 200 24");
+    run(&mut sv, c, 10, ClientMove::default());
+    let down = [80.0, 200.0, 0.0];
+    run(&mut sv, c, 2, gun(down, 0));
+    // walk a little while the blue portal opens under the feet
+    let walk = ClientMove { side: 100.0, ..gun(down, BUTTON_TOY_FIRE) };
+    run(&mut sv, c, 1, walk);
+    let idle = ClientMove { angles: [0.0, 90.0, 0.0], ..Default::default() };
+    run(&mut sv, c, 80, idle);
+    let (mut top, mut spots) = (0.0f32, Vec::new());
+    for _ in 0..300 {
+        run(&mut sv, c, 1, idle);
+        let o = origin(&sv);
+        let v = sv.level.as_ref().unwrap().vm.ent_v(1, sv.core.sv.fields.velocity);
+        assert!(v[0].abs() < 1e-3 && v[1].abs() < 1e-3, "sideways drift {v:?} at {o:?}");
+        top = top.max(o[2]);
+        if !spots.iter().any(|s: &[f32; 3]| (s[0] - o[0]).hypot(s[1] - o[1]) < 1.0) {
+            spots.push(o);
+        }
+    }
+    assert!(top > 80.0, "launch too low: {top}");
+    assert_eq!(spots.len(), 2, "{spots:?}");
+}

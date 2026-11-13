@@ -17,6 +17,11 @@ const MOVETYPE_BOUNCE: i32 = 10;
 const FL_ONGROUND: i32 = 512;
 /// Slowest exit, so nothing sits in the exit plane and drops straight back.
 const MIN_EXIT_SPEED: f32 = 60.0;
+/// Slowest exit out of a floor portal: a launch about as high as a jump
+/// (~81 units at sv_gravity 800), so a mover that dropped or stepped into a
+/// floor portal pops out with room to steer away instead of falling
+/// straight back in and ping-ponging between two floor portals.
+const MIN_FLOOR_EXIT_SPEED: f32 = 360.0;
 
 fn movable<D: Edicts + ?Sized>(ents: &D, e: Ent) -> bool {
     let mt = ents.f(e, F::MoveType) as i32;
@@ -50,8 +55,11 @@ pub fn carry(a: &Portal, b: &Portal, v: Vec3) -> Vec3 {
     b.normal * -n + b.right * -r + b.up * u
 }
 
-/// Teleport movers that went into a portal this frame.
-pub(crate) fn cross<D: Edicts + ?Sized>(st: &mut Portals, w: &mut World, ents: &mut D) {
+/// Teleport movers that went into a portal this frame. `idle` lists player
+/// entities giving no movement input: leaving a floor portal they lose any
+/// sideways drift (they never touch ground to feel friction), so between
+/// two floor portals they bob straight up and down until they move.
+pub(crate) fn cross<D: Edicts + ?Sized>(st: &mut Portals, w: &mut World, ents: &mut D, idle: &[Ent]) {
     if st.snapshot.is_empty() {
         return;
     }
@@ -91,9 +99,13 @@ pub(crate) fn cross<D: Edicts + ?Sized>(st: &mut Portals, w: &mut World, ents: &
             continue;
         }
         let mut v = carry(&a, &b, vel);
+        if b.normal.z > 0.7 && idle.contains(&e) {
+            v = b.normal * v.dot(b.normal);
+        }
         let out = v.dot(b.normal);
-        if out < MIN_EXIT_SPEED {
-            v += b.normal * (MIN_EXIT_SPEED - out);
+        let min = if b.normal.z > 0.7 { MIN_FLOOR_EXIT_SPEED } else { MIN_EXIT_SPEED };
+        if out < min {
+            v += b.normal * (min - out);
         }
         ents.set_v(e, V::Velocity, v);
         turn(ents, e, &a, &b);

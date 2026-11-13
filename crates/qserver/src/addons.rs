@@ -83,8 +83,11 @@ pub(crate) fn active(c: &Core) -> bool {
 /// After physics: portal crossings, then new shots, then client updates.
 pub(crate) fn frame(l: &mut Level, c: &mut Core) {
     let st = &mut l.portals;
+    // players giving no movement input: they bob in place on floor portals
+    let idle: Vec<qworld::Ent> =
+        c.clients.iter().enumerate().filter(|(_, cl)| cl.cmd.forward == 0.0 && cl.cmd.side == 0.0).map(|(i, _)| i as qworld::Ent + 1).collect();
     let mut ents = Ents { vm: &mut l.vm, c: &mut *c };
-    portal_move::cross(st, &mut l.world, &mut ents);
+    portal_move::cross(st, &mut l.world, &mut ents, &idle);
     let gun = c.cvars.value_of(Toy::PortalGun.cvar()) != 0.0;
     for (i, slot) in st.presses(&c.clients) {
         if !gun {

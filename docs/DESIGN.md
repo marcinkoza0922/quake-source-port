@@ -172,7 +172,9 @@ off. Toys are only allowed with no deathmatch and no remote client
   velocity (walk/step/fly/toss/bounce) first; afterwards a mover touching a
   portal rectangle with the pre-frame velocity going in (or resting on a
   floor portal) is placed in front of the other portal, velocity rotated
-  (`carry`: normal and right flip, up kept), at least 60 u/s out, view or
+  (`carry`: normal and right flip, up kept), at least 60 u/s out (360
+  u/s up out of a floor portal, where a player with no move input also
+  loses sideways speed, so two floor portals bob in place), view or
   yaw turned (`fixangle`), unless the spot is solid. Missiles explode on
   the wall before the check, so they don't cross.
 - Sync: `//qsp_portal owner slot [origin normal up]` stufftext, full state
