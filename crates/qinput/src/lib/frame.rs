@@ -38,6 +38,7 @@ impl Input {
         let mlook = b[btn::MLOOK].is_down() || v(c.freelook) != 0.0;
 
         if self.dest != KeyDest::Game {
+            self.lockon.reset();
             self.mouse = [0.0; 2];
             self.wheel_aim = [0.0; 2];
             self.wheel_mouse = [0.0; 2];
@@ -192,6 +193,28 @@ impl Input {
         } else {
             let f = v(c.m_forward) * dy / fwd_speed;
             if f > 0.0 { s.back += f } else { s.forward -= f }
+        }
+        let held = self.buttons[btn::LOCKON].state & 3 != 0;
+        self.buttons[btn::LOCKON].state &= !2;
+        let cycle = self.key_down(if v(c.joy_swapmovelook) != 0.0 { K_LTHUMB } else { K_RTHUMB });
+        let p = lockon::LockOnParams {
+            enabled: v(c.autoaim) != 0.0 && !wheel,
+            allowed: self.autoaim_allowed,
+            toggle: v(c.autoaim_mode) != 0.0,
+            reacquire: v(c.autoaim_reacquire) != 0.0,
+            cone: v(c.autoaim_cone),
+            range: v(c.autoaim_range),
+            fov: self.autoaim_fov,
+            target_players: self.autoaim_players,
+        };
+        if let Some(delta) = self.lockon.update(&p, aim, viewangles, held, cycle) {
+            s.look_delta = delta;
+            if !s.strafe {
+                s.left = 0.0;
+                s.right = 0.0;
+            }
+            s.lookup = 0.0;
+            s.lookdown = 0.0;
         }
         s
     }

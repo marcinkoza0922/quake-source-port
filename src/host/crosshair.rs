@@ -13,7 +13,7 @@ pub(super) const CROSSHAIR_COLORS: [[f32; 4]; 6] = [
 /// A crosshair at the scene centre: shape from `crosshair_shape` (0 cross,
 /// 1 gap cross, 2 dot, 3 cross + dot, 4 T, 5 box), sized by `crosshair_size`
 /// with an optional dark outline (`crosshair_outline`) so it reads on any wall.
-pub(super) fn draw_crosshair(c: &mut Canvas, scene_h: f32, cv: &qcore::cvar::Cvars) {
+pub(super) fn draw_crosshair(c: &mut Canvas, scene_h: f32, cv: &qcore::cvar::Cvars, locked: bool, active: bool) {
     let size = cv.value_of("crosshair_size").clamp(0.5, 4.0);
     let color = CROSSHAIR_COLORS[(cv.value_of("crosshair_color").max(0.0) as usize).min(CROSSHAIR_COLORS.len() - 1)];
     let base = c.scale;
@@ -40,7 +40,7 @@ pub(super) fn draw_crosshair(c: &mut Canvas, scene_h: f32, cv: &qcore::cvar::Cva
         }
         v
     };
-    let bars: Vec<(f32, f32, f32, f32)> = match cv.value_of("crosshair_shape") as i32 {
+    let mut bars: Vec<(f32, f32, f32, f32)> = match cv.value_of("crosshair_shape") as i32 {
         1 => gapped(false),
         2 => vec![center_dot],
         3 => {
@@ -64,6 +64,7 @@ pub(super) fn draw_crosshair(c: &mut Canvas, scene_h: f32, cv: &qcore::cvar::Cva
         }
         _ => vec![full_h, full_v],
     };
+    if cv.value_of("crosshair") == 0.0 { bars.clear(); }
     if cv.value_of("crosshair_outline") != 0.0 {
         let o = (base * 0.5).round().max(1.0);
         for &(x, y, w, h) in &bars {
@@ -73,5 +74,25 @@ pub(super) fn draw_crosshair(c: &mut Canvas, scene_h: f32, cv: &qcore::cvar::Cva
     for (x, y, w, h) in bars {
         c.fill(x, y, w, h, color);
     }
+    if locked && cv.value_of("assist_autoaim_indicator") != 0.0 {
+        // Four small corner ticks preserve the chosen shape and colour.
+        let r = arm + 3.0 * base;
+        let tick = (2.0 * base).round().max(2.0);
+        for sx in [-1.0, 1.0] {
+            for sy in [-1.0, 1.0] {
+                let x = cx + sx * r;
+                let y = cy + sy * r;
+                c.fill(x - if sx > 0.0 { tick } else { 0.0 }, y, tick + t, t, color);
+                c.fill(x, y - if sy > 0.0 { tick } else { 0.0 }, t, tick + t, color);
+            }
+        }
+    }
     c.scale = base;
+    if active && cv.value_of("assist_autoaim") != 0.0 && cv.value_of("assist_autoaim_mode") == 1.0 {
+        // Keep the armed state visible between targets, independently of lock ticks.
+        let x = cx / base;
+        let y = (cy + arm + 8.0 * base) / base;
+        c.text_center(x + 0.5, y + 0.5, "AUTO AIM", 6.0, [0.0, 0.0, 0.0, 0.9]);
+        c.text_center(x, y, "AUTO AIM", 6.0, [1.0, 0.85, 0.1, 1.0]);
+    }
 }

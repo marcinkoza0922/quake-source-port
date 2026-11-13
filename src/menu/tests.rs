@@ -444,3 +444,53 @@ mod shader_tests {
         assert_eq!(cv.by_name("r_shader_params").unwrap().string, "");
     }
 }
+
+#[test]
+fn autoaim_mapping_tracks_enable_and_mode_and_captures_binding() {
+    let mut cv = Cvars::default();
+    cv.register("assist_autoaim", "0", 0);
+    cv.register("assist_autoaim_mode", "0", 0);
+    let mut m = Menu::new();
+    m.open(Screen::OptionsPage(Page::Controls));
+    m.key(0, &mut cv, false);
+    assert_eq!(m.page_len(Page::Controls), CONTROLS.len());
+    cv.set("assist_autoaim", "1");
+    m.key(0, &mut cv, false);
+    assert_eq!(m.page_len(Page::Controls), CONTROLS.len() + 1);
+    let row = 1;
+    assert!(matches!(m.page_item(Page::Controls, row), Item::Bind { label: "Lock-on", cmd: "+lockon" }));
+    m.opt_cursor = row;
+    m.key(K_ENTER, &mut cv, false);
+    let actions = m.key(b'f' as i32, &mut cv, false);
+    assert!(actions.iter().any(|a| matches!(a, Action::Command(c) if c == "bind \"f\" \"+lockon\"\n")));
+    cv.set("assist_autoaim_mode", "1");
+    m.key(0, &mut cv, false);
+    assert!(matches!(m.page_item(Page::Controls, row), Item::Bind { label: "Auto-aim Toggle", cmd: "+lockon" }));
+    cv.set("assist_autoaim", "0");
+    m.key(0, &mut cv, false);
+    assert_eq!(m.page_len(Page::Controls), CONTROLS.len());
+    assert!(m.opt_cursor < m.page_len(Page::Controls));
+    assert!(matches!(m.page_item(Page::Controls, 1), Item::Bind { cmd: "+jump", .. }));
+    assert_eq!(keys_for(&m.bindings, "+lockon"), vec![b'f' as i32]);
+}
+
+#[test]
+fn autoaim_submenu_is_guarded_and_returns_to_assists() {
+    let mut cv = Cvars::default();
+    for name in ["assist_autoaim", "assist_autoaim_mode", "assist_autoaim_cone", "assist_autoaim_range"] {
+        cv.register(name, "0", 0);
+        assert!(option_cvars().any(|c| c == name));
+    }
+    let mut m = Menu::new();
+    m.open(Screen::OptionsPage(Page::Assists));
+    let row = ASSISTS.iter().position(|i| matches!(i, Item::Sub { page: Page::AutoAim, .. })).unwrap();
+    m.opt_cursor = row;
+    m.key(K_ENTER, &mut cv, false);
+    assert_eq!(m.screen, Screen::OptionsPage(Page::Assists));
+    cv.set("assist_autoaim", "1");
+    m.key(K_ENTER, &mut cv, false);
+    assert_eq!(m.screen, Screen::OptionsPage(Page::AutoAim));
+    m.key(K_ESCAPE, &mut cv, false);
+    assert_eq!(m.screen, Screen::OptionsPage(Page::Assists));
+    assert_eq!(m.opt_cursor, row);
+}

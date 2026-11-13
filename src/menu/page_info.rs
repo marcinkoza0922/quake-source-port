@@ -57,6 +57,12 @@ pub(super) fn tooltip(item: Item) -> Option<&'static str> {
         "r_waterripples" => "Liquid surfaces swell and ring out where things move through them",
         "r_watersplash" => "Droplets spray up when things enter or leave water, slime or lava",
         "r_watercaustics" => "Rippling light patterns on surfaces under water and slime",
+        "assist_autoaim" => "Snap and track enemies in local play, including split-screen; unavailable online",
+        "assist_autoaim_mode" => "Hold: keep Lock-on held. Toggle: press Auto-aim Toggle to enable automatic acquisition. Click look stick to switch targets",
+        "assist_autoaim_indicator" => "Show corner ticks at screen centre while locked, even with Crosshair off",
+        "assist_autoaim_reacquire" => "Automatically acquire another enemy while holding Lock-on after losing a target",
+        "assist_autoaim_cone" => "How close an enemy must be to the crosshair for automatic acquisition in toggle mode (degrees)",
+        "assist_autoaim_range" => "Maximum distance for acquiring and keeping an enemy locked",
         "aim_slowdown" => "Slows stick look while the crosshair is over an enemy",
         "aim_rotation" => "Turns the view to follow a moving enemy you are aiming at",
         "a11y_reducemotion" => "Turns off view bob, strafe tilt and the camera kick when hit or firing",
@@ -115,6 +121,7 @@ pub(super) fn page_items(p: Page) -> &'static [Item] {
         Page::Touch => TOUCH,
         Page::Autosave => AUTOSAVE,
         Page::Assists => ASSISTS,
+        Page::AutoAim => AUTOAIM,
         Page::Join => JOIN,
         Page::Host => HOST,
         Page::Setup => SETUP,
@@ -131,6 +138,7 @@ pub(super) fn page_name(p: Page) -> &'static str {
         Page::Touch => "Touchscreen",
         Page::Autosave => "Autosave",
         Page::Assists => "Assists",
+        Page::AutoAim => "Auto-aim Settings",
         Page::HudLayout => "Modern HUD Layout",
         Page::Messages => "Messages & Captions",
         Page::Water => "Water Settings",
@@ -144,14 +152,15 @@ pub(super) fn page_name(p: Page) -> &'static str {
 
 /// The page an `Item::Sub` page returns to, with that row's index.
 pub(super) fn parent_page(p: Page) -> Option<(Page, usize)> {
-    [Page::Gameplay, Page::Input, Page::Hud, Page::Accessibility, Page::Enhancements].into_iter().find_map(|parent| {
+    [Page::Assists, Page::Gameplay, Page::Input, Page::Hud, Page::Accessibility, Page::Enhancements].into_iter().find_map(|parent| {
         page_items(parent).iter().position(|i| matches!(i, Item::Sub { page, .. } if *page == p)).map(|i| (parent, i))
     })
 }
 
 /// Sub-pages that are switched off by their parent setting.
 pub(super) fn sub_disabled(page: Page, cv: &Cvars) -> bool {
-    (page == Page::Autosave && cv.value_of("sv_autosave") == 0.0)
+    (page == Page::AutoAim && cv.value_of("assist_autoaim") == 0.0)
+        || (page == Page::Autosave && cv.value_of("sv_autosave") == 0.0)
         || (page == Page::HudLayout && cv.value_of("scr_hudstyle") == 0.0)
         || (page == Page::Water && cv.value_of("r_enhancedwater") == 0.0)
         || (page == Page::Blood && cv.value_of("r_blood") == 0.0)

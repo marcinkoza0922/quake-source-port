@@ -2,6 +2,7 @@ use super::*;
 
 impl Menu {
     pub fn draw(&self, c: &mut Canvas, pic: &mut PicFn, cv: &Cvars, realtime: f64) {
+        self.sync_autoaim_mapping(cv);
         if self.screen == Screen::None {
             return;
         }
@@ -162,6 +163,7 @@ impl Menu {
         self.draw_hints(c);
         self.draw_back(c);
         c.reset_origin();
+        if self.autoaim_prompt { self.draw_autoaim_prompt(c); }
         c.scale = base_scale;
     }
 
@@ -452,7 +454,7 @@ impl Menu {
             Item::Bind { label: l, cmd } => {
                 label(c, l);
                 let keys = keys_for(&self.bindings, cmd);
-                let capturing = self.capture.is_some_and(|r| matches!(page_items(Page::Controls).get(r), Some(Item::Bind { cmd: c2, .. }) if *c2 == cmd));
+                let capturing = self.capture.is_some_and(|r| matches!(self.page_item(Page::Controls, r), Item::Bind { cmd: c2, .. } if c2 == cmd));
                 if capturing {
                     if blink {
                         txt_gold(c, VALUE_X, y, "press a key...");

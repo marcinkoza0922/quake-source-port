@@ -91,7 +91,6 @@ impl Host {
             .into_iter()
             .find(|&k| crate::glyphs::is_pad_key(k))
             .unwrap_or(qinput::keys::K_XBUTTON);
-        let crosshair = self.cv("crosshair") != 0.0;
         let showfps = self.cv("scr_showfps") != 0.0;
         let classic = self.classic_hud();
         let hud_cfg = crate::sbar::HudConfig::from_cvars(&self.server.core.cvars);
@@ -120,16 +119,16 @@ impl Host {
                             let [x, y, w, h] = sv.rect;
                             let mut cc = Canvas::new(w, h);
                             cc.ui = c.ui.clone();
-                            let (cl, fade, face) = if i == 0 {
-                                (&self.cl, &mut self.hud_fade, self.view.face_anim_time > self.cl.time)
+                            let (cl, fade, face, locked, active) = if i == 0 {
+                                (&self.cl, &mut self.hud_fade, self.view.face_anim_time > self.cl.time, self.input.lockon.target.is_some(), self.input.lockon.active)
                             } else {
                                 let Some(g) = live.get(i - 1).and_then(|&k| self.guests.get_mut(k)) else { continue };
                                 let face = g.view.face_anim_time > g.cl.time;
-                                (&g.cl, &mut g.hud_fade, face)
+                                (&g.cl, &mut g.hud_fade, face, g.input.lockon.target.is_some(), g.input.lockon.active)
                             };
-                            if crosshair && cl.intermission == 0 {
+                            if cl.intermission == 0 {
                                 let vh = cc.vh() - if classic { CLASSIC_SBAR_LINES } else { 0.0 };
-                                draw_crosshair(&mut cc, vh, &self.server.core.cvars);
+                                draw_crosshair(&mut cc, vh, &self.server.core.cvars, locked, active);
                             }
                             let mut sb = crate::sbar::Sbar::new(&mut cc, &mut pf, pack);
                             sb.teamplay = teamplay;
@@ -156,8 +155,8 @@ impl Host {
                     }
                     _ => {
                         let scene_h = c.vh() - if classic { CLASSIC_SBAR_LINES } else { 0.0 };
-                        if crosshair {
-                            draw_crosshair(&mut c, scene_h, &self.server.core.cvars);
+                        {
+                            draw_crosshair(&mut c, scene_h, &self.server.core.cvars, self.input.lockon.target.is_some(), self.input.lockon.active);
                         }
                         let face = self.view.face_anim_time > self.cl.time;
                         let pack = crate::sbar::Pack::from_game_dirs(self.server.core.fs.game_dirs().iter().map(String::as_str));
