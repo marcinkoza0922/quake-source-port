@@ -373,8 +373,26 @@ pub(super) const COLORBLIND: &[(&str, f32)] =
 pub(super) const XHAIR_SIZE: &[(&str, f32)] = &[("small", 0.75), ("normal", 1.0), ("large", 1.5), ("huge", 2.5)];
 pub(super) const XHAIR_SHAPE: &[(&str, f32)] =
     &[("cross", 0.0), ("gap cross", 1.0), ("dot", 2.0), ("cross + dot", 3.0), ("T", 4.0), ("box", 5.0)];
+pub(super) const HITMARKER_SHAPE: &[(&str, f32)] = &[
+    ("diagonal streaks", 0.0), ("short diagonals", 1.0), ("diamond", 2.0),
+    ("double diagonals", 3.0), ("double chevrons", 4.0), ("broken square", 5.0),
+];
 pub(super) const XHAIR_COLOR: &[(&str, f32)] =
-    &[("white", 0.0), ("yellow", 1.0), ("green", 2.0), ("cyan", 3.0), ("magenta", 4.0), ("red", 5.0)];
+    &[("grey", 6.0), ("white", 0.0), ("yellow", 1.0), ("green", 2.0), ("cyan", 3.0), ("magenta", 4.0), ("red", 5.0)];
+pub(super) const CROSSHAIR: &[Item] = &[
+    toggle("Crosshair", "crosshair"),
+    Item::Choice { label: "Crosshair Shape", cvar: "crosshair_shape", choices: XHAIR_SHAPE },
+    Item::Choice { label: "Crosshair Size", cvar: "crosshair_size", choices: XHAIR_SIZE },
+    toggle("Crosshair Outline", "crosshair_outline"),
+    toggle("Hit Markers", "hud_hitmarkers"),
+    Item::Choice { label: "Hitmarker Type", cvar: "hitmarker_shape", choices: HITMARKER_SHAPE },
+    Item::Choice { label: "Hitmarker Size", cvar: "hitmarker_size", choices: XHAIR_SIZE },
+    toggle("Change Color on Target", "crosshair_ontarget"),
+    toggle("Change Color on Kill", "crosshair_onkill"),
+    Item::Choice { label: "Normal Color", cvar: "crosshair_color", choices: XHAIR_COLOR },
+    Item::Choice { label: "On Target Color", cvar: "crosshair_targetcolor", choices: XHAIR_COLOR },
+    Item::Choice { label: "On Kill Color", cvar: "crosshair_killcolor", choices: XHAIR_COLOR },
+];
 pub(super) const TEXT_SIZE: &[(&str, f32)] = &[("normal", 1.0), ("large", 1.5), ("larger", 2.0), ("largest", 3.0)];
 pub(super) const GAME_SPEED: &[(&str, f32)] = &[("100%", 1.0), ("90%", 0.9), ("75%", 0.75), ("60%", 0.6), ("50%", 0.5)];
 
@@ -407,12 +425,7 @@ pub(super) const NOTIFY_POS: &[(&str, f32)] = &[("top left", 0.0), ("top center"
 pub(super) const HUD: &[Item] = &[
     Item::Choice { label: "HUD Style", cvar: "scr_hudstyle", choices: HUD_STYLE },
     Item::Sub { label: "Modern HUD Layout", page: Page::HudLayout },
-    toggle("Crosshair", "crosshair"),
-    Item::Choice { label: "Crosshair Shape", cvar: "crosshair_shape", choices: XHAIR_SHAPE },
-    Item::Choice { label: "Crosshair Size", cvar: "crosshair_size", choices: XHAIR_SIZE },
-    Item::Choice { label: "Crosshair Color", cvar: "crosshair_color", choices: XHAIR_COLOR },
-    toggle("Crosshair Outline", "crosshair_outline"),
-    toggle("Hit Markers", "hud_hitmarkers"),
+    Item::Sub { label: "Crosshair", page: Page::Crosshair },
     Item::Choice { label: "Weapon Wheel Slowdown", cvar: "cl_wheel_timescale", choices: WHEEL_TIME },
     Item::Sub { label: "Messages & Captions", page: Page::Messages },
     toggle("Show FPS", "scr_showfps"),

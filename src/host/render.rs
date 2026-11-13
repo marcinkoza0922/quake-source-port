@@ -142,6 +142,14 @@ impl Host {
         let equip_key = self.equip_wheel_key();
         let showfps = self.cv("scr_showfps") != 0.0;
         let classic = self.classic_hud();
+        let rays: Vec<_> = std::iter::once(&self.cl).chain(self.guests.iter().filter(|g| g.cl.signon == 4).map(|g| &g.cl))
+            .map(|cl| {
+                let origin = cl.entities.get(cl.viewentity).map_or([0.0; 3], |e| e.origin);
+                let eye = Vec3::from_array(origin) + Vec3::new(0.0, 0.0, cl.viewheight);
+                (cl.viewentity as u32, eye, qcore::math::angle_vectors(Vec3::from_array(cl.viewangles)).0)
+            }).collect();
+        let target_colors: Vec<bool> = rays.into_iter().map(|(id, eye, dir)|
+            self.server.reticle_on_target(id, eye, dir)).collect();
         let hud_cfg = crate::sbar::HudConfig::from_cvars(&self.server.core.cvars);
         {
             let fs = &self.server.core.fs;
@@ -182,8 +190,9 @@ impl Host {
                             };
                             if cl.intermission == 0 {
                                 let vh = cc.vh() - if classic { CLASSIC_SBAR_LINES } else { 0.0 };
-                                draw_crosshair(&mut cc, vh, &self.server.core.cvars, locked, active);
-                                hitmarker::draw_hitmarker(&mut cc, vh, &self.server.core.cvars, marker.0, marker.1);
+                                let color = reticle::color(&self.server.core.cvars, target_colors[i], marker.1 && marker.0 > 0.0);
+                                draw_crosshair(&mut cc, vh, &self.server.core.cvars, locked, active, color);
+                                hitmarker::draw_hitmarker(&mut cc, vh, &self.server.core.cvars, marker.0, color);
                             }
                             let mut sb = crate::sbar::Sbar::new(&mut cc, &mut pf, pack);
                             sb.teamplay = teamplay;
@@ -212,8 +221,9 @@ impl Host {
                         let scene_h = c.vh() - if classic { CLASSIC_SBAR_LINES } else { 0.0 };
                         self.view.draw_damage(&mut c, scene_h, self.server.core.cvars.value_of("hud_damageindicator") != 0.0, self.server.core.cvars.value_of("v_flashscale"));
                         {
-                            draw_crosshair(&mut c, scene_h, &self.server.core.cvars, self.input.lockon.target.is_some(), self.input.lockon.active);
-                            hitmarker::draw_hitmarker(&mut c, scene_h, &self.server.core.cvars, self.feedback.remaining(self.realtime), self.feedback.kill);
+                            let color = reticle::color(&self.server.core.cvars, target_colors[0], self.feedback.kill && self.feedback.remaining(self.realtime) > 0.0);
+                            draw_crosshair(&mut c, scene_h, &self.server.core.cvars, self.input.lockon.target.is_some(), self.input.lockon.active, color);
+                            hitmarker::draw_hitmarker(&mut c, scene_h, &self.server.core.cvars, self.feedback.remaining(self.realtime), color);
                         }
                         let face = self.view.face_anim_time > self.cl.time;
                         let pack = crate::sbar::Pack::from_game_dirs(self.server.core.fs.game_dirs().iter().map(String::as_str));

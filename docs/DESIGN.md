@@ -11,33 +11,11 @@ The menu tooltip explains the edge directions and Screen Flashes scaling.
 
 ### Hit and kill feedback
 
-HUD → Hit Markers (`hud_hitmarkers`, default 0) adds six distinct outlined,
-animated confirmations matching the six crosshair shapes, independently of
-crosshair visibility. Hits are white; kills are orange-red and last longer.
-The Cross marker uses four diagonal strokes close to the center, between the + arms.
-Audio → Hit Sounds (`s_hitfeedback`, default 0) enables synthesized feedback;
-Hit Sound and Kill Sound submenus independently edit and preview nine cues,
-volume, time stretch, playback speed, pitch, bass/treble, drive, echo and reverb.
-All settings are archived (`s_hit_*`, `s_kill_*`); preview works while disabled.
-Time stretch changes envelopes/timing without transposing; speed changes both
-timing and pitch. Master SFX volume applies to previews and gameplay.
-
-`qvm::Host::{before_damage,after_damage}` bracket QC `T_Damage`, including
-nested calls. `qserver::host::feedback` captures live monster/player health,
-attacker and entity generation, then confirms an actual health reduction.
-World/self damage, scenery, corpses and invulnerability produce no feedback.
-Only the attacking client receives reliable `svc_stufftext` comments
-`//qhit 0` / `//qhit 1`; qclient consumes these exact lines as `HitFeedback`
-events without executing commands. Classic clients can ignore the comments.
-Servers/mods without this hook do not provide confirmations.
-`host::feedback` coalesces events per frame (kills win), throttles rapid hit
-audio, preserves kill visibility, and tracks split-screen players separately.
-`qsound::feedback` adapts the owner's original Padwight synthesis/effects with
-permission under this project's license; no recorded assets are copied.
-Two bounded caches regenerate samples on settings/device-rate changes; the
-audio thread only mixes PCM. State clears across maps/disconnects.
-`hitmarker_test [kill]` previews the marker for screenshot diagnostics;
-`hitfeedback_preview hit|kill` previews the configured sound.
+HUD → Crosshair edits the crosshair and hitmarker with static side-by-side previews;
+both share normal (grey), target (white), and kill (red) colors. Shapes and sizes
+are independent. Audio → Hit Sounds edits the synthesized hit and kill cues.
+See [HIT_FEEDBACK.md](HIT_FEEDBACK.md) for settings, target detection, event
+capture, synthesis, and diagnostic commands.
 
 ## Decisions (interview, 2026-11-10)
 
@@ -144,7 +122,7 @@ Custom immediate-mode UI (`qui`) drawing through the renderer's 2D batch, concha
   liquid tints stay.
 - `r_colorblind` 0–3: daltonize in `post.frag` after the polyblend.
 - `crosshair_shape` (0 cross, 1 gap cross, 2 dot, 3 cross+dot, 4 T, 5 box)/`crosshair_size`/`crosshair_color`/`crosshair_outline`: pixel-drawn
-  rects (`draw_crosshair` in host.rs).
+  rects (`draw_crosshair` in `reticle.rs`).
 - `cl_captions`: `src/captions.rs` maps sound path prefixes to captions,
   merged as "xN", 2.5 s hold, drawn above the HUD.
 - `scr_textscale`/`scr_textbg`: scale and backdrop for notify, centerprint

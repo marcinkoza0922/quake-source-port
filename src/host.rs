@@ -43,9 +43,7 @@ mod ctx;
 mod cvars;
 use cvars::*;
 pub(crate) mod feedback;
-mod hitmarker;
-mod crosshair;
-use crosshair::*;
+use crate::reticle::{self, draw_crosshair, hitmarker};
 mod video;
 mod touch;
 

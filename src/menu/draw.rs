@@ -115,6 +115,7 @@ impl Menu {
                     let pw = p.map_or(48.0, |p| p.1 as f32);
                     c.pic(((640.0 - pw) / 2.0).floor(), y0 + 8.0, p);
                 }
+                if page == Page::Crosshair { crate::reticle::preview(c, cv); }
                 self.draw_addon_notes(c, cv, page, n);
                 if page == Page::Join && self.servers.is_empty() && !self.searching {
                     let s = "no servers found yet";

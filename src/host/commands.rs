@@ -144,6 +144,7 @@ pub(super) fn register_commands(c: &mut Commands<Host>) {
             "assists" => Some(Page::Assists),
             "autoaim" => Some(Page::AutoAim),
             "hud" => Some(Page::Hud),
+            "crosshair" => Some(Page::Crosshair),
             "hitsound" => Some(Page::HitSound),
             "killsound" => Some(Page::KillSound),
             "hudlayout" | "layout" => Some(Page::HudLayout),

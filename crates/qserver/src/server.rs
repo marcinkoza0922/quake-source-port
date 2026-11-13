@@ -17,6 +17,7 @@ use crate::host::Ctx;
 use crate::msg::*;
 use crate::vis::Vis;
 mod types;
+mod reticle;
 pub use types::*;
 mod spawn;
 mod physics;
