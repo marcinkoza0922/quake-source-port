@@ -15,6 +15,7 @@ float linear_depth(float d) {
 }
 
 void main() {
+    if (dot(fr.portal_clip.xyz, i_wpos) + fr.portal_clip.w < 0.0) discard;
     if (pc.fogmix.w == 8.0) {
         // add-on portal: oval mask over the quad, the view out of the linked
         // portal sampled in screen space (or a dim fill), a glowing rim

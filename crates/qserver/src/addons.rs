@@ -23,6 +23,7 @@ pub const CVARS: &[(&str, &str, u32)] = &[
     ("addon_portal_view", "1", CVAR_ARCHIVE),
     ("addon_portal_max", "4", CVAR_ARCHIVE),
     ("addon_portal_dist", "4096", CVAR_ARCHIVE),
+    ("addon_portal_depth", "3", CVAR_ARCHIVE),
 ];
 
 /// Usercmd button bits (bit 0 attack and bit 1 jump are QC's).

@@ -242,6 +242,7 @@ impl Host {
             teleport_windows: v("r_teleportwindows") != 0.0,
             gun_portal_max: v("addon_portal_max").clamp(0.0, 4.0) as u32,
             gun_portal_dist: v("addon_portal_dist").max(0.0),
+            gun_portal_depth: v("addon_portal_depth").clamp(0.0, 6.0) as u32,
             skyfog: v("r_skyfog"),
             dynamic: v("r_dynamic") != 0.0,
             vsync: v("vid_vsync") != 0.0,

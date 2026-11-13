@@ -186,12 +186,24 @@ off. Toys are only allowed with no deathmatch and no remote client
   window for a linked portal (same rotation as `carry`, clip plane 0.5 in
   front of the exit wall). `prepare_portals` takes live gun portals first
   (facing, in frustum, nearest, `addon_portal_max` 1-4, within
-  `addon_portal_dist`), then teleporter windows, 4 targets in all; targets
-  exist only once a live portal was seen. Each portal is an FTE quad in
-  `fte.frag` mode 8: oval mask, rim in the owner colour, inside the window
-  target sampled at `gl_FragCoord` (flat fill without one or with
-  `addon_portal_view 0`). Windows are not recursive. The player's own body
-  is a `portal_only` entity (views bit for its player), skipped in normal
+  `addon_portal_dist`), then teleporter windows (4 top-level views), then
+  nested gun portals breadth first up to `addon_portal_depth` levels
+  (0-6, default 3): `Portal::through` composes the outer mapping with the
+  inner one, so a nested view is just another window from the main eye;
+  `MAX_PORTAL_VIEWS` (8) targets in all, created once a live portal was
+  seen. `PortalDraw::parent` names the view it is seen in; `draw_portals`
+  renders in reverse so children exist before their parent samples them.
+  Each portal is an FTE quad in `fte.frag` mode 8: oval mask, rim in the
+  owner colour, inside the target of the view (parent, portal) sampled at
+  `gl_FragCoord` (flat fill past the depth limit or with
+  `addon_portal_view 0`). Portal views also draw the classic and FTE
+  particles (not soft) and every gun oval but their own exit; particle,
+  FTE, world, alias, water and sky shaders discard behind `portal_clip`.
+  The player's own body is a `portal_only` entity (views bit for its
+  player), skipped in normal draws. `portal_set <0|1> [o n up]` (server
+  command, single player) places the local player's portal exactly, no
+  surface checks: `portal_set 0 480 80 48 0 1 0 0 0 1; portal_set 1 480 330
+  48 0 -1 0 0 0 1; setpos 470 160 40 0 80 0` on e1m1 is a recursion tunnel.
   draws.
 - Turning add-ons off (or a remote client joining) removes all portals.
 - Tests: `crates/qserver/tests/portals.rs` (e1m1, needs game data).

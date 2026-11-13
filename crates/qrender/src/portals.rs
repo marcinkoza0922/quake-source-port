@@ -176,6 +176,36 @@ impl Portal {
         m[15] = 1.0;
         m
     }
+    /// Destination point back to the source side (inverse of `to_destination`).
+    pub fn from_destination(&self, p: [f32; 3]) -> [f32; 3] {
+        let d: [f32; 3] = std::array::from_fn(|k| p[k] - self.destination[k]);
+        std::array::from_fn(|i| (0..3).map(|j| self.rot[j][i] * d[j]).sum::<f32>() + self.center[i])
+    }
+    /// `inner` (a portal on this one's destination side) as seen through
+    /// this one: a window from the source side whose mapping is this
+    /// portal's followed by `inner`'s, its clip plane `inner`'s.
+    pub fn through(&self, inner: &Portal) -> Portal {
+        let (mut mins, mut maxs) = ([f32::MAX; 3], [f32::MIN; 3]);
+        for c in 0..8 {
+            let p = std::array::from_fn(|k| if c >> k & 1 == 0 { inner.mins[k] } else { inner.maxs[k] });
+            let q = self.from_destination(p);
+            for k in 0..3 {
+                mins[k] = mins[k].min(q[k]);
+                maxs[k] = maxs[k].max(q[k]);
+            }
+        }
+        let (a, b) = (self.rot, inner.rot);
+        Portal {
+            mins,
+            maxs,
+            normal: std::array::from_fn(|i| (0..3).map(|j| a[j][i] * inner.normal[j]).sum()),
+            center: self.from_destination(inner.center),
+            destination: inner.destination,
+            rot: std::array::from_fn(|i| std::array::from_fn(|j| (0..3).map(|k| b[i][k] * a[k][j]).sum())),
+            pvs: inner.pvs,
+            gun: inner.gun,
+        }
+    }
     pub fn plane(&self) -> [f32; 4] {
         [
             self.normal[0],
@@ -218,6 +248,30 @@ mod tests {
         let m = p.to_source();
         let back: [f32; 3] = std::array::from_fn(|i| m[i] * q[0] + m[4 + i] * q[1] + m[8 + i] * q[2] + m[12 + i]);
         assert!((0..3).all(|k| (back[k] - [3.0, -7.0, 20.0][k]).abs() < 1e-3), "{back:?}");
+    }
+
+    #[test]
+    fn nested_window_composes_both_mappings() {
+        let g = |o: [f32; 3], n: [f32; 3]| crate::GunPortal {
+            origin: o,
+            normal: n,
+            up: [0.0, 0.0, 1.0],
+            half: [28.0, 48.0],
+            color: [0; 3],
+            exit: None,
+            live: true,
+        };
+        let (a, b) = (g([0.0; 3], [1.0, 0.0, 0.0]), g([300.0, 40.0, 0.0], [0.0, 1.0, 0.0]));
+        let outer = gun(0, &a, (b.origin, b.normal, b.up));
+        let inner = gun(1, &b, (a.origin, a.normal, a.up));
+        let both = outer.through(&inner);
+        let p = [50.0, 7.0, -3.0];
+        let want = inner.to_destination(outer.to_destination(p));
+        let got = both.to_destination(p);
+        assert!((0..3).all(|k| (got[k] - want[k]).abs() < 1e-3), "{got:?} {want:?}");
+        assert!((0..3).all(|k| (both.from_destination(got)[k] - p[k]).abs() < 1e-3));
+        let (c1, c2) = (both.clip(), inner.clip());
+        assert!((0..4).all(|k| (c1[k] - c2[k]).abs() < 1e-3), "{c1:?} {c2:?}");
     }
 
     fn fixture(class: &str, destination: &str, extra: &str) -> (Bsp, world::World) {

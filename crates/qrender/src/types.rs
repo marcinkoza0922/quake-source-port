@@ -271,6 +271,9 @@ pub struct Settings {
     /// the distance beyond which a portal is drawn flat.
     pub gun_portal_max: u32,
     pub gun_portal_dist: f32,
+    /// Portals seen through portals: nesting levels drawn live (0 = none;
+    /// deeper ones are flat). All views share [`crate::MAX_PORTAL_VIEWS`].
+    pub gun_portal_depth: u32,
     /// Sky blend toward fog colour (r_skyfog).
     pub skyfog: f32,
     /// Alpha of the front sky layer (r_skyalpha).
@@ -360,6 +363,7 @@ impl Default for Settings {
             teleport_windows: false,
             gun_portal_max: 4,
             gun_portal_dist: 4096.0,
+            gun_portal_depth: 3,
             skyfog: 0.5,
             skyalpha: 1.0,
             dynamic: true,

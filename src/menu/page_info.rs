@@ -34,6 +34,7 @@ pub(super) fn tooltip(item: Item) -> Option<&'static str> {
         "addons_enable" => "Optional engine toys for single player and local split-screen; pick one with the Toy Slot bind (Controls)",
         "addon_portal_view" => "Draw the view out of the linked portal inside each portal; off shows flat discs (fastest)",
         "addon_portal_max" => "How many portals per screen show a live view; each one redraws the scene, so lower this on slow machines or in split-screen",
+        "addon_portal_depth" => "How deep portals seen through other portals keep showing a live view (a hall of mirrors between facing portals); each level redraws the scene",
         "addon_portal_dist" => "Portals farther away than this are drawn as flat discs",
         "addon_portalgun" => "A two-portal gun: fire and alt-fire place linked portals on flat walls",
         "r_debris" => "Corpses go limp as ragdolls, gibs tumble and barrels throw shrapnel; shots and blasts push them (cosmetic only)",

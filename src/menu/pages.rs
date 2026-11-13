@@ -112,7 +112,10 @@ pub(super) const PORTAL_GUN: &[Item] = &[
     toggle("See Through Portals", "addon_portal_view"),
     Item::Choice { label: "Live Portal Views", cvar: "addon_portal_max", choices: PORTAL_MAX },
     slider("Live View Distance", "addon_portal_dist", 512.0, 8192.0, 512.0),
+    Item::Choice { label: "Portal Recursion", cvar: "addon_portal_depth", choices: PORTAL_DEPTH },
 ];
+pub(super) const PORTAL_DEPTH: &[(&str, f32)] =
+    &[("Off", 0.0), ("1", 1.0), ("2", 2.0), ("3", 3.0), ("4", 4.0), ("6", 6.0)];
 pub(super) const PORTAL_MAX: &[(&str, f32)] = &[("1", 1.0), ("2", 2.0), ("3", 3.0), ("4", 4.0)];
 
 pub(super) const PLAYERS: &[(&str, f32)] = &[("2", 2.0), ("3", 3.0), ("4", 4.0), ("6", 6.0), ("8", 8.0), ("12", 12.0), ("16", 16.0)];

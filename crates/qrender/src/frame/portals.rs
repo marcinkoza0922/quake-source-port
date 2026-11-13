@@ -3,6 +3,10 @@ pub(super) struct PortalDraw {
     pub portal: crate::portals::Portal,
     pub world: WorldDraw,
     pub ubo: u32,
+    /// The view this portal is seen in (`None`: the main view).
+    pub parent: Option<usize>,
+    /// FTE batches drawn in this view (particles, gun portal ovals).
+    pub fte: Vec<(usize, u32, crate::FteBatch, f32)>,
 }
 impl Renderer {
     /// Destination views for this frame: live add-on portals first (nearest,
@@ -48,9 +52,42 @@ impl Renderer {
         guns.extend(portals);
         let mut portals = guns;
         portals.truncate(4);
-        portals
+        // portals seen through portals, breadth first up to
+        // `gun_portal_depth` levels (children follow their parents)
+        let mut views: Vec<(crate::portals::Portal, Option<usize>, u32)> =
+            portals.into_iter().map(|p| (p, None, 0)).collect();
+        let mut k = 0;
+        while k < views.len() && views.len() < crate::MAX_PORTAL_VIEWS {
+            let (outer, _, depth) = views[k].clone();
+            if outer.gun.is_some() && depth < set.gun_portal_depth {
+                let eye = outer.to_destination(v.eye);
+                let clip = outer.clip();
+                let mut kids: Vec<_> = gun
+                    .iter()
+                    .enumerate()
+                    .filter_map(|(i, g)| Some(crate::portals::gun(i, g, g.exit.filter(|_| g.live)?)))
+                    .filter(|p| {
+                        let d = sub(eye, p.center);
+                        p.center != outer.destination
+                            && dot(d, p.normal) > 1.0
+                            && dot(d, d) < set.gun_portal_dist * set.gun_portal_dist
+                            && dot([clip[0], clip[1], clip[2]], p.center) + clip[3] > 0.0
+                    })
+                    .map(|p| outer.through(&p))
+                    .filter(|p| box_in_frustum(&v.frustum, p.mins, p.maxs))
+                    .collect();
+                kids.sort_by(|a, b| dist2(a).total_cmp(&dist2(b)));
+                for p in kids {
+                    if views.len() < crate::MAX_PORTAL_VIEWS {
+                        views.push((p, Some(k), depth + 1));
+                    }
+                }
+            }
+            k += 1;
+        }
+        views
             .into_iter()
-            .filter_map(|portal| {
+            .filter_map(|(portal, parent, _)| {
                 let ubo = dynw.push(&[0u8; 2048], 256)? as u32;
                 let surfs = w.cpu.portal_surfaces(portal.pvs);
                 let world = build_world_draw(
@@ -65,15 +102,19 @@ impl Renderer {
                     ident(),
                     lm,
                 );
-                Some(PortalDraw { portal, world, ubo })
+                Some(PortalDraw { portal, world, ubo, parent, fte: Vec::new() })
             })
             .collect()
     }
-    /// Record bounded, nonrecursive destination views using the scene's MSAA/depth scratch.
+    /// Record destination views using the scene's MSAA/depth scratch,
+    /// nested views first so their parents can sample them.
+    #[allow(clippy::too_many_arguments)]
     pub(super) unsafe fn draw_portals(
         &self,
         cmd: vk::CommandBuffer,
         portals: &[PortalDraw],
+        particles: Range,
+        fte: Option<(u64, u64)>,
         brushes: &[WorldDraw],
         aliases: &[AliasDraw],
         fi: usize,
@@ -89,7 +130,7 @@ impl Renderer {
         // SAFETY: caller is recording a command buffer outside a rendering instance;
         // all resources belong to this renderer and survive its submission.
         unsafe {
-            for (i, portal) in portals.iter().enumerate() {
+            for (i, portal) in portals.iter().enumerate().rev() {
                 let img = &t.portals[i].0;
                 gpu::barrier(
                     d,
@@ -210,6 +251,28 @@ impl Renderer {
                         bytes_of(&[a.push]),
                     );
                     d.cmd_draw_indexed(cmd, am.num_indices, 1, 0, 0, 0);
+                }
+                if particles.count > 0 {
+                    d.cmd_bind_pipeline(cmd, gfx, p.particle);
+                    d.cmd_bind_vertex_buffers(cmd, 0, &[f.dynbuf.buf], &[particles.ofs]);
+                    d.cmd_draw(cmd, 6, particles.count, 0, 0);
+                }
+                if let Some((vofs, iofs)) = fte.filter(|_| !portal.fte.is_empty()) {
+                    let samples = t.color_ms.as_ref().map_or(1, |_| self.msaa);
+                    d.cmd_bind_vertex_buffers(cmd, 0, &[f.dynbuf.buf], &[vofs]);
+                    d.cmd_bind_index_buffer(cmd, f.dynbuf.buf, iofs, vk::IndexType::UINT32);
+                    for (pipe, slot, b, mode) in &portal.fte {
+                        d.cmd_bind_pipeline(cmd, gfx, p.fte[*pipe]);
+                        let fogmix = if matches!(b.blend, crate::FteBlend::Blend | crate::FteBlend::BlendColour) { 1.0 } else { 0.0 };
+                        d.cmd_push_constants(
+                            cmd,
+                            p.layout,
+                            vk::ShaderStageFlags::VERTEX | vk::ShaderStageFlags::FRAGMENT,
+                            0,
+                            bytes_of(&[PolyPush { color: [fogmix, 0.0, samples as f32, *mode], tex: *slot }]),
+                        );
+                        d.cmd_draw_indexed(cmd, b.num_indices, 1, b.first_index, 0, 0);
+                    }
                 }
                 d.cmd_end_rendering(cmd);
                 gpu::barrier(

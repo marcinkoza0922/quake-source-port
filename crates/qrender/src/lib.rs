@@ -16,6 +16,9 @@ pub mod types;
 pub(crate) mod water;
 mod world;
 pub mod portals;
+/// Portal view render targets (teleporter windows, gun portals and their
+/// nested views).
+pub const MAX_PORTAL_VIEWS: usize = 8;
 
 pub use types::*;
 
