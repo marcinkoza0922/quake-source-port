@@ -157,6 +157,7 @@ pub(super) fn register_commands(c: &mut Commands<Host>) {
             "addons" => Some(Page::Addons),
             "newgame" => Some(Page::NewGameAddons),
             "portalgun" => Some(Page::PortalGun),
+            "goggles" => Some(Page::Goggles),
             _ => None,
         };
         if page == Some(Page::Graphics) {

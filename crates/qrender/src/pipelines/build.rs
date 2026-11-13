@@ -10,6 +10,7 @@ impl Pipelines {
             self.sky,
             self.alias,
             self.alias_alpha,
+            self.alias_xray,
             self.poly,
             self.particle,
             self.ui,
@@ -96,6 +97,7 @@ impl Pipelines {
             cull: false,
             sample_shading: supersample,
             topology: vk::PrimitiveTopology::TRIANGLE_LIST,
+            behind: false,
         };
         let g = |d: Desc| graphics(gpu, layout, &d);
         let world = g(d(world_vs, world_fs, &wb, &wa, Blend::None, true, true))?;
@@ -105,6 +107,9 @@ impl Pipelines {
         let sky = g(d(world_vs, sky_fs, &wb, &wa, Blend::None, true, true))?;
         let alias = g(Desc { cull: true, ..d(alias_vs, alias_fs, &ab, &aa, Blend::None, true, true) })?;
         let alias_alpha = g(Desc { cull: true, ..d(alias_vs, alias_fs, &ab, &aa, Blend::Alpha, true, false) })?;
+        // thermal goggles: hot bodies behind walls, added on top
+        let one = vk::BlendFactor::ONE;
+        self.alias_xray = g(Desc { cull: true, behind: true, ..d(alias_vs, alias_fs, &ab, &aa, Blend::Factors(one, one), true, false) })?;
         let poly = g(d(poly_vs, poly_fs, &pb, &pa, Blend::Alpha, true, true))?;
         let particle = g(d(part_vs, part_fs, &qb, &qa, Blend::Alpha, true, false))?;
         let fb = [bind(0, 24, false)];
@@ -149,6 +154,7 @@ impl Pipelines {
                 cull: false,
                 sample_shading: false,
                 topology: vk::PrimitiveTopology::TRIANGLE_LIST,
+                behind: false,
             },
         )?;
         // post-effect passes: single-sampled, no depth attachment

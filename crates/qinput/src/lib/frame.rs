@@ -48,7 +48,8 @@ impl Input {
             self.wheel_mouse = [0.0; 2];
             return s;
         }
-        let wheel = b[btn::WHEEL].is_down();
+        // both wheels share the aim (stick or mouse cursor)
+        let wheel = b[btn::WHEEL].is_down() || b[btn::EQUIPWHEEL].is_down();
         if !wheel {
             self.wheel_aim = [0.0; 2];
             self.wheel_mouse = [0.0; 2];

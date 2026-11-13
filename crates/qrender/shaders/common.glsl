@@ -46,6 +46,12 @@ vec3 apply_fog(vec3 c, vec3 wpos) {
 
 vec4 unpack_rgba(uint c) { return unpackUnorm4x8(c); }
 
+// Add-on goggles (fr.softf.z: 1 night vision, 2 thermal). In thermal mode
+// scene shaders write a grey "heat" level that post.frag maps to colours.
+bool thermal() { return fr.softf.z == 2u; }
+float luma(vec3 c) { return dot(c, vec3(0.299, 0.587, 0.114)); }
+float cold_heat(vec3 c) { return 0.05 + 0.2 * luma(c); }
+
 // Noise (ironwail NOISE_FUNCTIONS).
 // ALU-only 16x16 Bayer matrix, [0, 1).
 float bayer01(ivec2 coord) {

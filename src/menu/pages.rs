@@ -101,20 +101,25 @@ pub(super) const CONTROLS_ALL: &[Item] = &[
     Item::ResetBinds,
     bind("Alt Fire (Add-ons)", "+attack2"),
     bind("Toy Slot (Add-ons)", "+toy"),
+    bind("Equipment Wheel (Add-ons)", "+equipwheel"),
 ];
-pub(super) const CONTROLS: &[Item] = CONTROLS_ALL.split_at(CONTROLS_ALL.len() - 2).0;
+pub(super) const CONTROLS: &[Item] = CONTROLS_ALL.split_at(CONTROLS_ALL.len() - 3).0;
 
 /// Main menu → Add-ons: which toys the running game (or the next new
 /// game) has. Locked while the running game was started without add-ons.
 pub(super) const ADDONS: &[Item] = &[
     toggle("Portal Gun", "addon_portalgun"),
     Item::Sub { label: "Portal Gun Settings", page: Page::PortalGun },
+    toggle("Goggles", "addon_goggles"),
+    Item::Sub { label: "Goggles Settings", page: Page::Goggles },
 ];
 
 /// New Game with Add-ons ticked: choose the toys, then start.
 pub(super) const NEW_GAME_ADDONS: &[Item] = &[
     toggle("Portal Gun", "addon_portalgun"),
     Item::Sub { label: "Portal Gun Settings", page: Page::PortalGun },
+    toggle("Goggles", "addon_goggles"),
+    Item::Sub { label: "Goggles Settings", page: Page::Goggles },
     Item::Run { label: "Start New Game", run: Run::NewGame },
 ];
 
@@ -436,3 +441,9 @@ pub(super) const SCREEN_SHADER: &[Item] = &[
     Item::ResetShaderParams,
 ];
 pub(super) const SHADER_SCOPE: &[(&str, f32)] = &[("3D view", 0.0), ("whole screen", 1.0)];
+
+/// Reached from the Add-ons pages: night-vision / thermal goggle look.
+pub(super) const GOGGLES: &[Item] = &[
+    slider("Goggle Intensity", "addon_goggles_intensity", 0.25, 3.0, 0.25),
+    slider("Goggle Noise", "addon_goggles_noise", 0.0, 2.0, 0.25),
+];

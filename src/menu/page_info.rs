@@ -35,6 +35,9 @@ pub(super) fn tooltip(item: Item) -> Option<&'static str> {
         "addon_portal_max" => "How many portals per screen show a live view; each one redraws the scene, so lower this on slow machines or in split-screen",
         "addon_portal_depth" => "How deep portals seen through other portals keep showing a live view (a hall of mirrors between facing portals); each level redraws the scene",
         "addon_portal_dist" => "Portals farther away than this are drawn as flat discs",
+        "addon_goggles" => "Night-vision and thermal goggles, switched on and off with the Equipment Wheel bind (Controls) or the goggles command",
+        "addon_goggles_intensity" => "Night vision: how much dark areas are brightened; thermal: how strongly heat stands out",
+        "addon_goggles_noise" => "Sensor grain, scanlines and flicker of the goggle image",
         "addon_portalgun" => "A two-portal gun: fire and alt-fire place linked portals on flat walls; pick it with the Toy Slot bind (Controls)",
         "r_debris" => "Corpses go limp as ragdolls, gibs tumble and barrels throw shrapnel; shots and blasts push them (cosmetic only)",
         "r_debris_ragdolls" => "Corpses go limp and fall as ragdolls",
@@ -133,6 +136,7 @@ pub(super) fn page_items(p: Page) -> &'static [Item] {
         Page::Addons => ADDONS,
         Page::NewGameAddons => NEW_GAME_ADDONS,
         Page::PortalGun => PORTAL_GUN,
+        Page::Goggles => GOGGLES,
         Page::Input => INPUT,
         Page::Graphics => GRAPHICS,
         Page::Enhancements => ENHANCEMENTS,
@@ -183,6 +187,7 @@ pub(super) fn page_name(p: Page) -> &'static str {
         Page::Addons => "Add-ons",
         Page::NewGameAddons => "New Game: Add-ons",
         Page::PortalGun => "Portal Gun",
+        Page::Goggles => "Goggles",
         _ => PAGES.iter().find(|x| x.1 == p).map_or("", |x| x.0),
     }
 }
@@ -202,6 +207,7 @@ pub(super) fn sub_disabled(page: Page, cv: &Cvars) -> bool {
         || (page == Page::Water && cv.value_of("r_enhancedwater") == 0.0)
         || (page == Page::Blood && cv.value_of("r_blood") == 0.0)
         || (page == Page::Debris && cv.value_of("r_debris") == 0.0)
+        || (page == Page::Goggles && cv.value_of("addon_goggles") == 0.0)
 }
 
 pub(super) fn is_net_page(p: Page) -> bool {

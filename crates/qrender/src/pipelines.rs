@@ -38,6 +38,8 @@ pub struct Pipelines {
     pub sky: vk::Pipeline,
     pub alias: vk::Pipeline,
     pub alias_alpha: vk::Pipeline,
+    /// Thermal goggles: alias models behind the scene depth, additive.
+    pub alias_xray: vk::Pipeline,
     pub poly: vk::Pipeline,
     pub particle: vk::Pipeline,
     /// FTE particles: 8 blend modes of triangles, then the same as lines
@@ -294,6 +296,7 @@ impl Pipelines {
             sky: null,
             alias: null,
             alias_alpha: null,
+            alias_xray: null,
             poly: null,
             particle: null,
             fte: [null; 16],

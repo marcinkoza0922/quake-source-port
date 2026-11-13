@@ -107,6 +107,11 @@ pub(super) struct PostPush {
     pub(super) mbx: f32,
     pub(super) mby: f32,
     pub(super) uvs: [f32; 2],
+    /// Add-on goggles: mode (0 off, 1 night vision, 2 thermal), gain, noise, time.
+    pub(super) goggles: u32,
+    pub(super) g_gain: f32,
+    pub(super) g_noise: f32,
+    pub(super) g_time: f32,
 }
 
 #[repr(C)]
