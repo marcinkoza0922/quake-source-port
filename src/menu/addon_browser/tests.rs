@@ -50,7 +50,7 @@ fn occupied_keys_require_confirmation_for_shared_and_unique_actions() {
     // Goggles has one unique action and no weapon slot.
     menu.addon_ui.selected = 5;
     menu.addon_ui.focus = 2;
-    assert_eq!(menu.selected_addon().slot, None);
+    assert!(menu.selected_addon().weapons.is_empty());
     menu.key(K_ENTER, &mut cv, false);
     menu.key(b'f' as i32, &mut cv, false);
     assert_eq!(menu.bindings[b'f' as usize].as_deref(), Some("+attack2"));
@@ -117,7 +117,7 @@ fn clicking_selects_and_toggles_but_locked_games_keep_remapping() {
     menu.key(K_MOUSE1, &mut cv, true);
     assert_eq!(menu.addon_ui.selected, 1);
     assert_eq!(cv.value_of("addon_boomerang"), 1.0);
-    menu.mouse_move((450.0, 289.0), &mut cv); // Alt Fire
+    menu.mouse_move((450.0, menu.browser_row_y(2) + 1.0), &mut cv); // Alt Fire
     menu.key(K_MOUSE1, &mut cv, true);
     menu.key(b'q' as i32, &mut cv, true);
     assert_eq!(menu.bindings[b'q' as usize].as_deref(), Some("+attack2"));
@@ -125,4 +125,67 @@ fn clicking_selects_and_toggles_but_locked_games_keep_remapping() {
     menu.mouse_move((70.0, 90.0), &mut cv);
     menu.key(K_MOUSE1, &mut cv, true);
     assert_eq!(cv.value_of("addon_boomerang"), 0.0);
+}
+
+#[test]
+fn multi_weapon_addon_lists_slots_before_shared_actions() {
+    let addon = Addon {
+        weapons: &[
+            Weapon { name: "First", slot: "first_slot" },
+            Weapon { name: "Second", slot: "second_slot" },
+        ],
+        ..ADDON[0]
+    };
+    assert_eq!(addon.row_count(), 5);
+    assert_eq!(addon.command(0), None);
+    assert_eq!(addon.command(1), None);
+    assert_eq!(addon.command(2), Some("+attack"));
+    assert_eq!(addon.command(3), Some("+attack2"));
+    assert_eq!(addon.command(4), None);
+    assert!(addon.row_y(1) + 16.0 <= addon.header_y());
+    assert!(addon.row_y(2) >= addon.header_y() + 8.0);
+}
+
+#[test]
+fn settings_scroll_is_independent_bounded_and_keeps_click_targets_stable() {
+    let (mut menu, mut cv) = setup(Page::Addons);
+    let description_scroll = menu.addon_ui.scroll;
+    menu.mouse_move((600.0, 310.0), &mut cv);
+    for _ in 0..10 {
+        menu.key(K_MWHEELDOWN, &mut cv, true);
+    }
+    assert_eq!(menu.browser_offset(), menu.browser_max_offset());
+    assert_eq!(menu.addon_ui.scroll, description_scroll);
+    let row = menu.selected_addon().row_count() - 1;
+    let y = menu.browser_row_y(row) + 4.0;
+    let offset = menu.browser_offset();
+    menu.mouse_move((300.0, y), &mut cv);
+    assert_eq!(menu.addon_ui.focus, menu.browser_rows());
+    assert_eq!(menu.browser_offset(), offset);
+    menu.key(K_MOUSE1, &mut cv, true);
+    assert_eq!(menu.screen, Screen::OptionsPage(Page::PortalGun));
+}
+
+#[test]
+fn settings_keyboard_navigation_reveals_rows_and_page_keys_scroll() {
+    let (mut menu, mut cv) = setup(Page::Addons);
+    menu.addon_ui.focus = 2;
+    menu.key(K_PGDN, &mut cv, false);
+    assert_eq!(menu.browser_offset(), menu.browser_max_offset());
+    menu.key(K_PGUP, &mut cv, false);
+    assert_eq!(menu.browser_offset(), 0.0);
+    for _ in 0..3 {
+        menu.key(K_DPAD_DOWN, &mut cv, false);
+    }
+    assert_eq!(menu.addon_ui.focus, menu.browser_rows());
+    assert_eq!(menu.browser_offset(), menu.browser_max_offset());
+    for _ in 0..3 {
+        menu.key(K_DPAD_UP, &mut cv, false);
+    }
+    assert!(menu.browser_row_y(0) >= 236.0);
+    menu.mouse_move((600.0, 280.0), &mut cv);
+    for _ in 0..10 {
+        menu.key(K_MWHEELUP, &mut cv, true);
+    }
+    assert_eq!(menu.browser_offset(), 0.0);
 }

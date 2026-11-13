@@ -343,7 +343,17 @@ locked like the toy cvars). It is not saved: goggles start off after a load.
 ### Browser and gameplay preview tooling
 
 `src/menu/addon_browser.rs` owns selection, description scrolling and contextual
-rows. Tab moves between the checklist, description, slot assignment, action
+rows. The browser must list a separate, weapon-labelled slot setting for every
+weapon supplied by the selected add-on, above the input remapping header. An
+add-on may supply multiple weapons even though each current weapon add-on
+supplies only one; equipment without weapons has no weapon slot settings.
+The browser metadata stores a weapon list per add-on; row positions, binding
+actions and slot edits use its length. Tall settings lists scroll with focus
+to keep keyboard/controller selections visible within the settings panel.
+Wheel scrolling targets the hovered settings box; Page Up/Down scroll the
+focused box. Settings retain an independent offset and show a scrollbar.
+Mapping labels use action names without internal shared/unique qualifiers.
+Tab moves between the checklist, description, slot assignment, action
 bindings and Configure Parameters. Arrow keys / D-pad select and adjust;
 Enter / A toggles or captures a binding. New Game's Start button is reachable
 by Tab / D-pad as well as mouse or F10. Wheel / PgUp / PgDn scroll the description.

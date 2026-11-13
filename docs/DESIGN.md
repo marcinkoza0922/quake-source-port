@@ -189,8 +189,10 @@ Damage/movement assists are engine-side so they work with any progs; off in deat
 See [ADDONS.md](ADDONS.md) for the toys (`Toy` cycle order: portal gun,
 boomerang, stickybomb launcher, hookshot, railgun, then the QC weapon), goggles
 and equipment wheel, models, effects, synthesized cues, settings and commands.
-Weapon slot selection sits above the input remapping header; parameter links use
-the settings submenus’ gold label and tinted strip.
+A Weapon Slot header groups weapon-named rows above Input Remapping, one per
+weapon supplied by the selected add-on. Add-ons may supply multiple weapons;
+the current single-weapon add-ons are not a constraint on the design. Parameter
+links use the settings submenus’ gold label and tinted strip.
 The two-column add-on browser combines looping previews, descriptions, shared
 and unique action remapping, weapon-slot assignments and parameter submenus.
 `tools/capture_addon_previews.py` regenerates embedded gameplay loops; format,

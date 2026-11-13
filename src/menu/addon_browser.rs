@@ -7,13 +7,19 @@ pub(super) struct Browser {
     /// Zero is the checklist; remaining entries are rows in the details pane.
     focus: usize,
     scroll: usize,
+    settings_scroll: f32,
+}
+
+struct Weapon {
+    name: &'static str,
+    slot: &'static str,
 }
 
 struct Addon {
     name: &'static str,
     id: &'static str,
     cvar: &'static str,
-    slot: Option<&'static str>,
+    weapons: &'static [Weapon],
     page: Option<Page>,
     description: &'static str,
     alt: bool,
@@ -23,57 +29,81 @@ const ADDON: &[Addon] = &[
         name: "Portal Gun",
         id: "portalgun",
         cvar: "addon_portalgun",
-        slot: Some("addon_portalgun_slot"),
+        weapons: &[Weapon { name: "Portal Gun", slot: "addon_portalgun_slot" }],
         page: Some(Page::PortalGun),
         alt: true,
-        description: "Create two linked portals on flat walls. Shared Fire places the first portal; shared Alt Fire places the second. Walk through either portal to emerge from the other. Your momentum carries through. Assign a weapon slot below: pressing that slot repeatedly cycles its ordinary weapon and every enabled add-on assigned there. Portal view quality is configurable below.",
+        description: "Create two linked portals on flat walls. Fire places the first portal; Alt Fire places the second. Walk through either portal to emerge from the other. Your momentum carries through. Assign a weapon slot below: pressing that slot repeatedly cycles its ordinary weapon and every enabled add-on assigned there. Portal view quality is configurable below.",
     },
     Addon {
         name: "Boomerang",
         id: "boomerang",
         cvar: "addon_boomerang",
-        slot: Some("addon_boomerang_slot"),
+        weapons: &[Weapon { name: "Boomerang", slot: "addon_boomerang_slot" }],
         page: Some(Page::Boomerang),
         alt: true,
-        description: "Hold shared Fire and sweep the crosshair over monsters to queue targets. Release Fire to throw: the boomerang visits each target, stuns it and returns to you. Shared Alt Fire clears the queue. The weapon slot selects a group, not a separate hotkey: press it again to cycle through the weapons in that slot. Configure stun duration and flight speed below.",
+        description: "Hold Fire and sweep the crosshair over monsters to queue targets. Release Fire to throw: the boomerang visits each target, stuns it and returns to you. Alt Fire clears the queue. The weapon slot selects a group, not a separate hotkey: press it again to cycle through the weapons in that slot. Configure stun duration and flight speed below.",
     },
     Addon {
         name: "Stickybomb Launcher",
         id: "sticky",
         cvar: "addon_sticky",
-        slot: Some("addon_sticky_slot"),
+        weapons: &[Weapon { name: "Stickybomb Launcher", slot: "addon_sticky_slot" }],
         page: Some(Page::Sticky),
         alt: true,
-        description: "Hold shared Fire to charge a sticky bomb using rocket ammunition; release to launch. A longer charge throws it faster. Bombs cling to walls, doors and monsters. Shared Alt Fire detonates your planted bombs together. Place a trap, retreat, then detonate it when enemies approach. Assign any weapon slot below; repeated presses cycle through the ordinary weapon and add-ons in that slot.",
+        description: "Hold Fire to charge a sticky bomb using rocket ammunition; release to launch. A longer charge throws it faster. Bombs cling to walls, doors and monsters. Alt Fire detonates your planted bombs together. Place a trap, retreat, then detonate it when enemies approach. Assign any weapon slot below; repeated presses cycle through the ordinary weapon and add-ons in that slot.",
     },
     Addon {
         name: "Hookshot",
         id: "hookshot",
         cvar: "addon_hookshot",
-        slot: Some("addon_hookshot_slot"),
+        weapons: &[Weapon { name: "Hookshot", slot: "addon_hookshot_slot" }],
         page: Some(Page::Hookshot),
         alt: true,
-        description: "Shared Fire launches a chain hook. It latches onto a permitted surface or enemy and reels you toward the anchor. Fire again or use shared Alt Fire to let go. Choose which materials and enemies can be hooked in Configure Parameters. Assign it to any weapon slot; repeated presses of the slot's existing binding cycle through its weapons.",
+        description: "Fire launches a chain hook. It latches onto a permitted surface or enemy and reels you toward the anchor. Fire again or use Alt Fire to let go. Choose which materials and enemies can be hooked in Configure Parameters. Assign it to any weapon slot; repeated presses of the slot's existing binding cycle through its weapons.",
     },
     Addon {
         name: "Railgun",
         id: "railgun",
         cvar: "addon_railgun",
-        slot: Some("addon_railgun_slot"),
+        weapons: &[Weapon { name: "Railgun", slot: "addon_railgun_slot" }],
         page: Some(Page::Railgun),
         alt: false,
-        description: "A piercing railgun inspired by Quake III. Shared Fire sends a slug through every enemy along its line. Each shot consumes two cells, with a 1.5 second refire interval. Damage and the spiral trail colour are configurable below. Choose a weapon slot: the slot's current binding selects and cycles the weapons assigned to it.",
+        description: "A piercing railgun inspired by Quake III. Fire sends a slug through every enemy along its line. Each shot consumes two cells, with a 1.5 second refire interval. Damage and the spiral trail colour are configurable below. Choose a weapon slot: the slot's current binding selects and cycles the weapons assigned to it.",
     },
     Addon {
         name: "Goggles",
         id: "goggles",
         cvar: "addon_goggles",
-        slot: None,
+        weapons: &[],
         page: Some(Page::Goggles),
         alt: false,
-        description: "One equipment add-on includes both night vision and thermal vision. The unique Change Goggles action cycles Normal, Night Vision, Thermal, then Normal again. Night vision brightens dark rooms; thermal vision highlights living enemies. Goggles do not occupy a weapon slot. Configure intensity and sensor noise below. The unique binding affects only this add-on.",
+        description: "One equipment add-on includes both night vision and thermal vision. The Change Goggles action cycles Normal, Night Vision, Thermal, then Normal again. Night vision brightens dark rooms; thermal vision highlights living enemies. Goggles do not occupy a weapon slot. Configure intensity and sensor noise below. The binding affects only this add-on.",
     },
 ];
+
+impl Addon {
+    fn row_count(&self) -> usize {
+        self.weapons.len() + 2 + usize::from(!self.weapons.is_empty() && self.alt)
+    }
+    fn command(&self, row: usize) -> Option<&'static str> {
+        match row.checked_sub(self.weapons.len())? {
+            0 if self.weapons.is_empty() => Some("goggles cycle"),
+            0 => Some("+attack"),
+            1 if !self.weapons.is_empty() && self.alt => Some("+attack2"),
+            _ => None,
+        }
+    }
+    fn header_y(&self) -> f32 {
+        if self.weapons.is_empty() { 238.0 } else { 252.0 + self.weapons.len() as f32 * 18.0 }
+    }
+    fn row_y(&self, row: usize) -> f32 {
+        if row < self.weapons.len() {
+            250.0 + row as f32 * 18.0
+        } else {
+            self.header_y() + 12.0 + (row - self.weapons.len()) as f32 * 18.0
+        }
+    }
+}
 
 impl Menu {
     fn browser_active(&self) -> bool {
@@ -83,32 +113,38 @@ impl Menu {
         &ADDON[self.addon_ui.selected.min(ADDON.len() - 1)]
     }
     fn browser_rows(&self) -> usize {
-        if self.selected_addon().slot.is_none() {
-            3
-        } else if self.selected_addon().alt {
-            5
-        } else {
-            4
-        }
+        self.selected_addon().row_count() + 1
     }
     fn browser_last_focus(&self) -> usize {
         self.browser_rows() + usize::from(self.screen == Screen::OptionsPage(Page::NewGameAddons))
     }
     fn browser_command(&self) -> Option<&'static str> {
+        self.addon_ui.focus.checked_sub(2).and_then(|row| self.selected_addon().command(row))
+    }
+    fn browser_slot(&self) -> Option<&'static str> {
+        self.addon_ui.focus.checked_sub(2)
+            .and_then(|row| self.selected_addon().weapons.get(row)).map(|weapon| weapon.slot)
+    }
+    fn browser_max_offset(&self) -> f32 {
         let a = self.selected_addon();
-        match (a.slot.is_some(), self.addon_ui.focus) {
-            (false, 2) => Some("goggles cycle"),
-            (true, 3) => Some("+attack"),
-            (true, 4) if a.alt => Some("+attack2"),
-            _ => None,
-        }
+        (a.row_y(a.row_count() - 1) + 16.0 - 322.0).max(0.0)
+    }
+    fn browser_offset(&self) -> f32 {
+        self.addon_ui.settings_scroll.min(self.browser_max_offset())
+    }
+    fn reveal_browser_focus(&mut self) {
+        let Some(row) = self.addon_ui.focus.checked_sub(2) else { return };
+        if row >= self.selected_addon().row_count() { return; }
+        let y = self.selected_addon().row_y(row);
+        let offset = self.browser_offset();
+        self.addon_ui.settings_scroll = if y < 236.0 + offset {
+            (y - 236.0).max(0.0)
+        } else if y + 16.0 > 322.0 + offset {
+            y + 16.0 - 322.0
+        } else { offset };
     }
     fn browser_row_y(&self, row: usize) -> f32 {
-        if self.selected_addon().slot.is_some() {
-            if row == 0 { 238.0 } else { 270.0 + (row - 1) as f32 * 18.0 }
-        } else {
-            250.0 + row as f32 * 18.0
-        }
+        self.selected_addon().row_y(row) - self.browser_offset()
     }
     fn browser_hit(&self, (x, y): (f32, f32)) -> Option<(usize, usize)> {
         if (20.0..200.0).contains(&x) && (58.0..202.0).contains(&y) {
@@ -120,7 +156,7 @@ impl Menu {
             }
             for row in 0..self.browser_rows() - 1 {
                 let top = self.browser_row_y(row);
-                if (top..top + 16.0).contains(&y) {
+                if top >= 236.0 && top + 16.0 <= 322.0 && (top..top + 16.0).contains(&y) {
                     return Some((self.addon_ui.selected, row + 2));
                 }
             }
@@ -134,6 +170,7 @@ impl Menu {
         if let Some((selected, focus)) = self.browser_hit(pos) {
             if selected != self.addon_ui.selected {
                 self.addon_ui.scroll = 0;
+                self.addon_ui.settings_scroll = 0.0;
             }
             self.addon_ui.selected = selected;
             self.addon_ui.focus = focus;
@@ -166,6 +203,15 @@ impl Menu {
         let down = matches!(key, K_DOWNARROW | K_DPAD_DOWN);
         let left = matches!(key, K_LEFTARROW | K_DPAD_LEFT);
         let right = matches!(key, K_RIGHTARROW | K_DPAD_RIGHT);
+        let wheel = matches!(key, K_MWHEELUP | K_MWHEELDOWN);
+        let paging = matches!(key, K_PGUP | K_PGDN);
+        let over_settings = self.mouse.is_some_and(|(x, y)| (216.0..620.0).contains(&x) && (236.0..322.0).contains(&y));
+        if (wheel && over_settings) || (paging && self.addon_ui.focus >= 2 && self.addon_ui.focus <= self.browser_rows()) {
+            let step = if wheel { 18.0 } else { 64.0 };
+            let delta = if matches!(key, K_MWHEELUP | K_PGUP) { -step } else { step };
+            self.addon_ui.settings_scroll = (self.browser_offset() + delta).clamp(0.0, self.browser_max_offset());
+            return true;
+        }
         if key == K_TAB {
             self.addon_ui.focus = (self.addon_ui.focus + 1) % (self.browser_last_focus() + 1);
         } else if matches!(key, K_MWHEELUP | K_MWHEELDOWN | K_PGUP | K_PGDN) || (self.addon_ui.focus == 1 && (up || down)) {
@@ -182,6 +228,7 @@ impl Menu {
             if up || down {
                 self.addon_ui.selected = (self.addon_ui.selected + if up { ADDON.len() - 1 } else { 1 }) % ADDON.len();
                 self.addon_ui.scroll = 0;
+                self.addon_ui.settings_scroll = 0.0;
             }
             if right {
                 self.addon_ui.focus = 1;
@@ -197,7 +244,7 @@ impl Menu {
             if down {
                 self.addon_ui.focus = (self.addon_ui.focus + 1).min(self.browser_last_focus());
             }
-            if left && self.addon_ui.focus != 2 {
+            if left && self.browser_slot().is_none() {
                 self.addon_ui.focus = 0;
             }
             let a = self.selected_addon();
@@ -208,9 +255,8 @@ impl Menu {
                 if matches!(key, K_DEL | K_BACKSPACE | K_XBUTTON) {
                     self.clear_addon_binding(cmd, key == K_XBUTTON, out);
                 }
-            } else if self.addon_ui.focus == 2
-                && (left || right || enter)
-                && let Some(slot) = a.slot
+            } else if (left || right || enter)
+                && let Some(slot) = self.browser_slot()
             {
                 let v = cv.value_of(slot).round().clamp(1.0, 10.0) as i32;
                 set_num(cv, slot, ((v - 1 + if left { -1 } else { 1 }).rem_euclid(10) + 1) as f32);
@@ -225,6 +271,9 @@ impl Menu {
             } else if self.addon_ui.focus > self.browser_rows() && enter {
                 self.start_new_game(out);
             }
+        }
+        if matches!(key, K_TAB | K_UPARROW | K_DOWNARROW | K_DPAD_UP | K_DPAD_DOWN | K_RIGHTARROW | K_DPAD_RIGHT) {
+            self.reveal_browser_focus();
         }
         if self.screen == Screen::OptionsPage(Page::NewGameAddons) && key == K_F1 + 9 {
             self.start_new_game(out);
@@ -279,23 +328,37 @@ impl Menu {
             c.fill(614.0, 180.0 + start as f32 / (lines.len() - 4) as f32 * (46.0 - h), 2.0, h, GOLD_FG);
         }
         c.round_box(216.0, 236.0, 404.0, 86.0, 2.0, [0.0, 0.0, 0.0, 0.8], Some(BORDER));
-        let header_y = if a.slot.is_some() { 258.0 } else { 238.0 };
-        c.text(220.0, header_y, "Input Remapping", 8.0, MUTED);
-        c.text(425.0, header_y, "Keyboard", 8.0, MUTED);
-        c.text(525.0, header_y, "Controller", 8.0, MUTED);
+        let max_offset = self.browser_max_offset();
+        if max_offset > 0.0 {
+            let h = 80.0 * 86.0 / (86.0 + max_offset);
+            c.fill(616.0, 239.0 + self.browser_offset() / max_offset * (80.0 - h), 2.0, h, GOLD_FG);
+        }
+        let slot_header_y = 238.0 - self.browser_offset();
+        if !a.weapons.is_empty() && slot_header_y >= 236.0 {
+            c.text(220.0, slot_header_y, "Weapon Slot", 8.0, MUTED);
+        }
+        let header_y = a.header_y() - self.browser_offset();
+        if header_y >= 236.0 && header_y + 8.0 <= 322.0 {
+            c.text(220.0, header_y, "Input Remapping", 8.0, MUTED);
+            c.text(425.0, header_y, "Keyboard", 8.0, MUTED);
+            c.text(525.0, header_y, "Controller", 8.0, MUTED);
+        }
         let mut rows = Vec::new();
-        if let Some(slot) = a.slot {
-            rows.push(("Weapon Slot", None, Some(slot)));
-            rows.push(("Fire (shared)", Some("+attack"), None));
-            if a.alt {
-                rows.push(("Alt Fire (shared)", Some("+attack2"), None));
-            }
+        for weapon in a.weapons {
+            rows.push((weapon.name, None, Some(weapon.slot)));
+        }
+        if a.weapons.is_empty() {
+            rows.push(("Change Goggles", Some("goggles cycle"), None));
         } else {
-            rows.push(("Change Goggles (unique)", Some("goggles cycle"), None));
+            rows.push(("Fire", Some("+attack"), None));
+            if a.alt {
+                rows.push(("Alt Fire", Some("+attack2"), None));
+            }
         }
         rows.push(("Configure Parameters >", None, None));
         for (i, (label, cmd, slot)) in rows.iter().enumerate() {
             let y = self.browser_row_y(i);
+            if y < 236.0 || y + 16.0 > 322.0 { continue; }
             if self.addon_ui.focus == i + 2 {
                 c.fill(216.0, y, 404.0, 16.0, HILITE);
             }
@@ -336,7 +399,7 @@ impl Menu {
             "Add-on saves (.qsa) require this source port. Enable Add-ons beside New Game."
         };
         c.text_center(320.0, 327.0, note, 8.0, MUTED);
-        c.text_center(350.0, 346.0, "Enter: remap  Del: clear keyboard  X: clear pad  Wheel / PgUp/PgDn: description", 8.0, MUTED);
+        c.text_center(350.0, 346.0, "Enter: remap  Del: clear keyboard  X: clear pad  Wheel: scroll hovered box  PgUp/PgDn: scroll", 8.0, MUTED);
     }
 }
 
