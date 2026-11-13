@@ -8,7 +8,7 @@ impl Menu {
         c.fade_screen();
         let base_scale = c.scale;
         c.menu_layout();
-        if !matches!(self.screen, Screen::Options | Screen::OptionsPage(_) | Screen::Quit | Screen::Mods | Screen::ModMaps | Screen::Load | Screen::Save) {
+        if !matches!(self.screen, Screen::Options | Screen::OptionsPage(_) | Screen::Death | Screen::Quit | Screen::Mods | Screen::ModMaps | Screen::Load | Screen::Save) {
             c.ox += CLASSIC.0;
             c.oy += CLASSIC.1;
         }
@@ -143,6 +143,16 @@ impl Menu {
                     let mut cx = tx + txt(c, tx, ty, "(");
                     cx += txt_gold(c, cx, ty, &label[1..2]);
                     txt(c, cx, ty, &label[2..]);
+                }
+            }
+            Screen::Death => {
+                c.fill(148.0, 96.0, 344.0, 152.0, [0.05, 0.04, 0.03, 0.95]);
+                c.frame(148.0, 96.0, 344.0, 152.0, BORDER);
+                c.text_center(320.0, 112.0, "You died", TXT * 1.2, GOLD_FG);
+                for (i, label) in ["1. Continue from most recent save", "2. Select save", "3. Restart level", "4. Return to main menu"].iter().enumerate() {
+                    let y = 140.0 + i as f32 * 24.0;
+                    if i == self.death_cursor { c.fill(160.0, y, 320.0, 20.0, HILITE); }
+                    txt(c, 168.0, y + 4.0, label);
                 }
             }
             Screen::None => {}
@@ -288,6 +298,7 @@ impl Menu {
     }
 
     pub(super) fn draw_hints(&self, c: &mut Canvas) {
+        if self.screen == Screen::Death { return; }
         let pad = self.pad_ui;
         let (sel, back) = if pad { (K_ABUTTON, K_BBUTTON) } else { (K_ENTER, K_ESCAPE) };
         let y = 344.0;

@@ -1,6 +1,7 @@
 use super::*;
 
 pub(super) const HOST_CVARS: &[(&str, &str, u32)] = &[
+    ("cl_deathaction", "0", CVAR_ARCHIVE),
     ("sv_autosave", "1", CVAR_ARCHIVE),
     ("sv_autosave_keep", "5", CVAR_ARCHIVE),
     ("sv_autosave_entry", "1", CVAR_ARCHIVE),
@@ -174,6 +175,18 @@ pub(super) const COMPAT_CVARS: &[(&str, &str, u32)] = &[
     ("r_motionblur", "0", CVAR_ARCHIVE),
     ("r_motionblur_amount", "0.5", CVAR_ARCHIVE),
     ("r_enhancedwater", "0", CVAR_ARCHIVE),
+    ("r_impact_bullets", "0", CVAR_ARCHIVE),
+    ("r_impact_nails", "0", CVAR_ARCHIVE),
+    ("r_impact_scorches", "0", CVAR_ARCHIVE),
+    ("r_impact_lifetime", "120", CVAR_ARCHIVE),
+    ("r_impact_limit", "512", CVAR_ARCHIVE),
+    ("r_blood", "0", CVAR_ARCHIVE),
+    ("r_blood_amount", "5", CVAR_ARCHIVE),
+    ("r_blood_size", "1", CVAR_ARCHIVE),
+    ("r_blood_lifetime", "120", CVAR_ARCHIVE),
+    ("r_blood_maxmarks", "512", CVAR_ARCHIVE),
+    ("r_blood_wounds", "1", CVAR_ARCHIVE),
+    ("r_blood_gibs", "1", CVAR_ARCHIVE),
     ("r_debris", "0", CVAR_ARCHIVE),
     ("r_debris_ragdolls", "1", CVAR_ARCHIVE),
     ("r_debris_ragdollstart", "2", CVAR_ARCHIVE),

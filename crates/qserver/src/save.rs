@@ -14,7 +14,7 @@ const MAX_LIGHTSTYLES: usize = 64;
 /// PR_UglyValueString for savegames.
 fn ugly_value(vm: &Vm, ty: EType, v: &[u32]) -> String {
     match ty {
-        EType::String => String::from_utf8_lossy(vm.strings.get(v[0] as i32).unwrap_or(b"")).replace('\n', "\\n").replace('"', "'"),
+        EType::String => qcore::text::decode(vm.strings.get(v[0] as i32).unwrap_or(b"")).replace('\n', "\\n").replace('"', "'"),
         EType::Entity => format!("{}", v[0] as i32),
         EType::Function => vm.progs.function_name(v[0] as usize),
         EType::Field => {
@@ -56,8 +56,8 @@ impl Server {
     fn savegame_comment(&self) -> String {
         let Some(l) = &self.level else { return String::new() };
         let msg = l.vm.field_ofs("message").and_then(|o| l.vm.ent_str(0, o).ok()).unwrap_or(b"");
-        let mut s: String = String::from_utf8_lossy(msg).chars().take(22).collect();
-        while s.len() < 22 {
+        let mut s: String = qcore::text::decode(msg).chars().take(22).collect();
+        while s.chars().count() < 22 {
             s.push(' ');
         }
         let st = self.stats();
@@ -65,7 +65,7 @@ impl Server {
         s.chars().map(|c| if c == ' ' || c == '\n' { '_' } else { c }).take(39).collect()
     }
 
-    /// Host_Savegame_f contents.
+    /// Host_Savegame_f contents. Encode with `qcore::text::encode` for disk.
     pub fn save_game(&self) -> String {
         let Some(l) = &self.level else { return String::new() };
         let vm = &l.vm;
@@ -119,7 +119,8 @@ impl Server {
     }
 
     /// Host_Loadgame_f: spawns the saved map and restores globals/edicts.
-    /// The local client must be (re)connected afterwards.
+    /// Decode disk bytes with `qcore::text::decode` first. The local client
+    /// must be (re)connected afterwards.
     pub fn load_game(&mut self, text: &str) -> Result<(), String> {
         let mut lines = text.split_inclusive('\n');
         let mut next = || lines.next().map(|l| l.trim_end_matches(['\n', '\r']).to_string()).ok_or("unexpected end of savegame");
@@ -214,14 +215,26 @@ mod tests {
         for _ in 0..20 {
             sv.frame(1.0 / 72.0);
         }
+        let message = b"\xa0\xd0\xe5\xee\xe4\xf2\xe1\xe7\xef\xee\xa0\n\x9e\x9d\x9d\xc3\xa9";
+        let l = sv.level.as_mut().unwrap();
+        let ofs = l.vm.field_ofs("message").unwrap();
+        // Exercise the entity parser as well as save serialization, as with
+        // a colored label from a BSP or an external .ent override.
+        let pairs = vec![("message".into(), qcore::text::decode(message).replace('\n', "\\n"))];
+        let mut h = crate::host::Ctx { c: &mut sv.core, w: &mut l.world };
+        l.vm.parse_edict(&mut h, 0, &pairs).unwrap();
+        assert_eq!(l.vm.ent_str(0, ofs).unwrap(), message);
         let text = sv.save_game();
         assert!(text.starts_with("5\n"));
         let n = sv.level.as_ref().unwrap().vm.num_edicts();
-        sv.load_game(&text).unwrap();
+        let bytes = qcore::text::encode(&text); // actual v5 on-disk bytes
+        assert!(bytes.windows(11).any(|w| w == &message[..11]));
+        sv.load_game(&qcore::text::decode(&bytes)).unwrap();
         sv.connect_local().unwrap();
         sv.frame(1.0 / 72.0);
         assert!(sv.error().is_none());
         let l = sv.level.as_ref().unwrap();
+        assert_eq!(l.vm.ent_str(0, ofs).unwrap(), message);
         assert_eq!(l.vm.num_edicts(), n);
         assert_eq!(sv.save_game().lines().count(), text.lines().count());
     }

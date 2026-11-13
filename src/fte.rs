@@ -10,7 +10,7 @@ use qpart::geom::{self, Geometry, TexRef, ViewInfo};
 use qpart::{FrameInput, Registry, System, Trace, TrailHandle, World};
 use qrender::{FteBatch, FteBlend, FteVertex, PicId, Renderer};
 use qworld::hull::CollisionModel;
-mod world;
+pub(crate) mod world;
 use world::*;
 mod model_fx;
 mod sky;

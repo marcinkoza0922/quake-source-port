@@ -174,6 +174,8 @@ impl ClientState {
         }
         let _ = prevframe; // syncbase for ST_FRAMETIME models is the renderer's concern
         if forcelink {
+            // New or reappearing entities must also snap renderer movement history.
+            ent.lerpflags |= LERP_RESETMOVE;
             ent.msg_origins[1] = ent.msg_origins[0];
             ent.origin = ent.msg_origins[0];
             ent.msg_angles[1] = ent.msg_angles[0];

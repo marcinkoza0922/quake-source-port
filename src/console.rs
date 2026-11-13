@@ -294,13 +294,13 @@ impl Console {
             _ => (vh * 0.35).floor(),
         };
         if self.text_bg && n > 0 {
-            let w = self.centerprint.iter().map(|l| l.len()).max().unwrap_or(0) as f32 * 8.0;
+            let w = self.centerprint.iter().map(|l| l.chars().count()).max().unwrap_or(0) as f32 * 8.0;
             c.fill(((vw - w) / 2.0).floor() - 4.0, y - 3.0, w + 8.0, n as f32 * 8.0 + 6.0, TEXT_BG);
         }
         let mut left = max_chars;
         for l in &self.centerprint {
-            let x = ((vw - l.len() as f32 * 8.0) / 2.0).floor();
-            for (i, b) in l.bytes().enumerate() {
+            let x = ((vw - l.chars().count() as f32 * 8.0) / 2.0).floor();
+            for (i, b) in qcore::text::glyphs(l).enumerate() {
                 if left == 0 {
                     return;
                 }
@@ -324,7 +324,7 @@ pub fn word_wrap(src: &str, maxcols: usize) -> String {
     if maxcols == 0 {
         return src.to_string();
     }
-    let b = src.as_bytes();
+    let b = qcore::text::encode(src);
     let sp = |c: u8| c.is_ascii_whitespace();
     let mut out = Vec::with_capacity(b.len() + 8);
     let mut p = 0;
@@ -358,7 +358,7 @@ pub fn word_wrap(src: &str, maxcols: usize) -> String {
             out.push(b'\n');
         }
     }
-    String::from_utf8_lossy(&out).into_owned()
+    qcore::text::decode(&out)
 }
 
 #[cfg(test)]
@@ -372,5 +372,28 @@ mod wrap_tests {
         assert_eq!(word_wrap("abcdefghijkl xy", 5), "abcde\nfghij\nkl xy");
         assert_eq!(word_wrap("one\ntwo", 40), "one\ntwo");
         assert_eq!(word_wrap("no wrap", 0), "no wrap");
+    }
+
+    #[test]
+    fn colored_centerprint_wraps_and_centers_by_font_indices() {
+        use crate::draw::Canvas;
+        use qrender::Draw2D;
+        let title = b"\xa0\xd0\xe5\xee\xe4\xf2\xe1\xe7\xef\xee\xa0";
+        let mut con = super::Console::new();
+        con.center_print(&qcore::text::decode(title), 2.0, 11);
+        assert_eq!(con.centerprint.len(), 1);
+        let mut canvas = Canvas::new(640, 480);
+        con.draw_center(&mut canvas, usize::MAX);
+        let glyphs: Vec<_> = canvas.list.iter().filter_map(|d| match d {
+            Draw2D::Char { x, ch, .. } => Some((*x, *ch)),
+            _ => None,
+        }).collect();
+        assert_eq!(glyphs.iter().map(|&(_, ch)| ch).collect::<Vec<_>>(), title);
+        assert_eq!(glyphs[0].0, 232.0); // (320 - 11*8)/2, at scale 2
+        let wrapped = word_wrap(&qcore::text::decode(b"\xd0\xe5\xee\xe4 \x9e\x9d\x9d"), 5);
+        assert_eq!(qcore::text::encode(&wrapped), b"\xd0\xe5\xee\xe4 \n\x9e\x9d\x9d");
+        canvas.list.clear();
+        con.draw_center(&mut canvas, 2);
+        assert_eq!(canvas.list.len(), 2); // finale typewriter limit is glyphs
     }
 }

@@ -123,6 +123,8 @@ pub(super) fn register_commands(c: &mut Commands<Host>) {
             "messages" => Some(Page::Messages),
             "accessibility" => Some(Page::Accessibility),
             "graphics" => Some(Page::Graphics),
+            "enhancements" => Some(Page::Enhancements),
+            "impacts" => Some(Page::Impacts),
             "audio" => Some(Page::Audio),
             _ => None,
         };
@@ -193,6 +195,30 @@ pub(super) fn register_commands(c: &mut Commands<Host>) {
     c.add("r_partinfo", |h, _| {
         let s = h.fte.info(&h.cl);
         h.con.print(&s);
+    });
+    // Exercise the real impact path against the surface under the crosshair.
+    c.add("impact_test", |h, a| {
+        let kind = match a.argv(1) {
+            "bullet" => 0, "nail" => 1, "explosion" => 2,
+            _ => { h.con.print("impact_test bullet|nail|explosion\n"); return; }
+        };
+        let Some(bsp) = h.level.bsp.as_ref() else {return};
+        let (forward, _, _) = qcore::math::angle_vectors(h.cl.viewangles.into());
+        let eye = qcore::math::Vec3::from(h.cl.entities.get(h.cl.viewentity).map_or([0.0; 3], |e| e.origin))
+            + qcore::math::Vec3::new(0.0, 0.0, h.cl.viewheight);
+        let cm = qworld::CollisionModel::from_bsp(bsp);
+        let tr = cm.hull(0, 0).trace(eye, eye + forward * 1024.0);
+        if tr.fraction < 1.0 {
+            h.cl.weapon_impacts.push((kind, (tr.endpos + tr.plane_normal * if kind==2 {8.0} else {0.0}).to_array()));
+        }
+    });
+    // Cosmetic diagnostic: exercise the real blood path without a QC hit.
+    c.add("blood_test", |h, a| {
+        let distance = a.argv(1).parse::<f32>().unwrap_or(64.0).clamp(1.0, 1024.0);
+        let (forward, _, _) = qcore::math::angle_vectors(h.cl.viewangles.into());
+        let eye = qcore::math::Vec3::from(h.cl.entities.get(h.cl.viewentity).map_or([0.0; 3], |e| e.origin))
+            + qcore::math::Vec3::new(0.0, 0.0, h.cl.viewheight);
+        h.blood.debug_hits.push((eye + forward * distance, a.argv(2) == "burst"));
     });
     // Debug: run an FTE effect 128 units in front of the view.
     c.add("fte_spawn", |h, a| {
@@ -379,6 +405,7 @@ pub(super) fn register_commands(c: &mut Commands<Host>) {
         h.delayed.push((t, cmd));
     });
     c.add("version", |h, _| h.print("quake-source-port 0.1.0\n"));
+    super::death::register(c);
     c.add("_scansaves", |h, _| h.scan_saves());
     c.add("_mods", |h, _| h.scan_mods());
     c.add("_modmaps", |h, a| h.scan_mod_maps(a.argv(1)));
@@ -415,7 +442,7 @@ pub(super) fn register_commands(c: &mut Commands<Host>) {
         if let Some(d) = p.parent() {
             let _ = std::fs::create_dir_all(d);
         }
-        match std::fs::write(&p, text) {
+        match std::fs::write(&p, qcore::text::encode(&text)) {
             Ok(()) => h.print(&format!("Saved {}\n", p.display())),
             Err(e) => h.print(&format!("ERROR: couldn't write {}: {e}\n", p.display())),
         }
@@ -426,10 +453,11 @@ pub(super) fn register_commands(c: &mut Commands<Host>) {
             return;
         }
         let p = h.savegame_path(a.argv(1));
-        let Ok(text) = std::fs::read_to_string(&p) else {
+        let Ok(bytes) = std::fs::read(&p) else {
             h.print(&format!("ERROR: couldn't open {}\n", p.display()));
             return;
         };
+        let text = qcore::text::decode(&bytes);
         h.print(&format!("Loading game from {}...\n", p.display()));
         if let Some(i) = h.local.take() {
             h.server.drop_client(i, false);

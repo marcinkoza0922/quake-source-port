@@ -33,6 +33,7 @@ pub enum Screen {
     Options,
     OptionsPage(Page),
     Quit,
+    Death,
     Mods,
     ModMaps,
     Multiplayer,
@@ -45,6 +46,7 @@ pub enum Page {
     Controls,
     Input,
     Graphics,
+    Enhancements,
     Audio,
     Accessibility,
     Hud,
@@ -57,6 +59,8 @@ pub enum Page {
     Messages,
     Water,
     Debris,
+    Blood,
+    Impacts,
     /// Multiplayer pages (reached from Screen::Multiplayer).
     Join,
     Host,
@@ -65,7 +69,7 @@ pub enum Page {
 
 /// Every cvar the options pages edit (the host marks them archived).
 pub fn option_cvars() -> impl Iterator<Item = &'static str> {
-    [GAMEPLAY, HUD, HUD_LAYOUT, MESSAGES, WATER, AUTOSAVE, ASSISTS, INPUT, MOUSE, CONTROLLER, GRAPHICS, AUDIO, ACCESSIBILITY].into_iter().flatten().filter_map(|i| match *i {
+    [GAMEPLAY, HUD, HUD_LAYOUT, MESSAGES, ENHANCEMENTS, WATER, BLOOD, DEBRIS, IMPACTS, AUTOSAVE, ASSISTS, INPUT, MOUSE, CONTROLLER, GRAPHICS, AUDIO, ACCESSIBILITY].into_iter().flatten().filter_map(|i| match *i {
         Item::Slider { cvar, .. } | Item::Toggle { cvar, .. } | Item::Choice { cvar, .. } => Some(cvar),
         _ => None,
     })
@@ -92,6 +96,7 @@ pub struct Menu {
     page_cursor: usize,
     /// Quit prompt button: 0 = yes, 1 = no.
     quit_cursor: usize,
+    death_cursor: usize,
     /// Display settings being edited on the Graphics page (mode 0..=2, size).
     pub pending_mode: usize,
     pub pending_res: (u32, u32),
@@ -188,6 +193,7 @@ impl Menu {
             opt_scroll: Default::default(),
             page_cursor: 0,
             quit_cursor: 0,
+            death_cursor: 0,
             pending_mode: 0,
             pending_res: (1280, 720),
             resolutions: Vec::new(),
@@ -269,6 +275,7 @@ impl Menu {
         self.capture = None;
         self.osk = None;
         self.quit_cursor = 0;
+        self.death_cursor = 0;
         if matches!(s, Screen::Load | Screen::Save) { self.load_cursor = 0; self.save_scroll = 0; }
     }
 
@@ -291,6 +298,7 @@ impl Menu {
         };
         let (cx, cy) = CLASSIC;
         match self.screen {
+            Screen::Death => row(140.0, 24.0, 4, 160.0, 480.0),
             Screen::Main => row(cy + 32.0, 20.0, MAIN_ITEMS, cx + 54.0, cx + 312.0),
             Screen::SinglePlayer => row(cy + 32.0, 20.0, 3, cx + 54.0, cx + 312.0),
             Screen::Load | Screen::Save => {
@@ -317,6 +325,7 @@ impl Menu {
 
     fn cursor_mut(&mut self) -> Option<&mut usize> {
         match self.screen {
+            Screen::Death => Some(&mut self.death_cursor),
             Screen::Main => Some(&mut self.main_cursor),
             Screen::SinglePlayer => Some(&mut self.sp_cursor),
             Screen::Multiplayer => Some(&mut self.mp_cursor),

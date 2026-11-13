@@ -428,3 +428,41 @@ pub fn dlights(cl: &ClientState, out: &mut Vec<DLight>) {
         out.push(DLight { origin: d.origin, radius: d.radius, minlight: d.minlight, color: d.color });
     }
 }
+
+#[cfg(test)]
+mod movement_tests {
+    use super::*;
+
+    #[test]
+    fn appearing_monster_snaps_then_smooths_normal_steps() {
+        let mut cl = ClientState::new();
+        cl.protocol = PROTOCOL_NETQUAKE;
+        cl.model_precache = vec![String::new(), "progs/ogre.mdl".into()];
+        cl.entities.resize(3, ClientEntity::default());
+        cl.entities[2].baseline = qclient::EntityState {
+            modelindex: 1, origin: [256.0, 128.0, 24.0], ..Default::default()
+        };
+        // Exercise both a first appearance and reuse of old renderer history.
+        for stale in [[0.0; 3], [-128.0, 64.0, 24.0]] {
+            cl.mtime = [1.0, 0.9];
+            cl.entities[2].msgtime = 0.5;
+            let mut anim = Anim { cur_origin: stale, ..Default::default() };
+            cl.parse_server_message(&[(U_SIGNAL | U_STEP) as u8, 2]).unwrap();
+            cl.relink_entities();
+            let e = &mut cl.entities[2];
+            let start = e.origin;
+            assert_eq!(ViewState::move_lerp(&mut anim, e, 1.0, true).0, start);
+            assert_eq!(e.lerpflags & LERP_RESETMOVE, 0);
+
+            // U_STEP is also sent for normal movement; it must not reset smoothing.
+            cl.mtime = [1.1, 1.0];
+            cl.entities[2].baseline.origin[0] += 20.0;
+            cl.parse_server_message(&[(U_SIGNAL | U_STEP) as u8, 2]).unwrap();
+            cl.relink_entities();
+            let e = &mut cl.entities[2];
+            assert_eq!(ViewState::move_lerp(&mut anim, e, 1.1, true).0, start);
+            let halfway = ViewState::move_lerp(&mut anim, e, 1.15, true).0;
+            assert!((halfway[0] - start[0] - 10.0).abs() < 0.001);
+        }
+    }
+}

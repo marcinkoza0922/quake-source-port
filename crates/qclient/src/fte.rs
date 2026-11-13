@@ -101,6 +101,7 @@ impl ClientState {
         let (dir, count) =
             if cmd == SVCDP_POINTPARTICLES1 { ([0.0; 3], 1) } else { (m.vec3_coord(pf), m.short()) };
         if let Some(name) = self.precached(ef) {
+            if name.to_ascii_lowercase().contains("blood") { self.blood_hits.push(org); }
             self.fte_queue.push(FteRequest::Effect { name, org, dir: Some(dir), count: count as f32 });
         }
     }

@@ -10,6 +10,8 @@ mod autosave;
 mod captions;
 mod console;
 mod debris;
+mod blood;
+mod impacts;
 mod demo;
 mod draw;
 mod font;
@@ -62,14 +64,10 @@ fn main() {
     let basedir = o
         .val("-basedir")
         .map(PathBuf::from)
-        .or_else(|| std::env::var_os("QUAKE_BASEDIR").map(PathBuf::from))
-        .unwrap_or_else(|| {
-            let d = PathBuf::from("vkQuake directory with maps");
-            if d.join("id1").is_dir() { d } else { Fs::default_basedir() }
-        });
+        .unwrap_or_else(Fs::default_basedir);
     let mut fs = Fs::new(&basedir);
     if !fs.add_game_dir("id1") {
-        eprintln!("couldn't find id1 in {}", basedir.display());
+        eprintln!("couldn't find Quake data in {}; use -basedir DIR or QUAKE_BASEDIR (expected id1/pak0.pak or pak0.pak)", basedir.display());
         std::process::exit(1);
     }
     for (flag, dir) in [("-hipnotic", "hipnotic"), ("-rogue", "rogue"), ("-quoth", "quoth")] {
