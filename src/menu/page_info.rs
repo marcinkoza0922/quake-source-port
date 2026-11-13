@@ -31,6 +31,12 @@ pub(super) fn tooltip(item: Item) -> Option<&'static str> {
         "r_ssao" => "Darkens corners and contact areas where geometry meets",
         "r_motionblur" => "Blurs fast-moving monsters, projectiles and doors (not camera turns)",
         "r_motionblur_amount" => "Length of the motion blur streaks",
+        "addons_enable" => "Optional engine toys for single player and local split-screen; pick one with the Toy Slot bind (Controls)",
+        "addon_portal_view" => "Draw the view out of the linked portal inside each portal; off shows flat discs (fastest)",
+        "addon_portal_max" => "How many portals per screen show a live view; each one redraws the scene, so lower this on slow machines or in split-screen",
+        "addon_portal_depth" => "How deep portals seen through other portals keep showing a live view (a hall of mirrors between facing portals); each level redraws the scene",
+        "addon_portal_dist" => "Portals farther away than this are drawn as flat discs",
+        "addon_portalgun" => "A two-portal gun: fire and alt-fire place linked portals on flat walls",
         "r_debris" => "Corpses go limp as ragdolls, gibs tumble and barrels throw shrapnel; shots and blasts push them (cosmetic only)",
         "r_debris_ragdolls" => "Corpses go limp and fall as ragdolls",
         "r_debris_ragdollstart" => "After animation keeps the death animations; at death goes limp the moment a monster dies; mixed goes limp on a hard hit, and the weaker the killing hit the likelier the animation plays",
@@ -99,10 +105,21 @@ pub(super) fn tooltip(item: Item) -> Option<&'static str> {
     })
 }
 
+/// Add-on binds are listed on the Controls page (set from `addons_enable`
+/// whenever the menu handles a key or draws).
+pub(super) static ADDON_BINDS: std::sync::atomic::AtomicBool = std::sync::atomic::AtomicBool::new(false);
+
+pub(super) fn sync_addon_binds(cv: &Cvars) {
+    ADDON_BINDS.store(cv.value_of("addons_enable") != 0.0, std::sync::atomic::Ordering::Relaxed);
+}
+
 pub(super) fn page_items(p: Page) -> &'static [Item] {
     match p {
         Page::Gameplay => GAMEPLAY,
+        Page::Controls if ADDON_BINDS.load(std::sync::atomic::Ordering::Relaxed) => CONTROLS_ALL,
         Page::Controls => CONTROLS,
+        Page::Addons => ADDONS,
+        Page::PortalGun => PORTAL_GUN,
         Page::Input => INPUT,
         Page::Graphics => GRAPHICS,
         Page::Enhancements => ENHANCEMENTS,
@@ -146,13 +163,15 @@ pub(super) fn page_name(p: Page) -> &'static str {
         Page::Debris => "Debris Settings",
         Page::Blood => "Blood Splatter Settings",
         Page::ScreenShader => "Screen Shader",
+        Page::Addons => "Add-ons",
+        Page::PortalGun => "Portal Gun",
         _ => PAGES.iter().find(|x| x.1 == p).map_or("", |x| x.0),
     }
 }
 
 /// The page an `Item::Sub` page returns to, with that row's index.
 pub(super) fn parent_page(p: Page) -> Option<(Page, usize)> {
-    [Page::Assists, Page::Gameplay, Page::Input, Page::Hud, Page::Accessibility, Page::Enhancements].into_iter().find_map(|parent| {
+    [Page::Assists, Page::Gameplay, Page::Input, Page::Hud, Page::Accessibility, Page::Enhancements, Page::Addons].into_iter().find_map(|parent| {
         page_items(parent).iter().position(|i| matches!(i, Item::Sub { page, .. } if *page == p)).map(|i| (parent, i))
     })
 }
@@ -165,6 +184,7 @@ pub(super) fn sub_disabled(page: Page, cv: &Cvars) -> bool {
         || (page == Page::Water && cv.value_of("r_enhancedwater") == 0.0)
         || (page == Page::Blood && cv.value_of("r_blood") == 0.0)
         || (page == Page::Debris && cv.value_of("r_debris") == 0.0)
+        || (page == Page::PortalGun && cv.value_of("addons_enable") == 0.0)
 }
 
 pub(super) fn is_net_page(p: Page) -> bool {

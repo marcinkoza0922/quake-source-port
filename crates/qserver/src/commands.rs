@@ -24,6 +24,7 @@ pub(crate) fn register(s: &mut Server) {
     s.add_cmd("notarget", |s, a| toggle_flag(s, a, FL_NOTARGET, "notarget"));
     s.add_cmd("noclip", cmd_noclip);
     s.add_cmd("setpos", cmd_setpos);
+    s.add_cmd("portal_set", cmd_portal_set);
     s.add_cmd("give", cmd_give);
     s.add_cmd("kill", cmd_kill);
     s.add_cmd("color", cmd_color);
@@ -330,6 +331,26 @@ fn cmd_setpos(s: &mut Server, a: &Args) {
         l.vm.set_ent_f(e, f.fixangle, 1.0);
     }
     l.world.link_edict(&mut crate::ents::Ents { vm: &mut l.vm, c: &mut s.core }, e, false);
+}
+
+/// `portal_set slot ox oy oz nx ny nz ux uy uz` (or `portal_set slot` to
+/// remove): place the local player's portal exactly, without the gun's
+/// surface checks. For screenshots and tests; single player only.
+fn cmd_portal_set(s: &mut Server, a: &Args) {
+    let Some((i, _)) = s.cmd_player() else { return };
+    let slot = a.argv(1).parse::<usize>().ok().filter(|&n| n < 2);
+    let (Some(slot), false, 2 | 11) = (slot, s.deathmatch(), a.argc()) else {
+        s.core.print("portal_set <0|1> [ox oy oz nx ny nz ux uy uz]\n");
+        return;
+    };
+    let v = |o: usize| {
+        let f = |k: usize| a.argv(o + k).parse::<f32>().unwrap_or(0.0);
+        qcore::math::Vec3::new(f(0), f(1), f(2))
+    };
+    let p = (a.argc() == 11).then(|| crate::addons::portal::Portal::new(v(2), v(5).normalize(), v(8).normalize()));
+    if let Some(l) = s.level.as_mut() {
+        l.portals.set(i, slot, p);
+    }
 }
 
 fn cmd_kill(s: &mut Server, _: &Args) {

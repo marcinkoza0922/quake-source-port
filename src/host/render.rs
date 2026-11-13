@@ -23,7 +23,12 @@ impl Host {
             let fs = &self.server.core.fs;
             let cv = self.view_cvars();
             self.view.replaced_models = self.fte.replaced_models(&self.cl, fs);
+            self.view.with_self = !self.cl.portals.is_empty();
             self.view.entities(&mut self.cl, &cv, &mut self.level, fs, &mut self.r, &mut ents);
+            // player 1's own body belongs to player 1's portal views only
+            for e in ents.iter_mut().filter(|e| e.portal_only) {
+                e.views = 1;
+            }
             let debris_on = self.cv("r_debris") != 0.0;
             let gravity = self.cv("sv_gravity");
             let set = crate::debris::Settings {
@@ -234,6 +239,9 @@ impl Host {
             slimealpha: self.level.liquid_alpha[2].or(Some(v("r_slimealpha"))).filter(|&a| a > 0.0).map(|a| a.min(1.0)),
             telealpha: self.level.liquid_alpha[3].or(Some(v("r_telealpha"))).filter(|&a| a > 0.0).map(|a| a.min(1.0)),
             teleport_windows: v("r_teleportwindows") != 0.0,
+            gun_portal_max: v("addon_portal_max").clamp(0.0, 4.0) as u32,
+            gun_portal_dist: v("addon_portal_dist").max(0.0),
+            gun_portal_depth: v("addon_portal_depth").clamp(0.0, 6.0) as u32,
             skyfog: v("r_skyfog"),
             dynamic: v("r_dynamic") != 0.0,
             vsync: v("vid_vsync") != 0.0,
@@ -284,7 +292,9 @@ impl Host {
         let impacts = std::mem::take(&mut self.cl.shot_impacts);
         self.cl.blood_hits.clear();
         self.cl.weapon_impacts.clear();
+        let gun_portals = crate::addons::portal_draw::gun_portals(&self.cl.portals, self.cv("addon_portal_view") != 0.0);
         let frame = qrender::RenderFrame {
+            gun_portals: &gun_portals,
             time: self.cl.time,
             view,
             entities: &ents,

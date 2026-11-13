@@ -77,14 +77,20 @@ impl Host {
                     _ => {}
                 }
             }
-            let (v, gun) = g.view.calc_refdef(&g.cl, &cv, &self.level, ft);
+            let mut gcv = cv;
+            gcv.drawviewmodel &= g.toy.held.is_none();
+            let (v, gun) = g.view.calc_refdef(&g.cl, &gcv, &self.level, ft);
             let me = g.cl.viewentity as u32;
             for e in ents.iter_mut().filter(|e| e.key != 0 && e.key == me) {
                 e.views = if e.views == 0 { all } else { e.views } & !bit;
             }
             if draw_ents {
                 let mut gents = Vec::new();
+                g.view.with_self = !g.cl.portals.is_empty();
                 g.view.entities(&mut g.cl, &cv, &mut self.level, &self.server.core.fs, &mut self.r, &mut gents);
+                // this guest's own body, for its portal views only
+                ents.extend(gents.iter().filter(|e| e.portal_only).map(|e| RenderEntity { views: bit, ..*e }));
+                gents.retain(|e| !e.portal_only);
                 ents.extend(
                     gents
                         .into_iter()

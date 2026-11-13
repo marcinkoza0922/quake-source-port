@@ -73,7 +73,8 @@ pub(super) const fn bind(label: &'static str, cmd: &'static str) -> Item {
     Item::Bind { label, cmd }
 }
 
-pub(super) const CONTROLS: &[Item] = &[
+/// Controls rows; the last two (add-on binds) show only with add-ons on.
+pub(super) const CONTROLS_ALL: &[Item] = &[
     bind("Attack", "+attack"),
     bind("Jump / Swim Up", "+jump"),
     bind("Weapon Wheel", "+weaponwheel"),
@@ -94,7 +95,28 @@ pub(super) const CONTROLS: &[Item] = &[
     bind("Quick Save", "echo Quicksaving...; wait; save quick"),
     bind("Quick Load", "echo Quickloading...; wait; load quick"),
     Item::ResetBinds,
+    bind("Alt Fire (Add-ons)", "+attack2"),
+    bind("Toy Slot (Add-ons)", "+toy"),
 ];
+pub(super) const CONTROLS: &[Item] = CONTROLS_ALL.split_at(CONTROLS_ALL.len() - 2).0;
+
+/// Main menu → Add-ons.
+pub(super) const ADDONS: &[Item] = &[
+    toggle("Add-ons", "addons_enable"),
+    Item::Sub { label: "Portal Gun", page: Page::PortalGun },
+];
+
+/// Reached from Add-ons; unavailable while `addons_enable` is off.
+pub(super) const PORTAL_GUN: &[Item] = &[
+    toggle("Portal Gun", "addon_portalgun"),
+    toggle("See Through Portals", "addon_portal_view"),
+    Item::Choice { label: "Live Portal Views", cvar: "addon_portal_max", choices: PORTAL_MAX },
+    slider("Live View Distance", "addon_portal_dist", 512.0, 8192.0, 512.0),
+    Item::Choice { label: "Portal Recursion", cvar: "addon_portal_depth", choices: PORTAL_DEPTH },
+];
+pub(super) const PORTAL_DEPTH: &[(&str, f32)] =
+    &[("Off", 0.0), ("1", 1.0), ("2", 2.0), ("3", 3.0), ("4", 4.0), ("6", 6.0)];
+pub(super) const PORTAL_MAX: &[(&str, f32)] = &[("1", 1.0), ("2", 2.0), ("3", 3.0), ("4", 4.0)];
 
 pub(super) const PLAYERS: &[(&str, f32)] = &[("2", 2.0), ("3", 3.0), ("4", 4.0), ("6", 6.0), ("8", 8.0), ("12", 12.0), ("16", 16.0)];
 pub(super) const LOCAL_PLAYERS: &[(&str, f32)] =

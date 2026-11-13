@@ -6,6 +6,7 @@ impl Menu {
         if self.screen == Screen::None {
             return;
         }
+        sync_addon_binds(cv);
         c.fade_screen();
         let base_scale = c.scale;
         c.menu_layout();
@@ -33,11 +34,13 @@ impl Menu {
                 title(c, pic, "gfx/ttl_main.lmp");
                 let p = pic("gfx/mainmenu.lmp");
                 c.pic(72.0, 32.0, p);
-                // extra entry under the classic graphic
-                let (y, w) = (32.0 + 5.0 * 20.0 + 2.0, 112.0);
-                c.fill(72.0, y, w, 16.0, [0.0, 0.0, 0.0, 0.55]);
-                c.frame(72.0, y, w, 16.0, BORDER);
-                gold(c, 72.0 + (w - 32.0) / 2.0, y + 4.0, "Mods");
+                // extra entries under the classic graphic
+                for (k, label) in ["Map Packs", "Add-ons"].into_iter().enumerate() {
+                    let (y, w) = (32.0 + (5 + k) as f32 * 20.0 + 2.0, 112.0);
+                    c.fill(72.0, y, w, 16.0, [0.0, 0.0, 0.0, 0.55]);
+                    c.frame(72.0, y, w, 16.0, BORDER);
+                    gold(c, 72.0 + (w - 8.0 * label.len() as f32) / 2.0, y + 4.0, label);
+                }
                 let d = dot(pic);
                 c.pic(54.0, 32.0 + self.main_cursor as f32 * 20.0, d);
             }
