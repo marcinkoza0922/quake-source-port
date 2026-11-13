@@ -178,9 +178,21 @@ off. Toys are only allowed with no deathmatch and no remote client
 - Sync: `//qsp_portal owner slot [origin normal up]` stufftext, full state
   when a client spawns. `qclient` swallows these into `ClientState::portals`;
   other engines ignore `//` lines, so demos still play elsewhere.
-  `PortalDraw` draws one textured oval quad per portal into the FTE batch
-  (colour pairs per owner). Saves write portals to `<save>.qsp` beside the
+  `portal_draw::gun_portals` turns them into `qrender::GunPortal`s (owner
+  colour pair, linked exit). Saves write portals to `<save>.qsp` beside the
   untouched `.sav` (manual saves only, not autosaves).
+- See-through (qrender, reusing teleporter windows): `portals::Portal`
+  carries a full `rot` matrix and a `pvs` point; `portals::gun` builds the
+  window for a linked portal (same rotation as `carry`, clip plane 0.5 in
+  front of the exit wall). `prepare_portals` takes live gun portals first
+  (facing, in frustum, nearest, `addon_portal_max` 1-4, within
+  `addon_portal_dist`), then teleporter windows, 4 targets in all; targets
+  exist only once a live portal was seen. Each portal is an FTE quad in
+  `fte.frag` mode 8: oval mask, rim in the owner colour, inside the window
+  target sampled at `gl_FragCoord` (flat fill without one or with
+  `addon_portal_view 0`). Windows are not recursive. The player's own body
+  is a `portal_only` entity (views bit for its player), skipped in normal
+  draws.
 - Turning add-ons off (or a remote client joining) removes all portals.
 - Tests: `crates/qserver/tests/portals.rs` (e1m1, needs game data).
 

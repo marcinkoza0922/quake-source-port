@@ -105,7 +105,6 @@ pub struct Host {
     wheel: crate::wheel::Wheel,
     /// Player 1's add-on toy slot.
     toy: crate::addons::ToySlot,
-    portal_draw: crate::addons::portal_draw::PortalDraw,
     captions: crate::captions::Captions,
     hud_fade: crate::sbar::HudFade,
     /// Split-screen players 2..6 (`cl_splitscreen`); player 1 is `cl`.
@@ -226,7 +225,6 @@ impl Host {
             pend_impulse: 0,
             wheel: Default::default(),
             toy: Default::default(),
-            portal_draw: Default::default(),
             captions: Default::default(),
             hud_fade: Default::default(),
             guests: Vec::new(),

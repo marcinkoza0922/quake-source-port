@@ -8,7 +8,53 @@ pub struct Portal {
     pub normal: [f32; 3],
     pub center: [f32; 3],
     pub destination: [f32; 3],
-    pub yaw: f32,
+    /// Maps directions at the source to directions at the destination
+    /// (`rot[i][j]`: row i, column j).
+    pub rot: [[f32; 3]; 3],
+    /// Point whose PVS is drawn (inside the destination's empty space).
+    pub pvs: [f32; 3],
+    /// Index into [`crate::RenderFrame::gun_portals`] for add-on portals;
+    /// `None` for teleporter windows.
+    pub gun: Option<usize>,
+}
+
+fn cross(a: [f32; 3], b: [f32; 3]) -> [f32; 3] {
+    [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]]
+}
+
+/// The window through add-on portal `index` out of its linked exit: in
+/// through the face, out of the exit's face (normal and right flip, up
+/// kept), matching `qserver::addons::portal_move::carry`.
+pub fn gun(index: usize, g: &crate::GunPortal, (eo, en, eu): ([f32; 3], [f32; 3], [f32; 3])) -> Portal {
+    let (n, u) = (g.normal, g.up);
+    let r = cross(u, n);
+    let er = cross(eu, en);
+    let rot = std::array::from_fn(|i| std::array::from_fn(|j| -en[i] * n[j] - er[i] * r[j] + eu[i] * u[j]));
+    let [hw, hh] = g.half;
+    let (mut mins, mut maxs) = ([f32::MAX; 3], [f32::MIN; 3]);
+    for (a, b) in [(-1.0, -1.0), (1.0, -1.0), (1.0, 1.0), (-1.0, 1.0)] {
+        for k in 0..3 {
+            let c = g.origin[k] + r[k] * a * hw + u[k] * b * hh;
+            mins[k] = mins[k].min(c - 1.0);
+            maxs[k] = maxs[k].max(c + 1.0);
+        }
+    }
+    Portal {
+        mins,
+        maxs,
+        normal: n,
+        center: g.origin,
+        destination: eo,
+        rot,
+        pvs: std::array::from_fn(|k| eo[k] + en[k] * 8.0),
+        gun: Some(index),
+    }
+}
+
+/// Rotation by `yaw` radians about +z.
+pub fn yaw_rot(yaw: f32) -> [[f32; 3]; 3] {
+    let (s, c) = yaw.sin_cos();
+    [[c, -s, 0.0], [s, c, 0.0], [0.0, 0.0, 1.0]]
 }
 
 pub(crate) fn discover(bsp: &Bsp, world: &world::World) -> Vec<Portal> {
@@ -84,13 +130,16 @@ pub(crate) fn discover(bsp: &Bsp, world: &world::World) -> Vec<Portal> {
                 .and_then(|s| s.parse::<f32>().ok())
                 .unwrap_or(0.0);
             // Vanilla QC raises destination markers 27 units; player eyes add 22.
+            let destination = [origin[0], origin[1], origin[2] + 49.0];
             out.push(Portal {
                 mins: s.mins,
                 maxs: s.maxs,
                 normal,
                 center,
-                destination: [origin[0], origin[1], origin[2] + 49.0],
-                yaw: angle.to_radians() - (-normal[1]).atan2(-normal[0]),
+                destination,
+                rot: yaw_rot(angle.to_radians() - (-normal[1]).atan2(-normal[0])),
+                pvs: destination,
+                gun: None,
             });
         }
     }
@@ -106,34 +155,26 @@ fn vector(s: &str) -> Option<[f32; 3]> {
 }
 impl Portal {
     pub fn rotate(&self, v: [f32; 3]) -> [f32; 3] {
-        let (s, c) = self.yaw.sin_cos();
-        [c * v[0] - s * v[1], s * v[0] + c * v[1], v[2]]
+        std::array::from_fn(|i| world::dot(self.rot[i], v))
     }
     pub fn to_destination(&self, p: [f32; 3]) -> [f32; 3] {
         let v = self.rotate(std::array::from_fn(|k| p[k] - self.center[k]));
         std::array::from_fn(|k| v[k] + self.destination[k])
     }
+    /// Column-major destination→source transform (inverse of `to_destination`).
     pub fn to_source(&self) -> [f32; 16] {
-        let (s, c) = self.yaw.sin_cos();
-        let d = self.destination;
-        [
-            c,
-            -s,
-            0.0,
-            0.0,
-            s,
-            c,
-            0.0,
-            0.0,
-            0.0,
-            0.0,
-            1.0,
-            0.0,
-            self.center[0] - c * d[0] - s * d[1],
-            self.center[1] + s * d[0] - c * d[1],
-            self.center[2] - d[2],
-            1.0,
-        ]
+        let (r, d) = (self.rot, self.destination);
+        let mut m = [0.0; 16];
+        for j in 0..3 {
+            for i in 0..3 {
+                m[j * 4 + i] = r[j][i];
+            }
+        }
+        for i in 0..3 {
+            m[12 + i] = self.center[i] - (0..3).map(|j| r[j][i] * d[j]).sum::<f32>();
+        }
+        m[15] = 1.0;
+        m
     }
     pub fn plane(&self) -> [f32; 4] {
         [
@@ -145,13 +186,40 @@ impl Portal {
     }
     pub fn clip(&self) -> [f32; 4] {
         let n = self.rotate(self.normal).map(|x| -x);
-        [n[0], n[1], n[2], -world::dot(n, self.destination)]
+        // gun portals sit on a wall: clip just in front of it so the wall
+        // itself (coplanar with the plane) is gone
+        let lift = if self.gun.is_some() { 0.5 } else { 0.0 };
+        [n[0], n[1], n[2], -world::dot(n, self.destination) - lift]
     }
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn gun_window_matches_teleport_rotation() {
+        let g = crate::GunPortal {
+            origin: [0.0; 3],
+            normal: [0.0, 0.0, 1.0],
+            up: [1.0, 0.0, 0.0],
+            half: [28.0, 48.0],
+            color: [0; 3],
+            exit: None,
+            live: true,
+        };
+        let exit = ([500.0, 0.0, 64.0], [-1.0, 0.0, 0.0], [0.0, 0.0, 1.0]);
+        let p = gun(0, &g, exit);
+        // falling into the floor comes out of the wall, heading -x
+        assert_eq!(p.rotate([0.0, 0.0, -1.0]), [-1.0, 0.0, 0.0]);
+        assert_eq!(p.to_destination(p.center), exit.0);
+        // to_source undoes to_destination
+        let q = p.to_destination([3.0, -7.0, 20.0]);
+        let m = p.to_source();
+        let back: [f32; 3] = std::array::from_fn(|i| m[i] * q[0] + m[4 + i] * q[1] + m[8 + i] * q[2] + m[12 + i]);
+        assert!((0..3).all(|k| (back[k] - [3.0, -7.0, 20.0][k]).abs() < 1e-3), "{back:?}");
+    }
+
     fn fixture(class: &str, destination: &str, extra: &str) -> (Bsp, world::World) {
         use qformats::bsp::{Face, MipTex, Model};
         let model = Model {

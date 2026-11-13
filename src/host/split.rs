@@ -86,7 +86,11 @@ impl Host {
             }
             if draw_ents {
                 let mut gents = Vec::new();
+                g.view.with_self = !g.cl.portals.is_empty();
                 g.view.entities(&mut g.cl, &cv, &mut self.level, &self.server.core.fs, &mut self.r, &mut gents);
+                // this guest's own body, for its portal views only
+                ents.extend(gents.iter().filter(|e| e.portal_only).map(|e| RenderEntity { views: bit, ..*e }));
+                gents.retain(|e| !e.portal_only);
                 ents.extend(
                     gents
                         .into_iter()

@@ -19,6 +19,10 @@ pub mod portal_move;
 pub const CVARS: &[(&str, &str, u32)] = &[
     ("addons_enable", "0", CVAR_ARCHIVE),
     ("addon_portalgun", "1", CVAR_ARCHIVE),
+    // see-through portals: on/off, live views per frame, live distance
+    ("addon_portal_view", "1", CVAR_ARCHIVE),
+    ("addon_portal_max", "4", CVAR_ARCHIVE),
+    ("addon_portal_dist", "4096", CVAR_ARCHIVE),
 ];
 
 /// Usercmd button bits (bit 0 attack and bit 1 jump are QC's).

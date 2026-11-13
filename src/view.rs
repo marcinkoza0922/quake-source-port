@@ -85,6 +85,8 @@ pub struct ViewState {
     static_anims: Vec<Anim>,
     view_anim: Anim,
     pub face_anim_time: f64,
+    /// Add the player's own body as a portal-only entity (portals exist).
+    pub with_self: bool,
 }
 
 fn dot(a: Vec3, b: Vec3) -> f32 {
@@ -380,6 +382,7 @@ impl ViewState {
                 key: if idx > 0 && idx != cl.viewentity { idx as u32 } else { 0 },
                 dyn_pose: None,
                 views: 0,
+                portal_only: false,
             }
         };
         for k in 0..cl.visedicts.len() {
@@ -395,6 +398,20 @@ impl ViewState {
             let t = Self::move_lerp(a, e, time, cv.lerp_move);
             let f = if m.kind == Kind::Brush { (e.frame.max(0) as u32, 0, 1.0) } else { Self::anim_lerp(a, e, time, cv.lerp_models) };
             out.push(mk(&cl.entities[i], m, f, t, i, cl));
+        }
+        let me = cl.viewentity;
+        if self.with_self
+            && me > 0
+            && me <= cl.maxclients
+            && me < cl.entities.len()
+            && let Some(m) = lv.models.get(cl.entities[me].model).copied().flatten().filter(|m| m.kind == Kind::Alias)
+        {
+            let e = &mut cl.entities[me];
+            let a = &mut self.anims[me];
+            let t = Self::move_lerp(a, e, time, cv.lerp_move);
+            let f = Self::anim_lerp(a, e, time, cv.lerp_models);
+            let ent = mk(&cl.entities[me], m, f, t, me, cl);
+            out.push(RenderEntity { portal_only: true, key: me as u32, ..ent });
         }
         if self.static_anims.len() < cl.static_entities.len() {
             self.static_anims.resize(cl.static_entities.len(), Anim::default());

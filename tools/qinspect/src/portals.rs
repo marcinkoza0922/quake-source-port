@@ -28,7 +28,7 @@ pub fn run(files: &[String]) -> Result<(), String> {
                 p.normal[0],
                 p.normal[1],
                 p.normal[2],
-                p.yaw,
+                p.rot[1][0].atan2(p.rot[0][0]),
                 distance
             );
         }

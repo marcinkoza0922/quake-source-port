@@ -147,6 +147,7 @@ impl Renderer {
             dummy,
             world: None,
             isolated_portal: None,
+            gun_targets: false,
             isolated_distance: None,
             hidden_entities: Default::default(),
             models: Vec::new(),

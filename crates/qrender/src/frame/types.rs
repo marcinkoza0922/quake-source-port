@@ -155,7 +155,11 @@ impl Dyn {
 }
 
 /// FTE particles: vertex offset, index offset, (pipeline, texture slot, batch).
-pub(super) type FteDraw = (u64, u64, Vec<(usize, u32, crate::FteBatch)>);
+/// FTE draws: vertex and index offsets, then (pipeline, texture slot,
+/// batch, shader mode). Mode is the blend index, or [`GUN_PORTAL_MODE`].
+pub(super) type FteDraw = (u64, u64, Vec<(usize, u32, crate::FteBatch, f32)>);
+/// `fte.frag` mode for add-on portal ovals (screen-space view texture).
+pub(super) const GUN_PORTAL_MODE: f32 = 8.0;
 
 #[derive(Clone, Copy, Default)]
 pub(super) struct Range {
@@ -211,6 +215,8 @@ pub(super) struct AliasDraw {
     pub(super) model: usize,
     pub(super) push: AliasPush,
     pub(super) viewmodel: bool,
+    /// Drawn only into portal views.
+    pub(super) portal_only: bool,
 }
 
 pub(super) struct SpriteDraw {

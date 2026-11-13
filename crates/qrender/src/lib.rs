@@ -105,6 +105,8 @@ pub struct Renderer {
     dummy: Buffer,
     world: Option<WorldGpu>,
     isolated_portal: Option<usize>,
+    /// Add-on portals have been drawn: keep the portal view targets.
+    gun_targets: bool,
     isolated_distance: Option<f32>,
     hidden_entities: std::collections::HashSet<u32>,
     models: Vec<Model>,

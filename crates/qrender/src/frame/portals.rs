@@ -5,9 +5,15 @@ pub(super) struct PortalDraw {
     pub ubo: u32,
 }
 impl Renderer {
+    /// Destination views for this frame: live add-on portals first (nearest,
+    /// at most `gun_portal_max`, within `gun_portal_dist`), then teleporter
+    /// windows, four at most in all.
+    #[allow(clippy::too_many_arguments)]
     pub(super) fn prepare_portals(
         &mut self,
         view: Option<&ViewSetup>,
+        gun: &[crate::GunPortal],
+        set: &crate::Settings,
         dynw: &mut Dyn,
         time: f64,
         alphas: [f32; 4],
@@ -16,27 +22,37 @@ impl Renderer {
         let (Some(v), Some(w)) = (view, self.world.as_mut()) else {
             return Vec::new();
         };
-        let mut portals: Vec<_> = w
-            .portals
+        let dist2 = |p: &crate::portals::Portal| dot(sub(p.center, v.eye), sub(p.center, v.eye));
+        let facing = |p: &crate::portals::Portal| {
+            dot(sub(v.eye, p.center), p.normal) > 1.0 && box_in_frustum(&v.frustum, p.mins, p.maxs)
+        };
+        let mut guns: Vec<_> = gun
             .iter()
             .enumerate()
-            .filter(|(i, p)| {
-                self.isolated_portal.is_none_or(|index| index == *i) &&
-                dot(sub(v.eye, p.center), p.normal) > 1.0
-                    && box_in_frustum(&v.frustum, p.mins, p.maxs)
-            })
-            .map(|(_, p)| p.clone())
+            .filter_map(|(i, g)| Some(crate::portals::gun(i, g, g.exit.filter(|_| g.live)?)))
+            .filter(|p| facing(p) && dist2(p) < set.gun_portal_dist * set.gun_portal_dist)
             .collect();
-        portals.sort_by(|a, b| {
-            dot(sub(a.center, v.eye), sub(a.center, v.eye))
-                .total_cmp(&dot(sub(b.center, v.eye), sub(b.center, v.eye)))
-        });
+        guns.sort_by(|a, b| dist2(a).total_cmp(&dist2(b)));
+        guns.truncate(set.gun_portal_max as usize);
+        let mut portals: Vec<_> = if set.teleport_windows {
+            w.portals
+                .iter()
+                .enumerate()
+                .filter(|(i, p)| self.isolated_portal.is_none_or(|index| index == *i) && facing(p))
+                .map(|(_, p)| p.clone())
+                .collect()
+        } else {
+            Vec::new()
+        };
+        portals.sort_by(|a, b| dist2(a).total_cmp(&dist2(b)));
+        guns.extend(portals);
+        let mut portals = guns;
         portals.truncate(4);
         portals
             .into_iter()
             .filter_map(|portal| {
                 let ubo = dynw.push(&[0u8; 2048], 256)? as u32;
-                let surfs = w.cpu.portal_surfaces(portal.destination);
+                let surfs = w.cpu.portal_surfaces(portal.pvs);
                 let world = build_world_draw(
                     w,
                     &mut self.buckets,
@@ -227,4 +243,36 @@ impl Renderer {
             }
         }
     }
+}
+
+/// One add-on portal oval: a quad just off the wall (uv 0..1 across it for
+/// the oval mask), drawn in `fte.frag`'s portal mode with the view texture
+/// `slot` (`NO_TEX`: flat colour).
+pub(super) fn gun_portal_quad(
+    g: &crate::GunPortal,
+    slot: u32,
+    v: &mut Vec<crate::FteVertex>,
+    i: &mut Vec<u32>,
+) -> (usize, u32, crate::FteBatch, f32) {
+    let (n, u) = (g.normal, g.up);
+    let r = [u[1] * n[2] - u[2] * n[1], u[2] * n[0] - u[0] * n[2], u[0] * n[1] - u[1] * n[0]];
+    let [hw, hh] = g.half;
+    let [cr, cg, cb] = g.color;
+    let base = v.len() as u32;
+    let first = i.len() as u32;
+    for (s, t) in [(0.0, 0.0), (1.0, 0.0), (1.0, 1.0), (0.0, 1.0)] {
+        let (a, b) = (s * 2.0 - 1.0, 1.0 - t * 2.0);
+        let pos = std::array::from_fn(|k| g.origin[k] + n[k] * 0.6 + r[k] * a * hw + u[k] * b * hh);
+        v.push(crate::FteVertex { pos, uv: [s, t], color: [cr, cg, cb, 255] });
+    }
+    i.extend([0, 1, 2, 0, 2, 3].map(|k| base + k));
+    let batch = crate::FteBatch {
+        pic: crate::PicId(0),
+        blend: crate::FteBlend::Blend,
+        lines: false,
+        first_index: first,
+        num_indices: 6,
+        soft: false,
+    };
+    (crate::pipelines::fte_index(crate::FteBlend::Blend, false), slot, batch, GUN_PORTAL_MODE)
 }
