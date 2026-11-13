@@ -20,7 +20,7 @@ mod tests {
     fn imported_asset_has_valid_geometry_uvs_and_owner_skins() {
         let palette: Vec<u8> = (0..256).flat_map(|i| [i as u8; 3]).collect();
         let m = model(&palette);
-        assert!(m.triangles.len() > 10_000 && m.triangles.len() <= 16_000);
+        assert!(m.triangles.len() > 500 && m.triangles.len() <= 4_000);
         assert_eq!((m.skin_width, m.skin_height), (512, 512));
         assert_eq!(m.skins.len(), 8);
         assert_eq!(m.num_verts, m.stverts.len());

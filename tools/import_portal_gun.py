@@ -21,7 +21,8 @@ from mathutils import Vector
 
 ROOT = Path(__file__).resolve().parents[1]
 SIZE = 512
-TRIANGLES = 16000
+TRIANGLES = 4000
+METAL_GAIN = 0.6
 
 
 def main():
@@ -173,6 +174,14 @@ def main():
                     b = ((cy - ay) * (x - cx) + (ax - cx) * (y - cy)) / den
                     if a >= -.01 and b >= -.01 and a + b <= 1.01 and mask[y * SIZE + x] in (1, 2):
                         mask[y * SIZE + x] = 3
+        # Quake's overbright alias lighting brightens skins in game; darken the
+        # metal (mask 0) so the in-game look matches the concept render.
+        rgb = bytearray(rgb)
+        for i in range(SIZE * SIZE):
+            if mask[i] == 0:
+                for c in range(3):
+                    rgb[i * 3 + c] = round(rgb[i * 3 + c] * METAL_GAIN)
+        rgb = bytes(rgb)
         bboxmin, bboxmax = bytes(4), bytes((255, 255, 255, 0))
         header = b'IDPO' + struct.pack('<i3f3ff3f8if', 6, *scale, *lo,
             max(Vector(v.co).length for v in mesh.vertices), 0, 0, 0,

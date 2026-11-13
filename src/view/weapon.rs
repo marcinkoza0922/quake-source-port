@@ -40,7 +40,7 @@ impl Alignment {
 /// and orientation follow the camera, so looking up/down cannot tip the gun.
 pub fn portal_pose(view: View, bob: f32, recoil: f32) -> ([f32; 3], [f32; 3]) {
     let (forward, _, up) = angle_vectors(view.angles.into());
-    let origin = Vec3::from(view.origin) + forward * (23.0 - recoil * 2.5) - up * (11.0 + bob);
+    let origin = Vec3::from(view.origin) + forward * (32.0 - recoil * 2.5) - up * (15.0 + bob);
     (
         origin.to_array(),
         [-view.angles[0], view.angles[1], view.angles[2]],
@@ -140,9 +140,9 @@ mod tests {
                     let (origin, angles) = portal_pose(view, 0.0, 0.0);
                     let (f, r, u) = angle_vectors(view.angles.into());
                     let delta = Vec3::from(origin) - Vec3::from(view.origin);
-                    assert!((delta.dot(f) - 23.0).abs() < 0.0001);
+                    assert!((delta.dot(f) - 32.0).abs() < 0.0001);
                     assert!(delta.dot(r).abs() < 0.0001);
-                    assert!((delta.dot(u) + 11.0).abs() < 0.0001);
+                    assert!((delta.dot(u) + 15.0).abs() < 0.0001);
                     // Renderer local +X after Rz(yaw) * Ry(-pitch).
                     let (sy, cy) = angles[1].to_radians().sin_cos();
                     let (sp, cp) = (-angles[0]).to_radians().sin_cos();
