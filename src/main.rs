@@ -11,6 +11,7 @@ mod captions;
 mod console;
 mod debris;
 mod blood;
+mod impacts;
 mod demo;
 mod draw;
 mod font;

@@ -1,11 +1,12 @@
 use super::*;
 
-pub(super) const PAGES: [(&str, Page); 7] = [
+pub(super) const PAGES: [(&str, Page); 8] = [
     ("Gameplay", Page::Gameplay),
     ("HUD", Page::Hud),
     ("Controls", Page::Controls),
     ("Input", Page::Input),
     ("Graphics", Page::Graphics),
+    ("Enhancements", Page::Enhancements),
     ("Audio", Page::Audio),
     ("Accessibility", Page::Accessibility),
 ];
@@ -211,20 +212,32 @@ pub(super) const GRAPHICS: &[Item] = &[
     Item::Slider { label: "Brightness", cvar: "gamma", min: 0.5, max: 1.5, step: 0.05, invert: true },
     slider("Contrast", "contrast", 1.0, 2.0, 0.1),
     toggle("Dynamic Lights", "r_dynamic"),
+    toggle("Interpolate Animation", "r_lerpmodels"),
+    toggle("Interpolate Movement", "r_lerpmove"),
+];
+
+pub(super) const ENHANCEMENTS: &[Item] = &[
     Item::Choice { label: "Ambient Occlusion", cvar: "r_ssao", choices: SSAO },
     toggle("Motion Blur", "r_motionblur"),
     slider("Motion Blur Amount", "r_motionblur_amount", 0.1, 2.0, 0.1),
     toggle("Enhanced Water", "r_enhancedwater"),
     Item::Sub { label: "Water Settings", page: Page::Water },
+    Item::Sub { label: "Impact Effects", page: Page::Impacts },
     toggle("Enhanced Blood Splatter", "r_blood"),
     Item::Sub { label: "Blood Splatter Settings", page: Page::Blood },
     toggle("Ragdolls & Debris", "r_debris"),
     Item::Sub { label: "Debris Settings", page: Page::Debris },
-    toggle("Interpolate Animation", "r_lerpmodels"),
-    toggle("Interpolate Movement", "r_lerpmove"),
 ];
 
-/// Reached from Graphics; unavailable while `r_enhancedwater` is off.
+pub(super) const IMPACTS: &[Item] = &[
+    toggle("Shotgun Bullet Decals", "r_impact_bullets"),
+    toggle("Physical Nail Impacts", "r_impact_nails"),
+    toggle("Explosion Scorch Marks", "r_impact_scorches"),
+    slider("Impact Lifetime", "r_impact_lifetime", 5.0, 600.0, 5.0),
+    slider("Maximum Impacts", "r_impact_limit", 32.0, 2048.0, 32.0),
+];
+
+/// Reached from Enhancements; unavailable while `r_enhancedwater` is off.
 pub(super) const WATER: &[Item] = &[
     slider("Water Opacity", "r_wateralpha", 0.0, 1.0, 0.1),
     toggle("Ripples", "r_waterripples"),
@@ -236,7 +249,7 @@ pub(super) const WATER: &[Item] = &[
 
 pub(super) const RAGDOLL_START: &[(&str, f32)] = &[("after animation", 0.0), ("at death", 1.0), ("mixed", 2.0)];
 
-/// Reached from Graphics; unavailable while `r_debris` is off.
+/// Reached from Enhancements; unavailable while `r_debris` is off.
 pub(super) const DEBRIS: &[Item] = &[
     toggle("Ragdolls", "r_debris_ragdolls"),
     Item::Choice { label: "Ragdoll Start", cvar: "r_debris_ragdollstart", choices: RAGDOLL_START },

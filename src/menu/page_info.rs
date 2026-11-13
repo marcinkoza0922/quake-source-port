@@ -25,6 +25,11 @@ pub(super) fn tooltip(item: Item) -> Option<&'static str> {
         "r_debris_maxragdolls" => "How many ragdolls can lie around at once",
         "r_debris_gibs" => "Gibs and heads tumble and bounce; blasts can gib ragdolls",
         "r_debris_shrapnel" => "Exploding boxes throw metal shards",
+        "r_impact_bullets" => "Shotgun hits leave small surface marks (cosmetic only)",
+        "r_impact_nails" => "Nails stick to wood and bodies; hard surfaces deflect them to the floor",
+        "r_impact_scorches" => "Explosions scorch nearby solid surfaces",
+        "r_impact_lifetime" => "Impact marks and nails fade before expiring",
+        "r_impact_limit" => "Oldest marks and nails are recycled at this shared limit",
         "r_blood" => "Blood stains surfaces and bodies; cosmetic, independent of ragdolls and particle packs",
         "r_blood_amount" => "Number of splatter rays per blood impact",
         "r_blood_lifetime" => "Marks fade out before expiring; oldest marks are recycled at the limit",
@@ -81,6 +86,8 @@ pub(super) fn page_items(p: Page) -> &'static [Item] {
         Page::Controls => CONTROLS,
         Page::Input => INPUT,
         Page::Graphics => GRAPHICS,
+        Page::Enhancements => ENHANCEMENTS,
+        Page::Impacts => IMPACTS,
         Page::Audio => AUDIO,
         Page::Accessibility => ACCESSIBILITY,
         Page::Hud => HUD,
@@ -111,6 +118,7 @@ pub(super) fn page_name(p: Page) -> &'static str {
         Page::HudLayout => "Modern HUD Layout",
         Page::Messages => "Messages & Captions",
         Page::Water => "Water Settings",
+        Page::Impacts => "Impact Effects",
         Page::Debris => "Debris Settings",
         Page::Blood => "Blood Splatter Settings",
         _ => PAGES.iter().find(|x| x.1 == p).map_or("", |x| x.0),
@@ -119,7 +127,7 @@ pub(super) fn page_name(p: Page) -> &'static str {
 
 /// The page an `Item::Sub` page returns to, with that row's index.
 pub(super) fn parent_page(p: Page) -> Option<(Page, usize)> {
-    [Page::Gameplay, Page::Input, Page::Hud, Page::Accessibility, Page::Graphics].into_iter().find_map(|parent| {
+    [Page::Gameplay, Page::Input, Page::Hud, Page::Accessibility, Page::Enhancements].into_iter().find_map(|parent| {
         page_items(parent).iter().position(|i| matches!(i, Item::Sub { page, .. } if *page == p)).map(|i| (parent, i))
     })
 }

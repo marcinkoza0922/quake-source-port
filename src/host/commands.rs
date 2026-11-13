@@ -123,6 +123,8 @@ pub(super) fn register_commands(c: &mut Commands<Host>) {
             "messages" => Some(Page::Messages),
             "accessibility" => Some(Page::Accessibility),
             "graphics" => Some(Page::Graphics),
+            "enhancements" => Some(Page::Enhancements),
+            "impacts" => Some(Page::Impacts),
             "audio" => Some(Page::Audio),
             _ => None,
         };
@@ -193,6 +195,22 @@ pub(super) fn register_commands(c: &mut Commands<Host>) {
     c.add("r_partinfo", |h, _| {
         let s = h.fte.info(&h.cl);
         h.con.print(&s);
+    });
+    // Exercise the real impact path against the surface under the crosshair.
+    c.add("impact_test", |h, a| {
+        let kind = match a.argv(1) {
+            "bullet" => 0, "nail" => 1, "explosion" => 2,
+            _ => { h.con.print("impact_test bullet|nail|explosion\n"); return; }
+        };
+        let Some(bsp) = h.level.bsp.as_ref() else {return};
+        let (forward, _, _) = qcore::math::angle_vectors(h.cl.viewangles.into());
+        let eye = qcore::math::Vec3::from(h.cl.entities.get(h.cl.viewentity).map_or([0.0; 3], |e| e.origin))
+            + qcore::math::Vec3::new(0.0, 0.0, h.cl.viewheight);
+        let cm = qworld::CollisionModel::from_bsp(bsp);
+        let tr = cm.hull(0, 0).trace(eye, eye + forward * 1024.0);
+        if tr.fraction < 1.0 {
+            h.cl.weapon_impacts.push((kind, (tr.endpos + tr.plane_normal * if kind==2 {8.0} else {0.0}).to_array()));
+        }
     });
     // Cosmetic diagnostic: exercise the real blood path without a QC hit.
     c.add("blood_test", |h, a| {

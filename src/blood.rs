@@ -9,7 +9,7 @@ mod appearance;
 #[cfg(test)]
 mod effects_tests;
 mod events;
-mod mesh;
+pub(crate) mod mesh;
 #[cfg(test)]
 mod tests;
 
