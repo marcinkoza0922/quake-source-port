@@ -88,6 +88,7 @@ impl ClientState {
             }
             TE_SPIKE | TE_SUPERSPIKE => {
                 let pos = pos_of(m);
+                self.weapon_impacts.push((1, pos));
                 let name = if ty == TE_SPIKE { "TE_SPIKE" } else { "TE_SUPERSPIKE" };
                 self.shot_impacts.push((pos, false));
                 if !self.fte_effect(name, pos, 1.0) {
@@ -106,6 +107,7 @@ impl ClientState {
             }
             TE_GUNSHOT => {
                 let pos = pos_of(m);
+                self.weapon_impacts.push((0, pos));
                 self.shot_impacts.push((pos, false));
                 if !self.fte_effect("TE_GUNSHOT", pos, 20.0) {
                     self.run_particle_effect(pos, [0.0; 3], 0, 20);
@@ -114,6 +116,7 @@ impl ClientState {
             TE_EXPLOSION => {
                 let pos = pos_of(m);
                 self.shot_impacts.push((pos, true));
+                self.weapon_impacts.push((2, pos));
                 if !self.fte_effect("TE_EXPLOSION", pos, 1.0) {
                     self.particle_explosion(pos);
                 }
@@ -123,6 +126,7 @@ impl ClientState {
             TE_TAREXPLOSION => {
                 let pos = pos_of(m);
                 self.shot_impacts.push((pos, true));
+                self.weapon_impacts.push((2, pos));
                 if !self.fte_effect("TE_TAREXPLOSION", pos, 1.0) {
                     self.blob_explosion(pos);
                 }
@@ -149,6 +153,7 @@ impl ClientState {
                 let start = m.byte();
                 let len = m.byte();
                 self.shot_impacts.push((pos, true));
+                self.weapon_impacts.push((2, pos));
                 if !self.fte_effect(&format!("TE_EXPLOSION2_{start}_{len}"), pos, 1.0) {
                     self.particle_explosion2(pos, start, len);
                 }
@@ -173,5 +178,22 @@ impl ClientState {
         dl.radius = 350.0;
         dl.die = die;
         dl.decay = 300.0;
+    }
+}
+
+#[cfg(test)]
+mod impact_tests {
+    use super::*;
+    #[test]
+    fn weapon_kinds_survive_scripted_particle_replacement() {
+        let mut cl = ClientState::new();
+        cl.fte_names = crate::FteNames::new(["TE_GUNSHOT".into(),"TE_SPIKE".into(),"TE_EXPLOSION".into()]);
+        for (ty, kind) in [(TE_GUNSHOT,Some(0)),(TE_SPIKE,Some(1)),(TE_SUPERSPIKE,Some(1)),
+            (TE_EXPLOSION,Some(2)),(TE_WIZSPIKE,None),(TE_KNIGHTSPIKE,None)] {
+            cl.weapon_impacts.clear();
+            let bytes=[ty,0,0,0,0,0,0];
+            cl.parse_tent(&mut MsgReader::new(&bytes)).unwrap();
+            assert_eq!(cl.weapon_impacts.first().map(|e| e.0),kind);
+        }
     }
 }

@@ -3,17 +3,21 @@ use super::*;
 #[test]
 fn long_page_scrolls_with_cursor() {
     let mut m = Menu::new();
-    m.open(Screen::OptionsPage(Page::Graphics));
-    let n = m.page_len(Page::Graphics);
-    assert!(n > PAGE_ROWS, "Graphics page should be long enough to scroll");
-    assert_eq!(m.page_scroll(Page::Graphics), 0);
+    m.servers = (0..PAGE_ROWS).map(|i| ServerEntry {
+        address: format!("127.0.0.1:{}", 26000+i), hostname: format!("Server {i}"),
+        map: "start".into(), players: 1, max_players: 4,
+    }).collect();
+    m.open(Screen::OptionsPage(Page::Join));
+    let n = m.page_len(Page::Join);
+    assert!(n > PAGE_ROWS, "Server list should be long enough to scroll");
+    assert_eq!(m.page_scroll(Page::Join), 0);
     m.opt_cursor = n - 1;
-    assert_eq!(m.page_scroll(Page::Graphics), n - PAGE_ROWS);
+    assert_eq!(m.page_scroll(Page::Join), n - PAGE_ROWS);
     // the top visible row maps to the first scrolled-in item
     assert_eq!(m.item_at((320.0, PAGE_ROW0 + 1.0)), Some(n - PAGE_ROWS));
     // moving back up past the window scrolls up
     m.opt_cursor = 0;
-    assert_eq!(m.page_scroll(Page::Graphics), 0);
+    assert_eq!(m.page_scroll(Page::Join), 0);
 }
 
 #[test]
@@ -318,4 +322,31 @@ fn death_shortcuts_and_controller_select_recovery() {
     m.key(K_ESCAPE, &mut cv, true);
     assert_eq!(m.screen, Screen::Death);
     assert_eq!(m.item_at((170.0, 190.0)), Some(2));
+}
+
+#[test]
+fn enhancements_hub_and_subpages_navigate_back_to_their_parent() {
+    let mut cv = Cvars::default();
+    for name in ["r_enhancedwater", "r_blood", "r_debris"] {
+        cv.register(name, "1", 0);
+    }
+    let mut menu = Menu::new();
+    menu.open(Screen::Options);
+    menu.page_cursor = PAGES.iter().position(|(_, page)| *page == Page::Enhancements).unwrap();
+    menu.key(K_ENTER, &mut cv, false);
+    assert_eq!(menu.screen, Screen::OptionsPage(Page::Enhancements));
+    for page in [Page::Water, Page::Blood, Page::Debris, Page::Impacts] {
+        let row = ENHANCEMENTS.iter().position(|item| matches!(item, Item::Sub {page:p,..} if *p==page)).unwrap();
+        menu.opt_cursor = row;
+        menu.key(K_ENTER, &mut cv, false);
+        assert_eq!(menu.screen, Screen::OptionsPage(page));
+        menu.key(K_ESCAPE, &mut cv, false);
+        assert_eq!(menu.screen, Screen::OptionsPage(Page::Enhancements));
+        assert_eq!(menu.opt_cursor, row);
+    }
+    menu.key(K_ESCAPE, &mut cv, false);
+    assert_eq!(menu.screen, Screen::Options);
+    for cvar in ["r_impact_nails", "r_blood_amount", "r_debris_gibs", "r_wateralpha"] {
+        assert!(option_cvars().any(|name| name==cvar));
+    }
 }

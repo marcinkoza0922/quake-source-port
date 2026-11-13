@@ -29,3 +29,15 @@ and ragdolls, and contact painting from moving giblets. Settings control
 splatter amount, size, lifetime, mark limit, wounds, and gib painting.
 Blood decals vary in shape, orientation and proportions. Wall and trigger hits
 produce no blood; explosive dismemberments throw dense splatter across a room.
+
+## Optional weapon impacts
+
+Enhancements → Impact Effects options independently enable shotgun bullet decals, explosion scorch
+marks, and physical nail impacts. Nails embed in wood, enemies and ragdolls;
+other solid materials deflect them into cosmetic objects that fall and settle.
+A shared lifetime and count limit bound these client-only effects. Railgun
+burns are out of scope (Quake II weapon).
+
+Optional visual enhancements live under Options → Enhancements, alongside
+Graphics. Water, blood, debris and impact effects have their own settings pages;
+ambient occlusion and motion blur also live in Enhancements.
