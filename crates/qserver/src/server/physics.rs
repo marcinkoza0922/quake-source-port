@@ -159,7 +159,7 @@ impl Server {
             } else {
                 l.falls.clear();
                 l.hooks.reset();
-                if !l.portals.pairs.is_empty() {
+                if !l.portals.pairs.is_empty() || !l.stickies.bombs.is_empty() {
                     crate::addons::shut_down(l, c);
                 }
             }

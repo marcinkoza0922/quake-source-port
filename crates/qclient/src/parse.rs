@@ -319,6 +319,10 @@ impl ClientState {
                 self.parse_hook(&String::from_utf8_lossy(args));
                 continue;
             }
+            if let Some(args) = line.strip_prefix(b"//qsp_sticky ") {
+                self.parse_sticky(&String::from_utf8_lossy(args));
+                continue;
+            }
             if let Some(args) = line.strip_prefix(b"//qsp_portal ") {
                 self.parse_portal(&String::from_utf8_lossy(args));
                 continue;

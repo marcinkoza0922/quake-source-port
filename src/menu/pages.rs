@@ -109,6 +109,7 @@ pub(super) const CONTROLS: &[Item] = CONTROLS_ALL.split_at(CONTROLS_ALL.len() - 
 pub(super) const ADDONS: &[Item] = &[
     toggle("Portal Gun", "addon_portalgun"),
     Item::Sub { label: "Portal Gun Settings", page: Page::PortalGun },
+    toggle("Stickybomb Launcher", "addon_sticky"),
     toggle("Railgun", "addon_railgun"),
     Item::Sub { label: "Railgun Settings", page: Page::Railgun },
     toggle("Hookshot", "addon_hookshot"),
@@ -119,6 +120,7 @@ pub(super) const ADDONS: &[Item] = &[
 pub(super) const NEW_GAME_ADDONS: &[Item] = &[
     toggle("Portal Gun", "addon_portalgun"),
     Item::Sub { label: "Portal Gun Settings", page: Page::PortalGun },
+    toggle("Stickybomb Launcher", "addon_sticky"),
     toggle("Railgun", "addon_railgun"),
     Item::Sub { label: "Railgun Settings", page: Page::Railgun },
     toggle("Hookshot", "addon_hookshot"),

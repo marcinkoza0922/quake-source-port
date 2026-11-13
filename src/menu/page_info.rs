@@ -35,6 +35,7 @@ pub(super) fn tooltip(item: Item) -> Option<&'static str> {
         "addon_portal_max" => "How many portals per screen show a live view; each one redraws the scene, so lower this on slow machines or in split-screen",
         "addon_portal_depth" => "How deep portals seen through other portals keep showing a live view (a hall of mirrors between facing portals); each level redraws the scene",
         "addon_portal_dist" => "Portals farther away than this are drawn as flat discs",
+        "addon_sticky" => "Lobs sticky bombs (rockets ammo) that cling to walls, doors and monsters; alt-fire detonates them all",
         "addon_railgun" => "A Quake III style railgun: a slug that pierces every enemy on its line, using 2 cells a shot and refiring every 1.5 s; pick it with the Toy Slot bind (Controls)",
         "addon_rail_damage" => "Damage the railgun deals to each enemy it passes through (Quake III: 100)",
         "addon_rail_color" => "Colour of the railgun's spiral trail; split-screen players each get the next colour along",

@@ -204,3 +204,33 @@ point follows the entity's origin.
   copy of the portal importer: longest axis to +X, texture scaled by 0.5 for
   alias overbright, no mask); `hook_model.rs` palette-quantises it.
 - Tests: `crates/qserver/tests/hookshot.rs` (e1m1, game data).
+### Stickybomb launcher (`addon_sticky`, `addons/sticky.rs`)
+TF2 homage. Fire (held) lobs a bomb every 0.6 s on the grenade arc
+(forward 600 + up 200, `sv_gravity`), costing one rocket (the grenade
+launcher's pool; `currentammo` follows when the QC weapon is the GL/RL).
+Bombs are engine-side records, not edicts, so they never touch the edict
+limit; `MAX_BOMBS` (64, all players) caps them and the shooter's oldest
+goes off when it is reached. Each frame a flying bomb traces as a missile
+(`MoveType::Missile`, owner ignored); on a hit it sticks: world (absolute
+spot), brush entities and monsters (offset from the entity's origin, so it
+rides doors, plats and monsters). Sky hits fizzle. When the host monster
+dies (health ≤ 0 or `SOLID_NOT`) or is freed, the bomb falls and sticks to
+whatever is below. Alt-fire (`+attack2`) edge detonates all the player's
+bombs: a temporary edict calls QC `T_RadiusDamage(tmp, player, 120,
+world)`, then TE_EXPLOSION and `weapons/r_exp3.wav` (only if precached).
+A player leaving detonates theirs; the toy switched off removes all.
+- Sync: `//qsp_sticky id x y z` when a bomb moves, `//qsp_sticky id` when
+  it is gone, `//qsp_sticky clear` + full state on spawn →
+  `ClientState::stickies`. Saves: `sticky owner x y z vx vy vz ent ox oy oz`
+  header lines (ent −1 = flying; edict numbers survive save/load);
+  `save::Header::extra` keeps any non-toy/portal header line verbatim.
+- Look (`src/addons/sticky_model.rs`, `sticky_draw.rs`): the bomb is a
+  40-triangle studded ball built in code (16×16 skin, dark red; skin 1
+  lights its band in fullbright red) that blinks ~twice a second with a
+  48-unit red dlight. The launcher is a Meshy import (concept nano-banana
+  `01a1d669-d70f-7701-a63a-9822cdf2662d`, meshy-t2 + meshy-n1 task
+  `01a1d66a-00dd-7228-897d-05a59fec46ac`, 18 credits) converted by
+  `tools/import_toy_model.py` (generic copy of the portal importer, no
+  energy mask: `blender -b --factory-startup --python
+  tools/import_toy_model.py -- DIR_OR_ZIP --out assets/stickybomb`), skin
+  quantized to the active palette's non-fullbright colours.
