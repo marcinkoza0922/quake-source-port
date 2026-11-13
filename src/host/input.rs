@@ -30,7 +30,7 @@ impl Host {
                 let mut c = Canvas::new(pw, ph);
                 c.menu_layout();
                 let pos = (px / c.scale - c.ox, py / c.scale - c.oy);
-                if let Some(snd) = self.menu.mouse_move(pos) {
+                if let Some(snd) = self.menu.mouse_move(pos, &mut self.server.core.cvars) {
                     self.local_sound(snd);
                 }
             }

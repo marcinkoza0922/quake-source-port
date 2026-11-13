@@ -175,13 +175,19 @@ impl Menu {
         }
         let n = self.save_rows();
         c.text_right(CARD_X + CARD_W, 23.0, &format!("{} / {}", self.load_cursor + 1, n), TXT, MUTED);
-        c.clip_rows(Some((CARD_Y0, CARD_BOTTOM)));
         let small = 8.5;
-        for i in self.save_scroll..n {
-            let y = CARD_Y0 + (i - self.save_scroll) as f32 * CARD_PITCH;
-            if y >= CARD_BOTTOM {
-                break;
+        let sticky = usize::from(self.screen == Screen::Load);
+        if sticky > 0 {
+            // divider between the pinned newest save and the scrolling rest
+            let y = CARD_Y0 + CARD_H + 3.0;
+            c.fill(CARD_X, y, CARD_W, 1.0, [0.55, 0.40, 0.20, 0.8]);
+        }
+        for i in 0..n {
+            if !self.card_visible(i) {
+                continue;
             }
+            let y = self.card_y(i);
+            c.clip_rows(Some(if i < sticky { (CARD_Y0 - 1.0, CARD_Y0 + CARD_H + 1.0) } else { (self.card_top(), CARD_BOTTOM) }));
             let x = CARD_X;
             let selected = i == self.load_cursor;
             let bg = if selected { [0.30, 0.20, 0.09, 0.97] } else { [0.08, 0.07, 0.06, 0.94] };
@@ -236,12 +242,12 @@ impl Menu {
                 }
             }
             let icons = self.save_inventory.weapons(sv);
-            let wx = x + 320.0;
+            let wx = x + 250.0;
             if icons.is_empty() {
                 c.text(wx, y + 26.0, "No weapons", small, MUTED);
             }
             let columns = if icons.len() <= 20 { 10 } else { 14 };
-            let cell = if columns == 10 { 26.0 } else { 18.5 };
+            let cell = if columns == 10 { 22.0 } else { 16.0 };
             let mut missing = Vec::new();
             for (j, icon) in icons.iter().take(columns * 2).enumerate() {
                 if pic(&icon.name).is_none() {
@@ -255,14 +261,9 @@ impl Menu {
             }
         }
         c.clip = None;
-    }
-
-    /// Keeps the card cursor within the fully visible cards.
-    pub(super) fn fix_card_scroll(&mut self) {
-        if self.load_cursor < self.save_scroll {
-            self.save_scroll = self.load_cursor;
-        } else if self.load_cursor >= self.save_scroll + CARDS_FULL {
-            self.save_scroll = self.load_cursor + 1 - CARDS_FULL;
+        if let Some((x, top, h, ty, th)) = self.card_scrollbar() {
+            c.fill(x, top, 3.0, h, [1.0, 1.0, 1.0, 0.12]);
+            c.fill(x, ty, 3.0, th, [0.85, 0.65, 0.3, if self.drag.is_some() { 1.0 } else { 0.9 }]);
         }
     }
 
@@ -471,9 +472,13 @@ impl Menu {
                 }
             }
             Item::Sub { label: l, page } => {
-                label(c, l);
+                // submenu rows: tinted strip, gold label and arrow
                 let dim = sub_disabled(page, cv);
-                { txt(c, VALUE_X, y, if dim { "(off) >" } else { ">" }); }
+                let (fg, tint) = if dim { (MUTED, 0.04) } else { (GOLD_FG, 0.10) };
+                c.fill(PANEL_X + 4.0, y - 2.0, PANEL_W - 14.0, ROW_H, [0.85, 0.60, 0.25, tint]);
+                c.text_right(LABEL_R, y, l, TXT, fg);
+                c.text(VALUE_X, y, if dim { "(off)" } else { "" }, TXT, MUTED);
+                c.shape(VALUE_X + if dim { 30.0 } else { 0.0 }, y + 1.0, 7.0, 7.0, crate::font::Shape::ArrowRight, fg);
             }
             Item::ResetBinds => {
                 c.text_center(320.0, y, "Reset to Defaults", TXT, GOLD_FG);
