@@ -1,0 +1,28 @@
+{
+  "source": "Meshy_AI_retro_portal_gun_20261113_image-to-3d-texture_fbx.zip",
+  "source_triangles": 301018,
+  "triangles": 13603,
+  "vertices": 14661,
+  "texture_size": 512,
+  "removed_packed_degenerates": 2397,
+  "bounds": [
+    [
+      -11.989950180053711,
+      -8.3226900100708,
+      -8.845012664794922
+    ],
+    [
+      24.0033016204834,
+      8.282045364379883,
+      8.80264949798584
+    ]
+  ],
+  "mask_counts": {
+    "0": 257723,
+    "1": 1199,
+    "2": 620,
+    "3": 389,
+    "4": 1856,
+    "5": 357
+  }
+}

@@ -146,6 +146,7 @@ pub enum ClientEvent {
     LocalSound { sound: usize },
     /// Server-confirmed damage dealt to a living enemy; kills supersede hits.
     HitFeedback { kill: bool },
+    PortalEffect(PortalEffect),
     StopSound { ent: i32, channel: i32 },
     StaticSound(StaticSound),
     CdTrack { track: u8, loop_track: u8 },
@@ -447,6 +448,45 @@ impl ClientState {
         self.portals.retain(|p| (p.owner, p.slot) != (owner, slot));
         if let [_, _, ox, oy, oz, nx, ny, nz, ux, uy, uz] = n[..] {
             self.portals.push(PortalView { owner, slot, origin: [ox, oy, oz], normal: [nx, ny, nz], up: [ux, uy, uz] });
+        }
+    }
+}
+
+/// Server-confirmed shot (0 rejected, 1 placed) or crossing (2).
+#[derive(Clone, Copy, Debug, PartialEq)]
+pub struct PortalEffect {
+    pub owner: u8,
+    pub slot: u8,
+    pub kind: u8,
+    pub start: [f32; 3],
+    pub end: [f32; 3],
+}
+
+impl PortalEffect {
+    pub(crate) fn parse(args: &str) -> Option<Self> {
+        let words: Vec<_> = args.split_whitespace().collect();
+        if words.len() != 9 { return None; }
+        let owner = words[0].parse().ok()?;
+        let slot = words[1].parse::<u8>().ok()?;
+        let kind = words[2].parse::<u8>().ok()?;
+        if slot > 1 || kind > 2 { return None; }
+        let mut xyz = [0.0f32; 6];
+        for (v, w) in xyz.iter_mut().zip(&words[3..]) {
+            *v = w.parse().ok()?;
+            if !v.is_finite() || v.abs() > 1_000_000.0 { return None; }
+        }
+        Some(Self { owner, slot, kind, start: xyz[..3].try_into().ok()?, end: xyz[3..].try_into().ok()? })
+    }
+}
+
+#[cfg(test)]
+mod portal_effect_tests {
+    use super::PortalEffect;
+    #[test]
+    fn rejects_malformed_presentation_messages() {
+        assert!(PortalEffect::parse("1 1 0 0 0 0 10 20 30").is_some());
+        for bad in ["1 2 0 0 0 0 10 20 30", "1 1 3 0 0 0 10 20 30", "1 1 0 NaN 0 0 10 20 30", "1 1 0 0 0 0 10 20", "1 1 0 0 0 0 10 20 30 extra"] {
+            assert!(PortalEffect::parse(bad).is_none());
         }
     }
 }

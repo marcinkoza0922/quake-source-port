@@ -9,6 +9,9 @@ use qrender::{DLight, Particle, RenderEntity, View};
 use crate::assets::{Kind, Level};
 use crate::sbar::{IT_INVISIBILITY, IT_INVULNERABILITY, IT_QUAD, IT_SUIT};
 
+pub mod weapon;
+use weapon::Alignment;
+
 pub const CONTENTS_WATER: i32 = -3;
 pub const CONTENTS_SLIME: i32 = -4;
 pub const CONTENTS_LAVA: i32 = -5;
@@ -26,7 +29,7 @@ pub struct ViewCvars {
     pub kickpitch: f32,
     pub fov: f32,
     pub gunkick: bool,
-    pub drawviewmodel: bool,
+    pub viewmodel: Alignment,
     /// r_lerpmodels: blend alias frames.
     pub lerp_models: bool,
     /// r_lerpmove: smooth MOVESTEP (monster) movement over 0.1s.
@@ -249,7 +252,7 @@ impl ViewState {
             self.oldz = ent.origin[2];
         }
         let wmodel = cl.stats[STAT_WEAPON] as usize;
-        let show = cv.drawviewmodel && !dead && cl.items & IT_INVISIBILITY == 0 && wmodel != 0;
+        let show = cv.viewmodel.visible() && !dead && cl.items & IT_INVISIBILITY == 0 && wmodel != 0;
         let gun = lv.models.get(wmodel).copied().flatten().filter(|_| show).map(|m| {
             let frame = cl.stats[STAT_WEAPONFRAME];
             let a = &mut self.view_anim;
@@ -277,7 +280,7 @@ impl ViewState {
             };
             RenderEntity {
                 model: m.id,
-                origin: gorg,
+                origin: (Vec3::from(gorg) + cv.viewmodel.offset(view.angles)).to_array(),
                 angles: gun_angles,
                 frame: frame.max(0) as u32,
                 prev_frame: a.prev.max(0) as u32,

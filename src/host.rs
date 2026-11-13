@@ -106,6 +106,7 @@ pub struct Host {
     hud_fade: crate::sbar::HudFade,
     feedback: feedback::Feedback,
     feedback_sounds: feedback::CueCache,
+    portal_fx: crate::addons::portal_fx::Presentation,
     /// Split-screen players 2..6 (`cl_splitscreen`); player 1 is `cl`.
     pub guests: Vec<crate::splitscreen::Guest>,
     /// Player 1's gamepad (the first pad used); other pads can join.
@@ -228,6 +229,7 @@ impl Host {
             hud_fade: Default::default(),
             feedback: Default::default(),
             feedback_sounds: Default::default(),
+            portal_fx: Default::default(),
             guests: Vec::new(),
             p1_pad: None,
             input_target: None,

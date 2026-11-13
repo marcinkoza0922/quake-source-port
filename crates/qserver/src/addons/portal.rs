@@ -64,6 +64,12 @@ pub struct Portals {
 }
 
 impl Portals {
+    /// Transient presentation, separate from saved/synchronized portal state.
+    pub(crate) fn effect(&mut self, owner: usize, slot: usize, kind: u8, start: Vec3, end: Vec3) {
+        self.outbox.push(format!("//qsp_portalfx {owner} {slot} {kind} {} {} {} {} {} {}\n",
+            start.x, start.y, start.z, end.x, end.y, end.z));
+    }
+
     fn ensure(&mut self, n: usize) {
         if self.pairs.len() != n {
             self.pairs.resize(n, [None, None]);

@@ -25,7 +25,7 @@ run with no deathmatch and no remote client (`addons::allowed`/`all_local`).
   ticked (`ADDON_BINDS`, synced on menu key/draw).
 - While a toy is held, `ToySlot::buttons` keeps QC's attack bit at 0 and
   sends usercmd bit 2 (fire), bit 3 (alt) and the toy id in bits 4–7; QC
-  only reads bits 0/1. The view model is hidden for that player (player 1
+  only reads bits 0/1. The QC view model is replaced by the imported projector (player 1
   and each split-screen guest have their own `ToySlot`).
 - Off costs one cvar lookup per frame; nothing else runs.
 - Portal gun (`addons/portal.rs`, `portal_move.rs`): fire/alt-fire edges
@@ -81,3 +81,60 @@ run with no deathmatch and no remote client (`addons::allowed`/`all_local`).
 - Turning add-ons off (or a remote client joining) removes all portals.
 - Tests: `crates/qserver/tests/portals.rs` (e1m1, needs game data).
 
+
+### Portal gun presentation
+`src/addons/portal_model.rs` loads the owner's supplied Meshy retro portal-gun
+FBX as an embedded native alias model. `assets/portal-gun/` contains compressed
+MDL geometry, a 512×512 RGB atlas and import statistics. The source's 301,018
+triangles are decimated to a 16,000-triangle budget, with triangles collapsed by
+MDL position quantization removed. The source color is baked onto a fresh UV
+layout before palette conversion; smooth lighting normals survive. The muzzle
+points along +X and the full model spans 36 Quake units.
+`portal_skin.rs` remaps the imported texture to the active mod's palette once
+per level. Metal excludes fullbright indices; a source-color/UV mask supplies
+eight owner/slot skins, retaining paired chamber/emblem colors and switching
+muzzle energy with the last fired slot. The native renderer supplies lighting;
+the FBX's PBR normal, metallic and roughness maps are not used.
+The model is uploaded once per level and drawn as a depth-compressed view weapon,
+with idle movement and firing recoil.
+
+Reimport with `blender -b --factory-startup --python-exit-code 1 --python
+tools/import_portal_gun.py -- /path/to/Meshy_export.zip`. This offline Blender
+helper preserves the external source archive and needs no Quake game data.
+The imported mesh and color atlas were supplied by the project owner; the large
+FBX, original PNGs and extracted Blender files are not bundled. Generated game
+assets are embedded, so installed binaries need neither Blender nor Downloads.
+Each split-screen camera gets its own weapon, skin, and visibility mask;
+death, invisibility and intermission hide it like the normal weapon.
+Gameplay → Viewmodels controls all weapons: Center (default), Right, Left, Off
+(`r_drawviewmodel` 1, 2, 3, 0 respectively, archived). Side placement translates
+eight units along each camera's right axis without changing aim or mirroring
+meshes. The portal gun follows the camera basis with negated alias pitch,
+without the former fixed yaw/side offset, so looking up/down keeps its pose.
+
+The authoritative server broadcasts transient reliable comment messages
+`//qsp_portalfx owner slot kind sx sy sz ex ey ez`: rejected shot (0), placed
+shot (1), or successful crossing (2). These are neither saved nor included in
+late-join portal state. qclient validates the complete message, finite bounded
+coordinates, and mode/kind before emitting `ClientEvent::PortalEffect`; malformed
+messages are swallowed. Existing portal placement/collision timing is unchanged.
+
+`portal_fx::Presentation` caps live effects at 64 and clears them on map changes
+or time rewind. Cosmetic projectiles travel for 120 ms with a helical
+particle wake; impact then triggers an expanding burst or contracting
+failure fizz. The particles use exact RGB colors from `portal_draw::colour`
+for all four owner pairs, independent of scripted particle settings. Crossing
+bursts use the destination portal's slot color, with sound at both endpoints
+when far apart. The weapon core follows that owner's last fired slot.
+
+`qsound::portal` synthesizes four original mono PCM cues at the device rate:
+FM snap and bass impulse (fire), rising resonant chime (placed), falling noisy
+collapse (rejected/dissipated), and filtered air rush (crossing). Both slots have
+distinct pitches. Eight cached cues feed normal positional SFX channels and
+respect master SFX volume and all split-screen listeners. No Portal recordings
+or extracted Valve assets are included. The add-on's existing local-only
+eligibility remains in force.
+
+Audition/export helper: `rustc --edition=2024 tools/portal_cues.rs -o target/portal-cues` then `target/portal-cues target/portal-audio` writes all eight
+48 kHz mono WAVs from the same synthesis code used in-game. Generated previews
+stay under ignored `target/`; the Rust sources are the editable assets.

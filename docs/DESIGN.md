@@ -201,7 +201,17 @@ Damage/movement assists are engine-side so they work with any progs; off in deat
 ### Add-ons
 
 See [ADDONS.md](ADDONS.md) for the optional local toys, portal gun, rendering,
+imported projector model, owner-colored projectile effects and synthesized cues,
+plus `tools/portal_cues.rs` for exporting WAV previews,
 movement, settings and diagnostic commands.
+
+Gameplay → Viewmodels archives `r_drawviewmodel`: 0 Off, 1 Center (default),
+2 Right, 3 Left. `view::weapon::Alignment` translates every stock/mod/add-on
+weapon eight camera-right units for side placement, independently per split view.
+The portal gun uses negated alias pitch and a camera-relative origin with no yaw
+cant. Its Meshy FBX is converted by `tools/import_portal_gun.py` to embedded native MDL
+and a 512×512 atlas; `addons::portal_model`/`portal_skin` apply owner colors and
+the active palette. See ADDONS.md for conversion, materials and ownership.
 
 ### Test bot (`tools/qbot`)
 

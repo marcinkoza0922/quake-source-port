@@ -63,7 +63,8 @@ pub(crate) fn cross<D: Edicts + ?Sized>(st: &mut Portals, w: &mut World, ents: &
     if st.snapshot.is_empty() {
         return;
     }
-    let pairs: Vec<[Portal; 2]> = st.pairs.iter().filter_map(|p| Some([p[0]?, p[1]?])).collect();
+    let pairs: Vec<_> = st.pairs.iter().enumerate().filter_map(|(o,p)| Some((o,[p[0]?, p[1]?]))).collect();
+    let mut effects = Vec::new();
     for &(e, _, vel) in &st.snapshot {
         if ents.is_free(e) || !movable(ents, e) {
             continue;
@@ -72,14 +73,14 @@ pub(crate) fn cross<D: Edicts + ?Sized>(st: &mut Portals, w: &mut World, ents: &
         let mid = (mins + maxs) * 0.5;
         let centre = ents.v(e, V::Origin) + mid;
         let onground = ents.flags(e) & FL_ONGROUND != 0;
-        let hit = pairs.iter().flat_map(|p| [(p[0], p[1]), (p[1], p[0])]).find(|(a, _)| {
+        let hit = pairs.iter().flat_map(|(o,p)| [(*o,0,p[0],p[1]), (*o,1,p[1],p[0])]).find(|(_, _, a, _)| {
             let d = centre - a.origin;
             let along = d.dot(a.normal);
             let ext = extent(mins, maxs, a.normal);
             let into = vel.dot(a.normal) < -1.0 || (a.normal.z > 0.7 && onground);
             into && along <= ext + 4.0 && along > -ext && d.dot(a.right).abs() <= HALF_W && d.dot(a.up).abs() <= HALF_H
         });
-        let Some((a, b)) = hit else { continue };
+        let Some((owner, slot, a, b)) = hit else { continue };
         let d = centre - a.origin;
         let ext = extent(mins, maxs, b.normal);
         let lateral = |k: f32| (-d.dot(a.right) * k, d.dot(a.up) * k);
@@ -114,8 +115,12 @@ pub(crate) fn cross<D: Edicts + ?Sized>(st: &mut Portals, w: &mut World, ents: &
         ents.set_flags(e, ents.flags(e) & !FL_ONGROUND);
         ents.set_e(e, E::GroundEntity, 0);
         w.link_edict(ents, e, true);
+        effects.push((owner, slot, a.origin, b.origin));
     }
     st.snapshot.clear();
+    for (owner, slot, start, end) in effects {
+        st.effect(owner, slot, 2, start, end);
+    }
 }
 
 /// Turn the mover (and a player's view) by the portal rotation.

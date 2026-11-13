@@ -71,6 +71,7 @@ pub(super) fn tooltip(item: Item) -> Option<&'static str> {
         "aim_slowdown" => "Slows stick look while the crosshair is over an enemy",
         "aim_rotation" => "Turns the view to follow a moving enemy you are aiming at",
         "a11y_reducemotion" => "Turns off view bob, strafe tilt and the camera kick when hit or firing",
+        "r_drawviewmodel" => "Place every weapon at the center, right or left of the view, or hide all viewmodels",
         "v_flashscale" => "Strength of the full-screen flashes for damage, pickups and powerups",
         "r_shader_scope" => "3D view keeps the HUD and menus sharp; whole screen runs them through the shader too",
         "r_colorblind" => "Shifts colors so they stay distinct for the chosen color blindness",

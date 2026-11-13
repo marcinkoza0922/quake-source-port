@@ -173,6 +173,28 @@ fn monsters_take_fall_damage_with_the_portal_gun() {
     }
 }
 
+#[test]
+fn confirmed_and_rejected_shots_send_transient_feedback() {
+    let Some((mut sv, c)) = start(&["addons_enable 1"]) else { return };
+    run(&mut sv,c,30,ClientMove::default());
+    sv.command("setpos 480 200 24");
+    run(&mut sv,c,10,ClientMove::default());
+    let ahead = [-8.0,90.0,0.0];
+    sv.set_move(c,gun(ahead,BUTTON_TOY_ALT));
+    sv.frame(1.0/72.0);
+    let accepted = sv.take_reliable(c).concat();
+    assert!(String::from_utf8_lossy(&accepted).contains("//qsp_portalfx 0 1 1 "));
+    let original = sv.level.as_ref().unwrap().portals.pairs[0];
+    // The second slot cannot overlap the first; retain the original portal.
+    run(&mut sv,c,1,gun(ahead,0));
+    sv.set_move(c,gun(ahead,BUTTON_TOY_FIRE));
+    sv.frame(1.0/72.0);
+    let rejected = sv.take_reliable(c).concat();
+    assert!(String::from_utf8_lossy(&rejected).contains("//qsp_portalfx 0 0 0 "));
+    assert_eq!(sv.level.as_ref().unwrap().portals.pairs[0],original);
+    assert!(!sv.save_game().contains("portalfx"));
+}
+
 /// A game with add-ons saves with the `QSPADDONS` header (a `.qsa` file no
 /// other port loads) holding its toys and portals; loading it brings them
 /// back, and loading an ordinary save turns add-ons off again.
