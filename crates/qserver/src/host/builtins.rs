@@ -2,7 +2,17 @@ use super::*;
 
 impl Host for Ctx<'_> {
     fn before_damage(&mut self, vm: &mut Vm) -> Result<bool> {
-        crate::assists::before_damage(vm, self.c)
+        let skip = crate::assists::before_damage(vm, self.c)?;
+        if !skip {
+            self.damage_calls.push(feedback::begin(vm, self.c));
+        }
+        Ok(skip)
+    }
+    fn after_damage(&mut self, vm: &mut Vm) -> Result<()> {
+        if let Some(Some(call)) = self.damage_calls.pop() {
+            feedback::finish(vm, self.c, call);
+        }
+        Ok(())
     }
     fn builtin(&mut self, vm: &mut Vm, b: Builtin) -> Result<()> {
         if let Some(e) = &self.c.sv.error {

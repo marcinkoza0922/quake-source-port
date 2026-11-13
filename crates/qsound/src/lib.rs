@@ -4,6 +4,7 @@
 //! [`SoundSystem`], which sends commands through a short-lock queue.
 
 pub mod music;
+pub mod feedback;
 
 use std::collections::HashMap;
 use std::sync::{Arc, Mutex};

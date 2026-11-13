@@ -120,7 +120,7 @@ impl Server {
             nomonsters: c.cvars.value_of("nomonsters") != 0.0,
         };
         let r = {
-            let mut h = Ctx { c: &mut *c, w: &mut world };
+            let mut h = Ctx::new(&mut *c, &mut world);
             vm.load_from_file(&mut h, &ents, filter)
         };
         if let Err(e) = r {

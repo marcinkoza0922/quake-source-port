@@ -96,6 +96,7 @@ impl Host {
             self.cl.fog = qclient::Fog { density: w.density, color: w.color, time: 0.0 };
         }
         self.view.reset();
+        self.feedback = Default::default();
         self.debris.new_map(&mut self.cl);
         self.blood.clear();
         self.impacts.clear();

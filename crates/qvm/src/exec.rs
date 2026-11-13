@@ -203,6 +203,13 @@ impl Vm {
             self.argc = self.progs.functions[fnum].numparms.clamp(0, 8) as usize;
             return self.call_builtin(host, fnum).map_err(|e| self.fail(e));
         }
+        if fnum == self.damage_fn {
+            match host.before_damage(self) {
+                Ok(true) => return Ok(()),
+                Ok(false) => {}
+                Err(e) => return Err(self.fail(e)),
+            }
+        }
         self.trace = false;
         let exitdepth = self.stack.len();
         let r = self.run(host, fnum, exitdepth);
@@ -356,6 +363,9 @@ impl Vm {
                 // OP_RETURN / OP_DONE
                 OP_DONE | 43 => {
                     self.globals.copy_within(a..a + 3, OFS_RETURN);
+                    if self.xfunction == self.damage_fn {
+                        host.after_damage(self)?;
+                    }
                     next = self.leave_function()? + 1;
                     if self.stack.len() == exitdepth {
                         return Ok(());

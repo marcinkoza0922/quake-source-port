@@ -84,7 +84,7 @@ pub(crate) fn exec(vm: &mut Vm, c: &mut Core, w: &mut World, f: i32) {
         return;
     }
     let r = {
-        let mut h = Ctx { c: &mut *c, w };
+        let mut h = Ctx::new(&mut *c, w);
         vm.execute(&mut h, f as usize)
     };
     if let Err(e) = r {

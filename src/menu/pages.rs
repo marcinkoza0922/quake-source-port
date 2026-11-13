@@ -51,6 +51,8 @@ pub(super) enum Run {
     Connect,
     Search,
     Start,
+    PreviewHit,
+    PreviewKill,
 }
 
 /// A server answering the LAN search.
@@ -361,6 +363,7 @@ pub(super) const HUD: &[Item] = &[
     Item::Choice { label: "Crosshair Size", cvar: "crosshair_size", choices: XHAIR_SIZE },
     Item::Choice { label: "Crosshair Color", cvar: "crosshair_color", choices: XHAIR_COLOR },
     toggle("Crosshair Outline", "crosshair_outline"),
+    toggle("Hit Markers", "hud_hitmarkers"),
     Item::Choice { label: "Weapon Wheel Slowdown", cvar: "cl_wheel_timescale", choices: WHEEL_TIME },
     Item::Sub { label: "Messages & Captions", page: Page::Messages },
     toggle("Show FPS", "scr_showfps"),
@@ -399,7 +402,13 @@ pub(super) const HUD_LAYOUT: &[Item] = &[
     hud_pos("Keys & Powerups Position", "hud_items_pos"),
 ];
 
-pub(super) const AUDIO: &[Item] = &[slider("Sound Volume", "volume", 0.0, 1.0, 0.1), slider("Music Volume", "bgmvolume", 0.0, 1.0, 0.1)];
+pub(super) const AUDIO: &[Item] = &[
+    slider("Sound Volume", "volume", 0.0, 1.0, 0.1),
+    slider("Music Volume", "bgmvolume", 0.0, 1.0, 0.1),
+    toggle("Hit & Kill Sounds", "s_hitfeedback"),
+    Item::Sub { label: "Hit Sound", page: Page::HitSound },
+    Item::Sub { label: "Kill Sound", page: Page::KillSound },
+];
 
 /// Independent of the debris toggle and particle scripts.
 pub(super) const BLOOD: &[Item] = &[

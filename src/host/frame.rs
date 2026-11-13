@@ -298,6 +298,7 @@ impl Host {
             }
         }
         self.process_client_events();
+        self.guest_feedback();
         self.track_rumble();
         self.update_death();
         self.sync_key_dest();

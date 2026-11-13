@@ -63,3 +63,22 @@ fn qbj3_door_label_survives_entity_load_and_save_restore() {
     let l = sv.level.as_ref().unwrap();
     assert_eq!(l.vm.ent_str(entity, ofs).unwrap(), bytes);
 }
+
+#[test]
+fn hit_feedback_comments_become_events_without_commands() {
+    use qnet::protocol::SVC_STUFFTEXT;
+    let mut cl = ClientState::new();
+    // Split a line across packets: no feedback until its newline arrives.
+    let mut first = b"\x09//qhit \0".to_vec();
+    first.resize(512, 1); // svc_nop: large packet retains a partial line
+    cl.parse_server_message(&first).unwrap();
+    assert!(cl.take_events().is_empty());
+    let mut msg = vec![SVC_STUFFTEXT];
+    msg.extend_from_slice(b"0\n//qhit 1\nbf\n\0");
+    cl.parse_server_message(&msg).unwrap();
+    assert_eq!(cl.take_events(), vec![
+        ClientEvent::HitFeedback { kill: false },
+        ClientEvent::HitFeedback { kill: true },
+        ClientEvent::StuffText("bf\n".into()),
+    ]);
+}

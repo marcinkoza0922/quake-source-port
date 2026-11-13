@@ -24,6 +24,8 @@ pub struct Guest {
     /// SDL id of the gamepad that plays this guest; `None` until one joins.
     pub pad: Option<u32>,
     pub hud_fade: crate::sbar::HudFade,
+    pub(crate) feedback: crate::host::feedback::Feedback,
+    pub(crate) pending_feedback: Option<bool>,
     /// Sound events this frame; the host plays those player 1's client
     /// can't have heard.
     pub sounds: Vec<ClientEvent>,
@@ -55,6 +57,8 @@ impl Guest {
             input,
             pad: None,
             hud_fade: Default::default(),
+            feedback: Default::default(),
+            pending_feedback: None,
             sounds: Vec::new(),
             center_prints: Vec::new(),
             center: crate::console::Console::new(),
@@ -84,7 +88,18 @@ impl Guest {
         // Prints and stufftext belong to player 1's host.
         for e in self.cl.take_events() {
             match e {
-                ClientEvent::Disconnect => self.cl = ClientState::new(),
+                ClientEvent::Disconnect => {
+                    self.cl = ClientState::new();
+                    self.feedback = Default::default();
+                    self.pending_feedback = None;
+                }
+                ClientEvent::NewMap => {
+                    self.feedback = Default::default();
+                    self.pending_feedback = None;
+                }
+                ClientEvent::HitFeedback { kill } => {
+                    self.pending_feedback = Some(self.pending_feedback.unwrap_or(false) || kill);
+                }
                 ClientEvent::Damage { .. } | ClientEvent::BonusFlash => self.view_events.push(e),
                 ClientEvent::Sound { .. } | ClientEvent::TempSound { .. } => self.sounds.push(e),
                 ClientEvent::CenterPrint(s) => self.center_prints.push(s),

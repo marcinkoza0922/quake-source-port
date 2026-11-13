@@ -124,6 +124,8 @@ impl Host {
                             let [x, y, w, h] = sv.rect;
                             let mut cc = Canvas::new(w, h);
                             cc.ui = c.ui.clone();
+                            let feedback = if i == 0 { &self.feedback } else { &self.guests[live[i - 1]].feedback };
+                            let marker = (feedback.remaining(self.realtime), feedback.kill);
                             let (cl, fade, face, locked, active) = if i == 0 {
                                 (&self.cl, &mut self.hud_fade, self.view.face_anim_time > self.cl.time, self.input.lockon.target.is_some(), self.input.lockon.active)
                             } else {
@@ -134,6 +136,7 @@ impl Host {
                             if cl.intermission == 0 {
                                 let vh = cc.vh() - if classic { CLASSIC_SBAR_LINES } else { 0.0 };
                                 draw_crosshair(&mut cc, vh, &self.server.core.cvars, locked, active);
+                                hitmarker::draw_hitmarker(&mut cc, vh, &self.server.core.cvars, marker.0, marker.1);
                             }
                             let mut sb = crate::sbar::Sbar::new(&mut cc, &mut pf, pack);
                             sb.teamplay = teamplay;
@@ -162,6 +165,7 @@ impl Host {
                         let scene_h = c.vh() - if classic { CLASSIC_SBAR_LINES } else { 0.0 };
                         {
                             draw_crosshair(&mut c, scene_h, &self.server.core.cvars, self.input.lockon.target.is_some(), self.input.lockon.active);
+                            hitmarker::draw_hitmarker(&mut c, scene_h, &self.server.core.cvars, self.feedback.remaining(self.realtime), self.feedback.kill);
                         }
                         let face = self.view.face_anim_time > self.cl.time;
                         let pack = crate::sbar::Pack::from_game_dirs(self.server.core.fs.game_dirs().iter().map(String::as_str));
