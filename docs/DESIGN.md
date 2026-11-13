@@ -138,7 +138,10 @@ Damage/movement assists are engine-side so they work with any progs; off in deat
   A stable entity ID retains the target while tracking. Clicking the look stick
   cycles visible enemies (left stick when move/look are swapped), suppressing
   its usual binding while locked. Corner ticks indicate a lock even with the
-  crosshair disabled (`assist_autoaim_indicator`, default on). Hold mode requires
+  crosshair disabled (`assist_autoaim_indicator`, default on). Toggle mode shows a
+  small gold AUTO AIM label below the crosshair while armed, even between targets
+  and with the crosshair or lock ticks disabled; each split-screen view uses its
+  own active state. Hold mode requires
   a fresh press after target loss unless `assist_autoaim_reacquire` is enabled.
   Enabling assigns free RMB/LT defaults; conflicts prompt on Back and Yes opens
   Controls with Lock-on highlighted, preserving existing bindings.

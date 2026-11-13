@@ -13,7 +13,7 @@ pub(super) const CROSSHAIR_COLORS: [[f32; 4]; 6] = [
 /// A crosshair at the scene centre: shape from `crosshair_shape` (0 cross,
 /// 1 gap cross, 2 dot, 3 cross + dot, 4 T, 5 box), sized by `crosshair_size`
 /// with an optional dark outline (`crosshair_outline`) so it reads on any wall.
-pub(super) fn draw_crosshair(c: &mut Canvas, scene_h: f32, cv: &qcore::cvar::Cvars, locked: bool) {
+pub(super) fn draw_crosshair(c: &mut Canvas, scene_h: f32, cv: &qcore::cvar::Cvars, locked: bool, active: bool) {
     let size = cv.value_of("crosshair_size").clamp(0.5, 4.0);
     let color = CROSSHAIR_COLORS[(cv.value_of("crosshair_color").max(0.0) as usize).min(CROSSHAIR_COLORS.len() - 1)];
     let base = c.scale;
@@ -88,4 +88,11 @@ pub(super) fn draw_crosshair(c: &mut Canvas, scene_h: f32, cv: &qcore::cvar::Cva
         }
     }
     c.scale = base;
+    if active && cv.value_of("assist_autoaim") != 0.0 && cv.value_of("assist_autoaim_mode") == 1.0 {
+        // Keep the armed state visible between targets, independently of lock ticks.
+        let x = cx / base;
+        let y = (cy + arm + 8.0 * base) / base;
+        c.text_center(x + 0.5, y + 0.5, "AUTO AIM", 6.0, [0.0, 0.0, 0.0, 0.9]);
+        c.text_center(x, y, "AUTO AIM", 6.0, [1.0, 0.85, 0.1, 1.0]);
+    }
 }
