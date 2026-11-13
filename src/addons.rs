@@ -6,6 +6,8 @@ pub mod portal_draw;
 pub mod portal_fx;
 pub mod portal_model;
 mod portal_skin;
+pub mod sticky_draw;
+pub mod sticky_model;
 
 use qserver::addons::{BUTTON_TOY_ALT, BUTTON_TOY_FIRE, TOY_SHIFT, Toy};
 

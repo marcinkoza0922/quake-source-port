@@ -35,6 +35,7 @@ pub(super) fn tooltip(item: Item) -> Option<&'static str> {
         "addon_portal_max" => "How many portals per screen show a live view; each one redraws the scene, so lower this on slow machines or in split-screen",
         "addon_portal_depth" => "How deep portals seen through other portals keep showing a live view (a hall of mirrors between facing portals); each level redraws the scene",
         "addon_portal_dist" => "Portals farther away than this are drawn as flat discs",
+        "addon_sticky" => "Lobs sticky bombs (rockets ammo) that cling to walls, doors and monsters; alt-fire detonates them all",
         "addon_portalgun" => "A two-portal gun: fire and alt-fire place linked portals on flat walls; pick it with the Toy Slot bind (Controls)",
         "r_debris" => "Corpses go limp as ragdolls, gibs tumble and barrels throw shrapnel; shots and blasts push them (cosmetic only)",
         "r_debris_ragdolls" => "Corpses go limp and fall as ragdolls",

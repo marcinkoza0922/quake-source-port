@@ -202,7 +202,8 @@ Damage/movement assists are engine-side so they work with any progs; off in deat
 
 See [ADDONS.md](ADDONS.md) for the optional local toys, portal gun, rendering,
 imported projector model, owner-colored projectile effects and synthesized cues,
-plus `tools/portal_cues.rs` for exporting WAV previews,
+plus `tools/portal_cues.rs` for exporting WAV previews, the stickybomb launcher
+(`tools/import_toy_model.py` imports Meshy toy models),
 movement, settings and diagnostic commands.
 
 Gameplay → Viewmodels archives `r_drawviewmodel`: 0 Off, 1 Center (default),

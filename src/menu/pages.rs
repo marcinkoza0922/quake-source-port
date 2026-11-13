@@ -109,12 +109,14 @@ pub(super) const CONTROLS: &[Item] = CONTROLS_ALL.split_at(CONTROLS_ALL.len() - 
 pub(super) const ADDONS: &[Item] = &[
     toggle("Portal Gun", "addon_portalgun"),
     Item::Sub { label: "Portal Gun Settings", page: Page::PortalGun },
+    toggle("Stickybomb Launcher", "addon_sticky"),
 ];
 
 /// New Game with Add-ons ticked: choose the toys, then start.
 pub(super) const NEW_GAME_ADDONS: &[Item] = &[
     toggle("Portal Gun", "addon_portalgun"),
     Item::Sub { label: "Portal Gun Settings", page: Page::PortalGun },
+    toggle("Stickybomb Launcher", "addon_sticky"),
     Item::Run { label: "Start New Game", run: Run::NewGame },
 ];
 

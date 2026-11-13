@@ -267,6 +267,8 @@ pub struct ClientState {
     pub(crate) stuffcmdbuf: Vec<u8>,
     /// Add-on portals from `//qsp_portal` stufftext (this engine only).
     pub portals: Vec<PortalView>,
+    /// Add-on stickybombs (id, origin) from `//qsp_sticky` stufftext.
+    pub stickies: Vec<(u32, [f32; 3])>,
     /// Reliable clc_* bytes to send (signon replies, string commands).
     pub out_reliable: SizeBuf,
     pub movemessages: u32,
@@ -353,6 +355,7 @@ impl ClientState {
             events: Vec::new(),
             stuffcmdbuf: Vec::new(),
             portals: Vec::new(),
+            stickies: Vec::new(),
             out_reliable: SizeBuf::new(MAX_MSGLEN),
             movemessages: 0,
             name: "player".into(),
@@ -439,6 +442,21 @@ pub struct PortalView {
 }
 
 impl ClientState {
+    /// `qsp_sticky id [x y z]` (no position removes it), `qsp_sticky clear`.
+    pub(crate) fn parse_sticky(&mut self, args: &str) {
+        if args.trim() == "clear" {
+            self.stickies.clear();
+            return;
+        }
+        let n: Vec<f32> = args.split_whitespace().filter_map(|w| w.parse().ok()).collect();
+        let Some(&id) = n.first() else { return };
+        let id = id as u32;
+        self.stickies.retain(|s| s.0 != id);
+        if let [_, x, y, z] = n[..] {
+            self.stickies.push((id, [x, y, z]));
+        }
+    }
+
     /// `qsp_portal owner slot [ox oy oz nx ny nz ux uy uz]` (no args after
     /// the slot removes it).
     pub(crate) fn parse_portal(&mut self, args: &str) {

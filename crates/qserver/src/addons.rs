@@ -16,6 +16,7 @@ pub mod fall;
 pub mod portal;
 pub mod portal_move;
 pub mod save;
+pub mod sticky;
 
 /// (name, default, flags) of the add-on cvars.
 pub const CVARS: &[(&str, &str, u32)] = &[
@@ -25,6 +26,7 @@ pub const CVARS: &[(&str, &str, u32)] = &[
     // read-only mirror of `Core::addons_on` for the menu
     ("addons_active", "0", CVAR_ROM),
     ("addon_portalgun", "1", CVAR_ARCHIVE),
+    ("addon_sticky", "1", CVAR_ARCHIVE),
     // see-through portals: on/off, live views per frame, live distance
     ("addon_portal_view", "1", CVAR_ARCHIVE),
     ("addon_portal_max", "4", CVAR_ARCHIVE),
@@ -42,10 +44,11 @@ pub const TOY_SHIFT: u8 = 4;
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum Toy {
     PortalGun,
+    Sticky,
 }
 
 impl Toy {
-    pub const ALL: [Toy; 1] = [Toy::PortalGun];
+    pub const ALL: [Toy; 2] = [Toy::PortalGun, Toy::Sticky];
 
     /// Wire id (1..=15).
     pub fn id(self) -> u8 {
@@ -57,12 +60,14 @@ impl Toy {
     pub fn name(self) -> &'static str {
         match self {
             Toy::PortalGun => "Portal Gun",
+            Toy::Sticky => "Stickybomb Launcher",
         }
     }
     /// Name in savegame headers.
     pub fn key(self) -> &'static str {
         match self {
             Toy::PortalGun => "portalgun",
+            Toy::Sticky => "sticky",
         }
     }
     pub fn from_key(key: &str) -> Option<Toy> {
@@ -72,6 +77,7 @@ impl Toy {
     pub fn cvar(self) -> &'static str {
         match self {
             Toy::PortalGun => "addon_portalgun",
+            Toy::Sticky => "addon_sticky",
         }
     }
     /// The toys switched on in the menu.
@@ -135,6 +141,12 @@ pub(crate) fn frame(l: &mut Level, c: &mut Core) {
         }
     }
     st.send(&mut c.clients);
+    if c.cvars.value_of(Toy::Sticky.cvar()) != 0.0 {
+        sticky::frame(&mut l.stickies, &mut l.vm, c, &mut l.world);
+        l.stickies.send(&mut c.clients);
+    } else if !l.stickies.bombs.is_empty() {
+        l.stickies.clear(&mut c.clients);
+    }
     if gun {
         fall::frame(&mut l.falls, &mut l.vm, c, &mut l.world);
     } else {
@@ -154,7 +166,9 @@ impl crate::Server {
             return body;
         }
         let toys: Vec<Toy> = Toy::enabled(&self.core.cvars).collect();
-        save::wrap(&toys, self.level.as_ref().and_then(|l| l.portals.save_text()).as_deref(), &body)
+        let l = self.level.as_ref();
+        let extra = l.map(|l| l.stickies.save_text()).unwrap_or_default();
+        save::wrap_with(&toys, l.and_then(|l| l.portals.save_text()).as_deref(), &extra, &body)
     }
 }
 
@@ -171,6 +185,7 @@ pub(crate) fn shut_down(l: &mut Level, c: &mut Core) {
     }
     st.send(&mut c.clients);
     *st = Default::default();
+    l.stickies.clear(&mut c.clients);
 }
 
 /// No remote client is connected.

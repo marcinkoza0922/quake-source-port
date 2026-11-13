@@ -67,6 +67,13 @@ impl Host {
                 g.origin = (Vec3::from(g.origin) + cv.viewmodel.offset(v.angles)).to_array();
                 ents.push(g);
             }
+            if self.toy.held == Some(qserver::addons::Toy::Sticky) && self.cl.intermission == 0 && self.cl.stats[0] > 0
+                && cv.viewmodel.visible() && self.cl.items & crate::sbar::IT_INVISIBILITY == 0
+                && let Some(mut g) = crate::addons::sticky_draw::weapon(self.cl.time, *v, &mut self.level, &self.server.core.fs, &mut self.r) {
+                g.origin = (Vec3::from(g.origin) + cv.viewmodel.offset(v.angles)).to_array();
+                ents.push(g);
+            }
+            crate::addons::sticky_draw::bombs(&self.cl, &mut self.level, &self.server.core.fs, &mut self.r, &mut ents, &mut dls);
             if let Some(g) = gun {
                 ents.push(g);
             }

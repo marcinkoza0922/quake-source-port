@@ -427,7 +427,7 @@ fn new_game_starts_directly_unless_the_addons_box_is_ticked() {
     menu.key(K_ENTER, &mut cv, false);
     assert_eq!(cv.value_of("addon_portalgun"), 0.0);
     // Start New Game is the last row
-    menu.opt_cursor = 2;
+    menu.opt_cursor = super::pages::NEW_GAME_ADDONS.len() - 1;
     let acts = menu.key(K_ENTER, &mut cv, false);
     assert!(acts.iter().any(|a| matches!(a, Action::Command(c) if c.contains("map start"))));
     assert_eq!(menu.screen, Screen::None);
