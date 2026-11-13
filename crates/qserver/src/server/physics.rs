@@ -156,8 +156,11 @@ impl Server {
             crate::assists::frame(l, c);
             if toys {
                 crate::addons::frame(l, c);
-            } else if !l.portals.pairs.is_empty() {
-                crate::addons::shut_down(l, c);
+            } else {
+                l.falls.clear();
+                if !l.portals.pairs.is_empty() {
+                    crate::addons::shut_down(l, c);
+                }
             }
         }
         self.process_queued_client_cmds();

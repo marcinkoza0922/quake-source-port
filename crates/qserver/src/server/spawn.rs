@@ -132,7 +132,7 @@ impl Server {
         c.sv.active = true;
         c.sv.loading = false;
         vm.protect_world = true;
-        self.level = Some(Level { vm, world, assist: Vec::new(), portals: Default::default() });
+        self.level = Some(Level { vm, world, assist: Vec::new(), portals: Default::default(), falls: Default::default() });
 
         // run two frames to allow everything to settle
         self.physics(0.1);

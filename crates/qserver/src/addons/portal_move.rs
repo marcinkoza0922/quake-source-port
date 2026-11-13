@@ -85,8 +85,10 @@ pub(crate) fn cross<D: Edicts + ?Sized>(st: &mut Portals, w: &mut World, ents: &
         let lateral = |k: f32| (-d.dot(a.right) * k, d.dot(a.up) * k);
         let old = ents.v(e, V::Origin);
         let mut placed = false;
-        for k in [1.0, 0.0] {
-            let (r, u) = lateral(k);
+        // where it lines up, then centred, then shifted along the exit's up
+        // axis (a tall monster out of a low wall portal clears the floor)
+        let (r1, u1) = lateral(1.0);
+        for (r, u) in [(r1, u1), (0.0, 0.0), (0.0, 16.0), (0.0, 32.0), (0.0, -16.0)] {
             let c = b.at(r.clamp(-HALF_W, HALF_W), u.clamp(-HALF_H, HALF_H)) + b.normal * (ext + 1.0);
             ents.set_v(e, V::Origin, c - mid);
             if w.test_entity_position(ents, e).is_none() {

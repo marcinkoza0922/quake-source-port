@@ -14,6 +14,10 @@ pub const HALF_W: f32 = 28.0;
 pub const HALF_H: f32 = 48.0;
 /// Longest shot.
 const RANGE: f32 = 8192.0;
+const FL_MONSTER: i32 = 32;
+/// How far past a monster's footprint a floor shot still counts as
+/// "under its feet".
+const MONSTER_SLACK: f32 = 16.0;
 
 /// A placed portal: centre, outward normal and in-plane up / right axes.
 #[derive(Clone, Copy, Debug, PartialEq)]
@@ -189,6 +193,11 @@ pub(crate) fn place<D: Edicts + ?Sized>(w: &World, ents: &D, e: Ent, others: &[P
         (z - n * z.dot(n)).normalize()
     };
     let mut p = Portal::new(tr.endpos, n, up);
+    if n.z > 0.99
+        && let Some(o) = under_monster(w, ents, e, eye, fwd, tr.endpos)
+    {
+        p.origin = o;
+    }
     let plane = tr.endpos.dot(n);
     for _ in 0..8 {
         let mut push = Vec3::ZERO;
@@ -208,6 +217,39 @@ pub(crate) fn place<D: Edicts + ?Sized>(w: &World, ents: &D, e: Ent, others: &[P
         p.origin += push.normalize() * 8.0;
     }
     None
+}
+
+/// A floor shot at (or just past) a monster's feet: the spot under the
+/// monster standing on that floor, so it drops in. Otherwise the shot would
+/// miss its feet (monsters don't block the shot) and land on the floor
+/// behind it, leaving the monster standing beside the hole.
+fn under_monster<D: Edicts + ?Sized>(w: &World, ents: &D, e: Ent, eye: Vec3, fwd: Vec3, hit: Vec3) -> Option<Vec3> {
+    let direct = w.trace(ents, eye, Vec3::ZERO, Vec3::ZERO, hit, MoveType::Normal, Some(e)).ent.filter(|&m| m != 0);
+    let mut best: Option<(f32, Vec3)> = None;
+    for m in 1..ents.num_edicts() {
+        if ents.is_free(m) || ents.flags(m) & FL_MONSTER == 0 || m == e {
+            continue;
+        }
+        let o = ents.v(m, V::Origin);
+        let (mins, maxs) = (ents.v(m, V::Mins), ents.v(m, V::Maxs));
+        if (o.z + mins.z - hit.z).abs() > 4.0 {
+            continue; // not standing on this floor
+        }
+        let spot = Vec3::new(o.x, o.y, hit.z);
+        let reach = (maxs.x - mins.x).max(maxs.y - mins.y) * 0.5 + MONSTER_SLACK;
+        let dist = (spot - hit).length();
+        if direct != Some(m) && dist > reach {
+            continue;
+        }
+        // only monsters in front of the shooter
+        if (spot - eye).dot(fwd) <= 0.0 {
+            continue;
+        }
+        if best.is_none_or(|(d, _)| dist < d) {
+            best = Some((dist, spot));
+        }
+    }
+    best.map(|(_, s)| s)
 }
 
 fn sgn(x: f32) -> f32 {

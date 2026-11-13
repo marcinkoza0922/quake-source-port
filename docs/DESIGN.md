@@ -167,7 +167,8 @@ off. Toys are only allowed with no deathmatch and no remote client
   surfaces or brush entities), then checks 9 rim/centre samples of a
   56×96 rectangle (on-plane, empty in front, nothing jutting out) and nudges
   8 units away from failing samples up to 8 times; overlap with any other
-  portal is refused. Floor/ceiling portals point "up" along the shot.
+  portal is refused. Floor/ceiling portals point "up" along the shot; a
+  floor shot within 16 u of a monster's feet centres under that monster.
 - Crossing: while some pair is linked, physics snapshots movers' origin and
   velocity (walk/step/fly/toss/bounce) first; afterwards a mover touching a
   portal rectangle with the pre-frame velocity going in (or resting on a
@@ -175,8 +176,11 @@ off. Toys are only allowed with no deathmatch and no remote client
   (`carry`: normal and right flip, up kept), at least 60 u/s out (360
   u/s up out of a floor portal, where a player with no move input also
   loses sideways speed, so two floor portals bob in place), view or
-  yaw turned (`fixangle`), unless the spot is solid. Missiles explode on
+  yaw turned (`fixangle`); exit spots tried: lined up, centred, then
+  shifted +16/+32/-16 along the exit's up; skipped if all are solid. Missiles explode on
   the wall before the check, so they don't cross.
+- Monster fall damage (`addons/fall.rs`, gun on): landing >650 u/s calls
+  QC `T_Damage` (world attacker) for 5 + (speed − 650)/10.
 - Sync: `//qsp_portal owner slot [origin normal up]` stufftext, full state
   when a client spawns. `qclient` swallows these into `ClientState::portals`;
   other engines ignore `//` lines, so demos still play elsewhere.

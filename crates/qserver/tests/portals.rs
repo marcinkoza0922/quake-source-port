@@ -115,3 +115,58 @@ fn idle_player_bobs_in_place_between_floor_portals() {
     assert!(top > 80.0, "launch too low: {top}");
     assert_eq!(spots.len(), 2, "{spots:?}");
 }
+
+/// The first monster, moved to `at` (standing still, asleep).
+fn grab_monster(sv: &mut Server, at: [f32; 3], onground: bool) -> u32 {
+    let f = sv.core.sv.fields.clone();
+    let vm = &mut sv.level.as_mut().unwrap().vm;
+    let m = (1..vm.num_edicts() as u32).find(|&e| !vm.is_free(e) && vm.ent_f(e, f.flags) as i32 & 32 != 0).expect("no monster");
+    let mins = vm.ent_v(m, f.mins);
+    vm.set_ent_v(m, f.origin, [at[0], at[1], at[2] - mins[2]]);
+    vm.set_ent_v(m, f.velocity, [0.0; 3]);
+    let fl = vm.ent_f(m, f.flags) as i32 & !512;
+    vm.set_ent_f(m, f.flags, (fl | if onground { 512 } else { 0 }) as f32);
+    m
+}
+
+/// A floor shot that lands just past a monster's feet still opens the
+/// portal under it, and it drops through.
+#[test]
+fn floor_shot_at_a_monsters_feet_drops_it() {
+    let Some((mut sv, c)) = start(&["addons_enable 1"]) else { return };
+    run(&mut sv, c, 30, ClientMove::default());
+    sv.command("setpos 480 200 24");
+    run(&mut sv, c, 10, ClientMove::default());
+    // the far portal first, along the corridor
+    let ahead = [-8.0, 90.0, 0.0];
+    run(&mut sv, c, 2, gun(ahead, 0));
+    run(&mut sv, c, 2, gun(ahead, BUTTON_TOY_ALT));
+    let m = grab_monster(&mut sv, [480.0, 330.0, 0.0], true);
+    // eye at z 46: aim at the floor 25 units past the monster's centre
+    let pitch = (46.0f32 / 155.0).atan().to_degrees();
+    let down = [pitch, 90.0, 0.0];
+    run(&mut sv, c, 2, gun(down, 0));
+    run(&mut sv, c, 1, gun(down, BUTTON_TOY_FIRE));
+    let floor = sv.level.as_ref().unwrap().portals.pairs[0][0].expect("floor portal");
+    assert!((floor.origin.x - 480.0).abs() < 1.0 && (floor.origin.y - 330.0).abs() < 1.0, "{floor:?}");
+    run(&mut sv, c, 5, ClientMove::default());
+    let o = sv.level.as_ref().unwrap().vm.ent_v(m, sv.core.sv.fields.origin);
+    assert!((o[1] - 330.0).abs() > 60.0, "monster still at {o:?}");
+}
+
+/// With the portal gun on, a monster landing hard takes damage on
+/// landing; with add-ons off it does not.
+#[test]
+fn monsters_take_fall_damage_with_the_portal_gun() {
+    for (cv, hurt) in [("addons_enable 1", true), ("addons_enable 0", false)] {
+        let Some((mut sv, c)) = start(&[cv]) else { return };
+        run(&mut sv, c, 30, ClientMove::default());
+        // as if flung out of a floor portal at it, just above the floor
+        let m = grab_monster(&mut sv, [480.0, 330.0, 30.0], false);
+        sv.level.as_mut().unwrap().vm.set_ent_v(m, sv.core.sv.fields.velocity, [0.0, 0.0, -1000.0]);
+        let hp = sv.level.as_ref().unwrap().vm.ent_f(m, sv.core.sv.fields.health);
+        run(&mut sv, c, 150, ClientMove::default());
+        let after = sv.level.as_ref().unwrap().vm.ent_f(m, sv.core.sv.fields.health);
+        assert_eq!(after < hp, hurt, "{cv}: health {hp} -> {after}");
+    }
+}

@@ -12,6 +12,7 @@ use qcore::cvar::{CVAR_ARCHIVE, Cvars};
 use crate::ents::Ents;
 use crate::server::{Core, Level};
 
+pub mod fall;
 pub mod portal;
 pub mod portal_move;
 
@@ -101,6 +102,11 @@ pub(crate) fn frame(l: &mut Level, c: &mut Core) {
         }
     }
     st.send(&mut c.clients);
+    if gun {
+        fall::frame(&mut l.falls, &mut l.vm, c, &mut l.world);
+    } else {
+        l.falls.clear();
+    }
 }
 
 impl crate::Server {
