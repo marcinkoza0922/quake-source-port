@@ -115,6 +115,8 @@ pub struct Level {
     pub portals: crate::addons::portal::Portals,
     /// Monster fall damage while the portal gun is on.
     pub(crate) falls: crate::addons::fall::Falls,
+    /// Railgun refire timers.
+    pub(crate) rails: crate::addons::railgun::Rails,
 }
 
 pub struct Server {

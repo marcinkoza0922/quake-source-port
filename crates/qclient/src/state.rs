@@ -147,6 +147,7 @@ pub enum ClientEvent {
     /// Server-confirmed damage dealt to a living enemy; kills supersede hits.
     HitFeedback { kill: bool },
     PortalEffect(PortalEffect),
+    RailEffect(crate::RailEffect),
     StopSound { ent: i32, channel: i32 },
     StaticSound(StaticSound),
     CdTrack { track: u8, loop_track: u8 },

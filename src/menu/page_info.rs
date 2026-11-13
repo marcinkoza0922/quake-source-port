@@ -35,6 +35,9 @@ pub(super) fn tooltip(item: Item) -> Option<&'static str> {
         "addon_portal_max" => "How many portals per screen show a live view; each one redraws the scene, so lower this on slow machines or in split-screen",
         "addon_portal_depth" => "How deep portals seen through other portals keep showing a live view (a hall of mirrors between facing portals); each level redraws the scene",
         "addon_portal_dist" => "Portals farther away than this are drawn as flat discs",
+        "addon_railgun" => "A Quake III style railgun: a slug that pierces every enemy on its line, using 2 cells a shot and refiring every 1.5 s; pick it with the Toy Slot bind (Controls)",
+        "addon_rail_damage" => "Damage the railgun deals to each enemy it passes through (Quake III: 100)",
+        "addon_rail_color" => "Colour of the railgun's spiral trail; split-screen players each get the next colour along",
         "addon_portalgun" => "A two-portal gun: fire and alt-fire place linked portals on flat walls; pick it with the Toy Slot bind (Controls)",
         "r_debris" => "Corpses go limp as ragdolls, gibs tumble and barrels throw shrapnel; shots and blasts push them (cosmetic only)",
         "r_debris_ragdolls" => "Corpses go limp and fall as ragdolls",
@@ -133,6 +136,7 @@ pub(super) fn page_items(p: Page) -> &'static [Item] {
         Page::Addons => ADDONS,
         Page::NewGameAddons => NEW_GAME_ADDONS,
         Page::PortalGun => PORTAL_GUN,
+        Page::Railgun => RAILGUN,
         Page::Input => INPUT,
         Page::Graphics => GRAPHICS,
         Page::Enhancements => ENHANCEMENTS,
@@ -183,6 +187,7 @@ pub(super) fn page_name(p: Page) -> &'static str {
         Page::Addons => "Add-ons",
         Page::NewGameAddons => "New Game: Add-ons",
         Page::PortalGun => "Portal Gun",
+        Page::Railgun => "Railgun",
         _ => PAGES.iter().find(|x| x.1 == p).map_or("", |x| x.0),
     }
 }

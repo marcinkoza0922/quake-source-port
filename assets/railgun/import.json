@@ -1,0 +1,21 @@
+{
+  "source": "meshy_t2_railgun.zip",
+  "source_triangles": 1365,
+  "triangles": 1365,
+  "vertices": 1800,
+  "texture_size": 512,
+  "removed_packed_degenerates": 0,
+  "bounds": [
+    [
+      -14.0,
+      -2.053568124771118,
+      -3.913140058517456
+    ],
+    [
+      30.0,
+      2.0423038005828857,
+      3.831740140914917
+    ]
+  ],
+  "glow_texels": 897
+}

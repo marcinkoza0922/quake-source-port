@@ -109,12 +109,16 @@ pub(super) const CONTROLS: &[Item] = CONTROLS_ALL.split_at(CONTROLS_ALL.len() - 
 pub(super) const ADDONS: &[Item] = &[
     toggle("Portal Gun", "addon_portalgun"),
     Item::Sub { label: "Portal Gun Settings", page: Page::PortalGun },
+    toggle("Railgun", "addon_railgun"),
+    Item::Sub { label: "Railgun Settings", page: Page::Railgun },
 ];
 
 /// New Game with Add-ons ticked: choose the toys, then start.
 pub(super) const NEW_GAME_ADDONS: &[Item] = &[
     toggle("Portal Gun", "addon_portalgun"),
     Item::Sub { label: "Portal Gun Settings", page: Page::PortalGun },
+    toggle("Railgun", "addon_railgun"),
+    Item::Sub { label: "Railgun Settings", page: Page::Railgun },
     Item::Run { label: "Start New Game", run: Run::NewGame },
 ];
 
@@ -125,6 +129,13 @@ pub(super) const PORTAL_GUN: &[Item] = &[
     slider("Live View Distance", "addon_portal_dist", 512.0, 8192.0, 512.0),
     Item::Choice { label: "Portal Recursion", cvar: "addon_portal_depth", choices: PORTAL_DEPTH },
 ];
+/// Reached from the Add-ons pages: railgun damage and trail colour.
+pub(super) const RAILGUN: &[Item] = &[
+    slider("Damage", "addon_rail_damage", 25.0, 300.0, 25.0),
+    Item::Choice { label: "Trail Colour", cvar: "addon_rail_color", choices: RAIL_COLOR },
+];
+pub(super) const RAIL_COLOR: &[(&str, f32)] =
+    &[("Blue", 0.0), ("Green", 1.0), ("Red", 2.0), ("Yellow", 3.0), ("Purple", 4.0), ("White", 5.0)];
 pub(super) const PORTAL_DEPTH: &[(&str, f32)] =
     &[("Off", 0.0), ("1", 1.0), ("2", 2.0), ("3", 3.0), ("4", 4.0), ("6", 6.0)];
 pub(super) const PORTAL_MAX: &[(&str, f32)] = &[("1", 1.0), ("2", 2.0), ("3", 3.0), ("4", 4.0)];
