@@ -323,6 +323,7 @@ pub(super) const GRAPHICS: &[Item] = &[
 pub(super) const ENHANCEMENTS: &[Item] = &[
     Item::Choice { label: "Ambient Occlusion", cvar: "r_ssao", choices: SSAO },
     toggle("Motion Blur", "r_motionblur"),
+    toggle("Speed Blur", "r_speedblur"),
     slider("Motion Blur Amount", "r_motionblur_amount", 0.1, 2.0, 0.1),
     toggle("Enhanced Water", "r_enhancedwater"),
     toggle("See-through Teleporters", "r_teleportwindows"),

@@ -194,13 +194,9 @@ impl Host {
             let alive = g.cl.stats[qnet::protocol::STAT_HEALTH] > 0;
             let allowed = in_game && alive && g.cl.intermission == 0 && !demo;
             let choice = g.wheel.update(g.input.wheel_held(), allowed, g.input.wheel_aim, &g.cl, &entries, g.toy.held);
-            let mut selected = g.toy.update_slots(cvars, &toys, (inp.weapon_slot, &mut fresh), &g.cl);
+            g.toy.update_slots(cvars, &toys, (inp.weapon_slot, &mut fresh), &g.cl);
             if let Some(weapon) = choice {
                 g.toy.select(weapon, &g.cl, &mut fresh);
-                selected = g.toy.held;
-            }
-            if let Some(t) = selected {
-                g.center_prints.push(t.name().to_string());
             }
             let buttons = g.cmd.buttons | g.toy.buttons(inp.attack, inp.attack2, inp.jump);
             let impulse = if fresh != 0 { fresh } else { g.cmd.impulse };

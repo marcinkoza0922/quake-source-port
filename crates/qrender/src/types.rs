@@ -37,6 +37,8 @@ pub struct View {
     /// Pixel rows reserved at the bottom of the screen (classic status bar);
     /// the 3D scene is drawn above them.
     pub reserve_bottom: u32,
+    /// Peripheral radial blur strength, 0..=1; centre and UI stay sharp.
+    pub speed_blur: f32,
 }
 
 /// One entity to draw.

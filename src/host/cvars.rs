@@ -213,6 +213,7 @@ pub(super) const COMPAT_CVARS: &[(&str, &str, u32)] = &[
     ("r_ssao", "0", CVAR_ARCHIVE),
     ("r_ssao_radius", "32", CVAR_ARCHIVE),
     ("r_motionblur", "0", CVAR_ARCHIVE),
+    ("r_speedblur", "1", CVAR_ARCHIVE),
     ("r_motionblur_amount", "0.5", CVAR_ARCHIVE),
     ("r_enhancedwater", "0", CVAR_ARCHIVE),
     ("r_teleportwindows", "0", CVAR_ARCHIVE),

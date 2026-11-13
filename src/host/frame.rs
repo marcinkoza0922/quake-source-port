@@ -33,6 +33,7 @@ impl Host {
             kickpitch: v("v_kickpitch"),
             fov: v("fov").clamp(10.0, 170.0),
             gunkick: v("v_gunkick") != 0.0,
+            speed_blur: v("r_speedblur") != 0.0,
             viewmodel: crate::view::weapon::Alignment::from_cvar(v("r_drawviewmodel")),
             lerp_models: v("r_lerpmodels") != 0.0,
             lerp_move: v("r_lerpmove") != 0.0,
@@ -171,14 +172,9 @@ impl Host {
         let entries = crate::wheel::inventory(&self.server.core.cvars, &toys);
         let choice = self.wheel.update(held, in_game && alive && self.demo.is_none(), aim, &self.cl, &entries, self.toy.held);
         self.goggles_frame(in_game, alive);
-        let mut selected = self.toy.update_slots(&self.server.core.cvars, &toys, (inp.weapon_slot, &mut impulse), &self.cl);
+        self.toy.update_slots(&self.server.core.cvars, &toys, (inp.weapon_slot, &mut impulse), &self.cl);
         if let Some(weapon) = choice {
             self.toy.select(weapon, &self.cl, &mut impulse);
-            selected = self.toy.held;
-        }
-        if let Some(t) = selected {
-            let (s, t, cols) = self.center_args(t.name());
-            self.con.center_print(&s, t, cols);
         }
         if impulse != 0 { self.pend_impulse = impulse; }
         self.guest_moves(ft);

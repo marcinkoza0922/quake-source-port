@@ -18,6 +18,7 @@ layout(push_constant) uniform P {
     float g_gain;   // image gain / heat contrast
     float g_noise;  // sensor noise and scanlines
     float g_time;
+    float speed_blur; // high player velocity: peripheral radial smear
 } pc;
 layout(location = 0) out vec4 o_color;
 
@@ -67,6 +68,20 @@ vec3 motion_blur(vec3 c, vec2 uv) {
     }
     return acc / float(N);
 }
+// Sample toward the centre to stretch scenery into peripheral speed streaks.
+// The inner 40% stays sharp. Inward taps stay inside this split view's region.
+vec3 speed_blur(vec3 c, vec2 uv) {
+    vec2 radial = (i_uv - 0.5) * 2.0;
+    float edge = smoothstep(0.4, 1.1, length(radial));
+    float amount = pc.speed_blur * edge;
+    if (amount < 0.0001) return c;
+    vec2 streak = (uv - pc.uvs * 0.5) * (0.12 * amount);
+    vec3 acc = c;
+    const int N = 8;
+    for (int i = 1; i <= N; i++)
+        acc += texture(textures[nonuniformEXT(pc.scene)], uv - streak * (float(i) / float(N))).rgb;
+    return acc / float(N + 1);
+}
 float g_luma(vec3 c) { return dot(c, vec3(0.299, 0.587, 0.114)); }
 // Thermal palette: cold blue-grey, through purple and red, to white hot.
 vec3 heat_colour(float h) {
@@ -109,6 +124,8 @@ void main() {
     vec3 c = sc.rgb;
     if (pc.mbx > 0.0)
         c = motion_blur(c, uv);
+    if (pc.speed_blur > 0.0)
+        c = speed_blur(c, uv);
     if (pc.mode != 0u) {
         if (pc.mode == 1u) {
             vec2 noiseuv = floor(gl_FragCoord.xy * pc.scale) + 0.5;

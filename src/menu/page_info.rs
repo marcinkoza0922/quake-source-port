@@ -30,6 +30,7 @@ pub(super) fn tooltip(item: Item) -> Option<&'static str> {
         "r_dither" => "Adds fine noise to hide color banding",
         "r_ssao" => "Darkens corners and contact areas where geometry meets",
         "r_motionblur" => "Blurs fast-moving monsters, projectiles and doors (not camera turns)",
+        "r_speedblur" => "Blurs the screen edges during fast falls and launches; keeps the centre clear. Reduce Motion disables it",
         "r_motionblur_amount" => "Length of the motion blur streaks",
         "addon_portal_view" => "Draw the view out of the linked portal inside each portal; off shows flat discs (fastest)",
         "addon_portal_max" => "How many portals per screen show a live view; each one redraws the scene, so lower this on slow machines or in split-screen",
