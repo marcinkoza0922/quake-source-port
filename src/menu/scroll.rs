@@ -1,9 +1,14 @@
 use super::*;
 
 impl Menu {
+    pub(super) fn sync_autoaim_mapping(&self, cv: &Cvars) {
+        self.autoaim_mapping.set(if cv.value_of("assist_autoaim") == 0.0 { 0 }
+            else if cv.value_of("assist_autoaim_mode") == 1.0 { 2 } else { 1 });
+    }
+
     /// Rows on a page: its static items, plus found servers on Join.
     pub(super) fn page_len(&self, p: Page) -> usize {
-        page_items(p).len()
+        page_items(p).len() + usize::from(p == Page::Controls && self.autoaim_mapping.get() != 0)
             + match p {
                 Page::Join => self.servers.len(),
                 Page::ScreenShader => self.shader_params.len(),
@@ -97,6 +102,13 @@ impl Menu {
 
     pub(super) fn page_item(&self, p: Page, i: usize) -> Item {
         let items = page_items(p);
+        // Keep the contextual action beside Attack, before the movement binds.
+        let i = if p == Page::Controls && self.autoaim_mapping.get() != 0 {
+            if i == 1 {
+                return bind(if self.autoaim_mapping.get() == 2 { "Auto-aim Toggle" } else { "Lock-on" }, "+lockon");
+            }
+            if i > 1 { i - 1 } else { i }
+        } else { i };
         let k = i.saturating_sub(items.len());
         items.get(i).copied().unwrap_or(if p == Page::ScreenShader { Item::ShaderParam(k) } else { Item::Server(k) })
     }

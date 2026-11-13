@@ -129,7 +129,23 @@ Client-only and cosmetic: the server never sees it. Sub-options `r_debris_ragdol
 - Fixed 60 Hz steps (at most 6 per frame), driven by `cl.time` so pause and slow motion apply. Caps: 48 ragdolls (`r_debris_maxragdolls`), 128 gibs, 96 shards.
 
 ### Gameplay assists (Options → Gameplay → Assists; `qserver::assists`)
-Engine-side so they work with any progs; all off in deathmatch.
+Damage/movement assists are engine-side so they work with any progs; off in deathmatch.
+- Auto-aim (`qinput::lockon`) is opt-in (`assist_autoaim`) and independent of
+  gamepad slowdown. The settings submenu selects hold lock-on (default) or
+  continuous toggle, acquisition cone and range. Controls adds the matching
+  `+lockon` binding only while enabled. Hold picks the nearest visible enemy;
+  toggle acquires near the crosshair and stays enabled to reacquire after loss.
+  A stable entity ID retains the target while tracking. Clicking the look stick
+  cycles visible enemies (left stick when move/look are swapped), suppressing
+  its usual binding while locked. Four crosshair corner ticks indicate a lock.
+- The host rejects auto-aim for remote clients and whenever any nonlocal player
+  joins its server, including coop. Local split-screen is allowed, including
+  deathmatch (players are targets there; coop targets monsters). Each player
+  has independent lock state. Death, intermission, menus, demos and disabling
+  the assist clear the lock. Targets must be alive, in range, on screen and
+  visible through the map and inline brush doors/lifts (`host::aim_vis`). FOV follows the renderer's 4:3 adaptation and local
+  viewport. Tests cover acquisition, tracking, cycling, toggling, occlusion,
+  gating and conditional menu bindings.
 - qvm resolves QC `T_Damage` at load; each QC→QC call to it first runs
   `Host::before_damage`, which may change the damage parm or skip the call.
   `assist_damagetaken` scales damage to clients, `assist_enemyhealth`

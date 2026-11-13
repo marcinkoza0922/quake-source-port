@@ -57,6 +57,7 @@ pub enum Page {
     Touch,
     Autosave,
     Assists,
+    AutoAim,
     HudLayout,
     Messages,
     Water,
@@ -72,7 +73,7 @@ pub enum Page {
 
 /// Every cvar the options pages edit (the host marks them archived).
 pub fn option_cvars() -> impl Iterator<Item = &'static str> {
-    [GAMEPLAY, HUD, HUD_LAYOUT, MESSAGES, ENHANCEMENTS, WATER, BLOOD, DEBRIS, IMPACTS, AUTOSAVE, ASSISTS, INPUT, MOUSE, CONTROLLER, GRAPHICS, AUDIO, ACCESSIBILITY].into_iter().flatten().filter_map(|i| match *i {
+    [GAMEPLAY, HUD, HUD_LAYOUT, MESSAGES, ENHANCEMENTS, WATER, BLOOD, DEBRIS, IMPACTS, AUTOSAVE, ASSISTS, AUTOAIM, INPUT, MOUSE, CONTROLLER, GRAPHICS, AUDIO, ACCESSIBILITY].into_iter().flatten().filter_map(|i| match *i {
         Item::Slider { cvar, .. } | Item::Toggle { cvar, .. } | Item::Choice { cvar, .. } => Some(cvar),
         _ => None,
     })
@@ -135,6 +136,8 @@ pub struct Menu {
     pub searching: bool,
     /// Key bindings snapshot (host refreshes it while the menu is open).
     pub bindings: Vec<Option<String>>,
+    /// Conditional Controls row, refreshed from cvars before draw/input.
+    autoaim_mapping: std::cell::Cell<u8>,
     /// Controls row waiting for a key to bind.
     capture: Option<usize>,
     /// Prompts show gamepad glyphs (the pad was used last).
@@ -229,6 +232,7 @@ impl Menu {
             servers: Vec::new(),
             searching: false,
             bindings: vec![None; MAX_KEYS],
+            autoaim_mapping: std::cell::Cell::new(0),
             capture: None,
             pad_ui: false,
             glyphs: Glyphs { family: Family::Xbox },

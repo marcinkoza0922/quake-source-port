@@ -63,6 +63,13 @@ pub fn key_event<C: InputHost>(ctx: &mut C, key: i32, down: bool) -> Option<Rout
     if repeat {
         return None;
     }
+    // The look-stick click switches a live lock instead of executing its
+    // usual binding (centerview by default).
+    let swapped = { let id = ctx.input().cv.joy_swapmovelook; ctx.cvars().value(id) != 0.0 };
+    let inp = ctx.input();
+    if inp.lockon.target.is_some() && key == if swapped { K_LTHUMB } else { K_RTHUMB } {
+        return None;
+    }
     if let Some(b) = inp.binding(key).map(str::to_string) {
         inp.game_down[ku] = true;
         let s = if b.starts_with('+') { format!("{b} {key}\n") } else { format!("{b}\n") };

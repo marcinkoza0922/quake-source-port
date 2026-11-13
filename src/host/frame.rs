@@ -43,8 +43,23 @@ impl Host {
         }
     }
 
-    /// Aim-assist targets from the loopback server's live monsters/players,
-    /// positioned at the client's interpolated origins.
+    /// Auto-aim is allowed only when every connected player is local.
+    pub(super) fn local_autoaim_allowed(&self) -> bool {
+        self.local.is_some() && !self.remote() && self.server.active()
+            && !self.server.core.clients.iter().any(|c| c.active && !c.local)
+    }
+
+    /// Match the renderer's 4:3-adapted FOV for each local player's viewport.
+    pub(super) fn autoaim_fov(&self) -> [f32; 2] {
+        let (w, h) = self.r.size();
+        let n = 1 + self.guests.iter().filter(|g| g.cl.signon == 4).count();
+        let rect = crate::splitscreen::layout(n, w, h, self.cv("r_splitscreen_layout") != 0.0)[0];
+        let aspect = rect[2].max(1) as f32 / rect[3].max(1) as f32;
+        let ty = (self.cv("fov").clamp(10.0, 170.0).to_radians() * 0.5).tan() * 0.75;
+        [(ty * aspect).atan().to_degrees() * 2.0, ty.atan().to_degrees() * 2.0]
+    }
+
+    /// Living loopback targets at the client's interpolated positions.
     pub(super) fn aim_targets(&self, cl: &qclient::ClientState) -> Vec<AimTarget> {
         let mut out = Vec::new();
         let Some(l) = &self.server.level else { return out };
@@ -73,7 +88,7 @@ impl Host {
                 continue;
             };
             let origin = cl.entities.get(e as usize).filter(|c| c.model != 0).map_or(vm.ent_v(e, org), |c| c.origin);
-            out.push(AimTarget { origin, mins: vm.ent_v(e, mn), maxs: vm.ent_v(e, mx), velocity: vm.ent_v(e, vel), kind });
+            out.push(AimTarget { id: e, origin, mins: vm.ent_v(e, mn), maxs: vm.ent_v(e, mx), velocity: vm.ent_v(e, vel), kind });
         }
         out
     }
@@ -112,7 +127,11 @@ impl Host {
         // input (every frame, for smooth view angles)
         let ft = dt as f32;
         let in_game = self.cl.signon == 4 && self.cl.intermission == 0;
-        let targets = if in_game && self.input.gamepad_connected { self.aim_targets(&self.cl) } else { Vec::new() };
+        self.input.autoaim_allowed = self.local_autoaim_allowed() && self.demo.is_none() && in_game && self.cl.stats[STAT_HEALTH] > 0;
+        let needs_targets = self.input.gamepad_connected || (self.input.autoaim_allowed && self.cv("assist_autoaim") != 0.0);
+        let targets = if in_game && self.cl.stats[STAT_HEALTH] > 0 && needs_targets { self.aim_targets(&self.cl) } else { Vec::new() };
+        self.input.autoaim_fov = self.autoaim_fov();
+        self.input.autoaim_players = self.cv("deathmatch") != 0.0;
         let mut inp = {
             let eye = self.cl.entities.get(self.cl.viewentity).map_or([0.0; 3], |e| {
                 let mut o = e.origin;
@@ -120,7 +139,7 @@ impl Host {
                 o
             });
             let cm = self.server.level.as_ref().map(|l| l.world.worldmodel.clone());
-            let vis = cm.as_deref().map(WorldVis);
+            let vis = cm.as_deref().map(|cm| WorldVis::new(cm, &self.cl));
             let allowed = aim_assist_allowed(self.cv("deathmatch") != 0.0, self.cv("sv_aimassist") != 0.0);
             let ctx = vis.as_ref().map(|v| AimContext { eye, player_velocity: self.cl.velocity, targets: &targets, vis: v, allowed });
             self.input.frame(&self.server.core.cvars, self.cl.viewangles, ft, ctx.as_ref())
