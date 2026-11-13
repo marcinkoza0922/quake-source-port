@@ -10,6 +10,7 @@
 //!   name-resolved extension builtins, implemented by the server.
 
 mod builtins;
+pub mod disasm;
 mod edict;
 mod exec;
 mod progs;

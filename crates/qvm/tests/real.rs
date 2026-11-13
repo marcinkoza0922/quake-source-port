@@ -117,3 +117,21 @@ fn runtime_error_has_trace() {
     vm.execute_by_name(&mut Stub::default(), "anglemod").unwrap();
     assert_eq!(vm.g_f(qvm::OFS_RETURN), 10.0);
 }
+
+#[test]
+fn disassemble_every_function() {
+    let Some(base) = basedir() else { return };
+    let mut fs = Fs::new(base);
+    fs.add_game_dir("id1");
+    let p = qvm::Progs::parse(&fs.open("progs.dat").unwrap()).unwrap();
+    let d = qvm::disasm::Disasm::new(&p);
+    for i in 1..p.functions.len() {
+        let text = d.function(i);
+        assert!(!text.contains("OP_"), "unknown opcode in\n{text}");
+    }
+    let army = d.function(p.find_function("monster_army").unwrap());
+    assert!(army.contains("IFNOT      deathmatch,"), "{army}");
+    assert!(army.contains("CALL1      precache_model #20"), "{army}");
+    assert!(army.contains("\"progs/soldier.mdl\" -> PARM0"), "{army}");
+    assert!(army.contains("&self.health"), "{army}");
+}

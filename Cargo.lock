@@ -250,6 +250,10 @@ dependencies = [
 [[package]]
 name = "qinspect"
 version = "0.1.0"
+dependencies = [
+ "qcore",
+ "qvm",
+]
 
 [[package]]
 name = "qnet"
