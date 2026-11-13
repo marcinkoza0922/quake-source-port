@@ -48,6 +48,9 @@ pub(super) fn tooltip(item: Item) -> Option<&'static str> {
         "addon_hook_metal" => "The hook latches onto metal surfaces (metal, tech, computer panels, copper)",
         "addon_hook_stone" => "The hook latches onto stone, brick, rock and any surface not recognised as wood or metal",
         "addon_hook_enemies" => "Hooking an enemy pulls you to it",
+        "addon_goggles" => "Night-vision and thermal goggles, switched on and off with the Equipment Wheel bind (Controls) or the goggles command",
+        "addon_goggles_intensity" => "Night vision: how much dark areas are brightened; thermal: how strongly heat stands out",
+        "addon_goggles_noise" => "Sensor grain, scanlines and flicker of the goggle image",
         "addon_portalgun" => "A two-portal gun: fire and alt-fire place linked portals on flat walls; pick it with the Toy Slot bind (Controls)",
         "r_debris" => "Corpses go limp as ragdolls, gibs tumble and barrels throw shrapnel; shots and blasts push them (cosmetic only)",
         "r_debris_ragdolls" => "Corpses go limp and fall as ragdolls",
@@ -149,6 +152,7 @@ pub(super) fn page_items(p: Page) -> &'static [Item] {
         Page::Boomerang => BOOMERANG,
         Page::Railgun => RAILGUN,
         Page::Hookshot => HOOKSHOT,
+        Page::Goggles => GOGGLES,
         Page::Input => INPUT,
         Page::Graphics => GRAPHICS,
         Page::Enhancements => ENHANCEMENTS,
@@ -202,6 +206,7 @@ pub(super) fn page_name(p: Page) -> &'static str {
         Page::Boomerang => "Boomerang",
         Page::Railgun => "Railgun",
         Page::Hookshot => "Hookshot",
+        Page::Goggles => "Goggles",
         _ => PAGES.iter().find(|x| x.1 == p).map_or("", |x| x.0),
     }
 }
@@ -221,6 +226,7 @@ pub(super) fn sub_disabled(page: Page, cv: &Cvars) -> bool {
         || (page == Page::Water && cv.value_of("r_enhancedwater") == 0.0)
         || (page == Page::Blood && cv.value_of("r_blood") == 0.0)
         || (page == Page::Debris && cv.value_of("r_debris") == 0.0)
+        || (page == Page::Goggles && cv.value_of("addon_goggles") == 0.0)
 }
 
 pub(super) fn is_net_page(p: Page) -> bool {

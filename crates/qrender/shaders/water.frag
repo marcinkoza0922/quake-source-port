@@ -49,5 +49,10 @@ void main() {
     st += 8.0 * sin(st.yx * 0.125 + t);
     vec4 c = tex(m.x, st / 64.0);
     float a = kind >= 1u && kind <= 4u ? fr.alphas[kind - 1u] : 1.0;
+    if (thermal()) {
+        float h = kind == 2u ? 0.88 + 0.12 * luma(c.rgb) : cold_heat(c.rgb) * 0.7;
+        o_color = vec4(vec3(h), a * pc.params.x);
+        return;
+    }
     o_color = vec4(apply_fog(c.rgb * shade, i_wpos), a * pc.params.x);
 }

@@ -156,11 +156,13 @@ pub mod btn {
     /// Add-ons: secondary fire and the toy-slot toggle.
     pub const ATTACK2: usize = 20;
     pub const TOY: usize = 21;
-    pub const COUNT: usize = 22;
+    /// Add-ons: the equipment wheel (goggles).
+    pub const EQUIPWHEEL: usize = 22;
+    pub const COUNT: usize = 23;
     pub const NAMES: [&str; COUNT] = [
         "forward", "back", "moveleft", "moveright", "moveup", "movedown", "left", "right", "lookup", "lookdown",
         "speed", "strafe", "attack", "jump", "mlook", "klook", "use", "gyroaction", "weaponwheel", "lockon",
-        "attack2", "toy",
+        "attack2", "toy", "equipwheel",
     ];
 }
 
@@ -330,6 +332,10 @@ impl Input {
     /// Weapon wheel button held (and in game).
     pub fn wheel_held(&self) -> bool {
         self.buttons[btn::WHEEL].is_down() && self.dest == KeyDest::Game
+    }
+    /// Equipment wheel button held (and in game).
+    pub fn equip_wheel_held(&self) -> bool {
+        self.buttons[btn::EQUIPWHEEL].is_down() && self.dest == KeyDest::Game
     }
     /// Layout of the on-screen controls.
     pub fn touch_layout(&self, cvars: &Cvars) -> touch::TouchLayout {

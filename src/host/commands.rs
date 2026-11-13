@@ -160,6 +160,7 @@ pub(super) fn register_commands(c: &mut Commands<Host>) {
             "railgun" => Some(Page::Railgun),
             "hookshot" => Some(Page::Hookshot),
             "boomerang" => Some(Page::Boomerang),
+            "goggles" => Some(Page::Goggles),
             _ => None,
         };
         if page == Some(Page::Graphics) {

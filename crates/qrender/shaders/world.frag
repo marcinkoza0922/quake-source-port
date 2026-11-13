@@ -56,5 +56,11 @@ void main() {
     } else if (dither == 0u) {
         rgb += SUPPRESS_BANDING() * fr.soft.x;
     }
+    if (thermal()) {
+        float h = cold_heat(c.rgb * light);
+        // fullbright texels (torches, lights, lava rock) are hot
+        if (m.y != NO_TEX) h += 1.6 * luma(texture(textures[nonuniformEXT(m.y)], uv, bias).rgb);
+        rgb = vec3(min(h, 1.0));
+    }
     o_color = vec4(rgb, pc.params.x);
 }

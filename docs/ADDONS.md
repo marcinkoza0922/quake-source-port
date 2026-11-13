@@ -275,3 +275,40 @@ nothing until it is caught.
   --flat` (28 u long, thinnest axis Z, 256² atlas darkened ×0.75, converted to
   the mod palette at load, no fullbrights). The FBX stays external.
 - Audition: `rustc --edition=2024 tools/boomerang_cues.rs -o target/boomerang-cues && target/boomerang-cues target/boomerang-audio` writes the four cues as 48 kHz WAVs.
+### Equipment wheel and goggles (`src/addons/goggles.rs`, `equip_wheel.rs`, `src/host/goggles.rs`)
+Equipment is switched on and off rather than held, so it does not use the
+toy slot. `Equip` lists it in wheel order; items of one group exclude each
+other (night vision and thermal share the goggle group). State is player 1's
+`Equipment` on the host, cleared whenever `goggles_allowed()` fails (no
+add-on game, deathmatch, remote client, or `addon_goggles` 0, which is
+locked like the toy cvars). It is not saved: goggles start off after a load.
+- Input: `+equipwheel` (qinput button, Controls → "Equipment Wheel
+  (Add-ons)", shown with the other add-on binds) opens a radial wheel in the
+  weapon wheel's style; it shares `wheel_aim` (either stick, or the mouse
+  cursor), and releasing on a slot toggles it. Slots follow `Equip::ALL`, so
+  new equipment is one enum variant. Commands: `goggles` (toggle night
+  vision), `goggles nv|thermal|off`, `equip <nv|thermal>` (toggle). Each
+  switch plays a synthesised cue (`goggles::cue`, rising on / falling off,
+  non-positional) and centerprints the new state.
+- Rendering: the host passes `qrender::Goggles { mode, intensity, noise }`
+  in `Settings`; the UBO carries it in `soft.zw`/`softf.z`, `PostPush` in
+  `goggles`/`g_*`. Night vision (mode 1) is post only: luminance lifted
+  with `1 - exp(-7·gain·l)`, an 8-tap ring glow around bright spots, green
+  phosphor tint, grain, every third line darkened, faint flicker, oval
+  vignette. Thermal (mode 2): scene shaders write a grey heat level instead
+  of colour (`thermal()` in `common.glsl`): world `0.05 + 0.2·luma` plus 1.6×
+  fullbright texels (torches, lights), lava 0.88+, other liquids colder,
+  sky 0.02, particles 0.55+, sprites (explosions) 0.65+; alias models by
+  `RenderEntity::heat` (texs.w bits 8–9): cold, warm 0.42 (gibs, heads,
+  projectiles), body 0.6–0.95 (monsters, players), fire 0.85+ (flames).
+  Heat comes from the model file name (`goggles::heat_of`, cached per level
+  in `HeatTable`). Body-class models are drawn again after particles with
+  `alias_xray` (depth GREATER, no write, additive, flag 1024 → flat 0.42),
+  so they glow through walls. Post maps heat through a blue-grey → purple →
+  red → orange → white palette, with gain, glow, grain and a soft vignette.
+  Split-screen views share the post effect (player 1's goggles).
+- Options (Add-ons → Goggles Settings, `menu_options goggles`):
+  `addon_goggles` (1), `addon_goggles_intensity` 0.25–3 (1; night-vision
+  gain / heat contrast), `addon_goggles_noise` 0–2 (1; grain, scanlines).
+- Headless check: `+addons_enable 1 +sv_autosave 0 +map e1m1 "+delay 2
+  goggles thermal" "+delay 3 screenshot target/shots/thermal"`.

@@ -71,6 +71,25 @@ pub struct RenderEntity {
     pub views: u8,
     /// Drawn only in portal views (the player's own body).
     pub portal_only: bool,
+    /// Thermal goggles: [`HEAT_COLD`], [`HEAT_WARM`], [`HEAT_BODY`] (also
+    /// seen through walls) or [`HEAT_FIRE`].
+    pub heat: u8,
+}
+
+pub const HEAT_COLD: u8 = 0;
+pub const HEAT_WARM: u8 = 1;
+pub const HEAT_BODY: u8 = 2;
+pub const HEAT_FIRE: u8 = 3;
+
+/// Add-on goggles post effect (see `post.frag`).
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct Goggles {
+    /// 0 off, 1 night vision, 2 thermal.
+    pub mode: u32,
+    /// Image gain (night vision) or heat contrast (thermal), 0.25..=3.
+    pub intensity: f32,
+    /// Sensor noise and scanlines, 0..=2.
+    pub noise: f32,
 }
 
 /// An add-on (portal gun) portal: an oval on a wall, `half` its half width
@@ -130,6 +149,7 @@ impl Default for RenderEntity {
             views: 0,
             dyn_pose: None,
             portal_only: false,
+            heat: HEAT_COLD,
         }
     }
 }
@@ -330,6 +350,8 @@ pub struct Settings {
     /// r_shader_scope: 0 = slang preset on the 3D view only (UI drawn after
     /// it), 1 = on the whole frame including the UI.
     pub shader_scope: u32,
+    /// Add-on night vision / thermal goggles.
+    pub goggles: Goggles,
 }
 
 /// gl_texturemode names (ironwail order): (name, linear mag/min, mipmapped, linear mips).
@@ -391,6 +413,7 @@ impl Default for Settings {
             water_splashes: false,
             water_caustics: 0.0,
             shader_scope: 0,
+            goggles: Goggles::default(),
         }
     }
 }

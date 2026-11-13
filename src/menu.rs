@@ -79,6 +79,7 @@ pub enum Page {
     Boomerang,
     Railgun,
     Hookshot,
+    Goggles,
     /// Multiplayer pages (reached from Screen::Multiplayer).
     Join,
     Host,
@@ -87,7 +88,7 @@ pub enum Page {
 
 /// Every cvar the options pages edit (the host marks them archived).
 pub fn option_cvars() -> impl Iterator<Item = &'static str> {
-    [ADDONS, NEW_GAME_ADDONS, PORTAL_GUN, BOOMERANG, GAMEPLAY, HUD, HUD_LAYOUT, MESSAGES, ENHANCEMENTS, WATER, BLOOD, DEBRIS, IMPACTS, AUTOSAVE, ASSISTS, AUTOAIM, INPUT, MOUSE, CONTROLLER, GRAPHICS, AUDIO, HIT_SOUND, KILL_SOUND, ACCESSIBILITY].into_iter().flatten().filter_map(|i| match *i {
+    [ADDONS, NEW_GAME_ADDONS, PORTAL_GUN, BOOMERANG, HOOKSHOT, RAILGUN, GOGGLES, GAMEPLAY, HUD, HUD_LAYOUT, MESSAGES, ENHANCEMENTS, WATER, BLOOD, DEBRIS, IMPACTS, AUTOSAVE, ASSISTS, AUTOAIM, INPUT, MOUSE, CONTROLLER, GRAPHICS, AUDIO, HIT_SOUND, KILL_SOUND, ACCESSIBILITY].into_iter().flatten().filter_map(|i| match *i {
         Item::Slider { cvar, .. } | Item::Toggle { cvar, .. } | Item::Choice { cvar, .. } => Some(cvar),
         _ => None,
     })

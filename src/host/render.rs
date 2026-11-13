@@ -19,6 +19,7 @@ impl Host {
         let mut fte = (Vec::new(), Vec::new(), Vec::new());
         let mut blend = [0.0; 4];
         let mut splits = Vec::new();
+        let mut goggles = qrender::Goggles::default();
         if let Some(v) = &view {
             let fs = &self.server.core.fs;
             let cv = self.view_cvars();
@@ -100,6 +101,7 @@ impl Host {
             if let Some(g) = gun {
                 ents.push(g);
             }
+            goggles = self.goggles_render(&mut ents);
             crate::view::particles(&self.cl, &mut parts);
             fte = self.fte.frame(
                 &mut self.cl,
@@ -137,6 +139,7 @@ impl Host {
             .into_iter()
             .find(|&k| crate::glyphs::is_pad_key(k))
             .unwrap_or(qinput::keys::K_XBUTTON);
+        let equip_key = self.equip_wheel_key();
         let showfps = self.cv("scr_showfps") != 0.0;
         let classic = self.classic_hud();
         let hud_cfg = crate::sbar::HudConfig::from_cvars(&self.server.core.cvars);
@@ -222,6 +225,7 @@ impl Host {
                             crate::sbar::deathmatch_overlay(&mut c, &mut pf, &self.cl);
                         }
                         self.wheel.draw(&mut c, &mut pf, &glyphs, &self.cl, pad_ui, wheel_key);
+                        self.goggles.wheel.draw(&mut c, &glyphs, &self.goggles.equip, pad_ui, equip_key);
                         if self.server.core.cvars.value_of("cl_captions") != 0.0 {
                             let bottom = if classic { scene_h - 4.0 } else { c.vh() - 44.0 };
                             let ts = self.server.core.cvars.value_of("scr_textscale");
@@ -321,6 +325,7 @@ impl Host {
             water_splashes: v("r_enhancedwater") != 0.0 && v("r_watersplash") != 0.0,
             water_caustics: if v("r_enhancedwater") != 0.0 && v("r_watercaustics") != 0.0 { v("r_watercaustics_amount").clamp(0.0, 4.0) } else { 0.0 },
             shader_scope: v("r_shader_scope").clamp(0.0, 1.0) as u32,
+            goggles,
             ..Settings::default()
         };
         {

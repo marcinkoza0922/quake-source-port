@@ -37,6 +37,7 @@ mod death;
 mod console;
 mod input;
 mod frame;
+mod goggles;
 mod ctx;
 mod cvars;
 use cvars::*;
@@ -110,6 +111,8 @@ pub struct Host {
     rail_fx: crate::addons::rail_fx::Presentation,
     hook_fx: crate::addons::hook_fx::HookFx,
     boomerang_fx: crate::addons::boomerang_fx::Presentation,
+    /// Player 1's add-on equipment (goggles) and equipment wheel.
+    goggles: goggles::Goggles,
     /// Split-screen players 2..6 (`cl_splitscreen`); player 1 is `cl`.
     pub guests: Vec<crate::splitscreen::Guest>,
     /// Player 1's gamepad (the first pad used); other pads can join.
@@ -186,7 +189,7 @@ pub struct Host {
 impl Host {
     pub fn new(fs: qcore::fs::Fs, mut r: Renderer, snd: Option<SoundSystem>, cmdline: Vec<String>) -> Self {
         let mut cvars = Cvars::new();
-        for &(n, d, f) in HOST_CVARS.iter().chain(COMPAT_CVARS) {
+        for &(n, d, f) in HOST_CVARS.iter().chain(COMPAT_CVARS).chain(goggles::CVARS) {
             cvars.register(n, d, f);
         }
         let input = Input::new(&mut cvars);
@@ -236,6 +239,7 @@ impl Host {
             rail_fx: Default::default(),
             hook_fx: Default::default(),
             boomerang_fx: Default::default(),
+            goggles: Default::default(),
             guests: Vec::new(),
             p1_pad: None,
             input_target: None,
@@ -280,6 +284,7 @@ impl Host {
         };
         qinput::register_commands(&mut h.cmds);
         register_commands(&mut h.cmds);
+        goggles::register_goggle_commands(&mut h.cmds);
         shader::register_shader_commands(&mut h.cmds);
         h.con.forced = true;
         h.con.frac = 1.0;
