@@ -377,6 +377,7 @@ impl Host {
         for e in evs {
             match e {
                 ClientEvent::PortalEffect(fx) => self.portal_fx.receive(fx, self.cl.time, self.snd.as_ref()),
+                ClientEvent::Boomerang(line) => self.boomerang_fx.receive(&line, self.cl.time, &self.cl, self.snd.as_ref()),
                 ClientEvent::HitFeedback { kill } => {
                     feedback = Some(feedback.unwrap_or(false) || kill);
                 }
@@ -455,6 +456,7 @@ impl Host {
                 ClientEvent::BonusFlash => self.view.bonus_flash(),
                 ClientEvent::NewMap => {
                     self.portal_fx.clear();
+                    self.boomerang_fx.clear();
                     feedback = None;
                     self.feedback = Default::default();
                     self.stats_recorded = false;

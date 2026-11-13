@@ -147,6 +147,8 @@ pub enum ClientEvent {
     /// Server-confirmed damage dealt to a living enemy; kills supersede hits.
     HitFeedback { kill: bool },
     PortalEffect(PortalEffect),
+    /// Add-on boomerang line (`//qsp_boom ...` without the prefix).
+    Boomerang(String),
     StopSound { ent: i32, channel: i32 },
     StaticSound(StaticSound),
     CdTrack { track: u8, loop_track: u8 },

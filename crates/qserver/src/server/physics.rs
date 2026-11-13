@@ -158,7 +158,7 @@ impl Server {
                 crate::addons::frame(l, c);
             } else {
                 l.falls.clear();
-                if !l.portals.pairs.is_empty() {
+                if !l.portals.pairs.is_empty() || !l.boomerangs.is_empty() {
                     crate::addons::shut_down(l, c);
                 }
             }

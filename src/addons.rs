@@ -2,6 +2,8 @@
 //! player's toy slot, toggled with `+toy`, and the usercmd buttons it sends.
 //! With add-ons off this is a single `Option` check per player per frame.
 
+pub mod boomerang_fx;
+mod boomerang_model;
 pub mod portal_draw;
 pub mod portal_fx;
 pub mod portal_model;

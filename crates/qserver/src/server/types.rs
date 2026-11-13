@@ -115,6 +115,8 @@ pub struct Level {
     pub portals: crate::addons::portal::Portals,
     /// Monster fall damage while the portal gun is on.
     pub(crate) falls: crate::addons::fall::Falls,
+    /// Boomerang flights, marks and stunned monsters.
+    pub boomerangs: crate::addons::boomerang::Boomerangs,
 }
 
 pub struct Server {

@@ -109,12 +109,16 @@ pub(super) const CONTROLS: &[Item] = CONTROLS_ALL.split_at(CONTROLS_ALL.len() - 
 pub(super) const ADDONS: &[Item] = &[
     toggle("Portal Gun", "addon_portalgun"),
     Item::Sub { label: "Portal Gun Settings", page: Page::PortalGun },
+    toggle("Boomerang", "addon_boomerang"),
+    Item::Sub { label: "Boomerang Settings", page: Page::Boomerang },
 ];
 
 /// New Game with Add-ons ticked: choose the toys, then start.
 pub(super) const NEW_GAME_ADDONS: &[Item] = &[
     toggle("Portal Gun", "addon_portalgun"),
     Item::Sub { label: "Portal Gun Settings", page: Page::PortalGun },
+    toggle("Boomerang", "addon_boomerang"),
+    Item::Sub { label: "Boomerang Settings", page: Page::Boomerang },
     Item::Run { label: "Start New Game", run: Run::NewGame },
 ];
 
@@ -124,6 +128,11 @@ pub(super) const PORTAL_GUN: &[Item] = &[
     Item::Choice { label: "Live Portal Views", cvar: "addon_portal_max", choices: PORTAL_MAX },
     slider("Live View Distance", "addon_portal_dist", 512.0, 8192.0, 512.0),
     Item::Choice { label: "Portal Recursion", cvar: "addon_portal_depth", choices: PORTAL_DEPTH },
+];
+/// Reached from the Add-ons pages: boomerang stun time and flight speed.
+pub(super) const BOOMERANG: &[Item] = &[
+    slider("Stun Duration", "addon_boomerang_stun", 1.0, 10.0, 0.5),
+    slider("Flight Speed", "addon_boomerang_speed", 300.0, 1500.0, 100.0),
 ];
 pub(super) const PORTAL_DEPTH: &[(&str, f32)] =
     &[("Off", 0.0), ("1", 1.0), ("2", 2.0), ("3", 3.0), ("4", 4.0), ("6", 6.0)];
