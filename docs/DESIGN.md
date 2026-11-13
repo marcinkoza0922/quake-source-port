@@ -13,7 +13,7 @@ Living design doc. `PROPOSAL.md` says *what*; this says *how*. Update when decis
 | Aim assist | On in SP/co-op; in DM controlled by a server-side cvar (`sv_aimassist`, default 0 in DM). |
 | Mod menu | Browse installed mods + metadata, per-mod map browser (with completion/secret stats), per-mod config profiles. No online downloads. |
 | Test bot | Legal movement with god mode; noclip fallback when stuck, flagged in report. |
-| Game data | `QUAKE_BASEDIR` env var (default: the `vkQuake directory with maps` symlink). Data-dependent tests skip when absent. |
+| Game data | `-basedir` overrides `QUAKE_BASEDIR`. Otherwise auto-discover from the working directory (breadth first, two child levels), then conventional Quake/GOG and Steam install paths, including extra libraries from `libraryfolders.vdf`. Symlinks are followed with cycle detection; unreadable directories are skipped. Discovery requires `pak0.pak` (case insensitive), directly or under `id1`; flat PAK directories mount as virtual `id1`. Explicit paths are never replaced by discovery. Data-dependent tests skip when absent. |
 
 ## Compatibility targets
 

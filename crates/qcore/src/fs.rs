@@ -9,6 +9,7 @@ use std::collections::{BTreeSet, HashMap};
 use std::fs::File;
 use std::io::{Read, Seek, SeekFrom};
 use std::path::{Path, PathBuf};
+mod discovery;
 mod pack;
 pub use pack::*;
 
@@ -56,11 +57,11 @@ impl Fs {
         Self { basedir: basedir.into(), game_dirs: Vec::new(), paths: Vec::new() }
     }
 
-    /// `QUAKE_BASEDIR` or the default `./vkQuake directory with maps`.
+    /// `QUAKE_BASEDIR`, local data (two child levels), or an installed Quake.
     pub fn default_basedir() -> PathBuf {
         std::env::var_os("QUAKE_BASEDIR")
             .map(PathBuf::from)
-            .unwrap_or_else(|| PathBuf::from("vkQuake directory with maps"))
+            .unwrap_or_else(discovery::discover)
     }
 
     pub fn basedir(&self) -> &Path {
@@ -94,7 +95,14 @@ impl Fs {
         if self.game_dirs.iter().any(|g| g.eq_ignore_ascii_case(name)) {
             return true;
         }
-        let dir = self.basedir.join(name);
+        let dir = if name.eq_ignore_ascii_case("id1")
+            && !self.basedir.join(name).is_dir()
+            && discovery::has_pak(&self.basedir)
+        {
+            self.basedir.clone()
+        } else {
+            self.basedir.join(name)
+        };
         if !dir.is_dir() {
             return false;
         }
@@ -370,6 +378,17 @@ mod tests {
         fs.truncate_game_dirs(1);
         assert_eq!(fs.open("b.txt").unwrap(), b"pak1");
         let _ = std::fs::remove_dir_all(&b);
+    }
+
+    #[test]
+    fn flat_paks_mount_as_id1() {
+        let b = tmpdir("flat");
+        write_pak(&b.join("pak0.pak"), &[("progs.dat", b"flat")]);
+        let mut fs = Fs::new(&b);
+        assert!(fs.add_game_dir("id1"));
+        assert_eq!(fs.game_dir(), Some("id1"));
+        assert_eq!(fs.open("progs.dat").as_deref(), Some(&b"flat"[..]));
+        let _ = std::fs::remove_dir_all(b);
     }
 
     #[test]
