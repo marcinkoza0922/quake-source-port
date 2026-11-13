@@ -93,11 +93,11 @@ impl Bot<'_> {
         }
     }
 
-    /// Monsters waiting to be spawned by a trigger (hipnotic, AD): not solid
-    /// and not damageable yet.
+    /// Monsters that can't be hurt yet: waiting to be spawned by a trigger
+    /// (hipnotic, AD; not solid) or rogue statues (solid stone until their
+    /// targetname fires). Chasing them only burns the goal timeout.
     pub(super) fn dormant(&self, g: &Goal) -> bool {
-        let vm = self.vm();
-        g.kind == Kind::Monster && vm.ent_f(g.ent, self.o.solid) as i32 == SOLID_NOT && vm.ent_f(g.ent, self.o.takedamage) == 0.0
+        g.kind == Kind::Monster && self.vm().ent_f(g.ent, self.o.takedamage) == 0.0
     }
 
     pub(super) fn update_goals(&mut self) {

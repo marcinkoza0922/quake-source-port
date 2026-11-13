@@ -7,7 +7,7 @@
   "r1m5": {"kills": 98, "secrets": 7, "events": 46, "exited": true, "log": []},
   "r1m6": {"kills": 86, "secrets": 5, "events": 29, "exited": true, "log": []},
   "r1m7": {"kills": 111, "secrets": 4, "events": 20, "exited": true, "log": ["walkmonster in wall!", "monster_hell_knight at '552.0 2464.0 -503.0'", "Bonus item fell out of level!", "item_armor1 at '  0.0 -88.0 294.0'"]},
-  "r2m1": {"kills": 101, "secrets": 3, "events": 33, "exited": true, "log": ["statue not targeted", "monster_knight at '958.0 -1768.0 320.0'", "monster_hell_knight at '958.0 -2129.0 320.0'", "monster_hell_knight at '-1244.0 -1105.0 -51.0'", "walkmonster in wall!", "monster_ogre at '808.0 -1776.0 345.0'", "monster_ogre at '808.0 -2134.0 345.0'", "monster_ogre at '135.0 -860.0 -306.0'"]},
+  "r2m1": {"kills": 105, "secrets": 3, "events": 33, "exited": true, "log": ["statue not targeted", "monster_knight at '958.0 -1768.0 320.0'", "monster_hell_knight at '958.0 -2129.0 320.0'", "monster_hell_knight at '-1244.0 -1105.0 -51.0'", "walkmonster in wall!", "monster_ogre at '808.0 -1776.0 345.0'", "monster_ogre at '808.0 -2134.0 345.0'", "monster_ogre at '135.0 -860.0 -306.0'"]},
   "r2m2": {"kills": 59, "secrets": 2, "events": 35, "exited": true, "log": ["Monster can't find target at '-1240.0 428.0 -200.0'"]},
   "r2m3": {"kills": 84, "secrets": 1, "events": 24, "exited": true, "log": ["walkmonster in wall!", "monster_enforcer at '-156.0 932.0 512.0'"]},
   "r2m4": {"kills": 150, "secrets": 5, "events": 51, "exited": true, "log": []},

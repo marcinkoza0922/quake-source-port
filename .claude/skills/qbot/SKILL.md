@@ -86,7 +86,10 @@ never just to make a regression go away.
 hipnotic `func_spawn` keeps dormant template monsters (`spawnfunction` set)
 that never wake; they are skipped. A spawner fired by `item_hornofconjuring`
 makes a charmed ally and leaves `total_monsters` one higher (hip2m1 62/63 is
-that, not a bot gap). Doors that fire a `target` when touched open are goals
+that, not a bot gap; if the ally spawns blocked it logs `walkmonster in
+wall` and the total stays put, as on hip2m5). Rogue statues (spawnflag 2)
+are solid but `takedamage 0` until their targetname fires: any monster with
+`takedamage 0` counts as dormant. Doors that fire a `target` when touched open are goals
 pressed like buttons. No QC source for a mod? Disassemble the function from
 `vm.progs` (statements + `global_at_ofs` names): that's how func_spawn and the
 horn were worked out.
