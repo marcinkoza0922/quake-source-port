@@ -61,9 +61,10 @@ impl Host {
                 ents.clear();
             }
             if self.toy.held == Some(qserver::addons::Toy::PortalGun) && self.cl.intermission == 0 && self.cl.stats[0] > 0
-                && cv.drawviewmodel
-                && let Some(g) = self.portal_fx.weapon(self.cl.viewentity.saturating_sub(1), self.cl.time, *v,
+                && cv.viewmodel.visible() && self.cl.items & crate::sbar::IT_INVISIBILITY == 0
+                && let Some(mut g) = self.portal_fx.weapon(self.cl.viewentity.saturating_sub(1), self.cl.time, *v,
                     &mut self.level, &self.server.core.fs, &mut self.r) {
+                g.origin = (Vec3::from(g.origin) + cv.viewmodel.offset(v.angles)).to_array();
                 ents.push(g);
             }
             if let Some(g) = gun {

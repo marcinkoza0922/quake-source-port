@@ -205,6 +205,13 @@ procedural projector model, owner-colored projectile effects and synthesized cue
 plus `tools/portal_cues.rs` for exporting WAV previews,
 movement, settings and diagnostic commands.
 
+Gameplay → Viewmodels archives `r_drawviewmodel`: 0 Off, 1 Center (default),
+2 Right, 3 Left. `view::weapon::Alignment` translates every stock/mod/add-on
+weapon eight camera-right units for side placement, independently per split view.
+The portal gun uses negated alias pitch and a camera-relative origin with no yaw
+cant. Its beveled iron/bronze MDL and detailed 128×64 indexed atlas are built by
+`addons::portal_model`/`portal_skin`; see ADDONS.md for materials and ownership.
+
 ### Test bot (`tools/qbot`)
 
 A level-breaking test, not a player simulation (simplified 2026-11-12: the earlier nav-graph traversal bot tried to play levels built to challenge people and was dropped). The bot has god mode, noclip and full knowledge of the edicts, and sets off everything a level scripts; the question is whether the level or the engine breaks along the way. In-process headless `qserver::Server` at 20 Hz (`sys_ticrate 0.05`), `skill 3`, one local client driven by `set_move`, client entity updates skipped. `sv_altnoclip 0` (classic noclip: the up move is the vertical velocity, so flight steers independently of aim) and `sv_maxspeed 1000`. Code: `main.rs` (CLI, jobs, report, baseline), `bot.rs` (setup, main loop, teleport/pin handling), `bot/goals.rs` (goal scan, done tests, choice), `bot/fly.rs` (flight, aiming, firing spots, buttons).

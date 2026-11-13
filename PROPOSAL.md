@@ -26,6 +26,14 @@ owner's synthesized Padwight cues, with independent volume, time stretch,
 speed, pitch, bass, treble, drive, echo and reverb for each cue. Save settings
 with the user's config and support each local split-screen player's feedback.
 
+## Viewmodels
+
+Gameplay offers Center (default), Right, Left and Off for every weapon viewmodel,
+including mod weapons and the portal gun. Save the choice with the user's config
+and apply it to each local split-screen camera. The portal gun keeps a stable
+pose relative to the camera when looking up/down, with original low-poly geometry
+and a worn, palette-indexed metal texture matching vanilla Quake weapons.
+
 ## Save usability
 
 Single-player autosaves rotate independently of manual/quicksaves. Gameplay settings control retention (default five, zero disables) and level-entry (on by default), timer, secret discovery, all enemies killed, and all secrets found triggers. Loading a save does not itself trigger an autosave.

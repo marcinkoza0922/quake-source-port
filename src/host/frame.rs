@@ -33,7 +33,7 @@ impl Host {
             kickpitch: v("v_kickpitch"),
             fov: v("fov").clamp(10.0, 170.0),
             gunkick: v("v_gunkick") != 0.0,
-            drawviewmodel: v("r_drawviewmodel") != 0.0,
+            viewmodel: crate::view::weapon::Alignment::from_cvar(v("r_drawviewmodel")),
             lerp_models: v("r_lerpmodels") != 0.0,
             lerp_move: v("r_lerpmove") != 0.0,
             flash: v("v_flashscale").clamp(0.0, 1.0),
@@ -307,7 +307,7 @@ impl Host {
 
         let (view, gun) = if self.cl.signon == 4 && !self.level.mapname.is_empty() {
             let mut cv = self.view_cvars();
-            cv.drawviewmodel &= self.toy.held.is_none();
+            if self.toy.held.is_some() { cv.viewmodel = crate::view::weapon::Alignment::Hidden; }
             let (mut v, g) = self.view.calc_refdef(&self.cl, &cv, &self.level, ft);
             self.cl.viewent.lerpflags &= !qclient::LERP_RESETANIM;
             if self.classic_hud() && self.cl.intermission == 0 {

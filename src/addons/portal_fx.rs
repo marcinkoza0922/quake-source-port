@@ -59,10 +59,10 @@ impl Presentation {
         let (slot, shot) = self.last[owner.min(255)].unwrap_or((0,-100.0));
         let age = (time-shot).max(0.0) as f32;
         let recoil = (-age*18.0).exp();
-        let (f,r,u) = angle_vectors(view.angles.into());
         let bob = (time as f32 * 2.5).sin()*0.15;
-        Some(RenderEntity { model: model.id, origin: (Vec3::from(view.origin) + f*(23.0-recoil*2.5) + r*9.0 - u*(8.0+bob)).to_array(),
-            angles: [view.angles[0], view.angles[1]+12.0, view.angles[2]], skin: ((owner%4)*2+slot) as u32, viewmodel: true, ..Default::default() })
+        let (origin, angles) = crate::view::weapon::portal_pose(view, bob, recoil);
+        Some(RenderEntity { model: model.id, origin, angles,
+            skin: ((owner%4)*2+slot) as u32, viewmodel: true, ..Default::default() })
     }
     pub fn frame(&mut self, time: f64, view: &View, r: &mut Renderer, snd: Option<&SoundSystem>, geom: &mut Geometry) {
         self.shots.retain(|s| time >= s.time && time-s.time < 0.8);

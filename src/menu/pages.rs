@@ -162,7 +162,7 @@ pub(super) const GAMEPLAY: &[Item] = &[
     toggle("Always Run", "cl_alwaysrun"),
     slider("View Bob", "cl_bob", 0.0, 0.02, 0.002),
     toggle("Gun Kick", "v_gunkick"),
-    toggle("Show Weapon", "r_drawviewmodel"),
+    Item::Choice { label: "Viewmodels", cvar: "r_drawviewmodel", choices: &[("Center", 1.0), ("Right", 2.0), ("Left", 3.0), ("Off", 0.0)] },
     toggle("Level Select", "ui_levelselect"),
     toggle("Autosave", "sv_autosave"),
     Item::Sub { label: "Autosave Settings", page: Page::Autosave },

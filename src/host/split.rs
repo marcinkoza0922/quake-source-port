@@ -78,7 +78,7 @@ impl Host {
                 }
             }
             let mut gcv = cv;
-            gcv.drawviewmodel &= g.toy.held.is_none();
+            if g.toy.held.is_some() { gcv.viewmodel = crate::view::weapon::Alignment::Hidden; }
             let (v, gun) = g.view.calc_refdef(&g.cl, &gcv, &self.level, ft);
             let me = g.cl.viewentity as u32;
             for e in ents.iter_mut().filter(|e| e.key != 0 && e.key == me) {
@@ -103,9 +103,10 @@ impl Host {
                     }
                 }
                 if g.toy.held == Some(qserver::addons::Toy::PortalGun) && g.cl.intermission == 0 && g.cl.stats[0] > 0
-                    && cv.drawviewmodel
-                    && let Some(weapon) = self.portal_fx.weapon(g.cl.viewentity.saturating_sub(1), self.cl.time, v,
+                    && cv.viewmodel.visible() && g.cl.items & crate::sbar::IT_INVISIBILITY == 0
+                    && let Some(mut weapon) = self.portal_fx.weapon(g.cl.viewentity.saturating_sub(1), self.cl.time, v,
                         &mut self.level, &self.server.core.fs, &mut self.r) {
+                    weapon.origin = (Vec3::from(weapon.origin) + cv.viewmodel.offset(v.angles)).to_array();
                     ents.push(RenderEntity { views: bit, ..weapon });
                 }
                 if let Some(gun) = gun {

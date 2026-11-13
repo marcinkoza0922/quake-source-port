@@ -70,13 +70,21 @@ off. Toys are only allowed with no deathmatch and no remote client
 
 
 ### Portal gun presentation
-`src/addons/portal_model.rs` builds an original native MDL: ivory split shell,
-graphite spine, copper induction rings, two blunt emitter forks, exposed core
-and dorsal mode indicator. Eight skins select the nearest Quake palette entry
-for each owner's two portal colors. It is uploaded once per level and drawn
-as a depth-compressed view weapon, with gentle idle movement and firing recoil.
+`src/addons/portal_model.rs` builds an original native MDL: a beveled iron
+receiver, brown armor plates, tarnished copper induction collars, squat emitter
+jaws, recessed core and dorsal mode indicator. `portal_skin.rs` paints a
+128×64 palette-indexed atlas with panel seams, slotted fasteners, scratches,
+oxidation, cooling slots and grip ribs. Faces have projected UVs; only the core
+tile changes between the eight owner/slot skins. Metal excludes fullbright
+palette indices. No game assets are copied. It is uploaded once per level and
+drawn as a depth-compressed view weapon, with idle movement and firing recoil.
 Each split-screen camera gets its own weapon, skin, and visibility mask;
-`r_drawviewmodel`, death and intermission hide it like the normal weapon.
+death, invisibility and intermission hide it like the normal weapon.
+Gameplay → Viewmodels controls all weapons: Center (default), Right, Left, Off
+(`r_drawviewmodel` 1, 2, 3, 0 respectively, archived). Side placement translates
+eight units along each camera's right axis without changing aim or mirroring
+meshes. The portal gun follows the camera basis with negated alias pitch,
+without the former fixed yaw/side offset, so looking up/down keeps its pose.
 
 The authoritative server broadcasts transient reliable comment messages
 `//qsp_portalfx owner slot kind sx sy sz ex ey ez`: rejected shot (0), placed
