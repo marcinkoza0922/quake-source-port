@@ -7,12 +7,14 @@ Gameplay → Directional Damage (`hud_damageindicator`, archived, default 1)
 scales opacity with blood plus armor damage and respects `v_flashscale`.
 Front/right/back/left hits map to top/right/bottom/left edges at impact;
 repeated hits accumulate up to a bounded opacity and fade over time.
+The menu tooltip explains the edge directions and Screen Flashes scaling.
 
 ### Hit and kill feedback
 
 HUD → Hit Markers (`hud_hitmarkers`, default 0) adds six distinct outlined,
 animated confirmations matching the six crosshair shapes, independently of
 crosshair visibility. Hits are white; kills are orange-red and last longer.
+The Cross marker uses four diagonal strokes close to the center, between the + arms.
 Audio → Hit Sounds (`s_hitfeedback`, default 0) enables synthesized feedback;
 Hit Sound and Kill Sound submenus independently edit and preview nine cues,
 volume, time stretch, playback speed, pitch, bass/treble, drive, echo and reverb.

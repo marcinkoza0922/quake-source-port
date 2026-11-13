@@ -89,8 +89,10 @@ fn marker_segments(shape: i32, r: f32) -> Vec<Segment> {
                 lines.push(([sign * r, -r + 2.0], [sign * r, r - 2.0]));
             }
         }
-        // Cross: the familiar four diagonal hit-confirmation ticks.
+        // Cross: diagonal ticks tucked between the + arms. Keep the same
+        // outward drift, but start near the center rather than beyond the arms.
         _ => {
+            let r = r - 3.5;
             for x in [-1.0, 1.0] {
                 for y in [-1.0, 1.0] {
                     lines.push(([x * r, y * r], [x * (r + 3.0), y * (r + 3.0)]));
