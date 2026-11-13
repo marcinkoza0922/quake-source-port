@@ -379,6 +379,7 @@ pub(super) fn register_commands(c: &mut Commands<Host>) {
         h.delayed.push((t, cmd));
     });
     c.add("version", |h, _| h.print("quake-source-port 0.1.0\n"));
+    super::death::register(c);
     c.add("_scansaves", |h, _| h.scan_saves());
     c.add("_mods", |h, _| h.scan_mods());
     c.add("_modmaps", |h, a| h.scan_mod_maps(a.argv(1)));

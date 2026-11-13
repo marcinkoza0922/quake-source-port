@@ -28,6 +28,7 @@ mod demo;
 mod mapswitch;
 mod render;
 mod saves;
+mod death;
 mod console;
 mod input;
 mod frame;
@@ -153,6 +154,7 @@ pub struct Host {
     /// Running `slist`.
     lan_search: Option<crate::net::LanSearch>,
     autosave: crate::autosave::Tracker,
+    death_handled: bool,
     /// FTE scripted particles.
     fte: crate::fte::Fte,
 }
@@ -176,6 +178,7 @@ impl Host {
         let mut h = Host {
             server,
             autosave: Default::default(),
+            death_handled: false,
             fte: crate::fte::Fte::new(),
             cl: ClientState::new(),
             local: None,

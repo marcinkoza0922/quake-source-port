@@ -80,6 +80,7 @@ impl Host {
     }
 
     pub(super) fn new_map(&mut self) {
+        self.death_handled = false;
         if let Some(s) = &self.snd {
             s.event(SoundEvent::StopAll);
             s.event(SoundEvent::ClearStatic);
