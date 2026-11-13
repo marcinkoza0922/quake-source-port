@@ -11,6 +11,13 @@ fn spawn_template(vm: &Vm, o: &Ofs, e: u32) -> bool {
         && o.spawnfunction.is_some_and(|f| vm.ent_i(e, f) != 0)
 }
 
+/// A crucified zombie (spawnflags 1, id1 and hipnotic alike) is scenery:
+/// monster_zombie skips walkmonster_start, so it never takes damage and
+/// is never counted in total_monsters.
+fn crucified(vm: &Vm, o: &Ofs, e: u32, cls: &str) -> bool {
+    cls == "monster_zombie" && vm.ent_f(e, o.spawnflags) as i32 & 1 != 0 && vm.ent_f(e, o.takedamage) == 0.0
+}
+
 impl Bot<'_> {
     /// Add goals for edicts not seen yet: run at the start and every couple
     /// of seconds, since triggers spawn monsters and items as the level runs.
@@ -36,7 +43,7 @@ impl Bot<'_> {
                 // Chthon never gets FL_MONSTER (mgend's can be killed); rogue's
                 // item_time_machine is a monster.
                 c if vm.ent_f(e, o.flags) as i32 & FL_MONSTER != 0 || c.starts_with("monster_") => {
-                    if vm.ent_f(e, o.health) <= 0.0 || spawn_template(vm, o, e) {
+                    if vm.ent_f(e, o.health) <= 0.0 || spawn_template(vm, o, e) || crucified(vm, o, e, c) {
                         continue;
                     }
                     Kind::Monster
@@ -60,6 +67,7 @@ impl Bot<'_> {
                 tries: 0,
                 armed: false,
                 initial_state: o.state.map_or(0.0, |s| vm.ent_f(e, s)),
+                initial_absmin: vm.ent_v(e, o.absmin),
                 touch: vm.ent_i(e, o.touch),
                 again: false,
                 late: kind == Kind::Pickup && self.has_str(e, o.target),
@@ -132,7 +140,11 @@ impl Bot<'_> {
             // and not solid again.
             Kind::Pickup => g.armed && vm.ent_f(e, o.solid) as i32 == SOLID_NOT,
             Kind::Button => o.state.is_some_and(|s| vm.ent_f(e, s) != g.initial_state),
-            Kind::Shoot => vm.ent_f(e, o.takedamage) == 0.0 || vm.ent_f(e, o.health) <= 0.0,
+            // func_door_secret with SECRET_NO_SHOOT (8) stays shootable and
+            // resets health in its th_pain: done once it has moved.
+            Kind::Shoot => {
+                vm.ent_f(e, o.takedamage) == 0.0 || vm.ent_f(e, o.health) <= 0.0 || matches!(g.class.as_str(), "door" | "func_door_secret") && vm.ent_v(e, o.absmin) != g.initial_absmin
+            }
             Kind::Exit => false,
         }
     }

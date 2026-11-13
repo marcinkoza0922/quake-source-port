@@ -104,6 +104,8 @@ struct Goal {
     armed: bool,
     /// Buttons: `state` at spawn; pressed once it changes.
     initial_state: f32,
+    /// Where the brush was when found: a shootable that moved has worked.
+    initial_absmin: [f32; 3],
     /// Exits: the touch function, cleared until the exit becomes the goal.
     touch: i32,
     /// Buttons: pressed before and re-armed to press again (see
@@ -122,6 +124,7 @@ struct Ofs {
     solid: usize,
     takedamage: usize,
     movetype: usize,
+    spawnflags: usize,
     touch: usize,
     waterlevel: usize,
     state: Option<usize>,
@@ -145,6 +148,7 @@ impl Ofs {
             solid: f("solid")?,
             takedamage: f("takedamage")?,
             movetype: f("movetype")?,
+            spawnflags: f("spawnflags")?,
             touch: f("touch")?,
             waterlevel: f("waterlevel")?,
             state: f("state"),
