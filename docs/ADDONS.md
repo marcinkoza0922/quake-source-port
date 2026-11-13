@@ -12,7 +12,7 @@ off. Toys are only allowed with no deathmatch and no remote client
   while `addons_enable` is on (`ADDON_BINDS`, synced on menu key/draw).
 - While a toy is held, `ToySlot::buttons` keeps QC's attack bit at 0 and
   sends usercmd bit 2 (fire), bit 3 (alt) and the toy id in bits 4–7; QC
-  only reads bits 0/1. The QC view model is replaced by the procedural projector (player 1
+  only reads bits 0/1. The QC view model is replaced by the imported projector (player 1
   and each split-screen guest have their own `ToySlot`).
 - Off costs one cvar lookup per frame; nothing else runs.
 - Portal gun (`addons/portal.rs`, `portal_move.rs`): fire/alt-fire edges
@@ -70,14 +70,27 @@ off. Toys are only allowed with no deathmatch and no remote client
 
 
 ### Portal gun presentation
-`src/addons/portal_model.rs` builds an original native MDL: a beveled iron
-receiver, brown armor plates, tarnished copper induction collars, squat emitter
-jaws, recessed core and dorsal mode indicator. `portal_skin.rs` paints a
-128×64 palette-indexed atlas with panel seams, slotted fasteners, scratches,
-oxidation, cooling slots and grip ribs. Faces have projected UVs; only the core
-tile changes between the eight owner/slot skins. Metal excludes fullbright
-palette indices. No game assets are copied. It is uploaded once per level and
-drawn as a depth-compressed view weapon, with idle movement and firing recoil.
+`src/addons/portal_model.rs` loads the owner's supplied Meshy retro portal-gun
+FBX as an embedded native alias model. `assets/portal-gun/` contains compressed
+MDL geometry, a 512×512 RGB atlas and import statistics. The source's 301,018
+triangles are decimated to a 16,000-triangle budget, with triangles collapsed by
+MDL position quantization removed. The source color is baked onto a fresh UV
+layout before palette conversion; smooth lighting normals survive. The muzzle
+points along +X and the full model spans 36 Quake units.
+`portal_skin.rs` remaps the imported texture to the active mod's palette once
+per level. Metal excludes fullbright indices; a source-color/UV mask supplies
+eight owner/slot skins, retaining paired chamber/emblem colors and switching
+muzzle energy with the last fired slot. The native renderer supplies lighting;
+the FBX's PBR normal, metallic and roughness maps are not used.
+The model is uploaded once per level and drawn as a depth-compressed view weapon,
+with idle movement and firing recoil.
+
+Reimport with `blender -b --factory-startup --python-exit-code 1 --python
+tools/import_portal_gun.py -- /path/to/Meshy_export.zip`. This offline Blender
+helper preserves the external source archive and needs no Quake game data.
+The imported mesh and color atlas were supplied by the project owner; the large
+FBX, original PNGs and extracted Blender files are not bundled. Generated game
+assets are embedded, so installed binaries need neither Blender nor Downloads.
 Each split-screen camera gets its own weapon, skin, and visibility mask;
 death, invisibility and intermission hide it like the normal weapon.
 Gameplay → Viewmodels controls all weapons: Center (default), Right, Left, Off
@@ -105,9 +118,9 @@ when far apart. The weapon core follows that owner's last fired slot.
 FM snap and bass impulse (fire), rising resonant chime (placed), falling noisy
 collapse (rejected/dissipated), and filtered air rush (crossing). Both slots have
 distinct pitches. Eight cached cues feed normal positional SFX channels and
-respect master SFX volume and all split-screen listeners. No Portal recordings,
-models, textures or other external assets are included. The add-on's existing
-local-only eligibility remains in force.
+respect master SFX volume and all split-screen listeners. No Portal recordings
+or extracted Valve assets are included. The add-on's existing local-only
+eligibility remains in force.
 
 Audition/export helper: `rustc --edition=2024 tools/portal_cues.rs -o target/portal-cues` then `target/portal-cues target/portal-audio` writes all eight
 48 kHz mono WAVs from the same synthesis code used in-game. Generated previews

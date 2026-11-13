@@ -22,6 +22,7 @@
   Headless runs never write config.cfg.
 
 ## Asset tools
+- Meshy: available via MCP. Consider using it to generate 3D models for the project.
 - Blender: available via MCP. 3D modeling, scenes, rendering.
 - ArtCraft (pure Rust, installed locally). Use only when the project needs
   that asset type:
