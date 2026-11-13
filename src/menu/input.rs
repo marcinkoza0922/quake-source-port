@@ -3,10 +3,18 @@ use super::*;
 impl Menu {
     /// Mouse hover: moves the cursor onto the item under the pointer.
     /// Returns a sound to play when the selection changed.
-    pub fn mouse_move(&mut self, pos: (f32, f32)) -> Option<&'static str> {
+    pub fn mouse_move(&mut self, pos: (f32, f32), cv: &mut Cvars) -> Option<&'static str> {
         self.mouse = Some(pos);
+        if let (Some(i), Screen::OptionsPage(p)) = (self.slider_drag, self.screen) {
+            self.set_slider(self.page_item(p, i), pos.0, cv);
+            return None;
+        }
         if let (Some(g), Screen::OptionsPage(p)) = (self.drag, self.screen) {
             self.drag_to(p, pos.1, g);
+            return None;
+        }
+        if let (Some(g), Screen::Load | Screen::Save) = (self.drag, self.screen) {
+            self.card_drag_to(pos.1, g);
             return None;
         }
         if let Some(d) = self.drop {
@@ -58,6 +66,14 @@ impl Menu {
             self.drop_key(key, d, item, cv, &mut out);
             return out;
         }
+        // the wheel scrolls the card list itself; the pointer then picks the card under it
+        if let (K_MWHEELUP | K_MWHEELDOWN, Screen::Load | Screen::Save) = (key, self.screen) {
+            self.scroll_cards(if key == K_MWHEELUP { -CARD_WHEEL } else { CARD_WHEEL });
+            if let Some(i) = self.mouse.and_then(|pos| self.item_at(pos)) {
+                self.load_cursor = i;
+            }
+            return out;
+        }
         // left click acts on the item under the pointer, never on a stale cursor
         if let (K_MWHEELUP | K_MWHEELDOWN, Screen::OptionsPage(p)) = (key, self.screen) {
             let sc = self.page_scroll(p);
@@ -85,21 +101,27 @@ impl Menu {
                 self.drag = Some(grab);
                 return out;
             }
+            if let Screen::Load | Screen::Save = self.screen
+                && let Some((x, top, h, ty, th)) = self.card_scrollbar()
+                && (x - 4.0..x + 7.0).contains(&pos.0)
+                && (top..top + h).contains(&pos.1)
+            {
+                let grab = if (ty..ty + th).contains(&pos.1) { pos.1 - ty } else { th / 2.0 };
+                self.card_drag_to(pos.1, grab);
+                self.drag = Some(grab);
+                return out;
+            }
             let Some(i) = self.item_at(pos) else { return out };
             if let Some(c) = self.cursor_mut() {
                 *c = i;
             }
             if let Screen::OptionsPage(p) = self.screen
-                && let Item::Slider { cvar, min, max, step, invert, .. } = self.page_item(p, i)
+                && let item @ Item::Slider { .. } = self.page_item(p, i)
                 && pos.0 >= SLIDER_X.0 - 8.0
                 && pos.0 < SLIDER_X.1 + 8.0
             {
-                let mut f = ((pos.0 - SLIDER_X.0) / (SLIDER_X.1 - SLIDER_X.0 - 8.0)).clamp(0.0, 1.0);
-                if invert {
-                    f = 1.0 - f;
-                }
-                let v = min + ((f * (max - min)) / step).round() * step;
-                set_num(cv, cvar, v.clamp(min, max));
+                self.set_slider(item, pos.0, cv);
+                self.slider_drag = Some(i);
                 out.push(Action::Sound("misc/menu3.wav"));
                 return out;
             }
@@ -208,7 +230,7 @@ impl Menu {
                     if self.autosaves && self.screen == Screen::Load {
                         self.autosaves = false;
                         self.load_cursor = 1;
-                        self.save_scroll = 0;
+                        self.save_scroll = 0.0;
                         out.push(Action::Command("_scansaves\n".into()));
                     } else {
                         self.screen = Screen::SinglePlayer;
@@ -230,7 +252,7 @@ impl Menu {
                         if !self.autosaves && i == 1 {
                             self.autosaves = true;
                             self.load_cursor = 0;
-                            self.save_scroll = 0;
+                            self.save_scroll = 0.0;
                             out.push(Action::Command("_scansaves\n".into()));
                         } else if self.saves[i].is_some() {
                             let name = self.save_slot_name(i).unwrap();

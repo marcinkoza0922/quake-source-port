@@ -89,7 +89,7 @@ pub struct Menu {
     sp_cursor: usize,
     load_cursor: usize,
     /// First card shown on the save/load screens.
-    save_scroll: usize,
+    save_scroll: f32,
     opt_cursor: usize,
     /// First visible row of a long options page (follows the cursor).
     opt_scroll: std::cell::Cell<usize>,
@@ -112,6 +112,8 @@ pub struct Menu {
     mouse: Option<(f32, f32)>,
     /// Options scrollbar being dragged: pointer offset from the thumb top.
     drag: Option<f32>,
+    /// Row of the options slider being dragged with the mouse.
+    slider_drag: Option<usize>,
     /// Open dropdown on an options page.
     drop: Option<Drop>,
     /// Page and row an open sub-page was entered from (sub-pages reachable
@@ -150,13 +152,18 @@ const MENU_H: f32 = 360.0;
 const CLASSIC: (f32, f32) = (160.0, 80.0);
 /// Save/load cards: left edge, size, first top, pitch, clip bottom (above
 /// the hint row) and how many fit whole (the next one shows cut off).
-const CARD_X: f32 = 24.0;
-const CARD_W: f32 = 592.0;
+const CARD_X: f32 = 80.0;
+const CARD_W: f32 = 480.0;
 const CARD_H: f32 = 62.0;
 const CARD_Y0: f32 = 40.0;
 const CARD_PITCH: f32 = 66.0;
 const CARD_BOTTOM: f32 = 338.0;
-const CARDS_FULL: usize = 4;
+const CARDS_FULL: usize = 3;
+/// Load screen: the newest save is pinned at the top; the rest scroll below
+/// a divider starting here.
+const CARD_SCROLL_Y0: f32 = CARD_Y0 + CARD_PITCH + 6.0;
+/// Pixels scrolled per wheel notch on the card screens.
+const CARD_WHEEL: f32 = 24.0;
 
 /// Options panel: background box, label column (right-aligned), value column.
 const PANEL_X: f32 = 136.0;
@@ -173,8 +180,8 @@ const ROW0: f32 = 64.0;
 const PAGE_ROW0: f32 = 72.0;
 /// Rows shown at once on an options page; longer pages scroll.
 const PAGE_ROWS: usize = 20;
-/// Slider track in options, menu x units.
-const SLIDER_X: (f32, f32) = (VALUE_X + 8.0, VALUE_X + 88.0);
+/// Slider track in options, menu x units (knob is 8 wide).
+const SLIDER_X: (f32, f32) = (VALUE_X, VALUE_X + 92.0);
 /// Dropdown value box minimum width and visible entries.
 const DROP_W: f32 = 120.0;
 const DROP_ROWS: usize = 10;
@@ -188,7 +195,7 @@ impl Menu {
             main_cursor: 0,
             sp_cursor: 0,
             load_cursor: 0,
-            save_scroll: 0,
+            save_scroll: 0.0,
             opt_cursor: 0,
             opt_scroll: Default::default(),
             page_cursor: 0,
@@ -204,6 +211,7 @@ impl Menu {
             prev: Screen::None,
             mouse: None,
             drag: None,
+            slider_drag: None,
             drop: None,
             sub_return: None,
             mods: ModMenu::default(),
@@ -272,11 +280,12 @@ impl Menu {
         self.screen = s;
         self.drop = None;
         self.drag = None;
+        self.slider_drag = None;
         self.capture = None;
         self.osk = None;
         self.quit_cursor = 0;
         self.death_cursor = 0;
-        if matches!(s, Screen::Load | Screen::Save) { self.load_cursor = 0; self.save_scroll = 0; }
+        if matches!(s, Screen::Load | Screen::Save) { self.load_cursor = 0; self.save_scroll = 0.0; }
     }
 
     fn save_rows(&self) -> usize {
@@ -301,14 +310,7 @@ impl Menu {
             Screen::Death => row(140.0, 24.0, 4, 160.0, 480.0),
             Screen::Main => row(cy + 32.0, 20.0, MAIN_ITEMS, cx + 54.0, cx + 312.0),
             Screen::SinglePlayer => row(cy + 32.0, 20.0, 3, cx + 54.0, cx + 312.0),
-            Screen::Load | Screen::Save => {
-                let row = ((y - CARD_Y0) / CARD_PITCH).floor();
-                let inside = (CARD_X..CARD_X + CARD_W).contains(&x)
-                    && (CARD_Y0..CARD_BOTTOM).contains(&y)
-                    && y - CARD_Y0 - row * CARD_PITCH < CARD_H;
-                let i = self.save_scroll + row as usize;
-                (inside && i < self.save_rows()).then_some(i)
-            },
+            Screen::Load | Screen::Save => self.card_at(x, y),
             Screen::Options => row(ROW0, ROW_H, PAGES.len(), PANEL_X, PANEL_X + PANEL_W),
             Screen::OptionsPage(p) => {
                 row(PAGE_ROW0, ROW_H, self.page_vis(p), PANEL_X, PANEL_X + PANEL_W).map(|r| r + self.page_scroll(p))

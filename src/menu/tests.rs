@@ -65,12 +65,12 @@ mod quit_tests {
         m.open(Screen::Quit);
         assert!(quits(&m.key(b'y' as i32, &mut cv, false)));
         // click "No"
-        m.mouse_move((QUIT_BUTTONS[1] + 4.0, QUIT_BTN_Y + 4.0));
+        m.mouse_move((QUIT_BUTTONS[1] + 4.0, QUIT_BTN_Y + 4.0), &mut Cvars::default());
         assert!(!quits(&m.key(K_MOUSE1, &mut cv, false)));
         assert_eq!(m.screen, Screen::Main);
         // click "Yes"
         m.open(Screen::Quit);
-        m.mouse_move((QUIT_BUTTONS[0] + 4.0, QUIT_BTN_Y + 4.0));
+        m.mouse_move((QUIT_BUTTONS[0] + 4.0, QUIT_BTN_Y + 4.0), &mut Cvars::default());
         assert!(quits(&m.key(K_MOUSE1, &mut cv, false)));
         // keyboard: right then enter = No
         m.mouse = None;
@@ -228,25 +228,68 @@ mod save_menu_tests {
     fn card_mouse_coordinates_follow_scrolling() {
         let mut m = Menu::new();
         m.open(Screen::Load);
-        assert_eq!(m.item_at((40.0, CARD_Y0 + 4.0)), Some(0));
-        assert_eq!(m.item_at((400.0, CARD_Y0 + 3.0 * CARD_PITCH + 4.0)), Some(3));
-        // the cut-off fifth card is still clickable, the gap between cards isn't
-        assert_eq!(m.item_at((400.0, CARD_Y0 + 4.0 * CARD_PITCH + 4.0)), Some(4));
-        assert_eq!(m.item_at((400.0, CARD_Y0 + CARD_H + 1.0)), None);
-        assert_eq!(m.item_at((20.0, CARD_Y0 + 4.0)), None);
-        // moving down past the fourth card scrolls by one
+        let top = CARD_SCROLL_Y0;
+        // the newest save is pinned above the scrolling list
+        assert_eq!(m.item_at((100.0, CARD_Y0 + 4.0)), Some(0));
+        assert_eq!(m.item_at((100.0, top + 4.0)), Some(1));
+        assert_eq!(m.item_at((100.0, top + CARD_PITCH + 4.0)), Some(2));
+        // the gap between cards and the area outside the column aren't cards
+        assert_eq!(m.item_at((100.0, top + CARD_H + 1.0)), None);
+        assert_eq!(m.item_at((20.0, top + 4.0)), None);
+        // wheel scrolls the list in pixels; the pinned card stays
         let mut cv = Cvars::default();
-        for _ in 0..5 {
+        m.mouse_move((100.0, top + 4.0), &mut Cvars::default());
+        m.key(K_MWHEELDOWN, &mut cv, false);
+        assert_eq!(m.save_scroll, CARD_WHEEL);
+        assert_eq!(m.item_at((100.0, CARD_Y0 + 4.0)), Some(0));
+        assert_eq!(m.item_at((100.0, top + 4.0)), Some(1));
+        assert_eq!(m.load_cursor, 1);
+        m.key(K_MWHEELUP, &mut cv, false);
+        m.key(K_MWHEELUP, &mut cv, false);
+        assert_eq!(m.save_scroll, 0.0);
+        // scrolling to the end stops at the last card
+        for _ in 0..100 {
+            m.key(K_MWHEELDOWN, &mut cv, false);
+        }
+        assert_eq!(m.save_scroll, m.card_max_scroll());
+        let last = m.save_rows() - 1;
+        assert!(m.card_y(last) + CARD_H <= CARD_BOTTOM + 0.01);
+        // keyboard navigation brings the cursor card fully into view
+        m.save_scroll = 0.0;
+        m.load_cursor = 0;
+        for _ in 0..6 {
             m.key(K_DOWNARROW, &mut cv, false);
         }
-        assert_eq!((m.load_cursor, m.save_scroll), (5, 2));
-        assert_eq!(m.item_at((40.0, CARD_Y0 + 4.0)), Some(2));
-        m.key(K_UPARROW, &mut cv, false);
-        m.key(K_UPARROW, &mut cv, false);
-        m.key(K_UPARROW, &mut cv, false);
-        assert_eq!((m.load_cursor, m.save_scroll), (2, 2));
-        m.key(K_UPARROW, &mut cv, false);
-        assert_eq!((m.load_cursor, m.save_scroll), (1, 1));
+        let y = m.card_y(m.load_cursor);
+        assert!(y >= top && y + CARD_H <= CARD_BOTTOM + 0.01);
+        // dragging the scrollbar thumb reaches both ends
+        let (x, t, h, _, th) = m.card_scrollbar().unwrap();
+        m.mouse_move((x + 1.0, t + h - 1.0), &mut Cvars::default());
+        m.key(K_MOUSE1, &mut cv, false);
+        m.mouse_move((x, t + h + 50.0), &mut Cvars::default());
+        assert_eq!(m.save_scroll, m.card_max_scroll());
+        m.mouse_move((x, t - 50.0), &mut Cvars::default());
+        assert_eq!(m.save_scroll, 0.0);
+        m.mouse_up();
+        let _ = th;
+    }
+
+    #[test]
+    fn slider_follows_mouse_drag() {
+        let mut m = Menu::new();
+        let mut cv = Cvars::default();
+        let Some(row) = page_items(Page::Mouse).iter().position(|i| matches!(i, Item::Slider { cvar: "sensitivity", .. })) else { return };
+        m.open(Screen::OptionsPage(Page::Mouse));
+        let y = PAGE_ROW0 + row as f32 * ROW_H + 4.0;
+        cv.register("sensitivity", "3", 0);
+        m.mouse_move((SLIDER_X.0 + 4.0, y), &mut cv);
+        m.key(K_MOUSE1, &mut cv, false);
+        assert_eq!(cv.value_of("sensitivity"), 1.0);
+        m.mouse_move((SLIDER_X.1 + 40.0, y + 30.0), &mut cv);
+        assert_eq!(cv.value_of("sensitivity"), 11.0);
+        m.mouse_up();
+        m.mouse_move((SLIDER_X.0, y), &mut cv);
+        assert_eq!(cv.value_of("sensitivity"), 11.0);
     }
 
     #[test]
