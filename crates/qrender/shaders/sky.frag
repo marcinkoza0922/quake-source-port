@@ -30,6 +30,7 @@ vec3 skybox(vec3 d) {
 }
 
 void main() {
+    if (dot(fr.portal_clip.xyz, i_wpos) + fr.portal_clip.w < 0.0) discard;
     vec3 d = i_wpos - fr.eye.xyz;
     vec3 rgb;
     if (fr.sky.y > 0.5) {

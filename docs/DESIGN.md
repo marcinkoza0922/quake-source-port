@@ -62,6 +62,8 @@ Fit-to-purpose, not general. Quake's entity model is a fixed field layout define
 
 ### Renderer (`qrender`)
 
+Teleporter windows (`qrender::portals`, `frame::portals`) match world `*tele*` sheets against unnamed, nonsilent `trigger_teleport` brushes with one explicit `info_teleport_destination`. Changelevel slipgates, ambiguous links, silent/named triggers and unrelated textures stay classic. Up to four front-facing windows per frame use rigid camera transforms, destination PVS and exit-plane fragment clipping, with no recursion. Destination views include available brush/alias entities; remote network entities outside the server PVS may be absent. Full scene-size render targets reuse MSAA/depth scratch before the main scene; dynamic UBO offsets isolate each view. Water shader composites an opaque, black-tinted shimmer and gold sparks, independently of telealpha. Gameplay teleport rules remain QuakeC-owned.
+
 - Vulkan 1.2 baseline + dynamic rendering when available; ash, hand-written allocator (big-block suballocation; few resource types).
 - World: BSP surfaces batched into one big vertex buffer at load; per-frame visible face set from PVS + frustum culled on CPU (multithreaded mark-leaves), drawn via indirect indexed draws grouped by texture+lightmap atlas. GPU lightmap update for lightstyles (compute shader, like ironwail's approach) to avoid CPU uploads.
 - Alias models: GPU vertex lerp from packed frame buffers; instanced by model.

@@ -2,6 +2,10 @@
 #extension GL_EXT_nonuniform_qualifier : require
 
 layout(set = 0, binding = 0, std140) uniform Frame {
+    vec4 portal_clip;
+    vec4 portal_plane[4];
+    vec4 portal_min[4];
+    vec4 portal_max[4];
     mat4 viewproj;
     vec4 eye;       // xyz eye, w time
     vec4 fog;       // rgb colour, w density (already /64)

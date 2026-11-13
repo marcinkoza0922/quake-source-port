@@ -12,6 +12,7 @@ mod pipelines;
 pub mod types;
 pub(crate) mod water;
 mod world;
+mod portals;
 
 pub use types::*;
 
@@ -56,7 +57,7 @@ pub type Result<T> = std::result::Result<T, Error>;
 
 const FRAMES: usize = 2;
 const DYN_SIZE: u64 = 48 << 20;
-const OFS_LMDYN: u64 = 1024;
+const OFS_LMDYN: u64 = 2048;
 const OFS_VIS: u64 = 8192;
 const MAX_VIS: u64 = 1 << 17;
 const OFS_BUMP: u64 = OFS_VIS + MAX_VIS * 4;

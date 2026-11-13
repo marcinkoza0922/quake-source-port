@@ -41,3 +41,11 @@ burns are out of scope (Quake II weapon).
 Optional visual enhancements live under Options → Enhancements, alongside
 Graphics. Water, blood, debris and impact effects have their own settings pages;
 ambient occlusion and motion blur also live in Enhancements.
+
+
+## See-through teleporters
+
+Visible intra-level teleporters show their linked destination with Portal-style
+parallax as the player moves. Preserve the original dark look with a black-tinted
+shimmer and animated sparkles. Slipgates, silent or activated teleport triggers,
+and unrelated uses of teleport textures keep their existing appearance.

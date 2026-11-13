@@ -133,3 +133,18 @@ impl World {
         self.leafs.len()
     }
 }
+
+impl World {
+    pub(crate) fn portal_surfaces(&mut self, eye: [f32; 3]) -> Vec<u32> {
+        self.mark_leaves(self.point_leaf(eye));
+        let mut seen = vec![false; self.surfaces.len()];
+        let mut out = Vec::new();
+        for vl in &self.vis_leaves {
+            let l = &self.leafs[vl.leaf as usize];
+            for &si in &self.marksurfaces[l.first_marksurface as usize..(l.first_marksurface as usize + l.num_marksurfaces as usize)] {
+                if !seen[si as usize] { seen[si as usize] = true; out.push(si); }
+            }
+        }
+        out
+    }
+}

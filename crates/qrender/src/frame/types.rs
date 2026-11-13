@@ -3,6 +3,10 @@ use super::*;
 #[repr(C)]
 #[derive(Clone, Copy)]
 pub(super) struct FrameUbo {
+    pub(super) portal_clip: [f32; 4],
+    pub(super) portal_plane: [[f32; 4]; 4],
+    pub(super) portal_min: [[f32; 4]; 4],
+    pub(super) portal_max: [[f32; 4]; 4],
     pub(super) viewproj: Mat4,
     pub(super) eye: [f32; 4],
     pub(super) fog: [f32; 4],

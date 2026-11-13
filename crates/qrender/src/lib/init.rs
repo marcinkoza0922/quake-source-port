@@ -6,7 +6,7 @@ impl Renderer {
         let dev = gpu.device.clone();
         let sizes = [
             vk::DescriptorPoolSize {
-                ty: vk::DescriptorType::UNIFORM_BUFFER,
+                ty: vk::DescriptorType::UNIFORM_BUFFER_DYNAMIC,
                 descriptor_count: 8,
             },
             vk::DescriptorPoolSize {

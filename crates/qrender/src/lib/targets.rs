@@ -3,6 +3,10 @@ use super::*;
 impl Renderer {
     pub(super) fn destroy_targets(&mut self) {
         if let Some(t) = self.targets.take() {
+            for (img, slot) in t.portals {
+                self.textures[slot as usize] = None;
+                self.gpu.free_image(img);
+            }
             self.textures[t.color_slot as usize] = None;
             self.textures[t.ao_slot as usize] = None;
             self.textures[t.vel_slot as usize] = None;
@@ -137,7 +141,12 @@ impl Renderer {
         };
         let (ao, ao_slot) = fx_target(self, pipelines::AO_FORMAT)?;
         let (vel, vel_slot) = fx_target(self, pipelines::VEL_FORMAT)?;
+        let mut portals = Vec::new();
+        if self.world.as_ref().is_some_and(|w| !w.portals.is_empty()) {
+            for _ in 0..4 { portals.push(fx_target(self, COLOR_FORMAT)?); }
+        }
         self.targets = Some(Targets {
+            portals,
             color,
             color_ms,
             depth,

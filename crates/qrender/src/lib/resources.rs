@@ -22,6 +22,7 @@ pub(super) struct Swapchain {
 }
 
 pub(super) struct Targets {
+    pub(super) portals: Vec<(Image, u32)>,
     /// Single-sampled scene colour (MSAA resolve target), sampled by post.
     pub(super) color: Image,
     /// Multisampled scene colour when MSAA is on.
@@ -62,6 +63,7 @@ pub(super) enum Sampling {
 }
 
 pub(super) struct WorldGpu {
+    pub(super) portals: Vec<crate::portals::Portal>,
     pub(super) cpu: world::World,
     pub(super) vbuf: Buffer,
     pub(super) samples: Buffer,

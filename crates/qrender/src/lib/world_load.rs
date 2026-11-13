@@ -168,6 +168,7 @@ impl Renderer {
         }
         self.buckets = vec![Vec::new(); tex_info.len()];
         self.world = Some(WorldGpu {
+            portals: crate::portals::discover(bsp, &cpu),
             cpu,
             vbuf,
             samples,
