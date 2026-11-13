@@ -21,6 +21,7 @@ impl Host {
             HostEvent::PadFamily(f) => self.pad_family = crate::glyphs::Family::from_platform(f),
             HostEvent::Pad(id, ie) => self.pad_event(id, ie),
             HostEvent::PadRemoved(id) => self.pad_removed(id),
+            HostEvent::Finger { id, phase, x, y } => self.finger_event(id, phase, x, y),
             HostEvent::MousePos { x, y } => {
                 if !self.menu.active() {
                     return;

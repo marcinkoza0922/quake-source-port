@@ -141,6 +141,22 @@ impl Input {
         s.look_delta[0] += pad_look[0] * self.last_aim.scale + self.last_aim.delta[0];
         s.look_delta[1] += pad_look[1] * self.last_aim.scale + self.last_aim.delta[1];
 
+        // touch: stick moves like a gamepad stick, drags turn like a mouse
+        if v(c.touch_enable) != 0.0 {
+            let lay = self.touch_layout(cvars);
+            let mv = self.touch.move_vec(&lay);
+            s.moveright += mv[0].max(0.0);
+            s.moveleft += (-mv[0]).max(0.0);
+            s.back += mv[1].max(0.0);
+            s.forward += (-mv[1]).max(0.0);
+            // a full screen-height drag turns 180 degrees at sensitivity 1
+            let lk = self.touch.take_look();
+            let k = 180.0 * v(c.touch_sensitivity);
+            let inv = if v(c.touch_invert) != 0.0 { -1.0 } else { 1.0 };
+            s.look_delta[0] -= lk[0] * k;
+            s.look_delta[1] += lk[1] * k * inv;
+        }
+
         // mouse
         let mut m = std::mem::take(&mut self.mouse);
         if wheel {

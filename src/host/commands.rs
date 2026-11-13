@@ -128,6 +128,7 @@ pub(super) fn register_commands(c: &mut Commands<Host>) {
             "input" => Some(Page::Input),
             "mouse" | "keyboard" => Some(Page::Mouse),
             "controller" | "gamepad" => Some(Page::Controller),
+            "touch" | "touchscreen" => Some(Page::Touch),
             "autosave" => Some(Page::Autosave),
             "hud" => Some(Page::Hud),
             "hudlayout" | "layout" => Some(Page::HudLayout),

@@ -54,6 +54,7 @@ pub enum Page {
     /// Sub-pages reached from an `Item::Sub` row.
     Mouse,
     Controller,
+    Touch,
     Autosave,
     Assists,
     HudLayout,
