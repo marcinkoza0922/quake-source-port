@@ -27,6 +27,12 @@ pub struct Guest {
     /// Sound events this frame; the host plays those player 1's client
     /// can't have heard.
     pub sounds: Vec<ClientEvent>,
+    /// Center prints this frame, shown by the host in this guest's cell.
+    pub center_prints: Vec<String>,
+    /// This guest's center message (only its centerprint state is used).
+    pub center: crate::console::Console,
+    /// This guest's weapon wheel (opened with its own `+weaponwheel`).
+    pub wheel: crate::wheel::Wheel,
 }
 
 impl Guest {
@@ -48,6 +54,9 @@ impl Guest {
             pad: None,
             hud_fade: Default::default(),
             sounds: Vec::new(),
+            center_prints: Vec::new(),
+            center: crate::console::Console::new(),
+            wheel: Default::default(),
         };
         g.feed(sv);
         Some(g)
@@ -75,6 +84,7 @@ impl Guest {
                 ClientEvent::Disconnect => self.cl = ClientState::new(),
                 ClientEvent::Damage { .. } | ClientEvent::BonusFlash => self.view_events.push(e),
                 ClientEvent::Sound { .. } | ClientEvent::TempSound { .. } => self.sounds.push(e),
+                ClientEvent::CenterPrint(s) => self.center_prints.push(s),
                 _ => {}
             }
         }

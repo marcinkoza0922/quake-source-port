@@ -141,9 +141,15 @@ impl Host {
                             if self.show_scores && cl.gametype == 1 {
                                 crate::sbar::deathmatch_overlay(&mut cc, &mut pf, cl);
                             }
-                            if i == 0 {
-                                self.wheel.draw(&mut cc, &mut pf, &glyphs, &self.cl, pad_ui, wheel_key);
+                            let con = if i == 0 { &self.con } else { &self.guests[live[i - 1]].center };
+                            if con.realtime < con.center_time && !self.con.open {
+                                let mut cp = crate::console::Console::new();
+                                cp.centerprint.clone_from(&con.centerprint);
+                                (cp.text_bg, cp.text_scale, cp.center_pos) = (self.con.text_bg, self.con.text_scale, self.con.center_pos);
+                                cp.draw_center(&mut cc, usize::MAX);
                             }
+                            let (wheel, wcl) = if i == 0 { (&self.wheel, &self.cl) } else { (&self.guests[live[i - 1]].wheel, &self.guests[live[i - 1]].cl) };
+                            wheel.draw(&mut cc, &mut pf, &glyphs, wcl, pad_ui, wheel_key);
                             crate::draw::translate(&mut cc.list, x as f32, y as f32);
                             c.list.append(&mut cc.list);
                         }
@@ -187,7 +193,9 @@ impl Host {
             }
             let conback = pf("gfx/conback.lmp");
             let ingame = view.is_some() && self.cl.intermission == 0;
-            self.con.draw(&mut c, conback, ingame && !self.menu.active(), ingame && !self.menu.active());
+            // Split screen draws center prints in each player's cell.
+            let center = ingame && !self.menu.active() && splits.is_empty();
+            self.con.draw(&mut c, conback, ingame && !self.menu.active(), center);
             if self.server.core.sv.paused && view.is_some() {
                 let p = pf("gfx/pause.lmp");
                 if let Some((_, pw, _)) = p {

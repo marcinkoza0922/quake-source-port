@@ -45,7 +45,7 @@ impl Host {
 
     /// Aim-assist targets from the loopback server's live monsters/players,
     /// positioned at the client's interpolated origins.
-    pub(super) fn aim_targets(&self) -> Vec<AimTarget> {
+    pub(super) fn aim_targets(&self, cl: &qclient::ClientState) -> Vec<AimTarget> {
         let mut out = Vec::new();
         let Some(l) = &self.server.level else { return out };
         let vm = &l.vm;
@@ -61,7 +61,7 @@ impl Host {
         };
         let maxc = self.server.core.maxclients();
         for e in 1..vm.num_edicts() as u32 {
-            if vm.is_free(e) || e as usize == self.cl.viewentity || vm.ent_f(e, hp) <= 0.0 {
+            if vm.is_free(e) || e as usize == cl.viewentity || vm.ent_f(e, hp) <= 0.0 {
                 continue;
             }
             let flags = vm.ent_f(e, fl) as i32;
@@ -72,7 +72,7 @@ impl Host {
             } else {
                 continue;
             };
-            let origin = self.cl.entities.get(e as usize).filter(|c| c.model != 0).map_or(vm.ent_v(e, org), |c| c.origin);
+            let origin = cl.entities.get(e as usize).filter(|c| c.model != 0).map_or(vm.ent_v(e, org), |c| c.origin);
             out.push(AimTarget { origin, mins: vm.ent_v(e, mn), maxs: vm.ent_v(e, mx), velocity: vm.ent_v(e, vel), kind });
         }
         out
@@ -112,7 +112,7 @@ impl Host {
         // input (every frame, for smooth view angles)
         let ft = dt as f32;
         let in_game = self.cl.signon == 4 && self.cl.intermission == 0;
-        let targets = if in_game && self.input.gamepad_connected { self.aim_targets() } else { Vec::new() };
+        let targets = if in_game && self.input.gamepad_connected { self.aim_targets(&self.cl) } else { Vec::new() };
         let mut inp = {
             let eye = self.cl.entities.get(self.cl.viewentity).map_or([0.0; 3], |e| {
                 let mut o = e.origin;
@@ -238,6 +238,7 @@ impl Host {
                 g.feed(&mut self.server);
             }
             self.guest_sounds();
+            self.guest_center_prints();
         }
         self.poll_remote();
         self.poll_qw();

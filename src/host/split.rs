@@ -61,6 +61,10 @@ impl Host {
             e.views = 1;
         }
         let p1_keys: std::collections::HashSet<u32> = ents.iter().map(|e| e.key).filter(|&k| k != 0).collect();
+        // Temp entities (beam segments) carry no key; match them by model and
+        // rounded origin so only those player 1's client lacks are added.
+        let tkey = |t: &qclient::TempEntity| (t.model, t.origin.map(|c| c.round() as i32));
+        let p1_temps: std::collections::HashSet<_> = self.cl.temp_entities.iter().map(tkey).collect();
         let cv = self.view_cvars();
         let draw_ents = self.cv("r_drawentities") != 0.0;
         for (vi, &k) in live.iter().enumerate() {
@@ -87,6 +91,11 @@ impl Host {
                         .filter(|e| e.key != 0 && !p1_keys.contains(&e.key))
                         .map(|e| RenderEntity { views: bit, ..e }),
                 );
+                for t in g.cl.temp_entities.iter().filter(|t| !p1_temps.contains(&tkey(t))) {
+                    if let Some(m) = self.level.named(&self.server.core.fs, &mut self.r, t.model) {
+                        ents.push(RenderEntity { model: m.id, origin: t.origin, angles: t.angles, views: bit, ..Default::default() });
+                    }
+                }
                 if let Some(gun) = gun {
                     ents.push(RenderEntity { views: bit, ..gun });
                 }

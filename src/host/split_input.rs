@@ -129,17 +129,52 @@ impl Host {
         }
     }
 
+    /// Translated text, hold time and wrap columns for a center print.
+    pub(super) fn center_args(&self, s: &str) -> (String, f64, usize) {
+        let t = self.cv("scr_centertime") as f64;
+        let s = self.server.core.loc.translate(s);
+        let cols = if self.cv("scr_usekfont") != 0.0 {
+            let (w, h) = self.r.size();
+            crate::console::center_wrap_cols(Canvas::new(w, h).vw())
+        } else {
+            0
+        };
+        (s, t, cols)
+    }
+
+    /// Guests' center prints go to their own message, drawn in their cell.
+    pub(super) fn guest_center_prints(&mut self) {
+        for k in 0..self.guests.len() {
+            self.guests[k].center.realtime = self.realtime;
+            for s in std::mem::take(&mut self.guests[k].center_prints) {
+                let (s, t, cols) = self.center_args(&s);
+                self.guests[k].center.center_print(&s, t, cols);
+            }
+        }
+    }
+
     /// Each frame: turn every guest's input into its next move.
     pub(super) fn guest_moves(&mut self, ft: f32) {
         let in_game = self.key_dest() == KeyDest::Game;
         let sp = self.move_speeds();
         let run = self.cv("cl_alwaysrun") != 0.0;
+        let demo = self.demo.is_some();
+        let allowed = aim_assist_allowed(self.cv("deathmatch") != 0.0, self.cv("sv_aimassist") != 0.0);
+        let cm = self.server.level.as_ref().map(|l| l.world.worldmodel.clone());
+        let vis = cm.as_deref().map(WorldVis);
+        let targets: Vec<Vec<AimTarget>> = self
+            .guests
+            .iter()
+            .map(|g| if g.cl.signon == 4 && g.cl.intermission == 0 { self.aim_targets(&g.cl) } else { Vec::new() })
+            .collect();
         let cvars = &self.server.core.cvars;
-        for g in &mut self.guests {
+        for (g, targets) in self.guests.iter_mut().zip(&targets) {
             if g.cl.signon != 4 {
                 continue;
             }
-            let mut inp = g.input.frame(cvars, g.cl.viewangles, ft, None);
+            let eye = g.cl.entities.get(g.cl.viewentity).map_or([0.0; 3], |e| [e.origin[0], e.origin[1], e.origin[2] + g.cl.viewheight]);
+            let ctx = vis.as_ref().map(|v| AimContext { eye, player_velocity: g.cl.velocity, targets, vis: v, allowed });
+            let mut inp = g.input.frame(cvars, g.cl.viewangles, ft, ctx.as_ref());
             if !in_game {
                 inp = InputState::default();
             }
@@ -147,7 +182,12 @@ impl Host {
                 inp.speed = !inp.speed;
             }
             let buttons = g.cmd.buttons | inp.attack as u8 | (inp.jump as u8) << 1;
-            let impulse = if inp.impulse != 0 { inp.impulse } else { g.cmd.impulse };
+            let mut impulse = if inp.impulse != 0 { inp.impulse } else { g.cmd.impulse };
+            let alive = g.cl.stats[qnet::protocol::STAT_HEALTH] > 0;
+            let allowed = in_game && alive && g.cl.intermission == 0 && !demo;
+            if let Some(imp) = g.wheel.update(g.input.wheel_held(), allowed, g.input.wheel_aim, &g.cl) {
+                impulse = imp;
+            }
             g.cmd = g.cl.base_move(&InputState { attack: false, jump: false, impulse: 0, ..inp }, &sp, ft);
             g.cmd.buttons = buttons;
             g.cmd.impulse = impulse;

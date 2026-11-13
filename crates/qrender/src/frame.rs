@@ -175,7 +175,7 @@ impl Renderer {
             }
             setup_view(&v, scene_w, scene_h)
         });
-        let portal_draws = if fr.settings.teleport_windows && !multi {
+        let portal_draws = if fr.settings.teleport_windows {
             self.prepare_portals(view.as_ref(), &mut dynw, time, alphas, &mut lm_vis)
         } else {
             Vec::new()
@@ -1041,7 +1041,7 @@ impl Renderer {
             let depth_layout = |old: vk::ImageLayout, new: vk::ImageLayout| {
                 gpu::barrier(&dev, cmd, t.depth.image, drng, old, new);
             };
-            self.draw_portals(cmd, portal_draws, world_draws, alias_draws, fi, scene_h);
+            self.draw_portals(cmd, portal_draws, world_draws, alias_draws, fi, [scene_w, scene_h]);
             if self.isolated_portal.is_some() && !multi {
                 // Destination draws above retain their scenery and entities. Only
                 // the source sheet survives in the main diagnostic view below.

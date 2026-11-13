@@ -382,14 +382,7 @@ impl Host {
                     self.con.print(&s)
                 }
                 ClientEvent::CenterPrint(s) => {
-                    let t = self.cv("scr_centertime") as f64;
-                    let s = self.server.core.loc.translate(&s);
-                    let cols = if self.cv("scr_usekfont") != 0.0 {
-                        let (w, h) = self.r.size();
-                        crate::console::center_wrap_cols(Canvas::new(w, h).vw())
-                    } else {
-                        0
-                    };
+                    let (s, t, cols) = self.center_args(&s);
                     self.con.center_print(&s, t, cols);
                 }
                 ClientEvent::StuffText(s) => self.cbuf.add_text(&s),
