@@ -470,7 +470,7 @@ meshes (death sequences, gibs, heads); shootable buttons/triggers cannot bleed.
 Confirmed live-enemy blood can use the nearest skin within 32 units when QC
 box damage misses animated triangles; cover traces still block this fallback. Shots crossing dead
 MDL triangles also bleed even when QC gives the corpse no damage handler.
-The debris shooter's inferred firing line supplies spray direction.
+The debris shooter's inferred firing line supplies spray direction. Local players' own bodies (`portal_only`) never bleed or take wounds.
 Wounds appear at once; surface marks do not. Each spray ray launches a
 droplet (`droplets.rs`, 220–480 u/s plus a slow downward gout) that falls
 under 800 u/s² gravity, drawn as a camera-facing streak along its velocity.

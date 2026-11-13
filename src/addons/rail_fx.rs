@@ -114,8 +114,9 @@ impl Presentation {
         let key = "@railgun";
         if !lv.by_name.contains_key(key) {
             let palette = fs.open("gfx/palette.lmp").unwrap_or_default();
+            let (mdl, glow) = super::rail_model::model(&palette);
             let model = r
-                .load_alias(&super::rail_model::model(&palette))
+                .load_alias_glow(&mdl, &[glow])
                 .ok()
                 .map(|id| crate::assets::Model { id, kind: crate::assets::Kind::Alias, flags: 0 });
             lv.by_name.insert(key.into(), model);
@@ -124,11 +125,8 @@ impl Presentation {
         let age = (time - self.last[owner.min(255)]).max(0.0) as f32;
         let recoil = (-age * 10.0).exp() * 2.0;
         let bob = (time as f32 * 2.0).sin() * 0.15;
-        let (origin, mut angles) = crate::view::weapon::portal_pose(view, bob, recoil);
-        // a little right and turned in so the side and its glow strip show
-        let (_, right, _) = qcore::math::angle_vectors(view.angles.into());
-        let origin = (qcore::math::Vec3::from(origin) + right * 6.0).to_array();
-        angles[1] += 6.0;
+        let (origin, angles) = crate::view::weapon::portal_pose(view, bob, recoil);
+        // centred; the Right/Left view-model setting adds the side offset
         Some(RenderEntity { model: model.id, origin, angles, viewmodel: true, ..Default::default() })
     }
 

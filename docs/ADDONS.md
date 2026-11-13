@@ -164,12 +164,17 @@ kills, gibs and mod rules apply. Refire timers live on `Level::rails`
   holder's entity channel 6 while held; dry click; impact hiss.
 - Model: `assets/railgun/` (Meshy meshy-t2 1,365 tris, see its README),
   converted with the command in its README (`--glow`: pixels with one
-  dominant channel are drawn fullbright). At load the cross-section is
-  scaled ×1.9 (`rail_model::THICKEN`) and non-glow texels brightened ×1.5 so
-  the slim rod reads; drawn with `portal_pose` + recoil, 6 u right and
-  turned in 6°.
+  dominant channel form the glow mask). The palette has no green
+  fullbrights, so the masked texels go to `Renderer::load_alias_glow` as a
+  true-colour RGBA glow layer. The bake kept only ~900 green texels, so at
+  load the mesh's coil loops (small triangles with x 2.5–22.5, z > 0.8) are
+  remapped onto a solid green texel and a strip is added on each side. The
+  cross-section is then scaled ×1.9 (`rail_model::THICKEN`) and non-glow
+  texels brightened ×1.5; drawn centred with `portal_pose` + recoil.
 - Menu: Add-ons → Railgun toggle (`addon_railgun`) and Railgun Settings
   (Damage slider, Trail Colour); `menu railgun` opens it.
+- Split-screen: `splittoy <2..6> <0..4>` (debug) hands a guest a toy by
+  `Toy::ALL` index, for headless screenshots.
 - Tests: `crates/qserver/tests/railgun.rs` (e1m1: ammo, refire, dry click).
 ### Hookshot (`qserver::addons::hookshot`, `hook_surface`; `src/addons/hook_fx.rs`)
 Zelda homage. Fire sends a hook head out at 1600 u/s (trace `Normal`, so
@@ -194,7 +199,8 @@ point follows the entity's origin.
 - Sync: `//qsp_hook owner state x y z` every frame the hook is out
   (0 idle, 1 out, 2 latched, 3 back); `qclient::HookView`, `ClientEvent::Hook`
   on state changes. Hooks are transient: saves keep only `toy hookshot`.
-- Presentation: chain links and a barbed head as FTE quads from the view
+- Presentation: launcher held centred (side placement comes from
+  `r_drawviewmodel`); chain links and a barbed head as FTE quads from the view
   model's muzzle (other players: their origin); cues synthesised in
   `qsound::hookshot` (launch clank + rattle, latch thunk, retract rattle,
   miss clink). Menu: Add-ons → Hookshot Settings (`Page::Hookshot`,
@@ -207,8 +213,11 @@ point follows the entity's origin.
   overbright, no mask); `hook_model.rs` palette-quantises it.
 - Tests: `crates/qserver/tests/hookshot.rs` (e1m1, game data).
 ### Stickybomb launcher (`addon_sticky`, `addons/sticky.rs`)
-TF2 homage. Fire (held) lobs a bomb every 0.6 s on the grenade arc
-(forward 600 + up 200, `sv_gravity`), costing one rocket (the grenade
+TF2 homage. Holding fire charges, releasing launches a bomb on the grenade
+arc (forward 600 + up 200, `sv_gravity`); the forward speed grows to 1400
+over `CHARGE` (2 s), when a still-held shot goes off by itself. 0.6 s
+refire; putting the toy away, dying or running dry drops the charge. Each
+bomb costs one rocket (the grenade
 launcher's pool; `currentammo` follows when the QC weapon is the GL/RL).
 Bombs are engine-side records, not edicts, so they never touch the edict
 limit; `MAX_BOMBS` (64, all players) caps them and the shooter's oldest
@@ -236,8 +245,8 @@ A player leaving detonates theirs; the toy switched off removes all.
   DIR_OR_ZIP --out assets/stickybomb --back 12 --gain 0.6` (no mask), skin
   quantized to the active palette's non-fullbright colours. The imported
   mesh's muzzle is at −X, so `sticky_draw::weapon` turns it 180° (taking the
-  view pitch un-inverted and the opposite roll), holds it right of centre
-  and tips the muzzle in and up so the barrel shows past the drum.
+  view pitch un-inverted and the opposite roll), scales it ×1.35, holds it
+  centred and low (`PULL`/`DROP`) and tips the muzzle up.
 ### Boomerang (`addons/boomerang.rs`, `src/addons/boomerang_fx.rs`)
 Zelda-style homing boomerang (`addon_boomerang`, default 1). Holding fire
 marks monsters: each server frame the monster nearest along the aim (centre

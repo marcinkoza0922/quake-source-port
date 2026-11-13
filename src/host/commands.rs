@@ -279,6 +279,17 @@ pub(super) fn register_commands(c: &mut Commands<Host>) {
         h.server.client_command(slot, &rest);
         h.drain_server_log();
     });
+    // Debug/headless: hand split-screen player 2..6 a toy (index into
+    // `Toy::ALL`; anything else puts it away).
+    c.add("splittoy", |h, a| {
+        let n = a.argv(1).parse::<usize>().unwrap_or(0);
+        let toy = a.argv(2).parse::<usize>().ok().and_then(|k| qserver::addons::Toy::ALL.get(k).copied());
+        let allowed = h.allowed_toys();
+        match n.checked_sub(2).and_then(|k| h.guests.get_mut(k)) {
+            Some(g) => g.toy.held = toy.filter(|t| allowed.contains(t)),
+            None => h.print("splittoy <player 2..6> <toy 0..4>\n"),
+        }
+    });
     // Host_Name_f / Host_Color_f: set the archived cvar, then tell the server.
     c.add("name", |h, a| {
         if a.argc() < 2 {

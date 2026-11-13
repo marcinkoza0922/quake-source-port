@@ -49,9 +49,12 @@ fn bombs_stick_survive_a_save_and_alt_fire_detonates_them() {
     sv.command("setpos 480 200 24");
     sv.level.as_mut().unwrap().vm.set_ent_f(1, sv.core.sv.fields.ammo_rockets, 10.0);
     run(&mut sv, c, 2, toy(0));
-    // hold fire for one refire period plus a bit: two bombs
-    run(&mut sv, c, 50, toy(BUTTON_TOY_FIRE));
-    run(&mut sv, c, 150, toy(0));
+    // two quick taps a refire period apart: two bombs
+    for _ in 0..2 {
+        run(&mut sv, c, 3, toy(BUTTON_TOY_FIRE));
+        run(&mut sv, c, 50, toy(0));
+    }
+    run(&mut sv, c, 100, toy(0));
     let bombs = sv.level.as_ref().unwrap().stickies.bombs.clone();
     assert_eq!(bombs.len(), 2, "{bombs:?}");
     assert!(bombs.iter().all(|b| b.stuck.is_some()), "{bombs:?}");
@@ -67,4 +70,25 @@ fn bombs_stick_survive_a_save_and_alt_fire_detonates_them() {
 
     run(&mut sv, c, 2, toy(BUTTON_TOY_ALT));
     assert!(sv.level.as_ref().unwrap().stickies.bombs.is_empty());
+}
+
+#[test]
+fn holding_fire_charges_a_faster_launch() {
+    let Some((mut sv, c)) = start() else { return };
+    run(&mut sv, c, 30, ClientMove::default());
+    sv.level.as_mut().unwrap().vm.set_ent_f(1, sv.core.sv.fields.ammo_rockets, 10.0);
+    run(&mut sv, c, 2, toy(0));
+    let speed = |sv: &Server| sv.level.as_ref().unwrap().stickies.bombs.last().map(|b| b.vel.length());
+    // nothing leaves while fire is held
+    run(&mut sv, c, 36, toy(BUTTON_TOY_FIRE));
+    assert!(sv.level.as_ref().unwrap().stickies.bombs.is_empty());
+    run(&mut sv, c, 1, toy(0));
+    let half = speed(&sv).expect("released shot");
+    // held past the full charge it fires by itself at the top speed
+    run(&mut sv, c, 60, toy(0));
+    let n = sv.level.as_ref().unwrap().stickies.bombs.len();
+    run(&mut sv, c, (qserver::addons::sticky::CHARGE * 72.0) as usize + 2, toy(BUTTON_TOY_FIRE));
+    assert_eq!(sv.level.as_ref().unwrap().stickies.bombs.len(), n + 1);
+    let full = speed(&sv).unwrap();
+    assert!(half > 700.0 && full > half + 300.0, "{half} {full}");
 }

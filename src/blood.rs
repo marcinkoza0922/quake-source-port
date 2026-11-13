@@ -265,7 +265,9 @@ impl Blood {
         let poses: HashMap<u32, (&RenderEntity, Vec<Vec3>)> = ents
             .iter()
             .filter_map(|e| {
-                if e.key == 0 || e.viewmodel {
+                // a local player's own body (portal views only) wraps the
+                // camera: wounds on it would hang in front of the face
+                if e.key == 0 || e.viewmodel || e.portal_only {
                     return None;
                 }
                 let m = self.models.get(&e.model)?;

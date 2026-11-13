@@ -22,6 +22,12 @@ use crate::server::{Core, exec};
 pub const MAX_BOMBS: usize = 64;
 /// Seconds between shots while fire is held (the grenade launcher's rate).
 const REFIRE: f64 = 0.6;
+/// Holding fire charges the launch (TF2-style): released at once the bomb
+/// leaves at `SPEED_MIN`, after `CHARGE` seconds at `SPEED_MAX`, where a
+/// still-held shot goes off by itself.
+pub const CHARGE: f64 = 2.0;
+const SPEED_MIN: f32 = 600.0;
+const SPEED_MAX: f32 = 1400.0;
 /// Explosion damage (a rocket's 120).
 const DAMAGE: f32 = 120.0;
 const SOLID_BSP: f32 = 4.0;
@@ -49,6 +55,8 @@ pub struct Stickies {
     next_id: u32,
     prev_buttons: Vec<u8>,
     next_fire: Vec<f64>,
+    /// When each player started charging (fire held), if they are.
+    charge: Vec<Option<f64>>,
     synced: Vec<bool>,
     outbox: Vec<String>,
 }
@@ -58,6 +66,7 @@ impl Stickies {
         if self.prev_buttons.len() < n {
             self.prev_buttons.resize(n, 0);
             self.next_fire.resize(n, 0.0);
+            self.charge.resize(n, None);
             self.synced.resize(n, false);
         }
     }
@@ -155,6 +164,35 @@ fn write_stuff(cl: &mut Client, s: &str) {
     cl.message.string(s.as_bytes());
 }
 
+/// Launch speed after charging for `t` seconds.
+pub fn charge_speed(t: f64) -> f32 {
+    let k = (t / CHARGE).clamp(0.0, 1.0) as f32;
+    SPEED_MIN + (SPEED_MAX - SPEED_MIN) * k
+}
+
+/// Fires one bomb for player `i` at `speed`, spending a rocket.
+fn launch(st: &mut Stickies, vm: &mut Vm, c: &mut Core, w: &mut World, i: usize, speed: f32) {
+    let e = i as Ent + 1;
+    let f = c.sv.fields.clone();
+    let rockets = vm.ent_f(e, f.ammo_rockets) - 1.0;
+    vm.set_ent_f(e, f.ammo_rockets, rockets);
+    let wpn = vm.ent_f(e, f.weapon);
+    if wpn == IT_GRENADE_LAUNCHER || wpn == IT_ROCKET_LAUNCHER {
+        vm.set_ent_f(e, f.currentammo, rockets);
+    }
+    if st.bombs.len() >= MAX_BOMBS {
+        // the shooter's oldest goes off (anyone's when they own none)
+        let k = st.bombs.iter().position(|b| b.owner == i).unwrap_or(0);
+        let b = st.remove(k);
+        explode(vm, c, w, b);
+    }
+    let ents = Ents { vm: &mut *vm, c: &mut *c };
+    let (fwd, _, up) = angle_vectors(ents.v(e, V::VAngle));
+    let vel = fwd * speed + up * 200.0;
+    st.add(i, ents.v(e, V::Origin), vel, None);
+    sound(vm, c, e, 1, "weapons/grenade.wav");
+}
+
 /// One server frame: fire / detonate from the buttons, then move bombs.
 pub(crate) fn frame(st: &mut Stickies, vm: &mut Vm, c: &mut Core, w: &mut World) {
     let n = c.clients.len();
@@ -169,30 +207,23 @@ pub(crate) fn frame(st: &mut Stickies, vm: &mut Vm, c: &mut Core, w: &mut World)
         if new & super::BUTTON_TOY_ALT != 0 {
             detonate.push(i);
         }
-        if b & super::BUTTON_TOY_FIRE != 0 && now >= st.next_fire[i] {
-            let e = i as Ent + 1;
-            let f = c.sv.fields.clone();
-            if vm.ent_f(e, f.health) <= 0.0 || vm.ent_f(e, f.ammo_rockets) < 1.0 {
-                continue;
+        let held = cl.spawned && super::Toy::from_buttons(cl.cmd.buttons) == Some(super::Toy::Sticky);
+        let fire = b & super::BUTTON_TOY_FIRE != 0;
+        let e = i as Ent + 1;
+        let f = c.sv.fields.clone();
+        let can = vm.ent_f(e, f.health) > 0.0 && vm.ent_f(e, f.ammo_rockets) >= 1.0;
+        if !held || !can {
+            // toy put away, dead or out of rockets: the charge is dropped
+            st.charge[i] = None;
+        } else if let Some(start) = st.charge[i] {
+            let t = now - start;
+            if !fire || t >= CHARGE {
+                st.charge[i] = None;
+                st.next_fire[i] = now + REFIRE;
+                launch(st, vm, c, w, i, charge_speed(t));
             }
-            st.next_fire[i] = now + REFIRE;
-            let rockets = vm.ent_f(e, f.ammo_rockets) - 1.0;
-            vm.set_ent_f(e, f.ammo_rockets, rockets);
-            let wpn = vm.ent_f(e, f.weapon);
-            if wpn == IT_GRENADE_LAUNCHER || wpn == IT_ROCKET_LAUNCHER {
-                vm.set_ent_f(e, f.currentammo, rockets);
-            }
-            if st.bombs.len() >= MAX_BOMBS {
-                // the shooter's oldest goes off (anyone's when they own none)
-                let k = st.bombs.iter().position(|b| b.owner == i).unwrap_or(0);
-                let b = st.remove(k);
-                explode(vm, c, w, b);
-            }
-            let ents = Ents { vm: &mut *vm, c: &mut *c };
-            let (fwd, right, up) = angle_vectors(ents.v(e, V::VAngle));
-            let vel = fwd * 600.0 + up * 200.0 + right * 0.0;
-            st.add(i, ents.v(e, V::Origin), vel, None);
-            sound(vm, c, e, 1, "weapons/grenade.wav");
+        } else if fire && now >= st.next_fire[i] {
+            st.charge[i] = Some(now);
         }
         if !c.clients[i].active {
             detonate.push(i);
