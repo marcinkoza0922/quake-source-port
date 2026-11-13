@@ -103,6 +103,13 @@ impl Menu {
             _ => None,
         }
     }
+    fn browser_row_y(&self, row: usize) -> f32 {
+        if self.selected_addon().slot.is_some() {
+            if row == 0 { 238.0 } else { 270.0 + (row - 1) as f32 * 18.0 }
+        } else {
+            250.0 + row as f32 * 18.0
+        }
+    }
     fn browser_hit(&self, (x, y): (f32, f32)) -> Option<(usize, usize)> {
         if (20.0..200.0).contains(&x) && (58.0..202.0).contains(&y) {
             return Some((((y - 58.0) / 24.0) as usize, 0));
@@ -111,8 +118,11 @@ impl Menu {
             if (174.0..232.0).contains(&y) {
                 return Some((self.addon_ui.selected, 1));
             }
-            if (250.0..250.0 + (self.browser_rows() - 1) as f32 * 18.0).contains(&y) {
-                return Some((self.addon_ui.selected, 2 + ((y - 250.0) / 18.0) as usize));
+            for row in 0..self.browser_rows() - 1 {
+                let top = self.browser_row_y(row);
+                if (top..top + 16.0).contains(&y) {
+                    return Some((self.addon_ui.selected, row + 2));
+                }
             }
         }
         None
@@ -269,9 +279,10 @@ impl Menu {
             c.fill(614.0, 180.0 + start as f32 / (lines.len() - 4) as f32 * (46.0 - h), 2.0, h, GOLD_FG);
         }
         c.round_box(216.0, 236.0, 404.0, 86.0, 2.0, [0.0, 0.0, 0.0, 0.8], Some(BORDER));
-        c.text(220.0, 238.0, "Input Remapping", 8.0, MUTED);
-        c.text(425.0, 238.0, "Keyboard", 8.0, MUTED);
-        c.text(525.0, 238.0, "Controller", 8.0, MUTED);
+        let header_y = if a.slot.is_some() { 258.0 } else { 238.0 };
+        c.text(220.0, header_y, "Input Remapping", 8.0, MUTED);
+        c.text(425.0, header_y, "Keyboard", 8.0, MUTED);
+        c.text(525.0, header_y, "Controller", 8.0, MUTED);
         let mut rows = Vec::new();
         if let Some(slot) = a.slot {
             rows.push(("Weapon Slot", None, Some(slot)));
@@ -284,11 +295,15 @@ impl Menu {
         }
         rows.push(("Configure Parameters >", None, None));
         for (i, (label, cmd, slot)) in rows.iter().enumerate() {
-            let y = 250.0 + i as f32 * 18.0;
+            let y = self.browser_row_y(i);
             if self.addon_ui.focus == i + 2 {
                 c.fill(216.0, y, 404.0, 16.0, HILITE);
             }
-            c.text(224.0, y + 3.0, label, TXT, FG);
+            let submenu = cmd.is_none() && slot.is_none();
+            if submenu {
+                c.fill(216.0, y, 404.0, 16.0, [0.85, 0.60, 0.25, 0.10]);
+            }
+            c.text(224.0, y + 3.0, label, TXT, if submenu { GOLD_FG } else { FG });
             if let Some(slot) = slot {
                 let v = cv.value_of(slot).round().clamp(1.0, 10.0) as i32;
                 c.text(425.0, y + 3.0, &format!("< {} >", v % 10), TXT, GOLD_FG);
