@@ -12,7 +12,7 @@ mod pipelines;
 pub mod types;
 pub(crate) mod water;
 mod world;
-mod portals;
+pub mod portals;
 
 pub use types::*;
 

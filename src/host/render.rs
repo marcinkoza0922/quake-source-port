@@ -178,6 +178,7 @@ impl Host {
             lavaalpha: self.level.liquid_alpha[1].or(Some(v("r_lavaalpha"))).filter(|&a| a > 0.0).map(|a| a.min(1.0)),
             slimealpha: self.level.liquid_alpha[2].or(Some(v("r_slimealpha"))).filter(|&a| a > 0.0).map(|a| a.min(1.0)),
             telealpha: self.level.liquid_alpha[3].or(Some(v("r_telealpha"))).filter(|&a| a > 0.0).map(|a| a.min(1.0)),
+            teleport_windows: v("r_teleportwindows") != 0.0,
             skyfog: v("r_skyfog"),
             dynamic: v("r_dynamic") != 0.0,
             vsync: v("vid_vsync") != 0.0,

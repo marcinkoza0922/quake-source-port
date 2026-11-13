@@ -147,7 +147,11 @@ impl Renderer {
         });
         let view = fr.view.map(|v| setup_view(&v, sw, scene_h));
         let fog = fr.fog;
-        let mut portal_draws = self.prepare_portals(view.as_ref(), &mut dynw, time, alphas, &mut lm_vis);
+        let mut portal_draws = if fr.settings.teleport_windows {
+            self.prepare_portals(view.as_ref(), &mut dynw, time, alphas, &mut lm_vis)
+        } else {
+            Vec::new()
+        };
 
         if let Some(vs) = &view {
             if let Some(wg) = self.world.as_mut()

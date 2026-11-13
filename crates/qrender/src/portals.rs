@@ -2,7 +2,7 @@
 use crate::{Bsp, TextureKind, world};
 
 #[derive(Clone, Debug)]
-pub(crate) struct Portal {
+pub struct Portal {
     pub mins: [f32; 3],
     pub maxs: [f32; 3],
     pub normal: [f32; 3],
@@ -243,4 +243,9 @@ mod tests {
         assert!(world::dot([clip[0], clip[1], clip[2]], mapped) + clip[3] < 0.0);
         assert_eq!(p.to_destination(p.center), p.destination);
     }
+}
+
+/// Enumerate the exact teleporter windows used by the renderer, without a GPU.
+pub fn inspect(bsp: &Bsp) -> Vec<Portal> {
+    discover(bsp, &world::World::build(bsp, None))
 }
