@@ -97,6 +97,8 @@ pub(super) const CONTROLS: &[Item] = &[
 ];
 
 pub(super) const PLAYERS: &[(&str, f32)] = &[("2", 2.0), ("3", 3.0), ("4", 4.0), ("6", 6.0), ("8", 8.0), ("12", 12.0), ("16", 16.0)];
+pub(super) const LOCAL_PLAYERS: &[(&str, f32)] =
+    &[("1", 1.0), ("2 split-screen", 2.0), ("3 split-screen", 3.0), ("4 split-screen", 4.0), ("5 split-screen", 5.0), ("6 split-screen", 6.0)];
 pub(super) const GAMETYPE: &[(&str, f32)] = &[("deathmatch", 0.0), ("cooperative", 1.0)];
 pub(super) const TEAMPLAY: &[(&str, f32)] = &[("off", 0.0), ("no team damage", 1.0), ("team damage", 2.0)];
 pub(super) const SKILL: &[(&str, f32)] = &[("easy", 0.0), ("normal", 1.0), ("hard", 2.0), ("nightmare", 3.0)];
@@ -107,6 +109,7 @@ pub(super) const MINUTES: &[(&str, f32)] =
 
 pub(super) const HOST: &[Item] = &[
     Item::Choice { label: "Max Players", cvar: "_mp_maxplayers", choices: PLAYERS },
+    Item::Choice { label: "Local Players", cvar: "_mp_localplayers", choices: LOCAL_PLAYERS },
     Item::Choice { label: "Game Type", cvar: "_mp_coop", choices: GAMETYPE },
     Item::Choice { label: "Teamplay", cvar: "_mp_teamplay", choices: TEAMPLAY },
     Item::Choice { label: "Skill", cvar: "_mp_skill", choices: SKILL },

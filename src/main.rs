@@ -26,6 +26,7 @@ mod png;
 mod qw;
 mod sbar;
 mod saveinfo;
+mod splitscreen;
 mod save_inventory;
 mod view;
 mod wheel;
@@ -187,7 +188,13 @@ fn main() {
         };
         host.frame(dt, events);
         if let (Some(p), Some((lo, hi, ms))) = (&platform, host.take_rumble()) {
-            p.rumble_all(lo, hi, ms);
+            // Split-screen: only player 1's pad feels player 1's hits.
+            match host.rumble_pad() {
+                Some(id) => {
+                    let _ = p.rumble(id, lo, hi, ms);
+                }
+                None => p.rumble_all(lo, hi, ms),
+            }
         }
         if autoquit.is_some_and(|t| host.realtime >= t) {
             host.quit = true;

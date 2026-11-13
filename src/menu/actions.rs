@@ -38,9 +38,10 @@ impl Menu {
                 let Some(map) = self.host_map(cv) else { return };
                 let n = |c: &str| cv.value_of(c) as i32;
                 let coop = n("_mp_coop");
+                let local = n("_mp_localplayers").clamp(1, 6);
                 let cmd = format!(
-                    "disconnect\nmaxplayers {}\ncoop {coop}\ndeathmatch {}\nteamplay {}\nskill {}\nfraglimit {}\ntimelimit {}\nmap {map}\n",
-                    n("_mp_maxplayers").max(2),
+                    "disconnect\nmaxplayers {}\ncl_splitscreen {local}\ncoop {coop}\ndeathmatch {}\nteamplay {}\nskill {}\nfraglimit {}\ntimelimit {}\nmap {map}\n",
+                    n("_mp_maxplayers").max(2).max(local),
                     (coop == 0) as i32,
                     n("_mp_teamplay"),
                     n("_mp_skill"),

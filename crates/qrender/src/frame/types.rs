@@ -106,6 +106,7 @@ pub(super) struct PostPush {
     pub(super) vel_tex: u32,
     pub(super) mbx: f32,
     pub(super) mby: f32,
+    pub(super) uvs: [f32; 2],
 }
 
 #[repr(C)]
@@ -222,4 +223,26 @@ pub(super) enum Trans {
     World(usize),
     Alias(usize),
     Sprite(usize),
+}
+
+/// One view's draw lists for a frame (several with split-screen).
+pub(super) struct ViewPass {
+    pub(super) view: Option<ViewSetup>,
+    /// Output rectangle (x, y, w, h) in output pixels.
+    pub(super) rect: [u32; 4],
+    pub(super) blend: [f32; 4],
+    /// Scene target region drawn (top-left), in target pixels.
+    pub(super) scene_w: u32,
+    pub(super) scene_h: u32,
+    /// Dynamic UBO offset in dynbuf.
+    pub(super) ubo: u32,
+    pub(super) world_draws: Vec<WorldDraw>,
+    pub(super) alias_draws: Vec<AliasDraw>,
+    pub(super) sprite_draws: Vec<SpriteDraw>,
+    pub(super) trans: Vec<(f32, Trans)>,
+    pub(super) vel_draws: Vec<VelDraw>,
+    pub(super) cull: Option<CullFrame>,
+    pub(super) particles: Range,
+    pub(super) fte: Option<FteDraw>,
+    pub(super) portal_draws: Vec<super::portals::PortalDraw>,
 }

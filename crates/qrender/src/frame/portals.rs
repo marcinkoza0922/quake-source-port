@@ -61,7 +61,7 @@ impl Renderer {
         brushes: &[WorldDraw],
         aliases: &[AliasDraw],
         fi: usize,
-        height: u32,
+        [width, height]: [u32; 2],
     ) {
         let Some(t) = &self.targets else { return };
         let Some(w) = &self.world else { return };
@@ -115,7 +115,7 @@ impl Renderer {
                 let area = vk::Rect2D {
                     offset: vk::Offset2D::default(),
                     extent: vk::Extent2D {
-                        width: t.scene_w,
+                        width,
                         height,
                     },
                 };
@@ -133,7 +133,7 @@ impl Renderer {
                     &[vk::Viewport {
                         x: 0.0,
                         y: 0.0,
-                        width: t.scene_w as f32,
+                        width: width as f32,
                         height: height as f32,
                         min_depth: 0.0,
                         max_depth: 1.0,

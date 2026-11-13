@@ -108,6 +108,10 @@ pub enum HostEvent {
     MousePos { x: f32, y: f32 },
     /// Button-label family of a newly connected gamepad (`qplatform::family`).
     PadFamily(u8),
+    /// Gamepad button, stick or gyro input from the pad with this SDL id
+    /// (split-screen routes it to the pad's player).
+    Pad(u32, InputEvent),
+    PadRemoved(u32),
 }
 
 pub fn convert(e: Event) -> Vec<HostEvent> {
@@ -133,7 +137,7 @@ pub fn convert(e: Event) -> Vec<HostEvent> {
             vec![HostEvent::MousePos { x, y }, HostEvent::Input(InputEvent::MouseButton { button: b, down })]
         }
         Event::MouseWheel { dy, .. } => one(InputEvent::MouseWheel { y: dy }),
-        Event::GamepadAxis { axis, value, .. } => {
+        Event::GamepadAxis { id, axis, value } => {
             let a = match axis {
                 qplatform::axis::LEFTX => GamepadAxis::LeftX,
                 qplatform::axis::LEFTY => GamepadAxis::LeftY,
@@ -143,17 +147,17 @@ pub fn convert(e: Event) -> Vec<HostEvent> {
                 qplatform::axis::RIGHT_TRIGGER => GamepadAxis::RightTrigger,
                 _ => return vec![],
             };
-            one(InputEvent::GamepadAxis { axis: a, value: (value as f32 / 32767.0).clamp(-1.0, 1.0) })
+            vec![HostEvent::Pad(id, InputEvent::GamepadAxis { axis: a, value: (value as f32 / 32767.0).clamp(-1.0, 1.0) })]
         }
-        Event::GamepadButton { button, down, .. } => match pad_button(button) {
-            Some(b) => one(InputEvent::GamepadButton { button: b, down }),
+        Event::GamepadButton { id, button, down } => match pad_button(button) {
+            Some(b) => vec![HostEvent::Pad(id, InputEvent::GamepadButton { button: b, down })],
             None => vec![],
         },
         Event::GamepadAdded { family, .. } => {
             vec![HostEvent::Input(InputEvent::GamepadConnected(true)), HostEvent::PadFamily(family)]
         }
-        Event::GamepadRemoved { .. } => one(InputEvent::GamepadConnected(false)),
-        Event::GamepadGyro { data, .. } => one(InputEvent::Gyro { pitch: data[0], yaw: data[1] }),
+        Event::GamepadRemoved { id } => vec![HostEvent::Input(InputEvent::GamepadConnected(false)), HostEvent::PadRemoved(id)],
+        Event::GamepadGyro { id, data, .. } => vec![HostEvent::Pad(id, InputEvent::Gyro { pitch: data[0], yaw: data[1] })],
         Event::Resize { .. } => vec![HostEvent::Resize],
         Event::FocusGained | Event::FocusLost => vec![HostEvent::Focus],
     }

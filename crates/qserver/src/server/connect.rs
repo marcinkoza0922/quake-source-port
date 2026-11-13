@@ -114,12 +114,19 @@ impl Server {
     /// Connect an in-process client and run the whole signon sequence
     /// (prespawn/spawn/begin). Returns the slot.
     pub fn connect_local(&mut self) -> Option<usize> {
+        self.connect_local_as("player", 0)
+    }
+
+    /// [`Server::connect_local`] with the name and colours set before the
+    /// signon, so ClientConnect announces the right name.
+    pub fn connect_local_as(&mut self, name: &str, colors: i32) -> Option<usize> {
         let i = self.core.clients.iter().position(|c| !c.active)?;
         self.connect_slot(i, true);
         if !self.core.clients[i].active {
             return None;
         }
-        self.core.clients[i].name = "player".into();
+        self.core.clients[i].name = name.into();
+        self.core.clients[i].colors = colors;
         self.local_signon(i);
         Some(i)
     }

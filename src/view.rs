@@ -379,6 +379,7 @@ impl ViewState {
                 // motion blur identity; the view entity moves with the camera
                 key: if idx > 0 && idx != cl.viewentity { idx as u32 } else { 0 },
                 dyn_pose: None,
+                views: 0,
             }
         };
         for k in 0..cl.visedicts.len() {

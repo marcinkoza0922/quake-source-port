@@ -20,6 +20,7 @@ impl Host {
             }
             return;
         }
+        self.sync_guests();
         let ok = self.dedicated || self.local.is_some_and(|i| self.server.core.clients.get(i).is_some_and(|c| c.active));
         if !ok {
             // Host_Map_f: a local game stops demo playback and the demo loop.
@@ -56,6 +57,7 @@ impl Host {
         self.demo_head.clear();
         self.cl = ClientState::new();
         self.local = None;
+        self.guests.clear();
         self.level = Level::default();
         if let Some(s) = &self.snd {
             s.event(SoundEvent::StopAll);
@@ -380,14 +382,7 @@ impl Host {
                     self.con.print(&s)
                 }
                 ClientEvent::CenterPrint(s) => {
-                    let t = self.cv("scr_centertime") as f64;
-                    let s = self.server.core.loc.translate(&s);
-                    let cols = if self.cv("scr_usekfont") != 0.0 {
-                        let (w, h) = self.r.size();
-                        crate::console::center_wrap_cols(Canvas::new(w, h).vw())
-                    } else {
-                        0
-                    };
+                    let (s, t, cols) = self.center_args(&s);
                     self.con.center_print(&s, t, cols);
                 }
                 ClientEvent::StuffText(s) => self.cbuf.add_text(&s),

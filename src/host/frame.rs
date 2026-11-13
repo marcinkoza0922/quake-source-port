@@ -45,7 +45,7 @@ impl Host {
 
     /// Aim-assist targets from the loopback server's live monsters/players,
     /// positioned at the client's interpolated origins.
-    pub(super) fn aim_targets(&self) -> Vec<AimTarget> {
+    pub(super) fn aim_targets(&self, cl: &qclient::ClientState) -> Vec<AimTarget> {
         let mut out = Vec::new();
         let Some(l) = &self.server.level else { return out };
         let vm = &l.vm;
@@ -61,7 +61,7 @@ impl Host {
         };
         let maxc = self.server.core.maxclients();
         for e in 1..vm.num_edicts() as u32 {
-            if vm.is_free(e) || e as usize == self.cl.viewentity || vm.ent_f(e, hp) <= 0.0 {
+            if vm.is_free(e) || e as usize == cl.viewentity || vm.ent_f(e, hp) <= 0.0 {
                 continue;
             }
             let flags = vm.ent_f(e, fl) as i32;
@@ -72,7 +72,7 @@ impl Host {
             } else {
                 continue;
             };
-            let origin = self.cl.entities.get(e as usize).filter(|c| c.model != 0).map_or(vm.ent_v(e, org), |c| c.origin);
+            let origin = cl.entities.get(e as usize).filter(|c| c.model != 0).map_or(vm.ent_v(e, org), |c| c.origin);
             out.push(AimTarget { origin, mins: vm.ent_v(e, mn), maxs: vm.ent_v(e, mx), velocity: vm.ent_v(e, vel), kind });
         }
         out
@@ -112,7 +112,7 @@ impl Host {
         // input (every frame, for smooth view angles)
         let ft = dt as f32;
         let in_game = self.cl.signon == 4 && self.cl.intermission == 0;
-        let targets = if in_game && self.input.gamepad_connected { self.aim_targets() } else { Vec::new() };
+        let targets = if in_game && self.input.gamepad_connected { self.aim_targets(&self.cl) } else { Vec::new() };
         let mut inp = {
             let eye = self.cl.entities.get(self.cl.viewentity).map_or([0.0; 3], |e| {
                 let mut o = e.origin;
@@ -138,6 +138,7 @@ impl Host {
         if let Some(imp) = self.wheel.update(held, in_game && alive && self.demo.is_none(), aim, &self.cl) {
             self.pend_impulse = imp;
         }
+        self.guest_moves(ft);
         let timescale = self.wheel_timescale() as f64;
         if self.cl.signon == 4 {
             let sp = self.move_speeds();
@@ -175,6 +176,9 @@ impl Host {
                     self.pend_jump = false;
                     self.pend_impulse = 0;
                 }
+            }
+            for g in &mut self.guests {
+                g.send(&mut self.server);
             }
             if let Some(q) = &mut self.qw_client {
                 let c = self.last_cmd;
@@ -230,6 +234,11 @@ impl Host {
             }
             self.drain_server_log();
             self.feed_client();
+            for g in &mut self.guests {
+                g.feed(&mut self.server);
+            }
+            self.guest_sounds();
+            self.guest_center_prints();
         }
         self.poll_remote();
         self.poll_qw();
@@ -241,6 +250,11 @@ impl Host {
         if self.cl.signon > 0 {
             self.cl.frame(dt * timescale);
             self.apply_qw_prediction();
+        }
+        for g in &mut self.guests {
+            if g.cl.signon > 0 {
+                g.cl.frame(dt * timescale);
+            }
         }
         self.process_client_events();
         self.track_rumble();
@@ -291,6 +305,13 @@ impl Host {
                 l.ambient_levels = bsp.leafs.get(leaf).map(|lf| lf.ambient_level);
             }
             l.underwater = self.contents(v.origin) <= crate::view::CONTENTS_WATER;
+        }
+        // Split-screen: every other local player is a listener too.
+        for g in self.guests.iter().filter(|g| g.cl.signon == 4).take(qsound::MAX_OTHER_LISTENERS) {
+            let Some(e) = g.cl.entities.get(g.cl.viewentity) else { continue };
+            let ear = [e.origin[0], e.origin[1], e.origin[2] + g.cl.viewheight];
+            l.others[l.num_others] = (ear, g.cl.viewentity as i32);
+            l.num_others += 1;
         }
         snd.set_water_fx(l.underwater);
         snd.update(l);

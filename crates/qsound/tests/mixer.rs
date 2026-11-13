@@ -186,3 +186,24 @@ fn music_stream() {
     m.paint(&mut out);
     assert!(!m.music_playing());
 }
+
+#[test]
+fn split_screen_listeners() {
+    let (s, mut m) = sys();
+    let mut others = [([0.0; 3], 0); MAX_OTHER_LISTENERS];
+    others[0] = ([4000.0, 0.0, 0.0], 7);
+    s.update(Listener { origin: [0.0; 3], right: [0.0, -1.0, 0.0], view_entity: 1, others, num_others: 1, ..Default::default() });
+    let t = tone("t", 44100);
+    // Out of player 1's range but next to player 2: played, centred.
+    start(&s, 5, 1, &t, [4050.0, 0.0, 0.0]);
+    // Player 2's own sound: full volume.
+    start(&s, 7, 1, &t, [4000.0, 0.0, 0.0]);
+    // Heard by nobody.
+    start(&s, 6, 1, &t, [2000.0, 3000.0, 0.0]);
+    m.process_commands();
+    let (l, r) = m.channel_volume(5, 1).unwrap();
+    assert!(l > 0 && l == r, "{l} {r}");
+    let (l2, r2) = m.channel_volume(7, 1).unwrap();
+    assert!(l2 > l && l2 == r2);
+    assert!(m.channel_volume(6, 1).is_none());
+}

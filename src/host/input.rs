@@ -19,6 +19,8 @@ impl Host {
             }
             HostEvent::Focus => {}
             HostEvent::PadFamily(f) => self.pad_family = crate::glyphs::Family::from_platform(f),
+            HostEvent::Pad(id, ie) => self.pad_event(id, ie),
+            HostEvent::PadRemoved(id) => self.pad_removed(id),
             HostEvent::MousePos { x, y } => {
                 if !self.menu.active() {
                     return;

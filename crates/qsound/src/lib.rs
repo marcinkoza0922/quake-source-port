@@ -88,7 +88,13 @@ pub struct Listener {
     pub underwater: bool,
     /// Host frame time in seconds (ambient fade).
     pub frametime: f32,
+    /// Split-screen: the other local players' ears and view entities. A
+    /// sound plays as loud as the nearest player hears it (mono for these).
+    pub others: [(Vec3, i32); MAX_OTHER_LISTENERS],
+    pub num_others: usize,
 }
+
+pub const MAX_OTHER_LISTENERS: usize = 5;
 
 /// Events mirrored from the client (the binary converts `ClientEvent`s).
 #[derive(Clone, Debug)]
@@ -358,7 +364,8 @@ impl Mixer {
     fn spatialize(&mut self, i: usize) {
         let l = self.listener;
         let ch = &mut self.channels[i];
-        if ch.entity == l.view_entity || ch.dist_mult == 0.0 {
+        let others = &l.others[..l.num_others.min(MAX_OTHER_LISTENERS)];
+        if ch.entity == l.view_entity || ch.dist_mult == 0.0 || others.iter().any(|o| o.1 == ch.entity) {
             ch.left = ch.master_vol;
             ch.right = ch.master_vol;
             return;
@@ -374,6 +381,12 @@ impl Mixer {
         let mv = ch.master_vol as f32;
         ch.right = ((mv * (1.0 - dist) * rscale) as i32).max(0);
         ch.left = ((mv * (1.0 - dist) * lscale) as i32).max(0);
+        for (o, _) in others {
+            let d = sub(ch.origin, *o);
+            let mono = ((mv * (1.0 - dot(d, d).sqrt() * ch.dist_mult)) as i32).max(0);
+            ch.left = ch.left.max(mono);
+            ch.right = ch.right.max(mono);
+        }
     }
 
     /// SND_PickChannel.

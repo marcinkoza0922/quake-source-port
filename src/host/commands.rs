@@ -244,6 +244,18 @@ pub(super) fn register_commands(c: &mut Commands<Host>) {
         let count = if a.argc() > 2 { qpart::num::atof(a.argv(2)) } else { 1.0 };
         h.cl.fte_queue.push(qclient::FteRequest::Effect { name: a.argv(1).to_string(), org, dir: None, count });
     });
+    // Run a client command as split-screen player 2..6 (setpos, give, god...).
+    c.add("splitcmd", |h, a| {
+        let n = a.argv(1).parse::<usize>().unwrap_or(0);
+        let Some(g) = n.checked_sub(2).and_then(|k| h.guests.get(k)) else {
+            h.print("splitcmd <player 2..6> <command>\n");
+            return;
+        };
+        let slot = g.slot;
+        let rest = a.args().split_once(char::is_whitespace).map_or("", |(_, r)| r).trim().to_string();
+        h.server.client_command(slot, &rest);
+        h.drain_server_log();
+    });
     // Host_Name_f / Host_Color_f: set the archived cvar, then tell the server.
     c.add("name", |h, a| {
         if a.argc() < 2 {

@@ -18,6 +18,7 @@ impl Host {
         let mut dls = Vec::new();
         let mut fte = (Vec::new(), Vec::new(), Vec::new());
         let mut blend = [0.0; 4];
+        let mut splits = Vec::new();
         if let Some(v) = &view {
             let fs = &self.server.core.fs;
             let cv = self.view_cvars();
@@ -79,6 +80,9 @@ impl Host {
             crate::view::dlights(&self.cl, &mut dls);
             let contents = self.contents(v.origin);
             blend = self.view.blend(&self.cl, contents, ft, cv.flash);
+            if !self.guests.is_empty() {
+                splits = self.split_views(*v, blend, ft, &mut ents);
+            }
         }
         // 2D
         let glyphs = self.glyphs();
@@ -107,6 +111,49 @@ impl Host {
                         self.con.draw_center(&mut c, n);
                     }
                     3 => self.con.draw_center(&mut c, usize::MAX),
+                    // Split-screen: each player's HUD in their own cell.
+                    _ if !splits.is_empty() => {
+                        let pack = crate::sbar::Pack::from_game_dirs(self.server.core.fs.game_dirs().iter().map(String::as_str));
+                        let teamplay = self.server.core.cvars.value_of("teamplay");
+                        let live: Vec<usize> = (0..self.guests.len()).filter(|&k| self.guests[k].cl.signon == 4).collect();
+                        for (i, sv) in splits.iter().enumerate() {
+                            let [x, y, w, h] = sv.rect;
+                            let mut cc = Canvas::new(w, h);
+                            cc.ui = c.ui.clone();
+                            let (cl, fade, face) = if i == 0 {
+                                (&self.cl, &mut self.hud_fade, self.view.face_anim_time > self.cl.time)
+                            } else {
+                                let Some(g) = live.get(i - 1).and_then(|&k| self.guests.get_mut(k)) else { continue };
+                                let face = g.view.face_anim_time > g.cl.time;
+                                (&g.cl, &mut g.hud_fade, face)
+                            };
+                            if crosshair && cl.intermission == 0 {
+                                let vh = cc.vh() - if classic { CLASSIC_SBAR_LINES } else { 0.0 };
+                                draw_crosshair(&mut cc, vh, &self.server.core.cvars);
+                            }
+                            let mut sb = crate::sbar::Sbar::new(&mut cc, &mut pf, pack);
+                            sb.teamplay = teamplay;
+                            if classic {
+                                sb.draw(cl, self.show_scores, face);
+                            } else {
+                                sb.draw_modern(cl, self.show_scores, face, &hud_cfg, fade, self.realtime);
+                            }
+                            if self.show_scores && cl.gametype == 1 {
+                                crate::sbar::deathmatch_overlay(&mut cc, &mut pf, cl);
+                            }
+                            let con = if i == 0 { &self.con } else { &self.guests[live[i - 1]].center };
+                            if con.realtime < con.center_time && !self.con.open {
+                                let mut cp = crate::console::Console::new();
+                                cp.centerprint.clone_from(&con.centerprint);
+                                (cp.text_bg, cp.text_scale, cp.center_pos) = (self.con.text_bg, self.con.text_scale, self.con.center_pos);
+                                cp.draw_center(&mut cc, usize::MAX);
+                            }
+                            let (wheel, wcl) = if i == 0 { (&self.wheel, &self.cl) } else { (&self.guests[live[i - 1]].wheel, &self.guests[live[i - 1]].cl) };
+                            wheel.draw(&mut cc, &mut pf, &glyphs, wcl, pad_ui, wheel_key);
+                            crate::draw::translate(&mut cc.list, x as f32, y as f32);
+                            c.list.append(&mut cc.list);
+                        }
+                    }
                     _ => {
                         let scene_h = c.vh() - if classic { CLASSIC_SBAR_LINES } else { 0.0 };
                         if crosshair {
@@ -146,7 +193,9 @@ impl Host {
             }
             let conback = pf("gfx/conback.lmp");
             let ingame = view.is_some() && self.cl.intermission == 0;
-            self.con.draw(&mut c, conback, ingame && !self.menu.active(), ingame && !self.menu.active());
+            // Split screen draws center prints in each player's cell.
+            let center = ingame && !self.menu.active() && splits.is_empty();
+            self.con.draw(&mut c, conback, ingame && !self.menu.active(), center);
             if self.server.core.sv.paused && view.is_some() {
                 let p = pf("gfx/pause.lmp");
                 if let Some((_, pw, _)) = p {
@@ -249,6 +298,7 @@ impl Host {
             settings,
             shot_impacts: &impacts,
             dyn_verts: &dyn_verts,
+            splits: &splits,
             player: self.cl.entities.get(self.cl.viewentity).filter(|_| self.cl.viewentity > 0).map(|e| e.origin),
         };
         if let Err(e) = self.r.render(&frame) {
