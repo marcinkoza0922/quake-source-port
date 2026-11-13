@@ -489,6 +489,11 @@ impl Menu {
             Item::ResetBinds => {
                 c.text_center(320.0, y, "Reset to Defaults", TXT, GOLD_FG);
             }
+            Item::ResetShaderParams => {
+                // live only while some parameter differs from the preset
+                let dirty = cv.by_name("r_shader_params").is_some_and(|c| !c.string.trim().is_empty());
+                c.text_center(320.0, y, "Reset Shader Settings", TXT, if dirty { GOLD_FG } else { MUTED });
+            }
             Item::Apply => {
                 // a button, live only while there are pending changes
                 let col = if self.display_dirty(cv) { GOLD_FG } else { MUTED };

@@ -57,7 +57,7 @@ impl Menu {
                 let i = (cur as i32 + dir).rem_euclid(n) as usize;
                 cv.set("_mp_map", &self.net_maps[i].name.clone());
             }
-            Item::Text { .. } | Item::Run { .. } | Item::Server(_) | Item::Bind { .. } | Item::ResetBinds | Item::Sub { .. } => return false,
+            Item::Text { .. } | Item::Run { .. } | Item::Server(_) | Item::Bind { .. } | Item::ResetBinds | Item::ResetShaderParams | Item::Sub { .. } => return false,
             Item::Apply => {
                 if !enter || !self.display_dirty(cv) {
                     return false;

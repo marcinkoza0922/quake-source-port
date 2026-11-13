@@ -419,8 +419,15 @@ mod shader_tests {
         m.key(K_RIGHTARROW, &mut cv, false);
         assert_eq!(cv.by_name("r_shader_preset").unwrap().string, "crt/a");
         // the param row follows the static rows
+        m.opt_cursor = 3;
+        assert!(matches!(m.page_item(Page::ScreenShader, 3), Item::ShaderParam(0)));
+        m.key(K_RIGHTARROW, &mut cv, false);
+        assert_eq!(cv.by_name("r_shader_params").unwrap().string, "MASK=0.75");
+        // the reset row drops every override
         m.opt_cursor = 2;
-        assert!(matches!(m.page_item(Page::ScreenShader, 2), Item::ShaderParam(0)));
+        m.key(K_ENTER, &mut cv, false);
+        assert_eq!(cv.by_name("r_shader_params").unwrap().string, "");
+        m.opt_cursor = 3;
         m.key(K_RIGHTARROW, &mut cv, false);
         assert_eq!(cv.by_name("r_shader_params").unwrap().string, "MASK=0.75");
         // back to the default drops the override

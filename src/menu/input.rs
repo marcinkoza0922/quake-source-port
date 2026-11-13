@@ -356,6 +356,13 @@ impl Menu {
                         }
                         return out;
                     }
+                    Item::ResetShaderParams => {
+                        if enter {
+                            cv.set("r_shader_params", "");
+                            out.push(Action::Sound("misc/menu2.wav"));
+                        }
+                        return out;
+                    }
                     Item::ResetBinds => {
                         if enter {
                             out.push(Action::Command("_resetbinds\n".into()));

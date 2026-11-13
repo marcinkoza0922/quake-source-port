@@ -40,6 +40,8 @@ pub(super) enum Item {
     ShaderPreset,
     /// k-th parameter of the loaded slang preset.
     ShaderParam(usize),
+    /// Clears `r_shader_params` (the preset's own defaults).
+    ResetShaderParams,
     /// Opens a nested options page.
     Sub { label: &'static str, page: Page },
 }
@@ -365,5 +367,6 @@ pub(super) const BLOOD: &[Item] = &[
 pub(super) const SCREEN_SHADER: &[Item] = &[
     Item::ShaderPreset,
     Item::Choice { label: "Apply To", cvar: "r_shader_scope", choices: SHADER_SCOPE },
+    Item::ResetShaderParams,
 ];
 pub(super) const SHADER_SCOPE: &[(&str, f32)] = &[("3D view", 0.0), ("whole screen", 1.0)];

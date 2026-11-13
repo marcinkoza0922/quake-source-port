@@ -5,6 +5,7 @@ pub(super) fn tooltip(item: Item) -> Option<&'static str> {
     let cvar = match item {
         Item::Slider { cvar, .. } | Item::Toggle { cvar, .. } | Item::Choice { cvar, .. } => cvar,
         Item::ShaderPreset => "RetroArch slang shader on the final image: CRT, scanlines, NTSC, sharpening; add your own in <game>/shaders",
+        Item::ResetShaderParams => "Puts every setting of the chosen shader back to the preset's defaults",
         Item::ShaderParam(_) => "A setting of the chosen shader; arrows step it, Enter is not needed",
         _ => return None,
     };
