@@ -140,3 +140,32 @@ eligibility remains in force.
 Audition/export helper: `rustc --edition=2024 tools/portal_cues.rs -o target/portal-cues` then `target/portal-cues target/portal-audio` writes all eight
 48 kHz mono WAVs from the same synthesis code used in-game. Generated previews
 stay under ignored `target/`; the Rust sources are the editable assets.
+
+### Railgun (`qserver::addons::railgun`, `src/addons/rail_fx.rs`)
+Quake II/III homage. Holding fire shoots every 1.5 s (`REFIRE`) while the
+player has 2 cells (`AMMO`; `currentammo` follows when it showed cells);
+with fewer, a dry click every 0.5 s. The slug is a point trace from the eye
+(`MoveType::Normal`, 8192 u): each damageable entity hit is recorded and the
+trace resumes from the hit point ignoring it (up to 16), stopping at the
+world or a non-damageable brush entity. Every hit gets QC
+`T_Damage(target, player, player, addon_rail_damage)` (default 100), so
+kills, gibs and mod rules apply. Refire timers live on `Level::rails`
+(transient, not saved); `.qsa` saves only record `toy railgun`.
+- Sync: `//qsp_rail owner kind sx sy sz ex ey ez nx ny nz [hx hy hz]…`
+  (kind 1 fired, 0 dry; `n` wall normal or zero; hit points) →
+  `qclient::RailEffect` → `ClientEvent::RailEffect`.
+- Trail (FTE additive dots): dense core beam fading in 0.5 s, spiral (radius
+  4 growing, one turn per 48 u) fading over 1 s, impact glow ring (2 s),
+  16 gravity sparks (0.6 s), red bursts at pierced bodies. Colour:
+  `addon_rail_color` 0 blue, 1 green, 2 red, 3 yellow, 4 purple, 5 white,
+  rotated by owner so split-screen players differ.
+- Sound (`qsound::rail`, synthesized): fire = crack, ringing zap and rising
+  recharge whine ending in a ready tick at ~1.4 s; looping hum on the
+  holder's entity channel 6 while held; dry click; impact hiss.
+- Model: `assets/railgun/` (Meshy meshy-t2 1,365 tris, see its README),
+  converted by `tools/import_toy_model.py` (generic copy of the portal
+  importer: `--out --name --length --back`, glow mask = pixels with one
+  dominant channel, drawn fullbright). Drawn with `portal_pose` + recoil.
+- Menu: Add-ons → Railgun toggle (`addon_railgun`) and Railgun Settings
+  (Damage slider, Trail Colour); `menu railgun` opens it.
+- Tests: `crates/qserver/tests/railgun.rs` (e1m1: ammo, refire, dry click).

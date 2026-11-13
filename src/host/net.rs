@@ -377,6 +377,10 @@ impl Host {
         for e in evs {
             match e {
                 ClientEvent::PortalEffect(fx) => self.portal_fx.receive(fx, self.cl.time, self.snd.as_ref()),
+                ClientEvent::RailEffect(fx) => {
+                    let choice = self.cv("addon_rail_color").max(0.0) as usize;
+                    self.rail_fx.receive(fx, self.cl.time, choice, self.snd.as_ref());
+                }
                 ClientEvent::HitFeedback { kill } => {
                     feedback = Some(feedback.unwrap_or(false) || kill);
                 }
@@ -455,6 +459,7 @@ impl Host {
                 ClientEvent::BonusFlash => self.view.bonus_flash(),
                 ClientEvent::NewMap => {
                     self.portal_fx.clear();
+                    self.rail_fx.clear();
                     feedback = None;
                     self.feedback = Default::default();
                     self.stats_recorded = false;

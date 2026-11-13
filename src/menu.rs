@@ -76,6 +76,7 @@ pub enum Page {
     /// Add-on picker shown by New Game when Add-ons is ticked.
     NewGameAddons,
     PortalGun,
+    Railgun,
     /// Multiplayer pages (reached from Screen::Multiplayer).
     Join,
     Host,

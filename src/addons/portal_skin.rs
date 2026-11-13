@@ -1,7 +1,7 @@
 //! Imported RGB atlas remapped to the active mod's palette and owner colors.
 use qformats::mdl::Skin;
 
-fn nearest(palette: &[u8], rgb: [u8; 3], glow: bool) -> u8 {
+pub(super) fn nearest(palette: &[u8], rgb: [u8; 3], glow: bool) -> u8 {
     palette
         .as_chunks::<3>()
         .0

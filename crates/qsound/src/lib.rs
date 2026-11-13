@@ -6,6 +6,7 @@
 pub mod music;
 pub mod feedback;
 pub mod portal;
+pub mod rail;
 
 use std::collections::HashMap;
 use std::sync::{Arc, Mutex};
