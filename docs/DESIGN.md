@@ -2,6 +2,12 @@
 
 Living design doc. `PROPOSAL.md` says *what*; this says *how*. Update when decisions change.
 
+Directional damage uses per-player view state and fading red HUD edge bands.
+Gameplay → Directional Damage (`hud_damageindicator`, archived, default 1)
+scales opacity with blood plus armor damage and respects `v_flashscale`.
+Front/right/back/left hits map to top/right/bottom/left edges at impact;
+repeated hits accumulate up to a bounded opacity and fade over time.
+
 ### Hit and kill feedback
 
 HUD → Hit Markers (`hud_hitmarkers`, default 0) adds six distinct outlined,

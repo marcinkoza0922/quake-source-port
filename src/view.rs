@@ -10,6 +10,7 @@ use crate::assets::{Kind, Level};
 use crate::sbar::{IT_INVISIBILITY, IT_INVULNERABILITY, IT_QUAD, IT_SUIT};
 
 pub mod weapon;
+mod damage;
 use weapon::Alignment;
 
 pub const CONTENTS_WATER: i32 = -3;
@@ -82,6 +83,7 @@ pub struct ViewState {
     dmg_roll: f32,
     dmg_pitch: f32,
     damage: CShift,
+    edges: [f32; 4],
     bonus: CShift,
     oldz: f32,
     anims: Vec<Anim>,
@@ -120,6 +122,14 @@ impl ViewState {
             d = d / len;
         }
         let (f, r, _) = angle_vectors(Vec3::from_array(ent.angles));
+        let (forward, right, _) = angle_vectors(Vec3::new(0.0, cl.viewangles[1], 0.0));
+        let front = dot(d, forward);
+        let side = dot(d, right);
+        let weights = [front.max(0.0), side.max(0.0), (-front).max(0.0), (-side).max(0.0)];
+        let strength = (armor + blood).max(0) as f32 / 80.0;
+        for (edge, weight) in self.edges.iter_mut().zip(weights) {
+            *edge = (*edge + strength * if len < 1.0 { 1.0 } else { weight }).min(0.85);
+        }
         self.dmg_roll = count * dot(d, r) * cv.kickroll;
         self.dmg_pitch = count * dot(d, f) * cv.kickpitch;
         self.dmg_time = cv.kicktime;
@@ -163,6 +173,9 @@ impl ViewState {
             r = r * (1.0 - f) + s.color[0] * f;
             g = g * (1.0 - f) + s.color[1] * f;
             b = b * (1.0 - f) + s.color[2] * f;
+        }
+        for edge in &mut self.edges {
+            *edge = (*edge - ft.max(0.0) * 0.65).max(0.0);
         }
         self.damage.percent = (self.damage.percent - ft * 150.0).max(0.0);
         self.bonus.percent = (self.bonus.percent - ft * 100.0).max(0.0);

@@ -168,6 +168,9 @@ impl Host {
                             let [x, y, w, h] = sv.rect;
                             let mut cc = Canvas::new(w, h);
                             cc.ui = c.ui.clone();
+                            let damage_view = if i == 0 { &self.view } else { &self.guests[live[i - 1]].view };
+                            let damage_height = cc.vh() - if classic { CLASSIC_SBAR_LINES } else { 0.0 };
+                            damage_view.draw_damage(&mut cc, damage_height, self.server.core.cvars.value_of("hud_damageindicator") != 0.0, self.server.core.cvars.value_of("v_flashscale"));
                             let feedback = if i == 0 { &self.feedback } else { &self.guests[live[i - 1]].feedback };
                             let marker = (feedback.remaining(self.realtime), feedback.kill);
                             let (cl, fade, face, locked, active) = if i == 0 {
@@ -207,6 +210,7 @@ impl Host {
                     }
                     _ => {
                         let scene_h = c.vh() - if classic { CLASSIC_SBAR_LINES } else { 0.0 };
+                        self.view.draw_damage(&mut c, scene_h, self.server.core.cvars.value_of("hud_damageindicator") != 0.0, self.server.core.cvars.value_of("v_flashscale"));
                         {
                             draw_crosshair(&mut c, scene_h, &self.server.core.cvars, self.input.lockon.target.is_some(), self.input.lockon.active);
                             hitmarker::draw_hitmarker(&mut c, scene_h, &self.server.core.cvars, self.feedback.remaining(self.realtime), self.feedback.kill);
