@@ -24,6 +24,7 @@ mod input;
 mod page_info;
 use page_info::*;
 mod scroll;
+mod navigation;
 mod actions;
 mod addons;
 mod addon_browser;
@@ -211,8 +212,6 @@ const VALUE_X: f32 = 320.0;
 const ROW_H: f32 = 12.0;
 /// Height of value boxes inside a row, and of entries in an open dropdown.
 const BOX_H: f32 = 10.0;
-/// Clickable Back button, menu units.
-const BACK_BTN: (f32, f32, f32, f32) = (12.0, 341.0, 60.0, 16.0);
 /// First row of the options hub / of an options page (below its heading).
 const ROW0: f32 = 64.0;
 const PAGE_ROW0: f32 = 72.0;

@@ -1,5 +1,7 @@
 //! Small host unit tests.
 
+mod menu_controller;
+
 mod relaunch_tests {
     #[test]
     fn strips_game_and_commands() {

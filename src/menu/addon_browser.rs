@@ -121,6 +121,16 @@ impl Menu {
     fn browser_command(&self) -> Option<&'static str> {
         self.addon_ui.focus.checked_sub(2).and_then(|row| self.selected_addon().command(row))
     }
+    pub(super) fn browser_binding_focused(&self) -> bool {
+        self.browser_command().is_some()
+    }
+    pub(super) fn browser_select_label(&self) -> &'static str {
+        if self.addon_ui.focus == 0 { "Toggle" }
+        else if self.addon_ui.focus == 1 { "Settings" }
+        else if self.addon_ui.focus > self.browser_rows() { "Start game" }
+        else if self.browser_slot().is_some() { "Change slot" }
+        else { "Configure" }
+    }
     fn browser_slot(&self) -> Option<&'static str> {
         self.addon_ui.focus.checked_sub(2)
             .and_then(|row| self.selected_addon().weapons.get(row)).map(|weapon| weapon.slot)
@@ -181,6 +191,7 @@ impl Menu {
         if !self.browser_active() {
             return false;
         }
+        self.addon_ui.focus = self.addon_ui.focus.min(self.browser_last_focus());
         let enter = matches!(key, K_ENTER | K_KP_ENTER | K_ABUTTON | K_MOUSE1);
         if matches!(key, K_ESCAPE | K_BBUTTON | K_MOUSE2) {
             self.screen = if self.screen == Screen::OptionsPage(Page::NewGameAddons) { Screen::SinglePlayer } else { Screen::Main };
@@ -188,7 +199,7 @@ impl Menu {
         }
         if key == K_MOUSE1 {
             let Some((x, y)) = self.mouse else { return true };
-            if (12.0..72.0).contains(&x) && (341.0..357.0).contains(&y) {
+            if self.back_button().is_some_and(|(bx, by, bw, bh)| (bx..bx + bw).contains(&x) && (by..by + bh).contains(&y)) {
                 return self.addon_key(K_ESCAPE, cv, out);
             }
             if self.screen == Screen::OptionsPage(Page::NewGameAddons) && (24.0..196.0).contains(&x) && (264.0..286.0).contains(&y) {
@@ -198,6 +209,10 @@ impl Menu {
             let Some((selected, focus)) = self.browser_hit((x, y)) else { return true };
             self.addon_ui.selected = selected;
             self.addon_ui.focus = focus;
+        }
+        if self.screen == Screen::OptionsPage(Page::NewGameAddons) && (key == K_YBUTTON || key == K_F1 + 9) {
+            self.start_new_game(out);
+            return true;
         }
         let up = matches!(key, K_UPARROW | K_DPAD_UP);
         let down = matches!(key, K_DOWNARROW | K_DPAD_DOWN);
@@ -212,7 +227,15 @@ impl Menu {
             self.addon_ui.settings_scroll = (self.browser_offset() + delta).clamp(0.0, self.browser_max_offset());
             return true;
         }
-        if key == K_TAB {
+        if matches!(key, K_LSHOULDER | K_RSHOULDER) {
+            let sections = [0, 1, 2, self.browser_last_focus()];
+            let count = if self.screen == Screen::OptionsPage(Page::NewGameAddons) { 4 } else { 3 };
+            let section = if self.addon_ui.focus > self.browser_rows() { 3 } else { self.addon_ui.focus.min(2) };
+            let next = (section + if key == K_LSHOULDER { count - 1 } else { 1 }) % count;
+            self.addon_ui.focus = sections[next];
+        } else if self.addon_ui.focus == 1 && (enter || right) {
+            self.addon_ui.focus = 2;
+        } else if key == K_TAB {
             self.addon_ui.focus = (self.addon_ui.focus + 1) % (self.browser_last_focus() + 1);
         } else if matches!(key, K_MWHEELUP | K_MWHEELDOWN | K_PGUP | K_PGDN) || (self.addon_ui.focus == 1 && (up || down)) {
             let decrease = matches!(key, K_MWHEELUP | K_PGUP | K_UPARROW | K_DPAD_UP);
@@ -268,15 +291,12 @@ impl Menu {
                 self.sub_return = Some((parent, page, self.opt_cursor));
                 self.screen = Screen::OptionsPage(page);
                 self.opt_cursor = 0;
-            } else if self.addon_ui.focus > self.browser_rows() && enter {
+            } else if self.screen == Screen::OptionsPage(Page::NewGameAddons) && self.addon_ui.focus > self.browser_rows() && enter {
                 self.start_new_game(out);
             }
         }
-        if matches!(key, K_TAB | K_UPARROW | K_DOWNARROW | K_DPAD_UP | K_DPAD_DOWN | K_RIGHTARROW | K_DPAD_RIGHT) {
+        if matches!(key, K_TAB | K_UPARROW | K_DOWNARROW | K_DPAD_UP | K_DPAD_DOWN | K_RIGHTARROW | K_DPAD_RIGHT | K_LSHOULDER | K_RSHOULDER | K_ABUTTON | K_ENTER | K_KP_ENTER) {
             self.reveal_browser_focus();
-        }
-        if self.screen == Screen::OptionsPage(Page::NewGameAddons) && key == K_F1 + 9 {
-            self.start_new_game(out);
         }
         true
     }
@@ -297,7 +317,7 @@ impl Menu {
     }
     pub(super) fn draw_addon_browser(&self, c: &mut Canvas, pic: &mut PicFn, cv: &Cvars, time: f64, page: Page) {
         c.text(24.0, 25.0, page_name(page), 14.0, GOLD_FG);
-        c.round_box(20.0, 50.0, 180.0, 208.0, 3.0, [0.0, 0.0, 0.0, 0.7], Some(BORDER));
+        c.round_box(20.0, 50.0, 180.0, 208.0, 3.0, [0.0, 0.0, 0.0, 0.7], Some(if self.addon_ui.focus == 0 { GOLD_FG } else { BORDER }));
         for (i, a) in ADDON.iter().enumerate() {
             let y = 58.0 + i as f32 * 24.0;
             if i == self.addon_ui.selected {
@@ -309,11 +329,16 @@ impl Menu {
             }
             c.text(44.0, y + 6.0, a.name, TXT, if self.toys_locked(cv) { MUTED } else { FG });
         }
-        c.text(28.0, 218.0, "Enter: toggle   Right: details", 8.0, MUTED);
-        c.text(28.0, 234.0, "Tab: switch section", 8.0, MUTED);
+        if self.pad_ui {
+            self.glyphs.hints(c, 28.0, 214.0, &[(K_ABUTTON, "Toggle")], true);
+            self.glyphs.hints(c, 28.0, 236.0, &[(K_LSHOULDER, "/"), (K_RSHOULDER, "Section")], true);
+        } else {
+            c.text(28.0, 218.0, "Enter: toggle   Right: details", 8.0, MUTED);
+            c.text(28.0, 234.0, "Tab: switch section", 8.0, MUTED);
+        }
         if page == Page::NewGameAddons {
             c.round_box(24.0, 264.0, 172.0, 22.0, 2.0, HILITE, Some(if self.addon_ui.focus > self.browser_rows() { GOLD_FG } else { BORDER }));
-            c.text_center(110.0, 271.0, "Start New Game [F10]", TXT, GOLD_FG);
+            c.text_center(110.0, 271.0, if self.pad_ui { "Start New Game" } else { "Start New Game [F10]" }, TXT, GOLD_FG);
         }
         let a = self.selected_addon();
         super::addon_preview::draw(c, pic, a.id, time, [216.0, 50.0, 404.0, 116.0]);
@@ -373,7 +398,7 @@ impl Menu {
             }
             if let Some(cmd) = cmd {
                 if self.addon_capture == Some(*cmd) {
-                    c.text(425.0, y + 3.0, "press a key... (Esc cancels)", TXT, GOLD_FG);
+                    c.text(425.0, y + 3.0, if self.pad_ui { "press a button..." } else { "press a key... (Esc cancels)" }, TXT, GOLD_FG);
                 } else {
                     let keys = keys_for(&self.bindings, cmd);
                     for (pad, mut x) in [(false, 425.0), (true, 525.0)] {
@@ -399,7 +424,9 @@ impl Menu {
             "Add-on saves (.qsa) require this source port. Enable Add-ons beside New Game."
         };
         c.text_center(320.0, 327.0, note, 8.0, MUTED);
-        c.text_center(350.0, 346.0, "Enter: remap  Del: clear keyboard  X: clear pad  Wheel: scroll hovered box  PgUp/PgDn: scroll", 8.0, MUTED);
+        if self.pad_ui {
+            self.draw_addon_hints(c, page);
+        }
     }
 }
 

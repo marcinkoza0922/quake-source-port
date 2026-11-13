@@ -189,3 +189,77 @@ fn settings_keyboard_navigation_reveals_rows_and_page_keys_scroll() {
     }
     assert_eq!(menu.browser_offset(), 0.0);
 }
+
+#[test]
+fn controller_sections_reach_every_addons_action_without_a_keyboard() {
+    let (mut menu, mut cv) = setup(Page::Addons);
+    menu.pad_ui = true;
+    for index in 0..ADDON.len() {
+        assert_eq!(menu.addon_ui.selected, index);
+        let a = menu.selected_addon();
+        let enabled = cv.value_of(a.cvar);
+        menu.key(K_ABUTTON, &mut cv, false);
+        assert_ne!(cv.value_of(a.cvar), enabled);
+        menu.key(K_RSHOULDER, &mut cv, false);
+        assert_eq!(menu.addon_ui.focus, 1);
+        for _ in 0..10 { menu.key(K_DPAD_DOWN, &mut cv, false); }
+        assert!(menu.addon_ui.scroll <= menu.description_lines().len().saturating_sub(4));
+        // Return to the description, then select its settings directly.
+        menu.key(K_LSHOULDER, &mut cv, false);
+        menu.key(K_ABUTTON, &mut cv, false);
+        assert_eq!(menu.addon_ui.focus, 2);
+        if let Some(slot) = menu.browser_slot() {
+            let old = cv.value_of(slot);
+            menu.key(K_DPAD_RIGHT, &mut cv, false);
+            assert_ne!(cv.value_of(slot), old);
+            menu.key(K_DPAD_DOWN, &mut cv, false);
+        }
+        let command = menu.browser_command().unwrap();
+        menu.key(K_ABUTTON, &mut cv, false);
+        assert!(menu.capturing());
+        menu.key(K_RTRIGGER, &mut cv, false);
+        if menu.bind_pending.is_some() { menu.key(K_ABUTTON, &mut cv, false); }
+        assert_eq!(menu.bindings[K_RTRIGGER as usize].as_deref(), Some(command));
+        menu.key(K_XBUTTON, &mut cv, false);
+        assert_eq!(menu.bindings[K_RTRIGGER as usize], None);
+        while menu.addon_ui.focus < menu.browser_rows() {
+            menu.key(K_DPAD_DOWN, &mut cv, false);
+        }
+        assert!(menu.browser_row_y(a.row_count() - 1) + 16.0 <= 322.0);
+        menu.key(K_ABUTTON, &mut cv, false);
+        assert_eq!(menu.screen, Screen::OptionsPage(a.page.unwrap()));
+        menu.key(K_BBUTTON, &mut cv, false);
+        assert_eq!(menu.screen, Screen::OptionsPage(Page::Addons));
+        menu.key(K_RSHOULDER, &mut cv, false);
+        assert_eq!(menu.addon_ui.focus, 0);
+        menu.key(K_DPAD_DOWN, &mut cv, false);
+    }
+    menu.key(K_BBUTTON, &mut cv, false);
+    assert_eq!(menu.screen, Screen::Main);
+}
+
+#[test]
+fn controller_bumpers_reach_start_and_shortcut_does_not_interrupt_binding() {
+    let (mut menu, mut cv) = setup(Page::NewGameAddons);
+    menu.key(K_LSHOULDER, &mut cv, false);
+    assert!(menu.addon_ui.focus > menu.browser_rows());
+    assert!(commands(&menu.key(K_ABUTTON, &mut cv, false)).contains("map start"));
+    menu.open(Screen::OptionsPage(Page::NewGameAddons));
+    menu.addon_ui.focus = 3;
+    menu.key(K_ABUTTON, &mut cv, false);
+    menu.key(K_YBUTTON, &mut cv, false);
+    assert_eq!(menu.bindings[K_YBUTTON as usize].as_deref(), Some("+attack"));
+    assert_eq!(menu.screen, Screen::OptionsPage(Page::NewGameAddons));
+    assert!(commands(&menu.key(K_YBUTTON, &mut cv, false)).contains("map start"));
+}
+
+#[test]
+fn reopening_regular_addons_cannot_activate_the_pickers_start_button() {
+    let (mut menu, mut cv) = setup(Page::NewGameAddons);
+    menu.key(K_LSHOULDER, &mut cv, false);
+    menu.key(K_BBUTTON, &mut cv, false);
+    menu.open(Screen::OptionsPage(Page::Addons));
+    let actions = menu.key(K_ABUTTON, &mut cv, false);
+    assert!(!commands(&actions).contains("map start"));
+    assert_eq!(menu.screen, Screen::OptionsPage(Page::PortalGun));
+}
