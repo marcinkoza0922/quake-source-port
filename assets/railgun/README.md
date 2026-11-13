@@ -14,4 +14,4 @@ not Quake or id Software data.
 Rebuild: zip `model.fbx` + `model_base_color.png` from the Meshy task, then
 `blender -b --factory-startup --python-exit-code 1 --python
 tools/import_toy_model.py -- meshy_t2_railgun.zip --out assets/railgun
---name railgun --length 44 --back 14`.
+--name railgun --length 44 --anchor origin --flip --back 14 --gain 0.6 --glow`.

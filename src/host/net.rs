@@ -376,13 +376,9 @@ impl Host {
         let mut feedback = None;
         for e in evs {
             match e {
-                ClientEvent::PortalEffect(fx) => self.portal_fx.receive(fx, self.cl.time, self.snd.as_ref()),
-                ClientEvent::RailEffect(fx) => {
-                    let choice = self.cv("addon_rail_color").max(0.0) as usize;
-                    self.rail_fx.receive(fx, self.cl.time, choice, self.snd.as_ref());
+                ClientEvent::PortalEffect(_) | ClientEvent::RailEffect(_) | ClientEvent::Hook(_) | ClientEvent::Boomerang(_) => {
+                    self.toy_event(e);
                 }
-                ClientEvent::Hook(h) => self.hook_fx.receive(h, self.cl.time, self.snd.as_ref()),
-                ClientEvent::Boomerang(line) => self.boomerang_fx.receive(&line, self.cl.time, &self.cl, self.snd.as_ref()),
                 ClientEvent::HitFeedback { kill } => {
                     feedback = Some(feedback.unwrap_or(false) || kill);
                 }
@@ -460,10 +456,7 @@ impl Host {
                 }
                 ClientEvent::BonusFlash => self.view.bonus_flash(),
                 ClientEvent::NewMap => {
-                    self.portal_fx.clear();
-                    self.rail_fx.clear();
-                    self.hook_fx.clear();
-                    self.boomerang_fx.clear();
+                    self.clear_toy_fx();
                     feedback = None;
                     self.feedback = Default::default();
                     self.stats_recorded = false;

@@ -9,6 +9,7 @@
 
 use qcore::anorms;
 pub mod delta;
+mod addon_msgs;
 mod effects;
 mod fte;
 mod hook;
@@ -25,4 +26,5 @@ pub use input::{InputState, MoveSpeeds, UserCmd};
 pub use parse::ParseError;
 pub use rail::RailEffect;
 pub use state::*;
+pub use addon_msgs::{PortalEffect, PortalView};
 pub use hook::HookView;

@@ -163,9 +163,8 @@ kills, gibs and mod rules apply. Refire timers live on `Level::rails`
   recharge whine ending in a ready tick at ~1.4 s; looping hum on the
   holder's entity channel 6 while held; dry click; impact hiss.
 - Model: `assets/railgun/` (Meshy meshy-t2 1,365 tris, see its README),
-  converted by `tools/import_toy_model.py` (generic copy of the portal
-  importer: `--out --name --length --back`, glow mask = pixels with one
-  dominant channel, drawn fullbright). Drawn with `portal_pose` + recoil.
+  converted with the command in its README (`--glow`: pixels with one
+  dominant channel are drawn fullbright). Drawn with `portal_pose` + recoil.
 - Menu: Add-ons → Railgun toggle (`addon_railgun`) and Railgun Settings
   (Damage slider, Trail Colour); `menu railgun` opens it.
 - Tests: `crates/qserver/tests/railgun.rs` (e1m1: ammo, refire, dry click).
@@ -200,9 +199,9 @@ point follows the entity's origin.
 - Model: `assets/hookshot/` from Meshy (nano-banana concept, meshy-t2
   1,342 tris + meshy-n1 texture, task `01a1d66e-1a99-7656-a692-de203abb1792`),
   converted by `blender -b --factory-startup --python
-  tools/import_toy_model.py -- SRC.zip assets/hookshot --length 30` (generic
-  copy of the portal importer: longest axis to +X, texture scaled by 0.5 for
-  alias overbright, no mask); `hook_model.rs` palette-quantises it.
+  tools/import_toy_model.py -- SRC.zip assets/hookshot --length 30 --anchor
+  centroid` (longest horizontal axis to +X, texture ×0.5 for alias
+  overbright, no mask); `hook_model.rs` palette-quantises it.
 - Tests: `crates/qserver/tests/hookshot.rs` (e1m1, game data).
 ### Stickybomb launcher (`addon_sticky`, `addons/sticky.rs`)
 TF2 homage. Fire (held) lobs a bomb every 0.6 s on the grenade arc
@@ -230,9 +229,8 @@ A player leaving detonates theirs; the toy switched off removes all.
   48-unit red dlight. The launcher is a Meshy import (concept nano-banana
   `01a1d669-d70f-7701-a63a-9822cdf2662d`, meshy-t2 + meshy-n1 task
   `01a1d66a-00dd-7228-897d-05a59fec46ac`, 18 credits) converted by
-  `tools/import_toy_model.py` (generic copy of the portal importer, no
-  energy mask: `blender -b --factory-startup --python
-  tools/import_toy_model.py -- DIR_OR_ZIP --out assets/stickybomb`), skin
+  `blender -b --factory-startup --python tools/import_toy_model.py --
+  DIR_OR_ZIP --out assets/stickybomb --back 12 --gain 0.6` (no mask), skin
   quantized to the active palette's non-fullbright colours.
 ### Boomerang (`addons/boomerang.rs`, `src/addons/boomerang_fx.rs`)
 Zelda-style homing boomerang (`addon_boomerang`, default 1). Holding fire
@@ -272,7 +270,7 @@ nothing until it is caught.
   990 tris) + meshy-n1 texture, task `01a1d66c-46a1-72b3-a95b-549075c70824`
   (18 credits). Imported with `blender -b --factory-startup --python-exit-code 1
   --python tools/import_toy_model.py -- model.fbx assets/boomerang boomerang
-  --flat` (28 u long, thinnest axis Z, 256² atlas darkened ×0.75, converted to
+  --flat --length 28 --size 256 --gain 0.75` (28 u long, thinnest axis Z, 256² atlas darkened ×0.75, converted to
   the mod palette at load, no fullbrights). The FBX stays external.
 - Audition: `rustc --edition=2024 tools/boomerang_cues.rs -o target/boomerang-cues && target/boomerang-cues target/boomerang-audio` writes the four cues as 48 kHz WAVs.
 ### Equipment wheel and goggles (`src/addons/goggles.rs`, `equip_wheel.rs`, `src/host/goggles.rs`)

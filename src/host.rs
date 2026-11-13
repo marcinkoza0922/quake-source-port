@@ -38,6 +38,7 @@ mod console;
 mod input;
 mod frame;
 mod goggles;
+mod toy_fx;
 mod ctx;
 mod cvars;
 use cvars::*;
@@ -445,32 +446,6 @@ fn cmd_fog(h: &mut Host, a: &Args) {
         }
     };
     h.cl.fog = qclient::Fog { density: d.max(0.0), color: [r, g, b].map(|c| c.clamp(0.0, 1.0)), time: 0.0 };
-}
-
-/// The original command line without the mod selection (`-game x`,
-/// `-hipnotic`/`-rogue`/`-quoth`) and without `+command` sequences, which
-/// belong to the first launch.
-fn relaunch_args(cmdline: &[String]) -> Vec<String> {
-    let mut out = Vec::new();
-    let mut it = cmdline.iter();
-    let mut in_cmd = false;
-    while let Some(a) = it.next() {
-        let l = a.to_ascii_lowercase();
-        if l == "-game" {
-            it.next();
-            in_cmd = false;
-        } else if matches!(l.as_str(), "-hipnotic" | "-rogue" | "-quoth") {
-            in_cmd = false;
-        } else if a.starts_with('+') {
-            in_cmd = true;
-        } else if a.starts_with('-') && a.len() > 1 && a.parse::<f64>().is_err() {
-            in_cmd = false;
-            out.push(a.clone());
-        } else if !in_cmd {
-            out.push(a.clone());
-        }
-    }
-    out
 }
 
 /// The strings of the clc_stringcmd messages in `out`.
