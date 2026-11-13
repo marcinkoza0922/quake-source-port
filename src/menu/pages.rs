@@ -100,10 +100,9 @@ pub(super) const CONTROLS_ALL: &[Item] = &[
     bind("Quick Load", "echo Quickloading...; wait; load quick"),
     Item::ResetBinds,
     bind("Alt Fire (Add-ons)", "+attack2"),
-    bind("Toy Slot (Add-ons)", "+toy"),
     bind("Equipment Wheel (Add-ons)", "+equipwheel"),
 ];
-pub(super) const CONTROLS: &[Item] = CONTROLS_ALL.split_at(CONTROLS_ALL.len() - 3).0;
+pub(super) const CONTROLS: &[Item] = CONTROLS_ALL.split_at(CONTROLS_ALL.len() - 2).0;
 
 /// Main menu → Add-ons: which toys the running game (or the next new
 /// game) has. Locked while the running game was started without add-ons.

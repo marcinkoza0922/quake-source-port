@@ -150,6 +150,8 @@ impl Host {
             }).collect();
         let target_colors: Vec<bool> = rays.into_iter().map(|(id, eye, dir)|
             self.server.reticle_on_target(id, eye, dir)).collect();
+        let addon_entries: Vec<_> = crate::wheel::inventory(&self.server.core.cvars, &self.allowed_toys())
+            .into_iter().filter(|e| matches!(e.weapon, crate::wheel::Weapon::Addon(_))).collect();
         let hud_cfg = crate::sbar::HudConfig::from_cvars(&self.server.core.cvars);
         {
             let fs = &self.server.core.fs;
@@ -181,12 +183,12 @@ impl Host {
                             damage_view.draw_damage(&mut cc, damage_height, self.server.core.cvars.value_of("hud_damageindicator") != 0.0, self.server.core.cvars.value_of("v_flashscale"));
                             let feedback = if i == 0 { &self.feedback } else { &self.guests[live[i - 1]].feedback };
                             let marker = (feedback.remaining(self.realtime), feedback.kill);
-                            let (cl, fade, face, locked, active) = if i == 0 {
-                                (&self.cl, &mut self.hud_fade, self.view.face_anim_time > self.cl.time, self.input.lockon.target.is_some(), self.input.lockon.active)
+                            let (cl, fade, face, locked, active, held_addon) = if i == 0 {
+                                (&self.cl, &mut self.hud_fade, self.view.face_anim_time > self.cl.time, self.input.lockon.target.is_some(), self.input.lockon.active, self.toy.held)
                             } else {
                                 let Some(g) = live.get(i - 1).and_then(|&k| self.guests.get_mut(k)) else { continue };
                                 let face = g.view.face_anim_time > g.cl.time;
-                                (&g.cl, &mut g.hud_fade, face, g.input.lockon.target.is_some(), g.input.lockon.active)
+                                (&g.cl, &mut g.hud_fade, face, g.input.lockon.target.is_some(), g.input.lockon.active, g.toy.held)
                             };
                             if cl.intermission == 0 {
                                 let vh = cc.vh() - if classic { CLASSIC_SBAR_LINES } else { 0.0 };
@@ -196,6 +198,8 @@ impl Host {
                             }
                             let mut sb = crate::sbar::Sbar::new(&mut cc, &mut pf, pack);
                             sb.teamplay = teamplay;
+                            sb.addon_weapons = addon_entries.clone();
+                            sb.held_addon = held_addon;
                             if classic {
                                 sb.draw(cl, self.show_scores, face);
                             } else {
@@ -229,6 +233,8 @@ impl Host {
                         let pack = crate::sbar::Pack::from_game_dirs(self.server.core.fs.game_dirs().iter().map(String::as_str));
                         let mut sb = crate::sbar::Sbar::new(&mut c, &mut pf, pack);
                         sb.teamplay = self.server.core.cvars.value_of("teamplay");
+                        sb.addon_weapons = addon_entries.clone();
+                        sb.held_addon = self.toy.held;
                         if classic {
                             sb.backtile(CLASSIC_SBAR_LINES);
                             sb.draw(&self.cl, self.show_scores, face);

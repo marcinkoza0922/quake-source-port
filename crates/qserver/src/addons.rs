@@ -67,7 +67,7 @@ pub const BUTTON_TOY_ALT: u8 = 1 << 3;
 /// The held toy's id sits in bits 4..7 (0 = none).
 pub const TOY_SHIFT: u8 = 4;
 
-/// The toys, in toy-slot cycling order.
+/// Add-on weapons, in stable order within a shared weapon slot.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum Toy {
     PortalGun,

@@ -171,6 +171,7 @@ impl Host {
         let autoaim_fov = self.autoaim_fov();
         let autoaim_players = self.cv("deathmatch") != 0.0;
         let cvars = &self.server.core.cvars;
+        let entries = crate::wheel::inventory(cvars, &toys);
         for (g, targets) in self.guests.iter_mut().zip(&targets) {
             if g.cl.signon != 4 {
                 continue;
@@ -192,10 +193,13 @@ impl Host {
             let mut fresh = inp.impulse;
             let alive = g.cl.stats[qnet::protocol::STAT_HEALTH] > 0;
             let allowed = in_game && alive && g.cl.intermission == 0 && !demo;
-            if let Some(imp) = g.wheel.update(g.input.wheel_held(), allowed, g.input.wheel_aim, &g.cl) {
-                fresh = imp;
+            let choice = g.wheel.update(g.input.wheel_held(), allowed, g.input.wheel_aim, &g.cl, &entries, g.toy.held);
+            let mut selected = g.toy.update_slots(cvars, &toys, (inp.weapon_slot, &mut fresh), &g.cl);
+            if let Some(weapon) = choice {
+                g.toy.select(weapon, &g.cl, &mut fresh);
+                selected = g.toy.held;
             }
-            if let Some(t) = g.toy.update_slots(cvars, &toys, inp.toy, (inp.weapon_slot, &mut fresh), g.cl.stats[qnet::protocol::STAT_WEAPON]) {
+            if let Some(t) = selected {
                 g.center_prints.push(t.name().to_string());
             }
             let buttons = g.cmd.buttons | g.toy.buttons(inp.attack, inp.attack2, inp.jump);

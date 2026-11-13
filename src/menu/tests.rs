@@ -487,18 +487,18 @@ fn a_game_without_addons_cannot_gain_them_but_an_addon_game_can_adjust() {
 #[test]
 fn control_binds_for_toys_follow_the_running_game() {
     let mut cv = addon_cvars();
-    let has_toy = || page_items(Page::Controls).iter().any(|i| matches!(i, Item::Bind { cmd: "+toy", .. }));
+    let has_addon_binds = || page_items(Page::Controls).iter().any(|i| matches!(i, Item::Bind { cmd: "+attack2", .. }));
     sync_addon_binds(&cv, false);
-    assert!(!has_toy());
+    assert!(!has_addon_binds());
     cv.set("addons_enable", "1");
     sync_addon_binds(&cv, false);
-    assert!(has_toy());
+    assert!(has_addon_binds());
     // a running game without add-ons hides them whatever the checkbox says
     sync_addon_binds(&cv, true);
-    assert!(!has_toy());
+    assert!(!has_addon_binds());
     cv.set("addons_active", "1");
     sync_addon_binds(&cv, true);
-    assert!(has_toy());
+    assert!(has_addon_binds());
 }
 
 mod shader_tests {

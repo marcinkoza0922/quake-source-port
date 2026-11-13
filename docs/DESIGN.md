@@ -107,7 +107,7 @@ Target selection: live monsters (`FL_MONSTER`, health > 0) and DM opponents if a
 - **Glyphs** (`src/glyphs.rs`): the label/colour table comes from padwight's `button_glyph`. Xbox: coloured A/B/X/Y. PlayStation: coloured ✕○□△. Nintendo: neutral discs labelled by position (south shows B). LB/L1/L, LT/L2/ZL, View/Share/−, and so on. Family comes from SDL's gamepad type, then vendor id, then name (`qplatform::pad_family`, sent as `HostEvent::PadFamily`). `joy_glyphs` overrides it (0 auto, 1 Xbox, 2 PS, 3 Nintendo). Discs and PS symbols come from a 5-cell RGBA atlas rasterised at startup with bilinear sampling (`Renderer::register_pic_rgba_linear`). Keyboard keys are drawn as square tags.
 - **Touch** (`qinput::touch`, `src/host/touch.rs`): SDL finger events become `Event::Finger`, and `SDL_TOUCH_MOUSE_EVENTS` is off, so touches never also arrive as mouse clicks. In menus a tap hovers and then clicks on release, and a vertical drag sends wheel steps. In the console or chat a tap re-opens the OS keyboard. In game the twin-zone overlay applies: a floating stick on the left half (base follows the finger past the rim, 10% deadzone) and drag-to-look on the right half (180° per screen-height drag × `touch_sensitivity`, `touch_invert`). Round buttons run commands. Held `+` buttons pass key `1000+i` so the release matches. FIRE also turns the view while dragged. `touch_enable`: 0 off, 1 auto (shown from the first touch until a key, click, mouse move or pad input), 2 always. `touch_size` 0.5–2, `touch_opacity`. Menu: Options → Input → Touchscreen (`menu_options touch`). Fingers are released when the key destination leaves game.
 - **Menus**: D-pad or left stick moves, A selects, B goes back. The host auto-repeats held directions for the pad only, since keyboards repeat themselves. Every screen ends with a hint row for the active device. **Options › Controls** lists rebindable actions with keyboard and controller columns. Select starts capture, and the next key or button binds; a third key of the same kind replaces both. Backspace/Del clears the keyboard keys and X clears the pad keys. Esc/Start cancels. While capturing, `Input::capture` stops the sticks from emulating arrows. "Reset to Defaults" runs `_resetbinds`, which replays default.cfg's `bind`/`alias` lines plus the pad defaults and leaves cvars alone. `menu_options controls` opens the page. Pressing A on a text field (player name, join address) opens an on-screen keyboard: a 10×4 character grid plus Shift/Space/Del/Done. A types, X deletes, Y toggles shift, and B/Start closes it. Physical typing still works while it is open.
-- **Weapon wheel** (`src/wheel.rs`, `+weaponwheel`): while it is held, either stick (whichever is pushed further) or a mouse-driven virtual cursor picks one of 8 slots, axe to thunderbolt clockwise from the top, instead of moving or turning. Releasing on an owned weapon with ammo sends its impulse. In single player (local server, maxclients 1) the server tic and client time run at `cl_wheel_timescale` (default 0.25; Input page "Wheel Slow Motion").
+- **Weapon wheel** (`src/wheel.rs`, `+weaponwheel`): while it is held, either stick (whichever is pushed further) or a mouse-driven virtual cursor picks a stock or enabled add-on weapon clockwise in assigned-slot order (stock first), instead of moving or turning. Releasing selects that exact owned weapon with ammo; addon selections stay local. `wheel/inventory.rs` supplies shared weapon identities, labels and slot order. In single player (local server, maxclients 1) the server tic and client time run at `cl_wheel_timescale` (default 0.25; Input page "Wheel Slow Motion").
 - **Rumble** (`joy_rumble` 0..1): on firing, detected from STAT_AMMO dropping on the same weapon or an axe swing starting, with strength by weapon; on damage, scaled by armor + blood; and on view punches (`punchangle`). Requests are merged per frame and the main loop sends them to every pad (`Platform::rumble_all`).
 - **Intermission**: any key, click or pad button except Escape/Start sets the attack button, which QC treats as "continue". After QC's exit delay (2 s, or 5 s in deathmatch), "Press any key/button to continue..." follows the active device.
 
@@ -186,13 +186,18 @@ Damage/movement assists are engine-side so they work with any progs; off in deat
 
 ### Add-ons
 
-See [ADDONS.md](ADDONS.md) for the toys (`Toy` cycle order: portal gun,
-boomerang, stickybomb launcher, hookshot, railgun, then the QC weapon), goggles
+See [ADDONS.md](ADDONS.md) for the add-on weapons, goggles
 and equipment wheel, models, effects, synthesized cues, settings and commands.
 A Weapon Slot header groups weapon-named rows above Input Remapping, one per
 weapon supplied by the selected add-on. Add-ons may supply multiple weapons;
 the current single-weapon add-ons are not a constraint on the design. Parameter
 links use the settings submenus’ gold label and tinted strip.
+Enabled add-on weapons are available from the start without stock weapon pickups.
+Slot cycling skips unowned stock weapons; Controls exposes weapon slots, alt fire
+and the equipment wheel, with no separate toy action. Next/previous weapon
+traverses owned stock weapons and enabled add-ons in slot order (stock first);
+stock weapons without ammunition are skipped. The modern weapon HUD uses 18×12 icons
+in rows of at most four, includes enabled add-ons and highlights the held weapon.
 The two-column add-on browser combines looping previews, descriptions, shared
 and unique action remapping, weapon-slot assignments and parameter submenus.
 `tools/capture_addon_previews.py` regenerates embedded gameplay loops; format,

@@ -28,16 +28,22 @@ run with no deathmatch and no remote client (`addons::allowed`/`all_local`).
   and 0; assignment changes the slot membership rather than its key binding.
   `weapon_slot <1..9|0>` uses local input state, preserving every mod-defined
   QC impulse value, including the console's `impulse 9` cheat.
-  `+toy` still cycles all enabled toys. `+attack` and `+attack2` are shared
+  Enabled toys are available immediately; slot cycling skips unowned stock weapons.
+  Next/previous weapon (including mouse wheel) traverses owned stock weapons
+  and all enabled add-ons in slot order, stock first within each slot.
+  The radial weapon wheel adds one segment per enabled add-on in the same slot
+  order, selecting each weapon directly. Add-ons use short labels and show their
+  ammo and full names; the modern HUD includes them in a compact four-column grid.
+  The former `+toy` action is removed. `+attack` and `+attack2` are shared
   fire/alt-fire actions: remapping them affects every add-on using them.
   Goggles instead expose the unique `goggles cycle` action. The browser
   offers keyboard/mouse and controller bindings and warns before replacing
   an occupied key. Bindings use the same persistent host configuration as
   Controls.
-- While a toy is held, `ToySlot::buttons` keeps QC's attack bit at 0 and
+- While a toy is held, `WeaponSelection::buttons` keeps QC's attack bit at 0 and
   sends usercmd bit 2 (fire), bit 3 (alt) and the toy id in bits 4–7; QC
   only reads bits 0/1. The QC view model is replaced by the imported projector (player 1
-  and each split-screen guest have their own `ToySlot`).
+  and each split-screen guest have their own `WeaponSelection`).
 - Off costs one cvar lookup per frame; nothing else runs.
 - Portal gun (`addons/portal.rs`, `portal_move.rs`): fire/alt-fire edges
   place slot 0/1 of the shooter's pair. Placement traces from the eye

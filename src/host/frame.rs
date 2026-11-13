@@ -167,12 +167,16 @@ impl Host {
         let mut impulse = inp.impulse;
         let alive = self.cl.stats[STAT_HEALTH] > 0;
         let (held, aim) = (self.input.wheel_held(), self.input.wheel_aim);
-        if let Some(imp) = self.wheel.update(held, in_game && alive && self.demo.is_none(), aim, &self.cl) {
-            impulse = imp;
-        }
-        self.goggles_frame(in_game, alive);
         let toys = if self.local.is_some() { self.allowed_toys() } else { Vec::new() };
-        if let Some(t) = self.toy.update_slots(&self.server.core.cvars, &toys, inp.toy, (inp.weapon_slot, &mut impulse), self.cl.stats[qnet::protocol::STAT_WEAPON]) {
+        let entries = crate::wheel::inventory(&self.server.core.cvars, &toys);
+        let choice = self.wheel.update(held, in_game && alive && self.demo.is_none(), aim, &self.cl, &entries, self.toy.held);
+        self.goggles_frame(in_game, alive);
+        let mut selected = self.toy.update_slots(&self.server.core.cvars, &toys, (inp.weapon_slot, &mut impulse), &self.cl);
+        if let Some(weapon) = choice {
+            self.toy.select(weapon, &self.cl, &mut impulse);
+            selected = self.toy.held;
+        }
+        if let Some(t) = selected {
             let (s, t, cols) = self.center_args(t.name());
             self.con.center_print(&s, t, cols);
         }

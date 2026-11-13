@@ -153,16 +153,15 @@ pub mod btn {
     pub const GYRO: usize = 17;
     pub const WHEEL: usize = 18;
     pub const LOCKON: usize = 19;
-    /// Add-ons: secondary fire and the toy-slot toggle.
+    /// Add-ons: secondary fire.
     pub const ATTACK2: usize = 20;
-    pub const TOY: usize = 21;
     /// Add-ons: the equipment wheel (goggles).
-    pub const EQUIPWHEEL: usize = 22;
-    pub const COUNT: usize = 23;
+    pub const EQUIPWHEEL: usize = 21;
+    pub const COUNT: usize = 22;
     pub const NAMES: [&str; COUNT] = [
         "forward", "back", "moveleft", "moveright", "moveup", "movedown", "left", "right", "lookup", "lookdown",
         "speed", "strafe", "attack", "jump", "mlook", "klook", "use", "gyroaction", "weaponwheel", "lockon",
-        "attack2", "toy", "equipwheel",
+        "attack2", "equipwheel",
     ];
 }
 
