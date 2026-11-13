@@ -25,6 +25,7 @@ pub(super) const HOST_CVARS: &[(&str, &str, u32)] = &[
     ("r_lerpmove", "1", CVAR_ARCHIVE),
     ("scr_hudstyle", "1", CVAR_ARCHIVE),
     ("crosshair", "0", CVAR_ARCHIVE),
+    ("hud_damageindicator", "1", CVAR_ARCHIVE),
     ("hud_hitmarkers", "0", CVAR_ARCHIVE),
     ("ui_levelselect", "0", CVAR_ARCHIVE),
     ("ui_menufont", "0", CVAR_ARCHIVE),
