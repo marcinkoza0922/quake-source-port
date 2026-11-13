@@ -12,7 +12,7 @@ off. Toys are only allowed with no deathmatch and no remote client
   while `addons_enable` is on (`ADDON_BINDS`, synced on menu key/draw).
 - While a toy is held, `ToySlot::buttons` keeps QC's attack bit at 0 and
   sends usercmd bit 2 (fire), bit 3 (alt) and the toy id in bits 4–7; QC
-  only reads bits 0/1. The view model is hidden for that player (player 1
+  only reads bits 0/1. The QC view model is replaced by the procedural projector (player 1
   and each split-screen guest have their own `ToySlot`).
 - Off costs one cvar lookup per frame; nothing else runs.
 - Portal gun (`addons/portal.rs`, `portal_move.rs`): fire/alt-fire edges
@@ -68,3 +68,39 @@ off. Toys are only allowed with no deathmatch and no remote client
 - Turning add-ons off (or a remote client joining) removes all portals.
 - Tests: `crates/qserver/tests/portals.rs` (e1m1, needs game data).
 
+
+### Portal gun presentation
+`src/addons/portal_model.rs` builds an original native MDL: ivory split shell,
+graphite spine, copper induction rings, two blunt emitter forks, exposed core
+and dorsal mode indicator. Eight skins select the nearest Quake palette entry
+for each owner's two portal colors. It is uploaded once per level and drawn
+as a depth-compressed view weapon, with gentle idle movement and firing recoil.
+Each split-screen camera gets its own weapon, skin, and visibility mask;
+`r_drawviewmodel`, death and intermission hide it like the normal weapon.
+
+The authoritative server broadcasts transient reliable comment messages
+`//qsp_portalfx owner slot kind sx sy sz ex ey ez`: rejected shot (0), placed
+shot (1), or successful crossing (2). These are neither saved nor included in
+late-join portal state. qclient validates the complete message, finite bounded
+coordinates, and mode/kind before emitting `ClientEvent::PortalEffect`; malformed
+messages are swallowed. Existing portal placement/collision timing is unchanged.
+
+`portal_fx::Presentation` caps live effects at 64 and clears them on map changes
+or time rewind. Cosmetic projectiles travel for 120 ms with a helical
+particle wake; impact then triggers an expanding burst or contracting
+failure fizz. The particles use exact RGB colors from `portal_draw::colour`
+for all four owner pairs, independent of scripted particle settings. Crossing
+bursts use the destination portal's slot color, with sound at both endpoints
+when far apart. The weapon core follows that owner's last fired slot.
+
+`qsound::portal` synthesizes four original mono PCM cues at the device rate:
+FM snap and bass impulse (fire), rising resonant chime (placed), falling noisy
+collapse (rejected/dissipated), and filtered air rush (crossing). Both slots have
+distinct pitches. Eight cached cues feed normal positional SFX channels and
+respect master SFX volume and all split-screen listeners. No Portal recordings,
+models, textures or other external assets are included. The add-on's existing
+local-only eligibility remains in force.
+
+Audition/export helper: `rustc --edition=2024 tools/portal_cues.rs -o target/portal-cues` then `target/portal-cues target/portal-audio` writes all eight
+48 kHz mono WAVs from the same synthesis code used in-game. Generated previews
+stay under ignored `target/`; the Rust sources are the editable assets.

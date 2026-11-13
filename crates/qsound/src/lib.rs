@@ -5,6 +5,7 @@
 
 pub mod music;
 pub mod feedback;
+pub mod portal;
 
 use std::collections::HashMap;
 use std::sync::{Arc, Mutex};

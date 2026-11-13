@@ -97,7 +97,18 @@ pub(crate) fn frame(l: &mut Level, c: &mut Core) {
         let ents = Ents { vm: &mut l.vm, c: &mut *c };
         let others: Vec<portal::Portal> =
             st.pairs.iter().enumerate().flat_map(|(o, p)| p.iter().enumerate().filter(move |&(s, _)| (o, s) != (i, slot)).filter_map(|(_, p)| *p)).collect();
-        if let Some(p) = portal::place(&l.world, &ents, i as u32 + 1, &others) {
+        use qcore::math::{Vec3, angle_vectors};
+        use qworld::{Edicts, MoveType, V};
+        let e = i as u32 + 1;
+        let eye = ents.v(e, V::Origin) + ents.v(e, V::ViewOfs);
+        let (fwd, right, up) = angle_vectors(ents.v(e, V::VAngle));
+        let start = eye + fwd * 40.0 + right * 5.0 - up * 8.0;
+        let p = portal::place(&l.world, &ents, e, &others);
+        let end = p.map(|p| p.origin).unwrap_or_else(|| {
+            l.world.trace(&ents, eye, Vec3::ZERO, Vec3::ZERO, eye + fwd * 8192.0, MoveType::NoMonsters, Some(e)).endpos
+        });
+        st.effect(i, slot, u8::from(p.is_some()), start, end);
+        if let Some(p) = p {
             st.set(i, slot, Some(p));
         }
     }

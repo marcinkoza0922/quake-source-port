@@ -102,6 +102,12 @@ impl Host {
                         ents.push(RenderEntity { model: m.id, origin: t.origin, angles: t.angles, views: bit, ..Default::default() });
                     }
                 }
+                if g.toy.held == Some(qserver::addons::Toy::PortalGun) && g.cl.intermission == 0 && g.cl.stats[0] > 0
+                    && cv.drawviewmodel
+                    && let Some(weapon) = self.portal_fx.weapon(g.cl.viewentity.saturating_sub(1), self.cl.time, v,
+                        &mut self.level, &self.server.core.fs, &mut self.r) {
+                    ents.push(RenderEntity { views: bit, ..weapon });
+                }
                 if let Some(gun) = gun {
                     ents.push(RenderEntity { views: bit, ..gun });
                 }

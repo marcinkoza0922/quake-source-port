@@ -201,6 +201,8 @@ Damage/movement assists are engine-side so they work with any progs; off in deat
 ### Add-ons
 
 See [ADDONS.md](ADDONS.md) for the optional local toys, portal gun, rendering,
+procedural projector model, owner-colored projectile effects and synthesized cues,
+plus `tools/portal_cues.rs` for exporting WAV previews,
 movement, settings and diagnostic commands.
 
 ### Test bot (`tools/qbot`)

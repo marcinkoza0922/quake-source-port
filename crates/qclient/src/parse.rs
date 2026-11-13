@@ -303,6 +303,12 @@ impl ClientState {
                 }
                 _ => {}
             }
+            if let Some(args) = line.strip_prefix(b"//qsp_portalfx ") {
+                if let Some(fx) = crate::PortalEffect::parse(&String::from_utf8_lossy(args)) {
+                    self.events.push(ClientEvent::PortalEffect(fx));
+                }
+                continue;
+            }
             if let Some(args) = line.strip_prefix(b"//qsp_portal ") {
                 self.parse_portal(&String::from_utf8_lossy(args));
                 continue;
