@@ -69,7 +69,9 @@ never just to make a regression go away.
 - `bot/fly.rs`: classic noclip flight (`sv_altnoclip 0`, `sv_maxspeed
   1000`); touch goals fly to a point in the box clear of other triggers;
   after 5 s it `setpos`es there. Shootables: nearest open firing spot with a
-  clear shot at the centre or a face. Buttons: noclip never touches, so it
+  clear shot (the engine's real `traceline` hits the target from both
+  `origin+16` and `origin`: LG damage traces start at the origin) at the centre
+  or a face. No LG underwater (it discharges). Buttons: noclip never touches, so it
   stands just off a face (or on top), turns noclip off and walks/swims in.
 
 ## Debugging a failed goal
@@ -84,10 +86,10 @@ never just to make a regression go away.
    games) or a real level/engine problem (that's a finding: report it).
 
 hipnotic `func_spawn` keeps dormant template monsters (`spawnfunction` set)
-that never wake; they are skipped. A spawner fired by `item_hornofconjuring`
-makes a charmed ally and leaves `total_monsters` one higher (hip2m1 62/63 is
-that, not a bot gap; if the ally spawns blocked it logs `walkmonster in
-wall` and the total stays put, as on hip2m5). Rogue statues (spawnflag 2)
+that never wake; they are skipped. The horn of conjuring fires a spawner (a charmed ally); earlier
+"hip2m1 62/63" counts were not the ally but a bot gap, now fixed: a monster
+spawned into a reused edict slot was never a goal. If a spawned monster lands
+blocked it logs `walkmonster in wall` (order-dependent NEW-LOG). Rogue statues (spawnflag 2)
 are solid but `takedamage 0` until their targetname fires: any monster with
 `takedamage 0` counts as dormant. Doors that fire a `target` when touched open are goals
 pressed like buttons. No QC source for a mod? Disassemble the function from
@@ -97,7 +99,10 @@ horn were worked out.
 Repeatable buttons are re-pressed (movers first) while monsters that aren't
 goals stay alive: that's how e1m7's Chthon dies.
 
-Known residuals (2026-11-12): e1m7 closet zombies placed in the floor (`walkmonster
+A kill shortfall no failed goal explains is listed at the end ("alive but
+never a goal" / "neither killed nor alive").
+
+Known residuals (2026-11-13): e1m7 closet zombies placed in the floor (`walkmonster
 in wall`): once splash knocks one down it can never get up or be hit, in
 vanilla too; reported as "knocked down inside the world". A few buttons in id1/rogue/hipnotic; hip1m5 shootable
 door; Shub-Niggurath in `end` (killed by a telefrag the bot doesn't perform).

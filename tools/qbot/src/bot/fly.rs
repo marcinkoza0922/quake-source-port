@@ -132,11 +132,10 @@ impl Bot<'_> {
         }
         // Keep the aim on the same part of the target as it moves.
         let c = self.center(ent) + self.aim_point;
-        let eye = self.eye();
         self.aim(mv, ent, c);
         let spot = self.spot.unwrap();
         let dist = (spot - self.me_origin()).length();
-        let clear = self.clear_shot(eye, c, ent);
+        let clear = self.clear_shot(self.me_origin(), c, ent);
         if dist < 32.0 || clear {
             mv.buttons |= 1;
         }
@@ -147,7 +146,7 @@ impl Bot<'_> {
 
     /// Fire at the nearest live monster in sight while flying elsewhere.
     fn fire_at_will(&mut self, mv: &mut ClientMove) {
-        let eye = self.eye();
+        let (eye, here) = (self.eye(), self.me_origin());
         let mut cands: Vec<(f32, u32, Vec3)> = self
             .goals
             .iter()
@@ -159,9 +158,12 @@ impl Bot<'_> {
             .filter(|x| x.0 < 1200.0 * 1200.0)
             .collect();
         cands.sort_by(|a, b| a.0.total_cmp(&b.0));
-        if let Some(&(_, e, c)) = cands.iter().take(6).find(|x| self.clear_shot(eye, x.2, x.1)) {
-            self.aim(mv, e, c);
-            mv.buttons |= 1;
+        for &(_, e, c) in cands.iter().take(6) {
+            if self.clear_shot(here, c, e) {
+                self.aim(mv, e, c);
+                mv.buttons |= 1;
+                break;
+            }
         }
     }
 
@@ -171,10 +173,12 @@ impl Bot<'_> {
         mv.angles = look_angles(d);
         // Zombies only die when gibbed: rockets. Otherwise the lightning
         // gun in its range (hitscan, cheap to simulate), the super nailgun
-        // beyond it.
+        // beyond it. Never the lightning gun underwater: it discharges
+        // instead of firing (e1m1's secret panel is shot from the pool).
+        let wet = self.vm().ent_f(self.me, self.o.waterlevel) > 1.0;
         let w = if self.vm().classname(e).contains("zombie") {
             7
-        } else if d.length() < 560.0 {
+        } else if d.length() < 560.0 && !wet {
             8
         } else {
             5
@@ -234,7 +238,7 @@ impl Bot<'_> {
     /// The nearest open spot with a clear shot at some part of `ent` (its
     /// centre, else the middle of a face: an altar's trigger can wrap world
     /// brushes), and that part as an offset from the centre.
-    fn firing_spot(&self, ent: u32) -> Option<(Vec3, Vec3)> {
+    fn firing_spot(&mut self, ent: u32) -> Option<(Vec3, Vec3)> {
         let here = self.me_origin();
         let (lo, hi) = self.bounds(ent);
         let c = (lo + hi) * 0.5;
@@ -259,8 +263,7 @@ impl Bot<'_> {
                     if best.is_some_and(|b| b.0 <= d) || !self.fits(p, 0, false) {
                         continue;
                     }
-                    let eye = p + Vec3::new(0.0, 0.0, 22.0);
-                    if let Some(&aim) = aims.iter().find(|&&o| self.clear_shot(eye, c + o, ent)) {
+                    if let Some(&aim) = aims.iter().find(|&&o| self.clear_shot(p, c + o, ent)) {
                         best = Some((d, p, aim));
                     }
                 }
@@ -351,31 +354,23 @@ impl Bot<'_> {
         true
     }
 
-    /// Whether a shot from `a` reaches `b` past the world and every brush
-    /// entity other than `target` (bars, glass, closed doors).
-    fn clear_shot(&self, a: Vec3, b: Vec3, target: u32) -> bool {
-        if self.cm.hull(0, 0).trace(a, b).fraction < 1.0 {
-            return false;
+    /// Whether a shot by a player standing at `origin` hits `target` when
+    /// aimed at `b`, by the engine's own traces (monsters and brush entities
+    /// in the way stop it). Both lines must reach: weapons fire from
+    /// `origin + '0 0 16'`, but the lightning gun's damage traces start at
+    /// the origin itself (e1m1's panel over the pool clips the ledge).
+    fn clear_shot(&mut self, origin: Vec3, b: Vec3, target: u32) -> bool {
+        let me = self.me;
+        // A downed zombie is not solid, so no trace hits it, but rocket
+        // splash does: then only the world and brushes may be in the way.
+        if self.vm().ent_f(target, self.o.solid) as i32 == SOLID_NOT {
+            let a = origin + Vec3::new(0.0, 0.0, 16.0);
+            return self.sv.traceline(a, b, true, me).is_some_and(|tr| tr.fraction == 1.0);
         }
-        let l = self.sv.level.as_ref().unwrap();
-        let vm = &l.vm;
-        let Some(mi) = self.o.modelindex else { return true };
-        let (lo, hi) = (a.min(b), a.max(b));
-        for e in 1..vm.num_edicts() as u32 {
-            if e == target || vm.is_free(e) || vm.ent_f(e, self.o.solid) as i32 != SOLID_BSP {
-                continue;
-            }
-            let (emin, emax) = self.bounds(e);
-            if emin.x > hi.x || emax.x < lo.x || emin.y > hi.y || emax.y < lo.y || emin.z > hi.z || emax.z < lo.z {
-                continue;
-            }
-            if let Some((m, sub)) = l.world.model(vm.ent_f(e, mi) as usize) {
-                let o = v(vm.ent_v(e, self.o.origin));
-                if m.hull(*sub, 0).trace(a - o, b - o).fraction < 1.0 {
-                    return false;
-                }
-            }
-        }
-        true
+        [origin + Vec3::new(0.0, 0.0, 16.0), origin].into_iter().all(|a| {
+            // Run through `b`: an aim point on a face ends a trace short.
+            let end = a + (b - a) * 1.25;
+            self.sv.traceline(a, end, false, me).is_some_and(|tr| tr.ent == Some(target))
+        })
     }
 }

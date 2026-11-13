@@ -3,6 +3,14 @@
 
 use super::*;
 
+/// hipnotic func_spawn keeps dormant templates (with `spawnfunction` set)
+/// and only ever spawns copies of them.
+fn spawn_template(vm: &Vm, o: &Ofs, e: u32) -> bool {
+    vm.ent_f(e, o.solid) as i32 == SOLID_NOT
+        && vm.ent_f(e, o.takedamage) == 0.0
+        && o.spawnfunction.is_some_and(|f| vm.ent_i(e, f) != 0)
+}
+
 impl Bot<'_> {
     /// Add goals for edicts not seen yet: run at the start and every couple
     /// of seconds, since triggers spawn monsters and items as the level runs.
@@ -26,12 +34,7 @@ impl Bot<'_> {
                 "door" | "func_door" if !shootable && self.has_str(e, o.target) && !self.has_str(e, o.targetname) => Kind::Button,
                 c if c.starts_with("item_") && c.contains("key") || c == "item_sigil" || c == "item_hornofconjuring" => Kind::Pickup,
                 _ if vm.ent_f(e, o.flags) as i32 & FL_MONSTER != 0 => {
-                    // hipnotic func_spawn keeps dormant templates (with
-                    // `spawnfunction` set) and only ever spawns copies.
-                    let template = solid == SOLID_NOT
-                        && vm.ent_f(e, o.takedamage) == 0.0
-                        && o.spawnfunction.is_some_and(|f| vm.ent_i(e, f) != 0);
-                    if vm.ent_f(e, o.health) <= 0.0 || template {
+                    if vm.ent_f(e, o.health) <= 0.0 || spawn_template(vm, o, e) {
                         continue;
                     }
                     Kind::Monster
@@ -60,6 +63,35 @@ impl Bot<'_> {
                 self.sv.level.as_mut().unwrap().vm.set_ent_i(g.ent, self.o.touch, 0);
             }
             self.goals.push(g);
+        }
+    }
+
+    /// Explain kills short of `total_monsters` that no failed goal covers:
+    /// live monsters that never became goals (a horn's charmed ally, one
+    /// spawned after the last scan), else counted ones that left no edict
+    /// (removed or never spawned).
+    pub(super) fn unaccounted_monsters(&mut self) {
+        let st = self.sv.stats();
+        let short = st.total_monsters - st.killed_monsters;
+        let failed = self.goals.iter().filter(|g| g.kind == Kind::Monster && !g.done).count() as i32;
+        if short <= failed {
+            return;
+        }
+        let vm = self.vm();
+        let o = &self.o;
+        let alive: Vec<String> = (1..vm.num_edicts() as u32)
+            .filter(|&e| !vm.is_free(e) && vm.ent_f(e, o.flags) as i32 & FL_MONSTER != 0 && vm.ent_f(e, o.health) > 0.0)
+            .filter(|&e| !spawn_template(vm, o, e))
+            .filter(|e| !self.goals.iter().any(|g| g.ent == *e && !g.done))
+            .map(|e| {
+                let c = self.center(e);
+                format!("Monster {} #{e} at ({:.0} {:.0} {:.0}): alive but never a goal", vm.classname(e), c.x, c.y, c.z)
+            })
+            .collect();
+        let gone = short - failed - alive.len() as i32;
+        self.rep.failed.extend(alive);
+        if gone > 0 {
+            self.rep.failed.push(format!("{gone} counted monster(s) neither killed nor alive (removed, or counted but never spawned)"));
         }
     }
 
@@ -105,6 +137,12 @@ impl Bot<'_> {
         for i in 0..self.goals.len() {
             let g = &self.goals[i];
             if g.done {
+                // A corpse removed later frees its edict, which a spawner
+                // can reuse (ED_Alloc waits 0.5 s): let the scan see it anew.
+                if self.vm().is_free(g.ent) {
+                    let e = g.ent;
+                    self.known.remove(&e);
+                }
                 continue;
             }
             if g.kind == Kind::Pickup && !g.armed && self.vm().ent_f(g.ent, self.o.solid) as i32 == SOLID_TRIGGER {

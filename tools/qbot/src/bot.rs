@@ -121,7 +121,7 @@ struct Ofs {
     takedamage: usize,
     movetype: usize,
     touch: usize,
-    view_ofs: usize,
+    waterlevel: usize,
     state: Option<usize>,
     items: Option<usize>,
     modelindex: Option<usize>,
@@ -144,7 +144,7 @@ impl Ofs {
             takedamage: f("takedamage")?,
             movetype: f("movetype")?,
             touch: f("touch")?,
-            view_ofs: f("view_ofs")?,
+            waterlevel: f("waterlevel")?,
             state: f("state"),
             items: f("items"),
             modelindex: f("modelindex"),
@@ -267,6 +267,7 @@ pub fn run(fs: Fs, map: &str, opt: &Options) -> Report {
         let line = format!("{}: {why}", bot.describe(i));
         bot.rep.failed.push(line);
     }
+    bot.unaccounted_monsters();
     bot.drain_log();
     let st = bot.sv.stats();
     let mut rep = bot.rep;
@@ -308,8 +309,11 @@ impl Bot<'_> {
         v(self.vm().ent_v(self.me, self.o.origin))
     }
 
+    /// Where shots start: weapons.qc fires from `origin + '0 0 16'`, not
+    /// the eye (`view_ofs` 22), so aiming from the eye passes 6u under a
+    /// thin target such as e1m1's shootable secret panel.
     fn eye(&self) -> Vec3 {
-        self.me_origin() + v(self.vm().ent_v(self.me, self.o.view_ofs))
+        self.me_origin() + Vec3::new(0.0, 0.0, 16.0)
     }
 
     fn bounds(&self, e: u32) -> (Vec3, Vec3) {
