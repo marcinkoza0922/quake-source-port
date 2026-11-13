@@ -290,6 +290,19 @@ impl ClientState {
             if line[0] == 0x01 && self.protocol == PROTOCOL_NETQUAKE {
                 continue;
             }
+            // Comment transport keeps classic clients compatible and bypasses
+            // command execution entirely for these narrowly parsed events.
+            match line.as_slice() {
+                b"//qhit 0\n" => {
+                    self.events.push(ClientEvent::HitFeedback { kill: false });
+                    continue;
+                }
+                b"//qhit 1\n" => {
+                    self.events.push(ClientEvent::HitFeedback { kill: true });
+                    continue;
+                }
+                _ => {}
+            }
             let line = line.strip_prefix(b"//").unwrap_or(&line);
             self.events.push(ClientEvent::StuffText(String::from_utf8_lossy(line).into_owned()));
         }

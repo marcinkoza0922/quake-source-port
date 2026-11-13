@@ -20,6 +20,11 @@ impl Menu {
 
     pub(super) fn run(&mut self, run: Run, cv: &mut Cvars, out: &mut Vec<Action>) {
         match run {
+            Run::PreviewHit | Run::PreviewKill => {
+                let cue = if run == Run::PreviewHit { "hit" } else { "kill" };
+                out.push(Action::Command(format!("hitfeedback_preview {cue}\n")));
+                return;
+            }
             Run::Connect => {
                 let a = cv.by_name("_mp_address").map_or(String::new(), |c| c.string.trim().to_string());
                 if a.is_empty() {

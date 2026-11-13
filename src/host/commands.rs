@@ -41,6 +41,16 @@ pub(super) fn register_commands(c: &mut Commands<Host>) {
             None => h.print(&format!("couldn't exec {name}\n")),
         }
     });
+    c.add("hitfeedback_preview", |h, a| {
+        match a.argv(1) {
+            "hit" => h.play_feedback(false),
+            "kill" => h.play_feedback(true),
+            _ => h.print("hitfeedback_preview <hit|kill>\n"),
+        }
+    });
+    c.add("hitmarker_test", |h, a| {
+        h.feedback.trigger(h.realtime, a.argv(1) == "kill");
+    });
     c.add("stuffcmds", |h, _| h.stuff_cmds());
     // Once per config (cl_paddefaults): fill in default pad binds whose key
     // is still unbound, so configs saved before the pad
@@ -133,6 +143,8 @@ pub(super) fn register_commands(c: &mut Commands<Host>) {
             "assists" => Some(Page::Assists),
             "autoaim" => Some(Page::AutoAim),
             "hud" => Some(Page::Hud),
+            "hitsound" => Some(Page::HitSound),
+            "killsound" => Some(Page::KillSound),
             "hudlayout" | "layout" => Some(Page::HudLayout),
             "messages" => Some(Page::Messages),
             "accessibility" => Some(Page::Accessibility),

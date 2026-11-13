@@ -54,6 +54,7 @@ impl Host {
         self.stop_recording();
         self.autosave.reset();
         self.death_handled = false;
+        self.feedback = Default::default();
         self.demo_head.clear();
         self.cl = ClientState::new();
         self.local = None;
@@ -372,8 +373,12 @@ impl Host {
 
     pub(super) fn process_client_events(&mut self) {
         let evs = self.cl.take_events();
+        let mut feedback = None;
         for e in evs {
             match e {
+                ClientEvent::HitFeedback { kill } => {
+                    feedback = Some(feedback.unwrap_or(false) || kill);
+                }
                 ClientEvent::Print(s) => {
                     if self.ping_expect.is_some() && self.take_ping_reply(&s) {
                         continue;
@@ -448,6 +453,8 @@ impl Host {
                 }
                 ClientEvent::BonusFlash => self.view.bonus_flash(),
                 ClientEvent::NewMap => {
+                    feedback = None;
+                    self.feedback = Default::default();
                     self.stats_recorded = false;
                     self.autosave.reset();
                     self.new_map()
@@ -473,6 +480,9 @@ impl Host {
                 }
                 _ => {}
             }
+        }
+        if let Some(kill) = feedback {
+            self.receive_feedback(kill);
         }
         if self.cl.intermission != 0 && !self.stats_recorded {
             self.stats_recorded = true;

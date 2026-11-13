@@ -69,6 +69,16 @@ pub(super) fn tooltip(item: Item) -> Option<&'static str> {
         "v_flashscale" => "Strength of the full-screen flashes for damage, pickups and powerups",
         "r_shader_scope" => "3D view keeps the HUD and menus sharp; whole screen runs them through the shader too",
         "r_colorblind" => "Shifts colors so they stay distinct for the chosen color blindness",
+        "hud_hitmarkers" => "Flash a marker on confirmed hits; kills use a different color, and the shape follows your crosshair",
+        "s_hitfeedback" => "Play your chosen hit or kill cue when you damage an enemy",
+        "s_hit_length" | "s_kill_length" => "Stretch or shorten the sound while keeping its pitch",
+        "s_hit_speed" | "s_kill_speed" => "Playback speed: faster sounds shorter and higher",
+        "s_hit_pitch" | "s_kill_pitch" => "Raise or lower the tone independently of sound length",
+        "s_hit_bass" | "s_kill_bass" => "Boost or cut low frequencies in decibels",
+        "s_hit_treble" | "s_kill_treble" => "Boost or cut high frequencies in decibels",
+        "s_hit_drive" | "s_kill_drive" => "Add saturation and distortion",
+        "s_hit_echo" | "s_kill_echo" => "Add delayed repeats after the cue",
+        "s_hit_reverb" | "s_kill_reverb" => "Add a ringing room tail after the cue",
         "crosshair_outline" => "Dark border keeps the crosshair visible on any background",
         "cl_captions" => "Shows text for important sounds: doors, alerted enemies, secrets, pickups",
         "scr_textscale" => "Size of on-screen messages and captions",
@@ -108,6 +118,8 @@ pub(super) fn page_items(p: Page) -> &'static [Item] {
         Page::Enhancements => ENHANCEMENTS,
         Page::Impacts => IMPACTS,
         Page::Audio => AUDIO,
+        Page::HitSound => HIT_SOUND,
+        Page::KillSound => KILL_SOUND,
         Page::Accessibility => ACCESSIBILITY,
         Page::Hud => HUD,
         Page::HudLayout => HUD_LAYOUT,
@@ -130,6 +142,8 @@ pub(super) fn page_items(p: Page) -> &'static [Item] {
 
 pub(super) fn page_name(p: Page) -> &'static str {
     match p {
+        Page::HitSound => "Hit Sound",
+        Page::KillSound => "Kill Sound",
         Page::Join => "Join Game",
         Page::Host => "Host Game",
         Page::Setup => "Player Setup",
@@ -152,7 +166,7 @@ pub(super) fn page_name(p: Page) -> &'static str {
 
 /// The page an `Item::Sub` page returns to, with that row's index.
 pub(super) fn parent_page(p: Page) -> Option<(Page, usize)> {
-    [Page::Assists, Page::Gameplay, Page::Input, Page::Hud, Page::Accessibility, Page::Enhancements].into_iter().find_map(|parent| {
+    [Page::Assists, Page::Gameplay, Page::Input, Page::Hud, Page::Accessibility, Page::Enhancements, Page::Audio].into_iter().find_map(|parent| {
         page_items(parent).iter().position(|i| matches!(i, Item::Sub { page, .. } if *page == p)).map(|i| (parent, i))
     })
 }

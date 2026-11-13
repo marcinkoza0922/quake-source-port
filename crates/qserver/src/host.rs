@@ -13,6 +13,7 @@ use crate::vis::leafs_in_pvs;
 mod model;
 mod trace;
 mod entities;
+mod feedback;
 
 const FL_NOTARGET: i32 = 128;
 const DAMAGE_AIM: f32 = 2.0;
@@ -24,6 +25,13 @@ const MSG_INIT: i32 = 3;
 pub(crate) struct Ctx<'a> {
     pub c: &'a mut Core,
     pub w: &'a mut World,
+    damage_calls: Vec<Option<feedback::DamageCall>>,
+}
+
+impl<'a> Ctx<'a> {
+    pub(crate) fn new(c: &'a mut Core, w: &'a mut World) -> Self {
+        Self { c, w, damage_calls: Vec::new() }
+    }
 }
 
 fn p(i: usize) -> usize {

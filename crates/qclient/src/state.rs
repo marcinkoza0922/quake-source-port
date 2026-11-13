@@ -144,6 +144,8 @@ pub enum ClientEvent {
     /// Engine sound by name from a temp entity (ent -1, channel 0).
     TempSound { name: &'static str, origin: [f32; 3] },
     LocalSound { sound: usize },
+    /// Server-confirmed damage dealt to a living enemy; kills supersede hits.
+    HitFeedback { kill: bool },
     StopSound { ent: i32, channel: i32 },
     StaticSound(StaticSound),
     CdTrack { track: u8, loop_track: u8 },

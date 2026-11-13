@@ -2,6 +2,35 @@
 
 Living design doc. `PROPOSAL.md` says *what*; this says *how*. Update when decisions change.
 
+### Hit and kill feedback
+
+HUD → Hit Markers (`hud_hitmarkers`, default 0) adds six distinct outlined,
+animated confirmations matching the six crosshair shapes, independently of
+crosshair visibility. Hits are white; kills are orange-red and last longer.
+Audio → Hit Sounds (`s_hitfeedback`, default 0) enables synthesized feedback;
+Hit Sound and Kill Sound submenus independently edit and preview nine cues,
+volume, time stretch, playback speed, pitch, bass/treble, drive, echo and reverb.
+All settings are archived (`s_hit_*`, `s_kill_*`); preview works while disabled.
+Time stretch changes envelopes/timing without transposing; speed changes both
+timing and pitch. Master SFX volume applies to previews and gameplay.
+
+`qvm::Host::{before_damage,after_damage}` bracket QC `T_Damage`, including
+nested calls. `qserver::host::feedback` captures live monster/player health,
+attacker and entity generation, then confirms an actual health reduction.
+World/self damage, scenery, corpses and invulnerability produce no feedback.
+Only the attacking client receives reliable `svc_stufftext` comments
+`//qhit 0` / `//qhit 1`; qclient consumes these exact lines as `HitFeedback`
+events without executing commands. Classic clients can ignore the comments.
+Servers/mods without this hook do not provide confirmations.
+`host::feedback` coalesces events per frame (kills win), throttles rapid hit
+audio, preserves kill visibility, and tracks split-screen players separately.
+`qsound::feedback` adapts the owner's original Padwight synthesis/effects with
+permission under this project's license; no recorded assets are copied.
+Two bounded caches regenerate samples on settings/device-rate changes; the
+audio thread only mixes PCM. State clears across maps/disconnects.
+`hitmarker_test [kill]` previews the marker for screenshot diagnostics;
+`hitfeedback_preview hit|kill` previews the configured sound.
+
 ## Decisions (interview, 2026-11-10)
 
 | Topic | Decision |
