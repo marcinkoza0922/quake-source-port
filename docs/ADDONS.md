@@ -164,7 +164,10 @@ kills, gibs and mod rules apply. Refire timers live on `Level::rails`
   holder's entity channel 6 while held; dry click; impact hiss.
 - Model: `assets/railgun/` (Meshy meshy-t2 1,365 tris, see its README),
   converted with the command in its README (`--glow`: pixels with one
-  dominant channel are drawn fullbright). Drawn with `portal_pose` + recoil.
+  dominant channel are drawn fullbright). At load the cross-section is
+  scaled ×1.9 (`rail_model::THICKEN`) and non-glow texels brightened ×1.5 so
+  the slim rod reads; drawn with `portal_pose` + recoil, 6 u right and
+  turned in 6°.
 - Menu: Add-ons → Railgun toggle (`addon_railgun`) and Railgun Settings
   (Damage slider, Trail Colour); `menu railgun` opens it.
 - Tests: `crates/qserver/tests/railgun.rs` (e1m1: ammo, refire, dry click).
@@ -231,7 +234,10 @@ A player leaving detonates theirs; the toy switched off removes all.
   `01a1d66a-00dd-7228-897d-05a59fec46ac`, 18 credits) converted by
   `blender -b --factory-startup --python tools/import_toy_model.py --
   DIR_OR_ZIP --out assets/stickybomb --back 12 --gain 0.6` (no mask), skin
-  quantized to the active palette's non-fullbright colours.
+  quantized to the active palette's non-fullbright colours. The imported
+  mesh's muzzle is at −X, so `sticky_draw::weapon` turns it 180° (taking the
+  view pitch un-inverted and the opposite roll), holds it right of centre
+  and tips the muzzle in and up so the barrel shows past the drum.
 ### Boomerang (`addons/boomerang.rs`, `src/addons/boomerang_fx.rs`)
 Zelda-style homing boomerang (`addon_boomerang`, default 1). Holding fire
 marks monsters: each server frame the monster nearest along the aim (centre
@@ -271,7 +277,10 @@ nothing until it is caught.
   (18 credits). Imported with `blender -b --factory-startup --python-exit-code 1
   --python tools/import_toy_model.py -- model.fbx assets/boomerang boomerang
   --flat --length 28 --size 256 --gain 0.75` (28 u long, thinnest axis Z, 256² atlas darkened ×0.75, converted to
-  the mod palette at load, no fullbrights). The FBX stays external.
+  the mod palette at load, no fullbrights). The FBX stays external. At load
+  the atlas is shaded ×0.6 more (`boomerang_model::SHADE`); the held copy
+  (`view_model`, key `@boomerang_view`) is scaled ×0.6 and posed flat face
+  to the camera, low right, so it reads as a V in the hand.
 - Audition: `rustc --edition=2024 tools/boomerang_cues.rs -o target/boomerang-cues && target/boomerang-cues target/boomerang-audio` writes the four cues as 48 kHz WAVs.
 ### Equipment wheel and goggles (`src/addons/goggles.rs`, `equip_wheel.rs`, `src/host/goggles.rs`)
 Equipment is switched on and off rather than held, so it does not use the

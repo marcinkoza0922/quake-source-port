@@ -18,13 +18,23 @@ pub fn model(palette: &[u8]) -> Mdl {
         .as_chunks::<3>()
         .0
         .iter()
-        .map(|&p| *cache.entry(p).or_insert_with(|| nearest(palette, p)))
+        .map(|&p| *cache.entry(p).or_insert_with(|| nearest(palette, super::portal_skin::shade(p, SHADE))))
         .collect();
     model.skins = vec![Skin {
         intervals: vec![],
         images: vec![pixels],
     }];
     model
+}
+
+/// Skin brightness: the Meshy atlas is pastel; Quake wood is dark.
+const SHADE: f32 = 0.6;
+
+/// The held boomerang: the same mesh at view-model size.
+pub fn view_model(palette: &[u8]) -> Mdl {
+    let mut m = model(palette);
+    super::portal_skin::rescale(&mut m, [0.6; 3]);
+    m
 }
 
 /// Nearest non-fullbright palette index.

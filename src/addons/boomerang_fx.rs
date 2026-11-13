@@ -144,11 +144,20 @@ impl Presentation {
         fs: &qcore::fs::Fs,
         r: &mut Renderer,
     ) -> Option<crate::assets::Model> {
-        let key = "@boomerang";
+        Self::load("@boomerang", bm::model, lv, fs, r)
+    }
+
+    fn load(
+        key: &str,
+        build: fn(&[u8]) -> qformats::mdl::Mdl,
+        lv: &mut crate::assets::Level,
+        fs: &qcore::fs::Fs,
+        r: &mut Renderer,
+    ) -> Option<crate::assets::Model> {
         if !lv.by_name.contains_key(key) {
             let palette = fs.open("gfx/palette.lmp").unwrap_or_default();
             let model = r
-                .load_alias(&bm::model(&palette))
+                .load_alias(&build(&palette))
                 .ok()
                 .map(|id| crate::assets::Model {
                     id,
@@ -173,15 +182,16 @@ impl Presentation {
         if self.flying(owner) {
             return None;
         }
-        let model = Self::model(lv, fs, r)?;
+        let model = Self::load("@boomerang_view", bm::view_model, lv, fs, r)?;
         let (fwd, right, up) = angle_vectors(view.angles.into());
         let bob = (time as f32 * 2.0).sin() * 0.2;
-        let origin = Vec3::from(view.origin) + fwd * 30.0 + right * 10.0 - up * (9.0 + bob);
+        let origin = Vec3::from(view.origin) + fwd * 26.0 + right * 7.0 - up * (11.0 + bob);
         let a = view.angles;
         Some(RenderEntity {
             model: model.id,
             origin: origin.to_array(),
-            angles: [-a[0] + 25.0, a[1] + 75.0, a[2] - 30.0],
+            // flat face to the camera, one arm raised: reads as a V in the hand
+            angles: [-a[0] - 40.0, a[1] + 70.0, a[2] + 80.0],
             viewmodel: true,
             ..Default::default()
         })

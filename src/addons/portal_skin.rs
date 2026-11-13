@@ -16,6 +16,22 @@ pub(super) fn nearest(palette: &[u8], rgb: [u8; 3], glow: bool) -> u8 {
         .map_or(0, |(i, _)| i as u8)
 }
 
+/// Scale an imported texel's brightness by `k` (clamped), so Meshy's
+/// pastel atlases land near Quake's darker palette under alias lighting.
+pub(super) fn shade(rgb: [u8; 3], k: f32) -> [u8; 3] {
+    rgb.map(|c| (f32::from(c) * k).round().clamp(0.0, 255.0) as u8)
+}
+
+/// Resize an alias model about its local origin, per axis.
+pub(super) fn rescale(m: &mut qformats::mdl::Mdl, k: [f32; 3]) {
+    m.bounding_radius *= k.iter().copied().fold(0.0, f32::max);
+    for (a, k) in k.iter().enumerate() {
+        m.scale[a] *= k;
+        m.scale_origin[a] *= k;
+    }
+    
+}
+
 pub fn skins(palette: &[u8], mask: &[u8]) -> Vec<Skin> {
     let rgb = miniz_oxide::inflate::decompress_to_vec_zlib(include_bytes!(
         "../../assets/portal-gun/texture.rgb.zlib"

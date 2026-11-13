@@ -13,11 +13,18 @@ pub fn model(palette: &[u8]) -> Mdl {
     let pixels = mask
         .iter()
         .zip(rgb.as_chunks::<3>().0)
-        .map(|(&k, p)| *cache.entry((*p, k)).or_insert_with(|| super::portal_skin::nearest(palette, *p, k == 1)))
+        .map(|(&k, p)| *cache.entry((*p, k)).or_insert_with(|| super::portal_skin::nearest(palette, if k == 1 { *p } else { super::portal_skin::shade(*p, BODY_GAIN) }, k == 1)))
         .collect();
     model.skins = vec![Skin { intervals: vec![], images: vec![pixels] }];
+    // the mesh is a slim rod; thicken it so it reads at view-model size
+    super::portal_skin::rescale(&mut model, [1.0, THICKEN, THICKEN]);
     model
 }
+
+/// Body texels are near-black in the source; lift them toward Quake metal.
+const BODY_GAIN: f32 = 1.5;
+/// Cross-section scale of the held gun.
+const THICKEN: f32 = 1.9;
 
 #[cfg(test)]
 mod tests {

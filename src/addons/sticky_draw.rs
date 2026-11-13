@@ -17,7 +17,16 @@ fn model(key: &str, build: fn(&[u8]) -> qformats::mdl::Mdl, lv: &mut crate::asse
 pub fn weapon(time: f64, view: View, lv: &mut crate::assets::Level, fs: &qcore::fs::Fs, r: &mut Renderer) -> Option<RenderEntity> {
     let id = model("@sticky_launcher", sticky_model::launcher, lv, fs, r)?;
     let bob = (time as f32 * 2.5).sin() * 0.15;
-    let (origin, angles) = crate::view::weapon::portal_pose(view, bob, 0.0);
+    // the imported mesh's muzzle is at -X: turn it round and push it out so
+    // it spans the same depth as the portal gun
+    // (alias pitch is inverted, so the reversed gun takes the view's pitch
+    // as is and the opposite roll)
+    let (origin, _) = crate::view::weapon::portal_pose(view, bob, 0.0);
+    let (forward, right, up) = qcore::math::angle_vectors(view.angles.into());
+    let origin = (qcore::math::Vec3::from(origin) + forward * 10.0 + right * 8.0 - up * 6.0).to_array();
+    // held to the right, muzzle turned in and raised so the barrel shows
+    // past the drum
+    let angles = [view.angles[0] - 10.0, view.angles[1] + 192.0, -view.angles[2]];
     Some(RenderEntity { model: id, origin, angles, viewmodel: true, ..Default::default() })
 }
 
