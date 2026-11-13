@@ -109,6 +109,8 @@ pub struct Level {
     pub vm: Vm,
     pub world: World,
     pub(crate) assist: Vec<crate::assists::ClientAssist>,
+    /// Portal gun state (empty unless add-ons are in use).
+    pub portals: crate::addons::portal::Portals,
 }
 
 pub struct Server {

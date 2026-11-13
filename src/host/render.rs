@@ -77,6 +77,7 @@ impl Host {
                 &self.server.core.cvars, &self.cl, &self.level, &self.server.core.fs,
                 &mut self.r, &mut ents, &dyn_verts, v.origin.into(), &self.debris, &mut fte,
             );
+            self.portal_draw.frame(&self.cl.portals, &mut self.r, &mut fte);
             crate::view::dlights(&self.cl, &mut dls);
             let contents = self.contents(v.origin);
             blend = self.view.blend(&self.cl, contents, ft, cv.flash);

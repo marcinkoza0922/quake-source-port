@@ -193,7 +193,7 @@ impl ModMenu {
     }
 
     fn draw_list(&self, c: &mut Canvas) {
-        center_gold(c, 24.0, "Mods");
+        center_gold(c, 24.0, "Map Packs");
         center(c, 36.0, &format!("{} installed", self.mods.len()));
         let (x, w) = LIST;
         box_(c, x, w, ROWS);

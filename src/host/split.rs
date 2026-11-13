@@ -77,7 +77,9 @@ impl Host {
                     _ => {}
                 }
             }
-            let (v, gun) = g.view.calc_refdef(&g.cl, &cv, &self.level, ft);
+            let mut gcv = cv;
+            gcv.drawviewmodel &= g.toy.held.is_none();
+            let (v, gun) = g.view.calc_refdef(&g.cl, &gcv, &self.level, ft);
             let me = g.cl.viewentity as u32;
             for e in ents.iter_mut().filter(|e| e.key != 0 && e.key == me) {
                 e.views = if e.views == 0 { all } else { e.views } & !bit;

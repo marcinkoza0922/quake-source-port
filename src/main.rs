@@ -5,6 +5,7 @@
 //! renderer, simulated time, no audio), -autoquit <seconds>, and `+cmd args`
 //! console commands.
 
+mod addons;
 mod assets;
 mod autosave;
 mod captions;

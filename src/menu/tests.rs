@@ -397,6 +397,32 @@ fn enhancements_hub_and_subpages_navigate_back_to_their_parent() {
     }
 }
 
+#[test]
+fn addons_page_from_main_menu_gates_portal_gun_and_control_binds() {
+    let mut cv = Cvars::default();
+    cv.register("addons_enable", "0", 0);
+    cv.register("addon_portalgun", "1", 0);
+    let mut menu = Menu::new();
+    menu.open(Screen::Main);
+    menu.main_cursor = 6;
+    menu.key(K_ENTER, &mut cv, false);
+    assert_eq!(menu.screen, Screen::OptionsPage(Page::Addons));
+    assert!(!page_items(Page::Controls).iter().any(|i| matches!(i, Item::Bind { cmd: "+toy", .. })));
+    // the Portal Gun page refuses to open while add-ons are off
+    menu.opt_cursor = 1;
+    menu.key(K_ENTER, &mut cv, false);
+    assert_eq!(menu.screen, Screen::OptionsPage(Page::Addons));
+    cv.set("addons_enable", "1");
+    menu.key(K_ENTER, &mut cv, false);
+    assert_eq!(menu.screen, Screen::OptionsPage(Page::PortalGun));
+    assert!(page_items(Page::Controls).iter().any(|i| matches!(i, Item::Bind { cmd: "+toy", .. })));
+    menu.key(K_ESCAPE, &mut cv, false);
+    assert_eq!((menu.screen, menu.opt_cursor), (Screen::OptionsPage(Page::Addons), 1));
+    menu.key(K_ESCAPE, &mut cv, false);
+    assert_eq!(menu.screen, Screen::Main);
+    assert!(option_cvars().any(|n| n == "addon_portalgun"));
+}
+
 mod shader_tests {
     use super::*;
 

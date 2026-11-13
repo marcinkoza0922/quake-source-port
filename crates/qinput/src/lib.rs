@@ -151,10 +151,14 @@ pub mod btn {
     pub const USE: usize = 16;
     pub const GYRO: usize = 17;
     pub const WHEEL: usize = 18;
-    pub const COUNT: usize = 19;
+    /// Add-ons: secondary fire and the toy-slot toggle.
+    pub const ATTACK2: usize = 19;
+    pub const TOY: usize = 20;
+    pub const COUNT: usize = 21;
     pub const NAMES: [&str; COUNT] = [
         "forward", "back", "moveleft", "moveright", "moveup", "movedown", "left", "right", "lookup", "lookdown",
         "speed", "strafe", "attack", "jump", "mlook", "klook", "use", "gyroaction", "weaponwheel",
+        "attack2", "toy",
     ];
 }
 
@@ -366,7 +370,7 @@ macro_rules! button_cmds {
 
 /// Register bind/unbind/unbindall/bindlist, +/- buttons and impulse.
 pub fn register_commands<C: InputHost>(c: &mut Commands<C>) {
-    button_cmds!(c, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 13, 14, 15, 16, 17, 18);
+    button_cmds!(c, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 13, 14, 15, 16, 17, 18, 19, 20);
     toggle_button_cmds!(c, btn::ATTACK, in_toggleattack);
     toggle_button_cmds!(c, btn::SPEED, in_togglerun);
     c.add("impulse", |ctx, a| ctx.input().impulse = a.argv(1).parse().unwrap_or(0));

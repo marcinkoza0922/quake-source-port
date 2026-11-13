@@ -167,6 +167,7 @@ impl Host {
             .iter()
             .map(|g| if g.cl.signon == 4 && g.cl.intermission == 0 { self.aim_targets(&g.cl) } else { Vec::new() })
             .collect();
+        let toys = self.allowed_toys();
         let cvars = &self.server.core.cvars;
         for (g, targets) in self.guests.iter_mut().zip(&targets) {
             if g.cl.signon != 4 {
@@ -181,13 +182,17 @@ impl Host {
             if run {
                 inp.speed = !inp.speed;
             }
-            let buttons = g.cmd.buttons | inp.attack as u8 | (inp.jump as u8) << 1;
-            let mut impulse = if inp.impulse != 0 { inp.impulse } else { g.cmd.impulse };
+            let mut fresh = inp.impulse;
             let alive = g.cl.stats[qnet::protocol::STAT_HEALTH] > 0;
             let allowed = in_game && alive && g.cl.intermission == 0 && !demo;
             if let Some(imp) = g.wheel.update(g.input.wheel_held(), allowed, g.input.wheel_aim, &g.cl) {
-                impulse = imp;
+                fresh = imp;
             }
+            if let Some(t) = g.toy.update(&toys, inp.toy, fresh) {
+                g.center_prints.push(t.name().to_string());
+            }
+            let buttons = g.cmd.buttons | g.toy.buttons(inp.attack, inp.attack2, inp.jump);
+            let impulse = if fresh != 0 { fresh } else { g.cmd.impulse };
             g.cmd = g.cl.base_move(&InputState { attack: false, jump: false, impulse: 0, ..inp }, &sp, ft);
             g.cmd.buttons = buttons;
             g.cmd.impulse = impulse;
