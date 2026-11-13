@@ -73,10 +73,10 @@ impl HookFx {
         let shot = self.prev.get(owner).map_or(-100.0, |p| p.1);
         let recoil = (-((time - shot).max(0.0) as f32) * 14.0).exp();
         let bob = (time as f32 * 2.5).sin() * 0.15;
-        // held low and to the right, turned in a little so its side shows
-        let (f, r, u) = angle_vectors(view.angles.into());
-        let origin = (Vec3::from(view.origin) + f * (22.0 - recoil * 4.0) + r * 7.0 - u * (13.0 + bob)).to_array();
-        let angles = [-view.angles[0] - recoil * 6.0, view.angles[1] + 7.0, view.angles[2]];
+        // held low and centred; the Right/Left view-model setting adds the side offset
+        let (f, _, u) = angle_vectors(view.angles.into());
+        let origin = (Vec3::from(view.origin) + f * (22.0 - recoil * 4.0) - u * (13.0 + bob)).to_array();
+        let angles = [-view.angles[0] - recoil * 6.0, view.angles[1], view.angles[2]];
         Some(RenderEntity { model: model.id, origin, angles, viewmodel: true, ..Default::default() })
     }
 

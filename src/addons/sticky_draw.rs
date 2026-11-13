@@ -13,6 +13,10 @@ fn model(key: &str, build: fn(&[u8]) -> qformats::mdl::Mdl, lv: &mut crate::asse
     lv.by_name.get(key).copied().flatten().map(|m| m.id)
 }
 
+/// Forward push past the portal gun's spot and drop below it.
+const PULL: f32 = 6.0;
+const DROP: f32 = 5.0;
+
 /// The held launcher, placed like the portal gun.
 pub fn weapon(time: f64, view: View, lv: &mut crate::assets::Level, fs: &qcore::fs::Fs, r: &mut Renderer) -> Option<RenderEntity> {
     let id = model("@sticky_launcher", sticky_model::launcher, lv, fs, r)?;
@@ -22,11 +26,11 @@ pub fn weapon(time: f64, view: View, lv: &mut crate::assets::Level, fs: &qcore::
     // (alias pitch is inverted, so the reversed gun takes the view's pitch
     // as is and the opposite roll)
     let (origin, _) = crate::view::weapon::portal_pose(view, bob, 0.0);
-    let (forward, right, up) = qcore::math::angle_vectors(view.angles.into());
-    let origin = (qcore::math::Vec3::from(origin) + forward * 10.0 + right * 8.0 - up * 6.0).to_array();
-    // held to the right, muzzle turned in and raised so the barrel shows
-    // past the drum
-    let angles = [view.angles[0] - 10.0, view.angles[1] + 192.0, -view.angles[2]];
+    let (forward, _, up) = qcore::math::angle_vectors(view.angles.into());
+    let origin = (qcore::math::Vec3::from(origin) + forward * PULL - up * DROP).to_array();
+    // centred (the Right/Left setting adds the side offset), muzzle raised
+    // so the barrel shows past the drum
+    let angles = [view.angles[0] - 10.0, view.angles[1] + 180.0, -view.angles[2]];
     Some(RenderEntity { model: id, origin, angles, viewmodel: true, ..Default::default() })
 }
 

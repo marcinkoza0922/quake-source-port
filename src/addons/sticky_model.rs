@@ -23,8 +23,12 @@ pub fn launcher(palette: &[u8]) -> Mdl {
     let mut cache = std::collections::HashMap::new();
     let px = rgb.as_chunks::<3>().0.iter().map(|p| *cache.entry(*p).or_insert_with(|| nearest(palette, *p, false))).collect();
     m.skins = vec![Skin { intervals: vec![], images: vec![px] }];
+    super::portal_skin::rescale(&mut m, [LAUNCHER_SCALE; 3]);
     m
 }
+
+/// The imported launcher read small beside the other toys.
+const LAUNCHER_SCALE: f32 = 1.35;
 
 const SKIN: usize = 16;
 const SEG: usize = 8;

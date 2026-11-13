@@ -104,6 +104,13 @@ impl Blood {
             let p = Vec3::from(p);
             let dir = (p - debris.shot_origin(view, p)).normalize();
             if let Some((e, v, hit, n)) = self.contact(p, dir, poses, world) {
+                if e.portal_only {
+                    // a local player's own body wraps the camera: no wound
+                    // meshes, and the spray leaves outwards, away from the eye
+                    let out = (n * 2.0 - dir).normalize();
+                    hits.push((hit + n * 4.0, out));
+                    continue;
+                }
                 if set.wounds {
                     self.wound(e, v, hit, n, cl.time, 7.0 * set.size);
                 }
@@ -121,7 +128,7 @@ impl Blood {
             let mut nearest = None;
             for (e, verts) in poses.values() {
                 let m = &self.models[&e.model];
-                if !(flesh(m) && corpse(m, e) || self.heads.contains(&e.model)) {
+                if e.portal_only || !(flesh(m) && corpse(m, e) || self.heads.contains(&e.model)) {
                     continue;
                 }
                 for t in &m.triangles {

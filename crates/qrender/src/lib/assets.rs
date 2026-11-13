@@ -34,6 +34,14 @@ impl Renderer {
 
     /// Loads an alias model.
     pub fn load_alias(&mut self, mdl: &Mdl) -> Result<ModelId> {
+        self.load_alias_glow(mdl, &[])
+    }
+
+    /// Loads an alias model whose skin `k` gets the true-colour RGBA glow
+    /// layer `glow[k]` (when present and non-empty) instead of palette
+    /// fullbrights: texels with alpha > 0 are drawn unlit in that colour,
+    /// so add-on models can glow in colours Quake's palette lacks (green).
+    pub fn load_alias_glow(&mut self, mdl: &Mdl, glow: &[Vec<u8>]) -> Result<ModelId> {
         self.idle();
         let (verts, idx) = convert::alias_mesh(mdl);
         let (poses, frames) = convert::alias_poses(mdl);
@@ -41,10 +49,18 @@ impl Renderer {
         let mut up = self.gpu.begin_upload()?;
         let mut skins = Vec::new();
         let pal = self.palette;
-        for s in &mdl.skins {
+        for (k, s) in mdl.skins.iter().enumerate() {
             let mut imgs = Vec::new();
             for img in &s.images {
-                let (b, fb, cm) = convert::alias_skin(&pal, img, holey);
+                let (mut b, mut fb, cm) = convert::alias_skin(&pal, img, holey);
+                if let Some(g) = glow.get(k).filter(|g| g.len() == b.len()) {
+                    for (t, gl) in b.as_chunks_mut::<4>().0.iter_mut().zip(g.as_chunks::<4>().0) {
+                        if gl[3] > 0 {
+                            *t = [0, 0, 0, 255];
+                        }
+                    }
+                    fb = Some(g.clone());
+                }
                 let (w, h) = (mdl.skin_width, mdl.skin_height);
                 let bs = self.add_texture(&mut up, w, h, &[&b], true, Sampling::World)?;
                 let fs = match fb {
