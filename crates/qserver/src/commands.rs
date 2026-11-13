@@ -239,6 +239,9 @@ fn cmd_map(s: &mut Server, a: &Args) {
         s.drop_client(i, false);
     }
     s.core.serverflags = 0.0;
+    // a new game: add-ons only if the New Game checkbox asked for them
+    let on = s.core.cvars.value_of("addons_enable") != 0.0;
+    s.core.set_addons(on);
     let name = a.argv(1).strip_suffix(".bsp").unwrap_or(a.argv(1)).to_string();
     if s.spawn_server(&name).is_ok() && had_local {
         s.connect_local();

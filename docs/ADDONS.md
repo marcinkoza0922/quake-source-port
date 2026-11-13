@@ -1,15 +1,28 @@
 # Add-ons design
 
 ### Add-ons (main menu → Add-ons; `qserver::addons`, `src/addons.rs`)
-Optional engine-side toys, so they work with any progs. `addons_enable`
-(default 0) is the master switch; each toy has its own cvar
-(`addon_portalgun`, default 1) and options page, dimmed while the master is
-off. Toys are only allowed with no deathmatch and no remote client
-(`addons::allowed`/`all_local`); otherwise every slot empties.
+Optional engine-side toys, so they work with any progs. A game has add-ons
+only if it was *started* with them: `Core::addons_on`, set by `map` from
+`addons_enable` (the archived New Game checkbox) or by `load_game` from the
+save, mirrored in read-only `addons_active` for the menu. It never changes
+mid-game, so a game started without add-ons can't gain them. Which toys are on
+is the per-toy cvar (`addon_portalgun`, default 1), editable live in an
+add-on game (Main menu → Add-ons) and fixed (dimmed) otherwise. Toys only
+run with no deathmatch and no remote client (`addons::allowed`/`all_local`).
+- New Game: single-player menu has an "Add-ons" checkbox (left/right or
+  click). Ticked, New Game opens `Page::NewGameAddons` (toy toggles, portal
+  settings, Start New Game) with a warning about other ports.
+- Saves (`addons/save.rs`): add-on games save as `.qsa` (never `.sav`) with a
+  `QSPADDONS 1 <n>` header (toys, portals) before the v5 body, so other ports
+  neither list nor parse them. `savegame_path` picks the extension, `find_save`
+  loads either (newer wins), saving removes the same-named other-format file,
+  autosave rotation carries each file's extension. Load/Save cards show an
+  "ADD-ONS: …" badge (`SaveInfo::addons`). A plain `.sav` load turns add-ons off.
 - Input: `+toy` cycles a player's slot through the enabled toys and back to
   the QC weapon; any weapon impulse (1–8, 10, 12, incl. the wheel) puts the
   toy away. `+attack2` is alt-fire. Both binds appear on Controls only
-  while `addons_enable` is on (`ADDON_BINDS`, synced on menu key/draw).
+  while the game has add-ons, or with none running while the checkbox is
+  ticked (`ADDON_BINDS`, synced on menu key/draw).
 - While a toy is held, `ToySlot::buttons` keeps QC's attack bit at 0 and
   sends usercmd bit 2 (fire), bit 3 (alt) and the toy id in bits 4–7; QC
   only reads bits 0/1. The view model is hidden for that player (player 1
@@ -39,8 +52,8 @@ off. Toys are only allowed with no deathmatch and no remote client
   when a client spawns. `qclient` swallows these into `ClientState::portals`;
   other engines ignore `//` lines, so demos still play elsewhere.
   `portal_draw::gun_portals` turns them into `qrender::GunPortal`s (owner
-  colour pair, linked exit). Saves write portals to `<save>.qsp` beside the
-  untouched `.sav` (manual saves only, not autosaves).
+  colour pair, linked exit). Saves write portals into the `.qsa` header
+  (manual saves and autosaves).
 - See-through (qrender, reusing teleporter windows): `portals::Portal`
   carries a full `rot` matrix and a `pvs` point; `portals::gun` builds the
   window for a linked portal (same rotation as `carry`, clip plane 0.5 in

@@ -10,6 +10,9 @@ impl Menu {
                 set_num(cv, cvar, v);
             }
             Item::Toggle { cvar, .. } => {
+                if addons::is_toy_cvar(cvar) && self.toys_locked(cv) {
+                    return false;
+                }
                 let v = cv.value_of(cvar);
                 cv.set(cvar, if v != 0.0 { "0" } else { "1" });
                 if cvar == "assist_autoaim" {

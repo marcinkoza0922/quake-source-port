@@ -39,6 +39,7 @@ impl Menu {
                     out.push(Action::Command("slist\n".into()));
                 }
             }
+            Run::NewGame => self.start_new_game(out),
             Run::Start => {
                 let Some(map) = self.host_map(cv) else { return };
                 let n = |c: &str| cv.value_of(c) as i32;

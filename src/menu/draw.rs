@@ -6,7 +6,7 @@ impl Menu {
         if self.screen == Screen::None {
             return;
         }
-        sync_addon_binds(cv);
+        sync_addon_binds(cv, self.game_running);
         c.fade_screen();
         let base_scale = c.scale;
         c.menu_layout();
@@ -54,6 +54,7 @@ impl Menu {
                 c.pic(72.0, 32.0, p);
                 let d = dot(pic);
                 c.pic(54.0, 32.0 + self.sp_cursor as f32 * 20.0, d);
+                self.draw_new_game_box(c, cv);
             }
             Screen::Multiplayer => {
                 let p = pic("gfx/qplaque.lmp");
@@ -114,6 +115,7 @@ impl Menu {
                     let pw = p.map_or(48.0, |p| p.1 as f32);
                     c.pic(((640.0 - pw) / 2.0).floor(), y0 + 8.0, p);
                 }
+                self.draw_addon_notes(c, cv, page, n);
                 if page == Page::Join && self.servers.is_empty() && !self.searching {
                     let s = "no servers found yet";
                     c.text_center(320.0, PAGE_ROW0 + n as f32 * ROW_H + 8.0, s, TXT, MUTED);
@@ -232,6 +234,14 @@ impl Menu {
             }
             c.text(lx, y + 5.0, &title, 11.0, FG);
             c.text(lx, y + 20.0, &sv.timestamp, small, MUTED);
+            if let Some(toys) = &sv.addons {
+                // add-on saves are .qsa files that other ports cannot load
+                let names: Vec<&str> = toys.iter().map(|t| t.name()).collect();
+                let tag = if names.is_empty() { "ADD-ONS".to_string() } else { format!("ADD-ONS: {}", names.join(", ")) };
+                let w = c.text_w(&tag, small) + 8.0;
+                c.round_box(rx - w, y + 18.0, w, 12.0, 3.0, [0.35, 0.22, 0.05, 0.95], Some([0.95, 0.66, 0.26, 1.0]));
+                c.text(rx - w + 4.0, y + 20.0, &tag, small, GOLD_FG);
+            }
             c.text(lx, y + 32.0, &format!("Health {}   Armor {}", sv.health, sv.armor), small, FG);
             let stats = format!("Kills {}/{}   Secrets {}/{}", sv.kills.0, sv.kills.1, sv.secrets.0, sv.secrets.1);
             let sw = c.text(lx, y + 44.0, &stats, small, FG);
@@ -383,11 +393,19 @@ impl Menu {
                 txt(c, VALUE_X + 100.0, y, &qcore::cvar::format_float((v * 1000.0).round() / 1000.0));
             }
             Item::Toggle { label: l, cvar } => {
-                label(c, l);
+                let locked = addons::is_toy_cvar(cvar) && self.toys_locked(cv);
+                if locked {
+                    c.text_right(LABEL_R, y, l, TXT, MUTED);
+                } else {
+                    label(c, l);
+                }
                 let on = cv.value_of(cvar) != 0.0;
                 c.round_box(VALUE_X, y - 0.5, 9.0, 9.0, 1.5, [0.0, 0.0, 0.0, 0.5], Some(BORDER));
                 if on {
-                    c.round_box(VALUE_X + 2.0, y + 1.5, 5.0, 5.0, 1.0, GOLD_FG, None);
+                    c.round_box(VALUE_X + 2.0, y + 1.5, 5.0, 5.0, 1.0, if locked { MUTED } else { GOLD_FG }, None);
+                }
+                if locked {
+                    c.text(VALUE_X + 14.0, y, "(fixed for this game)", TXT, MUTED);
                 }
             }
             Item::Choice { label: l, cvar, choices } => {

@@ -367,6 +367,7 @@ impl Host {
         }
         self.server.level = None;
         self.server.core.sv.active = false;
+        self.server.core.set_addons(false);
         self.disconnect_client();
     }
 

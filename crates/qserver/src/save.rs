@@ -115,13 +115,14 @@ impl Server {
             }
             f += "}\n";
         }
-        f
+        self.wrap_save(f)
     }
 
     /// Host_Loadgame_f: spawns the saved map and restores globals/edicts.
     /// Decode disk bytes with `qcore::text::decode` first. The local client
     /// must be (re)connected afterwards.
     pub fn load_game(&mut self, text: &str) -> Result<(), String> {
+        let (addons, text) = crate::addons::save::split(text)?;
         let mut lines = text.split_inclusive('\n');
         let mut next = || lines.next().map(|l| l.trim_end_matches(['\n', '\r']).to_string()).ok_or("unexpected end of savegame");
         let version: i32 = next()?.trim().parse().map_err(|_| "bad version")?;
@@ -184,6 +185,14 @@ impl Server {
             }
         }
         c.clients[0].spawn_parms = parms;
+        // a game's add-ons come from its save: none for a plain .sav
+        c.set_addons(addons.is_some());
+        if let Some(h) = addons {
+            for t in crate::addons::Toy::ALL {
+                c.cvars.set(t.cvar(), if h.toys.contains(&t) { "1" } else { "0" });
+            }
+            l.portals.load_text(&h.portals);
+        }
         Ok(())
     }
 }

@@ -52,12 +52,19 @@ impl Host {
         crate::user_dir(self.fs_snapshot.1.last().map_or("id1", String::as_str))
     }
 
+    /// Where a save called `name` is written: `.qsa` for a game with
+    /// add-ons (no other port can load it), `.sav` otherwise.
     pub(super) fn savegame_path(&self, name: &str) -> PathBuf {
-        let mut n = name.to_string();
-        if !n.ends_with(".sav") {
-            n += ".sav";
+        self.user_dir().join(format!("{}.{}", save_stem(name), crate::autosave::ext(self.server.core.addons_on)))
+    }
+
+    /// The existing save called `name`, in either format.
+    pub(super) fn find_save(&self, name: &str) -> Option<PathBuf> {
+        let dir = self.user_dir();
+        match name.rsplit_once('.') {
+            Some((_, e)) if e == crate::autosave::SAVE_EXT || e == crate::autosave::ADDON_EXT => dir.join(name).is_file().then(|| dir.join(name)),
+            _ => crate::autosave::find(&dir, name),
         }
-        self.user_dir().join(n)
     }
 
     pub(super) fn update_autosave(&mut self) {
@@ -76,12 +83,9 @@ impl Host {
         let reason = self.autosave.update(self.server.time(), self.server.stats(), self.server.core.sv.loadgame, flags, interval);
         if let Some(reason) = reason.filter(|_| keep > 0) {
             let text = self.server.save_game();
-            let mut lines = text.splitn(3, '\n');
-            let version = lines.next().unwrap_or("5");
-            lines.next();
             // The v5 description is ignored by the loader; preserve the trigger in the save itself.
-            let text = format!("{version}\nAUTOSAVE_{}\n{}", reason.replace(' ', "_"), lines.next().unwrap_or(""));
-            match crate::autosave::rotate(&self.user_dir(), keep, &text) {
+            let text = qserver::addons::save::set_comment(&text, &format!("AUTOSAVE_{}", reason.replace(' ', "_")));
+            match crate::autosave::rotate(&self.user_dir(), keep, &text, crate::autosave::ext(self.server.core.addons_on)) {
                 Ok(()) => self.print("Autosaved.\n"),
                 Err(e) => self.print(&format!("ERROR: autosave failed: {e}\n")),
             }
@@ -94,10 +98,15 @@ impl Host {
         let count = if self.menu.autosaves { crate::autosave::MAX } else { crate::menu::MAX_SAVEGAMES + 2 };
         for i in 0..count {
             let Some(name) = self.menu.save_slot_name(i) else { continue };
-            let p = self.savegame_path(&name);
+            let Some(p) = self.find_save(&name) else { continue };
             self.menu.saves[i] = std::fs::read(&p).ok().and_then(|bytes| {
                 crate::saveinfo::SaveInfo::parse(&qcore::text::decode(&bytes), std::fs::metadata(&p).ok().and_then(|m| m.modified().ok()))
             });
         }
     }
+}
+
+/// A save name without a `.sav`/`.qsa` extension.
+fn save_stem(name: &str) -> &str {
+    name.strip_suffix(".sav").or_else(|| name.strip_suffix(".qsa")).unwrap_or(name)
 }

@@ -51,6 +51,8 @@ pub(super) enum Run {
     Connect,
     Search,
     Start,
+    /// Begin a new single player game from the add-on picker.
+    NewGame,
     PreviewHit,
     PreviewKill,
 }
@@ -102,15 +104,22 @@ pub(super) const CONTROLS_ALL: &[Item] = &[
 ];
 pub(super) const CONTROLS: &[Item] = CONTROLS_ALL.split_at(CONTROLS_ALL.len() - 2).0;
 
-/// Main menu → Add-ons.
+/// Main menu → Add-ons: which toys the running game (or the next new
+/// game) has. Locked while the running game was started without add-ons.
 pub(super) const ADDONS: &[Item] = &[
-    toggle("Add-ons", "addons_enable"),
-    Item::Sub { label: "Portal Gun", page: Page::PortalGun },
+    toggle("Portal Gun", "addon_portalgun"),
+    Item::Sub { label: "Portal Gun Settings", page: Page::PortalGun },
 ];
 
-/// Reached from Add-ons; unavailable while `addons_enable` is off.
-pub(super) const PORTAL_GUN: &[Item] = &[
+/// New Game with Add-ons ticked: choose the toys, then start.
+pub(super) const NEW_GAME_ADDONS: &[Item] = &[
     toggle("Portal Gun", "addon_portalgun"),
+    Item::Sub { label: "Portal Gun Settings", page: Page::PortalGun },
+    Item::Run { label: "Start New Game", run: Run::NewGame },
+];
+
+/// Reached from the Add-ons pages: how portals look and perform.
+pub(super) const PORTAL_GUN: &[Item] = &[
     toggle("See Through Portals", "addon_portal_view"),
     Item::Choice { label: "Live Portal Views", cvar: "addon_portal_max", choices: PORTAL_MAX },
     slider("Live View Distance", "addon_portal_dist", 512.0, 8192.0, 512.0),
