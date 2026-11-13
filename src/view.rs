@@ -386,6 +386,7 @@ impl ViewState {
                 dyn_pose: None,
                 views: 0,
                 portal_only: false,
+                heat: 0,
             }
         };
         for k in 0..cl.visedicts.len() {

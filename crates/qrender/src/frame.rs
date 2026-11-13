@@ -385,6 +385,7 @@ impl Renderer {
                         if dynp.is_some() {
                             flags |= 16;
                         }
+                        flags |= (e.heat.min(3) as u32) << 8;
                         let push = AliasPush {
                             model,
                             light: [lc[0] / 200.0, lc[1] / 200.0, lc[2] / 200.0, alpha],
@@ -729,8 +730,8 @@ impl Renderer {
                     self.sky_layers[1],
                 ],
                 alphas,
-                soft: [soft.0, soft.1, 0.0, 0.0],
-                softf: [soft.2, soft.3, 0, 0],
+                soft: [soft.0, soft.1, st.goggles.intensity.clamp(0.25, 3.0), st.goggles.noise.clamp(0.0, 2.0)],
+                softf: [soft.2, soft.3, st.goggles.mode.min(2), 0],
                 water: [
                     st.water_ripples.clamp(0.0, 4.0),
                     st.water_caustics.clamp(0.0, 4.0),
@@ -1291,6 +1292,14 @@ impl Renderer {
                     dev.cmd_bind_vertex_buffers(cmd, 0, &[dynbuf], &[particles.ofs]);
                     dev.cmd_draw(cmd, 6, particles.count, 0, 0);
                 }
+                if st.goggles.mode == 2 {
+                    // thermal goggles: warm bodies seen through walls
+                    for a in alias_draws.iter().filter(|a| !a.viewmodel && (a.push.texs[3] >> 8) & 3 == 2) {
+                        let mut x = AliasDraw { push: a.push, ..*a };
+                        x.push.texs[3] |= 1 << 10;
+                        draw_alias(&x, p.alias_xray);
+                    }
+                }
                 let vm: Vec<&AliasDraw> = alias_draws.iter().filter(|a| a.viewmodel).collect();
                 if let Some((vofs, iofs, batches)) = &fte {
                     let restore = |vp| {
@@ -1469,6 +1478,10 @@ impl Renderer {
                 mbx: mb * scene_w as f32 / sw as f32,
                 mby: mb * scene_h as f32 / sh as f32,
                 uvs: [rect[2] as f32 / w.max(1) as f32, rect[3] as f32 / h.max(1) as f32],
+                goggles: st.goggles.mode.min(2),
+                g_gain: st.goggles.intensity.clamp(0.25, 3.0),
+                g_noise: st.goggles.noise.clamp(0.0, 2.0),
+                g_time: (fr.time % 1000.0) as f32,
             }]));
             dev.cmd_draw(cmd, 3, 1, 0, 0);
             if pi + 1 < npasses {

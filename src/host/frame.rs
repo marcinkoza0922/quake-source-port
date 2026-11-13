@@ -173,6 +173,7 @@ impl Host {
         if impulse != 0 {
             self.pend_impulse = impulse;
         }
+        self.goggles_frame(in_game, alive);
         let toys = if self.local.is_some() { self.allowed_toys() } else { Vec::new() };
         if let Some(t) = self.toy.update(&toys, inp.toy, impulse) {
             let (s, t, cols) = self.center_args(t.name());

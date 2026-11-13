@@ -101,20 +101,39 @@ pub(super) const CONTROLS_ALL: &[Item] = &[
     Item::ResetBinds,
     bind("Alt Fire (Add-ons)", "+attack2"),
     bind("Toy Slot (Add-ons)", "+toy"),
+    bind("Equipment Wheel (Add-ons)", "+equipwheel"),
 ];
-pub(super) const CONTROLS: &[Item] = CONTROLS_ALL.split_at(CONTROLS_ALL.len() - 2).0;
+pub(super) const CONTROLS: &[Item] = CONTROLS_ALL.split_at(CONTROLS_ALL.len() - 3).0;
 
 /// Main menu → Add-ons: which toys the running game (or the next new
 /// game) has. Locked while the running game was started without add-ons.
 pub(super) const ADDONS: &[Item] = &[
     toggle("Portal Gun", "addon_portalgun"),
     Item::Sub { label: "Portal Gun Settings", page: Page::PortalGun },
+    toggle("Boomerang", "addon_boomerang"),
+    Item::Sub { label: "Boomerang Settings", page: Page::Boomerang },
+    toggle("Stickybomb Launcher", "addon_sticky"),
+    toggle("Hookshot", "addon_hookshot"),
+    Item::Sub { label: "Hookshot Settings", page: Page::Hookshot },
+    toggle("Railgun", "addon_railgun"),
+    Item::Sub { label: "Railgun Settings", page: Page::Railgun },
+    toggle("Goggles", "addon_goggles"),
+    Item::Sub { label: "Goggles Settings", page: Page::Goggles },
 ];
 
 /// New Game with Add-ons ticked: choose the toys, then start.
 pub(super) const NEW_GAME_ADDONS: &[Item] = &[
     toggle("Portal Gun", "addon_portalgun"),
     Item::Sub { label: "Portal Gun Settings", page: Page::PortalGun },
+    toggle("Boomerang", "addon_boomerang"),
+    Item::Sub { label: "Boomerang Settings", page: Page::Boomerang },
+    toggle("Stickybomb Launcher", "addon_sticky"),
+    toggle("Hookshot", "addon_hookshot"),
+    Item::Sub { label: "Hookshot Settings", page: Page::Hookshot },
+    toggle("Railgun", "addon_railgun"),
+    Item::Sub { label: "Railgun Settings", page: Page::Railgun },
+    toggle("Goggles", "addon_goggles"),
+    Item::Sub { label: "Goggles Settings", page: Page::Goggles },
     Item::Run { label: "Start New Game", run: Run::NewGame },
 ];
 
@@ -124,6 +143,26 @@ pub(super) const PORTAL_GUN: &[Item] = &[
     Item::Choice { label: "Live Portal Views", cvar: "addon_portal_max", choices: PORTAL_MAX },
     slider("Live View Distance", "addon_portal_dist", 512.0, 8192.0, 512.0),
     Item::Choice { label: "Portal Recursion", cvar: "addon_portal_depth", choices: PORTAL_DEPTH },
+];
+/// Reached from the Add-ons pages: boomerang stun time and flight speed.
+pub(super) const BOOMERANG: &[Item] = &[
+    slider("Stun Duration", "addon_boomerang_stun", 1.0, 10.0, 0.5),
+    slider("Flight Speed", "addon_boomerang_speed", 300.0, 1500.0, 100.0),
+];
+/// Reached from the Add-ons pages: railgun damage and trail colour.
+pub(super) const RAILGUN: &[Item] = &[
+    slider("Damage", "addon_rail_damage", 25.0, 300.0, 25.0),
+    Item::Choice { label: "Trail Colour", cvar: "addon_rail_color", choices: RAIL_COLOR },
+];
+pub(super) const RAIL_COLOR: &[(&str, f32)] =
+    &[("Blue", 0.0), ("Green", 1.0), ("Red", 2.0), ("Yellow", 3.0), ("Purple", 4.0), ("White", 5.0)];
+/// Reached from the Add-ons pages: hookshot range and what it latches onto.
+pub(super) const HOOKSHOT: &[Item] = &[
+    slider("Hookshot Range", "addon_hook_range", 256.0, 4096.0, 128.0),
+    toggle("Hook Wood", "addon_hook_wood"),
+    toggle("Hook Metal", "addon_hook_metal"),
+    toggle("Hook Stone", "addon_hook_stone"),
+    toggle("Hook Enemies", "addon_hook_enemies"),
 ];
 pub(super) const PORTAL_DEPTH: &[(&str, f32)] =
     &[("Off", 0.0), ("1", 1.0), ("2", 2.0), ("3", 3.0), ("4", 4.0), ("6", 6.0)];
@@ -436,3 +475,9 @@ pub(super) const SCREEN_SHADER: &[Item] = &[
     Item::ResetShaderParams,
 ];
 pub(super) const SHADER_SCOPE: &[(&str, f32)] = &[("3D view", 0.0), ("whole screen", 1.0)];
+
+/// Reached from the Add-ons pages: night-vision / thermal goggle look.
+pub(super) const GOGGLES: &[Item] = &[
+    slider("Goggle Intensity", "addon_goggles_intensity", 0.25, 3.0, 0.25),
+    slider("Goggle Noise", "addon_goggles_noise", 0.0, 2.0, 0.25),
+];

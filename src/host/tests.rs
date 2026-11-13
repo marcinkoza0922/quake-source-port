@@ -4,9 +4,9 @@ mod relaunch_tests {
     #[test]
     fn strips_game_and_commands() {
         let v = |s: &str| s.split(' ').map(String::from).collect::<Vec<_>>();
-        let out = super::super::relaunch_args(&v("-basedir /q -hipnotic -game foo +map e1m1 +skill 3 -width 800 -height 600"));
+        let out = super::super::mapswitch::relaunch_args(&v("-basedir /q -hipnotic -game foo +map e1m1 +skill 3 -width 800 -height 600"));
         assert_eq!(out, v("-basedir /q -width 800 -height 600"));
-        assert_eq!(super::super::relaunch_args(&v("+delay 3 screenshot x -window")), v("-window"));
+        assert_eq!(super::super::mapswitch::relaunch_args(&v("+delay 3 screenshot x -window")), v("-window"));
     }
 }
 

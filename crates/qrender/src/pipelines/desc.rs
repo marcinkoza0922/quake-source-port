@@ -17,6 +17,9 @@ pub(super) struct Desc<'a> {
     /// Per-sample shading (supersampling) when multisampled.
     pub(super) sample_shading: bool,
     pub(super) topology: vk::PrimitiveTopology,
+    /// Draw only where the fragment is behind the scene depth (thermal
+    /// goggles' through-wall silhouettes) instead of LESS_OR_EQUAL.
+    pub(super) behind: bool,
 }
 
 pub(super) fn attr(
@@ -77,7 +80,7 @@ pub(super) fn graphics(gpu: &Gpu, layout: vk::PipelineLayout, d: &Desc) -> Resul
     let ds = vk::PipelineDepthStencilStateCreateInfo::default()
         .depth_test_enable(d.depth_test)
         .depth_write_enable(d.depth_write)
-        .depth_compare_op(vk::CompareOp::LESS_OR_EQUAL);
+        .depth_compare_op(if d.behind { vk::CompareOp::GREATER } else { vk::CompareOp::LESS_OR_EQUAL });
     let (src, dst, src_a, dst_a) = match d.blend {
         Blend::Factors(s, t) => (s, t, vk::BlendFactor::ZERO, vk::BlendFactor::ONE),
         _ => (

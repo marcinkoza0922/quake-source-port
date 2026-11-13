@@ -9,11 +9,14 @@
 
 use qcore::anorms;
 pub mod delta;
+mod addon_msgs;
 mod effects;
 mod fte;
+mod hook;
 mod input;
 mod parse;
 pub mod qw;
+mod rail;
 mod relink;
 mod state;
 
@@ -21,4 +24,7 @@ pub use effects::{Beam, Dlight, PT_BLOB, PT_BLOB2, PT_EXPLODE, PT_EXPLODE2, PT_F
 pub use fte::{FteNames, FteRequest};
 pub use input::{InputState, MoveSpeeds, UserCmd};
 pub use parse::ParseError;
+pub use rail::RailEffect;
 pub use state::*;
+pub use addon_msgs::{PortalEffect, PortalView};
+pub use hook::HookView;

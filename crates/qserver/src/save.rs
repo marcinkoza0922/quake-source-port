@@ -192,6 +192,7 @@ impl Server {
                 c.cvars.set(t.cvar(), if h.toys.contains(&t) { "1" } else { "0" });
             }
             l.portals.load_text(&h.portals);
+            l.stickies.load_text(&h.extra);
         }
         Ok(())
     }

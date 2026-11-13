@@ -309,6 +309,24 @@ impl ClientState {
                 }
                 continue;
             }
+            if let Some(args) = line.strip_prefix(b"//qsp_rail ") {
+                if let Some(fx) = crate::RailEffect::parse(&String::from_utf8_lossy(args)) {
+                    self.events.push(ClientEvent::RailEffect(fx));
+                }
+                continue;
+            }
+            if let Some(args) = line.strip_prefix(b"//qsp_hook ") {
+                self.parse_hook(&String::from_utf8_lossy(args));
+                continue;
+            }
+            if let Some(args) = line.strip_prefix(b"//qsp_sticky ") {
+                self.parse_sticky(&String::from_utf8_lossy(args));
+                continue;
+            }
+            if let Some(args) = line.strip_prefix(b"//qsp_boom ") {
+                self.events.push(ClientEvent::Boomerang(String::from_utf8_lossy(args).trim_end().to_owned()));
+                continue;
+            }
             if let Some(args) = line.strip_prefix(b"//qsp_portal ") {
                 self.parse_portal(&String::from_utf8_lossy(args));
                 continue;

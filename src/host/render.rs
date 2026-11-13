@@ -19,6 +19,7 @@ impl Host {
         let mut fte = (Vec::new(), Vec::new(), Vec::new());
         let mut blend = [0.0; 4];
         let mut splits = Vec::new();
+        let mut goggles = qrender::Goggles::default();
         if let Some(v) = &view {
             let fs = &self.server.core.fs;
             let cv = self.view_cvars();
@@ -67,9 +68,40 @@ impl Host {
                 g.origin = (Vec3::from(g.origin) + cv.viewmodel.offset(v.angles)).to_array();
                 ents.push(g);
             }
+            let rail = self.toy.held == Some(qserver::addons::Toy::Railgun) && self.cl.intermission == 0 && self.cl.stats[0] > 0;
+            self.rail_fx.hum(self.cl.viewentity.saturating_sub(1), rail, self.snd.as_ref());
+            if rail && cv.viewmodel.visible() && self.cl.items & crate::sbar::IT_INVISIBILITY == 0
+                && let Some(mut g) = self.rail_fx.weapon(self.cl.viewentity.saturating_sub(1), self.cl.time, *v,
+                    &mut self.level, &self.server.core.fs, &mut self.r) {
+                g.origin = (Vec3::from(g.origin) + cv.viewmodel.offset(v.angles)).to_array();
+                ents.push(g);
+            }
+            if self.toy.held == Some(qserver::addons::Toy::Boomerang) && self.cl.intermission == 0 && self.cl.stats[0] > 0
+                && cv.viewmodel.visible() && self.cl.items & crate::sbar::IT_INVISIBILITY == 0
+                && let Some(mut g) = self.boomerang_fx.weapon(self.cl.viewentity.saturating_sub(1), self.cl.time, *v,
+                    &mut self.level, &self.server.core.fs, &mut self.r) {
+                g.origin = (Vec3::from(g.origin) + cv.viewmodel.offset(v.angles)).to_array();
+                ents.push(g);
+            }
+            if self.toy.held == Some(qserver::addons::Toy::Hookshot) && self.cl.intermission == 0 && self.cl.stats[0] > 0
+                && cv.viewmodel.visible() && self.cl.items & crate::sbar::IT_INVISIBILITY == 0
+                && let Some(mut g) = self.hook_fx.weapon(self.cl.viewentity.saturating_sub(1), self.cl.time, *v,
+                    &mut self.level, &self.server.core.fs, &mut self.r) {
+                g.origin = (Vec3::from(g.origin) + cv.viewmodel.offset(v.angles)).to_array();
+                ents.push(g);
+            }
+            if self.toy.held == Some(qserver::addons::Toy::Sticky) && self.cl.intermission == 0 && self.cl.stats[0] > 0
+                && cv.viewmodel.visible() && self.cl.items & crate::sbar::IT_INVISIBILITY == 0
+                && let Some(mut g) = crate::addons::sticky_draw::weapon(self.cl.time, *v, &mut self.level, &self.server.core.fs, &mut self.r) {
+                g.origin = (Vec3::from(g.origin) + cv.viewmodel.offset(v.angles)).to_array();
+                ents.push(g);
+            }
+            crate::addons::sticky_draw::bombs(&self.cl, &mut self.level, &self.server.core.fs, &mut self.r, &mut ents, &mut dls);
+            self.boomerang_fx.entities(self.cl.time, &mut self.level, &self.server.core.fs, &mut self.r, self.snd.as_ref(), &mut ents);
             if let Some(g) = gun {
                 ents.push(g);
             }
+            goggles = self.goggles_render(&mut ents);
             crate::view::particles(&self.cl, &mut parts);
             fte = self.fte.frame(
                 &mut self.cl,
@@ -81,6 +113,9 @@ impl Host {
                 &self.level.mapname,
             );
             self.portal_fx.frame(self.cl.time, v, &mut self.r, self.snd.as_ref(), &mut fte);
+            self.rail_fx.frame(self.cl.time, v, &mut self.r, &mut fte);
+            self.hook_fx.frame(&self.cl, self.cl.viewentity.saturating_sub(1), v, &mut self.r, &mut fte);
+            self.boomerang_fx.frame(self.cl.time, &self.cl, v, &mut self.r, &mut fte);
             self.blood.frame(
                 crate::blood::Settings::read(&self.server.core.cvars), &self.cl, &self.level,
                 &self.server.core.fs, &mut self.r, &ents, &dyn_verts,
@@ -104,6 +139,7 @@ impl Host {
             .into_iter()
             .find(|&k| crate::glyphs::is_pad_key(k))
             .unwrap_or(qinput::keys::K_XBUTTON);
+        let equip_key = self.equip_wheel_key();
         let showfps = self.cv("scr_showfps") != 0.0;
         let classic = self.classic_hud();
         let hud_cfg = crate::sbar::HudConfig::from_cvars(&self.server.core.cvars);
@@ -189,6 +225,7 @@ impl Host {
                             crate::sbar::deathmatch_overlay(&mut c, &mut pf, &self.cl);
                         }
                         self.wheel.draw(&mut c, &mut pf, &glyphs, &self.cl, pad_ui, wheel_key);
+                        self.goggles.wheel.draw(&mut c, &glyphs, &self.goggles.equip, pad_ui, equip_key);
                         if self.server.core.cvars.value_of("cl_captions") != 0.0 {
                             let bottom = if classic { scene_h - 4.0 } else { c.vh() - 44.0 };
                             let ts = self.server.core.cvars.value_of("scr_textscale");
@@ -288,6 +325,7 @@ impl Host {
             water_splashes: v("r_enhancedwater") != 0.0 && v("r_watersplash") != 0.0,
             water_caustics: if v("r_enhancedwater") != 0.0 && v("r_watercaustics") != 0.0 { v("r_watercaustics_amount").clamp(0.0, 4.0) } else { 0.0 },
             shader_scope: v("r_shader_scope").clamp(0.0, 1.0) as u32,
+            goggles,
             ..Settings::default()
         };
         {

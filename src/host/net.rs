@@ -376,7 +376,9 @@ impl Host {
         let mut feedback = None;
         for e in evs {
             match e {
-                ClientEvent::PortalEffect(fx) => self.portal_fx.receive(fx, self.cl.time, self.snd.as_ref()),
+                ClientEvent::PortalEffect(_) | ClientEvent::RailEffect(_) | ClientEvent::Hook(_) | ClientEvent::Boomerang(_) => {
+                    self.toy_event(e);
+                }
                 ClientEvent::HitFeedback { kill } => {
                     feedback = Some(feedback.unwrap_or(false) || kill);
                 }
@@ -454,7 +456,7 @@ impl Host {
                 }
                 ClientEvent::BonusFlash => self.view.bonus_flash(),
                 ClientEvent::NewMap => {
-                    self.portal_fx.clear();
+                    self.clear_toy_fx();
                     feedback = None;
                     self.feedback = Default::default();
                     self.stats_recorded = false;

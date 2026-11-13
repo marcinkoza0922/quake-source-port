@@ -132,7 +132,11 @@ impl Server {
         c.sv.active = true;
         c.sv.loading = false;
         vm.protect_world = true;
-        self.level = Some(Level { vm, world, assist: Vec::new(), portals: Default::default(), falls: Default::default() });
+        self.level = Some(Level {
+            vm, world, assist: Vec::new(), portals: Default::default(), stickies: Default::default(), falls: Default::default(),
+            rails: Default::default(), hooks: crate::addons::hookshot::Hooks::new(crate::addons::hook_surface::Surfaces::new(&bsp)),
+            boomerangs: Default::default(),
+        });
 
         // run two frames to allow everything to settle
         self.physics(0.1);

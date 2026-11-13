@@ -2,10 +2,20 @@
 //! player's toy slot, toggled with `+toy`, and the usercmd buttons it sends.
 //! With add-ons off this is a single `Option` check per player per frame.
 
+pub mod hook_fx;
+mod hook_model;
+pub mod boomerang_fx;
+mod boomerang_model;
+pub mod equip_wheel;
+pub mod goggles;
 pub mod portal_draw;
 pub mod portal_fx;
 pub mod portal_model;
 mod portal_skin;
+pub mod rail_fx;
+mod rail_model;
+pub mod sticky_draw;
+pub mod sticky_model;
 
 use qserver::addons::{BUTTON_TOY_ALT, BUTTON_TOY_FIRE, TOY_SHIFT, Toy};
 

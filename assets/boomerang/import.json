@@ -1,0 +1,23 @@
+{
+  "source": "model.fbx",
+  "source_triangles": 990,
+  "triangles": 990,
+  "vertices": 1306,
+  "texture_size": 256,
+  "removed_packed_degenerates": 0,
+  "bounds": [
+    [
+      -14.0,
+      -4.107193946838379,
+      -2.4570415019989014
+    ],
+    [
+      14.0,
+      4.107193946838379,
+      2.4570415019989014
+    ]
+  ],
+  "length": 28.0,
+  "flat": true,
+  "gain": 0.75
+}

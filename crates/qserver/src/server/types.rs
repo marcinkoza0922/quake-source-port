@@ -113,8 +113,15 @@ pub struct Level {
     pub(crate) assist: Vec<crate::assists::ClientAssist>,
     /// Portal gun state (empty unless add-ons are in use).
     pub portals: crate::addons::portal::Portals,
+    pub stickies: crate::addons::sticky::Stickies,
     /// Monster fall damage while the portal gun is on.
     pub(crate) falls: crate::addons::fall::Falls,
+    /// Railgun refire timers.
+    pub(crate) rails: crate::addons::railgun::Rails,
+    /// Hookshot state and the map's surface materials.
+    pub hooks: crate::addons::hookshot::Hooks,
+    /// Boomerang flights, marks and stunned monsters.
+    pub boomerangs: crate::addons::boomerang::Boomerangs,
 }
 
 pub struct Server {

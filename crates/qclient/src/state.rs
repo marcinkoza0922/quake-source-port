@@ -5,6 +5,7 @@ use qnet::SizeBuf;
 use qnet::protocol::*;
 
 use crate::effects::{Beam, Dlight, QRand, TempEntity};
+use crate::{PortalEffect, PortalView};
 
 pub const MAX_EDICTS: usize = 32000;
 pub const MAX_STATIC_ENTITIES: usize = 4096;
@@ -147,6 +148,11 @@ pub enum ClientEvent {
     /// Server-confirmed damage dealt to a living enemy; kills supersede hits.
     HitFeedback { kill: bool },
     PortalEffect(PortalEffect),
+    RailEffect(crate::RailEffect),
+    /// A hookshot changed state (`hooks` holds the live heads).
+    Hook(crate::hook::HookView),
+    /// Add-on boomerang line (`//qsp_boom ...` without the prefix).
+    Boomerang(String),
     StopSound { ent: i32, channel: i32 },
     StaticSound(StaticSound),
     CdTrack { track: u8, loop_track: u8 },
@@ -267,6 +273,10 @@ pub struct ClientState {
     pub(crate) stuffcmdbuf: Vec<u8>,
     /// Add-on portals from `//qsp_portal` stufftext (this engine only).
     pub portals: Vec<PortalView>,
+    /// Add-on hookshot heads from `//qsp_hook` stufftext.
+    pub hooks: Vec<crate::hook::HookView>,
+    /// Add-on stickybombs (id, origin) from `//qsp_sticky` stufftext.
+    pub stickies: Vec<(u32, [f32; 3])>,
     /// Reliable clc_* bytes to send (signon replies, string commands).
     pub out_reliable: SizeBuf,
     pub movemessages: u32,
@@ -353,6 +363,8 @@ impl ClientState {
             events: Vec::new(),
             stuffcmdbuf: Vec::new(),
             portals: Vec::new(),
+            hooks: Vec::new(),
+            stickies: Vec::new(),
             out_reliable: SizeBuf::new(MAX_MSGLEN),
             movemessages: 0,
             name: "player".into(),
@@ -425,68 +437,5 @@ impl ClientState {
             _ => {}
         }
         self.events.push(ClientEvent::Signon(self.signon));
-    }
-}
-
-/// One add-on portal: owner client slot, slot 0/1, centre, normal, up.
-#[derive(Clone, Copy, Debug, PartialEq)]
-pub struct PortalView {
-    pub owner: u8,
-    pub slot: u8,
-    pub origin: [f32; 3],
-    pub normal: [f32; 3],
-    pub up: [f32; 3],
-}
-
-impl ClientState {
-    /// `qsp_portal owner slot [ox oy oz nx ny nz ux uy uz]` (no args after
-    /// the slot removes it).
-    pub(crate) fn parse_portal(&mut self, args: &str) {
-        let n: Vec<f32> = args.split_whitespace().filter_map(|w| w.parse().ok()).collect();
-        let (Some(&o), Some(&s)) = (n.first(), n.get(1)) else { return };
-        let (owner, slot) = (o as u8, s as u8);
-        self.portals.retain(|p| (p.owner, p.slot) != (owner, slot));
-        if let [_, _, ox, oy, oz, nx, ny, nz, ux, uy, uz] = n[..] {
-            self.portals.push(PortalView { owner, slot, origin: [ox, oy, oz], normal: [nx, ny, nz], up: [ux, uy, uz] });
-        }
-    }
-}
-
-/// Server-confirmed shot (0 rejected, 1 placed) or crossing (2).
-#[derive(Clone, Copy, Debug, PartialEq)]
-pub struct PortalEffect {
-    pub owner: u8,
-    pub slot: u8,
-    pub kind: u8,
-    pub start: [f32; 3],
-    pub end: [f32; 3],
-}
-
-impl PortalEffect {
-    pub(crate) fn parse(args: &str) -> Option<Self> {
-        let words: Vec<_> = args.split_whitespace().collect();
-        if words.len() != 9 { return None; }
-        let owner = words[0].parse().ok()?;
-        let slot = words[1].parse::<u8>().ok()?;
-        let kind = words[2].parse::<u8>().ok()?;
-        if slot > 1 || kind > 2 { return None; }
-        let mut xyz = [0.0f32; 6];
-        for (v, w) in xyz.iter_mut().zip(&words[3..]) {
-            *v = w.parse().ok()?;
-            if !v.is_finite() || v.abs() > 1_000_000.0 { return None; }
-        }
-        Some(Self { owner, slot, kind, start: xyz[..3].try_into().ok()?, end: xyz[3..].try_into().ok()? })
-    }
-}
-
-#[cfg(test)]
-mod portal_effect_tests {
-    use super::PortalEffect;
-    #[test]
-    fn rejects_malformed_presentation_messages() {
-        assert!(PortalEffect::parse("1 1 0 0 0 0 10 20 30").is_some());
-        for bad in ["1 2 0 0 0 0 10 20 30", "1 1 3 0 0 0 10 20 30", "1 1 0 NaN 0 0 10 20 30", "1 1 0 0 0 0 10 20", "1 1 0 0 0 0 10 20 30 extra"] {
-            assert!(PortalEffect::parse(bad).is_none());
-        }
     }
 }

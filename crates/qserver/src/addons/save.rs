@@ -23,12 +23,20 @@ pub struct Header {
     pub toys: Vec<Toy>,
     /// `Portals::save_text` lines.
     pub portals: String,
+    /// Other toys' state lines (`<key> ...`), kept verbatim.
+    pub extra: String,
 }
 
 /// Prefixes a v5 savegame with the add-on header.
 pub fn wrap(toys: &[Toy], portals: Option<&str>, body: &str) -> String {
+    wrap_with(toys, portals, "", body)
+}
+
+/// [`wrap`] with further whole header lines (`extra`, e.g. `sticky ...`).
+pub fn wrap_with(toys: &[Toy], portals: Option<&str>, extra: &str, body: &str) -> String {
     let mut lines: Vec<String> = toys.iter().map(|t| format!("toy {}", t.key())).collect();
     lines.extend(portals.unwrap_or("").lines().map(|l| format!("portal {l}")));
+    lines.extend(extra.lines().filter(|l| !l.is_empty()).map(str::to_string));
     let mut s = format!("{MAGIC} {HEADER_VERSION} {}\n", lines.len());
     for l in lines {
         s += &l;
@@ -62,6 +70,10 @@ pub fn split(text: &str) -> Result<(Option<Header>, &str), String> {
                 h.portals += p;
                 h.portals.push('\n');
             }
+            Some(_) => {
+                h.extra += line;
+                h.extra.push('\n');
+            }
             _ => {}
         }
     }
@@ -90,12 +102,13 @@ mod tests {
     #[test]
     fn header_round_trips_and_plain_saves_pass_through() {
         let body = "5\ncomment\n0\n";
-        let w = wrap(&[Toy::PortalGun], Some("0 1 1 2 3 0 0 1 1 0 0\n"), body);
-        assert!(w.starts_with("QSPADDONS 1 2\ntoy portalgun\nportal 0 1 "));
+        let w = wrap_with(&[Toy::PortalGun], Some("0 1 1 2 3 0 0 1 1 0 0\n"), "sticky 1 2\n", body);
+        assert!(w.starts_with("QSPADDONS 1 3\ntoy portalgun\nportal 0 1 "));
         let (h, rest) = split(&w).unwrap();
         let h = h.unwrap();
         assert_eq!(h.toys, [Toy::PortalGun]);
         assert_eq!(h.portals, "0 1 1 2 3 0 0 1 1 0 0\n");
+        assert_eq!(h.extra, "sticky 1 2\n");
         assert_eq!(rest, body);
         assert_eq!(split(body).unwrap(), (None, body));
         // no toys, no portals: still marked as an add-on save
