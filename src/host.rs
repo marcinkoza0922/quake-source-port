@@ -27,6 +27,7 @@ mod net;
 mod demo;
 mod mapswitch;
 mod render;
+mod split;
 mod shader;
 mod saves;
 mod death;

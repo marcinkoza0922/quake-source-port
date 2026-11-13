@@ -67,6 +67,17 @@ pub struct RenderEntity {
     /// Alias model drawn from a CPU-built pose in [`RenderFrame::dyn_verts`]
     /// instead of its own frames (ragdolls).
     pub dyn_pose: Option<DynPose>,
+    /// Split-screen views this entity is drawn in (bit k = view k); 0 = all.
+    pub views: u8,
+}
+
+/// One split-screen view: its camera, its rectangle of the output (x, y,
+/// w, h in output pixels) and its polyblend.
+#[derive(Clone, Copy, Debug)]
+pub struct SplitView {
+    pub view: View,
+    pub rect: [u32; 4],
+    pub blend: [f32; 4],
 }
 
 /// A per-frame alias pose: `num_verts` packed vertices (x, y, z bytes and an
@@ -98,6 +109,7 @@ impl Default for RenderEntity {
             fullbright: false,
             player: false,
             key: 0,
+            views: 0,
             dyn_pose: None,
         }
     }
@@ -384,6 +396,9 @@ pub struct RenderFrame<'a> {
     pub shot_impacts: &'a [(Vec3, bool)],
     /// Packed alias vertices referenced by [`RenderEntity::dyn_pose`].
     pub dyn_verts: &'a [u32],
+    /// Split-screen: when non-empty, these views are drawn instead of
+    /// `view` and `blend`.
+    pub splits: &'a [SplitView],
 }
 
 impl Default for RenderFrame<'_> {
@@ -405,6 +420,7 @@ impl Default for RenderFrame<'_> {
             player: None,
             shot_impacts: &[],
             dyn_verts: &[],
+            splits: &[],
         }
     }
 }

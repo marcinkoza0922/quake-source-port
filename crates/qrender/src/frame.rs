@@ -81,10 +81,19 @@ impl Renderer {
         }
         let style_ints: Vec<i32> = styles.iter().map(|&v| v as i32).collect();
 
+        // views: split-screen cells, or the one view over the whole output
+        let views_in: Vec<(Option<View>, [u32; 4], [f32; 4])> = if fr.splits.is_empty() {
+            vec![(fr.view, [0, 0, w, h], fr.blend)]
+        } else {
+            fr.splits.iter().map(|s| (Some(s.view), s.rect, s.blend)).collect()
+        };
+        let multi = views_in.len() > 1;
+        let primary = views_in[0].0;
+
         // liquid ripples/splashes (CPU side); droplets join the particles
         let mut water_parts = Vec::new();
         if let Some(wg) = &self.world
-            && fr.view.is_some()
+            && primary.is_some()
         {
             let models = &self.models;
             let movers = fr.entities.iter().filter_map(|e| {
@@ -96,21 +105,19 @@ impl Renderer {
                 time,
                 movers,
                 fr.player,
-                fr.view.map(|v| v.origin),
+                primary.map(|v| v.origin),
                 fr.shot_impacts,
                 st.water_ripples > 0.0,
                 st.water_splashes,
             );
         }
 
-        let mut world_draws: Vec<WorldDraw> = Vec::new();
         // per-object motion blur: last frame's transforms by entity key
-        let mb_on = st.motion_blur > 0.0 && fr.view.is_some();
+        let mb_on = st.motion_blur > 0.0 && primary.is_some();
         let prev_xforms = std::mem::take(&mut self.prev_xforms);
         let mb_dt = time - self.prev_xform_time;
         let prev_ok = mb_on && mb_dt > 0.0 && mb_dt < 0.25;
         let mut xforms = std::collections::HashMap::new();
-        let mut vel_draws: Vec<VelDraw> = Vec::new();
         // last frame's model transform rows, when the entity moved
         let prev_rows = |e: &RenderEntity, local: Option<&Mat4>| -> Option<[[f32; 4]; 3]> {
             if !prev_ok || e.key == 0 || e.viewmodel {
@@ -129,35 +136,46 @@ impl Renderer {
         };
         // CPU-built alias poses (ragdolls), indexed in u32s from the buffer start
         let dyn_base = if fr.dyn_verts.is_empty() { None } else { dynw.push(fr.dyn_verts, 4).map(|o| (o / 4) as u32) };
-        let mut alias_draws: Vec<AliasDraw> = Vec::new();
-        let mut sprite_draws: Vec<SpriteDraw> = Vec::new();
-        let mut trans: Vec<(f32, Trans)> = Vec::new();
+        // lightmaps to update: the union over all views
         let mut lm_vis: Vec<u32> = Vec::new();
-        let mut cull: Option<CullFrame> = None;
-        let mut particles = Range::default();
-        // FTE particles: (vertex offset, index offset, batches with texture slots)
-        let mut fte: Option<FteDraw> = None;
-        // scene target size (render scale) and the 3D view height in it
+        // scene target size (render scale)
         let (sw, sh) = self
             .targets
             .as_ref()
             .map_or((w, h), |t| (t.scene_w, t.scene_h));
-        let scene_h = fr.view.map_or(sh, |v| {
-            let px = h.saturating_sub(v.reserve_bottom) as f32 * sh as f32 / h.max(1) as f32;
+        // classic particles are view-independent: uploaded once
+        let mut particle_range: Option<Range> = None;
+        let fog = fr.fog;
+        let mut passes: Vec<ViewPass> = Vec::with_capacity(views_in.len());
+        for (vi, &(view_in, rect, blend)) in views_in.iter().enumerate() {
+        let vbit = 1u8 << vi.min(7);
+        let mut world_draws: Vec<WorldDraw> = Vec::new();
+        let mut vel_draws: Vec<VelDraw> = Vec::new();
+        let mut alias_draws: Vec<AliasDraw> = Vec::new();
+        let mut sprite_draws: Vec<SpriteDraw> = Vec::new();
+        let mut trans: Vec<(f32, Trans)> = Vec::new();
+        let mut cull: Option<CullFrame> = None;
+        let mut particles = Range::default();
+        // FTE particles: (vertex offset, index offset, batches with texture slots)
+        let mut fte: Option<FteDraw> = None;
+        // this view's scene region (top-left of the target) and its 3D height
+        let scene_w = ((rect[2] as f32 * sw as f32 / w.max(1) as f32).round() as u32).clamp(1, sw);
+        let scene_h = view_in.map_or(sh, |v| {
+            let px = rect[3].saturating_sub(v.reserve_bottom) as f32 * sh as f32 / h.max(1) as f32;
             (px.round() as u32).clamp(1, sh)
         });
-        let view = fr.view.map(|mut v| {
-            if let (Some(index), Some(distance), Some(w)) =
-                (self.isolated_portal, self.isolated_distance, self.world.as_ref())
+        let view = view_in.map(|mut v| {
+            if !multi
+                && let (Some(index), Some(distance), Some(w)) =
+                    (self.isolated_portal, self.isolated_distance, self.world.as_ref())
             {
                 let p = &w.portals[index];
                 v.origin = std::array::from_fn(|k| p.center[k] + p.normal[k] * distance);
                 v.angles = [0.0, (-p.normal[1]).atan2(-p.normal[0]).to_degrees(), 0.0];
             }
-            setup_view(&v, sw, scene_h)
+            setup_view(&v, scene_w, scene_h)
         });
-        let fog = fr.fog;
-        let mut portal_draws = if fr.settings.teleport_windows {
+        let portal_draws = if fr.settings.teleport_windows && !multi {
             self.prepare_portals(view.as_ref(), &mut dynw, time, alphas, &mut lm_vis)
         } else {
             Vec::new()
@@ -165,7 +183,7 @@ impl Renderer {
 
         if let Some(vs) = &view {
             if let Some(wg) = self.world.as_mut() {
-                if let Some(index) = self.isolated_portal {
+                if let Some(index) = self.isolated_portal.filter(|_| !multi) {
                     let p = &wg.portals[index];
                     let surfs: Vec<_> = wg.cpu.surfaces.iter().enumerate().filter_map(|(i, s)| {
                         let normal = if s.flipped { s.normal.map(|x| -x) } else { s.normal };
@@ -190,7 +208,7 @@ impl Renderer {
                 }
             }
             for e in fr.entities {
-                if self.hidden_entities.contains(&e.key) { continue; }
+                if self.hidden_entities.contains(&e.key) || (e.views != 0 && e.views & vbit == 0) { continue; }
                 let Some(m) = self.models.get(e.model.0 as usize) else {
                     continue;
                 };
@@ -442,7 +460,9 @@ impl Renderer {
                     }
                 }
             }
-            if !fr.particles.is_empty() {
+            if let Some(r) = particle_range {
+                particles = r;
+            } else if !fr.particles.is_empty() {
                 let data: Vec<([f32; 3], u32)> = fr
                     .particles
                     .iter()
@@ -461,6 +481,7 @@ impl Renderer {
                         count: data.len() as u32,
                     };
                 }
+                particle_range = Some(particles);
             }
             // water spray puffs: camera-facing quads appended to the FTE geometry
             let mut spray_v: Vec<FteVertex> = Vec::new();
@@ -527,6 +548,24 @@ impl Renderer {
                 }
             }
             trans.sort_by(|a, b| b.0.total_cmp(&a.0));
+        }
+        passes.push(ViewPass {
+            view,
+            rect,
+            blend,
+            scene_w,
+            scene_h,
+            ubo: 0,
+            world_draws,
+            alias_draws,
+            sprite_draws,
+            trans,
+            vel_draws,
+            cull,
+            particles,
+            fte,
+            portal_draws,
+        });
         }
 
         // UI vertices
@@ -615,8 +654,9 @@ impl Renderer {
             dynw.push(&ui, 16)
         };
 
-        // UBO + lightmap dynamic data
-        if let Some(vs) = &view {
+        // UBO per view (view 0 at offset 0) + lightmap dynamic data
+        for (vi, pass) in passes.iter_mut().enumerate() {
+            let Some(vs) = &pass.view else { continue };
             let sky = self.skybox;
             let soft = softemu_params(st);
             let mut ubo = FrameUbo {
@@ -672,7 +712,7 @@ impl Renderer {
                     a
                 },
             };
-            for (i, portal) in portal_draws.iter_mut().enumerate() {
+            for (i, portal) in pass.portal_draws.iter_mut().enumerate() {
                 ubo.portal_plane[i] = portal.portal.plane();
                 ubo.portal_min[i] = [portal.portal.mins[0], portal.portal.mins[1], portal.portal.mins[2], self.targets.as_ref().unwrap().portals[i].1 as f32];
                 ubo.portal_max[i] = [portal.portal.maxs[0], portal.portal.maxs[1], portal.portal.maxs[2], 1.0];
@@ -688,7 +728,13 @@ impl Renderer {
                 pu.vfwd = rotate(vs.fwd);
                 dynw.write_at(portal.ubo as u64, &[pu]);
             }
-            dynw.write_at(0, &[ubo]);
+            if vi == 0 {
+                dynw.write_at(0, &[ubo]);
+            } else {
+                pass.ubo = dynw.push(&[ubo], 256).unwrap_or(0) as u32;
+            }
+        }
+        if passes.iter().any(|p| p.view.is_some()) {
             let mut lmd = LmDyn {
                 styles,
                 num_dlights: 0,
@@ -713,7 +759,7 @@ impl Renderer {
             dynw.write_at(OFS_LMDYN, &[lmd]);
             lm_vis.truncate(MAX_VIS as usize);
             dynw.write_at(OFS_VIS, &lm_vis);
-            if let Some(c) = &cull {
+            for c in passes.iter().filter_map(|p| p.cull.as_ref()) {
                 // The cull shader appends the world's lightmaps after these.
                 dynw.write_at(c.stage_ofs + c.disp_ofs, &[lm_vis.len() as u32, 1, 1, 0]);
             }
@@ -721,10 +767,6 @@ impl Renderer {
 
         self.prev_xforms = xforms;
         self.prev_xform_time = time;
-        let ao_on = st.ssao > 0.0 && view.is_some();
-        // the AO and velocity passes read scene depth after the scene passes
-        // (SSAO runs inside the scene, between opaque and translucent draws)
-        let keep_depth = !vel_draws.is_empty();
 
         // ---- record ----
         let tsq = self.gpu_times.as_ref().map(|t| t.pool);
@@ -762,6 +804,58 @@ impl Renderer {
                 dev.cmd_reset_query_pool(cmd, q, ts_base, GPU_TS);
             }
             ts(0);
+            // post: gamma/contrast/polyblend to the output
+            let (out_img, out_view) = match (&self.swap, &t.out) {
+                (Some(s), _) => (s.images[img_idx as usize], s.views[img_idx as usize]),
+                (None, Some((o, _))) => (o.image, o.view),
+                _ => return Ok(()),
+            };
+            // with a slang preset, post (and UI in scope 1) render to its
+            // input at scene size; the chain then draws onto the output
+            let slang_src = self.slang.as_ref().and_then(|s| s.src.as_ref()).map(|i| (i.image, i.view, i.width, i.height));
+            let ui_in_src = st.shader_scope == 1;
+            let (post_img, post_view, pw, ph) = slang_src.unwrap_or((out_img, out_view, w, h));
+            let post_area = vk::Rect2D { offset: vk::Offset2D::default(), extent: vk::Extent2D { width: pw, height: ph } };
+            let vp_full = vk::Viewport { x: 0.0, y: 0.0, width: w as f32, height: h as f32, min_depth: 0.0, max_depth: 1.0 };
+            let npasses = passes.len();
+            let gfx = vk::PipelineBindPoint::GRAPHICS;
+            let all = vk::ShaderStageFlags::VERTEX | vk::ShaderStageFlags::FRAGMENT;
+            let push = |data: &[u8]| dev.cmd_push_constants(cmd, p.layout, all, 0, data);
+            let crng = gpu::range(vk::ImageAspectFlags::COLOR, 1, 1);
+            let area = vk::Rect2D { offset: vk::Offset2D::default(), extent: vk::Extent2D { width: w, height: h } };
+            for (pi, pass) in passes.iter_mut().enumerate() {
+            let ts = |k: u32| if pi == 0 { ts(k) };
+            if pi > 0 {
+                // the previous view's draws read the shared targets and cull buffers
+                let mb = [vk::MemoryBarrier::default()
+                    .src_access_mask(vk::AccessFlags::MEMORY_WRITE | vk::AccessFlags::MEMORY_READ)
+                    .dst_access_mask(vk::AccessFlags::MEMORY_READ | vk::AccessFlags::MEMORY_WRITE)];
+                dev.cmd_pipeline_barrier(
+                    cmd,
+                    vk::PipelineStageFlags::ALL_COMMANDS,
+                    vk::PipelineStageFlags::ALL_COMMANDS,
+                    vk::DependencyFlags::empty(),
+                    &mb,
+                    &[],
+                    &[],
+                );
+            }
+            let view = pass.view.as_ref();
+            let cull = &pass.cull;
+            let (scene_w, scene_h, rect, blend) = (pass.scene_w, pass.scene_h, pass.rect, pass.blend);
+            let ubo_ofs = pass.ubo;
+            let portal_draws = &pass.portal_draws;
+            let world_draws = &mut pass.world_draws;
+            let alias_draws = &mut pass.alias_draws;
+            let sprite_draws = &mut pass.sprite_draws;
+            let trans = &mut pass.trans;
+            let vel_draws = &mut pass.vel_draws;
+            let mut particles = pass.particles;
+            let mut fte = pass.fte.take();
+            let ao_on = st.ssao > 0.0 && view.is_some();
+            // the AO and velocity passes read scene depth after the scene passes
+            // (SSAO runs inside the scene, between opaque and translucent draws)
+            let keep_depth = !vel_draws.is_empty();
             let lm_rng = gpu::range(vk::ImageAspectFlags::COLOR, 1, lightmap.layers);
             if let Some(c) = &cull {
                 let cs = vk::PipelineBindPoint::COMPUTE;
@@ -807,7 +901,8 @@ impl Renderer {
                 );
             }
             ts(1);
-            if (!lm_vis.is_empty() || cull.is_some()) && self.world.is_some() {
+            let lm_cpu = pi == 0 && !lm_vis.is_empty();
+            if (lm_cpu || cull.is_some()) && self.world.is_some() {
                 gpu::barrier(
                     &dev,
                     cmd,
@@ -881,6 +976,7 @@ impl Renderer {
                     height: sh,
                 },
             };
+            let _ = h;
             let clear = vk::ClearValue {
                 color: vk::ClearColorValue {
                     float32: [0.0, 0.0, 0.0, 1.0],
@@ -945,8 +1041,8 @@ impl Renderer {
             let depth_layout = |old: vk::ImageLayout, new: vk::ImageLayout| {
                 gpu::barrier(&dev, cmd, t.depth.image, drng, old, new);
             };
-            self.draw_portals(cmd, &portal_draws, &world_draws, &alias_draws, fi, scene_h);
-            if self.isolated_portal.is_some() {
+            self.draw_portals(cmd, portal_draws, world_draws, alias_draws, fi, scene_h);
+            if self.isolated_portal.is_some() && !multi {
                 // Destination draws above retain their scenery and entities. Only
                 // the source sheet survives in the main diagnostic view below.
                 world_draws.truncate(1);
@@ -968,13 +1064,13 @@ impl Renderer {
                 max_depth: 1.0,
             };
             let vp_scene = vk::Viewport {
-                width: sw as f32,
+                width: scene_w as f32,
                 height: scene_h as f32,
                 ..vp_full
             };
             let area_scene = vk::Rect2D {
                 extent: vk::Extent2D {
-                    width: sw,
+                    width: scene_w,
                     height: scene_h,
                 },
                 ..area
@@ -998,7 +1094,7 @@ impl Renderer {
                 dev.cmd_begin_rendering(cmd, &ri);
                 dev.cmd_set_viewport(cmd, 0, &[vp_scene]);
                 dev.cmd_set_scissor(cmd, 0, &[area_scene]);
-                dev.cmd_bind_descriptor_sets(cmd, gfx, p.layout, 0, &set, &[0]);
+                dev.cmd_bind_descriptor_sets(cmd, gfx, p.layout, 0, &set, &[ubo_ofs]);
                 body();
                 dev.cmd_end_rendering(cmd);
                 gpu::barrier(
@@ -1011,7 +1107,7 @@ impl Renderer {
                 );
             };
             if view.is_some() {
-                dev.cmd_bind_descriptor_sets(cmd, gfx, p.layout, 0, &set, &[0]);
+                dev.cmd_bind_descriptor_sets(cmd, gfx, p.layout, 0, &set, &[ubo_ofs]);
                 dev.cmd_set_depth_bias(cmd, 0.0, 0.0, 0.0);
                 let draw_world = |wd: &WorldDraw, cats: &[(Range, vk::Pipeline)]| {
                     dev.cmd_bind_index_buffer(cmd, wd.ibuf.unwrap_or(dynbuf), 0, vk::IndexType::UINT32);
@@ -1079,7 +1175,7 @@ impl Renderer {
                         dev.cmd_bind_pipeline(cmd, gfx, p.ao);
                         push(bytes_of(&[AoPush {
                             proj: [vs.tan[0], vs.tan[1], samples as f32, st.ssao_radius.clamp(4.0, 256.0)],
-                            size: [sw as f32, scene_h as f32, st.ssao.min(4.0), t.color_slot as f32],
+                            size: [scene_w as f32, scene_h as f32, st.ssao.min(4.0), t.color_slot as f32],
                         }]));
                         dev.cmd_draw(cmd, 3, 1, 0, 0);
                     });
@@ -1102,7 +1198,7 @@ impl Renderer {
                     begin(true, !split, false);
                     dev.cmd_set_viewport(cmd, 0, &[vp_scene]);
                     dev.cmd_set_scissor(cmd, 0, &[area_scene]);
-                    dev.cmd_bind_descriptor_sets(cmd, gfx, p.layout, 0, &set, &[0]);
+                    dev.cmd_bind_descriptor_sets(cmd, gfx, p.layout, 0, &set, &[ubo_ofs]);
                     dev.cmd_set_depth_bias(cmd, 0.0, 0.0, 0.0);
                 }
                 // translucent: world liquids first, then sorted entities
@@ -1114,7 +1210,7 @@ impl Renderer {
                         draw_world(wd, &wa);
                     }
                 }
-                for (_, tr) in &trans {
+                for (_, tr) in trans.iter() {
                     match *tr {
                         Trans::World(i) => {
                             if let Some(wg) = &self.world {
@@ -1156,7 +1252,7 @@ impl Renderer {
                     let restore = |vp| {
                         dev.cmd_set_viewport(cmd, 0, &[vp]);
                         dev.cmd_set_scissor(cmd, 0, &[area_scene]);
-                        dev.cmd_bind_descriptor_sets(cmd, gfx, p.layout, 0, &set, &[0]);
+                        dev.cmd_bind_descriptor_sets(cmd, gfx, p.layout, 0, &set, &[ubo_ofs]);
                         dev.cmd_set_depth_bias(cmd, 0.0, 0.0, 0.0);
                     };
                     if split {
@@ -1224,7 +1320,7 @@ impl Renderer {
                 depth_layout(end_layout, vk::ImageLayout::DEPTH_STENCIL_READ_ONLY_OPTIMAL);
                 if !vel_draws.is_empty() {
                     fx_pass(&t.vel, [0.0; 4], &|| {
-                        for vd in &vel_draws {
+                        for vd in vel_draws.iter() {
                             match *vd {
                                 VelDraw::Alias(i, prev) => {
                                     let a = &alias_draws[i];
@@ -1269,43 +1365,50 @@ impl Renderer {
                 vk::ImageLayout::SHADER_READ_ONLY_OPTIMAL,
             );
 
-            // post: gamma/contrast/polyblend to the output
-            let (out_img, out_view) = match (&self.swap, &t.out) {
-                (Some(s), _) => (s.images[img_idx as usize], s.views[img_idx as usize]),
-                (None, Some((o, _))) => (o.image, o.view),
-                _ => return Ok(()),
+            let (fx, fy) = (pw as f32 / w.max(1) as f32, ph as f32 / h.max(1) as f32);
+            let vp_cell = vk::Viewport {
+                x: rect[0] as f32 * fx,
+                y: rect[1] as f32 * fy,
+                width: rect[2] as f32 * fx,
+                height: rect[3] as f32 * fy,
+                ..vp_full
             };
-            // with a slang preset, post (and UI in scope 1) render to its
-            // input at scene size; the chain then draws onto the output
-            let slang_src = self.slang.as_ref().and_then(|s| s.src.as_ref()).map(|i| (i.image, i.view, i.width, i.height));
-            let ui_in_src = st.shader_scope == 1;
-            let (post_img, post_view, pw, ph) = slang_src.unwrap_or((out_img, out_view, w, h));
-            let post_area = vk::Rect2D { offset: vk::Offset2D::default(), extent: vk::Extent2D { width: pw, height: ph } };
-            let vp_post = vk::Viewport { width: pw as f32, height: ph as f32, ..vp_full };
+            let cell_area = vk::Rect2D {
+                offset: vk::Offset2D { x: vp_cell.x as i32, y: vp_cell.y as i32 },
+                extent: vk::Extent2D { width: vp_cell.width as u32, height: vp_cell.height as u32 },
+            };
             gpu::barrier(
                 &dev,
                 cmd,
                 post_img,
                 crng,
-                vk::ImageLayout::UNDEFINED,
+                if pi == 0 { vk::ImageLayout::UNDEFINED } else { vk::ImageLayout::COLOR_ATTACHMENT_OPTIMAL },
                 vk::ImageLayout::COLOR_ATTACHMENT_OPTIMAL,
             );
+            // split cells may leave parts of the output uncovered: clear it
+            let post_load = match (pi, multi) {
+                (0, false) => vk::AttachmentLoadOp::DONT_CARE,
+                (0, true) => vk::AttachmentLoadOp::CLEAR,
+                _ => vk::AttachmentLoadOp::LOAD,
+            };
             let oatt = [vk::RenderingAttachmentInfo::default()
                 .image_view(post_view)
                 .image_layout(vk::ImageLayout::COLOR_ATTACHMENT_OPTIMAL)
-                .load_op(vk::AttachmentLoadOp::DONT_CARE)
-                .store_op(vk::AttachmentStoreOp::STORE)];
+                .load_op(post_load)
+                .store_op(vk::AttachmentStoreOp::STORE)
+                .clear_value(clear)];
             let ri = vk::RenderingInfo::default()
                 .render_area(post_area)
                 .layer_count(1)
                 .color_attachments(&oatt);
             dev.cmd_begin_rendering(cmd, &ri);
-            dev.cmd_set_viewport(cmd, 0, &[vp_post]);
-            dev.cmd_set_scissor(cmd, 0, &[post_area]);
+            dev.cmd_set_viewport(cmd, 0, &[vp_cell]);
+            dev.cmd_set_scissor(cmd, 0, &[cell_area]);
             dev.cmd_bind_descriptor_sets(cmd, gfx, p.layout, 0, &set, &[0]);
             dev.cmd_bind_pipeline(cmd, gfx, p.post);
+            let mb = if vel_draws.is_empty() { 0.0 } else { st.motion_blur.min(4.0) / (60.0 * mb_dt as f32) };
             push(bytes_of(&[PostPush {
-                blend: fr.blend,
+                blend,
                 gamma: st.gamma.clamp(0.1, 4.0),
                 contrast: st.contrast.clamp(0.1, 4.0),
                 scene: t.color_slot,
@@ -1319,14 +1422,18 @@ impl Renderer {
                 colorblind: st.colorblind.min(3),
                 vel_tex: t.vel_slot,
                 // blur length: r_motionblur × the motion over 1/60 s
-                mbx: if vel_draws.is_empty() { 0.0 } else { st.motion_blur.min(4.0) / (60.0 * mb_dt as f32) },
-                mby: if vel_draws.is_empty() {
-                    0.0
-                } else {
-                    st.motion_blur.min(4.0) / (60.0 * mb_dt as f32) * scene_h as f32 / sh as f32
-                },
+                mbx: mb * scene_w as f32 / sw as f32,
+                mby: mb * scene_h as f32 / sh as f32,
+                uvs: [rect[2] as f32 / w.max(1) as f32, rect[3] as f32 / h.max(1) as f32],
             }]));
             dev.cmd_draw(cmd, 3, 1, 0, 0);
+            if pi + 1 < npasses {
+                dev.cmd_end_rendering(cmd);
+            }
+            }
+            let post_area = vk::Rect2D { offset: vk::Offset2D::default(), extent: vk::Extent2D { width: pw, height: ph } };
+            let vp_post = vk::Viewport { width: pw as f32, height: ph as f32, ..vp_full };
+            dev.cmd_set_scissor(cmd, 0, &[post_area]);
             ts(8);
             let draw_ui = |vp: vk::Viewport| {
                 if let Some(ofs) = ui_ofs {

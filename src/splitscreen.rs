@@ -16,6 +16,10 @@ pub struct Guest {
     pub cl: ClientState,
     /// Input for the next server tic (set by whoever drives this player).
     pub cmd: UserCmd,
+    /// View state (bob, kicks, damage flashes, entity lerps).
+    pub view: crate::view::ViewState,
+    /// Damage and bonus-flash events for `view`, applied by the host.
+    pub view_events: Vec<ClientEvent>,
 }
 
 impl Guest {
@@ -26,7 +30,7 @@ impl Guest {
         // Distinct shirt/pants so local players tell each other apart.
         let c = ((n * 2) % 14) as i32;
         let slot = sv.connect_local_as(&cl.name, c * 16 + c)?;
-        let mut g = Self { slot, cl, cmd: UserCmd::default() };
+        let mut g = Self { slot, cl, cmd: UserCmd::default(), view: Default::default(), view_events: Vec::new() };
         g.feed(sv);
         Some(g)
     }
@@ -48,10 +52,12 @@ impl Guest {
             }
         }
         // Prints, sounds and stufftext belong to player 1's host for now;
-        // per-player HUD and messages come with the split views.
+        // per-player HUD and messages come later.
         for e in self.cl.take_events() {
-            if let ClientEvent::Disconnect = e {
-                self.cl = ClientState::new();
+            match e {
+                ClientEvent::Disconnect => self.cl = ClientState::new(),
+                ClientEvent::Damage { .. } | ClientEvent::BonusFlash => self.view_events.push(e),
+                _ => {}
             }
         }
     }
@@ -119,6 +125,29 @@ pub fn sync(guests: &mut Vec<Guest>, sv: &mut Server, want: usize) -> Option<Str
         guests.push(g);
     }
     None
+}
+
+/// Output rectangles (x, y, w, h) for `n` local players on a `w`×`h`
+/// screen: 2 split top/bottom (or side by side), 3–4 a 2×2 grid, 5–6 a 3×2
+/// grid; filled left to right, top to bottom.
+pub fn layout(n: usize, w: u32, h: u32, side_by_side: bool) -> Vec<[u32; 4]> {
+    let (cols, rows) = match n {
+        0 | 1 => (1, 1),
+        2 if side_by_side => (2, 1),
+        2 => (1, 2),
+        3 | 4 => (2, 2),
+        _ => (3, 2),
+    };
+    // Edges from rounded fractions so cells tile the screen exactly.
+    let edge = |i: u32, n: u32, len: u32| (len as u64 * i as u64 / n as u64) as u32;
+    (0..n.min(MAX_LOCAL_PLAYERS) as u32)
+        .map(|k| {
+            let (c, r) = (k % cols, k / cols);
+            let (x0, x1) = (edge(c, cols, w), edge(c + 1, cols, w));
+            let (y0, y1) = (edge(r, rows, h), edge(r + 1, rows, h));
+            [x0, y0, x1 - x0, y1 - y0]
+        })
+        .collect()
 }
 
 #[cfg(test)]

@@ -113,3 +113,17 @@ fn guests_move_and_fight_independently() {
     }
     assert!(guests[0].cl.stats[STAT_HEALTH] < hp, "health {hp} -> {}", guests[0].cl.stats[STAT_HEALTH]);
 }
+
+#[test]
+fn layouts_tile_the_screen() {
+    assert_eq!(layout(1, 1920, 1080, false), vec![[0, 0, 1920, 1080]]);
+    assert_eq!(layout(2, 1920, 1080, false), vec![[0, 0, 1920, 540], [0, 540, 1920, 540]]);
+    assert_eq!(layout(2, 1920, 1080, true), vec![[0, 0, 960, 1080], [960, 0, 960, 1080]]);
+    assert_eq!(layout(3, 1920, 1080, false).len(), 3);
+    assert_eq!(layout(4, 1920, 1080, false)[3], [960, 540, 960, 540]);
+    let six = layout(6, 1921, 1081, false);
+    assert_eq!(six[0], [0, 0, 640, 540]);
+    assert_eq!(six[5], [1280, 540, 641, 541]);
+    let area: u32 = six.iter().map(|r| r[2] * r[3]).sum();
+    assert_eq!(area, 1921 * 1081);
+}

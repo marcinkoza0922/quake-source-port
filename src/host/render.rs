@@ -18,6 +18,7 @@ impl Host {
         let mut dls = Vec::new();
         let mut fte = (Vec::new(), Vec::new(), Vec::new());
         let mut blend = [0.0; 4];
+        let mut splits = Vec::new();
         if let Some(v) = &view {
             let fs = &self.server.core.fs;
             let cv = self.view_cvars();
@@ -79,6 +80,9 @@ impl Host {
             crate::view::dlights(&self.cl, &mut dls);
             let contents = self.contents(v.origin);
             blend = self.view.blend(&self.cl, contents, ft, cv.flash);
+            if !self.guests.is_empty() {
+                splits = self.split_views(*v, blend, ft, &mut ents);
+            }
         }
         // 2D
         let glyphs = self.glyphs();
@@ -249,6 +253,7 @@ impl Host {
             settings,
             shot_impacts: &impacts,
             dyn_verts: &dyn_verts,
+            splits: &splits,
             player: self.cl.entities.get(self.cl.viewentity).filter(|_| self.cl.viewentity > 0).map(|e| e.origin),
         };
         if let Err(e) = self.r.render(&frame) {

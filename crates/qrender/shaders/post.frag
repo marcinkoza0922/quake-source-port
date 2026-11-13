@@ -13,6 +13,7 @@ layout(push_constant) uniform P {
     uint vel_tex;   // per-object motion target (uv displacement per frame)
     float mbx;      // motion blur scale (0 = off), x and y (reserved rows)
     float mby;
+    vec2 uvs;       // scene region of the target (split views draw top-left)
 } pc;
 layout(location = 0) out vec4 o_color;
 
@@ -63,10 +64,11 @@ vec3 motion_blur(vec3 c, vec2 uv) {
     return acc / float(N);
 }
 void main() {
-    vec4 sc = texture(textures[nonuniformEXT(pc.scene)], i_uv);
+    vec2 uv = i_uv * pc.uvs;
+    vec4 sc = texture(textures[nonuniformEXT(pc.scene)], uv);
     vec3 c = sc.rgb;
     if (pc.mbx > 0.0)
-        c = motion_blur(c, i_uv);
+        c = motion_blur(c, uv);
     if (pc.mode != 0u) {
         if (pc.mode == 1u) {
             vec2 noiseuv = floor(gl_FragCoord.xy * pc.scale) + 0.5;
