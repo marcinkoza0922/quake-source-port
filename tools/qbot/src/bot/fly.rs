@@ -55,6 +55,9 @@ impl Bot<'_> {
                     self.spot_at = t;
                 }
                 let c = self.spot.unwrap();
+                self.att.frame(Some((c - here).length()));
+                let inside = self.inside(ent);
+                self.att.touching(inside);
                 self.warp_if_slow(t, c);
                 fly_towards(&mut mv, here, c);
             }
@@ -102,9 +105,8 @@ impl Bot<'_> {
     fn warp_if_slow(&mut self, t: f64, to: Vec3) {
         if t - self.goal_start > 5.0 && t - self.warped_at > 5.0 {
             self.warped_at = t;
-            if self.opt.verbose {
-                eprintln!("  t={t:.1} warp to {to:?}");
-            }
+            self.att.warps += 1;
+            self.note(&format!("warp to {to:?}"));
             self.sv.command(&format!("setpos {} {} {}", to.x, to.y, to.z));
         }
     }
@@ -121,7 +123,9 @@ impl Bot<'_> {
     /// Fly to a spot with a clear shot at `ent` and fire at it.
     fn shoot(&mut self, mv: &mut ClientMove, ent: u32, t: f64) {
         if self.spot.is_none() || t - self.spot_at > 1.0 {
-            let (spot, aim) = self.firing_spot(ent);
+            let found = self.firing_spot(ent);
+            self.found_spot = found.is_some();
+            let (spot, aim) = found.unwrap_or((self.center(ent), Vec3::ZERO));
             self.spot = Some(spot);
             self.aim_point = aim;
             self.spot_at = t;
@@ -131,9 +135,13 @@ impl Bot<'_> {
         let eye = self.eye();
         self.aim(mv, ent, c);
         let spot = self.spot.unwrap();
-        if (spot - self.me_origin()).length() < 32.0 || self.clear_shot(eye, c, ent) {
+        let dist = (spot - self.me_origin()).length();
+        let clear = self.clear_shot(eye, c, ent);
+        if dist < 32.0 || clear {
             mv.buttons |= 1;
         }
+        self.att.frame(self.found_spot.then_some(dist));
+        self.att.shot(clear, mv.buttons & 1 != 0);
         fly_towards(mv, self.me_origin(), spot);
     }
 
@@ -206,6 +214,7 @@ impl Bot<'_> {
             self.spot_at = t;
         }
         self.fire_at_will(mv);
+        self.att.frame(self.spot.map(|s| (s - here).length()));
         let Some(spot) = self.spot else {
             fly_towards(mv, here, c);
             return true;
@@ -213,9 +222,7 @@ impl Bot<'_> {
         self.warp_if_slow(t, spot);
         fly_towards(mv, here, spot);
         if (spot - here).length() < 4.0 {
-            if self.opt.verbose {
-                eprintln!("  t={t:.1} pushing button #{ent} from {spot:?}");
-            }
+            self.note(&format!("pushing button #{ent} from {spot:?}"));
             self.set_noclip(false);
             self.pushing_until = t + 1.5;
             self.pushes += 1;
@@ -227,7 +234,7 @@ impl Bot<'_> {
     /// The nearest open spot with a clear shot at some part of `ent` (its
     /// centre, else the middle of a face: an altar's trigger can wrap world
     /// brushes), and that part as an offset from the centre.
-    fn firing_spot(&self, ent: u32) -> (Vec3, Vec3) {
+    fn firing_spot(&self, ent: u32) -> Option<(Vec3, Vec3)> {
         let here = self.me_origin();
         let (lo, hi) = self.bounds(ent);
         let c = (lo + hi) * 0.5;
@@ -262,7 +269,7 @@ impl Bot<'_> {
                 break;
             }
         }
-        best.map_or((c, Vec3::ZERO), |b| (b.1, b.2))
+        best.map(|b| (b.1, b.2))
     }
 
     /// Where a player stands touching brush entity `e`: just off one of its

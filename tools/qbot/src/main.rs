@@ -228,6 +228,15 @@ fn main() {
     if let Err(e) = std::fs::write(&out, &j) {
         eprintln!("qbot: writing {}: {e}", out.display());
     }
+    let traces = o.out.join("trace");
+    let _ = std::fs::create_dir_all(&traces);
+    for (m, r) in &results {
+        let mut body = r.trace.join("\n");
+        body.push('\n');
+        if let Err(e) = std::fs::write(traces.join(format!("{m}.log")), body) {
+            eprintln!("qbot: writing trace for {m}: {e}");
+        }
+    }
 
     let mut regressions: Vec<String> = results.iter().filter(|(_, r)| !r.errors.is_empty()).map(|(m, _)| format!("{m}: errors")).collect();
     let old = std::fs::read_to_string(&o.baseline).ok().and_then(|t| qui::json::parse(&t));

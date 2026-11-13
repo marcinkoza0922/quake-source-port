@@ -112,13 +112,13 @@ impl Bot<'_> {
             }
             if self.goal_done(&self.goals[i]) {
                 let freed = self.vm().is_free(self.goals[i].ent);
+                let g = &self.goals[i];
+                let msg = format!("done {:?} {} #{}", g.kind, g.class, g.ent);
+                self.note(&msg);
                 let g = &mut self.goals[i];
                 g.done = true;
                 if freed {
                     self.known.remove(&g.ent);
-                }
-                if self.opt.verbose {
-                    eprintln!("  t={:.1} done {:?} {} #{}", self.sv.time(), g.kind, g.class, g.ent);
                 }
                 if self.cur == Some(i) {
                     self.cur = None;
@@ -128,10 +128,7 @@ impl Bot<'_> {
     }
 
     pub(super) fn fail(&mut self, i: usize, why: &str) {
-        if self.opt.verbose {
-            let g = &self.goals[i];
-            eprintln!("  t={:.1} FAILED {:?} {} #{} at {:?}: {why}", self.sv.time(), g.kind, g.class, g.ent, self.center(g.ent));
-        }
+        self.note(&format!("FAILED {}: {why}", self.describe(i)));
         let g = &mut self.goals[i];
         g.failed = Some(why.into());
         g.tries += 1;
@@ -158,8 +155,8 @@ impl Bot<'_> {
                 any = true;
             }
         }
-        if any && self.opt.verbose {
-            eprintln!("  t={:.1} re-pressing buttons (round {})", self.sv.time(), self.repressed);
+        if any {
+            self.note(&format!("re-pressing buttons (round {})", self.repressed));
         }
         any
     }
