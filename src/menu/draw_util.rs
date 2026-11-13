@@ -6,7 +6,6 @@ pub(super) const QUIT_BTN: (f32, f32) = (64.0, 14.0);
 pub(super) const QUIT_BTN_Y: f32 = 178.0;
 pub(super) const QUIT_BUTTONS: [f32; 2] = [248.0, 328.0];
 
-/// Main menu rows: the five of mainmenu.lmp plus Mods.
 pub(super) fn draw_inventory_icon(c: &mut Canvas, pic: &mut PicFn, x: f32, y: f32, max_w: f32, max_h: f32, icon: &crate::save_inventory::Icon) {
     if let Some((id, w, h)) = pic(&icon.name) {
         let frame = icon.frame;
@@ -20,7 +19,8 @@ pub(super) fn draw_inventory_icon(c: &mut Canvas, pic: &mut PicFn, x: f32, y: f3
     }
 }
 
-pub(super) const MAIN_ITEMS: usize = 6;
+/// Main menu rows: the five of mainmenu.lmp plus Map Packs and Add-ons.
+pub(super) const MAIN_ITEMS: usize = 7;
 
 pub const BORDER: [f32; 4] = [0.55, 0.42, 0.25, 1.0];
 pub const HILITE: [f32; 4] = [0.6, 0.38, 0.12, 0.45];

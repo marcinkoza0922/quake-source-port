@@ -9,6 +9,7 @@
 //!   15/666/999 encoding) to them, and accepts [`ClientMove`]s and string
 //!   commands.
 
+pub mod addons;
 pub mod assists;
 mod client;
 mod commands;

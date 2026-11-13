@@ -303,6 +303,10 @@ impl ClientState {
                 }
                 _ => {}
             }
+            if let Some(args) = line.strip_prefix(b"//qsp_portal ") {
+                self.parse_portal(&String::from_utf8_lossy(args));
+                continue;
+            }
             let line = line.strip_prefix(b"//").unwrap_or(&line);
             self.events.push(ClientEvent::StuffText(String::from_utf8_lossy(line).into_owned()));
         }

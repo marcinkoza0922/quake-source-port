@@ -127,7 +127,7 @@ Target selection: live monsters (`FL_MONSTER`, health > 0) and DM opponents if a
 
 ### UI / mod menu
 
-Custom immediate-mode UI (`qui`) drawing through the renderer's 2D batch, conchars + scalable bitmap font. Mod menu: scans basedir for gamedirs (has pak/pk3/progs/maps), reads metadata (`modinfo.txt`, readme, `maps/*.bsp` names, worldspawn `message`), thumbnail from screenshot cache, launches with correct base game flags. Per-mod profile = `config.cfg` in `<basedir>/<mod>/`, with per-mod stats file (`qsp_stats.json`) storing kills/secrets/completion per map.
+Custom immediate-mode UI (`qui`) drawing through the renderer's 2D batch, conchars + scalable bitmap font. Mod menu (main menu "Map Packs"): scans basedir for gamedirs (has pak/pk3/progs/maps), reads metadata (`modinfo.txt`, readme, `maps/*.bsp` names, worldspawn `message`), thumbnail from screenshot cache, launches with correct base game flags. Per-mod profile = `config.cfg` in `<basedir>/<mod>/`, with per-mod stats file (`qsp_stats.json`) storing kills/secrets/completion per map.
 
 ### Accessibility (Options → Accessibility)
 - `a11y_reducemotion`: `ViewCvars::reduce_motion` zeroes bob, strafe roll,
@@ -197,6 +197,11 @@ Damage/movement assists are engine-side so they work with any progs; off in deat
   `assist_jumps` 2/3 gives air jumps on a fresh press, using QC's
   `FL_JUMPRELEASED` to tell presses apart.
 - Tests: `crates/qserver/tests/assists.rs` (needs game data).
+
+### Add-ons
+
+See [ADDONS.md](ADDONS.md) for the optional local toys, portal gun, rendering,
+movement, settings and diagnostic commands.
 
 ### Test bot (`tools/qbot`)
 

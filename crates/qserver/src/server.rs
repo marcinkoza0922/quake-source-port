@@ -160,7 +160,7 @@ fn register_cvars(cv: &mut Cvars) {
     ] {
         cv.register(n, d, f);
     }
-    for &(n, d, f) in crate::assists::CVARS {
+    for &(n, d, f) in crate::assists::CVARS.iter().chain(crate::addons::CVARS) {
         cv.register(n, d, f);
     }
 }

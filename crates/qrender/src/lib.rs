@@ -16,6 +16,9 @@ pub mod types;
 pub(crate) mod water;
 mod world;
 pub mod portals;
+/// Portal view render targets (teleporter windows, gun portals and their
+/// nested views).
+pub const MAX_PORTAL_VIEWS: usize = 8;
 
 pub use types::*;
 
@@ -105,6 +108,8 @@ pub struct Renderer {
     dummy: Buffer,
     world: Option<WorldGpu>,
     isolated_portal: Option<usize>,
+    /// Add-on portals have been drawn: keep the portal view targets.
+    gun_targets: bool,
     isolated_distance: Option<f32>,
     hidden_entities: std::collections::HashSet<u32>,
     models: Vec<Model>,

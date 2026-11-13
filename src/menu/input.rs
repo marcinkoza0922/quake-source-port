@@ -36,6 +36,7 @@ impl Menu {
     }
 
     pub fn key(&mut self, key: i32, cv: &mut Cvars, server_active: bool) -> Vec<Action> {
+        sync_addon_binds(cv);
         self.sync_autoaim_mapping(cv);
         let mut out = Vec::new();
         if self.autoaim_prompt {
@@ -183,6 +184,10 @@ impl Menu {
                             out.push(Action::Command("_mods\n".into()));
                             self.screen = Screen::Mods;
                         }
+                        6 => {
+                            self.opt_cursor = 0;
+                            self.screen = Screen::OptionsPage(Page::Addons);
+                        }
                         _ => {}
                     }
                 }
@@ -302,6 +307,8 @@ impl Menu {
                     }
                     self.screen = if is_net_page(p) {
                         Screen::Multiplayer
+                    } else if p == Page::Addons {
+                        Screen::Main
                     } else if let Some((parent, row)) =
                         self.sub_return.take().filter(|r| r.1 == p).map(|r| (r.0, r.2)).or_else(|| parent_page(p))
                     {

@@ -35,6 +35,8 @@ pub struct Guest {
     pub center: crate::console::Console,
     /// This guest's weapon wheel (opened with its own `+weaponwheel`).
     pub wheel: crate::wheel::Wheel,
+    /// This guest's add-on toy slot.
+    pub toy: crate::addons::ToySlot,
 }
 
 impl Guest {
@@ -61,6 +63,7 @@ impl Guest {
             center_prints: Vec::new(),
             center: crate::console::Console::new(),
             wheel: Default::default(),
+            toy: Default::default(),
         };
         g.feed(sv);
         Some(g)

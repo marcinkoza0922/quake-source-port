@@ -6,6 +6,20 @@ impl Host {
         self.cv("scr_hudstyle") == 0.0
     }
 
+    /// Toys usable this frame: add-ons on, a local non-deathmatch game and
+    /// no remote clients. Empty (no allocation) when add-ons are off.
+    pub(super) fn allowed_toys(&self) -> Vec<qserver::addons::Toy> {
+        let cv = &self.server.core.cvars;
+        if cv.value_of("addons_enable") == 0.0 || !self.server.active() {
+            return Vec::new();
+        }
+        let all_local = qserver::addons::all_local(&self.server.core.clients);
+        if !qserver::addons::allowed(cv, self.cv("deathmatch") != 0.0, all_local) {
+            return Vec::new();
+        }
+        qserver::addons::Toy::enabled(cv).collect()
+    }
+
     pub(super) fn view_cvars(&self) -> ViewCvars {
         let v = |n: &str| self.cv(n);
         ViewCvars {
@@ -148,14 +162,21 @@ impl Host {
             inp.speed = !inp.speed;
         }
         self.pend_attack |= inp.attack;
+        self.pend_attack2 |= inp.attack2;
         self.pend_jump |= inp.jump;
-        if inp.impulse != 0 {
-            self.pend_impulse = inp.impulse;
-        }
+        let mut impulse = inp.impulse;
         let alive = self.cl.stats[STAT_HEALTH] > 0;
         let (held, aim) = (self.input.wheel_held(), self.input.wheel_aim);
         if let Some(imp) = self.wheel.update(held, in_game && alive && self.demo.is_none(), aim, &self.cl) {
-            self.pend_impulse = imp;
+            impulse = imp;
+        }
+        if impulse != 0 {
+            self.pend_impulse = impulse;
+        }
+        let toys = if self.local.is_some() { self.allowed_toys() } else { Vec::new() };
+        if let Some(t) = self.toy.update(&toys, inp.toy, impulse) {
+            let (s, t, cols) = self.center_args(t.name());
+            self.con.center_print(&s, t, cols);
         }
         self.guest_moves(ft);
         let timescale = self.wheel_timescale() as f64;
@@ -173,7 +194,7 @@ impl Host {
             self.accum = 0.0;
             if let Some(i) = self.local {
                 let mut cmd = self.last_cmd;
-                cmd.buttons = self.pend_attack as u8 | (self.pend_jump as u8) << 1;
+                cmd.buttons = self.toy.buttons(self.pend_attack, self.pend_attack2, self.pend_jump);
                 cmd.impulse = self.pend_impulse;
                 // The server acks the lossless local client's frames itself;
                 // only full-resend requests (-1) go back.
@@ -192,6 +213,7 @@ impl Host {
                         impulse: cmd.impulse,
                     });
                     self.pend_attack = false;
+                    self.pend_attack2 = false;
                     self.pend_jump = false;
                     self.pend_impulse = 0;
                 }
@@ -284,7 +306,8 @@ impl Host {
         self.con.update(ft);
 
         let (view, gun) = if self.cl.signon == 4 && !self.level.mapname.is_empty() {
-            let cv = self.view_cvars();
+            let mut cv = self.view_cvars();
+            cv.drawviewmodel &= self.toy.held.is_none();
             let (mut v, g) = self.view.calc_refdef(&self.cl, &cv, &self.level, ft);
             self.cl.viewent.lerpflags &= !qclient::LERP_RESETANIM;
             if self.classic_hud() && self.cl.intermission == 0 {

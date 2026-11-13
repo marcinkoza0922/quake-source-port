@@ -91,6 +91,10 @@ impl Server {
         vm.set_g_i(g.other, 0);
         vm.set_g_f(g.time, vm.time as f32);
         exec(vm, c, w, vm.g_i(g.f_start_frame));
+        let toys = crate::addons::active(c);
+        if toys {
+            crate::addons::portal_move::snapshot(&mut l.portals, &Ents { vm: &mut *vm, c: &mut *c });
+        }
         let mut i = 0u32;
         loop {
             let cap = if freeze { maxclients + 1 } else { vm.num_edicts() as u32 };
@@ -150,6 +154,14 @@ impl Server {
         }
         if c.sv.error.is_none() {
             crate::assists::frame(l, c);
+            if toys {
+                crate::addons::frame(l, c);
+            } else {
+                l.falls.clear();
+                if !l.portals.pairs.is_empty() {
+                    crate::addons::shut_down(l, c);
+                }
+            }
         }
         self.process_queued_client_cmds();
     }

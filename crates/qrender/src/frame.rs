@@ -4,6 +4,7 @@ use crate::convert::group_index;
 use crate::world::{NO_LM, box_in_frustum, dot};
 use crate::*;
 mod portals;
+use portals::gun_portal_quad;
 mod types;
 use types::*;
 mod math;
@@ -22,8 +23,9 @@ impl Renderer {
             self.create_swapchain(fr.settings.vsync)?;
         }
         self.apply_settings(&fr.settings)?;
+        self.gun_targets |= fr.gun_portals.iter().any(|g| g.live && g.exit.is_some());
         if self.targets.as_ref().is_some_and(|t| t.portals.is_empty())
-            && self.world.as_ref().is_some_and(|w| !w.portals.is_empty())
+            && (self.gun_targets || self.world.as_ref().is_some_and(|w| !w.portals.is_empty()))
         {
             self.create_targets()?;
         }
@@ -175,8 +177,8 @@ impl Renderer {
             }
             setup_view(&v, scene_w, scene_h)
         });
-        let portal_draws = if fr.settings.teleport_windows {
-            self.prepare_portals(view.as_ref(), &mut dynw, time, alphas, &mut lm_vis)
+        let mut portal_draws = if fr.settings.teleport_windows || !fr.gun_portals.is_empty() {
+            self.prepare_portals(view.as_ref(), fr.gun_portals, &fr.settings, &mut dynw, time, alphas, &mut lm_vis)
         } else {
             Vec::new()
         };
@@ -390,7 +392,9 @@ impl Renderer {
                             poses: [p1, p2, top.min(13) as u32, bot.min(13) as u32],
                             texs: [skin[0], skin[1], skin[2], flags],
                         };
-                        if alpha < 1.0 && !e.viewmodel {
+                        if e.portal_only {
+                            // portal views only (see draw_portals)
+                        } else if alpha < 1.0 && !e.viewmodel {
                             trans.push((dist, Trans::Alias(alias_draws.len())));
                         } else if let Some(r) = prev_rows(e, Some(&local)) {
                             vel_draws.push(VelDraw::Alias(alias_draws.len(), r));
@@ -399,6 +403,7 @@ impl Renderer {
                             model: e.model.0 as usize,
                             push,
                             viewmodel: e.viewmodel,
+                            portal_only: e.portal_only,
                         });
                     }
                     Model::Sprite(sm) => {
@@ -526,8 +531,8 @@ impl Renderer {
                     });
                 }
             }
-            let (fte_v, fte_i, fte_b);
-            let (fte_vertices, fte_indices, fte_batches) = if spray_b.is_empty() {
+            let (mut fte_v, mut fte_i, fte_b);
+            let (mut fte_vertices, mut fte_indices, fte_batches) = if spray_b.is_empty() {
                 (fr.fte_vertices, fr.fte_indices, fr.fte_batches)
             } else {
                 fte_v = [fr.fte_vertices, &spray_v].concat();
@@ -535,14 +540,49 @@ impl Renderer {
                 fte_b = [fr.fte_batches, &spray_b].concat();
                 (&fte_v[..], &fte_i[..], &fte_b[..])
             };
-            if !fte_batches.is_empty() && !fte_indices.is_empty() {
-                let batches: Vec<_> = fte_batches
+            let mut gun_batches = Vec::new();
+            // the view texture of gun portal `gi` as seen in view `parent`
+            let slot_in = |parent: Option<usize>, gi: usize| {
+                portal_draws
+                    .iter()
+                    .position(|d| d.parent == parent && d.portal.gun == Some(gi))
+                    .and_then(|k| Some(self.targets.as_ref()?.portals.get(k)?.1))
+                    .unwrap_or(NO_TEX)
+            };
+            if !fr.gun_portals.is_empty() {
+                let (mut v, mut i) = (fte_vertices.to_vec(), fte_indices.to_vec());
+                for (gi, g) in fr.gun_portals.iter().enumerate() {
+                    gun_batches.push((gi, gun_portal_quad(g, slot_in(None, gi), &mut v, &mut i)));
+                }
+                (fte_v, fte_i) = (v, i);
+                (fte_vertices, fte_indices) = (&fte_v[..], &fte_i[..]);
+            }
+            if !(fte_batches.is_empty() && gun_batches.is_empty()) && !fte_indices.is_empty() {
+                let parts: Vec<_> = fte_batches
                     .iter()
                     .filter_map(|b| {
                         let slot = self.pics.get(b.pic.0 as usize)?.slot;
-                        Some((crate::pipelines::fte_index(b.blend, b.lines), slot, *b))
+                        Some((crate::pipelines::fte_index(b.blend, b.lines), slot, *b, b.blend as u32 as f32))
                     })
                     .collect();
+                // portal views: the same particles (not soft) and every gun
+                // portal but the one they look out of, with nested views
+                let per_view: Vec<Vec<_>> = (0..portal_draws.len())
+                    .map(|k| {
+                        let exit = portal_draws[k].portal.destination;
+                        let mut b: Vec<_> = parts.iter().map(|&(p, s, mut b, m)| { b.soft = false; (p, s, b, m) }).collect();
+                        for &(gi, (p, _, gb, m)) in &gun_batches {
+                            if fr.gun_portals[gi].origin != exit {
+                                b.push((p, slot_in(Some(k), gi), gb, m));
+                            }
+                        }
+                        b
+                    })
+                    .collect();
+                for (d, b) in portal_draws.iter_mut().zip(per_view) {
+                    d.fte = b;
+                }
+                let batches: Vec<_> = parts.into_iter().chain(gun_batches.into_iter().map(|(_, b)| b)).collect();
                 if let (Some(v), Some(i)) = (dynw.push(fte_vertices, 16), dynw.push(fte_indices, 4)) {
                     fte = Some((v, i, batches));
                 }
@@ -712,10 +752,14 @@ impl Renderer {
                     a
                 },
             };
-            for (i, portal) in pass.portal_draws.iter_mut().enumerate() {
+            for (i, portal) in pass.portal_draws.iter_mut().enumerate().filter(|(i, _)| *i < 4) {
                 ubo.portal_plane[i] = portal.portal.plane();
-                ubo.portal_min[i] = [portal.portal.mins[0], portal.portal.mins[1], portal.portal.mins[2], self.targets.as_ref().unwrap().portals[i].1 as f32];
+                // only teleporter sheets sample their view in water.frag
+                let slot = if portal.portal.gun.is_some() { 0.0 } else { self.targets.as_ref().unwrap().portals[i].1 as f32 };
+                ubo.portal_min[i] = [portal.portal.mins[0], portal.portal.mins[1], portal.portal.mins[2], slot];
                 ubo.portal_max[i] = [portal.portal.maxs[0], portal.portal.maxs[1], portal.portal.maxs[2], 1.0];
+            }
+            for portal in &pass.portal_draws {
                 let mut pu = ubo;
                 pu.portal_min = [[0.0; 4]; 4];
                 pu.portal_clip = portal.portal.clip();
@@ -988,7 +1032,7 @@ impl Renderer {
             let soft_dist = st.soft_particle_distance;
             let split = self.isolated_portal.is_none() && soft_dist > 0.0
                 && view.is_some()
-                && fte.as_ref().is_some_and(|(_, _, b)| b.iter().any(|(_, _, b)| b.soft && !b.lines));
+                && fte.as_ref().is_some_and(|(_, _, b)| b.iter().any(|(_, _, b, _)| b.soft && !b.lines));
             // load: keep earlier contents; last: the final scene pass (MSAA
             // resolves only there); ro: depth attachment read-only.
             let begin = |load: bool, last: bool, ro: bool| {
@@ -1041,7 +1085,7 @@ impl Renderer {
             let depth_layout = |old: vk::ImageLayout, new: vk::ImageLayout| {
                 gpu::barrier(&dev, cmd, t.depth.image, drng, old, new);
             };
-            self.draw_portals(cmd, portal_draws, world_draws, alias_draws, fi, [scene_w, scene_h]);
+            self.draw_portals(cmd, portal_draws, particles, fte.as_ref().map(|f| (f.0, f.1)), world_draws, alias_draws, fi, [scene_w, scene_h]);
             if self.isolated_portal.is_some() && !multi {
                 // Destination draws above retain their scenery and entities. Only
                 // the source sheet survives in the main diagnostic view below.
@@ -1148,7 +1192,7 @@ impl Renderer {
                 }
                 ts(4);
                 let draw_alias = |a: &AliasDraw, pipe: vk::Pipeline| {
-                    let Some(Model::Alias(am)) = self.models.get(a.model) else {
+                    let Some(Model::Alias(am)) = self.models.get(a.model).filter(|_| !a.portal_only) else {
                         return;
                     };
                     dev.cmd_bind_pipeline(cmd, gfx, pipe);
@@ -1267,11 +1311,11 @@ impl Renderer {
                     let samples = t.color_ms.as_ref().map_or(1, |_| self.msaa);
                     dev.cmd_bind_vertex_buffers(cmd, 0, &[dynbuf], &[*vofs]);
                     dev.cmd_bind_index_buffer(cmd, dynbuf, *iofs, vk::IndexType::UINT32);
-                    for (pipe, slot, b) in batches {
+                    for (pipe, slot, b, mode) in batches {
                         dev.cmd_bind_pipeline(cmd, gfx, p.fte[*pipe]);
                         let fogmix = if matches!(b.blend, crate::FteBlend::Blend | crate::FteBlend::BlendColour) { 1.0 } else { 0.0 };
                         let soft = if split && b.soft { 1.0 / soft_dist } else { 0.0 };
-                        let color = [fogmix, soft, samples as f32, b.blend as u32 as f32];
+                        let color = [fogmix, soft, samples as f32, *mode];
                         push(bytes_of(&[PolyPush { color, tex: *slot }]));
                         dev.cmd_draw_indexed(cmd, b.num_indices, 1, b.first_index, 0, 0);
                     }

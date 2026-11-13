@@ -264,6 +264,8 @@ pub struct ClientState {
 
     pub events: Vec<ClientEvent>,
     pub(crate) stuffcmdbuf: Vec<u8>,
+    /// Add-on portals from `//qsp_portal` stufftext (this engine only).
+    pub portals: Vec<PortalView>,
     /// Reliable clc_* bytes to send (signon replies, string commands).
     pub out_reliable: SizeBuf,
     pub movemessages: u32,
@@ -349,6 +351,7 @@ impl ClientState {
             ack_frames: Vec::new(),
             events: Vec::new(),
             stuffcmdbuf: Vec::new(),
+            portals: Vec::new(),
             out_reliable: SizeBuf::new(MAX_MSGLEN),
             movemessages: 0,
             name: "player".into(),
@@ -421,5 +424,29 @@ impl ClientState {
             _ => {}
         }
         self.events.push(ClientEvent::Signon(self.signon));
+    }
+}
+
+/// One add-on portal: owner client slot, slot 0/1, centre, normal, up.
+#[derive(Clone, Copy, Debug, PartialEq)]
+pub struct PortalView {
+    pub owner: u8,
+    pub slot: u8,
+    pub origin: [f32; 3],
+    pub normal: [f32; 3],
+    pub up: [f32; 3],
+}
+
+impl ClientState {
+    /// `qsp_portal owner slot [ox oy oz nx ny nz ux uy uz]` (no args after
+    /// the slot removes it).
+    pub(crate) fn parse_portal(&mut self, args: &str) {
+        let n: Vec<f32> = args.split_whitespace().filter_map(|w| w.parse().ok()).collect();
+        let (Some(&o), Some(&s)) = (n.first(), n.get(1)) else { return };
+        let (owner, slot) = (o as u8, s as u8);
+        self.portals.retain(|p| (p.owner, p.slot) != (owner, slot));
+        if let [_, _, ox, oy, oz, nx, ny, nz, ux, uy, uz] = n[..] {
+            self.portals.push(PortalView { owner, slot, origin: [ox, oy, oz], normal: [nx, ny, nz], up: [ux, uy, uz] });
+        }
     }
 }

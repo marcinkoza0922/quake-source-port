@@ -69,6 +69,24 @@ pub struct RenderEntity {
     pub dyn_pose: Option<DynPose>,
     /// Split-screen views this entity is drawn in (bit k = view k); 0 = all.
     pub views: u8,
+    /// Drawn only in portal views (the player's own body).
+    pub portal_only: bool,
+}
+
+/// An add-on (portal gun) portal: an oval on a wall, `half` its half width
+/// and height along `right = up × normal` and `up`. With `exit` set and
+/// `live`, the view out of the exit is drawn into it; otherwise it is a
+/// flat disc in `color`.
+#[derive(Clone, Copy, Debug, PartialEq)]
+pub struct GunPortal {
+    pub origin: Vec3,
+    pub normal: Vec3,
+    pub up: Vec3,
+    pub half: [f32; 2],
+    pub color: [u8; 3],
+    /// Linked portal's (origin, normal, up).
+    pub exit: Option<(Vec3, Vec3, Vec3)>,
+    pub live: bool,
 }
 
 /// One split-screen view: its camera, its rectangle of the output (x, y,
@@ -111,6 +129,7 @@ impl Default for RenderEntity {
             key: 0,
             views: 0,
             dyn_pose: None,
+            portal_only: false,
         }
     }
 }
@@ -248,6 +267,13 @@ pub struct Settings {
     pub telealpha: Option<f32>,
     /// Opt-in destination views on linked teleporter surfaces.
     pub teleport_windows: bool,
+    /// Most live portal-gun views per frame (each costs a scene draw) and
+    /// the distance beyond which a portal is drawn flat.
+    pub gun_portal_max: u32,
+    pub gun_portal_dist: f32,
+    /// Portals seen through portals: nesting levels drawn live (0 = none;
+    /// deeper ones are flat). All views share [`crate::MAX_PORTAL_VIEWS`].
+    pub gun_portal_depth: u32,
     /// Sky blend toward fog colour (r_skyfog).
     pub skyfog: f32,
     /// Alpha of the front sky layer (r_skyalpha).
@@ -335,6 +361,9 @@ impl Default for Settings {
             slimealpha: None,
             telealpha: None,
             teleport_windows: false,
+            gun_portal_max: 4,
+            gun_portal_dist: 4096.0,
+            gun_portal_depth: 3,
             skyfog: 0.5,
             skyalpha: 1.0,
             dynamic: true,
@@ -399,6 +428,8 @@ pub struct RenderFrame<'a> {
     /// Split-screen: when non-empty, these views are drawn instead of
     /// `view` and `blend`.
     pub splits: &'a [SplitView],
+    /// Add-on portals (empty unless the portal gun is in use).
+    pub gun_portals: &'a [GunPortal],
 }
 
 impl Default for RenderFrame<'_> {
@@ -421,6 +452,7 @@ impl Default for RenderFrame<'_> {
             shot_impacts: &[],
             dyn_verts: &[],
             splits: &[],
+            gun_portals: &[],
         }
     }
 }

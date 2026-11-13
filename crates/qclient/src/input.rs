@@ -35,6 +35,10 @@ pub struct InputState {
     pub strafe: bool,
     pub attack: bool,
     pub jump: bool,
+    /// Add-on secondary fire (`+attack2`), held.
+    pub attack2: bool,
+    /// `+toy` was pressed since the last frame (toggles the toy slot).
+    pub toy: bool,
     pub impulse: u8,
     /// Mouse/gamepad look delta in degrees, applied before clamping.
     pub look_delta: [f32; 2],

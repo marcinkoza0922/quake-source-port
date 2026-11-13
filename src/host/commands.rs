@@ -153,6 +153,8 @@ pub(super) fn register_commands(c: &mut Commands<Host>) {
             "impacts" => Some(Page::Impacts),
             "shader" | "screenshader" => Some(Page::ScreenShader),
             "audio" => Some(Page::Audio),
+            "addons" => Some(Page::Addons),
+            "portalgun" => Some(Page::PortalGun),
             _ => None,
         };
         if page == Some(Page::Graphics) {
@@ -481,6 +483,11 @@ pub(super) fn register_commands(c: &mut Commands<Host>) {
         if let Some(d) = p.parent() {
             let _ = std::fs::create_dir_all(d);
         }
+        let side = crate::addons::sidecar(&p);
+        let _ = match h.server.addon_save_text() {
+            Some(s) => std::fs::write(&side, s),
+            None => std::fs::remove_file(&side),
+        };
         match std::fs::write(&p, qcore::text::encode(&text)) {
             Ok(()) => h.print(&format!("Saved {}\n", p.display())),
             Err(e) => h.print(&format!("ERROR: couldn't write {}: {e}\n", p.display())),
@@ -504,6 +511,8 @@ pub(super) fn register_commands(c: &mut Commands<Host>) {
         h.disconnect_client();
         if let Err(e) = h.server.load_game(&text) {
             h.print(&format!("load failed: {e}\n"));
+        } else if let Ok(s) = std::fs::read_to_string(crate::addons::sidecar(&p)) {
+            h.server.addon_load_text(&s);
         }
         h.drain_server_log();
     });

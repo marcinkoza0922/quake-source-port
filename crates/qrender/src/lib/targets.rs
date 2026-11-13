@@ -142,8 +142,8 @@ impl Renderer {
         let (ao, ao_slot) = fx_target(self, pipelines::AO_FORMAT)?;
         let (vel, vel_slot) = fx_target(self, pipelines::VEL_FORMAT)?;
         let mut portals = Vec::new();
-        if self.world.as_ref().is_some_and(|w| !w.portals.is_empty()) {
-            for _ in 0..4 { portals.push(fx_target(self, COLOR_FORMAT)?); }
+        if self.gun_targets || self.world.as_ref().is_some_and(|w| !w.portals.is_empty()) {
+            for _ in 0..crate::MAX_PORTAL_VIEWS { portals.push(fx_target(self, COLOR_FORMAT)?); }
         }
         self.targets = Some(Targets {
             portals,
