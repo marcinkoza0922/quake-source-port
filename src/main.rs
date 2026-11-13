@@ -26,6 +26,7 @@ mod png;
 mod qw;
 mod sbar;
 mod saveinfo;
+mod splitscreen;
 mod save_inventory;
 mod view;
 mod wheel;

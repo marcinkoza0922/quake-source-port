@@ -99,6 +99,8 @@ pub struct Host {
     wheel: crate::wheel::Wheel,
     captions: crate::captions::Captions,
     hud_fade: crate::sbar::HudFade,
+    /// Split-screen players 2..6 (`cl_splitscreen`); player 1 is `cl`.
+    pub guests: Vec<crate::splitscreen::Guest>,
     /// Label family of the last connected gamepad.
     pad_family: crate::glyphs::Family,
     /// Modern menu text/shape atlas (`crate::font`).
@@ -208,6 +210,7 @@ impl Host {
             wheel: Default::default(),
             captions: Default::default(),
             hud_fade: Default::default(),
+            guests: Vec::new(),
             pad_family: Default::default(),
             ui_text: Default::default(),
             rumble: None,

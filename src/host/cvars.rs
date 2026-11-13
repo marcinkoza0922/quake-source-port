@@ -74,6 +74,8 @@ pub(super) const HOST_CVARS: &[(&str, &str, u32)] = &[
     ("sv_aimassist", "0", CVAR_SERVERINFO),
     ("_cl_name", "player", CVAR_ARCHIVE),
     ("_cl_color", "0", CVAR_ARCHIVE),
+    // Local players on a local server (1 = no split-screen, up to 6).
+    ("cl_splitscreen", "1", 0),
     // Multiplayer menu (Join / Host Game).
     ("_mp_address", "localhost", CVAR_ARCHIVE),
     ("_mp_maxplayers", "8", CVAR_ARCHIVE),

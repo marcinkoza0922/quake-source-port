@@ -176,6 +176,9 @@ impl Host {
                     self.pend_impulse = 0;
                 }
             }
+            for g in &mut self.guests {
+                g.send(&mut self.server);
+            }
             if let Some(q) = &mut self.qw_client {
                 let c = self.last_cmd;
                 let cmd = qnet::qw::UserCmd {
@@ -230,6 +233,9 @@ impl Host {
             }
             self.drain_server_log();
             self.feed_client();
+            for g in &mut self.guests {
+                g.feed(&mut self.server);
+            }
         }
         self.poll_remote();
         self.poll_qw();
@@ -241,6 +247,11 @@ impl Host {
         if self.cl.signon > 0 {
             self.cl.frame(dt * timescale);
             self.apply_qw_prediction();
+        }
+        for g in &mut self.guests {
+            if g.cl.signon > 0 {
+                g.cl.frame(dt * timescale);
+            }
         }
         self.process_client_events();
         self.track_rumble();
