@@ -162,12 +162,44 @@ impl ClientState {
             }
             e.frame = s.frame as i32;
             if forcelink {
+                // New or reappearing entities must also snap renderer movement history.
+                e.lerpflags |= LERP_RESETMOVE;
                 e.msg_origins[1] = e.msg_origins[0];
                 e.origin = e.msg_origins[0];
                 e.msg_angles[1] = e.msg_angles[0];
                 e.angles = e.msg_angles[0];
                 e.forcelink = true;
             }
+        }
+    }
+}
+
+#[cfg(test)]
+mod movement_tests {
+    use super::*;
+
+    #[test]
+    fn replacement_delta_appearance_resets_movement_but_steps_do_not() {
+        let mut cl = ClientState::new();
+        cl.model_precache = vec![String::new(), "progs/ogre.mdl".into()];
+        cl.entities.resize(3, ClientEntity::default());
+        cl.entities[2].delta_live = true;
+        cl.entities[2].netstate = EntState {
+            modelindex: 1, origin: [256.0, 128.0, 24.0],
+            eflags: EFLAGS_STEP, ..Default::default()
+        };
+        for stale_time in [-1.0, 0.5] {
+            cl.mtime = [1.0, 0.9];
+            cl.entities[2].msgtime = stale_time;
+            cl.entities_deltaed();
+            let e = &mut cl.entities[2];
+            assert_ne!(e.lerpflags & LERP_RESETMOVE, 0);
+            assert_eq!(e.origin, e.netstate.origin);
+            e.lerpflags &= !LERP_RESETMOVE;
+            cl.mtime = [1.1, 1.0];
+            cl.entities[2].netstate.origin[0] += 20.0;
+            cl.entities_deltaed();
+            assert_eq!(cl.entities[2].lerpflags & LERP_RESETMOVE, 0);
         }
     }
 }

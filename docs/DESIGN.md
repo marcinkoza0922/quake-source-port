@@ -452,3 +452,5 @@ Phase 6 done:
 - A world trait for trace_line / point_contents / decal clipping against BSP.
 - Geometry: builds vertex batches (texture, blend mode) for qrender: textured quads, line/fan/textured sparks, beams, decals. Fallback textures: white, beam, ptri, ball, fuzzy.
 - Hooks: `r_particledesc` default "classic" loads no FTE configs, so classic effects stay unless an effect resolves. Server: builtins particleeffectnum #335, trailparticles #336, pointparticles #337, te_particlerain #409 / te_particlesnow #410, advertise FTE_SV_POINTPARTICLES, DP_SV_POINTPARTICLES, DP_TE_PARTICLERAIN/SNOW, FTE_PART_NAMESPACE_EFFECTINFO; messages svcdp_precache (54, 0x4000|idx), svcdp_trailparticles 60, pointparticles 61, pointparticles1 62, TEDP 55/56. Entity emit/trail effect fields need replacement deltas; skip at first.
+
+Monster movement interpolation: classic updates and FTE replacement deltas set `LERP_RESETMOVE` when an entity first appears or returns after a snapshot gap. This resets renderer transform history to the received position, preventing a brief slide from zero or a stale position. Ordinary `U_STEP`/`EFLAGS_STEP` updates retain movement smoothing.
