@@ -125,6 +125,15 @@ impl Menu {
             }
         };
         match self.screen {
+            Screen::Death => {
+                wrap(&mut self.death_cursor, 4, &mut out);
+                let shortcut = (b'1' as i32..=b'4' as i32).contains(&key).then(|| (key - b'1' as i32) as usize);
+                if enter || shortcut.is_some() {
+                    let choice = shortcut.unwrap_or(self.death_cursor);
+                    out.push(Action::Sound("misc/menu2.wav"));
+                    out.push(Action::Command(format!("_death_choice {}\n", choice + 1)));
+                }
+            }
             Screen::None => {}
             Screen::Main => {
                 if back {

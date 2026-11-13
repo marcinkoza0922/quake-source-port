@@ -244,6 +244,8 @@ impl Host {
         }
         self.process_client_events();
         self.track_rumble();
+        self.update_death();
+        self.sync_key_dest();
         self.update_autosave();
         self.con.update(ft);
 

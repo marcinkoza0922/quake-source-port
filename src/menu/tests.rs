@@ -301,3 +301,21 @@ mod save_menu_tests {
         assert_eq!(m.screen, Screen::OptionsPage(Page::Setup));
     }
 }
+
+#[test]
+fn death_shortcuts_and_controller_select_recovery() {
+    let mut cv = Cvars::default();
+    let mut m = Menu::new();
+    for key in b'1'..=b'4' {
+        m.open(Screen::Death);
+        let actions = m.key(key as i32, &mut cv, true);
+        assert!(actions.iter().any(|a| matches!(a, Action::Command(c) if c == &format!("_death_choice {}\n", key - b'0'))));
+    }
+    m.open(Screen::Death);
+    m.key(K_DPAD_DOWN, &mut cv, true);
+    let actions = m.key(K_ABUTTON, &mut cv, true);
+    assert!(actions.iter().any(|a| matches!(a, Action::Command(c) if c == "_death_choice 2\n")));
+    m.key(K_ESCAPE, &mut cv, true);
+    assert_eq!(m.screen, Screen::Death);
+    assert_eq!(m.item_at((170.0, 190.0)), Some(2));
+}

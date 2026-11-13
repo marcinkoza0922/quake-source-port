@@ -454,3 +454,11 @@ Phase 6 done:
 - Hooks: `r_particledesc` default "classic" loads no FTE configs, so classic effects stay unless an effect resolves. Server: builtins particleeffectnum #335, trailparticles #336, pointparticles #337, te_particlerain #409 / te_particlesnow #410, advertise FTE_SV_POINTPARTICLES, DP_SV_POINTPARTICLES, DP_TE_PARTICLERAIN/SNOW, FTE_PART_NAMESPACE_EFFECTINFO; messages svcdp_precache (54, 0x4000|idx), svcdp_trailparticles 60, pointparticles 61, pointparticles1 62, TEDP 55/56. Entity emit/trail effect fields need replacement deltas; skip at first.
 
 Monster movement interpolation: classic updates and FTE replacement deltas set `LERP_RESETMOVE` when an entity first appears or returns after a snapshot gap. This resets renderer transform history to the received position, preventing a brief slide from zero or a stale position. Ordinary `U_STEP`/`EFLAGS_STEP` updates retain movement smoothing.
+
+Single-player death recovery (`host/death.rs`) opens a paused menu once per death.
+`cl_deathaction` is archived: 0 Ask (default), 1 newest readable living-player
+save by filesystem modification time (including named saves and autosaves),
+2 Load browser, 3 restart with level-entry spawn parameters. Missing saves
+fall back to Ask. Keys 1–3 select recovery; 4 disconnects to Main. Mouse,
+arrows/Enter and controller navigation also work. Demos and multiplayer retain
+their existing behavior.

@@ -60,7 +60,7 @@ impl Menu {
 
     /// Clickable Back button in the bottom-left corner (x, y, w, h).
     pub(super) fn back_button(&self) -> Option<(f32, f32, f32, f32)> {
-        let hidden = matches!(self.screen, Screen::None | Screen::Main | Screen::Quit)
+        let hidden = matches!(self.screen, Screen::None | Screen::Main | Screen::Quit | Screen::Death)
             || self.capturing()
             || self.osk.is_some();
         (!hidden).then_some(BACK_BTN)

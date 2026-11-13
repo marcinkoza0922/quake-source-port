@@ -52,6 +52,7 @@ impl Host {
         }
         self.stop_recording();
         self.autosave.reset();
+        self.death_handled = false;
         self.demo_head.clear();
         self.cl = ClientState::new();
         self.local = None;
