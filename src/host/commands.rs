@@ -130,6 +130,8 @@ pub(super) fn register_commands(c: &mut Commands<Host>) {
             "controller" | "gamepad" => Some(Page::Controller),
             "touch" | "touchscreen" => Some(Page::Touch),
             "autosave" => Some(Page::Autosave),
+            "assists" => Some(Page::Assists),
+            "autoaim" => Some(Page::AutoAim),
             "hud" => Some(Page::Hud),
             "hudlayout" | "layout" => Some(Page::HudLayout),
             "messages" => Some(Page::Messages),

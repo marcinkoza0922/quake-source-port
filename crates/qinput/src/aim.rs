@@ -37,6 +37,7 @@ pub enum TargetKind {
 
 #[derive(Clone, Copy, Debug, PartialEq)]
 pub struct AimTarget {
+    pub id: u32,
     pub origin: V3,
     pub mins: V3,
     pub maxs: V3,
@@ -189,7 +190,7 @@ mod tests {
     use super::*;
 
     fn monster(origin: V3, vel: V3) -> AimTarget {
-        AimTarget { origin, mins: [-16.0, -16.0, -24.0], maxs: [16.0, 16.0, 40.0], velocity: vel, kind: TargetKind::Monster }
+        AimTarget { id: 1, origin, mins: [-16.0, -16.0, -24.0], maxs: [16.0, 16.0, 40.0], velocity: vel, kind: TargetKind::Monster }
     }
     fn ctx<'a>(eye: V3, pv: V3, t: &'a [AimTarget], vis: &'a dyn Visibility) -> AimContext<'a> {
         AimContext { eye, player_velocity: pv, targets: t, vis, allowed: true }

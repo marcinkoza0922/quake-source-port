@@ -162,7 +162,7 @@ fn gyro_look() {
 }
 
 fn target() -> AimTarget {
-    AimTarget { origin: [400.0, 0.0, 0.0], mins: [-16.0; 3], maxs: [16.0; 3], velocity: [0.0, 200.0, 0.0], kind: TargetKind::Monster }
+    AimTarget { id: 1, origin: [400.0, 0.0, 0.0], mins: [-16.0; 3], maxs: [16.0; 3], velocity: [0.0, 200.0, 0.0], kind: TargetKind::Monster }
 }
 
 #[test]
@@ -248,4 +248,35 @@ fn wheel_takes_look_stick() {
 fn back_button_is_bindable() {
     assert_eq!(GamepadButton::Back.key(), keys::K_BACK);
     assert_eq!(keys::string_to_keynum("BACK"), keys::K_BACK);
+}
+
+#[test]
+fn lockon_binding_overrides_look_and_cycles_without_normal_stick_action() {
+    let mut h = host();
+    h.cvars.set("assist_autoaim", "1");
+    h.input.autoaim_allowed = true;
+    run(&mut h, "bind q +lockon\nbind RTHUMB centerview\n");
+    key_event(&mut h, b'q' as i32, true);
+    execute(&mut h);
+    let targets = [
+        AimTarget { id: 1, origin: [200.0, 20.0, 0.0], ..target() },
+        AimTarget { id: 2, origin: [300.0, -20.0, 0.0], ..target() },
+    ];
+    let ctx = AimContext { eye: [0.0; 3], player_velocity: [0.0; 3], targets: &targets, vis: &NoWorld, allowed: false };
+    h.input.mouse = [100.0, 100.0];
+    let s = frame(&mut h, Some(&ctx));
+    assert_eq!(h.input.lockon.target, Some(1));
+    assert!((s.look_delta[0] - 5.7106).abs() < 0.01);
+    key_event(&mut h, K_RTHUMB, true);
+    assert!(h.cbuf.next_line().is_none(), "stick binding must not run while switching targets");
+    frame(&mut h, Some(&ctx));
+    assert_eq!(h.input.lockon.target, Some(2));
+    key_event(&mut h, b'q' as i32, false);
+    execute(&mut h);
+    frame(&mut h, Some(&ctx));
+    assert_eq!(h.input.lockon.target, None);
+    h.input.autoaim_allowed = false;
+    run(&mut h, "+lockon\n");
+    frame(&mut h, Some(&ctx));
+    assert_eq!(h.input.lockon.target, None);
 }

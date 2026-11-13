@@ -7,7 +7,7 @@ use qclient::{ClientEvent, ClientState, InputState, MoveSpeeds, UserCmd};
 use qcore::cmd::{Args, Cbuf, CmdContext, Commands};
 use qcore::cvar::{CVAR_ARCHIVE, CVAR_SERVERINFO, Cvars};
 use qcore::math::{Vec3, angle_vectors};
-use qinput::aim::{AimContext, AimTarget, TargetKind, Visibility, aim_assist_allowed};
+use qinput::aim::{AimContext, AimTarget, TargetKind, aim_assist_allowed};
 use qinput::keys::{K_ESCAPE, KeyDest};
 use qinput::{Device, Input, InputEvent, InputHost, Routed};
 use qnet::protocol::{CLC_STRINGCMD, STAT_ACTIVEWEAPON, STAT_AMMO, STAT_HEALTH, STAT_WEAPONFRAME};
@@ -70,13 +70,8 @@ fn pad_default_binds() -> Vec<(i32, String)> {
         .collect()
 }
 
-/// Line-of-sight through the map's hull 0.
-struct WorldVis<'a>(&'a qworld::hull::CollisionModel);
-impl Visibility for WorldVis<'_> {
-    fn visible(&self, from: [f32; 3], to: [f32; 3]) -> bool {
-        self.0.hull(0, 0).trace(Vec3::from_array(from), Vec3::from_array(to)).fraction >= 1.0
-    }
-}
+mod aim_vis;
+use aim_vis::WorldVis;
 
 pub struct Host {
     pub server: Server,

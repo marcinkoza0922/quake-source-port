@@ -161,20 +161,27 @@ impl Host {
         let demo = self.demo.is_some();
         let allowed = aim_assist_allowed(self.cv("deathmatch") != 0.0, self.cv("sv_aimassist") != 0.0);
         let cm = self.server.level.as_ref().map(|l| l.world.worldmodel.clone());
-        let vis = cm.as_deref().map(WorldVis);
         let targets: Vec<Vec<AimTarget>> = self
             .guests
             .iter()
             .map(|g| if g.cl.signon == 4 && g.cl.intermission == 0 { self.aim_targets(&g.cl) } else { Vec::new() })
             .collect();
         let toys = self.allowed_toys();
+        let autoaim_allowed = self.local_autoaim_allowed() && !demo && in_game;
+        let autoaim_fov = self.autoaim_fov();
+        let autoaim_players = self.cv("deathmatch") != 0.0;
         let cvars = &self.server.core.cvars;
         for (g, targets) in self.guests.iter_mut().zip(&targets) {
             if g.cl.signon != 4 {
                 continue;
             }
             let eye = g.cl.entities.get(g.cl.viewentity).map_or([0.0; 3], |e| [e.origin[0], e.origin[1], e.origin[2] + g.cl.viewheight]);
+            let vis = cm.as_deref().map(|cm| WorldVis::new(cm, &g.cl));
             let ctx = vis.as_ref().map(|v| AimContext { eye, player_velocity: g.cl.velocity, targets, vis: v, allowed });
+            g.input.autoaim_allowed = autoaim_allowed && g.cl.intermission == 0 && g.cl.stats[qnet::protocol::STAT_HEALTH] > 0;
+            g.input.autoaim_fov = autoaim_fov;
+            g.input.autoaim_players = autoaim_players;
+            g.input.dest = if in_game { KeyDest::Game } else { KeyDest::Menu };
             let mut inp = g.input.frame(cvars, g.cl.viewangles, ft, ctx.as_ref());
             if !in_game {
                 inp = InputState::default();

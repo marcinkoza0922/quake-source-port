@@ -174,6 +174,8 @@ pub(super) const AMMO_MULT: &[(&str, f32)] = &[("100%", 1.0), ("150%", 1.5), ("2
 pub(super) const JUMPS: &[(&str, f32)] = &[("single", 1.0), ("double", 2.0), ("triple", 3.0)];
 
 pub(super) const ASSISTS: &[Item] = &[
+    toggle("Auto-aim", "assist_autoaim"),
+    Item::Sub { label: "Auto-aim Settings", page: Page::AutoAim },
     Item::Choice { label: "Damage Taken", cvar: "assist_damagetaken", choices: PERCENT },
     Item::Choice { label: "Enemy Health", cvar: "assist_enemyhealth", choices: PERCENT },
     Item::Choice { label: "Ammo Pickups", cvar: "assist_ammo", choices: AMMO_MULT },
@@ -183,6 +185,14 @@ pub(super) const ASSISTS: &[Item] = &[
     toggle("No Self Damage", "assist_noselfdamage"),
     toggle("Health Regeneration", "assist_regen"),
     Item::Choice { label: "Jumps", cvar: "assist_jumps", choices: JUMPS },
+];
+
+pub(super) const AUTOAIM: &[Item] = &[
+    Item::Choice { label: "Mode", cvar: "assist_autoaim_mode", choices: &[("Hold lock-on", 0.0), ("Toggle auto-aim", 1.0)] },
+    toggle("Lock Indicator", "assist_autoaim_indicator"),
+    toggle("Reacquire While Held", "assist_autoaim_reacquire"),
+    slider("Acquisition Cone", "assist_autoaim_cone", 1.0, 30.0, 1.0),
+    slider("Maximum Range", "assist_autoaim_range", 128.0, 4096.0, 128.0),
 ];
 
 pub(super) const AUTOSAVE: &[Item] = &[
