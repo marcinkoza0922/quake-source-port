@@ -1,6 +1,15 @@
 use super::*;
 
 impl Server {
+    /// The QC `traceline` builtin from outside the VM (tools, bots):
+    /// a point trace against the world and linked entities, skipping `pass`.
+    pub fn traceline(&mut self, a: qworld::Vec3, b: qworld::Vec3, nomonsters: bool, pass: u32) -> Option<qworld::Trace> {
+        let l = self.level.as_mut()?;
+        let ents = crate::ents::Ents { vm: &mut l.vm, c: &mut self.core };
+        let ty = qworld::MoveType::from(nomonsters as i32);
+        Some(l.world.trace(&ents, a, qworld::Vec3::ZERO, qworld::Vec3::ZERO, b, ty, Some(pass)))
+    }
+
     pub(super) fn phys_params(&self, ft: f64) -> PhysParams {
         let cv = &self.core.cvars;
         PhysParams {

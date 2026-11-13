@@ -8,5 +8,7 @@ license.workspace = true
 workspace = true
 
 [dependencies]
+qcore = { path = "../../crates/qcore" }
+qvm = { path = "../../crates/qvm" }
 qrender = { path = "../../crates/qrender" }
 qformats = { path = "../../crates/qformats" }

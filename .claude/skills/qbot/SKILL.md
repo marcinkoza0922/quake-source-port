@@ -21,7 +21,7 @@ client driven by `set_move`. Runs are deterministic. A release build has
 ```sh
 cargo build --release -p qbot
 target/release/qbot                       # every playable id1 map, all cores
-target/release/qbot -game hipnotic        # baselines exist for id1, hipnotic, rogue
+target/release/qbot -game hipnotic        # baselines: id1, hipnotic, rogue, dopa, mg1, mg3
 target/release/qbot e1m3 e2m5 -v          # specific maps, verbose log
 target/release/qbot -game ad ad_sepulcher -time 1200
 ```
@@ -30,16 +30,24 @@ Flags: `-basedir D -game G -skill N -time S -j N -out DIR -baseline F
 -save-baseline -v`.
 
 Output `target/qbot/report.json` per map: kills, secrets, triggers, buttons
-(incl. shootable brushes), pickups (keys, runes) as done/total, `has_exit`,
+(incl. shootable brushes), pickups (every placed item; keys etc. that spawn later) as done/total, `has_exit`,
 `exited`, `failed` (one line per goal given up on: `Kind classname #ent at
-pos: why`), sim/wall time, `errors`. `cargo nextest run -p qbot` checks e1m1
+pos: why`), sim/wall time, `errors`, `unusual` (developer-log lines, see
+below). `cargo nextest run -p qbot` checks e1m1
 and e1m3 (every monster, every secret, exit); skips without data.
 
 ## Baselines
 
 `tools/qbot/baseline-<game>.json`: `{kills, secrets, events, exited}` per map
 (`events` = triggers + buttons + pickups). Fewer of anything, a lost exit, or
-any engine error prints `REGRESSION` and exits 1. Engine errors and QC errors
+any engine error prints `REGRESSION` and exits 1. Each entry also has
+`log`: the map's known developer-log lines (qbot runs `developer 1`;
+`bot/devlog.rs` drops lines every level prints). A line not in `log` prints
+`NEW-LOG map: text` and is a regression: read it before re-saving. Most
+known lines are vanilla spawn complaints (`"property 1" is not a field`,
+`walkmonster in wall`, `Bonus item fell out of level`, OBJECT ERROR dumps
+for missing targets); add a pattern to `EXPECTED` only for noise every
+level prints. Engine errors and QC errors
 are the point of the tool: treat them as real bugs.
 
 Any change to the bot can reorder goals and move a count by one or two
@@ -61,7 +69,9 @@ never just to make a regression go away.
 - `bot/fly.rs`: classic noclip flight (`sv_altnoclip 0`, `sv_maxspeed
   1000`); touch goals fly to a point in the box clear of other triggers;
   after 5 s it `setpos`es there. Shootables: nearest open firing spot with a
-  clear shot at the centre or a face. Buttons: noclip never touches, so it
+  clear shot (the engine's real `traceline` hits the target from both
+  `origin+16` and `origin`: LG damage traces start at the origin) at the centre
+  or a face. No LG underwater (it discharges). Buttons: noclip never touches, so it
   stands just off a face (or on top), turns noclip off and walks/swims in.
 
 ## Debugging a failed goal
@@ -75,7 +85,33 @@ never just to make a regression go away.
 4. Decide: a bot gap (fix generally in `fly.rs`/`goals.rs`, rerun all three
    games) or a real level/engine problem (that's a finding: report it).
 
-Known residuals (2026-11-12): e1m7 closet zombies that get knocked down where
-no open spot sees them; hipnotic spawn-on-trigger monsters that never wake
-(hip2m5, hip2m6); a few buttons in id1/rogue; Shub-Niggurath in `end`
-(killed by a telefrag the bot doesn't perform).
+hipnotic `func_spawn` keeps dormant template monsters (`spawnfunction` set)
+that never wake; they are skipped. The horn of conjuring fires a spawner (a charmed ally); earlier
+"hip2m1 62/63" counts were not the ally but a bot gap, now fixed: a monster
+spawned into a reused edict slot was never a goal. If a spawned monster lands
+blocked it logs `walkmonster in wall` (order-dependent NEW-LOG). Rogue statues (spawnflag 2)
+are solid but `takedamage 0` until their targetname fires: any monster with
+`takedamage 0` counts as dormant. Doors that fire a `target` when touched open are goals
+pressed like buttons. No QC source for a mod? Disassemble the function from
+`vm.progs` (statements + `global_at_ofs` names): that's how func_spawn and the
+horn were worked out.
+
+Repeatable buttons are re-pressed (movers first) while monsters that aren't
+goals stay alive: that's how e1m7's Chthon dies.
+
+A kill shortfall no failed goal explains is listed at the end ("alive but
+never a goal" / "neither killed nor alive").
+
+Every placed item is a goal (2026-11-13). Refused items get the matching
+stat lowered (`empty_ammo_for` in fly.rs; rogue keeps ammo in `ammo_shells1` and similar fields);
+zeroing all ammo leaves the axe, whose frame names dopa's progs print. Items
+with a `target` go last with a 5 s pause after each (mgend Chthon stages).
+Check FL_MONSTER before the item rule: rogue's `item_time_machine` is a monster.
+`item_key1` is the silver key, `item_key2` gold (door spawnflags 16 / 8). A key
+the bot already holds is dormant (a second copy refuses it) and any key taken
+reopens failed buttons/key doors (mg3 map5: two keys and two locks of each).
+
+Known residuals (2026-11-13): e1m7 closet zombies placed in the floor (`walkmonster
+in wall`): once splash knocks one down it can never get up or be hit, in
+vanilla too; reported as "knocked down inside the world". A few buttons in id1/rogue/hipnotic; hip1m5 shootable
+door; Shub-Niggurath in `end` (killed by a telefrag the bot doesn't perform).

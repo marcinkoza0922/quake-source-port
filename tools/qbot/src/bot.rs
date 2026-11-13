@@ -16,8 +16,11 @@ use qworld::{FL_MONSTER, MOVETYPE_NOCLIP, SOLID_BBOX, SOLID_BSP, SOLID_NOT, SOLI
 use std::collections::HashSet;
 use std::sync::Arc;
 use std::time::Instant;
+mod attempt;
+pub mod devlog;
 mod fly;
 mod goals;
+pub mod trace;
 
 /// Server tick: 20 Hz like a dedicated server (sys_ticrate 0.05).
 const DT: f64 = 1.0 / 20.0;
@@ -59,6 +62,10 @@ pub struct Report {
     pub sim_time: f64,
     pub wall_time: f64,
     pub errors: Vec<String>,
+    /// Developer-log lines a level doesn't normally print (see devlog.rs).
+    pub unusual: Vec<String>,
+    /// The whole run, console and bot events (see trace.rs).
+    pub trace: Vec<String>,
 }
 
 impl Report {
@@ -97,8 +104,15 @@ struct Goal {
     armed: bool,
     /// Buttons: `state` at spawn; pressed once it changes.
     initial_state: f32,
+    /// Where the brush was when found: a shootable that moved has worked.
+    initial_absmin: [f32; 3],
     /// Exits: the touch function, cleared until the exit becomes the goal.
     touch: i32,
+    /// Buttons: pressed before and re-armed to press again (see
+    /// `repress`); counts as done in the report whatever happens next.
+    again: bool,
+    /// Pickups that fire targets: taken last (see `pick`).
+    late: bool,
 }
 
 struct Ofs {
@@ -110,11 +124,15 @@ struct Ofs {
     solid: usize,
     takedamage: usize,
     movetype: usize,
+    spawnflags: usize,
     touch: usize,
-    view_ofs: usize,
+    waterlevel: usize,
     state: Option<usize>,
     items: Option<usize>,
     modelindex: Option<usize>,
+    spawnfunction: Option<usize>,
+    target: Option<usize>,
+    targetname: Option<usize>,
     attack_finished: Option<usize>,
 }
 
@@ -130,11 +148,15 @@ impl Ofs {
             solid: f("solid")?,
             takedamage: f("takedamage")?,
             movetype: f("movetype")?,
+            spawnflags: f("spawnflags")?,
             touch: f("touch")?,
-            view_ofs: f("view_ofs")?,
+            waterlevel: f("waterlevel")?,
             state: f("state"),
             items: f("items"),
             modelindex: f("modelindex"),
+            spawnfunction: f("spawnfunction"),
+            target: f("target"),
+            targetname: f("targetname"),
             attack_finished: f("attack_finished"),
         })
     }
@@ -163,6 +185,8 @@ struct Bot<'a> {
     spot_at: f64,
     /// Shooting: the part of the target aimed at, from its centre.
     aim_point: Vec3,
+    /// Shooting: `firing_spot` found a spot with a clear shot.
+    found_spot: bool,
     /// Walking into a button (noclip off) until this time.
     pushing_until: f64,
     pushes: u32,
@@ -170,8 +194,19 @@ struct Bot<'a> {
     pinned: u32,
     /// Last `setpos` to a goal that flight didn't reach.
     warped_at: f64,
+    devlog: devlog::DevLog,
+    trace: trace::Trace,
+    /// What happened in the current goal's attempt so far.
+    att: attempt::Attempt,
     weapon: u8,
+    /// Rounds of re-pressing repeatable buttons so far.
+    repressed: u32,
     impulses: Vec<u8>,
+    /// No pickup that fires targets before this: the last one's script
+    /// (a boss rising) gets time to run first.
+    late_until: f64,
+    /// IT_KEY1/IT_KEY2 bits held at the last update (see `reopen_locks`).
+    keys_held: i32,
     intermission: Option<usize>,
 }
 
@@ -186,6 +221,7 @@ pub fn run(fs: Fs, map: &str, opt: &Options) -> Report {
     // independently of where the bot aims.
     sv.command("sv_altnoclip 0");
     sv.command(&format!("sv_maxspeed {SPEED}"));
+    sv.command("developer 1");
     if let Err(e) = sv.spawn_server(map) {
         rep.errors.push(format!("spawn: {e}"));
         return rep;
@@ -217,29 +253,39 @@ pub fn run(fs: Fs, map: &str, opt: &Options) -> Report {
         spot: None,
         spot_at: -100.0,
         aim_point: Vec3::ZERO,
+        found_spot: false,
         pushing_until: -1.0,
         pushes: 0,
         pinned: 0,
         warped_at: -100.0,
+        devlog: devlog::DevLog::default(),
+        trace: trace::Trace::default(),
+        att: attempt::Attempt::new(0.0),
         weapon: 5,
+        repressed: 0,
         impulses: Vec::new(),
+        late_until: 0.0,
+        keys_held: 0,
         intermission,
     };
+    bot.drain_log();
     bot.set_noclip(true);
     bot.scan();
     bot.rep.has_exit = bot.goals.iter().any(|g| g.kind == Kind::Exit);
-    if opt.verbose {
-        eprintln!("{map}: {} goals", bot.goals.len());
-    }
+    bot.note(&format!("{map}: {} goals", bot.goals.len()));
     let max_time = opt.max_time.unwrap_or_else(|| (bot.goals.len() as f64 * 10.0).max(600.0));
     bot.main_loop(map, max_time);
-    for g in bot.goals.iter().filter(|g| !g.done && g.kind != Kind::Exit) {
+    for (i, g) in bot.goals.iter().enumerate().filter(|(_, g)| !g.done && !g.again && g.kind != Kind::Exit) {
         let why = g.failed.as_deref().unwrap_or(if bot.dormant(g) { "never activated" } else { "out of time" });
-        let line = format!("{:?} {} #{} at {:?}: {why}", g.kind, g.class, g.ent, bot.center(g.ent));
+        let line = format!("{}: {why}", bot.describe(i));
         bot.rep.failed.push(line);
     }
+    bot.unaccounted_monsters();
+    bot.drain_log();
     let st = bot.sv.stats();
     let mut rep = bot.rep;
+    rep.unusual = std::mem::take(&mut bot.devlog).finish(bot.sv.time());
+    rep.trace = std::mem::take(&mut bot.trace).finish(bot.sv.time());
     for g in &bot.goals {
         let (done, total) = match g.kind {
             Kind::Trigger => (&mut rep.triggers, &mut rep.total_triggers),
@@ -248,7 +294,7 @@ pub fn run(fs: Fs, map: &str, opt: &Options) -> Report {
             _ => continue,
         };
         *total += 1;
-        *done += g.done as u32;
+        *done += (g.done || g.again) as u32;
     }
     rep.kills = st.killed_monsters;
     rep.total_monsters = st.total_monsters;
@@ -260,6 +306,14 @@ pub fn run(fs: Fs, map: &str, opt: &Options) -> Report {
 }
 
 impl Bot<'_> {
+    fn drain_log(&mut self) {
+        let t = self.sv.time();
+        for s in std::mem::take(&mut self.sv.core.log) {
+            self.devlog.feed(&s, t);
+            self.trace.con(&s, t);
+        }
+    }
+
     fn vm(&self) -> &Vm {
         &self.sv.level.as_ref().unwrap().vm
     }
@@ -268,8 +322,11 @@ impl Bot<'_> {
         v(self.vm().ent_v(self.me, self.o.origin))
     }
 
+    /// Where shots start: weapons.qc fires from `origin + '0 0 16'`, not
+    /// the eye (`view_ofs` 22), so aiming from the eye passes 6u under a
+    /// thin target such as e1m1's shootable secret panel.
     fn eye(&self) -> Vec3 {
-        self.me_origin() + v(self.vm().ent_v(self.me, self.o.view_ofs))
+        self.me_origin() + Vec3::new(0.0, 0.0, 16.0)
     }
 
     fn bounds(&self, e: u32) -> (Vec3, Vec3) {
@@ -323,25 +380,35 @@ impl Bot<'_> {
                     // All weapons and ammo, then back to the current weapon.
                     self.impulses = vec![self.weapon, 9];
                     last_refill = t;
+                    // Health items are taken at 1 health (see `empty_ammo_for`).
+                    if self.vm().ent_f(self.me, self.o.health) < 100.0 {
+                        let (me, h) = (self.me, self.o.health);
+                        self.sv.level.as_mut().unwrap().vm.set_ent_f(me, h, 100.0);
+                    }
                 }
                 if self.cur.is_none() {
                     self.cur = self.pick();
                     self.goal_start = t;
                     self.spot = None;
                     self.pushes = 0;
-                    if let Some(i) = self.cur
-                        && self.opt.verbose
-                    {
-                        let g = &self.goals[i];
-                        eprintln!("  t={t:.1} goal {:?} {} #{} at {:?}", g.kind, g.class, g.ent, self.center(g.ent));
+                    if let Some(i) = self.cur {
+                        self.att = attempt::Attempt::new(self.vm().ent_f(self.goals[i].ent, self.o.health));
+                        self.note(&format!("goal {}", self.describe(i)));
                     }
                 }
                 let Some(i) = self.cur else {
+                    if t < self.late_until {
+                        // Waiting on a pickup's script; fight what it brings.
+                        self.fire_at_will(&mut mv);
+                        self.step(mv);
+                        continue;
+                    }
                     // Nothing left and no exit to take.
                     break;
                 };
                 if t - self.goal_start > GOAL_TIMEOUT {
-                    self.fail(i, "timed out");
+                    let why = format!("timed out: {}", self.diagnose(i));
+                    self.fail(i, &why);
                     self.set_noclip(true);
                     continue;
                 }
@@ -375,9 +442,7 @@ impl Bot<'_> {
             }
         }
         let to = self.cur.map_or(at + Vec3::new(0.0, 0.0, 128.0), |i| self.center(self.goals[i].ent));
-        if self.opt.verbose {
-            eprintln!("  t={:.1} pinned at {at:?}, setpos to {to:?}", self.sv.time());
-        }
+        self.note(&format!("pinned at {at:?}, setpos to {to:?}"));
         self.sv.command(&format!("setpos {} {} {}", to.x, to.y, to.z));
     }
 
@@ -388,6 +453,7 @@ impl Bot<'_> {
         let before = self.me_origin();
         self.sv.set_move(self.c, mv);
         self.sv.frame(DT);
+        self.drain_log();
         if self.sv.level.is_none() {
             return;
         }

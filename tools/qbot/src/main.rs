@@ -116,7 +116,7 @@ fn json_str(s: &str) -> String {
 fn report_json(r: &bot::Report) -> String {
     let list = |v: &[String]| v.iter().map(|s| json_str(s)).collect::<Vec<_>>().join(", ");
     format!(
-        "{{\"kills\": {}, \"total_monsters\": {}, \"secrets\": {}, \"total_secrets\": {}, \"triggers\": {}, \"total_triggers\": {}, \"buttons\": {}, \"total_buttons\": {}, \"pickups\": {}, \"total_pickups\": {}, \"has_exit\": {}, \"exited\": {}, \"sim_time\": {:.1}, \"wall_time\": {:.1}, \"failed\": [{}], \"errors\": [{}]}}",
+        "{{\"kills\": {}, \"total_monsters\": {}, \"secrets\": {}, \"total_secrets\": {}, \"triggers\": {}, \"total_triggers\": {}, \"buttons\": {}, \"total_buttons\": {}, \"pickups\": {}, \"total_pickups\": {}, \"has_exit\": {}, \"exited\": {}, \"sim_time\": {:.1}, \"wall_time\": {:.1}, \"failed\": [{}], \"errors\": [{}], \"unusual\": [{}]}}",
         r.kills,
         r.total_monsters,
         r.secrets,
@@ -133,6 +133,7 @@ fn report_json(r: &bot::Report) -> String {
         r.wall_time,
         list(&r.failed),
         list(&r.errors),
+        list(&r.unusual),
     )
 }
 
@@ -146,6 +147,10 @@ fn run_one(o: &Opts, map: &str) -> bot::Report {
             bot::Report { errors: vec![format!("panic: {}", msg.unwrap_or_default())], ..Default::default() }
         }
     }
+}
+
+fn log_texts(r: &bot::Report) -> Vec<String> {
+    r.unusual.iter().map(|l| bot::devlog::text(l).to_string()).collect()
 }
 
 /// Run every map on `o.jobs` threads, printing a line per map.
@@ -191,8 +196,17 @@ fn run_jobs(o: &Opts, maps: &[String]) -> Vec<(String, bot::Report)> {
     v
 }
 
-fn baseline_entry(kills: f64, secrets: f64, events: f64, exited: bool) -> String {
-    format!("{{\"kills\": {kills}, \"secrets\": {secrets}, \"events\": {events}, \"exited\": {exited}}}")
+fn baseline_entry(kills: f64, secrets: f64, events: f64, exited: bool, log: &[String]) -> String {
+    let log = log.iter().map(|s| json_str(s)).collect::<Vec<_>>().join(", ");
+    format!("{{\"kills\": {kills}, \"secrets\": {secrets}, \"events\": {events}, \"exited\": {exited}, \"log\": [{log}]}}")
+}
+
+/// The developer-log lines a baseline entry already knows about.
+fn baseline_log(e: &qui::json::Value) -> Vec<String> {
+    match e.get("log") {
+        Some(qui::json::Value::Arr(a)) => a.iter().filter_map(|x| if let qui::json::Value::Str(s) = x { Some(s.clone()) } else { None }).collect(),
+        _ => Vec::new(),
+    }
 }
 
 fn main() {
@@ -214,6 +228,15 @@ fn main() {
     if let Err(e) = std::fs::write(&out, &j) {
         eprintln!("qbot: writing {}: {e}", out.display());
     }
+    let traces = o.out.join("trace");
+    let _ = std::fs::create_dir_all(&traces);
+    for (m, r) in &results {
+        let mut body = r.trace.join("\n");
+        body.push('\n');
+        if let Err(e) = std::fs::write(traces.join(format!("{m}.log")), body) {
+            eprintln!("qbot: writing trace for {m}: {e}");
+        }
+    }
 
     let mut regressions: Vec<String> = results.iter().filter(|(_, r)| !r.errors.is_empty()).map(|(m, _)| format!("{m}: errors")).collect();
     let old = std::fs::read_to_string(&o.baseline).ok().and_then(|t| qui::json::parse(&t));
@@ -224,11 +247,11 @@ fn main() {
             if !results.iter().any(|(m, _)| m == k) {
                 let n = |f: &str| e.get(f).and_then(|x| x.num()).unwrap_or(0.0);
                 let exited = e.get("exited").and_then(|x| x.bool()).unwrap_or(false);
-                entries.push((k.clone(), baseline_entry(n("kills"), n("secrets"), n("events"), exited)));
+                entries.push((k.clone(), baseline_entry(n("kills"), n("secrets"), n("events"), exited, &baseline_log(e))));
             }
         }
         for (m, r) in &results {
-            entries.push((m.clone(), baseline_entry(r.kills as f64, r.secrets as f64, r.events() as f64, r.exited)));
+            entries.push((m.clone(), baseline_entry(r.kills as f64, r.secrets as f64, r.events() as f64, r.exited, &log_texts(r))));
         }
         entries.sort();
         let body: Vec<String> = entries.iter().map(|(k, v)| format!("  {}: {v}", json_str(k))).collect();
@@ -249,6 +272,11 @@ fn main() {
             }
             if e.get("exited").and_then(|x| x.bool()) == Some(true) && !r.exited {
                 regressions.push(format!("{m}: no longer reaches the exit"));
+            }
+            let known = baseline_log(e);
+            for l in log_texts(r).into_iter().filter(|l| !known.contains(l)) {
+                eprintln!("NEW-LOG {m}: {l}");
+                regressions.push(format!("{m}: new developer log line"));
             }
         }
     }

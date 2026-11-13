@@ -149,6 +149,8 @@ fn register_cvars(cv: &mut Cvars) {
         ("cl_rollspeed", "200", 0),
         ("external_ents", "1", CVAR_ARCHIVE),
         ("registered", "1", 0),
+        // Set by 2021-rerelease progs (hipnotic/rogue cvar_set it every frame).
+        ("campaign", "0", 0),
         ("pr_checkextension", "1", 0),
         // FTE/DP particle builtins + svcdp_* messages (single player only).
         ("sv_fteparticles", "1", 0),

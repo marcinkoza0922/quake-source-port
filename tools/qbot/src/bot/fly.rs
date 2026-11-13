@@ -36,6 +36,10 @@ impl Bot<'_> {
         }
         let mut mv = ClientMove::default();
         let shootable = self.vm().ent_f(ent, self.o.health) > 0.0 && self.vm().ent_f(ent, self.o.takedamage) != 0.0;
+        if kind == Kind::Monster && self.stuck_down(ent) {
+            self.fail(i, "knocked down inside the world: can never get up or be hit");
+            return mv;
+        }
         match kind {
             Kind::Monster | Kind::Shoot => self.shoot(&mut mv, ent, t),
             Kind::Button if shootable => self.shoot(&mut mv, ent, t),
@@ -45,17 +49,83 @@ impl Bot<'_> {
                 }
             }
             Kind::Secret | Kind::Trigger | Kind::Pickup | Kind::Exit => {
-                self.fire_at_will(&mut mv);
+                let inside = self.inside(ent);
+                if inside && kind == Kind::Pickup {
+                    // Ammo just emptied may leave only the axe: don't swing it.
+                    self.empty_ammo_for(ent);
+                } else {
+                    self.fire_at_will(&mut mv);
+                }
                 if self.spot.is_none() || t - self.spot_at > 1.0 {
                     self.spot = Some(self.touch_point(ent));
                     self.spot_at = t;
                 }
                 let c = self.spot.unwrap();
+                self.att.frame(Some((c - here).length()));
+                self.att.touching(inside);
+                let cls = &self.goals[i].class;
+                let plain = !self.goals[i].late && !cls.contains("key") && cls != "item_sigil" && cls != "item_hornofconjuring";
+                if kind == Kind::Pickup && plain && self.att.inside_secs() > 3.0 {
+                    // The touch refuses the bot: don't burn the goal timeout.
+                    let vm = self.vm();
+                    let touch = vm.ent_i(ent, self.o.touch);
+                    let why = format!(
+                        "inside it 3s, touch refused (touch {}, solid {}, health {})",
+                        if touch > 0 { vm.progs.function_name(touch as usize) } else { "none".into() },
+                        vm.ent_f(ent, self.o.solid),
+                        vm.ent_f(self.me, self.o.health)
+                    );
+                    self.fail(i, &why);
+                    return mv;
+                }
                 self.warp_if_slow(t, c);
                 fly_towards(&mut mv, here, c);
             }
         }
         mv
+    }
+
+    /// Items refuse a player who doesn't need them: ammo at the cap (where
+    /// impulse 9 keeps the bot), health at max, armor as good or better.
+    /// Lower that stat so the touch takes it (god mode covers low health,
+    /// impulse 9 refills ammo). Only the matching ammo, in each field a mod
+    /// keeps it (rogue: `ammo_shells1`, ...): emptying all of it leaves the
+    /// axe. Backpacks and id1's `item_weapon` hold several kinds.
+    fn empty_ammo_for(&mut self, e: u32) {
+        const ALL: &[(&str, f32)] = &[
+            ("ammo_shells", 0.0),
+            ("ammo_nails", 0.0),
+            ("ammo_rockets", 0.0),
+            ("ammo_cells", 0.0),
+            ("ammo_shells1", 0.0),
+            ("ammo_nails1", 0.0),
+            ("ammo_lava_nails", 0.0),
+            ("ammo_rockets1", 0.0),
+            ("ammo_multi_rockets", 0.0),
+            ("ammo_cells1", 0.0),
+            ("ammo_plasma", 0.0),
+        ];
+        let cls = self.vm().classname(e);
+        let set: &[(&str, f32)] = match cls.as_str() {
+            "item_shells" => &[("ammo_shells", 0.0), ("ammo_shells1", 0.0)],
+            "item_spikes" => &[("ammo_nails", 0.0), ("ammo_nails1", 0.0)],
+            "item_lava_spikes" => &[("ammo_nails", 0.0), ("ammo_lava_nails", 0.0)],
+            "item_rockets" => &[("ammo_rockets", 0.0), ("ammo_rockets1", 0.0)],
+            "item_multi_rockets" => &[("ammo_rockets", 0.0), ("ammo_multi_rockets", 0.0)],
+            "item_cells" => &[("ammo_cells", 0.0), ("ammo_cells1", 0.0)],
+            "item_plasma" => &[("ammo_cells", 0.0), ("ammo_plasma", 0.0)],
+            "item_weapon" | "item_backpack" => ALL,
+            "item_health" => &[("health", 1.0)],
+            c if c.starts_with("item_armor") => &[("armorvalue", 0.0), ("armortype", 0.0)],
+            _ => return,
+        };
+        let me = self.me;
+        let vm = &mut self.sv.level.as_mut().unwrap().vm;
+        for &(name, val) in set {
+            if let Some(f) = vm.field_ofs(name) {
+                vm.set_ent_f(me, f, val);
+            }
+        }
     }
 
     /// A point where the player's box overlaps trigger `e` but no other
@@ -72,8 +142,11 @@ impl Bot<'_> {
         if others.is_empty() {
             return c;
         }
+        // The engine pads the player's linked box by 1 unit too (the other
+        // boxes' padding is already in their absmin/absmax): a spot 1 unit
+        // short grazes a teleporter (e4m7's secret under door #74).
         let clear = |p: Vec3| {
-            others.iter().all(|(a, b)| !(p.x + 16.0 > a.x && p.x - 16.0 < b.x && p.y + 16.0 > a.y && p.y - 16.0 < b.y && p.z + 32.0 > a.z && p.z - 24.0 < b.z))
+            others.iter().all(|(a, b)| !(p.x + 17.0 > a.x && p.x - 17.0 < b.x && p.y + 17.0 > a.y && p.y - 17.0 < b.y && p.z + 33.0 > a.z && p.z - 25.0 < b.z))
         };
         let mut best: Option<(f32, Vec3)> = None;
         // The player's box just touching each part of the trigger.
@@ -98,35 +171,52 @@ impl Bot<'_> {
     fn warp_if_slow(&mut self, t: f64, to: Vec3) {
         if t - self.goal_start > 5.0 && t - self.warped_at > 5.0 {
             self.warped_at = t;
-            if self.opt.verbose {
-                eprintln!("  t={t:.1} warp to {to:?}");
-            }
+            self.att.warps += 1;
+            self.note(&format!("warp to {to:?}"));
             self.sv.command(&format!("setpos {} {} {}", to.x, to.y, to.z));
         }
+    }
+
+    /// A knocked-down zombie is not solid (shots and splash pass it by) and
+    /// gets up only when `walkmove(0,0)` succeeds; one placed in the floor
+    /// (e1m7's closets, "walkmonster in wall") never does. Unkillable in
+    /// vanilla too: a level finding, not something to keep shooting at.
+    fn stuck_down(&self, ent: u32) -> bool {
+        let o = v(self.vm().ent_v(ent, self.o.origin));
+        self.vm().ent_f(ent, self.o.solid) as i32 == SOLID_NOT && self.cm.hull(0, 1).trace(o, o).startsolid
     }
 
     /// Fly to a spot with a clear shot at `ent` and fire at it.
     fn shoot(&mut self, mv: &mut ClientMove, ent: u32, t: f64) {
         if self.spot.is_none() || t - self.spot_at > 1.0 {
-            let (spot, aim) = self.firing_spot(ent);
+            let found = self.firing_spot(ent);
+            self.found_spot = found.is_some();
+            let (spot, aim) = found.unwrap_or((self.center(ent), Vec3::ZERO));
             self.spot = Some(spot);
             self.aim_point = aim;
             self.spot_at = t;
         }
         // Keep the aim on the same part of the target as it moves.
         let c = self.center(ent) + self.aim_point;
-        let eye = self.eye();
         self.aim(mv, ent, c);
         let spot = self.spot.unwrap();
-        if (spot - self.me_origin()).length() < 32.0 || self.clear_shot(eye, c, ent) {
+        let dist = (spot - self.me_origin()).length();
+        let clear = self.clear_shot(self.me_origin(), c, ent);
+        if dist < 32.0 || clear {
             mv.buttons |= 1;
+        }
+        self.att.frame(self.found_spot.then_some(dist));
+        self.att.shot(clear, mv.buttons & 1 != 0);
+        if self.found_spot && dist >= 32.0 && !clear {
+            // Flying can't get there (e4m5's closet shalrath): put it there.
+            self.warp_if_slow(t, spot);
         }
         fly_towards(mv, self.me_origin(), spot);
     }
 
     /// Fire at the nearest live monster in sight while flying elsewhere.
-    fn fire_at_will(&mut self, mv: &mut ClientMove) {
-        let eye = self.eye();
+    pub(super) fn fire_at_will(&mut self, mv: &mut ClientMove) {
+        let (eye, here) = (self.eye(), self.me_origin());
         let mut cands: Vec<(f32, u32, Vec3)> = self
             .goals
             .iter()
@@ -138,9 +228,12 @@ impl Bot<'_> {
             .filter(|x| x.0 < 1200.0 * 1200.0)
             .collect();
         cands.sort_by(|a, b| a.0.total_cmp(&b.0));
-        if let Some(&(_, e, c)) = cands.iter().take(6).find(|x| self.clear_shot(eye, x.2, x.1)) {
-            self.aim(mv, e, c);
-            mv.buttons |= 1;
+        for &(_, e, c) in cands.iter().take(6) {
+            if self.clear_shot(here, c, e) {
+                self.aim(mv, e, c);
+                mv.buttons |= 1;
+                break;
+            }
         }
     }
 
@@ -150,10 +243,13 @@ impl Bot<'_> {
         mv.angles = look_angles(d);
         // Zombies only die when gibbed: rockets. Otherwise the lightning
         // gun in its range (hitscan, cheap to simulate), the super nailgun
-        // beyond it.
-        let w = if self.vm().classname(e).contains("zombie") {
+        // beyond it. Never the lightning gun underwater: it discharges
+        // instead of firing (e1m1's secret panel is shot from the pool).
+        let wet = self.vm().ent_f(self.me, self.o.waterlevel) > 1.0;
+        let cls = self.vm().classname(e);
+        let w = if cls.contains("zombie") {
             7
-        } else if d.length() < 560.0 {
+        } else if (d.length() < 560.0 || cls == "monster_boss") && !wet {
             8
         } else {
             5
@@ -180,6 +276,11 @@ impl Bot<'_> {
         if self.pushes >= 3 {
             return false;
         }
+        if self.goals[i].again && !self.fires_mover(ent) && self.movers_moving() {
+            // Stay put until the doors the other buttons moved have arrived.
+            self.goal_start = t;
+            return true;
+        }
         if self.spot.is_none() || t - self.spot_at > 1.0 {
             // Try another face on each attempt. Nothing free (a monster in
             // the way): clear the area and look again.
@@ -188,6 +289,7 @@ impl Bot<'_> {
             self.spot_at = t;
         }
         self.fire_at_will(mv);
+        self.att.frame(self.spot.map(|s| (s - here).length()));
         let Some(spot) = self.spot else {
             fly_towards(mv, here, c);
             return true;
@@ -195,9 +297,7 @@ impl Bot<'_> {
         self.warp_if_slow(t, spot);
         fly_towards(mv, here, spot);
         if (spot - here).length() < 4.0 {
-            if self.opt.verbose {
-                eprintln!("  t={t:.1} pushing button #{ent} from {spot:?}");
-            }
+            self.note(&format!("pushing button #{ent} from {spot:?}"));
             self.set_noclip(false);
             self.pushing_until = t + 1.5;
             self.pushes += 1;
@@ -209,7 +309,7 @@ impl Bot<'_> {
     /// The nearest open spot with a clear shot at some part of `ent` (its
     /// centre, else the middle of a face: an altar's trigger can wrap world
     /// brushes), and that part as an offset from the centre.
-    fn firing_spot(&self, ent: u32) -> (Vec3, Vec3) {
+    fn firing_spot(&mut self, ent: u32) -> Option<(Vec3, Vec3)> {
         let here = self.me_origin();
         let (lo, hi) = self.bounds(ent);
         let c = (lo + hi) * 0.5;
@@ -234,8 +334,7 @@ impl Bot<'_> {
                     if best.is_some_and(|b| b.0 <= d) || !self.fits(p, 0, false) {
                         continue;
                     }
-                    let eye = p + Vec3::new(0.0, 0.0, 22.0);
-                    if let Some(&aim) = aims.iter().find(|&&o| self.clear_shot(eye, c + o, ent)) {
+                    if let Some(&aim) = aims.iter().find(|&&o| self.clear_shot(p, c + o, ent)) {
                         best = Some((d, p, aim));
                     }
                 }
@@ -244,7 +343,7 @@ impl Bot<'_> {
                 break;
             }
         }
-        best.map_or((c, Vec3::ZERO), |b| (b.1, b.2))
+        best.map(|b| (b.1, b.2))
     }
 
     /// Where a player stands touching brush entity `e`: just off one of its
@@ -268,7 +367,8 @@ impl Bot<'_> {
         ];
         for (n, face) in faces {
             'face: for dist in [17.0, 24.0, 32.0] {
-                for z in [c.z, lo.z + 24.0, hi.z - 32.0] {
+                // The last: standing on a floor flush with its top (a sill).
+                for z in [c.z, lo.z + 24.0, hi.z - 32.0, hi.z + 25.0] {
                     let p = Vec3::new(face.x, face.y, z) + n * dist;
                     // The face must look into open space, not through a wall.
                     if !self.fits(p, e, true) || self.cm.hull(0, 0).trace(p, Vec3::new(face.x, face.y, z.clamp(lo.z, hi.z))).fraction < 1.0 {
@@ -325,31 +425,23 @@ impl Bot<'_> {
         true
     }
 
-    /// Whether a shot from `a` reaches `b` past the world and every brush
-    /// entity other than `target` (bars, glass, closed doors).
-    fn clear_shot(&self, a: Vec3, b: Vec3, target: u32) -> bool {
-        if self.cm.hull(0, 0).trace(a, b).fraction < 1.0 {
-            return false;
+    /// Whether a shot by a player standing at `origin` hits `target` when
+    /// aimed at `b`, by the engine's own traces (monsters and brush entities
+    /// in the way stop it). Both lines must reach: weapons fire from
+    /// `origin + '0 0 16'`, but the lightning gun's damage traces start at
+    /// the origin itself (e1m1's panel over the pool clips the ledge).
+    fn clear_shot(&mut self, origin: Vec3, b: Vec3, target: u32) -> bool {
+        let me = self.me;
+        // A downed zombie is not solid, so no trace hits it, but rocket
+        // splash does: then only the world and brushes may be in the way.
+        if self.vm().ent_f(target, self.o.solid) as i32 == SOLID_NOT {
+            let a = origin + Vec3::new(0.0, 0.0, 16.0);
+            return self.sv.traceline(a, b, true, me).is_some_and(|tr| tr.fraction == 1.0);
         }
-        let l = self.sv.level.as_ref().unwrap();
-        let vm = &l.vm;
-        let Some(mi) = self.o.modelindex else { return true };
-        let (lo, hi) = (a.min(b), a.max(b));
-        for e in 1..vm.num_edicts() as u32 {
-            if e == target || vm.is_free(e) || vm.ent_f(e, self.o.solid) as i32 != SOLID_BSP {
-                continue;
-            }
-            let (emin, emax) = self.bounds(e);
-            if emin.x > hi.x || emax.x < lo.x || emin.y > hi.y || emax.y < lo.y || emin.z > hi.z || emax.z < lo.z {
-                continue;
-            }
-            if let Some((m, sub)) = l.world.model(vm.ent_f(e, mi) as usize) {
-                let o = v(vm.ent_v(e, self.o.origin));
-                if m.hull(*sub, 0).trace(a - o, b - o).fraction < 1.0 {
-                    return false;
-                }
-            }
-        }
-        true
+        [origin + Vec3::new(0.0, 0.0, 16.0), origin].into_iter().all(|a| {
+            // Run through `b`: an aim point on a face ends a trace short.
+            let end = a + (b - a) * 1.25;
+            self.sv.traceline(a, end, false, me).is_some_and(|tr| tr.ent == Some(target))
+        })
     }
 }

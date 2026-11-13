@@ -1,0 +1,15 @@
+{
+  "e5dm": {"kills": 0, "secrets": 0, "events": 0, "exited": false, "log": []},
+  "e5end": {"kills": 30, "secrets": 2, "events": 36, "exited": true, "log": ["monster in wall at: '  0.0 1120.0 320.0':", "monster_wizard", "monster in wall at: ' 32.0 1056.0 320.0':", "monster in wall at: '320.0 1920.0 320.0':", "monster in wall at: '416.0 1888.0 320.0':", "monster in wall at: '352.0 1728.0 288.0':", "monster in wall at: '-160.0 -288.0  88.0':", "monster_fish", "monster in wall at: '-128.0 256.0  88.0':", "monster in wall at: '576.0 -128.0  24.0':", "monster in wall at: '144.0 208.0  88.0':", "Unknown command \"menu_credits\"", "Unknown command \"disconnect\""]},
+  "e5m1": {"kills": 53, "secrets": 6, "events": 41, "exited": true, "log": ["enemy name: worldspawn"]},
+  "e5m2": {"kills": 78, "secrets": 5, "events": 65, "exited": true, "log": ["enemy name: worldspawn"]},
+  "e5m3": {"kills": 64, "secrets": 5, "events": 54, "exited": true, "log": ["monster in wall at: '-432.0 112.0  -7.0':", "monster_zombie"]},
+  "e5m4": {"kills": 86, "secrets": 7, "events": 77, "exited": true, "log": []},
+  "e5m5": {"kills": 61, "secrets": 5, "events": 57, "exited": true, "log": ["monster in wall at: '-576.0 -416.0 -200.0':", "monster_wizard", "monster in wall at: '-368.0 -736.0 -264.0':", "monster in wall at: '-368.0 -928.0 -264.0':", "monster in wall at: '-1160.0 -1096.0 -256.0':", "monster in wall at: '-1160.0 -1032.0 -232.0':", "monster in wall at: '-544.0 208.0  24.0':", "monster in wall at: '-512.0 -416.0 -112.0':", "monster_wizard (targetname = spawnhk1 )"]},
+  "e5m6": {"kills": 69, "secrets": 4, "events": 80, "exited": true, "log": ["\"property 1\" is not a field"]},
+  "e5m7": {"kills": 70, "secrets": 5, "events": 70, "exited": true, "log": ["monster in wall at: '424.0 -528.0  24.0':", "monster_shalrath (targetname = goldside )", "monster in wall at: '-408.0 -528.0  24.0':", "monster_shalrath (targetname = silverside )", "monster in wall at: '  0.0 -328.0  24.0':", "monster_ogre (targetname = silverside )"]},
+  "e5sm1": {"kills": 83, "secrets": 4, "events": 98, "exited": true, "log": ["monster in wall at: '  0.0 -960.0 -168.0':", "monster_wizard", "monster in wall at: '224.0 -768.0 -128.0':", "monster in wall at: '336.0 -720.0 -256.0':", "monster in wall at: '-3264.0 -2048.0 1136.0':", "monster in wall at: '-3256.0 -2440.0 1136.0':", "monster in wall at: '224.0 -864.0 -200.0':", "monster_wizard (targetname = ogresp1 )"]},
+  "e5sm2": {"kills": 45, "secrets": 1, "events": 40, "exited": true, "log": []},
+  "e5start": {"kills": 0, "secrets": 0, "events": 13, "exited": true, "log": []},
+  "start": {"kills": 0, "secrets": 0, "events": 13, "exited": true, "log": []}
+}
