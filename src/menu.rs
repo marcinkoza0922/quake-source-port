@@ -25,6 +25,7 @@ mod page_info;
 use page_info::*;
 mod scroll;
 mod actions;
+mod addons;
 pub(crate) mod shader;
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
@@ -72,6 +73,8 @@ pub enum Page {
     ScreenShader,
     /// Add-ons (reached from the main menu) and its toy pages.
     Addons,
+    /// Add-on picker shown by New Game when Add-ons is ticked.
+    NewGameAddons,
     PortalGun,
     /// Multiplayer pages (reached from Screen::Multiplayer).
     Join,
@@ -81,7 +84,7 @@ pub enum Page {
 
 /// Every cvar the options pages edit (the host marks them archived).
 pub fn option_cvars() -> impl Iterator<Item = &'static str> {
-    [ADDONS, PORTAL_GUN, GAMEPLAY, HUD, HUD_LAYOUT, MESSAGES, ENHANCEMENTS, WATER, BLOOD, DEBRIS, IMPACTS, AUTOSAVE, ASSISTS, AUTOAIM, INPUT, MOUSE, CONTROLLER, GRAPHICS, AUDIO, HIT_SOUND, KILL_SOUND, ACCESSIBILITY].into_iter().flatten().filter_map(|i| match *i {
+    [ADDONS, NEW_GAME_ADDONS, PORTAL_GUN, GAMEPLAY, HUD, HUD_LAYOUT, MESSAGES, ENHANCEMENTS, WATER, BLOOD, DEBRIS, IMPACTS, AUTOSAVE, ASSISTS, AUTOAIM, INPUT, MOUSE, CONTROLLER, GRAPHICS, AUDIO, HIT_SOUND, KILL_SOUND, ACCESSIBILITY].into_iter().flatten().filter_map(|i| match *i {
         Item::Slider { cvar, .. } | Item::Toggle { cvar, .. } | Item::Choice { cvar, .. } => Some(cvar),
         _ => None,
     })
@@ -152,6 +155,8 @@ pub struct Menu {
     /// Controls row waiting for a key to bind.
     capture: Option<usize>,
     /// Prompts show gamepad glyphs (the pad was used last).
+    /// A game is running (set by the host); add-ons are then fixed per game.
+    pub game_running: bool,
     pub pad_ui: bool,
     pub glyphs: Glyphs,
     /// On-screen keyboard over a text field (gamepad typing).
@@ -248,6 +253,7 @@ impl Menu {
             autoaim_yes: false,
             autoaim_mapping: std::cell::Cell::new(0),
             capture: None,
+            game_running: false,
             pad_ui: false,
             glyphs: Glyphs { family: Family::Xbox },
             osk: None,

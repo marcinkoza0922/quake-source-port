@@ -137,6 +137,7 @@ impl Host {
 
     /// Menu state that follows the input devices and bindings.
     pub(super) fn sync_menu_ui(&mut self) {
+        self.menu.game_running = self.server.active();
         self.menu.pad_ui = self.pad_ui();
         self.menu.glyphs = self.glyphs();
         if self.menu.active() {

@@ -12,6 +12,8 @@ pub struct SaveInfo {
     pub kills: (i32, i32),
     pub secrets: (i32, i32),
     pub reason: Option<String>,
+    /// Add-ons the save was made with (None: an ordinary save).
+    pub addons: Option<Vec<qserver::addons::Toy>>,
     pub player: std::collections::HashMap<String, String>,
 }
 
@@ -32,6 +34,7 @@ fn block<'a>(data: &mut &'a str) -> Option<Vec<(&'a str, &'a str)>> {
 
 impl SaveInfo {
     pub fn parse(text: &str, modified: Option<SystemTime>) -> Option<Self> {
+        let (addons, text) = qserver::addons::save::split(text).ok()?;
         let mut lines = text.lines();
         if lines.next()?.trim() != "5" { return None; }
         let comment = lines.next()?;
@@ -54,6 +57,7 @@ impl SaveInfo {
             kills: (value(&globals, "killed_monsters"), value(&globals, "total_monsters")),
             secrets: (value(&globals, "found_secrets"), value(&globals, "total_secrets")),
             player: player.iter().map(|(k,v)| (k.to_string(),v.to_string())).collect(),
+            addons: addons.map(|h| h.toys),
             reason: comment.strip_prefix("AUTOSAVE_").map(|s| s.replace('_', " ")),
         })
     }
@@ -106,6 +110,19 @@ mod tests {
         server.load_game(&autosave).unwrap();
         assert_eq!(server.stats(), stats);
         assert!(server.core.sv.loadgame);
+    }
+
+    #[test]
+    fn addon_save_preview_lists_the_toys() {
+        let header = format!("5\ncomment\n{}1\ne1m1\n12\n{}", "0\n".repeat(16), "m\n".repeat(64));
+        let body = "{\n}\n{\n}\n{\n\"health\" \"87\"\n}\n";
+        let plain = header + body;
+        assert!(SaveInfo::parse(&plain, None).unwrap().addons.is_none());
+        let wrapped = qserver::addons::save::wrap(&[qserver::addons::Toy::PortalGun], None, &plain);
+        let s = SaveInfo::parse(&wrapped, None).unwrap();
+        assert_eq!(s.addons, Some(vec![qserver::addons::Toy::PortalGun]));
+        assert_eq!(s.health, 87);
+        assert!(SaveInfo::parse("QSPADDONS 2 0\n", None).is_none());
     }
 
     #[test]

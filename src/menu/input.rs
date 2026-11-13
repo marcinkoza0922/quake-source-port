@@ -36,7 +36,8 @@ impl Menu {
     }
 
     pub fn key(&mut self, key: i32, cv: &mut Cvars, server_active: bool) -> Vec<Action> {
-        sync_addon_binds(cv);
+        self.game_running = server_active;
+        sync_addon_binds(cv, server_active);
         self.sync_autoaim_mapping(cv);
         let mut out = Vec::new();
         if self.autoaim_prompt {
@@ -119,6 +120,11 @@ impl Menu {
                 self.drag = Some(grab);
                 return out;
             }
+            if self.on_new_game_box(pos) {
+                self.sp_cursor = 0;
+                Self::toggle_addons_box(cv, &mut out);
+                return out;
+            }
             let Some(i) = self.item_at(pos) else { return out };
             if let Some(c) = self.cursor_mut() {
                 *c = i;
@@ -198,14 +204,13 @@ impl Menu {
                     return out;
                 }
                 wrap(&mut self.sp_cursor, 3, &mut out);
+                if (left || right) && self.sp_cursor == 0 {
+                    Self::toggle_addons_box(cv, &mut out);
+                }
                 if enter {
                     out.push(Action::Sound("misc/menu2.wav"));
                     match self.sp_cursor {
-                        0 => {
-                            self.screen = Screen::None;
-                            out.push(Action::Close);
-                            out.push(Action::Command("maxplayers 1\ndeathmatch 0\ncoop 0\nmap start\n".into()));
-                        }
+                        0 => self.new_game(cv, &mut out),
                         1 => {
                             out.push(Action::Command("_scansaves\n".into()));
                             self.autosaves = false;
@@ -307,6 +312,8 @@ impl Menu {
                     }
                     self.screen = if is_net_page(p) {
                         Screen::Multiplayer
+                    } else if p == Page::NewGameAddons {
+                        Screen::SinglePlayer
                     } else if p == Page::Addons {
                         Screen::Main
                     } else if let Some((parent, row)) =

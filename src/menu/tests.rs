@@ -397,30 +397,108 @@ fn enhancements_hub_and_subpages_navigate_back_to_their_parent() {
     }
 }
 
-#[test]
-fn addons_page_from_main_menu_gates_portal_gun_and_control_binds() {
+fn addon_cvars() -> Cvars {
     let mut cv = Cvars::default();
     cv.register("addons_enable", "0", 0);
+    cv.register("addons_active", "0", 0);
     cv.register("addon_portalgun", "1", 0);
+    cv
+}
+
+#[test]
+fn new_game_starts_directly_unless_the_addons_box_is_ticked() {
+    let mut cv = addon_cvars();
+    let mut menu = Menu::new();
+    menu.open(Screen::SinglePlayer);
+    let acts = menu.key(K_ENTER, &mut cv, false);
+    assert!(acts.iter().any(|a| matches!(a, Action::Command(c) if c.contains("map start"))));
+    assert_eq!(menu.screen, Screen::None);
+
+    // right/left on the New Game row ticks the box; Enter then opens the picker
+    menu.open(Screen::SinglePlayer);
+    menu.key(K_RIGHTARROW, &mut cv, false);
+    assert_eq!(cv.value_of("addons_enable"), 1.0);
+    let acts = menu.key(K_ENTER, &mut cv, false);
+    assert!(!acts.iter().any(|a| matches!(a, Action::Command(_))));
+    assert_eq!(menu.screen, Screen::OptionsPage(Page::NewGameAddons));
+    assert!(option_cvars().any(|n| n == "addon_portalgun"));
+    // toys can be switched off before starting
+    menu.opt_cursor = 0;
+    menu.key(K_ENTER, &mut cv, false);
+    assert_eq!(cv.value_of("addon_portalgun"), 0.0);
+    // Start New Game is the last row
+    menu.opt_cursor = 2;
+    let acts = menu.key(K_ENTER, &mut cv, false);
+    assert!(acts.iter().any(|a| matches!(a, Action::Command(c) if c.contains("map start"))));
+    assert_eq!(menu.screen, Screen::None);
+
+    // Back from the picker returns to the single player menu, with the box still ticked
+    menu.open(Screen::SinglePlayer);
+    menu.key(K_ENTER, &mut cv, false);
+    menu.key(K_ESCAPE, &mut cv, false);
+    assert_eq!(menu.screen, Screen::SinglePlayer);
+    assert_eq!(cv.value_of("addons_enable"), 1.0);
+}
+
+#[test]
+fn clicking_the_checkbox_toggles_it_without_starting_a_game() {
+    let mut cv = addon_cvars();
+    let mut menu = Menu::new();
+    menu.open(Screen::SinglePlayer);
+    let pos = (CLASSIC.0 + 232.0, CLASSIC.1 + 38.0);
+    menu.mouse_move(pos, &mut cv);
+    let acts = menu.key(K_MOUSE1, &mut cv, false);
+    assert_eq!(cv.value_of("addons_enable"), 1.0);
+    assert_eq!(menu.screen, Screen::SinglePlayer);
+    assert!(!acts.iter().any(|a| matches!(a, Action::Command(_))));
+}
+
+#[test]
+fn a_game_without_addons_cannot_gain_them_but_an_addon_game_can_adjust() {
+    let mut cv = addon_cvars();
     let mut menu = Menu::new();
     menu.open(Screen::Main);
     menu.main_cursor = 6;
-    menu.key(K_ENTER, &mut cv, false);
+    menu.key(K_ENTER, &mut cv, true);
     assert_eq!(menu.screen, Screen::OptionsPage(Page::Addons));
-    assert!(!page_items(Page::Controls).iter().any(|i| matches!(i, Item::Bind { cmd: "+toy", .. })));
-    // the Portal Gun page refuses to open while add-ons are off
+    // running game started without add-ons: the toggle is fixed
+    menu.opt_cursor = 0;
+    menu.key(K_ENTER, &mut cv, true);
+    assert_eq!(cv.value_of("addon_portalgun"), 1.0);
+    assert!(menu.toys_locked(&cv));
+    // running game with add-ons: free to change
+    cv.set("addons_active", "1");
+    menu.key(K_ENTER, &mut cv, true);
+    assert_eq!(cv.value_of("addon_portalgun"), 0.0);
+    // no game running: edits the defaults for the next new game
+    cv.set("addons_active", "0");
+    menu.key(K_ENTER, &mut cv, false);
+    assert_eq!(cv.value_of("addon_portalgun"), 1.0);
+    // portal settings stay reachable either way
     menu.opt_cursor = 1;
-    menu.key(K_ENTER, &mut cv, false);
-    assert_eq!(menu.screen, Screen::OptionsPage(Page::Addons));
-    cv.set("addons_enable", "1");
-    menu.key(K_ENTER, &mut cv, false);
+    menu.key(K_ENTER, &mut cv, true);
     assert_eq!(menu.screen, Screen::OptionsPage(Page::PortalGun));
-    assert!(page_items(Page::Controls).iter().any(|i| matches!(i, Item::Bind { cmd: "+toy", .. })));
-    menu.key(K_ESCAPE, &mut cv, false);
+    menu.key(K_ESCAPE, &mut cv, true);
     assert_eq!((menu.screen, menu.opt_cursor), (Screen::OptionsPage(Page::Addons), 1));
-    menu.key(K_ESCAPE, &mut cv, false);
+    menu.key(K_ESCAPE, &mut cv, true);
     assert_eq!(menu.screen, Screen::Main);
-    assert!(option_cvars().any(|n| n == "addon_portalgun"));
+}
+
+#[test]
+fn control_binds_for_toys_follow_the_running_game() {
+    let mut cv = addon_cvars();
+    let has_toy = || page_items(Page::Controls).iter().any(|i| matches!(i, Item::Bind { cmd: "+toy", .. }));
+    sync_addon_binds(&cv, false);
+    assert!(!has_toy());
+    cv.set("addons_enable", "1");
+    sync_addon_binds(&cv, false);
+    assert!(has_toy());
+    // a running game without add-ons hides them whatever the checkbox says
+    sync_addon_binds(&cv, true);
+    assert!(!has_toy());
+    cv.set("addons_active", "1");
+    sync_addon_binds(&cv, true);
+    assert!(has_toy());
 }
 
 mod shader_tests {

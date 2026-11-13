@@ -7,7 +7,7 @@
 //! QC (`button0` stays 0) and sends them in usercmd bits QC never sees:
 //! [`BUTTON_TOY_FIRE`], [`BUTTON_TOY_ALT`] and the toy id in the top bits.
 
-use qcore::cvar::{CVAR_ARCHIVE, Cvars};
+use qcore::cvar::{CVAR_ARCHIVE, CVAR_ROM, Cvars};
 
 use crate::ents::Ents;
 use crate::server::{Core, Level};
@@ -15,10 +15,15 @@ use crate::server::{Core, Level};
 pub mod fall;
 pub mod portal;
 pub mod portal_move;
+pub mod save;
 
 /// (name, default, flags) of the add-on cvars.
 pub const CVARS: &[(&str, &str, u32)] = &[
+    // New Game checkbox: start the next new game with add-ons (a game's
+    // add-ons are fixed at its start; see `Core::addons_on`)
     ("addons_enable", "0", CVAR_ARCHIVE),
+    // read-only mirror of `Core::addons_on` for the menu
+    ("addons_active", "0", CVAR_ROM),
     ("addon_portalgun", "1", CVAR_ARCHIVE),
     // see-through portals: on/off, live views per frame, live distance
     ("addon_portal_view", "1", CVAR_ARCHIVE),
@@ -54,7 +59,16 @@ impl Toy {
             Toy::PortalGun => "Portal Gun",
         }
     }
-    /// The cvar that enables this toy (on top of `addons_enable`).
+    /// Name in savegame headers.
+    pub fn key(self) -> &'static str {
+        match self {
+            Toy::PortalGun => "portalgun",
+        }
+    }
+    pub fn from_key(key: &str) -> Option<Toy> {
+        Self::ALL.into_iter().find(|t| t.key() == key)
+    }
+    /// The cvar that selects this toy in a game that has add-ons.
     pub fn cvar(self) -> &'static str {
         match self {
             Toy::PortalGun => "addon_portalgun",
@@ -70,15 +84,23 @@ impl Toy {
     }
 }
 
-/// Add-ons may run: switched on, not deathmatch, and every connected
-/// client plays on this machine.
-pub fn allowed(cv: &Cvars, deathmatch: bool, all_local: bool) -> bool {
-    cv.value_of("addons_enable") != 0.0 && !deathmatch && all_local
+/// Add-ons may run: this game was started with them, not deathmatch, and
+/// every connected client plays on this machine.
+pub fn allowed(on: bool, deathmatch: bool, all_local: bool) -> bool {
+    on && !deathmatch && all_local
 }
 
 /// Add-ons may run on this server this frame (cheap when off).
 pub(crate) fn active(c: &Core) -> bool {
-    c.cvars.value_of("addons_enable") != 0.0 && c.cvars.value_of("deathmatch") == 0.0 && all_local(&c.clients)
+    c.addons_on && c.cvars.value_of("deathmatch") == 0.0 && all_local(&c.clients)
+}
+
+impl Core {
+    /// Fixes whether this game has add-ons (at a new game or a load).
+    pub fn set_addons(&mut self, on: bool) {
+        self.addons_on = on;
+        self.cvars.set_value("addons_active", on as u8 as f32);
+    }
 }
 
 /// After physics: portal crossings, then new shots, then client updates.
@@ -121,16 +143,18 @@ pub(crate) fn frame(l: &mut Level, c: &mut Core) {
 }
 
 impl crate::Server {
-    /// Add-on state for a savegame sidecar (`<save>.qsp`), so the `.sav`
-    /// itself stays loadable by other engines. None when there is none.
-    pub fn addon_save_text(&self) -> Option<String> {
-        self.level.as_ref()?.portals.save_text()
+    /// This game was started with add-ons: its saves are `.qsa` files.
+    pub fn addons_on(&self) -> bool {
+        self.core.addons_on
     }
-    /// Restore a sidecar after `load_game`.
-    pub fn addon_load_text(&mut self, text: &str) {
-        if let Some(l) = &mut self.level {
-            l.portals.load_text(text);
+    /// A v5 savegame body, wrapped in the add-on header when this game has
+    /// add-ons.
+    pub(crate) fn wrap_save(&self, body: String) -> String {
+        if !self.core.addons_on {
+            return body;
         }
+        let toys: Vec<Toy> = Toy::enabled(&self.core.cvars).collect();
+        save::wrap(&toys, self.level.as_ref().and_then(|l| l.portals.save_text()).as_deref(), &body)
     }
 }
 

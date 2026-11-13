@@ -184,6 +184,7 @@ impl Server {
                 clients: (0..maxclients.max(1)).map(|_| Client::default()).collect(),
                 serverflags: 0.0,
                 changelevel_issued: false,
+                addons_on: false,
                 skip_entity_updates: false,
                 standard_quake,
                 log: Vec::new(),

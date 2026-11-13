@@ -6,15 +6,15 @@ impl Host {
         self.cv("scr_hudstyle") == 0.0
     }
 
-    /// Toys usable this frame: add-ons on, a local non-deathmatch game and
+    /// Toys usable this frame: this game has add-ons, a local non-deathmatch game and
     /// no remote clients. Empty (no allocation) when add-ons are off.
     pub(super) fn allowed_toys(&self) -> Vec<qserver::addons::Toy> {
         let cv = &self.server.core.cvars;
-        if cv.value_of("addons_enable") == 0.0 || !self.server.active() {
+        if !self.server.core.addons_on || !self.server.active() {
             return Vec::new();
         }
         let all_local = qserver::addons::all_local(&self.server.core.clients);
-        if !qserver::addons::allowed(cv, self.cv("deathmatch") != 0.0, all_local) {
+        if !qserver::addons::allowed(true, self.cv("deathmatch") != 0.0, all_local) {
             return Vec::new();
         }
         qserver::addons::Toy::enabled(cv).collect()

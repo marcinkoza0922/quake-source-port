@@ -22,6 +22,8 @@ fn start(cvars: &[&str]) -> Option<(Server, usize)> {
     for c in cvars {
         sv.command(c);
     }
+    // `spawn_server` keeps a game's add-ons; `map` is what arms them
+    sv.core.set_addons(cvars.contains(&"addons_enable 1"));
     sv.spawn_server("e1m1").ok()?;
     let c = sv.connect_local()?;
     Some((sv, c))
@@ -190,5 +192,38 @@ fn confirmed_and_rejected_shots_send_transient_feedback() {
     let rejected = sv.take_reliable(c).concat();
     assert!(String::from_utf8_lossy(&rejected).contains("//qsp_portalfx 0 0 0 "));
     assert_eq!(sv.level.as_ref().unwrap().portals.pairs[0],original);
-    assert!(!sv.addon_save_text().unwrap().contains("portalfx"));
+    assert!(!sv.save_game().contains("portalfx"));
+}
+
+/// A game with add-ons saves with the `QSPADDONS` header (a `.qsa` file no
+/// other port loads) holding its toys and portals; loading it brings them
+/// back, and loading an ordinary save turns add-ons off again.
+#[test]
+fn addon_saves_carry_toys_and_portals_and_plain_saves_clear_them() {
+    let Some((mut sv, c)) = start(&["addons_enable 1"]) else { return };
+    place_pair(&mut sv, c);
+    let portals = sv.level.as_ref().unwrap().portals.save_text().expect("portals placed");
+    sv.core.cvars.set("addon_portalgun", "1");
+    let text = sv.save_game();
+    assert!(text.starts_with("QSPADDONS 1 "), "{}", &text[..40.min(text.len())]);
+    assert!(text.contains("\ntoy portalgun\n") && text.contains("\nportal "));
+
+    // another game without add-ons: loading the addon save restores everything
+    let (mut other, _) = start(&[]).unwrap();
+    assert!(!other.addons_on());
+    let plain = other.save_game();
+    assert!(plain.starts_with("5\n"));
+    other.core.cvars.set("addon_portalgun", "0");
+    other.load_game(&text).unwrap();
+    assert!(other.addons_on());
+    assert_eq!(other.core.cvars.value_of("addons_active"), 1.0);
+    assert_eq!(other.core.cvars.value_of("addon_portalgun"), 1.0);
+    assert_eq!(other.level.as_ref().unwrap().portals.save_text().as_deref(), Some(portals.as_str()));
+
+    // and an ordinary save puts it back to a game without add-ons
+    other.load_game(&plain).unwrap();
+    assert!(!other.addons_on());
+    assert_eq!(other.core.cvars.value_of("addons_active"), 0.0);
+    assert!(other.level.as_ref().unwrap().portals.save_text().is_none());
+    assert!(other.load_game("QSPADDONS 7 0\n5\n").is_err());
 }

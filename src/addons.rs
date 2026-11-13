@@ -9,13 +9,6 @@ mod portal_skin;
 
 use qserver::addons::{BUTTON_TOY_ALT, BUTTON_TOY_FIRE, TOY_SHIFT, Toy};
 
-/// Add-on state saved beside `save` (`name.sav` → `name.sav.qsp`).
-pub fn sidecar(save: &std::path::Path) -> std::path::PathBuf {
-    let mut s = save.as_os_str().to_owned();
-    s.push(".qsp");
-    s.into()
-}
-
 /// One local player's toy slot.
 #[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
 pub struct ToySlot {
