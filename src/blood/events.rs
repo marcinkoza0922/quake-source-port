@@ -95,7 +95,7 @@ impl Blood {
         let mut hits = Vec::new();
         for (p, burst) in std::mem::take(&mut self.debug_hits) {
             if burst {
-                self.burst(world, p, cl.time, set);
+                self.burst(p, set);
             } else {
                 hits.push((p, (p - view).normalize()));
             }
@@ -158,18 +158,21 @@ impl Blood {
                     (dir * 0.5 + spread).normalize()
                 };
                 let size = (5.0 + self.random() * 9.0) * set.size;
-                self.splat(world, p, d, cl.time, size);
+                let speed = 220.0 + self.random() * 260.0;
+                self.launch(p, d, speed, size);
             }
-            self.splat(world, p, Vec3::new(0.0, 0.0, -1.0), cl.time, 9.0 * set.size);
+            // A heavier gout falls almost straight down from the wound.
+            let drip = Vec3::new(dir.x * 0.3, dir.y * 0.3, -1.0).normalize();
+            let speed = 40.0 + self.random() * 60.0;
+            self.launch(p, drip, speed, 9.0 * set.size);
         }
-        self.gib_events(set, cl, world, debris);
+        self.gib_events(set, cl, debris);
     }
 
     fn gib_events(
         &mut self,
         set: Settings,
         cl: &qclient::ClientState,
-        world: &dyn World,
         debris: &crate::debris::Debris,
     ) {
         let mut current = HashMap::new();
@@ -216,22 +219,22 @@ impl Blood {
         self.actors = current;
         self.gibs = current_gibs;
         for p in bursts {
-            self.burst(world, p, cl.time, set);
+            self.burst(p, set);
         }
     }
 
     /// Many independent rays, including shallow trajectories that carry
     /// droplets across a room. World traces keep the spray behind cover.
-    pub(super) fn burst(&mut self, world: &dyn World, p: Vec3, time: f64, set: Settings) {
+    pub(super) fn burst(&mut self, p: Vec3, set: Settings) {
         let count = 48 + set.amount * 12;
         for i in 0..count {
             let z = 1.0 - 2.0 * (i as f32 + self.random()) / count as f32;
             let a = i as f32 * 2.399963 + self.random() * 0.5;
             let r = (1.0 - z * z).max(0.0).sqrt();
             let dir = Vec3::new(a.cos() * r, a.sin() * r, z);
-            let range = 384.0 + self.random() * 384.0;
+            let speed = 300.0 + self.random() * 420.0;
             let size = (4.0 + self.random() * 15.0) * set.size;
-            self.splat_range(world, p, dir, time, size, range);
+            self.launch(p, dir, speed, size);
         }
     }
 }
