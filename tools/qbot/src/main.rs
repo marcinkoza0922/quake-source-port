@@ -1,37 +1,23 @@
-//! qbot: automated level traversal test (M7).
+//! qbot: automated level-breaking test.
 //!
 //! Usage: qbot [-basedir <dir>] [-game <dir>] [-skill N] [-time <sim s>] [-j N]
-//!             [-out <dir>] [-baseline <file>] [-save-baseline] [-routes <dir>]
-//!             [-no-routes] [-hints DIR] [-no-hints] [-fresh] [-variants N] [-v] [map ...]
+//!             [-out <dir>] [-baseline <file>] [-save-baseline] [-v] [map ...]
 //!
-//! Each map runs on an in-process headless server at skill 3 with god mode.
-//! The bot paths to secrets, monsters, buttons and keys over a nav graph built
-//! from the world hull, shoots what it sees and noclips to a goal when it gets
-//! stuck (counted in the report). A run that finishes its level by game means
-//! only is cached as a route (`<routes>/<map>.qbr`, default
-//! `target/qbot/routes/<game>`) and replayed next time. Writes
-//! `<out>/report.json`. With `-variants N`, maps the plain bot doesn't finish
-//! cleanly are rerun with seeds 1..N-1 (other goal orders, routes and lift
-//! patience) and the best run is reported and cached. With
-//! `-baseline`, exits 1 if any map has errors or fewer kills/secrets than the
-//! baseline; `-save-baseline` writes the current results as the new baseline.
+//! Each map runs on an in-process headless server at skill 3. The bot has god
+//! mode, noclip and full knowledge of the edicts: it kills every monster,
+//! finds every secret, sets off every trigger and button, picks up every key
+//! and finally touches the exit, so the level's scripting all runs. Writes
+//! `<out>/report.json`. Exits 1 if any map hits an engine error or does worse
+//! than the baseline (kills, secrets, events, exit); `-save-baseline` merges
+//! the current results into it.
 
-mod actions;
 mod bot;
-mod diagnostics;
-mod hints;
-mod movement;
-mod nav;
-mod route;
 
 use qcore::fs::Fs;
 use std::fmt::Write as _;
 use std::panic::{AssertUnwindSafe, catch_unwind};
 use std::path::{Path, PathBuf};
 use std::sync::Mutex;
-#[path = "main/report.rs"]
-mod report;
-use report::*;
 
 struct Opts {
     basedir: PathBuf,
@@ -40,15 +26,13 @@ struct Opts {
     time: Option<f64>,
     jobs: usize,
     out: PathBuf,
-    baseline: Option<PathBuf>,
+    baseline: PathBuf,
     save_baseline: bool,
     verbose: bool,
-    routes: Option<PathBuf>,
-    hints: Option<PathBuf>,
-    fresh: bool,
-    variants: u32,
     maps: Vec<String>,
 }
+
+const USAGE: &str = "qbot [-basedir D] [-game G] [-skill N] [-time S] [-j N] [-out DIR] [-baseline F] [-save-baseline] [-v] [map ...]";
 
 fn parse_args() -> Opts {
     let basedir = std::env::var_os("QUAKE_BASEDIR").map_or_else(|| PathBuf::from("vkQuake directory with maps"), PathBuf::from);
@@ -59,17 +43,12 @@ fn parse_args() -> Opts {
         time: None,
         jobs: std::thread::available_parallelism().map_or(4, |n| n.get()),
         out: PathBuf::from("target/qbot"),
-        baseline: None,
+        baseline: PathBuf::new(),
         save_baseline: false,
         verbose: false,
-        routes: None,
-        hints: None,
-        fresh: false,
-        variants: 1,
         maps: Vec::new(),
     };
-    let mut no_routes = false;
-    let mut no_hints = false;
+    let mut baseline = None;
     let mut a = std::env::args().skip(1);
     while let Some(x) = a.next() {
         let mut val = || a.next().unwrap_or_else(|| panic!("{x} needs a value"));
@@ -80,39 +59,19 @@ fn parse_args() -> Opts {
             "-time" => o.time = Some(val().parse().expect("-time S")),
             "-j" => o.jobs = val().parse::<usize>().expect("-j N").max(1),
             "-out" => o.out = val().into(),
-            "-baseline" => o.baseline = Some(val().into()),
+            "-baseline" => baseline = Some(PathBuf::from(val())),
             "-save-baseline" => o.save_baseline = true,
             "-v" => o.verbose = true,
-            "-routes" => o.routes = Some(val().into()),
-            "-no-routes" => no_routes = true,
-            "-hints" => o.hints = Some(val().into()),
-            "-no-hints" => no_hints = true,
-            "-fresh" => o.fresh = true,
-            "-variants" => o.variants = val().parse::<u32>().expect("-variants N").max(1),
             "-h" | "--help" => {
-                eprintln!("{}", USAGE);
+                eprintln!("{USAGE}");
                 std::process::exit(0);
             }
             m => o.maps.push(m.to_string()),
         }
     }
-    if no_routes {
-        o.routes = None;
-    } else if o.routes.is_none() {
-        o.routes = Some(PathBuf::from(format!("target/qbot/routes/{}", o.game)));
-    }
-    if no_hints {
-        o.hints = None;
-    } else if o.hints.is_none() {
-        o.hints = Some(PathBuf::from(format!("tools/qbot/hints/{}", o.game)));
-    }
-    if o.baseline.is_none() {
-        o.baseline = Some(PathBuf::from(format!("tools/qbot/baseline-{}.json", o.game)));
-    }
+    o.baseline = baseline.unwrap_or_else(|| PathBuf::from(format!("tools/qbot/baseline-{}.json", o.game)));
     o
 }
-
-const USAGE: &str = "qbot [-basedir D] [-game G] [-skill N] [-time S] [-j N] [-out DIR] [-baseline F] [-save-baseline] [-routes DIR] [-no-routes] [-hints DIR] [-no-hints] [-fresh] [-variants N] [-v] [map ...]";
 
 fn mount(basedir: &Path, game: &str) -> Fs {
     let mut fs = Fs::new(basedir);
@@ -154,6 +113,88 @@ fn json_str(s: &str) -> String {
     o
 }
 
+fn report_json(r: &bot::Report) -> String {
+    let list = |v: &[String]| v.iter().map(|s| json_str(s)).collect::<Vec<_>>().join(", ");
+    format!(
+        "{{\"kills\": {}, \"total_monsters\": {}, \"secrets\": {}, \"total_secrets\": {}, \"triggers\": {}, \"total_triggers\": {}, \"buttons\": {}, \"total_buttons\": {}, \"pickups\": {}, \"total_pickups\": {}, \"has_exit\": {}, \"exited\": {}, \"sim_time\": {:.1}, \"wall_time\": {:.1}, \"failed\": [{}], \"errors\": [{}]}}",
+        r.kills,
+        r.total_monsters,
+        r.secrets,
+        r.total_secrets,
+        r.triggers,
+        r.total_triggers,
+        r.buttons,
+        r.total_buttons,
+        r.pickups,
+        r.total_pickups,
+        r.has_exit,
+        r.exited,
+        r.sim_time,
+        r.wall_time,
+        list(&r.failed),
+        list(&r.errors),
+    )
+}
+
+fn run_one(o: &Opts, map: &str) -> bot::Report {
+    let opt = bot::Options { skill: o.skill, max_time: o.time, verbose: o.verbose };
+    let fs = mount(&o.basedir, &o.game);
+    match catch_unwind(AssertUnwindSafe(|| bot::run(fs, map, &opt))) {
+        Ok(r) => r,
+        Err(p) => {
+            let msg = p.downcast_ref::<String>().cloned().or_else(|| p.downcast_ref::<&str>().map(|s| s.to_string()));
+            bot::Report { errors: vec![format!("panic: {}", msg.unwrap_or_default())], ..Default::default() }
+        }
+    }
+}
+
+/// Run every map on `o.jobs` threads, printing a line per map.
+fn run_jobs(o: &Opts, maps: &[String]) -> Vec<(String, bot::Report)> {
+    let next = Mutex::new(0usize);
+    let results = Mutex::new(Vec::new());
+    std::thread::scope(|s| {
+        for _ in 0..o.jobs.min(maps.len()) {
+            s.spawn(|| {
+                loop {
+                    let i = {
+                        let mut n = next.lock().unwrap();
+                        *n += 1;
+                        *n - 1
+                    };
+                    let Some(map) = maps.get(i) else { break };
+                    let r = run_one(o, map);
+                    eprintln!(
+                        "{map:<16} kills {:>3}/{:<3} secrets {:>2}/{:<2} triggers {:>3}/{:<3} buttons {:>2}/{:<2} keys {}/{} failed {:>2}{}{} ({:.0}s sim, {:.1}s wall)",
+                        r.kills,
+                        r.total_monsters,
+                        r.secrets,
+                        r.total_secrets,
+                        r.triggers,
+                        r.total_triggers,
+                        r.buttons,
+                        r.total_buttons,
+                        r.pickups,
+                        r.total_pickups,
+                        r.failed.len(),
+                        if r.exited { " exit" } else if r.has_exit { " NO-EXIT" } else { "" },
+                        if r.errors.is_empty() { String::new() } else { format!(" ERRORS: {}", r.errors.join("; ")) },
+                        r.sim_time,
+                        r.wall_time
+                    );
+                    results.lock().unwrap().push((map.clone(), r));
+                }
+            });
+        }
+    });
+    let mut v = results.into_inner().unwrap();
+    v.sort_by(|a, b| a.0.cmp(&b.0));
+    v
+}
+
+fn baseline_entry(kills: f64, secrets: f64, events: f64, exited: bool) -> String {
+    format!("{{\"kills\": {kills}, \"secrets\": {secrets}, \"events\": {events}, \"exited\": {exited}}}")
+}
+
 fn main() {
     let o = parse_args();
     if !o.basedir.join("id1").is_dir() {
@@ -161,65 +202,7 @@ fn main() {
         std::process::exit(2);
     }
     let maps = if o.maps.is_empty() { maps_of(&o.basedir, &o.game) } else { o.maps.clone() };
-    // Phase 1: the plain bot (seed 0) on every map; it replays cached routes.
-    let first = run_jobs(&o, maps.iter().map(|m| (m.clone(), 0)).collect(), true);
-    let mut by_map: std::collections::BTreeMap<String, Vec<bot::Report>> = std::collections::BTreeMap::new();
-    for (m, r) in first {
-        by_map.entry(m).or_default().push(r);
-    }
-    // Phase 2: maps the plain bot didn't finish cleanly get seeded variants.
-    if o.variants > 1 {
-        let jobs: Vec<(String, u64)> = by_map
-            .iter()
-            .filter(|(_, rs)| !rs[0].clean)
-            .flat_map(|(m, _)| (1..o.variants as u64).map(move |seed| (m.clone(), seed)))
-            .collect();
-        for (m, r) in run_jobs(&o, jobs, o.verbose) {
-            by_map.entry(m).or_default().push(r);
-        }
-    }
-    let mut results: Vec<(String, bot::Report)> = Vec::new();
-    // The baseline is about the plain bot (seed 0); variants are extra search.
-    let mut plain: Vec<(String, Plain)> = Vec::new();
-    for (m, mut rs) in by_map {
-        let p0 = &rs[0];
-        plain.push((m.clone(), Plain { kills: p0.kills, secrets: p0.secrets, exited: p0.exited, noclips: p0.noclip_uses }));
-        let n = rs.len();
-        let clean = rs.iter().filter(|r| r.clean).count();
-        // Errors from any variant count against the map.
-        let errors: Vec<String> =
-            rs.iter().flat_map(|r| r.errors.iter().map(move |e| if r.seed == 0 { e.clone() } else { format!("seed {}: {e}", r.seed) })).collect();
-        // Best variant: clean, then exit, fewest noclips, most kills+secrets, shortest.
-        rs.sort_by(|a, b| {
-            (b.clean, b.exited, std::cmp::Reverse(b.noclip_uses), b.kills + b.secrets)
-                .cmp(&(a.clean, a.exited, std::cmp::Reverse(a.noclip_uses), a.kills + a.secrets))
-                .then(a.sim_time.total_cmp(&b.sim_time))
-        });
-        let mut best = rs.swap_remove(0);
-        best.errors = errors;
-        best.variants = n as u32;
-        best.clean_variants = clean as u32;
-        if let (Some(rec), Some(dir)) = (best.recording.take(), &o.routes) {
-            let p = bot::route_file(dir, &m);
-            match rec.save(&p) {
-                Ok(()) => best.route = format!("recorded (seed {})", best.seed),
-                Err(e) => best.errors.push(format!("saving route {}: {e}", p.display())),
-            }
-        }
-        if n > 1 {
-            eprintln!(
-                "{m:<16} best of {n}: seed {} kills {}/{} secrets {}/{} noclip {}{} ({clean} clean)",
-                best.seed,
-                best.kills,
-                best.total_monsters,
-                best.secrets,
-                best.total_secrets,
-                best.noclip_uses,
-                if best.exited { " exit" } else { "" }
-            );
-        }
-        results.push((m, best));
-    }
+    let results = run_jobs(&o, &maps);
 
     let mut j = String::from("{\n");
     for (i, (m, r)) in results.iter().enumerate() {
@@ -232,65 +215,45 @@ fn main() {
         eprintln!("qbot: writing {}: {e}", out.display());
     }
 
-    let mut regressions = Vec::new();
-    for (m, r) in &results {
-        if !r.errors.is_empty() {
-            regressions.push(format!("{m}: errors"));
-        }
-    }
-    let base = o.baseline.as_ref().unwrap();
-    let entry = |kills: f64, secrets: f64, exited: bool, noclips: f64| {
-        format!("{{\"kills\": {kills}, \"secrets\": {secrets}, \"exited\": {exited}, \"noclips\": {noclips}}}")
-    };
-    let mut soft = Vec::new();
+    let mut regressions: Vec<String> = results.iter().filter(|(_, r)| !r.errors.is_empty()).map(|(m, _)| format!("{m}: errors")).collect();
+    let old = std::fs::read_to_string(&o.baseline).ok().and_then(|t| qui::json::parse(&t));
     if o.save_baseline {
-        // Merge into the existing baseline so partial runs keep other maps.
+        // Merge, so partial runs keep the other maps.
         let mut entries: Vec<(String, String)> = Vec::new();
-        if let Some(old) = std::fs::read_to_string(base).ok().and_then(|t| qui::json::parse(&t)) {
-            for (k, v) in old.as_obj().unwrap_or_default() {
-                if !results.iter().any(|(m, _)| m == k) {
-                    let n = |f: &str| v.get(f).and_then(|x| x.num()).unwrap_or(0.0);
-                    let exited = v.get("exited").and_then(|x| x.bool()).unwrap_or(false);
-                    entries.push((k.clone(), entry(n("kills"), n("secrets"), exited, n("noclips"))));
-                }
+        for (k, e) in old.as_ref().and_then(|b| b.as_obj()).unwrap_or_default() {
+            if !results.iter().any(|(m, _)| m == k) {
+                let n = |f: &str| e.get(f).and_then(|x| x.num()).unwrap_or(0.0);
+                let exited = e.get("exited").and_then(|x| x.bool()).unwrap_or(false);
+                entries.push((k.clone(), baseline_entry(n("kills"), n("secrets"), n("events"), exited)));
             }
         }
-        for (m, r) in &plain {
-            entries.push((m.clone(), entry(r.kills as f64, r.secrets as f64, r.exited, r.noclips as f64)));
+        for (m, r) in &results {
+            entries.push((m.clone(), baseline_entry(r.kills as f64, r.secrets as f64, r.events() as f64, r.exited)));
         }
         entries.sort();
         let body: Vec<String> = entries.iter().map(|(k, v)| format!("  {}: {v}", json_str(k))).collect();
-        let _ = std::fs::write(base, format!("{{\n{}\n}}\n", body.join(",\n")));
-        eprintln!("qbot: baseline written to {}", base.display());
-    } else if let Some(b) = std::fs::read_to_string(base).ok().and_then(|t| qui::json::parse(&t)) {
-        for (m, r) in &plain {
+        let _ = std::fs::write(&o.baseline, format!("{{\n{}\n}}\n", body.join(",\n")));
+        eprintln!("qbot: baseline written to {}", o.baseline.display());
+    } else if let Some(b) = old {
+        for (m, r) in &results {
             let Some(e) = b.get(m) else { continue };
-            let n = |f: &str| e.get(f).and_then(|x| x.num()).unwrap_or(0.0);
-            let (kills, secrets) = (n("kills") as i32, n("secrets") as i32);
-            if r.kills < kills || r.secrets < secrets {
-                regressions.push(format!("{m}: kills {} (was {kills}), secrets {} (was {secrets})", r.kills, r.secrets));
+            let n = |f: &str| e.get(f).and_then(|x| x.num()).unwrap_or(0.0) as i64;
+            let (kills, secrets, events) = (n("kills"), n("secrets"), n("events"));
+            if (r.kills as i64) < kills || (r.secrets as i64) < secrets || (r.events() as i64) < events {
+                regressions.push(format!(
+                    "{m}: kills {} (was {kills}), secrets {} (was {secrets}), events {} (was {events})",
+                    r.kills,
+                    r.secrets,
+                    r.events()
+                ));
             }
             if e.get("exited").and_then(|x| x.bool()) == Some(true) && !r.exited {
                 regressions.push(format!("{m}: no longer reaches the exit"));
             }
-            // More noclips is a soft failure: reported, not fatal.
-            if let Some(nc) = e.get("noclips").and_then(|x| x.num())
-                && r.noclips as f64 > nc
-            {
-                soft.push(format!("{m}: {} noclips (was {nc})", r.noclips));
-            }
         }
     }
-    for s in &soft {
-        eprintln!("SOFT {s}");
-    }
-    for cause in diagnostics::Cause::ALL {
-        let count = results.iter().flat_map(|(_, r)| &r.assists).filter(|a| a.cause == cause).count();
-        let non_monster = results.iter().flat_map(|(_, r)| &r.assists)
-            .filter(|a| a.cause == cause && a.kind != "Monster").count();
-        if count > 0 { eprintln!("qbot: assists {}: {count} ({non_monster} non-monster)", cause.name()); }
-    }
-    eprintln!("qbot: {} maps, report {}", results.len(), out.display());
+    let failed: usize = results.iter().map(|(_, r)| r.failed.len()).sum();
+    eprintln!("qbot: {} maps, {failed} goals failed, report {}", results.len(), out.display());
     if !regressions.is_empty() {
         for r in &regressions {
             eprintln!("REGRESSION {r}");
@@ -303,124 +266,36 @@ fn main() {
 mod tests {
     use super::*;
 
-    #[test]
-    fn assist_report_preserves_evidence_and_escapes_entity_names() {
-        use qui::json::Value;
-        let mut r = bot::Report { noclip_uses: 1, ..Default::default() };
-        r.assists.push(diagnostics::Assist {
-            time: 3.5, cause: diagnostics::Cause::Prerequisite, goal: Some(42),
-            kind: "Button".into(), classname: "custom\"button\n".into(), reason: "unreachable".into(),
-            from: qcore::math::Vec3::ZERO, to: qcore::math::Vec3::new(1.0, 2.0, 3.0), door: Some(7),
-        });
-        let j = qui::json::parse(&report_json(&r)).unwrap();
-        let Value::Arr(assists) = j.get("assists").unwrap() else { panic!("expected assists array") };
-        assert_eq!(assists.len(), 1);
-        assert_eq!(assists[0].get("classname"), Some(&Value::Str("custom\"button\n".into())));
-        assert_eq!(assists[0].get("cause"), Some(&Value::Str("prerequisite".into())));
-        assert_eq!(assists[0].get("door").and_then(Value::num), Some(7.0));
-        assert_eq!(j.get("noclip_uses").and_then(Value::num), Some(1.0));
+    fn base() -> PathBuf {
+        std::env::var_os("QUAKE_BASEDIR")
+            .map_or_else(|| Path::new(env!("CARGO_MANIFEST_DIR")).join("../../vkQuake directory with maps"), PathBuf::from)
     }
 
-    /// e1m1 at skill 3: the bot should kill nearly every monster, find most
-    /// secrets and leave through the exit.
     #[test]
-    fn e1m1_traversal() {
-        let base = std::env::var_os("QUAKE_BASEDIR").map_or_else(
-            || Path::new(env!("CARGO_MANIFEST_DIR")).join("../../vkQuake directory with maps"),
-            PathBuf::from,
-        );
-        if !base.join("id1").is_dir() {
+    fn report_json_escapes_strings() {
+        let r = bot::Report { failed: vec!["Button custom\"button\n".into()], ..Default::default() };
+        let j = qui::json::parse(&report_json(&r)).unwrap();
+        let Some(qui::json::Value::Arr(f)) = j.get("failed") else { panic!("expected failed array") };
+        assert_eq!(f[0], qui::json::Value::Str("Button custom\"button\n".into()));
+    }
+
+    /// e1m1 and e1m3 at skill 3: everything killed, found and triggered, and
+    /// the exit taken.
+    #[test]
+    fn breaks_episode_one_maps() {
+        let base = base();
+        let fs = mount(&base, "id1");
+        if fs.open("progs.dat").is_none() {
             eprintln!("no game data; skipping");
             return;
         }
-        let opt = bot::Options { skill: 3, max_time: None, verbose: false, routes: None, fresh: false, seed: 0, hints: None };
-        let r = bot::run(mount(&base, "id1"), "e1m1", &opt);
-        assert!(r.errors.is_empty(), "{:?}", r.errors);
-        assert!(r.secrets + 1 >= r.total_secrets, "secrets {}/{}", r.secrets, r.total_secrets);
-        assert!(r.kills * 10 >= r.total_monsters * 9, "kills {}/{}", r.kills, r.total_monsters);
-        assert!(r.exited, "never reached the exit");
-    }
-
-    /// The raised touch triggers in hip2m2 must be reached by jumping, rather
-    /// than repeatedly returning to their floor nodes by noclip. Shootable
-    /// door buttons should use reachable firing positions during recovery.
-    #[test]
-    fn hip2m2_raised_triggers() {
-        let base = std::env::var_os("QUAKE_BASEDIR").map_or_else(
-            || Path::new(env!("CARGO_MANIFEST_DIR")).join("../../vkQuake directory with maps"),
-            PathBuf::from,
-        );
-        let fs = mount(&base, "hipnotic");
-        if fs.open("maps/hip2m2.bsp").is_none() || !base.join("hipnotic").is_dir() {
-            return;
-        }
-        let opt = bot::Options { skill: 3, max_time: None, verbose: false, routes: None, fresh: true, seed: 0, hints: None };
-        let r = bot::run(fs, "hip2m2", &opt);
-        assert!(r.errors.is_empty(), "{:?}", r.errors);
-        assert_eq!(r.kills, r.total_monsters, "kills {}/{}", r.kills, r.total_monsters);
-        assert_eq!(r.secrets, r.total_secrets, "secrets {}/{}", r.secrets, r.total_secrets);
-        assert!(r.exited, "never reached the exit");
-        assert!(r.noclip_uses <= 4, "{} noclips; trigger/button navigation regressed", r.noclip_uses);
-    }
-
-    #[test]
-    fn jump_probe_does_not_advance_live_game() {
-        let base = std::env::var_os("QUAKE_BASEDIR").map_or_else(
-            || Path::new(env!("CARGO_MANIFEST_DIR")).join("../../vkQuake directory with maps"), PathBuf::from,
-        );
-        let fs = mount(&base, "id1");
-        if fs.open("maps/e1m1.bsp").is_none() || fs.open("progs.dat").is_none() { return; }
-        let mut sv = qserver::Server::new(fs, qcore::cvar::Cvars::new(), 1);
-        sv.spawn_server("e1m1").unwrap();
-        sv.connect_local().unwrap();
-        for _ in 0..10 { sv.frame(movement::DT); }
-        let before = sv.save_game();
-        let time = sv.time();
-        let level = sv.level.as_ref().unwrap();
-        let from = qcore::math::Vec3::from_array(level.vm.ent_v(1, sv.core.sv.fields.origin));
-        let mut probe = movement::Probe::snapshot(&sv, 270.0).unwrap();
-        for d in [qcore::math::Vec3::new(104.0, 0.0, 0.0), qcore::math::Vec3::new(0.0, 104.0, 40.0)] {
-            let _ = probe.recover(from, from + d, &[]);
-        }
-        assert_eq!(sv.time(), time);
-        assert_eq!(sv.save_game(), before, "probe altered live QC globals or edicts");
-        assert!(sv.error().is_none());
-    }
-
-    #[test]
-    fn e3m7_physics_jump_recovery() {
-        let base = std::env::var_os("QUAKE_BASEDIR").map_or_else(
-            || Path::new(env!("CARGO_MANIFEST_DIR")).join("../../vkQuake directory with maps"), PathBuf::from,
-        );
-        let fs = mount(&base, "id1");
-        if fs.open("maps/e3m7.bsp").is_none() || fs.open("progs.dat").is_none() { return; }
-        let opt = bot::Options { skill: 3, max_time: None, verbose: false, routes: None, fresh: true, seed: 0, hints: None };
-        let r = bot::run(fs, "e3m7", &opt);
-        assert!(r.errors.is_empty(), "{:?}", r.errors);
-        assert!(r.exited);
-        assert!(r.kills >= 40);
-        assert_eq!(r.secrets, r.total_secrets, "all four secrets should be collected");
-        assert!(r.noclip_uses - r.monster_noclips <= 5, "navigation assists regressed");
-        assert!(r.noclip_uses <= 8, "{} total assists", r.noclip_uses);
-        assert!(r.jump_links > 0 && r.jumps_completed > 0, "no verified jump was executed");
-    }
-
-    #[test]
-    fn failed_approaches_and_trigger_contacts_recover_coverage() {
-        let base = std::env::var_os("QUAKE_BASEDIR").map_or_else(
-            || Path::new(env!("CARGO_MANIFEST_DIR")).join("../../vkQuake directory with maps"), PathBuf::from,
-        );
-        let fs = mount(&base, "id1");
-        if fs.open("progs.dat").is_none() { return; }
-        let opt = bot::Options { skill: 3, max_time: None, verbose: false, routes: None, fresh: true, seed: 0, hints: None };
-        for (map, kills, secrets) in [("e1m3", 65, 3), ("e3m3", 47, 1), ("e4m2", 40, 4), ("e1m6", 30, 4), ("e3m6", 61, 2)] {
-            if fs.open(&format!("maps/{map}.bsp")).is_none() { continue; }
+        let opt = bot::Options { skill: 3, max_time: None, verbose: false };
+        for map in ["e1m1", "e1m3"] {
             let r = bot::run(mount(&base, "id1"), map, &opt);
             assert!(r.errors.is_empty(), "{map}: {:?}", r.errors);
-            assert!(r.exited, "{map}: exit lost");
-            assert!(r.kills >= kills && r.secrets >= secrets,
-                "{map}: kills {}/{}, secrets {}/{}", r.kills, r.total_monsters, r.secrets, r.total_secrets);
+            assert_eq!(r.kills, r.total_monsters, "{map}: kills; failed {:?}", r.failed);
+            assert_eq!(r.secrets, r.total_secrets, "{map}: secrets; failed {:?}", r.failed);
+            assert!(r.exited, "{map}: never reached the exit");
         }
     }
-
 }

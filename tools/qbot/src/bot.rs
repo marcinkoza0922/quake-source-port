@@ -1,69 +1,38 @@
-//! One map run: spawn a headless server, build the nav graph, then chase goals
-//! (secrets, monsters, buttons, keys, finally the exit) with usercmds until
-//! none are left.
-//!
-//! The bot moves by game means only: walking, jumping, riding lifts and
-//! teleporters. When an edge turns out impassable (a locked door, a lift that
-//! needs a trigger) it is blocked and other goals come first; blocks are lifted
-//! once something changed. Noclip (an instant `setpos`) is the last resort and
-//! is reported as a soft failure.
+//! One map run: spawn a headless server, give the player god mode and noclip,
+//! then work through every goal the edicts reveal (monsters, secrets,
+//! triggers, buttons, shootable brushes, keys, runes) and finally touch the
+//! exit. The bot does not try to play like a person: it knows where
+//! everything is and flies straight through walls. Its job is to set off
+//! every scripted event on the level and see whether the level (or the
+//! engine) breaks.
 
-use crate::hints;
-use crate::movement::{Jump, Probe};
-use crate::actions::{Approach, ButtonTrip, LiftAction, LiftStage};
-use crate::nav::{self, Blocked, EdgeKind, Forbid, FxBuild, Geo, Nav, path_to};
-use crate::route::{self, Route};
 use qcore::cvar::Cvars;
 use qcore::fs::Fs;
 use qcore::math::Vec3;
 use qserver::{ClientMove, Server};
 use qvm::Vm;
 use qworld::hull::CollisionModel;
-use qworld::{CONTENTS_WATER, FL_MONSTER, MOVETYPE_NOCLIP, SOLID_BSP, SOLID_NOT, SOLID_TRIGGER};
-use std::collections::HashMap;
-use std::path::PathBuf;
+use qworld::{FL_MONSTER, MOVETYPE_NOCLIP, SOLID_BBOX, SOLID_BSP, SOLID_NOT, SOLID_TRIGGER};
+use std::collections::HashSet;
 use std::sync::Arc;
 use std::time::Instant;
-mod navbuild;
-use navbuild::*;
-mod jump;
-mod lift;
-mod plan;
-mod spots;
-mod control;
-mod think;
-mod state;
-mod util;
-use util::*;
-mod run;
-pub use run::*;
+mod fly;
+mod goals;
 
-/// Server tick: 20 Hz like a dedicated server (sys_ticrate 0.05), so a third
-/// of the frames a 72 Hz listen server would run.
+/// Server tick: 20 Hz like a dedicated server (sys_ticrate 0.05).
 const DT: f64 = 1.0 / 20.0;
-/// Frames per second of sim time.
-const FPS: u32 = 20;
-const GOAL_TIMEOUT: f64 = 30.0;
-const STUCK_TIME: f64 = 4.0;
-/// A node counts as reached this close (XY); a tick moves the bot 16 units.
-const REACH: f32 = 20.0;
-/// How long to wait for a lift before blocking it.
-const RIDE_TIME: f64 = 15.0;
+/// Noclip flight speed (sv_maxspeed is raised to this for the bot).
+const SPEED: f32 = 1000.0;
+/// Sim seconds a single goal may take before it counts as failed.
+const GOAL_TIMEOUT: f64 = 20.0;
+const IT_KEY1: i32 = 131072;
+const IT_KEY2: i32 = 262144;
 
 pub struct Options {
     pub skill: i32,
     /// Sim time limit; `None` scales with the number of goals.
     pub max_time: Option<f64>,
     pub verbose: bool,
-    /// Where cached routes live (`<dir>/<map>.qbr`); `None` disables caching.
-    pub routes: Option<PathBuf>,
-    /// Ignore cached routes (still record new ones).
-    pub fresh: bool,
-    /// Variant seed: 0 is the plain bot; others vary goal order, routes and
-    /// lift patience, deterministically per seed.
-    pub seed: u64,
-    /// Where per-map hint files live (`<dir>/<map>.txt`); `None`: no hints.
-    pub hints: Option<PathBuf>,
 }
 
 #[derive(Default)]
@@ -72,99 +41,107 @@ pub struct Report {
     pub total_monsters: i32,
     pub secrets: i32,
     pub total_secrets: i32,
-    /// Soft failures: places the bot could not reach by game means.
-    pub noclip_uses: u32,
-    pub assists: Vec<crate::diagnostics::Assist>,
-    pub goals_failed: u32,
-    /// Triggers the bot never got into (often monster-only or decorative).
-    pub triggers_missed: u32,
-    /// Noclips to monsters (included in `noclip_uses`): coverage, not
-    /// navigation; the rest went to goals a player has to reach.
-    pub monster_noclips: u32,
-    /// Noclips directly to exit goals (excludes returns to the graph).
-    pub exit_noclips: u32,
-    pub nav_nodes: usize,
-    pub jump_links: u32,
-    pub jumps_completed: u32,
-    pub jump_failures: u32,
-    pub lift_detours: u32,
-    pub prerequisite_actions: u32,
-    pub sim_time: f64,
-    pub wall_time: f64,
+    /// Trigger volumes entered (trigger_once/multiple/teleport/push/...).
+    pub triggers: u32,
+    pub total_triggers: u32,
+    /// Buttons pressed or shot, shootable brushes broken.
+    pub buttons: u32,
+    pub total_buttons: u32,
+    /// Keys and runes picked up.
+    pub pickups: u32,
+    pub total_pickups: u32,
+    /// Goals given up on, as "kind classname #ent at (x y z): why".
+    pub failed: Vec<String>,
     /// The level has a trigger_changelevel.
     pub has_exit: bool,
-    /// Left the level through its exit.
+    /// Left the level through its exit (or reached its intermission).
     pub exited: bool,
-    /// The bot couldn't get back onto the nav graph and gave up early.
-    pub stranded: bool,
-    /// Cached route: "replayed", "diverged t=…", "recorded" or empty.
-    pub route: String,
-    /// Finished by game means only: exit reached, no noclip, no error.
-    pub clean: bool,
-    /// A clean run's recording, for the caller to cache.
-    pub recording: Option<Route>,
-    pub seed: u64,
-    /// Runs made for this map, and how many finished cleanly.
-    pub variants: u32,
-    pub clean_variants: u32,
+    pub sim_time: f64,
+    pub wall_time: f64,
     pub errors: Vec<String>,
+}
+
+impl Report {
+    /// Scripted events set off: what the baseline compares besides kills,
+    /// secrets and the exit.
+    pub fn events(&self) -> u32 {
+        self.triggers + self.buttons + self.pickups
+    }
 }
 
 #[derive(Clone, Copy, PartialEq, Debug)]
 enum Kind {
-    Secret,
     Monster,
-    Button,
-    Key,
-    /// Runes that fire progression targets.
-    Pickup,
-    /// A brush entity that opens when shot (secret doors).
-    Shoot,
-    /// trigger_once / trigger_multiple: walk through it (fires the level's
-    /// scripting, e.g. monsters teleporting in from closets).
+    Secret,
+    /// Any other touchable trigger volume.
     Trigger,
+    /// func_button pressed by touch (or shot when it has health).
+    Button,
+    /// A brush or box that opens or breaks when shot.
+    Shoot,
+    /// Keys and runes.
+    Pickup,
     Exit,
 }
 
 struct Goal {
     ent: u32,
     kind: Kind,
+    class: String,
     done: bool,
-    failed: bool,
-    /// Put off until nothing else is reachable (timed out, out of sight).
-    deferred: bool,
-    defers: u32,
-    initial_state: f32,
-    noclips: u32,
-    /// Fixed entry node (exits).
-    node: Option<u32>,
-    /// Exits: the touch function, restored when the exit becomes the goal.
-    touch: i32,
-    /// Shootable goals: nodes with a view of the target, and where the
-    /// target was when they were found.
-    views: Vec<u32>,
-    views_at: Option<Vec3>,
-    /// Keys: placed in the world (became a trigger) at least once.
+    /// Why the last attempt failed; failed goals get one more try once
+    /// everything else is done (the level may have opened up by then).
+    failed: Option<String>,
+    tries: u32,
+    /// Pickups: placed in the world (became a trigger) at least once.
     armed: bool,
+    /// Buttons: `state` at spawn; pressed once it changes.
+    initial_state: f32,
+    /// Exits: the touch function, cleared until the exit becomes the goal.
+    touch: i32,
 }
 
-/// A lift between two stop nodes.
-#[derive(Clone, Copy)]
-struct Lift {
-    ent: u32,
-    /// Top surface heights at the low and high stops.
-    lo: f32,
-    hi: f32,
-    mins: Vec3,
-    maxs: Vec3,
-    plat: bool,
+struct Ofs {
+    origin: usize,
+    absmin: usize,
+    absmax: usize,
+    health: usize,
+    flags: usize,
+    solid: usize,
+    takedamage: usize,
+    movetype: usize,
+    touch: usize,
+    view_ofs: usize,
+    state: Option<usize>,
+    items: Option<usize>,
+    modelindex: Option<usize>,
+    attack_finished: Option<usize>,
 }
 
-struct JumpAction {
-    edge: (u32, u32),
-    since: f64,
-    tick: Option<usize>,
-    released: bool,
+impl Ofs {
+    fn new(vm: &Vm) -> Option<Ofs> {
+        let f = |n| vm.field_ofs(n);
+        Some(Ofs {
+            origin: f("origin")?,
+            absmin: f("absmin")?,
+            absmax: f("absmax")?,
+            health: f("health")?,
+            flags: f("flags")?,
+            solid: f("solid")?,
+            takedamage: f("takedamage")?,
+            movetype: f("movetype")?,
+            touch: f("touch")?,
+            view_ofs: f("view_ofs")?,
+            state: f("state"),
+            items: f("items"),
+            modelindex: f("modelindex"),
+            attack_finished: f("attack_finished"),
+        })
+    }
+}
+
+fn v(a: [f32; 3]) -> Vec3 {
+    Vec3::from_array(a)
 }
 
 struct Bot<'a> {
@@ -173,97 +150,284 @@ struct Bot<'a> {
     me: u32,
     o: Ofs,
     cm: Arc<CollisionModel>,
-    geo: Geo,
-    nav: Nav,
-    goals: Vec<Goal>,
     opt: &'a Options,
     rep: Report,
-    /// Current goal, its path and progress.
+    goals: Vec<Goal>,
+    /// Edicts already turned into goals (freed ones drop out, so a reused
+    /// slot is picked up again).
+    known: HashSet<u32>,
     cur: Option<usize>,
-    path: Vec<u32>,
-    step: usize,
     goal_start: f64,
-    best_dist: f32,
-    best_time: f64,
-    last_replan: f64,
-    yaw: f32,
-    /// Impulses still to send, popped one per frame.
-    impulses: Vec<u8>,
-    /// Consecutive flights back to the graph without reaching a goal.
-    returns: u32,
-    stranded: bool,
-    /// Weapon impulse last selected.
+    /// Where to stand for the current goal, and when it was worked out.
+    spot: Option<Vec3>,
+    spot_at: f64,
+    /// Shooting: the part of the target aimed at, from its centre.
+    aim_point: Vec3,
+    /// Walking into a button (noclip off) until this time.
+    pushing_until: f64,
+    pushes: u32,
+    /// Frames the bot has not moved although it tried to fly.
+    pinned: u32,
+    /// Last `setpos` to a goal that flight didn't reach.
+    warped_at: f64,
     weapon: u8,
-    max_time: f64,
-    blocked: Blocked,
-    /// Nodes the bot couldn't walk onto from where it stood; not used as the
-    /// start of a path until blocks are lifted.
-    bad_src: std::collections::HashSet<u32, FxBuild>,
-    /// A goal was finished since blocks and deferrals were last lifted.
-    progress: bool,
-    lifts: HashMap<(u32, u32), Lift, FxBuild>,
-    /// Waiting on a lift edge (path step) since.
-    ride_since: Option<(usize, f64)>,
-    lift_action: Option<LiftAction>,
-    action_jump: bool,
-    jump_links: HashMap<(u32, u32), Jump, FxBuild>,
-    jump_tried: std::collections::HashSet<(u32, u32), FxBuild>,
-    jump_action: Option<JumpAction>,
-    local_recovery_goals: std::collections::HashSet<u32, FxBuild>,
-    jump_failed_goals: std::collections::HashSet<u32, FxBuild>,
-    /// QC's jump impulse, measured from an ordinary successful jump.
-    jump_speed: Option<f32>,
-    /// A shootable button being shot to call the lift the bot waits on.
-    call: Option<u32>,
-    /// Time of the last noclip, for goals reached that way.
-    noclip_at: f64,
-    /// Whether the last noclip went to the current goal (not back to the graph).
-    noclip_to_goal: bool,
+    impulses: Vec<u8>,
     intermission: Option<usize>,
-    /// For rebuilding the nav graph.
-    forbid: Vec<Forbid>,
-    start: Vec3,
-    /// Mover positions the graph was built with.
-    mover_sig: u64,
-    /// Frames run so far.
-    frame: u32,
-    /// Target picked by `target()`, refreshed every few frames.
-    target_cache: Option<(Vec3, u32)>,
-    /// What this run did, for the route cache.
-    rec: Route,
-    /// The cached route being replayed.
-    replay: Option<Route>,
-    /// Edges gated by locked doors at the last replan (for the log).
-    gated: usize,
-    /// This map's navigation hints, applied on every graph build.
-    hints: Vec<hints::Line>,
+}
+
+pub fn run(fs: Fs, map: &str, opt: &Options) -> Report {
+    let wall = Instant::now();
+    let mut rep = Report::default();
+    let mut sv = Server::new(fs, Cvars::new(), 1);
+    // Nobody reads the client's datagrams.
+    sv.core.skip_entity_updates = true;
+    sv.command(&format!("skill {}", opt.skill));
+    // Classic noclip: wishvel.z is the up move, so flight is easy to steer
+    // independently of where the bot aims.
+    sv.command("sv_altnoclip 0");
+    sv.command(&format!("sv_maxspeed {SPEED}"));
+    if let Err(e) = sv.spawn_server(map) {
+        rep.errors.push(format!("spawn: {e}"));
+        return rep;
+    }
+    let Some(c) = sv.connect_local() else {
+        rep.errors.push("connect failed".into());
+        return rep;
+    };
+    sv.command("god");
+    let l = sv.level.as_ref().unwrap();
+    let Some(o) = Ofs::new(&l.vm) else {
+        rep.errors.push("progs lack standard fields".into());
+        return rep;
+    };
+    let cm = l.world.worldmodel.clone();
+    let intermission = l.vm.global_ofs("intermission_running");
+    let mut bot = Bot {
+        sv,
+        c,
+        me: c as u32 + 1,
+        o,
+        cm,
+        opt,
+        rep,
+        goals: Vec::new(),
+        known: HashSet::new(),
+        cur: None,
+        goal_start: 0.0,
+        spot: None,
+        spot_at: -100.0,
+        aim_point: Vec3::ZERO,
+        pushing_until: -1.0,
+        pushes: 0,
+        pinned: 0,
+        warped_at: -100.0,
+        weapon: 5,
+        impulses: Vec::new(),
+        intermission,
+    };
+    bot.set_noclip(true);
+    bot.scan();
+    bot.rep.has_exit = bot.goals.iter().any(|g| g.kind == Kind::Exit);
+    if opt.verbose {
+        eprintln!("{map}: {} goals", bot.goals.len());
+    }
+    let max_time = opt.max_time.unwrap_or_else(|| (bot.goals.len() as f64 * 10.0).max(600.0));
+    bot.main_loop(map, max_time);
+    for g in bot.goals.iter().filter(|g| !g.done && g.kind != Kind::Exit) {
+        let why = g.failed.as_deref().unwrap_or(if bot.dormant(g) { "never activated" } else { "out of time" });
+        let line = format!("{:?} {} #{} at {:?}: {why}", g.kind, g.class, g.ent, bot.center(g.ent));
+        bot.rep.failed.push(line);
+    }
+    let st = bot.sv.stats();
+    let mut rep = bot.rep;
+    for g in &bot.goals {
+        let (done, total) = match g.kind {
+            Kind::Trigger => (&mut rep.triggers, &mut rep.total_triggers),
+            Kind::Button | Kind::Shoot => (&mut rep.buttons, &mut rep.total_buttons),
+            Kind::Pickup => (&mut rep.pickups, &mut rep.total_pickups),
+            _ => continue,
+        };
+        *total += 1;
+        *done += g.done as u32;
+    }
+    rep.kills = st.killed_monsters;
+    rep.total_monsters = st.total_monsters;
+    rep.secrets = st.found_secrets;
+    rep.total_secrets = st.total_secrets;
+    rep.sim_time = bot.sv.time();
+    rep.wall_time = wall.elapsed().as_secs_f64();
+    rep
 }
 
 impl Bot<'_> {
-}
+    fn vm(&self) -> &Vm {
+        &self.sv.level.as_ref().unwrap().vm
+    }
 
-#[cfg(test)]
-mod tests {
-    use super::*;
-    use crate::actions::opener_node;
+    fn me_origin(&self) -> Vec3 {
+        v(self.vm().ent_v(self.me, self.o.origin))
+    }
 
-    #[test]
-    fn shootable_opener_on_disconnected_ledge() {
-        let mut nav = Nav::empty(Vec3::ZERO, Vec::new());
-        let start = nav.add(Vec3::ZERO);
-        let ledge = nav.add(Vec3::new(0.0, 0.0, 128.0));
-        let near = nav.add(Vec3::new(32.0, 0.0, 0.0));
-        let far = nav.add(Vec3::new(64.0, 0.0, 0.0));
-        nav.link(start, near, EdgeKind::Walk, 32.0);
-        nav.link(near, far, EdgeKind::Walk, 32.0);
-        let (dist, _) = nav.dijkstra(start, &Blocked::default(), 0);
-        assert_eq!(opener_node(Some(ledge), &[ledge, far, near], &dist), Some(near));
-        assert_eq!(opener_node(None, &[far, near], &dist), Some(near));
-        assert_eq!(opener_node(Some(far), &[near], &dist), Some(far));
-        assert_eq!(opener_node(Some(ledge), &[], &dist), None);
-        // Blocking the corridor must not leave a stale shooting approach.
-        let blocked = Blocked::from_iter([(start, near)]);
-        let (dist, _) = nav.dijkstra(start, &blocked, 0);
-        assert_eq!(opener_node(Some(ledge), &[far, near], &dist), None);
+    fn eye(&self) -> Vec3 {
+        self.me_origin() + v(self.vm().ent_v(self.me, self.o.view_ofs))
+    }
+
+    fn bounds(&self, e: u32) -> (Vec3, Vec3) {
+        let vm = self.vm();
+        (v(vm.ent_v(e, self.o.absmin)), v(vm.ent_v(e, self.o.absmax)))
+    }
+
+    fn center(&self, e: u32) -> Vec3 {
+        let (a, b) = self.bounds(e);
+        (a + b) * 0.5
+    }
+
+    fn set_noclip(&mut self, on: bool) {
+        let mt = if on { MOVETYPE_NOCLIP } else { qworld::MOVETYPE_WALK };
+        let (me, ofs) = (self.me, self.o.movetype);
+        self.sv.level.as_mut().unwrap().vm.set_ent_f(me, ofs, mt as f32);
+    }
+
+    fn main_loop(&mut self, map: &str, max_time: f64) {
+        let mut last_refill = -100.0;
+        let mut last_scan = 0.0;
+        let mut intermission_since: Option<f64> = None;
+        loop {
+            let t = self.sv.time();
+            if t > max_time {
+                break;
+            }
+            if self.sv.core.changelevel_issued || !self.sv.core.sv.name.eq_ignore_ascii_case(map) {
+                self.rep.exited = true;
+                break;
+            }
+            if let Some(e) = self.sv.error() {
+                self.rep.errors.push(format!("t={t:.2}: {}", e.to_string().replace('\n', " | ")));
+                break;
+            }
+            if t - last_scan > 2.0 {
+                self.scan();
+                last_scan = t;
+            }
+            self.update_goals();
+            let mut mv = ClientMove::default();
+            if self.intermission.is_some_and(|g| self.vm().g_f(g) != 0.0) {
+                // Finales have no changelevel: the intermission is the end.
+                if t - *intermission_since.get_or_insert(t) > 8.0 {
+                    self.rep.exited = true;
+                    break;
+                }
+                mv.buttons = ((t * 4.0) as i64 % 2 == 0) as u8;
+            } else {
+                if t - last_refill > 5.0 {
+                    // All weapons and ammo, then back to the current weapon.
+                    self.impulses = vec![self.weapon, 9];
+                    last_refill = t;
+                }
+                if self.cur.is_none() {
+                    self.cur = self.pick();
+                    self.goal_start = t;
+                    self.spot = None;
+                    self.pushes = 0;
+                    if let Some(i) = self.cur
+                        && self.opt.verbose
+                    {
+                        let g = &self.goals[i];
+                        eprintln!("  t={t:.1} goal {:?} {} #{} at {:?}", g.kind, g.class, g.ent, self.center(g.ent));
+                    }
+                }
+                let Some(i) = self.cur else {
+                    // Nothing left and no exit to take.
+                    break;
+                };
+                if t - self.goal_start > GOAL_TIMEOUT {
+                    self.fail(i, "timed out");
+                    self.set_noclip(true);
+                    continue;
+                }
+                mv = self.act(i, t);
+                // QC ignores impulses until the weapon is ready again: hold
+                // fire while any are queued and send one once it is.
+                if !self.impulses.is_empty() {
+                    mv.buttons &= !1;
+                    let ready = self.o.attack_finished.is_none_or(|f| t as f32 >= self.vm().ent_f(self.me, f));
+                    if ready {
+                        mv.impulse = self.impulses.pop().unwrap();
+                    }
+                }
+            }
+            self.step(mv);
+        }
+    }
+
+    /// Escape a spot QC keeps putting the bot back to (see `step`).
+    fn unpin(&mut self, at: Vec3) {
+        for i in 0..self.goals.len() {
+            let g = &self.goals[i];
+            if g.kind == Kind::Trigger && !g.done && !self.vm().is_free(g.ent) {
+                let (a, b) = self.bounds(g.ent);
+                if (at.max(a).min(b) - at).length() < 64.0 {
+                    self.goals[i].done = true;
+                    if self.cur == Some(i) {
+                        self.cur = None;
+                    }
+                }
+            }
+        }
+        let to = self.cur.map_or(at + Vec3::new(0.0, 0.0, 128.0), |i| self.center(self.goals[i].ent));
+        if self.opt.verbose {
+            eprintln!("  t={:.1} pinned at {at:?}, setpos to {to:?}", self.sv.time());
+        }
+        self.sv.command(&format!("setpos {} {} {}", to.x, to.y, to.z));
+    }
+
+    fn step(&mut self, mv: ClientMove) {
+        // impulse 9 also hands out every key in id1: strip the keys it
+        // added, so key doors stay locked until the key is picked up.
+        let keys_before = (mv.impulse == 9).then(|| self.o.items.map(|it| (it, self.vm().ent_f(self.me, it) as i32))).flatten();
+        let before = self.me_origin();
+        self.sv.set_move(self.c, mv);
+        self.sv.frame(DT);
+        if self.sv.level.is_none() {
+            return;
+        }
+        // A teleporter moves the bot away before it is ever seen inside:
+        // a jump further than flight goes counts for triggers it was at.
+        let reach = SPEED * DT as f32 + 32.0;
+        let moved = (self.me_origin() - before).length();
+        // A teleporter whose destination lies inside it puts the bot back
+        // every frame: count its triggers and jump out to the goal.
+        let flying = self.vm().ent_f(self.me, self.o.movetype) as i32 == MOVETYPE_NOCLIP;
+        self.pinned = if flying && moved < 1.0 && (mv.forward != 0.0 || mv.side != 0.0 || mv.up != 0.0) { self.pinned + 1 } else { 0 };
+        if self.pinned > 20 {
+            self.pinned = 0;
+            self.unpin(before);
+        }
+        if moved > reach {
+            for i in 0..self.goals.len() {
+                let g = &self.goals[i];
+                if g.kind == Kind::Trigger && !g.done && !self.vm().is_free(g.ent) {
+                    let (a, b) = self.bounds(g.ent);
+                    let p = before.max(a).min(b);
+                    if (p - before).length() < reach {
+                        self.goals[i].done = true;
+                        if self.cur == Some(i) {
+                            self.cur = None;
+                        }
+                    }
+                }
+            }
+        }
+        if let Some((it, before)) = keys_before
+            && let Some(l) = self.sv.level.as_mut()
+        {
+            let now = l.vm.ent_f(self.me, it) as i32;
+            let added = now & (IT_KEY1 | IT_KEY2) & !before;
+            if added != 0 {
+                l.vm.set_ent_f(self.me, it, (now & !added) as f32);
+            }
+        }
+        let _ = self.sv.take_reliable(self.c);
+        let _ = self.sv.take_datagrams(self.c);
     }
 }
