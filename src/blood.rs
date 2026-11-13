@@ -6,6 +6,7 @@ use qpart::World;
 use qrender::{FteBatch, FteBlend, FteVertex, ModelId, PicId, RenderEntity};
 use std::collections::{HashMap, VecDeque};
 mod appearance;
+mod droplets;
 #[cfg(test)]
 mod effects_tests;
 mod events;
@@ -64,6 +65,7 @@ pub struct Blood {
     actors: HashMap<u32, (ModelId, Vec3)>,
     gibs: HashMap<u32, usize>,
     explosions: Vec<(Vec3, f64)>,
+    droplets: Vec<droplets::Droplet>,
     pub debug_hits: Vec<(Vec3, bool)>,
 }
 
@@ -221,6 +223,7 @@ impl Blood {
         if cl.time < self.time {
             self.clear();
         }
+        let dt = (cl.time - self.time).clamp(0.0, 0.1) as f32;
         self.time = cl.time;
         let Some(bsp) = lv.bsp.as_ref() else { return };
         let cm = self
@@ -276,6 +279,7 @@ impl Blood {
             })
             .collect();
         self.impacts(set, cl, &world, &poses, view, debris);
+        self.step_droplets(&world, dt, cl.time);
         if set.gibs {
             let mut sources: Vec<_> = debris.blood_sources().collect();
             sources.extend(
@@ -337,17 +341,19 @@ impl Blood {
                 .ok();
         }
         if let Some(pic) = self.pic {
-            self.draw(set, cl.time, &world, &poses, pic, out);
+            self.draw(set, cl.time, &world, &poses, view, pic, out);
         }
         self.cm = Some(cm);
     }
 
+    #[allow(clippy::too_many_arguments)]
     fn draw(
         &self,
         set: Settings,
         time: f64,
         world: &dyn World,
         poses: &HashMap<u32, (&RenderEntity, Vec<Vec3>)>,
+        view: Vec3,
         pic: PicId,
         out: &mut Geometry,
     ) {
@@ -401,6 +407,7 @@ impl Blood {
                 }
             }
         }
+        self.draw_droplets(view, out);
         let count = out.1.len() as u32 - first;
         if count > 0 {
             out.2.push(FteBatch {

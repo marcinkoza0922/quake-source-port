@@ -96,6 +96,9 @@ fn shootable_objects_blood_particles_require_a_flesh_mesh() {
         &crate::debris::Debris::default(),
     );
     assert!(blood.marks.iter().any(|m| m.owner.is_some()));
+    assert!(!blood.droplets.is_empty(), "spray must be airborne first");
+    assert!(blood.marks.iter().all(|m| m.owner.is_some()));
+    blood.settle(&MovingFloor(Vec3::ZERO), 0.0);
     assert!(blood.marks.iter().any(|m| m.owner.is_none()));
 }
 
@@ -132,7 +135,9 @@ fn explosive_gib_spray_reaches_distant_surfaces() {
     let floor = MovingFloor(Vec3::new(0.0, 0.0, -200.0));
     blood.splat(&floor, Vec3::ZERO, Vec3::new(0.0, 0.0, -1.0), 0.0, 5.0);
     assert!(blood.marks.is_empty());
-    blood.burst(&floor, Vec3::ZERO, 0.0, settings());
+    blood.burst(Vec3::ZERO, settings());
+    assert!(blood.marks.is_empty(), "burst marks appear only on landing");
+    blood.settle(&floor, 0.0);
     assert!(
         blood.marks.len() >= 10,
         "expected a dense burst: {}",
@@ -185,6 +190,7 @@ fn only_an_explosion_that_gibs_flesh_produces_a_burst_once() {
         Vec3::ZERO,
         &debris,
     );
+    blood.settle(&world, 0.0);
     assert!(blood.marks.len() >= 20);
     let count = blood.marks.len();
     blood.impacts(
@@ -195,6 +201,7 @@ fn only_an_explosion_that_gibs_flesh_produces_a_burst_once() {
         Vec3::ZERO,
         &debris,
     );
+    blood.settle(&world, 0.0);
     assert_eq!(
         blood.marks.len(),
         count,
@@ -229,6 +236,7 @@ fn living_monster_bbox_hit_bleeds_when_shot_misses_animated_triangles() {
         Vec3::new(8.0, 8.0, 40.0),
         &crate::debris::Debris::default(),
     );
+    blood.settle(&MovingFloor(Vec3::ZERO), 0.0);
     assert!(
         blood.marks.iter().any(|m| m.owner.is_some()),
         "bbox damage should stain the closest skin surface"

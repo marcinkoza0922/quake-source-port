@@ -166,7 +166,7 @@ fn splat_clips_to_surface_follows_lift_and_fades() {
         gibs: true,
     };
     let mut first = (vec![], vec![], vec![]);
-    blood.draw(set, 0.0, &floor, &HashMap::new(), PicId(0), &mut first);
+    blood.draw(set, 0.0, &floor, &HashMap::new(), Vec3::ZERO, PicId(0), &mut first);
     assert!(!first.0.is_empty());
     assert!(
         first
@@ -180,6 +180,7 @@ fn splat_clips_to_surface_follows_lift_and_fades() {
         9.5,
         &MovingFloor(Vec3::new(12.0, 0.0, 8.0)),
         &HashMap::new(),
+        Vec3::ZERO,
         PicId(0),
         &mut moved,
     );
@@ -233,7 +234,7 @@ fn soldier_wounds_attach_to_skin_and_remain_on_deformed_mesh() {
         gibs: true,
     };
     let mut out = (vec![], vec![], vec![]);
-    blood.draw(set, 0.0, &qpart::EmptyWorld, &poses, PicId(0), &mut out);
+    blood.draw(set, 0.0, &qpart::EmptyWorld, &poses, Vec3::ZERO, PicId(0), &mut out);
     assert!(!out.0.is_empty());
     let first = Vec3::from(out.0[0].pos);
     assert!((first - patch.points[0].pos - Vec3::new(20.0, 3.0, -1.0)).length() < 0.13);
