@@ -76,6 +76,7 @@ impl Server {
                 crate::addons::gel_phys::tune(&l.gel, &ents, e, &mut p, &mut cmd);
             }
             qworld::user::client_think(&l.world, &mut ents, &p, e, &cmd);
+            crate::addons::dodge::apply(&mut l.dodges, &mut l.vm, c, i, mv);
         }
     }
 

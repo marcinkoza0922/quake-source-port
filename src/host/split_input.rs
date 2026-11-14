@@ -198,7 +198,9 @@ impl Host {
             if let Some(weapon) = choice {
                 g.toy.select(weapon, &g.cl, &mut fresh);
             }
-            let buttons = g.cmd.buttons | g.toy.buttons(inp.attack, inp.attack2, inp.jump);
+            let dodge = g.input.dodge_pressed();
+            let buttons = g.cmd.buttons | g.toy.buttons(inp.attack, inp.attack2, inp.jump)
+                | if dodge && allowed { qserver::addons::BUTTON_DODGE } else { 0 };
             let impulse = if fresh != 0 { fresh } else { g.cmd.impulse };
             g.cmd = g.cl.base_move(&InputState { attack: false, jump: false, impulse: 0, ..inp }, &sp, ft);
             g.cmd.buttons = buttons;

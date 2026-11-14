@@ -2,7 +2,7 @@
 //! listed cvars may be restored from a save header.
 use qcore::cvar::Cvars;
 const NAMES: &[&str] = &[
-    "addon_projectile_shotguns", "addon_shotgun_speed", "addon_bullet_time",
+    "addon_dodge", "addon_projectile_shotguns", "addon_shotgun_speed", "addon_bullet_time",
     "addon_bullet_time_toggle", "addon_bullet_time_meter",
     "addon_bullet_time_duration", "addon_bullet_time_regen",
 ];

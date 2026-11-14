@@ -103,9 +103,10 @@ pub(super) const CONTROLS_ALL: &[Item] = &[
     Item::ResetBinds,
     bind("Alt Fire (Add-ons)", "+attack2"),
     bind("Equipment Wheel (Add-ons)", "+equipwheel"),
+    bind("Dodge / Dive (Add-ons)", "+dodge"),
     bind("Bullet Time (Add-ons)", "+bullettime"),
 ];
-pub(super) const CONTROLS: &[Item] = CONTROLS_ALL.split_at(CONTROLS_ALL.len() - 3).0;
+pub(super) const CONTROLS: &[Item] = CONTROLS_ALL.split_at(CONTROLS_ALL.len() - 4).0;
 
 /// Reached from the Add-ons pages: how portals look and perform.
 pub(super) const PORTAL_GUN: &[Item] = &[

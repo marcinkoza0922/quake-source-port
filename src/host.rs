@@ -116,6 +116,7 @@ pub struct Host {
     boomerang_fx: crate::addons::boomerang_fx::Presentation,
     /// Player 1's add-on equipment (goggles) and equipment wheel.
     goggles: goggles::Goggles,
+    pend_dodge: bool,
     bullet_time: bullet_time::BulletTime,
     /// Split-screen players 2..6 (`cl_splitscreen`); player 1 is `cl`.
     pub guests: Vec<crate::splitscreen::Guest>,
@@ -247,6 +248,7 @@ impl Host {
             water_fx: Default::default(),
             boomerang_fx: Default::default(),
             goggles: Default::default(),
+            pend_dodge: false,
             bullet_time: Default::default(),
             guests: Vec::new(),
             p1_pad: None,

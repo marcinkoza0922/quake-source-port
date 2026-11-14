@@ -4,6 +4,7 @@ use super::*;
 #[derive(Default)]
 pub(super) struct Browser {
     selected: usize,
+    list_scroll: usize,
     /// Checklist, description, settings rows, then the new-game Start button.
     focus: usize,
     scroll: usize,
@@ -24,6 +25,12 @@ struct Addon {
     description: &'static str,
     alt: bool,
 }
+// Checklist ends before the dedicated help rows below it.
+const LIST_TOP: f32 = 58.0;
+const LIST_ROW: f32 = 20.0;
+const LIST_VISIBLE: usize = 8;
+const LIST_BOTTOM: f32 = LIST_TOP + LIST_ROW * LIST_VISIBLE as f32;
+
 const ADDON: &[Addon] = &[
     Addon {
         name: "Portal Gun",
@@ -107,11 +114,18 @@ const ADDON: &[Addon] = &[
         weapons: &[], page: Some(Page::BulletTime), alt: false,
         description: "Use the dedicated Bullet Time action to slow the whole local game to 20% speed. Hold is the default; Toggle switches on each press. The optional meter limits use in real seconds and regenerates while inactive. Disable the meter for unlimited use. Remap the action and configure duration and regeneration below.",
     },
+    Addon {
+        name: "Dodge / Dive", id: "dodge", cvar: "addon_dodge",
+        weapons: &[], page: None, alt: false,
+        description: "Press Dodge with a movement direction on the ground or in midair: dive forward or leap backward and sideways. Diagonals are supported. Each press launches once, with a short recovery. The player body animates in third person. Assign the Dodge action below or in Controls.",
+    },
+
 ];
 
 impl Addon {
     fn equipment_action(&self) -> Option<(&'static str, &'static str)> {
         match self.id {
+            "dodge" => Some(("Dodge / Dive", "+dodge")),
             "goggles" => Some(("Change Goggles", "goggles cycle")),
             "bullettime" => Some(("Bullet Time", "+bullettime")),
             _ => None,
@@ -171,6 +185,17 @@ impl Menu {
         self.addon_ui.focus.checked_sub(2)
             .and_then(|row| self.selected_addon().weapons.get(row)).map(|weapon| weapon.slot)
     }
+    fn list_offset(&self) -> usize {
+        self.addon_ui.list_scroll.min(ADDON.len().saturating_sub(LIST_VISIBLE))
+    }
+    fn reveal_addon_selection(&mut self) {
+        let offset = self.list_offset();
+        self.addon_ui.list_scroll = if self.addon_ui.selected < offset {
+            self.addon_ui.selected
+        } else if self.addon_ui.selected >= offset + LIST_VISIBLE {
+            self.addon_ui.selected + 1 - LIST_VISIBLE
+        } else { offset };
+    }
     fn browser_max_offset(&self) -> f32 {
         let a = self.selected_addon();
         (a.row_y(a.row_count() - 1) + 16.0 - 322.0).max(0.0)
@@ -197,8 +222,9 @@ impl Menu {
             && (24.0..196.0).contains(&x) && (264.0..286.0).contains(&y) {
             return Some((self.addon_ui.selected, self.browser_last_focus()));
         }
-        if (20.0..200.0).contains(&x) && (58.0..218.0).contains(&y) {
-            return Some((((y - 58.0) / 20.0) as usize, 0));
+        if (20.0..200.0).contains(&x) && (LIST_TOP..LIST_BOTTOM).contains(&y) {
+            let index = self.list_offset() + ((y - LIST_TOP) / LIST_ROW) as usize;
+            return (index < ADDON.len()).then_some((index, 0));
         }
         if (216.0..620.0).contains(&x) {
             if (174.0..232.0).contains(&y) {
@@ -256,6 +282,20 @@ impl Menu {
         let right = matches!(key, K_RIGHTARROW | K_DPAD_RIGHT);
         let wheel = matches!(key, K_MWHEELUP | K_MWHEELDOWN);
         let paging = matches!(key, K_PGUP | K_PGDN);
+        let over_list = self.mouse.is_some_and(|(x, y)| (20.0..200.0).contains(&x) && (LIST_TOP..LIST_BOTTOM).contains(&y));
+        if (wheel && over_list) || (paging && self.addon_ui.focus == 0) {
+            let step = if paging { LIST_VISIBLE } else { 1 };
+            let max = ADDON.len().saturating_sub(LIST_VISIBLE);
+            self.addon_ui.list_scroll = if matches!(key, K_MWHEELUP | K_PGUP) {
+                self.list_offset().saturating_sub(step)
+            } else { (self.list_offset() + step).min(max) };
+            if paging {
+                self.addon_ui.selected = self.addon_ui.selected.clamp(self.list_offset(), (self.list_offset() + LIST_VISIBLE - 1).min(ADDON.len() - 1));
+                self.addon_ui.scroll = 0;
+                self.addon_ui.settings_scroll = 0.0;
+            }
+            return true;
+        }
         let over_settings = self.mouse.is_some_and(|(x, y)| (216.0..620.0).contains(&x) && (236.0..322.0).contains(&y));
         if (wheel && over_settings) || (paging && self.addon_ui.focus >= 2 && self.addon_ui.focus <= self.browser_rows()) {
             let step = if wheel { 18.0 } else { 64.0 };
@@ -343,6 +383,7 @@ impl Menu {
         }
         if matches!(key, K_TAB | K_UPARROW | K_DOWNARROW | K_DPAD_UP | K_DPAD_DOWN | K_RIGHTARROW | K_DPAD_RIGHT | K_LSHOULDER | K_RSHOULDER | K_ABUTTON | K_ENTER | K_KP_ENTER) {
             self.reveal_browser_focus();
+            self.reveal_addon_selection();
         }
         true
     }
@@ -361,116 +402,10 @@ impl Menu {
         }
         lines
     }
-    pub(super) fn draw_addon_browser(&self, c: &mut Canvas, pic: &mut PicFn, cv: &Cvars, time: f64, page: Page) {
-        c.text(24.0, 25.0, page_name(page), 14.0, GOLD_FG);
-        c.round_box(20.0, 50.0, 180.0, 208.0, 3.0, [0.0, 0.0, 0.0, 0.7], Some(BORDER));
-        for (i, a) in ADDON.iter().enumerate() {
-            let y = 58.0 + i as f32 * 20.0;
-            if i == self.addon_ui.selected {
-                c.fill(22.0, y, 176.0, 19.0, HILITE);
-            }
-            c.frame(28.0, y + 6.0, 9.0, 9.0, BORDER);
-            if cv.value_of(a.cvar) != 0.0 {
-                c.fill(30.0, y + 8.0, 5.0, 5.0, GOLD_FG);
-            }
-            c.text(44.0, y + 6.0, a.name, TXT, if self.toys_locked(cv) { MUTED } else { FG });
-        }
-        if self.pad_ui {
-            self.glyphs.hints(c, 28.0, 224.0, &[(K_ABUTTON, "Toggle")], true);
-        } else {
-            c.text(28.0, 224.0, "Enter: toggle   Right: details", 8.0, MUTED);
-            c.text(28.0, 238.0, "Tab: switch section", 8.0, MUTED);
-        }
-        if page == Page::NewGameAddons {
-            c.round_box(24.0, 264.0, 172.0, 22.0, 2.0, HILITE, Some(BORDER));
-            if self.pad_ui {
-                self.glyphs.hints_centered(c, 110.0, 268.0, &[(K_YBUTTON, "Start New Game")]);
-            } else {
-                c.text_center(110.0, 271.0, "Start New Game", TXT, GOLD_FG);
-            }
-        }
-        let a = self.selected_addon();
-        super::addon_preview::draw(c, pic, a.id, time, [216.0, 50.0, 404.0, 116.0]);
-        c.round_box(216.0, 174.0, 404.0, 58.0, 2.0, [0.0, 0.0, 0.0, 0.75], Some(BORDER));
-        let lines = self.description_lines();
-        let start = self.addon_ui.scroll.min(lines.len().saturating_sub(4));
-        for (i, line) in lines.iter().skip(start).take(4).enumerate() {
-            c.text(224.0, 180.0 + i as f32 * 11.0, line, 8.5, FG);
-        }
-        if lines.len() > 4 {
-            let h = 46.0 * 4.0 / lines.len() as f32;
-            c.fill(614.0, 180.0 + start as f32 / (lines.len() - 4) as f32 * (46.0 - h), 2.0, h, GOLD_FG);
-        }
-        c.round_box(216.0, 236.0, 404.0, 86.0, 2.0, [0.0, 0.0, 0.0, 0.8], Some(BORDER));
-        let max_offset = self.browser_max_offset();
-        if max_offset > 0.0 {
-            let h = 80.0 * 86.0 / (86.0 + max_offset);
-            c.fill(616.0, 239.0 + self.browser_offset() / max_offset * (80.0 - h), 2.0, h, GOLD_FG);
-        }
-        let slot_header_y = 238.0 - self.browser_offset();
-        if !a.weapons.is_empty() && slot_header_y >= 236.0 {
-            c.text(220.0, slot_header_y, "Weapon Slot", 8.0, MUTED);
-        }
-        let header_y = a.header_y() - self.browser_offset();
-        if header_y >= 236.0 && header_y + 8.0 <= 322.0
-            && (!a.weapons.is_empty() || a.equipment_action().is_some()) {
-            c.text(220.0, header_y, "Input Remapping", 8.0, MUTED);
-            c.text(425.0, header_y, "Keyboard", 8.0, MUTED);
-            c.text(525.0, header_y, "Controller", 8.0, MUTED);
-        }
-        let mut rows = Vec::new();
-        for weapon in a.weapons {
-            rows.push((weapon.name, None, Some(weapon.slot)));
-        }
-        if a.weapons.is_empty() {
-            if let Some((label, cmd)) = a.equipment_action() { rows.push((label, Some(cmd), None)); }
-        } else {
-            rows.push(("Fire", Some("+attack"), None));
-            if a.alt {
-                rows.push(("Alt Fire", Some("+attack2"), None));
-            }
-        }
-        rows.push(("Configure Parameters >", None, None));
-        for (i, (label, cmd, slot)) in rows.iter().enumerate() {
-            let y = self.browser_row_y(i);
-            if y < 236.0 || y + 16.0 > 322.0 { continue; }
-            if self.addon_ui.focus == i + 2 {
-                c.fill(216.0, y, 404.0, 16.0, HILITE);
-            }
-            let submenu = cmd.is_none() && slot.is_none();
-            if submenu {
-                c.fill(216.0, y, 404.0, 16.0, [0.85, 0.60, 0.25, 0.10]);
-            }
-            c.text(224.0, y + 3.0, label, TXT, if submenu { GOLD_FG } else { FG });
-            if let Some(slot) = slot {
-                let v = cv.value_of(slot).round().clamp(1.0, 10.0) as i32;
-                c.text(425.0, y + 3.0, &format!("< {} >", v % 10), TXT, GOLD_FG);
-            }
-            if let Some(cmd) = cmd {
-                self.draw_binding_columns(c, cmd, y + 2.0, [(425.0, 515.0), (525.0, 615.0)],
-                    self.addon_capture == Some(*cmd), (time * 4.0) as i64 & 1 == 0);
-            }
-        }
-        let (rect, radius) = match self.addon_ui.focus {
-            0 => ([20.0, 50.0, 180.0, 208.0], 3.0),
-            1 => ([216.0, 174.0, 404.0, 58.0], 2.0),
-            f if f <= self.browser_rows() => ([216.0, 236.0, 404.0, 86.0], 2.0),
-            _ => ([24.0, 264.0, 172.0, 22.0], 2.0),
-        };
-        c.round_frame(rect, radius, 2.0, GOLD_FG);
-        let note = if self.toys_locked(cv) {
-            "This game started without add-ons. Start a new add-on game to enable them."
-        } else if self.game_running {
-            "Changes are saved with this game (.qsa); these saves require this source port."
-        } else {
-            "Add-on saves (.qsa) require this source port. Enable Add-ons beside New Game."
-        };
-        c.text_center(320.0, 327.0, note, 8.0, MUTED);
-        if self.pad_ui {
-            self.draw_addon_hints(c);
-        }
-    }
+
 }
+
+mod draw;
 
 #[cfg(test)]
 mod tests;

@@ -302,3 +302,45 @@ fn reopening_regular_addons_cannot_activate_the_pickers_start_button() {
     assert!(!commands(&actions).contains("map start"));
     assert_eq!(menu.screen, Screen::OptionsPage(Page::PortalGun));
 }
+
+#[test]
+fn checklist_scrolls_without_moving_other_panels_and_hits_visible_rows() {
+    let (mut menu, mut cv) = setup(Page::NewGameAddons);
+    menu.mouse_move((100.0, 100.0), &mut cv);
+    for _ in 0..30 { menu.key(K_MWHEELDOWN, &mut cv, true); }
+    cv.set("addons_active", "1");
+    let offset = ADDON.len() - LIST_VISIBLE;
+    assert_eq!(menu.list_offset(), offset);
+    assert_eq!(menu.addon_ui.scroll, 0);
+    assert_eq!(menu.browser_offset(), 0.0);
+    assert_eq!(menu.browser_hit((70.0, LIST_TOP + 1.0)), Some((offset, 0)));
+    assert_eq!(menu.browser_hit((70.0, LIST_BOTTOM - 1.0)), Some((ADDON.len() - 1, 0)));
+    // Help rows cannot select or toggle an offscreen item.
+    assert_eq!(menu.browser_hit((70.0, 225.0)), None);
+    menu.mouse_move((70.0, LIST_BOTTOM - 1.0), &mut cv);
+    let last = &ADDON[ADDON.len() - 1];
+    let before = cv.value_of(last.cvar);
+    menu.key(K_MOUSE1, &mut cv, true);
+    assert_ne!(cv.value_of(last.cvar), before);
+    assert_eq!(menu.addon_ui.selected, ADDON.len() - 1);
+    for _ in 0..30 { menu.key(K_MWHEELUP, &mut cv, true); }
+    assert_eq!(menu.list_offset(), 0);
+}
+
+#[test]
+fn checklist_navigation_reveals_selection_and_page_keys_reach_both_ends() {
+    for page in [Page::Addons, Page::NewGameAddons] {
+        let (mut menu, mut cv) = setup(page);
+        for _ in 1..ADDON.len() {
+            menu.key(K_DPAD_DOWN, &mut cv, false);
+            assert!(menu.addon_ui.selected >= menu.list_offset());
+            assert!(menu.addon_ui.selected < menu.list_offset() + LIST_VISIBLE);
+        }
+        assert_eq!(menu.list_offset(), ADDON.len() - LIST_VISIBLE);
+        menu.key(K_PGUP, &mut cv, false);
+        assert_eq!(menu.list_offset(), 0);
+        assert!(menu.addon_ui.selected < LIST_VISIBLE);
+        menu.key(K_PGDN, &mut cv, false);
+        assert_eq!(menu.list_offset(), ADDON.len() - LIST_VISIBLE);
+    }
+}
