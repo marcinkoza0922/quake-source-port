@@ -310,7 +310,11 @@ pub(super) const ENHANCEMENTS: &[Item] = &[
     Item::Sub { label: "Debris Settings", page: Page::Debris },
 ];
 
+pub(super) const IMPACT_FX: &[(&str, f32)] =
+    &[("off", 0.0), ("subtle", 1.0), ("normal", 2.0), ("intense", 3.0), ("spectacle", 4.0)];
+
 pub(super) const IMPACTS: &[Item] = &[
+    Item::Choice { label: "Surface Hit Effects", cvar: "r_impact_fx", choices: IMPACT_FX },
     toggle("Shotgun Bullet Decals", "r_impact_bullets"),
     toggle("Physical Nail Impacts", "r_impact_nails"),
     toggle("Explosion Scorch Marks", "r_impact_scorches"),
