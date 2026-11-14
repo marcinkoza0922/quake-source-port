@@ -28,7 +28,7 @@ pub fn launcher(palette: &[u8]) -> Mdl {
 }
 
 /// The imported launcher read small beside the other toys.
-const LAUNCHER_SCALE: f32 = 1.35;
+const LAUNCHER_SCALE: f32 = 1.05;
 
 const SKIN: usize = 16;
 const SEG: usize = 8;

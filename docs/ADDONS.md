@@ -259,14 +259,17 @@ A player leaving detonates theirs; the toy switched off removes all.
 - Look (`src/addons/sticky_model.rs`, `sticky_draw.rs`): the bomb is a
   40-triangle studded ball built in code (16×16 skin, dark red; skin 1
   lights its band in fullbright red) that blinks ~twice a second with a
-  48-unit red dlight. The launcher is a Meshy import (concept nano-banana
-  `01a1d669-d70f-7701-a63a-9822cdf2662d`, meshy-t2 + meshy-n1 task
-  `01a1d66a-00dd-7228-897d-05a59fec46ac`, 18 credits) converted by
+  48-unit red dlight. The launcher is a Meshy import (concept sheet cleaned of
+  text/emblem by nano-banana-2 `01a1d6cc-a3a8-7160-ad84-b28d1f25b92c`,
+  meshy-t2 1800-tri + meshy-n1 task `01a1d6cd-0a07-778f-a874-78596809cbac`,
+  21 credits; GLB re-exported as FBX in Blender) converted by
   `blender -b --factory-startup --python tools/import_toy_model.py --
-  DIR_OR_ZIP --out assets/stickybomb --back 12 --gain 0.6` (no mask), skin
+  DIR_OR_ZIP --out assets/stickybomb --back 12 --gain 0.6` (no mask), then
+  `python3 tools/retint_toy_texture.py assets/stickybomb/texture.rgb.zlib`
+  (dark warm iron with rust specks, grained wood, no Meshy blue fill), skin
   quantized to the active palette's non-fullbright colours. The imported
   mesh's muzzle is at −X, so `sticky_draw::weapon` turns it 180° (taking the
-  view pitch un-inverted and the opposite roll), scales it ×1.35, holds it
+  view pitch un-inverted and the opposite roll), scales it ×1.05, holds it
   centred and low (`PULL`/`DROP`) and tips the muzzle up.
 ### Boomerang (`addons/boomerang.rs`, `src/addons/boomerang_fx.rs`)
 Zelda-style homing boomerang (`addon_boomerang`, default 1). Holding fire
