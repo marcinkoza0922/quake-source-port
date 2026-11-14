@@ -190,6 +190,7 @@ impl Host {
         self.pend_attack |= inp.attack;
         self.pend_attack2 |= inp.attack2;
         self.pend_jump |= inp.jump;
+        self.pend_dodge |= self.input.dodge_pressed();
         let mut impulse = inp.impulse;
         let alive = self.cl.stats[STAT_HEALTH] > 0;
         let (held, aim) = (self.input.wheel_held(), self.input.wheel_aim);
@@ -219,7 +220,8 @@ impl Host {
             self.accum = 0.0;
             if let Some(i) = self.local {
                 let mut cmd = self.last_cmd;
-                cmd.buttons = self.toy.buttons(self.pend_attack, self.pend_attack2, self.pend_jump);
+                cmd.buttons = self.toy.buttons(self.pend_attack, self.pend_attack2, self.pend_jump)
+                    | if self.pend_dodge { qserver::addons::BUTTON_DODGE } else { 0 };
                 cmd.impulse = self.pend_impulse;
                 // The server acks the lossless local client's frames itself;
                 // only full-resend requests (-1) go back.
@@ -240,6 +242,7 @@ impl Host {
                     self.pend_attack = false;
                     self.pend_attack2 = false;
                     self.pend_jump = false;
+                    self.pend_dodge = false;
                     self.pend_impulse = 0;
                 }
             }
@@ -262,6 +265,7 @@ impl Host {
                 if active {
                     self.pend_attack = false;
                     self.pend_jump = false;
+                    self.pend_dodge = false;
                     self.pend_impulse = 0;
                 }
             }
@@ -275,6 +279,7 @@ impl Host {
                     n.send_unreliable(&m, self.realtime);
                     self.pend_attack = false;
                     self.pend_jump = false;
+                    self.pend_dodge = false;
                     self.pend_impulse = 0;
                 }
             }

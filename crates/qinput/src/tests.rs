@@ -320,3 +320,11 @@ fn bullet_time_preserves_taps_and_releases_held_buttons() {
     assert_eq!(h.input.bullet_time_button(), (false, false));
     assert!(h.out.is_empty());
 }
+
+#[test]
+fn dodge_action_registers_and_preserves_brief_presses() {
+    let mut h = host();
+    run(&mut h, "+dodge 42\n-dodge 42\n");
+    assert!(h.input.dodge_pressed());
+    assert!(!h.input.dodge_pressed());
+}

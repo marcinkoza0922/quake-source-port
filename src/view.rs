@@ -61,6 +61,7 @@ pub struct ViewState {
     pub with_self: bool,
     /// Third-person camera: draw the player's own body in the main view too.
     pub third_person: bool,
+    pub dodge_pose: [f32; 3],
     /// Smoothed third-person crosshair convergence.
     pub aim: camera::Aim,
 }
@@ -402,7 +403,10 @@ impl ViewState {
             let a = &mut self.anims[me];
             let t = Self::move_lerp(a, e, time, cv.lerp_move);
             let f = Self::anim_lerp(a, e, time, cv.lerp_models);
-            let ent = mk(&cl.entities[me], m, f, t, me, cl);
+            let mut ent = mk(&cl.entities[me], m, f, t, me, cl);
+            ent.angles[0] += self.dodge_pose[0];
+            ent.angles[2] += self.dodge_pose[1];
+            ent.origin[2] += self.dodge_pose[2];
             out.push(RenderEntity { portal_only: !self.third_person, follows_camera: self.third_person, key: me as u32, ..ent });
         }
         if self.static_anims.len() < cl.static_entities.len() {

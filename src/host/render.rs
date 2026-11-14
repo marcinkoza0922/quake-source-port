@@ -25,6 +25,9 @@ impl Host {
             let cv = self.view_cvars();
             self.view.replaced_models = self.fte.replaced_models(&self.cl, fs);
             self.view.with_self = !self.cl.portals.is_empty();
+            self.view.dodge_pose = self.server.level.as_ref()
+                .and_then(|l| l.dodges.get(self.cl.viewentity.saturating_sub(1)).map(|d| d.pose(l.vm.time)))
+                .unwrap_or_default();
             self.view.third_person = self.camera().third_person();
             self.view.entities(&mut self.cl, &cv, &mut self.level, fs, &mut self.r, &mut ents);
             // player 1's own body belongs to player 1's portal views only

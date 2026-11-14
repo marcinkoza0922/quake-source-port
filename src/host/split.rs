@@ -90,6 +90,9 @@ impl Host {
             if draw_ents {
                 let mut gents = Vec::new();
                 g.view.with_self = !g.cl.portals.is_empty();
+                g.view.dodge_pose = self.server.level.as_ref()
+                    .and_then(|l| l.dodges.get(g.cl.viewentity.saturating_sub(1)).map(|d| d.pose(l.vm.time)))
+                    .unwrap_or_default();
                 g.view.entities(&mut g.cl, &cv, &mut self.level, &self.server.core.fs, &mut self.r, &mut gents);
                 // this guest's own body, for its portal views only
                 ents.extend(gents.iter().filter(|e| e.portal_only).map(|e| RenderEntity { views: bit, ..*e }));

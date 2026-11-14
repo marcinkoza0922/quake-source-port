@@ -88,3 +88,10 @@ the whole local simulation to 20%. An optional meter limits use to configurable
 real seconds and regenerates at a configurable rate while inactive; disabling
 the meter allows unlimited use. Default duration is 5 seconds, regeneration is
 1 second of charge per real second.
+
+## Dodge / dive
+
+An optional add-on provides a remappable Dodge / Dive action. Press it with a
+movement direction on the ground or while jumping to dive forward or leap backward/sideways,
+including diagonals. Animate the player's body in third person. Support local
+split-screen and the existing add-on game restrictions.

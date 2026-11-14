@@ -54,6 +54,7 @@ impl Host {
         self.stop_recording();
         self.autosave.reset();
         self.bullet_time = Default::default();
+        self.pend_dodge = false;
         self.death_handled = false;
         self.feedback = Default::default();
         self.demo_head.clear();

@@ -108,6 +108,7 @@ pub struct Core {
 
 /// The QC VM and collision world of the running level.
 pub struct Level {
+    pub dodges: Vec<crate::addons::dodge::Dodge>,
     pub vm: Vm,
     pub world: World,
     pub(crate) assist: Vec<crate::assists::ClientAssist>,

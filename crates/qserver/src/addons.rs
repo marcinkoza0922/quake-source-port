@@ -14,6 +14,7 @@ use crate::server::{Core, Level};
 
 pub mod boomerang;
 pub mod fall;
+pub mod dodge;
 pub mod gel;
 pub mod gel_phys;
 pub mod hook_surface;
@@ -36,6 +37,7 @@ pub const CVARS: &[(&str, &str, u32)] = &[
     ("addons_active", "0", CVAR_ROM),
     ("addon_projectile_shotguns", "1", CVAR_ARCHIVE),
     ("addon_shotgun_speed", "10000", CVAR_ARCHIVE),
+    ("addon_dodge", "1", CVAR_ARCHIVE),
     ("addon_bullet_time", "1", CVAR_ARCHIVE),
     ("addon_bullet_time_toggle", "0", CVAR_ARCHIVE),
     ("addon_bullet_time_meter", "1", CVAR_ARCHIVE),
@@ -82,8 +84,10 @@ pub const CVARS: &[(&str, &str, u32)] = &[
 /// Usercmd button bits (bit 0 attack and bit 1 jump are QC's).
 pub const BUTTON_TOY_FIRE: u8 = 1 << 2;
 pub const BUTTON_TOY_ALT: u8 = 1 << 3;
-/// The held toy's id sits in bits 4..7 (0 = none).
+/// The held toy's id sits in bits 4..6 (0 = none). Bit 7 is dodge.
 pub const TOY_SHIFT: u8 = 4;
+/// Directional dodge press, independent of weapon buttons.
+pub const BUTTON_DODGE: u8 = 1 << 7;
 
 /// Add-on weapons, in stable order within a shared weapon slot.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
@@ -163,7 +167,7 @@ impl Toy {
     }
     /// The toy (if any) a usercmd's buttons say is held.
     pub fn from_buttons(buttons: u8) -> Option<Toy> {
-        Self::from_id(buttons >> TOY_SHIFT)
+        Self::from_id((buttons & !BUTTON_DODGE) >> TOY_SHIFT)
     }
 }
 

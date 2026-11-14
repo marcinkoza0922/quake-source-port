@@ -158,11 +158,12 @@ pub mod btn {
     /// Add-ons: the equipment wheel (goggles).
     pub const EQUIPWHEEL: usize = 21;
     pub const BULLET_TIME: usize = 22;
-    pub const COUNT: usize = 23;
+    pub const DODGE: usize = 23;
+    pub const COUNT: usize = 24;
     pub const NAMES: [&str; COUNT] = [
         "forward", "back", "moveleft", "moveright", "moveup", "movedown", "left", "right", "lookup", "lookdown",
         "speed", "strafe", "attack", "jump", "mlook", "klook", "use", "gyroaction", "weaponwheel", "lockon",
-        "attack2", "equipwheel", "bullettime",
+        "attack2", "equipwheel", "bullettime", "dodge",
     ];
 }
 
@@ -346,6 +347,13 @@ impl Input {
         b.state &= !2;
         (b.is_down(), pressed)
     }
+    /// Consume a dodge press, preserving taps between server ticks.
+    pub fn dodge_pressed(&mut self) -> bool {
+        let b = &mut self.buttons[btn::DODGE];
+        let pressed = b.state & 2 != 0;
+        b.state &= !2;
+        pressed && self.dest == KeyDest::Game
+    }
     /// Layout of the on-screen controls.
     pub fn touch_layout(&self, cvars: &Cvars) -> touch::TouchLayout {
         touch::TouchLayout { aspect: self.touch_aspect, size: cvars.value(self.cv.touch_size) }
@@ -402,7 +410,7 @@ macro_rules! button_cmds {
 
 /// Register bind/unbind/unbindall/bindlist, +/- buttons and impulse.
 pub fn register_commands<C: InputHost>(c: &mut Commands<C>) {
-    button_cmds!(c, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22);
+    button_cmds!(c, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23);
     toggle_button_cmds!(c, btn::ATTACK, in_toggleattack);
     toggle_button_cmds!(c, btn::SPEED, in_togglerun);
     c.add("impulse", |ctx, a| ctx.input().impulse = a.argv(1).parse().unwrap_or(0));
