@@ -10,14 +10,16 @@
 //!
 //! Usage: qprof [-basedir <dir>] [-maps game:map,...] [-only a,b] [-group vanilla|enhancement|addon]
 //!              [-secs S] [-warmup S] [-runs N] [-maxfps F] [-width W] [-height H]
-//!              [-window] [-perf] [-shots S] [-list] [-out <dir>]
+//!              [-window] [-fixedstep Hz] [-perf] [-shots S] [-list] [-out <dir>]
 //!
 //! Headless by default (offscreen, simulated time: every frame advances
 //! 1/maxfps seconds, so each run does identical game work). Headless
 //! frames pay an image readback in "ui+present", so compare headless with
 //! headless only; `-window` measures the real swapchain path (opens
 //! windows on the user's display; runs are SIGKILLed so config.cfg is never
-//! written). `-perf` wraps each run in `perf record` and keeps the top
+//! written). Add `-fixedstep 250` to run the swapchain path uncapped with
+//! the same simulation schedule as the default headless run. This controls
+//! game time, not residual effects nondeterminism. `-perf` wraps each run in `perf record` and keeps the top
 //! symbols (build with CARGO_PROFILE_RELEASE_DEBUG=line-tables-only and
 //! needs kernel.perf_event_paranoid <= 1).
 //!
@@ -45,6 +47,8 @@ pub struct Opts {
     pub width: u32,
     pub height: u32,
     pub window: bool,
+    /// Explicit simulation frequency, independent of windowed wall time.
+    pub fixedstep: Option<u32>,
     pub perf: bool,
     pub list: bool,
     /// Screenshots every N seconds of measurement (0 = none).
@@ -58,6 +62,10 @@ fn die(m: &str) -> ! {
 }
 
 fn parse_args() -> Opts {
+    parse_args_from(std::env::args().skip(1))
+}
+
+fn parse_args_from(args: impl IntoIterator<Item = String>) -> Opts {
     let mut o = Opts {
         basedir: std::env::var_os("QUAKE_BASEDIR").map(PathBuf::from)
             .unwrap_or_else(|| PathBuf::from("vkQuake directory with maps")),
@@ -71,12 +79,13 @@ fn parse_args() -> Opts {
         width: 1280,
         height: 720,
         window: false,
+        fixedstep: None,
         perf: false,
         list: false,
         shots: 0.0,
         out: PathBuf::from("target/qprof/latest"),
     };
-    let mut it = std::env::args().skip(1);
+    let mut it = args.into_iter();
     while let Some(a) = it.next() {
         let mut v = || it.next().unwrap_or_else(|| die(&format!("{a} needs a value")));
         match a.as_str() {
@@ -97,6 +106,9 @@ fn parse_args() -> Opts {
             "-height" => o.height = v().parse().unwrap_or(o.height),
             "-out" => o.out = v().into(),
             "-window" => o.window = true,
+            "-fixedstep" => o.fixedstep = Some(v().parse::<u32>().ok()
+                .filter(|hz| (1..=1000).contains(hz))
+                .unwrap_or_else(|| die("-fixedstep needs a frequency from 1 to 1000 Hz"))),
             "-perf" => o.perf = true,
             "-list" => o.list = true,
             "-shots" => o.shots = v().parse().unwrap_or(0.0),
@@ -114,6 +126,9 @@ fn abs(p: &Path) -> PathBuf {
 fn engine_args(o: &Opts, sc: &scenarios::Scenario, game: &str, map: &str, json: &Path) -> Vec<String> {
     let mut a: Vec<String> = vec!["-basedir".into(), abs(&o.basedir).display().to_string(), "-game".into(), game.into()];
     a.push(if o.window { "-window".into() } else { "-headless".into() });
+    if let Some(hz) = o.fixedstep {
+        a.extend(["-fixedstep".into(), hz.to_string()]);
+    }
     a.extend(["-width".into(), o.width.to_string(), "-height".into(), o.height.to_string()]);
     let end = o.warmup + o.secs;
     a.extend(["-autoquit".into(), format!("{}", end + 3.0)]);
@@ -297,4 +312,24 @@ fn main() {
         }
     }
     report::write(&o, &results);
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn windowed_fixed_step_keeps_simulation_separate_from_frame_cap() {
+        let args = ["-window", "-fixedstep", "250", "-maxfps", "10000"];
+        let o = parse_args_from(args.map(str::to_string));
+        let sc = scenarios::all(20.0).remove(0);
+        let a = engine_args(&o, &sc, "id1", "e1m1", Path::new("test.json"));
+        assert!(a.windows(2).any(|v| v == ["-fixedstep", "250"]));
+        assert!(a.iter().any(|v| v == "+host_maxfps \"10000\""));
+        assert!(a.iter().any(|v| v == "-window"));
+        let o = parse_args_from([]);
+        assert_eq!(o.fixedstep, None);
+        assert!(!engine_args(&o, &sc, "id1", "e1m1", Path::new("test.json"))
+            .iter().any(|v| v == "-fixedstep"));
+    }
 }

@@ -172,7 +172,9 @@ confirm wins windowed (`qprof -window`, or qbench for parity).
   rendering interval (items 5/7); qprof reports per-view contributions without
   double-counting aggregate GPU totals. Earlier reports measured only the
   first view and charged later views to `post`.
-- Record a windowed baseline (`qprof -window`) once, for absolute numbers.
+- Done: fixed-step windowed co-op baseline (`qprof -window -fixedstep 250`),
+  with the simulation schedule independent of frame rate (results below).
+  Use this mode for co-op A/B work; keep wall-time play checks separate.
 
 ## Results log
 
@@ -700,3 +702,55 @@ confirm wins windowed (`qprof -window`, or qbench for parity).
   another fix. The headless CPU saving is clear, but does not by itself
   establish a live-play fps improvement. Revisit the remaining lightmap
   request sorting and world/destination work with those measurements.
+
+
+- 2026-11-14, items 5/7 measurement follow-up: the engine and qprof accept
+  `-fixedstep Hz` (1–1000), explicitly selecting a fixed simulation step
+  with uncapped rendering, including the swapchain path. Normal windowed
+  runs retain wall-time simulation; headless defaults are unchanged.
+  `-realtime` and `-dedicated` reject the engine flag. qprof reports now
+  distinguish wall-time simulation from fixed steps; previous windowed
+  headers incorrectly described the frame cap as a simulation frequency.
+
+  Fixed-step windowed baseline, pinned `ultimate-coop` on ad_sepulcher,
+  RTX 3060 Ti, 1280×720, 20 simulated seconds after 4 s warm-up, 250 Hz,
+  vsync off, `host_maxfps 10000`, three runs: 59.8/59.3/58.8 fps (1.7%
+  full spread), exactly 5000 measured frames in every run. Median frame
+  16853 µs, render CPU excluding fence 14016 µs, GPU 15638 µs, p99 42809 µs.
+  Config hashes are unchanged. Report: `target/qprof/coop-fixedstep-window/`.
+  These numbers establish a baseline, not an optimisation or reference-engine
+  parity result; the workload differs from previous wall-time combat.
+
+  Fixed steps control commands, camera movement and simulation ticks, but
+  do not remove all effects nondeterminism. Comparing run 0 to runs 1/2 at
+  5/10/15 measured seconds changes 0–9623 pixels (at most 1.05%); the
+  earlier headless horde captures also varied. Inspected the four green
+  night-vision views, weapons, bullet-time bars and HUDs. FTE counters
+  match (zero in this scenario); this does not count add-on effects.
+
+  Quiet output checks compare the implicit headless 250 Hz path with
+  explicit `-fixedstep 250`: recursive e1m1 portals and four AD split views
+  with teleporter windows, high SSAO, 8x MSAA and 200% scale both have
+  `compare -metric AE = 0`. All four Vulkan-validation runs are clean.
+  Inspected the nested orange portals/player and four torch-lit AD views.
+  Tests cover flag validation/conflicts, forwarding an independent simulation
+  frequency, preserving defaults and reporting wall-time/fixed clocks.
+  458 tests passed, 2 skipped; clippy clean. No server or rendering algorithm
+  changed. Checks: `target/perf-fixedstep/`.
+
+  Isolated fresh full-cycle CPU capture (same headless 250 Hz workload,
+  release with line-table symbols, 999 Hz `cycles:u`, measured-window filter):
+  main-core engine self-time is `build_world_draw` 13.10%, u32 quicksort
+  9.04%, `mark_leaves` 5.73%, `gpu_world_draw` 5.22%. About 69k main-core
+  samples, none lost; the 103 small-core samples are not used. These are
+  diagnostic shares, not before/after frame-time results. Profile JSON:
+  `target/qprof/coop-optimized-fixedstep/`; data and reports:
+  `target/perf-fixedstep/optimized.perf.data`, `optimized-self.txt`.
+  DWARF call chains were captured but stop at the sort in this panic-abort
+  release, so they do not establish its caller. Before optimising that sort,
+  rebuild the profiling binary with unwind tables (e.g.
+  `RUSTFLAGS="-C force-unwind-tables=yes"`) and verify caller attribution;
+  measure the lightmap-request count and duplication as well. Destination
+  construction remains the largest engine symbol. The repeatable windowed
+  baseline is ready for the next isolated A/B change; no new renderer
+  optimisation is claimed here.

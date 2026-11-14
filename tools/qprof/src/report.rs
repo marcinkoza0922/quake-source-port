@@ -117,13 +117,34 @@ fn pct(d: f64, base: f64) -> String {
     if base > 0.0 { format!("{:+.0}%", d / base * 100.0) } else { "-".into() }
 }
 
+fn simulation_clock(window: bool, fixedstep: Option<u32>, maxfps: u32) -> String {
+    if let Some(hz) = fixedstep {
+        format!("fixed sim step 1/{hz} s (uncapped benchmark)")
+    } else if window {
+        format!("wall-time simulation, frame cap {maxfps} Hz (0 = uncapped)")
+    } else {
+        let hz = if maxfps == 0 { 72 } else { maxfps.min(1000) };
+        format!("sim step 1/{hz} s")
+    }
+}
+
+#[cfg(test)]
+#[test]
+fn report_distinguishes_wall_time_and_fixed_simulation() {
+    assert!(simulation_clock(true, None, 10000).contains("wall-time"));
+    assert!(simulation_clock(true, Some(250), 10000).contains("1/250"));
+    assert!(simulation_clock(false, None, 0).contains("1/72"));
+    assert!(simulation_clock(false, None, 10000).contains("1/1000"));
+}
+
 pub fn write(o: &crate::Opts, results: &[Result]) {
     let mut md = String::new();
     let mode = if o.window { "windowed" } else { "headless (offscreen readback in ui+present)" };
-    let _ = writeln!(md, "# qprof report\n\n{}x{}, {mode}, {} s measured after {} s warm-up, sim step 1/{} s, \
+    let clock = simulation_clock(o.window, o.fixedstep, o.maxfps);
+    let _ = writeln!(md, "# qprof report\n\n{}x{}, {mode}, {} s measured after {} s warm-up, {clock}, \
         median of {} run(s).\nTimes are µs per frame (means unless noted). `fence` = CPU waiting on the GPU; \
         `render cpu` = render phase minus fence. Bound = GPU when fence > 30% of the frame.\n",
-        o.width, o.height, o.secs, o.warmup, o.maxfps, o.runs);
+        o.width, o.height, o.secs, o.warmup, o.runs);
     let mut maps: Vec<&str> = results.iter().map(|r| r.map.as_str()).collect();
     maps.dedup();
     let mut hot: Vec<(f64, String)> = Vec::new();
