@@ -57,6 +57,7 @@ pub(super) enum Run {
     PreviewKill,
     ResetShotguns,
     ResetBulletTime,
+    ResetHitstop,
 }
 
 /// A server answering the LAN search.

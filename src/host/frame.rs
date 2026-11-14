@@ -296,7 +296,7 @@ impl Host {
             let t = self.server.take_text();
             self.cbuf.add_text(&t);
             // Ironwail: single player only advances while not in the menu.
-            let hold = self.server.core.maxclients() == 1 && self.menu.active();
+            let hold = (self.server.core.maxclients() == 1 && self.menu.active()) || self.hitstop_hold();
             self.server.frame_held(sdt, hold);
             if let Some(e) = self.server.error() {
                 let msg = format!("Host_Error: {e}\n");

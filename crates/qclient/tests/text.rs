@@ -93,3 +93,12 @@ fn portal_feedback_preserves_owner_and_never_executes_as_commands() {
         owner: 3, slot: 1, kind: 1, start: [1.0,2.0,3.0], end: [4.0,5.0,6.0],
     })]);
 }
+
+#[test]
+fn hitstop_comment_becomes_event_and_malformed_is_dropped() {
+    let mut cl = ClientState::new();
+    let mut msg = vec![qnet::protocol::SVC_STUFFTEXT];
+    msg.extend_from_slice(b"//qsp_hitstop 1 25 1 80\n//qsp_hitstop x\n\0");
+    cl.parse_server_message(&msg).unwrap();
+    assert_eq!(cl.take_events(), vec![ClientEvent::HitStop { kill: true, damage: 25, class: 1, health: 80 }]);
+}
