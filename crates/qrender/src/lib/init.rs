@@ -146,6 +146,7 @@ impl Renderer {
             palette: *palette,
             palette_buf,
             lightmap,
+            lightmap_requests: Default::default(),
             dummy,
             world: None,
             isolated_portal: None,

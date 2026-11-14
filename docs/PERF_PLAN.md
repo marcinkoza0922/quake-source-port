@@ -123,7 +123,9 @@ confirm wins windowed (`qprof -window`, or qbench for parity).
   re-walks the world on the CPU (`build_world_draw`).
 - Implemented: item 2 caches destination surface lists. Destination world
   index/indirect ranges are now reused within a frame when several windows,
-  recursive portals or split players share that exact list (results below).
+  recursive portals or split players share that exact list. CPU lightmap
+  requests now use a reusable dense bitset to avoid the accumulated
+  sort/dedup while preserving the exact ascending union (results below).
 - Remaining candidates: cull windows by screen size and distance; consider
   the GPU cull path for portal views as for the main view. Reprofile first,
   since eliminating repeated CPU construction changes the balance.
@@ -172,7 +174,9 @@ confirm wins windowed (`qprof -window`, or qbench for parity).
   rendering interval (items 5/7); qprof reports per-view contributions without
   double-counting aggregate GPU totals. Earlier reports measured only the
   first view and charged later views to `post`.
-- Record a windowed baseline (`qprof -window`) once, for absolute numbers.
+- Done: fixed-step windowed co-op baseline (`qprof -window -fixedstep 250`),
+  with the simulation schedule independent of frame rate (results below).
+  Use this mode for co-op A/B work; keep wall-time play checks separate.
 
 ## Results log
 
@@ -700,3 +704,135 @@ confirm wins windowed (`qprof -window`, or qbench for parity).
   another fix. The headless CPU saving is clear, but does not by itself
   establish a live-play fps improvement. Revisit the remaining lightmap
   request sorting and world/destination work with those measurements.
+
+
+- 2026-11-14, items 5/7 measurement follow-up: the engine and qprof accept
+  `-fixedstep Hz` (1–1000), explicitly selecting a fixed simulation step
+  with uncapped rendering, including the swapchain path. Normal windowed
+  runs retain wall-time simulation; headless defaults are unchanged.
+  `-realtime` and `-dedicated` reject the engine flag. qprof reports now
+  distinguish wall-time simulation from fixed steps; previous windowed
+  headers incorrectly described the frame cap as a simulation frequency.
+
+  Fixed-step windowed baseline, pinned `ultimate-coop` on ad_sepulcher,
+  RTX 3060 Ti, 1280×720, 20 simulated seconds after 4 s warm-up, 250 Hz,
+  vsync off, `host_maxfps 10000`, three runs: 59.8/59.3/58.8 fps (1.7%
+  full spread), exactly 5000 measured frames in every run. Median frame
+  16853 µs, render CPU excluding fence 14016 µs, GPU 15638 µs, p99 42809 µs.
+  Config hashes are unchanged. Report: `target/qprof/coop-fixedstep-window/`.
+  These numbers establish a baseline, not an optimisation or reference-engine
+  parity result; the workload differs from previous wall-time combat.
+
+  Fixed steps control commands, camera movement and simulation ticks, but
+  do not remove all effects nondeterminism. Comparing run 0 to runs 1/2 at
+  5/10/15 measured seconds changes 0–9623 pixels (at most 1.05%); the
+  earlier headless horde captures also varied. Inspected the four green
+  night-vision views, weapons, bullet-time bars and HUDs. FTE counters
+  match (zero in this scenario); this does not count add-on effects.
+
+  Quiet output checks compare the implicit headless 250 Hz path with
+  explicit `-fixedstep 250`: recursive e1m1 portals and four AD split views
+  with teleporter windows, high SSAO, 8x MSAA and 200% scale both have
+  `compare -metric AE = 0`. All four Vulkan-validation runs are clean.
+  Inspected the nested orange portals/player and four torch-lit AD views.
+  Tests cover flag validation/conflicts, forwarding an independent simulation
+  frequency, preserving defaults and reporting wall-time/fixed clocks.
+  458 tests passed, 2 skipped; clippy clean. No server or rendering algorithm
+  changed. Checks: `target/perf-fixedstep/`.
+
+  Isolated fresh full-cycle CPU capture (same headless 250 Hz workload,
+  release with line-table symbols, 999 Hz `cycles:u`, measured-window filter):
+  main-core engine self-time is `build_world_draw` 13.10%, u32 quicksort
+  9.04%, `mark_leaves` 5.73%, `gpu_world_draw` 5.22%. About 69k main-core
+  samples, none lost; the 103 small-core samples are not used. These are
+  diagnostic shares, not before/after frame-time results. Profile JSON:
+  `target/qprof/coop-optimized-fixedstep/`; data and reports:
+  `target/perf-fixedstep/optimized.perf.data`, `optimized-self.txt`.
+  DWARF call chains were captured but stop at the sort in this panic-abort
+  release, so they do not establish its caller. Before optimising that sort,
+  rebuild the profiling binary with unwind tables (e.g.
+  `RUSTFLAGS="-C force-unwind-tables=yes"`) and verify caller attribution;
+  measure the lightmap-request count and duplication as well. Destination
+  construction remains the largest engine symbol. The repeatable windowed
+  baseline is ready for the next isolated A/B change; no new renderer
+  optimisation is claimed here.
+
+
+- 2026-11-14, item 7 CPU lightmap union: a second diagnostic capture
+  confirmed 100,370 requested / 75,165 unique lightmaps per frame on
+  average during the 5000-frame `ultimate-coop` cycle (25.1% repeated
+  requests). Peak requests 351,641, of which 172,741 are unique; peak unique
+  count across the cycle 173,490. The map has 194,369 lightmaps. These are
+  counts, not a timing comparison; the temporary diagnostic logging was
+  removed before benchmarking. Data: `target/perf-lightmaps/counts.json`.
+
+  Unwind tables alone still did not recover the caller. A short separate
+  capture built with `RUSTFLAGS="-C force-unwind-tables=yes -C force-frame-pointers=yes"`
+  and `perf record --call-graph fp` recovered quicksort → `Renderer::render`
+  → host render/frame. `addr2line -i` resolves the call to `frame.rs:819`,
+  the lightmap-request sort. Caller evidence: `target/perf-lightmaps/fp-sort-stacks.txt`
+  and `sort-callsite.txt`; the diagnostic build is not used for A/B timings.
+
+  `frame::lightmaps::LightmapRequests` replaces the per-frame vector's
+  sort/dedup with a bitset bounded by the world's dense lightmap table
+  (24,304 bytes for ad_sepulcher). Brushes and destination views set bits;
+  scanning set bits in ascending order yields the exact former sorted
+  union. The scan covers only the requested word span. Bitset/output
+  allocations persist in the renderer, with contents reset each frame and
+  on map-size changes. The complete CPU list still goes into the bump buffer;
+  it is not limited by the separate GPU cull list. Tests compare against the
+  old algorithm with 350k repeated requests, cover word boundaries, empty
+  frames, changing map sizes, allocation reuse and unions above `MAX_VIS`.
+
+
+  Fresh standard-release A/B (no diagnostic flags/logging), pinned
+  `ultimate-coop` on ad_sepulcher, RTX 3060 Ti, 1280×720, full 20 s cycle
+  after 4 s warm-up, fixed 250 Hz simulation, three runs/build/mode:
+
+  | metric | headless before | headless after | windowed before | windowed after |
+  |---|--:|--:|--:|--:|
+  | fps | 55.2 | 56.7 | 55.9 | 58.1 |
+  | frame µs | 18115 | 17638 | 17884 | 17205 |
+  | render CPU excluding fence µs | 14546 | 13562 | 15043 | 13913 |
+  | GPU µs | 17187 | 16879 | 16161 | 15885 |
+  | p99 frame µs | 43972 | 42774 | 45534 | 43736 |
+
+  Render CPU falls 6.8% headless / 7.5% windowed; frame time falls
+  2.6% / 3.8%. Headless fps runs before 48.4/55.8/55.2, after
+  55.4/56.7/57.4: its small total-frame improvement is within the broad
+  run spread. Windowed is tighter: before 55.9/55.8/55.9, after
+  58.2/58.1/58.1 (+3.9% median fps). Windowed uses vsync off and
+  `host_maxfps 10000`; config hashes stay unchanged. Every run measures
+  5000 frames. These are engine A/B results, not reference-engine parity.
+  Reports: `target/qprof/lightmaps-{headless,window}-{before,after}/`.
+
+
+  Vanilla AD control (headless, same pinned baseline, 8 s after 4 s warm-up,
+  three runs/build): 488.4→488.4 fps, frame 2047.38→2047.69 µs (+0.02%),
+  render CPU 1770.51→1779.08 µs (+0.5%, within noise). All three combat
+  screenshots have AE = 0, with unchanged counters. Reports:
+  `target/qprof/lightmaps-controls-{before,after}/`.
+
+  Quiet recursive e1m1 portals and four AD split views (teleporter windows,
+  high SSAO, 8x MSAA, 200% scale) both have `compare -metric AE = 0`;
+  all four Vulkan-validation runs are clean. Inspected the nested orange
+  portals/player, four torch-lit AD views and full four-player blood/portal
+  combat scene. The 18 live co-op screenshot pairs differ by 61–9776 pixels
+  (up to 1.1%); repeated baseline pairs also differ by 0–10010 pixels.
+  Particle/geometry counters match in every pair. These effects variations
+  do not replace the exact quiet-scene and vanilla checks.
+
+  Both benchmark builds' startup logs contain unsupported `addon_hitstop_*`
+  entries from the saved config. They are ignored before measurement on
+  both sides. Quiet validation and vanilla controls use the same temporary
+  config copy with only those unsupported entries removed; original configs
+  are untouched and hashes match across all four co-op benchmark phases.
+  Checks and comparisons: `target/perf-lightmaps/`.
+  461 tests passed, 2 skipped; clippy clean. No server/physics change.
+  Next: reprofile destination draw construction with the lightmap sort gone
+  before selecting another world/portal CPU change.
+
+  Integration with current master: qprof now pins the newly registered
+  `addon_hitstop` off in its baseline, inherited by add-on scenarios, so
+  the saved settings that previously printed unknown commands cannot change
+  the historical workload. The measurements above predate that integration.

@@ -21,7 +21,7 @@ impl Renderer {
         dynw: &mut Dyn,
         time: f64,
         alphas: [f32; 4],
-        lm: &mut Vec<u32>,
+        lm: &mut LightmapRequests,
         worlds: &mut PortalWorldCache,
     ) -> Vec<PortalDraw> {
         let (Some(v), Some(w)) = (view, self.world.as_mut()) else {

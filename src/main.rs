@@ -4,6 +4,8 @@
 //! -width <w>, -height <h>, -fullscreen, -window, -headless (offscreen
 //! renderer, simulated time, no audio), -autoquit <seconds>, and `+cmd args`
 //! console commands.
+//! `-fixedstep <Hz>` runs uncapped with a fixed simulation step for profiling,
+//! including the windowed path; it cannot be combined with real-time pacing.
 
 mod addons;
 mod assets;
@@ -46,6 +48,17 @@ struct Opts {
 }
 
 impl Opts {
+    fn fixed_step(&self) -> Result<Option<f64>, &'static str> {
+        if !self.has("-fixedstep") { return Ok(None); }
+        if self.has("-realtime") || self.has("-dedicated") {
+            return Err("-fixedstep cannot be combined with -realtime or -dedicated");
+        }
+        let hz = self.val("-fixedstep").and_then(|v| v.parse::<f64>().ok())
+            .filter(|v| v.is_finite() && (1.0..=1000.0).contains(v))
+            .ok_or("-fixedstep needs a frequency from 1 to 1000 Hz")?;
+        Ok(Some(1.0 / hz))
+    }
+
     fn has(&self, f: &str) -> bool {
         self.args.iter().any(|a| a.eq_ignore_ascii_case(f))
     }
@@ -66,6 +79,10 @@ pub fn user_dir(game: &str) -> PathBuf {
 
 fn main() {
     let o = Opts { args: std::env::args().skip(1).collect() };
+    let fixed_step = o.fixed_step().unwrap_or_else(|e| {
+        eprintln!("{e}");
+        std::process::exit(2)
+    });
     let basedir = o
         .val("-basedir")
         .map(PathBuf::from)
@@ -168,7 +185,9 @@ fn main() {
     loop {
         // Host_FilterTime: timedemo runs uncapped.
         let maxfps = if dedicated { 72.0 } else if host.timedemo_active() { 0.0 } else { host.server.core.cvars.value_of("host_maxfps") };
-        let dt = if headless && !realtime {
+        let dt = if let Some(dt) = fixed_step {
+            dt
+        } else if headless && !realtime {
             1.0 / if maxfps > 0.0 { maxfps.min(1000.0) as f64 } else { 72.0 }
         } else {
             let min = if maxfps > 0.0 { 1.0 / maxfps as f64 } else { 0.0 };
@@ -209,4 +228,21 @@ fn main() {
     }
     host.write_config();
     drop(audio);
+}
+
+#[cfg(test)]
+mod timing_tests {
+    use super::Opts;
+
+    #[test]
+    fn fixed_step_is_explicit_and_rejects_invalid_or_realtime_modes() {
+        let opts = |s: &str| Opts { args: s.split_whitespace().map(str::to_string).collect() };
+        assert_eq!(opts("-window").fixed_step(), Ok(None));
+        assert_eq!(opts("-window -fixedstep 250").fixed_step(), Ok(Some(0.004)));
+        for flags in ["-fixedstep", "-fixedstep NaN", "-fixedstep inf", "-fixedstep 0",
+            "-fixedstep -1", "-fixedstep 1001", "-fixedstep 250 -realtime",
+            "-dedicated -fixedstep 250"] {
+            assert!(opts(flags).fixed_step().is_err(), "{flags}");
+        }
+    }
 }
