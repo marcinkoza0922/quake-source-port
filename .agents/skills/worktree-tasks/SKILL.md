@@ -37,10 +37,11 @@ ls "/tmp/quake-$topic/vkQuake directory with maps/id1" >/dev/null && echo "game 
 git -C "/tmp/quake-$topic" status --porcelain    # should print nothing
 ```
 
-The Agent tool's `isolation: "worktree"` gives you a worktree automatically,
-but it is missing the same links. Make creating them the subagent's first
-step, or set `QUAKE_BASEDIR="$(realpath "$main/vkQuake directory with maps")"`
-in its commands.
+If your agent supports automatic worktree isolation, its worktree is still
+missing the same links. Create them before running checks, or set
+`QUAKE_BASEDIR="$(realpath "$main/vkQuake directory with maps")"` in the
+worker's commands. Otherwise, use the manual setup above. This workflow also
+works without subagents: run the tasks yourself in separate worktrees.
 
 The local `info/exclude` (shared by all worktrees, never committed) keeps the
 reference symlinks out of `git add -A`. The data symlink is already covered
