@@ -153,6 +153,10 @@ pub enum ClientEvent {
     Hook(crate::hook::HookView),
     /// Add-on boomerang line (`//qsp_boom ...` without the prefix).
     Boomerang(String),
+    /// Add-on gel line (`//qsp_gel ...` without the prefix).
+    Gel(String),
+    /// Add-on powerwasher line (`//qsp_water ...` without the prefix).
+    Water(String),
     StopSound { ent: i32, channel: i32 },
     StaticSound(StaticSound),
     CdTrack { track: u8, loop_track: u8 },

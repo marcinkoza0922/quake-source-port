@@ -14,6 +14,8 @@ use crate::server::{Core, Level};
 
 pub mod boomerang;
 pub mod fall;
+pub mod gel;
+pub mod gel_phys;
 pub mod hook_surface;
 pub mod hookshot;
 pub mod portal;
@@ -23,6 +25,7 @@ pub mod save;
 pub mod sticky;
 pub mod shotgun;
 pub(crate) mod settings;
+pub mod washer;
 
 /// (name, default, flags) of the add-on cvars.
 pub const CVARS: &[(&str, &str, u32)] = &[
@@ -47,6 +50,8 @@ pub const CVARS: &[(&str, &str, u32)] = &[
     ("addon_sticky_slot", "6", CVAR_ARCHIVE),
     ("addon_hookshot_slot", "1", CVAR_ARCHIVE),
     ("addon_railgun_slot", "8", CVAR_ARCHIVE),
+    ("addon_gel_slot", "9", CVAR_ARCHIVE),
+    ("addon_washer_slot", "5", CVAR_ARCHIVE),
     // see-through portals: on/off, live views per frame, live distance
     ("addon_portal_view", "1", CVAR_ARCHIVE),
     ("addon_portal_max", "4", CVAR_ARCHIVE),
@@ -68,6 +73,10 @@ pub const CVARS: &[(&str, &str, u32)] = &[
     ("addon_hook_metal", "1", CVAR_ARCHIVE),
     ("addon_hook_stone", "1", CVAR_ARCHIVE),
     ("addon_hook_enemies", "1", CVAR_ARCHIVE),
+    ("addon_gel", "1", CVAR_ARCHIVE),
+    // powerwasher: on/off and push strength multiplier
+    ("addon_washer", "1", CVAR_ARCHIVE),
+    ("addon_washer_push", "1", CVAR_ARCHIVE),
 ];
 
 /// Usercmd button bits (bit 0 attack and bit 1 jump are QC's).
@@ -84,10 +93,12 @@ pub enum Toy {
     Sticky,
     Hookshot,
     Railgun,
+    GelSprayer,
+    Washer,
 }
 
 impl Toy {
-    pub const ALL: [Toy; 5] = [Toy::PortalGun, Toy::Boomerang, Toy::Sticky, Toy::Hookshot, Toy::Railgun];
+    pub const ALL: [Toy; 7] = [Toy::PortalGun, Toy::Boomerang, Toy::Sticky, Toy::Hookshot, Toy::Railgun, Toy::GelSprayer, Toy::Washer];
 
     /// Wire id (1..=15).
     pub fn id(self) -> u8 {
@@ -103,6 +114,8 @@ impl Toy {
             Toy::Sticky => "Stickybomb Launcher",
             Toy::Railgun => "Railgun",
             Toy::Hookshot => "Hookshot",
+            Toy::GelSprayer => "Gel Sprayer",
+            Toy::Washer => "Powerwasher",
         }
     }
     /// Name in savegame headers.
@@ -113,6 +126,8 @@ impl Toy {
             Toy::Sticky => "sticky",
             Toy::Railgun => "railgun",
             Toy::Hookshot => "hookshot",
+            Toy::GelSprayer => "gel",
+            Toy::Washer => "washer",
         }
     }
     pub fn from_key(key: &str) -> Option<Toy> {
@@ -126,6 +141,8 @@ impl Toy {
             Toy::Sticky => "addon_sticky",
             Toy::Railgun => "addon_railgun",
             Toy::Hookshot => "addon_hookshot",
+            Toy::GelSprayer => "addon_gel",
+            Toy::Washer => "addon_washer",
         }
     }
     /// Archived weapon slot assignment (10 is displayed as 0).
@@ -136,6 +153,8 @@ impl Toy {
             Toy::Sticky => "addon_sticky_slot",
             Toy::Hookshot => "addon_hookshot_slot",
             Toy::Railgun => "addon_railgun_slot",
+            Toy::GelSprayer => "addon_gel_slot",
+            Toy::Washer => "addon_washer_slot",
         }
     }
     /// The toys switched on in the menu.
@@ -217,6 +236,7 @@ pub(crate) fn frame(l: &mut Level, c: &mut Core) {
     let mut clients = std::mem::take(&mut c.clients);
     hookshot::frame(&mut l.hooks, &l.world, &mut Ents { vm: &mut l.vm, c: &mut *c }, &mut clients, rules, hook, time);
     c.clients = clients;
+    gel_frame(l, c);
     if gun {
         fall::frame(&mut l.falls, &mut l.vm, c, &mut l.world);
     } else {
@@ -237,9 +257,36 @@ impl crate::Server {
         }
         let toys: Vec<Toy> = Toy::enabled(&self.core.cvars).collect();
         let l = self.level.as_ref();
-        let extra = l.map(|l| l.stickies.save_text()).unwrap_or_default() + &settings::save(&self.core.cvars);
+        let extra = l.map(|l| l.stickies.save_text() + &l.gel.save_text()).unwrap_or_default() + &settings::save(&self.core.cvars);
         save::wrap_with(&toys, l.and_then(|l| l.portals.save_text()).as_deref(), &extra, &body)
     }
+}
+
+/// Gel sprayer and powerwasher (the washer cleans gel, so they run together).
+fn gel_frame(l: &mut Level, c: &mut Core) {
+    let gel_on = c.cvars.value_of(Toy::GelSprayer.cvar()) != 0.0;
+    if !gel_on {
+        if !l.gel.splats.is_empty() {
+            l.gel.clear(&mut c.clients);
+        }
+    } else {
+        let (time, dt) = (l.vm.time, l.vm.g_f(c.sv.globals.frametime));
+        let gravity = c.cvars.value_of("sv_gravity");
+        let clients = std::mem::take(&mut c.clients);
+        let mut ents = Ents { vm: &mut l.vm, c: &mut *c };
+        gel_phys::after(&mut l.gel, &mut ents, clients.len(), time);
+        l.gel.frame(&l.world, &ents, &clients, time, dt, gravity);
+        c.clients = clients;
+    }
+    if c.cvars.value_of(Toy::Washer.cvar()) != 0.0 {
+        let dt = l.vm.g_f(c.sv.globals.frametime);
+        let scale = c.cvars.value_of("addon_washer_push").clamp(0.0, 4.0);
+        let mut clients = std::mem::take(&mut c.clients);
+        let mut ents = Ents { vm: &mut l.vm, c: &mut *c };
+        l.washers.frame(&mut l.world, &mut ents, &mut clients, &mut l.gel, scale, dt);
+        c.clients = clients;
+    }
+    l.gel.send(&mut c.clients);
 }
 
 fn boomerang_frame(l: &mut Level, c: &mut Core) {
@@ -274,6 +321,8 @@ pub(crate) fn shut_down(l: &mut Level, c: &mut Core) {
     *st = Default::default();
     l.boomerangs.clear(&mut c.clients);
     l.stickies.clear(&mut c.clients);
+    l.gel.clear(&mut c.clients);
+    l.washers.reset();
     l.hooks.reset();
 }
 

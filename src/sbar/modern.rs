@@ -264,7 +264,7 @@ mod tests {
         cl.items = 4096 | 127;
         cl.stats[STAT_HEALTH] = 100;
         cl.stats[STAT_ACTIVEWEAPON] = 16;
-        sb.addon_weapons = Toy::ALL.map(|t| Entry { weapon: Weapon::Addon(t), slot: 6 }).to_vec();
+        sb.addon_weapons = Toy::ALL[..5].iter().map(|&t| Entry { weapon: Weapon::Addon(t), slot: 6 }).collect();
         sb.held_addon = Some(Toy::Sticky);
         let icons = sb.weapon_row(&cl);
         assert_eq!(icons.len(), 13);

@@ -114,6 +114,9 @@ pub struct Level {
     /// Portal gun state (empty unless add-ons are in use).
     pub portals: crate::addons::portal::Portals,
     pub stickies: crate::addons::sticky::Stickies,
+    /// Gel splats and blobs in flight.
+    pub gel: crate::addons::gel::Gel,
+    pub(crate) washers: crate::addons::washer::Washers,
     /// Monster fall damage while the portal gun is on.
     pub(crate) falls: crate::addons::fall::Falls,
     /// Railgun refire timers.

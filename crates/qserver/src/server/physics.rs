@@ -68,8 +68,13 @@ impl Server {
             if c.sv.paused {
                 continue;
             }
-            let cmd = qworld::user::UserCmd { forwardmove: mv.forward, sidemove: mv.side, upmove: mv.up };
+            let mut cmd = qworld::user::UserCmd { forwardmove: mv.forward, sidemove: mv.side, upmove: mv.up };
+            let mut p = p;
+            let toys = !l.gel.splats.is_empty() && crate::addons::active(c);
             let mut ents = Ents { vm: &mut l.vm, c };
+            if toys {
+                crate::addons::gel_phys::tune(&l.gel, &ents, e, &mut p, &mut cmd);
+            }
             qworld::user::client_think(&l.world, &mut ents, &p, e, &cmd);
         }
     }
@@ -94,6 +99,7 @@ impl Server {
         let toys = crate::addons::active(c);
         if toys {
             crate::addons::portal_move::snapshot(&mut l.portals, &Ents { vm: &mut *vm, c: &mut *c });
+            crate::addons::gel_phys::snapshot(&mut l.gel, &Ents { vm: &mut *vm, c: &mut *c });
         }
         let mut i = 0u32;
         loop {
@@ -118,6 +124,9 @@ impl Server {
                 vm.set_self(e);
                 exec(vm, c, w, vm.g_i(g.f_player_pre_think));
                 let ok = qworld::phys::physics_client_move(w, &mut Ents { vm: &mut *vm, c: &mut *c }, &p, e);
+                if ok && toys {
+                    crate::addons::gel_phys::land(&mut l.gel, &mut Ents { vm: &mut *vm, c: &mut *c }, e);
+                }
                 if ok {
                     vm.set_g_f(g.time, vm.time as f32);
                     vm.set_self(e);

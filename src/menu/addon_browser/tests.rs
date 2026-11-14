@@ -48,7 +48,7 @@ fn occupied_keys_require_confirmation_for_shared_and_unique_actions() {
     assert_eq!(menu.browser_command(), Some("+attack2"));
     assert_eq!(keys_for(&menu.bindings, menu.browser_command().unwrap()), vec![b'f' as i32]);
     // Goggles has one unique action and no weapon slot.
-    menu.addon_ui.selected = 5;
+    menu.addon_ui.selected = ADDON.iter().position(|a| a.id == "goggles").unwrap();
     menu.addon_ui.focus = 2;
     assert!(menu.selected_addon().weapons.is_empty());
     menu.key(K_ENTER, &mut cv, false);
@@ -83,7 +83,7 @@ fn every_parameter_link_returns_to_the_selected_addon() {
     for index in 0..ADDON.len() {
         menu.addon_ui.selected = index;
         menu.addon_ui.focus = menu.browser_rows();
-        let page = menu.selected_addon().page.unwrap();
+        let Some(page) = menu.selected_addon().page else { continue };
         menu.key(K_ENTER, &mut cv, false);
         assert_eq!(menu.screen, Screen::OptionsPage(page));
         menu.key(K_ESCAPE, &mut cv, false);
@@ -263,10 +263,12 @@ fn controller_sections_reach_every_addons_action_without_a_keyboard() {
             menu.key(K_DPAD_DOWN, &mut cv, false);
         }
         assert!(menu.browser_row_y(a.row_count() - 1) + 16.0 <= 322.0);
-        menu.key(K_ABUTTON, &mut cv, false);
-        assert_eq!(menu.screen, Screen::OptionsPage(a.page.unwrap()));
-        menu.key(K_BBUTTON, &mut cv, false);
-        assert_eq!(menu.screen, Screen::OptionsPage(Page::Addons));
+        if let Some(page) = a.page {
+            menu.key(K_ABUTTON, &mut cv, false);
+            assert_eq!(menu.screen, Screen::OptionsPage(page));
+            menu.key(K_BBUTTON, &mut cv, false);
+            assert_eq!(menu.screen, Screen::OptionsPage(Page::Addons));
+        }
         menu.key(K_RSHOULDER, &mut cv, false);
         assert_eq!(menu.addon_ui.focus, 0);
         menu.key(K_DPAD_DOWN, &mut cv, false);

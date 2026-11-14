@@ -156,7 +156,7 @@ impl Presentation {
             let age = (time - s.time) as f32;
             trail(geom, s, age, right, up);
         }
-        geom.2.push(FteBatch { pic, blend: FteBlend::AddA, lines: false, first_index: first, num_indices: geom.1.len() as u32 - first, soft: false });
+        geom.2.push(FteBatch { pic, blend: FteBlend::AddA, lines: false, first_index: first, num_indices: geom.1.len() as u32 - first, soft: false, gel: false });
     }
 }
 

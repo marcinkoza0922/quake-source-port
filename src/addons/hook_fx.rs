@@ -126,12 +126,12 @@ impl HookFx {
             }
             heads.push((end, dir, side));
         }
-        geom.2.push(FteBatch { pic: link, blend: FteBlend::Blend, lines: false, first_index: first, num_indices: geom.1.len() as u32 - first, soft: false });
+        geom.2.push(FteBatch { pic: link, blend: FteBlend::Blend, lines: false, first_index: first, num_indices: geom.1.len() as u32 - first, soft: false, gel: false });
         let first = geom.1.len() as u32;
         for (end, dir, side) in heads {
             quad(geom, end - dir * HEAD * 0.4, dir * HEAD, side * HEAD, [255; 4]);
         }
-        geom.2.push(FteBatch { pic: head, blend: FteBlend::Blend, lines: false, first_index: first, num_indices: geom.1.len() as u32 - first, soft: false });
+        geom.2.push(FteBatch { pic: head, blend: FteBlend::Blend, lines: false, first_index: first, num_indices: geom.1.len() as u32 - first, soft: false, gel: false });
     }
 }
 

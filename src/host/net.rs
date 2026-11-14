@@ -377,7 +377,8 @@ impl Host {
         let mut feedback = None;
         for e in evs {
             match e {
-                ClientEvent::PortalEffect(_) | ClientEvent::RailEffect(_) | ClientEvent::Hook(_) | ClientEvent::Boomerang(_) => {
+                ClientEvent::PortalEffect(_) | ClientEvent::RailEffect(_) | ClientEvent::Hook(_) | ClientEvent::Boomerang(_)
+                | ClientEvent::Gel(_) | ClientEvent::Water(_) => {
                     self.toy_event(e);
                 }
                 ClientEvent::HitFeedback { kill } => {

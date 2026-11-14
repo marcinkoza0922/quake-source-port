@@ -96,6 +96,20 @@ impl Host {
                 g.origin = (Vec3::from(g.origin) + cv.viewmodel.offset(v.angles)).to_array();
                 ents.push(g);
             }
+            let me = self.cl.viewentity.saturating_sub(1);
+            let held = |t| self.toy.held == Some(t) && self.cl.intermission == 0 && self.cl.stats[0] > 0
+                && cv.viewmodel.visible() && self.cl.items & crate::sbar::IT_INVISIBILITY == 0;
+            let toy_gun = if held(qserver::addons::Toy::GelSprayer) {
+                self.gel_fx.weapon(me, self.cl.time, *v, &mut self.level, &self.server.core.fs, &mut self.r)
+            } else if held(qserver::addons::Toy::Washer) {
+                self.water_fx.weapon(me, self.cl.time, *v, &mut self.level, &self.server.core.fs, &mut self.r)
+            } else {
+                None
+            };
+            if let Some(mut g) = toy_gun {
+                g.origin = (Vec3::from(g.origin) + cv.viewmodel.offset(v.angles)).to_array();
+                ents.push(g);
+            }
             crate::addons::sticky_draw::bombs(&self.cl, &mut self.level, &self.server.core.fs, &mut self.r, &mut ents, &mut dls);
             self.boomerang_fx.entities(self.cl.time, &mut self.level, &self.server.core.fs, &mut self.r, self.snd.as_ref(), &mut ents);
             if let Some(g) = gun {
@@ -116,6 +130,13 @@ impl Host {
             self.rail_fx.frame(self.cl.time, v, &mut self.r, &mut fte);
             self.hook_fx.frame(&self.cl, self.cl.viewentity.saturating_sub(1), v, &mut self.r, &mut fte);
             self.boomerang_fx.frame(self.cl.time, &self.cl, v, &mut self.r, &mut fte);
+            let grav = self.cv("sv_gravity");
+            let grav = if grav > 0.0 { grav } else { 800.0 };
+            self.gel_fx.frame(&self.cl, &self.level, &mut self.r, v, grav, self.snd.as_ref(), &mut fte);
+            self.water_fx.frame(&self.cl, self.cl.viewentity.saturating_sub(1), v, grav, &mut self.r, &mut fte);
+            for p in self.water_fx.wash_points(self.cl.time).collect::<Vec<_>>() {
+                self.blood.wash(p, crate::addons::water_fx::WASH_RADIUS);
+            }
             self.blood.frame(
                 crate::blood::Settings::read(&self.server.core.cvars), &self.cl, &self.level,
                 &self.server.core.fs, &mut self.r, &ents, &dyn_verts,
