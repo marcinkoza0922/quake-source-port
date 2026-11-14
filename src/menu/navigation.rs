@@ -6,7 +6,8 @@ impl Menu {
     pub(super) fn back_button(&self) -> Option<(f32, f32, f32, f32)> {
         if self.capturing() || self.osk.is_some() { return None; }
         let (x, y) = match self.screen {
-            Screen::SinglePlayer | Screen::Multiplayer => (CLASSIC.0 + 72.0, CLASSIC.1 + 32.0 + 3.0 * 20.0 + 8.0),
+            Screen::SinglePlayer => (CLASSIC.0 + 72.0, CLASSIC.1 + 32.0 + 4.0 * 20.0 + 8.0),
+            Screen::Multiplayer => (CLASSIC.0 + 72.0, CLASSIC.1 + 32.0 + 3.0 * 20.0 + 8.0),
             Screen::Options => (PANEL_X, ROW0 + PAGES.len() as f32 * ROW_H + 12.0),
             Screen::OptionsPage(Page::Addons) => (20.0, 266.0),
             Screen::OptionsPage(Page::NewGameAddons) => (24.0, 294.0),

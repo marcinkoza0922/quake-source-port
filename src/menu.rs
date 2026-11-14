@@ -365,7 +365,7 @@ impl Menu {
         match self.screen {
             Screen::Death => row(140.0, 24.0, 4, 160.0, 480.0),
             Screen::Main => row(cy + 32.0, 20.0, MAIN_ITEMS, cx + 54.0, cx + 312.0),
-            Screen::SinglePlayer => row(cy + 32.0, 20.0, 3, cx + 54.0, cx + 312.0),
+            Screen::SinglePlayer => row(cy + 32.0, 20.0, 4, cx + 54.0, cx + 312.0),
             Screen::Load | Screen::Save => self.card_at(x, y),
             Screen::Options => row(ROW0, ROW_H, PAGES.len(), PANEL_X, PANEL_X + PANEL_W),
             Screen::OptionsPage(p) => {
@@ -379,6 +379,10 @@ impl Menu {
             Screen::ModMaps => self.mods.item_at(modmenu::Page::Maps, (x, y)),
             Screen::None => None,
         }
+    }
+
+    fn mods_page(&self) -> modmenu::Page {
+        if self.screen == Screen::Mods { modmenu::Page::List } else { modmenu::Page::Maps }
     }
 
     fn cursor_mut(&mut self) -> Option<&mut usize> {

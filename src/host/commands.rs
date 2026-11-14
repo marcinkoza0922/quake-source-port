@@ -539,6 +539,17 @@ pub(super) fn register_commands(c: &mut Commands<Host>) {
             h.menu.open(Screen::Mods);
         }
     });
+    // menu_levels: the running mod's level selector (New Game > Level Select)
+    c.add("menu_levels", |h, _| {
+        let g = h.game_name().to_string();
+        h.scan_mods();
+        if h.menu.mods.select(&g) {
+            h.scan_mod_maps(&g);
+            h.menu.open(Screen::ModMaps);
+        } else {
+            h.menu.open(Screen::Mods);
+        }
+    });
     c.add("game", |h, a| {
         if a.argc() < 2 {
             let g = h.game_name().to_string();
