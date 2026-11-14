@@ -16,6 +16,7 @@ impl Pipelines {
             self.ui,
             self.post,
             self.ao,
+            self.ao_source,
             self.ao_apply,
             self.vel_alias,
             self.vel_world,
@@ -52,6 +53,7 @@ impl Pipelines {
             post_vs,
             post_fs,
             ao_fs,
+            ao_source_fs,
             ao_apply_fs,
             vel_alias_vs,
             vel_world_vs,
@@ -166,6 +168,7 @@ impl Pipelines {
             sample_shading: false,
             ..d(vs, fs, bindings, attrs, Blend::None, false, false)
         };
+        self.ao_source = graphics(gpu, layout, &fx(post_vs, ao_source_fs, &[], &[], AO_SOURCE_FORMAT, false))?;
         self.ao = graphics(gpu, layout, &fx(post_vs, ao_fs, &[], &[], AO_FORMAT, false))?;
         self.ao_apply = graphics(
             gpu,

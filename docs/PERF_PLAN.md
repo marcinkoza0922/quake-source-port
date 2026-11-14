@@ -109,10 +109,10 @@ confirm wins windowed (`qprof -window`, or qbench for parity).
   (including its apply pass). Separate prepare/generate/to-apply/apply/resume
   timestamps and a controlled 200%-scale SSAO matrix now identify AO generation
   as the dominant cost with MSAA, even without sample shading (results below).
-  Next: investigate the generation shader's repeated sample-0 depth reads;
-  test a full-resolution single-sample snapshot of sample-0 depth/alpha while
-  retaining exact output, then include its extraction cost in the comparison.
-  The timings identify the expensive interval, not the hardware cause.
+  A full-resolution RG32F sample-0 depth/alpha snapshot now removes repeated
+  multisample reads while retaining exact output (results below); extraction
+  and its barriers are included in `ao-prepare`. The original timings identified
+  the expensive interval, not the hardware cause.
   `gl_lodbias auto` also selects a −1.5 mip bias with 8x sample shading, so
   controlled sample-shading deltas include that sampler change. Running AO
   at output resolution when render scale exceeds 1 would be a *visual* change.
@@ -489,3 +489,51 @@ confirm wins windowed (`qprof -window`, or qbench for parity).
   455 tests passed, 2 skipped; clippy clean. Reports:
   `target/qprof/ao-stages-before/`, `ao-stages-after/` and
   `ao-stages-validation/`.
+
+- 2026-11-14, item 6 sample-0 snapshot: MSAA SSAO now extracts exact
+  sample-0 depth/alpha into a full-resolution RG32F image before generation.
+  The AO algorithm, sample positions, sky/fog mask and blur are unchanged;
+  single-sample SSAO reads the original attachments. The snapshot is allocated
+  on the first MSAA SSAO frame, reused across frames/views and recreated with
+  scene targets after resolution/scale/sample changes. Its draw, target setup
+  and barriers are included in `ao-prepare`, so the comparison includes
+  extraction overhead.
+  RTX 3060 Ti, 1280×720 headless, pinned settings, 20 s after 4 s warm-up,
+  250 Hz simulation, three runs per scenario/map (24 before, 24 after).
+  Values below come from each build's run selected by median fps:
+
+  | SSAO at 200% scale | e1m1 frame µs before → after | AD frame µs before → after | e1m1 GPU µs before → after | AD GPU µs before → after |
+  |---|--:|--:|--:|--:|
+  | 8x MSAA | 5375 → 3882 | 5526 → 4239 | 5278 → 3779 | 5425 → 4155 |
+  | 8x sample shading | 6267 → 4672 | 6750 → 5464 | 6171 → 4581 | 6650 → 5377 |
+
+  MSAA frame time falls 27.8%/23.3% (e1m1/AD); sample-shading frame time
+  falls 25.5%/19.1%. MSAA AO generation falls 3455→1788 / 2744→1490 µs,
+  while prepare rises 24→170 / 27→156 µs. Summed AO intervals fall
+  3813→2277 / 3074→1864 µs, including extraction. Sample-shading generation
+  falls 3491→1796 / 2790→1501 µs, with prepare 107→256 / 51→213 µs.
+  One-sample controls (100% and 200% scale) vary −2.4%…+4.1% in frame time,
+  with generation nearly unchanged; small overall deltas remain noisy.
+  All 24 fixed-time combat screenshot pairs have ImageMagick AE = 0 and
+  identical frame/particle/geometry counters. Six additional before/after
+  pairs cover fractional scale, 2x/4x/8x MSAA, SSAO off, and two/four split
+  views: AE = 0, with no Vulkan validation errors in all 12 runs. Inspected
+  e1m1's shaded metal corner/impact/weapon/HUD, AD's pillar/torch/axe/HUD,
+  and four-player views. Benchmark logs contain no unknown commands/cvars
+  or Host_Error. The offscreen regression now exercises split views followed
+  by resize and sample-count changes, requiring the original pixels after
+  target recreation. 455 tests passed, 2 skipped; clippy clean.
+  Reports: `target/qprof/snapshot-before/`, `snapshot-after/`; extra captures
+  and validation logs: `target/perf-snapshot/`.
+  Windowed confirmation (same GPU/resolution, pinned combined 8x sample
+  shading/200%-scale SSAO, 20 s after 4 s warm-up, three runs/build/map,
+  vsync off, `host_maxfps 10000`): e1m1 median 189.5→276.5 fps,
+  5278→3616 µs frame (−31.5%), 5126→3477 µs GPU; ad_sepulcher
+  175.7→228.3 fps, 5691→4380 µs frame (−23.0%), 5580→4261 µs GPU.
+  Wall-time combat populations vary in windowed runs; deterministic headless
+  pairs establish pixel equivalence. Reports: `snapshot-window-before/`
+  and `snapshot-window-after/` under `target/qprof/`. Windowed logs are
+  clean and all user config-file hashes stayed unchanged. These are engine
+  A/B results, not reference-engine parity measurements. Next: remeasure
+  all-enhancements with this optimisation before choosing another combined
+  cost target; split-view GPU timestamp attribution remains outstanding.

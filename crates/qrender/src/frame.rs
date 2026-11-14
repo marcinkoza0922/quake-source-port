@@ -37,6 +37,9 @@ impl Renderer {
         if self.width == 0 || self.height == 0 {
             return Ok(());
         }
+        if fr.settings.ssao > 0.0 && (fr.view.is_some() || !fr.splits.is_empty()) {
+            self.ensure_ao_source()?;
+        }
         self.prepare_shader()?;
         let dev = self.gpu.device.clone();
         let fi = self.cur;
@@ -1242,12 +1245,19 @@ impl Renderer {
                     let scene_img = t.color_ms.as_ref().unwrap_or(&t.color);
                     gpu::barrier(&dev, cmd, scene_img.image, crng, vk::ImageLayout::COLOR_ATTACHMENT_OPTIMAL, vk::ImageLayout::SHADER_READ_ONLY_OPTIMAL);
                     depth_layout(vk::ImageLayout::DEPTH_ATTACHMENT_OPTIMAL, vk::ImageLayout::DEPTH_STENCIL_READ_ONLY_OPTIMAL);
+                    let ao_slot = if let Some((source, slot)) = &t.ao_source {
+                        fx_pass(source, [0.0; 4], &|| {
+                            dev.cmd_bind_pipeline(cmd, gfx, p.ao_source);
+                            dev.cmd_draw(cmd, 3, 1, 0, 0);
+                        });
+                        *slot
+                    } else { t.color_slot };
                     fx_pass(&t.ao, [1.0, 0.0, 0.0, 0.0], &|| {
-                        ts(6); // scene/depth transitions and AO target setup complete
+                        ts(6); // transitions, optional sample-0 snapshot and AO target setup complete
                         dev.cmd_bind_pipeline(cmd, gfx, p.ao);
                         push(bytes_of(&[AoPush {
                             proj: [vs.tan[0], vs.tan[1], samples as f32, st.ssao_radius.clamp(4.0, 256.0)],
-                            size: [scene_w as f32, scene_h as f32, st.ssao.min(4.0), t.color_slot as f32],
+                            size: [scene_w as f32, scene_h as f32, st.ssao.min(4.0), ao_slot as f32],
                         }]));
                         dev.cmd_draw(cmd, 3, 1, 0, 0);
                         ts(7); // AO generation, before its target becomes shader-readable

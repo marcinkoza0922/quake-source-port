@@ -19,6 +19,8 @@ pub const DEPTH_FORMAT: vk::Format = vk::Format::D32_SFLOAT;
 pub const LM_FORMAT: vk::Format = vk::Format::R16G16B16A16_SFLOAT;
 /// SSAO target (visibility, view depth) and per-object velocity target.
 pub const AO_FORMAT: vk::Format = vk::Format::R16G16_SFLOAT;
+/// Exact scene sample-0 depth and alpha for MSAA SSAO input.
+pub const AO_SOURCE_FORMAT: vk::Format = vk::Format::R32G32_SFLOAT;
 pub const VEL_FORMAT: vk::Format = vk::Format::R16G16_SFLOAT;
 
 pub struct Pipelines {
@@ -49,6 +51,8 @@ pub struct Pipelines {
     pub post: vk::Pipeline,
     /// SSAO pass (fullscreen, scene resolution).
     pub ao: vk::Pipeline,
+    /// Extracts sample-0 depth/alpha into a single-sampled image.
+    pub ao_source: vk::Pipeline,
     /// Multiplies the blurred AO into the scene colour (scene samples).
     pub ao_apply: vk::Pipeline,
     /// Velocity pass for moving alias models / brush entities.
@@ -82,6 +86,7 @@ struct Shaders {
     post_vs: vk::ShaderModule,
     post_fs: vk::ShaderModule,
     ao_fs: vk::ShaderModule,
+    ao_source_fs: vk::ShaderModule,
     ao_apply_fs: vk::ShaderModule,
     vel_alias_vs: vk::ShaderModule,
     vel_world_vs: vk::ShaderModule,
@@ -234,6 +239,7 @@ impl Pipelines {
         let ui_fs = m(spv!("ui.frag"))?;
         let post_vs = m(spv!("post.vert"))?;
         let post_fs = m(spv!("post.frag"))?;
+        let ao_source_fs = m(spv!("aosource.frag"))?;
         let ao_fs = m(spv!("ao.frag"))?;
         let ao_apply_fs = m(spv!("aoapply.frag"))?;
         let vel_alias_vs = m(spv!("velalias.vert"))?;
@@ -279,6 +285,7 @@ impl Pipelines {
             post_vs,
             post_fs,
             ao_fs,
+            ao_source_fs,
             ao_apply_fs,
             vel_alias_vs,
             vel_world_vs,
@@ -308,6 +315,7 @@ impl Pipelines {
             ui: null,
             post: null,
             ao: null,
+            ao_source: null,
             ao_apply: null,
             vel_alias: null,
             vel_world: null,

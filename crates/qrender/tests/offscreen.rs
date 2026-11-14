@@ -183,6 +183,26 @@ fn start_bsp_renders_non_black() {
         r.render(frame).unwrap();
         r.read_pixels().unwrap()
     }).collect();
+    // The MSAA snapshot must survive consecutive views and be recreated after
+    // resize/sample changes. Returning to the same scene must restore pixels.
+    let splits = [
+        SplitView { view, rect: [0, 0, 160, 200], blend: [0.0; 4] },
+        SplitView { view: View { angles: [0.0, yaw + 90.0, 0.0], ..view }, rect: [160, 0, 160, 200], blend: [0.0; 4] },
+    ];
+    let split_frame = RenderFrame {
+        time: frame.time,
+        splits: &splits,
+        settings: Settings { ssao: 2.0, msaa: 4, render_scale: 2.0, ..Default::default() },
+        ..Default::default()
+    };
+    r.render(&split_frame).unwrap();
+    let split_expected = r.read_pixels().unwrap();
+    r.resize(400, 240);
+    r.render(&frames[2]).unwrap();
+    r.render(&frames[1]).unwrap(); // drops multisampled targets
+    r.resize(320, 200);
+    r.render(&split_frame).unwrap();
+    assert_eq!(split_expected, r.read_pixels().unwrap(), "AO snapshot changed after target recreation");
     r.gpu_times_wanted = true;
     for (frame, expected) in frames.iter().zip(expected) {
         // Drain both frame slots so collection includes this path's queries.
