@@ -3,6 +3,7 @@
 //! classification and a ranked hotspot list.
 
 use std::fmt::Write as _;
+mod interactions;
 
 /// Host phases as host/prof.rs names them.
 pub const PHASES: [&str; 6] = ["pre", "input", "server", "client", "view+sound", "render"];
@@ -147,6 +148,7 @@ pub fn write(o: &crate::Opts, results: &[Result]) {
             }
         }
         let Some(b) = base else { continue };
+        interactions::write(&mut md, &rows, &b);
         // Where each scenario's extra cost went.
         let _ = writeln!(md, "\n### {map}: where the extra time goes (vs vanilla)\n");
         let _ = writeln!(md, "| scenario | Δ CPU work | biggest CPU phase Δ | Δ GPU | biggest GPU stage Δ | server p99 | what |");

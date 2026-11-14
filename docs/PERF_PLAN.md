@@ -101,10 +101,14 @@ confirm wins windowed (`qprof -window`, or qbench for parity).
   one alone (+6.4 ms GPU on e1m1, +8 ms on AD; `translucent` reaches
   3–3.6 ms). SSAO alone adds 0.3 ms. Supersampling (`vid_fsaamode`) likely
   multiplies the cost of SSAO and the translucent/water passes.
-- Plan: add pairwise scenarios to qprof (supersample+ssao,
-  supersample+water); then run SSAO and similar effects at the base
-  resolution and upscale (*visual*), or document the combination as
-  expensive in the option tooltip.
+- Investigation: qprof now has `supersample-ssao` and
+  `supersample-water` pairs and reports GPU excess above additive cost
+  (see results below). `vid_fsaamode` enables sample shading, whereas
+  `r_renderscale 2` quadruples scene pixels; all-enhancements enables both.
+  SSAO already uses a single-sampled target with sample shading disabled
+  (including its apply pass). Next isolate 8x MSAA from sample shading and
+  200% render scale before choosing an optimisation. Running AO at output
+  resolution when render scale exceeds 1 would be a *visual* change.
 
 ### 7. Extra scene views (teleporter windows, portals)
 - Problem: `teleportwindows` +1.3 ms CPU and +0.7 ms GPU on AD; each window
@@ -148,8 +152,9 @@ confirm wins windowed (`qprof -window`, or qbench for parity).
 
 - Run qprof with `-runs 3` for the before/after numbers of each item.
 - Done: particle and vertex counters in the engine and qprof JSON (item 4).
-- Add pairwise enhancement scenarios (item 6) and a per-view GPU timestamp
-  for split-screen (item 5).
+- Done: `supersample-ssao` and `supersample-water` diagnostic scenarios
+  (item 6), with additive GPU cost and interaction excess in `report.md`.
+- Add a per-view GPU timestamp for split-screen (item 5).
 - Record a windowed baseline (`qprof -window`) once, for absolute numbers.
 
 ## Results log
@@ -302,3 +307,42 @@ confirm wins windowed (`qprof -window`, or qbench for parity).
   errors. 451 tests passed, 2 skipped; clippy clean. Config-file hashes stayed
   unchanged after all windowed runs. Next: per-view geometry handling before
   enabling culling for shared views.
+
+- 2026-11-13, item 6 diagnostics: added `supersample-ssao` and
+  `supersample-water` to qprof without altering standalone scenarios or
+  all-enhancements. The Markdown report compares each pair with additive
+  GPU cost (`supersample + effect − vanilla`) and shows the largest stage
+  excess; it omits incomplete pairs and missing stage timestamps. A regression
+  test covers baseline subtraction, incomplete pairs and missing timestamps.
+  RTX 3060 Ti, 1280×720 headless, pinned qprof settings, 20 s after 4 s
+  warm-up, 250 Hz simulation, 3 runs/scenario/map (36 runs total). Values
+  below come from each scenario's run with median fps, matching qprof:
+
+  | scenario | e1m1 frame / GPU µs | ad_sepulcher frame / GPU µs |
+  |---|--:|--:|
+  | vanilla | 1354 / 1234 | 2213 / 2007 |
+  | supersample | 1619 / 1497 | 2487 / 2377 |
+  | ssao | 1663 / 1543 | 2386 / 2276 |
+  | water | 1352 / 1237 | 2481 / 2209 |
+  | supersample-ssao | 2208 / 2086 | 2996 / 2884 |
+  | supersample-water | 1627 / 1505 | 2817 / 2701 |
+
+  SSAO interaction excess is +280/+238 µs (e1m1/AD), mostly in
+  `translucent` (+278/+249 µs). That timestamp bucket includes SSAO before
+  liquid draws, so it does not identify water as the cause. Water interaction
+  excess is +5/+123 µs, with the AD difference mostly in `world` (+143 µs);
+  this is small relative to the original multi-millisecond all-enhancements
+  excess and partly near measurement noise. These pairs alone do not explain
+  that original result. Code inspection confirms SSAO generation already
+  uses a single-sampled image and both generation/apply disable sample shading.
+  Next: separate 8x MSAA, sample shading and 200% render scale (four times
+  the scene pixels) with controlled scenarios before choosing a visual change.
+  No renderer or simulation changes, and no speedup or windowed parity claim.
+  Particle/geometry counters match across all six AD scenarios; e1m1 has
+  no FTE particles. Inspected the AD torch-lit corridor with both pairs and
+  e1m1's metal corridor with SSAO, weapon and HUD intact. All run logs are
+  free of unknown commands/cvars and Host_Error. No Vulkan code changed.
+  No before/after image comparison was needed
+  because the engine binary is unchanged. Reports: `target/qprof/pairwise-id1`
+  and `pairwise-ad-clean`; the initial AD attempt overlapping checks was
+  discarded. 452 tests passed, 2 skipped; clippy clean.
