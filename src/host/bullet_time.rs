@@ -122,7 +122,9 @@ mod tests {
         let Ok(r) = Renderer::headless(320, 240, &pal) else { return; };
         let mut h = Host::new(fs, r, None, Vec::new());
         h.headless = true;
-        for cmd in ["sv_autosave 0", "addons_enable 1", "map e1m1"] { h.exec_line(cmd); }
+        h.exec_line("sv_autosave 0");
+        qserver::addons::enable_all(&mut h.server.core.cvars);
+        h.exec_line("map e1m1");
         for _ in 0..30 { h.frame(1.0 / 72.0, Vec::new()); }
         h.menu.open(Screen::None);
         h.con.open = false;

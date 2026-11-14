@@ -95,6 +95,7 @@ mod integration {
         let mv = ClientMove { forward: 400.0, buttons: super::super::BUTTON_DODGE, ..Default::default() };
         apply(&mut l.dodges, &mut l.vm, &mut sv.core, 0, mv);
         assert_eq!(l.vm.ent_v(1, f.velocity), [0.0; 3]);
+        crate::addons::enable_all(&mut sv.core.cvars);
         sv.core.set_addons(true);
         apply(&mut l.dodges, &mut l.vm, &mut sv.core, 0, mv);
         assert_eq!(l.vm.ent_v(1, f.velocity), [550.0, 0.0, 190.0]);

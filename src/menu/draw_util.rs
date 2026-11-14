@@ -20,7 +20,7 @@ pub(super) fn draw_inventory_icon(c: &mut Canvas, pic: &mut PicFn, x: f32, y: f3
 }
 
 /// Main menu rows: the five of mainmenu.lmp plus Map Packs and Add-ons.
-pub(super) const MAIN_ITEMS: usize = 7;
+pub(super) const MAIN_ITEMS: usize = 6;
 
 pub const BORDER: [f32; 4] = [0.55, 0.42, 0.25, 1.0];
 pub const HILITE: [f32; 4] = [0.6, 0.38, 0.12, 0.45];

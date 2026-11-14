@@ -5,7 +5,8 @@ fn setup(page: Page) -> (Menu, Cvars) {
     for &(name, default, flags) in qserver::addons::CVARS {
         cv.register(name, default, flags);
     }
-    cv.register("addon_goggles", "1", 0);
+    cv.register("addon_goggles", "0", 0);
+    for n in ["addon_boomerang", "addon_portalgun"] { cv.set(n, "1"); }
     let mut menu = Menu::new();
     menu.open(Screen::OptionsPage(page));
     (menu, cv)
