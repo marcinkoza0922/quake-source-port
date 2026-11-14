@@ -40,6 +40,7 @@ mod frame;
 mod prof;
 mod goggles;
 mod bullet_time;
+mod hitstop;
 mod toy_fx;
 mod ctx;
 mod cvars;
@@ -120,6 +121,7 @@ pub struct Host {
     goggles: goggles::Goggles,
     pend_dodge: bool,
     bullet_time: bullet_time::BulletTime,
+    hitstop: hitstop::HitStop,
     /// Split-screen players 2..6 (`cl_splitscreen`); player 1 is `cl`.
     pub guests: Vec<crate::splitscreen::Guest>,
     /// Player 1's gamepad (the first pad used); other pads can join.
@@ -255,6 +257,7 @@ impl Host {
             goggles: Default::default(),
             pend_dodge: false,
             bullet_time: Default::default(),
+            hitstop: Default::default(),
             guests: Vec::new(),
             p1_pad: None,
             input_target: None,

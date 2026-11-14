@@ -8,6 +8,29 @@ pub(super) struct DamageCall {
     target: qpool::Entity,
     attacker: usize,
     health: f32,
+    class: u8,
+}
+
+/// IT_AXE: the stock melee weapon, which mods reuse for their own.
+const IT_AXE: f32 = 4096.0;
+/// Farthest a direct hit can be and still count as melee (axe reach is 64).
+const MELEE_REACH: f32 = 96.0;
+
+/// Hitstop damage class: 0 ranged, 1 melee, 2 explosive splash.
+fn class(vm: &Vm, c: &Core, target: u32, attacker: usize) -> u8 {
+    if vm.current_function_name() == "T_RadiusDamage" {
+        return 2;
+    }
+    let inflictor = vm.g_i(ofs_parm(1));
+    if inflictor != attacker as i32 {
+        return 0;
+    }
+    let f = &c.sv.fields;
+    let (a, t) = (vm.ent_v(attacker as u32, f.origin), vm.ent_v(target, f.origin));
+    let d = ((a[0] - t[0]).powi(2) + (a[1] - t[1]).powi(2) + (a[2] - t[2]).powi(2)).sqrt();
+    let num = |name: &str| vm.field_ofs(name).map_or(0.0, |o| vm.ent_f(attacker as u32, o));
+    // An axe, or a mod weapon that needs no ammo, at close range.
+    u8::from(d <= MELEE_REACH && (num("weapon") == IT_AXE || num("currentammo") <= 0.0))
 }
 
 pub(super) fn begin(vm: &Vm, c: &Core) -> Option<DamageCall> {
@@ -28,7 +51,10 @@ pub(super) fn begin(vm: &Vm, c: &Core) -> Option<DamageCall> {
     if health <= 0.0 || !health.is_finite() {
         return None;
     }
-    Some(DamageCall { target: vm.entity(target)?, attacker, health })
+    if c.cvars.value_of("addon_hitstop") == 0.0 || !crate::addons::active(c) || c.maxclients() != 1 {
+        return Some(DamageCall { target: vm.entity(target)?, attacker, health, class: u8::MAX });
+    }
+    Some(DamageCall { target: vm.entity(target)?, attacker, health, class: class(vm, c, target, attacker) })
 }
 
 pub(super) fn finish(vm: &Vm, c: &mut Core, call: DamageCall) {
@@ -51,6 +77,12 @@ pub(super) fn finish(vm: &Vm, c: &mut Core, call: DamageCall) {
     // parser consumes only the two exact forms as events, never commands.
     cl.message.byte(SVC_STUFFTEXT);
     cl.message.string(if kill { b"//qhit 1\n" } else { b"//qhit 0\n" });
+    if call.class != u8::MAX {
+        // Hitstop event: kill, health lost, class (see `class`), health before.
+        let line = format!("//qsp_hitstop {} {} {} {}\n", u8::from(kill), (call.health - health).round() as i32, call.class, call.health.round() as i32);
+        cl.message.byte(SVC_STUFFTEXT);
+        cl.message.string(line.as_bytes());
+    }
 }
 
 #[cfg(test)]
@@ -120,5 +152,18 @@ mod tests {
         l.vm.execute_by_name(&mut host, "T_RadiusDamage").unwrap();
         assert_eq!(host.c.clients[client].message.data, b"\x09//qhit 0\n\0");
         assert!(host.damage_calls.is_empty());
+        // With hitstop on, a second event carries kill, damage, class, health.
+        host.c.clients[client].message.clear();
+        host.c.cvars.set("addon_hitstop", "1");
+        host.c.addons_on = true;
+        l.vm.set_ent_f(target, f.health, 100.0);
+        l.vm.set_g_i(ofs_parm(0), target as i32);
+        l.vm.set_g_i(ofs_parm(1), 1);
+        l.vm.set_g_i(ofs_parm(2), 1);
+        l.vm.set_g_f(ofs_parm(3), 10.0);
+        l.vm.execute_by_name(&mut host, "T_Damage").unwrap();
+        let data = String::from_utf8_lossy(&host.c.clients[client].message.data).into_owned();
+        assert!(data.contains("//qsp_hitstop 0 10 "), "{data}");
+        assert!(data.trim_end_matches('\0').ends_with(" 100\n"), "{data}");
     }
 }

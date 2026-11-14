@@ -303,6 +303,16 @@ impl ClientState {
                 }
                 _ => {}
             }
+            if let Some(args) = line.strip_prefix(b"//qsp_hitstop ") {
+                let args = String::from_utf8_lossy(args);
+                let mut w = args.split_whitespace();
+                if let (Some(k), Some(d), Some(c), Some(h)) = (w.next(), w.next(), w.next(), w.next())
+                    && let (Ok(k), Ok(damage), Ok(class), Ok(health)) = (k.parse::<u8>(), d.parse(), c.parse(), h.parse())
+                {
+                    self.events.push(ClientEvent::HitStop { kill: k != 0, damage, class, health });
+                }
+                continue;
+            }
             if let Some(args) = line.strip_prefix(b"//qsp_portalfx ") {
                 if let Some(fx) = crate::PortalEffect::parse(&String::from_utf8_lossy(args)) {
                     self.events.push(ClientEvent::PortalEffect(fx));

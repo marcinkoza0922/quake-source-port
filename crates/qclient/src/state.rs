@@ -149,6 +149,8 @@ pub enum ClientEvent {
     LocalSound { sound: usize },
     /// Server-confirmed damage dealt to a living enemy; kills supersede hits.
     HitFeedback { kill: bool },
+    /// Add-on hitstop: `//qsp_hitstop kill damage class health` (0 ranged, 1 melee, 2 explosive).
+    HitStop { kill: bool, damage: i32, class: u8, health: i32 },
     PortalEffect(PortalEffect),
     RailEffect(crate::RailEffect),
     /// A hookshot changed state (`hooks` holds the live heads).
