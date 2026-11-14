@@ -3,6 +3,7 @@ pub(super) struct PortalDraw {
     pub portal: crate::portals::Portal,
     pub world: WorldDraw,
     pub ubo: u32,
+    pub scissor: vk::Rect2D,
     /// The view this portal is seen in (`None`: the main view).
     pub parent: Option<usize>,
     /// FTE batches drawn in this view (particles, gun portal ovals).
@@ -16,6 +17,7 @@ impl Renderer {
     pub(super) fn prepare_portals(
         &mut self,
         view: Option<&ViewSetup>,
+        extent: [u32; 2],
         gun: &[crate::GunPortal],
         set: &crate::Settings,
         dynw: &mut Dyn,
@@ -27,6 +29,7 @@ impl Renderer {
         let (Some(v), Some(w)) = (view, self.world.as_mut()) else {
             return Vec::new();
         };
+        let texture_extent = self.targets.as_ref().map_or(extent, |t| [t.scene_w, t.scene_h]);
         let dist2 = |p: &crate::portals::Portal| dot(sub(p.center, v.eye), sub(p.center, v.eye));
         let facing = |p: &crate::portals::Portal| {
             dot(sub(v.eye, p.center), p.normal) > 1.0 && box_in_frustum(&v.frustum, p.mins, p.maxs)
@@ -103,7 +106,8 @@ impl Renderer {
                     ident(),
                     lm,
                 ));
-                Some(PortalDraw { portal, world, ubo, parent, fte: Vec::new() })
+                let scissor = super::portal_scissor::aperture(&v.vp, &portal, extent, texture_extent);
+                Some(PortalDraw { portal, world, ubo, scissor, parent, fte: Vec::new() })
             })
             .collect()
     }
@@ -120,6 +124,7 @@ impl Renderer {
         aliases: &[AliasDraw],
         fi: usize,
         [width, height]: [u32; 2],
+        scene: usize,
     ) {
         let Some(t) = &self.targets else { return };
         let Some(w) = &self.world else { return };
@@ -132,6 +137,14 @@ impl Renderer {
         // all resources belong to this renderer and survive its submission.
         unsafe {
             for (i, portal) in portals.iter().enumerate().rev() {
+                let timestamp = |stage: usize| {
+                    if let Some(timing) = &self.gpu_times {
+                        let query = timing.destination_base(fi, scene)
+                            + (i * timing::DESTINATION_TS + stage) as u32;
+                        d.cmd_write_timestamp(cmd, vk::PipelineStageFlags::BOTTOM_OF_PIPE, timing.pool, query);
+                    }
+                };
+                timestamp(0);
                 let img = &t.portals[i].0;
                 gpu::barrier(
                     d,
@@ -197,10 +210,11 @@ impl Renderer {
                         max_depth: 1.0,
                     }],
                 );
-                d.cmd_set_scissor(cmd, 0, &[area]);
+                d.cmd_set_scissor(cmd, 0, &[portal.scissor]);
                 d.cmd_bind_descriptor_sets(cmd, gfx, p.layout, 0, &[f.set], &[portal.ubo]);
                 d.cmd_set_depth_bias(cmd, 0.0, 0.0, 0.0);
                 d.cmd_bind_vertex_buffers(cmd, 0, &[w.vbuf.buf], &[0]);
+                timestamp(1);
                 for wd in std::iter::once(&portal.world).chain(brushes.iter().skip(1)) {
                     d.cmd_bind_index_buffer(
                         cmd,
@@ -237,6 +251,7 @@ impl Renderer {
                         );
                     }
                 }
+                timestamp(2);
                 for a in aliases.iter().filter(|a| !a.viewmodel) {
                     let Some(Model::Alias(am)) = self.models.get(a.model) else {
                         continue;
@@ -253,6 +268,7 @@ impl Renderer {
                     );
                     d.cmd_draw_indexed(cmd, am.num_indices, 1, 0, 0, 0);
                 }
+                timestamp(3);
                 if particles.count > 0 {
                     d.cmd_bind_pipeline(cmd, gfx, p.particle);
                     d.cmd_bind_vertex_buffers(cmd, 0, &[f.dynbuf.buf], &[particles.ofs]);
@@ -275,6 +291,7 @@ impl Renderer {
                         d.cmd_draw_indexed(cmd, b.num_indices, 1, b.first_index, 0, 0);
                     }
                 }
+                timestamp(4);
                 d.cmd_end_rendering(cmd);
                 gpu::barrier(
                     d,
@@ -304,6 +321,7 @@ impl Renderer {
                     &[],
                     &[],
                 );
+                timestamp(5);
             }
         }
     }

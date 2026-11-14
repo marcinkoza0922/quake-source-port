@@ -1,4 +1,4 @@
-//! GPU intervals for every scene view, followed by shared UI/present work.
+//! GPU intervals for every scene view and its destinations, plus shared UI/present work.
 use crate::*;
 
 pub(super) const VIEW_STAGES: [&str; 14] = [
@@ -11,10 +11,15 @@ pub(super) const GPU_STAGES: [&str; 15] = [
     "ao-prepare", "ao-generate", "ao-to-apply", "ao-apply", "ao-resume",
     "translucent", "particles+vm", "post", "ui+present",
 ];
+pub(super) const DESTINATION_STAGES: [&str; 5] = ["setup", "world", "models", "particles", "resolve"];
+pub(super) const DESTINATION_TS: usize = DESTINATION_STAGES.len() + 1;
+
 pub(super) const VIEW_TS: usize = VIEW_STAGES.len();
 
 /// Per-view contribution in µs per profiled frame (including frames where
 /// this view was absent). These are a breakdown of the aggregate, not extra work.
+/// `frames` counts active scene frames for `gpu_view_times`, or destination
+/// draws (including recursion) for `gpu_destination_times`.
 #[derive(Clone, Debug)]
 pub struct GpuViewTiming {
     pub frames: u64,
@@ -29,10 +34,30 @@ pub(super) struct GpuTimes {
     pub frames: u64,
     views: Vec<([f64; VIEW_STAGES.len()], u64)>,
     values: Vec<u64>,
+    pub destination_counts: [Vec<usize>; FRAMES],
+    destinations: Vec<([f64; DESTINATION_STAGES.len()], u64)>,
 }
 
 impl GpuTimes {
-    pub fn stride(&self) -> u32 { (self.capacity * VIEW_TS + 2) as u32 }
+    pub fn stride(&self) -> u32 {
+        (self.capacity * (VIEW_TS + crate::MAX_PORTAL_VIEWS * DESTINATION_TS) + 2) as u32
+    }
+
+    pub fn destination_base(&self, fi: usize, scene: usize) -> u32 {
+        fi as u32 * self.stride()
+            + (self.capacity * VIEW_TS + 2 + scene * crate::MAX_PORTAL_VIEWS * DESTINATION_TS) as u32
+    }
+
+    fn accumulate_destinations(&mut self, scene: usize, values: &[u64], period: f64) {
+        self.destinations.resize(self.capacity, ([0.0; DESTINATION_STAGES.len()], 0));
+        let (sum, draws) = &mut self.destinations[scene];
+        for stamps in values.as_chunks::<DESTINATION_TS>().0 {
+            for k in 0..DESTINATION_STAGES.len() {
+                sum[k] += stamps[k + 1].saturating_sub(stamps[k]) as f64 * period;
+            }
+            *draws += 1;
+        }
+    }
 
     fn accumulate(&mut self, values: &[u64], period: f64) {
         let count = (values.len() - 2) / VIEW_TS;
@@ -69,7 +94,7 @@ impl Renderer {
         }
         let capacity = views.max(4);
         let ci = vk::QueryPoolCreateInfo::default().query_type(vk::QueryType::TIMESTAMP)
-            .query_count(((capacity * VIEW_TS + 2) * FRAMES) as u32);
+            .query_count(((capacity * (VIEW_TS + crate::MAX_PORTAL_VIEWS * DESTINATION_TS) + 2) * FRAMES) as u32);
         // SAFETY: valid device; the old pool is retained if allocation fails.
         let pool = unsafe { self.gpu.device.create_query_pool(&ci, None)? };
         if let Some(t) = &mut self.gpu_times {
@@ -81,6 +106,7 @@ impl Renderer {
             self.gpu_times = Some(GpuTimes {
                 pool, capacity, written: [0; FRAMES], sum_ns: [0.0; GPU_STAGES.len()],
                 frames: 0, views: Vec::new(), values: Vec::new(),
+                destination_counts: std::array::from_fn(|_| Vec::new()), destinations: Vec::new(),
             });
         }
         Ok(())
@@ -103,6 +129,34 @@ impl Renderer {
             t.accumulate(&values, period);
             t.values = values;
         }
+        for scene in 0..views {
+            let count = t.destination_counts[fi][scene];
+            if count == 0 { continue; }
+            t.values.resize(count * DESTINATION_TS, 0);
+            // SAFETY: the frame fence completed; only this scene's written prefix is read.
+            let result = unsafe {
+                self.gpu.device.get_query_pool_results(t.pool, t.destination_base(fi, scene),
+                    &mut t.values, vk::QueryResultFlags::TYPE_64)
+            };
+            if result.is_ok() {
+                let values = std::mem::take(&mut t.values);
+                t.accumulate_destinations(scene, &values, period);
+                t.values = values;
+            }
+        }
+    }
+
+    /// Destination subintervals per scene, normalized by all profiled GPU frames.
+    /// `frames` counts destination draws, including recursive views. These sums
+    /// are a subset of `destinations`, never additional aggregate GPU work.
+    pub fn gpu_destination_times(&self) -> Vec<GpuViewTiming> {
+        let Some(t) = &self.gpu_times else { return Vec::new() };
+        let n = t.frames.max(1) as f64 * 1000.0;
+        let scenes = t.views.iter().take_while(|(_, frames)| *frames > 0).count();
+        t.destinations.iter().take(scenes).map(|(sum, draws)| GpuViewTiming {
+            frames: *draws,
+            stages: DESTINATION_STAGES.iter().enumerate().map(|(k, name)| (*name, sum[k] / n)).collect(),
+        }).collect()
     }
 
     /// Per-view breakdown since the last `take_gpu_times`, with the same
@@ -126,6 +180,7 @@ impl Renderer {
         t.sum_ns.fill(0.0);
         t.frames = 0;
         t.views.fill(([0.0; VIEW_STAGES.len()], 0));
+        t.destinations.fill(([0.0; DESTINATION_STAGES.len()], 0));
         Some((frames, values))
     }
 }
@@ -137,7 +192,8 @@ mod tests {
     #[test]
     fn sums_views_once_and_handles_changing_view_counts() {
         let mut t = GpuTimes { pool: vk::QueryPool::null(), capacity: 4, written: [0; FRAMES],
-            sum_ns: [0.0; GPU_STAGES.len()], frames: 0, views: Vec::new(), values: Vec::new() };
+            sum_ns: [0.0; GPU_STAGES.len()], frames: 0, views: Vec::new(), values: Vec::new(),
+            destination_counts: std::array::from_fn(|_| Vec::new()), destinations: Vec::new() };
         let frame = |views: usize| (0..views * VIEW_TS + 2).map(|i| i as u64 * 10).collect::<Vec<_>>();
         t.accumulate(&frame(4), 2.0);
         t.accumulate(&frame(1), 2.0);
@@ -149,5 +205,17 @@ mod tests {
         }
         assert_eq!(t.sum_ns[VIEW_STAGES.len()], 40.0, "shared UI counted once per frame");
         assert_eq!(t.sum_ns.iter().sum::<f64>(), 1440.0);
+        // Portal queries are indexed by portal id, although recursive views are
+        // drawn in reverse order. Never subtract across portal boundaries.
+        t.accumulate_destinations(0, &[100, 110, 130, 160, 200, 250, 0, 1, 3, 6, 10, 15], 2.0);
+        t.accumulate_destinations(2, &[0, 1, 2, 3, 4, 5], 2.0);
+        t.accumulate_destinations(0, &[0, 1, 2, 3, 4, 5], 2.0);
+        assert_eq!(t.destinations[0], ([24.0, 46.0, 68.0, 90.0, 112.0], 3));
+        assert_eq!(t.destinations[1], ([0.0; 5], 0), "absent scenes keep their index");
+        assert_eq!(t.destinations[2], ([2.0; 5], 1));
+        assert_eq!(t.sum_ns.iter().sum::<f64>(), 1440.0, "subintervals must not inflate GPU totals");
+        assert_eq!(t.destination_base(0, 0), (4 * VIEW_TS + 2) as u32);
+        assert_eq!(t.destination_base(0, 3) + (crate::MAX_PORTAL_VIEWS * DESTINATION_TS) as u32, t.stride());
+        assert_eq!(t.destination_base(1, 0), t.stride() + t.destination_base(0, 0));
     }
 }

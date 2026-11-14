@@ -12,6 +12,7 @@ pub const PHASES: [&str; 6] = ["pre", "input", "server", "client", "view+sound",
 #[derive(Clone, Debug, Default)]
 pub struct Run {
     views: Vec<views::View>,
+    destinations: Vec<views::View>,
     pub particles: Option<[f64; 5]>,
     pub fps: f64,
     pub frame_mean: f64,
@@ -76,6 +77,7 @@ impl Run {
             r.particles = Some(counters);
         }
         r.views = views::parse(s)?;
+        r.destinations = views::parse_key(s, "gpu_destinations_us")?;
         Some(r)
     }
 
@@ -172,6 +174,7 @@ pub fn write(o: &crate::Opts, results: &[Result]) {
             }
         }
         views::write(&mut md, &rows);
+        views::write_destinations(&mut md, &rows);
         let Some(b) = base else { continue };
         interactions::write(&mut md, &rows, &b);
         // Where each scenario's extra cost went.
@@ -225,10 +228,11 @@ pub fn write(o: &crate::Opts, results: &[Result]) {
         let x = &r.run;
         let gpu: Vec<String> = x.gpu.iter().map(|(k, v)| format!("\"{k}\": {v:.2}")).collect();
         let views = views::json(&x.views);
+        let destinations = views::json(&x.destinations);
         let particles = x.particles.map_or_else(|| "null".to_string(), |v| format!("{:?}", v));
         let ph: Vec<String> = PHASES.iter().zip(x.phases).map(|(k, v)| format!("\"{k}\": {v:.2}")).collect();
         let _ = write!(js, "{}  {{\"scenario\": \"{}\", \"group\": \"{}\", \"map\": \"{}\", \"fte_particles_mean\": {particles}, \"fps\": {:.1}, \"frame_mean\": {:.2}, \
-            \"frame_p99\": {:.2}, \"frame_max\": {:.2}, \"fence\": {:.2}, \"phases\": {{{}}}, \"gpu_total\": {:.2}, \"gpu_views_us\": {views}, \"gpu\": {{{}}}}}",
+            \"frame_p99\": {:.2}, \"frame_max\": {:.2}, \"fence\": {:.2}, \"phases\": {{{}}}, \"gpu_total\": {:.2}, \"gpu_views_us\": {views}, \"gpu_destinations_us\": {destinations}, \"gpu\": {{{}}}}}",
             if i > 0 { ",\n" } else { "" }, r.scenario, r.group, r.map, x.fps, x.frame_mean, x.frame_p99, x.frame_max, x.fence,
             ph.join(", "), x.gpu_total, gpu.join(", "));
     }
@@ -269,8 +273,12 @@ mod tests {
         assert_eq!(r.bound(), "GPU");
         assert!(r.particles.is_none());
         assert!(r.views.is_empty(), "older profiles have no view breakdown");
+        assert!(r.destinations.is_empty(), "older profiles have no destination breakdown");
         let with_views = s.replacen("\"frame_us_raw\":", "\"gpu_views_us\": [{\"frames\": 3, \"total\": 7.5, \"world\": 6, \"post\": 1.5}, {\"frames\": 2, \"total\": 5, \"world\": 4, \"post\": 1}], \"frame_us_raw\":", 1);
+        let with_views = with_views.replacen("\"frame_us_raw\":", "\"gpu_destinations_us\": [{\"frames\": 6, \"total\": 4, \"world\": 3, \"resolve\": 1}], \"frame_us_raw\":", 1);
         let parsed = super::Run::parse(&with_views).unwrap();
+        assert_eq!(parsed.destinations[0].frames, 6);
+        assert_eq!(parsed.destinations[0].stages, [("world".into(), 3.0), ("resolve".into(), 1.0)]);
         assert_eq!(parsed.gpu_total, r.gpu_total, "view totals must not be counted twice");
         assert_eq!(parsed.gpu, r.gpu);
         assert_eq!(parsed.views.len(), 2);

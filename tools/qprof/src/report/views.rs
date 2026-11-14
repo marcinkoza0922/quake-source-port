@@ -8,8 +8,10 @@ pub(super) struct View {
     pub stages: Vec<(String, f64)>,
 }
 
-pub(super) fn parse(s: &str) -> Option<Vec<View>> {
-    let Some(start) = s.find("\"gpu_views_us\": [") else { return Some(Vec::new()) };
+pub(super) fn parse(s: &str) -> Option<Vec<View>> { parse_key(s, "gpu_views_us") }
+
+pub(super) fn parse_key(s: &str, key: &str) -> Option<Vec<View>> {
+    let Some(start) = s.find(&format!("\"{key}\": [")) else { return Some(Vec::new()) };
     let body = &s[start..];
     let body = body.split_once('[')?.1.split_once(']')?.0;
     let mut views = Vec::new();
@@ -54,6 +56,21 @@ pub(super) fn write(md: &mut String, rows: &[&Result]) {
     }
 }
 
+pub(super) fn write_destinations(md: &mut String, rows: &[&Result]) {
+    if rows.iter().all(|row| row.run.destinations.is_empty()) { return; }
+    let _ = writeln!(md, "\n### GPU destination breakdown\n\nContributions in µs per profiled GPU frame, summed over portal/teleporter destinations in each scene. Draws includes recursive views. Subintervals are part of the existing destinations stage, never added to GPU totals. Setup includes clears; resolve includes rendering end, MSAA resolve and barriers. Gaps is the enclosing destinations stage minus these subintervals, covering time between draws and timestamp boundaries. Timestamp intervals include GPU stalls and boundary overhead.\n");
+    let _ = writeln!(md, "| scenario | scene | destination draws | setup | world | models | particles | resolve | gaps |\n|---|--:|--:|--:|--:|--:|--:|--:|--:|");
+    for row in rows {
+        for (scene, view) in row.run.destinations.iter().enumerate() {
+            let stage = |name| view.stages.iter().find(|(k, _)| k == name).map_or(0.0, |v| v.1);
+            let enclosing = row.run.views.get(scene).and_then(|v| v.stages.iter().find(|(k, _)| k == "destinations")).map_or(0.0, |v| v.1);
+            let gaps = enclosing - view.stages.iter().map(|v| v.1).sum::<f64>();
+            let _ = writeln!(md, "| {} | {} | {} | {:.0} | {:.0} | {:.0} | {:.0} | {:.0} | {gaps:.0} |",
+                row.scenario, scene + 1, view.frames, stage("setup"), stage("world"), stage("models"), stage("particles"), stage("resolve"));
+        }
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -75,5 +92,15 @@ mod tests {
         assert!(md.contains("| coop | 1 | 2 | 10 | 0 | 0 | 0 | 2 |"));
         assert!(md.contains("| coop | 2 | 1 | 15 | 0 | 0 | 0 | 3 |"));
         assert!(parse(r#""gpu_views_us": [{"frames": "broken"}]"#).is_none());
+        let both = format!("{views}, \"gpu_destinations_us\": [{{\"frames\": 4, \"total\": 9, \"world\": 7, \"resolve\": 2}}]");
+        let destinations = parse_key(&both, "gpu_destinations_us").unwrap();
+        assert_eq!(destinations[0].stages, [("world".into(), 7.0), ("resolve".into(), 2.0)]);
+        assert_eq!(parse(&both).unwrap()[0].stages, [("world".into(), 8.0), ("post".into(), 2.0)]);
+        let result = Result { scenario: "coop", group: "ultimate", map: "test".into(), what: "", run: Run { destinations, views: vec![View { frames: 2, stages: vec![("destinations".into(), 10.0)] }], ..Run::default() } };
+        let mut md = String::new();
+        write_destinations(&mut md, &[&result]);
+        assert!(md.contains("| coop | 1 | 4 | 0 | 7 | 0 | 0 | 2 | 1 |"));
+        assert!(parse_key(old, "gpu_destinations_us").unwrap().is_empty());
+        assert!(parse_key(r#""gpu_destinations_us": [{"frames": "broken"}]"#, "gpu_destinations_us").is_none());
     }
 }
