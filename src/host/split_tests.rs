@@ -46,6 +46,11 @@ fn origin(cl: &ClientState) -> [f32; 3] {
 fn pads_join_and_play_their_own_player() {
     let Some(mut h) = host() else { return };
     assert_eq!(h.cl.signon, 4);
+    h.exec_line("r_teleportwindows 0");
+    assert!(h.cull_fte_for_view());
+    h.exec_line("r_teleportwindows 1");
+    assert!(!h.cull_fte_for_view());
+    h.exec_line("r_teleportwindows 0");
     h.menu.open(Screen::None);
     h.sync_key_dest();
     h.exec_line("bind ABUTTON +jump");
@@ -62,6 +67,7 @@ fn pads_join_and_play_their_own_player() {
     run(&mut h, 1, || vec![button(9, GamepadButton::Start, true)]);
     run(&mut h, 1, || vec![button(9, GamepadButton::Start, false)]);
     assert_eq!(h.guests.len(), 1);
+    assert!(!h.cull_fte_for_view(), "guests share particle geometry");
     assert_eq!(h.guests[0].pad, Some(9));
     assert!(!h.menu.active(), "joining doesn't open the menu");
     run(&mut h, 30, Vec::new);

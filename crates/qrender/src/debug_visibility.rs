@@ -2,6 +2,11 @@
 use crate::Renderer;
 
 impl Renderer {
+    /// Debug isolation overrides the host camera during rendering.
+    pub fn has_camera_override(&self) -> bool {
+        self.isolated_portal.is_some()
+    }
+
     /// Console interface for identifying and hiding level geometry.
     pub fn debug_visibility(&mut self, args: &[String]) -> String {
         const HELP: &str = "r_visibility list [texture substring] | hide/show face <id> | hide/show texture <substring> | hide/show entity <render key> | isolate <portal index> [camera distance] | reset\n";

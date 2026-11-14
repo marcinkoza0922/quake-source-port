@@ -223,3 +223,24 @@ confirm wins windowed (`qprof -window`, or qbench for parity).
   outstanding; these headless numbers include readback and are not a parity
   comparison. Next: conservative side-frustum rejection, then per-view
   geometry handling before extending culling to portal scenarios.
+
+- 2026-11-13, item 4 follow-up: normal billboards also reject geometry
+  wholly outside the top/bottom frustum planes, using the renderer's
+  vertical half-FOV tangent and a conservative scale bound. Horizontal
+  planes remain deferred until viewport/aspect calculation can be shared.
+  Corrected the previous safeguard: split-screen guests also share the
+  main camera's FTE geometry, so any guest now disables camera culling.
+  Debug portal isolation likewise disables it because rendering overrides
+  the host camera. An existing headless split-input test now verifies the
+  guest/teleporter gating, and geometry tests cover both vertical planes,
+  rotated quads, edge intersections, varied FOVs and unculling for sharing.
+  ad_sepulcher, 1280×720 headless RTX 3060 Ti, pinned vanilla, 20 s measured
+  after 4 s warm-up, 3 runs/build: median 390.4 → 401.5 fps (+2.8%, near
+  run-to-run noise), frame 2562 → 2491 µs, GPU 2242 → 2198 µs,
+  particles+vm 993 → 947 µs. Live particles unchanged at 33,622;
+  vertices 77,743 → 73,406 (−5.6%). Nine combat screenshots pixel-identical,
+  as are two pitched/rolled-camera shots and a four-player split-screen
+  shot against the original unculling build. Inspected the tower/sky
+  pitched view and the four torch-lit player views. Six headless visual
+  runs with Vulkan validation enabled logged no validation errors. Reports: `target/qprof/vertical-before` and `vertical-after`.
+  446 tests passed, 2 skipped; clippy clean. No windowed speedup claim.

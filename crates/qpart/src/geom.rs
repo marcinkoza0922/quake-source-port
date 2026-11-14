@@ -157,6 +157,8 @@ pub struct ViewInfo {
 pub struct Geometry<'a> {
     /// Reject normal billboards wholly behind this view. Disable for shared portal geometry.
     pub cull_behind: bool,
+    /// Optional tangent of the vertical half-FOV; only used with cull_behind.
+    pub vertical_tan: Option<f32>,
     reg: &'a Registry,
     view: ViewInfo,
     particletime: f32,
@@ -184,6 +186,7 @@ impl<'a> Geometry<'a> {
     pub fn new(reg: &'a Registry, view: ViewInfo, particletime: f32, entity_origin: &'a dyn Fn(i32) -> Option<Vec3>) -> Self {
         Geometry {
             cull_behind: false,
+            vertical_tan: None,
             reg,
             view,
             particletime,

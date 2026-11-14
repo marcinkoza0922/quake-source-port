@@ -8,9 +8,19 @@ impl<'a> Geometry<'a> {
         // sphere covers rotated quads and floating-point error at the eye plane.
         // Simulation and secondary effects have already run; only geometry is skipped.
         if self.cull_behind {
-            let depth = (p.org - self.view.origin).dot(self.view.forward);
-            if depth < -(scale.abs() * 3.0 + 1.0) {
+            let delta = p.org - self.view.origin;
+            let depth = delta.dot(self.view.forward);
+            let radius = scale.abs() * 3.0 + 1.0;
+            if depth < -radius {
                 return;
+            }
+            if let Some(tan) = self.vertical_tan {
+                // Unnormalised top/bottom planes: (forward * tan ± up).
+                // radius * (tan + 1) is conservative for both plane lengths.
+                let height = delta.dot(self.view.up).abs();
+                if height > depth * tan + radius * (tan + 1.0) {
+                    return;
+                }
             }
         }
         let c = shade(p.rgba, l.premul);

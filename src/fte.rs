@@ -351,6 +351,9 @@ impl Fte {
         let eo = |e: i32| world.entity_origin(e);
         let mut g = Geometry::new(&self.reg, vi, self.sys.particletime, &eo);
         g.cull_behind = cull_behind;
+        // qrender::frame::math::setup_view uses a 4:3 horizontal FOV;
+        // the vertical tangent is invariant under aspect and render scaling.
+        g.vertical_tan = Some((view.fov_x.clamp(1.0, 179.0).to_radians() * 0.5).tan() * 0.75);
         let rain = self.rain_emitters(cl);
         let input = FrameInput { cl_time: cl.time, vieworg: view.origin.into(), rain };
         self.sys.frame(&self.reg, &world, &input, &mut g);

@@ -121,8 +121,8 @@ impl Host {
             }
             goggles = self.goggles_render(&mut ents);
             crate::view::particles(&self.cl, &mut parts);
-            // Portal views reuse this geometry from other camera positions.
-            let cull_particles = self.cl.portals.is_empty() && self.cv("r_teleportwindows") == 0.0;
+            // Portal and split-screen views reuse geometry from other camera positions.
+            let cull_particles = self.cull_fte_for_view();
             fte = self.fte.frame(
                 &mut self.cl,
                 self.level.bsp.as_ref(),
