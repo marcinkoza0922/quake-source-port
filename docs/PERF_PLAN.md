@@ -154,3 +154,11 @@ confirm wins windowed (`qprof -window`, or qbench for parity).
 ## Results log
 
 (date, item, scenario, before → after, notes)
+
+- 2026-11-13, item 1 (stopgap): `Cvars::find` now hashes the name
+  case-insensitively with FNV-1a into an identity-hashed map, with no
+  allocation or SipHash. `vanilla`/e1m1 `-perf`: lookup cost (`hash_one<String>`
+  + `find` + SipHash) 39% → 14% of engine time. Frame time unchanged within
+  noise headless (GPU/readback-bound). Screenshots pixel-identical. About 280
+  lookups per frame remain (`deathmatch`, `addon_*`, `sv_gravity`, `fov`);
+  resolving ids at startup is left for later, as the gain is now a few µs.

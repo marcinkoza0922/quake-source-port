@@ -1,5 +1,26 @@
 //! Console variables.
 use std::collections::HashMap;
+use std::hash::{BuildHasherDefault, Hasher};
+
+/// Passes a precomputed `u64` through unchanged (keys are already hashed).
+#[derive(Default)]
+struct IdentityHasher(u64);
+impl Hasher for IdentityHasher {
+    fn finish(&self) -> u64 {
+        self.0
+    }
+    fn write(&mut self, _: &[u8]) {
+        unreachable!("only u64 keys")
+    }
+    fn write_u64(&mut self, v: u64) {
+        self.0 = v;
+    }
+}
+
+/// Case-insensitive FNV-1a of a cvar name, without allocating.
+fn name_hash(name: &str) -> u64 {
+    name.bytes().fold(0xcbf2_9ce4_8422_2325, |h, b| (h ^ b.to_ascii_lowercase() as u64).wrapping_mul(0x100_0000_01b3))
+}
 
 pub const CVAR_ARCHIVE: u32 = 1;
 pub const CVAR_NOTIFY: u32 = 2;
@@ -43,7 +64,8 @@ pub struct SetResult {
 #[derive(Default, Debug)]
 pub struct Cvars {
     vars: Vec<Cvar>,
-    by_name: HashMap<String, CvarId>,
+    /// Case-insensitive name hash → ids with that hash (collisions are rare).
+    by_name: HashMap<u64, Vec<CvarId>, BuildHasherDefault<IdentityHasher>>,
 }
 
 /// Q_atof: decimal or 0x hex, optional sign, ignores trailing junk.
@@ -104,12 +126,13 @@ impl Cvars {
             default: default.to_string(),
             flags,
         });
-        self.by_name.insert(name.to_ascii_lowercase(), id);
+        self.by_name.entry(name_hash(name)).or_default().push(id);
         id
     }
 
     pub fn find(&self, name: &str) -> Option<CvarId> {
-        self.by_name.get(&name.to_ascii_lowercase()).copied()
+        let ids = self.by_name.get(&name_hash(name))?;
+        ids.iter().copied().find(|id| self.vars[id.0 as usize].name.eq_ignore_ascii_case(name))
     }
     pub fn get(&self, id: CvarId) -> &Cvar {
         &self.vars[id.0 as usize]
