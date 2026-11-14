@@ -5,6 +5,7 @@ impl World {
         let numleafs = bsp.models.first().map_or(0, |m| m.visleafs.max(0) as usize);
         let has_light = !bsp.lighting.is_empty();
         let mut w = World {
+            transparent_liquids: false,
             hidden_surfaces: Default::default(),
             texture_names: bsp.textures.iter().map(|t| t.as_ref().map_or_else(String::new, |t| t.name.clone())).collect(),
             light_cache: Default::default(),

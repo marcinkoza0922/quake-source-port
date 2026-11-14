@@ -346,6 +346,7 @@ pub(super) const IMPACTS: &[Item] = &[
 
 /// Reached from Enhancements; unavailable while `r_enhancedwater` is off.
 pub(super) const WATER: &[Item] = &[
+    toggle("Translucent Water", "r_watertranslucency"),
     slider("Water Opacity", "r_wateralpha", 0.0, 1.0, 0.1),
     toggle("Ripples", "r_waterripples"),
     slider("Ripple Intensity", "r_waterripples_amount", 0.1, 2.0, 0.1),

@@ -75,6 +75,7 @@ impl Menu {
 
     /// Sets a slider from a pointer x (the knob centres on it), snapped to its step.
     pub(super) fn set_slider(&self, item: Item, x: f32, cv: &mut Cvars) {
+        if item_disabled(item, cv) { return; }
         if let Item::ShaderParam(k) = item {
             return self.drag_shader_param(k, x, cv);
         }

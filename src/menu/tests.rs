@@ -598,3 +598,26 @@ fn autoaim_submenu_is_guarded_and_returns_to_assists() {
     assert_eq!(m.screen, Screen::OptionsPage(Page::Assists));
     assert_eq!(m.opt_cursor, row);
 }
+
+#[test]
+fn water_opacity_requires_translucency_for_keys_and_pointer() {
+    let mut cv = Cvars::default();
+    cv.register("r_enhancedwater", "1", 0);
+    cv.register("r_watertranslucency", "0", 0);
+    cv.register("r_wateralpha", "0.5", 0);
+    let item = WATER.iter().copied().find(|i| matches!(i, Item::Slider { cvar: "r_wateralpha", .. })).unwrap();
+    let mut menu = Menu::new();
+    let mut out = Vec::new();
+    assert!(!menu.adjust(item, 1, false, &mut cv, &mut out));
+    menu.set_slider(item, SLIDER_X.1, &mut cv);
+    assert_eq!(cv.value_of("r_wateralpha"), 0.5);
+    cv.set("r_watertranslucency", "1");
+    assert!(menu.adjust(item, 1, false, &mut cv, &mut out));
+    assert!((cv.value_of("r_wateralpha") - 0.6).abs() < 0.001);
+    menu.set_slider(item, SLIDER_X.1, &mut cv);
+    assert_eq!(cv.value_of("r_wateralpha"), 1.0);
+    cv.set("r_enhancedwater", "0");
+    assert!(!menu.adjust(item, -1, false, &mut cv, &mut out));
+    menu.set_slider(item, SLIDER_X.0, &mut cv);
+    assert_eq!(cv.value_of("r_wateralpha"), 1.0);
+}

@@ -1,6 +1,14 @@
 use super::*;
 
 impl World {
+    /// Opaque-water VIS can omit the entire other side of a liquid boundary.
+    pub(crate) fn set_transparent_liquids(&mut self, enabled: bool) {
+        if self.transparent_liquids != enabled {
+            self.transparent_liquids = enabled;
+            self.vis_leaf = usize::MAX;
+        }
+    }
+
     /// Texture a surface is batched under: its own texture, or for random
     /// animations (`-0..-9`) the frame picked for that surface.
     pub fn slot_texture(&self, si: u32) -> u32 {
@@ -56,7 +64,7 @@ impl World {
     pub(super) fn mark_leaves(&mut self, leaf: usize) {
         self.vis_leaf = leaf;
         self.vis_leaves.clear();
-        let novis = leaf == 0
+        let novis = self.transparent_liquids || leaf == 0
             || self.leafs.get(leaf).is_none_or(|l| l.visofs < 0)
             || self.visdata.is_empty();
         let pvs = if novis {

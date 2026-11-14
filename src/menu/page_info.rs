@@ -74,7 +74,8 @@ pub(super) fn tooltip(item: Item) -> Option<&'static str> {
         "r_debris_killlift" => "With ragdolls starting at death, a killing shot also lifts the body off its feet",
         "r_debris_force" => "How hard shots and explosions push debris around",
         "r_enhancedwater" => "Turns on the extra liquid effects; Water Settings controls each one",
-        "r_wateralpha" => "How see-through water surfaces are",
+        "r_watertranslucency" => "See through enhanced water; enables Water Opacity",
+        "r_wateralpha" => "Surface opacity; requires Enhanced Water and Translucent Water",
         "r_waterripples_amount" => "Strength of the surface swell and rings",
         "r_watercaustics_amount" => "Brightness of the underwater light patterns",
         "r_waterripples" => "Liquid surfaces swell and ring out where things move through them",
@@ -238,4 +239,10 @@ pub(super) fn sub_disabled(page: Page, cv: &Cvars) -> bool {
 
 pub(super) fn is_net_page(p: Page) -> bool {
     matches!(p, Page::Join | Page::Host | Page::Setup)
+}
+
+/// Shared by keyboard adjustment, pointer dragging and drawing.
+pub(super) fn item_disabled(item: Item, cv: &Cvars) -> bool {
+    matches!(item, Item::Slider { cvar: "r_wateralpha", .. })
+        && (cv.value_of("r_enhancedwater") == 0.0 || cv.value_of("r_watertranslucency") == 0.0)
 }

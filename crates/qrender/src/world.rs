@@ -66,6 +66,7 @@ pub struct SubModel {
 }
 
 pub struct World {
+    pub(super) transparent_liquids: bool,
     /// R_LightPoint cache (ironwail's per-entity lightcache_t): sample point
     /// floored to whole units -> trace result. Entities that don't move skip
     /// the BSP trace; the colour is re-read from the lightmap each call so

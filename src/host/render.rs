@@ -301,9 +301,11 @@ impl Host {
         let settings = Settings {
             gamma: v("gamma").clamp(0.3, 3.0),
             contrast: v("contrast").clamp(0.5, 3.0),
-            // GL_WaterAlphaForTextureType: map keys win; per-type values of
-            // 0 fall back to r_wateralpha.
-            wateralpha: self.level.liquid_alpha[0].unwrap_or(v("r_wateralpha")).clamp(0.0, 1.0),
+            // Enhanced water explicitly controls opacity; other liquid types
+            // retain map overrides and zero-to-water fallback.
+            wateralpha: if v("r_enhancedwater") != 0.0 && v("r_watertranslucency") != 0.0 {
+                v("r_wateralpha").clamp(0.0, 1.0)
+            } else { 1.0 },
             lavaalpha: self.level.liquid_alpha[1].or(Some(v("r_lavaalpha"))).filter(|&a| a > 0.0).map(|a| a.min(1.0)),
             slimealpha: self.level.liquid_alpha[2].or(Some(v("r_slimealpha"))).filter(|&a| a > 0.0).map(|a| a.min(1.0)),
             telealpha: self.level.liquid_alpha[3].or(Some(v("r_telealpha"))).filter(|&a| a > 0.0).map(|a| a.min(1.0)),
