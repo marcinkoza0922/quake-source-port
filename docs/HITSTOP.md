@@ -39,6 +39,6 @@ Advanced sub-page:
 | `addon_hitstop_targets` | 0 | 0 all enemies, 1 only tough ones |
 | `addon_hitstop_tough` | 100 | Health before the hit that counts as tough |
 | `addon_hitstop_scale_damage` | 3 | Extra ms per 10 damage |
-| `addon_hitstop_min_damage` | 20 | Ignore hits below this (nails 9, super nails 18, pellets 4; axe 20 still counts) |
+| `addon_hitstop_min_damage` | 10 | Ignore hits below this (nails 9, super nails 18, pellets 4; axe 20 still counts) |
 | `addon_hitstop_cooldown` | 150 | ms between freezes; pellets count once, kills ignore it |
 | `addon_hitstop_max` | 250 | Cap on any one freeze in ms |
