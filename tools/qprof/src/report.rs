@@ -9,6 +9,7 @@ pub const PHASES: [&str; 6] = ["pre", "input", "server", "client", "view+sound",
 
 #[derive(Clone, Debug, Default)]
 pub struct Run {
+    pub particles: Option<[f64; 5]>,
     pub fps: f64,
     pub frame_mean: f64,
     pub frame_p99: f64,
@@ -61,6 +62,15 @@ impl Run {
                     _ => r.gpu.push((k.to_string(), v)),
                 }
             }
+        }
+        if let Some(at) = s.find("\"fte_particles\": {") {
+            let body = &s[at..];
+            let mut counters = [0.0; 5];
+            for (k, name) in ["live", "beams", "decals", "vertices", "indices"].iter().enumerate() {
+                let start = body.find(&format!("\"{name}\":"))?;
+                counters[k] = num(body, start, "mean")?.0;
+            }
+            r.particles = Some(counters);
         }
         Some(r)
     }
@@ -129,6 +139,13 @@ pub fn write(o: &crate::Opts, results: &[Result]) {
             let _ = writeln!(md, "| {} | {} | {:.0} | {:.0} | {:.0} | {dframe} | {:.0} | {:.0} | {:.0} | {:.0} | {:.0} | {dgpu} | {} | {gs} {gv:.0} |",
                 r.scenario, r.group, x.fps, x.frame_mean, x.frame_p99, x.phases[2], x.phases[3], x.render_cpu(), x.fence, x.gpu_total, x.bound());
         }
+        let _ = writeln!(md, "\nFTE counters: frame means; live arena counts at frame end, geometry summed across views.\n");
+        let _ = writeln!(md, "| scenario | live | beams | decals | vertices | indices |\n|---|--:|--:|--:|--:|--:|");
+        for r in &rows {
+            if let Some([live, beams, decals, vertices, indices]) = r.run.particles {
+                let _ = writeln!(md, "| {} | {live:.0} | {beams:.0} | {decals:.0} | {vertices:.0} | {indices:.0} |", r.scenario);
+            }
+        }
         let Some(b) = base else { continue };
         // Where each scenario's extra cost went.
         let _ = writeln!(md, "\n### {map}: where the extra time goes (vs vanilla)\n");
@@ -180,8 +197,9 @@ pub fn write(o: &crate::Opts, results: &[Result]) {
     for (i, r) in results.iter().enumerate() {
         let x = &r.run;
         let gpu: Vec<String> = x.gpu.iter().map(|(k, v)| format!("\"{k}\": {v:.2}")).collect();
+        let particles = x.particles.map_or_else(|| "null".to_string(), |v| format!("{:?}", v));
         let ph: Vec<String> = PHASES.iter().zip(x.phases).map(|(k, v)| format!("\"{k}\": {v:.2}")).collect();
-        let _ = write!(js, "{}  {{\"scenario\": \"{}\", \"group\": \"{}\", \"map\": \"{}\", \"fps\": {:.1}, \"frame_mean\": {:.2}, \
+        let _ = write!(js, "{}  {{\"scenario\": \"{}\", \"group\": \"{}\", \"map\": \"{}\", \"fte_particles_mean\": {particles}, \"fps\": {:.1}, \"frame_mean\": {:.2}, \
             \"frame_p99\": {:.2}, \"frame_max\": {:.2}, \"fence\": {:.2}, \"phases\": {{{}}}, \"gpu_total\": {:.2}, \"gpu\": {{{}}}}}",
             if i > 0 { ",\n" } else { "" }, r.scenario, r.group, r.map, x.fps, x.frame_mean, x.frame_p99, x.frame_max, x.fence,
             ph.join(", "), x.gpu_total, gpu.join(", "));
@@ -221,5 +239,8 @@ mod tests {
         assert_eq!(r.gpu, vec![("world".to_string(), 10.0), ("post".to_string(), 2.5)]);
         assert_eq!(r.render_cpu(), 900.0);
         assert_eq!(r.bound(), "GPU");
+        assert!(r.particles.is_none());
+        let with = s.replacen("\"frames\": 3,", "\"fte_particles\": {\"live\": {\"mean\": 10}, \"beams\": {\"mean\": 2}, \"decals\": {\"mean\": 3}, \"vertices\": {\"mean\": 40}, \"indices\": {\"mean\": 60}}, \"frames\": 3,", 1);
+        assert_eq!(super::Run::parse(&with).unwrap().particles, Some([10., 2., 3., 40., 60.]));
     }
 }

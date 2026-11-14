@@ -22,7 +22,10 @@ fn monotonic_secs(t: Instant) -> f64 {
     }
 }
 
+const COUNTERS: [&str; 5] = ["live", "beams", "decals", "vertices", "indices"];
+
 pub(super) struct Profiler {
+    particles: Vec<[usize; 5]>,
     started: Instant,
     last: Instant,
     cur: [f64; PHASES.len()],
@@ -33,7 +36,7 @@ pub(super) struct Profiler {
 impl Profiler {
     pub(super) fn new() -> Self {
         let now = Instant::now();
-        Profiler { started: now, last: now, cur: [0.0; PHASES.len()], frames: Vec::with_capacity(16384) }
+        Profiler { particles: Vec::with_capacity(16384), started: now, last: now, cur: [0.0; PHASES.len()], frames: Vec::with_capacity(16384) }
     }
 
     pub(super) fn begin(&mut self) {
@@ -48,12 +51,13 @@ impl Profiler {
         self.last = now;
     }
 
-    pub(super) fn end(&mut self, fence_wait_ns: u64) {
+    pub(super) fn end(&mut self, fence_wait_ns: u64, particles: [usize; 5]) {
         let mut row = [0.0; PHASES.len() + 2];
         row[..PHASES.len()].copy_from_slice(&self.cur);
         row[PHASES.len()] = self.cur.iter().sum();
         row[PHASES.len() + 1] = fence_wait_ns as f64 / 1000.0;
         self.frames.push(row);
+        self.particles.push(particles);
     }
 
     /// JSON report; `gpu` is (frames, [(stage, avg µs)]).
@@ -94,6 +98,11 @@ impl Profiler {
             }
             _ => s.push_str("null"),
         }
+        let counters: Vec<String> = COUNTERS.iter().enumerate().map(|(k, name)| {
+            let values = self.particles.iter().map(|row| row[k] as f64).collect();
+            format!("\"{name}\": {}", stats(values))
+        }).collect();
+        s.push_str(&format!(",\n  \"fte_particles\": {{{}}}", counters.join(", ")));
         let raw: Vec<String> = total.iter().map(|v| format!("{v:.0}")).collect();
         s.push_str(&format!(",\n  \"frame_us_raw\": [{}]\n}}\n", raw.join(",")));
         s
@@ -110,12 +119,14 @@ mod tests {
             for k in 0..super::PHASES.len() {
                 p.mark(k);
             }
-            p.end(5000);
+            p.end(5000, [10, 2, 3, 40, 60]);
         }
         let r = p.report(Some((3, vec![("world", 10.0), ("post", 2.5)])));
         assert!(r.contains("\"frames\": 3"));
         assert!(r.contains("\"fence_wait_us\": {\"mean\": 5.00"));
         assert!(r.contains("\"total\": 12.50"));
         assert!(r.contains("\"render\""));
+        assert!(r.contains("\"live\": {\"mean\": 10.00"));
+        assert!(r.contains("\"vertices\": {\"mean\": 40.00"));
     }
 }

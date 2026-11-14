@@ -52,7 +52,7 @@ pub const VANILLA: &[(&str, &str)] = &[
     ("r_impact_fx", "0"), ("r_impact_bullets", "0"), ("r_impact_nails", "0"),
     ("r_shotgun_tracers", "0"), ("r_impact_scorches", "0"),
     ("r_blood", "0"), ("r_debris", "0"), ("r_shader_preset", ""), ("r_colorblind", "0"),
-    ("addons_enable", "0"),
+    ("addons_enable", "0"), ("r_fteparticles", "1"), ("r_particledesc", "classic"), ("r_part_rain", "1"), ("r_part_rain_quantity", "1"),
 ];
 
 const WATER: &[(&str, &str)] = &[
@@ -163,6 +163,10 @@ pub fn all(secs: f32) -> Vec<Scenario> {
         name: "vanilla", group: Group::Vanilla, what: "classic renderer, every enhancement and add-on off",
         cvars: vec![], map: None, script: vec![], own_fire: false,
     }];
+    out.push(Scenario {
+        name: "no-rain", group: Group::Vanilla, what: "diagnostic: sky rain emitters disabled (changes output)",
+        cvars: vec![("r_part_rain", "0")], map: None, script: vec![], own_fire: false,
+    });
     let mut every = Vec::new();
     for (name, what, cv) in ENHANCEMENTS {
         out.push(Scenario {

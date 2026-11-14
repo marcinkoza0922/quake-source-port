@@ -121,6 +121,8 @@ impl Host {
             }
             goggles = self.goggles_render(&mut ents);
             crate::view::particles(&self.cl, &mut parts);
+            // Portal views reuse this geometry from other camera positions.
+            let cull_particles = self.cl.portals.is_empty() && self.cv("r_teleportwindows") == 0.0;
             fte = self.fte.frame(
                 &mut self.cl,
                 self.level.bsp.as_ref(),
@@ -129,6 +131,7 @@ impl Host {
                 self.snd.as_mut(),
                 v,
                 &self.level.mapname,
+                cull_particles,
             );
             self.portal_fx.frame(self.cl.time, v, &mut self.r, self.snd.as_ref(), &mut fte);
             self.rail_fx.frame(self.cl.time, v, &mut self.r, &mut fte);

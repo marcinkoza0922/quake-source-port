@@ -155,6 +155,8 @@ pub struct ViewInfo {
 
 /// Collects geometry from [`crate::System::frame`].
 pub struct Geometry<'a> {
+    /// Reject normal billboards wholly behind this view. Disable for shared portal geometry.
+    pub cull_behind: bool,
     reg: &'a Registry,
     view: ViewInfo,
     particletime: f32,
@@ -181,6 +183,7 @@ fn shade(rgba: [f32; 4], premul: u8) -> [u8; 4] {
 impl<'a> Geometry<'a> {
     pub fn new(reg: &'a Registry, view: ViewInfo, particletime: f32, entity_origin: &'a dyn Fn(i32) -> Option<Vec3>) -> Self {
         Geometry {
+            cull_behind: false,
             reg,
             view,
             particletime,

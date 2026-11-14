@@ -143,6 +143,8 @@ fn to_blend(b: qpart::BlendMode) -> FteBlend {
 
 /// Client-side FTE particle state.
 pub struct Fte {
+    /// Geometry emitted this host frame, summed across views (vertices, indices).
+    pub profile_geometry: [usize; 2],
     pub reg: Registry,
     pub sys: System,
     /// Uploaded textures, by `Registry::textures` index.
@@ -169,6 +171,7 @@ pub struct Fte {
 impl Fte {
     pub fn new() -> Self {
         Fte {
+            profile_geometry: [0; 2],
             reg: Registry::new(),
             sys: System::default(),
             pics: Vec::new(),
@@ -275,6 +278,7 @@ impl Fte {
         snd: Option<&mut qsound::SoundSystem>,
         view: &qrender::View,
         mapname: &str,
+        cull_behind: bool,
     ) -> (Vec<FteVertex>, Vec<u32>, Vec<FteBatch>) {
         let queue = std::mem::take(&mut cl.fte_queue);
         self.requests += queue.len() as u64;
@@ -346,9 +350,12 @@ impl Fte {
         let vi = ViewInfo { origin: view.origin.into(), forward: fwd, right, up };
         let eo = |e: i32| world.entity_origin(e);
         let mut g = Geometry::new(&self.reg, vi, self.sys.particletime, &eo);
+        g.cull_behind = cull_behind;
         let rain = self.rain_emitters(cl);
         let input = FrameInput { cl_time: cl.time, vieworg: view.origin.into(), rain };
         self.sys.frame(&self.reg, &world, &input, &mut g);
+        self.profile_geometry[0] += g.vertices.len();
+        self.profile_geometry[1] += g.indices.len();
 
         for d in self.sys.dlights.drain(..) {
             let dl = cl.alloc_dlight(d.key);

@@ -136,6 +136,8 @@ fn engine_args(o: &Opts, sc: &scenarios::Scenario, game: &str, map: &str, json: 
     // The warm-up absorbs level load, shader compiles and the first fights.
     a.push(format!("+delay {:.2} prof_start", o.warmup));
     a.push(format!("+delay {end:.2} prof_stop {}", json.display()));
+    // Snapshot effect names after measurement; walking live lists must not affect timings.
+    a.push(format!("+delay {:.2} r_partinfo", end + 0.1));
     if o.shots > 0.0 {
         let stem = json.with_extension("");
         let mut t = o.shots;

@@ -135,6 +135,7 @@ impl Host {
 
     /// One host frame of `dt` seconds.
     pub fn frame(&mut self, dt: f64, events: Vec<HostEvent>) {
+        self.fte.profile_geometry = [0; 2];
         if let Some(p) = &mut self.prof { p.begin(); }
         self.realtime += dt;
         self.con.realtime = self.realtime;
@@ -367,7 +368,10 @@ impl Host {
         }
         if let Some(p) = &mut self.prof {
             p.mark(5);
-            p.end(self.r.fence_wait_ns);
+            p.end(self.r.fence_wait_ns, [
+                self.fte.sys.num_particles(), self.fte.sys.num_beams(), self.fte.sys.num_decals(),
+                self.fte.profile_geometry[0], self.fte.profile_geometry[1],
+            ]);
         }
     }
 

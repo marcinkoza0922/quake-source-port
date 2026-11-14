@@ -73,10 +73,11 @@ confirm wins windowed (`qprof -window`, or qbench for parity).
   `Geometry::begin`) is 40–75% of engine CPU on every AD scenario,
   vanilla included, and the GPU `particles+vm` stage is ~1.64 ms of a
   2.86 ms frame on ad_sepulcher.
-- First step: find out what is spawning them (likely AD's FTE weather and
-  `_texpart_*` emitters; not yet verified). Add counters for live particles
-  and emitted vertices to the profile JSON, and an A/B run with the
-  emitters disabled.
+- First step (instrumented): profile JSON now includes live FTE particles,
+  beams, decals and emitted vertices/indices; qprof reports their frame means
+  and snapshots `r_partinfo` after measurement. `no-rain` disables sky rain
+  for an A/B check. Sky rain is only a small share; identify the remaining
+  effects before choosing a simulation/geometry optimisation.
 - Candidate fixes, in order: skip simulating or building geometry for
   particles outside the frustum or PVS; cheaper `shade` (cache lighting per
   emitter or per cell instead of per particle, reusing the light-point
@@ -146,7 +147,7 @@ confirm wins windowed (`qprof -window`, or qbench for parity).
 ## Tooling follow-ups
 
 - Run qprof with `-runs 3` for the before/after numbers of each item.
-- Add particle and vertex counters to the profile JSON (needed for item 4).
+- Done: particle and vertex counters in the engine and qprof JSON (item 4).
 - Add pairwise enhancement scenarios (item 6) and a per-view GPU timestamp
   for split-screen (item 5).
 - Record a windowed baseline (`qprof -window`) once, for absolute numbers.
@@ -183,3 +184,42 @@ confirm wins windowed (`qprof -window`, or qbench for parity).
   the output path). Left: ~2 ms of `idle()` plus ~1 ms of submit wait per
   rebuild; removing them needs an asynchronous per-frame texture upload.
   (c), cheaper noise (*visual*), was not needed.
+
+- 2026-11-13, item 4 investigation (1280×720 headless, RTX 3060 Ti,
+  20 s measured after 4 s warm-up, 3 runs, 250 Hz simulation): added FTE
+  counters and `no-rain` diagnostic; pinned classic FTE config and rain
+  quantity 1. e1m1 vanilla/no-rain medians 771.6/771.2 fps, zero FTE particles.
+  ad_sepulcher vanilla/no-rain: 321.0/314.4 fps, 3115/3181 µs frame,
+  2924.50/2924.78 µs GPU, particles+vm 1682/1657 µs. Live particles
+  33,622/31,766, generated vertices 134,960/127,728. Sky rain removes only
+  5.5% of live particles and gives no frame-time win; it is not the main
+  cause. Worldspawn maps `sky_seprain` to `fte_weather.tex_skyrainlit`.
+  These are diagnostic measurements, not an optimisation or parity claim;
+  no rendering algorithm changed. A separate 11 s spawn-point `r_partinfo`
+  probe (inherited user graphics config, not the pinned combat benchmark)
+  identifies `effectinfo.*DPP_ITSFCIRCLE` (~14,744 particles across its
+  layers) and `effectinfo.*DPP_ITSLFLAME` (~10,492) as large populations.
+  Follow-up below implements conservative behind-eye geometry rejection;
+  broader visibility culling remains to investigate.
+  Reports: `target/qprof/rain-investigation/`. Full tests: 444 passed,
+  2 skipped; clippy clean. No screenshot comparison for this instrumentation
+  change; the diagnostic intentionally removes sky rain.
+
+- 2026-11-13, item 4 first optimisation: normal FTE billboards wholly
+  behind the eye skip geometry generation using an oversized scale bound.
+  The default Geometry sink remains unculled; the host enables rejection
+  only when there are no gun portals and teleporter windows are disabled,
+  because those views reuse the same geometry. Particle simulation,
+  lighting/effects, RNG, beams and sparks retain their existing paths.
+  ad_sepulcher, 1280×720 headless RTX 3060 Ti, pinned vanilla, 20 s measured
+  after 4 s warm-up, three runs per build: median 282.6 → 396.0 fps (+40%),
+  frame 3539 → 2525 µs, GPU 2938 → 2253 µs, particles+vm 1691 → 1003 µs.
+  Live count unchanged at 33,622; vertices 134,960 → 77,743 (−42%).
+  Nine fixed-time screenshots (5/10/15 s in all three runs) pixel-identical;
+  inspected the 10 s image (pillar, rain and distant torch remain intact).
+  Initial baseline overlapped compilation and was discarded; clean reports
+  are `target/qprof/behind-before-clean` and `target/qprof/behind-after`.
+  445 tests passed, 2 skipped; clippy clean. Windowed confirmation remains
+  outstanding; these headless numbers include readback and are not a parity
+  comparison. Next: conservative side-frustum rejection, then per-view
+  geometry handling before extending culling to portal scenarios.
