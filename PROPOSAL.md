@@ -69,3 +69,10 @@ in the Enhancements menu) makes visible intra-level teleporters show their linke
 parallax as the player moves. Preserve the original dark look with a black-tinted
 shimmer and animated sparkles. Slipgates, silent or activated teleport triggers,
 and unrelated uses of teleport textures keep their existing appearance.
+
+## Speed feedback
+
+At very high player velocities, blur the screen edges to accentuate fast falls
+and portal launches while keeping the centre and HUD readable. Enable by default,
+with an Enhancements toggle and Reduce Motion support, independently per local
+player. Selecting an add-on weapon does not print its name over gameplay.

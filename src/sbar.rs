@@ -186,6 +186,7 @@ const IMMERSIVE_FADE: f64 = 0.5;
 pub struct HudFade {
     last: [Option<i64>; 6],
     changed: [f64; 6],
+    last_addons: Option<(Vec<crate::wheel::Entry>, Option<qserver::addons::Toy>)>,
 }
 
 impl HudFade {
@@ -234,6 +235,8 @@ pub struct Sbar<'a, 'b> {
     alpha: f32,
     /// Local `teamplay` cvar (rogue CTF modes 4..6 replace the face).
     pub teamplay: f32,
+    pub addon_weapons: Vec<crate::wheel::Entry>,
+    pub held_addon: Option<qserver::addons::Toy>,
 }
 
 impl<'a, 'b> Sbar<'a, 'b> {
@@ -241,7 +244,7 @@ impl<'a, 'b> Sbar<'a, 'b> {
         c.reset_origin();
         let x0 = ((c.vw() - 320.0) / 2.0).floor();
         let y0 = c.vh() - 24.0;
-        Self { c, pack, pic, y0, x0, alpha: 1.0, teamplay: 0.0 }
+        Self { c, pack, pic, y0, x0, alpha: 1.0, teamplay: 0.0, addon_weapons: Vec::new(), held_addon: None }
     }
     /// Classic layout: fills the strip below the 3D view (`lines` virtual
     /// rows) edge to edge with the backtile before drawing the bar.

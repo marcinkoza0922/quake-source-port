@@ -77,6 +77,9 @@ impl Menu {
                     c.text_center(320.0, y, label, TXT, FG);
                 }
             }
+            Screen::OptionsPage(page) if matches!(page, Page::Addons | Page::NewGameAddons) => {
+                self.draw_addon_browser(c, pic, cv, realtime, page);
+            }
             Screen::OptionsPage(page) => {
                 let p = pic("gfx/qplaque.lmp");
                 c.pic(PANEL_X - 40.0, 16.0, p);
@@ -165,11 +168,14 @@ impl Menu {
             Screen::None => {}
         }
         c.menu_layout();
-        self.draw_tooltip(c);
-        self.draw_hints(c);
+        if !matches!(self.screen, Screen::OptionsPage(Page::Addons | Page::NewGameAddons)) {
+            self.draw_tooltip(c);
+            self.draw_hints(c);
+        }
         self.draw_back(c);
         c.reset_origin();
         if self.autoaim_prompt { self.draw_autoaim_prompt(c); }
+        self.draw_binding_prompt(c);
         c.scale = base_scale;
     }
 
@@ -281,70 +287,6 @@ impl Menu {
             c.fill(x, top, 3.0, h, [1.0, 1.0, 1.0, 0.12]);
             c.fill(x, ty, 3.0, th, [0.85, 0.65, 0.3, if self.drag.is_some() { 1.0 } else { 0.9 }]);
         }
-    }
-
-    /// Bottom row of button prompts, for the device in use.
-    /// One-line explanation of the selected option, just below the panel.
-    pub(super) fn draw_tooltip(&self, c: &mut Canvas) {
-        let Screen::OptionsPage(page) = self.screen else { return };
-        if self.drop.is_some() || self.osk.is_some() || self.capturing() || self.opt_cursor >= self.page_len(page) {
-            return;
-        }
-        let Some(s) = tooltip(self.page_item(page, self.opt_cursor)) else { return };
-        let w = c.text_w(s, TXT);
-        let y = PAGE_ROW0 + self.page_vis(page) as f32 * ROW_H + 10.0;
-        c.round_box(320.0 - w / 2.0 - 8.0, y - 3.0, w + 16.0, 14.0, 4.0, [0.0, 0.0, 0.0, 0.7], Some(BORDER));
-        c.text(320.0 - w / 2.0, y, s, TXT, MUTED);
-    }
-
-    pub(super) fn draw_back(&self, c: &mut Canvas) {
-        let Some((x, y, w, h)) = self.back_button() else { return };
-        let hover = self.mouse.is_some_and(|(mx, my)| (x..x + w).contains(&mx) && (y..y + h).contains(&my));
-        let bg = if hover { HILITE } else { [0.0, 0.0, 0.0, 0.7] };
-        c.round_box(x, y, w, h, 4.0, bg, Some(BORDER));
-        let s = "< Back";
-        c.text(x + ((w - c.text_w(s, TXT)) / 2.0).floor(), y + 4.0, s, TXT, if hover { GOLD_FG } else { FG });
-    }
-
-    /// Menu hint row, centred in a bordered box.
-    pub(super) fn boxed_hints(&self, c: &mut Canvas, y: f32, items: &[(i32, &str)]) {
-        let w = self.glyphs.hints(c, 0.0, y, items, false);
-        let h = crate::glyphs::HINT_H;
-        c.round_box(320.0 - w / 2.0 - 8.0, y - 3.0, w + 16.0, h + 6.0, 4.0, [0.0, 0.0, 0.0, 0.7], Some(BORDER));
-        self.glyphs.hints_centered(c, 320.0, y, items);
-    }
-
-    pub(super) fn draw_hints(&self, c: &mut Canvas) {
-        if self.screen == Screen::Death { return; }
-        let pad = self.pad_ui;
-        let (sel, back) = if pad { (K_ABUTTON, K_BBUTTON) } else { (K_ENTER, K_ESCAPE) };
-        let y = 344.0;
-        if self.capturing() {
-            let s = if pad { "Press a button or key to bind" } else { "Press a key or button to bind" };
-            let w = c.text_w(s, TXT);
-            c.round_box(320.0 - w / 2.0 - 8.0, y - 3.0, w + 16.0, 18.0, 4.0, [0.0, 0.0, 0.0, 0.8], Some(BORDER));
-            c.text(320.0 - w / 2.0, y + 2.0, s, TXT, GOLD_FG);
-            return;
-        }
-        if self.osk.is_some() {
-            let items = [(K_ABUTTON, "Type"), (K_XBUTTON, "Delete"), (K_YBUTTON, "Shift"), (K_BBUTTON, "Done")];
-            self.boxed_hints(c, y, &items);
-            return;
-        }
-        let action = match self.screen {
-            Screen::Save => "Save",
-            Screen::Load => "Load",
-            Screen::OptionsPage(Page::Controls) => "Bind",
-            _ => "Select",
-        };
-        let mut items = vec![(sel, action), (back, "Back")];
-        if self.screen == Screen::OptionsPage(Page::Controls) && self.drop.is_none() {
-            items.insert(1, (if pad { K_XBUTTON } else { K_BACKSPACE }, "Clear"));
-        }
-        if matches!(self.screen, Screen::Quit) {
-            items = vec![(sel, "Confirm"), (back, "Cancel")];
-        }
-        self.boxed_hints(c, y, &items);
     }
 
     pub(super) fn draw_drop(&self, c: &mut Canvas, cv: &Cvars, item: Item, d: Drop) {
@@ -475,31 +417,9 @@ impl Menu {
             }
             Item::Bind { label: l, cmd } => {
                 label(c, l);
-                let keys = keys_for(&self.bindings, cmd);
                 let capturing = self.capture.is_some_and(|r| matches!(self.page_item(Page::Controls, r), Item::Bind { cmd: c2, .. } if c2 == cmd));
-                if capturing {
-                    if blink {
-                        txt_gold(c, VALUE_X, y, "press a key...");
-                    }
-                    return;
-                }
-                let g = self.glyphs;
-                let (mut x, mut px) = (VALUE_X, BIND_PAD_X);
-                for &k in &keys {
-                    if is_pad_key(k) {
-                        if px + crate::glyphs::width(c, k, g.family, crate::glyphs::H) < PANEL_X + PANEL_W - 2.0 {
-                            px += g.key(c, px, y - 1.0, k) + 3.0;
-                        }
-                    } else if x + crate::glyphs::width(c, k, g.family, crate::glyphs::H) < BIND_PAD_X - 4.0 {
-                        x += g.key(c, x, y - 1.0, k) + 3.0;
-                    }
-                }
-                if x == VALUE_X {
-                    { txt(c, VALUE_X, y, "---"); }
-                }
-                if px == BIND_PAD_X {
-                    { txt(c, BIND_PAD_X, y, "---"); }
-                }
+                self.draw_binding_columns(c, cmd, y - 1.0,
+                    [(VALUE_X, BIND_PAD_X - 4.0), (BIND_PAD_X, PANEL_X + PANEL_W - 2.0)], capturing, blink);
             }
             Item::Sub { label: l, page } => {
                 // submenu rows: tinted strip, gold label and arrow

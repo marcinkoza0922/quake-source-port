@@ -100,10 +100,9 @@ pub(super) const CONTROLS_ALL: &[Item] = &[
     bind("Quick Load", "echo Quickloading...; wait; load quick"),
     Item::ResetBinds,
     bind("Alt Fire (Add-ons)", "+attack2"),
-    bind("Toy Slot (Add-ons)", "+toy"),
     bind("Equipment Wheel (Add-ons)", "+equipwheel"),
 ];
-pub(super) const CONTROLS: &[Item] = CONTROLS_ALL.split_at(CONTROLS_ALL.len() - 3).0;
+pub(super) const CONTROLS: &[Item] = CONTROLS_ALL.split_at(CONTROLS_ALL.len() - 2).0;
 
 /// Main menu → Add-ons: which toys the running game (or the next new
 /// game) has. Locked while the running game was started without add-ons.
@@ -324,6 +323,7 @@ pub(super) const GRAPHICS: &[Item] = &[
 pub(super) const ENHANCEMENTS: &[Item] = &[
     Item::Choice { label: "Ambient Occlusion", cvar: "r_ssao", choices: SSAO },
     toggle("Motion Blur", "r_motionblur"),
+    toggle("Speed Blur", "r_speedblur"),
     slider("Motion Blur Amount", "r_motionblur_amount", 0.1, 2.0, 0.1),
     toggle("Enhanced Water", "r_enhancedwater"),
     toggle("See-through Teleporters", "r_teleportwindows"),
@@ -495,3 +495,6 @@ pub(super) const GOGGLES: &[Item] = &[
     slider("Goggle Intensity", "addon_goggles_intensity", 0.25, 3.0, 0.25),
     slider("Goggle Noise", "addon_goggles_noise", 0.0, 2.0, 0.25),
 ];
+
+/// Stickybomb explosion balance; action mapping lives in the browser.
+pub(super) const STICKY: &[Item] = &[slider("Explosion Damage", "addon_sticky_damage", 25.0, 300.0, 25.0)];

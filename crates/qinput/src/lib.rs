@@ -153,16 +153,15 @@ pub mod btn {
     pub const GYRO: usize = 17;
     pub const WHEEL: usize = 18;
     pub const LOCKON: usize = 19;
-    /// Add-ons: secondary fire and the toy-slot toggle.
+    /// Add-ons: secondary fire.
     pub const ATTACK2: usize = 20;
-    pub const TOY: usize = 21;
     /// Add-ons: the equipment wheel (goggles).
-    pub const EQUIPWHEEL: usize = 22;
-    pub const COUNT: usize = 23;
+    pub const EQUIPWHEEL: usize = 21;
+    pub const COUNT: usize = 22;
     pub const NAMES: [&str; COUNT] = [
         "forward", "back", "moveleft", "moveright", "moveup", "movedown", "left", "right", "lookup", "lookdown",
         "speed", "strafe", "attack", "jump", "mlook", "klook", "use", "gyroaction", "weaponwheel", "lockon",
-        "attack2", "toy", "equipwheel",
+        "attack2", "equipwheel",
     ];
 }
 
@@ -257,6 +256,7 @@ pub struct Input {
     keydown: [bool; MAX_KEYS],
     game_down: [bool; MAX_KEYS],
     impulse: u8,
+    weapon_slot: u8,
     mouse: [f32; 2],
     old_mouse: [f32; 2],
     axes: [f32; 6],
@@ -298,6 +298,7 @@ impl Input {
             keydown: [false; MAX_KEYS],
             game_down: [false; MAX_KEYS],
             impulse: 0,
+            weapon_slot: 0,
             mouse: [0.0; 2],
             old_mouse: [0.0; 2],
             axes: [0.0; 6],
@@ -397,6 +398,13 @@ pub fn register_commands<C: InputHost>(c: &mut Commands<C>) {
     toggle_button_cmds!(c, btn::ATTACK, in_toggleattack);
     toggle_button_cmds!(c, btn::SPEED, in_togglerun);
     c.add("impulse", |ctx, a| ctx.input().impulse = a.argv(1).parse().unwrap_or(0));
+    // Slot selection stays local and cannot collide with mod-defined QC impulses.
+    c.add("weapon_slot", |ctx, a| {
+        if let Ok(slot) = a.argv(1).parse::<u8>() && slot <= 10 {
+            let slot = if slot == 0 { 10 } else { slot };
+            ctx.input().weapon_slot = slot;
+        }
+    });
     c.add("bind", cmd_bind);
     c.add("unbind", |ctx, a| {
         if a.argc() != 2 {

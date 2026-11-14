@@ -87,6 +87,7 @@ mod tests {
             kickpitch: 0.0,
             fov: 90.0,
             gunkick: false,
+            speed_blur: true,
             viewmodel: Alignment::Center,
             lerp_models: false,
             lerp_move: false,

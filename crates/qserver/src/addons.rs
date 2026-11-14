@@ -31,6 +31,13 @@ pub const CVARS: &[(&str, &str, u32)] = &[
     ("addons_active", "0", CVAR_ROM),
     ("addon_portalgun", "1", CVAR_ARCHIVE),
     ("addon_sticky", "1", CVAR_ARCHIVE),
+    ("addon_sticky_damage", "120", CVAR_ARCHIVE),
+    // Weapon slot numbers; 10 is the slot labelled 0.
+    ("addon_portalgun_slot", "9", CVAR_ARCHIVE),
+    ("addon_boomerang_slot", "1", CVAR_ARCHIVE),
+    ("addon_sticky_slot", "6", CVAR_ARCHIVE),
+    ("addon_hookshot_slot", "1", CVAR_ARCHIVE),
+    ("addon_railgun_slot", "8", CVAR_ARCHIVE),
     // see-through portals: on/off, live views per frame, live distance
     ("addon_portal_view", "1", CVAR_ARCHIVE),
     ("addon_portal_max", "4", CVAR_ARCHIVE),
@@ -60,7 +67,7 @@ pub const BUTTON_TOY_ALT: u8 = 1 << 3;
 /// The held toy's id sits in bits 4..7 (0 = none).
 pub const TOY_SHIFT: u8 = 4;
 
-/// The toys, in toy-slot cycling order.
+/// Add-on weapons, in stable order within a shared weapon slot.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum Toy {
     PortalGun,
@@ -110,6 +117,16 @@ impl Toy {
             Toy::Sticky => "addon_sticky",
             Toy::Railgun => "addon_railgun",
             Toy::Hookshot => "addon_hookshot",
+        }
+    }
+    /// Archived weapon slot assignment (10 is displayed as 0).
+    pub fn slot_cvar(self) -> &'static str {
+        match self {
+            Toy::PortalGun => "addon_portalgun_slot",
+            Toy::Boomerang => "addon_boomerang_slot",
+            Toy::Sticky => "addon_sticky_slot",
+            Toy::Hookshot => "addon_hookshot_slot",
+            Toy::Railgun => "addon_railgun_slot",
         }
     }
     /// The toys switched on in the menu.

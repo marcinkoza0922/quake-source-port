@@ -58,6 +58,17 @@ pub struct Equipment {
 }
 
 impl Equipment {
+    /// Cycle the single goggles action: normal, night vision, thermal.
+    pub fn cycle_goggles(&mut self) -> u32 {
+        let mode = (self.goggles_mode() + 1) % 3;
+        self.clear();
+        match mode {
+            1 => self.set(Equip::NightVision, true),
+            2 => self.set(Equip::Thermal, true),
+            _ => {}
+        }
+        mode
+    }
     pub fn is_on(&self, e: Equip) -> bool {
         self.on[e.index()]
     }
@@ -182,6 +193,15 @@ pub fn cue(on: bool, rate: u32) -> qsound::Sfx {
 
 #[cfg(test)]
 mod tests {
+    #[test]
+    fn goggles_action_cycles_all_modes() {
+        let mut equipment = super::Equipment::default();
+        for expected in [1, 2, 0, 1, 2, 0] {
+            assert_eq!(equipment.cycle_goggles(), expected);
+            assert_eq!(equipment.goggles_mode(), expected);
+            assert_eq!(equipment.any(), expected != 0);
+        }
+    }
     use super::*;
 
     #[test]

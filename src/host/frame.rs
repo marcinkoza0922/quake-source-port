@@ -33,6 +33,7 @@ impl Host {
             kickpitch: v("v_kickpitch"),
             fov: v("fov").clamp(10.0, 170.0),
             gunkick: v("v_gunkick") != 0.0,
+            speed_blur: v("r_speedblur") != 0.0,
             viewmodel: crate::view::weapon::Alignment::from_cvar(v("r_drawviewmodel")),
             lerp_models: v("r_lerpmodels") != 0.0,
             lerp_move: v("r_lerpmove") != 0.0,
@@ -167,18 +168,15 @@ impl Host {
         let mut impulse = inp.impulse;
         let alive = self.cl.stats[STAT_HEALTH] > 0;
         let (held, aim) = (self.input.wheel_held(), self.input.wheel_aim);
-        if let Some(imp) = self.wheel.update(held, in_game && alive && self.demo.is_none(), aim, &self.cl) {
-            impulse = imp;
-        }
-        if impulse != 0 {
-            self.pend_impulse = impulse;
-        }
-        self.goggles_frame(in_game, alive);
         let toys = if self.local.is_some() { self.allowed_toys() } else { Vec::new() };
-        if let Some(t) = self.toy.update(&toys, inp.toy, impulse) {
-            let (s, t, cols) = self.center_args(t.name());
-            self.con.center_print(&s, t, cols);
+        let entries = crate::wheel::inventory(&self.server.core.cvars, &toys);
+        let choice = self.wheel.update(held, in_game && alive && self.demo.is_none(), aim, &self.cl, &entries, self.toy.held);
+        self.goggles_frame(in_game, alive);
+        self.toy.update_slots(&self.server.core.cvars, &toys, (inp.weapon_slot, &mut impulse), &self.cl);
+        if let Some(weapon) = choice {
+            self.toy.select(weapon, &self.cl, &mut impulse);
         }
+        if impulse != 0 { self.pend_impulse = impulse; }
         self.guest_moves(ft);
         let timescale = self.wheel_timescale() as f64;
         if self.cl.signon == 4 {

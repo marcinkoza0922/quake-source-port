@@ -44,6 +44,32 @@ fn frame(h: &mut Host, aim: Option<&AimContext>) -> InputState {
 }
 
 #[test]
+fn removed_toy_action_is_not_registered() {
+    let mut h = host();
+    run(&mut h, "+toy\n-toy\n");
+    assert!(h.out.contains("Unknown command"));
+    assert!(!btn::NAMES.contains(&"toy"));
+    // The equipment wheel remains registered after removing the button index.
+    run(&mut h, "+equipwheel 42\n");
+    assert!(h.input.buttons[btn::EQUIPWHEEL].is_down());
+    run(&mut h, "-equipwheel 42\n");
+    assert!(!h.input.buttons[btn::EQUIPWHEEL].is_down());
+}
+
+#[test]
+fn weapon_slots_are_local_and_leave_mod_impulses_available() {
+    let mut h = host();
+    for (arg, expected) in [("1",1),("9",9),("0",10)] {
+        run(&mut h, &format!("weapon_slot {arg}\nimpulse 240\n"));
+        let state = frame(&mut h, None);
+        assert_eq!((state.weapon_slot,state.impulse),(expected,240));
+        assert_eq!(frame(&mut h,None).weapon_slot,0);
+    }
+    run(&mut h,"weapon_slot 11\n");
+    assert_eq!(frame(&mut h,None).weapon_slot,0);
+}
+
+#[test]
 fn bind_and_buttons() {
     let mut h = host();
     run(&mut h, "bind w +forward\nbind MOUSE1 +attack\nbind SPACE \"impulse 7\"\n");

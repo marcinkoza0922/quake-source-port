@@ -1,5 +1,7 @@
 //! Small host unit tests.
 
+mod menu_controller;
+
 mod relaunch_tests {
     #[test]
     fn strips_game_and_commands() {
@@ -18,6 +20,8 @@ mod pad_default_tests {
         assert!(b.contains(&(K_RTRIGGER, "+attack".into())));
         assert!(b.contains(&(K_XBUTTON, "+weaponwheel".into())));
         assert!(b.contains(&(K_LSHOULDER, "impulse 12".into())));
-        assert_eq!(b.len(), 11);
+        assert!(b.contains(&(b'9' as i32, "weapon_slot 9".into())));
+        assert!(b.contains(&(b'0' as i32, "weapon_slot 0".into())));
+        assert_eq!(b.len(), 13);
     }
 }
