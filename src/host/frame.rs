@@ -135,6 +135,7 @@ impl Host {
 
     /// One host frame of `dt` seconds.
     pub fn frame(&mut self, dt: f64, events: Vec<HostEvent>) {
+        if let Some(p) = &mut self.prof { p.begin(); }
         self.realtime += dt;
         self.con.realtime = self.realtime;
         for e in events {
@@ -164,6 +165,7 @@ impl Host {
         self.sync_menu_ui();
         self.menu_nav_repeat();
 
+        self.prof_mark(0);
         // input (every frame, for smooth view angles)
         let ft = dt as f32;
         let in_game = self.cl.signon == 4 && self.cl.intermission == 0;
@@ -211,6 +213,7 @@ impl Host {
             self.last_cmd = self.cl.base_move(&InputState { attack: false, jump: false, impulse: 0, ..inp }, &sp, ft);
         }
 
+        self.prof_mark(1);
         // server tic
         self.accum += dt;
         let maxfps = self.cv("host_maxfps");
@@ -311,6 +314,7 @@ impl Host {
             self.guest_sounds();
             self.guest_center_prints();
         }
+        self.prof_mark(2);
         self.poll_remote();
         self.poll_qw();
         self.poll_lan_search();
@@ -335,6 +339,7 @@ impl Host {
         self.update_autosave();
         self.con.update(ft);
 
+        self.prof_mark(3);
         let (view, gun) = if self.cl.signon == 4 && !self.level.mapname.is_empty() {
             let mut cv = self.view_cvars();
             if self.toy.held.is_some() { cv.viewmodel = crate::view::weapon::Alignment::Hidden; }
@@ -350,6 +355,7 @@ impl Host {
             (None, None)
         };
         self.update_sound(view.as_ref(), ft);
+        self.prof_mark(4);
         if self.screenshot.is_some() {
             self.r.request_capture();
         }
@@ -359,6 +365,14 @@ impl Host {
         if let Some(name) = self.screenshot.take() {
             self.write_screenshot(&name);
         }
+        if let Some(p) = &mut self.prof {
+            p.mark(5);
+            p.end(self.r.fence_wait_ns);
+        }
+    }
+
+    fn prof_mark(&mut self, k: usize) {
+        if let Some(p) = &mut self.prof { p.mark(k); }
     }
 
     pub(super) fn update_sound(&mut self, view: Option<&qrender::View>, ft: f32) {

@@ -333,6 +333,10 @@ impl Input {
         self.bindings.get(key as usize)?.as_deref()
     }
     /// Weapon wheel button held (and in game).
+    /// Queue an impulse as the `impulse` command does (scripted guests).
+    pub fn set_impulse(&mut self, n: u8) {
+        self.impulse = n;
+    }
     pub fn wheel_held(&self) -> bool {
         self.buttons[btn::WHEEL].is_down() && self.dest == KeyDest::Game
     }

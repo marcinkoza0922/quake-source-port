@@ -54,6 +54,15 @@ qbench first if `target/qbench/base` doesn't exist yet. Pin the settings,
 because headless runs exec the user's `config.cfg`. Run at least three times
 per build and compare medians, since run-to-run noise is several percent.
 
+### qprof (whole-feature CPU+GPU suite)
+
+`target/release/qprof [-only a,b] [-group enhancement|addon|ultimate] [-perf] [-shots 2.5]`
+runs vanilla, every enhancement, every add-on, and the ultimate/co-op horde
+tests live and headless, and writes `target/qprof/latest/report.md` (costs
+compared with vanilla, CPU/GPU phase and stage, hotspot ranking). `-perf` adds per-function
+profiles of just the measured window. `-list` shows the scenarios. Details in
+DESIGN.md (Tooling).
+
 ### GPU timestamps
 
 `QSP_GPUTIMES=1` prints the average µs per stage on exit (cull, lightmap,

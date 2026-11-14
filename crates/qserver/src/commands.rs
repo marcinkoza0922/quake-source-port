@@ -26,6 +26,7 @@ pub(crate) fn register(s: &mut Server) {
     s.add_cmd("setpos", cmd_setpos);
     s.add_cmd("portal_set", cmd_portal_set);
     s.add_cmd("give", cmd_give);
+    s.add_cmd("prof_wake", |s, _| if !s.deathmatch() { crate::horde::cmd_prof_wake(s) });
     s.add_cmd("kill", cmd_kill);
     s.add_cmd("color", cmd_color);
     s.add_cmd("name", cmd_name);

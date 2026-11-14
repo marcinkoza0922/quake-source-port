@@ -1,0 +1,156 @@
+# Performance optimisation plan
+
+Findings from the `qprof` suite (2026-11-13, 1280×720 headless, RTX 3060 Ti,
+single runs; noise about ±150 µs/frame). Function shares are of engine CPU
+time during the measured window (`qprof -perf`). How to measure: see
+`docs/DESIGN.md` (Tooling: qprof) and the perf-profiling skill.
+
+Rules for every item:
+
+- Output must not change. Take headless screenshots before and after and
+  require `compare -metric AE` = 0 (visual-check skill). Items that change
+  output on purpose (marked *visual*) need a side-by-side check instead.
+- Measure before and after with the same qprof scenarios, at least
+  `-runs 3`, and compare medians. Record results here with the date.
+- One item per branch/PR.
+
+## Baseline (to beat)
+
+| scenario | map | fps | frame µs | p99 µs | GPU µs |
+|---|---|--:|--:|--:|--:|
+| vanilla | e1m1 | 798 | 1253 | 1750 | 1183 |
+| vanilla | ad_sepulcher | 342 | 2928 | 3566 | 2861 |
+| gel | e1m1 | 614 | 1629 | 18974 | 1196 |
+| water | ad_sepulcher | 231 | 4327 | 11466 | 3138 |
+| teleportwindows | ad_sepulcher | 242 | 4125 | 6579 | 3538 |
+| all-enhancements | ad_sepulcher | 91 | 10936 | 18189 | 10870 |
+| ultimate | ad_sepulcher | 79 | 12593 | 30894 | 12216 |
+| ultimate-coop | ad_sepulcher | 44 | 22951 | 60488 | 16833 |
+
+Headless frames include about 1.07 ms of image readback in `ui+present`;
+confirm wins windowed (`qprof -window`, or qbench for parity).
+
+## Phase 1: cheap, low-risk CPU wins
+
+### 1. Look up settings by id, not by name
+- Problem: `Cvars::find` lowercases the name into a new `String` and
+  SipHashes it (`crates/qcore/src/cvar.rs:111`). The host calls `cv("…")`
+  dozens of times per frame (`host/render.rs` render settings,
+  `view_cvars`, `frame.rs`). About 10–15% of engine CPU on e1m1
+  (`Cvars::find`, `hash_one<String>`, `view_cvars`).
+- Plan: resolve the `CvarId`s once (a struct of ids registered at startup,
+  like `qinput::InputCvars`) and read `value(id)`. Keep `find` for console
+  use. As a stopgap, make `find` hash without allocating (case-insensitive
+  hasher, or require lowercase names at registration).
+- Expect: −100…150 µs/frame on e1m1, CPU-bound maps benefit most.
+- Measure: `vanilla` on e1m1 and ad_sepulcher.
+
+### 2. Stop allocating in `portal_surfaces`
+- Problem: `World::portal_surfaces` (`crates/qrender/src/world/query.rs:138`)
+  allocates `vec![false; surfaces.len()]` (the whole map) on every call,
+  once per portal view, teleporter window and split-screen view per frame.
+  Together with `build_world_draw` and `mark_leaves` it is ~45% of engine
+  CPU with the portal gun and ~50% in 4-player co-op.
+- Plan: keep a per-surface frame stamp (`Vec<u32>`) in `World` and bump a
+  counter per call, as `cull.comp` does on the GPU; reuse the output `Vec`.
+- Expect: large win in `portalgun`, `teleportwindows`, `ultimate-coop`.
+
+### 3. Gel coat rebuild spikes
+- Problem: each `REBUILD` interval `gel_fx::frame` rebuilds the whole coat
+  (`src/addons/gel_fx.rs`): `gel_coat::group` compares every pair of discs
+  (O(n²)) and value noise is evaluated per texel (`floorf` 13–17%). This
+  is the 14–19 ms p99 in `gel`.
+- Plan: (a) group with a spatial hash keyed by plane + cell so only nearby
+  discs are compared; (b) rebuild only clusters whose discs changed; (c)
+  precompute the noise into a small tiling texture, or evaluate it per
+  vertex instead of per texel (*visual*).
+- Expect: p99 under 3 ms on `gel`.
+
+## Phase 2: the big ones
+
+### 4. Particle system cost on AD (CPU and GPU)
+- Problem: `qpart` (`System::frame`, `Geometry::particle`, `shade`,
+  `Geometry::begin`) is 40–75% of engine CPU on every AD scenario,
+  vanilla included, and the GPU `particles+vm` stage is ~1.64 ms of a
+  2.86 ms frame on ad_sepulcher.
+- First step: find out what is spawning them (likely AD's FTE weather and
+  `_texpart_*` emitters; not yet verified). Add counters for live particles
+  and emitted vertices to the profile JSON, and an A/B run with the
+  emitters disabled.
+- Candidate fixes, in order: skip simulating or building geometry for
+  particles outside the frustum or PVS; cheaper `shade` (cache lighting per
+  emitter or per cell instead of per particle, reusing the light-point
+  cache); remove per-frame allocation in `Geometry::begin`; build quads in
+  a vertex shader from one instance per particle (cuts CPU and upload);
+  with large counts, simulate weather on the GPU.
+- Expect: the largest single gain on AD maps (vanilla included).
+
+### 5. Split-screen post-processing
+- Problem: GPU `post` is 11.2 ms with 4 split views against 0.25 ms solo
+  (about 44×). Post passes (SSAO, blur, screen shader) seem to run at
+  full-screen size for each view.
+- Plan: confirm with a per-view timestamp; then run each view's post at
+  its viewport size, and run whole-screen passes (screen shader with
+  `r_shader_scope 1`, goggles) once for the whole screen instead of per
+  view.
+- Expect: co-op from ~44 to well over 100 fps headless.
+
+### 6. Supersampling combined with other enhancements
+- Problem: all enhancements together cost far more than the sum of each
+  one alone (+6.4 ms GPU on e1m1, +8 ms on AD; `translucent` reaches
+  3–3.6 ms). SSAO alone adds 0.3 ms. Supersampling (`vid_fsaamode`) likely
+  multiplies the cost of SSAO and the translucent/water passes.
+- Plan: add pairwise scenarios to qprof (supersample+ssao,
+  supersample+water); then run SSAO and similar effects at the base
+  resolution and upscale (*visual*), or document the combination as
+  expensive in the option tooltip.
+
+### 7. Extra scene views (teleporter windows, portals)
+- Problem: `teleportwindows` +1.3 ms CPU and +0.7 ms GPU on AD; each window
+  re-walks the world on the CPU (`build_world_draw`).
+- Plan: after item 2, cache each window's destination surface list (static
+  destinations); cull windows by screen size and distance; consider the
+  GPU cull path for portal views as for the main view.
+
+## Phase 3: gameplay-scale and smaller items
+
+### 8. Server spikes in large fights
+- Problem: server p99 19–23 ms with the `sv_horde` load (mean 0.65 ms).
+  `clip_to_links` and `Hull::recursive_check` lead the profile. Probable
+  cause, not yet confirmed: all monsters think on the same server frame.
+- Plan: confirm by counting QC thinks per server frame. If confirmed, find
+  why thinks line up (spawn-time `nextthink`), and reduce trace cost
+  (area-node tree sizes, cheaper box/hull rejection). Monster timing is
+  gameplay: do not stagger thinks without checking qbot results.
+
+### 9. Enhanced water and impacts on AD
+- `water` +1.5 ms CPU and p99 11 ms; `impacts` +0.85 ms; `blood` +0.64 ms.
+  Profile each alone with `-perf`; look for per-frame rebuilds of decal
+  and ripple geometry that could be incremental.
+
+### 10. Contents checks
+- `check_water_transition` and `point_contents` take 4–8% on e1m1. Check
+  for repeated checks of the same point per frame (client and server) and
+  cache per entity per frame.
+
+### 11. Aim-assist target search in co-op
+- The input phase is 0.38 ms in 4-player co-op: `aim_targets` scans every
+  edict per player. Only gather targets when a pad is used or autoaim is
+  on (already partly gated), and share one candidate list between players.
+
+### 12. Driver and synchronisation overhead
+- The NVIDIA driver takes 13–38% and libc locking/memmove 10–37% of the
+  process. Fewer draws and views (items 2, 4, 5, 7) reduce this; measure
+  windowed, since the headless readback adds memmove and waits.
+
+## Tooling follow-ups
+
+- Run qprof with `-runs 3` for the before/after numbers of each item.
+- Add particle and vertex counters to the profile JSON (needed for item 4).
+- Add pairwise enhancement scenarios (item 6) and a per-view GPU timestamp
+  for split-screen (item 5).
+- Record a windowed baseline (`qprof -window`) once, for absolute numbers.
+
+## Results log
+
+(date, item, scenario, before → after, notes)

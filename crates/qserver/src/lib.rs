@@ -16,6 +16,7 @@ mod commands;
 pub mod delta;
 mod ents;
 pub mod fields;
+mod horde;
 mod host;
 pub mod loc;
 pub mod msg;

@@ -120,6 +120,8 @@ impl Renderer {
             frames,
             cur: 0,
             gpu_times: None,
+            gpu_times_wanted: false,
+            fence_wait_ns: 0,
             swap: None,
             surface_size: Box::new(move || (width, height)),
             width,

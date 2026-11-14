@@ -1113,6 +1113,10 @@ dependencies = [
 ]
 
 [[package]]
+name = "qprof"
+version = "0.1.0"
+
+[[package]]
 name = "qrender"
 version = "0.1.0"
 dependencies = [
