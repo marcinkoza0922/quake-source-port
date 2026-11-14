@@ -18,15 +18,36 @@ run with no deathmatch and no remote client (`addons::allowed`/`all_local`).
   loads either (newer wins), saving removes the same-named other-format file,
   autosave rotation carries each file's extension. Load/Save cards show an
   "ADD-ONS: …" badge (`SaveInfo::addons`). A plain `.sav` load turns add-ons off.
-- Input: `+toy` cycles a player's slot through the enabled toys and back to
-  the QC weapon; any weapon impulse (1–8, 10, 12, incl. the wheel) puts the
-  toy away. `+attack2` is alt-fire. Both binds appear on Controls only
-  while the game has add-ons, or with none running while the checkbox is
-  ticked (`ADDON_BINDS`, synced on menu key/draw).
-- While a toy is held, `ToySlot::buttons` keeps QC's attack bit at 0 and
+- Browser: both add-on pickers use a narrow checklist and a detail panel with
+  a looping action preview, scrollable instructions, bindings and a parameter
+  submenu. Selection and enablement are independent. The running game's
+  add-on lock still applies to the checklist.
+- Input: each weapon has an archived `addon_<name>_slot` assignment (1–10,
+  where 10 is slot 0). Repeated selection of a stock weapon slot cycles its
+  QC weapon and enabled assigned add-ons. Slots 9 and 0 have default keys 9
+  and 0; assignment changes the slot membership rather than its key binding.
+  `weapon_slot <1..9|0>` uses local input state, preserving every mod-defined
+  QC impulse value, including the console's `impulse 9` cheat.
+  Enabled toys are owned immediately. Slots, next/previous cycling and exact
+  selections share `wheel::Entry::usable`: stock weapons require ownership and
+  ammo; sticky needs one rocket and railgun needs two cells. Ammo-free add-ons
+  remain selectable. Unavailable slots preserve the current weapon; stock
+  requests still reach QC when no add-on is held. Next/previous weapon (including
+  mouse wheel) traverses usable weapons in slot order, stock first within each slot.
+  An empty usable inventory consumes cycling without changing the held weapon.
+  The radial weapon wheel adds one segment per enabled add-on in the same slot
+  order, selecting each weapon directly. Add-ons use short labels and show their
+  ammo and full names; the modern HUD includes them in a compact four-column grid.
+  The former `+toy` action is removed. `+attack` and `+attack2` are shared
+  fire/alt-fire actions: remapping them affects every add-on using them.
+  Goggles instead expose the unique `goggles cycle` action. The browser
+  offers keyboard/mouse and controller bindings and warns before replacing
+  an occupied key. Bindings use the same persistent host configuration as
+  Controls.
+- While a toy is held, `WeaponSelection::buttons` keeps QC's attack bit at 0 and
   sends usercmd bit 2 (fire), bit 3 (alt) and the toy id in bits 4–7; QC
   only reads bits 0/1. The QC view model is replaced by the imported projector (player 1
-  and each split-screen guest have their own `ToySlot`).
+  and each split-screen guest have their own `WeaponSelection`).
 - Off costs one cvar lookup per frame; nothing else runs.
 - Portal gun (`addons/portal.rs`, `portal_move.rs`): fire/alt-fire edges
   place slot 0/1 of the shooter's pair. Placement traces from the eye
@@ -228,8 +249,8 @@ spot), brush entities and monsters (offset from the entity's origin, so it
 rides doors, plats and monsters). Sky hits fizzle. When the host monster
 dies (health ≤ 0 or `SOLID_NOT`) or is freed, the bomb falls and sticks to
 whatever is below. Alt-fire (`+attack2`) edge detonates all the player's
-bombs: a temporary edict calls QC `T_RadiusDamage(tmp, player, 120,
-world)`, then TE_EXPLOSION and `weapons/r_exp3.wav` (only if precached).
+bombs: a temporary edict calls QC `T_RadiusDamage(tmp, player, damage,
+world)` (`addon_sticky_damage`, archived, default 120, clamped 25–300), then TE_EXPLOSION and `weapons/r_exp3.wav` (only if precached).
 A player leaving detonates theirs; the toy switched off removes all.
 - Sync: `//qsp_sticky id x y z` when a bomb moves, `//qsp_sticky id` when
   it is gone, `//qsp_sticky clear` + full state on spawn →
@@ -393,8 +414,8 @@ locked like the toy cvars). It is not saved: goggles start off after a load.
   (Add-ons)", shown with the other add-on binds) opens a radial wheel in the
   weapon wheel's style; it shares `wheel_aim` (either stick, or the mouse
   cursor), and releasing on a slot toggles it. Slots follow `Equip::ALL`, so
-  new equipment is one enum variant. Commands: `goggles` (toggle night
-  vision), `goggles nv|thermal|off`, `equip <nv|thermal>` (toggle). Each
+  new equipment is one enum variant. Commands: `goggles` / `goggles cycle` (normal → night vision →
+  thermal → normal), `goggles nv|thermal|off`, `equip <nv|thermal>` (toggle). Each
   switch plays a synthesised cue (`goggles::cue`, rising on / falling off,
   non-positional) and centerprints the new state.
 - Rendering: the host passes `qrender::Goggles { mode, intensity, noise }`
@@ -419,3 +440,57 @@ locked like the toy cvars). It is not saved: goggles start off after a load.
   gain / heat contrast), `addon_goggles_noise` 0–2 (1; grain, scanlines).
 - Headless check: `+addons_enable 1 +sv_autosave 0 +map e1m1 "+delay 2
   goggles thermal" "+delay 3 screenshot target/shots/thermal"`.
+
+### Browser and gameplay preview tooling
+
+`src/menu/addon_browser.rs` owns selection, description scrolling and contextual
+rows. The browser must list a separate, weapon-labelled slot setting for every
+weapon supplied by the selected add-on, above the input remapping header. An
+add-on may supply multiple weapons even though each current weapon add-on
+supplies only one; equipment without weapons has no weapon slot settings.
+The browser metadata stores a weapon list per add-on; row positions, binding
+actions and slot edits use its length. Tall settings lists scroll with focus
+to keep keyboard/controller selections visible within the settings panel.
+Wheel scrolling targets the hovered settings box; Page Up/Down scroll the
+focused box. Settings retain an independent offset and show a scrollbar.
+Mapping labels use action names without internal shared/unique qualifiers.
+Tab moves between the checklist, description, slot assignment, action
+bindings and Configure Parameters. Arrow keys / D-pad select and adjust;
+Enter / A toggles or captures a binding. New Game's Start button is reachable
+by Tab / D-pad as well as mouse, Y or F10. Down from the last checklist entry
+focuses Start; Up from Start returns to that entry. A activates focused Start.
+Down at the last settings row stays in the bottom-right panel.
+Bumpers cycle checklist, description, settings and Start without an on-screen
+bumper prompt. The focused section has a two-unit gold outline, drawn with
+`Canvas::round_frame`. The Start button includes the controller family's Y glyph;
+the footer keeps contextual A/B prompts. Keyboard Start has no F10 label.
+Wheel / PgUp / PgDn scroll the description.
+Delete / Backspace clears keyboard bindings; X clears controller bindings.
+`addon_bindings.rs` also protects the Controls menu: occupied keys keep their
+old command until Yes (Y / controller A / click) confirms replacement;
+Escape / B / Enter declines. The assigned key is drawn as a glyph, with Yes/No
+prompts for the active device and controller family. Both Controls and the browser
+use `draw_binding_columns`: only the active device column flashes during capture,
+and the other device's existing glyphs remain visible. Capture accepts any device.
+`host::tests::menu_controller` exercises platform button/stick events; optional
+`QUAKE_MENU_SHOTS=target/shots` writes navigation, capture and conflict screenshots
+(skips without game data/Vulkan).
+
+`tools/capture_addon_previews.py` records all six add-ons on e1m1 using the
+headless renderer and installed game data (`--basedir` or normal discovery).
+It needs a release executable (`--engine` to override) and Python Pillow.
+The 48-frame, 12 fps, 320×92 silent loops in `assets/addon-previews/*.qav`
+show linked portals, a boomerang stunning a soldier, planted bombs and remote
+detonation, hookshot travel, railgun shots and all three goggle modes.
+Source screenshots and logs stay in `target/addon-previews/`; config.cfg and
+game files are never written by the capture tool. The bundled preview
+assets are rendered footage, not game archives, maps, models or reference repos.
+
+QAV1 has a little-endian header (magic, u16 width, height, frame count, fps),
+then u32 compressed length + zlib RGB for each independent frame.
+`src/draw/addon_video.rs` bounds decoding and the existing Pics cache uploads
+each requested frame once. No video decoder dependency or background server
+is needed; playback follows menu time and preserves the footage's aspect ratio.
+Mods can override individual frames at `addons/previews/<id>/000.tga` through
+`047.tga` using the normal filesystem priority. All bundled clips are tested
+for complete decoding, dimensions and motion without needing installed game data.

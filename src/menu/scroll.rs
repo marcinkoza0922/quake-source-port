@@ -68,14 +68,6 @@ impl Menu {
         self.set_page_scroll(p, (f * max as f32).round() as usize);
     }
 
-    /// Clickable Back button in the bottom-left corner (x, y, w, h).
-    pub(super) fn back_button(&self) -> Option<(f32, f32, f32, f32)> {
-        let hidden = matches!(self.screen, Screen::None | Screen::Main | Screen::Quit | Screen::Death)
-            || self.capturing()
-            || self.osk.is_some();
-        (!hidden).then_some(BACK_BTN)
-    }
-
     pub fn mouse_up(&mut self) {
         self.drag = None;
         self.slider_drag = None;
@@ -83,6 +75,7 @@ impl Menu {
 
     /// Sets a slider from a pointer x (the knob centres on it), snapped to its step.
     pub(super) fn set_slider(&self, item: Item, x: f32, cv: &mut Cvars) {
+        if item_disabled(item, cv) { return; }
         if let Item::ShaderParam(k) = item {
             return self.drag_shader_param(k, x, cv);
         }

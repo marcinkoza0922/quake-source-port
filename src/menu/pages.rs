@@ -100,10 +100,9 @@ pub(super) const CONTROLS_ALL: &[Item] = &[
     bind("Quick Load", "echo Quickloading...; wait; load quick"),
     Item::ResetBinds,
     bind("Alt Fire (Add-ons)", "+attack2"),
-    bind("Toy Slot (Add-ons)", "+toy"),
     bind("Equipment Wheel (Add-ons)", "+equipwheel"),
 ];
-pub(super) const CONTROLS: &[Item] = CONTROLS_ALL.split_at(CONTROLS_ALL.len() - 3).0;
+pub(super) const CONTROLS: &[Item] = CONTROLS_ALL.split_at(CONTROLS_ALL.len() - 2).0;
 
 /// Main menu → Add-ons: which toys the running game (or the next new
 /// game) has. Locked while the running game was started without add-ons.
@@ -119,7 +118,7 @@ pub(super) const ADDONS: &[Item] = &[
     Item::Sub { label: "Railgun Settings", page: Page::Railgun },
     toggle("Gel Sprayer", "addon_gel"),
     toggle("Powerwasher", "addon_washer"),
-    slider("Powerwasher Push", "addon_washer_push", 0.25, 3.0, 0.25),
+    Item::Sub { label: "Powerwasher Settings", page: Page::Washer },
     toggle("Goggles", "addon_goggles"),
     Item::Sub { label: "Goggles Settings", page: Page::Goggles },
 ];
@@ -137,7 +136,7 @@ pub(super) const NEW_GAME_ADDONS: &[Item] = &[
     Item::Sub { label: "Railgun Settings", page: Page::Railgun },
     toggle("Gel Sprayer", "addon_gel"),
     toggle("Powerwasher", "addon_washer"),
-    slider("Powerwasher Push", "addon_washer_push", 0.25, 3.0, 0.25),
+    Item::Sub { label: "Powerwasher Settings", page: Page::Washer },
     toggle("Goggles", "addon_goggles"),
     Item::Sub { label: "Goggles Settings", page: Page::Goggles },
     Item::Run { label: "Start New Game", run: Run::NewGame },
@@ -155,6 +154,8 @@ pub(super) const BOOMERANG: &[Item] = &[
     slider("Stun Duration", "addon_boomerang_stun", 1.0, 10.0, 0.5),
     slider("Flight Speed", "addon_boomerang_speed", 300.0, 1500.0, 100.0),
 ];
+/// Reached from the Add-ons pages: powerwasher push strength.
+pub(super) const WASHER: &[Item] = &[slider("Push", "addon_washer_push", 0.25, 3.0, 0.25)];
 /// Reached from the Add-ons pages: railgun damage and trail colour.
 pub(super) const RAILGUN: &[Item] = &[
     slider("Damage", "addon_rail_damage", 25.0, 300.0, 25.0),
@@ -330,6 +331,7 @@ pub(super) const GRAPHICS: &[Item] = &[
 pub(super) const ENHANCEMENTS: &[Item] = &[
     Item::Choice { label: "Ambient Occlusion", cvar: "r_ssao", choices: SSAO },
     toggle("Motion Blur", "r_motionblur"),
+    toggle("Speed Blur", "r_speedblur"),
     slider("Motion Blur Amount", "r_motionblur_amount", 0.1, 2.0, 0.1),
     toggle("Enhanced Water", "r_enhancedwater"),
     toggle("See-through Teleporters", "r_teleportwindows"),
@@ -352,6 +354,7 @@ pub(super) const IMPACTS: &[Item] = &[
 
 /// Reached from Enhancements; unavailable while `r_enhancedwater` is off.
 pub(super) const WATER: &[Item] = &[
+    toggle("Translucent Water", "r_watertranslucency"),
     slider("Water Opacity", "r_wateralpha", 0.0, 1.0, 0.1),
     toggle("Ripples", "r_waterripples"),
     slider("Ripple Intensity", "r_waterripples_amount", 0.1, 2.0, 0.1),
@@ -501,3 +504,6 @@ pub(super) const GOGGLES: &[Item] = &[
     slider("Goggle Intensity", "addon_goggles_intensity", 0.25, 3.0, 0.25),
     slider("Goggle Noise", "addon_goggles_noise", 0.0, 2.0, 0.25),
 ];
+
+/// Stickybomb explosion balance; action mapping lives in the browser.
+pub(super) const STICKY: &[Item] = &[slider("Explosion Damage", "addon_sticky_damage", 25.0, 300.0, 25.0)];

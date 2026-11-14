@@ -1,5 +1,17 @@
 use super::*;
 
+pub(super) struct WeaponIcon {
+    slot: u8,
+    pic: Option<String>,
+    label: &'static str,
+    active: bool,
+}
+
+fn weapon_grid_size(count: usize) -> (f32, f32) {
+    (count.min(4) as f32 * 20.0, count.div_ceil(4) as f32 * 14.0)
+}
+
+
 impl<'a, 'b> Sbar<'a, 'b> {
     /// Modern HUD: each element (`HudElem`) is drawn in a box at its
     /// configured anchor; elements sharing an anchor stack away from the
@@ -19,6 +31,11 @@ impl<'a, 'b> Sbar<'a, 'b> {
         let weapons = self.weapon_row(cl);
         let items = self.item_row(cl);
         fade.update(cl, now);
+        let addons = (self.addon_weapons.clone(), self.held_addon);
+        if fade.last_addons.as_ref() != Some(&addons) {
+            fade.last_addons = Some(addons);
+            fade.changed[HudElem::Weapons as usize] = now;
+        }
         let m = 8.0;
         let gap = 4.0;
         // per-anchor offset from the edge consumed so far
@@ -52,7 +69,7 @@ impl<'a, 'b> Sbar<'a, 'b> {
                     (100.0, 24.0)
                 }
                 HudElem::AmmoList => (88.0, 36.0),
-                HudElem::Weapons => (weapons.len() as f32 * 24.0, 16.0),
+                HudElem::Weapons => weapon_grid_size(weapons.len()),
                 HudElem::Items => (items.iter().map(|i| i.1).sum::<f32>(), 16.0),
             };
             if w <= 0.0 || alpha <= 0.0 {
@@ -83,7 +100,7 @@ impl<'a, 'b> Sbar<'a, 'b> {
     }
 
     #[allow(clippy::too_many_arguments)]
-    pub(super) fn draw_elem(&mut self, cl: &ClientState, e: HudElem, x: f32, y: f32, w: f32, right: bool, face_anim: bool, face: bool, weapons: &[String], items: &[(String, f32, f32)]) {
+    pub(super) fn draw_elem(&mut self, cl: &ClientState, e: HudElem, x: f32, y: f32, w: f32, right: bool, face_anim: bool, face: bool, weapons: &[WeaponIcon], items: &[(String, f32, f32)]) {
         let st = &cl.stats;
         match e {
             HudElem::Health => {
@@ -138,8 +155,19 @@ impl<'a, 'b> Sbar<'a, 'b> {
                 }
             }
             HudElem::Weapons => {
-                for (i, p) in weapons.iter().enumerate() {
-                    self.draw_pic(x + i as f32 * 24.0, y, p);
+                for (i, weapon) in weapons.iter().enumerate() {
+                    let (wx, wy) = (x + (i % 4) as f32 * 20.0, y + (i / 4) as f32 * 14.0);
+                    let color = if weapon.active { [1.0, 0.7, 0.3, self.alpha] } else { [1.0, 1.0, 1.0, self.alpha * 0.65] };
+                    if weapon.active { self.c.fill(wx, wy, 18.0, 12.0, [0.35, 0.22, 0.07, self.alpha * 0.7]); }
+                    if let Some((id, pw, ph)) = weapon.pic.as_ref().and_then(|p| (self.pic)(p)) {
+                        let scale = (18.0 / pw as f32).min(12.0 / ph as f32).min(0.75);
+                        let (pw, ph) = ((pw as f32 * scale) as u32, (ph as f32 * scale) as u32);
+                        self.c.pic_color(wx, wy + (12.0 - ph as f32) / 2.0, Some((id, pw, ph)), color);
+                    } else {
+                        for (j, b) in weapon.label.bytes().enumerate() {
+                            self.c.ch_color(wx + 1.0 + j as f32 * 8.0, wy + 2.0, b, color);
+                        }
+                    }
                 }
             }
             HudElem::Items => {
@@ -153,10 +181,12 @@ impl<'a, 'b> Sbar<'a, 'b> {
     }
 
     /// Owned weapon icons, left to right.
-    pub(super) fn weapon_row(&self, cl: &ClientState) -> Vec<String> {
+    pub(super) fn weapon_row(&self, cl: &ClientState) -> Vec<WeaponIcon> {
         let st = &cl.stats;
         let items = cl.items;
-        let mut row: Vec<String> = Vec::new();
+        let mut row = Vec::new();
+        let stock_active = self.held_addon.is_none();
+        let icon = |slot, pic: String, active| WeaponIcon { slot, pic: Some(pic), label: "??", active: stock_active && active };
         let hip = if self.pack == Pack::Hipnotic { hip_weapons(cl) } else { Vec::new() };
         for (i, w) in WEAPONS.iter().enumerate() {
             if items & (IT_SHOTGUN << i) == 0 && !(i == 4 && hip.iter().any(|h| h.0 == 2)) {
@@ -165,20 +195,27 @@ impl<'a, 'b> Sbar<'a, 'b> {
             if self.pack == Pack::Hipnotic && i == 4 {
                 // grenade launcher slot shows the prox variants
                 if let Some(h) = hip.iter().find(|h| h.0 == 2) {
-                    row.push(h.1.clone());
+                    row.push(icon(i as u8 + 2, h.1.clone(), h.2));
                     continue;
                 }
             }
-            let active = st[STAT_ACTIVEWEAPON] == IT_SHOTGUN << i;
+            let active = stock_active && st[STAT_ACTIVEWEAPON] == IT_SHOTGUN << i;
             if self.pack == Pack::Rogue && i >= 2 && st[STAT_ACTIVEWEAPON] == RIT_LAVA_NAILGUN << (i - 2) {
-                row.push(ROGUE_WEAPONS[i - 2].into());
+                row.push(icon(i as u8 + 2, ROGUE_WEAPONS[i - 2].into(), true));
                 continue;
             }
-            row.push(format!("{}{w}", if active { "inv2_" } else { "inv_" }));
+            row.push(icon(i as u8 + 2, format!("{}{w}", if active { "inv2_" } else { "inv_" }), active));
         }
         for h in hip.iter().filter(|h| h.0 < 2) {
-            row.push(h.1.clone());
+            row.push(icon(9, h.1.clone(), h.2));
         }
+        if self.pack != Pack::Rogue && items & 4096 != 0 {
+            row.push(WeaponIcon { slot: 1, pic: None, label: "AX", active: stock_active && st[STAT_ACTIVEWEAPON] == 4096 });
+        }
+        row.extend(self.addon_weapons.iter().map(|e| WeaponIcon {
+            slot: e.slot, pic: None, label: e.label(), active: e.active(cl, self.held_addon),
+        }));
+        row.sort_by_key(|w| w.slot);
         row
     }
 
@@ -209,5 +246,38 @@ impl<'a, 'b> Sbar<'a, 'b> {
             l.1 = 16.0;
         }
         row
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn weapon_grid_wraps_addons_and_tracks_the_held_weapon() {
+        use crate::wheel::{Entry, Weapon};
+        use qserver::addons::Toy;
+        let mut c = Canvas::new(640, 480);
+        let mut pic = |_: &str| Some((PicId(1), 24, 16));
+        let mut sb = Sbar::new(&mut c, &mut pic, Pack::Id);
+        let mut cl = ClientState::default();
+        cl.items = 4096 | 127;
+        cl.stats[STAT_HEALTH] = 100;
+        cl.stats[STAT_ACTIVEWEAPON] = 16;
+        sb.addon_weapons = Toy::ALL[..5].iter().map(|&t| Entry { weapon: Weapon::Addon(t), slot: 6 }).collect();
+        sb.held_addon = Some(Toy::Sticky);
+        let icons = sb.weapon_row(&cl);
+        assert_eq!(icons.len(), 13);
+        assert_eq!(weapon_grid_size(icons.len()), (80.0, 56.0));
+        assert_eq!(icons.iter().filter(|w| w.active).count(), 1);
+        assert_eq!(icons.iter().find(|w| w.active).unwrap().label, "SB");
+        assert!(icons.windows(2).all(|w| w[0].slot <= w[1].slot));
+        let cfg = HudConfig { mode: [HudMode::Immersive; 6], anchor: [HudAnchor::BottomRight; 6], face: false };
+        let mut fade = HudFade::default();
+        sb.draw_modern(&cl, false, false, &cfg, &mut fade, 0.0);
+        assert_eq!(fade.alpha(HudElem::Weapons, 4.0), 0.0);
+        sb.held_addon = Some(Toy::Boomerang);
+        sb.draw_modern(&cl, false, false, &cfg, &mut fade, 4.0);
+        assert_eq!(fade.alpha(HudElem::Weapons, 4.0), 1.0);
     }
 }

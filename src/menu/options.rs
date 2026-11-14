@@ -3,6 +3,7 @@ use super::*;
 impl Menu {
     /// Changes one option by `dir` steps. Returns true if something changed.
     pub(super) fn adjust(&mut self, item: Item, dir: i32, enter: bool, cv: &mut Cvars, out: &mut Vec<Action>) -> bool {
+        if item_disabled(item, cv) { return false; }
         match item {
             Item::Slider { cvar, min, max, step, invert, .. } => {
                 let d = if invert { -dir } else { dir } as f32;

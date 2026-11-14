@@ -35,8 +35,8 @@ pub struct Guest {
     pub center: crate::console::Console,
     /// This guest's weapon wheel (opened with its own `+weaponwheel`).
     pub wheel: crate::wheel::Wheel,
-    /// This guest's add-on toy slot.
-    pub toy: crate::addons::ToySlot,
+    /// This guest's weapon selection.
+    pub toy: crate::addons::WeaponSelection,
 }
 
 impl Guest {

@@ -54,6 +54,11 @@ fn clamp_scroll(cursor: usize, scroll: &mut usize) {
 }
 
 impl ModMenu {
+    /// Back sits directly beneath the list panel, in the shared menu coordinate space.
+    pub fn back_position(&self) -> (f32, f32) {
+        (LIST.0, TOP + ROWS as f32 * ROW_H + 8.0)
+    }
+
     pub fn set_mods(&mut self, mods: Vec<ModInfo>, current: &str) {
         self.current = current.to_ascii_lowercase();
         self.mods = mods;

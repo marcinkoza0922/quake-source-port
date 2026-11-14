@@ -11,47 +11,13 @@ use crate::sbar::{IT_INVISIBILITY, IT_INVULNERABILITY, IT_QUAD, IT_SUIT};
 
 pub mod weapon;
 mod damage;
-use weapon::Alignment;
+mod settings;
+mod speed;
+pub use settings::ViewCvars;
 
 pub const CONTENTS_WATER: i32 = -3;
 pub const CONTENTS_SLIME: i32 = -4;
 pub const CONTENTS_LAVA: i32 = -5;
-
-/// View cvars read once per frame.
-#[derive(Clone, Copy, Debug)]
-pub struct ViewCvars {
-    pub bob: f32,
-    pub bobcycle: f32,
-    pub bobup: f32,
-    pub rollangle: f32,
-    pub rollspeed: f32,
-    pub kicktime: f32,
-    pub kickroll: f32,
-    pub kickpitch: f32,
-    pub fov: f32,
-    pub gunkick: bool,
-    pub viewmodel: Alignment,
-    /// r_lerpmodels: blend alias frames.
-    pub lerp_models: bool,
-    /// r_lerpmove: smooth MOVESTEP (monster) movement over 0.1s.
-    pub lerp_move: bool,
-    /// v_flashscale: strength of damage, pickup and powerup screen flashes.
-    pub flash: f32,
-}
-
-impl ViewCvars {
-    /// a11y_reducemotion: no bob, strafe roll, damage kick or gun kick.
-    pub fn reduce_motion(mut self, on: bool) -> Self {
-        if on {
-            self.bob = 0.0;
-            self.rollangle = 0.0;
-            self.kickroll = 0.0;
-            self.kickpitch = 0.0;
-            self.gunkick = false;
-        }
-        self
-    }
-}
 
 #[derive(Clone, Copy, Default)]
 struct CShift {
@@ -209,10 +175,13 @@ impl ViewState {
     /// view model entity, if one should be drawn.
     pub fn calc_refdef(&mut self, cl: &ClientState, cv: &ViewCvars, lv: &Level, ft: f32) -> (View, Option<RenderEntity>) {
         let ent = cl.entities.get(cl.viewentity).cloned().unwrap_or_default();
-        let mut view = View { origin: ent.origin, angles: cl.viewangles, fov_x: cv.fov, reserve_bottom: 0 };
+        let mut view = View { origin: ent.origin, angles: cl.viewangles, fov_x: cv.fov, ..Default::default() };
         if cl.intermission != 0 {
             view.angles = ent.angles;
             return (view, None);
+        }
+        if cv.speed_blur && cl.stats[STAT_HEALTH] > 0 {
+            view.speed_blur = speed::strength(cl.velocity);
         }
         let bob = Self::calc_bob(cl, cv);
         view.origin[2] += cl.viewheight + bob;

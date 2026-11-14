@@ -56,6 +56,14 @@ pub(super) fn register_commands(c: &mut Commands<Host>) {
     // is still unbound, so configs saved before the pad
     // defaults existed gain them without losing the player's own choices.
     c.add("_paddefaults_merge", |h, _| {
+        if h.cv("cl_addonslotdefaults") < 1.0 {
+            for (key, cmd) in [('9' as i32, "weapon_slot 9"), ('0' as i32, "weapon_slot 0")] {
+                if h.input.binding(key).is_none_or(|b| b == "impulse 0") {
+                    h.input.set_binding(key, Some(cmd));
+                }
+            }
+            h.server.core.cvars.set("cl_addonslotdefaults", "1");
+        }
         if h.cv("cl_paddefaults") >= 1.0 {
             return;
         }
@@ -162,6 +170,7 @@ pub(super) fn register_commands(c: &mut Commands<Host>) {
             "hookshot" => Some(Page::Hookshot),
             "boomerang" => Some(Page::Boomerang),
             "goggles" => Some(Page::Goggles),
+            "sticky" => Some(Page::Sticky),
             _ => None,
         };
         if page == Some(Page::Graphics) {

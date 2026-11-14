@@ -29,7 +29,7 @@ pub(super) const CVARS: &[(&str, &str, u32)] = &[
 ];
 
 pub(super) fn register_goggle_commands(c: &mut Commands<Host>) {
-    // `goggles` toggles night vision; `goggles nv|thermal|off` sets them
+    // The remappable action cycles all modes; explicit commands still select one.
     c.add("goggles", |h, a| {
         let arg = a.argv(1);
         if !h.goggles_allowed() {
@@ -37,7 +37,13 @@ pub(super) fn register_goggle_commands(c: &mut Commands<Host>) {
             return;
         }
         match arg {
-            "" => h.toggle_equip(Equip::NightVision),
+            "" | "cycle" => {
+                let mode = h.goggles.equip.cycle_goggles();
+                h.goggle_cue(mode != 0);
+                let name = ["Normal vision", "Night Vision Goggles", "Thermal Goggles"][mode as usize];
+                let (s, t, cols) = h.center_args(name);
+                h.con.center_print(&s, t, cols);
+            }
             "off" | "0" => {
                 if h.goggles.equip.any() {
                     h.goggles.equip.clear();
@@ -47,7 +53,7 @@ pub(super) fn register_goggle_commands(c: &mut Commands<Host>) {
             s => match Equip::from_key(s) {
                 Some(e) if h.goggles.equip.is_on(e) => {}
                 Some(e) => h.toggle_equip(e),
-                None => h.print("goggles [nv|thermal|off]\n"),
+                None => h.print("goggles [cycle|nv|thermal|off]\n"),
             },
         }
     });

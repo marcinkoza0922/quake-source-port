@@ -78,6 +78,9 @@ impl Renderer {
             st.telealpha.unwrap_or(st.wateralpha),
         ]
         .map(|a| a.clamp(0.0, 1.0));
+        if let Some(wg) = &mut self.world {
+            wg.cpu.set_transparent_liquids(alphas.iter().any(|&a| a < 1.0));
+        }
         let time = fr.time;
         let mut styles = [256.0f32; 256];
         for (i, v) in fr.lightstyles.iter().take(256).enumerate() {
@@ -593,6 +596,7 @@ impl Renderer {
             trans.sort_by(|a, b| b.0.total_cmp(&a.0));
         }
         passes.push(ViewPass {
+            speed_blur: view_in.map_or(0.0, |v| v.speed_blur.clamp(0.0, 1.0)),
             view,
             rect,
             blend,
@@ -1484,6 +1488,7 @@ impl Renderer {
                 g_gain: st.goggles.intensity.clamp(0.25, 3.0),
                 g_noise: st.goggles.noise.clamp(0.0, 2.0),
                 g_time: (fr.time % 1000.0) as f32,
+                speed_blur: pass.speed_blur,
             }]));
             dev.cmd_draw(cmd, 3, 1, 0, 0);
             if pi + 1 < npasses {

@@ -112,6 +112,7 @@ pub(super) struct PostPush {
     pub(super) g_gain: f32,
     pub(super) g_noise: f32,
     pub(super) g_time: f32,
+    pub(super) speed_blur: f32,
 }
 
 #[repr(C)]
@@ -242,6 +243,7 @@ pub(super) struct ViewPass {
     /// Output rectangle (x, y, w, h) in output pixels.
     pub(super) rect: [u32; 4],
     pub(super) blend: [f32; 4],
+    pub(super) speed_blur: f32,
     /// Scene target region drawn (top-left), in target pixels.
     pub(super) scene_w: u32,
     pub(super) scene_h: u32,

@@ -100,8 +100,8 @@ pub struct Host {
     pend_jump: bool,
     pend_impulse: u8,
     wheel: crate::wheel::Wheel,
-    /// Player 1's add-on toy slot.
-    toy: crate::addons::ToySlot,
+    /// Player 1's weapon selection.
+    toy: crate::addons::WeaponSelection,
     captions: crate::captions::Captions,
     hud_fade: crate::sbar::HudFade,
     feedback: feedback::Feedback,
