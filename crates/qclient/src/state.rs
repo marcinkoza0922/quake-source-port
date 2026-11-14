@@ -27,6 +27,8 @@ pub const EF_BRIGHTLIGHT: i32 = 4;
 pub const EF_DIMLIGHT: i32 = 8;
 pub const EF_QEX_QUADLIGHT: i32 = 16;
 pub const EF_QEX_PENTALIGHT: i32 = 32;
+/// Add-ons projectile shotgun pellet: drawn as a tracer, not its nail model.
+pub const EF_QSP_PELLET: i32 = 128;
 
 /// Model flags (MDL header `flags`), set by the host via [`ClientState::model_flags`].
 pub const MF_ROCKET: u32 = 1;

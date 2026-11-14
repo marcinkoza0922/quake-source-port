@@ -147,6 +147,8 @@ impl Host {
                 &self.server.core.cvars, &self.cl, &self.level, &self.server.core.fs,
                 &mut self.r, v, &self.debris, &mut fte,
             );
+            let hitscan = self.cv("r_shotgun_tracers") != 0.0;
+            self.tracers.frame(hitscan, &self.cl, &self.debris, v, &mut self.r, &mut fte);
             self.impacts.frame(
                 &self.server.core.cvars, &self.cl, &self.level, &self.server.core.fs,
                 &mut self.r, &mut ents, &dyn_verts, v.origin.into(), &self.debris, &mut fte,

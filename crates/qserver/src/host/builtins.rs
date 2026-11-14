@@ -229,7 +229,7 @@ impl Host for Ctx<'_> {
                 }
             }
             B::WriteByte => {
-                let v = vm.g_f(p(1)) as i32;
+                let v = crate::addons::shotgun::temp_entity(vm, self.c, vm.g_f(p(1)) as i32);
                 self.with_dest(vm, |m, _| m.byte(v))?;
             }
             B::WriteChar => {

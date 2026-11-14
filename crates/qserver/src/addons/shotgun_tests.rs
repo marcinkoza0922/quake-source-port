@@ -63,6 +63,12 @@ fn qc_pellets_defer_damage_sweep_at_configured_speed_and_save() {
     let pellet = pellets[0];
     let l = sv.level.as_ref().unwrap();
     assert_eq!(l.vm.ent_f(target, f.health), 100.0, "no hitscan damage");
+    assert_eq!(l.vm.ent_f(pellet, f.effects), 128.0, "drawn as a tracer");
+    let l = sv.level.as_mut().unwrap();
+    l.vm.set_self(pellet);
+    let l = sv.level.as_ref().unwrap();
+    assert_eq!(super::temp_entity(&l.vm, &sv.core, 0), 2, "TE_SPIKE becomes TE_GUNSHOT");
+    assert_eq!(super::temp_entity(&l.vm, &sv.core, 23), 23);
     assert!((Vec3::from_array(l.vm.ent_v(pellet, f.velocity)).length() - 10000.0).abs() < 0.1);
     sv.core.cvars.set("addon_shotgun_speed", "30000");
     sv.core.cvars.set("addon_bullet_time_duration", "12");

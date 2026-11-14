@@ -65,6 +65,7 @@ pub(super) fn tooltip(item: Item) -> Option<&'static str> {
         "r_debris_shrapnel" => "Exploding boxes throw metal shards",
         "r_impact_fx" => "Sparks, smoke, chips, splinters and splashes fly off whatever your shots hit",
         "r_impact_bullets" => "Shotgun hits leave small surface marks (cosmetic only)",
+        "r_shotgun_tracers" => "Shotgun pellets leave thin glowing streaks from the gun to where they hit",
         "r_impact_nails" => "Nails stick to wood and bodies; hard surfaces deflect them to the floor",
         "r_impact_scorches" => "Explosions scorch nearby solid surfaces",
         "r_impact_lifetime" => "Impact marks and nails fade before expiring",

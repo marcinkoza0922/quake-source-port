@@ -49,6 +49,11 @@ impl Debris {
         }
     }
 
+    /// Whether something fired within the last moment.
+    pub(crate) fn recent_flash(&self) -> bool {
+        !self.flashes.is_empty()
+    }
+
     /// A point on the line of fire behind impact `p`.
     pub(crate) fn shot_origin(&self, view: Vec3, p: Vec3) -> Vec3 {
         let cm = self.cm.as_deref();

@@ -317,6 +317,7 @@ pub(super) const IMPACTS: &[Item] = &[
     Item::Choice { label: "Surface Hit Effects", cvar: "r_impact_fx", choices: IMPACT_FX },
     toggle("Shotgun Bullet Decals", "r_impact_bullets"),
     toggle("Physical Nail Impacts", "r_impact_nails"),
+    toggle("Shotgun Tracers", "r_shotgun_tracers"),
     toggle("Explosion Scorch Marks", "r_impact_scorches"),
     slider("Impact Lifetime", "r_impact_lifetime", 5.0, 600.0, 5.0),
     slider("Maximum Impacts", "r_impact_limit", 32.0, 2048.0, 32.0),

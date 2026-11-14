@@ -513,3 +513,5 @@ nearest surface to an explosion, from normal up) is classified by texture name i
 (sparks, flash), stone (chips, dust), wood (splinters), dirt (clods), water/slime (droplets,
 mist), lava (embers, smoke) or sky (nothing); chips and dust are tinted with the texture's
 average colour. Own client-side simulation with bouncing fragments, drawn as FTE batches.
+
+Shotgun tracers (`src/tracers.rs`): projectile pellets (`EF_QSP_PELLET`) are always drawn as thin additive streaks instead of their nail model. `r_shotgun_tracers` (0 default, Graphics → Impacts "Shotgun Tracers") adds hitscan streaks: each `TE_GUNSHOT`, and blood hits during a recent muzzle flash, launches a 56-unit streak at 7000 u/s from `Debris::shot_origin` (skipping the first 40 units) to the impact. Gunshots within 200 units of last frame's pellets are skipped. Streaks widen with distance to stay visible.
