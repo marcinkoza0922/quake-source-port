@@ -29,7 +29,7 @@ pub(super) fn build_world_draw(
     alphas: [f32; 4],
     ent_alpha: f32,
     model: Mat4,
-    lm_vis: &mut Vec<u32>,
+    lm_vis: &mut LightmapRequests,
 ) -> WorldDraw {
     for &si in surfs {
         if w.cpu.hidden_surfaces.contains(&si) { continue; }

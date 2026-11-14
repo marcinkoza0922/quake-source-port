@@ -13,6 +13,8 @@ mod math;
 pub use math::*;
 mod world_draw;
 use world_draw::*;
+mod lightmaps;
+pub(super) use lightmaps::LightmapRequests;
 
 type Mat4 = [f32; 16];
 
@@ -149,7 +151,8 @@ impl Renderer {
         // CPU-built alias poses (ragdolls), indexed in u32s from the buffer start
         let dyn_base = if fr.dyn_verts.is_empty() { None } else { dynw.push(fr.dyn_verts, 4).map(|o| (o / 4) as u32) };
         // lightmaps to update: the union over all views
-        let mut lm_vis: Vec<u32> = Vec::new();
+        let mut lm_vis = std::mem::take(&mut self.lightmap_requests);
+        lm_vis.begin(self.world.as_ref().map_or(0, |w| w.cpu.lm_surfs.len()));
         // scene target size (render scale)
         let (sw, sh) = self
             .targets
@@ -816,14 +819,14 @@ impl Renderer {
             // Portal views can request more lightmaps than the fixed GPU
             // cull list holds. Keep their complete union in the bump buffer;
             // the reserved list belongs only to the GPU-culled world.
-            lm_vis.sort_unstable();
-            lm_vis.dedup();
+            let lm_vis = lm_vis.sorted();
             if !lm_vis.is_empty() {
-                let ofs = dynw.push(&lm_vis, 4).ok_or_else(|| Error::new("lightmap update buffer full"))?;
+                let ofs = dynw.push(lm_vis, 4).ok_or_else(|| Error::new("lightmap update buffer full"))?;
                 lm_cpu_range = Some((ofs / 4, lm_vis.len()));
             }
         }
 
+        self.lightmap_requests = lm_vis;
         self.prev_xforms = xforms;
         self.prev_xform_time = time;
 

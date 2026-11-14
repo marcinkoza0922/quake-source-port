@@ -115,6 +115,8 @@ pub struct Renderer {
     palette: Palette,
     palette_buf: Buffer,
     lightmap: Option<Image>,
+    /// Reused CPU lightmap union across all scene/destination views.
+    lightmap_requests: frame::LightmapRequests,
     dummy: Buffer,
     world: Option<WorldGpu>,
     isolated_portal: Option<usize>,
