@@ -234,6 +234,10 @@ First results (2026-11-12, all cores, about 1 s wall per game): id1 42/42 exits,
 
 ## Tooling
 
+Project workflow skills live in `.agents/skills/` as portable `SKILL.md` files.
+`AGENTS.md` provides discovery for agents that read instructions directly;
+`.claude/skills` is a compatibility symlink to the same source.
+
 - `cargo nextest run` — quiet default profile; `--profile verbose` for debugging.
 - `cargo clippy --message-format=short`.
 - `tools/qinspect` uses renderer portal discovery without a GPU; `tools/portal_survey.py --basedir PATH [--game MOD] --capture` inventories maps and writes camera coordinates, screenshots and an HTML gallery under `target/portal-survey` (Python standard library only). `tools/portal_recheck.py --basedir PATH` recaptures every view linked in `target/portal-survey/problematic.md` with same-camera baseline/isolation pairs, command manifests, logs and a gallery under `target/portal-survey/recheck`; it never overwrites the original captures. `tools/qbot`, `tools/qbench` as above.

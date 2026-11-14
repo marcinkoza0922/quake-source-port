@@ -21,6 +21,11 @@
   +map e1m1 "+delay 3 screenshot target/shots/x"`, then view the PNG.
   Headless runs never write config.cfg.
 
+## Project skills
+- Shared skills live in `.agents/skills/<name>/SKILL.md`. Read the relevant
+  skill before its workflow; agents without skill discovery can open it directly.
+- `.claude/skills` links to that directory for compatibility; edit the shared copy.
+
 ## Asset tools
 - Meshy: available via MCP. Consider using it to generate 3D models for the project.
 - Blender: available via MCP. 3D modeling, scenes, rendering.
