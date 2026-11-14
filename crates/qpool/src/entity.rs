@@ -7,16 +7,12 @@ pub struct Entity {
 
 impl Entity {
     #[inline]
-    pub const fn new(index: u32, generation: u32) -> Self {
+    const fn new(index: u32, generation: u32) -> Self {
         Self { index, generation }
     }
     #[inline]
     pub const fn index(self) -> u32 {
         self.index
-    }
-    #[inline]
-    pub const fn generation(self) -> u32 {
-        self.generation
     }
 }
 
@@ -41,9 +37,7 @@ impl EntityAllocator {
     pub fn new() -> Self {
         Self::default()
     }
-    pub fn with_capacity(n: usize) -> Self {
-        Self { slots: Vec::with_capacity(n), free: Vec::with_capacity(n) }
-    }
+
 
     /// Number of index slots ever created (high-water mark).
     #[inline]
@@ -54,10 +48,6 @@ impl EntityAllocator {
     pub fn is_empty(&self) -> bool {
         self.slots.is_empty()
     }
-    pub fn alive_count(&self) -> usize {
-        self.slots.len() - self.free.len()
-    }
-
     fn push_new(&mut self) -> Entity {
         let index = self.slots.len() as u32;
         self.slots.push(Slot { generation: 0, alive: true, freed_at: 0.0 });
@@ -68,14 +58,6 @@ impl EntityAllocator {
         let s = &mut self.slots[index as usize];
         s.alive = true;
         Entity::new(index, s.generation)
-    }
-
-    /// Allocate, reusing the most recently freed index if any.
-    pub fn alloc(&mut self) -> Entity {
-        match self.free.pop() {
-            Some(i) => self.revive(i),
-            None => self.push_new(),
-        }
     }
 
     /// Allocate reusing the first free index for which `accept(index, freed_at)` holds,
@@ -147,15 +129,6 @@ impl EntityAllocator {
         self.slots.get(index as usize).filter(|s| !s.alive).map(|s| s.freed_at)
     }
 
-    /// Iterate live entities in index order.
-    pub fn iter(&self) -> impl Iterator<Item = Entity> + '_ {
-        self.slots
-            .iter()
-            .enumerate()
-            .filter(|(_, s)| s.alive)
-            .map(|(i, s)| Entity::new(i as u32, s.generation))
-    }
-
     pub fn clear(&mut self) {
         self.slots.clear();
         self.free.clear();
@@ -167,40 +140,25 @@ mod tests {
     use super::*;
 
     #[test]
-    fn alloc_free_reuse_bumps_generation() {
-        let mut a = EntityAllocator::new();
-        let e0 = a.alloc();
-        let e1 = a.alloc();
-        assert_eq!((e0.index(), e1.index()), (0, 1));
-        assert!(a.free(e0, 1.0));
-        assert!(!a.is_alive(e0));
-        assert!(!a.free(e0, 1.0));
-        assert_eq!(a.free_time(0), Some(1.0));
-        let e2 = a.alloc();
-        assert_eq!(e2.index(), 0);
-        assert_eq!(e2.generation(), 1);
-        assert!(a.is_alive(e2) && !a.is_alive(e0));
-        assert_eq!(a.get(0), Some(e2));
-        assert_eq!(a.alive_count(), 2);
-    }
-
-    #[test]
-    fn alloc_at_and_policy() {
+    fn free_bumps_generation_and_policy_reuses() {
         let mut a = EntityAllocator::new();
         let e5 = a.alloc_at(5).unwrap();
         assert_eq!(e5.index(), 5);
         assert!(a.alloc_at(5).is_none());
-        assert_eq!(a.alive_count(), 1);
-        assert_eq!(a.iter().collect::<Vec<_>>(), vec![e5]);
+        assert_eq!(a.len(), 6);
+        assert!(a.get(3).is_none());
+        let e3 = a.alloc_at(3).unwrap();
+        assert!(a.free(e3, 10.0));
+        assert!(!a.is_alive(e3) && !a.free(e3, 10.0));
+        assert_eq!(a.free_time(3), Some(10.0));
         // ED_Alloc-like: skip indices < 2 and recently freed.
-        let e3 = a.get(3);
-        assert!(e3.is_none());
-        let e = a.alloc_at(3).unwrap();
-        a.free(e, 10.0);
         let got = a.alloc_with(|i, t| i >= 2 && 10.2 - t > 0.5);
         assert_eq!(got.index(), 2);
         let got = a.alloc_with(|i, t| i >= 2 && 11.0 - t > 0.5);
         assert_eq!(got.index(), 3);
-        assert_eq!(got.generation(), 1);
+        assert_ne!(got, e3);
+        assert_eq!(a.get(3), Some(got));
+        a.clear();
+        assert!(a.is_empty());
     }
 }

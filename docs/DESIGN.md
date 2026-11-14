@@ -55,8 +55,8 @@ Cargo workspace. Binary crate at root (`src/main.rs`) wires crates together.
 crates/
   qcore      math (Vec3, plane, bbox), byte reader, hashing, cvar + cmd + console text, filesystem (pak/pk3 search paths, gamedir stack)
   qformats   BSP29/BSP2/2PSB, MDL, SPR, WAD2, LMP, palette, PCX/TGA, WAV parsing → plain Rust structs, no GPU
-  qecs       custom ECS (see below)
-  qvm        QuakeC VM: progs loader, interpreter, builtin dispatch trait, edict field layout mapping onto ECS
+  qpool      edict slot allocator (ED_Alloc reuse), capped effect pools, SoA particle pool (see below)
+  qvm        QuakeC VM: progs loader, interpreter, builtin dispatch trait, edict field storage
   qworld     collision (hull traces, BSP2 large hulls), SV_Move, physics (SV_Physics_*), area grid
   qnet       message buffers, protocols 15/666/999, loopback + UDP datagram transport
   qserver    server frame, builtins impl, entity delta encoding
@@ -74,13 +74,14 @@ tools/
 
 Dependency direction: qcore ← qformats ← {qworld, qvm} ← qserver; qnet ← {qserver, qclient}; qrender/qsound/qinput/qui depend on qcore/qformats and client state, never on qserver. The server must run headless (no SDL/Vulkan) — required by `qbot` and dedicated servers.
 
-### ECS (`qecs`)
+### Entity and effect storage
 
-Fit-to-purpose, not general. Quake's entity model is a fixed field layout defined by progs, so:
+The engine is not an ECS. It keeps Quake's own model, where QuakeC defines what an entity is and the engine supplies subsystems, because the progs field layout is fixed and mods depend on it.
 
-- **Server**: edicts are stored as a dense SoA-ish block of `f32/i32` slots exactly as progs expects (QC accesses fields by offset; this must stay O(1) and branch-free). The ECS adds *engine-side* components (link state in area grid, cached hull, interpolation, bot nav data) in sparse-set storages keyed by edict index. Generational `Entity` handles for engine code; raw indices for QC.
-- **Client**: entities, temp entities, beams, dlights, particles live in archetype-free typed pools (`Pool<T>` with free list + dense iteration). Systems are plain functions run in a fixed schedule; no dynamic scheduler, no reflection.
-- Particles are a separate SoA pool (pos/vel/color/die/type) for SIMD-friendly update.
+- **Server**: edicts are one dense `u32` slot array in `qvm`, laid out exactly as progs expects (QC reads fields by offset, so access stays O(1) and branch-free). `qpool::EntityAllocator` hands out slots with the ED_Alloc reuse rules and generation-checked `Entity` handles for engine code that must not follow a reused slot (e.g. damage feedback); QC uses raw edict numbers. Engine-side per-edict data that QC cannot see (baseline, PVS leafs, alpha, send interval) is one `EdictExt` struct per edict in a `Vec` indexed by edict number (`qserver::Sv::ext`), as `edict_t` held it in C. Area-tree links live in `qworld::World`.
+- **Behaviour**: entity logic runs in QuakeC (`think`, `touch`, `blocked`); the engine runs subsystems as plain functions in a fixed order each host frame (`src/host/frame.rs`): events and input, server (physics and QC), client (parse, interpolation, effects), view and sound, render — the same phases `prof_start` measures. No scheduler, no component queries.
+- **Client**: network entities, statics and temp entities are `Vec`s of whole structs (`ClientEntity`, as `cl_entities[]`). Beams and dlights are `qpool::Pool`s (capped dense lists, swap-remove), and classic particles are a `qpool::ParticlePool` (SoA pos/vel/color/die/kind/ramp, auto-vectorised integrate).
+- Host-side presentation (debris, ragdolls, blood, add-on effects in `src/`) owns its state in ordinary per-feature structs with `Vec`s.
 
 ### Renderer (`qrender`)
 Teleporter windows are opt-in (`r_teleportwindows`, archived, default 0; Enhancements menu). Disabled frames skip destination views and retain classic teleport surfaces. Teleporter windows (`qrender::portals`, `frame::portals`) match world `*tele*` sheets against unnamed, nonsilent `trigger_teleport` brushes with one explicit `info_teleport_destination`. Changelevel slipgates, ambiguous links, silent/named triggers and unrelated textures stay classic. Up to four front-facing windows per frame use rigid camera transforms, destination PVS and exit-plane fragment clipping, with no recursion. Destination views include available brush/alias entities; remote network entities outside the server PVS may be absent. Full scene-size render targets reuse MSAA/depth scratch before the main scene; dynamic UBO offsets isolate each view. Within a frame, portal/teleporter views sharing the same cached PVS surface-list allocation also share immutable world index/indirect ranges (`frame::world_draw::PortalWorldCache`); camera UBOs, clipping, entities and particles remain per view. The cache is recreated each frame so texture animation, alpha and hidden-surface changes rebuild the ranges, and lightmap requests enter the frame union only on a miss. Water shader composites an opaque, black-tinted shimmer and gold sparks, independently of telealpha. Gameplay teleport rules remain QuakeC-owned.
@@ -265,11 +266,10 @@ Subagent split: crates with frozen interfaces (qformats, qvm interpreter, qsound
 
 ## Implemented APIs
 
-### qecs
-- `Entity` (index = QC edict number + generation); `EntityAllocator` with `alloc`, `alloc_with(|idx, freed_at| bool)` for ED_Alloc-style reuse policies, `alloc_at(idx)`, `free(e, now)`, `free_time`.
-- `SparseSet<T>` with generation-checked access plus `*_raw` index access for QC; `join2`/`join3` and `join_mut`/`join2_mut` all iterate the smallest storage.
-- `Pool<T>`/`PoolHandle`: preallocated with `with_max`, swap-remove `retain`.
-- `ParticlePool`: SoA, `spawn`, `kill_expired`, `integrate(dt)`, `update_with(time, dt, closure)` for per-kind ramps/gravity.
+### qpool
+- `Entity` (index = QC edict number + generation); `EntityAllocator` with `alloc_with(|idx, freed_at| bool)` for ED_Alloc-style reuse policies, `alloc_at(idx)`, `free(e, now)`, `get`, `free_time`.
+- `Pool<T>`: `with_max` cap, `insert` returns false when full, swap-remove `retain`.
+- `ParticlePool`: SoA, `spawn`, `kill`, `kill_expired`, `integrate(dt)`; per-kind ramps/gravity are in `qclient` `run_particles`.
 
 ### qformats
 All parsers take `&[u8]` and return `qformats::Result<T>`; bad input gives an `Error { format, msg }` with the byte offset, never a panic. Vectors are `[f32;3]`.
@@ -301,7 +301,7 @@ All parsers take `&[u8]` and return `qformats::Result<T>`; bad input gives an `E
 ### qvm
 - `Progs::parse`: v6 progs. Every operand, jump and range is validated at load, so running code can't panic.
 - `Vm::new/load(progs, max_edicts, maxclients)`: `execute(&mut dyn Host, fnum)` is re-entrant, with the reference limits (runaway, stack depth). Errors come back as `VmError { msg, trace }` and the VM stays usable afterwards.
-- Edicts: one dense u32 slot array. `ed_alloc` follows the ED_Alloc reuse rules via `qecs::EntityAllocator::alloc_with`. The host must unlink an edict before `ed_free`.
+- Edicts: one dense u32 slot array. `ed_alloc` follows the ED_Alloc reuse rules via `qpool::EntityAllocator::alloc_with`. The host must unlink an edict before `ed_free`.
 - Strings: a handle ≥ 0 is an offset into the progs string table; a negative handle is an engine slot (1024 rotating temp strings, zone strings, interned constants).
 - `trait Host { builtin, ext_builtin, has_extension, dprint, print }`. `Builtin` is an enum of the id1 numbers 1–80. Re-release ex_* names and numbers 90–92 are remapped. #0 builtins are resolved by name at load. Math and string builtins run inside the VM.
 - `spawn::load_from_file(host, ents, SpawnFilter)`: ED_LoadFromFile, including the key hacks.
@@ -332,7 +332,7 @@ Port of vkQuake/QSS's entity delta protocol, layered on 15/666/999. It is needed
 - Tests: `qnet::delta` (round trips, record numbers), `qserver::delta` (lost frames resent, snapshot split over datagrams), `tests/loopback.rs` (every protocol with and without deltas), `net.rs` UDP play (one delta client, one vanilla).
 
 ### qclient
-- `ClientState`: protocol/flags, signon, precache name lists, `model_flags` (MF_*, which the host fills in after loading models), `entities` (with baselines, `msg_origins`/`msg_angles` [0]=new [1]=old, interpolated `origin`/`angles`), statics, stats/items, scores, lightstyles, viewangles/punch/velocity, intermission/centerprint, fog/skybox. Effects live in qecs pools: `beams`, `dlights` (`Pool`) and `particles` (`ParticlePool`, PT_* kinds).
+- `ClientState`: protocol/flags, signon, precache name lists, `model_flags` (MF_*, which the host fills in after loading models), `entities` (with baselines, `msg_origins`/`msg_angles` [0]=new [1]=old, interpolated `origin`/`angles`), statics, stats/items, scores, lightstyles, viewangles/punch/velocity, intermission/centerprint, fog/skybox. Effects live in qpool containers: `beams`, `dlights` (`Pool`) and `particles` (`ParticlePool`, PT_* kinds).
 - `parse_server_message(&[u8]) -> Result<(), ParseError>` handles every svc_* that ironwail's CL_ParseServerMessage handles (FitzQuake/RMQ bits, Nehahra U_TRANS, temp entities). Side effects come out as `ClientEvent`s (sounds, prints, stufftext lines, signon stages) through `take_events()`. Signon replies and string commands are queued as clc bytes, drained with `take_reliable_out()`.
 - `frame(dt)`: time advance, CL_RelinkEntities (CL_LerpPoint; `nolerp` for a local server), beam temp entities, dlight decay, CL_RunParticles. The particle spawners (run_particle_effect, rocket_trail, explosions, splashes, entity_particles) are public. `QRand` stands in for C rand().
 - Input: `base_move(&InputState, &MoveSpeeds, frametime) -> UserCmd`, `encode_move`/`build_move` (clc_move; the first two moves of a level are dropped).

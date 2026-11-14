@@ -1047,9 +1047,9 @@ name = "qclient"
 version = "0.1.0"
 dependencies = [
  "qcore",
- "qecs",
  "qformats",
  "qnet",
+ "qpool",
  "qserver",
  "qworld",
 ]
@@ -1060,10 +1060,6 @@ version = "0.1.0"
 dependencies = [
  "miniz_oxide 0.8.9",
 ]
-
-[[package]]
-name = "qecs"
-version = "0.1.0"
 
 [[package]]
 name = "qformats"
@@ -1113,6 +1109,10 @@ dependencies = [
 ]
 
 [[package]]
+name = "qpool"
+version = "0.1.0"
+
+[[package]]
 name = "qprof"
 version = "0.1.0"
 
@@ -1131,9 +1131,9 @@ name = "qserver"
 version = "0.1.0"
 dependencies = [
  "qcore",
- "qecs",
  "qformats",
  "qnet",
+ "qpool",
  "qvm",
  "qworld",
 ]
@@ -1198,8 +1198,8 @@ name = "qvm"
 version = "0.1.0"
 dependencies = [
  "qcore",
- "qecs",
  "qformats",
+ "qpool",
 ]
 
 [[package]]

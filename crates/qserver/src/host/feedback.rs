@@ -5,7 +5,7 @@ use crate::msg::SVC_STUFFTEXT;
 use crate::server::Core;
 
 pub(super) struct DamageCall {
-    target: qecs::Entity,
+    target: qpool::Entity,
     attacker: usize,
     health: f32,
 }

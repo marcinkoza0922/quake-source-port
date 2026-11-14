@@ -9,7 +9,7 @@ workspace = true
 
 [dependencies]
 qcore = { path = "../qcore" }
-qecs = { path = "../qecs" }
+qpool = { path = "../qpool" }
 qformats = { path = "../qformats" }
 qnet = { path = "../qnet" }
 qvm = { path = "../qvm" }

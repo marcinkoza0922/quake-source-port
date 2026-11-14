@@ -40,7 +40,7 @@ DESIGN.md which one you followed.
 | `menu.c` | `src/menu.rs` + `src/menu/` |
 | `console.c`, `keys.c` line editing, `screen.c` centerprint | `src/console.rs` |
 | `gl_*.c`, `r_*.c`, GLSL in `gl_shaders.c` / `vkQuake/Shaders` | `qrender` (`world/`, `frame.rs`, `pipelines/`, `shaders/`) |
-| `r_part.c` (classic particles) | `qclient` effects + `qecs::ParticlePool` |
+| `r_part.c` (classic particles) | `qclient` effects + `qpool::ParticlePool` |
 | `r_part_fte.c` | `qpart` |
 | `snd_*.c`, `bgmusic.c` | `qsound` |
 | `in_sdl*.c`, `keys.c` | `qinput` + `qplatform` (SDL3 via raw `sdl3-sys`) |

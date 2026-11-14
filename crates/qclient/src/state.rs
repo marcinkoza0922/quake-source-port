@@ -1,6 +1,6 @@
 //! client_state_t / entity_t equivalents.
 
-use qecs::{ParticlePool, Pool};
+use qpool::{ParticlePool, Pool};
 use qnet::SizeBuf;
 use qnet::protocol::*;
 

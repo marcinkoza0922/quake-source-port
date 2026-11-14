@@ -2,7 +2,7 @@
 //!
 //! Each edict is `entityfields` contiguous `u32` slots in one dense array;
 //! QC entity values are edict numbers. Liveness/free times come from
-//! [`qecs::EntityAllocator`].
+//! [`qpool::EntityAllocator`].
 
 use crate::{EType, Result, Vm, VmError};
 
@@ -27,7 +27,7 @@ impl Vm {
         self.alloc.free_time(e)
     }
     /// Generational handle for a live edict.
-    pub fn entity(&self, e: u32) -> Option<qecs::Entity> {
+    pub fn entity(&self, e: u32) -> Option<qpool::Entity> {
         self.alloc.get(e)
     }
 
