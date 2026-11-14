@@ -1,4 +1,5 @@
 use super::*;
+use std::sync::Arc;
 
 impl World {
     /// R_TextureAnimation (+ random `-` tiling textures picked per surface).
@@ -135,16 +136,42 @@ impl World {
 }
 
 impl World {
-    pub(crate) fn portal_surfaces(&mut self, eye: [f32; 3]) -> Vec<u32> {
-        self.mark_leaves(self.point_leaf(eye));
-        let mut seen = vec![false; self.surfaces.len()];
+    /// Surfaces in the PVS of `eye`'s leaf, each once. Cached per leaf, so
+    /// static portal/window destinations and split views cost a lookup.
+    pub(crate) fn portal_surfaces(&mut self, eye: [f32; 3]) -> Arc<[u32]> {
+        const CACHE: usize = 16;
+        let leaf = self.point_leaf(eye);
+        if let Some(i) = self.portal_cache.iter().position(|(l, _)| *l == leaf) {
+            let hit = self.portal_cache.remove(i);
+            self.portal_cache.push(hit.clone());
+            return hit.1;
+        }
+        if leaf != self.vis_leaf {
+            self.mark_leaves(leaf);
+        }
+        self.surf_stamp.resize(self.surfaces.len(), 0);
+        self.stamp = self.stamp.wrapping_add(1);
+        if self.stamp == 0 {
+            self.surf_stamp.fill(0);
+            self.stamp = 1;
+        }
         let mut out = Vec::new();
         for vl in &self.vis_leaves {
             let l = &self.leafs[vl.leaf as usize];
-            for &si in &self.marksurfaces[l.first_marksurface as usize..(l.first_marksurface as usize + l.num_marksurfaces as usize)] {
-                if !seen[si as usize] { seen[si as usize] = true; out.push(si); }
+            let first = l.first_marksurface as usize;
+            for &si in &self.marksurfaces[first..first + l.num_marksurfaces as usize] {
+                let s = &mut self.surf_stamp[si as usize];
+                if *s != self.stamp {
+                    *s = self.stamp;
+                    out.push(si);
+                }
             }
         }
+        let out: Arc<[u32]> = out.into();
+        if self.portal_cache.len() == CACHE {
+            self.portal_cache.remove(0);
+        }
+        self.portal_cache.push((leaf, out.clone()));
         out
     }
 }

@@ -26,6 +26,9 @@ impl World {
             numleafs,
             vis_leaves: Vec::new(),
             vis_leaf: usize::MAX,
+            portal_cache: Vec::new(),
+            surf_stamp: Vec::new(),
+            stamp: 0,
             has_light,
             packer: Packer {
                 allocated: vec![0; ATLAS as usize],

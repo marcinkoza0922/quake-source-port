@@ -162,3 +162,11 @@ confirm wins windowed (`qprof -window`, or qbench for parity).
   noise headless (GPU/readback-bound). Screenshots pixel-identical. About 280
   lookups per frame remain (`deathmatch`, `addon_*`, `sv_gravity`, `fov`);
   resolving ids at startup is left for later, as the gain is now a few µs.
+- 2026-11-13, item 2: `portal_surfaces` caches its surface list per eye
+  leaf (16 entries, cleared with `set_transparent_liquids`) and dedupes with
+  per-surface stamps instead of a map-sized `Vec<bool>`; portal views no
+  longer reset the main view's `mark_leaves` cache. `ultimate-coop`/
+  ad_sepulcher (3 runs): 44 → 51 fps, frame 22.5 → 19.5 ms, render CPU
+  19.8 → 16.7 ms. `portalgun`/`teleportwindows` unchanged headless (GPU and
+  readback bound). Screenshots identical except ≤ 0.008% pixels in co-op
+  (live horde noise).

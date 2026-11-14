@@ -6,6 +6,7 @@ impl World {
         if self.transparent_liquids != enabled {
             self.transparent_liquids = enabled;
             self.vis_leaf = usize::MAX;
+            self.portal_cache.clear();
         }
     }
 
