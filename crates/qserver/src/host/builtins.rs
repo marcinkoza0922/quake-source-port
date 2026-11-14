@@ -2,6 +2,7 @@ use super::*;
 
 impl Host for Ctx<'_> {
     fn before_damage(&mut self, vm: &mut Vm) -> Result<bool> {
+        crate::addons::shotgun::damage(vm, self.c);
         let skip = crate::assists::before_damage(vm, self.c)?;
         if !skip {
             self.damage_calls.push(feedback::begin(vm, self.c));

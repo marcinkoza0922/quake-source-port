@@ -21,6 +21,8 @@ pub mod portal_move;
 pub mod railgun;
 pub mod save;
 pub mod sticky;
+pub mod shotgun;
+pub(crate) mod settings;
 
 /// (name, default, flags) of the add-on cvars.
 pub const CVARS: &[(&str, &str, u32)] = &[
@@ -29,6 +31,13 @@ pub const CVARS: &[(&str, &str, u32)] = &[
     ("addons_enable", "0", CVAR_ARCHIVE),
     // read-only mirror of `Core::addons_on` for the menu
     ("addons_active", "0", CVAR_ROM),
+    ("addon_projectile_shotguns", "1", CVAR_ARCHIVE),
+    ("addon_shotgun_speed", "10000", CVAR_ARCHIVE),
+    ("addon_bullet_time", "1", CVAR_ARCHIVE),
+    ("addon_bullet_time_toggle", "0", CVAR_ARCHIVE),
+    ("addon_bullet_time_meter", "1", CVAR_ARCHIVE),
+    ("addon_bullet_time_duration", "5", CVAR_ARCHIVE),
+    ("addon_bullet_time_regen", "1", CVAR_ARCHIVE),
     ("addon_portalgun", "1", CVAR_ARCHIVE),
     ("addon_sticky", "1", CVAR_ARCHIVE),
     ("addon_sticky_damage", "120", CVAR_ARCHIVE),
@@ -228,7 +237,7 @@ impl crate::Server {
         }
         let toys: Vec<Toy> = Toy::enabled(&self.core.cvars).collect();
         let l = self.level.as_ref();
-        let extra = l.map(|l| l.stickies.save_text()).unwrap_or_default();
+        let extra = l.map(|l| l.stickies.save_text()).unwrap_or_default() + &settings::save(&self.core.cvars);
         save::wrap_with(&toys, l.and_then(|l| l.portals.save_text()).as_deref(), &extra, &body)
     }
 }

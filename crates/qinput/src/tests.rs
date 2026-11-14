@@ -306,3 +306,17 @@ fn lockon_binding_overrides_look_and_cycles_without_normal_stick_action() {
     frame(&mut h, Some(&ctx));
     assert_eq!(h.input.lockon.target, None);
 }
+
+#[test]
+fn bullet_time_preserves_taps_and_releases_held_buttons() {
+    let mut h = host();
+    run(&mut h, "+bullettime 42\n-bullettime 42\n");
+    assert_eq!(h.input.bullet_time_button(), (false, true));
+    assert_eq!(h.input.bullet_time_button(), (false, false));
+    run(&mut h, "+bullettime 42\n");
+    assert_eq!(h.input.bullet_time_button(), (true, true));
+    assert_eq!(h.input.bullet_time_button(), (true, false));
+    run(&mut h, "-bullettime 42\n");
+    assert_eq!(h.input.bullet_time_button(), (false, false));
+    assert!(h.out.is_empty());
+}

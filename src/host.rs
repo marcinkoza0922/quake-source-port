@@ -38,6 +38,7 @@ mod console;
 mod input;
 mod frame;
 mod goggles;
+mod bullet_time;
 mod toy_fx;
 mod ctx;
 mod cvars;
@@ -112,6 +113,7 @@ pub struct Host {
     boomerang_fx: crate::addons::boomerang_fx::Presentation,
     /// Player 1's add-on equipment (goggles) and equipment wheel.
     goggles: goggles::Goggles,
+    bullet_time: bullet_time::BulletTime,
     /// Split-screen players 2..6 (`cl_splitscreen`); player 1 is `cl`.
     pub guests: Vec<crate::splitscreen::Guest>,
     /// Player 1's gamepad (the first pad used); other pads can join.
@@ -239,6 +241,7 @@ impl Host {
             hook_fx: Default::default(),
             boomerang_fx: Default::default(),
             goggles: Default::default(),
+            bullet_time: Default::default(),
             guests: Vec::new(),
             p1_pad: None,
             input_target: None,

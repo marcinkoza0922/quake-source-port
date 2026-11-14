@@ -191,6 +191,7 @@ impl Server {
             for t in crate::addons::Toy::ALL {
                 c.cvars.set(t.cvar(), if h.toys.contains(&t) { "1" } else { "0" });
             }
+            crate::addons::settings::load(&mut c.cvars, &h.extra);
             l.portals.load_text(&h.portals);
             l.stickies.load_text(&h.extra);
         }

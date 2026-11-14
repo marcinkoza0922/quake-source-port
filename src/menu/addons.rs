@@ -9,7 +9,7 @@ const NG_BOX: (f32, f32, f32, f32) = (224.0, 31.0, 84.0, 14.0);
 
 /// Whether this cvar selects a toy.
 pub(super) fn is_toy_cvar(cvar: &str) -> bool {
-    qserver::addons::Toy::ALL.iter().any(|t| t.cvar() == cvar) || cvar == "addon_goggles"
+    qserver::addons::Toy::ALL.iter().any(|t| t.cvar() == cvar) || matches!(cvar, "addon_goggles" | "addon_projectile_shotguns" | "addon_bullet_time")
 }
 
 impl Menu {

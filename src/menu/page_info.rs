@@ -158,6 +158,8 @@ pub(super) fn page_items(p: Page) -> &'static [Item] {
         Page::Hookshot => HOOKSHOT,
         Page::Sticky => STICKY,
         Page::Goggles => GOGGLES,
+        Page::ProjectileShotguns => super::addon_settings::SHOTGUNS,
+        Page::BulletTime => super::addon_settings::BULLET_TIME,
         Page::Input => INPUT,
         Page::Graphics => GRAPHICS,
         Page::Enhancements => ENHANCEMENTS,
@@ -215,6 +217,8 @@ pub(super) fn page_name(p: Page) -> &'static str {
         Page::Hookshot => "Hookshot",
         Page::Sticky => "Stickybomb Launcher",
         Page::Goggles => "Goggles",
+        Page::ProjectileShotguns => "Projectile Shotguns",
+        Page::BulletTime => "Bullet Time",
         _ => PAGES.iter().find(|x| x.1 == p).map_or("", |x| x.0),
     }
 }

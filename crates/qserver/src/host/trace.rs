@@ -7,6 +7,12 @@ impl Ctx<'_> {
         let v2 = Vec3::from_array(fix(vm.g_v(p(1))));
         let nomonsters = vm.g_f(p(2)) as i32;
         let pass = ent_arg(vm, 3)?;
+        if crate::addons::shotgun::launch(vm, self.c, self.w, v1, v2, nomonsters, pass)? {
+            // QC still owns spread, ammo, sound and refire; defer each pellet
+            // collision and damage to missile physics.
+            self.set_trace_globals(vm, &qworld::Trace { allsolid: false, inopen: true, ..qworld::Trace::new(v2) });
+            return Ok(());
+        }
         let tr = {
             let (ents, w) = self.ents(vm);
             w.trace(&ents, v1, Vec3::ZERO, Vec3::ZERO, v2, MoveType::from(nomonsters), Some(pass))

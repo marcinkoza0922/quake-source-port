@@ -170,6 +170,8 @@ pub(super) fn register_commands(c: &mut Commands<Host>) {
             "hookshot" => Some(Page::Hookshot),
             "boomerang" => Some(Page::Boomerang),
             "goggles" => Some(Page::Goggles),
+            "projectileshotguns" => Some(Page::ProjectileShotguns),
+            "bullettime" => Some(Page::BulletTime),
             "sticky" => Some(Page::Sticky),
             _ => None,
         };

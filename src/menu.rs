@@ -27,6 +27,8 @@ mod scroll;
 mod navigation;
 mod actions;
 mod addons;
+mod addon_settings;
+use addon_settings::{ADDONS, NEW_GAME_ADDONS};
 mod addon_browser;
 mod addon_preview;
 mod addon_bindings;
@@ -86,6 +88,8 @@ pub enum Page {
     Hookshot,
     Sticky,
     Goggles,
+    ProjectileShotguns,
+    BulletTime,
     /// Multiplayer pages (reached from Screen::Multiplayer).
     Join,
     Host,
@@ -94,7 +98,7 @@ pub enum Page {
 
 /// Every cvar the options pages edit (the host marks them archived).
 pub fn option_cvars() -> impl Iterator<Item = &'static str> {
-    [ADDONS, NEW_GAME_ADDONS, PORTAL_GUN, BOOMERANG, HOOKSHOT, RAILGUN, STICKY, GOGGLES, GAMEPLAY, HUD, CROSSHAIR, HUD_LAYOUT, MESSAGES, ENHANCEMENTS, WATER, BLOOD, DEBRIS, IMPACTS, AUTOSAVE, ASSISTS, AUTOAIM, INPUT, MOUSE, CONTROLLER, GRAPHICS, AUDIO, HIT_SOUND, KILL_SOUND, ACCESSIBILITY].into_iter().flatten().filter_map(|i| match *i {
+    [addon_settings::SHOTGUNS, addon_settings::BULLET_TIME, ADDONS, NEW_GAME_ADDONS, PORTAL_GUN, BOOMERANG, HOOKSHOT, RAILGUN, STICKY, GOGGLES, GAMEPLAY, HUD, CROSSHAIR, HUD_LAYOUT, MESSAGES, ENHANCEMENTS, WATER, BLOOD, DEBRIS, IMPACTS, AUTOSAVE, ASSISTS, AUTOAIM, INPUT, MOUSE, CONTROLLER, GRAPHICS, AUDIO, HIT_SOUND, KILL_SOUND, ACCESSIBILITY].into_iter().flatten().filter_map(|i| match *i {
         Item::Slider { cvar, .. } | Item::Toggle { cvar, .. } | Item::Choice { cvar, .. } => Some(cvar),
         _ => None,
     })

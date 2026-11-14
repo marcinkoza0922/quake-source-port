@@ -186,8 +186,8 @@ Damage/movement assists are engine-side so they work with any progs; off in deat
 
 ### Add-ons
 
-See [ADDONS.md](ADDONS.md) for the add-on weapons, goggles
-and equipment wheel, models, effects, synthesized cues, settings and commands.
+See [ADDONS.md](ADDONS.md) for weapons, goggles, equipment, models, effects, settings and commands.
+[Projectile shotguns and bullet time](ADDONS_TIME.md) covers simulation, input, meter and save rules.
 A Weapon Slot header groups weapon-named rows above Input Remapping, one per
 weapon supplied by the selected add-on. Add-ons may supply multiple weapons;
 the current single-weapon add-ons are not a constraint on the design. Parameter
