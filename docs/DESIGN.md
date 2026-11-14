@@ -194,6 +194,7 @@ Damage/movement assists are engine-side so they work with any progs; off in deat
 ### Add-ons
 
 See [ADDONS.md](ADDONS.md) for weapons, goggles, equipment, models, effects, settings and commands.
+Add-ons are opt-in: the "Enable Add-ons" checkbox (New Game screen only, hover tooltip, off by default) and every add-on toggle default to off. There is no main-menu Add-ons entry; the page stays reachable via the `addons` command. Save cards show a plain "Add-ons enabled" tag beside the timestamp.
 [Projectile shotguns and bullet time](ADDONS_TIME.md) covers simulation, input, meter and save rules; [hitstop](HITSTOP.md) covers the hit-freeze add-on.
 A Weapon Slot header groups weapon-named rows above Input Remapping, one per
 weapon supplied by the selected add-on. Add-ons may supply multiple weapons;

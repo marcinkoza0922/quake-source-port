@@ -23,6 +23,9 @@ fn start(cvars: &[&str]) -> Option<(Server, usize)> {
         sv.command(c);
     }
     // `spawn_server` keeps a game's add-ons; `map` is what arms them
+    if cvars.contains(&"addons_enable 1") {
+        qserver::addons::enable_all(&mut sv.core.cvars);
+    }
     sv.core.set_addons(cvars.contains(&"addons_enable 1"));
     sv.spawn_server("e1m1").ok()?;
     let c = sv.connect_local()?;

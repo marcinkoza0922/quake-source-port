@@ -5,7 +5,7 @@
 use super::*;
 
 /// Clickable checkbox + label beside New Game: (x, y, w, h), classic menu units.
-const NG_BOX: (f32, f32, f32, f32) = (224.0, 31.0, 84.0, 14.0);
+const NG_BOX: (f32, f32, f32, f32) = (224.0, 31.0, 126.0, 14.0);
 
 /// Whether this cvar selects a toy.
 pub(super) fn is_toy_cvar(cvar: &str) -> bool {
@@ -54,12 +54,21 @@ impl Menu {
     pub(super) fn draw_new_game_box(&self, c: &mut Canvas, cv: &Cvars) {
         let (bx, by, ..) = NG_BOX;
         let on = cv.value_of("addons_enable") != 0.0;
-        let hot = self.sp_cursor == 0;
+        let hot = self.mouse.is_some_and(|m| self.on_new_game_box(m));
         c.round_box(bx, by + 3.0, 9.0, 9.0, 1.5, [0.0, 0.0, 0.0, 0.6], Some(BORDER));
         if on {
             c.round_box(bx + 2.0, by + 5.0, 5.0, 5.0, 1.0, GOLD_FG, None);
         }
-        c.text(bx + 14.0, by + 3.0, "Add-ons", TXT, if on || hot { GOLD_FG } else { MUTED });
+        c.text(bx + 14.0, by + 3.0, "Enable Add-ons", TXT, if on || hot { GOLD_FG } else { MUTED });
+        if hot {
+            let lines = ["Remix the classic Quake experience with extra", "weapons and abilities. Saves made with add-ons", "enabled can't be used in other source ports."];
+            let w = lines.iter().map(|s| c.text_w(s, TXT)).fold(0.0, f32::max);
+            let (tx, ty) = (bx + 63.0 - w / 2.0, by + 24.0);
+            c.round_box(tx - 8.0, ty - 4.0, w + 16.0, lines.len() as f32 * 11.0 + 6.0, 4.0, [0.0, 0.0, 0.0, 0.85], Some(BORDER));
+            for (i, s) in lines.iter().enumerate() {
+                c.text(tx, ty + i as f32 * 11.0, s, TXT, FG);
+            }
+        }
     }
 
     /// Explanatory lines under an add-on page's rows.
@@ -74,15 +83,11 @@ impl Menu {
             ],
             Page::Addons if self.toys_locked(cv) => &[
                 ("This game was started without add-ons, so they can't be turned on", GOLD_FG),
-                ("for it. Tick Add-ons beside New Game to start one that has them.", GOLD_FG),
+                ("for it. Start a new game with Enable Add-ons ticked.", GOLD_FG),
             ],
             Page::Addons if self.game_running => &[
                 ("Changes apply to this game and are saved with it (.qsa).", MUTED),
                 ("Saves of this game will not work in other source ports.", MUTED),
-            ],
-            Page::Addons => &[
-                ("Add-ons are chosen when a game starts: tick Add-ons beside", MUTED),
-                ("New Game. Pick what a new game starts with here.", MUTED),
             ],
             _ => return,
         };

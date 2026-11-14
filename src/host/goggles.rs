@@ -23,7 +23,7 @@ pub(super) struct Goggles {
 
 /// (name, default, flags) of the goggle cvars.
 pub(super) const CVARS: &[(&str, &str, u32)] = &[
-    ("addon_goggles", "1", qcore::cvar::CVAR_ARCHIVE),
+    ("addon_goggles", "0", qcore::cvar::CVAR_ARCHIVE),
     ("addon_goggles_intensity", "1", qcore::cvar::CVAR_ARCHIVE),
     ("addon_goggles_noise", "1", qcore::cvar::CVAR_ARCHIVE),
 ];
