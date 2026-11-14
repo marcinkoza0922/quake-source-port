@@ -251,3 +251,45 @@ fn horizontal_culling_keeps_edges_for_rotated_cameras_and_quads() {
         }
     }
 }
+
+#[test]
+fn recycled_geometry_matches_fresh_after_empty_and_smaller_frames() {
+    let mut r = Registry::new();
+    for blend in [BlendMode::AddA, BlendMode::Blend, BlendMode::Subtract] {
+        let mut ty = crate::types::PartType::empty("test", "recycle");
+        ty.tex = Some(0);
+        ty.looks.kind = RenderType::Normal;
+        ty.looks.blendmode = blend;
+        r.types.push(ty);
+    }
+    let view = ViewInfo {
+        forward: Vec3::new(1.0, 0.0, 0.0),
+        right: Vec3::new(0.0, -1.0, 0.0),
+        up: Vec3::new(0.0, 0.0, 1.0),
+        ..Default::default()
+    };
+    let eo = |_| None;
+    let mut buffers = (Vec::with_capacity(256), Vec::with_capacity(512), Vec::with_capacity(64));
+    let addresses = (buffers.0.as_ptr(), buffers.1.as_ptr(), buffers.2.as_ptr());
+    // Empty frames and changing type/count order must not retain stale batches
+    // or offset the next frame's indices. Stable pass ordering must also match.
+    for types in [&[0, 1, 2, 0][..], &[], &[2], &[1, 0, 1]] {
+        let mut reused = Geometry::new(&r, view, 0.0, &eo);
+        reused.reuse_buffers(buffers.0, buffers.1, buffers.2);
+        let mut fresh = Geometry::new(&r, view, 0.0, &eo);
+        for &ty in types {
+            let mut p = Particle::default();
+            p.org = Vec3::new(100.0, ty as f32, 0.0);
+            p.scale = 8.0;
+            p.rgba = [1.0, 0.5, 0.25, 1.0];
+            reused.particle(ty, &p);
+            fresh.particle(ty, &p);
+        }
+        reused.batches.sort_by_key(|b| blend_pass(b.blend));
+        assert_eq!(reused.vertices, fresh.vertices);
+        assert_eq!(reused.indices, fresh.indices);
+        assert_eq!(reused.batches, fresh.ordered_batches());
+        assert_eq!((reused.vertices.as_ptr(), reused.indices.as_ptr(), reused.batches.as_ptr()), addresses);
+        buffers = (reused.vertices, reused.indices, reused.batches);
+    }
+}

@@ -81,7 +81,7 @@ confirm wins windowed (`qprof -window`, or qbench for parity).
 - Candidate fixes, in order: skip simulating or building geometry for
   particles outside the frustum or PVS; cheaper `shade` (cache lighting per
   emitter or per cell instead of per particle, reusing the light-point
-  cache); remove per-frame allocation in `Geometry::begin`; build quads in
+  cache); reuse geometry storage (implemented below); build quads in
   a vertex shader from one instance per particle (cuts CPU and upload);
   with large counts, simulate weather on the GPU.
 - Expect: the largest single gain on AD maps (vanilla included).
@@ -270,3 +270,35 @@ confirm wins windowed (`qprof -window`, or qbench for parity).
   `horizontal-window-after`. These are our engine's A/B results, not reference
   engine parity measurements.
   Next: per-view geometry handling before enabling culling for shared views.
+
+- 2026-11-13, item 4 geometry storage: qpart and qrender now share
+  `qcore::vertex::ParticleVertex`, removing the host's vertex conversion copy.
+  After upload, the host returns vertex/index/renderer-batch vectors (including
+  appended add-on geometry) for reuse; raw qpart batches are reused and stably
+  sorted in place instead of cloned. Empty-effect frames hand storage through
+  for add-ons; frames without a view preserve the cache. A regression test
+  covers changing counts/blends, empty frames, unchanged indices/draw order
+  and retention of allocations.
+  ad_sepulcher, 1280×720 RTX 3060 Ti, pinned vanilla, 20 s measured after
+  4 s warm-up, 3 runs/build: headless median 437.9 → 451.2 fps (+3.0%),
+  frame 2283 → 2216 µs, render CPU 2092 → 2006 µs; teleporter windows
+  260.6 → 267.0 fps (+2.5%), frame 3838 → 3746 µs, render CPU
+  3359 → 2726 µs. GPU times stayed roughly level; the smaller headless
+  frame-time changes are near run-to-run noise. All six runs have identical
+  particle/geometry counters and all 18 fixed-time combat screenshot pairs
+  have `compare -metric AE = 0`.
+  Windowed vanilla confirmation (same map/resolution/GPU and pinned settings,
+  20 s after 4 s warm-up, 3 runs/build, vsync off, `host_maxfps 10000`):
+  median 505.3 → 536.6 fps (+6.2%), frame 1979 → 1863 µs, render CPU
+  1866 → 1754 µs, GPU 727 → 733 µs. Combat advances by wall time, so
+  populations vary slightly; deterministic headless runs establish output
+  equivalence. Reports: `target/qprof/reuse-before`, `reuse-after`,
+  `reuse-window-before`, `reuse-window-after`. These are engine A/B results,
+  not reference-engine parity measurements. Two additional id1 gel screenshot
+  pairs also have AE = 0 when both builds use the same screenshot output path
+  (different paths otherwise change the printed console notification). Inspected
+  the torch-lit AD corridor and the gel weapon/HUD scene. AD vanilla and
+  teleporter-window runs and id1 gel runs with Vulkan validation logged no
+  errors. 451 tests passed, 2 skipped; clippy clean. Config-file hashes stayed
+  unchanged after all windowed runs. Next: per-view geometry handling before
+  enabling culling for shared views.

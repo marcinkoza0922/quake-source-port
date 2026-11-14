@@ -428,5 +428,8 @@ impl Host {
         if let Err(e) = self.r.render(&frame) {
             self.con.print(&format!("render error: {e:?}\n"));
         }
+        if view.is_some() {
+            self.fte.recycle_geometry(fte);
+        }
     }
 }

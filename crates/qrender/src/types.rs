@@ -206,14 +206,7 @@ impl FteBlend {
     ];
 }
 
-/// World-space particle vertex (FTE scripted particles).
-#[repr(C)]
-#[derive(Clone, Copy, Debug, Default, PartialEq)]
-pub struct FteVertex {
-    pub pos: [f32; 3],
-    pub uv: [f32; 2],
-    pub color: [u8; 4],
-}
+pub use qcore::vertex::ParticleVertex as FteVertex;
 
 /// Indexed draw of FTE particle geometry; drawn in slice order.
 #[derive(Clone, Copy, Debug, PartialEq)]
