@@ -93,7 +93,7 @@ fn every_parameter_link_returns_to_the_selected_addon() {
 }
 
 #[test]
-fn controller_can_reach_start_and_description_scroll_is_bounded() {
+fn settings_down_stops_at_last_row_and_bumper_reaches_start() {
     let (mut menu, mut cv) = setup(Page::NewGameAddons);
     menu.key(K_DPAD_RIGHT, &mut cv, false);
     for _ in 0..20 {
@@ -105,9 +105,45 @@ fn controller_can_reach_start_and_description_scroll_is_bounded() {
     for _ in 0..4 {
         menu.key(K_DPAD_DOWN, &mut cv, false);
     }
+    assert_eq!(menu.addon_ui.focus, menu.browser_rows());
+    let offset = menu.browser_offset();
+    for key in [K_DPAD_DOWN, K_DOWNARROW] {
+        menu.key(key, &mut cv, false);
+        assert_eq!(menu.addon_ui.focus, menu.browser_rows());
+        assert_eq!(menu.browser_offset(), offset);
+    }
+    menu.key(K_RSHOULDER, &mut cv, false);
+    assert_eq!(menu.addon_ui.focus, menu.browser_last_focus());
     let actions = menu.key(K_ABUTTON, &mut cv, false);
     assert!(commands(&actions).contains("map start"));
     assert_eq!(menu.screen, Screen::None);
+}
+
+#[test]
+fn controller_reaches_start_directly_below_the_checklist_and_returns() {
+    let (mut menu, mut cv) = setup(Page::NewGameAddons);
+    for _ in 0..ADDON.len() {
+        menu.key(K_DPAD_DOWN, &mut cv, false);
+    }
+    assert_eq!(menu.addon_ui.focus, menu.browser_last_focus());
+    menu.key(K_DPAD_UP, &mut cv, false);
+    assert_eq!((menu.addon_ui.focus, menu.addon_ui.selected), (0, ADDON.len() - 1));
+    menu.key(K_DPAD_DOWN, &mut cv, false);
+    menu.key(K_DPAD_DOWN, &mut cv, false);
+    assert_eq!((menu.addon_ui.focus, menu.addon_ui.selected), (0, 0));
+    for _ in 0..ADDON.len() { menu.key(K_DPAD_DOWN, &mut cv, false); }
+    let actions = menu.key(K_ABUTTON, &mut cv, false);
+    assert!(commands(&actions).contains("map start"));
+    assert_eq!(menu.screen, Screen::None);
+}
+
+#[test]
+fn mouse_hover_and_click_share_the_start_buttons_focus() {
+    let (mut menu, mut cv) = setup(Page::NewGameAddons);
+    menu.mouse_move((100.0, 275.0), &mut cv);
+    assert_eq!(menu.addon_ui.focus, menu.browser_last_focus());
+    let actions = menu.key(K_MOUSE1, &mut cv, false);
+    assert!(commands(&actions).contains("map start"));
 }
 
 #[test]

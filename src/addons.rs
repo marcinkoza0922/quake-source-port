@@ -17,6 +17,7 @@ pub mod sticky_draw;
 pub mod sticky_model;
 
 use qserver::addons::{BUTTON_TOY_ALT, BUTTON_TOY_FIRE, TOY_SHIFT, Toy};
+use crate::wheel::{Entry, Weapon};
 
 /// One local player's weapon selection.
 #[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
@@ -36,7 +37,6 @@ impl WeaponSelection {
     ) -> Option<Toy> {
         let (requested, impulse) = selection;
         let active_weapon = cl.stats[qnet::protocol::STAT_ACTIVEWEAPON];
-        let items = cl.items;
         if self.pending_base.is_some_and(|(_, observed)| observed != active_weapon) {
             self.pending_base = None;
         }
@@ -51,18 +51,25 @@ impl WeaponSelection {
             return None;
         }
         let assigned: Vec<_> = enabled.iter().copied()
-            .filter(|t| cv.value_of(t.slot_cvar()).clamp(1.0, 10.0) as u8 == slot).collect();
+            .filter(|t| cv.value_of(t.slot_cvar()).clamp(1.0, 10.0) as u8 == slot
+                && (Entry { weapon: Weapon::Addon(*t), slot }).usable(cl)).collect();
         let same_slot = self.last_slot == Some(slot);
         let holding_here = self.held.filter(|t| assigned.contains(t));
         let base_weapon = if slot == 1 { 4096 } else { 1 << (slot - 2) };
-        let base_owned = slot <= 8 && items & base_weapon != 0;
+        let base_usable = slot <= 8
+            && (Entry { weapon: Weapon::Stock(slot), slot }).usable(cl);
+        if !base_usable && assigned.is_empty() {
+            // Leave stock selection to QC when no add-on is currently held.
+            *impulse = if self.held.is_none() && slot <= 8 { slot } else { 0 };
+            return self.held;
+        }
         let base_selected = self.held.is_none() && slot <= 8
             && (same_slot || active_weapon == base_weapon);
         self.held = if let Some(t) = holding_here {
             let next = assigned.iter().position(|&a| a == t).and_then(|i| assigned.get(i + 1)).copied();
-            // Skip the base entry when its weapon is not owned.
-            next.or_else(|| if !base_owned { assigned.first().copied() } else { None })
-        } else if !base_owned || base_selected {
+            // Skip the base entry when it is unowned or lacks ammunition.
+            next.or_else(|| if !base_usable { assigned.first().copied() } else { None })
+        } else if !base_usable || base_selected {
             assigned.first().copied()
         } else { None };
         self.last_slot = Some(slot);
@@ -72,8 +79,8 @@ impl WeaponSelection {
     }
 
     /// An exact wheel selection bypasses repeated-slot cycling.
-    pub fn select(&mut self, weapon: crate::wheel::Weapon, cl: &qclient::ClientState, impulse: &mut u8) {
-        use crate::wheel::Weapon;
+    pub fn select(&mut self, weapon: Weapon, cl: &qclient::ClientState, impulse: &mut u8) {
+        if !(Entry { weapon, slot: 0 }).usable(cl) { return; }
         match weapon {
             Weapon::Stock(slot) => {
                 self.held = None;
@@ -94,19 +101,11 @@ impl WeaponSelection {
     /// within each slot. Keep QC's mod-specific cycling when add-ons are off.
     fn cycle(&mut self, cv: &qcore::cvar::Cvars, enabled: &[Toy], impulse: &mut u8,
         cl: &qclient::ClientState) -> Option<Toy> {
-        let mut weapons = Vec::new();
-        for slot in 1..=10 {
-            if let Some(base) = crate::wheel::SLOTS.iter().find(|s| s.impulse == slot)
-                && cl.items & base.item != 0
-                && base.ammo.is_none_or(|a| cl.stats[a] > 0) {
-                weapons.push((slot, None));
-            }
-            for &toy in enabled {
-                if cv.value_of(toy.slot_cvar()).clamp(1.0, 10.0) as u8 == slot {
-                    weapons.push((slot, Some(toy)));
-                }
-            }
-        }
+        let weapons: Vec<_> = crate::wheel::inventory(cv, enabled).into_iter()
+            .filter(|entry| entry.usable(cl)).map(|entry| match entry.weapon {
+                Weapon::Stock(slot) => (slot, None),
+                Weapon::Addon(toy) => (entry.slot, Some(toy)),
+            }).collect();
         let active = cl.stats[qnet::protocol::STAT_ACTIVEWEAPON];
         let base_slot = self.pending_base.map(|(slot, _)| slot).or_else(||
             crate::wheel::SLOTS.iter().find(|s| s.item == active).map(|s| s.impulse));
@@ -114,7 +113,11 @@ impl WeaponSelection {
             Some(held) => toy == Some(held),
             None => toy.is_none() && Some(slot) == base_slot,
         });
-        let n = weapons.len(); // enabled is nonempty, so the inventory is too.
+        let n = weapons.len();
+        if n == 0 {
+            *impulse = 0;
+            return self.held;
+        }
         let next = if *impulse == 10 {
             current.map_or(0, |i| (i + 1) % n)
         } else {
@@ -267,16 +270,13 @@ mod tests {
     }
 
     #[test]
-    fn scrolling_skips_empty_stock_weapons_but_keeps_enabled_addons() {
+    fn scrolling_skips_weapons_without_ammunition() {
         let cv = slot_cvars();
         let mut cl = inventory(4096, 4097 | 16);
         cl.stats[qnet::protocol::STAT_SHELLS] = 0;
         cl.stats[qnet::protocol::STAT_ROCKETS] = 0;
         let mut s = WeaponSelection::default();
         let mut impulse = 10;
-        assert_eq!(s.update_slots(&cv, &[Toy::Sticky], (0, &mut impulse), &cl), Some(Toy::Sticky));
-        assert_eq!(impulse, 0);
-        impulse = 10;
         assert_eq!(s.update_slots(&cv, &[Toy::Sticky], (0, &mut impulse), &cl), None);
         assert_eq!(impulse, 1);
         // Without add-ons, preserve the mod's own next/previous handling.
@@ -285,6 +285,71 @@ mod tests {
             s.update_slots(&cv, &[], (0, &mut impulse), &cl);
             assert_eq!(impulse, value);
         }
+    }
+
+    #[test]
+    fn addon_ammo_requirements_apply_to_slots_cycles_and_exact_selections() {
+        use qnet::protocol::{STAT_CELLS, STAT_ROCKETS};
+        for toy in Toy::ALL {
+            let mut cv = slot_cvars();
+            cv.set(toy.slot_cvar(), "9");
+            for ammo in [0, 1, 2] {
+                let mut cl = inventory(4096, 4096);
+                cl.stats[STAT_CELLS] = ammo;
+                cl.stats[STAT_ROCKETS] = ammo;
+                let usable = match toy {
+                    Toy::Sticky => ammo >= 1,
+                    Toy::Railgun => ammo >= 2,
+                    _ => true,
+                };
+                let expected = usable.then_some(toy);
+                let mut s = WeaponSelection::default();
+                let mut impulse = 0;
+                s.update_slots(&cv, &[toy], (9, &mut impulse), &cl);
+                assert_eq!((s.held, impulse), (expected, 0), "slot: {toy:?}, ammo {ammo}");
+                for direction in [10, 12] {
+                    let mut s = WeaponSelection::default();
+                    let mut impulse = direction;
+                    s.update_slots(&cv, &[toy], (0, &mut impulse), &cl);
+                    assert_eq!((s.held, impulse), (expected, if usable { 0 } else { 1 }),
+                        "cycle {direction}: {toy:?}, ammo {ammo}");
+                }
+                let mut s = WeaponSelection::default();
+                let mut impulse = 0;
+                s.select(crate::wheel::Weapon::Addon(toy), &cl, &mut impulse);
+                assert_eq!((s.held, impulse), (expected, 0), "exact: {toy:?}, ammo {ammo}");
+            }
+        }
+    }
+
+    #[test]
+    fn unavailable_slots_preserve_current_weapon_and_shared_slots_skip_empty_entries() {
+        let mut cv = slot_cvars();
+        let mut cl = inventory(4096, 4096 | 16);
+        cl.stats[qnet::protocol::STAT_ROCKETS] = 1;
+        let mut empty = inventory(4096, 4096 | 16);
+        empty.stats[qnet::protocol::STAT_ROCKETS] = 0;
+        let mut s = WeaponSelection { held: Some(Toy::Hookshot), ..Default::default() };
+        let mut impulse = 6;
+        s.update_slots(&cv, &Toy::ALL, (6, &mut impulse), &empty);
+        assert_eq!((s.held, impulse), (Some(Toy::Hookshot), 0));
+        cv.set(Toy::Hookshot.slot_cvar(), "6");
+        for _ in 0..3 {
+            impulse = 6;
+            s.update_slots(&cv, &Toy::ALL, (6, &mut impulse), &empty);
+            assert_eq!((s.held, impulse), (Some(Toy::Hookshot), 0));
+        }
+        // One rocket makes both the stock launcher and sticky selectable again.
+        impulse = 6;
+        s.update_slots(&cv, &Toy::ALL, (6, &mut impulse), &cl);
+        assert_eq!((s.held, impulse), (None, 6));
+        impulse = 6;
+        s.update_slots(&cv, &Toy::ALL, (6, &mut impulse), &cl);
+        assert_eq!((s.held, impulse), (Some(Toy::Sticky), 0));
+        // A snapshot without any usable inventory must not underflow cycling.
+        let mut impulse = 12;
+        s.update_slots(&cv, &[Toy::Sticky], (0, &mut impulse), &qclient::ClientState::default());
+        assert_eq!(impulse, 0);
     }
 
     #[test]

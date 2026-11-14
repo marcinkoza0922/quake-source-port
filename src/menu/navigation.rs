@@ -22,19 +22,16 @@ impl Menu {
         Some((x, y.min(MENU_H - 16.0), 60.0, 16.0))
     }
 
-    pub(super) fn draw_addon_hints(&self, c: &mut Canvas, page: Page) {
+    pub(super) fn draw_addon_hints(&self, c: &mut Canvas) {
         if self.capturing() {
             self.boxed_hints(c, 344.0, &[(K_START, "Cancel binding")]);
             return;
         }
-        let mut items = if self.browser_binding_focused() {
+        let items = if self.browser_binding_focused() {
             vec![(K_ABUTTON, "Remap"), (K_XBUTTON, "Clear pad"), (K_BBUTTON, "Back")]
         } else {
             vec![(K_ABUTTON, self.browser_select_label()), (K_BBUTTON, "Back")]
         };
-        if page == Page::NewGameAddons {
-            items.push((K_YBUTTON, "Start game"));
-        }
         self.boxed_hints(c, 344.0, &items);
     }
 

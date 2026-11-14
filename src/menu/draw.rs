@@ -417,31 +417,9 @@ impl Menu {
             }
             Item::Bind { label: l, cmd } => {
                 label(c, l);
-                let keys = keys_for(&self.bindings, cmd);
                 let capturing = self.capture.is_some_and(|r| matches!(self.page_item(Page::Controls, r), Item::Bind { cmd: c2, .. } if c2 == cmd));
-                if capturing {
-                    if blink {
-                        txt_gold(c, VALUE_X, y, "press a key...");
-                    }
-                    return;
-                }
-                let g = self.glyphs;
-                let (mut x, mut px) = (VALUE_X, BIND_PAD_X);
-                for &k in &keys {
-                    if is_pad_key(k) {
-                        if px + crate::glyphs::width(c, k, g.family, crate::glyphs::H) < PANEL_X + PANEL_W - 2.0 {
-                            px += g.key(c, px, y - 1.0, k) + 3.0;
-                        }
-                    } else if x + crate::glyphs::width(c, k, g.family, crate::glyphs::H) < BIND_PAD_X - 4.0 {
-                        x += g.key(c, x, y - 1.0, k) + 3.0;
-                    }
-                }
-                if x == VALUE_X {
-                    { txt(c, VALUE_X, y, "---"); }
-                }
-                if px == BIND_PAD_X {
-                    { txt(c, BIND_PAD_X, y, "---"); }
-                }
+                self.draw_binding_columns(c, cmd, y - 1.0,
+                    [(VALUE_X, BIND_PAD_X - 4.0), (BIND_PAD_X, PANEL_X + PANEL_W - 2.0)], capturing, blink);
             }
             Item::Sub { label: l, page } => {
                 // submenu rows: tinted strip, gold label and arrow

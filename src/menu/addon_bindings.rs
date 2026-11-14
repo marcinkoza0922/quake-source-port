@@ -54,17 +54,49 @@ impl Menu {
         }
     }
 
+    /// Preserve the other device's bindings while the active column flashes.
+    pub(super) fn draw_binding_columns(&self, c: &mut Canvas, cmd: &str, y: f32,
+        columns: [(f32, f32); 2], capturing: bool, blink: bool) {
+        let keys = keys_for(&self.bindings, cmd);
+        for (pad, (mut x, edge)) in [false, true].into_iter().zip(columns) {
+            if capturing && pad == self.pad_ui {
+                if blink {
+                    c.text(x, y + 2.0, if pad { "Press button..." } else { "Press key..." }, 8.0, GOLD_FG);
+                }
+                continue;
+            }
+            let start = x;
+            for key in keys.iter().copied().filter(|&key| is_pad_key(key) == pad) {
+                if x + crate::glyphs::width(c, key, self.glyphs.family, crate::glyphs::H) < edge {
+                    x += self.glyphs.key(c, x, y, key) + 3.0;
+                }
+            }
+            if x == start {
+                c.text(x, y + 1.0, "---", TXT, MUTED);
+            }
+        }
+    }
+
     pub(super) fn draw_binding_prompt(&self, c: &mut Canvas) {
         let Some((key, _)) = self.bind_pending else { return };
         c.menu_layout();
         c.fill(110.0, 152.0, 420.0, 94.0, [0.04, 0.04, 0.04, 1.0]);
         c.frame(110.0, 152.0, 420.0, 94.0, BORDER);
-        c.text_center(320.0, 162.0, &format!("{} is already assigned", keynum_to_string(key)), TXT, GOLD_FG);
+        let label = "is already assigned";
+        let w = crate::glyphs::width(c, key, self.glyphs.family, crate::glyphs::HINT_H)
+            + 5.0 + c.text_w(label, TXT);
+        let x = 320.0 - w / 2.0;
+        let kw = self.glyphs.key_h(c, x, 159.0, key, crate::glyphs::HINT_H);
+        c.text(x + kw + 5.0, 162.0, label, TXT, GOLD_FG);
         let old = self.bindings.get(key as usize).and_then(Option::as_deref).unwrap_or("");
         let old: String = old.chars().take(65).collect();
         c.text_center(320.0, 179.0, &old, TXT, FG);
         c.text_center(320.0, 196.0, "Replace this binding?", TXT, FG);
-        c.text_center(250.0, 222.0, "Yes (Y / A)", TXT, MUTED);
-        c.text_center(390.0, 222.0, "No (Enter / B)", TXT, GOLD_FG);
+        let (yes, no) = if self.pad_ui { (K_ABUTTON, K_BBUTTON) } else { (b'y' as i32, K_ENTER) };
+        self.glyphs.hints_centered(c, 250.0, 217.0, &[(yes, "Yes")]);
+        self.glyphs.hints_centered(c, 390.0, 217.0, &[(no, "No")]);
     }
 }
+
+#[cfg(test)]
+mod tests;

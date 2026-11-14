@@ -193,13 +193,12 @@ weapon supplied by the selected add-on. Add-ons may supply multiple weapons;
 the current single-weapon add-ons are not a constraint on the design. Parameter
 links use the settings submenus’ gold label and tinted strip.
 Enabled add-on weapons are available from the start without stock weapon pickups; selection produces no weapon-name centerprint. Wheel and inventory labels remain.
-Slot cycling skips unowned stock weapons; Controls exposes weapon slots, alt fire
-and the equipment wheel, with no separate toy action. Next/previous weapon
-traverses owned stock weapons and enabled add-ons in slot order (stock first);
-stock weapons without ammunition are skipped. The modern weapon HUD uses 18×12 icons
-in rows of at most four, includes enabled add-ons and highlights the held weapon.
-The two-column add-on browser combines looping previews, descriptions, shared
-and unique action remapping, weapon-slot assignments and parameter submenus. Controller bumpers cycle list/description/settings/Start sections; A toggles, opens settings, edits slots or remaps the focused action, X clears pad bindings, B returns, and Y starts a new game from the picker. Focused settings scroll into view; prompts follow the controller family. Keyboard section navigation remains on Tab and arrows. `host::tests::menu_controller` checks platform button/stick events; optional `QUAKE_MENU_SHOTS=target/shots` writes menu captures during that test (skips without game data/Vulkan).
+Slots, cycling and exact selection share `wheel::Entry::usable`; see ADDONS.md for details.
+Sticky needs one rocket; railgun needs two cells; ammo-free add-ons remain selectable.
+Controls exposes weapon slots, alt fire and the equipment wheel; HUD rows hold four 18×12 icons.
+The browser highlights its focused section; Down reaches Start below the checklist, but stops at the settings panel's last row.
+Start's shortcut glyph is inside its button. Capture flashes only the active device column.
+Binding conflicts use device-specific glyphs; ADDONS.md covers navigation and capture checks.
 `tools/capture_addon_previews.py` regenerates embedded gameplay loops; format,
 playback and capture instructions are in [ADDONS.md](ADDONS.md).
 

@@ -4,7 +4,7 @@ use super::*;
 #[derive(Default)]
 pub(super) struct Browser {
     selected: usize,
-    /// Zero is the checklist; remaining entries are rows in the details pane.
+    /// Checklist, description, settings rows, then the new-game Start button.
     focus: usize,
     scroll: usize,
     settings_scroll: f32,
@@ -157,6 +157,10 @@ impl Menu {
         self.selected_addon().row_y(row) - self.browser_offset()
     }
     fn browser_hit(&self, (x, y): (f32, f32)) -> Option<(usize, usize)> {
+        if self.screen == Screen::OptionsPage(Page::NewGameAddons)
+            && (24.0..196.0).contains(&x) && (264.0..286.0).contains(&y) {
+            return Some((self.addon_ui.selected, self.browser_last_focus()));
+        }
         if (20.0..200.0).contains(&x) && (58.0..202.0).contains(&y) {
             return Some((((y - 58.0) / 24.0) as usize, 0));
         }
@@ -202,10 +206,6 @@ impl Menu {
             if self.back_button().is_some_and(|(bx, by, bw, bh)| (bx..bx + bw).contains(&x) && (by..by + bh).contains(&y)) {
                 return self.addon_key(K_ESCAPE, cv, out);
             }
-            if self.screen == Screen::OptionsPage(Page::NewGameAddons) && (24.0..196.0).contains(&x) && (264.0..286.0).contains(&y) {
-                self.start_new_game(out);
-                return true;
-            }
             let Some((selected, focus)) = self.browser_hit((x, y)) else { return true };
             self.addon_ui.selected = selected;
             self.addon_ui.focus = focus;
@@ -249,7 +249,12 @@ impl Menu {
             }
         } else if self.addon_ui.focus == 0 {
             if up || down {
-                self.addon_ui.selected = (self.addon_ui.selected + if up { ADDON.len() - 1 } else { 1 }) % ADDON.len();
+                if down && self.addon_ui.selected == ADDON.len() - 1
+                    && self.screen == Screen::OptionsPage(Page::NewGameAddons) {
+                    self.addon_ui.focus = self.browser_last_focus();
+                } else {
+                    self.addon_ui.selected = (self.addon_ui.selected + if up { ADDON.len() - 1 } else { 1 }) % ADDON.len();
+                }
                 self.addon_ui.scroll = 0;
                 self.addon_ui.settings_scroll = 0.0;
             }
@@ -260,12 +265,19 @@ impl Menu {
                 let a = self.selected_addon();
                 self.adjust(toggle(a.name, a.cvar), 1, true, cv, out);
             }
+        } else if self.addon_ui.focus > self.browser_rows() {
+            if enter {
+                self.start_new_game(out);
+            } else if up || down || right {
+                self.addon_ui.focus = if right { 1 } else { 0 };
+                if up || down { self.addon_ui.selected = if up { ADDON.len() - 1 } else { 0 }; }
+            }
         } else {
             if up {
                 self.addon_ui.focus = self.addon_ui.focus.saturating_sub(1);
             }
             if down {
-                self.addon_ui.focus = (self.addon_ui.focus + 1).min(self.browser_last_focus());
+                self.addon_ui.focus = (self.addon_ui.focus + 1).min(self.browser_rows());
             }
             if left && self.browser_slot().is_none() {
                 self.addon_ui.focus = 0;
@@ -291,8 +303,6 @@ impl Menu {
                 self.sub_return = Some((parent, page, self.opt_cursor));
                 self.screen = Screen::OptionsPage(page);
                 self.opt_cursor = 0;
-            } else if self.screen == Screen::OptionsPage(Page::NewGameAddons) && self.addon_ui.focus > self.browser_rows() && enter {
-                self.start_new_game(out);
             }
         }
         if matches!(key, K_TAB | K_UPARROW | K_DOWNARROW | K_DPAD_UP | K_DPAD_DOWN | K_RIGHTARROW | K_DPAD_RIGHT | K_LSHOULDER | K_RSHOULDER | K_ABUTTON | K_ENTER | K_KP_ENTER) {
@@ -317,7 +327,7 @@ impl Menu {
     }
     pub(super) fn draw_addon_browser(&self, c: &mut Canvas, pic: &mut PicFn, cv: &Cvars, time: f64, page: Page) {
         c.text(24.0, 25.0, page_name(page), 14.0, GOLD_FG);
-        c.round_box(20.0, 50.0, 180.0, 208.0, 3.0, [0.0, 0.0, 0.0, 0.7], Some(if self.addon_ui.focus == 0 { GOLD_FG } else { BORDER }));
+        c.round_box(20.0, 50.0, 180.0, 208.0, 3.0, [0.0, 0.0, 0.0, 0.7], Some(BORDER));
         for (i, a) in ADDON.iter().enumerate() {
             let y = 58.0 + i as f32 * 24.0;
             if i == self.addon_ui.selected {
@@ -331,18 +341,21 @@ impl Menu {
         }
         if self.pad_ui {
             self.glyphs.hints(c, 28.0, 214.0, &[(K_ABUTTON, "Toggle")], true);
-            self.glyphs.hints(c, 28.0, 236.0, &[(K_LSHOULDER, "/"), (K_RSHOULDER, "Section")], true);
         } else {
             c.text(28.0, 218.0, "Enter: toggle   Right: details", 8.0, MUTED);
             c.text(28.0, 234.0, "Tab: switch section", 8.0, MUTED);
         }
         if page == Page::NewGameAddons {
-            c.round_box(24.0, 264.0, 172.0, 22.0, 2.0, HILITE, Some(if self.addon_ui.focus > self.browser_rows() { GOLD_FG } else { BORDER }));
-            c.text_center(110.0, 271.0, if self.pad_ui { "Start New Game" } else { "Start New Game [F10]" }, TXT, GOLD_FG);
+            c.round_box(24.0, 264.0, 172.0, 22.0, 2.0, HILITE, Some(BORDER));
+            if self.pad_ui {
+                self.glyphs.hints_centered(c, 110.0, 268.0, &[(K_YBUTTON, "Start New Game")]);
+            } else {
+                c.text_center(110.0, 271.0, "Start New Game", TXT, GOLD_FG);
+            }
         }
         let a = self.selected_addon();
         super::addon_preview::draw(c, pic, a.id, time, [216.0, 50.0, 404.0, 116.0]);
-        c.round_box(216.0, 174.0, 404.0, 58.0, 2.0, [0.0, 0.0, 0.0, 0.75], Some(if self.addon_ui.focus == 1 { GOLD_FG } else { BORDER }));
+        c.round_box(216.0, 174.0, 404.0, 58.0, 2.0, [0.0, 0.0, 0.0, 0.75], Some(BORDER));
         let lines = self.description_lines();
         let start = self.addon_ui.scroll.min(lines.len().saturating_sub(4));
         for (i, line) in lines.iter().skip(start).take(4).enumerate() {
@@ -397,25 +410,17 @@ impl Menu {
                 c.text(425.0, y + 3.0, &format!("< {} >", v % 10), TXT, GOLD_FG);
             }
             if let Some(cmd) = cmd {
-                if self.addon_capture == Some(*cmd) {
-                    c.text(425.0, y + 3.0, if self.pad_ui { "press a button..." } else { "press a key... (Esc cancels)" }, TXT, GOLD_FG);
-                } else {
-                    let keys = keys_for(&self.bindings, cmd);
-                    for (pad, mut x) in [(false, 425.0), (true, 525.0)] {
-                        let device_keys: Vec<_> = keys.iter().copied().filter(|&key| is_pad_key(key) == pad).collect();
-                        let edge = x + 90.0;
-                        if device_keys.is_empty() {
-                            c.text(x, y + 3.0, "---", TXT, MUTED);
-                        }
-                        for key in device_keys {
-                            if x < edge {
-                                x += self.glyphs.key(c, x, y + 2.0, key) + 3.0;
-                            }
-                        }
-                    }
-                }
+                self.draw_binding_columns(c, cmd, y + 2.0, [(425.0, 515.0), (525.0, 615.0)],
+                    self.addon_capture == Some(*cmd), (time * 4.0) as i64 & 1 == 0);
             }
         }
+        let (rect, radius) = match self.addon_ui.focus {
+            0 => ([20.0, 50.0, 180.0, 208.0], 3.0),
+            1 => ([216.0, 174.0, 404.0, 58.0], 2.0),
+            f if f <= self.browser_rows() => ([216.0, 236.0, 404.0, 86.0], 2.0),
+            _ => ([24.0, 264.0, 172.0, 22.0], 2.0),
+        };
+        c.round_frame(rect, radius, 2.0, GOLD_FG);
         let note = if self.toys_locked(cv) {
             "This game started without add-ons. Start a new add-on game to enable them."
         } else if self.game_running {
@@ -425,7 +430,7 @@ impl Menu {
         };
         c.text_center(320.0, 327.0, note, 8.0, MUTED);
         if self.pad_ui {
-            self.draw_addon_hints(c, page);
+            self.draw_addon_hints(c);
         }
     }
 }

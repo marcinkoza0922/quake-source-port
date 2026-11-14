@@ -49,13 +49,33 @@ fn addon_controller_events_navigate_edit_and_switch_prompts() {
     assert_eq!(h.menu.screen, Screen::OptionsPage(crate::menu::Page::PortalGun));
     press(&mut h, GamepadButton::East);
     assert_eq!(h.menu.screen, Screen::OptionsPage(crate::menu::Page::Addons));
+    for _ in 0..2 { press(&mut h, GamepadButton::DpadUp); }
+    h.input.set_binding(qinput::keys::K_BBUTTON, Some("+jump"));
+    h.sync_menu_ui();
+    press(&mut h, GamepadButton::South);
+    assert!(h.menu.capturing());
+    capture(&mut h, "addons-controller-binding");
+    press(&mut h, GamepadButton::East);
+    assert!(h.menu.capturing()); // Occupied binding awaits confirmation.
+    capture(&mut h, "addons-controller-binding-conflict");
+    press(&mut h, GamepadButton::East);
+    assert!(!h.menu.capturing());
     h.handle_event(HostEvent::Input(InputEvent::Key { key: b'k' as i32, down: true }));
     h.sync_menu_ui();
     assert!(!h.menu.pad_ui);
     capture(&mut h, "addons-keyboard-after-controller");
+    h.handle_event(HostEvent::Input(InputEvent::Key { key: qinput::keys::K_ENTER, down: true }));
+    h.sync_menu_ui();
+    assert!(h.menu.capturing());
+    capture(&mut h, "addons-keyboard-binding");
+    h.handle_event(HostEvent::Input(InputEvent::Key { key: qinput::keys::K_ESCAPE, down: true }));
+    h.sync_menu_ui();
     h.exec_line("menu_options newgame");
     press(&mut h, GamepadButton::RightShoulder);
     capture(&mut h, "addons-newgame-controller");
+    press(&mut h, GamepadButton::DpadUp);
+    press(&mut h, GamepadButton::DpadDown);
+    capture(&mut h, "addons-newgame-controller-start");
     press(&mut h, GamepadButton::South);
     assert_eq!(h.menu.screen, Screen::None);
 }

@@ -28,9 +28,13 @@ run with no deathmatch and no remote client (`addons::allowed`/`all_local`).
   and 0; assignment changes the slot membership rather than its key binding.
   `weapon_slot <1..9|0>` uses local input state, preserving every mod-defined
   QC impulse value, including the console's `impulse 9` cheat.
-  Enabled toys are available immediately; slot cycling skips unowned stock weapons.
-  Next/previous weapon (including mouse wheel) traverses owned stock weapons
-  and all enabled add-ons in slot order, stock first within each slot.
+  Enabled toys are owned immediately. Slots, next/previous cycling and exact
+  selections share `wheel::Entry::usable`: stock weapons require ownership and
+  ammo; sticky needs one rocket and railgun needs two cells. Ammo-free add-ons
+  remain selectable. Unavailable slots preserve the current weapon; stock
+  requests still reach QC when no add-on is held. Next/previous weapon (including
+  mouse wheel) traverses usable weapons in slot order, stock first within each slot.
+  An empty usable inventory consumes cycling without changing the held weapon.
   The radial weapon wheel adds one segment per enabled add-on in the same slot
   order, selecting each weapon directly. Add-ons use short labels and show their
   ammo and full names; the modern HUD includes them in a compact four-column grid.
@@ -362,11 +366,24 @@ Mapping labels use action names without internal shared/unique qualifiers.
 Tab moves between the checklist, description, slot assignment, action
 bindings and Configure Parameters. Arrow keys / D-pad select and adjust;
 Enter / A toggles or captures a binding. New Game's Start button is reachable
-by Tab / D-pad as well as mouse or F10. Wheel / PgUp / PgDn scroll the description.
+by Tab / D-pad as well as mouse, Y or F10. Down from the last checklist entry
+focuses Start; Up from Start returns to that entry. A activates focused Start.
+Down at the last settings row stays in the bottom-right panel.
+Bumpers cycle checklist, description, settings and Start without an on-screen
+bumper prompt. The focused section has a two-unit gold outline, drawn with
+`Canvas::round_frame`. The Start button includes the controller family's Y glyph;
+the footer keeps contextual A/B prompts. Keyboard Start has no F10 label.
+Wheel / PgUp / PgDn scroll the description.
 Delete / Backspace clears keyboard bindings; X clears controller bindings.
 `addon_bindings.rs` also protects the Controls menu: occupied keys keep their
 old command until Yes (Y / controller A / click) confirms replacement;
-Escape / B / Enter declines. The capture itself accepts any device.
+Escape / B / Enter declines. The assigned key is drawn as a glyph, with Yes/No
+prompts for the active device and controller family. Both Controls and the browser
+use `draw_binding_columns`: only the active device column flashes during capture,
+and the other device's existing glyphs remain visible. Capture accepts any device.
+`host::tests::menu_controller` exercises platform button/stick events; optional
+`QUAKE_MENU_SHOTS=target/shots` writes navigation, capture and conflict screenshots
+(skips without game data/Vulkan).
 
 `tools/capture_addon_previews.py` records all six add-ons on e1m1 using the
 headless renderer and installed game data (`--basedir` or normal discovery).

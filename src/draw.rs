@@ -339,6 +339,19 @@ impl Canvas {
         }
     }
 
+    /// Rounded outline with a stroke width in virtual units.
+    pub fn round_frame(&mut self, rect: [f32; 4], r: f32, thickness: f32, color: [f32; 4]) {
+        let [x, y, w, h] = rect;
+        let (px, py) = self.px(x, y);
+        let (w, h) = ((px + w * self.scale).round() - px.round(),
+            (py + h * self.scale).round() - py.round());
+        let t = self.upx(thickness).min((w.min(h) / 2.0).max(0.0) as u16);
+        if t == 0 { return; }
+        let r = self.upx(r).max(t).min((w.min(h) / 2.0) as u16);
+        self.slices(px.round(), py.round(), w, h, r as f32,
+            Shape::RoundEdge { r, t }, color, Some(t as f32));
+    }
+
     /// Nine-slice draw in pixels. `edge` = Some(thickness): only the border
     /// strips are filled between the corners.
     #[allow(clippy::too_many_arguments)]
