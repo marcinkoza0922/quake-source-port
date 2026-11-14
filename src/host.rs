@@ -37,6 +37,7 @@ mod death;
 mod console;
 mod input;
 mod frame;
+mod prof;
 mod goggles;
 mod bullet_time;
 mod toy_fx;
@@ -140,6 +141,8 @@ pub struct Host {
     menu_touch: Option<touch::MenuTouch>,
     last_cmd: UserCmd,
     screenshot: Option<String>,
+    /// Frame profiler while `prof_start` is recording (tools/qprof).
+    prof: Option<prof::Profiler>,
     delayed: Vec<(f64, String)>,
     pub headless: bool,
     show_scores: bool,
@@ -264,6 +267,7 @@ impl Host {
             menu_touch: None,
             last_cmd: UserCmd::default(),
             screenshot: None,
+            prof: None,
             delayed: Vec::new(),
             headless: false,
             show_scores: false,

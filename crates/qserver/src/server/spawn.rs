@@ -114,6 +114,8 @@ impl Server {
         {
             ents = qcore::text::decode(&e);
         }
+        let horde = c.cvars.value_of("sv_horde").clamp(0.0, 64.0) as usize;
+        let ents = crate::horde::multiply(&ents, horde);
         let filter = SpawnFilter {
             deathmatch: c.cvars.value_of("deathmatch") != 0.0,
             skill,

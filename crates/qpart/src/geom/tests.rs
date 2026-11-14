@@ -116,3 +116,93 @@ fn builds_batches_per_kind() {
     let o = g.ordered_batches();
     assert!(blend_pass(o[0].blend) <= blend_pass(o[2].blend));
 }
+
+#[test]
+fn behind_eye_culling_keeps_front_and_boundary_quads() {
+    let mut r = Registry::new();
+    let mut f = files(&[]);
+    r.load_set("classic", false, true, &mut f);
+    // Use a resolved normal billboard, independent of any game data.
+    let mut ty = crate::types::PartType::empty("test", "billboard");
+    ty.looks.kind = RenderType::Normal;
+    ty.looks.scalefactor = 1.0;
+    ty.tex = Some(0);
+    r.types.push(ty);
+    let id = r.types.len() - 1;
+    let view = ViewInfo {
+        origin: Vec3::ZERO, forward: Vec3::new(1.0, 0.0, 0.0),
+        right: Vec3::new(0.0, -1.0, 0.0), up: Vec3::new(0.0, 0.0, 1.0),
+    };
+    let eo = |_| None;
+    for angle in [0.0, 0.7] {
+        for (depth, kept) in [(-100.0, false), (-1.0, true), (0.0, true), (100.0, true)] {
+            let mut p = Particle::default();
+            p.org = Vec3::new(depth, 0.0, 0.0);
+            p.scale = 8.0;
+            p.angle = angle;
+            p.rgba = [1.0; 4];
+            let mut reference = Geometry::new(&r, view, 0.0, &eo);
+            reference.particle(id, &p);
+            let mut culled = Geometry::new(&r, view, 0.0, &eo);
+            culled.cull_behind = true;
+            culled.particle(id, &p);
+            if kept {
+                assert_eq!(reference.indices, culled.indices);
+                for (a, b) in reference.vertices.iter().zip(&culled.vertices) {
+                    assert_eq!(a.pos, b.pos);
+                    assert_eq!(a.color, b.color);
+                    assert_eq!(a.uv, b.uv);
+                }
+                assert_eq!(culled.vertices.len(), 4);
+            } else {
+                assert!(culled.vertices.is_empty());
+                assert!(culled.indices.is_empty());
+                assert!(culled.batches.is_empty());
+            }
+        }
+    }
+}
+
+#[test]
+fn vertical_culling_keeps_intersecting_quads_at_varied_fovs() {
+    let mut r = Registry::new();
+    let mut ty = crate::types::PartType::empty("test", "billboard");
+    ty.looks.kind = RenderType::Normal;
+    ty.looks.scalefactor = 1.0;
+    ty.tex = Some(0);
+    r.types.push(ty);
+    let view = ViewInfo {
+        origin: Vec3::ZERO, forward: Vec3::new(1.0, 0.0, 0.0),
+        right: Vec3::new(0.0, -1.0, 0.0), up: Vec3::new(0.0, 0.0, 1.0),
+    };
+    let eo = |_| None;
+    for tan in [0.1, 0.75, 4.0] {
+        for sign in [-1.0, 1.0] {
+            for angle in [0.0, 0.7] {
+                for (offset, kept) in [(0.0, true), (1.0, true), (1000.0, false)] {
+                    let mut p = Particle::default();
+                    p.org = Vec3::new(100.0, 0.0, sign * (100.0 * tan + offset));
+                    p.scale = 8.0;
+                    p.angle = angle;
+                    p.rgba = [1.0; 4];
+                    let mut g = Geometry::new(&r, view, 0.0, &eo);
+                    g.cull_behind = true;
+                    g.vertical_tan = Some(tan);
+                    g.particle(0, &p);
+                    assert_eq!(!g.vertices.is_empty(), kept);
+                    // Disabling camera culling must keep the shared geometry.
+                    let mut shared = Geometry::new(&r, view, 0.0, &eo);
+                    shared.vertical_tan = Some(tan);
+                    shared.particle(0, &p);
+                    assert_eq!(shared.vertices.len(), 4);
+                    if kept {
+                        assert_eq!(g.indices, shared.indices);
+                        for (a, b) in g.vertices.iter().zip(&shared.vertices) {
+                            assert_eq!((a.pos, a.uv, a.color), (b.pos, b.uv, b.color));
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

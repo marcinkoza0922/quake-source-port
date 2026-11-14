@@ -94,6 +94,11 @@ pub struct World {
     /// R_MarkLeaves state: the PVS leaves of `vis_leaf` that have surfaces.
     vis_leaves: Vec<VisLeaf>,
     vis_leaf: usize,
+    /// `portal_surfaces` results per eye leaf (most recent last), and the
+    /// per-surface stamps used to dedupe while building one.
+    portal_cache: Vec<(usize, std::sync::Arc<[u32]>)>,
+    surf_stamp: Vec<u32>,
+    stamp: u32,
     pub has_light: bool,
     packer: Packer,
 }

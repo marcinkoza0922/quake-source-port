@@ -4,6 +4,12 @@ use super::*;
 use qrender::{RenderEntity, SplitView};
 
 impl Host {
+    /// Main-camera culling is safe only when no other camera shares FTE geometry.
+    pub(super) fn cull_fte_for_view(&self) -> bool {
+        self.guests.is_empty() && self.cl.portals.is_empty()
+            && self.cv("r_teleportwindows") == 0.0 && !self.r.has_camera_override()
+    }
+
     /// Join or drop split-screen guests to match `cl_splitscreen` once
     /// player 1 is on the local server.
     pub(super) fn sync_guests(&mut self) {

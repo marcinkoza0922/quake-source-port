@@ -302,8 +302,49 @@ pub(super) fn register_commands(c: &mut Commands<Host>) {
             None => h.print("splittoy <player 2..6> <toy 0..6>\n"),
         }
     });
+    // Debug/headless (tools/qprof co-op): drive split-screen player 2..6's
+    // input: `splitbtn <n> +attack|-dodge|...` or `splitbtn <n> impulse 7`.
+    c.add("splitbtn", |h, a| {
+        let n = a.argv(1).parse::<usize>().unwrap_or(0);
+        let Some(g) = n.checked_sub(2).and_then(|k| h.guests.get_mut(k)) else {
+            return h.print("splitbtn <player 2..6> <+button|-button|impulse N>\n");
+        };
+        let what = a.argv(2);
+        if what == "impulse" {
+            g.input.set_impulse(a.argv(3).parse().unwrap_or(0));
+            return;
+        }
+        let (down, name) = match what.split_at_checked(1) {
+            Some(("+", n)) => (true, n),
+            Some(("-", n)) => (false, n),
+            _ => return h.print("splitbtn: expected +button or -button\n"),
+        };
+        // A fixed fake key so press and release pair up.
+        const KEY: i32 = 4242;
+        match qinput::btn::NAMES.iter().position(|b| *b == name) {
+            Some(i) if down => g.input.buttons[i].press(KEY),
+            Some(i) => g.input.buttons[i].release(KEY),
+            None => h.print(&format!("splitbtn: unknown button {name}\n")),
+        }
+    });
     // Debug/headless: hand player 1 a toy (index into `Toy::ALL`; anything
     // else puts it away).
+    // tools/qprof: frame profiling (see host/prof.rs).
+    c.add("prof_start", |h, _| {
+        h.r.gpu_times_wanted = true;
+        let _ = h.r.take_gpu_times();
+        h.prof = Some(super::prof::Profiler::new());
+    });
+    c.add("prof_stop", |h, a| {
+        let Some(p) = h.prof.take() else { return h.print("prof_stop: not recording\n") };
+        let json = p.report(h.r.take_gpu_times());
+        let path = a.argv(1);
+        if path.is_empty() {
+            h.print(&json);
+        } else if let Err(e) = std::fs::write(path, json) {
+            h.print(&format!("prof_stop: {path}: {e}\n"));
+        }
+    });
     c.add("toy", |h, a| {
         let toy = a.argv(1).parse::<usize>().ok().and_then(|k| qserver::addons::Toy::ALL.get(k).copied());
         let allowed = h.allowed_toys();

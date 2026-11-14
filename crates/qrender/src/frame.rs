@@ -45,8 +45,10 @@ impl Renderer {
             self.frames[fi].acquire,
             self.frames[fi].cmd,
         );
+        let wait = std::time::Instant::now();
         // SAFETY: fence owned by this frame.
         unsafe { dev.wait_for_fences(&[fence], true, u64::MAX)? };
+        self.fence_wait_ns = wait.elapsed().as_nanos() as u64;
         self.init_gpu_times();
         self.collect_gpu_times(fi);
         let mut img_idx = 0u32;

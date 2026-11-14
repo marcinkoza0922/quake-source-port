@@ -121,6 +121,8 @@ impl Host {
             }
             goggles = self.goggles_render(&mut ents);
             crate::view::particles(&self.cl, &mut parts);
+            // Portal and split-screen views reuse geometry from other camera positions.
+            let cull_particles = self.cull_fte_for_view();
             fte = self.fte.frame(
                 &mut self.cl,
                 self.level.bsp.as_ref(),
@@ -129,6 +131,7 @@ impl Host {
                 self.snd.as_mut(),
                 v,
                 &self.level.mapname,
+                cull_particles,
             );
             self.portal_fx.frame(self.cl.time, v, &mut self.r, self.snd.as_ref(), &mut fte);
             self.rail_fx.frame(self.cl.time, v, &mut self.r, &mut fte);

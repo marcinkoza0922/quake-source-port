@@ -79,6 +79,10 @@ pub struct Renderer {
     cur: usize,
     /// GPU pass timing (QSP_GPUTIMES=1): printed as averages on drop.
     gpu_times: Option<GpuTimes>,
+    /// Force GPU timestamps on without QSP_GPUTIMES (profiling, `prof_start`).
+    pub gpu_times_wanted: bool,
+    /// CPU time spent waiting on the frame-in-flight fence last frame (ns).
+    pub fence_wait_ns: u64,
     swap: Option<Swapchain>,
     surface_size: Box<dyn Fn() -> (u32, u32)>,
     width: u32,
@@ -285,7 +289,7 @@ const GPU_TS: u32 = GPU_STAGES.len() as u32 + 1;
 
 impl Renderer {
     fn init_gpu_times(&mut self) {
-        if std::env::var_os("QSP_GPUTIMES").is_none() || self.gpu_times.is_some() {
+        if (!self.gpu_times_wanted && std::env::var_os("QSP_GPUTIMES").is_none()) || self.gpu_times.is_some() {
             return;
         }
         let ci = vk::QueryPoolCreateInfo::default()
@@ -319,6 +323,20 @@ impl Renderer {
             }
             t.frames += 1;
         }
+    }
+}
+
+impl Renderer {
+    /// Average µs per GPU stage since the last call, then resets the sums.
+    /// None while timestamps are off.
+    pub fn take_gpu_times(&mut self) -> Option<(u64, Vec<(&'static str, f64)>)> {
+        let t = self.gpu_times.as_mut()?;
+        let n = t.frames.max(1) as f64;
+        let v = GPU_STAGES.iter().enumerate().map(|(k, s)| (*s, t.sum_ns[k] / n / 1000.0)).collect();
+        let frames = t.frames;
+        t.sum_ns = [0.0; GPU_STAGES.len()];
+        t.frames = 0;
+        Some((frames, v))
     }
 }
 

@@ -128,6 +128,8 @@ fn register_cvars(cv: &mut Cvars) {
         ("samelevel", "0", 0),
         ("noexit", "0", CVAR_NOTIFY | CVAR_SERVERINFO),
         ("nomonsters", "0", 0),
+        // tools/qprof stress: extra copies of every monster (horde.rs)
+        ("sv_horde", "0", 0),
         ("temp1", "0", 0),
         ("hostname", "UNNAMED", 0),
         ("developer", "0", 0),

@@ -4,6 +4,25 @@ impl<'a> Geometry<'a> {
     pub(super) fn textured(&mut self, ty: TypeId, p: &Particle) {
         let l = &self.reg.types[ty].looks;
         let scale = if l.scalefactor == 1.0 { p.scale * 0.25 } else { self.view_scale(p, l, 0.25, 0.001) };
+        // Normal billboards use right/up axes only. A deliberately oversized
+        // sphere covers rotated quads and floating-point error at the eye plane.
+        // Simulation and secondary effects have already run; only geometry is skipped.
+        if self.cull_behind {
+            let delta = p.org - self.view.origin;
+            let depth = delta.dot(self.view.forward);
+            let radius = scale.abs() * 3.0 + 1.0;
+            if depth < -radius {
+                return;
+            }
+            if let Some(tan) = self.vertical_tan {
+                // Unnormalised top/bottom planes: (forward * tan ± up).
+                // radius * (tan + 1) is conservative for both plane lengths.
+                let height = delta.dot(self.view.up).abs();
+                if height > depth * tan + radius * (tan + 1.0) {
+                    return;
+                }
+            }
+        }
         let c = shade(p.rgba, l.premul);
         let (pr, pu) = (self.view.right * 1.5, self.view.up * 1.5);
         let pos = if p.angle != 0.0 {

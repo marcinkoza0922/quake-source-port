@@ -119,6 +119,37 @@ impl Gpu {
         Ok(())
     }
 
+    /// Uploads the first `rows` rows of an RGBA8 single-mip image from
+    /// `data` (full-width rows) and clears the rest to transparent black,
+    /// then transitions it to shader-read. Cheaper than [`Self::upload_image`]
+    /// when only the top of a large image holds anything.
+    pub fn upload_image_rows(&mut self, up: &mut Upload, img: &Image, data: &[u8], rows: u32) -> Result<()> {
+        let rows = rows.min(img.height);
+        let rng = range(vk::ImageAspectFlags::COLOR, img.mips, img.layers);
+        barrier(&self.device, up.cmd, img.image, rng, vk::ImageLayout::UNDEFINED, vk::ImageLayout::TRANSFER_DST_OPTIMAL);
+        if rows < img.height {
+            let clear = vk::ClearColorValue { float32: [0.0; 4] };
+            // SAFETY: image in TRANSFER_DST layout.
+            unsafe { self.device.cmd_clear_color_image(up.cmd, img.image, vk::ImageLayout::TRANSFER_DST_OPTIMAL, &clear, &[rng]) };
+            barrier(&self.device, up.cmd, img.image, rng, vk::ImageLayout::TRANSFER_DST_OPTIMAL, vk::ImageLayout::TRANSFER_DST_OPTIMAL);
+        }
+        if rows > 0 {
+            let len = (img.width * rows * 4) as usize;
+            let mut st = self.buffer(len as u64, vk::BufferUsageFlags::TRANSFER_SRC, true)?;
+            st.bytes_mut()[..len].copy_from_slice(&data[..len]);
+            let region = [vk::BufferImageCopy {
+                image_subresource: vk::ImageSubresourceLayers { aspect_mask: vk::ImageAspectFlags::COLOR, mip_level: 0, base_array_layer: 0, layer_count: 1 },
+                image_extent: vk::Extent3D { width: img.width, height: rows, depth: 1 },
+                ..Default::default()
+            }];
+            // SAFETY: image in TRANSFER_DST layout; staging lives until end_upload.
+            unsafe { self.device.cmd_copy_buffer_to_image(up.cmd, st.buf, img.image, vk::ImageLayout::TRANSFER_DST_OPTIMAL, &region) };
+            up.staging.push(st);
+        }
+        barrier(&self.device, up.cmd, img.image, rng, vk::ImageLayout::TRANSFER_DST_OPTIMAL, vk::ImageLayout::SHADER_READ_ONLY_OPTIMAL);
+        Ok(())
+    }
+
     pub fn destroy(&mut self) {
         // SAFETY: device idle; all resources freed by the caller.
         unsafe {
