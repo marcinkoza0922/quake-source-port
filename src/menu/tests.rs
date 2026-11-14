@@ -621,3 +621,17 @@ fn water_opacity_requires_translucency_for_keys_and_pointer() {
     menu.set_slider(item, SLIDER_X.0, &mut cv);
     assert_eq!(cv.value_of("r_wateralpha"), 1.0);
 }
+
+#[test]
+fn viewmodel_position_is_locked_in_third_person() {
+    let mut cv = Cvars::default();
+    cv.register("cl_camera", "2", 0);
+    cv.register("r_drawviewmodel", "1", 0);
+    let item = GAMEPLAY.iter().copied().find(|i| matches!(i, Item::Choice { cvar: "r_drawviewmodel", .. })).unwrap();
+    let mut menu = Menu::new();
+    let mut out = Vec::new();
+    assert!(!menu.adjust(item, 1, false, &mut cv, &mut out));
+    assert_eq!(cv.value_of("r_drawviewmodel"), 1.0);
+    cv.set("cl_camera", "0");
+    assert!(menu.adjust(item, 1, false, &mut cv, &mut out));
+}

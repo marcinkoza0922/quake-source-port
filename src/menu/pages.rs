@@ -179,6 +179,7 @@ pub(super) const fn toggle(label: &'static str, cvar: &'static str) -> Item {
 pub(super) const GAMEPLAY: &[Item] = &[
     toggle("Directional Damage", "hud_damageindicator"),
     Item::Choice { label: "On Death", cvar: "cl_deathaction", choices: &[("Ask", 0.0), ("Most recent save", 1.0), ("Select save", 2.0), ("Restart level", 3.0)] },
+    Item::Choice { label: "Camera", cvar: "cl_camera", choices: &[("First person", 0.0), ("Third person", 1.0), ("Shoulder right", 2.0), ("Shoulder left", 3.0)] },
     slider("Field of View", "fov", 60.0, 130.0, 5.0),
     toggle("Always Run", "cl_alwaysrun"),
     slider("View Bob", "cl_bob", 0.0, 0.02, 0.002),

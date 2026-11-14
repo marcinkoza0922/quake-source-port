@@ -13,6 +13,7 @@ pub mod weapon;
 mod damage;
 mod settings;
 mod speed;
+pub mod camera;
 pub use settings::ViewCvars;
 
 pub const CONTENTS_WATER: i32 = -3;
@@ -58,6 +59,10 @@ pub struct ViewState {
     pub face_anim_time: f64,
     /// Add the player's own body as a portal-only entity (portals exist).
     pub with_self: bool,
+    /// Third-person camera: draw the player's own body in the main view too.
+    pub third_person: bool,
+    /// Smoothed third-person crosshair convergence.
+    pub aim: camera::Aim,
 }
 
 fn dot(a: Vec3, b: Vec3) -> f32 {
@@ -368,6 +373,7 @@ impl ViewState {
                 dyn_pose: None,
                 views: 0,
                 portal_only: false,
+                follows_camera: false,
                 heat: 0,
             }
         };
@@ -386,7 +392,7 @@ impl ViewState {
             out.push(mk(&cl.entities[i], m, f, t, i, cl));
         }
         let me = cl.viewentity;
-        if self.with_self
+        if (self.with_self || self.third_person)
             && me > 0
             && me <= cl.maxclients
             && me < cl.entities.len()
@@ -397,7 +403,7 @@ impl ViewState {
             let t = Self::move_lerp(a, e, time, cv.lerp_move);
             let f = Self::anim_lerp(a, e, time, cv.lerp_models);
             let ent = mk(&cl.entities[me], m, f, t, me, cl);
-            out.push(RenderEntity { portal_only: true, key: me as u32, ..ent });
+            out.push(RenderEntity { portal_only: !self.third_person, follows_camera: self.third_person, key: me as u32, ..ent });
         }
         if self.static_anims.len() < cl.static_entities.len() {
             self.static_anims.resize(cl.static_entities.len(), Anim::default());

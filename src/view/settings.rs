@@ -39,4 +39,15 @@ impl ViewCvars {
         }
         self
     }
+
+    /// A third-person camera doesn't bob or strafe-roll (the body it
+    /// follows doesn't), and there's no viewmodel to show.
+    pub fn third_person(mut self, on: bool) -> Self {
+        if on {
+            self.bob = 0.0;
+            self.rollangle = 0.0;
+            self.viewmodel = super::weapon::Alignment::Hidden;
+        }
+        self
+    }
 }

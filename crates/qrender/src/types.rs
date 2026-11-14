@@ -76,6 +76,9 @@ pub struct RenderEntity {
     pub views: u8,
     /// Drawn only in portal views (the player's own body).
     pub portal_only: bool,
+    /// Moves with the camera (the player's own body in third person): no
+    /// per-object motion blur, since it stays put on screen.
+    pub follows_camera: bool,
     /// Thermal goggles: [`HEAT_COLD`], [`HEAT_WARM`], [`HEAT_BODY`] (also
     /// seen through walls) or [`HEAT_FIRE`].
     pub heat: u8,
@@ -154,6 +157,7 @@ impl Default for RenderEntity {
             views: 0,
             dyn_pose: None,
             portal_only: false,
+            follows_camera: false,
             heat: HEAT_COLD,
         }
     }

@@ -313,7 +313,7 @@ impl Menu {
     }
 
     pub(super) fn draw_item(&self, c: &mut Canvas, cv: &Cvars, item: Item, y: f32, blink: bool) {
-        if item_disabled(item, cv) && let Item::Slider { label, .. } = item {
+        if item_disabled(item, cv) && let Item::Slider { label, .. } | Item::Choice { label, .. } = item {
             c.text_right(LABEL_R, y, label, TXT, MUTED);
             c.text(VALUE_X, y, "(disabled)", TXT, MUTED);
             return;

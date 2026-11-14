@@ -93,6 +93,7 @@ pub(super) fn tooltip(item: Item) -> Option<&'static str> {
         "aim_slowdown" => "Slows stick look while the crosshair is over an enemy",
         "aim_rotation" => "Turns the view to follow a moving enemy you are aiming at",
         "a11y_reducemotion" => "Turns off view bob, strafe tilt and the camera kick when hit or firing",
+        "cl_camera" => "First person, a third-person camera centered behind the player, or one over the right or left shoulder; third person hides viewmodels",
         "r_drawviewmodel" => "Place every weapon at the center, right or left of the view, or hide all viewmodels",
         "v_flashscale" => "Strength of the full-screen flashes for damage, pickups and powerups",
         "hud_damageindicator" => "Red screen edges show where damage came from: top is front, bottom is behind; Screen Flashes controls their strength",
@@ -252,6 +253,7 @@ pub(super) fn is_net_page(p: Page) -> bool {
 
 /// Shared by keyboard adjustment, pointer dragging and drawing.
 pub(super) fn item_disabled(item: Item, cv: &Cvars) -> bool {
-    matches!(item, Item::Slider { cvar: "r_wateralpha", .. })
-        && (cv.value_of("r_enhancedwater") == 0.0 || cv.value_of("r_watertranslucency") == 0.0)
+    (matches!(item, Item::Slider { cvar: "r_wateralpha", .. })
+        && (cv.value_of("r_enhancedwater") == 0.0 || cv.value_of("r_watertranslucency") == 0.0))
+        || (matches!(item, Item::Choice { cvar: "r_drawviewmodel", .. }) && cv.value_of("cl_camera") != 0.0)
 }

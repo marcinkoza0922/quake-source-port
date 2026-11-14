@@ -79,9 +79,12 @@ impl Host {
             }
             let mut gcv = cv;
             if g.toy.held.is_some() { gcv.viewmodel = crate::view::weapon::Alignment::Hidden; }
-            let (v, gun) = g.view.calc_refdef(&g.cl, &gcv, &self.level, ft);
+            let (mut v, gun) = g.view.calc_refdef(&g.cl, &gcv, &self.level, ft);
+            let third = self.camera().third_person();
+            self.place_camera(Some(k), &mut v, ft);
+            let g = &mut self.guests[k];
             let me = g.cl.viewentity as u32;
-            for e in ents.iter_mut().filter(|e| e.key != 0 && e.key == me) {
+            for e in ents.iter_mut().filter(|e| !third && e.key != 0 && e.key == me) {
                 e.views = if e.views == 0 { all } else { e.views } & !bit;
             }
             if draw_ents {
