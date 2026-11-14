@@ -64,7 +64,7 @@ pub(super) fn tooltip(item: Item) -> Option<&'static str> {
         "addon_hitstop_targets" => "Freeze for every enemy, or only for enemies that were tough before the hit",
         "addon_hitstop_tough" => "Health an enemy must have had before the hit to count as tough",
         "addon_hitstop_scale_damage" => "Extra freeze milliseconds for every 10 damage dealt, so heavy hits stop longer",
-        "addon_hitstop_min_damage" => "Hits dealing less damage than this do not freeze the game; the default 20 skips nails, super nails and shotgun pellets",
+        "addon_hitstop_min_damage" => "Hits dealing less damage than this do not freeze the game; the default 10 skips nails and shotgun pellets",
         "addon_hitstop_cooldown" => "Minimum gap between freezes, so shotgun pellets and rapid fire count once; kills ignore it",
         "addon_hitstop_max" => "No single freeze lasts longer than this, however much damage or kill bonus adds",
         "addon_portalgun" => "A two-portal gun: fire and alt-fire place linked portals on flat walls; select it through its assigned weapon slot (Add-ons)",

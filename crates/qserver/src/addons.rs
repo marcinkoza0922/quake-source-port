@@ -54,7 +54,7 @@ pub const CVARS: &[(&str, &str, u32)] = &[
     ("addon_hitstop_kill_bonus", "2", CVAR_ARCHIVE),
     ("addon_hitstop_cooldown", "150", CVAR_ARCHIVE),
     ("addon_hitstop_max", "250", CVAR_ARCHIVE),
-    ("addon_hitstop_min_damage", "20", CVAR_ARCHIVE),
+    ("addon_hitstop_min_damage", "10", CVAR_ARCHIVE),
     ("addon_hitstop_tough", "100", CVAR_ARCHIVE),
     ("addon_hitstop_shake", "0", CVAR_ARCHIVE),
     ("addon_portalgun", "1", CVAR_ARCHIVE),

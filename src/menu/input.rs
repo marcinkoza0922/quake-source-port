@@ -16,6 +16,10 @@ impl Menu {
             self.drag_to(p, pos.1, g);
             return None;
         }
+        if let (Some(g), Screen::Mods | Screen::ModMaps) = (self.drag, self.screen) {
+            self.mods.drag_to(self.mods_page(), pos.1, g);
+            return None;
+        }
         if let (Some(g), Screen::Load | Screen::Save) = (self.drag, self.screen) {
             self.card_drag_to(pos.1, g);
             return None;
@@ -74,6 +78,13 @@ impl Menu {
             }
             return out;
         }
+        if let (K_MWHEELUP | K_MWHEELDOWN, Screen::Mods | Screen::ModMaps) = (key, self.screen) {
+            self.mods.wheel(self.mods_page(), key == K_MWHEELUP);
+            if let Some(i) = self.mouse.and_then(|pos| self.item_at(pos)) {
+                *self.mods.cursor_mut(self.mods_page()) = i;
+            }
+            return out;
+        }
         // left click acts on the item under the pointer, never on a stale cursor
         if let (K_MWHEELUP | K_MWHEELDOWN, Screen::OptionsPage(p)) = (key, self.screen) {
             let sc = self.page_scroll(p);
@@ -98,6 +109,16 @@ impl Menu {
             {
                 let grab = if (ty..ty + th).contains(&pos.1) { pos.1 - ty } else { th / 2.0 };
                 self.drag_to(p, pos.1, grab);
+                self.drag = Some(grab);
+                return out;
+            }
+            if let Screen::Mods | Screen::ModMaps = self.screen
+                && let Some((x, top, h, ty, th)) = self.mods.scrollbar(self.mods_page())
+                && (x - 4.0..x + 7.0).contains(&pos.0)
+                && (top..top + h).contains(&pos.1)
+            {
+                let grab = if (ty..ty + th).contains(&pos.1) { pos.1 - ty } else { th / 2.0 };
+                self.mods.drag_to(self.mods_page(), pos.1, grab);
                 self.drag = Some(grab);
                 return out;
             }
@@ -194,7 +215,7 @@ impl Menu {
                     self.screen = Screen::Main;
                     return out;
                 }
-                wrap(&mut self.sp_cursor, 3, &mut out);
+                wrap(&mut self.sp_cursor, 4, &mut out);
                 if (left || right) && self.sp_cursor == 0 {
                     Self::toggle_addons_box(cv, &mut out);
                 }
@@ -207,6 +228,7 @@ impl Menu {
                             self.autosaves = false;
                             self.open(Screen::Load);
                         }
+                        3 => out.push(Action::Command("menu_levels\n".into())),
                         _ => {
                             if server_active {
                                 self.autosaves = false;
@@ -403,8 +425,7 @@ impl Menu {
                 }
             }
             Screen::Mods | Screen::ModMaps => {
-                self.mods.level_select = cv.value_of("ui_levelselect") != 0.0;
-                let page = if self.screen == Screen::Mods { modmenu::Page::List } else { modmenu::Page::Maps };
+                let page = self.mods_page();
                 self.screen = match self.mods.key(page, key, &mut out) {
                     Some(modmenu::Page::List) => Screen::Mods,
                     Some(modmenu::Page::Maps) => Screen::ModMaps,

@@ -54,6 +54,10 @@ impl Menu {
                 c.pic(72.0, 32.0, p);
                 let d = dot(pic);
                 c.pic(54.0, 32.0 + self.sp_cursor as f32 * 20.0, d);
+                let (y, w) = (32.0 + 3.0 * 20.0 + 2.0, 112.0);
+                c.fill(72.0, y, w, 16.0, [0.0, 0.0, 0.0, 0.55]);
+                c.frame(72.0, y, w, 16.0, BORDER);
+                gold(c, 72.0 + (w - 8.0 * 12.0) / 2.0, y + 4.0, "Level Select");
                 self.draw_new_game_box(c, cv);
             }
             Screen::Multiplayer => {
