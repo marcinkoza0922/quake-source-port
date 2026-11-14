@@ -24,6 +24,7 @@ pub(crate) fn register(s: &mut Server) {
     s.add_cmd("notarget", |s, a| toggle_flag(s, a, FL_NOTARGET, "notarget"));
     s.add_cmd("noclip", cmd_noclip);
     s.add_cmd("setpos", cmd_setpos);
+    s.add_cmd("viewpos", cmd_viewpos);
     s.add_cmd("portal_set", cmd_portal_set);
     s.add_cmd("give", cmd_give);
     s.add_cmd("prof_wake", |s, _| if !s.deathmatch() { crate::horde::cmd_prof_wake(s) });
@@ -335,6 +336,20 @@ fn cmd_setpos(s: &mut Server, a: &Args) {
         l.vm.set_ent_f(e, f.fixangle, 1.0);
     }
     l.world.link_edict(&mut crate::ents::Ents { vm: &mut l.vm, c: &mut s.core }, e, false);
+}
+
+/// `viewpos`: print the player's position and view angles in the form
+/// `setpos` takes (vkQuake's CL_Viewpos_f), truncated to integers.
+fn cmd_viewpos(s: &mut Server, _a: &Args) {
+    let Some((i, e)) = s.cmd_player() else { return };
+    let f = s.core.sv.fields.clone();
+    let Some(l) = s.level.as_ref() else { return };
+    let (o, a) = (l.vm.ent_v(e, f.origin), l.vm.ent_v(e, f.v_angle));
+    let msg = format!(
+        "Viewpos: ({} {} {}) {} {} {}\n",
+        o[0] as i32, o[1] as i32, o[2] as i32, a[0] as i32, a[1] as i32, a[2] as i32
+    );
+    s.client_print(i, &msg);
 }
 
 /// `portal_set slot ox oy oz nx ny nz ux uy uz` (or `portal_set slot` to

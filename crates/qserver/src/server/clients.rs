@@ -255,7 +255,7 @@ impl Server {
     /// Cmd_ExecuteString(s, src_client) restricted to the commands clients may run.
     pub(crate) fn exec_client_string(&mut self, i: usize, s: &str) {
         const ALLOWED: &[&str] = &[
-            "status", "god", "notarget", "fly", "name", "noclip", "setpos", "say", "say_team", "tell",
+            "status", "god", "notarget", "fly", "name", "noclip", "setpos", "viewpos", "say", "say_team", "tell",
             "color", "kill", "pause", "spawn", "begin", "prespawn", "kick", "ping", "give", "ban",
         ];
         let low = s.trim_start().to_ascii_lowercase();
