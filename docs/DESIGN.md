@@ -501,6 +501,14 @@ Shotgun tracers (`src/tracers.rs`): projectile pellets (`EF_QSP_PELLET`) are alw
 
 `viewpos` (qserver `commands.rs`, client-allowed): prints `Viewpos: (x y z) pitch yaw roll` (integers, same form as `setpos`) for the issuing player, like vkQuake; no `copy` argument since there is no clipboard support.
 
+## Global config (`global.cfg`)
+
+`<data dir>/quake-source-port/global.cfg` holds settings shared by every game and map
+pack (currently only `bugreport_dir`). Loaded in `Host::new` before per-game `config.cfg`;
+written next to it by `write_config` (never headless). Global cvars are registered
+without `CVAR_ARCHIVE` so they stay out of per-game configs. Add new ones to
+`GLOBAL_CVARS` in `src/host/global_cfg.rs`.
+
 ## Bug reports (`bugreport`)
 
 Development aid. `bugreport "text"` creates `<bugreport_dir>/<UTC stamp>_<map>/` holding
@@ -509,5 +517,5 @@ Development aid. `bugreport "text"` creates `<bugreport_dir>/<UTC stamp>_<map>/`
 `save.sav`/`save.qsa` (written at that moment, never into the user's save slots or
 autosave rotation), `config.cfg` (bindings + archived cvars as they were) and
 `screenshot.png`. The screenshot is taken on the next rendered frame with the
-console not drawn (`Host::clean_shot`). `bugreport_dir` (archived cvar, no menu row;
-set it by hand in config.cfg) defaults to `<user dir>/bugreports`. Code: `src/host/bugreport.rs`.
+console not drawn (`Host::clean_shot`). `bugreport_dir` (global cvar, no menu row; lives in
+`global.cfg`, see below) defaults to `<user dir>/bugreports`. Code: `src/host/bugreport.rs`.
