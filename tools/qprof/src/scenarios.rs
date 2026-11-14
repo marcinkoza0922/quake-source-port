@@ -197,6 +197,16 @@ pub fn all(secs: f32) -> Vec<Scenario> {
             map: None, script: vec![], own_fire: false,
         });
     }
+    for (name, what, effect) in [
+        ("supersample-renderscale200-ssao", "8x sample shading at 200% scale + high ambient occlusion", SSAO),
+        ("supersample-renderscale200-water", "8x sample shading at 200% scale + enhanced water at max", WATER),
+    ] {
+        out.push(Scenario {
+            name, group: Group::Enhancement, what,
+            cvars: SSAA.iter().chain(SCALE).chain(effect).copied().collect(),
+            map: None, script: vec![], own_fire: false,
+        });
+    }
 
     let addon = |name, what, script: Vec<(f32, String)>, own_fire| Scenario {
         name, group: Group::Addon, what, cvars: ADDON_ON.to_vec(), map: None, script, own_fire,

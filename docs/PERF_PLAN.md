@@ -106,7 +106,9 @@ confirm wins windowed (`qprof -window`, or qbench for parity).
   (see results below). `vid_fsaamode` enables sample shading, whereas
   `r_renderscale 2` quadruples scene pixels; all-enhancements enables both.
   SSAO already uses a single-sampled target with sample shading disabled
-  (including its apply pass). The controlled MSAA/sample-shading/200%-scale
+  (including its apply pass). Combined sample-shading/200%-scale probes
+  now isolate a large SSAO interaction (results below); next, timestamp
+  AO generation, AO application and their barriers separately. The controlled MSAA/sample-shading/200%-scale
   matrix now includes `msaa8-renderscale200` and
   `supersample-renderscale200` (results below). Sample shading also selects
   an automatic −1.5 mip bias at 8x; these are setting costs rather than
@@ -155,8 +157,9 @@ confirm wins windowed (`qprof -window`, or qbench for parity).
 
 - Run qprof with `-runs 3` for the before/after numbers of each item.
 - Done: particle and vertex counters in the engine and qprof JSON (item 4).
-- Done: `supersample-ssao` and `supersample-water` diagnostic scenarios
-  (item 6), with additive GPU cost and interaction excess in `report.md`.
+- Done: standalone and combined sample-shading/200%-scale SSAO/water
+  diagnostic scenarios (item 6), with additive GPU costs, interaction excess
+  and controlled setting differences in `report.md`.
 - Add a per-view GPU timestamp for split-screen (item 5).
 - Record a windowed baseline (`qprof -window`) once, for absolute numbers.
 
@@ -387,3 +390,49 @@ confirm wins windowed (`qprof -window`, or qbench for parity).
   unknown commands/cvars or Host_Error. No engine code changed, so there is
   no before/after screenshot comparison, Vulkan change or speedup claim.
   Report: `target/qprof/aa-scale/`. 453 tests passed, 2 skipped; clippy clean.
+
+
+- 2026-11-14, item 6 combined SSAO/water diagnostics: added
+  `supersample-renderscale200-ssao` and
+  `supersample-renderscale200-water`, with additive interaction and controlled
+  effect deltas in qprof. Standalone and all-enhancements settings are
+  unchanged. RTX 3060 Ti, 1280×720 headless, 20 s measured after 4 s warm-up,
+  250 Hz simulation, three runs per scenario/map (42 total). Values are from
+  each scenario's run selected by median fps:
+
+  | scenario | e1m1 frame / GPU µs | ad_sepulcher frame / GPU µs |
+  |---|--:|--:|
+  | vanilla | 1322 / 1231 | 2193 / 2036 |
+  | ssao | 1629 / 1536 | 2371 / 2278 |
+  | water | 1322 / 1232 | 2460 / 2199 |
+  | supersample-renderscale200 | 2391 / 2296 | 3451 / 3376 |
+  | supersample-renderscale200-ssao | 6227 / 6130 | 6410 / 6335 |
+  | supersample-renderscale200-water | 2417 / 2322 | 4082 / 4007 |
+  | all-enhancements | 8043 / 7935 | 11195 / 11116 |
+
+  Adding SSAO to combined sample shading/200% scale costs +3834/+2958 µs
+  GPU (e1m1/AD), versus standalone +305/+243 µs. Excess above additive cost
+  is +3529/+2716 µs, concentrated in `translucent` (+3531/+2691 µs).
+  This bucket contains AO generation, depth/colour barriers, AO application
+  and liquid draws; these measurements cannot distinguish those costs.
+  Water costs +27/+631 µs at combined settings, with interaction excess
+  +26/+467 µs (mostly `world` +24/+443 µs); the e1m1 effect is near noise.
+  The same all-enhancements bucket is 3837/2996 µs, close to the SSAO probe's
+  3838/2970 µs, identifying SSAO at combined settings as a substantial part
+  of the expensive combined case. Other costs remain: all-enhancements
+  generates 135,014 AD FTE vertices versus 53,626 in the diagnostic probes,
+  because teleporter windows disable shared-geometry camera culling.
+  Next: separate GPU timestamps for AO generation, application and barriers,
+  then compare 200%-scale SSAO with and without MSAA/sample shading to
+  identify the output-preserving optimisation. Retain current full-resolution
+  AO output until that evidence exists.
+  All 36 diagnostic runs have identical per-map particle/geometry counters;
+  the six all-enhancements controls are internally consistent and intentionally
+  use a different effect configuration. Inspected e1m1's SSAO corridor and
+  CRT/blur/impact scene, and AD's SSAO pillar/torch corridor and combined-water
+  view, with weapons and HUD intact. Logs contain no unknown commands/cvars
+  or Host_Error. No engine or Vulkan code changed, so no before/after image
+  comparison or validation run was needed. These are setting-cost diagnostics,
+  not an optimisation speedup or windowed parity claim.
+  Report: `target/qprof/combined-effects/`. 454 tests passed, 2 skipped;
+  clippy clean.

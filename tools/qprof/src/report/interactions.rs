@@ -10,6 +10,8 @@ pub(super) fn write(md: &mut String, rows: &[&Result], base: &Run) {
         ("supersample-water", "supersample", "water"),
         ("msaa8-renderscale200", "msaa8", "renderscale200"),
         ("supersample-renderscale200", "supersample", "renderscale200"),
+        ("supersample-renderscale200-ssao", "supersample-renderscale200", "ssao"),
+        ("supersample-renderscale200-water", "supersample-renderscale200", "water"),
     ] {
         let (Some(combined), Some(ss), Some(fx)) = (find(pair), find(first), find(effect)) else {
             continue;
@@ -38,6 +40,8 @@ pub(super) fn write(md: &mut String, rows: &[&Result], base: &Run) {
         ("200% scale (1 sample)", "vanilla", "renderscale200"),
         ("200% scale (8x MSAA)", "msaa8", "msaa8-renderscale200"),
         ("200% scale (8x sample shading)", "supersample", "supersample-renderscale200"),
+        ("SSAO at 200% (8x sample shading)", "supersample-renderscale200", "supersample-renderscale200-ssao"),
+        ("water at 200% (8x sample shading)", "supersample-renderscale200", "supersample-renderscale200-water"),
     ] {
         if let (Some(a), Some(b)) = (find(before), find(after)) {
             let _ = writeln!(deltas, "| {label} | {before} → {after} | {:+.0} | {:+.0} |",
@@ -105,5 +109,35 @@ mod tests {
         write(&mut md, &[&rows[0], &rows[1]], &rows[0].run);
         assert!(md.contains("| 8x MSAA at 100% | vanilla → msaa8 | +30 | +30 |"));
         assert!(!md.contains("sample shading at 200% (8x MSAA) |"));
+    }
+
+    #[test]
+    fn measures_effect_amplification_at_combined_sample_shading_and_scale() {
+        let result = |scenario, total, world, translucent| Result {
+            scenario, run: Run {
+                gpu_total: total, frame_mean: total + 10.0,
+                gpu: vec![("world".into(), world), ("translucent".into(), translucent)],
+                ..Run::default()
+            },
+            group: "enhancement", what: "", map: "test".into(),
+        };
+        let rows = [
+            result("vanilla", 100.0, 70.0, 30.0),
+            result("ssao", 150.0, 70.0, 80.0),
+            result("water", 120.0, 80.0, 40.0),
+            result("supersample-renderscale200", 400.0, 300.0, 100.0),
+            result("supersample-renderscale200-ssao", 600.0, 300.0, 300.0),
+            result("supersample-renderscale200-water", 500.0, 360.0, 140.0),
+        ];
+        let mut md = String::new();
+        write(&mut md, &rows.iter().collect::<Vec<_>>(), &rows[0].run);
+        assert!(md.contains("| supersample-renderscale200-ssao | 450 | 600 | +150 | translucent +150 |"));
+        assert!(md.contains("| supersample-renderscale200-water | 420 | 500 | +80 | world +50 |"));
+        assert!(md.contains("| SSAO at 200% (8x sample shading) | supersample-renderscale200 → supersample-renderscale200-ssao | +200 | +200 |"));
+        // Without the combined baseline, neither an interaction nor a controlled delta is valid.
+        let refs: Vec<_> = rows.iter().filter(|r| r.scenario != "supersample-renderscale200").collect();
+        md.clear();
+        write(&mut md, &refs, &rows[0].run);
+        assert!(md.is_empty());
     }
 }
