@@ -173,8 +173,9 @@ kills, gibs and mod rules apply. Refire timers live on `Level::rails`
   texels brightened ×1.5; drawn centred with `portal_pose` + recoil.
 - Menu: Add-ons → Railgun toggle (`addon_railgun`) and Railgun Settings
   (Damage slider, Trail Colour); `menu railgun` opens it.
-- Split-screen: `splittoy <2..6> <0..4>` (debug) hands a guest a toy by
-  `Toy::ALL` index, for headless screenshots.
+- Split-screen: `splittoy <2..6> <0..6>` (debug) hands a guest a toy by
+  `Toy::ALL` index, for headless screenshots; `toy <0..6>` does the same
+  for player 1 (e.g. `"+delay 2 toy 5" "+delay 2.1 +attack"` sprays gel).
 - Tests: `crates/qserver/tests/railgun.rs` (e1m1: ammo, refire, dry click).
 ### Hookshot (`qserver::addons::hookshot`, `hook_surface`; `src/addons/hook_fx.rs`)
 Zelda homage. Fire sends a hook head out at 1600 u/s (trace `Normal`, so
@@ -309,7 +310,9 @@ over each other. `MAX_SPLATS` 1024, oldest out. No ammo.
   speed (450–1500); a player jumping off blue gets 680 u/s (≈290 u);
   running into a blue wall faster than 180 u/s rebounds (95%) with lift.
   Walking onto it does not bounce. Grenades, gibs, items and monsters
-  bounce too.
+  bounce too. A player's landing bounces in `gel_phys::land`, right after
+  their own move and before QC `PlayerPostThink`, so PostThink never sees
+  the landing: no fall damage or grunt on blue gel.
 - Propulsion (`gel_phys::tune`, before `client_think`): a player on the
   ground on orange gets move input and `sv_maxspeed` ×2.6 and friction
   ×0.1; momentum carries on through the air, plain floor slows it.
@@ -320,15 +323,27 @@ over each other. `MAX_SPLATS` 1024, oldest out. No ammo.
   splat, `d id`, `c` clear + full state on spawn, `s kind pos speed`
   footstep, `j kind pos speed` bounce. Saves: `gel kind x y z nx ny nz r`
   header lines. The toy switched off removes all gel.
-- Look: splats are clipped to BSP faces like blood marks (`blood::mesh`,
-  faces must lie on the hit plane) and lit once from the lightmap
-  (`light_point`). They and the flying blobs are `FteBatch { gel: true }`:
+- Look: splats merge into one contiguous coat (`src/addons/gel_coat.rs`):
+  splats on the same plane whose discs touch form a cluster; each cluster
+  gets a square field in a 2048² atlas (2 u/texel, coarser if it would
+  exceed 512 texels or the atlas is full; shelf packed) where every splat
+  adds `(1 − d²/r²)²`, so overlaps sum instead of stacking puddles. The edge
+  is where the sum crosses 0.3, roughened by world-space value noise;
+  alpha is the height (steep rim, domed top, slight ripple), RGB the
+  colour of whichever kind dominates (blended at a blue/orange border).
+  The atlas is rebuilt (`update_pic`) at most every 0.1 s while splats
+  change. Each cluster square is clipped to BSP faces like blood marks
+  (`blood::mesh`, faces on the plane) and lit per vertex from the
+  lightmap (`light_point`). The coat and flying blobs are `FteBatch { gel: true }`:
   fte.frag mode 9 reads the atlas alpha as a height field, builds a
   tangent frame from screen derivatives, shifts the lookup for parallax,
   bends the normal by the height gradient and lights it as a thick liquid
   (two specular highlights, fresnel rim, darker thin edges, brighter thick
-  middle). Atlas (`gel_fx::atlas`, 2×2 tiles of 128²): three metaball
-  splats with lobes and drops, and a dome for blobs/droplets.
+  middle); texture RGB tints the vertex colour (light for the coat, white
+  atlas for sprites). Parallax and gradient steps are in world units
+  (uv-per-unit from derivatives), so any atlas scale shades alike. Atlas
+  (`gel_fx::atlas`, 2×2 tiles of 128²): three metaball splats (unused by
+  the coat) and a dome for blobs, droplets and the washer jet.
 - Sound (`qsound::gel`, synthesised): looping wet spray while blobs fly
   (owner entity, channel 7), splat, blue footstep = rubber-band stretch
   squeak gliding up, bounce = spring boing, orange footstep = swept zip in
@@ -340,11 +355,12 @@ over each other. `MAX_SPLATS` 1024, oldest out. No ammo.
   0.6`. Saturated blue/orange texels (the canisters) become a true-colour
   glow layer (`toy_model::gel_glow`), since the palette has no bright blue.
 - Tests: `crates/qserver/tests/gel.rs` (e1m1: spray, save, wash, bounce,
-  orange speed).
+  no fall damage on blue, orange speed); `gel_coat` unit tests (seams
+  between splats are filled, walls and floors stay separate).
 ### Powerwasher (`addon_washer`, `addons/washer.rs`; `src/addons/water_fx.rs`)
-Water cannon, meant to go with the gel sprayer. Fire: one jet (1700 u/s,
-sag 500 u/s², traced 0.45 s in 12 segments, ≈750 u); alt-fire: a fan of
-five shorter jets at −14…14° yaw. No ammo. Per jet each frame: the first
+Water cannon, meant to go with the gel sprayer. Fire: one straight,
+lightning-gun style jet reaching 560 u (traced in 12 segments); alt-fire: a
+fan of five straight 320 u jets at −14…14° yaw. No ammo. Per jet each frame: the first
 monster/player/toss object hit is pushed along the jet (3200 u/s² stream,
 1100 fan, × `addon_washer_push` 0.25–3, capped at 650 u/s; a grounded one
 is lifted 110 u/s so step physics slides it; no damage); projectiles
@@ -353,8 +369,12 @@ is lifted 110 u/s so step physics slides it; no damage); projectiles
 floor gel within 44 u (+0.6 r) is washed off.
 - Sync: `//qsp_water owner mode x y z…` every frame while spraying (one
   end per jet), `owner 0` on stop → `ClientEvent::Water`. Not saved.
-- Client: droplet streams (gel-shaded translucent domes on a Bézier from
-  the muzzle along the aim to each end), splash droplets, a hiss loop
+- Client: each jet is a solid water column, a camera-facing ribbon (40
+  segments) across the middle row of the dome tile so the gel shader
+  shades it as a cylinder; half width 1.6→4.5 u with travelling ripples
+  and a flare at the tip, fading in at the nozzle and out at the end. It
+  leaves the view model's muzzle along the aim and joins the server's line
+  within 48 u. Plus 40 loose droplets around it, splash droplets, a hiss loop
   (jet / fan, channel 7), splashes; blood surface marks within 44 u of each
   end are removed (`Blood::wash`).
 - Model: `assets/washer/` (nano-banana-pro concept

@@ -105,6 +105,29 @@ pub(crate) fn tune<D: Edicts + ?Sized>(gel: &Gel, ents: &D, e: Ent, p: &mut qwor
     }
 }
 
+/// Right after a player's own move, before QC PlayerPostThink: a landing
+/// on blue gel bounces now, so PostThink never sees the player on the
+/// ground (no fall damage, no landing grunt). [`after`] then skips them.
+pub(crate) fn land<D: Edicts + ?Sized>(gel: &mut Gel, ents: &mut D, e: Ent) {
+    let Some(k) = gel.snapshot.iter().position(|s| s.0 == e) else { return };
+    let (_, _, pre, _) = gel.snapshot[k];
+    if ents.is_free(e) || !movable(ents, e) {
+        return;
+    }
+    let origin = ents.v(e, V::Origin);
+    let vel = ents.v(e, V::Velocity);
+    let on = ents.flags(e) & FL_ONGROUND != 0;
+    let (lo, hi) = bbox(ents, e, origin);
+    if pre.z < -LAND_MIN && (on || vel.z > pre.z * 0.5) && floor_kind(gel, lo, hi) == Some(BLUE) {
+        let up = (-pre.z).clamp(BOUNCE_MIN, BOUNCE_MAX);
+        ents.set_v(e, V::Velocity, Vec3::new(pre.x, pre.y, up));
+        ents.set_flags(e, ents.flags(e) & !FL_ONGROUND);
+        ents.set_e(e, E::GroundEntity, 0);
+        gel.event(format!("//qsp_gel j {BLUE} {:.1} {:.1} {:.1} {up:.0}\n", origin.x, origin.y, lo.z));
+        gel.snapshot.swap_remove(k);
+    }
+}
+
 /// After physics: bounces off blue gel, and footstep sounds on any gel.
 pub(crate) fn after<D: Edicts + ?Sized>(gel: &mut Gel, ents: &mut D, players: usize, now: f64) {
     let snap = std::mem::take(&mut gel.snapshot);

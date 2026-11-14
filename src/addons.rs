@@ -7,6 +7,7 @@ mod hook_model;
 pub mod boomerang_fx;
 mod boomerang_model;
 pub mod equip_wheel;
+pub mod gel_coat;
 pub mod gel_fx;
 mod toy_model;
 pub mod water_fx;

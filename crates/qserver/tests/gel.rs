@@ -108,3 +108,29 @@ fn blue_gel_bounces_a_fall_and_orange_gel_speeds_up_a_run() {
     }
     assert!(fast > 480.0, "orange speed {fast}");
 }
+
+/// A hard landing (the same drop hurts on plain floor) does no damage on
+/// blue gel: the bounce happens before PlayerPostThink checks the fall.
+#[test]
+fn blue_gel_cancels_fall_damage() {
+    let health_after_drop = |gel: bool| {
+        let (mut sv, c) = start().unwrap();
+        run(&mut sv, c, 30, ClientMove::default());
+        sv.command("setpos 480 200 24");
+        run(&mut sv, c, 30, ClientMove::default());
+        let floor = Vec3::from(sv.level.as_ref().unwrap().vm.ent_v(1, sv.core.sv.fields.origin)).z - 24.0;
+        if gel {
+            sv.level.as_mut().unwrap().gel.add(BLUE, Vec3::new(480.0, 200.0, floor), Vec3::new(0.0, 0.0, 1.0), 48.0);
+        }
+        sv.command("setpos 480 200 100");
+        let f = sv.core.sv.fields.clone();
+        sv.level.as_mut().unwrap().vm.set_ent_v(1, f.velocity, [0.0, 0.0, -900.0]);
+        run(&mut sv, c, 40, ClientMove::default());
+        sv.level.as_ref().unwrap().vm.ent_f(1, f.health)
+    };
+    if start().is_none() {
+        return;
+    }
+    assert!(health_after_drop(false) < 100.0, "plain floor should hurt");
+    assert_eq!(health_after_drop(true), 100.0);
+}

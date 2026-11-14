@@ -49,11 +49,18 @@ void main() {
         float im = inversesqrt(max(max(dot(t, t), dot(b, b)), 1e-12));
         t *= im;
         b *= im;
+        // i_color: light (rgb), alpha; texture rgb: gel colour (white for
+        // tinted sprites, which carry their colour in i_color)
         float h0 = tex(pc.tex, i_uv).a;
         vec2 vts = vec2(dot(v, t), dot(v, b)) / max(dot(v, n), 0.3);
-        vec2 uv = i_uv - vts * h0 * 0.03;
-        vec2 ts = 1.5 / vec2(textureSize(textures[nonuniformEXT(pc.tex)], 0));
-        float h = tex(pc.tex, uv).a;
+        // parallax and gradient steps in world units (uv per unit from the
+        // derivatives), so any atlas scale looks the same
+        float upw = sqrt(max(dot(dux, dux), dot(duy, duy)) / max(max(dot(dpx, dpx), dot(dpy, dpy)), 1e-12));
+        vec2 uv = i_uv - vts * h0 * 4.0 * upw;
+        vec2 ts = vec2(max(1.6 * upw, 1.0 / float(textureSize(textures[nonuniformEXT(pc.tex)], 0).x)));
+        vec4 g = tex(pc.tex, uv);
+        float h = g.a;
+        vec3 gc = i_color.rgb * g.rgb;
         float hx = tex(pc.tex, uv + vec2(ts.x, 0.0)).a - tex(pc.tex, uv - vec2(ts.x, 0.0)).a;
         float hy = tex(pc.tex, uv + vec2(0.0, ts.y)).a - tex(pc.tex, uv - vec2(0.0, ts.y)).a;
         vec3 nb = normalize(n - (t * hx + b * hy) * 3.5);
@@ -64,8 +71,8 @@ void main() {
         float fres = pow(1.0 - max(dot(nb, v), 0.0), 3.0);
         float lit = clamp(max(max(i_color.r, i_color.g), i_color.b) * 1.4, 0.3, 1.2);
         float edge = smoothstep(0.03, 0.18, h) * (1.0 - smoothstep(0.18, 0.4, h));
-        vec3 base = i_color.rgb * (0.6 + 0.4 * max(dot(nb, l1), 0.0)) * mix(0.75, 1.2, h) * (1.0 - 0.35 * edge);
-        vec3 col = base + vec3(s1 * 0.7 + s2 * 0.45) * lit + i_color.rgb * fres * 0.6;
+        vec3 base = gc * (0.6 + 0.4 * max(dot(nb, l1), 0.0)) * mix(0.75, 1.2, h) * (1.0 - 0.35 * edge);
+        vec3 col = base + vec3(s1 * 0.7 + s2 * 0.45) * lit + gc * fres * 0.6;
         c = vec4(col, smoothstep(0.0, 0.08, h) * i_color.a);
     } else {
         c = tex(pc.tex, i_uv) * i_color;

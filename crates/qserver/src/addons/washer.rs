@@ -1,9 +1,10 @@
-//! Powerwasher: a water cannon. Fire shoots a tight jet, alt-fire a wide
-//! fan of five shorter jets. Each jet is a sagging arc traced in short
-//! segments from the muzzle. It pushes back the first monster or player it
-//! hits (no damage), turns projectiles flying near it along the jet, and
-//! washes gel ([`super::gel::Gel::wash`]) off where it hits a wall; clients
-//! wash blood off around the same points.
+//! Powerwasher: a water cannon. Fire shoots a straight, lightning-gun
+//! style jet with a limited reach ([`STREAM`]), alt-fire a wide fan of five
+//! shorter jets. Each jet is traced in short segments from the muzzle. It
+//! pushes back the first monster or player it hits (no damage), turns
+//! projectiles flying near it along the jet, and washes gel
+//! ([`super::gel::Gel::wash`]) off where it hits a wall; clients wash blood
+//! off around the same points.
 //!
 //! While spraying the server sends `//qsp_water owner mode x y z...` every
 //! frame (mode 1 jet, 2 fan; one end point per jet) and
@@ -23,18 +24,15 @@ const MOVETYPE_BOUNCE: i32 = 10;
 const FL_ONGROUND: i32 = 512;
 const SOLID_BSP: f32 = 4.0;
 
-/// One jet: muzzle speed, sag (units/s²), flight time traced, push
-/// acceleration on a target and wash radius at the hit.
+/// One jet: reach, push acceleration on a target and wash radius at the hit.
 #[derive(Clone, Copy, Debug)]
 pub struct Jet {
-    pub speed: f32,
-    pub sag: f32,
-    pub time: f32,
+    pub range: f32,
     pub push: f32,
     pub wash: f32,
 }
-pub const STREAM: Jet = Jet { speed: 1700.0, sag: 500.0, time: 0.45, push: 3200.0, wash: 44.0 };
-pub const FAN: Jet = Jet { speed: 1100.0, sag: 700.0, time: 0.32, push: 1100.0, wash: 40.0 };
+pub const STREAM: Jet = Jet { range: 560.0, push: 3200.0, wash: 44.0 };
+pub const FAN: Jet = Jet { range: 320.0, push: 1100.0, wash: 40.0 };
 /// Fan jets' yaw offsets (degrees).
 pub const FAN_YAW: [f32; 5] = [-14.0, -7.0, 0.0, 7.0, 14.0];
 /// Pushed targets go no faster than this along the jet.
@@ -49,12 +47,9 @@ pub struct Washers {
     mode: Vec<u8>,
 }
 
-/// Points along a jet's arc, from `start` in direction `dir`.
+/// Points along a jet, from `start` in direction `dir` to its reach.
 pub fn arc(start: Vec3, dir: Vec3, jet: Jet) -> [Vec3; STEPS + 1] {
-    std::array::from_fn(|k| {
-        let t = jet.time * k as f32 / STEPS as f32;
-        start + dir * jet.speed * t - Vec3::new(0.0, 0.0, 0.5 * jet.sag * t * t)
-    })
+    std::array::from_fn(|k| start + dir * jet.range * k as f32 / STEPS as f32)
 }
 
 /// Distance from `p` to segment `a`..`b`.
@@ -204,11 +199,10 @@ mod tests {
     use super::*;
 
     #[test]
-    fn jets_sag_and_reach() {
+    fn jets_are_straight_with_limited_reach() {
         let p = arc(Vec3::ZERO, Vec3::new(1.0, 0.0, 0.0), STREAM);
         let end = p[STEPS];
-        assert!(end.x > 700.0 && end.x < 800.0, "{end:?}");
-        assert!(end.z < -40.0 && end.z > -60.0, "{end:?}");
+        assert!((end.x - STREAM.range).abs() < 1e-3 && end.z == 0.0, "{end:?}");
         assert!(seg_dist(Vec3::new(5.0, 3.0, 0.0), Vec3::ZERO, Vec3::new(10.0, 0.0, 0.0)) - 3.0 < 1e-4);
     }
 }

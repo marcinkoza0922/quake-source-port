@@ -1,6 +1,9 @@
-//! Client presentation of the powerwasher: water jets as streams of
-//! glossy droplets (gel-shaded, translucent) arcing from the muzzle to the
-//! end points the server sends every frame, splashes there, the jet hiss
+//! Client presentation of the powerwasher: each jet is a straight,
+//! lightning-gun style column of water from the muzzle to the end point
+//! the server sends every frame (a camera-facing ribbon across the round
+//! dome tile, so the gel shading makes it look cylindrical; its width
+//! ripples along the length and flares at the tip), a few loose droplets
+//! around it, splashes at the end, the jet hiss
 //! loop and splash sounds, and the imported view model. The host also
 //! washes blood marks off around [`WaterFx::wash_points`].
 use super::gel_fx::{DOME, atlas, tile_uv};
@@ -12,9 +15,12 @@ use std::sync::Arc;
 type Geometry = (Vec<FteVertex>, Vec<u32>, Vec<FteBatch>);
 
 const LOOP_CHANNEL: i32 = 7;
-/// Droplets drawn per jet and their size near the muzzle / at the end.
-const DROPS: usize = 180;
-const SIZE: (f32, f32) = (1.3, 4.2);
+/// Ribbon segments per jet, its half width at the muzzle / the end, and
+/// loose droplets around it.
+const SEGMENTS: usize = 40;
+const WIDTH: (f32, f32) = (1.6, 4.5);
+const DROPS: usize = 40;
+const WATER: [u8; 3] = [150, 200, 235];
 pub const WASH_RADIUS: f32 = 44.0;
 
 #[derive(Clone, Debug, Default)]
@@ -162,17 +168,28 @@ impl WaterFx {
                 (Vec3::from(e.origin) + Vec3::new(0.0, 0.0, 16.0), Vec3::ZERO)
             };
             for (k, &end) in j.ends.iter().enumerate() {
+                let fan = if j.mode == 1 { 1.0 } else { 0.7 };
+                // the jet leaves the muzzle along the aim, bending onto the
+                // server's line only over the first few units
                 let len = (end - start).length();
-                // the arc leaves along the aim and sags onto the end point
-                let ctrl = if aim == Vec3::ZERO { (start + end) * 0.5 + Vec3::new(0.0, 0.0, len * 0.08) } else { start + aim * len * 0.5 };
+                let bend = if aim == Vec3::ZERO { (start + end) * 0.5 } else { start + aim * len.min(48.0) };
+                let point = |u: f32| {
+                    let w = (u * len / 48.0).min(1.0);
+                    let near = start * (1.0 - u) + bend * u;
+                    let far = start * (1.0 - u) + end * u;
+                    near * (1.0 - w) + far * w
+                };
+                ribbon(geom, eye, &point, |u| {
+                    let ripple = (u * 37.0 - t * 31.0 + k as f32).sin() * 0.25 + (u * 91.0 - t * 53.0).sin() * 0.15;
+                    let flare = ((u - 0.85) / 0.15).max(0.0) * 1.5;
+                    (WIDTH.0 + (WIDTH.1 - WIDTH.0) * u) * fan * (1.0 + ripple + flare)
+                });
                 for d in 0..DROPS {
                     let h = hash(d as u32 * 7 + k as u32 * 131);
-                    let u = (d as f32 / DROPS as f32 + t * 2.2 + h * 0.03).fract();
-                    let p = start * (1.0 - u).powi(2) + ctrl * 2.0 * u * (1.0 - u) + end * u * u;
-                    let spread = (if j.mode == 1 { 1.0 } else { 2.0 }) * (0.6 + u * u * 6.0);
+                    let u = (d as f32 / DROPS as f32 + t * 3.0 + h * 0.03).fract();
+                    let spread = 2.0 + u * u * 9.0;
                     let jitter = (vr * (hash(d as u32 + 17) - 0.5) + vu * (hash(d as u32 + 29) - 0.5)) * spread;
-                    let size = SIZE.0 + (SIZE.1 - SIZE.0) * u;
-                    drop(geom, p + jitter, vr, vu, size * (0.7 + h * 0.6), 170);
+                    drop(geom, point(u) + jitter, vr, vu, 0.8 + u * 1.4, 150);
                 }
             }
         }
@@ -195,11 +212,34 @@ fn hash(n: u32) -> f32 {
     (x & 0xffff) as f32 / 65535.0
 }
 
+/// A camera-facing strip along `point(0..1)` with half width `width(u)`,
+/// mapped across the middle of the dome tile so it shades as a cylinder.
+fn ribbon(g: &mut Geometry, eye: Vec3, point: &dyn Fn(f32) -> Vec3, width: impl Fn(f32) -> f32) {
+    let base = g.0.len() as u32;
+    for i in 0..=SEGMENTS {
+        let u = i as f32 / SEGMENTS as f32;
+        let p = point(u);
+        let along = point((u + 0.01).min(1.0)) - point((u - 0.01).max(0.0));
+        let side = along.cross(eye - p).normalize();
+        let side = if side.length_sq() > 0.5 { side } else { Vec3::new(0.0, 0.0, 1.0) };
+        let w = width(u);
+        // fade in at the nozzle and out at the tip
+        let a = (u * 12.0).min(1.0) * ((1.0 - u) * 6.0).min(1.0);
+        let color = [WATER[0], WATER[1], WATER[2], (200.0 * a) as u8];
+        g.0.push(FteVertex { pos: (p - side * w).to_array(), uv: tile_uv([0.0, 0.5], DOME), color });
+        g.0.push(FteVertex { pos: (p + side * w).to_array(), uv: tile_uv([1.0, 0.5], DOME), color });
+    }
+    for i in 0..SEGMENTS as u32 {
+        let v = base + i * 2;
+        g.1.extend([v, v + 1, v + 3, v, v + 3, v + 2]);
+    }
+}
+
 /// One glossy water droplet facing the camera.
 fn drop(g: &mut Geometry, c: Vec3, r: Vec3, u: Vec3, s: f32, alpha: u8) {
     let base = g.0.len() as u32;
     for (x, y, uv) in [(-1.0, -1.0, [0.0, 1.0]), (1.0, -1.0, [1.0, 1.0]), (1.0, 1.0, [1.0, 0.0]), (-1.0, 1.0, [0.0, 0.0])] {
-        g.0.push(FteVertex { pos: (c + r * x * s + u * y * s).to_array(), uv: tile_uv(uv, DOME), color: [150, 200, 235, alpha] });
+        g.0.push(FteVertex { pos: (c + r * x * s + u * y * s).to_array(), uv: tile_uv(uv, DOME), color: [WATER[0], WATER[1], WATER[2], alpha] });
     }
     g.1.extend([base, base + 1, base + 2, base, base + 2, base + 3]);
 }

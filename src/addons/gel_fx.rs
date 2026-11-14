@@ -1,5 +1,6 @@
-//! Client presentation of the gel sprayer: splats clipped onto BSP faces
-//! like blood marks, blobs flying (simulated here from the launch the
+//! Client presentation of the gel sprayer: splats merged into one
+//! contiguous coat per surface (`gel_coat.rs`) clipped onto BSP faces like
+//! blood marks, blobs flying (simulated here from the launch the
 //! server sends), all drawn as gel-shaded FTE batches (`FteBatch::gel`:
 //! fte.frag mode 9 turns the atlas alpha into a raised, glossy surface),
 //! plus the synthesised squirts, splats, stretches, boings and zips.
@@ -21,7 +22,9 @@ const BLOB_SIZE: f32 = 4.5;
 /// Sound channel of the spray loop on the owner's entity.
 const LOOP_CHANNEL: i32 = 7;
 
-pub const COLORS: [[f32; 3]; 2] = [[0.14, 0.5, 1.0], [1.0, 0.47, 0.06]];
+pub use super::gel_coat::COLORS;
+/// Seconds between coat rebuilds while splats keep changing.
+const REBUILD: f64 = 0.1;
 
 struct Splat {
     id: u32,
@@ -29,8 +32,6 @@ struct Splat {
     origin: Vec3,
     normal: Vec3,
     radius: f32,
-    /// Clipped polygons (built on first draw) and the light there.
-    patches: Option<(Vec<Vec<mesh::Point>>, f32)>,
 }
 
 struct Blob {
@@ -49,6 +50,12 @@ pub struct GelFx {
     last_splat_sound: f64,
     time: f64,
     pic: Option<PicId>,
+    /// The coat atlas and its polygons (world position, atlas uv, light),
+    /// rebuilt when `dirty` (splats changed).
+    coat_pic: Option<PicId>,
+    coat: Vec<Vec<FteVertex>>,
+    dirty: bool,
+    built: f64,
     cm: Option<(String, qworld::CollisionModel)>,
     rate: u32,
     cues: Vec<Arc<Sfx>>,
@@ -62,6 +69,8 @@ impl GelFx {
     pub fn clear(&mut self) {
         self.splats.clear();
         self.blobs.clear();
+        self.coat.clear();
+        self.dirty = false;
         self.cm = None;
     }
 
@@ -87,6 +96,7 @@ impl GelFx {
             ("c", _) => {
                 self.splats.clear();
                 self.blobs.clear();
+                self.dirty = true;
             }
             ("b", &[o, k, x, y, z, vx, vy, vz]) => {
                 let o = o as usize;
@@ -114,9 +124,13 @@ impl GelFx {
                         self.play(snd, qsound::gel::SPLAT, origin, 0.55);
                     }
                 }
-                self.splats.push(Splat { id: id as u32, kind, origin, normal: Vec3::new(nx, ny, nz), radius: r.clamp(4.0, 128.0), patches: None });
+                self.splats.push(Splat { id: id as u32, kind, origin, normal: Vec3::new(nx, ny, nz), radius: r.clamp(4.0, 128.0) });
+                self.dirty = true;
             }
-            ("d", &[id]) => self.splats.retain(|s| s.id != id as u32),
+            ("d", &[id]) => {
+                self.splats.retain(|s| s.id != id as u32);
+                self.dirty = true;
+            }
             ("s", &[k, x, y, z, speed]) => {
                 let cue = if k == 0.0 {
                     qsound::gel::STRETCH
@@ -158,7 +172,7 @@ impl GelFx {
                 }
             }
         }
-        if self.splats.is_empty() && self.blobs.is_empty() {
+        if self.splats.is_empty() && self.blobs.is_empty() && self.coat.is_empty() && !self.dirty {
             return;
         }
         let Some(bsp) = lv.bsp.as_ref() else { return };
@@ -185,37 +199,26 @@ impl GelFx {
                 p
             }
         };
-        let styles: Vec<i32> = (0..qnet::protocol::MAX_LIGHTSTYLES).map(|i| cl.lightstyle_value(i)).collect();
         let first = geom.1.len() as u32;
-        for s in &mut self.splats {
-            let (patches, light) = s.patches.get_or_insert_with(|| {
-                let mut out = Vec::new();
-                world.decal_polys(0, s.origin, s.radius * 1.5, s.normal, false, &mut |poly| {
-                    if poly.iter().any(|p| (*p - s.origin).dot(s.normal).abs() > 0.5) {
-                        return;
-                    }
-                    let pts = mesh::project_shaped(poly, s.origin, s.normal, s.radius, [(s.id % 17) as f32 * 0.37, 1.0]);
-                    if pts.len() >= 3 {
-                        out.push(pts);
-                    }
-                });
-                let l = r.light_point((s.origin + s.normal * 4.0).to_array(), &styles);
-                (out, ((l[0] + l[1] + l[2]) / 3.0 / 170.0).clamp(0.4, 1.0))
-            });
-            let c = COLORS[s.kind as usize].map(|v| (v * *light * 255.0) as u8);
-            let tile = (s.id % 3) as usize;
-            // later splats sit a hair above older ones
-            let lift = 0.25 + (s.id % 64) as f32 * 0.004;
-            for poly in patches.iter() {
+        if self.dirty && (now - self.built >= REBUILD || now < self.built) {
+            self.dirty = false;
+            self.built = now;
+            rebuild(&self.splats, &mut self.coat, &mut self.coat_pic, cl, &world, r);
+        }
+        if let Some(coat_pic) = self.coat_pic.filter(|_| !self.coat.is_empty()) {
+            for poly in &self.coat {
                 let base = geom.0.len() as u32;
-                for p in poly {
-                    geom.0.push(FteVertex { pos: (p.pos + s.normal * lift).to_array(), uv: tile_uv(p.uv, tile), color: [c[0], c[1], c[2], 245] });
-                }
+                geom.0.extend_from_slice(poly);
                 for i in 1..poly.len() as u32 - 1 {
                     geom.1.extend([base, base + i, base + i + 1]);
                 }
             }
+            let count = geom.1.len() as u32 - first;
+            if count > 0 {
+                geom.2.push(FteBatch { pic: coat_pic, blend: FteBlend::Blend, lines: false, first_index: first, num_indices: count, soft: false, gel: true });
+            }
         }
+        let first = geom.1.len() as u32;
         let (_, vr, vu) = angle_vectors(view.angles.into());
         for b in &self.blobs {
             let c = COLORS[b.kind as usize].map(|v| (v * 255.0) as u8);
@@ -229,6 +232,48 @@ impl GelFx {
         let count = geom.1.len() as u32 - first;
         if count > 0 {
             geom.2.push(FteBatch { pic, blend: FteBlend::Blend, lines: false, first_index: first, num_indices: count, soft: false, gel: true });
+        }
+    }
+}
+
+/// Rebuilds the coat atlas and its clipped polygons from the splats.
+fn rebuild(splats: &[Splat], coat: &mut Vec<Vec<FteVertex>>, coat_pic: &mut Option<PicId>, cl: &qclient::ClientState, world: &BspWorld, r: &mut Renderer) {
+    use super::gel_coat::{Disc, build, group};
+    coat.clear();
+    let discs: Vec<Disc> = splats.iter().map(|s| Disc { kind: s.kind, origin: s.origin, normal: s.normal, radius: s.radius }).collect();
+    let groups = group(&discs);
+    let (clusters, tex) = build(&discs, &groups);
+    let pic = match *coat_pic {
+        Some(p) => r.update_pic(p, &tex).ok().map(|_| p),
+        None => r.register_pic_rgba_linear(super::gel_coat::ATLAS as u32, super::gel_coat::ATLAS as u32, &tex).ok(),
+    };
+    let Some(pic) = pic else { return };
+    *coat_pic = Some(pic);
+    let styles: Vec<i32> = (0..qnet::protocol::MAX_LIGHTSTYLES).map(|i| cl.lightstyle_value(i)).collect();
+    for c in clusters.iter().flatten() {
+        let light = |p: Vec3| {
+            let l = r.light_point((p + c.normal * 4.0).to_array(), &styles);
+            (((l[0] + l[1] + l[2]) / 3.0 / 170.0).clamp(0.4, 1.0) * 255.0) as u8
+        };
+        let mut polys = Vec::new();
+        world.decal_polys(0, c.center, c.half * 1.5, c.normal, false, &mut |poly| {
+            if poly.iter().any(|p| (*p - c.center).dot(c.normal).abs() > 0.5) {
+                return;
+            }
+            let pts = mesh::project_shaped(poly, c.center, c.normal, c.half, [0.0, 1.0]);
+            if pts.len() >= 3 {
+                polys.push(pts);
+            }
+        });
+        for pts in polys {
+            let poly = pts
+                .iter()
+                .map(|p| {
+                    let l = light(p.pos);
+                    FteVertex { pos: (p.pos + c.normal * 0.3).to_array(), uv: c.atlas_uv(p.uv), color: [l, l, l, 245] }
+                })
+                .collect();
+            coat.push(poly);
         }
     }
 }
