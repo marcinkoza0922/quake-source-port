@@ -340,6 +340,7 @@ impl Host {
             soft_particle_distance: if v("r_softparticles") != 0.0 { v("r_softparticledistance").max(0.01) } else { 0.0 },
             ssao: v("r_ssao").max(0.0),
             ssao_radius: v("r_ssao_radius"),
+            edge_blur: if self.bullet_time.active && v("a11y_reducemotion") == 0.0 { 0.65 } else { 0.0 },
             // Reduce Motion turns motion blur off
             motion_blur: if v("a11y_reducemotion") != 0.0 || v("r_motionblur") == 0.0 {
                 0.0

@@ -48,6 +48,7 @@ impl BulletTime {
 
 impl Host {
     pub(super) fn bullet_time_frame(&mut self, dt: f64, playing: bool) {
+        let was_active = self.bullet_time.active;
         let (mut held, mut pressed) = self.input.bullet_time_button();
         for g in &mut self.guests {
             let (h, p) = g.input.bullet_time_button();
@@ -67,6 +68,7 @@ impl Host {
         if !self.bullet_time.visible {
             self.bullet_time.active = false;
             self.bullet_time.latched = false;
+            if was_active { self.local_sound("items/protect3.wav"); }
             return;
         }
         self.bullet_time.update(dt, (held, pressed),
@@ -74,6 +76,13 @@ impl Host {
             self.cv("addon_bullet_time_meter") != 0.0,
             self.cv("addon_bullet_time_duration").clamp(1.0, 60.0) as f64,
             self.cv("addon_bullet_time_regen").clamp(0.1, 10.0) as f64);
+        if self.bullet_time.active != was_active {
+            self.local_sound(if self.bullet_time.active {
+                "items/protect.wav"
+            } else {
+                "items/protect3.wav"
+            });
+        }
     }
 }
 

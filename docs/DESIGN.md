@@ -2,6 +2,11 @@
 
 Living design doc. `PROPOSAL.md` says *what*; this says *how*. Update when decisions change.
 
+Bullet time adds peripheral radial blur even while stationary (keeping the centre
+sharp, sharing the speed-blur shader), respects Reduce Motion, and plays local
+Quake protection pickup/expiration cues on entry/exit.
+Transitions include meter exhaustion and suspension by menus or pause.
+
 Directional damage uses per-player view state and fading red HUD edge bands.
 Gameplay → Directional Damage (`hud_damageindicator`, archived, default 1)
 scales opacity with blood plus armor damage and respects `v_flashscale`.
