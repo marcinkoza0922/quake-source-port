@@ -83,6 +83,7 @@ pub enum Page {
     PortalGun,
     Boomerang,
     Railgun,
+    Washer,
     Hookshot,
     Sticky,
     Goggles,

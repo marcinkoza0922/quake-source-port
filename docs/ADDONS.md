@@ -194,8 +194,9 @@ kills, gibs and mod rules apply. Refire timers live on `Level::rails`
   texels brightened ×1.5; drawn centred with `portal_pose` + recoil.
 - Menu: Add-ons → Railgun toggle (`addon_railgun`) and Railgun Settings
   (Damage slider, Trail Colour); `menu railgun` opens it.
-- Split-screen: `splittoy <2..6> <0..4>` (debug) hands a guest a toy by
-  `Toy::ALL` index, for headless screenshots.
+- Split-screen: `splittoy <2..6> <0..6>` (debug) hands a guest a toy by
+  `Toy::ALL` index, for headless screenshots; `toy <0..6>` does the same
+  for player 1 (e.g. `"+delay 2 toy 5" "+delay 2.1 +attack"` sprays gel).
 - Tests: `crates/qserver/tests/railgun.rs` (e1m1: ammo, refire, dry click).
 ### Hookshot (`qserver::addons::hookshot`, `hook_surface`; `src/addons/hook_fx.rs`)
 Zelda homage. Fire sends a hook head out at 1600 u/s (trace `Normal`, so
@@ -315,6 +316,93 @@ nothing until it is caught.
   (`view_model`, key `@boomerang_view`) is scaled ×0.6 and posed flat face
   to the camera, low right, so it reads as a V in the hand.
 - Audition: `rustc --edition=2024 tools/boomerang_cues.rs -o target/boomerang-cues && target/boomerang-cues target/boomerang-audio` writes the four cues as 48 kHz WAVs.
+### Gel sprayer (`addon_gel`, `addons/gel.rs`, `gel_phys.rs`; `src/addons/gel_fx.rs`)
+Portal 2 homage. Holding fire sprays blue Repulsion gel, alt-fire orange
+Propulsion gel: a blob every 45 ms at 950 u/s (±3.5% spread, plus half the
+shooter's velocity) under `sv_gravity`. Blobs are engine-side (no edicts,
+`MAX_BLOBS` 256) traced as missiles; on world they leave a splat (radius
+26–40) on the face hit; on a monster or mover the gel drips onto the floor
+below; sky fizzles. A new splat replaces same-colour splats on the same
+plane within 0.45 r and other-colour ones within 0.8 r, so colours paint
+over each other. `MAX_SPLATS` 1024, oldest out. No ammo.
+- Repulsion (`gel_phys::after`, after physics with a pre-physics snapshot
+  of walk/step/toss/bounce movers, taken only while blue gel exists): a
+  landing faster than 170 u/s on blue floor goes back up at the landing
+  speed (450–1500); a player jumping off blue gets 680 u/s (≈290 u);
+  running into a blue wall faster than 180 u/s rebounds (95%) with lift.
+  Walking onto it does not bounce. Grenades, gibs, items and monsters
+  bounce too. A player's landing bounces in `gel_phys::land`, right after
+  their own move and before QC `PlayerPostThink`, so PostThink never sees
+  the landing: no fall damage or grunt on blue gel.
+- Propulsion (`gel_phys::tune`, before `client_think`): a player on the
+  ground on orange gets move input and `sv_maxspeed` ×2.6 and friction
+  ×0.1; momentum carries on through the air, plain floor slows it.
+- Footsteps: players on gel moving >60 u/s send step events (blue every
+  ~0.42 s, orange ~0.3 s, scaled by speed).
+- Sync (`//qsp_gel`, reliable stufftext → `ClientEvent::Gel`): `b owner kind
+  pos vel` launch (the client flies the blob itself), `a id kind pos normal r`
+  splat, `d id`, `c` clear + full state on spawn, `s kind pos speed`
+  footstep, `j kind pos speed` bounce. Saves: `gel kind x y z nx ny nz r`
+  header lines. The toy switched off removes all gel.
+- Look: splats merge into one contiguous coat (`src/addons/gel_coat.rs`):
+  splats on the same plane whose discs touch form a cluster; each cluster
+  gets a square field in a 2048² atlas (2 u/texel, coarser if it would
+  exceed 512 texels or the atlas is full; shelf packed) where every splat
+  adds `(1 − d²/r²)²`, so overlaps sum instead of stacking puddles. The edge
+  is where the sum crosses 0.3, roughened by world-space value noise;
+  alpha is the height (steep rim, domed top, slight ripple), RGB the
+  colour of whichever kind dominates (blended at a blue/orange border).
+  The atlas is rebuilt (`update_pic`) at most every 0.1 s while splats
+  change. Each cluster square is clipped to BSP faces like blood marks
+  (`blood::mesh`, faces on the plane) and lit per vertex from the
+  lightmap (`light_point`). The coat and flying blobs are `FteBatch { gel: true }`:
+  fte.frag mode 9 reads the atlas alpha as a height field, builds a
+  tangent frame from screen derivatives, shifts the lookup for parallax,
+  bends the normal by the height gradient and lights it as a thick liquid
+  (two specular highlights, fresnel rim, darker thin edges, brighter thick
+  middle); texture RGB tints the vertex colour (light for the coat, white
+  atlas for sprites). Parallax and gradient steps are in world units
+  (uv-per-unit from derivatives), so any atlas scale shades alike. Atlas
+  (`gel_fx::atlas`, 2×2 tiles of 128²): three metaball splats (unused by
+  the coat) and a dome for blobs, droplets and the washer jet.
+- Sound (`qsound::gel`, synthesised): looping wet spray while blobs fly
+  (owner entity, channel 7), splat, blue footstep = rubber-band stretch
+  squeak gliding up, bounce = spring boing, orange footstep = swept zip in
+  three tiers by speed (>450, >750 u/s brighter and higher).
+- Model: `assets/gel/` from Meshy (nano-banana-pro concept
+  `01a1d71e-09d5-7552-bef1-1f2f2b5f3751`, meshy-t2.5 2,476 tris + meshy-7
+  texture, task `01a1d721-3df9-7197-b9bd-ea79a741f53d`), imported with
+  `tools/import_toy_model.py -- model.glb assets/gel --length 28 --gain
+  0.6`. Saturated blue/orange texels (the canisters) become a true-colour
+  glow layer (`toy_model::gel_glow`), since the palette has no bright blue.
+- Tests: `crates/qserver/tests/gel.rs` (e1m1: spray, save, wash, bounce,
+  no fall damage on blue, orange speed); `gel_coat` unit tests (seams
+  between splats are filled, walls and floors stay separate).
+### Powerwasher (`addon_washer`, `addons/washer.rs`; `src/addons/water_fx.rs`)
+Water cannon, meant to go with the gel sprayer. Fire: one straight,
+lightning-gun style jet reaching 560 u (traced in 12 segments); alt-fire: a
+fan of five straight 320 u jets at −14…14° yaw. No ammo. Per jet each frame: the first
+monster/player/toss object hit is pushed along the jet (3200 u/s² stream,
+1100 fan, × `addon_washer_push` 0.25–3, capped at 650 u/s; a grounded one
+is lifted 110 u/s so step physics slides it; no damage); projectiles
+(flymissile/bounce) within 30 u of the jet are turned towards its direction
+(rockets re-aimed) and become the washer's; where it lands on a wall or
+floor gel within 44 u (+0.6 r) is washed off.
+- Sync: `//qsp_water owner mode x y z…` every frame while spraying (one
+  end per jet), `owner 0` on stop → `ClientEvent::Water`. Not saved.
+- Client: each jet is a solid water column, a camera-facing ribbon (40
+  segments) across the middle row of the dome tile so the gel shader
+  shades it as a cylinder; half width 1.6→4.5 u with travelling ripples
+  and a flare at the tip, fading in at the nozzle and out at the end. It
+  leaves the view model's muzzle along the aim and joins the server's line
+  within 48 u. Plus 40 loose droplets around it, splash droplets, a hiss loop
+  (jet / fan, channel 7), splashes; blood surface marks within 44 u of each
+  end are removed (`Blood::wash`).
+- Model: `assets/washer/` (nano-banana-pro concept
+  `01a1d71e-0b15-7650-b42c-64a73647d9fd`, meshy-t2.5 2,498 tris + meshy-7,
+  task `01a1d721-4189-74a0-b4a3-702bf531235d`), imported with `--length 30
+  --gain 0.6 --flip`.
+- Menu: Add-ons → Gel Sprayer, Powerwasher, Powerwasher Push.
 ### Equipment wheel and goggles (`src/addons/goggles.rs`, `equip_wheel.rs`, `src/host/goggles.rs`)
 Equipment is switched on and off rather than held, so it does not use the
 toy slot. `Equip` lists it in wheel order; items of one group exclude each

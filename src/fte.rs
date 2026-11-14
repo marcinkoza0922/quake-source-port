@@ -385,7 +385,7 @@ impl Fte {
                     lines: b.lines,
                     first_index: b.first_index,
                     num_indices: b.num_indices,
-                    soft: b.soft,
+                    soft: b.soft, gel: false,
                 })
             })
             .collect();

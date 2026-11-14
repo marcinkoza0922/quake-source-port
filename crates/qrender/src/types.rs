@@ -222,6 +222,9 @@ pub struct FteBatch {
     pub num_indices: u32,
     /// Fades out near scene depth when soft particles are on.
     pub soft: bool,
+    /// Gel shading: the texture alpha is a height field lit as a thick,
+    /// glossy liquid (fte.frag mode 9).
+    pub gel: bool,
 }
 
 #[derive(Clone, Copy, Debug)]

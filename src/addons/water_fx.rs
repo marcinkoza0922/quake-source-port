@@ -1,0 +1,260 @@
+//! Client presentation of the powerwasher: each jet is a straight,
+//! lightning-gun style column of water from the muzzle to the end point
+//! the server sends every frame (a camera-facing ribbon across the round
+//! dome tile, so the gel shading makes it look cylindrical; its width
+//! ripples along the length and flares at the tip), a few loose droplets
+//! around it, splashes at the end, the jet hiss
+//! loop and splash sounds, and the imported view model. The host also
+//! washes blood marks off around [`WaterFx::wash_points`].
+use super::gel_fx::{DOME, atlas, tile_uv};
+use qcore::math::{Vec3, angle_vectors};
+use qrender::{FteBatch, FteBlend, FteVertex, PicId, RenderEntity, Renderer, View};
+use qsound::{Sfx, SoundEvent, SoundSystem};
+use std::sync::Arc;
+
+type Geometry = (Vec<FteVertex>, Vec<u32>, Vec<FteBatch>);
+
+const LOOP_CHANNEL: i32 = 7;
+/// Ribbon segments per jet, its half width at the muzzle / the end, and
+/// loose droplets around it.
+const SEGMENTS: usize = 40;
+const WIDTH: (f32, f32) = (1.6, 4.5);
+const DROPS: usize = 40;
+const WATER: [u8; 3] = [150, 200, 235];
+pub const WASH_RADIUS: f32 = 44.0;
+
+#[derive(Clone, Debug, Default)]
+struct Jet {
+    mode: u8,
+    ends: Vec<Vec3>,
+    seen: f64,
+}
+
+struct Splash {
+    pos: Vec3,
+    vel: Vec3,
+    born: f64,
+}
+
+#[derive(Default)]
+pub struct WaterFx {
+    jets: Vec<Jet>,
+    splashes: Vec<Splash>,
+    last_splash_sound: f64,
+    seed: u32,
+    time: f64,
+    pic: Option<PicId>,
+    rate: u32,
+    cues: Vec<Arc<Sfx>>,
+}
+
+impl WaterFx {
+    pub fn clear(&mut self) {
+        self.jets.clear();
+        self.splashes.clear();
+    }
+
+    fn random(&mut self) -> f32 {
+        self.seed = self.seed.wrapping_mul(1_664_525).wrapping_add(1_013_904_223);
+        (self.seed >> 8) as f32 / 16_777_216.0
+    }
+
+    fn cue(&mut self, snd: &SoundSystem, k: usize) -> Arc<Sfx> {
+        if self.rate != snd.rate() || self.cues.is_empty() {
+            self.rate = snd.rate();
+            self.cues = (0..qsound::gel::COUNT).map(|k| Arc::new(qsound::gel::render(k, snd.rate()))).collect();
+        }
+        self.cues[k].clone()
+    }
+
+    /// One `//qsp_water owner mode [x y z]...` line (without the prefix).
+    pub fn receive(&mut self, line: &str, time: f64, snd: Option<&SoundSystem>) {
+        let n: Vec<f32> = line.split_whitespace().filter_map(|w| w.parse().ok()).filter(|v: &f32| v.is_finite()).collect();
+        let (Some(&o), Some(&mode)) = (n.first(), n.get(1)) else { return };
+        let o = (o as usize).min(63);
+        if self.jets.len() <= o {
+            self.jets.resize(o + 1, Jet::default());
+        }
+        let mode = mode as u8;
+        let before = self.jets[o].mode;
+        let ends: Vec<Vec3> = n[2..].as_chunks::<3>().0.iter().map(|c| Vec3::new(c[0], c[1], c[2])).take(8).collect();
+        if let Some(snd) = snd
+            && before != mode
+        {
+            let entity = o as i32 + 1;
+            if mode == 0 {
+                snd.event(SoundEvent::Stop { entity, channel: LOOP_CHANNEL });
+            } else {
+                let sfx = self.cue(snd, if mode == 1 { qsound::gel::JET } else { qsound::gel::FAN });
+                let origin = ends.first().map_or([0.0; 3], |e| e.to_array());
+                snd.event(SoundEvent::Start { entity, channel: LOOP_CHANNEL, sfx, origin, volume: 0.55, attenuation: 1.2 });
+            }
+        }
+        if let (Some(snd), Some(&e)) = (snd, ends.first())
+            && time - self.last_splash_sound > 0.22
+        {
+            self.last_splash_sound = time;
+            let sfx = self.cue(snd, qsound::gel::SPLASH);
+            snd.event(SoundEvent::Start { entity: -1, channel: 0, sfx, origin: e.to_array(), volume: 0.5, attenuation: 1.2 });
+        }
+        for &e in &ends {
+            for _ in 0..2 {
+                let v = Vec3::new(self.random() - 0.5, self.random() - 0.5, self.random() * 0.8 + 0.2) * 260.0;
+                if self.splashes.len() < 400 {
+                    self.splashes.push(Splash { pos: e, vel: v, born: time });
+                }
+            }
+        }
+        self.jets[o] = Jet { mode, ends, seen: time };
+    }
+
+    /// Where water lands this frame (to wash blood off).
+    pub fn wash_points(&self, time: f64) -> impl Iterator<Item = Vec3> + '_ {
+        self.jets.iter().filter(move |j| j.mode != 0 && time - j.seen < 0.2).flat_map(|j| j.ends.iter().copied())
+    }
+
+    /// Player `owner` is spraying now.
+    pub fn spraying(&self, owner: usize, time: f64) -> bool {
+        self.jets.get(owner).is_some_and(|j| j.mode != 0 && time - j.seen < 0.2)
+    }
+
+    pub fn weapon(&self, owner: usize, time: f64, view: View, lv: &mut crate::assets::Level, fs: &qcore::fs::Fs, r: &mut Renderer) -> Option<RenderEntity> {
+        let id = super::toy_model::get("@powerwasher", include_bytes!("../../assets/washer/model.mdl.zlib"), include_bytes!("../../assets/washer/texture.rgb.zlib"), false, lv, fs, r)?;
+        let shake = if self.spraying(owner, time) { (time as f32 * 70.0).sin() * 0.3 - 0.8 } else { 0.0 };
+        let bob = (time as f32 * 2.5).sin() * 0.15;
+        let (f, _, u) = angle_vectors(view.angles.into());
+        let origin = (Vec3::from(view.origin) + f * (24.0 + shake) - u * (17.0 + bob)).to_array();
+        let angles = [-view.angles[0], view.angles[1], view.angles[2]];
+        Some(RenderEntity { model: id, origin, angles, viewmodel: true, ..Default::default() })
+    }
+
+    /// Droplet streams and splashes. `me` is the local player (0-based),
+    /// whose jets leave the view model's muzzle.
+    pub fn frame(&mut self, cl: &qclient::ClientState, me: usize, view: &View, gravity: f32, r: &mut Renderer, geom: &mut Geometry) {
+        let dt = (cl.time - self.time).clamp(0.0, 0.1) as f32;
+        self.time = cl.time;
+        let now = cl.time;
+        for j in &mut self.jets {
+            // the server stops sending when a player leaves mid-spray
+            if j.mode != 0 && now - j.seen > 0.5 {
+                j.mode = 0;
+            }
+        }
+        self.splashes.retain_mut(|s| {
+            s.vel.z -= gravity * dt;
+            s.pos += s.vel * dt;
+            now - s.born < 0.45
+        });
+        if self.splashes.is_empty() && self.jets.iter().all(|j| j.mode == 0) {
+            return;
+        }
+        let pic = match self.pic {
+            Some(p) => p,
+            None => {
+                let Ok(p) = r.register_pic_rgba_linear(256, 256, &atlas()) else { return };
+                self.pic = Some(p);
+                p
+            }
+        };
+        let (vf, vr, vu) = angle_vectors(view.angles.into());
+        let eye = Vec3::from(view.origin);
+        let first = geom.1.len() as u32;
+        let t = now as f32;
+        for (o, j) in self.jets.iter().enumerate().filter(|(_, j)| j.mode != 0) {
+            let (start, aim) = if o == me {
+                (eye + vf * 34.0 - vu * 9.0, vf)
+            } else {
+                let Some(e) = cl.entities.get(o + 1) else { continue };
+                (Vec3::from(e.origin) + Vec3::new(0.0, 0.0, 16.0), Vec3::ZERO)
+            };
+            for (k, &end) in j.ends.iter().enumerate() {
+                let fan = if j.mode == 1 { 1.0 } else { 0.7 };
+                // the jet leaves the muzzle along the aim, bending onto the
+                // server's line only over the first few units
+                let len = (end - start).length();
+                let bend = if aim == Vec3::ZERO { (start + end) * 0.5 } else { start + aim * len.min(48.0) };
+                let point = |u: f32| {
+                    let w = (u * len / 48.0).min(1.0);
+                    let near = start * (1.0 - u) + bend * u;
+                    let far = start * (1.0 - u) + end * u;
+                    near * (1.0 - w) + far * w
+                };
+                ribbon(geom, eye, &point, |u| {
+                    let ripple = (u * 37.0 - t * 31.0 + k as f32).sin() * 0.25 + (u * 91.0 - t * 53.0).sin() * 0.15;
+                    let flare = ((u - 0.85) / 0.15).max(0.0) * 1.5;
+                    (WIDTH.0 + (WIDTH.1 - WIDTH.0) * u) * fan * (1.0 + ripple + flare)
+                });
+                for d in 0..DROPS {
+                    let h = hash(d as u32 * 7 + k as u32 * 131);
+                    let u = (d as f32 / DROPS as f32 + t * 3.0 + h * 0.03).fract();
+                    let spread = 2.0 + u * u * 9.0;
+                    let jitter = (vr * (hash(d as u32 + 17) - 0.5) + vu * (hash(d as u32 + 29) - 0.5)) * spread;
+                    drop(geom, point(u) + jitter, vr, vu, 0.8 + u * 1.4, 150);
+                }
+            }
+        }
+        for s in &self.splashes {
+            let age = ((now - s.born) / 0.45) as f32;
+            drop(geom, s.pos, vr, vu, 1.6 + age * 1.5, ((1.0 - age) * 170.0) as u8);
+        }
+        let count = geom.1.len() as u32 - first;
+        if count > 0 {
+            geom.2.push(FteBatch { pic, blend: FteBlend::Blend, lines: false, first_index: first, num_indices: count, soft: false, gel: true });
+        }
+    }
+}
+
+fn hash(n: u32) -> f32 {
+    let mut x = n.wrapping_mul(0x9e37_79b9) ^ 0x5bd1_e995;
+    x ^= x >> 15;
+    x = x.wrapping_mul(0x2c1b_3c6d);
+    x ^= x >> 12;
+    (x & 0xffff) as f32 / 65535.0
+}
+
+/// A camera-facing strip along `point(0..1)` with half width `width(u)`,
+/// mapped across the middle of the dome tile so it shades as a cylinder.
+fn ribbon(g: &mut Geometry, eye: Vec3, point: &dyn Fn(f32) -> Vec3, width: impl Fn(f32) -> f32) {
+    let base = g.0.len() as u32;
+    for i in 0..=SEGMENTS {
+        let u = i as f32 / SEGMENTS as f32;
+        let p = point(u);
+        let along = point((u + 0.01).min(1.0)) - point((u - 0.01).max(0.0));
+        let side = along.cross(eye - p).normalize();
+        let side = if side.length_sq() > 0.5 { side } else { Vec3::new(0.0, 0.0, 1.0) };
+        let w = width(u);
+        // fade in at the nozzle and out at the tip
+        let a = (u * 12.0).min(1.0) * ((1.0 - u) * 6.0).min(1.0);
+        let color = [WATER[0], WATER[1], WATER[2], (200.0 * a) as u8];
+        g.0.push(FteVertex { pos: (p - side * w).to_array(), uv: tile_uv([0.0, 0.5], DOME), color });
+        g.0.push(FteVertex { pos: (p + side * w).to_array(), uv: tile_uv([1.0, 0.5], DOME), color });
+    }
+    for i in 0..SEGMENTS as u32 {
+        let v = base + i * 2;
+        g.1.extend([v, v + 1, v + 3, v, v + 3, v + 2]);
+    }
+}
+
+/// One glossy water droplet facing the camera.
+fn drop(g: &mut Geometry, c: Vec3, r: Vec3, u: Vec3, s: f32, alpha: u8) {
+    let base = g.0.len() as u32;
+    for (x, y, uv) in [(-1.0, -1.0, [0.0, 1.0]), (1.0, -1.0, [1.0, 1.0]), (1.0, 1.0, [1.0, 0.0]), (-1.0, 1.0, [0.0, 0.0])] {
+        g.0.push(FteVertex { pos: (c + r * x * s + u * y * s).to_array(), uv: tile_uv(uv, DOME), color: [WATER[0], WATER[1], WATER[2], alpha] });
+    }
+    g.1.extend([base, base + 1, base + 2, base, base + 2, base + 3]);
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn water_lines_track_jets() {
+        let mut w = WaterFx::default();
+        w.receive("0 2 1 2 3 4 5 6", 1.0, None);
+        assert_eq!(w.wash_points(1.0).count(), 2);
+        assert!(w.spraying(0, 1.05));
+        w.receive("0 0", 1.1, None);
+        assert_eq!(w.wash_points(1.1).count(), 0);
+    }
+}

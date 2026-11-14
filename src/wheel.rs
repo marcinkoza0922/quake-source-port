@@ -159,7 +159,7 @@ mod tests {
         for slot in [1, 6, 9, 10] {
             for toy in Toy::ALL { cv.set(toy.slot_cvar(), &slot.to_string()); }
             let entries = inventory(&cv, &Toy::ALL);
-            assert_eq!(entries.len(), 13);
+            assert_eq!(entries.len(), 8 + Toy::ALL.len());
             assert!(entries.windows(2).all(|w| w[0].slot <= w[1].slot));
             let mut cl = ClientState::default();
             cl.items = 4096 | 1 | 16;

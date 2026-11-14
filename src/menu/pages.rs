@@ -116,6 +116,9 @@ pub(super) const ADDONS: &[Item] = &[
     Item::Sub { label: "Hookshot Settings", page: Page::Hookshot },
     toggle("Railgun", "addon_railgun"),
     Item::Sub { label: "Railgun Settings", page: Page::Railgun },
+    toggle("Gel Sprayer", "addon_gel"),
+    toggle("Powerwasher", "addon_washer"),
+    Item::Sub { label: "Powerwasher Settings", page: Page::Washer },
     toggle("Goggles", "addon_goggles"),
     Item::Sub { label: "Goggles Settings", page: Page::Goggles },
 ];
@@ -131,6 +134,9 @@ pub(super) const NEW_GAME_ADDONS: &[Item] = &[
     Item::Sub { label: "Hookshot Settings", page: Page::Hookshot },
     toggle("Railgun", "addon_railgun"),
     Item::Sub { label: "Railgun Settings", page: Page::Railgun },
+    toggle("Gel Sprayer", "addon_gel"),
+    toggle("Powerwasher", "addon_washer"),
+    Item::Sub { label: "Powerwasher Settings", page: Page::Washer },
     toggle("Goggles", "addon_goggles"),
     Item::Sub { label: "Goggles Settings", page: Page::Goggles },
     Item::Run { label: "Start New Game", run: Run::NewGame },
@@ -148,6 +154,8 @@ pub(super) const BOOMERANG: &[Item] = &[
     slider("Stun Duration", "addon_boomerang_stun", 1.0, 10.0, 0.5),
     slider("Flight Speed", "addon_boomerang_speed", 300.0, 1500.0, 100.0),
 ];
+/// Reached from the Add-ons pages: powerwasher push strength.
+pub(super) const WASHER: &[Item] = &[slider("Push", "addon_washer_push", 0.25, 3.0, 0.25)];
 /// Reached from the Add-ons pages: railgun damage and trail colour.
 pub(super) const RAILGUN: &[Item] = &[
     slider("Damage", "addon_rail_damage", 25.0, 300.0, 25.0),

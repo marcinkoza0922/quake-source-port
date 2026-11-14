@@ -335,7 +335,7 @@ pub(super) fn gun_portal_quad(
         lines: false,
         first_index: first,
         num_indices: 6,
-        soft: false,
+        soft: false, gel: false,
     };
     (crate::pipelines::fte_index(crate::FteBlend::Blend, false), slot, batch, GUN_PORTAL_MODE)
 }

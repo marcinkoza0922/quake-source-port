@@ -1,0 +1,26 @@
+{
+  "source": "model.glb",
+  "source_triangles": 2502,
+  "triangles": 2498,
+  "vertices": 4701,
+  "texture_size": 512,
+  "removed_packed_degenerates": 4,
+  "bounds": [
+    [
+      -15.0,
+      -6.483171463012695,
+      -7.928138732910156
+    ],
+    [
+      15.0,
+      6.483171463012695,
+      7.928138732910156
+    ]
+  ],
+  "glow_texels": 0,
+  "length": 30.0,
+  "anchor": "bbox",
+  "flip": true,
+  "flat": false,
+  "gain": 0.6
+}

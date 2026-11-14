@@ -6,6 +6,10 @@ mod hook_model;
 pub mod boomerang_fx;
 mod boomerang_model;
 pub mod equip_wheel;
+pub mod gel_coat;
+pub mod gel_fx;
+mod toy_model;
+pub mod water_fx;
 pub mod goggles;
 pub mod portal_draw;
 pub mod portal_fx;
@@ -263,7 +267,7 @@ mod tests {
             (12, forward[..7].iter().rev().copied().chain([(1, None)]).collect())] {
             for (sent, held) in expected {
                 let mut impulse = direction;
-                assert_eq!(s.update_slots(&cv, &Toy::ALL, (0, &mut impulse), &cl), held);
+                assert_eq!(s.update_slots(&cv, &Toy::ALL[..5], (0, &mut impulse), &cl), held);
                 assert_eq!(impulse, sent);
             }
         }
