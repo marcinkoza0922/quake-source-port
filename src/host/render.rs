@@ -143,6 +143,10 @@ impl Host {
                 &self.server.core.fs, &mut self.r, &ents, &dyn_verts,
                 v.origin.into(), &self.debris, &mut fte,
             );
+            self.hitfx.frame(
+                &self.server.core.cvars, &self.cl, &self.level, &self.server.core.fs,
+                &mut self.r, v, &self.debris, &mut fte,
+            );
             self.impacts.frame(
                 &self.server.core.cvars, &self.cl, &self.level, &self.server.core.fs,
                 &mut self.r, &mut ents, &dyn_verts, v.origin.into(), &self.debris, &mut fte,

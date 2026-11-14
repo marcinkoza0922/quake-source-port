@@ -507,3 +507,9 @@ and explicit cosmetic dismemberments, launch 48 + 12×amount droplets at
 Enhancements → Impact Effects toggles, clipped bullet/scorch marks and embedded/bouncing
 nails are implemented in `src/impacts.rs` and `src/impacts/`; see
 [IMPACTS.md](IMPACTS.md) for ownership, material heuristics and diagnostics.
+Surface hit effects (`src/hitfx.rs`, `src/hitfx/`): `r_impact_fx` 0 off, 1 subtle (default),
+2 normal, 3 intense, 4 spectacle, on the Impact Effects page. Each bullet/nail impact (and the
+nearest surface to an explosion, from normal up) is classified by texture name into metal
+(sparks, flash), stone (chips, dust), wood (splinters), dirt (clods), water/slime (droplets,
+mist), lava (embers, smoke) or sky (nothing); chips and dust are tinted with the texture's
+average colour. Own client-side simulation with bouncing fragments, drawn as FTE batches.

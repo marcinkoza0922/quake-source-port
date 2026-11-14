@@ -63,6 +63,7 @@ pub(super) fn tooltip(item: Item) -> Option<&'static str> {
         "r_debris_maxragdolls" => "How many ragdolls can lie around at once",
         "r_debris_gibs" => "Gibs and heads tumble and bounce; blasts can gib ragdolls",
         "r_debris_shrapnel" => "Exploding boxes throw metal shards",
+        "r_impact_fx" => "Sparks, smoke, chips, splinters and splashes fly off whatever your shots hit",
         "r_impact_bullets" => "Shotgun hits leave small surface marks (cosmetic only)",
         "r_impact_nails" => "Nails stick to wood and bodies; hard surfaces deflect them to the floor",
         "r_impact_scorches" => "Explosions scorch nearby solid surfaces",
