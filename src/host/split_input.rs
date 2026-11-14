@@ -193,7 +193,7 @@ impl Host {
             let mut fresh = inp.impulse;
             let alive = g.cl.stats[qnet::protocol::STAT_HEALTH] > 0;
             let allowed = in_game && alive && g.cl.intermission == 0 && !demo;
-            let choice = g.wheel.update(g.input.wheel_held(), allowed, g.input.wheel_aim, &g.cl, &entries, g.toy.held);
+            let choice = g.wheel.update(ft, g.input.wheel_held(), allowed, g.input.wheel_aim, &g.cl, &entries, g.toy.held);
             g.toy.update_slots(cvars, &toys, (inp.weapon_slot, &mut fresh), &g.cl);
             if let Some(weapon) = choice {
                 g.toy.select(weapon, &g.cl, &mut fresh);

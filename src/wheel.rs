@@ -20,7 +20,17 @@ pub struct Wheel {
     pub sel: Option<usize>,
     entries: Vec<Entry>,
     held_addon: Option<qserver::addons::Toy>,
+    /// Button is down but the wheel has not opened yet (a possible tap).
+    pending: bool,
+    held_for: f32,
+    current: Option<Weapon>,
+    /// The weapon used before the current one; a tap switches back to it.
+    last: Option<Weapon>,
 }
+
+/// Seconds the button must be held before the wheel opens; a shorter press
+/// is a quick switch to the previous weapon.
+pub const HOLD_TIME: f32 = 0.2;
 
 /// Slot index for a direction (+y down), 0 at the top, clockwise.
 pub fn sector(aim: [f32; 2], count: usize) -> Option<usize> {
@@ -33,21 +43,35 @@ pub fn sector(aim: [f32; 2], count: usize) -> Option<usize> {
 }
 
 impl Wheel {
-    /// Advance one frame. `held` is the wheel button, `allowed` whether the
-    /// player can switch now (in game, alive). Returns the exact weapon
-    /// when the wheel closes on a usable weapon other than the current one.
+    /// Advance one frame of `dt` seconds. `held` is the wheel button,
+    /// `allowed` whether the player can switch now (in game, alive). A tap
+    /// returns the previous weapon; holding opens the wheel, and releasing
+    /// it returns the exact weapon chosen when usable and not current.
     #[allow(clippy::too_many_arguments)]
-    pub fn update(&mut self, held: bool, allowed: bool, aim: [f32; 2], cl: &ClientState,
+    pub fn update(&mut self, dt: f32, held: bool, allowed: bool, aim: [f32; 2], cl: &ClientState,
         entries: &[Entry], held_addon: Option<qserver::addons::Toy>) -> Option<Weapon> {
         if !allowed {
-            *self = Self::default();
+            *self = Self { current: self.current, last: self.last, ..Self::default() };
             return None;
+        }
+        let now = entries.iter().find(|s| s.active(cl, held_addon)).map(|e| e.weapon);
+        if now.is_some() && now != self.current {
+            if self.current.is_some() { self.last = self.current; }
+            self.current = now;
         }
         if self.entries != entries { self.sel = None; }
         self.entries = entries.to_vec();
         self.held_addon = held_addon;
         if held {
             if !self.open {
+                if !self.pending {
+                    self.pending = true;
+                    self.held_for = 0.0;
+                }
+                self.held_for += dt;
+                if self.held_for < HOLD_TIME {
+                    return None;
+                }
                 self.open = true;
                 self.sel = entries.iter().position(|s| s.active(cl, held_addon));
             }
@@ -57,8 +81,13 @@ impl Wheel {
             return None;
         }
         if !self.open {
-            return None;
+            if !std::mem::take(&mut self.pending) {
+                return None;
+            }
+            let entry = entries.iter().find(|e| Some(e.weapon) == self.last)?;
+            return (entry.usable(cl) && !entry.active(cl, held_addon)).then_some(entry.weapon);
         }
+        self.pending = false;
         self.open = false;
         let i = self.sel.take()?;
         let entry = entries.get(i)?;
@@ -172,8 +201,8 @@ mod tests {
                 let aim = [angle.sin(), -angle.cos()];
                 assert_eq!(sector(aim, entries.len()), Some(i));
                 let mut wheel = Wheel::default();
-                wheel.update(true, true, aim, &cl, &entries, None);
-                let choice = wheel.update(false, true, [0.0; 2], &cl, &entries, None).unwrap();
+                wheel.update(1.0, true, true, aim, &cl, &entries, None);
+                let choice = wheel.update(0.0, false, true, [0.0; 2], &cl, &entries, None).unwrap();
                 assert_eq!(choice, Weapon::Addon(toy));
                 let mut selection = crate::addons::WeaponSelection::default();
                 let mut impulse = 6;
@@ -188,6 +217,35 @@ mod tests {
     }
 
     #[test]
+    fn tap_switches_to_last_weapon_hold_opens_wheel() {
+        let mut cl = ClientState::default();
+        cl.items = 4096 | 1 | 32;
+        cl.stats[STAT_ROCKETS] = 5;
+        cl.stats[STAT_SHELLS] = 5;
+        let entries = inventory(&qcore::cvar::Cvars::new(), &[]);
+        let mut w = Wheel::default();
+        cl.stats[STAT_ACTIVEWEAPON] = 1;
+        w.update(0.0, false, true, [0.0; 2], &cl, &entries, None);
+        cl.stats[STAT_ACTIVEWEAPON] = 32;
+        w.update(0.0, false, true, [0.0; 2], &cl, &entries, None);
+        // quick tap: no wheel, back to the axe
+        assert_eq!(w.update(0.05, true, true, [0.0; 2], &cl, &entries, None), None);
+        assert!(!w.open);
+        assert_eq!(w.update(0.05, false, true, [0.0; 2], &cl, &entries, None), Some(Weapon::Stock(2)));
+        // tapping again with the axe active returns to the rocket launcher
+        cl.stats[STAT_ACTIVEWEAPON] = 1;
+        w.update(0.0, false, true, [0.0; 2], &cl, &entries, None);
+        w.update(0.05, true, true, [0.0; 2], &cl, &entries, None);
+        assert_eq!(w.update(0.05, false, true, [0.0; 2], &cl, &entries, None), Some(Weapon::Stock(7)));
+        // hold: wheel opens, release without moving selects nothing new
+        w.update(0.1, true, true, [0.0; 2], &cl, &entries, None);
+        assert!(!w.open);
+        w.update(0.15, true, true, [0.0; 2], &cl, &entries, None);
+        assert!(w.open);
+        assert_eq!(w.update(0.0, false, true, [0.0; 2], &cl, &entries, None), None);
+    }
+
+    #[test]
     fn release_switches_to_owned_weapon() {
         let mut cl = ClientState::default();
         cl.items = 4096 | 1 | 32;
@@ -195,15 +253,15 @@ mod tests {
         cl.stats[STAT_ROCKETS] = 5;
         let entries = inventory(&qcore::cvar::Cvars::new(), &[]);
         let mut w = Wheel::default();
-        assert_eq!(w.update(true, true, [0.0; 2], &cl, &entries, None), None);
+        assert_eq!(w.update(1.0, true, true, [0.0; 2], &cl, &entries, None), None);
         assert_eq!(w.sel, Some(1));
-        w.update(true, true, [-1.0, 0.0], &cl, &entries, None); // rocket launcher (left)
-        assert_eq!(w.update(false, true, [0.0; 2], &cl, &entries, None), Some(Weapon::Stock(7)));
+        w.update(1.0, true, true, [-1.0, 0.0], &cl, &entries, None); // rocket launcher (left)
+        assert_eq!(w.update(0.0, false, true, [0.0; 2], &cl, &entries, None), Some(Weapon::Stock(7)));
         // not owned: nothing
-        w.update(true, true, [0.0, 1.0], &cl, &entries, None);
-        assert_eq!(w.update(false, true, [0.0; 2], &cl, &entries, None), None);
+        w.update(1.0, true, true, [0.0, 1.0], &cl, &entries, None);
+        assert_eq!(w.update(0.0, false, true, [0.0; 2], &cl, &entries, None), None);
         // current weapon: nothing
-        w.update(true, true, [0.0; 2], &cl, &entries, None);
-        assert_eq!(w.update(false, true, [0.0; 2], &cl, &entries, None), None);
+        w.update(1.0, true, true, [0.0; 2], &cl, &entries, None);
+        assert_eq!(w.update(0.0, false, true, [0.0; 2], &cl, &entries, None), None);
     }
 }
