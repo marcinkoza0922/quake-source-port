@@ -172,7 +172,7 @@ impl Impacts {
             // supplies its own flight line, also allowing contact with ragdolls.
             let mut flights = HashMap::new();
             for (key, e) in cl.active_entities() {
-                if !cl
+                if e.effects & qclient::EF_QSP_PELLET != 0 || !cl
                     .model_name(e.model)
                     .is_some_and(|n| n == "progs/spike.mdl" || n == "progs/s_spike.mdl")
                 {

@@ -221,6 +221,7 @@ pub(super) const COMPAT_CVARS: &[(&str, &str, u32)] = &[
     ("r_impact_fx", "1", CVAR_ARCHIVE),
     ("r_impact_bullets", "0", CVAR_ARCHIVE),
     ("r_impact_nails", "0", CVAR_ARCHIVE),
+    ("r_shotgun_tracers", "0", CVAR_ARCHIVE),
     ("r_impact_scorches", "0", CVAR_ARCHIVE),
     ("r_impact_lifetime", "120", CVAR_ARCHIVE),
     ("r_impact_limit", "512", CVAR_ARCHIVE),

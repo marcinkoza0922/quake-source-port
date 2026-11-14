@@ -7,6 +7,8 @@ use qworld::World;
 use crate::{ents::Ents, server::Core};
 
 const CLASS: &[u8] = b"qsp_shotgun_pellet";
+/// Matches `qclient::EF_QSP_PELLET`; not in the non-QEX effects mask.
+const EF_QSP_PELLET: f32 = 128.0;
 
 pub(crate) fn launch(vm: &mut Vm, c: &mut Core, w: &mut World,
     start: Vec3, end: Vec3, nomonsters: i32, owner: u32) -> Result<bool> {
@@ -24,11 +26,14 @@ pub(crate) fn launch(vm: &mut Vm, c: &mut Core, w: &mut World,
     let e = vm.ed_alloc()?;
     *c.ext(e) = Default::default();
     let class = vm.strings.engine(CLASS);
-    let model_name = vm.strings.engine(b"progs/spike.mdl");
     let f = &c.sv.fields;
     vm.set_ent_i(e, f.classname, class);
+    // The nail model carries the entity to clients; ours hide it for a tracer
+    // (EF_QSP_PELLET), other engines show a nail.
+    let model_name = vm.strings.engine(b"progs/spike.mdl");
     vm.set_ent_i(e, f.model, model_name);
     vm.set_ent_f(e, f.modelindex, model as f32);
+    vm.set_ent_f(e, f.effects, EF_QSP_PELLET);
     vm.set_ent_i(e, f.owner, owner as i32);
     vm.set_ent_f(e, f.movetype, 5.0); // MOVETYPE_FLY: swept point collision, no gravity
     vm.set_ent_f(e, f.solid, 2.0);
@@ -43,6 +48,21 @@ pub(crate) fn launch(vm: &mut Vm, c: &mut Core, w: &mut World,
     vm.set_ent_f(e, f.nextthink, vm.time as f32 + 2048.0 / velocity.length());
     w.link_edict(&mut Ents { vm, c }, e, false);
     Ok(true)
+}
+
+/// spike_touch announces a wall hit as TE_SPIKE (nail tink, nail-sized
+/// hit effects); a pellet reports it as TE_GUNSHOT, like hitscan bullets.
+/// spike_touch only writes svc_temp_entity (23) and TE_SPIKE (0) as bytes.
+pub(crate) fn temp_entity(vm: &Vm, c: &Core, v: i32) -> i32 {
+    const TE_SPIKE: i32 = 0;
+    const TE_GUNSHOT: i32 = 2;
+    let me = vm.self_ent();
+    if v == TE_SPIKE && me > 0 && (me as usize) < vm.num_edicts()
+        && vm.ent_str(me, c.sv.fields.classname).ok() == Some(CLASS) {
+        TE_GUNSHOT
+    } else {
+        v
+    }
 }
 
 /// spike_touch's base 9 damage becomes the shotgun's 4 before QC applies

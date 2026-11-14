@@ -16,15 +16,18 @@ super shotgun and soldier helper. QC still owns ammo, sounds, pellet count,
 quad, animation and firing cadence; the original trace reports no immediate hit.
 
 `qserver::addons::shotgun` creates zero-size MOVETYPE_FLY edicts with the
-precached nail model, owner, `spike_touch` and `SUB_Remove`. FLY sweeps point
+nail model and `effects` 128 (`EF_QSP_PELLET`, outside the non-QEX mask), owner, `spike_touch` and `SUB_Remove`. FLY sweeps point
 collision without the enlarged monster bounds of FLYMISSILE. Only these edicts
 receive a 30000 velocity ceiling in server physics, preserving their direction
 and configured speed without raising `sv_maxvelocity` for other entities.
 Pellets live for the original 2048-unit range divided by speed, then expire.
 The T_Damage hook changes marked pellets' 9 damage to 4 before QC armor/quad,
-pain, kills and hit feedback. Nail impacts and blood use the mod's spike effects.
+pain, kills and hit feedback. Blood uses the mod's spike effects; WriteByte turns spike_touch's TE_SPIKE into
+TE_GUNSHOT when `self` is a pellet, so walls get the hitscan puff, no nail tink.
+Our client hides flagged entities and draws them as streaks (`src/tracers.rs`);
+other engines show a nail.
 Ordinary edict serialization preserves pellets in flight and their attribution.
-Unrecognized mod firing helpers, missing spike callbacks or missing nail models
+Unrecognized mod firing helpers, or missing spike callbacks
 retain their QC behavior rather than failing. Mod-specific extra parameters,
 penetration and nonstandard damage behavior are not replaced generically.
 

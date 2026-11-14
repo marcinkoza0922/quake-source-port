@@ -14,6 +14,7 @@ mod debris;
 mod blood;
 mod hitfx;
 mod impacts;
+mod tracers;
 mod demo;
 mod draw;
 mod font;

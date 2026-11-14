@@ -229,7 +229,7 @@ impl ClientState {
                 Self::reset_trail(&mut self.entities[i]);
             }
             self.entities[i].forcelink = false;
-            if i == self.viewentity {
+            if i == self.viewentity || effects & crate::EF_QSP_PELLET != 0 {
                 continue;
             }
             self.visedicts.push(i);

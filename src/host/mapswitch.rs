@@ -101,6 +101,7 @@ impl Host {
         self.blood.clear();
         self.impacts.clear();
         self.hitfx.clear();
+        self.tracers.clear();
         self.con.print(&format!("loaded {} in {:.2}s\n", self.level.mapname, t0.elapsed().as_secs_f32()));
     }
 }
