@@ -560,6 +560,14 @@ pub(super) fn register_commands(c: &mut Commands<Host>) {
         let map = (a.argc() > 2).then(|| a.argv(2).to_string());
         h.switch_game(a.argv(1), map.as_deref());
     });
+    c.add("bugreport", |h, a| {
+        let text = (1..a.argc()).map(|i| a.argv(i)).collect::<Vec<_>>().join(" ");
+        if text.trim().is_empty() {
+            h.print("bugreport \"description\" : save a report (json, save, config, screenshot) for developers\n");
+            return;
+        }
+        h.bugreport(&text);
+    });
     c.add("save", |h, a| {
         if a.argc() != 2 {
             h.print("save <savename> : save a game\n");

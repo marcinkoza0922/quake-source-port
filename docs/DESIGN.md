@@ -498,3 +498,14 @@ mist), lava (embers, smoke) or sky (nothing); chips and dust are tinted with the
 average colour. Own client-side simulation with bouncing fragments, drawn as FTE batches.
 
 Shotgun tracers (`src/tracers.rs`): projectile pellets (`EF_QSP_PELLET`) are always drawn as thin additive streaks instead of their nail model. `r_shotgun_tracers` (0 default, Graphics → Impacts "Shotgun Tracers") adds hitscan streaks (off while Add-ons projectile shotguns are active, so the two never stack): each `TE_GUNSHOT`, and blood hits during a recent muzzle flash, launches a 56-unit streak at 7000 u/s from `Debris::shot_origin` (skipping the first 40 units) to the impact. Gunshots within 200 units of last frame's pellets are skipped. Streaks widen with distance to stay visible.
+
+## Bug reports (`bugreport`)
+
+Development aid. `bugreport "text"` creates `<bugreport_dir>/<UTC stamp>_<map>/` holding
+`report.json` (text, UTC timestamp, map, viewpos/origin/angles/velocity, a ready
+`setpos` line, stats, skill/mode, gamedirs, cmdline, GPU/OS, last console lines),
+`save.sav`/`save.qsa` (written at that moment, never into the user's save slots or
+autosave rotation), `config.cfg` (bindings + archived cvars as they were) and
+`screenshot.png`. The screenshot is taken on the next rendered frame with the
+console not drawn (`Host::clean_shot`). `bugreport_dir` (archived cvar, no menu row;
+set it by hand in config.cfg) defaults to `<user dir>/bugreports`. Code: `src/host/bugreport.rs`.

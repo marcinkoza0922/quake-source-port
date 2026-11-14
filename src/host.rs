@@ -22,6 +22,7 @@ use crate::menu::{Action, Menu, Screen};
 use crate::platform::HostEvent;
 use crate::view::{ViewCvars, ViewState};
 mod commands;
+mod bugreport;
 use commands::*;
 mod net;
 mod demo;
@@ -143,6 +144,8 @@ pub struct Host {
     menu_touch: Option<touch::MenuTouch>,
     last_cmd: UserCmd,
     screenshot: Option<String>,
+    /// The pending screenshot is drawn without the console (bug reports).
+    clean_shot: bool,
     /// Frame profiler while `prof_start` is recording (tools/qprof).
     prof: Option<prof::Profiler>,
     delayed: Vec<(f64, String)>,
@@ -270,6 +273,7 @@ impl Host {
             menu_touch: None,
             last_cmd: UserCmd::default(),
             screenshot: None,
+            clean_shot: false,
             prof: None,
             delayed: Vec::new(),
             headless: false,
