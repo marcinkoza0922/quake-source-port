@@ -23,6 +23,7 @@ use crate::platform::HostEvent;
 use crate::view::{ViewCvars, ViewState};
 mod commands;
 mod bugreport;
+mod global_cfg;
 use commands::*;
 mod net;
 mod demo;
@@ -206,6 +207,7 @@ impl Host {
         for &(n, d, f) in HOST_CVARS.iter().chain(COMPAT_CVARS).chain(goggles::CVARS) {
             cvars.register(n, d, f);
         }
+        global_cfg::load(&mut cvars);
         let input = Input::new(&mut cvars);
         // everything the options menu edits persists in config.cfg
         for n in crate::menu::option_cvars() {

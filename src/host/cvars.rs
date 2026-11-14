@@ -2,7 +2,6 @@ use super::*;
 
 pub(super) const HOST_CVARS: &[(&str, &str, u32)] = &[
     ("cl_deathaction", "0", CVAR_ARCHIVE),
-    ("bugreport_dir", "", CVAR_ARCHIVE),
     ("sv_autosave", "1", CVAR_ARCHIVE),
     ("sv_autosave_keep", "5", CVAR_ARCHIVE),
     ("sv_autosave_entry", "1", CVAR_ARCHIVE),
