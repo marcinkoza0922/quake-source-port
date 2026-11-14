@@ -22,6 +22,7 @@ impl Renderer {
         time: f64,
         alphas: [f32; 4],
         lm: &mut Vec<u32>,
+        worlds: &mut PortalWorldCache,
     ) -> Vec<PortalDraw> {
         let (Some(v), Some(w)) = (view, self.world.as_mut()) else {
             return Vec::new();
@@ -90,7 +91,7 @@ impl Renderer {
             .filter_map(|(portal, parent, _)| {
                 let ubo = dynw.push(&[0u8; 2048], 256)? as u32;
                 let surfs = w.cpu.portal_surfaces(portal.pvs);
-                let world = build_world_draw(
+                let world = worlds.get_or_build(&surfs, || build_world_draw(
                     w,
                     &mut self.buckets,
                     dynw,
@@ -101,7 +102,7 @@ impl Renderer {
                     1.0,
                     ident(),
                     lm,
-                );
+                ));
                 Some(PortalDraw { portal, world, ubo, parent, fte: Vec::new() })
             })
             .collect()

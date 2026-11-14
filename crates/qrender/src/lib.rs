@@ -10,6 +10,8 @@ mod convert;
 mod frame;
 mod gpu;
 mod pipelines;
+mod projection;
+pub use projection::view_fov_tangents;
 mod slang;
 pub use slang::ShaderParam;
 pub mod types;
@@ -41,6 +43,10 @@ mod settings;
 mod descriptors;
 #[path = "lib/init.rs"]
 mod init;
+#[path = "lib/timing.rs"]
+mod timing;
+pub use timing::GpuViewTiming;
+use timing::{GpuTimes, GPU_STAGES};
 #[path = "lib/resources.rs"]
 mod resources;
 use resources::*;
@@ -271,72 +277,6 @@ impl Renderer {
             .as_ref()
             .and_then(|w| w.cpu.light_point(p, lightstyles))
             .unwrap_or([0.0; 3])
-    }
-}
-
-/// Timestamp queries around each render stage, per frame in flight.
-struct GpuTimes {
-    pool: vk::QueryPool,
-    written: [bool; FRAMES],
-    sum_ns: [f64; GPU_STAGES.len()],
-    frames: u64,
-}
-
-/// Stage names; timestamp k+1 ends stage k (timestamp 0 is the start).
-const GPU_STAGES: [&str; 9] =
-    ["cull", "lightmap", "targets", "world", "models", "translucent", "particles+vm", "post", "ui+present"];
-const GPU_TS: u32 = GPU_STAGES.len() as u32 + 1;
-
-impl Renderer {
-    fn init_gpu_times(&mut self) {
-        if (!self.gpu_times_wanted && std::env::var_os("QSP_GPUTIMES").is_none()) || self.gpu_times.is_some() {
-            return;
-        }
-        let ci = vk::QueryPoolCreateInfo::default()
-            .query_type(vk::QueryType::TIMESTAMP)
-            .query_count(GPU_TS * FRAMES as u32);
-        // SAFETY: valid device.
-        let Ok(pool) = (unsafe { self.gpu.device.create_query_pool(&ci, None) }) else { return };
-        self.gpu_times = Some(GpuTimes { pool, written: [false; FRAMES], sum_ns: [0.0; GPU_STAGES.len()], frames: 0 });
-    }
-
-    /// Accumulates frame `fi`'s timestamps (its fence has been waited on).
-    fn collect_gpu_times(&mut self, fi: usize) {
-        let period = self.gpu.timestamp_period as f64;
-        let Some(t) = &mut self.gpu_times else { return };
-        if !std::mem::take(&mut t.written[fi]) {
-            return;
-        }
-        let mut v = [0u64; GPU_TS as usize];
-        // SAFETY: queries written by a completed submission.
-        let ok = unsafe {
-            self.gpu.device.get_query_pool_results(
-                t.pool,
-                fi as u32 * GPU_TS,
-                &mut v,
-                vk::QueryResultFlags::TYPE_64,
-            )
-        };
-        if ok.is_ok() {
-            for k in 0..GPU_STAGES.len() {
-                t.sum_ns[k] += v[k + 1].saturating_sub(v[k]) as f64 * period;
-            }
-            t.frames += 1;
-        }
-    }
-}
-
-impl Renderer {
-    /// Average µs per GPU stage since the last call, then resets the sums.
-    /// None while timestamps are off.
-    pub fn take_gpu_times(&mut self) -> Option<(u64, Vec<(&'static str, f64)>)> {
-        let t = self.gpu_times.as_mut()?;
-        let n = t.frames.max(1) as f64;
-        let v = GPU_STAGES.iter().enumerate().map(|(k, s)| (*s, t.sum_ns[k] / n / 1000.0)).collect();
-        let frames = t.frames;
-        t.sum_ns = [0.0; GPU_STAGES.len()];
-        t.frames = 0;
-        Some((frames, v))
     }
 }
 

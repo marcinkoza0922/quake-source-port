@@ -206,3 +206,90 @@ fn vertical_culling_keeps_intersecting_quads_at_varied_fovs() {
         }
     }
 }
+
+#[test]
+fn horizontal_culling_keeps_edges_for_rotated_cameras_and_quads() {
+    let mut r = Registry::new();
+    let mut ty = crate::types::PartType::empty("test", "billboard");
+    ty.looks.kind = RenderType::Normal;
+    ty.looks.scalefactor = 1.0;
+    ty.tex = Some(0);
+    r.types.push(ty);
+    let eo = |_| None;
+    for angles in [Vec3::ZERO, Vec3::new(35.0, 123.0, 42.0)] {
+        let (forward, right, up) = qcore::math::angle_vectors(angles);
+        let view = ViewInfo { origin: Vec3::new(100.0, -50.0, 30.0), forward, right, up };
+        for tan in [0.1, 0.75, 1.33, 4.0] {
+            for sign in [-1.0, 1.0] {
+                for angle in [0.0, 0.7] {
+                    for (offset, kept) in [(0.0, true), (1.0, true), (1000.0, false)] {
+                        let mut p = Particle::default();
+                        p.org = view.origin + forward * 100.0 + right * (sign * (100.0 * tan + offset));
+                        p.scale = 8.0;
+                        p.angle = angle;
+                        p.rgba = [1.0; 4];
+                        let mut g = Geometry::new(&r, view, 0.0, &eo);
+                        g.cull_behind = true;
+                        g.horizontal_tan = Some(tan);
+                        g.vertical_tan = Some(0.75);
+                        g.particle(0, &p);
+                        assert_eq!(!g.vertices.is_empty(), kept);
+                        let mut shared = Geometry::new(&r, view, 0.0, &eo);
+                        shared.horizontal_tan = Some(tan);
+                        shared.vertical_tan = Some(0.75);
+                        shared.particle(0, &p);
+                        assert_eq!(shared.vertices.len(), 4);
+                        if kept {
+                            assert_eq!(g.indices, shared.indices);
+                            for (a, b) in g.vertices.iter().zip(&shared.vertices) {
+                                assert_eq!((a.pos, a.uv, a.color), (b.pos, b.uv, b.color));
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+#[test]
+fn recycled_geometry_matches_fresh_after_empty_and_smaller_frames() {
+    let mut r = Registry::new();
+    for blend in [BlendMode::AddA, BlendMode::Blend, BlendMode::Subtract] {
+        let mut ty = crate::types::PartType::empty("test", "recycle");
+        ty.tex = Some(0);
+        ty.looks.kind = RenderType::Normal;
+        ty.looks.blendmode = blend;
+        r.types.push(ty);
+    }
+    let view = ViewInfo {
+        forward: Vec3::new(1.0, 0.0, 0.0),
+        right: Vec3::new(0.0, -1.0, 0.0),
+        up: Vec3::new(0.0, 0.0, 1.0),
+        ..Default::default()
+    };
+    let eo = |_| None;
+    let mut buffers = (Vec::with_capacity(256), Vec::with_capacity(512), Vec::with_capacity(64));
+    let addresses = (buffers.0.as_ptr(), buffers.1.as_ptr(), buffers.2.as_ptr());
+    // Empty frames and changing type/count order must not retain stale batches
+    // or offset the next frame's indices. Stable pass ordering must also match.
+    for types in [&[0, 1, 2, 0][..], &[], &[2], &[1, 0, 1]] {
+        let mut reused = Geometry::new(&r, view, 0.0, &eo);
+        reused.reuse_buffers(buffers.0, buffers.1, buffers.2);
+        let mut fresh = Geometry::new(&r, view, 0.0, &eo);
+        for &ty in types {
+            let mut p = Particle::default();
+            p.org = Vec3::new(100.0, ty as f32, 0.0);
+            p.scale = 8.0;
+            p.rgba = [1.0, 0.5, 0.25, 1.0];
+            reused.particle(ty, &p);
+            fresh.particle(ty, &p);
+        }
+        reused.batches.sort_by_key(|b| blend_pass(b.blend));
+        assert_eq!(reused.vertices, fresh.vertices);
+        assert_eq!(reused.indices, fresh.indices);
+        assert_eq!(reused.batches, fresh.ordered_batches());
+        assert_eq!((reused.vertices.as_ptr(), reused.indices.as_ptr(), reused.batches.as_ptr()), addresses);
+        buffers = (reused.vertices, reused.indices, reused.batches);
+    }
+}

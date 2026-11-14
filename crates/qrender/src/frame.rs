@@ -37,6 +37,9 @@ impl Renderer {
         if self.width == 0 || self.height == 0 {
             return Ok(());
         }
+        if fr.settings.ssao > 0.0 && (fr.view.is_some() || !fr.splits.is_empty()) {
+            self.ensure_ao_source()?;
+        }
         self.prepare_shader()?;
         let dev = self.gpu.device.clone();
         let fi = self.cur;
@@ -49,7 +52,7 @@ impl Renderer {
         // SAFETY: fence owned by this frame.
         unsafe { dev.wait_for_fences(&[fence], true, u64::MAX)? };
         self.fence_wait_ns = wait.elapsed().as_nanos() as u64;
-        self.init_gpu_times();
+        self.init_gpu_times(fr.splits.len().max(1))?;
         self.collect_gpu_times(fi);
         let mut img_idx = 0u32;
         if let (Some(s), Some(f)) = (&self.swap, &self.gpu.swapchain_fn) {
@@ -156,6 +159,7 @@ impl Renderer {
         let mut particle_range: Option<Range> = None;
         let fog = fr.fog;
         let mut passes: Vec<ViewPass> = Vec::with_capacity(views_in.len());
+        let mut portal_worlds = PortalWorldCache::default();
         for (vi, &(view_in, rect, blend)) in views_in.iter().enumerate() {
         let vbit = 1u8 << vi.min(7);
         let mut world_draws: Vec<WorldDraw> = Vec::new();
@@ -168,11 +172,9 @@ impl Renderer {
         // FTE particles: (vertex offset, index offset, batches with texture slots)
         let mut fte: Option<FteDraw> = None;
         // this view's scene region (top-left of the target) and its 3D height
-        let scene_w = ((rect[2] as f32 * sw as f32 / w.max(1) as f32).round() as u32).clamp(1, sw);
-        let scene_h = view_in.map_or(sh, |v| {
-            let px = rect[3].saturating_sub(v.reserve_bottom) as f32 * sh as f32 / h.max(1) as f32;
-            (px.round() as u32).clamp(1, sh)
-        });
+        let (scene_w, scene_h) = crate::projection::view_extent(
+            rect, view_in.map_or(0, |v| v.reserve_bottom), (w, h), (sw, sh),
+        );
         let view = view_in.map(|mut v| {
             if !multi
                 && let (Some(index), Some(distance), Some(w)) =
@@ -185,7 +187,7 @@ impl Renderer {
             setup_view(&v, scene_w, scene_h)
         });
         let mut portal_draws = if fr.settings.teleport_windows || !fr.gun_portals.is_empty() {
-            self.prepare_portals(view.as_ref(), fr.gun_portals, &fr.settings, &mut dynw, time, alphas, &mut lm_vis)
+            self.prepare_portals(view.as_ref(), fr.gun_portals, &fr.settings, &mut dynw, time, alphas, &mut lm_vis, &mut portal_worlds)
         } else {
             Vec::new()
         };
@@ -827,12 +829,13 @@ impl Renderer {
 
         // ---- record ----
         let tsq = self.gpu_times.as_ref().map(|t| t.pool);
+        let ts_stride = self.gpu_times.as_ref().map_or(0, |t| t.stride());
         if let Some(t) = &mut self.gpu_times {
-            t.written[fi] = true;
+            t.written[fi] = passes.len();
         }
-        let ts_base = fi as u32 * GPU_TS;
-        // SAFETY: recording into `cmd`; query index within the pool.
-        let ts = |k: u32| unsafe {
+        let ts_base = fi as u32 * ts_stride;
+        // SAFETY: recording into `cmd`; query index within this frame's pool region.
+        let timestamp = |k: u32| unsafe {
             if let Some(q) = tsq {
                 dev.cmd_write_timestamp(cmd, vk::PipelineStageFlags::BOTTOM_OF_PIPE, q, ts_base + k);
             }
@@ -858,9 +861,8 @@ impl Renderer {
                     .flags(vk::CommandBufferUsageFlags::ONE_TIME_SUBMIT),
             )?;
             if let Some(q) = tsq {
-                dev.cmd_reset_query_pool(cmd, q, ts_base, GPU_TS);
+                dev.cmd_reset_query_pool(cmd, q, ts_base, ts_stride);
             }
-            ts(0);
             // post: gamma/contrast/polyblend to the output
             let (out_img, out_view) = match (&self.swap, &t.out) {
                 (Some(s), _) => (s.images[img_idx as usize], s.views[img_idx as usize]),
@@ -881,7 +883,8 @@ impl Renderer {
             let crng = gpu::range(vk::ImageAspectFlags::COLOR, 1, 1);
             let area = vk::Rect2D { offset: vk::Offset2D::default(), extent: vk::Extent2D { width: w, height: h } };
             for (pi, pass) in passes.iter_mut().enumerate() {
-            let ts = |k: u32| if pi == 0 { ts(k) };
+            let ts = |k: u32| timestamp(pi as u32 * timing::VIEW_TS as u32 + k);
+            if pi == 0 { ts(0); }
             if pi > 0 {
                 // the previous view's draws read the shared targets and cull buffers
                 let mb = [vk::MemoryBarrier::default()
@@ -1114,7 +1117,9 @@ impl Renderer {
             let depth_layout = |old: vk::ImageLayout, new: vk::ImageLayout| {
                 gpu::barrier(&dev, cmd, t.depth.image, drng, old, new);
             };
+            ts(3);
             self.draw_portals(cmd, portal_draws, particles, fte.as_ref().map(|f| (f.0, f.1)), world_draws, alias_draws, fi, [scene_w, scene_h]);
+            ts(4);
             if self.isolated_portal.is_some() && !multi {
                 // Destination draws above retain their scenery and entities. Only
                 // the source sheet survives in the main diagnostic view below.
@@ -1127,7 +1132,6 @@ impl Renderer {
                 fte = None;
             }
             begin(false, !split && !ao_on, false);
-            ts(3);
             let vp_full = vk::Viewport {
                 x: 0.0,
                 y: 0.0,
@@ -1219,7 +1223,7 @@ impl Renderer {
                         );
                     }
                 }
-                ts(4);
+                ts(5);
                 let draw_alias = |a: &AliasDraw, pipe: vk::Pipeline| {
                     let Some(Model::Alias(am)) = self.models.get(a.model).filter(|_| !a.portal_only) else {
                         return;
@@ -1236,7 +1240,7 @@ impl Renderer {
                 {
                     draw_alias(a, p.alias);
                 }
-                ts(5);
+                ts(6);
                 if ao_on && let Some(vs) = &view {
                     // SSAO between the opaque and translucent draws, so water,
                     // particles and the viewmodel are not darkened
@@ -1244,15 +1248,25 @@ impl Renderer {
                     let scene_img = t.color_ms.as_ref().unwrap_or(&t.color);
                     gpu::barrier(&dev, cmd, scene_img.image, crng, vk::ImageLayout::COLOR_ATTACHMENT_OPTIMAL, vk::ImageLayout::SHADER_READ_ONLY_OPTIMAL);
                     depth_layout(vk::ImageLayout::DEPTH_ATTACHMENT_OPTIMAL, vk::ImageLayout::DEPTH_STENCIL_READ_ONLY_OPTIMAL);
+                    let ao_slot = if let Some((source, slot)) = &t.ao_source {
+                        fx_pass(source, [0.0; 4], &|| {
+                            dev.cmd_bind_pipeline(cmd, gfx, p.ao_source);
+                            dev.cmd_draw(cmd, 3, 1, 0, 0);
+                        });
+                        *slot
+                    } else { t.color_slot };
                     fx_pass(&t.ao, [1.0, 0.0, 0.0, 0.0], &|| {
+                        ts(7); // transitions, optional sample-0 snapshot and AO target setup complete
                         dev.cmd_bind_pipeline(cmd, gfx, p.ao);
                         push(bytes_of(&[AoPush {
                             proj: [vs.tan[0], vs.tan[1], samples as f32, st.ssao_radius.clamp(4.0, 256.0)],
-                            size: [scene_w as f32, scene_h as f32, st.ssao.min(4.0), t.color_slot as f32],
+                            size: [scene_w as f32, scene_h as f32, st.ssao.min(4.0), ao_slot as f32],
                         }]));
                         dev.cmd_draw(cmd, 3, 1, 0, 0);
+                        ts(8); // AO generation, before its target becomes shader-readable
                     });
                     gpu::barrier(&dev, cmd, scene_img.image, crng, vk::ImageLayout::SHADER_READ_ONLY_OPTIMAL, vk::ImageLayout::COLOR_ATTACHMENT_OPTIMAL);
+                    ts(9); // AO/scene transitions complete
                     // multiply the blurred AO into the scene colour (all samples)
                     let att = [vk::RenderingAttachmentInfo::default()
                         .image_view(scene_img.view)
@@ -1267,12 +1281,17 @@ impl Renderer {
                     push(bytes_of(&[t.ao_slot]));
                     dev.cmd_draw(cmd, 3, 1, 0, 0);
                     dev.cmd_end_rendering(cmd);
+                    ts(10); // AO application complete
                     depth_layout(vk::ImageLayout::DEPTH_STENCIL_READ_ONLY_OPTIMAL, vk::ImageLayout::DEPTH_ATTACHMENT_OPTIMAL);
                     begin(true, !split, false);
                     dev.cmd_set_viewport(cmd, 0, &[vp_scene]);
                     dev.cmd_set_scissor(cmd, 0, &[area_scene]);
                     dev.cmd_bind_descriptor_sets(cmd, gfx, p.layout, 0, &set, &[ubo_ofs]);
                     dev.cmd_set_depth_bias(cmd, 0.0, 0.0, 0.0);
+                    ts(11); // depth transition and scene rendering resumed
+                } else {
+                    // Every query must be written, including when AO is disabled.
+                    for k in 7..=11 { ts(k); }
                 }
                 // translucent: world liquids first, then sorted entities
                 if let Some(wg) = &self.world {
@@ -1314,7 +1333,7 @@ impl Renderer {
                         }
                     }
                 }
-                ts(6);
+                ts(12);
                 if particles.count > 0 {
                     dev.cmd_bind_pipeline(cmd, gfx, p.particle);
                     dev.cmd_bind_vertex_buffers(cmd, 0, &[dynbuf], &[particles.ofs]);
@@ -1386,9 +1405,12 @@ impl Renderer {
                         );
                     }
                 }
+            } else {
+                // Menu/no-view frames have no world, models, AO or translucency.
+                for k in 5..=12 { ts(k); }
             }
             dev.cmd_end_rendering(cmd);
-            ts(7);
+            ts(13);
             if keep_depth && view.is_some() {
                 // the last scene pass leaves depth read-only only when it was
                 // the soft-particle pass (no viewmodel after it)
@@ -1516,11 +1538,11 @@ impl Renderer {
             if pi + 1 < npasses {
                 dev.cmd_end_rendering(cmd);
             }
+            ts(14);
             }
             let post_area = vk::Rect2D { offset: vk::Offset2D::default(), extent: vk::Extent2D { width: pw, height: ph } };
             let vp_post = vk::Viewport { width: pw as f32, height: ph as f32, ..vp_full };
             dev.cmd_set_scissor(cmd, 0, &[post_area]);
-            ts(8);
             let draw_ui = |vp: vk::Viewport| {
                 if let Some(ofs) = ui_ofs {
                     dev.cmd_set_viewport(cmd, 0, &[vp]);
@@ -1666,7 +1688,7 @@ impl Renderer {
                     &region,
                 );
             }
-            ts(9);
+            timestamp(npasses as u32 * timing::VIEW_TS as u32 + 1);
             dev.end_command_buffer(cmd)?;
 
             let cmds = [cmd];

@@ -2,10 +2,10 @@
 #include "common.glsl"
 // Screen-space ambient occlusion (Alchemy/SAO-style obscurance) from scene
 // depth. Output: r = visibility (1 = unoccluded), g = view-space depth for the
-// depth-aware blur in post.frag.
+// depth-aware blur in aoapply.frag.
 layout(push_constant) uniform P {
     vec4 proj;   // tan half-fov x, y, scene MSAA samples, world radius
-    vec4 size;   // scene viewport w, h, intensity, scene colour texture slot
+    vec4 size;   // scene viewport w, h, intensity, snapshot or scene colour texture slot
 } pc;
 layout(location = 0) out vec4 o_ao;
 
@@ -15,7 +15,7 @@ float linear_depth(float d) {
 }
 float fetch_depth(ivec2 px) {
     px = clamp(px, ivec2(0), ivec2(pc.size.xy) - 1);
-    if (pc.proj.z > 1.0) return texelFetch(scene_depth_ms, px, 0).r;
+    if (pc.proj.z > 1.0) return texelFetch(textures[nonuniformEXT(uint(pc.size.w))], px, 0).r;
     return texelFetch(scene_depth, px, 0).r;
 }
 // View-space position (x right, y down, z forward) of a pixel centre.
@@ -64,8 +64,8 @@ void main() {
     float vis = clamp(1.0 - 1.5 * pc.size.z * occ / float(N), 0.0, 1.0);
     // scene alpha masks AO (0 on sky); fade out with fog so fogged distance
     // isn't darkened toward black
-    float mask = pc.proj.z > 1.0 ? texelFetch(scene_color_ms, px, 0).a
-                                 : texelFetch(textures[nonuniformEXT(uint(pc.size.w))], px, 0).a;
+    float mask = pc.proj.z > 1.0 ? texelFetch(textures[nonuniformEXT(uint(pc.size.w))], px, 0).g
+                               : texelFetch(textures[nonuniformEXT(uint(pc.size.w))], px, 0).a;
     float fz = length(p) * fr.fog.w;
     float fogf = fr.fog.w > 0.0 ? clamp(exp(-fz * fz), 0.0, 1.0) : 1.0;
     vis = mix(1.0, vis, clamp(mask, 0.0, 1.0) * fogf);

@@ -110,14 +110,7 @@ impl Registry {
     }
 }
 
-/// Vertex for the particle pipeline.
-#[repr(C)]
-#[derive(Clone, Copy, Debug, Default, PartialEq)]
-pub struct Vertex {
-    pub pos: [f32; 3],
-    pub uv: [f32; 2],
-    pub color: [u8; 4],
-}
+pub use qcore::vertex::ParticleVertex as Vertex;
 
 /// A run of indices drawn with one texture and blend mode.
 #[derive(Clone, Copy, Debug, PartialEq)]
@@ -159,6 +152,8 @@ pub struct Geometry<'a> {
     pub cull_behind: bool,
     /// Optional tangent of the vertical half-FOV; only used with cull_behind.
     pub vertical_tan: Option<f32>,
+    /// Optional tangent of the horizontal half-FOV; only used with cull_behind.
+    pub horizontal_tan: Option<f32>,
     reg: &'a Registry,
     view: ViewInfo,
     particletime: f32,
@@ -187,6 +182,7 @@ impl<'a> Geometry<'a> {
         Geometry {
             cull_behind: false,
             vertical_tan: None,
+            horizontal_tan: None,
             reg,
             view,
             particletime,
@@ -195,6 +191,16 @@ impl<'a> Geometry<'a> {
             indices: Vec::new(),
             batches: Vec::new(),
         }
+    }
+
+    /// Start with the previous frame's storage, discarding its geometry.
+    pub fn reuse_buffers(&mut self, mut vertices: Vec<Vertex>, mut indices: Vec<u32>, mut batches: Vec<Batch>) {
+        vertices.clear();
+        indices.clear();
+        batches.clear();
+        self.vertices = vertices;
+        self.indices = indices;
+        self.batches = batches;
     }
 
     /// Batches sorted into draw order (stable within each pass).

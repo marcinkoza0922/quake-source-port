@@ -122,7 +122,9 @@ impl Host {
             goggles = self.goggles_render(&mut ents);
             crate::view::particles(&self.cl, &mut parts);
             // Portal and split-screen views reuse geometry from other camera positions.
-            let cull_particles = self.cull_fte_for_view();
+            let cull_particles = self.cull_fte_for_view().then(|| {
+                qrender::view_fov_tangents(v, (w, h), self.cv("r_renderscale"))
+            });
             fte = self.fte.frame(
                 &mut self.cl,
                 self.level.bsp.as_ref(),
@@ -425,6 +427,9 @@ impl Host {
         };
         if let Err(e) = self.r.render(&frame) {
             self.con.print(&format!("render error: {e:?}\n"));
+        }
+        if view.is_some() {
+            self.fte.recycle_geometry(fte);
         }
     }
 }

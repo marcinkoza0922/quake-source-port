@@ -149,6 +149,9 @@ pub struct Fte {
     pub sys: System,
     /// Uploaded textures, by `Registry::textures` index.
     pics: Vec<Option<PicId>>,
+    /// Recycled after rendering, including any appended add-on geometry.
+    geometry: (Vec<FteVertex>, Vec<u32>, Vec<FteBatch>),
+    geometry_batches: Vec<geom::Batch>,
     /// Trail state per entity number.
     trails: HashMap<i32, Option<TrailHandle>>,
     /// Collision model of the current map.
@@ -175,6 +178,8 @@ impl Fte {
             reg: Registry::new(),
             sys: System::default(),
             pics: Vec::new(),
+            geometry: Default::default(),
+            geometry_batches: Vec::new(),
             trails: HashMap::new(),
             cm: None,
             loaded_for: None,
@@ -185,6 +190,14 @@ impl Fte {
             sky_dirty: true,
             sky_models: Default::default(),
         }
+    }
+
+    /// Return storage once the renderer has uploaded this frame's geometry.
+    pub fn recycle_geometry(&mut self, mut geometry: (Vec<FteVertex>, Vec<u32>, Vec<FteBatch>)) {
+        geometry.0.clear();
+        geometry.1.clear();
+        geometry.2.clear();
+        self.geometry = geometry;
     }
 
     /// Reloads effects when `r_particledesc` or the map changed, then
@@ -278,21 +291,21 @@ impl Fte {
         snd: Option<&mut qsound::SoundSystem>,
         view: &qrender::View,
         mapname: &str,
-        cull_behind: bool,
+        cull_tangents: Option<[f32; 2]>,
     ) -> (Vec<FteVertex>, Vec<u32>, Vec<FteBatch>) {
         let queue = std::mem::take(&mut cl.fte_queue);
         self.requests += queue.len() as u64;
         if self.reg.types.is_empty() && queue.is_empty() && self.sys.run_list().is_empty() {
-            return Default::default();
+            return std::mem::take(&mut self.geometry);
         }
-        let Some(bsp) = bsp else { return Default::default() };
+        let Some(bsp) = bsp else { return std::mem::take(&mut self.geometry) };
         if self.cm.as_ref().is_none_or(|(n, _)| n != mapname) {
             self.cm = Some((mapname.to_string(), std::rc::Rc::new(CollisionModel::from_bsp(bsp))));
             self.trails.clear();
             self.ent_fx.clear();
             self.sky_dirty = true;
         }
-        let Some(cm) = self.cm.as_ref().map(|c| c.1.clone()) else { return Default::default() };
+        let Some(cm) = self.cm.as_ref().map(|c| c.1.clone()) else { return std::mem::take(&mut self.geometry) };
         let ents = brush_ents(cl, &cm);
         let world = BspWorld { bsp, cm: &cm, ents: &ents };
         let mut f = files(fs);
@@ -350,10 +363,14 @@ impl Fte {
         let vi = ViewInfo { origin: view.origin.into(), forward: fwd, right, up };
         let eo = |e: i32| world.entity_origin(e);
         let mut g = Geometry::new(&self.reg, vi, self.sys.particletime, &eo);
-        g.cull_behind = cull_behind;
-        // qrender::frame::math::setup_view uses a 4:3 horizontal FOV;
-        // the vertical tangent is invariant under aspect and render scaling.
-        g.vertical_tan = Some((view.fov_x.clamp(1.0, 179.0).to_radians() * 0.5).tan() * 0.75);
+        let (vertices, indices, mut batches) = std::mem::take(&mut self.geometry);
+        batches.clear();
+        g.reuse_buffers(vertices, indices, std::mem::take(&mut self.geometry_batches));
+        g.cull_behind = cull_tangents.is_some();
+        if let Some([tx, ty]) = cull_tangents {
+            g.horizontal_tan = Some(tx);
+            g.vertical_tan = Some(ty);
+        }
         let rain = self.rain_emitters(cl);
         let input = FrameInput { cl_time: cl.time, vieworg: view.origin.into(), rain };
         self.sys.frame(&self.reg, &world, &input, &mut g);
@@ -384,22 +401,19 @@ impl Fte {
             }
         }
 
-        let verts = g.vertices.iter().map(|v| FteVertex { pos: v.pos, uv: v.uv, color: v.color }).collect();
-        let batches = g
-            .ordered_batches()
-            .into_iter()
-            .filter_map(|b| {
-                Some(FteBatch {
-                    pic: self.pics.get(b.tex).copied().flatten()?,
-                    blend: to_blend(b.blend),
-                    lines: b.lines,
-                    first_index: b.first_index,
-                    num_indices: b.num_indices,
-                    soft: b.soft, gel: false,
-                })
+        g.batches.sort_by_key(|b| geom::blend_pass(b.blend));
+        batches.extend(g.batches.iter().filter_map(|b| {
+            Some(FteBatch {
+                pic: self.pics.get(b.tex).copied().flatten()?,
+                blend: to_blend(b.blend),
+                lines: b.lines,
+                first_index: b.first_index,
+                num_indices: b.num_indices,
+                soft: b.soft, gel: false,
             })
-            .collect();
-        (verts, g.indices, batches)
+        }));
+        self.geometry_batches = g.batches;
+        (g.vertices, g.indices, batches)
     }
 }
 

@@ -14,6 +14,13 @@ impl<'a> Geometry<'a> {
             if depth < -radius {
                 return;
             }
+            // Unnormalised side planes use the same conservative sphere bound.
+            if let Some(tan) = self.horizontal_tan {
+                let width = delta.dot(self.view.right).abs();
+                if width > depth * tan + radius * (tan + 1.0) {
+                    return;
+                }
+            }
             if let Some(tan) = self.vertical_tan {
                 // Unnormalised top/bottom planes: (forward * tan ± up).
                 // radius * (tan + 1) is conservative for both plane lengths.

@@ -32,7 +32,7 @@ pub struct View {
     pub origin: Vec3,
     /// Pitch, yaw, roll in degrees (Quake convention).
     pub angles: Vec3,
-    /// Horizontal field of view in degrees; vertical is derived from the aspect.
+    /// Horizontal field of view in degrees at 4:3; widened for the scene aspect.
     pub fov_x: f32,
     /// Pixel rows reserved at the bottom of the screen (classic status bar);
     /// the 3D scene is drawn above them.
@@ -206,14 +206,7 @@ impl FteBlend {
     ];
 }
 
-/// World-space particle vertex (FTE scripted particles).
-#[repr(C)]
-#[derive(Clone, Copy, Debug, Default, PartialEq)]
-pub struct FteVertex {
-    pub pos: [f32; 3],
-    pub uv: [f32; 2],
-    pub color: [u8; 4],
-}
+pub use qcore::vertex::ParticleVertex as FteVertex;
 
 /// Indexed draw of FTE particle geometry; drawn in slice order.
 #[derive(Clone, Copy, Debug, PartialEq)]

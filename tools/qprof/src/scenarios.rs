@@ -43,7 +43,7 @@ pub struct Scenario {
 /// Classic look, every enhancement off. Pinned so the user's config.cfg
 /// never leaks into a measurement.
 pub const VANILLA: &[(&str, &str)] = &[
-    ("r_msaa", "1"), ("vid_fsaamode", "0"), ("r_renderscale", "1"), ("r_texfilter", "0"),
+    ("r_msaa", "1"), ("vid_fsaamode", "0"), ("gl_lodbias", "auto"), ("r_renderscale", "1"), ("r_texfilter", "0"),
     ("r_anisotropy", "1"), ("r_softemu", "0"), ("r_dither", "0"), ("gamma", "1"), ("contrast", "1"),
     ("r_dynamic", "1"), ("r_coloredlight", "0"), ("r_fog", "1"), ("r_skyfog", "0.5"),
     ("r_lerpmodels", "1"), ("r_lerpmove", "1"),
@@ -183,6 +183,32 @@ pub fn all(secs: f32) -> Vec<Scenario> {
         what: "every enhancement above at once (except colour-blind and 8-bit emulation)",
         cvars: every, map: None, script: vec![], own_fire: false,
     });
+    // Keep pairs outside ENHANCEMENTS: they diagnose interactions and
+    // must not contribute duplicate overrides to all-enhancements.
+    for (name, what, first, second) in [
+        ("supersample-ssao", "8x supersampling + high ambient occlusion", SSAA, SSAO),
+        ("supersample-water", "8x supersampling + enhanced water at max", SSAA, WATER),
+        ("msaa8-renderscale200", "8x MSAA at 200% render scale", MSAA, SCALE),
+        ("supersample-renderscale200", "8x sample shading at 200% render scale", SSAA, SCALE),
+        ("renderscale200-ssao", "200% render scale + high ambient occlusion (1 sample)", SCALE, SSAO),
+    ] {
+        out.push(Scenario {
+            name, group: Group::Enhancement, what,
+            cvars: first.iter().chain(second).copied().collect(),
+            map: None, script: vec![], own_fire: false,
+        });
+    }
+    for (name, what, samples, effect) in [
+        ("msaa8-renderscale200-ssao", "8x MSAA at 200% scale + high ambient occlusion", MSAA, SSAO),
+        ("supersample-renderscale200-ssao", "8x sample shading at 200% scale + high ambient occlusion", SSAA, SSAO),
+        ("supersample-renderscale200-water", "8x sample shading at 200% scale + enhanced water at max", SSAA, WATER),
+    ] {
+        out.push(Scenario {
+            name, group: Group::Enhancement, what,
+            cvars: samples.iter().chain(SCALE).chain(effect).copied().collect(),
+            map: None, script: vec![], own_fire: false,
+        });
+    }
 
     let addon = |name, what, script: Vec<(f32, String)>, own_fire| Scenario {
         name, group: Group::Addon, what, cvars: ADDON_ON.to_vec(), map: None, script, own_fire,

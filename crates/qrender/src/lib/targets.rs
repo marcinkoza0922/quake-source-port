@@ -10,6 +10,10 @@ impl Renderer {
             self.textures[t.color_slot as usize] = None;
             self.textures[t.ao_slot as usize] = None;
             self.textures[t.vel_slot as usize] = None;
+            if let Some((img, slot)) = t.ao_source {
+                self.textures[slot as usize] = None;
+                self.gpu.free_image(img);
+            }
             self.gpu.free_image(t.ao);
             self.gpu.free_image(t.vel);
             self.gpu.free_image(t.color);
@@ -29,8 +33,7 @@ impl Renderer {
         self.destroy_targets();
         let (w, h) = (self.width.max(1), self.height.max(1));
         let scale = self.render_scale;
-        let sw = ((w as f32 * scale).round() as u32).clamp(1, 16384);
-        let shh = ((h as f32 * scale).round() as u32).clamp(1, 16384);
+        let (sw, shh) = crate::projection::scene_extent((w, h), scale);
         let color = self.gpu.image(
             sw,
             shh,
@@ -153,12 +156,33 @@ impl Renderer {
             scene_w: sw,
             scene_h: shh,
             color_slot: slot,
+            ao_source: None,
             ao,
             ao_slot,
             vel,
             vel_slot,
             out,
         });
+        Ok(())
+    }
+
+    /// Allocate on the first MSAA AO frame, after scene targets exist. Keep
+    /// the snapshot until a resize/sample change destroys those targets.
+    pub(super) fn ensure_ao_source(&mut self) -> Result<()> {
+        if self.msaa <= 1 || !self.targets.as_ref().is_some_and(|t| t.ao_source.is_none()) {
+            return Ok(());
+        }
+        self.idle();
+        let t = self.targets.as_ref().unwrap();
+        let img = self.gpu.image(
+            t.scene_w, t.scene_h, 1, 1, pipelines::AO_SOURCE_FORMAT,
+            vk::ImageUsageFlags::COLOR_ATTACHMENT | vk::ImageUsageFlags::SAMPLED,
+            vk::ImageAspectFlags::COLOR,
+        )?;
+        let slot = self.alloc_slot()?;
+        self.write_texture_descriptor(slot, img.view, self.sampler_clamp);
+        self.textures[slot as usize] = Some(Tex { image: None, level: false, sampling: Sampling::Clamp });
+        self.targets.as_mut().unwrap().ao_source = Some((img, slot));
         Ok(())
     }
 
