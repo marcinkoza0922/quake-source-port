@@ -120,7 +120,7 @@ impl Mdl {
         let num_skins = r.count("skin", 4)?;
         let sw = r.i32()?;
         let sh = r.i32()?;
-        if sw <= 0 || sh <= 0 || sw > 4096 || sh > 4096 {
+        if sw <= 0 || sh <= 0 || sw > 16384 || sh > 16384 {
             return Err(r.err(format!("bad skin size {sw}x{sh}")));
         }
         let skin_size = (sw * sh) as usize;

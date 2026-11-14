@@ -91,6 +91,8 @@ pub enum Page {
     Goggles,
     ProjectileShotguns,
     BulletTime,
+    Hitstop,
+    HitstopAdvanced,
     /// Multiplayer pages (reached from Screen::Multiplayer).
     Join,
     Host,
@@ -99,7 +101,7 @@ pub enum Page {
 
 /// Every cvar the options pages edit (the host marks them archived).
 pub fn option_cvars() -> impl Iterator<Item = &'static str> {
-    [addon_settings::SHOTGUNS, addon_settings::BULLET_TIME, ADDONS, NEW_GAME_ADDONS, PORTAL_GUN, BOOMERANG, HOOKSHOT, RAILGUN, STICKY, GOGGLES, GAMEPLAY, HUD, CROSSHAIR, HUD_LAYOUT, MESSAGES, ENHANCEMENTS, WATER, BLOOD, DEBRIS, IMPACTS, AUTOSAVE, ASSISTS, AUTOAIM, INPUT, MOUSE, CONTROLLER, GRAPHICS, AUDIO, HIT_SOUND, KILL_SOUND, ACCESSIBILITY].into_iter().flatten().filter_map(|i| match *i {
+    [addon_settings::SHOTGUNS, addon_settings::BULLET_TIME, addon_settings::HITSTOP, addon_settings::HITSTOP_ADVANCED, ADDONS, NEW_GAME_ADDONS, PORTAL_GUN, BOOMERANG, HOOKSHOT, RAILGUN, STICKY, GOGGLES, GAMEPLAY, HUD, CROSSHAIR, HUD_LAYOUT, MESSAGES, ENHANCEMENTS, WATER, BLOOD, DEBRIS, IMPACTS, AUTOSAVE, ASSISTS, AUTOAIM, INPUT, MOUSE, CONTROLLER, GRAPHICS, AUDIO, HIT_SOUND, KILL_SOUND, ACCESSIBILITY].into_iter().flatten().filter_map(|i| match *i {
         Item::Slider { cvar, .. } | Item::Toggle { cvar, .. } | Item::Choice { cvar, .. } => Some(cvar),
         _ => None,
     })
@@ -363,7 +365,7 @@ impl Menu {
         match self.screen {
             Screen::Death => row(140.0, 24.0, 4, 160.0, 480.0),
             Screen::Main => row(cy + 32.0, 20.0, MAIN_ITEMS, cx + 54.0, cx + 312.0),
-            Screen::SinglePlayer => row(cy + 32.0, 20.0, 3, cx + 54.0, cx + 312.0),
+            Screen::SinglePlayer => row(cy + 32.0, 20.0, 4, cx + 54.0, cx + 312.0),
             Screen::Load | Screen::Save => self.card_at(x, y),
             Screen::Options => row(ROW0, ROW_H, PAGES.len(), PANEL_X, PANEL_X + PANEL_W),
             Screen::OptionsPage(p) => {
@@ -377,6 +379,10 @@ impl Menu {
             Screen::ModMaps => self.mods.item_at(modmenu::Page::Maps, (x, y)),
             Screen::None => None,
         }
+    }
+
+    fn mods_page(&self) -> modmenu::Page {
+        if self.screen == Screen::Mods { modmenu::Page::List } else { modmenu::Page::Maps }
     }
 
     fn cursor_mut(&mut self) -> Option<&mut usize> {

@@ -56,6 +56,17 @@ pub(super) fn tooltip(item: Item) -> Option<&'static str> {
         "addon_goggles" => "Night-vision and thermal goggles, cycle normal, night vision and thermal with Change Goggles (Add-ons), or use the Equipment Wheel",
         "addon_goggles_intensity" => "Night vision: how much dark areas are brightened; thermal: how strongly heat stands out",
         "addon_goggles_noise" => "Sensor grain, scanlines and flicker of the goggle image",
+        "addon_hitstop" => "Freeze the game briefly when you damage an enemy; single player with add-ons only",
+        "addon_hitstop_weapons" => "Which weapons trigger the freeze; melee covers the axe and any mod weapon used at close range without ammo",
+        "addon_hitstop_duration" => "How long a hit freezes the game, in milliseconds",
+        "addon_hitstop_kill_bonus" => "Multiplier on the freeze when the hit kills the enemy; 1 means no extra",
+        "addon_hitstop_shake" => "Small camera jolt on each freeze; off with Reduce Motion",
+        "addon_hitstop_targets" => "Freeze for every enemy, or only for enemies that were tough before the hit",
+        "addon_hitstop_tough" => "Health an enemy must have had before the hit to count as tough",
+        "addon_hitstop_scale_damage" => "Extra freeze milliseconds for every 10 damage dealt, so heavy hits stop longer",
+        "addon_hitstop_min_damage" => "Hits dealing less damage than this do not freeze the game; the default 10 skips nails and shotgun pellets",
+        "addon_hitstop_cooldown" => "Minimum gap between freezes, so shotgun pellets and rapid fire count once; kills ignore it",
+        "addon_hitstop_max" => "No single freeze lasts longer than this, however much damage or kill bonus adds",
         "addon_portalgun" => "A two-portal gun: fire and alt-fire place linked portals on flat walls; select it through its assigned weapon slot (Add-ons)",
         "r_debris" => "Corpses go limp as ragdolls, gibs tumble and barrels throw shrapnel; shots and blasts push them (cosmetic only)",
         "r_debris_ragdolls" => "Corpses go limp and fall as ragdolls",
@@ -167,6 +178,8 @@ pub(super) fn page_items(p: Page) -> &'static [Item] {
         Page::Goggles => GOGGLES,
         Page::ProjectileShotguns => super::addon_settings::SHOTGUNS,
         Page::BulletTime => super::addon_settings::BULLET_TIME,
+        Page::Hitstop => super::addon_settings::HITSTOP,
+        Page::HitstopAdvanced => super::addon_settings::HITSTOP_ADVANCED,
         Page::Input => INPUT,
         Page::Graphics => GRAPHICS,
         Page::Enhancements => ENHANCEMENTS,
@@ -227,6 +240,8 @@ pub(super) fn page_name(p: Page) -> &'static str {
         Page::Goggles => "Goggles",
         Page::ProjectileShotguns => "Projectile Shotguns",
         Page::BulletTime => "Bullet Time",
+        Page::Hitstop => "Hitstop",
+        Page::HitstopAdvanced => "Hitstop Advanced",
         _ => PAGES.iter().find(|x| x.1 == p).map_or("", |x| x.0),
     }
 }
@@ -247,6 +262,7 @@ pub(super) fn sub_disabled(page: Page, cv: &Cvars) -> bool {
         || (page == Page::Blood && cv.value_of("r_blood") == 0.0)
         || (page == Page::Debris && cv.value_of("r_debris") == 0.0)
         || (page == Page::Goggles && cv.value_of("addon_goggles") == 0.0)
+        || (matches!(page, Page::Hitstop | Page::HitstopAdvanced) && cv.value_of("addon_hitstop") == 0.0)
 }
 
 pub(super) fn is_net_page(p: Page) -> bool {

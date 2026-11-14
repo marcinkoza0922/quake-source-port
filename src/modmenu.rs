@@ -1,8 +1,8 @@
 //! Mod menu: installed mods (left list + info panel) and a per-mod map
 //! browser with completion stats from qsp_stats.json. The host fills the
 //! data (`_mods`, `_modmaps <dir>`). Enter launches the mod (`game <dir>`);
-//! the map page is a hidden level selector, reached with Right only when
-//! `ui_levelselect` is on.
+//! the map page is the level selector, reached with Right (or from New Game's
+//! Level Select button). Both lists scroll: arrows, wheel and a draggable bar.
 
 use qinput::keys::*;
 use qui::mods::{MapInfo, ModInfo};
@@ -38,8 +38,6 @@ pub struct ModMenu {
     sel: usize,
     pub maps: Vec<MapInfo>,
     pub stats: Stats,
-    /// `ui_levelselect`: the map page is reachable.
-    pub level_select: bool,
     /// Map page cursor: 0 = "Start", 1.. = maps.
     map_cursor: usize,
     map_scroll: usize,
@@ -82,6 +80,49 @@ impl ModMenu {
         self.sel = i;
         clamp_scroll(i, &mut self.scroll);
         true
+    }
+
+    /// Scrollbar of a page: (x, track top, track h, thumb y, thumb h).
+    pub fn scrollbar(&self, page: Page) -> Option<(f32, f32, f32, f32, f32)> {
+        let (x0, w, scroll) = match page {
+            Page::List => (LIST.0, LIST.1, self.scroll),
+            Page::Maps => (MAPS.0, MAPS.1, self.map_scroll),
+        };
+        let n = self.rows(page);
+        if n <= ROWS {
+            return None;
+        }
+        let h = ROWS as f32 * ROW_H;
+        let th = (h * ROWS as f32 / n as f32).max(8.0);
+        let ty = TOP + (h - th) * scroll as f32 / (n - ROWS) as f32;
+        Some((x0 + w - 5.0, TOP, h, ty, th))
+    }
+
+    /// Scrollbar drag: the thumb top follows `y`; the cursor is pulled into view.
+    pub fn drag_to(&mut self, page: Page, y: f32, grab: f32) {
+        let Some((_, top, h, _, th)) = self.scrollbar(page) else { return };
+        let max = self.rows(page) - ROWS;
+        let f = ((y - grab - top) / (h - th).max(1.0)).clamp(0.0, 1.0);
+        self.set_scroll(page, (f * max as f32).round() as usize);
+    }
+
+    /// Wheel: scrolls the view by rows, keeping the cursor visible.
+    pub fn wheel(&mut self, page: Page, up: bool) {
+        let sc = match page {
+            Page::List => self.scroll,
+            Page::Maps => self.map_scroll,
+        };
+        self.set_scroll(page, if up { sc.saturating_sub(3) } else { sc + 3 });
+    }
+
+    fn set_scroll(&mut self, page: Page, sc: usize) {
+        let sc = sc.min(self.rows(page).saturating_sub(ROWS));
+        let (cursor, scroll) = match page {
+            Page::List => (&mut self.cursor, &mut self.scroll),
+            Page::Maps => (&mut self.map_cursor, &mut self.map_scroll),
+        };
+        *scroll = sc;
+        *cursor = (*cursor).clamp(sc, sc + ROWS - 1);
     }
 
     fn selected(&self) -> Option<&ModInfo> {
@@ -159,7 +200,7 @@ impl ModMenu {
                 }
                 None
             }
-            Page::List if self.level_select && matches!(key, K_RIGHTARROW | K_DPAD_RIGHT) => {
+            Page::List if matches!(key, K_RIGHTARROW | K_DPAD_RIGHT) => {
                 let Some(m) = self.mods.get(self.cursor) else { return Some(page) };
                 self.sel = self.cursor;
                 self.maps.clear();
@@ -216,7 +257,7 @@ impl ModMenu {
                 txt(c, x + 6.0, y + 1.0, &t);
             }
         }
-        scroll_hints(c, x, w, self.scroll, self.mods.len());
+        self.draw_bar(c, Page::List);
         // info panel for the highlighted mod
         let Some(m) = self.mods.get(self.cursor) else { return };
         let (ix, iw) = INFO;
@@ -238,10 +279,8 @@ impl ModMenu {
             txt_gold(c, ix + 8.0, y, "(running)");
             y += ROW_H;
         }
-        if self.level_select {
-            c.text(ix + 8.0, y, "Right: levels", TXT, MUTED);
-            y += ROW_H;
-        }
+        c.text(ix + 8.0, y, "Right: levels", TXT, MUTED);
+        y += ROW_H;
         y += 6.0;
         let bottom = TOP + ROWS as f32 * ROW_H - ROW_H;
         'blurb: for line in &m.blurb {
@@ -292,7 +331,14 @@ impl ModMenu {
         if self.maps.is_empty() {
             center(c, TOP + 2.0 * ROW_H + 1.0, "no maps of its own");
         }
-        scroll_hints(c, x, w, self.map_scroll, self.maps.len() + 1);
+        self.draw_bar(c, Page::Maps);
+    }
+
+    fn draw_bar(&self, c: &mut Canvas, page: Page) {
+        if let Some((x, top, h, ty, th)) = self.scrollbar(page) {
+            c.fill(x, top, 3.0, h, [1.0, 1.0, 1.0, 0.12]);
+            c.fill(x, ty, 3.0, th, [0.85, 0.65, 0.3, 0.9]);
+        }
     }
 }
 
@@ -300,15 +346,6 @@ fn box_(c: &mut Canvas, x: f32, w: f32, rows: usize) {
     let h = rows as f32 * ROW_H + 8.0;
     c.fill(x, TOP - 4.0, w, h, [0.0, 0.0, 0.0, 0.8]);
     c.frame(x, TOP - 4.0, w, h, BORDER);
-}
-
-fn scroll_hints(c: &mut Canvas, x: f32, w: f32, scroll: usize, n: usize) {
-    if scroll > 0 {
-        c.shape(x + w - 10.0, TOP - 2.0, 7.0, 7.0, crate::font::Shape::ArrowUp, GOLD_FG);
-    }
-    if scroll + ROWS < n {
-        c.shape(x + w - 10.0, TOP + ROWS as f32 * ROW_H - 4.0, 7.0, 7.0, crate::font::Shape::ArrowDown, GOLD_FG);
-    }
 }
 
 fn center(c: &mut Canvas, y: f32, s: &str) {
@@ -358,7 +395,6 @@ mod tests {
         let m = |d: &str| ModInfo { dir: d.into(), title: d.into(), base: Base::Id, blurb: vec![] };
         let mut mm = ModMenu::default();
         mm.set_mods(vec![m("id1"), m("ad"), m("mg1")], "ad");
-        mm.level_select = true;
         mm
     }
 
@@ -392,11 +428,9 @@ mod tests {
     }
 
     #[test]
-    fn enter_launches_and_selector_is_hidden() {
+    fn enter_launches_the_mod() {
         let mut mm = menu();
-        mm.level_select = false;
         let mut out = Vec::new();
-        assert_eq!(mm.key(Page::List, K_RIGHTARROW, &mut out), Some(Page::List));
         mm.key(Page::List, K_DOWNARROW, &mut out);
         out.clear();
         assert_eq!(mm.key(Page::List, K_ENTER, &mut out), None);
@@ -406,6 +440,22 @@ mod tests {
         out.clear();
         mm.key(Page::List, K_ENTER, &mut out);
         assert!(cmds(&out).is_empty() && out.iter().any(|a| matches!(a, Action::Close)));
+    }
+
+    #[test]
+    fn long_lists_scroll_by_wheel_and_bar() {
+        let m = |i: usize| ModInfo { dir: format!("m{i}"), title: String::new(), base: Base::Id, blurb: vec![] };
+        let mut mm = ModMenu::default();
+        mm.set_mods((0..100).map(m).collect(), "m0");
+        assert!(mm.scrollbar(Page::List).is_some());
+        mm.wheel(Page::List, false);
+        assert_eq!((mm.scroll, mm.cursor), (3, 3));
+        mm.drag_to(Page::List, 1000.0, 0.0);
+        assert_eq!(mm.scroll, 100 - ROWS);
+        mm.drag_to(Page::List, -1000.0, 0.0);
+        assert_eq!((mm.scroll, mm.cursor), (0, ROWS - 1));
+        mm.set_mods(vec![m(0)], "m0");
+        assert!(mm.scrollbar(Page::List).is_none());
     }
 
     #[test]

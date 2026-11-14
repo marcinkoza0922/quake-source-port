@@ -54,6 +54,7 @@ impl Host {
         self.stop_recording();
         self.autosave.reset();
         self.bullet_time = Default::default();
+        self.hitstop = Default::default();
         self.pend_dodge = false;
         self.death_handled = false;
         self.feedback = Default::default();
@@ -381,6 +382,9 @@ impl Host {
                 ClientEvent::PortalEffect(_) | ClientEvent::RailEffect(_) | ClientEvent::Hook(_) | ClientEvent::Boomerang(_)
                 | ClientEvent::Gel(_) | ClientEvent::Water(_) => {
                     self.toy_event(e);
+                }
+                ClientEvent::HitStop { kill, damage, class, health } => {
+                    self.receive_hitstop(super::hitstop::Hit { kill, damage, class, health });
                 }
                 ClientEvent::HitFeedback { kill } => {
                     feedback = Some(feedback.unwrap_or(false) || kill);

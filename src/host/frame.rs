@@ -199,7 +199,7 @@ impl Host {
         let (held, aim) = (self.input.wheel_held(), self.input.wheel_aim);
         let toys = if self.local.is_some() { self.allowed_toys() } else { Vec::new() };
         let entries = crate::wheel::inventory(&self.server.core.cvars, &toys);
-        let choice = self.wheel.update(held, in_game && alive && self.demo.is_none(), aim, &self.cl, &entries, self.toy.held);
+        let choice = self.wheel.update(dt as f32, held, in_game && alive && self.demo.is_none(), aim, &self.cl, &entries, self.toy.held);
         self.goggles_frame(in_game, alive);
         self.toy.update_slots(&self.server.core.cvars, &toys, (inp.weapon_slot, &mut impulse), &self.cl);
         if let Some(weapon) = choice {
@@ -296,7 +296,7 @@ impl Host {
             let t = self.server.take_text();
             self.cbuf.add_text(&t);
             // Ironwail: single player only advances while not in the menu.
-            let hold = self.server.core.maxclients() == 1 && self.menu.active();
+            let hold = (self.server.core.maxclients() == 1 && self.menu.active()) || self.hitstop_hold();
             self.server.frame_held(sdt, hold);
             if let Some(e) = self.server.error() {
                 let msg = format!("Host_Error: {e}\n");

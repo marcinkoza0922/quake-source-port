@@ -43,6 +43,20 @@ pub const CVARS: &[(&str, &str, u32)] = &[
     ("addon_bullet_time_meter", "1", CVAR_ARCHIVE),
     ("addon_bullet_time_duration", "5", CVAR_ARCHIVE),
     ("addon_bullet_time_regen", "1", CVAR_ARCHIVE),
+    // hitstop (client side): master, weapons (0 all, 1 melee, 2 ranged, 3
+    // explosives), targets (0 all, 1 tough), freeze ms, per-damage ms, kill
+    // multiplier, cooldown ms, cap ms, minimum damage, tough health, shake
+    ("addon_hitstop", "0", CVAR_ARCHIVE),
+    ("addon_hitstop_weapons", "0", CVAR_ARCHIVE),
+    ("addon_hitstop_targets", "0", CVAR_ARCHIVE),
+    ("addon_hitstop_duration", "60", CVAR_ARCHIVE),
+    ("addon_hitstop_scale_damage", "3", CVAR_ARCHIVE),
+    ("addon_hitstop_kill_bonus", "2", CVAR_ARCHIVE),
+    ("addon_hitstop_cooldown", "150", CVAR_ARCHIVE),
+    ("addon_hitstop_max", "250", CVAR_ARCHIVE),
+    ("addon_hitstop_min_damage", "10", CVAR_ARCHIVE),
+    ("addon_hitstop_tough", "100", CVAR_ARCHIVE),
+    ("addon_hitstop_shake", "0", CVAR_ARCHIVE),
     ("addon_portalgun", "1", CVAR_ARCHIVE),
     ("addon_sticky", "1", CVAR_ARCHIVE),
     ("addon_sticky_damage", "120", CVAR_ARCHIVE),

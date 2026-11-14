@@ -69,7 +69,6 @@ impl Host {
         let mods = qui::mods::scan(&self.fs_snapshot.0);
         let cur = self.game_name().to_string();
         self.menu.set_mods(mods, &cur);
-        self.menu.mods.level_select = self.cv("ui_levelselect") != 0.0;
     }
 
     /// Fills the mod menu's map page for one mod (`_modmaps <dir>`).

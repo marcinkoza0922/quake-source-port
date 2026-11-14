@@ -30,6 +30,13 @@ impl Menu {
                 out.push(Action::Sound("misc/menu3.wav"));
                 return;
             }
+            Run::ResetHitstop => {
+                for &(name, default, _) in qserver::addons::CVARS {
+                    if name.starts_with("addon_hitstop_") { cv.set(name, default); }
+                }
+                out.push(Action::Sound("misc/menu3.wav"));
+                return;
+            }
             Run::PreviewHit | Run::PreviewKill => {
                 let cue = if run == Run::PreviewHit { "hit" } else { "kill" };
                 out.push(Action::Command(format!("hitfeedback_preview {cue}\n")));

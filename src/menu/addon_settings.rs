@@ -13,6 +13,24 @@ pub(super) const BULLET_TIME: &[Item] = &[
     Item::Run { label: "Reset to Defaults", run: Run::ResetBulletTime },
 ];
 
+pub(super) const HITSTOP: &[Item] = &[
+    Item::Choice { label: "Weapons", cvar: "addon_hitstop_weapons", choices: &[("All", 0.0), ("Melee only", 1.0), ("Ranged only", 2.0), ("Explosives only", 3.0)] },
+    slider("Freeze Duration (ms)", "addon_hitstop_duration", 10.0, 250.0, 10.0),
+    slider("Kill Bonus (x)", "addon_hitstop_kill_bonus", 1.0, 4.0, 0.25),
+    slider("Screen Shake", "addon_hitstop_shake", 0.0, 1.0, 0.1),
+    Item::Sub { label: "Advanced Settings", page: Page::HitstopAdvanced },
+    Item::Run { label: "Reset to Defaults", run: Run::ResetHitstop },
+];
+pub(super) const HITSTOP_ADVANCED: &[Item] = &[
+    Item::Choice { label: "Targets", cvar: "addon_hitstop_targets", choices: &[("All enemies", 0.0), ("Tough enemies only", 1.0)] },
+    slider("Tough Enemy Health", "addon_hitstop_tough", 10.0, 1000.0, 10.0),
+    slider("Extra Per 10 Damage (ms)", "addon_hitstop_scale_damage", 0.0, 50.0, 1.0),
+    slider("Minimum Damage", "addon_hitstop_min_damage", 0.0, 100.0, 1.0),
+    slider("Cooldown (ms)", "addon_hitstop_cooldown", 0.0, 1000.0, 10.0),
+    slider("Longest Freeze (ms)", "addon_hitstop_max", 50.0, 1000.0, 10.0),
+    Item::Run { label: "Reset to Defaults", run: Run::ResetHitstop },
+];
+
 /// Main menu → Add-ons: which toys the running game (or the next new
 /// game) has. Locked while the running game was started without add-ons.
 pub(super) const ADDONS: &[Item] = &[
@@ -30,6 +48,8 @@ pub(super) const ADDONS: &[Item] = &[
     toggle("Dodge / Dive", "addon_dodge"),
     toggle("Bullet Time", "addon_bullet_time"),
     Item::Sub { label: "Bullet Time Settings", page: Page::BulletTime },
+    toggle("Hitstop", "addon_hitstop"),
+    Item::Sub { label: "Hitstop Settings", page: Page::Hitstop },
     toggle("Goggles", "addon_goggles"),
     Item::Sub { label: "Goggles Settings", page: Page::Goggles },
 ];
@@ -50,6 +70,8 @@ pub(super) const NEW_GAME_ADDONS: &[Item] = &[
     toggle("Dodge / Dive", "addon_dodge"),
     toggle("Bullet Time", "addon_bullet_time"),
     Item::Sub { label: "Bullet Time Settings", page: Page::BulletTime },
+    toggle("Hitstop", "addon_hitstop"),
+    Item::Sub { label: "Hitstop Settings", page: Page::Hitstop },
     toggle("Goggles", "addon_goggles"),
     Item::Sub { label: "Goggles Settings", page: Page::Goggles },
     Item::Run { label: "Start New Game", run: Run::NewGame },

@@ -172,6 +172,7 @@ pub(super) fn register_commands(c: &mut Commands<Host>) {
             "goggles" => Some(Page::Goggles),
             "projectileshotguns" => Some(Page::ProjectileShotguns),
             "bullettime" => Some(Page::BulletTime),
+            "hitstop" => Some(Page::Hitstop),
             "sticky" => Some(Page::Sticky),
             _ => None,
         };
@@ -533,6 +534,17 @@ pub(super) fn register_commands(c: &mut Commands<Host>) {
         h.scan_mods();
         if a.argc() > 1 && h.menu.mods.select(a.argv(1)) {
             h.scan_mod_maps(a.argv(1));
+            h.menu.open(Screen::ModMaps);
+        } else {
+            h.menu.open(Screen::Mods);
+        }
+    });
+    // menu_levels: the running mod's level selector (New Game > Level Select)
+    c.add("menu_levels", |h, _| {
+        let g = h.game_name().to_string();
+        h.scan_mods();
+        if h.menu.mods.select(&g) {
+            h.scan_mod_maps(&g);
             h.menu.open(Screen::ModMaps);
         } else {
             h.menu.open(Screen::Mods);

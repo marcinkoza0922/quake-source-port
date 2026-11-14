@@ -115,6 +115,11 @@ const ADDON: &[Addon] = &[
         description: "Use the dedicated Bullet Time action to slow the whole local game to 20% speed. Hold is the default; Toggle switches on each press. The optional meter limits use in real seconds and regenerates while inactive. Disable the meter for unlimited use. Remap the action and configure duration and regeneration below.",
     },
     Addon {
+        name: "Hitstop", id: "hitstop", cvar: "addon_hitstop",
+        weapons: &[], page: Some(Page::Hitstop), alt: false,
+        description: "Freezes the game for a split second when you damage an enemy, so hits feel heavier. Single player only. Choose which weapons trigger it (all, melee, ranged or explosives), how long it lasts and how much more a kill freezes. Advanced settings cover enemy toughness, damage scaling, cooldown and the longest freeze.",
+    },
+    Addon {
         name: "Dodge / Dive", id: "dodge", cvar: "addon_dodge",
         weapons: &[], page: None, alt: false,
         description: "Press Dodge with a movement direction on the ground or in midair: dive forward or leap backward and sideways. Diagonals are supported. Each press launches once, with a short recovery. The player body animates in third person. Assign the Dodge action below or in Controls.",
