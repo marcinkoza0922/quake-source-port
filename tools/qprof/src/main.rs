@@ -326,6 +326,7 @@ mod tests {
         let a = engine_args(&o, &sc, "id1", "e1m1", Path::new("test.json"));
         assert!(a.windows(2).any(|v| v == ["-fixedstep", "250"]));
         assert!(a.iter().any(|v| v == "+host_maxfps \"10000\""));
+        assert!(a.iter().any(|v| v == "+addon_hitstop \"0\""));
         assert!(a.iter().any(|v| v == "-window"));
         let o = parse_args_from([]);
         assert_eq!(o.fixedstep, None);

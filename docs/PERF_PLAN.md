@@ -831,3 +831,8 @@ confirm wins windowed (`qprof -window`, or qbench for parity).
   461 tests passed, 2 skipped; clippy clean. No server/physics change.
   Next: reprofile destination draw construction with the lightmap sort gone
   before selecting another world/portal CPU change.
+
+  Integration with current master: qprof now pins the newly registered
+  `addon_hitstop` off in its baseline, inherited by add-on scenarios, so
+  the saved settings that previously printed unknown commands cannot change
+  the historical workload. The measurements above predate that integration.
