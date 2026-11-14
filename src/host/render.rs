@@ -155,7 +155,10 @@ impl Host {
                 &self.server.core.cvars, &self.cl, &self.level, &self.server.core.fs,
                 &mut self.r, v, &self.debris, &mut fte,
             );
-            let hitscan = self.cv("r_shotgun_tracers") != 0.0;
+            // Projectile pellets already draw their own streaks; hitscan ones would stack.
+            let pellets = self.cv("addons_active") != 0.0 && self.cv("addon_projectile_shotguns") != 0.0
+                && self.cv("deathmatch") == 0.0;
+            let hitscan = self.cv("r_shotgun_tracers") != 0.0 && !pellets;
             self.tracers.frame(hitscan, &self.cl, &self.debris, v, &mut self.r, &mut fte);
             self.impacts.frame(
                 &self.server.core.cvars, &self.cl, &self.level, &self.server.core.fs,
