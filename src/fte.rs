@@ -278,7 +278,7 @@ impl Fte {
         snd: Option<&mut qsound::SoundSystem>,
         view: &qrender::View,
         mapname: &str,
-        cull_behind: bool,
+        cull_tangents: Option<[f32; 2]>,
     ) -> (Vec<FteVertex>, Vec<u32>, Vec<FteBatch>) {
         let queue = std::mem::take(&mut cl.fte_queue);
         self.requests += queue.len() as u64;
@@ -350,10 +350,11 @@ impl Fte {
         let vi = ViewInfo { origin: view.origin.into(), forward: fwd, right, up };
         let eo = |e: i32| world.entity_origin(e);
         let mut g = Geometry::new(&self.reg, vi, self.sys.particletime, &eo);
-        g.cull_behind = cull_behind;
-        // qrender::frame::math::setup_view uses a 4:3 horizontal FOV;
-        // the vertical tangent is invariant under aspect and render scaling.
-        g.vertical_tan = Some((view.fov_x.clamp(1.0, 179.0).to_radians() * 0.5).tan() * 0.75);
+        g.cull_behind = cull_tangents.is_some();
+        if let Some([tx, ty]) = cull_tangents {
+            g.horizontal_tan = Some(tx);
+            g.vertical_tan = Some(ty);
+        }
         let rain = self.rain_emitters(cl);
         let input = FrameInput { cl_time: cl.time, vieworg: view.origin.into(), rain };
         self.sys.frame(&self.reg, &world, &input, &mut g);

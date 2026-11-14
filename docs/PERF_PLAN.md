@@ -244,3 +244,29 @@ confirm wins windowed (`qprof -window`, or qbench for parity).
   pitched view and the four torch-lit player views. Six headless visual
   runs with Vulkan validation enabled logged no validation errors. Reports: `target/qprof/vertical-before` and `vertical-after`.
   446 tests passed, 2 skipped; clippy clean. No windowed speedup claim.
+
+- 2026-11-13, item 4 horizontal follow-up: normal billboards also reject
+  geometry wholly outside the left/right frustum planes. Scene target sizing,
+  viewport rounding, reserved status-bar rows and 4:3 FOV adaptation now share
+  `qrender::projection` helpers between rendering and host geometry culling.
+  Existing guest/portal/teleporter/debug-camera safeguards remain in force.
+  ad_sepulcher, 1280×720 headless RTX 3060 Ti, pinned vanilla, 20 s measured
+  after 4 s warm-up, 3 runs/build: median 393.8 → 421.5 fps (+7.0%), frame
+  2540 → 2372 µs, GPU 2224 → 2011 µs, particles+vm 926 → 693 µs.
+  Live particles unchanged at 33,611; vertices 73,455 → 53,626 (−27.0%).
+  Nine fixed-time combat screenshots and four viewport checks (4:3 with
+  classic status bar, wide pitched/rolled camera, portrait, four-player
+  split-screen; render scales 0.25/0.73/1/2) have `compare -metric AE = 0`.
+  Inspected the tower/torch wide view, classic bar and four player views.
+  All eight viewport runs with Vulkan validation logged no validation errors.
+  450 tests passed, 2 skipped; clippy clean. Reports:
+  `target/qprof/horizontal-before` and `horizontal-after`.
+  Windowed confirmation (same map/resolution/GPU and pinned vanilla, 20 s
+  measured after 4 s warm-up, 3 runs/build, `host_maxfps 10000`, vsync off):
+  median 452.4 → 492.2 fps (+8.8%), frame 2210 → 2032 µs, GPU 914 → 725 µs,
+  particles+vm 728 → 538 µs. Live combat advances by wall time here, so particle
+  counts vary slightly across builds; headless provides the deterministic
+  output comparison. Reports: `target/qprof/horizontal-window-before` and
+  `horizontal-window-after`. These are our engine's A/B results, not reference
+  engine parity measurements.
+  Next: per-view geometry handling before enabling culling for shared views.

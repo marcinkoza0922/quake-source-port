@@ -10,6 +10,8 @@ mod convert;
 mod frame;
 mod gpu;
 mod pipelines;
+mod projection;
+pub use projection::view_fov_tangents;
 mod slang;
 pub use slang::ShaderParam;
 pub mod types;

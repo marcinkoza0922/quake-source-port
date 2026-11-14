@@ -168,11 +168,9 @@ impl Renderer {
         // FTE particles: (vertex offset, index offset, batches with texture slots)
         let mut fte: Option<FteDraw> = None;
         // this view's scene region (top-left of the target) and its 3D height
-        let scene_w = ((rect[2] as f32 * sw as f32 / w.max(1) as f32).round() as u32).clamp(1, sw);
-        let scene_h = view_in.map_or(sh, |v| {
-            let px = rect[3].saturating_sub(v.reserve_bottom) as f32 * sh as f32 / h.max(1) as f32;
-            (px.round() as u32).clamp(1, sh)
-        });
+        let (scene_w, scene_h) = crate::projection::view_extent(
+            rect, view_in.map_or(0, |v| v.reserve_bottom), (w, h), (sw, sh),
+        );
         let view = view_in.map(|mut v| {
             if !multi
                 && let (Some(index), Some(distance), Some(w)) =

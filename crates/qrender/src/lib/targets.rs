@@ -29,8 +29,7 @@ impl Renderer {
         self.destroy_targets();
         let (w, h) = (self.width.max(1), self.height.max(1));
         let scale = self.render_scale;
-        let sw = ((w as f32 * scale).round() as u32).clamp(1, 16384);
-        let shh = ((h as f32 * scale).round() as u32).clamp(1, 16384);
+        let (sw, shh) = crate::projection::scene_extent((w, h), scale);
         let color = self.gpu.image(
             sw,
             shh,

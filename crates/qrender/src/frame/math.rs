@@ -102,11 +102,7 @@ pub(super) fn rows3(m: &Mat4) -> [[f32; 4]; 3] {
 
 pub(super) fn setup_view(v: &View, w: u32, h: u32) -> ViewSetup {
     let (fwd, right, up) = angle_vectors(v.angles);
-    // fov_adapt: fov_x is for 4:3, widened for the actual aspect
-    let aspect = w.max(1) as f32 / h.max(1) as f32;
-    let tx43 = (v.fov_x.clamp(1.0, 179.0).to_radians() * 0.5).tan();
-    let ty = tx43 * 0.75;
-    let tx = ty * aspect;
+    let [tx, ty] = crate::projection::half_fov_tangents(v.fov_x, (w, h));
     let (n, f) = (4.0f32, 65536.0f32);
     // view: rows right, -up, forward
     let rows = [right, [-up[0], -up[1], -up[2]], fwd];

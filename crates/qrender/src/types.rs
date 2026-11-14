@@ -32,7 +32,7 @@ pub struct View {
     pub origin: Vec3,
     /// Pitch, yaw, roll in degrees (Quake convention).
     pub angles: Vec3,
-    /// Horizontal field of view in degrees; vertical is derived from the aspect.
+    /// Horizontal field of view in degrees at 4:3; widened for the scene aspect.
     pub fov_x: f32,
     /// Pixel rows reserved at the bottom of the screen (classic status bar);
     /// the 3D scene is drawn above them.

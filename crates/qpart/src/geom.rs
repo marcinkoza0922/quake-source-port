@@ -159,6 +159,8 @@ pub struct Geometry<'a> {
     pub cull_behind: bool,
     /// Optional tangent of the vertical half-FOV; only used with cull_behind.
     pub vertical_tan: Option<f32>,
+    /// Optional tangent of the horizontal half-FOV; only used with cull_behind.
+    pub horizontal_tan: Option<f32>,
     reg: &'a Registry,
     view: ViewInfo,
     particletime: f32,
@@ -187,6 +189,7 @@ impl<'a> Geometry<'a> {
         Geometry {
             cull_behind: false,
             vertical_tan: None,
+            horizontal_tan: None,
             reg,
             view,
             particletime,
