@@ -36,7 +36,7 @@ impl Impacts {
 
 /// BSP has no material metadata. Use conventional texture names; unknown
 /// materials deliberately behave as hard surfaces.
-pub(super) fn wood(name: &str) -> bool {
+pub(crate) fn wood(name: &str) -> bool {
     let n = name.to_ascii_lowercase();
     ["wood", "crate", "plank", "timber", "tree", "trunk"]
         .iter()
@@ -46,19 +46,20 @@ pub(super) fn wood(name: &str) -> bool {
 }
 
 pub(super) fn wooden(world: &BspWorld<'_>, tr: &qpart::Trace) -> bool {
+    texture_at(world, tr).is_some_and(|t| wood(&t.name))
+}
+
+/// The miptex of the face `tr` hit, on the world or an inline brush entity.
+pub(crate) fn texture_at<'b>(world: &BspWorld<'b>, tr: &qpart::Trace) -> Option<&'b qformats::bsp::MipTex> {
     let (sub, p, n) = if tr.entity == 0 {
         (0, tr.endpos, tr.normal)
     } else {
-        let Some(e) = world.ents.iter().find(|e| e.entity == tr.entity) else {
-            return false;
-        };
+        let e = world.ents.iter().find(|e| e.entity == tr.entity)?;
         let p = e.local(tr.endpos);
         let n = e.local(tr.endpos + tr.normal) - p;
         (e.submodel, p, n)
     };
-    let Some(model) = world.bsp.models.get(sub) else {
-        return false;
-    };
+    let model = world.bsp.models.get(sub)?;
     for f in
         &world.bsp.faces[model.first_face as usize..(model.first_face + model.num_faces) as usize]
     {
@@ -87,10 +88,9 @@ pub(super) fn wooden(world: &BspWorld<'_>, tr: &qpart::Trace) -> bool {
             .texinfo
             .get(f.texinfo as usize)
             .and_then(|t| world.bsp.textures.get(t.miptex.max(0) as usize))
-            .and_then(|t| t.as_ref())
-            .is_some_and(|t| wood(&t.name));
+            .and_then(|t| t.as_ref());
     }
-    false
+    None
 }
 
 pub(super) fn texture() -> Vec<u8> {

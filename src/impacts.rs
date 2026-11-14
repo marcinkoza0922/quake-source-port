@@ -6,7 +6,7 @@ use qpart::World;
 use qrender::{FteBatch, FteBlend, FteVertex, ModelId, PicId, RenderEntity};
 use std::collections::{HashMap, VecDeque};
 mod nails;
-mod surfaces;
+pub(crate) mod surfaces;
 #[cfg(test)]
 mod tests;
 

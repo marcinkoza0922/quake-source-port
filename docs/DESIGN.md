@@ -484,3 +484,10 @@ from its help prompts and Start/Back buttons. Wheel input over the list scrolls
 only that list; Page Up/Down pages it while focused. Keyboard/controller selection
 reveals its row. Drawing and pointer hit testing share the scroll offset and
 viewport bounds; description and settings retain independent scrolling.
+
+Surface hit effects (`src/hitfx.rs`, `src/hitfx/`): `r_impact_fx` 0 off, 1 subtle (default),
+2 normal, 3 intense, 4 spectacle, on the Impact Effects page. Each bullet/nail impact (and the
+nearest surface to an explosion, from normal up) is classified by texture name into metal
+(sparks, flash), stone (chips, dust), wood (splinters), dirt (clods), water/slime (droplets,
+mist), lava (embers, smoke) or sky (nothing); chips and dust are tinted with the texture's
+average colour. Own client-side simulation with bouncing fragments, drawn as FTE batches.
