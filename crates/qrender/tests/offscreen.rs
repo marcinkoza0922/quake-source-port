@@ -165,6 +165,27 @@ fn start_bsp_renders_non_black() {
         r.read_pixels().unwrap(),
         "reset must restore source scenery"
     );
+    // Both players see the same teleporter destination. Sharing the immutable
+    // destination ranges must preserve each cell's pixels and rebuild after
+    // time changes and frames that use a different layout.
+    let portal_splits = [
+        SplitView { view: portal_frame.view.unwrap(), rect: [0, 0, 160, 200], blend: [0.0; 4] },
+        SplitView { view: portal_frame.view.unwrap(), rect: [160, 0, 160, 200], blend: [0.0; 4] },
+    ];
+    let portal_single = RenderFrame { splits: &portal_splits[..1], ..portal_frame };
+    let portal_double = RenderFrame { splits: &portal_splits, ..portal_frame };
+    let cell = |pixels: &[u8], x: usize| pixels.chunks_exact(320 * 4)
+        .flat_map(|row| row[x * 4..(x + 160) * 4].iter().copied()).collect::<Vec<_>>();
+    r.render(&portal_single).unwrap();
+    let cell_expected = cell(&r.read_pixels().unwrap(), 0);
+    r.render(&portal_double).unwrap();
+    let both_expected = r.read_pixels().unwrap();
+    assert_eq!(cell_expected, cell(&both_expected, 0));
+    assert_eq!(cell_expected, cell(&both_expected, 160), "shared destination changed the second view");
+    r.render(&RenderFrame { time: portal_frame.time + 1.0, ..portal_double }).unwrap();
+    r.render(&portal_single).unwrap();
+    r.render(&portal_double).unwrap();
+    assert_eq!(both_expected, r.read_pixels().unwrap(), "destination ranges survived into another frame");
     // 2D only frame
     r.render(&RenderFrame::default()).unwrap();
     // Profiling must preserve pixels and produce complete queries for AO on,
@@ -203,6 +224,20 @@ fn start_bsp_renders_non_black() {
     r.resize(320, 200);
     r.render(&split_frame).unwrap();
     assert_eq!(split_expected, r.read_pixels().unwrap(), "AO snapshot changed after target recreation");
+    // Capture multi-view pixels before enabling profiling, including a fifth
+    // view to force query-pool growth beyond the four-player reservation.
+    let view_counts = [2, 4, 5, 1];
+    let split_cases: Vec<Vec<SplitView>> = view_counts.iter().map(|&n| {
+        (0..n).map(|i| SplitView {
+            view: View { angles: [0.0, yaw + i as f32 * 45.0, 0.0], ..view },
+            rect: [i as u32 * (320 / n as u32), 0, 320 / n as u32, 200],
+            blend: [0.0; 4],
+        }).collect()
+    }).collect();
+    let split_pixels: Vec<_> = split_cases.iter().map(|splits| {
+        r.render(&RenderFrame { splits, ..split_frame }).unwrap();
+        r.read_pixels().unwrap()
+    }).collect();
     r.gpu_times_wanted = true;
     for (frame, expected) in frames.iter().zip(expected) {
         // Drain both frame slots so collection includes this path's queries.
@@ -215,4 +250,24 @@ fn start_bsp_renders_non_black() {
             assert!(us.is_finite() && us >= 0.0, "invalid {name} timestamp: {us}");
         }
     }
+    for (splits, expected) in split_cases.iter().zip(split_pixels) {
+        let frame = RenderFrame { splits, ..split_frame };
+        for _ in 0..4 { r.render(&frame).unwrap(); }
+        let _ = r.take_gpu_times(); // discard queries from the previous view count
+        for _ in 0..4 { r.render(&frame).unwrap(); }
+        assert_eq!(expected, r.read_pixels().unwrap(), "profiling changed split pixels");
+        let views = r.gpu_view_times();
+        let (frames, stages) = r.take_gpu_times().unwrap();
+        assert_eq!(views.len(), splits.len());
+        for view in &views { assert_eq!(view.frames, frames); }
+        for (name, us) in &stages {
+            assert!(us.is_finite() && *us >= 0.0, "invalid {name}: {us}");
+            if *name == "ui+present" { continue; }
+            let sum: f64 = views.iter().flat_map(|v| &v.stages)
+                .filter(|(k, _)| k == name).map(|v| v.1).sum();
+            assert!((sum - us).abs() < 1e-6, "{name} double-counted or missing a view");
+        }
+        assert!(r.gpu_view_times().is_empty(), "taking totals must reset views too");
+    }
+
 }

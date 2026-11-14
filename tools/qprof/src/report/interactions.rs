@@ -67,7 +67,7 @@ pub(super) fn write(md: &mut String, rows: &[&Result], base: &Run) {
         }
     }
     if !ao.is_empty() {
-        let _ = writeln!(md, "\n### SSAO GPU breakdown\n\nTimes in µs from the median-fps run. Prepare includes scene/depth transitions and AO target setup; to-apply includes AO/colour transitions; resume includes depth transition and scene restart. These intervals include GPU stalls and rendering boundaries, not isolated barrier instruction costs. With SSAO off they contain only timestamp overhead. Split-screen measures the first view here; later views remain in post.\n\n| scenario | prepare | generate | to apply | apply | resume | AO total |\n|---|--:|--:|--:|--:|--:|--:|\n{ao}");
+        let _ = writeln!(md, "\n### SSAO GPU breakdown\n\nTimes in µs from the median-fps run. Prepare includes scene/depth transitions and AO target setup; to-apply includes AO/colour transitions; resume includes depth transition and scene restart. These intervals include GPU stalls and rendering boundaries, not isolated barrier instruction costs. With SSAO off they contain only timestamp overhead. New profiles sum these stages across every scene view; older profiles measured only the first view.\n\n| scenario | prepare | generate | to apply | apply | resume | AO total |\n|---|--:|--:|--:|--:|--:|--:|\n{ao}");
     }
 
 }

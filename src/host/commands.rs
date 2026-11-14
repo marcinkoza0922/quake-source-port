@@ -337,7 +337,8 @@ pub(super) fn register_commands(c: &mut Commands<Host>) {
     });
     c.add("prof_stop", |h, a| {
         let Some(p) = h.prof.take() else { return h.print("prof_stop: not recording\n") };
-        let json = p.report(h.r.take_gpu_times());
+        let views = h.r.gpu_view_times();
+        let json = p.report(h.r.take_gpu_times(), &views);
         let path = a.argv(1);
         if path.is_empty() {
             h.print(&json);

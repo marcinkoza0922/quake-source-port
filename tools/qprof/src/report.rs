@@ -4,12 +4,14 @@
 
 use std::fmt::Write as _;
 mod interactions;
+mod views;
 
 /// Host phases as host/prof.rs names them.
 pub const PHASES: [&str; 6] = ["pre", "input", "server", "client", "view+sound", "render"];
 
 #[derive(Clone, Debug, Default)]
 pub struct Run {
+    views: Vec<views::View>,
     pub particles: Option<[f64; 5]>,
     pub fps: f64,
     pub frame_mean: f64,
@@ -73,6 +75,7 @@ impl Run {
             }
             r.particles = Some(counters);
         }
+        r.views = views::parse(s)?;
         Some(r)
     }
 
@@ -147,6 +150,7 @@ pub fn write(o: &crate::Opts, results: &[Result]) {
                 let _ = writeln!(md, "| {} | {live:.0} | {beams:.0} | {decals:.0} | {vertices:.0} | {indices:.0} |", r.scenario);
             }
         }
+        views::write(&mut md, &rows);
         let Some(b) = base else { continue };
         interactions::write(&mut md, &rows, &b);
         // Where each scenario's extra cost went.
@@ -199,10 +203,11 @@ pub fn write(o: &crate::Opts, results: &[Result]) {
     for (i, r) in results.iter().enumerate() {
         let x = &r.run;
         let gpu: Vec<String> = x.gpu.iter().map(|(k, v)| format!("\"{k}\": {v:.2}")).collect();
+        let views = views::json(&x.views);
         let particles = x.particles.map_or_else(|| "null".to_string(), |v| format!("{:?}", v));
         let ph: Vec<String> = PHASES.iter().zip(x.phases).map(|(k, v)| format!("\"{k}\": {v:.2}")).collect();
         let _ = write!(js, "{}  {{\"scenario\": \"{}\", \"group\": \"{}\", \"map\": \"{}\", \"fte_particles_mean\": {particles}, \"fps\": {:.1}, \"frame_mean\": {:.2}, \
-            \"frame_p99\": {:.2}, \"frame_max\": {:.2}, \"fence\": {:.2}, \"phases\": {{{}}}, \"gpu_total\": {:.2}, \"gpu\": {{{}}}}}",
+            \"frame_p99\": {:.2}, \"frame_max\": {:.2}, \"fence\": {:.2}, \"phases\": {{{}}}, \"gpu_total\": {:.2}, \"gpu_views_us\": {views}, \"gpu\": {{{}}}}}",
             if i > 0 { ",\n" } else { "" }, r.scenario, r.group, r.map, x.fps, x.frame_mean, x.frame_p99, x.frame_max, x.fence,
             ph.join(", "), x.gpu_total, gpu.join(", "));
     }
@@ -242,6 +247,14 @@ mod tests {
         assert_eq!(r.render_cpu(), 900.0);
         assert_eq!(r.bound(), "GPU");
         assert!(r.particles.is_none());
+        assert!(r.views.is_empty(), "older profiles have no view breakdown");
+        let with_views = s.replacen("\"frame_us_raw\":", "\"gpu_views_us\": [{\"frames\": 3, \"total\": 7.5, \"world\": 6, \"post\": 1.5}, {\"frames\": 2, \"total\": 5, \"world\": 4, \"post\": 1}], \"frame_us_raw\":", 1);
+        let parsed = super::Run::parse(&with_views).unwrap();
+        assert_eq!(parsed.gpu_total, r.gpu_total, "view totals must not be counted twice");
+        assert_eq!(parsed.gpu, r.gpu);
+        assert_eq!(parsed.views.len(), 2);
+        assert_eq!(parsed.views[1].frames, 2);
+
         let with = s.replacen("\"frames\": 3,", "\"fte_particles\": {\"live\": {\"mean\": 10}, \"beams\": {\"mean\": 2}, \"decals\": {\"mean\": 3}, \"vertices\": {\"mean\": 40}, \"indices\": {\"mean\": 60}}, \"frames\": 3,", 1);
         assert_eq!(super::Run::parse(&with).unwrap().particles, Some([10., 2., 3., 40., 60.]));
     }

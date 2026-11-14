@@ -87,14 +87,15 @@ confirm wins windowed (`qprof -window`, or qbench for parity).
 - Expect: the largest single gain on AD maps (vanilla included).
 
 ### 5. Split-screen post-processing
-- Problem: GPU `post` is 11.2 ms with 4 split views against 0.25 ms solo
-  (about 44×). Post passes (SSAO, blur, screen shader) seem to run at
-  full-screen size for each view.
-- Plan: confirm with a per-view timestamp; then run each view's post at
-  its viewport size, and run whole-screen passes (screen shader with
-  `r_shader_scope 1`, goggles) once for the whole screen instead of per
-  view.
-- Expect: co-op from ~44 to well over 100 fps headless.
+- Original suspicion: GPU `post` was 11.2 ms with four split views against
+  0.25 ms solo. This was a timestamp attribution error: only the first
+  scene wrote stage boundaries, leaving later scenes in `post`.
+- Instrumented: each scene now writes all stage boundaries, including its
+  post pass, and shared UI/screen shader/present is counted once. qprof
+  reports both aggregate stages and each view's contribution (results below).
+- Next: use the corrected scene/destination breakdown to choose a target.
+  The original prediction of >100 fps from fixing post is unsupported;
+  no post-processing optimisation has been made or justified by that bucket.
 
 ### 6. Supersampling combined with other enhancements
 - Problem: all enhancements together cost far more than the sum of each
@@ -120,9 +121,12 @@ confirm wins windowed (`qprof -window`, or qbench for parity).
 ### 7. Extra scene views (teleporter windows, portals)
 - Problem: `teleportwindows` +1.3 ms CPU and +0.7 ms GPU on AD; each window
   re-walks the world on the CPU (`build_world_draw`).
-- Plan: after item 2, cache each window's destination surface list (static
-  destinations); cull windows by screen size and distance; consider the
-  GPU cull path for portal views as for the main view.
+- Implemented: item 2 caches destination surface lists. Destination world
+  index/indirect ranges are now reused within a frame when several windows,
+  recursive portals or split players share that exact list (results below).
+- Remaining candidates: cull windows by screen size and distance; consider
+  the GPU cull path for portal views as for the main view. Reprofile first,
+  since eliminating repeated CPU construction changes the balance.
 
 ## Phase 3: gameplay-scale and smaller items
 
@@ -164,8 +168,10 @@ confirm wins windowed (`qprof -window`, or qbench for parity).
   and controlled setting differences in `report.md`.
 - Done: separate SSAO generation/application/transition intervals and the
   200%-scale SSAO matrix at 1 sample, 8x MSAA and 8x sample shading (item 6).
-- Add a per-view GPU timestamp for split-screen (item 5); current stage
-  intervals measure the first view and charge later views to `post`.
+- Done: per-view GPU stages for split-screen and a separate destination
+  rendering interval (items 5/7); qprof reports per-view contributions without
+  double-counting aggregate GPU totals. Earlier reports measured only the
+  first view and charged later views to `post`.
 - Record a windowed baseline (`qprof -window`) once, for absolute numbers.
 
 ## Results log
@@ -534,6 +540,163 @@ confirm wins windowed (`qprof -window`, or qbench for parity).
   pairs establish pixel equivalence. Reports: `snapshot-window-before/`
   and `snapshot-window-after/` under `target/qprof/`. Windowed logs are
   clean and all user config-file hashes stayed unchanged. These are engine
-  A/B results, not reference-engine parity measurements. Next: remeasure
-  all-enhancements with this optimisation before choosing another combined
-  cost target; split-view GPU timestamp attribution remains outstanding.
+  A/B results, not reference-engine parity measurements. The all-enhancements
+  follow-up is recorded below; split-view GPU timestamp attribution remains
+  outstanding.
+
+- 2026-11-14, item 6 all-enhancements confirmation: compared the saved
+  pre-snapshot executable with the current build (3359a61), RTX 3060 Ti,
+  1280×720 headless, pinned qprof all-enhancements, 20 s measured after 4 s
+  warm-up, 250 Hz simulation, three runs/build/map. Values are from the
+  median-fps run, matching qprof's selection:
+
+  | map | fps before → after | frame µs | GPU µs | p99 µs |
+  |---|--:|--:|--:|--:|
+  | e1m1 | 126.6 → 151.2 | 7897 → 6613 (−16.3%) | 7805 → 6508 | 9895 → 8750 |
+  | ad_sepulcher | 88.1 → 95.5 | 11348 → 10473 (−7.7%) | 11269 → 10384 | 22481 → 19118 |
+
+  SSAO generation falls 3509→1827 / 2779→1507 µs (e1m1/AD), with
+  prepare increasing 43→270 / 26→231 µs, including snapshot extraction.
+  All six fixed-time combat screenshot pairs have AE = 0; frame and FTE
+  particle/geometry counters match in every pair. Inspected e1m1's impact
+  sparks/shaded corner/weapon and AD's pillar/torch/axe, with CRT-filtered
+  HUDs. Benchmark logs have no unknown commands/cvars, Host_Error or
+  validation errors (validation was not enabled for these timing runs).
+  Raw profiles, logs and shots: `target/qprof/combined-snapshot-before/`
+  and `combined-snapshot-after/`; comparison: `target/perf-combined/`.
+  Each profile contains 5000 measured frames; an additional replacement
+  probe is excluded from the three-run median. No rendering code changed
+  here; windowed all-enhancements confirmation remains outstanding.
+  Verification: 455 tests passed, 2 skipped; clippy clean.
+
+  Next: finer GPU attribution for destination views and split-screen
+  (items 5/7). After the snapshot, AD's largest scene buckets are
+  `particles+vm` 2051 µs, `targets` 1952 µs and `world` 1682 µs;
+  `targets` includes `draw_portals`, so it does not isolate attachment setup.
+  Split-screen currently times only the first view's scene and charges later
+  views to `post`; separate view/destination work before choosing a fix.
+  The 2119 µs `ui+present` bucket includes readback and the whole-screen
+  shader; it cannot be treated as pure readback or compared with windowed.
+
+- 2026-11-14, items 5/7 GPU attribution: every scene view now writes a full
+  set of stage boundaries; aggregate stages sum all views, while shared
+  UI/screen shader/present is counted once. `destinations` isolates
+  `draw_portals` (all portal/teleporter destinations, including recursion),
+  separately from target transitions. Scene begin/clear now falls into
+  `world`, so old `targets`/`world` values are not directly comparable.
+  `gpu_views_us` and qprof's GPU scene views table report each view's
+  contribution with the same per-profiled-frame denominator as the aggregate,
+  plus its active-frame count. They do not inflate the aggregate GPU total.
+  Query pools reserve four views and grow safely after draining both frame
+  slots; result storage is reused, and only written queries are read.
+
+  RTX 3060 Ti, 1280×720 headless, pinned qprof settings, 8 s measured after
+  4 s warm-up, 250 Hz simulation, three runs/build/scenario on ad_sepulcher
+  (2000 measured frames each; shorter diagnostic workload than the 20 s
+  optimisation baselines). Values come from the median-fps run:
+
+  | scenario | frame µs before → after | GPU µs before → after |
+  |---|--:|--:|
+  | vanilla | 2020 → 1954 | 1916 → 1870 |
+  | teleportwindows | 3476 → 3354 | 3379 → 3275 |
+  | ultimate-coop | 16714 → 16727 | 11721 → 11649 |
+
+  This is instrumentation, with no speedup claim: co-op frame time changes
+  +0.08%; the smaller control changes (−3.3%/−3.5%) are near run noise.
+  Co-op's old `post` bucket was 7086 µs in this workload; actual post is
+  423 µs across four views (105/104/108/107 µs). Scene totals are
+  2445/2304/2326/2286 µs, with shared UI/present 2288 µs. The largest scene
+  stages are world 2422 µs, destinations 2237 µs, AO total 1503 µs and
+  particles/viewmodel 1316 µs. Teleporter-only destinations cost 495 µs;
+  their main-view particles/viewmodel cost 1482 µs.
+
+  All nine combat screenshot pairs are pixel-identical (AE = 0), with
+  matching frame and particle/geometry counters. All per-view contributions
+  sum to the aggregate within JSON rounding. Two additional pixel-identical
+  pairs cover recursive e1m1 portals and four AD split views at 8x MSAA,
+  200% scale and high SSAO; all four runs with Vulkan validation are clean.
+  Inspected the recursive orange ovals/player model, four torch-lit AD
+  views/weapons/HUDs, and the co-op thermal/impact scene. Tests cover changing
+  counts (1/2/4/5 views), query-pool growth, resetting statistics, unchanged
+  pixels, and parsing/reporting old and new profiles without double-counting.
+  457 tests passed, 2 skipped; six qprof tests also passed after extending
+  parser coverage; clippy clean. Reports: `target/qprof/views-before/` and
+  `views-after/`; comparisons/validation: `target/perf-views/`.
+
+  Next: CPU-profile repeated scene building in `ultimate-coop` before
+  choosing another optimisation (items 4/7). Render CPU excluding fence is
+  14747 µs and fence wait only 696 µs: co-op remains CPU-bound despite its
+  substantial GPU costs. Revisit particle geometry shared by multiple views
+  and repeated world/destination draw building using that profile. The
+  original post-only >100 fps prediction is withdrawn. No rendering or
+  gameplay algorithm changed; windowed confirmation remains outstanding.
+
+- 2026-11-14, item 7 destination world draw reuse: a full 20 s co-op
+  `qprof -perf` run (4 s warm-up, 250 Hz headless simulation, RTX 3060 Ti,
+  1280×720, release with line-table symbols) found `build_world_draw` at
+  24.34% of sampled engine cycles on the main cores and u32 quicksort at
+  18.31%. The render path sorts the accumulated lightmap requests; this
+  profile has no call stacks, so the sort symbol alone does not identify
+  all callers. The main-core event has about 216k process samples; the
+  small-core event has only 229 and is not used for these percentages.
+  Profile: `target/qprof/coop-cpu-investigation/`.
+
+  `PortalWorldCache` now reuses immutable world index/indirect ranges when
+  destination views share the same cached PVS surface-list allocation.
+  The cache belongs to one render call and is shared by all scene views,
+  including recursive portals and split-screen players. Identity uses
+  `Arc::ptr_eq`, retaining the list for the frame; different allocations
+  build independently. Time, texture animation, liquid alpha and hidden
+  surfaces are common within a render call and rebuild next frame. View
+  UBOs, clipping, entities and particles remain separate. Cache hits also
+  avoid appending duplicate lightmap requests; the final sorted/deduped
+  union is unchanged. No persistent buffers or rendering algorithm changed.
+
+  Headless A/B, same GPU/resolution, pinned `ultimate-coop` on ad_sepulcher,
+  20 s measured after 4 s warm-up, 250 Hz, three runs/build, both builds
+  with line-table symbols. Medians select the run by fps as qprof does:
+
+  | metric | before | after | change |
+  |---|--:|--:|--:|
+  | fps | 41.9 | 58.4 | +39.4% |
+  | frame µs | 23875 | 17114 | −28.3% |
+  | render CPU excluding fence µs | 21934 | 13414 | −38.8% |
+  | p99 frame µs | 65348 | 40966 | −37.3% |
+  | GPU µs | 16159 | 16463 | +1.9% |
+
+  Short controls (same map/settings, 8 s after 4 s warm-up, three runs/build):
+  vanilla 2038→2027 µs, teleportwindows 3470→3429 µs (−0.5%/−1.2%, within
+  noise). All six control screenshot pairs have AE = 0. The nine full-cycle
+  horde pairs differ by 61–8986 pixels (up to 0.98%); repeated baseline runs
+  also differ (188/203/9407 pixels at 5/10/15 s for runs 0 and 1). Inspected
+  the difference image and four-player portal/blood/impact scene; changes
+  occupy effects regions and have the same scale as baseline variation.
+  Frame and FTE counters match in every pair. Exact-output checks use fixed
+  quiet scenes: recursive e1m1 portals and four AD split views with teleporter
+  windows, high SSAO, 8x MSAA and 200% scale both have AE = 0. All four
+  validation runs are clean; inspected the recursive ovals/player model.
+  Unit coverage checks range sharing and lightmap requests across cache hits,
+  distinct lists and new frames. The offscreen test checks two players
+  viewing the same teleporter against a single-view reference, then changes
+  time and layout and requires the original pixels again. 458 tests passed,
+  2 skipped; clippy clean. No server/physics change.
+  Reports: `target/qprof/destination-before/`, `destination-after/`,
+  `destination-controls-before/`, `destination-controls-after/`;
+  comparisons/validation: `target/perf-destination-cache/`.
+
+  Windowed check (same GPU/resolution, pinned ultimate-coop, 20 s after
+  4 s warm-up, three runs/build, vsync off, `host_maxfps 10000`): before
+  75.8/75.0/64.8 fps, after 79.5/73.7/73.1 fps. Median frame 13338→13571 µs
+  (+1.7%), render CPU excluding fence 10376→10341 µs, GPU 8797→10756 µs.
+  This does not confirm a windowed speedup. Wall-time combat differs with
+  frame rate, and the run spread is much larger than the median change;
+  the unchanged configuration and clean logs do not establish identical
+  live workloads. All config-file hashes stayed unchanged. Reports:
+  `target/qprof/destination-window-before/` and `destination-window-after/`.
+  These results are engine A/B measurements, not reference-engine parity.
+
+  Next: make the windowed co-op workload repeatable (fixed scene/cameras or
+  recorded movement) and profile the optimised full cycle before choosing
+  another fix. The headless CPU saving is clear, but does not by itself
+  establish a live-play fps improvement. Revisit the remaining lightmap
+  request sorting and world/destination work with those measurements.

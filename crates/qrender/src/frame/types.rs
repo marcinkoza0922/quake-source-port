@@ -173,6 +173,7 @@ pub(super) struct Range {
     pub(super) count: u32,
 }
 
+#[derive(Clone, Copy)]
 pub(super) struct WorldDraw {
     pub(super) model: Mat4,
     /// Brush entity: drawn with a depth bias toward the viewer so it wins

@@ -61,7 +61,7 @@ impl Profiler {
     }
 
     /// JSON report; `gpu` is (frames, [(stage, avg µs)]).
-    pub(super) fn report(&self, gpu: Option<(u64, Vec<(&'static str, f64)>)>) -> String {
+    pub(super) fn report(&self, gpu: Option<(u64, Vec<(&'static str, f64)>)>, views: &[qrender::GpuViewTiming]) -> String {
         let n = self.frames.len();
         let col = |k: usize| -> Vec<f64> { self.frames.iter().map(|r| r[k]).collect() };
         let stats = |mut v: Vec<f64>| -> String {
@@ -98,6 +98,12 @@ impl Profiler {
             }
             _ => s.push_str("null"),
         }
+        let view_json: Vec<String> = views.iter().map(|view| {
+            let total: f64 = view.stages.iter().map(|v| v.1).sum();
+            let stages: Vec<String> = view.stages.iter().map(|(name, us)| format!("\"{name}\": {us:.2}")).collect();
+            format!("{{\"frames\": {}, \"total\": {total:.2}, {}}}", view.frames, stages.join(", "))
+        }).collect();
+        s.push_str(&format!(",\n  \"gpu_views_us\": [{}]", view_json.join(", ")));
         let counters: Vec<String> = COUNTERS.iter().enumerate().map(|(k, name)| {
             let values = self.particles.iter().map(|row| row[k] as f64).collect();
             format!("\"{name}\": {}", stats(values))
@@ -121,12 +127,13 @@ mod tests {
             }
             p.end(5000, [10, 2, 3, 40, 60]);
         }
-        let r = p.report(Some((3, vec![("world", 10.0), ("post", 2.5)])));
+        let r = p.report(Some((3, vec![("world", 10.0), ("post", 2.5)])), &[qrender::GpuViewTiming { frames: 3, stages: vec![("world", 10.0)] }]);
         assert!(r.contains("\"frames\": 3"));
         assert!(r.contains("\"fence_wait_us\": {\"mean\": 5.00"));
         assert!(r.contains("\"total\": 12.50"));
         assert!(r.contains("\"render\""));
         assert!(r.contains("\"live\": {\"mean\": 10.00"));
         assert!(r.contains("\"vertices\": {\"mean\": 40.00"));
+        assert!(r.contains("\"gpu_views_us\": [{\"frames\": 3, \"total\": 10.00, \"world\": 10.00}]"));
     }
 }
