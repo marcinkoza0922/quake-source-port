@@ -1,4 +1,4 @@
-Write a full fledged Quake source port from scratch. It should be written in Rust using a Vulkan renderer and custom, fit-to-purpose ECS engine.
+Write a full fledged Quake source port from scratch. It should be written in Rust using a Vulkan renderer and a custom, fit-to-purpose engine.
 
 The repos to ironwail and vkQuake are included as well as a reference, as is a symlink to a directory where I have a bunch of quake maps installed. Exclude these from the git repo. 
 

@@ -435,7 +435,7 @@ pub fn particles(cl: &ClientState, out: &mut Vec<Particle>) {
 }
 
 pub fn dlights(cl: &ClientState, out: &mut Vec<DLight>) {
-    for (_, d) in cl.dlights.iter() {
+    for d in cl.dlights.iter() {
         if d.die < cl.time || d.radius <= 0.0 {
             continue;
         }

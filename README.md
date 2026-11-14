@@ -1,8 +1,10 @@
 # quake-source-port
 
 A Quake source port written from scratch in Rust, with a Vulkan renderer
-(`ash`) and a custom, fit-to-purpose ECS engine. SDL3 handles windowing,
-input, gamepads and audio.
+(`ash`) and a custom engine. Like the original, entities are Quake edicts:
+QuakeC owns their fields and behaviour, and the engine runs plain subsystems
+(physics, networking, client effects, rendering) over them in a fixed frame
+order. SDL3 handles windowing, input, gamepads and audio.
 
 ## What sets it apart
 
@@ -100,7 +102,7 @@ cargo run --release -- -headless -autoquit 6 +map e1m1 "+delay 3 screenshot targ
 | `src/` | Host binary (wires the crates together, plus menus, HUD and console) |
 | `crates/qcore` | Math, cvars/commands, filesystem (PAK/PK3) |
 | `crates/qformats` | BSP29/BSP2, MDL, SPR, WAD, LMP, image and WAV parsing |
-| `crates/qecs` | Custom ECS |
+| `crates/qpool` | Edict slot allocator, capped effect pools, SoA particle storage |
 | `crates/qvm` | QuakeC VM |
 | `crates/qworld` | Collision and physics |
 | `crates/qserver`, `qclient`, `qnet` | Server, client and protocols |

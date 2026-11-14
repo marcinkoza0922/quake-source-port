@@ -1,7 +1,7 @@
 //! Temp entities, dynamic lights and particles (cl_tent.c, cl_main.c
 //! CL_AllocDlight/CL_DecayLights, r_part.c simulation only).
 
-use qecs::ParticleSpawn;
+use qpool::ParticleSpawn;
 
 use crate::anorms::{AVERTEXNORMALS, NUMVERTEXNORMALS};
 use crate::state::{ClientState, MAX_TEMP_ENTITIES};

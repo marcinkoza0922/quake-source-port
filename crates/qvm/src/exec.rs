@@ -1,6 +1,6 @@
 //! Interpreter. Port of pr_exec.c.
 
-use qecs::EntityAllocator;
+use qpool::EntityAllocator;
 
 use crate::builtins::{self, Dispatch};
 use crate::progs::Progs;
