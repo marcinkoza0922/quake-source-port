@@ -33,7 +33,7 @@ pub(super) fn build_world_draw(
 ) -> WorldDraw {
     for &si in surfs {
         if w.cpu.hidden_surfaces.contains(&si) { continue; }
-        let s = &w.cpu.surfaces[si as usize];
+        let s = &w.draw_surfaces[si as usize];
         let t = (w.cpu.resolve_texture(s.texture, alt, time, si) as usize).min(buckets.len() - 1);
         buckets[t].push(si);
         if s.lm != NO_LM {
@@ -48,7 +48,7 @@ pub(super) fn build_world_draw(
         let mut first = None;
         let mut count = 0u32;
         for &si in b.iter() {
-            let s = &w.cpu.surfaces[si as usize];
+            let s = &w.draw_surfaces[si as usize];
             let idx =
                 &w.cpu.indices[s.first_index as usize..(s.first_index + s.num_indices) as usize];
             let Some(o) = dynw.push(idx, 4) else { break };

@@ -67,6 +67,8 @@ pub(super) enum Sampling {
 pub(super) struct WorldGpu {
     pub(super) portals: Vec<crate::portals::Portal>,
     pub(super) cpu: world::World,
+    /// Compact immutable metadata for CPU draw construction, including brushes.
+    pub(super) draw_surfaces: Vec<DrawSurface>,
     pub(super) vbuf: Buffer,
     pub(super) samples: Buffer,
     pub(super) surfs: Buffer,
@@ -78,6 +80,20 @@ pub(super) struct WorldGpu {
     /// Per-frame scratch reused by `gpu_world_draw`.
     pub(super) scratch_bits: Vec<u32>,
     pub(super) scratch_cmds: Vec<vk::DrawIndexedIndirectCommand>,
+}
+
+/// Draw construction needs only these four fields of the larger CPU surface.
+pub(super) struct DrawSurface {
+    pub(super) first_index: u32,
+    pub(super) num_indices: u32,
+    pub(super) texture: u32,
+    pub(super) lm: u32,
+}
+
+impl From<&world::Surface> for DrawSurface {
+    fn from(s: &world::Surface) -> Self {
+        Self { first_index: s.first_index, num_indices: s.num_indices, texture: s.texture, lm: s.lm }
+    }
 }
 
 /// GPU world culling (cull.comp) resources.
