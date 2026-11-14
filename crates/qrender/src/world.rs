@@ -3,6 +3,8 @@
 
 use qformats::bsp::{Bsp, TEX_SPECIAL, TextureKind};
 mod build;
+#[cfg(test)]
+mod build_tests;
 mod query;
 mod cull;
 mod light;
@@ -34,6 +36,7 @@ pub struct LmSurf {
     pub vecs0: [f32; 4],
     pub vecs1: [f32; 4],
     pub plane: [f32; 4],
+    /// Texture minima, atlas layer, fullbright fallback for an unlit BSP.
     pub tmins: [f32; 4],
 }
 
