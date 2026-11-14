@@ -76,6 +76,9 @@ impl Renderer {
             st.telealpha.unwrap_or(st.wateralpha),
         ]
         .map(|a| a.clamp(0.0, 1.0));
+        if let Some(wg) = &mut self.world {
+            wg.cpu.set_transparent_liquids(alphas.iter().any(|&a| a < 1.0));
+        }
         let time = fr.time;
         let mut styles = [256.0f32; 256];
         for (i, v) in fr.lightstyles.iter().take(256).enumerate() {
