@@ -170,3 +170,16 @@ confirm wins windowed (`qprof -window`, or qbench for parity).
   19.8 → 16.7 ms. `portalgun`/`teleportwindows` unchanged headless (GPU and
   readback bound). Screenshots identical except ≤ 0.008% pixels in co-op
   (live horde noise).
+- 2026-11-13, item 3 (a, b, plus upload): the coat atlas is kept between
+  rebuilds and each cluster's texels are cached by a hash of its square and
+  splats, so a rebuild fills only changed clusters (600 splats: 27 → 0.7 ms
+  after the first build). Texels whose summed field is below the lowest
+  possible edge skip the noise; `noise` floors without libm; `group` uses a
+  grid instead of comparing every pair. Most of the spike was the 16 MB atlas
+  upload: `Renderer::update_pic_rows` now rewrites the image in place and
+  uploads only the packed rows (the rest is cleared on the GPU). `gel`
+  (3 runs): e1m1 p99 18.4 → 4.5 ms, fps 592 → 716; ad_sepulcher p99 14.3 →
+  6.5 ms. Screenshots pixel-identical (apart from the console line printing
+  the output path). Left: ~2 ms of `idle()` plus ~1 ms of submit wait per
+  rebuild; removing them needs an asynchronous per-frame texture upload.
+  (c), cheaper noise (*visual*), was not needed.

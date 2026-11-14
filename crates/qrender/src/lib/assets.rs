@@ -218,28 +218,44 @@ impl Renderer {
     /// Replaces a picture's texels (same size it was registered with), for
     /// CPU-built atlases such as the UI text cache. Waits for the GPU.
     pub fn update_pic(&mut self, pic: PicId, rgba: &[u8]) -> Result<()> {
+        self.update_pic_rows(pic, rgba, u32::MAX)
+    }
+
+    /// Like [`Self::update_pic`], but only the first `rows` rows of `rgba`
+    /// are uploaded and the rest of the picture becomes transparent black.
+    pub fn update_pic_rows(&mut self, pic: PicId, rgba: &[u8], rows: u32) -> Result<()> {
         let Some(&PicInfo { slot, width, height }) = self.pics.get(pic.0 as usize) else {
             return Err(Error::new("no such picture"));
         };
         self.idle();
+        // After `idle` the GPU no longer reads the old image, so a same-size
+        // one is rewritten in place instead of allocating a new one.
+        let tex = self.textures[slot as usize].as_mut();
+        let sampling = tex.as_ref().map_or(Sampling::Nearest, |t| t.sampling);
+        let (img, old) = match tex.and_then(|t| t.image.take()) {
+            Some(i) if i.width == width && i.height == height && i.mips == 1 && i.layers == 1 => (i, None),
+            old => {
+                let usage = vk::ImageUsageFlags::SAMPLED | vk::ImageUsageFlags::TRANSFER_DST;
+                let img = match self.gpu.image(width, height, 1, 1, vk::Format::R8G8B8A8_UNORM, usage, vk::ImageAspectFlags::COLOR) {
+                    Ok(img) => img,
+                    Err(e) => {
+                        if let Some(t) = self.textures[slot as usize].as_mut() {
+                            t.image = old;
+                        }
+                        return Err(e);
+                    }
+                };
+                self.write_texture_descriptor(slot, img.view, self.sampler_for(sampling));
+                (img, old)
+            }
+        };
         let mut up = self.gpu.begin_upload()?;
-        let img = self.gpu.image(
-            width,
-            height,
-            1,
-            1,
-            vk::Format::R8G8B8A8_UNORM,
-            vk::ImageUsageFlags::SAMPLED | vk::ImageUsageFlags::TRANSFER_DST,
-            vk::ImageAspectFlags::COLOR,
-        )?;
-        self.gpu.upload_image(&mut up, &img, &[rgba])?;
-        self.gpu.end_upload(up)?;
-        let sampling = self.textures[slot as usize].as_ref().map_or(Sampling::Nearest, |t| t.sampling);
-        self.write_texture_descriptor(slot, img.view, self.sampler_for(sampling));
-        let old = self.textures[slot as usize].replace(Tex { image: Some(img), level: false, sampling });
-        if let Some(img) = old.and_then(|t| t.image) {
+        let r = if rows >= height { self.gpu.upload_image(&mut up, &img, &[rgba]) } else { self.gpu.upload_image_rows(&mut up, &img, rgba, rows) };
+        let r = r.and_then(|_| self.gpu.end_upload(up));
+        self.textures[slot as usize] = Some(Tex { image: Some(img), level: false, sampling });
+        if let Some(img) = old {
             self.gpu.free_image(img);
         }
-        Ok(())
+        r
     }
 }

@@ -54,6 +54,7 @@ pub struct GelFx {
     /// rebuilt when `dirty` (splats changed).
     coat_pic: Option<PicId>,
     coat: Vec<Vec<FteVertex>>,
+    atlas: super::gel_coat::Atlas,
     dirty: bool,
     built: f64,
     cm: Option<(String, qworld::CollisionModel)>,
@@ -203,7 +204,7 @@ impl GelFx {
         if self.dirty && (now - self.built >= REBUILD || now < self.built) {
             self.dirty = false;
             self.built = now;
-            rebuild(&self.splats, &mut self.coat, &mut self.coat_pic, cl, &world, r);
+            rebuild(&self.splats, &mut self.coat, &mut self.atlas, &mut self.coat_pic, cl, &world, r);
         }
         if let Some(coat_pic) = self.coat_pic.filter(|_| !self.coat.is_empty()) {
             for poly in &self.coat {
@@ -237,15 +238,16 @@ impl GelFx {
 }
 
 /// Rebuilds the coat atlas and its clipped polygons from the splats.
-fn rebuild(splats: &[Splat], coat: &mut Vec<Vec<FteVertex>>, coat_pic: &mut Option<PicId>, cl: &qclient::ClientState, world: &BspWorld, r: &mut Renderer) {
+fn rebuild(splats: &[Splat], coat: &mut Vec<Vec<FteVertex>>, atlas: &mut super::gel_coat::Atlas, coat_pic: &mut Option<PicId>, cl: &qclient::ClientState, world: &BspWorld, r: &mut Renderer) {
     use super::gel_coat::{Disc, build, group};
     coat.clear();
     let discs: Vec<Disc> = splats.iter().map(|s| Disc { kind: s.kind, origin: s.origin, normal: s.normal, radius: s.radius }).collect();
     let groups = group(&discs);
-    let (clusters, tex) = build(&discs, &groups);
+    let clusters = build(&discs, &groups, atlas);
+    let tex = &atlas.texels;
     let pic = match *coat_pic {
-        Some(p) => r.update_pic(p, &tex).ok().map(|_| p),
-        None => r.register_pic_rgba_linear(super::gel_coat::ATLAS as u32, super::gel_coat::ATLAS as u32, &tex).ok(),
+        Some(p) => r.update_pic_rows(p, tex, atlas.rows() as u32).ok().map(|_| p),
+        None => r.register_pic_rgba_linear(super::gel_coat::ATLAS as u32, super::gel_coat::ATLAS as u32, tex).ok(),
     };
     let Some(pic) = pic else { return };
     *coat_pic = Some(pic);
