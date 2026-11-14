@@ -250,14 +250,15 @@ fn controller_sections_reach_every_addons_action_without_a_keyboard() {
             assert_ne!(cv.value_of(slot), old);
             menu.key(K_DPAD_DOWN, &mut cv, false);
         }
-        let command = menu.browser_command().unwrap();
-        menu.key(K_ABUTTON, &mut cv, false);
-        assert!(menu.capturing());
-        menu.key(K_RTRIGGER, &mut cv, false);
-        if menu.bind_pending.is_some() { menu.key(K_ABUTTON, &mut cv, false); }
-        assert_eq!(menu.bindings[K_RTRIGGER as usize].as_deref(), Some(command));
-        menu.key(K_XBUTTON, &mut cv, false);
-        assert_eq!(menu.bindings[K_RTRIGGER as usize], None);
+        if let Some(command) = menu.browser_command() {
+            menu.key(K_ABUTTON, &mut cv, false);
+            assert!(menu.capturing());
+            menu.key(K_RTRIGGER, &mut cv, false);
+            if menu.bind_pending.is_some() { menu.key(K_ABUTTON, &mut cv, false); }
+            assert_eq!(menu.bindings[K_RTRIGGER as usize].as_deref(), Some(command));
+            menu.key(K_XBUTTON, &mut cv, false);
+            assert_eq!(menu.bindings[K_RTRIGGER as usize], None);
+        }
         while menu.addon_ui.focus < menu.browser_rows() {
             menu.key(K_DPAD_DOWN, &mut cv, false);
         }

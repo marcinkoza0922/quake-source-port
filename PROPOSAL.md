@@ -76,3 +76,15 @@ At very high player velocities, blur the screen edges to accentuate fast falls
 and portal launches while keeping the centre and HUD readable. Enable by default,
 with an Enhancements toggle and Reduce Motion support, independently per local
 player. Selecting an add-on weapon does not print its name over gameplay.
+
+## Projectile shotguns and bullet time
+
+Two independently selectable add-ons, restricted to games started with Add-ons
+and local non-deathmatch play. Projectile Shotguns replaces both player shotguns
+and grunt pellets with fast physical projectiles while retaining spread, ammo,
+damage and firing cadence. Speed is configurable with a reset to 10000 units/s.
+Bullet Time has a dedicated remappable action, Hold by default or Toggle, slowing
+the whole local simulation to 20%. An optional meter limits use to configurable
+real seconds and regenerates at a configurable rate while inactive; disabling
+the meter allows unlimited use. Default duration is 5 seconds, regeneration is
+1 second of charge per real second.

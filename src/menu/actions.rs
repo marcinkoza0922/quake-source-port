@@ -20,6 +20,16 @@ impl Menu {
 
     pub(super) fn run(&mut self, run: Run, cv: &mut Cvars, out: &mut Vec<Action>) {
         match run {
+            Run::ResetShotguns | Run::ResetBulletTime => {
+                let names: &[&str] = if run == Run::ResetShotguns { &["addon_shotgun_speed"] } else {
+                    &["addon_bullet_time_toggle", "addon_bullet_time_meter", "addon_bullet_time_duration", "addon_bullet_time_regen"]
+                };
+                for &(name, default, _) in qserver::addons::CVARS {
+                    if names.contains(&name) { cv.set(name, default); }
+                }
+                out.push(Action::Sound("misc/menu3.wav"));
+                return;
+            }
             Run::PreviewHit | Run::PreviewKill => {
                 let cue = if run == Run::PreviewHit { "hit" } else { "kill" };
                 out.push(Action::Command(format!("hitfeedback_preview {cue}\n")));

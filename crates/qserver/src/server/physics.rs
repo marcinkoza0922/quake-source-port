@@ -133,7 +133,11 @@ impl Server {
                     exec(vm, c, w, vm.g_i(g.f_player_post_think));
                 }
             } else {
-                qworld::phys::physics_entity(w, &mut Ents { vm: &mut *vm, c: &mut *c }, &p, e);
+                let mut ep = p;
+                if vm.ent_str(e, f.classname).ok() == Some(b"qsp_shotgun_pellet".as_slice()) {
+                    ep.maxvelocity = ep.maxvelocity.max(30000.0);
+                }
+                qworld::phys::physics_entity(w, &mut Ents { vm: &mut *vm, c: &mut *c }, &ep, e);
             }
             if c.sv.error.is_some() {
                 break;

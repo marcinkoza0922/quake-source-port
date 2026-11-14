@@ -97,15 +97,33 @@ const ADDON: &[Addon] = &[
         alt: false,
         description: "One equipment add-on includes both night vision and thermal vision. The Change Goggles action cycles Normal, Night Vision, Thermal, then Normal again. Night vision brightens dark rooms; thermal vision highlights living enemies. Goggles do not occupy a weapon slot. Configure intensity and sensor noise below. The binding affects only this add-on.",
     },
+    Addon {
+        name: "Projectile Shotguns", id: "projectileshotguns", cvar: "addon_projectile_shotguns",
+        weapons: &[], page: Some(Page::ProjectileShotguns), alt: false,
+        description: "Both shotguns and enemy grunts fire physical pellets with their original spread and damage. Fast default projectiles feel immediate; lower their speed to dodge incoming fire during bullet time. Configure projectile speed below, or reset it to the default of 10000 units per second.",
+    },
+    Addon {
+        name: "Bullet Time", id: "bullettime", cvar: "addon_bullet_time",
+        weapons: &[], page: Some(Page::BulletTime), alt: false,
+        description: "Use the dedicated Bullet Time action to slow the whole local game to 20% speed. Hold is the default; Toggle switches on each press. The optional meter limits use in real seconds and regenerates while inactive. Disable the meter for unlimited use. Remap the action and configure duration and regeneration below.",
+    },
 ];
 
 impl Addon {
+    fn equipment_action(&self) -> Option<(&'static str, &'static str)> {
+        match self.id {
+            "goggles" => Some(("Change Goggles", "goggles cycle")),
+            "bullettime" => Some(("Bullet Time", "+bullettime")),
+            _ => None,
+        }
+    }
     fn row_count(&self) -> usize {
-        self.weapons.len() + 2 + usize::from(!self.weapons.is_empty() && self.alt)
+        if self.weapons.is_empty() { 1 + usize::from(self.equipment_action().is_some()) }
+        else { self.weapons.len() + 2 + usize::from(self.alt) }
     }
     fn command(&self, row: usize) -> Option<&'static str> {
         match row.checked_sub(self.weapons.len())? {
-            0 if self.weapons.is_empty() => Some("goggles cycle"),
+            _ if self.weapons.is_empty() => (row == 0).then(|| self.equipment_action().map(|a| a.1)).flatten(),
             0 => Some("+attack"),
             1 if !self.weapons.is_empty() && self.alt => Some("+attack2"),
             _ => None,
@@ -179,8 +197,8 @@ impl Menu {
             && (24.0..196.0).contains(&x) && (264.0..286.0).contains(&y) {
             return Some((self.addon_ui.selected, self.browser_last_focus()));
         }
-        if (20.0..200.0).contains(&x) && (58.0..202.0).contains(&y) {
-            return Some((((y - 58.0) / 24.0) as usize, 0));
+        if (20.0..200.0).contains(&x) && (58.0..218.0).contains(&y) {
+            return Some((((y - 58.0) / 20.0) as usize, 0));
         }
         if (216.0..620.0).contains(&x) {
             if (174.0..232.0).contains(&y) {
@@ -347,9 +365,9 @@ impl Menu {
         c.text(24.0, 25.0, page_name(page), 14.0, GOLD_FG);
         c.round_box(20.0, 50.0, 180.0, 208.0, 3.0, [0.0, 0.0, 0.0, 0.7], Some(BORDER));
         for (i, a) in ADDON.iter().enumerate() {
-            let y = 58.0 + i as f32 * 24.0;
+            let y = 58.0 + i as f32 * 20.0;
             if i == self.addon_ui.selected {
-                c.fill(22.0, y, 176.0, 22.0, HILITE);
+                c.fill(22.0, y, 176.0, 19.0, HILITE);
             }
             c.frame(28.0, y + 6.0, 9.0, 9.0, BORDER);
             if cv.value_of(a.cvar) != 0.0 {
@@ -358,10 +376,10 @@ impl Menu {
             c.text(44.0, y + 6.0, a.name, TXT, if self.toys_locked(cv) { MUTED } else { FG });
         }
         if self.pad_ui {
-            self.glyphs.hints(c, 28.0, 214.0, &[(K_ABUTTON, "Toggle")], true);
+            self.glyphs.hints(c, 28.0, 224.0, &[(K_ABUTTON, "Toggle")], true);
         } else {
-            c.text(28.0, 218.0, "Enter: toggle   Right: details", 8.0, MUTED);
-            c.text(28.0, 234.0, "Tab: switch section", 8.0, MUTED);
+            c.text(28.0, 224.0, "Enter: toggle   Right: details", 8.0, MUTED);
+            c.text(28.0, 238.0, "Tab: switch section", 8.0, MUTED);
         }
         if page == Page::NewGameAddons {
             c.round_box(24.0, 264.0, 172.0, 22.0, 2.0, HILITE, Some(BORDER));
@@ -394,7 +412,8 @@ impl Menu {
             c.text(220.0, slot_header_y, "Weapon Slot", 8.0, MUTED);
         }
         let header_y = a.header_y() - self.browser_offset();
-        if header_y >= 236.0 && header_y + 8.0 <= 322.0 {
+        if header_y >= 236.0 && header_y + 8.0 <= 322.0
+            && (!a.weapons.is_empty() || a.equipment_action().is_some()) {
             c.text(220.0, header_y, "Input Remapping", 8.0, MUTED);
             c.text(425.0, header_y, "Keyboard", 8.0, MUTED);
             c.text(525.0, header_y, "Controller", 8.0, MUTED);
@@ -404,7 +423,7 @@ impl Menu {
             rows.push((weapon.name, None, Some(weapon.slot)));
         }
         if a.weapons.is_empty() {
-            rows.push(("Change Goggles", Some("goggles cycle"), None));
+            if let Some((label, cmd)) = a.equipment_action() { rows.push((label, Some(cmd), None)); }
         } else {
             rows.push(("Fire", Some("+attack"), None));
             if a.alt {

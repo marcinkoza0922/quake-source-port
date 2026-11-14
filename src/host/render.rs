@@ -161,6 +161,7 @@ impl Host {
             .find(|&k| crate::glyphs::is_pad_key(k))
             .unwrap_or(qinput::keys::K_XBUTTON);
         let equip_key = self.equip_wheel_key();
+        let bullet_meter = self.cv("addon_bullet_time_meter") != 0.0;
         let showfps = self.cv("scr_showfps") != 0.0;
         let classic = self.classic_hud();
         let rays: Vec<_> = std::iter::once(&self.cl).chain(self.guests.iter().filter(|g| g.cl.signon == 4).map(|g| &g.cl))
@@ -237,6 +238,7 @@ impl Host {
                                 cp.draw_center(&mut cc, usize::MAX);
                             }
                             let (wheel, wcl) = if i == 0 { (&self.wheel, &self.cl) } else { (&self.guests[live[i - 1]].wheel, &self.guests[live[i - 1]].cl) };
+                            self.bullet_time.draw(&mut cc, bullet_meter);
                             wheel.draw(&mut cc, &mut pf, &glyphs, wcl, pad_ui, wheel_key);
                             crate::draw::translate(&mut cc.list, x as f32, y as f32);
                             c.list.append(&mut cc.list);
@@ -265,6 +267,7 @@ impl Host {
                         if self.show_scores && self.cl.gametype == 1 {
                             crate::sbar::deathmatch_overlay(&mut c, &mut pf, &self.cl);
                         }
+                        self.bullet_time.draw(&mut c, bullet_meter);
                         self.wheel.draw(&mut c, &mut pf, &glyphs, &self.cl, pad_ui, wheel_key);
                         self.goggles.wheel.draw(&mut c, &glyphs, &self.goggles.equip, pad_ui, equip_key);
                         if self.server.core.cvars.value_of("cl_captions") != 0.0 {
@@ -358,6 +361,7 @@ impl Host {
             soft_particle_distance: if v("r_softparticles") != 0.0 { v("r_softparticledistance").max(0.01) } else { 0.0 },
             ssao: v("r_ssao").max(0.0),
             ssao_radius: v("r_ssao_radius"),
+            edge_blur: if self.bullet_time.active && v("a11y_reducemotion") == 0.0 { 0.65 } else { 0.0 },
             // Reduce Motion turns motion blur off
             motion_blur: if v("a11y_reducemotion") != 0.0 || v("r_motionblur") == 0.0 {
                 0.0

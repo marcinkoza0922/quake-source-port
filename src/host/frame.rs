@@ -178,7 +178,8 @@ impl Host {
         }
         if impulse != 0 { self.pend_impulse = impulse; }
         self.guest_moves(ft);
-        let timescale = self.wheel_timescale() as f64;
+        self.bullet_time_frame(dt, in_game && alive);
+        let timescale = (self.wheel_timescale() * if self.bullet_time.active { 0.2 } else { 1.0 }) as f64;
         if self.cl.signon == 4 {
             let sp = self.move_speeds();
             self.last_cmd = self.cl.base_move(&InputState { attack: false, jump: false, impulse: 0, ..inp }, &sp, ft);

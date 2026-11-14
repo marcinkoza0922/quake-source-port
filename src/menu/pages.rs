@@ -55,6 +55,8 @@ pub(super) enum Run {
     NewGame,
     PreviewHit,
     PreviewKill,
+    ResetShotguns,
+    ResetBulletTime,
 }
 
 /// A server answering the LAN search.
@@ -101,46 +103,9 @@ pub(super) const CONTROLS_ALL: &[Item] = &[
     Item::ResetBinds,
     bind("Alt Fire (Add-ons)", "+attack2"),
     bind("Equipment Wheel (Add-ons)", "+equipwheel"),
+    bind("Bullet Time (Add-ons)", "+bullettime"),
 ];
-pub(super) const CONTROLS: &[Item] = CONTROLS_ALL.split_at(CONTROLS_ALL.len() - 2).0;
-
-/// Main menu → Add-ons: which toys the running game (or the next new
-/// game) has. Locked while the running game was started without add-ons.
-pub(super) const ADDONS: &[Item] = &[
-    toggle("Portal Gun", "addon_portalgun"),
-    Item::Sub { label: "Portal Gun Settings", page: Page::PortalGun },
-    toggle("Boomerang", "addon_boomerang"),
-    Item::Sub { label: "Boomerang Settings", page: Page::Boomerang },
-    toggle("Stickybomb Launcher", "addon_sticky"),
-    toggle("Hookshot", "addon_hookshot"),
-    Item::Sub { label: "Hookshot Settings", page: Page::Hookshot },
-    toggle("Railgun", "addon_railgun"),
-    Item::Sub { label: "Railgun Settings", page: Page::Railgun },
-    toggle("Gel Sprayer", "addon_gel"),
-    toggle("Powerwasher", "addon_washer"),
-    Item::Sub { label: "Powerwasher Settings", page: Page::Washer },
-    toggle("Goggles", "addon_goggles"),
-    Item::Sub { label: "Goggles Settings", page: Page::Goggles },
-];
-
-/// New Game with Add-ons ticked: choose the toys, then start.
-pub(super) const NEW_GAME_ADDONS: &[Item] = &[
-    toggle("Portal Gun", "addon_portalgun"),
-    Item::Sub { label: "Portal Gun Settings", page: Page::PortalGun },
-    toggle("Boomerang", "addon_boomerang"),
-    Item::Sub { label: "Boomerang Settings", page: Page::Boomerang },
-    toggle("Stickybomb Launcher", "addon_sticky"),
-    toggle("Hookshot", "addon_hookshot"),
-    Item::Sub { label: "Hookshot Settings", page: Page::Hookshot },
-    toggle("Railgun", "addon_railgun"),
-    Item::Sub { label: "Railgun Settings", page: Page::Railgun },
-    toggle("Gel Sprayer", "addon_gel"),
-    toggle("Powerwasher", "addon_washer"),
-    Item::Sub { label: "Powerwasher Settings", page: Page::Washer },
-    toggle("Goggles", "addon_goggles"),
-    Item::Sub { label: "Goggles Settings", page: Page::Goggles },
-    Item::Run { label: "Start New Game", run: Run::NewGame },
-];
+pub(super) const CONTROLS: &[Item] = CONTROLS_ALL.split_at(CONTROLS_ALL.len() - 3).0;
 
 /// Reached from the Add-ons pages: how portals look and perform.
 pub(super) const PORTAL_GUN: &[Item] = &[
