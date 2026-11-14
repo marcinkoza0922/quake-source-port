@@ -114,7 +114,7 @@ pub(super) fn gpu_world_draw(
     // Staged as commands then dispatch args, copied to cmdbuf on the GPU.
     let disp_ofs = cmds.len() as u64 * 20;
     let stage_ofs = dynw.push(&cmds, 16)?;
-    dynw.push(&[0u32; 4], 4)?;
+    dynw.push(&[0u32, 1, 1, 0], 4)?;
     dynw.push(&bits, 4)?;
     let range = |r: &std::ops::Range<u32>| Range {
         ofs: r.start as u64 * 20,

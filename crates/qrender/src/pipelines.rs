@@ -192,7 +192,12 @@ impl Pipelines {
         // SAFETY: valid device.
         let comp_set_layout = unsafe { dev.create_descriptor_set_layout(&cci, None)? };
         let csl = [comp_set_layout];
-        let clci = vk::PipelineLayoutCreateInfo::default().set_layouts(&csl);
+        let lm_push = [vk::PushConstantRange {
+            stage_flags: vk::ShaderStageFlags::COMPUTE,
+            offset: 0,
+            size: 8,
+        }];
+        let clci = vk::PipelineLayoutCreateInfo::default().set_layouts(&csl).push_constant_ranges(&lm_push);
         // SAFETY: valid device.
         let comp_layout = unsafe { dev.create_pipeline_layout(&clci, None)? };
 

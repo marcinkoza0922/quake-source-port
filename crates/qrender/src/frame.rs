@@ -787,6 +787,7 @@ impl Renderer {
                 pass.ubo = dynw.push(&[ubo], 256).unwrap_or(0) as u32;
             }
         }
+        let mut lm_cpu_range = None;
         if passes.iter().any(|p| p.view.is_some()) {
             let mut lmd = LmDyn {
                 styles,
@@ -810,11 +811,14 @@ impl Renderer {
                 }
             }
             dynw.write_at(OFS_LMDYN, &[lmd]);
-            lm_vis.truncate(MAX_VIS as usize);
-            dynw.write_at(OFS_VIS, &lm_vis);
-            for c in passes.iter().filter_map(|p| p.cull.as_ref()) {
-                // The cull shader appends the world's lightmaps after these.
-                dynw.write_at(c.stage_ofs + c.disp_ofs, &[lm_vis.len() as u32, 1, 1, 0]);
+            // Portal views can request more lightmaps than the fixed GPU
+            // cull list holds. Keep their complete union in the bump buffer;
+            // the reserved list belongs only to the GPU-culled world.
+            lm_vis.sort_unstable();
+            lm_vis.dedup();
+            if !lm_vis.is_empty() {
+                let ofs = dynw.push(&lm_vis, 4).ok_or_else(|| Error::new("lightmap update buffer full"))?;
+                lm_cpu_range = Some((ofs / 4, lm_vis.len()));
             }
         }
 
@@ -954,7 +958,7 @@ impl Renderer {
                 );
             }
             ts(1);
-            let lm_cpu = pi == 0 && !lm_vis.is_empty();
+            let lm_cpu = pi == 0 && lm_cpu_range.is_some();
             if (lm_cpu || cull.is_some()) && self.world.is_some() {
                 gpu::barrier(
                     &dev,
@@ -973,9 +977,25 @@ impl Renderer {
                     &comp_set,
                     &[],
                 );
-                match &cull {
-                    Some(c) => dev.cmd_dispatch_indirect(cmd, c.cmdbuf, c.disp_ofs),
-                    None => dev.cmd_dispatch(cmd, lm_vis.len() as u32, 1, 1),
+                if lm_cpu {
+                    let (base, count) = lm_cpu_range.unwrap();
+                    // Vulkan guarantees at least 65535 workgroups per axis.
+                    for first in (0..count).step_by(65535) {
+                        let n = (count - first).min(65535) as u32;
+                        dev.cmd_push_constants(cmd, p.comp_layout, vk::ShaderStageFlags::COMPUTE,
+                            0, bytes_of(&[(base + first as u64) as u32, n]));
+                        dev.cmd_dispatch(cmd, n, 1, 1);
+                    }
+                }
+                if let Some(c) = &cull {
+                    if lm_cpu {
+                        // Portal and world lists can contain the same surface.
+                        gpu::barrier(&dev, cmd, lightmap.image, lm_rng,
+                            vk::ImageLayout::GENERAL, vk::ImageLayout::GENERAL);
+                    }
+                    dev.cmd_push_constants(cmd, p.comp_layout, vk::ShaderStageFlags::COMPUTE,
+                        0, bytes_of(&[(OFS_VIS / 4) as u32, MAX_VIS as u32]));
+                    dev.cmd_dispatch_indirect(cmd, c.cmdbuf, c.disp_ofs);
                 }
                 gpu::barrier(
                     &dev,

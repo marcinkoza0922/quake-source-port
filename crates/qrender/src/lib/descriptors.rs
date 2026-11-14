@@ -68,8 +68,8 @@ impl Renderer {
             }];
             let vis = [vk::DescriptorBufferInfo {
                 buffer: f.dynbuf.buf,
-                offset: OFS_VIS,
-                range: MAX_VIS * 4,
+                offset: 0,
+                range: vk::WHOLE_SIZE,
             }];
             let alias = whole(self.alias_buf.buf);
             let dynv = whole(f.dynbuf.buf);

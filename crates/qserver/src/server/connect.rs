@@ -5,7 +5,15 @@ impl Server {
     pub(super) fn local_signon(&mut self, i: usize) {
         self.flush_client(i);
         self.client_command(i, "prespawn");
-        self.flush_client(i);
+        // Large maps (AD's Sepulcher) need several reliable messages for
+        // their signon buffers. Finish prespawn before spawn clears the
+        // message and advances the handshake, as a remote client does.
+        while self.core.clients[i].active && self.core.clients[i].sendsignon != Signon::Done {
+            self.flush_client(i);
+        }
+        if !self.core.clients[i].active {
+            return;
+        }
         self.client_command(i, "spawn");
         self.flush_client(i);
         self.client_command(i, "begin");
