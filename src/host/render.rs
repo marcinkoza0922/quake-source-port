@@ -25,6 +25,7 @@ impl Host {
             let cv = self.view_cvars();
             self.view.replaced_models = self.fte.replaced_models(&self.cl, fs);
             self.view.with_self = !self.cl.portals.is_empty();
+            self.view.third_person = self.camera().third_person();
             self.view.entities(&mut self.cl, &cv, &mut self.level, fs, &mut self.r, &mut ents);
             // player 1's own body belongs to player 1's portal views only
             for e in ents.iter_mut().filter(|e| e.portal_only) {

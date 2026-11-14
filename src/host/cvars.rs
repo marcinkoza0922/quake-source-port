@@ -22,6 +22,7 @@ pub(super) const HOST_CVARS: &[(&str, &str, u32)] = &[
     ("v_kickpitch", "0.6", 0),
     ("v_gunkick", "1", CVAR_ARCHIVE),
     ("r_drawviewmodel", "1", CVAR_ARCHIVE),
+    ("cl_camera", "0", CVAR_ARCHIVE),
     ("r_lerpmodels", "1", CVAR_ARCHIVE),
     ("r_lerpmove", "1", CVAR_ARCHIVE),
     ("scr_hudstyle", "1", CVAR_ARCHIVE),

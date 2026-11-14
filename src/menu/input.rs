@@ -389,7 +389,7 @@ impl Menu {
                     }
                     _ => {}
                 }
-                if enter && self.options(item).len() > 2 {
+                if enter && self.options(item).len() > 2 && !item_disabled(item, cv) {
                     let cur = self.option_index(item, cv);
                     let mut d = Drop { item: self.opt_cursor, cursor: cur, scroll: 0 };
                     clamp_scroll(&mut d);

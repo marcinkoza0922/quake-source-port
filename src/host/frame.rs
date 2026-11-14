@@ -40,6 +40,31 @@ impl Host {
             flash: v("v_flashscale").clamp(0.0, 1.0),
         }
         .reduce_motion(v("a11y_reducemotion") != 0.0)
+        .third_person(self.camera().third_person())
+    }
+
+    /// cl_camera: the camera perspective for every local player.
+    pub(super) fn camera(&self) -> crate::view::camera::Camera {
+        crate::view::camera::Camera::from_cvar(self.cv("cl_camera"))
+    }
+
+    /// Moves a computed first-person view to the cl_camera perspective
+    /// (outside intermissions).
+    /// `guest`: index into `guests`, or None for player 1.
+    pub(super) fn place_camera(&mut self, guest: Option<usize>, v: &mut qrender::View, ft: f32) {
+        let cam = self.camera();
+        let cm = self.server.level.as_ref().map(|l| l.world.worldmodel.clone());
+        let (cl, view) = match guest {
+            Some(k) => {
+                let g = &mut self.guests[k];
+                (&g.cl, &mut g.view)
+            }
+            None => (&self.cl, &mut self.view),
+        };
+        if cl.intermission != 0 {
+            return;
+        }
+        cam.place(v, cm.as_deref(), &mut view.aim, ft);
     }
 
     pub(super) fn move_speeds(&self) -> MoveSpeeds {
@@ -308,6 +333,7 @@ impl Host {
             let mut cv = self.view_cvars();
             if self.toy.held.is_some() { cv.viewmodel = crate::view::weapon::Alignment::Hidden; }
             let (mut v, g) = self.view.calc_refdef(&self.cl, &cv, &self.level, ft);
+            self.place_camera(None, &mut v, ft);
             self.cl.viewent.lerpflags &= !qclient::LERP_RESETANIM;
             if self.classic_hud() && self.cl.intermission == 0 {
                 let (_, h) = self.r.size();

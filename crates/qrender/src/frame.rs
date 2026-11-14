@@ -127,7 +127,7 @@ impl Renderer {
         let mut xforms = std::collections::HashMap::new();
         // last frame's model transform rows, when the entity moved
         let prev_rows = |e: &RenderEntity, local: Option<&Mat4>| -> Option<[[f32; 4]; 3]> {
-            if !prev_ok || e.key == 0 || e.viewmodel {
+            if !prev_ok || e.key == 0 || e.viewmodel || e.follows_camera {
                 return None;
             }
             let &(po, pa) = prev_xforms.get(&e.key)?;

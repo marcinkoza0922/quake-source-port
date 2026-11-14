@@ -205,6 +205,10 @@ playback and capture instructions are in [ADDONS.md](ADDONS.md).
 Gameplay → Viewmodels archives `r_drawviewmodel`: 0 Off, 1 Center (default),
 2 Right, 3 Left. `view::weapon::Alignment` translates every stock/mod/add-on
 weapon eight camera-right units for side placement, independently per split view.
+Gameplay → Camera archives `cl_camera` (0 first person, 1 centered third person, 2/3 right/left
+shoulder); `view::camera` traces the offset against the world hull, draws the own body and
+hides viewmodels (row disabled) in third person. The camera turns toward where the eye's aim ray
+lands (≥128u away, distance eased over ~0.12s, no bob) so the crosshair is true; the body is `follows_camera` (no object blur).
 The portal gun uses negated alias pitch and a camera-relative origin with no yaw
 cant. Its Meshy FBX is converted by `tools/import_portal_gun.py` to embedded native MDL
 and a 512×512 atlas; `addons::portal_model`/`portal_skin` apply owner colors and
