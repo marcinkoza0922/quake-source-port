@@ -285,8 +285,11 @@ struct GpuTimes {
 }
 
 /// Stage names; timestamp k+1 ends stage k (timestamp 0 is the start).
-const GPU_STAGES: [&str; 9] =
-    ["cull", "lightmap", "targets", "world", "models", "translucent", "particles+vm", "post", "ui+present"];
+const GPU_STAGES: [&str; 14] = [
+    "cull", "lightmap", "targets", "world", "models",
+    "ao-prepare", "ao-generate", "ao-to-apply", "ao-apply", "ao-resume",
+    "translucent", "particles+vm", "post", "ui+present",
+];
 const GPU_TS: u32 = GPU_STAGES.len() as u32 + 1;
 
 impl Renderer {

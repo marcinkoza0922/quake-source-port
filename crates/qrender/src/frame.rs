@@ -1243,14 +1243,17 @@ impl Renderer {
                     gpu::barrier(&dev, cmd, scene_img.image, crng, vk::ImageLayout::COLOR_ATTACHMENT_OPTIMAL, vk::ImageLayout::SHADER_READ_ONLY_OPTIMAL);
                     depth_layout(vk::ImageLayout::DEPTH_ATTACHMENT_OPTIMAL, vk::ImageLayout::DEPTH_STENCIL_READ_ONLY_OPTIMAL);
                     fx_pass(&t.ao, [1.0, 0.0, 0.0, 0.0], &|| {
+                        ts(6); // scene/depth transitions and AO target setup complete
                         dev.cmd_bind_pipeline(cmd, gfx, p.ao);
                         push(bytes_of(&[AoPush {
                             proj: [vs.tan[0], vs.tan[1], samples as f32, st.ssao_radius.clamp(4.0, 256.0)],
                             size: [scene_w as f32, scene_h as f32, st.ssao.min(4.0), t.color_slot as f32],
                         }]));
                         dev.cmd_draw(cmd, 3, 1, 0, 0);
+                        ts(7); // AO generation, before its target becomes shader-readable
                     });
                     gpu::barrier(&dev, cmd, scene_img.image, crng, vk::ImageLayout::SHADER_READ_ONLY_OPTIMAL, vk::ImageLayout::COLOR_ATTACHMENT_OPTIMAL);
+                    ts(8); // AO/scene transitions complete
                     // multiply the blurred AO into the scene colour (all samples)
                     let att = [vk::RenderingAttachmentInfo::default()
                         .image_view(scene_img.view)
@@ -1265,12 +1268,17 @@ impl Renderer {
                     push(bytes_of(&[t.ao_slot]));
                     dev.cmd_draw(cmd, 3, 1, 0, 0);
                     dev.cmd_end_rendering(cmd);
+                    ts(9); // AO application complete
                     depth_layout(vk::ImageLayout::DEPTH_STENCIL_READ_ONLY_OPTIMAL, vk::ImageLayout::DEPTH_ATTACHMENT_OPTIMAL);
                     begin(true, !split, false);
                     dev.cmd_set_viewport(cmd, 0, &[vp_scene]);
                     dev.cmd_set_scissor(cmd, 0, &[area_scene]);
                     dev.cmd_bind_descriptor_sets(cmd, gfx, p.layout, 0, &set, &[ubo_ofs]);
                     dev.cmd_set_depth_bias(cmd, 0.0, 0.0, 0.0);
+                    ts(10); // depth transition and scene rendering resumed
+                } else {
+                    // Every query must be written, including when AO is disabled.
+                    for k in 6..=10 { ts(k); }
                 }
                 // translucent: world liquids first, then sorted entities
                 if let Some(wg) = &self.world {
@@ -1312,7 +1320,7 @@ impl Renderer {
                         }
                     }
                 }
-                ts(6);
+                ts(11);
                 if particles.count > 0 {
                     dev.cmd_bind_pipeline(cmd, gfx, p.particle);
                     dev.cmd_bind_vertex_buffers(cmd, 0, &[dynbuf], &[particles.ofs]);
@@ -1384,9 +1392,12 @@ impl Renderer {
                         );
                     }
                 }
+            } else {
+                // Menu/no-view frames have no world, models, AO or translucency.
+                for k in 4..=11 { ts(k); }
             }
             dev.cmd_end_rendering(cmd);
-            ts(7);
+            ts(12);
             if keep_depth && view.is_some() {
                 // the last scene pass leaves depth read-only only when it was
                 // the soft-particle pass (no viewmodel after it)
@@ -1518,7 +1529,7 @@ impl Renderer {
             let post_area = vk::Rect2D { offset: vk::Offset2D::default(), extent: vk::Extent2D { width: pw, height: ph } };
             let vp_post = vk::Viewport { width: pw as f32, height: ph as f32, ..vp_full };
             dev.cmd_set_scissor(cmd, 0, &[post_area]);
-            ts(8);
+            ts(13);
             let draw_ui = |vp: vk::Viewport| {
                 if let Some(ofs) = ui_ofs {
                     dev.cmd_set_viewport(cmd, 0, &[vp]);
@@ -1664,7 +1675,7 @@ impl Renderer {
                     &region,
                 );
             }
-            ts(9);
+            ts(14);
             dev.end_command_buffer(cmd)?;
 
             let cmds = [cmd];

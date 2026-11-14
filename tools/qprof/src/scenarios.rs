@@ -190,6 +190,7 @@ pub fn all(secs: f32) -> Vec<Scenario> {
         ("supersample-water", "8x supersampling + enhanced water at max", SSAA, WATER),
         ("msaa8-renderscale200", "8x MSAA at 200% render scale", MSAA, SCALE),
         ("supersample-renderscale200", "8x sample shading at 200% render scale", SSAA, SCALE),
+        ("renderscale200-ssao", "200% render scale + high ambient occlusion (1 sample)", SCALE, SSAO),
     ] {
         out.push(Scenario {
             name, group: Group::Enhancement, what,
@@ -197,13 +198,14 @@ pub fn all(secs: f32) -> Vec<Scenario> {
             map: None, script: vec![], own_fire: false,
         });
     }
-    for (name, what, effect) in [
-        ("supersample-renderscale200-ssao", "8x sample shading at 200% scale + high ambient occlusion", SSAO),
-        ("supersample-renderscale200-water", "8x sample shading at 200% scale + enhanced water at max", WATER),
+    for (name, what, samples, effect) in [
+        ("msaa8-renderscale200-ssao", "8x MSAA at 200% scale + high ambient occlusion", MSAA, SSAO),
+        ("supersample-renderscale200-ssao", "8x sample shading at 200% scale + high ambient occlusion", SSAA, SSAO),
+        ("supersample-renderscale200-water", "8x sample shading at 200% scale + enhanced water at max", SSAA, WATER),
     ] {
         out.push(Scenario {
             name, group: Group::Enhancement, what,
-            cvars: SSAA.iter().chain(SCALE).chain(effect).copied().collect(),
+            cvars: samples.iter().chain(SCALE).chain(effect).copied().collect(),
             map: None, script: vec![], own_fire: false,
         });
     }

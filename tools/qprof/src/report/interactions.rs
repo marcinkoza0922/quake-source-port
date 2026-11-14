@@ -10,6 +10,8 @@ pub(super) fn write(md: &mut String, rows: &[&Result], base: &Run) {
         ("supersample-water", "supersample", "water"),
         ("msaa8-renderscale200", "msaa8", "renderscale200"),
         ("supersample-renderscale200", "supersample", "renderscale200"),
+        ("renderscale200-ssao", "renderscale200", "ssao"),
+        ("msaa8-renderscale200-ssao", "msaa8-renderscale200", "ssao"),
         ("supersample-renderscale200-ssao", "supersample-renderscale200", "ssao"),
         ("supersample-renderscale200-water", "supersample-renderscale200", "water"),
     ] {
@@ -40,6 +42,10 @@ pub(super) fn write(md: &mut String, rows: &[&Result], base: &Run) {
         ("200% scale (1 sample)", "vanilla", "renderscale200"),
         ("200% scale (8x MSAA)", "msaa8", "msaa8-renderscale200"),
         ("200% scale (8x sample shading)", "supersample", "supersample-renderscale200"),
+        ("SSAO at 200% (1 sample)", "renderscale200", "renderscale200-ssao"),
+        ("SSAO at 200% (8x MSAA)", "msaa8-renderscale200", "msaa8-renderscale200-ssao"),
+        ("8x MSAA at 200% with SSAO", "renderscale200-ssao", "msaa8-renderscale200-ssao"),
+        ("sample shading at 200% with SSAO (8x MSAA)", "msaa8-renderscale200-ssao", "supersample-renderscale200-ssao"),
         ("SSAO at 200% (8x sample shading)", "supersample-renderscale200", "supersample-renderscale200-ssao"),
         ("water at 200% (8x sample shading)", "supersample-renderscale200", "supersample-renderscale200-water"),
     ] {
@@ -51,6 +57,19 @@ pub(super) fn write(md: &mut String, rows: &[&Result], base: &Run) {
     if !deltas.is_empty() {
         let _ = writeln!(md, "\n### MSAA, sample shading and render scale\n\nControlled setting differences in µs; sample shading is measured with MSAA held at 8x. With gl_lodbias auto, vid_fsaamode also changes mip bias from 0 to −1.5, so its delta includes that sampler change. 200% scale quadruples scene pixels. These are diagnostic setting costs, not optimisation speedups.\n\n| change | comparison | Δ frame | Δ GPU |\n|---|---|--:|--:|\n{deltas}");
     }
+    let mut ao = String::new();
+    for row in rows {
+        let stages: Option<Vec<f64>> = ["ao-prepare", "ao-generate", "ao-to-apply", "ao-apply", "ao-resume"]
+            .iter().map(|name| row.run.gpu.iter().find(|(k, _)| k == *name).map(|(_, v)| *v)).collect();
+        if let Some(v) = stages {
+            let _ = writeln!(ao, "| {} | {:.0} | {:.0} | {:.0} | {:.0} | {:.0} | {:.0} |",
+                row.scenario, v[0], v[1], v[2], v[3], v[4], v.iter().sum::<f64>());
+        }
+    }
+    if !ao.is_empty() {
+        let _ = writeln!(md, "\n### SSAO GPU breakdown\n\nTimes in µs from the median-fps run. Prepare includes scene/depth transitions and AO target setup; to-apply includes AO/colour transitions; resume includes depth transition and scene restart. These intervals include GPU stalls and rendering boundaries, not isolated barrier instruction costs. With SSAO off they contain only timestamp overhead. Split-screen measures the first view here; later views remain in post.\n\n| scenario | prepare | generate | to apply | apply | resume | AO total |\n|---|--:|--:|--:|--:|--:|--:|\n{ao}");
+    }
+
 }
 
 #[cfg(test)]
@@ -140,4 +159,30 @@ mod tests {
         write(&mut md, &refs, &rows[0].run);
         assert!(md.is_empty());
     }
+
+    #[test]
+    fn reports_ao_stages_and_controlled_msaa_cost_without_missing_queries() {
+        let result = |scenario, total| Result {
+            scenario, run: Run { gpu_total: total, frame_mean: total,
+                gpu: ["ao-prepare", "ao-generate", "ao-to-apply", "ao-apply", "ao-resume"]
+                    .iter().enumerate().map(|(i, name)| (name.to_string(), (i + 1) as f64)).collect(),
+                ..Run::default() },
+            group: "enhancement", what: "", map: "test".into(),
+        };
+        let mut rows = [result("vanilla", 100.0), result("renderscale200", 200.0),
+            result("renderscale200-ssao", 400.0), result("msaa8-renderscale200", 300.0),
+            result("msaa8-renderscale200-ssao", 600.0), result("supersample-renderscale200-ssao", 650.0)];
+        let mut md = String::new();
+        write(&mut md, &rows.iter().collect::<Vec<_>>(), &rows[0].run);
+        assert!(md.contains("| SSAO at 200% (1 sample) | renderscale200 → renderscale200-ssao | +200 | +200 |"));
+        assert!(md.contains("| SSAO at 200% (8x MSAA) | msaa8-renderscale200 → msaa8-renderscale200-ssao | +300 | +300 |"));
+        assert!(md.contains("| sample shading at 200% with SSAO (8x MSAA) | msaa8-renderscale200-ssao → supersample-renderscale200-ssao | +50 | +50 |"));
+        assert!(md.contains("| renderscale200-ssao | 1 | 2 | 3 | 4 | 5 | 15 |"));
+        rows[2].run.gpu.pop();
+        md.clear();
+        write(&mut md, &[&rows[2]], &rows[0].run);
+        assert!(!md.contains("SSAO GPU breakdown"));
+        assert!(md.is_empty());
+    }
+
 }

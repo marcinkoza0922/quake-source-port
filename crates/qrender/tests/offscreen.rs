@@ -167,4 +167,32 @@ fn start_bsp_renders_non_black() {
     );
     // 2D only frame
     r.render(&RenderFrame::default()).unwrap();
+    // Profiling must preserve pixels and produce complete queries for AO on,
+    // AO off and no-view frames. Capture every reference before enabling it.
+    let frames = [
+        RenderFrame::default(),
+        RenderFrame { time: frame.time, view: frame.view, ..Default::default() },
+        RenderFrame {
+            time: frame.time,
+            view: frame.view,
+            settings: Settings { ssao: 2.0, msaa: 4, render_scale: 2.0, ..Default::default() },
+            ..Default::default()
+        },
+    ];
+    let expected: Vec<_> = frames.iter().map(|frame| {
+        r.render(frame).unwrap();
+        r.read_pixels().unwrap()
+    }).collect();
+    r.gpu_times_wanted = true;
+    for (frame, expected) in frames.iter().zip(expected) {
+        // Drain both frame slots so collection includes this path's queries.
+        for _ in 0..4 { r.render(frame).unwrap(); }
+        assert_eq!(expected, r.read_pixels().unwrap(), "GPU profiling changed output");
+        let (count, stages) = r.take_gpu_times().expect("GPU queries enabled");
+        assert!(count >= 2, "incomplete timestamp queries");
+        for name in ["ao-prepare", "ao-generate", "ao-to-apply", "ao-apply", "ao-resume", "translucent"] {
+            let us = stages.iter().find(|(k, _)| *k == name).expect("missing GPU stage").1;
+            assert!(us.is_finite() && us >= 0.0, "invalid {name} timestamp: {us}");
+        }
+    }
 }

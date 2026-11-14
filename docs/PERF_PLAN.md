@@ -106,14 +106,16 @@ confirm wins windowed (`qprof -window`, or qbench for parity).
   (see results below). `vid_fsaamode` enables sample shading, whereas
   `r_renderscale 2` quadruples scene pixels; all-enhancements enables both.
   SSAO already uses a single-sampled target with sample shading disabled
-  (including its apply pass). Combined sample-shading/200%-scale probes
-  now isolate a large SSAO interaction (results below); next, timestamp
-  AO generation, AO application and their barriers separately. The controlled MSAA/sample-shading/200%-scale
-  matrix now includes `msaa8-renderscale200` and
-  `supersample-renderscale200` (results below). Sample shading also selects
-  an automatic −1.5 mip bias at 8x; these are setting costs rather than
-  isolated shader-invocation costs. Running AO at output
-  resolution when render scale exceeds 1 would be a *visual* change.
+  (including its apply pass). Separate prepare/generate/to-apply/apply/resume
+  timestamps and a controlled 200%-scale SSAO matrix now identify AO generation
+  as the dominant cost with MSAA, even without sample shading (results below).
+  Next: investigate the generation shader's repeated sample-0 depth reads;
+  test a full-resolution single-sample snapshot of sample-0 depth/alpha while
+  retaining exact output, then include its extraction cost in the comparison.
+  The timings identify the expensive interval, not the hardware cause.
+  `gl_lodbias auto` also selects a −1.5 mip bias with 8x sample shading, so
+  controlled sample-shading deltas include that sampler change. Running AO
+  at output resolution when render scale exceeds 1 would be a *visual* change.
 
 ### 7. Extra scene views (teleporter windows, portals)
 - Problem: `teleportwindows` +1.3 ms CPU and +0.7 ms GPU on AD; each window
@@ -160,7 +162,10 @@ confirm wins windowed (`qprof -window`, or qbench for parity).
 - Done: standalone and combined sample-shading/200%-scale SSAO/water
   diagnostic scenarios (item 6), with additive GPU costs, interaction excess
   and controlled setting differences in `report.md`.
-- Add a per-view GPU timestamp for split-screen (item 5).
+- Done: separate SSAO generation/application/transition intervals and the
+  200%-scale SSAO matrix at 1 sample, 8x MSAA and 8x sample shading (item 6).
+- Add a per-view GPU timestamp for split-screen (item 5); current stage
+  intervals measure the first view and charge later views to `post`.
 - Record a windowed baseline (`qprof -window`) once, for absolute numbers.
 
 ## Results log
@@ -436,3 +441,51 @@ confirm wins windowed (`qprof -window`, or qbench for parity).
   not an optimisation speedup or windowed parity claim.
   Report: `target/qprof/combined-effects/`. 454 tests passed, 2 skipped;
   clippy clean.
+
+- 2026-11-14, item 6 SSAO stage investigation: GPU timestamps now separate
+  `ao-prepare`, `ao-generate`, `ao-to-apply`, `ao-apply` and `ao-resume`
+  from `translucent`. Generation/application draws are distinguished from
+  target setup, layout transitions and rendering boundaries; these intervals
+  include GPU stalls, not isolated barrier instruction costs. All queries
+  are also written with AO off or no view. The existing split-screen limit
+  remains: these stages measure view 0, later views are charged to `post`.
+  Added `renderscale200-ssao` and `msaa8-renderscale200-ssao` and an AO stage
+  table and controlled MSAA/sample-shading deltas in qprof.
+  RTX 3060 Ti, 1280×720 headless, pinned settings, 20 s after 4 s warm-up,
+  250 Hz simulation, three runs per scenario/map: 24 before, 48 after.
+  Values below come from the instrumented run selected by median fps:
+
+  | SSAO settings | e1m1 frame / GPU µs | e1m1 generate / apply µs | AD frame / GPU µs | AD generate / apply µs |
+  |---|--:|--:|--:|--:|
+  | 100%, 1 sample | 1597 / 1507 | 215 / 36 | 2335 / 2249 | 184 / 36 |
+  | 200%, 1 sample | 2700 / 2611 | 1099 / 138 | 3341 / 3254 | 958 / 138 |
+  | 200%, 8x MSAA | 5288 / 5200 | 3438 / 140 | 5373 / 5281 | 2715 / 141 |
+  | 200%, 8x sample shading | 6165 / 6075 | 3481 / 144 | 6621 / 6527 | 2784 / 148 |
+
+  Generation accounts for about 90–91% of the combined AO intervals on AD and
+  e1m1. At 200%, switching from 1 sample to 8x MSAA raises generation by
+  +2339/+1757 µs (e1m1/AD); adding sample shading then changes it by only
+  +43/+69 µs. Application stays around 138–148 µs; combined prepare,
+  to-apply and resume are 210/147 µs with sample shading. This identifies
+  the generation interval under MSAA as the main target, even without
+  sample shading. Both AO pipelines already disable sample shading; the
+  generation shader repeatedly fetches sample 0 of multisampled depth and
+  reads sample-0 scene alpha. The timings do not establish the hardware
+  reason for its cost. Next experiment: preserve exact sample-0 depth/alpha
+  in a full-resolution single-sample snapshot, include extraction overhead,
+  and require pixel identity before considering it an optimisation. No
+  downsampling or shader algorithm change was made here.
+  Matching before/after median frame changes range from −0.1% to +1.9%
+  (combined SSAO e1m1 6104→6165 µs, AD 6499→6621 µs); these are
+  instrumentation checks, not a speedup or windowed parity claim.
+  All 24 fixed-time before/after combat screenshot pairs have AE = 0 and
+  matching particle/geometry counters. Inspected e1m1's shaded metal corner,
+  impacts and weapon/HUD, and AD's shaded pillar, torch and axe/HUD.
+  Tests cover profiling pixel identity and complete queries with AO on,
+  off and no view, plus report deltas and incomplete-stage omission.
+  Six additional Vulkan-validation runs (AO off, normal SSAO, and combined
+  8x sample-shading/200%-scale SSAO on both maps) logged no validation errors;
+  benchmark logs contain no unknown commands/cvars or Host_Error.
+  455 tests passed, 2 skipped; clippy clean. Reports:
+  `target/qprof/ao-stages-before/`, `ao-stages-after/` and
+  `ao-stages-validation/`.
