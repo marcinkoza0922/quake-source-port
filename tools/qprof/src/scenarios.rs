@@ -43,7 +43,7 @@ pub struct Scenario {
 /// Classic look, every enhancement off. Pinned so the user's config.cfg
 /// never leaks into a measurement.
 pub const VANILLA: &[(&str, &str)] = &[
-    ("r_msaa", "1"), ("vid_fsaamode", "0"), ("r_renderscale", "1"), ("r_texfilter", "0"),
+    ("r_msaa", "1"), ("vid_fsaamode", "0"), ("gl_lodbias", "auto"), ("r_renderscale", "1"), ("r_texfilter", "0"),
     ("r_anisotropy", "1"), ("r_softemu", "0"), ("r_dither", "0"), ("gamma", "1"), ("contrast", "1"),
     ("r_dynamic", "1"), ("r_coloredlight", "0"), ("r_fog", "1"), ("r_skyfog", "0.5"),
     ("r_lerpmodels", "1"), ("r_lerpmove", "1"),
@@ -185,13 +185,15 @@ pub fn all(secs: f32) -> Vec<Scenario> {
     });
     // Keep pairs outside ENHANCEMENTS: they diagnose interactions and
     // must not contribute duplicate overrides to all-enhancements.
-    for (name, what, effect) in [
-        ("supersample-ssao", "8x supersampling + high ambient occlusion", SSAO),
-        ("supersample-water", "8x supersampling + enhanced water at max", WATER),
+    for (name, what, first, second) in [
+        ("supersample-ssao", "8x supersampling + high ambient occlusion", SSAA, SSAO),
+        ("supersample-water", "8x supersampling + enhanced water at max", SSAA, WATER),
+        ("msaa8-renderscale200", "8x MSAA at 200% render scale", MSAA, SCALE),
+        ("supersample-renderscale200", "8x sample shading at 200% render scale", SSAA, SCALE),
     ] {
         out.push(Scenario {
             name, group: Group::Enhancement, what,
-            cvars: SSAA.iter().chain(effect).copied().collect(),
+            cvars: first.iter().chain(second).copied().collect(),
             map: None, script: vec![], own_fire: false,
         });
     }

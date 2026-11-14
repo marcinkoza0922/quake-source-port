@@ -106,8 +106,11 @@ confirm wins windowed (`qprof -window`, or qbench for parity).
   (see results below). `vid_fsaamode` enables sample shading, whereas
   `r_renderscale 2` quadruples scene pixels; all-enhancements enables both.
   SSAO already uses a single-sampled target with sample shading disabled
-  (including its apply pass). Next isolate 8x MSAA from sample shading and
-  200% render scale before choosing an optimisation. Running AO at output
+  (including its apply pass). The controlled MSAA/sample-shading/200%-scale
+  matrix now includes `msaa8-renderscale200` and
+  `supersample-renderscale200` (results below). Sample shading also selects
+  an automatic −1.5 mip bias at 8x; these are setting costs rather than
+  isolated shader-invocation costs. Running AO at output
   resolution when render scale exceeds 1 would be a *visual* change.
 
 ### 7. Extra scene views (teleporter windows, portals)
@@ -346,3 +349,41 @@ confirm wins windowed (`qprof -window`, or qbench for parity).
   because the engine binary is unchanged. Reports: `target/qprof/pairwise-id1`
   and `pairwise-ad-clean`; the initial AD attempt overlapping checks was
   discarded. 452 tests passed, 2 skipped; clippy clean.
+
+
+- 2026-11-14, item 6 controlled MSAA/scale diagnostics: added
+  `msaa8-renderscale200` and `supersample-renderscale200`, plus controlled
+  setting deltas and additive interaction costs in qprof's report. The
+  baseline now explicitly pins `gl_lodbias auto`; both measured user configs
+  already had that value. `vid_fsaamode 1` therefore includes the automatic
+  −1.5 mip bias at 8x, not just a change in shader invocation count.
+  RTX 3060 Ti, 1280×720 headless, 20 s measured after 4 s warm-up,
+  250 Hz simulation, three runs per scenario/map (36 total, spanning
+  November 13–14). Each value is from the run selected by median fps:
+
+  | scenario | e1m1 frame / GPU µs | ad_sepulcher frame / GPU µs |
+  |---|--:|--:|
+  | vanilla | 1333 / 1238 | 2160 / 2008 |
+  | msaa8 | 1381 / 1289 | 2232 / 2068 |
+  | supersample | 1601 / 1506 | 2486 / 2391 |
+  | renderscale200 | 1413 / 1315 | 2299 / 2113 |
+  | msaa8-renderscale200 | 1587 / 1487 | 2416 / 2325 |
+  | supersample-renderscale200 | 2400 / 2303 | 3561 / 3464 |
+
+  Normal-scale MSAA costs +51/+60 µs GPU (e1m1/AD); at 200% scale,
+  +172/+212 µs. Sample-shading mode adds +217/+323 µs at normal scale,
+  growing to +816/+1139 µs at 200%. World rendering accounts for
+  +192/+240 µs and +736/+862 µs of those mode deltas, respectively;
+  particles+viewmodel adds +23/+74 µs and +82/+242 µs. The combined
+  sample-shading/200%-scale cost exceeds its standalone additive GPU
+  prediction by +720/+968 µs. This confirms amplification by scene pixel
+  count, but does not explain the entire original all-enhancements cost.
+  Next: measure SSAO and enhanced water with the combined sample-shading
+  and 200%-scale setting, alongside a fresh all-enhancements control,
+  before choosing an output-preserving optimisation.
+  All 36 runs have matching per-map particle/geometry counters. Inspected
+  e1m1's metal corridor and the AD pillar/torch corridor at MSAA and combined
+  sample shading/200% scale, with weapons and HUD intact. Logs contain no
+  unknown commands/cvars or Host_Error. No engine code changed, so there is
+  no before/after screenshot comparison, Vulkan change or speedup claim.
+  Report: `target/qprof/aa-scale/`. 453 tests passed, 2 skipped; clippy clean.
