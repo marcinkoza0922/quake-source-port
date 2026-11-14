@@ -136,7 +136,7 @@ fn start_bsp_renders_non_black() {
         lines: false,
         first_index: 0,
         num_indices: 3,
-        soft: true,
+        soft: true, gel: false,
     }];
     let soft_frame = RenderFrame {
         time: portal_frame.time,

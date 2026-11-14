@@ -109,6 +109,8 @@ pub struct Host {
     portal_fx: crate::addons::portal_fx::Presentation,
     rail_fx: crate::addons::rail_fx::Presentation,
     hook_fx: crate::addons::hook_fx::HookFx,
+    gel_fx: crate::addons::gel_fx::GelFx,
+    water_fx: crate::addons::water_fx::WaterFx,
     boomerang_fx: crate::addons::boomerang_fx::Presentation,
     /// Player 1's add-on equipment (goggles) and equipment wheel.
     goggles: goggles::Goggles,
@@ -237,6 +239,8 @@ impl Host {
             portal_fx: Default::default(),
             rail_fx: Default::default(),
             hook_fx: Default::default(),
+            gel_fx: Default::default(),
+            water_fx: Default::default(),
             boomerang_fx: Default::default(),
             goggles: Default::default(),
             guests: Vec::new(),

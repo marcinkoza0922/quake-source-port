@@ -5,6 +5,8 @@ use crate::world::{NO_LM, box_in_frustum, dot};
 use crate::*;
 mod portals;
 use portals::gun_portal_quad;
+/// fte.frag mode of add-on gel batches ([`crate::FteBatch::gel`]).
+const GEL_MODE: f32 = 9.0;
 mod types;
 use types::*;
 mod math;
@@ -528,7 +530,7 @@ impl Renderer {
                         lines: false,
                         first_index: fr.fte_indices.len() as u32,
                         num_indices: spray_i.len() as u32,
-                        soft: true,
+                        soft: true, gel: false,
                     });
                 }
             }
@@ -563,7 +565,7 @@ impl Renderer {
                     .iter()
                     .filter_map(|b| {
                         let slot = self.pics.get(b.pic.0 as usize)?.slot;
-                        Some((crate::pipelines::fte_index(b.blend, b.lines), slot, *b, b.blend as u32 as f32))
+                        Some((crate::pipelines::fte_index(b.blend, b.lines), slot, *b, if b.gel { GEL_MODE } else { b.blend as u32 as f32 }))
                     })
                     .collect();
                 // portal views: the same particles (not soft) and every gun

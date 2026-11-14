@@ -137,6 +137,20 @@ impl Host {
                     weapon.origin = (Vec3::from(weapon.origin) + cv.viewmodel.offset(v.angles)).to_array();
                     ents.push(RenderEntity { views: bit, ..weapon });
                 }
+                let me = g.cl.viewentity.saturating_sub(1);
+                let held = |t| g.toy.held == Some(t) && g.cl.intermission == 0 && g.cl.stats[0] > 0
+                    && cv.viewmodel.visible() && g.cl.items & crate::sbar::IT_INVISIBILITY == 0;
+                let toy_gun = if held(qserver::addons::Toy::GelSprayer) {
+                    self.gel_fx.weapon(me, self.cl.time, v, &mut self.level, &self.server.core.fs, &mut self.r)
+                } else if held(qserver::addons::Toy::Washer) {
+                    self.water_fx.weapon(me, self.cl.time, v, &mut self.level, &self.server.core.fs, &mut self.r)
+                } else {
+                    None
+                };
+                if let Some(mut weapon) = toy_gun {
+                    weapon.origin = (Vec3::from(weapon.origin) + cv.viewmodel.offset(v.angles)).to_array();
+                    ents.push(RenderEntity { views: bit, ..weapon });
+                }
                 if let Some(gun) = gun {
                     ents.push(RenderEntity { views: bit, ..gun });
                 }

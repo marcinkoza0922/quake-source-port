@@ -303,7 +303,7 @@ impl Presentation {
             lines: false,
             first_index: first,
             num_indices: geom.1.len() as u32 - first,
-            soft: false,
+            soft: false, gel: false,
         });
     }
 }

@@ -31,7 +31,45 @@ void main() {
         o_color = vec4(mix(inner, glow, rim), 1.0 - smoothstep(1.0 - aa, 1.0, d));
         return;
     }
-    vec4 c = tex(pc.tex, i_uv) * i_color;
+    vec4 c;
+    if (pc.fogmix.w == 9.0) {
+        // add-on gel: the texture alpha is a height field. The surface
+        // frame comes from screen-space derivatives; a parallax shift and a
+        // normal from the height gradient make the blob look raised, then it
+        // is lit as a glossy liquid (two highlights, fresnel rim, thin dark
+        // edges, a brighter thick middle). i_color: lit gel colour, alpha.
+        vec3 dpx = dFdx(i_wpos), dpy = dFdy(i_wpos);
+        vec2 dux = dFdx(i_uv), duy = dFdy(i_uv);
+        vec3 n = normalize(cross(dpx, dpy));
+        vec3 v = normalize(fr.eye.xyz - i_wpos);
+        if (dot(n, v) < 0.0) n = -n;
+        vec3 p2 = cross(dpy, n), p1 = cross(n, dpx);
+        vec3 t = p2 * dux.x + p1 * duy.x;
+        vec3 b = p2 * dux.y + p1 * duy.y;
+        float im = inversesqrt(max(max(dot(t, t), dot(b, b)), 1e-12));
+        t *= im;
+        b *= im;
+        float h0 = tex(pc.tex, i_uv).a;
+        vec2 vts = vec2(dot(v, t), dot(v, b)) / max(dot(v, n), 0.3);
+        vec2 uv = i_uv - vts * h0 * 0.03;
+        vec2 ts = 1.5 / vec2(textureSize(textures[nonuniformEXT(pc.tex)], 0));
+        float h = tex(pc.tex, uv).a;
+        float hx = tex(pc.tex, uv + vec2(ts.x, 0.0)).a - tex(pc.tex, uv - vec2(ts.x, 0.0)).a;
+        float hy = tex(pc.tex, uv + vec2(0.0, ts.y)).a - tex(pc.tex, uv - vec2(0.0, ts.y)).a;
+        vec3 nb = normalize(n - (t * hx + b * hy) * 3.5);
+        vec3 l1 = normalize(vec3(0.35, 0.25, 1.0));
+        vec3 l2 = normalize(v + fr.vup.xyz * 0.6 - fr.vright.xyz * 0.3);
+        float s1 = pow(max(dot(nb, normalize(l1 + v)), 0.0), 70.0);
+        float s2 = pow(max(dot(nb, normalize(l2 + v)), 0.0), 260.0);
+        float fres = pow(1.0 - max(dot(nb, v), 0.0), 3.0);
+        float lit = clamp(max(max(i_color.r, i_color.g), i_color.b) * 1.4, 0.3, 1.2);
+        float edge = smoothstep(0.03, 0.18, h) * (1.0 - smoothstep(0.18, 0.4, h));
+        vec3 base = i_color.rgb * (0.6 + 0.4 * max(dot(nb, l1), 0.0)) * mix(0.75, 1.2, h) * (1.0 - 0.35 * edge);
+        vec3 col = base + vec3(s1 * 0.7 + s2 * 0.45) * lit + i_color.rgb * fres * 0.6;
+        c = vec4(col, smoothstep(0.0, 0.08, h) * i_color.a);
+    } else {
+        c = tex(pc.tex, i_uv) * i_color;
+    }
     if (pc.fogmix.y > 0.0) {
         // Soft particles: fade as the particle nears the scene behind it.
         // MSAA uses the nearest covered sample (vkQuake fte_particles.inc).

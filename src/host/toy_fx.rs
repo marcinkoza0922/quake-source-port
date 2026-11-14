@@ -13,6 +13,8 @@ impl Host {
                 self.rail_fx.receive(fx, self.cl.time, choice, self.snd.as_ref());
             }
             ClientEvent::Hook(h) => self.hook_fx.receive(h, self.cl.time, self.snd.as_ref()),
+            ClientEvent::Gel(line) => self.gel_fx.receive(&line, self.cl.time, self.snd.as_ref()),
+            ClientEvent::Water(line) => self.water_fx.receive(&line, self.cl.time, self.snd.as_ref()),
             ClientEvent::Boomerang(line) => self.boomerang_fx.receive(&line, self.cl.time, &self.cl, self.snd.as_ref()),
             _ => {}
         }
@@ -24,5 +26,7 @@ impl Host {
         self.rail_fx.clear();
         self.hook_fx.clear();
         self.boomerang_fx.clear();
+        self.gel_fx.clear();
+        self.water_fx.clear();
     }
 }

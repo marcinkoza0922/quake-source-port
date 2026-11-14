@@ -1,7 +1,7 @@
 """Generic Blender importer for Meshy toy models (see docs/ADDONS.md).
 
 blender -b --factory-startup --python tools/import_toy_model.py -- \
-    SOURCE(.zip|dir|.fbx) [OUT] [NAME] [--out DIR] [--name NAME] [--length 36]
+    SOURCE(.zip|dir|.fbx|.glb) [OUT] [NAME] [--out DIR] [--name NAME] [--length 36]
     [--anchor bbox|centroid|origin] [--back B] [--forward F] [--flip] [--flat]
     [--size 512] [--gain 0.5] [--glow]
 
@@ -98,7 +98,7 @@ def main():
     out = Path(opts.out) if Path(opts.out).is_absolute() else ROOT / opts.out
     out.mkdir(parents=True, exist_ok=True)
     with tempfile.TemporaryDirectory(prefix='quake-toy-') as directory:
-        if opts.archive.suffix.lower() == '.fbx':
+        if opts.archive.suffix.lower() in ('.fbx', '.glb'):
             fbx = opts.archive
         else:
             if opts.archive.is_dir():
@@ -106,8 +106,11 @@ def main():
             else:
                 with zipfile.ZipFile(opts.archive) as archive:
                     archive.extractall(directory)
-            fbx = next(Path(directory).rglob('*.fbx'))
-        bpy.ops.import_scene.fbx(filepath=str(fbx))
+            fbx = next(p for ext in ('*.fbx', '*.glb') for p in Path(directory).rglob(ext))
+        if fbx.suffix.lower() == '.glb':
+            bpy.ops.import_scene.gltf(filepath=str(fbx))
+        else:
+            bpy.ops.import_scene.fbx(filepath=str(fbx))
         objects = [o for o in bpy.context.selected_objects if o.type == 'MESH']
         if len(objects) != 1:
             raise ValueError('Expected the supplied single-mesh Meshy export')

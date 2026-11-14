@@ -193,6 +193,7 @@ impl Server {
             }
             l.portals.load_text(&h.portals);
             l.stickies.load_text(&h.extra);
+            l.gel.load_text(&h.extra);
         }
         Ok(())
     }

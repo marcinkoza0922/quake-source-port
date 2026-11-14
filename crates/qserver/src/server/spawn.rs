@@ -135,7 +135,7 @@ impl Server {
         self.level = Some(Level {
             vm, world, assist: Vec::new(), portals: Default::default(), stickies: Default::default(), falls: Default::default(),
             rails: Default::default(), hooks: crate::addons::hookshot::Hooks::new(crate::addons::hook_surface::Surfaces::new(&bsp)),
-            boomerangs: Default::default(),
+            boomerangs: Default::default(), gel: Default::default(), washers: Default::default(),
         });
 
         // run two frames to allow everything to settle

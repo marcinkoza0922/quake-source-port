@@ -76,6 +76,14 @@ impl Blood {
         self.pic = pic;
     }
 
+    /// Washes surface marks (not wounds) within `r` of `p` away.
+    pub fn wash(&mut self, p: Vec3, r: f32) {
+        self.marks.retain(|m| {
+            m.owner.is_some()
+                || m.patches.iter().flat_map(|q| q.points.first()).all(|q| (q.pos - p).length() > r)
+        });
+    }
+
     fn random(&mut self) -> f32 {
         self.seed = self.seed.wrapping_mul(1664525).wrapping_add(1013904223);
         (self.seed >> 8) as f32 / 16777216.0
@@ -416,7 +424,7 @@ impl Blood {
                 pic,
                 blend: FteBlend::Blend,
                 lines: false,
-                soft: false,
+                soft: false, gel: false,
                 first_index: first,
                 num_indices: count,
             });

@@ -375,7 +375,7 @@ fn batch(pic: PicId, first: u32, out: &mut Geometry) {
             pic,
             blend: FteBlend::Blend,
             lines: false,
-            soft: false,
+            soft: false, gel: false,
             first_index: first,
             num_indices: count,
         });

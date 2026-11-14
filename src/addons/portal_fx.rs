@@ -118,7 +118,7 @@ impl Presentation {
             }
         }
         geom.2.push(FteBatch { pic, blend: FteBlend::AddA, lines: false, first_index: first,
-            num_indices: geom.1.len() as u32-first, soft: false });
+            num_indices: geom.1.len() as u32-first, soft: false, gel: false });
     }
 }
 fn dot(g: &mut Geometry, p: Vec3, r: Vec3, u: Vec3, size: f32, rgb: [u8;3], alpha: f32) {
