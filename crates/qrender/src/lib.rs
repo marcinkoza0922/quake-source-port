@@ -11,7 +11,7 @@ mod frame;
 mod gpu;
 mod pipelines;
 mod projection;
-pub use projection::view_fov_tangents;
+pub use projection::{ViewFrustum, view_fov_tangents};
 mod slang;
 pub use slang::ShaderParam;
 pub mod types;

@@ -3,8 +3,8 @@
 use qcore::math::Vec3;
 use qrender::ModelId;
 
+use super::Collide;
 use super::math::{Quat, Rng};
-use super::{Collide, STEP};
 
 pub struct Body {
     pub model: ModelId,
@@ -65,28 +65,31 @@ impl Body {
         self.still = 0.0;
     }
 
-    pub fn step(&mut self, gravity: f32, cm: &dyn Collide) {
-        self.life -= STEP;
+    pub fn step(&mut self, gravity: f32, cm: &dyn Collide, step: f32, skip_down: bool) {
+        self.life -= step;
         if self.asleep {
             return;
         }
+        let scale60 = step * 60.0;
         if cm.water(self.pos) {
-            self.vel = self.vel * 0.92 - Vec3::new(0.0, 0.0, gravity * 0.1 * STEP);
-            self.spin *= 0.95;
+            self.vel = self.vel * 0.92f32.powf(scale60) - Vec3::new(0.0, 0.0, gravity * 0.1 * step);
+            self.spin *= 0.95f32.powf(scale60);
         } else {
-            self.vel.z -= gravity * STEP;
+            self.vel.z -= gravity * step;
         }
-        let to = self.pos + self.vel * STEP;
+        let to = self.pos + self.vel * step;
         if cm.solid(self.pos) {
             self.pos = to; // embedded: fall through rather than stick
         } else {
             let tr = cm.trace(self.pos, to);
             self.pos = if tr.0 < 1.0 { tr.1 + tr.2 * 0.1 } else { to };
             let mut normal = (tr.0 < 1.0).then_some(tr.2);
-            let down = cm.trace(self.pos, self.pos - Vec3::new(0.0, 0.0, self.radius));
-            if down.0 < 1.0 && down.2.z > 0.5 {
-                self.pos.z = down.1.z + self.radius * down.2.z;
-                normal = normal.or(Some(down.2));
+            if !skip_down {
+                let down = cm.trace(self.pos, self.pos - Vec3::new(0.0, 0.0, self.radius));
+                if down.0 < 1.0 && down.2.z > 0.5 {
+                    self.pos.z = down.1.z + self.radius * down.2.z;
+                    normal = normal.or(Some(down.2));
+                }
             }
             if let Some(n) = normal {
                 let vn = n * self.vel.dot(n);
@@ -101,9 +104,9 @@ impl Body {
                 }
             }
         }
-        self.rot = self.rot.integrate(self.spin, STEP);
+        self.rot = self.rot.integrate(self.spin, step);
         if self.vel.length_sq() < 1.0 && self.spin.length_sq() < 0.01 {
-            self.still += STEP;
+            self.still += step;
             if self.still > 0.3 {
                 self.asleep = true;
                 self.vel = Vec3::ZERO;

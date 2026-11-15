@@ -200,6 +200,8 @@ mod save_menu_tests {
         assert_eq!(parent_page(Page::Autosave).map(|p| p.0), Some(Page::Gameplay));
         assert!(option_cvars().any(|c| c == "sv_autosave"));
         assert!(option_cvars().any(|c| c == "joy_invert"));
+        assert!(option_cvars().any(|c| c == "addon_washer_quality"));
+        assert!(tooltip(WASHER[1]).is_some());
     }
 
     #[test]
@@ -392,7 +394,7 @@ fn enhancements_hub_and_subpages_navigate_back_to_their_parent() {
     }
     menu.key(K_ESCAPE, &mut cv, false);
     assert_eq!(menu.screen, Screen::Options);
-    for cvar in ["r_impact_nails", "r_blood_amount", "r_debris_gibs", "r_wateralpha"] {
+    for cvar in ["r_impact_nails", "r_blood_amount", "r_debris_quality", "r_debris_gibs", "r_wateralpha"] {
         assert!(option_cvars().any(|name| name==cvar));
     }
 }
@@ -510,6 +512,7 @@ mod shader_tests {
             cv.register(n, "", 0);
         }
         cv.register("r_shader_scope", "0", 0);
+        cv.register("r_shader_scale", "0", 0);
         let mut m = Menu::new();
         m.shader_presets = vec!["crt/a".into(), "crt/b".into()];
         m.shader_params = vec![qrender::ShaderParam {
@@ -524,16 +527,20 @@ mod shader_tests {
         m.opt_cursor = 0;
         m.key(K_RIGHTARROW, &mut cv, false);
         assert_eq!(cv.by_name("r_shader_preset").unwrap().string, "crt/a");
+        // input scale row toggles between fit output (0) and 3D resolution (1)
+        m.opt_cursor = 2;
+        m.key(K_RIGHTARROW, &mut cv, false);
+        assert_eq!(cv.by_name("r_shader_scale").unwrap().value, 1.0);
         // the param row follows the static rows
-        m.opt_cursor = 3;
-        assert!(matches!(m.page_item(Page::ScreenShader, 3), Item::ShaderParam(0)));
+        m.opt_cursor = 4;
+        assert!(matches!(m.page_item(Page::ScreenShader, 4), Item::ShaderParam(0)));
         m.key(K_RIGHTARROW, &mut cv, false);
         assert_eq!(cv.by_name("r_shader_params").unwrap().string, "MASK=0.75");
         // the reset row drops every override
-        m.opt_cursor = 2;
+        m.opt_cursor = 3;
         m.key(K_ENTER, &mut cv, false);
         assert_eq!(cv.by_name("r_shader_params").unwrap().string, "");
-        m.opt_cursor = 3;
+        m.opt_cursor = 4;
         m.key(K_RIGHTARROW, &mut cv, false);
         assert_eq!(cv.by_name("r_shader_params").unwrap().string, "MASK=0.75");
         // back to the default drops the override

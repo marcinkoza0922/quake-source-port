@@ -1,7 +1,9 @@
 # Enhanced blood (`src/blood/`, Enhancements › Enhanced Blood Splatter)
 `r_blood` (default 0, archived) enables cosmetic surface splatters and localized
 MDL wounds independently of `r_debris` and scripted particle packs. Blood Settings
-archives `r_blood_amount` (5 rays/hit), `_size` (1), `_lifetime` (120 s),
+archives `r_blood_quality` (`0` low, `1` medium default, `2` high — capping mark
+count/lifetime/spray/droplet budgets and skipping wounds/gib trails on low),
+`r_blood_amount` (5 rays/hit), `_size` (1), `_lifetime` (120 s),
 `_maxmarks` (512), `_wounds` (1), and `_gibs` (1). Classic blood messages and
 DP blood point effects supply candidate hits, accepted only beside flesh
 meshes (death sequences, gibs, heads); shootable buttons/triggers cannot bleed.

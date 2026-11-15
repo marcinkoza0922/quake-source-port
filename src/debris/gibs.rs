@@ -14,8 +14,6 @@ const HEADS: [(&str, &str); 6] = [
     ("oldone", "h_shams"),
 ];
 const STOCK: [&str; 3] = ["progs/gib1.mdl", "progs/gib2.mdl", "progs/gib3.mdl"];
-/// Gib pieces per ragdoll (plus the head).
-const PIECES: usize = 6;
 
 fn stem(name: &str) -> String {
     name.rsplit('/').next().unwrap_or(name).trim_end_matches(".mdl").to_ascii_lowercase()
@@ -63,7 +61,7 @@ impl Debris {
 
     /// Gibs ragdolls hit directly by an explosion (unless the server gibbed
     /// them meanwhile, which releases the ragdoll first).
-    pub(super) fn gib_pending(&mut self, cl: &mut ClientState, lv: &mut Level, fs: &qcore::fs::Fs, r: &mut Renderer, time: f64) {
+    pub(super) fn gib_pending(&mut self, cl: &mut ClientState, lv: &mut Level, fs: &qcore::fs::Fs, r: &mut Renderer, time: f64, tier: &Tier) {
         if !self.corpses.iter().any(|c| c.gib.is_some_and(|g| g.0 <= time)) {
             return;
         }
@@ -79,8 +77,7 @@ impl Debris {
             let s = cl.model_name(c.model).map(stem).unwrap_or_default();
             let own: Vec<ModelId> = pool.iter().filter(|g| !s.is_empty() && g.0.contains(&s)).map(|g| g.1).collect();
             let ids: Vec<ModelId> = if own.is_empty() { pool.iter().map(|g| g.1).collect() } else { own };
-            let frame = cl.entities[c.ent].frame;
-            self.gibbed.insert(c.ent, (c.model, frame));
+            self.gibbed.insert(c.ent, (c.model, None));
             let mid = c.doll.pos.iter().fold(Vec3::ZERO, |s, p| s + *p) / c.doll.pos.len() as f32;
             self.blood_bursts.push(mid);
             cl.events.push(qclient::ClientEvent::TempSound { name: "player/udeath.wav", origin: mid.to_array() });
@@ -91,7 +88,7 @@ impl Debris {
                 cl.run_particle_effect(p.to_array(), [0.0; 3], BLOOD, 24);
                 let model = if Some(n) == top && head.is_some() {
                     head
-                } else if pieces < PIECES && !ids.is_empty() {
+                } else if pieces < tier.gib_pieces && !ids.is_empty() {
                     pieces += 1;
                     Some(ids[n % ids.len()])
                 } else {
@@ -101,12 +98,13 @@ impl Debris {
                 let out = (*p - center).normalize() + Vec3::new(rng.signed(), rng.signed(), rng.signed()) * 0.5;
                 let vel = out.normalize() * (200.0 + rng.unit() * 250.0) + Vec3::new(0.0, 0.0, 200.0 + rng.unit() * 150.0);
                 let mut b = Body::new(model, *p, vel, Quat::IDENTITY, 3.0);
-                b.life = 10.0 + rng.unit() * 10.0;
+                b.life = tier.client_gib_life.0 + rng.unit() * tier.client_gib_life.1;
                 b.trail = true;
                 b.random_spin(&mut rng, 10.0);
                 self.bodies.push(b);
             }
             self.rng = Some(rng);
         }
+        self.trim_client_gibs(tier.max_gibs);
     }
 }

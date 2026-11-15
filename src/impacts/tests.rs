@@ -88,7 +88,7 @@ fn stuck_nail_draws_at_brush_origin() {
     n.anchor = Some(Anchor::Brush(7));
     effects.nails.push_back(n);
     let mut out = (vec![], vec![], vec![]);
-    effects.draw(&Floor, &HashMap::new(), PicId(0), 0.0, 120.0, &mut out);
+    effects.draw(&Floor, &HashMap::new(), None, PicId(0), 0.0, 120.0, &mut out);
     assert!(!out.0.is_empty());
     assert!(out.0.iter().all(|v| v.pos[0] >= 13.0));
 }
@@ -188,4 +188,47 @@ fn resting_nail_rides_lift_in_both_directions_and_falls_when_removed() {
     assert!(!n.sleeping);
     assert!(n.support.is_none());
     assert!(n.pos.z < before.z);
+}
+
+#[test]
+fn impact_quality_tiers_and_frustum_culling() {
+    let mut cv = qcore::cvar::Cvars::default();
+    cv.register("r_impact_quality", "0", 0);
+    cv.register("r_impact_lifetime", "600", 0);
+    cv.register("r_impact_limit", "2048", 0);
+    cv.register("r_impact_fx", "4", 0);
+    let low = tier(&cv);
+    cv.set("r_impact_quality", "1");
+    let med = tier(&cv);
+    cv.set("r_impact_quality", "2");
+    let high = tier(&cv);
+    assert_eq!((low.limit, low.lifetime as u32, low.fx_level, low.max_parts), (256, 30, 2, 1024));
+    assert_eq!((med.limit, med.lifetime as u32, med.fx_level, med.max_parts), (512, 120, 3, 2500));
+    assert_eq!((high.limit, high.lifetime as u32, high.fx_level, high.max_parts), (2048, 600, 4, 6000));
+
+    let mut effects = Impacts::default();
+    effects.marks.push_back(Mark {
+        kind: 0,
+        born: 0.0,
+        entity: 0,
+        normal: Vec3::new(0.0, 0.0, 1.0),
+        center: Vec3::new(100.0, 0.0, 0.0),
+        radius: 2.0,
+        points: [
+            Vec3::new(99.0, -1.0, 0.0),
+            Vec3::new(101.0, -1.0, 0.0),
+            Vec3::new(100.0, 1.0, 0.0),
+        ]
+        .into_iter()
+        .map(|pos| mesh::Point { pos, uv: [0.5, 0.5], bary: Vec3::ZERO })
+        .collect(),
+    });
+    let mut behind_nail = nail();
+    behind_nail.pos = Vec3::new(-100.0, 0.0, 0.0);
+    effects.nails.push_back(behind_nail);
+    let view = qrender::View { origin: [0.0; 3], angles: [0.0; 3], fov_x: 90.0, ..Default::default() };
+    let frustum = qrender::ViewFrustum::from_view(&view, (1280, 720), 1.0);
+    let mut out = (vec![], vec![], vec![]);
+    effects.draw(&Floor, &HashMap::new(), Some(&frustum), PicId(0), 0.0, 120.0, &mut out);
+    assert_eq!(out.0.len(), 3, "only the in-frustum mark should emit; behind nail is culled");
 }

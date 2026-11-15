@@ -162,6 +162,8 @@ pub(super) fn register_commands(c: &mut Commands<Host>) {
             "enhancements" => Some(Page::Enhancements),
             "water" => Some(Page::Water),
             "impacts" => Some(Page::Impacts),
+            "blood" => Some(Page::Blood),
+            "debris" => Some(Page::Debris),
             "shader" | "screenshader" => Some(Page::ScreenShader),
             "audio" => Some(Page::Audio),
             "addons" => Some(Page::Addons),

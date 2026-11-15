@@ -39,6 +39,7 @@ impl Host {
             let debris_on = self.cv("r_debris") != 0.0;
             let gravity = self.cv("sv_gravity");
             let set = crate::debris::Settings {
+                quality: crate::debris::Quality::from_cvar(self.cv("r_debris_quality")),
                 ragdolls: self.cv("r_debris_ragdolls") != 0.0,
                 start: crate::debris::Start::from_cvar(self.cv("r_debris_ragdollstart")),
                 max_ragdolls: self.cv("r_debris_maxragdolls").clamp(1.0, 128.0) as usize,
@@ -63,7 +64,10 @@ impl Host {
             if self.cv("r_blood") != 0.0 || self.cv("r_impact_nails") != 0.0 || self.cv("r_impact_bullets") != 0.0 {
                 self.debris.track_shooters(&self.cl, &self.level, self.cl.time);
             }
-            self.debris.entities(&mut ents, &mut dyn_verts);
+            let fte_frustum = self.cull_fte_for_view().then(|| {
+                qrender::ViewFrustum::from_view(v, (w, h), self.cv("r_renderscale"))
+            });
+            self.debris.entities(&mut ents, &mut dyn_verts, fte_frustum.as_ref());
             if self.cv("r_drawentities") == 0.0 {
                 ents.clear();
             }
@@ -145,19 +149,20 @@ impl Host {
             let grav = self.cv("sv_gravity");
             let grav = if grav > 0.0 { grav } else { 800.0 };
             let gel_quality = (self.cv("addon_gel_quality").round() as i32).clamp(0, 1) as u32;
+            let washer_quality = (self.cv("addon_washer_quality").round() as i32).clamp(0, 1) as u32;
             self.gel_fx.frame(&self.cl, &self.level, &mut self.r, v, grav, self.snd.as_ref(), gel_quality, &mut fte);
-            self.water_fx.frame(&self.cl, self.cl.viewentity.saturating_sub(1), v, grav, &mut self.r, &mut fte);
-            for p in self.water_fx.wash_points(self.cl.time).collect::<Vec<_>>() {
+            self.water_fx.frame(&self.cl, self.cl.viewentity.saturating_sub(1), v, grav, washer_quality, &mut self.r, &mut fte);
+            for p in self.water_fx.wash_points(self.cl.time) {
                 self.blood.wash(p, crate::addons::water_fx::WASH_RADIUS);
             }
             self.blood.frame(
                 crate::blood::Settings::read(&self.server.core.cvars), &self.cl, &self.level, &mut brushes,
                 &self.server.core.fs, &mut self.r, &ents, &dyn_verts,
-                v.origin.into(), &self.debris, &mut fte,
+                v.origin.into(), &self.debris, fte_frustum.as_ref(), &mut fte,
             );
             self.hitfx.frame(
                 &self.server.core.cvars, &self.cl, &self.level, &mut brushes, &self.server.core.fs,
-                &mut self.r, v, &self.debris, &mut fte,
+                &mut self.r, v, &self.debris, fte_frustum.as_ref(), &mut fte,
             );
             // Projectile pellets already draw their own streaks; hitscan ones would stack.
             let pellets = self.cv("addons_active") != 0.0 && self.cv("addon_projectile_shotguns") != 0.0
@@ -166,7 +171,7 @@ impl Host {
             self.tracers.frame(hitscan, &self.cl, &self.debris, v, &mut self.r, &mut fte);
             self.impacts.frame(
                 &self.server.core.cvars, &self.cl, &self.level, &mut brushes, &self.server.core.fs,
-                &mut self.r, &mut ents, &dyn_verts, v.origin.into(), &self.debris, &mut fte,
+                &mut self.r, &mut ents, &dyn_verts, v.origin.into(), &self.debris, fte_frustum.as_ref(), &mut fte,
             );
             crate::view::dlights(&self.cl, &mut dls);
             let contents = self.contents(v.origin);
@@ -402,6 +407,7 @@ impl Host {
             water_quality: (v("r_water_quality").round() as i32).clamp(0, 1) as u32,
             gel_quality: (v("addon_gel_quality").round() as i32).clamp(0, 1) as u32,
             shader_scope: v("r_shader_scope").clamp(0.0, 1.0) as u32,
+            shader_scale: v("r_shader_scale").clamp(0.0, 1.0) as u32,
             goggles,
             ..Settings::default()
         };

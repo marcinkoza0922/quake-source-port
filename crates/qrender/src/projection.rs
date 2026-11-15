@@ -28,6 +28,47 @@ pub fn view_fov_tangents(view: &View, output: (u32, u32), scale: f32) -> [f32; 2
     half_fov_tangents(view.fov_x, extent)
 }
 
+/// Normalized side frustum planes (left, right, top, bottom) for a camera view.
+#[derive(Clone, Copy, Debug)]
+pub struct ViewFrustum {
+    pub planes: [[f32; 4]; 4],
+}
+
+impl ViewFrustum {
+    /// Frustum planes for a single full-output view, matching the renderer's
+    /// scene sizing, status-bar reservation, and 4:3 FOV adaptation.
+    pub fn from_view(v: &View, output: (u32, u32), scale: f32) -> Self {
+        let scene = scene_extent(output, scale);
+        let extent = view_extent([0, 0, output.0, output.1], v.reserve_bottom, output, scene);
+        Self::for_extent(v, extent.0, extent.1)
+    }
+
+    pub(crate) fn for_extent(v: &View, w: u32, h: u32) -> Self {
+        let [tx, ty] = half_fov_tangents(v.fov_x, (w, h));
+        let (fwd, right, up) = qcore::math::angle_vectors(v.angles.into());
+        let e = qcore::math::Vec3::from(v.origin);
+        let dirs = [
+            fwd + right / tx,
+            fwd - right / tx,
+            fwd - up / ty,
+            fwd + up / ty,
+        ];
+        let mut planes = [[0.0; 4]; 4];
+        for (slot, d) in planes.iter_mut().zip(dirs) {
+            let l = d.length().max(1e-6);
+            let n = d / l;
+            *slot = [n.x, n.y, n.z, -n.dot(e)];
+        }
+        Self { planes }
+    }
+
+    pub fn contains_sphere(&self, center: [f32; 3], radius: f32) -> bool {
+        self.planes
+            .iter()
+            .all(|p| p[0] * center[0] + p[1] * center[1] + p[2] * center[2] + p[3] >= -radius)
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -47,5 +88,14 @@ mod tests {
             }
         }
         assert_eq!(scene_extent((0, 0), 0.0), (1, 1));
+    }
+
+    #[test]
+    fn frustum_accepts_forward_and_rejects_behind() {
+        let view = View { origin: [10.0, 20.0, 30.0], angles: [0.0, 0.0, 0.0], fov_x: 90.0, ..View::default() };
+        let f = ViewFrustum::from_view(&view, (1280, 720), 1.0);
+        assert!(f.contains_sphere([110.0, 20.0, 30.0], 8.0));
+        assert!(!f.contains_sphere([-90.0, 20.0, 30.0], 8.0));
+        assert!(!f.contains_sphere([50.0, 500.0, 30.0], 8.0));
     }
 }

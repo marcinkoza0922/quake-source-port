@@ -10,11 +10,71 @@ pub(crate) mod surfaces;
 #[cfg(test)]
 mod tests;
 
+/// `r_impact_quality`: mark caps, lifetimes and surface hit-particle budgets.
+#[derive(Clone, Copy, PartialEq, Eq, Debug, Default)]
+pub enum Quality {
+    Low = 0,
+    #[default]
+    Medium = 1,
+    High = 2,
+}
+
+impl Quality {
+    pub fn from_cvar(v: f32) -> Self {
+        match v.round() as i32 {
+            ..=0 => Self::Low,
+            1 => Self::Medium,
+            _ => Self::High,
+        }
+    }
+}
+
+#[derive(Clone, Copy)]
+pub(crate) struct Tier {
+    pub lifetime: f64,
+    pub limit: usize,
+    pub fx_level: u8,
+    pub fx_mult: f32,
+    pub max_parts: usize,
+}
+
+pub(crate) fn tier(cv: &qcore::cvar::Cvars) -> Tier {
+    let quality = Quality::from_cvar(cv.value_of("r_impact_quality"));
+    let lifetime = cv.value_of("r_impact_lifetime").clamp(5.0, 600.0) as f64;
+    let limit = cv.value_of("r_impact_limit").clamp(32.0, 2048.0) as usize;
+    let level = cv.value_of("r_impact_fx").clamp(0.0, 4.0) as u8;
+    match quality {
+        Quality::Low => Tier {
+            lifetime: lifetime.min(30.0),
+            limit: limit.min(256),
+            fx_level: level.min(2),
+            fx_mult: 0.5,
+            max_parts: 1024,
+        },
+        Quality::Medium => Tier {
+            lifetime: lifetime.min(120.0),
+            limit: limit.min(512),
+            fx_level: level.min(3),
+            fx_mult: 1.0,
+            max_parts: 2500,
+        },
+        Quality::High => Tier {
+            lifetime,
+            limit,
+            fx_level: level,
+            fx_mult: 1.0,
+            max_parts: 6000,
+        },
+    }
+}
+
 struct Mark {
     kind: u8,
     born: f64,
     entity: i32,
     normal: Vec3,
+    center: Vec3,
+    radius: f32,
     points: Vec<mesh::Point>,
 }
 struct Nail {
@@ -74,6 +134,7 @@ impl Impacts {
         dynverts: &[u32],
         view: Vec3,
         debris: &crate::debris::Debris,
+        frustum: Option<&qrender::ViewFrustum>,
         out: &mut Geometry,
     ) {
         let enabled = ["r_impact_bullets", "r_impact_nails", "r_impact_scorches"]
@@ -227,8 +288,9 @@ impl Impacts {
             self.flights.clear();
             self.intercepted.clear();
         }
-        let lifetime = cv.value_of("r_impact_lifetime").clamp(5.0, 600.0) as f64;
-        let limit = cv.value_of("r_impact_limit").clamp(32.0, 2048.0) as usize;
+        let tier = tier(cv);
+        let lifetime = tier.lifetime;
+        let limit = tier.limit;
         self.marks
             .retain(|m| enabled[m.kind as usize] && cl.time - m.born < lifetime);
         self.nails.retain(|n| {
@@ -268,6 +330,7 @@ impl Impacts {
                     && let Some(e) = ents.iter().rev().find(|e| e.key == key && !e.viewmodel)
                     && let Some(Some(cm)) = self.models.get(&e.model)
                     && cm.has_death_pose
+                    && frustum.is_none_or(|f| f.contains_sphere(e.origin, cm.entity_radius(e)))
                 {
                     poses.insert(key, (e, mesh::positions(&cm.mdl, e, dynverts, cl.time)));
                 }
@@ -280,16 +343,18 @@ impl Impacts {
                 .ok();
         }
         if let Some(pic) = self.pic {
-            self.draw(&world, &poses, pic, cl.time, lifetime, out);
+            self.draw(&world, &poses, frustum, pic, cl.time, lifetime, out);
         }
         drop(poses);
         ents.retain(|e| !self.intercepted.contains(&(e.key as usize)));
     }
 
+    #[allow(clippy::too_many_arguments)]
     fn draw(
         &self,
         world: &dyn World,
         poses: &Poses<'_>,
+        frustum: Option<&qrender::ViewFrustum>,
         pic: PicId,
         time: f64,
         life: f64,
@@ -305,6 +370,9 @@ impl Impacts {
                 };
                 o
             };
+            if frustum.is_some_and(|f| !f.contains_sphere((m.center + origin).to_array(), m.radius)) {
+                continue;
+            }
             let base = out.0.len() as u32;
             let alpha = fade(time - m.born, life);
             for p in &m.points {
@@ -343,6 +411,9 @@ impl Impacts {
                 _ => Vec3::ZERO,
             };
             let tip = n.pos + origin;
+            if frustum.is_some_and(|f| !f.contains_sphere(tip.to_array(), 7.0)) {
+                continue;
+            }
             let tail = tip - n.dir * 6.0;
             let ring = [u, v, -u, -v].map(|a| tail + a * 0.3);
             let tipring = [u, v, -u, -v].map(|a| tip - n.dir * 1.0 + a * 0.3);

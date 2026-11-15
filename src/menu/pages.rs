@@ -121,8 +121,12 @@ pub(super) const BOOMERANG: &[Item] = &[
     slider("Stun Duration", "addon_boomerang_stun", 1.0, 10.0, 0.5),
     slider("Flight Speed", "addon_boomerang_speed", 300.0, 1500.0, 100.0),
 ];
-/// Reached from the Add-ons pages: powerwasher push strength.
-pub(super) const WASHER: &[Item] = &[slider("Push", "addon_washer_push", 0.25, 3.0, 0.25)];
+/// Reached from the Add-ons pages: powerwasher push strength and jet quality.
+pub(super) const WASHER_QUALITY: &[(&str, f32)] = &[("low", 0.0), ("high", 1.0)];
+pub(super) const WASHER: &[Item] = &[
+    slider("Push", "addon_washer_push", 0.25, 3.0, 0.25),
+    Item::Choice { label: "Jet Quality", cvar: "addon_washer_quality", choices: WASHER_QUALITY },
+];
 /// Reached from the Add-ons pages: gel coat resolution, rebuild cadence and shader detail.
 pub(super) const GEL_QUALITY: &[(&str, f32)] = &[("low", 0.0), ("high", 1.0)];
 pub(super) const GEL: &[Item] = &[Item::Choice { label: "Gel Quality", cvar: "addon_gel_quality", choices: GEL_QUALITY }];
@@ -325,6 +329,7 @@ pub(super) const IMPACT_FX: &[(&str, f32)] =
     &[("off", 0.0), ("subtle", 1.0), ("normal", 2.0), ("intense", 3.0), ("spectacle", 4.0)];
 
 pub(super) const IMPACTS: &[Item] = &[
+    Item::Choice { label: "Impact Quality", cvar: "r_impact_quality", choices: DEBRIS_QUALITY },
     Item::Choice { label: "Surface Hit Effects", cvar: "r_impact_fx", choices: IMPACT_FX },
     toggle("Shotgun Bullet Decals", "r_impact_bullets"),
     toggle("Physical Nail Impacts", "r_impact_nails"),
@@ -346,10 +351,12 @@ pub(super) const WATER: &[Item] = &[
     slider("Caustic Intensity", "r_watercaustics_amount", 0.1, 2.0, 0.1),
 ];
 
+pub(super) const DEBRIS_QUALITY: &[(&str, f32)] = &[("low", 0.0), ("medium", 1.0), ("high", 2.0)];
 pub(super) const RAGDOLL_START: &[(&str, f32)] = &[("after animation", 0.0), ("at death", 1.0), ("mixed", 2.0)];
 
 /// Reached from Enhancements; unavailable while `r_debris` is off.
 pub(super) const DEBRIS: &[Item] = &[
+    Item::Choice { label: "Debris Quality", cvar: "r_debris_quality", choices: DEBRIS_QUALITY },
     toggle("Ragdolls", "r_debris_ragdolls"),
     Item::Choice { label: "Ragdoll Start", cvar: "r_debris_ragdollstart", choices: RAGDOLL_START },
     slider("Max Ragdolls", "r_debris_maxragdolls", 8.0, 64.0, 8.0),
@@ -467,6 +474,7 @@ pub(super) const AUDIO: &[Item] = &[
 
 /// Independent of the debris toggle and particle scripts.
 pub(super) const BLOOD: &[Item] = &[
+    Item::Choice { label: "Blood Quality", cvar: "r_blood_quality", choices: DEBRIS_QUALITY },
     slider("Splatter Amount", "r_blood_amount", 1.0, 12.0, 1.0),
     slider("Splatter Size", "r_blood_size", 0.25, 3.0, 0.25),
     slider("Lifetime (seconds)", "r_blood_lifetime", 5.0, 600.0, 5.0),
@@ -479,12 +487,15 @@ pub(super) const BLOOD: &[Item] = &[
 pub(super) const SCREEN_SHADER: &[Item] = &[
     Item::ShaderPreset,
     Item::Choice { label: "Apply To", cvar: "r_shader_scope", choices: SHADER_SCOPE },
+    Item::Choice { label: "Input Scale", cvar: "r_shader_scale", choices: SHADER_SCALE },
     Item::ResetShaderParams,
 ];
 pub(super) const SHADER_SCOPE: &[(&str, f32)] = &[("3D view", 0.0), ("whole screen", 1.0)];
+pub(super) const SHADER_SCALE: &[(&str, f32)] = &[("fit output", 0.0), ("3D resolution", 1.0)];
 
 /// Reached from the Add-ons pages: night-vision / thermal goggle look.
 pub(super) const GOGGLES: &[Item] = &[
+    Item::Choice { label: "Goggle Glow Quality", cvar: "addon_goggles_quality", choices: DEBRIS_QUALITY },
     slider("Goggle Intensity", "addon_goggles_intensity", 0.25, 3.0, 0.25),
     slider("Goggle Noise", "addon_goggles_noise", 0.0, 2.0, 0.25),
 ];

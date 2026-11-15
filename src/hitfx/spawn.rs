@@ -148,10 +148,11 @@ impl HitFx {
 }
 
 /// A bullet (`kind` 0) or nail (1) hitting `mat` at `pos`, travelling along `dir`.
-pub(crate) fn hit(fx: &mut HitFx, (mat, tint): (Material, [u8; 3]), pos: Vec3, normal: Vec3, dir: Vec3, kind: u8, level: u8) {
+#[allow(clippy::too_many_arguments)]
+pub(crate) fn hit(fx: &mut HitFx, (mat, tint): (Material, [u8; 3]), pos: Vec3, normal: Vec3, dir: Vec3, kind: u8, level: u8, mult: f32) {
     let (many, big) = scale(level);
     // Nails are single heavy projectiles; shotguns send one hit per pellet.
-    let many = if kind == 1 { many * 1.6 } else { many };
+    let many = if kind == 1 { many * 1.6 } else { many } * mult;
     let bounce = dir - normal * (2.0 * dir.dot(normal));
     let c = Ctx { pos, normal, bounce, many, big };
     let dust = mix(tint, [200, 195, 185], 0.35);
@@ -190,12 +191,12 @@ pub(crate) fn hit(fx: &mut HitFx, (mat, tint): (Material, [u8; 3]), pos: Vec3, n
 }
 
 /// Debris and a dust cloud from the surface nearest an explosion.
-pub(crate) fn blast(fx: &mut HitFx, (mat, tint): (Material, [u8; 3]), pos: Vec3, normal: Vec3, level: u8) {
+pub(crate) fn blast(fx: &mut HitFx, (mat, tint): (Material, [u8; 3]), pos: Vec3, normal: Vec3, level: u8, mult: f32) {
     if level < 2 || matches!(mat, Material::None | Material::Lava) {
         return;
     }
     let (many, big) = scale(level);
-    let c = Ctx { pos: pos + normal * 2.0, normal, bounce: normal, many, big };
+    let c = Ctx { pos: pos + normal * 2.0, normal, bounce: normal, many: many * mult, big };
     let dust = mix(tint, [200, 195, 185], 0.35);
     match mat {
         Material::Water | Material::Slime => {
@@ -236,7 +237,7 @@ mod tests {
             let mut fx = HitFx::default();
             for _ in 0..20 {
                 hit(&mut fx, (Material::Metal, [100; 3]), Vec3::ZERO, Vec3::new(1.0, 0.0, 0.0),
-                    Vec3::new(-1.0, 0.0, 0.0), 0, level);
+                    Vec3::new(-1.0, 0.0, 0.0), 0, level, 1.0);
             }
             fx.parts.len()
         };
@@ -247,8 +248,8 @@ mod tests {
     #[test]
     fn sky_and_subtle_explosions_show_nothing() {
         let mut fx = HitFx::default();
-        hit(&mut fx, (Material::None, [0; 3]), Vec3::ZERO, Vec3::new(0.0, 0.0, 1.0), Vec3::new(0.0, 0.0, -1.0), 0, 4);
-        blast(&mut fx, (Material::Stone, [0; 3]), Vec3::ZERO, Vec3::new(0.0, 0.0, 1.0), 1);
+        hit(&mut fx, (Material::None, [0; 3]), Vec3::ZERO, Vec3::new(0.0, 0.0, 1.0), Vec3::new(0.0, 0.0, -1.0), 0, 4, 1.0);
+        blast(&mut fx, (Material::Stone, [0; 3]), Vec3::ZERO, Vec3::new(0.0, 0.0, 1.0), 1, 1.0);
         assert!(fx.parts.is_empty());
     }
 }

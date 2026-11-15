@@ -107,7 +107,7 @@ pub const HEAT_BODY: u8 = 2;
 pub const HEAT_FIRE: u8 = 3;
 
 /// Add-on goggles post effect (see `post.frag`).
-#[derive(Clone, Copy, Debug, Default, PartialEq)]
+#[derive(Clone, Copy, Debug, PartialEq)]
 pub struct Goggles {
     /// 0 off, 1 night vision, 2 thermal.
     pub mode: u32,
@@ -115,6 +115,14 @@ pub struct Goggles {
     pub intensity: f32,
     /// Sensor noise and scanlines, 0..=2.
     pub noise: f32,
+    /// Glow quality: 0 low (no halo taps), 1 medium (4 diagonal taps), 2 high (8 ring taps).
+    pub quality: u32,
+}
+
+impl Default for Goggles {
+    fn default() -> Self {
+        Self { mode: 0, intensity: 0.0, noise: 0.0, quality: 1 }
+    }
 }
 
 /// An add-on (portal gun) portal: an oval on a wall, `half` its half width

@@ -26,6 +26,7 @@ pub(super) const CVARS: &[(&str, &str, u32)] = &[
     ("addon_goggles", "0", qcore::cvar::CVAR_ARCHIVE),
     ("addon_goggles_intensity", "1", qcore::cvar::CVAR_ARCHIVE),
     ("addon_goggles_noise", "1", qcore::cvar::CVAR_ARCHIVE),
+    ("addon_goggles_quality", "1", qcore::cvar::CVAR_ARCHIVE),
 ];
 
 pub(super) fn register_goggle_commands(c: &mut Commands<Host>) {
@@ -120,6 +121,7 @@ impl Host {
             mode,
             intensity: self.cv("addon_goggles_intensity").clamp(0.25, 3.0),
             noise: self.cv("addon_goggles_noise").clamp(0.0, 2.0),
+            quality: (self.cv("addon_goggles_quality").round() as i32).clamp(0, 2) as u32,
         }
     }
 

@@ -125,17 +125,7 @@ pub(super) fn setup_view(v: &View, w: u32, h: u32) -> ViewSetup {
     proj[11] = 1.0;
     proj[14] = -f * n / (f - n);
     let vp = mul(&proj, &view);
-    let row = |i: usize| [vp[i], vp[4 + i], vp[8 + i], vp[12 + i]];
-    let (r0, r1, r3) = (row(0), row(1), row(3));
-    let mut frustum = [[0.0; 4]; 4];
-    for (k, (a, s)) in [(r0, 1.0), (r0, -1.0), (r1, 1.0), (r1, -1.0)]
-        .iter()
-        .enumerate()
-    {
-        let p: [f32; 4] = std::array::from_fn(|i| r3[i] + s * a[i]);
-        let l = (p[0] * p[0] + p[1] * p[1] + p[2] * p[2]).sqrt().max(1e-6);
-        frustum[k] = p.map(|x| x / l);
-    }
+    let frustum = crate::projection::ViewFrustum::for_extent(v, w, h).planes;
     ViewSetup {
         vp,
         eye: e,
@@ -148,8 +138,7 @@ pub(super) fn setup_view(v: &View, w: u32, h: u32) -> ViewSetup {
 }
 
 pub(super) fn sphere_in_frustum(f: &[[f32; 4]; 4], c: [f32; 3], r: f32) -> bool {
-    f.iter()
-        .all(|p| p[0] * c[0] + p[1] * c[1] + p[2] * c[2] + p[3] >= -r)
+    crate::projection::ViewFrustum { planes: *f }.contains_sphere(c, r)
 }
 
 pub(super) fn rotate3(r: &[[f32; 3]; 3], v: [f32; 3]) -> [f32; 3] {

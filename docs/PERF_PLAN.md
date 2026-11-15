@@ -195,6 +195,12 @@ the remaining parity-bound phases below.
   and tiny spray droplets off full 5-tap parallax `gel: true` shading onto a
   cheaper translucent water batch (or gate full `gel` shading behind High).
 - Measure: `washer`, `all-addons`, `ultimate`.
+- **Status (Done, 2026-11-15)**:
+  - Added `addon_washer_quality` (`0` = low, `1` = high [default], `CVAR_ARCHIVE` in `crates/qserver/src/addons.rs`), Powerwasher menu `"Jet Quality"` (`src/menu/pages.rs`, `src/menu/page_info.rs`, and added `GEL`/`WASHER` to `menu::option_cvars` in `src/menu.rs`), passed into `WaterFx::frame` from `src/host/render.rs`, and pinned `("addon_washer_quality", "1")` in `qprof` `VANILLA`.
+  - In `src/addons/water_fx.rs`, reduced jet geometry and capped splashes (`high`: `16` ribbon segments, `14` loose drops/jet, `120` splash cap; `low`: `10` segments, `6` drops/jet, `48` splash cap, spawning 1 splash per hit instead of 2), moved loose drops and splashes onto a non-gel translucent water batch (`gel: false`), kept `gel: true` on `high` jet ribbons and switched `low` jet ribbons onto the single `gel: false` batch, replaced `Vec<f32>`/`Vec<Vec3>` parsing in `WaterFx::receive` with a fixed `[Vec3; 8]` array, evaluated ribbon centerline points once into a stack array instead of 3× via `&dyn Fn`, and removed the per-frame `wash_points(...).collect::<Vec<_>>()` allocation in `src/host/render.rs`.
+  - Verified with `cargo clippy --all-targets --message-format=short` (0 warnings in touched files), `cargo nextest run` (including `quality_tiers_scale_geometry_and_gel_batches` in `src/addons/water_fx.rs` and `addon_washer_quality` menu checks in `src/menu/tests.rs`), `QRENDER_VALIDATION=1` headless screenshots (`item19-high-stream.png`, `item19-high-fan.png`, `item19-low-stream.png`, `item19-low-fan.png`, `item19-menu.png`, clean validation), `qprof -runs 3` medians (`target/qprof/item19-before` → `target/qprof/item19-after`, `1280×720`, default `high`), and controlled `e1m1` 5-jet fan (`+attack2`) `prof_stop` probes:
+    - `qprof` `washer` (`+attack`, single jet, `high`): `e1m1` `particles+vm` **9 → 4 µs** (**−55.6%**; `GPU` **1170 → 1164 µs**, `812 → 816 fps`; `vanilla` control `808 → 814 fps`); `ad_sepulcher` `particles+vm` **679 → 668 µs** (`GPU` **1933 → 1921 µs**, `502 → 505 fps`; `vanilla` control `1924 → 1928 µs`). `all-addons` (`e1m1` `783 → 784 fps`, `ad_sepulcher` `442 → 442 fps`) and `ultimate` (`137 → 137 fps`, `GPU` `7045 → 7048 µs`) stayed flat within run noise.
+    - `e1m1` 5-jet fan (`+attack2`) `prof_stop`: before single-run `100% 1×` `particles+vm` **9.9 µs** (`off` `1.1 µs`, `ren_cpu` `262.3 µs`) and `200% 8× SSAA` **175.2 µs** (`off` `151.5 µs`, **+23.7 µs** added); after 3-run medians on the final build: `100% 1×` `off` **1.1 µs** → `high` **4.5 µs** (+3.4 µs, `ren_cpu` **201.7 µs**) / `low` **3.4 µs** (+2.3 µs, `ren_cpu` **191.1 µs**); `200% 8× SSAA` `off` **150.8 µs** → `high` **155.2 µs** (+4.4 µs added) / `low` **153.4 µs** (+2.6 µs added).
 
 ### 20. Ragdolls & debris simulation quality (*visual*)
 - Problem: `src/debris/` runs 60 Hz Verlet (`ITERS = 6`, `MAX_BONES = 12`)
@@ -206,33 +212,96 @@ the remaining parity-bound phases below.
   clearance trace skipping, `r_debris_movers`, lower corpse/gib/shard caps
   with fade-out lifetimes, and frustum-culled CPU skinning (`pack()`).
 - Measure: `debris`, `ultimate`, `ultimate-coop`.
+- **Status (Done, 2026-11-15)**:
+  - Added `r_debris_quality` (`0` = low, `1` = medium [default], `2` = high, `CVAR_ARCHIVE` in `src/host/cvars.rs`), `Debris Settings` `"Debris Quality"` row + tooltip (`src/menu/pages.rs`, `src/menu/page_info.rs`, `src/menu/tests.rs`), `menu_options debris` (`src/host/commands.rs`), and `qprof` pinning (`("r_debris_quality", "1")` in `VANILLA`, `("r_debris_quality", "2")` in `DEBRIS` in `tools/qprof/src/scenarios.rs`).
+  - Split tier configuration into `src/debris/settings.rs` (`Tier` via `tier_for`: `Low` = `6` bones, `3` iters, `30 Hz`, `max_steps 3`, `skip_down`, movers off, `16`/`32`/`24` ragdoll/gib/shard caps, `12 s` corpse / `8 s` server gib / `6+4 s` client gib / `4+2 s` shard lifetimes; `Medium` [default] = `8` bones, `4` iters, `45 Hz`, `max_steps 5`, `32`/`64`/`48` caps, `24 s` corpse / `16 s` server gib / `8+6 s` client gib / `6+3 s` shard lifetimes; `High` = `12` bones, `6` iters, `60 Hz`, `max_steps 6`, full `48`/`128`/`96` caps and infinite corpse/server-gib lifetimes).
+  - Parameterized `Rig::build` (`max_bones`, `max_offset` bounding margin in `src/debris/rig.rs`), `Ragdoll::step` / `Body::step` (`src/debris/ragdoll.rs`, `src/debris/body.rs` with step-scaled damping, velocity rescaling in `set_step`, skipped zero-move traces, and optional `skip_down` clearance traces), and lifetime fade-outs / oldest-corpse cap eviction (`CORPSE_FADE = 1.5 s`, `gibbed: HashMap<i32, Option<i32>>` in `src/debris.rs`, `src/debris/events.rs`, `src/debris/gibs.rs`). Eliminated per-frame heap allocations in `Ragdoll::pack()` by reusing `packed.verts`, `skin_scratch`, and stack `[Mat3; MAX_BONES]`.
+  - Extracted `qrender::ViewFrustum` (`crates/qrender/src/{lib.rs,projection.rs,frame/math.rs}`), passed single-view frustum into `Debris::entities` (`src/host/render.rs`, gated on `cull_fte_for_view()` so split-screen guest ownership culling in `host/split.rs` stays intact) to skip `pack()` for offscreen ragdolls and emit-cull bodies (`Ragdoll::bounds()` verified to enclose every packed vertex).
+  - Verified with `cargo clippy --all-targets --message-format=short` (0 warnings in touched files), `cargo nextest run` (with game data, all 14 `debris` tests across `Low`/`Medium`/`High` plus `offscreen_ragdoll_skips_pack_until_visible` and `ViewFrustum` test passing), `-headless -validation` screenshots (`target/shots/item20_menu.png` and `e1m1` close-up `skill 3` grunt ragdoll shots `item20_ragdoll_q{0,1,2}.png`, 0 validation errors), and benchmarks (`1280×720` headless, RTX 3060 Ti):
+    - `qprof -only vanilla,debris -runs 3` (`target/qprof/item20-before` → `target/qprof/item20-after`, `debris` pinned at `High` / `64` ragdolls): `ad_sepulcher` `debris` FPS **481 → 504**, frame **2079 → 1986 µs**, `render cpu` **1179 (+44 vs vanilla) → 1084 µs (-5 vs vanilla)**, `p99` **3723 → 3102 µs** (`vanilla` control: 481 → 498 fps, frame 2080 → 2008 µs, `render cpu` 1135 → 1089 µs); `e1m1` `debris` `render cpu` **80 → 74 µs** (`vanilla` 97 → 72 µs).
+    - `qprof -only ultimate` / `ultimate-coop` (`1` run each, `ad_sepulcher`, default `Medium`): `ultimate` **130 → 134 fps** (frame **7724 → 7461 µs**, `p99` **23111 → 22554 µs**, `render cpu` **2865 → 2615 µs**, GPU **7421 → 7172 µs**); `ultimate-coop` **119 → 120 fps** (frame **8418 → 8308 µs**, `p99` **27570 → 26740 µs**, `render cpu` **3324 → 3188 µs**, GPU **8041 → 7947 µs**).
+    - Controlled `ad_sepulcher` `sv_horde 3` rotating RL `prof_stop` probe (`r_debris_ragdollstart 1`, `r_debris_maxragdolls 64`): before single-run `off` vs `on` added **+131 µs** `render cpu` (`1613.0 → 1744.0 µs`, `ren_p99` `4180.0 µs`, `297.8 → 288.7 fps`); after 3-run medians: `off` `ren_cpu` **1406.8 µs** (`318.2 fps`, `ren_p99` `3907.7 µs`) → `q0` Low **1402.5 µs** (-4 µs vs off, `320.9 fps`, `ren_p99` **3510.7 µs**), `q1` Medium **1423.7 µs** (+17 µs vs off, `318.8 fps`, `ren_p99` **3547.0 µs**), `q2` High **1422.3 µs** (+16 µs vs off, `316.1 fps`, `ren_p99` **3733.8 µs**).
 
-### 21. Blood & impact decal budgets (*visual*)
+### 21. Blood & impact decal budgets (*visual*) — Done
 - Problem: while item 9 removed idle CPU overhead, max settings still allow
   up to 2048 blood marks (`r_blood_amount 12`), 2048 impact marks
   (`r_impact_fx 4`), and 600 s lifetimes, driving heavy overdraw and mesh
   wound work in sustained horde fights.
-- Plan: expose quality presets (`Low` / `Medium` / `High`) scaling mark
-  caps, lifetimes, droplet/spark counts, and `r_blood_wounds` /
-  `r_blood_gibs` mesh painting, plus frustum culling on decal emission.
-- Measure: `blood`, `impacts`, `ultimate`, `ultimate-coop`.
+- Fix:
+  - Added `r_blood_quality` (`0` Low / `1` Medium default / `2` High, archived
+    in `HOST_CVARS`, menu `Blood Settings`) scaling effective splatter rays,
+    burst counts, droplet cap (`256`/`768`/`2048`), lifetime (`30`/`120` s),
+    mark cap (`256`/`512`), and wound/gib painting (`off` on Low).
+  - Added `r_impact_quality` (`0` Low / `1` Medium default / `2` High, archived
+    in `HOST_CVARS`, menu `Impact Effects`) scaling mark lifetime
+    (`30`/`120` s), mark/nail cap (`256`/`512`), `r_impact_fx` tier (`2`/`3`),
+    spawn multiplier (`0.5×` on Low), and hitfx particle cap (`1024`/`2500`/`6000`).
+  - Stored bounding spheres on blood/impact marks and frustum-culled offscreen
+    entity mesh evaluation, marks, wounds, blood droplets, embedded/loose
+    nails, and `hitfx` emitters in single-view frames (`ViewFrustum`).
+- Results (`qprof -runs 3` before/after medians; `blood`/`impacts` pinned to
+  tier 2 in `qprof`, default `1` in `vanilla`):
+  - `ad_sepulcher` `ultimate`: **132 → 134 fps**, frame **7605 → 7448 µs**
+    (−157 µs), render CPU **2941 → 2717 µs** (−224 µs), GPU **7240 → 7163 µs**
+    (−77 µs).
+  - Controlled `ad_sepulcher` `sv_horde 3` combat probe (all blood/impact max
+    cvars enabled, `+attack`, 3 runs per tier on final build):
+    `q2` High **218.3 fps** (`4581 µs` frame, `2177 µs` render CPU, `4518 µs` GPU) →
+    `q1` Medium **219.8 fps** (`4550 µs` frame, `2160 µs` render CPU, `4488 µs` GPU) →
+    `q0` Low **222.1 fps** (`4502 µs` frame, `2104 µs` render CPU, `4439 µs` GPU).
 
-### 22. Slang screen-shader input scale (*visual*)
+### 22. Slang screen-shader input scale (*visual*) — Done
 - Problem: `Slang::prepare_shader` (`crates/qrender/src/slang.rs`) allocates
   `Slang::src` at `scene_w × scene_h`, so `r_renderscale 2` quadruples the
   input processed by multi-pass `.slangp` CRT presets.
-- Plan: feed `slang` at output resolution (or 1× scale) when
-  `r_renderscale > 1` (at least for `r_shader_scope 0`), or provide a toggle
-  for preset resolution scaling.
-- Measure: `screenshader` + `renderscale200`, `all-enhancements`.
+- Fix:
+  - Updated `Renderer::prepare_shader(full_scale)` to size `Slang::src` at
+    `(t.scene_w.min(width), t.scene_h.min(height))` by default so >100% render
+    scale downsamples in the post pass onto output resolution while <100%
+    keeps low-res CRT input unchanged; preserved `post.frag` `pc.scale`
+    (`scene_w / pw`) so softemu dithering still tracks scene pixels.
+  - Added archived `r_shader_scale` (`0` = `"fit output"` default,
+    `1` = `"3D resolution"`), wired through `Settings::shader_scale` and the
+    `Screen Shader` options menu (`Input Scale`), plus `renderscale200-screenshader`
+    in `tools/qprof/src/scenarios.rs`.
+- Results (`qprof -runs 3` before/after medians):
+  - `e1m1` `all-enhancements`: **257 → 295 fps** (+14.8%), frame **3886 → 3393 µs**
+    (−493 µs, −12.7%), GPU **3822 → 3322 µs** (−500 µs), `ui+present`
+    **2023 → 1552 µs** (−471 µs).
+  - `ad_sepulcher` `all-enhancements`: **158 → 174 fps** (+10.1%), frame
+    **6315 → 5736 µs** (−579 µs, −9.2%), GPU **6256 → 5679 µs** (−577 µs).
+  - `e1m1` `renderscale200 + screenshader` (`r_shader_scope 1`, 3-run median):
+    `r_shader_scale 1` **386.9 fps** (`2584 µs` frame, `2526 µs` GPU, `2135 µs`
+    `ui+present`) → `r_shader_scale 0` **509.7 fps** (**+31.7%**, **1962 µs**
+    frame, −622 µs, **1903 µs** GPU, **1546 µs** `ui+present`).
+  - `renderscale200-screenshader` in `qprof`: `e1m1` **570 fps** (`1755 µs`
+    frame, `1521 µs` `ui+present` vs `1511 µs` at 100%); `ad_sepulcher`
+    **392 fps** (`2553 µs` frame, `1531 µs` `ui+present` vs `1527 µs` at 100%).
 
-### 23. Goggles post-process glow (*visual*)
+### 23. Goggles post-process glow (*visual*) — Done
 - Problem: `goggles()` in `crates/qrender/shaders/post.frag` executes an
-  8-tap ring glow per output pixel for both night vision and thermal modes
-  (plus `alias_xray` re-draws in thermal).
-- Plan: reduce to 4 taps (or disable glow on a fast/low-fx mode) if post
-  shows up in `goggles-nv` / `goggles-thermal` / `ultimate-coop`.
-- Measure: `goggles-nv`, `goggles-thermal`, `ultimate-coop`.
+  8-tap ring glow with per-pixel `cos`/`sin` per output pixel for both night
+  vision and thermal modes (`post` +15 µs at 1280×720, +68 µs at 2560×1440).
+- Fix:
+  - Added `addon_goggles_quality` (`0` Low / `1` Medium default / `2` High,
+    archived in `goggles::CVARS`, menu `Goggles` page `"Goggle Glow Quality"`),
+    plumbed through `qrender::Goggles::quality` and `PostPush::g_quality`.
+  - Replaced per-pixel `cos`/`sin` ring math in `post.frag` with precomputed
+    constant offsets `G_RING4` / `G_RING8` and skipped `textureSize`/ring
+    fetches when `g_quality == 0u`; default `1` (Medium) uses 4 diagonal taps.
+- Results (`qprof -runs 3` before/after + 3-run `e1m1` `prof_stop` medians on final build):
+  - `qprof` 1280×720 `goggles-nv` `post`: **42 → 40 µs** (`e1m1`), **40 → 39 µs**
+    (`ad_sepulcher`); `goggles-thermal` `post`: **41 → 40 µs** (`e1m1`), **40 → 38 µs**
+    (`ad_sepulcher`); `ad_sepulcher` `ultimate-coop`: **131 → 132 fps**
+    (`7621 → 7575 µs` frame, GPU `7228 → 7194 µs`).
+  - Controlled `e1m1` `prof_stop` tier probe (`off` = `28.0 µs` post at 1×,
+    `67.0 µs` at 2×):
+    - `1×` (1280×720): `nv` `q2` **46.4 µs** (+18.4 µs) → `q1` **44.0 µs** (+16.0 µs)
+      → `q0` **36.2 µs** (+8.2 µs, **−55%** added post cost vs `q2`); `thermal`
+      `q2` **45.7 µs** → `q1` **42.8 µs** → `q0` **35.8 µs** (**−56%** added).
+    - `2×` (`2560×1440` `post` target): `nv` `q2` **137.6 µs** (+70.6 µs) → `q1`
+      **123.5 µs** (+56.5 µs, **−14.1 µs**) → `q0` **96.2 µs** (+29.2 µs,
+      **−41.4 µs / −59%** added post cost vs `q2`).
 
 ## Phase 1: cheap, low-risk CPU wins
 

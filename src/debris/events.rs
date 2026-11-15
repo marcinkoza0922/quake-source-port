@@ -56,7 +56,7 @@ impl Debris {
     }
 
     /// Starts simulating corpses that finished dying and new gibs.
-    pub(super) fn take_over(&mut self, cl: &mut ClientState, lv: &Level, fs: &qcore::fs::Fs, time: f64, set: &Settings) {
+    pub(super) fn take_over(&mut self, cl: &mut ClientState, lv: &Level, fs: &qcore::fs::Fs, time: f64, set: &Settings, tier: &Tier) {
         let Some(cm) = self.cm.clone() else { return };
         let mut gibs = self.bodies.iter().filter(|b| b.ent.is_some()).count();
         for k in 0..cl.visedicts.len() {
@@ -84,7 +84,7 @@ impl Debris {
                     continue;
                 }
                 // wait for a second update so the throw velocity is known
-                if gibs >= MAX_GIBS || (e.msg_origins[0] == e.msg_origins[1] && held < 0.3) {
+                if gibs >= tier.max_gibs || (e.msg_origins[0] == e.msg_origins[1] && held < 0.3) {
                     continue;
                 }
                 let vel = msg_velocity(cl, e);
@@ -92,6 +92,7 @@ impl Debris {
                 let mut b = Body::new(m.id, Vec3::from(e.origin), vel, rot, 3.0);
                 b.frame = frame.max(0) as u32;
                 b.skin = e.skin.max(0) as u32;
+                b.life = tier.gib_life;
                 b.trail = true;
                 b.ent = Some((i, model));
                 if vel.length() > 50.0 {
@@ -114,15 +115,24 @@ impl Debris {
                     }
                 },
             };
-            let e = &cl.entities[i];
             let ready = at_death || (info.is_last(frame) && held >= HOLD_FINAL) || held >= HOLD_ANY;
-            if !set.ragdolls || !ready || i <= cl.maxclients || self.corpses.len() >= set.max_ragdolls {
+            if !set.ragdolls || !ready || i <= cl.maxclients {
                 continue;
             }
-            let rig = self.rigs.entry((model, frame)).or_insert_with(|| Rig::build(&info.mdl, frame as usize).map(Rc::new));
+            if self.corpses.len() >= tier.max_ragdolls {
+                if tier.max_ragdolls == 0 {
+                    continue;
+                }
+                self.retire_oldest_corpse(cl);
+            }
+            let e = &cl.entities[i];
+            let rig = self
+                .rigs
+                .entry((model, frame, tier.max_bones))
+                .or_insert_with(|| Rig::build(&info.mdl, frame as usize, tier.max_bones).map(Rc::new));
             let Some(rig) = rig.clone() else { continue };
             let vel = msg_velocity(cl, e);
-            let mut doll = Ragdoll::new(rig, Vec3::from(e.origin), e.angles, vel, &*cm);
+            let mut doll = Ragdoll::new(rig, Vec3::from(e.origin), e.angles, vel, tier.step, &*cm);
             for &(p, t) in &self.booms {
                 if time - t < BOOM_MEMORY {
                     doll.blast(p, 220.0, 450.0 * set.force);
@@ -142,7 +152,17 @@ impl Debris {
                 [((c >> 4) & 15) as u8, (c & 15) as u8]
             });
             let alpha = if e.alpha == qnet::protocol::ENTALPHA_DEFAULT { 1.0 } else { (e.alpha as f32 - 1.0) / 254.0 };
-            self.corpses.push(Corpse { ent: i, model, id: m.id, skin: e.skin.max(0) as u32, colormap, alpha, doll, gib: None });
+            self.corpses.push(Corpse {
+                ent: i,
+                model,
+                id: m.id,
+                skin: e.skin.max(0) as u32,
+                colormap,
+                alpha,
+                life: tier.corpse_life,
+                doll,
+                gib: None,
+            });
             cl.debris_owned[i] = true;
         }
         let (ents, mtime) = (&cl.entities, cl.mtime[0]);
@@ -162,7 +182,7 @@ impl Debris {
     /// model (id1 becomes the explosion sprite) has exploded; one that just
     /// vanishes only counts next to an explosion, since leaving the PVS
     /// also removes it.
-    pub(super) fn brush_breaks(&mut self, cl: &ClientState, lv: &Level, fs: &qcore::fs::Fs, r: &mut Renderer) {
+    pub(super) fn brush_breaks(&mut self, cl: &ClientState, lv: &Level, fs: &qcore::fs::Fs, r: &mut Renderer, tier: &Tier) {
         let mut cur = HashMap::with_capacity(self.brushes.len());
         for &i in &cl.visedicts {
             let e = &cl.entities[i];
@@ -189,12 +209,12 @@ impl Debris {
                 .find(|&b| inside(b, lo, hi, 48.0));
             if changed || boom.is_some() {
                 let below = (lo + hi) * 0.5 - Vec3::new(0.0, 0.0, (hi.z - lo.z) * 0.4);
-                self.shatter(r, lo, hi, boom.unwrap_or(below));
+                self.shatter(r, lo, hi, boom.unwrap_or(below), tier);
             }
         }
     }
 
-    fn shatter(&mut self, r: &mut Renderer, lo: Vec3, hi: Vec3, center: Vec3) {
+    fn shatter(&mut self, r: &mut Renderer, lo: Vec3, hi: Vec3, center: Vec3, tier: &Tier) {
         let id = match self.shard {
             Some(id) => id,
             None => {
@@ -204,7 +224,7 @@ impl Debris {
             }
         };
         let mut rng = self.rng.take().unwrap_or(Rng(0x9e37_79b9));
-        for _ in 0..14 {
+        for _ in 0..tier.shard_burst {
             let p = Vec3::new(
                 lo.x + (hi.x - lo.x) * rng.unit(),
                 lo.y + (hi.y - lo.y) * rng.unit(),
@@ -215,19 +235,13 @@ impl Debris {
             let rot = Quat::axis_angle(Vec3::new(rng.signed(), rng.signed(), rng.signed()).normalize(), rng.unit() * 6.0);
             let mut b = Body::new(id, p, vel, rot, 1.2);
             b.frame = rng.next() % fragment::SHAPES;
-            b.life = 8.0 + rng.unit() * 4.0;
+            b.life = tier.shard_life.0 + rng.unit() * tier.shard_life.1;
             b.random_spin(&mut rng, 18.0);
             self.bodies.push(b);
         }
         self.rng = Some(rng);
         // drop the oldest shards over the cap
-        let shards = self.bodies.iter().filter(|b| b.ent.is_none()).count();
-        if shards > MAX_SHARDS {
-            let mut lives: Vec<f32> = self.bodies.iter().filter(|b| b.ent.is_none()).map(|b| b.life).collect();
-            lives.sort_by(f32::total_cmp);
-            let cut = lives[shards - MAX_SHARDS];
-            self.bodies.retain(|b| b.ent.is_some() || b.life >= cut);
-        }
+        self.trim_shards(tier.max_shards);
     }
 
     /// Bullets and nails nudge what they pass through; explosions fling

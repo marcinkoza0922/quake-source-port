@@ -22,11 +22,14 @@ impl Impacts {
             }
             let points = mesh::project_shaped(poly, p, tr.normal, size, [time as f32 * 17.0, 1.0]);
             if points.len() >= 3 {
+                let (center, radius) = mesh::bounds(points.iter().map(|pt| pt.pos));
                 self.marks.push_back(Mark {
                     kind,
                     born: time,
                     entity: tr.entity,
                     normal: tr.normal,
+                    center,
+                    radius,
                     points,
                 });
             }

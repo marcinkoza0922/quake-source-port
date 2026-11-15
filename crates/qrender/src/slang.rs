@@ -145,6 +145,11 @@ impl Renderer {
         Ok(params)
     }
 
+    /// Dimensions of the active slang chain source image, if any.
+    pub fn shader_src_size(&self) -> Option<(u32, u32)> {
+        self.slang.as_ref().and_then(|s| s.src.as_ref()).map(|i| (i.width, i.height))
+    }
+
     /// Path and parameters of the loaded preset.
     pub fn shader_preset(&self) -> Option<(&Path, &[ShaderParam])> {
         self.slang.as_ref().map(|s| (s.path.as_path(), s.params.as_slice()))
@@ -169,10 +174,16 @@ impl Renderer {
 }
 
 impl Renderer {
-    /// Sizes the chain input to the scene before a frame is recorded.
-    pub(crate) fn prepare_shader(&mut self) -> Result<()> {
+    /// Sizes the chain input before a frame is recorded, capping at output
+    /// resolution unless `full_scale` requests the full 3D scene size.
+    pub(crate) fn prepare_shader(&mut self, full_scale: bool) -> Result<()> {
         let Some(t) = &self.targets else { return Ok(()) };
-        let (w, h, fmt) = (t.scene_w, t.scene_h, self.pipes.post_format);
+        let (w, h) = if full_scale {
+            (t.scene_w, t.scene_h)
+        } else {
+            (t.scene_w.min(self.width.max(1)), t.scene_h.min(self.height.max(1)))
+        };
+        let fmt = self.pipes.post_format;
         let Some(s) = self.slang.as_mut() else { return Ok(()) };
         if s.src.as_ref().is_some_and(|i| i.width == w && i.height == h) {
             return Ok(());

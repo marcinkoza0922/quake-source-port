@@ -6,11 +6,12 @@ use std::rc::Rc;
 
 use qcore::math::Vec3;
 
+use super::Collide;
 use super::math::{Mat3, Quat, add_outer, apply, extract_rotation, normal_index};
-use super::rig::Rig;
-use super::{Collide, STEP};
+use super::rig::{MAX_BONES, Rig};
 
 /// Packed skinned vertices for one ragdoll, ready for `RenderEntity::dyn_pose`.
+#[derive(Default)]
 pub struct Packed {
     pub verts: Vec<u32>,
     pub origin: Vec3,
@@ -26,23 +27,26 @@ pub struct Ragdoll {
     rot: Vec<Quat>,
     /// Per-particle collision radius (the rig's, clamped to initial clearance).
     radii: Vec<f32>,
+    /// Step size (`1/60`..`1/30` s) encoded in `pos - prev`.
+    step: f32,
     /// Seconds spent nearly still; asleep past [`SLEEP_AFTER`].
     still: f32,
     pub asleep: bool,
-    packed: Option<Packed>,
+    packed: Packed,
+    dirty: bool,
+    skin_scratch: Vec<Vec3>,
 }
 
 const SLEEP_AFTER: f32 = 1.0;
-const ITERS: usize = 6;
 
 impl Ragdoll {
     /// Places the rig's rest pose at `origin` with entity `angles`, moving
     /// at `vel` (units/s).
-    pub fn new(rig: Rc<Rig>, origin: Vec3, angles: [f32; 3], vel: Vec3, cm: &dyn Collide) -> Ragdoll {
+    pub fn new(rig: Rc<Rig>, origin: Vec3, angles: [f32; 3], vel: Vec3, step: f32, cm: &dyn Collide) -> Ragdoll {
         let m = super::math::entity_rotation(angles);
         let q = mat_to_quat(&m);
         let pos: Vec<Vec3> = rig.centers.iter().map(|c| origin + apply(&m, *c)).collect();
-        let prev = pos.iter().map(|p| *p - vel * STEP).collect();
+        let prev = pos.iter().map(|p| *p - vel * step).collect();
         let n = pos.len();
         // Clamp collision radii to the clearance the corpse already has so it
         // does not pop up off the floor when taken over.
@@ -54,7 +58,29 @@ impl Ragdoll {
                 if tr.0 < 1.0 { (r * tr.0).max(0.5) } else { r }
             })
             .collect();
-        Ragdoll { rig, pos, prev, rot: vec![q; n], radii, still: 0.0, asleep: false, packed: None }
+        Ragdoll {
+            rig,
+            pos,
+            prev,
+            rot: vec![q; n],
+            radii,
+            step,
+            still: 0.0,
+            asleep: false,
+            packed: Packed::default(),
+            dirty: true,
+            skin_scratch: Vec::new(),
+        }
+    }
+
+    pub fn set_step(&mut self, step: f32) {
+        if (self.step - step).abs() > 1e-6 {
+            let scale = step / self.step;
+            for (p, prev) in self.pos.iter().zip(&mut self.prev) {
+                *prev = *p - (*p - *prev) * scale;
+            }
+            self.step = step;
+        }
     }
 
     fn radius(&self, i: usize) -> f32 {
@@ -69,7 +95,7 @@ impl Ragdoll {
             let d = (self.pos[i] - p).length();
             if d < range {
                 let f = 1.0 - d / range;
-                self.prev[i] -= dv * (f * STEP);
+                self.prev[i] -= dv * (f * self.step);
                 hit = true;
             }
         }
@@ -95,7 +121,7 @@ impl Ragdoll {
         let up = if lift { KILL_LIFT } else { 0.0 };
         let dv = (flat * KILL_BACK + Vec3::new(0.0, 0.0, up)) * force;
         for p in &mut self.prev {
-            *p -= dv * STEP;
+            *p -= dv * self.step;
         }
         self.wake();
     }
@@ -108,7 +134,7 @@ impl Ragdoll {
             if d < range {
                 let f = 1.0 - d / range;
                 let dv = (dir + Vec3::new(0.0, 0.0, 0.6)) * (speed * f);
-                self.prev[i] -= dv * STEP;
+                self.prev[i] -= dv * self.step;
                 hit = true;
             }
         }
@@ -142,7 +168,7 @@ impl Ragdoll {
     pub fn translate(&mut self, i: usize, d: Vec3) {
         self.pos[i] += d;
         self.prev[i] += d;
-        self.packed = None;
+        self.dirty = true;
     }
 
     pub fn wake(&mut self) {
@@ -150,22 +176,26 @@ impl Ragdoll {
         self.still = 0.0;
     }
 
-    /// One fixed [`STEP`] of simulation.
-    pub fn step(&mut self, gravity: f32, cm: &dyn Collide) {
+    /// One fixed simulation step (`self.step` seconds).
+    pub fn step(&mut self, gravity: f32, cm: &dyn Collide, iters: usize, skip_down: bool) {
         if self.asleep {
             return;
         }
-        let g = Vec3::new(0.0, 0.0, -gravity * STEP * STEP);
+        let step = self.step;
+        let scale60 = step * 60.0;
+        let g = Vec3::new(0.0, 0.0, -gravity * step * step);
         let mut moved = 0.0f32;
+        let water_damp = 0.9f32.powf(scale60);
+        let air_damp = 0.995f32.powf(scale60);
         for i in 0..self.pos.len() {
             let water = cm.water(self.pos[i]);
-            let damp = if water { 0.9 } else { 0.995 };
+            let damp = if water { water_damp } else { air_damp };
             let gi = if water { g * 0.15 } else { g };
             let v = (self.pos[i] - self.prev[i]) * damp;
             self.prev[i] = self.pos[i];
             self.pos[i] += v + gi;
         }
-        for _ in 0..ITERS {
+        for _ in 0..iters.max(1) {
             for l in &self.rig.links {
                 let (a, b) = (l.a as usize, l.b as usize);
                 let (dir, d) = (self.pos[b] - self.pos[a]).normalize_len();
@@ -185,12 +215,12 @@ impl Ragdoll {
             }
         }
         for i in 0..self.pos.len() {
-            self.collide(i, cm);
+            self.collide(i, cm, skip_down);
             moved = moved.max((self.pos[i] - self.prev[i]).length());
         }
-        self.match_rotations();
-        if moved < 0.04 {
-            self.still += STEP;
+        self.match_rotations(iters);
+        if moved < 2.4 * step {
+            self.still += step;
             if self.still > SLEEP_AFTER {
                 self.asleep = true;
                 // snap still so the cached pose is exact
@@ -199,27 +229,31 @@ impl Ragdoll {
         } else {
             self.still = 0.0;
         }
-        self.packed = None;
+        self.dirty = true;
     }
 
-    fn collide(&mut self, i: usize, cm: &dyn Collide) {
+    fn collide(&mut self, i: usize, cm: &dyn Collide, skip_down: bool) {
         let r = self.radius(i);
         let (from, to) = (self.prev[i], self.pos[i]);
         if cm.solid(from) {
             return; // started inside geometry; let the links pull it out
         }
-        let tr = cm.trace(from, to);
         let mut hit = None;
-        if tr.0 < 1.0 {
-            self.pos[i] = tr.1 + tr.2 * 0.1;
-            hit = Some(tr.2);
+        if (to - from).length_sq() >= 1e-10 {
+            let tr = cm.trace(from, to);
+            if tr.0 < 1.0 {
+                self.pos[i] = tr.1 + tr.2 * 0.1;
+                hit = Some(tr.2);
+            }
         }
-        // keep the particle its radius above the floor
-        let p = self.pos[i];
-        let down = cm.trace(p, p - Vec3::new(0.0, 0.0, r));
-        if down.0 < 1.0 && down.2.z > 0.5 {
-            self.pos[i].z = down.1.z + r * down.2.z;
-            hit = Some(down.2);
+        if !skip_down {
+            // keep the particle its radius above the floor
+            let p = self.pos[i];
+            let down = cm.trace(p, p - Vec3::new(0.0, 0.0, r));
+            if down.0 < 1.0 && down.2.z > 0.5 {
+                self.pos[i].z = down.1.z + r * down.2.z;
+                hit = Some(down.2);
+            }
         }
         if let Some(n) = hit {
             // friction and a little bounce, through the implied velocity
@@ -233,7 +267,7 @@ impl Ragdoll {
 
     /// Per-bone rotation from its linked neighbours (shape matching),
     /// regularised by the previous rotation so leaf bones keep their twist.
-    fn match_rotations(&mut self) {
+    fn match_rotations(&mut self, iters: usize) {
         let rig = &self.rig;
         for c in 0..self.pos.len() {
             let prev = self.rot[c];
@@ -253,23 +287,44 @@ impl Ragdoll {
                     *x += p * k;
                 }
             }
-            self.rot[c] = extract_rotation(&a, prev, 6);
+            self.rot[c] = extract_rotation(&a, prev, iters.max(1));
         }
     }
 
-    /// Skins the mesh and packs it (cached while asleep).
+    /// Conservative world-space bounding sphere `(center, radius)` enclosing all skinned vertices.
+    pub fn bounds(&self) -> (Vec3, f32) {
+        if !self.dirty {
+            return (self.packed.center, self.packed.radius);
+        }
+        let mut lo = Vec3::splat(f32::MAX);
+        let mut hi = Vec3::splat(f32::MIN);
+        for &p in &self.pos {
+            lo = lo.min(p);
+            hi = hi.max(p);
+        }
+        let mid = (lo + hi) * 0.5;
+        let r_bones = self.pos.iter().map(|p| (*p - mid).length()).fold(0.0f32, f32::max);
+        (mid, r_bones + self.rig.max_offset + 1.0)
+    }
+
+    /// Skins the mesh and packs it (cached while asleep and offscreen).
     pub fn pack(&mut self) -> &Packed {
-        if self.packed.is_none() {
-            self.packed = Some(self.skin());
+        if self.dirty {
+            self.skin();
+            self.dirty = false;
         }
-        self.packed.as_ref().unwrap_or_else(|| unreachable!())
+        &self.packed
     }
 
-    fn skin(&self) -> Packed {
+    fn skin(&mut self) {
         let rig = &self.rig;
-        let mats: Vec<Mat3> = self.rot.iter().map(|q| q.to_mat()).collect();
+        let mut mats = [[[0.0f32; 3]; 3]; MAX_BONES];
+        for (slot, q) in mats.iter_mut().zip(&self.rot) {
+            *slot = q.to_mat();
+        }
         let n = rig.rest.len();
-        let mut world = Vec::with_capacity(n);
+        self.skin_scratch.clear();
+        self.skin_scratch.reserve(n.saturating_sub(self.skin_scratch.capacity()));
         let mut lo = Vec3::splat(f32::MAX);
         let mut hi = Vec3::splat(f32::MIN);
         for v in 0..n {
@@ -284,21 +339,23 @@ impl Ragdoll {
             };
             lo = lo.min(p);
             hi = hi.max(p);
-            world.push(p);
+            self.skin_scratch.push(p);
         }
         let ext = (hi - lo).max(Vec3::splat(1e-3));
         let scale = ext / 255.0;
-        let verts = world
-            .iter()
-            .enumerate()
-            .map(|(v, p)| {
-                let q = (*p - lo).mul_elem(Vec3::new(1.0 / scale.x, 1.0 / scale.y, 1.0 / scale.z));
-                let b = |x: f32| (x + 0.5).clamp(0.0, 255.0) as u32;
-                let nrm = apply(&mats[rig.bones[v][0] as usize], rig.normals[v]);
-                b(q.x) | b(q.y) << 8 | b(q.z) << 16 | (normal_index(nrm) as u32) << 24
-            })
-            .collect();
-        Packed { verts, origin: lo, scale, center: (lo + hi) * 0.5, radius: (hi - lo).length() * 0.5 }
+        let inv = Vec3::new(1.0 / scale.x, 1.0 / scale.y, 1.0 / scale.z);
+        self.packed.verts.clear();
+        self.packed.verts.reserve(n.saturating_sub(self.packed.verts.capacity()));
+        for (v, p) in self.skin_scratch.iter().enumerate() {
+            let q = (*p - lo).mul_elem(inv);
+            let b = |x: f32| (x + 0.5).clamp(0.0, 255.0) as u32;
+            let nrm = apply(&mats[rig.bones[v][0] as usize], rig.normals[v]);
+            self.packed.verts.push(b(q.x) | b(q.y) << 8 | b(q.z) << 16 | (normal_index(nrm) as u32) << 24);
+        }
+        self.packed.origin = lo;
+        self.packed.scale = scale;
+        self.packed.center = (lo + hi) * 0.5;
+        self.packed.radius = (hi - lo).length() * 0.5;
     }
 }
 
