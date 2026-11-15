@@ -269,7 +269,7 @@ pub(super) const SCALE: &[(&str, f32)] = &[("50%", 0.5), ("75%", 0.75), ("100%",
 pub(super) const FILTER: &[(&str, f32)] = &[("nearest", 0.0), ("linear", 1.0)];
 pub(super) const ANISO: &[(&str, f32)] = &[("off", 1.0), ("2x", 2.0), ("4x", 4.0), ("8x", 8.0), ("16x", 16.0)];
 pub(super) const SOFTEMU: &[(&str, f32)] = &[("off", 0.0), ("fine", 1.0), ("coarse", 2.0), ("banded", 3.0)];
-pub(super) const SSAO: &[(&str, f32)] = &[("off", 0.0), ("low", 0.5), ("medium", 1.0), ("high", 2.0)];
+pub(super) const SSAO: &[(&str, f32)] = &[("off", 0.0), ("low", 1.0), ("medium", 2.0), ("high", 3.0)];
 pub(super) const MODES: [&str; 3] = ["windowed", "fullscreen", "borderless"];
 
 pub(super) const GRAPHICS: &[Item] = &[

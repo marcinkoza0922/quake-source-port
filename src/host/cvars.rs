@@ -214,6 +214,7 @@ pub(super) const COMPAT_CVARS: &[(&str, &str, u32)] = &[
     ("r_part_maxdecals", "8192", 0),
     ("r_softparticles", "1", CVAR_ARCHIVE),
     ("r_ssao", "0", CVAR_ARCHIVE),
+    ("r_ssao_strength", "2", CVAR_ARCHIVE),
     ("r_ssao_radius", "32", CVAR_ARCHIVE),
     ("r_motionblur", "0", CVAR_ARCHIVE),
     ("r_speedblur", "1", CVAR_ARCHIVE),

@@ -80,9 +80,31 @@ pub(super) enum VelDraw {
 
 #[repr(C)]
 #[derive(Clone, Copy)]
+pub(super) struct AoSourcePush {
+    pub(super) scene_per_ao: [f32; 2],
+    pub(super) scene_max: [i32; 2],
+}
+
+#[repr(C)]
+#[derive(Clone, Copy)]
 pub(super) struct AoPush {
     pub(super) proj: [f32; 4],
     pub(super) size: [f32; 4],
+    pub(super) scene_per_ao: [f32; 2],
+    pub(super) scene_max: [i32; 2],
+    pub(super) quality: u32,
+    pub(super) _pad: [u32; 3],
+}
+
+#[repr(C)]
+#[derive(Clone, Copy)]
+pub(super) struct AoApplyPush {
+    pub(super) ao_tex: u32,
+    pub(super) msaa: u32,
+    pub(super) quality: u32,
+    pub(super) _pad: u32,
+    pub(super) ao_per_scene: [f32; 2],
+    pub(super) ao_max: [i32; 2],
 }
 
 #[repr(C)]

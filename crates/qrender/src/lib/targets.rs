@@ -127,10 +127,10 @@ impl Renderer {
             level: false,
             sampling: Sampling::Clamp,
         });
-        let fx_target = |r: &mut Self, format| -> Result<(Image, u32)> {
+        let fx_target = |r: &mut Self, tw, th, format| -> Result<(Image, u32)> {
             let img = r.gpu.image(
-                sw,
-                shh,
+                tw,
+                th,
                 1,
                 1,
                 format,
@@ -142,11 +142,17 @@ impl Renderer {
             r.textures[slot as usize] = Some(Tex { image: None, level: false, sampling: Sampling::Clamp });
             Ok((img, slot))
         };
-        let (ao, ao_slot) = fx_target(self, pipelines::AO_FORMAT)?;
-        let (vel, vel_slot) = fx_target(self, pipelines::VEL_FORMAT)?;
+        let (base_w, base_h) = (sw.min(w), shh.min(h));
+        let (ao_w, ao_h) = if self.ssao_quality < 2 {
+            ((base_w / 2).max(1), (base_h / 2).max(1))
+        } else {
+            (base_w.max(1), base_h.max(1))
+        };
+        let (ao, ao_slot) = fx_target(self, ao_w, ao_h, pipelines::AO_FORMAT)?;
+        let (vel, vel_slot) = fx_target(self, sw, shh, pipelines::VEL_FORMAT)?;
         let mut portals = Vec::new();
         if self.gun_targets || self.world.as_ref().is_some_and(|w| !w.portals.is_empty()) {
-            for _ in 0..crate::MAX_PORTAL_VIEWS { portals.push(fx_target(self, COLOR_FORMAT)?); }
+            for _ in 0..crate::MAX_PORTAL_VIEWS { portals.push(fx_target(self, sw, shh, COLOR_FORMAT)?); }
         }
         self.targets = Some(Targets {
             portals,
@@ -158,6 +164,8 @@ impl Renderer {
             color_slot: slot,
             ao_source: None,
             ao,
+            ao_w,
+            ao_h,
             ao_slot,
             vel,
             vel_slot,
@@ -167,7 +175,7 @@ impl Renderer {
     }
 
     /// Allocate on the first MSAA AO frame, after scene targets exist. Keep
-    /// the snapshot until a resize/sample change destroys those targets.
+    /// the snapshot until a resize/sample/AO-quality change destroys those targets.
     pub(super) fn ensure_ao_source(&mut self) -> Result<()> {
         if self.msaa <= 1 || !self.targets.as_ref().is_some_and(|t| t.ao_source.is_none()) {
             return Ok(());
@@ -175,7 +183,7 @@ impl Renderer {
         self.idle();
         let t = self.targets.as_ref().unwrap();
         let img = self.gpu.image(
-            t.scene_w, t.scene_h, 1, 1, pipelines::AO_SOURCE_FORMAT,
+            t.ao_w, t.ao_h, 1, 1, pipelines::AO_SOURCE_FORMAT,
             vk::ImageUsageFlags::COLOR_ATTACHMENT | vk::ImageUsageFlags::SAMPLED,
             vk::ImageAspectFlags::COLOR,
         )?;

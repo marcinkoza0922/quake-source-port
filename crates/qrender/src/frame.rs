@@ -1190,7 +1190,7 @@ impl Renderer {
             let push = |data: &[u8]| dev.cmd_push_constants(cmd, p.layout, all, 0, data);
             let samples = t.color_ms.as_ref().map_or(1, |_| self.msaa);
             // fullscreen pass into a single-sampled effect target
-            let fx_pass = |img: &Image, clear: [f32; 4], body: &dyn Fn()| {
+            let fx_pass = |img: &Image, area_rt: vk::Rect2D, vp: vk::Viewport, scissor: vk::Rect2D, clear: [f32; 4], body: &dyn Fn()| {
                 gpu::barrier(&dev, cmd, img.image, crng, vk::ImageLayout::UNDEFINED, vk::ImageLayout::COLOR_ATTACHMENT_OPTIMAL);
                 let att = [vk::RenderingAttachmentInfo::default()
                     .image_view(img.view)
@@ -1198,10 +1198,10 @@ impl Renderer {
                     .load_op(vk::AttachmentLoadOp::CLEAR)
                     .store_op(vk::AttachmentStoreOp::STORE)
                     .clear_value(vk::ClearValue { color: vk::ClearColorValue { float32: clear } })];
-                let ri = vk::RenderingInfo::default().render_area(area_target).layer_count(1).color_attachments(&att);
+                let ri = vk::RenderingInfo::default().render_area(area_rt).layer_count(1).color_attachments(&att);
                 dev.cmd_begin_rendering(cmd, &ri);
-                dev.cmd_set_viewport(cmd, 0, &[vp_scene]);
-                dev.cmd_set_scissor(cmd, 0, &[area_scene]);
+                dev.cmd_set_viewport(cmd, 0, &[vp]);
+                dev.cmd_set_scissor(cmd, 0, &[scissor]);
                 dev.cmd_bind_descriptor_sets(cmd, gfx, p.layout, 0, &set, &[ubo_ofs]);
                 body();
                 dev.cmd_end_rendering(cmd);
@@ -1279,19 +1279,32 @@ impl Renderer {
                     let scene_img = t.color_ms.as_ref().unwrap_or(&t.color);
                     gpu::barrier(&dev, cmd, scene_img.image, crng, vk::ImageLayout::COLOR_ATTACHMENT_OPTIMAL, vk::ImageLayout::SHADER_READ_ONLY_OPTIMAL);
                     depth_layout(vk::ImageLayout::DEPTH_ATTACHMENT_OPTIMAL, vk::ImageLayout::DEPTH_STENCIL_READ_ONLY_OPTIMAL);
+                    let ao_vw = ((scene_w as f32 * t.ao_w as f32 / sw.max(1) as f32).round() as u32).clamp(1, t.ao_w);
+                    let ao_vh = ((scene_h as f32 * t.ao_h as f32 / sh.max(1) as f32).round() as u32).clamp(1, t.ao_h);
+                    let area_ao_rt = vk::Rect2D { offset: vk::Offset2D::default(), extent: vk::Extent2D { width: t.ao_w, height: t.ao_h } };
+                    let vp_ao = vk::Viewport { width: ao_vw as f32, height: ao_vh as f32, ..vp_full };
+                    let area_ao = vk::Rect2D { offset: vk::Offset2D::default(), extent: vk::Extent2D { width: ao_vw, height: ao_vh } };
+                    let scene_per_ao = [scene_w as f32 / ao_vw as f32, scene_h as f32 / ao_vh as f32];
+                    let scene_max = [scene_w.max(1) as i32 - 1, scene_h.max(1) as i32 - 1];
+                    let quality = st.ssao_quality.min(2);
                     let ao_slot = if let Some((source, slot)) = &t.ao_source {
-                        fx_pass(source, [0.0; 4], &|| {
+                        fx_pass(source, area_ao_rt, vp_ao, area_ao, [0.0; 4], &|| {
                             dev.cmd_bind_pipeline(cmd, gfx, p.ao_source);
+                            push(bytes_of(&[AoSourcePush { scene_per_ao, scene_max }]));
                             dev.cmd_draw(cmd, 3, 1, 0, 0);
                         });
                         *slot
                     } else { t.color_slot };
-                    fx_pass(&t.ao, [1.0, 0.0, 0.0, 0.0], &|| {
+                    fx_pass(&t.ao, area_ao_rt, vp_ao, area_ao, [1.0, 0.0, 0.0, 0.0], &|| {
                         ts(7); // transitions, optional sample-0 snapshot and AO target setup complete
                         dev.cmd_bind_pipeline(cmd, gfx, p.ao);
                         push(bytes_of(&[AoPush {
                             proj: [vs.tan[0], vs.tan[1], samples as f32, st.ssao_radius.clamp(4.0, 256.0)],
-                            size: [scene_w as f32, scene_h as f32, st.ssao.min(4.0), ao_slot as f32],
+                            size: [ao_vw as f32, ao_vh as f32, st.ssao.min(4.0), ao_slot as f32],
+                            scene_per_ao,
+                            scene_max,
+                            quality,
+                            _pad: [0; 3],
                         }]));
                         dev.cmd_draw(cmd, 3, 1, 0, 0);
                         ts(8); // AO generation, before its target becomes shader-readable
@@ -1309,7 +1322,14 @@ impl Renderer {
                     dev.cmd_set_viewport(cmd, 0, &[vp_scene]);
                     dev.cmd_set_scissor(cmd, 0, &[area_scene]);
                     dev.cmd_bind_pipeline(cmd, gfx, p.ao_apply);
-                    push(bytes_of(&[t.ao_slot]));
+                    push(bytes_of(&[AoApplyPush {
+                        ao_tex: t.ao_slot,
+                        msaa: samples,
+                        quality,
+                        _pad: 0,
+                        ao_per_scene: [ao_vw as f32 / scene_w.max(1) as f32, ao_vh as f32 / scene_h.max(1) as f32],
+                        ao_max: [ao_vw as i32 - 1, ao_vh as i32 - 1],
+                    }]));
                     dev.cmd_draw(cmd, 3, 1, 0, 0);
                     dev.cmd_end_rendering(cmd);
                     ts(10); // AO application complete
@@ -1453,7 +1473,7 @@ impl Renderer {
                 };
                 depth_layout(end_layout, vk::ImageLayout::DEPTH_STENCIL_READ_ONLY_OPTIMAL);
                 if !vel_draws.is_empty() {
-                    fx_pass(&t.vel, [0.0; 4], &|| {
+                    fx_pass(&t.vel, area_target, vp_scene, area_scene, [0.0; 4], &|| {
                         for vd in vel_draws.iter() {
                             match *vd {
                                 VelDraw::Alias(i, prev) => {
