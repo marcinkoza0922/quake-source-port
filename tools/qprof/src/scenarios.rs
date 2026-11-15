@@ -51,7 +51,7 @@ pub const VANILLA: &[(&str, &str)] = &[
     ("r_enhancedwater", "0"), ("r_teleportwindows", "0"), ("r_portal_quality", "1"), ("r_water_quality", "1"),
     ("r_impact_fx", "0"), ("r_impact_bullets", "0"), ("r_impact_nails", "0"),
     ("r_shotgun_tracers", "0"), ("r_impact_scorches", "0"),
-    ("r_blood", "0"), ("r_debris", "0"), ("r_shader_preset", ""), ("r_colorblind", "0"),
+    ("r_blood", "0"), ("r_debris", "0"), ("r_debris_quality", "1"), ("r_shader_preset", ""), ("r_colorblind", "0"),
     ("addons_enable", "0"), ("addon_hitstop", "0"), ("addon_gel_quality", "1"), ("addon_washer_quality", "1"), ("r_fteparticles", "1"), ("r_particledesc", "classic"), ("r_part_rain", "1"), ("r_part_rain_quantity", "1"),
 ];
 
@@ -70,7 +70,7 @@ const BLOOD: &[(&str, &str)] = &[
     ("r_blood_maxmarks", "2048"), ("r_blood_wounds", "1"), ("r_blood_gibs", "1"),
 ];
 const DEBRIS: &[(&str, &str)] = &[
-    ("r_debris", "1"), ("r_debris_ragdolls", "1"), ("r_debris_ragdollstart", "1"),
+    ("r_debris", "1"), ("r_debris_quality", "2"), ("r_debris_ragdolls", "1"), ("r_debris_ragdollstart", "1"),
     ("r_debris_maxragdolls", "64"), ("r_debris_gibs", "1"), ("r_debris_shrapnel", "1"),
     ("r_debris_movers", "1"), ("r_debris_force", "6"), ("r_debris_killlift", "1"),
 ];

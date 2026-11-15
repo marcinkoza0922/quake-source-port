@@ -394,7 +394,7 @@ fn enhancements_hub_and_subpages_navigate_back_to_their_parent() {
     }
     menu.key(K_ESCAPE, &mut cv, false);
     assert_eq!(menu.screen, Screen::Options);
-    for cvar in ["r_impact_nails", "r_blood_amount", "r_debris_gibs", "r_wateralpha"] {
+    for cvar in ["r_impact_nails", "r_blood_amount", "r_debris_quality", "r_debris_gibs", "r_wateralpha"] {
         assert!(option_cvars().any(|name| name==cvar));
     }
 }

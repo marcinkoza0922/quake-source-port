@@ -74,6 +74,7 @@ pub(super) fn tooltip(item: Item) -> Option<&'static str> {
         "r_portal_quality" => "Resolution and detail inside see-through teleporters and live portal views (single-sampled); low and medium tighten recursion budgets and skip ripples, particles and tiny distant models in nested views",
         "r_softparticles" => "Fades particles smoothly where they meet walls and floors; low uses single-sample depth and shading under MSAA, high checks every sample",
         "r_debris" => "Corpses go limp as ragdolls, gibs tumble and barrels throw shrapnel; shots and blasts push them (cosmetic only)",
+        "r_debris_quality" => "Simulation detail, step rate, fade-out lifetimes and caps for ragdolls, gibs and shrapnel; low also skips mover collision",
         "r_debris_ragdolls" => "Corpses go limp and fall as ragdolls",
         "r_debris_ragdollstart" => "After animation keeps the death animations; at death goes limp the moment a monster dies; mixed goes limp on a hard hit, and the weaker the killing hit the likelier the animation plays",
         "r_debris_maxragdolls" => "How many ragdolls can lie around at once",

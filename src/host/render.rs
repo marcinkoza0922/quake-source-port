@@ -39,6 +39,7 @@ impl Host {
             let debris_on = self.cv("r_debris") != 0.0;
             let gravity = self.cv("sv_gravity");
             let set = crate::debris::Settings {
+                quality: crate::debris::Quality::from_cvar(self.cv("r_debris_quality")),
                 ragdolls: self.cv("r_debris_ragdolls") != 0.0,
                 start: crate::debris::Start::from_cvar(self.cv("r_debris_ragdollstart")),
                 max_ragdolls: self.cv("r_debris_maxragdolls").clamp(1.0, 128.0) as usize,
@@ -63,7 +64,10 @@ impl Host {
             if self.cv("r_blood") != 0.0 || self.cv("r_impact_nails") != 0.0 || self.cv("r_impact_bullets") != 0.0 {
                 self.debris.track_shooters(&self.cl, &self.level, self.cl.time);
             }
-            self.debris.entities(&mut ents, &mut dyn_verts);
+            let debris_frustum = self.cull_fte_for_view().then(|| {
+                qrender::ViewFrustum::from_view(v, (w, h), self.cv("r_renderscale"))
+            });
+            self.debris.entities(&mut ents, &mut dyn_verts, debris_frustum.as_ref());
             if self.cv("r_drawentities") == 0.0 {
                 ents.clear();
             }

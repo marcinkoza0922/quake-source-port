@@ -31,17 +31,19 @@ pub struct Rig {
     /// Cluster rest centroids (model space) and collision radii.
     pub centers: Vec<Vec3>,
     pub radius: Vec<f32>,
+    /// Maximum distance from any vertex to its assigned bone centers.
+    pub max_offset: f32,
     pub links: Vec<Link>,
     /// Hard-linked neighbours per cluster (for shape matching).
     pub neighbors: Vec<Vec<u8>>,
 }
 
-const MAX_BONES: usize = 12;
+pub const MAX_BONES: usize = 12;
 /// Distance over which a vertex blends between two bones.
 const BLEND: f32 = 5.0;
 
 impl Rig {
-    pub fn build(mdl: &Mdl, frame: usize) -> Option<Rig> {
+    pub fn build(mdl: &Mdl, frame: usize, max_bones: usize) -> Option<Rig> {
         let pose = mdl.frames.get(frame)?.poses.first()?;
         let n = pose.verts.len();
         if n < 4 || mdl.triangles.is_empty() {
@@ -49,7 +51,7 @@ impl Rig {
         }
         let rest: Vec<Vec3> = pose.verts.iter().map(|v| Vec3::from(mdl.decode(*v))).collect();
         let normals = pose.verts.iter().map(|v| anorm(v.normal)).collect();
-        let k = (n / 20).clamp(5, MAX_BONES).min(n);
+        let k = (n / 20).clamp(5, max_bones.clamp(5, MAX_BONES)).min(n);
         let (centers, assign) = kmeans(&rest, k);
         let k = centers.len();
         let tris: Vec<[usize; 3]> = mdl
@@ -113,14 +115,20 @@ impl Rig {
         }
         let mut radius = vec![0.0f32; k];
         let mut count = vec![0u32; k];
+        let mut max_offset = 0.0f32;
         for (i, p) in rest.iter().enumerate() {
             radius[assign[i]] += (*p - centers[assign[i]]).length_sq();
             count[assign[i]] += 1;
+            let [b0, b1] = bones[i].map(usize::from);
+            max_offset = max_offset.max((*p - centers[b0]).length());
+            if weight[i] < 1.0 {
+                max_offset = max_offset.max((*p - centers[b1]).length());
+            }
         }
         for (r, c) in radius.iter_mut().zip(&count) {
             *r = ((*r / (*c).max(1) as f32).sqrt() * 0.6).clamp(2.0, 10.0);
         }
-        Some(Rig { rest, normals, bones, weight, centers, radius, links, neighbors })
+        Some(Rig { rest, normals, bones, weight, centers, radius, max_offset, links, neighbors })
     }
 }
 
