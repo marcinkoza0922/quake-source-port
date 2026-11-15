@@ -165,12 +165,13 @@ impl System {
                 len = stop;
                 break;
             }
-            if t.looks.kind == RenderType::Beam && !self.has_free_beam() {
+            let is_beam = t.looks.kind == RenderType::Beam;
+            if is_beam && !self.has_free_beam() {
                 len = stop;
                 break;
             }
-            let p = self.alloc_particle(ty);
-            if t.looks.kind == RenderType::Beam {
+            let p = self.alloc_particle_for(ty, is_beam);
+            if let PartRef::Arena(pi) = p {
                 let nb = self.alloc_beam();
                 if b != NIL {
                     self.beams[b as usize].next = nb;
@@ -178,7 +179,7 @@ impl System {
                     bfirst = nb;
                 }
                 b = nb;
-                self.beams[b as usize] = BeamSeg { next: NIL, p, flags: 0, dir: vec, texture_s: len };
+                self.beams[b as usize] = BeamSeg { next: NIL, p: pi, flags: 0, dir: vec, texture_s: len };
             }
             self.init_particle(reg, t, p);
             let tcount =
@@ -187,7 +188,7 @@ impl System {
             self.apply_colour(reg, t, p, extra);
             if t.randsmax != 1 {
                 let o = t.texsstride * (self.rng.rand() % t.randsmax.max(1) as u32) as f32;
-                let pp = &mut self.parts[p as usize];
+                let pp = self.part_mut(p);
                 pp.s1 += o;
                 pp.s2 += o;
                 let mut guard = 0;
@@ -247,11 +248,11 @@ impl System {
                     }
                 }
             }
-            let pp = &mut self.parts[p as usize];
+            let pp = self.part_mut(p);
             pp.vel = vel;
             pp.org = if len >= nrfirst && len < nrlast && t.orgadd != 0.0 { org + vec * t.orgadd } else { org };
             self.worldspace_rand(t, p);
-            let pp = &mut self.parts[p as usize];
+            let pp = self.part_mut(p);
             pp.org += Vec3::from(t.orgbias);
 
             start += vstep;
@@ -260,8 +261,9 @@ impl System {
                 start = start.mul_add(rstep, vec);
                 step += rstep;
             }
-            let pp = &mut self.parts[p as usize];
-            pp.die = self.particletime + t.die - pp.die;
+            let pt = self.particletime;
+            let pp = self.part_mut(p);
+            pp.die = pt + t.die - pp.die;
             pp.oldorg = pp.org;
         }
 

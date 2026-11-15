@@ -1,9 +1,10 @@
 //! Particle simulation (r_part_fte.c: trailstates, RunParticleEffectState,
 //! ParticleTrailSpawn, UpdateParticle, UpdateParticleTypes, decals, rain).
 //!
-//! Particles, beam segments and clipped decals live in index arenas; each
-//! type keeps index-linked lists like the C code, because beams refer to
-//! particles and dead particles are only recycled at the end of a frame.
+//! Non-beam particles are stored per-type in contiguous `Vec<Particle>`
+//! (oldest-to-newest for sequential update and reverse newest-to-oldest draw),
+//! while beam particles, beam segments, and clipped decals live in index arenas
+//! so `BeamSeg` handles remain stable across frames.
 use crate::types::*;
 use crate::util::{Rng, pcos, perpendicular, psin, rotate_around, vector_vectors};
 use crate::{FileSource, Registry, TypeId};
@@ -18,6 +19,7 @@ mod effect_particles;
 mod trail;
 mod weather;
 mod update;
+mod types_pass;
 mod frag;
 use frag::*;
 
@@ -37,6 +39,7 @@ pub struct System {
     pub settings: Settings,
     parts: Vec<Particle>,
     free_parts: Vec<u32>,
+    total_particles: usize,
     beams: Vec<BeamSeg>,
     free_beams: Vec<u32>,
     decals: Vec<Decal>,
@@ -45,6 +48,7 @@ pub struct System {
     ts_cycle: usize,
     rt: Vec<TypeRt>,
     run_list: Vec<TypeId>,
+    run_scratch: Vec<TypeId>,
     /// Particle clock (advances by the clamped frame time).
     pub particletime: f32,
     oldtime: f64,
@@ -92,6 +96,7 @@ impl System {
             settings,
             parts: Vec::new(),
             free_parts: Vec::new(),
+            total_particles: 0,
             beams: Vec::new(),
             free_beams: Vec::new(),
             decals: Vec::new(),
@@ -100,6 +105,7 @@ impl System {
             ts_cycle: 0,
             rt: Vec::new(),
             run_list: Vec::new(),
+            run_scratch: Vec::new(),
             particletime: 0.0,
             oldtime: 0.0,
             cl_time: 0.0,
@@ -175,7 +181,7 @@ impl System {
 
     /// Number of live (allocated) particles.
     pub fn num_particles(&self) -> usize {
-        self.parts.len() - self.free_parts.len()
+        self.total_particles
     }
     pub fn num_decals(&self) -> usize {
         self.decals.len() - self.free_decals.len()
@@ -189,8 +195,16 @@ impl System {
     }
     /// Live particles of a type, newest first.
     pub fn particles_of(&self, ty: TypeId) -> impl Iterator<Item = &Particle> {
-        let mut i = self.rt.get(ty).map_or(NIL, |r| r.particles);
+        let (slice, mut i) = match self.rt.get(ty) {
+            Some(r) if !r.vec.is_empty() => (r.vec.as_slice(), NIL),
+            Some(r) => (&[][..], r.particles),
+            None => (&[][..], NIL),
+        };
+        let mut rev = slice.iter().rev();
         std::iter::from_fn(move || {
+            if let Some(p) = rev.next() {
+                return Some(p);
+            }
             if i == NIL {
                 return None;
             }
@@ -234,7 +248,7 @@ impl System {
     }
 
     fn has_free_particle(&self) -> bool {
-        !self.free_parts.is_empty() || self.parts.len() < self.max_particles()
+        self.total_particles < self.max_particles()
     }
     fn has_free_beam(&self) -> bool {
         !self.free_beams.is_empty() || self.beams.len() < MAX_BEAMSEGS
@@ -243,8 +257,31 @@ impl System {
         !self.free_decals.is_empty() || self.decals.len() < self.max_decals()
     }
 
-    /// Takes a particle and links it at the head of `ty`'s list.
-    fn alloc_particle(&mut self, ty: TypeId) -> u32 {
+    #[inline]
+    fn part(&self, r: PartRef) -> &Particle {
+        match r {
+            PartRef::Vec(ty, i) => &self.rt[ty].vec[i],
+            PartRef::Arena(i) => &self.parts[i as usize],
+        }
+    }
+
+    #[inline]
+    fn part_mut(&mut self, r: PartRef) -> &mut Particle {
+        match r {
+            PartRef::Vec(ty, i) => &mut self.rt[ty].vec[i],
+            PartRef::Arena(i) => &mut self.parts[i as usize],
+        }
+    }
+
+    /// Allocates a particle for `ty`, using the arena only when `is_beam` (needed for `BeamSeg::p`).
+    fn alloc_particle_for(&mut self, ty: TypeId, is_beam: bool) -> PartRef {
+        self.total_particles += 1;
+        if !is_beam {
+            let v = &mut self.rt[ty].vec;
+            let idx = v.len();
+            v.push(Particle::default());
+            return PartRef::Vec(ty, idx);
+        }
         let i = match self.free_parts.pop() {
             Some(i) => i,
             None => {
@@ -255,7 +292,7 @@ impl System {
         let p = &mut self.parts[i as usize];
         *p = Particle { next: self.rt[ty].particles, ..Particle::default() };
         self.rt[ty].particles = i;
-        i
+        PartRef::Arena(i)
     }
 
     fn alloc_beam(&mut self) -> u32 {

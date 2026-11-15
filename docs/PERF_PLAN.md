@@ -1159,3 +1159,63 @@ confirm wins windowed (`qprof -window`, or qbench for parity).
   how much remaining world cost comes from geometry outside the destination
   frustum. Use those findings to choose tighter aperture clipping or GPU
   surface rejection; avoid losing draw-range sharing for a small GPU saving.
+
+- 2026-11-14, item 4 qpart CPU simulation & geometry batching:
+  - `crates/qpart/src/util.rs`: replaced runtime `f32::sin`/`f32::cos` in
+    `psin`/`pcos` with precomputed 128-entry `PSIN`/`PCOS` tables matching
+    `libm::sinf`/`cosf` at quantized table angles.
+  - `crates/qpart/src/system{,.rs,/defs.rs,/update.rs,/types_pass.rs}`:
+    moved non-beam particles from index-chased linked lists in `self.parts`
+    into per-type contiguous `Vec<Particle>` (`TypeRt.vec`, oldest-to-newest)
+    while keeping `RenderType::Beam` particles in the arena for stable
+    `BeamSeg::p` handles; replaced per-frame `updates`/`run_list.clone()`/`keep`
+    allocations with reusable `run_scratch` + in-place `run_list`; added
+    order-preserving slice compaction (`reap_vec`) and a hoisted fast path in
+    `update_type_particles`; split `update_types`/`draw_beam` into
+    `crates/qpart/src/system/types_pass.rs`.
+  - `crates/qpart/src/geom.rs`, `crates/qpart/src/geom/shapes.rs`: added
+    `Sink::particles_rev`, hoisting view vectors, type look/blend state,
+    texture lookup, and `push_batch` per particle type instead of dispatching
+    per particle.
+
+  A/B benchmarks on RTX 3060 Ti, 1280×720, `qprof -runs 3` (20 s measured
+  after 4 s warm-up, sim step 1/250 s), exact matching FTE counters on
+  `ad_sepulcher` (`vanilla`: live 33611, decals 210, vertices 53626, indices
+  80124; `all-enhancements`: live 33611, decals 210, vertices 135014,
+  indices 202207):
+
+  Windowed `ad_sepulcher` (`-window -fixedstep 250 -maxfps 10000`, uncapped):
+
+  | scenario | metric | before | after | change |
+  |---|---|--:|--:|--:|
+  | vanilla | fps | 450 | 816 | +81.3% |
+  | vanilla | frame µs | 2223 | 1225 | −44.9% |
+  | vanilla | render cpu (excl. fence) µs | 2081 | 1084 | −47.9% |
+  | vanilla | p99 frame µs | 3784 | 2384 | −37.0% |
+  | vanilla | GPU µs | 887 | 893 | +0.7% |
+  | all-enhancements | fps | 122 | 122 | +0.0% (CPU→GPU bound) |
+  | all-enhancements | frame µs | 8201 | 8182 | −0.2% |
+  | all-enhancements | render cpu (excl. fence) µs | 6861 | 5139 | −25.1% |
+  | all-enhancements | fence µs | 1132 | 2828 | +149.8% |
+  | all-enhancements | GPU µs | 8132 | 8121 | −0.1% |
+
+  Headless (`-headless`, offscreen readback in `ui+present`, `1280×720`):
+  - `ad_sepulcher` `vanilla`: `render cpu` 1887→1023 µs (−45.8%), fps 479→490,
+    fence 107→916 µs, GPU 1954→1952 µs.
+  - `ad_sepulcher` `all-enhancements`: `render cpu` 5677→4616 µs (−18.7%),
+    fps 109→108, fence 3359→4443 µs, GPU 9070→9102 µs.
+  - `e1m1` (0 particles): `vanilla` 755→756 fps (`render cpu` 234→232 µs);
+    `all-enhancements` 140→139 fps (`render cpu` 1661→1718 µs).
+
+  Verification: `vanilla@ad_sepulcher` (9/9) and `vanilla@e1m1` (9/9)
+  screenshots have `compare -metric AE = 0`; `all-enhancements` has `AE = 0`
+  on 15/18 pairs (remaining 3 `#0_05`/`#2_05` pairs match baseline 5s variance).
+  Vulkan validation clean (`-validation -headless` on `ad_sepulcher`); user
+  `config.cfg` SHA-256 hashes unchanged; `cargo nextest run`, `cargo nextest
+  run -p qpart`, and `cargo clippy --message-format=short` pass cleanly.
+  Reports: `target/qprof/qpart-cpu-{before,after}/` and
+  `target/qprof/qpart-cpu-win-{before,after}/`.
+
+  Next (remaining item 4 work): per-view particle geometry culling / sharing
+  across teleporter/portal/split views, and GPU-side quad expansion or
+  weather/emitter optimizations.

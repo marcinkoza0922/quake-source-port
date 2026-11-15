@@ -38,21 +38,24 @@ impl System {
     }
 
     /// Shared initial state of a new particle (die offset kept in `p.die`).
-    pub(super) fn init_particle(&mut self, reg: &Registry, t: &PartType, i: u32) {
+    pub(super) fn init_particle(&mut self, reg: &Registry, t: &PartType, i: PartRef) {
         let rng = &mut self.rng;
         let die = t.randdie * rng.frandom();
         let scale = t.scale + t.scalerand * rng.frandom();
         let mut a = if t.die != 0.0 { t.alpha + die * t.alphachange } else { t.alpha };
         a += t.alpharand * rng.frandom();
-        let p = &mut self.parts[i as usize];
+        let rotationspeed = t.rotationmin + rng.frandom() * t.rotationrand;
+        let angle = t.rotationstartmin + rng.frandom() * t.rotationstartrand;
+        let pt = self.particletime;
+        let p = self.part_mut(i);
         p.die = die;
         p.scale = scale;
         p.rgba[3] = a;
         if t.emittime >= 0.0 {
-            p.nextemit = self.particletime + t.emitstart - die;
+            p.nextemit = pt + t.emitstart - die;
         }
-        p.rotationspeed = t.rotationmin + rng.frandom() * t.rotationrand;
-        p.angle = t.rotationstartmin + rng.frandom() * t.rotationstartrand;
+        p.rotationspeed = rotationspeed;
+        p.angle = angle;
         p.s1 = t.s1;
         p.t1 = t.t1;
         p.s2 = t.s2;
@@ -60,27 +63,28 @@ impl System {
         let _ = reg;
     }
 
-    pub(super) fn apply_colour(&mut self, reg: &Registry, t: &PartType, i: u32, extra_cidx: i32) {
-        let p = &mut self.parts[i as usize];
+    pub(super) fn apply_colour(&mut self, reg: &Registry, t: &PartType, i: PartRef, extra_cidx: i32) {
         if t.colorindex >= 0 {
             let r = if t.colorrand > 0 { (self.rng.rand() % t.colorrand as u32) as i32 } else { 0 };
             let cidx = t.colorindex + r + extra_cidx;
+            let c = reg.palette_rgb(cidx as usize);
+            let p = self.part_mut(i);
             if cidx > 255 {
                 p.rgba[3] /= 2.0;
             }
-            let c = reg.palette_rgb(cidx as usize);
             p.rgba[..3].copy_from_slice(&c);
         } else {
-            p.rgba[..3].copy_from_slice(&t.rgb);
+            self.part_mut(i).rgba[..3].copy_from_slice(&t.rgb);
         }
         let v = rgb_rand(&mut self.rng, t);
+        let p = self.part_mut(i);
         let die = p.die;
         for (k, c) in p.rgba[..3].iter_mut().enumerate() {
             *c += v[k] * t.rgbrand[k] + t.rgbchange[k] * die;
         }
     }
 
-    pub(super) fn worldspace_rand(&mut self, t: &PartType, i: u32) {
+    pub(super) fn worldspace_rand(&mut self, t: &PartType, i: PartRef) {
         if t.flags & PT_WORLDSPACERAND == 0 {
             return;
         }
@@ -91,7 +95,7 @@ impl System {
                 break;
             }
         }
-        let p = &mut self.parts[i as usize];
+        let p = self.part_mut(i);
         p.org += v.mul_elem(Vec3::from(t.orgwrand));
         p.vel += v.mul_elem(Vec3::from(t.velwrand));
         p.vel += Vec3::from(t.velbias);

@@ -293,3 +293,75 @@ fn recycled_geometry_matches_fresh_after_empty_and_smaller_frames() {
         buffers = (reused.vertices, reused.indices, reused.batches);
     }
 }
+
+#[test]
+fn particles_rev_matches_reverse_single_particle_calls() {
+    let kinds = [
+        RenderType::Normal,
+        RenderType::UDecal,
+        RenderType::Spark,
+        RenderType::SparkFan,
+        RenderType::TexturedSpark,
+    ];
+    let mut r = Registry::new();
+    r.textures.push(TexRef::Builtin(BuiltinTex::Fuzzy));
+    r.textures.push(TexRef::Builtin(BuiltinTex::White));
+    for (i, &kind) in kinds.iter().enumerate() {
+        let mut ty = crate::types::PartType::empty("test", &format!("k{i}"));
+        ty.tex = Some(0);
+        ty.looks.kind = kind;
+        ty.looks.premul = (i % 3) as u8;
+        ty.looks.scalefactor = if i == 0 { 0.5 } else { 1.0 };
+        ty.looks.invscalefactor = if i == 0 { 0.02 } else { 0.0 };
+        ty.looks.blendmode = if i % 2 == 0 { BlendMode::Blend } else { BlendMode::AddA };
+        r.types.push(ty);
+    }
+    let view = ViewInfo {
+        origin: Vec3::new(10.0, 20.0, 30.0),
+        forward: Vec3::new(1.0, 0.0, 0.0),
+        right: Vec3::new(0.0, -1.0, 0.0),
+        up: Vec3::new(0.0, 0.0, 1.0),
+    };
+    let mk = |org, vel, rgba, scale, angle, uv: [f32; 4]| {
+        let mut p = Particle::default();
+        p.org = org;
+        p.vel = vel;
+        p.rgba = rgba;
+        p.scale = scale;
+        p.angle = angle;
+        p.s1 = uv[0];
+        p.t1 = uv[1];
+        p.s2 = uv[2];
+        p.t2 = uv[3];
+        p
+    };
+    let particles = [
+        mk(Vec3::new(100.0, 10.0, 35.0), Vec3::new(50.0, -10.0, 5.0), [0.9, 0.4, 0.2, 0.8], 12.0, 0.0, [0.0, 0.0, 1.0, 1.0]),
+        // Behind view -> culled when cull_behind = true
+        mk(Vec3::new(-50.0, 20.0, 30.0), Vec3::new(-20.0, 30.0, 10.0), [0.3, 0.8, 0.6, 1.0], 6.0, 1.25, [0.25, 0.0, 0.5, 0.25]),
+        // Side culled when horizontal_tan is set
+        mk(Vec3::new(30.0, 200.0, 30.0), Vec3::new(10.0, 40.0, -15.0), [1.0, 1.0, 1.0, 0.5], 4.0, 2.7, [0.0, 0.5, 0.5, 1.0]),
+    ];
+    let eo = |_| None;
+    for cull in [false, true] {
+        let mut batched = Geometry::new(&r, view, 1.0, &eo);
+        let mut single = Geometry::new(&r, view, 1.0, &eo);
+        batched.cull_behind = cull;
+        single.cull_behind = cull;
+        if cull {
+            batched.horizontal_tan = Some(1.0);
+            batched.vertical_tan = Some(0.75);
+            single.horizontal_tan = Some(1.0);
+            single.vertical_tan = Some(0.75);
+        }
+        for ty in 0..kinds.len() {
+            batched.particles_rev(ty, &particles);
+            for p in particles.iter().rev() {
+                single.particle(ty, p);
+            }
+        }
+        assert_eq!(batched.vertices, single.vertices);
+        assert_eq!(batched.indices, single.indices);
+        assert_eq!(batched.batches, single.batches);
+    }
+}

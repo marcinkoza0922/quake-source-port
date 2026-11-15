@@ -90,11 +90,12 @@ impl System {
                 if !self.has_free_particle() {
                     break;
                 }
-                if t.looks.kind == RenderType::Beam && !self.has_free_beam() {
+                let is_beam = t.looks.kind == RenderType::Beam;
+                if is_beam && !self.has_free_beam() {
                     break;
                 }
-                let p = self.alloc_particle(ty);
-                if t.looks.kind == RenderType::Beam {
+                let p = self.alloc_particle_for(ty, is_beam);
+                if let PartRef::Arena(pi) = p {
                     let nb = self.alloc_beam();
                     if b != NIL {
                         self.beams[b as usize].next = nb;
@@ -102,12 +103,12 @@ impl System {
                         bfirst = nb;
                     }
                     b = nb;
-                    self.beams[b as usize] = BeamSeg { next: NIL, p, flags: 0, dir: Vec3::ZERO, texture_s: i as f32 };
+                    self.beams[b as usize] = BeamSeg { next: NIL, p: pi, flags: 0, dir: Vec3::ZERO, texture_s: i as f32 };
                 }
                 self.init_particle(reg, t, p);
                 if t.randsmax != 1 {
                     let o = t.texsstride * (self.rng.rand() % t.randsmax.max(1) as u32) as f32;
-                    let pp = &mut self.parts[p as usize];
+                    let pp = self.part_mut(p);
                     pp.s1 += o;
                     pp.s2 += o;
                 }
@@ -208,16 +209,17 @@ impl System {
                 if let Some(d) = dir {
                     veladd *= d.length();
                 }
-                let pp = &mut self.parts[p as usize];
+                let pt = self.particletime;
+                let pp = self.part_mut(p);
                 pp.vel = Vec3::ZERO
                     .mul_add(ofsvec.x * t.spawnvel, axis[0])
                     .mul_add(ofsvec.y * t.spawnvel, axis[1])
                     .mul_add(veladd + ofsvec.z * t.spawnvelvert, axis[2]);
                 pp.org = org.mul_add(arsvec.x, axis[0]).mul_add(arsvec.y, axis[1]).mul_add(orgadd + arsvec.z, axis[2]);
                 self.worldspace_rand(t, p);
-                let pp = &mut self.parts[p as usize];
+                let pp = self.part_mut(p);
                 pp.org += Vec3::from(t.orgbias);
-                pp.die = self.particletime + t.die - pp.die;
+                pp.die = pt + t.die - pp.die;
                 pp.oldorg = pp.org;
                 i += 1;
             }
@@ -237,7 +239,7 @@ impl System {
         if let Some(ts) = ts {
             self.trails[ts].state2 = pcount - i as f32;
         }
-        if self.rt[ty].particles != NIL || self.rt[ty].decals != NIL {
+        if !self.rt[ty].vec.is_empty() || self.rt[ty].particles != NIL || self.rt[ty].decals != NIL {
             self.add_to_run_list(ty, true);
         }
         true

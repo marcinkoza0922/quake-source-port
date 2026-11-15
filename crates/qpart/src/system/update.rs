@@ -1,25 +1,55 @@
 use super::*;
 
+#[inline(always)]
+fn step_kinematics(p: &mut Particle, ft: f32, has_vel: bool, has_fric: bool, fric_mul: Vec3, grav_ft: f32) {
+    if has_vel {
+        p.org += p.vel * ft;
+        p.vel.z -= grav_ft;
+        if has_fric {
+            p.vel = p.vel.mul_elem(fric_mul);
+        }
+    }
+    p.angle += p.rotationspeed * ft;
+}
+
+#[inline(always)]
+fn step_linear_ramp(t: &PartType, p: &mut Particle, pt: f32, d_rgb: [f32; 3], d_alpha: f32, d_scale: f32) {
+    if pt < p.die - t.die + t.rgbchangetime {
+        p.rgba[0] += d_rgb[0];
+        p.rgba[1] += d_rgb[1];
+        p.rgba[2] += d_rgb[2];
+    }
+    p.rgba[3] += d_alpha;
+    p.scale += d_scale;
+}
+
 impl System {
     /// PScript_UpdateParticle.
-    pub(super) fn update_particle(&mut self, reg: &Registry, world: &dyn World, pi: u32, ty: TypeId) {
+    pub(super) fn update_particle(&mut self, reg: &Registry, world: &dyn World, pi: PartRef, ty: TypeId) {
         let t = &reg.types[ty];
         let ft = self.frametime;
         let pt = self.particletime;
-        let p = &mut self.parts[pi as usize];
+        let has_vel = t.flags & PT_VELOCITY != 0;
+        let has_fric = t.flags & PT_FRICTION != 0;
+        let fric_mul = Vec3::new(1.0 - t.friction[0] * ft, 1.0 - t.friction[1] * ft, 1.0 - t.friction[2] * ft);
+        let grav_ft = t.gravity * ft;
+        let d_rgb = [ft * t.rgbchange[0], ft * t.rgbchange[1], ft * t.rgbchange[2]];
+        let d_alpha = ft * t.alphachange;
+        let d_scale = ft * t.scaledelta;
+
+        // Pre-sample flurry RNG before borrowing the particle element.
+        let flurry = if has_vel && t.flurry != 0.0 && self.doflurry {
+            Some([self.urng.ucrandom() * t.flurry, self.urng.ucrandom() * t.flurry])
+        } else {
+            None
+        };
+        let p = self.part_mut(pi);
         let oldorg = p.org;
-        if t.flags & PT_VELOCITY != 0 {
-            p.org += p.vel * ft;
-            p.vel.z -= t.gravity * ft;
-            if t.flags & PT_FRICTION != 0 {
-                p.vel = p.vel.mul_elem(Vec3::new(1.0 - t.friction[0] * ft, 1.0 - t.friction[1] * ft, 1.0 - t.friction[2] * ft));
-            }
-            if t.flurry != 0.0 && self.doflurry {
-                p.vel.x += self.urng.ucrandom() * t.flurry;
-                p.vel.y += self.urng.ucrandom() * t.flurry;
-            }
+        step_kinematics(p, ft, has_vel, has_fric, fric_mul, grav_ft);
+        if let Some([fx, fy]) = flurry {
+            p.vel.x += fx;
+            p.vel.y += fy;
         }
-        p.angle += p.rotationspeed * ft;
         let n = t.ramp.len();
         let age_frac = |die: f32| n as f32 * (t.die - (die - pt)) / t.die;
         match t.rampmode {
@@ -48,23 +78,19 @@ impl System {
                 p.rgba[3] -= ft * r.alpha;
                 p.scale += ft * r.scale;
             }
-            _ => {
-                if pt < p.die - t.die + t.rgbchangetime {
-                    for k in 0..3 {
-                        p.rgba[k] += ft * t.rgbchange[k];
-                    }
-                }
-                p.rgba[3] += ft * t.alphachange;
-                p.scale += ft * t.scaledelta;
-            }
+            _ => step_linear_ramp(t, p, pt, d_rgb, d_alpha, d_scale),
         }
 
         if let Some(e) = t.emit {
+            let p_org = p.org;
+            let p_vel = p.vel;
+            let p_nextemit = p.nextemit;
             if t.emittime < 0.0 {
-                self.q_trails.push(DeferredTrail { start: oldorg, end: p.org, ty: e, owner: Some(pi) });
-            } else if p.nextemit < pt {
-                p.nextemit = pt + t.emittime + self.urng.ufrandom() * t.emitrand;
-                self.q_effects.push((p.org, p.vel, 1.0, e));
+                self.q_trails.push(DeferredTrail { start: oldorg, end: p_org, ty: e, owner: Some(pi) });
+            } else if p_nextemit < pt {
+                let nextemit = pt + t.emittime + self.urng.ufrandom() * t.emitrand;
+                self.part_mut(pi).nextemit = nextemit;
+                self.q_effects.push((p_org, p_vel, 1.0, e));
             }
         }
 
@@ -72,29 +98,37 @@ impl System {
         if !self.settings.bouncysparks {
             return;
         }
-        let p = &mut self.parts[pi as usize];
+        let p = self.part_mut(pi);
         let moved = p.org - p.oldorg;
         if t.clipbounce == 0.0 || moved.dot(moved) > 100.0 {
+            let p_oldorg = p.oldorg;
+            let p_org = p.org;
             self.traces_used += 1;
             let tr = if self.traces_used <= self.settings.trace_limit {
-                world.trace_line(p.oldorg, p.org)
+                world.trace_line(p_oldorg, p_org)
             } else {
-                Trace { frac: 1.0, endpos: p.org, normal: Vec3::ZERO, entity: 0 }
+                Trace { frac: 1.0, endpos: p_org, normal: Vec3::ZERO, entity: 0 }
             };
             if tr.frac < 1.0 {
                 if t.clipbounce < 0.0 {
-                    p.die = -1.0;
+                    let p_scale;
+                    {
+                        let p = self.part_mut(pi);
+                        p.die = -1.0;
+                        p_scale = p.scale;
+                    }
                     if t.clipbounce == -2.0 {
                         self.q_decals.push(DeferredDecal {
                             ty,
                             entity: tr.entity,
-                            center: p.org,
+                            center: p_org,
                             normal: tr.normal,
-                            scale: p.scale,
+                            scale: p_scale,
                         });
                     }
                     return;
                 } else if ct == ty {
+                    let p = self.part_mut(pi);
                     let dist = p.vel.dot(tr.normal) * -t.clipbounce;
                     p.vel = p.vel.mul_add(dist, tr.normal);
                     p.org = tr.endpos;
@@ -103,25 +137,97 @@ impl System {
                         return;
                     }
                 } else {
-                    p.die = -1.0;
-                    p.vel = p.vel.normalize();
                     let cc = t.clipcount / reg.types[ct].count;
-                    let d = if t.clipbounce != 0.0 { tr.normal * t.clipbounce } else { p.vel };
+                    let d = {
+                        let p = self.part_mut(pi);
+                        p.die = -1.0;
+                        p.vel = p.vel.normalize();
+                        if t.clipbounce != 0.0 { tr.normal * t.clipbounce } else { p.vel }
+                    };
                     self.q_effects.push((tr.endpos, d, cc, ct));
                     return;
                 }
             }
+            let p = self.part_mut(pi);
             p.oldorg = p.org;
         }
     }
 
-    /// Unlinks expired particles of `ty` into the kill list and returns the
-    /// live ones.
-    pub(super) fn reap(&mut self, reg: &Registry, ty: TypeId, out: &mut Vec<(u32, TypeId)>) {
+    fn recycle_particles(&mut self) {
+        let mut left = 256usize;
+        let n_types = self.run_list.len();
+        if n_types > 0 {
+            for step in 0..n_types {
+                let ty = self.run_list[(self.particle_recycle + step) % n_types];
+                let v = &mut self.rt[ty].vec;
+                let take = left.min(v.len());
+                for p in &mut v[..take] {
+                    p.die = -1.0;
+                }
+                left -= take;
+                if left == 0 {
+                    self.particle_recycle = (self.particle_recycle + step + 1) % n_types;
+                    return;
+                }
+            }
+            self.particle_recycle = (self.particle_recycle + 1) % n_types;
+        }
+        for _ in 0..left {
+            if self.parts.is_empty() {
+                break;
+            }
+            let idx = self.particle_recycle % self.parts.len();
+            self.parts[idx].die = -1.0;
+            self.particle_recycle = (idx + 1) % self.parts.len();
+        }
+    }
+
+    fn reap_vec(&mut self, t: &PartType, ty: TypeId, pt: f32) {
+        let len = self.rt[ty].vec.len();
+        let mut w = 0;
+        {
+            let v = &self.rt[ty].vec;
+            while w < len && v[w].die >= pt {
+                w += 1;
+            }
+        }
+        if w == len {
+            return;
+        }
+        if t.emittime < 0.0 {
+            let mut v = std::mem::take(&mut self.rt[ty].vec);
+            let start = w;
+            for r in start..len {
+                if v[r].die < pt {
+                    let mut tr = v[r].trail.take();
+                    self.delink_trailstate(&mut tr);
+                } else {
+                    v[w] = v[r];
+                    w += 1;
+                }
+            }
+            v.truncate(w);
+            self.rt[ty].vec = v;
+        } else {
+            let v = &mut self.rt[ty].vec;
+            let start = w + 1;
+            for r in start..len {
+                if v[r].die >= pt {
+                    v[w] = v[r];
+                    w += 1;
+                }
+            }
+            v.truncate(w);
+        }
+        self.total_particles -= len - w;
+    }
+
+    fn reap_arena(&mut self, reg: &Registry, ty: TypeId) {
         let pt = self.particletime;
         let emit_trail = reg.types[ty].emittime < 0.0;
         let mut prev = NIL;
         let mut cur = self.rt[ty].particles;
+        let mut reaped = 0usize;
         while cur != NIL {
             let next = self.parts[cur as usize].next;
             if self.parts[cur as usize].die < pt {
@@ -135,16 +241,56 @@ impl System {
                     self.parts[prev as usize].next = next;
                 }
                 self.kill_list.push(cur);
+                reaped += 1;
             } else {
-                out.push((cur, ty));
                 prev = cur;
             }
             cur = next;
         }
+        self.total_particles -= reaped;
     }
 
-    pub(super) fn free_beam(&mut self, b: u32) {
-        self.free_beams.push(b);
+    fn update_type_particles(&mut self, reg: &Registry, world: &dyn World, ty: TypeId) {
+        let t = &reg.types[ty];
+        let ft = self.frametime;
+        let pt = self.particletime;
+        if t.looks.kind == RenderType::Beam {
+            self.reap_arena(reg, ty);
+            let mut cur = self.rt[ty].particles;
+            while cur != NIL {
+                let next = self.parts[cur as usize].next;
+                self.update_particle(reg, world, PartRef::Arena(cur), ty);
+                cur = next;
+            }
+            return;
+        }
+        self.reap_vec(t, ty, pt);
+        let len = self.rt[ty].vec.len();
+        if len == 0 {
+            return;
+        }
+        let has_vel = t.flags & PT_VELOCITY != 0;
+        let has_fric = t.flags & PT_FRICTION != 0;
+        let fric_mul = Vec3::new(1.0 - t.friction[0] * ft, 1.0 - t.friction[1] * ft, 1.0 - t.friction[2] * ft);
+        let grav_ft = t.gravity * ft;
+        let d_rgb = [ft * t.rgbchange[0], ft * t.rgbchange[1], ft * t.rgbchange[2]];
+        let d_alpha = ft * t.alphachange;
+        let d_scale = ft * t.scaledelta;
+        let simple_ramp = matches!(t.rampmode, RampMode::None) || t.ramp.is_empty();
+        if simple_ramp
+            && t.emit.is_none()
+            && (t.cliptype.is_none() || !self.settings.bouncysparks)
+            && (t.flurry == 0.0 || !self.doflurry)
+        {
+            for p in self.rt[ty].vec.iter_mut().rev() {
+                step_kinematics(p, ft, has_vel, has_fric, fric_mul, grav_ft);
+                step_linear_ramp(t, p, pt, d_rgb, d_alpha, d_scale);
+            }
+            return;
+        }
+        for idx in (0..len).rev() {
+            self.update_particle(reg, world, PartRef::Vec(ty, idx), ty);
+        }
     }
 
     /// One frame: spawns rain, advances particles, feeds renderables to
@@ -171,11 +317,8 @@ impl System {
                 self.decal_recycle = (self.decal_recycle + 1) % self.decals.len();
             }
         }
-        if !self.has_free_particle() && !self.parts.is_empty() {
-            for _ in 0..256 {
-                self.parts[self.particle_recycle].die = -1.0;
-                self.particle_recycle = (self.particle_recycle + 1) % self.parts.len();
-            }
+        if !self.has_free_particle() {
+            self.recycle_particles();
         }
 
         if self.settings.rain {
@@ -184,213 +327,52 @@ impl System {
             }
         }
 
-        // Setup: reap and flatten.
-        let mut updates = Vec::new();
-        let run = self.run_list.clone();
-        for &ty in &run {
+        // Snapshot active types without allocating and reap+update each non-zero type.
+        std::mem::swap(&mut self.run_scratch, &mut self.run_list);
+        self.run_list.clear();
+        self.traces_used = 0;
+        for i in 0..self.run_scratch.len() {
+            let ty = self.run_scratch[i];
             if reg.types[ty].die == 0.0 {
                 continue;
             }
-            self.reap(reg, ty, &mut updates);
-        }
-        self.traces_used = 0;
-        for &(p, ty) in &updates {
-            self.update_particle(reg, world, p, ty);
+            self.update_type_particles(reg, world, ty);
         }
 
         self.update_types(reg, sink);
 
-        // Deferred spawns.
+        // Deferred spawns (preserve capacity of reusable queues).
         let ft = self.frametime;
-        for tr in std::mem::take(&mut self.q_trails) {
-            let mut slot = tr.owner.and_then(|p| self.parts[p as usize].trail);
-            self.trail(reg, world, tr.start, tr.end, tr.ty, ft, 0, Some(&mut slot));
-            if let Some(p) = tr.owner {
-                self.parts[p as usize].trail = slot;
+        if !self.q_trails.is_empty() {
+            let mut q = std::mem::take(&mut self.q_trails);
+            for tr in q.drain(..) {
+                let mut slot = tr.owner.and_then(|p| self.part(p).trail);
+                self.trail(reg, world, tr.start, tr.end, tr.ty, ft, 0, Some(&mut slot));
+                if let Some(p) = tr.owner {
+                    self.part_mut(p).trail = slot;
+                }
             }
+            self.q_trails = q;
         }
-        for (org, dir, count, ty) in std::mem::take(&mut self.q_effects) {
-            self.run_effect(reg, world, org, Some(dir), count, ty, None);
+        if !self.q_effects.is_empty() {
+            let mut q = std::mem::take(&mut self.q_effects);
+            for (org, dir, count, ty) in q.drain(..) {
+                self.run_effect(reg, world, org, Some(dir), count, ty, None);
+            }
+            self.q_effects = q;
         }
-        for dd in std::mem::take(&mut self.q_decals) {
-            self.spawn_hit_decal(reg, world, &dd);
+        if !self.q_decals.is_empty() {
+            let mut q = std::mem::take(&mut self.q_decals);
+            for dd in q.drain(..) {
+                self.spawn_hit_decal(reg, world, &dd);
+            }
+            self.q_decals = q;
         }
 
-        let kills = std::mem::take(&mut self.kill_list);
-        self.free_parts.extend(kills.iter().rev());
+        if !self.kill_list.is_empty() {
+            self.free_parts.extend(self.kill_list.iter().rev());
+            self.kill_list.clear();
+        }
         self.particletime += self.frametime;
-    }
-
-    /// PScript_UpdateParticleTypes minus geometry: decals, draining of
-    /// zero-lifetime types, beam bookkeeping, run-list maintenance.
-    pub(super) fn update_types(&mut self, reg: &Registry, sink: &mut dyn Sink) {
-        let pt = self.particletime;
-        let ft = self.frametime;
-        let run = std::mem::take(&mut self.run_list);
-        let mut keep = Vec::with_capacity(run.len());
-        for ty in run {
-            let t = &reg.types[ty];
-
-            // Clipped decals.
-            if self.rt[ty].decals != NIL {
-                let mut prev = NIL;
-                let mut cur = self.rt[ty].decals;
-                while cur != NIL {
-                    let next = self.decals[cur as usize].next;
-                    if self.decals[cur as usize].die < pt {
-                        if prev == NIL {
-                            self.rt[ty].decals = next;
-                        } else {
-                            self.decals[prev as usize].next = next;
-                        }
-                        self.free_decals.push(cur);
-                        cur = next;
-                        continue;
-                    }
-                    let d = &mut self.decals[cur as usize];
-                    if d.die - pt <= t.die {
-                        ramp_decal(t, d, pt, ft);
-                    }
-                    sink.decal(ty, d);
-                    prev = cur;
-                    cur = next;
-                }
-            }
-
-            let draws_points = matches!(
-                t.looks.kind,
-                RenderType::UDecal
-                    | RenderType::Normal
-                    | RenderType::Spark
-                    | RenderType::SparkFan
-                    | RenderType::TexturedSpark
-            );
-
-            if draws_points && t.die != 0.0 {
-                let mut i = self.rt[ty].particles;
-                while i != NIL {
-                    let p = &self.parts[i as usize];
-                    sink.particle(ty, p);
-                    i = p.next;
-                }
-            } else if t.die == 0.0 {
-                // Zero-lifetime: draw once, then kill.
-                let mut i = self.rt[ty].particles;
-                while i != NIL {
-                    let p = &self.parts[i as usize];
-                    if draws_points {
-                        sink.particle(ty, p);
-                    }
-                    if let Some(e) = t.emit
-                        && t.emitstart <= 0.0
-                    {
-                        self.q_effects.push((p.org, p.vel, 1.0, e));
-                    }
-                    let next = p.next;
-                    self.kill_list.push(i);
-                    i = next;
-                }
-                self.rt[ty].particles = NIL;
-
-                while self.rt[ty].beams != NIL && self.beams[self.rt[ty].beams as usize].flags & BS_DEAD != 0 {
-                    let b = self.rt[ty].beams;
-                    self.rt[ty].beams = self.beams[b as usize].next;
-                    self.free_beam(b);
-                }
-                let mut b = self.rt[ty].beams;
-                while b != NIL {
-                    if self.beams[b as usize].flags & BS_NODRAW == 0 {
-                        let nb = self.beams[b as usize].next;
-                        if nb != NIL {
-                            self.draw_beam(ty, b, nb, sink);
-                        }
-                    }
-                    loop {
-                        let k = self.beams[b as usize].next;
-                        if k != NIL && self.beams[k as usize].flags & BS_DEAD != 0 {
-                            self.beams[b as usize].next = self.beams[k as usize].next;
-                            self.free_beam(k);
-                            continue;
-                        }
-                        break;
-                    }
-                    self.beams[b as usize].flags |= BS_DEAD;
-                    b = self.beams[b as usize].next;
-                }
-            } else {
-                // Beams of types with a lifetime.
-                loop {
-                    let k = self.rt[ty].beams;
-                    if k == NIL {
-                        break;
-                    }
-                    let bk = &self.beams[k as usize];
-                    if (bk.flags & BS_DEAD != 0 || self.parts[bk.p as usize].die < pt) && bk.flags & BS_LASTSEG == 0 {
-                        self.rt[ty].beams = bk.next;
-                        self.free_beam(k);
-                        continue;
-                    }
-                    break;
-                }
-                let mut b = self.rt[ty].beams;
-                let mut guard = 0usize;
-                while b != NIL && guard <= MAX_BEAMSEGS * 2 {
-                    guard += 1;
-                    let next = self.beams[b as usize].next;
-                    if next == NIL {
-                        if self.parts[self.beams[b as usize].p as usize].die < pt {
-                            self.beams[b as usize].flags |= BS_DEAD;
-                        }
-                        break;
-                    }
-                    if self.beams[b as usize].flags & (BS_LASTSEG | BS_DEAD | BS_NODRAW) != 0 {
-                        loop {
-                            let k = self.beams[b as usize].next;
-                            if k != NIL
-                                && self.beams[k as usize].flags & BS_DEAD != 0
-                                && self.beams[k as usize].flags & BS_LASTSEG == 0
-                            {
-                                self.beams[b as usize].next = self.beams[k as usize].next;
-                                self.free_beam(k);
-                                continue;
-                            }
-                            break;
-                        }
-                        if self.beams[b as usize].next == NIL {
-                            continue;
-                        }
-                    } else {
-                        if self.beams[next as usize].flags & BS_DEAD == 0 {
-                            self.draw_beam(ty, b, next, sink);
-                        }
-                        if self.parts[self.beams[b as usize].p as usize].die < pt {
-                            self.beams[b as usize].flags |= BS_DEAD;
-                        }
-                    }
-                    if self.parts[self.beams[b as usize].p as usize].die < pt {
-                        self.beams[b as usize].flags |= BS_DEAD;
-                    }
-                    b = self.beams[b as usize].next;
-                }
-            }
-
-            let r = &mut self.rt[ty];
-            if r.particles == NIL && r.beams == NIL && r.decals == NIL {
-                r.in_run = false;
-            } else {
-                keep.push(ty);
-            }
-        }
-        // Types added during this pass (none expected) go first.
-        let added: Vec<_> = std::mem::take(&mut self.run_list);
-        self.run_list = added.into_iter().chain(keep).collect();
-    }
-
-    pub(super) fn draw_beam(&mut self, ty: TypeId, b: u32, nb: u32, sink: &mut dyn Sink) {
-        let po = self.parts[self.beams[b as usize].p as usize].org;
-        let qo = self.parts[self.beams[nb as usize].p as usize].org;
-        self.beams[nb as usize].dir = (qo - po).normalize();
-        let (seg, next) = (&self.beams[b as usize], &self.beams[nb as usize]);
-        sink.beam(ty, seg, next, &self.parts[seg.p as usize], &self.parts[next.p as usize]);
     }
 }
