@@ -91,6 +91,9 @@ pub struct Settings {
     /// r_shader_scope: 0 = slang preset on the 3D view only (UI drawn after
     /// it), 1 = on the whole frame including the UI.
     pub shader_scope: u32,
+    /// r_shader_scale: 0 = cap slang preset input at output resolution,
+    /// 1 = match full 3D scene resolution.
+    pub shader_scale: u32,
     /// Add-on night vision / thermal goggles.
     pub goggles: Goggles,
 }
@@ -161,6 +164,7 @@ impl Default for Settings {
             water_quality: 1,
             gel_quality: 1,
             shader_scope: 0,
+            shader_scale: 0,
             goggles: Goggles::default(),
         }
     }

@@ -51,7 +51,7 @@ impl Renderer {
         if fr.settings.ssao > 0.0 && (fr.view.is_some() || !fr.splits.is_empty()) {
             self.ensure_ao_source()?;
         }
-        self.prepare_shader()?;
+        self.prepare_shader(fr.settings.shader_scale != 0)?;
         let dev = self.gpu.device.clone();
         let fi = self.cur;
         let (fence, acquire, cmd) = (
@@ -1714,7 +1714,11 @@ impl Renderer {
                     _ => 0.0,
                 },
                 mode: st.softemu.min(2),
-                scale: if slang_src.is_some() { 1.0 } else { self.render_scale },
+                scale: if let Some((_, _, pw, _)) = slang_src {
+                    sw.max(1) as f32 / pw.max(1) as f32
+                } else {
+                    self.render_scale
+                },
                 colorblind: st.colorblind.min(3),
                 vel_tex: t.vel_slot,
                 // blur length: r_motionblur × the motion over 1/60 s

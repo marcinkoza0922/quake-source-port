@@ -454,4 +454,25 @@ fn start_bsp_renders_non_black() {
         ..Default::default()
     }).unwrap();
     let _ = r.read_pixels().unwrap();
+
+    // Slang shader input scale: fit output (shader_scale = 0) caps 200% render
+    // scale at output size (320x240) while preserving low-res input at 50%;
+    // 3D resolution (shader_scale = 1) feeds full 200% scene size (640x480).
+    let preset = std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("../../assets/slang/crt/crt-easymode.slangp");
+    if preset.is_file() {
+        r.set_shader_preset(Some(&preset)).unwrap();
+        let cases = [
+            (2.0f32, 0u32, (320u32, 200u32)),
+            (2.0f32, 1u32, (640u32, 400u32)),
+            (0.5f32, 0u32, (160u32, 100u32)),
+        ];
+        for (render_scale, shader_scale, want_size) in cases {
+            let st = Settings { render_scale, shader_scale, ..Default::default() };
+            r.render(&RenderFrame { time: frame.time, view: Some(view), settings: st, ..Default::default() }).unwrap();
+            assert_eq!(r.shader_src_size(), Some(want_size));
+            let px = r.read_pixels().unwrap();
+            assert!(px.as_chunks::<4>().0.iter().any(|p| p[..3].iter().any(|&v| v > 10)));
+        }
+        r.set_shader_preset(None).unwrap();
+    }
 }

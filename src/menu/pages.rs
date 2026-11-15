@@ -487,9 +487,11 @@ pub(super) const BLOOD: &[Item] = &[
 pub(super) const SCREEN_SHADER: &[Item] = &[
     Item::ShaderPreset,
     Item::Choice { label: "Apply To", cvar: "r_shader_scope", choices: SHADER_SCOPE },
+    Item::Choice { label: "Input Scale", cvar: "r_shader_scale", choices: SHADER_SCALE },
     Item::ResetShaderParams,
 ];
 pub(super) const SHADER_SCOPE: &[(&str, f32)] = &[("3D view", 0.0), ("whole screen", 1.0)];
+pub(super) const SHADER_SCALE: &[(&str, f32)] = &[("fit output", 0.0), ("3D resolution", 1.0)];
 
 /// Reached from the Add-ons pages: night-vision / thermal goggle look.
 pub(super) const GOGGLES: &[Item] = &[

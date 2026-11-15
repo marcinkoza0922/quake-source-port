@@ -120,6 +120,7 @@ pub(super) fn tooltip(item: Item) -> Option<&'static str> {
         "v_flashscale" => "Strength of the full-screen flashes for damage, pickups and powerups",
         "hud_damageindicator" => "Red screen edges show where damage came from: top is front, bottom is behind; Screen Flashes controls their strength",
         "r_shader_scope" => "3D view keeps the HUD and menus sharp; whole screen runs them through the shader too",
+        "r_shader_scale" => "Caps shader input at output size so 200% render scale keeps 3D sharpness without 4x shader cost; low scales stay low-res",
         "r_colorblind" => "Shifts colors so they stay distinct for the chosen color blindness",
         "hud_hitmarkers" => "Flash the selected marker on confirmed hits; colors are shared with the crosshair",
         "s_hitfeedback" => "Play your chosen hit or kill cue when you damage an enemy",

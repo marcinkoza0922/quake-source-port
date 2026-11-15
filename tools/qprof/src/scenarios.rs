@@ -51,7 +51,7 @@ pub const VANILLA: &[(&str, &str)] = &[
     ("r_enhancedwater", "0"), ("r_teleportwindows", "0"), ("r_portal_quality", "1"), ("r_water_quality", "1"),
     ("r_impact_quality", "1"), ("r_impact_fx", "0"), ("r_impact_bullets", "0"), ("r_impact_nails", "0"),
     ("r_shotgun_tracers", "0"), ("r_impact_scorches", "0"),
-    ("r_blood", "0"), ("r_blood_quality", "1"), ("r_debris", "0"), ("r_debris_quality", "1"), ("r_shader_preset", ""), ("r_colorblind", "0"),
+    ("r_blood", "0"), ("r_blood_quality", "1"), ("r_debris", "0"), ("r_debris_quality", "1"), ("r_shader_preset", ""), ("r_shader_scale", "0"), ("r_colorblind", "0"),
     ("addons_enable", "0"), ("addon_hitstop", "0"), ("addon_gel_quality", "1"), ("addon_washer_quality", "1"), ("r_fteparticles", "1"), ("r_particledesc", "classic"), ("r_part_rain", "1"), ("r_part_rain_quantity", "1"),
 ];
 
@@ -191,6 +191,7 @@ pub fn all(secs: f32) -> Vec<Scenario> {
         ("msaa8-renderscale200", "8x MSAA at 200% render scale", MSAA, SCALE),
         ("supersample-renderscale200", "8x sample shading at 200% render scale", SSAA, SCALE),
         ("renderscale200-ssao", "200% render scale + high ambient occlusion (1 sample)", SCALE, SSAO),
+        ("renderscale200-screenshader", "200% render scale + slang CRT preset", SCALE, SHADER),
     ] {
         out.push(Scenario {
             name, group: Group::Enhancement, what,

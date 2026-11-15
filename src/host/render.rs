@@ -407,6 +407,7 @@ impl Host {
             water_quality: (v("r_water_quality").round() as i32).clamp(0, 1) as u32,
             gel_quality: (v("addon_gel_quality").round() as i32).clamp(0, 1) as u32,
             shader_scope: v("r_shader_scope").clamp(0.0, 1.0) as u32,
+            shader_scale: v("r_shader_scale").clamp(0.0, 1.0) as u32,
             goggles,
             ..Settings::default()
         };

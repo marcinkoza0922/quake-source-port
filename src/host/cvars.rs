@@ -167,6 +167,7 @@ pub(super) const HOST_CVARS: &[(&str, &str, u32)] = &[
     ("r_colorblind", "0", CVAR_ARCHIVE),
     ("r_shader_preset", "", CVAR_ARCHIVE),
     ("r_shader_scope", "0", CVAR_ARCHIVE),
+    ("r_shader_scale", "0", CVAR_ARCHIVE),
     ("r_shader_params", "", CVAR_ARCHIVE),
     ("cl_captions", "0", CVAR_ARCHIVE),
     ("scr_textbg", "0", CVAR_ARCHIVE),

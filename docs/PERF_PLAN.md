@@ -250,14 +250,33 @@ the remaining parity-bound phases below.
     `q1` Medium **219.8 fps** (`4550 µs` frame, `2160 µs` render CPU, `4488 µs` GPU) →
     `q0` Low **222.1 fps** (`4502 µs` frame, `2104 µs` render CPU, `4439 µs` GPU).
 
-### 22. Slang screen-shader input scale (*visual*)
+### 22. Slang screen-shader input scale (*visual*) — Done
 - Problem: `Slang::prepare_shader` (`crates/qrender/src/slang.rs`) allocates
   `Slang::src` at `scene_w × scene_h`, so `r_renderscale 2` quadruples the
   input processed by multi-pass `.slangp` CRT presets.
-- Plan: feed `slang` at output resolution (or 1× scale) when
-  `r_renderscale > 1` (at least for `r_shader_scope 0`), or provide a toggle
-  for preset resolution scaling.
-- Measure: `screenshader` + `renderscale200`, `all-enhancements`.
+- Fix:
+  - Updated `Renderer::prepare_shader(full_scale)` to size `Slang::src` at
+    `(t.scene_w.min(width), t.scene_h.min(height))` by default so >100% render
+    scale downsamples in the post pass onto output resolution while <100%
+    keeps low-res CRT input unchanged; preserved `post.frag` `pc.scale`
+    (`scene_w / pw`) so softemu dithering still tracks scene pixels.
+  - Added archived `r_shader_scale` (`0` = `"fit output"` default,
+    `1` = `"3D resolution"`), wired through `Settings::shader_scale` and the
+    `Screen Shader` options menu (`Input Scale`), plus `renderscale200-screenshader`
+    in `tools/qprof/src/scenarios.rs`.
+- Results (`qprof -runs 3` before/after medians):
+  - `e1m1` `all-enhancements`: **257 → 295 fps** (+14.8%), frame **3886 → 3393 µs**
+    (−493 µs, −12.7%), GPU **3822 → 3322 µs** (−500 µs), `ui+present`
+    **2023 → 1552 µs** (−471 µs).
+  - `ad_sepulcher` `all-enhancements`: **158 → 174 fps** (+10.1%), frame
+    **6315 → 5736 µs** (−579 µs, −9.2%), GPU **6256 → 5679 µs** (−577 µs).
+  - `e1m1` `renderscale200 + screenshader` (`r_shader_scope 1`, 3-run median):
+    `r_shader_scale 1` **386.9 fps** (`2584 µs` frame, `2526 µs` GPU, `2135 µs`
+    `ui+present`) → `r_shader_scale 0` **509.7 fps** (**+31.7%**, **1962 µs**
+    frame, −622 µs, **1903 µs** GPU, **1546 µs** `ui+present`).
+  - `renderscale200-screenshader` in `qprof`: `e1m1` **570 fps** (`1755 µs`
+    frame, `1521 µs` `ui+present` vs `1511 µs` at 100%); `ad_sepulcher`
+    **392 fps** (`2553 µs` frame, `1531 µs` `ui+present` vs `1527 µs` at 100%).
 
 ### 23. Goggles post-process glow (*visual*)
 - Problem: `goggles()` in `crates/qrender/shaders/post.frag` executes an
