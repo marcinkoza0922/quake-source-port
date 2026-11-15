@@ -266,7 +266,7 @@ impl Renderer {
                         0,
                         bytes_of(&[a.push]),
                     );
-                    d.cmd_draw_indexed(cmd, am.num_indices, 1, 0, 0, 0);
+                    d.cmd_draw_indexed(cmd, a.num_indices, 1, a.first_index, 0, 0);
                 }
                 timestamp(3);
                 if particles.count > 0 {

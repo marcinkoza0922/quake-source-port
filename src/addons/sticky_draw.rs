@@ -7,7 +7,7 @@ use super::sticky_model;
 fn model(key: &str, build: fn(&[u8]) -> qformats::mdl::Mdl, lv: &mut crate::assets::Level, fs: &qcore::fs::Fs, r: &mut Renderer) -> Option<ModelId> {
     if !lv.by_name.contains_key(key) {
         let palette = fs.open("gfx/palette.lmp").unwrap_or_default();
-        let m = r.load_alias(&build(&palette)).ok().map(|id| crate::assets::Model { id, kind: crate::assets::Kind::Alias, flags: 0 });
+        let m = r.load_alias(&build(&palette)).ok().map(|id| crate::assets::Model { id, kind: crate::assets::Kind::Alias, flags: 0, md3: false });
         lv.by_name.insert(key.into(), m);
     }
     lv.by_name.get(key).copied().flatten().map(|m| m.id)

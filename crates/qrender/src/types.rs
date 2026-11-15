@@ -18,6 +18,23 @@ pub trait SurfaceProvider {
     fn drawable_size(&self) -> (u32, u32);
 }
 
+/// One skin frame for an MD3 surface (`base` RGBA8 plus optional `fb`/`cmap`).
+#[derive(Clone, Debug)]
+pub struct Md3SkinImage {
+    pub width: u32,
+    pub height: u32,
+    pub base: Vec<u8>,
+    pub fb: Option<(u32, u32, Vec<u8>)>,
+    pub cmap: Option<(u32, u32, Vec<u8>)>,
+}
+
+/// Skin set for one MD3 surface (`skins[skin_idx] = (frames, intervals)`).
+#[derive(Clone, Debug, Default)]
+pub struct Md3SurfaceSkins {
+    pub skins: Vec<(Vec<Md3SkinImage>, Vec<f32>)>,
+    pub holey: bool,
+}
+
 /// Handle to a loaded model (world submodel, alias or sprite).
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash)]
 pub struct ModelId(pub u32);

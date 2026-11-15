@@ -85,7 +85,7 @@ impl Host {
             }
             let mut gcv = cv;
             if g.toy.held.is_some() { gcv.viewmodel = crate::view::weapon::Alignment::Hidden; }
-            let (mut v, gun) = g.view.calc_refdef(&g.cl, &gcv, &self.level, ft);
+            let (mut v, gun) = g.view.calc_refdef(&mut g.cl, &gcv, &self.level, ft);
             let third = self.camera().third_person();
             self.place_camera(Some(k), &mut v, ft);
             let g = &mut self.guests[k];

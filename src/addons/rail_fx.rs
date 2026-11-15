@@ -118,7 +118,7 @@ impl Presentation {
             let model = r
                 .load_alias_glow(&mdl, &[glow])
                 .ok()
-                .map(|id| crate::assets::Model { id, kind: crate::assets::Kind::Alias, flags: 0 });
+                .map(|id| crate::assets::Model { id, kind: crate::assets::Kind::Alias, flags: 0, md3: false });
             lv.by_name.insert(key.into(), model);
         }
         let model = lv.by_name.get(key).copied().flatten()?;

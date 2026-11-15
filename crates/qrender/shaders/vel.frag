@@ -13,7 +13,7 @@ float linear_depth(float d) {
 }
 void main() {
     ivec2 px = ivec2(gl_FragCoord.xy);
-    float d = pc.samples > 1u ? texelFetch(scene_depth_ms, px, 0).r : texelFetch(scene_depth, px, 0).r;
+    float d = (pc.samples & 0xffffu) > 1u ? texelFetch(scene_depth_ms, px, 0).r : texelFetch(scene_depth, px, 0).r;
     if (linear_depth(gl_FragCoord.z) > linear_depth(d) * 1.02 + 2.0) discard;
     vec2 c = i_cur.xy / i_cur.w, p = i_prev.xy / i_prev.w;
     o_vel = vec4((c - p) * 0.5, 0.0, 0.0);

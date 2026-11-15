@@ -1,9 +1,10 @@
 //! Malformed-input robustness and synthetic format tests.
 
-use qformats::{Bsp, Mdl, Spr, Wad, Wav, bsp, entities, image};
+use qformats::{Bsp, Md3, Mdl, Spr, Wad, Wav, bsp, entities, image};
 
 fn all_parsers(d: &[u8]) {
     let _ = Bsp::parse(d);
+    let _ = Md3::parse(d);
     let _ = Mdl::parse(d);
     let _ = Spr::parse(d);
     let _ = Wad::parse(d);
@@ -241,4 +242,74 @@ fn quake64_bsp() {
     assert_eq!(t.mips[1][1], px[2]);
     assert_eq!(b.rgb_lighting.as_deref(), Some(&[0xf8, 0x00, 0xfc][..]));
     assert_eq!(b.lighting.len(), 1);
+}
+
+#[test]
+fn md3_synth_and_skin() {
+    let mut d = Vec::new();
+    let pad = |buf: &mut Vec<u8>, s: &str, len: usize| {
+        let mut b = vec![0u8; len];
+        let n = s.len().min(len);
+        b[..n].copy_from_slice(&s.as_bytes()[..n]);
+        buf.extend_from_slice(&b);
+    };
+    let ofs_frames = 108i32;
+    let ofs_surfaces = ofs_frames + 56;
+    let surf_hdr = 108;
+    let ofs_tris = surf_hdr;
+    let ofs_shaders = ofs_tris + 12;
+    let ofs_st = ofs_shaders + 68;
+    let ofs_xyz = ofs_st + 3 * 8;
+    let surf_end = ofs_xyz + 3 * 8;
+    d.extend_from_slice(b"IDP3");
+    d.extend_from_slice(&15i32.to_le_bytes());
+    pad(&mut d, "test.md3", 64);
+    d.extend_from_slice(&0i32.to_le_bytes()); // flags
+    d.extend_from_slice(&1i32.to_le_bytes()); // num_frames
+    d.extend_from_slice(&0i32.to_le_bytes()); // num_tags
+    d.extend_from_slice(&1i32.to_le_bytes()); // num_surfaces
+    d.extend_from_slice(&0i32.to_le_bytes()); // num_skins
+    d.extend_from_slice(&ofs_frames.to_le_bytes());
+    d.extend_from_slice(&ofs_frames.to_le_bytes());
+    d.extend_from_slice(&ofs_surfaces.to_le_bytes());
+    d.extend_from_slice(&(ofs_surfaces + surf_end).to_le_bytes());
+    // Frame 0
+    for f in [-10.0f32, -10.0, -10.0, 10.0, 10.0, 10.0, 0.0, 0.0, 0.0, 17.32] {
+        d.extend_from_slice(&f.to_le_bytes());
+    }
+    pad(&mut d, "idle0", 16);
+    // Surface 0
+    d.extend_from_slice(b"IDP3");
+    pad(&mut d, "body", 64);
+    for v in [0i32, 1, 1, 3, 1, ofs_tris, ofs_shaders, ofs_st, ofs_xyz, surf_end] {
+        d.extend_from_slice(&v.to_le_bytes());
+    }
+    for v in [0i32, 1, 2] {
+        d.extend_from_slice(&v.to_le_bytes());
+    }
+    pad(&mut d, "progs/body.tga", 64);
+    d.extend_from_slice(&0i32.to_le_bytes());
+    for uv in [0.0f32, 0.0, 1.0, 0.0, 0.0, 1.0] {
+        d.extend_from_slice(&uv.to_le_bytes());
+    }
+    for (x, y, z, lat, lng) in [(0i16, 0, 0, 0u8, 0u8), (64, 0, 0, 64, 0), (0, 64, 0, 0, 64)] {
+        for c in [x, y, z] {
+            d.extend_from_slice(&c.to_le_bytes());
+        }
+        d.extend_from_slice(&[lat, lng]);
+    }
+    let m = Md3::parse(&d).unwrap();
+    assert_eq!(m.surfaces.len(), 1);
+    assert_eq!(m.surfaces[0].name, "body");
+    assert_eq!(m.surfaces[0].verts[1].xyz, [64, 0, 0]);
+    assert_eq!(m.surfaces[0].shaders, vec!["progs/body.tga"]);
+    fuzz(&d);
+
+    let skin = "tag_head,\nbody,progs/body.tga\n";
+    assert!(qformats::md3::parse_skin(skin, &["body"]).is_none());
+    let valid = "header\nbody,progs/body.tga\n";
+    assert_eq!(
+        qformats::md3::parse_skin(valid, &["body"]).as_deref(),
+        Some(&[("body".to_string(), "progs/body.tga".to_string())][..])
+    );
 }

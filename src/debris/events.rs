@@ -66,7 +66,7 @@ impl Debris {
             }
             let (model, frame) = (cl.entities[i].model, cl.entities[i].frame);
             let Some(m) = lv.models.get(model).copied().flatten() else { continue };
-            if m.kind != Kind::Alias {
+            if m.kind != Kind::Alias || m.md3 {
                 continue;
             }
             let Some(info) = self.info(cl, fs, model) else { continue };

@@ -67,11 +67,13 @@ mod tests {
                     id: qrender::ModelId(1),
                     kind: Kind::Alias,
                     flags: 0,
+                    md3: false,
                 }),
                 Some(Model {
                     id: qrender::ModelId(42),
                     kind: Kind::Alias,
                     flags: 0,
+                    md3: false,
                 }),
             ],
             ..Default::default()
@@ -99,11 +101,11 @@ mod tests {
                 cl.viewangles = [pitch, 123.0, 0.0];
                 let mut state = ViewState::default();
                 cv.viewmodel = Alignment::Center;
-                let (view, center) = state.calc_refdef(&cl, &cv, &lv, 0.0);
+                let (view, center) = state.calc_refdef(&mut cl, &cv, &lv, 0.0);
                 let center = center.unwrap();
                 for setting in [2.0, 3.0] {
                     cv.viewmodel = Alignment::from_cvar(setting);
-                    let (_, side) = state.calc_refdef(&cl, &cv, &lv, 0.0);
+                    let (_, side) = state.calc_refdef(&mut cl, &cv, &lv, 0.0);
                     let side = side.unwrap();
                     assert_eq!(side.model, center.model);
                     assert_eq!(side.angles, center.angles);
@@ -116,13 +118,13 @@ mod tests {
                     );
                 }
                 cv.viewmodel = Alignment::Hidden;
-                assert!(state.calc_refdef(&cl, &cv, &lv, 0.0).1.is_none());
+                assert!(state.calc_refdef(&mut cl, &cv, &lv, 0.0).1.is_none());
                 cv.viewmodel = Alignment::Center;
                 cl.items = crate::sbar::IT_INVISIBILITY;
-                assert!(state.calc_refdef(&cl, &cv, &lv, 0.0).1.is_none());
+                assert!(state.calc_refdef(&mut cl, &cv, &lv, 0.0).1.is_none());
                 cl.items = 0;
                 cl.stats[STAT_HEALTH] = 0;
-                assert!(state.calc_refdef(&cl, &cv, &lv, 0.0).1.is_none());
+                assert!(state.calc_refdef(&mut cl, &cv, &lv, 0.0).1.is_none());
                 cl.stats[STAT_HEALTH] = 100;
             }
         }

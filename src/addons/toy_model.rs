@@ -43,7 +43,7 @@ pub fn get(key: &str, mdl_zlib: &[u8], rgb_zlib: &[u8], glow: bool, lv: &mut cra
         let palette = fs.open("gfx/palette.lmp").unwrap_or_default();
         let mdl = parse(mdl_zlib, rgb_zlib, &palette);
         let loaded = if glow { r.load_alias_glow(&mdl, &[gel_glow(rgb_zlib)]) } else { r.load_alias(&mdl) };
-        let m = loaded.ok().map(|id| crate::assets::Model { id, kind: crate::assets::Kind::Alias, flags: 0 });
+        let m = loaded.ok().map(|id| crate::assets::Model { id, kind: crate::assets::Kind::Alias, flags: 0, md3: false });
         lv.by_name.insert(key.into(), m);
     }
     lv.by_name.get(key).copied().flatten().map(|m| m.id)

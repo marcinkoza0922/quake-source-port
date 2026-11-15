@@ -52,7 +52,7 @@ impl Presentation {
         if !lv.by_name.contains_key(key) {
             let palette = fs.open("gfx/palette.lmp").unwrap_or_default();
             let model = r.load_alias(&super::portal_model::model(&palette)).ok().map(|id|
-                crate::assets::Model { id, kind: crate::assets::Kind::Alias, flags: 0 });
+                crate::assets::Model { id, kind: crate::assets::Kind::Alias, flags: 0, md3: false });
             lv.by_name.insert(key.into(),model);
         }
         let model = lv.by_name.get(key).copied().flatten()?;

@@ -43,7 +43,7 @@ Everything ironwail/vkQuake load: id1, hipnotic/rogue (`-hipnotic`/`-rogue` buil
 
 - Archives: PAK, PK3/zip (store + deflate).
 - BSP29, BSP2, 2PSB, lit/colored (`.lit`, else BSPX `RGBLIGHTING` via `qformats::bspx::find_lump`, else Quake64 RGB), external `.ent` overrides, `.vis` not required.
-- MDL (incl. `QuakeForge` flags, MD5 replacement models from re-release optional later), SPR/SPR32, WAD2, LMP, TGA/PCX external textures, `.skybox` (`sky` worldspawn key).
+- MDL (incl. `QuakeForge` flags, MD3 native and `.md3` replacement models via `r_enhancedmodels`; MD5 optional later), SPR/SPR32, WAD2, LMP, TGA/PCX external textures, `.skybox` (`sky` worldspawn key).
 - QuakeC progs.dat v6, FTE/QSS extensions used by AD/MG (checkextension, string builtins, `sv_protocol 999` limits).
 - Audio: WAV, OGG/FLAC/MP3 music in `music/` (decoders: `lewton` ok as a "solved" crate; mp3 via `minimp3`-class crate).
 
@@ -54,7 +54,7 @@ Cargo workspace. Binary crate at root (`src/main.rs`) wires crates together.
 ```
 crates/
   qcore      math (Vec3, plane, bbox), byte reader, hashing, cvar + cmd + console text, filesystem (pak/pk3 search paths, gamedir stack)
-  qformats   BSP29/BSP2/2PSB, MDL, SPR, WAD2, LMP, palette, PCX/TGA, WAV parsing → plain Rust structs, no GPU
+  qformats   BSP29/BSP2/2PSB, MDL, MD3 (`.skin`), SPR, WAD2, LMP, palette, PCX/TGA, WAV parsing → plain Rust structs, no GPU
   qpool      edict slot allocator (ED_Alloc reuse), capped effect pools, SoA particle pool (see below)
   qvm        QuakeC VM: progs loader, interpreter, builtin dispatch trait, edict field storage
   qworld     collision (hull traces, BSP2 large hulls), SV_Move, physics (SV_Physics_*), area grid
@@ -467,6 +467,10 @@ Phase 6 done:
 - Hooks: `r_particledesc` default "classic" loads no FTE configs, so classic effects stay unless an effect resolves. Server: builtins particleeffectnum #335, trailparticles #336, pointparticles #337, te_particlerain #409 / te_particlesnow #410, advertise FTE_SV_POINTPARTICLES, DP_SV_POINTPARTICLES, DP_TE_PARTICLERAIN/SNOW, FTE_PART_NAMESPACE_EFFECTINFO; messages svcdp_precache (54, 0x4000|idx), svcdp_trailparticles 60, pointparticles 61, pointparticles1 62, TEDP 55/56. Entity emit/trail effect fields need replacement deltas; skip at first.
 
 Monster movement interpolation: classic updates and FTE replacement deltas set `LERP_RESETMOVE` when an entity first appears or returns after a snapshot gap. This resets renderer transform history to the received position, preventing a brief slide from zero or a stale position. Ordinary `U_STEP`/`EFLAGS_STEP` updates retain movement smoothing.
+
+Alias animation reset and MD3 models:
+- `ViewState::alias_frame` (`src/view.rs`) clears `LERP_RESETANIM` on first evaluation (snapping `prev = frame` cleanly rather than skipping lerp after reset) and clears `LERP_RESETANIM2` across the *next* frame transition (preventing `EF_MUZZLEFLASH` two-step viewmodel snapbacks from morphing).
+- `qformats::md3` parses `"IDP3"` v15 `.md3` models and validates `.skin` manifests; `qrender` stores per-surface `AliasSurface` ranges (`first_index`, `num_indices`, per-surface skins/holey) and decodes packed 16-bit MD3 positions and spherical `(lat, lng)` normals in `alias.vert`/`velalias.vert` (flag `32`, velocity bit `65536`). `src/assets/md3.rs` resolves companion `<stem>.md3` replacements (via `Fs::open_companion`, gated by `r_enhancedmodels` archived default `1`, preserving `.mdl` entity flags) and `.skin` / prefix fallback textures (`progs/`, `textures/`, embedded shaders) with `_glow`/`_luma` fullbright layers and indexed `.lmp` colormap translation. `debris` (`take_over`) and `qrender` skip MDL ragdoll takeover for `Model::md3` entities.
 
 Single-player death recovery (`host/death.rs`) opens a paused menu once per death.
 `cl_deathaction` is archived: 0 Ask (default), 1 newest readable living-player
