@@ -58,7 +58,7 @@ pub const VANILLA: &[(&str, &str)] = &[
 const WATER: &[(&str, &str)] = &[
     ("r_enhancedwater", "1"), ("r_watertranslucency", "1"), ("r_wateralpha", "0.3"),
     ("r_waterripples", "1"), ("r_waterripples_amount", "2"), ("r_watersplash", "1"),
-    ("r_watercaustics", "1"), ("r_watercaustics_amount", "2"), ("r_water_quality", "2"),
+    ("r_watercaustics", "1"), ("r_watercaustics_amount", "2"), ("r_water_quality", "1"),
 ];
 const IMPACTS: &[(&str, &str)] = &[
     ("r_impact_fx", "4"), ("r_impact_bullets", "1"), ("r_impact_nails", "1"),

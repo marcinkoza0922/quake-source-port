@@ -20,7 +20,7 @@ use std::collections::HashMap;
 pub const MAX_RIPPLES: usize = 32;
 /// Seconds a ripple ring lives (must match `water_grad` in common.glsl).
 pub const RIPPLE_LIFE: f32 = 2.5;
-const MAX_DROPS: usize = 2048;
+const MAX_DROPS: usize = 1024;
 const GRAVITY: f32 = 800.0;
 /// Explosions deeper than this under a liquid surface don't splash it.
 const BLAST_MAX_DEPTH: f32 = 200.0;
@@ -28,12 +28,11 @@ const BLAST_MAX_DEPTH: f32 = 200.0;
 const PLAYER_KEY: u32 = u32::MAX;
 
 /// Active `(max_ripples, max_drops, max_puffs)` budgets for `r_water_quality`
-/// (`0` low, `1` medium, `2` high).
+/// (`0` low, `1` high).
 pub fn quality_budgets(quality: u32) -> (usize, usize, usize) {
     match quality {
         0 => (8, 512, 128),
-        1 => (16, 1024, 256),
-        _ => (MAX_RIPPLES, MAX_DROPS, MAX_PUFFS),
+        _ => (16, MAX_DROPS, MAX_PUFFS),
     }
 }
 
@@ -80,7 +79,7 @@ pub struct SprayPuff {
     pub color: [u8; 4],
 }
 
-const MAX_PUFFS: usize = 512;
+const MAX_PUFFS: usize = 256;
 
 #[derive(Default)]
 pub struct WaterFx {

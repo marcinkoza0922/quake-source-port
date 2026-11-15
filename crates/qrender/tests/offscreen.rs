@@ -298,7 +298,7 @@ fn start_bsp_renders_non_black() {
                 r.render(&RenderFrame { time: portal_frame.time, splits: &splits, settings: st, ..Default::default() }).unwrap();
                 let _ = r.read_pixels().unwrap();
             }
-            for water_quality in [0, 1, 2] {
+            for water_quality in [0, 1] {
                 let st = Settings {
                     wateralpha: 0.35,
                     water_ripples: 1.0,

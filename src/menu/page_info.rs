@@ -98,7 +98,7 @@ pub(super) fn tooltip(item: Item) -> Option<&'static str> {
         "r_waterripples" => "Liquid surfaces swell and ring out where things move through them",
         "r_watersplash" => "Droplets spray up when things enter or leave water, slime or lava",
         "r_watercaustics" => "Rippling light patterns on surfaces under water and slime",
-        "r_water_quality" => "Detail for caustics, ripples and splashes: low and medium use a tiled caustic texture and smaller budgets; high uses procedural caustics and full budgets",
+        "r_water_quality" => "Detail for caustics, ripples and splashes: low uses smaller budgets and shorter view distance; high uses larger budgets and farther view distance",
         "assist_autoaim" => "Snap and track enemies in local play, including split-screen; unavailable online",
         "assist_autoaim_mode" => "Hold: keep Lock-on held. Toggle: press Auto-aim Toggle to enable automatic acquisition. Click look stick to switch targets",
         "assist_autoaim_indicator" => "Show corner ticks at screen centre while locked, even with Crosshair off",

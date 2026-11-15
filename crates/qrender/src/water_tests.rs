@@ -61,7 +61,7 @@ fn quality_tiers_cap_ripples_drops_and_puffs() {
     let shots: Vec<([f32; 3], bool)> = (0..40)
         .map(|i| ([i as f32 * 2.0 - 40.0, 0.0, -32.0], true))
         .collect();
-    for (quality, (max_r, max_d, max_p)) in [(0, (8, 512, 128)), (1, (16, 1024, 256)), (2, (32, 2048, 512))] {
+    for (quality, (max_r, max_d, max_p)) in [(0, (8, 512, 128)), (1, (16, 1024, 256))] {
         let mut fx = WaterFx::default();
         let drops = fx.update(&world, 1.0, std::iter::empty(), None, Some([0.0, 0.0, 32.0]), &[], true, true, quality);
         assert!(drops.is_empty());
