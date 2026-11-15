@@ -4,6 +4,10 @@
 //! small soft dots) plus spray puffs (larger textured billboards) that give
 //! big splashes a solid body.
 
+#[cfg(test)]
+#[path = "water_tests.rs"]
+mod tests;
+
 use crate::Particle;
 use crate::world::World;
 use std::collections::HashMap;
@@ -94,6 +98,7 @@ pub struct WaterFx {
     rng: u32,
     /// Palette shade rows (start index, 16 entries ramp) per liquid kind 1..3.
     shades: [[u8; 4]; 3],
+    landed_scratch: Vec<[f32; 3]>,
 }
 
 /// Index of the palette colour closest to `rgb`.
@@ -345,44 +350,68 @@ impl WaterFx {
         // the player's origin is 24 units above the feet; splash at the shins
         let player = player.map(|p| (PLAYER_KEY, [p[0], p[1], p[2] - 16.0]));
         for (key, o) in movers.chain(player) {
-            let kind = world.liquid_surface(o).map_or(0, |(_, k)| k & 3);
-            let prev = self.tracks.insert(key, Track { origin: o, kind, last_wake: 0.0, seen: self.frame });
-            let Some(prev) = prev else { continue };
-            let d = [o[0] - prev.origin[0], o[1] - prev.origin[1], o[2] - prev.origin[2]];
-            if d.iter().map(|c| c * c).sum::<f32>() > 256.0 * 256.0 {
-                continue; // teleported
+            let mut wake_at = None;
+            let mut cross = None;
+            if let Some(tr) = self.tracks.get_mut(&key) {
+                tr.seen = self.frame;
+                if tr.origin == o {
+                    continue;
+                }
+                let prev_origin = tr.origin;
+                let prev_kind = tr.kind;
+                let last_wake = tr.last_wake;
+                let surf = world.liquid_surface(o);
+                let kind = surf.map_or(0, |(_, k)| k & 3);
+                tr.origin = o;
+                tr.kind = kind;
+                let d = [o[0] - prev_origin[0], o[1] - prev_origin[1], o[2] - prev_origin[2]];
+                if d[0] * d[0] + d[1] * d[1] + d[2] * d[2] > 256.0 * 256.0 {
+                    tr.last_wake = 0.0;
+                    continue;
+                }
+                if dt <= 0.0 {
+                    continue;
+                }
+                if prev_kind != kind {
+                    // crossed a surface: find it from the submerged end
+                    let wet_surf = if kind != 0 {
+                        surf.map(|(z, _)| (z, kind))
+                    } else {
+                        world.liquid_surface(prev_origin).map(|(z, _)| (z, prev_kind))
+                    };
+                    if let Some((z, k)) = wet_surf {
+                        let vz = (d[2] / dt).abs();
+                        let speed = (d[0] * d[0] + d[1] * d[1] + d[2] * d[2]).sqrt() / dt;
+                        let strength = (vz.max(speed * 0.5) / 350.0).clamp(0.25, 1.5)
+                            * if kind != 0 { 1.0 } else { 0.5 };
+                        cross = Some(([o[0], o[1], z], k, strength));
+                    }
+                } else if kind != 0 && ripples {
+                    // wading near the surface leaves a wake
+                    let hs = (d[0] * d[0] + d[1] * d[1]).sqrt() / dt;
+                    if hs > 40.0
+                        && time - last_wake > 0.3
+                        && let Some((z, k)) = surf
+                        && k & 4 == 0
+                        && z - o[2] < 36.0
+                    {
+                        tr.last_wake = time;
+                        wake_at = Some(([o[0], o[1], z], (hs / 320.0).clamp(0.2, 0.6)));
+                    }
+                }
+            } else {
+                let kind = world.liquid_surface(o).map_or(0, |(_, k)| k & 3);
+                self.tracks.insert(key, Track { origin: o, kind, last_wake: 0.0, seen: self.frame });
             }
-            let tr = self.tracks.get_mut(&key).unwrap();
-            tr.last_wake = prev.last_wake;
-            if dt <= 0.0 {
-                continue;
-            }
-            if prev.kind != kind {
-                // crossed a surface: find it from the submerged end
-                let (wet, k) = if kind != 0 { (o, kind) } else { (prev.origin, prev.kind) };
-                let Some((z, _)) = world.liquid_surface(wet) else { continue };
-                let vz = (d[2] / dt).abs();
-                let speed = (d.iter().map(|c| c * c).sum::<f32>()).sqrt() / dt;
-                let strength = (vz.max(speed * 0.5) / 350.0).clamp(0.25, 1.5) * if kind != 0 { 1.0 } else { 0.5 };
-                let at = [o[0], o[1], z];
+            if let Some((at, k, strength)) = cross {
                 if ripples {
                     self.add_ripple(at, time, 1.6 * strength);
                 }
                 if splashes {
                     self.splash(at, k, strength, time);
                 }
-            } else if kind != 0 && ripples {
-                // wading near the surface leaves a wake
-                let hs = (d[0] * d[0] + d[1] * d[1]).sqrt() / dt;
-                if hs > 40.0
-                    && time - prev.last_wake > 0.3
-                    && let Some((z, k)) = world.liquid_surface(o)
-                    && k & 4 == 0
-                    && z - o[2] < 36.0
-                {
-                    self.tracks.get_mut(&key).unwrap().last_wake = time;
-                    self.add_ripple([o[0], o[1], z], time, (hs / 320.0).clamp(0.2, 0.6));
-                }
+            } else if let Some((at, amp)) = wake_at {
+                self.add_ripple(at, time, amp);
             }
         }
         if dt > 0.0
@@ -397,7 +426,8 @@ impl WaterFx {
         self.ripples.retain(|r| time as f32 - r.t0 < RIPPLE_LIFE && time as f32 >= r.t0);
 
         // droplets: fall back into the liquid with a tiny ring
-        let mut landed = Vec::new();
+        let mut landed = std::mem::take(&mut self.landed_scratch);
+        landed.clear();
         self.drops.retain_mut(|p| {
             p.vel[2] -= GRAVITY * dt;
             for k in 0..3 {
@@ -422,12 +452,13 @@ impl WaterFx {
             age < p.life && !(p.pos[2] < p.surface - 4.0 && p.vel[2] < 0.0)
         });
         if ripples {
-            for at in landed.into_iter().take(2) {
+            for &at in landed.iter().take(2) {
                 if self.ripples.len() < MAX_RIPPLES {
                     self.add_ripple(at, time, 0.25);
                 }
             }
         }
+        self.landed_scratch = landed;
         self.drops.iter().map(|p| Particle { origin: p.pos, color: p.color, alpha: 1.0 }).collect()
     }
 

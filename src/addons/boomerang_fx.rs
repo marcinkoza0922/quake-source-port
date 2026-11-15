@@ -163,6 +163,7 @@ impl Presentation {
                     id,
                     kind: crate::assets::Kind::Alias,
                     flags: 0,
+                    md3: false,
                 });
             lv.by_name.insert(key.into(), model);
         }

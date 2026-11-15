@@ -3,78 +3,161 @@ use super::*;
 
 type Poses<'a> = HashMap<u32, (&'a RenderEntity, Vec<Vec3>)>;
 
-fn death(name: &str) -> bool {
-    let n = name.to_ascii_lowercase();
-    ["death", "deth", "dth", "die", "dead"]
-        .iter()
-        .any(|s| n.contains(s))
-}
-fn flesh(m: &Mdl) -> bool {
-    m.flags & (4 | 32) != 0
-        || m.frames
-            .iter()
-            .any(|f| f.poses.iter().any(|p| death(&p.name)))
-}
-fn corpse(m: &Mdl, e: &RenderEntity) -> bool {
-    e.dyn_pose.is_some()
-        || m.flags & (4 | 32) != 0
-        || m.frames
-            .get(e.frame as usize)
-            .is_some_and(|f| f.poses.iter().any(|p| death(&p.name)))
+pub(super) enum PoseSet<'a, 'p> {
+    #[cfg(test)]
+    Ready(&'p Poses<'a>),
+    Lazy {
+        ents: &'a [RenderEntity],
+        dynverts: &'a [u32],
+        time: f64,
+        cache: &'p mut Poses<'a>,
+    },
 }
 
-impl Blood {
-    /// A blood-coloured QC particle alone is insufficient: shootable buttons
-    /// and triggers can emit SpawnBlood too. Match nearby flesh, allowing
-    /// collision-box damage to living enemies to stain the nearest skin.
-    fn contact<'a>(
-        &self,
-        p: Vec3,
-        dir: Vec3,
-        poses: &'a Poses<'a>,
-        world: &dyn World,
-    ) -> Option<(&'a RenderEntity, &'a [Vec3], Vec3, Vec3)> {
-        let mut nearest = None;
-        for (e, verts) in poses.values() {
-            let m = &self.models[&e.model];
-            if !flesh(m) && !self.heads.contains(&e.model) {
-                continue;
+impl<'a> PoseSet<'a, '_> {
+    fn get(&self, key: u32) -> Option<(&RenderEntity, &[Vec3])> {
+        match self {
+            #[cfg(test)]
+            Self::Ready(poses) => poses.get(&key).map(|&(e, ref v)| (e, v.as_slice())),
+            Self::Lazy { cache, .. } => cache.get(&key).map(|&(e, ref v)| (e, v.as_slice())),
+        }
+    }
+
+    fn for_each(
+        &mut self,
+        models: &HashMap<ModelId, Option<mesh::CachedMdl>>,
+        mut filter: impl FnMut(&RenderEntity, &mesh::CachedMdl) -> bool,
+        mut f: impl FnMut(u32, &RenderEntity, &mesh::CachedMdl, &[Vec3]),
+    ) {
+        match self {
+            #[cfg(test)]
+            Self::Ready(poses) => {
+                for (&key, &(e, ref verts)) in *poses {
+                    if let Some(Some(cm)) = models.get(&e.model)
+                        && filter(e, cm)
+                    {
+                        f(key, e, cm, verts);
+                    }
+                }
             }
-            for t in &m.triangles {
+            Self::Lazy {
+                ents,
+                dynverts,
+                time,
+                cache,
+            } => {
+                for e in *ents {
+                    if e.key == 0 || e.viewmodel {
+                        continue;
+                    }
+                    let Some(Some(cm)) = models.get(&e.model) else {
+                        continue;
+                    };
+                    if !filter(e, cm) {
+                        continue;
+                    }
+                    let (_, verts) = cache
+                        .entry(e.key)
+                        .or_insert_with(|| (e, mesh::positions(&cm.mdl, e, dynverts, *time)));
+                    f(e.key, e, cm, verts);
+                }
+            }
+        }
+    }
+}
+
+/// A blood-coloured QC particle alone is insufficient: shootable buttons
+/// and triggers can emit SpawnBlood too. Match nearby flesh, allowing
+/// collision-box damage to living enemies to stain the nearest skin.
+fn contact(
+    models: &HashMap<ModelId, Option<mesh::CachedMdl>>,
+    p: Vec3,
+    dir: Vec3,
+    poses: &mut PoseSet<'_, '_>,
+    world: &dyn World,
+) -> Option<(u32, Vec3, Vec3)> {
+    let mut nearest = None;
+    poses.for_each(
+        models,
+        |e, cm| {
+            if !cm.is_flesh && !cm.is_head {
+                return false;
+            }
+            let r = cm.entity_radius(e) + 32.0;
+            (Vec3::from(e.origin) - p).length_sq() <= r * r
+        },
+        |key, e, cm, verts| {
+            let is_corpse = cm.is_corpse(e);
+            for t in &cm.mdl.triangles {
                 let tri = t.verts.map(|i| verts[i as usize]);
-                let contact = mesh::ray(p - dir * 24.0, p + dir * 24.0, tri)
+                let hit_contact = mesh::ray(p - dir * 24.0, p + dir * 24.0, tri)
                     .map(|(f, n)| (p + dir * ((f - 0.5) * 48.0), n))
                     .or_else(|| {
                         // QC hits boxes, not triangles. Only confirmed blood
                         // on living flesh gets a bounded nearest-skin fallback;
                         // wall impacts and cosmetic corpse rays remain exact.
-                        if corpse(m, e) {
+                        if is_corpse {
                             return None;
                         }
                         let hit = mesh::closest_triangle(p, tri);
                         ((hit - p).length_sq() <= 32.0 * 32.0)
                             .then(|| (hit, (tri[1] - tri[0]).cross(tri[2] - tri[0]).normalize()))
                     });
-                let Some((hit, n)) = contact else { continue };
+                let Some((hit, n)) = hit_contact else {
+                    continue;
+                };
                 let d = (hit - p).length_sq();
                 let trace = world.trace_line(p, hit);
                 if trace.frac < 1.0 && (trace.endpos - hit).length() > 1.0 {
                     continue;
                 }
-                if nearest.as_ref().is_none_or(|(best, _, _, _, _)| d < *best) {
-                    nearest = Some((
-                        d,
-                        *e,
-                        verts.as_slice(),
-                        hit,
-                        if n.dot(dir) > 0.0 { -n } else { n },
-                    ));
+                if nearest.as_ref().is_none_or(|(best, _, _, _)| d < *best) {
+                    nearest = Some((d, key, hit, if n.dot(dir) > 0.0 { -n } else { n }));
                 }
             }
-        }
-        nearest.map(|(_, e, v, p, n)| (e, v, p, n))
-    }
+        },
+    );
+    nearest.map(|(_, key, p, n)| (key, p, n))
+}
 
+fn shot_contact(
+    models: &HashMap<ModelId, Option<mesh::CachedMdl>>,
+    a: Vec3,
+    b: Vec3,
+    poses: &mut PoseSet<'_, '_>,
+    world: &dyn World,
+) -> Option<(u32, Vec3, Vec3)> {
+    let mut nearest = None;
+    poses.for_each(
+        models,
+        |e, cm| {
+            if e.portal_only || !(cm.is_flesh && cm.is_corpse(e) || cm.is_head) {
+                return false;
+            }
+            let r = cm.entity_radius(e);
+            mesh::point_segment_dist_sq(Vec3::from(e.origin), a, b) <= r * r
+        },
+        |key, _e, cm, verts| {
+            for t in &cm.mdl.triangles {
+                if let Some((f, n)) = mesh::ray(a, b, t.verts.map(|i| verts[i as usize]))
+                    && nearest.as_ref().is_none_or(|(best, _, _, _)| f < *best)
+                {
+                    let p = a.lerp(b, f);
+                    let tr = world.trace_line(a, p);
+                    if tr.frac < 1.0 && (tr.endpos - p).length() > 1.0 {
+                        continue;
+                    }
+                    let n = if n.dot(b - a) > 0.0 { -n } else { n };
+                    nearest = Some((f, key, p, n));
+                }
+            }
+        },
+    );
+    nearest.map(|(_, key, p, n)| (key, p, n))
+}
+
+impl Blood {
+    #[cfg(test)]
     #[allow(clippy::too_many_arguments)]
     pub(super) fn impacts(
         &mut self,
@@ -82,6 +165,19 @@ impl Blood {
         cl: &qclient::ClientState,
         world: &dyn World,
         poses: &Poses<'_>,
+        view: Vec3,
+        debris: &crate::debris::Debris,
+    ) {
+        self.impacts_with(set, cl, world, PoseSet::Ready(poses), view, debris);
+    }
+
+    #[allow(clippy::too_many_arguments)]
+    pub(super) fn impacts_with(
+        &mut self,
+        set: Settings,
+        cl: &qclient::ClientState,
+        world: &dyn World,
+        mut poses: PoseSet<'_, '_>,
         view: Vec3,
         debris: &crate::debris::Debris,
     ) {
@@ -103,7 +199,8 @@ impl Blood {
         for &p in &cl.blood_hits {
             let p = Vec3::from(p);
             let dir = (p - debris.shot_origin(view, p)).normalize();
-            if let Some((e, v, hit, n)) = self.contact(p, dir, poses, world) {
+            if let Some((key, hit, n)) = contact(&self.models, p, dir, &mut poses, world) {
+                let (e, v) = poses.get(key).expect("matched entity pose must exist");
                 if e.portal_only {
                     // a local player's own body wraps the camera: no wound
                     // meshes, and the spray leaves outwards, away from the eye
@@ -125,27 +222,8 @@ impl Blood {
             }
             let b = Vec3::from(p);
             let a = debris.shot_origin(view, b);
-            let mut nearest = None;
-            for (e, verts) in poses.values() {
-                let m = &self.models[&e.model];
-                if e.portal_only || !(flesh(m) && corpse(m, e) || self.heads.contains(&e.model)) {
-                    continue;
-                }
-                for t in &m.triangles {
-                    if let Some((f, n)) = mesh::ray(a, b, t.verts.map(|i| verts[i as usize]))
-                        && nearest.as_ref().is_none_or(|(best, _, _, _, _)| f < *best)
-                    {
-                        let p = a.lerp(b, f);
-                        let tr = world.trace_line(a, p);
-                        if tr.frac < 1.0 && (tr.endpos - p).length() > 1.0 {
-                            continue;
-                        }
-                        let n = if n.dot(b - a) > 0.0 { -n } else { n };
-                        nearest = Some((f, *e, verts.as_slice(), p, n));
-                    }
-                }
-            }
-            if let Some((_, e, v, p, n)) = nearest {
+            if let Some((key, p, n)) = shot_contact(&self.models, a, b, &mut poses, world) {
+                let (e, v) = poses.get(key).expect("matched entity pose must exist");
                 if set.wounds {
                     self.wound(e, v, p, n, cl.time, 7.0 * set.size);
                 }
@@ -182,9 +260,11 @@ impl Blood {
         cl: &qclient::ClientState,
         debris: &crate::debris::Debris,
     ) {
-        let mut current = HashMap::new();
+        let mut current = std::mem::take(&mut self.actors_scratch);
+        current.clear();
         let mut gibs = Vec::new();
-        let mut current_gibs = HashMap::new();
+        let mut current_gibs = std::mem::take(&mut self.gibs_scratch);
+        current_gibs.clear();
         for (key, e) in cl.active_entities() {
             let Some(name) = cl.model_name(e.model) else {
                 continue;
@@ -204,7 +284,11 @@ impl Blood {
             }
             // The model id was cached before its server entity changed.
             if let Some(&id) = self.model_ids.get(&e.model)
-                && self.models.get(&id).is_some_and(flesh)
+                && self
+                    .models
+                    .get(&id)
+                    .and_then(Option::as_ref)
+                    .is_some_and(|c| c.is_flesh)
             {
                 current.insert(key as u32, (id, Vec3::from(e.origin)));
             }
@@ -223,8 +307,8 @@ impl Blood {
                 bursts.push(p + Vec3::new(0.0, 0.0, 12.0));
             }
         }
-        self.actors = current;
-        self.gibs = current_gibs;
+        self.actors_scratch = std::mem::replace(&mut self.actors, current);
+        self.gibs_scratch = std::mem::replace(&mut self.gibs, current_gibs);
         for p in bursts {
             self.burst(p, set);
         }

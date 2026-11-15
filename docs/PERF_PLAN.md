@@ -151,10 +151,12 @@ confirm wins windowed (`qprof -window`, or qbench for parity).
   (area-node tree sizes, cheaper box/hull rejection). Monster timing is
   gameplay: do not stagger thinks without checking qbot results.
 
-### 9. Enhanced water and impacts on AD
-- `water` +1.5 ms CPU and p99 11 ms; `impacts` +0.85 ms; `blood` +0.64 ms.
-  Profile each alone with `-perf`; look for per-frame rebuilds of decal
-  and ripple geometry that could be incremental.
+### 9. Enhanced water and impacts on AD — done (2026-11-14)
+- `impacts` (+1.01 ms CPU) and `blood` (+0.93 ms CPU) done (overhead over
+  `vanilla` dropped to +1 µs and +13 µs).
+- `water` (+190 µs frame / +169 µs render CPU / +189 µs GPU) done (overhead
+  over `vanilla` dropped to +14 µs frame / +46 µs render CPU / +13 µs GPU;
+  see results log).
 
 ### 10. Contents checks
 - `check_water_transition` and `point_contents` take 4–8% on e1m1. Check
@@ -1219,3 +1221,91 @@ confirm wins windowed (`qprof -window`, or qbench for parity).
   Next (remaining item 4 work): per-view particle geometry culling / sharing
   across teleporter/portal/split views, and GPU-side quad expansion or
   weather/emitter optimizations.
+- 2026-11-14, item 9 (impacts & blood CPU + shared `CollisionModel` /
+  `brush_ents`): eliminated per-frame filesystem opens (`resolve_loose` /
+  `read_dir`) for non-`.mdl` entities (`*1..*35`, sprites), per-frame
+  `to_ascii_lowercase()` death-pose scans, eager `mesh::positions` builds
+  over every entity, unculled triangle sweeps, per-frame `HashMap`
+  allocations, and duplicate per-subsystem `CollisionModel` / `brush_ents`
+  builds across `fte`, `blood`, `hitfx`, and `impacts`:
+  - `src/blood/mesh.rs`: added zero-alloc `is_death_name` / `is_mdl_path`,
+    `point_segment_dist_sq`, and `CachedMdl` (precomputing `is_flesh`,
+    `has_death_pose`, `is_head`, `is_gib_or_head`, `death_frames`, and
+    conservative entity bounding `radius`).
+  - `src/impacts.rs`, `src/impacts/nails.rs`: cached `Option<CachedMdl>` per
+    `ModelId` (storing `None` for brush/sprite models), reused `flights_scratch`,
+    and switched nail triangle collision and `mesh::positions` to lazy
+    per-ray bounding-sphere evaluation plus active `Anchor::Mesh` keys only.
+  - `src/blood.rs`, `src/blood/events.rs`: cached `Option<CachedMdl>` per
+    `ModelId`, replaced eager pose builds with `PoseSet::Lazy` + bounding-sphere
+    rejection in `contact`/`shot_contact`, skipped `mesh::positions` on
+    non-wounded gibs, computed poses only for active owned wounds in `draw`,
+    and reused `trails_scratch`/`actors_scratch`/`gibs_scratch`.
+  - `src/assets.rs`, `src/fte/world.rs`, `src/fte.rs`, `src/hitfx.rs`,
+    `src/host/render.rs`: added `Level::collision_model()` (`OnceLock`) and
+    `cached_world` so `fte`, `blood`, `hitfx`, and `impacts` share one lazy
+    `CollisionModel` per level and one `brush_ents` list per frame.
+
+  A/B benchmarks on RTX 3060 Ti, `1280×720` headless, `qprof -runs 3` (20 s
+  measured after 4 s warm-up, sim step `1/250 s`) on `ad_sepulcher`, exact
+  matching FTE counters (live 33611, decals 210, vertices 53626 / 135014,
+  indices 80124 / 202207):
+
+  | scenario | metric | before | after | change |
+  |---|---|--:|--:|--:|
+  | vanilla | frame / render cpu µs | 2037 / 1031 | 2040 / 1025 | +3 / −6 µs |
+  | impacts | fps | 462 (CPU) | 491 (GPU) | +6.3% |
+  | impacts | frame / render cpu µs | 2163 / 2037 | 2037 / 1026 | −126 / −1011 µs (+1006→+1 µs vs vanilla) |
+  | blood | fps | 473 (CPU) | 490 (GPU) | +3.6% |
+  | blood | frame / render cpu µs | 2115 / 1964 | 2040 / 1038 | −75 / −926 µs (+933→+13 µs vs vanilla) |
+  | water | frame / render cpu µs | 2225 / 1199 | 2225 / 1169 | +0 / −30 µs |
+  | all-enhancements | render cpu µs | 4782 | 4210 | −572 µs (−12.0%, GPU-bound 9056 µs) |
+
+  Verification: `compare -metric AE = 0` across all 12 pairs (`vanilla`,
+  `impacts`, `blood`, `water` at `05`, `10`, `15` s); Vulkan validation clean
+  (`-headless -validation -autoquit 4 -game ad +map ad_sepulcher +r_blood 1
+  +r_impact_bullets 1 +r_impact_nails 1 +r_impact_scorches 1 +r_impact_fx 4`);
+  full `cargo nextest run` (with game data) and `cargo clippy --message-format=short`
+  pass cleanly. Reports: `target/qprof/item9-{before,after}/`.
+
+- **2026-11-14 — Item 9 (`water`): skip `novis` on water-vised maps & `WaterFx` fast paths**:
+  Root cause on `ad_sepulcher` (`58233` leaves): `frame.rs` previously called
+  `wg.cpu.set_transparent_liquids(alphas.iter().any(|&a| a < 1.0))` unconditionally,
+  forcing `novis` (`vis_leaf = 0`, all 58,233 leaves + whole-map GPU cull/lightmap/world/models)
+  even though `ad_sepulcher` already has water-vised PVS across its liquid leaves.
+  Additionally, `WaterFx::update` called `world.liquid_surface` and tracked hash maps
+  for stationary entities and scanned entities even when ripples/splashes were disabled.
+  Changes on `improve/perf-water`:
+  - `crates/qrender/src/world{,.rs,/build.rs,/cull.rs}`: added `water_vised`
+    (`World::check_water_vis`, porting ironwail's `Mod_CheckWaterVis` with zero-alloc
+    RLE vis scan per liquid content type) and `World::needs_transparent_novis(alphas)`
+    so `novis` is only enabled when an actually translucent liquid (`alpha < 1.0`) is
+    un-vised on the map.
+  - `crates/qrender/src/{frame.rs,water.rs}`: gated `set_transparent_liquids` with
+    `needs_transparent_novis(alphas)`, fast-reset `WaterFx` when both ripples and
+    splashes are disabled, skipped `liquid_surface` / extra map lookups for stationary
+    entities, and avoided duplicate `liquid_surface` queries for moving entities.
+
+  A/B benchmarks on RTX 3060 Ti, `1280×720` headless, `qprof -runs 3 -shots 5` (20 s
+  measured after 4 s warm-up, sim step `1/250 s`) on `ad_sepulcher` and `e1m1`:
+
+  | map | scenario | metric | before | after | change |
+  |---|---|---|--:|--:|--:|
+  | `ad_sepulcher` | `vanilla` | fps / frame µs | 491 / 2035 | 491 / 2036 | +0 / +1 µs |
+  | `ad_sepulcher` | `water` | fps | 450 | 488 | +38 (+8.4%) |
+  | `ad_sepulcher` | `water` | frame / p99 µs | 2225 / 3692 | 2049 / 3119 | −176 / −573 µs (+190→+14 µs vs vanilla) |
+  | `ad_sepulcher` | `water` | render cpu µs | 1190 | 1063 | −127 µs (+169→+46 µs vs vanilla) |
+  | `ad_sepulcher` | `water` | GPU total µs | 2138 | 1962 | −176 µs (+189→+13 µs vs vanilla) |
+  | `ad_sepulcher` | `water` | GPU `cull` / `lightmap` / `world` / `models` (median run) | 68.12 / 122.73 / 95.03 / 45.46 | 25.55 / 27.96 / 70.62 / 30.96 | −42.57 / −94.77 / −24.41 / −14.50 µs |
+  | `e1m1` | `water` | fps / frame / GPU µs | 768 / 1302 / 1206 | 772 / 1294 / 1198 | +4 / −8 / −8 µs |
+
+  Verification: `compare -metric AE = 0` across all 12 `qprof` pairs (`vanilla` and
+  `water` at `05`, `10`, `15` s on `ad_sepulcher` and `e1m1`) and all 4 quiet water-feature
+  screenshots (`e1m1`, `e1m3`, `ad_sepulcher`, `ad_tears`); Vulkan validation clean
+  (`-headless -validation -autoquit 4` on `ad_sepulcher` and `e1m1` with `water` cvars);
+  full `cargo nextest run` (with game data) and `cargo clippy --message-format=short` pass
+  cleanly. Reports: `target/qprof/water-{before,after}/`.
+
+  Next candidate items: remaining Item 4 (GPU billboard expansion / per-view particle
+  culling across multiple views), Item 8 (`ultimate-coop` server p99 spikes), Item 10
+  (`check_water_transition` / `point_contents`), Item 11 (`aim_targets` in co-op).

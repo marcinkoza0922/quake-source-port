@@ -1,23 +1,40 @@
 use super::*;
 
 impl Impacts {
-    pub(super) fn nail(
+    #[allow(clippy::too_many_arguments)]
+    pub(super) fn nail<'a>(
         &mut self,
         world: &BspWorld<'_>,
-        poses: &Poses<'_>,
+        ents: &'a [RenderEntity],
+        dynverts: &[u32],
+        poses: &mut Poses<'a>,
         a: Vec3,
         b: Vec3,
         time: f64,
         hard: bool,
     ) -> bool {
         let tr = world.trace_line(a, b);
+        let ray_end = a.lerp(b, tr.frac);
         let dir = (b - a).normalize();
         let mut nearest = None;
-        for (&key, (e, verts)) in poses {
-            let Some(m) = self.models.get(&e.model) else {
+        for e in ents.iter().rev() {
+            if e.key == 0 || e.viewmodel {
+                continue;
+            }
+            let Some(Some(cm)) = self.models.get(&e.model) else {
                 continue;
             };
-            for t in &m.triangles {
+            if !cm.has_death_pose {
+                continue;
+            }
+            let r = cm.entity_radius(e);
+            if mesh::point_segment_dist_sq(Vec3::from(e.origin), a, ray_end) > r * r {
+                continue;
+            }
+            let (_, verts) = poses
+                .entry(e.key)
+                .or_insert_with(|| (e, mesh::positions(&cm.mdl, e, dynverts, time)));
+            for t in &cm.mdl.triangles {
                 let tri = t.verts.map(|i| i as usize);
                 let v = tri.map(|i| verts[i]);
                 if let Some((f, n)) = mesh::ray(a, b, v)
@@ -30,7 +47,7 @@ impl Impacts {
                     let bary = barycentric(p, v);
                     nearest = Some((
                         f,
-                        key,
+                        e.key,
                         e.model,
                         tri,
                         bary,

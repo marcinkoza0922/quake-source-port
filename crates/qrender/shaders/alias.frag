@@ -63,5 +63,6 @@ void main() {
                 : heat == 2u ? 0.6 + 0.25 * lit + 0.1 * luma(c.rgb) : 0.85 + 0.15 * luma(c.rgb);
         rgb = vec3(min(h + fb, 1.0));
     }
-    o_color = vec4(rgb, pc.light.a);
+    float out_a = ((pc.texs.w & 32u) != 0u && (pc.texs.w & 1u) == 0u) ? c.a * pc.light.a : pc.light.a;
+    o_color = vec4(rgb, out_a);
 }

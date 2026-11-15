@@ -7,6 +7,7 @@ pub mod bsp;
 pub mod bspx;
 pub mod entities;
 pub mod image;
+pub mod md3;
 pub mod mdl;
 pub mod spr;
 pub mod wad;
@@ -14,6 +15,7 @@ pub mod wav;
 
 pub use bsp::{Bsp, BspVersion};
 pub use entities::{Entity, parse_entities};
+pub use md3::Md3;
 pub use mdl::Mdl;
 pub use spr::Spr;
 pub use wad::Wad;

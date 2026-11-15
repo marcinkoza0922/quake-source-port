@@ -87,7 +87,8 @@ impl Renderer {
         ]
         .map(|a| a.clamp(0.0, 1.0));
         if let Some(wg) = &mut self.world {
-            wg.cpu.set_transparent_liquids(alphas.iter().any(|&a| a < 1.0));
+            let need_novis = wg.cpu.needs_transparent_novis(alphas);
+            wg.cpu.set_transparent_liquids(need_novis);
         }
         let time = fr.time;
         let mut styles = [256.0f32; 256];
@@ -107,7 +108,9 @@ impl Renderer {
 
         // liquid ripples/splashes (CPU side); droplets join the particles
         let mut water_parts = Vec::new();
-        if let Some(wg) = &self.world
+        if st.water_ripples <= 0.0 && !st.water_splashes {
+            self.water_fx.reset();
+        } else if let Some(wg) = &self.world
             && primary.is_some()
         {
             let models = &self.models;
@@ -298,15 +301,19 @@ impl Renderer {
                         world_draws.push(wd);
                     }
                     Model::Alias(am) => {
-                        if am.frames.is_empty() || am.num_indices == 0 {
+                        if am.frames.is_empty() || am.surfaces.is_empty() {
                             continue;
                         }
-                        let dynp = match e.dyn_pose {
-                            Some(d) => match dyn_base {
-                                Some(base) => Some((base + d.ofs, d)),
-                                None => continue,
-                            },
-                            None => None,
+                        let dynp = if am.md3 {
+                            None
+                        } else {
+                            match e.dyn_pose {
+                                Some(d) => match dyn_base {
+                                    Some(base) => Some((base + d.ofs, d)),
+                                    None => continue,
+                                },
+                                None => None,
+                            }
                         };
                         let radius = dynp.map_or(am.radius, |(_, d)| d.radius);
                         if portal_draws.is_empty() && !e.viewmodel && !sphere_in_frustum(&vs.frustum, e.origin, radius) {
@@ -317,16 +324,8 @@ impl Renderer {
                             let (first, n, iv) = &am.frames[(f as usize).min(am.frames.len() - 1)];
                             first + group_index(iv, *n as usize, t) as u32
                         };
-                        let (p1, p2) = match dynp {
-                            Some((p, _)) => (p, p),
-                            None => (am.verts_base + pose(e.prev_frame) * am.num_verts, am.verts_base + pose(e.frame) * am.num_verts),
-                        };
-                        let skin = if am.skins.is_empty() {
-                            [NO_TEX; 3]
-                        } else {
-                            let (imgs, iv) = &am.skins[e.skin as usize % am.skins.len()];
-                            imgs[group_index(iv, imgs.len(), t)]
-                        };
+                        let pf1 = pose(e.prev_frame);
+                        let pf2 = pose(e.frame);
                         let local = affine(
                             [
                                 [am.scale[0], 0.0, 0.0],
@@ -384,41 +383,67 @@ impl Renderer {
                         let ang = q / 16.0 * std::f32::consts::TAU;
                         let sv = norm([(-ang).cos(), (-ang).sin(), 1.0]);
                         let alpha = e.alpha.clamp(0.0, 1.0);
-                        let mut flags = 0u32;
-                        if am.holey {
-                            flags |= 1;
-                        }
+                        let mut base_flags = 0u32;
                         if e.fullbright {
-                            flags |= 2;
+                            base_flags |= 2;
                         }
                         let [top, bot] = e.colormap.unwrap_or([1, 6]);
                         if e.colormap.is_some() {
-                            flags |= 4;
+                            base_flags |= 4;
                         }
                         if dynp.is_some() {
-                            flags |= 16;
+                            base_flags |= 16;
                         }
-                        flags |= (e.heat.min(3) as u32) << 8;
-                        let push = AliasPush {
-                            model,
-                            light: [lc[0] / 200.0, lc[1] / 200.0, lc[2] / 200.0, alpha],
-                            shadevec: [sv[0], sv[1], sv[2], e.lerp.clamp(0.0, 1.0)],
-                            poses: [p1, p2, top.min(13) as u32, bot.min(13) as u32],
-                            texs: [skin[0], skin[1], skin[2], flags],
+                        if am.md3 {
+                            base_flags |= 32;
+                        }
+                        base_flags |= (e.heat.min(3) as u32) << 8;
+                        let stride = if am.md3 { 2 } else { 1 };
+                        let prev_r = if !(e.portal_only || (alpha < 1.0 && !e.viewmodel)) {
+                            prev_rows(e, Some(&local))
+                        } else {
+                            None
                         };
-                        if e.portal_only {
-                            // portal views only (see draw_portals)
-                        } else if alpha < 1.0 && !e.viewmodel {
-                            trans.push((dist, Trans::Alias(alias_draws.len())));
-                        } else if let Some(r) = prev_rows(e, Some(&local)) {
-                            vel_draws.push(VelDraw::Alias(alias_draws.len(), r));
+                        for surf in &am.surfaces {
+                            if surf.num_indices == 0 {
+                                continue;
+                            }
+                            let (p1, p2) = match dynp {
+                                Some((p, _)) => (p, p),
+                                None => (
+                                    surf.verts_base + pf1 * surf.num_verts * stride,
+                                    surf.verts_base + pf2 * surf.num_verts * stride,
+                                ),
+                            };
+                            let skin = if surf.skins.is_empty() {
+                                [NO_TEX; 3]
+                            } else {
+                                let (imgs, iv) = &surf.skins[e.skin as usize % surf.skins.len()];
+                                imgs[group_index(iv, imgs.len(), t)]
+                            };
+                            let push = AliasPush {
+                                model,
+                                light: [lc[0] / 200.0, lc[1] / 200.0, lc[2] / 200.0, alpha],
+                                shadevec: [sv[0], sv[1], sv[2], e.lerp.clamp(0.0, 1.0)],
+                                poses: [p1, p2, top.min(13) as u32, bot.min(13) as u32],
+                                texs: [skin[0], skin[1], skin[2], base_flags | u32::from(surf.holey)],
+                            };
+                            if e.portal_only {
+                                // portal views only (see draw_portals)
+                            } else if alpha < 1.0 && !e.viewmodel {
+                                trans.push((dist, Trans::Alias(alias_draws.len())));
+                            } else if let Some(r) = prev_r {
+                                vel_draws.push(VelDraw::Alias(alias_draws.len(), r));
+                            }
+                            alias_draws.push(AliasDraw {
+                                model: e.model.0 as usize,
+                                first_index: surf.first_index,
+                                num_indices: surf.num_indices,
+                                push,
+                                viewmodel: e.viewmodel,
+                                portal_only: e.portal_only,
+                            });
                         }
-                        alias_draws.push(AliasDraw {
-                            model: e.model.0 as usize,
-                            push,
-                            viewmodel: e.viewmodel,
-                            portal_only: e.portal_only,
-                        });
                     }
                     Model::Sprite(sm) => {
                         if sm.frames.is_empty()
@@ -1238,7 +1263,7 @@ impl Renderer {
                     dev.cmd_bind_vertex_buffers(cmd, 0, &[am.vbuf.buf], &[0]);
                     dev.cmd_bind_index_buffer(cmd, am.ibuf.buf, 0, vk::IndexType::UINT32);
                     push(bytes_of(&[a.push]));
-                    dev.cmd_draw_indexed(cmd, am.num_indices, 1, 0, 0, 0);
+                    dev.cmd_draw_indexed(cmd, a.num_indices, 1, a.first_index, 0, 0);
                 };
                 for a in alias_draws
                     .iter()
@@ -1443,9 +1468,14 @@ impl Renderer {
                                     push(bytes_of(&[VelPush {
                                         model: a.push.model,
                                         prev,
-                                        misc: [pp[0], pp[1], a.push.shadevec[3].to_bits(), samples],
+                                        misc: [
+                                            pp[0],
+                                            pp[1],
+                                            a.push.shadevec[3].to_bits(),
+                                            samples | (u32::from(am.md3) << 16),
+                                        ],
                                     }]));
-                                    dev.cmd_draw_indexed(cmd, am.num_indices, 1, 0, 0, 0);
+                                    dev.cmd_draw_indexed(cmd, a.num_indices, 1, a.first_index, 0, 0);
                                 }
                                 VelDraw::World(i, prev) => {
                                     let Some(wg) = &self.world else { continue };

@@ -212,7 +212,7 @@ fn soldier_wounds_attach_to_skin_and_remain_on_deformed_mesh() {
     let p = (tri[0] + tri[1] + tri[2]) / 3.0;
     let n = (tri[1] - tri[0]).cross(tri[2] - tri[0]).normalize();
     let mut blood = Blood::default();
-    blood.models.insert(e.model, m);
+    blood.models.insert(e.model, Some(mesh::CachedMdl::from_mdl(m, false)));
     blood.wound(&e, &v, p, n, 0.0, 5.0);
     assert_eq!(blood.marks.len(), 1);
     let patch = &blood.marks[0].patches[0];
@@ -326,4 +326,90 @@ fn closest_skin_point_handles_faces_edges_vertices_and_degenerate_triangles() {
         closest_triangle(Vec3::new(1.0, 2.0, 3.0), [Vec3::ZERO; 3]),
         Vec3::ZERO
     );
+}
+
+#[test]
+fn cached_mdl_and_segment_culling_helpers() {
+    for name in ["death1", "DEATHb9", "axDeth5", "dth3", "Die2", "Dead"] {
+        assert!(is_death_name(name), "{name} should be detected as death pose");
+    }
+    for name in ["stand1", "pain3", "attack", "de"] {
+        assert!(!is_death_name(name), "{name} should not be a death pose");
+    }
+    assert!(is_mdl_path("progs/soldier.mdl"));
+    assert!(is_mdl_path("PROGS/WIZARD.MDL"));
+    assert!(!is_mdl_path("*12"));
+    assert!(!is_mdl_path("progs/s_explod.spr"));
+    assert!(!is_mdl_path("maps/e1m1.bsp"));
+
+    assert!((point_segment_dist_sq(Vec3::new(5.0, 3.0, 0.0), Vec3::ZERO, Vec3::new(10.0, 0.0, 0.0)) - 9.0).abs() < 1e-5);
+    assert!((point_segment_dist_sq(Vec3::new(-4.0, 3.0, 0.0), Vec3::ZERO, Vec3::new(10.0, 0.0, 0.0)) - 25.0).abs() < 1e-5);
+    assert!((point_segment_dist_sq(Vec3::new(14.0, 3.0, 0.0), Vec3::ZERO, Vec3::new(10.0, 0.0, 0.0)) - 25.0).abs() < 1e-5);
+    assert!((point_segment_dist_sq(Vec3::new(3.0, 4.0, 0.0), Vec3::ZERO, Vec3::ZERO) - 25.0).abs() < 1e-5);
+
+    use qformats::mdl::{Frame, Pose, TriVert};
+    let v0 = TriVert {
+        v: [0, 0, 0],
+        normal: 0,
+    };
+    let m = Mdl {
+        scale: [1.0; 3],
+        scale_origin: [0.0; 3],
+        bounding_radius: 1.0,
+        eye_position: [0.0; 3],
+        skin_width: 1,
+        skin_height: 1,
+        num_verts: 2,
+        synctype: 0,
+        flags: 0,
+        size: 1.0,
+        skins: Vec::new(),
+        stverts: Vec::new(),
+        triangles: Vec::new(),
+        frames: vec![
+            Frame {
+                bboxmin: v0,
+                bboxmax: v0,
+                intervals: vec![0.1],
+                poses: vec![Pose {
+                    name: "stand1".into(),
+                    bboxmin: v0,
+                    bboxmax: v0,
+                    verts: vec![v0, TriVert { v: [3, 4, 0], normal: 0 }],
+                }],
+            },
+            Frame {
+                bboxmin: v0,
+                bboxmax: v0,
+                intervals: vec![0.1],
+                poses: vec![Pose {
+                    name: "DEATH1".into(),
+                    bboxmin: v0,
+                    bboxmax: v0,
+                    verts: vec![v0, TriVert { v: [0, 0, 12], normal: 0 }],
+                }],
+            },
+        ],
+    };
+    let cm = CachedMdl::from_mdl(m, false);
+    assert!(cm.is_flesh);
+    assert!(cm.has_death_pose);
+    assert!(!cm.is_gib_or_head);
+    assert!((cm.radius - 12.0).abs() < 1e-5);
+    let mut e = RenderEntity::default();
+    assert!(!cm.is_corpse(&e));
+    assert!((cm.entity_radius(&e) - 13.0).abs() < 1e-5);
+    e.frame = 1;
+    assert!(cm.is_corpse(&e));
+    e.frame = 0;
+    e.dyn_pose = Some(qrender::DynPose {
+        ofs: 0,
+        origin: [0.0; 3],
+        scale: [1.0; 3],
+        radius: 20.0,
+    });
+    assert!(cm.is_corpse(&e));
+    assert!((cm.entity_radius(&e) - 21.0).abs() < 1e-5);
+    e.dyn_pose.as_mut().unwrap().radius = 0.0;
+    assert!(cm.entity_radius(&e).is_infinite());
 }

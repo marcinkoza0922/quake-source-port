@@ -1,6 +1,7 @@
 //! Palette → RGBA conversion and model preprocessing (no GPU).
 
 use qformats::bsp::{MipTex, TextureKind};
+use qformats::md3::Md3Surface;
 use qformats::mdl::Mdl;
 
 pub type Palette = [[u8; 3]; 256];
@@ -250,6 +251,59 @@ pub fn alias_poses(m: &Mdl) -> (Vec<u32>, Vec<FrameInfo>) {
         frames.push((first, pose - first, f.intervals.clone()));
     }
     (out, frames)
+}
+
+/// Builds deduplicated vertex/index data and packed 16-bit pose data (`2 * u32`
+/// per vertex: `[xyz_xy, xyz_z | lat<<16 | lng<<24]`) for one MD3 surface.
+/// `vertex_offset` is added to emitted indices so multiple surfaces can share
+/// a single vertex buffer while keeping `AliasVertex.vert` surface-local.
+pub fn md3_surface(
+    s: &Md3Surface,
+    num_frames: usize,
+    vertex_offset: u32,
+) -> (Vec<AliasVertex>, Vec<u32>, Vec<u32>, u32) {
+    let mut remap: Vec<Option<u32>> = vec![None; s.num_verts];
+    let mut orig: Vec<usize> = Vec::new();
+    let mut verts = Vec::new();
+    let mut idx = Vec::with_capacity(s.triangles.len() * 3);
+    for tri in &s.triangles {
+        for &v in tri {
+            let vi = v as usize;
+            let local = match remap.get(vi).copied().flatten() {
+                Some(i) => i,
+                None => {
+                    let i = verts.len() as u32;
+                    if vi < remap.len() {
+                        remap[vi] = Some(i);
+                    }
+                    orig.push(vi);
+                    verts.push(AliasVertex {
+                        vert: i,
+                        st: s.st.get(vi).copied().unwrap_or([0.0, 0.0]),
+                    });
+                    i
+                }
+            };
+            idx.push(vertex_offset + local);
+        }
+    }
+    let used = verts.len();
+    let mut poses = Vec::with_capacity(num_frames * used * 2);
+    for f in 0..num_frames {
+        let base = f * s.num_verts;
+        for &oi in &orig {
+            let v = s.verts.get(base + oi).copied().unwrap_or(qformats::md3::Md3Vert {
+                xyz: [0; 3],
+                normal: [0; 2],
+            });
+            let x = (v.xyz[0] as i32 + 32768) as u32;
+            let y = (v.xyz[1] as i32 + 32768) as u32;
+            let z = (v.xyz[2] as i32 + 32768) as u32;
+            poses.push((x & 0xffff) | ((y & 0xffff) << 16));
+            poses.push((z & 0xffff) | ((v.normal[0] as u32) << 16) | ((v.normal[1] as u32) << 24));
+        }
+    }
+    (verts, idx, poses, used as u32)
 }
 
 /// Picks the image of a timed group (frame/skin groups).

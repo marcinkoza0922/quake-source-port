@@ -346,9 +346,8 @@ impl Host {
         let (view, gun) = if self.cl.signon == 4 && !self.level.mapname.is_empty() {
             let mut cv = self.view_cvars();
             if self.toy.held.is_some() { cv.viewmodel = crate::view::weapon::Alignment::Hidden; }
-            let (mut v, g) = self.view.calc_refdef(&self.cl, &cv, &self.level, ft);
+            let (mut v, g) = self.view.calc_refdef(&mut self.cl, &cv, &self.level, ft);
             self.place_camera(None, &mut v, ft);
-            self.cl.viewent.lerpflags &= !qclient::LERP_RESETANIM;
             if self.classic_hud() && self.cl.intermission == 0 {
                 let (_, h) = self.r.size();
                 v.reserve_bottom = (CLASSIC_SBAR_LINES * crate::draw::Canvas::new(1, h).scale) as u32;

@@ -32,6 +32,58 @@ impl Renderer {
         Ok(())
     }
 
+    fn upload_alias_buffers(
+        &mut self,
+        mut up: gpu::Upload,
+        verts: &[convert::AliasVertex],
+        idx: &[u32],
+        poses: &[u32],
+    ) -> Result<(gpu::Buffer, gpu::Buffer, u32)> {
+        let usage = vk::BufferUsageFlags::TRANSFER_DST;
+        let vb = bytes_of(verts);
+        let vbuf = self.gpu.buffer(
+            (vb.len() as u64).max(4),
+            usage | vk::BufferUsageFlags::VERTEX_BUFFER,
+            false,
+        )?;
+        if !vb.is_empty() {
+            self.gpu.upload_buffer(&mut up, vbuf.buf, 0, vb)?;
+        }
+        let ib = bytes_of(idx);
+        let ibuf = self.gpu.buffer(
+            (ib.len() as u64).max(4),
+            usage | vk::BufferUsageFlags::INDEX_BUFFER,
+            false,
+        )?;
+        if !ib.is_empty() {
+            self.gpu.upload_buffer(&mut up, ibuf.buf, 0, ib)?;
+        }
+        let base = self.alias_cpu.len() as u32;
+        if !poses.is_empty() {
+            self.alias_cpu.extend_from_slice(poses);
+            let need = (self.alias_cpu.len() * 4) as u64;
+            if need > self.alias_buf.size {
+                let nb = self.gpu.buffer(
+                    (need * 2).max(4 << 20),
+                    vk::BufferUsageFlags::STORAGE_BUFFER | vk::BufferUsageFlags::TRANSFER_DST,
+                    false,
+                )?;
+                self.gpu
+                    .upload_buffer(&mut up, nb.buf, 0, bytes_of(&self.alias_cpu))?;
+                let old = std::mem::replace(&mut self.alias_buf, nb);
+                self.gpu.end_upload(up)?;
+                self.gpu.free_buffer(old);
+                self.write_static_descriptors();
+                return Ok((vbuf, ibuf, base));
+            }
+            let dst = self.alias_buf.buf;
+            self.gpu
+                .upload_buffer(&mut up, dst, base as u64 * 4, bytes_of(poses))?;
+        }
+        self.gpu.end_upload(up)?;
+        Ok((vbuf, ibuf, base))
+    }
+
     /// Loads an alias model.
     pub fn load_alias(&mut self, mdl: &Mdl) -> Result<ModelId> {
         self.load_alias_glow(mdl, &[])
@@ -75,46 +127,7 @@ impl Renderer {
             }
             skins.push((imgs, s.intervals.clone()));
         }
-        let usage = vk::BufferUsageFlags::TRANSFER_DST;
-        let vb = bytes_of(&verts);
-        let vbuf = self.gpu.buffer(
-            vb.len() as u64,
-            usage | vk::BufferUsageFlags::VERTEX_BUFFER,
-            false,
-        )?;
-        self.gpu.upload_buffer(&mut up, vbuf.buf, 0, vb)?;
-        let ib = bytes_of(&idx);
-        let ibuf = self.gpu.buffer(
-            ib.len() as u64,
-            usage | vk::BufferUsageFlags::INDEX_BUFFER,
-            false,
-        )?;
-        self.gpu.upload_buffer(&mut up, ibuf.buf, 0, ib)?;
-        let base = self.alias_cpu.len() as u32;
-        self.alias_cpu.extend_from_slice(&poses);
-        let need = (self.alias_cpu.len() * 4) as u64;
-        let mut grow = false;
-        if need > self.alias_buf.size {
-            let nb = self.gpu.buffer(
-                (need * 2).max(4 << 20),
-                vk::BufferUsageFlags::STORAGE_BUFFER | vk::BufferUsageFlags::TRANSFER_DST,
-                false,
-            )?;
-            self.gpu
-                .upload_buffer(&mut up, nb.buf, 0, bytes_of(&self.alias_cpu))?;
-            let old = std::mem::replace(&mut self.alias_buf, nb);
-            self.gpu.end_upload(up)?;
-            self.gpu.free_buffer(old);
-            grow = true;
-        } else {
-            let dst = self.alias_buf.buf;
-            self.gpu
-                .upload_buffer(&mut up, dst, base as u64 * 4, bytes_of(&poses))?;
-            self.gpu.end_upload(up)?;
-        }
-        if grow {
-            self.write_static_descriptors();
-        }
+        let (vbuf, ibuf, base) = self.upload_alias_buffers(up, &verts, &idx, &poses)?;
         let mut maxs_z: f32 = 0.0;
         let mut radius: f32 = mdl.bounding_radius;
         for f in &mdl.frames {
@@ -128,16 +141,150 @@ impl Renderer {
         self.models.push(Model::Alias(Box::new(AliasModel {
             vbuf,
             ibuf,
-            num_indices: idx.len() as u32,
-            verts_base: base,
-            num_verts: mdl.num_verts as u32,
+            surfaces: vec![AliasSurface {
+                first_index: 0,
+                num_indices: idx.len() as u32,
+                verts_base: base,
+                num_verts: mdl.num_verts as u32,
+                skins,
+                holey,
+            }],
             frames,
-            skins,
             scale: mdl.scale,
             scale_origin: mdl.scale_origin,
             radius,
             maxs_z,
-            holey,
+            md3: false,
+        })));
+        Ok(ModelId(self.models.len() as u32 - 1))
+    }
+
+    /// Converts a palette-indexed MD3 skin image into RGBA base, fullbright and
+    /// player colour-translation map buffers using the renderer palette.
+    pub fn md3_indexed_skin(
+        &self,
+        width: u32,
+        height: u32,
+        pixels: &[u8],
+        holey: bool,
+    ) -> Md3SkinImage {
+        let (base, fb, cmap) = convert::alias_skin(&self.palette, pixels, holey);
+        Md3SkinImage {
+            width,
+            height,
+            base,
+            fb: fb.map(|d| (width, height, d)),
+            cmap: cmap.map(|d| (width, height, d)),
+        }
+    }
+
+    /// Loads an MD3 model with pre-decoded per-surface skins.
+    pub fn load_md3(&mut self, md3: &Md3, surface_skins: &[Md3SurfaceSkins]) -> Result<ModelId> {
+        self.idle();
+        let num_frames = md3.frames.len();
+        let mut all_verts = Vec::new();
+        let mut all_idx = Vec::new();
+        let mut all_poses = Vec::new();
+        struct PendingSurf {
+            first_index: u32,
+            num_indices: u32,
+            pose_ofs: u32,
+            num_verts: u32,
+            skins: Vec<(Vec<[u32; 3]>, Vec<f32>)>,
+            holey: bool,
+        }
+        let mut up = self.gpu.begin_upload()?;
+        let mut pending = Vec::with_capacity(md3.surfaces.len());
+        for (si, s) in md3.surfaces.iter().enumerate() {
+            let first_index = all_idx.len() as u32;
+            let (sv, s_idx, sp, used) =
+                convert::md3_surface(s, num_frames, all_verts.len() as u32);
+            let pose_ofs = all_poses.len() as u32;
+            all_verts.extend_from_slice(&sv);
+            all_idx.extend_from_slice(&s_idx);
+            all_poses.extend_from_slice(&sp);
+            let mut skins = Vec::new();
+            let spec = surface_skins.get(si);
+            if let Some(ss) = spec {
+                for (frames, intervals) in &ss.skins {
+                    let mut imgs = Vec::with_capacity(frames.len());
+                    for img in frames {
+                        let bs = self.add_texture(
+                            &mut up,
+                            img.width,
+                            img.height,
+                            &[&img.base],
+                            true,
+                            Sampling::World,
+                        )?;
+                        let fs = match &img.fb {
+                            Some((w, h, data)) => self.add_texture(
+                                &mut up,
+                                *w,
+                                *h,
+                                &[data],
+                                true,
+                                Sampling::World,
+                            )?,
+                            None => NO_TEX,
+                        };
+                        let cs = match &img.cmap {
+                            Some((w, h, data)) => self.add_texture(
+                                &mut up,
+                                *w,
+                                *h,
+                                &[data],
+                                true,
+                                Sampling::Nearest,
+                            )?,
+                            None => NO_TEX,
+                        };
+                        imgs.push([bs, fs, cs]);
+                    }
+                    skins.push((imgs, intervals.clone()));
+                }
+            }
+            pending.push(PendingSurf {
+                first_index,
+                num_indices: s_idx.len() as u32,
+                pose_ofs,
+                num_verts: used,
+                skins,
+                holey: spec.is_some_and(|ss| ss.holey),
+            });
+        }
+        let (vbuf, ibuf, base) = self.upload_alias_buffers(up, &all_verts, &all_idx, &all_poses)?;
+        let surfaces = pending
+            .into_iter()
+            .map(|p| AliasSurface {
+                first_index: p.first_index,
+                num_indices: p.num_indices,
+                verts_base: base + p.pose_ofs,
+                num_verts: p.num_verts,
+                skins: p.skins,
+                holey: p.holey,
+            })
+            .collect();
+        let frames = (0..num_frames).map(|f| (f as u32, 1, Vec::new())).collect();
+        let mut maxs_z: f32 = 0.0;
+        let mut radius: f32 = 0.0;
+        for f in &md3.frames {
+            maxs_z = maxs_z.max(f.bounds[1][2]);
+            radius = radius
+                .max(f.radius)
+                .max(world::dot(f.bounds[0], f.bounds[0]).sqrt())
+                .max(world::dot(f.bounds[1], f.bounds[1]).sqrt());
+        }
+        self.models.push(Model::Alias(Box::new(AliasModel {
+            vbuf,
+            ibuf,
+            surfaces,
+            frames,
+            scale: [qformats::md3::XYZ_SCALE; 3],
+            scale_origin: [0.0; 3],
+            radius,
+            maxs_z,
+            md3: true,
         })));
         Ok(ModelId(self.models.len() as u32 - 1))
     }

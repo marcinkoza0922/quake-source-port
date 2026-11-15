@@ -116,21 +116,27 @@ pub(super) struct WorldCull {
     pub(super) framecount: u32,
 }
 
-pub(super) struct AliasModel {
-    pub(super) vbuf: Buffer,
-    pub(super) ibuf: Buffer,
+pub(super) struct AliasSurface {
+    pub(super) first_index: u32,
     pub(super) num_indices: u32,
     pub(super) verts_base: u32,
     pub(super) num_verts: u32,
-    /// (first pose, pose count, intervals)
-    pub(super) frames: Vec<convert::FrameInfo>,
     /// Per skin group: images as [base, fb, cmap] slots + intervals.
     pub(super) skins: Vec<(Vec<[u32; 3]>, Vec<f32>)>,
+    pub(super) holey: bool,
+}
+
+pub(super) struct AliasModel {
+    pub(super) vbuf: Buffer,
+    pub(super) ibuf: Buffer,
+    pub(super) surfaces: Vec<AliasSurface>,
+    /// (first pose, pose count, intervals)
+    pub(super) frames: Vec<convert::FrameInfo>,
     pub(super) scale: [f32; 3],
     pub(super) scale_origin: [f32; 3],
     pub(super) radius: f32,
     pub(super) maxs_z: f32,
-    pub(super) holey: bool,
+    pub(super) md3: bool,
 }
 
 pub(super) struct SpriteFrameGpu {

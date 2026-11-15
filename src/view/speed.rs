@@ -50,10 +50,10 @@ mod tests {
         };
         let lv = crate::assets::Level::default();
         let mut state = ViewState::default();
-        assert_eq!(state.calc_refdef(&cl, &cv, &lv, 0.0).0.speed_blur, 1.0);
+        assert_eq!(state.calc_refdef(&mut cl, &cv, &lv, 0.0).0.speed_blur, 1.0);
         assert_eq!(
             state
-                .calc_refdef(&cl, &cv.reduce_motion(true), &lv, 0.0)
+                .calc_refdef(&mut cl, &cv.reduce_motion(true), &lv, 0.0)
                 .0
                 .speed_blur,
             0.0
@@ -63,16 +63,16 @@ mod tests {
             ..cv
         };
         assert_eq!(
-            state.calc_refdef(&cl, &disabled, &lv, 0.0).0.speed_blur,
+            state.calc_refdef(&mut cl, &disabled, &lv, 0.0).0.speed_blur,
             0.0
         );
         cl.stats[STAT_HEALTH] = 0;
-        assert_eq!(state.calc_refdef(&cl, &cv, &lv, 0.0).0.speed_blur, 0.0);
+        assert_eq!(state.calc_refdef(&mut cl, &cv, &lv, 0.0).0.speed_blur, 0.0);
         cl.stats[STAT_HEALTH] = 100;
         cl.intermission = 1;
-        assert_eq!(state.calc_refdef(&cl, &cv, &lv, 0.0).0.speed_blur, 0.0);
+        assert_eq!(state.calc_refdef(&mut cl, &cv, &lv, 0.0).0.speed_blur, 0.0);
         cl.intermission = 0;
         cl.velocity = [0.0; 3];
-        assert_eq!(state.calc_refdef(&cl, &cv, &lv, 0.0).0.speed_blur, 0.0);
+        assert_eq!(state.calc_refdef(&mut cl, &cv, &lv, 0.0).0.speed_blur, 0.0);
     }
 }

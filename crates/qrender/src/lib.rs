@@ -30,7 +30,7 @@ use gpu::{Buffer, Gpu, Image};
 use pipelines::{COLOR_FORMAT, DEPTH_FORMAT, LM_FORMAT, MAX_TEXTURES, Pipelines};
 use qformats::bsp::{Bsp, TextureKind};
 use qformats::image::Pic;
-use qformats::{Mdl, Spr};
+use qformats::{Md3, Mdl, Spr};
 #[path = "lib/targets.rs"]
 mod targets;
 #[path = "lib/assets.rs"]

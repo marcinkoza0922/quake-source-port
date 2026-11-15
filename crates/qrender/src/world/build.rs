@@ -6,6 +6,7 @@ impl World {
         let has_light = !bsp.lighting.is_empty();
         let mut w = World {
             transparent_liquids: false,
+            water_vised: 0,
             hidden_surfaces: Default::default(),
             texture_names: bsp.textures.iter().map(|t| t.as_ref().map_or_else(String::new, |t| t.name.clone())).collect(),
             light_cache: Default::default(),
@@ -36,6 +37,7 @@ impl World {
             },
         };
         w.append(bsp, lit, 0);
+        w.water_vised = w.check_water_vis();
         if let Some(m) = bsp.models.first() {
             w.bake_liquid(m.first_face.max(0) as usize, m.num_faces.max(0) as usize);
         }

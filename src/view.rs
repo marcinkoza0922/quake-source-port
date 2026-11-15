@@ -1,7 +1,10 @@
 //! V_CalcRefdef (view.c): bob, roll, view height, punch, damage kick,
 //! colour shifts and the view model; plus building the render entity list.
 
-use qclient::{ClientEntity, ClientState, LERP_FINISH, LERP_MOVESTEP, LERP_RESETANIM, LERP_RESETMOVE};
+use qclient::{
+    ClientEntity, ClientState, LERP_FINISH, LERP_MOVESTEP, LERP_RESETANIM, LERP_RESETANIM2,
+    LERP_RESETMOVE,
+};
 use qcore::math::{Vec3, angle_vectors};
 use qnet::protocol::*;
 use qrender::{DLight, Particle, RenderEntity, View};
@@ -179,7 +182,7 @@ impl ViewState {
 
     /// V_CalcRefdef (or V_CalcIntermissionRefdef). Returns the view and the
     /// view model entity, if one should be drawn.
-    pub fn calc_refdef(&mut self, cl: &ClientState, cv: &ViewCvars, lv: &Level, ft: f32) -> (View, Option<RenderEntity>) {
+    pub fn calc_refdef(&mut self, cl: &mut ClientState, cv: &ViewCvars, lv: &Level, ft: f32) -> (View, Option<RenderEntity>) {
         let ent = cl.entities.get(cl.viewentity).cloned().unwrap_or_default();
         let mut view = View { origin: ent.origin, angles: cl.viewangles, fov_x: cv.fov, ..Default::default() };
         if cl.intermission != 0 {
@@ -243,35 +246,22 @@ impl ViewState {
         let show = cv.viewmodel.visible() && !dead && cl.items & IT_INVISIBILITY == 0 && wmodel != 0;
         let gun = lv.models.get(wmodel).copied().flatten().filter(|_| show).map(|m| {
             let frame = cl.stats[STAT_WEAPONFRAME];
-            let a = &mut self.view_anim;
-            if a.model != wmodel || cl.viewent.lerpflags & LERP_RESETANIM != 0 {
-                if a.model != wmodel {
-                    a.prev = frame;
-                } else {
-                    a.prev = a.frame;
-                }
-                a.model = wmodel;
-                a.frame = frame;
-                a.start = cl.time;
-            } else if a.frame != frame {
-                a.prev = a.frame;
-                a.frame = frame;
-                a.start = cl.time;
-            }
-            // view->lerpfinish = ent->lerpfinish when the server sent one
-            let lerp = if !cv.lerp_models {
-                1.0
-            } else if ent.lerpflags & LERP_FINISH != 0 && ent.lerpfinish > a.start {
-                (((cl.time - a.start) / (ent.lerpfinish - a.start)) as f32).clamp(0.0, 1.0)
-            } else {
-                (((cl.time - a.start) / 0.1) as f32).clamp(0.0, 1.0)
-            };
+            let (f, prev, lerp) = Self::alias_frame(
+                &mut self.view_anim,
+                wmodel,
+                frame,
+                &mut cl.viewent.lerpflags,
+                cl.time,
+                cv.lerp_models,
+                ent.lerpflags & LERP_FINISH != 0,
+                ent.lerpfinish,
+            );
             RenderEntity {
                 model: m.id,
                 origin: (Vec3::from(gorg) + cv.viewmodel.offset(view.angles)).to_array(),
                 angles: gun_angles,
-                frame: frame.max(0) as u32,
-                prev_frame: a.prev.max(0) as u32,
+                frame: f,
+                prev_frame: prev,
                 lerp,
                 viewmodel: true,
                 alpha: 1.0,
@@ -281,28 +271,51 @@ impl ViewState {
         (view, gun)
     }
 
-    /// R_SetupAliasFrame: (frame, prev_frame, blend). Consumes LERP_RESETANIM.
-    fn anim_lerp(a: &mut Anim, e: &mut ClientEntity, time: f64, enabled: bool) -> (u32, u32, f32) {
-        if a.model != e.model || e.lerpflags & LERP_RESETANIM != 0 {
-            a.model = e.model;
-            a.frame = e.frame;
-            a.prev = e.frame;
+    /// R_SetupAliasFrame: (frame, prev_frame, blend). Consumes LERP_RESETANIM / LERP_RESETANIM2.
+    #[allow(clippy::too_many_arguments)]
+    fn alias_frame(
+        a: &mut Anim,
+        model: usize,
+        frame: i32,
+        lerpflags: &mut u32,
+        time: f64,
+        enabled: bool,
+        has_finish: bool,
+        lerpfinish: f64,
+    ) -> (u32, u32, f32) {
+        if a.model != model || *lerpflags & LERP_RESETANIM != 0 {
+            a.model = model;
+            a.frame = frame;
+            a.prev = frame;
             a.start = time - 1.0;
-            e.lerpflags &= !LERP_RESETANIM;
-        } else if a.frame != e.frame {
-            a.prev = a.frame;
-            a.frame = e.frame;
-            a.start = time;
+            *lerpflags &= !LERP_RESETANIM;
+        } else if a.frame != frame {
+            if *lerpflags & LERP_RESETANIM2 != 0 {
+                a.prev = frame;
+                a.frame = frame;
+                a.start = time - 1.0;
+                *lerpflags &= !LERP_RESETANIM2;
+            } else {
+                a.prev = a.frame;
+                a.frame = frame;
+                a.start = time;
+            }
         }
         if !enabled {
             return (a.frame.max(0) as u32, a.frame.max(0) as u32, 1.0);
         }
-        let blend = if e.lerpflags & LERP_FINISH != 0 && e.lerpfinish > a.start {
-            ((time - a.start) / (e.lerpfinish - a.start)) as f32
+        let blend = if has_finish && lerpfinish > a.start {
+            ((time - a.start) / (lerpfinish - a.start)) as f32
         } else {
             ((time - a.start) / 0.1) as f32
         };
         (a.frame.max(0) as u32, a.prev.max(0) as u32, blend.clamp(0.0, 1.0))
+    }
+
+    fn anim_lerp(a: &mut Anim, e: &mut ClientEntity, time: f64, enabled: bool) -> (u32, u32, f32) {
+        let has_finish = e.lerpflags & LERP_FINISH != 0;
+        let lerpfinish = e.lerpfinish;
+        Self::alias_frame(a, e.model, e.frame, &mut e.lerpflags, time, enabled, has_finish, lerpfinish)
     }
 
     /// R_SetupEntityTransform: smoothed (origin, angles). Consumes LERP_RESETMOVE.
@@ -478,5 +491,37 @@ mod movement_tests {
             let halfway = ViewState::move_lerp(&mut anim, e, 1.15, true).0;
             assert!((halfway[0] - start[0] - 10.0).abs() < 0.001);
         }
+    }
+
+    #[test]
+    fn muzzleflash_resetanim_and_resetanim2_skip_lerp_both_ways() {
+        let mut anim = Anim::default();
+        let mut flags = 0u32;
+        // Idle at frame 10.
+        assert_eq!(ViewState::alias_frame(&mut anim, 1, 10, &mut flags, 1.0, true, false, 0.0), (10, 10, 1.0));
+
+        // Muzzleflash fires: server sets EF_MUZZLEFLASH -> relink sets LERP_RESETANIM | LERP_RESETANIM2.
+        flags |= LERP_RESETANIM | LERP_RESETANIM2;
+        let (f, prev, _) = ViewState::alias_frame(&mut anim, 1, 11, &mut flags, 1.02, true, false, 0.0);
+        assert_eq!((f, prev), (11, 11), "flash frame must snap, not lerp from idle");
+        assert_eq!(flags & LERP_RESETANIM, 0);
+        assert_ne!(flags & LERP_RESETANIM2, 0, "RESETANIM2 stays until next pose change");
+
+        // Next render tick on the same flash frame keeps RESETANIM2 armed.
+        let (f, prev, _) = ViewState::alias_frame(&mut anim, 1, 11, &mut flags, 1.03, true, false, 0.0);
+        assert_eq!((f, prev), (11, 11));
+        assert_ne!(flags & LERP_RESETANIM2, 0);
+
+        // Next animation frame (flash disappears): RESETANIM2 prevents lerping out of flash.
+        let (f, prev, _) = ViewState::alias_frame(&mut anim, 1, 12, &mut flags, 1.05, true, false, 0.0);
+        assert_eq!((f, prev), (12, 12), "post-flash frame must snap, not morph flash back in");
+        assert_eq!(flags & LERP_RESETANIM2, 0);
+
+        // Subsequent recoil frames lerp smoothly.
+        let (f, prev, blend) = ViewState::alias_frame(&mut anim, 1, 13, &mut flags, 1.075, true, false, 0.0);
+        assert_eq!((f, prev, blend), (13, 12, 0.0));
+        let (f, prev, blend) = ViewState::alias_frame(&mut anim, 1, 13, &mut flags, 1.125, true, false, 0.0);
+        assert_eq!((f, prev), (13, 12));
+        assert!((blend - 0.5).abs() < 0.001);
     }
 }

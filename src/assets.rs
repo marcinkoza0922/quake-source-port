@@ -10,6 +10,8 @@ use qformats::{Bsp, Mdl, Spr, parse_entities};
 use qrender::{Fog, ModelId, Renderer};
 use qsound::{Sfx, SoundSystem};
 
+mod md3;
+
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum Kind {
     Brush,
@@ -22,11 +24,13 @@ pub struct Model {
     pub id: ModelId,
     pub kind: Kind,
     pub flags: u32,
+    pub md3: bool,
 }
 
 #[derive(Default)]
 pub struct Level {
     pub mapname: String,
+    pub enhanced_models: bool,
     /// Indexed by client model index.
     pub models: Vec<Option<Model>>,
     /// Indexed by client sound index.
@@ -34,6 +38,8 @@ pub struct Level {
     /// Models by name (temp entities, beams).
     pub by_name: HashMap<String, Option<Model>>,
     pub bsp: Option<Bsp>,
+    /// Lazily initialized BSP collision model shared across client FX systems.
+    pub cm: std::sync::OnceLock<qworld::CollisionModel>,
     pub world_fog: Fog,
     pub world_sky: String,
     /// Worldspawn `[_]wateralpha`/`lavaalpha`/`slimealpha`/`telealpha`
@@ -41,25 +47,49 @@ pub struct Level {
     pub liquid_alpha: [Option<f32>; 4],
 }
 
-fn load_model(fs: &Fs, r: &mut Renderer, name: &str) -> Option<Model> {
+fn load_model(fs: &Fs, r: &mut Renderer, name: &str, enhanced_models: bool) -> Option<Model> {
     let data = fs.open(name)?;
     if data.len() >= 4 && &data[..4] == b"IDPO" {
         let m = Mdl::parse(&data).ok()?;
+        let flags = m.flags as u32;
+        if enhanced_models && let Some(id) = md3::load_replacement(fs, r, name, &m) {
+            return Some(Model { id, kind: Kind::Alias, flags, md3: true });
+        }
         let id = r.load_alias(&m).ok()?;
-        return Some(Model { id, kind: Kind::Alias, flags: m.flags as u32 });
+        return Some(Model { id, kind: Kind::Alias, flags, md3: false });
+    }
+    if data.len() >= 4 && &data[..4] == b"IDP3" {
+        let m = qformats::Md3::parse(&data).ok()?;
+        let id = md3::load_md3(fs, r, name, &m, false)?;
+        return Some(Model { id, kind: Kind::Alias, flags: 0, md3: true });
     }
     if data.len() >= 4 && &data[..4] == b"IDSP" {
         let s = Spr::parse(&data).ok()?;
         let id = r.load_sprite(&s).ok()?;
-        return Some(Model { id, kind: Kind::Sprite, flags: 0 });
+        return Some(Model { id, kind: Kind::Sprite, flags: 0, md3: false });
     }
     None
 }
 
 impl Level {
+    /// Lazily builds and caches the BSP collision model for this level.
+    pub fn collision_model(&self) -> Option<&qworld::CollisionModel> {
+        self.bsp
+            .as_ref()
+            .map(|bsp| self.cm.get_or_init(|| qworld::CollisionModel::from_bsp(bsp)))
+    }
+
     /// Loads everything in `cl`'s precache lists; sets `cl.model_flags`.
-    pub fn load(fs: &Fs, r: &mut Renderer, snd: Option<&mut SoundSystem>, cl: &mut ClientState, colored: bool, print: &mut dyn FnMut(&str)) -> Level {
-        let mut lv = Level { mapname: cl.mapname.clone(), ..Default::default() };
+    pub fn load(
+        fs: &Fs,
+        r: &mut Renderer,
+        snd: Option<&mut SoundSystem>,
+        cl: &mut ClientState,
+        colored: bool,
+        enhanced_models: bool,
+        print: &mut dyn FnMut(&str),
+    ) -> Level {
+        let mut lv = Level { mapname: cl.mapname.clone(), enhanced_models, ..Default::default() };
         let world = cl.model_precache.get(1).cloned().unwrap_or_default();
         let bsp = fs.open(&world).and_then(|d| Bsp::parse(&d).map_err(|e| print(&format!("{world}: {e}\n"))).ok());
         let mut subs = Vec::new();
@@ -71,7 +101,7 @@ impl Level {
                 continue;
             }
             let Some(d) = fs.open(name) else { continue };
-            if d.starts_with(b"IDPO") || d.starts_with(b"IDSP") {
+            if d.starts_with(b"IDPO") || d.starts_with(b"IDSP") || d.starts_with(b"IDP3") {
                 continue;
             }
             match Bsp::parse(&d) {
@@ -120,11 +150,12 @@ impl Level {
                     id,
                     kind: Kind::Brush,
                     flags: 0,
+                    md3: false,
                 })
             } else if let Some(&id) = brush_models.get(name) {
-                Some(Model { id, kind: Kind::Brush, flags: 0 })
+                Some(Model { id, kind: Kind::Brush, flags: 0, md3: false })
             } else {
-                let m = load_model(fs, r, name);
+                let m = load_model(fs, r, name, enhanced_models);
                 if m.is_none() && !name.ends_with(".bsp") {
                     print(&format!("couldn't load model {name}\n"));
                 }
@@ -152,7 +183,7 @@ impl Level {
         if let Some(m) = self.by_name.get(name) {
             return *m;
         }
-        let m = load_model(fs, r, name);
+        let m = load_model(fs, r, name, self.enhanced_models);
         self.by_name.insert(name.to_string(), m);
         m
     }

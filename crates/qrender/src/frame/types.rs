@@ -220,6 +220,8 @@ pub(super) struct CullPush {
 
 pub(super) struct AliasDraw {
     pub(super) model: usize,
+    pub(super) first_index: u32,
+    pub(super) num_indices: u32,
     pub(super) push: AliasPush,
     pub(super) viewmodel: bool,
     /// Drawn only into portal views.

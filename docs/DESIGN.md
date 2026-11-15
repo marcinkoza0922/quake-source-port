@@ -43,7 +43,7 @@ Everything ironwail/vkQuake load: id1, hipnotic/rogue (`-hipnotic`/`-rogue` buil
 
 - Archives: PAK, PK3/zip (store + deflate).
 - BSP29, BSP2, 2PSB, lit/colored (`.lit`, else BSPX `RGBLIGHTING` via `qformats::bspx::find_lump`, else Quake64 RGB), external `.ent` overrides, `.vis` not required.
-- MDL (incl. `QuakeForge` flags, MD5 replacement models from re-release optional later), SPR/SPR32, WAD2, LMP, TGA/PCX external textures, `.skybox` (`sky` worldspawn key).
+- MDL (incl. `QuakeForge` flags, MD3 native and `.md3` replacement models via `r_enhancedmodels`; MD5 optional later), SPR/SPR32, WAD2, LMP, TGA/PCX external textures, `.skybox` (`sky` worldspawn key).
 - QuakeC progs.dat v6, FTE/QSS extensions used by AD/MG (checkextension, string builtins, `sv_protocol 999` limits).
 - Audio: WAV, OGG/FLAC/MP3 music in `music/` (decoders: `lewton` ok as a "solved" crate; mp3 via `minimp3`-class crate).
 
@@ -54,7 +54,7 @@ Cargo workspace. Binary crate at root (`src/main.rs`) wires crates together.
 ```
 crates/
   qcore      math (Vec3, plane, bbox), byte reader, hashing, cvar + cmd + console text, filesystem (pak/pk3 search paths, gamedir stack)
-  qformats   BSP29/BSP2/2PSB, MDL, SPR, WAD2, LMP, palette, PCX/TGA, WAV parsing → plain Rust structs, no GPU
+  qformats   BSP29/BSP2/2PSB, MDL, MD3 (`.skin`), SPR, WAD2, LMP, palette, PCX/TGA, WAV parsing → plain Rust structs, no GPU
   qpool      edict slot allocator (ED_Alloc reuse), capped effect pools, SoA particle pool (see below)
   qvm        QuakeC VM: progs loader, interpreter, builtin dispatch trait, edict field storage
   qworld     collision (hull traces, BSP2 large hulls), SV_Move, physics (SV_Physics_*), area grid
@@ -410,7 +410,7 @@ Port of vkQuake/QSS's entity delta protocol, layered on 15/666/999. It is needed
 - One shared command buffer, as in Quake: the server's Cbuf text (QC `localcmd`, changelevel) is moved into the host Cbuf before each server frame and at each `exec_cbuf`, so it reaches host commands and cvars too. `name`/`color` are host commands that set `_cl_name`/`_cl_color` and forward to the server, which has server-side `name`/`color` (svc_updatename/updatecolors).
 - `.lit` and `.ent` files load through `Fs::open_companion`, which only accepts them from the same or a higher-priority game dir than the map (ironwail's `path_id` check), so id1's `start.lit` never lights another game's `start.bsp`.
 - Fog has a single current state, `cl.fog`. Worldspawn sets it at map load (unless an svc_fog arrived first), and svc_fog or the `fog` console command (Fog_FogCommand_f) change it; MG1 sets fog through QC. Fade times apply instantly.
-- Liquid alpha (GL_WaterAlphaForTextureType): Enhanced water uses its explicit translucency/opacity settings; worldspawn `[_]lavaalpha/slimealpha/telealpha` override `r_lavaalpha/r_slimealpha/r_telealpha`; a per-type value of 0 falls back to water alpha. Not ported: ironwail's check that the map was vised for transparent water (`contentstransparent`).
+- Liquid alpha (GL_WaterAlphaForTextureType): Enhanced water uses its explicit translucency/opacity settings; worldspawn `[_]lavaalpha/slimealpha/telealpha` override `r_lavaalpha/r_slimealpha/r_telealpha`; a per-type value of 0 falls back to water alpha. At world build, `World::check_water_vis` (ironwail's `Mod_CheckWaterVis`) checks whether each liquid type's PVS crosses content boundaries (`water_vised`), and `World::needs_transparent_novis` forces `novis` (`transparent_liquids`) only when an active translucent liquid type lacks water-vis on the map.
 - `r_drawentities 0` hides all entities except the view model (for debugging).
 - `COMPAT_CVARS` (host.rs) registers cvars from other engines without effect (gl_*, r_*_list, scr_usekfont, ...), so vkQuake.cfg and mod configs load quietly. `gamecfg`/`savedgamecfg` are real: QC reads them.
 - `sbar::Pack` (Id/Hipnotic/Rogue, from the mounted game dirs as in ironwail: rogue, hipnotic or quoth) selects the mission-pack status bar rules in both HUD styles: hipnotic laser/Mjolnir/proximity weapons, keys on the main bar, wetsuit/empathy shield items; rogue RIT_* ammo and armor bits, r_invbar1/2, powered-up weapon pics and shield/antigrav items, and no sigils. Rogue's CTF team face (Sbar_DrawFace: in multiplayer with `teamplay` 4..6, `r_teambord` with shirt/pants fills and the frag count, gold digits on a white shirt) is drawn by the classic bar (`Sbar::rogue_team_face`); like ironwail it reads the local `teamplay` cvar, so it shows on listen servers.
@@ -468,6 +468,10 @@ Phase 6 done:
 
 Monster movement interpolation: classic updates and FTE replacement deltas set `LERP_RESETMOVE` when an entity first appears or returns after a snapshot gap. This resets renderer transform history to the received position, preventing a brief slide from zero or a stale position. Ordinary `U_STEP`/`EFLAGS_STEP` updates retain movement smoothing.
 
+Alias animation reset and MD3 models:
+- `ViewState::alias_frame` (`src/view.rs`) clears `LERP_RESETANIM` on first evaluation (snapping `prev = frame` cleanly rather than skipping lerp after reset) and clears `LERP_RESETANIM2` across the *next* frame transition (preventing `EF_MUZZLEFLASH` two-step viewmodel snapbacks from morphing).
+- `qformats::md3` parses `"IDP3"` v15 `.md3` models and validates `.skin` manifests; `qrender` stores per-surface `AliasSurface` ranges (`first_index`, `num_indices`, per-surface skins/holey) and decodes packed 16-bit MD3 positions and spherical `(lat, lng)` normals in `alias.vert`/`velalias.vert` (flag `32`, velocity bit `65536`). `src/assets/md3.rs` resolves companion `<stem>.md3` replacements (via `Fs::open_companion`, gated by `r_enhancedmodels` archived default `1`, preserving `.mdl` entity flags) and `.skin` / prefix fallback textures (`progs/`, `textures/`, embedded shaders) with `_glow`/`_luma` fullbright layers and indexed `.lmp` colormap translation. `debris` (`take_over`) and `qrender` skip MDL ragdoll takeover for `Model::md3` entities.
+
 Single-player death recovery (`host/death.rs`) opens a paused menu once per death.
 `cl_deathaction` is archived: 0 Ask (default), 1 newest readable living-player
 save by filesystem modification time (including named saves and autosaves),
@@ -482,7 +486,11 @@ See [BLOOD.md](BLOOD.md) for splatter, wounds, droplets and diagnostics.
 ### Optional weapon impacts
 Enhancements → Impact Effects toggles, clipped bullet/scorch marks and embedded/bouncing
 nails are implemented in `src/impacts.rs` and `src/impacts/`; see
-[IMPACTS.md](IMPACTS.md) for ownership, material heuristics and diagnostics.
+[IMPACTS.md](IMPACTS.md) for ownership, material heuristics and diagnostics. Both
+`blood` and `impacts` cache alias-model metadata (`CachedMdl` in `src/blood/mesh.rs`)
+once per `ModelId`, evaluate animated vertex positions lazily behind bounding-sphere
+culling, and share `Level::collision_model()` (`OnceLock`) plus one per-frame
+`BrushEnt` list (`cached_world` in `src/fte/world.rs`) with `fte` and `hitfx`.
 
 The add-on browser checklist has an eight-row viewport with a scrollbar, separate
 from its help prompts and Start/Back buttons. Wheel input over the list scrolls

@@ -72,6 +72,9 @@ pub struct SubModel {
 
 pub struct World {
     pub(super) transparent_liquids: bool,
+    /// Bitmask of liquid types (`1 << (type - 1)` for water/lava/slime/tele)
+    /// whose PVS already includes other-content leaves (or are absent).
+    pub(super) water_vised: u8,
     /// R_LightPoint cache (ironwail's per-entity lightcache_t): sample point
     /// floored to whole units -> trace result. Entities that don't move skip
     /// the BSP trace; the colour is re-read from the lightmap each call so

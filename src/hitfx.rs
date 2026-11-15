@@ -3,7 +3,7 @@
 //! material of the texture that was struck. Client-only and cosmetic;
 //! `r_impact_fx` picks the intensity from subtle to spectacle.
 use crate::blood::Geometry;
-use crate::fte::world::{BspWorld, brush_ents};
+use crate::fte::world::{BspWorld, BrushEnt, cached_world};
 use qcore::math::Vec3;
 use qpart::World;
 use qrender::{PicId, View};
@@ -77,7 +77,6 @@ impl Default for Part {
 #[derive(Default)]
 pub struct HitFx {
     parts: Vec<Part>,
-    cm: Option<qworld::CollisionModel>,
     pic: Option<PicId>,
     palette: Option<Vec<u8>>,
     tints: HashMap<String, [u8; 3]>,
@@ -99,6 +98,7 @@ impl HitFx {
         cv: &qcore::cvar::Cvars,
         cl: &qclient::ClientState,
         lv: &crate::assets::Level,
+        brushes: &mut Option<Vec<BrushEnt>>,
         fs: &qcore::fs::Fs,
         r: &mut qrender::Renderer,
         view: &View,
@@ -117,13 +117,10 @@ impl HitFx {
         }
         let dt = (cl.time - self.time).clamp(0.0, 0.1) as f32;
         self.time = cl.time;
-        let Some(bsp) = lv.bsp.as_ref() else { return };
         if self.palette.is_none() {
             self.palette = Some(fs.open("gfx/palette.lmp").unwrap_or_default());
         }
-        let cm = self.cm.take().unwrap_or_else(|| qworld::CollisionModel::from_bsp(bsp));
-        let brushes = brush_ents(cl, &cm);
-        let world = BspWorld { bsp, cm: &cm, ents: &brushes };
+        let Some(world) = cached_world(cl, lv, brushes) else { return };
         let eye = Vec3::from(view.origin);
         for &(kind, p) in &cl.weapon_impacts {
             let p = Vec3::from(p);
@@ -135,7 +132,6 @@ impl HitFx {
             let extra = self.parts.len() - MAX_PARTS;
             self.parts.drain(..extra);
         }
-        self.cm = Some(cm);
         if self.parts.is_empty() {
             return;
         }
