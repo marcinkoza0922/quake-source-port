@@ -19,6 +19,13 @@ pub(super) use lightmaps::LightmapRequests;
 
 type Mat4 = [f32; 16];
 
+fn vel_viewport(t: &Targets, [scene_w, scene_h]: [u32; 2]) -> [u32; 2] {
+    [
+        ((scene_w as f32 * t.vel_w as f32 / t.scene_w.max(1) as f32).round() as u32).clamp(1, t.vel_w),
+        ((scene_h as f32 * t.vel_h as f32 / t.scene_h.max(1) as f32).round() as u32).clamp(1, t.vel_h),
+    ]
+}
+
 impl Renderer {
     /// Draws and presents one frame.
     pub fn render(&mut self, fr: &RenderFrame) -> Result<()> {
@@ -136,9 +143,24 @@ impl Renderer {
         let prev_xforms = std::mem::take(&mut self.prev_xforms);
         let mb_dt = time - self.prev_xform_time;
         let prev_ok = mb_on && mb_dt > 0.0 && mb_dt < 0.25;
-        let mut xforms = std::collections::HashMap::new();
-        // last frame's model transform rows, when the entity moved
-        let prev_rows = |e: &RenderEntity, local: Option<&Mat4>| -> Option<[[f32; 4]; 3]> {
+        let mb_scale = if prev_ok { st.motion_blur.min(4.0) / (60.0 * mb_dt as f32) } else { 0.0 };
+        let mb_quality = st.motion_blur_quality.min(1);
+        let mut xforms = std::mem::take(&mut self.cur_xforms);
+        xforms.clear();
+        if mb_on {
+            for e in fr.entities {
+                if e.key != 0
+                    && !e.viewmodel
+                    && !e.follows_camera
+                    && !e.portal_only
+                    && !self.hidden_entities.contains(&e.key)
+                {
+                    xforms.insert(e.key, (e.origin, e.angles));
+                }
+            }
+        }
+        // last frame's model transform rows, when the entity moved perceptibly
+        let prev_rows = |vs: &ViewSetup, view_px: [f32; 2], e: &RenderEntity, center: [f32; 3], local_mid: [f32; 3], radius: f32, local: Option<&Mat4>| -> Option<[[f32; 4]; 3]> {
             if !prev_ok || e.key == 0 || e.viewmodel || e.follows_camera {
                 return None;
             }
@@ -150,7 +172,16 @@ impl Renderer {
             if dot(d, d) > 256.0 * 256.0 {
                 return None; // teleported
             }
-            let m = affine(entity_rotation(pa), po);
+            let prot = entity_rotation(pa);
+            let prev_center = if local_mid == [0.0; 3] {
+                po
+            } else {
+                add(po, rotate3(&prot, local_mid))
+            };
+            if !vel_entity_visible(vs, center, prev_center, e.angles, pa, radius, mb_scale, view_px, mb_quality) {
+                return None;
+            }
+            let m = affine(prot, po);
             Some(rows3(&local.map_or(m, |l| mul(&m, l))))
         };
         // CPU-built alias poses (ragdolls), indexed in u32s from the buffer start
@@ -194,6 +225,10 @@ impl Renderer {
             }
             setup_view(&v, scene_w, scene_h)
         });
+        let view_px = [
+            w.max(1) as f32 * (scene_w as f32 / sw.max(1) as f32),
+            h.max(1) as f32 * (scene_h as f32 / sh.max(1) as f32),
+        ];
         let mut portal_draws = if fr.settings.teleport_windows || !fr.gun_portals.is_empty() {
             self.prepare_portals(view.as_ref(), [scene_w, scene_h], fr.gun_portals, &fr.settings, &mut dynw, time, alphas, &mut lm_vis, &mut portal_worlds)
         } else {
@@ -231,9 +266,6 @@ impl Renderer {
                 let Some(m) = self.models.get(e.model.0 as usize) else {
                     continue;
                 };
-                if mb_on && e.key != 0 && !e.viewmodel {
-                    xforms.insert(e.key, (e.origin, e.angles));
-                }
                 let rot = entity_rotation(e.angles);
                 let dist = dot(sub(e.origin, vs.eye), vs.fwd);
                 match m {
@@ -296,8 +328,14 @@ impl Renderer {
                         wd.zfix = true;
                         if alpha < 1.0 {
                             trans.push((dist, Trans::World(world_draws.len())));
-                        } else if let Some(r) = prev_rows(e, None) {
-                            vel_draws.push(VelDraw::World(world_draws.len(), r));
+                        } else if !e.portal_only {
+                            let local_mid = [0, 1, 2].map(|i| 0.5 * (sub_.mins[i] + sub_.maxs[i]));
+                            let half = [0, 1, 2].map(|i| 0.5 * (sub_.maxs[i] - sub_.mins[i]));
+                            let r = dot(half, half).sqrt();
+                            let center = add(e.origin, rotate3(&rot, local_mid));
+                            if let Some(r) = prev_rows(vs, view_px, e, center, local_mid, r, None) {
+                                vel_draws.push(VelDraw::World(world_draws.len(), r));
+                            }
                         }
                         world_draws.push(wd);
                     }
@@ -401,8 +439,8 @@ impl Renderer {
                         }
                         base_flags |= (e.heat.min(3) as u32) << 8;
                         let stride = if am.md3 { 2 } else { 1 };
-                        let prev_r = if !(e.portal_only || (alpha < 1.0 && !e.viewmodel)) {
-                            prev_rows(e, Some(&local))
+                        let prev_r = if main_visible && !e.portal_only && (alpha >= 1.0 || e.viewmodel) {
+                            prev_rows(vs, view_px, e, e.origin, [0.0; 3], radius, Some(&local))
                         } else {
                             None
                         };
@@ -800,6 +838,17 @@ impl Renderer {
                 } else {
                     [0.0; 4]
                 },
+                vel_uv: if let Some(t) = &self.targets {
+                    let [vw, vh] = vel_viewport(t, [pass.scene_w, pass.scene_h]);
+                    [
+                        pass.scene_w.max(1) as f32 / vw as f32,
+                        pass.scene_h.max(1) as f32 / vh as f32,
+                        (pass.scene_w.max(1) - 1) as f32,
+                        (pass.scene_h.max(1) - 1) as f32,
+                    ]
+                } else {
+                    [0.0; 4]
+                },
                 ripples: {
                     let mut r = [[0.0; 4]; crate::water::MAX_RIPPLES];
                     for (d, w) in r.iter_mut().zip(&self.water_fx.ripples) {
@@ -891,6 +940,8 @@ impl Renderer {
 
         self.lightmap_requests = lm_vis;
         self.prev_xforms = xforms;
+        self.cur_xforms = prev_xforms;
+        self.cur_xforms.clear();
         self.prev_xform_time = time;
 
         // ---- record ----
@@ -1522,7 +1573,17 @@ impl Renderer {
                 };
                 depth_layout(end_layout, vk::ImageLayout::DEPTH_STENCIL_READ_ONLY_OPTIMAL);
                 if !vel_draws.is_empty() {
-                    fx_pass(&t.vel, area_target, vp_scene, area_scene, [0.0; 4], &|| {
+                    let [vel_vw, vel_vh] = vel_viewport(t, [scene_w, scene_h]);
+                    let area_vel_rt = vk::Rect2D {
+                        offset: vk::Offset2D::default(),
+                        extent: vk::Extent2D { width: t.vel_w, height: t.vel_h },
+                    };
+                    let vp_vel = vk::Viewport { width: vel_vw as f32, height: vel_vh as f32, ..vp_full };
+                    let area_vel = vk::Rect2D {
+                        offset: vk::Offset2D::default(),
+                        extent: vk::Extent2D { width: vel_vw, height: vel_vh },
+                    };
+                    fx_pass(&t.vel, area_vel_rt, vp_vel, area_vel, [0.0; 4], &|| {
                         for vd in vel_draws.iter() {
                             match *vd {
                                 VelDraw::Alias(i, prev) => {
@@ -1638,6 +1699,9 @@ impl Renderer {
                 g_noise: st.goggles.noise.clamp(0.0, 2.0),
                 g_time: (fr.time % 1000.0) as f32,
                 speed_blur: pass.speed_blur.max(st.edge_blur.clamp(0.0, 1.0)),
+                mb_quality: st.motion_blur_quality.min(1),
+                mb_w: w.max(1) as f32,
+                mb_h: h.max(1) as f32,
             }]));
             dev.cmd_draw(cmd, 3, 1, 0, 0);
             if pi + 1 < npasses {

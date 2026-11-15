@@ -135,6 +135,17 @@ the remaining parity-bound phases below.
   - Skip `vel_draws` submission for tiny/distant entities with sub-pixel
     screen motion.
 - Measure: `motionblur`, `all-enhancements`.
+- **Status (Done, 2026-11-15)**:
+  - Added `r_motionblur_quality` (`0` = low, `1` = high [archived, default `1`]; Enhancements menu `"Motion Blur Quality"`, `qrender::Settings::motion_blur_quality`).
+  - Output-capped `t.vel` at `min(scene, output)` on High and halved it (`(min(scene, output) / 2).max(1)`) on Low in `crates/qrender/src/lib/targets.rs`, rebuilding targets on quality change; updated `crates/qrender/shaders/vel.frag` to map `gl_FragCoord.xy` to `scene_depth`/`scene_depth_ms` via `FrameUbo::vel_uv`.
+  - Updated `crates/qrender/shaders/post.frag` `motion_blur` to use output resolution (`PostPush::mb_w`/`mb_h`), precomputed 8-direction constant offsets (`MB_DIRS`) for dilation on High (`pc.mb_quality > 0u`) with `12` taps, and skip neighborhood dilation on Low (`pc.mb_quality == 0u`) with `6` taps.
+  - Added `vel_entity_visible` in `crates/qrender/src/frame/math.rs` (culling tiny/distant or sub-pixel moving entities, checking `main_visible` first for alias models) and reused double-buffered `Renderer::cur_xforms` / `prev_xforms` once per frame in `crates/qrender/src/frame.rs`.
+  - Verified with `cargo clippy --all-targets --message-format=short` (exit 0), `QRENDER_VALIDATION=1 cargo nextest run` (exit 0), `QRENDER_VALIDATION=1 cargo test -p qrender --test offscreen -- --nocapture` (pass across `motion_blur_quality` `[0, 1]` × `msaa` `[1, 4]` × `render_scale` `[1.0, 2.0]` + split-screen, clean validation), headless screenshots (`Enhancements` menu + `e1m1` moving rocket `off` / `low` / `high` / `200% 8x SSAA`), `compare -metric AE` `0` px diff on `vanilla` shots (`item16-before` → `item16-after`), and benchmarks (`1280×720` headless):
+    - `qprof` 3-run medians (`target/qprof/item16-before` → `target/qprof/item16-after`, High tier): `e1m1` `motionblur` `gpu post` **27 → 26 µs** (total GPU **1168 µs**, **798 fps**), `all-enhancements` `gpu post` **67 → 66 µs**; `ad_sepulcher` `motionblur` `gpu post` **38 → 37 µs** (**495 fps**), `all-enhancements` `gpu post` **99 → 96 µs**.
+    - Controlled `ad_sepulcher` `prof_stop` tier comparison (498 GPU frames each, `+left +attack`, pinned cvars, `r_motionblur 0` vs `2`):
+      - `100% 1×`: `post` Off **23.2 µs** → Low **35.8 µs** (+12.6 µs) / High **41.6 µs** (+18.4 µs; Low −5.8 µs).
+      - `200% 8× SSAA`: `post` Off **35.0 µs** → Low **48.4 µs** (+13.4 µs) / High **53.0 µs** (+18.0 µs; Low −4.6 µs).
+      - `all-enhancements` (200% 8× SSAA + `crt-royale-fake-bloom`): `post` Off **66.4 µs** → Low **86.8 µs** (+20.4 µs) / High **106.7 µs** (+40.3 µs; Low **−19.9 µs** / **−49.4%** of added motion-blur `post` cost).
 
 ### 17. Soft particles MSAA depth lookup (*visual*)
 - Problem: in `crates/qrender/shaders/fte.frag`, under MSAA (`ns > 1`), every

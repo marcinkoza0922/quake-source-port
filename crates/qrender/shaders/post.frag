@@ -19,6 +19,9 @@ layout(push_constant) uniform P {
     float g_noise;  // sensor noise and scanlines
     float g_time;
     float speed_blur; // high player velocity: peripheral radial smear
+    uint mb_quality;  // 0 low (no dilation, 6 taps), 1 high (8-dir dilation, 12 taps)
+    float mb_w;       // output width in pixels
+    float mb_h;       // output height in pixels
 } pc;
 layout(location = 0) out vec4 o_color;
 
@@ -41,17 +44,27 @@ vec3 daltonize(vec3 c, uint m) {
 vec2 vel_at(vec2 uv) {
     return texture(textures[nonuniformEXT(pc.vel_tex)], uv).xy * vec2(pc.mbx, pc.mby);
 }
+const vec2 MB_DIRS[8] = vec2[8](
+    vec2(1.0, 0.0),
+    vec2(0.70710678, 0.70710678),
+    vec2(0.0, 1.0),
+    vec2(-0.70710678, 0.70710678),
+    vec2(-1.0, 0.0),
+    vec2(-0.70710678, -0.70710678),
+    vec2(0.0, -1.0),
+    vec2(0.70710678, -0.70710678)
+);
+
 // Per-object motion blur: average along the strongest motion nearby, so
 // moving objects also smear over the static background around them.
 vec3 motion_blur(vec3 c, vec2 uv) {
-    vec2 sz = vec2(textureSize(textures[nonuniformEXT(pc.vel_tex)], 0));
+    vec2 sz = vec2(pc.mb_w, pc.mb_h);
     vec2 v = vel_at(uv);
     float best = dot(v * sz, v * sz);
-    if (best < 0.25) {
+    if (pc.mb_quality > 0u && best < 0.25) {
         vec2 r = 24.0 / sz;
         for (int i = 0; i < 8; i++) {
-            float a = float(i) * 0.78539816;
-            vec2 t = vel_at(uv + vec2(cos(a), sin(a)) * r);
+            vec2 t = vel_at(uv + MB_DIRS[i] * r);
             float l = dot(t * sz, t * sz);
             if (l > best) { best = l; v = t; }
         }
@@ -59,14 +72,14 @@ vec3 motion_blur(vec3 c, vec2 uv) {
     if (best < 0.25) return c;
     float l = length(v);
     if (l > 0.06) v *= 0.06 / l;
-    const int N = 12;
+    int n = pc.mb_quality > 0u ? 12 : 6;
     float j = bayer01(ivec2(gl_FragCoord.xy)) - 0.5;
     vec3 acc = vec3(0.0);
-    for (int i = 0; i < N; i++) {
-        float t = (float(i) + 0.5 + j) / float(N) - 0.5;
+    for (int i = 0; i < n; i++) {
+        float t = (float(i) + 0.5 + j) / float(n) - 0.5;
         acc += texture(textures[nonuniformEXT(pc.scene)], uv - v * t).rgb;
     }
-    return acc / float(N);
+    return acc / float(n);
 }
 // Sample toward the centre to stretch scenery into peripheral speed streaks.
 // The inner 40% stays sharp. Inward taps stay inside this split view's region.

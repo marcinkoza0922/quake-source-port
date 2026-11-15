@@ -47,7 +47,7 @@ pub const VANILLA: &[(&str, &str)] = &[
     ("r_anisotropy", "1"), ("r_softemu", "0"), ("r_dither", "0"), ("gamma", "1"), ("contrast", "1"),
     ("r_dynamic", "1"), ("r_coloredlight", "0"), ("r_fog", "1"), ("r_skyfog", "0.5"),
     ("r_lerpmodels", "1"), ("r_lerpmove", "1"),
-    ("r_ssao", "0"), ("r_motionblur", "0"), ("r_speedblur", "0"), ("a11y_reducemotion", "0"),
+    ("r_ssao", "0"), ("r_motionblur", "0"), ("r_motionblur_quality", "1"), ("r_speedblur", "0"), ("a11y_reducemotion", "0"),
     ("r_enhancedwater", "0"), ("r_teleportwindows", "0"), ("r_portal_quality", "1"), ("r_water_quality", "1"),
     ("r_impact_fx", "0"), ("r_impact_bullets", "0"), ("r_impact_nails", "0"),
     ("r_shotgun_tracers", "0"), ("r_impact_scorches", "0"),
@@ -81,7 +81,7 @@ const ANISO: &[(&str, &str)] = &[("r_texfilter", "1"), ("r_anisotropy", "16")];
 const SOFTEMU: &[(&str, &str)] = &[("r_softemu", "3"), ("r_dither", "1")];
 const COLOR: &[(&str, &str)] = &[("r_coloredlight", "1"), ("gamma", "0.8"), ("contrast", "1.4")];
 const SSAO: &[(&str, &str)] = &[("r_ssao", "3")];
-const BLUR: &[(&str, &str)] = &[("r_motionblur", "1"), ("r_motionblur_amount", "2"), ("r_speedblur", "1")];
+const BLUR: &[(&str, &str)] = &[("r_motionblur", "1"), ("r_motionblur_amount", "2"), ("r_motionblur_quality", "1"), ("r_speedblur", "1")];
 const TELE: &[(&str, &str)] = &[("r_teleportwindows", "1")];
 const SHADER: &[(&str, &str)] = &[("r_shader_preset", "crt/crt-guest-advanced-hd"), ("r_shader_scope", "1")];
 const COLORBLIND: &[(&str, &str)] = &[("r_colorblind", "2")];

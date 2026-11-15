@@ -314,4 +314,49 @@ fn start_bsp_renders_non_black() {
             }
         }
     }
+    // Cycle motion blur quality tiers with a moving alias entity so vel.frag and
+    // post.frag run across MSAA, render scale and split-screen.
+    if let Some(mdl_bytes) = fs.open("progs/player.mdl") {
+        let mdl = qformats::Mdl::parse(&mdl_bytes).unwrap();
+        let player_id = r.load_alias(&mdl).unwrap();
+        let rad = yaw.to_radians();
+        let fwd = [rad.cos(), rad.sin(), 0.0];
+        let right = [rad.sin(), -rad.cos(), 0.0];
+        let base_pos = std::array::from_fn(|k| view.origin[k] + fwd[k] * 96.0);
+        let moved_pos = std::array::from_fn(|k| base_pos[k] + right[k] * 14.0);
+        let ent = |pos: [f32; 3]| RenderEntity {
+            key: 42,
+            model: player_id,
+            origin: pos,
+            angles: [0.0, yaw + 180.0, 0.0],
+            alpha: 1.0,
+            ..Default::default()
+        };
+        let e0 = [ent(base_pos)];
+        let e1 = [ent(moved_pos)];
+        for msaa in [1, 4] {
+            for render_scale in [1.0, 2.0] {
+                for motion_blur_quality in [0, 1] {
+                    let st = Settings {
+                        motion_blur: 2.0,
+                        motion_blur_quality,
+                        msaa,
+                        render_scale,
+                        ..Default::default()
+                    };
+                    r.render(&RenderFrame { time: 1.0, view: Some(view), entities: &e0, settings: st, ..Default::default() }).unwrap();
+                    r.render(&RenderFrame { time: 1.02, view: Some(view), entities: &e1, settings: st, ..Default::default() }).unwrap();
+                    let blurred = r.read_pixels().unwrap();
+                    let st_off = Settings { motion_blur: 0.0, ..st };
+                    r.render(&RenderFrame { time: 1.04, view: Some(view), entities: &e1, settings: st_off, ..Default::default() }).unwrap();
+                    let crisp = r.read_pixels().unwrap();
+                    assert_ne!(blurred, crisp, "motion blur quality {motion_blur_quality} ({msaa}x, {render_scale}) produced no change");
+                    // Split-screen coverage with recreated velocity targets.
+                    r.render(&RenderFrame { time: 1.06, splits: &splits, entities: &e0, settings: st, ..Default::default() }).unwrap();
+                    r.render(&RenderFrame { time: 1.08, splits: &splits, entities: &e1, settings: st, ..Default::default() }).unwrap();
+                    let _ = r.read_pixels().unwrap();
+                }
+            }
+        }
+    }
 }

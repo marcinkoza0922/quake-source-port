@@ -143,7 +143,9 @@ impl Renderer {
             render_scale: 1.0,
             ssao_quality: 1,
             portal_quality: 1,
+            motion_blur_quality: 1,
             prev_xforms: Default::default(),
+            cur_xforms: Default::default(),
             prev_xform_time: 0.0,
             water_fx: {
                 let mut w = water::WaterFx::default();

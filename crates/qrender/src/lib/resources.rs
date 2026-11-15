@@ -44,8 +44,10 @@ pub(super) struct Targets {
     pub(super) ao_w: u32,
     pub(super) ao_h: u32,
     pub(super) ao_slot: u32,
-    /// Single-sampled, scene-sized per-object velocity for post-processing.
+    /// Single-sampled per-object velocity for post-processing (output-capped, half-res on low).
     pub(super) vel: Image,
+    pub(super) vel_w: u32,
+    pub(super) vel_h: u32,
     pub(super) vel_slot: u32,
     /// Headless output image + readback buffer.
     pub(super) out: Option<(Image, Buffer)>,

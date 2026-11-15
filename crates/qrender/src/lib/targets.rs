@@ -152,7 +152,12 @@ impl Renderer {
             (base_w.max(1), base_h.max(1))
         };
         let (ao, ao_slot) = fx_target(self, ao_w, ao_h, pipelines::AO_FORMAT, self.sampler_clamp)?;
-        let (vel, vel_slot) = fx_target(self, sw, shh, pipelines::VEL_FORMAT, self.sampler_clamp)?;
+        let (vel_w, vel_h) = if self.motion_blur_quality == 0 {
+            ((base_w / 2).max(1), (base_h / 2).max(1))
+        } else {
+            (base_w.max(1), base_h.max(1))
+        };
+        let (vel, vel_slot) = fx_target(self, vel_w, vel_h, pipelines::VEL_FORMAT, self.sampler_clamp)?;
         let (portal_w, portal_h) = match self.portal_quality {
             0 => ((base_w / 2).max(1), (base_h / 2).max(1)),
             1 => (((base_w * 3) / 4).max(1), ((base_h * 3) / 4).max(1)),
@@ -196,6 +201,8 @@ impl Renderer {
             ao_h,
             ao_slot,
             vel,
+            vel_w,
+            vel_h,
             vel_slot,
             out,
         });

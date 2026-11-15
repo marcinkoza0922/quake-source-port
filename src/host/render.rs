@@ -393,6 +393,7 @@ impl Host {
             } else {
                 v("r_motionblur_amount").clamp(0.0, 4.0)
             },
+            motion_blur_quality: (v("r_motionblur_quality").round() as i32).clamp(0, 1) as u32,
             water_ripples: if v("r_enhancedwater") != 0.0 && v("r_waterripples") != 0.0 { v("r_waterripples_amount").clamp(0.0, 4.0) } else { 0.0 },
             water_splashes: v("r_enhancedwater") != 0.0 && v("r_watersplash") != 0.0,
             water_caustics: if v("r_enhancedwater") != 0.0 && v("r_watercaustics") != 0.0 { v("r_watercaustics_amount").clamp(0.0, 4.0) } else { 0.0 },

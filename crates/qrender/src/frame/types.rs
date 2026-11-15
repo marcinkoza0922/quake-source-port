@@ -24,6 +24,8 @@ pub(super) struct FrameUbo {
     pub(super) water: [f32; 4],
     /// xy gl_FragCoord -> portal UV scale, zw valid UV clamp max.
     pub(super) portal_uv: [f32; 4],
+    /// xy scene px per vel px, zw scene max texel coords.
+    pub(super) vel_uv: [f32; 4],
     /// xy centre, z liquid surface height, w start time.
     pub(super) ripples: [[f32; 4]; crate::water::MAX_RIPPLES],
     pub(super) ripple_amp: [[f32; 4]; crate::water::MAX_RIPPLES / 4],
@@ -138,6 +140,9 @@ pub(super) struct PostPush {
     pub(super) g_noise: f32,
     pub(super) g_time: f32,
     pub(super) speed_blur: f32,
+    pub(super) mb_quality: u32,
+    pub(super) mb_w: f32,
+    pub(super) mb_h: f32,
 }
 
 #[repr(C)]

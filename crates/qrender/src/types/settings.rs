@@ -71,6 +71,8 @@ pub struct Settings {
     /// r_motionblur: per-object motion blur; the blur covers this fraction of
     /// the motion over 1/60 s (0 = off). Camera motion is not blurred.
     pub motion_blur: f32,
+    /// r_motionblur_quality: per-object motion blur quality (0 = low, 1 = high).
+    pub motion_blur_quality: u32,
     /// Peripheral radial blur independent of camera velocity.
     pub edge_blur: f32,
     /// r_waterripples: ripple rings and gentle swell on liquid surfaces
@@ -146,6 +148,7 @@ impl Default for Settings {
             portal_quality: 1,
             ssao_radius: 32.0,
             motion_blur: 0.0,
+            motion_blur_quality: 1,
             edge_blur: 0.0,
             water_ripples: 0.0,
             water_splashes: false,

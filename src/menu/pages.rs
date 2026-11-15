@@ -272,6 +272,7 @@ pub(super) const SOFTEMU: &[(&str, f32)] = &[("off", 0.0), ("fine", 1.0), ("coar
 pub(super) const SSAO: &[(&str, f32)] = &[("off", 0.0), ("low", 1.0), ("medium", 2.0), ("high", 3.0)];
 pub(super) const PORTAL_QUALITY: &[(&str, f32)] = &[("low", 0.0), ("medium", 1.0), ("high", 2.0)];
 pub(super) const WATER_QUALITY: &[(&str, f32)] = &[("low", 0.0), ("high", 1.0)];
+pub(super) const MOTIONBLUR_QUALITY: &[(&str, f32)] = &[("low", 0.0), ("high", 1.0)];
 pub(super) const MODES: [&str; 3] = ["windowed", "fullscreen", "borderless"];
 
 pub(super) const GRAPHICS: &[Item] = &[
@@ -300,6 +301,7 @@ pub(super) const GRAPHICS: &[Item] = &[
 pub(super) const ENHANCEMENTS: &[Item] = &[
     Item::Choice { label: "Ambient Occlusion", cvar: "r_ssao", choices: SSAO },
     toggle("Motion Blur", "r_motionblur"),
+    Item::Choice { label: "Motion Blur Quality", cvar: "r_motionblur_quality", choices: MOTIONBLUR_QUALITY },
     toggle("Speed Blur", "r_speedblur"),
     slider("Motion Blur Amount", "r_motionblur_amount", 0.1, 2.0, 0.1),
     toggle("Enhanced Water", "r_enhancedwater"),

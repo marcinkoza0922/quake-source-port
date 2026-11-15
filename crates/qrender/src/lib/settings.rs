@@ -45,6 +45,12 @@ impl Renderer {
             self.idle();
             self.destroy_targets();
         }
+        let motion_blur_quality = st.motion_blur_quality.min(1);
+        if motion_blur_quality != self.motion_blur_quality {
+            self.motion_blur_quality = motion_blur_quality;
+            self.idle();
+            self.destroy_targets();
+        }
         // TexMgr_ApplySettings: gl_texturemode (r_texfilter picks the default),
         // anisotropy, lod bias; softemu 2/3 or lightmap banding force nearest
         // with linear mips and at least 8x anisotropy.

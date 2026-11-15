@@ -104,13 +104,15 @@ pub struct Renderer {
     world_filter: (usize, f32, f32),
     /// Colour metric the palette LUT was built with (-1 = not built).
     lut_metric: i32,
-    /// Scene MSAA sample count, render scale, SSAO quality, and portal quality in effect.
+    /// Scene MSAA sample count, render scale, SSAO quality, portal quality, and motion-blur quality in effect.
     msaa: u32,
     render_scale: f32,
     ssao_quality: u32,
     portal_quality: u32,
-    /// Last frame's entity transforms by `RenderEntity::key` (motion blur).
+    motion_blur_quality: u32,
+    /// Last frame's entity transforms by `RenderEntity::key` (motion blur), plus reused scratch map.
     prev_xforms: std::collections::HashMap<u32, ([f32; 3], [f32; 3])>,
+    cur_xforms: std::collections::HashMap<u32, ([f32; 3], [f32; 3])>,
     prev_xform_time: f64,
     /// Ripples, splashes and wakes on liquids (r_waterripples/r_watersplash).
     water_fx: water::WaterFx,

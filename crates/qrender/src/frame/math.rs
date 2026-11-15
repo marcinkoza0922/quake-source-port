@@ -70,6 +70,10 @@ pub(super) fn sub(a: [f32; 3], b: [f32; 3]) -> [f32; 3] {
     [a[0] - b[0], a[1] - b[1], a[2] - b[2]]
 }
 
+pub(super) fn add(a: [f32; 3], b: [f32; 3]) -> [f32; 3] {
+    [a[0] + b[0], a[1] + b[1], a[2] + b[2]]
+}
+
 pub(super) fn norm(a: [f32; 3]) -> [f32; 3] {
     let l = dot(a, a).sqrt();
     if l > 0.0 {
@@ -146,4 +150,182 @@ pub(super) fn setup_view(v: &View, w: u32, h: u32) -> ViewSetup {
 pub(super) fn sphere_in_frustum(f: &[[f32; 4]; 4], c: [f32; 3], r: f32) -> bool {
     f.iter()
         .all(|p| p[0] * c[0] + p[1] * c[1] + p[2] * c[2] + p[3] >= -r)
+}
+
+pub(super) fn rotate3(r: &[[f32; 3]; 3], v: [f32; 3]) -> [f32; 3] {
+    [
+        r[0][0] * v[0] + r[0][1] * v[1] + r[0][2] * v[2],
+        r[1][0] * v[0] + r[1][1] * v[1] + r[1][2] * v[2],
+        r[2][0] * v[0] + r[2][1] * v[1] + r[2][2] * v[2],
+    ]
+}
+
+fn min_angle_diff_rad(a: [f32; 3], b: [f32; 3]) -> f32 {
+    let mut sum_deg = 0.0f32;
+    for i in 0..3 {
+        let d = (a[i] - b[i]).rem_euclid(360.0);
+        sum_deg += d.min(360.0 - d);
+    }
+    sum_deg.to_radians()
+}
+
+/// Conservative screen-space visibility and motion check matching `post.frag`'s
+/// velocity threshold so sub-pixel or tiny distant moving entities skip `t.vel`.
+#[allow(clippy::too_many_arguments)]
+pub(super) fn vel_entity_visible(
+    vs: &ViewSetup,
+    cur_center: [f32; 3],
+    prev_center: [f32; 3],
+    cur_angles: [f32; 3],
+    prev_angles: [f32; 3],
+    radius: f32,
+    mb_scale: f32,
+    view_px: [f32; 2],
+    quality: u32,
+) -> bool {
+    let r = radius.max(0.0);
+    let cur_rel = sub(cur_center, vs.eye);
+    let prev_rel = sub(prev_center, vs.eye);
+    let z_cur = dot(cur_rel, vs.fwd);
+    let z_prev = dot(prev_rel, vs.fwd);
+    if z_cur.max(z_prev) + r <= 4.0 {
+        return false;
+    }
+    let z_min = (z_cur.min(z_prev) - r).max(4.0);
+    let half_x = 0.5 * view_px[0] / vs.tan[0].max(1e-4);
+    let half_y = 0.5 * view_px[1] / vs.tan[1].max(1e-4);
+    let focal = half_x.max(half_y);
+    let r_px = (r / z_min) * focal;
+    let rot_disp = (r * min_angle_diff_rad(cur_angles, prev_angles)).min(2.0 * r);
+    let d_center = sub(cur_center, prev_center);
+    let dx = dot(d_center, vs.right).abs() + rot_disp;
+    let dy = dot(d_center, vs.up).abs() + rot_disp;
+    let dz = dot(d_center, vs.fwd).abs() + rot_disp;
+    let vx = mb_scale * ((dx / z_min) * half_x + 0.5 * view_px[0] * (dz / z_min));
+    let vy = mb_scale * ((dy / z_min) * half_y + 0.5 * view_px[1] * (dz / z_min));
+    let blur_sq = vx * vx + vy * vy;
+    if quality == 0 {
+        blur_sq >= 1.0 && r_px >= 2.0
+    } else {
+        blur_sq >= 0.20 && r_px >= 0.5
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    fn test_view() -> ViewSetup {
+        setup_view(
+            &View {
+                origin: [0.0, 0.0, 0.0],
+                angles: [0.0, 0.0, 0.0],
+                fov_x: 90.0,
+                reserve_bottom: 0,
+                speed_blur: 0.0,
+            },
+            1280,
+            720,
+        )
+    }
+
+    #[test]
+    fn vel_cull_keeps_visible_fast_entity() {
+        let vs = test_view();
+        // Monster at x=500 moving 4 units laterally (~5 px blur at 1280px, r ~ 40 px).
+        assert!(vel_entity_visible(
+            &vs,
+            [500.0, 4.0, 0.0],
+            [500.0, 0.0, 0.0],
+            [0.0; 3],
+            [0.0; 3],
+            32.0,
+            1.0,
+            [1280.0, 720.0],
+            1,
+        ));
+        assert!(vel_entity_visible(
+            &vs,
+            [500.0, 4.0, 0.0],
+            [500.0, 0.0, 0.0],
+            [0.0; 3],
+            [0.0; 3],
+            32.0,
+            1.0,
+            [1280.0, 720.0],
+            0,
+        ));
+    }
+
+    #[test]
+    fn vel_cull_skips_subpixel_distant_entity() {
+        let vs = test_view();
+        // Tiny gib at x=2500 drifting 0.25 units (~0.06 px blur).
+        assert!(!vel_entity_visible(
+            &vs,
+            [2500.0, 0.25, 0.0],
+            [2500.0, 0.0, 0.0],
+            [0.0; 3],
+            [0.0; 3],
+            8.0,
+            1.0,
+            [1280.0, 720.0],
+            1,
+        ));
+    }
+
+    #[test]
+    fn vel_cull_tier_difference_on_small_entity() {
+        let vs = test_view();
+        // Radius ~1.3 px, blur ~0.8 px: kept on high, culled on low.
+        let cur = [2500.0, 3.0, 0.0];
+        let prev = [2500.0, 0.0, 0.0];
+        assert!(vel_entity_visible(&vs, cur, prev, [0.0; 3], [0.0; 3], 5.0, 1.0, [1280.0, 720.0], 1));
+        assert!(!vel_entity_visible(&vs, cur, prev, [0.0; 3], [0.0; 3], 5.0, 1.0, [1280.0, 720.0], 0));
+    }
+
+    #[test]
+    fn vel_cull_keeps_rotating_entity_and_wraps_angles() {
+        let vs = test_view();
+        // Pure rotation with zero origin delta keeps entity when arc exceeds threshold.
+        assert!(vel_entity_visible(
+            &vs,
+            [300.0, 0.0, 0.0],
+            [300.0, 0.0, 0.0],
+            [0.0, 5.0, 0.0],
+            [0.0, 0.0, 0.0],
+            32.0,
+            1.0,
+            [1280.0, 720.0],
+            1,
+        ));
+        // 359.9 deg -> 0.0 deg is 0.1 deg wrap (~0.056u arc at r=32, ~0.13px), culled.
+        assert!(!vel_entity_visible(
+            &vs,
+            [300.0, 0.0, 0.0],
+            [300.0, 0.0, 0.0],
+            [0.0, 359.9, 0.0],
+            [0.0, 0.0, 0.0],
+            32.0,
+            1.0,
+            [1280.0, 720.0],
+            1,
+        ));
+    }
+
+    #[test]
+    fn vel_cull_skips_completely_behind_near_plane() {
+        let vs = test_view();
+        assert!(!vel_entity_visible(
+            &vs,
+            [-50.0, 10.0, 0.0],
+            [-50.0, 0.0, 0.0],
+            [0.0; 3],
+            [0.0; 3],
+            16.0,
+            1.0,
+            [1280.0, 720.0],
+            1,
+        ));
+    }
 }
