@@ -409,6 +409,7 @@ pub(super) const HUD: &[Item] = &[
     Item::Sub { label: "Crosshair", page: Page::Crosshair },
     Item::Choice { label: "Weapon Wheel Slowdown", cvar: "cl_wheel_timescale", choices: WHEEL_TIME },
     Item::Sub { label: "Messages & Captions", page: Page::Messages },
+    toggle("Modern Console", "con_modern"),
     toggle("Show FPS", "scr_showfps"),
 ];
 

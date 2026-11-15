@@ -23,23 +23,50 @@ impl Host {
             HostEvent::PadRemoved(id) => self.pad_removed(id),
             HostEvent::Finger { id, phase, x, y } => self.finger_event(id, phase, x, y),
             HostEvent::MousePos { x, y } => {
-                if !self.menu.active() {
-                    return;
-                }
                 let Some(win) = &self.window else { return };
                 let (pw, ph) = win.drawable_size();
                 let (ww, wh) = win.window_size();
                 let (px, py) = (x * pw as f32 / ww.max(1) as f32, y * ph as f32 / wh.max(1) as f32);
                 let mut c = Canvas::new(pw, ph);
-                c.menu_layout();
-                let pos = (px / c.scale - c.ox, py / c.scale - c.oy);
-                if let Some(snd) = self.menu.mouse_move(pos, &mut self.server.core.cvars) {
-                    self.local_sound(snd);
+                if self.menu.active() {
+                    c.menu_layout();
+                    let pos = (px / c.scale - c.ox, py / c.scale - c.oy);
+                    if let Some(snd) = self.menu.mouse_move(pos, &mut self.server.core.cvars) {
+                        self.local_sound(snd);
+                    }
+                } else if self.key_dest() == KeyDest::Console && self.con.modern {
+                    let cell = self.con.hit_cell(px / c.scale, py / c.scale);
+                    self.con.hover_cell = cell;
+                    if self.con.selection.dragging
+                        && let Some(cell) = cell
+                    {
+                        self.con.selection.focus = cell;
+                    }
                 }
             }
             HostEvent::Input(ie) => {
-                if let InputEvent::MouseButton { button: 1, down: false } = ie {
-                    self.menu.mouse_up();
+                if let InputEvent::MouseButton { button: 1, down } = ie {
+                    if down {
+                        if self.key_dest() == KeyDest::Console
+                            && self.con.modern
+                            && let Some(cell) = self.con.hover_cell
+                        {
+                            self.con.selection = crate::console::edit::Selection {
+                                anchor: cell,
+                                focus: cell,
+                                active: true,
+                                dragging: true,
+                            };
+                        }
+                    } else {
+                        self.menu.mouse_up();
+                        if self.con.selection.dragging {
+                            self.con.selection.dragging = false;
+                            if let (Some(win), Some(s)) = (&self.window, self.con.selected_text()) {
+                                let _ = win.set_clipboard_text(&s);
+                            }
+                        }
+                    }
                 }
                 if let InputEvent::Key { key, down: true } = ie
                     && key == b'`' as i32
@@ -80,34 +107,82 @@ impl Host {
                 match routed {
                     Some(Routed::Escape) => self.menu.open(Screen::Main),
                     Some(Routed::Key { key, dest: KeyDest::Console }) => {
-                        if key == K_ESCAPE {
-                            if self.con.forced {
-                                self.menu.open(Screen::Main);
-                            } else {
-                                self.con.open = false;
-                            }
-                        } else {
-                            let cmds = &self.cmds;
-                            let cv = &self.server.core.cvars;
-                            let sv = &self.server;
-                            let complete = |p: &str| -> Vec<String> {
-                                let mut v: Vec<String> = cmds.complete(p).into_iter().map(str::to_string).collect();
-                                v.extend(cv.complete(p).into_iter().map(str::to_string));
-                                v.extend(sv.complete_command(p).into_iter().map(str::to_string));
-                                v
-                            };
-                            if let Some(line) = self.con.key(key, &complete) {
-                                self.cbuf.add_text(&line);
-                                self.cbuf.add_text("\n");
-                            }
+                        self.console_key(key);
+                    }
+                    Some(Routed::Text { ch, dest: KeyDest::Console }) => {
+                        if !self.input.key_down(qinput::keys::K_CTRL) && !self.input.key_down(qinput::keys::K_ALT) {
+                            self.con.text(ch);
                         }
                     }
-                    Some(Routed::Text { ch, dest: KeyDest::Console }) => self.con.text(ch),
                     Some(Routed::Text { ch, dest: KeyDest::Menu }) => self.menu.text(ch, &mut self.server.core.cvars),
                     Some(Routed::Key { key, dest: KeyDest::Menu }) => self.menu_key(key),
                     _ => {}
                 }
                 self.sync_key_dest();
+            }
+        }
+    }
+
+    fn console_key(&mut self, key: i32) {
+        use qinput::keys::*;
+        self.con.modern = self.cv("con_modern") != 0.0;
+        if self.con.modern {
+            let mods = crate::console::edit::Modifiers {
+                ctrl: self.input.key_down(K_CTRL),
+                shift: self.input.key_down(K_SHIFT),
+                alt: self.input.key_down(K_ALT),
+            };
+            if key == K_ESCAPE {
+                if let Some(pty) = &mut self.con.pty
+                    && (pty.vt.in_alt_screen() || mods.shift)
+                {
+                    pty.write_bytes(b"\x1b");
+                    return;
+                }
+                if self.con.search.active {
+                    self.con.search.active = false;
+                } else if self.con.completion.visible {
+                    self.con.completion.clear();
+                } else if self.con.forced {
+                    self.menu.open(Screen::Main);
+                } else {
+                    self.con.open = false;
+                }
+                return;
+            }
+            self.sync_console_cvars();
+            let win = &self.window;
+            let clip_get = || win.as_ref().and_then(|w| w.clipboard_text());
+            let clip_set = |s: &str| {
+                if let Some(w) = win.as_ref() {
+                    let _ = w.set_clipboard_text(s);
+                }
+            };
+            if let Some(line) = self.con.key_modern(key, mods, &clip_get, &clip_set) {
+                self.cbuf.add_text(&line);
+                self.cbuf.add_text("\n");
+            }
+            return;
+        }
+        if key == K_ESCAPE {
+            if self.con.forced {
+                self.menu.open(Screen::Main);
+            } else {
+                self.con.open = false;
+            }
+        } else {
+            let cmds = &self.cmds;
+            let cv = &self.server.core.cvars;
+            let sv = &self.server;
+            let complete = |p: &str| -> Vec<String> {
+                let mut v: Vec<String> = cmds.complete(p).into_iter().map(str::to_string).collect();
+                v.extend(cv.complete(p).into_iter().map(str::to_string));
+                v.extend(sv.complete_command(p).into_iter().map(str::to_string));
+                v
+            };
+            if let Some(line) = self.con.key(key, &complete) {
+                self.cbuf.add_text(&line);
+                self.cbuf.add_text("\n");
             }
         }
     }

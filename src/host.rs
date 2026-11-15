@@ -313,6 +313,9 @@ impl Host {
         shader::register_shader_commands(&mut h.cmds);
         h.con.forced = true;
         h.con.frac = 1.0;
+        h.con.load_history(&crate::user_dir("id1"));
+        h.sync_shell_env();
+        h.sync_console_catalog();
         // 2026 update compat (ironwail host.c): word-wrap centerprints for mg3.
         let mg3 = h.server.core.fs.game_dirs().iter().any(|d| d.eq_ignore_ascii_case("mg3"));
         h.server.core.cvars.set("scr_usekfont", if mg3 { "1" } else { "0" });
@@ -348,19 +351,6 @@ impl Host {
 
     fn cvs(&self, name: &str) -> &str {
         self.server.core.cvars.by_name(name).map_or("", |c| c.string.as_str())
-    }
-
-    pub fn toggle_console(&mut self) {
-        if self.con.forced {
-            if !self.menu.active() {
-                self.menu.open(Screen::Main);
-            }
-            return;
-        }
-        self.con.open = !self.con.open;
-        self.con.input.clear();
-        self.con.cursor = 0;
-        self.menu.screen = Screen::None;
     }
 
     /// Time scale for the world while the weapon wheel is open (single player only).
@@ -461,13 +451,7 @@ fn cmd_fog(h: &mut Host, a: &Args) {
         2 | 3 => (n(1), f.color),
         4 => (f.density, [n(1), n(2), n(3)]),
         5 | 6 => (n(1), [n(2), n(3), n(4)]),
-        _ => {
-            h.print(&format!(
-                "usage:\n   fog <density>\n   fog <red> <green> <blue>\n   fog <density> <red> <green> <blue>\ncurrent values:\n   \"density\" is \"{}\"\n   \"red\"     is \"{}\"\n   \"green\"   is \"{}\"\n   \"blue\"    is \"{}\"\n",
-                f.density, f.color[0], f.color[1], f.color[2]
-            ));
-            return;
-        }
+        _ => return h.print(&format!("usage:\n   fog <density>\n   fog <red> <green> <blue>\n   fog <density> <red> <green> <blue>\ncurrent values:\n   \"density\" is \"{}\"\n   \"red\"     is \"{}\"\n   \"green\"   is \"{}\"\n   \"blue\"    is \"{}\"\n", f.density, f.color[0], f.color[1], f.color[2])),
     };
     h.cl.fog = qclient::Fog { density: d.max(0.0), color: [r, g, b].map(|c| c.clamp(0.0, 1.0)), time: 0.0 };
 }

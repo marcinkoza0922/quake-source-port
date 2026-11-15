@@ -10,6 +10,8 @@ impl Host {
         self.con.text_scale = self.cv("scr_textscale");
         self.con.center_pos = self.cv("scr_centerpos").clamp(0.0, 2.0) as u8;
         self.con.notify_pos = self.cv("con_notifypos").clamp(0.0, 2.0) as u8;
+        self.con.modern = self.cv("con_modern") != 0.0;
+        self.sync_shell_env();
         self.sync_ui_text();
         c.ui = Some(self.ui_text.clone());
         let mut ents = Vec::new();

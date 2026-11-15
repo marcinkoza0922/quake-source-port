@@ -2,6 +2,7 @@
 /ironwail/
 /vkQuake/
 /vkQuake directory with maps
+/maps*
 *.pak
 *.pk3
 /refs/

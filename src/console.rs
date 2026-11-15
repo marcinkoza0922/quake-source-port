@@ -1,5 +1,15 @@
-//! Drop-down console (console.c / keys.c line editing), notify lines and
-//! centerprint (screen.c).
+//! Drop-down console (classic `console.c` + modern `con_modern` terminal with
+//! fuzzy autocomplete, persistent history, ANSI styling, interactive `bash`
+//! PTY and Quake-to-shell command piping), notify lines and centerprint.
+
+pub mod ansi;
+pub mod complete;
+pub mod edit;
+mod modern_draw;
+pub mod shell;
+pub mod vt;
+#[cfg(test)]
+mod tests;
 
 use std::collections::VecDeque;
 
@@ -7,7 +17,7 @@ use qinput::keys::*;
 
 use crate::draw::Canvas;
 
-const MAX_LINES: usize = 4096;
+pub(crate) const MAX_LINES: usize = 4096;
 const NUM_NOTIFY: usize = 4;
 /// Backdrop colour behind messages when `text_bg` is on.
 pub const TEXT_BG: [f32; 4] = [0.0, 0.0, 0.0, 0.65];
@@ -22,10 +32,10 @@ pub struct Console {
     notify: VecDeque<(f64, Vec<u8>)>,
     pub input: String,
     pub cursor: usize,
-    history: Vec<String>,
-    hist_pos: usize,
+    pub(crate) history: Vec<String>,
+    pub(crate) hist_pos: usize,
     pub backscroll: usize,
-    /// Current drop-down fraction 0..1 of half screen.
+    /// Current drop-down fraction 0..1.
     pub frac: f32,
     pub open: bool,
     /// Forced full screen (no map running).
@@ -46,17 +56,62 @@ pub struct Console {
     pub center_pos: u8,
     /// Notify line position: 0 top-left, 1 top-center, 2 bottom-left.
     pub notify_pos: u8,
+    /// `con_modern`: use modern terminal console (default true).
+    pub modern: bool,
+    /// Target screen height fraction in modern mode (0.30..0.92).
+    pub height_frac: f32,
+    /// Styled lines for the modern console.
+    pub modern_lines: VecDeque<Vec<ansi::StyledCell>>,
+    pub(crate) modern_cur: Vec<ansi::StyledCell>,
+    pub(crate) style: ansi::CellStyle,
+    pub catalog: complete::Catalog,
+    pub completion: complete::CompletionState,
+    pub(crate) tab_cycled: bool,
+    pub search: edit::ReverseSearch,
+    pub selection: edit::Selection,
+    pub pty: Option<shell::PtySession>,
+    pub jobs: Vec<shell::ShellJob>,
+    pub shell_env: shell::ShellEnv,
+    pub(crate) capture: Option<String>,
+    pub(crate) grid_cols: usize,
+    pub(crate) grid_rows: usize,
+    pub(crate) last_body_top: f32,
+    pub(crate) last_panel_h: f32,
+    pub(crate) last_cell_w: f32,
+    pub(crate) hover_cell: Option<(usize, usize)>,
 }
 
 impl Console {
     pub fn new() -> Self {
-        Self { width: 78, notify_time: 3.0, text_scale: 1.0, ..Default::default() }
+        Self {
+            width: 78,
+            notify_time: 3.0,
+            text_scale: 1.0,
+            modern: true,
+            height_frac: 0.58,
+            grid_cols: 80,
+            grid_rows: 24,
+            ..Default::default()
+        }
     }
 
     /// Con_Print: appends text, wrapping at `width`.
     pub fn print(&mut self, text: &str) {
-        eprint!("{}", text.replace(|c: char| (c as u32) < 32 && c != '\n', ""));
-        let mut bytes: Vec<u8> = text.chars().map(|c| if (c as u32) < 256 { c as u32 as u8 } else { b'?' }).collect();
+        if let Some(cap) = &mut self.capture {
+            cap.push_str(&ansi::strip_ansi(text));
+            return;
+        }
+        ansi::append_styled(
+            text,
+            &mut self.modern_cur,
+            &mut self.modern_lines,
+            &mut self.style,
+            self.width,
+            MAX_LINES,
+        );
+        let plain = ansi::strip_ansi(text);
+        eprint!("{}", plain.replace(|c: char| (c as u32) < 32 && c != '\n', ""));
+        let mut bytes: Vec<u8> = plain.chars().map(|c| if (c as u32) < 256 { c as u32 as u8 } else { b'?' }).collect();
         // \x01 / \x02: coloured line (Con_Print mask)
         let mut mask = 0u8;
         if let Some(&b) = bytes.first()
@@ -106,7 +161,7 @@ impl Console {
         self.center_time = self.realtime + centertime;
     }
 
-    /// Key in console. Returns a command line to execute or completion request.
+    /// Classic key handler (`con_modern 0`). Returns a command line to execute.
     pub fn key(&mut self, key: i32, complete: &dyn Fn(&str) -> Vec<String>) -> Option<String> {
         match key {
             K_ENTER | K_KP_ENTER => {
@@ -158,13 +213,17 @@ impl Console {
     }
 
     pub fn text(&mut self, ch: char) {
+        if self.modern {
+            self.text_modern(ch);
+            return;
+        }
         if ch.is_ascii() && !ch.is_ascii_control() && ch != '`' && ch != '~' {
             self.input.insert(self.cursor, ch);
             self.cursor += 1;
         }
     }
 
-    /// Tab completion over the last word of the input line.
+    /// Classic tab completion over the last word of the input line.
     fn complete(&mut self, complete: &dyn Fn(&str) -> Vec<String>) {
         let start = self.input[..self.cursor].rfind([' ', ';']).map_or(0, |i| i + 1);
         let partial = self.input[start..self.cursor].to_string();
@@ -201,7 +260,7 @@ impl Console {
     /// Slide animation (con_speed-like).
     pub fn update(&mut self, dt: f32) {
         let target = if self.forced || self.open { 1.0 } else { 0.0 };
-        let step = dt * 3.0;
+        let step = dt * 4.0;
         if self.frac < target {
             self.frac = (self.frac + step).min(target);
         } else if self.frac > target {
@@ -213,10 +272,14 @@ impl Console {
     pub fn draw(&mut self, c: &mut Canvas, conback: Option<(qrender::PicId, u32, u32)>, show_notify: bool, centerprint: bool) {
         c.reset_origin();
         let (vw, vh) = (c.vw(), c.vh());
-        self.width = ((vw / 8.0) as usize).saturating_sub(2).max(10);
         let full = if self.forced { vh } else { (vh / 2.0).floor() };
         let lines_h = (full * self.frac).floor();
         if lines_h > 0.0 {
+            if self.modern && c.ui.is_some() {
+                self.draw_modern(c);
+                return;
+            }
+            self.width = ((vw / 8.0) as usize).saturating_sub(2).max(10);
             if let Some((pic, _, _)) = conback {
                 let s = c.scale;
                 c.pic_stretch_px([0.0, (lines_h - vh) * s, vw * s, vh * s], pic);
@@ -330,7 +393,6 @@ pub fn word_wrap(src: &str, maxcols: usize) -> String {
     let mut p = 0;
     while p < b.len() {
         let s = &b[p..];
-        // COM_AdvanceLineWrapped
         let mut i = 0;
         let (len, adv) = 'line: {
             while i < maxcols && i < s.len() {
@@ -359,41 +421,4 @@ pub fn word_wrap(src: &str, maxcols: usize) -> String {
         }
     }
     qcore::text::decode(&out)
-}
-
-#[cfg(test)]
-mod wrap_tests {
-    use super::word_wrap;
-
-    #[test]
-    fn wraps_words() {
-        // as COM_AdvanceLineWrapped, the space before a pushed word stays
-        assert_eq!(word_wrap("the quick brown fox", 10), "the quick \nbrown fox");
-        assert_eq!(word_wrap("abcdefghijkl xy", 5), "abcde\nfghij\nkl xy");
-        assert_eq!(word_wrap("one\ntwo", 40), "one\ntwo");
-        assert_eq!(word_wrap("no wrap", 0), "no wrap");
-    }
-
-    #[test]
-    fn colored_centerprint_wraps_and_centers_by_font_indices() {
-        use crate::draw::Canvas;
-        use qrender::Draw2D;
-        let title = b"\xa0\xd0\xe5\xee\xe4\xf2\xe1\xe7\xef\xee\xa0";
-        let mut con = super::Console::new();
-        con.center_print(&qcore::text::decode(title), 2.0, 11);
-        assert_eq!(con.centerprint.len(), 1);
-        let mut canvas = Canvas::new(640, 480);
-        con.draw_center(&mut canvas, usize::MAX);
-        let glyphs: Vec<_> = canvas.list.iter().filter_map(|d| match d {
-            Draw2D::Char { x, ch, .. } => Some((*x, *ch)),
-            _ => None,
-        }).collect();
-        assert_eq!(glyphs.iter().map(|&(_, ch)| ch).collect::<Vec<_>>(), title);
-        assert_eq!(glyphs[0].0, 232.0); // (320 - 11*8)/2, at scale 2
-        let wrapped = word_wrap(&qcore::text::decode(b"\xd0\xe5\xee\xe4 \x9e\x9d\x9d"), 5);
-        assert_eq!(qcore::text::encode(&wrapped), b"\xd0\xe5\xee\xe4 \n\x9e\x9d\x9d");
-        canvas.list.clear();
-        con.draw_center(&mut canvas, 2);
-        assert_eq!(canvas.list.len(), 2); // finale typewriter limit is glyphs
-    }
 }

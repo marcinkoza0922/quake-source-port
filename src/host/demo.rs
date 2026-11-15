@@ -218,3 +218,56 @@ impl Host {
         }
     }
 }
+
+pub(super) fn register(c: &mut Commands<Host>) {
+    c.add("startdemos", |h, a| {
+        h.demos = (1..a.argc()).map(|i| a.argv(i).to_string()).collect();
+        h.print(&format!("{} demo(s) in loop\n", h.demos.len()));
+        if !h.server.active() && !h.dedicated && !h.remote() && h.demonum != -1 && h.demo.is_none() {
+            h.demonum = 0;
+            if h.cv("cl_startdemos") == 0.0 {
+                h.demonum = -1;
+                return;
+            }
+            h.next_demo();
+        } else {
+            h.demonum = -1;
+        }
+    });
+    c.add("demos", |h, _| {
+        if h.demonum == -1 {
+            h.demonum = 1;
+        }
+        h.stop_game();
+        h.next_demo();
+    });
+    c.add("record", |h, a| h.record(a));
+    c.add("stop", |h, _| {
+        if h.recording.is_none() {
+            h.print("Not recording a demo.\n");
+        }
+        h.stop_recording();
+    });
+    c.add("timedemo", |h, a| {
+        if a.argc() != 2 {
+            h.print("timedemo <demoname> : gets demo speeds\n");
+            return;
+        }
+        h.play_demo(a.argv(1));
+        if h.demo.is_some() {
+            h.timedemo = Some((0, std::time::Instant::now()));
+        }
+    });
+    c.add("stopdemo", |h, _| {
+        if h.demo.is_some() {
+            h.disconnect_client();
+        }
+    });
+    c.add("playdemo", |h, a| {
+        if a.argc() < 2 {
+            h.print("playdemo <demoname> : plays a demo\n");
+            return;
+        }
+        h.play_demo(a.argv(1));
+    });
+}

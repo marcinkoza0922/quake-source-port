@@ -46,6 +46,7 @@ impl Host {
         if let Err(e) = std::fs::write(dir.join("config.cfg"), s) {
             eprintln!("couldn't write config.cfg: {e}");
         }
+        self.con.save_history(&crate::user_dir("id1"));
     }
 
     /// Per-game user data dir (config, saves, screenshots); never the game data dir.
@@ -110,4 +111,74 @@ impl Host {
 /// A save name without a `.sav`/`.qsa` extension.
 fn save_stem(name: &str) -> &str {
     name.strip_suffix(".sav").or_else(|| name.strip_suffix(".qsa")).unwrap_or(name)
+}
+
+pub(super) fn register(c: &mut Commands<Host>) {
+    c.add("menu_load", |h, _| {
+        h.menu.autosaves = false;
+        h.menu.open(Screen::Load);
+        h.scan_saves();
+    });
+    c.add("menu_autosaves", |h, _| {
+        h.menu.autosaves = true;
+        h.menu.open(Screen::Load);
+        h.scan_saves();
+    });
+    c.add("menu_save", |h, _| {
+        h.menu.autosaves = false;
+        if h.server.active() {
+            h.menu.open(Screen::Save);
+            h.scan_saves();
+        }
+    });
+    c.add("_scansaves", |h, _| h.scan_saves());
+    c.add("save", |h, a| {
+        if a.argc() != 2 {
+            h.print("save <savename> : save a game\n");
+            return;
+        }
+        if !h.server.active() || h.cl.intermission != 0 || h.cl.stats[STAT_HEALTH] <= 0 {
+            h.print("Can't save now.\n");
+            return;
+        }
+        let text = h.server.save_game();
+        let p = h.savegame_path(a.argv(1));
+        if let Some(d) = p.parent() {
+            let _ = std::fs::create_dir_all(d);
+        }
+        match std::fs::write(&p, qcore::text::encode(&text)) {
+            Ok(()) => {
+                // the slot is one save: drop a same-named file of the other format
+                if let (Some(d), Some(stem)) = (p.parent(), p.file_stem().and_then(|s| s.to_str())) {
+                    let _ = crate::autosave::remove_other_exts(d, stem, p.extension().and_then(|e| e.to_str()));
+                }
+                h.print(&format!("Saved {}\n", p.display()));
+            }
+            Err(e) => h.print(&format!("ERROR: couldn't write {}: {e}\n", p.display())),
+        }
+    });
+    c.add("load", |h, a| {
+        if a.argc() != 2 {
+            h.print("load <savename> : load a game\n");
+            return;
+        }
+        let Some(p) = h.find_save(a.argv(1)) else {
+            h.print(&format!("ERROR: couldn't open {}\n", h.savegame_path(a.argv(1)).display()));
+            return;
+        };
+        let Ok(bytes) = std::fs::read(&p) else {
+            h.print(&format!("ERROR: couldn't open {}\n", p.display()));
+            return;
+        };
+        let text = qcore::text::decode(&bytes);
+        h.print(&format!("Loading game from {}...\n", p.display()));
+        if let Some(i) = h.local.take() {
+            h.server.drop_client(i, false);
+        }
+        h.disconnect_client();
+        if let Err(e) = h.server.load_game(&text) {
+            h.print(&format!("load failed: {e}\n"));
+        }
+        h.drain_server_log();
+    });
 }

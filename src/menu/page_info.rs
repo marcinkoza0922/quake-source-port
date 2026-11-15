@@ -140,6 +140,7 @@ pub(super) fn tooltip(item: Item) -> Option<&'static str> {
         "scr_hudstyle" => "Classic: the original status bar; modern: compact elements at the screen edges",
         "scr_centerpos" => "Where center-screen messages appear",
         "con_notifypos" => "Where pickup and event messages appear",
+        "con_modern" => "Modern terminal console with autocomplete popup, history search, ANSI colors, bash shell and piping; off uses the classic Quake console",
         "hud_face" => "Shows the player face next to the health number",
         "hud_health" | "hud_armor" | "hud_ammo" | "hud_ammolist" | "hud_weapons" | "hud_items" => {
             "Immersive: appears for a few seconds only when its value changes"

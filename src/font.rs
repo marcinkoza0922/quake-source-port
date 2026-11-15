@@ -19,6 +19,9 @@ pub const FONTS: [(&str, &[u8]); 4] = [
     ("Kreon", include_bytes!("../assets/fonts/Kreon-Regular.ttf")),
 ];
 
+/// Bundled monospace font for the modern terminal console (`con_modern`).
+pub const MONO_FONT: &[u8] = include_bytes!("../assets/fonts/DejaVuSansMono.ttf");
+
 const ATLAS: usize = 1024;
 
 /// Vector shapes drawn as white coverage masks (tinted by the draw colour).
@@ -41,7 +44,7 @@ pub enum Shape {
 
 #[derive(Clone, Copy, PartialEq, Eq, Hash)]
 enum Key {
-    Glyph { ch: char, px: u16 },
+    Glyph { ch: char, px: u16, mono: bool },
     Shape { s: Shape, w: u16, h: u16 },
 }
 
@@ -59,6 +62,7 @@ pub struct Slot {
 
 pub struct UiText {
     font: FontArc,
+    mono: FontArc,
     /// (ui_menufont, ui_fontfile) the font was loaded for.
     pub source: (i32, String),
     pub pic: Option<qrender::PicId>,
@@ -77,8 +81,10 @@ impl Default for UiText {
 
 impl UiText {
     pub fn new(font: FontArc) -> Self {
+        let mono = FontArc::try_from_slice(MONO_FONT).expect("bundled mono font");
         Self {
             font,
+            mono,
             source: (0, String::new()),
             pic: None,
             px: vec![0; ATLAS * ATLAS * 4],
@@ -181,12 +187,29 @@ impl UiText {
 
     /// Atlas slot of `ch` at `px` (rasterised on first use).
     pub fn glyph(&mut self, ch: char, px: u16) -> Option<Slot> {
-        let key = Key::Glyph { ch, px };
+        self.glyph_from(ch, px, false)
+    }
+
+    /// Integer pixel advance of one monospace cell at `px`.
+    pub fn mono_advance(&self, px: u16) -> f32 {
+        let sf = self.mono.as_scaled(PxScale::from(px as f32));
+        sf.h_advance(self.mono.glyph_id('M')).ceil().max(1.0)
+    }
+
+    /// Atlas slot of `ch` at `px` from the bundled monospace font (`DejaVuSansMono`).
+    pub fn mono_glyph(&mut self, ch: char, px: u16) -> Option<Slot> {
+        self.glyph_from(ch, px, true)
+    }
+
+    fn glyph_from(&mut self, ch: char, px: u16, mono: bool) -> Option<Slot> {
+        let key = Key::Glyph { ch, px, mono };
         if let Some(s) = self.map.get(&key) {
             return *s;
         }
-        let g = self.font.glyph_id(ch).with_scale_and_position(PxScale::from(px as f32), ab_glyph::point(0.0, 0.0));
-        let slot = match self.font.outline_glyph(g) {
+        let font = if mono { &self.mono } else { &self.font };
+        let id = font.glyph_id(ch);
+        let g = id.with_scale_and_position(PxScale::from(px as f32), ab_glyph::point(0.0, 0.0));
+        let slot = match font.outline_glyph(g) {
             None => None,
             Some(o) => {
                 let b = o.px_bounds();
