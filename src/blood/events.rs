@@ -181,6 +181,7 @@ impl Blood {
         view: Vec3,
         debris: &crate::debris::Debris,
     ) {
+        let tier = set.tier();
         self.explosions.retain(|(_, t)| cl.time - *t < 0.6);
         self.explosions.extend(
             cl.shot_impacts
@@ -208,7 +209,7 @@ impl Blood {
                     hits.push((hit + n * 4.0, out));
                     continue;
                 }
-                if set.wounds {
+                if tier.wounds {
                     self.wound(e, v, hit, n, cl.time, 7.0 * set.size);
                 }
                 hits.push((hit + n * 0.5, dir));
@@ -224,14 +225,14 @@ impl Blood {
             let a = debris.shot_origin(view, b);
             if let Some((key, p, n)) = shot_contact(&self.models, a, b, &mut poses, world) {
                 let (e, v) = poses.get(key).expect("matched entity pose must exist");
-                if set.wounds {
+                if tier.wounds {
                     self.wound(e, v, p, n, cl.time, 7.0 * set.size);
                 }
                 hits.push((p + n * 0.5, (b - a).normalize()));
             }
         }
         for (p, dir) in hits {
-            for k in 0..set.amount {
+            for k in 0..tier.amount {
                 let spread = Vec3::new(
                     self.random() - 0.5,
                     self.random() - 0.5,
@@ -244,12 +245,12 @@ impl Blood {
                 };
                 let size = (5.0 + self.random() * 9.0) * set.size;
                 let speed = 220.0 + self.random() * 260.0;
-                self.launch(p, d, speed, size);
+                self.launch(p, d, speed, size, tier.max_droplets);
             }
             // A heavier gout falls almost straight down from the wound.
             let drip = Vec3::new(dir.x * 0.3, dir.y * 0.3, -1.0).normalize();
             let speed = 40.0 + self.random() * 60.0;
-            self.launch(p, drip, speed, 9.0 * set.size);
+            self.launch(p, drip, speed, 9.0 * set.size, tier.max_droplets);
         }
         self.gib_events(set, cl, debris);
     }
@@ -317,7 +318,8 @@ impl Blood {
     /// Many independent rays, including shallow trajectories that carry
     /// droplets across a room. World traces keep the spray behind cover.
     pub(super) fn burst(&mut self, p: Vec3, set: Settings) {
-        let count = 48 + set.amount * 12;
+        let tier = set.tier();
+        let count = tier.burst_base + tier.amount * tier.burst_per_amount;
         for i in 0..count {
             let z = 1.0 - 2.0 * (i as f32 + self.random()) / count as f32;
             let a = i as f32 * 2.399963 + self.random() * 0.5;
@@ -325,7 +327,7 @@ impl Blood {
             let dir = Vec3::new(a.cos() * r, a.sin() * r, z);
             let speed = 300.0 + self.random() * 420.0;
             let size = (4.0 + self.random() * 15.0) * set.size;
-            self.launch(p, dir, speed, size);
+            self.launch(p, dir, speed, size, tier.max_droplets);
         }
     }
 }

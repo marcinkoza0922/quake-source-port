@@ -64,10 +64,10 @@ impl Host {
             if self.cv("r_blood") != 0.0 || self.cv("r_impact_nails") != 0.0 || self.cv("r_impact_bullets") != 0.0 {
                 self.debris.track_shooters(&self.cl, &self.level, self.cl.time);
             }
-            let debris_frustum = self.cull_fte_for_view().then(|| {
+            let fte_frustum = self.cull_fte_for_view().then(|| {
                 qrender::ViewFrustum::from_view(v, (w, h), self.cv("r_renderscale"))
             });
-            self.debris.entities(&mut ents, &mut dyn_verts, debris_frustum.as_ref());
+            self.debris.entities(&mut ents, &mut dyn_verts, fte_frustum.as_ref());
             if self.cv("r_drawentities") == 0.0 {
                 ents.clear();
             }
@@ -158,11 +158,11 @@ impl Host {
             self.blood.frame(
                 crate::blood::Settings::read(&self.server.core.cvars), &self.cl, &self.level, &mut brushes,
                 &self.server.core.fs, &mut self.r, &ents, &dyn_verts,
-                v.origin.into(), &self.debris, &mut fte,
+                v.origin.into(), &self.debris, fte_frustum.as_ref(), &mut fte,
             );
             self.hitfx.frame(
                 &self.server.core.cvars, &self.cl, &self.level, &mut brushes, &self.server.core.fs,
-                &mut self.r, v, &self.debris, &mut fte,
+                &mut self.r, v, &self.debris, fte_frustum.as_ref(), &mut fte,
             );
             // Projectile pellets already draw their own streaks; hitscan ones would stack.
             let pellets = self.cv("addons_active") != 0.0 && self.cv("addon_projectile_shotguns") != 0.0
@@ -171,7 +171,7 @@ impl Host {
             self.tracers.frame(hitscan, &self.cl, &self.debris, v, &mut self.r, &mut fte);
             self.impacts.frame(
                 &self.server.core.cvars, &self.cl, &self.level, &mut brushes, &self.server.core.fs,
-                &mut self.r, &mut ents, &dyn_verts, v.origin.into(), &self.debris, &mut fte,
+                &mut self.r, &mut ents, &dyn_verts, v.origin.into(), &self.debris, fte_frustum.as_ref(), &mut fte,
             );
             crate::view::dlights(&self.cl, &mut dls);
             let contents = self.contents(v.origin);

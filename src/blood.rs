@@ -11,40 +11,23 @@ mod droplets;
 mod effects_tests;
 mod events;
 pub(crate) mod mesh;
+mod settings;
 #[cfg(test)]
 mod tests;
 
-pub type Geometry = (Vec<FteVertex>, Vec<u32>, Vec<FteBatch>);
+#[cfg(test)]
+pub use settings::Quality;
+pub use settings::Settings;
 
-#[derive(Clone, Copy)]
-pub struct Settings {
-    pub enabled: bool,
-    pub amount: usize,
-    pub size: f32,
-    pub lifetime: f64,
-    pub limit: usize,
-    pub wounds: bool,
-    pub gibs: bool,
-}
-impl Settings {
-    pub fn read(cv: &qcore::cvar::Cvars) -> Self {
-        Self {
-            enabled: cv.value_of("r_blood") != 0.0,
-            amount: cv.value_of("r_blood_amount").clamp(1.0, 12.0) as usize,
-            size: cv.value_of("r_blood_size").clamp(0.25, 3.0),
-            lifetime: cv.value_of("r_blood_lifetime").clamp(5.0, 600.0) as f64,
-            limit: cv.value_of("r_blood_maxmarks").clamp(32.0, 2048.0) as usize,
-            wounds: cv.value_of("r_blood_wounds") != 0.0,
-            gibs: cv.value_of("r_blood_gibs") != 0.0,
-        }
-    }
-}
+pub type Geometry = (Vec<FteVertex>, Vec<u32>, Vec<FteBatch>);
 
 struct Mark {
     born: f64,
     /// A brush entity or world (0).
     surface: i32,
     normal: Vec3,
+    center: Vec3,
+    radius: f32,
     variant: u8,
     /// Wounds follow triangle topology, including a ragdoll takeover.
     owner: Option<(u32, ModelId)>,
@@ -154,10 +137,15 @@ impl Blood {
             },
         );
         if !patches.is_empty() {
+            let (center, radius) = mesh::bounds(
+                patches.iter().flat_map(|p| p.points.iter().map(|pt| pt.pos)),
+            );
             self.marks.push_back(Mark {
                 born: time,
                 surface: tr.entity,
                 normal: tr.normal,
+                center,
+                radius,
                 variant,
                 owner: None,
                 patches,
@@ -204,6 +192,8 @@ impl Blood {
                 born: time,
                 surface: 0,
                 normal: n,
+                center: Vec3::ZERO,
+                radius: 0.0,
                 variant,
                 owner: Some((e.key, e.model)),
                 patches,
@@ -251,6 +241,7 @@ impl Blood {
         dynverts: &[u32],
         view: Vec3,
         debris: &crate::debris::Debris,
+        frustum: Option<&qrender::ViewFrustum>,
         out: &mut Geometry,
     ) {
         if !set.enabled {
@@ -260,6 +251,7 @@ impl Blood {
         if cl.time < self.time {
             self.clear();
         }
+        let tier = set.tier();
         let dt = (cl.time - self.time).clamp(0.0, 0.1) as f32;
         self.time = cl.time;
         let Some(world) = cached_world(cl, lv, brushes) else { return };
@@ -305,7 +297,11 @@ impl Blood {
             debris,
         );
         self.step_droplets(&world, dt, cl.time);
-        if set.gibs {
+        if self.droplets.len() > tier.max_droplets {
+            let extra = self.droplets.len() - tier.max_droplets;
+            self.droplets.drain(..extra);
+        }
+        if tier.gibs {
             let mut next = std::mem::take(&mut self.trails_scratch);
             next.clear();
             for (key, p) in debris.blood_sources() {
@@ -336,7 +332,7 @@ impl Blood {
             self.trails.clear();
         }
         self.marks.retain(|m| {
-            cl.time - m.born < set.lifetime
+            cl.time - m.born < tier.lifetime
                 && m.owner.is_none_or(|(key, model)| {
                     cl.entities.get(key as usize).is_some_and(|e| {
                         cl.model_name(e.model).is_some()
@@ -350,10 +346,10 @@ impl Blood {
                     })
                 })
         });
-        while self.marks.len() > set.limit {
+        while self.marks.len() > tier.limit {
             self.marks.pop_front();
         }
-        if set.wounds {
+        if tier.wounds {
             for m in &self.marks {
                 if let Some((key, model)) = m.owner
                     && !poses.contains_key(&key)
@@ -362,6 +358,7 @@ impl Blood {
                         .rev()
                         .find(|e| e.key == key && e.model == model && !e.viewmodel)
                     && let Some(Some(cm)) = self.models.get(&e.model)
+                    && frustum.is_none_or(|f| f.contains_sphere(e.origin, cm.entity_radius(e)))
                 {
                     poses.insert(key, (e, mesh::positions(&cm.mdl, e, dynverts, cl.time)));
                 }
@@ -377,32 +374,44 @@ impl Blood {
                 .ok();
         }
         if let Some(pic) = self.pic {
-            self.draw(set, cl.time, &world, &poses, view, pic, out);
+            self.draw(tier, cl.time, &world, &poses, view, frustum, pic, out);
         }
     }
 
     #[allow(clippy::too_many_arguments)]
     fn draw(
         &self,
-        set: Settings,
+        tier: settings::Tier,
         time: f64,
         world: &dyn World,
         poses: &HashMap<u32, (&RenderEntity, Vec<Vec3>)>,
         view: Vec3,
+        frustum: Option<&qrender::ViewFrustum>,
         pic: PicId,
         out: &mut Geometry,
     ) {
         let first = out.1.len() as u32;
         for m in &self.marks {
-            if m.owner.is_some() && !set.wounds {
+            if m.owner.is_some() && !tier.wounds {
                 continue;
             }
-            let fade =
-                ((set.lifetime - (time - m.born)) / (set.lifetime * 0.15).min(5.0)).clamp(0.0, 1.0);
+            let fade = ((tier.lifetime - (time - m.born)) / (tier.lifetime * 0.15).min(5.0))
+                .clamp(0.0, 1.0);
             let pose = m
                 .owner
                 .and_then(|(k, id)| poses.get(&k).filter(|(e, _)| e.model == id));
-            if m.owner.is_some() && pose.is_none() {
+            if let Some((e, _)) = pose {
+                if let Some(f) = frustum {
+                    let r = self
+                        .models
+                        .get(&e.model)
+                        .and_then(Option::as_ref)
+                        .map_or(64.0, |cm| cm.entity_radius(e));
+                    if !f.contains_sphere(e.origin, r) {
+                        continue;
+                    }
+                }
+            } else if m.owner.is_some() {
                 continue;
             }
             let origin = if m.surface == 0 {
@@ -413,6 +422,11 @@ impl Blood {
                 };
                 o
             };
+            if m.owner.is_none()
+                && frustum.is_some_and(|f| !f.contains_sphere((m.center + origin).to_array(), m.radius))
+            {
+                continue;
+            }
             for patch in &m.patches {
                 let tri = pose.map(|(_, v)| patch.tri.map(|i| v[i]));
                 let normal = if let Some(v) = tri {
@@ -442,7 +456,7 @@ impl Blood {
                 }
             }
         }
-        self.draw_droplets(view, out);
+        self.draw_droplets(view, frustum, out);
         let count = out.1.len() as u32 - first;
         if count > 0 {
             out.2.push(FteBatch {

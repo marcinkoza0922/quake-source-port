@@ -49,9 +49,9 @@ pub const VANILLA: &[(&str, &str)] = &[
     ("r_lerpmodels", "1"), ("r_lerpmove", "1"),
     ("r_ssao", "0"), ("r_motionblur", "0"), ("r_motionblur_quality", "1"), ("r_speedblur", "0"), ("a11y_reducemotion", "0"),
     ("r_enhancedwater", "0"), ("r_teleportwindows", "0"), ("r_portal_quality", "1"), ("r_water_quality", "1"),
-    ("r_impact_fx", "0"), ("r_impact_bullets", "0"), ("r_impact_nails", "0"),
+    ("r_impact_quality", "1"), ("r_impact_fx", "0"), ("r_impact_bullets", "0"), ("r_impact_nails", "0"),
     ("r_shotgun_tracers", "0"), ("r_impact_scorches", "0"),
-    ("r_blood", "0"), ("r_debris", "0"), ("r_debris_quality", "1"), ("r_shader_preset", ""), ("r_colorblind", "0"),
+    ("r_blood", "0"), ("r_blood_quality", "1"), ("r_debris", "0"), ("r_debris_quality", "1"), ("r_shader_preset", ""), ("r_colorblind", "0"),
     ("addons_enable", "0"), ("addon_hitstop", "0"), ("addon_gel_quality", "1"), ("addon_washer_quality", "1"), ("r_fteparticles", "1"), ("r_particledesc", "classic"), ("r_part_rain", "1"), ("r_part_rain_quantity", "1"),
 ];
 
@@ -61,12 +61,12 @@ const WATER: &[(&str, &str)] = &[
     ("r_watercaustics", "1"), ("r_watercaustics_amount", "2"), ("r_water_quality", "1"),
 ];
 const IMPACTS: &[(&str, &str)] = &[
-    ("r_impact_fx", "4"), ("r_impact_bullets", "1"), ("r_impact_nails", "1"),
+    ("r_impact_quality", "2"), ("r_impact_fx", "4"), ("r_impact_bullets", "1"), ("r_impact_nails", "1"),
     ("r_shotgun_tracers", "1"), ("r_impact_scorches", "1"),
     ("r_impact_lifetime", "600"), ("r_impact_limit", "2048"),
 ];
 const BLOOD: &[(&str, &str)] = &[
-    ("r_blood", "1"), ("r_blood_amount", "12"), ("r_blood_size", "3"), ("r_blood_lifetime", "600"),
+    ("r_blood", "1"), ("r_blood_quality", "2"), ("r_blood_amount", "12"), ("r_blood_size", "3"), ("r_blood_lifetime", "600"),
     ("r_blood_maxmarks", "2048"), ("r_blood_wounds", "1"), ("r_blood_gibs", "1"),
 ];
 const DEBRIS: &[(&str, &str)] = &[

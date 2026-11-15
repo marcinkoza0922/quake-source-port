@@ -499,8 +499,7 @@ Enhancements → Impact Effects toggles, clipped bullet/scorch marks and embedde
 nails are implemented in `src/impacts.rs` and `src/impacts/`; see
 [IMPACTS.md](IMPACTS.md) for ownership, material heuristics and diagnostics. Both
 `blood` and `impacts` cache alias-model metadata (`CachedMdl` in `src/blood/mesh.rs`)
-once per `ModelId`, evaluate animated vertex positions lazily behind bounding-sphere
-culling, and share `Level::collision_model()` (`OnceLock`) plus one per-frame
+once per `ModelId`, skip offscreen entity posing and decal emission in single-view frames (`qrender::ViewFrustum`), cap budgets via `r_blood_quality` / `r_impact_quality`, and share `Level::collision_model()` (`OnceLock`) plus one per-frame
 `BrushEnt` list (`cached_world` in `src/fte/world.rs`) with `fte` and `hitfx`.
 
 The add-on browser checklist has an eight-row viewport with a scrollbar, separate

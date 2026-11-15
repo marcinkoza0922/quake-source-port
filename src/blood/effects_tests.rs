@@ -38,13 +38,8 @@ fn test_model(name: &str) -> Mdl {
 
 fn settings() -> Settings {
     Settings {
-        enabled: true,
-        amount: 5,
-        size: 1.0,
-        lifetime: 120.0,
-        limit: 512,
-        wounds: true,
-        gibs: true,
+        quality: Quality::High,
+        ..Settings::default()
     }
 }
 
@@ -315,4 +310,61 @@ fn near_misses_and_blood_behind_cover_do_not_use_live_skin_fallback() {
         blood.marks.is_empty(),
         "unmatched blood must not jump to a distant monster"
     );
+}
+
+#[test]
+fn quality_tiers_scale_budgets_and_frustum_culls_offscreen_emission() {
+    let mut max_set = Settings {
+        enabled: true,
+        quality: Quality::Low,
+        amount: 12,
+        size: 1.0,
+        lifetime: 600.0,
+        limit: 2048,
+        wounds: true,
+        gibs: true,
+    };
+    let low = max_set.tier();
+    max_set.quality = Quality::Medium;
+    let med = max_set.tier();
+    max_set.quality = Quality::High;
+    let high = max_set.tier();
+    assert_eq!((low.limit, low.lifetime as u32, low.amount, low.max_droplets, low.wounds, low.gibs), (256, 30, 3, 256, false, false));
+    assert_eq!((med.limit, med.lifetime as u32, med.amount, med.max_droplets, med.wounds, med.gibs), (512, 120, 6, 768, true, true));
+    assert_eq!((high.limit, high.lifetime as u32, high.amount, high.max_droplets, high.wounds, high.gibs), (2048, 600, 12, 2048, true, true));
+
+    let mut blood = Blood::default();
+    blood.marks.push_back(Mark {
+        born: 0.0,
+        surface: 0,
+        normal: Vec3::new(0.0, 0.0, 1.0),
+        center: Vec3::new(100.0, 0.0, 0.0),
+        radius: 4.0,
+        variant: 0,
+        owner: None,
+        patches: vec![mesh::Patch {
+            tri: [0; 3],
+            side: 1.0,
+            points: [
+                Vec3::new(98.0, -2.0, 0.0),
+                Vec3::new(102.0, -2.0, 0.0),
+                Vec3::new(100.0, 2.0, 0.0),
+            ]
+            .into_iter()
+            .map(|pos| mesh::Point { pos, uv: [0.5, 0.5], bary: Vec3::ZERO })
+            .collect(),
+        }],
+    });
+    blood.launch(Vec3::new(-100.0, 0.0, 0.0), Vec3::new(0.0, 0.0, 1.0), 100.0, 4.0, 16);
+    let view = qrender::View { origin: [0.0; 3], angles: [0.0; 3], fov_x: 90.0, ..Default::default() };
+    let frustum = qrender::ViewFrustum::from_view(&view, (1280, 720), 1.0);
+    let mut out = (Vec::new(), Vec::new(), Vec::new());
+    blood.draw(high, 0.0, &MovingFloor(Vec3::ZERO), &HashMap::new(), Vec3::ZERO, Some(&frustum), PicId(0), &mut out);
+    assert_eq!(out.0.len(), 3, "only the in-frustum mark should emit; behind-camera droplet must be culled");
+
+    let behind = qrender::View { angles: [0.0, 180.0, 0.0], ..view };
+    let behind_frustum = qrender::ViewFrustum::from_view(&behind, (1280, 720), 1.0);
+    let mut out_behind = (Vec::new(), Vec::new(), Vec::new());
+    blood.draw(high, 0.0, &MovingFloor(Vec3::ZERO), &HashMap::new(), Vec3::ZERO, Some(&behind_frustum), PicId(0), &mut out_behind);
+    assert_eq!(out_behind.0.len(), 4, "turned camera sees the droplet but culls the behind-camera mark");
 }

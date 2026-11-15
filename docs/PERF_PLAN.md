@@ -222,15 +222,33 @@ the remaining parity-bound phases below.
     - `qprof -only ultimate` / `ultimate-coop` (`1` run each, `ad_sepulcher`, default `Medium`): `ultimate` **130 → 134 fps** (frame **7724 → 7461 µs**, `p99` **23111 → 22554 µs**, `render cpu` **2865 → 2615 µs**, GPU **7421 → 7172 µs**); `ultimate-coop` **119 → 120 fps** (frame **8418 → 8308 µs**, `p99` **27570 → 26740 µs**, `render cpu` **3324 → 3188 µs**, GPU **8041 → 7947 µs**).
     - Controlled `ad_sepulcher` `sv_horde 3` rotating RL `prof_stop` probe (`r_debris_ragdollstart 1`, `r_debris_maxragdolls 64`): before single-run `off` vs `on` added **+131 µs** `render cpu` (`1613.0 → 1744.0 µs`, `ren_p99` `4180.0 µs`, `297.8 → 288.7 fps`); after 3-run medians: `off` `ren_cpu` **1406.8 µs** (`318.2 fps`, `ren_p99` `3907.7 µs`) → `q0` Low **1402.5 µs** (-4 µs vs off, `320.9 fps`, `ren_p99` **3510.7 µs**), `q1` Medium **1423.7 µs** (+17 µs vs off, `318.8 fps`, `ren_p99` **3547.0 µs**), `q2` High **1422.3 µs** (+16 µs vs off, `316.1 fps`, `ren_p99` **3733.8 µs**).
 
-### 21. Blood & impact decal budgets (*visual*)
+### 21. Blood & impact decal budgets (*visual*) — Done
 - Problem: while item 9 removed idle CPU overhead, max settings still allow
   up to 2048 blood marks (`r_blood_amount 12`), 2048 impact marks
   (`r_impact_fx 4`), and 600 s lifetimes, driving heavy overdraw and mesh
   wound work in sustained horde fights.
-- Plan: expose quality presets (`Low` / `Medium` / `High`) scaling mark
-  caps, lifetimes, droplet/spark counts, and `r_blood_wounds` /
-  `r_blood_gibs` mesh painting, plus frustum culling on decal emission.
-- Measure: `blood`, `impacts`, `ultimate`, `ultimate-coop`.
+- Fix:
+  - Added `r_blood_quality` (`0` Low / `1` Medium default / `2` High, archived
+    in `HOST_CVARS`, menu `Blood Settings`) scaling effective splatter rays,
+    burst counts, droplet cap (`256`/`768`/`2048`), lifetime (`30`/`120` s),
+    mark cap (`256`/`512`), and wound/gib painting (`off` on Low).
+  - Added `r_impact_quality` (`0` Low / `1` Medium default / `2` High, archived
+    in `HOST_CVARS`, menu `Impact Effects`) scaling mark lifetime
+    (`30`/`120` s), mark/nail cap (`256`/`512`), `r_impact_fx` tier (`2`/`3`),
+    spawn multiplier (`0.5×` on Low), and hitfx particle cap (`1024`/`2500`/`6000`).
+  - Stored bounding spheres on blood/impact marks and frustum-culled offscreen
+    entity mesh evaluation, marks, wounds, blood droplets, embedded/loose
+    nails, and `hitfx` emitters in single-view frames (`ViewFrustum`).
+- Results (`qprof -runs 3` before/after medians; `blood`/`impacts` pinned to
+  tier 2 in `qprof`, default `1` in `vanilla`):
+  - `ad_sepulcher` `ultimate`: **132 → 134 fps**, frame **7605 → 7448 µs**
+    (−157 µs), render CPU **2941 → 2717 µs** (−224 µs), GPU **7240 → 7163 µs**
+    (−77 µs).
+  - Controlled `ad_sepulcher` `sv_horde 3` combat probe (all blood/impact max
+    cvars enabled, `+attack`, 3 runs per tier on final build):
+    `q2` High **218.3 fps** (`4581 µs` frame, `2177 µs` render CPU, `4518 µs` GPU) →
+    `q1` Medium **219.8 fps** (`4550 µs` frame, `2160 µs` render CPU, `4488 µs` GPU) →
+    `q0` Low **222.1 fps** (`4502 µs` frame, `2104 µs` render CPU, `4439 µs` GPU).
 
 ### 22. Slang screen-shader input scale (*visual*)
 - Problem: `Slang::prepare_shader` (`crates/qrender/src/slang.rs`) allocates

@@ -16,8 +16,9 @@ pub(super) struct Droplet {
 
 impl Blood {
     /// Launches a droplet; `speed` sets how far it carries before gravity wins.
-    pub(super) fn launch(&mut self, p: Vec3, dir: Vec3, speed: f32, size: f32) {
-        if self.droplets.len() >= MAX_DROPLETS {
+    pub(super) fn launch(&mut self, p: Vec3, dir: Vec3, speed: f32, size: f32, max_droplets: usize) {
+        let cap = max_droplets.max(1);
+        while self.droplets.len() >= cap {
             self.droplets.swap_remove(0);
         }
         self.droplets.push(Droplet {
@@ -70,8 +71,16 @@ impl Blood {
     }
 
     /// Camera-facing streaks stretched along velocity.
-    pub(super) fn draw_droplets(&self, view: Vec3, out: &mut Geometry) {
+    pub(super) fn draw_droplets(
+        &self,
+        view: Vec3,
+        frustum: Option<&qrender::ViewFrustum>,
+        out: &mut Geometry,
+    ) {
         for d in &self.droplets {
+            if frustum.is_some_and(|f| !f.contains_sphere(d.pos.to_array(), 5.0)) {
+                continue;
+            }
             let speed = d.vel.length();
             if speed < 1e-3 {
                 continue;

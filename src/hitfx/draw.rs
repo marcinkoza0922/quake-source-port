@@ -58,12 +58,24 @@ fn batch(g: &mut Geometry, pic: PicId, first: u32, blend: FteBlend, soft: bool) 
     }
 }
 
-pub(super) fn draw(parts: &[Part], view: &View, pic: PicId, g: &mut Geometry) {
+pub(super) fn draw(
+    parts: &[Part],
+    view: &View,
+    frustum: Option<&qrender::ViewFrustum>,
+    pic: PicId,
+    g: &mut Geometry,
+) {
     let (_, right, up) = angle_vectors(view.angles.into());
     let eye = Vec3::from(view.origin);
+    let visible = |center: Vec3, radius: f32| {
+        frustum.is_none_or(|f| f.contains_sphere(center.to_array(), radius))
+    };
     // Smoke first (soft, alpha), then solid fragments, then additive light.
     let first = g.1.len() as u32;
     for p in parts.iter().filter(|p| p.kind == Kind::Smoke) {
+        if !visible(p.pos, p.size * 1.5) {
+            continue;
+        }
         let t = p.age / p.life;
         let alpha = p.alpha * (p.age * 10.0).min(1.0) * (1.0 - t).powf(1.5);
         let (s, c) = p.angle.sin_cos();
@@ -74,6 +86,9 @@ pub(super) fn draw(parts: &[Part], view: &View, pic: PicId, g: &mut Geometry) {
     batch(g, pic, first, FteBlend::Blend, true);
     let first = g.1.len() as u32;
     for p in parts.iter().filter(|p| p.kind == Kind::Chip) {
+        if !visible(p.pos, p.size * (p.stretch + 1.0)) {
+            continue;
+        }
         let alpha = ((p.life - p.age) / 0.4).min(1.0);
         let (s, c) = p.angle.sin_cos();
         let a = (right * c + up * s) * (p.size * p.stretch);
@@ -86,13 +101,20 @@ pub(super) fn draw(parts: &[Part], view: &View, pic: PicId, g: &mut Geometry) {
         let fade = 1.0 - p.age / p.life;
         if p.kind == Kind::Flash {
             let s = p.size * (0.6 + 0.4 * fade);
+            if !visible(p.pos, s * 1.5) {
+                continue;
+            }
             quad(g, [p.pos - right * s - up * s, p.pos + right * s - up * s, p.pos + right * s + up * s,
                 p.pos - right * s + up * s], GLOW, p.color, fade);
             continue;
         }
         // Streak from the head back along the velocity, as a motion-blurred ember.
         let tail = p.pos - p.vel * 0.03;
+        let mid = p.pos - p.vel * 0.015;
         let len = (p.pos - tail).length();
+        if !visible(mid, len * 0.5 + p.size * 2.0) {
+            continue;
+        }
         let along = if len > 0.1 { (p.pos - tail) / len } else { up };
         let side = along.cross(eye - p.pos).normalize();
         let side = if side.length_sq() > 0.5 { side * p.size } else { right * p.size };

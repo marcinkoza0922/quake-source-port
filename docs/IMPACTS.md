@@ -2,8 +2,10 @@
 
 `src/impacts.rs` owns client-only marks and nails, independently of enhanced
 blood, scripted particles and the debris master switch. Options → Enhancements → Impact Effects exposes
-archived `r_impact_bullets`, `r_impact_nails` and `r_impact_scorches` (all default
-0), plus `r_impact_lifetime` (120 seconds) and `r_impact_limit` (512). Marks
+archived `r_impact_quality` (`0` low, `1` medium default, `2` high — capping
+mark count/lifetime and hitfx spark/debris budgets), `r_impact_bullets`,
+`r_impact_nails` and `r_impact_scorches` (all default 0), plus
+`r_impact_lifetime` (120 seconds) and `r_impact_limit` (512). Marks
 and nails share the cap, recycle oldest first and fade over their last five
 seconds. Map changes, time rewind and disabling all effects clear state.
 

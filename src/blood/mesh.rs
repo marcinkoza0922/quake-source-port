@@ -16,6 +16,28 @@ pub struct Patch {
     pub points: Vec<Point>,
 }
 
+/// Bounding sphere enclosing `points` with a small decal-offset margin.
+pub fn bounds(points: impl Iterator<Item = Vec3> + Clone) -> (Vec3, f32) {
+    let mut min = Vec3::splat(f32::INFINITY);
+    let mut max = Vec3::splat(f32::NEG_INFINITY);
+    let mut any = false;
+    for p in points.clone() {
+        min = Vec3::new(min.x.min(p.x), min.y.min(p.y), min.z.min(p.z));
+        max = Vec3::new(max.x.max(p.x), max.y.max(p.y), max.z.max(p.z));
+        any = true;
+    }
+    if !any {
+        return (Vec3::ZERO, 0.0);
+    }
+    let center = (min + max) * 0.5;
+    let radius = points
+        .map(|p| (p - center).length_sq())
+        .fold(0.0f32, f32::max)
+        .sqrt()
+        + 0.25;
+    (center, radius)
+}
+
 pub fn clip(mut poly: Vec<Point>) -> Vec<Point> {
     for axis in 0..2 {
         for bound in [0.0, 1.0] {

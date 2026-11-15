@@ -13,9 +13,6 @@ mod spawn;
 
 pub(crate) use spawn::Material;
 
-/// Particle budget; the oldest are dropped first.
-const MAX_PARTS: usize = 6000;
-
 #[derive(Clone, Copy, PartialEq, Debug)]
 enum Kind {
     /// Additive streak stretched along its velocity.
@@ -103,9 +100,11 @@ impl HitFx {
         r: &mut qrender::Renderer,
         view: &View,
         debris: &crate::debris::Debris,
+        frustum: Option<&qrender::ViewFrustum>,
         out: &mut Geometry,
     ) {
-        let level = cv.value_of("r_impact_fx").clamp(0.0, 4.0) as u8;
+        let tier = crate::impacts::tier(cv);
+        let level = tier.fx_level;
         if level == 0 {
             if !self.parts.is_empty() {
                 self.parts.clear();
@@ -125,11 +124,11 @@ impl HitFx {
         for &(kind, p) in &cl.weapon_impacts {
             let p = Vec3::from(p);
             let from = debris.shot_origin(eye, p);
-            self.impact(&world, kind, p, from, level);
+            self.impact(&world, kind, p, from, level, tier.fx_mult);
         }
         self.step(&world, dt, cv.value_of("sv_gravity").max(1.0));
-        if self.parts.len() > MAX_PARTS {
-            let extra = self.parts.len() - MAX_PARTS;
+        if self.parts.len() > tier.max_parts {
+            let extra = self.parts.len() - tier.max_parts;
             self.parts.drain(..extra);
         }
         if self.parts.is_empty() {
@@ -139,12 +138,12 @@ impl HitFx {
             self.pic = r.register_pic_rgba_linear(draw::W, draw::H, &draw::texture()).ok();
         }
         if let Some(pic) = self.pic {
-            draw::draw(&self.parts, view, pic, out);
+            draw::draw(&self.parts, view, frustum, pic, out);
         }
     }
 
     /// Find the surface at an impact and throw off its material's effect.
-    fn impact(&mut self, world: &BspWorld<'_>, kind: u8, p: Vec3, from: Vec3, level: u8) {
+    fn impact(&mut self, world: &BspWorld<'_>, kind: u8, p: Vec3, from: Vec3, level: u8, mult: f32) {
         if kind == 2 {
             // Explosions: the nearest surface around the blast sheds debris.
             let dirs = [Vec3::new(0.0, 0.0, -1.0), Vec3::new(1.0, 0.0, 0.0), Vec3::new(-1.0, 0.0, 0.0),
@@ -156,7 +155,7 @@ impl HitFx {
                 .min_by(|a, b| a.frac.total_cmp(&b.frac));
             if let Some(tr) = best {
                 let mat = self.material(world, &tr);
-                spawn::blast(self, mat, tr.endpos, tr.normal, level);
+                spawn::blast(self, mat, tr.endpos, tr.normal, level, mult);
             }
             return;
         }
@@ -168,7 +167,7 @@ impl HitFx {
         } else {
             (p, -dir, (Material::Stone, [120, 115, 105]))
         };
-        spawn::hit(self, mat, pos + normal * 0.5, normal, dir, kind, level);
+        spawn::hit(self, mat, pos + normal * 0.5, normal, dir, kind, level, mult);
     }
 
     fn material(&mut self, world: &BspWorld<'_>, tr: &qpart::Trace) -> (Material, [u8; 3]) {
@@ -245,5 +244,25 @@ mod tests {
             fx.step(&w, 0.1, 800.0);
         }
         assert!(fx.parts.is_empty());
+    }
+
+    #[test]
+    fn frustum_culls_offscreen_hitfx_particles() {
+        let mut parts = vec![
+            Part { kind: Kind::Chip, pos: Vec3::new(100.0, 0.0, 0.0), size: 2.0, ..Default::default() },
+            Part { kind: Kind::Chip, pos: Vec3::new(-100.0, 0.0, 0.0), size: 2.0, ..Default::default() },
+        ];
+        let view = View { origin: [0.0; 3], angles: [0.0; 3], fov_x: 90.0, ..Default::default() };
+        let frustum = qrender::ViewFrustum::from_view(&view, (1280, 720), 1.0);
+        let mut out = (Vec::new(), Vec::new(), Vec::new());
+        draw::draw(&parts, &view, Some(&frustum), PicId(0), &mut out);
+        assert_eq!(out.0.len(), 4, "only the in-frustum chip should emit");
+        parts[0].kind = Kind::Spark;
+        parts[0].vel = Vec3::new(0.0, 100.0, 0.0);
+        parts[1].kind = Kind::Spark;
+        parts[1].vel = Vec3::new(0.0, 100.0, 0.0);
+        let mut out2 = (Vec::new(), Vec::new(), Vec::new());
+        draw::draw(&parts, &view, Some(&frustum), PicId(0), &mut out2);
+        assert_eq!(out2.0.len(), 4, "only the in-frustum spark should emit");
     }
 }

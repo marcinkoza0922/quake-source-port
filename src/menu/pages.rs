@@ -329,6 +329,7 @@ pub(super) const IMPACT_FX: &[(&str, f32)] =
     &[("off", 0.0), ("subtle", 1.0), ("normal", 2.0), ("intense", 3.0), ("spectacle", 4.0)];
 
 pub(super) const IMPACTS: &[Item] = &[
+    Item::Choice { label: "Impact Quality", cvar: "r_impact_quality", choices: DEBRIS_QUALITY },
     Item::Choice { label: "Surface Hit Effects", cvar: "r_impact_fx", choices: IMPACT_FX },
     toggle("Shotgun Bullet Decals", "r_impact_bullets"),
     toggle("Physical Nail Impacts", "r_impact_nails"),
@@ -473,6 +474,7 @@ pub(super) const AUDIO: &[Item] = &[
 
 /// Independent of the debris toggle and particle scripts.
 pub(super) const BLOOD: &[Item] = &[
+    Item::Choice { label: "Blood Quality", cvar: "r_blood_quality", choices: DEBRIS_QUALITY },
     slider("Splatter Amount", "r_blood_amount", 1.0, 12.0, 1.0),
     slider("Splatter Size", "r_blood_size", 0.25, 3.0, 0.25),
     slider("Lifetime (seconds)", "r_blood_lifetime", 5.0, 600.0, 5.0),
