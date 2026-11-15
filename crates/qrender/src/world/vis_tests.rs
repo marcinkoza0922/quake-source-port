@@ -92,3 +92,28 @@ fn shared_candidates_still_clip_each_view_and_preserve_destination_surfaces() {
     w.leaf_bits([1.0, 0.0, 0.0], &[[0.0, 0.0, 0.0, 1.0]; 4], &mut bits);
     assert_eq!(bits, [1 << 1]);
 }
+
+#[test]
+fn water_vised_skips_novis_only_when_pvs_crosses_liquid_boundaries() {
+    let mut w = world();
+    // Leaf 1 is air (-1) with a normal surface; leaf 2 is water (-3) with a *water surface.
+    w.texture_names = vec!["*water0".into()];
+    w.surfaces[0].kind = TextureKind::Liquid;
+    w.leafs[2].contents = qformats::bsp::CONTENTS_WATER;
+    // visdata: leaf 1 sees only leaf 1; leaf 2 sees only leaf 2 (not water-vised).
+    w.visdata = vec![1, 2];
+    w.water_vised = w.check_water_vis();
+    assert!(w.needs_transparent_novis([0.3, 1.0, 1.0, 1.0]));
+    // Absent liquid types (lava, slime, tele) do not trigger novis.
+    assert!(!w.needs_transparent_novis([1.0, 0.3, 0.3, 0.3]));
+
+    // Now leaf 2 sees both leaf 1 and leaf 2 (water-vised).
+    w.visdata = vec![1, 3];
+    w.water_vised = w.check_water_vis();
+    assert!(!w.needs_transparent_novis([0.3, 0.3, 0.3, 0.3]));
+
+    // Missing visdata still requires novis whenever any liquid is translucent.
+    w.visdata.clear();
+    w.water_vised = w.check_water_vis();
+    assert!(w.needs_transparent_novis([0.3, 1.0, 1.0, 1.0]));
+}

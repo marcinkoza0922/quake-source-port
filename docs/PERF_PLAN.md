@@ -151,10 +151,12 @@ confirm wins windowed (`qprof -window`, or qbench for parity).
   (area-node tree sizes, cheaper box/hull rejection). Monster timing is
   gameplay: do not stagger thinks without checking qbot results.
 
-### 9. Enhanced water and impacts on AD
-- `impacts` (+1.01 ms CPU) and `blood` (+0.93 ms CPU) are done (2026-11-14, see
-  results log: overhead over `vanilla` dropped to +1 µs and +13 µs). Remaining
-  in item 9: `water` (+144 µs CPU, +187 µs GPU on `lightmap` and surface passes).
+### 9. Enhanced water and impacts on AD — done (2026-11-14)
+- `impacts` (+1.01 ms CPU) and `blood` (+0.93 ms CPU) done (overhead over
+  `vanilla` dropped to +1 µs and +13 µs).
+- `water` (+190 µs frame / +169 µs render CPU / +189 µs GPU) done (overhead
+  over `vanilla` dropped to +14 µs frame / +46 µs render CPU / +13 µs GPU;
+  see results log).
 
 ### 10. Contents checks
 - `check_water_transition` and `point_contents` take 4–8% on e1m1. Check
@@ -1266,4 +1268,44 @@ confirm wins windowed (`qprof -window`, or qbench for parity).
   full `cargo nextest run` (with game data) and `cargo clippy --message-format=short`
   pass cleanly. Reports: `target/qprof/item9-{before,after}/`.
 
-  Next (remaining item 9 work): `water` (+144 µs CPU, +187 µs GPU `lightmap`).
+- **2026-11-14 — Item 9 (`water`): skip `novis` on water-vised maps & `WaterFx` fast paths**:
+  Root cause on `ad_sepulcher` (`58233` leaves): `frame.rs` previously called
+  `wg.cpu.set_transparent_liquids(alphas.iter().any(|&a| a < 1.0))` unconditionally,
+  forcing `novis` (`vis_leaf = 0`, all 58,233 leaves + whole-map GPU cull/lightmap/world/models)
+  even though `ad_sepulcher` already has water-vised PVS across its liquid leaves.
+  Additionally, `WaterFx::update` called `world.liquid_surface` and tracked hash maps
+  for stationary entities and scanned entities even when ripples/splashes were disabled.
+  Changes on `improve/perf-water`:
+  - `crates/qrender/src/world{,.rs,/build.rs,/cull.rs}`: added `water_vised`
+    (`World::check_water_vis`, porting ironwail's `Mod_CheckWaterVis` with zero-alloc
+    RLE vis scan per liquid content type) and `World::needs_transparent_novis(alphas)`
+    so `novis` is only enabled when an actually translucent liquid (`alpha < 1.0`) is
+    un-vised on the map.
+  - `crates/qrender/src/{frame.rs,water.rs}`: gated `set_transparent_liquids` with
+    `needs_transparent_novis(alphas)`, fast-reset `WaterFx` when both ripples and
+    splashes are disabled, skipped `liquid_surface` / extra map lookups for stationary
+    entities, and avoided duplicate `liquid_surface` queries for moving entities.
+
+  A/B benchmarks on RTX 3060 Ti, `1280×720` headless, `qprof -runs 3 -shots 5` (20 s
+  measured after 4 s warm-up, sim step `1/250 s`) on `ad_sepulcher` and `e1m1`:
+
+  | map | scenario | metric | before | after | change |
+  |---|---|---|--:|--:|--:|
+  | `ad_sepulcher` | `vanilla` | fps / frame µs | 491 / 2035 | 491 / 2036 | +0 / +1 µs |
+  | `ad_sepulcher` | `water` | fps | 450 | 488 | +38 (+8.4%) |
+  | `ad_sepulcher` | `water` | frame / p99 µs | 2225 / 3692 | 2049 / 3119 | −176 / −573 µs (+190→+14 µs vs vanilla) |
+  | `ad_sepulcher` | `water` | render cpu µs | 1190 | 1063 | −127 µs (+169→+46 µs vs vanilla) |
+  | `ad_sepulcher` | `water` | GPU total µs | 2138 | 1962 | −176 µs (+189→+13 µs vs vanilla) |
+  | `ad_sepulcher` | `water` | GPU `cull` / `lightmap` / `world` / `models` (median run) | 68.12 / 122.73 / 95.03 / 45.46 | 25.55 / 27.96 / 70.62 / 30.96 | −42.57 / −94.77 / −24.41 / −14.50 µs |
+  | `e1m1` | `water` | fps / frame / GPU µs | 768 / 1302 / 1206 | 772 / 1294 / 1198 | +4 / −8 / −8 µs |
+
+  Verification: `compare -metric AE = 0` across all 12 `qprof` pairs (`vanilla` and
+  `water` at `05`, `10`, `15` s on `ad_sepulcher` and `e1m1`) and all 4 quiet water-feature
+  screenshots (`e1m1`, `e1m3`, `ad_sepulcher`, `ad_tears`); Vulkan validation clean
+  (`-headless -validation -autoquit 4` on `ad_sepulcher` and `e1m1` with `water` cvars);
+  full `cargo nextest run` (with game data) and `cargo clippy --message-format=short` pass
+  cleanly. Reports: `target/qprof/water-{before,after}/`.
+
+  Next candidate items: remaining Item 4 (GPU billboard expansion / per-view particle
+  culling across multiple views), Item 8 (`ultimate-coop` server p99 spikes), Item 10
+  (`check_water_transition` / `point_contents`), Item 11 (`aim_targets` in co-op).

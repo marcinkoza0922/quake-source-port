@@ -10,6 +10,88 @@ impl World {
         }
     }
 
+    /// True if any translucent liquid type exists in a leaf whose PVS omits
+    /// non-matching contents, requiring `novis` to render across the surface.
+    pub(crate) fn needs_transparent_novis(&self, alphas: [f32; 4]) -> bool {
+        alphas
+            .iter()
+            .enumerate()
+            .any(|(i, &a)| a < 1.0 && (self.water_vised & (1 << i)) == 0)
+    }
+
+    /// Port of ironwail's `Mod_CheckWaterVis`: detects which liquid types
+    /// (bits 0..4 = water, lava, slime, tele) have VIS seeing across liquid
+    /// boundaries. Absent liquid types are treated as safe.
+    pub(super) fn check_water_vis(&self) -> u8 {
+        use qformats::bsp::{CONTENTS_LAVA, CONTENTS_SLIME, CONTENTS_WATER};
+        if self.visdata.is_empty() || self.numleafs == 0 {
+            return 0;
+        }
+        let numclusters = self.numleafs.min(self.leafs.len().saturating_sub(1));
+        let row = numclusters.div_ceil(8);
+        let mut found = 0u8;
+        let mut vised = 0u8;
+        for li in 1..=numclusters {
+            let leaf = &self.leafs[li];
+            let mask = match leaf.contents {
+                CONTENTS_WATER => {
+                    let first = leaf.first_marksurface as usize;
+                    let end = (first + leaf.num_marksurfaces as usize).min(self.marksurfaces.len());
+                    let mut m = 0u8;
+                    for &si in &self.marksurfaces[first..end] {
+                        if let Some(s) = self.surfaces.get(si as usize)
+                            && s.kind == TextureKind::Liquid
+                            && let Some(name) = self.texture_names.get(s.texture as usize)
+                        {
+                            let ty = liquid_type(name);
+                            if (1..=4).contains(&ty) {
+                                m |= 1 << (ty - 1);
+                            }
+                        }
+                    }
+                    if m == 0 {
+                        continue;
+                    }
+                    m
+                }
+                CONTENTS_LAVA => 1 << 1,
+                CONTENTS_SLIME => 1 << 2,
+                _ => continue,
+            };
+            found |= mask;
+            if (vised & mask) == mask || leaf.visofs < 0 {
+                continue;
+            }
+            let mut i = leaf.visofs as usize;
+            let mut byte_idx = 0usize;
+            let mut saw_other = false;
+            'vis: while byte_idx < row {
+                let Some(&b) = self.visdata.get(i) else { break };
+                i += 1;
+                if b == 0 {
+                    let Some(&c) = self.visdata.get(i) else { break };
+                    i += 1;
+                    byte_idx += c as usize;
+                    continue;
+                }
+                for k in 0..8usize {
+                    if b & (1 << k) != 0 {
+                        let other = (byte_idx << 3) + k + 1;
+                        if other <= numclusters && self.leafs[other].contents != leaf.contents {
+                            saw_other = true;
+                            break 'vis;
+                        }
+                    }
+                }
+                byte_idx += 1;
+            }
+            if saw_other {
+                vised |= mask;
+            }
+        }
+        vised | (!found & 0b1111)
+    }
+
     /// Texture a surface is batched under: its own texture, or for random
     /// animations (`-0..-9`) the frame picked for that surface.
     pub fn slot_texture(&self, si: u32) -> u32 {

@@ -87,7 +87,8 @@ impl Renderer {
         ]
         .map(|a| a.clamp(0.0, 1.0));
         if let Some(wg) = &mut self.world {
-            wg.cpu.set_transparent_liquids(alphas.iter().any(|&a| a < 1.0));
+            let need_novis = wg.cpu.needs_transparent_novis(alphas);
+            wg.cpu.set_transparent_liquids(need_novis);
         }
         let time = fr.time;
         let mut styles = [256.0f32; 256];
@@ -107,7 +108,9 @@ impl Renderer {
 
         // liquid ripples/splashes (CPU side); droplets join the particles
         let mut water_parts = Vec::new();
-        if let Some(wg) = &self.world
+        if st.water_ripples <= 0.0 && !st.water_splashes {
+            self.water_fx.reset();
+        } else if let Some(wg) = &self.world
             && primary.is_some()
         {
             let models = &self.models;
