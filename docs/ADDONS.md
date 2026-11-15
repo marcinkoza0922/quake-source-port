@@ -183,15 +183,13 @@ kills, gibs and mod rules apply. Refire timers live on `Level::rails`
 - Sound (`qsound::rail`, synthesized): fire = crack, ringing zap and rising
   recharge whine ending in a ready tick at ~1.4 s; looping hum on the
   holder's entity channel 6 while held; dry click; impact hiss.
-- Model: `assets/railgun/` (Meshy meshy-t2 1,365 tris, see its README),
-  converted with the command in its README (`--glow`: pixels with one
-  dominant channel form the glow mask). The palette has no green
-  fullbrights, so the masked texels go to `Renderer::load_alias_glow` as a
-  true-colour RGBA glow layer. The bake kept only ~900 green texels, so at
-  load the mesh's coil loops (small triangles with x 2.5–22.5, z > 0.8) are
-  remapped onto a solid green texel and a strip is added on each side. The
-  cross-section is then scaled ×1.9 (`rail_model::THICKEN`) and non-glow
-  texels brightened ×1.5; drawn centred with `portal_pose` + recoil.
+- Model: `assets/railgun/` (Meshy meshy-t2.5 3,527 tris, see its README),
+  converted with `--keep-uv --glow-blue` so the Meshy UV layout is preserved
+  and only the blue coil rings are marked in the glow mask. The Quake palette
+  has no electric-blue fullbrights, so the masked texels go to
+  `Renderer::load_alias_glow` as a true-colour RGBA glow layer while the body
+  is darkened ×0.78 (`rail_model::BODY_GAIN`) before palette quantisation; drawn
+  centred with `portal_pose` (1.5 u lower) + recoil.
 - Menu: Add-ons → Railgun toggle (`addon_railgun`) and Railgun Settings
   (Damage slider, Trail Colour); `menu railgun` opens it.
 - Split-screen: `splittoy <2..6> <0..6>` (debug) hands a guest a toy by
