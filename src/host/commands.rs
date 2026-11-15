@@ -181,60 +181,32 @@ pub(super) fn register_commands(c: &mut Commands<Host>) {
         }
         h.menu.open(page.map_or(Screen::Options, Screen::OptionsPage));
     });
-    c.add("clear", |h, _| h.con.lines.clear());
+    c.add("clear", |h, _| h.con.clear_scrollback());
+    c.add("con_type", |h, a| {
+        h.sync_console_catalog();
+        for ch in a.args().chars() {
+            h.con.text(ch);
+        }
+    });
+    for sh_name in ["bash", "sh"] {
+        c.add(sh_name, |h, a| {
+            h.sync_shell_env();
+            if a.argc() == 1 {
+                h.con.start_pty();
+            } else {
+                let cmd = if a.argv(1) == "-c" && a.argc() >= 3 {
+                    a.all()[2..].join(" ")
+                } else {
+                    a.args().to_string()
+                };
+                h.con.run_shell_cmd(&cmd, None);
+            }
+        });
+    }
     c.add("bf", |h, _| h.view.bonus_flash());
     c.add("+showscores", |h, _| h.show_scores = true);
     c.add("-showscores", |h, _| h.show_scores = false);
-    c.add("startdemos", |h, a| {
-        h.demos = (1..a.argc()).map(|i| a.argv(i).to_string()).collect();
-        h.print(&format!("{} demo(s) in loop\n", h.demos.len()));
-        if !h.server.active() && !h.dedicated && !h.remote() && h.demonum != -1 && h.demo.is_none() {
-            h.demonum = 0;
-            if h.cv("cl_startdemos") == 0.0 {
-                h.demonum = -1;
-                return;
-            }
-            h.next_demo();
-        } else {
-            h.demonum = -1;
-        }
-    });
-    c.add("demos", |h, _| {
-        if h.demonum == -1 {
-            h.demonum = 1;
-        }
-        h.stop_game();
-        h.next_demo();
-    });
-    c.add("record", |h, a| h.record(a));
-    c.add("stop", |h, _| {
-        if h.recording.is_none() {
-            h.print("Not recording a demo.\n");
-        }
-        h.stop_recording();
-    });
-    c.add("timedemo", |h, a| {
-        if a.argc() != 2 {
-            h.print("timedemo <demoname> : gets demo speeds\n");
-            return;
-        }
-        h.play_demo(a.argv(1));
-        if h.demo.is_some() {
-            h.timedemo = Some((0, std::time::Instant::now()));
-        }
-    });
-    c.add("stopdemo", |h, _| {
-        if h.demo.is_some() {
-            h.disconnect_client();
-        }
-    });
-    c.add("playdemo", |h, a| {
-        if a.argc() < 2 {
-            h.print("playdemo <demoname> : plays a demo\n");
-            return;
-        }
-        h.play_demo(a.argv(1));
-    });
+    super::demo::register(c);
     for n in ["sizeup", "sizedown", "cd", "help", "scr_autoscale", "togglezoom", "messagemode", "messagemode2", "menu_multiplayer"] {
         c.add(n, |_, _| {});
     }
@@ -380,23 +352,7 @@ pub(super) fn register_commands(c: &mut Commands<Host>) {
     c.add("_vid_menu", |h, _| h.vid_menu());
     c.add("force_centerview", |h, _| h.cl.viewangles[0] = 0.0);
     c.add("centerview", |h, _| h.cl.viewangles[0] = 0.0);
-    c.add("menu_load", |h, _| {
-        h.menu.autosaves = false;
-        h.menu.open(Screen::Load);
-        h.scan_saves();
-    });
-    c.add("menu_autosaves", |h, _| {
-        h.menu.autosaves = true;
-        h.menu.open(Screen::Load);
-        h.scan_saves();
-    });
-    c.add("menu_save", |h, _| {
-        h.menu.autosaves = false;
-        if h.server.active() {
-            h.menu.open(Screen::Save);
-            h.scan_saves();
-        }
-    });
+    super::saves::register(c);
     c.add("pause", |h, _| {
         if h.server.active() {
             let p = !h.server.core.sv.paused;
@@ -526,86 +482,5 @@ pub(super) fn register_commands(c: &mut Commands<Host>) {
     });
     c.add("version", |h, _| h.print("quake-source-port 0.1.0\n"));
     super::death::register(c);
-    c.add("_scansaves", |h, _| h.scan_saves());
-    c.add("_mods", |h, _| h.scan_mods());
-    c.add("_modmaps", |h, a| h.scan_mod_maps(a.argv(1)));
-    // menu_mods [dir]: the mod list, or one mod's maps
-    c.add("menu_mods", |h, a| {
-        h.scan_mods();
-        if a.argc() > 1 && h.menu.mods.select(a.argv(1)) {
-            h.scan_mod_maps(a.argv(1));
-            h.menu.open(Screen::ModMaps);
-        } else {
-            h.menu.open(Screen::Mods);
-        }
-    });
-    // menu_levels: the running mod's level selector (New Game > Level Select)
-    c.add("menu_levels", |h, _| {
-        let g = h.game_name().to_string();
-        h.scan_mods();
-        if h.menu.mods.select(&g) {
-            h.scan_mod_maps(&g);
-            h.menu.open(Screen::ModMaps);
-        } else {
-            h.menu.open(Screen::Mods);
-        }
-    });
-    c.add("game", |h, a| {
-        if a.argc() < 2 {
-            let g = h.game_name().to_string();
-            h.print(&format!("\"game\" is \"{g}\"\ngame <dir> [map] : switch to another mod\n"));
-            return;
-        }
-        let map = (a.argc() > 2).then(|| a.argv(2).to_string());
-        h.switch_game(a.argv(1), map.as_deref());
-    });
-    c.add("save", |h, a| {
-        if a.argc() != 2 {
-            h.print("save <savename> : save a game\n");
-            return;
-        }
-        if !h.server.active() || h.cl.intermission != 0 || h.cl.stats[STAT_HEALTH] <= 0 {
-            h.print("Can't save now.\n");
-            return;
-        }
-        let text = h.server.save_game();
-        let p = h.savegame_path(a.argv(1));
-        if let Some(d) = p.parent() {
-            let _ = std::fs::create_dir_all(d);
-        }
-        match std::fs::write(&p, qcore::text::encode(&text)) {
-            Ok(()) => {
-                // the slot is one save: drop a same-named file of the other format
-                if let (Some(d), Some(stem)) = (p.parent(), p.file_stem().and_then(|s| s.to_str())) {
-                    let _ = crate::autosave::remove_other_exts(d, stem, p.extension().and_then(|e| e.to_str()));
-                }
-                h.print(&format!("Saved {}\n", p.display()));
-            }
-            Err(e) => h.print(&format!("ERROR: couldn't write {}: {e}\n", p.display())),
-        }
-    });
-    c.add("load", |h, a| {
-        if a.argc() != 2 {
-            h.print("load <savename> : load a game\n");
-            return;
-        }
-        let Some(p) = h.find_save(a.argv(1)) else {
-            h.print(&format!("ERROR: couldn't open {}\n", h.savegame_path(a.argv(1)).display()));
-            return;
-        };
-        let Ok(bytes) = std::fs::read(&p) else {
-            h.print(&format!("ERROR: couldn't open {}\n", p.display()));
-            return;
-        };
-        let text = qcore::text::decode(&bytes);
-        h.print(&format!("Loading game from {}...\n", p.display()));
-        if let Some(i) = h.local.take() {
-            h.server.drop_client(i, false);
-        }
-        h.disconnect_client();
-        if let Err(e) = h.server.load_game(&text) {
-            h.print(&format!("load failed: {e}\n"));
-        }
-        h.drain_server_log();
-    });
+    super::mapswitch::register(c);
 }

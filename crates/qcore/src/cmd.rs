@@ -117,20 +117,22 @@ impl Cbuf {
     pub fn is_empty(&self) -> bool {
         self.text.is_empty()
     }
-    /// Pop one command: split at newline, or `;` outside quotes and comments.
+    /// Pop one command: split at newline, or `;` outside quotes, comments and shell pipes.
     pub fn next_line(&mut self) -> Option<String> {
         if self.text.is_empty() {
             return None;
         }
         let b = self.text.as_bytes();
-        let (mut quotes, mut comment) = (false, false);
+        let shell_line = self.text.trim_start_matches([' ', '\t']).starts_with('!');
+        let (mut quotes, mut comment, mut piped) = (false, false, shell_line);
         let mut i = 0;
         while i < b.len() {
             match b[i] {
                 b'\n' => break,
                 b'"' if !comment => quotes = !quotes,
                 b'/' if !quotes && b.get(i + 1) == Some(&b'/') => comment = true,
-                b';' if !quotes && !comment => break,
+                b'|' | b'!' if !quotes && !comment => piped = true,
+                b';' if !quotes && !comment && !piped => break,
                 _ => {}
             }
             i += 1;
@@ -222,6 +224,16 @@ impl<C: CmdContext> Commands<C> {
     }
     pub fn set_alias(&mut self, name: &str, value: &str) {
         self.aliases.insert(name.to_ascii_lowercase(), (name.to_string(), value.to_string()));
+    }
+    pub fn cmd_names(&self) -> Vec<&str> {
+        let mut v: Vec<&str> = self.cmds.values().map(|(n, _)| n.as_str()).collect();
+        v.sort_unstable();
+        v
+    }
+    pub fn alias_list(&self) -> Vec<(&str, &str)> {
+        let mut v: Vec<(&str, &str)> = self.aliases.values().map(|(n, val)| (n.as_str(), val.as_str())).collect();
+        v.sort_unstable_by_key(|&(n, _)| n);
+        v
     }
     /// Command and alias names starting with `partial`.
     pub fn complete(&self, partial: &str) -> Vec<&str> {

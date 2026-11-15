@@ -130,3 +130,36 @@ pub(super) fn relaunch_args(cmdline: &[String]) -> Vec<String> {
     }
     out
 }
+
+pub(super) fn register(c: &mut Commands<Host>) {
+    c.add("_mods", |h, _| h.scan_mods());
+    c.add("_modmaps", |h, a| h.scan_mod_maps(a.argv(1)));
+    c.add("menu_mods", |h, a| {
+        h.scan_mods();
+        if a.argc() > 1 && h.menu.mods.select(a.argv(1)) {
+            h.scan_mod_maps(a.argv(1));
+            h.menu.open(Screen::ModMaps);
+        } else {
+            h.menu.open(Screen::Mods);
+        }
+    });
+    c.add("menu_levels", |h, _| {
+        let g = h.game_name().to_string();
+        h.scan_mods();
+        if h.menu.mods.select(&g) {
+            h.scan_mod_maps(&g);
+            h.menu.open(Screen::ModMaps);
+        } else {
+            h.menu.open(Screen::Mods);
+        }
+    });
+    c.add("game", |h, a| {
+        if a.argc() < 2 {
+            let g = h.game_name().to_string();
+            h.print(&format!("\"game\" is \"{g}\"\ngame <dir> [map] : switch to another mod\n"));
+            return;
+        }
+        let map = (a.argc() > 2).then(|| a.argv(2).to_string());
+        h.switch_game(a.argv(1), map.as_deref());
+    });
+}

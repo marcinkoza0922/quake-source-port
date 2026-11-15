@@ -129,6 +129,7 @@ pub(super) const HOST_CVARS: &[(&str, &str, u32)] = &[
     ("saved3", "0", CVAR_ARCHIVE),
     ("saved4", "0", CVAR_ARCHIVE),
     ("con_notifytime", "3", 0),
+    ("con_modern", "1", CVAR_ARCHIVE),
     ("scr_conspeed", "500", CVAR_ARCHIVE),
     ("scr_sbaralpha", "0.75", CVAR_ARCHIVE),
     // Accessibility page.

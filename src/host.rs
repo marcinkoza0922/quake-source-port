@@ -307,6 +307,9 @@ impl Host {
         shader::register_shader_commands(&mut h.cmds);
         h.con.forced = true;
         h.con.frac = 1.0;
+        h.con.load_history(&crate::user_dir("id1"));
+        h.sync_shell_env();
+        h.sync_console_catalog();
         // 2026 update compat (ironwail host.c): word-wrap centerprints for mg3.
         let mg3 = h.server.core.fs.game_dirs().iter().any(|d| d.eq_ignore_ascii_case("mg3"));
         h.server.core.cvars.set("scr_usekfont", if mg3 { "1" } else { "0" });
@@ -342,19 +345,6 @@ impl Host {
 
     fn cvs(&self, name: &str) -> &str {
         self.server.core.cvars.by_name(name).map_or("", |c| c.string.as_str())
-    }
-
-    pub fn toggle_console(&mut self) {
-        if self.con.forced {
-            if !self.menu.active() {
-                self.menu.open(Screen::Main);
-            }
-            return;
-        }
-        self.con.open = !self.con.open;
-        self.con.input.clear();
-        self.con.cursor = 0;
-        self.menu.screen = Screen::None;
     }
 
     /// Time scale for the world while the weapon wheel is open (single player only).

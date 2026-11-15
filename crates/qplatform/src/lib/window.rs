@@ -139,6 +139,27 @@ impl Window {
     pub fn raw(&self) -> *mut sys::SDL_Window {
         self.raw
     }
+
+    /// Copy UTF-8 text to the system clipboard.
+    pub fn set_clipboard_text(&self, text: &str) -> Result<()> {
+        let t = cstring(text)?;
+        // SAFETY: SDL video is initialised while Window is alive; t is a valid C string.
+        check(unsafe { sys::SDL_SetClipboardText(t.as_ptr()) })
+    }
+
+    /// Read UTF-8 text from the system clipboard, if any.
+    pub fn clipboard_text(&self) -> Option<String> {
+        // SAFETY: SDL video is initialised while Window is alive; returned buffer is freed with SDL_free.
+        unsafe {
+            let ptr = sys::SDL_GetClipboardText();
+            if ptr.is_null() {
+                return None;
+            }
+            let s = CStr::from_ptr(ptr).to_string_lossy().into_owned();
+            sys::SDL_free(ptr as *mut c_void);
+            (!s.is_empty()).then_some(s)
+        }
+    }
 }
 
 /// Vulkan instance extensions required by SDL (empty on error).

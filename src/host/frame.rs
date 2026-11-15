@@ -139,6 +139,8 @@ impl Host {
         if let Some(p) = &mut self.prof { p.begin(); }
         self.realtime += dt;
         self.con.realtime = self.realtime;
+        self.con.modern = self.cv("con_modern") != 0.0;
+        self.con.poll_shell();
         for e in events {
             self.handle_event(e);
         }
@@ -157,7 +159,7 @@ impl Host {
                 self.stuff_cmds();
                 self.exec_cbuf();
             }
-            if self.startup == 2 && !self.server.active() && self.cbuf.is_empty() && self.delayed.is_empty() {
+            if self.startup == 2 && !self.server.active() && self.cbuf.is_empty() && self.delayed.is_empty() && self.con.pty.is_none() {
                 self.menu.open(Screen::Main);
             }
         }

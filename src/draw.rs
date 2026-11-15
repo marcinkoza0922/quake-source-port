@@ -294,6 +294,41 @@ impl Canvas {
         self.text(cx - w / 2.0, y, s, size, color);
     }
 
+    /// Width of one monospace cell in virtual units at `size`, snapped to whole screen pixels.
+    pub fn mono_cell_w(&self, size: f32) -> f32 {
+        let Some(ui) = &self.ui else { return size * 0.6 };
+        let px = self.em_px(size) as u16;
+        ui.borrow().mono_advance(px) / self.scale
+    }
+
+    /// Monospace-grid text: each character of `s` is drawn with the bundled
+    /// monospace font (`DejaVuSansMono`) on an integer-pixel cell stride.
+    pub fn mono_str(&mut self, x: f32, y: f32, s: &str, size: f32, _cell_w: f32, color: [f32; 4]) {
+        let Some(ui) = self.ui.clone() else {
+            self.string(x, y, s);
+            return;
+        };
+        let mut ui = ui.borrow_mut();
+        let px = self.em_px(size);
+        let Some(pic) = ui.pic else { return };
+        let (x0, y0) = self.px(x, y);
+        let x0 = x0.round();
+        let base = (y0 + px * 0.8).round();
+        let cell_px = ui.mono_advance(px as u16);
+        let a = crate::font::UiText::atlas_size() as f32;
+        for (i, ch) in s.chars().enumerate() {
+            if ch == ' ' {
+                continue;
+            }
+            if let Some(g) = ui.mono_glyph(ch, px as u16) {
+                let cx = x0 + i as f32 * cell_px;
+                let (gx, gy) = (cx + g.ox as f32, base + g.oy as f32);
+                let uv = [g.x as f32 / a, g.y as f32 / a, (g.x + g.w) as f32 / a, (g.y + g.h) as f32 / a];
+                self.push(Draw2D::Pic { x: gx, y: gy, w: g.w as f32, h: g.h as f32, pic, uv, color });
+            }
+        }
+    }
+
     /// A vector shape filling the virtual rectangle, rasterised at its pixel
     /// size. `r`/`t` in [`Shape`] are given in pixels by the caller; use
     /// [`Self::upx`] to convert.
