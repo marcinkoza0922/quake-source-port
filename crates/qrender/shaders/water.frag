@@ -17,9 +17,9 @@ void main() {
             if (abs(dot(fr.portal_plane[i].xyz, i_wpos) + fr.portal_plane[i].w) > 0.25) continue;
             if (any(lessThan(i_wpos, fr.portal_min[i].xyz - 0.25)) ||
                 any(greaterThan(i_wpos, fr.portal_max[i].xyz + 0.25))) continue;
-            vec2 uv = gl_FragCoord.xy / vec2(textureSize(textures[nonuniformEXT(uint(fr.portal_min[i].w))], 0));
+            vec2 uv = gl_FragCoord.xy * fr.portal_uv.xy;
             vec2 warp = sin(i_st.yx * 0.14 + t * vec2(1.7, -1.3)) * 0.0015;
-            vec3 behind = tex(uint(fr.portal_min[i].w), uv + warp).rgb;
+            vec3 behind = tex(uint(fr.portal_min[i].w), clamp(uv + warp, vec2(0.0), fr.portal_uv.zw)).rgb;
             vec2 cell = floor(i_st / 3.0);
             float seed = whitenoise01(cell);
             float pulse = pow(max(0.0, sin(t * (2.0 + seed * 3.0) + seed * 90.0)), 16.0);
@@ -35,15 +35,19 @@ void main() {
     // r_waterripples: the height field bends the classic warp lookup and
     // shades the slopes; teleporters and non-horizontal sheets stay classic
     if (fr.water.x > 0.0 && kind >= 1u && kind <= 3u) {
-        vec3 n = cross(dFdx(i_wpos), dFdy(i_wpos));
-        float horiz = abs(n.z) * inversesqrt(max(dot(n, n), 1e-12));
-        if (horiz > 0.7) {
-            float swell = kind == 2u ? 0.5 : 1.0; // lava is thick
-            float k = fr.water.x;
-            vec2 g = water_grad(i_wpos, t, swell * 0.5 * min(k, 1.5), 2.5 * k);
-            st += g * 5.0;
-            float slope = dot(g, vec2(0.6, 0.45));
-            shade = 1.0 + clamp(slope, -0.6, 0.6) * 1.4 + smoothstep(0.25, 0.7, length(g)) * 0.2;
+        int qual = int(fr.water.w + 0.5);
+        float dist_fade = water_dist_fade(i_wpos, qual);
+        if (dist_fade > 0.0) {
+            vec3 n = cross(dFdx(i_wpos), dFdy(i_wpos));
+            float horiz = abs(n.z) * inversesqrt(max(dot(n, n), 1e-12));
+            if (horiz > 0.7) {
+                float swell = kind == 2u ? 0.5 : 1.0; // lava is thick
+                float k = fr.water.x * dist_fade;
+                vec2 g = water_grad(i_wpos, t, swell * 0.5 * min(k, 1.5), 2.5 * k);
+                st += g * 5.0;
+                float slope = dot(g, vec2(0.6, 0.45));
+                shade = 1.0 + clamp(slope, -0.6, 0.6) * 1.4 + smoothstep(0.25, 0.7, length(g)) * 0.2;
+            }
         }
     }
     st += 8.0 * sin(st.yx * 0.125 + t);

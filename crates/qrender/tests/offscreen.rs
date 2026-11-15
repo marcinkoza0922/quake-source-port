@@ -188,6 +188,29 @@ fn start_bsp_renders_non_black() {
     assert_eq!(both_expected, r.read_pixels().unwrap(), "destination ranges survived into another frame");
     // 2D only frame
     r.render(&RenderFrame::default()).unwrap();
+    let splits = [
+        SplitView { view, rect: [0, 0, 160, 200], blend: [0.0; 4] },
+        SplitView { view: View { angles: [0.0, yaw + 90.0, 0.0], ..view }, rect: [160, 0, 160, 200], blend: [0.0; 4] },
+    ];
+    let split_frame = RenderFrame {
+        time: frame.time,
+        splits: &splits,
+        settings: Settings { ssao: 2.0, msaa: 4, render_scale: 2.0, ..Default::default() },
+        ..Default::default()
+    };
+    let view_counts = [2, 4, 5, 1];
+    let split_cases: Vec<Vec<SplitView>> = view_counts.iter().map(|&n| {
+        (0..n).map(|i| SplitView {
+            view: View { angles: [0.0, yaw + i as f32 * 45.0, 0.0], ..view },
+            rect: [i as u32 * (320 / n as u32), 0, 320 / n as u32, 200],
+            blend: [0.0; 4],
+        }).collect()
+    }).collect();
+    // Warm every angle's lightmap atlas entries before capturing bit-exact
+    // reference frames (tightly packed adjacent surfaces only populate on draw).
+    for splits in &split_cases {
+        r.render(&RenderFrame { splits, ..split_frame }).unwrap();
+    }
     // Profiling must preserve pixels and produce complete queries for AO on,
     // AO off and no-view frames. Capture every reference before enabling it.
     let frames = [
@@ -206,16 +229,6 @@ fn start_bsp_renders_non_black() {
     }).collect();
     // The MSAA snapshot must survive consecutive views and be recreated after
     // resize/sample changes. Returning to the same scene must restore pixels.
-    let splits = [
-        SplitView { view, rect: [0, 0, 160, 200], blend: [0.0; 4] },
-        SplitView { view: View { angles: [0.0, yaw + 90.0, 0.0], ..view }, rect: [160, 0, 160, 200], blend: [0.0; 4] },
-    ];
-    let split_frame = RenderFrame {
-        time: frame.time,
-        splits: &splits,
-        settings: Settings { ssao: 2.0, msaa: 4, render_scale: 2.0, ..Default::default() },
-        ..Default::default()
-    };
     r.render(&split_frame).unwrap();
     let split_expected = r.read_pixels().unwrap();
     r.resize(400, 240);
@@ -226,14 +239,6 @@ fn start_bsp_renders_non_black() {
     assert_eq!(split_expected, r.read_pixels().unwrap(), "AO snapshot changed after target recreation");
     // Capture multi-view pixels before enabling profiling, including a fifth
     // view to force query-pool growth beyond the four-player reservation.
-    let view_counts = [2, 4, 5, 1];
-    let split_cases: Vec<Vec<SplitView>> = view_counts.iter().map(|&n| {
-        (0..n).map(|i| SplitView {
-            view: View { angles: [0.0, yaw + i as f32 * 45.0, 0.0], ..view },
-            rect: [i as u32 * (320 / n as u32), 0, 320 / n as u32, 200],
-            blend: [0.0; 4],
-        }).collect()
-    }).collect();
     let split_pixels: Vec<_> = split_cases.iter().map(|splits| {
         r.render(&RenderFrame { splits, ..split_frame }).unwrap();
         r.read_pixels().unwrap()
@@ -282,4 +287,171 @@ fn start_bsp_renders_non_black() {
     }
     r.render(&split_frame).unwrap();
     assert_eq!(split_expected, r.read_pixels().unwrap(), "SSAO quality cycling corrupted recreated targets");
+    // Cycle portal quality tiers across single-sample/MSAA, 100%/200% scale and split-screen.
+    for msaa in [1, 4] {
+        for render_scale in [1.0, 2.0] {
+            for portal_quality in [0, 1, 2] {
+                let st = Settings { teleport_windows: true, portal_quality, msaa, render_scale, ..Default::default() };
+                r.render(&RenderFrame { settings: st, ..portal_frame }).unwrap();
+                let portal_px = r.read_pixels().unwrap();
+                assert!(portal_px.as_chunks::<4>().0.iter().any(|p| p[..3].iter().any(|&v| v > 30)));
+                r.render(&RenderFrame { time: portal_frame.time, splits: &splits, settings: st, ..Default::default() }).unwrap();
+                let _ = r.read_pixels().unwrap();
+            }
+            for water_quality in [0, 1] {
+                let st = Settings {
+                    wateralpha: 0.35,
+                    water_ripples: 1.0,
+                    water_splashes: true,
+                    water_caustics: 1.0,
+                    water_quality,
+                    msaa,
+                    render_scale,
+                    ..Default::default()
+                };
+                r.render(&RenderFrame { time: frame.time, view: frame.view, settings: st, ..Default::default() }).unwrap();
+                let _ = r.read_pixels().unwrap();
+            }
+        }
+    }
+    // Cycle motion blur quality tiers with a moving alias entity so vel.frag and
+    // post.frag run across MSAA, render scale and split-screen.
+    if let Some(mdl_bytes) = fs.open("progs/player.mdl") {
+        let mdl = qformats::Mdl::parse(&mdl_bytes).unwrap();
+        let player_id = r.load_alias(&mdl).unwrap();
+        let rad = yaw.to_radians();
+        let fwd = [rad.cos(), rad.sin(), 0.0];
+        let right = [rad.sin(), -rad.cos(), 0.0];
+        let base_pos = std::array::from_fn(|k| view.origin[k] + fwd[k] * 96.0);
+        let moved_pos = std::array::from_fn(|k| base_pos[k] + right[k] * 14.0);
+        let ent = |pos: [f32; 3]| RenderEntity {
+            key: 42,
+            model: player_id,
+            origin: pos,
+            angles: [0.0, yaw + 180.0, 0.0],
+            alpha: 1.0,
+            ..Default::default()
+        };
+        let e0 = [ent(base_pos)];
+        let e1 = [ent(moved_pos)];
+        for msaa in [1, 4] {
+            for render_scale in [1.0, 2.0] {
+                for motion_blur_quality in [0, 1] {
+                    let st = Settings {
+                        motion_blur: 2.0,
+                        motion_blur_quality,
+                        msaa,
+                        render_scale,
+                        ..Default::default()
+                    };
+                    r.render(&RenderFrame { time: 1.0, view: Some(view), entities: &e0, settings: st, ..Default::default() }).unwrap();
+                    r.render(&RenderFrame { time: 1.02, view: Some(view), entities: &e1, settings: st, ..Default::default() }).unwrap();
+                    let blurred = r.read_pixels().unwrap();
+                    let st_off = Settings { motion_blur: 0.0, ..st };
+                    r.render(&RenderFrame { time: 1.04, view: Some(view), entities: &e1, settings: st_off, ..Default::default() }).unwrap();
+                    let crisp = r.read_pixels().unwrap();
+                    assert_ne!(blurred, crisp, "motion blur quality {motion_blur_quality} ({msaa}x, {render_scale}) produced no change");
+                    // Split-screen coverage with recreated velocity targets.
+                    r.render(&RenderFrame { time: 1.06, splits: &splits, entities: &e0, settings: st, ..Default::default() }).unwrap();
+                    r.render(&RenderFrame { time: 1.08, splits: &splits, entities: &e1, settings: st, ..Default::default() }).unwrap();
+                    let _ = r.read_pixels().unwrap();
+                }
+            }
+        }
+    }
+    // Cycle soft particle quality tiers across MSAA and supersampling with a soft
+    // FTE quad near the view.
+    let rad = yaw.to_radians();
+    let fwd = [rad.cos(), rad.sin(), 0.0];
+    let right = [rad.sin(), -rad.cos(), 0.0];
+    let q_center = [
+        view.origin[0] + fwd[0] * 48.0,
+        view.origin[1] + fwd[1] * 48.0,
+        view.origin[2],
+    ];
+    let soft_verts = [
+        FteVertex { pos: [q_center[0] - right[0] * 16.0, q_center[1] - right[1] * 16.0, q_center[2] - 16.0], uv: [0.0, 1.0], color: [255; 4] },
+        FteVertex { pos: [q_center[0] + right[0] * 16.0, q_center[1] + right[1] * 16.0, q_center[2] - 16.0], uv: [1.0, 1.0], color: [255; 4] },
+        FteVertex { pos: [q_center[0] + right[0] * 16.0, q_center[1] + right[1] * 16.0, q_center[2] + 16.0], uv: [1.0, 0.0], color: [255; 4] },
+        FteVertex { pos: [q_center[0] - right[0] * 16.0, q_center[1] - right[1] * 16.0, q_center[2] + 16.0], uv: [0.0, 0.0], color: [255; 4] },
+    ];
+    let soft_idx = [0, 1, 2, 0, 2, 3];
+    let soft_batch = [FteBatch { pic, blend: FteBlend::Blend, lines: false, first_index: 0, num_indices: 6, soft: true, gel: false }];
+    for msaa in [1, 4] {
+        for supersample in [false, true] {
+            for soft_particle_quality in [0, 1] {
+                let st = Settings {
+                    msaa,
+                    supersample,
+                    soft_particle_distance: 4.0,
+                    soft_particle_quality,
+                    ..Default::default()
+                };
+                r.render(&RenderFrame {
+                    time: frame.time,
+                    view: Some(view),
+                    settings: st,
+                    fte_vertices: &soft_verts,
+                    fte_indices: &soft_idx,
+                    fte_batches: &soft_batch,
+                    ..Default::default()
+                }).unwrap();
+                let _ = r.read_pixels().unwrap();
+            }
+        }
+    }
+    // Gel shading quality tiers (low single-fetch vs high parallax+gradient)
+    // and async staged update_pic_rows + resize_pic across consecutive frames.
+    let mut gel_px = vec![0u8; 32 * 32 * 4];
+    for y in 0..32usize {
+        for x in 0..32usize {
+            let (dx, dy) = (x as f32 / 15.5 - 1.0, y as f32 / 15.5 - 1.0);
+            let h = ((1.0 - (dx * dx + dy * dy)).max(0.0).sqrt() * 255.0) as u8;
+            let o = (y * 32 + x) * 4;
+            gel_px[o..o + 4].copy_from_slice(&[64, 160, 255, h]);
+        }
+    }
+    let gel_pic = r.register_pic_rgba_linear(32, 32, &gel_px).unwrap();
+    let gel_batch = [FteBatch { pic: gel_pic, blend: FteBlend::Blend, lines: false, first_index: 0, num_indices: 6, soft: false, gel: true }];
+    let mut gel_outs = Vec::new();
+    for gel_quality in [0u32, 1] {
+        // Stage a partial update, render consecutive frames without idle(),
+        // then render full update and read back.
+        r.update_pic_rows(gel_pic, &gel_px[..32 * 16 * 4], 16).unwrap();
+        for _ in 0..2 {
+            r.render(&RenderFrame {
+                time: frame.time,
+                view: Some(view),
+                settings: Settings { gel_quality, ..Default::default() },
+                fte_vertices: &soft_verts,
+                fte_indices: &soft_idx,
+                fte_batches: &gel_batch,
+                ..Default::default()
+            }).unwrap();
+        }
+        r.update_pic_rows(gel_pic, &gel_px, 32).unwrap();
+        r.render(&RenderFrame {
+            time: frame.time,
+            view: Some(view),
+            settings: Settings { gel_quality, ..Default::default() },
+            fte_vertices: &soft_verts,
+            fte_indices: &soft_idx,
+            fte_batches: &gel_batch,
+            ..Default::default()
+        }).unwrap();
+        gel_outs.push(r.read_pixels().unwrap());
+    }
+    assert_ne!(gel_outs[0], gel_outs[1], "fast gel shader must differ from full parallax+gradient");
+    let small_px = vec![255u8; 16 * 16 * 4];
+    r.resize_pic(gel_pic, 16, 16).unwrap();
+    r.update_pic(gel_pic, &small_px).unwrap();
+    r.render(&RenderFrame {
+        time: frame.time,
+        view: Some(view),
+        fte_vertices: &soft_verts,
+        fte_indices: &soft_idx,
+        fte_batches: &gel_batch,
+        ..Default::default()
+    }).unwrap();
+    let _ = r.read_pixels().unwrap();
 }

@@ -144,7 +144,8 @@ impl Host {
             self.boomerang_fx.frame(self.cl.time, &self.cl, v, &mut self.r, &mut fte);
             let grav = self.cv("sv_gravity");
             let grav = if grav > 0.0 { grav } else { 800.0 };
-            self.gel_fx.frame(&self.cl, &self.level, &mut self.r, v, grav, self.snd.as_ref(), &mut fte);
+            let gel_quality = (self.cv("addon_gel_quality").round() as i32).clamp(0, 1) as u32;
+            self.gel_fx.frame(&self.cl, &self.level, &mut self.r, v, grav, self.snd.as_ref(), gel_quality, &mut fte);
             self.water_fx.frame(&self.cl, self.cl.viewentity.saturating_sub(1), v, grav, &mut self.r, &mut fte);
             for p in self.water_fx.wash_points(self.cl.time).collect::<Vec<_>>() {
                 self.blood.wash(p, crate::addons::water_fx::WASH_RADIUS);
@@ -357,6 +358,7 @@ impl Host {
             slimealpha: self.level.liquid_alpha[2].or(Some(v("r_slimealpha"))).filter(|&a| a > 0.0).map(|a| a.min(1.0)),
             telealpha: self.level.liquid_alpha[3].or(Some(v("r_telealpha"))).filter(|&a| a > 0.0).map(|a| a.min(1.0)),
             teleport_windows: v("r_teleportwindows") != 0.0,
+            portal_quality: (v("r_portal_quality").round() as i32).clamp(0, 2) as u32,
             gun_portal_max: v("addon_portal_max").clamp(0.0, 4.0) as u32,
             gun_portal_dist: v("addon_portal_dist").max(0.0),
             gun_portal_depth: v("addon_portal_depth").clamp(0.0, 6.0) as u32,
@@ -381,7 +383,8 @@ impl Host {
             dither_screen: v("r_softemu_dither_screen"),
             dither_texture: v("r_softemu_dither_texture"),
             colorblind: v("r_colorblind").clamp(0.0, 3.0) as u32,
-            soft_particle_distance: if v("r_softparticles") != 0.0 { v("r_softparticledistance").max(0.01) } else { 0.0 },
+            soft_particle_distance: if (v("r_softparticles").round() as i32) > 0 { v("r_softparticledistance").max(0.01) } else { 0.0 },
+            soft_particle_quality: u32::from((v("r_softparticles").round() as i32) >= 2),
             ssao: if (v("r_ssao").round() as i32).clamp(0, 3) > 0 { v("r_ssao_strength").max(0.0) } else { 0.0 },
             ssao_quality: (v("r_ssao").round() as i32).clamp(0, 3).saturating_sub(1).min(2) as u32,
             ssao_radius: v("r_ssao_radius"),
@@ -392,9 +395,12 @@ impl Host {
             } else {
                 v("r_motionblur_amount").clamp(0.0, 4.0)
             },
+            motion_blur_quality: (v("r_motionblur_quality").round() as i32).clamp(0, 1) as u32,
             water_ripples: if v("r_enhancedwater") != 0.0 && v("r_waterripples") != 0.0 { v("r_waterripples_amount").clamp(0.0, 4.0) } else { 0.0 },
             water_splashes: v("r_enhancedwater") != 0.0 && v("r_watersplash") != 0.0,
             water_caustics: if v("r_enhancedwater") != 0.0 && v("r_watercaustics") != 0.0 { v("r_watercaustics_amount").clamp(0.0, 4.0) } else { 0.0 },
+            water_quality: (v("r_water_quality").round() as i32).clamp(0, 1) as u32,
+            gel_quality: (v("addon_gel_quality").round() as i32).clamp(0, 1) as u32,
             shader_scope: v("r_shader_scope").clamp(0.0, 1.0) as u32,
             goggles,
             ..Settings::default()

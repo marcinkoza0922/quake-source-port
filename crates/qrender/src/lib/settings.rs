@@ -20,10 +20,12 @@ impl Renderer {
         };
         let scale = st.render_scale.clamp(0.25, 2.0);
         let supersample = st.supersample && self.gpu.sample_shading;
-        if msaa != self.msaa || supersample != self.pipes.supersample {
+        let fte_supersample = supersample && st.soft_particle_quality > 0;
+        if msaa != self.msaa || supersample != self.pipes.supersample || fte_supersample != self.pipes.fte_supersample {
             self.idle();
             self.msaa = msaa;
             self.pipes.supersample = supersample;
+            self.pipes.fte_supersample = fte_supersample;
             let fmt = self.pipes.post_format;
             self.pipes.build(&self.gpu, fmt, msaa)?;
             self.destroy_targets();
@@ -36,6 +38,18 @@ impl Renderer {
         let ssao_quality = st.ssao_quality.min(2);
         if ssao_quality != self.ssao_quality {
             self.ssao_quality = ssao_quality;
+            self.idle();
+            self.destroy_targets();
+        }
+        let portal_quality = st.portal_quality.min(2);
+        if portal_quality != self.portal_quality {
+            self.portal_quality = portal_quality;
+            self.idle();
+            self.destroy_targets();
+        }
+        let motion_blur_quality = st.motion_blur_quality.min(1);
+        if motion_blur_quality != self.motion_blur_quality {
+            self.motion_blur_quality = motion_blur_quality;
             self.idle();
             self.destroy_targets();
         }

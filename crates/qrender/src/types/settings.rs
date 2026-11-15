@@ -60,15 +60,21 @@ pub struct Settings {
     /// r_softparticles ? r_softparticledistance : 0. Soft FTE particles fade
     /// over this many units in front of scene depth; 0 disables.
     pub soft_particle_distance: f32,
+    /// Soft particle MSAA depth quality (0 = low / sample 0, 1 = high / all samples).
+    pub soft_particle_quality: u32,
     /// r_ssao / r_ssao_strength: screen-space ambient occlusion strength (0 = off).
     pub ssao: f32,
     /// SSAO resolution and sample quality (0 = low, 1 = medium, 2 = high).
     pub ssao_quality: u32,
+    /// Portal & teleporter destination view quality (0 = low, 1 = medium, 2 = high).
+    pub portal_quality: u32,
     /// r_ssao_radius: occlusion radius in world units.
     pub ssao_radius: f32,
     /// r_motionblur: per-object motion blur; the blur covers this fraction of
     /// the motion over 1/60 s (0 = off). Camera motion is not blurred.
     pub motion_blur: f32,
+    /// r_motionblur_quality: per-object motion blur quality (0 = low, 1 = high).
+    pub motion_blur_quality: u32,
     /// Peripheral radial blur independent of camera velocity.
     pub edge_blur: f32,
     /// r_waterripples: ripple rings and gentle swell on liquid surfaces
@@ -78,6 +84,10 @@ pub struct Settings {
     pub water_splashes: bool,
     /// r_watercaustics: animated caustics on submerged world faces (strength).
     pub water_caustics: f32,
+    /// r_water_quality: enhanced water caustics, ripples & splashes quality (0 = low, 1 = high).
+    pub water_quality: u32,
+    /// addon_gel_quality: gel coat & droplet shading quality (0 = low / single fetch, 1 = high).
+    pub gel_quality: u32,
     /// r_shader_scope: 0 = slang preset on the 3D view only (UI drawn after
     /// it), 1 = on the whole frame including the UI.
     pub shader_scope: u32,
@@ -137,14 +147,19 @@ impl Default for Settings {
             dither_texture: 1.0,
             colorblind: 0,
             soft_particle_distance: 4.0,
+            soft_particle_quality: 0,
             ssao: 0.0,
             ssao_quality: 1,
+            portal_quality: 1,
             ssao_radius: 32.0,
             motion_blur: 0.0,
+            motion_blur_quality: 1,
             edge_blur: 0.0,
             water_ripples: 0.0,
             water_splashes: false,
             water_caustics: 0.0,
+            water_quality: 1,
+            gel_quality: 1,
             shader_scope: 0,
             goggles: Goggles::default(),
         }

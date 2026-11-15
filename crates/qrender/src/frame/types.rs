@@ -18,9 +18,14 @@ pub(super) struct FrameUbo {
     pub(super) skybox1: [u32; 4],
     pub(super) alphas: [f32; 4],
     pub(super) soft: [f32; 4],
+    /// x world dither level, y alias mode, z goggles mode, w caustic texture slot.
     pub(super) softf: [u32; 4],
-    /// x ripple strength, y caustics strength, z ripple count.
+    /// x ripple strength, y caustics strength, z ripple count, w water quality (0..=1).
     pub(super) water: [f32; 4],
+    /// xy gl_FragCoord -> portal UV scale, zw valid UV clamp max.
+    pub(super) portal_uv: [f32; 4],
+    /// xy scene px per vel px, zw scene max texel coords.
+    pub(super) vel_uv: [f32; 4],
     /// xy centre, z liquid surface height, w start time.
     pub(super) ripples: [[f32; 4]; crate::water::MAX_RIPPLES],
     pub(super) ripple_amp: [[f32; 4]; crate::water::MAX_RIPPLES / 4],
@@ -135,6 +140,9 @@ pub(super) struct PostPush {
     pub(super) g_noise: f32,
     pub(super) g_time: f32,
     pub(super) speed_blur: f32,
+    pub(super) mb_quality: u32,
+    pub(super) mb_w: f32,
+    pub(super) mb_h: f32,
 }
 
 #[repr(C)]
@@ -245,6 +253,9 @@ pub(super) struct AliasDraw {
     pub(super) first_index: u32,
     pub(super) num_indices: u32,
     pub(super) push: AliasPush,
+    pub(super) origin: [f32; 3],
+    pub(super) radius: f32,
+    pub(super) main_visible: bool,
     pub(super) viewmodel: bool,
     /// Drawn only into portal views.
     pub(super) portal_only: bool,

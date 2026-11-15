@@ -82,7 +82,7 @@ const ADDON: &[Addon] = &[
         id: "gel",
         cvar: "addon_gel",
         weapons: &[Weapon { name: "Gel Sprayer", slot: "addon_gel_slot" }],
-        page: None,
+        page: Some(Page::Gel),
         alt: true,
         description: "A Portal-style gel sprayer. Fire sprays blue Repulsion gel: land, jump or run into it to bounce, and landings on it never hurt. Alt Fire sprays orange Propulsion gel: run across it to go much faster. Gel coats floors and walls until washed off with the Powerwasher. Assign a weapon slot below; repeated presses cycle the weapons in that slot.",
     },

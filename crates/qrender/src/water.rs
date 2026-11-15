@@ -7,6 +7,10 @@
 #[cfg(test)]
 #[path = "water_tests.rs"]
 mod tests;
+#[path = "water_tex.rs"]
+mod tex;
+
+pub use tex::{caustic_texture, spray_blob};
 
 use crate::Particle;
 use crate::world::World;
@@ -16,12 +20,21 @@ use std::collections::HashMap;
 pub const MAX_RIPPLES: usize = 32;
 /// Seconds a ripple ring lives (must match `water_grad` in common.glsl).
 pub const RIPPLE_LIFE: f32 = 2.5;
-const MAX_DROPS: usize = 2048;
+const MAX_DROPS: usize = 1024;
 const GRAVITY: f32 = 800.0;
 /// Explosions deeper than this under a liquid surface don't splash it.
 const BLAST_MAX_DEPTH: f32 = 200.0;
 /// Key used for the player (view entity) track.
 const PLAYER_KEY: u32 = u32::MAX;
+
+/// Active `(max_ripples, max_drops, max_puffs)` budgets for `r_water_quality`
+/// (`0` low, `1` high).
+pub fn quality_budgets(quality: u32) -> (usize, usize, usize) {
+    match quality {
+        0 => (8, 512, 128),
+        _ => (16, MAX_DROPS, MAX_PUFFS),
+    }
+}
 
 #[derive(Clone, Copy, Debug)]
 pub struct Ripple {
@@ -66,26 +79,7 @@ pub struct SprayPuff {
     pub color: [u8; 4],
 }
 
-const MAX_PUFFS: usize = 512;
-
-/// RGBA of a soft round blob with a slightly lumpy edge (`n`×`n`).
-pub fn spray_blob(n: u32) -> Vec<u8> {
-    let mut out = Vec::with_capacity((n * n * 4) as usize);
-    for y in 0..n {
-        for x in 0..n {
-            let u = (x as f32 + 0.5) / n as f32 * 2.0 - 1.0;
-            let v = (y as f32 + 0.5) / n as f32 * 2.0 - 1.0;
-            let a = v.atan2(u);
-            let edge = 0.85 + 0.08 * (a * 5.0).sin() + 0.05 * (a * 9.0 + 1.3).sin();
-            let d = (u * u + v * v).sqrt() / edge;
-            let alpha = (1.0 - d * d).clamp(0.0, 1.0).powf(0.7);
-            // brighter core so overlapping puffs read as foam
-            let l = (200.0 + 55.0 * (1.0 - d).clamp(0.0, 1.0)) as u8;
-            out.extend_from_slice(&[l, l, l, (alpha * 255.0) as u8]);
-        }
-    }
-    out
-}
+const MAX_PUFFS: usize = 256;
 
 #[derive(Default)]
 pub struct WaterFx {
@@ -145,21 +139,23 @@ impl WaterFx {
         (x >> 8) as f32 / (1u32 << 24) as f32
     }
 
-    fn add_ripple(&mut self, pos: [f32; 3], time: f64, amp: f32) {
-        if self.ripples.len() >= MAX_RIPPLES {
+    fn add_ripple(&mut self, pos: [f32; 3], time: f64, amp: f32, max_ripples: usize) {
+        while self.ripples.len() >= max_ripples {
             // replace the oldest
             if let Some(i) = (0..self.ripples.len()).min_by(|&a, &b| self.ripples[a].t0.total_cmp(&self.ripples[b].t0)) {
                 self.ripples.remove(i);
+            } else {
+                break;
             }
         }
         self.ripples.push(Ripple { pos, t0: time as f32, amp });
     }
 
-    fn splash(&mut self, at: [f32; 3], kind: u32, strength: f32, time: f64) {
+    fn splash(&mut self, at: [f32; 3], kind: u32, strength: f32, time: f64, max_drops: usize) {
         let n = (6.0 + 26.0 * strength) as usize;
         let shades = self.shades[(kind as usize).clamp(1, 3) - 1];
         for _ in 0..n {
-            if self.drops.len() >= MAX_DROPS {
+            if self.drops.len() >= max_drops {
                 break;
             }
             let a = self.rand() * std::f32::consts::TAU;
@@ -181,7 +177,7 @@ impl WaterFx {
     /// An underwater explosion `depth` units below the surface at `at`: a
     /// tall column plus a wide crown, both shrinking with depth; nothing
     /// past `BLAST_MAX_DEPTH`.
-    fn blast(&mut self, at: [f32; 3], kind: u32, depth: f32, time: f64) {
+    fn blast(&mut self, at: [f32; 3], kind: u32, depth: f32, time: f64, max_drops: usize, max_puffs: usize) {
         let f = 1.0 - (depth.max(0.0) / BLAST_MAX_DEPTH);
         if f <= 0.0 {
             return;
@@ -190,7 +186,7 @@ impl WaterFx {
         let column = (8.0 + 24.0 * f) as usize;
         let crown = (14.0 + 30.0 * f) as usize;
         for i in 0..column + crown {
-            if self.puffs.len() >= MAX_PUFFS {
+            if self.puffs.len() >= max_puffs {
                 break;
             }
             let a = self.rand() * std::f32::consts::TAU;
@@ -236,7 +232,7 @@ impl WaterFx {
         let shades = self.shades[(kind as usize).clamp(1, 3) - 1];
         let n = (20.0 + 100.0 * f) as usize;
         for i in 0..n {
-            if self.drops.len() >= MAX_DROPS {
+            if self.drops.len() >= max_drops {
                 break;
             }
             let column = i % 3 != 0;
@@ -263,9 +259,29 @@ impl WaterFx {
     /// the view is right for the player's own shots); explosions under a
     /// surface throw up a big splash above them, smaller the deeper they are.
     #[allow(clippy::too_many_arguments)]
-    fn shot(&mut self, world: &World, eye: [f32; 3], hit: [f32; 3], explosion: bool, time: f64, ripples: bool, splashes: bool) {
+    fn shot(
+        &mut self,
+        world: &World,
+        eye: [f32; 3],
+        hit: [f32; 3],
+        explosion: bool,
+        time: f64,
+        ripples: bool,
+        splashes: bool,
+        max_ripples: usize,
+        max_drops: usize,
+        max_puffs: usize,
+    ) {
+        // `hit` from trace_endpos / MSG_WriteCoord often sits on or just inside
+        // a solid floor/wall; step 1 unit back toward `eye` so underwater hits
+        // still resolve their surrounding liquid.
+        let back = {
+            let d = [eye[0] - hit[0], eye[1] - hit[1], eye[2] - hit[2]];
+            let len = (d[0] * d[0] + d[1] * d[1] + d[2] * d[2]).sqrt();
+            (len > 1.0).then(|| [hit[0] + d[0] / len, hit[1] + d[1] / len, hit[2] + d[2] / len])
+        };
         if explosion
-            && let Some((z, k)) = world.liquid_surface(hit)
+            && let Some((z, k)) = world.liquid_surface(hit).or_else(|| back.and_then(|p| world.liquid_surface(p)))
             && k & 4 == 0
         {
             let depth = z - hit[2];
@@ -273,27 +289,38 @@ impl WaterFx {
             if f > 0.0 {
                 let at = [hit[0], hit[1], z];
                 if ripples {
-                    self.add_ripple(at, time, 2.5 * f);
+                    self.add_ripple(at, time, 2.5 * f, max_ripples);
                 }
                 if splashes {
-                    self.blast(at, k & 3, depth, time);
+                    self.blast(at, k & 3, depth, time, max_drops, max_puffs);
                 }
             }
             return;
         }
         let wet = |p: [f32; 3]| world.liquid_surface(p).map_or(0, |(_, k)| k & 3);
-        let (we, wh) = (wet(eye), wet(hit));
+        let we = wet(eye);
+        let mut end = hit;
+        let mut wh = wet(end);
+        if wh == 0
+            && let Some(b) = back
+        {
+            let wb = wet(b);
+            if wb != 0 {
+                end = b;
+                wh = wb;
+            }
+        }
         let emit = |fx: &mut Self, at: [f32; 3], k: u32, strength: f32| {
             if ripples {
-                fx.add_ripple(at, time, 1.2 * strength);
+                fx.add_ripple(at, time, 1.2 * strength, max_ripples);
             }
             if splashes {
-                fx.splash(at, k, strength, time);
+                fx.splash(at, k, strength, time, max_drops);
             }
         };
         if we != wh {
             // bisect the segment for the crossing
-            let (mut a, mut b) = (eye, hit);
+            let (mut a, mut b) = (eye, end);
             for _ in 0..12 {
                 let m = [0.5 * (a[0] + b[0]), 0.5 * (a[1] + b[1]), 0.5 * (a[2] + b[2])];
                 if wet(m) == we { a = m } else { b = m }
@@ -307,12 +334,12 @@ impl WaterFx {
                 emit(self, [wetp[0], wetp[1], z], k & 3, 0.35);
             }
         } else if wh != 0
-            && let Some((z, k)) = world.liquid_surface(hit)
+            && let Some((z, k)) = world.liquid_surface(end)
             && k & 4 == 0
-            && z - hit[2] < 2.0
+            && z - end[2] < 2.0
         {
             // impact right at the surface (e.g. shot along it)
-            emit(self, [hit[0], hit[1], z], k & 3, 0.35);
+            emit(self, [end[0], end[1], z], k & 3, 0.35);
         }
     }
 
@@ -330,6 +357,7 @@ impl WaterFx {
         shots: &[([f32; 3], bool)],
         ripples: bool,
         splashes: bool,
+        quality: u32,
     ) -> Vec<Particle> {
         let dt = time - self.last_time;
         if !(0.0..=1.0).contains(&dt) {
@@ -347,8 +375,10 @@ impl WaterFx {
             self.reset();
             return Vec::new();
         }
-        // the player's origin is 24 units above the feet; splash at the shins
-        let player = player.map(|p| (PLAYER_KEY, [p[0], p[1], p[2] - 16.0]));
+        let (max_ripples, max_drops, max_puffs) = quality_budgets(quality);
+        // the player's origin is 24 units above the feet; probe just above the
+        // soles (like SV_CheckWater) so even shallow pools ripple and splash
+        let player = player.map(|p| (PLAYER_KEY, [p[0], p[1], p[2] - 23.0]));
         for (key, o) in movers.chain(player) {
             let mut wake_at = None;
             let mut cross = None;
@@ -384,7 +414,7 @@ impl WaterFx {
                         let speed = (d[0] * d[0] + d[1] * d[1] + d[2] * d[2]).sqrt() / dt;
                         let strength = (vz.max(speed * 0.5) / 350.0).clamp(0.25, 1.5)
                             * if kind != 0 { 1.0 } else { 0.5 };
-                        cross = Some(([o[0], o[1], z], k, strength));
+                        cross = Some(([o[0], o[1], z], k, strength, vz > 80.0));
                     }
                 } else if kind != 0 && ripples {
                     // wading near the surface leaves a wake
@@ -393,7 +423,7 @@ impl WaterFx {
                         && time - last_wake > 0.3
                         && let Some((z, k)) = surf
                         && k & 4 == 0
-                        && z - o[2] < 36.0
+                        && z - o[2] < 48.0
                     {
                         tr.last_wake = time;
                         wake_at = Some(([o[0], o[1], z], (hs / 320.0).clamp(0.2, 0.6)));
@@ -403,27 +433,34 @@ impl WaterFx {
                 let kind = world.liquid_surface(o).map_or(0, |(_, k)| k & 3);
                 self.tracks.insert(key, Track { origin: o, kind, last_wake: 0.0, seen: self.frame });
             }
-            if let Some((at, k, strength)) = cross {
+            if let Some((at, k, strength, do_splash)) = cross {
                 if ripples {
-                    self.add_ripple(at, time, 1.6 * strength);
+                    self.add_ripple(at, time, 1.6 * strength, max_ripples);
                 }
-                if splashes {
-                    self.splash(at, k, strength, time);
+                if splashes && do_splash {
+                    self.splash(at, k, strength, time, max_drops);
                 }
             } else if let Some((at, amp)) = wake_at {
-                self.add_ripple(at, time, amp);
+                self.add_ripple(at, time, amp, max_ripples);
             }
         }
         if dt > 0.0
             && let Some(eye) = eye
         {
             for &(hit, explosion) in shots {
-                self.shot(world, eye, hit, explosion, time, ripples, splashes);
+                self.shot(world, eye, hit, explosion, time, ripples, splashes, max_ripples, max_drops, max_puffs);
             }
         }
         let frame = self.frame;
         self.tracks.retain(|_, t| t.seen == frame);
         self.ripples.retain(|r| time as f32 - r.t0 < RIPPLE_LIFE && time as f32 >= r.t0);
+        while self.ripples.len() > max_ripples {
+            if let Some(i) = (0..self.ripples.len()).min_by(|&a, &b| self.ripples[a].t0.total_cmp(&self.ripples[b].t0)) {
+                self.ripples.remove(i);
+            } else {
+                break;
+            }
+        }
 
         // droplets: fall back into the liquid with a tiny ring
         let mut landed = std::mem::take(&mut self.landed_scratch);
@@ -439,6 +476,9 @@ impl WaterFx {
             }
             time < p.die
         });
+        if self.drops.len() > max_drops {
+            self.drops.truncate(max_drops);
+        }
         // spray puffs: lighter than droplets (air drag), sink back and vanish
         self.puffs.retain_mut(|p| {
             p.vel[2] -= GRAVITY * 0.8 * dt;
@@ -451,10 +491,13 @@ impl WaterFx {
             let age = (time - p.t0) as f32;
             age < p.life && !(p.pos[2] < p.surface - 4.0 && p.vel[2] < 0.0)
         });
+        if self.puffs.len() > max_puffs {
+            self.puffs.truncate(max_puffs);
+        }
         if ripples {
             for &at in landed.iter().take(2) {
-                if self.ripples.len() < MAX_RIPPLES {
-                    self.add_ripple(at, time, 0.25);
+                if self.ripples.len() < max_ripples {
+                    self.add_ripple(at, time, 0.25, max_ripples);
                 }
             }
         }

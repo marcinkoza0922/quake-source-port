@@ -362,40 +362,92 @@ impl Renderer {
         Ok(id)
     }
 
+    /// Updates the stored dimensions of an existing picture so the next
+    /// [`Self::update_pic_rows`] recreates its backing image at the new size
+    /// without allocating a new `PicId` or texture slot.
+    pub fn resize_pic(&mut self, pic: PicId, width: u32, height: u32) -> Result<()> {
+        let Some(info) = self.pics.get_mut(pic.0 as usize) else {
+            return Err(Error::new("no such picture"));
+        };
+        info.width = width;
+        info.height = height;
+        Ok(())
+    }
+
     /// Replaces a picture's texels (same size it was registered with), for
-    /// CPU-built atlases such as the UI text cache. Waits for the GPU.
+    /// CPU-built atlases such as the UI text cache.
     pub fn update_pic(&mut self, pic: PicId, rgba: &[u8]) -> Result<()> {
         self.update_pic_rows(pic, rgba, u32::MAX)
     }
 
     /// Like [`Self::update_pic`], but only the first `rows` rows of `rgba`
     /// are uploaded and the rest of the picture becomes transparent black.
+    /// When the backing image already matches `pic`'s dimensions, the upload
+    /// is staged and recorded onto the next rendered frame without idling.
     pub fn update_pic_rows(&mut self, pic: PicId, rgba: &[u8], rows: u32) -> Result<()> {
         let Some(&PicInfo { slot, width, height }) = self.pics.get(pic.0 as usize) else {
             return Err(Error::new("no such picture"));
         };
+        if let Some(Tex { image: Some(img), .. }) = self.textures.get(slot as usize).and_then(|t| t.as_ref())
+            && img.width == width && img.height == height && img.mips == 1 && img.layers == 1
+        {
+            let img_handle = img.image;
+            let rows = rows.min(height);
+            let len = (width * rows * 4) as usize;
+            let staging = if len > 0 {
+                let mut buf = self.gpu.buffer(len as u64, vk::BufferUsageFlags::TRANSFER_SRC, true)?;
+                buf.bytes_mut()[..len].copy_from_slice(&rgba[..len]);
+                Some(buf)
+            } else {
+                None
+            };
+            // Drop any earlier staged upload for the same image (unsubmitted).
+            let mut i = 0;
+            while i < self.pending_pic_uploads.len() {
+                if self.pending_pic_uploads[i].image == img_handle {
+                    if let Some(old_st) = self.pending_pic_uploads.swap_remove(i).staging {
+                        self.gpu.free_buffer(old_st);
+                    }
+                } else {
+                    i += 1;
+                }
+            }
+            self.pending_pic_uploads.push(PendingPicUpload {
+                image: img_handle,
+                width,
+                height,
+                rows,
+                staging,
+            });
+            return Ok(());
+        }
         self.idle();
-        // After `idle` the GPU no longer reads the old image, so a same-size
-        // one is rewritten in place instead of allocating a new one.
         let tex = self.textures[slot as usize].as_mut();
         let sampling = tex.as_ref().map_or(Sampling::Nearest, |t| t.sampling);
-        let (img, old) = match tex.and_then(|t| t.image.take()) {
-            Some(i) if i.width == width && i.height == height && i.mips == 1 && i.layers == 1 => (i, None),
-            old => {
-                let usage = vk::ImageUsageFlags::SAMPLED | vk::ImageUsageFlags::TRANSFER_DST;
-                let img = match self.gpu.image(width, height, 1, 1, vk::Format::R8G8B8A8_UNORM, usage, vk::ImageAspectFlags::COLOR) {
-                    Ok(img) => img,
-                    Err(e) => {
-                        if let Some(t) = self.textures[slot as usize].as_mut() {
-                            t.image = old;
-                        }
-                        return Err(e);
+        let old = tex.and_then(|t| t.image.take());
+        if let Some(ref old_img) = old {
+            let mut i = 0;
+            while i < self.pending_pic_uploads.len() {
+                if self.pending_pic_uploads[i].image == old_img.image {
+                    if let Some(old_st) = self.pending_pic_uploads.swap_remove(i).staging {
+                        self.gpu.free_buffer(old_st);
                     }
-                };
-                self.write_texture_descriptor(slot, img.view, self.sampler_for(sampling));
-                (img, old)
+                } else {
+                    i += 1;
+                }
+            }
+        }
+        let usage = vk::ImageUsageFlags::SAMPLED | vk::ImageUsageFlags::TRANSFER_DST;
+        let img = match self.gpu.image(width, height, 1, 1, vk::Format::R8G8B8A8_UNORM, usage, vk::ImageAspectFlags::COLOR) {
+            Ok(img) => img,
+            Err(e) => {
+                if let Some(t) = self.textures[slot as usize].as_mut() {
+                    t.image = old;
+                }
+                return Err(e);
             }
         };
+        self.write_texture_descriptor(slot, img.view, self.sampler_for(sampling));
         let mut up = self.gpu.begin_upload()?;
         let r = if rows >= height { self.gpu.upload_image(&mut up, &img, &[rgba]) } else { self.gpu.upload_image_rows(&mut up, &img, rgba, rows) };
         let r = r.and_then(|_| self.gpu.end_upload(up));

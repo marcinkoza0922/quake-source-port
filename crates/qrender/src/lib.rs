@@ -97,18 +97,22 @@ pub struct Renderer {
     sampler_repeat: vk::Sampler,
     sampler_clamp: vk::Sampler,
     sampler_linear: vk::Sampler,
+    sampler_linear_repeat: vk::Sampler,
     /// Sampler for [`Sampling::World`] textures, rebuilt when filtering changes.
     sampler_world: vk::Sampler,
     /// (linear, anisotropy) of `sampler_world`.
     world_filter: (usize, f32, f32),
     /// Colour metric the palette LUT was built with (-1 = not built).
     lut_metric: i32,
-    /// Scene MSAA sample count, render scale and SSAO quality in effect.
+    /// Scene MSAA sample count, render scale, SSAO quality, portal quality, and motion-blur quality in effect.
     msaa: u32,
     render_scale: f32,
     ssao_quality: u32,
-    /// Last frame's entity transforms by `RenderEntity::key` (motion blur).
+    portal_quality: u32,
+    motion_blur_quality: u32,
+    /// Last frame's entity transforms by `RenderEntity::key` (motion blur), plus reused scratch map.
     prev_xforms: std::collections::HashMap<u32, ([f32; 3], [f32; 3])>,
+    cur_xforms: std::collections::HashMap<u32, ([f32; 3], [f32; 3])>,
     prev_xform_time: f64,
     /// Ripples, splashes and wakes on liquids (r_waterripples/r_watersplash).
     water_fx: water::WaterFx,
@@ -127,8 +131,12 @@ pub struct Renderer {
     hidden_entities: std::collections::HashSet<u32>,
     models: Vec<Model>,
     pics: Vec<PicInfo>,
+    /// Queued same-size picture uploads recorded on the next frame without idling.
+    pending_pic_uploads: Vec<PendingPicUpload>,
     /// Soft round blob for water spray puffs (big underwater-blast splashes).
     splash_pic: Option<PicId>,
+    /// Precomputed tiling Worley caustic texture slot (`NO_TEX` if upload failed).
+    caustic_tex: u32,
     conchars: Option<PicId>,
     alias_cpu: Vec<u32>,
     alias_buf: Buffer,
@@ -327,6 +335,14 @@ impl Renderer {
                 dev.destroy_semaphore(f.acquire, None);
             }
             self.gpu.free_buffer(f.dynbuf);
+            for b in f.staging {
+                self.gpu.free_buffer(b);
+            }
+        }
+        for up in std::mem::take(&mut self.pending_pic_uploads) {
+            if let Some(b) = up.staging {
+                self.gpu.free_buffer(b);
+            }
         }
         for b in [&self.palette_buf, &self.dummy, &self.alias_buf] {
             self.gpu.free_buffer_ref(b);
@@ -339,6 +355,7 @@ impl Renderer {
             dev.destroy_sampler(self.sampler_repeat, None);
             dev.destroy_sampler(self.sampler_clamp, None);
             dev.destroy_sampler(self.sampler_linear, None);
+            dev.destroy_sampler(self.sampler_linear_repeat, None);
             if self.sampler_world != self.sampler_repeat {
                 dev.destroy_sampler(self.sampler_world, None);
             }

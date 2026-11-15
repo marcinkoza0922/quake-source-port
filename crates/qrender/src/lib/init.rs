@@ -69,6 +69,7 @@ impl Renderer {
                 fence,
                 acquire,
                 dynbuf,
+                staging: Vec::new(),
                 set: sets[0],
                 comp_set: sets[1],
                 cull_set: sets[2],
@@ -102,6 +103,11 @@ impl Renderer {
             vk::SamplerAddressMode::CLAMP_TO_EDGE,
             vk::SamplerMipmapMode::NEAREST,
         )?;
+        let sampler_linear_repeat = sampler(
+            vk::Filter::LINEAR,
+            vk::SamplerAddressMode::REPEAT,
+            vk::SamplerMipmapMode::NEAREST,
+        )?;
         let storage = vk::BufferUsageFlags::STORAGE_BUFFER | vk::BufferUsageFlags::TRANSFER_DST;
         let mut palette_buf = gpu.buffer(1024 + convert::LUT_BYTES as u64, vk::BufferUsageFlags::STORAGE_BUFFER, true)?;
         let pal: Vec<u32> = palette
@@ -130,13 +136,17 @@ impl Renderer {
             sampler_repeat,
             sampler_clamp,
             sampler_linear,
+            sampler_linear_repeat,
             sampler_world: sampler_repeat,
             world_filter: (usize::MAX, 0.0, 0.0),
             lut_metric: -1,
             msaa: 1,
             render_scale: 1.0,
             ssao_quality: 1,
+            portal_quality: 1,
+            motion_blur_quality: 1,
             prev_xforms: Default::default(),
+            cur_xforms: Default::default(),
             prev_xform_time: 0.0,
             water_fx: {
                 let mut w = water::WaterFx::default();
@@ -156,7 +166,9 @@ impl Renderer {
             hidden_entities: Default::default(),
             models: Vec::new(),
             pics: Vec::new(),
+            pending_pic_uploads: Vec::new(),
             splash_pic: None,
+            caustic_tex: NO_TEX,
             conchars: None,
             alias_cpu: Vec::new(),
             alias_buf,
@@ -171,6 +183,11 @@ impl Renderer {
         };
         r.write_static_descriptors();
         r.splash_pic = r.register_pic_rgba_linear(32, 32, &water::spray_blob(32)).ok();
+        let caustic_rgba = water::caustic_texture(128);
+        let mut up = r.gpu.begin_upload()?;
+        let slot = r.add_texture(&mut up, 128, 128, &[&caustic_rgba], false, Sampling::LinearRepeat)?;
+        r.gpu.end_upload(up)?;
+        r.caustic_tex = slot;
         Ok(r)
     }
 

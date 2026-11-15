@@ -8,6 +8,7 @@ mod portal_scissor;
 use portals::gun_portal_quad;
 /// fte.frag mode of add-on gel batches ([`crate::FteBatch::gel`]).
 const GEL_MODE: f32 = 9.0;
+const GEL_FAST_MODE: f32 = 10.0;
 mod types;
 use types::*;
 mod math;
@@ -18,6 +19,13 @@ mod lightmaps;
 pub(super) use lightmaps::LightmapRequests;
 
 type Mat4 = [f32; 16];
+
+fn vel_viewport(t: &Targets, [scene_w, scene_h]: [u32; 2]) -> [u32; 2] {
+    [
+        ((scene_w as f32 * t.vel_w as f32 / t.scene_w.max(1) as f32).round() as u32).clamp(1, t.vel_w),
+        ((scene_h as f32 * t.vel_h as f32 / t.scene_h.max(1) as f32).round() as u32).clamp(1, t.vel_h),
+    ]
+}
 
 impl Renderer {
     /// Draws and presents one frame.
@@ -54,6 +62,9 @@ impl Renderer {
         let wait = std::time::Instant::now();
         // SAFETY: fence owned by this frame.
         unsafe { dev.wait_for_fences(&[fence], true, u64::MAX)? };
+        for b in std::mem::take(&mut self.frames[fi].staging) {
+            self.gpu.free_buffer(b);
+        }
         self.fence_wait_ns = wait.elapsed().as_nanos() as u64;
         self.init_gpu_times(fr.splits.len().max(1))?;
         self.collect_gpu_times(fi);
@@ -127,6 +138,7 @@ impl Renderer {
                 fr.shot_impacts,
                 st.water_ripples > 0.0,
                 st.water_splashes,
+                st.water_quality.min(1),
             );
         }
 
@@ -135,9 +147,24 @@ impl Renderer {
         let prev_xforms = std::mem::take(&mut self.prev_xforms);
         let mb_dt = time - self.prev_xform_time;
         let prev_ok = mb_on && mb_dt > 0.0 && mb_dt < 0.25;
-        let mut xforms = std::collections::HashMap::new();
-        // last frame's model transform rows, when the entity moved
-        let prev_rows = |e: &RenderEntity, local: Option<&Mat4>| -> Option<[[f32; 4]; 3]> {
+        let mb_scale = if prev_ok { st.motion_blur.min(4.0) / (60.0 * mb_dt as f32) } else { 0.0 };
+        let mb_quality = st.motion_blur_quality.min(1);
+        let mut xforms = std::mem::take(&mut self.cur_xforms);
+        xforms.clear();
+        if mb_on {
+            for e in fr.entities {
+                if e.key != 0
+                    && !e.viewmodel
+                    && !e.follows_camera
+                    && !e.portal_only
+                    && !self.hidden_entities.contains(&e.key)
+                {
+                    xforms.insert(e.key, (e.origin, e.angles));
+                }
+            }
+        }
+        // last frame's model transform rows, when the entity moved perceptibly
+        let prev_rows = |vs: &ViewSetup, view_px: [f32; 2], e: &RenderEntity, center: [f32; 3], local_mid: [f32; 3], radius: f32, local: Option<&Mat4>| -> Option<[[f32; 4]; 3]> {
             if !prev_ok || e.key == 0 || e.viewmodel || e.follows_camera {
                 return None;
             }
@@ -149,7 +176,16 @@ impl Renderer {
             if dot(d, d) > 256.0 * 256.0 {
                 return None; // teleported
             }
-            let m = affine(entity_rotation(pa), po);
+            let prot = entity_rotation(pa);
+            let prev_center = if local_mid == [0.0; 3] {
+                po
+            } else {
+                add(po, rotate3(&prot, local_mid))
+            };
+            if !vel_entity_visible(vs, center, prev_center, e.angles, pa, radius, mb_scale, view_px, mb_quality) {
+                return None;
+            }
+            let m = affine(prot, po);
             Some(rows3(&local.map_or(m, |l| mul(&m, l))))
         };
         // CPU-built alias poses (ragdolls), indexed in u32s from the buffer start
@@ -193,6 +229,10 @@ impl Renderer {
             }
             setup_view(&v, scene_w, scene_h)
         });
+        let view_px = [
+            w.max(1) as f32 * (scene_w as f32 / sw.max(1) as f32),
+            h.max(1) as f32 * (scene_h as f32 / sh.max(1) as f32),
+        ];
         let mut portal_draws = if fr.settings.teleport_windows || !fr.gun_portals.is_empty() {
             self.prepare_portals(view.as_ref(), [scene_w, scene_h], fr.gun_portals, &fr.settings, &mut dynw, time, alphas, &mut lm_vis, &mut portal_worlds)
         } else {
@@ -230,9 +270,6 @@ impl Renderer {
                 let Some(m) = self.models.get(e.model.0 as usize) else {
                     continue;
                 };
-                if mb_on && e.key != 0 && !e.viewmodel {
-                    xforms.insert(e.key, (e.origin, e.angles));
-                }
                 let rot = entity_rotation(e.angles);
                 let dist = dot(sub(e.origin, vs.eye), vs.fwd);
                 match m {
@@ -295,8 +332,14 @@ impl Renderer {
                         wd.zfix = true;
                         if alpha < 1.0 {
                             trans.push((dist, Trans::World(world_draws.len())));
-                        } else if let Some(r) = prev_rows(e, None) {
-                            vel_draws.push(VelDraw::World(world_draws.len(), r));
+                        } else if !e.portal_only {
+                            let local_mid = [0, 1, 2].map(|i| 0.5 * (sub_.mins[i] + sub_.maxs[i]));
+                            let half = [0, 1, 2].map(|i| 0.5 * (sub_.maxs[i] - sub_.mins[i]));
+                            let r = dot(half, half).sqrt();
+                            let center = add(e.origin, rotate3(&rot, local_mid));
+                            if let Some(r) = prev_rows(vs, view_px, e, center, local_mid, r, None) {
+                                vel_draws.push(VelDraw::World(world_draws.len(), r));
+                            }
                         }
                         world_draws.push(wd);
                     }
@@ -316,7 +359,8 @@ impl Renderer {
                             }
                         };
                         let radius = dynp.map_or(am.radius, |(_, d)| d.radius);
-                        if portal_draws.is_empty() && !e.viewmodel && !sphere_in_frustum(&vs.frustum, e.origin, radius) {
+                        let main_visible = e.viewmodel || sphere_in_frustum(&vs.frustum, e.origin, radius);
+                        if portal_draws.is_empty() && !main_visible {
                             continue;
                         }
                         let t = time + e.syncbase as f64;
@@ -399,8 +443,8 @@ impl Renderer {
                         }
                         base_flags |= (e.heat.min(3) as u32) << 8;
                         let stride = if am.md3 { 2 } else { 1 };
-                        let prev_r = if !(e.portal_only || (alpha < 1.0 && !e.viewmodel)) {
-                            prev_rows(e, Some(&local))
+                        let prev_r = if main_visible && !e.portal_only && (alpha >= 1.0 || e.viewmodel) {
+                            prev_rows(vs, view_px, e, e.origin, [0.0; 3], radius, Some(&local))
                         } else {
                             None
                         };
@@ -428,8 +472,8 @@ impl Renderer {
                                 poses: [p1, p2, top.min(13) as u32, bot.min(13) as u32],
                                 texs: [skin[0], skin[1], skin[2], base_flags | u32::from(surf.holey)],
                             };
-                            if e.portal_only {
-                                // portal views only (see draw_portals)
+                            if e.portal_only || !main_visible {
+                                // offscreen main-view models (drawn only in portal views if visible there)
                             } else if alpha < 1.0 && !e.viewmodel {
                                 trans.push((dist, Trans::Alias(alias_draws.len())));
                             } else if let Some(r) = prev_r {
@@ -440,6 +484,9 @@ impl Renderer {
                                 first_index: surf.first_index,
                                 num_indices: surf.num_indices,
                                 push,
+                                origin: e.origin,
+                                radius,
+                                main_visible,
                                 viewmodel: e.viewmodel,
                                 portal_only: e.portal_only,
                             });
@@ -597,19 +644,26 @@ impl Renderer {
                 (fte_vertices, fte_indices) = (&fte_v[..], &fte_i[..]);
             }
             if !(fte_batches.is_empty() && gun_batches.is_empty()) && !fte_indices.is_empty() {
+                let gel_mode = if st.gel_quality == 0 { GEL_FAST_MODE } else { GEL_MODE };
                 let parts: Vec<_> = fte_batches
                     .iter()
                     .filter_map(|b| {
                         let slot = self.pics.get(b.pic.0 as usize)?.slot;
-                        Some((crate::pipelines::fte_index(b.blend, b.lines), slot, *b, if b.gel { GEL_MODE } else { b.blend as u32 as f32 }))
+                        Some((crate::pipelines::fte_index(b.blend, b.lines), slot, *b, if b.gel { gel_mode } else { b.blend as u32 as f32 }))
                     })
                     .collect();
-                // portal views: the same particles (not soft) and every gun
-                // portal but the one they look out of, with nested views
-                let per_view: Vec<Vec<_>> = (0..portal_draws.len())
-                    .map(|k| {
-                        let exit = portal_draws[k].portal.destination;
-                        let mut b: Vec<_> = parts.iter().map(|&(p, s, mut b, m)| { b.soft = false; (p, s, b, m) }).collect();
+                // portal views: the same particles (unless gated by portal quality) and
+                // every gun portal but the one they look out of, with nested views
+                let per_view: Vec<Vec<_>> = portal_draws
+                    .iter()
+                    .enumerate()
+                    .map(|(k, pd)| {
+                        let exit = pd.portal.destination;
+                        let mut b = if portals::skip_portal_extras(st.portal_quality.min(2), pd.depth) {
+                            Vec::new()
+                        } else {
+                            parts.iter().map(|&(p, s, mut b, m)| { b.soft = false; (p, s, b, m) }).collect()
+                        };
                         for &(gi, (p, _, gb, m)) in &gun_batches {
                             if fr.gun_portals[gi].origin != exit {
                                 b.push((p, slot_in(Some(k), gi), gb, m));
@@ -770,13 +824,36 @@ impl Renderer {
                 ],
                 alphas,
                 soft: [soft.0, soft.1, st.goggles.intensity.clamp(0.25, 3.0), st.goggles.noise.clamp(0.0, 2.0)],
-                softf: [soft.2, soft.3, st.goggles.mode.min(2), 0],
+                softf: [soft.2, soft.3, st.goggles.mode.min(2), self.caustic_tex],
                 water: [
                     st.water_ripples.clamp(0.0, 4.0),
                     st.water_caustics.clamp(0.0, 4.0),
                     if st.water_ripples > 0.0 || st.water_caustics > 0.0 { self.water_fx.ripples.len() as f32 } else { 0.0 },
-                    0.0,
+                    st.water_quality.min(1) as f32,
                 ],
+                portal_uv: if let Some(t) = &self.targets {
+                    let [pw, ph] = portals::portal_viewport(t, [pass.scene_w, pass.scene_h]);
+                    let (ptw, pth) = (t.portal_w.max(1) as f32, t.portal_h.max(1) as f32);
+                    [
+                        pw as f32 / (pass.scene_w.max(1) as f32 * ptw),
+                        ph as f32 / (pass.scene_h.max(1) as f32 * pth),
+                        (pw as f32 - 0.5).max(0.0) / ptw,
+                        (ph as f32 - 0.5).max(0.0) / pth,
+                    ]
+                } else {
+                    [0.0; 4]
+                },
+                vel_uv: if let Some(t) = &self.targets {
+                    let [vw, vh] = vel_viewport(t, [pass.scene_w, pass.scene_h]);
+                    [
+                        pass.scene_w.max(1) as f32 / vw as f32,
+                        pass.scene_h.max(1) as f32 / vh as f32,
+                        (pass.scene_w.max(1) - 1) as f32,
+                        (pass.scene_h.max(1) - 1) as f32,
+                    ]
+                } else {
+                    [0.0; 4]
+                },
                 ripples: {
                     let mut r = [[0.0; 4]; crate::water::MAX_RIPPLES];
                     for (d, w) in r.iter_mut().zip(&self.water_fx.ripples) {
@@ -799,10 +876,24 @@ impl Renderer {
                 ubo.portal_min[i] = [portal.portal.mins[0], portal.portal.mins[1], portal.portal.mins[2], slot];
                 ubo.portal_max[i] = [portal.portal.maxs[0], portal.portal.maxs[1], portal.portal.maxs[2], 1.0];
             }
+            let portal_uv_self = self.targets.as_ref().map_or([0.0; 4], |t| {
+                let [pw, ph] = portals::portal_viewport(t, [pass.scene_w, pass.scene_h]);
+                let (ptw, pth) = (t.portal_w.max(1) as f32, t.portal_h.max(1) as f32);
+                [
+                    1.0 / ptw,
+                    1.0 / pth,
+                    (pw as f32 - 0.5).max(0.0) / ptw,
+                    (ph as f32 - 0.5).max(0.0) / pth,
+                ]
+            });
             for portal in &pass.portal_draws {
                 let mut pu = ubo;
                 pu.portal_min = [[0.0; 4]; 4];
                 pu.portal_clip = portal.portal.clip();
+                pu.portal_uv = portal_uv_self;
+                if portals::skip_portal_extras(st.portal_quality.min(2), portal.depth) {
+                    pu.water = [0.0; 4];
+                }
                 pu.viewproj = mul(&vs.vp, &portal.portal.to_source());
                 let eye = portal.portal.to_destination(vs.eye);
                 pu.eye[..3].copy_from_slice(&eye);
@@ -854,6 +945,8 @@ impl Renderer {
 
         self.lightmap_requests = lm_vis;
         self.prev_xforms = xforms;
+        self.cur_xforms = prev_xforms;
+        self.cur_xforms.clear();
         self.prev_xform_time = time;
 
         // ---- record ----
@@ -871,6 +964,11 @@ impl Renderer {
                 dev.cmd_write_timestamp(cmd, vk::PipelineStageFlags::BOTTOM_OF_PIPE, q, ts_base + k);
             }
         };
+        let has_output = self.swap.is_some() || self.targets.as_ref().is_some_and(|t| t.out.is_some());
+        if self.targets.is_none() || self.lightmap.is_none() || !has_output {
+            return Ok(());
+        }
+        let pic_uploads = std::mem::take(&mut self.pending_pic_uploads);
         let f = &self.frames[fi];
         let dynbuf = f.dynbuf.buf;
         let set = [f.set];
@@ -894,6 +992,17 @@ impl Renderer {
             if let Some(q) = tsq {
                 dev.cmd_reset_query_pool(cmd, q, ts_base, ts_stride);
             }
+            timestamp(0);
+            for up in &pic_uploads {
+                self.gpu.record_image_rows_upload(
+                    cmd,
+                    up.image,
+                    up.width,
+                    up.height,
+                    up.rows,
+                    up.staging.as_ref().map(|b| b.buf),
+                );
+            }
             // post: gamma/contrast/polyblend to the output
             let (out_img, out_view) = match (&self.swap, &t.out) {
                 (Some(s), _) => (s.images[img_idx as usize], s.views[img_idx as usize]),
@@ -915,7 +1024,6 @@ impl Renderer {
             let area = vk::Rect2D { offset: vk::Offset2D::default(), extent: vk::Extent2D { width: w, height: h } };
             for (pi, pass) in passes.iter_mut().enumerate() {
             let ts = |k: u32| timestamp(pi as u32 * timing::VIEW_TS as u32 + k);
-            if pi == 0 { ts(0); }
             if pi > 0 {
                 // the previous view's draws read the shared targets and cull buffers
                 let mb = [vk::MemoryBarrier::default()
@@ -1149,7 +1257,19 @@ impl Renderer {
                 gpu::barrier(&dev, cmd, t.depth.image, drng, old, new);
             };
             ts(3);
-            self.draw_portals(cmd, portal_draws, particles, fte.as_ref().map(|f| (f.0, f.1)), world_draws, alias_draws, fi, [scene_w, scene_h], pi);
+            self.draw_portals(
+                cmd,
+                portal_draws,
+                particles,
+                fte.as_ref().map(|f| (f.0, f.1)),
+                world_draws,
+                alias_draws,
+                fi,
+                [scene_w, scene_h],
+                pi,
+                view,
+                st.portal_quality.min(2),
+            );
             ts(4);
             if self.isolated_portal.is_some() && !multi {
                 // Destination draws above retain their scenery and entities. Only
@@ -1256,7 +1376,7 @@ impl Renderer {
                 }
                 ts(5);
                 let draw_alias = |a: &AliasDraw, pipe: vk::Pipeline| {
-                    let Some(Model::Alias(am)) = self.models.get(a.model).filter(|_| !a.portal_only) else {
+                    let Some(Model::Alias(am)) = self.models.get(a.model).filter(|_| !a.portal_only && a.main_visible) else {
                         return;
                     };
                     dev.cmd_bind_pipeline(cmd, gfx, pipe);
@@ -1416,13 +1536,20 @@ impl Renderer {
                         restore(vp_scene);
                     }
                     let samples = t.color_ms.as_ref().map_or(1, |_| self.msaa);
+                    let depth_samples = if samples <= 1 {
+                        0
+                    } else if st.soft_particle_quality > 0 {
+                        samples
+                    } else {
+                        1
+                    };
                     dev.cmd_bind_vertex_buffers(cmd, 0, &[dynbuf], &[*vofs]);
                     dev.cmd_bind_index_buffer(cmd, dynbuf, *iofs, vk::IndexType::UINT32);
                     for (pipe, slot, b, mode) in batches {
                         dev.cmd_bind_pipeline(cmd, gfx, p.fte[*pipe]);
                         let fogmix = if matches!(b.blend, crate::FteBlend::Blend | crate::FteBlend::BlendColour) { 1.0 } else { 0.0 };
                         let soft = if split && b.soft { 1.0 / soft_dist } else { 0.0 };
-                        let color = [fogmix, soft, samples as f32, *mode];
+                        let color = [fogmix, soft, depth_samples as f32, *mode];
                         push(bytes_of(&[PolyPush { color, tex: *slot }]));
                         dev.cmd_draw_indexed(cmd, b.num_indices, 1, b.first_index, 0, 0);
                     }
@@ -1473,7 +1600,17 @@ impl Renderer {
                 };
                 depth_layout(end_layout, vk::ImageLayout::DEPTH_STENCIL_READ_ONLY_OPTIMAL);
                 if !vel_draws.is_empty() {
-                    fx_pass(&t.vel, area_target, vp_scene, area_scene, [0.0; 4], &|| {
+                    let [vel_vw, vel_vh] = vel_viewport(t, [scene_w, scene_h]);
+                    let area_vel_rt = vk::Rect2D {
+                        offset: vk::Offset2D::default(),
+                        extent: vk::Extent2D { width: t.vel_w, height: t.vel_h },
+                    };
+                    let vp_vel = vk::Viewport { width: vel_vw as f32, height: vel_vh as f32, ..vp_full };
+                    let area_vel = vk::Rect2D {
+                        offset: vk::Offset2D::default(),
+                        extent: vk::Extent2D { width: vel_vw, height: vel_vh },
+                    };
+                    fx_pass(&t.vel, area_vel_rt, vp_vel, area_vel, [0.0; 4], &|| {
                         for vd in vel_draws.iter() {
                             match *vd {
                                 VelDraw::Alias(i, prev) => {
@@ -1589,6 +1726,9 @@ impl Renderer {
                 g_noise: st.goggles.noise.clamp(0.0, 2.0),
                 g_time: (fr.time % 1000.0) as f32,
                 speed_blur: pass.speed_blur.max(st.edge_blur.clamp(0.0, 1.0)),
+                mb_quality: st.motion_blur_quality.min(1),
+                mb_w: w.max(1) as f32,
+                mb_h: h.max(1) as f32,
             }]));
             dev.cmd_draw(cmd, 3, 1, 0, 0);
             if pi + 1 < npasses {
@@ -1772,6 +1912,11 @@ impl Renderer {
             } else {
                 let si = [vk::SubmitInfo::default().command_buffers(&cmds)];
                 dev.queue_submit(self.gpu.queue, &si, fence)?;
+            }
+        }
+        for up in pic_uploads {
+            if let Some(b) = up.staging {
+                self.frames[fi].staging.push(b);
             }
         }
         self.cur = (self.cur + 1) % FRAMES;

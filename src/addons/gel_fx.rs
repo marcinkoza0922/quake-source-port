@@ -23,8 +23,9 @@ const BLOB_SIZE: f32 = 4.5;
 const LOOP_CHANNEL: i32 = 7;
 
 pub use super::gel_coat::COLORS;
-/// Seconds between coat rebuilds while splats keep changing.
+/// Seconds between coat rebuilds while splats keep changing (high vs low).
 const REBUILD: f64 = 0.1;
+const REBUILD_LOW: f64 = 0.2;
 
 struct Splat {
     id: u32,
@@ -165,9 +166,18 @@ impl GelFx {
 
     /// Flies blobs, stops spray loops, and adds splats and blobs to `geom`.
     #[allow(clippy::too_many_arguments)]
-    pub fn frame(&mut self, cl: &qclient::ClientState, lv: &crate::assets::Level, r: &mut Renderer, view: &View, gravity: f32, snd: Option<&SoundSystem>, geom: &mut Geometry) {
+    pub fn frame(&mut self, cl: &qclient::ClientState, lv: &crate::assets::Level, r: &mut Renderer, view: &View, gravity: f32, snd: Option<&SoundSystem>, quality: u32, geom: &mut Geometry) {
         let dt = (cl.time - self.time).clamp(0.0, 0.1) as f32;
         self.time = cl.time;
+        if self.atlas.set_quality(quality) {
+            if let Some(p) = self.coat_pic {
+                let _ = r.resize_pic(p, self.atlas.side as u32, self.atlas.side as u32);
+            }
+            if !self.splats.is_empty() {
+                self.dirty = true;
+                self.built = -1.0;
+            }
+        }
         for (o, t) in self.spraying.iter_mut().enumerate() {
             if *t >= 0.0 && cl.time - *t > 0.12 {
                 *t = -1.0;
@@ -204,7 +214,8 @@ impl GelFx {
             }
         };
         let first = geom.1.len() as u32;
-        if self.dirty && (now - self.built >= REBUILD || now < self.built) {
+        let cadence = if quality == 0 { REBUILD_LOW } else { REBUILD };
+        if self.dirty && (now - self.built >= cadence || now < self.built) {
             self.dirty = false;
             self.built = now;
             rebuild(&self.splats, &mut self.coat, &mut self.atlas, &mut self.coat_pic, cl, &world, r);
@@ -250,7 +261,7 @@ fn rebuild(splats: &[Splat], coat: &mut Vec<Vec<FteVertex>>, atlas: &mut super::
     let tex = &atlas.texels;
     let pic = match *coat_pic {
         Some(p) => r.update_pic_rows(p, tex, atlas.rows() as u32).ok().map(|_| p),
-        None => r.register_pic_rgba_linear(super::gel_coat::ATLAS as u32, super::gel_coat::ATLAS as u32, tex).ok(),
+        None => r.register_pic_rgba_linear(atlas.side as u32, atlas.side as u32, tex).ok(),
     };
     let Some(pic) = pic else { return };
     *coat_pic = Some(pic);

@@ -90,6 +90,7 @@ pub const CVARS: &[(&str, &str, u32)] = &[
     ("addon_hook_stone", "1", CVAR_ARCHIVE),
     ("addon_hook_enemies", "1", CVAR_ARCHIVE),
     ("addon_gel", "0", CVAR_ARCHIVE),
+    ("addon_gel_quality", "1", CVAR_ARCHIVE),
     // powerwasher: on/off and push strength multiplier
     ("addon_washer", "0", CVAR_ARCHIVE),
     ("addon_washer_push", "1", CVAR_ARCHIVE),

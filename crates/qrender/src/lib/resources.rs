@@ -1,10 +1,19 @@
 use super::*;
 
+pub(super) struct PendingPicUpload {
+    pub(super) image: vk::Image,
+    pub(super) width: u32,
+    pub(super) height: u32,
+    pub(super) rows: u32,
+    pub(super) staging: Option<Buffer>,
+}
+
 pub(super) struct FrameRes {
     pub(super) cmd: vk::CommandBuffer,
     pub(super) fence: vk::Fence,
     pub(super) acquire: vk::Semaphore,
     pub(super) dynbuf: Buffer,
+    pub(super) staging: Vec<Buffer>,
     pub(super) set: vk::DescriptorSet,
     pub(super) comp_set: vk::DescriptorSet,
     pub(super) cull_set: vk::DescriptorSet,
@@ -23,6 +32,11 @@ pub(super) struct Swapchain {
 
 pub(super) struct Targets {
     pub(super) portals: Vec<(Image, u32)>,
+    /// Single-sampled depth buffer for portal destination views.
+    pub(super) portal_depth: Option<Image>,
+    /// Full extent of each portal target in pixels (output-capped, scaled by portal quality).
+    pub(super) portal_w: u32,
+    pub(super) portal_h: u32,
     /// Single-sampled scene colour (MSAA resolve target), sampled by post.
     pub(super) color: Image,
     /// Multisampled scene colour when MSAA is on.
@@ -39,8 +53,10 @@ pub(super) struct Targets {
     pub(super) ao_w: u32,
     pub(super) ao_h: u32,
     pub(super) ao_slot: u32,
-    /// Single-sampled, scene-sized per-object velocity for post-processing.
+    /// Single-sampled per-object velocity for post-processing (output-capped, half-res on low).
     pub(super) vel: Image,
+    pub(super) vel_w: u32,
+    pub(super) vel_h: u32,
     pub(super) vel_slot: u32,
     /// Headless output image + readback buffer.
     pub(super) out: Option<(Image, Buffer)>,
@@ -64,6 +80,8 @@ pub(super) enum Sampling {
     Clamp,
     /// Bilinear, clamp to edge (smooth UI shapes).
     Linear,
+    /// Bilinear, repeat (tiling procedural textures).
+    LinearRepeat,
 }
 
 pub(super) struct WorldGpu {

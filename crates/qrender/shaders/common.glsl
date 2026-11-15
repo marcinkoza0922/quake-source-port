@@ -17,8 +17,10 @@ layout(set = 0, binding = 0, std140) uniform Frame {
     uvec4 skybox1;  // up dn solid-layer alpha-layer
     vec4 alphas;    // water lava slime tele
     vec4 soft;      // x screen dither, y texture dither (r_softemu/r_dither)
-    uvec4 softf;    // x world dither level (0 off, 1 coarse, 2 banded lightmap), y alias mode (0 std, 1 dither, 2 affine)
-    vec4 water;     // x ripple strength, y caustics strength, z ripple count
+    uvec4 softf;    // x world dither level (0 off, 1 coarse, 2 banded lightmap), y alias mode (0 std, 1 dither, 2 affine), z goggles, w caustic tex
+    vec4 water;     // x ripple strength, y caustics strength, z ripple count, w quality (0 low, 1 high)
+    vec4 portal_uv; // xy gl_FragCoord -> portal UV scale, zw valid UV clamp max
+    vec4 vel_uv;    // xy scene px per vel px, zw scene max texel coords
     vec4 ripples[32];   // xy centre, z liquid surface height, w start time
     vec4 ripple_amp[8]; // amplitudes, 4 per vec4
 } fr;
@@ -104,11 +106,16 @@ vec2 water_grad(vec3 p, float t, float swell, float rings) {
         float age = t - r.w;
         if (age < 0.0 || age > 2.5 || abs(p.z - r.z) > 24.0) continue;
         vec2 d = p.xy - r.xy;
-        float dist = length(d);
         float front = age * 85.0;
-        float x = dist - front;
         float sig = 5.0 + age * 7.0;
-        if (abs(x) > 3.0 * sig) continue;
+        float reach = 3.0 * sig;
+        float max_r = front + reach;
+        if (abs(d.x) > max_r || abs(d.y) > max_r) continue;
+        float d2 = dot(d, d);
+        float min_r = max(front - reach, 0.0);
+        if (d2 > max_r * max_r || d2 < min_r * min_r) continue;
+        float dist = sqrt(d2);
+        float x = dist - front;
         float env = exp(-x * x / (2.0 * sig * sig));
         float fade = (1.0 - age / 2.5);
         float amp = fr.ripple_amp[i >> 2][i & 3] * fade * fade / (1.0 + front * 0.03);
@@ -120,28 +127,23 @@ vec2 water_grad(vec3 p, float t, float swell, float rings) {
     return g + gr * rings;
 }
 
-// Caustic light network: two drifting Worley edge layers.
-vec2 caustic_hash(vec2 p) {
-    p = vec2(dot(p, vec2(127.1, 311.7)), dot(p, vec2(269.5, 183.3)));
-    return fract(sin(p) * 43758.5453);
+// Distance fade for water ripples and caustics by quality tier (0 low, 1 high).
+float water_dist_fade(vec3 wpos, int qual) {
+    float fade_d = qual == 0 ? 640.0 : 1024.0;
+    float max_d  = qual == 0 ? 1024.0 : 1536.0;
+    vec3 delta = wpos - fr.eye.xyz;
+    float d2 = dot(delta, delta);
+    if (d2 <= fade_d * fade_d) return 1.0;
+    if (d2 >= max_d * max_d) return 0.0;
+    return 1.0 - smoothstep(fade_d, max_d, sqrt(d2));
 }
-float caustic_layer(vec2 p, float t) {
-    vec2 i = floor(p), f = fract(p);
-    float d1 = 8.0, d2 = 8.0;
-    for (int y = -1; y <= 1; y++)
-        for (int x = -1; x <= 1; x++) {
-            vec2 o = vec2(x, y);
-            vec2 h = caustic_hash(i + o);
-            vec2 q = o + 0.5 + 0.38 * sin(t * (0.6 + 0.5 * h.yx) + 6.2831853 * h) - f;
-            float d = dot(q, q);
-            if (d < d1) { d2 = d1; d1 = d; } else if (d < d2) d2 = d;
-        }
-    float e = sqrt(d2) - sqrt(d1); // 0 on cell borders
-    return pow(1.0 - smoothstep(0.0, 0.26, e), 4.0);
-}
-float caustic(vec2 p, float t) {
-    p += 0.22 * vec2(sin(p.y * 1.7 + t * 0.8), sin(p.x * 1.9 - t * 0.7));
-    float a = caustic_layer(p, t);
-    float b = caustic_layer(p * 1.31 + vec2(5.2, 1.3), t * 1.15 + 3.0);
+
+// Precomputed tiling caustic texture (two scrolling Worley layers).
+float caustic_tex(vec2 q, float t) {
+    uint slot = fr.softf.w;
+    if (slot == NO_TEX) return 0.0;
+    vec2 uv = q / (56.0 * 4.0);
+    float a = tex(slot, uv + vec2(t * 0.035, t * 0.024)).r;
+    float b = tex(slot, uv * 1.31 + vec2(0.37, 0.19) + vec2(-t * 0.029, t * 0.038)).g;
     return clamp(0.55 * (a + b) + 0.9 * a * b, 0.0, 1.5);
 }

@@ -47,18 +47,18 @@ pub const VANILLA: &[(&str, &str)] = &[
     ("r_anisotropy", "1"), ("r_softemu", "0"), ("r_dither", "0"), ("gamma", "1"), ("contrast", "1"),
     ("r_dynamic", "1"), ("r_coloredlight", "0"), ("r_fog", "1"), ("r_skyfog", "0.5"),
     ("r_lerpmodels", "1"), ("r_lerpmove", "1"),
-    ("r_ssao", "0"), ("r_motionblur", "0"), ("r_speedblur", "0"), ("a11y_reducemotion", "0"),
-    ("r_enhancedwater", "0"), ("r_teleportwindows", "0"),
+    ("r_ssao", "0"), ("r_motionblur", "0"), ("r_motionblur_quality", "1"), ("r_speedblur", "0"), ("a11y_reducemotion", "0"),
+    ("r_enhancedwater", "0"), ("r_teleportwindows", "0"), ("r_portal_quality", "1"), ("r_water_quality", "1"),
     ("r_impact_fx", "0"), ("r_impact_bullets", "0"), ("r_impact_nails", "0"),
     ("r_shotgun_tracers", "0"), ("r_impact_scorches", "0"),
     ("r_blood", "0"), ("r_debris", "0"), ("r_shader_preset", ""), ("r_colorblind", "0"),
-    ("addons_enable", "0"), ("addon_hitstop", "0"), ("r_fteparticles", "1"), ("r_particledesc", "classic"), ("r_part_rain", "1"), ("r_part_rain_quantity", "1"),
+    ("addons_enable", "0"), ("addon_hitstop", "0"), ("addon_gel_quality", "1"), ("r_fteparticles", "1"), ("r_particledesc", "classic"), ("r_part_rain", "1"), ("r_part_rain_quantity", "1"),
 ];
 
 const WATER: &[(&str, &str)] = &[
     ("r_enhancedwater", "1"), ("r_watertranslucency", "1"), ("r_wateralpha", "0.3"),
     ("r_waterripples", "1"), ("r_waterripples_amount", "2"), ("r_watersplash", "1"),
-    ("r_watercaustics", "1"), ("r_watercaustics_amount", "2"),
+    ("r_watercaustics", "1"), ("r_watercaustics_amount", "2"), ("r_water_quality", "1"),
 ];
 const IMPACTS: &[(&str, &str)] = &[
     ("r_impact_fx", "4"), ("r_impact_bullets", "1"), ("r_impact_nails", "1"),
@@ -81,7 +81,7 @@ const ANISO: &[(&str, &str)] = &[("r_texfilter", "1"), ("r_anisotropy", "16")];
 const SOFTEMU: &[(&str, &str)] = &[("r_softemu", "3"), ("r_dither", "1")];
 const COLOR: &[(&str, &str)] = &[("r_coloredlight", "1"), ("gamma", "0.8"), ("contrast", "1.4")];
 const SSAO: &[(&str, &str)] = &[("r_ssao", "3")];
-const BLUR: &[(&str, &str)] = &[("r_motionblur", "1"), ("r_motionblur_amount", "2"), ("r_speedblur", "1")];
+const BLUR: &[(&str, &str)] = &[("r_motionblur", "1"), ("r_motionblur_amount", "2"), ("r_motionblur_quality", "1"), ("r_speedblur", "1")];
 const TELE: &[(&str, &str)] = &[("r_teleportwindows", "1")];
 const SHADER: &[(&str, &str)] = &[("r_shader_preset", "crt/crt-guest-advanced-hd"), ("r_shader_scope", "1")];
 const COLORBLIND: &[(&str, &str)] = &[("r_colorblind", "2")];
@@ -113,7 +113,7 @@ pub(crate) const ADDON_ON: &[(&str, &str)] = &[
     ("addon_boomerang", "1"), ("addon_railgun", "1"), ("addon_hookshot", "1"), ("addon_gel", "1"),
     ("addon_washer", "1"), ("addon_goggles", "1"),
     ("addon_portal_view", "1"), ("addon_portal_max", "4"), ("addon_portal_depth", "6"),
-    ("addon_portal_dist", "8192"),
+    ("addon_portal_dist", "8192"), ("r_portal_quality", "2"),
 ];
 
 /// Repeats `on`/`off` command pairs every `period` seconds over `secs`.

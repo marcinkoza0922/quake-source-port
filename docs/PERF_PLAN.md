@@ -83,6 +83,16 @@ the remaining parity-bound phases below.
     (especially nested depth ≥ 1): `water_grad` ripples/caustics, classic/FTE
     particles, or distant small alias models.
 - Measure: `portalgun`, `teleportwindows`, `ultimate`, `ultimate-coop`.
+- **Status (Done)**:
+  - Added `r_portal_quality` (`0` = low, `1` = medium [default], `2` = high; Enhancements → `"Portal Quality"` and `qrender::Settings::portal_quality`).
+  - Rendered destination views (`t.portals` in `crates/qrender/src/lib/targets.rs`) single-sampled (`samples = 1`, dedicated `portal_depth` and single-sampled `portal` scene pipelines in `crates/qrender/src/pipelines.rs`, no MSAA scratch/resolve or sample shading) at output-capped `min(scene, output)` scale (`0.5×` `low`, `0.75×` `medium`, `1.0×` `high`) with `sampler_linear` when scaled and `FrameUbo::portal_uv` screen-space UV scaling/clamping in `water.frag` / `fte.frag`.
+  - Applied per-tier destination budgets (`low`: `max <= 2, depth <= 1, dist <= 2048`; `medium`: `max <= 4, depth <= 3, dist <= 4096`; `high`: uncapped), skipped `water_grad` ripples/caustics (`pu.water = 0`) and non-oval particles (`low`: all destination views; `medium`: nested `depth >= 1`), and culled alias draws per portal against the portal frustum/clip plane and tiny/distant bounds (preserving main-view `main_visible`). Pinned `r_portal_quality 1` in `qprof` `VANILLA` and `2` in `ADDON_ON`.
+  - Verified with `QRENDER_VALIDATION=1 cargo test -p qrender --test offscreen`, `QRENDER_VALIDATION=1 cargo nextest run`, `cargo clippy --all-targets --message-format=short`, headless screenshots (`e1m1` recursive portals `0/1/2` + 8× MSAA/200%, `start` teleporter at 8× MSAA/200%, `ad_sepulcher` 4-player split-screen), and `qprof -runs 3` medians (`target/qprof/item14-before-{ad,e1m1}` → `target/qprof/item14-after-{ad,e1m1}`, 1280×720):
+    - `teleportwindows` (`ad_sepulcher`, `r_portal_quality 1`): FPS **270 → 283**, frame **3701 → 3534 µs** (−167 µs), GPU **3623 → 3474 µs** (−149 µs); `destinations` **588 → 524 µs** (`models` **61 → 13 µs**, `resolve` **19 → 2 µs**).
+    - `ultimate` (`ad_sepulcher`, 8× SSAA + 200% scale, `r_portal_quality 2`): FPS **108 → 116**, frame **9217 → 8639 µs** (−578 µs), GPU **8919 → 8387 µs** (−532 µs); `destinations` **677 → 582 µs** (`models` **73 → 13 µs**, `resolve` **36 → 2 µs**, `setup` **10 → 2 µs**).
+    - `ultimate-coop` (`ad_sepulcher`, 4 views, `r_portal_quality 2`): FPS **94 → 97**, frame **10620 → 10324 µs** (−296 µs), GPU **10313 → 10032 µs** (−281 µs); 4-view `destinations` **1172 → 964 µs** (`models` **245 → 86 µs**, `resolve` **53 → 10 µs**).
+    - `portalgun` (`e1m1`, `r_portal_quality 2`): FPS **746 → 752**, frame **1341 → 1329 µs** (−12 µs), GPU **1266 → 1259 µs** (−7 µs); CPU `render` **290 → 254 µs**.
+    - Tier scaling (`prof_stop`, 1280×720, 8× SSAA + 200% scale): `ad_sepulcher` (`r_teleportwindows 1` + enhanced water, 500 frames) `destinations` **142.8 µs** (`low`, GPU **6045.7 µs**) / **1858.0 µs** (`medium`, **7760.1 µs**) / **1856.1 µs** (`high`, **7767.3 µs**); `e1m1` (`addon_portal_depth 4`, 750 frames) `destinations` **70.7 µs** (`low`, GPU **2950.9 µs**) / **107.6 µs** (`medium`, **2987.8 µs**) / **127.6 µs** (`high`, **3008.1 µs**).
 
 ### 15. Enhanced water caustics, ripples & splashes (*visual*)
 - Problem: in `crates/qrender/shaders/common.glsl`, `water_grad` loops over
@@ -101,6 +111,16 @@ the remaining parity-bound phases below.
     plus `WaterFx` splash `MAX_DROPS` (`2048`) / `MAX_PUFFS` (`512`) in
     `crates/qrender/src/water.rs` by quality.
 - Measure: `water`, `supersample-renderscale200-water`, `all-enhancements`.
+- **Status (Done, 2026-11-15)**:
+  - Added `r_water_quality` (`0` = low, `1` = medium [default], `2` = high; Water Settings menu `"Water Quality"`, `menu_options water`, archived cvar, and `qrender::Settings::water_quality`).
+  - Precomputed a seamless 128×128 dual-layer Worley-edge caustic texture (`water_tex::caustic_texture` in `crates/qrender/src/water_tex.rs`), uploaded once as `Renderer::caustic_tex` (`Sampling::LinearRepeat` in `FrameUbo::softf.w`). On Low/Medium (`qual < 2`), `world.frag` samples `caustic_tex()` with two scrolling taps and skips `water_grad` ripple distortion; High (`qual >= 2`) keeps procedural dual 3×3 Worley `caustic()` + `water_grad`.
+  - Added `water_dist_fade` in `crates/qrender/shaders/common.glsl` (`640..1024` low, `1024..1536` medium, `1536..2048` high, fast-returning `1.0` inside `fade_d`) gating both `water.frag` ripples/swell and `world.frag` caustics, plus per-ripple bounding-box and squared-annulus early rejects before `sqrt` in `water_grad`.
+  - Enforced per-tier budgets in `crates/qrender/src/water.rs` (`quality_budgets`: `8`/`16`/`32` active ripples, `512`/`1024`/`2048` drops, `128`/`256`/`512` puffs, trimming excess when lowered). Pinned `r_water_quality 1` in `qprof` `VANILLA` and `2` in `WATER`.
+  - Verified with `QRENDER_VALIDATION=1 cargo nextest run` (502 passed, 2 skipped), `cargo clippy --all-targets --message-format=short` (0 warnings in touched files), headless screenshots with `QRENDER_VALIDATION=1` (`ad_sepulcher` surface & underwater at `q0/1/2` + Water Settings menu, clean validation), and benchmarks (`1280×720` headless, 3-run medians):
+    - `qprof` (`target/qprof/item15-before` → `target/qprof/item15-after`, spawn view): on `ad_sepulcher`, `supersample-renderscale200 → supersample-renderscale200-water` (`r_water_quality 2`) added **+138 µs frame / +130 µs GPU** before → **+101 µs frame / +98 µs GPU** after (−32 µs GPU even at High); `all-enhancements` (default `r_water_quality 1`) improved from **143 → 152 fps**, frame **6999 → 6597 µs**, GPU **6924 → 6537 µs**.
+    - Water-heavy `prof_stop` tier scaling (`ad_sepulcher`, 200% render scale + 8× sample shading, median of 3 runs; note `Before` predates the quality cvar):
+      - Surface (`setpos -1448 -1100 -100 35 200 0`): Before frame **4449.5** / GPU **4388.6** (`world` **2400.8** µs) → `q0` **3193.8 / 3135.8** (`world` **1136.5** µs, −52.7% `world`), `q1` **3207.8 / 3150.1** (`world` **1151.2** µs, −52.0% `world`), `q2` **4537.4 / 4480.4** (`world` **2473.2** µs).
+      - Underwater (`setpos -1448 -1250 -200 20 180 0`): Before frame **6305.4** / GPU **6247.1** (`world` **4460.7** µs) → `q0` **3360.2 / 3302.6** (`world` **1565.3** µs, −64.9% `world`), `q1` **3377.6 / 3319.9** (`world` **1592.1** µs, −64.3% `world`), `q2` **6351.8 / 6293.7** (`world` **4560.8** µs).
 
 ### 16. Per-object motion blur quality (*visual*)
 - Problem: in `crates/qrender/shaders/post.frag`, whenever any moving entity
@@ -115,6 +135,17 @@ the remaining parity-bound phases below.
   - Skip `vel_draws` submission for tiny/distant entities with sub-pixel
     screen motion.
 - Measure: `motionblur`, `all-enhancements`.
+- **Status (Done, 2026-11-15)**:
+  - Added `r_motionblur_quality` (`0` = low, `1` = high [archived, default `1`]; Enhancements menu `"Motion Blur Quality"`, `qrender::Settings::motion_blur_quality`).
+  - Output-capped `t.vel` at `min(scene, output)` on High and halved it (`(min(scene, output) / 2).max(1)`) on Low in `crates/qrender/src/lib/targets.rs`, rebuilding targets on quality change; updated `crates/qrender/shaders/vel.frag` to map `gl_FragCoord.xy` to `scene_depth`/`scene_depth_ms` via `FrameUbo::vel_uv`.
+  - Updated `crates/qrender/shaders/post.frag` `motion_blur` to use output resolution (`PostPush::mb_w`/`mb_h`), precomputed 8-direction constant offsets (`MB_DIRS`) for dilation on High (`pc.mb_quality > 0u`) with `12` taps, and skip neighborhood dilation on Low (`pc.mb_quality == 0u`) with `6` taps.
+  - Added `vel_entity_visible` in `crates/qrender/src/frame/math.rs` (culling tiny/distant or sub-pixel moving entities, checking `main_visible` first for alias models) and reused double-buffered `Renderer::cur_xforms` / `prev_xforms` once per frame in `crates/qrender/src/frame.rs`.
+  - Verified with `cargo clippy --all-targets --message-format=short` (exit 0), `QRENDER_VALIDATION=1 cargo nextest run` (exit 0), `QRENDER_VALIDATION=1 cargo test -p qrender --test offscreen -- --nocapture` (pass across `motion_blur_quality` `[0, 1]` × `msaa` `[1, 4]` × `render_scale` `[1.0, 2.0]` + split-screen, clean validation), headless screenshots (`Enhancements` menu + `e1m1` moving rocket `off` / `low` / `high` / `200% 8x SSAA`), `compare -metric AE` `0` px diff on `vanilla` shots (`item16-before` → `item16-after`), and benchmarks (`1280×720` headless):
+    - `qprof` 3-run medians (`target/qprof/item16-before` → `target/qprof/item16-after`, High tier): `e1m1` `motionblur` `gpu post` **27 → 26 µs** (total GPU **1168 µs**, **798 fps**), `all-enhancements` `gpu post` **67 → 66 µs**; `ad_sepulcher` `motionblur` `gpu post` **38 → 37 µs** (**495 fps**), `all-enhancements` `gpu post` **99 → 96 µs**.
+    - Controlled `ad_sepulcher` `prof_stop` tier comparison (498 GPU frames each, `+left +attack`, pinned cvars, `r_motionblur 0` vs `2`):
+      - `100% 1×`: `post` Off **23.2 µs** → Low **35.8 µs** (+12.6 µs) / High **41.6 µs** (+18.4 µs; Low −5.8 µs).
+      - `200% 8× SSAA`: `post` Off **35.0 µs** → Low **48.4 µs** (+13.4 µs) / High **53.0 µs** (+18.0 µs; Low −4.6 µs).
+      - `all-enhancements` (200% 8× SSAA + `crt-royale-fake-bloom`): `post` Off **66.4 µs** → Low **86.8 µs** (+20.4 µs) / High **106.7 µs** (+40.3 µs; Low **−19.9 µs** / **−49.4%** of added motion-blur `post` cost).
 
 ### 17. Soft particles MSAA depth lookup (*visual*)
 - Problem: in `crates/qrender/shaders/fte.frag`, under MSAA (`ns > 1`), every
@@ -124,6 +155,12 @@ the remaining parity-bound phases below.
 - Plan: add a fast/low-cost mode reading sample 0 only under MSAA (or
   reusing `t.ao_source` when available) instead of all `ns` samples.
 - Measure: `supersample`, `all-enhancements` on `ad_sepulcher`.
+- **Status (Done, 2026-11-15)**:
+  - Expanded `r_softparticles` (`0` = off, `1` = low [default], `2` = high; Enhancements → `"Soft Particles"` choice and `qrender::Settings::soft_particle_quality`).
+  - Under MSAA (`r_msaa > 1`), `low` (`1`) encodes `depth_samples = 1` in `pc.fogmix.z` so `crates/qrender/shaders/fte.frag` reads only `texelFetch(scene_depth_ms, px, 0).r` instead of looping `0..ns`, and disables per-sample shading (`Pipelines::fte_supersample = false`) on FTE pipelines (`crates/qrender/src/pipelines/build.rs`); `high` (`2`) preserves the `0..ns` nearest-sample depth loop and per-sample shading when `vid_fsaamode` is enabled.
+  - Verified with `cargo clippy --all-targets --message-format=short` (0 warnings in touched files), `cargo nextest run`, `QRENDER_VALIDATION=1 cargo test -p qrender --test offscreen` (cycling `msaa` `[1, 4]` × `supersample` `[false, true]` × `soft_particle_quality` `[0, 1]`, clean validation), headless screenshots (`ad_sepulcher` 200% + 8× SSAA `high` before/after `compare -metric AE = 0`, `low` vs `high` `34.85` px diff, and `Enhancements` menu), and `qprof -runs 3` medians (`target/qprof/item17-before` → `target/qprof/item17-after-final`, `ad_sepulcher`, 1280×720):
+    - `supersample`: FPS **432 → 440**, frame **2313 → 2271 µs** (-42 µs), GPU **2258 → 2216 µs** (-42 µs), `particles+vm` **755 → 712 µs** (-43 µs).
+    - `all-enhancements`: FPS **156 → 161**, frame **6392 → 6218 µs** (-174 µs), GPU **6334 → 6161 µs** (-173 µs), `particles+vm` **1964 → 1810 µs** (-154 µs).
 
 ### 18. Gel sprayer coat build, upload & shading (*visual*)
 - Problem: even after item 3, `gel` has 4.5–6.5 ms p99 spikes from
@@ -141,6 +178,14 @@ the remaining parity-bound phases below.
     3D noise, and a fast gel shader path without parallax + 4-tap gradient
     fetches.
 - Measure: `gel`, `all-addons`, `ultimate`.
+- **Status (Done)**:
+  - Eliminated synchronous `self.idle()` in `Renderer::update_pic_rows` / `update_pic` (`crates/qrender/src/lib/assets.rs`): matching-size uploads stage into `TRANSFER_SRC` buffers (`PendingPicUpload`, deduplicating prior unsubmitted uploads for the same image), drain into the active frame's command buffer (`Gpu::record_image_rows_upload` in `crates/qrender/src/gpu/upload.rs`, `crates/qrender/src/frame.rs`), and free once that frame's fence completes. Added `Renderer::resize_pic` for tier switches.
+  - Added `addon_gel_quality` (`0` = low, `1` = high [default], `CVAR_ARCHIVE` in `crates/qserver/src/addons.rs`), `qrender::Settings::gel_quality`, `menu_options gel` (`Page::Gel`, Add-ons → `Gel Sprayer` → `Gel Quality` + tooltip), `src/addons/gel_coat.rs` tiers (`low`: 1024² atlas, `texel = 4.0`, 256 cap, 0.2 s rebuild in `gel_fx.rs`, `OnceLock` 128×128 2-octave tiling noise LUT; `high`: 2048², `texel = 2.0`, 512 cap, 0.1 s rebuild, 3D value noise), and `fte.frag` mode `10.0` (`GEL_FAST_MODE`: single texture tap, `dFdx`/`dFdy` normal perturbation, single Blinn-Phong specular + Fresnel rim without parallax or 4-tap neighbor gradient fetches). Pinned `("addon_gel_quality", "1")` in `qprof` `VANILLA`.
+  - Verified with `cargo clippy --all-targets --message-format=short` (0 warnings in touched files), `cargo nextest run`, `QRENDER_VALIDATION=1 cargo test -p qrender --test offscreen` (covering `gel_quality` 0/1, consecutive-frame staged `update_pic_rows`, and `resize_pic`), headless screenshots (`item18-before-clean.png` vs `item18-after-high.png` `compare -metric AE = 0`, `item18-after-low.png`, and `item18-menu.png`), `qprof -runs 3` medians (`target/qprof/item18-before` → `target/qprof/item18-after-final`, 1280×720, default high + staged upload), and a 3-run `e1m1` `toy 5` low-vs-high A/B (`target/qprof/item18-low-high`):
+    - `e1m1` `gel` (`high`): FPS **779 → 790**, frame **1283 → 1266 µs**, **p99 3904 → 1657 µs (−57.6%)**, **render cpu 216 → 94 µs (−56.5%)** (`vanilla` control: 814 → 813 fps, frame 1229 → 1229 µs).
+    - `ad_sepulcher` `gel` (`high`): FPS **490 → 497**, frame **2040 → 2011 µs**, **p99 5017 → 3213 µs (−36.0%)** (`vanilla` control: 505 → 504 fps, frame 1982 → 1985 µs).
+    - `ad_sepulcher` `all-addons` / `ultimate`: `all-addons` **434 → 440 fps** (p99 **3888 → 3556 µs**); `ultimate` **134 → 135 fps** (frame **7459 → 7400 µs**, GPU **7153 → 7107 µs**).
+    - `e1m1` `toy 5` (`high` → `low` 3-run median): FPS **803.3 → 808.9**, frame **1244.8 → 1236.2 µs**, p99 **1533.8 → 1333.5 µs (−13.1%)**, render CPU **105.5 → 88.0 µs (−16.6%)**, GPU `particles+vm` **4.84 → 4.13 µs (−14.7%)**.
 
 ### 19. Powerwasher jet geometry & shading (*visual*)
 - Problem: `src/addons/water_fx.rs` builds 40 ribbon segments + 40 loose

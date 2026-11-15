@@ -353,22 +353,30 @@ over each other. `MAX_SPLATS` 1024, oldest out. No ammo.
   header lines. The toy switched off removes all gel.
 - Look: splats merge into one contiguous coat (`src/addons/gel_coat.rs`):
   splats on the same plane whose discs touch form a cluster; each cluster
-  gets a square field in a 2048² atlas (2 u/texel, coarser if it would
-  exceed 512 texels or the atlas is full; shelf packed) where every splat
-  adds `(1 − d²/r²)²`, so overlaps sum instead of stacking puddles. The edge
-  is where the sum crosses 0.3, roughened by world-space value noise;
-  alpha is the height (steep rim, domed top, slight ripple), RGB the
-  colour of whichever kind dominates (blended at a blue/orange border).
-  The atlas is rebuilt (`update_pic`) at most every 0.1 s while splats
-  change. Each cluster square is clipped to BSP faces like blood marks
-  (`blood::mesh`, faces on the plane) and lit per vertex from the
-  lightmap (`light_point`). The coat and flying blobs are `FteBatch { gel: true }`:
-  fte.frag mode 9 reads the atlas alpha as a height field, builds a
-  tangent frame from screen derivatives, shifts the lookup for parallax,
-  bends the normal by the height gradient and lights it as a thick liquid
-  (two specular highlights, fresnel rim, darker thin edges, brighter thick
-  middle); texture RGB tints the vertex colour (light for the coat, white
-  atlas for sprites). Parallax and gradient steps are in world units
+  gets a square field in an atlas whose size, texel density, rebuild
+  cadence and edge noise follow `addon_gel_quality` (`0` = low: 1024² atlas,
+  4 u/texel capped at 256 texels, 0.2 s rebuild, precomputed 128×128
+  2-octave tiling noise LUT; `1` = high, default: 2048² atlas, 2 u/texel
+  capped at 512 texels, 0.1 s rebuild, 3-octave 3D world-space value noise;
+  shelf packed). Inside each cluster, every splat adds `(1 − d²/r²)²` so
+  overlaps sum instead of stacking puddles. The edge is where the sum
+  crosses 0.3, roughened by noise; alpha is the height (steep rim, domed
+  top, slight ripple), RGB the colour of whichever kind dominates (blended
+  at a blue/orange border). `gel_fx::frame` recreates the GPU pic via
+  `resize_pic` when `addon_gel_quality` switches and uploads dirty regions via
+  `update_pic_rows` (staged per frame without `device_wait_idle`). Each
+  cluster square is clipped to BSP faces like blood marks (`blood::mesh`,
+  faces on the plane) and lit per vertex from the lightmap (`light_point`).
+  The coat and flying blobs are `FteBatch { gel: true }`: `fte.frag` mode 9
+  (`addon_gel_quality 1`, high) reads the atlas alpha as a height field,
+  builds a tangent frame from screen derivatives, shifts the lookup for
+  parallax, bends the normal by the height gradient and lights it as a thick
+  liquid (two specular highlights, fresnel rim, darker thin edges, brighter
+  thick middle); mode 10 (`addon_gel_quality 0`, low) uses a single height/RGB
+  fetch, screen-space `dFdx`/`dFdy` slope normal perturbation, a single
+  Blinn-Phong highlight and Fresnel rim without parallax or 4-tap neighbor
+  gradient fetches. Texture RGB tints the vertex colour (light for the coat,
+  white atlas for sprites). Parallax and gradient steps are in world units
   (uv-per-unit from derivatives), so any atlas scale shades alike. Atlas
   (`gel_fx::atlas`, 2×2 tiles of 128²): three metaball splats (unused by
   the coat) and a dome for blobs, droplets and the washer jet.
@@ -409,7 +417,7 @@ floor gel within 44 u (+0.6 r) is washed off.
   `01a1d71e-0b15-7650-b42c-64a73647d9fd`, meshy-t2.5 2,498 tris + meshy-7,
   task `01a1d721-4189-74a0-b4a3-702bf531235d`), imported with `--length 30
   --gain 0.6 --flip`.
-- Menu: Add-ons → Gel Sprayer, Powerwasher, Powerwasher Push.
+- Menu: Add-ons → Gel Sprayer (Gel Quality `addon_gel_quality` low/high, default high), Powerwasher, Powerwasher Push (`menu_options gel` / `menu_options washer`).
 ### Equipment wheel and goggles (`src/addons/goggles.rs`, `equip_wheel.rs`, `src/host/goggles.rs`)
 Equipment is switched on and off rather than held, so it does not use the
 toy slot. `Equip` lists it in wheel order; items of one group exclude each

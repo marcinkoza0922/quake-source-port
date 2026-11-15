@@ -123,6 +123,9 @@ pub(super) const BOOMERANG: &[Item] = &[
 ];
 /// Reached from the Add-ons pages: powerwasher push strength.
 pub(super) const WASHER: &[Item] = &[slider("Push", "addon_washer_push", 0.25, 3.0, 0.25)];
+/// Reached from the Add-ons pages: gel coat resolution, rebuild cadence and shader detail.
+pub(super) const GEL_QUALITY: &[(&str, f32)] = &[("low", 0.0), ("high", 1.0)];
+pub(super) const GEL: &[Item] = &[Item::Choice { label: "Gel Quality", cvar: "addon_gel_quality", choices: GEL_QUALITY }];
 /// Reached from the Add-ons pages: railgun damage and trail colour.
 pub(super) const RAILGUN: &[Item] = &[
     slider("Damage", "addon_rail_damage", 25.0, 300.0, 25.0),
@@ -270,6 +273,10 @@ pub(super) const FILTER: &[(&str, f32)] = &[("nearest", 0.0), ("linear", 1.0)];
 pub(super) const ANISO: &[(&str, f32)] = &[("off", 1.0), ("2x", 2.0), ("4x", 4.0), ("8x", 8.0), ("16x", 16.0)];
 pub(super) const SOFTEMU: &[(&str, f32)] = &[("off", 0.0), ("fine", 1.0), ("coarse", 2.0), ("banded", 3.0)];
 pub(super) const SSAO: &[(&str, f32)] = &[("off", 0.0), ("low", 1.0), ("medium", 2.0), ("high", 3.0)];
+pub(super) const PORTAL_QUALITY: &[(&str, f32)] = &[("low", 0.0), ("medium", 1.0), ("high", 2.0)];
+pub(super) const WATER_QUALITY: &[(&str, f32)] = &[("low", 0.0), ("high", 1.0)];
+pub(super) const MOTIONBLUR_QUALITY: &[(&str, f32)] = &[("low", 0.0), ("high", 1.0)];
+pub(super) const SOFT_PARTICLES: &[(&str, f32)] = &[("off", 0.0), ("low", 1.0), ("high", 2.0)];
 pub(super) const MODES: [&str; 3] = ["windowed", "fullscreen", "borderless"];
 
 pub(super) const GRAPHICS: &[Item] = &[
@@ -298,10 +305,13 @@ pub(super) const GRAPHICS: &[Item] = &[
 pub(super) const ENHANCEMENTS: &[Item] = &[
     Item::Choice { label: "Ambient Occlusion", cvar: "r_ssao", choices: SSAO },
     toggle("Motion Blur", "r_motionblur"),
+    Item::Choice { label: "Motion Blur Quality", cvar: "r_motionblur_quality", choices: MOTIONBLUR_QUALITY },
     toggle("Speed Blur", "r_speedblur"),
     slider("Motion Blur Amount", "r_motionblur_amount", 0.1, 2.0, 0.1),
     toggle("Enhanced Water", "r_enhancedwater"),
     toggle("See-through Teleporters", "r_teleportwindows"),
+    Item::Choice { label: "Portal View Quality", cvar: "r_portal_quality", choices: PORTAL_QUALITY },
+    Item::Choice { label: "Soft Particles", cvar: "r_softparticles", choices: SOFT_PARTICLES },
     Item::Sub { label: "Water Settings", page: Page::Water },
     Item::Sub { label: "Screen Shader", page: Page::ScreenShader },
     Item::Sub { label: "Impact Effects", page: Page::Impacts },
@@ -326,6 +336,7 @@ pub(super) const IMPACTS: &[Item] = &[
 
 /// Reached from Enhancements; unavailable while `r_enhancedwater` is off.
 pub(super) const WATER: &[Item] = &[
+    Item::Choice { label: "Water Quality", cvar: "r_water_quality", choices: WATER_QUALITY },
     toggle("Translucent Water", "r_watertranslucency"),
     slider("Water Opacity", "r_wateralpha", 0.0, 1.0, 0.1),
     toggle("Ripples", "r_waterripples"),
