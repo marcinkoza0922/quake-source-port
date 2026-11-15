@@ -272,8 +272,16 @@ impl WaterFx {
         max_drops: usize,
         max_puffs: usize,
     ) {
+        // `hit` from trace_endpos / MSG_WriteCoord often sits on or just inside
+        // a solid floor/wall; step 1 unit back toward `eye` so underwater hits
+        // still resolve their surrounding liquid.
+        let back = {
+            let d = [eye[0] - hit[0], eye[1] - hit[1], eye[2] - hit[2]];
+            let len = (d[0] * d[0] + d[1] * d[1] + d[2] * d[2]).sqrt();
+            (len > 1.0).then(|| [hit[0] + d[0] / len, hit[1] + d[1] / len, hit[2] + d[2] / len])
+        };
         if explosion
-            && let Some((z, k)) = world.liquid_surface(hit)
+            && let Some((z, k)) = world.liquid_surface(hit).or_else(|| back.and_then(|p| world.liquid_surface(p)))
             && k & 4 == 0
         {
             let depth = z - hit[2];
@@ -290,7 +298,18 @@ impl WaterFx {
             return;
         }
         let wet = |p: [f32; 3]| world.liquid_surface(p).map_or(0, |(_, k)| k & 3);
-        let (we, wh) = (wet(eye), wet(hit));
+        let we = wet(eye);
+        let mut end = hit;
+        let mut wh = wet(end);
+        if wh == 0
+            && let Some(b) = back
+        {
+            let wb = wet(b);
+            if wb != 0 {
+                end = b;
+                wh = wb;
+            }
+        }
         let emit = |fx: &mut Self, at: [f32; 3], k: u32, strength: f32| {
             if ripples {
                 fx.add_ripple(at, time, 1.2 * strength, max_ripples);
@@ -301,7 +320,7 @@ impl WaterFx {
         };
         if we != wh {
             // bisect the segment for the crossing
-            let (mut a, mut b) = (eye, hit);
+            let (mut a, mut b) = (eye, end);
             for _ in 0..12 {
                 let m = [0.5 * (a[0] + b[0]), 0.5 * (a[1] + b[1]), 0.5 * (a[2] + b[2])];
                 if wet(m) == we { a = m } else { b = m }
@@ -315,12 +334,12 @@ impl WaterFx {
                 emit(self, [wetp[0], wetp[1], z], k & 3, 0.35);
             }
         } else if wh != 0
-            && let Some((z, k)) = world.liquid_surface(hit)
+            && let Some((z, k)) = world.liquid_surface(end)
             && k & 4 == 0
-            && z - hit[2] < 2.0
+            && z - end[2] < 2.0
         {
             // impact right at the surface (e.g. shot along it)
-            emit(self, [hit[0], hit[1], z], k & 3, 0.35);
+            emit(self, [end[0], end[1], z], k & 3, 0.35);
         }
     }
 
@@ -357,8 +376,9 @@ impl WaterFx {
             return Vec::new();
         }
         let (max_ripples, max_drops, max_puffs) = quality_budgets(quality);
-        // the player's origin is 24 units above the feet; splash at the shins
-        let player = player.map(|p| (PLAYER_KEY, [p[0], p[1], p[2] - 16.0]));
+        // the player's origin is 24 units above the feet; probe just above the
+        // soles (like SV_CheckWater) so even shallow pools ripple and splash
+        let player = player.map(|p| (PLAYER_KEY, [p[0], p[1], p[2] - 23.0]));
         for (key, o) in movers.chain(player) {
             let mut wake_at = None;
             let mut cross = None;
@@ -394,7 +414,7 @@ impl WaterFx {
                         let speed = (d[0] * d[0] + d[1] * d[1] + d[2] * d[2]).sqrt() / dt;
                         let strength = (vz.max(speed * 0.5) / 350.0).clamp(0.25, 1.5)
                             * if kind != 0 { 1.0 } else { 0.5 };
-                        cross = Some(([o[0], o[1], z], k, strength));
+                        cross = Some(([o[0], o[1], z], k, strength, vz > 80.0));
                     }
                 } else if kind != 0 && ripples {
                     // wading near the surface leaves a wake
@@ -403,7 +423,7 @@ impl WaterFx {
                         && time - last_wake > 0.3
                         && let Some((z, k)) = surf
                         && k & 4 == 0
-                        && z - o[2] < 36.0
+                        && z - o[2] < 48.0
                     {
                         tr.last_wake = time;
                         wake_at = Some(([o[0], o[1], z], (hs / 320.0).clamp(0.2, 0.6)));
@@ -413,11 +433,11 @@ impl WaterFx {
                 let kind = world.liquid_surface(o).map_or(0, |(_, k)| k & 3);
                 self.tracks.insert(key, Track { origin: o, kind, last_wake: 0.0, seen: self.frame });
             }
-            if let Some((at, k, strength)) = cross {
+            if let Some((at, k, strength, do_splash)) = cross {
                 if ripples {
                     self.add_ripple(at, time, 1.6 * strength, max_ripples);
                 }
-                if splashes {
+                if splashes && do_splash {
                     self.splash(at, k, strength, time, max_drops);
                 }
             } else if let Some((at, amp)) = wake_at {
