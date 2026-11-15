@@ -67,10 +67,24 @@ const KNOWN: &[(&str, &str)] = &[
     ("hipnotic", "Scourge of Armagon"),
     ("rogue", "Dissolution of Eternity"),
     ("mg1", "Dimension of the Machine"),
+    ("mg3", "Dawn of the Machine"),
     ("ctf", "Capture the Flag"),
     ("dopa", "Dimension of the Past"),
     ("q64", "Quake 64"),
 ];
+
+fn known_blurb(dir: &str) -> Vec<String> {
+    let lines: &[&str] = match dir.to_ascii_lowercase().as_str() {
+        "id1" => &["id Software (1996)", "The original four-episode Quake campaign."],
+        "hipnotic" => &["Ritual Entertainment (1997)", "Mission Pack 1: Scourge of Armagon."],
+        "rogue" => &["Rogue Entertainment (1997)", "Mission Pack 2: Dissolution of Eternity."],
+        "dopa" => &["MachineGames (2016)", "20th anniversary episode with classic Quake callbacks."],
+        "mg1" => &["MachineGames (2021)", "Five-realm expansion culminating in a rematch with Chthon."],
+        "mg3" => &["MachineGames & id Software (2026)", "30th anniversary expansion for Quake."],
+        _ => &[],
+    };
+    lines.iter().map(|s| (*s).to_string()).collect()
+}
 
 /// True for a directory with game data (paks, pk3s, progs or maps).
 pub fn is_game_dir(path: &Path) -> bool {
@@ -119,6 +133,9 @@ fn info(path: &Path, dir: &str) -> ModInfo {
         && let Some(r) = readme(path, dir)
     {
         m.blurb = blurb(&r, 6);
+    }
+    if m.blurb.is_empty() {
+        m.blurb = known_blurb(dir);
     }
     m
 }

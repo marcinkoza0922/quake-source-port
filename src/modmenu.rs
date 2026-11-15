@@ -19,13 +19,71 @@ pub enum Page {
 }
 
 const ROW_H: f32 = 10.0;
-const TOP: f32 = 56.0;
-const ROWS: usize = 28;
+const OFFICIAL_FG: [f32; 4] = [0.62, 0.80, 0.95, 1.0];
+const TOP: f32 = 64.0;
+const ROWS: usize = 27;
+const BAR_Y: f32 = 46.0;
+const BAR_H: f32 = 12.0;
 /// Mod list column and info panel (menu units, 640x360).
 const LIST: (f32, f32) = (40.0, 264.0);
 const INFO: (f32, f32) = (312.0, 288.0);
 /// Map page panel.
 const MAPS: (f32, f32) = (40.0, 560.0);
+
+#[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
+pub enum ModSort {
+    #[default]
+    Default,
+    Name,
+    Dir,
+}
+
+impl ModSort {
+    fn next(self) -> Self {
+        match self {
+            Self::Default => Self::Name,
+            Self::Name => Self::Dir,
+            Self::Dir => Self::Default,
+        }
+    }
+
+    fn label(self) -> &'static str {
+        match self {
+            Self::Default => "Recent",
+            Self::Name => "Name",
+            Self::Dir => "Dir",
+        }
+    }
+}
+
+#[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
+pub enum MapSort {
+    #[default]
+    Default,
+    Name,
+    Title,
+    Completed,
+}
+
+impl MapSort {
+    fn next(self) -> Self {
+        match self {
+            Self::Default => Self::Name,
+            Self::Name => Self::Title,
+            Self::Title => Self::Completed,
+            Self::Completed => Self::Default,
+        }
+    }
+
+    fn label(self) -> &'static str {
+        match self {
+            Self::Default => "Default",
+            Self::Name => "Name",
+            Self::Title => "Title",
+            Self::Completed => "Done",
+        }
+    }
+}
 
 #[derive(Default)]
 pub struct ModMenu {
@@ -34,13 +92,20 @@ pub struct ModMenu {
     pub current: String,
     cursor: usize,
     scroll: usize,
-    /// Mod whose maps are listed.
+    mod_view: Vec<usize>,
+    mod_filter: String,
+    mod_sort: ModSort,
+    mod_last_played: Vec<u64>,
+    /// Mod index (in `self.mods`) whose maps are listed.
     sel: usize,
     pub maps: Vec<MapInfo>,
     pub stats: Stats,
-    /// Map page cursor: 0 = "Start", 1.. = maps.
+    /// Map page cursor: 0 = "Start" (when unfiltered), or maps.
     map_cursor: usize,
     map_scroll: usize,
+    map_view: Vec<usize>,
+    map_filter: String,
+    map_sort: MapSort,
 }
 
 fn clamp_scroll(cursor: usize, scroll: &mut usize) {
@@ -59,9 +124,21 @@ impl ModMenu {
 
     pub fn set_mods(&mut self, mods: Vec<ModInfo>, current: &str) {
         self.current = current.to_ascii_lowercase();
+        self.mod_last_played.resize(mods.len(), 0);
+        self.mod_last_played.fill(0);
         self.mods = mods;
+        self.rebuild_mod_view();
         // start on the mounted mod
-        self.cursor = self.mods.iter().position(|m| m.dir.eq_ignore_ascii_case(current)).unwrap_or(0);
+        self.cursor = self.mod_view.iter().position(|&i| self.mods[i].dir.eq_ignore_ascii_case(current)).unwrap_or(0);
+        self.scroll = 0;
+        clamp_scroll(self.cursor, &mut self.scroll);
+    }
+
+    /// Sets per-mod last-played timestamps (unix seconds, 0 = never) and re-sorts.
+    pub fn set_last_played(&mut self, times: Vec<u64>) {
+        self.mod_last_played = times;
+        self.rebuild_mod_view();
+        self.cursor = self.mod_view.iter().position(|&i| self.mods[i].dir.eq_ignore_ascii_case(&self.current)).unwrap_or(0);
         self.scroll = 0;
         clamp_scroll(self.cursor, &mut self.scroll);
     }
@@ -69,17 +146,94 @@ impl ModMenu {
     pub fn set_maps(&mut self, maps: Vec<MapInfo>, stats: Stats) {
         self.maps = maps;
         self.stats = stats;
-        self.map_cursor = 0;
-        self.map_scroll = 0;
+        self.map_filter.clear();
+        self.rebuild_map_view();
     }
 
     /// Shows the map page of `dir` (for `menu_mods <dir>`). False if unknown.
     pub fn select(&mut self, dir: &str) -> bool {
         let Some(i) = self.mods.iter().position(|m| m.dir.eq_ignore_ascii_case(dir)) else { return false };
-        self.cursor = i;
         self.sel = i;
-        clamp_scroll(i, &mut self.scroll);
+        if let Some(v) = self.mod_view.iter().position(|&idx| idx == i) {
+            self.cursor = v;
+            clamp_scroll(v, &mut self.scroll);
+        }
         true
+    }
+
+    fn rebuild_mod_view(&mut self) {
+        let q = self.mod_filter.trim();
+        let mut scored: Vec<(usize, i32)> = self
+            .mods
+            .iter()
+            .enumerate()
+            .filter_map(|(i, m)| {
+                let s = [fuzzy_score(q, &m.title), fuzzy_score(q, &m.dir)].into_iter().flatten().max()?;
+                Some((i, s))
+            })
+            .collect();
+        scored.sort_by(|&(ia, sa), &(ib, sb)| {
+            if !q.is_empty() && sa != sb {
+                return sb.cmp(&sa);
+            }
+            let (a, b) = (&self.mods[ia], &self.mods[ib]);
+            match self.mod_sort {
+                ModSort::Default => {
+                    let ta = self.mod_last_played.get(ia).copied().unwrap_or(0);
+                    let tb = self.mod_last_played.get(ib).copied().unwrap_or(0);
+                    tb.cmp(&ta)
+                        .then_with(|| mod_fallback_key(a).cmp(&mod_fallback_key(b)))
+                        .then_with(|| ia.cmp(&ib))
+                }
+                ModSort::Name => a.title.to_ascii_lowercase().cmp(&b.title.to_ascii_lowercase()).then_with(|| ia.cmp(&ib)),
+                ModSort::Dir => a.dir.to_ascii_lowercase().cmp(&b.dir.to_ascii_lowercase()).then_with(|| ia.cmp(&ib)),
+            }
+        });
+        self.mod_view = scored.into_iter().map(|(i, _)| i).collect();
+        self.cursor = 0;
+        self.scroll = 0;
+    }
+
+    fn rebuild_map_view(&mut self) {
+        let q = self.map_filter.trim();
+        let mut scored: Vec<(usize, i32)> = self
+            .maps
+            .iter()
+            .enumerate()
+            .filter_map(|(i, m)| {
+                let s = [fuzzy_score(q, &m.name), fuzzy_score(q, &m.title)].into_iter().flatten().max()?;
+                Some((i, s))
+            })
+            .collect();
+        scored.sort_by(|&(ia, sa), &(ib, sb)| {
+            if !q.is_empty() && sa != sb {
+                return sb.cmp(&sa);
+            }
+            let (a, b) = (&self.maps[ia], &self.maps[ib]);
+            match self.map_sort {
+                MapSort::Default => ia.cmp(&ib),
+                MapSort::Name => a.name.to_ascii_lowercase().cmp(&b.name.to_ascii_lowercase()).then_with(|| ia.cmp(&ib)),
+                MapSort::Title => a.title.to_ascii_lowercase().cmp(&b.title.to_ascii_lowercase()).then_with(|| ia.cmp(&ib)),
+                MapSort::Completed => {
+                    let da = self.stats.get(&a.name).is_some_and(|s| s.completions > 0);
+                    let db = self.stats.get(&b.name).is_some_and(|s| s.completions > 0);
+                    db.cmp(&da).then_with(|| ia.cmp(&ib))
+                }
+            }
+        });
+        self.map_view = scored.into_iter().map(|(i, _)| i).collect();
+        self.map_cursor = 0;
+        self.map_scroll = 0;
+    }
+
+    fn mod_at_row(&self, row: usize) -> Option<(usize, &ModInfo)> {
+        let &idx = self.mod_view.get(row)?;
+        Some((idx, self.mods.get(idx)?))
+    }
+
+    fn map_at_row(&self, row: usize) -> Option<&MapInfo> {
+        let idx = if self.map_filter.is_empty() { row.checked_sub(1)? } else { row };
+        self.map_view.get(idx).and_then(|&i| self.maps.get(i))
     }
 
     /// Scrollbar of a page: (x, track top, track h, thumb y, thumb h).
@@ -131,8 +285,8 @@ impl ModMenu {
 
     fn rows(&self, page: Page) -> usize {
         match page {
-            Page::List => self.mods.len(),
-            Page::Maps => self.maps.len() + 1,
+            Page::List => self.mod_view.len(),
+            Page::Maps => self.map_view.len() + usize::from(self.map_filter.is_empty()),
         }
     }
 
@@ -156,8 +310,73 @@ impl ModMenu {
         }
     }
 
+    fn cycle_sort(&mut self, page: Page) {
+        match page {
+            Page::List => {
+                self.mod_sort = self.mod_sort.next();
+                self.rebuild_mod_view();
+            }
+            Page::Maps => {
+                self.map_sort = self.map_sort.next();
+                self.rebuild_map_view();
+            }
+        }
+    }
+
+    /// Handles clicks on the search/sort bar.
+    pub fn click(&mut self, page: Page, (x, y): (f32, f32), out: &mut Vec<Action>) -> bool {
+        if !(BAR_Y..BAR_Y + BAR_H).contains(&y) {
+            return false;
+        }
+        let (bx, bw, sw) = match page {
+            Page::List => (LIST.0, LIST.1, 78.0),
+            Page::Maps => (MAPS.0, MAPS.1, 88.0),
+        };
+        let sx = bx + bw - sw;
+        if (sx..sx + sw).contains(&x) {
+            self.cycle_sort(page);
+            out.push(Action::Sound("misc/menu3.wav"));
+            return true;
+        }
+        false
+    }
+
     /// Returns the next page (`None` = leave the mod menu to the main menu).
     pub fn key(&mut self, page: Page, key: i32, out: &mut Vec<Action>) -> Option<Page> {
+        if key == K_TAB {
+            self.cycle_sort(page);
+            out.push(Action::Sound("misc/menu3.wav"));
+            return Some(page);
+        }
+        if key == K_BACKSPACE {
+            let filter = match page {
+                Page::List => &mut self.mod_filter,
+                Page::Maps => &mut self.map_filter,
+            };
+            if filter.pop().is_some() {
+                match page {
+                    Page::List => self.rebuild_mod_view(),
+                    Page::Maps => self.rebuild_map_view(),
+                }
+                out.push(Action::Sound("misc/menu1.wav"));
+            }
+            return Some(page);
+        }
+        if (0x20..=0x7e).contains(&key) {
+            let ch = key as u8 as char;
+            match page {
+                Page::List => {
+                    self.mod_filter.push(ch);
+                    self.rebuild_mod_view();
+                }
+                Page::Maps => {
+                    self.map_filter.push(ch);
+                    self.rebuild_map_view();
+                }
+            }
+            out.push(Action::Sound("misc/menu1.wav"));
+            return Some(page);
+        }
         let n = self.rows(page);
         let (cursor, scroll) = match page {
             Page::List => (&mut self.cursor, &mut self.scroll),
@@ -189,9 +408,21 @@ impl ModMenu {
         let enter = matches!(key, K_ENTER | K_KP_ENTER | K_ABUTTON | K_MOUSE1);
         let back = matches!(key, K_ESCAPE | K_BBUTTON | K_MOUSE2);
         match page {
+            Page::List if key == K_ESCAPE && !self.mod_filter.is_empty() => {
+                self.mod_filter.clear();
+                self.rebuild_mod_view();
+                out.push(Action::Sound("misc/menu1.wav"));
+                Some(Page::List)
+            }
+            Page::Maps if key == K_ESCAPE && !self.map_filter.is_empty() => {
+                self.map_filter.clear();
+                self.rebuild_map_view();
+                out.push(Action::Sound("misc/menu1.wav"));
+                Some(Page::Maps)
+            }
             Page::List if back => None,
             Page::List if enter => {
-                let Some(m) = self.mods.get(self.cursor) else { return Some(page) };
+                let Some((_, m)) = self.mod_at_row(self.cursor) else { return Some(page) };
                 out.push(Action::Sound("misc/menu2.wav"));
                 out.push(Action::Close);
                 // the running mod is already loaded: just return to it
@@ -201,26 +432,34 @@ impl ModMenu {
                 None
             }
             Page::List if matches!(key, K_RIGHTARROW | K_DPAD_RIGHT) => {
-                let Some(m) = self.mods.get(self.cursor) else { return Some(page) };
-                self.sel = self.cursor;
+                let Some((idx, m)) = self.mod_at_row(self.cursor) else { return Some(page) };
+                let cmd = format!("_modmaps \"{}\"\n", m.dir);
+                self.sel = idx;
                 self.maps.clear();
+                self.map_view.clear();
+                self.map_filter.clear();
                 out.push(Action::Sound("misc/menu2.wav"));
-                out.push(Action::Command(format!("_modmaps \"{}\"\n", m.dir)));
+                out.push(Action::Command(cmd));
                 Some(Page::Maps)
             }
             Page::Maps if back || matches!(key, K_LEFTARROW | K_DPAD_LEFT) => Some(Page::List),
             Page::Maps if enter => {
                 let Some(m) = self.selected() else { return Some(Page::List) };
                 let current = m.dir.eq_ignore_ascii_case(&self.current);
-                let cmd = match self.map_cursor {
+                let cmd = if self.map_filter.is_empty() && self.map_cursor == 0 {
                     // Start: another mod boots through its own quake.rc; the
                     // mounted one starts its first map.
-                    0 if !current => format!("game \"{}\"\n", m.dir),
-                    0 => match self.maps.first() {
-                        Some(f) => format!("game \"{}\" \"{}\"\n", m.dir, f.name),
-                        None => return Some(page),
-                    },
-                    i => format!("game \"{}\" \"{}\"\n", m.dir, self.maps[i - 1].name),
+                    if !current {
+                        format!("game \"{}\"\n", m.dir)
+                    } else {
+                        match self.map_view.first().and_then(|&i| self.maps.get(i)) {
+                            Some(f) => format!("game \"{}\" \"{}\"\n", m.dir, f.name),
+                            None => return Some(page),
+                        }
+                    }
+                } else {
+                    let Some(map) = self.map_at_row(self.map_cursor) else { return Some(page) };
+                    format!("game \"{}\" \"{}\"\n", m.dir, map.name)
                 };
                 out.push(Action::Sound("misc/menu2.wav"));
                 out.push(Action::Close);
@@ -240,10 +479,17 @@ impl ModMenu {
 
     fn draw_list(&self, c: &mut Canvas) {
         center_gold(c, 24.0, "Map Packs");
-        center(c, 36.0, &format!("{} installed", self.mods.len()));
+        let count = if self.mod_filter.is_empty() {
+            format!("{} installed", self.mods.len())
+        } else {
+            format!("{}/{} matching", self.mod_view.len(), self.mods.len())
+        };
+        center(c, 36.0, &count);
         let (x, w) = LIST;
+        draw_filter_bar(c, x, w, 78.0, &self.mod_filter, self.mod_sort.label());
         box_(c, x, w, ROWS);
-        for (i, m) in self.mods.iter().enumerate().skip(self.scroll).take(ROWS) {
+        for (i, &idx) in self.mod_view.iter().enumerate().skip(self.scroll).take(ROWS) {
+            let m = &self.mods[idx];
             let y = TOP + (i - self.scroll) as f32 * ROW_H;
             if i == self.cursor {
                 c.fill(x + 2.0, y, w - 4.0, ROW_H, HILITE);
@@ -253,13 +499,15 @@ impl ModMenu {
             if m.dir.eq_ignore_ascii_case(&self.current) {
                 txt_gold(c, x + 6.0, y + 1.0, &t);
                 c.text_right(x + w - 8.0, y + 1.0, "running", TXT, MUTED);
+            } else if is_official_expansion(&m.dir) {
+                c.text(x + 6.0, y + 1.0, &t, TXT, OFFICIAL_FG);
             } else {
                 txt(c, x + 6.0, y + 1.0, &t);
             }
         }
         self.draw_bar(c, Page::List);
         // info panel for the highlighted mod
-        let Some(m) = self.mods.get(self.cursor) else { return };
+        let Some((_, m)) = self.mod_at_row(self.cursor) else { return };
         let (ix, iw) = INFO;
         box_(c, ix, iw, ROWS);
         let cols = ((iw - 16.0) / 6.0) as usize;
@@ -279,8 +527,6 @@ impl ModMenu {
             txt_gold(c, ix + 8.0, y, "(running)");
             y += ROW_H;
         }
-        c.text(ix + 8.0, y, "Right: levels", TXT, MUTED);
-        y += ROW_H;
         y += 6.0;
         let bottom = TOP + ROWS as f32 * ROW_H - ROW_H;
         'blurb: for line in &m.blurb {
@@ -298,21 +544,28 @@ impl ModMenu {
         let Some(m) = self.selected() else { return };
         center_gold(c, 24.0, &clip(&m.title, 70));
         let done = self.maps.iter().filter(|x| self.stats.get(&x.name).is_some_and(|s| s.completions > 0)).count();
-        center(c, 36.0, &format!("{} maps, {done} completed", self.maps.len()));
+        let subtitle = if self.map_filter.is_empty() {
+            format!("{} maps, {done} completed", self.maps.len())
+        } else {
+            format!("{}/{} matching, {done} completed", self.map_view.len(), self.maps.len())
+        };
+        center(c, 36.0, &subtitle);
         let (x, w) = MAPS;
+        draw_filter_bar(c, x, w, 88.0, &self.map_filter, self.map_sort.label());
         box_(c, x, w, ROWS);
         let stat_x = x + w - 176.0;
-        for i in (self.map_scroll..self.maps.len() + 1).take(ROWS) {
+        let total = self.rows(Page::Maps);
+        for i in (self.map_scroll..total).take(ROWS) {
             let y = TOP + (i - self.map_scroll) as f32 * ROW_H;
             if i == self.map_cursor {
                 c.fill(x + 2.0, y, w - 4.0, ROW_H, HILITE);
             }
-            if i == 0 {
+            if self.map_filter.is_empty() && i == 0 {
                 let running = m.dir.eq_ignore_ascii_case(&self.current);
                 txt_gold(c, x + 6.0, y + 1.0, if running { "Start first map" } else { "Launch mod" });
                 continue;
             }
-            let map = &self.maps[i - 1];
+            let Some(map) = self.map_at_row(i) else { continue };
             txt(c, x + 6.0, y + 1.0, &clip(&map.name, 14));
             let tcols = ((stat_x - x - 128.0) / 6.0) as usize;
             txt(c, x + 120.0, y + 1.0, &clip(&map.title, tcols));
@@ -340,6 +593,74 @@ impl ModMenu {
             c.fill(x, ty, 3.0, th, [0.85, 0.65, 0.3, 0.9]);
         }
     }
+}
+
+fn draw_filter_bar(c: &mut Canvas, x: f32, w: f32, sort_w: f32, filter: &str, sort_label: &str) {
+    let fw = w - sort_w - 4.0;
+    c.fill(x, BAR_Y, fw, BAR_H, [0.0, 0.0, 0.0, 0.8]);
+    c.frame(x, BAR_Y, fw, BAR_H, BORDER);
+    let cols = ((fw - 12.0) / 6.0) as usize;
+    if filter.is_empty() {
+        c.text(x + 6.0, BAR_Y + 2.0, "Type to filter...", TXT, MUTED);
+    } else {
+        txt(c, x + 6.0, BAR_Y + 2.0, &clip(&format!("{filter}_"), cols));
+    }
+    let sx = x + w - sort_w;
+    c.fill(sx, BAR_Y, sort_w, BAR_H, [0.08, 0.08, 0.08, 0.9]);
+    c.frame(sx, BAR_Y, sort_w, BAR_H, BORDER);
+    c.text_center(sx + sort_w * 0.5, BAR_Y + 2.0, &format!("Sort: {sort_label}"), TXT, GOLD_FG);
+}
+
+const OFFICIAL_EXPANSIONS: &[&str] = &["hipnotic", "rogue", "dopa", "mg1", "mg3"];
+
+fn is_official_expansion(dir: &str) -> bool {
+    let d = dir.to_ascii_lowercase();
+    OFFICIAL_EXPANSIONS.contains(&d.as_str())
+}
+
+fn mod_fallback_key(m: &ModInfo) -> (u8, usize, String) {
+    let d = m.dir.to_ascii_lowercase();
+    if d == "id1" {
+        return (0, 0, String::new());
+    }
+    if let Some(pos) = OFFICIAL_EXPANSIONS.iter().position(|&e| e == d) {
+        return (1, pos, String::new());
+    }
+    (2, 0, m.title.to_ascii_lowercase())
+}
+
+/// Case-insensitive fuzzy subsequence score; `None` if `query` does not match.
+fn fuzzy_score(query: &str, target: &str) -> Option<i32> {
+    if query.is_empty() {
+        return Some(0);
+    }
+    let q: Vec<char> = query.chars().map(|c| c.to_ascii_lowercase()).collect();
+    let t: Vec<char> = target.chars().map(|c| c.to_ascii_lowercase()).collect();
+    let mut qi = 0;
+    let mut score = 0i32;
+    let mut prev_match: Option<usize> = None;
+    for (ti, &tc) in t.iter().enumerate() {
+        if tc == q[qi] {
+            score += 10;
+            if ti > 0 && prev_match == Some(ti - 1) {
+                score += 15;
+            }
+            if ti == 0 || matches!(t[ti - 1], ' ' | '_' | '-' | '/' | '.') {
+                score += 20;
+            }
+            prev_match = Some(ti);
+            qi += 1;
+            if qi == q.len() {
+                let q_str: String = q.iter().collect();
+                let t_str: String = t.iter().collect();
+                if t_str.contains(&q_str) {
+                    score += 50;
+                }
+                return Some(score - t.len() as i32);
+            }
+        }
+    }
+    None
 }
 
 fn box_(c: &mut Canvas, x: f32, w: f32, rows: usize) {
@@ -405,9 +726,9 @@ mod tests {
     #[test]
     fn pick_mod_and_map() {
         let mut mm = menu();
-        assert_eq!(mm.cursor, 1, "starts on the running mod");
+        assert_eq!(mm.cursor, 2, "starts on the running mod");
         let mut out = Vec::new();
-        assert_eq!(mm.key(Page::List, K_DOWNARROW, &mut out), Some(Page::List));
+        assert_eq!(mm.key(Page::List, K_UPARROW, &mut out), Some(Page::List));
         assert_eq!(mm.key(Page::List, K_RIGHTARROW, &mut out), Some(Page::Maps));
         assert_eq!(cmds(&out), ["_modmaps \"mg1\"\n"]);
         let maps = ["start", "mg1m1"].map(|n| MapInfo { name: n.into(), title: String::new() }).to_vec();
@@ -431,12 +752,12 @@ mod tests {
     fn enter_launches_the_mod() {
         let mut mm = menu();
         let mut out = Vec::new();
-        mm.key(Page::List, K_DOWNARROW, &mut out);
+        mm.key(Page::List, K_UPARROW, &mut out);
         out.clear();
         assert_eq!(mm.key(Page::List, K_ENTER, &mut out), None);
         assert_eq!(cmds(&out), ["game \"mg1\"\n"]);
         // the running mod just closes the menu
-        mm.cursor = 1;
+        mm.cursor = 2;
         out.clear();
         mm.key(Page::List, K_ENTER, &mut out);
         assert!(cmds(&out).is_empty() && out.iter().any(|a| matches!(a, Action::Close)));
@@ -462,5 +783,68 @@ mod tests {
     fn text_helpers() {
         assert_eq!(clip("abcdef", 4), "abc~");
         assert_eq!(wrap("one two three four", 9), ["one two", "three", "four"]);
+    }
+
+    #[test]
+    fn fuzzy_filter_and_sort_mods_and_maps() {
+        let mut mm = ModMenu::default();
+        let m = |d: &str, t: &str| ModInfo { dir: d.into(), title: t.into(), base: Base::Id, blurb: vec![] };
+        mm.set_mods(vec![m("z_mod", "Beta Pack"), m("a_mod", "Arcane Dimensions"), m("m_mod", "Alpha")], "z_mod");
+        let mut out = Vec::new();
+        // Tab cycles sort: Default -> Name -> Dir
+        mm.key(Page::List, K_TAB, &mut out);
+        assert_eq!(mm.mod_sort, ModSort::Name);
+        assert_eq!(mm.mod_at_row(0).unwrap().1.title, "Alpha");
+        mm.key(Page::List, K_TAB, &mut out);
+        assert_eq!(mm.mod_sort, ModSort::Dir);
+        assert_eq!(mm.mod_at_row(0).unwrap().1.dir, "a_mod");
+        // Typing filters immediately without focusing search box
+        mm.key(Page::List, b'a' as i32, &mut out);
+        mm.key(Page::List, b'd' as i32, &mut out);
+        assert_eq!(mm.mod_filter, "ad");
+        assert_eq!(mm.mod_view.len(), 1);
+        assert_eq!(mm.mod_at_row(0).unwrap().1.dir, "a_mod");
+        // Escape clears filter first
+        assert_eq!(mm.key(Page::List, K_ESCAPE, &mut out), Some(Page::List));
+        assert!(mm.mod_filter.is_empty());
+        assert_eq!(mm.mod_view.len(), 3);
+
+        // Maps: filter hides "Launch mod" row and selects top match
+        mm.set_maps(
+            vec![
+                MapInfo { name: "e1m1".into(), title: "Slipgate Complex".into() },
+                MapInfo { name: "e1m2".into(), title: "Castle of the Damned".into() },
+            ],
+            Stats::default(),
+        );
+        mm.key(Page::Maps, b'c' as i32, &mut out);
+        mm.key(Page::Maps, b'a' as i32, &mut out);
+        mm.key(Page::Maps, b's' as i32, &mut out);
+        assert_eq!(mm.rows(Page::Maps), 1);
+        assert_eq!(mm.map_at_row(0).unwrap().name, "e1m2");
+        mm.key(Page::Maps, K_BACKSPACE, &mut out);
+        assert_eq!(mm.map_filter, "ca");
+    }
+
+    #[test]
+    fn default_sort_recent_then_official_then_alpha() {
+        let mut mm = ModMenu::default();
+        let m = |d: &str, t: &str| ModInfo { dir: d.into(), title: t.into(), base: Base::Id, blurb: vec![] };
+        mm.set_mods(
+            vec![
+                m("z_pack", "Zeta"),
+                m("mg1", "Dimension of the Machine"),
+                m("rogue", "Dissolution of Eternity"),
+                m("a_pack", "Alpha"),
+                m("id1", "Quake"),
+                m("hipnotic", "Scourge of Armagon"),
+                m("dopa", "Dimension of the Past"),
+            ],
+            "id1",
+        );
+        // Mark z_pack as most recently played (200) and mg1 as played earlier (100)
+        mm.set_last_played(vec![200, 100, 0, 0, 0, 0, 0]);
+        let dirs: Vec<&str> = (0..7).map(|i| mm.mod_at_row(i).unwrap().1.dir.as_str()).collect();
+        assert_eq!(dirs, ["z_pack", "mg1", "id1", "hipnotic", "rogue", "dopa", "a_pack"]);
     }
 }
