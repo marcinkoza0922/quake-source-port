@@ -135,6 +135,7 @@ impl Renderer {
             lut_metric: -1,
             msaa: 1,
             render_scale: 1.0,
+            ssao_quality: 1,
             prev_xforms: Default::default(),
             prev_xform_time: 0.0,
             water_fx: {

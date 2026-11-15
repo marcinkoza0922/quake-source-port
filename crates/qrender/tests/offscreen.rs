@@ -269,5 +269,17 @@ fn start_bsp_renders_non_black() {
         }
         assert!(r.gpu_view_times().is_empty(), "taking totals must reset views too");
     }
-
+    r.gpu_times_wanted = false;
+    // Cycle all SSAO quality tiers across single-sample/MSAA and 100%/200% scale.
+    for msaa in [1, 4] {
+        for render_scale in [1.0, 2.0] {
+            for ssao_quality in [0, 1, 2] {
+                let st = Settings { ssao: 2.0, ssao_quality, msaa, render_scale, ..Default::default() };
+                r.render(&RenderFrame { time: frame.time, splits: &splits, settings: st, ..Default::default() }).unwrap();
+                let _ = r.read_pixels().unwrap();
+            }
+        }
+    }
+    r.render(&split_frame).unwrap();
+    assert_eq!(split_expected, r.read_pixels().unwrap(), "SSAO quality cycling corrupted recreated targets");
 }

@@ -33,6 +33,12 @@ impl Renderer {
             self.idle();
             self.destroy_targets();
         }
+        let ssao_quality = st.ssao_quality.min(2);
+        if ssao_quality != self.ssao_quality {
+            self.ssao_quality = ssao_quality;
+            self.idle();
+            self.destroy_targets();
+        }
         // TexMgr_ApplySettings: gl_texturemode (r_texfilter picks the default),
         // anisotropy, lod bias; softemu 2/3 or lightmap banding force nearest
         // with linear mips and at least 8x anisotropy.

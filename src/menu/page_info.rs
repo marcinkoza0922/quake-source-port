@@ -28,7 +28,7 @@ pub(super) fn tooltip(item: Item) -> Option<&'static str> {
         "vid_fsaamode" => "Shades every anti-aliasing sample; needs Anti-aliasing on",
         "r_renderscale" => "3D resolution relative to the window; the UI stays sharp",
         "r_dither" => "Adds fine noise to hide color banding",
-        "r_ssao" => "Darkens corners and contact areas where geometry meets",
+        "r_ssao" => "Darkens corners and contact areas where geometry meets; higher quality is sharper",
         "r_motionblur" => "Blurs fast-moving monsters, projectiles and doors (not camera turns)",
         "r_speedblur" => "Blurs the screen edges during fast falls and launches; keeps the centre clear. Reduce Motion disables it",
         "r_motionblur_amount" => "Length of the motion blur streaks",

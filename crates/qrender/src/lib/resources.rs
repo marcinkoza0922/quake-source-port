@@ -32,10 +32,12 @@ pub(super) struct Targets {
     pub(super) scene_w: u32,
     pub(super) scene_h: u32,
     pub(super) color_slot: u32,
-    /// Exact sample-0 depth/alpha snapshot, allocated only for MSAA SSAO.
+    /// Exact sample-0 depth/alpha snapshot, allocated at AO target size for MSAA SSAO.
     pub(super) ao_source: Option<(Image, u32)>,
-    /// Single-sampled, scene-sized visibility/view depth for AO application.
+    /// Single-sampled visibility/view depth for AO application (output-capped, half-res on low/medium).
     pub(super) ao: Image,
+    pub(super) ao_w: u32,
+    pub(super) ao_h: u32,
     pub(super) ao_slot: u32,
     /// Single-sampled, scene-sized per-object velocity for post-processing.
     pub(super) vel: Image,

@@ -60,8 +60,10 @@ pub struct Settings {
     /// r_softparticles ? r_softparticledistance : 0. Soft FTE particles fade
     /// over this many units in front of scene depth; 0 disables.
     pub soft_particle_distance: f32,
-    /// r_ssao: screen-space ambient occlusion strength (0 = off).
+    /// r_ssao / r_ssao_strength: screen-space ambient occlusion strength (0 = off).
     pub ssao: f32,
+    /// SSAO resolution and sample quality (0 = low, 1 = medium, 2 = high).
+    pub ssao_quality: u32,
     /// r_ssao_radius: occlusion radius in world units.
     pub ssao_radius: f32,
     /// r_motionblur: per-object motion blur; the blur covers this fraction of
@@ -136,6 +138,7 @@ impl Default for Settings {
             colorblind: 0,
             soft_particle_distance: 4.0,
             ssao: 0.0,
+            ssao_quality: 1,
             ssao_radius: 32.0,
             motion_blur: 0.0,
             edge_blur: 0.0,

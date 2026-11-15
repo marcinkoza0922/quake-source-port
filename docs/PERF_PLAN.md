@@ -30,6 +30,165 @@ Rules for every item:
 Headless frames include about 1.07 ms of image readback in `ui+present`;
 confirm wins windowed (`qprof -window`, or qbench for parity).
 
+## Priority diversion: enhancements and add-ons (*visual*)
+
+Added 2026-11-14. Visual and logic parity with reference ports for vanilla
+Quake and third-party map packs remains strict (no compromises). For this
+port's own enhancements and add-ons, appearance-altering optimisations are
+acceptable when they bring meaningful CPU/GPU gains; changes that noticeably
+degrade look should expose quality settings (e.g. `Low` / `Medium` / `High`)
+rather than forcing a single degraded mode. These items take priority over
+the remaining parity-bound phases below.
+
+### 13. SSAO resolution and quality tiers (*visual*)
+- Problem: `SSAO` in `src/menu/pages.rs` (`off` 0, `low` 0.5, `medium` 1.0,
+  `high` 2.0) currently scales only occlusion intensity (`pc.size.z` in
+  `crates/qrender/shaders/ao.frag`). All three non-off levels allocate
+  `t.ao` at full `scene_w × scene_h` (`crates/qrender/src/lib/targets.rs`),
+  run `N = 12` depth taps per pixel in `ao.frag`, and run a 4×4 (16-tap)
+  bilateral blur in `aoapply.frag`. Even after the sample-0 snapshot, AO
+  costs ~1.86–2.28 ms at 200% scale (1.5 ms across 4 views in `ultimate-coop`).
+- Plan:
+  - Add real quality tiers (decoupling quality from intensity, or mapping
+    presets cleanly): half-resolution `t.ao` with depth-aware upsample in
+    `aoapply.frag` (4× fewer `ao.frag` pixels), capped at output resolution
+    when `r_renderscale > 1`.
+  - Scale `ao.frag` sample count `N` (e.g. 4–6 / 8–10 / 12) and `aoapply.frag`
+    blur taps by quality tier.
+- Measure: `ssao`, `supersample-renderscale200-ssao`, `all-enhancements`,
+  `ultimate-coop`.
+- **Status (Done)**:
+  - Reworked `r_ssao` to `0` = off, `1` = low, `2` = medium, `3` = high (menu `Ambient Occlusion`: `off` / `low` / `medium` / `high`), separated `r_ssao_strength` (default `2`, matching the prior `high` intensity), added `ssao_quality` to `qrender::Settings`, and updated `qprof`'s `SSAO` preset to `r_ssao 3`.
+  - Capped `t.ao` and MSAA `t.ao_source` at output resolution when `r_renderscale > 1`, halved them on `low` and `medium`, scaled `ao.frag` taps (`6` with 2×2 Bayer on `low`, `8` on `medium`, `12` on `high`), and updated `aoapply.frag` to read full-res scene depth (sample 0 under MSAA) with sky early-out, split-view clamping, and `2×2` (`low`) vs `4×4` (`medium`/`high`) bilateral upsampling.
+  - Verified with `QRENDER_VALIDATION=1 cargo nextest run -p qrender` (including quality cycling across 1x/4x MSAA, 100%/200% scale, and split-screen), `QRENDER_VALIDATION=1` headless screenshots (`e1m1`, `ad_sepulcher`, 200% + 8x MSAA, 4-player split-screen), and `qprof -runs 3` medians (`target/qprof/before-ssao` → `target/qprof/after-ssao`, 1280×720):
+    - `renderscale200-ssao`: `ad_sepulcher` GPU **3191 → 2631 µs** (-560 µs, FPS 307 → 368; AO total **1127 → 480 µs**, `ao-generate` **946 → 296 µs**); `e1m1` GPU **2558 → 1766 µs** (-792 µs, FPS 380 → 546).
+    - `supersample-renderscale200-ssao`: `ad_sepulcher` GPU **5202 → 4114 µs** (-1088 µs, FPS 190 → 237; AO total **1835 → 607 µs**, `ao-generate` **1475 → 233 µs**); `e1m1` GPU **4275 → 2754 µs** (-1521 µs, FPS 230 → 354).
+    - `all-enhancements`: `ad_sepulcher` GPU **7906 → 6645 µs** (-1261 µs, FPS 126 → 149; AO total **1827 → 556 µs**); `e1m1` GPU **5662 → 4206 µs** (-1456 µs, FPS 174 → 233).
+    - `ultimate-coop` (`ad_sepulcher`, 4 views): GPU **11000 → 10278 µs** (-722 µs, FPS 89 → 95; AO total **1449 → 722 µs**).
+    - Tier scaling on `ad_sepulcher` (499-frame spawn `prof_stop` AO total / `ao-generate`): 100% scale `low` **112.7 / 24.7 µs**, `medium` **131.4 / 31.5 µs**, `high` **291.0 / 184.8 µs**; 200% + 8x sample shading `low` **245.1 / 24.8 µs**, `medium` **302.3 / 31.8 µs**, `high` **527.2 / 186.7 µs**.
+
+### 14. Add-on portals & teleporter window target quality (*visual*)
+- Problem: `destinations` is the largest GPU stage in `ultimate-coop`
+  (~4.3 ms GPU, ~3.35 ms in `world`, ~0.66 ms in `particles`). Each portal
+  view (`crates/qrender/src/frame/portals.rs`, up to `MAX_PORTAL_VIEWS = 8`)
+  renders into full `scene_w × scene_h` targets (`t.portals` in `targets.rs`)
+  with full scene MSAA (`t.color_ms`), full water ripples/caustics, and all
+  particles/FTE batches.
+- Plan:
+  - Render portal views at reduced scale (e.g. 0.5× or 0.75× output res)
+    and single-sampled (no MSAA scratch/resolve), with quality tiers
+    controlling resolution scale and `addon_portal_depth` / `addon_portal_max`
+    / `addon_portal_dist` budgets.
+  - Provide an option/tier to skip expensive extras inside destination views
+    (especially nested depth ≥ 1): `water_grad` ripples/caustics, classic/FTE
+    particles, or distant small alias models.
+- Measure: `portalgun`, `teleportwindows`, `ultimate`, `ultimate-coop`.
+
+### 15. Enhanced water caustics, ripples & splashes (*visual*)
+- Problem: in `crates/qrender/shaders/common.glsl`, `water_grad` loops over
+  up to `MAX_RIPPLES = 32` active ripples per fragment in both `water.frag`
+  and `world.frag` (to distort caustics), and `caustic()` evaluates two 3×3
+  Worley cellular layers (18 cell checks per submerged world pixel). At
+  `r_renderscale 2` + 8× sample shading, `water` adds +631 µs GPU on
+  `ad_sepulcher` (+443 µs in `world`).
+- Plan:
+  - Quality tiers for caustics/ripples: Low/Medium use a precomputed tiling
+    caustic texture (two scrolling texture taps instead of dual Worley) and
+    skip `water_grad` distortion on `world.frag` caustics; High retains dual
+    Worley.
+  - Add distance fade cutoffs in `water.frag`/`world.frag` to skip ripple and
+    caustic loops past sub-pixel range, and cap active ripples (`8`/`16`/`32`)
+    plus `WaterFx` splash `MAX_DROPS` (`2048`) / `MAX_PUFFS` (`512`) in
+    `crates/qrender/src/water.rs` by quality.
+- Measure: `water`, `supersample-renderscale200-water`, `all-enhancements`.
+
+### 16. Per-object motion blur quality (*visual*)
+- Problem: in `crates/qrender/shaders/post.frag`, whenever any moving entity
+  populates `vel_draws`, every static background pixel (`best < 0.25`) runs
+  an 8-tap 24 px neighborhood search in `vel_tex`, and blurred pixels take
+  `N = 12` scene taps; `frame.rs` also re-renders moving models into `t.vel`.
+- Plan:
+  - Add quality tiers: Low skips the 8-tap dilation search on static pixels
+    and reduces blur taps (e.g. `N = 6`); High keeps the dilated smear (or
+    replaces the 8-tap per-pixel search with a coarse tile-max velocity
+    pass).
+  - Skip `vel_draws` submission for tiny/distant entities with sub-pixel
+    screen motion.
+- Measure: `motionblur`, `all-enhancements`.
+
+### 17. Soft particles MSAA depth lookup (*visual*)
+- Problem: in `crates/qrender/shaders/fte.frag`, under MSAA (`ns > 1`), every
+  soft-particle fragment loops `0..ns` (up to 8 `texelFetch`es on
+  `scene_depth_ms`), and any soft batch splits dynamic render passes in
+  `frame.rs`.
+- Plan: add a fast/low-cost mode reading sample 0 only under MSAA (or
+  reusing `t.ao_source` when available) instead of all `ns` samples.
+- Measure: `supersample`, `all-enhancements` on `ad_sepulcher`.
+
+### 18. Gel sprayer coat build, upload & shading (*visual*)
+- Problem: even after item 3, `gel` has 4.5–6.5 ms p99 spikes from
+  `Renderer::update_pic_rows` calling `self.idle()` (~3 ms stall every
+  `REBUILD = 0.1 s` while spraying), `gel_coat.rs` evaluating 3 octaves of
+  3D value noise across `2048×2048` (`TEXEL = 2.0`), and `fte.frag` mode 9
+  performing parallax + 4 neighbor height taps + dual Phong + Fresnel per
+  fragment.
+- Plan:
+  - Replace the synchronous `self.idle()` in `update_pic_rows`
+    (`crates/qrender/src/lib/assets.rs`) with per-frame staging/ring upload.
+  - Add quality tiers for `gel_coat.rs` / `gel_fx.rs` / `fte.frag` mode 9:
+    coarser coat texel size (`TEXEL = 4.0`, `1024×1024` atlas) and longer
+    `REBUILD` cadence (`0.2 s`), tiling noise LUT or smooth edge without
+    3D noise, and a fast gel shader path without parallax + 4-tap gradient
+    fetches.
+- Measure: `gel`, `all-addons`, `ultimate`.
+
+### 19. Powerwasher jet geometry & shading (*visual*)
+- Problem: `src/addons/water_fx.rs` builds 40 ribbon segments + 40 loose
+  drops per jet (200 segments + 200 drops in 5-jet fan mode, plus up to 400
+  splash drops), all shaded with `gel: true` (`fte.frag` mode 9).
+- Plan: reduce `SEGMENTS`/`DROPS` (e.g. 40 → 12–16) and switch washer jets
+  and tiny spray droplets off full 5-tap parallax `gel: true` shading onto a
+  cheaper translucent water batch (or gate full `gel` shading behind High).
+- Measure: `washer`, `all-addons`, `ultimate`.
+
+### 20. Ragdolls & debris simulation quality (*visual*)
+- Problem: `src/debris/` runs 60 Hz Verlet (`ITERS = 6`, `MAX_BONES = 12`)
+  with 2 BSP hull traces per bone per step (plus `Scene` mover traces),
+  shape-matching polar decomposition, and CPU linear-blend skinning + MDL
+  repacking (`pack()`) every awake frame for up to 48–64 ragdolls.
+- Plan: add quality tiers (`Low` / `Medium` / `High`) scaling `MAX_BONES`
+  (e.g. 6–8 vs 12), `ITERS` (3 vs 6), sim rate (30 Hz vs 60 Hz), downward
+  clearance trace skipping, `r_debris_movers`, lower corpse/gib/shard caps
+  with fade-out lifetimes, and frustum-culled CPU skinning (`pack()`).
+- Measure: `debris`, `ultimate`, `ultimate-coop`.
+
+### 21. Blood & impact decal budgets (*visual*)
+- Problem: while item 9 removed idle CPU overhead, max settings still allow
+  up to 2048 blood marks (`r_blood_amount 12`), 2048 impact marks
+  (`r_impact_fx 4`), and 600 s lifetimes, driving heavy overdraw and mesh
+  wound work in sustained horde fights.
+- Plan: expose quality presets (`Low` / `Medium` / `High`) scaling mark
+  caps, lifetimes, droplet/spark counts, and `r_blood_wounds` /
+  `r_blood_gibs` mesh painting, plus frustum culling on decal emission.
+- Measure: `blood`, `impacts`, `ultimate`, `ultimate-coop`.
+
+### 22. Slang screen-shader input scale (*visual*)
+- Problem: `Slang::prepare_shader` (`crates/qrender/src/slang.rs`) allocates
+  `Slang::src` at `scene_w × scene_h`, so `r_renderscale 2` quadruples the
+  input processed by multi-pass `.slangp` CRT presets.
+- Plan: feed `slang` at output resolution (or 1× scale) when
+  `r_renderscale > 1` (at least for `r_shader_scope 0`), or provide a toggle
+  for preset resolution scaling.
+- Measure: `screenshader` + `renderscale200`, `all-enhancements`.
+
+### 23. Goggles post-process glow (*visual*)
+- Problem: `goggles()` in `crates/qrender/shaders/post.frag` executes an
+  8-tap ring glow per output pixel for both night vision and thermal modes
+  (plus `alias_xray` re-draws in thermal).
+- Plan: reduce to 4 taps (or disable glow on a fast/low-fx mode) if post
+  shows up in `goggles-nv` / `goggles-thermal` / `ultimate-coop`.
+- Measure: `goggles-nv`, `goggles-thermal`, `ultimate-coop`.
+
 ## Phase 1: cheap, low-risk CPU wins
 
 ### 1. Look up settings by id, not by name
