@@ -3,14 +3,14 @@
 // lightstyles and dynamic lights (R_BuildLightMap + R_AddDynamicLights).
 layout(local_size_x = 8, local_size_y = 8) in;
 struct Surf {
-    uint sample_ofs;  // 0xffffffff: no light data (fullbright)
+    uint sample_ofs;  // 0xffffffff: this face has no light samples
     uint styles;      // 4 x u8, 255 = none
     uint size;        // w | h << 16 (in samples)
     uint atlas;       // x | y << 16
     vec4 vecs0;
     vec4 vecs1;
     vec4 plane;       // normal, dist
-    vec4 tmins;       // texturemins.xy, layer, pad
+    vec4 tmins;       // texturemins.xy, layer, fullbright (entire BSP unlit)
 };
 struct DLight { vec4 origin_radius; vec4 color_minlight; };
 layout(set = 0, binding = 0) readonly buffer Samples { uint samples[]; };
@@ -38,7 +38,9 @@ void main() {
         for (uint x = gl_LocalInvocationID.x; x < w; x += 8u) {
             vec3 l = vec3(0.0);
             if (s.sample_ofs == 0xffffffffu) {
-                l = vec3(1.0);
+                // R_BuildLightMap (vkQuake): missing samples in a lit map
+                // stay black. Only a BSP with no lighting is fullbright.
+                l = vec3(s.tmins.w);
             } else {
                 uint i = s.sample_ofs + y * w + x;
                 for (uint k = 0u; k < 4u; k++) {

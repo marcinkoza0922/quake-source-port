@@ -17,7 +17,7 @@ fn start() -> Option<(Server, usize)> {
     let mut fs = Fs::new(&d);
     fs.add_game_dir("id1");
     let mut sv = Server::new(fs, Cvars::new(), 1);
-    sv.command("addons_enable 1");
+    qserver::addons::enable_all(&mut sv.core.cvars);
     sv.core.set_addons(true);
     sv.spawn_server("e1m1").ok()?;
     let c = sv.connect_local()?;

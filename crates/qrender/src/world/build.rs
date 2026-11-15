@@ -113,16 +113,18 @@ impl World {
                 w.surfaces.push(s);
                 continue;
             }
-            // CalcSurfaceExtents (double precision as in ironwail)
-            let mut mins = [f64::MAX; 2];
-            let mut maxs = [f64::MIN; 2];
+            // CalcSurfaceExtents (ironwail/vkQuake): evaluate in double,
+            // then round to float before taking bounds. Keeping doubles
+            // here can add a lightmap row/column at a 16-unit boundary.
+            let mut mins = [f32::MAX; 2];
+            let mut maxs = [f32::MIN; 2];
             for v in &verts {
                 for j in 0..2 {
                     let t = &ti.vecs[j];
-                    let val = v[0] as f64 * t[0] as f64
+                    let val = (v[0] as f64 * t[0] as f64
                         + v[1] as f64 * t[1] as f64
                         + v[2] as f64 * t[2] as f64
-                        + t[3] as f64;
+                        + t[3] as f64) as f32;
                     mins[j] = mins[j].min(val);
                     maxs[j] = maxs[j].max(val);
                 }
@@ -183,7 +185,7 @@ impl World {
                         s.texturemins[0] as f32,
                         s.texturemins[1] as f32,
                         p.2 as f32,
-                        0.0,
+                        if has_light { 0.0 } else { 1.0 },
                     ],
                 });
             }

@@ -11,6 +11,7 @@ fn server() -> Option<Server> {
     let mut sv = Server::new(fs, Cvars::new(), 1);
     sv.spawn_server("e1m1").unwrap();
     sv.connect_local().unwrap();
+    crate::addons::enable_all(&mut sv.core.cvars);
     sv.core.set_addons(true);
     Some(sv)
 }

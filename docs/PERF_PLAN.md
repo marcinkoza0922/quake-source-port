@@ -126,9 +126,19 @@ confirm wins windowed (`qprof -window`, or qbench for parity).
   recursive portals or split players share that exact list. CPU lightmap
   requests now use a reusable dense bitset to avoid the accumulated
   sort/dedup while preserving the exact ascending union (results below).
-- Remaining candidates: cull windows by screen size and distance; consider
-  the GPU cull path for portal views as for the main view. Reprofile first,
-  since eliminating repeated CPU construction changes the balance.
+  A compact immutable draw-metadata table now avoids reading the full CPU
+  surface records during destination/brush construction; it lowers render
+  CPU time without a demonstrated frame-rate gain in the full windowed
+  co-op cycle (results below).
+- Destination subintervals identify world drawing as about 78% of
+  destination GPU time in the full fixed-step windowed co-op cycle.
+  Conservative aperture scissors now reduce rasterization while preserving
+  cached geometry, full-size projection, recursion and teleporter UV warp
+  (results below). The fixed recursive-portal benchmark improves clearly;
+  total co-op frame-time changes are small. Remaining candidates: measure
+  clipping-plane fallback frequency and remaining world geometry/shading
+  before choosing tighter aperture bounds or destination GPU surface culling.
+  Keep GPU time, CPU construction/cache reuse and fence wait separate.
 
 ## Phase 3: gameplay-scale and smaller items
 
@@ -174,6 +184,10 @@ confirm wins windowed (`qprof -window`, or qbench for parity).
   rendering interval (items 5/7); qprof reports per-view contributions without
   double-counting aggregate GPU totals. Earlier reports measured only the
   first view and charged later views to `post`.
+- Done: destination GPU subintervals per scene (item 7): setup, world,
+  models, particles and resolve/barriers, plus the enclosing interval's
+  residual. Counts include recursive destination draws; contributions use
+  all profiled GPU frames as the denominator and do not inflate totals.
 - Done: fixed-step windowed co-op baseline (`qprof -window -fixedstep 250`),
   with the simulation schedule independent of frame rate (results below).
   Use this mode for co-op A/B work; keep wall-time play checks separate.
@@ -836,3 +850,312 @@ confirm wins windowed (`qprof -window`, or qbench for parity).
   `addon_hitstop` off in its baseline, inherited by add-on scenarios, so
   the saved settings that previously printed unknown commands cannot change
   the historical workload. The measurements above predate that integration.
+
+
+- 2026-11-14, item 7 compact CPU draw metadata: fresh full-cycle profiles
+  after the lightmap union and lightmap parity fixes still put
+  `build_world_draw` first at 16.03/16.13/16.19% of main-core engine
+  cycles. `mark_leaves` is 6.09/6.17/6.15%, `gpu_world_draw`
+  5.69/5.61/5.54%. These are measured-window self-time shares from
+  three headless 20 s captures after 4 s warm-up, fixed 250 Hz,
+  1280×720 on RTX 3060 Ti, release with line-table symbols. Each main-core
+  event has 121k–125k process samples, with none lost; the sparse small-core
+  events are not used for these shares. Annotated samples concentrate
+  around the surface metadata reads in both grouping and index-copy loops;
+  this suggests testing a smaller working set, rather than proving a
+  hardware-cache cause. These diagnostic captures are not A/B timings.
+  Profiles: `target/qprof/destination-reprofile/`; annotation and compact
+  self reports: `target/perf-destination-profile/`.
+
+  `WorldGpu::draw_surfaces` stores only first index, index count, texture
+  and lightmap in a 16-byte `DrawSurface`, instead of walking the full
+  116-byte `Surface` during CPU draw construction. The table is built after
+  world/external-brush loading and freed with the level; its source fields
+  are immutable afterward. Extra CPU memory is 16 bytes per surface.
+  Texture animation (including alternate/random frames), hidden-surface
+  filtering, index order, buffer-capacity handling, categories, and lightmap
+  union all retain their existing paths. No new persistent GPU resources.
+
+  Fresh windowed A/B, pinned `ultimate-coop` on ad_sepulcher, same
+  GPU/resolution, full 20 simulated seconds after 4 s warm-up, fixed 250 Hz,
+  vsync off and `host_maxfps 10000`, three runs/build, both release builds
+  with line-table symbols. Median selects the run by fps as qprof does:
+
+  | metric | before | after | change |
+  |---|--:|--:|--:|
+  | fps | 62.7 | 62.9 | +0.3% |
+  | frame µs | 15938 | 15892 | −0.3% |
+  | render CPU excluding fence µs | 12687 | 11905 | −6.2% |
+  | fence wait µs | 1738 | 2511 | +44.4% |
+  | GPU µs | 14884 | 14943 | +0.4% |
+  | p99 frame µs | 38551 | 37526 | −2.7% |
+
+  Before fps 63.1/62.7/62.6, after 63.1/62.9/62.7; every run measures
+  exactly 5000 frames and config hashes stay unchanged. Render CPU ranges
+  do not overlap (12614–12760 → 11769–11928 µs), but the saving mostly
+  becomes fence wait. The total-frame change is within run variation:
+  **no demonstrated fps gain** in this workload and no reference-engine
+  parity claim. Reports: `target/qprof/compact-window-{before,after}/`.
+
+  Vanilla AD control (headless, pinned baseline, 8 s after 4 s warm-up,
+  three runs/build): 501.0→501.9 fps, frame 1995.98→1992.40 µs (−0.2%,
+  within noise), render CPU 1725→1708 µs. All three fixed-time combat
+  screenshot pairs have `compare -metric AE = 0`; FTE counters match.
+  Reports: `target/qprof/compact-controls-{before,after}/`.
+
+  Quiet recursive e1m1 portals and four AD split views (teleporter windows,
+  high SSAO, 8x MSAA and 200% scale) both have AE = 0; all four
+  Vulkan-validation runs are clean. Inspected the nested orange portals
+  and player model, the four torch-lit AD views with weapons/HUDs, and
+  the full co-op combat/difference images. Nine live co-op pairs differ
+  by 0–9235 pixels (up to 1.0%); baseline run 0 vs 1 differs by
+  123/98/9408 pixels at 5/10/15 measured seconds. Differences occupy effects
+  regions, and FTE counters match in all pairs. These live variations do
+  not replace the exact quiet-scene checks. Checks, config hashes and
+  comparisons: `target/perf-destination-profile/`.
+  469 tests passed, 2 skipped; clippy clean. No server/physics change.
+
+  Next: profile the remaining scene-building cost after this working-set
+  reduction, especially repeated PVS leaf marking across split views;
+  keep CPU time and GPU fence wait separate when choosing another target.
+
+
+- 2026-11-14, item 7 all-visible leaf reuse: a fresh full-cycle CPU
+  capture after compact draw metadata put `mark_leaves` first at 6.83%
+  of main-core engine cycles, ahead of `build_world_draw` 6.76% and
+  `gpu_world_draw` 6.33% (116k process samples, none lost). With transparent
+  liquids, every camera requests the same complete candidate list, but
+  changing raw view leaves rebuilt it. All-visible queries now share
+  candidate cache key 0; normal PVS queries keep their actual leaf key.
+  Solid/missing-VIS leaves and absent VIS data use the same all-visible
+  key. Liquid-transparency changes still invalidate candidate and portal
+  surface caches. Every view independently rebuilds its frustum-clipped
+  leaf bits; the portal surface cache remains keyed by destination leaf.
+  No extra cache storage or GPU resources are added.
+
+  Fresh pinned `ultimate-coop` windowed A/B on ad_sepulcher, RTX 3060 Ti,
+  1280×720, 20 simulated seconds after 4 s warm-up, fixed 250 Hz,
+  vsync off, `host_maxfps 10000`, three runs/build, release with line-table
+  symbols on both sides. Medians select the run by fps as qprof does:
+
+  | metric | before | after | change |
+  |---|--:|--:|--:|
+  | fps | 59.2 | 59.9 | +1.2% |
+  | frame µs | 16888 | 16681 | −1.2% |
+  | render CPU excluding fence µs | 12876 | 12168 | −5.5% |
+  | fence wait µs | 2385 | 2905 | +21.8% |
+  | GPU µs | 15766 | 15906 | +0.9% |
+  | p99 frame µs | 41389 | 40700 | −1.7% |
+
+  Before fps 60.0/59.2/58.9, after 60.0/59.9/59.4. Every run measures
+  exactly 5000 frames; config hashes are unchanged. Render CPU ranges
+  do not overlap (12648–13047 → 12168–12464 µs). Total-frame changes
+  are within the run spread; no demonstrated fps gain or reference-engine
+  parity claim. This fresh baseline is slower than the preceding session's,
+  so these results must not be compared across sessions as another A/B.
+  Reports: `target/qprof/vis-window-{before,after}/`.
+
+  A separate follow-up headless full-cycle CPU capture no longer lists
+  `mark_leaves` above the 0.1% main-core engine self-time threshold.
+  `build_world_draw`/`gpu_world_draw` lead at 7.59%/7.11% (113k process
+  samples, none lost). Both diagnostic captures use the same fixed-step
+  20 s/4 s workload and measured-window filter; these shares are not a
+  before/after frame-time comparison. Profiles:
+  `target/qprof/vis-reprofile/`, `vis-reprofile-after/`; normalized reports:
+  `target/perf-vis-reuse/{before,after}-self.txt`.
+
+  Vanilla AD control (headless, pinned baseline, 8 s after 4 s warm-up,
+  three runs/build) is 479.7→472.7 fps, frame 2084.78→2115.36 µs (+1.5%),
+  render CPU 1805→1849 µs (+2.5%). These small changes sit within broad
+  run variation (fps ranges 477.9–486.5 / 467.6–479.3); they do not
+  establish a control speedup or regression. All three fixed-time combat
+  screenshot pairs have AE = 0, and frame/FTE counters match in every
+  control and co-op pair. Reports: `target/qprof/vis-controls-{before,after}/`.
+
+  Quiet recursive e1m1 portals and four AD split views with transparent
+  water both have AE = 0, as does a split-view run switching to opaque
+  water during play (8x MSAA, 200% scale, high SSAO). The split checks
+  explicitly enable enhanced water and translucency so `r_wateralpha`
+  actually selects the tested modes. All six final Vulkan-validation runs
+  are clean. Inspected the nested orange portals/player, the torch-lit
+  split views with weapons/HUDs in both modes, and the full co-op combat
+  and difference images. Nine live co-op pairs differ by 0–10022 pixels
+  (up to 1.1%); baseline run 0 vs 1 differs by 178/61/9955 pixels at
+  5/10/15 measured seconds. Differences occupy effects regions; these
+  live variations do not replace the exact quiet-scene checks.
+  Three new unit tests cover shared all-visible keys, restoring normal
+  PVS after transparency toggles, missing-VIS/solid-leaf fallbacks,
+  per-camera frustum results and portal surface deduplication.
+  472 tests passed, 2 skipped; clippy clean. No server/physics change.
+  Checks, config hashes and comparisons: `target/perf-vis-reuse/`.
+
+  Next: investigate destination rendering, the largest aggregate GPU stage
+  at 4771 µs in the median windowed run, before selecting another change.
+  Retain the full-cycle cameras/workload and separate GPU time, render CPU
+  and fence wait; smaller CPU costs alone have not established an fps gain.
+
+- 2026-11-14, item 7 destination GPU breakdown (instrumentation): timestamps
+  now separate setup, world drawing, models, particles and resolve/barriers
+  inside each destination view. Queries are indexed by scene and destination,
+  independently of reverse recursive draw order; only written prefixes are
+  collected after the frame fence. `gpu_destinations_us` and qprof's new table
+  sum these subintervals per scene, normalized by all profiled GPU frames.
+  The count named `frames` in this diagnostic array counts destination draws,
+  recursion included. These values are not added to aggregate GPU totals.
+  The table also reports the enclosing stage minus its subintervals as gaps.
+  Intervals include GPU stalls and boundary/timestamp overhead; setup includes
+  clears and resolve includes rendering end, MSAA resolve and barriers.
+
+  Fresh pinned `ultimate-coop` windowed A/B on ad_sepulcher, RTX 3060 Ti,
+  1280×720, 20 simulated seconds after 4 s warm-up, fixed 250 Hz,
+  vsync off, `host_maxfps 10000`, three runs/build, release with line-table
+  symbols on both sides. Medians select the run by fps as qprof does:
+
+  | metric | before | instrumented |
+  |---|--:|--:|
+  | fps | 60.9 | 60.4 |
+  | frame µs | 16428 | 16556 |
+  | render CPU excluding fence µs | 11957 | 11647 |
+  | fence wait µs | 2903 | 3343 |
+  | GPU µs | 15783 | 15935 |
+  | destinations GPU µs | 4758 | 4745 |
+  | p99 frame µs | 40995 | 39928 |
+
+  Before fps 61.7/60.7/60.9, instrumented 60.2/60.4/60.7; all six runs
+  measure exactly 5000 frames with identical FTE counters. This change adds
+  diagnostics, with frame time +0.8% and GPU time +1.0% in these medians;
+  **no optimisation or speedup claim**. CPU/fence differences must not be
+  interpreted as a CPU improvement. Config hashes are unchanged. Build/warm-up
+  and interrupted batches are excluded. Reports:
+  `target/qprof/destination-stages-window-{before,after}/`.
+
+  Instrumented median destination contribution across all four scene views:
+
+  | subinterval | µs per GPU frame | share |
+  |---|--:|--:|
+  | setup | 26 | 0.5% |
+  | world | 3727 | 78.5% |
+  | models | 247 | 5.2% |
+  | particles | 662 | 13.9% |
+  | resolve/barriers | 83 | 1.8% |
+
+  All three runs put world drawing at 77.8–78.5% of destination GPU time.
+  Scene destination draw counts are 2514/2136/2557/2215 across 4998 profiled
+  GPU frames; their subintervals reconcile with the enclosing stage within
+  report rounding (aggregate residual 0.02–0.05 µs/frame). World submission
+  currently uses the destination PVS list without the main view's GPU
+  frustum/facing rejection. With transparent liquids that list is all-visible.
+  Next: test conservative destination visibility rejection, comparing saved
+  GPU work against extra CPU construction and lost draw-range cache sharing.
+  Aperture/scissor bounds are another candidate, but must retain full-size
+  projection, recursive sampling, teleporter UV warp and filtering margins;
+  neither optimisation is implemented here.
+
+  Vanilla AD control (headless, pinned baseline, 8 s after 4 s warm-up,
+  three runs/build): 487.0→480.0 fps, frame 2053→2083 µs (+1.5%), render
+  CPU 1705→1801 µs, GPU 1943→1935 µs. FPS ranges 477.6–493.2 / 478.6–481.8
+  overlap. All runs measure 2001 frames, FTE counters match and all three
+  combat screenshot pairs have `compare -metric AE = 0`. Reports:
+  `target/qprof/destination-stages-controls-{before,after}/`.
+
+  Quiet recursive e1m1 portals, four AD split views with transparent water,
+  and the split scene switching to opaque water also have AE = 0 (8x MSAA,
+  200% scale, high SSAO). All six Vulkan-validation runs are clean. Inspected
+  nested orange portals/player, four torch-lit views with weapons/HUDs, full
+  co-op night vision and the live combat difference image. Nine live co-op
+  pairs differ by 66–10109 pixels (up to 1.1%), concentrated in effects;
+  baseline run 0 vs 1 differs by 186/208/7819 pixels at 5/10/15 measured
+  seconds. These live differences do not replace the exact controlled checks.
+  Tests cover reverse-order query intervals, changing/absent scene counts,
+  slot bounds, old/new profile parsing and avoiding double-counted GPU work.
+  472 tests passed, 2 skipped; clippy clean. No shader or server/physics change.
+  Checks, config hashes and comparisons: `target/perf-destination-stages/`.
+
+- 2026-11-14, item 7 aperture scissors: destination rasterization is bounded
+  by the source aperture projected with the scene's existing view matrix.
+  Bounds expand by the sheet shader's 0.25-unit acceptance margin, the
+  teleporter warp amplitude (0.0015 of the full texture dimensions, including
+  split views), and two pixels for sampling/rounding. Near-plane crossings or
+  invalid projections use the full view; off-screen bounds clamp to the scene
+  region. Nested portals already supply source-space bounds. Target sizes,
+  projection, complete scene clears, shared geometry ranges, lightmap unions,
+  draw order and shader sampling remain unchanged. No additional GPU resources
+  or settings are introduced. This is specific to this port's aperture
+  sampling, rather than a reference-engine surface-culling port.
+
+  Fixed recursive e1m1 portal benchmark, RTX 3060 Ti, 1280×720 headless,
+  pinned qprof vanilla plus 8x MSAA, 200% render scale, high SSAO and portal
+  depth 4, fixed 250 Hz, 6 simulated seconds measured after 2 s warm-up,
+  three runs/build. Facing corridor portals are placed at
+  `480 80 48 / normal 0 1 0 / up 0 0 1` and
+  `480 330 48 / normal 0 -1 0 / up 0 0 1`, with camera
+  `setpos 470 160 40 0 80 0`, god/notarget, no combat or rotation.
+  Medians select the run by fps:
+
+  | metric | before | after | change |
+  |---|--:|--:|--:|
+  | fps | 194.5 | 254.8 | +31.0% |
+  | frame µs | 5142 | 3925 | −23.7% |
+  | GPU µs | 5066 | 3847 | −24.1% |
+  | destinations GPU µs | 1795 | 551 | −69.3% |
+  | destination world GPU µs | 1302 | 162 | −87.6% |
+
+  Before fps 194.8/194.3/194.5, after 254.9/254.8/254.4; every run measures
+  1501 frames. All three fixed-time screenshot pairs have AE = 0. These are
+  our engine's headless A/B results, including readback, not windowed or
+  reference-engine parity numbers. Reports and commands:
+  `target/perf-destination-scissor/portal-{bench,comparison}*`.
+
+  Fresh full-cycle `ultimate-coop` windowed A/B on ad_sepulcher, same GPU
+  and output resolution, all enhancements/add-ons, 20 simulated seconds after
+  4 s warm-up, fixed 250 Hz, vsync off, `host_maxfps 10000`, three runs/build,
+  release with line-table symbols on both sides. Windowed runs use isolated
+  copies of the user's configs; source config hashes remain unchanged.
+
+  | metric | before | after | change |
+  |---|--:|--:|--:|
+  | fps | 61.5 | 62.7 | +2.0% |
+  | frame µs | 16251 | 15940 | −1.9% |
+  | render CPU excluding fence µs | 11201 | 11531 | +2.9% |
+  | fence wait µs | 3518 | 2826 | −19.7% |
+  | GPU µs | 15710 | 15273 | −2.8% |
+  | destinations GPU µs | 4784 | 4299 | −10.1% |
+  | destination world GPU µs | 3734 | 3350 | −10.3% |
+  | p99 frame µs | 37779 | 39815 | +5.4% |
+
+  Before fps 62.6/61.5/61.2, after 62.9/62.7/62.5. FPS ranges overlap;
+  the overall co-op change is small. Destination GPU ranges do not overlap
+  (4711–4784 → 4280–4319 µs), establishing reduced destination GPU cost in
+  this workload. There is no CPU saving or p99 improvement claim: render CPU
+  rises in the selected medians, and p99 ranges overlap (37779–39909 /
+  39285–39815 µs). All six runs measure exactly 5000 frames with identical
+  FTE counters and destination counts (2514/2136/2557/2215 draws across
+  4998 profiled GPU frames). Reports:
+  `target/qprof/destination-scissor-window-{before,after}/`.
+
+  Vanilla AD headless control (8 s after 4 s warm-up, fixed 250 Hz,
+  three runs/build): 483.3→481.8 fps, frame 2069→2075 µs (+0.3%), GPU
+  1940→1939 µs; fps ranges 483.1–489.8 / 477.2–483.7 overlap. All runs
+  measure 2001 frames, FTE counters match and all three captures have AE = 0.
+  Reports: `target/qprof/destination-scissor-controls-{before,after}/`.
+
+  Nine quiet/edge scene pairs have `compare -metric AE = 0`: recursive
+  e1m1 portals; AD transparent split views and transparency toggling;
+  isolated AD teleporters at 4/128/2048 units (including sample shading and
+  warped sampling); nearby gun portals, a wide pitched/rolled view at 73%
+  render scale and a portrait view at 25% scale with no MSAA. All 18
+  Vulkan-validation runs are clean. Inspected the nested orange portal/player,
+  warped teleporter view, wide portal scene, benchmark capture and co-op
+  difference image. Nine live co-op pairs differ by 66–9109 pixels (under 1%),
+  concentrated in effects; baseline run 0 vs 1 differs by 159/0/9256 pixels
+  at 5/10/15 measured seconds. Live variation does not replace exact captures.
+  Four new tests cover texture-sized split-view warp margins, clipping/invalid
+  fallbacks, clamped empty scissors and projected samples in transformed
+  nested apertures across varied viewports and camera angles.
+  476 tests passed, 2 skipped; clippy clean. No shader or server/physics change.
+  Checks and comparisons: `target/perf-destination-scissor/`.
+
+  Next: measure how often aperture bounds fall back at the near plane and
+  how much remaining world cost comes from geometry outside the destination
+  frustum. Use those findings to choose tighter aperture clipping or GPU
+  surface rejection; avoid losing draw-range sharing for a small GPU saving.

@@ -3,6 +3,10 @@
 
 use qformats::bsp::{Bsp, TEX_SPECIAL, TextureKind};
 mod build;
+#[cfg(test)]
+mod build_tests;
+#[cfg(test)]
+mod vis_tests;
 mod query;
 mod cull;
 mod light;
@@ -34,6 +38,7 @@ pub struct LmSurf {
     pub vecs0: [f32; 4],
     pub vecs1: [f32; 4],
     pub plane: [f32; 4],
+    /// Texture minima, atlas layer, fullbright fallback for an unlit BSP.
     pub tmins: [f32; 4],
 }
 
@@ -91,7 +96,8 @@ pub struct World {
     marksurfaces: Vec<u32>,
     visdata: Vec<u8>,
     numleafs: usize,
-    /// R_MarkLeaves state: the PVS leaves of `vis_leaf` that have surfaces.
+    /// R_MarkLeaves state: candidate leaves with surfaces; `vis_leaf` is
+    /// the PVS leaf key, 0 for any all-visible query, or MAX before setup.
     vis_leaves: Vec<VisLeaf>,
     vis_leaf: usize,
     /// `portal_surfaces` results per eye leaf (most recent last), and the

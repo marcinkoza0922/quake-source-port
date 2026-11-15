@@ -35,10 +35,10 @@ pub const CVARS: &[(&str, &str, u32)] = &[
     ("addons_enable", "0", CVAR_ARCHIVE),
     // read-only mirror of `Core::addons_on` for the menu
     ("addons_active", "0", CVAR_ROM),
-    ("addon_projectile_shotguns", "1", CVAR_ARCHIVE),
+    ("addon_projectile_shotguns", "0", CVAR_ARCHIVE),
     ("addon_shotgun_speed", "10000", CVAR_ARCHIVE),
-    ("addon_dodge", "1", CVAR_ARCHIVE),
-    ("addon_bullet_time", "1", CVAR_ARCHIVE),
+    ("addon_dodge", "0", CVAR_ARCHIVE),
+    ("addon_bullet_time", "0", CVAR_ARCHIVE),
     ("addon_bullet_time_toggle", "0", CVAR_ARCHIVE),
     ("addon_bullet_time_meter", "1", CVAR_ARCHIVE),
     ("addon_bullet_time_duration", "5", CVAR_ARCHIVE),
@@ -57,8 +57,8 @@ pub const CVARS: &[(&str, &str, u32)] = &[
     ("addon_hitstop_min_damage", "10", CVAR_ARCHIVE),
     ("addon_hitstop_tough", "100", CVAR_ARCHIVE),
     ("addon_hitstop_shake", "0", CVAR_ARCHIVE),
-    ("addon_portalgun", "1", CVAR_ARCHIVE),
-    ("addon_sticky", "1", CVAR_ARCHIVE),
+    ("addon_portalgun", "0", CVAR_ARCHIVE),
+    ("addon_sticky", "0", CVAR_ARCHIVE),
     ("addon_sticky_damage", "120", CVAR_ARCHIVE),
     // Weapon slot numbers; 10 is the slot labelled 0.
     ("addon_portalgun_slot", "9", CVAR_ARCHIVE),
@@ -74,26 +74,34 @@ pub const CVARS: &[(&str, &str, u32)] = &[
     ("addon_portal_dist", "4096", CVAR_ARCHIVE),
     ("addon_portal_depth", "3", CVAR_ARCHIVE),
     // boomerang: on/off, stun seconds, flight speed (units/s)
-    ("addon_boomerang", "1", CVAR_ARCHIVE),
+    ("addon_boomerang", "0", CVAR_ARCHIVE),
     ("addon_boomerang_stun", "4", CVAR_ARCHIVE),
     ("addon_boomerang_speed", "700", CVAR_ARCHIVE),
-    ("addon_railgun", "1", CVAR_ARCHIVE),
+    ("addon_railgun", "0", CVAR_ARCHIVE),
     // railgun damage per entity pierced (Quake III: 100)
     ("addon_rail_damage", "100", CVAR_ARCHIVE),
     // trail colour: 0 blue, 1 green, 2 red, 3 yellow, 4 purple, 5 white
     ("addon_rail_color", "0", CVAR_ARCHIVE),
     // hookshot: range and which targets latch
-    ("addon_hookshot", "1", CVAR_ARCHIVE),
+    ("addon_hookshot", "0", CVAR_ARCHIVE),
     ("addon_hook_range", "1024", CVAR_ARCHIVE),
     ("addon_hook_wood", "1", CVAR_ARCHIVE),
     ("addon_hook_metal", "1", CVAR_ARCHIVE),
     ("addon_hook_stone", "1", CVAR_ARCHIVE),
     ("addon_hook_enemies", "1", CVAR_ARCHIVE),
-    ("addon_gel", "1", CVAR_ARCHIVE),
+    ("addon_gel", "0", CVAR_ARCHIVE),
     // powerwasher: on/off and push strength multiplier
-    ("addon_washer", "1", CVAR_ARCHIVE),
+    ("addon_washer", "0", CVAR_ARCHIVE),
     ("addon_washer_push", "1", CVAR_ARCHIVE),
 ];
+
+/// Switches every add-on on (they all default to off); for tests and tools.
+pub fn enable_all(cvars: &mut qcore::cvar::Cvars) {
+    cvars.set("addons_enable", "1");
+    for name in Toy::ALL.iter().map(|t| t.cvar()).chain(["addon_projectile_shotguns", "addon_dodge", "addon_bullet_time"]) {
+        cvars.set(name, "1");
+    }
+}
 
 /// Usercmd button bits (bit 0 attack and bit 1 jump are QC's).
 pub const BUTTON_TOY_FIRE: u8 = 1 << 2;

@@ -458,8 +458,7 @@ fn a_game_without_addons_cannot_gain_them_but_an_addon_game_can_adjust() {
     let mut cv = addon_cvars();
     let mut menu = Menu::new();
     menu.open(Screen::Main);
-    menu.main_cursor = 6;
-    menu.key(K_ENTER, &mut cv, true);
+    menu.open(Screen::OptionsPage(Page::Addons));
     assert_eq!(menu.screen, Screen::OptionsPage(Page::Addons));
     // running game started without add-ons: the toggle is fixed
     menu.opt_cursor = 0;

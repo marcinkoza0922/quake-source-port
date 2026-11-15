@@ -111,7 +111,7 @@ impl Menu {
         } else if self.game_running {
             "Changes are saved with this game (.qsa); these saves require this source port."
         } else {
-            "Add-on saves (.qsa) require this source port. Enable Add-ons beside New Game."
+            "Add-on saves (.qsa) require this source port."
         };
         c.text_center(320.0, 327.0, note, 8.0, MUTED);
         if self.pad_ui {

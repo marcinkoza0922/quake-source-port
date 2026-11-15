@@ -367,6 +367,7 @@ impl Host {
         }
         if let Some(name) = self.screenshot.take() {
             self.write_screenshot(&name);
+            self.clean_shot = false;
         }
         if let Some(p) = &mut self.prof {
             p.mark(5);

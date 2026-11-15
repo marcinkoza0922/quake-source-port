@@ -35,7 +35,7 @@ impl Menu {
                 let p = pic("gfx/mainmenu.lmp");
                 c.pic(72.0, 32.0, p);
                 // extra entries under the classic graphic
-                for (k, label) in ["Map Packs", "Add-ons"].into_iter().enumerate() {
+                for (k, label) in ["Map Packs"].into_iter().enumerate() {
                     let (y, w) = (32.0 + (5 + k) as f32 * 20.0 + 2.0, 112.0);
                     c.fill(72.0, y, w, 16.0, [0.0, 0.0, 0.0, 0.55]);
                     c.frame(72.0, y, w, 16.0, BORDER);
@@ -244,14 +244,10 @@ impl Menu {
                 title.push('…');
             }
             c.text(lx, y + 5.0, &title, 11.0, FG);
-            c.text(lx, y + 20.0, &sv.timestamp, small, MUTED);
-            if let Some(toys) = &sv.addons {
+            let tw = c.text(lx, y + 20.0, &sv.timestamp, small, MUTED);
+            if sv.addons.is_some() {
                 // add-on saves are .qsa files that other ports cannot load
-                let names: Vec<&str> = toys.iter().map(|t| t.name()).collect();
-                let tag = if names.is_empty() { "ADD-ONS".to_string() } else { format!("ADD-ONS: {}", names.join(", ")) };
-                let w = c.text_w(&tag, small) + 8.0;
-                c.round_box(rx - w, y + 18.0, w, 12.0, 3.0, [0.35, 0.22, 0.05, 0.95], Some([0.95, 0.66, 0.26, 1.0]));
-                c.text(rx - w + 4.0, y + 20.0, &tag, small, GOLD_FG);
+                c.text(lx + tw + 12.0, y + 20.0, "Add-ons enabled", small, GOLD_FG);
             }
             c.text(lx, y + 32.0, &format!("Health {}   Armor {}", sv.health, sv.armor), small, FG);
             let stats = format!("Kills {}/{}   Secrets {}/{}", sv.kills.0, sv.kills.1, sv.secrets.0, sv.secrets.1);

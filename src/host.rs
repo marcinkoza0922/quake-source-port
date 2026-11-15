@@ -22,6 +22,8 @@ use crate::menu::{Action, Menu, Screen};
 use crate::platform::HostEvent;
 use crate::view::{ViewCvars, ViewState};
 mod commands;
+mod bugreport;
+mod global_cfg;
 use commands::*;
 mod net;
 mod demo;
@@ -143,6 +145,8 @@ pub struct Host {
     menu_touch: Option<touch::MenuTouch>,
     last_cmd: UserCmd,
     screenshot: Option<String>,
+    /// The pending screenshot is drawn without the console (bug reports).
+    clean_shot: bool,
     /// Frame profiler while `prof_start` is recording (tools/qprof).
     prof: Option<prof::Profiler>,
     delayed: Vec<(f64, String)>,
@@ -203,6 +207,7 @@ impl Host {
         for &(n, d, f) in HOST_CVARS.iter().chain(COMPAT_CVARS).chain(goggles::CVARS) {
             cvars.register(n, d, f);
         }
+        global_cfg::load(&mut cvars);
         let input = Input::new(&mut cvars);
         // everything the options menu edits persists in config.cfg
         for n in crate::menu::option_cvars() {
@@ -270,6 +275,7 @@ impl Host {
             menu_touch: None,
             last_cmd: UserCmd::default(),
             screenshot: None,
+            clean_shot: false,
             prof: None,
             delayed: Vec::new(),
             headless: false,
@@ -445,13 +451,7 @@ fn cmd_fog(h: &mut Host, a: &Args) {
         2 | 3 => (n(1), f.color),
         4 => (f.density, [n(1), n(2), n(3)]),
         5 | 6 => (n(1), [n(2), n(3), n(4)]),
-        _ => {
-            h.print(&format!(
-                "usage:\n   fog <density>\n   fog <red> <green> <blue>\n   fog <density> <red> <green> <blue>\ncurrent values:\n   \"density\" is \"{}\"\n   \"red\"     is \"{}\"\n   \"green\"   is \"{}\"\n   \"blue\"    is \"{}\"\n",
-                f.density, f.color[0], f.color[1], f.color[2]
-            ));
-            return;
-        }
+        _ => return h.print(&format!("usage:\n   fog <density>\n   fog <red> <green> <blue>\n   fog <density> <red> <green> <blue>\ncurrent values:\n   \"density\" is \"{}\"\n   \"red\"     is \"{}\"\n   \"green\"   is \"{}\"\n   \"blue\"    is \"{}\"\n", f.density, f.color[0], f.color[1], f.color[2])),
     };
     h.cl.fog = qclient::Fog { density: d.max(0.0), color: [r, g, b].map(|c| c.clamp(0.0, 1.0)), time: 0.0 };
 }

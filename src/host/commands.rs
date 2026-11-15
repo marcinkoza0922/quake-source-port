@@ -311,7 +311,8 @@ pub(super) fn register_commands(c: &mut Commands<Host>) {
     c.add("prof_stop", |h, a| {
         let Some(p) = h.prof.take() else { return h.print("prof_stop: not recording\n") };
         let views = h.r.gpu_view_times();
-        let json = p.report(h.r.take_gpu_times(), &views);
+        let destinations = h.r.gpu_destination_times();
+        let json = p.report(h.r.take_gpu_times(), &views, &destinations);
         let path = a.argv(1);
         if path.is_empty() {
             h.print(&json);
@@ -483,4 +484,12 @@ pub(super) fn register_commands(c: &mut Commands<Host>) {
     c.add("version", |h, _| h.print("quake-source-port 0.1.0\n"));
     super::death::register(c);
     super::mapswitch::register(c);
+    c.add("bugreport", |h, a| {
+        let text = (1..a.argc()).map(|i| a.argv(i)).collect::<Vec<_>>().join(" ");
+        if text.trim().is_empty() {
+            h.print("bugreport \"description\" : save a report (json, save, config, screenshot) for developers\n");
+            return;
+        }
+        h.bugreport(&text);
+    });
 }

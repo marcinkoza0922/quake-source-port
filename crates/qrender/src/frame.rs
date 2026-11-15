@@ -4,6 +4,7 @@ use crate::convert::group_index;
 use crate::world::{NO_LM, box_in_frustum, dot};
 use crate::*;
 mod portals;
+mod portal_scissor;
 use portals::gun_portal_quad;
 /// fte.frag mode of add-on gel batches ([`crate::FteBatch::gel`]).
 const GEL_MODE: f32 = 9.0;
@@ -190,7 +191,7 @@ impl Renderer {
             setup_view(&v, scene_w, scene_h)
         });
         let mut portal_draws = if fr.settings.teleport_windows || !fr.gun_portals.is_empty() {
-            self.prepare_portals(view.as_ref(), fr.gun_portals, &fr.settings, &mut dynw, time, alphas, &mut lm_vis, &mut portal_worlds)
+            self.prepare_portals(view.as_ref(), [scene_w, scene_h], fr.gun_portals, &fr.settings, &mut dynw, time, alphas, &mut lm_vis, &mut portal_worlds)
         } else {
             Vec::new()
         };
@@ -835,6 +836,8 @@ impl Renderer {
         let ts_stride = self.gpu_times.as_ref().map_or(0, |t| t.stride());
         if let Some(t) = &mut self.gpu_times {
             t.written[fi] = passes.len();
+            t.destination_counts[fi].clear();
+            t.destination_counts[fi].extend(passes.iter().map(|p| p.portal_draws.len()));
         }
         let ts_base = fi as u32 * ts_stride;
         // SAFETY: recording into `cmd`; query index within this frame's pool region.
@@ -1121,7 +1124,7 @@ impl Renderer {
                 gpu::barrier(&dev, cmd, t.depth.image, drng, old, new);
             };
             ts(3);
-            self.draw_portals(cmd, portal_draws, particles, fte.as_ref().map(|f| (f.0, f.1)), world_draws, alias_draws, fi, [scene_w, scene_h]);
+            self.draw_portals(cmd, portal_draws, particles, fte.as_ref().map(|f| (f.0, f.1)), world_draws, alias_draws, fi, [scene_w, scene_h], pi);
             ts(4);
             if self.isolated_portal.is_some() && !multi {
                 // Destination draws above retain their scenery and entities. Only

@@ -61,13 +61,18 @@ impl World {
     }
 
     /// R_MarkLeaves: list the PVS leaves of `leaf` that have surfaces.
-    /// Rebuilt only when the view leaf changes.
+    /// All-visible queries share key 0, since their candidate list does not
+    /// depend on the camera leaf. Frustum clipping still runs for each view.
     pub(super) fn mark_leaves(&mut self, leaf: usize) {
-        self.vis_leaf = leaf;
-        self.vis_leaves.clear();
         let novis = self.transparent_liquids || leaf == 0
             || self.leafs.get(leaf).is_none_or(|l| l.visofs < 0)
             || self.visdata.is_empty();
+        let key = if novis { 0 } else { leaf };
+        if key == self.vis_leaf {
+            return;
+        }
+        self.vis_leaf = key;
+        self.vis_leaves.clear();
         let pvs = if novis {
             Vec::new()
         } else {

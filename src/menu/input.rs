@@ -202,10 +202,6 @@ impl Menu {
                             out.push(Action::Command("_mods\n".into()));
                             self.screen = Screen::Mods;
                         }
-                        6 => {
-                            self.opt_cursor = 0;
-                            self.screen = Screen::OptionsPage(Page::Addons);
-                        }
                         _ => {}
                     }
                 }
@@ -423,6 +419,10 @@ impl Menu {
                 if dir != 0 && self.adjust(item, dir, enter, cv, &mut out) {
                     out.push(Action::Sound("misc/menu3.wav"));
                 }
+            }
+            Screen::ModMaps if back && self.prev == Screen::SinglePlayer => {
+                // Level Select opened from New Game: back returns there
+                self.screen = Screen::SinglePlayer;
             }
             Screen::Mods | Screen::ModMaps => {
                 let page = self.mods_page();

@@ -23,6 +23,7 @@ fn start(cvars: &[&str]) -> Option<(Server, usize)> {
     for c in cvars {
         sv.command(c);
     }
+    qserver::addons::enable_all(&mut sv.core.cvars);
     sv.core.set_addons(true);
     sv.spawn_server("e1m1").ok()?;
     let c = sv.connect_local()?;

@@ -117,9 +117,7 @@ impl World {
     /// leaf index.
     pub fn leaf_bits(&mut self, eye: [f32; 3], frustum: &[[f32; 4]; 4], out: &mut Vec<u32>) {
         let leaf = self.point_leaf(eye);
-        if leaf != self.vis_leaf {
-            self.mark_leaves(leaf);
-        }
+        self.mark_leaves(leaf);
         out.clear();
         out.resize(self.leafs.len().div_ceil(32), 0);
         let planes = Planes::new(frustum);
@@ -146,9 +144,7 @@ impl World {
             self.portal_cache.push(hit.clone());
             return hit.1;
         }
-        if leaf != self.vis_leaf {
-            self.mark_leaves(leaf);
-        }
+        self.mark_leaves(leaf);
         self.surf_stamp.resize(self.surfaces.len(), 0);
         self.stamp = self.stamp.wrapping_add(1);
         if self.stamp == 0 {
