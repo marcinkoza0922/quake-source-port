@@ -67,8 +67,19 @@ impl Host {
     /// Fills the mod menu's list (`_mods`).
     pub(super) fn scan_mods(&mut self) {
         let mods = qui::mods::scan(&self.fs_snapshot.0);
+        let times: Vec<u64> = mods
+            .iter()
+            .map(|m| {
+                std::fs::metadata(crate::user_dir(&m.dir).join(qui::stats::FILE_NAME))
+                    .and_then(|md| md.modified())
+                    .ok()
+                    .and_then(|t| t.duration_since(std::time::UNIX_EPOCH).ok())
+                    .map_or(0, |d| d.as_secs())
+            })
+            .collect();
         let cur = self.game_name().to_string();
         self.menu.set_mods(mods, &cur);
+        self.menu.mods.set_last_played(times);
     }
 
     /// Fills the mod menu's map page for one mod (`_modmaps <dir>`).

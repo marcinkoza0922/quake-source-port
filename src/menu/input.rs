@@ -113,6 +113,11 @@ impl Menu {
                 return out;
             }
             if let Screen::Mods | Screen::ModMaps = self.screen
+                && self.mods.click(self.mods_page(), pos, &mut out)
+            {
+                return out;
+            }
+            if let Screen::Mods | Screen::ModMaps = self.screen
                 && let Some((x, top, h, ty, th)) = self.mods.scrollbar(self.mods_page())
                 && (x - 4.0..x + 7.0).contains(&pos.0)
                 && (top..top + h).contains(&pos.1)
