@@ -59,14 +59,14 @@ pub fn carry(a: &Portal, b: &Portal, v: Vec3) -> Vec3 {
 /// entities giving no movement input: leaving a floor portal they lose any
 /// sideways drift (they never touch ground to feel friction), so between
 /// two floor portals they bob straight up and down until they move.
-pub(crate) fn cross<D: Edicts + ?Sized>(st: &mut Portals, w: &mut World, ents: &mut D, idle: &[Ent]) {
+pub(crate) fn cross<D: Edicts + ?Sized>(st: &mut Portals, w: &mut World, ents: &mut D, idle: &[Ent], crossed: &[Ent]) {
     if st.snapshot.is_empty() {
         return;
     }
     let pairs: Vec<_> = st.pairs.iter().enumerate().filter_map(|(o,p)| Some((o,[p[0]?, p[1]?]))).collect();
     let mut effects = Vec::new();
     for &(e, _, vel) in &st.snapshot {
-        if ents.is_free(e) || !movable(ents, e) {
+        if crossed.contains(&e) || ents.is_free(e) || !movable(ents, e) {
             continue;
         }
         let (mins, maxs) = (ents.v(e, V::Mins), ents.v(e, V::Maxs));
@@ -145,6 +145,127 @@ fn turn<D: Edicts + ?Sized>(ents: &mut D, e: Ent, a: &Portal, b: &Portal) {
     }
 }
 
+/// Result of a line segment entering a linked portal.
+pub(crate) struct SegmentHit {
+    pub a: Portal,
+    pub b: Portal,
+    pub t: f32,
+    pub exit_pt: Vec3,
+    pub rem: Vec3,
+}
+
+/// Shared plane + oval intersection test for a swept point or box.
+fn find_portal_hit(
+    linked: &[(Portal, Portal)],
+    p0: Vec3,
+    delta: Vec3,
+    tr: &qworld::Trace,
+    box_extents: Option<(Vec3, Vec3)>,
+) -> Option<(f32, Portal, Portal, f32, f32)> {
+    let len = delta.length();
+    if linked.is_empty() || len < 1e-4 {
+        return None;
+    }
+    let mut best: Option<(f32, Portal, Portal, f32, f32)> = None;
+    for &(a, b) in linked {
+        let denom = delta.dot(a.normal);
+        if denom >= -1e-4 {
+            continue;
+        }
+        let ext_a = box_extents.map_or(0.0, |(mins, maxs)| extent(mins, maxs, a.normal));
+        let d0 = (p0 - a.origin).dot(a.normal) - ext_a;
+        if d0 < -0.5 {
+            continue;
+        }
+        let t_raw = d0 / -denom;
+        if t_raw < -0.01 {
+            continue;
+        }
+        let blocked = match tr.ent {
+            Some(0) => t_raw > tr.fraction + 1.0 / len,
+            Some(_) => t_raw >= tr.fraction,
+            None => t_raw > 1.0 + 0.5 / len,
+        };
+        if blocked {
+            continue;
+        }
+        let t = t_raw.clamp(0.0, 1.0);
+        let rel = p0 + delta * t - a.origin;
+        let r = rel.dot(a.right);
+        let u = rel.dot(a.up);
+        if (r / HALF_W).powi(2) + (u / HALF_H).powi(2) > 1.0 {
+            continue;
+        }
+        if best.is_none_or(|(bt, ..)| t < bt) {
+            best = Some((t, a, b, r, u));
+        }
+    }
+    best
+}
+
+/// Check if a point segment `start -> end` (with its world trace `tr`) enters
+/// any linked portal face before hitting a closer entity.
+pub(crate) fn intersect_segment(linked: &[(Portal, Portal)], start: Vec3, end: Vec3, tr: &qworld::Trace, exit_offset: f32) -> Option<SegmentHit> {
+    let delta = end - start;
+    let (t, a, b, r, u) = find_portal_hit(linked, start, delta, tr, None)?;
+    let exit_pt = b.at(-r, u) + b.normal * exit_offset;
+    let rem = carry(&a, &b, delta * (1.0 - t).max(0.0));
+    Some(SegmentHit { a, b, t, exit_pt, rem })
+}
+
+/// Teleport a toss/fly/bounce entity (e.g. rocket, nail, grenade, shotgun
+/// pellet) through a portal during `physics_toss` before it impacts the wall.
+#[allow(clippy::too_many_arguments)]
+pub(crate) fn try_cross_entity<D: Edicts + ?Sized>(
+    linked: &[(Portal, Portal)],
+    crossed: &mut Vec<Ent>,
+    w: &mut World,
+    ents: &mut D,
+    e: Ent,
+    org: Vec3,
+    mv: Vec3,
+    tr: &qworld::Trace,
+) -> Option<Vec3> {
+    if linked.is_empty() {
+        return None;
+    }
+    let (mins, maxs) = (ents.v(e, V::Mins), ents.v(e, V::Maxs));
+    let has_box = mins != Vec3::ZERO || maxs != Vec3::ZERO;
+    let mid = (mins + maxs) * 0.5;
+    let (t, a, b, r, u) = find_portal_hit(linked, org + mid, mv, tr, has_box.then_some((mins, maxs)))?;
+    let ext_b = if has_box { extent(mins, maxs, b.normal) } else { 0.0 };
+    let mut placed = false;
+    for (er, eu) in [(-r, u), (0.0, 0.0)] {
+        let c = b.at(er.clamp(-HALF_W, HALF_W), eu.clamp(-HALF_H, HALF_H)) + b.normal * (ext_b + 1.0);
+        ents.set_v(e, V::Origin, c - mid);
+        let ok = if has_box {
+            w.test_entity_position(ents, e).is_none()
+        } else {
+            w.point_contents(c) != qworld::CONTENTS_SOLID
+        };
+        if ok {
+            placed = true;
+            break;
+        }
+    }
+    if !placed {
+        ents.set_v(e, V::Origin, org);
+        return None;
+    }
+    let vel = ents.v(e, V::Velocity);
+    ents.set_v(e, V::Velocity, carry(&a, &b, vel));
+    let (fwd, _, _) = angle_vectors(ents.v(e, V::Angles));
+    let ang = vec_to_angles(carry(&a, &b, fwd));
+    ents.set_v(e, V::Angles, Vec3::new(ang.x, ang.y, 0.0));
+    ents.set_flags(e, ents.flags(e) & !FL_ONGROUND);
+    ents.set_e(e, E::GroundEntity, 0);
+    w.link_edict(ents, e, true);
+    if !crossed.contains(&e) {
+        crossed.push(e);
+    }
+    Some(carry(&a, &b, mv * (1.0 - t).max(0.0)))
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -160,5 +281,24 @@ mod tests {
         let w2 = Portal::new(Vec3::new(-500.0, 0.0, 0.0), Vec3::new(1.0, 0.0, 0.0), z);
         let v = carry(&wall, &w2, Vec3::new(320.0, 0.0, 0.0));
         assert!((v - Vec3::new(320.0, 0.0, 0.0)).length() < 1e-3, "{v:?}");
+    }
+
+    #[test]
+    fn intersect_segment_checks_oval_and_blockers() {
+        let z = Vec3::new(0.0, 0.0, 1.0);
+        let a = Portal::new(Vec3::new(100.0, 0.0, 0.0), Vec3::new(-1.0, 0.0, 0.0), z);
+        let b = Portal::new(Vec3::new(0.0, 200.0, 0.0), Vec3::new(0.0, -1.0, 0.0), z);
+        let linked = [(a, b), (b, a)];
+        let wall_tr = qworld::Trace { fraction: 0.5, ent: Some(0), endpos: Vec3::new(100.0, 0.0, 0.0), ..qworld::Trace::new(Vec3::ZERO) };
+        // centre hit redirects into b's outward normal (0, -1, 0)
+        let hit = intersect_segment(&linked, Vec3::new(0.0, 0.0, 0.0), Vec3::new(200.0, 0.0, 0.0), &wall_tr, 0.5).unwrap();
+        assert!((hit.t - 0.5).abs() < 1e-3);
+        assert!((hit.exit_pt - Vec3::new(0.0, 199.5, 0.0)).length() < 1e-3, "{:?}", hit.exit_pt);
+        assert!((hit.rem - Vec3::new(0.0, -100.0, 0.0)).length() < 1e-3, "{:?}", hit.rem);
+        // corner of bounding box is outside the oval
+        assert!(intersect_segment(&linked, Vec3::new(0.0, 27.0, 47.0), Vec3::new(200.0, 27.0, 47.0), &wall_tr, 0.5).is_none());
+        // closer entity blocks the shot before reaching the portal
+        let ent_tr = qworld::Trace { fraction: 0.25, ent: Some(3), ..wall_tr };
+        assert!(intersect_segment(&linked, Vec3::new(0.0, 0.0, 0.0), Vec3::new(200.0, 0.0, 0.0), &ent_tr, 0.5).is_none());
     }
 }

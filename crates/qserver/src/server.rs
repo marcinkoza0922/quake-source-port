@@ -195,6 +195,8 @@ impl Server {
                 cmd_client: None,
                 cmd_names: Vec::new(),
                 queued_client_cmds: Vec::new(),
+                linked_portals: Vec::new(),
+                portal_crossed: Vec::new(),
             },
             level: None,
             cmds: Commands::with_builtins(),

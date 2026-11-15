@@ -104,6 +104,10 @@ pub struct Core {
     pub cmd_client: Option<usize>,
     pub(crate) cmd_names: Vec<String>,
     pub(crate) queued_client_cmds: Vec<(usize, String)>,
+    /// Active linked portal pairs `(in, out)` for fast trace/projectile checks.
+    pub(crate) linked_portals: Vec<(crate::addons::portal::Portal, crate::addons::portal::Portal)>,
+    /// Entities that already crossed a portal during `physics_toss` this frame.
+    pub(crate) portal_crossed: Vec<qworld::Ent>,
 }
 
 /// The QC VM and collision world of the running level.

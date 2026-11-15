@@ -113,6 +113,9 @@ impl GelFx {
                 self.spraying[o] = time;
                 self.blobs.push(Blob { kind: (k as u8).min(1), pos: Vec3::new(x, y, z), vel: Vec3::new(vx, vy, vz), born: time });
             }
+            ("t", &[k, x, y, z, vx, vy, vz]) => {
+                self.blobs.push(Blob { kind: (k as u8).min(1), pos: Vec3::new(x, y, z), vel: Vec3::new(vx, vy, vz), born: time });
+            }
             ("a", &[id, k, x, y, z, nx, ny, nz, r]) => {
                 let origin = Vec3::new(x, y, z);
                 self.splats.retain(|s| s.id != id as u32);

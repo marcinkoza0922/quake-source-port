@@ -21,6 +21,35 @@ pub fn push_entity<D: Edicts + ?Sized>(w: &mut World, ents: &mut D, e: Ent, push
     tr
 }
 
+/// Like `push_entity`, but lets `ents.try_portal_move` redirect the entity
+/// through a portal (up to 4 hops) before impacting.
+pub(crate) fn push_entity_portal<D: Edicts + ?Sized>(w: &mut World, ents: &mut D, e: Ent, mut push: Vec3) -> Trace {
+    for _ in 0..4 {
+        let org = ents.v(e, V::Origin);
+        let end = org + push;
+        let solid = ents.fi(e, F::Solid);
+        let ty = if ents.fi(e, F::MoveType) == MOVETYPE_FLYMISSILE {
+            MoveType::Missile
+        } else if solid == SOLID_TRIGGER || solid == SOLID_NOT {
+            MoveType::NoMonsters
+        } else {
+            MoveType::Normal
+        };
+        let tr = w.trace(ents, org, ents.v(e, V::Mins), ents.v(e, V::Maxs), end, ty, Some(e));
+        if let Some(rem) = ents.try_portal_move(w, e, org, push, &tr) {
+            push = rem;
+            continue;
+        }
+        ents.set_v(e, V::Origin, tr.endpos);
+        w.link_edict(ents, e, true);
+        if let Some(t) = tr.ent {
+            impact(w, ents, e, t);
+        }
+        return tr;
+    }
+    push_entity(w, ents, e, push)
+}
+
 /// SV_PushMove.
 pub fn push_move<D: Edicts + ?Sized>(w: &mut World, ents: &mut D, p: &PhysParams, pusher: Ent, movetime: f32) {
     let vel = ents.v(pusher, V::Velocity);

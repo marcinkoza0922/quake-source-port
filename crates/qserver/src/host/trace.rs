@@ -15,7 +15,31 @@ impl Ctx<'_> {
         }
         let tr = {
             let (ents, w) = self.ents(vm);
-            w.trace(&ents, v1, Vec3::ZERO, Vec3::ZERO, v2, MoveType::from(nomonsters), Some(pass))
+            let mt = MoveType::from(nomonsters);
+            let active = !ents.c.linked_portals.is_empty() && crate::addons::active(ents.c);
+            let mut from = v1;
+            let mut to = v2;
+            let mut pass_ent = Some(pass);
+            let mut total_frac = 0.0f32;
+            let mut hops = 0u32;
+            loop {
+                let mut tr = w.trace(&ents, from, Vec3::ZERO, Vec3::ZERO, to, mt, pass_ent);
+                if active
+                    && hops < 4
+                    && let Some(hit) = crate::addons::portal_move::intersect_segment(&ents.c.linked_portals, from, to, &tr, 0.5)
+                {
+                    total_frac += (1.0 - total_frac) * hit.t;
+                    from = hit.exit_pt;
+                    to = hit.exit_pt + hit.rem;
+                    pass_ent = None;
+                    hops += 1;
+                    continue;
+                }
+                if hops > 0 {
+                    tr.fraction = (total_frac + (1.0 - total_frac) * tr.fraction).min(1.0);
+                }
+                break tr;
+            }
         };
         self.set_trace_globals(vm, &tr);
         Ok(())

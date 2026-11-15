@@ -65,8 +65,16 @@ run with no deathmatch and no remote client (`addons::allowed`/`all_local`).
   u/s up out of a floor portal, where a player with no move input also
   loses sideways speed, so two floor portals bob in place), view or
   yaw turned (`fixangle`); exit spots tried: lined up, centred, then
-  shifted +16/+32/-16 along the exit's up; skipped if all are solid. Missiles explode on
-  the wall before the check, so they don't cross.
+  shifted +16/+32/-16 along the exit's up; skipped if all are solid.
+- Shooting, projectiles and gel through portals (`Core::linked_portals`, empty
+  unless a portal pair is linked; level teleporters are unaffected): QC
+  `traceline` (`host/trace.rs`), `physics_toss` (`Edicts::try_portal_move` for
+  missiles, nails, grenades, enemy projectiles, shotgun pellets and toss
+  items) and gel blobs (`addons/gel.rs`) intersect linked portal ovals via
+  `portal_move::find_portal_hit` and continue from the exit with rotated
+  position/velocity/angles (up to 4 hops per frame). Only traces/movers that
+  actually enter a portal do extra work; otherwise the check is a few dot
+  products (or skipped when `linked_portals` is empty).
 - Monster fall damage (`addons/fall.rs`, gun on): landing >650 u/s calls
   QC `T_Damage` (world attacker) for 5 + (speed − 650)/10.
 - Sync: `//qsp_portal owner slot [origin normal up]` stufftext, full state
@@ -338,7 +346,8 @@ over each other. `MAX_SPLATS` 1024, oldest out. No ammo.
 - Footsteps: players on gel moving >60 u/s send step events (blue every
   ~0.42 s, orange ~0.3 s, scaled by speed).
 - Sync (`//qsp_gel`, reliable stufftext → `ClientEvent::Gel`): `b owner kind
-  pos vel` launch (the client flies the blob itself), `a id kind pos normal r`
+  pos vel` launch (the client flies the blob itself), `t kind pos vel` blob
+  exiting a portal, `a id kind pos normal r`
   splat, `d id`, `c` clear + full state on spawn, `s kind pos speed`
   footstep, `j kind pos speed` bounce. Saves: `gel kind x y z nx ny nz r`
   header lines. The toy switched off removes all gel.

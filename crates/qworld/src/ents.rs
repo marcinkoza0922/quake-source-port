@@ -80,6 +80,12 @@ pub trait Edicts {
     fn rand(&mut self) -> i32 {
         0
     }
+    /// Optional hook called by `physics_toss` before impacting `tr.ent`.
+    /// Returning `Some(rem)` means the entity teleported and should continue
+    /// moving by `rem` instead of impacting.
+    fn try_portal_move(&mut self, _w: &mut World, _e: Ent, _org: Vec3, _mv: Vec3, _tr: &crate::Trace) -> Option<Vec3> {
+        None
+    }
 
     fn fi(&self, e: Ent, f: F) -> i32 {
         self.f(e, f) as i32

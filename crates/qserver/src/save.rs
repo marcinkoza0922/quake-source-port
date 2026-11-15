@@ -193,6 +193,7 @@ impl Server {
             }
             crate::addons::settings::load(&mut c.cvars, &h.extra);
             l.portals.load_text(&h.portals);
+            l.portals.sync_links(&mut c.linked_portals);
             l.stickies.load_text(&h.extra);
             l.gel.load_text(&h.extra);
         }
