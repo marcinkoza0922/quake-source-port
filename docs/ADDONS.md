@@ -405,19 +405,22 @@ is lifted 110 u/s so step physics slides it; no damage); projectiles
 floor gel within 44 u (+0.6 r) is washed off.
 - Sync: `//qsp_water owner mode x y z…` every frame while spraying (one
   end per jet), `owner 0` on stop → `ClientEvent::Water`. Not saved.
-- Client: each jet is a solid water column, a camera-facing ribbon (40
-  segments) across the middle row of the dome tile so the gel shader
-  shades it as a cylinder; half width 1.6→4.5 u with travelling ripples
-  and a flare at the tip, fading in at the nozzle and out at the end. It
-  leaves the view model's muzzle along the aim and joins the server's line
-  within 48 u. Plus 40 loose droplets around it, splash droplets, a hiss loop
-  (jet / fan, channel 7), splashes; blood surface marks within 44 u of each
-  end are removed (`Blood::wash`).
+- Client: each jet is a solid water column, a camera-facing ribbon (16
+  segments on high `addon_washer_quality 1` [default], 10 on low `0`) across
+  the middle row of the dome tile; on high it uses the gel shader so it
+  shades as a glossy cylinder, and on low a single translucent water batch
+  (`gel: false`). Half width 1.6→4.5 u with travelling ripples and a flare
+  at the tip, fading in at the nozzle and out at the end. It leaves the
+  view model's muzzle along the aim and joins the server's line within
+  48 u. Plus loose droplets around it (14 per jet on high, 6 on low) and
+  splash droplets (capped at 120 on high, 48 on low) drawn in a non-gel
+  translucent batch, a hiss loop (jet / fan, channel 7), splashes; blood
+  surface marks within 44 u of each end are removed (`Blood::wash`).
 - Model: `assets/washer/` (nano-banana-pro concept
   `01a1d71e-0b15-7650-b42c-64a73647d9fd`, meshy-t2.5 2,498 tris + meshy-7,
   task `01a1d721-4189-74a0-b4a3-702bf531235d`), imported with `--length 30
   --gain 0.6 --flip`.
-- Menu: Add-ons → Gel Sprayer (Gel Quality `addon_gel_quality` low/high, default high), Powerwasher, Powerwasher Push (`menu_options gel` / `menu_options washer`).
+- Menu: Add-ons → Gel Sprayer (Gel Quality `addon_gel_quality` low/high, default high), Powerwasher, Powerwasher Push, Jet Quality (`addon_washer_quality` low/high, default high) (`menu_options gel` / `menu_options washer`).
 ### Equipment wheel and goggles (`src/addons/goggles.rs`, `equip_wheel.rs`, `src/host/goggles.rs`)
 Equipment is switched on and off rather than held, so it does not use the
 toy slot. `Equip` lists it in wheel order; items of one group exclude each

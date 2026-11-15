@@ -15,19 +15,29 @@ use std::sync::Arc;
 type Geometry = (Vec<FteVertex>, Vec<u32>, Vec<FteBatch>);
 
 const LOOP_CHANNEL: i32 = 7;
-/// Ribbon segments per jet, its half width at the muzzle / the end, and
-/// loose droplets around it.
-const SEGMENTS: usize = 40;
+/// Ribbon segments per jet, loose droplets around it, and splash cap per quality tier.
+const SEGMENTS_HIGH: usize = 16;
+const SEGMENTS_LOW: usize = 10;
+const DROPS_HIGH: usize = 14;
+const DROPS_LOW: usize = 6;
+const MAX_SPLASHES_HIGH: usize = 120;
+const MAX_SPLASHES_LOW: usize = 48;
 const WIDTH: (f32, f32) = (1.6, 4.5);
-const DROPS: usize = 40;
 const WATER: [u8; 3] = [150, 200, 235];
 pub const WASH_RADIUS: f32 = 44.0;
 
-#[derive(Clone, Debug, Default)]
+#[derive(Clone, Copy, Debug, Default)]
 struct Jet {
     mode: u8,
-    ends: Vec<Vec3>,
+    end_count: u8,
+    ends: [Vec3; 8],
     seen: f64,
+}
+
+impl Jet {
+    fn ends(&self) -> &[Vec3] {
+        &self.ends[..self.end_count as usize]
+    }
 }
 
 struct Splash {
@@ -69,15 +79,21 @@ impl WaterFx {
 
     /// One `//qsp_water owner mode [x y z]...` line (without the prefix).
     pub fn receive(&mut self, line: &str, time: f64, snd: Option<&SoundSystem>) {
-        let n: Vec<f32> = line.split_whitespace().filter_map(|w| w.parse().ok()).filter(|v: &f32| v.is_finite()).collect();
-        let (Some(&o), Some(&mode)) = (n.first(), n.get(1)) else { return };
+        let mut nums = line.split_whitespace().filter_map(|w| w.parse::<f32>().ok()).filter(|v| v.is_finite());
+        let (Some(o), Some(mode)) = (nums.next(), nums.next()) else { return };
         let o = (o as usize).min(63);
         if self.jets.len() <= o {
             self.jets.resize(o + 1, Jet::default());
         }
         let mode = mode as u8;
         let before = self.jets[o].mode;
-        let ends: Vec<Vec3> = n[2..].as_chunks::<3>().0.iter().map(|c| Vec3::new(c[0], c[1], c[2])).take(8).collect();
+        let mut ends = [Vec3::ZERO; 8];
+        let mut end_count = 0usize;
+        while end_count < ends.len() {
+            let (Some(x), Some(y), Some(z)) = (nums.next(), nums.next(), nums.next()) else { break };
+            ends[end_count] = Vec3::new(x, y, z);
+            end_count += 1;
+        }
         if let Some(snd) = snd
             && before != mode
         {
@@ -86,31 +102,30 @@ impl WaterFx {
                 snd.event(SoundEvent::Stop { entity, channel: LOOP_CHANNEL });
             } else {
                 let sfx = self.cue(snd, if mode == 1 { qsound::gel::JET } else { qsound::gel::FAN });
-                let origin = ends.first().map_or([0.0; 3], |e| e.to_array());
+                let origin = if end_count > 0 { ends[0].to_array() } else { [0.0; 3] };
                 snd.event(SoundEvent::Start { entity, channel: LOOP_CHANNEL, sfx, origin, volume: 0.55, attenuation: 1.2 });
             }
         }
-        if let (Some(snd), Some(&e)) = (snd, ends.first())
+        if let Some(snd) = snd
+            && end_count > 0
             && time - self.last_splash_sound > 0.22
         {
             self.last_splash_sound = time;
             let sfx = self.cue(snd, qsound::gel::SPLASH);
-            snd.event(SoundEvent::Start { entity: -1, channel: 0, sfx, origin: e.to_array(), volume: 0.5, attenuation: 1.2 });
+            snd.event(SoundEvent::Start { entity: -1, channel: 0, sfx, origin: ends[0].to_array(), volume: 0.5, attenuation: 1.2 });
         }
-        for &e in &ends {
-            for _ in 0..2 {
-                let v = Vec3::new(self.random() - 0.5, self.random() - 0.5, self.random() * 0.8 + 0.2) * 260.0;
-                if self.splashes.len() < 400 {
-                    self.splashes.push(Splash { pos: e, vel: v, born: time });
-                }
+        for &e in &ends[..end_count] {
+            let v = Vec3::new(self.random() - 0.5, self.random() - 0.5, self.random() * 0.8 + 0.2) * 260.0;
+            if self.splashes.len() < MAX_SPLASHES_HIGH {
+                self.splashes.push(Splash { pos: e, vel: v, born: time });
             }
         }
-        self.jets[o] = Jet { mode, ends, seen: time };
+        self.jets[o] = Jet { mode, end_count: end_count as u8, ends, seen: time };
     }
 
     /// Where water lands this frame (to wash blood off).
     pub fn wash_points(&self, time: f64) -> impl Iterator<Item = Vec3> + '_ {
-        self.jets.iter().filter(move |j| j.mode != 0 && time - j.seen < 0.2).flat_map(|j| j.ends.iter().copied())
+        self.jets.iter().filter(move |j| j.mode != 0 && time - j.seen < 0.2).flat_map(|j| j.ends().iter().copied())
     }
 
     /// Player `owner` is spraying now.
@@ -130,7 +145,8 @@ impl WaterFx {
 
     /// Droplet streams and splashes. `me` is the local player (0-based),
     /// whose jets leave the view model's muzzle.
-    pub fn frame(&mut self, cl: &qclient::ClientState, me: usize, view: &View, gravity: f32, r: &mut Renderer, geom: &mut Geometry) {
+    #[allow(clippy::too_many_arguments)]
+    pub fn frame(&mut self, cl: &qclient::ClientState, me: usize, view: &View, gravity: f32, quality: u32, r: &mut Renderer, geom: &mut Geometry) {
         let dt = (cl.time - self.time).clamp(0.0, 0.1) as f32;
         self.time = cl.time;
         let now = cl.time;
@@ -145,6 +161,12 @@ impl WaterFx {
             s.pos += s.vel * dt;
             now - s.born < 0.45
         });
+        let high = quality > 0;
+        let max_splashes = if high { MAX_SPLASHES_HIGH } else { MAX_SPLASHES_LOW };
+        if self.splashes.len() > max_splashes {
+            let excess = self.splashes.len() - max_splashes;
+            self.splashes.drain(..excess);
+        }
         if self.splashes.is_empty() && self.jets.iter().all(|j| j.mode == 0) {
             return;
         }
@@ -156,52 +178,78 @@ impl WaterFx {
                 p
             }
         };
+        self.emit_geometry(cl, me, view, quality, pic, geom);
+    }
+
+    fn emit_geometry(&self, cl: &qclient::ClientState, me: usize, view: &View, quality: u32, pic: PicId, geom: &mut Geometry) {
+        let high = quality > 0;
         let (vf, vr, vu) = angle_vectors(view.angles.into());
         let eye = Vec3::from(view.origin);
-        let first = geom.1.len() as u32;
-        let t = now as f32;
+        let segments = if high { SEGMENTS_HIGH } else { SEGMENTS_LOW };
+        let drops = if high { DROPS_HIGH } else { DROPS_LOW };
+        let t = self.time as f32;
+        let ribbon_first = geom.1.len() as u32;
         for (o, j) in self.jets.iter().enumerate().filter(|(_, j)| j.mode != 0) {
-            let (start, aim) = if o == me {
-                (eye + vf * 34.0 - vu * 9.0, vf)
-            } else {
-                let Some(e) = cl.entities.get(o + 1) else { continue };
-                (Vec3::from(e.origin) + Vec3::new(0.0, 0.0, 16.0), Vec3::ZERO)
-            };
-            for (k, &end) in j.ends.iter().enumerate() {
-                let fan = if j.mode == 1 { 1.0 } else { 0.7 };
-                // the jet leaves the muzzle along the aim, bending onto the
-                // server's line only over the first few units
+            let Some((start, aim)) = jet_origin(cl, o, me, eye, vf, vu) else { continue };
+            let fan = if j.mode == 1 { 1.0 } else { 0.7 };
+            for (k, &end) in j.ends().iter().enumerate() {
+                ribbon(geom, eye, start, aim, end, segments, fan, k as f32, t, high);
+            }
+        }
+        let ribbon_count = geom.1.len() as u32 - ribbon_first;
+        if high && ribbon_count > 0 {
+            geom.2.push(FteBatch { pic, blend: FteBlend::Blend, lines: false, first_index: ribbon_first, num_indices: ribbon_count, soft: false, gel: true });
+        }
+        let drops_first = geom.1.len() as u32;
+        let drop_alpha = if high { 185 } else { 195 };
+        for (o, j) in self.jets.iter().enumerate().filter(|(_, j)| j.mode != 0) {
+            let Some((start, aim)) = jet_origin(cl, o, me, eye, vf, vu) else { continue };
+            for (k, &end) in j.ends().iter().enumerate() {
                 let len = (end - start).length();
                 let bend = if aim == Vec3::ZERO { (start + end) * 0.5 } else { start + aim * len.min(48.0) };
-                let point = |u: f32| {
-                    let w = (u * len / 48.0).min(1.0);
-                    let near = start * (1.0 - u) + bend * u;
-                    let far = start * (1.0 - u) + end * u;
-                    near * (1.0 - w) + far * w
-                };
-                ribbon(geom, eye, &point, |u| {
-                    let ripple = (u * 37.0 - t * 31.0 + k as f32).sin() * 0.25 + (u * 91.0 - t * 53.0).sin() * 0.15;
-                    let flare = ((u - 0.85) / 0.15).max(0.0) * 1.5;
-                    (WIDTH.0 + (WIDTH.1 - WIDTH.0) * u) * fan * (1.0 + ripple + flare)
-                });
-                for d in 0..DROPS {
+                for d in 0..drops {
                     let h = hash(d as u32 * 7 + k as u32 * 131);
-                    let u = (d as f32 / DROPS as f32 + t * 3.0 + h * 0.03).fract();
+                    let u = (d as f32 / drops as f32 + t * 3.0 + h * 0.03).fract();
                     let spread = 2.0 + u * u * 9.0;
                     let jitter = (vr * (hash(d as u32 + 17) - 0.5) + vu * (hash(d as u32 + 29) - 0.5)) * spread;
-                    drop(geom, point(u) + jitter, vr, vu, 0.8 + u * 1.4, 150);
+                    drop(geom, jet_point(start, bend, end, len, u) + jitter, vr, vu, 0.8 + u * 1.4, drop_alpha);
                 }
             }
         }
         for s in &self.splashes {
-            let age = ((now - s.born) / 0.45) as f32;
-            drop(geom, s.pos, vr, vu, 1.6 + age * 1.5, ((1.0 - age) * 170.0) as u8);
+            let age = ((self.time - s.born) / 0.45) as f32;
+            drop(geom, s.pos, vr, vu, 1.6 + age * 1.5, ((1.0 - age) * 200.0) as u8);
         }
-        let count = geom.1.len() as u32 - first;
-        if count > 0 {
-            geom.2.push(FteBatch { pic, blend: FteBlend::Blend, lines: false, first_index: first, num_indices: count, soft: false, gel: true });
+        if high {
+            let count = geom.1.len() as u32 - drops_first;
+            if count > 0 {
+                geom.2.push(FteBatch { pic, blend: FteBlend::Blend, lines: false, first_index: drops_first, num_indices: count, soft: false, gel: false });
+            }
+        } else {
+            let count = geom.1.len() as u32 - ribbon_first;
+            if count > 0 {
+                geom.2.push(FteBatch { pic, blend: FteBlend::Blend, lines: false, first_index: ribbon_first, num_indices: count, soft: false, gel: false });
+            }
         }
     }
+}
+
+fn jet_origin(cl: &qclient::ClientState, owner: usize, me: usize, eye: Vec3, vf: Vec3, vu: Vec3) -> Option<(Vec3, Vec3)> {
+    if owner == me {
+        Some((eye + vf * 34.0 - vu * 9.0, vf))
+    } else {
+        let e = cl.entities.get(owner + 1)?;
+        Some((Vec3::from(e.origin) + Vec3::new(0.0, 0.0, 16.0), Vec3::ZERO))
+    }
+}
+
+/// The jet leaves the muzzle along the aim, bending onto the server's line
+/// over the first 48 units.
+fn jet_point(start: Vec3, bend: Vec3, end: Vec3, len: f32, u: f32) -> Vec3 {
+    let w = (u * len / 48.0).min(1.0);
+    let near = start * (1.0 - u) + bend * u;
+    let far = start * (1.0 - u) + end * u;
+    near * (1.0 - w) + far * w
 }
 
 fn hash(n: u32) -> f32 {
@@ -212,30 +260,39 @@ fn hash(n: u32) -> f32 {
     (x & 0xffff) as f32 / 65535.0
 }
 
-/// A camera-facing strip along `point(0..1)` with half width `width(u)`,
+/// A camera-facing strip along `jet_point` with `segments` subdivisions,
 /// mapped across the middle of the dome tile so it shades as a cylinder.
-fn ribbon(g: &mut Geometry, eye: Vec3, point: &dyn Fn(f32) -> Vec3, width: impl Fn(f32) -> f32) {
+#[allow(clippy::too_many_arguments)]
+fn ribbon(g: &mut Geometry, eye: Vec3, start: Vec3, aim: Vec3, end: Vec3, segments: usize, fan: f32, phase: f32, t: f32, high: bool) {
+    let len = (end - start).length();
+    let bend = if aim == Vec3::ZERO { (start + end) * 0.5 } else { start + aim * len.min(48.0) };
+    let mut pts = [Vec3::ZERO; SEGMENTS_HIGH + 1];
+    for (i, pt) in pts.iter_mut().enumerate().take(segments + 1) {
+        *pt = jet_point(start, bend, end, len, i as f32 / segments as f32);
+    }
     let base = g.0.len() as u32;
-    for i in 0..=SEGMENTS {
-        let u = i as f32 / SEGMENTS as f32;
-        let p = point(u);
-        let along = point((u + 0.01).min(1.0)) - point((u - 0.01).max(0.0));
+    let alpha_scale = if high { 200.0 } else { 225.0 };
+    for (i, &p) in pts.iter().enumerate().take(segments + 1) {
+        let u = i as f32 / segments as f32;
+        let along = pts[(i + 1).min(segments)] - pts[i.saturating_sub(1)];
         let side = along.cross(eye - p).normalize();
         let side = if side.length_sq() > 0.5 { side } else { Vec3::new(0.0, 0.0, 1.0) };
-        let w = width(u);
+        let ripple = (u * 31.0 - t * 31.0 + phase).sin() * 0.25 + (u * 47.0 - t * 53.0).sin() * 0.12;
+        let flare = ((u - 0.85) / 0.15).max(0.0) * 1.5;
+        let w = (WIDTH.0 + (WIDTH.1 - WIDTH.0) * u) * fan * (1.0 + ripple + flare);
         // fade in at the nozzle and out at the tip
         let a = (u * 12.0).min(1.0) * ((1.0 - u) * 6.0).min(1.0);
-        let color = [WATER[0], WATER[1], WATER[2], (200.0 * a) as u8];
+        let color = [WATER[0], WATER[1], WATER[2], (alpha_scale * a) as u8];
         g.0.push(FteVertex { pos: (p - side * w).to_array(), uv: tile_uv([0.0, 0.5], DOME), color });
         g.0.push(FteVertex { pos: (p + side * w).to_array(), uv: tile_uv([1.0, 0.5], DOME), color });
     }
-    for i in 0..SEGMENTS as u32 {
+    for i in 0..segments as u32 {
         let v = base + i * 2;
         g.1.extend([v, v + 1, v + 3, v, v + 3, v + 2]);
     }
 }
 
-/// One glossy water droplet facing the camera.
+/// One water droplet facing the camera.
 fn drop(g: &mut Geometry, c: Vec3, r: Vec3, u: Vec3, s: f32, alpha: u8) {
     let base = g.0.len() as u32;
     for (x, y, uv) in [(-1.0, -1.0, [0.0, 1.0]), (1.0, -1.0, [1.0, 1.0]), (1.0, 1.0, [1.0, 0.0]), (-1.0, 1.0, [0.0, 0.0])] {
@@ -256,5 +313,33 @@ mod tests {
         assert!(w.spraying(0, 1.05));
         w.receive("0 0", 1.1, None);
         assert_eq!(w.wash_points(1.1).count(), 0);
+    }
+
+    #[test]
+    fn quality_tiers_scale_geometry_and_gel_batches() {
+        let mut w = WaterFx::default();
+        // 5-jet fan spawns 5 splashes per receive, up to MAX_SPLASHES_HIGH.
+        for step in 0..30 {
+            w.receive("0 2 100 0 0 100 10 0 100 -10 0 100 0 10 100 0 -10", 1.0 + step as f64 * 0.01, None);
+        }
+        w.time = 1.3;
+        assert_eq!(w.splashes.len(), MAX_SPLASHES_HIGH);
+        let cl = qclient::ClientState::default();
+        let view = View::default();
+
+        let mut high = Geometry::default();
+        w.emit_geometry(&cl, 0, &view, 1, PicId(0), &mut high);
+        assert_eq!(high.2.len(), 2);
+        assert!(high.2[0].gel);
+        assert!(!high.2[1].gel);
+        assert_eq!(high.2[0].num_indices, 5 * SEGMENTS_HIGH as u32 * 6);
+        assert_eq!(high.2[1].num_indices, (5 * DROPS_HIGH as u32 + MAX_SPLASHES_HIGH as u32) * 6);
+
+        let mut low = Geometry::default();
+        w.splashes.drain(..w.splashes.len() - MAX_SPLASHES_LOW);
+        w.emit_geometry(&cl, 0, &view, 0, PicId(0), &mut low);
+        assert_eq!(low.2.len(), 1);
+        assert!(!low.2[0].gel);
+        assert_eq!(low.2[0].num_indices, (5 * SEGMENTS_LOW as u32 + 5 * DROPS_LOW as u32 + MAX_SPLASHES_LOW as u32) * 6);
     }
 }

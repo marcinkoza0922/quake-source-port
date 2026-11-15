@@ -145,9 +145,10 @@ impl Host {
             let grav = self.cv("sv_gravity");
             let grav = if grav > 0.0 { grav } else { 800.0 };
             let gel_quality = (self.cv("addon_gel_quality").round() as i32).clamp(0, 1) as u32;
+            let washer_quality = (self.cv("addon_washer_quality").round() as i32).clamp(0, 1) as u32;
             self.gel_fx.frame(&self.cl, &self.level, &mut self.r, v, grav, self.snd.as_ref(), gel_quality, &mut fte);
-            self.water_fx.frame(&self.cl, self.cl.viewentity.saturating_sub(1), v, grav, &mut self.r, &mut fte);
-            for p in self.water_fx.wash_points(self.cl.time).collect::<Vec<_>>() {
+            self.water_fx.frame(&self.cl, self.cl.viewentity.saturating_sub(1), v, grav, washer_quality, &mut self.r, &mut fte);
+            for p in self.water_fx.wash_points(self.cl.time) {
                 self.blood.wash(p, crate::addons::water_fx::WASH_RADIUS);
             }
             self.blood.frame(

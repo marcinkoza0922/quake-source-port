@@ -49,6 +49,7 @@ pub(super) fn tooltip(item: Item) -> Option<&'static str> {
         "addon_gel_quality" => "Coat atlas resolution, rebuild rate and shader detail: low builds smaller coats less often with fast shading; high uses full detail",
         "addon_washer" => "A water cannon: fire shoots a straight jet with limited reach, alt-fire a wide fan. Pushes enemies back, turns projectiles aside and washes away gel and blood. Recommended with the Gel Sprayer",
         "addon_washer_push" => "How hard the Powerwasher's water pushes enemies",
+        "addon_washer_quality" => "Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets",
         "addon_hookshot" => "A Zelda-style hookshot: fire sends a chain hook out; it latches onto hookable surfaces or enemies and reels you in; fire again to let go",
         "addon_hook_range" => "How far the hook flies before it retracts",
         "addon_hook_wood" => "The hook latches onto wooden surfaces (texture names like wood, crate, plank)",

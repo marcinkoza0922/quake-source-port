@@ -121,8 +121,12 @@ pub(super) const BOOMERANG: &[Item] = &[
     slider("Stun Duration", "addon_boomerang_stun", 1.0, 10.0, 0.5),
     slider("Flight Speed", "addon_boomerang_speed", 300.0, 1500.0, 100.0),
 ];
-/// Reached from the Add-ons pages: powerwasher push strength.
-pub(super) const WASHER: &[Item] = &[slider("Push", "addon_washer_push", 0.25, 3.0, 0.25)];
+/// Reached from the Add-ons pages: powerwasher push strength and jet quality.
+pub(super) const WASHER_QUALITY: &[(&str, f32)] = &[("low", 0.0), ("high", 1.0)];
+pub(super) const WASHER: &[Item] = &[
+    slider("Push", "addon_washer_push", 0.25, 3.0, 0.25),
+    Item::Choice { label: "Jet Quality", cvar: "addon_washer_quality", choices: WASHER_QUALITY },
+];
 /// Reached from the Add-ons pages: gel coat resolution, rebuild cadence and shader detail.
 pub(super) const GEL_QUALITY: &[(&str, f32)] = &[("low", 0.0), ("high", 1.0)];
 pub(super) const GEL: &[Item] = &[Item::Choice { label: "Gel Quality", cvar: "addon_gel_quality", choices: GEL_QUALITY }];

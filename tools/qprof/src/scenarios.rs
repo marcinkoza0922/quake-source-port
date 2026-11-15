@@ -52,7 +52,7 @@ pub const VANILLA: &[(&str, &str)] = &[
     ("r_impact_fx", "0"), ("r_impact_bullets", "0"), ("r_impact_nails", "0"),
     ("r_shotgun_tracers", "0"), ("r_impact_scorches", "0"),
     ("r_blood", "0"), ("r_debris", "0"), ("r_shader_preset", ""), ("r_colorblind", "0"),
-    ("addons_enable", "0"), ("addon_hitstop", "0"), ("addon_gel_quality", "1"), ("r_fteparticles", "1"), ("r_particledesc", "classic"), ("r_part_rain", "1"), ("r_part_rain_quantity", "1"),
+    ("addons_enable", "0"), ("addon_hitstop", "0"), ("addon_gel_quality", "1"), ("addon_washer_quality", "1"), ("r_fteparticles", "1"), ("r_particledesc", "classic"), ("r_part_rain", "1"), ("r_part_rain_quantity", "1"),
 ];
 
 const WATER: &[(&str, &str)] = &[
