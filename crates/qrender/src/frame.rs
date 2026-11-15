@@ -8,6 +8,7 @@ mod portal_scissor;
 use portals::gun_portal_quad;
 /// fte.frag mode of add-on gel batches ([`crate::FteBatch::gel`]).
 const GEL_MODE: f32 = 9.0;
+const GEL_FAST_MODE: f32 = 10.0;
 mod types;
 use types::*;
 mod math;
@@ -61,6 +62,9 @@ impl Renderer {
         let wait = std::time::Instant::now();
         // SAFETY: fence owned by this frame.
         unsafe { dev.wait_for_fences(&[fence], true, u64::MAX)? };
+        for b in std::mem::take(&mut self.frames[fi].staging) {
+            self.gpu.free_buffer(b);
+        }
         self.fence_wait_ns = wait.elapsed().as_nanos() as u64;
         self.init_gpu_times(fr.splits.len().max(1))?;
         self.collect_gpu_times(fi);
@@ -640,11 +644,12 @@ impl Renderer {
                 (fte_vertices, fte_indices) = (&fte_v[..], &fte_i[..]);
             }
             if !(fte_batches.is_empty() && gun_batches.is_empty()) && !fte_indices.is_empty() {
+                let gel_mode = if st.gel_quality == 0 { GEL_FAST_MODE } else { GEL_MODE };
                 let parts: Vec<_> = fte_batches
                     .iter()
                     .filter_map(|b| {
                         let slot = self.pics.get(b.pic.0 as usize)?.slot;
-                        Some((crate::pipelines::fte_index(b.blend, b.lines), slot, *b, if b.gel { GEL_MODE } else { b.blend as u32 as f32 }))
+                        Some((crate::pipelines::fte_index(b.blend, b.lines), slot, *b, if b.gel { gel_mode } else { b.blend as u32 as f32 }))
                     })
                     .collect();
                 // portal views: the same particles (unless gated by portal quality) and
@@ -959,6 +964,11 @@ impl Renderer {
                 dev.cmd_write_timestamp(cmd, vk::PipelineStageFlags::BOTTOM_OF_PIPE, q, ts_base + k);
             }
         };
+        let has_output = self.swap.is_some() || self.targets.as_ref().is_some_and(|t| t.out.is_some());
+        if self.targets.is_none() || self.lightmap.is_none() || !has_output {
+            return Ok(());
+        }
+        let pic_uploads = std::mem::take(&mut self.pending_pic_uploads);
         let f = &self.frames[fi];
         let dynbuf = f.dynbuf.buf;
         let set = [f.set];
@@ -982,6 +992,17 @@ impl Renderer {
             if let Some(q) = tsq {
                 dev.cmd_reset_query_pool(cmd, q, ts_base, ts_stride);
             }
+            timestamp(0);
+            for up in &pic_uploads {
+                self.gpu.record_image_rows_upload(
+                    cmd,
+                    up.image,
+                    up.width,
+                    up.height,
+                    up.rows,
+                    up.staging.as_ref().map(|b| b.buf),
+                );
+            }
             // post: gamma/contrast/polyblend to the output
             let (out_img, out_view) = match (&self.swap, &t.out) {
                 (Some(s), _) => (s.images[img_idx as usize], s.views[img_idx as usize]),
@@ -1003,7 +1024,6 @@ impl Renderer {
             let area = vk::Rect2D { offset: vk::Offset2D::default(), extent: vk::Extent2D { width: w, height: h } };
             for (pi, pass) in passes.iter_mut().enumerate() {
             let ts = |k: u32| timestamp(pi as u32 * timing::VIEW_TS as u32 + k);
-            if pi == 0 { ts(0); }
             if pi > 0 {
                 // the previous view's draws read the shared targets and cull buffers
                 let mb = [vk::MemoryBarrier::default()
@@ -1892,6 +1912,11 @@ impl Renderer {
             } else {
                 let si = [vk::SubmitInfo::default().command_buffers(&cmds)];
                 dev.queue_submit(self.gpu.queue, &si, fence)?;
+            }
+        }
+        for up in pic_uploads {
+            if let Some(b) = up.staging {
+                self.frames[fi].staging.push(b);
             }
         }
         self.cur = (self.cur + 1) % FRAMES;

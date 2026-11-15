@@ -168,6 +168,8 @@ pub(super) fn register_commands(c: &mut Commands<Host>) {
             "newgame" => Some(Page::NewGameAddons),
             "portalgun" => Some(Page::PortalGun),
             "railgun" => Some(Page::Railgun),
+            "gel" => Some(Page::Gel),
+            "washer" => Some(Page::Washer),
             "hookshot" => Some(Page::Hookshot),
             "boomerang" => Some(Page::Boomerang),
             "goggles" => Some(Page::Goggles),

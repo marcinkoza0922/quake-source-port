@@ -15,17 +15,35 @@ use qcore::math::Vec3;
 use std::collections::HashMap;
 use std::hash::{Hash, Hasher};
 
-/// Atlas side in texels.
+/// Atlas side in texels (high quality / default).
 pub const ATLAS: usize = 2048;
+/// Atlas side in texels on low quality.
+pub const ATLAS_LOW: usize = 1024;
 /// Finest texel size in world units.
 const TEXEL: f32 = 2.0;
 /// Largest cluster side in texels before it is sampled more coarsely.
 const MAX_SIDE: usize = 512;
+const LUT_N: usize = 128;
 /// Summed field where the coat's edge lies.
 const EDGE: f32 = 0.3;
 /// Below this summed field no texel is coated, whatever the edge noise
 /// (`EDGE - 0.11 - 0.04`, with a margin for rounding).
 const MIN_EDGE: f32 = 0.149;
+
+struct Tier {
+    atlas: usize,
+    texel: f32,
+    max_side: usize,
+    fast_noise: bool,
+}
+
+fn tier(quality: u32) -> Tier {
+    if quality == 0 {
+        Tier { atlas: ATLAS_LOW, texel: 4.0, max_side: 256, fast_noise: true }
+    } else {
+        Tier { atlas: ATLAS, texel: TEXEL, max_side: MAX_SIDE, fast_noise: false }
+    }
+}
 
 pub const COLORS: [[f32; 3]; 2] = [[0.14, 0.5, 1.0], [1.0, 0.47, 0.06]];
 
@@ -48,13 +66,14 @@ pub struct Cluster {
     pub x: usize,
     pub y: usize,
     pub side: usize,
+    pub atlas: usize,
 }
 
 impl Cluster {
     /// Square uv (0..1, as `mesh::project_shaped` with `half`) to atlas uv.
     pub fn atlas_uv(&self, uv: [f32; 2]) -> [f32; 2] {
         let s = self.side as f32;
-        let a = ATLAS as f32;
+        let a = self.atlas as f32;
         [(self.x as f32 + 0.5 + uv[0].clamp(0.0, 1.0) * (s - 1.0)) / a, (self.y as f32 + 0.5 + uv[1].clamp(0.0, 1.0) * (s - 1.0)) / a]
     }
 }
@@ -141,17 +160,46 @@ fn noise(p: Vec3) -> f32 {
     )
 }
 
+/// Precomputed tiling 2D edge-noise lookup table used on low quality instead
+/// of evaluating 3D value noise per coated texel.
+fn noise_lut() -> &'static [f32] {
+    static LUT: std::sync::OnceLock<Vec<f32>> = std::sync::OnceLock::new();
+    LUT.get_or_init(|| {
+        let tile2 = |period: i32, u: f32, v: f32| -> f32 {
+            let (fu, fv) = (u.floor(), v.floor());
+            let (sx, sy) = ((u - fu).powi(2) * (3.0 - 2.0 * (u - fu)), (v - fv).powi(2) * (3.0 - 2.0 * (v - fv)));
+            let (x0, y0) = ((fu as i32).rem_euclid(period), (fv as i32).rem_euclid(period));
+            let (x1, y1) = ((x0 + 1) % period, (y0 + 1) % period);
+            let a = hash3(x0, y0, period) + (hash3(x1, y0, period) - hash3(x0, y0, period)) * sx;
+            let b = hash3(x0, y1, period) + (hash3(x1, y1, period) - hash3(x0, y1, period)) * sx;
+            a + (b - a) * sy
+        };
+        let mut out = vec![0.0; LUT_N * LUT_N];
+        for y in 0..LUT_N {
+            for x in 0..LUT_N {
+                let n1 = tile2(16, x as f32 / 8.0, y as f32 / 8.0) - 0.5;
+                let n2 = tile2(32, x as f32 / 4.0, y as f32 / 4.0) - 0.5;
+                out[y * LUT_N + x] = (n1 * 0.22 + n2 * 0.08).clamp(-0.148, 0.15);
+            }
+        }
+        out
+    })
+}
+
 /// Height of the coat from the summed field: a steep rounded rim, then a
 /// gently domed top with a slight ripple.
-fn height(field: f32, p: Vec3) -> f32 {
-    let edge = EDGE + (noise(p / 14.0) - 0.5) * 0.22 + (noise(p / 5.0) - 0.5) * 0.08;
-    let x = field - edge;
-    if x <= 0.0 {
-        return 0.0;
-    }
-    let rim = (x / 0.12).min(1.0);
-    let body = (x / 1.2).min(1.0);
-    let ripple = (noise(p / 9.0) - 0.5) * 0.1;
+fn height(field: f32, p: Vec3, lut: Option<&[f32]>) -> f32 {
+    let (edge_off, ripple) = if let Some(lut) = lut {
+        let ix = ((p.x + p.z * 0.7) * 0.5).floor() as i32 & (LUT_N as i32 - 1);
+        let iy = ((p.y - p.z * 0.7) * 0.5).floor() as i32 & (LUT_N as i32 - 1);
+        let d = lut[iy as usize * LUT_N + ix as usize];
+        (d, d * 0.25)
+    } else {
+        ((noise(p / 14.0) - 0.5) * 0.22 + (noise(p / 5.0) - 0.5) * 0.08, (noise(p / 9.0) - 0.5) * 0.1)
+    };
+    let x = field - (EDGE + edge_off);
+    if x <= 0.0 { return 0.0; }
+    let (rim, body) = ((x / 0.12).min(1.0), (x / 1.2).min(1.0));
     (rim * rim * (3.0 - 2.0 * rim) * 0.35 + (1.0 - (1.0 - body).powi(3)) * 0.55 + ripple * rim).clamp(0.0, 1.0)
 }
 
@@ -161,17 +209,41 @@ fn height(field: f32, p: Vec3) -> f32 {
 /// clusters whose splats changed and copies the rest.
 pub struct Atlas {
     pub texels: Vec<u8>,
+    pub side: usize,
+    quality: u32,
     used: Vec<(usize, usize, usize)>,
     tiles: HashMap<u64, Vec<u8>>,
 }
 
 impl Default for Atlas {
     fn default() -> Self {
-        Self { texels: vec![0; ATLAS * ATLAS * 4], used: Vec::new(), tiles: HashMap::new() }
+        Self::new(1)
     }
 }
 
 impl Atlas {
+    pub fn new(quality: u32) -> Self {
+        let q = quality.min(1);
+        let side = tier(q).atlas;
+        Self { texels: vec![0; side * side * 4], side, quality: q, used: Vec::new(), tiles: HashMap::new() }
+    }
+
+    /// Switches atlas quality (0 = low / 1024, 1 = high / 2048), returning
+    /// `true` if the configuration changed and cleared cached tiles.
+    pub fn set_quality(&mut self, quality: u32) -> bool {
+        let q = quality.min(1);
+        if q == self.quality {
+            return false;
+        }
+        self.quality = q;
+        self.side = tier(q).atlas;
+        self.used.clear();
+        self.tiles.clear();
+        self.texels.resize(self.side * self.side * 4, 0);
+        self.texels.fill(0);
+        true
+    }
+
     /// Rows from the top that hold any cluster; the rest is zero.
     pub fn rows(&self) -> usize {
         self.used.iter().map(|&(_, y, side)| y + side).max().unwrap_or(0)
@@ -181,9 +253,10 @@ impl Atlas {
 /// Builds the atlas: places each cluster and fills its texels.
 /// Returns the clusters (parallel to `groups`); the texels are in `atlas`.
 pub fn build(discs: &[Disc], groups: &[Vec<usize>], atlas: &mut Atlas) -> Vec<Option<Cluster>> {
+    let t = tier(atlas.quality);
     for (x0, y0, side) in atlas.used.drain(..) {
         for j in 0..side {
-            let px = ((y0 + j) * ATLAS + x0) * 4;
+            let px = ((y0 + j) * atlas.side + x0) * 4;
             atlas.texels[px..px + side * 4].fill(0);
         }
     }
@@ -207,10 +280,10 @@ pub fn build(discs: &[Disc], groups: &[Vec<usize>], atlas: &mut Atlas) -> Vec<Op
         })
         .collect();
     // texel size: as fine as fits (coarser for big clusters / a full atlas)
-    let mut texel = TEXEL;
+    let mut texel = t.texel;
     let placed = loop {
-        let sides: Vec<usize> = squares.iter().map(|s| ((s.2 * 2.0 / texel).ceil() as usize + 2).clamp(4, MAX_SIDE)).collect();
-        if let Some(p) = pack(&sides) {
+        let sides: Vec<usize> = squares.iter().map(|s| ((s.2 * 2.0 / texel).ceil() as usize + 2).clamp(4, t.max_side)).collect();
+        if let Some(p) = pack(&sides, t.atlas) {
             break p.into_iter().zip(sides).map(|((x, y), s)| Some((x, y, s))).collect::<Vec<_>>();
         }
         texel *= 1.5;
@@ -225,18 +298,18 @@ pub fn build(discs: &[Disc], groups: &[Vec<usize>], atlas: &mut Atlas) -> Vec<Op
             continue;
         };
         let (center, n, half) = squares[k];
-        let c = Cluster { center, normal: n, half, x: x0, y: y0, side };
+        let c = Cluster { center, normal: n, half, x: x0, y: y0, side, atlas: t.atlas };
         atlas.used.push((x0, y0, side));
         let mut h = std::hash::DefaultHasher::new();
-        (side, center.to_array().map(f32::to_bits), n.to_array().map(f32::to_bits), half.to_bits()).hash(&mut h);
+        (t.atlas, side, center.to_array().map(f32::to_bits), n.to_array().map(f32::to_bits), half.to_bits()).hash(&mut h);
         for &i in g {
             let d = &discs[i];
             (d.kind, d.origin.to_array().map(f32::to_bits), d.radius.to_bits()).hash(&mut h);
         }
         let key = h.finish();
-        let tile = atlas.tiles.remove(&key).unwrap_or_else(|| fill(discs, g, &c));
+        let tile = atlas.tiles.remove(&key).unwrap_or_else(|| fill(discs, g, &c, t.fast_noise));
         for j in 0..side {
-            let px = ((y0 + j) * ATLAS + x0) * 4;
+            let px = ((y0 + j) * atlas.side + x0) * 4;
             atlas.texels[px..px + side * 4].copy_from_slice(&tile[j * side * 4..(j + 1) * side * 4]);
         }
         tiles.insert(key, tile);
@@ -247,7 +320,7 @@ pub fn build(discs: &[Disc], groups: &[Vec<usize>], atlas: &mut Atlas) -> Vec<Op
 }
 
 /// One cluster's texels (`side`² RGBA, row by row).
-fn fill(discs: &[Disc], g: &[usize], c: &Cluster) -> Vec<u8> {
+fn fill(discs: &[Disc], g: &[usize], c: &Cluster, fast_noise: bool) -> Vec<u8> {
     let (center, n, half, side) = (c.center, c.normal, c.half, c.side);
     let mut out = vec![0u8; side * side * 4];
     let (u, v) = crate::blood::mesh::axes(n);
@@ -256,6 +329,7 @@ fn fill(discs: &[Disc], g: &[usize], c: &Cluster) -> Vec<u8> {
         let (a, b) = (i as f32 / (side - 1) as f32, j as f32 / (side - 1) as f32);
         center + u * ((a - 0.5) * 2.0 * half) + v * ((b - 0.5) * 2.0 * half)
     };
+    let lut = fast_noise.then(noise_lut);
     let step = 2.0 * half / (side - 1) as f32;
     let mut field = vec![[0.0f32; 2]; side * side];
     for &i in g {
@@ -280,7 +354,7 @@ fn fill(discs: &[Disc], g: &[usize], c: &Cluster) -> Vec<u8> {
             if b + o < MIN_EDGE {
                 continue;
             }
-            let h = height(b + o, world(i, j));
+            let h = height(b + o, world(i, j), lut);
             if h <= 0.0 {
                 continue;
             }
@@ -295,19 +369,19 @@ fn fill(discs: &[Disc], g: &[usize], c: &Cluster) -> Vec<u8> {
 }
 
 /// Shelf packing of squares into the atlas (a texel of space between).
-fn pack(sides: &[usize]) -> Option<Vec<(usize, usize)>> {
+fn pack(sides: &[usize], atlas: usize) -> Option<Vec<(usize, usize)>> {
     let mut order: Vec<usize> = (0..sides.len()).collect();
     order.sort_by_key(|&i| std::cmp::Reverse(sides[i]));
     let mut pos = vec![(0, 0); sides.len()];
     let (mut x, mut y, mut shelf) = (0, 0, 0);
     for i in order {
         let s = sides[i] + 1;
-        if x + s > ATLAS {
+        if x + s > atlas {
             x = 0;
             y += shelf;
             shelf = 0;
         }
-        if y + s > ATLAS {
+        if y + s > atlas {
             return None;
         }
         pos[i] = (x, y);
@@ -369,6 +443,26 @@ mod tests {
             assert!(atlas.texels == fresh.texels, "rebuild {k} differs");
             discs.push(disc(1, 400.0 + k as f32 * 20.0, 30.0));
         }
+    }
+
+    #[test]
+    fn low_quality_uses_smaller_atlas_and_lut_bounds() {
+        assert!(noise_lut().iter().all(|&d| (-0.148..=0.15).contains(&d)));
+        let discs = [disc(0, 0.0, 0.0), disc(0, 40.0, 0.0), disc(1, 80.0, 0.0)];
+        let groups = group(&discs);
+        let mut atlas = Atlas::new(0);
+        assert_eq!(atlas.side, ATLAS_LOW);
+        assert_eq!(atlas.texels.len(), ATLAS_LOW * ATLAS_LOW * 4);
+        let clusters = build(&discs, &groups, &mut atlas);
+        let c = clusters[0].as_ref().unwrap();
+        assert_eq!(c.atlas, ATLAS_LOW);
+        let a = c.atlas_uv([0.5, 0.5]);
+        let (i, j) = ((a[0] * ATLAS_LOW as f32) as usize, (a[1] * ATLAS_LOW as f32) as usize);
+        assert!(atlas.texels[(j * ATLAS_LOW + i) * 4 + 3] > 100);
+        assert!(atlas.set_quality(1));
+        assert_eq!(atlas.side, ATLAS);
+        assert_eq!(atlas.texels.len(), ATLAS * ATLAS * 4);
+        assert!(!atlas.set_quality(1));
     }
 
     /// `cargo nextest run --release --run-ignored only gel_coat_bench --no-capture`

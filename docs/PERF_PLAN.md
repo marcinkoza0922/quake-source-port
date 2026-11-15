@@ -178,6 +178,14 @@ the remaining parity-bound phases below.
     3D noise, and a fast gel shader path without parallax + 4-tap gradient
     fetches.
 - Measure: `gel`, `all-addons`, `ultimate`.
+- **Status (Done)**:
+  - Eliminated synchronous `self.idle()` in `Renderer::update_pic_rows` / `update_pic` (`crates/qrender/src/lib/assets.rs`): matching-size uploads stage into `TRANSFER_SRC` buffers (`PendingPicUpload`, deduplicating prior unsubmitted uploads for the same image), drain into the active frame's command buffer (`Gpu::record_image_rows_upload` in `crates/qrender/src/gpu/upload.rs`, `crates/qrender/src/frame.rs`), and free once that frame's fence completes. Added `Renderer::resize_pic` for tier switches.
+  - Added `addon_gel_quality` (`0` = low, `1` = high [default], `CVAR_ARCHIVE` in `crates/qserver/src/addons.rs`), `qrender::Settings::gel_quality`, `menu_options gel` (`Page::Gel`, Add-ons → `Gel Sprayer` → `Gel Quality` + tooltip), `src/addons/gel_coat.rs` tiers (`low`: 1024² atlas, `texel = 4.0`, 256 cap, 0.2 s rebuild in `gel_fx.rs`, `OnceLock` 128×128 2-octave tiling noise LUT; `high`: 2048², `texel = 2.0`, 512 cap, 0.1 s rebuild, 3D value noise), and `fte.frag` mode `10.0` (`GEL_FAST_MODE`: single texture tap, `dFdx`/`dFdy` normal perturbation, single Blinn-Phong specular + Fresnel rim without parallax or 4-tap neighbor gradient fetches). Pinned `("addon_gel_quality", "1")` in `qprof` `VANILLA`.
+  - Verified with `cargo clippy --all-targets --message-format=short` (0 warnings in touched files), `cargo nextest run`, `QRENDER_VALIDATION=1 cargo test -p qrender --test offscreen` (covering `gel_quality` 0/1, consecutive-frame staged `update_pic_rows`, and `resize_pic`), headless screenshots (`item18-before-clean.png` vs `item18-after-high.png` `compare -metric AE = 0`, `item18-after-low.png`, and `item18-menu.png`), `qprof -runs 3` medians (`target/qprof/item18-before` → `target/qprof/item18-after-final`, 1280×720, default high + staged upload), and a 3-run `e1m1` `toy 5` low-vs-high A/B (`target/qprof/item18-low-high`):
+    - `e1m1` `gel` (`high`): FPS **779 → 790**, frame **1283 → 1266 µs**, **p99 3904 → 1657 µs (−57.6%)**, **render cpu 216 → 94 µs (−56.5%)** (`vanilla` control: 814 → 813 fps, frame 1229 → 1229 µs).
+    - `ad_sepulcher` `gel` (`high`): FPS **490 → 497**, frame **2040 → 2011 µs**, **p99 5017 → 3213 µs (−36.0%)** (`vanilla` control: 505 → 504 fps, frame 1982 → 1985 µs).
+    - `ad_sepulcher` `all-addons` / `ultimate`: `all-addons` **434 → 440 fps** (p99 **3888 → 3556 µs**); `ultimate` **134 → 135 fps** (frame **7459 → 7400 µs**, GPU **7153 → 7107 µs**).
+    - `e1m1` `toy 5` (`high` → `low` 3-run median): FPS **803.3 → 808.9**, frame **1244.8 → 1236.2 µs**, p99 **1533.8 → 1333.5 µs (−13.1%)**, render CPU **105.5 → 88.0 µs (−16.6%)**, GPU `particles+vm` **4.84 → 4.13 µs (−14.7%)**.
 
 ### 19. Powerwasher jet geometry & shading (*visual*)
 - Problem: `src/addons/water_fx.rs` builds 40 ribbon segments + 40 loose

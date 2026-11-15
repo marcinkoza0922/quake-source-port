@@ -85,6 +85,7 @@ pub enum Page {
     PortalGun,
     Boomerang,
     Railgun,
+    Gel,
     Washer,
     Hookshot,
     Sticky,

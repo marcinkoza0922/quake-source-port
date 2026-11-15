@@ -123,6 +123,9 @@ pub(super) const BOOMERANG: &[Item] = &[
 ];
 /// Reached from the Add-ons pages: powerwasher push strength.
 pub(super) const WASHER: &[Item] = &[slider("Push", "addon_washer_push", 0.25, 3.0, 0.25)];
+/// Reached from the Add-ons pages: gel coat resolution, rebuild cadence and shader detail.
+pub(super) const GEL_QUALITY: &[(&str, f32)] = &[("low", 0.0), ("high", 1.0)];
+pub(super) const GEL: &[Item] = &[Item::Choice { label: "Gel Quality", cvar: "addon_gel_quality", choices: GEL_QUALITY }];
 /// Reached from the Add-ons pages: railgun damage and trail colour.
 pub(super) const RAILGUN: &[Item] = &[
     slider("Damage", "addon_rail_damage", 25.0, 300.0, 25.0),

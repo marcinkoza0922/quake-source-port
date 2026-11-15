@@ -119,34 +119,57 @@ impl Gpu {
         Ok(())
     }
 
+    /// Records the barriers, optional clear, and buffer copy for uploading the
+    /// first `rows` rows of a single-mip single-layer RGBA8 image, leaving it in
+    /// `SHADER_READ_ONLY_OPTIMAL`.
+    #[allow(clippy::too_many_arguments)]
+    pub fn record_image_rows_upload(
+        &self,
+        cmd: vk::CommandBuffer,
+        image: vk::Image,
+        width: u32,
+        height: u32,
+        rows: u32,
+        staging: Option<vk::Buffer>,
+    ) {
+        let rows = rows.min(height);
+        let rng = range(vk::ImageAspectFlags::COLOR, 1, 1);
+        barrier(&self.device, cmd, image, rng, vk::ImageLayout::UNDEFINED, vk::ImageLayout::TRANSFER_DST_OPTIMAL);
+        if rows < height {
+            let clear = vk::ClearColorValue { float32: [0.0; 4] };
+            // SAFETY: image in TRANSFER_DST layout.
+            unsafe { self.device.cmd_clear_color_image(cmd, image, vk::ImageLayout::TRANSFER_DST_OPTIMAL, &clear, &[rng]) };
+            barrier(&self.device, cmd, image, rng, vk::ImageLayout::TRANSFER_DST_OPTIMAL, vk::ImageLayout::TRANSFER_DST_OPTIMAL);
+        }
+        if rows > 0 && let Some(buf) = staging {
+            let region = [vk::BufferImageCopy {
+                image_subresource: vk::ImageSubresourceLayers { aspect_mask: vk::ImageAspectFlags::COLOR, mip_level: 0, base_array_layer: 0, layer_count: 1 },
+                image_extent: vk::Extent3D { width, height: rows, depth: 1 },
+                ..Default::default()
+            }];
+            // SAFETY: image in TRANSFER_DST layout; staging lives until GPU execution finishes.
+            unsafe { self.device.cmd_copy_buffer_to_image(cmd, buf, image, vk::ImageLayout::TRANSFER_DST_OPTIMAL, &region) };
+        }
+        barrier(&self.device, cmd, image, rng, vk::ImageLayout::TRANSFER_DST_OPTIMAL, vk::ImageLayout::SHADER_READ_ONLY_OPTIMAL);
+    }
+
     /// Uploads the first `rows` rows of an RGBA8 single-mip image from
     /// `data` (full-width rows) and clears the rest to transparent black,
     /// then transitions it to shader-read. Cheaper than [`Self::upload_image`]
     /// when only the top of a large image holds anything.
     pub fn upload_image_rows(&mut self, up: &mut Upload, img: &Image, data: &[u8], rows: u32) -> Result<()> {
         let rows = rows.min(img.height);
-        let rng = range(vk::ImageAspectFlags::COLOR, img.mips, img.layers);
-        barrier(&self.device, up.cmd, img.image, rng, vk::ImageLayout::UNDEFINED, vk::ImageLayout::TRANSFER_DST_OPTIMAL);
-        if rows < img.height {
-            let clear = vk::ClearColorValue { float32: [0.0; 4] };
-            // SAFETY: image in TRANSFER_DST layout.
-            unsafe { self.device.cmd_clear_color_image(up.cmd, img.image, vk::ImageLayout::TRANSFER_DST_OPTIMAL, &clear, &[rng]) };
-            barrier(&self.device, up.cmd, img.image, rng, vk::ImageLayout::TRANSFER_DST_OPTIMAL, vk::ImageLayout::TRANSFER_DST_OPTIMAL);
-        }
-        if rows > 0 {
+        let st_buf = if rows > 0 {
             let len = (img.width * rows * 4) as usize;
             let mut st = self.buffer(len as u64, vk::BufferUsageFlags::TRANSFER_SRC, true)?;
             st.bytes_mut()[..len].copy_from_slice(&data[..len]);
-            let region = [vk::BufferImageCopy {
-                image_subresource: vk::ImageSubresourceLayers { aspect_mask: vk::ImageAspectFlags::COLOR, mip_level: 0, base_array_layer: 0, layer_count: 1 },
-                image_extent: vk::Extent3D { width: img.width, height: rows, depth: 1 },
-                ..Default::default()
-            }];
-            // SAFETY: image in TRANSFER_DST layout; staging lives until end_upload.
-            unsafe { self.device.cmd_copy_buffer_to_image(up.cmd, st.buf, img.image, vk::ImageLayout::TRANSFER_DST_OPTIMAL, &region) };
+            let b = st.buf;
             up.staging.push(st);
-        }
-        barrier(&self.device, up.cmd, img.image, rng, vk::ImageLayout::TRANSFER_DST_OPTIMAL, vk::ImageLayout::SHADER_READ_ONLY_OPTIMAL);
+            Some(b)
+        } else {
+            None
+        };
+        self.record_image_rows_upload(up.cmd, img.image, img.width, img.height, rows, st_buf);
         Ok(())
     }
 

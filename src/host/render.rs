@@ -144,7 +144,8 @@ impl Host {
             self.boomerang_fx.frame(self.cl.time, &self.cl, v, &mut self.r, &mut fte);
             let grav = self.cv("sv_gravity");
             let grav = if grav > 0.0 { grav } else { 800.0 };
-            self.gel_fx.frame(&self.cl, &self.level, &mut self.r, v, grav, self.snd.as_ref(), &mut fte);
+            let gel_quality = (self.cv("addon_gel_quality").round() as i32).clamp(0, 1) as u32;
+            self.gel_fx.frame(&self.cl, &self.level, &mut self.r, v, grav, self.snd.as_ref(), gel_quality, &mut fte);
             self.water_fx.frame(&self.cl, self.cl.viewentity.saturating_sub(1), v, grav, &mut self.r, &mut fte);
             for p in self.water_fx.wash_points(self.cl.time).collect::<Vec<_>>() {
                 self.blood.wash(p, crate::addons::water_fx::WASH_RADIUS);
@@ -399,6 +400,7 @@ impl Host {
             water_splashes: v("r_enhancedwater") != 0.0 && v("r_watersplash") != 0.0,
             water_caustics: if v("r_enhancedwater") != 0.0 && v("r_watercaustics") != 0.0 { v("r_watercaustics_amount").clamp(0.0, 4.0) } else { 0.0 },
             water_quality: (v("r_water_quality").round() as i32).clamp(0, 1) as u32,
+            gel_quality: (v("addon_gel_quality").round() as i32).clamp(0, 1) as u32,
             shader_scope: v("r_shader_scope").clamp(0.0, 1.0) as u32,
             goggles,
             ..Settings::default()

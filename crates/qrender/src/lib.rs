@@ -131,6 +131,8 @@ pub struct Renderer {
     hidden_entities: std::collections::HashSet<u32>,
     models: Vec<Model>,
     pics: Vec<PicInfo>,
+    /// Queued same-size picture uploads recorded on the next frame without idling.
+    pending_pic_uploads: Vec<PendingPicUpload>,
     /// Soft round blob for water spray puffs (big underwater-blast splashes).
     splash_pic: Option<PicId>,
     /// Precomputed tiling Worley caustic texture slot (`NO_TEX` if upload failed).
@@ -333,6 +335,14 @@ impl Renderer {
                 dev.destroy_semaphore(f.acquire, None);
             }
             self.gpu.free_buffer(f.dynbuf);
+            for b in f.staging {
+                self.gpu.free_buffer(b);
+            }
+        }
+        for up in std::mem::take(&mut self.pending_pic_uploads) {
+            if let Some(b) = up.staging {
+                self.gpu.free_buffer(b);
+            }
         }
         for b in [&self.palette_buf, &self.dummy, &self.alias_buf] {
             self.gpu.free_buffer_ref(b);

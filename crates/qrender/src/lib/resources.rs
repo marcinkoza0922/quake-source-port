@@ -1,10 +1,19 @@
 use super::*;
 
+pub(super) struct PendingPicUpload {
+    pub(super) image: vk::Image,
+    pub(super) width: u32,
+    pub(super) height: u32,
+    pub(super) rows: u32,
+    pub(super) staging: Option<Buffer>,
+}
+
 pub(super) struct FrameRes {
     pub(super) cmd: vk::CommandBuffer,
     pub(super) fence: vk::Fence,
     pub(super) acquire: vk::Semaphore,
     pub(super) dynbuf: Buffer,
+    pub(super) staging: Vec<Buffer>,
     pub(super) set: vk::DescriptorSet,
     pub(super) comp_set: vk::DescriptorSet,
     pub(super) cull_set: vk::DescriptorSet,

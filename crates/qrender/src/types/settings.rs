@@ -86,6 +86,8 @@ pub struct Settings {
     pub water_caustics: f32,
     /// r_water_quality: enhanced water caustics, ripples & splashes quality (0 = low, 1 = high).
     pub water_quality: u32,
+    /// addon_gel_quality: gel coat & droplet shading quality (0 = low / single fetch, 1 = high).
+    pub gel_quality: u32,
     /// r_shader_scope: 0 = slang preset on the 3D view only (UI drawn after
     /// it), 1 = on the whole frame including the UI.
     pub shader_scope: u32,
@@ -157,6 +159,7 @@ impl Default for Settings {
             water_splashes: false,
             water_caustics: 0.0,
             water_quality: 1,
+            gel_quality: 1,
             shader_scope: 0,
             goggles: Goggles::default(),
         }

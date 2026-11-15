@@ -400,4 +400,58 @@ fn start_bsp_renders_non_black() {
             }
         }
     }
+    // Gel shading quality tiers (low single-fetch vs high parallax+gradient)
+    // and async staged update_pic_rows + resize_pic across consecutive frames.
+    let mut gel_px = vec![0u8; 32 * 32 * 4];
+    for y in 0..32usize {
+        for x in 0..32usize {
+            let (dx, dy) = (x as f32 / 15.5 - 1.0, y as f32 / 15.5 - 1.0);
+            let h = ((1.0 - (dx * dx + dy * dy)).max(0.0).sqrt() * 255.0) as u8;
+            let o = (y * 32 + x) * 4;
+            gel_px[o..o + 4].copy_from_slice(&[64, 160, 255, h]);
+        }
+    }
+    let gel_pic = r.register_pic_rgba_linear(32, 32, &gel_px).unwrap();
+    let gel_batch = [FteBatch { pic: gel_pic, blend: FteBlend::Blend, lines: false, first_index: 0, num_indices: 6, soft: false, gel: true }];
+    let mut gel_outs = Vec::new();
+    for gel_quality in [0u32, 1] {
+        // Stage a partial update, render consecutive frames without idle(),
+        // then render full update and read back.
+        r.update_pic_rows(gel_pic, &gel_px[..32 * 16 * 4], 16).unwrap();
+        for _ in 0..2 {
+            r.render(&RenderFrame {
+                time: frame.time,
+                view: Some(view),
+                settings: Settings { gel_quality, ..Default::default() },
+                fte_vertices: &soft_verts,
+                fte_indices: &soft_idx,
+                fte_batches: &gel_batch,
+                ..Default::default()
+            }).unwrap();
+        }
+        r.update_pic_rows(gel_pic, &gel_px, 32).unwrap();
+        r.render(&RenderFrame {
+            time: frame.time,
+            view: Some(view),
+            settings: Settings { gel_quality, ..Default::default() },
+            fte_vertices: &soft_verts,
+            fte_indices: &soft_idx,
+            fte_batches: &gel_batch,
+            ..Default::default()
+        }).unwrap();
+        gel_outs.push(r.read_pixels().unwrap());
+    }
+    assert_ne!(gel_outs[0], gel_outs[1], "fast gel shader must differ from full parallax+gradient");
+    let small_px = vec![255u8; 16 * 16 * 4];
+    r.resize_pic(gel_pic, 16, 16).unwrap();
+    r.update_pic(gel_pic, &small_px).unwrap();
+    r.render(&RenderFrame {
+        time: frame.time,
+        view: Some(view),
+        fte_vertices: &soft_verts,
+        fte_indices: &soft_idx,
+        fte_batches: &gel_batch,
+        ..Default::default()
+    }).unwrap();
+    let _ = r.read_pixels().unwrap();
 }
