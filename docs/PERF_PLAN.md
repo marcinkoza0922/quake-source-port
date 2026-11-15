@@ -155,6 +155,12 @@ the remaining parity-bound phases below.
 - Plan: add a fast/low-cost mode reading sample 0 only under MSAA (or
   reusing `t.ao_source` when available) instead of all `ns` samples.
 - Measure: `supersample`, `all-enhancements` on `ad_sepulcher`.
+- **Status (Done, 2026-11-15)**:
+  - Expanded `r_softparticles` (`0` = off, `1` = low [default], `2` = high; Enhancements → `"Soft Particles"` choice and `qrender::Settings::soft_particle_quality`).
+  - Under MSAA (`r_msaa > 1`), `low` (`1`) encodes `depth_samples = 1` in `pc.fogmix.z` so `crates/qrender/shaders/fte.frag` reads only `texelFetch(scene_depth_ms, px, 0).r` instead of looping `0..ns`, and disables per-sample shading (`Pipelines::fte_supersample = false`) on FTE pipelines (`crates/qrender/src/pipelines/build.rs`); `high` (`2`) preserves the `0..ns` nearest-sample depth loop and per-sample shading when `vid_fsaamode` is enabled.
+  - Verified with `cargo clippy --all-targets --message-format=short` (0 warnings in touched files), `cargo nextest run`, `QRENDER_VALIDATION=1 cargo test -p qrender --test offscreen` (cycling `msaa` `[1, 4]` × `supersample` `[false, true]` × `soft_particle_quality` `[0, 1]`, clean validation), headless screenshots (`ad_sepulcher` 200% + 8× SSAA `high` before/after `compare -metric AE = 0`, `low` vs `high` `34.85` px diff, and `Enhancements` menu), and `qprof -runs 3` medians (`target/qprof/item17-before` → `target/qprof/item17-after-final`, `ad_sepulcher`, 1280×720):
+    - `supersample`: FPS **432 → 440**, frame **2313 → 2271 µs** (-42 µs), GPU **2258 → 2216 µs** (-42 µs), `particles+vm` **755 → 712 µs** (-43 µs).
+    - `all-enhancements`: FPS **156 → 161**, frame **6392 → 6218 µs** (-174 µs), GPU **6334 → 6161 µs** (-173 µs), `particles+vm` **1964 → 1810 µs** (-154 µs).
 
 ### 18. Gel sprayer coat build, upload & shading (*visual*)
 - Problem: even after item 3, `gel` has 4.5–6.5 ms p99 spikes from

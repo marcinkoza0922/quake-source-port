@@ -111,6 +111,8 @@ pub struct Pipelines {
     pub samples: u32,
     /// Scene pipelines shade per sample (set before `build`).
     pub supersample: bool,
+    /// FTE particle pipelines also shade per sample (high soft-particle quality).
+    pub fte_supersample: bool,
     sh: Shaders,
     modules: Vec<vk::ShaderModule>,
 }
@@ -371,6 +373,7 @@ impl Pipelines {
             post_format,
             samples,
             supersample: false,
+            fte_supersample: false,
             sh,
             modules,
         };

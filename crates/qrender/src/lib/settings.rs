@@ -20,10 +20,12 @@ impl Renderer {
         };
         let scale = st.render_scale.clamp(0.25, 2.0);
         let supersample = st.supersample && self.gpu.sample_shading;
-        if msaa != self.msaa || supersample != self.pipes.supersample {
+        let fte_supersample = supersample && st.soft_particle_quality > 0;
+        if msaa != self.msaa || supersample != self.pipes.supersample || fte_supersample != self.pipes.fte_supersample {
             self.idle();
             self.msaa = msaa;
             self.pipes.supersample = supersample;
+            self.pipes.fte_supersample = fte_supersample;
             let fmt = self.pipes.post_format;
             self.pipes.build(&self.gpu, fmt, msaa)?;
             self.destroy_targets();

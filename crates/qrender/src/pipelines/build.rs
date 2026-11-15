@@ -128,6 +128,7 @@ impl Pipelines {
             attr(1, 0, f32x2, 12),
             attr(2, 0, vk::Format::R8G8B8A8_UNORM, 20),
         ];
+        let fte_supersample = self.fte_supersample;
         let build_scene = |pipe_samples, pipe_ss| -> Result<ScenePipes> {
             let sd = |vs, fs, bindings, attrs, blend, dt, dw| Desc {
                 samples: pipe_samples,
@@ -139,6 +140,7 @@ impl Pipelines {
             for (i, slot) in fte.iter_mut().enumerate() {
                 let (src, dst) = fte_factors(crate::FteBlend::ALL[i % 8]);
                 *slot = sg(Desc {
+                    sample_shading: pipe_ss && fte_supersample,
                     topology: if i >= 8 { vk::PrimitiveTopology::LINE_LIST } else { vk::PrimitiveTopology::TRIANGLE_LIST },
                     ..sd(fte_vs, fte_fs, &fb, &fa, Blend::Factors(src, dst), true, false)
                 })?;

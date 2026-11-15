@@ -273,6 +273,7 @@ pub(super) const SSAO: &[(&str, f32)] = &[("off", 0.0), ("low", 1.0), ("medium",
 pub(super) const PORTAL_QUALITY: &[(&str, f32)] = &[("low", 0.0), ("medium", 1.0), ("high", 2.0)];
 pub(super) const WATER_QUALITY: &[(&str, f32)] = &[("low", 0.0), ("high", 1.0)];
 pub(super) const MOTIONBLUR_QUALITY: &[(&str, f32)] = &[("low", 0.0), ("high", 1.0)];
+pub(super) const SOFT_PARTICLES: &[(&str, f32)] = &[("off", 0.0), ("low", 1.0), ("high", 2.0)];
 pub(super) const MODES: [&str; 3] = ["windowed", "fullscreen", "borderless"];
 
 pub(super) const GRAPHICS: &[Item] = &[
@@ -307,6 +308,7 @@ pub(super) const ENHANCEMENTS: &[Item] = &[
     toggle("Enhanced Water", "r_enhancedwater"),
     toggle("See-through Teleporters", "r_teleportwindows"),
     Item::Choice { label: "Portal View Quality", cvar: "r_portal_quality", choices: PORTAL_QUALITY },
+    Item::Choice { label: "Soft Particles", cvar: "r_softparticles", choices: SOFT_PARTICLES },
     Item::Sub { label: "Water Settings", page: Page::Water },
     Item::Sub { label: "Screen Shader", page: Page::ScreenShader },
     Item::Sub { label: "Impact Effects", page: Page::Impacts },

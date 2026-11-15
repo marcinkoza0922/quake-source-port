@@ -1516,13 +1516,20 @@ impl Renderer {
                         restore(vp_scene);
                     }
                     let samples = t.color_ms.as_ref().map_or(1, |_| self.msaa);
+                    let depth_samples = if samples <= 1 {
+                        0
+                    } else if st.soft_particle_quality > 0 {
+                        samples
+                    } else {
+                        1
+                    };
                     dev.cmd_bind_vertex_buffers(cmd, 0, &[dynbuf], &[*vofs]);
                     dev.cmd_bind_index_buffer(cmd, dynbuf, *iofs, vk::IndexType::UINT32);
                     for (pipe, slot, b, mode) in batches {
                         dev.cmd_bind_pipeline(cmd, gfx, p.fte[*pipe]);
                         let fogmix = if matches!(b.blend, crate::FteBlend::Blend | crate::FteBlend::BlendColour) { 1.0 } else { 0.0 };
                         let soft = if split && b.soft { 1.0 / soft_dist } else { 0.0 };
-                        let color = [fogmix, soft, samples as f32, *mode];
+                        let color = [fogmix, soft, depth_samples as f32, *mode];
                         push(bytes_of(&[PolyPush { color, tex: *slot }]));
                         dev.cmd_draw_indexed(cmd, b.num_indices, 1, b.first_index, 0, 0);
                     }

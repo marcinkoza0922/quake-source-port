@@ -60,6 +60,8 @@ pub struct Settings {
     /// r_softparticles ? r_softparticledistance : 0. Soft FTE particles fade
     /// over this many units in front of scene depth; 0 disables.
     pub soft_particle_distance: f32,
+    /// Soft particle MSAA depth quality (0 = low / sample 0, 1 = high / all samples).
+    pub soft_particle_quality: u32,
     /// r_ssao / r_ssao_strength: screen-space ambient occlusion strength (0 = off).
     pub ssao: f32,
     /// SSAO resolution and sample quality (0 = low, 1 = medium, 2 = high).
@@ -143,6 +145,7 @@ impl Default for Settings {
             dither_texture: 1.0,
             colorblind: 0,
             soft_particle_distance: 4.0,
+            soft_particle_quality: 0,
             ssao: 0.0,
             ssao_quality: 1,
             portal_quality: 1,

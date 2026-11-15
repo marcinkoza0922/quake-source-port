@@ -80,13 +80,16 @@ void main() {
     }
     if (pc.fogmix.y > 0.0) {
         // Soft particles: fade as the particle nears the scene behind it.
-        // MSAA uses the nearest covered sample (vkQuake fte_particles.inc).
+        // Low mode reads sample 0 under MSAA; high takes the nearest covered
+        // sample (vkQuake fte_particles.inc).
         ivec2 px = ivec2(gl_FragCoord.xy);
         int ns = int(pc.fogmix.z);
         float d;
         if (ns > 1) {
             d = 1.0;
             for (int s = 0; s < ns; s++) d = min(d, texelFetch(scene_depth_ms, px, s).r);
+        } else if (ns == 1) {
+            d = texelFetch(scene_depth_ms, px, 0).r;
         } else {
             d = texelFetch(scene_depth, px, 0).r;
         }

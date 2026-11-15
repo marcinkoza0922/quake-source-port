@@ -359,4 +359,45 @@ fn start_bsp_renders_non_black() {
             }
         }
     }
+    // Cycle soft particle quality tiers across MSAA and supersampling with a soft
+    // FTE quad near the view.
+    let rad = yaw.to_radians();
+    let fwd = [rad.cos(), rad.sin(), 0.0];
+    let right = [rad.sin(), -rad.cos(), 0.0];
+    let q_center = [
+        view.origin[0] + fwd[0] * 48.0,
+        view.origin[1] + fwd[1] * 48.0,
+        view.origin[2],
+    ];
+    let soft_verts = [
+        FteVertex { pos: [q_center[0] - right[0] * 16.0, q_center[1] - right[1] * 16.0, q_center[2] - 16.0], uv: [0.0, 1.0], color: [255; 4] },
+        FteVertex { pos: [q_center[0] + right[0] * 16.0, q_center[1] + right[1] * 16.0, q_center[2] - 16.0], uv: [1.0, 1.0], color: [255; 4] },
+        FteVertex { pos: [q_center[0] + right[0] * 16.0, q_center[1] + right[1] * 16.0, q_center[2] + 16.0], uv: [1.0, 0.0], color: [255; 4] },
+        FteVertex { pos: [q_center[0] - right[0] * 16.0, q_center[1] - right[1] * 16.0, q_center[2] + 16.0], uv: [0.0, 0.0], color: [255; 4] },
+    ];
+    let soft_idx = [0, 1, 2, 0, 2, 3];
+    let soft_batch = [FteBatch { pic, blend: FteBlend::Blend, lines: false, first_index: 0, num_indices: 6, soft: true, gel: false }];
+    for msaa in [1, 4] {
+        for supersample in [false, true] {
+            for soft_particle_quality in [0, 1] {
+                let st = Settings {
+                    msaa,
+                    supersample,
+                    soft_particle_distance: 4.0,
+                    soft_particle_quality,
+                    ..Default::default()
+                };
+                r.render(&RenderFrame {
+                    time: frame.time,
+                    view: Some(view),
+                    settings: st,
+                    fte_vertices: &soft_verts,
+                    fte_indices: &soft_idx,
+                    fte_batches: &soft_batch,
+                    ..Default::default()
+                }).unwrap();
+                let _ = r.read_pixels().unwrap();
+            }
+        }
+    }
 }
