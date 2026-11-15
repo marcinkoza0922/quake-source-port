@@ -1,0 +1,58 @@
+{
+  "mcpServers": {
+    "brave-devtools": {
+      "args": [
+        "/home/marcink/.local/share/mcp-servers/node_modules/.bin/chrome-devtools-mcp",
+        "--executablePath=/usr/bin/brave-browser",
+        "--isolated",
+        "--no-usage-statistics"
+      ],
+      "command": "/usr/bin/node",
+      "disabled": true
+    },
+    "chrome-devtools": {
+      "command": "/home/marcink/.local/share/mcp-servers/bin/run-chrome-devtools",
+      "disabled": true
+    },
+    "filesystem": {
+      "args": [
+        "/home/marcink/.local/share/mcp-servers/filesystem/node_modules/@modelcontextprotocol/server-filesystem/dist/index.js",
+        "/home/marcink"
+      ],
+      "command": "/home/marcink/.local/share/mcp-servers/filesystem/node_modules/node/bin/node",
+      "disabled": true
+    },
+    "firefox-devtools": {
+      "args": [
+        "/home/marcink/.local/share/mcp-servers/node_modules/.bin/firefox-devtools-mcp",
+        "--firefox-path=/usr/bin/firefox",
+        "--tool-preset=developer"
+      ],
+      "command": "/usr/bin/node",
+      "disabled": true
+    },
+    "ghidra": {
+      "args": [
+        "--ghidra-server",
+        "http://127.0.0.1:8080/"
+      ],
+      "command": "/home/marcink/.local/bin/ghidra-mcp",
+      "disabled": true
+    },
+    "rea": {
+      "args": [
+        "mcp"
+      ],
+      "command": "/home/marcink/.local/bin/rea",
+      "disabled": true
+    },
+    "quake-tools": {
+      "args": [
+        "--root",
+        "/home/marcink/Games/quake-source-port"
+      ],
+      "command": "/home/marcink/Repos/quake-source-port/target/debug/qmcp",
+      "disabled": false
+    }
+  }
+}

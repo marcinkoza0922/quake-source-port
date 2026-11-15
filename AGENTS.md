@@ -26,15 +26,5 @@
 - `.claude/skills` links to that directory for compatibility; edit the shared copy.
 
 ## Asset tools
-- Meshy: available via MCP. Consider using it to generate 3D models for the project.
-- Blender: available via MCP. 3D modeling, scenes, rendering.
-- ArtCraft (pure Rust, installed locally). Use only when the project needs
-  that asset type:
-  - Photocraft: raster editing, layers/masks, PSD
-  - VectorCraft: vector illustration
-  - SoundCraft: DAW, multitrack/MIDI/mixing, CLI-scriptable
-  - MaterialCraft: procedural node-graph materials, exports maps
-  - TextureCraft: 3D PBR texture painting, mesh map baking
-  - EffectCraft: motion graphics/VFX compositing, render queue
-  - FilmCraft: video editing, color, sound
-- Invocation notes (fill in as discovered):
+- Consider Meshy when the project needs a new 3D model.
+- Use asset tools only when the task needs that asset type.
