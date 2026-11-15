@@ -210,6 +210,23 @@ impl<'a> Geometry<'a> {
         b
     }
 
+    fn push_batch(&mut self, tex: usize, blend: BlendMode, lines: bool, soft: bool, first: u32, num_indices: u32) {
+        if num_indices == 0 {
+            return;
+        }
+        if let Some(last) = self.batches.last_mut()
+            && last.tex == tex
+            && last.blend == blend
+            && last.lines == lines
+            && last.soft == soft
+            && last.first_index + last.num_indices == first
+        {
+            last.num_indices += num_indices;
+            return;
+        }
+        self.batches.push(Batch { tex, blend, lines, first_index: first, num_indices, soft });
+    }
+
     fn begin(&mut self, ty: TypeId, lines: bool, verts: &[Vertex], idx: &[u32]) {
         let t = &self.reg.types[ty];
         let tex = if lines { self.reg.white_texture() } else { t.tex };
@@ -218,24 +235,12 @@ impl<'a> Geometry<'a> {
         let first = self.indices.len() as u32;
         self.vertices.extend_from_slice(verts);
         self.indices.extend(idx.iter().map(|i| i + base));
-        let n = idx.len() as u32;
         let soft = !lines && t.looks.kind == RenderType::Normal;
-        if let Some(last) = self.batches.last_mut()
-            && last.tex == tex
-            && last.blend == t.looks.blendmode
-            && last.lines == lines
-            && last.soft == soft
-            && last.first_index + last.num_indices == first
-        {
-            last.num_indices += n;
-            return;
-        }
-        self.batches.push(Batch { tex, blend: t.looks.blendmode, lines, first_index: first, num_indices: n, soft });
+        self.push_batch(tex, t.looks.blendmode, lines, soft, first, idx.len() as u32);
     }
 
-    fn view_scale(&self, p: &Particle, l: &Looks, base: f32, k: f32) -> f32 {
-        let d = (p.org - self.view.origin).dot(self.view.forward);
-        let s = (d * p.scale) * l.invscalefactor + p.scale * (l.scalefactor * 250.0);
+    pub(super) fn view_scale_depth(depth: f32, scale: f32, l: &Looks, base: f32, k: f32) -> f32 {
+        let s = (depth * scale) * l.invscalefactor + scale * (l.scalefactor * 250.0);
         if s < 20.0 { base } else { base + s * k }
     }
 
@@ -243,14 +248,30 @@ impl<'a> Geometry<'a> {
 
 impl Sink for Geometry<'_> {
     fn particle(&mut self, ty: TypeId, p: &Particle) {
-        match self.reg.types[ty].looks.kind {
-            RenderType::Normal => self.textured(ty, p),
-            RenderType::UDecal => self.udecal(ty, p),
-            RenderType::Spark => self.line_spark(ty, p),
-            RenderType::SparkFan => self.fan_spark(ty, p),
-            RenderType::TexturedSpark => self.textured_spark(ty, p),
-            _ => {}
+        self.particles_rev(ty, std::slice::from_ref(p));
+    }
+
+    fn particles_rev(&mut self, ty: TypeId, particles: &[Particle]) {
+        if particles.is_empty() {
+            return;
         }
+        let t = &self.reg.types[ty];
+        let l = &t.looks;
+        let lines = l.kind == RenderType::Spark;
+        let tex = if lines { self.reg.white_texture() } else { t.tex };
+        let Some(tex) = tex else { return };
+        let first = self.indices.len() as u32;
+        match l.kind {
+            RenderType::Normal => self.emit_normal_particles(l, particles),
+            RenderType::UDecal => self.emit_udecals(l, particles),
+            RenderType::Spark => self.emit_line_sparks(l, particles),
+            RenderType::SparkFan => self.emit_fan_sparks(l, particles),
+            RenderType::TexturedSpark => self.emit_textured_sparks(l, particles),
+            _ => return,
+        }
+        let num_indices = self.indices.len() as u32 - first;
+        let soft = !lines && l.kind == RenderType::Normal;
+        self.push_batch(tex, l.blendmode, lines, soft, first, num_indices);
     }
 
     fn beam(&mut self, ty: TypeId, seg: &BeamSeg, next: &BeamSeg, p: &Particle, q: &Particle) {

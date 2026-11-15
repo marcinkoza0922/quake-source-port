@@ -1,6 +1,6 @@
 use super::*;
 
-#[derive(Clone, Debug, Default)]
+#[derive(Clone, Copy, Debug, Default)]
 pub struct Particle {
     pub(super) next: u32,
     pub die: f32,
@@ -62,8 +62,9 @@ pub(super) struct TrailState {
     pub(super) state2: f32,
 }
 
-#[derive(Clone, Copy, Debug)]
+#[derive(Clone, Debug)]
 pub(super) struct TypeRt {
+    pub(super) vec: Vec<Particle>,
     pub(super) particles: u32,
     pub(super) beams: u32,
     pub(super) decals: u32,
@@ -73,7 +74,7 @@ pub(super) struct TypeRt {
 
 impl Default for TypeRt {
     fn default() -> Self {
-        TypeRt { particles: NIL, beams: NIL, decals: NIL, in_run: false, countoverflow: 0.0 }
+        TypeRt { vec: Vec::new(), particles: NIL, beams: NIL, decals: NIL, in_run: false, countoverflow: 0.0 }
     }
 }
 
@@ -168,6 +169,12 @@ impl World for EmptyWorld {
 /// Receives renderable state during [`System::frame`].
 pub trait Sink {
     fn particle(&mut self, _ty: TypeId, _p: &Particle) {}
+    /// Emits particles stored oldest-to-newest (drawn newest-to-oldest).
+    fn particles_rev(&mut self, ty: TypeId, particles: &[Particle]) {
+        for p in particles.iter().rev() {
+            self.particle(ty, p);
+        }
+    }
     /// Segment from `p` (of `seg`) to `q` (of `next`).
     fn beam(&mut self, _ty: TypeId, _seg: &BeamSeg, _next: &BeamSeg, _p: &Particle, _q: &Particle) {}
     fn decal(&mut self, _ty: TypeId, _d: &Decal) {}
@@ -263,12 +270,18 @@ pub struct PeTypes {
     pub defaulttrail: Option<TypeId>,
 }
 
+#[derive(Clone, Copy, Debug)]
+pub(super) enum PartRef {
+    Vec(TypeId, usize),
+    Arena(u32),
+}
+
 pub(super) struct DeferredTrail {
     pub(super) start: Vec3,
     pub(super) end: Vec3,
     pub(super) ty: TypeId,
     /// Particle owning the trailstate.
-    pub(super) owner: Option<u32>,
+    pub(super) owner: Option<PartRef>,
 }
 
 pub(super) struct DeferredDecal {
