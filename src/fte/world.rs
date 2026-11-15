@@ -63,6 +63,18 @@ pub(crate) fn brush_ents(cl: &ClientState, cm: &CollisionModel) -> Vec<BrushEnt>
     out
 }
 
+/// Shares one per-frame `BrushEnt` list and cached `CollisionModel` across client FX systems.
+pub(crate) fn cached_world<'a>(
+    cl: &ClientState,
+    lv: &'a crate::assets::Level,
+    cache: &'a mut Option<Vec<BrushEnt>>,
+) -> Option<BspWorld<'a>> {
+    let bsp = lv.bsp.as_ref()?;
+    let cm = lv.collision_model()?;
+    let ents = cache.get_or_insert_with(|| brush_ents(cl, cm));
+    Some(BspWorld { bsp, cm, ents })
+}
+
 pub(crate) fn fte_contents(c: i32) -> u32 {
     use qpart::*;
     match c {

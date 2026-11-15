@@ -154,8 +154,8 @@ pub struct Fte {
     geometry_batches: Vec<geom::Batch>,
     /// Trail state per entity number.
     trails: HashMap<i32, Option<TrailHandle>>,
-    /// Collision model of the current map.
-    cm: Option<(String, std::rc::Rc<CollisionModel>)>,
+    /// Map name used to detect level changes and reset cached trail/sky state.
+    cm_map: String,
     /// r_particledesc and map the effects were loaded for.
     loaded_for: Option<(String, String, String)>,
     palette: Option<Vec<u8>>,
@@ -181,7 +181,7 @@ impl Fte {
             geometry: Default::default(),
             geometry_batches: Vec::new(),
             trails: HashMap::new(),
-            cm: None,
+            cm_map: String::new(),
             loaded_for: None,
             palette: None,
             requests: 0,
@@ -285,12 +285,12 @@ impl Fte {
     pub fn frame(
         &mut self,
         cl: &mut ClientState,
-        bsp: Option<&Bsp>,
+        lv: &crate::assets::Level,
+        brushes: &mut Option<Vec<BrushEnt>>,
         fs: &qcore::fs::Fs,
         r: &mut Renderer,
         snd: Option<&mut qsound::SoundSystem>,
         view: &qrender::View,
-        mapname: &str,
         cull_tangents: Option<[f32; 2]>,
     ) -> (Vec<FteVertex>, Vec<u32>, Vec<FteBatch>) {
         let queue = std::mem::take(&mut cl.fte_queue);
@@ -298,16 +298,13 @@ impl Fte {
         if self.reg.types.is_empty() && queue.is_empty() && self.sys.run_list().is_empty() {
             return std::mem::take(&mut self.geometry);
         }
-        let Some(bsp) = bsp else { return std::mem::take(&mut self.geometry) };
-        if self.cm.as_ref().is_none_or(|(n, _)| n != mapname) {
-            self.cm = Some((mapname.to_string(), std::rc::Rc::new(CollisionModel::from_bsp(bsp))));
+        if self.cm_map != lv.mapname {
+            self.cm_map = lv.mapname.clone();
             self.trails.clear();
             self.ent_fx.clear();
             self.sky_dirty = true;
         }
-        let Some(cm) = self.cm.as_ref().map(|c| c.1.clone()) else { return std::mem::take(&mut self.geometry) };
-        let ents = brush_ents(cl, &cm);
-        let world = BspWorld { bsp, cm: &cm, ents: &ents };
+        let Some(world) = cached_world(cl, lv, brushes) else { return std::mem::take(&mut self.geometry) };
         let mut f = files(fs);
         // CL_ForceProtocolParticles: a server using particleeffectnum gets
         // effectinfo.txt loaded implicitly (weakly), for un-namespaced names.
@@ -351,7 +348,7 @@ impl Fte {
             self.sky_dirty = false;
             self.sys.clear_sky_tris();
             self.sky_models.clear();
-            for (sub, tris) in sky_tris(bsp, &mut self.reg, &mut f) {
+            for (sub, tris) in sky_tris(world.bsp, &mut self.reg, &mut f) {
                 self.sky_models.insert(sub);
                 self.sys.set_sky_tris(sub, tris);
             }

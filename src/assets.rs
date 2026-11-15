@@ -34,6 +34,8 @@ pub struct Level {
     /// Models by name (temp entities, beams).
     pub by_name: HashMap<String, Option<Model>>,
     pub bsp: Option<Bsp>,
+    /// Lazily initialized BSP collision model shared across client FX systems.
+    pub cm: std::sync::OnceLock<qworld::CollisionModel>,
     pub world_fog: Fog,
     pub world_sky: String,
     /// Worldspawn `[_]wateralpha`/`lavaalpha`/`slimealpha`/`telealpha`
@@ -57,6 +59,13 @@ fn load_model(fs: &Fs, r: &mut Renderer, name: &str) -> Option<Model> {
 }
 
 impl Level {
+    /// Lazily builds and caches the BSP collision model for this level.
+    pub fn collision_model(&self) -> Option<&qworld::CollisionModel> {
+        self.bsp
+            .as_ref()
+            .map(|bsp| self.cm.get_or_init(|| qworld::CollisionModel::from_bsp(bsp)))
+    }
+
     /// Loads everything in `cl`'s precache lists; sets `cl.model_flags`.
     pub fn load(fs: &Fs, r: &mut Renderer, snd: Option<&mut SoundSystem>, cl: &mut ClientState, colored: bool, print: &mut dyn FnMut(&str)) -> Level {
         let mut lv = Level { mapname: cl.mapname.clone(), ..Default::default() };

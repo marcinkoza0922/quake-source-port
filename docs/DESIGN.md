@@ -482,7 +482,11 @@ See [BLOOD.md](BLOOD.md) for splatter, wounds, droplets and diagnostics.
 ### Optional weapon impacts
 Enhancements → Impact Effects toggles, clipped bullet/scorch marks and embedded/bouncing
 nails are implemented in `src/impacts.rs` and `src/impacts/`; see
-[IMPACTS.md](IMPACTS.md) for ownership, material heuristics and diagnostics.
+[IMPACTS.md](IMPACTS.md) for ownership, material heuristics and diagnostics. Both
+`blood` and `impacts` cache alias-model metadata (`CachedMdl` in `src/blood/mesh.rs`)
+once per `ModelId`, evaluate animated vertex positions lazily behind bounding-sphere
+culling, and share `Level::collision_model()` (`OnceLock`) plus one per-frame
+`BrushEnt` list (`cached_world` in `src/fte/world.rs`) with `fte` and `hitfx`.
 
 The add-on browser checklist has an eight-row viewport with a scrollbar, separate
 from its help prompts and Start/Back buttons. Wheel input over the list scrolls

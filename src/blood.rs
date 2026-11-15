@@ -1,5 +1,5 @@
 //! Cosmetic blood, independent of scripted particle packs and server physics.
-use crate::fte::world::{BspWorld, brush_ents};
+use crate::fte::world::{BrushEnt, cached_world};
 use qcore::math::Vec3;
 use qformats::Mdl;
 use qpart::World;
@@ -54,16 +54,17 @@ struct Mark {
 #[derive(Default)]
 pub struct Blood {
     marks: VecDeque<Mark>,
-    models: HashMap<ModelId, Mdl>,
+    models: HashMap<ModelId, Option<mesh::CachedMdl>>,
     model_ids: HashMap<usize, ModelId>,
-    heads: std::collections::HashSet<ModelId>,
-    cm: Option<qworld::CollisionModel>,
     pic: Option<PicId>,
     trails: HashMap<u32, Vec3>,
+    trails_scratch: HashMap<u32, Vec3>,
     time: f64,
     seed: u32,
     actors: HashMap<u32, (ModelId, Vec3)>,
+    actors_scratch: HashMap<u32, (ModelId, Vec3)>,
     gibs: HashMap<u32, usize>,
+    gibs_scratch: HashMap<u32, usize>,
     explosions: Vec<(Vec3, f64)>,
     droplets: Vec<droplets::Droplet>,
     pub debug_hits: Vec<(Vec3, bool)>,
@@ -178,11 +179,11 @@ impl Blood {
             self.random() * std::f32::consts::TAU,
             0.7 + self.random() * 0.6,
         ];
-        let Some(m) = self.models.get(&e.model) else {
+        let Some(Some(cm)) = self.models.get(&e.model) else {
             return;
         };
         let mut patches = Vec::new();
-        for t in &m.triangles {
+        for t in &cm.mdl.triangles {
             let tri = t.verts.map(|i| i as usize);
             let v = tri.map(|i| positions[i]);
             let normal = (v[1] - v[0]).cross(v[2] - v[0]).normalize();
@@ -210,12 +211,40 @@ impl Blood {
         }
     }
 
+    fn step_gib_trail(
+        &mut self,
+        world: &dyn World,
+        time: f64,
+        size: f32,
+        next: &mut HashMap<u32, Vec3>,
+        key: u32,
+        p: Vec3,
+    ) {
+        let prev = self.trails.get(&key).copied().unwrap_or(p);
+        if (p - prev).length_sq() >= 9.0 && (p - prev).length_sq() < 256.0 * 256.0 {
+            let n = ((p - prev).length() / 4.0).ceil().min(16.0) as usize;
+            for i in 1..=n {
+                self.splat(
+                    world,
+                    prev.lerp(p, i as f32 / n as f32),
+                    Vec3::new(0.0, 0.0, -0.05),
+                    time,
+                    4.0 * size,
+                );
+            }
+            next.insert(key, p);
+        } else {
+            next.insert(key, prev);
+        }
+    }
+
     #[allow(clippy::too_many_arguments)]
     pub fn frame(
         &mut self,
         set: Settings,
         cl: &qclient::ClientState,
         lv: &crate::assets::Level,
+        brushes: &mut Option<Vec<BrushEnt>>,
         fs: &qcore::fs::Fs,
         r: &mut qrender::Renderer,
         ents: &[RenderEntity],
@@ -233,17 +262,7 @@ impl Blood {
         }
         let dt = (cl.time - self.time).clamp(0.0, 0.1) as f32;
         self.time = cl.time;
-        let Some(bsp) = lv.bsp.as_ref() else { return };
-        let cm = self
-            .cm
-            .take()
-            .unwrap_or_else(|| qworld::CollisionModel::from_bsp(bsp));
-        let brushes = brush_ents(cl, &cm);
-        let world = BspWorld {
-            bsp,
-            cm: &cm,
-            ents: &brushes,
-        };
+        let Some(world) = cached_world(cl, lv, brushes) else { return };
         // Cache only visible keyed MDLs; brush models and effects are excluded.
         for e in ents.iter().filter(|e| e.key != 0) {
             if let Some(server) = cl.entities.get(e.key as usize) {
@@ -256,70 +275,63 @@ impl Blood {
                 .entities
                 .get(e.key as usize)
                 .and_then(|e| cl.model_name(e.model))
-                && let Some(data) = fs.open(name)
-                && let Ok(m) = Mdl::parse(&data)
             {
-                if name
-                    .rsplit('/')
-                    .next()
-                    .is_some_and(|n| n.starts_with("h_") || n.contains("head"))
-                {
-                    self.heads.insert(e.model);
-                }
-                self.models.insert(e.model, m);
+                let cached = if mesh::is_mdl_path(name) {
+                    let is_head = name
+                        .rsplit('/')
+                        .next()
+                        .is_some_and(|n| n.starts_with("h_") || n.contains("head"));
+                    fs.open(name)
+                        .and_then(|data| Mdl::parse(&data).ok())
+                        .map(|m| mesh::CachedMdl::from_mdl(m, is_head))
+                } else {
+                    None
+                };
+                self.models.insert(e.model, cached);
             }
         }
-        let impacts = !cl.blood_hits.is_empty() || !cl.shot_impacts.is_empty();
-        let poses: HashMap<u32, (&RenderEntity, Vec<Vec3>)> = ents
-            .iter()
-            .filter_map(|e| {
-                // a local player's own body (portal views only) still
-                // bleeds, but takes no wounds (see `impacts`)
-                if e.key == 0 || e.viewmodel {
-                    return None;
-                }
-                let m = self.models.get(&e.model)?;
-                if !impacts
-                    && !(set.gibs && (m.flags & (4 | 32) != 0 || self.heads.contains(&e.model)))
-                    && !self.marks.iter().any(|m| m.owner == Some((e.key, e.model)))
-                {
-                    return None;
-                }
-                Some((e.key, (e, mesh::positions(m, e, dynverts, cl.time))))
-            })
-            .collect();
-        self.impacts(set, cl, &world, &poses, view, debris);
+        let mut poses: HashMap<u32, (&RenderEntity, Vec<Vec3>)> = HashMap::new();
+        self.impacts_with(
+            set,
+            cl,
+            &world,
+            events::PoseSet::Lazy {
+                ents,
+                dynverts,
+                time: cl.time,
+                cache: &mut poses,
+            },
+            view,
+            debris,
+        );
         self.step_droplets(&world, dt, cl.time);
         if set.gibs {
-            let mut sources: Vec<_> = debris.blood_sources().collect();
-            sources.extend(
-                poses
-                    .iter()
-                    .filter(|(_, (e, _))| {
-                        self.models[&e.model].flags & (4 | 32) != 0 || self.heads.contains(&e.model)
-                    })
-                    .map(|(&key, (e, _))| (key, Vec3::from(e.origin))),
-            );
-            let mut next = HashMap::new();
-            for (key, p) in sources {
-                let prev = self.trails.get(&key).copied().unwrap_or(p);
-                if (p - prev).length_sq() >= 9.0 && (p - prev).length_sq() < 256.0 * 256.0 {
-                    let n = ((p - prev).length() / 4.0).ceil().min(16.0) as usize;
-                    for i in 1..=n {
-                        self.splat(
-                            &world,
-                            prev.lerp(p, i as f32 / n as f32),
-                            Vec3::new(0.0, 0.0, -0.05),
-                            cl.time,
-                            4.0 * set.size,
-                        );
-                    }
-                    next.insert(key, p);
-                } else {
-                    next.insert(key, prev);
+            let mut next = std::mem::take(&mut self.trails_scratch);
+            next.clear();
+            for (key, p) in debris.blood_sources() {
+                self.step_gib_trail(&world, cl.time, set.size, &mut next, key, p);
+            }
+            for e in ents {
+                if e.key == 0 || e.viewmodel {
+                    continue;
+                }
+                if self
+                    .models
+                    .get(&e.model)
+                    .and_then(Option::as_ref)
+                    .is_some_and(|c| c.is_gib_or_head)
+                {
+                    self.step_gib_trail(
+                        &world,
+                        cl.time,
+                        set.size,
+                        &mut next,
+                        e.key,
+                        Vec3::from(e.origin),
+                    );
                 }
             }
-            self.trails = next;
+            self.trails_scratch = std::mem::replace(&mut self.trails, next);
         } else {
             self.trails.clear();
         }
@@ -341,6 +353,20 @@ impl Blood {
         while self.marks.len() > set.limit {
             self.marks.pop_front();
         }
+        if set.wounds {
+            for m in &self.marks {
+                if let Some((key, model)) = m.owner
+                    && !poses.contains_key(&key)
+                    && let Some(e) = ents
+                        .iter()
+                        .rev()
+                        .find(|e| e.key == key && e.model == model && !e.viewmodel)
+                    && let Some(Some(cm)) = self.models.get(&e.model)
+                {
+                    poses.insert(key, (e, mesh::positions(&cm.mdl, e, dynverts, cl.time)));
+                }
+            }
+        }
         if self.pic.is_none() {
             self.pic = r
                 .register_pic_rgba_linear(
@@ -353,7 +379,6 @@ impl Blood {
         if let Some(pic) = self.pic {
             self.draw(set, cl.time, &world, &poses, view, pic, out);
         }
-        self.cm = Some(cm);
     }
 
     #[allow(clippy::too_many_arguments)]

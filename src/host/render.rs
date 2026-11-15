@@ -127,14 +127,15 @@ impl Host {
             let cull_particles = self.cull_fte_for_view().then(|| {
                 qrender::view_fov_tangents(v, (w, h), self.cv("r_renderscale"))
             });
+            let mut brushes = None;
             fte = self.fte.frame(
                 &mut self.cl,
-                self.level.bsp.as_ref(),
+                &self.level,
+                &mut brushes,
                 &self.server.core.fs,
                 &mut self.r,
                 self.snd.as_mut(),
                 v,
-                &self.level.mapname,
                 cull_particles,
             );
             self.portal_fx.frame(self.cl.time, v, &mut self.r, self.snd.as_ref(), &mut fte);
@@ -149,12 +150,12 @@ impl Host {
                 self.blood.wash(p, crate::addons::water_fx::WASH_RADIUS);
             }
             self.blood.frame(
-                crate::blood::Settings::read(&self.server.core.cvars), &self.cl, &self.level,
+                crate::blood::Settings::read(&self.server.core.cvars), &self.cl, &self.level, &mut brushes,
                 &self.server.core.fs, &mut self.r, &ents, &dyn_verts,
                 v.origin.into(), &self.debris, &mut fte,
             );
             self.hitfx.frame(
-                &self.server.core.cvars, &self.cl, &self.level, &self.server.core.fs,
+                &self.server.core.cvars, &self.cl, &self.level, &mut brushes, &self.server.core.fs,
                 &mut self.r, v, &self.debris, &mut fte,
             );
             // Projectile pellets already draw their own streaks; hitscan ones would stack.
@@ -163,7 +164,7 @@ impl Host {
             let hitscan = self.cv("r_shotgun_tracers") != 0.0 && !pellets;
             self.tracers.frame(hitscan, &self.cl, &self.debris, v, &mut self.r, &mut fte);
             self.impacts.frame(
-                &self.server.core.cvars, &self.cl, &self.level, &self.server.core.fs,
+                &self.server.core.cvars, &self.cl, &self.level, &mut brushes, &self.server.core.fs,
                 &mut self.r, &mut ents, &dyn_verts, v.origin.into(), &self.debris, &mut fte,
             );
             crate::view::dlights(&self.cl, &mut dls);

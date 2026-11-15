@@ -1,6 +1,6 @@
 //! Bounded, client-only weapon marks and physical nails.
 use crate::blood::{Geometry, mesh};
-use crate::fte::world::{BspWorld, brush_ents};
+use crate::fte::world::{BspWorld, BrushEnt, cached_world};
 use qcore::math::Vec3;
 use qpart::World;
 use qrender::{FteBatch, FteBlend, FteVertex, ModelId, PicId, RenderEntity};
@@ -47,10 +47,10 @@ type Poses<'a> = HashMap<u32, (&'a RenderEntity, Vec<Vec3>)>;
 pub struct Impacts {
     marks: VecDeque<Mark>,
     nails: VecDeque<Nail>,
-    models: HashMap<ModelId, qformats::Mdl>,
+    models: HashMap<ModelId, Option<mesh::CachedMdl>>,
     flights: HashMap<usize, Flight>,
+    flights_scratch: HashMap<usize, Flight>,
     intercepted: std::collections::HashSet<usize>,
-    cm: Option<qworld::CollisionModel>,
     pic: Option<PicId>,
     time: f64,
 }
@@ -67,6 +67,7 @@ impl Impacts {
         cv: &qcore::cvar::Cvars,
         cl: &qclient::ClientState,
         lv: &crate::assets::Level,
+        brushes: &mut Option<Vec<BrushEnt>>,
         fs: &qcore::fs::Fs,
         r: &mut qrender::Renderer,
         ents: &mut Vec<RenderEntity>,
@@ -86,17 +87,7 @@ impl Impacts {
         }
         let dt = (cl.time - self.time).clamp(0.0, 0.1) as f32;
         self.time = cl.time;
-        let Some(bsp) = lv.bsp.as_ref() else { return };
-        let cm = self
-            .cm
-            .take()
-            .unwrap_or_else(|| qworld::CollisionModel::from_bsp(bsp));
-        let brushes = brush_ents(cl, &cm);
-        let world = BspWorld {
-            bsp,
-            cm: &cm,
-            ents: &brushes,
-        };
+        let Some(world) = cached_world(cl, lv, brushes) else { return };
         if enabled[1] {
             for e in ents.iter().filter(|e| e.key != 0 && !e.viewmodel) {
                 if self.models.contains_key(&e.model) {
@@ -106,33 +97,19 @@ impl Impacts {
                     .entities
                     .get(e.key as usize)
                     .and_then(|e| cl.model_name(e.model))
-                    && let Some(data) = fs.open(name)
-                    && let Ok(m) = qformats::Mdl::parse(&data)
                 {
-                    self.models.insert(e.model, m);
+                    let cached = if mesh::is_mdl_path(name) {
+                        fs.open(name)
+                            .and_then(|data| qformats::Mdl::parse(&data).ok())
+                            .map(|m| mesh::CachedMdl::from_mdl(m, false))
+                    } else {
+                        None
+                    };
+                    self.models.insert(e.model, cached);
                 }
             }
         }
-        let poses: Poses<'_> = ents
-            .iter()
-            .filter_map(|e| {
-                let m = self.models.get(&e.model)?;
-                // Death sequences identify flesh across mods, excluding weapon/effect MDLs.
-                if e.key == 0
-                    || e.viewmodel
-                    || !m.frames.iter().any(|f| {
-                        f.poses.iter().any(|p| {
-                            ["death", "deth", "dth", "die", "dead"]
-                                .iter()
-                                .any(|s| p.name.to_ascii_lowercase().contains(s))
-                        })
-                    })
-                {
-                    return None;
-                }
-                Some((e.key, (e, mesh::positions(m, e, dynverts, cl.time))))
-            })
-            .collect();
+        let mut poses: Poses<'_> = HashMap::new();
         for &(kind, p) in &cl.weapon_impacts {
             if !enabled.get(kind as usize).copied().unwrap_or(false) {
                 continue;
@@ -145,7 +122,9 @@ impl Impacts {
                 1 => {
                     self.nail(
                         &world,
-                        &poses,
+                        ents,
+                        dynverts,
+                        &mut poses,
                         p - dir * 24.0,
                         p + dir * 16.0,
                         cl.time,
@@ -170,11 +149,14 @@ impl Impacts {
         if enabled[1] {
             // Flesh hits produce blood rather than TE_SPIKE. A disappearing nail
             // supplies its own flight line, also allowing contact with ragdolls.
-            let mut flights = HashMap::new();
+            let mut flights = std::mem::take(&mut self.flights_scratch);
+            flights.clear();
+            let mut prev_flights = std::mem::take(&mut self.flights);
             for (key, e) in cl.active_entities() {
-                if e.effects & qclient::EF_QSP_PELLET != 0 || !cl
-                    .model_name(e.model)
-                    .is_some_and(|n| n == "progs/spike.mdl" || n == "progs/s_spike.mdl")
+                if e.effects & qclient::EF_QSP_PELLET != 0
+                    || !cl
+                        .model_name(e.model)
+                        .is_some_and(|n| n == "progs/spike.mdl" || n == "progs/s_spike.mdl")
                 {
                     continue;
                 }
@@ -193,16 +175,25 @@ impl Impacts {
                 if self.intercepted.contains(&key) {
                     continue;
                 }
-                if let Some(prev) = self.flights.get(&key) {
+                if let Some(prev) = prev_flights.get(&key) {
                     let a = prev.pos;
                     if (f.pos - a).length_sq() > 0.01
-                        && self.nail(&world, &poses, a, f.pos, cl.time, false)
+                        && self.nail(
+                            &world,
+                            ents,
+                            dynverts,
+                            &mut poses,
+                            a,
+                            f.pos,
+                            cl.time,
+                            false,
+                        )
                     {
                         self.intercepted.insert(key);
                     }
                 }
             }
-            for (key, f) in std::mem::take(&mut self.flights) {
+            for (key, f) in prev_flights.drain() {
                 if self.intercepted.contains(&key) {
                     continue;
                 }
@@ -219,7 +210,9 @@ impl Impacts {
                 }
                 self.nail(
                     &world,
-                    &poses,
+                    ents,
+                    dynverts,
+                    &mut poses,
                     f.pos - f.vel.normalize() * 8.0,
                     end,
                     cl.time,
@@ -227,6 +220,7 @@ impl Impacts {
                 );
             }
             self.intercepted.retain(|key| flights.contains_key(key));
+            self.flights_scratch = prev_flights;
             self.flights = flights;
         } else {
             self.nails.clear();
@@ -263,6 +257,22 @@ impl Impacts {
                 self.nails.pop_front();
             }
         }
+        if self
+            .nails
+            .iter()
+            .any(|n| matches!(n.anchor, Some(Anchor::Mesh { .. })))
+        {
+            for n in &self.nails {
+                if let Some(Anchor::Mesh { key, .. }) = n.anchor
+                    && !poses.contains_key(&key)
+                    && let Some(e) = ents.iter().rev().find(|e| e.key == key && !e.viewmodel)
+                    && let Some(Some(cm)) = self.models.get(&e.model)
+                    && cm.has_death_pose
+                {
+                    poses.insert(key, (e, mesh::positions(&cm.mdl, e, dynverts, cl.time)));
+                }
+            }
+        }
         self.step_nails(&world, &poses, dt, cv.value_of("sv_gravity").max(1.0));
         if self.pic.is_none() {
             self.pic = r
@@ -274,7 +284,6 @@ impl Impacts {
         }
         drop(poses);
         ents.retain(|e| !self.intercepted.contains(&(e.key as usize)));
-        self.cm = Some(cm);
     }
 
     fn draw(

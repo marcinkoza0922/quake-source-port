@@ -74,7 +74,7 @@ fn shootable_objects_blood_particles_require_a_flesh_mesh() {
     // An alias shootable object also must not be treated as flesh.
     let m = test_model("button1");
     let v = positions(&m, &e, &[], 0.0);
-    blood.models.insert(e.model, m);
+    blood.models.insert(e.model, Some(mesh::CachedMdl::from_mdl(m, false)));
     let poses = HashMap::from([(e.key, (&e, v))]);
     blood.impacts(
         settings(),
@@ -86,7 +86,9 @@ fn shootable_objects_blood_particles_require_a_flesh_mesh() {
     );
     assert!(blood.marks.is_empty());
     // The same geometry with a monster death sequence must still bleed.
-    blood.models.insert(e.model, test_model("death1"));
+    blood
+        .models
+        .insert(e.model, Some(mesh::CachedMdl::from_mdl(test_model("death1"), false)));
     blood.impacts(
         settings(),
         &cl,
@@ -226,7 +228,7 @@ fn living_monster_bbox_hit_bleeds_when_shot_misses_animated_triangles() {
     let mut cl = qclient::ClientState::new();
     cl.blood_hits.push([8.0, 8.0, 10.0]);
     let mut blood = Blood::default();
-    blood.models.insert(e.model, m);
+    blood.models.insert(e.model, Some(mesh::CachedMdl::from_mdl(m, false)));
     let poses = HashMap::from([(e.key, (&e, verts))]);
     blood.impacts(
         settings(),
@@ -275,7 +277,7 @@ fn near_misses_and_blood_behind_cover_do_not_use_live_skin_fallback() {
     };
     let verts = positions(&m, &e, &[], 0.0);
     let mut blood = Blood::default();
-    blood.models.insert(e.model, m);
+    blood.models.insert(e.model, Some(mesh::CachedMdl::from_mdl(m, false)));
     let poses = HashMap::from([(e.key, (&e, verts))]);
     let mut cl = qclient::ClientState::new();
     let view = Vec3::new(8.0, 8.0, 40.0);

@@ -191,3 +191,101 @@ pub fn closest_triangle(p: Vec3, tri: [Vec3; 3]) -> Vec3 {
         .min_by(|a, b| (*a - p).length_sq().total_cmp(&(*b - p).length_sq()))
         .unwrap_or(a)
 }
+
+const DEATH_NAMES: [&[u8]; 5] = [b"death", b"deth", b"dth", b"die", b"dead"];
+
+/// ASCII case-insensitive death-pose name check across id1 and mod monsters.
+pub(crate) fn is_death_name(name: &str) -> bool {
+    let bytes = name.as_bytes();
+    DEATH_NAMES.iter().any(|needle| {
+        bytes
+            .windows(needle.len())
+            .any(|w| w.eq_ignore_ascii_case(needle))
+    })
+}
+
+/// True for `.mdl` asset paths (excludes inline brush `*N`, sprites, and BSPs).
+pub(crate) fn is_mdl_path(name: &str) -> bool {
+    !name.starts_with('*')
+        && name.len() >= 4
+        && name.as_bytes()[name.len() - 4..].eq_ignore_ascii_case(b".mdl")
+}
+
+/// Squared Euclidean distance from `p` to closed line segment `[a, b]`.
+pub(crate) fn point_segment_dist_sq(p: Vec3, a: Vec3, b: Vec3) -> f32 {
+    let ab = b - a;
+    let len2 = ab.length_sq();
+    if len2 <= 1e-8 {
+        return (p - a).length_sq();
+    }
+    let t = (p - a).dot(ab) / len2;
+    (p - (a + ab * t.clamp(0.0, 1.0))).length_sq()
+}
+
+/// Cached alias model metadata used to skip non-flesh models, per-frame string
+/// scans, and vertex transformation when an entity cannot reach a ray or hit.
+pub(crate) struct CachedMdl {
+    pub mdl: Mdl,
+    pub is_flesh: bool,
+    pub has_death_pose: bool,
+    pub is_head: bool,
+    pub is_gib_or_head: bool,
+    pub death_frames: Vec<bool>,
+    pub radius: f32,
+}
+
+impl CachedMdl {
+    pub(crate) fn from_mdl(mdl: Mdl, is_head: bool) -> Self {
+        let death_frames: Vec<bool> = mdl
+            .frames
+            .iter()
+            .map(|f| f.poses.iter().any(|p| is_death_name(&p.name)))
+            .collect();
+        let has_death_pose = death_frames.iter().any(|&d| d);
+        let is_gib = mdl.flags & (4 | 32) != 0;
+        let mut max_r2 = 0.0_f32;
+        let so = Vec3::from(mdl.scale_origin);
+        let sc = Vec3::from(mdl.scale);
+        for f in &mdl.frames {
+            for p in &f.poses {
+                for v in &p.verts {
+                    let pos = so
+                        + Vec3::new(
+                            v.v[0] as f32 * sc.x,
+                            v.v[1] as f32 * sc.y,
+                            v.v[2] as f32 * sc.z,
+                        );
+                    max_r2 = max_r2.max(pos.length_sq());
+                }
+            }
+        }
+        Self {
+            mdl,
+            is_flesh: is_gib || has_death_pose,
+            has_death_pose,
+            is_head,
+            is_gib_or_head: is_gib || is_head,
+            death_frames,
+            radius: max_r2.sqrt(),
+        }
+    }
+
+    pub(crate) fn is_corpse(&self, e: &RenderEntity) -> bool {
+        e.dyn_pose.is_some()
+            || self.mdl.flags & (4 | 32) != 0
+            || self
+                .death_frames
+                .get(e.frame as usize)
+                .copied()
+                .unwrap_or(false)
+    }
+
+    /// Conservative world-space bounding radius around `e.origin`.
+    pub(crate) fn entity_radius(&self, e: &RenderEntity) -> f32 {
+        match e.dyn_pose {
+            Some(d) if d.radius > 0.0 => d.radius + 1.0,
+            Some(_) => f32::INFINITY,
+            None => self.radius + 1.0,
+        }
+    }
+}
