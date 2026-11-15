@@ -1,0 +1,56 @@
+# Workspace MCP overrides. Server commands and credentials stay in user config.
+# Keep source/docs, Quake inspection, and tools for project assets.
+[mcp_servers.github]
+enabled = true
+
+[mcp_servers.context7]
+enabled = true
+
+[mcp_servers.quake-tools]
+enabled = true
+# Reuse the installed binary, but inspect this workspace's data and artifacts.
+args = ["--root", "/home/marcink/Games/quake-source-port"]
+
+[mcp_servers.blender]
+enabled = true
+
+[mcp_servers.meshy]
+enabled = true
+
+[mcp_servers.photocraft]
+enabled = true
+
+[mcp_servers.vectorcraft]
+enabled = true
+
+[mcp_servers.soundcraft]
+enabled = true
+
+[mcp_servers.materialcraft]
+enabled = true
+
+[mcp_servers.texturecraft]
+enabled = true
+
+# Not needed for this native Rust engine's normal development workflow.
+[mcp_servers.effectcraft]
+enabled = false
+
+[mcp_servers.rea]
+enabled = false
+
+[mcp_servers.ghidra]
+enabled = false
+
+[mcp_servers.brave-devtools]
+enabled = false
+
+[mcp_servers.firefox-devtools]
+enabled = false
+
+[mcp_servers.chrome-devtools]
+enabled = false
+
+# Shell and built-in file tools already cover workspace file access.
+[mcp_servers.filesystem]
+enabled = false
