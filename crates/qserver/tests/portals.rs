@@ -230,3 +230,94 @@ fn addon_saves_carry_toys_and_portals_and_plain_saves_clear_them() {
     assert!(other.level.as_ref().unwrap().portals.save_text().is_none());
     assert!(other.load_game("QSPADDONS 7 0\n5\n").is_err());
 }
+
+#[test]
+fn hitscan_shotgun_shoots_through_portal() {
+    let Some((mut sv, c)) = start(&["addons_enable 1"]) else { return };
+    sv.core.cvars.set("addon_projectile_shotguns", "0");
+    run(&mut sv, c, 20, ClientMove::default());
+    sv.command("portal_set 0 480 330 48 0 -1 0 0 0 1");
+    sv.command("portal_set 1 480 80 48 0 1 0 0 0 1");
+    sv.command("setpos 480 200 40 0 90 0");
+    run(&mut sv, c, 5, ClientMove { angles: [0.0, 90.0, 0.0], ..Default::default() });
+    let hp_before = sv.level.as_ref().unwrap().vm.ent_f(1, sv.core.sv.fields.health);
+    // Fire shotgun north into portal 0 -> exits portal 1 heading north into the player's back.
+    run(&mut sv, c, 2, ClientMove { angles: [0.0, 90.0, 0.0], buttons: 1, ..Default::default() });
+    run(&mut sv, c, 5, ClientMove { angles: [0.0, 90.0, 0.0], ..Default::default() });
+    let hp_after = sv.level.as_ref().unwrap().vm.ent_f(1, sv.core.sv.fields.health);
+    assert!(hp_after < hp_before, "expected self-hit through portal: {hp_before} -> {hp_after}");
+}
+
+#[test]
+fn rocket_projectile_flies_through_portal() {
+    let Some((mut sv, c)) = start(&["addons_enable 1"]) else { return };
+    place_pair(&mut sv, c);
+    let far = sv.level.as_ref().unwrap().portals.pairs[0][1].expect("far wall portal placed");
+    // Move slightly south of the floor portal, aim down at it, and fire a rocket.
+    sv.command("setpos 480 200 60");
+    sv.command("give 7");
+    sv.command("give r 10");
+    run(&mut sv, c, 2, ClientMove { angles: [85.0, 90.0, 0.0], impulse: 7, ..Default::default() });
+    run(&mut sv, c, 2, ClientMove { angles: [85.0, 90.0, 0.0], buttons: 1, ..Default::default() });
+    run(&mut sv, c, 12, ClientMove { angles: [85.0, 90.0, 0.0], ..Default::default() });
+    let l = sv.level.as_ref().unwrap();
+    let f = &sv.core.sv.fields;
+    let missile = (2..l.vm.num_edicts() as u32).find(|&e| {
+        !l.vm.is_free(e) && l.vm.ent_str(e, f.classname).ok() == Some(b"missile")
+    });
+    let e = missile.expect("rocket should still be in flight after crossing floor portal");
+    let org = l.vm.ent_v(e, f.origin);
+    let vel = l.vm.ent_v(e, f.velocity);
+    let out_speed = qcore::math::Vec3::from_array(vel).dot(far.normal);
+    assert!(out_speed > 500.0, "expected rocket exiting far wall portal ({:?}), vel={vel:?} org={org:?}", far.normal);
+    assert!((org[1] - far.origin.y).abs() < 250.0, "expected rocket near far portal {:?}, got {org:?}", far.origin);
+}
+
+#[test]
+fn enemy_projectile_flies_through_portal() {
+    let Some((mut sv, c)) = start(&["addons_enable 1"]) else { return };
+    place_pair(&mut sv, c);
+    sv.command("setpos 480 100 24");
+    run(&mut sv, c, 2, ClientMove::default());
+    let floor = sv.level.as_ref().unwrap().portals.pairs[0][0].expect("floor portal placed");
+    let far = sv.level.as_ref().unwrap().portals.pairs[0][1].expect("far wall portal placed");
+    // Spawn a MOVETYPE_FLYMISSILE projectile (as monsters do) heading straight down into the floor portal.
+    let proj = {
+        let l = sv.level.as_mut().unwrap();
+        let e = l.vm.ed_alloc().unwrap();
+        let f = &sv.core.sv.fields;
+        let cls = l.vm.strings.engine(b"wizspike");
+        l.vm.set_ent_i(e, f.classname, cls);
+        l.vm.set_ent_f(e, f.movetype, 9.0); // MOVETYPE_FLYMISSILE
+        l.vm.set_ent_f(e, f.solid, 2.0);
+        l.vm.set_ent_v(e, f.origin, [floor.origin.x, floor.origin.y, floor.origin.z + 24.0]);
+        l.vm.set_ent_v(e, f.velocity, [0.0, 0.0, -600.0]);
+        l.vm.set_ent_v(e, f.angles, [-90.0, 0.0, 0.0]);
+        e
+    };
+    run(&mut sv, c, 10, ClientMove::default());
+    let l = sv.level.as_ref().unwrap();
+    let f = &sv.core.sv.fields;
+    assert!(!l.vm.is_free(proj), "enemy projectile should cross the floor portal instead of hitting the floor");
+    let vel = l.vm.ent_v(proj, f.velocity);
+    let out_speed = qcore::math::Vec3::from_array(vel).dot(far.normal);
+    assert!(out_speed > 500.0, "expected enemy projectile exiting far wall portal ({:?}), vel={vel:?}", far.normal);
+}
+
+#[test]
+fn gel_sprays_through_portal() {
+    let Some((mut sv, c)) = start(&["addons_enable 1"]) else { return };
+    place_pair(&mut sv, c);
+    let far = sv.level.as_ref().unwrap().portals.pairs[0][1].expect("far wall portal placed");
+    sv.command("setpos 480 200 60");
+    let gel_fire = ClientMove {
+        angles: [85.0, 90.0, 0.0],
+        buttons: Toy::GelSprayer.id() << TOY_SHIFT | BUTTON_TOY_FIRE,
+        ..Default::default()
+    };
+    run(&mut sv, c, 45, gel_fire);
+    let splats = &sv.level.as_ref().unwrap().gel.splats;
+    assert!(!splats.is_empty(), "expected gel splats after spraying through floor portal");
+    assert!(splats.iter().any(|s| (s.origin.y - far.origin.y).abs() < 300.0 && s.origin.y > 300.0),
+        "expected gel splats on far side near {:?}, got {splats:?}", far.origin);
+}

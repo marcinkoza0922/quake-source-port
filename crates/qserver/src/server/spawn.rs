@@ -18,6 +18,8 @@ impl Server {
     pub(super) fn spawn_inner(&mut self, mapname: &str) -> Result<(), String> {
         let c = &mut self.core;
         c.changelevel_issued = false;
+        c.linked_portals.clear();
+        c.portal_crossed.clear();
         if c.cvars.value_of("coop") != 0.0 {
             c.cvars.set("deathmatch", "0");
         }

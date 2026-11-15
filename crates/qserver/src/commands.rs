@@ -369,6 +369,7 @@ fn cmd_portal_set(s: &mut Server, a: &Args) {
     let p = (a.argc() == 11).then(|| crate::addons::portal::Portal::new(v(2), v(5).normalize(), v(8).normalize()));
     if let Some(l) = s.level.as_mut() {
         l.portals.set(i, slot, p);
+        l.portals.sync_links(&mut s.core.linked_portals);
     }
 }
 

@@ -218,8 +218,9 @@ pub(crate) fn frame(l: &mut Level, c: &mut Core) {
     // players giving no movement input: they bob in place on floor portals
     let idle: Vec<qworld::Ent> =
         c.clients.iter().enumerate().filter(|(_, cl)| cl.cmd.forward == 0.0 && cl.cmd.side == 0.0).map(|(i, _)| i as qworld::Ent + 1).collect();
+    let crossed = std::mem::take(&mut c.portal_crossed);
     let mut ents = Ents { vm: &mut l.vm, c: &mut *c };
-    portal_move::cross(st, &mut l.world, &mut ents, &idle);
+    portal_move::cross(st, &mut l.world, &mut ents, &idle, &crossed);
     let gun = c.cvars.value_of(Toy::PortalGun.cvar()) != 0.0;
     for (i, slot) in st.presses(&c.clients) {
         if !gun {
@@ -244,6 +245,7 @@ pub(crate) fn frame(l: &mut Level, c: &mut Core) {
         }
     }
     st.send(&mut c.clients);
+    st.sync_links(&mut c.linked_portals);
     boomerang_frame(l, c);
     if c.cvars.value_of(Toy::Sticky.cvar()) != 0.0 {
         sticky::frame(&mut l.stickies, &mut l.vm, c, &mut l.world);
@@ -299,9 +301,11 @@ fn gel_frame(l: &mut Level, c: &mut Core) {
         let (time, dt) = (l.vm.time, l.vm.g_f(c.sv.globals.frametime));
         let gravity = c.cvars.value_of("sv_gravity");
         let clients = std::mem::take(&mut c.clients);
+        let linked = std::mem::take(&mut c.linked_portals);
         let mut ents = Ents { vm: &mut l.vm, c: &mut *c };
         gel_phys::after(&mut l.gel, &mut ents, clients.len(), time);
-        l.gel.frame(&l.world, &ents, &clients, time, dt, gravity);
+        l.gel.frame(&l.world, &ents, &clients, &linked, time, dt, gravity);
+        c.linked_portals = linked;
         c.clients = clients;
     }
     if c.cvars.value_of(Toy::Washer.cvar()) != 0.0 {
@@ -345,6 +349,8 @@ pub(crate) fn shut_down(l: &mut Level, c: &mut Core) {
     }
     st.send(&mut c.clients);
     *st = Default::default();
+    c.linked_portals.clear();
+    c.portal_crossed.clear();
     l.boomerangs.clear(&mut c.clients);
     l.stickies.clear(&mut c.clients);
     l.gel.clear(&mut c.clients);

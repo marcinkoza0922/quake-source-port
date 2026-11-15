@@ -48,6 +48,7 @@ struct Blob {
     kind: u8,
     origin: Vec3,
     vel: Vec3,
+    pass_owner: bool,
 }
 
 #[derive(Clone, Debug, Default)]
@@ -186,7 +187,8 @@ impl Gel {
     }
 
     /// One server frame: spray from held triggers, then fly the blobs.
-    pub(crate) fn frame<D: Edicts + ?Sized>(&mut self, w: &World, ents: &D, clients: &[Client], now: f64, dt: f32, gravity: f32) {
+    #[allow(clippy::too_many_arguments)]
+    pub(crate) fn frame<D: Edicts + ?Sized>(&mut self, w: &World, ents: &D, clients: &[Client], linked: &[(super::portal::Portal, super::portal::Portal)], now: f64, dt: f32, gravity: f32) {
         self.ensure(clients.len());
         for (i, cl) in clients.iter().enumerate() {
             let b = cl.cmd.buttons;
@@ -221,14 +223,32 @@ impl Gel {
                 "//qsp_gel b {i} {kind} {:.1} {:.1} {:.1} {:.1} {:.1} {:.1}\n",
                 origin.x, origin.y, origin.z, vel.x, vel.y, vel.z
             ));
-            self.blobs.push(Blob { owner: i, kind, origin, vel });
+            self.blobs.push(Blob { owner: i, kind, origin, vel, pass_owner: true });
         }
         let mut k = 0;
         while k < self.blobs.len() {
             let mut b = self.blobs[k];
             b.vel.z -= gravity * dt;
-            let end = b.origin + b.vel * dt;
-            let tr = w.trace(ents, b.origin, Vec3::ZERO, Vec3::ZERO, end, MoveType::Missile, Some(b.owner as Ent + 1));
+            let mut end = b.origin + b.vel * dt;
+            let mut crossed = false;
+            let mut hops = 0u32;
+            let tr = loop {
+                let pass = b.pass_owner.then_some(b.owner as Ent + 1);
+                let tr = w.trace(ents, b.origin, Vec3::ZERO, Vec3::ZERO, end, MoveType::Missile, pass);
+                if !linked.is_empty()
+                    && hops < 4
+                    && let Some(hit) = super::portal_move::intersect_segment(linked, b.origin, end, &tr, 0.5)
+                {
+                    b.origin = hit.exit_pt;
+                    b.vel = super::portal_move::carry(&hit.a, &hit.b, b.vel);
+                    b.pass_owner = false;
+                    end = hit.exit_pt + hit.rem;
+                    crossed = true;
+                    hops += 1;
+                    continue;
+                }
+                break tr;
+            };
             if tr.allsolid || b.origin.z.abs() > 16384.0 {
                 self.blobs.remove(k);
                 continue;
@@ -236,6 +256,12 @@ impl Gel {
             let Some(hit) = tr.ent.filter(|_| tr.fraction < 1.0) else {
                 b.origin = end;
                 self.blobs[k] = b;
+                if crossed {
+                    self.outbox.push(format!(
+                        "//qsp_gel t {} {:.1} {:.1} {:.1} {:.1} {:.1} {:.1}\n",
+                        b.kind, b.origin.x, b.origin.y, b.origin.z, b.vel.x, b.vel.y, b.vel.z
+                    ));
+                }
                 k += 1;
                 continue;
             };

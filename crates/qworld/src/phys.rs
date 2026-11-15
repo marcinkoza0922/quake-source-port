@@ -271,7 +271,7 @@ pub fn physics_toss<D: Edicts + ?Sized>(w: &mut World, ents: &mut D, p: &PhysPar
     let ft = p.frametime as f32;
     ents.set_v(e, V::Angles, ma(ents.v(e, V::Angles), ft, ents.v(e, V::AVelocity)));
     let mv = ents.v(e, V::Velocity) * ft;
-    let tr = push_entity(w, ents, e, mv);
+    let tr = push::push_entity_portal(w, ents, e, mv);
     if tr.fraction == 1.0 || ents.is_free(e) {
         return;
     }

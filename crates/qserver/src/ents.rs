@@ -126,4 +126,15 @@ impl Edicts for Ents<'_> {
     fn rand(&mut self) -> i32 {
         self.vm.rand15() as i32
     }
+    fn try_portal_move(&mut self, w: &mut World, e: Ent, org: Vec3, mv: Vec3, tr: &qworld::Trace) -> Option<Vec3> {
+        if self.c.linked_portals.is_empty() || !crate::addons::active(self.c) {
+            return None;
+        }
+        let linked = std::mem::take(&mut self.c.linked_portals);
+        let mut crossed = std::mem::take(&mut self.c.portal_crossed);
+        let rem = crate::addons::portal_move::try_cross_entity(&linked, &mut crossed, w, self, e, org, mv, tr);
+        self.c.linked_portals = linked;
+        self.c.portal_crossed = crossed;
+        rem
+    }
 }

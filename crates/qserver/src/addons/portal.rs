@@ -83,6 +83,17 @@ impl Portals {
         self.pairs.iter().any(|p| p[0].is_some() && p[1].is_some())
     }
 
+    /// Populate `(entry, exit)` pairs for every linked portal pair (both directions).
+    pub fn sync_links(&self, out: &mut Vec<(Portal, Portal)>) {
+        out.clear();
+        for p in &self.pairs {
+            if let [Some(a), Some(b)] = *p {
+                out.push((a, b));
+                out.push((b, a));
+            }
+        }
+    }
+
     pub fn set(&mut self, owner: usize, slot: usize, p: Option<Portal>) {
         self.ensure(self.pairs.len().max(owner + 1));
         self.pairs[owner][slot] = p;
