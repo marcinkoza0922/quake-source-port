@@ -125,7 +125,9 @@ impl Presentation {
         let age = (time - self.last[owner.min(255)]).max(0.0) as f32;
         let recoil = (-age * 10.0).exp() * 2.0;
         let bob = (time as f32 * 2.0).sin() * 0.15;
-        let (origin, angles) = crate::view::weapon::portal_pose(view, bob, recoil);
+        let (mut origin, angles) = crate::view::weapon::portal_pose(view, bob, recoil);
+        let (_, _, up) = angle_vectors(view.angles.into());
+        origin = (Vec3::from(origin) - up * 1.5).to_array();
         // centred; the Right/Left view-model setting adds the side offset
         Some(RenderEntity { model: model.id, origin, angles, viewmodel: true, ..Default::default() })
     }

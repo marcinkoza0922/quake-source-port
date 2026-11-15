@@ -23,7 +23,7 @@ def capture(engine, basedir, addon):
     work = ROOT / "target" / "addon-previews" / addon
     work.mkdir(parents=True, exist_ok=True)
     settings = {
-        "addons_enable": 1, "skill": 2, "scr_centertime": 0,
+        "addons_enable": 1, f"addon_{addon}": 1, "skill": 2, "scr_centertime": 0,
         "con_notifytime": 0, "scr_showfps": 0, "scr_hudstyle": 1,
         "hud_health": 0, "hud_armor": 0, "hud_ammo": 0, "hud_ammolist": 0,
         "hud_weapons": 0, "hud_items": 0, "hud_face": 0, "crosshair": 1,
@@ -44,9 +44,7 @@ def capture(engine, basedir, addon):
     for cmd in ["god", "notarget", "impulse 9", "setpos 440 72 40 4 0 0"]:
         at(1.0, cmd)
     if addon != "goggles":
-        for i in range(IDS.index(addon) + 1):
-            at(1.2 + i * 0.2, "+toy")
-            at(1.3 + i * 0.2, "-toy")
+        at(1.2, f"toy {IDS.index(addon)}")
     if addon == "portalgun":
         at(2.5, "setpos 470 160 40 0 80 0")
         at(3.1, "+attack")

@@ -3,7 +3,7 @@
 blender -b --factory-startup --python tools/import_toy_model.py -- \
     SOURCE(.zip|dir|.fbx|.glb) [OUT] [NAME] [--out DIR] [--name NAME] [--length 36]
     [--anchor bbox|centroid|origin] [--back B] [--forward F] [--flip] [--flat]
-    [--size 512] [--gain 0.5] [--glow]
+    [--size 512] [--gain 0.5] [--glow] [--glow-blue] [--keep-uv]
 
 Generalised from tools/import_portal_gun.py. Writes OUT/NAME.mdl.zlib (MDL v6,
 one pose; NAME defaults to "model"), OUT/texture.rgb.zlib (top-down RGB8,
@@ -15,9 +15,12 @@ so its longest axis is --length units along +X (muzzle forward), +Z up.
             sits B units behind the origin; centroid: centred on the vertex
             centroid, moved --forward units (default 6) forward; origin: y/z
             kept as in the source, rear end at --back (default 6) behind.
-  --gain    texture multiplier (alias overbright); --glow marks bright
-            saturated "energy" texels as fullbright (skin index 1) at full
-            brightness and applies --gain only to the rest.
+  --gain       texture multiplier (alias overbright); --glow marks bright
+               saturated "energy" texels as fullbright (skin index 1) at full
+               brightness and applies --gain only to the rest. --glow-blue marks
+               only blue energy texels and preserves highlight gradients.
+  --keep-uv    keep the source UVs and texture when already within the triangle
+               budget instead of re-unwrapping and baking.
 No Quake palette or game data is needed.
 """
 import argparse
@@ -88,6 +91,10 @@ def main():
     args.add_argument('--size', type=int, default=512)
     args.add_argument('--gain', type=float, default=0.5)
     args.add_argument('--glow', action='store_true')
+    args.add_argument('--glow-blue', action='store_true',
+                      help='like --glow, but only mark blue energy texels')
+    args.add_argument('--keep-uv', action='store_true',
+                      help='keep source UVs and texture instead of re-unwrapping and baking')
     opts = args.parse_args(sys.argv[sys.argv.index('--') + 1:])
     opts.out = opts.out or opts.pos_out
     opts.name = opts.name or opts.pos_name or 'model'
@@ -124,67 +131,75 @@ def main():
             suffix in p.stem for suffix in ('_normal', '_metallic', '_roughness')))
         image = bpy.data.images.load(str(texture), check_existing=False)
         image.colorspace_settings.name = 'Non-Color'
-        # Keep the original surface for selected-to-active color baking. Meshy
-        # packs many tiny UV islands, so interpolating them during decimation
-        # damages the texture even when the simplified silhouette is accurate.
-        source = obj.copy()
-        source.data = obj.data.copy()
-        bpy.context.collection.objects.link(source)
-        source.name = 'Source high resolution'
-        material = bpy.data.materials.new('Source color only')
-        material.use_nodes = True
-        nodes = material.node_tree.nodes
-        nodes.clear()
-        tex = nodes.new('ShaderNodeTexImage')
-        tex.image = image
-        emission = nodes.new('ShaderNodeEmission')
-        output = nodes.new('ShaderNodeOutputMaterial')
-        material.node_tree.links.new(tex.outputs['Color'], emission.inputs['Color'])
-        material.node_tree.links.new(emission.outputs[0], output.inputs['Surface'])
-        source.data.materials.clear()
-        source.data.materials.append(material)
+        original = sum(len(p.vertices) - 2 for p in obj.data.polygons)
         bpy.ops.object.select_all(action='DESELECT')
         obj.select_set(True)
         bpy.context.view_layer.objects.active = obj
-        mod = obj.modifiers.new('View weapon budget', 'DECIMATE')
-        original = sum(len(p.vertices) - 2 for p in obj.data.polygons)
-        mod.ratio = min(1.0, TRIANGLES / original)
-        mod.use_collapse_triangulate = True
-        bpy.ops.object.modifier_apply(modifier=mod.name)
-        mod = obj.modifiers.new('Native triangles', 'TRIANGULATE')
-        bpy.ops.object.modifier_apply(modifier=mod.name)
-        mesh = obj.data
-        while mesh.uv_layers:
-            mesh.uv_layers.remove(mesh.uv_layers[0])
-        mesh.uv_layers.new(name='Game atlas')
-        bpy.ops.object.mode_set(mode='EDIT')
-        bpy.ops.mesh.select_all(action='SELECT')
-        bpy.ops.uv.smart_project(angle_limit=math.radians(66), island_margin=0.015)
-        bpy.ops.object.mode_set(mode='OBJECT')
-        baked = bpy.data.images.new('Game color', width=1024, height=1024, alpha=False)
-        baked.colorspace_settings.name = 'Non-Color'
-        target_material = bpy.data.materials.new('Baked game color')
-        target_material.use_nodes = True
-        bake_node = target_material.node_tree.nodes.new('ShaderNodeTexImage')
-        bake_node.image = baked
-        target_material.node_tree.nodes.active = bake_node
-        mesh.materials.clear()
-        mesh.materials.append(target_material)
-        for poly in mesh.polygons:
-            poly.material_index = 0
-        source.select_set(True)
-        bpy.context.view_layer.objects.active = obj
-        scene = bpy.context.scene
-        scene.render.engine = 'CYCLES'
-        scene.cycles.samples = 1
-        scene.render.bake.use_selected_to_active = True
-        scene.render.bake.cage_extrusion = 0.25
-        scene.render.bake.max_ray_distance = 0.5
-        scene.render.bake.margin = 8
-        bpy.ops.object.bake(type='EMIT')
-        baked.scale(SIZE, SIZE)
-        pixels = array.array('f', [0.0]) * (SIZE * SIZE * 4)
-        baked.pixels.foreach_get(pixels)
+        if opts.keep_uv and original <= TRIANGLES:
+            mod = obj.modifiers.new('Native triangles', 'TRIANGULATE')
+            bpy.ops.object.modifier_apply(modifier=mod.name)
+            mesh = obj.data
+            image.scale(SIZE, SIZE)
+            pixels = array.array('f', [0.0]) * (SIZE * SIZE * 4)
+            image.pixels.foreach_get(pixels)
+        else:
+            # Keep the original surface for selected-to-active color baking. Meshy
+            # packs many tiny UV islands, so interpolating them during decimation
+            # damages the texture even when the simplified silhouette is accurate.
+            source = obj.copy()
+            source.data = obj.data.copy()
+            bpy.context.collection.objects.link(source)
+            source.name = 'Source high resolution'
+            material = bpy.data.materials.new('Source color only')
+            material.use_nodes = True
+            nodes = material.node_tree.nodes
+            nodes.clear()
+            tex = nodes.new('ShaderNodeTexImage')
+            tex.image = image
+            emission = nodes.new('ShaderNodeEmission')
+            output = nodes.new('ShaderNodeOutputMaterial')
+            material.node_tree.links.new(tex.outputs['Color'], emission.inputs['Color'])
+            material.node_tree.links.new(emission.outputs[0], output.inputs['Surface'])
+            source.data.materials.clear()
+            source.data.materials.append(material)
+            mod = obj.modifiers.new('View weapon budget', 'DECIMATE')
+            mod.ratio = min(1.0, TRIANGLES / original)
+            mod.use_collapse_triangulate = True
+            bpy.ops.object.modifier_apply(modifier=mod.name)
+            mod = obj.modifiers.new('Native triangles', 'TRIANGULATE')
+            bpy.ops.object.modifier_apply(modifier=mod.name)
+            mesh = obj.data
+            while mesh.uv_layers:
+                mesh.uv_layers.remove(mesh.uv_layers[0])
+            mesh.uv_layers.new(name='Game atlas')
+            bpy.ops.object.mode_set(mode='EDIT')
+            bpy.ops.mesh.select_all(action='SELECT')
+            bpy.ops.uv.smart_project(angle_limit=math.radians(66), island_margin=0.015)
+            bpy.ops.object.mode_set(mode='OBJECT')
+            baked = bpy.data.images.new('Game color', width=1024, height=1024, alpha=False)
+            baked.colorspace_settings.name = 'Non-Color'
+            target_material = bpy.data.materials.new('Baked game color')
+            target_material.use_nodes = True
+            bake_node = target_material.node_tree.nodes.new('ShaderNodeTexImage')
+            bake_node.image = baked
+            target_material.node_tree.nodes.active = bake_node
+            mesh.materials.clear()
+            mesh.materials.append(target_material)
+            for poly in mesh.polygons:
+                poly.material_index = 0
+            source.select_set(True)
+            bpy.context.view_layer.objects.active = obj
+            scene = bpy.context.scene
+            scene.render.engine = 'CYCLES'
+            scene.cycles.samples = 1
+            scene.render.bake.use_selected_to_active = True
+            scene.render.bake.cage_extrusion = 0.25
+            scene.render.bake.max_ray_distance = 0.5
+            scene.render.bake.margin = 8
+            bpy.ops.object.bake(type='EMIT')
+            baked.scale(SIZE, SIZE)
+            pixels = array.array('f', [0.0]) * (SIZE * SIZE * 4)
+            baked.pixels.foreach_get(pixels)
         # Blender pixels are bottom-up; MDL texture rows are top-down.
         rgb = bytes(round(max(0, min(1, pixels[(y * SIZE + x) * 4 + c])) * 255)
                     for y in reversed(range(SIZE)) for x in range(SIZE) for c in range(3))
@@ -224,7 +239,11 @@ def main():
         for i in range(SIZE * SIZE):
             px = rgb[i * 3:i * 3 + 3]
             top = max(px)
-            if opts.glow and top > 60 and sorted(px)[1] * 1.4 < top:
+            if opts.glow_blue and px[2] > 50 and px[2] > px[0] + 20 and px[2] > px[1] + 8:
+                mask[i] = 1
+                # Preserve coil highlight gradients while lifting dim areas into glow.
+                gain = 255 / max(top, 140)
+            elif opts.glow and top > 60 and sorted(px)[1] * 1.4 < top:
                 # one dominant channel: energy; brighten it to full glow
                 mask[i] = 1
                 gain = 255 / top
