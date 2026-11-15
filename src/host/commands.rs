@@ -160,6 +160,7 @@ pub(super) fn register_commands(c: &mut Commands<Host>) {
             "accessibility" => Some(Page::Accessibility),
             "graphics" => Some(Page::Graphics),
             "enhancements" => Some(Page::Enhancements),
+            "water" => Some(Page::Water),
             "impacts" => Some(Page::Impacts),
             "shader" | "screenshader" => Some(Page::ScreenShader),
             "audio" => Some(Page::Audio),

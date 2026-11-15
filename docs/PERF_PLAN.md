@@ -111,6 +111,16 @@ the remaining parity-bound phases below.
     plus `WaterFx` splash `MAX_DROPS` (`2048`) / `MAX_PUFFS` (`512`) in
     `crates/qrender/src/water.rs` by quality.
 - Measure: `water`, `supersample-renderscale200-water`, `all-enhancements`.
+- **Status (Done, 2026-11-15)**:
+  - Added `r_water_quality` (`0` = low, `1` = medium [default], `2` = high; Water Settings menu `"Water Quality"`, `menu_options water`, archived cvar, and `qrender::Settings::water_quality`).
+  - Precomputed a seamless 128×128 dual-layer Worley-edge caustic texture (`water_tex::caustic_texture` in `crates/qrender/src/water_tex.rs`), uploaded once as `Renderer::caustic_tex` (`Sampling::LinearRepeat` in `FrameUbo::softf.w`). On Low/Medium (`qual < 2`), `world.frag` samples `caustic_tex()` with two scrolling taps and skips `water_grad` ripple distortion; High (`qual >= 2`) keeps procedural dual 3×3 Worley `caustic()` + `water_grad`.
+  - Added `water_dist_fade` in `crates/qrender/shaders/common.glsl` (`640..1024` low, `1024..1536` medium, `1536..2048` high, fast-returning `1.0` inside `fade_d`) gating both `water.frag` ripples/swell and `world.frag` caustics, plus per-ripple bounding-box and squared-annulus early rejects before `sqrt` in `water_grad`.
+  - Enforced per-tier budgets in `crates/qrender/src/water.rs` (`quality_budgets`: `8`/`16`/`32` active ripples, `512`/`1024`/`2048` drops, `128`/`256`/`512` puffs, trimming excess when lowered). Pinned `r_water_quality 1` in `qprof` `VANILLA` and `2` in `WATER`.
+  - Verified with `QRENDER_VALIDATION=1 cargo nextest run` (502 passed, 2 skipped), `cargo clippy --all-targets --message-format=short` (0 warnings in touched files), headless screenshots with `QRENDER_VALIDATION=1` (`ad_sepulcher` surface & underwater at `q0/1/2` + Water Settings menu, clean validation), and benchmarks (`1280×720` headless, 3-run medians):
+    - `qprof` (`target/qprof/item15-before` → `target/qprof/item15-after`, spawn view): on `ad_sepulcher`, `supersample-renderscale200 → supersample-renderscale200-water` (`r_water_quality 2`) added **+138 µs frame / +130 µs GPU** before → **+101 µs frame / +98 µs GPU** after (−32 µs GPU even at High); `all-enhancements` (default `r_water_quality 1`) improved from **143 → 152 fps**, frame **6999 → 6597 µs**, GPU **6924 → 6537 µs**.
+    - Water-heavy `prof_stop` tier scaling (`ad_sepulcher`, 200% render scale + 8× sample shading, median of 3 runs; note `Before` predates the quality cvar):
+      - Surface (`setpos -1448 -1100 -100 35 200 0`): Before frame **4449.5** / GPU **4388.6** (`world` **2400.8** µs) → `q0` **3193.8 / 3135.8** (`world` **1136.5** µs, −52.7% `world`), `q1` **3207.8 / 3150.1** (`world` **1151.2** µs, −52.0% `world`), `q2` **4537.4 / 4480.4** (`world` **2473.2** µs).
+      - Underwater (`setpos -1448 -1250 -200 20 180 0`): Before frame **6305.4** / GPU **6247.1** (`world` **4460.7** µs) → `q0` **3360.2 / 3302.6** (`world` **1565.3** µs, −64.9% `world`), `q1` **3377.6 / 3319.9** (`world` **1592.1** µs, −64.3% `world`), `q2` **6351.8 / 6293.7** (`world` **4560.8** µs).
 
 ### 16. Per-object motion blur quality (*visual*)
 - Problem: in `crates/qrender/shaders/post.frag`, whenever any moving entity

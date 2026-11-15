@@ -18,8 +18,9 @@ pub(super) struct FrameUbo {
     pub(super) skybox1: [u32; 4],
     pub(super) alphas: [f32; 4],
     pub(super) soft: [f32; 4],
+    /// x world dither level, y alias mode, z goggles mode, w caustic texture slot.
     pub(super) softf: [u32; 4],
-    /// x ripple strength, y caustics strength, z ripple count.
+    /// x ripple strength, y caustics strength, z ripple count, w water quality (0..=2).
     pub(super) water: [f32; 4],
     /// xy gl_FragCoord -> portal UV scale, zw valid UV clamp max.
     pub(super) portal_uv: [f32; 4],

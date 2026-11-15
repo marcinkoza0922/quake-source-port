@@ -127,6 +127,7 @@ impl Renderer {
                 fr.shot_impacts,
                 st.water_ripples > 0.0,
                 st.water_splashes,
+                st.water_quality.min(2),
             );
         }
 
@@ -780,12 +781,12 @@ impl Renderer {
                 ],
                 alphas,
                 soft: [soft.0, soft.1, st.goggles.intensity.clamp(0.25, 3.0), st.goggles.noise.clamp(0.0, 2.0)],
-                softf: [soft.2, soft.3, st.goggles.mode.min(2), 0],
+                softf: [soft.2, soft.3, st.goggles.mode.min(2), self.caustic_tex],
                 water: [
                     st.water_ripples.clamp(0.0, 4.0),
                     st.water_caustics.clamp(0.0, 4.0),
                     if st.water_ripples > 0.0 || st.water_caustics > 0.0 { self.water_fx.ripples.len() as f32 } else { 0.0 },
-                    0.0,
+                    st.water_quality.min(2) as f32,
                 ],
                 portal_uv: if let Some(t) = &self.targets {
                     let [pw, ph] = portals::portal_viewport(t, [pass.scene_w, pass.scene_h]);

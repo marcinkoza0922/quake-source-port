@@ -97,6 +97,7 @@ pub struct Renderer {
     sampler_repeat: vk::Sampler,
     sampler_clamp: vk::Sampler,
     sampler_linear: vk::Sampler,
+    sampler_linear_repeat: vk::Sampler,
     /// Sampler for [`Sampling::World`] textures, rebuilt when filtering changes.
     sampler_world: vk::Sampler,
     /// (linear, anisotropy) of `sampler_world`.
@@ -130,6 +131,8 @@ pub struct Renderer {
     pics: Vec<PicInfo>,
     /// Soft round blob for water spray puffs (big underwater-blast splashes).
     splash_pic: Option<PicId>,
+    /// Precomputed tiling Worley caustic texture slot (`NO_TEX` if upload failed).
+    caustic_tex: u32,
     conchars: Option<PicId>,
     alias_cpu: Vec<u32>,
     alias_buf: Buffer,
@@ -340,6 +343,7 @@ impl Renderer {
             dev.destroy_sampler(self.sampler_repeat, None);
             dev.destroy_sampler(self.sampler_clamp, None);
             dev.destroy_sampler(self.sampler_linear, None);
+            dev.destroy_sampler(self.sampler_linear_repeat, None);
             if self.sampler_world != self.sampler_repeat {
                 dev.destroy_sampler(self.sampler_world, None);
             }

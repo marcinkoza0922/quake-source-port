@@ -271,6 +271,7 @@ pub(super) const ANISO: &[(&str, f32)] = &[("off", 1.0), ("2x", 2.0), ("4x", 4.0
 pub(super) const SOFTEMU: &[(&str, f32)] = &[("off", 0.0), ("fine", 1.0), ("coarse", 2.0), ("banded", 3.0)];
 pub(super) const SSAO: &[(&str, f32)] = &[("off", 0.0), ("low", 1.0), ("medium", 2.0), ("high", 3.0)];
 pub(super) const PORTAL_QUALITY: &[(&str, f32)] = &[("low", 0.0), ("medium", 1.0), ("high", 2.0)];
+pub(super) const WATER_QUALITY: &[(&str, f32)] = &[("low", 0.0), ("medium", 1.0), ("high", 2.0)];
 pub(super) const MODES: [&str; 3] = ["windowed", "fullscreen", "borderless"];
 
 pub(super) const GRAPHICS: &[Item] = &[
@@ -328,6 +329,7 @@ pub(super) const IMPACTS: &[Item] = &[
 
 /// Reached from Enhancements; unavailable while `r_enhancedwater` is off.
 pub(super) const WATER: &[Item] = &[
+    Item::Choice { label: "Water Quality", cvar: "r_water_quality", choices: WATER_QUALITY },
     toggle("Translucent Water", "r_watertranslucency"),
     slider("Water Opacity", "r_wateralpha", 0.0, 1.0, 0.1),
     toggle("Ripples", "r_waterripples"),

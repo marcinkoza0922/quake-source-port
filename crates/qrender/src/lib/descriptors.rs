@@ -126,6 +126,7 @@ impl Renderer {
             Sampling::Nearest => self.sampler_repeat,
             Sampling::Clamp => self.sampler_clamp,
             Sampling::Linear => self.sampler_linear,
+            Sampling::LinearRepeat => self.sampler_linear_repeat,
         }
     }
 }

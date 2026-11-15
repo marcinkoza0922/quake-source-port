@@ -48,7 +48,7 @@ pub const VANILLA: &[(&str, &str)] = &[
     ("r_dynamic", "1"), ("r_coloredlight", "0"), ("r_fog", "1"), ("r_skyfog", "0.5"),
     ("r_lerpmodels", "1"), ("r_lerpmove", "1"),
     ("r_ssao", "0"), ("r_motionblur", "0"), ("r_speedblur", "0"), ("a11y_reducemotion", "0"),
-    ("r_enhancedwater", "0"), ("r_teleportwindows", "0"), ("r_portal_quality", "1"),
+    ("r_enhancedwater", "0"), ("r_teleportwindows", "0"), ("r_portal_quality", "1"), ("r_water_quality", "1"),
     ("r_impact_fx", "0"), ("r_impact_bullets", "0"), ("r_impact_nails", "0"),
     ("r_shotgun_tracers", "0"), ("r_impact_scorches", "0"),
     ("r_blood", "0"), ("r_debris", "0"), ("r_shader_preset", ""), ("r_colorblind", "0"),
@@ -58,7 +58,7 @@ pub const VANILLA: &[(&str, &str)] = &[
 const WATER: &[(&str, &str)] = &[
     ("r_enhancedwater", "1"), ("r_watertranslucency", "1"), ("r_wateralpha", "0.3"),
     ("r_waterripples", "1"), ("r_waterripples_amount", "2"), ("r_watersplash", "1"),
-    ("r_watercaustics", "1"), ("r_watercaustics_amount", "2"),
+    ("r_watercaustics", "1"), ("r_watercaustics_amount", "2"), ("r_water_quality", "2"),
 ];
 const IMPACTS: &[(&str, &str)] = &[
     ("r_impact_fx", "4"), ("r_impact_bullets", "1"), ("r_impact_nails", "1"),

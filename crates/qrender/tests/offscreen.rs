@@ -298,6 +298,20 @@ fn start_bsp_renders_non_black() {
                 r.render(&RenderFrame { time: portal_frame.time, splits: &splits, settings: st, ..Default::default() }).unwrap();
                 let _ = r.read_pixels().unwrap();
             }
+            for water_quality in [0, 1, 2] {
+                let st = Settings {
+                    wateralpha: 0.35,
+                    water_ripples: 1.0,
+                    water_splashes: true,
+                    water_caustics: 1.0,
+                    water_quality,
+                    msaa,
+                    render_scale,
+                    ..Default::default()
+                };
+                r.render(&RenderFrame { time: frame.time, view: frame.view, settings: st, ..Default::default() }).unwrap();
+                let _ = r.read_pixels().unwrap();
+            }
         }
     }
 }

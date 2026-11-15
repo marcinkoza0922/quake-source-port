@@ -35,15 +35,19 @@ void main() {
     // r_waterripples: the height field bends the classic warp lookup and
     // shades the slopes; teleporters and non-horizontal sheets stay classic
     if (fr.water.x > 0.0 && kind >= 1u && kind <= 3u) {
-        vec3 n = cross(dFdx(i_wpos), dFdy(i_wpos));
-        float horiz = abs(n.z) * inversesqrt(max(dot(n, n), 1e-12));
-        if (horiz > 0.7) {
-            float swell = kind == 2u ? 0.5 : 1.0; // lava is thick
-            float k = fr.water.x;
-            vec2 g = water_grad(i_wpos, t, swell * 0.5 * min(k, 1.5), 2.5 * k);
-            st += g * 5.0;
-            float slope = dot(g, vec2(0.6, 0.45));
-            shade = 1.0 + clamp(slope, -0.6, 0.6) * 1.4 + smoothstep(0.25, 0.7, length(g)) * 0.2;
+        int qual = int(fr.water.w + 0.5);
+        float dist_fade = water_dist_fade(i_wpos, qual);
+        if (dist_fade > 0.0) {
+            vec3 n = cross(dFdx(i_wpos), dFdy(i_wpos));
+            float horiz = abs(n.z) * inversesqrt(max(dot(n, n), 1e-12));
+            if (horiz > 0.7) {
+                float swell = kind == 2u ? 0.5 : 1.0; // lava is thick
+                float k = fr.water.x * dist_fade;
+                vec2 g = water_grad(i_wpos, t, swell * 0.5 * min(k, 1.5), 2.5 * k);
+                st += g * 5.0;
+                float slope = dot(g, vec2(0.6, 0.45));
+                shade = 1.0 + clamp(slope, -0.6, 0.6) * 1.4 + smoothstep(0.25, 0.7, length(g)) * 0.2;
+            }
         }
     }
     st += 8.0 * sin(st.yx * 0.125 + t);

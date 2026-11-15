@@ -69,6 +69,8 @@ pub(super) enum Sampling {
     Clamp,
     /// Bilinear, clamp to edge (smooth UI shapes).
     Linear,
+    /// Bilinear, repeat (tiling procedural textures).
+    LinearRepeat,
 }
 
 pub(super) struct WorldGpu {
