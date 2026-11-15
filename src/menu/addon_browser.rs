@@ -105,9 +105,9 @@ const ADDON: &[Addon] = &[
         description: "One equipment add-on includes both night vision and thermal vision. The Change Goggles action cycles Normal, Night Vision, Thermal, then Normal again. Night vision brightens dark rooms; thermal vision highlights living enemies. Goggles do not occupy a weapon slot. Configure intensity and sensor noise below. The binding affects only this add-on.",
     },
     Addon {
-        name: "Projectile Shotguns", id: "projectileshotguns", cvar: "addon_projectile_shotguns",
-        weapons: &[], page: Some(Page::ProjectileShotguns), alt: false,
-        description: "Both shotguns and enemy grunts fire physical pellets with their original spread and damage. Fast default projectiles feel immediate; lower their speed to dodge incoming fire during bullet time. Configure projectile speed below, or reset it to the default of 10000 units per second.",
+        name: "Dodge / Dive", id: "dodge", cvar: "addon_dodge",
+        weapons: &[], page: None, alt: false,
+        description: "Press Dodge with a movement direction on the ground or in midair: dive forward or leap backward and sideways. Diagonals are supported. Each press launches once, with a short recovery. The player body animates in third person. Assign the Dodge action below or in Controls.",
     },
     Addon {
         name: "Bullet Time", id: "bullettime", cvar: "addon_bullet_time",
@@ -115,14 +115,14 @@ const ADDON: &[Addon] = &[
         description: "Use the dedicated Bullet Time action to slow the whole local game to 20% speed. Hold is the default; Toggle switches on each press. The optional meter limits use in real seconds and regenerates while inactive. Disable the meter for unlimited use. Remap the action and configure duration and regeneration below.",
     },
     Addon {
+        name: "Projectile Shotguns", id: "projectileshotguns", cvar: "addon_projectile_shotguns",
+        weapons: &[], page: Some(Page::ProjectileShotguns), alt: false,
+        description: "Both shotguns and enemy grunts fire physical pellets with their original spread and damage. Fast default projectiles feel immediate; lower their speed to dodge incoming fire during bullet time. Configure projectile speed below, or reset it to the default of 10000 units per second.",
+    },
+    Addon {
         name: "Hitstop", id: "hitstop", cvar: "addon_hitstop",
         weapons: &[], page: Some(Page::Hitstop), alt: false,
         description: "Freezes the game for a split second when you damage an enemy, so hits feel heavier. Single player only. Choose which weapons trigger it (all, melee, ranged or explosives), how long it lasts and how much more a kill freezes. Advanced settings cover enemy toughness, damage scaling, cooldown and the longest freeze.",
-    },
-    Addon {
-        name: "Dodge / Dive", id: "dodge", cvar: "addon_dodge",
-        weapons: &[], page: None, alt: false,
-        description: "Press Dodge with a movement direction on the ground or in midair: dive forward or leap backward and sideways. Diagonals are supported. Each press launches once, with a short recovery. The player body animates in third person. Assign the Dodge action below or in Controls.",
     },
 
 ];

@@ -80,38 +80,46 @@ pub(super) const fn bind(label: &'static str, cmd: &'static str) -> Item {
     Item::Bind { label, cmd }
 }
 
-/// Controls rows; the last two (add-on binds) show only with add-ons on.
-pub(super) const CONTROLS_ALL: &[Item] = &[
-    bind("Attack", "+attack"),
-    bind("Jump / Swim Up", "+jump"),
-    bind("Weapon Wheel", "+weaponwheel"),
-    bind("Next Weapon", "impulse 10"),
-    bind("Previous Weapon", "impulse 12"),
-    bind("Move Forward", "+forward"),
-    bind("Move Back", "+back"),
-    bind("Strafe Left", "+moveleft"),
-    bind("Strafe Right", "+moveright"),
-    bind("Swim Down", "+movedown"),
-    bind("Run", "+speed"),
-    bind("Turn Left", "+left"),
-    bind("Turn Right", "+right"),
-    bind("Look Up", "+lookup"),
-    bind("Look Down", "+lookdown"),
-    bind("Center View", "centerview"),
-    bind("Scoreboard", "+showscores"),
-    bind("Quick Save", "echo Quicksaving...; wait; save quick"),
-    bind("Quick Load", "echo Quickloading...; wait; load quick"),
-    Item::ResetBinds,
+/// Controls rows; add-on binds appear above Reset when add-ons are active.
+macro_rules! controls_list {
+    ($($extra:expr,)*) => {
+        &[
+            bind("Attack", "+attack"),
+            bind("Weapon Wheel", "+weaponwheel"),
+            bind("Next Weapon", "impulse 10"),
+            bind("Previous Weapon", "impulse 12"),
+            bind("Move Forward", "+forward"),
+            bind("Move Back", "+back"),
+            bind("Strafe Left", "+moveleft"),
+            bind("Strafe Right", "+moveright"),
+            bind("Jump / Swim Up", "+jump"),
+            bind("Swim Down", "+movedown"),
+            bind("Run", "+speed"),
+            bind("Turn Left", "+left"),
+            bind("Turn Right", "+right"),
+            bind("Look Up", "+lookup"),
+            bind("Look Down", "+lookdown"),
+            bind("Center View", "centerview"),
+            bind("Scoreboard", "+showscores"),
+            bind("Quick Save", "echo Quicksaving...; wait; save quick"),
+            bind("Quick Load", "echo Quickloading...; wait; load quick"),
+            $($extra,)*
+            Item::ResetBinds,
+        ]
+    };
+}
+pub(super) const CONTROLS: &[Item] = controls_list!();
+pub(super) const CONTROLS_ALL: &[Item] = controls_list!(
     bind("Alt Fire (Add-ons)", "+attack2"),
     bind("Equipment Wheel (Add-ons)", "+equipwheel"),
     bind("Dodge / Dive (Add-ons)", "+dodge"),
     bind("Bullet Time (Add-ons)", "+bullettime"),
-];
-pub(super) const CONTROLS: &[Item] = CONTROLS_ALL.split_at(CONTROLS_ALL.len() - 4).0;
+);
 
 /// Reached from the Add-ons pages: how portals look and perform.
 pub(super) const PORTAL_GUN: &[Item] = &[
     toggle("See Through Portals", "addon_portal_view"),
+    Item::Choice { label: "Portal View Quality", cvar: "r_portal_quality", choices: PORTAL_QUALITY },
     Item::Choice { label: "Live Portal Views", cvar: "addon_portal_max", choices: PORTAL_MAX },
     slider("Live View Distance", "addon_portal_dist", 512.0, 8192.0, 512.0),
     Item::Choice { label: "Portal Recursion", cvar: "addon_portal_depth", choices: PORTAL_DEPTH },
@@ -186,14 +194,13 @@ pub(super) const fn toggle(label: &'static str, cvar: &'static str) -> Item {
 }
 
 pub(super) const GAMEPLAY: &[Item] = &[
-    toggle("Directional Damage", "hud_damageindicator"),
-    Item::Choice { label: "On Death", cvar: "cl_deathaction", choices: &[("Ask", 0.0), ("Most recent save", 1.0), ("Select save", 2.0), ("Restart level", 3.0)] },
-    Item::Choice { label: "Camera", cvar: "cl_camera", choices: &[("First person", 0.0), ("Third person", 1.0), ("Shoulder right", 2.0), ("Shoulder left", 3.0)] },
     slider("Field of View", "fov", 60.0, 130.0, 5.0),
-    toggle("Always Run", "cl_alwaysrun"),
+    Item::Choice { label: "Camera", cvar: "cl_camera", choices: &[("First person", 0.0), ("Third person", 1.0), ("Shoulder right", 2.0), ("Shoulder left", 3.0)] },
+    Item::Choice { label: "Viewmodels", cvar: "r_drawviewmodel", choices: &[("Center", 1.0), ("Right", 2.0), ("Left", 3.0), ("Off", 0.0)] },
     slider("View Bob", "cl_bob", 0.0, 0.02, 0.002),
     toggle("Gun Kick", "v_gunkick"),
-    Item::Choice { label: "Viewmodels", cvar: "r_drawviewmodel", choices: &[("Center", 1.0), ("Right", 2.0), ("Left", 3.0), ("Off", 0.0)] },
+    toggle("Always Run", "cl_alwaysrun"),
+    Item::Choice { label: "On Death", cvar: "cl_deathaction", choices: &[("Ask", 0.0), ("Most recent save", 1.0), ("Select save", 2.0), ("Restart level", 3.0)] },
     toggle("Autosave", "sv_autosave"),
     Item::Sub { label: "Autosave Settings", page: Page::Autosave },
     Item::Sub { label: "Assists", page: Page::Assists },
@@ -209,13 +216,13 @@ pub(super) const ASSISTS: &[Item] = &[
     toggle("Auto-aim", "assist_autoaim"),
     Item::Sub { label: "Auto-aim Settings", page: Page::AutoAim },
     Item::Choice { label: "Damage Taken", cvar: "assist_damagetaken", choices: PERCENT },
-    Item::Choice { label: "Enemy Health", cvar: "assist_enemyhealth", choices: PERCENT },
-    Item::Choice { label: "Ammo Pickups", cvar: "assist_ammo", choices: AMMO_MULT },
-    toggle("Infinite Ammo", "assist_infiniteammo"),
     toggle("No Fall Damage", "assist_nofalldamage"),
     toggle("No Drowning", "assist_nodrown"),
     toggle("No Self Damage", "assist_noselfdamage"),
     toggle("Health Regeneration", "assist_regen"),
+    Item::Choice { label: "Enemy Health", cvar: "assist_enemyhealth", choices: PERCENT },
+    Item::Choice { label: "Ammo Pickups", cvar: "assist_ammo", choices: AMMO_MULT },
+    toggle("Infinite Ammo", "assist_infiniteammo"),
     Item::Choice { label: "Jumps", cvar: "assist_jumps", choices: JUMPS },
 ];
 
@@ -229,11 +236,11 @@ pub(super) const AUTOAIM: &[Item] = &[
 
 pub(super) const AUTOSAVE: &[Item] = &[
     slider("Autosaves to Keep", "sv_autosave_keep", 1.0, 10.0, 1.0),
-    toggle("Save on Level Entry", "sv_autosave_entry"),
     Item::Choice { label: "Autosave Timer", cvar: "sv_autosave_interval", choices: MINUTES },
+    toggle("Save on Level Entry", "sv_autosave_entry"),
     toggle("Save on Secret Found", "sv_autosave_secret"),
-    toggle("Save on All Enemies Killed", "sv_autosave_monsters"),
     toggle("Save on All Secrets Found", "sv_autosave_secrets"),
+    toggle("Save on All Enemies Killed", "sv_autosave_monsters"),
 ];
 
 pub(super) const INPUT: &[Item] = &[
@@ -310,14 +317,14 @@ pub(super) const ENHANCEMENTS: &[Item] = &[
     Item::Choice { label: "Ambient Occlusion", cvar: "r_ssao", choices: SSAO },
     toggle("Motion Blur", "r_motionblur"),
     Item::Choice { label: "Motion Blur Quality", cvar: "r_motionblur_quality", choices: MOTIONBLUR_QUALITY },
-    toggle("Speed Blur", "r_speedblur"),
     slider("Motion Blur Amount", "r_motionblur_amount", 0.1, 2.0, 0.1),
+    toggle("Speed Blur", "r_speedblur"),
+    Item::Sub { label: "Screen Shader", page: Page::ScreenShader },
+    Item::Choice { label: "Soft Particles", cvar: "r_softparticles", choices: SOFT_PARTICLES },
     toggle("Enhanced Water", "r_enhancedwater"),
+    Item::Sub { label: "Water Settings", page: Page::Water },
     toggle("See-through Teleporters", "r_teleportwindows"),
     Item::Choice { label: "Portal View Quality", cvar: "r_portal_quality", choices: PORTAL_QUALITY },
-    Item::Choice { label: "Soft Particles", cvar: "r_softparticles", choices: SOFT_PARTICLES },
-    Item::Sub { label: "Water Settings", page: Page::Water },
-    Item::Sub { label: "Screen Shader", page: Page::ScreenShader },
     Item::Sub { label: "Impact Effects", page: Page::Impacts },
     toggle("Enhanced Blood Splatter", "r_blood"),
     Item::Sub { label: "Blood Splatter Settings", page: Page::Blood },
@@ -332,8 +339,8 @@ pub(super) const IMPACTS: &[Item] = &[
     Item::Choice { label: "Impact Quality", cvar: "r_impact_quality", choices: DEBRIS_QUALITY },
     Item::Choice { label: "Surface Hit Effects", cvar: "r_impact_fx", choices: IMPACT_FX },
     toggle("Shotgun Bullet Decals", "r_impact_bullets"),
-    toggle("Physical Nail Impacts", "r_impact_nails"),
     toggle("Shotgun Tracers", "r_shotgun_tracers"),
+    toggle("Physical Nail Impacts", "r_impact_nails"),
     toggle("Explosion Scorch Marks", "r_impact_scorches"),
     slider("Impact Lifetime", "r_impact_lifetime", 5.0, 600.0, 5.0),
     slider("Maximum Impacts", "r_impact_limit", 32.0, 2048.0, 32.0),
@@ -359,12 +366,12 @@ pub(super) const DEBRIS: &[Item] = &[
     Item::Choice { label: "Debris Quality", cvar: "r_debris_quality", choices: DEBRIS_QUALITY },
     toggle("Ragdolls", "r_debris_ragdolls"),
     Item::Choice { label: "Ragdoll Start", cvar: "r_debris_ragdollstart", choices: RAGDOLL_START },
+    toggle("Kill Lift", "r_debris_killlift"),
     slider("Max Ragdolls", "r_debris_maxragdolls", 8.0, 64.0, 8.0),
     toggle("Gibs", "r_debris_gibs"),
     toggle("Shrapnel", "r_debris_shrapnel"),
     toggle("Hit Doors & Lifts", "r_debris_movers"),
     slider("Push Strength", "r_debris_force", 0.0, 6.0, 0.25),
-    toggle("Kill Lift", "r_debris_killlift"),
 ];
 
 pub(super) const COLORBLIND: &[(&str, f32)] =
@@ -383,14 +390,14 @@ pub(super) const CROSSHAIR: &[Item] = &[
     Item::Choice { label: "Crosshair Shape", cvar: "crosshair_shape", choices: XHAIR_SHAPE },
     Item::Choice { label: "Crosshair Size", cvar: "crosshair_size", choices: XHAIR_SIZE },
     toggle("Crosshair Outline", "crosshair_outline"),
+    Item::Choice { label: "Normal Color", cvar: "crosshair_color", choices: XHAIR_COLOR },
+    toggle("Change Color on Target", "crosshair_ontarget"),
+    Item::Choice { label: "On Target Color", cvar: "crosshair_targetcolor", choices: XHAIR_COLOR },
+    toggle("Change Color on Kill", "crosshair_onkill"),
+    Item::Choice { label: "On Kill Color", cvar: "crosshair_killcolor", choices: XHAIR_COLOR },
     toggle("Hit Markers", "hud_hitmarkers"),
     Item::Choice { label: "Hitmarker Type", cvar: "hitmarker_shape", choices: HITMARKER_SHAPE },
     Item::Choice { label: "Hitmarker Size", cvar: "hitmarker_size", choices: XHAIR_SIZE },
-    toggle("Change Color on Target", "crosshair_ontarget"),
-    toggle("Change Color on Kill", "crosshair_onkill"),
-    Item::Choice { label: "Normal Color", cvar: "crosshair_color", choices: XHAIR_COLOR },
-    Item::Choice { label: "On Target Color", cvar: "crosshair_targetcolor", choices: XHAIR_COLOR },
-    Item::Choice { label: "On Kill Color", cvar: "crosshair_killcolor", choices: XHAIR_COLOR },
 ];
 pub(super) const TEXT_SIZE: &[(&str, f32)] = &[("normal", 1.0), ("large", 1.5), ("larger", 2.0), ("largest", 3.0)];
 pub(super) const GAME_SPEED: &[(&str, f32)] = &[("100%", 1.0), ("90%", 0.9), ("75%", 0.75), ("60%", 0.6), ("50%", 0.5)];
@@ -425,10 +432,11 @@ pub(super) const HUD: &[Item] = &[
     Item::Choice { label: "HUD Style", cvar: "scr_hudstyle", choices: HUD_STYLE },
     Item::Sub { label: "Modern HUD Layout", page: Page::HudLayout },
     Item::Sub { label: "Crosshair", page: Page::Crosshair },
-    Item::Choice { label: "Weapon Wheel Slowdown", cvar: "cl_wheel_timescale", choices: WHEEL_TIME },
+    toggle("Directional Damage", "hud_damageindicator"),
     Item::Sub { label: "Messages & Captions", page: Page::Messages },
-    toggle("Modern Console", "con_modern"),
+    Item::Choice { label: "Weapon Wheel Slowdown", cvar: "cl_wheel_timescale", choices: WHEEL_TIME },
     toggle("Show FPS", "scr_showfps"),
+    toggle("Modern Console", "con_modern"),
 ];
 
 pub(super) const MESSAGES: &[Item] = &[

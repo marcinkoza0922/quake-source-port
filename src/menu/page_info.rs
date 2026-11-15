@@ -34,8 +34,8 @@ pub(super) fn tooltip(item: Item) -> Option<&'static str> {
         "r_speedblur" => "Blurs the screen edges during fast falls and launches; keeps the centre clear. Reduce Motion disables it",
         "r_motionblur_amount" => "Length of the motion blur streaks",
         "addon_portal_view" => "Draw the view out of the linked portal inside each portal; off shows flat discs (fastest)",
-        "addon_portal_max" => "How many portals per screen show a live view; each one redraws the scene, so lower this on slow machines or in split-screen",
-        "addon_portal_depth" => "How deep portals seen through other portals keep showing a live view (a hall of mirrors between facing portals); each level redraws the scene",
+        "addon_portal_max" => "Max portals per screen with a live view; each one redraws the scene",
+        "addon_portal_depth" => "Max nested portal reflections to draw; each level redraws the scene",
         "addon_portal_dist" => "Portals farther away than this are drawn as flat discs",
         "addon_boomerang" => "Hold fire and sweep the crosshair over monsters to queue them, release to throw: it stuns each in turn and flies back; alt-fire clears the queue",
         "addon_sticky_damage" => "Explosion damage for each remotely detonated sticky bomb",
@@ -71,8 +71,8 @@ pub(super) fn tooltip(item: Item) -> Option<&'static str> {
         "addon_hitstop_min_damage" => "Hits dealing less damage than this do not freeze the game; the default 10 skips nails and shotgun pellets",
         "addon_hitstop_cooldown" => "Minimum gap between freezes, so shotgun pellets and rapid fire count once; kills ignore it",
         "addon_hitstop_max" => "No single freeze lasts longer than this, however much damage or kill bonus adds",
-        "addon_portalgun" => "A two-portal gun: fire and alt-fire place linked portals on flat walls; select it through its assigned weapon slot (Add-ons)",
-        "r_portal_quality" => "Resolution and detail inside see-through teleporters and live portal views (single-sampled); low and medium tighten recursion budgets and skip ripples, particles and tiny distant models in nested views",
+        "addon_portalgun" => "Two-portal gun: fire and alt-fire place linked portals on flat walls; assign a weapon slot in Add-ons",
+        "r_portal_quality" => "Resolution and detail inside portal and teleporter views; lower tiers trim nested effects",
         "r_softparticles" => "Fades particles smoothly where they meet walls and floors; low uses single-sample depth and shading under MSAA, high checks every sample",
         "r_debris" => "Corpses go limp as ragdolls, gibs tumble and barrels throw shrapnel; shots and blasts push them (cosmetic only)",
         "r_debris_quality" => "Simulation detail, step rate, fade-out lifetimes and caps for ragdolls, gibs and shrapnel; low also skips mover collision",
@@ -283,9 +283,22 @@ pub(super) fn is_net_page(p: Page) -> bool {
     matches!(p, Page::Join | Page::Host | Page::Setup)
 }
 
-/// Shared by keyboard adjustment, pointer dragging and drawing.
-pub(super) fn item_disabled(item: Item, cv: &Cvars) -> bool {
-    (matches!(item, Item::Slider { cvar: "r_wateralpha", .. })
-        && (cv.value_of("r_enhancedwater") == 0.0 || cv.value_of("r_watertranslucency") == 0.0))
-        || (matches!(item, Item::Choice { cvar: "r_drawviewmodel", .. }) && cv.value_of("cl_camera") != 0.0)
+impl Menu {
+    /// Shared by keyboard adjustment, pointer dragging and drawing.
+    pub(super) fn item_disabled(&self, item: Item, cv: &Cvars) -> bool {
+        (matches!(item, Item::Slider { cvar: "r_wateralpha", .. })
+            && (cv.value_of("r_enhancedwater") == 0.0 || cv.value_of("r_watertranslucency") == 0.0))
+            || (matches!(item, Item::Choice { cvar: "r_drawviewmodel", .. }) && cv.value_of("cl_camera") != 0.0)
+            || (matches!(item, Item::Choice { cvar: "r_portal_quality", .. })
+                && match self.screen {
+                    Screen::OptionsPage(Page::Enhancements) => cv.value_of("r_teleportwindows") == 0.0,
+                    Screen::OptionsPage(Page::PortalGun) => cv.value_of("addon_portal_view") == 0.0,
+                    _ => false,
+                })
+            || (matches!(
+                item,
+                Item::Choice { cvar: "addon_portal_max" | "addon_portal_depth", .. }
+                    | Item::Slider { cvar: "addon_portal_dist", .. }
+            ) && cv.value_of("addon_portal_view") == 0.0)
+    }
 }

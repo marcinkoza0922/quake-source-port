@@ -50,3 +50,37 @@ fn back_button_follows_content_and_click_returns_to_parent() {
     menu.open(Screen::OptionsPage(Page::Graphics));
     assert!(menu.back_button().unwrap().1 > short_y);
 }
+
+#[test]
+fn all_tooltips_fit_within_screen_width_and_portal_tooltips_stay_single_line() {
+    let mut canvas = Canvas::new(1280, 720);
+    canvas.ui = Some(Default::default());
+    canvas.menu_layout();
+    for item in [
+        Item::Choice { label: "", cvar: "r_portal_quality", choices: &[] },
+        Item::Toggle { label: "", cvar: "addon_portal_view" },
+        Item::Choice { label: "", cvar: "addon_portal_max", choices: &[] },
+        Item::Choice { label: "", cvar: "addon_portal_depth", choices: &[] },
+        Item::Slider { label: "", cvar: "addon_portal_dist", min: 0.0, max: 1.0, step: 1.0, invert: false },
+    ] {
+        let text = tooltip(item).unwrap();
+        let lines = wrap_tooltip_lines(&canvas, text, 588.0, TXT);
+        assert_eq!(lines.len(), 1, "portal tooltip should fit on one line: {text}");
+    }
+    let mut menu = Menu::new();
+    for &(_, page) in &PAGES {
+        for sub in std::iter::once(page).chain(
+            page_items(page).iter().filter_map(|i| if let Item::Sub { page: p, .. } = *i { Some(p) } else { None }),
+        ) {
+            menu.open(Screen::OptionsPage(sub));
+            for row in 0..menu.page_len(sub) {
+                menu.opt_cursor = row;
+                if let Some(s) = tooltip(menu.page_item(sub, row)) {
+                    for line in wrap_tooltip_lines(&canvas, s, 588.0, TXT) {
+                        assert!(canvas.text_w(&line, TXT) <= 588.0, "tooltip line overflow on {sub:?}: {line}");
+                    }
+                }
+            }
+        }
+    }
+}

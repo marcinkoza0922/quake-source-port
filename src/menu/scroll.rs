@@ -75,7 +75,7 @@ impl Menu {
 
     /// Sets a slider from a pointer x (the knob centres on it), snapped to its step.
     pub(super) fn set_slider(&self, item: Item, x: f32, cv: &mut Cvars) {
-        if item_disabled(item, cv) { return; }
+        if self.item_disabled(item, cv) { return; }
         if let Item::ShaderParam(k) = item {
             return self.drag_shader_param(k, x, cv);
         }
@@ -95,7 +95,7 @@ impl Menu {
 
     pub(super) fn page_item(&self, p: Page, i: usize) -> Item {
         let items = page_items(p);
-        // Keep the contextual action beside Attack, before the movement binds.
+        // Keep the contextual action beside Attack, before the weapon and movement binds.
         let i = if p == Page::Controls && self.autoaim_mapping.get() != 0 {
             if i == 1 {
                 return bind(if self.autoaim_mapping.get() == 2 { "Auto-aim Toggle" } else { "Lock-on" }, "+lockon");
