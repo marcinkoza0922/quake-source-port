@@ -278,13 +278,30 @@ the remaining parity-bound phases below.
     frame, `1521 µs` `ui+present` vs `1511 µs` at 100%); `ad_sepulcher`
     **392 fps** (`2553 µs` frame, `1531 µs` `ui+present` vs `1527 µs` at 100%).
 
-### 23. Goggles post-process glow (*visual*)
+### 23. Goggles post-process glow (*visual*) — Done
 - Problem: `goggles()` in `crates/qrender/shaders/post.frag` executes an
-  8-tap ring glow per output pixel for both night vision and thermal modes
-  (plus `alias_xray` re-draws in thermal).
-- Plan: reduce to 4 taps (or disable glow on a fast/low-fx mode) if post
-  shows up in `goggles-nv` / `goggles-thermal` / `ultimate-coop`.
-- Measure: `goggles-nv`, `goggles-thermal`, `ultimate-coop`.
+  8-tap ring glow with per-pixel `cos`/`sin` per output pixel for both night
+  vision and thermal modes (`post` +15 µs at 1280×720, +68 µs at 2560×1440).
+- Fix:
+  - Added `addon_goggles_quality` (`0` Low / `1` Medium default / `2` High,
+    archived in `goggles::CVARS`, menu `Goggles` page `"Goggle Glow Quality"`),
+    plumbed through `qrender::Goggles::quality` and `PostPush::g_quality`.
+  - Replaced per-pixel `cos`/`sin` ring math in `post.frag` with precomputed
+    constant offsets `G_RING4` / `G_RING8` and skipped `textureSize`/ring
+    fetches when `g_quality == 0u`; default `1` (Medium) uses 4 diagonal taps.
+- Results (`qprof -runs 3` before/after + 3-run `e1m1` `prof_stop` medians on final build):
+  - `qprof` 1280×720 `goggles-nv` `post`: **42 → 40 µs** (`e1m1`), **40 → 39 µs**
+    (`ad_sepulcher`); `goggles-thermal` `post`: **41 → 40 µs** (`e1m1`), **40 → 38 µs**
+    (`ad_sepulcher`); `ad_sepulcher` `ultimate-coop`: **131 → 132 fps**
+    (`7621 → 7575 µs` frame, GPU `7228 → 7194 µs`).
+  - Controlled `e1m1` `prof_stop` tier probe (`off` = `28.0 µs` post at 1×,
+    `67.0 µs` at 2×):
+    - `1×` (1280×720): `nv` `q2` **46.4 µs** (+18.4 µs) → `q1` **44.0 µs** (+16.0 µs)
+      → `q0` **36.2 µs** (+8.2 µs, **−55%** added post cost vs `q2`); `thermal`
+      `q2` **45.7 µs** → `q1` **42.8 µs** → `q0` **35.8 µs** (**−56%** added).
+    - `2×` (`2560×1440` `post` target): `nv` `q2` **137.6 µs** (+70.6 µs) → `q1`
+      **123.5 µs** (+56.5 µs, **−14.1 µs**) → `q0` **96.2 µs** (+29.2 µs,
+      **−41.4 µs / −59%** added post cost vs `q2`).
 
 ## Phase 1: cheap, low-risk CPU wins
 

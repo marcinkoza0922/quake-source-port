@@ -57,6 +57,7 @@ pub(super) fn tooltip(item: Item) -> Option<&'static str> {
         "addon_hook_stone" => "The hook latches onto stone, brick, rock and any surface not recognised as wood or metal",
         "addon_hook_enemies" => "Hooking an enemy pulls you to it",
         "addon_goggles" => "Night-vision and thermal goggles, cycle normal, night vision and thermal with Change Goggles (Add-ons), or use the Equipment Wheel",
+        "addon_goggles_quality" => "Bloom glow around bright lights and heat sources; medium uses 4 taps, high uses 8, low disables halo taps",
         "addon_goggles_intensity" => "Night vision: how much dark areas are brightened; thermal: how strongly heat stands out",
         "addon_goggles_noise" => "Sensor grain, scanlines and flicker of the goggle image",
         "addon_hitstop" => "Freeze the game briefly when you damage an enemy; single player with add-ons only",

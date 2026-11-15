@@ -143,6 +143,7 @@ pub(super) struct PostPush {
     pub(super) mb_quality: u32,
     pub(super) mb_w: f32,
     pub(super) mb_h: f32,
+    pub(super) g_quality: u32,
 }
 
 #[repr(C)]

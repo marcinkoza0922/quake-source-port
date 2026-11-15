@@ -495,6 +495,7 @@ pub(super) const SHADER_SCALE: &[(&str, f32)] = &[("fit output", 0.0), ("3D reso
 
 /// Reached from the Add-ons pages: night-vision / thermal goggle look.
 pub(super) const GOGGLES: &[Item] = &[
+    Item::Choice { label: "Goggle Glow Quality", cvar: "addon_goggles_quality", choices: DEBRIS_QUALITY },
     slider("Goggle Intensity", "addon_goggles_intensity", 0.25, 3.0, 0.25),
     slider("Goggle Noise", "addon_goggles_noise", 0.0, 2.0, 0.25),
 ];

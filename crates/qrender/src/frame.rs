@@ -1733,6 +1733,7 @@ impl Renderer {
                 mb_quality: st.motion_blur_quality.min(1),
                 mb_w: w.max(1) as f32,
                 mb_h: h.max(1) as f32,
+                g_quality: st.goggles.quality.min(2),
             }]));
             dev.cmd_draw(cmd, 3, 1, 0, 0);
             if pi + 1 < npasses {

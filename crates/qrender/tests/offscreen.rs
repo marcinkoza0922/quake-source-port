@@ -455,6 +455,22 @@ fn start_bsp_renders_non_black() {
     }).unwrap();
     let _ = r.read_pixels().unwrap();
 
+    // Goggles post-process glow tiers across night vision (1) and thermal (2).
+    for mode in [1u32, 2] {
+        let mut outs = Vec::new();
+        for quality in [0u32, 1, 2] {
+            let st = Settings {
+                goggles: qrender::Goggles { mode, intensity: 1.5, noise: 0.5, quality },
+                ..Default::default()
+            };
+            r.render(&RenderFrame { time: 1.0, view: Some(view), settings: st, ..Default::default() }).unwrap();
+            let px = r.read_pixels().unwrap();
+            assert!(px.as_chunks::<4>().0.iter().any(|p| p[..3].iter().any(|&v| v > 10)));
+            outs.push(px);
+        }
+        assert_ne!(outs[0], outs[1], "mode {mode}: low (no glow) and medium (4-tap glow) must differ");
+    }
+
     // Slang shader input scale: fit output (shader_scale = 0) caps 200% render
     // scale at output size (320x240) while preserving low-res input at 50%;
     // 3D resolution (shader_scale = 1) feeds full 200% scene size (640x480).

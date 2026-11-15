@@ -436,12 +436,13 @@ locked like the toy cvars). It is not saved: goggles start off after a load.
   thermal → normal), `goggles nv|thermal|off`, `equip <nv|thermal>` (toggle). Each
   switch plays a synthesised cue (`goggles::cue`, rising on / falling off,
   non-positional) and centerprints the new state.
-- Rendering: the host passes `qrender::Goggles { mode, intensity, noise }`
+- Rendering: the host passes `qrender::Goggles { mode, intensity, noise, quality }`
   in `Settings`; the UBO carries it in `soft.zw`/`softf.z`, `PostPush` in
   `goggles`/`g_*`. Night vision (mode 1) is post only: luminance lifted
-  with `1 - exp(-7·gain·l)`, an 8-tap ring glow around bright spots, green
-  phosphor tint, grain, every third line darkened, faint flicker, oval
-  vignette. Thermal (mode 2): scene shaders write a grey heat level instead
+  with `1 - exp(-7·gain·l)`, a constant-offset ring glow around bright spots
+  (`0` low skips taps, `1` medium default uses 4 diagonal taps, `2` high uses
+  8 taps), green phosphor tint, grain, every third line darkened, faint
+  flicker, oval vignette. Thermal (mode 2): scene shaders write a grey heat level instead
   of colour (`thermal()` in `common.glsl`): world `0.05 + 0.2·luma` plus 1.6×
   fullbright texels (torches, lights), lava 0.88+, other liquids colder,
   sky 0.02, particles 0.55+, sprites (explosions) 0.65+; alias models by
@@ -454,8 +455,9 @@ locked like the toy cvars). It is not saved: goggles start off after a load.
   red → orange → white palette, with gain, glow, grain and a soft vignette.
   Split-screen views share the post effect (player 1's goggles).
 - Options (Add-ons → Goggles Settings, `menu_options goggles`):
-  `addon_goggles` (1), `addon_goggles_intensity` 0.25–3 (1; night-vision
-  gain / heat contrast), `addon_goggles_noise` 0–2 (1; grain, scanlines).
+  `addon_goggles` (1), `addon_goggles_quality` (`0` low / `1` medium default / `2` high),
+  `addon_goggles_intensity` 0.25–3 (1; night-vision gain / heat contrast),
+  `addon_goggles_noise` 0–2 (1; grain, scanlines).
 - Headless check: `+addons_enable 1 +sv_autosave 0 +map e1m1 "+delay 2
   goggles thermal" "+delay 3 screenshot target/shots/thermal"`.
 

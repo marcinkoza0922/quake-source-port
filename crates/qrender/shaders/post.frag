@@ -22,6 +22,7 @@ layout(push_constant) uniform P {
     uint mb_quality;  // 0 low (no dilation, 6 taps), 1 high (8-dir dilation, 12 taps)
     float mb_w;       // output width in pixels
     float mb_h;       // output height in pixels
+    uint g_quality;   // goggles glow: 0 low (no ring taps), 1 medium (4 diag taps), 2 high (8 ring taps)
 } pc;
 layout(location = 0) out vec4 o_color;
 
@@ -104,19 +105,43 @@ vec3 heat_colour(float h) {
     int i = min(int(x), 4);
     return mix(K[i], K[i + 1], x - float(i));
 }
+const vec2 G_RING4[4] = vec2[](
+    vec2( 4.9497475,  4.9497475),
+    vec2(-4.9497475,  4.9497475),
+    vec2(-4.9497475, -4.9497475),
+    vec2( 4.9497475, -4.9497475)
+);
+const vec2 G_RING8[8] = vec2[](
+    vec2( 7.0,        0.0),
+    vec2( 4.9497475,  4.9497475),
+    vec2( 0.0,        7.0),
+    vec2(-4.9497475,  4.9497475),
+    vec2(-7.0,        0.0),
+    vec2(-4.9497475, -4.9497475),
+    vec2( 0.0,       -7.0),
+    vec2( 4.9497475, -4.9497475)
+);
+
 vec3 goggles(vec3 c, vec2 uv) {
-    vec2 px = 1.0 / vec2(textureSize(textures[nonuniformEXT(pc.scene)], 0));
     vec2 fc = floor(gl_FragCoord.xy);
     float grain = (whitenoise01(fc + fract(pc.g_time * 7.31) * 517.0) - 0.5) * pc.g_noise;
     float l = g_luma(c);
-    // glow around bright spots: 8 taps on a ring
+    // glow around bright spots: constant offsets avoid per-pixel trig; low skips extra taps
     float glow = 0.0;
-    for (int i = 0; i < 8; i++) {
-        float a = float(i) * 0.78539816;
-        vec2 o = vec2(cos(a), sin(a)) * px * 7.0;
-        glow += max(g_luma(texture(textures[nonuniformEXT(pc.scene)], uv + o).rgb) - 0.5, 0.0);
+    if (pc.g_quality > 0u) {
+        vec2 px = 1.0 / vec2(textureSize(textures[nonuniformEXT(pc.scene)], 0));
+        if (pc.g_quality == 1u) {
+            for (int i = 0; i < 4; i++) {
+                glow += max(g_luma(texture(textures[nonuniformEXT(pc.scene)], uv + G_RING4[i] * px).rgb) - 0.5, 0.0);
+            }
+            glow *= 0.25;
+        } else {
+            for (int i = 0; i < 8; i++) {
+                glow += max(g_luma(texture(textures[nonuniformEXT(pc.scene)], uv + G_RING8[i] * px).rgb) - 0.5, 0.0);
+            }
+            glow *= 0.125;
+        }
     }
-    glow /= 8.0;
     vec2 v = (i_uv - 0.5) * vec2(1.0, 0.8);
     float vignette = smoothstep(0.62, 0.32, length(v));
     if (pc.goggles == 1u) {
