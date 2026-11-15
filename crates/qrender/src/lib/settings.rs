@@ -39,6 +39,12 @@ impl Renderer {
             self.idle();
             self.destroy_targets();
         }
+        let portal_quality = st.portal_quality.min(2);
+        if portal_quality != self.portal_quality {
+            self.portal_quality = portal_quality;
+            self.idle();
+            self.destroy_targets();
+        }
         // TexMgr_ApplySettings: gl_texturemode (r_texfilter picks the default),
         // anisotropy, lod bias; softemu 2/3 or lightmap banding force nearest
         // with linear mips and at least 8x anisotropy.

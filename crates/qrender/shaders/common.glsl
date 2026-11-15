@@ -19,6 +19,7 @@ layout(set = 0, binding = 0, std140) uniform Frame {
     vec4 soft;      // x screen dither, y texture dither (r_softemu/r_dither)
     uvec4 softf;    // x world dither level (0 off, 1 coarse, 2 banded lightmap), y alias mode (0 std, 1 dither, 2 affine)
     vec4 water;     // x ripple strength, y caustics strength, z ripple count
+    vec4 portal_uv; // xy gl_FragCoord -> portal UV scale, zw valid UV clamp max
     vec4 ripples[32];   // xy centre, z liquid surface height, w start time
     vec4 ripple_amp[8]; // amplitudes, 4 per vec4
 } fr;

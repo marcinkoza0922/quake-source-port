@@ -68,6 +68,7 @@ pub(super) fn tooltip(item: Item) -> Option<&'static str> {
         "addon_hitstop_cooldown" => "Minimum gap between freezes, so shotgun pellets and rapid fire count once; kills ignore it",
         "addon_hitstop_max" => "No single freeze lasts longer than this, however much damage or kill bonus adds",
         "addon_portalgun" => "A two-portal gun: fire and alt-fire place linked portals on flat walls; select it through its assigned weapon slot (Add-ons)",
+        "r_portal_quality" => "Resolution and detail inside see-through teleporters and live portal views (single-sampled); low and medium tighten recursion budgets and skip ripples, particles and tiny distant models in nested views",
         "r_debris" => "Corpses go limp as ragdolls, gibs tumble and barrels throw shrapnel; shots and blasts push them (cosmetic only)",
         "r_debris_ragdolls" => "Corpses go limp and fall as ragdolls",
         "r_debris_ragdollstart" => "After animation keeps the death animations; at death goes limp the moment a monster dies; mixed goes limp on a hard hit, and the weaker the killing hit the likelier the animation plays",

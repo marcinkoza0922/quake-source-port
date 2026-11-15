@@ -103,10 +103,11 @@ pub struct Renderer {
     world_filter: (usize, f32, f32),
     /// Colour metric the palette LUT was built with (-1 = not built).
     lut_metric: i32,
-    /// Scene MSAA sample count, render scale and SSAO quality in effect.
+    /// Scene MSAA sample count, render scale, SSAO quality, and portal quality in effect.
     msaa: u32,
     render_scale: f32,
     ssao_quality: u32,
+    portal_quality: u32,
     /// Last frame's entity transforms by `RenderEntity::key` (motion blur).
     prev_xforms: std::collections::HashMap<u32, ([f32; 3], [f32; 3])>,
     prev_xform_time: f64,

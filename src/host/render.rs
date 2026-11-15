@@ -357,6 +357,7 @@ impl Host {
             slimealpha: self.level.liquid_alpha[2].or(Some(v("r_slimealpha"))).filter(|&a| a > 0.0).map(|a| a.min(1.0)),
             telealpha: self.level.liquid_alpha[3].or(Some(v("r_telealpha"))).filter(|&a| a > 0.0).map(|a| a.min(1.0)),
             teleport_windows: v("r_teleportwindows") != 0.0,
+            portal_quality: (v("r_portal_quality").round() as i32).clamp(0, 2) as u32,
             gun_portal_max: v("addon_portal_max").clamp(0.0, 4.0) as u32,
             gun_portal_dist: v("addon_portal_dist").max(0.0),
             gun_portal_depth: v("addon_portal_depth").clamp(0.0, 6.0) as u32,

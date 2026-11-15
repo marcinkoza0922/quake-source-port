@@ -17,9 +17,9 @@ void main() {
             if (abs(dot(fr.portal_plane[i].xyz, i_wpos) + fr.portal_plane[i].w) > 0.25) continue;
             if (any(lessThan(i_wpos, fr.portal_min[i].xyz - 0.25)) ||
                 any(greaterThan(i_wpos, fr.portal_max[i].xyz + 0.25))) continue;
-            vec2 uv = gl_FragCoord.xy / vec2(textureSize(textures[nonuniformEXT(uint(fr.portal_min[i].w))], 0));
+            vec2 uv = gl_FragCoord.xy * fr.portal_uv.xy;
             vec2 warp = sin(i_st.yx * 0.14 + t * vec2(1.7, -1.3)) * 0.0015;
-            vec3 behind = tex(uint(fr.portal_min[i].w), uv + warp).rgb;
+            vec3 behind = tex(uint(fr.portal_min[i].w), clamp(uv + warp, vec2(0.0), fr.portal_uv.zw)).rgb;
             vec2 cell = floor(i_st / 3.0);
             float seed = whitenoise01(cell);
             float pulse = pow(max(0.0, sin(t * (2.0 + seed * 3.0) + seed * 90.0)), 16.0);

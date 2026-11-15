@@ -270,6 +270,7 @@ pub(super) const FILTER: &[(&str, f32)] = &[("nearest", 0.0), ("linear", 1.0)];
 pub(super) const ANISO: &[(&str, f32)] = &[("off", 1.0), ("2x", 2.0), ("4x", 4.0), ("8x", 8.0), ("16x", 16.0)];
 pub(super) const SOFTEMU: &[(&str, f32)] = &[("off", 0.0), ("fine", 1.0), ("coarse", 2.0), ("banded", 3.0)];
 pub(super) const SSAO: &[(&str, f32)] = &[("off", 0.0), ("low", 1.0), ("medium", 2.0), ("high", 3.0)];
+pub(super) const PORTAL_QUALITY: &[(&str, f32)] = &[("low", 0.0), ("medium", 1.0), ("high", 2.0)];
 pub(super) const MODES: [&str; 3] = ["windowed", "fullscreen", "borderless"];
 
 pub(super) const GRAPHICS: &[Item] = &[
@@ -302,6 +303,7 @@ pub(super) const ENHANCEMENTS: &[Item] = &[
     slider("Motion Blur Amount", "r_motionblur_amount", 0.1, 2.0, 0.1),
     toggle("Enhanced Water", "r_enhancedwater"),
     toggle("See-through Teleporters", "r_teleportwindows"),
+    Item::Choice { label: "Portal View Quality", cvar: "r_portal_quality", choices: PORTAL_QUALITY },
     Item::Sub { label: "Water Settings", page: Page::Water },
     Item::Sub { label: "Screen Shader", page: Page::ScreenShader },
     Item::Sub { label: "Impact Effects", page: Page::Impacts },

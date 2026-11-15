@@ -7,6 +7,9 @@ impl Renderer {
                 self.textures[slot as usize] = None;
                 self.gpu.free_image(img);
             }
+            if let Some(d) = t.portal_depth {
+                self.gpu.free_image(d);
+            }
             self.textures[t.color_slot as usize] = None;
             self.textures[t.ao_slot as usize] = None;
             self.textures[t.vel_slot as usize] = None;
@@ -127,7 +130,7 @@ impl Renderer {
             level: false,
             sampling: Sampling::Clamp,
         });
-        let fx_target = |r: &mut Self, tw, th, format| -> Result<(Image, u32)> {
+        let fx_target = |r: &mut Self, tw, th, format, sampler| -> Result<(Image, u32)> {
             let img = r.gpu.image(
                 tw,
                 th,
@@ -138,7 +141,7 @@ impl Renderer {
                 vk::ImageAspectFlags::COLOR,
             )?;
             let slot = r.alloc_slot()?;
-            r.write_texture_descriptor(slot, img.view, r.sampler_clamp);
+            r.write_texture_descriptor(slot, img.view, sampler);
             r.textures[slot as usize] = Some(Tex { image: None, level: false, sampling: Sampling::Clamp });
             Ok((img, slot))
         };
@@ -148,14 +151,39 @@ impl Renderer {
         } else {
             (base_w.max(1), base_h.max(1))
         };
-        let (ao, ao_slot) = fx_target(self, ao_w, ao_h, pipelines::AO_FORMAT)?;
-        let (vel, vel_slot) = fx_target(self, sw, shh, pipelines::VEL_FORMAT)?;
+        let (ao, ao_slot) = fx_target(self, ao_w, ao_h, pipelines::AO_FORMAT, self.sampler_clamp)?;
+        let (vel, vel_slot) = fx_target(self, sw, shh, pipelines::VEL_FORMAT, self.sampler_clamp)?;
+        let (portal_w, portal_h) = match self.portal_quality {
+            0 => ((base_w / 2).max(1), (base_h / 2).max(1)),
+            1 => (((base_w * 3) / 4).max(1), ((base_h * 3) / 4).max(1)),
+            _ => (base_w.max(1), base_h.max(1)),
+        };
         let mut portals = Vec::new();
+        let mut portal_depth = None;
         if self.gun_targets || self.world.as_ref().is_some_and(|w| !w.portals.is_empty()) {
-            for _ in 0..crate::MAX_PORTAL_VIEWS { portals.push(fx_target(self, sw, shh, COLOR_FORMAT)?); }
+            let portal_sampler = if (portal_w, portal_h) == (sw, shh) {
+                self.sampler_clamp
+            } else {
+                self.sampler_linear
+            };
+            for _ in 0..crate::MAX_PORTAL_VIEWS {
+                portals.push(fx_target(self, portal_w, portal_h, COLOR_FORMAT, portal_sampler)?);
+            }
+            portal_depth = Some(self.gpu.image(
+                portal_w,
+                portal_h,
+                1,
+                1,
+                DEPTH_FORMAT,
+                vk::ImageUsageFlags::DEPTH_STENCIL_ATTACHMENT,
+                vk::ImageAspectFlags::DEPTH,
+            )?);
         }
         self.targets = Some(Targets {
             portals,
+            portal_depth,
+            portal_w,
+            portal_h,
             color,
             color_ms,
             depth,

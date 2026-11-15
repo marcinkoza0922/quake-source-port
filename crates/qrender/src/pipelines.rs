@@ -23,6 +23,52 @@ pub const AO_FORMAT: vk::Format = vk::Format::R16G16_SFLOAT;
 pub const AO_SOURCE_FORMAT: vk::Format = vk::Format::R32G32_SFLOAT;
 pub const VEL_FORMAT: vk::Format = vk::Format::R16G16_SFLOAT;
 
+/// Graphics pipelines needed to render a 3D scene pass (main or portal view).
+#[derive(Clone, Copy)]
+pub struct ScenePipes {
+    pub world: vk::Pipeline,
+    pub world_alpha: vk::Pipeline,
+    pub water: vk::Pipeline,
+    pub water_alpha: vk::Pipeline,
+    pub sky: vk::Pipeline,
+    pub alias: vk::Pipeline,
+    pub alias_alpha: vk::Pipeline,
+    pub particle: vk::Pipeline,
+    pub fte: [vk::Pipeline; 16],
+}
+
+impl ScenePipes {
+    fn null() -> Self {
+        let n = vk::Pipeline::null();
+        Self {
+            world: n,
+            world_alpha: n,
+            water: n,
+            water_alpha: n,
+            sky: n,
+            alias: n,
+            alias_alpha: n,
+            particle: n,
+            fte: [n; 16],
+        }
+    }
+
+    fn all(&self) -> impl Iterator<Item = vk::Pipeline> + '_ {
+        [
+            self.world,
+            self.world_alpha,
+            self.water,
+            self.water_alpha,
+            self.sky,
+            self.alias,
+            self.alias_alpha,
+            self.particle,
+        ]
+        .into_iter()
+        .chain(self.fte)
+    }
+}
+
 pub struct Pipelines {
     pub set_layout: vk::DescriptorSetLayout,
     pub layout: vk::PipelineLayout,
@@ -47,6 +93,8 @@ pub struct Pipelines {
     /// FTE particles: 8 blend modes of triangles, then the same as lines
     /// (see [`fte_index`]).
     pub fte: [vk::Pipeline; 16],
+    /// Single-sampled pipelines for portal/teleporter destination views when MSAA is enabled.
+    pub portal: ScenePipes,
     pub ui: vk::Pipeline,
     pub post: vk::Pipeline,
     /// SSAO pass (fullscreen, scene resolution).
@@ -312,6 +360,7 @@ impl Pipelines {
             poly: null,
             particle: null,
             fte: [null; 16],
+            portal: ScenePipes::null(),
             ui: null,
             post: null,
             ao: null,

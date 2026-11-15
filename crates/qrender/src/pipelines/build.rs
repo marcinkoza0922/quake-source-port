@@ -1,6 +1,25 @@
 use super::*;
 
 impl Pipelines {
+    /// Pipelines to use for single-sampled portal/teleporter views.
+    pub fn portal_pipes(&self) -> ScenePipes {
+        if self.samples > 1 {
+            self.portal
+        } else {
+            ScenePipes {
+                world: self.world,
+                world_alpha: self.world_alpha,
+                water: self.water,
+                water_alpha: self.water_alpha,
+                sky: self.sky,
+                alias: self.alias,
+                alias_alpha: self.alias_alpha,
+                particle: self.particle,
+                fte: self.fte,
+            }
+        }
+    }
+
     pub(super) fn graphics_pipes(&self) -> Vec<vk::Pipeline> {
         let mut v = vec![
             self.world,
@@ -22,6 +41,7 @@ impl Pipelines {
             self.vel_world,
         ];
         v.extend(self.fte);
+        v.extend(self.portal.all().filter(|&p| p != vk::Pipeline::null()));
         v
     }
 
@@ -102,32 +122,45 @@ impl Pipelines {
             behind: false,
         };
         let g = |d: Desc| graphics(gpu, layout, &d);
-        let world = g(d(world_vs, world_fs, &wb, &wa, Blend::None, true, true))?;
-        let world_alpha = g(d(world_vs, world_fs, &wb, &wa, Blend::Alpha, true, false))?;
-        let water = g(d(world_vs, water_fs, &wb, &wa, Blend::None, true, true))?;
-        let water_alpha = g(d(world_vs, water_fs, &wb, &wa, Blend::Alpha, true, false))?;
-        let sky = g(d(world_vs, sky_fs, &wb, &wa, Blend::None, true, true))?;
-        let alias = g(Desc { cull: true, ..d(alias_vs, alias_fs, &ab, &aa, Blend::None, true, true) })?;
-        let alias_alpha = g(Desc { cull: true, ..d(alias_vs, alias_fs, &ab, &aa, Blend::Alpha, true, false) })?;
-        // thermal goggles: hot bodies behind walls, added on top
-        let one = vk::BlendFactor::ONE;
-        self.alias_xray = g(Desc { cull: true, behind: true, ..d(alias_vs, alias_fs, &ab, &aa, Blend::Factors(one, one), true, false) })?;
-        let poly = g(d(poly_vs, poly_fs, &pb, &pa, Blend::Alpha, true, true))?;
-        let particle = g(d(part_vs, part_fs, &qb, &qa, Blend::Alpha, true, false))?;
         let fb = [bind(0, 24, false)];
         let fa = [
             attr(0, 0, f32x3, 0),
             attr(1, 0, f32x2, 12),
             attr(2, 0, vk::Format::R8G8B8A8_UNORM, 20),
         ];
-        let mut fte = [vk::Pipeline::null(); 16];
-        for (i, slot) in fte.iter_mut().enumerate() {
-            let (src, dst) = fte_factors(crate::FteBlend::ALL[i % 8]);
-            *slot = g(Desc {
-                topology: if i >= 8 { vk::PrimitiveTopology::LINE_LIST } else { vk::PrimitiveTopology::TRIANGLE_LIST },
-                ..d(fte_vs, fte_fs, &fb, &fa, Blend::Factors(src, dst), true, false)
-            })?;
-        }
+        let build_scene = |pipe_samples, pipe_ss| -> Result<ScenePipes> {
+            let sd = |vs, fs, bindings, attrs, blend, dt, dw| Desc {
+                samples: pipe_samples,
+                sample_shading: pipe_ss,
+                ..d(vs, fs, bindings, attrs, blend, dt, dw)
+            };
+            let sg = |desc: Desc| graphics(gpu, layout, &desc);
+            let mut fte = [vk::Pipeline::null(); 16];
+            for (i, slot) in fte.iter_mut().enumerate() {
+                let (src, dst) = fte_factors(crate::FteBlend::ALL[i % 8]);
+                *slot = sg(Desc {
+                    topology: if i >= 8 { vk::PrimitiveTopology::LINE_LIST } else { vk::PrimitiveTopology::TRIANGLE_LIST },
+                    ..sd(fte_vs, fte_fs, &fb, &fa, Blend::Factors(src, dst), true, false)
+                })?;
+            }
+            Ok(ScenePipes {
+                world: sg(sd(world_vs, world_fs, &wb, &wa, Blend::None, true, true))?,
+                world_alpha: sg(sd(world_vs, world_fs, &wb, &wa, Blend::Alpha, true, false))?,
+                water: sg(sd(world_vs, water_fs, &wb, &wa, Blend::None, true, true))?,
+                water_alpha: sg(sd(world_vs, water_fs, &wb, &wa, Blend::Alpha, true, false))?,
+                sky: sg(sd(world_vs, sky_fs, &wb, &wa, Blend::None, true, true))?,
+                alias: sg(Desc { cull: true, ..sd(alias_vs, alias_fs, &ab, &aa, Blend::None, true, true) })?,
+                alias_alpha: sg(Desc { cull: true, ..sd(alias_vs, alias_fs, &ab, &aa, Blend::Alpha, true, false) })?,
+                particle: sg(sd(part_vs, part_fs, &qb, &qa, Blend::Alpha, true, false))?,
+                fte,
+            })
+        };
+        let scene = build_scene(samples, supersample)?;
+        self.portal = if samples > 1 { build_scene(1, false)? } else { ScenePipes::null() };
+        // thermal goggles: hot bodies behind walls, added on top
+        let one = vk::BlendFactor::ONE;
+        self.alias_xray = g(Desc { cull: true, behind: true, ..d(alias_vs, alias_fs, &ab, &aa, Blend::Factors(one, one), true, false) })?;
+        let poly = g(d(poly_vs, poly_fs, &pb, &pa, Blend::Alpha, true, true))?;
         // UI is drawn in the output pass, after post-processing
         let ui = graphics(
             gpu,
@@ -193,8 +226,20 @@ impl Pipelines {
             self.particle,
             self.ui,
             self.post,
-        ) = (world, world_alpha, water, water_alpha, sky, alias, alias_alpha, poly, particle, ui, post);
-        self.fte = fte;
+        ) = (
+            scene.world,
+            scene.world_alpha,
+            scene.water,
+            scene.water_alpha,
+            scene.sky,
+            scene.alias,
+            scene.alias_alpha,
+            poly,
+            scene.particle,
+            ui,
+            post,
+        );
+        self.fte = scene.fte;
         self.post_format = post_format;
         self.samples = samples;
         Ok(())

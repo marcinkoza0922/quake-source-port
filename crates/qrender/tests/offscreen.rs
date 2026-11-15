@@ -188,6 +188,29 @@ fn start_bsp_renders_non_black() {
     assert_eq!(both_expected, r.read_pixels().unwrap(), "destination ranges survived into another frame");
     // 2D only frame
     r.render(&RenderFrame::default()).unwrap();
+    let splits = [
+        SplitView { view, rect: [0, 0, 160, 200], blend: [0.0; 4] },
+        SplitView { view: View { angles: [0.0, yaw + 90.0, 0.0], ..view }, rect: [160, 0, 160, 200], blend: [0.0; 4] },
+    ];
+    let split_frame = RenderFrame {
+        time: frame.time,
+        splits: &splits,
+        settings: Settings { ssao: 2.0, msaa: 4, render_scale: 2.0, ..Default::default() },
+        ..Default::default()
+    };
+    let view_counts = [2, 4, 5, 1];
+    let split_cases: Vec<Vec<SplitView>> = view_counts.iter().map(|&n| {
+        (0..n).map(|i| SplitView {
+            view: View { angles: [0.0, yaw + i as f32 * 45.0, 0.0], ..view },
+            rect: [i as u32 * (320 / n as u32), 0, 320 / n as u32, 200],
+            blend: [0.0; 4],
+        }).collect()
+    }).collect();
+    // Warm every angle's lightmap atlas entries before capturing bit-exact
+    // reference frames (tightly packed adjacent surfaces only populate on draw).
+    for splits in &split_cases {
+        r.render(&RenderFrame { splits, ..split_frame }).unwrap();
+    }
     // Profiling must preserve pixels and produce complete queries for AO on,
     // AO off and no-view frames. Capture every reference before enabling it.
     let frames = [
@@ -206,16 +229,6 @@ fn start_bsp_renders_non_black() {
     }).collect();
     // The MSAA snapshot must survive consecutive views and be recreated after
     // resize/sample changes. Returning to the same scene must restore pixels.
-    let splits = [
-        SplitView { view, rect: [0, 0, 160, 200], blend: [0.0; 4] },
-        SplitView { view: View { angles: [0.0, yaw + 90.0, 0.0], ..view }, rect: [160, 0, 160, 200], blend: [0.0; 4] },
-    ];
-    let split_frame = RenderFrame {
-        time: frame.time,
-        splits: &splits,
-        settings: Settings { ssao: 2.0, msaa: 4, render_scale: 2.0, ..Default::default() },
-        ..Default::default()
-    };
     r.render(&split_frame).unwrap();
     let split_expected = r.read_pixels().unwrap();
     r.resize(400, 240);
@@ -226,14 +239,6 @@ fn start_bsp_renders_non_black() {
     assert_eq!(split_expected, r.read_pixels().unwrap(), "AO snapshot changed after target recreation");
     // Capture multi-view pixels before enabling profiling, including a fifth
     // view to force query-pool growth beyond the four-player reservation.
-    let view_counts = [2, 4, 5, 1];
-    let split_cases: Vec<Vec<SplitView>> = view_counts.iter().map(|&n| {
-        (0..n).map(|i| SplitView {
-            view: View { angles: [0.0, yaw + i as f32 * 45.0, 0.0], ..view },
-            rect: [i as u32 * (320 / n as u32), 0, 320 / n as u32, 200],
-            blend: [0.0; 4],
-        }).collect()
-    }).collect();
     let split_pixels: Vec<_> = split_cases.iter().map(|splits| {
         r.render(&RenderFrame { splits, ..split_frame }).unwrap();
         r.read_pixels().unwrap()
@@ -282,4 +287,17 @@ fn start_bsp_renders_non_black() {
     }
     r.render(&split_frame).unwrap();
     assert_eq!(split_expected, r.read_pixels().unwrap(), "SSAO quality cycling corrupted recreated targets");
+    // Cycle portal quality tiers across single-sample/MSAA, 100%/200% scale and split-screen.
+    for msaa in [1, 4] {
+        for render_scale in [1.0, 2.0] {
+            for portal_quality in [0, 1, 2] {
+                let st = Settings { teleport_windows: true, portal_quality, msaa, render_scale, ..Default::default() };
+                r.render(&RenderFrame { settings: st, ..portal_frame }).unwrap();
+                let portal_px = r.read_pixels().unwrap();
+                assert!(portal_px.as_chunks::<4>().0.iter().any(|p| p[..3].iter().any(|&v| v > 30)));
+                r.render(&RenderFrame { time: portal_frame.time, splits: &splits, settings: st, ..Default::default() }).unwrap();
+                let _ = r.read_pixels().unwrap();
+            }
+        }
+    }
 }

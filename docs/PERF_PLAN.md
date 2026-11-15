@@ -83,6 +83,16 @@ the remaining parity-bound phases below.
     (especially nested depth ≥ 1): `water_grad` ripples/caustics, classic/FTE
     particles, or distant small alias models.
 - Measure: `portalgun`, `teleportwindows`, `ultimate`, `ultimate-coop`.
+- **Status (Done)**:
+  - Added `r_portal_quality` (`0` = low, `1` = medium [default], `2` = high; Enhancements → `"Portal Quality"` and `qrender::Settings::portal_quality`).
+  - Rendered destination views (`t.portals` in `crates/qrender/src/lib/targets.rs`) single-sampled (`samples = 1`, dedicated `portal_depth` and single-sampled `portal` scene pipelines in `crates/qrender/src/pipelines.rs`, no MSAA scratch/resolve or sample shading) at output-capped `min(scene, output)` scale (`0.5×` `low`, `0.75×` `medium`, `1.0×` `high`) with `sampler_linear` when scaled and `FrameUbo::portal_uv` screen-space UV scaling/clamping in `water.frag` / `fte.frag`.
+  - Applied per-tier destination budgets (`low`: `max <= 2, depth <= 1, dist <= 2048`; `medium`: `max <= 4, depth <= 3, dist <= 4096`; `high`: uncapped), skipped `water_grad` ripples/caustics (`pu.water = 0`) and non-oval particles (`low`: all destination views; `medium`: nested `depth >= 1`), and culled alias draws per portal against the portal frustum/clip plane and tiny/distant bounds (preserving main-view `main_visible`). Pinned `r_portal_quality 1` in `qprof` `VANILLA` and `2` in `ADDON_ON`.
+  - Verified with `QRENDER_VALIDATION=1 cargo test -p qrender --test offscreen`, `QRENDER_VALIDATION=1 cargo nextest run`, `cargo clippy --all-targets --message-format=short`, headless screenshots (`e1m1` recursive portals `0/1/2` + 8× MSAA/200%, `start` teleporter at 8× MSAA/200%, `ad_sepulcher` 4-player split-screen), and `qprof -runs 3` medians (`target/qprof/item14-before-{ad,e1m1}` → `target/qprof/item14-after-{ad,e1m1}`, 1280×720):
+    - `teleportwindows` (`ad_sepulcher`, `r_portal_quality 1`): FPS **270 → 283**, frame **3701 → 3534 µs** (−167 µs), GPU **3623 → 3474 µs** (−149 µs); `destinations` **588 → 524 µs** (`models` **61 → 13 µs**, `resolve` **19 → 2 µs**).
+    - `ultimate` (`ad_sepulcher`, 8× SSAA + 200% scale, `r_portal_quality 2`): FPS **108 → 116**, frame **9217 → 8639 µs** (−578 µs), GPU **8919 → 8387 µs** (−532 µs); `destinations` **677 → 582 µs** (`models` **73 → 13 µs**, `resolve` **36 → 2 µs**, `setup` **10 → 2 µs**).
+    - `ultimate-coop` (`ad_sepulcher`, 4 views, `r_portal_quality 2`): FPS **94 → 97**, frame **10620 → 10324 µs** (−296 µs), GPU **10313 → 10032 µs** (−281 µs); 4-view `destinations` **1172 → 964 µs** (`models` **245 → 86 µs**, `resolve` **53 → 10 µs**).
+    - `portalgun` (`e1m1`, `r_portal_quality 2`): FPS **746 → 752**, frame **1341 → 1329 µs** (−12 µs), GPU **1266 → 1259 µs** (−7 µs); CPU `render` **290 → 254 µs**.
+    - Tier scaling (`prof_stop`, 1280×720, 8× SSAA + 200% scale): `ad_sepulcher` (`r_teleportwindows 1` + enhanced water, 500 frames) `destinations` **142.8 µs** (`low`, GPU **6045.7 µs**) / **1858.0 µs** (`medium`, **7760.1 µs**) / **1856.1 µs** (`high`, **7767.3 µs**); `e1m1` (`addon_portal_depth 4`, 750 frames) `destinations` **70.7 µs** (`low`, GPU **2950.9 µs**) / **107.6 µs** (`medium`, **2987.8 µs**) / **127.6 µs** (`high`, **3008.1 µs**).
 
 ### 15. Enhanced water caustics, ripples & splashes (*visual*)
 - Problem: in `crates/qrender/shaders/common.glsl`, `water_grad` loops over

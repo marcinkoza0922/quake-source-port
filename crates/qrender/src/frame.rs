@@ -316,7 +316,8 @@ impl Renderer {
                             }
                         };
                         let radius = dynp.map_or(am.radius, |(_, d)| d.radius);
-                        if portal_draws.is_empty() && !e.viewmodel && !sphere_in_frustum(&vs.frustum, e.origin, radius) {
+                        let main_visible = e.viewmodel || sphere_in_frustum(&vs.frustum, e.origin, radius);
+                        if portal_draws.is_empty() && !main_visible {
                             continue;
                         }
                         let t = time + e.syncbase as f64;
@@ -428,8 +429,8 @@ impl Renderer {
                                 poses: [p1, p2, top.min(13) as u32, bot.min(13) as u32],
                                 texs: [skin[0], skin[1], skin[2], base_flags | u32::from(surf.holey)],
                             };
-                            if e.portal_only {
-                                // portal views only (see draw_portals)
+                            if e.portal_only || !main_visible {
+                                // offscreen main-view models (drawn only in portal views if visible there)
                             } else if alpha < 1.0 && !e.viewmodel {
                                 trans.push((dist, Trans::Alias(alias_draws.len())));
                             } else if let Some(r) = prev_r {
@@ -440,6 +441,9 @@ impl Renderer {
                                 first_index: surf.first_index,
                                 num_indices: surf.num_indices,
                                 push,
+                                origin: e.origin,
+                                radius,
+                                main_visible,
                                 viewmodel: e.viewmodel,
                                 portal_only: e.portal_only,
                             });
@@ -604,12 +608,18 @@ impl Renderer {
                         Some((crate::pipelines::fte_index(b.blend, b.lines), slot, *b, if b.gel { GEL_MODE } else { b.blend as u32 as f32 }))
                     })
                     .collect();
-                // portal views: the same particles (not soft) and every gun
-                // portal but the one they look out of, with nested views
-                let per_view: Vec<Vec<_>> = (0..portal_draws.len())
-                    .map(|k| {
-                        let exit = portal_draws[k].portal.destination;
-                        let mut b: Vec<_> = parts.iter().map(|&(p, s, mut b, m)| { b.soft = false; (p, s, b, m) }).collect();
+                // portal views: the same particles (unless gated by portal quality) and
+                // every gun portal but the one they look out of, with nested views
+                let per_view: Vec<Vec<_>> = portal_draws
+                    .iter()
+                    .enumerate()
+                    .map(|(k, pd)| {
+                        let exit = pd.portal.destination;
+                        let mut b = if portals::skip_portal_extras(st.portal_quality.min(2), pd.depth) {
+                            Vec::new()
+                        } else {
+                            parts.iter().map(|&(p, s, mut b, m)| { b.soft = false; (p, s, b, m) }).collect()
+                        };
                         for &(gi, (p, _, gb, m)) in &gun_batches {
                             if fr.gun_portals[gi].origin != exit {
                                 b.push((p, slot_in(Some(k), gi), gb, m));
@@ -777,6 +787,18 @@ impl Renderer {
                     if st.water_ripples > 0.0 || st.water_caustics > 0.0 { self.water_fx.ripples.len() as f32 } else { 0.0 },
                     0.0,
                 ],
+                portal_uv: if let Some(t) = &self.targets {
+                    let [pw, ph] = portals::portal_viewport(t, [pass.scene_w, pass.scene_h]);
+                    let (ptw, pth) = (t.portal_w.max(1) as f32, t.portal_h.max(1) as f32);
+                    [
+                        pw as f32 / (pass.scene_w.max(1) as f32 * ptw),
+                        ph as f32 / (pass.scene_h.max(1) as f32 * pth),
+                        (pw as f32 - 0.5).max(0.0) / ptw,
+                        (ph as f32 - 0.5).max(0.0) / pth,
+                    ]
+                } else {
+                    [0.0; 4]
+                },
                 ripples: {
                     let mut r = [[0.0; 4]; crate::water::MAX_RIPPLES];
                     for (d, w) in r.iter_mut().zip(&self.water_fx.ripples) {
@@ -799,10 +821,24 @@ impl Renderer {
                 ubo.portal_min[i] = [portal.portal.mins[0], portal.portal.mins[1], portal.portal.mins[2], slot];
                 ubo.portal_max[i] = [portal.portal.maxs[0], portal.portal.maxs[1], portal.portal.maxs[2], 1.0];
             }
+            let portal_uv_self = self.targets.as_ref().map_or([0.0; 4], |t| {
+                let [pw, ph] = portals::portal_viewport(t, [pass.scene_w, pass.scene_h]);
+                let (ptw, pth) = (t.portal_w.max(1) as f32, t.portal_h.max(1) as f32);
+                [
+                    1.0 / ptw,
+                    1.0 / pth,
+                    (pw as f32 - 0.5).max(0.0) / ptw,
+                    (ph as f32 - 0.5).max(0.0) / pth,
+                ]
+            });
             for portal in &pass.portal_draws {
                 let mut pu = ubo;
                 pu.portal_min = [[0.0; 4]; 4];
                 pu.portal_clip = portal.portal.clip();
+                pu.portal_uv = portal_uv_self;
+                if portals::skip_portal_extras(st.portal_quality.min(2), portal.depth) {
+                    pu.water = [0.0; 4];
+                }
                 pu.viewproj = mul(&vs.vp, &portal.portal.to_source());
                 let eye = portal.portal.to_destination(vs.eye);
                 pu.eye[..3].copy_from_slice(&eye);
@@ -1149,7 +1185,19 @@ impl Renderer {
                 gpu::barrier(&dev, cmd, t.depth.image, drng, old, new);
             };
             ts(3);
-            self.draw_portals(cmd, portal_draws, particles, fte.as_ref().map(|f| (f.0, f.1)), world_draws, alias_draws, fi, [scene_w, scene_h], pi);
+            self.draw_portals(
+                cmd,
+                portal_draws,
+                particles,
+                fte.as_ref().map(|f| (f.0, f.1)),
+                world_draws,
+                alias_draws,
+                fi,
+                [scene_w, scene_h],
+                pi,
+                view,
+                st.portal_quality.min(2),
+            );
             ts(4);
             if self.isolated_portal.is_some() && !multi {
                 // Destination draws above retain their scenery and entities. Only
@@ -1256,7 +1304,7 @@ impl Renderer {
                 }
                 ts(5);
                 let draw_alias = |a: &AliasDraw, pipe: vk::Pipeline| {
-                    let Some(Model::Alias(am)) = self.models.get(a.model).filter(|_| !a.portal_only) else {
+                    let Some(Model::Alias(am)) = self.models.get(a.model).filter(|_| !a.portal_only && a.main_visible) else {
                         return;
                     };
                     dev.cmd_bind_pipeline(cmd, gfx, pipe);

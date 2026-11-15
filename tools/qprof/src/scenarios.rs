@@ -48,7 +48,7 @@ pub const VANILLA: &[(&str, &str)] = &[
     ("r_dynamic", "1"), ("r_coloredlight", "0"), ("r_fog", "1"), ("r_skyfog", "0.5"),
     ("r_lerpmodels", "1"), ("r_lerpmove", "1"),
     ("r_ssao", "0"), ("r_motionblur", "0"), ("r_speedblur", "0"), ("a11y_reducemotion", "0"),
-    ("r_enhancedwater", "0"), ("r_teleportwindows", "0"),
+    ("r_enhancedwater", "0"), ("r_teleportwindows", "0"), ("r_portal_quality", "1"),
     ("r_impact_fx", "0"), ("r_impact_bullets", "0"), ("r_impact_nails", "0"),
     ("r_shotgun_tracers", "0"), ("r_impact_scorches", "0"),
     ("r_blood", "0"), ("r_debris", "0"), ("r_shader_preset", ""), ("r_colorblind", "0"),
@@ -113,7 +113,7 @@ pub(crate) const ADDON_ON: &[(&str, &str)] = &[
     ("addon_boomerang", "1"), ("addon_railgun", "1"), ("addon_hookshot", "1"), ("addon_gel", "1"),
     ("addon_washer", "1"), ("addon_goggles", "1"),
     ("addon_portal_view", "1"), ("addon_portal_max", "4"), ("addon_portal_depth", "6"),
-    ("addon_portal_dist", "8192"),
+    ("addon_portal_dist", "8192"), ("r_portal_quality", "2"),
 ];
 
 /// Repeats `on`/`off` command pairs every `period` seconds over `secs`.

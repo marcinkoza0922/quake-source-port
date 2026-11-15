@@ -221,6 +221,7 @@ pub(super) const COMPAT_CVARS: &[(&str, &str, u32)] = &[
     ("r_motionblur_amount", "0.5", CVAR_ARCHIVE),
     ("r_enhancedwater", "0", CVAR_ARCHIVE),
     ("r_teleportwindows", "0", CVAR_ARCHIVE),
+    ("r_portal_quality", "1", CVAR_ARCHIVE),
     ("r_impact_fx", "1", CVAR_ARCHIVE),
     ("r_impact_bullets", "0", CVAR_ARCHIVE),
     ("r_impact_nails", "0", CVAR_ARCHIVE),

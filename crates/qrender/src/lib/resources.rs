@@ -23,6 +23,11 @@ pub(super) struct Swapchain {
 
 pub(super) struct Targets {
     pub(super) portals: Vec<(Image, u32)>,
+    /// Single-sampled depth buffer for portal destination views.
+    pub(super) portal_depth: Option<Image>,
+    /// Full extent of each portal target in pixels (output-capped, scaled by portal quality).
+    pub(super) portal_w: u32,
+    pub(super) portal_h: u32,
     /// Single-sampled scene colour (MSAA resolve target), sampled by post.
     pub(super) color: Image,
     /// Multisampled scene colour when MSAA is on.

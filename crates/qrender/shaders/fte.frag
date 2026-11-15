@@ -23,8 +23,9 @@ void main() {
         float d = length(q);
         float aa = fwidth(d) * 1.5;
         if (d > 1.0) discard;
+        vec2 puv = clamp(gl_FragCoord.xy * fr.portal_uv.xy, vec2(0.0), fr.portal_uv.zw);
         vec3 inner = pc.tex != NO_TEX
-            ? texture(textures[nonuniformEXT(pc.tex)], gl_FragCoord.xy / vec2(textureSize(textures[nonuniformEXT(pc.tex)], 0))).rgb
+            ? texture(textures[nonuniformEXT(pc.tex)], puv).rgb
             : i_color.rgb * (0.25 + 0.2 * d);
         float rim = smoothstep(0.84 - aa, 0.9, d);
         vec3 glow = mix(i_color.rgb, vec3(1.0), 0.35 * (1.0 - smoothstep(0.9, 1.0, d)));

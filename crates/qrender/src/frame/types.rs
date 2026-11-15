@@ -21,6 +21,8 @@ pub(super) struct FrameUbo {
     pub(super) softf: [u32; 4],
     /// x ripple strength, y caustics strength, z ripple count.
     pub(super) water: [f32; 4],
+    /// xy gl_FragCoord -> portal UV scale, zw valid UV clamp max.
+    pub(super) portal_uv: [f32; 4],
     /// xy centre, z liquid surface height, w start time.
     pub(super) ripples: [[f32; 4]; crate::water::MAX_RIPPLES],
     pub(super) ripple_amp: [[f32; 4]; crate::water::MAX_RIPPLES / 4],
@@ -245,6 +247,9 @@ pub(super) struct AliasDraw {
     pub(super) first_index: u32,
     pub(super) num_indices: u32,
     pub(super) push: AliasPush,
+    pub(super) origin: [f32; 3],
+    pub(super) radius: f32,
+    pub(super) main_visible: bool,
     pub(super) viewmodel: bool,
     /// Drawn only into portal views.
     pub(super) portal_only: bool,
