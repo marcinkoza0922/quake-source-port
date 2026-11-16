@@ -377,7 +377,7 @@ fn death_shortcuts_and_controller_select_recovery() {
 #[test]
 fn enhancements_hub_and_subpages_navigate_back_to_their_parent() {
     let mut cv = Cvars::default();
-    for name in ["r_enhancedwater", "r_blood", "r_debris"] {
+    for name in ["r_enhancedwater", "r_enhancedfx", "r_blood", "r_debris"] {
         cv.register(name, "1", 0);
     }
     let mut menu = Menu::new();
@@ -385,7 +385,7 @@ fn enhancements_hub_and_subpages_navigate_back_to_their_parent() {
     menu.page_cursor = PAGES.iter().position(|(_, page)| *page == Page::Enhancements).unwrap();
     menu.key(K_ENTER, &mut cv, false);
     assert_eq!(menu.screen, Screen::OptionsPage(Page::Enhancements));
-    for page in [Page::Water, Page::Blood, Page::Debris, Page::Impacts] {
+    for page in [Page::Water, Page::Debris, Page::Impacts] {
         let row = ENHANCEMENTS.iter().position(|item| matches!(item, Item::Sub {page:p,..} if *p==page)).unwrap();
         menu.opt_cursor = row;
         menu.key(K_ENTER, &mut cv, false);

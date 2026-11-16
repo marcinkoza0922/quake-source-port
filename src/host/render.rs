@@ -65,7 +65,7 @@ impl Host {
                     set,
                 },
             );
-            if self.cv("r_blood") != 0.0 || self.cv("r_impact_nails") != 0.0 || self.cv("r_impact_bullets") != 0.0 {
+            if crate::blood::Settings::read(&self.server.core.cvars).enabled || (crate::impacts::impacts_on(&self.server.core.cvars) && (self.cv("r_impact_nails") != 0.0 || self.cv("r_impact_bullets") != 0.0)) {
                 self.debris.track_shooters(&self.cl, &self.level, self.cl.time);
             }
             let fte_frustum = self.cull_fte_for_view().then(|| {
