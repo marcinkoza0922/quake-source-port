@@ -204,7 +204,7 @@ impl Server {
             vm.time += ft;
         }
         if c.sv.error.is_none() {
-            crate::assists::frame(l, c);
+            crate::modifiers::frame(l, c);
             if toys {
                 crate::addons::frame(l, c);
             } else {

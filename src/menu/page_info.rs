@@ -153,13 +153,19 @@ pub(super) fn tooltip(item: Item) -> Option<&'static str> {
         "con_notifytime" => "Seconds messages at the top of the screen stay up",
         "in_toggleattack" => "Press attack once to keep firing, again to stop",
         "in_togglerun" => "Press run once to switch between running and walking",
-        "assist_damagetaken" => "Scales all damage you take; not in deathmatch",
-        "assist_enemyhealth" => "Monsters take proportionally less damage at higher values",
-        "assist_ammo" => "Multiplies ammo from pickups (up to the normal carry limit)",
-        "assist_infiniteammo" => "Firing never uses up ammo",
-        "assist_noselfdamage" => "Your own rockets and grenades don't hurt you; rocket jumps still work",
-        "assist_regen" => "Slowly heals up to 100 health after 5 seconds without being hit",
-        "assist_jumps" => "Jump again in mid-air",
+        "modifier_damagetaken" => "Scales all damage you take; above 100% is harder",
+        "modifier_enemyhealth" => "Monsters take proportionally less damage at higher values; above 100% is harder",
+        "modifier_ammo" => "Multiplies ammo from pickups (up to the normal carry limit); below 100% is harder",
+        "modifier_health" => "Multiplies health from pickups (up to 100, or the item's own limit); below 100% is harder",
+        "modifier_horde" => "Spawns extra copies of every monster around the original when a level starts",
+        "modifier_pistolstart" => "Every level starts with only the shotgun and axe, as if started fresh",
+        "modifier_nosaves" => "Only autosaves: quicksaves and the Save menu are off",
+        "modifier_infiniteammo" => "Firing never uses up ammo",
+        "modifier_nofalldamage" => "Long falls don't hurt",
+        "modifier_nodrown" => "Staying underwater doesn't hurt",
+        "modifier_noselfdamage" => "Your own rockets and grenades don't hurt you; rocket jumps still work",
+        "modifier_regen" => "Slowly heals up to 100 health after 5 seconds without being hit",
+        "modifier_jumps" => "Jump again in mid-air",
         "scr_hudstyle" => "Classic: the original status bar; modern: compact elements at the screen edges",
         "scr_centerpos" => "Where center-screen messages appear",
         "con_notifypos" => "Where pickup and event messages appear",
@@ -171,7 +177,7 @@ pub(super) fn tooltip(item: Item) -> Option<&'static str> {
         "hud_health_pos" | "hud_armor_pos" | "hud_ammo_pos" | "hud_ammolist_pos" | "hud_weapons_pos" | "hud_items_pos" => {
             "Screen edge for this element; elements on the same spot stack"
         }
-        "a11y_gamespeed" => "Slows the whole game down; single player only",
+        "a11y_gamespeed" => "Slows the whole game down; single player only. Saves and demos stay compatible with other ports",
         _ => return None,
     })
 }
@@ -182,7 +188,7 @@ pub(super) fn tooltip(item: Item) -> Option<&'static str> {
 pub(super) static ADDON_BINDS: std::sync::atomic::AtomicBool = std::sync::atomic::AtomicBool::new(false);
 
 pub(super) fn sync_addon_binds(cv: &Cvars, game_running: bool) {
-    let on = cv.value_of(if game_running { "addons_active" } else { "addons_enable" }) != 0.0;
+    let on = cv.value_of(if game_running { "custom_active" } else { "custom_enable" }) != 0.0;
     ADDON_BINDS.store(on, std::sync::atomic::Ordering::Relaxed);
 }
 
@@ -191,6 +197,9 @@ pub(super) fn page_items(p: Page) -> &'static [Item] {
         Page::Gameplay => GAMEPLAY,
         Page::Controls if ADDON_BINDS.load(std::sync::atomic::Ordering::Relaxed) => CONTROLS_ALL,
         Page::Controls => CONTROLS,
+        Page::Customize => CUSTOMIZE,
+        Page::NewGameCustomize => NEW_GAME_CUSTOMIZE,
+        Page::Modifiers => MODIFIERS,
         Page::Addons => ADDONS,
         Page::NewGameAddons => NEW_GAME_ADDONS,
         Page::PortalGun => PORTAL_GUN,
@@ -226,7 +235,6 @@ pub(super) fn page_items(p: Page) -> &'static [Item] {
         Page::Gyro => GYRO,
         Page::Touch => TOUCH,
         Page::Autosave => AUTOSAVE,
-        Page::Assists => ASSISTS,
         Page::AutoAim => AUTOAIM,
         Page::GrenadeArc => GRENADE_ARC,
         Page::Join => JOIN,
@@ -248,7 +256,9 @@ pub(super) fn page_name(p: Page) -> &'static str {
         Page::Gyro => "Gyro & Flick Stick",
         Page::Touch => "Touchscreen",
         Page::Autosave => "Autosave",
-        Page::Assists => "Assists",
+        Page::Customize => "Customize This Game",
+        Page::NewGameCustomize => "New Game: Customize",
+        Page::Modifiers => "Gameplay Modifiers",
         Page::AutoAim => "Auto-aim Settings",
         Page::GrenadeArc => "Grenade Arc Settings",
         Page::HudLayout => "Modern HUD Layout",
@@ -278,7 +288,7 @@ pub(super) fn page_name(p: Page) -> &'static str {
 
 /// The page an `Item::Sub` page returns to, with that row's index.
 pub(super) fn parent_page(p: Page) -> Option<(Page, usize)> {
-    [Page::Assists, Page::Gameplay, Page::Input, Page::Controller, Page::Hud, Page::Accessibility, Page::Enhancements, Page::Impacts, Page::Addons, Page::NewGameAddons, Page::Audio].into_iter().find_map(|parent| {
+    [Page::Customize, Page::NewGameCustomize, Page::Gameplay, Page::Input, Page::Controller, Page::Hud, Page::Crosshair, Page::Accessibility, Page::Enhancements, Page::Impacts, Page::Addons, Page::NewGameAddons, Page::Audio].into_iter().find_map(|parent| {
         page_items(parent).iter().position(|i| matches!(i, Item::Sub { page, .. } if *page == p)).map(|i| (parent, i))
     })
 }
@@ -317,7 +327,8 @@ pub(super) fn is_net_page(p: Page) -> bool {
 impl Menu {
     /// Shared by keyboard adjustment, pointer dragging and drawing.
     pub(super) fn item_disabled(&self, item: Item, cv: &Cvars) -> bool {
-        (matches!(item, Item::Slider { cvar: "r_motionblur_amount", .. } | Item::Choice { cvar: "r_motionblur_quality", .. })
+        self.game_locked(item, cv)
+            || (matches!(item, Item::Slider { cvar: "r_motionblur_amount", .. } | Item::Choice { cvar: "r_motionblur_quality", .. })
             && cv.value_of("r_motionblur") == 0.0)
             || (matches!(item, Item::Slider { cvar: "r_waterripples_amount", .. }) && cv.value_of("r_waterripples") == 0.0)
             || (matches!(item, Item::Slider { cvar: "r_watercaustics_amount", .. }) && cv.value_of("r_watercaustics") == 0.0)

@@ -43,6 +43,7 @@ impl Menu {
 
     pub fn key(&mut self, key: i32, cv: &mut Cvars, server_active: bool) -> Vec<Action> {
         self.game_running = server_active;
+        self.custom_running = server_active && cv.value_of("custom_active") != 0.0;
         sync_addon_binds(cv, server_active);
         self.sync_autoaim_mapping(cv);
         let mut out = Vec::new();
@@ -156,11 +157,6 @@ impl Menu {
                 self.ask_delete(sv.clone());
                 return out;
             }
-            if self.on_new_game_box(pos) {
-                self.sp_cursor = 0;
-                Self::toggle_addons_box(cv, &mut out);
-                return out;
-            }
             let Some(i) = self.item_at(pos) else { return out };
             if let Some(c) = self.cursor_mut() {
                 *c = i;
@@ -215,7 +211,9 @@ impl Menu {
                     out.push(Action::Sound("misc/menu3.wav"));
                     return out;
                 }
-                wrap(&mut self.main_cursor, MAIN_ITEMS, &mut out);
+                let n = self.main_items();
+                self.main_cursor = self.main_cursor.min(n - 1);
+                wrap(&mut self.main_cursor, n, &mut out);
                 if enter {
                     out.push(Action::Sound("misc/menu2.wav"));
                     match self.main_cursor {
@@ -228,18 +226,21 @@ impl Menu {
                             out.push(Action::Command("_mods\n".into()));
                             self.screen = Screen::Mods;
                         }
+                        6 => self.open_customize(false),
                         _ => {}
                     }
                 }
             }
             Screen::SinglePlayer => {
                 if back {
+                    self.new_game_setup = false;
                     self.screen = Screen::Main;
                     return out;
                 }
-                wrap(&mut self.sp_cursor, 4, &mut out);
-                if (left || right) && self.sp_cursor == 0 {
-                    Self::toggle_addons_box(cv, &mut out);
+                wrap(&mut self.sp_cursor, customize::SP_ITEMS, &mut out);
+                if self.sp_cursor == customize::SP_CUSTOMIZE_ROW && (enter || left || right) {
+                    Self::toggle_custom_box(cv, &mut out);
+                    return out;
                 }
                 if enter {
                     out.push(Action::Sound("misc/menu2.wav"));
@@ -251,6 +252,10 @@ impl Menu {
                             self.open(Screen::Load);
                         }
                         3 => out.push(Action::Command("menu_levels\n".into())),
+                        _ if server_active && cv.value_of("custom_active") != 0.0 && cv.value_of("modifier_nosaves") != 0.0 => {
+                            let lines = vec!["This game only autosaves.".into(), "(No Manual Saves modifier)".into()];
+                            self.confirm(lines, "OK", String::new(), false);
+                        }
                         _ => {
                             if server_active {
                                 self.autosaves = false;
@@ -357,10 +362,15 @@ impl Menu {
                     }
                     self.screen = if is_net_page(p) {
                         Screen::Multiplayer
-                    } else if p == Page::NewGameAddons {
+                    } else if p == Page::NewGameCustomize {
+                        self.new_game_setup = false;
                         Screen::SinglePlayer
-                    } else if p == Page::Addons {
+                    } else if p == Page::Customize {
+                        self.main_cursor = MAIN_ITEMS;
                         Screen::Main
+                    } else if matches!(p, Page::NewGameAddons | Page::Addons) {
+                        self.opt_cursor = 1;
+                        Screen::OptionsPage(if p == Page::Addons { Page::Customize } else { Page::NewGameCustomize })
                     } else if let Some((parent, row)) =
                         self.sub_return.take().filter(|r| r.1 == p).map(|r| (r.0, r.2)).or_else(|| parent_page(p))
                     {

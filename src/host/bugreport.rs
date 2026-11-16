@@ -81,7 +81,7 @@ impl Host {
         let _ = qcore::vfs::write(&dir.join("config.cfg"), cfg.as_bytes());
         let in_game = self.server.active() && self.cl.signon == 4;
         let save = if in_game {
-            let ext = crate::autosave::ext(self.server.core.addons_on);
+            let ext = crate::autosave::ext(self.server.qsa_saves());
             let name = format!("save.{ext}");
             let ok = qcore::vfs::write(&dir.join(&name), &qcore::text::encode(&self.server.save_game())).is_ok();
             ok.then_some(name)
@@ -130,7 +130,7 @@ impl Host {
         f("deathmatch", format!("{}", cv.value_of("deathmatch")));
         f("coop", format!("{}", cv.value_of("coop")));
         f("maxclients", cl.maxclients.to_string());
-        f("addons_on", self.server.core.addons_on.to_string());
+        f("custom", self.server.core.custom.to_string());
         f("demo_playback", cl.demoplayback.to_string());
         f("stats", format!("{{\"health\": {}, \"armor\": {}, \"weapon\": {}, \"ammo\": {}, \"shells\": {}, \"nails\": {}, \"rockets\": {}, \"cells\": {}, \"items\": {}, \"monsters\": [{}, {}], \"secrets\": [{}, {}]}}",
             cl.stats[STAT_HEALTH], cl.stats[STAT_ARMOR], cl.stats[STAT_ACTIVEWEAPON], cl.stats[STAT_AMMO], cl.stats[STAT_SHELLS], cl.stats[STAT_NAILS],

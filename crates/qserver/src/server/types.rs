@@ -88,8 +88,9 @@ pub struct Core {
     pub clients: Vec<Client>,
     pub serverflags: f32,
     pub changelevel_issued: bool,
-    /// This game was started with add-ons (fixed until the next new game or load).
-    pub addons_on: bool,
+    /// A customized game: gameplay modifiers and add-ons apply, saves are
+    /// `.qsa` (fixed until the next new game or load).
+    pub custom: bool,
     /// Skip the per-frame entity updates in client datagrams (tools that
     /// drive a local client and throw its datagrams away, like qbot).
     pub skip_entity_updates: bool,
@@ -115,7 +116,7 @@ pub struct Level {
     pub dodges: Vec<crate::addons::dodge::Dodge>,
     pub vm: Vm,
     pub world: World,
-    pub(crate) assist: Vec<crate::assists::ClientAssist>,
+    pub(crate) modifiers: Vec<crate::modifiers::ClientModifiers>,
     /// Portal gun state (empty unless add-ons are in use).
     pub portals: crate::addons::portal::Portals,
     pub stickies: crate::addons::sticky::Stickies,

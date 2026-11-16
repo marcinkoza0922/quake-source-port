@@ -24,10 +24,10 @@ impl Menu {
             c.fill(194.0, y, 2.0, thumb, GOLD_FG);
         }
         if self.pad_ui {
-            self.glyphs.hints(c, 28.0, 224.0, &[(K_ABUTTON, "Toggle")], true);
+            self.glyphs.hints(c, 28.0, 224.0, &[(K_ABUTTON, "Toggle"), (K_RSHOULDER, "Details")], true);
         } else {
-            c.text(28.0, 224.0, "Enter: toggle", 8.0, MUTED);
-            c.text(28.0, 238.0, "Right / Tab: details", 8.0, MUTED);
+            c.text(28.0, 224.0, "Enter or click the box: toggle", 8.0, MUTED);
+            c.text(28.0, 238.0, "Right / Tab / click: details", 8.0, MUTED);
         }
         if page == Page::NewGameAddons {
             c.round_box(24.0, 264.0, 172.0, 22.0, 2.0, HILITE, Some(BORDER));
@@ -107,11 +107,11 @@ impl Menu {
         };
         c.round_frame(rect, radius, 2.0, GOLD_FG);
         let note = if self.toys_locked(cv) {
-            "This game started without add-ons. Start a new add-on game to enable them."
-        } else if self.game_running {
-            "Changes are saved with this game (.qsa); these saves require this source port."
+            "This game started without Customize, so its add-ons are fixed. Tick Customize for a new game."
+        } else if page == Page::Addons && self.game_running {
+            "Changes apply now and are saved with this game (.qsa)."
         } else {
-            "Add-on saves (.qsa) require this source port."
+            "Customized games save as .qsa files, which need this source port."
         };
         c.text_center(320.0, 327.0, note, 8.0, MUTED);
         if self.pad_ui {

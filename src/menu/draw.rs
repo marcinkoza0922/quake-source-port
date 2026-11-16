@@ -35,7 +35,8 @@ impl Menu {
                 let p = pic("gfx/mainmenu.lmp");
                 c.pic(72.0, 32.0, p);
                 // extra entries under the classic graphic
-                for (k, label) in ["Map Packs"].into_iter().enumerate() {
+                let extra: &[&str] = if self.custom_running { &["Map Packs", "Customize"] } else { &["Map Packs"] };
+                for (k, &label) in extra.iter().enumerate() {
                     let (y, w) = (32.0 + (5 + k) as f32 * 20.0 + 2.0, 112.0);
                     c.fill(72.0, y, w, 16.0, [0.0, 0.0, 0.0, 0.55]);
                     c.frame(72.0, y, w, 16.0, BORDER);
@@ -63,7 +64,7 @@ impl Menu {
                 c.fill(72.0, y, w, 16.0, [0.0, 0.0, 0.0, 0.55]);
                 c.frame(72.0, y, w, 16.0, BORDER);
                 gold(c, 72.0 + (w - 8.0 * 12.0) / 2.0, y + 4.0, "Level Select");
-                self.draw_new_game_box(c, cv);
+                self.draw_custom_row(c, cv);
             }
             Screen::Multiplayer => {
                 let p = pic("gfx/qplaque.lmp");
@@ -128,7 +129,7 @@ impl Menu {
                     c.pic(((640.0 - pw) / 2.0).floor(), y0 + 8.0, p);
                 }
                 if page == Page::Crosshair { crate::reticle::preview(c, cv); }
-                self.draw_addon_notes(c, cv, page, n);
+                self.draw_custom_notes(c, cv, page, n);
                 if page == Page::Join && self.servers.is_empty() && !self.searching {
                     let s = "no servers found yet";
                     c.text_center(320.0, PAGE_ROW0 + n as f32 * ROW_H + 8.0, s, TXT, MUTED);
@@ -215,7 +216,7 @@ impl Menu {
     pub(super) fn draw_item(&self, c: &mut Canvas, cv: &Cvars, item: Item, y: f32, blink: bool) {
         if self.item_disabled(item, cv) && let Item::Slider { label, .. } | Item::Choice { label, .. } = item {
             c.text_right(LABEL_R, y, label, TXT, MUTED);
-            c.text(VALUE_X, y, "(disabled)", TXT, MUTED);
+            c.text(VALUE_X, y, if self.game_locked(item, cv) { "(fixed for this game)" } else { "(disabled)" }, TXT, MUTED);
             return;
         }
         let label = |c: &mut Canvas, l: &str| c.text_right(LABEL_R, y, l, TXT, FG);
@@ -241,7 +242,7 @@ impl Menu {
                 txt(c, VALUE_X + 100.0, y, &qcore::cvar::format_float((v * 1000.0).round() / 1000.0));
             }
             Item::Toggle { label: l, cvar } => {
-                let locked = addons::is_toy_cvar(cvar) && self.toys_locked(cv);
+                let locked = self.game_locked(item, cv);
                 if locked {
                     c.text_right(LABEL_R, y, l, TXT, MUTED);
                 } else {

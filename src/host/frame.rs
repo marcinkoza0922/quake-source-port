@@ -10,7 +10,7 @@ impl Host {
     /// no remote clients. Empty (no allocation) when add-ons are off.
     pub(super) fn allowed_toys(&self) -> Vec<qserver::addons::Toy> {
         let cv = &self.server.core.cvars;
-        if !self.server.core.addons_on || !self.server.active() {
+        if !self.server.core.custom || !self.server.active() {
             return Vec::new();
         }
         let all_local = qserver::addons::all_local(&self.server.core.clients);
@@ -141,6 +141,7 @@ impl Host {
         self.con.realtime = self.realtime;
         self.con.modern = self.cv("con_modern") != 0.0;
         self.con.poll_shell();
+        self.poll_demo_jobs();
         for e in events {
             self.handle_event(e);
         }

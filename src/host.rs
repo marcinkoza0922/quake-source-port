@@ -183,6 +183,8 @@ pub struct Host {
     demonum: i32,
     /// cls.demorecording.
     recording: Option<crate::demo::DemoWriter>,
+    /// Background conversions of finished demos (`demo::convert`).
+    demo_jobs: Vec<std::sync::mpsc::Receiver<String>>,
     /// `record <name> <map> [track]`: starts when the new map connects.
     pending_record: Option<(PathBuf, i32)>,
     /// Messages up to signon 2 (demo_head), so `record` works mid-game,
@@ -314,6 +316,7 @@ impl Host {
             demos: Vec::new(),
             demonum: 0,
             recording: None,
+            demo_jobs: Vec::new(),
             pending_record: None,
             demo_head: Vec::new(),
             demo_head_signon: 0,
@@ -383,10 +386,12 @@ impl Host {
     }
 
     /// Level exit (intermission or finale): merge kills/secrets/time into
-    /// the mod's qsp_stats.json. Not for deathmatch or headless tool runs.
+    /// the mod's qsp_stats.json. Not for deathmatch, customized games
+    /// (modifiers and add-ons change the run) or headless tool runs.
     fn record_level_stats(&mut self) {
         use qnet::protocol::{STAT_MONSTERS, STAT_SECRETS, STAT_TOTALMONSTERS, STAT_TOTALSECRETS};
-        if self.headless || self.demo.is_some() || self.cv("deathmatch") != 0.0 || self.level.mapname.is_empty() {
+        if self.headless || self.demo.is_some() || self.cv("deathmatch") != 0.0 || self.level.mapname.is_empty()
+            || self.server.core.custom {
             return;
         }
         let st = |i: usize| self.cl.stats[i].max(0) as u32;
@@ -416,7 +421,7 @@ impl Host {
         }
         self.server.level = None;
         self.server.core.sv.active = false;
-        self.server.core.set_addons(false);
+        self.server.core.set_custom(false);
         self.disconnect_client();
     }
 

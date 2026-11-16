@@ -17,9 +17,37 @@ use super::Toy;
 pub const MAGIC: &str = "QSPADDONS";
 const HEADER_VERSION: u32 = 1;
 
-/// Add-on state stored in the header.
-#[derive(Clone, Debug, Default, PartialEq, Eq)]
+/// Player slots and rules of a multiplayer (split-screen, co-op) save.
+#[derive(Clone, Copy, Debug, PartialEq)]
+pub struct Players {
+    /// maxplayers
+    pub slots: usize,
+    /// Local split-screen players (`cl_splitscreen`).
+    pub local: usize,
+    pub coop: f32,
+    pub deathmatch: f32,
+    pub teamplay: f32,
+}
+
+impl Players {
+    /// `players <slots> <local> <coop> <deathmatch> <teamplay>`
+    pub fn line(&self) -> String {
+        format!("players {} {} {} {} {}\n", self.slots, self.local, self.coop, self.deathmatch, self.teamplay)
+    }
+    fn parse(rest: &str) -> Option<Self> {
+        let w: Vec<f32> = rest.split_whitespace().filter_map(|v| v.parse().ok()).collect();
+        let [slots, local, coop, deathmatch, teamplay] = w[..] else { return None };
+        Some(Players { slots: slots as usize, local: local as usize, coop, deathmatch, teamplay })
+    }
+}
+
+/// State stored in the `.qsa` header.
+#[derive(Clone, Debug, Default, PartialEq)]
 pub struct Header {
+    /// Not a customized game (a split-screen or co-op save of a vanilla
+    /// game); headers without the `vanilla` line are customized.
+    pub vanilla: bool,
+    pub players: Option<Players>,
     pub toys: Vec<Toy>,
     /// `Portals::save_text` lines.
     pub portals: String,
@@ -64,8 +92,13 @@ pub fn split(text: &str) -> Result<(Option<Header>, &str), String> {
         rest = rest.strip_prefix('\r').unwrap_or(rest).strip_prefix('\n').ok_or("truncated add-on save header")?;
         let line = rest.lines().next().unwrap_or("");
         rest = &rest[line.len()..];
+        if line.trim() == "vanilla" {
+            h.vanilla = true;
+            continue;
+        }
         match line.split_once(' ') {
             Some(("toy", name)) => h.toys.extend(Toy::from_key(name.trim())),
+            Some(("players", p)) => h.players = Players::parse(p),
             Some(("portal", p)) => {
                 h.portals += p;
                 h.portals.push('\n');
@@ -121,6 +154,19 @@ mod tests {
         assert!(split("QSPADDONS 9 0\n5\n").is_err());
         assert!(split("QSPADDONS 1 3\ntoy portalgun\n").is_err());
         assert!(split("QSPADDONS\n5\n").is_err());
+    }
+
+    #[test]
+    fn vanilla_split_screen_header() {
+        let p = Players { slots: 4, local: 3, coop: 1.0, deathmatch: 0.0, teamplay: 0.0 };
+        let w = wrap_with(&[], None, &format!("vanilla\n{}", p.line()), "5\nc\n");
+        let (h, rest) = split(&w).unwrap();
+        let h = h.unwrap();
+        assert!(h.vanilla);
+        assert_eq!(h.players, Some(p));
+        assert_eq!(rest, "5\nc\n");
+        // customized headers have no `vanilla` line
+        assert!(!split(&wrap(&[Toy::PortalGun], None, "5\n")).unwrap().0.unwrap().vanilla);
     }
 
     #[test]

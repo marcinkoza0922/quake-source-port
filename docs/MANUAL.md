@@ -98,16 +98,30 @@ Options → Gameplay:
   left).
 - **Viewmodel** position: centre, right, left or hidden.
 
-## Assists
+## Customize: gameplay modifiers and add-ons
 
-Options → Gameplay → Assists. They are engine-side, so they work with any
-mod, and they switch off in deathmatch.
+A game is either *vanilla* or *customized*, chosen when it starts. Tick
+**Customize** on the Single Player menu, then New Game opens a page with
+Gameplay Modifiers, Add-ons and Start New Game. Vanilla games save ordinary
+`.sav` files that ironwail and vkQuake can load; customized games save
+`.qsa` files that only this port loads (so do split-screen and co-op
+games, which other ports can't save). During a customized game, Main menu
+→ Customize changes its modifiers and add-ons at any time; a vanilla game's
+rules stay fixed. Modifiers work with any mod and switch off in deathmatch.
 
-- Auto-aim with a lock indicator, cone and range settings.
-- Damage taken and enemy health scaling, ammo pickup multiplier, infinite
-  ammo.
-- No fall damage, no drowning, no self damage.
-- Health regeneration and extra air jumps.
+- Harder: more damage taken, tougher enemies, fewer ammo and health
+  pickups, 2–4x monsters, pistol start every level, no manual saves.
+- Easier: less damage taken, weaker enemies, more ammo and health, infinite
+  ammo, health regeneration, no fall damage, no drowning, no self damage,
+  double or triple jumps.
+
+## Demos
+
+`record <name>` and `stop` record a demo into your user folder; `playdemo
+<name>` plays it. When recording stops, the demo is rewritten in the
+background so ironwail and vkQuake can play it too. If a mod uses particle
+effects other ports can't show, the full version is kept as `<name>.qsd`
+(`playdemo <name>.qsd`). `demo_convert <name>` converts an older demo.
 
 ## Accessibility
 
@@ -121,6 +135,7 @@ Options → Accessibility:
   scaling.
 - Toggle (instead of hold) attack and run.
 - A game-speed slider for slowing the whole game down.
+- Auto-aim with a lock indicator, cone and range settings.
 
 ## Enhancements
 

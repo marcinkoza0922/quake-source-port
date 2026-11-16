@@ -30,6 +30,8 @@ const LIST_TOP: f32 = 58.0;
 const LIST_ROW: f32 = 20.0;
 const LIST_VISIBLE: usize = 8;
 const LIST_BOTTOM: f32 = LIST_TOP + LIST_ROW * LIST_VISIBLE as f32;
+/// Clicks or taps left of this (the checkbox column) toggle an add-on.
+const CHECK_RIGHT: f32 = 42.0;
 
 const ADDON: &[Addon] = &[
     Addon {
@@ -265,7 +267,10 @@ impl Menu {
         self.addon_ui.focus = self.addon_ui.focus.min(self.browser_last_focus());
         let enter = matches!(key, K_ENTER | K_KP_ENTER | K_ABUTTON | K_MOUSE1);
         if matches!(key, K_ESCAPE | K_BBUTTON | K_MOUSE2) {
-            self.screen = if self.screen == Screen::OptionsPage(Page::NewGameAddons) { Screen::SinglePlayer } else { Screen::Main };
+            // back to the Customize page the browser was opened from
+            let hub = if self.screen == Screen::OptionsPage(Page::NewGameAddons) { Page::NewGameCustomize } else { Page::Customize };
+            self.screen = Screen::OptionsPage(hub);
+            self.opt_cursor = 1;
             return true;
         }
         if key == K_MOUSE1 {
@@ -274,8 +279,16 @@ impl Menu {
                 return self.addon_key(K_ESCAPE, cv, out);
             }
             let Some((selected, focus)) = self.browser_hit((x, y)) else { return true };
+            if selected != self.addon_ui.selected {
+                self.addon_ui.scroll = 0;
+                self.addon_ui.settings_scroll = 0.0;
+            }
             self.addon_ui.selected = selected;
             self.addon_ui.focus = focus;
+            // a name only selects (so its details can be read); the box toggles
+            if focus == 0 && x >= CHECK_RIGHT {
+                return true;
+            }
         }
         if self.screen == Screen::OptionsPage(Page::NewGameAddons) && (key == K_YBUTTON || key == K_F1 + 9) {
             self.start_new_game(out);

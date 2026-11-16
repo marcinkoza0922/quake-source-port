@@ -133,10 +133,19 @@ impl Menu {
             let line = format!("{}   {}   Time {}", sv.when(now), sv.skill_name(), sv.level_time());
             c.text(lx, y + 20.0, &line, small, MUTED);
             let hw = c.text(lx, y + 32.0, &format!("Health {}   Armor {}", sv.health, sv.armor), small, FG);
-            if sv.addons.is_some() {
-                // add-on saves are .qsa files that other ports cannot load
-                c.text(lx + hw + 12.0, y + 32.0, "Add-ons", small, GOLD_FG);
-            }
+            // .qsa saves (customized or split-screen games) that other
+            // ports cannot load
+            let mp = match sv.players {
+                (local, _) if local > 1 => format!("Split-screen, {local} players"),
+                (_, slots) if slots > 1 => "Co-op".to_string(),
+                _ => String::new(),
+            };
+            let tag = match (sv.addons.is_some(), mp.is_empty()) {
+                (true, false) => format!("Customized, {mp}"),
+                (true, true) => "Customized".to_string(),
+                (false, _) => mp,
+            };
+            c.text(lx + hw + 12.0, y + 32.0, &tag, small, GOLD_FG);
             let stats = format!("Kills {}/{}   Secrets {}/{}", sv.kills.0, sv.kills.1, sv.secrets.0, sv.secrets.1);
             let sw = c.text(lx, y + 44.0, &stats, small, FG);
             // keys after the stats line, weapons between the text and the thumbnail

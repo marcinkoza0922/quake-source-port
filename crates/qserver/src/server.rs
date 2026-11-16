@@ -166,7 +166,7 @@ fn register_cvars(cv: &mut Cvars) {
     ] {
         cv.register(n, d, f);
     }
-    for &(n, d, f) in crate::assists::CVARS.iter().chain(crate::addons::CVARS) {
+    for &(n, d, f) in crate::modifiers::CVARS.iter().chain(crate::addons::CVARS) {
         cv.register(n, d, f);
     }
 }
@@ -190,7 +190,7 @@ impl Server {
                 clients: (0..maxclients.max(1)).map(|_| Client::default()).collect(),
                 serverflags: 0.0,
                 changelevel_issued: false,
-                addons_on: false,
+                custom: false,
                 skip_entity_updates: false,
                 standard_quake,
                 log: Vec::new(),

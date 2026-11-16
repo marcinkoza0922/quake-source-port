@@ -1,23 +1,25 @@
 # Add-ons design
 
-### Add-ons (main menu → Add-ons; `qserver::addons`, `src/addons.rs`)
-Optional engine-side toys, so they work with any progs. A game has add-ons
-only if it was *started* with them: `Core::addons_on`, set by `map` from
-`addons_enable` (the archived New Game checkbox) or by `load_game` from the
-save, mirrored in read-only `addons_active` for the menu. It never changes
-mid-game, so a game started without add-ons can't gain them. Which toys are on
-is the per-toy cvar (`addon_portalgun`, default 1), editable live in an
-add-on game (Main menu → Add-ons) and fixed (dimmed) otherwise. Toys only
-run with no deathmatch and no remote client (`addons::allowed`/`all_local`).
-- New Game: single-player menu has an "Add-ons" checkbox (left/right or
-  click). Ticked, New Game opens `Page::NewGameAddons` (toy toggles, portal
-  settings, Start New Game) with a warning about other ports.
-- Saves (`addons/save.rs`): add-on games save as `.qsa` (never `.sav`) with a
-  `QSPADDONS 1 <n>` header (toys, portals) before the v5 body, so other ports
-  neither list nor parse them. `savegame_path` picks the extension, `find_save`
-  loads either (newer wins), saving removes the same-named other-format file,
-  autosave rotation carries each file's extension. Load/Save cards show an
-  "ADD-ONS: …" badge (`SaveInfo::addons`). A plain `.sav` load turns add-ons off.
+### Add-ons (Customize → Add-ons; `qserver::addons`, `src/addons.rs`)
+Optional engine-side toys, so they work with any progs. Add-ons belong to a
+*customized* game (DESIGN.md, "Customize"): `Core::custom`, set by `map`
+from `custom_enable` (the archived Single Player "Customize" row) or by
+`load_game` from the save, mirrored in read-only `custom_active` for the
+menu. It never changes mid-game, so a vanilla game can't gain add-ons. Which
+toys are on is the per-toy cvar (`addon_portalgun`, default 0), editable live
+in a customized game (Main menu → Customize → Add-ons) and fixed (dimmed)
+otherwise. Toys only run with no deathmatch and no remote client
+(`addons::allowed`/`all_local`).
+- New Game with Customize ticked opens `Page::NewGameCustomize`; its Add-ons
+  row opens `Page::NewGameAddons` (toy toggles, portal settings, Start New
+  Game) with a note about other ports. Back returns to the Customize page.
+- Saves (`addons/save.rs`): customized games save as `.qsa` (never `.sav`)
+  with a `QSPADDONS 1 <n>` header (toys, portals, add-on state, gameplay
+  modifiers) before the v5 body, so other ports neither list nor parse them.
+  `savegame_path` picks the extension, `find_save` loads either (newer wins),
+  saving removes the same-named other-format file, autosave rotation carries
+  each file's extension. Load/Save cards show a "Customized" tag
+  (`SaveInfo::addons`). A plain `.sav` load makes the game vanilla.
 - Browser: both add-on pickers use a narrow checklist and a detail panel with
   a looping action preview, scrollable instructions, bindings and a parameter
   submenu. Selection and enablement are independent. The running game's
@@ -458,7 +460,7 @@ locked like the toy cvars). It is not saved: goggles start off after a load.
   `addon_goggles` (1), `addon_goggles_quality` (`0` low / `1` medium default / `2` high),
   `addon_goggles_intensity` 0.25–3 (1; night-vision gain / heat contrast),
   `addon_goggles_noise` 0–2 (1; grain, scanlines).
-- Headless check: `+addons_enable 1 +sv_autosave 0 +map e1m1 "+delay 2
+- Headless check: `+custom_enable 1 +sv_autosave 0 +map e1m1 "+delay 2
   goggles thermal" "+delay 3 screenshot target/shots/thermal"`.
 
 ### Browser and gameplay preview tooling

@@ -116,7 +116,8 @@ impl Server {
         {
             ents = qcore::text::decode(&e);
         }
-        let horde = c.cvars.value_of("sv_horde").clamp(0.0, 64.0) as usize;
+        // sv_horde (tools) or the Extra Monsters modifier of a customized game
+        let horde = c.cvars.value_of("sv_horde").max(crate::modifiers::value(c, "modifier_horde")).clamp(0.0, 64.0) as usize;
         let ents = crate::horde::multiply(&ents, horde);
         let filter = SpawnFilter {
             deathmatch: c.cvars.value_of("deathmatch") != 0.0,
@@ -137,7 +138,7 @@ impl Server {
         c.sv.loading = false;
         vm.protect_world = true;
         self.level = Some(Level {
-            dodges: Vec::new(), vm, world, assist: Vec::new(), portals: Default::default(), stickies: Default::default(), falls: Default::default(),
+            dodges: Vec::new(), vm, world, modifiers: Vec::new(), portals: Default::default(), stickies: Default::default(), falls: Default::default(),
             rails: Default::default(), hooks: crate::addons::hookshot::Hooks::new(crate::addons::hook_surface::Surfaces::new(&bsp)),
             boomerangs: Default::default(), gel: Default::default(), washers: Default::default(),
         });

@@ -96,7 +96,7 @@ mod integration {
         apply(&mut l.dodges, &mut l.vm, &mut sv.core, 0, mv);
         assert_eq!(l.vm.ent_v(1, f.velocity), [0.0; 3]);
         crate::addons::enable_all(&mut sv.core.cvars);
-        sv.core.set_addons(true);
+        sv.core.set_custom(true);
         apply(&mut l.dodges, &mut l.vm, &mut sv.core, 0, mv);
         assert_eq!(l.vm.ent_v(1, f.velocity), [550.0, 0.0, 190.0]);
         assert_eq!(l.vm.ent_f(1, f.flags) as i32 & 512, 0);

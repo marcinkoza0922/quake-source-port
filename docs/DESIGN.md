@@ -155,8 +155,36 @@ Client-only and cosmetic: the server never sees it. Sub-options `r_debris_qualit
 - **Pushes**: `shot_impacts` drive them. A bullet or nail pushes what lies on its line of fire (`fire.rs`). That line comes from a fast alias entity that vanished next to the impact, or else from the nearest muzzle flash in the last 0.15 s with a clear line to the impact, or else from the view. An explosion pushes everything within 200 units. One within 28 units of a ragdoll's bones gibs it (`gibs.rs`: the game's precached `EF_GIB` models, preferring ones named after the monster, plus its `h_*` head; id1 `gib1-3` as fallback; blood and `udeath`, spawning `3`–`6` gibs per tier) after 0.1 s, so a server-side gib wins. Explosions in the last 0.6 s also fling corpses as they are taken over. Bullet and nail hits from the last 0.3 s are remembered too, including hits on living monsters: QC's SpawnBlood sends a blood-colour `svc_particle` instead of `TE_GUNSHOT`, which the client collects as `blood_hits`. When a ragdoll is taken over, the latest volley whose line passes within 12 units of the body is replayed on it. Each pellet also adds a whole-body knock-back (25 u/s along the flattened shot), plus a 30 u/s lift with `r_debris_killlift 1` (Kill Lift), scaled by `r_debris_force`, so a good shot throws the body back. `impacts` runs before `take_over`, because the killing hit arrives in the same packet as the death frame.
 - Fixed tier-rate steps (30/45/60 Hz, driven by `cl.time` so pause and slow motion apply).
 
-### Gameplay assists (Options → Gameplay → Assists; `qserver::assists`)
-Damage/movement assists are engine-side so they work with any progs; off in deathmatch.
+### Customize: vanilla and customized games
+A game is *vanilla* or *customized* from its start, and never changes mid-game.
+Vanilla games aim for exact save (`.sav` v5) and demo compatibility with
+ironwail and vkQuake; anything that changes the simulation lives behind
+Customize. The Single Player menu's Customize row (`custom_enable`,
+archived, a focusable row below Level Select, Enter/click/tap toggles, its
+tooltip shows when focused) makes New Game open `Page::NewGameCustomize`
+(Gameplay Modifiers, Add-ons, Start New Game); `map` then fixes
+`Core::custom` (read-only mirror `custom_active`). Loading a `.qsa` makes the
+game customized, a `.sav` vanilla. In a customized game the main menu gains
+a Customize box (`Page::Customize`: Modifiers, Add-ons) and every modifier
+and add-on stays editable, applying at once. In a vanilla game those rows are
+fixed (`Menu::game_locked`: dimmed, "(fixed for this game)") except while
+setting up the next new game (`Menu::new_game_setup`). Customized games save
+as `.qsa` (add-on header plus `modifier <cvar> <value>` lines), show a
+"Customized" save-card tag and skip level-select stats (`qsp_stats.json`).
+Multiplayer games (split-screen, co-op: more than one slot) also save as
+`.qsa` (`Server::qsa_saves`), since other ports refuse to save them and load
+them as single player: the header has `vanilla` (not customized) and
+`players <slots> <local> <coop> <deathmatch> <teamplay>`; `load_game` restores
+maxplayers, the rules and `cl_splitscreen` before spawning, and rejoining
+guests take their saved edicts (`sv.loadgame`). A plain `.sav` loads as one
+slot, coop 0, deathmatch 0. Cards show "Split-screen, N players" or "Co-op".
+`menu_options customize|newgamecustomize|modifiers` open the pages.
+- Gameplay modifiers (`qserver::modifiers`, `Page::Modifiers`, Reset to
+  Defaults): applied only when `modifiers::active` (customized, not
+  deathmatch); `modifiers::value` returns the default otherwise.
+- Player aids that never touch the simulation stay global options: auto-aim
+  (Accessibility) and the grenade arc (HUD → Crosshair). Auto-aim only turns
+  the local view, so demos and saves are unaffected.
 - Auto-aim (`qinput::lockon`) is opt-in (`assist_autoaim`) and independent of
   gamepad slowdown. The settings submenu selects hold lock-on (default) or
   continuous toggle, acquisition cone and range. Controls adds the matching
@@ -210,26 +238,34 @@ Damage/movement assists are engine-side so they work with any progs; off in deat
   (0 solid, 1 dashed, default 1), `assist_grenadearc_color` (crosshair palette
   index, default 1 yellow) and `assist_grenadearc_alpha` (0.1–1, default 0.6).
   Local games only, not in deathmatch; QC's aim randomness is not modelled.
-- qvm resolves QC `T_Damage` at load; each QC→QC call to it first runs
-  `Host::before_damage`, which may change the damage parm or skip the call.
-  `assist_damagetaken` scales damage to clients, `assist_enemyhealth`
-  divides damage to `FL_MONSTER`s. `assist_nofalldamage` /
-  `assist_nodrown` skip world damage (and `assist_noselfdamage` any
-  damage whose attacker is the target, applying the id1 knockback
-  itself so rocket jumps still work) whose caller is `PlayerPostThink` /
-  `WaterMove` (in water, not slime/lava), so no pain flinch either.
+- Modifier damage: qvm resolves QC `T_Damage` at load; each QC→QC call to
+  it first runs `Host::before_damage`, which may change the damage parm or
+  skip the call. `modifier_damagetaken` (25–300%) scales damage to clients,
+  `modifier_enemyhealth` (25–300%) divides damage to `FL_MONSTER`s.
+  `modifier_nofalldamage` / `modifier_nodrown` skip world damage (and
+  `modifier_noselfdamage` any damage whose attacker is the target, applying
+  the id1 knockback itself so rocket jumps still work) whose caller is
+  `PlayerPostThink` / `WaterMove` (in water, not slime/lava), so no pain
+  flinch either.
 - After each physics frame, per-client state on `Level`: ammo increases
-  scaled by `assist_ammo` (capped at the id1 limits or the QC value),
-  decreases undone by `assist_infiniteammo` (`currentammo` kept in step);
-  `assist_regen` heals 5 hp/s to 100 after 5 s without losing health;
-  `assist_jumps` 2/3 gives air jumps on a fresh press, using QC's
-  `FL_JUMPRELEASED` to tell presses apart.
-- Tests: `crates/qserver/tests/assists.rs` (needs game data).
+  scaled by `modifier_ammo` (50–400%, capped at the id1 limits or the QC
+  value), decreases undone by `modifier_infiniteammo` (`currentammo` kept in
+  step); health increases scaled by `modifier_health` (50–200%, capped at 100
+  or the pickup's own result); `modifier_regen` heals 5 hp/s to 100 after
+  5 s without losing health; `modifier_jumps` 2/3 gives air jumps on a fresh
+  press, using QC's `FL_JUMPRELEASED` to tell presses apart.
+- `modifier_horde` (0–3) adds that many copies of every monster at map
+  spawn (the `sv_horde` code; the larger of the two applies).
+  `modifier_pistolstart` calls QC `SetNewParms` instead of `SetChangeParms`
+  on changelevel. `modifier_nosaves` makes the host refuse `save` (the Single
+  Player Save entry explains why); autosaves still run.
+- Tests: `crates/qserver/tests/modifiers.rs` (needs game data; vanilla games
+  ignore modifiers, `.qsa` round trip), menu flow in `src/menu/tests.rs`.
 
 ### Add-ons
 
 See [ADDONS.md](ADDONS.md) for weapons, goggles, equipment, models, effects, settings and commands.
-Add-ons are opt-in: the "Enable Add-ons" checkbox (New Game screen only, hover tooltip, off by default) and every add-on toggle default to off. There is no main-menu Add-ons entry; the page stays reachable via the `addons` command. Save cards show a plain "Add-ons enabled" tag beside the timestamp.
+Add-ons are part of a customized game (see Customize above): every add-on toggle defaults to off; the pickers are Customize → Add-ons (`Page::NewGameAddons` for the next game, `Page::Addons` in a running customized game). Back returns to the Customize page. In the checklist a click or tap on a name selects it (so its details can be read) and the checkbox column toggles it.
 [Projectile shotguns and bullet time](ADDONS_TIME.md) covers simulation, input, meter and save rules; [hitstop](HITSTOP.md) covers the hit-freeze add-on.
 A Weapon Slot header groups weapon-named rows above Input Remapping, one per
 weapon supplied by the selected add-on. Add-ons may supply multiple weapons;
@@ -465,6 +501,7 @@ Port of vkQuake/QSS's entity delta protocol, layered on 15/666/999. It is needed
 - Menu pause: in single player the host calls `Server::frame_held(dt, true)` while the menu is open, which skips physics like ironwail's `key_dest == key_game` check, without setting `sv.paused`.
 - Demo playback (`src/demo.rs`, host `read_demo`): `playdemo`, `startdemos` (gated by `cl_startdemos`), `demos`, `stopdemo`, ported from ironwail's CL_PlayDemo_f/CL_GetMessage/CL_NextDemo. Messages go through the normal client parser, which is fed until `cl.time` catches up with `mtime[0]`. View angles are interpolated from `cl.mviewangles`. With no server world, point contents and ambient sound levels come from the client's BSP (`bsp_leaf`). The startup menu stays open over the demo; a key pressed in game mode during a demo opens the menu, and starting a map ends the demo loop.
 - Demo recording (`DemoWriter`): `record <name> [<map> [track]]` writes `<user dir>/<name>.dem` from the messages in `feed_client`; `stop` ends it with svc_disconnect, and leaving the game or starting a map stops it too. Recording mid-game follows ProQuake/ironwail. The messages that reached signon 2 (`demo_head`) are written first, then scores, lightstyles, stats, setview and signon 3. Signon 3 is skipped when loopback already batched it into the head. With a map argument, recording starts when that map connects. `playdemo` also looks in the user dir.
+- Demo conversion (`src/demo/convert.rs`): the local client records with FTE replacement deltas (and mods may add svcdp particles), which ironwail can't play, so when a recording stops a background thread (`Host::convert_demo`, polled by `poll_demo_jobs`; synchronous on wasm) rewrites it to the plain 15/666/999 protocol: the client parser replays each block and lists message spans (`ClientState::parse_server_message_spans`); svc_serverinfo loses its `FTE2` prefix, each svcfte_updateentities becomes svc_time plus U_* updates of every snapshot entity against its baseline (as `send/entities.rs` writes them), DP stat messages become svc_updatestat, svcdp particles and DP rain/snow temp entities are dropped, the rest is copied. Blocks stay within ironwail's 64000-byte MAX_MSGLEN. A lossless result replaces `<name>.dem`; when particles or per-entity trail/emit effects would be lost, the original is kept as `<name>.qsd` (`playdemo name.qsd`) and the console says so. `demo_convert <name>` converts an existing demo; already-plain demos are left alone. Tests (game data): an e1m1 recording replays block for block with the same entities, models, frames and origins (within the plain protocol's 0.1 unit threshold) and no extension messages; a spliced particle message keeps the `.qsd`.
 - `timedemo <name>` reads one message per frame without a frame cap and prints frames/seconds/fps from wall-clock time, so the result is real even headless.
 - Gaps: multiplayer menu, `sizeup/down` are stubs.
 
@@ -486,7 +523,7 @@ Phase 4 done (server + remaining client hooks):
   - Builtins `particleeffectnum` #335, `trailparticles` #336 (accepts DP's swapped argument order), `pointparticles` #337, `te_particlerain` #409, `te_particlesnow` #410, all through `ext_builtin`, with numbers in qvm `HOST_EXT_NUMS`.
   - `Sv::particle_precache` (index 0 unused, max 2048). The first `effectinfo.*` request precaches DP's built-in names plus every `effect` in effectinfo.txt (COM_Effectinfo_Enumerate).
   - Messages: svcdp_precache 54 (`0x4000|idx`) goes after svc_serverinfo and into the reliable datagram for late precaches. svcdp_trailparticles 60, pointparticles 61 and pointparticles1 62 go in the datagram; TEDP_PARTICLERAIN 55 / SNOW 56 go as temp entities.
-  - Gate (`Core::fte_particles`): `sv_fteparticles` (default 1) and a one-slot (single-player) server. Only then does `checkextension` report DP_SV_POINTPARTICLES, FTE_SV_POINTPARTICLES, DP_TE_PARTICLERAIN/SNOW and FTE_PART_SCRIPT/NAMESPACES/NAMESPACE_EFFECTINFO, and only then are any svcdp messages sent. vkQuake gates on the client's PEXT2; our network clients are vanilla. Demos recorded with it contain svcdp messages that vanilla engines can't play.
+  - Gate (`Core::fte_particles`): `sv_fteparticles` (default 1) and a one-slot (single-player) server. Only then does `checkextension` report DP_SV_POINTPARTICLES, FTE_SV_POINTPARTICLES, DP_TE_PARTICLERAIN/SNOW and FTE_PART_SCRIPT/NAMESPACES/NAMESPACE_EFFECTINFO, and only then are any svcdp messages sent. vkQuake gates on the client's PEXT2; our network clients are vanilla. Demos recorded with it contain svcdp messages that vanilla engines can't play; the demo converter drops them and keeps the original as `.qsd`.
 - qclient: parses 54/60/61/62 and TEDP 55/56 into `particle_precache` and `FteRequest::{Effect, Trail{interval}, Weather}`. `fte_names` survive `clear_state`.
 - host `Fte`:
   - Once the server has precached particles, `effectinfo` loads implicitly (weak, CL_ForceProtocolParticles). Lookups of `ns.name` load `particles/ns.cfg` on demand.

@@ -70,7 +70,7 @@ mod tests {
         m.adjust(toggle("Auto-aim", "assist_autoaim"), 1, true, &mut cv, &mut out);
         assert_eq!(m.bindings[K_MOUSE2 as usize].as_deref(), Some("+jump"));
         assert_eq!(m.bindings[K_LTRIGGER as usize].as_deref(), Some("+lockon"));
-        m.screen = Screen::OptionsPage(Page::Assists);
+        m.screen = Screen::OptionsPage(Page::Accessibility);
         m.key(K_ESCAPE, &mut cv, false);
         assert!(m.autoaim_prompt);
         m.key(b'y' as i32, &mut cv, false);
@@ -85,11 +85,11 @@ mod tests {
         cv.register("assist_autoaim", "1", 0);
         m.bindings[K_MOUSE2 as usize] = Some("+jump".into());
         m.autoaim_conflicts.push(K_MOUSE2);
-        m.screen = Screen::OptionsPage(Page::Assists);
+        m.screen = Screen::OptionsPage(Page::Accessibility);
         m.key(K_ESCAPE, &mut cv, false);
         m.key(b'n' as i32, &mut cv, false);
         assert!(!m.autoaim_prompt);
-        assert_ne!(m.screen, Screen::OptionsPage(Page::Assists));
+        assert_ne!(m.screen, Screen::OptionsPage(Page::Accessibility));
         assert_eq!(m.bindings[K_MOUSE2 as usize].as_deref(), Some("+jump"));
     }
 }
