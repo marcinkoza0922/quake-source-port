@@ -58,16 +58,16 @@ impl Host {
     }
 
     pub(super) fn bugreport(&mut self, text: &str) {
-        let now = std::time::SystemTime::now().duration_since(std::time::UNIX_EPOCH).map_or(0, |d| d.as_secs());
+        let now = qcore::time::SystemTime::now().duration_since(qcore::time::UNIX_EPOCH).map_or(0, |d| d.as_secs());
         let (stamp, iso) = utc_stamps(now);
         let map = if self.level.mapname.is_empty() { "nomap" } else { self.level.mapname.as_str() };
         let root = self.bugreport_root();
         let mut dir = root.join(format!("{stamp}_{map}"));
         for i in 2..1000 {
-            if !dir.exists() { break; }
+            if !qcore::vfs::exists(&dir) { break; }
             dir = root.join(format!("{stamp}_{map}_{i}"));
         }
-        if let Err(e) = std::fs::create_dir_all(&dir) {
+        if let Err(e) = qcore::vfs::create_dir_all(&dir) {
             self.print(&format!("bugreport: can't create {}: {e}\n", dir.display()));
             return;
         }
@@ -78,19 +78,19 @@ impl Host {
             cfg += &l;
             cfg.push('\n');
         }
-        let _ = std::fs::write(dir.join("config.cfg"), cfg);
+        let _ = qcore::vfs::write(&dir.join("config.cfg"), cfg.as_bytes());
         let in_game = self.server.active() && self.cl.signon == 4;
         let save = if in_game {
             let ext = crate::autosave::ext(self.server.core.addons_on);
             let name = format!("save.{ext}");
-            let ok = std::fs::write(dir.join(&name), qcore::text::encode(&self.server.save_game())).is_ok();
+            let ok = qcore::vfs::write(&dir.join(&name), &qcore::text::encode(&self.server.save_game())).is_ok();
             ok.then_some(name)
         } else {
             None
         };
         let shot = !self.dedicated;
         let json = self.bugreport_json(text, &iso, save.as_deref(), shot);
-        let _ = std::fs::write(dir.join("report.json"), json);
+        let _ = qcore::vfs::write(&dir.join("report.json"), json.as_bytes());
         // Screenshot of the next rendered frame, with no console on top.
         self.screenshot = Some(dir.join("screenshot.png").to_string_lossy().into_owned());
         self.clean_shot = true;

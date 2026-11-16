@@ -182,7 +182,7 @@ pub struct Host {
     demo_head: Vec<Vec<u8>>,
     demo_head_signon: u32,
     /// timedemo: frame count and wall-clock start at the second frame.
-    timedemo: Option<(u32, std::time::Instant)>,
+    timedemo: Option<(u32, qcore::time::Instant)>,
     /// UDP listen socket while maxplayers > 1 (listen or dedicated server).
     net_server: Option<crate::net::NetServer>,
     /// Connection to a remote server (`connect`).

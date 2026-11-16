@@ -5,7 +5,7 @@ use std::io::{Read, Write};
 use std::path::{Path, PathBuf};
 use std::process::{Child, Command, Stdio};
 use std::sync::mpsc::{self, Receiver};
-use std::time::{Duration, Instant};
+use qcore::time::{Duration, Instant};
 
 use qinput::keys::*;
 
@@ -50,6 +50,9 @@ pub struct ShellJob {
 
 impl ShellJob {
     pub fn spawn(shell_cmd: &str, stdin_data: Option<String>, env: &ShellEnv) -> Result<Self, String> {
+        if cfg!(target_arch = "wasm32") {
+            return Err("no shell on the web".into());
+        }
         let mut cmd = Command::new("bash");
         cmd.arg("-c").arg(shell_cmd);
         env.apply(&mut cmd);

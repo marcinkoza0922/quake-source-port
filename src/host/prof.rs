@@ -3,7 +3,7 @@
 //! pass timestamps); `prof_stop <file.json>` writes the summary and the raw
 //! per-frame totals. Costs nothing while not recording.
 
-use std::time::Instant;
+use qcore::time::Instant;
 
 /// Host frame phases, in the order `Host::frame` runs them.
 pub(super) const PHASES: [&str; 6] = ["pre", "input", "server", "client", "view+sound", "render"];

@@ -88,22 +88,21 @@ fn known_blurb(dir: &str) -> Vec<String> {
 
 /// True for a directory with game data (paks, pk3s, progs or maps).
 pub fn is_game_dir(path: &Path) -> bool {
-    let Ok(rd) = std::fs::read_dir(path) else { return false };
-    rd.flatten().any(|e| {
-        let n = e.file_name().to_string_lossy().to_ascii_lowercase();
-        let dir = e.path().is_dir();
+    let Ok(rd) = qcore::vfs::read_dir(path) else { return false };
+    rd.into_iter().any(|e| {
+        let n = e.path.file_name().map_or_else(String::new, |n| n.to_string_lossy().to_ascii_lowercase());
+        let dir = e.is_dir;
         (!dir && (n.ends_with(".pak") || n.ends_with(".pk3") || n == "progs.dat" || n == "csprogs.dat")) || (dir && n == "maps")
     })
 }
 
 /// All mods under `basedir`: id1 first, then by title.
 pub fn scan(basedir: &Path) -> Vec<ModInfo> {
-    let mut out: Vec<ModInfo> = std::fs::read_dir(basedir)
+    let mut out: Vec<ModInfo> = qcore::vfs::read_dir(basedir)
         .into_iter()
         .flatten()
-        .flatten()
-        .filter(|e| is_game_dir(&e.path()))
-        .filter_map(|e| e.file_name().to_str().map(|d| info(&e.path(), d)))
+        .filter(|e| e.is_dir && is_game_dir(&e.path))
+        .filter_map(|e| e.path.file_name()?.to_str().map(|d| info(&e.path, d)))
         .collect();
     out.sort_by_key(|m| (!m.dir.eq_ignore_ascii_case("id1"), m.title.to_ascii_lowercase()));
     out
@@ -116,7 +115,7 @@ fn info(path: &Path, dir: &str) -> ModInfo {
         base: Base::from_name(dir).unwrap_or(Base::Id),
         blurb: Vec::new(),
     };
-    if let Ok(t) = std::fs::read(path.join("modinfo.txt")) {
+    if let Ok(t) = qcore::vfs::read(&path.join("modinfo.txt")) {
         for line in String::from_utf8_lossy(&t).lines() {
             let line = line.trim();
             let (k, v) = line.split_once(char::is_whitespace).unwrap_or((line, ""));
@@ -143,11 +142,11 @@ fn info(path: &Path, dir: &str) -> ModInfo {
 /// The mod's readme: a `.txt`/`.md` whose name says readme, else one named
 /// after the mod, else none (changelogs and credits are no use as a blurb).
 fn readme(path: &Path, dir: &str) -> Option<String> {
-    let mut files: Vec<(u8, std::path::PathBuf)> = std::fs::read_dir(path)
+    let mut files: Vec<(u8, std::path::PathBuf)> = qcore::vfs::read_dir(path)
         .ok()?
-        .flatten()
+        .into_iter()
         .filter_map(|e| {
-            let n = e.file_name().to_string_lossy().to_ascii_lowercase();
+            let n = e.path.file_name().map_or_else(String::new, |n| n.to_string_lossy().to_ascii_lowercase());
             if !(n.ends_with(".txt") || n.ends_with(".md")) {
                 return None;
             }
@@ -158,11 +157,11 @@ fn readme(path: &Path, dir: &str) -> Option<String> {
             } else {
                 return None;
             };
-            Some((rank, e.path()))
+            Some((rank, e.path))
         })
         .collect();
     files.sort();
-    let data = std::fs::read(&files.first()?.1).ok()?;
+    let data = qcore::vfs::read(&files.first()?.1).ok()?;
     Some(String::from_utf8_lossy(&data).into_owned())
 }
 

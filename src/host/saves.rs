@@ -8,15 +8,12 @@ impl Host {
                 let png = crate::png::encode_rgba(w, h, &px);
                 let path = if name.is_empty() {
                     let dir = self.user_dir();
-                    (0..10000).map(|i| dir.join(format!("spasm{i:04}.png"))).find(|p| !p.exists()).unwrap_or(dir.join("spasm.png"))
+                    (0..10000).map(|i| dir.join(format!("spasm{i:04}.png"))).find(|p| !qcore::vfs::exists(p)).unwrap_or(dir.join("spasm.png"))
                 } else {
                     let p = PathBuf::from(name);
                     if p.extension().is_none() { p.with_extension("png") } else { p }
                 };
-                if let Some(d) = path.parent() {
-                    let _ = std::fs::create_dir_all(d);
-                }
-                match std::fs::write(&path, png) {
+                match qcore::vfs::write(&path, &png) {
                     Ok(()) => self.con.print(&format!("Wrote {}\n", path.display())),
                     Err(e) => self.con.print(&format!("screenshot: {e}\n")),
                 }
@@ -42,8 +39,7 @@ impl Host {
             s += &l;
             s.push('\n');
         }
-        let _ = std::fs::create_dir_all(&dir);
-        if let Err(e) = std::fs::write(dir.join("config.cfg"), s) {
+        if let Err(e) = qcore::vfs::write(&dir.join("config.cfg"), s.as_bytes()) {
             eprintln!("couldn't write config.cfg: {e}");
         }
         self.con.save_history(&crate::user_dir("id1"));
@@ -64,7 +60,7 @@ impl Host {
     pub(super) fn find_save(&self, name: &str) -> Option<PathBuf> {
         let dir = self.user_dir();
         match name.rsplit_once('.') {
-            Some((_, e)) if e == crate::autosave::SAVE_EXT || e == crate::autosave::ADDON_EXT => dir.join(name).is_file().then(|| dir.join(name)),
+            Some((_, e)) if e == crate::autosave::SAVE_EXT || e == crate::autosave::ADDON_EXT => qcore::vfs::is_file(&dir.join(name)).then(|| dir.join(name)),
             _ => crate::autosave::find(&dir, name),
         }
     }
@@ -101,8 +97,8 @@ impl Host {
         for i in 0..count {
             let Some(name) = self.menu.save_slot_name(i) else { continue };
             let Some(p) = self.find_save(&name) else { continue };
-            self.menu.saves[i] = std::fs::read(&p).ok().and_then(|bytes| {
-                crate::saveinfo::SaveInfo::parse(&qcore::text::decode(&bytes), std::fs::metadata(&p).ok().and_then(|m| m.modified().ok()))
+            self.menu.saves[i] = qcore::vfs::read(&p).ok().and_then(|bytes| {
+                crate::saveinfo::SaveInfo::parse(&qcore::text::decode(&bytes), qcore::vfs::modified(&p).ok())
             });
         }
     }
@@ -143,10 +139,7 @@ pub(super) fn register(c: &mut Commands<Host>) {
         }
         let text = h.server.save_game();
         let p = h.savegame_path(a.argv(1));
-        if let Some(d) = p.parent() {
-            let _ = std::fs::create_dir_all(d);
-        }
-        match std::fs::write(&p, qcore::text::encode(&text)) {
+        match qcore::vfs::write(&p, &qcore::text::encode(&text)) {
             Ok(()) => {
                 // the slot is one save: drop a same-named file of the other format
                 if let (Some(d), Some(stem)) = (p.parent(), p.file_stem().and_then(|s| s.to_str())) {
@@ -166,7 +159,7 @@ pub(super) fn register(c: &mut Commands<Host>) {
             h.print(&format!("ERROR: couldn't open {}\n", h.savegame_path(a.argv(1)).display()));
             return;
         };
-        let Ok(bytes) = std::fs::read(&p) else {
+        let Ok(bytes) = qcore::vfs::read(&p) else {
             h.print(&format!("ERROR: couldn't open {}\n", p.display()));
             return;
         };

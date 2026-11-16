@@ -4,9 +4,9 @@
 //! the loose directory is pushed first, then `pak0.pak`, `pak1.pak`, ... each
 //! on top (so paks override loose files in the same dir, higher paks win), then
 //! `*.pk3` sorted by name (QSS-style). Later gamedirs override earlier ones.
+use crate::vfs;
 use crate::reader::Reader;
 use std::collections::{BTreeSet, HashMap};
-use std::fs::File;
 use std::io::{Read, Seek, SeekFrom};
 use std::path::{Path, PathBuf};
 mod discovery;
@@ -56,6 +56,11 @@ pub struct Fs {
 /// Quake data (`id1/`) goes. The package name is set in `android/AndroidManifest.xml`.
 pub const ANDROID_DATA_DIR: &str = "/sdcard/Android/data/org.quakesourceport.app/files";
 
+/// Where the web front-end mounts the user's game data (`/quake/id1/pak0.pak`).
+pub const WEB_BASEDIR: &str = "/quake";
+/// Root of the per-game user dirs on the web (`/quake-user/<game>`).
+pub const WEB_USER_ROOT: &str = "/quake-user";
+
 impl Fs {
     pub fn new(basedir: impl Into<PathBuf>) -> Self {
         Self { basedir: basedir.into(), game_dirs: Vec::new(), paths: Vec::new() }
@@ -67,6 +72,9 @@ impl Fs {
             .map(PathBuf::from)
             .unwrap_or_else(|| {
                 // Android: the app's own external folder, which the user can fill over USB or adb.
+                if cfg!(target_arch = "wasm32") {
+                    return PathBuf::from(WEB_BASEDIR);
+                }
                 if cfg!(target_os = "android") {
                     return PathBuf::from(ANDROID_DATA_DIR);
                 }
@@ -106,14 +114,14 @@ impl Fs {
             return true;
         }
         let dir = if name.eq_ignore_ascii_case("id1")
-            && !self.basedir.join(name).is_dir()
+            && !vfs::is_dir(&self.basedir.join(name))
             && discovery::has_pak(&self.basedir)
         {
             self.basedir.clone()
         } else {
             self.basedir.join(name)
         };
-        if !dir.is_dir() {
+        if !vfs::is_dir(&dir) {
             return false;
         }
         let game = self.game_dirs.len();
@@ -127,11 +135,11 @@ impl Fs {
                 None => break,
             }
         }
-        let mut pk3s: Vec<PathBuf> = std::fs::read_dir(&dir)
+        let mut pk3s: Vec<PathBuf> = vfs::read_dir(&dir)
             .into_iter()
             .flatten()
-            .flatten()
-            .map(|e| e.path())
+            .filter(|e| !e.is_dir)
+            .map(|e| e.path)
             .filter(|p| p.extension().is_some_and(|e| e.eq_ignore_ascii_case("pk3")))
             .collect();
         pk3s.sort();
@@ -193,7 +201,7 @@ impl Fs {
         let path = path.replace('\\', "/");
         match self.find(&path)? {
             (sp, None) => sp.pack()?.read(&path),
-            (_, Some(f)) => std::fs::read(f).ok(),
+            (_, Some(f)) => vfs::read(&f).ok(),
         }
     }
 
@@ -217,12 +225,11 @@ impl Fs {
                     let sub = prefix.rfind('/').map_or("", |i| &prefix[..i]);
                     let mut stack = vec![(d.join(sub), sub.to_string())];
                     while let Some((dir, rel)) = stack.pop() {
-                        for e in std::fs::read_dir(&dir).into_iter().flatten().flatten() {
-                            let Some(name) = e.file_name().to_str().map(str::to_string) else { continue };
+                        for e in vfs::read_dir(&dir).into_iter().flatten() {
+                            let Some(name) = e.path.file_name().and_then(|n| n.to_str()).map(str::to_string) else { continue };
                             let rp = if rel.is_empty() { name } else { format!("{rel}/{name}") };
-                            let Ok(ft) = e.file_type() else { continue };
-                            if ft.is_dir() {
-                                stack.push((e.path(), rp));
+                            if e.is_dir {
+                                stack.push((e.path, rp));
                             } else if ok(&rp) && seen.insert(rp.to_ascii_lowercase()) {
                                 out.insert(rp);
                             }
@@ -240,22 +247,22 @@ impl Fs {
 /// Exact match first; on a miss, walk each component case-insensitively.
 fn resolve_loose(dir: &Path, path: &str) -> Option<PathBuf> {
     let exact = dir.join(path);
-    if exact.is_file() {
+    if vfs::is_file(&exact) {
         return Some(exact);
     }
     let mut cur = dir.to_path_buf();
     for comp in path.split('/').filter(|c| !c.is_empty()) {
         let direct = cur.join(comp);
-        if direct.exists() {
+        if vfs::exists(&direct) {
             cur = direct;
             continue;
         }
-        let found = std::fs::read_dir(&cur).ok()?.flatten().find(|e| {
-            e.file_name().to_str().is_some_and(|n| n.eq_ignore_ascii_case(comp))
+        let found = vfs::read_dir(&cur).ok()?.into_iter().find(|e| {
+            e.path.file_name().and_then(|n| n.to_str()).is_some_and(|n| n.eq_ignore_ascii_case(comp))
         })?;
-        cur = found.path();
+        cur = found.path;
     }
-    cur.is_file().then_some(cur)
+    vfs::is_file(&cur).then_some(cur)
 }
 
 #[cfg(test)]

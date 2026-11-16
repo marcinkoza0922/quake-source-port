@@ -44,34 +44,45 @@ impl Demo {
 
 /// A demo being recorded (cls.demofile with cls.demorecording).
 pub struct DemoWriter {
-    file: std::io::BufWriter<std::fs::File>,
+    path: std::path::PathBuf,
+    buf: Vec<u8>,
 }
+
+/// Buffered bytes appended to the file at a time.
+const DEMO_FLUSH: usize = 64 * 1024;
 
 impl DemoWriter {
     /// Creates the file and writes the CD track header.
     pub fn create(path: &std::path::Path, track: i32) -> std::io::Result<Self> {
-        use std::io::Write;
-        if let Some(d) = path.parent() {
-            std::fs::create_dir_all(d)?;
-        }
-        let mut file = std::io::BufWriter::new(std::fs::File::create(path)?);
-        writeln!(file, "{track}")?;
-        Ok(DemoWriter { file })
+        qcore::vfs::write(path, format!("{track}\n").as_bytes())?;
+        Ok(DemoWriter { path: path.to_path_buf(), buf: Vec::with_capacity(DEMO_FLUSH) })
     }
 
     /// CL_WriteDemoMessage.
     pub fn write(&mut self, angles: [f32; 3], data: &[u8]) -> std::io::Result<()> {
-        use std::io::Write;
-        self.file.write_all(&(data.len() as i32).to_le_bytes())?;
+        self.buf.extend((data.len() as i32).to_le_bytes());
         for a in angles {
-            self.file.write_all(&a.to_le_bytes())?;
+            self.buf.extend(a.to_le_bytes());
         }
-        self.file.write_all(data)
+        self.buf.extend(data);
+        if self.buf.len() >= DEMO_FLUSH { self.flush() } else { Ok(()) }
+    }
+
+    fn flush(&mut self) -> std::io::Result<()> {
+        if self.buf.is_empty() { return Ok(()); }
+        let r = qcore::vfs::append(&self.path, &self.buf);
+        self.buf.clear();
+        r
     }
 
     pub fn finish(mut self) -> std::io::Result<()> {
-        use std::io::Write;
-        self.file.flush()
+        self.flush()
+    }
+}
+
+impl Drop for DemoWriter {
+    fn drop(&mut self) {
+        let _ = self.flush();
     }
 }
 

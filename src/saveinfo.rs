@@ -1,6 +1,6 @@
 //! Read previews from ordinary v5 saves without starting a server or loading game assets.
 use qcore::cmd::com_parse;
-use std::time::{SystemTime, UNIX_EPOCH};
+use qcore::time::{SystemTime, UNIX_EPOCH};
 
 #[derive(Clone, Debug)]
 pub struct SaveInfo {

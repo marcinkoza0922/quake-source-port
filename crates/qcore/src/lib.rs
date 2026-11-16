@@ -7,6 +7,8 @@ pub mod math;
 pub mod reader;
 pub mod vertex;
 pub mod text;
+pub mod time;
+pub mod vfs;
 
 pub use math::{Plane, Vec3};
 pub use reader::{ReadError, Reader};

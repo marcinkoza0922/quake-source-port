@@ -109,15 +109,15 @@ impl Stats {
 
     /// Missing or unreadable files give empty stats.
     pub fn load(dir: &Path) -> Stats {
-        std::fs::read_to_string(dir.join(FILE_NAME)).map(|t| Stats::parse(&t)).unwrap_or_default()
+        qcore::vfs::read_to_string(&dir.join(FILE_NAME)).map(|t| Stats::parse(&t)).unwrap_or_default()
     }
 
     /// Writes via a temp file + rename so a crash never truncates it.
     pub fn save(&self, dir: &Path) -> std::io::Result<()> {
-        std::fs::create_dir_all(dir)?;
+        qcore::vfs::create_dir_all(dir)?;
         let tmp = dir.join(format!("{FILE_NAME}.tmp"));
-        std::fs::write(&tmp, self.to_json())?;
-        std::fs::rename(tmp, dir.join(FILE_NAME))
+        qcore::vfs::write(&tmp, self.to_json().as_bytes())?;
+        qcore::vfs::rename(&tmp, &dir.join(FILE_NAME))
     }
 }
 

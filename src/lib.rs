@@ -68,8 +68,12 @@ impl Opts {
     }
 }
 
-/// `$XDG_DATA_HOME/quake-source-port/<game>` (default `~/.local/share/...`).
+/// `$XDG_DATA_HOME/quake-source-port/<game>` (default `~/.local/share/...`);
+/// `/quake-user/<game>` in the web build.
 pub fn user_dir(game: &str) -> PathBuf {
+    if cfg!(target_arch = "wasm32") {
+        return PathBuf::from(qcore::fs::WEB_USER_ROOT).join(game.to_ascii_lowercase());
+    }
     if cfg!(target_os = "android") && std::env::var_os("XDG_DATA_HOME").is_none() {
         return PathBuf::from(qcore::fs::ANDROID_DATA_DIR).join("userdata").join(game.to_ascii_lowercase());
     }
