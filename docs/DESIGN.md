@@ -655,7 +655,14 @@ strongest nearby motion; speed blur (`View::speed_blur`, bullet-time
 the scene nearest-filtered, so at very high frame rates the per-frame blur
 can be sub-pixel. Pipelines that read the scene targets (SSAO, velocity) are
 in `fx_pipes.rs`, rebuilt per MSAA sample count; command recording is in
-`encode.rs`. A post pass applies the
+`encode.rs`. Enhanced water (`wgpu_backend/water.rs`, r_enhancedwater)
+drives the shared `crate::water::WaterFx` like the Vulkan backend; its ripple
+events go into one `WaterU` uniform buffer (frame group binding 4, with the
+caustic texture and a repeat sampler at 5/6), `fs_water` ports
+water_grad/lava_rings (swell, rings, lava heat; liquid kind in
+`DrawU.params.w`) and `fs_world` the caustics from `WorldVertex::liquid`.
+Splash droplets and spray puffs are drawn as blended quads with the particles
+(not depth-softened, unlike Vulkan's soft particles). A post pass applies the
 `r_waterwarp 1` underwater screen warp (vkQuake's `water_warp`),
 polyblend/contrast/gamma at output size, then the 2D layer. The
 `r_waterwarp 2` FOV pulse works (it is in the shared projection); FTE
@@ -670,8 +677,8 @@ each frame; the Vulkan backend's `take_capture` is never pending.
 See-through portals and teleporter windows are deliberately left out of this
 backend: every portal view would rebuild the CPU draw lists again, which is
 too slow in a browser (portals and teleporters still work, the surface is
-just opaque). Not implemented there: water
-ripples/caustics, softemu/dither, goggles, colorblind, slang presets,
+just opaque). Not implemented there: soft particles,
+softemu/dither, goggles, colorblind, slang presets,
 GPU timings and r_visibility. Natively `Renderer::new` (windowed) returns an
 error with `--features wgpu`; use `-headless`.
 

@@ -236,6 +236,19 @@ impl Pipes {
             tex_entry(1, D::D2Array),
             tex_entry(2, D::D2),
             sampler_entry(3),
+            // water: ripple uniforms, caustic texture, repeat sampler
+            wgpu::BindGroupLayoutEntry {
+                binding: 4,
+                visibility: wgpu::ShaderStages::FRAGMENT,
+                ty: wgpu::BindingType::Buffer {
+                    ty: wgpu::BufferBindingType::Uniform,
+                    has_dynamic_offset: false,
+                    min_binding_size: wgpu::BufferSize::new(std::mem::size_of::<super::water::WaterU>() as u64),
+                },
+                count: None,
+            },
+            tex_entry(5, D::D2),
+            sampler_entry(6),
         ]);
         let mat_bgl = bgl(&[tex_entry(0, D::D2), tex_entry(1, D::D2), tex_entry(2, D::D2), sampler_entry(3)]);
         let sky_bgl = bgl(&[

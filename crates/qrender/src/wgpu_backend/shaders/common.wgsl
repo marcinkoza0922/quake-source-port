@@ -23,6 +23,15 @@ struct DrawU {
 @group(0) @binding(1) var lightmap: texture_2d_array<f32>;
 @group(0) @binding(2) var palette: texture_2d<f32>;
 @group(0) @binding(3) var lm_samp: sampler;
+// r_enhancedwater (wgpu_backend/water.rs)
+struct WaterU {
+    params: vec4<f32>,                 // x ripple strength, y caustics, z ripple count, w quality (0 low, 1 high)
+    ripples: array<vec4<f32>, 32>,     // xy centre, z liquid surface height, w start time
+    amp: array<vec4<f32>, 8>,          // amplitudes, 4 per vec4
+};
+@group(0) @binding(4) var<uniform> water: WaterU;
+@group(0) @binding(5) var caustic_t: texture_2d<f32>;
+@group(0) @binding(6) var caustic_s: sampler;
 @group(2) @binding(0) var<uniform> du: DrawU;
 
 fn apply_fog(c: vec3<f32>, wpos: vec3<f32>) -> vec3<f32> {

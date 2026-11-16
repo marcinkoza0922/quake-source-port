@@ -165,7 +165,8 @@ pub(super) fn world_cmds(
                 f32::from(flags & 0x10 != 0),
                 f32::from(fb != NO_TEX),
                 f32::from(flags & 0x20 != 0),
-                0.0,
+                // liquid kind (1 water, 2 lava, 3 slime, 4 tele) for fs_water
+                if pipe == Pipe::Water || pipe == Pipe::WaterAlpha { (flags & 0xf) as f32 } else { 0.0 },
             ],
             ..Default::default()
         });
@@ -235,6 +236,8 @@ impl Renderer {
         }
         self.entity_cmds(fr, &vs, vbit, alphas, lists, &mut b);
         self.particle_cmds(fr, &vs, lists, &mut b);
+        let tan = crate::projection::half_fov_tangents(view, (sw, sh));
+        self.splash_cmds(fr, vs.eye, [vs.fwd, vs.right, vs.up], 2.0 * tan[1] / sh.max(1) as f32, lists, &mut b);
         b.trans.sort_by(|a, c| c.0.total_cmp(&a.0));
         let (mut cmds, late): (Vec<Cmd>, Vec<Cmd>) =
             b.opaque.into_iter().partition(|c| !c.viewmodel && c.pipe != Pipe::Water);
@@ -247,7 +250,6 @@ impl Renderer {
             crate::WaterWarp::Screen(t) => t.max(0.0) % 1000.0,
             _ => -1.0,
         };
-        let tan = crate::projection::half_fov_tangents(view, (sw, sh));
         let fog = fog.density.max(0.0) / 64.0;
         let out = [ow, oh];
         let vel = b.vel;

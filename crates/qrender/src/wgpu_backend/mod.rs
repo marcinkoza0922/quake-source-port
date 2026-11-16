@@ -2,8 +2,8 @@
 //! feature). Same public API as the Vulkan backend; the scene is drawn with
 //! CPU-built draw lists (world from the PVS, alias poses lerped on the CPU,
 //! lightmaps built on the CPU) and WGSL shaders in `shaders/`. Advanced
-//! effects of the Vulkan backend (portals, slang presets, softemu, goggles,
-//! water ripples) are not drawn.
+//! effects of the Vulkan backend (portals, slang presets, softemu, goggles)
+//! are not drawn.
 
 mod capture;
 mod encode;
@@ -19,6 +19,7 @@ mod pipes;
 mod scene;
 mod ssao;
 mod textures;
+mod water;
 
 use crate::convert::Palette;
 use crate::{Error, GpuViewTiming, PicId, Result, ShaderParam, SurfaceProvider, Vec3};
@@ -95,6 +96,8 @@ pub struct Renderer {
     ssao: Option<u32>,
     /// Motion blur quality while r_motionblur is on.
     mblur: Option<u32>,
+    /// Ripples, caustics and splashes (r_enhancedwater).
+    water: water::Water,
     /// Entity transforms of the last frame (motion blur).
     motion: motion::Motion,
     /// Copy the next presented frame for [`Renderer::take_capture`].
@@ -204,6 +207,7 @@ impl Renderer {
         let black = textures::solid(&dev, &queue, [0; 4]);
         let palette_view = textures::palette_texture(&dev, &queue, palette);
         let lightmap = lightmap::Lightmaps::new(&dev, &queue, 1);
+        let water = water::Water::new(&dev, &queue, palette);
         let mut r = Renderer {
             gpu_times_wanted: false,
             fence_wait_ns: 0,
@@ -223,6 +227,7 @@ impl Renderer {
             palette: *palette,
             palette_view,
             lightmap,
+            water,
             world: None,
             models: Vec::new(),
             pics: Vec::new(),
@@ -243,6 +248,7 @@ impl Renderer {
             capture_req: false,
             capture: None,
         };
+        r.init_water();
         let dot = textures::particle_dot();
         r.dot_tex = r.add_texture(8, 8, &[&dot], false, textures::Sampling::Linear)?;
         Ok(r)

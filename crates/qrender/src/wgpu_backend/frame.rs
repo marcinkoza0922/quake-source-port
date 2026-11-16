@@ -245,6 +245,7 @@ impl Renderer {
         lists.views.clear();
         let (w, h) = (self.width, self.height);
         self.motion.begin(fr);
+        self.update_water(fr);
         if !fr.splits.is_empty() {
             for (k, s) in fr.splits.iter().enumerate() {
                 self.build_view(fr, &s.view, s.rect, s.blend, 1u8 << k.min(7), &mut lists);
@@ -339,6 +340,9 @@ impl Renderer {
                     wgpu::BindGroupEntry { binding: 1, resource: wgpu::BindingResource::TextureView(&self.lightmap.view) },
                     wgpu::BindGroupEntry { binding: 2, resource: wgpu::BindingResource::TextureView(&self.palette_view) },
                     wgpu::BindGroupEntry { binding: 3, resource: wgpu::BindingResource::Sampler(&self.samplers.linear) },
+                    wgpu::BindGroupEntry { binding: 4, resource: self.water.buf.as_entire_binding() },
+                    wgpu::BindGroupEntry { binding: 5, resource: wgpu::BindingResource::TextureView(&self.water.caustic) },
+                    wgpu::BindGroupEntry { binding: 6, resource: wgpu::BindingResource::Sampler(&self.water.repeat) },
                 ],
             });
             self.bufs.frame_group = Some(g);
