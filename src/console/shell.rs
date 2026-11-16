@@ -288,6 +288,8 @@ impl PtySession {
     }
 
     pub fn write_bytes(&mut self, data: &[u8]) {
+        #[cfg(not(unix))]
+        let _ = data;
         #[cfg(unix)]
         if !data.is_empty() {
             // SAFETY: master_fd is valid; data pointer and length are valid.

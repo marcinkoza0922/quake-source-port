@@ -7,6 +7,7 @@ default-run = "quake-source-port"
 
 [workspace]
 members = ["crates/*", "tools/*"]
+exclude = ["tools/webbuild"]
 default-members = [".", "crates/*", "tools/*"]
 
 [workspace.package]
@@ -62,3 +63,11 @@ panic = "abort"
 
 [dev-dependencies]
 qwfake = { path = "tools/qwfake" }
+
+# Browser build (docs/WEB_PORT.md); built as a cdylib by tools/webbuild/build.sh.
+[target.'cfg(target_arch = "wasm32")'.dependencies]
+wasm-bindgen = "=0.2.130"
+wasm-bindgen-futures = "0.4.80"
+js-sys = "=0.3.107"
+web-sys = { version = "=0.3.107", features = ["Window"] }
+console_error_panic_hook = "0.1.7"

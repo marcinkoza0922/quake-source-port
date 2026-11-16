@@ -262,6 +262,16 @@ dependencies = [
 ]
 
 [[package]]
+name = "console_error_panic_hook"
+version = "0.1.7"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "a06aeb73f470f66dcdbf7223caeebb85984942f22f1adb2a088cf9668146bbbc"
+dependencies = [
+ "cfg-if",
+ "wasm-bindgen",
+]
+
+[[package]]
 name = "constant_time_eq"
 version = "0.4.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1410,7 +1420,10 @@ dependencies = [
 name = "qplatform"
 version = "0.1.0"
 dependencies = [
+ "js-sys",
  "sdl3-sys",
+ "wasm-bindgen",
+ "web-sys",
 ]
 
 [[package]]
@@ -1467,6 +1480,8 @@ name = "quake-source-port"
 version = "0.1.0"
 dependencies = [
  "ab_glyph",
+ "console_error_panic_hook",
+ "js-sys",
  "miniz_oxide 0.8.9",
  "qclient",
  "qcore",
@@ -1482,6 +1497,9 @@ dependencies = [
  "qvm",
  "qwfake",
  "qworld",
+ "wasm-bindgen",
+ "wasm-bindgen-futures",
+ "web-sys",
 ]
 
 [[package]]

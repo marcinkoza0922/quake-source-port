@@ -14,5 +14,17 @@ bundled-sdl = ["sdl3-sys/build-from-source-static"]
 # Shared libSDL3.so, which the Android activity loads before the game library.
 bundled-sdl-shared = ["sdl3-sys/build-from-source"]
 
-[dependencies]
+[target.'cfg(not(target_arch = "wasm32"))'.dependencies]
 sdl3-sys = { version = "0.7.3", default-features = false, features = ["use-pkg-config"] }
+
+[target.'cfg(target_arch = "wasm32")'.dependencies]
+wasm-bindgen = "=0.2.130"
+js-sys = "=0.3.107"
+web-sys = { version = "=0.3.107", features = [
+    "AddEventListenerOptions", "AudioBuffer", "AudioContext", "AudioContextOptions",
+    "AudioContextState", "AudioDestinationNode", "AudioNode", "AudioProcessingEvent",
+    "CssStyleDeclaration", "Document", "DomRect", "Element", "Event", "EventTarget",
+    "FocusEvent", "Gamepad", "GamepadButton", "GamepadMappingType", "HtmlCanvasElement",
+    "HtmlElement", "KeyboardEvent", "MouseEvent", "Navigator", "Node", "Performance",
+    "Screen", "ScriptProcessorNode", "WheelEvent", "Window",
+] }

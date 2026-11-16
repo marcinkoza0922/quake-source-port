@@ -37,10 +37,11 @@ mod saveinfo;
 mod splitscreen;
 mod save_inventory;
 mod view;
+#[cfg(target_arch = "wasm32")]
+mod web;
 mod wheel;
 
 use std::path::PathBuf;
-use std::time::{Duration, Instant};
 
 use qcore::fs::Fs;
 use qsound::SoundSystem;
@@ -50,6 +51,7 @@ struct Opts {
 }
 
 impl Opts {
+    #[cfg(not(target_arch = "wasm32"))]
     fn fixed_step(&self) -> Result<Option<f64>, &'static str> {
         if !self.has("-fixedstep") { return Ok(None); }
         if self.has("-realtime") || self.has("-dedicated") {
@@ -86,25 +88,16 @@ pub fn user_dir(game: &str) -> PathBuf {
     root.join("quake-source-port").join(game.to_ascii_lowercase())
 }
 
-pub fn run() {
-    let o = Opts { args: std::env::args().skip(1).collect() };
-    let fixed_step = o.fixed_step().unwrap_or_else(|e| {
-        eprintln!("{e}");
-        std::process::exit(2)
-    });
+/// Game search paths from -basedir/-game/-hipnotic/-rogue/-quoth plus the
+/// user dir, and the game palette.
+fn open_game(o: &Opts) -> Result<(Fs, PathBuf, [[u8; 3]; 256]), String> {
     let basedir = o
         .val("-basedir")
         .map(PathBuf::from)
         .unwrap_or_else(Fs::default_basedir);
     let mut fs = Fs::new(&basedir);
     if !fs.add_game_dir("id1") {
-        let msg = format!("Couldn't find Quake game data in {}.\n\nCopy this port next to your Quake folder (the one containing id1/pak0.pak), or start it with -basedir DIR or the QUAKE_BASEDIR environment variable.", basedir.display());
-        eprintln!("{msg}");
-        // launched by double-click there is no terminal: show the error too
-        if !o.has("-headless") && !o.has("-dedicated") {
-            qplatform::error_box("Quake data not found", &msg);
-        }
-        std::process::exit(1);
+        return Err(format!("Couldn't find Quake game data in {}.\n\nCopy this port next to your Quake folder (the one containing id1/pak0.pak), or start it with -basedir DIR or the QUAKE_BASEDIR environment variable.", basedir.display()));
     }
     for (flag, dir) in [("-hipnotic", "hipnotic"), ("-rogue", "rogue"), ("-quoth", "quoth")] {
         if o.has(flag) {
@@ -119,6 +112,62 @@ pub fn run() {
     }
     // User config/saves live outside the game data and override it.
     fs.add_user_dir(user_dir(fs.game_dir().unwrap_or("id1")));
+    let pal = fs
+        .open("gfx/palette.lmp")
+        .and_then(|d| qformats::image::parse_palette(&d).ok())
+        .ok_or("couldn't load gfx/palette.lmp")?;
+    Ok((fs, basedir, pal))
+}
+
+/// Opens the audio device with a mixer reading sounds through its own `Fs`.
+fn open_sound(p: &qplatform::Platform, basedir: &std::path::Path, fs: &Fs) -> (Option<qplatform::AudioStream>, Option<SoundSystem>) {
+    let mut sfs = Fs::new(basedir);
+    for g in fs.game_dirs() {
+        sfs.add_game_dir(g);
+    }
+    let rate = 48000;
+    let (sys, mut mixer) = SoundSystem::new(rate, move |n| sfs.open(n));
+    match p.open_audio(rate, move |buf| mixer.paint(buf)) {
+        Ok(a) => {
+            let _ = a.resume();
+            (Some(a), Some(sys))
+        }
+        Err(e) => {
+            eprintln!("audio: {e:?}");
+            (None, None)
+        }
+    }
+}
+
+/// Forwards pending rumble to player 1's pad (split-screen) or every pad.
+fn apply_rumble(host: &mut host::Host, p: &qplatform::Platform) {
+    if let Some((lo, hi, ms)) = host.take_rumble() {
+        match host.rumble_pad() {
+            Some(id) => {
+                let _ = p.rumble(id, lo, hi, ms);
+            }
+            None => p.rumble_all(lo, hi, ms),
+        }
+    }
+}
+
+#[cfg(not(target_arch = "wasm32"))]
+pub fn run() {
+    use std::time::{Duration, Instant};
+
+    let o = Opts { args: std::env::args().skip(1).collect() };
+    let fixed_step = o.fixed_step().unwrap_or_else(|e| {
+        eprintln!("{e}");
+        std::process::exit(2)
+    });
+    let (fs, basedir, pal) = open_game(&o).unwrap_or_else(|e| {
+        eprintln!("{e}");
+        // launched by double-click there is no terminal: show the error too
+        if !o.has("-headless") && !o.has("-dedicated") {
+            qplatform::error_box("Quake data not found", &e);
+        }
+        std::process::exit(1)
+    });
     // -dedicated [n]: no window, no local client, real-time pacing.
     let dedicated = o.has("-dedicated");
     let realtime = dedicated || o.has("-realtime");
@@ -126,10 +175,6 @@ pub fn run() {
     let w: u32 = o.val("-width").and_then(|s| s.parse().ok()).unwrap_or(1280);
     let h: u32 = o.val("-height").and_then(|s| s.parse().ok()).unwrap_or(720);
     let autoquit: Option<f64> = o.val("-autoquit").and_then(|s| s.parse().ok());
-    let Some(pal) = fs.open("gfx/palette.lmp").and_then(|d| qformats::image::parse_palette(&d).ok()) else {
-        eprintln!("couldn't load gfx/palette.lmp");
-        std::process::exit(1);
-    };
 
     let mut platform = None;
     let mut window = None;
@@ -155,27 +200,10 @@ pub fn run() {
     });
     eprintln!("renderer: {}", renderer.device_name());
 
-    // audio
-    let mut audio = None;
-    let mut snd = None;
-    if let Some(p) = &platform
-        && !o.has("-nosound")
-    {
-        let mut sfs = Fs::new(&basedir);
-        for g in fs.game_dirs() {
-            sfs.add_game_dir(g);
-        }
-        let rate = 48000;
-        let (sys, mut mixer) = SoundSystem::new(rate, move |n| sfs.open(n));
-        match p.open_audio(rate, move |buf| mixer.paint(buf)) {
-            Ok(a) => {
-                let _ = a.resume();
-                audio = Some(a);
-                snd = Some(sys);
-            }
-            Err(e) => eprintln!("audio: {e:?}"),
-        }
-    }
+    let (audio, snd) = match &platform {
+        Some(p) if !o.has("-nosound") => open_sound(p, &basedir, &fs),
+        _ => (None, None),
+    };
 
     let mut host = host::Host::new(fs, renderer, snd, o.args.clone());
     host.headless = headless;
@@ -224,14 +252,8 @@ pub fn run() {
             None => Vec::new(),
         };
         host.frame(dt, events);
-        if let (Some(p), Some((lo, hi, ms))) = (&platform, host.take_rumble()) {
-            // Split-screen: only player 1's pad feels player 1's hits.
-            match host.rumble_pad() {
-                Some(id) => {
-                    let _ = p.rumble(id, lo, hi, ms);
-                }
-                None => p.rumble_all(lo, hi, ms),
-            }
+        if let Some(p) = &platform {
+            apply_rumble(&mut host, p);
         }
         if autoquit.is_some_and(|t| host.realtime >= t) {
             host.quit = true;

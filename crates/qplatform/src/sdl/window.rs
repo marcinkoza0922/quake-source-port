@@ -1,14 +1,5 @@
 use super::*;
-
-/// Window presentation mode for [`Window::set_display`].
-#[derive(Clone, Copy, Debug, PartialEq, Eq)]
-pub enum DisplayMode {
-    Windowed,
-    /// Exclusive fullscreen (changes the display mode).
-    Fullscreen,
-    /// Fullscreen window at desktop resolution.
-    Borderless,
-}
+use crate::DisplayMode;
 
 impl Window {
     /// Drawable size in pixels.

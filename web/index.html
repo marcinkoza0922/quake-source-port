@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quake Source Port</title>
+<style>
+  :root { --bg: #111; --fg: #ddd; --accent: #c8642a; --panel: #1c1c1c; }
+  html, body { margin: 0; height: 100%; background: var(--bg); color: var(--fg);
+    font: 15px/1.4 system-ui, sans-serif; }
+  #quake { display: block; width: 100vw; height: 100vh; outline: none; }
+  #setup { position: fixed; inset: 0; display: flex; align-items: center;
+    justify-content: center; padding: 16px; box-sizing: border-box; }
+  #setup .card { background: var(--panel); padding: 24px; border-radius: 8px;
+    max-width: 520px; width: 100%; }
+  #drop { border: 2px dashed #555; border-radius: 6px; padding: 24px;
+    text-align: center; margin: 16px 0; }
+  #drop.over { border-color: var(--accent); }
+  button, label.btn { background: var(--accent); color: #fff; border: 0;
+    padding: 8px 14px; border-radius: 4px; cursor: pointer; font: inherit; }
+  #status { min-height: 1.4em; color: #aaa; }
+  .row { display: flex; gap: 8px; flex-wrap: wrap; }
+  [hidden] { display: none !important; }
+</style>
+</head>
+<body>
+<canvas id="quake" tabindex="0" hidden></canvas>
+<div id="setup">
+  <div class="card">
+    <h1>Quake Source Port</h1>
+    <p>Pick your Quake folder (the one containing <code>id1/</code>) or drop it,
+      or <code>.pak</code> files, here. Files stay in this browser
+      (IndexedDB); nothing is uploaded. Needs a browser with WebGPU.</p>
+    <div id="drop">Drop folder or .pak files here</div>
+    <div class="row">
+      <label class="btn">Choose folder…
+        <input id="pick" type="file" webkitdirectory multiple hidden></label>
+      <button id="play" hidden>Play</button>
+      <button id="forget" hidden>Forget stored data</button>
+    </div>
+    <p id="status"></p>
+  </div>
+</div>
+<script type="module" src="main.js"></script>
+</body>
+</html>
