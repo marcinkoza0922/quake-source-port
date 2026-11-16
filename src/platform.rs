@@ -159,7 +159,7 @@ pub fn convert(e: Event) -> Vec<HostEvent> {
             vec![HostEvent::Input(InputEvent::GamepadConnected(true)), HostEvent::PadFamily(family)]
         }
         Event::GamepadRemoved { id } => vec![HostEvent::Input(InputEvent::GamepadConnected(false)), HostEvent::PadRemoved(id)],
-        Event::GamepadGyro { id, data, .. } => vec![HostEvent::Pad(id, InputEvent::Gyro { pitch: data[0], yaw: data[1] })],
+        Event::GamepadGyro { id, data, .. } => vec![HostEvent::Pad(id, InputEvent::Gyro { pitch: data[0], yaw: data[1], roll: data[2] })],
         Event::Finger { id, phase, x, y } => vec![HostEvent::Finger { id, phase, x, y }],
         Event::Resize { .. } => vec![HostEvent::Resize],
         Event::FocusGained | Event::FocusLost => vec![HostEvent::Focus],

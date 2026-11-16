@@ -175,8 +175,8 @@ pub fn handle_event<C: InputHost>(ctx: &mut C, ev: InputEvent) -> Option<Routed>
             }
             out
         }
-        InputEvent::Gyro { pitch, yaw } => {
-            ctx.input().gyro = [pitch, yaw];
+        InputEvent::Gyro { pitch, yaw, roll } => {
+            ctx.input().gyro = [pitch, yaw, roll];
             None
         }
         InputEvent::Touch { id, phase, x, y, aspect } => {
@@ -200,7 +200,7 @@ pub fn handle_event<C: InputHost>(ctx: &mut C, ev: InputEvent) -> Option<Routed>
             inp.gamepad_connected = c;
             if !c {
                 inp.axes = [0.0; 6];
-                inp.gyro = [0.0; 2];
+                inp.gyro = [0.0; 3];
                 inp.last_device = Device::KeyboardMouse;
             }
             None

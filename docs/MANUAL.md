@@ -31,6 +31,17 @@ them directly. The browser tracks your best kills, secrets and time per map.
 Each mod keeps its own config, so bindings and settings tuned for one mod do
 not leak into another.
 
+**Where map packs go.** The port looks for them in the Quake base directory
+(the one holding `id1/`, set with `QUAKE_BASEDIR` or `-basedir`). Every
+subfolder there that contains game data (a `.pak` or `.pk3` file, a
+`progs.dat`, or a `maps/` folder) is listed, so install a map pack by
+unpacking it into its own folder next to `id1/`, for example
+`<basedir>/ad/` or `<basedir>/my_maps/maps/*.bsp`. Optionally add a
+`modinfo.txt` with `title`, `base` and `description` lines to control how it
+is listed. Packs are found when the game starts, so restart after adding
+one. Saves, screenshots and config for each pack live in
+`~/.local/share/quake-source-port/<folder>/`, not in the pack folder.
+
 ## Split-screen
 
 Up to six players on one machine, in co-op or deathmatch.
@@ -52,7 +63,15 @@ The port is designed to be played on a gamepad.
 - **Aim assist** (Options → Input → Controller): slowdown near enemies and
   rotation that follows them. It only ever applies to the stick, never to
   the mouse.
-- **Gyro aiming**, **rumble**, stick sensitivity and inversion.
+- **Gyro aiming** (Options → Input → Controller → Gyro): a toggle, plus
+  separate sensitivity for the yaw, pitch and roll axes (roll is off by
+  default and turns the view like yaw, negative values reverse it), a noise
+  filter, and when gyro applies (always, off or only while `+gyroaction` is
+  held). **Aim Style** switches the right stick between 2D aiming (it turns
+  the view continuously) and **flick stick** (push the stick to snap the
+  view toward that direction, then turn the stick to rotate it); the two
+  combine well with gyro for fine aim.
+- **Rumble**, stick sensitivity and inversion.
 - **Button glyphs** match your pad (Xbox, PlayStation, Nintendo) and are
   detected automatically.
 - Rebind everything in Options → Controls, including from the controller.

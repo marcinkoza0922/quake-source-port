@@ -73,6 +73,13 @@ You need a stable Rust toolchain (edition 2024), a Vulkan driver and SDL3.
 cargo build --release
 ```
 
+## Releases
+
+Release builds are meant for Windows (x64, arm64), Linux (x64, arm64), macOS
+(Apple silicon) and Android (arm64). **Only Linux x64 has been tested so
+far**; the other builds are untested and may not start or may misbehave.
+You still need your own Quake game data (see below).
+
 ## Running
 
 You need your own Quake game data, which this repository does not include.
