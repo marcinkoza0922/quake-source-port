@@ -100,9 +100,12 @@ Options → Gameplay:
 
 ## Customize: gameplay modifiers and add-ons
 
-A game is either *vanilla* or *customized*, chosen when it starts. Tick
-**Customize** on the Single Player menu, then New Game opens a page with
-Gameplay Modifiers, Add-ons and Start New Game. Vanilla games save ordinary
+A game is either *vanilla* or *customized*, chosen when it starts. New
+Game (and picking a level in Level Select or Map Packs) shows a pop-up:
+**Play** starts the game, **Customize Experience** opens Gameplay
+Modifiers and Add-ons. While anything is changed, Play is tagged
+**CUSTOM** and **Disable All Modifications** (Del, gamepad X, or click)
+puts back the standard rules with no add-ons. Vanilla games save ordinary
 `.sav` files that ironwail and vkQuake can load; customized games save
 `.qsa` files that only this port loads (so do split-screen and co-op
 games, which other ports can't save). During a customized game, Main menu

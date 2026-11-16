@@ -288,9 +288,11 @@ mod save_menu_tests {
         let mut m = Menu::new();
         let mut cv = Cvars::new();
         m.open(Screen::SinglePlayer);
-        // no game running: straight in
+        // no game running: straight in after Play on the launch pop-up
+        assert!(commands(&m.key(K_ENTER, &mut cv, false)).is_empty());
         assert!(commands(&m.key(K_ENTER, &mut cv, false)).iter().any(|c| c.contains("map start")));
         m.open(Screen::SinglePlayer);
+        m.key(K_ENTER, &mut cv, true);
         assert!(commands(&m.key(K_ENTER, &mut cv, true)).is_empty());
         assert!(matches!(m.prompt, Some(Prompt::Confirm { .. })));
         assert!(commands(&m.key(0x79, &mut cv, true)).iter().any(|c| c.contains("map start")));
@@ -485,82 +487,6 @@ fn addon_cvars() -> Cvars {
     cv
 }
 
-/// Moves the Single Player cursor to `row` with the arrow keys.
-fn sp_row(menu: &mut Menu, cv: &mut Cvars, row: usize) {
-    menu.open(Screen::SinglePlayer);
-    for _ in 0..row {
-        menu.key(K_DOWNARROW, cv, false);
-    }
-}
-
-#[test]
-fn new_game_starts_directly_unless_customize_is_ticked() {
-    let mut cv = addon_cvars();
-    let mut menu = Menu::new();
-    menu.open(Screen::SinglePlayer);
-    let acts = menu.key(K_ENTER, &mut cv, false);
-    assert!(acts.iter().any(|a| matches!(a, Action::Command(c) if c.contains("map start"))));
-    assert_eq!(menu.screen, Screen::None);
-
-    // left/right on New Game no longer flips anything by accident
-    menu.open(Screen::SinglePlayer);
-    menu.key(K_RIGHTARROW, &mut cv, false);
-    assert_eq!(cv.value_of("custom_enable"), 0.0);
-    // the Customize row (reachable with up/down) ticks the box
-    sp_row(&mut menu, &mut cv, SP_CUSTOMIZE_ROW);
-    menu.key(K_ENTER, &mut cv, false);
-    assert_eq!(cv.value_of("custom_enable"), 1.0);
-    assert_eq!(menu.screen, Screen::SinglePlayer);
-    // New Game then opens the Customize hub
-    menu.key(K_DOWNARROW, &mut cv, false);
-    let acts = menu.key(K_ENTER, &mut cv, false);
-    assert!(!acts.iter().any(|a| matches!(a, Action::Command(_))));
-    assert_eq!(menu.screen, Screen::OptionsPage(Page::NewGameCustomize));
-    // Add-ons: toys can be switched off before starting; Back returns to the hub
-    menu.key(K_DOWNARROW, &mut cv, false);
-    menu.key(K_ENTER, &mut cv, false);
-    assert_eq!(menu.screen, Screen::OptionsPage(Page::NewGameAddons));
-    assert!(option_cvars().any(|n| n == "addon_portalgun"));
-    menu.key(K_ENTER, &mut cv, false);
-    assert_eq!(cv.value_of("addon_portalgun"), 0.0);
-    menu.key(K_ESCAPE, &mut cv, false);
-    assert_eq!(menu.screen, Screen::OptionsPage(Page::NewGameCustomize));
-    // Modifiers, then back to the hub at the same row
-    menu.opt_cursor = 0;
-    menu.key(K_ENTER, &mut cv, false);
-    assert_eq!(menu.screen, Screen::OptionsPage(Page::Modifiers));
-    menu.key(K_RIGHTARROW, &mut cv, false);
-    assert_eq!(cv.value_of("modifier_damagetaken"), 1.25);
-    menu.key(K_ESCAPE, &mut cv, false);
-    assert_eq!(menu.screen, Screen::OptionsPage(Page::NewGameCustomize));
-    assert_eq!(menu.opt_cursor, 0);
-    // Start New Game is the last row
-    menu.opt_cursor = 2;
-    let acts = menu.key(K_ENTER, &mut cv, false);
-    assert!(acts.iter().any(|a| matches!(a, Action::Command(c) if c.contains("map start"))));
-    assert_eq!(menu.screen, Screen::None);
-
-    // Back from the hub returns to the single player menu, box still ticked
-    menu.open(Screen::SinglePlayer);
-    menu.key(K_ENTER, &mut cv, false);
-    menu.key(K_ESCAPE, &mut cv, false);
-    assert_eq!(menu.screen, Screen::SinglePlayer);
-    assert_eq!(cv.value_of("custom_enable"), 1.0);
-}
-
-#[test]
-fn clicking_the_customize_row_toggles_it_without_starting_a_game() {
-    let mut cv = addon_cvars();
-    let mut menu = Menu::new();
-    menu.open(Screen::SinglePlayer);
-    let pos = (CLASSIC.0 + 120.0, CLASSIC.1 + 32.0 + SP_CUSTOMIZE_ROW as f32 * 20.0 + 8.0);
-    menu.mouse_move(pos, &mut cv);
-    let acts = menu.key(K_MOUSE1, &mut cv, false);
-    assert_eq!(cv.value_of("custom_enable"), 1.0);
-    assert_eq!(menu.screen, Screen::SinglePlayer);
-    assert!(!acts.iter().any(|a| matches!(a, Action::Command(_))));
-}
-
 #[test]
 fn a_vanilla_game_cannot_gain_customization_but_a_custom_game_can_adjust() {
     let mut cv = addon_cvars();
@@ -575,8 +501,9 @@ fn a_vanilla_game_cannot_gain_customization_but_a_custom_game_can_adjust() {
     menu.key(K_RIGHTARROW, &mut cv, true);
     assert_eq!(cv.value_of("modifier_damagetaken"), 1.0);
     // ...but the next new game can still be set up from a vanilla game
-    cv.set("custom_enable", "1");
-    sp_row(&mut menu, &mut cv, 0);
+    menu.open(Screen::SinglePlayer);
+    menu.key(K_ENTER, &mut cv, true);
+    menu.key(K_DOWNARROW, &mut cv, true);
     menu.key(K_ENTER, &mut cv, true);
     assert_eq!(menu.screen, Screen::OptionsPage(Page::NewGameCustomize));
     menu.key(K_ENTER, &mut cv, true);

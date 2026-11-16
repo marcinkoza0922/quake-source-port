@@ -1,6 +1,7 @@
 //! Modal prompts over any menu screen: yes/no confirmations (overwrite or
-//! delete a save, end the running game) and the skill picker shown before
-//! starting a map from Level Select or Map Packs.
+//! delete a save, end the running game), the launch pop-up before a new
+//! game (`launch.rs`) and the skill picker shown before starting a map from
+//! Level Select or Map Packs.
 use super::*;
 
 pub(super) const SKILLS: [&str; 4] = ["Easy", "Normal", "Hard", "Nightmare"];
@@ -11,6 +12,11 @@ pub(super) enum Prompt {
     Confirm { lines: Vec<String>, yes_label: &'static str, cmd: String, close: bool, yes: bool },
     /// `cmd` runs after `skill <cursor>`; `warn` says the running game ends.
     Skill { cmd: String, cursor: usize, warn: bool },
+    /// Play / Customize Experience / Disable All before a new game
+    /// (`Menu::launch` holds the game).
+    Launch { cursor: usize },
+    /// First-run graphics preset pick (`preset.rs`).
+    Preset { cursor: usize },
 }
 
 /// Box geometry (menu units): x, y, w, h.
@@ -42,6 +48,7 @@ impl Menu {
                 let row = ((y - SKILL_Y) / SKILL_H) as usize;
                 (inside && row < SKILLS.len()).then_some(row)
             }
+            Prompt::Launch { .. } | Prompt::Preset { .. } => None,
         }
     }
 
@@ -50,6 +57,7 @@ impl Menu {
         let changed = match self.prompt.as_mut()? {
             Prompt::Confirm { yes, .. } => std::mem::replace(yes, i == 0) != (i == 0),
             Prompt::Skill { cursor, .. } => std::mem::replace(cursor, i) != i,
+            Prompt::Launch { .. } | Prompt::Preset { .. } => false,
         };
         changed.then_some("misc/menu1.wav")
     }
@@ -97,6 +105,7 @@ impl Menu {
                 let Some(s) = pick else { return };
                 run = (format!("skill {s}\n{cmd}"), true);
             }
+            Prompt::Launch { .. } | Prompt::Preset { .. } => return,
         }
         self.prompt = None;
         let (cmd, close) = run;
@@ -108,8 +117,16 @@ impl Menu {
         out.push(Action::Command(cmd));
     }
 
-    pub(super) fn draw_prompt(&self, c: &mut Canvas) {
+    pub(super) fn draw_prompt(&self, c: &mut Canvas, cv: &Cvars) {
         let Some(p) = &self.prompt else { return };
+        if let Prompt::Launch { cursor } = *p {
+            self.draw_launch(c, cv, cursor);
+            return;
+        }
+        if let Prompt::Preset { cursor } = *p {
+            self.draw_preset(c, cursor);
+            return;
+        }
         let (x, y, w, h) = BOX;
         c.fill(-c.ox, -c.oy, c.vw(), c.vh(), [0.0, 0.0, 0.0, 0.5]);
         c.round_box(x, y, w, h, 5.0, [0.06, 0.05, 0.04, 0.98], Some(BORDER));
@@ -137,6 +154,7 @@ impl Menu {
                     c.text_center(320.0, ry + 1.0, &format!("{}  {s}", i + 1), TXT, if i == *cursor { GOLD_FG } else { FG });
                 }
             }
+            Prompt::Launch { .. } | Prompt::Preset { .. } => {}
         }
     }
 }

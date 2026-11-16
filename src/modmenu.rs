@@ -148,6 +148,12 @@ impl ModMenu {
         clamp_scroll(self.cursor, &mut self.scroll);
     }
 
+    /// Title of a listed map (its name when the map has no message).
+    pub fn map_title(&self, name: &str) -> Option<String> {
+        let m = self.maps.iter().find(|m| m.name.eq_ignore_ascii_case(name))?;
+        Some(if m.title.trim().is_empty() { m.name.clone() } else { m.title.clone() })
+    }
+
     pub fn set_maps(&mut self, maps: Vec<MapInfo>, stats: Stats) {
         self.maps = maps;
         self.stats = stats;

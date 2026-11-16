@@ -236,6 +236,10 @@ impl Host {
         self.menu.custom_running = self.server.active() && self.server.core.custom;
         self.menu.pad_ui = self.pad_ui();
         self.menu.glyphs = self.glyphs();
+        // headless runs are tools and tests: never block them on the pop-up
+        if !self.headless {
+            self.menu.show_pending_preset();
+        }
         if self.menu.active() {
             self.menu.bindings.clone_from(&self.input.bindings);
         }

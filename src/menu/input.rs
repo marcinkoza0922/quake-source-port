@@ -7,6 +7,8 @@ impl Menu {
         self.sync_autoaim_mapping(cv);
         self.mouse = Some(pos);
         if self.autoaim_prompt || self.capturing() { return None; }
+        if matches!(self.prompt, Some(Prompt::Launch { .. })) { return self.launch_hover(pos, cv); }
+        if matches!(self.prompt, Some(Prompt::Preset { .. })) { return self.preset_hover(pos); }
         if self.prompt.is_some() { return self.prompt_hover(pos); }
         if self.addon_mouse(pos) { return None; }
         if let (Some(i), Screen::OptionsPage(p)) = (self.slider_drag, self.screen) {
@@ -51,6 +53,14 @@ impl Menu {
         if self.addon_key(key, cv, &mut out) { return out; }
         if self.autoaim_prompt {
             self.autoaim_prompt_key(key, cv, &mut out);
+            return out;
+        }
+        if matches!(self.prompt, Some(Prompt::Launch { .. })) {
+            self.launch_key(key, cv, &mut out);
+            return out;
+        }
+        if matches!(self.prompt, Some(Prompt::Preset { .. })) {
+            self.preset_key(key, &mut out);
             return out;
         }
         if self.prompt.is_some() {
@@ -238,14 +248,10 @@ impl Menu {
                     return out;
                 }
                 wrap(&mut self.sp_cursor, customize::SP_ITEMS, &mut out);
-                if self.sp_cursor == customize::SP_CUSTOMIZE_ROW && (enter || left || right) {
-                    Self::toggle_custom_box(cv, &mut out);
-                    return out;
-                }
                 if enter {
                     out.push(Action::Sound("misc/menu2.wav"));
                     match self.sp_cursor {
-                        0 => self.new_game(cv, &mut out),
+                        0 => self.open_launch(launch::NEW_GAME_CMD.into(), false, None),
                         1 => {
                             out.push(Action::Command("_scansaves\n".into()));
                             self.autosaves = false;
@@ -363,8 +369,8 @@ impl Menu {
                     self.screen = if is_net_page(p) {
                         Screen::Multiplayer
                     } else if p == Page::NewGameCustomize {
-                        self.new_game_setup = false;
-                        Screen::SinglePlayer
+                        self.back_to_launch();
+                        return out;
                     } else if p == Page::Customize {
                         self.main_cursor = MAIN_ITEMS;
                         Screen::Main
@@ -479,7 +485,8 @@ impl Menu {
                 if let Some(cmd) = cmd && (page == modmenu::Page::Maps || self.game_running) {
                     out.retain(|a| !matches!(a, Action::Close | Action::Command(_)));
                     if page == modmenu::Page::Maps {
-                        self.ask_skill(cmd, cv);
+                        let title = launch::map_of(&cmd).and_then(|m| self.mods.map_title(m));
+                        self.open_launch(cmd, true, title);
                     } else {
                         self.confirm(vec!["End the current game?".into(), "Unsaved progress will be lost.".into()], "End game", cmd, true);
                     }
