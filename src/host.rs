@@ -428,7 +428,7 @@ impl Host {
     /// `r_enhancedparticles` adds the built-in set either way.
     fn sync_fte(&mut self) {
         let desc = if self.cv("r_fteparticles") != 0.0 { self.cvs("r_particledesc").to_string() } else { String::new() };
-        let enhanced = self.cv("r_enhancedparticles") != 0.0;
+        let enhanced = self.cv("r_enhancedfx") != 0.0 && self.cv("r_enhancedparticles") != 0.0;
         let map = self.level.mapname.clone();
         let opts = qpart::RenderOptions {
             sparks: self.cv("r_part_sparks"),

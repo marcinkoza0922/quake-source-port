@@ -197,6 +197,8 @@ fn impact_quality_tiers_and_frustum_culling() {
     cv.register("r_impact_lifetime", "600", 0);
     cv.register("r_impact_limit", "2048", 0);
     cv.register("r_impact_fx", "4", 0);
+    cv.register("r_enhancedfx", "1", 0);
+    cv.register("r_enhancedparticles", "1", 0);
     let low = tier(&cv);
     cv.set("r_particle_quality", "1");
     let med = tier(&cv);

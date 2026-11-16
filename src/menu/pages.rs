@@ -347,15 +347,12 @@ pub(super) const ENHANCEMENTS: &[Item] = &[
     slider("Motion Blur Amount", "r_motionblur_amount", 0.1, 2.0, 0.1),
     toggle("Speed Blur", "r_speedblur"),
     Item::Sub { label: "Screen Shader", page: Page::ScreenShader },
-    toggle("Enhanced Particles", "r_enhancedparticles"),
-    Item::Choice { label: "Particle Quality", cvar: "r_particle_quality", choices: DEBRIS_QUALITY },
+    toggle("Enhanced FX", "r_enhancedfx"),
+    Item::Sub { label: "FX Settings", page: Page::Impacts },
     toggle("Enhanced Water", "r_enhancedwater"),
     Item::Sub { label: "Water Settings", page: Page::Water },
     toggle("See-through Teleporters", "r_teleportwindows"),
     Item::Choice { label: "Portal View Quality", cvar: "r_portal_quality", choices: PORTAL_QUALITY },
-    Item::Sub { label: "Impact Effects", page: Page::Impacts },
-    toggle("Enhanced Blood Splatter", "r_blood"),
-    Item::Sub { label: "Blood Splatter Settings", page: Page::Blood },
     toggle("Debris", "r_debris"),
     Item::Sub { label: "Debris Settings", page: Page::Debris },
 ];
@@ -364,12 +361,16 @@ pub(super) const IMPACT_FX: &[(&str, f32)] =
     &[("off", 0.0), ("subtle", 1.0), ("normal", 2.0), ("intense", 3.0), ("spectacle", 4.0)];
 
 pub(super) const IMPACTS: &[Item] = &[
+    toggle("Enhanced Particles", "r_enhancedparticles"),
+    Item::Choice { label: "Particle Quality", cvar: "r_particle_quality", choices: DEBRIS_QUALITY },
     Item::Choice { label: "Surface Hit Effects", cvar: "r_impact_fx", choices: IMPACT_FX },
     toggle("Shotgun Bullet Decals", "r_impact_bullets"),
     toggle("Physical Nail Impacts", "r_impact_nails"),
     toggle("Explosion Scorch Marks", "r_impact_scorches"),
     slider("Impact Lifetime", "r_impact_lifetime", 5.0, 600.0, 5.0),
     slider("Maximum Impacts", "r_impact_limit", 32.0, 2048.0, 32.0),
+    toggle("Enhanced Blood Splatter", "r_blood"),
+    Item::Sub { label: "Blood Splatter Settings", page: Page::Blood },
 ];
 
 /// Reached from Enhancements; unavailable while `r_enhancedwater` is off.

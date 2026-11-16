@@ -39,11 +39,16 @@ pub(crate) struct Tier {
     pub max_parts: usize,
 }
 
+/// Impact effects need the Enhanced FX master and Enhanced Particles.
+pub(crate) fn impacts_on(cv: &qcore::cvar::Cvars) -> bool {
+    cv.value_of("r_enhancedfx") != 0.0 && cv.value_of("r_enhancedparticles") != 0.0
+}
+
 pub(crate) fn tier(cv: &qcore::cvar::Cvars) -> Tier {
     let quality = Quality::from_cvar(cv.value_of("r_particle_quality"));
     let lifetime = cv.value_of("r_impact_lifetime").clamp(5.0, 600.0) as f64;
     let limit = cv.value_of("r_impact_limit").clamp(32.0, 2048.0) as usize;
-    let level = cv.value_of("r_impact_fx").clamp(0.0, 4.0) as u8;
+    let level = if impacts_on(cv) { cv.value_of("r_impact_fx").clamp(0.0, 4.0) as u8 } else { 0 };
     match quality {
         Quality::Low => Tier {
             lifetime,
@@ -139,7 +144,7 @@ impl Impacts {
         out: &mut Geometry,
     ) {
         let enabled = ["r_impact_bullets", "r_impact_nails", "r_impact_scorches"]
-            .map(|n| cv.value_of(n) != 0.0);
+            .map(|n| cv.value_of(n) != 0.0 && impacts_on(cv));
         if !enabled.iter().any(|v| *v) {
             self.clear();
             return;

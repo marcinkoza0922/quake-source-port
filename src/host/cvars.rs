@@ -224,6 +224,7 @@ pub(super) const COMPAT_CVARS: &[(&str, &str, u32)] = &[
     // 0 low / 1 medium / 2 high: soft particles, impact budgets and
     // scripted particle density together.
     ("r_particle_quality", "1", CVAR_ARCHIVE),
+    ("r_enhancedfx", "0", CVAR_ARCHIVE),
     ("r_enhancedparticles", "0", CVAR_ARCHIVE),
     ("r_ssao", "0", CVAR_ARCHIVE),
     ("r_ssao_strength", "2", CVAR_ARCHIVE),

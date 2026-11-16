@@ -83,6 +83,7 @@ pub(super) fn tooltip(item: Item) -> Option<&'static str> {
         "r_portal_quality" => "Resolution and detail inside portal and teleporter views; lower tiers trim nested effects",
         "r_waterwarp" => "How the view distorts underwater: Classic ripples the whole screen like software Quake, GLQuake slowly stretches and squashes the view",
         "r_particles" => "Look of the classic particles: GLQuake draws soft round dots, Classic draws square pixels like software Quake",
+        "r_enhancedfx" => "Unlocks the FX Settings page: enhanced particles, impact effects and blood splatter",
         "r_enhancedparticles" => "Replaces the classic dot particles with glowing sparks, smoke and blood; mods with their own particle effects keep them",
         "r_particle_quality" => "Low: hard particle edges, half the scripted particles and fewer hit sparks. Medium: soft edges. High: soft edges checked per MSAA sample, most hit sparks",
         "r_debris" => "Gibs tumble and barrels throw shrapnel; shots and blasts push them (cosmetic only)",
@@ -252,7 +253,7 @@ pub(super) fn page_name(p: Page) -> &'static str {
         Page::HudLayout => "Modern HUD Layout",
         Page::Messages => "Messages & Captions",
         Page::Water => "Water Settings",
-        Page::Impacts => "Impact Effects",
+        Page::Impacts => "FX Settings",
         Page::Debris => "Debris Settings",
         Page::Blood => "Blood Splatter Settings",
         Page::ScreenShader => "Screen Shader",
@@ -276,7 +277,7 @@ pub(super) fn page_name(p: Page) -> &'static str {
 
 /// The page an `Item::Sub` page returns to, with that row's index.
 pub(super) fn parent_page(p: Page) -> Option<(Page, usize)> {
-    [Page::Assists, Page::Gameplay, Page::Input, Page::Controller, Page::Hud, Page::Accessibility, Page::Enhancements, Page::Addons, Page::NewGameAddons, Page::Audio].into_iter().find_map(|parent| {
+    [Page::Assists, Page::Gameplay, Page::Input, Page::Controller, Page::Hud, Page::Accessibility, Page::Enhancements, Page::Impacts, Page::Addons, Page::NewGameAddons, Page::Audio].into_iter().find_map(|parent| {
         page_items(parent).iter().position(|i| matches!(i, Item::Sub { page, .. } if *page == p)).map(|i| (parent, i))
     })
 }
@@ -301,6 +302,7 @@ pub(super) fn sub_disabled(page: Page, cv: &Cvars) -> bool {
         || (page == Page::Autosave && cv.value_of("sv_autosave") == 0.0)
         || (page == Page::HudLayout && cv.value_of("scr_hudstyle") == 0.0)
         || (page == Page::Water && cv.value_of("r_enhancedwater") == 0.0)
+        || (page == Page::Impacts && cv.value_of("r_enhancedfx") == 0.0)
         || (page == Page::Blood && cv.value_of("r_blood") == 0.0)
         || (page == Page::Debris && cv.value_of("r_debris") == 0.0)
         || (page == Page::Goggles && cv.value_of("addon_goggles") == 0.0)
@@ -314,7 +316,17 @@ pub(super) fn is_net_page(p: Page) -> bool {
 impl Menu {
     /// Shared by keyboard adjustment, pointer dragging and drawing.
     pub(super) fn item_disabled(&self, item: Item, cv: &Cvars) -> bool {
-        (matches!(item, Item::Slider { cvar: "r_wateralpha", .. })
+        (matches!(item, Item::Slider { cvar: "r_motionblur_amount", .. } | Item::Choice { cvar: "r_motionblur_quality", .. })
+            && cv.value_of("r_motionblur") == 0.0)
+            || (matches!(item, Item::Slider { cvar: "r_waterripples_amount", .. }) && cv.value_of("r_waterripples") == 0.0)
+            || (matches!(item, Item::Slider { cvar: "r_watercaustics_amount", .. }) && cv.value_of("r_watercaustics") == 0.0)
+            || (matches!(
+                item,
+                Item::Choice { cvar: "r_particle_quality" | "r_impact_fx", .. }
+                    | Item::Toggle { cvar: "r_impact_bullets" | "r_impact_nails" | "r_impact_scorches", .. }
+                    | Item::Slider { cvar: "r_impact_lifetime" | "r_impact_limit", .. }
+            ) && cv.value_of("r_enhancedparticles") == 0.0)
+            || (matches!(item, Item::Slider { cvar: "r_wateralpha", .. })
             && (cv.value_of("r_enhancedwater") == 0.0 || cv.value_of("r_watertranslucency") == 0.0))
             || (matches!(item, Item::Choice { cvar: "r_waterwarp", .. }) && cv.value_of("r_enhancedwater") != 0.0)
             || (matches!(item, Item::Choice { cvar: "r_particles", .. }) && cv.value_of("r_enhancedparticles") != 0.0)
