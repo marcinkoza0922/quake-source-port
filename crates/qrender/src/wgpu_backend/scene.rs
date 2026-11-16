@@ -55,6 +55,13 @@ pub(super) struct ViewDraw {
     pub(super) blend: [f32; 4],
     /// Underwater screen warp clock in seconds; negative = off.
     pub(super) warp: f32,
+    /// Tangents of the half field of view (x, y), for SSAO.
+    pub(super) tan: [f32; 2],
+    /// Fog density (/64) for SSAO.
+    pub(super) fog: f32,
+    /// `cmds[..split]` are drawn before SSAO: opaque world, sky and opaque
+    /// models except liquids and the viewmodel (as in the Vulkan backend).
+    pub(super) split: usize,
     pub(super) cmds: Vec<Cmd>,
 }
 
@@ -222,15 +229,21 @@ impl Renderer {
         self.entity_cmds(fr, &vs, vbit, alphas, lists, &mut b);
         self.particle_cmds(fr, &vs, lists, &mut b);
         b.trans.sort_by(|a, c| c.0.total_cmp(&a.0));
-        let mut cmds = b.opaque;
+        let (mut cmds, late): (Vec<Cmd>, Vec<Cmd>) =
+            b.opaque.into_iter().partition(|c| !c.viewmodel && c.pipe != Pipe::Water);
         cmds.extend(b.sky);
+        let split = cmds.len();
+        cmds.extend(late);
         cmds.extend(b.alpha_liquids);
         cmds.extend(b.trans.into_iter().map(|(_, c)| c));
         let warp = match view.waterwarp {
             crate::WaterWarp::Screen(t) => t.max(0.0) % 1000.0,
             _ => -1.0,
         };
-        lists.views.push(ViewDraw { fu, rect, ofs, scene: [sw, sh], out: [ow, oh], blend, warp, cmds });
+        let tan = crate::projection::half_fov_tangents(view, (sw, sh));
+        let fog = fog.density.max(0.0) / 64.0;
+        let out = [ow, oh];
+        lists.views.push(ViewDraw { fu, rect, ofs, scene: [sw, sh], out, blend, warp, tan, fog, split, cmds });
     }
 
     /// Classic particles (camera-facing dots) and FTE particle geometry.

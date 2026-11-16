@@ -633,7 +633,15 @@ renders to an RGBA8 target at output size × render scale (`r_renderscale`,
 target resolved into it at the end of the scene pass; WebGPU guarantees only
 1× and 4× for these formats, so any `r_msaa` above 1 means 4× and
 `max_msaa` reports 4 (the scene pipelines are rebuilt per sample count,
-`pipes::ScenePipes`). A post pass applies the
+`pipes::ScenePipes`). SSAO (`wgpu_backend/ssao.rs`, `shaders/ao.wgsl`, a
+port of ao.frag/aoapply.frag) splits the scene pass after the opaque world,
+sky and opaque models (`ViewDraw::split`; liquids and the viewmodel come
+after): AO is generated per view from scene depth into an Rg16Float target
+at half (quality 0/1) or full (2) resolution, masked by scene alpha (the sky
+writes 0) and fog, then multiplied into the scene colour with the
+depth-aware blur before the translucent draws resume. With MSAA both passes
+`textureLoad` sample 0 of the multisampled targets, so Vulkan's aosource
+copy isn't needed. A post pass applies the
 `r_waterwarp 1` underwater screen warp (vkQuake's `water_warp`),
 polyblend/contrast/gamma at output size, then the 2D layer. The
 `r_waterwarp 2` FOV pulse works (it is in the shared projection); FTE
@@ -648,7 +656,7 @@ each frame; the Vulkan backend's `take_capture` is never pending.
 See-through portals and teleporter windows are deliberately left out of this
 backend: every portal view would rebuild the CPU draw lists again, which is
 too slow in a browser (portals and teleporters still work, the surface is
-just opaque). Not implemented there: SSAO, motion/speed blur, water
+just opaque). Not implemented there: motion/speed blur, water
 ripples/caustics, softemu/dither, goggles, colorblind, slang presets,
 GPU timings and r_visibility. Natively `Renderer::new` (windowed) returns an
 error with `--features wgpu`; use `-headless`.

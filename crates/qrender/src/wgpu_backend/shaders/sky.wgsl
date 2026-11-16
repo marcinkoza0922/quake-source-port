@@ -67,5 +67,6 @@ fn skybox(d: vec3<f32>) -> vec3<f32> {
         rgb = mix(solid.rgb, alpha.rgb, alpha.a);
     }
     if (fr.fog.w > 0.0) { rgb = mix(rgb, fr.fog.rgb, fr.sky.x); }
-    return vec4<f32>(rgb, 1.0);
+    // alpha 0: no SSAO on the sky
+    return vec4<f32>(rgb, 0.0);
 }

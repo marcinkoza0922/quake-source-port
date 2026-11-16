@@ -6,6 +6,9 @@ use crate::FteBlend;
 const SCENE_SRC: &str = concat!(include_str!("shaders/common.wgsl"), include_str!("shaders/material.wgsl"));
 const SKY_SRC: &str = concat!(include_str!("shaders/common.wgsl"), include_str!("shaders/sky.wgsl"));
 const SCREEN_SRC: &str = include_str!("shaders/screen.wgsl");
+const AO_SRC: &str = include_str!("shaders/ao.wgsl");
+/// SSAO target: visibility and linear depth.
+pub(super) const AO_FORMAT: wgpu::TextureFormat = wgpu::TextureFormat::Rg16Float;
 
 /// Bytes per per-draw / per-view uniform record (dynamic offset alignment).
 pub(super) const UNIFORM_STRIDE: u64 = 256;
@@ -88,6 +91,12 @@ pub(super) struct ScenePipes {
     pub(super) alias_alpha: wgpu::RenderPipeline,
     /// FTE blend modes × (triangles, lines).
     pub(super) poly: Vec<wgpu::RenderPipeline>,
+    /// SSAO: scene depth + colour (alpha mask) -> AO target.
+    pub(super) ao_gen_bgl: wgpu::BindGroupLayout,
+    pub(super) ao_gen: wgpu::RenderPipeline,
+    /// SSAO: scene depth + AO target, multiplied into the scene colour.
+    pub(super) ao_apply_bgl: wgpu::BindGroupLayout,
+    pub(super) ao_apply: wgpu::RenderPipeline,
 }
 
 pub(super) fn poly_index(b: FteBlend, lines: bool) -> usize {
@@ -103,6 +112,16 @@ fn tex_entry(binding: u32, dim: wgpu::TextureViewDimension) -> wgpu::BindGroupLa
             view_dimension: dim,
             multisampled: false,
         },
+        count: None,
+    }
+}
+
+/// Unfilterable texture read with `textureLoad` (optionally multisampled).
+fn load_entry(binding: u32, sample_type: wgpu::TextureSampleType, multisampled: bool) -> wgpu::BindGroupLayoutEntry {
+    wgpu::BindGroupLayoutEntry {
+        binding,
+        visibility: wgpu::ShaderStages::FRAGMENT,
+        ty: wgpu::BindingType::Texture { sample_type, view_dimension: wgpu::TextureViewDimension::D2, multisampled },
         count: None,
     }
 }
@@ -257,7 +276,7 @@ impl Pipes {
         let alpha = Some(wgpu::BlendState::ALPHA_BLENDING);
         let tri = wgpu::PrimitiveTopology::TriangleList;
         let ui_vb = [vb::<UiV>(&UI_ATTRS)];
-        let scene = ScenePipes::new(dev, &scene_layout, &sky_layout, &scene_module, &sky_module, 1);
+        let scene = ScenePipes::new(dev, &draw_bgl, &scene_layout, &sky_layout, &scene_module, &sky_module, 1);
         let ui = pipeline(dev, Desc {
             layout: &screen_layout,
             module: &screen,
@@ -300,7 +319,15 @@ impl Pipes {
     /// Rebuilds the scene pipelines for `samples` (MSAA) if it changed.
     pub(super) fn set_samples(&mut self, dev: &wgpu::Device, samples: u32) {
         if samples != self.scene.samples {
-            self.scene = ScenePipes::new(dev, &self.scene_layout, &self.sky_layout, &self.scene_module, &self.sky_module, samples);
+            self.scene = ScenePipes::new(
+                dev,
+                &self.draw_bgl,
+                &self.scene_layout,
+                &self.sky_layout,
+                &self.scene_module,
+                &self.sky_module,
+                samples,
+            );
         }
     }
 }
@@ -308,6 +335,7 @@ impl Pipes {
 impl ScenePipes {
     fn new(
         dev: &wgpu::Device,
+        draw_bgl: &wgpu::BindGroupLayout,
         scene_layout: &wgpu::PipelineLayout,
         sky_layout: &wgpu::PipelineLayout,
         scene: &wgpu::ShaderModule,
@@ -369,6 +397,69 @@ impl ScenePipes {
                 }));
             }
         }
-        ScenePipes { samples, world, world_alpha, water, water_alpha, sky, alias, alias_alpha, poly }
+        let ms = samples > 1;
+        let unfilt = wgpu::TextureSampleType::Float { filterable: false };
+        let bgl = |entries: &[wgpu::BindGroupLayoutEntry]| {
+            dev.create_bind_group_layout(&wgpu::BindGroupLayoutDescriptor { label: None, entries })
+        };
+        let ao_gen_bgl = bgl(&[load_entry(0, wgpu::TextureSampleType::Depth, ms), load_entry(1, unfilt, ms)]);
+        let ao_apply_bgl = bgl(&[load_entry(0, wgpu::TextureSampleType::Depth, ms), load_entry(1, unfilt, false)]);
+        let (depth_t, color_t) = if ms {
+            ("texture_depth_multisampled_2d", "texture_multisampled_2d<f32>")
+        } else {
+            ("texture_depth_2d", "texture_2d<f32>")
+        };
+        // binding 1 is the scene colour for fs_ao but the AO target for fs_apply
+        let ao_module = |color_t: &str| {
+            dev.create_shader_module(wgpu::ShaderModuleDescriptor {
+                label: Some("ao"),
+                source: wgpu::ShaderSource::Wgsl(AO_SRC.replace("DEPTH_T", depth_t).replace("COLOR_T", color_t).into()),
+            })
+        };
+        let (gen_module, apply_module) = (ao_module(color_t), ao_module("texture_2d<f32>"));
+        let ao_layout = |g: &wgpu::BindGroupLayout| {
+            dev.create_pipeline_layout(&wgpu::PipelineLayoutDescriptor {
+                label: None,
+                bind_group_layouts: &[Some(draw_bgl), Some(g)],
+                immediate_size: 0,
+            })
+        };
+        let ao_pipe = |layout: &wgpu::PipelineLayout, module, fs, blend, format, samples| {
+            pipeline(dev, Desc {
+                layout,
+                module,
+                vs: "vs_full",
+                fs,
+                buffers: &[],
+                topology: tri,
+                blend,
+                depth: None,
+                format,
+                samples,
+            })
+        };
+        let ao_gen = ao_pipe(&ao_layout(&ao_gen_bgl), &gen_module, "fs_ao", None, AO_FORMAT, 1);
+        // scene colour *= AO; alpha kept
+        use wgpu::{BlendComponent as C, BlendFactor as F};
+        let mul = wgpu::BlendState {
+            color: C { src_factor: F::Dst, dst_factor: F::Zero, operation: wgpu::BlendOperation::Add },
+            alpha: C { src_factor: F::Zero, dst_factor: F::One, operation: wgpu::BlendOperation::Add },
+        };
+        let ao_apply = ao_pipe(&ao_layout(&ao_apply_bgl), &apply_module, "fs_apply", Some(mul), SCENE_FORMAT, samples);
+        ScenePipes {
+            samples,
+            world,
+            world_alpha,
+            water,
+            water_alpha,
+            sky,
+            alias,
+            alias_alpha,
+            poly,
+            ao_gen_bgl,
+            ao_gen,
+            ao_apply_bgl,
+            ao_apply,
+        }
     }
 }

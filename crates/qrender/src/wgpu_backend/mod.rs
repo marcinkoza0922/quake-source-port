@@ -2,7 +2,7 @@
 //! feature). Same public API as the Vulkan backend; the scene is drawn with
 //! CPU-built draw lists (world from the PVS, alias poses lerped on the CPU,
 //! lightmaps built on the CPU) and WGSL shaders in `shaders/`. Advanced
-//! effects of the Vulkan backend (SSAO, motion blur, portals, slang presets,
+//! effects of the Vulkan backend (motion blur, portals, slang presets,
 //! softemu, goggles, water ripples) are not drawn.
 
 mod capture;
@@ -14,6 +14,7 @@ mod math;
 mod models;
 mod pipes;
 mod scene;
+mod ssao;
 mod textures;
 
 use crate::convert::Palette;
@@ -37,6 +38,8 @@ struct Targets {
     /// Multisampled colour drawn into and resolved to `color` (MSAA on).
     ms_view: Option<wgpu::TextureView>,
     depth_view: wgpu::TextureView,
+    /// SSAO target and bind groups (r_ssao on).
+    ao: Option<ssao::AoTargets>,
     /// Headless: (output texture, readback buffer, padded bytes per row).
     out: Option<(wgpu::Texture, wgpu::Buffer, u32)>,
 }
@@ -83,6 +86,8 @@ pub struct Renderer {
     render_scale: f32,
     /// Scene MSAA sample count (1 or [`MSAA_SAMPLES`]).
     msaa: u32,
+    /// SSAO quality while r_ssao is on.
+    ssao: Option<u32>,
     /// Copy the next presented frame for [`Renderer::take_capture`].
     capture_req: bool,
     /// A presented frame being copied and mapped for reading.
@@ -223,6 +228,7 @@ impl Renderer {
             frame_ready: false,
             render_scale: 1.0,
             msaa: 1,
+            ssao: None,
             capture_req: false,
             capture: None,
         };
