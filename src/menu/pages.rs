@@ -224,6 +224,14 @@ pub(super) const ASSISTS: &[Item] = &[
     Item::Choice { label: "Ammo Pickups", cvar: "assist_ammo", choices: AMMO_MULT },
     toggle("Infinite Ammo", "assist_infiniteammo"),
     Item::Choice { label: "Jumps", cvar: "assist_jumps", choices: JUMPS },
+    toggle("Grenade Arc", "assist_grenadearc"),
+    Item::Sub { label: "Grenade Arc Settings", page: Page::GrenadeArc },
+];
+
+pub(super) const GRENADE_ARC: &[Item] = &[
+    Item::Choice { label: "Style", cvar: "assist_grenadearc_style", choices: &[("solid", 0.0), ("dashed", 1.0)] },
+    Item::Choice { label: "Color", cvar: "assist_grenadearc_color", choices: XHAIR_COLOR },
+    slider("Opacity", "assist_grenadearc_alpha", 0.1, 1.0, 0.1),
 ];
 
 pub(super) const AUTOAIM: &[Item] = &[

@@ -102,6 +102,10 @@ pub(super) fn tooltip(item: Item) -> Option<&'static str> {
         "r_watersplash" => "Droplets spray up when things enter or leave water, slime or lava",
         "r_watercaustics" => "Rippling light patterns on surfaces under water and slime",
         "r_water_quality" => "Detail for caustics, ripples and splashes: low uses smaller budgets and shorter view distance; high uses larger budgets and farther view distance",
+        "assist_grenadearc" => "Show where grenades and other arcing shots will fly, bounce and land; local play only, not in deathmatch",
+        "assist_grenadearc_style" => "Draw the predicted grenade path as a solid or dashed line",
+        "assist_grenadearc_color" => "Color of the grenade arc",
+        "assist_grenadearc_alpha" => "Opacity of the grenade arc",
         "assist_autoaim" => "Snap and track enemies in local play, including split-screen; unavailable online",
         "assist_autoaim_mode" => "Hold: keep Lock-on held. Toggle: press Auto-aim Toggle to enable automatic acquisition. Click look stick to switch targets",
         "assist_autoaim_indicator" => "Show corner ticks at screen centre while locked, even with Crosshair off",
@@ -211,6 +215,7 @@ pub(super) fn page_items(p: Page) -> &'static [Item] {
         Page::Autosave => AUTOSAVE,
         Page::Assists => ASSISTS,
         Page::AutoAim => AUTOAIM,
+        Page::GrenadeArc => GRENADE_ARC,
         Page::Join => JOIN,
         Page::Host => HOST,
         Page::Setup => SETUP,
@@ -231,6 +236,7 @@ pub(super) fn page_name(p: Page) -> &'static str {
         Page::Autosave => "Autosave",
         Page::Assists => "Assists",
         Page::AutoAim => "Auto-aim Settings",
+        Page::GrenadeArc => "Grenade Arc Settings",
         Page::HudLayout => "Modern HUD Layout",
         Page::Messages => "Messages & Captions",
         Page::Water => "Water Settings",
@@ -266,6 +272,7 @@ pub(super) fn parent_page(p: Page) -> Option<(Page, usize)> {
 /// Sub-pages that are switched off by their parent setting.
 pub(super) fn sub_disabled(page: Page, cv: &Cvars) -> bool {
     (page == Page::AutoAim && cv.value_of("assist_autoaim") == 0.0)
+        || (page == Page::GrenadeArc && cv.value_of("assist_grenadearc") == 0.0)
         || (page == Page::Autosave && cv.value_of("sv_autosave") == 0.0)
         || (page == Page::HudLayout && cv.value_of("scr_hudstyle") == 0.0)
         || (page == Page::Water && cv.value_of("r_enhancedwater") == 0.0)

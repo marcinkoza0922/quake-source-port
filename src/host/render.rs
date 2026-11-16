@@ -144,6 +144,7 @@ impl Host {
             );
             self.portal_fx.frame(self.cl.time, v, &mut self.r, self.snd.as_ref(), &mut fte);
             self.rail_fx.frame(self.cl.time, v, &mut self.r, &mut fte);
+            self.grenade_arc_frame(v, &mut fte);
             self.hook_fx.frame(&self.cl, self.cl.viewentity.saturating_sub(1), v, &mut self.r, &mut fte);
             self.boomerang_fx.frame(self.cl.time, &self.cl, v, &mut self.r, &mut fte);
             let grav = self.cv("sv_gravity");

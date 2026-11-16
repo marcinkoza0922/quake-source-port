@@ -180,6 +180,36 @@ Damage/movement assists are engine-side so they work with any progs; off in deat
   additionally requires on-screen visibility through the map and inline brush doors/lifts (`host::aim_vis`). FOV follows the renderer's 4:3 adaptation and local
   viewport. Acquired locks persist through occlusion and leaving the viewport. Tests cover acquisition, tracking, cycling, toggling, occlusion,
   gating and conditional menu bindings.
+- Grenade arc (`host::grenade_arc`, `host::arc_learn`, `assist_grenadearc`,
+  default off): for the held weapon's throw profile (launch offset and
+  velocity in the view basis, world-z lift, gravity scale, overbounce,
+  stick-on-contact, fuse) the host simulates MOVETYPE_BOUNCE/TOSS flight
+  from the player origin and draws the path as camera-facing FTE quads (walls
+  occlude it) with a target ring at the end, lying on the last surface touched
+  and growing with distance. The ring is stretched into an ellipse (along and
+  across the throw) covering the first impacts of the extreme random throws:
+  `spread_offsets` re-simulates every sign corner of `Profile::spread` (id1
+  `crandom()*10` right/up; gel ±3.5% aim, ±8% speed; learned profiles keep a
+  decaying max deviation, capped at 10% of speed). Bounces after the first
+  impact are not covered. Profiles are keyed by view model: `known()`
+  hardcodes id1/hipnotic/rogue `v_rock.mdl` (forward*600 + up*200, 2.5 s) and
+  qbj3's grenade launcher, rebar cannon (sticks) and flak shotgun (spread
+  centre). Held add-ons use `arc_learn::toy()`: the Stickybomb launcher
+  (current charge speed from `Stickies::arc_speed`, up*200, sticks to
+  anything) and the Gel sprayer (950 u/s from the eye, half the player's
+  velocity, splats on first hit), both traced as MOVE_MISSILE; the other
+  add-ons fly straight. Other mods are learned: `Server::thrown_by` lists the player's
+  TOSS/BOUNCE projectiles each server tick; the first fast one (> 250 u/s) a
+  weapon spawns gives its launch (one physics step undone, spread averaged),
+  and following it gives stick-on-contact and fuse. Learned profiles live for
+  the session per game dir. Each simulation step is a full SV_Move
+  (`Server::grenade_trace`, passing the player), so doors, lifts and other
+  brush entities bounce it and a DAMAGE_AIM entity (monster, player) ends the
+  arc where it would explode. The "Grenade Arc Settings" sub-page (gated by
+  the toggle; `menu_options grenadearc`) has `assist_grenadearc_style`
+  (0 solid, 1 dashed, default 1), `assist_grenadearc_color` (crosshair palette
+  index, default 1 yellow) and `assist_grenadearc_alpha` (0.1–1, default 0.6).
+  Local games only, not in deathmatch; QC's aim randomness is not modelled.
 - qvm resolves QC `T_Damage` at load; each QC→QC call to it first runs
   `Host::before_damage`, which may change the damage parm or skip the call.
   `assist_damagetaken` scales damage to clients, `assist_enemyhealth`

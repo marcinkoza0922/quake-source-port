@@ -25,7 +25,7 @@ const MAX_BLOBS: usize = 256;
 /// Seconds between blobs while a trigger is held.
 const RATE: f64 = 0.045;
 /// Muzzle speed of a blob (units/s).
-const SPEED: f32 = 950.0;
+pub const SPEED: f32 = 950.0;
 /// Splat radius range.
 const RADIUS: (f32, f32) = (26.0, 40.0);
 
