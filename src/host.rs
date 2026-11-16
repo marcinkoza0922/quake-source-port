@@ -149,6 +149,10 @@ pub struct Host {
     menu_touch: Option<touch::MenuTouch>,
     last_cmd: UserCmd,
     screenshot: Option<String>,
+    /// Save thumbnail to write from the next frame, and uploaded thumbnails
+    /// by save name (picture, file time).
+    thumb: Option<PathBuf>,
+    save_thumbs: std::collections::HashMap<String, (qrender::PicId, std::time::SystemTime)>,
     /// The pending screenshot is drawn without the console (bug reports).
     clean_shot: bool,
     /// Frame profiler while `prof_start` is recording (tools/qprof).
@@ -283,6 +287,8 @@ impl Host {
             menu_touch: None,
             last_cmd: UserCmd::default(),
             screenshot: None,
+            thumb: None,
+            save_thumbs: Default::default(),
             clean_shot: false,
             prof: None,
             delayed: Vec::new(),

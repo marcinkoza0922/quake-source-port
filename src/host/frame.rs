@@ -360,14 +360,14 @@ impl Host {
         };
         self.update_sound(view.as_ref(), ft);
         self.prof_mark(4);
-        if self.screenshot.is_some() {
+        if self.screenshot.is_some() || self.thumb.is_some() {
             self.r.request_capture();
         }
         if !self.dedicated {
             self.render(view, gun, ft);
         }
-        if let Some(name) = self.screenshot.take() {
-            self.write_screenshot(&name);
+        if self.screenshot.is_some() || self.thumb.is_some() {
+            self.write_captures();
             self.clean_shot = false;
         }
         if let Some(p) = &mut self.prof {

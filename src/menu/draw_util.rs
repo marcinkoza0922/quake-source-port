@@ -14,7 +14,7 @@ pub(super) fn draw_inventory_icon(c: &mut Canvas, pic: &mut PicFn, x: f32, y: f3
         let px = (c.ox + x) * c.scale;
         let py = (c.oy + y) * c.scale;
         let uv = frame.map_or([0.0,0.0,1.0,1.0], |n| [n as f32 / 16.0,0.0,(n+1) as f32 / 16.0,1.0]);
-        c.list.push(qrender::Draw2D::Pic { x: px, y: py, w: width as f32 * scale * c.scale,
+        c.push(qrender::Draw2D::Pic { x: px, y: py, w: width as f32 * scale * c.scale,
             h: h as f32 * scale * c.scale, pic: id, uv, color: [1.0; 4] });
     }
 }

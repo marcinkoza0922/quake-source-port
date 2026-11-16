@@ -181,116 +181,11 @@ impl Menu {
             self.draw_hints(c);
         }
         self.draw_back(c);
+        self.draw_prompt(c);
         c.reset_origin();
         if self.autoaim_prompt { self.draw_autoaim_prompt(c); }
         self.draw_binding_prompt(c);
         c.scale = base_scale;
-    }
-
-    /// Save/load cards: one column, scrolled so the cursor is in view, with
-    /// the next card cut off at the bottom to show the list goes on.
-    pub(super) fn draw_cards(&self, c: &mut Canvas, pic: &mut PicFn) {
-        let heading = if self.screen == Screen::Save { "Save Game" } else if self.autosaves { "Autosaves" } else { "Load Game" };
-        c.text(CARD_X, 20.0, heading, 13.0, GOLD_FG);
-        if self.autosaves {
-            c.text(CARD_X + c.text_w(heading, 13.0) + 10.0, 23.0, "newest first", TXT, MUTED);
-        }
-        let n = self.save_rows();
-        c.text_right(CARD_X + CARD_W, 23.0, &format!("{} / {}", self.load_cursor + 1, n), TXT, MUTED);
-        let small = 8.5;
-        let sticky = usize::from(self.screen == Screen::Load);
-        if sticky > 0 {
-            // divider between the pinned newest save and the scrolling rest
-            let y = CARD_Y0 + CARD_H + 3.0;
-            c.fill(CARD_X, y, CARD_W, 1.0, [0.55, 0.40, 0.20, 0.8]);
-        }
-        for i in 0..n {
-            if !self.card_visible(i) {
-                continue;
-            }
-            let y = self.card_y(i);
-            c.clip_rows(Some(if i < sticky { (CARD_Y0 - 1.0, CARD_Y0 + CARD_H + 1.0) } else { (self.card_top(), CARD_BOTTOM) }));
-            let x = CARD_X;
-            let selected = i == self.load_cursor;
-            let bg = if selected { [0.30, 0.20, 0.09, 0.97] } else { [0.08, 0.07, 0.06, 0.94] };
-            let edge = if selected { [0.85, 0.59, 0.22, 0.9] } else { [0.35, 0.27, 0.16, 0.7] };
-            c.round_box(x, y, CARD_W, CARD_H, 4.0, bg, Some(edge));
-            if selected {
-                c.round_box(x + 3.0, y + 6.0, 2.5, CARD_H - 12.0, 1.25, [0.95, 0.66, 0.26, 1.0], None);
-            }
-            let (lx, rx) = (x + 14.0, x + CARD_W - 12.0);
-            let clean = |t: &str| -> String { t.chars().map(|ch| if ch.is_control() { '?' } else { ch }).collect() };
-            if self.screen == Screen::Load && !self.autosaves && i == 1 {
-                c.text(lx, y + 9.0, "Browse Autosaves", 11.0, FG);
-                c.text(lx, y + 27.0, "Every retained autosave, newest first", small, MUTED);
-                c.shape(rx - 10.0, y + CARD_H / 2.0 - 5.0, 10.0, 10.0, crate::font::Shape::ArrowRight, GOLD_FG);
-                continue;
-            }
-            let Some(sv) = &self.saves[i] else {
-                let label = if self.screen == Screen::Load && self.autosaves { "No autosaves yet".into() }
-                    else if self.screen == Screen::Load && i == 0 { "No autosave yet".into() }
-                    else { format!("Empty slot {}", if self.screen == Screen::Load { i - 1 } else { i + 1 }) };
-                c.text(lx, y + 9.0, &label, 11.0, MUTED);
-                if self.screen == Screen::Save {
-                    c.text(lx, y + 27.0, "Select to save here", small, MUTED);
-                }
-                continue;
-            };
-            let label = if self.autosaves { format!("Autosave {}: {}", i + 1, sv.reason.as_deref().unwrap_or("unknown trigger")) }
-                else if self.screen == Screen::Load && i == 0 { format!("Latest autosave: {}", sv.reason.as_deref().unwrap_or("unknown")) }
-                else { format!("Slot {}", if self.screen == Screen::Load { i - 1 } else { i + 1 }) };
-            c.text_right(rx, y + 7.0, &clean(&label), small, GOLD_FG);
-            // title, cut to the space left of the label
-            let room = CARD_W - 40.0 - c.text_w(&label, small) - 20.0;
-            let mut title = clean(&sv.level);
-            while c.text_w(&title, 11.0) > room && title.pop().is_some() {}
-            if title.len() < sv.level.len() {
-                title.push('…');
-            }
-            c.text(lx, y + 5.0, &title, 11.0, FG);
-            let tw = c.text(lx, y + 20.0, &sv.timestamp, small, MUTED);
-            if sv.addons.is_some() {
-                // add-on saves are .qsa files that other ports cannot load
-                c.text(lx + tw + 12.0, y + 20.0, "Add-ons enabled", small, GOLD_FG);
-            }
-            c.text(lx, y + 32.0, &format!("Health {}   Armor {}", sv.health, sv.armor), small, FG);
-            let stats = format!("Kills {}/{}   Secrets {}/{}", sv.kills.0, sv.kills.1, sv.secrets.0, sv.secrets.1);
-            let sw = c.text(lx, y + 44.0, &stats, small, FG);
-            // keys after the stats line, weapons in the right half
-            let keys = self.save_inventory.keys(sv);
-            let mut kx = lx + sw + 12.0;
-            for icon in &keys {
-                if pic(&icon.name).is_some() {
-                    draw_inventory_icon(c, pic, kx, y + 42.0, 24.0, 12.0, icon);
-                    kx += 26.0;
-                } else {
-                    kx += c.text(kx, y + 44.0, &icon.fallback, small, GOLD_FG) + 6.0;
-                }
-            }
-            let icons = self.save_inventory.weapons(sv);
-            let wx = x + 250.0;
-            if icons.is_empty() {
-                c.text(wx, y + 26.0, "No weapons", small, MUTED);
-            }
-            let columns = if icons.len() <= 20 { 10 } else { 14 };
-            let cell = if columns == 10 { 22.0 } else { 16.0 };
-            let mut missing = Vec::new();
-            for (j, icon) in icons.iter().take(columns * 2).enumerate() {
-                if pic(&icon.name).is_none() {
-                    missing.push(icon.fallback.as_str());
-                    continue;
-                }
-                draw_inventory_icon(c, pic, wx + (j % columns) as f32 * cell, y + 22.0 + (j / columns) as f32 * 15.0, cell - 2.0, 13.0, icon);
-            }
-            if !missing.is_empty() {
-                c.text(wx, y + 44.0, &missing.join(", "), small, MUTED);
-            }
-        }
-        c.clip = None;
-        if let Some((x, top, h, ty, th)) = self.card_scrollbar() {
-            c.fill(x, top, 3.0, h, [1.0, 1.0, 1.0, 0.12]);
-            c.fill(x, ty, 3.0, th, [0.85, 0.65, 0.3, if self.drag.is_some() { 1.0 } else { 0.9 }]);
-        }
     }
 
     pub(super) fn draw_drop(&self, c: &mut Canvas, cv: &Cvars, item: Item, d: Drop) {

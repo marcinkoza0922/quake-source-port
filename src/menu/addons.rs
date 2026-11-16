@@ -37,9 +37,15 @@ impl Menu {
     }
 
     pub(super) fn start_new_game(&mut self, out: &mut Vec<Action>) {
+        let cmd = "maxplayers 1\ndeathmatch 0\ncoop 0\nmap start\n".to_string();
+        if self.game_running {
+            // vanilla asks before dropping the running game
+            self.confirm(vec!["Start a new game?".into(), "Unsaved progress will be lost.".into()], "New game", cmd, true);
+            return;
+        }
         self.screen = Screen::None;
         out.push(Action::Close);
-        out.push(Action::Command("maxplayers 1\ndeathmatch 0\ncoop 0\nmap start\n".into()));
+        out.push(Action::Command(cmd));
     }
 
     /// Pointer over the New Game checkbox (`pos` in screen menu units).

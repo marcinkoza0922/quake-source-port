@@ -89,7 +89,12 @@ fn main() {
         .unwrap_or_else(Fs::default_basedir);
     let mut fs = Fs::new(&basedir);
     if !fs.add_game_dir("id1") {
-        eprintln!("couldn't find Quake data in {}; use -basedir DIR or QUAKE_BASEDIR (expected id1/pak0.pak or pak0.pak)", basedir.display());
+        let msg = format!("Couldn't find Quake game data in {}.\n\nCopy this port next to your Quake folder (the one containing id1/pak0.pak), or start it with -basedir DIR or the QUAKE_BASEDIR environment variable.", basedir.display());
+        eprintln!("{msg}");
+        // launched by double-click there is no terminal: show the error too
+        if !o.has("-headless") && !o.has("-dedicated") {
+            qplatform::error_box("Quake data not found", &msg);
+        }
         std::process::exit(1);
     }
     for (flag, dir) in [("-hipnotic", "hipnotic"), ("-rogue", "rogue"), ("-quoth", "quoth")] {

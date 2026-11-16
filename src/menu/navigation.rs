@@ -95,6 +95,12 @@ impl Menu {
             _ => "Select",
         };
         let mut items = vec![(sel, action), (back, "Back")];
+        if matches!(self.screen, Screen::Load | Screen::Save) && self.save_at(self.load_cursor).is_some() {
+            items.insert(1, (K_XBUTTON, "Delete"));
+        }
+        if self.prompt.is_some() {
+            items = vec![(sel, "Select"), (back, "Cancel")];
+        }
         if self.screen == Screen::OptionsPage(Page::Controls) && self.drop.is_none() {
             items.insert(1, (K_XBUTTON, "Clear"));
         }

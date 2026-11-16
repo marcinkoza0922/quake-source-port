@@ -24,6 +24,10 @@ mod input;
 mod page_info;
 use page_info::*;
 mod scroll;
+mod prompt;
+mod cards;
+use cards::clean_title;
+use prompt::Prompt;
 mod navigation;
 mod actions;
 mod addons;
@@ -119,7 +123,21 @@ pub enum Action {
     Close,
 }
 
-pub const MAX_SAVEGAMES: usize = 12;
+/// A save shown on the Load/Save screens: file stem, preview and thumbnail.
+#[derive(Clone, Debug)]
+pub struct SaveSlot {
+    pub name: String,
+    pub info: crate::saveinfo::SaveInfo,
+    pub thumb: Option<(qrender::PicId, u32, u32)>,
+}
+
+impl SaveSlot {
+    pub fn is_autosave(&self) -> bool { is_autosave_name(&self.name) }
+}
+
+pub fn is_autosave_name(name: &str) -> bool {
+    name.strip_prefix("autosave").is_some_and(|n| !n.is_empty() && n.bytes().all(|b| b.is_ascii_digit()))
+}
 
 pub struct Menu {
     pub screen: Screen,
@@ -141,9 +159,14 @@ pub struct Menu {
     /// Available resolutions (filled by the host) and device MSAA limit.
     pub resolutions: Vec<(u32, u32)>,
     pub max_msaa: u32,
-    /// Parsed preview of each save slot (`None` = unused or unreadable).
-    pub saves: Vec<Option<crate::saveinfo::SaveInfo>>,
+    /// Saves listed on the current screen, newest first (Load: quick and
+    /// manual saves; Autosaves: autosaves; Save: everything but autosaves).
+    pub saves: Vec<SaveSlot>,
+    /// Newest readable save of any kind (pinned at the top of Load).
+    pub latest: Option<SaveSlot>,
     pub autosaves: bool,
+    /// Modal confirmation or skill picker over the current screen.
+    prompt: Option<Prompt>,
     pub save_inventory: crate::save_inventory::Inventory,
     prev: Screen,
     /// Cursor position in 640x360 menu units, when the mouse has moved.
@@ -256,8 +279,10 @@ impl Menu {
             pending_res: (1280, 720),
             resolutions: Vec::new(),
             max_msaa: 8,
-            saves: vec![None; MAX_SAVEGAMES + 2],
+            saves: Vec::new(),
+            latest: None,
             autosaves: false,
+            prompt: None,
             save_inventory: Default::default(),
             prev: Screen::None,
             mouse: None,
@@ -354,21 +379,42 @@ impl Menu {
         self.addon_capture = None;
         self.bind_pending = None;
         self.osk = None;
+        self.prompt = None;
         self.quit_cursor = 0;
         self.death_cursor = 0;
         if matches!(s, Screen::Load | Screen::Save) { self.load_cursor = 0; self.save_scroll = 0.0; }
     }
 
+    /// Card rows: Load = pinned latest + Browse Autosaves + saves; Autosaves
+    /// = saves (one placeholder when empty); Save = New save + saves.
     fn save_rows(&self) -> usize {
-        if self.screen == Screen::Load {
-            if self.autosaves { self.saves.iter().take(crate::autosave::MAX).rposition(Option::is_some).map_or(1, |i| i + 1) } else { MAX_SAVEGAMES + 2 }
-        } else { MAX_SAVEGAMES }
+        if self.screen == Screen::Save { 1 + self.saves.len() }
+        else if self.autosaves { self.saves.len().max(1) }
+        else { 2 + self.saves.len() }
     }
 
-    pub fn save_slot_name(&self, i: usize) -> Option<String> {
-        if self.screen == Screen::Save { Some(format!("s{i}")) }
-        else if self.autosaves { Some(format!("autosave{i}")) }
-        else { match i { 0 => Some("autosave0".into()), 1 => None, _ => Some(format!("s{}", i - 2)) } }
+    /// The save on card row `i`, if that row shows one.
+    pub fn save_at(&self, i: usize) -> Option<&SaveSlot> {
+        if self.screen == Screen::Save { i.checked_sub(1).and_then(|i| self.saves.get(i)) }
+        else if self.autosaves { self.saves.get(i) }
+        else if i == 0 { self.latest.as_ref() }
+        else { i.checked_sub(2).and_then(|i| self.saves.get(i)) }
+    }
+
+    /// Keeps the card cursor on a row after the list changed.
+    pub fn clamp_save_cursor(&mut self) {
+        self.load_cursor = self.load_cursor.min(self.save_rows() - 1);
+        self.fix_card_scroll();
+    }
+
+    /// Name for a new save: the first free `sN`.
+    pub fn new_save_name(&self) -> String {
+        (0..).map(|n| format!("s{n}")).find(|n| !self.saves.iter().any(|s| s.name.eq_ignore_ascii_case(n))).unwrap()
+    }
+
+    /// Whether row `i` of the Load list is the Browse Autosaves entry.
+    fn is_browse_row(&self, i: usize) -> bool {
+        self.screen == Screen::Load && !self.autosaves && i == 1
     }
 
     /// Item under the menu-space point for the current screen.
