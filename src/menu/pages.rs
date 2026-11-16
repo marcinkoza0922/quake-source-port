@@ -58,6 +58,8 @@ pub(super) enum Run {
     ResetShotguns,
     ResetBulletTime,
     ResetHitstop,
+    /// Every gameplay modifier back to its default (standard rules).
+    ResetModifiers,
 }
 
 /// A server answering the LAN search.
@@ -203,29 +205,6 @@ pub(super) const GAMEPLAY: &[Item] = &[
     Item::Choice { label: "On Death", cvar: "cl_deathaction", choices: &[("Ask", 0.0), ("Most recent save", 1.0), ("Select save", 2.0), ("Restart level", 3.0)] },
     toggle("Autosave", "sv_autosave"),
     Item::Sub { label: "Autosave Settings", page: Page::Autosave },
-    Item::Sub { label: "Assists", page: Page::Assists },
-];
-
-pub(super) const PERCENT: &[(&str, f32)] = &[
-    ("25%", 0.25), ("50%", 0.5), ("75%", 0.75), ("100%", 1.0), ("125%", 1.25), ("150%", 1.5), ("200%", 2.0),
-];
-pub(super) const AMMO_MULT: &[(&str, f32)] = &[("100%", 1.0), ("150%", 1.5), ("200%", 2.0), ("300%", 3.0)];
-pub(super) const JUMPS: &[(&str, f32)] = &[("single", 1.0), ("double", 2.0), ("triple", 3.0)];
-
-pub(super) const ASSISTS: &[Item] = &[
-    toggle("Auto-aim", "assist_autoaim"),
-    Item::Sub { label: "Auto-aim Settings", page: Page::AutoAim },
-    Item::Choice { label: "Damage Taken", cvar: "assist_damagetaken", choices: PERCENT },
-    toggle("No Fall Damage", "assist_nofalldamage"),
-    toggle("No Drowning", "assist_nodrown"),
-    toggle("No Self Damage", "assist_noselfdamage"),
-    toggle("Health Regeneration", "assist_regen"),
-    Item::Choice { label: "Enemy Health", cvar: "assist_enemyhealth", choices: PERCENT },
-    Item::Choice { label: "Ammo Pickups", cvar: "assist_ammo", choices: AMMO_MULT },
-    toggle("Infinite Ammo", "assist_infiniteammo"),
-    Item::Choice { label: "Jumps", cvar: "assist_jumps", choices: JUMPS },
-    toggle("Grenade Arc", "assist_grenadearc"),
-    Item::Sub { label: "Grenade Arc Settings", page: Page::GrenadeArc },
 ];
 
 pub(super) const GRENADE_ARC: &[Item] = &[
@@ -423,6 +402,8 @@ pub(super) const CROSSHAIR: &[Item] = &[
     toggle("Hit Markers", "hud_hitmarkers"),
     Item::Choice { label: "Hitmarker Type", cvar: "hitmarker_shape", choices: HITMARKER_SHAPE },
     Item::Choice { label: "Hitmarker Size", cvar: "hitmarker_size", choices: XHAIR_SIZE },
+    toggle("Grenade Arc", "assist_grenadearc"),
+    Item::Sub { label: "Grenade Arc Settings", page: Page::GrenadeArc },
 ];
 pub(super) const TEXT_SIZE: &[(&str, f32)] = &[("normal", 1.0), ("large", 1.5), ("larger", 2.0), ("largest", 3.0)];
 pub(super) const GAME_SPEED: &[(&str, f32)] = &[("100%", 1.0), ("90%", 0.9), ("75%", 0.75), ("60%", 0.6), ("50%", 0.5)];
@@ -435,7 +416,8 @@ pub(super) const ACCESSIBILITY: &[Item] = &[
     toggle("Toggle Attack", "in_toggleattack"),
     toggle("Toggle Run", "in_togglerun"),
     Item::Choice { label: "Game Speed", cvar: "a11y_gamespeed", choices: GAME_SPEED },
-    Item::Sub { label: "Assists", page: Page::Assists },
+    toggle("Auto-aim", "assist_autoaim"),
+    Item::Sub { label: "Auto-aim Settings", page: Page::AutoAim },
 ];
 
 pub(super) const HUD_MODE: &[(&str, f32)] = &[("off", 0.0), ("on", 1.0), ("immersive", 2.0)];

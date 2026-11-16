@@ -47,7 +47,7 @@ first; this skill is the practical map and the recipes.
 
 ## Settings
 
-`addons_enable` (New Game checkbox; `map` copies it into the game's fixed `addons_on`), `addon_portalgun`, `addon_portal_view`
+`custom_enable` (Single Player "Customize" row; `map` copies it into the game's fixed `custom`), `addon_portalgun`, `addon_portal_view`
 (see-through), `addon_portal_max` (top-level live views, 1–4),
 `addon_portal_dist`, `addon_portal_depth` (recursion levels, 0–6, default 3).
 Flow: cvar → `src/host/render.rs` → `qrender::Settings::gun_portal_*`.
@@ -70,7 +70,7 @@ tunnel:
 ```sh
 cargo build --release
 target/release/quake-source-port -headless -autoquit 6 +sv_autosave 0 \
-  +addons_enable 1 +addon_portal_depth 4 +map e1m1 \
+  +custom_enable 1 +addon_portal_depth 4 +map e1m1 \
   "+delay 2 portal_set 0 480 80 48 0 1 0 0 0 1" \
   "+delay 2 portal_set 1 480 330 48 0 -1 0 0 0 1" \
   "+delay 2 setpos 470 160 40 0 80 0" \

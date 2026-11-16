@@ -55,7 +55,7 @@ impl Host {
             held |= h && g.cl.stats[STAT_HEALTH] > 0;
             pressed |= p && g.cl.stats[STAT_HEALTH] > 0;
         }
-        let allowed = self.local.is_some() && self.server.active() && self.server.core.addons_on
+        let allowed = self.local.is_some() && self.server.active() && self.server.core.custom
             && self.cv("addon_bullet_time") != 0.0 && self.demo.is_none()
             && qserver::addons::allowed(true, self.cv("deathmatch") != 0.0,
                 qserver::addons::all_local(&self.server.core.clients));

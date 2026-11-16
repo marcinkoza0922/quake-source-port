@@ -127,3 +127,39 @@ fn layouts_tile_the_screen() {
     let area: u32 = six.iter().map(|r| r[2] * r[3]).sum();
     assert_eq!(area, 1921 * 1081);
 }
+
+#[test]
+fn split_screen_saves_are_qsa_and_bring_the_players_back() {
+    let Some(mut sv) = server("coop 1") else { return };
+    sv.core.cvars.register("cl_splitscreen", "1", 0);
+    sv.core.cvars.set("cl_splitscreen", "2");
+    let mut guests = Vec::new();
+    sync(&mut guests, &mut sv, 3);
+    step(&mut sv, &mut guests, 10);
+    let slot = guests[1].slot;
+    sv.client_command(slot, "setpos 480 -200 88 0 0 0");
+    step(&mut sv, &mut guests, 5);
+    let text = sv.save_game();
+    assert!(text.starts_with("QSPADDONS "), "split-screen games save as .qsa");
+    let h = qserver::addons::save::split(&text).unwrap().0.unwrap();
+    assert!(h.vanilla);
+    let p = h.players.unwrap();
+    assert_eq!((p.slots, p.local, p.coop), (6, 2, 1.0));
+
+    // a single-player server loads it with the saved slots and rules
+    let mut fs = Fs::new(sv.core.fs.basedir());
+    fs.add_game_dir("id1");
+    let mut sv = Server::new(fs, Cvars::new(), 1);
+    sv.core.cvars.register("cl_splitscreen", "1", 0);
+    sv.load_game(&text).unwrap();
+    assert_eq!(sv.core.maxclients(), 6);
+    assert_eq!(sv.core.cvars.value_of("coop"), 1.0);
+    assert_eq!(sv.core.cvars.value_of("cl_splitscreen"), 2.0);
+    assert!(!sv.custom());
+    let mut guests = Vec::new();
+    sync(&mut guests, &mut sv, 3);
+    step(&mut sv, &mut guests, 10);
+    let g = guests.iter().find(|g| g.slot == slot).expect("player rejoined its slot");
+    let o = origin(g);
+    assert!((o[0] - 480.0).abs() < 1.0 && (o[1] + 200.0).abs() < 1.0, "restored where saved: {o:?}");
+}

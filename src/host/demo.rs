@@ -119,11 +119,45 @@ impl Host {
     /// CL_Stop_f: end with svc_disconnect.
     pub(super) fn stop_recording(&mut self) {
         let Some(mut w) = self.recording.take() else { return };
+        let path = w.path().to_path_buf();
         let r = w.write(self.cl.viewangles, &[qnet::protocol::SVC_DISCONNECT]).and_then(|_| w.finish());
-        self.con.print(&match r {
-            Ok(()) => "Completed demo\n".to_string(),
-            Err(e) => format!("demo write failed: {e}\n"),
+        match r {
+            Ok(()) => {
+                self.con.print("Completed demo\n");
+                self.convert_demo(path);
+            }
+            Err(e) => self.con.print(&format!("demo write failed: {e}\n")),
+        }
+    }
+
+    /// Rewrites a finished demo for other ports in the background
+    /// (`demo::convert`); [`Self::poll_demo_jobs`] prints the outcome.
+    pub(super) fn convert_demo(&mut self, path: std::path::PathBuf) {
+        if cfg!(target_arch = "wasm32") {
+            let msg = crate::demo::convert::convert_file(&path);
+            self.con.print(&msg);
+            return;
+        }
+        let (tx, rx) = std::sync::mpsc::channel();
+        std::thread::spawn(move || {
+            let _ = tx.send(crate::demo::convert::convert_file(&path));
         });
+        self.demo_jobs.push(rx);
+    }
+
+    pub(super) fn poll_demo_jobs(&mut self) {
+        let mut done = Vec::new();
+        self.demo_jobs.retain(|rx| match rx.try_recv() {
+            Ok(msg) => {
+                done.push(msg);
+                false
+            }
+            Err(std::sync::mpsc::TryRecvError::Empty) => true,
+            Err(std::sync::mpsc::TryRecvError::Disconnected) => false,
+        });
+        for msg in done {
+            self.con.print(&msg);
+        }
     }
 
     /// CL_Record_f (with ProQuake's mid-game start).
@@ -242,6 +276,15 @@ pub(super) fn register(c: &mut Commands<Host>) {
         h.next_demo();
     });
     c.add("record", |h, a| h.record(a));
+    c.add("demo_convert", |h, a| {
+        if a.argc() != 2 || a.argv(1).contains("..") {
+            h.print("demo_convert <demoname> : rewrite a demo so other source ports can play it\n");
+            return;
+        }
+        let n = a.argv(1);
+        let file = if n.ends_with(".dem") { n.to_string() } else { format!("{n}.dem") };
+        h.convert_demo(h.user_dir().join(file));
+    });
     c.add("stop", |h, _| {
         if h.recording.is_none() {
             h.print("Not recording a demo.\n");

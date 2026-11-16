@@ -12,7 +12,7 @@ fn server() -> Option<Server> {
     sv.spawn_server("e1m1").unwrap();
     sv.connect_local().unwrap();
     crate::addons::enable_all(&mut sv.core.cvars);
-    sv.core.set_addons(true);
+    sv.core.set_custom(true);
     Some(sv)
 }
 
@@ -116,6 +116,6 @@ fn player_and_grunt_counts_speed_and_disabled_fallback() {
     let pellets = fire(&mut sv, grunt, 4.0, dir);
     assert_eq!(pellets.len(), 24);
     assert_eq!(pellets.iter().filter(|&&e| sv.level.as_ref().unwrap().vm.ent_i(e, f.owner) == grunt as i32).count(), 4);
-    sv.core.set_addons(false);
+    sv.core.set_custom(false);
     assert_eq!(fire(&mut sv, 1, 6.0, dir).len(), 24);
 }

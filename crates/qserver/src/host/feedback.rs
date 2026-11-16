@@ -155,7 +155,7 @@ mod tests {
         // With hitstop on, a second event carries kill, damage, class, health.
         host.c.clients[client].message.clear();
         host.c.cvars.set("addon_hitstop", "1");
-        host.c.addons_on = true;
+        host.c.custom = true;
         l.vm.set_ent_f(target, f.health, 100.0);
         l.vm.set_g_i(ofs_parm(0), target as i32);
         l.vm.set_g_i(ofs_parm(1), 1);

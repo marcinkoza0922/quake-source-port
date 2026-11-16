@@ -30,9 +30,25 @@ pub(crate) fn err<T>(s: impl Into<String>) -> R<T> {
 impl ClientState {
     /// CL_ParseServerMessage over one complete message (reliable or datagram).
     pub fn parse_server_message(&mut self, data: &[u8]) -> R {
+        self.parse_message(data, None)
+    }
+
+    /// [`Self::parse_server_message`] that also lists each server command
+    /// as `(cmd, start, end)` byte offsets into `data` (the demo converter
+    /// copies or rewrites them one by one). U_* entity updates use their
+    /// first byte as `cmd`.
+    pub fn parse_server_message_spans(&mut self, data: &[u8], spans: &mut Vec<(u8, usize, usize)>) -> R {
+        self.parse_message(data, Some(spans))
+    }
+
+    fn parse_message(&mut self, data: &[u8], mut spans: Option<&mut Vec<(u8, usize, usize)>>) -> R {
         let mut m = MsgReader::new(data);
         let mut lastcmd = 0;
+        let mut pending: Option<(u8, usize)> = None;
         loop {
+            if let (Some((c, start)), Some(sp)) = (pending.take(), spans.as_deref_mut()) {
+                sp.push((c, start, m.pos));
+            }
             if m.badread {
                 return err(format!("CL_ParseServerMessage: Bad server message (after svc {lastcmd})"));
             }
@@ -42,7 +58,9 @@ impl ClientState {
                 }
                 return Ok(());
             }
+            let start = m.pos;
             let cmd = m.byte() as u8;
+            pending = Some((cmd, start));
             if cmd as u32 & U_SIGNAL != 0 {
                 self.parse_update(&mut m, cmd as u32 & 127)?;
                 lastcmd = cmd;
@@ -63,6 +81,9 @@ impl ClientState {
                     self.protocol = i;
                 }
                 SVC_DISCONNECT => {
+                    if let (Some((c, start)), Some(sp)) = (pending.take(), spans.as_deref_mut()) {
+                        sp.push((c, start, m.pos));
+                    }
                     self.events.push(ClientEvent::Disconnect);
                     self.signon = 0;
                     return Ok(());

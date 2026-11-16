@@ -233,6 +233,7 @@ impl Host {
 
     pub(super) fn sync_menu_ui(&mut self) {
         self.menu.game_running = self.server.active();
+        self.menu.custom_running = self.server.active() && self.server.core.custom;
         self.menu.pad_ui = self.pad_ui();
         self.menu.glyphs = self.glyphs();
         if self.menu.active() {

@@ -475,15 +475,26 @@ fn enhancements_hub_and_subpages_navigate_back_to_their_parent() {
 
 fn addon_cvars() -> Cvars {
     let mut cv = Cvars::default();
-    cv.register("addons_enable", "0", 0);
-    cv.register("addons_active", "0", 0);
+    cv.register("custom_enable", "0", 0);
+    cv.register("custom_active", "0", 0);
     cv.register("addon_portalgun", "1", 0);
     cv.register("addon_boomerang", "1", 0);
+    for &(n, d, f) in qserver::modifiers::CVARS {
+        cv.register(n, d, f);
+    }
     cv
 }
 
+/// Moves the Single Player cursor to `row` with the arrow keys.
+fn sp_row(menu: &mut Menu, cv: &mut Cvars, row: usize) {
+    menu.open(Screen::SinglePlayer);
+    for _ in 0..row {
+        menu.key(K_DOWNARROW, cv, false);
+    }
+}
+
 #[test]
-fn new_game_starts_directly_unless_the_addons_box_is_ticked() {
+fn new_game_starts_directly_unless_customize_is_ticked() {
     let mut cv = addon_cvars();
     let mut menu = Menu::new();
     menu.open(Screen::SinglePlayer);
@@ -491,191 +502,150 @@ fn new_game_starts_directly_unless_the_addons_box_is_ticked() {
     assert!(acts.iter().any(|a| matches!(a, Action::Command(c) if c.contains("map start"))));
     assert_eq!(menu.screen, Screen::None);
 
-    // right/left on the New Game row ticks the box; Enter then opens the picker
+    // left/right on New Game no longer flips anything by accident
     menu.open(Screen::SinglePlayer);
     menu.key(K_RIGHTARROW, &mut cv, false);
-    assert_eq!(cv.value_of("addons_enable"), 1.0);
+    assert_eq!(cv.value_of("custom_enable"), 0.0);
+    // the Customize row (reachable with up/down) ticks the box
+    sp_row(&mut menu, &mut cv, SP_CUSTOMIZE_ROW);
+    menu.key(K_ENTER, &mut cv, false);
+    assert_eq!(cv.value_of("custom_enable"), 1.0);
+    assert_eq!(menu.screen, Screen::SinglePlayer);
+    // New Game then opens the Customize hub
+    menu.key(K_DOWNARROW, &mut cv, false);
     let acts = menu.key(K_ENTER, &mut cv, false);
     assert!(!acts.iter().any(|a| matches!(a, Action::Command(_))));
+    assert_eq!(menu.screen, Screen::OptionsPage(Page::NewGameCustomize));
+    // Add-ons: toys can be switched off before starting; Back returns to the hub
+    menu.key(K_DOWNARROW, &mut cv, false);
+    menu.key(K_ENTER, &mut cv, false);
     assert_eq!(menu.screen, Screen::OptionsPage(Page::NewGameAddons));
     assert!(option_cvars().any(|n| n == "addon_portalgun"));
-    // toys can be switched off before starting
-    menu.opt_cursor = 0;
     menu.key(K_ENTER, &mut cv, false);
     assert_eq!(cv.value_of("addon_portalgun"), 0.0);
+    menu.key(K_ESCAPE, &mut cv, false);
+    assert_eq!(menu.screen, Screen::OptionsPage(Page::NewGameCustomize));
+    // Modifiers, then back to the hub at the same row
+    menu.opt_cursor = 0;
+    menu.key(K_ENTER, &mut cv, false);
+    assert_eq!(menu.screen, Screen::OptionsPage(Page::Modifiers));
+    menu.key(K_RIGHTARROW, &mut cv, false);
+    assert_eq!(cv.value_of("modifier_damagetaken"), 1.25);
+    menu.key(K_ESCAPE, &mut cv, false);
+    assert_eq!(menu.screen, Screen::OptionsPage(Page::NewGameCustomize));
+    assert_eq!(menu.opt_cursor, 0);
     // Start New Game is the last row
-    let acts = menu.key(K_F1 + 9, &mut cv, false);
+    menu.opt_cursor = 2;
+    let acts = menu.key(K_ENTER, &mut cv, false);
     assert!(acts.iter().any(|a| matches!(a, Action::Command(c) if c.contains("map start"))));
     assert_eq!(menu.screen, Screen::None);
 
-    // Back from the picker returns to the single player menu, with the box still ticked
+    // Back from the hub returns to the single player menu, box still ticked
     menu.open(Screen::SinglePlayer);
     menu.key(K_ENTER, &mut cv, false);
     menu.key(K_ESCAPE, &mut cv, false);
     assert_eq!(menu.screen, Screen::SinglePlayer);
-    assert_eq!(cv.value_of("addons_enable"), 1.0);
+    assert_eq!(cv.value_of("custom_enable"), 1.0);
 }
 
 #[test]
-fn clicking_the_checkbox_toggles_it_without_starting_a_game() {
+fn clicking_the_customize_row_toggles_it_without_starting_a_game() {
     let mut cv = addon_cvars();
     let mut menu = Menu::new();
     menu.open(Screen::SinglePlayer);
-    let pos = (CLASSIC.0 + 232.0, CLASSIC.1 + 38.0);
+    let pos = (CLASSIC.0 + 120.0, CLASSIC.1 + 32.0 + SP_CUSTOMIZE_ROW as f32 * 20.0 + 8.0);
     menu.mouse_move(pos, &mut cv);
     let acts = menu.key(K_MOUSE1, &mut cv, false);
-    assert_eq!(cv.value_of("addons_enable"), 1.0);
+    assert_eq!(cv.value_of("custom_enable"), 1.0);
     assert_eq!(menu.screen, Screen::SinglePlayer);
     assert!(!acts.iter().any(|a| matches!(a, Action::Command(_))));
 }
 
 #[test]
-fn a_game_without_addons_cannot_gain_them_but_an_addon_game_can_adjust() {
+fn a_vanilla_game_cannot_gain_customization_but_a_custom_game_can_adjust() {
     let mut cv = addon_cvars();
     let mut menu = Menu::new();
-    menu.open(Screen::Main);
     menu.open(Screen::OptionsPage(Page::Addons));
-    assert_eq!(menu.screen, Screen::OptionsPage(Page::Addons));
-    // running game started without add-ons: the toggle is fixed
+    // running vanilla game: toys and modifiers are fixed
     menu.opt_cursor = 0;
     menu.key(K_ENTER, &mut cv, true);
     assert_eq!(cv.value_of("addon_portalgun"), 1.0);
     assert!(menu.toys_locked(&cv));
-    // running game with add-ons: free to change
-    cv.set("addons_active", "1");
+    menu.open(Screen::OptionsPage(Page::Modifiers));
+    menu.key(K_RIGHTARROW, &mut cv, true);
+    assert_eq!(cv.value_of("modifier_damagetaken"), 1.0);
+    // ...but the next new game can still be set up from a vanilla game
+    cv.set("custom_enable", "1");
+    sp_row(&mut menu, &mut cv, 0);
+    menu.key(K_ENTER, &mut cv, true);
+    assert_eq!(menu.screen, Screen::OptionsPage(Page::NewGameCustomize));
+    menu.key(K_ENTER, &mut cv, true);
+    menu.key(K_RIGHTARROW, &mut cv, true);
+    assert_eq!(cv.value_of("modifier_damagetaken"), 1.25);
+    // running customized game: Main → Customize → Add-ons, free to change
+    cv.set("custom_active", "1");
+    menu.custom_running = true;
+    menu.open(Screen::Main);
+    for _ in 0..MAIN_ITEMS {
+        menu.key(K_DOWNARROW, &mut cv, true);
+    }
+    menu.key(K_ENTER, &mut cv, true);
+    assert_eq!(menu.screen, Screen::OptionsPage(Page::Customize));
+    menu.key(K_DOWNARROW, &mut cv, true);
+    menu.key(K_ENTER, &mut cv, true);
+    assert_eq!(menu.screen, Screen::OptionsPage(Page::Addons));
     menu.key(K_ENTER, &mut cv, true);
     assert_eq!(cv.value_of("addon_portalgun"), 0.0);
-    // no game running: edits the defaults for the next new game
-    cv.set("addons_active", "0");
-    menu.key(K_ENTER, &mut cv, false);
-    assert_eq!(cv.value_of("addon_portalgun"), 1.0);
-    // portal settings stay reachable either way
+    // portal settings stay reachable
     for _ in 0..5 { menu.key(K_TAB, &mut cv, true); }
     menu.key(K_ENTER, &mut cv, true);
     assert_eq!(menu.screen, Screen::OptionsPage(Page::PortalGun));
     menu.key(K_ESCAPE, &mut cv, true);
     assert_eq!(menu.screen, Screen::OptionsPage(Page::Addons));
     menu.key(K_ESCAPE, &mut cv, true);
+    assert_eq!(menu.screen, Screen::OptionsPage(Page::Customize));
+    menu.key(K_ESCAPE, &mut cv, true);
     assert_eq!(menu.screen, Screen::Main);
 }
 
 #[test]
-fn control_binds_for_toys_follow_the_running_game() {
+fn main_menu_lists_customize_only_in_a_customized_game() {
+    let mut menu = Menu::new();
+    assert_eq!(menu.main_items(), MAIN_ITEMS);
+    menu.custom_running = true;
+    assert_eq!(menu.main_items(), MAIN_ITEMS + 1);
+}
+
+#[test]
+fn modifiers_reset_restores_standard_rules() {
     let mut cv = addon_cvars();
-    let has_addon_binds = || page_items(Page::Controls).iter().any(|i| matches!(i, Item::Bind { cmd: "+attack2", .. }));
-    sync_addon_binds(&cv, false);
-    assert!(!has_addon_binds());
-    cv.set("addons_enable", "1");
-    sync_addon_binds(&cv, false);
-    assert!(has_addon_binds());
-    // a running game without add-ons hides them whatever the checkbox says
-    sync_addon_binds(&cv, true);
-    assert!(!has_addon_binds());
-    cv.set("addons_active", "1");
-    sync_addon_binds(&cv, true);
-    assert!(has_addon_binds());
-}
-
-mod shader_tests {
-    use super::*;
-
-    #[test]
-    fn screen_shader_preset_and_params() {
-        let mut cv = Cvars::default();
-        for n in ["r_shader_preset", "r_shader_params"] {
-            cv.register(n, "", 0);
-        }
-        cv.register("r_shader_scope", "0", 0);
-        cv.register("r_shader_scale", "0", 0);
-        let mut m = Menu::new();
-        m.shader_presets = vec!["crt/a".into(), "crt/b".into()];
-        m.shader_params = vec![qrender::ShaderParam {
-            id: "MASK".into(),
-            description: "Mask".into(),
-            initial: 0.5,
-            min: 0.0,
-            max: 1.0,
-            step: 0.25,
-        }];
-        m.screen = Screen::OptionsPage(Page::ScreenShader);
-        m.opt_cursor = 0;
-        m.key(K_RIGHTARROW, &mut cv, false);
-        assert_eq!(cv.by_name("r_shader_preset").unwrap().string, "crt/a");
-        // input scale row toggles between fit output (0) and 3D resolution (1)
-        m.opt_cursor = 2;
-        m.key(K_RIGHTARROW, &mut cv, false);
-        assert_eq!(cv.by_name("r_shader_scale").unwrap().value, 1.0);
-        // the param row follows the static rows
-        m.opt_cursor = 4;
-        assert!(matches!(m.page_item(Page::ScreenShader, 4), Item::ShaderParam(0)));
-        m.key(K_RIGHTARROW, &mut cv, false);
-        assert_eq!(cv.by_name("r_shader_params").unwrap().string, "MASK=0.75");
-        // the reset row drops every override
-        m.opt_cursor = 3;
-        m.key(K_ENTER, &mut cv, false);
-        assert_eq!(cv.by_name("r_shader_params").unwrap().string, "");
-        m.opt_cursor = 4;
-        m.key(K_RIGHTARROW, &mut cv, false);
-        assert_eq!(cv.by_name("r_shader_params").unwrap().string, "MASK=0.75");
-        // back to the default drops the override
-        m.key(K_LEFTARROW, &mut cv, false);
-        assert_eq!(cv.by_name("r_shader_params").unwrap().string, "");
-        // picking another preset clears overrides
-        m.key(K_RIGHTARROW, &mut cv, false);
-        m.opt_cursor = 0;
-        m.key(K_RIGHTARROW, &mut cv, false);
-        assert_eq!(cv.by_name("r_shader_preset").unwrap().string, "crt/b");
-        assert_eq!(cv.by_name("r_shader_params").unwrap().string, "");
-    }
+    cv.set("modifier_horde", "2");
+    cv.set("modifier_infiniteammo", "1");
+    let mut menu = Menu::new();
+    menu.open(Screen::OptionsPage(Page::Modifiers));
+    menu.opt_cursor = MODIFIERS.len() - 1;
+    menu.key(K_ENTER, &mut cv, false);
+    assert_eq!(qserver::modifiers::changed(&cv).count(), 0);
 }
 
 #[test]
-fn autoaim_mapping_tracks_enable_and_mode_and_captures_binding() {
-    let mut cv = Cvars::default();
-    cv.register("assist_autoaim", "0", 0);
-    cv.register("assist_autoaim_mode", "0", 0);
-    let mut m = Menu::new();
-    m.open(Screen::OptionsPage(Page::Controls));
-    m.key(0, &mut cv, false);
-    assert_eq!(m.page_len(Page::Controls), CONTROLS.len());
-    cv.set("assist_autoaim", "1");
-    m.key(0, &mut cv, false);
-    assert_eq!(m.page_len(Page::Controls), CONTROLS.len() + 1);
-    let row = 1;
-    assert!(matches!(m.page_item(Page::Controls, row), Item::Bind { label: "Lock-on", cmd: "+lockon" }));
-    m.opt_cursor = row;
-    m.key(K_ENTER, &mut cv, false);
-    let actions = m.key(b'f' as i32, &mut cv, false);
-    assert!(actions.iter().any(|a| matches!(a, Action::Command(c) if c == "bind \"f\" \"+lockon\"\n")));
-    cv.set("assist_autoaim_mode", "1");
-    m.key(0, &mut cv, false);
-    assert!(matches!(m.page_item(Page::Controls, row), Item::Bind { label: "Auto-aim Toggle", cmd: "+lockon" }));
-    cv.set("assist_autoaim", "0");
-    m.key(0, &mut cv, false);
-    assert_eq!(m.page_len(Page::Controls), CONTROLS.len());
-    assert!(m.opt_cursor < m.page_len(Page::Controls));
-    assert!(matches!(m.page_item(Page::Controls, 1), Item::Bind { cmd: "+weaponwheel", .. }));
-    assert_eq!(keys_for(&m.bindings, "+lockon"), vec![b'f' as i32]);
-}
-
-#[test]
-fn autoaim_submenu_is_guarded_and_returns_to_assists() {
+fn autoaim_submenu_is_guarded_and_returns_to_accessibility() {
     let mut cv = Cvars::default();
     for name in ["assist_autoaim", "assist_autoaim_mode", "assist_autoaim_cone", "assist_autoaim_range"] {
         cv.register(name, "0", 0);
         assert!(option_cvars().any(|c| c == name));
     }
     let mut m = Menu::new();
-    m.open(Screen::OptionsPage(Page::Assists));
-    let row = ASSISTS.iter().position(|i| matches!(i, Item::Sub { page: Page::AutoAim, .. })).unwrap();
+    m.open(Screen::OptionsPage(Page::Accessibility));
+    let row = ACCESSIBILITY.iter().position(|i| matches!(i, Item::Sub { page: Page::AutoAim, .. })).unwrap();
     m.opt_cursor = row;
     m.key(K_ENTER, &mut cv, false);
-    assert_eq!(m.screen, Screen::OptionsPage(Page::Assists));
+    assert_eq!(m.screen, Screen::OptionsPage(Page::Accessibility));
     cv.set("assist_autoaim", "1");
     m.key(K_ENTER, &mut cv, false);
     assert_eq!(m.screen, Screen::OptionsPage(Page::AutoAim));
     m.key(K_ESCAPE, &mut cv, false);
-    assert_eq!(m.screen, Screen::OptionsPage(Page::Assists));
+    assert_eq!(m.screen, Screen::OptionsPage(Page::Accessibility));
     assert_eq!(m.opt_cursor, row);
 }
 

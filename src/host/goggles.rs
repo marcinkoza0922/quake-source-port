@@ -69,7 +69,7 @@ impl Host {
     /// Goggles may be used: an add-on game where toys are allowed, with the
     /// Goggles add-on ticked.
     pub(super) fn goggles_allowed(&self) -> bool {
-        if !self.server.core.addons_on || !self.server.active() || self.cv("addon_goggles") == 0.0 {
+        if !self.server.core.custom || !self.server.active() || self.cv("addon_goggles") == 0.0 {
             return false;
         }
         let all_local = qserver::addons::all_local(&self.server.core.clients);

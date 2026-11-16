@@ -150,16 +150,24 @@ fn mouse_hover_and_click_share_the_start_buttons_focus() {
 #[test]
 fn clicking_selects_and_toggles_but_locked_games_keep_remapping() {
     let (mut menu, mut cv) = setup(Page::Addons);
+    // a name only selects, so its details can be read
     menu.mouse_move((70.0, 90.0), &mut cv);
     menu.key(K_MOUSE1, &mut cv, true);
     assert_eq!(menu.addon_ui.selected, 1);
+    assert_eq!(cv.value_of("addon_boomerang"), 1.0);
+    // the checkbox of a locked (vanilla) game doesn't toggle
+    menu.mouse_move((30.0, 90.0), &mut cv);
+    menu.key(K_MOUSE1, &mut cv, true);
     assert_eq!(cv.value_of("addon_boomerang"), 1.0);
     menu.mouse_move((450.0, menu.browser_row_y(2) + 1.0), &mut cv); // Alt Fire
     menu.key(K_MOUSE1, &mut cv, true);
     menu.key(b'q' as i32, &mut cv, true);
     assert_eq!(menu.bindings[b'q' as usize].as_deref(), Some("+attack2"));
-    cv.set("addons_active", "1");
+    cv.set("custom_active", "1");
     menu.mouse_move((70.0, 90.0), &mut cv);
+    menu.key(K_MOUSE1, &mut cv, true);
+    assert_eq!(cv.value_of("addon_boomerang"), 1.0);
+    menu.mouse_move((30.0, 90.0), &mut cv);
     menu.key(K_MOUSE1, &mut cv, true);
     assert_eq!(cv.value_of("addon_boomerang"), 0.0);
 }
@@ -275,7 +283,7 @@ fn controller_sections_reach_every_addons_action_without_a_keyboard() {
         menu.key(K_DPAD_DOWN, &mut cv, false);
     }
     menu.key(K_BBUTTON, &mut cv, false);
-    assert_eq!(menu.screen, Screen::Main);
+    assert_eq!(menu.screen, Screen::OptionsPage(Page::Customize));
 }
 
 #[test]
@@ -309,7 +317,7 @@ fn checklist_scrolls_without_moving_other_panels_and_hits_visible_rows() {
     let (mut menu, mut cv) = setup(Page::NewGameAddons);
     menu.mouse_move((100.0, 100.0), &mut cv);
     for _ in 0..30 { menu.key(K_MWHEELDOWN, &mut cv, true); }
-    cv.set("addons_active", "1");
+    cv.set("custom_active", "1");
     let offset = ADDON.len() - LIST_VISIBLE;
     assert_eq!(menu.list_offset(), offset);
     assert_eq!(menu.addon_ui.scroll, 0);
@@ -318,7 +326,7 @@ fn checklist_scrolls_without_moving_other_panels_and_hits_visible_rows() {
     assert_eq!(menu.browser_hit((70.0, LIST_BOTTOM - 1.0)), Some((ADDON.len() - 1, 0)));
     // Help rows cannot select or toggle an offscreen item.
     assert_eq!(menu.browser_hit((70.0, 225.0)), None);
-    menu.mouse_move((70.0, LIST_BOTTOM - 1.0), &mut cv);
+    menu.mouse_move((30.0, LIST_BOTTOM - 1.0), &mut cv);
     let last = &ADDON[ADDON.len() - 1];
     let before = cv.value_of(last.cvar);
     menu.key(K_MOUSE1, &mut cv, true);

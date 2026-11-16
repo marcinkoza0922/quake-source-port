@@ -75,6 +75,10 @@ impl DemoWriter {
         r
     }
 
+    pub fn path(&self) -> &std::path::Path {
+        &self.path
+    }
+
     pub fn finish(mut self) -> std::io::Result<()> {
         self.flush()
     }
@@ -136,3 +140,4 @@ mod tests {
         assert!(demo.next_message().is_none());
     }
 }
+pub mod convert;

@@ -310,6 +310,7 @@ fn cmd_hint(name: &str) -> &'static str {
         "setpos" => "teleport player to x y z [pitch yaw roll]",
         "screenshot" => "save PNG screenshot",
         "record" => "record a demo",
+        "demo_convert" => "rewrite a recorded demo so other source ports can play it",
         "playdemo" => "play back a demo",
         "timedemo" => "benchmark a demo at uncapped framerate",
         "connect" => "connect to a NetQuake or QuakeWorld server",

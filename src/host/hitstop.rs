@@ -80,7 +80,7 @@ impl Host {
     fn hitstop_allowed(&self) -> bool {
         self.local.is_some() && self.guests.is_empty() && self.demo.is_none()
             && self.net_client.is_none() && self.server.core.maxclients() == 1
-            && self.server.active() && self.server.core.addons_on
+            && self.server.active() && self.server.core.custom
             && self.cv("addon_hitstop") != 0.0 && self.cv("deathmatch") == 0.0
     }
 

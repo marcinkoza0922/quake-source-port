@@ -31,7 +31,7 @@ pub(super) const HITSTOP_ADVANCED: &[Item] = &[
     Item::Run { label: "Reset to Defaults", run: Run::ResetHitstop },
 ];
 
-/// Main menu → Add-ons: which toys the running game (or the next new
+/// Customize → Add-ons: which toys the running customized game (or the next new
 /// game) has. Locked while the running game was started without add-ons.
 pub(super) const ADDONS: &[Item] = &[
     toggle("Portal Gun", "addon_portalgun"),

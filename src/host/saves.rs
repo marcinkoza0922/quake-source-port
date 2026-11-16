@@ -72,7 +72,7 @@ impl Host {
     /// Where a save called `name` is written: `.qsa` for a game with
     /// add-ons (no other port can load it), `.sav` otherwise.
     pub(super) fn savegame_path(&self, name: &str) -> PathBuf {
-        self.user_dir().join(format!("{}.{}", save_stem(name), crate::autosave::ext(self.server.core.addons_on)))
+        self.user_dir().join(format!("{}.{}", save_stem(name), crate::autosave::ext(self.server.qsa_saves())))
     }
 
     /// The existing save called `name`, in either format.
@@ -102,7 +102,7 @@ impl Host {
             let text = self.server.save_game();
             // The v5 description is ignored by the loader; preserve the trigger in the save itself.
             let text = qserver::addons::save::set_comment(&text, &format!("AUTOSAVE_{}", reason.replace(' ', "_")));
-            match crate::autosave::rotate(&self.user_dir(), keep, &text, crate::autosave::ext(self.server.core.addons_on)) {
+            match crate::autosave::rotate(&self.user_dir(), keep, &text, crate::autosave::ext(self.server.qsa_saves())) {
                 Ok(()) => {
                     self.print("Autosaved.\n");
                     self.thumb = Some(self.user_dir().join(format!("autosave0.{}", crate::autosave::THUMB_EXT)));
@@ -258,6 +258,10 @@ pub(super) fn register(c: &mut Commands<Host>) {
         }
         if !h.server.active() || h.cl.intermission != 0 || h.cl.stats[STAT_HEALTH] <= 0 {
             h.print("Can't save now.\n");
+            return;
+        }
+        if qserver::modifiers::value(&h.server.core, "modifier_nosaves") != 0.0 {
+            h.print("This game only autosaves (No Manual Saves modifier).\n");
             return;
         }
         let text = h.server.save_game();

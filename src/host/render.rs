@@ -172,7 +172,7 @@ impl Host {
                 &mut self.r, v, &self.debris, fte_frustum.as_ref(), &mut fte,
             );
             // Projectile pellets already draw their own streaks; hitscan ones would stack.
-            let pellets = self.cv("addons_active") != 0.0 && self.cv("addon_projectile_shotguns") != 0.0
+            let pellets = self.cv("custom_active") != 0.0 && self.cv("addon_projectile_shotguns") != 0.0
                 && self.cv("deathmatch") == 0.0;
             let hitscan = false && !pellets; // shotgun tracers disabled (hidden from menus)
             self.tracers.frame(hitscan, &self.cl, &self.debris, v, &mut self.r, &mut fte);

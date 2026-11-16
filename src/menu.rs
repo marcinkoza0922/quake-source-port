@@ -30,7 +30,10 @@ use cards::clean_title;
 use prompt::Prompt;
 mod navigation;
 mod actions;
-mod addons;
+mod customize;
+use customize::{CUSTOMIZE, MODIFIERS, NEW_GAME_CUSTOMIZE};
+#[cfg(test)]
+use customize::SP_CUSTOMIZE_ROW;
 mod addon_settings;
 use addon_settings::{ADDONS, NEW_GAME_ADDONS};
 mod addon_browser;
@@ -79,7 +82,6 @@ pub enum Page {
     Gyro,
     Touch,
     Autosave,
-    Assists,
     AutoAim,
     GrenadeArc,
     HudLayout,
@@ -89,9 +91,15 @@ pub enum Page {
     Blood,
     Impacts,
     ScreenShader,
-    /// Add-ons (reached from the main menu) and its toy pages.
+    /// Main menu → Customize (a customized game is running).
+    Customize,
+    /// New Game with Customize ticked: modifiers, add-ons, Start.
+    NewGameCustomize,
+    /// Gameplay modifiers (reached from either Customize page).
+    Modifiers,
+    /// Add-ons of the running customized game, and its toy pages.
     Addons,
-    /// Add-on picker shown by New Game when Add-ons is ticked.
+    /// Add-on picker for the next new game.
     NewGameAddons,
     PortalGun,
     Boomerang,
@@ -113,7 +121,7 @@ pub enum Page {
 
 /// Every cvar the options pages edit (the host marks them archived).
 pub fn option_cvars() -> impl Iterator<Item = &'static str> {
-    [addon_settings::SHOTGUNS, addon_settings::BULLET_TIME, addon_settings::HITSTOP, addon_settings::HITSTOP_ADVANCED, ADDONS, NEW_GAME_ADDONS, PORTAL_GUN, BOOMERANG, GEL, WASHER, HOOKSHOT, RAILGUN, STICKY, GOGGLES, GAMEPLAY, HUD, CROSSHAIR, HUD_LAYOUT, MESSAGES, ENHANCEMENTS, WATER, BLOOD, DEBRIS, IMPACTS, AUTOSAVE, ASSISTS, AUTOAIM, INPUT, MOUSE, CONTROLLER, GYRO, GRAPHICS, AUDIO, HIT_SOUND, KILL_SOUND, ACCESSIBILITY].into_iter().flatten().filter_map(|i| match *i {
+    [addon_settings::SHOTGUNS, addon_settings::BULLET_TIME, addon_settings::HITSTOP, addon_settings::HITSTOP_ADVANCED, ADDONS, NEW_GAME_ADDONS, PORTAL_GUN, BOOMERANG, GEL, WASHER, HOOKSHOT, RAILGUN, STICKY, GOGGLES, GAMEPLAY, HUD, CROSSHAIR, HUD_LAYOUT, MESSAGES, ENHANCEMENTS, WATER, BLOOD, DEBRIS, IMPACTS, AUTOSAVE, MODIFIERS, AUTOAIM, INPUT, MOUSE, CONTROLLER, GYRO, GRAPHICS, AUDIO, HIT_SOUND, KILL_SOUND, ACCESSIBILITY].into_iter().flatten().filter_map(|i| match *i {
         Item::Slider { cvar, .. } | Item::Toggle { cvar, .. } | Item::Choice { cvar, .. } => Some(cvar),
         _ => None,
     })
@@ -205,9 +213,15 @@ pub struct Menu {
     addon_ui: addon_browser::Browser,
     bind_pending: Option<(i32, &'static str)>,
     addon_capture: Option<&'static str>,
-    /// Prompts show gamepad glyphs (the pad was used last).
-    /// A game is running (set by the host); add-ons are then fixed per game.
+    /// A game is running (set by the host); modifiers and add-ons are then
+    /// fixed per game.
     pub game_running: bool,
+    /// The running game is customized (main menu shows Customize).
+    pub custom_running: bool,
+    /// Editing the Customize pages for the next new game, so per-game rows
+    /// stay editable even while a vanilla game runs.
+    new_game_setup: bool,
+    /// Prompts show gamepad glyphs (the pad was used last).
     pub pad_ui: bool,
     pub glyphs: Glyphs,
     /// On-screen keyboard over a text field (gamepad typing).
@@ -309,6 +323,8 @@ impl Menu {
             bind_pending: None,
             addon_capture: None,
             game_running: false,
+            custom_running: false,
+            new_game_setup: false,
             pad_ui: false,
             glyphs: Glyphs { family: Family::Xbox },
             osk: None,
@@ -374,6 +390,7 @@ impl Menu {
     pub fn open(&mut self, s: Screen) {
         self.prev = self.screen;
         self.screen = s;
+        self.new_game_setup = matches!(s, Screen::OptionsPage(Page::NewGameAddons | Page::NewGameCustomize));
         self.drop = None;
         self.drag = None;
         self.slider_drag = None;
@@ -427,8 +444,8 @@ impl Menu {
         let (cx, cy) = CLASSIC;
         match self.screen {
             Screen::Death => row(140.0, 24.0, 4, 160.0, 480.0),
-            Screen::Main => row(cy + 32.0, 20.0, MAIN_ITEMS, cx + 54.0, cx + 312.0),
-            Screen::SinglePlayer => row(cy + 32.0, 20.0, 4, cx + 54.0, cx + 312.0),
+            Screen::Main => row(cy + 32.0, 20.0, self.main_items(), cx + 54.0, cx + 312.0),
+            Screen::SinglePlayer => row(cy + 32.0, 20.0, customize::SP_ITEMS, cx + 54.0, cx + 312.0),
             Screen::Load | Screen::Save => self.card_at(x, y),
             Screen::Options => row(ROW0, ROW_H, PAGES.len(), PANEL_X, PANEL_X + PANEL_W),
             Screen::OptionsPage(p) => {

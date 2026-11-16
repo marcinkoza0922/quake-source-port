@@ -96,12 +96,15 @@ impl Server {
         let c = &mut self.core;
         let g = c.sv.globals.clone();
         c.serverflags = l.vm.g_f(g.serverflags);
+        // Pistol Start modifier: every level begins with fresh items
+        let pistol = crate::modifiers::value(c, "modifier_pistolstart") != 0.0;
+        let parms_fn = if pistol { g.f_set_new_parms } else { g.f_set_change_parms };
         for i in 0..c.maxclients() {
             if !c.clients[i].active {
                 continue;
             }
             l.vm.set_self(i as u32 + 1);
-            { let fnum = l.vm.g_i(g.f_set_change_parms); exec(&mut l.vm, c, &mut l.world, fnum); }
+            { let fnum = l.vm.g_i(parms_fn); exec(&mut l.vm, c, &mut l.world, fnum); }
             for k in 0..NUM_SPAWN_PARMS {
                 c.clients[i].spawn_parms[k] = l.vm.g_f(g.parm1 + k);
             }

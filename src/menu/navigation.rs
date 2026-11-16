@@ -6,15 +6,21 @@ impl Menu {
     pub(super) fn back_button(&self) -> Option<(f32, f32, f32, f32)> {
         if self.capturing() || self.osk.is_some() { return None; }
         let (x, y) = match self.screen {
-            Screen::SinglePlayer => (CLASSIC.0 + 72.0, CLASSIC.1 + 32.0 + 4.0 * 20.0 + 8.0),
+            Screen::SinglePlayer => (CLASSIC.0 + 72.0, CLASSIC.1 + 32.0 + customize::SP_ITEMS as f32 * 20.0 + 8.0),
             Screen::Multiplayer => (CLASSIC.0 + 72.0, CLASSIC.1 + 32.0 + 3.0 * 20.0 + 8.0),
             Screen::Options => (PANEL_X, ROW0 + PAGES.len() as f32 * ROW_H + 12.0),
             Screen::OptionsPage(Page::Addons) => (20.0, 266.0),
             Screen::OptionsPage(Page::NewGameAddons) => (24.0, 294.0),
             Screen::OptionsPage(p) => {
                 let bottom = PAGE_ROW0 + self.page_vis(p) as f32 * ROW_H;
-                // Leave room for contextual help and the player-colour preview.
-                (PANEL_X, bottom + if p == Page::Setup { 84.0 } else { 30.0 })
+                // Leave room for contextual help, the player-colour preview
+                // and the Customize notes.
+                let gap = match p {
+                    Page::Setup => 84.0,
+                    Page::Customize | Page::NewGameCustomize | Page::Modifiers => 58.0,
+                    _ => 30.0,
+                };
+                (PANEL_X, bottom + gap)
             }
             Screen::Load | Screen::Save => (CARD_X, CARD_BOTTOM + 4.0),
             Screen::Mods | Screen::ModMaps | Screen::ModOnline => self.mods.back_position(),
@@ -43,7 +49,13 @@ impl Menu {
             return;
         }
         let item = self.page_item(page, self.opt_cursor);
-        let reason = if self.item_disabled(item, cv) { disabled_reason(item) } else { None };
+        let reason = if self.game_locked(item, cv) {
+            Some("Fixed for this game: it was started without Customize")
+        } else if self.item_disabled(item, cv) {
+            disabled_reason(item)
+        } else {
+            None
+        };
         let Some(s) = reason.or_else(|| tooltip(item)) else { return };
         let lines = wrap_tooltip_lines(c, s, 588.0, TXT);
         let w = lines.iter().map(|l| c.text_w(l, TXT)).fold(0.0, f32::max);

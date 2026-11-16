@@ -1,6 +1,6 @@
 ---
 name: add-setting
-description: Add or change a user-facing setting in this Quake port — a cvar, its options-menu row (toggle, slider, choice), tooltip, sub-page, master-toggle gating, and the docs — following the project's existing wiring. Use whenever a feature needs an on/off switch or tunable, the user asks for "an option", "a toggle", "a slider", "a menu entry", "a setting", or a new Graphics/Gameplay/Accessibility/HUD/Controller/Assists option, or when a cvar from another engine must be accepted so configs load quietly.
+description: Add or change a user-facing setting in this Quake port — a cvar, its options-menu row (toggle, slider, choice), tooltip, sub-page, master-toggle gating, and the docs — following the project's existing wiring. Use whenever a feature needs an on/off switch or tunable, the user asks for "an option", "a toggle", "a slider", "a menu entry", "a setting", or a new Graphics/Gameplay/Accessibility/HUD/Controller option or a gameplay modifier, or when a cvar from another engine must be accepted so configs load quietly.
 ---
 
 # Adding a setting
@@ -16,9 +16,14 @@ text, a value that isn't saved, or a sub-page that can't be reached.
   `HOST_CVARS` in `src/host/cvars.rs`, next to related ones. Use
   `CVAR_ARCHIVE` when the user's choice should persist in `config.cfg`
   (almost every menu option), and `0` for tuning or debug knobs.
-- **Gameplay rules the server applies** (assists, autosave rules, `sv_*`):
-  register them in the server crate, the way `crates/qserver/src/assists.rs`
-  keeps its own table. That code runs in qbot and dedicated servers, where
+- **Gameplay rules the server applies** (modifiers, autosave rules, `sv_*`):
+  register them in the server crate, the way `crates/qserver/src/modifiers.rs`
+  keeps its own table. Anything that changes the simulation (damage, items,
+  monsters, physics) must be a gameplay modifier: vanilla games stay
+  save/demo compatible with ironwail and vkQuake, so such rules apply only in
+  a customized game (`modifiers::active`, saved in the `.qsa` header by
+  `modifiers::save_text`). Add it to `modifiers::CVARS` and the `MODIFIERS`
+  page in `src/menu/customize.rs`. That code runs in qbot and dedicated servers, where
   there is no host.
 - **Cvars from other engines that we accept but ignore**: add them to
   `COMPAT_CVARS` in `src/host/cvars.rs`, so vkQuake/ironwail/mod configs load
@@ -26,7 +31,7 @@ text, a value that isn't saved, or a sub-page that can't be reached.
   behaviour.
 - Naming: follow the existing prefixes, e.g. `r_` render, `r_debris_*`
   sub-options, `cl_` client, `v_` view, `scr_` screen/HUD, `hud_`, `joy_`
-  gamepad, `in_` input, `a11y_` accessibility, `assist_` gameplay assists,
+  gamepad, `in_` input, `a11y_` accessibility, `assist_` client-side aids (auto-aim, grenade arc), `modifier_` gameplay modifiers,
   `sv_` server, `ui_` menus. New optional effects default to **off**.
   Gameplay-changing options are disabled in deathmatch.
 
@@ -44,7 +49,7 @@ text, a value that isn't saved, or a sub-page that can't be reached.
 
 Add it to the page's `&[Item]` const (`GAMEPLAY`, `HUD`, `INPUT`, `MOUSE`,
 `CONTROLLER`, `GRAPHICS`, `WATER`, `DEBRIS`, `AUDIO`, `ACCESSIBILITY`,
-`ASSISTS`, `AUTOSAVE`, ...):
+`AUTOSAVE`, ...; `MODIFIERS` lives in `customize.rs`):
 
 ```rust
 toggle("Kill Lift", "r_debris_killlift"),

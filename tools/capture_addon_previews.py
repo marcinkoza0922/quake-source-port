@@ -23,7 +23,7 @@ def capture(engine, basedir, addon):
     work = ROOT / "target" / "addon-previews" / addon
     work.mkdir(parents=True, exist_ok=True)
     settings = {
-        "addons_enable": 1, f"addon_{addon}": 1, "skill": 2, "scr_centertime": 0,
+        "custom_enable": 1, f"addon_{addon}": 1, "skill": 2, "scr_centertime": 0,
         "con_notifytime": 0, "scr_showfps": 0, "scr_hudstyle": 1,
         "hud_health": 0, "hud_armor": 0, "hud_ammo": 0, "hud_ammolist": 0,
         "hud_weapons": 0, "hud_items": 0, "hud_face": 0, "crosshair": 1,

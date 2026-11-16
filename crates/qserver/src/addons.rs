@@ -1,4 +1,4 @@
-//! Add-ons: optional engine-side toys (Main menu → Add-ons). They live in
+//! Add-ons: optional engine-side toys (Customize → Add-ons). They live in
 //! the engine, not QuakeC, so they work with any progs. Off by default and
 //! only allowed in single player and local split-screen: never in
 //! deathmatch or with a remote client connected.
@@ -30,11 +30,11 @@ pub mod washer;
 
 /// (name, default, flags) of the add-on cvars.
 pub const CVARS: &[(&str, &str, u32)] = &[
-    // New Game checkbox: start the next new game with add-ons (a game's
-    // add-ons are fixed at its start; see `Core::addons_on`)
-    ("addons_enable", "0", CVAR_ARCHIVE),
-    // read-only mirror of `Core::addons_on` for the menu
-    ("addons_active", "0", CVAR_ROM),
+    // New Game "Customize" checkbox: start the next new game customized
+    // (modifiers and add-ons); fixed at a game's start, see `Core::custom`
+    ("custom_enable", "0", CVAR_ARCHIVE),
+    // read-only mirror of `Core::custom` for the menu
+    ("custom_active", "0", CVAR_ROM),
     ("addon_projectile_shotguns", "0", CVAR_ARCHIVE),
     ("addon_shotgun_speed", "10000", CVAR_ARCHIVE),
     ("addon_dodge", "0", CVAR_ARCHIVE),
@@ -99,7 +99,7 @@ pub const CVARS: &[(&str, &str, u32)] = &[
 
 /// Switches every add-on on (they all default to off); for tests and tools.
 pub fn enable_all(cvars: &mut qcore::cvar::Cvars) {
-    cvars.set("addons_enable", "1");
+    cvars.set("custom_enable", "1");
     for name in Toy::ALL.iter().map(|t| t.cvar()).chain(["addon_projectile_shotguns", "addon_dodge", "addon_bullet_time"]) {
         cvars.set(name, "1");
     }
@@ -203,14 +203,15 @@ pub fn allowed(on: bool, deathmatch: bool, all_local: bool) -> bool {
 
 /// Add-ons may run on this server this frame (cheap when off).
 pub(crate) fn active(c: &Core) -> bool {
-    c.addons_on && c.cvars.value_of("deathmatch") == 0.0 && all_local(&c.clients)
+    c.custom && c.cvars.value_of("deathmatch") == 0.0 && all_local(&c.clients)
 }
 
 impl Core {
-    /// Fixes whether this game has add-ons (at a new game or a load).
-    pub fn set_addons(&mut self, on: bool) {
-        self.addons_on = on;
-        self.cvars.set_value("addons_active", on as u8 as f32);
+    /// Fixes whether this is a customized game (modifiers and add-ons), at
+    /// a new game or a load. It never changes mid-game.
+    pub fn set_custom(&mut self, on: bool) {
+        self.custom = on;
+        self.cvars.set_value("custom_active", on as u8 as f32);
     }
 }
 
@@ -275,20 +276,50 @@ pub(crate) fn frame(l: &mut Level, c: &mut Core) {
 }
 
 impl crate::Server {
-    /// This game was started with add-ons: its saves are `.qsa` files.
-    pub fn addons_on(&self) -> bool {
-        self.core.addons_on
+    /// This is a customized game (modifiers and add-ons): its saves are
+    /// `.qsa` files.
+    pub fn custom(&self) -> bool {
+        self.core.custom
     }
-    /// A v5 savegame body, wrapped in the add-on header when this game has
-    /// add-ons.
+    /// Saves of this game are `.qsa` files: a customized game, or a game
+    /// with several player slots (split-screen, co-op), which other ports
+    /// refuse to save and would load as single player.
+    pub fn qsa_saves(&self) -> bool {
+        self.core.custom || self.core.maxclients() > 1
+    }
+    /// A v5 savegame body, wrapped in the `.qsa` header when
+    /// [`Self::qsa_saves`]: toys, add-on state and modifiers of a customized
+    /// game (`vanilla` otherwise), and the player slots and rules of a
+    /// multiplayer game.
     pub(crate) fn wrap_save(&self, body: String) -> String {
-        if !self.core.addons_on {
+        if !self.qsa_saves() {
             return body;
         }
-        let toys: Vec<Toy> = Toy::enabled(&self.core.cvars).collect();
+        let c = &self.core;
         let l = self.level.as_ref();
-        let extra = l.map(|l| l.stickies.save_text() + &l.gel.save_text()).unwrap_or_default() + &settings::save(&self.core.cvars);
-        save::wrap_with(&toys, l.and_then(|l| l.portals.save_text()).as_deref(), &extra, &body)
+        let mut extra = String::new();
+        let mut toys = Vec::new();
+        let mut portals = None;
+        if c.custom {
+            toys = Toy::enabled(&c.cvars).collect();
+            portals = l.and_then(|l| l.portals.save_text());
+            extra += &l.map(|l| l.stickies.save_text() + &l.gel.save_text()).unwrap_or_default();
+            extra += &settings::save(&c.cvars);
+            extra += &crate::modifiers::save_text(&c.cvars);
+        } else {
+            extra += "vanilla\n";
+        }
+        if c.maxclients() > 1 {
+            let p = save::Players {
+                slots: c.maxclients(),
+                local: (c.cvars.value_of("cl_splitscreen") as usize).max(1),
+                coop: c.cvars.value_of("coop"),
+                deathmatch: c.cvars.value_of("deathmatch"),
+                teamplay: c.cvars.value_of("teamplay"),
+            };
+            extra += &p.line();
+        }
+        save::wrap_with(&toys, portals.as_deref(), &extra, &body)
     }
 }
 

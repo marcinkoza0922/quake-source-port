@@ -52,7 +52,7 @@ pub const VANILLA: &[(&str, &str)] = &[
     ("r_particle_quality", "1"), ("r_impact_fx", "0"), ("r_impact_bullets", "0"), ("r_impact_nails", "0"),
     ("r_shotgun_tracers", "0"), ("r_impact_scorches", "0"),
     ("r_blood", "0"), ("r_blood_quality", "1"), ("r_debris", "0"), ("r_debris_quality", "1"), ("r_shader_preset", ""), ("r_shader_scale", "0"), ("r_colorblind", "0"),
-    ("addons_enable", "0"), ("addon_hitstop", "0"), ("addon_gel_quality", "1"), ("addon_washer_quality", "1"), ("addon_goggles_quality", "1"), ("r_fteparticles", "1"), ("r_particledesc", "classic"), ("r_enhancedparticles", "0"), ("r_part_rain", "1"), ("r_part_rain_quantity", "1"),
+    ("custom_enable", "0"), ("addon_hitstop", "0"), ("addon_gel_quality", "1"), ("addon_washer_quality", "1"), ("addon_goggles_quality", "1"), ("r_fteparticles", "1"), ("r_particledesc", "classic"), ("r_enhancedparticles", "0"), ("r_part_rain", "1"), ("r_part_rain_quantity", "1"),
 ];
 
 const WATER: &[(&str, &str)] = &[
@@ -109,7 +109,7 @@ const ENHANCEMENTS: &[(&str, &str, Cvars)] = &[
 ];
 
 pub(crate) const ADDON_ON: &[(&str, &str)] = &[
-    ("addons_enable", "1"), ("addon_projectile_shotguns", "1"), ("addon_shotgun_speed", "10000"),
+    ("custom_enable", "1"), ("addon_projectile_shotguns", "1"), ("addon_shotgun_speed", "10000"),
     ("addon_dodge", "1"), ("addon_bullet_time", "1"), ("addon_bullet_time_toggle", "0"),
     ("addon_bullet_time_duration", "5"), ("addon_portalgun", "1"), ("addon_sticky", "1"),
     ("addon_boomerang", "1"), ("addon_railgun", "1"), ("addon_hookshot", "1"), ("addon_gel", "1"),

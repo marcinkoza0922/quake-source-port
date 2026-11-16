@@ -23,10 +23,10 @@ fn start(cvars: &[&str]) -> Option<(Server, usize)> {
         sv.command(c);
     }
     // `spawn_server` keeps a game's add-ons; `map` is what arms them
-    if cvars.contains(&"addons_enable 1") {
+    if cvars.contains(&"custom_enable 1") {
         qserver::addons::enable_all(&mut sv.core.cvars);
     }
-    sv.core.set_addons(cvars.contains(&"addons_enable 1"));
+    sv.core.set_custom(cvars.contains(&"custom_enable 1"));
     sv.spawn_server("e1m1").ok()?;
     let c = sv.connect_local()?;
     Some((sv, c))
@@ -66,7 +66,7 @@ fn place_pair(sv: &mut Server, c: usize) {
 
 #[test]
 fn floor_portal_drops_the_player_out_of_the_far_one() {
-    let Some((mut sv, c)) = start(&["addons_enable 1"]) else { return };
+    let Some((mut sv, c)) = start(&["custom_enable 1"]) else { return };
     let before = origin(&sv);
     place_pair(&mut sv, c);
     let pair = sv.level.as_ref().unwrap().portals.pairs[0];
@@ -90,7 +90,7 @@ fn add_ons_off_ignores_the_gun() {
 /// between them, even after drifting sideways into the first one.
 #[test]
 fn idle_player_bobs_in_place_between_floor_portals() {
-    let Some((mut sv, c)) = start(&["addons_enable 1"]) else { return };
+    let Some((mut sv, c)) = start(&["custom_enable 1"]) else { return };
     run(&mut sv, c, 30, ClientMove::default());
     sv.command("setpos 480 600 24");
     run(&mut sv, c, 10, ClientMove::default());
@@ -138,7 +138,7 @@ fn grab_monster(sv: &mut Server, at: [f32; 3], onground: bool) -> u32 {
 /// portal under it, and it drops through.
 #[test]
 fn floor_shot_at_a_monsters_feet_drops_it() {
-    let Some((mut sv, c)) = start(&["addons_enable 1"]) else { return };
+    let Some((mut sv, c)) = start(&["custom_enable 1"]) else { return };
     run(&mut sv, c, 30, ClientMove::default());
     sv.command("setpos 480 200 24");
     run(&mut sv, c, 10, ClientMove::default());
@@ -163,7 +163,7 @@ fn floor_shot_at_a_monsters_feet_drops_it() {
 /// landing; with add-ons off it does not.
 #[test]
 fn monsters_take_fall_damage_with_the_portal_gun() {
-    for (cv, hurt) in [("addons_enable 1", true), ("addons_enable 0", false)] {
+    for (cv, hurt) in [("custom_enable 1", true), ("custom_enable 0", false)] {
         let Some((mut sv, c)) = start(&[cv]) else { return };
         run(&mut sv, c, 30, ClientMove::default());
         // as if flung out of a floor portal at it, just above the floor
@@ -178,7 +178,7 @@ fn monsters_take_fall_damage_with_the_portal_gun() {
 
 #[test]
 fn confirmed_and_rejected_shots_send_transient_feedback() {
-    let Some((mut sv, c)) = start(&["addons_enable 1"]) else { return };
+    let Some((mut sv, c)) = start(&["custom_enable 1"]) else { return };
     run(&mut sv,c,30,ClientMove::default());
     sv.command("setpos 480 200 24");
     run(&mut sv,c,10,ClientMove::default());
@@ -203,7 +203,7 @@ fn confirmed_and_rejected_shots_send_transient_feedback() {
 /// back, and loading an ordinary save turns add-ons off again.
 #[test]
 fn addon_saves_carry_toys_and_portals_and_plain_saves_clear_them() {
-    let Some((mut sv, c)) = start(&["addons_enable 1"]) else { return };
+    let Some((mut sv, c)) = start(&["custom_enable 1"]) else { return };
     place_pair(&mut sv, c);
     let portals = sv.level.as_ref().unwrap().portals.save_text().expect("portals placed");
     sv.core.cvars.set("addon_portalgun", "1");
@@ -213,27 +213,27 @@ fn addon_saves_carry_toys_and_portals_and_plain_saves_clear_them() {
 
     // another game without add-ons: loading the addon save restores everything
     let (mut other, _) = start(&[]).unwrap();
-    assert!(!other.addons_on());
+    assert!(!other.custom());
     let plain = other.save_game();
     assert!(plain.starts_with("5\n"));
     other.core.cvars.set("addon_portalgun", "0");
     other.load_game(&text).unwrap();
-    assert!(other.addons_on());
-    assert_eq!(other.core.cvars.value_of("addons_active"), 1.0);
+    assert!(other.custom());
+    assert_eq!(other.core.cvars.value_of("custom_active"), 1.0);
     assert_eq!(other.core.cvars.value_of("addon_portalgun"), 1.0);
     assert_eq!(other.level.as_ref().unwrap().portals.save_text().as_deref(), Some(portals.as_str()));
 
     // and an ordinary save puts it back to a game without add-ons
     other.load_game(&plain).unwrap();
-    assert!(!other.addons_on());
-    assert_eq!(other.core.cvars.value_of("addons_active"), 0.0);
+    assert!(!other.custom());
+    assert_eq!(other.core.cvars.value_of("custom_active"), 0.0);
     assert!(other.level.as_ref().unwrap().portals.save_text().is_none());
     assert!(other.load_game("QSPADDONS 7 0\n5\n").is_err());
 }
 
 #[test]
 fn hitscan_shotgun_shoots_through_portal() {
-    let Some((mut sv, c)) = start(&["addons_enable 1"]) else { return };
+    let Some((mut sv, c)) = start(&["custom_enable 1"]) else { return };
     sv.core.cvars.set("addon_projectile_shotguns", "0");
     run(&mut sv, c, 20, ClientMove::default());
     sv.command("portal_set 0 480 330 48 0 -1 0 0 0 1");
@@ -250,7 +250,7 @@ fn hitscan_shotgun_shoots_through_portal() {
 
 #[test]
 fn rocket_projectile_flies_through_portal() {
-    let Some((mut sv, c)) = start(&["addons_enable 1"]) else { return };
+    let Some((mut sv, c)) = start(&["custom_enable 1"]) else { return };
     place_pair(&mut sv, c);
     let far = sv.level.as_ref().unwrap().portals.pairs[0][1].expect("far wall portal placed");
     // Move slightly south of the floor portal, aim down at it, and fire a rocket.
@@ -275,7 +275,7 @@ fn rocket_projectile_flies_through_portal() {
 
 #[test]
 fn enemy_projectile_flies_through_portal() {
-    let Some((mut sv, c)) = start(&["addons_enable 1"]) else { return };
+    let Some((mut sv, c)) = start(&["custom_enable 1"]) else { return };
     place_pair(&mut sv, c);
     sv.command("setpos 480 100 24");
     run(&mut sv, c, 2, ClientMove::default());
@@ -306,7 +306,7 @@ fn enemy_projectile_flies_through_portal() {
 
 #[test]
 fn gel_sprays_through_portal() {
-    let Some((mut sv, c)) = start(&["addons_enable 1"]) else { return };
+    let Some((mut sv, c)) = start(&["custom_enable 1"]) else { return };
     place_pair(&mut sv, c);
     let far = sv.level.as_ref().unwrap().portals.pairs[0][1].expect("far wall portal placed");
     sv.command("setpos 480 200 60");

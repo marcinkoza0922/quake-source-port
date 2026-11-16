@@ -30,6 +30,15 @@ impl Menu {
                 out.push(Action::Sound("misc/menu3.wav"));
                 return;
             }
+            Run::ResetModifiers => {
+                if !self.toys_locked(cv) {
+                    for &(name, default, _) in qserver::modifiers::CVARS {
+                        cv.set(name, default);
+                    }
+                }
+                out.push(Action::Sound("misc/menu3.wav"));
+                return;
+            }
             Run::ResetHitstop => {
                 for &(name, default, _) in qserver::addons::CVARS {
                     if name.starts_with("addon_hitstop_") { cv.set(name, default); }

@@ -10,7 +10,7 @@
 //!   commands.
 
 pub mod addons;
-pub mod assists;
+pub mod modifiers;
 mod client;
 mod commands;
 pub mod delta;

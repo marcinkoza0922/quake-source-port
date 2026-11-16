@@ -17,8 +17,11 @@ pub struct SaveInfo {
     pub kills: (i32, i32),
     pub secrets: (i32, i32),
     pub reason: Option<String>,
-    /// Add-ons the save was made with (None: an ordinary save).
+    /// Add-ons of a customized game's `.qsa` save (None: not customized).
     pub addons: Option<Vec<qserver::addons::Toy>>,
+    /// Local split-screen players and player slots (maxplayers) of a
+    /// multiplayer `.qsa` save; (1, 1) otherwise.
+    pub players: (usize, usize),
     pub player: std::collections::HashMap<String, String>,
 }
 
@@ -65,7 +68,8 @@ impl SaveInfo {
             kills: (value(&globals, "killed_monsters"), value(&globals, "total_monsters")),
             secrets: (value(&globals, "found_secrets"), value(&globals, "total_secrets")),
             player: player.iter().map(|(k,v)| (k.to_string(),v.to_string())).collect(),
-            addons: addons.map(|h| h.toys),
+            players: addons.as_ref().and_then(|h| h.players).map_or((1, 1), |p| (p.local.max(1), p.slots.max(1))),
+            addons: addons.filter(|h| !h.vanilla).map(|h| h.toys),
             reason: comment.strip_prefix("AUTOSAVE_").map(|s| s.replace('_', " ")),
         })
     }

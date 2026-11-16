@@ -147,6 +147,24 @@ impl Server {
         for i in 0..self.core.maxclients() {
             self.drop_client(i, true);
         }
+        // a split-screen / co-op save brings back its player slots and rules;
+        // the host rejoins the local players from `cl_splitscreen`
+        let players = addons.as_ref().and_then(|h| h.players);
+        let slots = players.map_or(1, |p| p.slots);
+        if slots != self.core.maxclients() {
+            self.set_maxclients(slots);
+        }
+        let cv = &mut self.core.cvars;
+        if let Some(p) = players {
+            cv.set_value("coop", p.coop);
+            cv.set_value("deathmatch", p.deathmatch);
+            cv.set_value("teamplay", p.teamplay);
+            cv.set_value("cl_splitscreen", p.local.clamp(1, slots) as f32);
+        } else {
+            // other saves are single player
+            cv.set_value("coop", 0.0);
+            cv.set_value("deathmatch", 0.0);
+        }
         self.core.cvars.set_value("skill", skill.floor().clamp(0.0, 3.0));
         self.spawn_server(&mapname)?;
         let Some(l) = &mut self.level else { return Err("no level".into()) };
@@ -185,13 +203,14 @@ impl Server {
             }
         }
         c.clients[0].spawn_parms = parms;
-        // a game's add-ons come from its save: none for a plain .sav
-        c.set_addons(addons.is_some());
-        if let Some(h) = addons {
+        // a game's customization comes from its save: none for a plain .sav
+        c.set_custom(addons.as_ref().is_some_and(|h| !h.vanilla));
+        if let Some(h) = addons.filter(|h| !h.vanilla) {
             for t in crate::addons::Toy::ALL {
                 c.cvars.set(t.cvar(), if h.toys.contains(&t) { "1" } else { "0" });
             }
             crate::addons::settings::load(&mut c.cvars, &h.extra);
+            crate::modifiers::load_text(&mut c.cvars, &h.extra);
             l.portals.load_text(&h.portals);
             l.portals.sync_links(&mut c.linked_portals);
             l.stickies.load_text(&h.extra);
