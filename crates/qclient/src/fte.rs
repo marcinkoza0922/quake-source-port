@@ -15,6 +15,8 @@ pub enum FteRequest {
     /// PScript_EntParticleTrail: `entity` keys the trail state and dlight.
     /// `interval` overrides the frame time (trailparticles uses 1).
     Trail { name: String, start: [f32; 3], end: [f32; 3], entity: i32, interval: Option<f32> },
+    /// svc_particle through `pe_<color>` / PE_* (PScript_RunParticleEffect).
+    Classic { org: [f32; 3], dir: [f32; 3], color: i32, count: i32 },
     /// te_particlerain / te_particlesnow (PScript_RunParticleWeather).
     Weather { min: [f32; 3], max: [f32; 3], dir: [f32; 3], count: f32, colour: i32, snow: bool },
 }
@@ -56,6 +58,20 @@ impl ClientState {
             return false;
         }
         self.fte_queue.push(FteRequest::Effect { name: name.to_string(), org, dir: None, count });
+        true
+    }
+
+    /// svc_particle: queued when a `pe_*` effect is scripted (the 1024
+    /// count explosion uses TE_EXPLOSION); false means "use the classic effect".
+    pub(crate) fn fte_particle(&mut self, org: [f32; 3], dir: [f32; 3], color: i32, count: i32) -> bool {
+        if count == 1024 {
+            return self.fte_effect("TE_EXPLOSION", org, 1.0);
+        }
+        let n = &self.fte_names;
+        if !(n.has(&format!("pe_{color}")) || n.has("pe_default") || n.has("pe_size2") || n.has("pe_size3")) {
+            return false;
+        }
+        self.fte_queue.push(FteRequest::Classic { org, dir, color, count });
         true
     }
 

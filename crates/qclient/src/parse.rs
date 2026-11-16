@@ -128,7 +128,9 @@ impl ClientState {
                     if color == 73 {
                         self.blood_hits.push(org);
                     }
-                    self.run_particle_effect(org, dir, color, count);
+                    if !self.fte_particle(org, dir, color, count) {
+                        self.run_particle_effect(org, dir, color, count);
+                    }
                 }
                 SVC_SPAWNBASELINE | SVC_SPAWNBASELINE2 => {
                     let i = m.short();

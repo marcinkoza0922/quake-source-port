@@ -122,9 +122,19 @@ impl World for BspWorld<'_> {
     }
 }
 
-/// Files from the game filesystem as a `qpart::FileSource`.
+/// The built-in Enhanced Particles set (`r_enhancedparticles`).
+pub const ENHANCED_SET: &str = "qsp_enhanced";
+const ENHANCED_CFG: &str = include_str!("../assets/particles/qsp_enhanced.cfg");
+
+/// Files from the game filesystem as a `qpart::FileSource`; the built-in
+/// set is served from the binary so game data can't shadow it.
 fn files(fs: &qcore::fs::Fs) -> impl FnMut(&str) -> Option<Vec<u8>> + '_ {
-    |p: &str| fs.open(p)
+    |p: &str| {
+        if p.eq_ignore_ascii_case("particles/qsp_enhanced.cfg") {
+            return Some(ENHANCED_CFG.as_bytes().to_vec());
+        }
+        fs.open(p)
+    }
 }
 
 fn to_blend(b: qpart::BlendMode) -> FteBlend {
@@ -156,8 +166,9 @@ pub struct Fte {
     trails: HashMap<i32, Option<TrailHandle>>,
     /// Map name used to detect level changes and reset cached trail/sky state.
     cm_map: String,
-    /// r_particledesc and map the effects were loaded for.
-    loaded_for: Option<(String, String, String)>,
+    /// r_particledesc, map, render options and Enhanced Particles the
+    /// effects were loaded for.
+    loaded_for: Option<(String, String, String, bool)>,
     palette: Option<Vec<u8>>,
     /// Client requests processed (r_partinfo).
     requests: u64,
@@ -200,13 +211,15 @@ impl Fte {
         self.geometry = geometry;
     }
 
-    /// Reloads effects when `r_particledesc` or the map changed, then
-    /// republishes the scripted effect names to the client.
+    /// Reloads effects when `r_particledesc`, the map or `enhanced` changed,
+    /// then republishes the scripted effect names to the client. The
+    /// built-in set loads last, so mod and map effects of the same name win.
     #[allow(clippy::too_many_arguments)]
     pub fn sync(
         &mut self,
         desc: &str,
         map: &str,
+        enhanced: bool,
         opts: qpart::RenderOptions,
         settings: qpart::Settings,
         fs: &qcore::fs::Fs,
@@ -218,7 +231,7 @@ impl Fte {
             || settings.max_decals != self.sys.settings.max_decals;
         self.sys.settings = settings;
         // FinishParticleType applies the spark/beam cvars, so they reload.
-        let key = (desc.to_string(), map.to_string(), format!("{opts:?}"));
+        let key = (desc.to_string(), map.to_string(), format!("{opts:?}"), enhanced);
         if self.loaded_for.as_ref() == Some(&key) && !resize {
             return;
         }
@@ -231,6 +244,9 @@ impl Fte {
         }
         let mut f = files(fs);
         self.reg.set_desc(desc, (!map.is_empty()).then_some(map), &mut f);
+        if enhanced {
+            self.reg.load_set(ENHANCED_SET, false, true, &mut f);
+        }
         self.sys.clear(cl.time);
         self.trails.clear();
         self.sys.refresh_pe(&mut self.reg, &mut f);
@@ -326,6 +342,9 @@ impl Fte {
                         let dt = interval.unwrap_or(ft);
                         self.sys.trail(&self.reg, &world, start.into(), end.into(), t, dt, entity, Some(slot));
                     }
+                }
+                FteRequest::Classic { org, dir, color, count } => {
+                    self.sys.run_classic_effect(&mut self.reg, &mut f, &world, org.into(), dir.into(), color, count);
                 }
                 FteRequest::Weather { min, max, dir, count, colour, snow } => {
                     let name = if snow { "snow" } else { "rain" };

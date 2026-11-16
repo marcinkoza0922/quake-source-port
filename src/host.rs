@@ -425,8 +425,10 @@ impl Host {
 
     /// Loads FTE effects for `r_particledesc` and the current map
     /// (R_ParticleDesc_Callback); `r_fteparticles 0` turns them off.
+    /// `r_enhancedparticles` adds the built-in set either way.
     fn sync_fte(&mut self) {
         let desc = if self.cv("r_fteparticles") != 0.0 { self.cvs("r_particledesc").to_string() } else { String::new() };
+        let enhanced = self.cv("r_enhancedparticles") != 0.0;
         let map = self.level.mapname.clone();
         let opts = qpart::RenderOptions {
             sparks: self.cv("r_part_sparks"),
@@ -435,7 +437,7 @@ impl Host {
             beams: self.cv("r_part_beams"),
         };
         let settings = qpart::Settings {
-            density: self.cv("r_part_density"),
+            density: self.cv("r_part_density") * render::particle_density(self.cv("r_particle_quality")),
             contentswitch: self.cv("r_part_contentswitch") != 0.0,
             bouncysparks: self.cv("r_bouncysparks") != 0.0,
             trace_limit: self.cv("r_particle_tracelimit").max(0.0) as u32,
@@ -447,7 +449,7 @@ impl Host {
             max_decals: self.cv("r_part_maxdecals").max(1.0) as usize,
         };
         let con = &mut self.con;
-        self.fte.sync(&desc, &map, opts, settings, &self.server.core.fs, &mut self.cl, &mut |s| con.print(s));
+        self.fte.sync(&desc, &map, enhanced, opts, settings, &self.server.core.fs, &mut self.cl, &mut |s| con.print(s));
     }
 
 }

@@ -309,7 +309,6 @@ pub(super) const SSAO: &[(&str, f32)] = &[("off", 0.0), ("low", 1.0), ("medium",
 pub(super) const PORTAL_QUALITY: &[(&str, f32)] = &[("low", 0.0), ("medium", 1.0), ("high", 2.0)];
 pub(super) const WATER_QUALITY: &[(&str, f32)] = &[("low", 0.0), ("high", 1.0)];
 pub(super) const MOTIONBLUR_QUALITY: &[(&str, f32)] = &[("low", 0.0), ("high", 1.0)];
-pub(super) const SOFT_PARTICLES: &[(&str, f32)] = &[("off", 0.0), ("low", 1.0), ("high", 2.0)];
 pub(super) const MODES: [&str; 3] = ["windowed", "fullscreen", "borderless"];
 
 pub(super) const WATERWARP: &[(&str, f32)] = &[("off", 0.0), ("Classic", 1.0), ("GLQuake", 2.0)];
@@ -348,7 +347,8 @@ pub(super) const ENHANCEMENTS: &[Item] = &[
     slider("Motion Blur Amount", "r_motionblur_amount", 0.1, 2.0, 0.1),
     toggle("Speed Blur", "r_speedblur"),
     Item::Sub { label: "Screen Shader", page: Page::ScreenShader },
-    Item::Choice { label: "Soft Particles", cvar: "r_softparticles", choices: SOFT_PARTICLES },
+    toggle("Enhanced Particles", "r_enhancedparticles"),
+    Item::Choice { label: "Particle Quality", cvar: "r_particle_quality", choices: DEBRIS_QUALITY },
     toggle("Enhanced Water", "r_enhancedwater"),
     Item::Sub { label: "Water Settings", page: Page::Water },
     toggle("See-through Teleporters", "r_teleportwindows"),
@@ -364,7 +364,6 @@ pub(super) const IMPACT_FX: &[(&str, f32)] =
     &[("off", 0.0), ("subtle", 1.0), ("normal", 2.0), ("intense", 3.0), ("spectacle", 4.0)];
 
 pub(super) const IMPACTS: &[Item] = &[
-    Item::Choice { label: "Impact Quality", cvar: "r_impact_quality", choices: DEBRIS_QUALITY },
     Item::Choice { label: "Surface Hit Effects", cvar: "r_impact_fx", choices: IMPACT_FX },
     toggle("Shotgun Bullet Decals", "r_impact_bullets"),
     toggle("Physical Nail Impacts", "r_impact_nails"),
