@@ -127,6 +127,41 @@ vec2 water_grad(vec3 p, float t, float swell, float rings) {
     return g + gr * rings;
 }
 
+// Lava ripples: thick, viscous molten rock instead of water. Each event is a
+// single slow, broad, non-oscillating swell rolling outward (no ring train),
+// and the disturbance breaks the crust: the centre flares hot and the swell
+// glows as it passes. Returns (dh/dx, dh/dy, heat).
+vec3 lava_rings(vec3 p, float t, float rings) {
+    int n = rings > 0.0 ? int(fr.water.z) : 0;
+    vec2 g = vec2(0.0);
+    float heat = 0.0;
+    for (int i = 0; i < n; i++) {
+        vec4 r = fr.ripples[i];
+        float age = t - r.w;
+        if (age < 0.0 || age > 2.5 || abs(p.z - r.z) > 24.0) continue;
+        vec2 d = p.xy - r.xy;
+        // slows as it spreads: ~40 u/s at first, ~60 units total
+        float front = 60.0 * (1.0 - exp(-age * 0.9));
+        float sig = 8.0 + age * 5.0;
+        float max_r = front + 3.0 * sig;
+        if (abs(d.x) > max_r || abs(d.y) > max_r) continue;
+        float d2 = dot(d, d);
+        if (d2 > max_r * max_r) continue;
+        float dist = sqrt(d2);
+        float x = dist - front;
+        float env = exp(-x * x / (2.0 * sig * sig));
+        float fade = 1.0 - age / 2.5;
+        float amp = fr.ripple_amp[i >> 2][i & 3] * fade * fade;
+        // h = 3 * amp * env: one smooth ridge, slope along the radius
+        float dh = -3.0 * amp * env * x / (sig * sig);
+        g += dh * d / max(dist, 1e-3);
+        // molten core exposed at the impact, cooling quickly, plus the ridge
+        float core = exp(-d2 / (2.0 * 12.0 * 12.0)) * exp(-age * 1.8);
+        heat += amp * (0.35 * env + 0.6 * core);
+    }
+    return vec3(g * rings, min(heat * rings, 1.5));
+}
+
 // Distance fade for water ripples and caustics by quality tier (0 low, 1 high).
 float water_dist_fade(vec3 wpos, int qual) {
     float fade_d = qual == 0 ? 640.0 : 1024.0;

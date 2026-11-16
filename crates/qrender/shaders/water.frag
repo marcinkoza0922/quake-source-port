@@ -32,6 +32,7 @@ void main() {
     }
     vec2 st = i_st;
     float shade = 1.0;
+    float heat = 0.0; // lava only: disturbed crust glows hotter
     // r_waterripples: the height field bends the classic warp lookup and
     // shades the slopes; teleporters and non-horizontal sheets stay classic
     if (fr.water.x > 0.0 && kind >= 1u && kind <= 3u) {
@@ -41,17 +42,31 @@ void main() {
             vec3 n = cross(dFdx(i_wpos), dFdy(i_wpos));
             float horiz = abs(n.z) * inversesqrt(max(dot(n, n), 1e-12));
             if (horiz > 0.7) {
-                float swell = kind == 2u ? 0.5 : 1.0; // lava is thick
                 float k = fr.water.x * dist_fade;
-                vec2 g = water_grad(i_wpos, t, swell * 0.5 * min(k, 1.5), 2.5 * k);
-                st += g * 5.0;
-                float slope = dot(g, vec2(0.6, 0.45));
-                shade = 1.0 + clamp(slope, -0.6, 0.6) * 1.4 + smoothstep(0.25, 0.7, length(g)) * 0.2;
+                if (kind == 2u) {
+                    // lava is thick: a slow heave, viscous swells that glow
+                    vec2 g = water_grad(i_wpos, t * 0.3, 0.2 * min(k, 1.5), 0.0);
+                    vec3 l = lava_rings(i_wpos, t, k);
+                    g += l.xy;
+                    st += g * 3.0;
+                    shade = 1.0 + clamp(dot(g, vec2(0.6, 0.45)), -0.5, 0.5) * 0.8;
+                    heat = l.z;
+                } else {
+                    vec2 g = water_grad(i_wpos, t, 0.5 * min(k, 1.5), 2.5 * k);
+                    st += g * 5.0;
+                    float slope = dot(g, vec2(0.6, 0.45));
+                    shade = 1.0 + clamp(slope, -0.6, 0.6) * 1.4 + smoothstep(0.25, 0.7, length(g)) * 0.2;
+                }
             }
         }
     }
     st += 8.0 * sin(st.yx * 0.125 + t);
     vec4 c = tex(m.x, st / 64.0);
+    if (heat > 0.0) {
+        // toward yellow-white where the crust is broken
+        vec3 hot = c.rgb * 1.5 + vec3(0.35, 0.18, 0.02);
+        c.rgb = mix(c.rgb, hot, clamp(heat, 0.0, 1.0));
+    }
     float a = kind >= 1u && kind <= 4u ? fr.alphas[kind - 1u] : 1.0;
     if (thermal()) {
         float h = kind == 2u ? 0.88 + 0.12 * luma(c.rgb) : cold_heat(c.rgb) * 0.7;
