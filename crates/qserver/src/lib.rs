@@ -27,4 +27,4 @@ mod server;
 mod vis;
 
 pub use client::{Client, ClientMove, Signon};
-pub use server::{Core, Level, LevelStats, ModelInfo, Server, Sv, EdictExt, Baseline, Thrown, ThrownEnt};
+pub use server::{BoxModel, EdictBox, Core, Level, LevelStats, ModelInfo, Server, Sv, EdictExt, Baseline, Thrown, ThrownEnt};

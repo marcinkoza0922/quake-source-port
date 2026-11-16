@@ -8,6 +8,7 @@ pub mod bspx;
 pub mod entities;
 pub mod image;
 pub mod md3;
+pub mod md5;
 pub mod mdl;
 pub mod spr;
 pub mod wad;

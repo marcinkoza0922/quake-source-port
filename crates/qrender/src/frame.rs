@@ -649,7 +649,7 @@ impl Renderer {
                     .iter()
                     .filter_map(|b| {
                         let slot = self.pics.get(b.pic.0 as usize)?.slot;
-                        Some((crate::pipelines::fte_index(b.blend, b.lines), slot, *b, if b.gel { gel_mode } else { b.blend as u32 as f32 }))
+                        Some((crate::pipelines::fte_index(b.blend, b.lines), slot, *b, if b.gel { gel_mode } else { b.blend.shader_mode() }))
                     })
                     .collect();
                 // portal views: the same particles (unless gated by portal quality) and

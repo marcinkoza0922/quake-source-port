@@ -136,13 +136,15 @@ impl Pipelines {
                 ..d(vs, fs, bindings, attrs, blend, dt, dw)
             };
             let sg = |desc: Desc| graphics(gpu, layout, &desc);
-            let mut fte = [vk::Pipeline::null(); 16];
+            let mut fte = [vk::Pipeline::null(); 17];
             for (i, slot) in fte.iter_mut().enumerate() {
-                let (src, dst) = fte_factors(crate::FteBlend::ALL[i % 8]);
+                let overlay = i == 16;
+                let b = if overlay { crate::FteBlend::Overlay } else { crate::FteBlend::ALL[i % 8] };
+                let (src, dst) = fte_factors(b);
                 *slot = sg(Desc {
                     sample_shading: pipe_ss && fte_supersample,
                     topology: if i >= 8 { vk::PrimitiveTopology::LINE_LIST } else { vk::PrimitiveTopology::TRIANGLE_LIST },
-                    ..sd(fte_vs, fte_fs, &fb, &fa, Blend::Factors(src, dst), true, false)
+                    ..sd(fte_vs, fte_fs, &fb, &fa, Blend::Factors(src, dst), !overlay, false)
                 })?;
             }
             Ok(ScenePipes {

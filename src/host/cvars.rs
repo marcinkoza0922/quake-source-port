@@ -120,6 +120,16 @@ pub(super) const HOST_CVARS: &[(&str, &str, u32)] = &[
     ("_mp_timelimit", "0", CVAR_ARCHIVE),
     ("_mp_map", "", CVAR_ARCHIVE),
     ("scr_showfps", "0", CVAR_ARCHIVE),
+    // Horizontal speed under the crosshair; _ofs moves it down (ironwail).
+    ("scr_showspeed", "0", CVAR_ARCHIVE),
+    ("scr_showspeed_ofs", "0", CVAR_ARCHIVE),
+    // Mapper aid: server bounding boxes (see src/bboxes.rs).
+    ("r_showbboxes", "0", 0),
+    ("r_showbboxes_think", "0", 0),
+    ("r_showbboxes_health", "0", 0),
+    ("r_showbboxes_links", "3", 0),
+    ("r_showbboxes_targets", "1", 0),
+    ("r_showbboxes_filter", "", 0),
     ("cl_startdemos", "1", CVAR_ARCHIVE),
     ("cl_nopred", "0", 0),
     ("viewsize", "100", CVAR_ARCHIVE),

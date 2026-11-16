@@ -229,9 +229,17 @@ pub enum FteBlend {
     InvModC,
     /// ONE, ONE_MINUS_SRC_ALPHA
     Premul,
+    /// Alpha-blended line list drawn without depth testing (debug overlays
+    /// such as `r_showbboxes`); `lines` is implied.
+    Overlay,
 }
 
 impl FteBlend {
+    /// fte.frag blend mode (`fogmix.w`); Overlay shades like Blend, since
+    /// mode 8 is the gun portal.
+    pub fn shader_mode(self) -> f32 {
+        if self == FteBlend::Overlay { 0.0 } else { self as u32 as f32 }
+    }
     pub const ALL: [FteBlend; 8] = [
         FteBlend::Blend,
         FteBlend::BlendColour,

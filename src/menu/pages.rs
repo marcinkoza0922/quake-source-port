@@ -334,6 +334,7 @@ pub(super) const GRAPHICS: &[Item] = &[
     Item::Choice { label: "Particles", cvar: "r_particles", choices: PARTICLES },
     toggle("Dynamic Lights", "r_dynamic"),
     toggle("Colored Lighting", "r_coloredlight"),
+    toggle("Enhanced Models", "r_enhancedmodels"),
     toggle("Fog", "r_fog"),
     slider("Sky Fog", "r_skyfog", 0.0, 1.0, 0.1),
     toggle("Interpolate Animation", "r_lerpmodels"),
