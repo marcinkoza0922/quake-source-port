@@ -50,6 +50,9 @@ qui = { path = "crates/qui" }
 miniz_oxide = "0.8"
 ab_glyph = "0.2"
 
+[features]
+bundled-sdl = ["qplatform/bundled-sdl"]
+
 [profile.release]
 lto = "thin"
 codegen-units = 1

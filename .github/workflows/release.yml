@@ -1,0 +1,103 @@
+# Release builds. Push a tag like v0.1.0 (or run the workflow by hand) to build every
+# desktop target and attach the archives to a GitHub release.
+# Only Linux x64 has been tested by hand; the other targets are built but untested.
+name: release
+
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  CARGO_TERM_COLOR: never
+
+jobs:
+  shaders:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - run: sudo apt-get update && sudo apt-get install -y glslc
+      - name: Compile shaders to SPIR-V (platform independent)
+        run: |
+          mkdir spv
+          for f in crates/qrender/shaders/*.vert crates/qrender/shaders/*.frag crates/qrender/shaders/*.comp; do
+            [ -f "$f" ] && glslc --target-env=vulkan1.3 -O -Werror "$f" -o "spv/$(basename "$f").spv"
+          done
+          ls spv
+      - uses: actions/upload-artifact@v4
+        with: { name: spirv, path: spv }
+
+  build:
+    needs: shaders
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { name: linux-x64, os: ubuntu-24.04, ext: tar.gz }
+          - { name: linux-arm64, os: ubuntu-24.04-arm, ext: tar.gz }
+          - { name: windows-x64, os: windows-latest, ext: zip }
+          - { name: windows-arm64, os: windows-11-arm, ext: zip }
+          - { name: macos-arm64, os: macos-latest, ext: tar.gz }
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with: { name: spirv, path: spv }
+      - name: Rust toolchain
+        shell: bash
+        run: rustup toolchain install stable --profile minimal && rustup default stable
+      - name: Linux packages
+        if: startsWith(matrix.name, 'linux')
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y cmake ninja-build pkg-config libx11-dev libxext-dev libxcursor-dev \
+            libxi-dev libxfixes-dev libxrandr-dev libxss-dev libxtst-dev libxkbcommon-dev \
+            libwayland-dev wayland-protocols libdecor-0-dev libasound2-dev libpulse-dev libudev-dev \
+            libdbus-1-dev libdrm-dev libgbm-dev libgl-dev libegl-dev libibus-1.0-dev libsndio-dev
+      - name: macOS packages
+        if: startsWith(matrix.name, 'macos')
+        run: brew install cmake ninja molten-vk
+      - uses: Swatinem/rust-cache@v2
+        with: { key: "${{ matrix.name }}" }
+      - name: Build
+        shell: bash
+        run: |
+          export QSP_SPIRV_DIR="$GITHUB_WORKSPACE/spv"
+          cargo build --release --locked --features bundled-sdl
+      - name: Package
+        shell: bash
+        run: |
+          d="quake-source-port-${{ github.ref_name }}-${{ matrix.name }}"
+          mkdir "$d"
+          if [ "${{ runner.os }}" = Windows ]; then
+            cp target/release/quake-source-port.exe "$d/"
+          else
+            cp target/release/quake-source-port "$d/"
+          fi
+          if [ "${{ runner.os }}" = macOS ]; then
+            cp "$(brew --prefix molten-vk)/lib/libMoltenVK.dylib" "$d/"
+            install_name_tool -add_rpath @executable_path "$d/quake-source-port"
+          fi
+          cp README.md LICENSE "$d/"
+          mkdir "$d/docs" && cp docs/MANUAL.md "$d/docs/"
+          if [ "${{ matrix.ext }}" = zip ]; then 7z a "$d.zip" "$d" >/dev/null; else tar czf "$d.tar.gz" "$d"; fi
+          echo "ASSET=$d.${{ matrix.ext }}" >> "$GITHUB_ENV"
+      - uses: actions/upload-artifact@v4
+        with: { name: "${{ matrix.name }}", path: "${{ env.ASSET }}" }
+
+  release:
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: build
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/download-artifact@v4
+        with: { path: dist, pattern: "{linux,windows,macos,android}-*", merge-multiple: true }
+      - name: Publish
+        env: { GH_TOKEN: "${{ github.token }}" }
+        run: |
+          gh release create "${{ github.ref_name }}" dist/* --repo "${{ github.repository }}" \
+            --title "${{ github.ref_name }}" --prerelease \
+            --notes "Release builds. **Only Linux x64 has been tested so far**; every other build is untested. You need your own Quake game data. See the README."

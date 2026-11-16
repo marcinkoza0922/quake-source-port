@@ -7,5 +7,10 @@ license.workspace = true
 [lints]
 workspace = true
 
+[features]
+# Build SDL3 from source and link it statically instead of using the system
+# library (release builds for Windows, macOS, Android and portable Linux).
+bundled-sdl = ["sdl3-sys/build-from-source-static"]
+
 [dependencies]
 sdl3-sys = { version = "0.7.3", default-features = false, features = ["use-pkg-config"] }
