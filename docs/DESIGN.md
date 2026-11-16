@@ -10,7 +10,7 @@ Quake protection pickup/expiration cues on entry/exit.
 Transitions include meter exhaustion and suspension by menus or pause.
 
 Directional damage uses per-player view state and fading red HUD edge bands.
-Gameplay → Directional Damage (`hud_damageindicator`, archived, default 1)
+HUD → Directional Damage (`hud_damageindicator`, archived, default 1)
 scales opacity with blood plus armor damage and respects `v_flashscale`.
 Front/right/back/left hits map to top/right/bottom/left edges at impact;
 repeated hits accumulate up to a bounded opacity and fade over time.

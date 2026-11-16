@@ -202,6 +202,7 @@ impl Host {
         let toys = if self.local.is_some() { self.allowed_toys() } else { Vec::new() };
         let entries = crate::wheel::inventory(&self.server.core.cvars, &toys);
         let choice = self.wheel.update(dt as f32, held, in_game && alive && self.demo.is_none(), aim, &self.cl, &entries, self.toy.held);
+        self.input.wheel_open = self.wheel.open;
         self.goggles_frame(in_game, alive);
         self.toy.update_slots(&self.server.core.cvars, &toys, (inp.weapon_slot, &mut impulse), &self.cl);
         if let Some(weapon) = choice {

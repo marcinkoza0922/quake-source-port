@@ -270,8 +270,11 @@ pub struct Input {
     /// A menu is waiting for a key to bind: sticks don't emulate arrows.
     pub capture: bool,
     /// Weapon wheel direction this frame (unit vector, +y down), or zero
-    /// while the stick/mouse is centred. Only set while the wheel is held.
+    /// while the stick/mouse is centred. Only set while the wheel is open.
     pub wheel_aim: [f32; 2],
+    /// True while the weapon wheel is open on screen (after its hold delay),
+    /// so a quick tap for last-weapon does not pause mouse/stick look.
+    pub wheel_open: bool,
     wheel_mouse: [f32; 2],
     accel: AccelRamp,
     flick: FlickStick,
@@ -310,6 +313,7 @@ impl Input {
             last_device: Device::KeyboardMouse,
             capture: false,
             wheel_aim: [0.0; 2],
+            wheel_open: false,
             wheel_mouse: [0.0; 2],
             accel: AccelRamp::default(),
             flick: FlickStick::default(),

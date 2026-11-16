@@ -36,17 +36,21 @@ impl Menu {
         self.boxed_hints(c, 344.0, &items);
     }
 
-    /// One-line explanation of the selected option, just below the panel.
+    /// Explanation of the selected option, just below the panel (wraps if needed).
     pub(super) fn draw_tooltip(&self, c: &mut Canvas) {
         let Screen::OptionsPage(page) = self.screen else { return };
         if self.drop.is_some() || self.osk.is_some() || self.capturing() || self.opt_cursor >= self.page_len(page) {
             return;
         }
         let Some(s) = tooltip(self.page_item(page, self.opt_cursor)) else { return };
-        let w = c.text_w(s, TXT);
+        let lines = wrap_tooltip_lines(c, s, 588.0, TXT);
+        let w = lines.iter().map(|l| c.text_w(l, TXT)).fold(0.0, f32::max);
+        let h = lines.len() as f32 * 10.0 + 4.0;
         let y = PAGE_ROW0 + self.page_vis(page) as f32 * ROW_H + 10.0;
-        c.round_box(320.0 - w / 2.0 - 8.0, y - 3.0, w + 16.0, 14.0, 4.0, [0.0, 0.0, 0.0, 0.7], Some(BORDER));
-        c.text(320.0 - w / 2.0, y, s, TXT, MUTED);
+        c.round_box(320.0 - w / 2.0 - 8.0, y - 3.0, w + 16.0, h, 4.0, [0.0, 0.0, 0.0, 0.7], Some(BORDER));
+        for (i, line) in lines.iter().enumerate() {
+            c.text_center(320.0, y + i as f32 * 10.0, line, TXT, MUTED);
+        }
     }
 
     pub(super) fn draw_back(&self, c: &mut Canvas) {
@@ -102,3 +106,20 @@ impl Menu {
 
 #[cfg(test)]
 mod tests;
+
+fn wrap_tooltip_lines(c: &Canvas, s: &str, max_w: f32, size: f32) -> Vec<String> {
+    if c.text_w(s, size) <= max_w {
+        return vec![s.to_string()];
+    }
+    let mut lines = vec![String::new()];
+    for word in s.split_whitespace() {
+        let cur = lines.last_mut().unwrap();
+        let candidate = if cur.is_empty() { word.to_string() } else { format!("{cur} {word}") };
+        if !cur.is_empty() && c.text_w(&candidate, size) > max_w {
+            lines.push(word.to_string());
+        } else {
+            *cur = candidate;
+        }
+    }
+    lines
+}

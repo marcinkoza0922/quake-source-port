@@ -580,7 +580,7 @@ fn autoaim_mapping_tracks_enable_and_mode_and_captures_binding() {
     m.key(0, &mut cv, false);
     assert_eq!(m.page_len(Page::Controls), CONTROLS.len());
     assert!(m.opt_cursor < m.page_len(Page::Controls));
-    assert!(matches!(m.page_item(Page::Controls, 1), Item::Bind { cmd: "+jump", .. }));
+    assert!(matches!(m.page_item(Page::Controls, 1), Item::Bind { cmd: "+weaponwheel", .. }));
     assert_eq!(keys_for(&m.bindings, "+lockon"), vec![b'f' as i32]);
 }
 
@@ -640,4 +640,26 @@ fn viewmodel_position_is_locked_in_third_person() {
     assert_eq!(cv.value_of("r_drawviewmodel"), 1.0);
     cv.set("cl_camera", "0");
     assert!(menu.adjust(item, 1, false, &mut cv, &mut out));
+}
+
+#[test]
+fn portal_view_quality_is_gated_independently_on_enhancements_and_portalgun() {
+    let mut cv = Cvars::default();
+    cv.register("r_teleportwindows", "0", 0);
+    cv.register("addon_portal_view", "1", 0);
+    cv.register("r_portal_quality", "1", 0);
+    let mut menu = Menu::new();
+    let mut out = Vec::new();
+    let enh_item = ENHANCEMENTS.iter().copied().find(|i| matches!(i, Item::Choice { cvar: "r_portal_quality", .. })).unwrap();
+    let pg_item = PORTAL_GUN.iter().copied().find(|i| matches!(i, Item::Choice { cvar: "r_portal_quality", .. })).unwrap();
+    menu.open(Screen::OptionsPage(Page::Enhancements));
+    assert!(menu.item_disabled(enh_item, &cv));
+    assert!(!menu.adjust(enh_item, 1, false, &mut cv, &mut out));
+    menu.open(Screen::OptionsPage(Page::PortalGun));
+    assert!(!menu.item_disabled(pg_item, &cv));
+    assert!(menu.adjust(pg_item, 1, false, &mut cv, &mut out));
+    assert_eq!(cv.value_of("r_portal_quality"), 2.0);
+    cv.set("addon_portal_view", "0");
+    assert!(menu.item_disabled(pg_item, &cv));
+    assert!(menu.item_disabled(PORTAL_GUN[2], &cv));
 }
