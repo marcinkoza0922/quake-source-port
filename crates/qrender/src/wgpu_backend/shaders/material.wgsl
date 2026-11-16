@@ -260,9 +260,17 @@ struct PolyOut {
     o.wpos = v.pos;
     return o;
 }
-// du.params.x: alpha test threshold
+// fte.frag fog: alpha blending fogs toward the fog colour, additive and
+// modulating modes toward black (du.params.y = 1)
+fn poly_fog(c: vec4<f32>, wpos: vec3<f32>) -> vec4<f32> {
+    if (fr.fog.w <= 0.0) { return c; }
+    let z = length(wpos - fr.eye.xyz) * fr.fog.w;
+    let f = clamp(exp(-z * z), 0.0, 1.0);
+    return vec4<f32>(mix(fr.fog.rgb * (1.0 - du.params.y), c.rgb, f), c.a);
+}
+// du.params.x: alpha test threshold; y: fog toward black
 @fragment fn fs_poly(i: PolyOut) -> @location(0) vec4<f32> {
     let c = textureSample(t0, s0, i.uv) * i.color;
     if (c.a <= du.params.x) { discard; }
-    return vec4<f32>(apply_fog(c.rgb, i.wpos), c.a);
+    return poly_fog(c, i.wpos);
 }

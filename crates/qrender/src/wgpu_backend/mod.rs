@@ -44,6 +44,8 @@ struct Targets {
     depth_view: wgpu::TextureView,
     /// SSAO target and bind groups (r_ssao on).
     ao: Option<ssao::AoTargets>,
+    /// Scene depth for soft particles (group 3 of their pipelines).
+    soft_group: wgpu::BindGroup,
     /// Motion velocity target (r_motionblur on).
     vel: Option<motion::VelTarget>,
     /// Headless: (output texture, readback buffer, padded bytes per row).

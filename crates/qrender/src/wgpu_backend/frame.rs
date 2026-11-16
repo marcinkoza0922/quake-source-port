@@ -153,6 +153,11 @@ impl Renderer {
         let depth_view = depth.create_view(&Default::default());
         let ao = self.ssao.map(|q| self.create_ao_targets(q, scene, ms_view.as_ref().unwrap_or(&color_view), &depth_view));
         let vel = self.mblur.map(|q| self.create_vel_target(q, scene, &depth_view));
+        let soft_group = self.dev.create_bind_group(&wgpu::BindGroupDescriptor {
+            label: None,
+            layout: &self.pipes.scene.fx.soft_bgl,
+            entries: &[wgpu::BindGroupEntry { binding: 0, resource: wgpu::BindingResource::TextureView(&depth_view) }],
+        });
         // a scaled scene is filtered up/down to the output (vkQuake r_scale)
         let post_sampler = if scene == (w, h) { &self.samplers.clamp } else { &self.samplers.linear };
         self.bufs.post_group = Some(self.dev.create_bind_group(&wgpu::BindGroupDescriptor {
@@ -169,7 +174,7 @@ impl Renderer {
                 wgpu::BindGroupEntry { binding: 3, resource: wgpu::BindingResource::Sampler(post_sampler) },
             ],
         }));
-        self.targets = Some(Targets { scene, color, color_view, ms_view, depth_view, ao, vel, out });
+        self.targets = Some(Targets { scene, color, color_view, ms_view, depth_view, ao, soft_group, vel, out });
         self.frame_ready = false;
     }
 
@@ -284,7 +289,7 @@ impl Renderer {
         let (ui_v, ui_batches) = ui_quads(self, fr);
         let mut need_sky = false;
         for v in &lists.views {
-            for c in &v.cmds {
+            for c in v.cmds.iter().chain(&v.soft) {
                 if c.pipe == Pipe::Sky {
                     need_sky = true;
                 } else {

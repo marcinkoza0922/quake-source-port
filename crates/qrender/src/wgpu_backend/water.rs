@@ -7,7 +7,6 @@
 
 use super::math::{V3, dot, sub};
 use super::models::Model;
-use super::pipes::DrawU;
 use super::scene::{Buckets, Cmd, Lists, Pipe, Src};
 use super::{NO_TEX, Renderer};
 use crate::water::{MAX_RIPPLES, WaterFx};
@@ -140,9 +139,15 @@ impl Renderer {
         if count == 0 {
             return;
         }
-        let du = lists.draw(DrawU::default());
-        let pipe = Pipe::Poly(super::pipes::poly_index(FteBlend::Blend, false));
+        // soft like Vulkan's spray batch
+        let soft = self.soft_particles(&fr.settings);
+        let du = lists.draw(super::scene::poly_params(FteBlend::Blend, soft));
+        let pipe = if soft.is_some() { Pipe::SoftPoly(FteBlend::Blend as usize) } else { Pipe::Poly(super::pipes::poly_index(FteBlend::Blend, false)) };
         let cmd = Cmd { pipe, src: Src::Poly, mat: [slot, NO_TEX, NO_TEX], first, count, base_vertex: base as i32, du, viewmodel: false };
-        b.trans.push((-1.5, cmd));
+        if soft.is_some() {
+            b.soft.push(cmd);
+        } else {
+            b.trans.push((-1.5, cmd));
+        }
     }
 }

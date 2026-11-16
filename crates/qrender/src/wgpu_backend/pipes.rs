@@ -3,7 +3,7 @@
 use super::{DEPTH_FORMAT, SCENE_FORMAT};
 use crate::FteBlend;
 
-const SCENE_SRC: &str = concat!(include_str!("shaders/common.wgsl"), include_str!("shaders/material.wgsl"));
+pub(super) const SCENE_SRC: &str = concat!(include_str!("shaders/common.wgsl"), include_str!("shaders/material.wgsl"));
 const SKY_SRC: &str = concat!(include_str!("shaders/common.wgsl"), include_str!("shaders/sky.wgsl"));
 const SCREEN_SRC: &str = include_str!("shaders/screen.wgsl");
 
@@ -143,7 +143,7 @@ fn uniform_entry(binding: u32, size: u64) -> wgpu::BindGroupLayoutEntry {
     }
 }
 
-fn blend_of(b: FteBlend) -> wgpu::BlendState {
+pub(super) fn blend_of(b: FteBlend) -> wgpu::BlendState {
     use wgpu::BlendFactor as F;
     let (s, d) = match b {
         // Overlay (drawn over the world without depth test in Vulkan) blends like Blend
@@ -212,7 +212,7 @@ pub(super) const WORLD_ATTRS: [wgpu::VertexAttribute; 4] =
     wgpu::vertex_attr_array![0 => Float32x3, 1 => Float32x2, 2 => Float32x3, 3 => Float32x2];
 pub(super) const ALIAS_ATTRS: [wgpu::VertexAttribute; 3] =
     wgpu::vertex_attr_array![0 => Float32x3, 1 => Float32x2, 2 => Float32x3];
-const POLY_ATTRS: [wgpu::VertexAttribute; 3] =
+pub(super) const POLY_ATTRS: [wgpu::VertexAttribute; 3] =
     wgpu::vertex_attr_array![0 => Float32x3, 1 => Float32x2, 2 => Unorm8x4];
 const UI_ATTRS: [wgpu::VertexAttribute; 3] =
     wgpu::vertex_attr_array![0 => Float32x2, 1 => Float32x2, 2 => Unorm8x4];
@@ -284,7 +284,7 @@ impl Pipes {
         let alpha = Some(wgpu::BlendState::ALPHA_BLENDING);
         let tri = wgpu::PrimitiveTopology::TriangleList;
         let ui_vb = [vb::<UiV>(&UI_ATTRS)];
-        let scene = ScenePipes::new(dev, &frame_bgl, &draw_bgl, &scene_layout, &sky_layout, &scene_module, &sky_module, 1);
+        let scene = ScenePipes::new(dev, &frame_bgl, &mat_bgl, &draw_bgl, &scene_layout, &sky_layout, &scene_module, &sky_module, 1);
         let ui = pipeline(dev, Desc {
             layout: &screen_layout,
             module: &screen,
@@ -330,6 +330,7 @@ impl Pipes {
             self.scene = ScenePipes::new(
                 dev,
                 &self.frame_bgl,
+                &self.mat_bgl,
                 &self.draw_bgl,
                 &self.scene_layout,
                 &self.sky_layout,
@@ -346,6 +347,7 @@ impl ScenePipes {
     fn new(
         dev: &wgpu::Device,
         frame_bgl: &wgpu::BindGroupLayout,
+        mat_bgl: &wgpu::BindGroupLayout,
         draw_bgl: &wgpu::BindGroupLayout,
         scene_layout: &wgpu::PipelineLayout,
         sky_layout: &wgpu::PipelineLayout,
@@ -391,7 +393,8 @@ impl ScenePipes {
             samples,
         });
         let mut poly = Vec::new();
-        for b in FteBlend::ALL {
+        // Overlay (debug lines) last: drawn without depth testing, as in Vulkan
+        for b in FteBlend::ALL.into_iter().chain([FteBlend::Overlay]) {
             for lines in [false, true] {
                 debug_assert_eq!(poly.len(), poly_index(b, lines));
                 poly.push(pipeline(dev, Desc {
@@ -402,13 +405,13 @@ impl ScenePipes {
                     buffers: &poly_vb,
                     topology: if lines { wgpu::PrimitiveTopology::LineList } else { tri },
                     blend: Some(blend_of(b)),
-                    depth: Some((false, true)),
+                    depth: Some((false, b != FteBlend::Overlay)),
                     format: SCENE_FORMAT,
                     samples,
                 }));
             }
         }
-        let fx = super::fx_pipes::FxPipes::new(dev, frame_bgl, draw_bgl, samples);
+        let fx = super::fx_pipes::FxPipes::new(dev, [frame_bgl, mat_bgl, draw_bgl], samples);
         ScenePipes {
             samples,
             world,

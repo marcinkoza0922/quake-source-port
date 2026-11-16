@@ -8,12 +8,14 @@ use super::ssao::AoView;
 use super::{NO_TEX, Renderer, Targets};
 use crate::{Error, Result};
 
-/// Which of each view's draws a scene pass records (split around SSAO).
+/// Which of each view's draws a scene pass records (split around SSAO, and
+/// soft particles last with the depth attachment read-only).
 #[derive(Clone, Copy, PartialEq, Eq)]
 pub(super) enum Part {
     All,
     Opaque,
     Rest,
+    Soft,
 }
 
 impl Renderer {
@@ -41,12 +43,16 @@ impl Renderer {
         };
         let mut enc = self.dev.create_command_encoder(&Default::default());
         if !l.views.is_empty() {
+            let soft = l.views.iter().any(|v| !v.soft.is_empty());
             if ao_views.is_empty() {
-                self.scene_pass(&mut enc, t, l, Part::All);
+                self.scene_pass(&mut enc, t, l, Part::All, !soft);
             } else {
-                self.scene_pass(&mut enc, t, l, Part::Opaque);
+                self.scene_pass(&mut enc, t, l, Part::Opaque, false);
                 self.encode_ao(&mut enc, t, l, ao_views);
-                self.scene_pass(&mut enc, t, l, Part::Rest);
+                self.scene_pass(&mut enc, t, l, Part::Rest, !soft);
+            }
+            if soft {
+                self.scene_pass(&mut enc, t, l, Part::Soft, true);
             }
             self.encode_velocity(&mut enc, t, l);
         }
@@ -107,10 +113,11 @@ impl Renderer {
     }
 
     /// Records the scene pass for `part` of every view's draws.
-    fn scene_pass(&self, enc: &mut wgpu::CommandEncoder, t: &Targets, l: &Lists, part: Part) {
+    /// `last`: the final scene pass (MSAA resolves there).
+    fn scene_pass(&self, enc: &mut wgpu::CommandEncoder, t: &Targets, l: &Lists, part: Part, last: bool) {
         let b = &self.bufs;
         let (Some(frame_group), Some(draw_group)) = (&b.frame_group, &b.draw_group) else { return };
-        let (first, last) = (part != Part::Rest, part != Part::Opaque);
+        let first = matches!(part, Part::All | Part::Opaque);
         let keep_depth = t.vel.is_some() && l.views.iter().any(|v| !v.vel.is_empty());
         let mut pass = enc.begin_render_pass(&wgpu::RenderPassDescriptor {
             label: Some("scene"),
@@ -126,9 +133,10 @@ impl Renderer {
             })],
             depth_stencil_attachment: Some(wgpu::RenderPassDepthStencilAttachment {
                 view: &t.depth_view,
-                depth_ops: Some(wgpu::Operations {
+                // read-only while soft particles sample it
+                depth_ops: (part != Part::Soft).then_some(wgpu::Operations {
                     load: if first { wgpu::LoadOp::Clear(1.0) } else { wgpu::LoadOp::Load },
-                    // kept for SSAO (between the parts) and the velocity pass
+                    // kept for SSAO, soft particles and the velocity pass
                     store: if last && !keep_depth { wgpu::StoreOp::Discard } else { wgpu::StoreOp::Store },
                 }),
                 stencil_ops: None,
@@ -147,7 +155,11 @@ impl Renderer {
                 Part::All => &v.cmds[..],
                 Part::Opaque => &v.cmds[..v.split],
                 Part::Rest => &v.cmds[v.split..],
+                Part::Soft => &v.soft[..],
             };
+            if part == Part::Soft {
+                pass.set_bind_group(3, &t.soft_group, &[]);
+            }
             for c in cmds {
                 if vm != Some(c.viewmodel) {
                     vm = Some(c.viewmodel);
@@ -164,6 +176,7 @@ impl Renderer {
                     Pipe::Alias => &p.alias,
                     Pipe::AliasAlpha => &p.alias_alpha,
                     Pipe::Poly(i) => &p.poly[i],
+                    Pipe::SoftPoly(i) => &p.fx.soft[i],
                 });
                 let mat = if c.pipe == Pipe::Sky { self.sky_group.as_ref() } else { self.bind_groups.get(&c.mat) };
                 let Some(mat) = mat else { continue };

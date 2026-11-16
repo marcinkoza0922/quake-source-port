@@ -4,9 +4,11 @@
 //! depth and colour.
 
 use super::SCENE_FORMAT;
-use super::pipes::{ALIAS_ATTRS, AliasV, Desc, WORLD_ATTRS, load_entry, pipeline, vb};
+use super::pipes::{ALIAS_ATTRS, AliasV, Desc, POLY_ATTRS, SCENE_SRC, WORLD_ATTRS, load_entry, pipeline, vb};
+use crate::FteBlend;
 
 const AO_SRC: &str = include_str!("shaders/ao.wgsl");
+const SOFT_SRC: &str = include_str!("shaders/soft.wgsl");
 const VEL_SRC: &str = concat!(include_str!("shaders/common.wgsl"), include_str!("shaders/vel.wgsl"));
 /// SSAO target: visibility and linear depth.
 pub(super) const AO_FORMAT: wgpu::TextureFormat = wgpu::TextureFormat::Rg16Float;
@@ -24,13 +26,16 @@ pub(super) struct FxPipes {
     pub(super) vel_bgl: wgpu::BindGroupLayout,
     pub(super) vel_world: wgpu::RenderPipeline,
     pub(super) vel_alias: wgpu::RenderPipeline,
+    /// Soft particles: scene depth, bound while it is a read-only attachment.
+    pub(super) soft_bgl: wgpu::BindGroupLayout,
+    /// Soft FTE triangles per blend mode (`FteBlend::ALL` order).
+    pub(super) soft: Vec<wgpu::RenderPipeline>,
 }
 
 impl FxPipes {
     pub(super) fn new(
         dev: &wgpu::Device,
-        frame_bgl: &wgpu::BindGroupLayout,
-        draw_bgl: &wgpu::BindGroupLayout,
+        [frame_bgl, mat_bgl, draw_bgl]: [&wgpu::BindGroupLayout; 3],
         samples: u32,
     ) -> FxPipes {
         let ms = samples > 1;
@@ -79,6 +84,28 @@ impl FxPipes {
         let alias_vb = [vb::<AliasV>(&ALIAS_ATTRS)];
         let vel_world = fx_pipe(&vel_layout, &vel_module, "vs_vel", "fs_vel", &world_vb, None, VEL_FORMAT, 1);
         let vel_alias = fx_pipe(&vel_layout, &vel_module, "vs_vel", "fs_vel", &alias_vb, None, VEL_FORMAT, 1);
-        FxPipes { ao_gen_bgl, ao_gen, ao_apply_bgl, ao_apply, vel_bgl, vel_world, vel_alias }
+
+        let soft_bgl = bgl(&[load_entry(0, depth, ms)]);
+        let soft_module = module("soft", format!("{SCENE_SRC}{}", SOFT_SRC.replace("DEPTH_T", depth_t)));
+        let soft_layout = layout(&[frame_bgl, mat_bgl, draw_bgl, &soft_bgl]);
+        let poly_vb = [vb::<crate::FteVertex>(&POLY_ATTRS)];
+        let soft = FteBlend::ALL
+            .iter()
+            .map(|&b| {
+                pipeline(dev, Desc {
+                    layout: &soft_layout,
+                    module: &soft_module,
+                    vs: "vs_poly",
+                    fs: "fs_poly_soft",
+                    buffers: &poly_vb,
+                    topology: tri,
+                    blend: Some(super::pipes::blend_of(b)),
+                    depth: Some((false, true)),
+                    format: SCENE_FORMAT,
+                    samples,
+                })
+            })
+            .collect();
+        FxPipes { ao_gen_bgl, ao_gen, ao_apply_bgl, ao_apply, vel_bgl, vel_world, vel_alias, soft_bgl, soft }
     }
 }

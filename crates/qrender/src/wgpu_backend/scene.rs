@@ -16,6 +16,8 @@ pub(super) enum Pipe {
     Alias,
     AliasAlpha,
     Poly(usize),
+    /// Soft FTE triangles (`FteBlend` index), drawn last with scene depth read-only.
+    SoftPoly(usize),
 }
 
 /// Where a draw's vertices and indices come from.
@@ -67,6 +69,8 @@ pub(super) struct ViewDraw {
     pub(super) speed_blur: f32,
     /// Motion blur: moving entities for the velocity pass.
     pub(super) vel: Vec<Cmd>,
+    /// Soft particles: drawn in a final pass reading scene depth.
+    pub(super) soft: Vec<Cmd>,
 }
 
 /// CPU-side data of one frame, uploaded before encoding.
@@ -98,6 +102,8 @@ pub(super) struct Buckets {
     pub(super) trans: Vec<(f32, Cmd)>,
     /// Velocity-pass draws of moving entities (du with `prev`).
     pub(super) vel: Vec<Cmd>,
+    /// Soft particles, in submission order.
+    pub(super) soft: Vec<Cmd>,
 }
 
 pub(super) fn liquid_alphas(st: &crate::Settings) -> [f32; 4] {
@@ -252,10 +258,17 @@ impl Renderer {
         };
         let fog = fog.density.max(0.0) / 64.0;
         let out = [ow, oh];
-        let vel = b.vel;
+        let (vel, soft) = (b.vel, b.soft);
         let speed_blur = view.speed_blur.clamp(0.0, 1.0).max(st.edge_blur.clamp(0.0, 1.0));
         let scene = [sw, sh];
-        lists.views.push(ViewDraw { fu, rect, ofs, scene, out, blend, warp, tan, fog, split, cmds, speed_blur, vel });
+        lists.views.push(ViewDraw { fu, rect, ofs, scene, out, blend, warp, tan, fog, split, cmds, speed_blur, vel, soft });
+    }
+
+    /// Soft particle (inverse fade distance, depth samples) when r_softparticles
+    /// is on: high quality takes the nearest of all MSAA samples.
+    pub(super) fn soft_particles(&self, st: &crate::Settings) -> Option<[f32; 2]> {
+        let samples = if self.msaa > 1 && st.soft_particle_quality > 0 { self.msaa } else { 1 };
+        (st.soft_particle_distance > 0.0).then(|| [1.0 / st.soft_particle_distance, samples as f32])
     }
 
     /// Classic particles (camera-facing dots) and FTE particle geometry.
@@ -301,20 +314,39 @@ impl Renderer {
                 if end as usize > fr.fte_indices.len() {
                     continue;
                 }
-                b.trans.push((
-                    -2.0 - k as f32 * 1e-3,
-                    Cmd {
-                        pipe: Pipe::Poly(poly_index(bt.blend, bt.lines)),
-                        src: Src::Poly,
-                        mat: [p.slot, NO_TEX, NO_TEX],
-                        first: first + bt.first_index,
-                        count: bt.num_indices,
-                        base_vertex: base as i32,
-                        du: poly_du,
-                        viewmodel: false,
+                let soft = (bt.soft && !bt.lines).then(|| self.soft_particles(&fr.settings)).flatten();
+                let du = lists.draw(poly_params(bt.blend, soft));
+                let cmd = Cmd {
+                    pipe: match soft {
+                        Some(_) => Pipe::SoftPoly(bt.blend as usize),
+                        None => Pipe::Poly(poly_index(bt.blend, bt.lines)),
                     },
-                ));
+                    src: Src::Poly,
+                    mat: [p.slot, NO_TEX, NO_TEX],
+                    first: first + bt.first_index,
+                    count: bt.num_indices,
+                    base_vertex: base as i32,
+                    du,
+                    viewmodel: false,
+                };
+                if soft.is_some() {
+                    b.soft.push(cmd);
+                } else {
+                    b.trans.push((-2.0 - k as f32 * 1e-3, cmd));
+                }
             }
         }
+    }
+}
+
+/// Poly draw parameters (fs_poly / fs_poly_soft): fog toward black for
+/// additive and modulating blends, the soft fade, and the blend mode.
+pub(super) fn poly_params(blend: FteBlend, soft: Option<[f32; 2]>) -> DrawU {
+    let to_black = !matches!(blend, FteBlend::Blend | FteBlend::BlendColour | FteBlend::Overlay);
+    let [inv, samples] = soft.unwrap_or([0.0, 1.0]);
+    DrawU {
+        params: [0.0, f32::from(to_black), inv, samples],
+        ix: [blend.shader_mode() as u32, 0, 0, 0],
+        ..Default::default()
     }
 }
