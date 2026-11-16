@@ -2,16 +2,19 @@
 //! feature). Same public API as the Vulkan backend; the scene is drawn with
 //! CPU-built draw lists (world from the PVS, alias poses lerped on the CPU,
 //! lightmaps built on the CPU) and WGSL shaders in `shaders/`. Advanced
-//! effects of the Vulkan backend (motion blur, portals, slang presets,
-//! softemu, goggles, water ripples) are not drawn.
+//! effects of the Vulkan backend (portals, slang presets, softemu, goggles,
+//! water ripples) are not drawn.
 
 mod capture;
+mod encode;
 mod ents;
 mod frame;
+mod fx_pipes;
 mod level;
 mod lightmap;
 mod math;
 mod models;
+mod motion;
 mod pipes;
 mod scene;
 mod ssao;
@@ -40,6 +43,8 @@ struct Targets {
     depth_view: wgpu::TextureView,
     /// SSAO target and bind groups (r_ssao on).
     ao: Option<ssao::AoTargets>,
+    /// Motion velocity target (r_motionblur on).
+    vel: Option<motion::VelTarget>,
     /// Headless: (output texture, readback buffer, padded bytes per row).
     out: Option<(wgpu::Texture, wgpu::Buffer, u32)>,
 }
@@ -88,6 +93,10 @@ pub struct Renderer {
     msaa: u32,
     /// SSAO quality while r_ssao is on.
     ssao: Option<u32>,
+    /// Motion blur quality while r_motionblur is on.
+    mblur: Option<u32>,
+    /// Entity transforms of the last frame (motion blur).
+    motion: motion::Motion,
     /// Copy the next presented frame for [`Renderer::take_capture`].
     capture_req: bool,
     /// A presented frame being copied and mapped for reading.
@@ -229,6 +238,8 @@ impl Renderer {
             render_scale: 1.0,
             msaa: 1,
             ssao: None,
+            mblur: None,
+            motion: Default::default(),
             capture_req: false,
             capture: None,
         };

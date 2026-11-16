@@ -31,7 +31,9 @@ impl Renderer {
                 }
                 Some(Model::Alias(am)) => {
                     let light = self.alias_light(fr, e, am, &styles);
-                    alias_cmds(fr, e, e.model.0 as usize, am, vs, light, dist, lists, b);
+                    // vertices are posed in world space: prev = M_prev · M_cur⁻¹
+                    let prev = self.motion.prev_transform(e).map(|m| mul(&m, &affine_inv(entity_rotation(e.angles), e.origin)));
+                    alias_cmds(fr, e, e.model.0 as usize, am, vs, light, dist, prev, lists, b);
                 }
                 Some(Model::Sprite(sm)) => sprite_cmds(fr, e, sm, vs, dist, lists, b),
                 None => {}
@@ -75,7 +77,13 @@ impl Renderer {
             })
             .collect();
         let alpha = e.alpha.clamp(0.0, 1.0);
-        world_cmds(wr, &surfs, e.frame != 0, fr.time, alphas, alpha, affine(rot, e.origin), dist, lists, b);
+        let model = affine(rot, e.origin);
+        let first = b.opaque.len();
+        world_cmds(wr, &surfs, e.frame != 0, fr.time, alphas, alpha, model, dist, lists, b);
+        if let Some(prev) = self.motion.prev_transform(e) {
+            let du = lists.draw(DrawU { model, pad: vel_pad(&prev), ..Default::default() });
+            b.vel.extend(b.opaque[first..].iter().map(|c| Cmd { du, ..*c }));
+        }
     }
 
     /// R_SetupAliasLighting: (light colour / 200).
@@ -153,6 +161,7 @@ fn alias_cmds(
     vs: &ViewSetup,
     light: [f32; 3],
     dist: f32,
+    prev: Option<Mat4>,
     lists: &mut Lists,
     b: &mut Buckets,
 ) {
@@ -205,6 +214,8 @@ fn alias_cmds(
     }
     let alpha = e.alpha.clamp(0.0, 1.0);
     let [top, bot] = e.colormap.unwrap_or([1, 6]);
+    // ragdoll poses have their own transform; not blurred
+    let vel_du = prev.filter(|_| dynp.is_none()).map(|p| lists.draw(DrawU { pad: vel_pad(&p), ..Default::default() }));
     for s in &am.surfaces {
         if s.num_indices == 0 {
             continue;
@@ -243,9 +254,19 @@ fn alias_cmds(
             // drawn after the world so its compressed depth range can't poke through walls
             b.trans.push((-0.5, cmd));
         } else {
+            if let Some(du) = vel_du {
+                b.vel.push(Cmd { du, ..cmd });
+            }
             b.opaque.push(cmd);
         }
     }
+}
+
+/// `DrawU::pad` carrying the velocity pass's previous transform (`DrawU.prev`).
+fn vel_pad(prev: &Mat4) -> [f32; 32] {
+    let mut pad = [0.0; 32];
+    pad[..16].copy_from_slice(prev);
+    pad
 }
 
 fn sprite_cmds(fr: &RenderFrame, e: &RenderEntity, sm: &SpriteModel, vs: &ViewSetup, dist: f32, lists: &mut Lists, b: &mut Buckets) {

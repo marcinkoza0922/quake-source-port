@@ -63,6 +63,10 @@ pub(super) struct ViewDraw {
     /// models except liquids and the viewmodel (as in the Vulkan backend).
     pub(super) split: usize,
     pub(super) cmds: Vec<Cmd>,
+    /// Peripheral speed blur amount (0..1).
+    pub(super) speed_blur: f32,
+    /// Motion blur: moving entities for the velocity pass.
+    pub(super) vel: Vec<Cmd>,
 }
 
 /// CPU-side data of one frame, uploaded before encoding.
@@ -92,6 +96,8 @@ pub(super) struct Buckets {
     pub(super) alpha_liquids: Vec<Cmd>,
     /// Translucent draws with their view distance (drawn far to near).
     pub(super) trans: Vec<(f32, Cmd)>,
+    /// Velocity-pass draws of moving entities (du with `prev`).
+    pub(super) vel: Vec<Cmd>,
 }
 
 pub(super) fn liquid_alphas(st: &crate::Settings) -> [f32; 4] {
@@ -205,7 +211,8 @@ impl Renderer {
             vfwd: [vs.fwd[0], vs.fwd[1], vs.fwd[2], 0.0],
             sky: [st.skyfog, if self.skybox.is_some() { 1.0 } else { 0.0 }, st.skyalpha, 0.0],
             alphas,
-            pad: [0.0; 20],
+            vel: self.vel_frame_params(),
+            pad: [0.0; 16],
         });
         let fu = lists.frame_u.len() as u32 - 1;
         let mut b = Buckets::default();
@@ -243,7 +250,10 @@ impl Renderer {
         let tan = crate::projection::half_fov_tangents(view, (sw, sh));
         let fog = fog.density.max(0.0) / 64.0;
         let out = [ow, oh];
-        lists.views.push(ViewDraw { fu, rect, ofs, scene: [sw, sh], out, blend, warp, tan, fog, split, cmds });
+        let vel = b.vel;
+        let speed_blur = view.speed_blur.clamp(0.0, 1.0).max(st.edge_blur.clamp(0.0, 1.0));
+        let scene = [sw, sh];
+        lists.views.push(ViewDraw { fu, rect, ofs, scene, out, blend, warp, tan, fog, split, cmds, speed_blur, vel });
     }
 
     /// Classic particles (camera-facing dots) and FTE particle geometry.

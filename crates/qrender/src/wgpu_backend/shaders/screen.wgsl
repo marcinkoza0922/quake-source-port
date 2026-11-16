@@ -61,14 +61,90 @@ fn water_warp(p: vec2<f32>, t: f32, aspect: f32) -> vec2<f32> {
     let y = (p.y + sin(p.x * cycle_y + t) * amp_y) * (1.0 - amp_y * 2.0) + amp_y;
     return vec2<f32>(x, y);
 }
+fn bayer01(c0: vec2<i32>) -> f32 {
+    var c = c0 & vec2<i32>(15);
+    c.y = c.y ^ c.x;
+    var v = u32(c.y | (c.x << 8u));
+    v = (v ^ (v << 2u)) & 0x3333u;
+    v = (v ^ (v << 1u)) & 0x5555u;
+    v = v | (v >> 7u);
+    v = reverseBits(v) >> 24u;
+    return f32(v) * (1.0 / 256.0);
+}
+fn scene_at(uv: vec2<f32>) -> vec3<f32> {
+    return textureSampleLevel(t0, s0, uv, 0.0).rgb;
+}
+// t1: per-object motion (view uv per frame), scaled to target uv
+fn vel_at(uv: vec2<f32>) -> vec2<f32> {
+    return textureSampleLevel(t1, s0, uv, 0.0).xy * du.model[0].xy;
+}
+const MB_DIRS = array<vec2<f32>, 8>(
+    vec2<f32>(1.0, 0.0),
+    vec2<f32>(0.70710678, 0.70710678),
+    vec2<f32>(0.0, 1.0),
+    vec2<f32>(-0.70710678, 0.70710678),
+    vec2<f32>(-1.0, 0.0),
+    vec2<f32>(-0.70710678, -0.70710678),
+    vec2<f32>(0.0, -1.0),
+    vec2<f32>(0.70710678, -0.70710678),
+);
+// post.frag motion_blur: average along the strongest motion nearby, so
+// moving objects also smear over the static background around them.
+fn motion_blur(c: vec3<f32>, uv: vec2<f32>, frag: vec2<f32>) -> vec3<f32> {
+    let sz = du.model[1].xy;
+    let hq = du.model[0].w > 0.5;
+    var v = vel_at(uv);
+    var best = dot(v * sz, v * sz);
+    if (hq && best < 0.25) {
+        let r = 24.0 / sz;
+        for (var i = 0; i < 8; i++) {
+            let t = vel_at(uv + MB_DIRS[i] * r);
+            let l = dot(t * sz, t * sz);
+            if (l > best) { best = l; v = t; }
+        }
+    }
+    if (best < 0.25) { return c; }
+    let l = length(v);
+    if (l > 0.06) { v *= 0.06 / l; }
+    let n = select(6, 12, hq);
+    let j = bayer01(vec2<i32>(frag)) - 0.5;
+    var acc = vec3<f32>(0.0);
+    for (var i = 0; i < n; i++) {
+        let t = (f32(i) + 0.5 + j) / f32(n) - 0.5;
+        acc += scene_at(uv - v * t);
+    }
+    return acc / f32(n);
+}
+// post.frag speed_blur: sample toward the view centre to stretch scenery
+// into peripheral streaks; the inner 40% stays sharp.
+fn speed_blur(c: vec3<f32>, uv: vec2<f32>, q: vec2<f32>, amount0: f32) -> vec3<f32> {
+    let edge = smoothstep(0.4, 1.1, length((q - 0.5) * 2.0));
+    let amount = amount0 * edge;
+    if (amount < 0.0001) { return c; }
+    let streak = (uv - (du.extra.xy + du.extra.zw) * 0.5) * (0.12 * amount);
+    var acc = c;
+    for (var i = 1; i <= 8; i++) {
+        acc += scene_at(uv - streak * (f32(i) / 8.0));
+    }
+    return acc / 9.0;
+}
 // du.extra: uv rectangle (u0, v0, u1, v1) of the view in the scene texture
 // du.color: polyblend; du.params: x gamma, y contrast, z warp clock (< 0 off), w aspect
+// du.model[0]: motion blur scale x, y (0 = off), speed blur, motion blur quality
+// du.model[1].xy: output size
 @fragment fn fs_post(i: PostOut) -> @location(0) vec4<f32> {
     var q = i.q;
     if (du.params.z >= 0.0) {
         q = water_warp(q, du.params.z, du.params.w);
     }
-    var c = textureSample(t0, s0, mix(du.extra.xy, du.extra.zw, q)).rgb;
+    let uv = mix(du.extra.xy, du.extra.zw, q);
+    var c = scene_at(uv);
+    if (du.model[0].x > 0.0) {
+        c = motion_blur(c, uv, i.clip.xy);
+    }
+    if (du.model[0].z > 0.0) {
+        c = speed_blur(c, uv, i.q, du.model[0].z);
+    }
     c = mix(c, du.color.rgb, du.color.a);
     c = pow(max(c * du.params.y, vec3<f32>(0.0)), vec3<f32>(du.params.x));
     return vec4<f32>(c, 1.0);

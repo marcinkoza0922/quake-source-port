@@ -8,6 +8,7 @@ struct FrameU {
     vfwd: vec4<f32>,
     sky: vec4<f32>,    // x skyfog, y skybox flag, z sky layer alpha
     alphas: vec4<f32>, // water lava slime tele
+    vel: vec4<f32>,    // velocity pass: scene px per velocity px, max scene px x, y
 };
 // Per-draw record (dynamic uniform offset).
 struct DrawU {
@@ -16,6 +17,7 @@ struct DrawU {
     params: vec4<f32>,
     extra: vec4<f32>,
     ix: vec4<u32>,
+    prev: mat4x4<f32>, // velocity pass: last frame's transform (DrawU.pad[..16])
 };
 @group(0) @binding(0) var<uniform> fr: FrameU;
 @group(0) @binding(1) var lightmap: texture_2d_array<f32>;

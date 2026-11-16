@@ -6,9 +6,6 @@ use crate::FteBlend;
 const SCENE_SRC: &str = concat!(include_str!("shaders/common.wgsl"), include_str!("shaders/material.wgsl"));
 const SKY_SRC: &str = concat!(include_str!("shaders/common.wgsl"), include_str!("shaders/sky.wgsl"));
 const SCREEN_SRC: &str = include_str!("shaders/screen.wgsl");
-const AO_SRC: &str = include_str!("shaders/ao.wgsl");
-/// SSAO target: visibility and linear depth.
-pub(super) const AO_FORMAT: wgpu::TextureFormat = wgpu::TextureFormat::Rg16Float;
 
 /// Bytes per per-draw / per-view uniform record (dynamic offset alignment).
 pub(super) const UNIFORM_STRIDE: u64 = 256;
@@ -43,7 +40,9 @@ pub(super) struct FrameU {
     pub(super) vfwd: [f32; 4],
     pub(super) sky: [f32; 4],
     pub(super) alphas: [f32; 4],
-    pub(super) pad: [f32; 20],
+    /// Motion velocity pass: scene px per velocity px, max scene px x, y.
+    pub(super) vel: [f32; 4],
+    pub(super) pad: [f32; 16],
 }
 
 /// Vertex of CPU-posed alias models (world space).
@@ -91,12 +90,8 @@ pub(super) struct ScenePipes {
     pub(super) alias_alpha: wgpu::RenderPipeline,
     /// FTE blend modes × (triangles, lines).
     pub(super) poly: Vec<wgpu::RenderPipeline>,
-    /// SSAO: scene depth + colour (alpha mask) -> AO target.
-    pub(super) ao_gen_bgl: wgpu::BindGroupLayout,
-    pub(super) ao_gen: wgpu::RenderPipeline,
-    /// SSAO: scene depth + AO target, multiplied into the scene colour.
-    pub(super) ao_apply_bgl: wgpu::BindGroupLayout,
-    pub(super) ao_apply: wgpu::RenderPipeline,
+    /// SSAO and motion-velocity pipelines (read the scene targets).
+    pub(super) fx: super::fx_pipes::FxPipes,
 }
 
 pub(super) fn poly_index(b: FteBlend, lines: bool) -> usize {
@@ -117,7 +112,7 @@ fn tex_entry(binding: u32, dim: wgpu::TextureViewDimension) -> wgpu::BindGroupLa
 }
 
 /// Unfilterable texture read with `textureLoad` (optionally multisampled).
-fn load_entry(binding: u32, sample_type: wgpu::TextureSampleType, multisampled: bool) -> wgpu::BindGroupLayoutEntry {
+pub(super) fn load_entry(binding: u32, sample_type: wgpu::TextureSampleType, multisampled: bool) -> wgpu::BindGroupLayoutEntry {
     wgpu::BindGroupLayoutEntry {
         binding,
         visibility: wgpu::ShaderStages::FRAGMENT,
@@ -165,21 +160,21 @@ fn blend_of(b: FteBlend) -> wgpu::BlendState {
     wgpu::BlendState { color: c, alpha: c }
 }
 
-struct Desc<'a> {
-    layout: &'a wgpu::PipelineLayout,
-    module: &'a wgpu::ShaderModule,
-    vs: &'a str,
-    fs: &'a str,
-    buffers: &'a [Option<wgpu::VertexBufferLayout<'a>>],
-    topology: wgpu::PrimitiveTopology,
-    blend: Option<wgpu::BlendState>,
+pub(super) struct Desc<'a> {
+    pub(super) layout: &'a wgpu::PipelineLayout,
+    pub(super) module: &'a wgpu::ShaderModule,
+    pub(super) vs: &'a str,
+    pub(super) fs: &'a str,
+    pub(super) buffers: &'a [Option<wgpu::VertexBufferLayout<'a>>],
+    pub(super) topology: wgpu::PrimitiveTopology,
+    pub(super) blend: Option<wgpu::BlendState>,
     /// (depth write, depth test); None = no depth attachment.
-    depth: Option<(bool, bool)>,
-    format: wgpu::TextureFormat,
-    samples: u32,
+    pub(super) depth: Option<(bool, bool)>,
+    pub(super) format: wgpu::TextureFormat,
+    pub(super) samples: u32,
 }
 
-fn pipeline(dev: &wgpu::Device, d: Desc) -> wgpu::RenderPipeline {
+pub(super) fn pipeline(dev: &wgpu::Device, d: Desc) -> wgpu::RenderPipeline {
     dev.create_render_pipeline(&wgpu::RenderPipelineDescriptor {
         label: Some(d.fs),
         layout: Some(d.layout),
@@ -213,16 +208,16 @@ fn pipeline(dev: &wgpu::Device, d: Desc) -> wgpu::RenderPipeline {
     })
 }
 
-const WORLD_ATTRS: [wgpu::VertexAttribute; 4] =
+pub(super) const WORLD_ATTRS: [wgpu::VertexAttribute; 4] =
     wgpu::vertex_attr_array![0 => Float32x3, 1 => Float32x2, 2 => Float32x3, 3 => Float32x2];
-const ALIAS_ATTRS: [wgpu::VertexAttribute; 3] =
+pub(super) const ALIAS_ATTRS: [wgpu::VertexAttribute; 3] =
     wgpu::vertex_attr_array![0 => Float32x3, 1 => Float32x2, 2 => Float32x3];
 const POLY_ATTRS: [wgpu::VertexAttribute; 3] =
     wgpu::vertex_attr_array![0 => Float32x3, 1 => Float32x2, 2 => Unorm8x4];
 const UI_ATTRS: [wgpu::VertexAttribute; 3] =
     wgpu::vertex_attr_array![0 => Float32x2, 1 => Float32x2, 2 => Unorm8x4];
 
-fn vb<T>(attrs: &[wgpu::VertexAttribute]) -> Option<wgpu::VertexBufferLayout<'_>> {
+pub(super) fn vb<T>(attrs: &[wgpu::VertexAttribute]) -> Option<wgpu::VertexBufferLayout<'_>> {
     Some(wgpu::VertexBufferLayout {
         array_stride: std::mem::size_of::<T>() as u64,
         step_mode: wgpu::VertexStepMode::Vertex,
@@ -276,7 +271,7 @@ impl Pipes {
         let alpha = Some(wgpu::BlendState::ALPHA_BLENDING);
         let tri = wgpu::PrimitiveTopology::TriangleList;
         let ui_vb = [vb::<UiV>(&UI_ATTRS)];
-        let scene = ScenePipes::new(dev, &draw_bgl, &scene_layout, &sky_layout, &scene_module, &sky_module, 1);
+        let scene = ScenePipes::new(dev, &frame_bgl, &draw_bgl, &scene_layout, &sky_layout, &scene_module, &sky_module, 1);
         let ui = pipeline(dev, Desc {
             layout: &screen_layout,
             module: &screen,
@@ -321,6 +316,7 @@ impl Pipes {
         if samples != self.scene.samples {
             self.scene = ScenePipes::new(
                 dev,
+                &self.frame_bgl,
                 &self.draw_bgl,
                 &self.scene_layout,
                 &self.sky_layout,
@@ -333,8 +329,10 @@ impl Pipes {
 }
 
 impl ScenePipes {
+    #[allow(clippy::too_many_arguments)]
     fn new(
         dev: &wgpu::Device,
+        frame_bgl: &wgpu::BindGroupLayout,
         draw_bgl: &wgpu::BindGroupLayout,
         scene_layout: &wgpu::PipelineLayout,
         sky_layout: &wgpu::PipelineLayout,
@@ -397,55 +395,7 @@ impl ScenePipes {
                 }));
             }
         }
-        let ms = samples > 1;
-        let unfilt = wgpu::TextureSampleType::Float { filterable: false };
-        let bgl = |entries: &[wgpu::BindGroupLayoutEntry]| {
-            dev.create_bind_group_layout(&wgpu::BindGroupLayoutDescriptor { label: None, entries })
-        };
-        let ao_gen_bgl = bgl(&[load_entry(0, wgpu::TextureSampleType::Depth, ms), load_entry(1, unfilt, ms)]);
-        let ao_apply_bgl = bgl(&[load_entry(0, wgpu::TextureSampleType::Depth, ms), load_entry(1, unfilt, false)]);
-        let (depth_t, color_t) = if ms {
-            ("texture_depth_multisampled_2d", "texture_multisampled_2d<f32>")
-        } else {
-            ("texture_depth_2d", "texture_2d<f32>")
-        };
-        // binding 1 is the scene colour for fs_ao but the AO target for fs_apply
-        let ao_module = |color_t: &str| {
-            dev.create_shader_module(wgpu::ShaderModuleDescriptor {
-                label: Some("ao"),
-                source: wgpu::ShaderSource::Wgsl(AO_SRC.replace("DEPTH_T", depth_t).replace("COLOR_T", color_t).into()),
-            })
-        };
-        let (gen_module, apply_module) = (ao_module(color_t), ao_module("texture_2d<f32>"));
-        let ao_layout = |g: &wgpu::BindGroupLayout| {
-            dev.create_pipeline_layout(&wgpu::PipelineLayoutDescriptor {
-                label: None,
-                bind_group_layouts: &[Some(draw_bgl), Some(g)],
-                immediate_size: 0,
-            })
-        };
-        let ao_pipe = |layout: &wgpu::PipelineLayout, module, fs, blend, format, samples| {
-            pipeline(dev, Desc {
-                layout,
-                module,
-                vs: "vs_full",
-                fs,
-                buffers: &[],
-                topology: tri,
-                blend,
-                depth: None,
-                format,
-                samples,
-            })
-        };
-        let ao_gen = ao_pipe(&ao_layout(&ao_gen_bgl), &gen_module, "fs_ao", None, AO_FORMAT, 1);
-        // scene colour *= AO; alpha kept
-        use wgpu::{BlendComponent as C, BlendFactor as F};
-        let mul = wgpu::BlendState {
-            color: C { src_factor: F::Dst, dst_factor: F::Zero, operation: wgpu::BlendOperation::Add },
-            alpha: C { src_factor: F::Zero, dst_factor: F::One, operation: wgpu::BlendOperation::Add },
-        };
-        let ao_apply = ao_pipe(&ao_layout(&ao_apply_bgl), &apply_module, "fs_apply", Some(mul), SCENE_FORMAT, samples);
+        let fx = super::fx_pipes::FxPipes::new(dev, frame_bgl, draw_bgl, samples);
         ScenePipes {
             samples,
             world,
@@ -456,10 +406,7 @@ impl ScenePipes {
             alias,
             alias_alpha,
             poly,
-            ao_gen_bgl,
-            ao_gen,
-            ao_apply_bgl,
-            ao_apply,
+            fx,
         }
     }
 }

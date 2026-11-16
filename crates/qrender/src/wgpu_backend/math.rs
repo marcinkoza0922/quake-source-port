@@ -149,3 +149,22 @@ pub(super) fn anorms() -> &'static [V3] {
             .collect()
     })
 }
+
+/// Inverse of `affine(r, t)` for a rotation `r`: `affine(rᵀ, -rᵀt)`.
+pub(super) fn affine_inv(r: [[f32; 3]; 3], t: V3) -> Mat4 {
+    let rt: [[f32; 3]; 3] = std::array::from_fn(|i| std::array::from_fn(|j| r[j][i]));
+    affine(rt, std::array::from_fn(|i| -dot(rt[i], t)))
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn affine_inv_undoes_affine() {
+        let (r, t) = (entity_rotation([10.0, 70.0, -25.0]), [12.0, -40.0, 7.5]);
+        let p = [3.0, -8.0, 21.0];
+        let q = xform(&affine_inv(r, t), xform(&affine(r, t), p));
+        assert!(p.iter().zip(q).all(|(a, b)| (a - b).abs() < 1e-4), "{q:?}");
+    }
+}

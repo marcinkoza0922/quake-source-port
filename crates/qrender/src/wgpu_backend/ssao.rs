@@ -6,7 +6,8 @@
 //! resume. With MSAA both passes read sample 0 of the multisampled targets
 //! directly, so no sample-0 copy (Vulkan's aosource) is needed.
 
-use super::pipes::{AO_FORMAT, DrawU, UNIFORM_STRIDE};
+use super::fx_pipes::AO_FORMAT;
+use super::pipes::{DrawU, UNIFORM_STRIDE};
 use super::scene::Lists;
 use super::{Renderer, Targets};
 
@@ -62,8 +63,8 @@ impl Renderer {
         });
         let view = tex.create_view(&Default::default());
         let p = &self.pipes.scene;
-        let gen_group = tex_group(&self.dev, &p.ao_gen_bgl, depth, color);
-        let apply_group = tex_group(&self.dev, &p.ao_apply_bgl, depth, &view);
+        let gen_group = tex_group(&self.dev, &p.fx.ao_gen_bgl, depth, color);
+        let apply_group = tex_group(&self.dev, &p.fx.ao_apply_bgl, depth, &view);
         AoTargets { view, size, scale, gen_group, apply_group }
     }
 
@@ -112,7 +113,7 @@ impl Renderer {
                 })],
                 ..Default::default()
             });
-            pass.set_pipeline(&p.ao_gen);
+            pass.set_pipeline(&p.fx.ao_gen);
             pass.set_bind_group(1, &ao.gen_group, &[]);
             for (v, a) in l.views.iter().zip(views) {
                 if v.scene[0] == 0 || v.scene[1] == 0 {
@@ -135,7 +136,7 @@ impl Renderer {
             })],
             ..Default::default()
         });
-        pass.set_pipeline(&p.ao_apply);
+        pass.set_pipeline(&p.fx.ao_apply);
         pass.set_bind_group(1, &ao.apply_group, &[]);
         for (v, a) in l.views.iter().zip(views) {
             let ([x, y], [w, h]) = (v.ofs, v.scene);

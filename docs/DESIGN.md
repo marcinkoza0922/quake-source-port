@@ -641,7 +641,21 @@ at half (quality 0/1) or full (2) resolution, masked by scene alpha (the sky
 writes 0) and fog, then multiplied into the scene colour with the
 depth-aware blur before the translucent draws resume. With MSAA both passes
 `textureLoad` sample 0 of the multisampled targets, so Vulkan's aosource
-copy isn't needed. A post pass applies the
+copy isn't needed. Motion blur (`wgpu_backend/motion.rs`,
+`shaders/vel.wgsl`, port of velworld/velalias/vel.frag and post.frag's
+`motion_blur`): entity transforms are kept by entity key from the last frame;
+moving opaque brush and alias entities (not the viewmodel, ragdolls or
+teleports over 256 units) get a velocity-pass draw whose `DrawU.prev` is last
+frame's transform (alias vertices are CPU-posed in world space, so theirs is
+`M_prev · M_cur⁻¹`). After the scene (whose depth is then stored) they are
+drawn into an Rg16Float target at half (quality 0) or full resolution,
+discarded where hidden by scene depth, and the post pass smears along the
+strongest nearby motion; speed blur (`View::speed_blur`, bullet-time
+`edge_blur`) is in the same post pass. Like Vulkan, the post pass samples
+the scene nearest-filtered, so at very high frame rates the per-frame blur
+can be sub-pixel. Pipelines that read the scene targets (SSAO, velocity) are
+in `fx_pipes.rs`, rebuilt per MSAA sample count; command recording is in
+`encode.rs`. A post pass applies the
 `r_waterwarp 1` underwater screen warp (vkQuake's `water_warp`),
 polyblend/contrast/gamma at output size, then the 2D layer. The
 `r_waterwarp 2` FOV pulse works (it is in the shared projection); FTE
@@ -656,7 +670,7 @@ each frame; the Vulkan backend's `take_capture` is never pending.
 See-through portals and teleporter windows are deliberately left out of this
 backend: every portal view would rebuild the CPU draw lists again, which is
 too slow in a browser (portals and teleporters still work, the surface is
-just opaque). Not implemented there: motion/speed blur, water
+just opaque). Not implemented there: water
 ripples/caustics, softemu/dither, goggles, colorblind, slang presets,
 GPU timings and r_visibility. Natively `Renderer::new` (windowed) returns an
 error with `--features wgpu`; use `-headless`.

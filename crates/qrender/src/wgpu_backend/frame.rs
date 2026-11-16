@@ -1,17 +1,8 @@
-//! Frame recording: uploads the CPU draw lists, draws the scene views into
-//! the scene target, post-processes them onto the output, then the 2D layer.
+//! Frame setup: scene targets, the CPU draw lists of every view and their
+//! upload (recorded into commands by `encode.rs`).
 
-use super::pipes::{DrawU, UNIFORM_STRIDE, UiV};
-use super::scene::{Lists, Pipe, Src};
-use super::ssao::AoView;
-
-/// Which of each view's draws a scene pass records (split around SSAO).
-#[derive(Clone, Copy, PartialEq, Eq)]
-enum Part {
-    All,
-    Opaque,
-    Rest,
-}
+use super::pipes::{DrawU, UiV};
+use super::scene::{Lists, Pipe};
 use super::{DEPTH_FORMAT, MSAA_SAMPLES, NO_TEX, Renderer, SCENE_FORMAT, Targets};
 use crate::{Draw2D, Error, RenderFrame, Result};
 
@@ -44,25 +35,25 @@ impl GrowBuf {
         created
     }
 
-    fn get(&self) -> &wgpu::Buffer {
+    pub(super) fn get(&self) -> &wgpu::Buffer {
         self.0.as_ref().expect("uploaded before use")
     }
 }
 
 #[derive(Default)]
 pub(super) struct Buffers {
-    world_idx: GrowBuf,
-    alias_v: GrowBuf,
-    poly_v: GrowBuf,
-    poly_i: GrowBuf,
-    ui_v: GrowBuf,
-    draw_u: GrowBuf,
-    frame_u: GrowBuf,
+    pub(super) world_idx: GrowBuf,
+    pub(super) alias_v: GrowBuf,
+    pub(super) poly_v: GrowBuf,
+    pub(super) poly_i: GrowBuf,
+    pub(super) ui_v: GrowBuf,
+    pub(super) draw_u: GrowBuf,
+    pub(super) frame_u: GrowBuf,
     /// Group 0 of scene pipelines (frame uniforms, lightmap, palette).
     pub(super) frame_group: Option<wgpu::BindGroup>,
     pub(super) draw_group: Option<wgpu::BindGroup>,
     /// Scene colour as a material (post pass input).
-    post_group: Option<wgpu::BindGroup>,
+    pub(super) post_group: Option<wgpu::BindGroup>,
     lists: Lists,
 }
 
@@ -116,6 +107,15 @@ fn ui_quads(r: &Renderer, fr: &RenderFrame) -> (Vec<UiV>, Vec<(u32, u32, u32)>) 
     (v, batches)
 }
 
+/// Post pass `DrawU::model` columns: (motion blur x/y scale, speed blur,
+/// motion blur quality), (output width, height).
+fn post_blur(mb: [f32; 2], speed: f32, quality: u32, [w, h]: [u32; 2]) -> [f32; 16] {
+    let mut m = [0.0; 16];
+    m[..4].copy_from_slice(&[mb[0], mb[1], speed, quality as f32]);
+    m[4..6].copy_from_slice(&[w.max(1) as f32, h.max(1) as f32]);
+    m
+}
+
 impl Renderer {
     fn create_targets(&mut self) {
         let (w, h) = (self.width, self.height);
@@ -150,6 +150,9 @@ impl Renderer {
             (o, buf, bpr)
         });
         let color_view = color.create_view(&Default::default());
+        let depth_view = depth.create_view(&Default::default());
+        let ao = self.ssao.map(|q| self.create_ao_targets(q, scene, ms_view.as_ref().unwrap_or(&color_view), &depth_view));
+        let vel = self.mblur.map(|q| self.create_vel_target(q, scene, &depth_view));
         // a scaled scene is filtered up/down to the output (vkQuake r_scale)
         let post_sampler = if scene == (w, h) { &self.samplers.clamp } else { &self.samplers.linear };
         self.bufs.post_group = Some(self.dev.create_bind_group(&wgpu::BindGroupDescriptor {
@@ -157,14 +160,16 @@ impl Renderer {
             layout: &self.pipes.mat_bgl,
             entries: &[
                 wgpu::BindGroupEntry { binding: 0, resource: wgpu::BindingResource::TextureView(&color_view) },
-                wgpu::BindGroupEntry { binding: 1, resource: wgpu::BindingResource::TextureView(&self.black) },
+                // motion velocity (black = none)
+                wgpu::BindGroupEntry {
+                    binding: 1,
+                    resource: wgpu::BindingResource::TextureView(vel.as_ref().map_or(&self.black, |v| v.view())),
+                },
                 wgpu::BindGroupEntry { binding: 2, resource: wgpu::BindingResource::TextureView(&self.black) },
                 wgpu::BindGroupEntry { binding: 3, resource: wgpu::BindingResource::Sampler(post_sampler) },
             ],
         }));
-        let depth_view = depth.create_view(&Default::default());
-        let ao = self.ssao.map(|q| self.create_ao_targets(q, scene, ms_view.as_ref().unwrap_or(&color_view), &depth_view));
-        self.targets = Some(Targets { scene, color, color_view, ms_view, depth_view, ao, out });
+        self.targets = Some(Targets { scene, color, color_view, ms_view, depth_view, ao, vel, out });
         self.frame_ready = false;
     }
 
@@ -202,6 +207,11 @@ impl Renderer {
             self.ssao = ssao;
             self.needs_resize = true;
         }
+        let mblur = (fr.settings.motion_blur > 0.0).then(|| fr.settings.motion_blur_quality.min(1));
+        if mblur != self.mblur {
+            self.mblur = mblur;
+            self.needs_resize = true;
+        }
         if self.needs_resize {
             self.needs_resize = false;
             if let Some((s, cfg)) = &mut self.surface {
@@ -234,6 +244,7 @@ impl Renderer {
         lists.frame_u.clear();
         lists.views.clear();
         let (w, h) = (self.width, self.height);
+        self.motion.begin(fr);
         if !fr.splits.is_empty() {
             for (k, s) in fr.splits.iter().enumerate() {
                 self.build_view(fr, &s.view, s.rect, s.blend, 1u8 << k.min(7), &mut lists);
@@ -241,8 +252,11 @@ impl Renderer {
         } else if let Some(v) = &fr.view {
             self.build_view(fr, v, [0, 0, w, h], fr.blend, 1, &mut lists);
         }
+        self.motion.end(fr.time);
         let st = &fr.settings;
         let (tw, th) = self.targets.as_ref().map_or((w, h), |t| t.scene);
+        // blur length in target uv: velocity is in view uv units
+        let mb = if lists.views.iter().any(|v| !v.vel.is_empty()) { self.motion.scale } else { 0.0 };
         let post: Vec<DrawU> = lists
             .views
             .iter()
@@ -253,6 +267,12 @@ impl Renderer {
                     // z: underwater warp clock (< 0 off); w: output aspect
                     params: [st.gamma.clamp(0.1, 4.0), st.contrast.max(0.0), v.warp, w as f32 / h.max(1) as f32],
                     extra: [x as f32 / tw as f32, y as f32 / th as f32, (x + sw) as f32 / tw as f32, (y + sh) as f32 / th as f32],
+                    model: post_blur(
+                        [mb * sw as f32 / tw as f32, mb * sh as f32 / th as f32],
+                        v.speed_blur,
+                        st.motion_blur_quality.min(1),
+                        [w, h],
+                    ),
                     ..Default::default()
                 }
             })
@@ -322,176 +342,6 @@ impl Renderer {
                 ],
             });
             self.bufs.frame_group = Some(g);
-        }
-    }
-
-    fn encode(&mut self, l: &Lists, post_du: &[u32], ao_views: &[AoView], ui_du: u32, ui_batches: &[(u32, u32, u32)]) -> Result<()> {
-        let frame_tex = match &self.surface {
-            Some((s, cfg)) => match s.get_current_texture() {
-                wgpu::CurrentSurfaceTexture::Success(t) | wgpu::CurrentSurfaceTexture::Suboptimal(t) => Some(t),
-                wgpu::CurrentSurfaceTexture::Timeout | wgpu::CurrentSurfaceTexture::Occluded => return Ok(()),
-                _ => {
-                    s.configure(&self.dev, cfg);
-                    return Ok(());
-                }
-            },
-            None => None,
-        };
-        let t = self.targets.as_ref().ok_or_else(|| Error::new("no targets"))?;
-        let out_view = match (&frame_tex, &t.out) {
-            (Some(ft), _) => ft.texture.create_view(&Default::default()),
-            (None, Some((o, _, _))) => o.create_view(&Default::default()),
-            (None, None) => return Err(Error::new("no output")),
-        };
-        let b = &self.bufs;
-        let (Some(draw_group), Some(post_group)) = (&b.draw_group, &b.post_group) else {
-            return Err(Error::new("bind groups missing"));
-        };
-        let mut enc = self.dev.create_command_encoder(&Default::default());
-        if !l.views.is_empty() {
-            if ao_views.is_empty() {
-                self.scene_pass(&mut enc, t, l, Part::All);
-            } else {
-                self.scene_pass(&mut enc, t, l, Part::Opaque);
-                self.encode_ao(&mut enc, t, l, ao_views);
-                self.scene_pass(&mut enc, t, l, Part::Rest);
-            }
-        }
-        {
-            let mut pass = enc.begin_render_pass(&wgpu::RenderPassDescriptor {
-                label: Some("output"),
-                color_attachments: &[Some(wgpu::RenderPassColorAttachment {
-                    view: &out_view,
-                    depth_slice: None,
-                    resolve_target: None,
-                    ops: wgpu::Operations { load: wgpu::LoadOp::Clear(wgpu::Color::BLACK), store: wgpu::StoreOp::Store },
-                })],
-                ..Default::default()
-            });
-            pass.set_pipeline(&self.pipes.post);
-            pass.set_bind_group(1, post_group, &[]);
-            for (v, &du) in l.views.iter().zip(post_du) {
-                let ([x, y, _, _], [ow, oh]) = (v.rect, v.out);
-                if v.scene[0] == 0 || v.scene[1] == 0 || ow == 0 || oh == 0 {
-                    continue;
-                }
-                pass.set_viewport(x as f32, y as f32, ow as f32, oh as f32, 0.0, 1.0);
-                pass.set_bind_group(0, draw_group, &[du * UNIFORM_STRIDE as u32]);
-                pass.draw(0..3, 0..1);
-            }
-            if !ui_batches.is_empty() {
-                pass.set_viewport(0.0, 0.0, self.width as f32, self.height as f32, 0.0, 1.0);
-                pass.set_pipeline(&self.pipes.ui);
-                pass.set_bind_group(0, draw_group, &[ui_du * UNIFORM_STRIDE as u32]);
-                pass.set_vertex_buffer(0, b.ui_v.get().slice(..));
-                for &(slot, first, count) in ui_batches {
-                    let Some(mat) = self.bind_groups.get(&[slot, NO_TEX, NO_TEX]) else { continue };
-                    pass.set_bind_group(1, mat, &[]);
-                    pass.draw(first..first + count, 0..1);
-                }
-            }
-        }
-        if let (None, Some((o, buf, bpr))) = (&frame_tex, &t.out) {
-            enc.copy_texture_to_buffer(
-                o.as_image_copy(),
-                wgpu::TexelCopyBufferInfo {
-                    buffer: buf,
-                    layout: wgpu::TexelCopyBufferLayout { offset: 0, bytes_per_row: Some(*bpr), rows_per_image: None },
-                },
-                o.size(),
-            );
-        }
-        if let Some(ft) = &frame_tex {
-            self.record_capture(&mut enc, &ft.texture);
-        }
-        self.queue.submit([enc.finish()]);
-        self.start_capture_map();
-        if let Some(ft) = frame_tex {
-            self.queue.present(ft);
-        }
-        self.frame_ready = true;
-        Ok(())
-    }
-
-    /// Records the scene pass for `part` of every view's draws.
-    fn scene_pass(&self, enc: &mut wgpu::CommandEncoder, t: &Targets, l: &Lists, part: Part) {
-        let b = &self.bufs;
-        let (Some(frame_group), Some(draw_group)) = (&b.frame_group, &b.draw_group) else { return };
-        let (first, last) = (part != Part::Rest, part != Part::Opaque);
-        let mut pass = enc.begin_render_pass(&wgpu::RenderPassDescriptor {
-            label: Some("scene"),
-            // MSAA draws into ms_view and resolves into color_view at the end
-            color_attachments: &[Some(wgpu::RenderPassColorAttachment {
-                view: t.ms_view.as_ref().unwrap_or(&t.color_view),
-                depth_slice: None,
-                resolve_target: t.ms_view.as_ref().filter(|_| last).map(|_| &t.color_view),
-                ops: wgpu::Operations {
-                    load: if first { wgpu::LoadOp::Clear(wgpu::Color::BLACK) } else { wgpu::LoadOp::Load },
-                    store: if t.ms_view.is_some() && last { wgpu::StoreOp::Discard } else { wgpu::StoreOp::Store },
-                },
-            })],
-            depth_stencil_attachment: Some(wgpu::RenderPassDepthStencilAttachment {
-                view: &t.depth_view,
-                depth_ops: Some(wgpu::Operations {
-                    load: if first { wgpu::LoadOp::Clear(1.0) } else { wgpu::LoadOp::Load },
-                    store: if last { wgpu::StoreOp::Discard } else { wgpu::StoreOp::Store },
-                }),
-                stencil_ops: None,
-            }),
-            ..Default::default()
-        });
-        for v in &l.views {
-            let ([x, y], [sw, sh]) = (v.ofs, v.scene);
-            if sw == 0 || sh == 0 {
-                continue;
-            }
-            pass.set_scissor_rect(x, y, sw, sh);
-            pass.set_bind_group(0, frame_group, &[v.fu * UNIFORM_STRIDE as u32]);
-            let mut vm = None;
-            let cmds = match part {
-                Part::All => &v.cmds[..],
-                Part::Opaque => &v.cmds[..v.split],
-                Part::Rest => &v.cmds[v.split..],
-            };
-            for c in cmds {
-                if vm != Some(c.viewmodel) {
-                    vm = Some(c.viewmodel);
-                    let maxz = if c.viewmodel { 0.3 } else { 1.0 };
-                    pass.set_viewport(x as f32, y as f32, sw as f32, sh as f32, 0.0, maxz);
-                }
-                let p = &self.pipes.scene;
-                pass.set_pipeline(match c.pipe {
-                    Pipe::World => &p.world,
-                    Pipe::WorldAlpha => &p.world_alpha,
-                    Pipe::Water => &p.water,
-                    Pipe::WaterAlpha => &p.water_alpha,
-                    Pipe::Sky => &p.sky,
-                    Pipe::Alias => &p.alias,
-                    Pipe::AliasAlpha => &p.alias_alpha,
-                    Pipe::Poly(i) => &p.poly[i],
-                });
-                let mat = if c.pipe == Pipe::Sky { self.sky_group.as_ref() } else { self.bind_groups.get(&c.mat) };
-                let Some(mat) = mat else { continue };
-                pass.set_bind_group(1, mat, &[]);
-                pass.set_bind_group(2, draw_group, &[c.du * UNIFORM_STRIDE as u32]);
-                match c.src {
-                    Src::World => {
-                        let Some(wr) = &self.world else { continue };
-                        pass.set_vertex_buffer(0, wr.vbuf.slice(..));
-                        pass.set_index_buffer(b.world_idx.get().slice(..), wgpu::IndexFormat::Uint32);
-                    }
-                    Src::Alias(mi) => {
-                        let Some(super::models::Model::Alias(am)) = self.models.get(mi) else { continue };
-                        pass.set_vertex_buffer(0, b.alias_v.get().slice(..));
-                        pass.set_index_buffer(am.ibuf.slice(..), wgpu::IndexFormat::Uint32);
-                    }
-                    Src::Poly => {
-                        pass.set_vertex_buffer(0, b.poly_v.get().slice(..));
-                        pass.set_index_buffer(b.poly_i.get().slice(..), wgpu::IndexFormat::Uint32);
-                    }
-                }
-                pass.draw_indexed(c.first..c.first + c.count, c.base_vertex, 0..1);
-            }
         }
     }
 }
