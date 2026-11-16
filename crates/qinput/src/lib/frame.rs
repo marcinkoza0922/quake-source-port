@@ -118,10 +118,13 @@ impl Input {
                 let th = v(c.gyro_noise_thresh);
                 let gy = gamepad::gyro_filter(self.gyro[1].to_degrees(), th);
                 let gp = gamepad::gyro_filter(self.gyro[0].to_degrees(), th);
+                let gr = gamepad::gyro_filter(self.gyro[2].to_degrees(), th);
                 s.look_delta[0] += gy * v(c.gyro_yawsensitivity) * ft;
+                // roll steers like yaw (negative values reverse it)
+                s.look_delta[0] += gr * v(c.gyro_rollsensitivity) * ft;
                 s.look_delta[1] -= gp * v(c.gyro_pitchsensitivity) * ft;
             }
-            if pad_input || (gyro_on && self.gyro != [0.0; 2]) {
+            if pad_input || (gyro_on && self.gyro != [0.0; 3]) {
                 self.last_look = LookDevice::Gamepad;
             }
             aim_ok = self.last_look == LookDevice::Gamepad;

@@ -436,6 +436,7 @@ Port of vkQuake/QSS's entity delta protocol, layered on 15/666/999. It is needed
 - `InputHost: CmdContext`. `register_commands` adds bind/unbind/unbindall/bindlist/impulse and the +/- buttons. `handle_event(ctx, ev) -> Option<Routed>` returns what the console or menu still has to handle. `set_key_dest`.
 - `Input::new(&mut Cvars)`. `Input::frame(&cvars, viewangles, dt, Option<&AimContext>) -> qclient::InputState`, where `look_delta` holds [yaw, pitch] degrees.
 - Aim assist works only with the gamepad, never with mouse input in the same frame. Its parts: a cone of `aim_cone` plus the target's angular radius, linear falloff, look slowdown, and rotational assist while a stick is deflected. Snap is off. Targets need a visibility check through `trait Visibility`. `aim_assist_allowed(deathmatch, sv_aimassist)` gates it; the binary registers `sv_aimassist`.
+- Gyro: `InputEvent::Gyro { pitch, yaw, roll }` (rad/s). Per-axis cvars `gyro_yawsensitivity`, `gyro_pitchsensitivity`, `gyro_rollsensitivity` (default 0; roll adds to yaw, may be negative), `gyro_noise_thresh`, `gyro_mode`. The Options → Input → Controller → Gyro page (`Page::Gyro`) also exposes `gyro_enable`, the aim style (`joy_flick` 0 = 2D aiming, 1 = flick stick) and `joy_flick_time`.
 - Cvars are listed in `qinput::CVAR_LIST` (mouse, joy_*, flick stick, gyro, aim_*).
 - Differs from ironwail: flick stick works without gyro, and `gyro_mode` uses its own numbering (0 = always on, 1 = `+gyroaction` disables, 2 = `+gyroaction` enables).
 

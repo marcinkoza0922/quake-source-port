@@ -100,7 +100,7 @@ pub enum InputEvent {
     /// Sticks -1..1 (+y = down), triggers 0..1.
     GamepadAxis { axis: GamepadAxis, value: f32 },
     /// Angular rates in rad/s: pitch (+ = tilt up), yaw (+ = turn left).
-    Gyro { pitch: f32, yaw: f32 },
+    Gyro { pitch: f32, yaw: f32, roll: f32 },
     GamepadConnected(bool),
     /// Finger on the touchscreen: window-normalised position, window
     /// width/height.
@@ -219,6 +219,7 @@ cvars! {
     gyro_mode = "gyro_mode", "0";
     gyro_yawsensitivity = "gyro_yawsensitivity", "2.5";
     gyro_pitchsensitivity = "gyro_pitchsensitivity", "2.5";
+    gyro_rollsensitivity = "gyro_rollsensitivity", "0";
     gyro_noise_thresh = "gyro_noise_thresh", "1.5";
     autoaim = "assist_autoaim", "0";
     autoaim_mode = "assist_autoaim_mode", "0";
@@ -262,7 +263,7 @@ pub struct Input {
     mouse: [f32; 2],
     old_mouse: [f32; 2],
     axes: [f32; 6],
-    gyro: [f32; 2],
+    gyro: [f32; 3],
     pub gamepad_connected: bool,
     pub last_look: LookDevice,
     /// Device of the last deliberate input (buttons, sticks, keys, mouse).
@@ -307,7 +308,7 @@ impl Input {
             mouse: [0.0; 2],
             old_mouse: [0.0; 2],
             axes: [0.0; 6],
-            gyro: [0.0; 2],
+            gyro: [0.0; 3],
             gamepad_connected: false,
             last_look: LookDevice::Mouse,
             last_device: Device::KeyboardMouse,

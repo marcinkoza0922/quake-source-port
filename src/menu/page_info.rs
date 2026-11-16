@@ -10,6 +10,14 @@ pub(super) fn tooltip(item: Item) -> Option<&'static str> {
         _ => return None,
     };
     Some(match cvar {
+        "gyro_enable" => "Turn the controller's motion sensor into a look input; needs a pad with a gyroscope",
+        "joy_flick" => "2D aiming turns the view continuously with the right stick; flick stick snaps the view to where you push the stick, then turning the stick rotates it",
+        "gyro_mode" => "When gyro looking applies: always, off while +gyroaction is held, or only while it is held",
+        "gyro_yawsensitivity" => "How far the view turns left and right when you turn the controller (yaw axis)",
+        "gyro_pitchsensitivity" => "How far the view tilts up and down when you tilt the controller (pitch axis)",
+        "gyro_rollsensitivity" => "Turns the view when you roll the controller sideways; 0 disables it, negative reverses it",
+        "gyro_noise_thresh" => "Ignores gyro rotation slower than this many degrees per second, to hide hand tremor",
+        "joy_flick_time" => "Seconds the flick stick snap takes; lower is faster",
         "touch_enable" => "On-screen stick and buttons: auto shows them after a touch and hides them when another device is used",
         "touch_sensitivity" => "How far the view turns when you drag on the right half of the screen",
         "touch_invert" => "Dragging up looks down instead of up",
@@ -211,6 +219,7 @@ pub(super) fn page_items(p: Page) -> &'static [Item] {
         Page::ScreenShader => SCREEN_SHADER,
         Page::Mouse => MOUSE,
         Page::Controller => CONTROLLER,
+        Page::Gyro => GYRO,
         Page::Touch => TOUCH,
         Page::Autosave => AUTOSAVE,
         Page::Assists => ASSISTS,
@@ -232,6 +241,7 @@ pub(super) fn page_name(p: Page) -> &'static str {
         Page::Setup => "Player Setup",
         Page::Mouse => "Mouse & Keyboard",
         Page::Controller => "Controller",
+        Page::Gyro => "Gyro & Flick Stick",
         Page::Touch => "Touchscreen",
         Page::Autosave => "Autosave",
         Page::Assists => "Assists",
@@ -264,7 +274,7 @@ pub(super) fn page_name(p: Page) -> &'static str {
 
 /// The page an `Item::Sub` page returns to, with that row's index.
 pub(super) fn parent_page(p: Page) -> Option<(Page, usize)> {
-    [Page::Assists, Page::Gameplay, Page::Input, Page::Hud, Page::Accessibility, Page::Enhancements, Page::Addons, Page::NewGameAddons, Page::Audio].into_iter().find_map(|parent| {
+    [Page::Assists, Page::Gameplay, Page::Input, Page::Controller, Page::Hud, Page::Accessibility, Page::Enhancements, Page::Addons, Page::NewGameAddons, Page::Audio].into_iter().find_map(|parent| {
         page_items(parent).iter().position(|i| matches!(i, Item::Sub { page, .. } if *page == p)).map(|i| (parent, i))
     })
 }

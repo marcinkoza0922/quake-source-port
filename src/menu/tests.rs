@@ -200,6 +200,8 @@ mod save_menu_tests {
         assert_eq!(parent_page(Page::Autosave).map(|p| p.0), Some(Page::Gameplay));
         assert!(option_cvars().any(|c| c == "sv_autosave"));
         assert!(option_cvars().any(|c| c == "joy_invert"));
+        assert!(option_cvars().any(|c| c == "gyro_rollsensitivity"));
+        assert_eq!(parent_page(Page::Gyro).map(|p| p.0), Some(Page::Controller));
         assert!(option_cvars().any(|c| c == "addon_washer_quality"));
         assert!(tooltip(WASHER[1]).is_some());
     }
