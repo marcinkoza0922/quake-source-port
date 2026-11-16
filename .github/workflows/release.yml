@@ -89,6 +89,92 @@ jobs:
       - uses: actions/upload-artifact@v4
         with: { name: "${{ matrix.name }}", path: "${{ env.ASSET }}" }
 
+  # musl Linux (Alpine, Void musl, Chimera...). Built in an Alpine container with musl
+  # linked dynamically, since a static binary cannot dlopen Vulkan or SDL's backends.
+  # Alpine runs through `docker run` because GitHub's JavaScript actions do not work
+  # inside Alpine job containers on arm64.
+  musl:
+    needs: shaders
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { name: linux-musl-x64, os: ubuntu-24.04 }
+          - { name: linux-musl-arm64, os: ubuntu-24.04-arm }
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with: { name: spirv, path: spv }
+      - name: Build in Alpine
+        run: |
+          docker run --rm -v "$PWD:/src" -w /src -e QSP_SPIRV_DIR=/src/spv \
+            -e CARGO_TARGET_DIR=/src/target alpine:3.22 sh tools/release_musl.sh
+      - name: Package
+        run: |
+          sudo chown -R "$(id -u)" target
+          echo "ASSET=$(sh tools/release_package.sh ${{ matrix.name }} target/release/quake-source-port)" >> "$GITHUB_ENV"
+      - uses: actions/upload-artifact@v4
+        with: { name: "${{ matrix.name }}", path: "${{ env.ASSET }}" }
+
+  # The BSDs build natively in a QEMU VM and link the system SDL3 package, which users
+  # install anyway alongside the Vulkan loader. FreeBSD and NetBSD get Rust from rustup;
+  # OpenBSD has no rustup, so it uses the release's packaged Rust, and its binaries only
+  # run on the OpenBSD release they were built for.
+  bsd:
+    needs: shaders
+    # Experimental: a broken BSD build must not hold back the release.
+    continue-on-error: true
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: freebsd-x64
+            os: freebsd
+            version: "14.3"
+            setup: >-
+              sudo pkg install -y curl cmake ninja pkgconf sdl3 &&
+              curl -sSf https://sh.rustup.rs | sh -s -- -y --profile minimal
+          - name: openbsd-x64
+            os: openbsd
+            version: "7.9"
+            setup: >-
+              sudo pkg_add -I rust cmake ninja sdl3
+          - name: netbsd-x64
+            os: netbsd
+            version: "10.1"
+            setup: >-
+              sudo pkgin -y install curl cmake ninja-build pkgconf SDL3 &&
+              curl -sSf https://sh.rustup.rs | sh -s -- -y --profile minimal
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with: { name: spirv, path: spv }
+      - name: Build in VM
+        uses: cross-platform-actions/action@v1.3.0
+        with:
+          operating_system: ${{ matrix.os }}
+          version: ${{ matrix.version }}
+          architecture: x86-64
+          cpu_count: 4
+          memory: 12G
+          environment_variables: QSP_SPIRV_DIR CARGO_TARGET_DIR
+          run: |
+            ${{ matrix.setup }}
+            export PATH="$HOME/.cargo/bin:$PATH"
+            cargo --version
+            cargo build --release --locked -p quake-source-port
+            mkdir -p out && cp "$CARGO_TARGET_DIR/release/quake-source-port" out/
+        env:
+          QSP_SPIRV_DIR: ${{ github.workspace }}/spv
+          # Outside the synced workspace so the VM does not copy gigabytes back.
+          CARGO_TARGET_DIR: /tmp/qsp-target
+      - name: Package
+        run: echo "ASSET=$(sh tools/release_package.sh ${{ matrix.name }} out/quake-source-port)" >> "$GITHUB_ENV"
+      - uses: actions/upload-artifact@v4
+        with: { name: "${{ matrix.name }}", path: "${{ env.ASSET }}" }
+
   android:
     needs: shaders
     runs-on: ubuntu-24.04
@@ -139,11 +225,11 @@ jobs:
 
   release:
     if: startsWith(github.ref, 'refs/tags/v')
-    needs: [build, android]
+    needs: [build, musl, bsd, android]
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/download-artifact@v4
-        with: { path: dist, pattern: "{linux,windows,macos,android}-*", merge-multiple: true }
+        with: { path: dist, pattern: "{linux,windows,macos,android,freebsd,openbsd,netbsd}-*", merge-multiple: true }
       - name: Publish
         env: { GH_TOKEN: "${{ github.token }}" }
         run: |
