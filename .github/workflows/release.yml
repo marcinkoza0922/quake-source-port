@@ -70,7 +70,7 @@ jobs:
       - name: Package
         shell: bash
         run: |
-          d="quake-source-port-${{ github.ref_name }}-${{ matrix.name }}"
+          ref="${GITHUB_REF_NAME//\//-}"; d="quake-source-port-$ref-${{ matrix.name }}"
           mkdir "$d"
           if [ "${{ runner.os }}" = Windows ]; then
             cp target/release/quake-source-port.exe "$d/"
