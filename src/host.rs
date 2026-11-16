@@ -29,6 +29,7 @@ mod net;
 mod demo;
 mod mapswitch;
 mod render;
+mod speed;
 mod split;
 mod split_input;
 #[cfg(test)]
@@ -101,6 +102,9 @@ pub struct Host {
     impacts: crate::impacts::Impacts,
     hitfx: crate::hitfx::HitFx,
     tracers: crate::tracers::Tracers,
+    bboxes: crate::bboxes::BBoxes,
+    /// scr_showspeed: (peak this interval, shown value, interval start).
+    speed: (f32, f32, f64),
     pub realtime: f64,
     accum: f64,
     pub quit: bool,
@@ -250,6 +254,8 @@ impl Host {
             impacts: crate::impacts::Impacts::default(),
             hitfx: crate::hitfx::HitFx::default(),
             tracers: Default::default(),
+            bboxes: Default::default(),
+            speed: (0.0, -1.0, 0.0),
             realtime: 0.0,
             accum: 0.0,
             quit: false,

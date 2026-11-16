@@ -34,7 +34,7 @@ pub struct ScenePipes {
     pub alias: vk::Pipeline,
     pub alias_alpha: vk::Pipeline,
     pub particle: vk::Pipeline,
-    pub fte: [vk::Pipeline; 16],
+    pub fte: [vk::Pipeline; 17],
 }
 
 impl ScenePipes {
@@ -49,7 +49,7 @@ impl ScenePipes {
             alias: n,
             alias_alpha: n,
             particle: n,
-            fte: [n; 16],
+            fte: [n; 17],
         }
     }
 
@@ -92,7 +92,7 @@ pub struct Pipelines {
     pub particle: vk::Pipeline,
     /// FTE particles: 8 blend modes of triangles, then the same as lines
     /// (see [`fte_index`]).
-    pub fte: [vk::Pipeline; 16],
+    pub fte: [vk::Pipeline; 17],
     /// Single-sampled pipelines for portal/teleporter destination views when MSAA is enabled.
     pub portal: ScenePipes,
     pub ui: vk::Pipeline,
@@ -156,7 +156,7 @@ fn fte_factors(b: crate::FteBlend) -> (vk::BlendFactor, vk::BlendFactor) {
     use crate::FteBlend as F;
     use vk::BlendFactor as B;
     match b {
-        F::Blend => (B::SRC_ALPHA, B::ONE_MINUS_SRC_ALPHA),
+        F::Blend | F::Overlay => (B::SRC_ALPHA, B::ONE_MINUS_SRC_ALPHA),
         F::BlendColour => (B::SRC_COLOR, B::ONE_MINUS_SRC_COLOR),
         F::AddA => (B::SRC_ALPHA, B::ONE),
         F::AddC => (B::SRC_COLOR, B::ONE),
@@ -169,6 +169,9 @@ fn fte_factors(b: crate::FteBlend) -> (vk::BlendFactor, vk::BlendFactor) {
 
 /// Index of an FTE pipeline in [`Pipelines::fte`].
 pub fn fte_index(b: crate::FteBlend, lines: bool) -> usize {
+    if b == crate::FteBlend::Overlay {
+        return 16;
+    }
     crate::FteBlend::ALL.iter().position(|x| *x == b).unwrap_or(0) + if lines { 8 } else { 0 }
 }
 
@@ -361,7 +364,7 @@ impl Pipelines {
             alias_xray: null,
             poly: null,
             particle: null,
-            fte: [null; 16],
+            fte: [null; 17],
             portal: ScenePipes::null(),
             ui: null,
             post: null,

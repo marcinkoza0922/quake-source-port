@@ -17,6 +17,7 @@ mod blood;
 mod hitfx;
 mod impacts;
 mod tracers;
+mod bboxes;
 mod demo;
 mod draw;
 mod font;

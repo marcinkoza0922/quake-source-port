@@ -303,3 +303,44 @@ pub fn load_replacement(
     let holey = (mdl.flags & MF_HOLEY) != 0;
     load_md3(fs, r, &md3_name, &md3, holey)
 }
+
+/// Attempts to load the 2021 re-release's `.md5mesh`/`.md5anim` companion of
+/// `mdl_name`, baked into an MD3 (see `qformats::md5`). Skins follow the
+/// re-release naming, `<dir>/<shader>_SS_FF` (skin, animated skin frame).
+pub fn load_md5_replacement(fs: &Fs, r: &mut Renderer, mdl_name: &str, mdl: &Mdl) -> Option<ModelId> {
+    let stem = strip_ext(mdl_name);
+    let mesh = fs.open_companion(mdl_name, &format!("{stem}.md5mesh"))?;
+    let anim = fs.open(&format!("{stem}.md5anim"));
+    let md5 = match qformats::md5::Md5::parse(&mesh, anim.as_deref()) {
+        Ok(m) => m,
+        Err(e) => {
+            eprintln!("{stem}.md5mesh: {e}; using the .mdl");
+            return None;
+        }
+    };
+    let holey = (mdl.flags & MF_HOLEY) != 0;
+    let dir = mdl_name.rfind('/').map_or("", |i| &mdl_name[..=i]);
+    let surface_skins = md5
+        .shaders
+        .iter()
+        .map(|shader| {
+            let mut skins = Vec::new();
+            for s in 0..MAX_SKINS {
+                let frames: Vec<_> = (0..MAX_SKIN_FRAMES)
+                    .map_while(|f| load_image(fs, &format!("{dir}{shader}_{s:02}_{f:02}")))
+                    .map(|(tex, stem)| to_skin_image(r, fs, tex, &stem, holey))
+                    .collect();
+                if frames.is_empty() {
+                    break;
+                }
+                let iv = intervals_for(frames.len());
+                skins.push((frames, iv));
+            }
+            if skins.is_empty() {
+                skins.push((vec![dummy_skin()], Vec::new()));
+            }
+            Md3SurfaceSkins { skins, holey }
+        })
+        .collect::<Vec<_>>();
+    r.load_md3(&md5.md3, &surface_skins).ok()
+}

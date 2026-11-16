@@ -27,6 +27,7 @@ pub(super) fn tooltip(item: Item) -> Option<&'static str> {
         "r_texfilter" => "Nearest keeps crisp classic pixels; linear smooths textures",
         "r_anisotropy" => "Keeps textures sharp on floors and walls seen at steep angles",
         "r_dynamic" => "Lights from rockets, muzzle flashes and explosions brighten nearby walls",
+        "r_enhancedmodels" => "Uses the 2021 re-release's smoother MD5 models (and MD3 replacements from mods) instead of the classic ones. Applies on the next map load",
         "r_coloredlight" => "Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load",
         "r_fog" => "Shows the distance fog that maps and mods set; off always gives clear view",
         "r_skyfog" => "How strongly fog covers the sky when fog is on",

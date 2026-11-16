@@ -176,6 +176,13 @@ impl Host {
                 && self.cv("deathmatch") == 0.0;
             let hitscan = false && !pellets; // shotgun tracers disabled (hidden from menus)
             self.tracers.frame(hitscan, &self.cl, &self.debris, v, &mut self.r, &mut fte);
+            let bb = crate::bboxes::Settings::read(&self.server.core.cvars);
+            if bb.mode != 0 && self.cv("r_drawentities") != 0.0 {
+                let eye = Vec3::from(v.origin);
+                let boxes = self.server.edict_boxes(self.cl.viewentity as u32, (bb.mode.abs() >= 2).then_some(eye));
+                let fwd = qcore::math::angle_vectors(Vec3::from(v.angles)).0;
+                self.bboxes.frame(&bb, &boxes, eye, fwd, &mut self.r, &mut fte);
+            }
             self.impacts.frame(
                 &self.server.core.cvars, &self.cl, &self.level, &mut brushes, &self.server.core.fs,
                 &mut self.r, &mut ents, &dyn_verts, v.origin.into(), &self.debris, fte_frustum.as_ref(), &mut fte,
@@ -197,6 +204,7 @@ impl Host {
         let equip_key = self.equip_wheel_key();
         let bullet_meter = self.cv("addon_bullet_time_meter") != 0.0;
         let showfps = self.cv("scr_showfps") != 0.0;
+        let speed = self.speedometer();
         let classic = self.classic_hud();
         let rays: Vec<_> = std::iter::once(&self.cl).chain(self.guests.iter().filter(|g| g.cl.signon == 4).map(|g| &g.cl))
             .map(|cl| {
@@ -350,6 +358,13 @@ impl Host {
                 c.reset_origin();
                 let x = c.vw() - s.len() as f32 * 8.0 - 8.0;
                 c.string(x, 8.0, &s);
+            }
+            if let Some(s) = speed.filter(|_| ingame && !self.menu.active()) {
+                // Just below the crosshair, centred (ironwail's CANVAS_CROSSHAIR).
+                c.reset_origin();
+                let ofs = self.cv("scr_showspeed_ofs");
+                let y = (c.vh() / 2.0 + 4.0 + ofs).clamp(0.0, c.vh() - 8.0);
+                c.string((c.vw() / 2.0 - s.len() as f32 * 4.0).floor(), y.floor(), &s);
             }
         }
         let styles: Vec<i32> = (0..qnet::protocol::MAX_LIGHTSTYLES).map(|i| self.cl.lightstyle_value(i)).collect();

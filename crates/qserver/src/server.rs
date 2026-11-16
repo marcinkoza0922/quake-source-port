@@ -18,6 +18,8 @@ use crate::msg::*;
 use crate::vis::Vis;
 mod types;
 mod reticle;
+mod bboxes;
+pub use bboxes::{BoxModel, EdictBox};
 pub use types::*;
 mod spawn;
 mod physics;
