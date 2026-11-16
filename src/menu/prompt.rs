@@ -15,6 +15,8 @@ pub(super) enum Prompt {
     /// Play / Customize Experience / Disable All before a new game
     /// (`Menu::launch` holds the game).
     Launch { cursor: usize },
+    /// First-run graphics preset pick (`preset.rs`).
+    Preset { cursor: usize },
 }
 
 /// Box geometry (menu units): x, y, w, h.
@@ -46,7 +48,7 @@ impl Menu {
                 let row = ((y - SKILL_Y) / SKILL_H) as usize;
                 (inside && row < SKILLS.len()).then_some(row)
             }
-            Prompt::Launch { .. } => None,
+            Prompt::Launch { .. } | Prompt::Preset { .. } => None,
         }
     }
 
@@ -55,7 +57,7 @@ impl Menu {
         let changed = match self.prompt.as_mut()? {
             Prompt::Confirm { yes, .. } => std::mem::replace(yes, i == 0) != (i == 0),
             Prompt::Skill { cursor, .. } => std::mem::replace(cursor, i) != i,
-            Prompt::Launch { .. } => false,
+            Prompt::Launch { .. } | Prompt::Preset { .. } => false,
         };
         changed.then_some("misc/menu1.wav")
     }
@@ -103,7 +105,7 @@ impl Menu {
                 let Some(s) = pick else { return };
                 run = (format!("skill {s}\n{cmd}"), true);
             }
-            Prompt::Launch { .. } => return,
+            Prompt::Launch { .. } | Prompt::Preset { .. } => return,
         }
         self.prompt = None;
         let (cmd, close) = run;
@@ -119,6 +121,10 @@ impl Menu {
         let Some(p) = &self.prompt else { return };
         if let Prompt::Launch { cursor } = *p {
             self.draw_launch(c, cv, cursor);
+            return;
+        }
+        if let Prompt::Preset { cursor } = *p {
+            self.draw_preset(c, cursor);
             return;
         }
         let (x, y, w, h) = BOX;
@@ -148,7 +154,7 @@ impl Menu {
                     c.text_center(320.0, ry + 1.0, &format!("{}  {s}", i + 1), TXT, if i == *cursor { GOLD_FG } else { FG });
                 }
             }
-            Prompt::Launch { .. } => {}
+            Prompt::Launch { .. } | Prompt::Preset { .. } => {}
         }
     }
 }

@@ -33,6 +33,7 @@ mod actions;
 mod customize;
 use customize::{CUSTOMIZE, MODIFIERS, NEW_GAME_CUSTOMIZE};
 mod launch;
+mod preset;
 mod addon_settings;
 use addon_settings::{ADDONS, NEW_GAME_ADDONS};
 mod addon_browser;
@@ -223,6 +224,9 @@ pub struct Menu {
     /// The new game behind the launch pop-up (kept while its Customize
     /// pages are open).
     launch: Option<launch::Launch>,
+    /// First run of this game: ask for a graphics preset (`preset.rs`)
+    /// the next time the main menu shows.
+    pub preset_pending: bool,
     /// Prompts show gamepad glyphs (the pad was used last).
     pub pad_ui: bool,
     pub glyphs: Glyphs,
@@ -328,6 +332,7 @@ impl Menu {
             custom_running: false,
             new_game_setup: false,
             launch: None,
+            preset_pending: false,
             pad_ui: false,
             glyphs: Glyphs { family: Family::Xbox },
             osk: None,

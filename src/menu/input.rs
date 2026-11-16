@@ -8,6 +8,7 @@ impl Menu {
         self.mouse = Some(pos);
         if self.autoaim_prompt || self.capturing() { return None; }
         if matches!(self.prompt, Some(Prompt::Launch { .. })) { return self.launch_hover(pos, cv); }
+        if matches!(self.prompt, Some(Prompt::Preset { .. })) { return self.preset_hover(pos); }
         if self.prompt.is_some() { return self.prompt_hover(pos); }
         if self.addon_mouse(pos) { return None; }
         if let (Some(i), Screen::OptionsPage(p)) = (self.slider_drag, self.screen) {
@@ -56,6 +57,10 @@ impl Menu {
         }
         if matches!(self.prompt, Some(Prompt::Launch { .. })) {
             self.launch_key(key, cv, &mut out);
+            return out;
+        }
+        if matches!(self.prompt, Some(Prompt::Preset { .. })) {
+            self.preset_key(key, &mut out);
             return out;
         }
         if self.prompt.is_some() {

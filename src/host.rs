@@ -42,6 +42,7 @@ mod input;
 mod frame;
 mod prof;
 mod goggles;
+mod presets;
 mod bullet_time;
 mod hitstop;
 mod toy_fx;
@@ -335,6 +336,7 @@ impl Host {
         register_commands(&mut h.cmds);
         goggles::register_goggle_commands(&mut h.cmds);
         shader::register_shader_commands(&mut h.cmds);
+        presets::register_preset_commands(&mut h.cmds);
         h.con.forced = true;
         h.con.frac = 1.0;
         h.con.load_history(&crate::user_dir("id1"));
@@ -343,6 +345,9 @@ impl Host {
         // 2026 update compat (ironwail host.c): word-wrap centerprints for mg3.
         let mg3 = h.server.core.fs.game_dirs().iter().any(|d| d.eq_ignore_ascii_case("mg3"));
         h.server.core.cvars.set("scr_usekfont", if mg3 { "1" } else { "0" });
+        // First run of this game (no user config, none to inherit): ask for
+        // a graphics preset when the main menu first shows (`sync_menu_ui`).
+        h.menu.preset_pending = h.inherited_config().is_none() && !qcore::vfs::is_file(&h.user_dir().join("config.cfg"));
         h.cbuf.add_text("exec quake.rc\n");
         h
     }
