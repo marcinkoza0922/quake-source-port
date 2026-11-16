@@ -10,7 +10,8 @@ pub(crate) mod surfaces;
 #[cfg(test)]
 mod tests;
 
-/// `r_impact_quality`: mark caps, lifetimes and surface hit-particle budgets.
+/// `r_particle_quality`: surface hit-particle budgets. Mark lifetime and
+/// count come only from `r_impact_lifetime` / `r_impact_limit`.
 #[derive(Clone, Copy, PartialEq, Eq, Debug, Default)]
 pub enum Quality {
     Low = 0,
@@ -39,21 +40,21 @@ pub(crate) struct Tier {
 }
 
 pub(crate) fn tier(cv: &qcore::cvar::Cvars) -> Tier {
-    let quality = Quality::from_cvar(cv.value_of("r_impact_quality"));
+    let quality = Quality::from_cvar(cv.value_of("r_particle_quality"));
     let lifetime = cv.value_of("r_impact_lifetime").clamp(5.0, 600.0) as f64;
     let limit = cv.value_of("r_impact_limit").clamp(32.0, 2048.0) as usize;
     let level = cv.value_of("r_impact_fx").clamp(0.0, 4.0) as u8;
     match quality {
         Quality::Low => Tier {
-            lifetime: lifetime.min(30.0),
-            limit: limit.min(256),
+            lifetime,
+            limit,
             fx_level: level.min(2),
             fx_mult: 0.5,
             max_parts: 1024,
         },
         Quality::Medium => Tier {
-            lifetime: lifetime.min(120.0),
-            limit: limit.min(512),
+            lifetime,
+            limit,
             fx_level: level.min(3),
             fx_mult: 1.0,
             max_parts: 2500,

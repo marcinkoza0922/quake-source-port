@@ -63,3 +63,39 @@ fn traces_hit_brush_entities() {
     assert_eq!(fte_contents(-3), qpart::FTECONTENTS_WATER);
     assert_eq!(fte_contents(-2), qpart::FTECONTENTS_SOLID);
 }
+
+fn enhanced_files(p: &str) -> Option<Vec<u8>> {
+    match p {
+        "particles/qsp_enhanced.cfg" => Some(ENHANCED_CFG.as_bytes().to_vec()),
+        "particles/modfx.cfg" => Some(b"r_part TE_EXPLOSION\n{\n\ttexture ball\n\tcount 4\n}\n".to_vec()),
+        _ => None,
+    }
+}
+
+#[test]
+fn enhanced_set_parses_and_covers_classic_effects() {
+    let mut r = Registry::new();
+    let mut f = enhanced_files;
+    assert!(r.load_set(ENHANCED_SET, false, true, &mut f));
+    assert!(r.messages.is_empty(), "{:?}", r.messages);
+    for name in [
+        "TE_GUNSHOT", "TE_SPIKE", "TE_SUPERSPIKE", "TE_WIZSPIKE", "TE_KNIGHTSPIKE", "TE_EXPLOSION",
+        "TE_TAREXPLOSION", "TE_EXPLOSION2_224_8", "TE_LAVASPLASH", "TE_TELEPORT", "TR_ROCKET", "TR_GRENADE",
+        "TR_BLOOD", "TR_SLIGHTBLOOD", "TR_WIZSPIKE", "TR_KNIGHTSPIKE", "TR_VORESPIKE", "pe_73", "PE_DEFAULT",
+    ] {
+        let t = r.find(name, &mut f);
+        assert!(t.is_some_and(|t| r.types[t].is_loaded()), "{name} not scripted");
+    }
+}
+
+#[test]
+fn mod_effects_win_over_the_enhanced_set() {
+    let mut r = Registry::new();
+    let mut f = enhanced_files;
+    r.set_desc("classic modfx", None, &mut f);
+    r.load_set(ENHANCED_SET, false, true, &mut f);
+    let t = r.find("TE_EXPLOSION", &mut f).unwrap();
+    assert_eq!(r.types[t].config, "modfx");
+    let t = r.find("TR_ROCKET", &mut f).unwrap();
+    assert_eq!(r.types[t].config, ENHANCED_SET);
+}

@@ -1,9 +1,11 @@
 # Optional weapon impacts
 
 `src/impacts.rs` owns client-only marks and nails, independently of enhanced
-blood, scripted particles and the debris master switch. Options → Enhancements → Impact Effects exposes
-archived `r_impact_quality` (`0` low, `1` medium default, `2` high — capping
-mark count/lifetime and hitfx spark/debris budgets), `r_impact_bullets`,
+blood, scripted particles and the debris master switch. Its quality tier comes
+from Enhancements → Particle Quality (`r_particle_quality`: `0` low, `1` medium
+default, `2` high — capping the hitfx level and spark/debris budgets). Mark
+lifetime and count are not tied to quality: only the sliders below set them.
+Options → Enhancements → Impact Effects exposes `r_impact_bullets`,
 `r_impact_nails` and `r_impact_scorches` (all default 0), plus
 `r_impact_lifetime` (120 seconds) and `r_impact_limit` (512). Marks
 and nails share the cap, recycle oldest first and fade over their last five

@@ -395,8 +395,8 @@ impl Host {
             dither_screen: v("r_softemu_dither_screen"),
             dither_texture: v("r_softemu_dither_texture"),
             colorblind: v("r_colorblind").clamp(0.0, 3.0) as u32,
-            soft_particle_distance: if (v("r_softparticles").round() as i32) > 0 { v("r_softparticledistance").max(0.01) } else { 0.0 },
-            soft_particle_quality: u32::from((v("r_softparticles").round() as i32) >= 2),
+            soft_particle_distance: if soft_particles(v("r_particle_quality")) > 0 { v("r_softparticledistance").max(0.01) } else { 0.0 },
+            soft_particle_quality: u32::from(soft_particles(v("r_particle_quality")) >= 2),
             particle_style: if v("r_particles").round() as i32 == 2 { 2 } else { 1 },
             ssao: if (v("r_ssao").round() as i32).clamp(0, 3) > 0 { v("r_ssao_strength").max(0.0) } else { 0.0 },
             ssao_quality: (v("r_ssao").round() as i32).clamp(0, 3).saturating_sub(1).min(2) as u32,
@@ -461,4 +461,14 @@ impl Host {
             self.fte.recycle_geometry(fte);
         }
     }
+}
+
+/// Scripted particle count scale for `r_particle_quality` (low halves it).
+pub(super) fn particle_density(quality: f32) -> f32 {
+    if quality.round() <= 0.0 { 0.5 } else { 1.0 }
+}
+
+/// Soft particle level (0 off, 1 low, 2 high) for `r_particle_quality`.
+pub(super) fn soft_particles(quality: f32) -> i32 {
+    quality.round().clamp(0.0, 2.0) as i32
 }

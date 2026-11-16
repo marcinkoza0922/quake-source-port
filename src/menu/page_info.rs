@@ -83,17 +83,17 @@ pub(super) fn tooltip(item: Item) -> Option<&'static str> {
         "r_portal_quality" => "Resolution and detail inside portal and teleporter views; lower tiers trim nested effects",
         "r_waterwarp" => "How the view distorts underwater: Classic ripples the whole screen like software Quake, GLQuake slowly stretches and squashes the view",
         "r_particles" => "Look of the classic particles: GLQuake draws soft round dots, Classic draws square pixels like software Quake",
-        "r_softparticles" => "Fades particles smoothly where they meet walls and floors; low uses single-sample depth and shading under MSAA, high checks every sample",
+        "r_enhancedparticles" => "Replaces the classic dot particles with glowing sparks, smoke and blood; mods with their own particle effects keep them",
+        "r_particle_quality" => "Low: hard particle edges, half the scripted particles and fewer hit sparks. Medium: soft edges. High: soft edges checked per MSAA sample, most hit sparks",
         "r_debris" => "Gibs tumble and barrels throw shrapnel; shots and blasts push them (cosmetic only)",
         "r_debris_quality" => "Simulation detail, step rate, fade-out lifetimes and caps for gibs and shrapnel; low also skips mover collision",
         "r_debris_gibs" => "Gibs and heads tumble and bounce",
         "r_debris_shrapnel" => "Exploding boxes throw metal shards",
-        "r_impact_quality" => "Caps mark count, lifetime and hit particle density for impacts; low trims sparks and debris",
         "r_impact_fx" => "Sparks, smoke, chips, splinters and splashes fly off whatever your shots hit",
         "r_impact_bullets" => "Shotgun hits leave small surface marks (cosmetic only)",
         "r_impact_nails" => "Nails stick to wood and bodies; hard surfaces deflect them to the floor",
         "r_impact_scorches" => "Explosions scorch nearby solid surfaces",
-        "r_impact_lifetime" => "Impact marks and nails fade before expiring",
+        "r_impact_lifetime" => "Seconds impact marks and stuck nails stay before fading out; independent of Particle Quality",
         "r_impact_limit" => "Oldest marks and nails are recycled at this shared limit",
         "r_blood" => "Blood stains surfaces and bodies; cosmetic, independent of particle packs",
         "r_blood_quality" => "Caps mark count, lifetime, airborne droplets and wound/gib painting; low skips enemy wounds and gib trails",
@@ -287,6 +287,9 @@ pub(super) fn disabled_reason(item: Item) -> Option<&'static str> {
         Item::Choice { cvar: "r_waterwarp", .. } => {
             Some("Disabled while Enhanced Water is on: its own underwater effects replace the classic and GLQuake view warps")
         }
+        Item::Choice { cvar: "r_particles", .. } => {
+            Some("Disabled while Enhanced Particles is on: its particles replace the GLQuake and Classic styles")
+        }
         _ => None,
     }
 }
@@ -314,6 +317,7 @@ impl Menu {
         (matches!(item, Item::Slider { cvar: "r_wateralpha", .. })
             && (cv.value_of("r_enhancedwater") == 0.0 || cv.value_of("r_watertranslucency") == 0.0))
             || (matches!(item, Item::Choice { cvar: "r_waterwarp", .. }) && cv.value_of("r_enhancedwater") != 0.0)
+            || (matches!(item, Item::Choice { cvar: "r_particles", .. }) && cv.value_of("r_enhancedparticles") != 0.0)
             || (matches!(item, Item::Choice { cvar: "r_drawviewmodel", .. }) && cv.value_of("cl_camera") != 0.0)
             || (matches!(item, Item::Choice { cvar: "r_portal_quality", .. })
                 && match self.screen {
