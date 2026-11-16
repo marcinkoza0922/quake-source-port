@@ -16,16 +16,6 @@ pub(super) const DESTINATION_TS: usize = DESTINATION_STAGES.len() + 1;
 
 pub(super) const VIEW_TS: usize = VIEW_STAGES.len();
 
-/// Per-view contribution in µs per profiled frame (including frames where
-/// this view was absent). These are a breakdown of the aggregate, not extra work.
-/// `frames` counts active scene frames for `gpu_view_times`, or destination
-/// draws (including recursion) for `gpu_destination_times`.
-#[derive(Clone, Debug)]
-pub struct GpuViewTiming {
-    pub frames: u64,
-    pub stages: Vec<(&'static str, f64)>,
-}
-
 pub(super) struct GpuTimes {
     pub pool: vk::QueryPool,
     pub capacity: usize,
