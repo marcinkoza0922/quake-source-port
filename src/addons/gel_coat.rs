@@ -479,7 +479,7 @@ mod tests {
             .collect();
         let mut atlas = Atlas::default();
         for round in 0..3 {
-            let t = std::time::Instant::now();
+            let t = qcore::time::Instant::now();
             let groups = group(&discs);
             let tg = t.elapsed();
             build(&discs, &groups, &mut atlas);

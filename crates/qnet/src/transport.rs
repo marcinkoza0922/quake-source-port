@@ -20,7 +20,11 @@ pub struct UdpTransport {
 
 impl UdpTransport {
     /// Bind to `addr` (port 0 = any) and set non-blocking.
+    /// Always fails on wasm32: networking is disabled in the web build.
     pub fn bind(addr: SocketAddr) -> io::Result<Self> {
+        if cfg!(target_arch = "wasm32") {
+            return Err(io::Error::new(io::ErrorKind::Unsupported, "networking is disabled on the web"));
+        }
         let sock = UdpSocket::bind(addr)?;
         sock.set_nonblocking(true)?;
         Ok(Self { sock })

@@ -29,7 +29,7 @@ pub struct ReverseSearch {
 impl Console {
     /// Load persistent history from `<dir>/console_history.txt`.
     pub fn load_history(&mut self, dir: &Path) {
-        let Ok(text) = std::fs::read_to_string(dir.join("console_history.txt")) else {
+        let Ok(text) = qcore::vfs::read_to_string(&dir.join("console_history.txt")) else {
             return;
         };
         self.history.clear();
@@ -51,10 +51,9 @@ impl Console {
         if self.history.is_empty() {
             return;
         }
-        let _ = std::fs::create_dir_all(dir);
         let start = self.history.len().saturating_sub(MAX_HISTORY);
         let out: String = self.history[start..].iter().map(|l| format!("{l}\n")).collect();
-        let _ = std::fs::write(dir.join("console_history.txt"), out);
+        let _ = qcore::vfs::write(&dir.join("console_history.txt"), out.as_bytes());
     }
 
     /// Modern key handler with modifiers and optional clipboard callbacks.

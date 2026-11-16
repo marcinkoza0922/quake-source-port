@@ -1,6 +1,7 @@
 //! Single-player autosave event tracking and bounded, crash-safe slot rotation.
 use qserver::LevelStats;
-use std::{fs, io, path::Path};
+use qcore::vfs;
+use std::{io, path::Path};
 
 pub const MAX: usize = 10;
 
@@ -16,7 +17,7 @@ pub fn ext(addons: bool) -> &'static str {
 /// Removes `name` in every save extension except `keep`.
 pub fn remove_other_exts(dir: &Path, name: &str, keep: Option<&str>) -> io::Result<()> {
     for e in [SAVE_EXT, ADDON_EXT].into_iter().filter(|&e| Some(e) != keep) {
-        match fs::remove_file(dir.join(format!("{name}.{e}"))) {
+        match vfs::remove_file(&dir.join(format!("{name}.{e}"))) {
             Ok(()) => {}
             Err(x) if x.kind() == io::ErrorKind::NotFound => {}
             Err(x) => return Err(x),
@@ -29,7 +30,7 @@ pub fn remove_other_exts(dir: &Path, name: &str, keep: Option<&str>) -> io::Resu
 /// and `.qsa` files.
 pub fn find(dir: &Path, name: &str) -> Option<std::path::PathBuf> {
     [SAVE_EXT, ADDON_EXT].into_iter().map(|e| dir.join(format!("{name}.{e}")))
-        .filter_map(|p| Some((fs::metadata(&p).ok()?.modified().ok()?, p))).max().map(|x| x.1)
+        .filter_map(|p| Some((vfs::modified(&p).ok()?, p))).max().map(|x| x.1)
 }
 
 #[derive(Default)]
@@ -64,20 +65,31 @@ impl Tracker {
     }
 }
 
+/// Writes the staged save, synced to disk natively so the renames that
+/// follow never expose a truncated file after a crash.
+fn stage(path: &Path, data: &[u8]) -> io::Result<()> {
+    #[cfg(not(target_arch = "wasm32"))]
+    {
+        use io::Write;
+        let mut file = std::fs::File::create(path)?;
+        file.write_all(data)?;
+        file.sync_all()
+    }
+    #[cfg(target_arch = "wasm32")]
+    vfs::write(path, data)
+}
+
 /// Newest is autosave0. Stage the complete save before touching older slots.
 /// `ext` is the new save's extension; older slots keep theirs.
 pub fn rotate(dir: &Path, keep: usize, text: &str, ext: &str) -> io::Result<()> {
     let keep = keep.clamp(1, MAX);
-    fs::create_dir_all(dir)?;
+    vfs::create_dir_all(dir)?;
     let staged = dir.join("autosave.tmp");
-    let mut file = fs::File::create(&staged)?;
-    use io::Write;
-    file.write_all(&qcore::text::encode(text))?;
-    file.sync_all()?;
+    stage(&staged, &qcore::text::encode(text))?;
     for i in (1..keep).rev() {
         remove_other_exts(dir, &format!("autosave{i}"), Some(""))?;
         for e in [SAVE_EXT, ADDON_EXT] {
-            match fs::rename(dir.join(format!("autosave{}.{e}", i - 1)), dir.join(format!("autosave{i}.{e}"))) {
+            match vfs::rename(&dir.join(format!("autosave{}.{e}", i - 1)), &dir.join(format!("autosave{i}.{e}"))) {
                 Ok(()) => {}
                 Err(x) if x.kind() == io::ErrorKind::NotFound => {}
                 Err(x) => return Err(x),
@@ -85,7 +97,7 @@ pub fn rotate(dir: &Path, keep: usize, text: &str, ext: &str) -> io::Result<()> 
         }
     }
     remove_other_exts(dir, "autosave0", Some(""))?;
-    fs::rename(staged, dir.join(format!("autosave0.{ext}")))?;
+    vfs::rename(&staged, &dir.join(format!("autosave0.{ext}")))?;
     for i in keep..MAX {
         remove_other_exts(dir, &format!("autosave{i}"), Some(""))?;
     }
@@ -95,6 +107,7 @@ pub fn rotate(dir: &Path, keep: usize, text: &str, ext: &str) -> io::Result<()> 
 #[cfg(test)]
 mod tests {
     use super::*;
+    use std::fs;
     #[test]
     fn triggers_and_load_baseline() {
         let mut t = Tracker::default();
@@ -136,7 +149,7 @@ mod tests {
         for (i, expected) in ["4", "3", "2"].iter().enumerate() {
             assert_eq!(fs::read_to_string(dir.join(format!("autosave{i}.sav"))).unwrap(), *expected);
         }
-        let oldest_time = std::time::UNIX_EPOCH + std::time::Duration::from_secs(1234);
+        let oldest_time = qcore::time::UNIX_EPOCH + std::time::Duration::from_secs(1234);
         fs::File::options().write(true).open(dir.join("autosave0.sav")).unwrap().set_modified(oldest_time).unwrap();
         rotate(&dir, 3, "next", "sav").unwrap();
         assert_eq!(fs::metadata(dir.join("autosave1.sav")).unwrap().modified().unwrap(), oldest_time);

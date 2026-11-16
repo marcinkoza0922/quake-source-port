@@ -103,7 +103,7 @@ impl UiText {
     pub fn set_font(&mut self, fs: &qcore::fs::Fs, menufont: i32, file: &str) -> Option<String> {
         let mut warn = None;
         let custom = (!file.is_empty())
-            .then(|| fs.open(file).or_else(|| std::fs::read(file).ok()))
+            .then(|| fs.open(file).or_else(|| qcore::vfs::read(std::path::Path::new(file)).ok()))
             .flatten()
             .and_then(|d| FontArc::try_from_vec(d).ok());
         if !file.is_empty() && custom.is_none() {

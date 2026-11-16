@@ -60,13 +60,13 @@ impl Host {
 
 /// Include named/quicksaves and every autosave in the active game's user dir.
 fn latest_save(dir: &std::path::Path) -> Option<String> {
-    std::fs::read_dir(dir).ok()?.filter_map(Result::ok).filter_map(|entry| {
-        let path = entry.path();
+    qcore::vfs::read_dir(dir).ok()?.into_iter().filter_map(|entry| {
+        let path = entry.path;
         if !matches!(path.extension()?.to_str()?, crate::autosave::SAVE_EXT | crate::autosave::ADDON_EXT) { return None; }
         let name = path.file_stem()?.to_str()?.to_owned();
         if name.chars().any(|c| c.is_control() || matches!(c, '"' | ';' | '\\')) { return None; }
-        let modified = entry.metadata().ok()?.modified().ok()?;
-        let bytes = std::fs::read(&path).ok()?;
+        let modified = qcore::vfs::modified(&path).ok()?;
+        let bytes = qcore::vfs::read(&path).ok()?;
         let info = crate::saveinfo::SaveInfo::parse(&qcore::text::decode(&bytes), Some(modified))?;
         (info.health > 0).then_some((modified, name))
     }).max().map(|(_, name)| name)
