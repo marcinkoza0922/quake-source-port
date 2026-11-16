@@ -10,6 +10,9 @@ void main() {
     vec2 q = Q[gl_VertexIndex];
     float d = dot(in_pos - fr.eye.xyz, fr.vfwd.xyz);
     float scale = d < 20.0 ? 1.0 : 1.0 + d * 0.004;
+    // r_particles 2: software Quake squares; vkQuake draws the round GLQuake
+    // dot 1.27x larger to make up for its missing corners.
+    if (fr.sky.w > 1.5) scale /= 1.27;
     vec3 p = in_pos + (fr.vright.xyz * q.x + fr.vup.xyz * q.y) * scale * 0.75;
     o_uv = q;
     o_color = in_color;

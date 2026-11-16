@@ -684,6 +684,10 @@ impl Renderer {
         }
         passes.push(ViewPass {
             speed_blur: view_in.map_or(0.0, |v| v.speed_blur.clamp(0.0, 1.0)),
+            warp: match view_in.map(|v| v.waterwarp) {
+                Some(crate::WaterWarp::Screen(t)) => t.max(0.0) % 1000.0,
+                _ => -1.0,
+            },
             view,
             rect,
             blend,
@@ -813,7 +817,7 @@ impl Renderer {
                     st.skyfog,
                     if sky.is_some() { 1.0 } else { 0.0 },
                     st.skyalpha,
-                    0.0,
+                    st.particle_style as f32,
                 ],
                 skybox0: sky.map_or([NO_TEX; 4], |s| [s[0], s[1], s[2], s[3]]),
                 skybox1: [
@@ -1734,6 +1738,7 @@ impl Renderer {
                 mb_w: w.max(1) as f32,
                 mb_h: h.max(1) as f32,
                 g_quality: st.goggles.quality.min(2),
+                warp: pass.warp,
             }]));
             dev.cmd_draw(cmd, 3, 1, 0, 0);
             if pi + 1 < npasses {

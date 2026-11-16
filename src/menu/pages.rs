@@ -312,6 +312,10 @@ pub(super) const MOTIONBLUR_QUALITY: &[(&str, f32)] = &[("low", 0.0), ("high", 1
 pub(super) const SOFT_PARTICLES: &[(&str, f32)] = &[("off", 0.0), ("low", 1.0), ("high", 2.0)];
 pub(super) const MODES: [&str; 3] = ["windowed", "fullscreen", "borderless"];
 
+pub(super) const WATERWARP: &[(&str, f32)] = &[("off", 0.0), ("Classic", 1.0), ("GLQuake", 2.0)];
+/// vkQuake numbering: 1 is GLQuake, 2 is Classic.
+pub(super) const PARTICLES: &[(&str, f32)] = &[("off", 0.0), ("GLQuake", 1.0), ("Classic", 2.0)];
+
 pub(super) const GRAPHICS: &[Item] = &[
     Item::DisplayMode,
     Item::Resolution,
@@ -327,6 +331,8 @@ pub(super) const GRAPHICS: &[Item] = &[
     toggle("Dithering", "r_dither"),
     Item::Slider { label: "Brightness", cvar: "gamma", min: 0.5, max: 1.5, step: 0.05, invert: true },
     slider("Contrast", "contrast", 1.0, 2.0, 0.1),
+    Item::Choice { label: "Underwater FX", cvar: "r_waterwarp", choices: WATERWARP },
+    Item::Choice { label: "Particles", cvar: "r_particles", choices: PARTICLES },
     toggle("Dynamic Lights", "r_dynamic"),
     toggle("Colored Lighting", "r_coloredlight"),
     toggle("Fog", "r_fog"),

@@ -177,7 +177,7 @@ impl Menu {
         }
         c.menu_layout();
         if !matches!(self.screen, Screen::OptionsPage(Page::Addons | Page::NewGameAddons)) {
-            self.draw_tooltip(c);
+            self.draw_tooltip(c, cv);
             self.draw_hints(c);
         }
         self.draw_back(c);

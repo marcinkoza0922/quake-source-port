@@ -106,7 +106,7 @@ pub(super) fn rows3(m: &Mat4) -> [[f32; 4]; 3] {
 
 pub(super) fn setup_view(v: &View, w: u32, h: u32) -> ViewSetup {
     let (fwd, right, up) = angle_vectors(v.angles);
-    let [tx, ty] = crate::projection::half_fov_tangents(v.fov_x, (w, h));
+    let [tx, ty] = crate::projection::half_fov_tangents(v, (w, h));
     let (n, f) = (4.0f32, 65536.0f32);
     // view: rows right, -up, forward
     let rows = [right, [-up[0], -up[1], -up[2]], fwd];
@@ -212,6 +212,7 @@ mod tests {
                 fov_x: 90.0,
                 reserve_bottom: 0,
                 speed_blur: 0.0,
+                waterwarp: crate::WaterWarp::None,
             },
             1280,
             720,

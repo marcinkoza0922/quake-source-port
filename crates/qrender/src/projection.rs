@@ -13,11 +13,24 @@ pub(crate) fn view_extent(rect: [u32; 4], reserve: u32, output: (u32, u32), scen
     (w, h)
 }
 
-pub(crate) fn half_fov_tangents(fov: f32, scene: (u32, u32)) -> [f32; 2] {
+pub(crate) fn half_fov_tangents(view: &View, scene: (u32, u32)) -> [f32; 2] {
     // fov_x is specified at 4:3; keep vertical FOV and adapt horizontally.
     let aspect = scene.0.max(1) as f32 / scene.1.max(1) as f32;
-    let ty = (fov.clamp(1.0, 179.0).to_radians() * 0.5).tan() * 0.75;
-    [ty * aspect, ty]
+    let ty = (view.fov_x.clamp(1.0, 179.0).to_radians() * 0.5).tan() * 0.75;
+    let [sx, sy] = fov_warp(view.waterwarp);
+    [ty * aspect * sx, ty * sy]
+}
+
+/// vkQuake r_waterwarp 2 (R_SetupView): scales the half-FOV tangents so the
+/// pulse looks the same at any FOV.
+fn fov_warp(w: crate::WaterWarp) -> [f32; 2] {
+    match w {
+        crate::WaterWarp::Fov(t) => {
+            let s = (t * 1.5).sin() * 0.03;
+            [0.97 + s, 1.03 - s]
+        }
+        _ => [1.0, 1.0],
+    }
 }
 
 /// Half-FOV tangents for a single full-output view, including status-bar rows
@@ -25,7 +38,7 @@ pub(crate) fn half_fov_tangents(fov: f32, scene: (u32, u32)) -> [f32; 2] {
 pub fn view_fov_tangents(view: &View, output: (u32, u32), scale: f32) -> [f32; 2] {
     let scene = scene_extent(output, scale);
     let extent = view_extent([0, 0, output.0, output.1], view.reserve_bottom, output, scene);
-    half_fov_tangents(view.fov_x, extent)
+    half_fov_tangents(view, extent)
 }
 
 /// Normalized side frustum planes (left, right, top, bottom) for a camera view.
@@ -44,7 +57,7 @@ impl ViewFrustum {
     }
 
     pub(crate) fn for_extent(v: &View, w: u32, h: u32) -> Self {
-        let [tx, ty] = half_fov_tangents(v.fov_x, (w, h));
+        let [tx, ty] = half_fov_tangents(v, (w, h));
         let (fwd, right, up) = qcore::math::angle_vectors(v.angles.into());
         let e = qcore::math::Vec3::from(v.origin);
         let dirs = [

@@ -37,12 +37,14 @@ impl Menu {
     }
 
     /// Explanation of the selected option, just below the panel (wraps if needed).
-    pub(super) fn draw_tooltip(&self, c: &mut Canvas) {
+    pub(super) fn draw_tooltip(&self, c: &mut Canvas, cv: &Cvars) {
         let Screen::OptionsPage(page) = self.screen else { return };
         if self.drop.is_some() || self.osk.is_some() || self.capturing() || self.opt_cursor >= self.page_len(page) {
             return;
         }
-        let Some(s) = tooltip(self.page_item(page, self.opt_cursor)) else { return };
+        let item = self.page_item(page, self.opt_cursor);
+        let reason = if self.item_disabled(item, cv) { disabled_reason(item) } else { None };
+        let Some(s) = reason.or_else(|| tooltip(item)) else { return };
         let lines = wrap_tooltip_lines(c, s, 588.0, TXT);
         let w = lines.iter().map(|l| c.text_w(l, TXT)).fold(0.0, f32::max);
         let h = lines.len() as f32 * 10.0 + 4.0;
