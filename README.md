@@ -23,7 +23,7 @@ Beyond a faithful, fast Quake, this port adds a few things of its own:
   kills/secrets. A single-player death opens a paused recovery menu.
 - **Optional visual enhancements** (Options → Enhancements), all
   client-side and off by default:
-  - Ragdoll corpses, tumbling gibs, and debris from shattered barrels
+  - Tumbling gibs and debris from shattered barrels
     that works with mod monsters too.
   - Enhanced blood: splatters on surfaces, wounds that follow bodies,
     airborne droplets that splat where they land.
@@ -45,6 +45,10 @@ Beyond a faithful, fast Quake, this port adds a few things of its own:
   time per map, and keeps a separate config per mod.
 - **FTE scripted particles** and the QuakeWorld protocol, alongside
   NetQuake protocols 15, 666 (FitzQuake) and 999 (RMQ).
+
+**[User manual](docs/MANUAL.md)** — how to use all of the above:
+split-screen, controllers, saves, assists, accessibility, enhancements and
+the Add-ons (portal gun, railgun, hookshot and more).
 
 ## Compatibility and performance
 

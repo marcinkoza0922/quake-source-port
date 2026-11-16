@@ -102,6 +102,7 @@ pub(super) const HOST_CVARS: &[(&str, &str, u32)] = &[
     ("_cl_color", "0", CVAR_ARCHIVE),
     // Local players on a local server (1 = no split-screen, up to 6).
     ("cl_splitscreen", "1", 0),
+    ("menu_music", "1", CVAR_ARCHIVE),
     // Two-player split: 0 top/bottom, 1 side by side.
     ("r_splitscreen_layout", "0", CVAR_ARCHIVE),
     // Multiplayer menu (Join / Host Game).
@@ -242,7 +243,7 @@ pub(super) const COMPAT_CVARS: &[(&str, &str, u32)] = &[
     ("r_blood_gibs", "1", CVAR_ARCHIVE),
     ("r_debris", "0", CVAR_ARCHIVE),
     ("r_debris_quality", "1", CVAR_ARCHIVE),
-    ("r_debris_ragdolls", "1", CVAR_ARCHIVE),
+    ("r_debris_ragdolls", "0", CVAR_ARCHIVE),
     ("r_debris_ragdollstart", "2", CVAR_ARCHIVE),
     ("r_debris_maxragdolls", "48", CVAR_ARCHIVE),
     ("r_debris_gibs", "1", CVAR_ARCHIVE),

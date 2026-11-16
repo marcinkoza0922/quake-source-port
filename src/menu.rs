@@ -33,6 +33,7 @@ mod addon_browser;
 mod addon_preview;
 mod addon_bindings;
 pub(crate) mod shader;
+mod help;
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum Screen {
@@ -48,6 +49,8 @@ pub enum Screen {
     Mods,
     ModMaps,
     Multiplayer,
+    /// The user manual (main menu → Help).
+    Help,
 }
 
 /// Options sub-pages.
@@ -182,6 +185,7 @@ pub struct Menu {
     pub glyphs: Glyphs,
     /// On-screen keyboard over a text field (gamepad typing).
     osk: Option<Osk>,
+    help: help::Help,
 }
 
 /// Open dropdown list: the page row it belongs to, highlighted entry and
@@ -279,6 +283,7 @@ impl Menu {
             pad_ui: false,
             glyphs: Glyphs { family: Family::Xbox },
             osk: None,
+            help: Default::default(),
         }
     }
 
@@ -304,6 +309,13 @@ impl Menu {
         self.open(Screen::OptionsPage(p));
         self.opt_cursor = 0;
         (p == Page::Host).then(|| Action::Command("_netmaps\n".into()))
+    }
+
+    /// `menu_help [section]`: opens the manual, optionally at a section
+    /// whose title starts with `section` (case-insensitive).
+    pub fn open_help(&mut self, section: &str) {
+        self.open(Screen::Help);
+        self.help.open_section(section);
     }
 
     /// Typed text goes to a text field under the cursor.
@@ -378,6 +390,7 @@ impl Menu {
                 .position(|&bx| x >= bx && x < bx + QUIT_BTN.0 && y >= QUIT_BTN_Y && y < QUIT_BTN_Y + QUIT_BTN.1),
             Screen::Mods => self.mods.item_at(modmenu::Page::List, (x, y)),
             Screen::ModMaps => self.mods.item_at(modmenu::Page::Maps, (x, y)),
+            Screen::Help => self.help.item_at((x, y)),
             Screen::None => None,
         }
     }
@@ -398,6 +411,8 @@ impl Menu {
             Screen::Quit => Some(&mut self.quit_cursor),
             Screen::Mods => Some(self.mods.cursor_mut(modmenu::Page::List)),
             Screen::ModMaps => Some(self.mods.cursor_mut(modmenu::Page::Maps)),
+            // hovering doesn't switch sections; a click does
+            Screen::Help => None,
             Screen::None => None,
         }
     }

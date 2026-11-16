@@ -40,14 +40,14 @@ impl Host {
             let gravity = self.cv("sv_gravity");
             let set = crate::debris::Settings {
                 quality: crate::debris::Quality::from_cvar(self.cv("r_debris_quality")),
-                ragdolls: self.cv("r_debris_ragdolls") != 0.0,
+                ragdolls: false, // feature disabled (hidden from menus)
                 start: crate::debris::Start::from_cvar(self.cv("r_debris_ragdollstart")),
                 max_ragdolls: self.cv("r_debris_maxragdolls").clamp(1.0, 128.0) as usize,
                 gibs: self.cv("r_debris_gibs") != 0.0,
                 shrapnel: self.cv("r_debris_shrapnel") != 0.0,
                 movers: self.cv("r_debris_movers") != 0.0,
                 force: self.cv("r_debris_force").clamp(0.0, 6.0),
-                kill_lift: self.cv("r_debris_killlift") != 0.0,
+                kill_lift: false,
             };
             self.debris.update(
                 debris_on,
@@ -167,7 +167,7 @@ impl Host {
             // Projectile pellets already draw their own streaks; hitscan ones would stack.
             let pellets = self.cv("addons_active") != 0.0 && self.cv("addon_projectile_shotguns") != 0.0
                 && self.cv("deathmatch") == 0.0;
-            let hitscan = self.cv("r_shotgun_tracers") != 0.0 && !pellets;
+            let hitscan = false && !pellets; // shotgun tracers disabled (hidden from menus)
             self.tracers.frame(hitscan, &self.cl, &self.debris, v, &mut self.r, &mut fte);
             self.impacts.frame(
                 &self.server.core.cvars, &self.cl, &self.level, &mut brushes, &self.server.core.fs,

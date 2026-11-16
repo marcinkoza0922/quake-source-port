@@ -162,6 +162,8 @@ pub struct Host {
     stuffed: bool,
     /// The current level's exit was already written to qsp_stats.json.
     stats_recorded: bool,
+    /// The main menu theme is playing (`menu_music`); a CD track replaces it.
+    menu_music: bool,
     /// The demo being played (cls.demoplayback).
     demo: Option<crate::demo::Demo>,
     /// The startdemos loop (cls.demos) and the next index in it; -1 stops the loop.
@@ -289,6 +291,7 @@ impl Host {
             fs_snapshot,
             stuffed: false,
             stats_recorded: false,
+            menu_music: false,
             demo: None,
             demos: Vec::new(),
             demonum: 0,
