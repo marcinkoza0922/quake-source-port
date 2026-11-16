@@ -475,6 +475,7 @@ pub(super) const HUD_LAYOUT: &[Item] = &[
 pub(super) const AUDIO: &[Item] = &[
     slider("Sound Volume", "volume", 0.0, 1.0, 0.1),
     slider("Music Volume", "bgmvolume", 0.0, 1.0, 0.1),
+    toggle("Main Menu Music", "menu_music"),
     toggle("Hit & Kill Sounds", "s_hitfeedback"),
     Item::Sub { label: "Hit Sound", page: Page::HitSound },
     Item::Sub { label: "Kill Sound", page: Page::KillSound },

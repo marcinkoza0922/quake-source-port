@@ -70,6 +70,13 @@ impl Menu {
             self.drop_key(key, d, item, cv, &mut out);
             return out;
         }
+        if self.screen == Screen::Help {
+            if self.help.key(key, self.mouse, &mut out) {
+                self.screen = Screen::Main;
+                out.push(Action::Sound("misc/menu3.wav"));
+            }
+            return out;
+        }
         // the wheel scrolls the card list itself; the pointer then picks the card under it
         if let (K_MWHEELUP | K_MWHEELDOWN, Screen::Load | Screen::Save) = (key, self.screen) {
             self.scroll_cards(if key == K_MWHEELUP { -CARD_WHEEL } else { CARD_WHEEL });
@@ -188,6 +195,7 @@ impl Menu {
                 }
             }
             Screen::None => {}
+            Screen::Help => {}
             Screen::Main => {
                 if back {
                     self.screen = Screen::None;
@@ -202,6 +210,7 @@ impl Menu {
                         0 => self.screen = Screen::SinglePlayer,
                         1 => self.screen = Screen::Multiplayer,
                         2 => self.screen = Screen::Options,
+                        3 => self.open(Screen::Help),
                         4 => self.open(Screen::Quit),
                         5 => {
                             out.push(Action::Command("_mods\n".into()));

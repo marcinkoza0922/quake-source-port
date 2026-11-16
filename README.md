@@ -46,6 +46,10 @@ Beyond a faithful, fast Quake, this port adds a few things of its own:
 - **FTE scripted particles** and the QuakeWorld protocol, alongside
   NetQuake protocols 15, 666 (FitzQuake) and 999 (RMQ).
 
+**[User manual](docs/MANUAL.md)** — how to use all of the above:
+split-screen, controllers, saves, assists, accessibility, enhancements and
+the Add-ons (portal gun, railgun, hookshot and more).
+
 ## Compatibility and performance
 
 - Aims to run everything ironwail and vkQuake do: id1, hipnotic, rogue,

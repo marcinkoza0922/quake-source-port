@@ -122,6 +122,10 @@ Target selection: live monsters (`FL_MONSTER`, health > 0) and DM opponents if a
 
 Custom immediate-mode UI (`qui`) drawing through the renderer's 2D batch, conchars + scalable bitmap font. Mod menu (main menu "Map Packs"): scans basedir for gamedirs (has pak/pk3/progs/maps), reads metadata (`modinfo.txt`, readme, `maps/*.bsp` names, worldspawn `message`), thumbnail from screenshot cache, launches with correct base game flags. Per-mod profile = `config.cfg` in `<basedir>/<mod>/`, with per-mod stats file (`qsp_stats.json`) storing kills/secrets/completion per map.
 
+Help (main menu row 3, `menu_help [section]`; `src/menu/help.rs`): shows the user manual `docs/MANUAL.md`, compiled in with `include_str!` and parsed once into `##` sections (`###` headings, list items with hanging indents, table rows turned into one item each, inline markdown stripped). Up/down picks a section; PgUp/PgDn, left/right, shoulders or the wheel over the text scroll it. Keep MANUAL.md in this simple markdown subset.
+
+Main menu music (`menu_music`, Options → Audio): `Host::sync_menu_music` starts CD track 2 (the Quake theme) when the main menu shows with no local server and no connection; attract demos count as idle and their `svc_cdtrack` is ignored while the theme plays. It stops when a game starts (whose own track then plays) or the cvar is turned off.
+
 ### Accessibility (Options → Accessibility)
 - `a11y_reducemotion`: `ViewCvars::reduce_motion` zeroes bob, strafe roll,
   damage kick and gun kick (cvars untouched).

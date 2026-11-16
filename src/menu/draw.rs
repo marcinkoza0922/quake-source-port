@@ -10,7 +10,7 @@ impl Menu {
         c.fade_screen();
         let base_scale = c.scale;
         c.menu_layout();
-        if !matches!(self.screen, Screen::Options | Screen::OptionsPage(_) | Screen::Death | Screen::Quit | Screen::Mods | Screen::ModMaps | Screen::Load | Screen::Save) {
+        if !matches!(self.screen, Screen::Options | Screen::OptionsPage(_) | Screen::Death | Screen::Quit | Screen::Mods | Screen::ModMaps | Screen::Load | Screen::Save | Screen::Help) {
             c.ox += CLASSIC.0;
             c.oy += CLASSIC.1;
         }
@@ -43,6 +43,10 @@ impl Menu {
                 }
                 let d = dot(pic);
                 c.pic(54.0, 32.0 + self.main_cursor as f32 * 20.0, d);
+            }
+            Screen::Help => {
+                self.help.draw(c);
+                self.boxed_hints(c, 334.0, &[(K_DPAD_UP, "Section"), (K_RSHOULDER, "Scroll"), (K_BBUTTON, "Back")]);
             }
             Screen::Mods => self.mods.draw(c, modmenu::Page::List),
             Screen::ModMaps => self.mods.draw(c, modmenu::Page::Maps),

@@ -134,6 +134,7 @@ pub(super) fn tooltip(item: Item) -> Option<&'static str> {
         "s_hit_echo" | "s_kill_echo" => "Add delayed repeats after the cue",
         "s_hit_reverb" | "s_kill_reverb" => "Add a ringing room tail after the cue",
         "crosshair_outline" => "Dark border keeps the crosshair visible on any background",
+        "menu_music" => "Plays the Quake theme in the main menu when no game is running",
         "cl_captions" => "Shows text for important sounds: doors, alerted enemies, secrets, pickups",
         "scr_textscale" => "Size of on-screen messages and captions",
         "scr_textbg" => "Dark backdrop behind on-screen messages for readability",

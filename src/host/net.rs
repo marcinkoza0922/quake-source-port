@@ -442,6 +442,11 @@ impl Host {
                     }
                 }
                 ClientEvent::CdTrack { track, .. } => {
+                    // an attract demo's track doesn't replace the menu theme
+                    if self.menu_music && self.demo.is_some() {
+                        continue;
+                    }
+                    self.menu_music = false;
                     if let Some(snd) = &mut self.snd {
                         snd.play_cd_track(track, true);
                     }

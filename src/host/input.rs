@@ -211,6 +211,26 @@ impl Host {
     }
 
     /// Menu state that follows the input devices and bindings.
+    /// The Quake theme (CD track 2) plays in the main menu while no game,
+    /// demo or connection is running, and stops when one starts without a
+    /// track of its own. `menu_music 0` turns it off.
+    /// The Quake theme (CD track 2) plays in the main menu while no game or
+    /// connection runs (attract demos keep it); it stops when one starts
+    /// (or with `menu_music 0`).
+    pub(super) fn sync_menu_music(&mut self) {
+        // startup demos behind the menu don't count as a game
+        let no_game = !self.server.active() && (self.cl.signon == 0 || self.demo.is_some());
+        let on = self.server.core.cvars.value_of("menu_music") != 0.0;
+        let Some(snd) = &mut self.snd else { return };
+        if !self.menu_music && no_game && on && self.menu.screen == Screen::Main {
+            self.menu_music = true;
+            snd.play_cd_track(2, true);
+        } else if self.menu_music && !(no_game && on) {
+            self.menu_music = false;
+            snd.stop_music();
+        }
+    }
+
     pub(super) fn sync_menu_ui(&mut self) {
         self.menu.game_running = self.server.active();
         self.menu.pad_ui = self.pad_ui();

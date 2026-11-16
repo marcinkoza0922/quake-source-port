@@ -166,6 +166,7 @@ impl Host {
         self.check_local_client();
         self.sync_key_dest();
         self.sync_menu_ui();
+        self.sync_menu_music();
         self.menu_nav_repeat();
 
         self.prof_mark(0);
