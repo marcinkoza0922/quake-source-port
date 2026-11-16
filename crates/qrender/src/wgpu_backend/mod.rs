@@ -2,9 +2,10 @@
 //! feature). Same public API as the Vulkan backend; the scene is drawn with
 //! CPU-built draw lists (world from the PVS, alias poses lerped on the CPU,
 //! lightmaps built on the CPU) and WGSL shaders in `shaders/`. Advanced
-//! effects of the Vulkan backend (MSAA, render scale, SSAO, motion blur,
-//! portals, slang presets, softemu, goggles, water ripples) are not drawn.
+//! effects of the Vulkan backend (MSAA, SSAO, motion blur, portals, slang
+//! presets, softemu, goggles, water ripples) are not drawn.
 
+mod capture;
 mod ents;
 mod frame;
 mod level;
@@ -24,8 +25,10 @@ pub(super) const NO_TEX: u32 = u32::MAX;
 const SCENE_FORMAT: wgpu::TextureFormat = wgpu::TextureFormat::Rgba8Unorm;
 const DEPTH_FORMAT: wgpu::TextureFormat = wgpu::TextureFormat::Depth32Float;
 
-/// Scene targets at output size, plus the headless output and its readback.
+/// Scene targets at render-scaled size, plus the headless output and its readback.
 struct Targets {
+    /// Scene colour/depth size (output size × render scale).
+    scene: (u32, u32),
     color: wgpu::Texture,
     color_view: wgpu::TextureView,
     depth_view: wgpu::TextureView,
@@ -71,6 +74,12 @@ pub struct Renderer {
     needs_resize: bool,
     /// The last headless frame was copied to the readback buffer.
     frame_ready: bool,
+    /// Scene resolution relative to the output (r_scale), 0.25..=2.
+    render_scale: f32,
+    /// Copy the next presented frame for [`Renderer::take_capture`].
+    capture_req: bool,
+    /// A presented frame being copied and mapped for reading.
+    capture: Option<capture::Pending>,
 }
 
 impl Renderer {
@@ -146,8 +155,13 @@ impl Renderer {
                     .find(|f| !f.is_srgb())
                     .or(caps.formats.first().copied())
                     .ok_or_else(|| Error::new("surface has no formats"))?;
+                // COPY_SRC lets screenshots and save thumbnails read the frame back
+                // (a WebGPU canvas accepts any usage, but wgpu's browser
+                // backend reports only RENDER_ATTACHMENT, so ask regardless)
+                let copy = if cfg!(target_arch = "wasm32") { wgpu::TextureUsages::COPY_SRC } else { caps.usages & wgpu::TextureUsages::COPY_SRC };
+                let usage = wgpu::TextureUsages::RENDER_ATTACHMENT | copy;
                 let cfg = wgpu::SurfaceConfiguration {
-                    usage: wgpu::TextureUsages::RENDER_ATTACHMENT,
+                    usage,
                     format,
                     color_space: Default::default(),
                     width,
@@ -200,6 +214,9 @@ impl Renderer {
             world_linear: false,
             needs_resize: true,
             frame_ready: false,
+            render_scale: 1.0,
+            capture_req: false,
+            capture: None,
         };
         let dot = textures::particle_dot();
         r.dot_tex = r.add_texture(8, 8, &[&dot], false, textures::Sampling::Linear)?;
@@ -228,8 +245,12 @@ impl Renderer {
         self.pics.get(pic.0 as usize).map(|p| (p.width, p.height))
     }
 
-    /// Windowed captures are not supported by this backend.
-    pub fn request_capture(&mut self) {}
+    /// Copies the next presented frame for [`Renderer::take_capture`]
+    /// (headless renderers copy every frame). Ignored while a capture is
+    /// still being read back.
+    pub fn request_capture(&mut self) {
+        self.capture_req = self.surface.is_some() && self.capture.is_none();
+    }
 
     /// Waits for the last frame and returns its RGBA8 pixels (headless only).
     pub fn read_pixels(&mut self) -> Result<Vec<u8>> {

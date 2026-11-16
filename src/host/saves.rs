@@ -1,13 +1,17 @@
 use super::*;
 
 impl Host {
-    /// Writes the pending screenshot and/or save thumbnail from the captured frame.
+    /// Writes the pending screenshot and/or save thumbnail from the captured
+    /// frame. When the renderer is still reading it back (wgpu in the
+    /// browser), both stay pending and this runs again next frame.
     pub(super) fn write_captures(&mut self) {
+        if self.screenshot.is_none() && self.thumb.is_none() { return; }
+        let captured = self.r.take_capture();
+        if matches!(captured, Ok(None)) { return; }
         let (shot, thumb) = (self.screenshot.take(), self.thumb.take());
-        if shot.is_none() && thumb.is_none() { return; }
-        let (w, h) = self.r.size();
-        let px = match self.r.read_pixels() {
-            Ok(px) => px,
+        self.clean_shot = false;
+        let (w, h, px) = match captured {
+            Ok(c) => c.expect("pending returned above"),
             Err(e) => return self.con.print(&format!("screenshot failed: {e:?}\n")),
         };
         if let Some(name) = shot {

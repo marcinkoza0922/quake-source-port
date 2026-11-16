@@ -110,10 +110,11 @@ fn ui_quads(r: &Renderer, fr: &RenderFrame) -> (Vec<UiV>, Vec<(u32, u32, u32)>) 
 impl Renderer {
     fn create_targets(&mut self) {
         let (w, h) = (self.width, self.height);
-        let tex = |format, usage| {
+        let scene = crate::projection::scene_extent((w, h), self.render_scale);
+        let tex = |(width, height), format, usage| {
             self.dev.create_texture(&wgpu::TextureDescriptor {
                 label: None,
-                size: wgpu::Extent3d { width: w, height: h, depth_or_array_layers: 1 },
+                size: wgpu::Extent3d { width, height, depth_or_array_layers: 1 },
                 mip_level_count: 1,
                 sample_count: 1,
                 dimension: wgpu::TextureDimension::D2,
@@ -123,10 +124,10 @@ impl Renderer {
             })
         };
         use wgpu::TextureUsages as U;
-        let color = tex(SCENE_FORMAT, U::RENDER_ATTACHMENT | U::TEXTURE_BINDING);
-        let depth = tex(DEPTH_FORMAT, U::RENDER_ATTACHMENT);
+        let color = tex(scene, SCENE_FORMAT, U::RENDER_ATTACHMENT | U::TEXTURE_BINDING);
+        let depth = tex(scene, DEPTH_FORMAT, U::RENDER_ATTACHMENT);
         let out = self.surface.is_none().then(|| {
-            let o = tex(wgpu::TextureFormat::Rgba8Unorm, U::RENDER_ATTACHMENT | U::COPY_SRC);
+            let o = tex((w, h), wgpu::TextureFormat::Rgba8Unorm, U::RENDER_ATTACHMENT | U::COPY_SRC);
             let bpr = (w * 4).next_multiple_of(256);
             let buf = self.dev.create_buffer(&wgpu::BufferDescriptor {
                 label: Some("readback"),
@@ -137,6 +138,8 @@ impl Renderer {
             (o, buf, bpr)
         });
         let color_view = color.create_view(&Default::default());
+        // a scaled scene is filtered up/down to the output (vkQuake r_scale)
+        let post_sampler = if scene == (w, h) { &self.samplers.clamp } else { &self.samplers.linear };
         self.bufs.post_group = Some(self.dev.create_bind_group(&wgpu::BindGroupDescriptor {
             label: None,
             layout: &self.pipes.mat_bgl,
@@ -144,10 +147,10 @@ impl Renderer {
                 wgpu::BindGroupEntry { binding: 0, resource: wgpu::BindingResource::TextureView(&color_view) },
                 wgpu::BindGroupEntry { binding: 1, resource: wgpu::BindingResource::TextureView(&self.black) },
                 wgpu::BindGroupEntry { binding: 2, resource: wgpu::BindingResource::TextureView(&self.black) },
-                wgpu::BindGroupEntry { binding: 3, resource: wgpu::BindingResource::Sampler(&self.samplers.clamp) },
+                wgpu::BindGroupEntry { binding: 3, resource: wgpu::BindingResource::Sampler(post_sampler) },
             ],
         }));
-        self.targets = Some(Targets { color, color_view, depth_view: depth.create_view(&Default::default()), out });
+        self.targets = Some(Targets { scene, color, color_view, depth_view: depth.create_view(&Default::default()), out });
         self.frame_ready = false;
     }
 
@@ -169,6 +172,11 @@ impl Renderer {
     /// Draws one frame (and presents it when windowed).
     pub fn render(&mut self, fr: &RenderFrame) -> Result<()> {
         self.set_world_filter(fr.settings.texture_linear);
+        let scale = fr.settings.render_scale.clamp(0.25, 2.0);
+        if scale != self.render_scale {
+            self.render_scale = scale;
+            self.needs_resize = true;
+        }
         if self.needs_resize {
             self.needs_resize = false;
             if let Some((s, cfg)) = &mut self.surface {
@@ -179,6 +187,7 @@ impl Renderer {
             if let Some(t) = self.targets.take() {
                 t.color.destroy();
             }
+            self.bufs.post_group = None;
         }
         if self.targets.is_none() {
             self.create_targets();
@@ -208,25 +217,22 @@ impl Renderer {
             self.build_view(fr, v, [0, 0, w, h], fr.blend, 1, &mut lists);
         }
         let st = &fr.settings;
-        let post_du: Vec<u32> = lists
+        let (tw, th) = self.targets.as_ref().map_or((w, h), |t| t.scene);
+        let post: Vec<DrawU> = lists
             .views
             .iter()
             .map(|v| {
-                let [x, y, _, _] = v.rect;
-                let uv = [x as f32 / w as f32, y as f32 / h as f32, (x + v.scene[0]) as f32 / w as f32, (y + v.scene[1]) as f32 / h as f32];
-                (v.blend, uv)
-            })
-            .collect::<Vec<_>>()
-            .into_iter()
-            .map(|(blend, uv)| {
-                lists.draw(DrawU {
-                    color: blend.map(|c| c.clamp(0.0, 1.0)),
-                    params: [st.gamma.clamp(0.1, 4.0), st.contrast.max(0.0), 0.0, 0.0],
-                    extra: uv,
+                let ([x, y], [sw, sh]) = (v.ofs, v.scene);
+                DrawU {
+                    color: v.blend.map(|c| c.clamp(0.0, 1.0)),
+                    // z: underwater warp clock (< 0 off); w: output aspect
+                    params: [st.gamma.clamp(0.1, 4.0), st.contrast.max(0.0), v.warp, w as f32 / h.max(1) as f32],
+                    extra: [x as f32 / tw as f32, y as f32 / th as f32, (x + sw) as f32 / tw as f32, (y + sh) as f32 / th as f32],
                     ..Default::default()
-                })
+                }
             })
             .collect();
+        let post_du: Vec<u32> = post.into_iter().map(|d| lists.draw(d)).collect();
         let ui_du = lists.draw(DrawU { color: [1.0 / w as f32, 1.0 / h as f32, 0.0, 0.0], ..Default::default() });
         let (ui_v, ui_batches) = ui_quads(self, fr);
         let mut need_sky = false;
@@ -333,8 +339,7 @@ impl Renderer {
                 ..Default::default()
             });
             for v in &l.views {
-                let [x, y, _, _] = v.rect;
-                let [sw, sh] = v.scene;
+                let ([x, y], [sw, sh]) = (v.ofs, v.scene);
                 if sw == 0 || sh == 0 {
                     continue;
                 }
@@ -396,12 +401,11 @@ impl Renderer {
             pass.set_pipeline(&self.pipes.post);
             pass.set_bind_group(1, post_group, &[]);
             for (v, &du) in l.views.iter().zip(post_du) {
-                let [x, y, _, _] = v.rect;
-                let [sw, sh] = v.scene;
-                if sw == 0 || sh == 0 {
+                let ([x, y, _, _], [ow, oh]) = (v.rect, v.out);
+                if v.scene[0] == 0 || v.scene[1] == 0 || ow == 0 || oh == 0 {
                     continue;
                 }
-                pass.set_viewport(x as f32, y as f32, sw as f32, sh as f32, 0.0, 1.0);
+                pass.set_viewport(x as f32, y as f32, ow as f32, oh as f32, 0.0, 1.0);
                 pass.set_bind_group(0, draw_group, &[du * UNIFORM_STRIDE as u32]);
                 pass.draw(0..3, 0..1);
             }
@@ -427,41 +431,15 @@ impl Renderer {
                 o.size(),
             );
         }
+        if let Some(ft) = &frame_tex {
+            self.record_capture(&mut enc, &ft.texture);
+        }
         self.queue.submit([enc.finish()]);
+        self.start_capture_map();
         if let Some(ft) = frame_tex {
             self.queue.present(ft);
         }
         self.frame_ready = true;
         Ok(())
-    }
-
-    /// Maps the headless readback buffer (blocking) and returns RGBA8 rows.
-    pub(super) fn read_back(&mut self) -> Result<Vec<u8>> {
-        let (w, h) = (self.width, self.height);
-        let t = self.targets.as_ref().ok_or_else(|| Error::new("no frame rendered"))?;
-        let (_, buf, bpr) = t.out.as_ref().ok_or_else(|| Error::new("screen capture needs a headless renderer"))?;
-        if !self.frame_ready {
-            return Err(Error::new("no frame rendered"));
-        }
-        let slice = buf.slice(..);
-        let (tx, rx) = std::sync::mpsc::channel();
-        slice.map_async(wgpu::MapMode::Read, move |r| {
-            let _ = tx.send(r);
-        });
-        let _ = self.dev.poll(wgpu::PollType::wait_indefinitely());
-        rx.recv()
-            .map_err(|e| Error::new(e.to_string()))?
-            .map_err(|e| Error::new(e.to_string()))?;
-        let mut px = Vec::with_capacity((w * h * 4) as usize);
-        {
-            let data = slice.get_mapped_range().map_err(|e| Error::new(e.to_string()))?;
-            for row in 0..h as usize {
-                let ofs = row * *bpr as usize;
-                px.extend_from_slice(&data[ofs..ofs + (w * 4) as usize]);
-            }
-        }
-        buf.unmap();
-        px.as_chunks_mut::<4>().0.iter_mut().for_each(|p| p[3] = 255);
-        Ok(px)
     }
 }

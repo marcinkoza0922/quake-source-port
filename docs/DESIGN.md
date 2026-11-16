@@ -628,15 +628,25 @@ Lightmaps are built on the CPU (port of lightmap.comp) into an RGBA8
 changes or a dynamic light touches it. Bind groups: 0 frame (dynamic UBO,
 lightmap, palette), 1 material (3 textures + sampler; cached per slot triple)
 or sky (6 textures), 2 per-draw dynamic UBO (256-byte records). The scene
-renders to an RGBA8 target; a post pass applies polyblend/contrast/gamma to
-the output, then the 2D layer. `new_web(canvas, palette)` presents to a
-WebGPU canvas; `headless` reads back via a mapped buffer. The `r_waterwarp 2`
-FOV pulse works (it is in the shared projection); FTE `Overlay` blends like
-`Blend`. Not implemented there: MSAA/render scale, SSAO, motion/speed blur,
-portals/teleporter windows, water ripples/caustics and the screen warp,
-softemu/dither, goggles, colorblind, slang presets, GPU timings,
-r_visibility, and pixel read-back on the web (so no screenshots or save
-thumbnails in the browser). Natively `Renderer::new` (windowed) returns an
+renders to an RGBA8 target at output size × render scale (`r_renderscale`,
+0.25–2, linearly filtered when scaled); a post pass applies the
+`r_waterwarp 1` underwater screen warp (vkQuake's `water_warp`),
+polyblend/contrast/gamma at output size, then the 2D layer. The
+`r_waterwarp 2` FOV pulse works (it is in the shared projection); FTE
+`Overlay` blends like `Blend`. `new_web(canvas, palette)` presents to a
+WebGPU canvas configured with `COPY_SRC`. Read-back (`wgpu_backend/capture.rs`):
+`headless` copies every frame into a buffer mapped blocking; a presented
+frame is copied only after `request_capture` and mapped asynchronously, so
+`Renderer::take_capture` returns `Ok(None)` until the map completes (in the
+browser only after control returns to the page). The host
+(`Host::write_captures`) keeps the screenshot/thumbnail pending and retries
+each frame; the Vulkan backend's `take_capture` is never pending.
+See-through portals and teleporter windows are deliberately left out of this
+backend: every portal view would rebuild the CPU draw lists again, which is
+too slow in a browser (portals and teleporters still work, the surface is
+just opaque). Not implemented there: MSAA, SSAO, motion/speed blur, water
+ripples/caustics, softemu/dither, goggles, colorblind, slang presets,
+GPU timings and r_visibility. Natively `Renderer::new` (windowed) returns an
 error with `--features wgpu`; use `-headless`.
 
 ### Platform, entry point and page

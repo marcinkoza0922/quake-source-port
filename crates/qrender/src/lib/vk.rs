@@ -176,6 +176,16 @@ impl Renderer {
         self.capture_requested = self.swap.is_some();
     }
 
+    /// The captured frame as (width, height, RGBA8). Never pending here (the
+    /// wgpu backend may return `Ok(None)` until the read-back completes).
+    pub fn take_capture(&mut self) -> Result<Option<(u32, u32, Vec<u8>)>> {
+        let (w, h) = match &self.swap {
+            Some(_) => self.capture.as_ref().map_or((self.width, self.height), |c| (c.1, c.2)),
+            None => (self.width, self.height),
+        };
+        self.read_pixels().map(|px| Some((w, h, px)))
+    }
+
     /// Waits for the last frame and returns its RGBA8 pixels: the offscreen
     /// image when headless, else the swapchain image captured by the last
     /// `render` after `request_capture`.

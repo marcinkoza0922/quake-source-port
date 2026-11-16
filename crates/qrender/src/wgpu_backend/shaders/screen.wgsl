@@ -39,19 +39,36 @@ struct UiOut {
 
 struct PostOut {
     @builtin(position) clip: vec4<f32>,
-    @location(0) uv: vec2<f32>,
+    // 0..1 across the view
+    @location(0) q: vec2<f32>,
 };
-// du.extra: uv rectangle (u0, v0, u1, v1) of the view in the scene texture
 @vertex fn vs_post(@builtin(vertex_index) vi: u32) -> PostOut {
     var o: PostOut;
     let q = vec2<f32>(f32((vi << 1u) & 2u), f32(vi & 2u));
     o.clip = vec4<f32>(q.x * 2.0 - 1.0, 1.0 - q.y * 2.0, 0.0, 1.0);
-    o.uv = mix(du.extra.xy, du.extra.zw, q);
+    o.q = q;
     return o;
 }
-// du.color: polyblend; du.params: x gamma, y contrast
+// vkQuake screen_effects.inc SCREEN_EFFECT_FLAG_WATER_WARP (software Quake's
+// underwater ripple), inset by the amplitude so edges never sample outside.
+// t: warp clock (s); aspect: output width / height.
+fn water_warp(p: vec2<f32>, t: f32, aspect: f32) -> vec2<f32> {
+    let cycle_x = 3.14159 * 5.0;
+    let cycle_y = cycle_x * aspect;
+    let amp_x = 1.0 / 300.0;
+    let amp_y = amp_x * aspect;
+    let x = (p.x + sin(p.y * cycle_x + t) * amp_x) * (1.0 - amp_x * 2.0) + amp_x;
+    let y = (p.y + sin(p.x * cycle_y + t) * amp_y) * (1.0 - amp_y * 2.0) + amp_y;
+    return vec2<f32>(x, y);
+}
+// du.extra: uv rectangle (u0, v0, u1, v1) of the view in the scene texture
+// du.color: polyblend; du.params: x gamma, y contrast, z warp clock (< 0 off), w aspect
 @fragment fn fs_post(i: PostOut) -> @location(0) vec4<f32> {
-    var c = textureSample(t0, s0, i.uv).rgb;
+    var q = i.q;
+    if (du.params.z >= 0.0) {
+        q = water_warp(q, du.params.z, du.params.w);
+    }
+    var c = textureSample(t0, s0, mix(du.extra.xy, du.extra.zw, q)).rgb;
     c = mix(c, du.color.rgb, du.color.a);
     c = pow(max(c * du.params.y, vec3<f32>(0.0)), vec3<f32>(du.params.x));
     return vec4<f32>(c, 1.0);

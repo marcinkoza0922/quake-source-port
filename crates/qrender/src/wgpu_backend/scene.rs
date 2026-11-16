@@ -44,10 +44,17 @@ pub(super) struct Cmd {
 
 pub(super) struct ViewDraw {
     pub(super) fu: u32,
+    /// Output rectangle of the view.
     pub(super) rect: [u32; 4],
-    /// 3D scene size within `rect` (above the reserved status bar rows).
+    /// Top-left of the view in the (render-scaled) scene target.
+    pub(super) ofs: [u32; 2],
+    /// 3D scene size in the scene target (above the reserved status bar rows).
     pub(super) scene: [u32; 2],
+    /// The same 3D area in output pixels.
+    pub(super) out: [u32; 2],
     pub(super) blend: [f32; 4],
+    /// Underwater screen warp clock in seconds; negative = off.
+    pub(super) warp: f32,
     pub(super) cmds: Vec<Cmd>,
 }
 
@@ -171,7 +178,13 @@ impl Renderer {
         lists: &mut Lists,
     ) {
         let (w, h) = (self.width, self.height);
-        let (sw, sh) = crate::projection::view_extent(rect, view.reserve_bottom, (w, h), (w, h));
+        let tsize = self.targets.as_ref().map_or((w, h), |t| t.scene);
+        let (sw, sh) = crate::projection::view_extent(rect, view.reserve_bottom, (w, h), tsize);
+        let (ow, oh) = crate::projection::view_extent(rect, view.reserve_bottom, (w, h), (w, h));
+        let ofs = [
+            ((rect[0] as f32 * tsize.0 as f32 / w.max(1) as f32).round() as u32).min(tsize.0 - sw),
+            ((rect[1] as f32 * tsize.1 as f32 / h.max(1) as f32).round() as u32).min(tsize.1 - sh),
+        ];
         let vs = setup_view(view, sw, sh);
         let st = &fr.settings;
         let alphas = liquid_alphas(st);
@@ -213,7 +226,11 @@ impl Renderer {
         cmds.extend(b.sky);
         cmds.extend(b.alpha_liquids);
         cmds.extend(b.trans.into_iter().map(|(_, c)| c));
-        lists.views.push(ViewDraw { fu, rect, scene: [sw, sh], blend, cmds });
+        let warp = match view.waterwarp {
+            crate::WaterWarp::Screen(t) => t.max(0.0) % 1000.0,
+            _ => -1.0,
+        };
+        lists.views.push(ViewDraw { fu, rect, ofs, scene: [sw, sh], out: [ow, oh], blend, warp, cmds });
     }
 
     /// Classic particles (camera-facing dots) and FTE particle geometry.
