@@ -541,3 +541,11 @@ autosave rotation), `config.cfg` (bindings + archived cvars as they were) and
 `screenshot.png`. The screenshot is taken on the next rendered frame with the
 console not drawn (`Host::clean_shot`). `bugreport_dir` (global cvar, no menu row; lives in
 `global.cfg`, see below) defaults to `<user dir>/bugreports`. Code: `src/host/bugreport.rs`.
+
+## Disabled features (hidden, code retained)
+
+Ragdolls (`r_debris_ragdolls`, `_ragdollstart`, `_maxragdolls`, `r_debris_killlift`)
+and shotgun tracers (`r_shotgun_tracers`) are switched off: `src/host/render.rs`
+forces them off regardless of cvar values, and their menu rows and tooltip
+sources are removed from the Debris/Impacts pages. The code and cvars remain;
+re-enable by restoring the cvar reads in `render.rs` and the rows in `menu/pages.rs`.

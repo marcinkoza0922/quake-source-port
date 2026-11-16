@@ -328,7 +328,7 @@ pub(super) const ENHANCEMENTS: &[Item] = &[
     Item::Sub { label: "Impact Effects", page: Page::Impacts },
     toggle("Enhanced Blood Splatter", "r_blood"),
     Item::Sub { label: "Blood Splatter Settings", page: Page::Blood },
-    toggle("Ragdolls & Debris", "r_debris"),
+    toggle("Debris", "r_debris"),
     Item::Sub { label: "Debris Settings", page: Page::Debris },
 ];
 
@@ -339,7 +339,6 @@ pub(super) const IMPACTS: &[Item] = &[
     Item::Choice { label: "Impact Quality", cvar: "r_impact_quality", choices: DEBRIS_QUALITY },
     Item::Choice { label: "Surface Hit Effects", cvar: "r_impact_fx", choices: IMPACT_FX },
     toggle("Shotgun Bullet Decals", "r_impact_bullets"),
-    toggle("Shotgun Tracers", "r_shotgun_tracers"),
     toggle("Physical Nail Impacts", "r_impact_nails"),
     toggle("Explosion Scorch Marks", "r_impact_scorches"),
     slider("Impact Lifetime", "r_impact_lifetime", 5.0, 600.0, 5.0),
@@ -359,15 +358,12 @@ pub(super) const WATER: &[Item] = &[
 ];
 
 pub(super) const DEBRIS_QUALITY: &[(&str, f32)] = &[("low", 0.0), ("medium", 1.0), ("high", 2.0)];
+#[allow(dead_code)] // ragdoll options are hidden
 pub(super) const RAGDOLL_START: &[(&str, f32)] = &[("after animation", 0.0), ("at death", 1.0), ("mixed", 2.0)];
 
 /// Reached from Enhancements; unavailable while `r_debris` is off.
 pub(super) const DEBRIS: &[Item] = &[
     Item::Choice { label: "Debris Quality", cvar: "r_debris_quality", choices: DEBRIS_QUALITY },
-    toggle("Ragdolls", "r_debris_ragdolls"),
-    Item::Choice { label: "Ragdoll Start", cvar: "r_debris_ragdollstart", choices: RAGDOLL_START },
-    toggle("Kill Lift", "r_debris_killlift"),
-    slider("Max Ragdolls", "r_debris_maxragdolls", 8.0, 64.0, 8.0),
     toggle("Gibs", "r_debris_gibs"),
     toggle("Shrapnel", "r_debris_shrapnel"),
     toggle("Hit Doors & Lifts", "r_debris_movers"),

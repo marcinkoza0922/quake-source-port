@@ -23,7 +23,7 @@ Beyond a faithful, fast Quake, this port adds a few things of its own:
   kills/secrets. A single-player death opens a paused recovery menu.
 - **Optional visual enhancements** (Options → Enhancements), all
   client-side and off by default:
-  - Ragdoll corpses, tumbling gibs, and debris from shattered barrels
+  - Tumbling gibs and debris from shattered barrels
     that works with mod monsters too.
   - Enhanced blood: splatters on surfaces, wounds that follow bodies,
     airborne droplets that splat where they land.
