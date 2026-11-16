@@ -10,6 +10,43 @@ impl Server {
         Some(l.world.trace(&ents, a, qworld::Vec3::ZERO, qworld::Vec3::ZERO, b, ty, Some(pass)))
     }
 
+    /// A point MOVETYPE_BOUNCE step owned by `pass` (grenade arc preview):
+    /// the trace plus whether the hit entity is DAMAGE_AIM, which a grenade
+    /// explodes on instead of bouncing.
+    /// `missile` traces as MOVE_MISSILE (monster boxes grown by 15, as the
+    /// sticky and gel add-ons do).
+    pub fn grenade_trace(&mut self, a: qworld::Vec3, b: qworld::Vec3, pass: u32, missile: bool) -> Option<(qworld::Trace, bool)> {
+        let t = {
+            let l = self.level.as_mut()?;
+            let ents = crate::ents::Ents { vm: &mut l.vm, c: &mut self.core };
+            let ty = if missile { qworld::MoveType::Missile } else { qworld::MoveType::Normal };
+            l.world.trace(&ents, a, qworld::Vec3::ZERO, qworld::Vec3::ZERO, b, ty, Some(pass))
+        };
+        let l = self.level.as_ref()?;
+        let aim = t.ent.is_some_and(|e| e != 0 && l.vm.ent_f(e, self.core.sv.fields.takedamage) == 2.0);
+        Some((t, aim))
+    }
+
+    /// Gravity-affected projectiles (MOVETYPE_TOSS/BOUNCE) owned by `owner`,
+    /// plus the owner's origin and v_angle: lets the host learn how each
+    /// weapon throws for the arc assist, whatever the mod.
+    pub fn thrown_by(&self, owner: u32) -> Option<Thrown> {
+        let l = self.level.as_ref()?;
+        let f = &self.core.sv.fields;
+        let vm = &l.vm;
+        if owner as usize >= vm.num_edicts() || vm.is_free(owner) { return None; }
+        let v = |e: u32, o: usize| qworld::Vec3::from_array(vm.ent_v(e, o));
+        let mut out = Thrown { time: vm.time, origin: v(owner, f.origin), v_angle: v(owner, f.v_angle), list: Vec::new() };
+        for e in 1..vm.num_edicts() as u32 {
+            if vm.is_free(e) || vm.ent_i(e, f.owner) != owner as i32 { continue; }
+            let mt = vm.ent_f(e, f.movetype);
+            if mt != qworld::MOVETYPE_TOSS as f32 && mt != qworld::MOVETYPE_BOUNCE as f32 { continue; }
+            let g = f.gravity.map_or(0.0, |o| vm.ent_f(e, o));
+            out.list.push(ThrownEnt { ent: e, origin: v(e, f.origin), velocity: v(e, f.velocity), bounce: mt == qworld::MOVETYPE_BOUNCE as f32, gravity: if g == 0.0 { 1.0 } else { g } });
+        }
+        Some(out)
+    }
+
     pub(super) fn phys_params(&self, ft: f64) -> PhysParams {
         let cv = &self.core.cvars;
         PhysParams {
@@ -180,4 +217,24 @@ impl Server {
         }
         self.process_queued_client_cmds();
     }
+}
+
+/// Snapshot from [`Server::thrown_by`].
+#[derive(Clone, Debug, Default)]
+pub struct Thrown {
+    pub time: f64,
+    pub origin: qworld::Vec3,
+    pub v_angle: qworld::Vec3,
+    pub list: Vec<ThrownEnt>,
+}
+
+#[derive(Clone, Copy, Debug)]
+pub struct ThrownEnt {
+    pub ent: u32,
+    pub origin: qworld::Vec3,
+    pub velocity: qworld::Vec3,
+    /// MOVETYPE_BOUNCE (else TOSS).
+    pub bounce: bool,
+    /// `.gravity` scale (0 in QC means 1).
+    pub gravity: f32,
 }

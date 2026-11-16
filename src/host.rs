@@ -78,6 +78,8 @@ fn pad_default_binds() -> Vec<(i32, String)> {
 }
 
 mod aim_vis;
+mod grenade_arc;
+mod arc_learn;
 use aim_vis::WorldVis;
 
 pub struct Host {
@@ -116,6 +118,8 @@ pub struct Host {
     portal_fx: crate::addons::portal_fx::Presentation,
     rail_fx: crate::addons::rail_fx::Presentation,
     hook_fx: crate::addons::hook_fx::HookFx,
+    grenade_arc: grenade_arc::GrenadeArc,
+    arc_learn: arc_learn::ArcLearn,
     gel_fx: crate::addons::gel_fx::GelFx,
     water_fx: crate::addons::water_fx::WaterFx,
     boomerang_fx: crate::addons::boomerang_fx::Presentation,
@@ -258,6 +262,8 @@ impl Host {
             portal_fx: Default::default(),
             rail_fx: Default::default(),
             hook_fx: Default::default(),
+            grenade_arc: Default::default(),
+            arc_learn: Default::default(),
             gel_fx: Default::default(),
             water_fx: Default::default(),
             boomerang_fx: Default::default(),

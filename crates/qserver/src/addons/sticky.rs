@@ -30,8 +30,10 @@ const SPEED_MIN: f32 = 600.0;
 const SPEED_MAX: f32 = 1400.0;
 const SOLID_BSP: f32 = 4.0;
 const SOLID_NOT: f32 = 0.0;
-const IT_GRENADE_LAUNCHER: f32 = 32.0;
-const IT_ROCKET_LAUNCHER: f32 = 64.0;
+const IT_GRENADE_LAUNCHER: f32 = 16.0;
+const IT_ROCKET_LAUNCHER: f32 = 32.0;
+/// Upward launch speed added to the charged forward speed.
+pub const LIFT: f32 = 200.0;
 const TE_EXPLOSION: i32 = 3;
 const SVC_TEMP_ENTITY: i32 = 23;
 
@@ -60,6 +62,14 @@ pub struct Stickies {
 }
 
 impl Stickies {
+    /// Forward speed player `i`'s bomb would leave at now (grenade arc).
+    pub fn arc_speed(&self, i: usize, now: f64) -> f32 {
+        match self.charge.get(i).copied().flatten() {
+            Some(start) => charge_speed(now - start),
+            None => SPEED_MIN,
+        }
+    }
+
     fn ensure(&mut self, n: usize) {
         if self.prev_buttons.len() < n {
             self.prev_buttons.resize(n, 0);
@@ -186,7 +196,7 @@ fn launch(st: &mut Stickies, vm: &mut Vm, c: &mut Core, w: &mut World, i: usize,
     }
     let ents = Ents { vm: &mut *vm, c: &mut *c };
     let (fwd, _, up) = angle_vectors(ents.v(e, V::VAngle));
-    let vel = fwd * speed + up * 200.0;
+    let vel = fwd * speed + up * LIFT;
     st.add(i, ents.v(e, V::Origin), vel, None);
     sound(vm, c, e, 1, "weapons/grenade.wav");
 }

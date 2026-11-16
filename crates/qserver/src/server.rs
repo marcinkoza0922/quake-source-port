@@ -21,6 +21,7 @@ mod reticle;
 pub use types::*;
 mod spawn;
 mod physics;
+pub use physics::{Thrown, ThrownEnt};
 mod connect;
 mod clients;
 

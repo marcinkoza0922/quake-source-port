@@ -74,6 +74,7 @@ pub enum Page {
     Autosave,
     Assists,
     AutoAim,
+    GrenadeArc,
     HudLayout,
     Messages,
     Water,

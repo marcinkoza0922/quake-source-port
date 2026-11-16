@@ -152,6 +152,7 @@ pub(super) fn register_commands(c: &mut Commands<Host>) {
             "autosave" => Some(Page::Autosave),
             "assists" => Some(Page::Assists),
             "autoaim" => Some(Page::AutoAim),
+            "grenadearc" => Some(Page::GrenadeArc),
             "hud" => Some(Page::Hud),
             "crosshair" => Some(Page::Crosshair),
             "hitsound" => Some(Page::HitSound),
