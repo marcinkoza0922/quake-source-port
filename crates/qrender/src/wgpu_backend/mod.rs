@@ -2,8 +2,8 @@
 //! feature). Same public API as the Vulkan backend; the scene is drawn with
 //! CPU-built draw lists (world from the PVS, alias poses lerped on the CPU,
 //! lightmaps built on the CPU) and WGSL shaders in `shaders/`. Advanced
-//! effects of the Vulkan backend (MSAA, SSAO, motion blur, portals, slang
-//! presets, softemu, goggles, water ripples) are not drawn.
+//! effects of the Vulkan backend (SSAO, motion blur, portals, slang presets,
+//! softemu, goggles, water ripples) are not drawn.
 
 mod capture;
 mod ents;
@@ -24,6 +24,9 @@ use std::path::Path;
 pub(super) const NO_TEX: u32 = u32::MAX;
 const SCENE_FORMAT: wgpu::TextureFormat = wgpu::TextureFormat::Rgba8Unorm;
 const DEPTH_FORMAT: wgpu::TextureFormat = wgpu::TextureFormat::Depth32Float;
+/// MSAA sample count: WebGPU (and wgpu without adapter-specific format
+/// features) only guarantees 1 and 4 for the scene formats.
+const MSAA_SAMPLES: u32 = 4;
 
 /// Scene targets at render-scaled size, plus the headless output and its readback.
 struct Targets {
@@ -31,6 +34,8 @@ struct Targets {
     scene: (u32, u32),
     color: wgpu::Texture,
     color_view: wgpu::TextureView,
+    /// Multisampled colour drawn into and resolved to `color` (MSAA on).
+    ms_view: Option<wgpu::TextureView>,
     depth_view: wgpu::TextureView,
     /// Headless: (output texture, readback buffer, padded bytes per row).
     out: Option<(wgpu::Texture, wgpu::Buffer, u32)>,
@@ -76,6 +81,8 @@ pub struct Renderer {
     frame_ready: bool,
     /// Scene resolution relative to the output (r_scale), 0.25..=2.
     render_scale: f32,
+    /// Scene MSAA sample count (1 or [`MSAA_SAMPLES`]).
+    msaa: u32,
     /// Copy the next presented frame for [`Renderer::take_capture`].
     capture_req: bool,
     /// A presented frame being copied and mapped for reading.
@@ -215,6 +222,7 @@ impl Renderer {
             needs_resize: true,
             frame_ready: false,
             render_scale: 1.0,
+            msaa: 1,
             capture_req: false,
             capture: None,
         };
@@ -265,9 +273,9 @@ impl Renderer {
             .unwrap_or([0.0; 3])
     }
 
-    /// MSAA is not implemented in this backend.
+    /// Highest MSAA sample count (any r_msaa above 1 uses it).
     pub fn max_msaa(&self) -> u32 {
-        1
+        MSAA_SAMPLES
     }
 
     pub fn max_anisotropy(&self) -> f32 {

@@ -629,7 +629,11 @@ changes or a dynamic light touches it. Bind groups: 0 frame (dynamic UBO,
 lightmap, palette), 1 material (3 textures + sampler; cached per slot triple)
 or sky (6 textures), 2 per-draw dynamic UBO (256-byte records). The scene
 renders to an RGBA8 target at output size × render scale (`r_renderscale`,
-0.25–2, linearly filtered when scaled); a post pass applies the
+0.25–2, linearly filtered when scaled). MSAA draws into a 4× colour/depth
+target resolved into it at the end of the scene pass; WebGPU guarantees only
+1× and 4× for these formats, so any `r_msaa` above 1 means 4× and
+`max_msaa` reports 4 (the scene pipelines are rebuilt per sample count,
+`pipes::ScenePipes`). A post pass applies the
 `r_waterwarp 1` underwater screen warp (vkQuake's `water_warp`),
 polyblend/contrast/gamma at output size, then the 2D layer. The
 `r_waterwarp 2` FOV pulse works (it is in the shared projection); FTE
@@ -644,7 +648,7 @@ each frame; the Vulkan backend's `take_capture` is never pending.
 See-through portals and teleporter windows are deliberately left out of this
 backend: every portal view would rebuild the CPU draw lists again, which is
 too slow in a browser (portals and teleporters still work, the surface is
-just opaque). Not implemented there: MSAA, SSAO, motion/speed blur, water
+just opaque). Not implemented there: SSAO, motion/speed blur, water
 ripples/caustics, softemu/dither, goggles, colorblind, slang presets,
 GPU timings and r_visibility. Natively `Renderer::new` (windowed) returns an
 error with `--features wgpu`; use `-headless`.

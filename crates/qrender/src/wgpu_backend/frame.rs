@@ -3,7 +3,7 @@
 
 use super::pipes::{DrawU, UNIFORM_STRIDE, UiV};
 use super::scene::{Lists, Pipe, Src};
-use super::{DEPTH_FORMAT, NO_TEX, Renderer, SCENE_FORMAT, Targets};
+use super::{DEPTH_FORMAT, MSAA_SAMPLES, NO_TEX, Renderer, SCENE_FORMAT, Targets};
 use crate::{Draw2D, Error, RenderFrame, Result};
 
 /// A GPU buffer that grows to fit each frame's data.
@@ -111,12 +111,12 @@ impl Renderer {
     fn create_targets(&mut self) {
         let (w, h) = (self.width, self.height);
         let scene = crate::projection::scene_extent((w, h), self.render_scale);
-        let tex = |(width, height), format, usage| {
+        let tex = |(width, height), samples, format, usage| {
             self.dev.create_texture(&wgpu::TextureDescriptor {
                 label: None,
                 size: wgpu::Extent3d { width, height, depth_or_array_layers: 1 },
                 mip_level_count: 1,
-                sample_count: 1,
+                sample_count: samples,
                 dimension: wgpu::TextureDimension::D2,
                 format,
                 usage,
@@ -124,10 +124,12 @@ impl Renderer {
             })
         };
         use wgpu::TextureUsages as U;
-        let color = tex(scene, SCENE_FORMAT, U::RENDER_ATTACHMENT | U::TEXTURE_BINDING);
-        let depth = tex(scene, DEPTH_FORMAT, U::RENDER_ATTACHMENT);
+        let color = tex(scene, 1, SCENE_FORMAT, U::RENDER_ATTACHMENT | U::TEXTURE_BINDING);
+        let ms_view = (self.msaa > 1)
+            .then(|| tex(scene, self.msaa, SCENE_FORMAT, U::RENDER_ATTACHMENT).create_view(&Default::default()));
+        let depth = tex(scene, self.msaa, DEPTH_FORMAT, U::RENDER_ATTACHMENT);
         let out = self.surface.is_none().then(|| {
-            let o = tex((w, h), wgpu::TextureFormat::Rgba8Unorm, U::RENDER_ATTACHMENT | U::COPY_SRC);
+            let o = tex((w, h), 1, wgpu::TextureFormat::Rgba8Unorm, U::RENDER_ATTACHMENT | U::COPY_SRC);
             let bpr = (w * 4).next_multiple_of(256);
             let buf = self.dev.create_buffer(&wgpu::BufferDescriptor {
                 label: Some("readback"),
@@ -150,7 +152,7 @@ impl Renderer {
                 wgpu::BindGroupEntry { binding: 3, resource: wgpu::BindingResource::Sampler(post_sampler) },
             ],
         }));
-        self.targets = Some(Targets { scene, color, color_view, depth_view: depth.create_view(&Default::default()), out });
+        self.targets = Some(Targets { scene, color, color_view, ms_view, depth_view: depth.create_view(&Default::default()), out });
         self.frame_ready = false;
     }
 
@@ -175,6 +177,12 @@ impl Renderer {
         let scale = fr.settings.render_scale.clamp(0.25, 2.0);
         if scale != self.render_scale {
             self.render_scale = scale;
+            self.needs_resize = true;
+        }
+        let msaa = if fr.settings.msaa > 1 { MSAA_SAMPLES } else { 1 };
+        if msaa != self.msaa {
+            self.msaa = msaa;
+            self.pipes.set_samples(&self.dev, msaa);
             self.needs_resize = true;
         }
         if self.needs_resize {
@@ -325,11 +333,15 @@ impl Renderer {
         if !l.views.is_empty() {
             let mut pass = enc.begin_render_pass(&wgpu::RenderPassDescriptor {
                 label: Some("scene"),
+                // MSAA draws into ms_view and resolves into color_view
                 color_attachments: &[Some(wgpu::RenderPassColorAttachment {
-                    view: &t.color_view,
+                    view: t.ms_view.as_ref().unwrap_or(&t.color_view),
                     depth_slice: None,
-                    resolve_target: None,
-                    ops: wgpu::Operations { load: wgpu::LoadOp::Clear(wgpu::Color::BLACK), store: wgpu::StoreOp::Store },
+                    resolve_target: t.ms_view.as_ref().map(|_| &t.color_view),
+                    ops: wgpu::Operations {
+                        load: wgpu::LoadOp::Clear(wgpu::Color::BLACK),
+                        store: if t.ms_view.is_some() { wgpu::StoreOp::Discard } else { wgpu::StoreOp::Store },
+                    },
                 })],
                 depth_stencil_attachment: Some(wgpu::RenderPassDepthStencilAttachment {
                     view: &t.depth_view,
@@ -352,7 +364,7 @@ impl Renderer {
                         let maxz = if c.viewmodel { 0.3 } else { 1.0 };
                         pass.set_viewport(x as f32, y as f32, sw as f32, sh as f32, 0.0, maxz);
                     }
-                    let p = &self.pipes;
+                    let p = &self.pipes.scene;
                     pass.set_pipeline(match c.pipe {
                         Pipe::World => &p.world,
                         Pipe::WorldAlpha => &p.world_alpha,

@@ -66,6 +66,19 @@ pub(super) struct Pipes {
     pub(super) mat_bgl: wgpu::BindGroupLayout,
     pub(super) sky_bgl: wgpu::BindGroupLayout,
     pub(super) draw_bgl: wgpu::BindGroupLayout,
+    scene_layout: wgpu::PipelineLayout,
+    sky_layout: wgpu::PipelineLayout,
+    scene_module: wgpu::ShaderModule,
+    sky_module: wgpu::ShaderModule,
+    /// Scene pipelines for the current MSAA sample count.
+    pub(super) scene: ScenePipes,
+    pub(super) ui: wgpu::RenderPipeline,
+    pub(super) post: wgpu::RenderPipeline,
+}
+
+/// Pipelines drawing into the (possibly multisampled) scene target.
+pub(super) struct ScenePipes {
+    pub(super) samples: u32,
     pub(super) world: wgpu::RenderPipeline,
     pub(super) world_alpha: wgpu::RenderPipeline,
     pub(super) water: wgpu::RenderPipeline,
@@ -75,8 +88,6 @@ pub(super) struct Pipes {
     pub(super) alias_alpha: wgpu::RenderPipeline,
     /// FTE blend modes × (triangles, lines).
     pub(super) poly: Vec<wgpu::RenderPipeline>,
-    pub(super) ui: wgpu::RenderPipeline,
-    pub(super) post: wgpu::RenderPipeline,
 }
 
 pub(super) fn poly_index(b: FteBlend, lines: bool) -> usize {
@@ -146,6 +157,7 @@ struct Desc<'a> {
     /// (depth write, depth test); None = no depth attachment.
     depth: Option<(bool, bool)>,
     format: wgpu::TextureFormat,
+    samples: u32,
 }
 
 fn pipeline(dev: &wgpu::Device, d: Desc) -> wgpu::RenderPipeline {
@@ -166,7 +178,7 @@ fn pipeline(dev: &wgpu::Device, d: Desc) -> wgpu::RenderPipeline {
             stencil: Default::default(),
             bias: Default::default(),
         }),
-        multisample: Default::default(),
+        multisample: wgpu::MultisampleState { count: d.samples, ..Default::default() },
         fragment: Some(wgpu::FragmentState {
             module: d.module,
             entry_point: Some(d.fs),
@@ -239,62 +251,13 @@ impl Pipes {
                 source: wgpu::ShaderSource::Wgsl(src.into()),
             })
         };
-        let scene = module(SCENE_SRC);
-        let sky_m = module(SKY_SRC);
+        let scene_module = module(SCENE_SRC);
+        let sky_module = module(SKY_SRC);
         let screen = module(SCREEN_SRC);
         let alpha = Some(wgpu::BlendState::ALPHA_BLENDING);
         let tri = wgpu::PrimitiveTopology::TriangleList;
-        let world_vb = [vb::<crate::world::WorldVertex>(&WORLD_ATTRS)];
-        let alias_vb = [vb::<AliasV>(&ALIAS_ATTRS)];
-        let poly_vb = [vb::<crate::FteVertex>(&POLY_ATTRS)];
         let ui_vb = [vb::<UiV>(&UI_ATTRS)];
-        let scene_pipe = |vs, fs, buffers, blend, write| {
-            pipeline(dev, Desc {
-                layout: &scene_layout,
-                module: &scene,
-                vs,
-                fs,
-                buffers,
-                topology: tri,
-                blend,
-                depth: Some((write, true)),
-                format: SCENE_FORMAT,
-            })
-        };
-        let world = scene_pipe("vs_world", "fs_world", &world_vb, None, true);
-        let world_alpha = scene_pipe("vs_world", "fs_world", &world_vb, alpha, false);
-        let water = scene_pipe("vs_world", "fs_water", &world_vb, None, true);
-        let water_alpha = scene_pipe("vs_world", "fs_water", &world_vb, alpha, false);
-        let alias = scene_pipe("vs_alias", "fs_alias", &alias_vb, None, true);
-        let alias_alpha = scene_pipe("vs_alias", "fs_alias", &alias_vb, alpha, false);
-        let sky = pipeline(dev, Desc {
-            layout: &sky_layout,
-            module: &sky_m,
-            vs: "vs_sky",
-            fs: "fs_sky",
-            buffers: &world_vb,
-            topology: tri,
-            blend: None,
-            depth: Some((true, true)),
-            format: SCENE_FORMAT,
-        });
-        let mut poly = Vec::new();
-        for b in FteBlend::ALL {
-            for lines in [false, true] {
-                debug_assert_eq!(poly.len(), poly_index(b, lines));
-                poly.push(pipeline(dev, Desc {
-                    layout: &scene_layout,
-                    module: &scene,
-                    vs: "vs_poly",
-                    fs: "fs_poly",
-                    buffers: &poly_vb,
-                    topology: if lines { wgpu::PrimitiveTopology::LineList } else { tri },
-                    blend: Some(blend_of(b)),
-                    depth: Some((false, true)),
-                    format: SCENE_FORMAT,
-                }));
-            }
-        }
+        let scene = ScenePipes::new(dev, &scene_layout, &sky_layout, &scene_module, &sky_module, 1);
         let ui = pipeline(dev, Desc {
             layout: &screen_layout,
             module: &screen,
@@ -305,6 +268,7 @@ impl Pipes {
             blend: alpha,
             depth: None,
             format: out_format,
+            samples: 1,
         });
         let post = pipeline(dev, Desc {
             layout: &screen_layout,
@@ -316,22 +280,95 @@ impl Pipes {
             blend: None,
             depth: None,
             format: out_format,
+            samples: 1,
         });
         Pipes {
             frame_bgl,
             mat_bgl,
             sky_bgl,
             draw_bgl,
-            world,
-            world_alpha,
-            water,
-            water_alpha,
-            sky,
-            alias,
-            alias_alpha,
-            poly,
+            scene_layout,
+            sky_layout,
+            scene_module,
+            sky_module,
+            scene,
             ui,
             post,
         }
+    }
+
+    /// Rebuilds the scene pipelines for `samples` (MSAA) if it changed.
+    pub(super) fn set_samples(&mut self, dev: &wgpu::Device, samples: u32) {
+        if samples != self.scene.samples {
+            self.scene = ScenePipes::new(dev, &self.scene_layout, &self.sky_layout, &self.scene_module, &self.sky_module, samples);
+        }
+    }
+}
+
+impl ScenePipes {
+    fn new(
+        dev: &wgpu::Device,
+        scene_layout: &wgpu::PipelineLayout,
+        sky_layout: &wgpu::PipelineLayout,
+        scene: &wgpu::ShaderModule,
+        sky_m: &wgpu::ShaderModule,
+        samples: u32,
+    ) -> ScenePipes {
+        let alpha = Some(wgpu::BlendState::ALPHA_BLENDING);
+        let tri = wgpu::PrimitiveTopology::TriangleList;
+        let world_vb = [vb::<crate::world::WorldVertex>(&WORLD_ATTRS)];
+        let alias_vb = [vb::<AliasV>(&ALIAS_ATTRS)];
+        let poly_vb = [vb::<crate::FteVertex>(&POLY_ATTRS)];
+        let scene_pipe = |vs, fs, buffers, blend, write| {
+            pipeline(dev, Desc {
+                layout: scene_layout,
+                module: scene,
+                vs,
+                fs,
+                buffers,
+                topology: tri,
+                blend,
+                depth: Some((write, true)),
+                format: SCENE_FORMAT,
+                samples,
+            })
+        };
+        let world = scene_pipe("vs_world", "fs_world", &world_vb, None, true);
+        let world_alpha = scene_pipe("vs_world", "fs_world", &world_vb, alpha, false);
+        let water = scene_pipe("vs_world", "fs_water", &world_vb, None, true);
+        let water_alpha = scene_pipe("vs_world", "fs_water", &world_vb, alpha, false);
+        let alias = scene_pipe("vs_alias", "fs_alias", &alias_vb, None, true);
+        let alias_alpha = scene_pipe("vs_alias", "fs_alias", &alias_vb, alpha, false);
+        let sky = pipeline(dev, Desc {
+            layout: sky_layout,
+            module: sky_m,
+            vs: "vs_sky",
+            fs: "fs_sky",
+            buffers: &world_vb,
+            topology: tri,
+            blend: None,
+            depth: Some((true, true)),
+            format: SCENE_FORMAT,
+            samples,
+        });
+        let mut poly = Vec::new();
+        for b in FteBlend::ALL {
+            for lines in [false, true] {
+                debug_assert_eq!(poly.len(), poly_index(b, lines));
+                poly.push(pipeline(dev, Desc {
+                    layout: scene_layout,
+                    module: scene,
+                    vs: "vs_poly",
+                    fs: "fs_poly",
+                    buffers: &poly_vb,
+                    topology: if lines { wgpu::PrimitiveTopology::LineList } else { tri },
+                    blend: Some(blend_of(b)),
+                    depth: Some((false, true)),
+                    format: SCENE_FORMAT,
+                    samples,
+                }));
+            }
+        }
+        ScenePipes { samples, world, world_alpha, water, water_alpha, sky, alias, alias_alpha, poly }
     }
 }
