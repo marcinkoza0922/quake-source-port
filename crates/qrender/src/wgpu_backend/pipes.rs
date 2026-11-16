@@ -121,7 +121,8 @@ fn uniform_entry(binding: u32, size: u64) -> wgpu::BindGroupLayoutEntry {
 fn blend_of(b: FteBlend) -> wgpu::BlendState {
     use wgpu::BlendFactor as F;
     let (s, d) = match b {
-        FteBlend::Blend => (F::SrcAlpha, F::OneMinusSrcAlpha),
+        // Overlay (drawn over the world without depth test in Vulkan) blends like Blend
+        FteBlend::Blend | FteBlend::Overlay => (F::SrcAlpha, F::OneMinusSrcAlpha),
         FteBlend::BlendColour => (F::Src, F::OneMinusSrc),
         FteBlend::AddA => (F::SrcAlpha, F::One),
         FteBlend::AddC => (F::Src, F::One),

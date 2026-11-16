@@ -7,6 +7,7 @@ impl Menu {
         self.sync_autoaim_mapping(cv);
         self.mouse = Some(pos);
         if self.autoaim_prompt || self.capturing() { return None; }
+        if self.prompt.is_some() { return self.prompt_hover(pos); }
         if self.addon_mouse(pos) { return None; }
         if let (Some(i), Screen::OptionsPage(p)) = (self.slider_drag, self.screen) {
             self.set_slider(self.page_item(p, i), pos.0, cv);
@@ -16,7 +17,7 @@ impl Menu {
             self.drag_to(p, pos.1, g);
             return None;
         }
-        if let (Some(g), Screen::Mods | Screen::ModMaps) = (self.drag, self.screen) {
+        if let (Some(g), Screen::Mods | Screen::ModMaps | Screen::ModOnline) = (self.drag, self.screen) {
             self.mods.drag_to(self.mods_page(), pos.1, g);
             return None;
         }
@@ -49,6 +50,10 @@ impl Menu {
         if self.addon_key(key, cv, &mut out) { return out; }
         if self.autoaim_prompt {
             self.autoaim_prompt_key(key, cv, &mut out);
+            return out;
+        }
+        if self.prompt.is_some() {
+            self.prompt_key(key, &mut out);
             return out;
         }
         if let Some(row) = self.capture.take() {
@@ -85,7 +90,7 @@ impl Menu {
             }
             return out;
         }
-        if let (K_MWHEELUP | K_MWHEELDOWN, Screen::Mods | Screen::ModMaps) = (key, self.screen) {
+        if let (K_MWHEELUP | K_MWHEELDOWN, Screen::Mods | Screen::ModMaps | Screen::ModOnline) = (key, self.screen) {
             self.mods.wheel(self.mods_page(), key == K_MWHEELUP);
             if let Some(i) = self.mouse.and_then(|pos| self.item_at(pos)) {
                 *self.mods.cursor_mut(self.mods_page()) = i;
@@ -119,12 +124,12 @@ impl Menu {
                 self.drag = Some(grab);
                 return out;
             }
-            if let Screen::Mods | Screen::ModMaps = self.screen
+            if let Screen::Mods | Screen::ModMaps | Screen::ModOnline = self.screen
                 && self.mods.click(self.mods_page(), pos, &mut out)
             {
                 return out;
             }
-            if let Screen::Mods | Screen::ModMaps = self.screen
+            if let Screen::Mods | Screen::ModMaps | Screen::ModOnline = self.screen
                 && let Some((x, top, h, ty, th)) = self.mods.scrollbar(self.mods_page())
                 && (x - 4.0..x + 7.0).contains(&pos.0)
                 && (top..top + h).contains(&pos.1)
@@ -142,6 +147,13 @@ impl Menu {
                 let grab = if (ty..ty + th).contains(&pos.1) { pos.1 - ty } else { th / 2.0 };
                 self.card_drag_to(pos.1, grab);
                 self.drag = Some(grab);
+                return out;
+            }
+            if let Screen::Load | Screen::Save = self.screen
+                && self.on_delete_button(pos)
+                && let Some(sv) = self.save_at(self.load_cursor)
+            {
+                self.ask_delete(sv.clone());
                 return out;
             }
             if self.on_new_game_box(pos) {
@@ -286,24 +298,34 @@ impl Menu {
                 if right { self.load_cursor = (self.load_cursor + CARDS_FULL).min(count - 1); }
                 self.fix_card_scroll();
                 if up || down || left || right { out.push(Action::Sound("misc/menu1.wav")); }
+                let delete = matches!(key, K_DEL | K_BACKSPACE | K_XBUTTON);
+                if delete && let Some(sv) = self.save_at(self.load_cursor) {
+                    self.ask_delete(sv.clone());
+                    return out;
+                }
                 if enter {
                     let i = self.load_cursor;
-                    if self.screen == Screen::Load {
-                        if !self.autosaves && i == 1 {
-                            self.autosaves = true;
-                            self.load_cursor = 0;
-                            self.save_scroll = 0.0;
-                            out.push(Action::Command("_scansaves\n".into()));
-                        } else if self.saves[i].is_some() {
-                            let name = self.save_slot_name(i).unwrap();
+                    if self.is_browse_row(i) {
+                        self.autosaves = true;
+                        self.load_cursor = 0;
+                        self.save_scroll = 0.0;
+                        out.push(Action::Sound("misc/menu2.wav"));
+                        out.push(Action::Command("_scansaves\n".into()));
+                    } else if self.screen == Screen::Load {
+                        if let Some(sv) = self.save_at(i) {
+                            let name = sv.name.clone();
                             self.screen = Screen::None;
                             out.push(Action::Close);
-                            out.push(Action::Command(format!("load {name}\n")));
+                            out.push(Action::Command(format!("load \"{name}\"\n")));
                         }
+                    } else if let Some(sv) = self.save_at(i) {
+                        let title = format!("Overwrite \"{}\"?", clean_title(&sv.info.level, 40));
+                        let when = format!("Saved {}", sv.info.when(qcore::time::SystemTime::now()));
+                        self.confirm(vec![title, when], "Overwrite", format!("save \"{}\"\n", sv.name), true);
                     } else {
                         self.screen = Screen::None;
                         out.push(Action::Close);
-                        out.push(Action::Command(format!("save s{i}\n")));
+                        out.push(Action::Command(format!("save {}\n", self.new_save_name())));
                     }
                 }
             }
@@ -438,11 +460,25 @@ impl Menu {
                 // Level Select opened from New Game: back returns there
                 self.screen = Screen::SinglePlayer;
             }
-            Screen::Mods | Screen::ModMaps => {
+            Screen::Mods | Screen::ModMaps | Screen::ModOnline => {
                 let page = self.mods_page();
-                self.screen = match self.mods.key(page, key, &mut out) {
+                let start = out.len();
+                let next = self.mods.key(page, key, &mut out);
+                // starting a map asks for the skill; switching mods mid-game asks first
+                let cmd = out[start..].iter().find_map(|a| match a { Action::Command(c) if c.starts_with("game ") => Some(c.clone()), _ => None });
+                if let Some(cmd) = cmd && (page == modmenu::Page::Maps || self.game_running) {
+                    out.retain(|a| !matches!(a, Action::Close | Action::Command(_)));
+                    if page == modmenu::Page::Maps {
+                        self.ask_skill(cmd, cv);
+                    } else {
+                        self.confirm(vec!["End the current game?".into(), "Unsaved progress will be lost.".into()], "End game", cmd, true);
+                    }
+                    return out;
+                }
+                self.screen = match next {
                     Some(modmenu::Page::List) => Screen::Mods,
                     Some(modmenu::Page::Maps) => Screen::ModMaps,
+                    Some(modmenu::Page::Online) => Screen::ModOnline,
                     None if out.iter().any(|a| matches!(a, Action::Close)) => Screen::None,
                     None => Screen::Main,
                 };

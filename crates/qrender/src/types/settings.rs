@@ -62,6 +62,8 @@ pub struct Settings {
     pub soft_particle_distance: f32,
     /// Soft particle MSAA depth quality (0 = low / sample 0, 1 = high / all samples).
     pub soft_particle_quality: u32,
+    /// r_particles: classic particle shape (1 GLQuake round, 2 software square).
+    pub particle_style: u32,
     /// r_ssao / r_ssao_strength: screen-space ambient occlusion strength (0 = off).
     pub ssao: f32,
     /// SSAO resolution and sample quality (0 = low, 1 = medium, 2 = high).
@@ -151,6 +153,7 @@ impl Default for Settings {
             colorblind: 0,
             soft_particle_distance: 4.0,
             soft_particle_quality: 0,
+            particle_style: 1,
             ssao: 0.0,
             ssao_quality: 1,
             portal_quality: 1,

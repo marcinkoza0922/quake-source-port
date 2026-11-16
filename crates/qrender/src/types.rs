@@ -56,6 +56,19 @@ pub struct View {
     pub reserve_bottom: u32,
     /// Peripheral radial blur strength, 0..=1; centre and UI stay sharp.
     pub speed_blur: f32,
+    /// Underwater view effect (r_waterwarp).
+    pub waterwarp: WaterWarp,
+}
+
+/// Underwater view distortion; the value is the warp clock in seconds.
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub enum WaterWarp {
+    #[default]
+    None,
+    /// Software Quake: sine ripple over the whole image (post pass).
+    Screen(f32),
+    /// GLQuake: the horizontal and vertical FOV pulse in opposite directions.
+    Fov(f32),
 }
 
 /// One entity to draw.
@@ -216,9 +229,17 @@ pub enum FteBlend {
     InvModC,
     /// ONE, ONE_MINUS_SRC_ALPHA
     Premul,
+    /// Alpha-blended line list drawn without depth testing (debug overlays
+    /// such as `r_showbboxes`); `lines` is implied.
+    Overlay,
 }
 
 impl FteBlend {
+    /// fte.frag blend mode (`fogmix.w`); Overlay shades like Blend, since
+    /// mode 8 is the gun portal.
+    pub fn shader_mode(self) -> f32 {
+        if self == FteBlend::Overlay { 0.0 } else { self as u32 as f32 }
+    }
     pub const ALL: [FteBlend; 8] = [
         FteBlend::Blend,
         FteBlend::BlendColour,

@@ -27,6 +27,7 @@ pub(super) fn tooltip(item: Item) -> Option<&'static str> {
         "r_texfilter" => "Nearest keeps crisp classic pixels; linear smooths textures",
         "r_anisotropy" => "Keeps textures sharp on floors and walls seen at steep angles",
         "r_dynamic" => "Lights from rockets, muzzle flashes and explosions brighten nearby walls",
+        "r_enhancedmodels" => "Uses the 2021 re-release's smoother MD5 models (and MD3 replacements from mods) instead of the classic ones. Applies on the next map load",
         "r_coloredlight" => "Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load",
         "r_fog" => "Shows the distance fog that maps and mods set; off always gives clear view",
         "r_skyfog" => "How strongly fog covers the sky when fog is on",
@@ -81,17 +82,20 @@ pub(super) fn tooltip(item: Item) -> Option<&'static str> {
         "addon_hitstop_max" => "No single freeze lasts longer than this, however much damage or kill bonus adds",
         "addon_portalgun" => "Two-portal gun: fire and alt-fire place linked portals on flat walls; assign a weapon slot in Add-ons",
         "r_portal_quality" => "Resolution and detail inside portal and teleporter views; lower tiers trim nested effects",
-        "r_softparticles" => "Fades particles smoothly where they meet walls and floors; low uses single-sample depth and shading under MSAA, high checks every sample",
+        "r_waterwarp" => "How the view distorts underwater: Classic ripples the whole screen like software Quake, GLQuake slowly stretches and squashes the view",
+        "r_particles" => "Look of the classic particles: GLQuake draws soft round dots, Classic draws square pixels like software Quake",
+        "r_enhancedfx" => "Unlocks the FX Settings page: enhanced particles, impact effects and blood splatter",
+        "r_enhancedparticles" => "Replaces the classic dot particles with glowing sparks, smoke and blood; mods with their own particle effects keep them",
+        "r_particle_quality" => "Low: hard particle edges, half the scripted particles and fewer hit sparks. Medium: soft edges. High: soft edges checked per MSAA sample, most hit sparks",
         "r_debris" => "Gibs tumble and barrels throw shrapnel; shots and blasts push them (cosmetic only)",
         "r_debris_quality" => "Simulation detail, step rate, fade-out lifetimes and caps for gibs and shrapnel; low also skips mover collision",
         "r_debris_gibs" => "Gibs and heads tumble and bounce",
         "r_debris_shrapnel" => "Exploding boxes throw metal shards",
-        "r_impact_quality" => "Caps mark count, lifetime and hit particle density for impacts; low trims sparks and debris",
         "r_impact_fx" => "Sparks, smoke, chips, splinters and splashes fly off whatever your shots hit",
         "r_impact_bullets" => "Shotgun hits leave small surface marks (cosmetic only)",
         "r_impact_nails" => "Nails stick to wood and bodies; hard surfaces deflect them to the floor",
         "r_impact_scorches" => "Explosions scorch nearby solid surfaces",
-        "r_impact_lifetime" => "Impact marks and nails fade before expiring",
+        "r_impact_lifetime" => "Seconds impact marks and stuck nails stay before fading out; independent of Particle Quality",
         "r_impact_limit" => "Oldest marks and nails are recycled at this shared limit",
         "r_blood" => "Blood stains surfaces and bodies; cosmetic, independent of particle packs",
         "r_blood_quality" => "Caps mark count, lifetime, airborne droplets and wound/gib painting; low skips enemy wounds and gib trails",
@@ -250,7 +254,7 @@ pub(super) fn page_name(p: Page) -> &'static str {
         Page::HudLayout => "Modern HUD Layout",
         Page::Messages => "Messages & Captions",
         Page::Water => "Water Settings",
-        Page::Impacts => "Impact Effects",
+        Page::Impacts => "FX Settings",
         Page::Debris => "Debris Settings",
         Page::Blood => "Blood Splatter Settings",
         Page::ScreenShader => "Screen Shader",
@@ -274,9 +278,22 @@ pub(super) fn page_name(p: Page) -> &'static str {
 
 /// The page an `Item::Sub` page returns to, with that row's index.
 pub(super) fn parent_page(p: Page) -> Option<(Page, usize)> {
-    [Page::Assists, Page::Gameplay, Page::Input, Page::Controller, Page::Hud, Page::Accessibility, Page::Enhancements, Page::Addons, Page::NewGameAddons, Page::Audio].into_iter().find_map(|parent| {
+    [Page::Assists, Page::Gameplay, Page::Input, Page::Controller, Page::Hud, Page::Accessibility, Page::Enhancements, Page::Impacts, Page::Addons, Page::NewGameAddons, Page::Audio].into_iter().find_map(|parent| {
         page_items(parent).iter().position(|i| matches!(i, Item::Sub { page, .. } if *page == p)).map(|i| (parent, i))
     })
+}
+
+/// Why a dimmed row is switched off, shown instead of its usual tooltip.
+pub(super) fn disabled_reason(item: Item) -> Option<&'static str> {
+    match item {
+        Item::Choice { cvar: "r_waterwarp", .. } => {
+            Some("Disabled while Enhanced Water is on: its own underwater effects replace the classic and GLQuake view warps")
+        }
+        Item::Choice { cvar: "r_particles", .. } => {
+            Some("Disabled while Enhanced Particles is on: its particles replace the GLQuake and Classic styles")
+        }
+        _ => None,
+    }
 }
 
 /// Sub-pages that are switched off by their parent setting.
@@ -286,6 +303,7 @@ pub(super) fn sub_disabled(page: Page, cv: &Cvars) -> bool {
         || (page == Page::Autosave && cv.value_of("sv_autosave") == 0.0)
         || (page == Page::HudLayout && cv.value_of("scr_hudstyle") == 0.0)
         || (page == Page::Water && cv.value_of("r_enhancedwater") == 0.0)
+        || (page == Page::Impacts && cv.value_of("r_enhancedfx") == 0.0)
         || (page == Page::Blood && cv.value_of("r_blood") == 0.0)
         || (page == Page::Debris && cv.value_of("r_debris") == 0.0)
         || (page == Page::Goggles && cv.value_of("addon_goggles") == 0.0)
@@ -299,8 +317,20 @@ pub(super) fn is_net_page(p: Page) -> bool {
 impl Menu {
     /// Shared by keyboard adjustment, pointer dragging and drawing.
     pub(super) fn item_disabled(&self, item: Item, cv: &Cvars) -> bool {
-        (matches!(item, Item::Slider { cvar: "r_wateralpha", .. })
+        (matches!(item, Item::Slider { cvar: "r_motionblur_amount", .. } | Item::Choice { cvar: "r_motionblur_quality", .. })
+            && cv.value_of("r_motionblur") == 0.0)
+            || (matches!(item, Item::Slider { cvar: "r_waterripples_amount", .. }) && cv.value_of("r_waterripples") == 0.0)
+            || (matches!(item, Item::Slider { cvar: "r_watercaustics_amount", .. }) && cv.value_of("r_watercaustics") == 0.0)
+            || (matches!(
+                item,
+                Item::Choice { cvar: "r_particle_quality" | "r_impact_fx", .. }
+                    | Item::Toggle { cvar: "r_impact_bullets" | "r_impact_nails" | "r_impact_scorches", .. }
+                    | Item::Slider { cvar: "r_impact_lifetime" | "r_impact_limit", .. }
+            ) && cv.value_of("r_enhancedparticles") == 0.0)
+            || (matches!(item, Item::Slider { cvar: "r_wateralpha", .. })
             && (cv.value_of("r_enhancedwater") == 0.0 || cv.value_of("r_watertranslucency") == 0.0))
+            || (matches!(item, Item::Choice { cvar: "r_waterwarp", .. }) && cv.value_of("r_enhancedwater") != 0.0)
+            || (matches!(item, Item::Choice { cvar: "r_particles", .. }) && cv.value_of("r_enhancedparticles") != 0.0)
             || (matches!(item, Item::Choice { cvar: "r_drawviewmodel", .. }) && cv.value_of("cl_camera") != 0.0)
             || (matches!(item, Item::Choice { cvar: "r_portal_quality", .. })
                 && match self.screen {

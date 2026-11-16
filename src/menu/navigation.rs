@@ -17,7 +17,7 @@ impl Menu {
                 (PANEL_X, bottom + if p == Page::Setup { 84.0 } else { 30.0 })
             }
             Screen::Load | Screen::Save => (CARD_X, CARD_BOTTOM + 4.0),
-            Screen::Mods | Screen::ModMaps => self.mods.back_position(),
+            Screen::Mods | Screen::ModMaps | Screen::ModOnline => self.mods.back_position(),
             _ => return None,
         };
         Some((x, y.min(MENU_H - 16.0), 60.0, 16.0))
@@ -37,12 +37,14 @@ impl Menu {
     }
 
     /// Explanation of the selected option, just below the panel (wraps if needed).
-    pub(super) fn draw_tooltip(&self, c: &mut Canvas) {
+    pub(super) fn draw_tooltip(&self, c: &mut Canvas, cv: &Cvars) {
         let Screen::OptionsPage(page) = self.screen else { return };
         if self.drop.is_some() || self.osk.is_some() || self.capturing() || self.opt_cursor >= self.page_len(page) {
             return;
         }
-        let Some(s) = tooltip(self.page_item(page, self.opt_cursor)) else { return };
+        let item = self.page_item(page, self.opt_cursor);
+        let reason = if self.item_disabled(item, cv) { disabled_reason(item) } else { None };
+        let Some(s) = reason.or_else(|| tooltip(item)) else { return };
         let lines = wrap_tooltip_lines(c, s, 588.0, TXT);
         let w = lines.iter().map(|l| c.text_w(l, TXT)).fold(0.0, f32::max);
         let h = lines.len() as f32 * 10.0 + 4.0;
@@ -93,6 +95,12 @@ impl Menu {
             _ => "Select",
         };
         let mut items = vec![(sel, action), (back, "Back")];
+        if matches!(self.screen, Screen::Load | Screen::Save) && self.save_at(self.load_cursor).is_some() {
+            items.insert(1, (K_XBUTTON, "Delete"));
+        }
+        if self.prompt.is_some() {
+            items = vec![(sel, "Select"), (back, "Cancel")];
+        }
         if self.screen == Screen::OptionsPage(Page::Controls) && self.drop.is_none() {
             items.insert(1, (K_XBUTTON, "Clear"));
         }

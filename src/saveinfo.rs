@@ -5,7 +5,12 @@ use qcore::time::{SystemTime, UNIX_EPOCH};
 #[derive(Clone, Debug)]
 pub struct SaveInfo {
     pub level: String,
-    pub timestamp: String,
+    /// Map file name (e.g. `e1m3`).
+    pub map: String,
+    /// Skill 0..=3 and time spent in the level (seconds).
+    pub skill: i32,
+    pub time: f64,
+    pub modified: Option<SystemTime>,
     pub health: i32,
     pub armor: i32,
     pub items: u32,
@@ -38,9 +43,10 @@ impl SaveInfo {
         let mut lines = text.lines();
         if lines.next()?.trim() != "5" { return None; }
         let comment = lines.next()?;
-        for _ in 0..17 { lines.next()?; } // spawn parms and skill
+        for _ in 0..16 { lines.next()?; } // spawn parms
+        let skill = lines.next()?.trim().parse::<f32>().unwrap_or(1.0) as i32;
         let map = lines.next()?;
-        lines.next()?; // server time
+        let time = lines.next()?.trim().parse::<f64>().unwrap_or(0.0);
         for _ in 0..64 { lines.next()?; }
         let offset: usize = text.split_inclusive('\n').take(85).map(str::len).sum();
         let mut data = text.get(offset..)?;
@@ -51,7 +57,9 @@ impl SaveInfo {
         let level = world.iter().find(|p| p.0 == "message").map_or(map, |p| p.1).replace("\\n", " ");
         Some(Self {
             level,
-            timestamp: modified.and_then(|t| t.duration_since(UNIX_EPOCH).ok()).map_or_else(|| "Date unavailable".into(), |d| timestamp(d.as_secs())),
+            map: map.trim().to_string(),
+            skill, time,
+            modified,
             health: value(&player, "health"), armor: value(&player, "armorvalue"),
             items: player.iter().find(|p| p.0 == "items").and_then(|p| p.1.parse::<f64>().ok()).unwrap_or(0.0) as u32,
             kills: (value(&globals, "killed_monsters"), value(&globals, "total_monsters")),
@@ -62,13 +70,40 @@ impl SaveInfo {
         })
     }
 
+    /// When the save was written: relative while recent, else the local date.
+    pub fn when(&self, now: SystemTime) -> String {
+        let Some(t) = self.modified else { return "Date unavailable".into() };
+        match now.duration_since(t).map(|d| d.as_secs()) {
+            Ok(s) if s < 60 => "Just now".into(),
+            Ok(s) if s < 3600 => format!("{} min ago", s / 60),
+            Ok(s) if s < 86400 => format!("{} h ago", s / 3600),
+            _ => {
+                let secs = t.duration_since(UNIX_EPOCH).map_or(0, |d| d.as_secs()) as i64;
+                match qplatform::local_time(secs) {
+                    Some((y, mo, d, h, mi)) => format!("{y:04}-{mo:02}-{d:02} {h:02}:{mi:02}"),
+                    None => timestamp(secs as u64),
+                }
+            }
+        }
+    }
+
+    pub fn skill_name(&self) -> &'static str {
+        ["Easy", "Normal", "Hard", "Nightmare"][self.skill.clamp(0, 3) as usize]
+    }
+
+    /// Time in the level as m:ss (h:mm:ss past an hour).
+    pub fn level_time(&self) -> String {
+        let s = self.time.max(0.0) as u64;
+        if s >= 3600 { format!("{}:{:02}:{:02}", s / 3600, s / 60 % 60, s % 60) } else { format!("{}:{:02}", s / 60, s % 60) }
+    }
+
     pub fn bits(&self, name: &str) -> u32 {
         self.player.get(name).and_then(|v| v.parse::<f64>().ok()).unwrap_or(0.0) as u32
     }
 
 }
 
-/// Gregorian civil date from Unix days; show UTC explicitly so previews are portable.
+/// Gregorian civil date from Unix days (UTC fallback when local time is unavailable).
 fn timestamp(seconds: u64) -> String {
     let days = (seconds / 86400) as i64 + 719468;
     let era = days / 146097;
@@ -80,7 +115,7 @@ fn timestamp(seconds: u64) -> String {
     let day = doy - (153 * mp + 2) / 5 + 1;
     let month = mp + if mp < 10 { 3 } else { -9 };
     year += i64::from(month <= 2);
-    format!("{year:04}-{month:02}-{day:02} {:02}:{:02}:{:02} UTC", seconds / 3600 % 24, seconds / 60 % 60, seconds % 60)
+    format!("{year:04}-{month:02}-{day:02} {:02}:{:02} UTC", seconds / 3600 % 24, seconds / 60 % 60)
 }
 
 #[cfg(test)]
@@ -135,7 +170,10 @@ mod tests {
         assert_eq!((s.health, s.armor), (87, 50));
         assert_eq!(s.kills, (3, 7)); assert_eq!(s.secrets, (1, 2));
         assert_eq!(s.bits("items"), 131075);
-        assert_eq!(s.timestamp, "1970-01-01 00:00:00 UTC");
+        assert_eq!(timestamp(0), "1970-01-01 00:00 UTC");
+        assert_eq!((s.map.as_str(), s.skill, s.time, s.skill_name(), s.level_time()), ("e1m1", 1, 12.0, "Normal", "0:12".into()));
+        let now = UNIX_EPOCH + std::time::Duration::from_secs(5 * 60 + 3);
+        assert_eq!(s.when(now), "5 min ago");
         assert!(s.reason.is_none());
         assert_eq!(SaveInfo::parse(&text.replace("legacy_comment", "AUTOSAVE_Secret_found"), None).unwrap().reason.as_deref(), Some("Secret found"));
         assert!(SaveInfo::parse("5\ntruncated", None).is_none());

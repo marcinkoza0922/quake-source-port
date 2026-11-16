@@ -22,6 +22,10 @@ impl Host {
         let mut blend = [0.0; 4];
         let mut splits = Vec::new();
         let mut goggles = qrender::Goggles::default();
+        let view = view.map(|mut v| {
+            v.waterwarp = self.waterwarp(v.origin, self.cl.time);
+            v
+        });
         if let Some(v) = &view {
             let fs = &self.server.core.fs;
             let cv = self.view_cvars();
@@ -61,7 +65,7 @@ impl Host {
                     set,
                 },
             );
-            if self.cv("r_blood") != 0.0 || self.cv("r_impact_nails") != 0.0 || self.cv("r_impact_bullets") != 0.0 {
+            if crate::blood::Settings::read(&self.server.core.cvars).enabled || (crate::impacts::impacts_on(&self.server.core.cvars) && (self.cv("r_impact_nails") != 0.0 || self.cv("r_impact_bullets") != 0.0)) {
                 self.debris.track_shooters(&self.cl, &self.level, self.cl.time);
             }
             let fte_frustum = self.cull_fte_for_view().then(|| {
@@ -126,7 +130,9 @@ impl Host {
                 ents.push(g);
             }
             goggles = self.goggles_render(&mut ents);
-            crate::view::particles(&self.cl, &mut parts);
+            if self.cv("r_particles") != 0.0 {
+                crate::view::particles(&self.cl, &mut parts);
+            }
             // Portal and split-screen views reuse geometry from other camera positions.
             let cull_particles = self.cull_fte_for_view().then(|| {
                 qrender::view_fov_tangents(v, (w, h), self.cv("r_renderscale"))
@@ -170,6 +176,13 @@ impl Host {
                 && self.cv("deathmatch") == 0.0;
             let hitscan = false && !pellets; // shotgun tracers disabled (hidden from menus)
             self.tracers.frame(hitscan, &self.cl, &self.debris, v, &mut self.r, &mut fte);
+            let bb = crate::bboxes::Settings::read(&self.server.core.cvars);
+            if bb.mode != 0 && self.cv("r_drawentities") != 0.0 {
+                let eye = Vec3::from(v.origin);
+                let boxes = self.server.edict_boxes(self.cl.viewentity as u32, (bb.mode.abs() >= 2).then_some(eye));
+                let fwd = qcore::math::angle_vectors(Vec3::from(v.angles)).0;
+                self.bboxes.frame(&bb, &boxes, eye, fwd, &mut self.r, &mut fte);
+            }
             self.impacts.frame(
                 &self.server.core.cvars, &self.cl, &self.level, &mut brushes, &self.server.core.fs,
                 &mut self.r, &mut ents, &dyn_verts, v.origin.into(), &self.debris, fte_frustum.as_ref(), &mut fte,
@@ -191,6 +204,7 @@ impl Host {
         let equip_key = self.equip_wheel_key();
         let bullet_meter = self.cv("addon_bullet_time_meter") != 0.0;
         let showfps = self.cv("scr_showfps") != 0.0;
+        let speed = self.speedometer();
         let classic = self.classic_hud();
         let rays: Vec<_> = std::iter::once(&self.cl).chain(self.guests.iter().filter(|g| g.cl.signon == 4).map(|g| &g.cl))
             .map(|cl| {
@@ -320,7 +334,7 @@ impl Host {
             let ingame = view.is_some() && self.cl.intermission == 0;
             // Split screen draws center prints in each player's cell.
             let center = ingame && !self.menu.active() && splits.is_empty();
-            if !(self.clean_shot && self.screenshot.is_some()) {
+            if !(self.clean_shot && self.screenshot.is_some()) && self.thumb.is_none() {
                 self.con.draw(&mut c, conback, ingame && !self.menu.active(), center);
             }
             if self.server.core.sv.paused && view.is_some() {
@@ -332,6 +346,7 @@ impl Host {
             if self.cl.intermission == 0 {
                 touch::draw_touch(&mut c, &self.input, &self.server.core.cvars);
             }
+            self.menu.mods.online.poll();
             self.menu.draw(&mut c, &mut pf, &self.server.core.cvars, self.realtime);
             if showfps {
                 self.fps.0 += ft as f64;
@@ -344,6 +359,13 @@ impl Host {
                 c.reset_origin();
                 let x = c.vw() - s.len() as f32 * 8.0 - 8.0;
                 c.string(x, 8.0, &s);
+            }
+            if let Some(s) = speed.filter(|_| ingame && !self.menu.active()) {
+                // Just below the crosshair, centred (ironwail's CANVAS_CROSSHAIR).
+                c.reset_origin();
+                let ofs = self.cv("scr_showspeed_ofs");
+                let y = (c.vh() / 2.0 + 4.0 + ofs).clamp(0.0, c.vh() - 8.0);
+                c.string((c.vw() / 2.0 - s.len() as f32 * 4.0).floor(), y.floor(), &s);
             }
         }
         let styles: Vec<i32> = (0..qnet::protocol::MAX_LIGHTSTYLES).map(|i| self.cl.lightstyle_value(i)).collect();
@@ -389,8 +411,9 @@ impl Host {
             dither_screen: v("r_softemu_dither_screen"),
             dither_texture: v("r_softemu_dither_texture"),
             colorblind: v("r_colorblind").clamp(0.0, 3.0) as u32,
-            soft_particle_distance: if (v("r_softparticles").round() as i32) > 0 { v("r_softparticledistance").max(0.01) } else { 0.0 },
-            soft_particle_quality: u32::from((v("r_softparticles").round() as i32) >= 2),
+            soft_particle_distance: if soft_particles(v("r_particle_quality")) > 0 { v("r_softparticledistance").max(0.01) } else { 0.0 },
+            soft_particle_quality: u32::from(soft_particles(v("r_particle_quality")) >= 2),
+            particle_style: if v("r_particles").round() as i32 == 2 { 2 } else { 1 },
             ssao: if (v("r_ssao").round() as i32).clamp(0, 3) > 0 { v("r_ssao_strength").max(0.0) } else { 0.0 },
             ssao_quality: (v("r_ssao").round() as i32).clamp(0, 3).saturating_sub(1).min(2) as u32,
             ssao_radius: v("r_ssao_radius"),
@@ -454,4 +477,14 @@ impl Host {
             self.fte.recycle_geometry(fte);
         }
     }
+}
+
+/// Scripted particle count scale for `r_particle_quality` (low halves it).
+pub(super) fn particle_density(quality: f32) -> f32 {
+    if quality.round() <= 0.0 { 0.5 } else { 1.0 }
+}
+
+/// Soft particle level (0 off, 1 low, 2 high) for `r_particle_quality`.
+pub(super) fn soft_particles(quality: f32) -> i32 {
+    quality.round().clamp(0.0, 2.0) as i32
 }

@@ -9,6 +9,8 @@ pub const MAX: usize = 10;
 /// (which no other port can load).
 pub const SAVE_EXT: &str = "sav";
 pub const ADDON_EXT: &str = "qsa";
+/// Screenshot thumbnail written beside a save.
+pub const THUMB_EXT: &str = "thumb";
 
 pub fn ext(addons: bool) -> &'static str {
     if addons { ADDON_EXT } else { SAVE_EXT }
@@ -88,7 +90,8 @@ pub fn rotate(dir: &Path, keep: usize, text: &str, ext: &str) -> io::Result<()> 
     stage(&staged, &qcore::text::encode(text))?;
     for i in (1..keep).rev() {
         remove_other_exts(dir, &format!("autosave{i}"), Some(""))?;
-        for e in [SAVE_EXT, ADDON_EXT] {
+        let _ = vfs::remove_file(&dir.join(format!("autosave{i}.{THUMB_EXT}")));
+        for e in [SAVE_EXT, ADDON_EXT, THUMB_EXT] {
             match vfs::rename(&dir.join(format!("autosave{}.{e}", i - 1)), &dir.join(format!("autosave{i}.{e}"))) {
                 Ok(()) => {}
                 Err(x) if x.kind() == io::ErrorKind::NotFound => {}
@@ -97,9 +100,11 @@ pub fn rotate(dir: &Path, keep: usize, text: &str, ext: &str) -> io::Result<()> 
         }
     }
     remove_other_exts(dir, "autosave0", Some(""))?;
+    let _ = vfs::remove_file(&dir.join(format!("autosave0.{THUMB_EXT}")));
     vfs::rename(&staged, &dir.join(format!("autosave0.{ext}")))?;
     for i in keep..MAX {
         remove_other_exts(dir, &format!("autosave{i}"), Some(""))?;
+        let _ = vfs::remove_file(&dir.join(format!("autosave{i}.{THUMB_EXT}")));
     }
     Ok(())
 }

@@ -5,11 +5,17 @@ layout(location = 1) in vec4 i_color;
 layout(location = 2) in vec3 i_wpos;
 layout(location = 0) out vec4 o_color;
 void main() {
-    if (dot(i_uv, i_uv) > 1.0) discard;
+    vec4 col = i_color;
+    if (fr.sky.w < 1.5) {
+        // GLQuake round dot with an antialiased rim (R_ParticleTextureLookup, sharpness 8)
+        float r = dot(i_uv, i_uv);
+        if (r > 1.0) discard;
+        col.a *= min(8.0 * (1.0 - r), 1.0);
+    }
     if (dot(fr.portal_clip.xyz, i_wpos) + fr.portal_clip.w < 0.0) discard;
     if (thermal()) {
-        o_color = vec4(vec3(0.55 + 0.45 * luma(i_color.rgb)), i_color.a);
+        o_color = vec4(vec3(0.55 + 0.45 * luma(col.rgb)), col.a);
         return;
     }
-    o_color = vec4(apply_fog(i_color.rgb, i_wpos), i_color.a);
+    o_color = vec4(apply_fog(col.rgb, i_wpos), col.a);
 }

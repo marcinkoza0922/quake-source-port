@@ -29,6 +29,7 @@ mod net;
 mod demo;
 mod mapswitch;
 mod render;
+mod speed;
 mod split;
 mod split_input;
 #[cfg(test)]
@@ -101,6 +102,9 @@ pub struct Host {
     impacts: crate::impacts::Impacts,
     hitfx: crate::hitfx::HitFx,
     tracers: crate::tracers::Tracers,
+    bboxes: crate::bboxes::BBoxes,
+    /// scr_showspeed: (peak this interval, shown value, interval start).
+    speed: (f32, f32, f64),
     pub realtime: f64,
     accum: f64,
     pub quit: bool,
@@ -149,6 +153,10 @@ pub struct Host {
     menu_touch: Option<touch::MenuTouch>,
     last_cmd: UserCmd,
     screenshot: Option<String>,
+    /// Save thumbnail to write from the next frame, and uploaded thumbnails
+    /// by save name (picture, file time).
+    thumb: Option<PathBuf>,
+    save_thumbs: std::collections::HashMap<String, (qrender::PicId, qcore::time::SystemTime)>,
     /// The pending screenshot is drawn without the console (bug reports).
     clean_shot: bool,
     /// Frame profiler while `prof_start` is recording (tools/qprof).
@@ -246,6 +254,8 @@ impl Host {
             impacts: crate::impacts::Impacts::default(),
             hitfx: crate::hitfx::HitFx::default(),
             tracers: Default::default(),
+            bboxes: Default::default(),
+            speed: (0.0, -1.0, 0.0),
             realtime: 0.0,
             accum: 0.0,
             quit: false,
@@ -283,6 +293,8 @@ impl Host {
             menu_touch: None,
             last_cmd: UserCmd::default(),
             screenshot: None,
+            thumb: None,
+            save_thumbs: Default::default(),
             clean_shot: false,
             prof: None,
             delayed: Vec::new(),
@@ -425,8 +437,10 @@ impl Host {
 
     /// Loads FTE effects for `r_particledesc` and the current map
     /// (R_ParticleDesc_Callback); `r_fteparticles 0` turns them off.
+    /// `r_enhancedparticles` adds the built-in set either way.
     fn sync_fte(&mut self) {
         let desc = if self.cv("r_fteparticles") != 0.0 { self.cvs("r_particledesc").to_string() } else { String::new() };
+        let enhanced = self.cv("r_enhancedfx") != 0.0 && self.cv("r_enhancedparticles") != 0.0;
         let map = self.level.mapname.clone();
         let opts = qpart::RenderOptions {
             sparks: self.cv("r_part_sparks"),
@@ -435,7 +449,7 @@ impl Host {
             beams: self.cv("r_part_beams"),
         };
         let settings = qpart::Settings {
-            density: self.cv("r_part_density"),
+            density: self.cv("r_part_density") * render::particle_density(self.cv("r_particle_quality")),
             contentswitch: self.cv("r_part_contentswitch") != 0.0,
             bouncysparks: self.cv("r_bouncysparks") != 0.0,
             trace_limit: self.cv("r_particle_tracelimit").max(0.0) as u32,
@@ -447,7 +461,7 @@ impl Host {
             max_decals: self.cv("r_part_maxdecals").max(1.0) as usize,
         };
         let con = &mut self.con;
-        self.fte.sync(&desc, &map, opts, settings, &self.server.core.fs, &mut self.cl, &mut |s| con.print(s));
+        self.fte.sync(&desc, &map, enhanced, opts, settings, &self.server.core.fs, &mut self.cl, &mut |s| con.print(s));
     }
 
 }

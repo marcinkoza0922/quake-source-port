@@ -63,7 +63,7 @@ pub(super) struct Tier {
 impl Settings {
     pub fn read(cv: &qcore::cvar::Cvars) -> Self {
         Self {
-            enabled: cv.value_of("r_blood") != 0.0,
+            enabled: cv.value_of("r_enhancedfx") != 0.0 && cv.value_of("r_blood") != 0.0,
             quality: Quality::from_cvar(cv.value_of("r_blood_quality")),
             amount: cv.value_of("r_blood_amount").clamp(1.0, 12.0) as usize,
             size: cv.value_of("r_blood_size").clamp(0.25, 3.0),

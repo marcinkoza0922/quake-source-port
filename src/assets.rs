@@ -52,7 +52,10 @@ fn load_model(fs: &Fs, r: &mut Renderer, name: &str, enhanced_models: bool) -> O
     if data.len() >= 4 && &data[..4] == b"IDPO" {
         let m = Mdl::parse(&data).ok()?;
         let flags = m.flags as u32;
-        if enhanced_models && let Some(id) = md3::load_replacement(fs, r, name, &m) {
+        let replacement = enhanced_models
+            .then(|| md3::load_replacement(fs, r, name, &m).or_else(|| md3::load_md5_replacement(fs, r, name, &m)))
+            .flatten();
+        if let Some(id) = replacement {
             return Some(Model { id, kind: Kind::Alias, flags, md3: true });
         }
         let id = r.load_alias(&m).ok()?;

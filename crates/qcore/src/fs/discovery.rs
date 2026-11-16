@@ -16,6 +16,12 @@ fn search(root: &Path, depth: usize) -> Option<PathBuf> {
     while let Some((dir, level)) = queue.pop_front() {
         let Ok(identity) = dir.canonicalize() else { continue };
         if !seen.insert(identity) { continue; }
+        // A Steam/GOG/Epic install holds the 2021 re-release in rerelease/
+        // next to the original data; the re-release is the one to run.
+        let rerelease = dir.join("rerelease");
+        if has_pak(&rerelease.join("id1")) {
+            return Some(rerelease);
+        }
         if has_pak(&dir) || (level < depth && has_pak(&dir.join("id1"))) {
             return Some(dir);
         }
@@ -40,6 +46,8 @@ fn steam_installs(steam: &Path, candidates: &mut Vec<PathBuf>) {
         }
     }
     for library in libraries {
+        // the 2021 re-release lives in rerelease/; the original data sits above it
+        candidates.push(library.join("steamapps/common/Quake/rerelease"));
         candidates.push(library.join("steamapps/common/Quake"));
     }
 }
@@ -88,6 +96,19 @@ mod tests {
         assert_eq!(search(&root, 2), Some(root.join("one")));
         std::fs::write(root.join("pak0.pak"), []).unwrap();
         assert_eq!(search(&root, 2), Some(root.clone()));
+        let _ = std::fs::remove_dir_all(root);
+    }
+
+    #[test]
+    fn prefers_rerelease_folder() {
+        let root = std::env::temp_dir().join(format!("qcore-rerelease-{}", std::process::id()));
+        let _ = std::fs::remove_dir_all(&root);
+        for d in ["Quake/id1", "Quake/rerelease/id1"] {
+            std::fs::create_dir_all(root.join(d)).unwrap();
+            std::fs::write(root.join(d).join("pak0.pak"), []).unwrap();
+        }
+        assert_eq!(search(&root.join("Quake"), 2), Some(root.join("Quake/rerelease")));
+        assert_eq!(search(&root, 2), Some(root.join("Quake/rerelease")));
         let _ = std::fs::remove_dir_all(root);
     }
 }

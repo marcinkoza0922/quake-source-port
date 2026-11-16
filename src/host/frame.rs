@@ -360,14 +360,14 @@ impl Host {
         };
         self.update_sound(view.as_ref(), ft);
         self.prof_mark(4);
-        if self.screenshot.is_some() {
+        if self.screenshot.is_some() || self.thumb.is_some() {
             self.r.request_capture();
         }
         if !self.dedicated {
             self.render(view, gun, ft);
         }
-        if let Some(name) = self.screenshot.take() {
-            self.write_screenshot(&name);
+        if self.screenshot.is_some() || self.thumb.is_some() {
+            self.write_captures();
             self.clean_shot = false;
         }
         if let Some(p) = &mut self.prof {
@@ -411,6 +411,18 @@ impl Host {
         }
         snd.set_water_fx(l.underwater);
         snd.update(l);
+    }
+
+    /// r_waterwarp (0 off, 1 software ripple, 2 GLQuake FOV pulse) when the eye
+    /// is in water, slime or lava.
+    pub(super) fn waterwarp(&self, eye: [f32; 3], time: f64) -> qrender::WaterWarp {
+        let t = (time % 1000.0) as f32;
+        let mode = self.cv("r_waterwarp").round() as i32;
+        // Enhanced Water draws its own underwater effects instead.
+        if mode == 0 || self.cv("r_enhancedwater") != 0.0 || !(-5..=-3).contains(&self.contents(eye)) {
+            return qrender::WaterWarp::None;
+        }
+        if mode == 2 { qrender::WaterWarp::Fov(t) } else { qrender::WaterWarp::Screen(t) }
     }
 
     pub(super) fn contents(&self, p: [f32; 3]) -> i32 {

@@ -13,6 +13,7 @@ pub(super) struct FrameUbo {
     pub(super) vright: [f32; 4],
     pub(super) vup: [f32; 4],
     pub(super) vfwd: [f32; 4],
+    /// x skyfog, y skybox flag, z sky layer alpha, w particle style (r_particles).
     pub(super) sky: [f32; 4],
     pub(super) skybox0: [u32; 4],
     pub(super) skybox1: [u32; 4],
@@ -144,6 +145,8 @@ pub(super) struct PostPush {
     pub(super) mb_w: f32,
     pub(super) mb_h: f32,
     pub(super) g_quality: u32,
+    /// Software-style underwater ripple clock in seconds; negative = off.
+    pub(super) warp: f32,
 }
 
 #[repr(C)]
@@ -281,6 +284,8 @@ pub(super) struct ViewPass {
     pub(super) rect: [u32; 4],
     pub(super) blend: [f32; 4],
     pub(super) speed_blur: f32,
+    /// Screen ripple clock (WaterWarp::Screen); negative = off.
+    pub(super) warp: f32,
     /// Scene target region drawn (top-left), in target pixels.
     pub(super) scene_w: u32,
     pub(super) scene_h: u32,

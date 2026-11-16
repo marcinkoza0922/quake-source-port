@@ -103,7 +103,7 @@ pub(super) struct ViewSetup {
 /// Like the Vulkan backend's setup_view, but for WebGPU clip space (y up).
 pub(super) fn setup_view(v: &crate::View, w: u32, h: u32) -> ViewSetup {
     let (fwd, right, up) = angle_vectors(v.angles);
-    let [tx, ty] = crate::projection::half_fov_tangents(v.fov_x, (w, h));
+    let [tx, ty] = crate::projection::half_fov_tangents(v, (w, h));
     let (n, f) = (4.0f32, 65536.0f32);
     let rows = [right, up, fwd];
     let e = v.origin;
