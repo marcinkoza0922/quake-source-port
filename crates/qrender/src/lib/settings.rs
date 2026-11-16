@@ -58,7 +58,7 @@ impl Renderer {
         // with linear mips and at least 8x anisotropy.
         let mut mode = st.texture_mode.unwrap_or(if st.texture_linear { 5 } else { 2 });
         let mut aniso = st.anisotropy;
-        if mode != 0 && (st.softemu >= 2 || st.lightmap_banding > 0.0) {
+        if mode != 0 && crate::softemu::forces_nearest(st) {
             mode = 2;
             aniso = aniso.max(8.0);
         }
@@ -96,19 +96,14 @@ impl Renderer {
         }
         // GLPalette_UpdateLookupTable: auto metric is OKLab except in banded
         // mode on maps without coloured light.
-        if st.softemu > 0 {
-            let lit = self.world.as_ref().is_some_and(|w| w.cpu.lit);
-            let metric = if st.softemu_metric < 0 {
-                if st.softemu != 3 || lit { 2 } else { 0 }
-            } else {
-                st.softemu_metric.min(2)
-            };
-            if metric != self.lut_metric {
-                self.idle();
-                let lut = convert::palette_lut(&self.palette, metric as u32);
-                self.palette_buf.bytes_mut()[1024..1024 + lut.len()].copy_from_slice(&lut);
-                self.lut_metric = metric;
-            }
+        let lit = self.world.as_ref().is_some_and(|w| w.cpu.lit);
+        if let Some(metric) = crate::softemu::lut_metric(st, lit)
+            && metric != self.lut_metric
+        {
+            self.idle();
+            let lut = convert::palette_lut(&self.palette, metric as u32);
+            self.palette_buf.bytes_mut()[1024..1024 + lut.len()].copy_from_slice(&lut);
+            self.lut_metric = metric;
         }
         Ok(())
     }

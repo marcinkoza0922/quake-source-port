@@ -320,7 +320,7 @@ impl Menu {
                         }
                     } else if let Some(sv) = self.save_at(i) {
                         let title = format!("Overwrite \"{}\"?", clean_title(&sv.info.level, 40));
-                        let when = format!("Saved {}", sv.info.when(std::time::SystemTime::now()));
+                        let when = format!("Saved {}", sv.info.when(qcore::time::SystemTime::now()));
                         self.confirm(vec![title, when], "Overwrite", format!("save \"{}\"\n", sv.name), true);
                     } else {
                         self.screen = Screen::None;

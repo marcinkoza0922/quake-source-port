@@ -32,7 +32,7 @@ fn kind_label(sv: &SaveSlot) -> String {
 impl Menu {
     pub(super) fn ask_delete(&mut self, sv: SaveSlot) {
         let title = format!("Delete \"{}\"?", clean_title(&sv.info.level, 40));
-        let what = format!("{} - {}", kind_label(&sv), sv.info.when(std::time::SystemTime::now()));
+        let what = format!("{} - {}", kind_label(&sv), sv.info.when(qcore::time::SystemTime::now()));
         self.confirm(vec![title, what, "This cannot be undone.".into()], "Delete", format!("_deletesave \"{}\"\n", sv.name), false);
     }
 
@@ -66,7 +66,7 @@ impl Menu {
             let y = CARD_Y0 + CARD_H + 3.0;
             c.fill(CARD_X, y, CARD_W, 1.0, [0.55, 0.40, 0.20, 0.8]);
         }
-        let now = std::time::SystemTime::now();
+        let now = qcore::time::SystemTime::now();
         for i in 0..n {
             if !self.card_visible(i) {
                 continue;

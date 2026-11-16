@@ -15,7 +15,7 @@ impl Host {
                     }
                     td.0 += 1;
                     if td.0 == 2 {
-                        td.1 = std::time::Instant::now();
+                        td.1 = qcore::time::Instant::now();
                     }
                 } else if self.cl.time + dt <= self.cl.mtime[0] {
                     break;
@@ -80,7 +80,7 @@ impl Host {
         self.stop_game();
         let file = if name.contains('.') { name.to_string() } else { format!("{name}.dem") };
         // Recorded demos live in the user dir, which isn't a search path.
-        let data = self.server.core.fs.open(&file).or_else(|| std::fs::read(self.user_dir().join(&file)).ok());
+        let data = self.server.core.fs.open(&file).or_else(|| qcore::vfs::read(&self.user_dir().join(&file)).ok());
         let Some(data) = data else {
             self.con.print(&format!("ERROR: couldn't open {file}.\n"));
             self.demonum = -1;
@@ -255,7 +255,7 @@ pub(super) fn register(c: &mut Commands<Host>) {
         }
         h.play_demo(a.argv(1));
         if h.demo.is_some() {
-            h.timedemo = Some((0, std::time::Instant::now()));
+            h.timedemo = Some((0, qcore::time::Instant::now()));
         }
     });
     c.add("stopdemo", |h, _| {

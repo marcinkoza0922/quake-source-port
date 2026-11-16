@@ -368,7 +368,6 @@ impl Host {
         }
         if self.screenshot.is_some() || self.thumb.is_some() {
             self.write_captures();
-            self.clean_shot = false;
         }
         if let Some(p) = &mut self.prof {
             p.mark(5);

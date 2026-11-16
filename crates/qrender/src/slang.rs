@@ -11,17 +11,7 @@ use librashader::runtime::vk::{FilterChain, FilterChainOptions, FrameOptions, Vu
 use librashader::runtime::{FilterChainParameters, Size, Viewport};
 use std::path::{Path, PathBuf};
 
-/// A `#pragma parameter` of the loaded preset (for menus and configs).
-#[derive(Clone, Debug, PartialEq)]
-pub struct ShaderParam {
-    pub id: String,
-    pub description: String,
-    /// The shader's default, after the preset's own overrides.
-    pub initial: f32,
-    pub min: f32,
-    pub max: f32,
-    pub step: f32,
-}
+pub use crate::ShaderParam;
 
 pub(crate) struct Slang {
     pub(crate) chain: FilterChain,

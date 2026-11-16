@@ -9,3 +9,6 @@ workspace = true
 
 [dependencies]
 miniz_oxide = "0.8"
+
+[target.'cfg(target_arch = "wasm32")'.dependencies]
+web-time = "1.1.0"

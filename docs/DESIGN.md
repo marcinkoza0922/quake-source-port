@@ -285,6 +285,7 @@ other machines. `AGENTS.md` keeps asset-use guidance rather than a tool catalog.
 
 - `cargo nextest run` — quiet default profile; `--profile verbose` for debugging.
 - `cargo clippy --message-format=short`.
+- `tools/webbuild/build.sh` — browser build into `target/web/` (see Web build).
 - `tools/qinspect` uses renderer portal discovery without a GPU; `tools/portal_survey.py --basedir PATH [--game MOD] --capture` inventories maps and writes camera coordinates, screenshots and an HTML gallery under `target/portal-survey` (Python standard library only). `tools/portal_recheck.py --basedir PATH` recaptures every view linked in `target/portal-survey/problematic.md` with same-camera baseline/isolation pairs, command manifests, logs and a gallery under `target/portal-survey/recheck`; it never overwrites the original captures. `tools/qbot`, `tools/qbench` as above.
 - `tools/qbot` (M7): `cargo build --release -p qbot`, then `target/release/qbot [-game G] [-skill N] [-time S] [-j N] [-out DIR] [-baseline F] [-save-baseline] [-v] [map ...]`. With no maps it runs every playable map the game dir owns, in parallel threads (`-j`, default all cores). Output: `target/qbot/report.json`. Baselines exist for id1, hipnotic and rogue. `cargo nextest run -p qbot` checks e1m1 and e1m3 (every monster, every secret, exit).
 - `tools/qbench`: timedemo fps vs ironwail/vkQuake (M7). `cargo build --release`, then `target/release/qbench [-game ad] [-runs 3] [-secs 24] [-width W -height H] [-engines ours,ironwail,vkquake] [-rerecord] [map ...]` (default ad_sepulcher ad_tears). The demo is recorded by our engine headless (god, 30°/s spin at the spawn point), cached in `target/qbench/demos`. Engines run from `target/qbench/base` (symlinks to id1 + the game; the game data dir is never written) with `-basedir . -window +vid_vsync 0 <pinned settings> +timedemo qbench/<map>` (MSAA off, 8x anisotropy, render scale 1 in each engine's cvar names), under `stdbuf -oL` because the C engines block-buffer stdout. qbench reads stdout+stderr for the fps line, then kills the process group (the references don't quit after a timedemo). ironwail comes from `<basedir>/ironwail-*-linux-x64.7z`, extracted into `target/refengines`; vkQuake is `<basedir>/vkquake.AppImage`. Medians go to `target/qbench/report.json`.
@@ -333,6 +334,7 @@ All parsers take `&[u8]` and return `qformats::Result<T>`; bad input gives an `E
 - `cvar`: `Cvars` registry (`register` keeps a value already set by `set`; the usual flags).
 - `cmd`: `com_parse`, `Args::tokenize`, `Cbuf` (`wait`), `Commands<C: CmdContext>` with built-in alias/set/seta/toggle/echo. `exec` and `cvarlist` must be registered by the engine.
 - `text`: Quake font text is 8-bit conchars indices. `decode` carries each byte as the same-valued Unicode scalar through string-based entity/save parsers and client print events; `encode`/`glyphs` restore the indices at VM, disk and drawing boundaries. BSP entities and external `.ent` files use this explicitly, rather than lossy UTF-8. Centerprints wrap, center and count typewriter glyphs by these indices (qbj3 colored door titles/icons); manual saves, autosaves and save previews preserve them too. Modern UI fonts and localization files keep their UTF-8 representation. See `QBJ3-LABELS.md` for the regression evidence.
+- `time`, `vfs`: portable clocks and file access; see Web build below.
 - Dependency: `miniz_oxide` (pk3 deflate).
 
 ### qworld
@@ -397,7 +399,7 @@ Port of vkQuake/QSS's entity delta protocol, layered on 15/666/999. It is needed
   - `r_dither` (default 1) with `r_softemu 0`: Bayer banding suppression of ±0.5/255 in the world and alias shaders and the post pass.
   - `r_softemu` 1 fine / 2 coarse / 3 banded palettizes in the post pass. A 128³ palette-index LUT is built on the CPU (`convert::palette_lut`, multithreaded) and stored in the palette SSBO after the 256 colours, packed 4 per uint. It is rebuilt when the metric changes: `r_softemu_metric` <0 auto = OKLab, or naive RGB in banded mode on maps without `.lit` (`World::lit`).
   - Polyblend, contrast and gamma are applied to the looked-up palette colour, like ironwail's postprocessed palette.
-  - Per-mode values go in the Frame UBO (`soft`, `softf`), worked out in `frame::softemu_params`. World dither level 1 (coarse) snaps lightmap UVs to 1/16 texel, biases texture LOD by -0.5, and adds near (texture-space) / far (screen-space, fog only) noise. Level 2 (`r_softemu_lightmap_banding`) quantizes light to 64 levels with a -1 bias. Alias mode 1 dithers only in fog; mode 2 (`r_softemu_mdl_warp`) samples a `noperspective` texcoord at LOD 0 (software affine warp).
+  - Per-mode values go in the Frame UBO (`soft`, `softf`), worked out in `softemu::scene_params` (shared with the wgpu backend, with `post_dither`, `post_mode`, `forces_nearest` and `lut_metric`). World dither level 1 (coarse) snaps lightmap UVs to 1/16 texel, biases texture LOD by -0.5, and adds near (texture-space) / far (screen-space, fog only) noise. Level 2 (`r_softemu_lightmap_banding`) quantizes light to 64 levels with a -1 bias. Alias mode 1 dithers only in fog; mode 2 (`r_softemu_mdl_warp`) samples a `noperspective` texcoord at LOD 0 (software affine warp).
   - Coarse mode forces nearest + linear mips with at least 8× anisotropy. Fine mode dithers in post with noise per scene pixel.
   - Not ported: dithering for water, sky, sprites and particles.
 - Post effects (Enhancements menu; SSAO and per-object motion blur default off; add-on night-vision/thermal goggles are in docs/ADDONS.md):
@@ -578,6 +580,167 @@ autosave rotation), `config.cfg` (bindings + archived cvars as they were) and
 `screenshot.png`. The screenshot is taken on the next rendered frame with the
 console not drawn (`Host::clean_shot`). `bugreport_dir` (global cvar, no menu row; lives in
 `global.cfg`, see below) defaults to `<user dir>/bugreports`. Code: `src/host/bugreport.rs`.
+
+## Web build (WASM, WebGPU)
+
+Plan and frozen interfaces: `docs/WEB_PORT.md`. The browser build is the same
+host and crates compiled for `wasm32-unknown-unknown`; `qrender` and
+`qplatform` swap backends behind their existing APIs. It is single player only.
+
+### Time and virtual file system (`qcore::time`, `qcore::vfs`)
+All engine code takes `Instant`/`SystemTime`/`UNIX_EPOCH` from `qcore::time`,
+which re-exports `std::time` natively and `web_time` on wasm32 (where the std
+clocks panic). All file I/O for game data and user files goes through
+`qcore::vfs` (`read`, `write` (creates parents), `append`,
+`exists`/`is_dir`/`is_file`, `create_dir_all`, `remove_file`, `rename`,
+`read_dir` -> `DirEntry { path, is_dir, len }`, `modified`, `open_read` ->
+`Box<dyn ReadSeek>` for PAK/PK3, plus `mount_file`/`take_dirty`). Natively it
+is a thin `std::fs` wrapper (`take_dirty` is always empty). On wasm32 it is an
+in-memory tree (`vfs/mem.rs`, unit-tested natively). The web front-end mounts
+game data under `/quake` (`Fs::default_basedir()`), user files live in
+`/quake-user/<game>` (`user_dir()`), and written or removed paths are reported
+by `take_dirty` for persistence to IndexedDB. `qcore::fs::Fs` and every
+user-dir writer (config/global cfg, saves, save thumbnails and autosave
+rotation, screenshots, demos, bug reports, console history, mod stats, QW
+downloads) use vfs; autosave staging still fsyncs natively. On wasm32, UDP
+sockets (`UdpTransport::bind`, `QwClient::connect`) return `Unsupported`,
+shell jobs/PTY are unavailable and the Quaddicted browser reports downloads
+as unavailable, so nothing on the web path spawns threads, sleeps or blocks.
+Left on `std::fs` because they never run on the web: librashader presets
+(`src/host/shader.rs`), the Steam/home install search
+(`qcore/src/fs/discovery.rs`), the Quaddicted installer, and tests.
+
+### wgpu backend (web / `--features wgpu`)
+qrender has two backends behind one `Renderer` API. build.rs sets cfg `qvk`
+(Vulkan, ash + glslc SPIR-V) unless the target is wasm32 or the `wgpu`
+feature (root: `cargo run --features wgpu`) is on; then `src/wgpu_backend/`
+is compiled instead and no GLSL is built. Shared modules: types, projection,
+convert, world (CPU BSP/PVS/light), portals, water, shared (ShaderParam,
+GpuViewTiming). The Vulkan Renderer lives in `src/lib/vk.rs`, include!d at
+the crate root.
+The wgpu backend (wgpu 30, WGSL in `wgpu_backend/shaders/`) builds draw lists
+on the CPU each frame: world surfaces from `World::portal_surfaces`
+(frustum/backface culled, bucketed per animated texture) into one index
+buffer; alias/MD3/ragdoll poses lerped and lit on the CPU; sprites, classic
+and FTE particles as poly geometry; translucent draws sorted far to near.
+Lightmaps are built on the CPU (port of lightmap.comp) into an RGBA8
+2D-array atlas storing light/2, rebuilt per surface when a lightstyle value
+changes or a dynamic light touches it. Bind groups: 0 frame (dynamic UBO,
+lightmap, palette), 1 material (3 textures + sampler; cached per slot triple)
+or sky (6 textures), 2 per-draw dynamic UBO (256-byte records). The scene
+renders to an RGBA8 target at output size × render scale (`r_renderscale`,
+0.25–2, linearly filtered when scaled). MSAA draws into a 4× colour/depth
+target resolved into it at the end of the scene pass; WebGPU guarantees only
+1× and 4× for these formats, so any `r_msaa` above 1 means 4× and
+`max_msaa` reports 4 (the scene pipelines are rebuilt per sample count,
+`pipes::ScenePipes`). SSAO (`wgpu_backend/ssao.rs`, `shaders/ao.wgsl`, a
+port of ao.frag/aoapply.frag) splits the scene pass after the opaque world,
+sky and opaque models (`ViewDraw::split`; liquids and the viewmodel come
+after): AO is generated per view from scene depth into an Rg16Float target
+at half (quality 0/1) or full (2) resolution, masked by scene alpha (the sky
+writes 0) and fog, then multiplied into the scene colour with the
+depth-aware blur before the translucent draws resume. With MSAA both passes
+`textureLoad` sample 0 of the multisampled targets, so Vulkan's aosource
+copy isn't needed. Motion blur (`wgpu_backend/motion.rs`,
+`shaders/vel.wgsl`, port of velworld/velalias/vel.frag and post.frag's
+`motion_blur`): entity transforms are kept by entity key from the last frame;
+moving opaque brush and alias entities (not the viewmodel, ragdolls or
+teleports over 256 units) get a velocity-pass draw whose `DrawU.prev` is last
+frame's transform (alias vertices are CPU-posed in world space, so theirs is
+`M_prev · M_cur⁻¹`). After the scene (whose depth is then stored) they are
+drawn into an Rg16Float target at half (quality 0) or full resolution,
+discarded where hidden by scene depth, and the post pass smears along the
+strongest nearby motion; speed blur (`View::speed_blur`, bullet-time
+`edge_blur`) is in the same post pass. Like Vulkan, the post pass samples
+the scene nearest-filtered, so at very high frame rates the per-frame blur
+can be sub-pixel. Pipelines that read the scene targets (SSAO, velocity) are
+in `fx_pipes.rs`, rebuilt per MSAA sample count; command recording is in
+`encode.rs`. Enhanced water (`wgpu_backend/water.rs`, r_enhancedwater)
+drives the shared `crate::water::WaterFx` like the Vulkan backend; its ripple
+events go into one `WaterU` uniform buffer (frame group binding 4, with the
+caustic texture and a repeat sampler at 5/6), `fs_water` ports
+water_grad/lava_rings (swell, rings, lava heat; liquid kind in
+`DrawU.params.w`) and `fs_world` the caustics from `WorldVertex::liquid`.
+Splash droplets and spray puffs are drawn as blended quads with the particles.
+Soft particles (`shaders/soft.wgsl`, `Pipe::SoftPoly`): FTE batches flagged
+`soft` (and the water spray) go to `ViewDraw::soft` and are drawn in a final
+scene pass with the depth attachment read-only and the same depth texture
+bound at group 3, fading by fte.frag's rules (high quality takes the nearest
+MSAA sample). Poly draws fog like fte.frag: alpha blends toward the fog
+colour, additive/modulating ones toward black (`DrawU.params.y`). `Overlay`
+debug lines (r_showbboxes) have their own pipeline without depth testing.
+A post pass applies the
+`r_waterwarp 1` underwater screen warp (vkQuake's `water_warp`),
+polyblend/contrast/gamma at output size, then the 2D layer. The
+`r_waterwarp 2` FOV pulse works (it is in the shared projection); FTE
+`Overlay` blends like `Blend`. `new_web(canvas, palette)` presents to a
+WebGPU canvas configured with `COPY_SRC`. Read-back (`wgpu_backend/capture.rs`):
+`headless` copies every frame into a buffer mapped blocking; a presented
+frame is copied only after `request_capture` and mapped asynchronously, so
+`Renderer::take_capture` returns `Ok(None)` until the map completes (in the
+browser only after control returns to the page). The host
+(`Host::write_captures`) keeps the screenshot/thumbnail pending and retries
+each frame; the Vulkan backend's `take_capture` is never pending.
+See-through portals and teleporter windows are deliberately left out of this
+backend: every portal view would rebuild the CPU draw lists again, which is
+too slow in a browser (portals and teleporters still work, the surface is
+just opaque). Slang presets are not supported either.
+r_softemu/r_dither share their parameter logic with Vulkan
+(`crate::softemu`): `FrameU.soft`/`softf` carry the screen and texture
+dither, world dither level (coarse texel/lightmap snapping, banded 64-level
+light) and alias mode (dither or affine `@interpolate(linear)` texture
+coordinates), ported from world.frag/alias.frag, and softemu 2/3 force
+nearest world filtering. The post pass palettizes through the 128³ lookup
+table, which `wgpu_backend/post.rs` builds with a compute shader
+(`shaders/lut.wgsl`, a port of `convert::palette_lut`, rebuilt when the
+metric changes) into a storage buffer bound with the palette in the post
+group (`Pipes::post_bgl`); the browser has no threads for the CPU version.
+`fs_post` also ports post.frag's goggles (night vision, thermal colouring
+and glow taps) and the r_colorblind daltonize filter; its parameters are in
+the post `DrawU` (`post::post_draw`). In thermal mode the scene shaders
+write grey heat levels (world, liquids, sky, alias models by
+`RenderEntity::heat` in `DrawU.params.w`, sprites and classic particles by
+`DrawU.ix.y`; FTE particles keep their colours, like fte.frag), and warm
+bodies get a second draw (`Pipe::AliasXray`: additive, depth test Greater,
+front faces culled since triangles wind the other way than in Vulkan)
+before the viewmodel. GPU timings (`wgpu_backend/timing.rs`; QSP_GPUTIMES,
+`prof_start`) use the `TIMESTAMP_QUERY` feature when the adapter has it:
+every render pass writes a timestamp pair (WebGPU allows nothing finer), so
+the stages are per pass kind (scene, ao-generate, ao-apply, translucent,
+soft-particles, velocity, post+ui) for all split views together, and
+`gpu_view_times` is empty. They resolve into a ring of three read-back
+buffers mapped asynchronously and are summed a frame or more later.
+Natively at most two frames are in flight (`FRAMES_IN_FLIGHT`, waited on
+with `poll(Wait)` and reported as `fence_wait_ns`): headless has no
+presentation to throttle it, and an unbounded queue made headless timedemo
+fps measure submission rather than rendering and kept the timing buffers
+from ever mapping. r_visibility (`debug_visibility::command`, shared with
+Vulkan) hides and shows faces, textures and entities; `isolate` needs
+see-through portals and answers that it is unavailable. Natively
+`Renderer::new` (windowed) returns an error with `--features wgpu`; use
+`-headless`.
+
+### Platform, entry point and page
+On wasm32 qplatform uses the browser backend (`crates/qplatform/src/web*`:
+DOM events, pointer lock, Gamepad API polling, WebAudio ScriptProcessor,
+`js Date` for `local_time`, `window.alert` for `error_box`); natively it uses
+SDL3 (`src/sdl*`). `src/lib.rs` shares `open_game`/`open_sound`/
+`apply_rumble` between native `run()` and `src/web.rs`, which exports
+`vfs_mount`, `vfs_take_dirty`, `vfs_read` and `async start(args)`;
+`start` builds the host on `<canvas id="quake">` and drives `Host::frame`
+from requestAnimationFrame (`host_maxfps` skips animation frames).
+`tools/webbuild/build.sh` builds the root library as a `cdylib`
+(`cargo rustc --offline --release --lib --crate-type cdylib --target
+wasm32-unknown-unknown`), runs `wasm-bindgen --target web` (CLI 0.2.130, must
+match the crate) into `target/web/`, and copies `web/` (index.html, main.js)
+next to it. Serve with `python3 -m http.server -d target/web`. The page asks
+for the user's Quake folder or .pak files, caches them in IndexedDB (store
+`game`), mounts them under `/quake` via `vfs_mount`, restores user files
+(store `user`) under `/quake-user`, calls `start(args)` (`?args=` in the URL,
+space separated) and saves `vfs_take_dirty()` paths back to IndexedDB every
+2 s and when the page is hidden. Checked in headless Firefox (WebDriver BiDi,
+WebGPU enabled): e1m1, the demo loop with the main menu, and a save persisted
+to IndexedDB.
 
 ## Disabled features (hidden, code retained)
 

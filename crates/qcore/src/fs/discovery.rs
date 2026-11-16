@@ -5,7 +5,7 @@ use std::path::{Path, PathBuf};
 use super::resolve_loose;
 
 pub(super) fn has_pak(dir: &Path) -> bool {
-    resolve_loose(dir, "pak0.pak").is_some_and(|p| p.is_file())
+    resolve_loose(dir, "pak0.pak").is_some_and(|p| crate::vfs::is_file(&p))
 }
 
 /// Search directories breadth first, including at most `depth` child levels.

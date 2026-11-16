@@ -1,13 +1,17 @@
 use super::*;
 
 impl Host {
-    /// Writes the pending screenshot and/or save thumbnail from the captured frame.
+    /// Writes the pending screenshot and/or save thumbnail from the captured
+    /// frame. When the renderer is still reading it back (wgpu in the
+    /// browser), both stay pending and this runs again next frame.
     pub(super) fn write_captures(&mut self) {
+        if self.screenshot.is_none() && self.thumb.is_none() { return; }
+        let captured = self.r.take_capture();
+        if matches!(captured, Ok(None)) { return; }
         let (shot, thumb) = (self.screenshot.take(), self.thumb.take());
-        if shot.is_none() && thumb.is_none() { return; }
-        let (w, h) = self.r.size();
-        let px = match self.r.read_pixels() {
-            Ok(px) => px,
+        self.clean_shot = false;
+        let (w, h, px) = match captured {
+            Ok(c) => c.expect("pending returned above"),
             Err(e) => return self.con.print(&format!("screenshot failed: {e:?}\n")),
         };
         if let Some(name) = shot {
@@ -24,15 +28,12 @@ impl Host {
                 let png = crate::png::encode_rgba(w, h, px);
                 let path = if name.is_empty() {
                     let dir = self.user_dir();
-                    (0..10000).map(|i| dir.join(format!("spasm{i:04}.png"))).find(|p| !p.exists()).unwrap_or(dir.join("spasm.png"))
+                    (0..10000).map(|i| dir.join(format!("spasm{i:04}.png"))).find(|p| !qcore::vfs::exists(p)).unwrap_or(dir.join("spasm.png"))
                 } else {
                     let p = PathBuf::from(name);
                     if p.extension().is_none() { p.with_extension("png") } else { p }
                 };
-                if let Some(d) = path.parent() {
-                    let _ = std::fs::create_dir_all(d);
-                }
-                match std::fs::write(&path, png) {
+                match qcore::vfs::write(&path, &png) {
                     Ok(()) => self.con.print(&format!("Wrote {}\n", path.display())),
                     Err(e) => self.con.print(&format!("screenshot: {e}\n")),
                 }
@@ -57,8 +58,7 @@ impl Host {
             s += &l;
             s.push('\n');
         }
-        let _ = std::fs::create_dir_all(&dir);
-        if let Err(e) = std::fs::write(dir.join("config.cfg"), s) {
+        if let Err(e) = qcore::vfs::write(&dir.join("config.cfg"), s.as_bytes()) {
             eprintln!("couldn't write config.cfg: {e}");
         }
         self.con.save_history(&crate::user_dir("id1"));
@@ -79,7 +79,7 @@ impl Host {
     pub(super) fn find_save(&self, name: &str) -> Option<PathBuf> {
         let dir = self.user_dir();
         match name.rsplit_once('.') {
-            Some((_, e)) if e == crate::autosave::SAVE_EXT || e == crate::autosave::ADDON_EXT => dir.join(name).is_file().then(|| dir.join(name)),
+            Some((_, e)) if e == crate::autosave::SAVE_EXT || e == crate::autosave::ADDON_EXT => qcore::vfs::is_file(&dir.join(name)).then(|| dir.join(name)),
             _ => crate::autosave::find(&dir, name),
         }
     }
@@ -116,13 +116,13 @@ impl Host {
     pub(super) fn scan_saves(&mut self) {
         self.menu.save_inventory = crate::save_inventory::Inventory::new(self.fs(), crate::sbar::Pack::from_game_dirs(self.fs_snapshot.1.iter().map(String::as_str)));
         let dir = self.user_dir();
-        let mut all: Vec<crate::menu::SaveSlot> = std::fs::read_dir(&dir).into_iter().flatten().flatten().filter_map(|entry| {
-            let path = entry.path();
+        let mut all: Vec<crate::menu::SaveSlot> = qcore::vfs::read_dir(&dir).into_iter().flatten().filter_map(|entry| {
+            let path = entry.path;
             if !matches!(path.extension()?.to_str()?, crate::autosave::SAVE_EXT | crate::autosave::ADDON_EXT) { return None; }
             let name = path.file_stem()?.to_str()?.to_owned();
             if !valid_save_name(&name) { return None; }
-            let modified = entry.metadata().ok()?.modified().ok();
-            let info = crate::saveinfo::SaveInfo::parse(&qcore::text::decode(&std::fs::read(&path).ok()?), modified)?;
+            let modified = qcore::vfs::modified(&path).ok();
+            let info = crate::saveinfo::SaveInfo::parse(&qcore::text::decode(&qcore::vfs::read(&path).ok()?), modified)?;
             Some(crate::menu::SaveSlot { name, info, thumb: None })
         }).collect();
         all.sort_by(|a, b| b.info.modified.cmp(&a.info.modified).then_with(|| a.name.cmp(&b.name)));
@@ -148,12 +148,12 @@ impl Host {
     /// Thumbnail picture of save `name` (`<name>.thumb`), uploaded once per file version.
     fn save_thumb(&mut self, dir: &std::path::Path, name: &str) -> Option<(qrender::PicId, u32, u32)> {
         let path = dir.join(format!("{name}.{}", crate::autosave::THUMB_EXT));
-        let modified = std::fs::metadata(&path).ok()?.modified().ok()?;
+        let modified = qcore::vfs::modified(&path).ok()?;
         let key = name.to_ascii_lowercase();
         if let Some((id, t)) = self.save_thumbs.get(&key) && *t == modified {
             return Some((*id, THUMB_W, THUMB_H));
         }
-        let data = std::fs::read(&path).ok()?;
+        let data = qcore::vfs::read(&path).ok()?;
         let rgba = read_thumb(&data)?;
         let id = match self.save_thumbs.get(&key) {
             Some(&(id, _)) => { self.r.update_pic(id, rgba).ok()?; id }
@@ -166,7 +166,7 @@ impl Host {
     /// Writes the thumbnail of a save from a captured frame.
     pub(super) fn write_thumb(&mut self, path: &std::path::Path, w: u32, h: u32, px: &[u8]) {
         let data = encode_thumb(w, h, px);
-        if let Err(e) = std::fs::write(path, data) {
+        if let Err(e) = qcore::vfs::write(path, &data) {
             self.con.print(&format!("couldn't write {}: {e}\n", path.display()));
         }
     }
@@ -248,7 +248,7 @@ pub(super) fn register(c: &mut Commands<Host>) {
         if !valid_save_name(name) { return; }
         let dir = h.user_dir();
         let _ = crate::autosave::remove_other_exts(&dir, name, None);
-        let _ = std::fs::remove_file(dir.join(format!("{name}.{}", crate::autosave::THUMB_EXT)));
+        let _ = qcore::vfs::remove_file(&dir.join(format!("{name}.{}", crate::autosave::THUMB_EXT)));
         h.scan_saves();
     });
     c.add("save", |h, a| {
@@ -262,10 +262,7 @@ pub(super) fn register(c: &mut Commands<Host>) {
         }
         let text = h.server.save_game();
         let p = h.savegame_path(a.argv(1));
-        if let Some(d) = p.parent() {
-            let _ = std::fs::create_dir_all(d);
-        }
-        match std::fs::write(&p, qcore::text::encode(&text)) {
+        match qcore::vfs::write(&p, &qcore::text::encode(&text)) {
             Ok(()) => {
                 // the slot is one save: drop a same-named file of the other format
                 if let (Some(d), Some(stem)) = (p.parent(), p.file_stem().and_then(|s| s.to_str())) {
@@ -286,7 +283,7 @@ pub(super) fn register(c: &mut Commands<Host>) {
             h.print(&format!("ERROR: couldn't open {}\n", h.savegame_path(a.argv(1)).display()));
             return;
         };
-        let Ok(bytes) = std::fs::read(&p) else {
+        let Ok(bytes) = qcore::vfs::read(&p) else {
             h.print(&format!("ERROR: couldn't open {}\n", p.display()));
             return;
         };

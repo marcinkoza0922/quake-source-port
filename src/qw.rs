@@ -76,9 +76,12 @@ pub struct QwClient {
 
 impl QwClient {
     pub fn connect(server: SocketAddr, userinfo: String, now: f64) -> std::io::Result<Self> {
+        if cfg!(target_arch = "wasm32") {
+            return Err(std::io::Error::new(std::io::ErrorKind::Unsupported, "networking is disabled on the web"));
+        }
         let sock = UdpTransport::bind((Ipv4Addr::UNSPECIFIED, 0).into())?;
         // Netchan_Init: "a value that should be nice and random".
-        let t = std::time::SystemTime::now().duration_since(std::time::UNIX_EPOCH).map_or(0, |d| d.subsec_nanos());
+        let t = qcore::time::SystemTime::now().duration_since(qcore::time::UNIX_EPOCH).map_or(0, |d| d.subsec_nanos());
         let qport = ((t ^ std::process::id().wrapping_mul(2_654_435_761)) & 0xffff) as u16;
         Ok(Self {
             sock,
@@ -252,9 +255,8 @@ impl QwClient {
                 if let Some(dir) = &self.dl_dir {
                     let path = dir.join(&dl.name);
                     let tmp = path.with_extension("tmp");
-                    let ok = path.parent().is_some_and(|p| std::fs::create_dir_all(p).is_ok())
-                        && std::fs::write(&tmp, &dl.data).is_ok()
-                        && std::fs::rename(&tmp, &path).is_ok();
+                    let ok = qcore::vfs::write(&tmp, &dl.data).is_ok()
+                        && qcore::vfs::rename(&tmp, &path).is_ok();
                     prints.push(if ok { format!("Downloaded {}\n", dl.name) } else { format!("Couldn't write {}\n", path.display()) });
                 }
                 self.next_precache(fs, nq, prints)?;

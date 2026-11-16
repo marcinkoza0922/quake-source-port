@@ -324,7 +324,7 @@ pub(super) fn register_commands(c: &mut Commands<Host>) {
         let path = a.argv(1);
         if path.is_empty() {
             h.print(&json);
-        } else if let Err(e) = std::fs::write(path, json) {
+        } else if let Err(e) = qcore::vfs::write(std::path::Path::new(path), json.as_bytes()) {
             h.print(&format!("prof_stop: {path}: {e}\n"));
         }
     });

@@ -7,6 +7,8 @@ pub mod complete;
 pub mod edit;
 mod modern_draw;
 pub mod shell;
+// the terminal emulator only runs a shell on unix; the web build has none
+#[cfg_attr(target_arch = "wasm32", allow(dead_code))]
 pub mod vt;
 #[cfg(test)]
 mod tests;

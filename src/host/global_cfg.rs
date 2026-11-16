@@ -22,7 +22,7 @@ pub(super) fn load(cvars: &mut Cvars) {
     for &(n, d) in GLOBAL_CVARS {
         cvars.register(n, d, 0);
     }
-    let Ok(text) = std::fs::read_to_string(global_path()) else { return };
+    let Ok(text) = qcore::vfs::read_to_string(&global_path()) else { return };
     for line in text.lines() {
         let line = line.trim();
         let Some((name, rest)) = line.split_once(char::is_whitespace) else { continue };
@@ -43,11 +43,10 @@ impl Host {
             any |= v != d;
             s += &format!("{n} \"{v}\"\n");
         }
-        if !any && !path.exists() {
+        if !any && !qcore::vfs::exists(&path) {
             return;
         }
-        let _ = std::fs::create_dir_all(global_dir());
-        if let Err(e) = std::fs::write(&path, s) {
+        if let Err(e) = qcore::vfs::write(&path, s.as_bytes()) {
             eprintln!("couldn't write global.cfg: {e}");
         }
     }

@@ -23,7 +23,7 @@ pub(super) fn norm(name: &str) -> String {
 
 impl Pack {
     pub fn load_pak(path: &Path) -> Option<Pack> {
-        let mut f = File::open(path).ok()?;
+        let mut f = crate::vfs::open_read(path).ok()?;
         let mut hdr = [0u8; 12];
         f.read_exact(&mut hdr).ok()?;
         let mut r = Reader::new(&hdr);
@@ -53,7 +53,7 @@ impl Pack {
     }
 
     pub fn load_pk3(path: &Path) -> Option<Pack> {
-        let mut f = File::open(path).ok()?;
+        let mut f = crate::vfs::open_read(path).ok()?;
         let flen = f.seek(SeekFrom::End(0)).ok()?;
         let tail_len = flen.min(22 + 65535);
         let mut tail = vec![0u8; tail_len as usize];
@@ -112,7 +112,7 @@ impl Pack {
 
     pub fn read(&self, name: &str) -> Option<Vec<u8>> {
         let e = *self.entries.get(&norm(name))?;
-        let mut f = File::open(&self.path).ok()?;
+        let mut f = crate::vfs::open_read(&self.path).ok()?;
         let mut offset = e.offset;
         let method = e.method & 0x7fff;
         if e.method & 0x8000 != 0 {

@@ -4,12 +4,12 @@ impl Host {
     /// The base game's user config text, when the running mod has none of
     /// its own yet: (game dir it came from, text).
     pub(super) fn inherited_config(&self) -> Option<(String, String)> {
-        if self.user_dir().join("config.cfg").is_file() {
+        if qcore::vfs::is_file(&self.user_dir().join("config.cfg")) {
             return None;
         }
         let dirs = &self.fs_snapshot.1;
         dirs.iter().rev().skip(1).find_map(|g| {
-            let t = std::fs::read(crate::user_dir(g).join("config.cfg")).ok()?;
+            let t = qcore::vfs::read(&crate::user_dir(g).join("config.cfg")).ok()?;
             Some((g.clone(), String::from_utf8_lossy(&t).into_owned()))
         })
     }
@@ -70,10 +70,9 @@ impl Host {
         let times: Vec<u64> = mods
             .iter()
             .map(|m| {
-                std::fs::metadata(crate::user_dir(&m.dir).join(qui::stats::FILE_NAME))
-                    .and_then(|md| md.modified())
+                qcore::vfs::modified(&crate::user_dir(&m.dir).join(qui::stats::FILE_NAME))
                     .ok()
-                    .and_then(|t| t.duration_since(std::time::UNIX_EPOCH).ok())
+                    .and_then(|t| t.duration_since(qcore::time::UNIX_EPOCH).ok())
                     .map_or(0, |d| d.as_secs())
             })
             .collect();
@@ -102,7 +101,7 @@ impl Host {
             s.event(SoundEvent::StopAll);
             s.event(SoundEvent::ClearStatic);
         }
-        let t0 = std::time::Instant::now();
+        let t0 = qcore::time::Instant::now();
         let colored = self.cv("r_coloredlight") != 0.0;
         let enhanced = self.cv("r_enhancedmodels") != 0.0;
         let fs = &self.server.core.fs;

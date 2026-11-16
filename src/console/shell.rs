@@ -5,7 +5,7 @@ use std::io::{Read, Write};
 use std::path::{Path, PathBuf};
 use std::process::{Child, Command, Stdio};
 use std::sync::mpsc::{self, Receiver};
-use std::time::{Duration, Instant};
+use qcore::time::{Duration, Instant};
 
 use qinput::keys::*;
 
@@ -50,6 +50,9 @@ pub struct ShellJob {
 
 impl ShellJob {
     pub fn spawn(shell_cmd: &str, stdin_data: Option<String>, env: &ShellEnv) -> Result<Self, String> {
+        if cfg!(target_arch = "wasm32") {
+            return Err("no shell on the web".into());
+        }
         let mut cmd = Command::new("bash");
         cmd.arg("-c").arg(shell_cmd);
         env.apply(&mut cmd);
@@ -285,6 +288,8 @@ impl PtySession {
     }
 
     pub fn write_bytes(&mut self, data: &[u8]) {
+        #[cfg(not(unix))]
+        let _ = data;
         #[cfg(unix)]
         if !data.is_empty() {
             // SAFETY: master_fd is valid; data pointer and length are valid.

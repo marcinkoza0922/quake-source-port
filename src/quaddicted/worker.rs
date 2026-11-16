@@ -55,6 +55,11 @@ impl Online {
     pub fn open(&mut self, basedir: &Path, cache: &Path, force: bool) {
         self.basedir = basedir.to_path_buf();
         self.cache = cache.to_path_buf();
+        // the browser has no threads or curl
+        if cfg!(target_arch = "wasm32") {
+            self.lock().status = Status::Failed("Downloads are not available in the browser build".into());
+            return;
+        }
         {
             let mut s = self.lock();
             if s.status == Status::Loading || (s.status == Status::Ready && !force) {
@@ -99,6 +104,10 @@ impl Online {
 
     /// Downloads and installs a release in the background.
     pub fn download(&mut self, r: &Release) {
+        if cfg!(target_arch = "wasm32") {
+            self.lock().jobs.insert(r.sha.clone(), Job::Failed("Downloads are not available in the browser build".into()));
+            return;
+        }
         {
             let mut s = self.lock();
             if matches!(s.jobs.get(&r.sha), Some(Job::Downloading(_) | Job::Installing)) {

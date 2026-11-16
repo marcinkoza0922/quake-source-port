@@ -51,9 +51,9 @@ impl Host {
             .collect();
         let mods: Vec<String> = qui::mods::scan(fs.basedir()).into_iter().map(|m| m.dir).collect();
         let mut saves = Vec::new();
-        if let Ok(rd) = std::fs::read_dir(self.user_dir()) {
-            for e in rd.flatten() {
-                let p = e.path();
+        if let Ok(rd) = qcore::vfs::read_dir(&self.user_dir()) {
+            for e in rd {
+                let p = e.path;
                 if p.extension().is_some_and(|x| x == "sav" || x == "qsa")
                     && let Some(stem) = p.file_stem().and_then(|s| s.to_str())
                 {

@@ -32,24 +32,6 @@ pub(super) struct FrameUbo {
     pub(super) ripple_amp: [[f32; 4]; crate::water::MAX_RIPPLES / 4],
 }
 
-/// ironwail NOISESCALE.
-pub(super) const NOISESCALE: f32 = 9.0 / 255.0;
-
-/// R_SetupView / R_ChooseBModelProgram / alias mode selection for r_softemu:
-/// (screen dither, texture dither, world dither level, alias mode).
-pub(super) fn softemu_params(st: &Settings) -> (f32, f32, u32, u32) {
-    let (screen, texture) = match st.softemu {
-        0 => (st.dither / 255.0, 0.0),
-        2 => (NOISESCALE * st.dither * st.dither_screen, NOISESCALE * st.dither * st.dither_texture),
-        _ => (0.0, 0.0), // fine dithers in post; banded doesn't dither
-    };
-    let banding = if st.softemu == 3 { st.lightmap_banding != 0.0 } else { st.lightmap_banding > 0.0 };
-    let world = if banding { 2 } else if st.softemu >= 2 { 1 } else { 0 };
-    let warp = if st.softemu == 3 { st.mdl_warp != 0.0 } else { st.mdl_warp > 0.0 };
-    let alias = if warp { 2 } else if st.softemu == 2 { 1 } else { 0 };
-    (screen, texture, world, alias)
-}
-
 #[repr(C)]
 #[derive(Clone, Copy)]
 pub(super) struct AliasPush {
