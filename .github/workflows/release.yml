@@ -6,6 +6,7 @@ name: release
 on:
   push:
     tags: ["v*"]
+    branches: ["feature/gyro-menu-releases"]
   workflow_dispatch:
 
 permissions:
