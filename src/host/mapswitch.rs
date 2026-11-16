@@ -82,6 +82,13 @@ impl Host {
         self.menu.mods.set_last_played(times);
     }
 
+    /// Starts loading the Quaddicted index for Map Packs > Get more maps.
+    fn open_quaddicted(&mut self, force: bool) {
+        let basedir = self.fs_snapshot.0.clone();
+        let cache = crate::user_dir("id1").parent().map_or_else(|| basedir.join("quaddicted"), |p| p.join("quaddicted"));
+        self.menu.mods.online.data.open(&basedir, &cache, force);
+    }
+
     /// Fills the mod menu's map page for one mod (`_modmaps <dir>`).
     pub(super) fn scan_mod_maps(&mut self, dir: &str) {
         let maps = qui::mods::maps(&self.fs_snapshot.0, dir);
@@ -146,6 +153,13 @@ pub(super) fn relaunch_args(cmdline: &[String]) -> Vec<String> {
 pub(super) fn register(c: &mut Commands<Host>) {
     c.add("_mods", |h, _| h.scan_mods());
     c.add("_modmaps", |h, a| h.scan_mod_maps(a.argv(1)));
+    // Quaddicted browser: load (or with `force`, refetch) the archive's index
+    c.add("_quaddicted", |h, a| h.open_quaddicted(a.argv(1) == "force"));
+    c.add("menu_quaddicted", |h, _| {
+        h.scan_mods();
+        h.open_quaddicted(false);
+        h.menu.open(Screen::ModOnline);
+    });
     c.add("menu_mods", |h, a| {
         h.scan_mods();
         if a.argc() > 1 && h.menu.mods.select(a.argv(1)) {

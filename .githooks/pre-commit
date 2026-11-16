@@ -1,0 +1,5 @@
+#!/bin/sh
+# Enable once per clone: git config core.hooksPath .githooks
+# Checks the Quaddicted download route at most once a day; offline is not an error.
+# Skip a single commit with: git commit --no-verify
+exec python3 -I "$(git rev-parse --show-toplevel)/tools/quaddicted_check.py" --daily

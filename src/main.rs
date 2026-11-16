@@ -30,6 +30,7 @@ mod modmenu;
 mod net;
 mod platform;
 mod png;
+mod quaddicted;
 mod qw;
 mod sbar;
 mod saveinfo;

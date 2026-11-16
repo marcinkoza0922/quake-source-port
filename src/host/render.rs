@@ -346,6 +346,7 @@ impl Host {
             if self.cl.intermission == 0 {
                 touch::draw_touch(&mut c, &self.input, &self.server.core.cvars);
             }
+            self.menu.mods.online.poll();
             self.menu.draw(&mut c, &mut pf, &self.server.core.cvars, self.realtime);
             if showfps {
                 self.fps.0 += ft as f64;

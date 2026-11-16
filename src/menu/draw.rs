@@ -10,7 +10,7 @@ impl Menu {
         c.fade_screen();
         let base_scale = c.scale;
         c.menu_layout();
-        if !matches!(self.screen, Screen::Options | Screen::OptionsPage(_) | Screen::Death | Screen::Quit | Screen::Mods | Screen::ModMaps | Screen::Load | Screen::Save | Screen::Help) {
+        if !matches!(self.screen, Screen::Options | Screen::OptionsPage(_) | Screen::Death | Screen::Quit | Screen::Mods | Screen::ModMaps | Screen::ModOnline | Screen::Load | Screen::Save | Screen::Help) {
             c.ox += CLASSIC.0;
             c.oy += CLASSIC.1;
         }
@@ -50,6 +50,7 @@ impl Menu {
             }
             Screen::Mods => self.mods.draw(c, modmenu::Page::List),
             Screen::ModMaps => self.mods.draw(c, modmenu::Page::Maps),
+            Screen::ModOnline => self.mods.draw(c, modmenu::Page::Online),
             Screen::SinglePlayer => {
                 let p = pic("gfx/qplaque.lmp");
                 c.pic(16.0, 4.0, p);
