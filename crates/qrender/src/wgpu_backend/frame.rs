@@ -2,6 +2,7 @@
 //! upload (recorded into commands by `encode.rs`).
 
 use super::pipes::{DrawU, UiV};
+use super::post::{PostView, post_draw};
 use super::scene::{Lists, Pipe};
 use super::{DEPTH_FORMAT, MSAA_SAMPLES, NO_TEX, Renderer, SCENE_FORMAT, Targets};
 use crate::{Draw2D, Error, RenderFrame, Result};
@@ -107,15 +108,6 @@ fn ui_quads(r: &Renderer, fr: &RenderFrame) -> (Vec<UiV>, Vec<(u32, u32, u32)>) 
     (v, batches)
 }
 
-/// Post pass `DrawU::model` columns: (motion blur x/y scale, speed blur,
-/// motion blur quality), (output width, height).
-fn post_blur(mb: [f32; 2], speed: f32, quality: u32, [w, h]: [u32; 2]) -> [f32; 16] {
-    let mut m = [0.0; 16];
-    m[..4].copy_from_slice(&[mb[0], mb[1], speed, quality as f32]);
-    m[4..6].copy_from_slice(&[w.max(1) as f32, h.max(1) as f32]);
-    m
-}
-
 impl Renderer {
     fn create_targets(&mut self) {
         let (w, h) = (self.width, self.height);
@@ -158,22 +150,6 @@ impl Renderer {
             layout: &self.pipes.scene.fx.soft_bgl,
             entries: &[wgpu::BindGroupEntry { binding: 0, resource: wgpu::BindingResource::TextureView(&depth_view) }],
         });
-        // a scaled scene is filtered up/down to the output (vkQuake r_scale)
-        let post_sampler = if scene == (w, h) { &self.samplers.clamp } else { &self.samplers.linear };
-        self.bufs.post_group = Some(self.dev.create_bind_group(&wgpu::BindGroupDescriptor {
-            label: None,
-            layout: &self.pipes.mat_bgl,
-            entries: &[
-                wgpu::BindGroupEntry { binding: 0, resource: wgpu::BindingResource::TextureView(&color_view) },
-                // motion velocity (black = none)
-                wgpu::BindGroupEntry {
-                    binding: 1,
-                    resource: wgpu::BindingResource::TextureView(vel.as_ref().map_or(&self.black, |v| v.view())),
-                },
-                wgpu::BindGroupEntry { binding: 2, resource: wgpu::BindingResource::TextureView(&self.black) },
-                wgpu::BindGroupEntry { binding: 3, resource: wgpu::BindingResource::Sampler(post_sampler) },
-            ],
-        }));
         self.targets = Some(Targets { scene, color, color_view, ms_view, depth_view, ao, soft_group, vel, out });
         self.frame_ready = false;
     }
@@ -195,7 +171,10 @@ impl Renderer {
 
     /// Draws one frame (and presents it when windowed).
     pub fn render(&mut self, fr: &RenderFrame) -> Result<()> {
-        self.set_world_filter(fr.settings.texture_linear);
+        self.set_world_filter(fr.settings.texture_linear && !crate::softemu::forces_nearest(&fr.settings));
+        self.update_lut(&fr.settings);
+        self.wait_frames_in_flight();
+        self.begin_gpu_times();
         let scale = fr.settings.render_scale.clamp(0.25, 2.0);
         if scale != self.render_scale {
             self.render_scale = scale;
@@ -232,6 +211,7 @@ impl Renderer {
         if self.targets.is_none() {
             self.create_targets();
         }
+        self.ensure_post_group();
         if let Some(wr) = &self.world {
             let mut styles = [256.0f32; 256];
             for (i, v) in fr.lightstyles.iter().take(256).enumerate() {
@@ -268,19 +248,14 @@ impl Renderer {
             .iter()
             .map(|v| {
                 let ([x, y], [sw, sh]) = (v.ofs, v.scene);
-                DrawU {
-                    color: v.blend.map(|c| c.clamp(0.0, 1.0)),
-                    // z: underwater warp clock (< 0 off); w: output aspect
-                    params: [st.gamma.clamp(0.1, 4.0), st.contrast.max(0.0), v.warp, w as f32 / h.max(1) as f32],
-                    extra: [x as f32 / tw as f32, y as f32 / th as f32, (x + sw) as f32 / tw as f32, (y + sh) as f32 / th as f32],
-                    model: post_blur(
-                        [mb * sw as f32 / tw as f32, mb * sh as f32 / th as f32],
-                        v.speed_blur,
-                        st.motion_blur_quality.min(1),
-                        [w, h],
-                    ),
-                    ..Default::default()
-                }
+                let pv = PostView {
+                    blend: v.blend,
+                    warp: v.warp,
+                    uv: [x as f32 / tw as f32, y as f32 / th as f32, (x + sw) as f32 / tw as f32, (y + sh) as f32 / th as f32],
+                    mb: [mb * sw as f32 / tw as f32, mb * sh as f32 / th as f32],
+                    speed_blur: v.speed_blur,
+                };
+                post_draw(st, &pv, [w, h], self.render_scale, fr.time)
             })
             .collect();
         let post_du: Vec<u32> = post.into_iter().map(|d| lists.draw(d)).collect();
@@ -307,6 +282,19 @@ impl Renderer {
         let result = self.encode(&lists, &post_du, &ao_views, ui_du, &ui_batches);
         self.bufs.lists = lists;
         result
+    }
+
+    /// Waits until fewer than [`FRAMES_IN_FLIGHT`] frames are queued on the
+    /// GPU (headless has no presentation to throttle it), timing the wait.
+    fn wait_frames_in_flight(&mut self) {
+        self.fence_wait_ns = 0;
+        #[cfg(not(target_arch = "wasm32"))]
+        while self.in_flight.len() >= super::FRAMES_IN_FLIGHT {
+            let Some(idx) = self.in_flight.pop_front() else { break };
+            let t0 = std::time::Instant::now();
+            let _ = self.dev.poll(wgpu::PollType::Wait { submission_index: Some(idx), timeout: None });
+            self.fence_wait_ns += t0.elapsed().as_nanos() as u64;
+        }
     }
 
     fn upload(&mut self, l: &Lists, ui_v: &[UiV]) {

@@ -127,8 +127,10 @@ impl Renderer {
             return false;
         }
         let p = &self.pipes.scene.fx;
+        let ts = self.pass_times(super::timing::VELOCITY);
         let mut pass = enc.begin_render_pass(&wgpu::RenderPassDescriptor {
             label: Some("velocity"),
+            timestamp_writes: super::timing::writes(&ts),
             color_attachments: &[Some(wgpu::RenderPassColorAttachment {
                 view: &vel.view,
                 depth_slice: None,

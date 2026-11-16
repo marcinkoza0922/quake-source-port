@@ -35,6 +35,7 @@ impl Renderer {
         self.sky_layers = [NO_TEX; 2];
         self.skybox = None;
         self.sky_group = None;
+        self.hidden_entities.clear();
     }
 
     fn upload_bsp_textures(&mut self, bsp: &Bsp, materials: &mut Vec<[u32; 3]>, kinds: &mut Vec<TextureKind>) -> Result<()> {

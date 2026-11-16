@@ -796,7 +796,7 @@ impl Renderer {
         for (vi, pass) in passes.iter_mut().enumerate() {
             let Some(vs) = &pass.view else { continue };
             let sky = self.skybox;
-            let soft = softemu_params(st);
+            let soft = crate::softemu::scene_params(st);
             let mut ubo = FrameUbo {
                 portal_clip: [0.0; 4],
                 portal_plane: [[0.0; 4]; 4],
@@ -1712,12 +1712,8 @@ impl Renderer {
                 gamma: st.gamma.clamp(0.1, 4.0),
                 contrast: st.contrast.clamp(0.1, 4.0),
                 scene: t.color_slot,
-                dither: match st.softemu {
-                    0 => st.dither / 255.0,
-                    1 => NOISESCALE * st.dither * st.dither_screen,
-                    _ => 0.0,
-                },
-                mode: st.softemu.min(2),
+                dither: crate::softemu::post_dither(st),
+                mode: crate::softemu::post_mode(st),
                 scale: if let Some((_, _, pw, _)) = slang_src {
                     sw.max(1) as f32 / pw.max(1) as f32
                 } else {

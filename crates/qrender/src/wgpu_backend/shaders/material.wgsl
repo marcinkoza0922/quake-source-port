@@ -128,15 +128,27 @@ fn caustic_tex(q: vec2<f32>, t: f32) -> f32 {
 @fragment fn fs_world(i: WorldOut) -> @location(0) vec4<f32> {
     let size = vec2<f32>(textureDimensions(t0));
     let uv = i.st / size;
-    let c = textureSample(t0, s0, uv);
-    let fb = textureSample(t1, s0, uv);
-    let lmc = textureSample(lightmap, lm_samp, i.lm.xy, i32(i.lm.z + 0.5)).rgb * 2.0;
+    // ironwail world shader DITHER levels: 1 = softemu coarse, 2 = banded lightmap
+    let dither = fr.softf.x;
+    let bias = select(select(0.0, -0.5, dither == 1u), -1.0, dither >= 2u);
+    let c = textureSampleBias(t0, s0, uv, bias);
+    let fb = textureSampleBias(t1, s0, uv, bias);
+    let nf = cross(dpdx(i.wpos), dpdy(i.wpos));
+    let dpos = fwidth(i.wpos);
+    var lm = i.lm.xy;
+    let lmsize = vec2<f32>(textureDimensions(lightmap).xy) * 16.0;
+    if (dither != 0u) { // snap to the software renderer's surface-cache texels
+        lm = (floor(lm * lmsize) + 0.5) / lmsize;
+    }
+    let lmc = textureSampleLevel(lightmap, lm_samp, lm, i32(i.lm.z + 0.5), 0.0).rgb * 2.0;
     if (du.params.x > 0.5 && c.a < 0.666) { discard; }
     var light = lmc;
     if (du.params.z > 0.5) { light = vec3<f32>(1.0); }
+    if (dither >= 2u) { // 64 light levels, like the colormap
+        light = floor(light * (63.0 / 2.0) + 0.5) * (2.0 / 63.0);
+    }
     var rgb = c.rgb * light;
     // caustics on submerged faces (not lava); water bluish, slime green
-    let nf = cross(dpdx(i.wpos), dpdy(i.wpos));
     let lk = u32(i.liq.y + 0.5);
     if (water.params.y > 0.0 && (lk & 3u) != 0u && (lk & 3u) != 2u && i.wpos.z < i.liq.x) {
         let dist_fade = water_dist_fade(i.wpos, i32(water.params.w + 0.5));
@@ -154,6 +166,23 @@ fn caustic_tex(q: vec2<f32>, t: f32) -> f32 {
     }
     rgb += fb.rgb * du.params.y;
     rgb = apply_fog(clamp(rgb, vec3<f32>(0.0), vec3<f32>(1.0)), i.wpos);
+    if (dither == 1u) {
+        var farblend = clamp(max(dpos.x, max(dpos.y, dpos.z)) * 0.5 - 0.125, 0.0, 1.0);
+        farblend *= farblend;
+        rgb = sqrt(rgb);
+        let lu = dot(rgb, vec3<f32>(0.25, 0.625, 0.125));
+        let nearnoise = tri(whitenoise01(lm * lmsize)) * lu * fr.soft.y;
+        let farnoise = select(0.0, screen_noise(i.clip.xy) * fr.soft.x, fr.fog.w > 0.0);
+        rgb += mix(nearnoise, farnoise, farblend);
+        rgb *= rgb;
+    } else if (dither == 0u) {
+        rgb += suppress_banding(i.clip.xy) * fr.soft.x;
+    }
+    if (thermal()) {
+        // fullbright texels (torches, lights, lava rock) are hot
+        let h = cold_heat(c.rgb * light) + 1.6 * luma(fb.rgb) * du.params.y;
+        rgb = vec3<f32>(min(h, 1.0));
+    }
     return vec4<f32>(rgb, du.color.x);
 }
 // du.params.w: liquid kind (1 water, 2 lava, 3 slime, 4 tele)
@@ -193,6 +222,10 @@ fn caustic_tex(q: vec2<f32>, t: f32) -> f32 {
         let hot = c * 1.5 + vec3<f32>(0.35, 0.18, 0.02);
         c = mix(c, hot, clamp(heat, 0.0, 1.0));
     }
+    if (thermal()) {
+        let h = select(cold_heat(c) * 0.7, 0.88 + 0.12 * luma(c), kind == 2u);
+        return vec4<f32>(vec3<f32>(h), du.color.x);
+    }
     return vec4<f32>(apply_fog(c * shade, i.wpos), du.color.x);
 }
 
@@ -207,11 +240,14 @@ struct AliasOut {
     @location(0) st: vec2<f32>,
     @location(1) shade: vec3<f32>,
     @location(2) wpos: vec3<f32>,
+    // r_softemu_mdl_warp: software-renderer affine texture mapping
+    @location(3) @interpolate(linear) st_affine: vec2<f32>,
 };
 @vertex fn vs_alias(v: AliasIn) -> AliasOut {
     var o: AliasOut;
     o.clip = fr.viewproj * vec4<f32>(v.pos, 1.0);
     o.st = v.st;
+    o.st_affine = v.st;
     o.shade = v.shade;
     o.wpos = v.pos;
     return o;
@@ -220,15 +256,28 @@ fn ramp(row: u32, k: u32) -> vec3<f32> {
     let idx = select(row * 16u + 15u - k, row * 16u + k, row < 8u);
     return textureLoad(palette, vec2<i32>(i32(idx), 0), 0).rgb;
 }
-// du.params: x alpha test, y has fullbright, z colormapped; du.ix: shirt row, pants row; du.color.w alpha
+// ironwail alias modes: 0 standard, 1 dither (softemu coarse), 2 affine (no mips)
+fn alias_tex(t: texture_2d<f32>, st: vec2<f32>, affine: bool) -> vec4<f32> {
+    if (affine) {
+        let sz = vec2<f32>(textureDimensions(t));
+        return textureSampleLevel(t, s0, st - 0.5 / sz, 0.0);
+    }
+    return textureSample(t, s0, st);
+}
+// du.params: x alpha test, y has fullbright, z colormapped, w thermal heat
+// (HEAT_COLD..HEAT_FIRE, +4 = silhouette seen through a wall); du.ix: shirt
+// row, pants row; du.color.w alpha
 @fragment fn fs_alias(i: AliasOut) -> @location(0) vec4<f32> {
-    let c = textureSample(t0, s0, i.st);
-    let fb = textureSample(t1, s0, i.st);
+    let mode = fr.softf.y;
+    let affine = mode == 2u;
+    let st = select(i.st, i.st_affine, affine);
+    let c = alias_tex(t0, st, affine);
+    let fb = alias_tex(t1, st, affine);
     if (du.params.x > 0.5 && c.a < 0.666) { discard; }
     var rgb = c.rgb;
     if (du.params.z > 0.5) {
         let dims = vec2<f32>(textureDimensions(t2));
-        let p = vec2<i32>(clamp(fract(i.st) * dims, vec2<f32>(0.0), dims - 1.0));
+        let p = vec2<i32>(clamp(fract(st) * dims, vec2<f32>(0.0), dims - 1.0));
         let m = textureLoad(t2, p, 0).rg * 255.0 + 0.5;
         let top = u32(m.x);
         let bot = u32(m.y);
@@ -237,6 +286,28 @@ fn ramp(row: u32, k: u32) -> vec3<f32> {
     }
     rgb = rgb * i.shade * 2.0 + fb.rgb * du.params.y;
     rgb = apply_fog(clamp(rgb, vec3<f32>(0.0), vec3<f32>(1.0)), i.wpos);
+    if (mode != 0u) {
+        if (fr.fog.w > 0.0) {
+            rgb = sqrt(rgb);
+            rgb += screen_noise(i.clip.xy) * fr.soft.x;
+            rgb *= rgb;
+        }
+    } else {
+        rgb += suppress_banding(i.clip.xy) * fr.soft.x;
+    }
+    if (thermal()) {
+        let heat = u32(du.params.w + 0.5);
+        if (heat >= 4u) {
+            // seen through a wall: a flat warm silhouette, added to the scene
+            return vec4<f32>(vec3<f32>(0.42), 1.0);
+        }
+        let lit = luma(clamp(i.shade, vec3<f32>(0.0), vec3<f32>(1.0)));
+        var h = 0.85 + 0.15 * luma(c.rgb);
+        if (heat == 0u) { h = cold_heat(rgb); }
+        else if (heat == 1u) { h = 0.42 + 0.15 * luma(c.rgb); }
+        else if (heat == 2u) { h = 0.6 + 0.25 * lit + 0.1 * luma(c.rgb); }
+        rgb = vec3<f32>(min(h + luma(fb.rgb) * du.params.y, 1.0));
+    }
     return vec4<f32>(rgb, du.color.w);
 }
 
@@ -268,9 +339,15 @@ fn poly_fog(c: vec4<f32>, wpos: vec3<f32>) -> vec4<f32> {
     let f = clamp(exp(-z * z), 0.0, 1.0);
     return vec4<f32>(mix(fr.fog.rgb * (1.0 - du.params.y), c.rgb, f), c.a);
 }
-// du.params.x: alpha test threshold; y: fog toward black
+// du.params.x: alpha test threshold; y: fog toward black; du.ix.y thermal
+// kind (0 unchanged, 1 sprite, 2 classic particle)
 @fragment fn fs_poly(i: PolyOut) -> @location(0) vec4<f32> {
     let c = textureSample(t0, s0, i.uv) * i.color;
     if (c.a <= du.params.x) { discard; }
+    if (thermal() && du.ix.y != 0u) {
+        // sprites: explosions, flames, bubbles; particles: sparks and blood
+        let h = select(0.55 + 0.45 * luma(c.rgb), 0.65 + 0.35 * luma(c.rgb), du.ix.y == 1u);
+        return vec4<f32>(vec3<f32>(h), c.a);
+    }
     return poly_fog(c, i.wpos);
 }

@@ -1,9 +1,8 @@
 //! wgpu backend of [`Renderer`] (web via WebGPU, natively with the `wgpu`
 //! feature). Same public API as the Vulkan backend; the scene is drawn with
 //! CPU-built draw lists (world from the PVS, alias poses lerped on the CPU,
-//! lightmaps built on the CPU) and WGSL shaders in `shaders/`. Advanced
-//! effects of the Vulkan backend (portals, slang presets, softemu, goggles)
-//! are not drawn.
+//! lightmaps built on the CPU) and WGSL shaders in `shaders/`. See-through
+//! portals and slang presets of the Vulkan backend are not drawn.
 
 mod capture;
 mod encode;
@@ -16,13 +15,15 @@ mod math;
 mod models;
 mod motion;
 mod pipes;
+mod post;
 mod scene;
 mod ssao;
 mod textures;
+mod timing;
 mod water;
 
 use crate::convert::Palette;
-use crate::{Error, GpuViewTiming, PicId, Result, ShaderParam, SurfaceProvider, Vec3};
+use crate::{Error, PicId, Result, ShaderParam, SurfaceProvider, Vec3};
 use std::collections::HashMap;
 use std::path::Path;
 
@@ -32,6 +33,9 @@ const DEPTH_FORMAT: wgpu::TextureFormat = wgpu::TextureFormat::Depth32Float;
 /// MSAA sample count: WebGPU (and wgpu without adapter-specific format
 /// features) only guarantees 1 and 4 for the scene formats.
 const MSAA_SAMPLES: u32 = 4;
+/// Frames the CPU may record ahead of the GPU (natively; the browser
+/// throttles presentation itself).
+const FRAMES_IN_FLIGHT: usize = 2;
 
 /// Scene targets at render-scaled size, plus the headless output and its readback.
 struct Targets {
@@ -54,9 +58,9 @@ struct Targets {
 
 /// The renderer. Not `Send`: keep it on the render thread.
 pub struct Renderer {
-    /// Force GPU timestamps on (no-op in this backend).
+    /// Force GPU timestamps on without QSP_GPUTIMES (profiling, `prof_start`).
     pub gpu_times_wanted: bool,
-    /// CPU time spent waiting for the GPU last frame (ns); always 0 here.
+    /// CPU time spent waiting for the GPU last frame (ns).
     pub fence_wait_ns: u64,
     dev: wgpu::Device,
     queue: wgpu::Queue,
@@ -106,6 +110,15 @@ pub struct Renderer {
     capture_req: bool,
     /// A presented frame being copied and mapped for reading.
     capture: Option<capture::Pending>,
+    /// Softemu palette lookup table.
+    post: post::PostRes,
+    /// Submissions of the frames still in flight (native: at most
+    /// [`FRAMES_IN_FLIGHT`], so headless rendering can't queue up unbounded).
+    in_flight: std::collections::VecDeque<wgpu::SubmissionIndex>,
+    /// GPU pass timestamps (when requested and supported).
+    gpu_times: Option<timing::GpuTimes>,
+    /// Entities hidden with `r_visibility hide entity`.
+    hidden_entities: std::collections::HashSet<u32>,
 }
 
 impl Renderer {
@@ -165,6 +178,8 @@ impl Renderer {
         let (dev, queue) = adapter
             .request_device(&wgpu::DeviceDescriptor {
                 label: Some("qrender"),
+                // GPU pass timings (QSP_GPUTIMES, prof_start) where available
+                required_features: adapter.features() & wgpu::Features::TIMESTAMP_QUERY,
                 required_limits: wgpu::Limits::downlevel_defaults().using_resolution(adapter.limits()),
                 ..Default::default()
             })
@@ -249,6 +264,10 @@ impl Renderer {
             motion: Default::default(),
             capture_req: false,
             capture: None,
+            post: Default::default(),
+            gpu_times: None,
+            in_flight: Default::default(),
+            hidden_entities: Default::default(),
         };
         r.init_water();
         let dot = textures::particle_dot();
@@ -307,26 +326,18 @@ impl Renderer {
         1.0
     }
 
-    pub fn gpu_destination_times(&self) -> Vec<GpuViewTiming> {
-        Vec::new()
-    }
-
-    pub fn gpu_view_times(&self) -> Vec<GpuViewTiming> {
-        Vec::new()
-    }
-
-    /// GPU timestamps are not collected by this backend.
-    pub fn take_gpu_times(&mut self) -> Option<(u64, Vec<(&'static str, f64)>)> {
-        None
-    }
-
-    /// Debug isolation is a Vulkan-backend feature.
+    /// Portal isolation (the only camera override) is Vulkan-only.
     pub fn has_camera_override(&self) -> bool {
         false
     }
 
-    pub fn debug_visibility(&mut self, _args: &[String]) -> String {
-        "r_visibility is not available in the wgpu renderer.\n".into()
+    /// `r_visibility`: hide or show faces and entities (portal isolation
+    /// needs see-through portals, which this backend doesn't draw).
+    pub fn debug_visibility(&mut self, args: &[String]) -> String {
+        let Some(w) = self.world.as_mut() else {
+            return "No level loaded.\n".into();
+        };
+        crate::debug_visibility::command(&mut w.cpu, &mut self.hidden_entities, None, args)
     }
 
     /// Slang presets are not supported by this backend.

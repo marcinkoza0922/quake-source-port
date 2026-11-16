@@ -42,7 +42,11 @@ pub(super) struct FrameU {
     pub(super) alphas: [f32; 4],
     /// Motion velocity pass: scene px per velocity px, max scene px x, y.
     pub(super) vel: [f32; 4],
-    pub(super) pad: [f32; 16],
+    /// Screen dither, texture dither (r_softemu / r_dither).
+    pub(super) soft: [f32; 4],
+    /// World dither level, alias mode, goggles mode.
+    pub(super) softf: [u32; 4],
+    pub(super) pad: [f32; 8],
 }
 
 /// Vertex of CPU-posed alias models (world space).
@@ -68,6 +72,8 @@ pub(super) struct Pipes {
     pub(super) mat_bgl: wgpu::BindGroupLayout,
     pub(super) sky_bgl: wgpu::BindGroupLayout,
     pub(super) draw_bgl: wgpu::BindGroupLayout,
+    /// Post pass inputs: scene, motion velocity, sampler, palette, softemu LUT.
+    pub(super) post_bgl: wgpu::BindGroupLayout,
     scene_layout: wgpu::PipelineLayout,
     sky_layout: wgpu::PipelineLayout,
     scene_module: wgpu::ShaderModule,
@@ -88,6 +94,8 @@ pub(super) struct ScenePipes {
     pub(super) sky: wgpu::RenderPipeline,
     pub(super) alias: wgpu::RenderPipeline,
     pub(super) alias_alpha: wgpu::RenderPipeline,
+    /// Thermal goggles: alias models behind the scene depth, additive.
+    pub(super) alias_xray: wgpu::RenderPipeline,
     /// FTE blend modes × (triangles, lines).
     pub(super) poly: Vec<wgpu::RenderPipeline>,
     /// SSAO and motion-velocity pipelines (read the scene targets).
@@ -175,6 +183,11 @@ pub(super) struct Desc<'a> {
 }
 
 pub(super) fn pipeline(dev: &wgpu::Device, d: Desc) -> wgpu::RenderPipeline {
+    pipeline_with(dev, d, wgpu::CompareFunction::LessEqual, None)
+}
+
+/// [`pipeline`] with the depth test's comparison (when testing) and face culling.
+pub(super) fn pipeline_with(dev: &wgpu::Device, d: Desc, compare: wgpu::CompareFunction, cull: Option<wgpu::Face>) -> wgpu::RenderPipeline {
     dev.create_render_pipeline(&wgpu::RenderPipelineDescriptor {
         label: Some(d.fs),
         layout: Some(d.layout),
@@ -184,11 +197,11 @@ pub(super) fn pipeline(dev: &wgpu::Device, d: Desc) -> wgpu::RenderPipeline {
             compilation_options: Default::default(),
             buffers: d.buffers,
         },
-        primitive: wgpu::PrimitiveState { topology: d.topology, cull_mode: None, ..Default::default() },
+        primitive: wgpu::PrimitiveState { topology: d.topology, cull_mode: cull, ..Default::default() },
         depth_stencil: d.depth.map(|(write, test)| wgpu::DepthStencilState {
             format: DEPTH_FORMAT,
             depth_write_enabled: Some(write),
-            depth_compare: Some(if test { wgpu::CompareFunction::LessEqual } else { wgpu::CompareFunction::Always }),
+            depth_compare: Some(if test { compare } else { wgpu::CompareFunction::Always }),
             stencil: Default::default(),
             bias: Default::default(),
         }),
@@ -261,6 +274,22 @@ impl Pipes {
             sampler_entry(6),
         ]);
         let draw_bgl = bgl(&[uniform_entry(0, std::mem::size_of::<DrawU>() as u64)]);
+        let post_bgl = bgl(&[
+            tex_entry(0, D::D2),
+            tex_entry(1, D::D2),
+            sampler_entry(3),
+            tex_entry(4, D::D2),
+            wgpu::BindGroupLayoutEntry {
+                binding: 5,
+                visibility: wgpu::ShaderStages::FRAGMENT,
+                ty: wgpu::BindingType::Buffer {
+                    ty: wgpu::BufferBindingType::Storage { read_only: true },
+                    has_dynamic_offset: false,
+                    min_binding_size: None,
+                },
+                count: None,
+            },
+        ]);
         let layout = |groups: &[&wgpu::BindGroupLayout]| {
             let g: Vec<Option<&wgpu::BindGroupLayout>> = groups.iter().map(|g| Some(*g)).collect();
             dev.create_pipeline_layout(&wgpu::PipelineLayoutDescriptor {
@@ -272,6 +301,7 @@ impl Pipes {
         let scene_layout = layout(&[&frame_bgl, &mat_bgl, &draw_bgl]);
         let sky_layout = layout(&[&frame_bgl, &sky_bgl, &draw_bgl]);
         let screen_layout = layout(&[&draw_bgl, &mat_bgl]);
+        let post_layout = layout(&[&draw_bgl, &post_bgl]);
         let module = |src: &str| {
             dev.create_shader_module(wgpu::ShaderModuleDescriptor {
                 label: None,
@@ -298,7 +328,7 @@ impl Pipes {
             samples: 1,
         });
         let post = pipeline(dev, Desc {
-            layout: &screen_layout,
+            layout: &post_layout,
             module: &screen,
             vs: "vs_post",
             fs: "fs_post",
@@ -314,6 +344,7 @@ impl Pipes {
             mat_bgl,
             sky_bgl,
             draw_bgl,
+            post_bgl,
             scene_layout,
             sky_layout,
             scene_module,
@@ -380,6 +411,25 @@ impl ScenePipes {
         let water_alpha = scene_pipe("vs_world", "fs_water", &world_vb, alpha, false);
         let alias = scene_pipe("vs_alias", "fs_alias", &alias_vb, None, true);
         let alias_alpha = scene_pipe("vs_alias", "fs_alias", &alias_vb, alpha, false);
+        let add = wgpu::BlendComponent { src_factor: wgpu::BlendFactor::One, dst_factor: wgpu::BlendFactor::One, operation: wgpu::BlendOperation::Add };
+        let alias_xray = pipeline_with(
+            dev,
+            Desc {
+                layout: scene_layout,
+                module: scene,
+                vs: "vs_alias",
+                fs: "fs_alias",
+                buffers: &alias_vb,
+                topology: tri,
+                blend: Some(wgpu::BlendState { color: add, alpha: add }),
+                depth: Some((false, true)),
+                format: SCENE_FORMAT,
+                samples,
+            },
+            wgpu::CompareFunction::Greater,
+            // alias triangles wind clockwise here (Vulkan flips y): keep front faces
+            Some(wgpu::Face::Front),
+        );
         let sky = pipeline(dev, Desc {
             layout: sky_layout,
             module: sky_m,
@@ -421,6 +471,7 @@ impl ScenePipes {
             sky,
             alias,
             alias_alpha,
+            alias_xray,
             poly,
             fx,
         }

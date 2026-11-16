@@ -5,6 +5,7 @@
 use super::pipes::UNIFORM_STRIDE;
 use super::scene::{Lists, Pipe, Src};
 use super::ssao::AoView;
+use super::timing::{self, writes};
 use super::{NO_TEX, Renderer, Targets};
 use crate::{Error, Result};
 
@@ -57,8 +58,10 @@ impl Renderer {
             self.encode_velocity(&mut enc, t, l);
         }
         {
+            let ts = self.pass_times(timing::POST);
             let mut pass = enc.begin_render_pass(&wgpu::RenderPassDescriptor {
                 label: Some("output"),
+                timestamp_writes: writes(&ts),
                 color_attachments: &[Some(wgpu::RenderPassColorAttachment {
                     view: &out_view,
                     depth_slice: None,
@@ -103,7 +106,12 @@ impl Renderer {
         if let Some(ft) = &frame_tex {
             self.record_capture(&mut enc, &ft.texture);
         }
-        self.queue.submit([enc.finish()]);
+        self.resolve_gpu_times(&mut enc);
+        let idx = self.queue.submit([enc.finish()]);
+        if cfg!(not(target_arch = "wasm32")) {
+            self.in_flight.push_back(idx);
+        }
+        self.submit_gpu_times();
         self.start_capture_map();
         if let Some(ft) = frame_tex {
             self.queue.present(ft);
@@ -119,8 +127,14 @@ impl Renderer {
         let (Some(frame_group), Some(draw_group)) = (&b.frame_group, &b.draw_group) else { return };
         let first = matches!(part, Part::All | Part::Opaque);
         let keep_depth = t.vel.is_some() && l.views.iter().any(|v| !v.vel.is_empty());
+        let ts = self.pass_times(match part {
+            Part::All | Part::Opaque => timing::SCENE,
+            Part::Rest => timing::TRANSLUCENT,
+            Part::Soft => timing::SOFT,
+        });
         let mut pass = enc.begin_render_pass(&wgpu::RenderPassDescriptor {
             label: Some("scene"),
+            timestamp_writes: writes(&ts),
             // MSAA draws into ms_view and resolves into color_view at the end
             color_attachments: &[Some(wgpu::RenderPassColorAttachment {
                 view: t.ms_view.as_ref().unwrap_or(&t.color_view),
@@ -175,6 +189,7 @@ impl Renderer {
                     Pipe::Sky => &p.sky,
                     Pipe::Alias => &p.alias,
                     Pipe::AliasAlpha => &p.alias_alpha,
+                    Pipe::AliasXray => &p.alias_xray,
                     Pipe::Poly(i) => &p.poly[i],
                     Pipe::SoftPoly(i) => &p.fx.soft[i],
                 });

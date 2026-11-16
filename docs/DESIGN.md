@@ -399,7 +399,7 @@ Port of vkQuake/QSS's entity delta protocol, layered on 15/666/999. It is needed
   - `r_dither` (default 1) with `r_softemu 0`: Bayer banding suppression of ±0.5/255 in the world and alias shaders and the post pass.
   - `r_softemu` 1 fine / 2 coarse / 3 banded palettizes in the post pass. A 128³ palette-index LUT is built on the CPU (`convert::palette_lut`, multithreaded) and stored in the palette SSBO after the 256 colours, packed 4 per uint. It is rebuilt when the metric changes: `r_softemu_metric` <0 auto = OKLab, or naive RGB in banded mode on maps without `.lit` (`World::lit`).
   - Polyblend, contrast and gamma are applied to the looked-up palette colour, like ironwail's postprocessed palette.
-  - Per-mode values go in the Frame UBO (`soft`, `softf`), worked out in `frame::softemu_params`. World dither level 1 (coarse) snaps lightmap UVs to 1/16 texel, biases texture LOD by -0.5, and adds near (texture-space) / far (screen-space, fog only) noise. Level 2 (`r_softemu_lightmap_banding`) quantizes light to 64 levels with a -1 bias. Alias mode 1 dithers only in fog; mode 2 (`r_softemu_mdl_warp`) samples a `noperspective` texcoord at LOD 0 (software affine warp).
+  - Per-mode values go in the Frame UBO (`soft`, `softf`), worked out in `softemu::scene_params` (shared with the wgpu backend, with `post_dither`, `post_mode`, `forces_nearest` and `lut_metric`). World dither level 1 (coarse) snaps lightmap UVs to 1/16 texel, biases texture LOD by -0.5, and adds near (texture-space) / far (screen-space, fog only) noise. Level 2 (`r_softemu_lightmap_banding`) quantizes light to 64 levels with a -1 bias. Alias mode 1 dithers only in fog; mode 2 (`r_softemu_mdl_warp`) samples a `noperspective` texcoord at LOD 0 (software affine warp).
   - Coarse mode forces nearest + linear mips with at least 8× anisotropy. Fine mode dithers in post with noise per scene pixel.
   - Not ported: dithering for water, sky, sprites and particles.
 - Post effects (Enhancements menu; SSAO and per-object motion blur default off; add-on night-vision/thermal goggles are in docs/ADDONS.md):
@@ -684,10 +684,41 @@ each frame; the Vulkan backend's `take_capture` is never pending.
 See-through portals and teleporter windows are deliberately left out of this
 backend: every portal view would rebuild the CPU draw lists again, which is
 too slow in a browser (portals and teleporters still work, the surface is
-just opaque). Not implemented there:
-softemu/dither, goggles, colorblind, slang presets,
-GPU timings and r_visibility. Natively `Renderer::new` (windowed) returns an
-error with `--features wgpu`; use `-headless`.
+just opaque). Slang presets are not supported either.
+r_softemu/r_dither share their parameter logic with Vulkan
+(`crate::softemu`): `FrameU.soft`/`softf` carry the screen and texture
+dither, world dither level (coarse texel/lightmap snapping, banded 64-level
+light) and alias mode (dither or affine `@interpolate(linear)` texture
+coordinates), ported from world.frag/alias.frag, and softemu 2/3 force
+nearest world filtering. The post pass palettizes through the 128³ lookup
+table, which `wgpu_backend/post.rs` builds with a compute shader
+(`shaders/lut.wgsl`, a port of `convert::palette_lut`, rebuilt when the
+metric changes) into a storage buffer bound with the palette in the post
+group (`Pipes::post_bgl`); the browser has no threads for the CPU version.
+`fs_post` also ports post.frag's goggles (night vision, thermal colouring
+and glow taps) and the r_colorblind daltonize filter; its parameters are in
+the post `DrawU` (`post::post_draw`). In thermal mode the scene shaders
+write grey heat levels (world, liquids, sky, alias models by
+`RenderEntity::heat` in `DrawU.params.w`, sprites and classic particles by
+`DrawU.ix.y`; FTE particles keep their colours, like fte.frag), and warm
+bodies get a second draw (`Pipe::AliasXray`: additive, depth test Greater,
+front faces culled since triangles wind the other way than in Vulkan)
+before the viewmodel. GPU timings (`wgpu_backend/timing.rs`; QSP_GPUTIMES,
+`prof_start`) use the `TIMESTAMP_QUERY` feature when the adapter has it:
+every render pass writes a timestamp pair (WebGPU allows nothing finer), so
+the stages are per pass kind (scene, ao-generate, ao-apply, translucent,
+soft-particles, velocity, post+ui) for all split views together, and
+`gpu_view_times` is empty. They resolve into a ring of three read-back
+buffers mapped asynchronously and are summed a frame or more later.
+Natively at most two frames are in flight (`FRAMES_IN_FLIGHT`, waited on
+with `poll(Wait)` and reported as `fence_wait_ns`): headless has no
+presentation to throttle it, and an unbounded queue made headless timedemo
+fps measure submission rather than rendering and kept the timing buffers
+from ever mapping. r_visibility (`debug_visibility::command`, shared with
+Vulkan) hides and shows faces, textures and entities; `isolate` needs
+see-through portals and answers that it is unavailable. Natively
+`Renderer::new` (windowed) returns an error with `--features wgpu`; use
+`-headless`.
 
 ### Platform, entry point and page
 On wasm32 qplatform uses the browser backend (`crates/qplatform/src/web*`:

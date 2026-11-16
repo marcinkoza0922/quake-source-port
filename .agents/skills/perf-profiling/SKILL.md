@@ -66,7 +66,9 @@ DESIGN.md (Tooling).
 ### GPU timestamps
 
 `QSP_GPUTIMES=1` prints the average µs per stage on exit (cull, lightmap,
-targets, world, models, translucent, particles+vm, post, ui+present).
+targets, world, models, translucent, particles+vm, post, ui+present). The
+wgpu backend (`--features wgpu`) times whole render passes instead: scene,
+ao-generate, ao-apply, translucent, soft-particles, velocity, post+ui.
 
 ### CPU profile
 

@@ -15,6 +15,8 @@ pub(super) enum Pipe {
     Sky,
     Alias,
     AliasAlpha,
+    /// Thermal goggles: warm bodies behind the scene depth, additive.
+    AliasXray,
     Poly(usize),
     /// Soft FTE triangles (`FteBlend` index), drawn last with scene depth read-only.
     SoftPoly(usize),
@@ -209,6 +211,7 @@ impl Renderer {
         let st = &fr.settings;
         let alphas = liquid_alphas(st);
         let fog = fr.fog;
+        let soft = crate::softemu::scene_params(st);
         lists.frame_u.push(FrameU {
             viewproj: vs.vp,
             eye: [vs.eye[0], vs.eye[1], vs.eye[2], fr.time as f32],
@@ -219,7 +222,9 @@ impl Renderer {
             sky: [st.skyfog, if self.skybox.is_some() { 1.0 } else { 0.0 }, st.skyalpha, 0.0],
             alphas,
             vel: self.vel_frame_params(),
-            pad: [0.0; 16],
+            soft: [soft.0, soft.1, 0.0, 0.0],
+            softf: [soft.2, soft.3, st.goggles.mode.min(2), 0],
+            pad: [0.0; 8],
         });
         let fu = lists.frame_u.len() as u32 - 1;
         let mut b = Buckets::default();
@@ -273,7 +278,8 @@ impl Renderer {
 
     /// Classic particles (camera-facing dots) and FTE particle geometry.
     fn particle_cmds(&self, fr: &RenderFrame, vs: &ViewSetup, lists: &mut Lists, b: &mut Buckets) {
-        let poly_du = lists.draw(DrawU::default());
+        // thermal kind 2: classic particles
+        let poly_du = lists.draw(DrawU { ix: [0, 2, 0, 0], ..Default::default() });
         if !fr.particles.is_empty() {
             let base = lists.poly_v.len() as u32;
             let first = lists.poly_i.len() as u32;

@@ -100,8 +100,10 @@ impl Renderer {
         let (Some(ao), Some(draw_group)) = (&t.ao, &self.bufs.draw_group) else { return };
         let p = &self.pipes.scene;
         {
+            let ts = self.pass_times(super::timing::AO_GENERATE);
             let mut pass = enc.begin_render_pass(&wgpu::RenderPassDescriptor {
                 label: Some("ssao"),
+                timestamp_writes: super::timing::writes(&ts),
                 color_attachments: &[Some(wgpu::RenderPassColorAttachment {
                     view: &ao.view,
                     depth_slice: None,
@@ -126,8 +128,10 @@ impl Renderer {
                 pass.draw(0..3, 0..1);
             }
         }
+        let ts = self.pass_times(super::timing::AO_APPLY);
         let mut pass = enc.begin_render_pass(&wgpu::RenderPassDescriptor {
             label: Some("ssao apply"),
+            timestamp_writes: super::timing::writes(&ts),
             color_attachments: &[Some(wgpu::RenderPassColorAttachment {
                 view: t.ms_view.as_ref().unwrap_or(&t.color_view),
                 depth_slice: None,

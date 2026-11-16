@@ -20,7 +20,7 @@ impl Renderer {
     ) {
         let styles: Vec<i32> = (0..256).map(|i| fr.lightstyles.get(i).copied().unwrap_or(256)).collect();
         for e in fr.entities {
-            if (e.views != 0 && e.views & vbit == 0) || e.portal_only {
+            if (e.views != 0 && e.views & vbit == 0) || e.portal_only || self.hidden_entities.contains(&e.key) {
                 continue;
             }
             let dist = dot(sub(e.origin, vs.eye), vs.fwd);
@@ -214,6 +214,7 @@ fn alias_cmds(
     }
     let alpha = e.alpha.clamp(0.0, 1.0);
     let [top, bot] = e.colormap.unwrap_or([1, 6]);
+    let xray = fr.settings.goggles.mode == 2 && !e.viewmodel && e.heat == crate::HEAT_BODY;
     // ragdoll poses have their own transform; not blurred
     let vel_du = prev.filter(|_| dynp.is_none()).map(|p| lists.draw(DrawU { pad: vel_pad(&p), ..Default::default() }));
     for s in &am.surfaces {
@@ -226,17 +227,19 @@ fn alias_cmds(
             let (imgs, iv) = &s.skins[e.skin as usize % s.skins.len()];
             imgs[group_index(iv, imgs.len(), t)]
         };
-        let du = lists.draw(DrawU {
+        let draw = DrawU {
             color: [1.0, 1.0, 1.0, alpha],
             params: [
                 f32::from(s.holey),
                 f32::from(skin[1] != NO_TEX),
                 f32::from(e.colormap.is_some() && skin[2] != NO_TEX),
-                0.0,
+                // thermal goggles heat
+                f32::from(e.heat.min(crate::HEAT_FIRE)),
             ],
             ix: [u32::from(top.min(13)), u32::from(bot.min(13)), 0, 0],
             ..Default::default()
-        });
+        };
+        let du = lists.draw(draw);
         let translucent = alpha < 1.0;
         let cmd = Cmd {
             pipe: if translucent { Pipe::AliasAlpha } else { Pipe::Alias },
@@ -248,6 +251,12 @@ fn alias_cmds(
             du,
             viewmodel: e.viewmodel,
         };
+        if xray {
+            // thermal goggles: warm bodies seen through walls, after the
+            // other models and before the viewmodel
+            let du = lists.draw(DrawU { params: [draw.params[0], draw.params[1], draw.params[2], 4.0], ..draw });
+            b.trans.push((-0.25, Cmd { pipe: Pipe::AliasXray, du, ..cmd }));
+        }
         if translucent && !e.viewmodel {
             b.trans.push((dist, cmd));
         } else if e.viewmodel {
@@ -308,7 +317,8 @@ fn sprite_cmds(fr: &RenderFrame, e: &RenderEntity, sm: &SpriteModel, vs: &ViewSe
         lists.poly_v.push(FteVertex { pos, uv, color: [255, 255, 255, alpha] });
     }
     lists.poly_i.extend_from_slice(&[0, 1, 2, 0, 2, 3]);
-    let du = lists.draw(DrawU { params: [0.0; 4], ..Default::default() });
+    // thermal goggles: sprites are hot (explosions, flames)
+    let du = lists.draw(DrawU { params: [0.0; 4], ix: [0, 1, 0, 0], ..Default::default() });
     b.trans.push((
         dist,
         Cmd {

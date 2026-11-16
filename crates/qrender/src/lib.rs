@@ -12,6 +12,7 @@ mod convert;
 mod projection;
 pub use projection::{ViewFrustum, view_fov_tangents};
 mod shared;
+mod softemu;
 pub use shared::{GpuViewTiming, ShaderParam};
 pub mod types;
 pub(crate) mod water;
@@ -26,7 +27,6 @@ pub use types::*;
 use convert::Palette;
 use qformats::bsp::{Bsp, TextureKind};
 
-#[cfg(qvk)]
 mod debug_visibility;
 #[cfg(qvk)]
 mod frame;

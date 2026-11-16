@@ -9,8 +9,10 @@ struct DrawU {
 @group(0) @binding(0) var<uniform> du: DrawU;
 @group(1) @binding(0) var t0: texture_2d<f32>;
 @group(1) @binding(1) var t1: texture_2d<f32>;
-@group(1) @binding(2) var t2: texture_2d<f32>;
 @group(1) @binding(3) var s0: sampler;
+// post pass only: the palette and the r_softemu lookup table (post.rs)
+@group(1) @binding(4) var palette: texture_2d<f32>;
+@group(1) @binding(5) var<storage, read> lut: array<u32>;
 
 struct UiIn {
     @location(0) pos: vec2<f32>,
@@ -71,6 +73,19 @@ fn bayer01(c0: vec2<i32>) -> f32 {
     v = reverseBits(v) >> 24u;
     return f32(v) * (1.0 / 256.0);
 }
+// Uniform [0, 1] to triangular [-1, 1].
+fn tri(x0: f32) -> f32 {
+    let orig = x0 * 2.0 - 1.0;
+    let signbit = bitcast<u32>(orig) & 0x80000000u;
+    let x = sqrt(abs(orig)) - 1.0;
+    return bitcast<f32>(bitcast<u32>(x) ^ signbit);
+}
+// Hash without Sine (c) 2014 David Hoskins, MIT licence.
+fn whitenoise01(p: vec2<f32>) -> f32 {
+    var p3 = fract(vec3<f32>(p.x, p.y, p.x) * 0.1031);
+    p3 += dot(p3, p3.yzx + 33.33);
+    return fract((p3.x + p3.y) * p3.z);
+}
 fn scene_at(uv: vec2<f32>) -> vec3<f32> {
     return textureSampleLevel(t0, s0, uv, 0.0).rgb;
 }
@@ -128,10 +143,84 @@ fn speed_blur(c: vec3<f32>, uv: vec2<f32>, q: vec2<f32>, amount0: f32) -> vec3<f
     }
     return acc / 9.0;
 }
+// Nearest palette colour of c (GLPalette_Postprocess).
+fn palettize(c: vec3<f32>) -> vec3<f32> {
+    let q = vec3<u32>(clamp(c, vec3<f32>(0.0), vec3<f32>(1.0)) * 127.0 + 0.5);
+    let i = q.x + q.y * 128u + q.z * 16384u;
+    let idx = (lut[i >> 2u] >> ((i & 3u) * 8u)) & 255u;
+    return textureLoad(palette, vec2<i32>(i32(idx), 0), 0).rgb;
+}
+// Daltonize: simulate the deficiency (Viénot/Brettel-style RGB matrices),
+// then move the lost difference into channels the viewer can still tell apart.
+fn daltonize(c: vec3<f32>, m: u32) -> vec3<f32> {
+    var sim = mat3x3<f32>(0.95, 0.0, 0.0, 0.05, 0.43333, 0.475, 0.0, 0.56667, 0.525);
+    if (m == 1u) {
+        sim = mat3x3<f32>(0.56667, 0.55833, 0.0, 0.43333, 0.44167, 0.24167, 0.0, 0.0, 0.75833);
+    } else if (m == 2u) {
+        sim = mat3x3<f32>(0.625, 0.70, 0.0, 0.375, 0.30, 0.30, 0.0, 0.0, 0.70);
+    }
+    let err = c - sim * c;
+    let shift = vec3<f32>(0.0, 0.7 * err.r + err.g, 0.7 * err.r + err.b);
+    return clamp(c + shift, vec3<f32>(0.0), vec3<f32>(1.0));
+}
+fn g_luma(c: vec3<f32>) -> f32 { return dot(c, vec3<f32>(0.299, 0.587, 0.114)); }
+// Thermal palette: cold blue-grey, through purple and red, to white hot.
+fn heat_colour(h: f32) -> vec3<f32> {
+    let k = array<vec3<f32>, 6>(vec3<f32>(0.02, 0.03, 0.10), vec3<f32>(0.22, 0.28, 0.40), vec3<f32>(0.50, 0.10, 0.58),
+                                vec3<f32>(0.95, 0.18, 0.08), vec3<f32>(1.0, 0.62, 0.05), vec3<f32>(1.0, 1.0, 0.82));
+    let x = clamp(h, 0.0, 1.0) * 5.0;
+    let i = min(i32(x), 4);
+    return mix(k[i], k[i + 1], x - f32(i));
+}
+const G_RING8 = array<vec2<f32>, 8>(
+    vec2<f32>(7.0, 0.0),
+    vec2<f32>(4.9497475, 4.9497475),
+    vec2<f32>(0.0, 7.0),
+    vec2<f32>(-4.9497475, 4.9497475),
+    vec2<f32>(-7.0, 0.0),
+    vec2<f32>(-4.9497475, -4.9497475),
+    vec2<f32>(0.0, -7.0),
+    vec2<f32>(4.9497475, -4.9497475),
+);
+// post.frag goggles. du.ix.z: 1 night vision, 2 thermal (the scene holds
+// grey heat levels); du.ix.w glow quality; du.model[2]: gain, noise, time.
+fn goggles(c: vec3<f32>, uv: vec2<f32>, q: vec2<f32>, frag: vec2<f32>) -> vec3<f32> {
+    let gain = du.model[2].x;
+    let noise = du.model[2].y;
+    let time = du.model[2].z;
+    let fc = floor(frag);
+    let grain = (whitenoise01(fc + fract(time * 7.31) * 517.0) - 0.5) * noise;
+    let l = g_luma(c);
+    // glow around bright spots: low skips the ring taps, medium takes the 4 diagonals
+    var glow = 0.0;
+    if (du.ix.w > 0u) {
+        let px = 1.0 / vec2<f32>(textureDimensions(t0));
+        let n = select(8, 4, du.ix.w == 1u);
+        for (var i = 0; i < n; i++) {
+            let k = select(i, i * 2 + 1, du.ix.w == 1u);
+            glow += max(g_luma(scene_at(uv + G_RING8[k] * px)) - 0.5, 0.0);
+        }
+        glow /= f32(n);
+    }
+    let v = (q - 0.5) * vec2<f32>(1.0, 0.8);
+    let vignette = smoothstep(0.62, 0.32, length(v));
+    if (du.ix.z == 1u) {
+        // night vision: amplify (gamma-lift) dark areas, green phosphor
+        var a = 1.0 - exp(-l * 7.0 * gain);
+        a += glow * 1.6 + grain * 0.14;
+        a *= 1.0 - 0.18 * noise * f32(i32(fc.y) % 3 == 0);
+        a *= 0.92 + 0.08 * sin(time * 9.0); // faint flicker
+        return max(a, 0.0) * vec3<f32>(0.32, 1.0, 0.38) * vignette + vec3<f32>(0.0, 0.015, 0.0);
+    }
+    let h = 0.1 + (l - 0.1) * gain + glow * 0.8 + grain * 0.06;
+    return heat_colour(h) * mix(0.55, 1.0, vignette);
+}
 // du.extra: uv rectangle (u0, v0, u1, v1) of the view in the scene texture
 // du.color: polyblend; du.params: x gamma, y contrast, z warp clock (< 0 off), w aspect
 // du.model[0]: motion blur scale x, y (0 = off), speed blur, motion blur quality
-// du.model[1].xy: output size
+// du.model[1]: output size, dither strength, scene pixels per output pixel
+// du.ix: softemu mode (0 truecolour, 1 palettize + dither, 2 palettize),
+// colour-blind filter, goggles mode, goggles quality
 @fragment fn fs_post(i: PostOut) -> @location(0) vec4<f32> {
     var q = i.q;
     if (du.params.z >= 0.0) {
@@ -145,7 +234,28 @@ fn speed_blur(c: vec3<f32>, uv: vec2<f32>, q: vec2<f32>, amount0: f32) -> vec3<f
     if (du.model[0].z > 0.0) {
         c = speed_blur(c, uv, i.q, du.model[0].z);
     }
+    let mode = du.ix.x;
+    if (mode != 0u) {
+        if (mode == 1u) {
+            // noise follows scene pixels
+            let nuv = floor(i.clip.xy * du.model[1].w) + 0.5;
+            c = sqrt(c);
+            c += tri(bayer01(vec2<i32>(nuv))) * du.model[1].z;
+            c *= c;
+        }
+        c = palettize(c);
+    }
+    if (du.ix.z != 0u) {
+        c = goggles(c, uv, i.q, i.clip.xy);
+    }
     c = mix(c, du.color.rgb, du.color.a);
+    if (du.ix.y != 0u) {
+        c = daltonize(c, du.ix.y);
+    }
     c = pow(max(c * du.params.y, vec3<f32>(0.0)), vec3<f32>(du.params.x));
+    if (mode == 0u) {
+        // banding suppression
+        c += (bayer01(vec2<i32>(i.clip.xy)) - 0.5) * du.model[1].z;
+    }
     return vec4<f32>(c, 1.0);
 }
