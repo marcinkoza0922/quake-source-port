@@ -40,6 +40,8 @@ fn steam_installs(steam: &Path, candidates: &mut Vec<PathBuf>) {
         }
     }
     for library in libraries {
+        // the 2021 re-release lives in rerelease/; the original data sits above it
+        candidates.push(library.join("steamapps/common/Quake/rerelease"));
         candidates.push(library.join("steamapps/common/Quake"));
     }
 }

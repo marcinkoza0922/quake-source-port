@@ -326,7 +326,7 @@ impl Host {
             let ingame = view.is_some() && self.cl.intermission == 0;
             // Split screen draws center prints in each player's cell.
             let center = ingame && !self.menu.active() && splits.is_empty();
-            if !(self.clean_shot && self.screenshot.is_some()) {
+            if !(self.clean_shot && self.screenshot.is_some()) && self.thumb.is_none() {
                 self.con.draw(&mut c, conback, ingame && !self.menu.active(), center);
             }
             if self.server.core.sv.paused && view.is_some() {

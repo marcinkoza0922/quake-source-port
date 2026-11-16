@@ -152,7 +152,7 @@ impl Inventory {
 mod tests {
     use super::*;
     fn preview(items: u32, fields: &[(&str, &str)]) -> SaveInfo {
-        SaveInfo { level: "Test".into(), timestamp: "Test".into(), health: 100, armor: 0,
+        SaveInfo { level: "Test".into(), map: "e1m1".into(), skill: 1, time: 0.0, modified: None, health: 100, armor: 0,
             items, kills: (0, 10), secrets: (0, 1), reason: None, addons: None,
             player: fields.iter().map(|(k,v)| (k.to_string(),v.to_string())).chain([(String::from("items"), items.to_string())]).collect() }
     }

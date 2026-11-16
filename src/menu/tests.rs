@@ -206,35 +206,107 @@ mod save_menu_tests {
         assert!(tooltip(WASHER[1]).is_some());
     }
 
+    fn slot(name: &str) -> SaveSlot {
+        let text = format!("5\nc\n{}2\ne1m3\n75\n{}{{\n}}\n{{\n}}\n{{\n\"health\" \"50\"\n}}\n", "0\n".repeat(16), "m\n".repeat(64));
+        SaveSlot { name: name.into(), info: crate::saveinfo::SaveInfo::parse(&text, None).unwrap(), thumb: None }
+    }
+
+    fn commands(actions: &[Action]) -> Vec<String> {
+        actions.iter().filter_map(|a| if let Action::Command(c) = a { Some(c.clone()) } else { None }).collect()
+    }
+
     #[test]
-    fn autosave_submenu_navigation_and_slot_mapping() {
+    fn autosave_submenu_navigation_and_rows() {
         let mut m = Menu::new();
         let mut cv = Cvars::new();
         m.open(Screen::Load);
-        assert_eq!(m.save_slot_name(0).as_deref(), Some("autosave0"));
-        assert_eq!(m.save_slot_name(2).as_deref(), Some("s0"));
+        // empty: pinned placeholder + Browse Autosaves
+        assert_eq!(m.save_rows(), 2);
+        assert!(m.save_at(0).is_none());
         m.key(K_DOWNARROW, &mut cv, true);
         assert_eq!(m.load_cursor, 1);
         let actions = m.key(K_ENTER, &mut cv, true);
         assert!(m.autosaves);
-        assert!(actions.iter().any(|a| matches!(a, Action::Command(s) if s == "_scansaves\n")));
+        assert!(commands(&actions).iter().any(|s| s == "_scansaves\n"));
         // An empty archive still handles every direction without underflow.
         for key in [K_UPARROW, K_DOWNARROW, K_LEFTARROW, K_RIGHTARROW] {
             m.key(key, &mut cv, true);
             assert_eq!(m.load_cursor, 0);
         }
+        // the Autosaves list pins nothing
+        assert_eq!(m.card_sticky(), 0);
         m.key(K_ESCAPE, &mut cv, true);
         assert!(!m.autosaves);
         assert_eq!(m.screen, Screen::Load);
         assert_eq!(m.load_cursor, 1);
-        m.open(Screen::Save);
-        assert_eq!(m.save_slot_name(0).as_deref(), Some("s0"));
-        assert_eq!(m.save_rows(), MAX_SAVEGAMES);
+        // quick and manual saves load by name; the pinned card is the newest
+        m.latest = Some(slot("autosave0"));
+        m.saves = vec![slot("quick"), slot("s0")];
+        assert_eq!(m.save_rows(), 4);
+        assert_eq!(m.save_at(2).unwrap().name, "quick");
+        m.load_cursor = 0;
+        let actions = m.key(K_ENTER, &mut cv, true);
+        assert_eq!(commands(&actions), ["load \"autosave0\"\n"]);
     }
+
+    #[test]
+    fn save_screen_new_save_overwrite_and_delete_prompts() {
+        let mut m = Menu::new();
+        let mut cv = Cvars::new();
+        m.open(Screen::Save);
+        m.saves = vec![slot("s1"), slot("quick"), slot("s0")];
+        assert_eq!(m.new_save_name(), "s2");
+        // New save writes at once
+        let actions = m.key(K_ENTER, &mut cv, true);
+        assert_eq!(commands(&actions), ["save s2\n"]);
+        // an existing save asks first; cancelling keeps the menu
+        m.open(Screen::Save);
+        m.saves = vec![slot("s1")];
+        m.load_cursor = 1;
+        assert!(commands(&m.key(K_ENTER, &mut cv, true)).is_empty());
+        assert!(m.prompt.is_some());
+        m.key(K_ESCAPE, &mut cv, true);
+        assert!(m.prompt.is_none());
+        assert_eq!(m.screen, Screen::Save);
+        m.key(K_ENTER, &mut cv, true);
+        let actions = m.key(0x79, &mut cv, true);
+        assert_eq!(commands(&actions), ["save \"s1\"\n"]);
+        assert_eq!(m.screen, Screen::None);
+        // delete asks, then keeps the menu open
+        m.open(Screen::Save);
+        m.saves = vec![slot("s1")];
+        m.load_cursor = 1;
+        m.key(K_DEL, &mut cv, true);
+        m.key(K_LEFTARROW, &mut cv, true);
+        let actions = m.key(K_ENTER, &mut cv, true);
+        assert_eq!(commands(&actions), ["_deletesave \"s1\"\n"]);
+        assert_eq!(m.screen, Screen::Save);
+    }
+
+    #[test]
+    fn new_game_and_level_select_ask_while_playing() {
+        let mut m = Menu::new();
+        let mut cv = Cvars::new();
+        m.open(Screen::SinglePlayer);
+        // no game running: straight in
+        assert!(commands(&m.key(K_ENTER, &mut cv, false)).iter().any(|c| c.contains("map start")));
+        m.open(Screen::SinglePlayer);
+        assert!(commands(&m.key(K_ENTER, &mut cv, true)).is_empty());
+        assert!(matches!(m.prompt, Some(Prompt::Confirm { .. })));
+        assert!(commands(&m.key(0x79, &mut cv, true)).iter().any(|c| c.contains("map start")));
+        // skill picker
+        m.open(Screen::ModMaps);
+        m.ask_skill("game \"id1\" \"e4m1\"\n".into(), &cv);
+        let actions = m.key(b'4' as i32, &mut cv, true);
+        assert_eq!(commands(&actions), ["skill 3\ngame \"id1\" \"e4m1\"\n"]);
+        assert_eq!(m.screen, Screen::None);
+    }
+
     #[test]
     fn card_mouse_coordinates_follow_scrolling() {
         let mut m = Menu::new();
         m.open(Screen::Load);
+        m.saves = (0..12).map(|i| slot(&format!("s{i}"))).collect();
         let top = CARD_SCROLL_Y0;
         // the newest save is pinned above the scrolling list
         assert_eq!(m.item_at((100.0, CARD_Y0 + 4.0)), Some(0));

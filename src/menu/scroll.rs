@@ -107,11 +107,11 @@ impl Menu {
     }
 }
 
-/// Save/load card list: on Load the newest save is pinned at the top and the
+/// Save/load card list: on Load (not Autosaves) the newest save is pinned at the top and the
 /// rest scroll in pixels below a divider.
 impl Menu {
-    fn card_sticky(&self) -> usize {
-        usize::from(self.screen == Screen::Load)
+    pub(super) fn card_sticky(&self) -> usize {
+        usize::from(self.screen == Screen::Load && !self.autosaves)
     }
 
     pub(super) fn card_top(&self) -> f32 {

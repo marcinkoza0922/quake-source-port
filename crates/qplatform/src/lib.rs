@@ -408,6 +408,21 @@ pub fn ticks_ns() -> u64 {
     unsafe { sys::SDL_GetTicksNS() }
 }
 
+/// Local calendar time of a Unix timestamp: (year, month, day, hour, minute).
+pub fn local_time(unix_secs: i64) -> Option<(i32, i32, i32, i32, i32)> {
+    let mut dt = sys::SDL_DateTime::default();
+    // SAFETY: dt is a valid out pointer; SDL needs no init for time conversion.
+    let ok = unsafe { sys::SDL_TimeToDateTime(unix_secs.saturating_mul(1_000_000_000), &mut dt, true) };
+    ok.then_some((dt.year, dt.month, dt.day, dt.hour, dt.minute))
+}
+
+/// A modal error box (works before SDL video init); false if it couldn't show.
+pub fn error_box(title: &str, message: &str) -> bool {
+    let (Ok(t), Ok(m)) = (CString::new(title), CString::new(message)) else { return false };
+    // SAFETY: valid C strings; a null window is allowed.
+    unsafe { sys::SDL_ShowSimpleMessageBox(sys::SDL_MESSAGEBOX_ERROR, t.as_ptr(), m.as_ptr(), ptr::null_mut()) }
+}
+
 /// High-resolution counter and its frequency (ticks/second).
 pub fn performance_counter() -> (u64, u64) {
     // SAFETY: no preconditions.

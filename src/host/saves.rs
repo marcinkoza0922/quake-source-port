@@ -1,11 +1,27 @@
 use super::*;
 
 impl Host {
-    pub(super) fn write_screenshot(&mut self, name: &str) {
+    /// Writes the pending screenshot and/or save thumbnail from the captured frame.
+    pub(super) fn write_captures(&mut self) {
+        let (shot, thumb) = (self.screenshot.take(), self.thumb.take());
+        if shot.is_none() && thumb.is_none() { return; }
         let (w, h) = self.r.size();
-        match self.r.read_pixels() {
-            Ok(px) => {
-                let png = crate::png::encode_rgba(w, h, &px);
+        let px = match self.r.read_pixels() {
+            Ok(px) => px,
+            Err(e) => return self.con.print(&format!("screenshot failed: {e:?}\n")),
+        };
+        if let Some(name) = shot {
+            self.write_screenshot(&name, w, h, &px);
+        }
+        if let Some(path) = thumb {
+            self.write_thumb(&path, w, h, &px);
+        }
+    }
+
+    fn write_screenshot(&mut self, name: &str, w: u32, h: u32, px: &[u8]) {
+        {
+            {
+                let png = crate::png::encode_rgba(w, h, px);
                 let path = if name.is_empty() {
                     let dir = self.user_dir();
                     (0..10000).map(|i| dir.join(format!("spasm{i:04}.png"))).find(|p| !p.exists()).unwrap_or(dir.join("spasm.png"))
@@ -21,7 +37,6 @@ impl Host {
                     Err(e) => self.con.print(&format!("screenshot: {e}\n")),
                 }
             }
-            Err(e) => self.con.print(&format!("screenshot failed: {e:?}\n")),
         }
     }
 
@@ -88,24 +103,120 @@ impl Host {
             // The v5 description is ignored by the loader; preserve the trigger in the save itself.
             let text = qserver::addons::save::set_comment(&text, &format!("AUTOSAVE_{}", reason.replace(' ', "_")));
             match crate::autosave::rotate(&self.user_dir(), keep, &text, crate::autosave::ext(self.server.core.addons_on)) {
-                Ok(()) => self.print("Autosaved.\n"),
+                Ok(()) => {
+                    self.print("Autosaved.\n");
+                    self.thumb = Some(self.user_dir().join(format!("autosave0.{}", crate::autosave::THUMB_EXT)));
+                }
                 Err(e) => self.print(&format!("ERROR: autosave failed: {e}\n")),
             }
         }
     }
 
+    /// Fills the Load/Save list from the user dir, newest first.
     pub(super) fn scan_saves(&mut self) {
-        self.menu.saves.fill(None);
         self.menu.save_inventory = crate::save_inventory::Inventory::new(self.fs(), crate::sbar::Pack::from_game_dirs(self.fs_snapshot.1.iter().map(String::as_str)));
-        let count = if self.menu.autosaves { crate::autosave::MAX } else { crate::menu::MAX_SAVEGAMES + 2 };
-        for i in 0..count {
-            let Some(name) = self.menu.save_slot_name(i) else { continue };
-            let Some(p) = self.find_save(&name) else { continue };
-            self.menu.saves[i] = std::fs::read(&p).ok().and_then(|bytes| {
-                crate::saveinfo::SaveInfo::parse(&qcore::text::decode(&bytes), std::fs::metadata(&p).ok().and_then(|m| m.modified().ok()))
-            });
+        let dir = self.user_dir();
+        let mut all: Vec<crate::menu::SaveSlot> = std::fs::read_dir(&dir).into_iter().flatten().flatten().filter_map(|entry| {
+            let path = entry.path();
+            if !matches!(path.extension()?.to_str()?, crate::autosave::SAVE_EXT | crate::autosave::ADDON_EXT) { return None; }
+            let name = path.file_stem()?.to_str()?.to_owned();
+            if !valid_save_name(&name) { return None; }
+            let modified = entry.metadata().ok()?.modified().ok();
+            let info = crate::saveinfo::SaveInfo::parse(&qcore::text::decode(&std::fs::read(&path).ok()?), modified)?;
+            Some(crate::menu::SaveSlot { name, info, thumb: None })
+        }).collect();
+        all.sort_by(|a, b| b.info.modified.cmp(&a.info.modified).then_with(|| a.name.cmp(&b.name)));
+        // a name in both formats is one save: the newer file wins
+        let mut seen = std::collections::HashSet::new();
+        all.retain(|s| seen.insert(s.name.to_ascii_lowercase()));
+        for s in &mut all {
+            s.thumb = self.save_thumb(&dir, &s.name);
+        }
+        let latest = all.first().cloned();
+        let autos = self.menu.autosaves && self.menu.screen == Screen::Load;
+        all.retain(|s| s.is_autosave() == autos);
+        if self.menu.screen == Screen::Load && !autos
+            && let Some(l) = &latest
+        {
+            all.retain(|s| s.name != l.name);
+        }
+        self.menu.saves = all;
+        self.menu.latest = latest;
+        self.menu.clamp_save_cursor();
+    }
+
+    /// Thumbnail picture of save `name` (`<name>.thumb`), uploaded once per file version.
+    fn save_thumb(&mut self, dir: &std::path::Path, name: &str) -> Option<(qrender::PicId, u32, u32)> {
+        let path = dir.join(format!("{name}.{}", crate::autosave::THUMB_EXT));
+        let modified = std::fs::metadata(&path).ok()?.modified().ok()?;
+        let key = name.to_ascii_lowercase();
+        if let Some((id, t)) = self.save_thumbs.get(&key) && *t == modified {
+            return Some((*id, THUMB_W, THUMB_H));
+        }
+        let data = std::fs::read(&path).ok()?;
+        let rgba = read_thumb(&data)?;
+        let id = match self.save_thumbs.get(&key) {
+            Some(&(id, _)) => { self.r.update_pic(id, rgba).ok()?; id }
+            None => self.r.register_pic_rgba_linear(THUMB_W, THUMB_H, rgba).ok()?,
+        };
+        self.save_thumbs.insert(key, (id, modified));
+        Some((id, THUMB_W, THUMB_H))
+    }
+
+    /// Writes the thumbnail of a save from a captured frame.
+    pub(super) fn write_thumb(&mut self, path: &std::path::Path, w: u32, h: u32, px: &[u8]) {
+        let data = encode_thumb(w, h, px);
+        if let Err(e) = std::fs::write(path, data) {
+            self.con.print(&format!("couldn't write {}: {e}\n", path.display()));
         }
     }
+}
+
+/// Save thumbnails: 160x90 RGBA after an 8-byte header ("QTHB", w, h as u16 LE).
+const THUMB_W: u32 = 160;
+const THUMB_H: u32 = 90;
+
+/// Box-filters a frame down to the thumbnail size (cropped to 16:9).
+fn encode_thumb(w: u32, h: u32, px: &[u8]) -> Vec<u8> {
+    let mut out = Vec::with_capacity(8 + (THUMB_W * THUMB_H * 4) as usize);
+    out.extend_from_slice(b"QTHB");
+    out.extend_from_slice(&(THUMB_W as u16).to_le_bytes());
+    out.extend_from_slice(&(THUMB_H as u16).to_le_bytes());
+    // crop the source to 16:9 around its centre
+    let (cw, ch) = if w * 9 > h * 16 { (h * 16 / 9, h) } else { (w, w * 9 / 16) };
+    let (x0, y0) = ((w - cw) / 2, (h - ch) / 2);
+    for ty in 0..THUMB_H {
+        let (sy0, sy1) = (y0 + ty * ch / THUMB_H, (y0 + (ty + 1) * ch / THUMB_H).max(y0 + ty * ch / THUMB_H + 1));
+        for tx in 0..THUMB_W {
+            let (sx0, sx1) = (x0 + tx * cw / THUMB_W, (x0 + (tx + 1) * cw / THUMB_W).max(x0 + tx * cw / THUMB_W + 1));
+            let mut sum = [0u32; 3];
+            let mut n = 0;
+            for sy in sy0..sy1.min(h) {
+                for sx in sx0..sx1.min(w) {
+                    let i = ((sy * w + sx) * 4) as usize;
+                    if let Some(p) = px.get(i..i + 3) {
+                        for k in 0..3 { sum[k] += u32::from(p[k]); }
+                        n += 1;
+                    }
+                }
+            }
+            let n = n.max(1);
+            out.extend_from_slice(&[(sum[0] / n) as u8, (sum[1] / n) as u8, (sum[2] / n) as u8, 255]);
+        }
+    }
+    out
+}
+
+fn read_thumb(data: &[u8]) -> Option<&[u8]> {
+    let size = (THUMB_W * THUMB_H * 4) as usize;
+    (data.get(..4)? == b"QTHB" && data.get(4..8)? == [THUMB_W as u8, 0, THUMB_H as u8, 0]).then_some(())?;
+    data.get(8..8 + size)
+}
+
+/// Save names the menu offers: no path parts or characters that break a command.
+fn valid_save_name(name: &str) -> bool {
+    !name.is_empty() && !name.chars().any(|c| c.is_control() || matches!(c, '"' | ';' | '\\' | '/' | ':'))
+        && name != "." && name != ".."
 }
 
 /// A save name without a `.sav`/`.qsa` extension.
@@ -132,6 +243,14 @@ pub(super) fn register(c: &mut Commands<Host>) {
         }
     });
     c.add("_scansaves", |h, _| h.scan_saves());
+    c.add("_deletesave", |h, a| {
+        let name = a.argv(1);
+        if !valid_save_name(name) { return; }
+        let dir = h.user_dir();
+        let _ = crate::autosave::remove_other_exts(&dir, name, None);
+        let _ = std::fs::remove_file(dir.join(format!("{name}.{}", crate::autosave::THUMB_EXT)));
+        h.scan_saves();
+    });
     c.add("save", |h, a| {
         if a.argc() != 2 {
             h.print("save <savename> : save a game\n");
@@ -152,7 +271,8 @@ pub(super) fn register(c: &mut Commands<Host>) {
                 if let (Some(d), Some(stem)) = (p.parent(), p.file_stem().and_then(|s| s.to_str())) {
                     let _ = crate::autosave::remove_other_exts(d, stem, p.extension().and_then(|e| e.to_str()));
                 }
-                h.print(&format!("Saved {}\n", p.display()));
+                h.print("Game saved.\n");
+                h.thumb = Some(p.with_extension(crate::autosave::THUMB_EXT));
             }
             Err(e) => h.print(&format!("ERROR: couldn't write {}: {e}\n", p.display())),
         }
@@ -171,7 +291,7 @@ pub(super) fn register(c: &mut Commands<Host>) {
             return;
         };
         let text = qcore::text::decode(&bytes);
-        h.print(&format!("Loading game from {}...\n", p.display()));
+        h.print(&format!("Loading {}...\n", save_stem(a.argv(1))));
         if let Some(i) = h.local.take() {
             h.server.drop_client(i, false);
         }
