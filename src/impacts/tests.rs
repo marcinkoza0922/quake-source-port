@@ -193,17 +193,17 @@ fn resting_nail_rides_lift_in_both_directions_and_falls_when_removed() {
 #[test]
 fn impact_quality_tiers_and_frustum_culling() {
     let mut cv = qcore::cvar::Cvars::default();
-    cv.register("r_impact_quality", "0", 0);
+    cv.register("r_particle_quality", "0", 0);
     cv.register("r_impact_lifetime", "600", 0);
     cv.register("r_impact_limit", "2048", 0);
     cv.register("r_impact_fx", "4", 0);
     let low = tier(&cv);
-    cv.set("r_impact_quality", "1");
+    cv.set("r_particle_quality", "1");
     let med = tier(&cv);
-    cv.set("r_impact_quality", "2");
+    cv.set("r_particle_quality", "2");
     let high = tier(&cv);
-    assert_eq!((low.limit, low.lifetime as u32, low.fx_level, low.max_parts), (256, 30, 2, 1024));
-    assert_eq!((med.limit, med.lifetime as u32, med.fx_level, med.max_parts), (512, 120, 3, 2500));
+    assert_eq!((low.limit, low.lifetime as u32, low.fx_level, low.max_parts), (2048, 600, 2, 1024));
+    assert_eq!((med.limit, med.lifetime as u32, med.fx_level, med.max_parts), (2048, 600, 3, 2500));
     assert_eq!((high.limit, high.lifetime as u32, high.fx_level, high.max_parts), (2048, 600, 4, 6000));
 
     let mut effects = Impacts::default();

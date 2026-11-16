@@ -665,3 +665,20 @@ fn portal_view_quality_is_gated_independently_on_enhancements_and_portalgun() {
     assert!(menu.item_disabled(pg_item, &cv));
     assert!(menu.item_disabled(PORTAL_GUN[2], &cv));
 }
+
+#[test]
+fn enhanced_particles_disables_the_classic_particle_style() {
+    let mut cv = Cvars::default();
+    cv.register("r_enhancedparticles", "1", 0);
+    cv.register("r_particles", "1", 0);
+    let mut menu = Menu::new();
+    let mut out = Vec::new();
+    let item = GRAPHICS.iter().copied().find(|i| matches!(i, Item::Choice { cvar: "r_particles", .. })).unwrap();
+    menu.open(Screen::OptionsPage(Page::Graphics));
+    assert!(menu.item_disabled(item, &cv));
+    assert!(disabled_reason(item).is_some());
+    assert!(!menu.adjust(item, 1, false, &mut cv, &mut out));
+    cv.set("r_enhancedparticles", "0");
+    assert!(menu.adjust(item, 1, false, &mut cv, &mut out));
+    assert_eq!(cv.value_of("r_particles"), 2.0);
+}

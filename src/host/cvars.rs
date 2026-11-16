@@ -188,6 +188,9 @@ pub(super) const COMPAT_CVARS: &[(&str, &str, u32)] = &[
     ("scr_usekfont", "0", 0),
     ("cl_beams_polygons", "1", 0),
     ("r_noshadow_list", "", 0),
+    // Folded into r_particle_quality; old configs still set them.
+    ("r_softparticles", "1", 0),
+    ("r_impact_quality", "1", 0),
     ("r_noEntityCastShadowList", "", 0),
     ("r_useportalculling", "1", 0),
     ("r_nolerp_list", "", 0),
@@ -218,7 +221,10 @@ pub(super) const COMPAT_CVARS: &[(&str, &str, u32)] = &[
     ("r_part_beams", "1", 0),
     ("r_part_maxparticles", "65536", 0),
     ("r_part_maxdecals", "8192", 0),
-    ("r_softparticles", "1", CVAR_ARCHIVE),
+    // 0 low / 1 medium / 2 high: soft particles, impact budgets and
+    // scripted particle density together.
+    ("r_particle_quality", "1", CVAR_ARCHIVE),
+    ("r_enhancedparticles", "0", CVAR_ARCHIVE),
     ("r_ssao", "0", CVAR_ARCHIVE),
     ("r_ssao_strength", "2", CVAR_ARCHIVE),
     ("r_ssao_radius", "32", CVAR_ARCHIVE),
@@ -229,7 +235,6 @@ pub(super) const COMPAT_CVARS: &[(&str, &str, u32)] = &[
     ("r_enhancedwater", "0", CVAR_ARCHIVE),
     ("r_teleportwindows", "0", CVAR_ARCHIVE),
     ("r_portal_quality", "1", CVAR_ARCHIVE),
-    ("r_impact_quality", "1", CVAR_ARCHIVE),
     ("r_impact_fx", "1", CVAR_ARCHIVE),
     ("r_impact_bullets", "0", CVAR_ARCHIVE),
     ("r_impact_nails", "0", CVAR_ARCHIVE),

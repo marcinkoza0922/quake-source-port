@@ -49,10 +49,10 @@ pub const VANILLA: &[(&str, &str)] = &[
     ("r_lerpmodels", "1"), ("r_lerpmove", "1"),
     ("r_ssao", "0"), ("r_motionblur", "0"), ("r_motionblur_quality", "1"), ("r_speedblur", "0"), ("a11y_reducemotion", "0"),
     ("r_enhancedwater", "0"), ("r_teleportwindows", "0"), ("r_portal_quality", "1"), ("r_water_quality", "1"),
-    ("r_impact_quality", "1"), ("r_impact_fx", "0"), ("r_impact_bullets", "0"), ("r_impact_nails", "0"),
+    ("r_particle_quality", "1"), ("r_impact_fx", "0"), ("r_impact_bullets", "0"), ("r_impact_nails", "0"),
     ("r_shotgun_tracers", "0"), ("r_impact_scorches", "0"),
     ("r_blood", "0"), ("r_blood_quality", "1"), ("r_debris", "0"), ("r_debris_quality", "1"), ("r_shader_preset", ""), ("r_shader_scale", "0"), ("r_colorblind", "0"),
-    ("addons_enable", "0"), ("addon_hitstop", "0"), ("addon_gel_quality", "1"), ("addon_washer_quality", "1"), ("addon_goggles_quality", "1"), ("r_fteparticles", "1"), ("r_particledesc", "classic"), ("r_part_rain", "1"), ("r_part_rain_quantity", "1"),
+    ("addons_enable", "0"), ("addon_hitstop", "0"), ("addon_gel_quality", "1"), ("addon_washer_quality", "1"), ("addon_goggles_quality", "1"), ("r_fteparticles", "1"), ("r_particledesc", "classic"), ("r_enhancedparticles", "0"), ("r_part_rain", "1"), ("r_part_rain_quantity", "1"),
 ];
 
 const WATER: &[(&str, &str)] = &[
@@ -61,7 +61,7 @@ const WATER: &[(&str, &str)] = &[
     ("r_watercaustics", "1"), ("r_watercaustics_amount", "2"), ("r_water_quality", "1"),
 ];
 const IMPACTS: &[(&str, &str)] = &[
-    ("r_impact_quality", "2"), ("r_impact_fx", "4"), ("r_impact_bullets", "1"), ("r_impact_nails", "1"),
+    ("r_particle_quality", "2"), ("r_impact_fx", "4"), ("r_impact_bullets", "1"), ("r_impact_nails", "1"),
     ("r_shotgun_tracers", "1"), ("r_impact_scorches", "1"),
     ("r_impact_lifetime", "600"), ("r_impact_limit", "2048"),
 ];
@@ -85,6 +85,7 @@ const BLUR: &[(&str, &str)] = &[("r_motionblur", "1"), ("r_motionblur_amount", "
 const TELE: &[(&str, &str)] = &[("r_teleportwindows", "1")];
 const SHADER: &[(&str, &str)] = &[("r_shader_preset", "crt/crt-guest-advanced-hd"), ("r_shader_scope", "1")];
 const COLORBLIND: &[(&str, &str)] = &[("r_colorblind", "2")];
+const PARTICLES: &[(&str, &str)] = &[("r_enhancedparticles", "1"), ("r_particle_quality", "2")];
 
 /// (name, description, cvars) of every enhancement stress.
 type Cvars = &'static [(&'static str, &'static str)];
@@ -104,6 +105,7 @@ const ENHANCEMENTS: &[(&str, &str, Cvars)] = &[
     ("debris", "ragdolls at death, 64 ragdolls, gibs, shrapnel, movers, force 6", DEBRIS),
     ("screenshader", "slang CRT preset (crt-guest-advanced-hd), whole screen", SHADER),
     ("colorblind", "colour-blind filter", COLORBLIND),
+    ("particles", "enhanced particles, particle quality high", PARTICLES),
 ];
 
 pub(crate) const ADDON_ON: &[(&str, &str)] = &[
