@@ -180,11 +180,23 @@ fn gyro_look() {
     let mut h = host();
     h.cvars.set("gyro_enable", "1");
     handle_event(&mut h, InputEvent::GamepadConnected(true));
-    handle_event(&mut h, InputEvent::Gyro { pitch: 0.0, yaw: 1.0 });
+    handle_event(&mut h, InputEvent::Gyro { pitch: 0.0, yaw: 1.0, roll: 0.0 });
     let s = frame(&mut h, None);
     assert!((s.look_delta[0] - 1f32.to_degrees() * 2.5 / 60.0).abs() < 1e-3);
     h.cvars.set("gyro_mode", "2"); // needs +gyroaction
     assert_eq!(frame(&mut h, None).look_delta[0], 0.0);
+}
+
+#[test]
+fn gyro_roll_steers_yaw() {
+    let mut h = host();
+    h.cvars.set("gyro_enable", "1");
+    handle_event(&mut h, InputEvent::GamepadConnected(true));
+    handle_event(&mut h, InputEvent::Gyro { pitch: 0.0, yaw: 0.0, roll: 1.0 });
+    assert_eq!(frame(&mut h, None).look_delta[0], 0.0); // off by default
+    h.cvars.set("gyro_rollsensitivity", "-2");
+    let s = frame(&mut h, None);
+    assert!((s.look_delta[0] + 1f32.to_degrees() * 2.0 / 60.0).abs() < 1e-3);
 }
 
 fn target() -> AimTarget {
