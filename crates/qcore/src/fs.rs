@@ -52,6 +52,10 @@ pub struct Fs {
     paths: Vec<SearchPath>,
 }
 
+/// App-specific external storage on Android (`Android/data/<package>/files`), where the
+/// Quake data (`id1/`) goes. The package name is set in `android/AndroidManifest.xml`.
+pub const ANDROID_DATA_DIR: &str = "/sdcard/Android/data/org.quakesourceport.app/files";
+
 impl Fs {
     pub fn new(basedir: impl Into<PathBuf>) -> Self {
         Self { basedir: basedir.into(), game_dirs: Vec::new(), paths: Vec::new() }
@@ -61,7 +65,13 @@ impl Fs {
     pub fn default_basedir() -> PathBuf {
         std::env::var_os("QUAKE_BASEDIR")
             .map(PathBuf::from)
-            .unwrap_or_else(discovery::discover)
+            .unwrap_or_else(|| {
+                // Android: the app's own external folder, which the user can fill over USB or adb.
+                if cfg!(target_os = "android") {
+                    return PathBuf::from(ANDROID_DATA_DIR);
+                }
+                discovery::discover()
+            })
     }
 
     pub fn basedir(&self) -> &Path {

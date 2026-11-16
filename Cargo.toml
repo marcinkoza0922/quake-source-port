@@ -52,6 +52,7 @@ ab_glyph = "0.2"
 
 [features]
 bundled-sdl = ["qplatform/bundled-sdl"]
+bundled-sdl-shared = ["qplatform/bundled-sdl-shared"]
 
 [profile.release]
 lto = "thin"

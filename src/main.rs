@@ -70,6 +70,9 @@ impl Opts {
 
 /// `$XDG_DATA_HOME/quake-source-port/<game>` (default `~/.local/share/...`).
 pub fn user_dir(game: &str) -> PathBuf {
+    if cfg!(target_os = "android") && std::env::var_os("XDG_DATA_HOME").is_none() {
+        return PathBuf::from(qcore::fs::ANDROID_DATA_DIR).join("userdata").join(game.to_ascii_lowercase());
+    }
     let root = std::env::var_os("XDG_DATA_HOME")
         .map(PathBuf::from)
         .or_else(|| std::env::var_os("HOME").map(|h| PathBuf::from(h).join(".local/share")))
@@ -245,4 +248,12 @@ mod timing_tests {
             assert!(opts(flags).fixed_step().is_err(), "{flags}");
         }
     }
+}
+
+/// Entry point called by SDL's `SDLActivity` on Android (the app is a `cdylib`, see `android/`).
+#[cfg(target_os = "android")]
+#[unsafe(no_mangle)]
+pub extern "C" fn SDL_main(_argc: std::ffi::c_int, _argv: *mut *mut std::ffi::c_char) -> std::ffi::c_int {
+    main();
+    0
 }
