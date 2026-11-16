@@ -159,11 +159,20 @@ Client-only and cosmetic: the server never sees it. Sub-options `r_debris_qualit
 A game is *vanilla* or *customized* from its start, and never changes mid-game.
 Vanilla games aim for exact save (`.sav` v5) and demo compatibility with
 ironwail and vkQuake; anything that changes the simulation lives behind
-Customize. The Single Player menu's Customize row (`custom_enable`,
-archived, a focusable row below Level Select, Enter/click/tap toggles, its
-tooltip shows when focused) makes New Game open `Page::NewGameCustomize`
-(Gameplay Modifiers, Add-ons, Start New Game); `map` then fixes
-`Core::custom` (read-only mirror `custom_active`). Loading a `.qsa` makes the
+Customize. Starting a game (Single Player → New Game, or a map from Level
+Select / Map Packs) opens the launch pop-up (`src/menu/launch.rs`,
+`Prompt::Launch`, the pending game in `Menu::launch`): a big Play button,
+tagged CUSTOM while any modifier differs from its default or any add-on is
+on (`launch::customized`); Customize Experience, which opens
+`Page::NewGameCustomize` (Gameplay Modifiers, Add-ons, Play; Back returns to
+the pop-up); and, while something is modified, Disable All Modifications
+(modifiers to defaults, add-ons off, per-add-on settings kept), reachable by
+arrows/d-pad, click, Del/Backspace or gamepad X. Play sets `custom_enable`
+(archived) from `launch::customized`, then asks for the skill (levels) or
+confirms ending a running game; `map` then fixes `Core::custom` (read-only
+mirror `custom_active`). There is no Customize row on the Single Player menu,
+so nothing suggests changes apply to loaded saves. `menu_newgame` opens the
+pop-up (screenshots, binds). Loading a `.qsa` makes the
 game customized, a `.sav` vanilla. In a customized game the main menu gains
 a Customize box (`Page::Customize`: Modifiers, Add-ons) and every modifier
 and add-on stays editable, applying at once. In a vanilla game those rows are

@@ -54,7 +54,7 @@ pub(super) const ADDONS: &[Item] = &[
     Item::Sub { label: "Hitstop Settings", page: Page::Hitstop },
 ];
 
-/// New Game with Add-ons ticked: choose the toys, then start.
+/// New game → Customize Experience → Add-ons: choose the toys, then play.
 pub(super) const NEW_GAME_ADDONS: &[Item] = &[
     toggle("Portal Gun", "addon_portalgun"),
     Item::Sub { label: "Portal Gun Settings", page: Page::PortalGun },
@@ -74,7 +74,7 @@ pub(super) const NEW_GAME_ADDONS: &[Item] = &[
     Item::Sub { label: "Projectile Shotguns Settings", page: Page::ProjectileShotguns },
     toggle("Hitstop", "addon_hitstop"),
     Item::Sub { label: "Hitstop Settings", page: Page::Hitstop },
-    Item::Run { label: "Start New Game", run: Run::NewGame },
+    Item::Run { label: "Play", run: Run::NewGame },
 ];
 
 

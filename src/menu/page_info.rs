@@ -188,7 +188,7 @@ pub(super) fn tooltip(item: Item) -> Option<&'static str> {
 pub(super) static ADDON_BINDS: std::sync::atomic::AtomicBool = std::sync::atomic::AtomicBool::new(false);
 
 pub(super) fn sync_addon_binds(cv: &Cvars, game_running: bool) {
-    let on = cv.value_of(if game_running { "custom_active" } else { "custom_enable" }) != 0.0;
+    let on = if game_running { cv.value_of("custom_active") != 0.0 } else { super::launch::customized(cv) };
     ADDON_BINDS.store(on, std::sync::atomic::Ordering::Relaxed);
 }
 

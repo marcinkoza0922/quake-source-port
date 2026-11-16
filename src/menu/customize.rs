@@ -1,7 +1,8 @@
-//! Customize: the Single Player "Customize" row, the hub pages (gameplay
-//! modifiers and add-ons) and the locks that keep a vanilla game vanilla.
-//! Whether a game is customized is fixed when it starts (`custom_enable` →
-//! `Core::custom`, mirrored in `custom_active`): only a customized game
+//! Customize: the hub pages (gameplay modifiers and add-ons, reached from
+//! the launch pop-up's Customize Experience or, in a customized game, the
+//! main menu) and the locks that keep a vanilla game vanilla.
+//! Whether a game is customized is fixed when it starts (`custom_enable`,
+//! set by Play → `Core::custom`, mirrored in `custom_active`): only a customized game
 //! applies modifiers and add-ons, and only it saves as `.qsa`. Inside a
 //! customized game every modifier and add-on stays editable.
 
@@ -40,17 +41,16 @@ pub(super) const CUSTOMIZE: &[Item] = &[
     Item::Sub { label: "Add-ons", page: Page::Addons },
 ];
 
-/// New Game with Customize ticked: set up the rules, then start.
+/// New game → Customize Experience: set up the rules, then play (Back
+/// returns to the launch pop-up).
 pub(super) const NEW_GAME_CUSTOMIZE: &[Item] = &[
     Item::Sub { label: "Gameplay Modifiers", page: Page::Modifiers },
     Item::Sub { label: "Add-ons", page: Page::NewGameAddons },
-    Item::Run { label: "Start New Game", run: Run::NewGame },
+    Item::Run { label: "Play", run: Run::NewGame },
 ];
 
-/// Single Player row of the Customize checkbox (below Level Select).
-pub(super) const SP_CUSTOMIZE_ROW: usize = 4;
-/// Single Player rows: New Game, Load, Save, Level Select, Customize.
-pub(super) const SP_ITEMS: usize = 5;
+/// Single Player rows: New Game, Load, Save, Level Select.
+pub(super) const SP_ITEMS: usize = 4;
 
 /// Whether this cvar selects a toy.
 pub(super) fn is_toy_cvar(cvar: &str) -> bool {
@@ -77,22 +77,6 @@ impl Menu {
         }
     }
 
-    /// Flips the Single Player "Customize" checkbox (the next new game).
-    pub(super) fn toggle_custom_box(cv: &mut Cvars, out: &mut Vec<Action>) {
-        let on = cv.value_of("custom_enable") != 0.0;
-        cv.set("custom_enable", if on { "0" } else { "1" });
-        out.push(Action::Sound("misc/menu3.wav"));
-    }
-
-    /// New Game pressed: straight in, or via the Customize hub when ticked.
-    pub(super) fn new_game(&mut self, cv: &Cvars, out: &mut Vec<Action>) {
-        if cv.value_of("custom_enable") != 0.0 {
-            self.open_customize(true);
-        } else {
-            self.start_new_game(out);
-        }
-    }
-
     /// Opens the Customize hub: for the next new game, or the running one.
     pub(super) fn open_customize(&mut self, new_game: bool) {
         self.new_game_setup = new_game;
@@ -101,51 +85,10 @@ impl Menu {
         self.screen = Screen::OptionsPage(if new_game { Page::NewGameCustomize } else { Page::Customize });
     }
 
-    pub(super) fn start_new_game(&mut self, out: &mut Vec<Action>) {
-        let cmd = "maxplayers 1\ndeathmatch 0\ncoop 0\nmap start\n".to_string();
-        if self.game_running {
-            // vanilla asks before dropping the running game
-            self.confirm(vec!["Start a new game?".into(), "Unsaved progress will be lost.".into()], "New game", cmd, true);
-            return;
-        }
-        self.screen = Screen::None;
-        out.push(Action::Close);
-        out.push(Action::Command(cmd));
-    }
-
     /// Main menu rows: the classic five, Map Packs, and Customize while a
     /// customized game runs.
     pub(super) fn main_items(&self) -> usize {
         MAIN_ITEMS + usize::from(self.custom_running)
-    }
-
-    /// The Customize row below Level Select (classic-offset space).
-    pub(super) fn draw_custom_row(&self, c: &mut Canvas, cv: &Cvars) {
-        let (y, w) = (32.0 + SP_CUSTOMIZE_ROW as f32 * 20.0 + 2.0, 112.0);
-        let on = cv.value_of("custom_enable") != 0.0;
-        let focused = self.sp_cursor == SP_CUSTOMIZE_ROW;
-        c.fill(72.0, y, w, 16.0, [0.0, 0.0, 0.0, 0.55]);
-        c.frame(72.0, y, w, 16.0, if focused { GOLD_FG } else { BORDER });
-        // checkbox + label in the classic gold font, like Level Select
-        let (bx, by) = (84.0, y + 3.5);
-        c.round_box(bx, by, 9.0, 9.0, 1.5, [0.0, 0.0, 0.0, 0.6], Some(if on || focused { GOLD_FG } else { BORDER }));
-        if on {
-            c.round_box(bx + 2.0, by + 2.0, 5.0, 5.0, 1.0, GOLD_FG, None);
-        }
-        gold(c, bx + 17.0, y + 4.0, "Customize");
-        if focused {
-            let lines = [
-                "Pick gameplay modifiers (easier or harder rules) and",
-                "add-ons for the next new game. Customized games save",
-                "as .qsa files, which other source ports can't load.",
-            ];
-            let w = lines.iter().map(|s| c.text_w(s, TXT)).fold(0.0, f32::max);
-            let (tx, ty) = (160.0 - w / 2.0, 32.0 + 6.0 * 20.0 + 12.0);
-            c.round_box(tx - 8.0, ty - 4.0, w + 16.0, lines.len() as f32 * 11.0 + 6.0, 4.0, [0.0, 0.0, 0.0, 0.85], Some(BORDER));
-            for (i, s) in lines.iter().enumerate() {
-                c.text(tx, ty + i as f32 * 11.0, s, TXT, FG);
-            }
-        }
     }
 
     /// Notes under the Customize pages' rows; returns the lines' height.
@@ -153,9 +96,13 @@ impl Menu {
         let y = PAGE_ROW0 + rows as f32 * ROW_H + 30.0;
         let summary = custom_summary(cv);
         let lines: Vec<(String, [f32; 4])> = match page {
-            Page::NewGameCustomize => vec![
+            Page::NewGameCustomize if super::launch::customized(cv) => vec![
                 (summary, FG),
                 ("Saves of this game are .qsa files: they need this source port.".into(), GOLD_FG),
+            ],
+            Page::NewGameCustomize => vec![
+                (summary, FG),
+                ("Nothing changed: this plays as standard Quake.".into(), MUTED),
             ],
             Page::Customize => vec![
                 (summary, FG),
@@ -163,7 +110,7 @@ impl Menu {
             ],
             Page::Modifiers if self.toys_locked(cv) => vec![
                 ("This game started without Customize, so its rules are fixed.".into(), GOLD_FG),
-                ("Tick Customize on the Single Player menu, then start a new game.".into(), GOLD_FG),
+                ("Start a new game and choose Customize Experience.".into(), GOLD_FG),
             ],
             Page::Modifiers if self.new_game_setup || !self.game_running => {
                 vec![("These rules apply to the next customized game.".into(), MUTED)]
@@ -185,13 +132,7 @@ pub(super) fn custom_summary(cv: &Cvars) -> String {
         1 => "1 modifier changed".to_string(),
         n => format!("{n} modifiers changed"),
     };
-    let on: Vec<&str> = page_items(Page::NewGameAddons)
-        .iter()
-        .filter_map(|i| match *i {
-            Item::Toggle { label, cvar } if is_toy_cvar(cvar) && cv.value_of(cvar) != 0.0 => Some(label),
-            _ => None,
-        })
-        .collect();
+    let on = super::launch::addons_on(cv);
     let addons = match on.len() {
         0 => "no add-ons".to_string(),
         1..=2 => format!("add-ons: {}", on.join(", ")),

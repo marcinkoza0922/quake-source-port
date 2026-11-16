@@ -64,7 +64,6 @@ impl Menu {
                 c.fill(72.0, y, w, 16.0, [0.0, 0.0, 0.0, 0.55]);
                 c.frame(72.0, y, w, 16.0, BORDER);
                 gold(c, 72.0 + (w - 8.0 * 12.0) / 2.0, y + 4.0, "Level Select");
-                self.draw_custom_row(c, cv);
             }
             Screen::Multiplayer => {
                 let p = pic("gfx/qplaque.lmp");
@@ -183,7 +182,7 @@ impl Menu {
             self.draw_hints(c);
         }
         self.draw_back(c);
-        self.draw_prompt(c);
+        self.draw_prompt(c, cv);
         c.reset_origin();
         if self.autoaim_prompt { self.draw_autoaim_prompt(c); }
         self.draw_binding_prompt(c);

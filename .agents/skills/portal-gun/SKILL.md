@@ -47,7 +47,7 @@ first; this skill is the practical map and the recipes.
 
 ## Settings
 
-`custom_enable` (Single Player "Customize" row; `map` copies it into the game's fixed `custom`), `addon_portalgun`, `addon_portal_view`
+`custom_enable` (set by the New Game pop-up's Play; `map` copies it into the game's fixed `custom`), `addon_portalgun`, `addon_portal_view`
 (see-through), `addon_portal_max` (top-level live views, 1–4),
 `addon_portal_dist`, `addon_portal_depth` (recursion levels, 0–6, default 3).
 Flow: cvar → `src/host/render.rs` → `qrender::Settings::gun_portal_*`.

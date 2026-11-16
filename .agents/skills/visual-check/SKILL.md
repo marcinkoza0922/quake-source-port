@@ -63,7 +63,8 @@ target/release/quake-source-port -headless -autoquit 8 +sv_autosave 0 +map e1m1 
   customize, newgamecustomize, modifiers, addons,
   graphics, audio (`menu_options` in `src/host/commands.rs`). Sub-pages that
   have no name there (Water, Debris) need an alias added to that
-  match first. Also `menu_main`, `menu_load`, `menu_save`, `menu_autosaves`,
+  match first. Also `menu_main`, `menu_newgame` (the New Game pop-up),
+  `menu_load`, `menu_save`, `menu_autosaves`,
   `menu_mods`, `menu_multiplayer` and `toggleconsole`.
 - `r_drawentities 0` hides everything except the view model, which helps
   isolate world rendering.

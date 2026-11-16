@@ -32,8 +32,7 @@ mod navigation;
 mod actions;
 mod customize;
 use customize::{CUSTOMIZE, MODIFIERS, NEW_GAME_CUSTOMIZE};
-#[cfg(test)]
-use customize::SP_CUSTOMIZE_ROW;
+mod launch;
 mod addon_settings;
 use addon_settings::{ADDONS, NEW_GAME_ADDONS};
 mod addon_browser;
@@ -221,6 +220,9 @@ pub struct Menu {
     /// Editing the Customize pages for the next new game, so per-game rows
     /// stay editable even while a vanilla game runs.
     new_game_setup: bool,
+    /// The new game behind the launch pop-up (kept while its Customize
+    /// pages are open).
+    launch: Option<launch::Launch>,
     /// Prompts show gamepad glyphs (the pad was used last).
     pub pad_ui: bool,
     pub glyphs: Glyphs,
@@ -325,6 +327,7 @@ impl Menu {
             game_running: false,
             custom_running: false,
             new_game_setup: false,
+            launch: None,
             pad_ui: false,
             glyphs: Glyphs { family: Family::Xbox },
             osk: None,
@@ -391,6 +394,9 @@ impl Menu {
         self.prev = self.screen;
         self.screen = s;
         self.new_game_setup = matches!(s, Screen::OptionsPage(Page::NewGameAddons | Page::NewGameCustomize));
+        if !self.new_game_setup {
+            self.launch = None;
+        }
         self.drop = None;
         self.drag = None;
         self.slider_drag = None;

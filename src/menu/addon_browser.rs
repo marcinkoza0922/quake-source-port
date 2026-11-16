@@ -184,7 +184,7 @@ impl Menu {
     pub(super) fn browser_select_label(&self) -> &'static str {
         if self.addon_ui.focus == 0 { "Toggle" }
         else if self.addon_ui.focus == 1 { "Settings" }
-        else if self.addon_ui.focus > self.browser_rows() { "Start game" }
+        else if self.addon_ui.focus > self.browser_rows() { "Play" }
         else if self.browser_slot().is_some() { "Change slot" }
         else { "Configure" }
     }
@@ -291,7 +291,7 @@ impl Menu {
             }
         }
         if self.screen == Screen::OptionsPage(Page::NewGameAddons) && (key == K_YBUTTON || key == K_F1 + 9) {
-            self.start_new_game(out);
+            self.launch_play(cv, out);
             return true;
         }
         let up = matches!(key, K_UPARROW | K_DPAD_UP);
@@ -361,7 +361,7 @@ impl Menu {
             }
         } else if self.addon_ui.focus > self.browser_rows() {
             if enter {
-                self.start_new_game(out);
+                self.launch_play(cv, out);
             } else if up || down || right {
                 self.addon_ui.focus = if right { 1 } else { 0 };
                 if up || down { self.addon_ui.selected = if up { ADDON.len() - 1 } else { 0 }; }

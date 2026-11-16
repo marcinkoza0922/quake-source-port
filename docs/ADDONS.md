@@ -3,16 +3,17 @@
 ### Add-ons (Customize → Add-ons; `qserver::addons`, `src/addons.rs`)
 Optional engine-side toys, so they work with any progs. Add-ons belong to a
 *customized* game (DESIGN.md, "Customize"): `Core::custom`, set by `map`
-from `custom_enable` (the archived Single Player "Customize" row) or by
+from `custom_enable` (set by the launch pop-up's Play) or by
 `load_game` from the save, mirrored in read-only `custom_active` for the
 menu. It never changes mid-game, so a vanilla game can't gain add-ons. Which
 toys are on is the per-toy cvar (`addon_portalgun`, default 0), editable live
 in a customized game (Main menu → Customize → Add-ons) and fixed (dimmed)
 otherwise. Toys only run with no deathmatch and no remote client
 (`addons::allowed`/`all_local`).
-- New Game with Customize ticked opens `Page::NewGameCustomize`; its Add-ons
-  row opens `Page::NewGameAddons` (toy toggles, portal settings, Start New
-  Game) with a note about other ports. Back returns to the Customize page.
+- The launch pop-up's Customize Experience opens `Page::NewGameCustomize`;
+  its Add-ons row opens `Page::NewGameAddons` (toy toggles, portal settings,
+  Play) with a note about other ports. Back returns to the Customize page,
+  and from there to the pop-up.
 - Saves (`addons/save.rs`): customized games save as `.qsa` (never `.sav`)
   with a `QSPADDONS 1 <n>` header (toys, portals, add-on state, gameplay
   modifiers) before the v5 body, so other ports neither list nor parse them.
