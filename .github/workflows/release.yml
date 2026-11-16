@@ -110,6 +110,10 @@ jobs:
         run: |
           export QSP_SPIRV_DIR="$GITHUB_WORKSPACE/spv"
           export ANDROID_NDK_HOME="${ANDROID_NDK_LATEST_HOME:-$ANDROID_NDK_ROOT}"
+          # Without the NDK toolchain file cmake-rs passes CMAKE_SYSTEM_PROCESSOR=arm64,
+          # which CMake's Android support rejects.
+          export CMAKE_TOOLCHAIN_FILE_aarch64_linux_android="$ANDROID_NDK_HOME/build/cmake/android.toolchain.cmake"
+          export CMAKE_GENERATOR=Ninja
           cargo ndk -t arm64-v8a --platform 24 rustc --release --locked -p quake-source-port --lib \
             --features bundled-sdl-shared --crate-type cdylib
           libs=android/app/src/main/jniLibs/arm64-v8a
