@@ -75,10 +75,17 @@ cargo build --release
 
 ## Releases
 
-Release builds are meant for Windows (x64, arm64), Linux (x64, arm64), macOS
-(Apple silicon) and Android (arm64). **Only Linux x64 has been tested so
-far**; the other builds are untested and may not start or may misbehave.
+Release builds are meant for Windows (x64, arm64), Linux (x64, arm64, glibc
+and musl), macOS (Apple silicon), FreeBSD, OpenBSD and NetBSD (x64) and
+Android (arm64). **Only Linux x64 has been tested so far**; the other builds
+are untested and may not start or may misbehave.
 You still need your own Quake game data (see below).
+
+The musl build needs `libstdc++` and the Vulkan loader (Alpine:
+`apk add libstdc++ vulkan-loader mesa-vulkan-ati mesa-vulkan-intel` or your
+GPU's driver). The BSD builds need SDL3 and the Vulkan loader from packages
+(FreeBSD: `pkg install sdl3 vulkan-loader mesa-dri`), and the OpenBSD build
+only runs on the OpenBSD release it was built for.
 
 ## Running
 

@@ -322,6 +322,17 @@ other machines. `AGENTS.md` keeps asset-use guidance rather than a tool catalog.
 - `cargo nextest run` — quiet default profile; `--profile verbose` for debugging.
 - `cargo clippy --message-format=short`.
 - `tools/webbuild/build.sh` — browser build into `target/web/` (see Web build).
+- Releases (`.github/workflows/release.yml`, on `v*` tags): glibc Linux, Windows and
+  macOS build on native runners with bundled static SDL3; Android as a debug APK.
+  musl Linux (x64, arm64) builds in Alpine via `tools/release_musl.sh` (locally:
+  `podman run --rm -v "$PWD:/src:Z" -w /src alpine:3.22 sh tools/release_musl.sh`,
+  output in `target/musl/`). musl is linked dynamically (`-crt-static` off) because a
+  static binary cannot dlopen the Vulkan loader or SDL's X11/Wayland/audio backends;
+  it needs `libstdc++`, `libgcc` and `vulkan-loader` at run time. FreeBSD 14, OpenBSD 7.9
+  and NetBSD 10 (x64) build natively in QEMU VMs (`cross-platform-actions/action`)
+  against the system `sdl3` package; that job is `continue-on-error` so it never blocks
+  a release. OpenBSD binaries only run on the release they were built for.
+  `tools/release_package.sh NAME BINARY` makes the `.tar.gz` for the musl and BSD jobs.
 - `tools/qinspect` uses renderer portal discovery without a GPU; `tools/portal_survey.py --basedir PATH [--game MOD] --capture` inventories maps and writes camera coordinates, screenshots and an HTML gallery under `target/portal-survey` (Python standard library only). `tools/portal_recheck.py --basedir PATH` recaptures every view linked in `target/portal-survey/problematic.md` with same-camera baseline/isolation pairs, command manifests, logs and a gallery under `target/portal-survey/recheck`; it never overwrites the original captures. `tools/qbot`, `tools/qbench` as above.
 - `tools/qbot` (M7): `cargo build --release -p qbot`, then `target/release/qbot [-game G] [-skill N] [-time S] [-j N] [-out DIR] [-baseline F] [-save-baseline] [-v] [map ...]`. With no maps it runs every playable map the game dir owns, in parallel threads (`-j`, default all cores). Output: `target/qbot/report.json`. Baselines exist for id1, hipnotic and rogue. `cargo nextest run -p qbot` checks e1m1 and e1m3 (every monster, every secret, exit).
 - `tools/qbench`: timedemo fps vs ironwail/vkQuake (M7). `cargo build --release`, then `target/release/qbench [-game ad] [-runs 3] [-secs 24] [-width W -height H] [-engines ours,ironwail,vkquake] [-rerecord] [map ...]` (default ad_sepulcher ad_tears). The demo is recorded by our engine headless (god, 30°/s spin at the spawn point), cached in `target/qbench/demos`. Engines run from `target/qbench/base` (symlinks to id1 + the game; the game data dir is never written) with `-basedir . -window +vid_vsync 0 <pinned settings> +timedemo qbench/<map>` (MSAA off, 8x anisotropy, render scale 1 in each engine's cvar names), under `stdbuf -oL` because the C engines block-buffer stdout. qbench reads stdout+stderr for the fps line, then kills the process group (the references don't quit after a timedemo). ironwail comes from `<basedir>/ironwail-*-linux-x64.7z`, extracted into `target/refengines`; vkQuake is `<basedir>/vkquake.AppImage`. Medians go to `target/qbench/report.json`.
