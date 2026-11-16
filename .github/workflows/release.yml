@@ -67,7 +67,7 @@ jobs:
         shell: bash
         run: |
           export QSP_SPIRV_DIR="$GITHUB_WORKSPACE/spv"
-          cargo build --release --locked --features bundled-sdl
+          cargo build --release --locked -p quake-source-port --features bundled-sdl
       - name: Package
         shell: bash
         run: |
