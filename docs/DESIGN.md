@@ -285,6 +285,7 @@ other machines. `AGENTS.md` keeps asset-use guidance rather than a tool catalog.
 
 - `cargo nextest run` — quiet default profile; `--profile verbose` for debugging.
 - `cargo clippy --message-format=short`.
+- `tools/webbuild/build.sh` — browser build into `target/web/` (see Web build).
 - `tools/qinspect` uses renderer portal discovery without a GPU; `tools/portal_survey.py --basedir PATH [--game MOD] --capture` inventories maps and writes camera coordinates, screenshots and an HTML gallery under `target/portal-survey` (Python standard library only). `tools/portal_recheck.py --basedir PATH` recaptures every view linked in `target/portal-survey/problematic.md` with same-camera baseline/isolation pairs, command manifests, logs and a gallery under `target/portal-survey/recheck`; it never overwrites the original captures. `tools/qbot`, `tools/qbench` as above.
 - `tools/qbot` (M7): `cargo build --release -p qbot`, then `target/release/qbot [-game G] [-skill N] [-time S] [-j N] [-out DIR] [-baseline F] [-save-baseline] [-v] [map ...]`. With no maps it runs every playable map the game dir owns, in parallel threads (`-j`, default all cores). Output: `target/qbot/report.json`. Baselines exist for id1, hipnotic and rogue. `cargo nextest run -p qbot` checks e1m1 and e1m3 (every monster, every secret, exit).
 - `tools/qbench`: timedemo fps vs ironwail/vkQuake (M7). `cargo build --release`, then `target/release/qbench [-game ad] [-runs 3] [-secs 24] [-width W -height H] [-engines ours,ironwail,vkquake] [-rerecord] [map ...]` (default ad_sepulcher ad_tears). The demo is recorded by our engine headless (god, 30°/s spin at the spawn point), cached in `target/qbench/demos`. Engines run from `target/qbench/base` (symlinks to id1 + the game; the game data dir is never written) with `-basedir . -window +vid_vsync 0 <pinned settings> +timedemo qbench/<map>` (MSAA off, 8x anisotropy, render scale 1 in each engine's cvar names), under `stdbuf -oL` because the C engines block-buffer stdout. qbench reads stdout+stderr for the fps line, then kills the process group (the references don't quit after a timedemo). ironwail comes from `<basedir>/ironwail-*-linux-x64.7z`, extracted into `target/refengines`; vkQuake is `<basedir>/vkquake.AppImage`. Medians go to `target/qbench/report.json`.
@@ -333,6 +334,7 @@ All parsers take `&[u8]` and return `qformats::Result<T>`; bad input gives an `E
 - `cvar`: `Cvars` registry (`register` keeps a value already set by `set`; the usual flags).
 - `cmd`: `com_parse`, `Args::tokenize`, `Cbuf` (`wait`), `Commands<C: CmdContext>` with built-in alias/set/seta/toggle/echo. `exec` and `cvarlist` must be registered by the engine.
 - `text`: Quake font text is 8-bit conchars indices. `decode` carries each byte as the same-valued Unicode scalar through string-based entity/save parsers and client print events; `encode`/`glyphs` restore the indices at VM, disk and drawing boundaries. BSP entities and external `.ent` files use this explicitly, rather than lossy UTF-8. Centerprints wrap, center and count typewriter glyphs by these indices (qbj3 colored door titles/icons); manual saves, autosaves and save previews preserve them too. Modern UI fonts and localization files keep their UTF-8 representation. See `QBJ3-LABELS.md` for the regression evidence.
+- `time`, `vfs`: portable clocks and file access; see Web build below.
 - Dependency: `miniz_oxide` (pk3 deflate).
 
 ### qworld
@@ -578,6 +580,86 @@ autosave rotation), `config.cfg` (bindings + archived cvars as they were) and
 `screenshot.png`. The screenshot is taken on the next rendered frame with the
 console not drawn (`Host::clean_shot`). `bugreport_dir` (global cvar, no menu row; lives in
 `global.cfg`, see below) defaults to `<user dir>/bugreports`. Code: `src/host/bugreport.rs`.
+
+## Web build (WASM, WebGPU)
+
+Plan and frozen interfaces: `docs/WEB_PORT.md`. The browser build is the same
+host and crates compiled for `wasm32-unknown-unknown`; `qrender` and
+`qplatform` swap backends behind their existing APIs. It is single player only.
+
+### Time and virtual file system (`qcore::time`, `qcore::vfs`)
+All engine code takes `Instant`/`SystemTime`/`UNIX_EPOCH` from `qcore::time`,
+which re-exports `std::time` natively and `web_time` on wasm32 (where the std
+clocks panic). All file I/O for game data and user files goes through
+`qcore::vfs` (`read`, `write` (creates parents), `append`,
+`exists`/`is_dir`/`is_file`, `create_dir_all`, `remove_file`, `rename`,
+`read_dir` -> `DirEntry { path, is_dir, len }`, `modified`, `open_read` ->
+`Box<dyn ReadSeek>` for PAK/PK3, plus `mount_file`/`take_dirty`). Natively it
+is a thin `std::fs` wrapper (`take_dirty` is always empty). On wasm32 it is an
+in-memory tree (`vfs/mem.rs`, unit-tested natively). The web front-end mounts
+game data under `/quake` (`Fs::default_basedir()`), user files live in
+`/quake-user/<game>` (`user_dir()`), and written or removed paths are reported
+by `take_dirty` for persistence to IndexedDB. `qcore::fs::Fs` and every
+user-dir writer (config/global cfg, saves, save thumbnails and autosave
+rotation, screenshots, demos, bug reports, console history, mod stats, QW
+downloads) use vfs; autosave staging still fsyncs natively. On wasm32, UDP
+sockets (`UdpTransport::bind`, `QwClient::connect`) return `Unsupported`,
+shell jobs/PTY are unavailable and the Quaddicted browser reports downloads
+as unavailable, so nothing on the web path spawns threads, sleeps or blocks.
+Left on `std::fs` because they never run on the web: librashader presets
+(`src/host/shader.rs`), the Steam/home install search
+(`qcore/src/fs/discovery.rs`), the Quaddicted installer, and tests.
+
+### wgpu backend (web / `--features wgpu`)
+qrender has two backends behind one `Renderer` API. build.rs sets cfg `qvk`
+(Vulkan, ash + glslc SPIR-V) unless the target is wasm32 or the `wgpu`
+feature (root: `cargo run --features wgpu`) is on; then `src/wgpu_backend/`
+is compiled instead and no GLSL is built. Shared modules: types, projection,
+convert, world (CPU BSP/PVS/light), portals, water, shared (ShaderParam,
+GpuViewTiming). The Vulkan Renderer lives in `src/lib/vk.rs`, include!d at
+the crate root.
+The wgpu backend (wgpu 30, WGSL in `wgpu_backend/shaders/`) builds draw lists
+on the CPU each frame: world surfaces from `World::portal_surfaces`
+(frustum/backface culled, bucketed per animated texture) into one index
+buffer; alias/MD3/ragdoll poses lerped and lit on the CPU; sprites, classic
+and FTE particles as poly geometry; translucent draws sorted far to near.
+Lightmaps are built on the CPU (port of lightmap.comp) into an RGBA8
+2D-array atlas storing light/2, rebuilt per surface when a lightstyle value
+changes or a dynamic light touches it. Bind groups: 0 frame (dynamic UBO,
+lightmap, palette), 1 material (3 textures + sampler; cached per slot triple)
+or sky (6 textures), 2 per-draw dynamic UBO (256-byte records). The scene
+renders to an RGBA8 target; a post pass applies polyblend/contrast/gamma to
+the output, then the 2D layer. `new_web(canvas, palette)` presents to a
+WebGPU canvas; `headless` reads back via a mapped buffer. The `r_waterwarp 2`
+FOV pulse works (it is in the shared projection); FTE `Overlay` blends like
+`Blend`. Not implemented there: MSAA/render scale, SSAO, motion/speed blur,
+portals/teleporter windows, water ripples/caustics and the screen warp,
+softemu/dither, goggles, colorblind, slang presets, GPU timings,
+r_visibility, and pixel read-back on the web (so no screenshots or save
+thumbnails in the browser). Natively `Renderer::new` (windowed) returns an
+error with `--features wgpu`; use `-headless`.
+
+### Platform, entry point and page
+On wasm32 qplatform uses the browser backend (`crates/qplatform/src/web*`:
+DOM events, pointer lock, Gamepad API polling, WebAudio ScriptProcessor,
+`js Date` for `local_time`, `window.alert` for `error_box`); natively it uses
+SDL3 (`src/sdl*`). `src/lib.rs` shares `open_game`/`open_sound`/
+`apply_rumble` between native `run()` and `src/web.rs`, which exports
+`vfs_mount`, `vfs_take_dirty`, `vfs_read` and `async start(args)`;
+`start` builds the host on `<canvas id="quake">` and drives `Host::frame`
+from requestAnimationFrame (`host_maxfps` skips animation frames).
+`tools/webbuild/build.sh` builds the root library as a `cdylib`
+(`cargo rustc --offline --release --lib --crate-type cdylib --target
+wasm32-unknown-unknown`), runs `wasm-bindgen --target web` (CLI 0.2.130, must
+match the crate) into `target/web/`, and copies `web/` (index.html, main.js)
+next to it. Serve with `python3 -m http.server -d target/web`. The page asks
+for the user's Quake folder or .pak files, caches them in IndexedDB (store
+`game`), mounts them under `/quake` via `vfs_mount`, restores user files
+(store `user`) under `/quake-user`, calls `start(args)` (`?args=` in the URL,
+space separated) and saves `vfs_take_dirty()` paths back to IndexedDB every
+2 s and when the page is hidden. Checked in headless Firefox (WebDriver BiDi,
+WebGPU enabled): e1m1, the demo loop with the main menu, and a save persisted
+to IndexedDB.
 
 ## Disabled features (hidden, code retained)
 
