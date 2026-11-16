@@ -17,7 +17,7 @@ impl Menu {
             self.drag_to(p, pos.1, g);
             return None;
         }
-        if let (Some(g), Screen::Mods | Screen::ModMaps) = (self.drag, self.screen) {
+        if let (Some(g), Screen::Mods | Screen::ModMaps | Screen::ModOnline) = (self.drag, self.screen) {
             self.mods.drag_to(self.mods_page(), pos.1, g);
             return None;
         }
@@ -90,7 +90,7 @@ impl Menu {
             }
             return out;
         }
-        if let (K_MWHEELUP | K_MWHEELDOWN, Screen::Mods | Screen::ModMaps) = (key, self.screen) {
+        if let (K_MWHEELUP | K_MWHEELDOWN, Screen::Mods | Screen::ModMaps | Screen::ModOnline) = (key, self.screen) {
             self.mods.wheel(self.mods_page(), key == K_MWHEELUP);
             if let Some(i) = self.mouse.and_then(|pos| self.item_at(pos)) {
                 *self.mods.cursor_mut(self.mods_page()) = i;
@@ -124,12 +124,12 @@ impl Menu {
                 self.drag = Some(grab);
                 return out;
             }
-            if let Screen::Mods | Screen::ModMaps = self.screen
+            if let Screen::Mods | Screen::ModMaps | Screen::ModOnline = self.screen
                 && self.mods.click(self.mods_page(), pos, &mut out)
             {
                 return out;
             }
-            if let Screen::Mods | Screen::ModMaps = self.screen
+            if let Screen::Mods | Screen::ModMaps | Screen::ModOnline = self.screen
                 && let Some((x, top, h, ty, th)) = self.mods.scrollbar(self.mods_page())
                 && (x - 4.0..x + 7.0).contains(&pos.0)
                 && (top..top + h).contains(&pos.1)
@@ -460,7 +460,7 @@ impl Menu {
                 // Level Select opened from New Game: back returns there
                 self.screen = Screen::SinglePlayer;
             }
-            Screen::Mods | Screen::ModMaps => {
+            Screen::Mods | Screen::ModMaps | Screen::ModOnline => {
                 let page = self.mods_page();
                 let start = out.len();
                 let next = self.mods.key(page, key, &mut out);
@@ -478,6 +478,7 @@ impl Menu {
                 self.screen = match next {
                     Some(modmenu::Page::List) => Screen::Mods,
                     Some(modmenu::Page::Maps) => Screen::ModMaps,
+                    Some(modmenu::Page::Online) => Screen::ModOnline,
                     None if out.iter().any(|a| matches!(a, Action::Close)) => Screen::None,
                     None => Screen::Main,
                 };

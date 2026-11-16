@@ -52,6 +52,8 @@ pub enum Screen {
     Death,
     Mods,
     ModMaps,
+    /// Map Packs > Get more maps (Quaddicted archive).
+    ModOnline,
     Multiplayer,
     /// The user manual (main menu → Help).
     Help,
@@ -436,15 +438,18 @@ impl Menu {
             Screen::Quit => QUIT_BUTTONS
                 .iter()
                 .position(|&bx| x >= bx && x < bx + QUIT_BTN.0 && y >= QUIT_BTN_Y && y < QUIT_BTN_Y + QUIT_BTN.1),
-            Screen::Mods => self.mods.item_at(modmenu::Page::List, (x, y)),
-            Screen::ModMaps => self.mods.item_at(modmenu::Page::Maps, (x, y)),
+            Screen::Mods | Screen::ModMaps | Screen::ModOnline => self.mods.item_at(self.mods_page(), (x, y)),
             Screen::Help => self.help.item_at((x, y)),
             Screen::None => None,
         }
     }
 
     fn mods_page(&self) -> modmenu::Page {
-        if self.screen == Screen::Mods { modmenu::Page::List } else { modmenu::Page::Maps }
+        match self.screen {
+            Screen::Mods => modmenu::Page::List,
+            Screen::ModOnline => modmenu::Page::Online,
+            _ => modmenu::Page::Maps,
+        }
     }
 
     fn cursor_mut(&mut self) -> Option<&mut usize> {
@@ -457,8 +462,10 @@ impl Menu {
             Screen::Options => Some(&mut self.page_cursor),
             Screen::OptionsPage(_) => Some(&mut self.opt_cursor),
             Screen::Quit => Some(&mut self.quit_cursor),
-            Screen::Mods => Some(self.mods.cursor_mut(modmenu::Page::List)),
-            Screen::ModMaps => Some(self.mods.cursor_mut(modmenu::Page::Maps)),
+            Screen::Mods | Screen::ModMaps | Screen::ModOnline => {
+                let p = self.mods_page();
+                Some(self.mods.cursor_mut(p))
+            }
             // hovering doesn't switch sections; a click does
             Screen::Help => None,
             Screen::None => None,

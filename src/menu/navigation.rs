@@ -17,7 +17,7 @@ impl Menu {
                 (PANEL_X, bottom + if p == Page::Setup { 84.0 } else { 30.0 })
             }
             Screen::Load | Screen::Save => (CARD_X, CARD_BOTTOM + 4.0),
-            Screen::Mods | Screen::ModMaps => self.mods.back_position(),
+            Screen::Mods | Screen::ModMaps | Screen::ModOnline => self.mods.back_position(),
             _ => return None,
         };
         Some((x, y.min(MENU_H - 16.0), 60.0, 16.0))
