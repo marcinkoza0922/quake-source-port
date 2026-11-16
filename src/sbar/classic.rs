@@ -141,13 +141,61 @@ impl<'a, 'b> Sbar<'a, 'b> {
 
     pub(super) fn solo_scoreboard(&mut self, cl: &ClientState) {
         let st = &cl.stats;
-        self.draw_string(8.0, 4.0, &format!("Monsters:{:3} /{:3}", st[STAT_MONSTERS], st[STAT_TOTALMONSTERS]));
-        self.draw_string(8.0, 12.0, &format!("Secrets :{:3} /{:3}", st[STAT_SECRETS], st[STAT_TOTALSECRETS]));
+        // Row 1: level name centered across the 320px scorebar so long names
+        // never collide with the kills/secrets counters.
+        let name: String = cl.levelname.chars().take(38).collect();
+        let nx = (160.0 - name.len() as f32 * 4.0).max(8.0);
+        self.draw_string(nx, 4.0, &name);
+
+        // Row 2: Kills on the left, Secrets on the right, Time in the gap between.
+        let kills = format!("Kills: {}/{}", st[STAT_MONSTERS], st[STAT_TOTALMONSTERS]);
+        let secrets = format!("Secrets: {}/{}", st[STAT_SECRETS], st[STAT_TOTALSECRETS]);
+        self.draw_string(8.0, 12.0, &kills);
+        let right = 312.0 - secrets.len() as f32 * 8.0;
+        self.draw_string(right, 12.0, &secrets);
+
+        let left = 8.0 + kills.len() as f32 * 8.0;
         let t = cl.time as i32;
         let (m, s) = (t / 60, t % 60);
-        self.draw_string(184.0, 4.0, &format!("Time :{:3}:{}{}", m, s / 10, s % 10));
-        let name: String = cl.levelname.chars().take(38).collect();
-        let x = 232.0 - name.len() as f32 * 4.0;
-        self.draw_string(x.max(0.0), 12.0, &name);
+        let long_t = format!("Time {m}:{s:02}");
+        let short_t = format!("{m}:{s:02}");
+        let t_str = if long_t.len() as f32 * 8.0 + 8.0 <= right - left {
+            long_t
+        } else {
+            short_t
+        };
+        let tx = ((left + right) / 2.0 - t_str.len() as f32 * 4.0).floor();
+        if tx >= left + 4.0 && tx + t_str.len() as f32 * 8.0 <= right - 4.0 {
+            self.draw_string(tx, 12.0, &t_str);
+        }
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn solo_scoreboard_has_no_overlapping_chars() {
+        let mut c = Canvas::new(640, 480);
+        let mut pic = |_: &str| Some((PicId(1), 24, 16));
+        let mut sb = Sbar::new(&mut c, &mut pic, Pack::Id);
+        let mut cl = ClientState::default();
+        cl.levelname = "Critical Condition Concrete".into();
+        cl.stats[STAT_MONSTERS] = 400;
+        cl.stats[STAT_TOTALMONSTERS] = 552;
+        cl.stats[STAT_SECRETS] = 6;
+        cl.stats[STAT_TOTALSECRETS] = 23;
+        cl.time = 2451.27;
+        sb.solo_scoreboard(&cl);
+        // Verify no two drawn characters occupy the same (x, y) cell.
+        let mut cells: Vec<(i32, i32)> = c.list.iter().filter_map(|d| match d {
+            qrender::Draw2D::Char { x, y, .. } => Some((*x as i32, *y as i32)),
+            _ => None,
+        }).collect();
+        let total = cells.len();
+        cells.sort();
+        cells.dedup();
+        assert_eq!(cells.len(), total, "solo_scoreboard characters overlapped");
     }
 }

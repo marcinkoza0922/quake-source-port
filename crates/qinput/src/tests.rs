@@ -251,6 +251,13 @@ fn wheel_takes_look_stick() {
     handle_event(&mut h, InputEvent::GamepadButton { button: GamepadButton::West, down: true });
     execute(&mut h);
     assert!(h.input.wheel_held());
+    // While the wheel has not opened yet (tap window), mouse and stick still look normally.
+    handle_event(&mut h, InputEvent::MouseMotion { dx: 10.0, dy: 0.0 });
+    let s = h.input.frame(&h.cvars, [0.0; 3], 0.1, None);
+    assert!(s.look_delta[0] < 0.0);
+    assert_eq!(h.input.wheel_aim, [0.0, 0.0]);
+
+    h.input.wheel_open = true;
     handle_event(&mut h, InputEvent::GamepadAxis { axis: GamepadAxis::RightX, value: 1.0 });
     let s = h.input.frame(&h.cvars, [0.0; 3], 0.1, None);
     assert_eq!(s.look_delta, [0.0, 0.0]);
