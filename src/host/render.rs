@@ -22,6 +22,10 @@ impl Host {
         let mut blend = [0.0; 4];
         let mut splits = Vec::new();
         let mut goggles = qrender::Goggles::default();
+        let view = view.map(|mut v| {
+            v.waterwarp = self.waterwarp(v.origin, self.cl.time);
+            v
+        });
         if let Some(v) = &view {
             let fs = &self.server.core.fs;
             let cv = self.view_cvars();
@@ -126,7 +130,9 @@ impl Host {
                 ents.push(g);
             }
             goggles = self.goggles_render(&mut ents);
-            crate::view::particles(&self.cl, &mut parts);
+            if self.cv("r_particles") != 0.0 {
+                crate::view::particles(&self.cl, &mut parts);
+            }
             // Portal and split-screen views reuse geometry from other camera positions.
             let cull_particles = self.cull_fte_for_view().then(|| {
                 qrender::view_fov_tangents(v, (w, h), self.cv("r_renderscale"))
@@ -391,6 +397,7 @@ impl Host {
             colorblind: v("r_colorblind").clamp(0.0, 3.0) as u32,
             soft_particle_distance: if (v("r_softparticles").round() as i32) > 0 { v("r_softparticledistance").max(0.01) } else { 0.0 },
             soft_particle_quality: u32::from((v("r_softparticles").round() as i32) >= 2),
+            particle_style: if v("r_particles").round() as i32 == 2 { 2 } else { 1 },
             ssao: if (v("r_ssao").round() as i32).clamp(0, 3) > 0 { v("r_ssao_strength").max(0.0) } else { 0.0 },
             ssao_quality: (v("r_ssao").round() as i32).clamp(0, 3).saturating_sub(1).min(2) as u32,
             ssao_radius: v("r_ssao_radius"),

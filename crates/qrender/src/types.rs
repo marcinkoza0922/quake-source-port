@@ -56,6 +56,19 @@ pub struct View {
     pub reserve_bottom: u32,
     /// Peripheral radial blur strength, 0..=1; centre and UI stay sharp.
     pub speed_blur: f32,
+    /// Underwater view effect (r_waterwarp).
+    pub waterwarp: WaterWarp,
+}
+
+/// Underwater view distortion; the value is the warp clock in seconds.
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub enum WaterWarp {
+    #[default]
+    None,
+    /// Software Quake: sine ripple over the whole image (post pass).
+    Screen(f32),
+    /// GLQuake: the horizontal and vertical FOV pulse in opposite directions.
+    Fov(f32),
 }
 
 /// One entity to draw.

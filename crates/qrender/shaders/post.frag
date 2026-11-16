@@ -23,6 +23,7 @@ layout(push_constant) uniform P {
     float mb_w;       // output width in pixels
     float mb_h;       // output height in pixels
     uint g_quality;   // goggles glow: 0 low (no ring taps), 1 medium (4 diag taps), 2 high (8 ring taps)
+    float warp;       // underwater screen ripple clock (s); < 0 off
 } pc;
 layout(location = 0) out vec4 o_color;
 
@@ -156,8 +157,20 @@ vec3 goggles(vec3 c, vec2 uv) {
     float h = 0.1 + (l - 0.1) * pc.g_gain + glow * 0.8 + grain * 0.06;
     return heat_colour(h) * mix(0.55, 1.0, vignette);
 }
+// vkQuake screen_effects.inc SCREEN_EFFECT_FLAG_WATER_WARP (software Quake's
+// underwater ripple), inset by the amplitude so edges never sample outside.
+vec2 water_warp(vec2 p) {
+    float aspect = pc.mb_w / pc.mb_h;
+    const float cycle_x = 3.14159 * 5.0;
+    float cycle_y = cycle_x * aspect;
+    const float amp_x = 1.0 / 300.0;
+    float amp_y = amp_x * aspect;
+    float x = (p.x + sin(p.y * cycle_x + pc.warp) * amp_x) * (1.0 - amp_x * 2.0) + amp_x;
+    float y = (p.y + sin(p.x * cycle_y + pc.warp) * amp_y) * (1.0 - amp_y * 2.0) + amp_y;
+    return vec2(x, y);
+}
 void main() {
-    vec2 uv = i_uv * pc.uvs;
+    vec2 uv = (pc.warp >= 0.0 ? water_warp(i_uv) : i_uv) * pc.uvs;
     vec4 sc = texture(textures[nonuniformEXT(pc.scene)], uv);
     vec3 c = sc.rgb;
     if (pc.mbx > 0.0)

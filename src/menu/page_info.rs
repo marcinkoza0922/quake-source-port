@@ -81,6 +81,8 @@ pub(super) fn tooltip(item: Item) -> Option<&'static str> {
         "addon_hitstop_max" => "No single freeze lasts longer than this, however much damage or kill bonus adds",
         "addon_portalgun" => "Two-portal gun: fire and alt-fire place linked portals on flat walls; assign a weapon slot in Add-ons",
         "r_portal_quality" => "Resolution and detail inside portal and teleporter views; lower tiers trim nested effects",
+        "r_waterwarp" => "How the view distorts underwater: Classic ripples the whole screen like software Quake, GLQuake slowly stretches and squashes the view",
+        "r_particles" => "Look of the classic particles: GLQuake draws soft round dots, Classic draws square pixels like software Quake",
         "r_softparticles" => "Fades particles smoothly where they meet walls and floors; low uses single-sample depth and shading under MSAA, high checks every sample",
         "r_debris" => "Gibs tumble and barrels throw shrapnel; shots and blasts push them (cosmetic only)",
         "r_debris_quality" => "Simulation detail, step rate, fade-out lifetimes and caps for gibs and shrapnel; low also skips mover collision",
@@ -279,6 +281,16 @@ pub(super) fn parent_page(p: Page) -> Option<(Page, usize)> {
     })
 }
 
+/// Why a dimmed row is switched off, shown instead of its usual tooltip.
+pub(super) fn disabled_reason(item: Item) -> Option<&'static str> {
+    match item {
+        Item::Choice { cvar: "r_waterwarp", .. } => {
+            Some("Disabled while Enhanced Water is on: its own underwater effects replace the classic and GLQuake view warps")
+        }
+        _ => None,
+    }
+}
+
 /// Sub-pages that are switched off by their parent setting.
 pub(super) fn sub_disabled(page: Page, cv: &Cvars) -> bool {
     (page == Page::AutoAim && cv.value_of("assist_autoaim") == 0.0)
@@ -301,6 +313,7 @@ impl Menu {
     pub(super) fn item_disabled(&self, item: Item, cv: &Cvars) -> bool {
         (matches!(item, Item::Slider { cvar: "r_wateralpha", .. })
             && (cv.value_of("r_enhancedwater") == 0.0 || cv.value_of("r_watertranslucency") == 0.0))
+            || (matches!(item, Item::Choice { cvar: "r_waterwarp", .. }) && cv.value_of("r_enhancedwater") != 0.0)
             || (matches!(item, Item::Choice { cvar: "r_drawviewmodel", .. }) && cv.value_of("cl_camera") != 0.0)
             || (matches!(item, Item::Choice { cvar: "r_portal_quality", .. })
                 && match self.screen {

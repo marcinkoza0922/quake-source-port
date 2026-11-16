@@ -88,6 +88,7 @@ impl Host {
             let (mut v, gun) = g.view.calc_refdef(&mut g.cl, &gcv, &self.level, ft);
             let third = self.camera().third_person();
             self.place_camera(Some(k), &mut v, ft);
+            v.waterwarp = self.waterwarp(v.origin, self.guests[k].cl.time);
             let g = &mut self.guests[k];
             let me = g.cl.viewentity as u32;
             for e in ents.iter_mut().filter(|e| !third && e.key != 0 && e.key == me) {

@@ -12,7 +12,7 @@ layout(set = 0, binding = 0, std140) uniform Frame {
     vec4 vright;    // view right
     vec4 vup;       // view up
     vec4 vfwd;      // view forward
-    vec4 sky;       // x skyfog, y skybox flag, z sky layer alpha
+    vec4 sky;       // x skyfog, y skybox flag, z sky layer alpha, w particle style (1 round, 2 square)
     uvec4 skybox0;  // rt bk lf ft
     uvec4 skybox1;  // up dn solid-layer alpha-layer
     vec4 alphas;    // water lava slime tele
