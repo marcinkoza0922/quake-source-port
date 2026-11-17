@@ -49,7 +49,7 @@ pub struct Flight {
 
 #[derive(Clone, Debug, Default)]
 struct Player {
-    prev: u8,
+    prev: u16,
     marks: Vec<Ent>,
     flight: Option<Flight>,
 }

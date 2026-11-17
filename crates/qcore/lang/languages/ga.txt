@@ -1343,6 +1343,27 @@ ga Xbox
 @ yellow
 ga buí
 
+@ Male-to-Male Cable
+ga Cábla fireann-fireann
+
+@ Cable Length
+ga Fad an chábla
+
+@ Plug Into Metal
+ga Plugáil isteach i miotal
+
+@ Bolt Damage
+ga Damáiste an scaoilte
+
+@ How far the cable reaches from its socket, measured along the cable
+ga Cé chomh fada is a shíneann an cábla ón soicéad, tomhaiste feadh an chábla
+
+@ Any metal surface takes the plug, not just electronics
+ga Glacann aon dromchla miotail leis an bplocóid, ní leictreonaic amháin
+
+@ Lightning damage every tenth of a second (the stock lightning gun does 30)
+ga Damáiste tintrí gach deichiú cuid de shoicind (déanann an gnáth-ghunna tintrí 30)
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2509,6 +2530,9 @@ ga < Siar
 # tr_ctx keys: English shows the short word, the key says which meaning
 @ Save (a manual save, as opposed to a quicksave or autosave)
 ga Sábháil
+
+@ Alt Fire on a glowing electronics panel within reach plugs one end in; the other end then shoots lightning with unlimited ammunition. The cable tethers you to the socket and catches on corners. Alt Fire or switching weapons yanks it out.
+ga Plugálann an tine thánaisteach ar phainéal leictreonach lonrach laistigh d'achar foirceann amháin; scaoileann an foirceann eile tintreach ansin le hurchair gan teorainn. Ceanglaíonn an cábla thú leis an soicéad agus téann sé i bhfostú ar choirnéil. Stoitheann tine thánaisteach nó athrú airm amach é.
 
 # ==== hud.txt ====
 

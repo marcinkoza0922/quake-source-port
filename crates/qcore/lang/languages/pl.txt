@@ -1343,6 +1343,27 @@ pl xbox
 @ yellow
 pl żółty
 
+@ Male-to-Male Cable
+pl Kabel męsko-męski
+
+@ Cable Length
+pl Długość kabla
+
+@ Plug Into Metal
+pl Podłączanie do metalu
+
+@ Bolt Damage
+pl Obrażenia wyładowania
+
+@ How far the cable reaches from its socket, measured along the cable
+pl Jak daleko sięga kabel od gniazda, mierzone wzdłuż kabla
+
+@ Any metal surface takes the plug, not just electronics
+pl Wtyczka pasuje do każdej metalowej powierzchni, nie tylko do elektroniki
+
+@ Lightning damage every tenth of a second (the stock lightning gun does 30)
+pl Obrażenia błyskawicy co dziesiątą część sekundy (zwykłe działo błyskawic zadaje 30)
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2509,6 +2530,9 @@ pl < Wstecz
 # tr_ctx keys: English shows the short word, the key says which meaning
 @ Save (a manual save, as opposed to a quicksave or autosave)
 pl Zapis
+
+@ Alt Fire on a glowing electronics panel within reach plugs one end in; the other end then shoots lightning with unlimited ammunition. The cable tethers you to the socket and catches on corners. Alt Fire or switching weapons yanks it out.
+pl Ogień alternatywny na świecącym panelu elektronicznym w zasięgu wpina jeden koniec; drugi strzela błyskawicami bez limitu amunicji. Kabel wiąże cię z gniazdem i zaczepia o narożniki. Ogień alternatywny lub zmiana broni go wyrywa.
 
 # ==== hud.txt ====
 

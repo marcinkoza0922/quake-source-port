@@ -5,7 +5,7 @@ use std::path::{Path, PathBuf};
 use qcore::cvar::Cvars;
 use qcore::fs::Fs;
 use qserver::addons::hookshot::State;
-use qserver::addons::{BUTTON_TOY_FIRE, TOY_SHIFT, Toy};
+use qserver::addons::{BUTTON_TOY_FIRE, Toy};
 use qserver::{ClientMove, Server};
 
 fn basedir() -> Option<PathBuf> {
@@ -49,8 +49,8 @@ fn origin(sv: &Server) -> [f32; 3] {
     sv.level.as_ref().unwrap().vm.ent_v(1, sv.core.sv.fields.origin)
 }
 
-fn hook(angles: [f32; 3], buttons: u8) -> ClientMove {
-    ClientMove { angles, buttons: Toy::Hookshot.id() << TOY_SHIFT | buttons, ..Default::default() }
+fn hook(angles: [f32; 3], buttons: u16) -> ClientMove {
+    ClientMove { angles, buttons: Toy::Hookshot.bits() | buttons, ..Default::default() }
 }
 
 /// In the start corridor, shoot the side wall.

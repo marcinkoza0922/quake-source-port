@@ -1343,6 +1343,27 @@ ta Xbox
 @ yellow
 ta மஞ்சள்
 
+@ Male-to-Male Cable
+ta ஆண்-ஆண் கேபிள்
+
+@ Cable Length
+ta கேபிள் நீளம்
+
+@ Plug Into Metal
+ta உலோகத்தில் செருகு
+
+@ Bolt Damage
+ta மின்னிறக்க சேதம்
+
+@ How far the cable reaches from its socket, measured along the cable
+ta சாக்கெட்டிலிருந்து கேபிள் எவ்வளவு தூரம் எட்டும், கேபிளின் வழியே அளக்கப்பட்டது
+
+@ Any metal surface takes the plug, not just electronics
+ta மின்னணு மட்டுமல்ல, எந்த உலோக மேற்பரப்பும் பிளக்கை ஏற்கும்
+
+@ Lightning damage every tenth of a second (the stock lightning gun does 30)
+ta ஒவ்வொரு பத்தில் ஒரு வினாடிக்கும் மின்னல் சேதம் (சாதாரண மின்னல் துப்பாக்கி 30)
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2509,6 +2530,9 @@ ta < பின்செல்
 # tr_ctx keys: English shows the short word, the key says which meaning
 @ Save (a manual save, as opposed to a quicksave or autosave)
 ta சேமிப்பு
+
+@ Alt Fire on a glowing electronics panel within reach plugs one end in; the other end then shoots lightning with unlimited ammunition. The cable tethers you to the socket and catches on corners. Alt Fire or switching weapons yanks it out.
+ta எட்டும் தூரத்தில் ஒளிரும் மின்னணு பலகையில் மாற்றுச் சுடுதல் ஒரு முனையைச் செருகும்; மறுமுனை பின்னர் வரம்பற்ற வெடிமருந்துடன் மின்னலைச் சுடும். கேபிள் உங்களைச் சாக்கெட்டுடன் கட்டி மூலைகளில் சிக்கும். மாற்றுச் சுடுதல் அல்லது ஆயுத மாற்றம் அதைப் பிடுங்கும்.
 
 # ==== hud.txt ====
 

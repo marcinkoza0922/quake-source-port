@@ -1343,6 +1343,27 @@ zh-CN Xbox
 @ yellow
 zh-CN 黄色
 
+@ Male-to-Male Cable
+zh-CN 公对公线缆
+
+@ Cable Length
+zh-CN 线缆长度
+
+@ Plug Into Metal
+zh-CN 可插入金属
+
+@ Bolt Damage
+zh-CN 放电伤害
+
+@ How far the cable reaches from its socket, measured along the cable
+zh-CN 线缆从插座能延伸多远（沿线缆测量）
+
+@ Any metal surface takes the plug, not just electronics
+zh-CN 不只电子设备，任何金属表面都能插入插头
+
+@ Lightning damage every tenth of a second (the stock lightning gun does 30)
+zh-CN 每 0.1 秒的闪电伤害（原版雷电枪为 30）
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2509,6 +2530,9 @@ zh-CN < 返回
 # tr_ctx keys: English shows the short word, the key says which meaning
 @ Save (a manual save, as opposed to a quicksave or autosave)
 zh-CN 存档
+
+@ Alt Fire on a glowing electronics panel within reach plugs one end in; the other end then shoots lightning with unlimited ammunition. The cable tethers you to the socket and catches on corners. Alt Fire or switching weapons yanks it out.
+zh-CN 对触手可及的发光电子面板使用副开火可插入一端；另一端随即以无限弹药发射闪电。线缆会把你拴在插座上，并会挂住拐角。副开火或切换武器会将其拔出。
 
 # ==== hud.txt ====
 

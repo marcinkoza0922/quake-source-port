@@ -7,7 +7,7 @@ use qcore::cvar::Cvars;
 use qcore::fs::Fs;
 use qcore::math::Vec3;
 use qserver::addons::gel::{BLUE, ORANGE};
-use qserver::addons::{BUTTON_TOY_ALT, BUTTON_TOY_FIRE, TOY_SHIFT, Toy};
+use qserver::addons::{BUTTON_TOY_ALT, BUTTON_TOY_FIRE, Toy};
 use qserver::{ClientMove, Server};
 
 fn start() -> Option<(Server, usize)> {
@@ -37,12 +37,12 @@ fn run(sv: &mut Server, c: usize, frames: usize, mv: ClientMove) {
     }
 }
 
-fn held(t: Toy, buttons: u8, pitch: f32) -> ClientMove {
+fn held(t: Toy, buttons: u16, pitch: f32) -> ClientMove {
     aimed(t, buttons, pitch, 90.0)
 }
 
-fn aimed(t: Toy, buttons: u8, pitch: f32, yaw: f32) -> ClientMove {
-    ClientMove { angles: [pitch, yaw, 0.0], buttons: t.id() << TOY_SHIFT | buttons, ..Default::default() }
+fn aimed(t: Toy, buttons: u16, pitch: f32, yaw: f32) -> ClientMove {
+    ClientMove { angles: [pitch, yaw, 0.0], buttons: t.bits() | buttons, ..Default::default() }
 }
 
 fn velocity(sv: &Server) -> Vec3 {

@@ -139,7 +139,7 @@ impl Server {
         vm.protect_world = true;
         self.level = Some(Level {
             dodges: Vec::new(), vm, world, modifiers: Vec::new(), portals: Default::default(), stickies: Default::default(), falls: Default::default(),
-            rails: Default::default(), hooks: crate::addons::hookshot::Hooks::new(crate::addons::hook_surface::Surfaces::new(&bsp)),
+            rails: Default::default(), hooks: crate::addons::hookshot::Hooks::new(crate::addons::hook_surface::Surfaces::new(&bsp)), cables: Default::default(),
             boomerangs: Default::default(), gel: Default::default(), washers: Default::default(),
         });
 

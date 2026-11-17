@@ -348,6 +348,10 @@ impl ClientState {
                 }
                 continue;
             }
+            if let Some(args) = line.strip_prefix(b"//qsp_cable ") {
+                self.parse_cable(&String::from_utf8_lossy(args));
+                continue;
+            }
             if let Some(args) = line.strip_prefix(b"//qsp_hook ") {
                 self.parse_hook(&String::from_utf8_lossy(args));
                 continue;

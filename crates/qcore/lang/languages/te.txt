@@ -1343,6 +1343,27 @@ te Xbox
 @ yellow
 te పసుపు
 
+@ Male-to-Male Cable
+te మేల్-టు-మేల్ కేబుల్
+
+@ Cable Length
+te కేబుల్ పొడవు
+
+@ Plug Into Metal
+te లోహంలో ప్లగ్ చేయి
+
+@ Bolt Damage
+te డిశ్చార్జ్ నష్టం
+
+@ How far the cable reaches from its socket, measured along the cable
+te సాకెట్ నుండి కేబుల్ ఎంత దూరం చేరుతుంది, కేబుల్ వెంబడి కొలిచినది
+
+@ Any metal surface takes the plug, not just electronics
+te ఎలక్ట్రానిక్స్ మాత్రమే కాదు, ఏ లోహ ఉపరితలమైనా ప్లగ్‌ను తీసుకుంటుంది
+
+@ Lightning damage every tenth of a second (the stock lightning gun does 30)
+te ప్రతి పదో వంతు సెకనుకు మెరుపు నష్టం (సాధారణ మెరుపు తుపాకీ 30 ఇస్తుంది)
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2509,6 +2530,9 @@ te < వెనక్కి
 # tr_ctx keys: English shows the short word, the key says which meaning
 @ Save (a manual save, as opposed to a quicksave or autosave)
 te సేవ్
+
+@ Alt Fire on a glowing electronics panel within reach plugs one end in; the other end then shoots lightning with unlimited ammunition. The cable tethers you to the socket and catches on corners. Alt Fire or switching weapons yanks it out.
+te అందుబాటులో మెరుస్తున్న ఎలక్ట్రానిక్ ప్యానెల్‌పై ప్రత్యామ్నాయ కాల్పు ఒక చివరను ప్లగ్ చేస్తుంది; మరో చివర అప్పుడు అపరిమిత మందుగుండుతో మెరుపులు కాలుస్తుంది. కేబుల్ మిమ్మల్ని సాకెట్‌కు కట్టి మూలల్లో చిక్కుకుంటుంది. ప్రత్యామ్నాయ కాల్పు లేదా ఆయుధం మార్చడం దాన్ని లాగేస్తుంది.
 
 # ==== hud.txt ====
 

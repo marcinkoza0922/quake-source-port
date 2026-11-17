@@ -155,6 +155,9 @@ pub enum ClientEvent {
     RailEffect(crate::RailEffect),
     /// A hookshot changed state (`hooks` holds the live heads).
     Hook(crate::hook::HookView),
+    /// A cable was plugged in, yanked out, missed a socket or started firing
+    /// (`cables` holds the plugged ones).
+    Cable(crate::cable::CableView),
     /// Add-on boomerang line (`//qsp_boom ...` without the prefix).
     Boomerang(String),
     /// Add-on gel line (`//qsp_gel ...` without the prefix).
@@ -283,6 +286,8 @@ pub struct ClientState {
     pub portals: Vec<PortalView>,
     /// Add-on hookshot heads from `//qsp_hook` stufftext.
     pub hooks: Vec<crate::hook::HookView>,
+    /// Add-on cables plugged in, from `//qsp_cable` stufftext.
+    pub cables: Vec<crate::cable::CableView>,
     /// Add-on stickybombs (id, origin) from `//qsp_sticky` stufftext.
     pub stickies: Vec<(u32, [f32; 3])>,
     /// Reliable clc_* bytes to send (signon replies, string commands).
@@ -372,6 +377,7 @@ impl ClientState {
             stuffcmdbuf: Vec::new(),
             portals: Vec::new(),
             hooks: Vec::new(),
+            cables: Vec::new(),
             stickies: Vec::new(),
             out_reliable: SizeBuf::new(MAX_MSGLEN),
             movemessages: 0,

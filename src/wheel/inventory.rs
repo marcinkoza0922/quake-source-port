@@ -46,7 +46,7 @@ impl Entry {
             Weapon::Addon(Toy::PortalGun) => "PG", Weapon::Addon(Toy::Boomerang) => "BM",
             Weapon::Addon(Toy::Sticky) => "SB", Weapon::Addon(Toy::Hookshot) => "HK",
             Weapon::Addon(Toy::Railgun) => "RG", Weapon::Addon(Toy::GelSprayer) => "GS",
-            Weapon::Addon(Toy::Washer) => "PW", _ => "AX",
+            Weapon::Addon(Toy::Washer) => "PW", Weapon::Addon(Toy::Cable) => "MM", _ => "AX",
         }
     }
     pub fn icon(self) -> Option<&'static str> { self.stock().and_then(|s| s.icon) }

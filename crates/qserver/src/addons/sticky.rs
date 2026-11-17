@@ -53,7 +53,7 @@ pub struct Bomb {
 pub struct Stickies {
     pub bombs: Vec<Bomb>,
     next_id: u32,
-    prev_buttons: Vec<u8>,
+    prev_buttons: Vec<u16>,
     next_fire: Vec<f64>,
     /// When each player started charging (fire held), if they are.
     charge: Vec<Option<f64>>,

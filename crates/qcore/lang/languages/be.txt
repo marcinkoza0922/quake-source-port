@@ -1343,6 +1343,27 @@ be Xbox
 @ yellow
 be жоўты
 
+@ Male-to-Male Cable
+be Кабель «тата-тата»
+
+@ Cable Length
+be Даўжыня кабеля
+
+@ Plug Into Metal
+be Падключаць да металу
+
+@ Bolt Damage
+be Шкода разраду
+
+@ How far the cable reaches from its socket, measured along the cable
+be Як далёка кабель дастае ад гнязда, па даўжыні кабеля
+
+@ Any metal surface takes the plug, not just electronics
+be Штэкер падыходзіць да любой металічнай паверхні, а не толькі да электронікі
+
+@ Lightning damage every tenth of a second (the stock lightning gun does 30)
+be Шкода маланкі кожную дзясятую долю секунды (звычайная маланкавая гармата наносіць 30)
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2509,6 +2530,9 @@ be < Назад
 # tr_ctx keys: English shows the short word, the key says which meaning
 @ Save (a manual save, as opposed to a quicksave or autosave)
 be Захаванне
+
+@ Alt Fire on a glowing electronics panel within reach plugs one end in; the other end then shoots lightning with unlimited ammunition. The cable tethers you to the socket and catches on corners. Alt Fire or switching weapons yanks it out.
+be Альт. агонь па бліскучай электроннай панэлі побач устаўляе адзін канец; другі канец страляе маланкамі з неабмежаванымі боепрыпасамі. Кабель прывязвае вас да гнязда і чапляецца за вуглы. Альт. агонь або змена зброі выдзірае яго.
 
 # ==== hud.txt ====
 

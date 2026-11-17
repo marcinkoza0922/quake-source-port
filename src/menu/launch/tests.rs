@@ -213,3 +213,18 @@ fn map_of_reads_level_commands() {
     assert_eq!(map_of("game \"id1\" \"e1m3\"\n"), Some("e1m3"));
     assert_eq!(map_of("game \"mg1\"\n"), None);
 }
+
+#[test]
+fn any_single_addon_makes_the_new_game_customized() {
+    for (name, cvar) in toy_toggles() {
+        let mut cv = cvars();
+        cv.register("addon_goggles", "0", 0); // a host cvar
+        assert!(!customized(&cv));
+        cv.set(cvar, "1");
+        assert!(customized(&cv), "{name} alone did not customize the game");
+        assert_eq!(addons_on(&cv), [name]);
+        disable_all(&mut cv);
+        assert!(!customized(&cv));
+    }
+    assert!(toy_toggles().any(|t| t.1 == "addon_cable"));
+}

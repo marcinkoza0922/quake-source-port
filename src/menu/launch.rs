@@ -36,12 +36,9 @@ const BTN_W: f32 = BOX.2 - 40.0;
 /// Play, Customize Experience, Disable All Modifications: top and height.
 const BTNS: [(f32, f32); 3] = [(BOX.1 + 38.0, 34.0), (BOX.1 + 78.0, 18.0), (BOX.1 + 102.0, 16.0)];
 
-/// Rows of the New Game add-on picker that switch a toy on.
+/// Every add-on the New Game browser can switch on (name, cvar).
 fn toy_toggles() -> impl Iterator<Item = (&'static str, &'static str)> {
-    page_items(Page::NewGameAddons).iter().filter_map(|i| match *i {
-        Item::Toggle { label, cvar } if customize::is_toy_cvar(cvar) => Some((label, cvar)),
-        _ => None,
-    })
+    super::addon_browser::toggles()
 }
 
 /// Names of the add-ons that are on.

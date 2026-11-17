@@ -1343,6 +1343,27 @@ ca Xbox
 @ yellow
 ca groc
 
+@ Male-to-Male Cable
+ca Cable mascle-mascle
+
+@ Cable Length
+ca Longitud del cable
+
+@ Plug Into Metal
+ca Endollar al metall
+
+@ Bolt Damage
+ca Dany de la descàrrega
+
+@ How far the cable reaches from its socket, measured along the cable
+ca Fins on arriba el cable des de la presa, mesurat al llarg del cable
+
+@ Any metal surface takes the plug, not just electronics
+ca Qualsevol superfície metàl·lica admet l'endoll, no només l'electrònica
+
+@ Lightning damage every tenth of a second (the stock lightning gun does 30)
+ca Dany del llamp cada dècima de segon (el canó de llamps original en fa 30)
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2509,6 +2530,9 @@ ca < Enrere
 # tr_ctx keys: English shows the short word, the key says which meaning
 @ Save (a manual save, as opposed to a quicksave or autosave)
 ca Partida desada
+
+@ Alt Fire on a glowing electronics panel within reach plugs one end in; the other end then shoots lightning with unlimited ammunition. The cable tethers you to the socket and catches on corners. Alt Fire or switching weapons yanks it out.
+ca El tret secundari sobre un panell electrònic il·luminat a l'abast hi endolla un extrem; l'altre dispara llamps amb munició il·limitada. El cable et lliga a la presa i s'enganxa a les cantonades. El tret secundari o canviar d'arma l'arrenca.
 
 # ==== hud.txt ====
 

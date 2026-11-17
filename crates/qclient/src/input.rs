@@ -12,8 +12,9 @@ pub struct UserCmd {
     pub forwardmove: f32,
     pub sidemove: f32,
     pub upmove: f32,
-    /// bit 0 attack, bit 1 jump.
-    pub buttons: u8,
+    /// bit 0 attack, bit 1 jump; bits 2.. are local add-on bits (only the
+    /// low byte goes on the wire).
+    pub buttons: u16,
     pub impulse: u8,
 }
 
@@ -106,7 +107,7 @@ impl ClientState {
             cmd.sidemove *= sp.movespeedkey;
             cmd.upmove *= sp.movespeedkey;
         }
-        cmd.buttons = inp.attack as u8 | (inp.jump as u8) << 1;
+        cmd.buttons = inp.attack as u16 | (inp.jump as u16) << 1;
         cmd.impulse = inp.impulse;
         cmd
     }
@@ -126,7 +127,7 @@ impl ClientState {
         b.short(cmd.forwardmove as i32);
         b.short(cmd.sidemove as i32);
         b.short(cmd.upmove as i32);
-        b.byte(cmd.buttons as i32);
+        b.byte(i32::from(cmd.buttons as u8));
         b.byte(cmd.impulse as i32);
         b.data
     }

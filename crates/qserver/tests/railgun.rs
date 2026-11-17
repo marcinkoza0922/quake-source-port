@@ -4,7 +4,7 @@ use std::path::{Path, PathBuf};
 
 use qcore::cvar::Cvars;
 use qcore::fs::Fs;
-use qserver::addons::{BUTTON_TOY_FIRE, TOY_SHIFT, Toy};
+use qserver::addons::{BUTTON_TOY_FIRE, Toy};
 use qserver::{ClientMove, Server};
 
 fn start() -> Option<(Server, usize)> {
@@ -25,8 +25,8 @@ fn start() -> Option<(Server, usize)> {
 }
 
 /// Runs frames, returning the reliable text received.
-fn run(sv: &mut Server, c: usize, frames: usize, buttons: u8) -> String {
-    let mv = ClientMove { angles: [0.0, 90.0, 0.0], buttons: Toy::Railgun.id() << TOY_SHIFT | buttons, ..Default::default() };
+fn run(sv: &mut Server, c: usize, frames: usize, buttons: u16) -> String {
+    let mv = ClientMove { angles: [0.0, 90.0, 0.0], buttons: Toy::Railgun.bits() | buttons, ..Default::default() };
     let mut out = Vec::new();
     for _ in 0..frames {
         sv.set_move(c, mv);

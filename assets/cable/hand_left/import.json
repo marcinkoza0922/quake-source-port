@@ -1,0 +1,26 @@
+{
+  "source": "hands.glb",
+  "source_triangles": 1342,
+  "triangles": 1342,
+  "vertices": 1247,
+  "texture_size": 512,
+  "removed_packed_degenerates": 0,
+  "bounds": [
+    [
+      -3.75,
+      -4.841601371765137,
+      -6.211944580078125
+    ],
+    [
+      3.75,
+      4.841601371765137,
+      6.211944580078125
+    ]
+  ],
+  "glow_texels": 0,
+  "length": 7.5,
+  "anchor": "bbox",
+  "flip": false,
+  "flat": false,
+  "gain": 0.5
+}

@@ -143,7 +143,7 @@ death, invisibility and intermission hide it like the normal weapon.
 Gameplay → Viewmodels controls all weapons: Center (default), Right, Left, Off
 (`r_drawviewmodel` 1, 2, 3, 0 respectively, archived). Side placement translates
 eight units along each camera's right axis without changing aim or mirroring
-meshes. The portal gun follows the camera basis with negated alias pitch,
+meshes (except the two-handed cable, which stays centred). The portal gun follows the camera basis with negated alias pitch,
 without the former fixed yaw/side offset, so looking up/down keeps its pose.
 
 The authoritative server broadcasts transient reliable comment messages
@@ -431,6 +431,77 @@ floor gel within 44 u (+0.6 r) is washed off.
   task `01a1d721-4189-74a0-b4a3-702bf531235d`), imported with `--length 30
   --gain 0.6 --flip`.
 - Menu: Add-ons → Gel Sprayer (Gel Quality `addon_gel_quality` low/high, default high), Powerwasher, Powerwasher Push, Jet Quality (`addon_washer_quality` low/high, default high) (`menu_options gel` / `menu_options washer`).
+### Male-to-male cable (`addon_cable`, `addons/cable.rs`, `cable_rope.rs`; `src/addons/cable_fx.rs`, `cable_rope_fx.rs`, `cable_glow.rs`)
+The player holds one plug in each hand. Alt-fire on a surface that takes
+the plug, within `cable::REACH` (112 u) of the eye, plugs one end in;
+otherwise it is a miss (cue only). Sockets are faces whose texture shows
+electronics (`hook_surface::electronic`: `comp`, `tech`, `twall`, `tlight`,
+`htek`, buttons `basebtn`/`butn`/`button`, switches `mtlsw`/`swtch`/
+`floorsw`, slipgates `slip`, plus `screen`, `monitor`, `panel`, `console`,
+...), or any metal with `addon_cable_metal 1` (default 0, for maps without
+computer panels). World faces and brush entities (the socket then follows
+the entity) both work.
+- Plugged: fire shoots a lightning bolt from the free plug (infinite ammo):
+  a 600 u `Normal` trace from the eye; every 0.1 s the first entity hit takes
+  `addon_cable_damage` (default 30, the stock lightning gun's) through QC
+  `T_Damage`, with the stock blood puff. Stock `weapons/lstart.wav` /
+  `lhit.wav` play when the progs precached them.
+- Tether (`cable_rope::Rope`): a rope from the socket to the player's hull
+  centre that wraps round world corners. When the line from the last anchor
+  to the player is blocked, a binary search between last frame's clear
+  point and this frame's finds the corner and a pivot goes just outside it
+  (nudged sideways towards the clear side and off the face). Each pivot
+  stores its bend direction; it is removed when the rope straightens through
+  it and the line from the previous anchor is clear. Only the world snags
+  the rope (movers don't); at most 24 pivots. Length is measured along the
+  rope; past `addon_cable_length` (default 512, 128–4096) the player loses
+  the outward speed and gets a pull back of 10 u/s per unit over (≤ 500), so
+  player physics does all the moving. Over by more than 160 u (teleporters,
+  pushers) tears it out.
+- Unplugged by alt-fire, putting the cable away (any other weapon), death,
+  the socket's entity disappearing, add-ons going off or a level change.
+- Sync: `//qsp_cable owner state fire sx sy sz nx ny nz ex ey ez length
+  [px py pz]...` every frame while plugged (state 1, `fire` 1 while the bolt
+  reaches `e`, the rope's pivots); state 0 once on unplugging, 2 for a
+  miss. `qclient::CableView`, `ClientState::cables`, `ClientEvent::Cable`
+  on plug/yank/miss/bolt start. Cables are transient: saves keep only `toy
+  cable`.
+- Toy id 8 needed a fourth id bit: usercmd buttons are `u16` in
+  `ClientMove`/`UserCmd` (toy id bits 4–7, dodge bit 8). Only the low byte
+  goes on the wire; add-ons never run with remote clients.
+- Client: view model = two Meshy gloved fists (`assets/cable/`) low in
+  the corners, each holding its plug pins up in a hammer grip (the fist is
+  posed from forearm and grip directions with roll, `cable_fx::fist`);
+  each plug's aim is a damped spring kicked by turning and acceleration
+  (buzzing while the bolt fires) that the fist follows, the hands sway on
+  a stiffer one. Plugging in drops the left hand out of view and cocks the
+  right wrist so its plug, held by the tail, points ahead (0.25 s). Being
+  two-handed, the cable ignores the Viewmodels left/right alignment. A world plug sits in the
+  socket. Ropes are verlet chains (`RopeSim`, ~10 u links, ≤ 96 nodes)
+  between the socket, the server's pivots and the owner's body, sharing
+  the slack between spans, point-traced against the client BSP so they lie
+  on floors; the owner's own rope ends at his plug. A 70 u loop hangs
+  between the hands while unplugged, carried rigidly with them before each
+  step (`RopeSim::carry`) so walking and turning only make it sway instead
+  of whipping up past the eye. A rope not stepped for 0.25 s (put away,
+  or the hand loop while plugged in) or whose anchor jumps further than its
+  length (teleport) is laid afresh between its anchors. Ribbons are camera-facing dark rubber
+  quads. The bolt is stock `progs/bolt2.mdl` segments from the plug's pins.
+- Highlight (`cable_glow`): while the cable is held and not plugged,
+  socket faces facing the eye within 320 u get a faint pulsing cyan
+  outline, and the one under the crosshair within reach a brighter outline
+  and fill (client BSP + the same texture rules, world and unrotated brush
+  entities; the crosshair test stops at the world).
+- Cues: synthesised `qsound::cable` (plug clunk + hum swell, yank pop +
+  sparks, miss clunk).
+- Menu: Add-ons → Male-to-Male Cable (`Page::Cable`, `menu_options cable`):
+  Cable Length, Plug Into Metal, Bolt Damage. Default weapon slot 8 (the
+  lightning gun's), wheel label "MM".
+- Tests: `crates/qserver/tests/cable.rs` (e1m1: plug into a tech panel,
+  bolt, tether holds a player walking away, alt-fire and weapon switch
+  unplug, the floor refuses); `cable_rope` (wrap round a pillar and unwrap
+  coming back), `cable_rope_fx` (slack rope lies on the floor, taut one
+  stays straight), `hook_surface` electronics names, `qclient::cable`.
 ### Equipment wheel and goggles (`src/addons/goggles.rs`, `equip_wheel.rs`, `src/host/goggles.rs`)
 Equipment is switched on and off rather than held, so it does not use the
 toy slot. `Equip` lists it in wheel order; items of one group exclude each

@@ -144,6 +144,13 @@ impl Host {
                     weapon.origin = (Vec3::from(weapon.origin) + cv.viewmodel.offset(v.angles)).to_array();
                     ents.push(RenderEntity { views: bit, ..weapon });
                 }
+                if g.toy.held == Some(qserver::addons::Toy::Cable) && g.cl.intermission == 0 && g.cl.stats[0] > 0
+                    && cv.viewmodel.visible() && g.cl.items & crate::sbar::IT_INVISIBILITY == 0 {
+                    // two-handed: no left/right view model alignment
+                    for weapon in self.cable_fx.weapon(g.cl.viewentity.saturating_sub(1), &g.cl, self.cl.time, v, &mut self.level, &self.server.core.fs, &mut self.r) {
+                        ents.push(RenderEntity { views: bit, ..weapon });
+                    }
+                }
                 if g.toy.held == Some(qserver::addons::Toy::Sticky) && g.cl.intermission == 0 && g.cl.stats[0] > 0
                     && cv.viewmodel.visible() && g.cl.items & crate::sbar::IT_INVISIBILITY == 0
                     && let Some(mut weapon) = crate::addons::sticky_draw::weapon(self.cl.time, v, &mut self.level, &self.server.core.fs, &mut self.r) {

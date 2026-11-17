@@ -5,6 +5,7 @@ blender -b --factory-startup --python tools/import_toy_model.py -- \
     [--anchor bbox|centroid|origin] [--back B] [--forward F] [--flip] [--flat]
     [--mirror]
     [--size 512] [--gain 0.5] [--glow] [--glow-blue] [--keep-uv]
+    [--side left|right] [--fixed]
 
 Generalised from tools/import_portal_gun.py. Writes OUT/NAME.mdl.zlib (MDL v6,
 one pose; NAME defaults to "model"), OUT/texture.rgb.zlib (top-down RGB8,
@@ -23,6 +24,11 @@ so its longest axis is --length units along +X (muzzle forward), +Z up.
                only blue energy texels and preserves highlight gradients.
   --keep-uv    keep the source UVs and texture when already within the triangle
                budget instead of re-unwrapping and baking.
+  --side       keep only the faces left (source -X) or right (+X) of the
+               bounding box centre: one hand of a pair of hands.
+  --fixed      skip the longest-axis guess: the source front (Blender +Y, the
+               view into the Meshy concept image) becomes +X and --length is
+               the size along it.
 No Quake palette or game data is needed.
 """
 import argparse
@@ -46,13 +52,28 @@ TRIANGLES = 4000
 
 
 
+def keep_side(obj, side):
+    """Delete the faces whose centre lies on the other side of the bbox centre (X)."""
+    import bmesh
+    bm = bmesh.new()
+    bm.from_mesh(obj.data)
+    xs = [(obj.matrix_world @ v.co).x for v in bm.verts]
+    mid = (min(xs) + max(xs)) / 2
+    drop = [f for f in bm.faces if ((obj.matrix_world @ f.calc_center_median()).x < mid) == (side == 'right')]
+    bmesh.ops.delete(bm, geom=drop, context='FACES')
+    bm.to_mesh(obj.data)
+    bm.free()
+
+
 def place(obj, opts):
     """Scale and orient the mesh in place (world space)."""
     pts = [obj.matrix_world @ v.co for v in obj.data.vertices]
     lo = [min(p[i] for p in pts) for i in range(3)]
     hi = [max(p[i] for p in pts) for i in range(3)]
     dims = [hi[i] - lo[i] for i in range(3)]
-    if opts.flat:
+    if opts.fixed:
+        axes = [1, 0, 2]
+    elif opts.flat:
         axes = sorted(range(3), key=lambda i: -dims[i])
     else:
         # longest horizontal axis -> X, Z stays up
@@ -97,6 +118,8 @@ def main():
     args.add_argument('--glow', action='store_true')
     args.add_argument('--glow-blue', action='store_true',
                       help='like --glow, but only mark blue energy texels')
+    args.add_argument('--side', choices=('left', 'right'))
+    args.add_argument('--fixed', action='store_true')
     args.add_argument('--keep-uv', action='store_true',
                       help='keep source UVs and texture instead of re-unwrapping and baking')
     opts = args.parse_args(sys.argv[sys.argv.index('--') + 1:])
@@ -127,6 +150,8 @@ def main():
             raise ValueError('Expected the supplied single-mesh Meshy export')
         obj = objects[0]
         bpy.context.view_layer.objects.active = obj
+        if opts.side:
+            keep_side(obj, opts.side)
         place(obj, opts)
         if opts.mirror:
             for vertex in obj.data.vertices:

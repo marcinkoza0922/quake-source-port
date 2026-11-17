@@ -1343,6 +1343,27 @@ mk Xbox
 @ yellow
 mk жолта
 
+@ Male-to-Male Cable
+mk Кабел машки-машки
+
+@ Cable Length
+mk Должина на кабелот
+
+@ Plug Into Metal
+mk Приклучи во метал
+
+@ Bolt Damage
+mk Штета од празнење
+
+@ How far the cable reaches from its socket, measured along the cable
+mk Колку далеку стигнува кабелот од приклучокот, мерено по должината на кабелот
+
+@ Any metal surface takes the plug, not just electronics
+mk Секоја метална површина го прифаќа приклучокот, не само електрониката
+
+@ Lightning damage every tenth of a second (the stock lightning gun does 30)
+mk Штета од молња секоја десетинка од секунда (обичниот молњомет нанесува 30)
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2509,6 +2530,9 @@ mk < Назад
 # tr_ctx keys: English shows the short word, the key says which meaning
 @ Save (a manual save, as opposed to a quicksave or autosave)
 mk Зачувај
+
+@ Alt Fire on a glowing electronics panel within reach plugs one end in; the other end then shoots lightning with unlimited ammunition. The cable tethers you to the socket and catches on corners. Alt Fire or switching weapons yanks it out.
+mk Алтернативниот оган врз светлечка електронска плоча на дофат приклучува едниот крај; другиот потоа испука молњи со неограничена муниција. Кабелот ве врзува за приклучокот и се закачува на аглите. Алтернативниот оган или промената на оружјето го искорнува.
 
 # ==== hud.txt ====
 

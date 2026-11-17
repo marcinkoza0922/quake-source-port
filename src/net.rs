@@ -187,7 +187,7 @@ fn read_client_message(sv: &mut Server, slot: usize, m: &[u8]) -> bool {
                 let forward = r.short() as f32;
                 let side = r.short() as f32;
                 let up = r.short() as f32;
-                let buttons = r.byte() as u8;
+                let buttons = u16::from(r.byte() as u8);
                 let impulse = r.byte() as u8;
                 if r.badread {
                     return false;

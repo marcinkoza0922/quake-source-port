@@ -8,7 +8,7 @@ const ALL_PAGES: &[Page] = &[
     Page::Touch, Page::Autosave, Page::AutoAim, Page::GrenadeArc, Page::HudLayout, Page::Messages, Page::Water,
     Page::Debris, Page::Blood, Page::Impacts, Page::ScreenShader, Page::Customize, Page::NewGameCustomize,
     Page::Modifiers, Page::Addons, Page::NewGameAddons, Page::PortalGun, Page::Boomerang, Page::Railgun, Page::Gel,
-    Page::Washer, Page::Hookshot, Page::Sticky, Page::Goggles, Page::ProjectileShotguns, Page::BulletTime,
+    Page::Washer, Page::Hookshot, Page::Cable, Page::Sticky, Page::Goggles, Page::ProjectileShotguns, Page::BulletTime,
     Page::Hitstop, Page::HitstopAdvanced, Page::Join, Page::Host, Page::Setup,
 ];
 

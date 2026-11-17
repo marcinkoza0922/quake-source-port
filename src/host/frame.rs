@@ -281,7 +281,7 @@ impl Host {
             }
             if self.net_client.is_some() && self.local.is_none() {
                 let mut cmd = self.last_cmd;
-                cmd.buttons = self.pend_attack as u8 | (self.pend_jump as u8) << 1;
+                cmd.buttons = self.pend_attack as u16 | (self.pend_jump as u16) << 1;
                 cmd.impulse = self.pend_impulse;
                 if let Some(m) = self.cl.build_move(&cmd)
                     && let Some(n) = &mut self.net_client

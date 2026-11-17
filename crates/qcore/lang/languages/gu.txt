@@ -1343,6 +1343,27 @@ gu Xbox
 @ yellow
 gu પીળો
 
+@ Male-to-Male Cable
+gu મેલ-ટુ-મેલ કેબલ
+
+@ Cable Length
+gu કેબલની લંબાઈ
+
+@ Plug Into Metal
+gu ધાતુમાં લગાવો
+
+@ Bolt Damage
+gu ડિસ્ચાર્જ નુકસાન
+
+@ How far the cable reaches from its socket, measured along the cable
+gu સોકેટથી કેબલ કેટલે દૂર સુધી પહોંચે છે, કેબલની સાથે માપેલું
+
+@ Any metal surface takes the plug, not just electronics
+gu માત્ર ઇલેક્ટ્રોનિક્સ નહીં, કોઈપણ ધાતુની સપાટી પ્લગ સ્વીકારે છે
+
+@ Lightning damage every tenth of a second (the stock lightning gun does 30)
+gu દર સેકન્ડના દસમા ભાગે વીજળીનું નુકસાન (સામાન્ય લાઇટનિંગ ગન 30 આપે છે)
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2509,6 +2530,9 @@ gu < પાછળ
 # tr_ctx keys: English shows the short word, the key says which meaning
 @ Save (a manual save, as opposed to a quicksave or autosave)
 gu સેવ
+
+@ Alt Fire on a glowing electronics panel within reach plugs one end in; the other end then shoots lightning with unlimited ammunition. The cable tethers you to the socket and catches on corners. Alt Fire or switching weapons yanks it out.
+gu પહોંચમાં ચમકતી ઇલેક્ટ્રોનિક પેનલ પર વૈકલ્પિક ફાયર એક છેડો લગાવે છે; પછી બીજો છેડો અમર્યાદિત દારૂગોળા સાથે વીજળી છોડે છે. કેબલ તમને સોકેટ સાથે બાંધે છે અને ખૂણામાં અટકે છે. વૈકલ્પિક ફાયર અથવા હથિયાર બદલવાથી તે ખેંચાઈ જાય છે.
 
 # ==== hud.txt ====
 

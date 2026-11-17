@@ -1,6 +1,9 @@
 //! Local weapon inventory selection and add-on usercmd buttons. Enabled
 //! add-on weapons are owned from the start and share stock weapon slots.
 
+pub mod cable_fx;
+mod cable_glow;
+mod cable_rope_fx;
 pub mod hook_fx;
 mod hook_model;
 pub mod boomerang_fx;
@@ -20,7 +23,7 @@ mod rail_model;
 pub mod sticky_draw;
 pub mod sticky_model;
 
-use qserver::addons::{BUTTON_TOY_ALT, BUTTON_TOY_FIRE, TOY_SHIFT, Toy};
+use qserver::addons::{BUTTON_TOY_ALT, BUTTON_TOY_FIRE, Toy};
 use crate::wheel::{Entry, Weapon};
 
 /// One local player's weapon selection.
@@ -136,12 +139,12 @@ impl WeaponSelection {
     }
 
     /// Usercmd buttons: QC's attack bit is withheld while a toy is held.
-    pub fn buttons(&self, attack: bool, attack2: bool, jump: bool) -> u8 {
-        let jump = (jump as u8) << 1;
+    pub fn buttons(&self, attack: bool, attack2: bool, jump: bool) -> u16 {
+        let jump = (jump as u16) << 1;
         match self.held {
-            None => attack as u8 | jump,
+            None => attack as u16 | jump,
             Some(t) => {
-                jump | t.id() << TOY_SHIFT
+                jump | t.bits()
                     | if attack { BUTTON_TOY_FIRE } else { 0 }
                     | if attack2 { BUTTON_TOY_ALT } else { 0 }
             }
@@ -359,7 +362,7 @@ mod tests {
     #[test]
     fn disabled_weapons_are_put_away_and_buttons_follow_selection() {
         let mut s = WeaponSelection { held: Some(Toy::Sticky), ..Default::default() };
-        assert_eq!(s.buttons(true, false, false), Toy::Sticky.id() << TOY_SHIFT | BUTTON_TOY_FIRE);
+        assert_eq!(s.buttons(true, false, false), Toy::Sticky.bits() | BUTTON_TOY_FIRE);
         let mut impulse = 0;
         s.update_slots(&slot_cvars(), &[], (0, &mut impulse), &inventory(1, 4097));
         assert_eq!(s.held, None);

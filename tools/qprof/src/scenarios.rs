@@ -113,7 +113,7 @@ pub(crate) const ADDON_ON: &[(&str, &str)] = &[
     ("addon_dodge", "1"), ("addon_bullet_time", "1"), ("addon_bullet_time_toggle", "0"),
     ("addon_bullet_time_duration", "5"), ("addon_portalgun", "1"), ("addon_sticky", "1"),
     ("addon_boomerang", "1"), ("addon_railgun", "1"), ("addon_hookshot", "1"), ("addon_gel", "1"),
-    ("addon_washer", "1"), ("addon_goggles", "1"),
+    ("addon_washer", "1"), ("addon_cable", "1"), ("addon_goggles", "1"),
     ("addon_portal_view", "1"), ("addon_portal_max", "4"), ("addon_portal_depth", "6"),
     ("addon_portal_dist", "8192"), ("r_portal_quality", "2"),
 ];
@@ -224,6 +224,7 @@ pub fn all(secs: f32) -> Vec<Scenario> {
     out.push(addon("railgun", "railgun fired continuously", hold_toy(4), true));
     out.push(addon("gel", "gel sprayer: both gels", alt_toy(5, secs, 1.0), true));
     out.push(addon("washer", "powerwasher held", hold_toy(6), true));
+    out.push(addon("cable", "male-to-male cable: socket highlight, plug attempts, bolt when plugged", alt_toy(7, secs, 1.5), true));
     out.push(addon("goggles-nv", "night-vision goggles on", vec![(0.0, "goggles nv".into())], false));
     out.push(addon("goggles-thermal", "thermal goggles on", vec![(0.0, "goggles thermal".into())], false));
     out.push(addon("bullettime", "bullet time pulsed (5 s on, 1 s off)", pulse(secs, 6.0, 5.0, "+bullettime", "-bullettime"), false));
@@ -240,7 +241,7 @@ pub fn all(secs: f32) -> Vec<Scenario> {
     let mut t = 0.0;
     let mut k = 0;
     while t < secs {
-        all.push((t, format!("toy {}", k % 7)));
+        all.push((t, format!("toy {}", k % 8)));
         t += 2.0;
         k += 1;
     }

@@ -11,8 +11,9 @@ pub struct ClientMove {
     pub forward: f32,
     pub side: f32,
     pub up: f32,
-    /// bit 0 attack (button0), bit 1 jump (button2).
-    pub buttons: u8,
+    /// bit 0 attack (button0), bit 1 jump (button2); higher bits are the
+    /// local add-on bits (`addons::BUTTON_*`, toy id), never on the wire.
+    pub buttons: u16,
     pub impulse: u8,
 }
 

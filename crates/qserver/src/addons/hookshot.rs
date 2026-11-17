@@ -90,7 +90,7 @@ impl Rules {
 pub struct Hooks {
     pub surfaces: Surfaces,
     pub state: Vec<State>,
-    prev_buttons: Vec<u8>,
+    prev_buttons: Vec<u16>,
     sent: Vec<u8>,
     last_time: f64,
 }
