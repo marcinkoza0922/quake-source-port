@@ -161,13 +161,58 @@ acting (numbers in [HISTORY.md](HISTORY.md)):
 - **H12 (old item 12)**: driver and synchronisation overhead; 540p shows
   it best.
 
-New items go here once the first baseline exists.
+From the first baseline (Results, 2026-11-17):
+
+- **V1**: `spin-sepulcher` at 540p is the one scene where we aren't ahead
+  (ironwail +2%, within noise). It is the scene where AD sends classic
+  particle messages every frame, so this is H4 in its classic form, and it
+  is CPU work: at 4K we lead by 45%.
+- **V2**: one 49.7 ms cold-start hitch on `spin-sepulcher-fte`, the only
+  frame over 33 ms in our cold runs. It is probably the FTE particle
+  pipelines or textures created on first use; find out and create them at
+  load. `combat-e1m3`'s worst cold frame (6.5 ms) is also twice the
+  references'.
+- **V3**: the r_partinfo particle-count check (Particle suite) is still to
+  do before the FTE numbers count as a like-for-like comparison.
 
 ## Results
 
-(date, commit, scene, resolution, engine, median fps / frame µs / p99 µs,
-spread)
+**2026-11-17, commit 6fcd456, demo set `e53154d-dirty`.** qbench
+defaults: 3 fps runs + 1 MangoHud run per cell, median fps (min–max), p99
+from the MangoHud run. 540p is in a window, 4K in gamescope. No errors, and
+no config changed. A copy of the report is in `target/perf/part1-6fcd456/`.
 
-None yet. The last recorded parity numbers (1280×720, MSAA off, 8×
-anisotropy, no md5, 2026-11-11) are in HISTORY.md and DESIGN.md (M7); they
-are not comparable with this suite.
+| scene | 540p ours | ironwail | vkQuake | ours vs best | 4K ours | ironwail | vkQuake | ours vs best |
+|---|--:|--:|--:|--:|--:|--:|--:|--:|
+| spin-e1m1 | 5277 | 3827 | 887 | +38% | 970 | 657 | 683 | +42% |
+| spin-e2m2 | 5262 | 3780 | 891 | +39% | 962 | 656 | 655 | +47% |
+| spin-mg1 | 3415 | 2927 | 854 | +17% | 634 (604–681) | 525 | 349 | +21% |
+| spin-sepulcher | 2777 | 2840 | 777 | −2% | 723 | 498 | 482 | +45% |
+| spin-tears | 3338 | 2500 | 796 | +34% | 583 | 396 | 295 | +47% |
+| combat-e1m3 | 4763 | 3545 | 861 | +34% | 882 | 621 | 630 | +40% |
+| spin-sepulcher-fte ᶠ | 772 | (2948) | 372 | +108% | 442 | (503) | 261 | +69% |
+| combat-e1m3, ultra-fte | 4796 | – | 861 | +457% | 855 | – | 634 | +35% |
+
+ᶠ ours and vkQuake play the `.qsd` with AD's FTE particles. ironwail plays
+the plain `.dem` without them, so its numbers in brackets aren't
+comparable. Run spread is under 1% except where shown (and for vkQuake at
+4K, up to 13%).
+
+- **p99 frame time** is lowest for us in every main-suite cell: 0.46–0.71 ms
+  at 540p (ironwail 0.51–1.35, vkQuake 1.19–1.40) and 2.4–3.0 ms at 4K
+  (ironwail 3.3–5.9, vkQuake 7.2–9.7). With FTE on sepulcher it is 2.25 ms
+  at 540p and 6.83 ms at 4K, against vkQuake's 4.64 and 9.28.
+- **FTE particle cost** on sepulcher (frame time with FTE minus classic) is
+  0.94 ms for us and 1.40 ms for vkQuake at 540p, and 0.88 ms against 1.76 ms
+  at 4K. So the per-frame cost of the particles is smaller than vkQuake's
+  (H4), but it is the largest single cost in the suite (×3.6 frame time).
+- **Cold start** (driver shader cache off, 540p): our worst frame is
+  1.8–6.5 ms, except one 49.7 ms frame on `spin-sepulcher-fte` (V2). The
+  references hitch on `spin-tears`: 166 ms for ironwail and 203 ms for
+  vkQuake.
+- vkQuake 1.34.1 sits at 850–890 fps at 540p on every id1/MG1 scene, which
+  looks like a fixed per-frame cost of about 1.1 ms in that build.
+
+The last parity numbers recorded before this suite (1280×720, MSAA off, 8×
+anisotropy, no md5, 2026-11-11) are in HISTORY.md and DESIGN.md (M7).
+They are not comparable with these.

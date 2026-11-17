@@ -138,15 +138,20 @@ scene list, runner, baselines, report schema) goes in a small library crate
   `sv_fteparticles` (not the client's `r_fteparticles`) decides what AD
   shows; without FTE, AD sends classic particle messages every frame
   (`spin-sepulcher.dem` is 134 MB against 12.5 MB with FTE).
-- **R4. qbench → Part 1 — tool done 2026-11-17.** qbench now runs on
+- **R4. qbench → Part 1 — done 2026-11-17.** qbench now runs on
   perfkit (DESIGN.md, Tooling): `main` and `fte` suites, 540p window and
   4K gamescope, cold-start + warm-up + interleaved fps and MangoHud
   rounds, `report.{json,md}` with machine header, percentiles and cold
   hitches; `compare_qbench` (qmcp) reads both report formats, keys Part 1
   cells by scene/profile/engine/resolution, and reports p99 change and
   machine differences. The r_partinfo particle-count check between ours
-  and vkQuake (FTE suite) is still manual. First full results:
-  [VANILLA.md](VANILLA.md#results).
+  and vkQuake (FTE suite) is still manual. The first full run took about
+  70 minutes and covered 46 cells with no errors. We lead the fastest
+  reference in every main-suite cell (+17% to +47%) except
+  `spin-sepulcher` at 540p (−2%, within noise), and our p99 is the lowest
+  everywhere. Numbers and new items V1–V3:
+  [VANILLA.md](VANILLA.md#results). In the FTE suite, "ours vs fastest
+  ref" counts only references that played the same file as ours.
 - **R5. Parity stills.** Fixed camera positions captured in all three
   engines and compared with a perceptual metric plus an HTML side-by-side
   gallery (VANILLA.md, Visual parity).

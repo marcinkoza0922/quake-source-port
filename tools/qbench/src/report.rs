@@ -99,7 +99,14 @@ fn markdown(o: &Opts, m: &Machine, demo_set: &str, cases: &[Case], cells: &Cells
                         _ => format!("failed ({})", c.errors.len()),
                     },
                 };
-                let best_ref = ["ironwail", "vkquake"].iter().filter_map(|e| med(e).map(|m| (m, *e))).max_by(|a, b| a.0.total_cmp(&b.0));
+                // Only references that played the same file as ours: in the FTE suite
+                // ironwail plays the plain .dem without FTE particles, so it isn't comparable.
+                let ours_file = get("ours").map(|c| c.file);
+                let best_ref = ["ironwail", "vkquake"]
+                    .iter()
+                    .filter(|e| get(e).map(|c| c.file) == ours_file)
+                    .filter_map(|e| med(e).map(|m| (m, *e)))
+                    .max_by(|a, b| a.0.total_cmp(&b.0));
                 let vs = match (med("ours"), best_ref) {
                     (Some(ours), Some((r, name))) => {
                         let pct = (ours / r - 1.0) * 100.0;
