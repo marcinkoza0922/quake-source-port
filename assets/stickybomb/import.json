@@ -2,7 +2,7 @@
   "source": "model.fbx",
   "source_triangles": 1805,
   "triangles": 1805,
-  "vertices": 3470,
+  "vertices": 3784,
   "texture_size": 512,
   "removed_packed_degenerates": 0,
   "bounds": [
@@ -22,5 +22,10 @@
   "anchor": "bbox",
   "flip": false,
   "flat": false,
-  "gain": 0.6
+  "gain": 0.6,
+  "cleanup": [
+    "blender -b --factory-startup --python tools/relayout_toy_uv.py -- OLD/model.mdl.zlib assets/stickybomb/model.mdl.zlib",
+    "python3 tools/clean_toy_texture.py assets/stickybomb --from OLD/model.mdl.zlib --ramps 0,10,6 --chroma 6 --luma 5 --detail 0.35 --wear 0.07 --edges 0.1 --grime 0.08 --rust 0.08 --scratches 0.5 --grain 0.015",
+    "(OLD = the importer output, i.e. this model before relayout)"
+  ]
 }
