@@ -33,6 +33,11 @@ const LIST_BOTTOM: f32 = LIST_TOP + LIST_ROW * LIST_VISIBLE as f32;
 /// Clicks or taps left of this (the checkbox column) toggle an add-on.
 const CHECK_RIGHT: f32 = 42.0;
 
+/// Every add-on's (name, on/off cvar), in browser order.
+pub(super) fn toggles() -> impl Iterator<Item = (&'static str, &'static str)> {
+    ADDON.iter().map(|a| (a.name, a.cvar))
+}
+
 const ADDON: &[Addon] = &[
     Addon {
         name: qcore::t!("Portal Gun"),
