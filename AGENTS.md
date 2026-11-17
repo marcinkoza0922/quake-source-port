@@ -27,4 +27,7 @@
 
 ## Asset tools
 - Consider Meshy when the project needs a new 3D model.
+- Meshy download links expire within days. Archive raw outputs right away in
+  `~/Assets/Meshy/<toy>/` (GLB, base colour, concept, preview, README with
+  task IDs/prompts/re-import command, SHA256SUMS); never commit them.
 - Use asset tools only when the task needs that asset type.
