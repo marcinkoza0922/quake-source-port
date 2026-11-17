@@ -16,14 +16,17 @@
 
 pub mod catalog;
 mod translit;
+pub mod wrap;
 
 use std::borrow::Cow;
 use std::fmt::Display;
 use std::sync::atomic::{AtomicBool, AtomicU8, Ordering};
 
 pub use translit::to_ascii;
+pub use wrap::wrap;
 
-/// The re-release's languages.
+/// The supported languages: the 2021 re-release's six first, then the
+/// port's own translations (`crates/qcore/lang/languages/<code>.txt`).
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash)]
 pub enum Lang {
     English,
@@ -32,55 +35,160 @@ pub enum Lang {
     Italian,
     Spanish,
     Russian,
+    Polish,
+    Ukrainian,
+    Czech,
+    Slovak,
+    Croatian,
+    Bulgarian,
+    Swedish,
+    Finnish,
+    Danish,
+    Norwegian,
+    Dutch,
+    Greek,
+    Hungarian,
+    Romanian,
+    Portuguese,
+    Brazilian,
+    Japanese,
+    Korean,
+    SChinese,
+    TChinese,
+    Turkish,
+    Indonesian,
+    Malay,
+    Filipino,
+    Vietnamese,
+    Serbian,
+    Lithuanian,
+    Latvian,
+    Estonian,
+    Maltese,
+    Albanian,
+    Armenian,
+    Georgian,
+    Icelandic,
+    Irish,
+    Welsh,
+    Basque,
+    Catalan,
+    Galician,
+    Latin,
+    Esperanto,
+    Belarusian,
+    Macedonian,
+    Slovenian,
+    Swahili,
 }
 
+/// (language, `language` cvar name, catalog code, own name).
+const INFO: [(Lang, &str, &str, &str); 51] = [
+    (Lang::English, "english", "en", "English"),
+    (Lang::French, "french", "fr", "Français"),
+    (Lang::German, "german", "de", "Deutsch"),
+    (Lang::Italian, "italian", "it", "Italiano"),
+    (Lang::Spanish, "spanish", "es", "Español"),
+    (Lang::Russian, "russian", "ru", "Русский"),
+    (Lang::Polish, "polish", "pl", "Polski"),
+    (Lang::Ukrainian, "ukrainian", "uk", "Українська"),
+    (Lang::Czech, "czech", "cs", "Čeština"),
+    (Lang::Slovak, "slovak", "sk", "Slovenčina"),
+    (Lang::Croatian, "croatian", "hr", "Hrvatski"),
+    (Lang::Bulgarian, "bulgarian", "bg", "Български"),
+    (Lang::Swedish, "swedish", "sv", "Svenska"),
+    (Lang::Finnish, "finnish", "fi", "Suomi"),
+    (Lang::Danish, "danish", "da", "Dansk"),
+    (Lang::Norwegian, "norwegian", "nb", "Norsk"),
+    (Lang::Dutch, "dutch", "nl", "Nederlands"),
+    (Lang::Greek, "greek", "el", "Ελληνικά"),
+    (Lang::Hungarian, "hungarian", "hu", "Magyar"),
+    (Lang::Romanian, "romanian", "ro", "Română"),
+    (Lang::Portuguese, "portuguese", "pt", "Português"),
+    (Lang::Brazilian, "brazilian", "pt-BR", "Português (Brasil)"),
+    (Lang::Japanese, "japanese", "ja", "日本語"),
+    (Lang::Korean, "korean", "ko", "한국어"),
+    (Lang::SChinese, "schinese", "zh-CN", "简体中文"),
+    (Lang::TChinese, "tchinese", "zh-TW", "繁體中文"),
+    (Lang::Turkish, "turkish", "tr", "Türkçe"),
+    (Lang::Indonesian, "indonesian", "id", "Bahasa Indonesia"),
+    (Lang::Malay, "malay", "ms", "Bahasa Melayu"),
+    (Lang::Filipino, "filipino", "fil", "Filipino"),
+    (Lang::Vietnamese, "vietnamese", "vi", "Tiếng Việt"),
+    (Lang::Serbian, "serbian", "sr", "Српски"),
+    (Lang::Lithuanian, "lithuanian", "lt", "Lietuvių"),
+    (Lang::Latvian, "latvian", "lv", "Latviešu"),
+    (Lang::Estonian, "estonian", "et", "Eesti"),
+    (Lang::Maltese, "maltese", "mt", "Malti"),
+    (Lang::Albanian, "albanian", "sq", "Shqip"),
+    (Lang::Armenian, "armenian", "hy", "Հայերեն"),
+    (Lang::Georgian, "georgian", "ka", "ქართული"),
+    (Lang::Icelandic, "icelandic", "is", "Íslenska"),
+    (Lang::Irish, "irish", "ga", "Gaeilge"),
+    (Lang::Welsh, "welsh", "cy", "Cymraeg"),
+    (Lang::Basque, "basque", "eu", "Euskara"),
+    (Lang::Catalan, "catalan", "ca", "Català"),
+    (Lang::Galician, "galician", "gl", "Galego"),
+    (Lang::Latin, "latin", "la", "Latina"),
+    (Lang::Esperanto, "esperanto", "eo", "Esperanto"),
+    (Lang::Belarusian, "belarusian", "be", "Беларуская"),
+    (Lang::Macedonian, "macedonian", "mk", "Македонски"),
+    (Lang::Slovenian, "slovenian", "sl", "Slovenščina"),
+    (Lang::Swahili, "swahili", "sw", "Kiswahili"),
+];
+
 impl Lang {
-    pub const ALL: [Lang; 6] = [Lang::English, Lang::French, Lang::German, Lang::Italian, Lang::Spanish, Lang::Russian];
+    pub const ALL: [Lang; INFO.len()] = {
+        let mut a = [Lang::English; INFO.len()];
+        let mut i = 0;
+        while i < a.len() {
+            a[i] = INFO[i].0;
+            i += 1;
+        }
+        a
+    };
+
+    /// The 2021 re-release's languages, whose catalogs live in the shared
+    /// `crates/qcore/lang/*.txt` files.
+    pub const RERELEASE: [Lang; 6] = [Lang::English, Lang::French, Lang::German, Lang::Italian, Lang::Spanish, Lang::Russian];
 
     /// `language` cvar value and `loc_<name>.txt` suffix.
     pub fn name(self) -> &'static str {
-        match self {
-            Lang::English => "english",
-            Lang::French => "french",
-            Lang::German => "german",
-            Lang::Italian => "italian",
-            Lang::Spanish => "spanish",
-            Lang::Russian => "russian",
-        }
+        INFO[self as usize].1
     }
 
-    /// ISO 639-1 code (catalog line prefix, system locale match).
+    /// Catalog line prefix and manual suffix: ISO 639-1 (`fil`: 639-2), with
+    /// a region where one language has two variants (`pt-BR`, `zh-CN`, `zh-TW`).
     pub fn code(self) -> &'static str {
-        match self {
-            Lang::English => "en",
-            Lang::French => "fr",
-            Lang::German => "de",
-            Lang::Italian => "it",
-            Lang::Spanish => "es",
-            Lang::Russian => "ru",
-        }
+        INFO[self as usize].2
     }
 
     /// The language's own name, for the menu.
     pub fn native(self) -> &'static str {
-        match self {
-            Lang::English => "English",
-            Lang::French => "Français",
-            Lang::German => "Deutsch",
-            Lang::Italian => "Italiano",
-            Lang::Spanish => "Español",
-            Lang::Russian => "Русский",
-        }
+        INFO[self as usize].3
     }
 
     pub fn from_name(s: &str) -> Option<Lang> {
         Lang::ALL.into_iter().find(|l| l.name().eq_ignore_ascii_case(s.trim()))
     }
 
+    /// A catalog code or a system locale (`pt_BR.UTF-8`, `zh-Hant-TW`,
+    /// `nb-NO`, `de-AT`).
     pub fn from_code(s: &str) -> Option<Lang> {
-        let s = s.trim();
-        let base = s.split(['-', '_', '.', '@']).next().unwrap_or(s);
-        Lang::ALL.into_iter().find(|l| l.code().eq_ignore_ascii_case(base))
+        let s = s.trim().split(['.', '@']).next().unwrap_or("").to_ascii_lowercase().replace('_', "-");
+        let mut parts = s.split('-');
+        let base = parts.next().unwrap_or("");
+        let rest: Vec<&str> = parts.collect();
+        let has = |x: &str| rest.contains(&x);
+        Some(match base {
+            "pt" if has("br") => Lang::Brazilian,
+            "zh" if has("hant") || has("tw") || has("hk") || has("mo") => Lang::TChinese,
+            "zh" => Lang::SChinese,
+            "no" | "nn" => Lang::Norwegian,
+            "tl" => Lang::Filipino,
+            "in" => Lang::Indonesian,
+            _ => return Lang::ALL.into_iter().find(|l| l.code().eq_ignore_ascii_case(base)),
+        })
     }
 
     fn index(self) -> u8 {

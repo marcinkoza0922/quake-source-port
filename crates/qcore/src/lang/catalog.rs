@@ -12,6 +12,12 @@
 //!
 //! `\n` and `\\` are escapes on both sides; text runs to the end of the line.
 //! `{}`/`{N}` are arguments ([`super::format`]) and may be reordered.
+//!
+//! The shared files ([`FILES`]) hold every key with the re-release's
+//! languages; each other language has one file ([`LANG_FILES`],
+//! `lang/languages/<code>.txt`) with the same `@` keys and its own lines,
+//! merged into the shared entries by key (`tools/lang_check.py` makes and
+//! checks them).
 
 use std::collections::HashMap;
 use std::sync::OnceLock;
@@ -26,6 +32,26 @@ pub const FILES: &[(&str, &str)] = &[
     ("hud.txt", include_str!("../../lang/hud.txt")),
     ("console.txt", include_str!("../../lang/console.txt")),
 ];
+
+macro_rules! lang_files {
+    ($($l:ident $code:literal),* $(,)?) => {
+        /// Per-language catalogs: (language, file name, text).
+        pub const LANG_FILES: &[(Lang, &str, &str)] = &[
+            $((Lang::$l, concat!("languages/", $code, ".txt"), include_str!(concat!("../../lang/languages/", $code, ".txt")))),*
+        ];
+    };
+}
+
+lang_files!(
+    Polish "pl", Ukrainian "uk", Czech "cs", Slovak "sk", Croatian "hr", Bulgarian "bg", Swedish "sv", Finnish "fi",
+    Danish "da", Norwegian "nb", Dutch "nl", Greek "el", Hungarian "hu", Romanian "ro", Portuguese "pt",
+    Brazilian "pt-BR", Japanese "ja", Korean "ko", SChinese "zh-CN", TChinese "zh-TW", Turkish "tr",
+    Indonesian "id", Malay "ms", Filipino "fil", Vietnamese "vi", Serbian "sr", Lithuanian "lt", Latvian "lv",
+    Estonian "et", Maltese "mt", Albanian "sq", Armenian "hy", Georgian "ka",
+    Icelandic "is", Irish "ga", Welsh "cy", Basque "eu",
+    Catalan "ca", Galician "gl", Latin "la", Esperanto "eo",
+    Belarusian "be", Macedonian "mk", Slovenian "sl", Swahili "sw",
+);
 
 /// One parsed entry: English key and (language, text) pairs.
 #[derive(Debug, Default, Clone, PartialEq)]
@@ -86,24 +112,44 @@ pub fn parse(file: &str, text: &str) -> (Vec<Entry>, Vec<Problem>) {
     (entries, problems)
 }
 
-/// Every entry of every built-in file, with parse problems.
+/// Every entry of the shared files with the per-language files' texts
+/// merged in, and parse problems (including per-language keys that the
+/// shared files don't have, and lines for the wrong language).
 pub fn all() -> (Vec<(&'static str, Entry)>, Vec<Problem>) {
-    let mut out = Vec::new();
+    let mut out: Vec<(&'static str, Entry)> = Vec::new();
     let mut problems = Vec::new();
     for (name, text) in FILES {
         let (e, p) = parse(name, text);
         out.extend(e.into_iter().map(|e| (*name, e)));
         problems.extend(p);
     }
+    let index: HashMap<String, usize> = out.iter().enumerate().map(|(i, (_, e))| (e.key.clone(), i)).collect();
+    for (lang, name, text) in LANG_FILES {
+        let (entries, p) = parse(name, text);
+        problems.extend(p);
+        for e in entries {
+            let Some(&i) = index.get(&e.key) else {
+                problems.push((name.to_string(), e.line, format!("stale key {:?}", e.key)));
+                continue;
+            };
+            for (l, s) in e.texts {
+                if l != *lang || Lang::RERELEASE.contains(&l) {
+                    problems.push((name.to_string(), e.line, format!("{} line in the {} file", l.code(), lang.code())));
+                } else if !out[i].1.texts.iter().any(|(x, _)| *x == l) {
+                    out[i].1.texts.push((l, s));
+                }
+            }
+        }
+    }
     (out, problems)
 }
 
 type Table = HashMap<String, String>;
 
-fn tables() -> &'static [Table; 6] {
-    static T: OnceLock<[Table; 6]> = OnceLock::new();
+fn tables() -> &'static [Table] {
+    static T: OnceLock<Vec<Table>> = OnceLock::new();
     T.get_or_init(|| {
-        let mut t: [Table; 6] = Default::default();
+        let mut t: Vec<Table> = vec![Table::new(); Lang::ALL.len()];
         for (_, e) in all().0 {
             for (l, s) in e.texts {
                 t[l as usize].entry(e.key.clone()).or_insert(s);

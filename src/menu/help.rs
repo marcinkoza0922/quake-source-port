@@ -7,13 +7,58 @@ use std::cell::Cell;
 use super::*;
 
 /// The manual per language, in [`qcore::lang::Lang::ALL`] order.
-const MANUALS: [&str; 6] = [
+const MANUALS: [&str; qcore::lang::Lang::ALL.len()] = [
     include_str!("../../docs/MANUAL.md"),
     include_str!("../../docs/MANUAL.fr.md"),
     include_str!("../../docs/MANUAL.de.md"),
     include_str!("../../docs/MANUAL.it.md"),
     include_str!("../../docs/MANUAL.es.md"),
     include_str!("../../docs/MANUAL.ru.md"),
+    include_str!("../../docs/MANUAL.pl.md"),
+    include_str!("../../docs/MANUAL.uk.md"),
+    include_str!("../../docs/MANUAL.cs.md"),
+    include_str!("../../docs/MANUAL.sk.md"),
+    include_str!("../../docs/MANUAL.hr.md"),
+    include_str!("../../docs/MANUAL.bg.md"),
+    include_str!("../../docs/MANUAL.sv.md"),
+    include_str!("../../docs/MANUAL.fi.md"),
+    include_str!("../../docs/MANUAL.da.md"),
+    include_str!("../../docs/MANUAL.nb.md"),
+    include_str!("../../docs/MANUAL.nl.md"),
+    include_str!("../../docs/MANUAL.el.md"),
+    include_str!("../../docs/MANUAL.hu.md"),
+    include_str!("../../docs/MANUAL.ro.md"),
+    include_str!("../../docs/MANUAL.pt.md"),
+    include_str!("../../docs/MANUAL.pt-BR.md"),
+    include_str!("../../docs/MANUAL.ja.md"),
+    include_str!("../../docs/MANUAL.ko.md"),
+    include_str!("../../docs/MANUAL.zh-CN.md"),
+    include_str!("../../docs/MANUAL.zh-TW.md"),
+    include_str!("../../docs/MANUAL.tr.md"),
+    include_str!("../../docs/MANUAL.id.md"),
+    include_str!("../../docs/MANUAL.ms.md"),
+    include_str!("../../docs/MANUAL.fil.md"),
+    include_str!("../../docs/MANUAL.vi.md"),
+    include_str!("../../docs/MANUAL.sr.md"),
+    include_str!("../../docs/MANUAL.lt.md"),
+    include_str!("../../docs/MANUAL.lv.md"),
+    include_str!("../../docs/MANUAL.et.md"),
+    include_str!("../../docs/MANUAL.mt.md"),
+    include_str!("../../docs/MANUAL.sq.md"),
+    include_str!("../../docs/MANUAL.hy.md"),
+    include_str!("../../docs/MANUAL.ka.md"),
+    include_str!("../../docs/MANUAL.is.md"),
+    include_str!("../../docs/MANUAL.ga.md"),
+    include_str!("../../docs/MANUAL.cy.md"),
+    include_str!("../../docs/MANUAL.eu.md"),
+    include_str!("../../docs/MANUAL.ca.md"),
+    include_str!("../../docs/MANUAL.gl.md"),
+    include_str!("../../docs/MANUAL.la.md"),
+    include_str!("../../docs/MANUAL.eo.md"),
+    include_str!("../../docs/MANUAL.be.md"),
+    include_str!("../../docs/MANUAL.mk.md"),
+    include_str!("../../docs/MANUAL.sl.md"),
+    include_str!("../../docs/MANUAL.sw.md"),
 ];
 
 /// Section list (left) and text pane (right), in 640x360 menu units.
@@ -82,7 +127,8 @@ fn cells(line: &str) -> Vec<String> {
 /// The manual follows the current language; every translation has the same
 /// sections, so the selected one stays valid when the language changes.
 pub(super) fn sections() -> &'static [Section] {
-    static S: [std::sync::OnceLock<Vec<Section>>; 6] = [const { std::sync::OnceLock::new() }; 6];
+    static S: [std::sync::OnceLock<Vec<Section>>; qcore::lang::Lang::ALL.len()] =
+        [const { std::sync::OnceLock::new() }; qcore::lang::Lang::ALL.len()];
     let i = qcore::lang::Lang::ALL.iter().position(|&l| l == qcore::lang::current()).unwrap_or(0);
     S[i].get_or_init(|| parse(MANUALS[i], qcore::lang::Lang::ALL[i]))
 }
@@ -148,8 +194,13 @@ fn parse(manual: &str, lang: qcore::lang::Lang) -> Vec<Section> {
             flush(sec, &mut para);
             para = Some((plain(rest), Some(b)));
         } else if let Some((text, _)) = &mut para {
-            text.push(' ');
-            text.push_str(&plain(t));
+            // Chinese/Japanese lines join without a space
+            let next = plain(t);
+            let wide = |c: Option<char>| c.is_some_and(qcore::lang::wrap::is_wide);
+            if !(wide(text.chars().last()) && wide(next.chars().next())) {
+                text.push(' ');
+            }
+            text.push_str(&next);
         } else {
             para = Some((plain(t), None));
         }
@@ -189,17 +240,7 @@ fn layout(c: &Canvas, sec: &Section) -> Vec<(f32, String, bool)> {
 }
 
 fn wrap_lines(c: &Canvas, s: &str, max_w: f32) -> Vec<String> {
-    let mut lines = vec![String::new()];
-    for word in s.split_whitespace() {
-        let cur = lines.last_mut().unwrap();
-        let cand = if cur.is_empty() { word.to_string() } else { format!("{cur} {word}") };
-        if !cur.is_empty() && c.text_w(&cand, TXT) > max_w {
-            lines.push(word.to_string());
-        } else {
-            *cur = cand;
-        }
-    }
-    lines
+    qcore::lang::wrap(s, max_w, |t| c.text_w(t, TXT))
 }
 
 fn visible_lines() -> usize {
@@ -321,6 +362,8 @@ mod tests {
     fn translated_manuals_have_the_same_sections() {
         let n = parse(MANUALS[0], qcore::lang::Lang::English).len();
         for (i, m) in MANUALS.iter().enumerate() {
+            let code = qcore::lang::Lang::ALL[i].code();
+            assert!(i == 0 || m.lines().any(|l| l.starts_with("## ")), "MANUAL.{code}.md looks empty");
             let s = parse(m, qcore::lang::Lang::ALL[i]);
             assert_eq!(s.len(), n, "{:?} manual has {} sections, English {n}", qcore::lang::Lang::ALL[i], s.len());
             assert!(s.iter().all(|x| !x.blocks.is_empty()), "{:?} has an empty section", qcore::lang::Lang::ALL[i]);

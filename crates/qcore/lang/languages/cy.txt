@@ -1,0 +1,3024 @@
+# cy: the port's own text; English keys from crates/qcore/lang/*.txt.
+# Format in crates/qcore/src/lang/catalog.rs; check with tools/lang_check.py.
+
+# ==== menu.txt ====
+
+# Options pages: page names, row labels and choice values.
+@ 10% speed
+cy cyflymder 10%
+
+@ 2 split-screen
+cy 2 ar sgrin hollt
+
+@ 3 split-screen
+cy 3 ar sgrin hollt
+
+@ 4 split-screen
+cy 4 ar sgrin hollt
+
+@ 5 split-screen
+cy 5 ar sgrin hollt
+
+@ 6 split-screen
+cy 6 ar sgrin hollt
+
+@ 2D aiming
+cy anelu 2D
+
+@ 2x monsters
+cy angenfilod x2
+
+@ 3x monsters
+cy angenfilod x3
+
+@ 4x monsters
+cy angenfilod x4
+
+@ 3D resolution
+cy cydraniad 3D
+
+@ 3D view
+cy golwg 3D
+
+@ 8-bit Color
+cy Lliw 8-did
+
+@ Accessibility
+cy Hygyrchedd
+
+@ Acquisition Cone
+cy Côn caffael
+
+@ Activation
+cy Actifadu
+
+@ Add a ringing room tail after the cue
+cy Ychwanegu atsain ystafell ar ôl y ciw
+
+@ Add delayed repeats after the cue
+cy Ychwanegu ailadroddiadau oedi ar ôl y ciw
+
+@ Add saturation and distortion
+cy Ychwanegu dirlawnder ac ystumio
+
+@ Add-ons
+cy Ychwanegion
+
+@ Address
+cy Cyfeiriad
+
+@ Adds fine noise to hide color banding
+cy Ychwanegu sŵn mân i guddio bandiau lliw
+
+@ Advanced Settings
+cy Gosodiadau uwch
+
+@ Aim Assist
+cy Cymorth anelu
+
+@ Aim Rotation
+cy Cylchdro anelu
+
+@ Aim Slowdown
+cy Arafu anelu
+
+@ Aim Style
+cy Arddull anelu
+
+@ All
+cy Pob un
+
+@ All enemies
+cy Pob gelyn
+
+@ Alt Fire (Add-ons)
+cy Tanio amgen (Ychwanegion)
+
+@ Always Run
+cy Rhedeg bob amser
+
+@ Ambient Occlusion
+cy Occlwsiwn amgylchol
+
+@ Ammo Counts
+cy Nifer bwledi
+
+@ Ammo Counts Position
+cy Safle nifer bwledi
+
+@ Ammo Pickups
+cy Bwledi a gasglwyd
+
+@ Anisotropic
+cy Anisotropig
+
+@ Anti-aliasing
+cy Gwrth-ddanheddu
+
+@ Apply To
+cy Cymhwyso i
+
+@ Armor
+cy Arfwisg
+
+@ Armor Position
+cy Safle'r arfwisg
+
+@ Ask
+cy Gofyn
+
+@ Attack
+cy Ymosod
+
+@ Audio
+cy Sain
+
+@ Auto-aim
+cy Anelu awtomatig
+
+@ Auto-aim Settings
+cy Gosodiadau anelu awtomatig
+
+@ Autosave
+cy Awtogadw
+
+@ Autosave Settings
+cy Gosodiadau awtogadw
+
+@ Autosave Timer
+cy Amserydd awtogadw
+
+@ Autosaves to Keep
+cy Awtogadwau i'w cadw
+
+@ Bass
+cy Bas
+
+@ Blip
+cy Blip
+
+@ Blood Quality
+cy Ansawdd gwaed
+
+@ Blood Splatter Settings
+cy Gosodiadau tasgu gwaed
+
+@ Blue
+cy Glas
+
+@ Boomerang Settings
+cy Gosodiadau bwmerang
+
+@ Boost or cut high frequencies in decibels
+cy Cynyddu neu dorri amleddau uchel mewn desibelau
+
+@ Boost or cut low frequencies in decibels
+cy Cynyddu neu dorri amleddau isel mewn desibelau
+
+@ Brightness
+cy Disgleirdeb
+
+@ Bullet Time (Add-ons)
+cy Bullet time (Ychwanegion)
+
+@ Bullet Time Settings
+cy Gosodiadau bullet time
+
+@ Button Glyphs
+cy Symbolau botymau
+
+@ Button Size
+cy Maint botymau
+
+@ Camera
+cy Camera
+
+@ Caustic Intensity
+cy Dwyster costigau
+
+@ Caustics
+cy Costigau
+
+@ Center
+cy Canol
+
+@ Center Message Position
+cy Safle negeseuon canol
+
+@ Center Message Time
+cy Amser negeseuon canol
+
+@ Center View
+cy Canoli'r olwg
+
+@ Change Color on Kill
+cy Newid lliw wrth ladd
+
+@ Change Color on Target
+cy Newid lliw ar darged
+
+@ Chime
+cy Clychau
+
+@ Click
+cy Clic
+
+@ Clink
+cy Tincian
+
+@ Coin
+cy Darn arian
+
+@ Color
+cy Lliw
+
+@ Color Filter
+cy Hidlydd lliw
+
+@ Color of the grenade arc
+cy Lliw arc y grenâd
+
+@ Colored Lighting
+cy Goleuo lliw
+
+@ Connect
+cy Cysylltu
+
+@ Contrast
+cy Cyferbyniad
+
+@ Controls
+cy Rheolyddion
+
+@ Cooldown (ms)
+cy Amser oeri (ms)
+
+@ Crosshair Outline
+cy Amlinell croesflew
+
+@ Crosshair Shape
+cy Siâp croesflew
+
+@ Crosshair Size
+cy Maint croesflew
+
+@ Current Ammo
+cy Bwledi cyfredol
+
+@ Current Ammo Position
+cy Safle bwledi cyfredol
+
+@ Customize This Game
+cy Addasu'r gêm hon
+
+@ Damage
+cy Difrod
+
+@ Damage Taken
+cy Difrod a gafwyd
+
+@ Debris
+cy Malurion
+
+@ Debris Quality
+cy Ansawdd malurion
+
+@ Debris Settings
+cy Gosodiadau malurion
+
+@ Directional Damage
+cy Difrod cyfeiriadol
+
+@ Dithering
+cy Gwasgaru picseli
+
+@ Dodge / Dive (Add-ons)
+cy Osgoi / plymio (Ychwanegion)
+
+@ Dragging up looks down instead of up
+cy Mae llusgo i fyny yn edrych i lawr yn lle i fyny
+
+@ Drive
+cy Gyriant
+
+@ Dynamic Lights
+cy Goleuadau deinamig
+
+@ Echo
+cy Adlais
+
+@ Enemy Health
+cy Iechyd gelynion
+
+@ Enemy Wounds
+cy Clwyfau gelynion
+
+@ Enhanced Blood Splatter
+cy Tasgu gwaed gwell
+
+@ Enhanced FX
+cy Effeithiau gwell
+
+@ Enhanced Models
+cy Modelau gwell
+
+@ Enhanced Particles
+cy Gronynnau gwell
+
+@ Enhanced Water
+cy Dŵr gwell
+
+@ Enhancements
+cy Gwelliannau
+
+@ Equipment Wheel (Add-ons)
+cy Olwyn offer (Ychwanegion)
+
+@ Exploding boxes throw metal shards
+cy Mae blychau sy'n ffrwydro yn taflu darnau metel
+
+@ Explosion Damage
+cy Difrod ffrwydrad
+
+@ Explosion Scorch Marks
+cy Olion llosg ffrwydradau
+
+@ Explosions scorch nearby solid surfaces
+cy Mae ffrwydradau'n llosgi arwynebau solet cyfagos
+
+@ Explosives only
+cy Ffrwydron yn unig
+
+@ Extra Monsters
+cy Angenfilod ychwanegol
+
+@ Extra Per 10 Damage (ms)
+cy Ychwanegol fesul 10 difrod (ms)
+
+@ FX Settings
+cy Gosodiadau effeithiau
+
+@ Field of View
+cy Maes golwg
+
+@ Firing never uses up ammo
+cy Nid yw tanio byth yn defnyddio bwledi
+
+@ First person
+cy person cyntaf
+
+@ Flick Time
+cy Amser fflic
+
+@ Flight Speed
+cy Cyflymder hedfan
+
+@ Fog
+cy Niwl
+
+@ Frag Limit
+cy Terfyn frags
+
+@ Freeze Duration (ms)
+cy Hyd rhewi (ms)
+
+@ GLQuake
+cy GLQuake
+
+@ Game Speed
+cy Cyflymder y gêm
+
+@ Game Type
+cy Math o gêm
+
+@ Gameplay
+cy Chwarae
+
+@ Gameplay Modifiers
+cy Addaswyr chwarae
+
+@ Gel Quality
+cy Ansawdd gel
+
+@ Gib Surface Painting
+cy Staeniau darnau cnawd
+
+@ Gibs
+cy Darnau cnawd
+
+@ Gibs and heads tumble and bounce
+cy Mae darnau cnawd a phennau'n rholio ac yn bownsio
+
+@ Goggle Glow Quality
+cy Ansawdd llewyrch y gogls
+
+@ Goggle Intensity
+cy Dwyster y gogls
+
+@ Goggle Noise
+cy Sŵn y gogls
+
+@ Goggles Settings
+cy Gosodiadau gogls
+
+@ Graphics
+cy Graffeg
+
+@ Green
+cy Gwyrdd
+
+@ Grenade Arc
+cy Arc grenâd
+
+@ Grenade Arc Settings
+cy Gosodiadau arc grenâd
+
+@ Gun Kick
+cy Adlam gwn
+
+@ Gyro
+cy Gyro
+
+@ Gyro & Flick Stick
+cy Gyro a flick stick
+
+@ Gyro Active
+cy Gyro yn weithredol
+
+@ Gyro Aiming
+cy Anelu gyro
+
+@ HUD
+cy HUD
+
+@ HUD Style
+cy Arddull HUD
+
+@ Health
+cy Iechyd
+
+@ Health Pickups
+cy Iechyd a gasglwyd
+
+@ Health Position
+cy Safle iechyd
+
+@ Health Regeneration
+cy Adfywio iechyd
+
+@ Hit & Kill Sounds
+cy Synau taro a lladd
+
+@ Hit Doors & Lifts
+cy Taro drysau a lifftiau
+
+@ Hit Markers
+cy Marcwyr taro
+
+@ Hit Sound
+cy Sain taro
+
+@ Hitmarker Size
+cy Maint marciwr
+
+@ Hitmarker Type
+cy Math o farciwr
+
+@ Hitstop Advanced
+cy Hitstop uwch
+
+@ Hitstop Settings
+cy Gosodiadau hitstop
+
+@ Hold
+cy Dal
+
+@ Hold lock-on
+cy Dal i gloi
+
+@ Hook Enemies
+cy Bachu gelynion
+
+@ Hook Metal
+cy Bachu metel
+
+@ Hook Stone
+cy Bachu carreg
+
+@ Hook Wood
+cy Bachu pren
+
+@ Hooking an enemy pulls you to it
+cy Mae bachu gelyn yn eich tynnu ato
+
+@ Hookshot Range
+cy Pellter y bachyn
+
+@ Hookshot Settings
+cy Gosodiadau'r bachyn
+
+@ Host Game
+cy Cynnal gêm
+
+@ How far the hook flies before it retracts
+cy Pa mor bell mae'r bachyn yn hedfan cyn dod yn ôl
+
+@ How visible the on-screen controls are
+cy Pa mor weladwy yw'r rheolyddion ar y sgrin
+
+@ Impact Lifetime
+cy Oes trawiadau
+
+@ Infinite Ammo
+cy Bwledi diddiwedd
+
+@ Input
+cy Mewnbwn
+
+@ Input Scale
+cy Graddfa mewnbwn
+
+@ Interpolate Animation
+cy Rhyngosod animeiddio
+
+@ Interpolate Movement
+cy Rhyngosod symudiad
+
+@ Invert Look
+cy Gwrthdroi edrych
+
+@ Invert Mouse
+cy Gwrthdroi llygoden
+
+@ Invert Stick
+cy Gwrthdroi ffon
+
+@ Jet Quality
+cy Ansawdd jet
+
+@ Join Game
+cy Ymuno â gêm
+
+@ Jump / Swim Up
+cy Neidio / nofio i fyny
+
+@ Jump again in mid-air
+cy Neidio eto yng nghanol yr awyr
+
+@ Jumps
+cy Neidiau
+
+@ Keys & Powerups
+cy Allweddi a hwbiau
+
+@ Keys & Powerups Position
+cy Safle allweddi a hwbiau
+
+@ Kill Bonus (x)
+cy Bonws lladd (x)
+
+@ Kill Sound
+cy Sain lladd
+
+@ Knock
+cy Cnoc
+
+@ Left
+cy Chwith
+
+@ Length of the motion blur streaks
+cy Hyd stribedi'r aneglurder symud
+
+@ Lifetime (seconds)
+cy Oes (eiliadau)
+
+@ Live Portal Views
+cy Golygfeydd porth byw
+
+@ Live View Distance
+cy Pellter golwg fyw
+
+@ Local Players
+cy Chwaraewyr lleol
+
+@ Local red wounds follow enemy animation
+cy Clwyfau coch lleol yn dilyn animeiddiad y gelyn
+
+@ Lock Indicator
+cy Dangosydd cloi
+
+@ Long falls don't hurt
+cy Nid yw cwympiadau hir yn brifo
+
+@ Longest Freeze (ms)
+cy Rhewi hiraf (ms)
+
+@ Look Down
+cy Edrych i lawr
+
+@ Look Speed
+cy Cyflymder edrych
+
+@ Look Up
+cy Edrych i fyny
+
+@ Main Menu Music
+cy Cerddoriaeth y brif ddewislen
+
+@ Max FPS
+cy FPS uchaf
+
+@ Max Players
+cy Uchafswm chwaraewyr
+
+@ Maximum Impacts
+cy Uchafswm trawiadau
+
+@ Maximum Marks
+cy Uchafswm olion
+
+@ Maximum Range
+cy Pellter mwyaf
+
+@ Melee only
+cy Ymladd agos yn unig
+
+@ Message Background
+cy Cefndir negeseuon
+
+@ Message Text Size
+cy Maint testun negeseuon
+
+@ Messages & Captions
+cy Negeseuon a chapsiynau
+
+@ Meter Duration (real seconds)
+cy Hyd y mesurydd (eiliadau go iawn)
+
+@ Minimum Damage
+cy Difrod lleiaf
+
+@ Mode
+cy Modd
+
+@ Modern Console
+cy Consol modern
+
+@ Modern HUD Layout
+cy Cynllun HUD modern
+
+@ Most recent save
+cy Y cadw diweddaraf
+
+@ Motion Blur
+cy Aneglurder symud
+
+@ Motion Blur Amount
+cy Maint aneglurder symud
+
+@ Motion Blur Quality
+cy Ansawdd aneglurder symud
+
+@ Mouse & Keyboard
+cy Llygoden a bysellfwrdd
+
+@ Mouse Speed
+cy Cyflymder llygoden
+
+@ Move Back
+cy Symud yn ôl
+
+@ Move Forward
+cy Symud ymlaen
+
+@ Music Volume
+cy Lefel y gerddoriaeth
+
+@ Next Weapon
+cy Arf nesaf
+
+@ No Drowning
+cy Dim boddi
+
+@ No Fall Damage
+cy Dim difrod cwympo
+
+@ No Manual Saves
+cy Dim cadw â llaw
+
+@ No Self Damage
+cy Dim hunan-ddifrod
+
+@ Noise Filter
+cy Hidlydd sŵn
+
+@ Normal Color
+cy Lliw arferol
+
+@ Notify Message Position
+cy Safle hysbysiadau
+
+@ Notify Message Time
+cy Amser hysbysiadau
+
+@ Number of splatter rays per blood impact
+cy Nifer y pelydrau tasgu fesul trawiad gwaed
+
+@ Off
+cy I ffwrdd
+
+@ On Death
+cy Wrth farw
+
+@ On Kill Color
+cy Lliw wrth ladd
+
+@ On Target Color
+cy Lliw ar darged
+
+@ Opacity
+cy Didreiddedd
+
+@ Opacity of the grenade arc
+cy Didreiddedd arc y grenâd
+
+@ Pants Color
+cy Lliw trowsus
+
+@ Particle Quality
+cy Ansawdd gronynnau
+
+@ Particles
+cy Gronynnau
+
+@ Physical Nail Impacts
+cy Trawiadau hoelion ffisegol
+
+@ Pistol Start
+cy Dechrau o'r newydd
+
+@ Pitch
+cy Traw
+
+@ Pitch Sensitivity
+cy Sensitifrwydd fertigol
+
+@ Playback Speed
+cy Cyflymder chwarae
+
+@ Player Setup
+cy Gosod chwaraewr
+
+@ Pop
+cy Pop
+
+@ Portal Gun Settings
+cy Gosodiadau'r gwn pyrth
+
+@ Portal Recursion
+cy Atchwel pyrth
+
+@ Portal View Quality
+cy Ansawdd golwg pyrth
+
+@ Preview Sound
+cy Rhagwrando
+
+@ Previous Weapon
+cy Arf blaenorol
+
+@ Projectile Shotguns Settings
+cy Gosodiadau drylliau taflegrau
+
+@ Projectile Speed (units/s)
+cy Cyflymder taflegrau (unedau/e)
+
+@ Purple
+cy Porffor
+
+@ Push
+cy Gwthio
+
+@ Push Strength
+cy Cryfder gwthio
+
+@ Quick Load
+cy Llwytho cyflym
+
+@ Quick Save
+cy Cadw cyflym
+
+@ Railgun Settings
+cy Gosodiadau railgun
+
+@ Ranged only
+cy O bell yn unig
+
+@ Reacquire While Held
+cy Ailgaffael wrth ddal
+
+@ Red
+cy Coch
+
+@ Reduce Motion
+cy Lleihau symudiad
+
+@ Regen (seconds per second)
+cy Adfywio (eiliadau yr eiliad)
+
+@ Render Scale
+cy Graddfa rendro
+
+@ Reverb
+cy Atsain
+
+@ Right
+cy De
+
+@ Ripple Intensity
+cy Dwyster crychdonnau
+
+@ Ripples
+cy Crychdonnau
+
+@ Roll Sensitivity
+cy Sensitifrwydd rholio
+
+@ Rumble
+cy Dirgryniad
+
+@ Run
+cy Rhedeg
+
+@ Save on All Enemies Killed
+cy Cadw ar ôl lladd pob gelyn
+
+@ Save on All Secrets Found
+cy Cadw ar ôl canfod pob cyfrinach
+
+@ Save on Level Entry
+cy Cadw wrth ddechrau lefel
+
+@ Save on Secret Found
+cy Cadw wrth ganfod cyfrinach
+
+@ Scoreboard
+cy Tabl sgorau
+
+@ Screen Flashes
+cy Fflachiadau sgrin
+
+@ Screen Shader
+cy Arlliwiwr sgrin
+
+@ Screen Shake
+cy Ysgwyd sgrin
+
+@ Search LAN
+cy Chwilio'r LAN
+
+@ Seconds a center-screen message stays up
+cy Eiliadau mae neges canol y sgrin yn aros
+
+@ See Through Portals
+cy Gweld trwy byrth
+
+@ See-through Teleporters
+cy Teleportwyr tryloyw
+
+@ Shirt Color
+cy Lliw crys
+
+@ Shotgun Bullet Decals
+cy Olion haels dryll
+
+@ Shoulder left
+cy ysgwydd chwith
+
+@ Shoulder right
+cy ysgwydd dde
+
+@ Show FPS
+cy Dangos FPS
+
+@ Show Face
+cy Dangos wyneb
+
+@ Shrapnel
+cy Shrapnel
+
+@ Size of on-screen messages and captions
+cy Maint negeseuon a chapsiynau ar y sgrin
+
+@ Skill
+cy Anhawster
+
+@ Sky Fog
+cy Niwl awyr
+
+@ Smooths the stepped movement of monsters
+cy Llyfnhau symudiad herciog angenfilod
+
+@ Sound
+cy Sain
+
+@ Sound Captions
+cy Capsiynau sain
+
+@ Sound Volume
+cy Lefel y synau
+
+@ Speed Blur
+cy Aneglurder cyflymder
+
+@ Splashes
+cy Tasgiadau
+
+@ Splatter Amount
+cy Swm y tasgu
+
+@ Splatter Size
+cy Maint y tasgu
+
+@ Start Game
+cy Dechrau gêm
+
+@ Staying underwater doesn't hurt
+cy Nid yw aros o dan y dŵr yn brifo
+
+@ Stick Look Pitch
+cy Edrych fertigol â ffon
+
+@ Stick Look Yaw
+cy Edrych llorweddol â ffon
+
+@ Strafe Left
+cy Camu i'r chwith
+
+@ Strafe Right
+cy Camu i'r dde
+
+@ Strength of the surface swell and rings
+cy Cryfder ymchwydd a chylchoedd yr arwyneb
+
+@ Stun Duration
+cy Hyd syfrdanu
+
+@ Style
+cy Arddull
+
+@ Supersampling
+cy Uwchsamplu
+
+@ Surface Hit Effects
+cy Effeithiau taro arwyneb
+
+@ Swim Down
+cy Nofio i lawr
+
+@ Targets
+cy Targedau
+
+@ Teamplay
+cy Chwarae tîm
+
+@ Texture Filter
+cy Hidlydd gweadau
+
+@ Third person
+cy trydydd person
+
+@ Thud
+cy Dwmp
+
+@ Tick
+cy Tic
+
+@ Time Limit
+cy Terfyn amser
+
+@ Time Stretch
+cy Ymestyn amser
+
+@ Toggle Attack
+cy Ymosod (togl)
+
+@ Toggle Run
+cy Rhedeg (togl)
+
+@ Toggle auto-aim
+cy Toglo anelu awtomatig
+
+@ Touch Controls
+cy Rheolyddion cyffwrdd
+
+@ Touchscreen
+cy Sgrin gyffwrdd
+
+@ Tough Enemy Health
+cy Iechyd gelynion caled
+
+@ Tough enemies only
+cy Gelynion caled yn unig
+
+@ Trail Colour
+cy Lliw'r trywydd
+
+@ Translate Console
+cy Cyfieithu'r consol
+
+@ Translucent Water
+cy Dŵr tryleu
+
+@ Treble
+cy Trebl
+
+@ Turn Left
+cy Troi i'r chwith
+
+@ Turn Right
+cy Troi i'r dde
+
+@ Underwater FX
+cy Effeithiau tanddwr
+
+@ Use Bullet Time Meter
+cy Defnyddio mesurydd bullet time
+
+@ VSync
+cy VSync
+
+@ View Bob
+cy Siglo'r olwg
+
+@ Viewmodels
+cy Modelau arfau
+
+@ Volume
+cy Lefel sain
+
+@ Water Opacity
+cy Didreiddedd dŵr
+
+@ Water Quality
+cy Ansawdd dŵr
+
+@ Water Settings
+cy Gosodiadau dŵr
+
+@ Weapon Wheel
+cy Olwyn arfau
+
+@ Weapon Wheel Slowdown
+cy Arafu olwyn arfau
+
+@ Weapons
+cy Arfau
+
+@ Weapons Position
+cy Safle arfau
+
+@ Where center-screen messages appear
+cy Lle mae negeseuon canol y sgrin yn ymddangos
+
+@ Where pickup and event messages appear
+cy Lle mae negeseuon casglu a digwyddiadau'n ymddangos
+
+@ White
+cy Gwyn
+
+@ Yaw Sensitivity
+cy Sensitifrwydd llorweddol
+
+@ Yellow
+cy Melyn
+
+# lowercase choice values
+@ T
+cy T
+
+@ always
+cy bob amser
+
+@ auto
+cy awto
+
+@ banded
+cy bandiau
+
+@ borderless
+cy heb ymyl
+
+@ bottom center
+cy gwaelod canol
+
+@ bottom left
+cy gwaelod chwith
+
+@ bottom right
+cy gwaelod de
+
+@ box
+cy blwch
+
+@ broken square
+cy sgwâr toredig
+
+@ classic
+cy clasurol
+
+@ coarse
+cy bras
+
+@ cooperative
+cy cydweithredol
+
+@ cross
+cy croes
+
+@ cross + dot
+cy croes + dot
+
+@ cyan
+cy gwyrddlas
+
+@ dashed
+cy llinell doredig
+
+@ deathmatch
+cy deathmatch
+
+@ deuteranopia
+cy dewteranopia
+
+@ diagonal streaks
+cy rhesi croeslin
+
+@ diamond
+cy diemwnt
+
+@ dot
+cy dot
+
+@ double
+cy dwbl
+
+@ double chevrons
+cy chevronau dwbl
+
+@ double diagonals
+cy croesliniau dwbl
+
+@ easy
+cy hawdd
+
+@ fine
+cy mân
+
+@ fit output
+cy ffitio'r allbwn
+
+@ flick stick
+cy flick stick
+
+@ fullscreen
+cy sgrin lawn
+
+@ gap cross
+cy croes fylchog
+
+@ green
+cy gwyrdd
+
+@ grey
+cy llwyd
+
+@ half speed
+cy hanner cyflymder
+
+@ hard
+cy anodd
+
+@ high
+cy uchel
+
+@ huge
+cy enfawr
+
+@ immersive
+cy trochol
+
+@ intense
+cy dwys
+
+@ large
+cy mawr
+
+@ larger
+cy mwy
+
+@ largest
+cy mwyaf
+
+@ linear
+cy llinol
+
+@ low
+cy isel
+
+@ lower
+cy is
+
+@ magenta
+cy magenta
+
+@ medium
+cy canolig
+
+@ middle
+cy canol
+
+@ middle left
+cy canol chwith
+
+@ middle right
+cy canol de
+
+@ modern
+cy modern
+
+@ nearest
+cy agosaf
+
+@ nightmare
+cy hunllef
+
+@ nintendo
+cy Nintendo
+
+@ no team damage
+cy dim difrod i'r tîm
+
+@ none
+cy dim
+
+@ normal
+cy arferol
+
+@ off
+cy i ffwrdd
+
+@ off while held
+cy i ffwrdd wrth ddal
+
+@ on
+cy ymlaen
+
+@ only while held
+cy dim ond wrth ddal
+
+@ playstation
+cy PlayStation
+
+@ protanopia
+cy protanopia
+
+@ quarter speed
+cy chwarter cyflymder
+
+@ red
+cy coch
+
+@ short diagonals
+cy croesliniau byr
+
+@ single
+cy sengl
+
+@ small
+cy bach
+
+@ solid
+cy solet
+
+@ spectacle
+cy ysblennydd
+
+@ subtle
+cy cynnil
+
+@ team damage
+cy difrod i'r tîm
+
+@ top center
+cy brig canol
+
+@ top left
+cy brig chwith
+
+@ top right
+cy brig de
+
+@ triple
+cy triphlyg
+
+@ tritanopia
+cy tritanopia
+
+@ upper
+cy uwch
+
+@ white
+cy gwyn
+
+@ whole screen
+cy sgrin gyfan
+
+@ windowed
+cy ffenestr
+
+@ xbox
+cy Xbox
+
+@ yellow
+cy melyn
+
+# ==== tooltips.txt ====
+
+# Options help lines (tooltips) and reasons for disabled rows.
+@ 2D aiming turns the view continuously with the right stick; flick stick snaps the view to where you push the stick, then turning the stick rotates it
+cy Mae anelu 2D yn troi'r olwg yn ddi-dor gyda'r ffon dde; mae flick stick yn neidio'r olwg i'r cyfeiriad rydych yn gwthio'r ffon, yna mae troi'r ffon yn ei chylchdroi
+
+@ 3D resolution relative to the window; the UI stays sharp
+cy Cydraniad 3D o'i gymharu â'r ffenestr; mae'r rhyngwyneb yn aros yn finiog
+
+@ 3D view keeps the HUD and menus sharp; whole screen runs them through the shader too
+cy Mae golwg 3D yn cadw'r HUD a'r dewislenni'n finiog; mae sgrin gyfan yn eu rhedeg drwy'r arlliwiwr hefyd
+
+@ A Quake III style railgun: a slug that pierces every enemy on its line, using 2 cells a shot and refiring every 1.5 s; select it through its assigned weapon slot (Add-ons)
+cy Railgun yn null Quake III: bwled sy'n trywanu pob gelyn ar ei llinell, gan ddefnyddio 2 gell yr ergyd a thanio eto bob 1.5 e; dewiswch hi drwy ei slot arf (Ychwanegion)
+
+@ A Zelda-style hookshot: fire sends a chain hook out; it latches onto hookable surfaces or enemies and reels you in; fire again to let go
+cy Bachyn yn null Zelda: mae tanio'n anfon bachyn ar gadwyn; mae'n cydio mewn arwynebau addas neu elynion ac yn eich tynnu ato; taniwch eto i ollwng
+
+@ Also translates the engine's console messages; off keeps them in English
+cy Mae hefyd yn cyfieithu negeseuon consol yr injan; mae i ffwrdd yn eu cadw yn Saesneg
+
+@ Automatically acquire another enemy while holding Lock-on after losing a target
+cy Caffael gelyn arall yn awtomatig wrth ddal Cloi ar ôl colli targed
+
+@ Blends between animation frames of monsters and weapons
+cy Cymysgu rhwng fframiau animeiddio angenfilod ac arfau
+
+@ Blood stains surfaces and bodies; cosmetic, independent of particle packs
+cy Mae gwaed yn staenio arwynebau a chyrff; cosmetig yn unig, yn annibynnol ar becynnau gronynnau
+
+@ Bloom glow around bright lights and heat sources; medium uses 4 taps, high uses 8, low disables halo taps
+cy Llewyrch bloom o amgylch goleuadau llachar a ffynonellau gwres; mae canolig yn defnyddio 4 sampl, uchel 8, ac isel yn analluogi'r eurgylch
+
+@ Blurs fast-moving monsters, projectiles and doors (not camera turns)
+cy Aneglurhau angenfilod, taflegrau a drysau sy'n symud yn gyflym (nid troi'r camera)
+
+@ Blurs the screen edges during fast falls and launches; keeps the centre clear. Reduce Motion disables it
+cy Aneglurhau ymylon y sgrin wrth gwympo neu gael eich lansio'n gyflym; mae'r canol yn aros yn glir. Mae Lleihau symudiad yn ei analluogi
+
+@ Brightness of the underwater light patterns
+cy Disgleirdeb y patrymau golau o dan y dŵr
+
+@ Caps mark count, lifetime, airborne droplets and wound/gib painting; low skips enemy wounds and gib trails
+cy Cyfyngu ar nifer ac oes olion, diferion yn yr awyr a staeniau clwyfau/darnau cnawd; mae isel yn hepgor clwyfau gelynion a llwybrau darnau cnawd
+
+@ Caps shader input at output size so 200% render scale keeps 3D sharpness without 4x shader cost; low scales stay low-res
+cy Cyfyngu mewnbwn yr arlliwiwr i faint yr allbwn fel bod graddfa rendro 200% yn cadw miniogrwydd 3D heb gost 4x i'r arlliwiwr; mae graddfeydd isel yn aros yn gydraniad isel
+
+@ Classic: the original status bar; modern: compact elements at the screen edges
+cy Clasurol: y bar statws gwreiddiol; modern: elfennau cryno ar ymylon y sgrin
+
+@ Coat atlas resolution, rebuild rate and shader detail: low builds smaller coats less often with fast shading; high uses full detail
+cy Cydraniad atlas yr haenau, cyfradd ailadeiladu a manylder yr arlliwiwr: mae isel yn creu haenau llai yn llai aml gydag arlliwio cyflym; mae uchel yn defnyddio'r manylder llawn
+
+@ Colour of the railgun's spiral trail; split-screen players each get the next colour along
+cy Lliw trywydd troellog y railgun; mae pob chwaraewr ar sgrin hollt yn cael y lliw nesaf
+
+@ Damage the railgun deals to each enemy it passes through (Quake III: 100)
+cy Difrod mae'r railgun yn ei wneud i bob gelyn mae'n mynd drwyddo (Quake III: 100)
+
+@ Dark backdrop behind on-screen messages for readability
+cy Cefndir tywyll y tu ôl i negeseuon ar y sgrin i'w gwneud yn haws eu darllen
+
+@ Dark border keeps the crosshair visible on any background
+cy Mae ymyl dywyll yn cadw'r croesflew yn weladwy ar unrhyw gefndir
+
+@ Darkens corners and contact areas where geometry meets; higher quality is sharper
+cy Tywyllu corneli a mannau cyswllt lle mae geometreg yn cwrdd; mae ansawdd uwch yn fwy miniog
+
+@ Debris lands on and is carried or shoved by doors, lifts and platforms
+cy Mae malurion yn glanio ar ddrysau, lifftiau a llwyfannau, sy'n eu cario neu'n eu gwthio
+
+@ Detail for caustics, ripples and splashes: low uses smaller budgets and shorter view distance; high uses larger budgets and farther view distance
+cy Manylder costigau, crychdonnau a thasgiadau: mae isel yn defnyddio cyllidebau llai a phellter golwg byrrach; mae uchel yn defnyddio cyllidebau mwy a phellter golwg hirach
+
+@ Disabled while Enhanced Particles is on: its particles replace the GLQuake and Classic styles
+cy Wedi'i analluogi tra bo Gronynnau gwell ymlaen: mae ei ronynnau'n disodli'r arddulliau GLQuake a clasurol
+
+@ Disabled while Enhanced Water is on: its own underwater effects replace the classic and GLQuake view warps
+cy Wedi'i analluogi tra bo Dŵr gwell ymlaen: mae ei effeithiau tanddwr ei hun yn disodli ystumiadau golwg clasurol a GLQuake
+
+@ Draw the predicted grenade path as a solid or dashed line
+cy Lluniadu llwybr disgwyliedig y grenâd fel llinell solet neu doredig
+
+@ Draw the view out of the linked portal inside each portal; off shows flat discs (fastest)
+cy Dangos yr olwg allan o'r porth cysylltiedig ym mhob porth; mae i ffwrdd yn dangos disgiau gwastad (cyflymaf)
+
+@ Droplets spray up when things enter or leave water, slime or lava
+cy Mae diferion yn tasgu pan fydd pethau'n mynd i mewn i ddŵr, llysnafedd neu lafa, neu'n dod allan
+
+@ Emulates the original 8-bit palette of software rendering
+cy Efelychu palet 8-did gwreiddiol y rendro meddalwedd
+
+@ Every level starts with only the shotgun and axe, as if started fresh
+cy Mae pob lefel yn dechrau gyda'r dryll a'r fwyell yn unig, fel petai'n dechrau o'r newydd
+
+@ Explosion damage for each remotely detonated sticky bomb
+cy Difrod ffrwydrad pob bom gludiog a ffrwydrir o bell
+
+@ Extra freeze milliseconds for every 10 damage dealt, so heavy hits stop longer
+cy Milieiliadau rhewi ychwanegol am bob 10 difrod, fel bod ergydion trwm yn rhewi'n hirach
+
+@ First person, a third-person camera centered behind the player, or one over the right or left shoulder; third person hides viewmodels
+cy Person cyntaf, camera trydydd person y tu ôl i'r chwaraewr, neu un dros yr ysgwydd dde neu chwith; mae trydydd person yn cuddio modelau arfau
+
+@ Flash the selected marker on confirmed hits; colors are shared with the crosshair
+cy Fflachio'r marciwr a ddewiswyd ar drawiadau wedi'u cadarnhau; rhennir y lliwiau â'r croesflew
+
+@ Freeze for every enemy, or only for enemies that were tough before the hit
+cy Rhewi am bob gelyn, neu dim ond am elynion a oedd yn galed cyn y trawiad
+
+@ Freeze the game briefly when you damage an enemy; single player with add-ons only
+cy Rhewi'r gêm am eiliad pan fyddwch yn niweidio gelyn; un chwaraewr gydag ychwanegion yn unig
+
+@ Gibs tumble and barrels throw shrapnel; shots and blasts push them (cosmetic only)
+cy Mae darnau cnawd yn rholio a chasgenni'n taflu shrapnel; mae ergydion a ffrwydradau'n eu gwthio (cosmetig yn unig)
+
+@ Health an enemy must have had before the hit to count as tough
+cy Yr iechyd roedd yn rhaid i elyn ei gael cyn y trawiad i gyfrif yn galed
+
+@ Hits dealing less damage than this do not freeze the game; the default 10 skips nails and shotgun pellets
+cy Nid yw trawiadau â llai o ddifrod na hyn yn rhewi'r gêm; mae'r gwerth diofyn 10 yn hepgor hoelion a haels dryll
+
+@ Hold fire and sweep the crosshair over monsters to queue them, release to throw: it stuns each in turn and flies back; alt-fire clears the queue
+cy Daliwch i danio a sgubo'r croesflew dros angenfilod i'w ciwio, gollyngwch i daflu: mae'n syfrdanu pob un yn ei dro ac yn hedfan yn ôl; mae tanio amgen yn clirio'r ciw
+
+@ Hold: keep Lock-on held. Toggle: press Auto-aim Toggle to enable automatic acquisition. Click look stick to switch targets
+cy Dal: daliwch Cloi i lawr. Togl: pwyswch Anelu awtomatig (togl) i alluogi caffael awtomatig. Cliciwch y ffon edrych i newid targed
+
+@ How close an enemy must be to the crosshair for automatic acquisition in toggle mode (degrees)
+cy Pa mor agos mae'n rhaid i elyn fod at y croesflew i'w gaffael yn awtomatig yn y modd togl (graddau)
+
+@ How far the view tilts up and down when you tilt the controller (pitch axis)
+cy Pa mor bell mae'r olwg yn gogwyddo i fyny ac i lawr pan fyddwch yn gogwyddo'r rheolydd (echelin traw)
+
+@ How far the view turns left and right when you turn the controller (yaw axis)
+cy Pa mor bell mae'r olwg yn troi i'r chwith a'r dde pan fyddwch yn troi'r rheolydd (echelin gwyro)
+
+@ How far the view turns when you drag on the right half of the screen
+cy Pa mor bell mae'r olwg yn troi pan fyddwch yn llusgo ar hanner de'r sgrin
+
+@ How fast the boomerang flies (units per second)
+cy Pa mor gyflym mae'r bwmerang yn hedfan (unedau yr eiliad)
+
+@ How hard shots and explosions push debris around
+cy Pa mor galed mae ergydion a ffrwydradau'n gwthio malurion
+
+@ How hard the Powerwasher's water pushes enemies
+cy Pa mor galed mae dŵr y Golchwr pŵer yn gwthio gelynion
+
+@ How long a hit freezes the game, in milliseconds
+cy Am ba hyd mae trawiad yn rhewi'r gêm, mewn milieiliadau
+
+@ How strongly fog covers the sky when fog is on
+cy Pa mor gryf mae niwl yn gorchuddio'r awyr pan fydd niwl ymlaen
+
+@ How the view distorts underwater: Classic ripples the whole screen like software Quake, GLQuake slowly stretches and squashes the view
+cy Sut mae'r olwg yn ystumio o dan y dŵr: mae Clasurol yn crychu'r sgrin gyfan fel Quake meddalwedd, mae GLQuake yn ymestyn ac yn gwasgu'r olwg yn araf
+
+@ Ignores gyro rotation slower than this many degrees per second, to hide hand tremor
+cy Anwybyddu cylchdro gyro sy'n arafach na hyn o raddau yr eiliad, i guddio cryndod llaw
+
+@ Immersive: appears for a few seconds only when its value changes
+cy Trochol: yn ymddangos am ychydig eiliadau dim ond pan fydd ei werth yn newid
+
+@ Keeps textures sharp on floors and walls seen at steep angles
+cy Cadw gweadau'n finiog ar loriau a waliau a welir ar onglau serth
+
+@ Lights from rockets, muzzle flashes and explosions brighten nearby walls
+cy Mae golau rocedi, fflachiadau tanio a ffrwydradau'n goleuo waliau cyfagos
+
+@ Liquid surfaces swell and ring out where things move through them
+cy Mae arwynebau hylif yn ymchwyddo ac yn crychu lle mae pethau'n symud drwyddynt
+
+@ Lobs sticky bombs (rockets ammo) that cling to walls, doors and monsters; alt-fire detonates them all
+cy Taflu bomiau gludiog (bwledi rocedi) sy'n glynu wrth waliau, drysau ac angenfilod; mae tanio amgen yn eu ffrwydro i gyd
+
+@ Look of the classic particles: GLQuake draws soft round dots, Classic draws square pixels like software Quake
+cy Golwg y gronynnau clasurol: mae GLQuake yn lluniadu dotiau crwn meddal, mae Clasurol yn lluniadu picseli sgwâr fel Quake meddalwedd
+
+@ Low skips the background smear halo and uses fewer blur samples; high keeps the full halo and smoother streaks
+cy Mae isel yn hepgor yr eurgylch taenu cefndir ac yn defnyddio llai o samplau aneglurder; mae uchel yn cadw'r eurgylch llawn a stribedi llyfnach
+
+@ Low: hard particle edges, half the scripted particles and fewer hit sparks. Medium: soft edges. High: soft edges checked per MSAA sample, most hit sparks
+cy Isel: ymylon gronynnau caled, hanner y gronynnau sgript a llai o wreichion taro. Canolig: ymylon meddal. Uchel: ymylon meddal wedi'u gwirio fesul sampl MSAA, y rhan fwyaf o wreichion taro
+
+@ Marks fade out before expiring; oldest marks are recycled at the limit
+cy Mae olion yn pylu cyn diflannu; mae'r olion hynaf yn cael eu hailgylchu wrth y terfyn
+
+@ Max nested portal reflections to draw; each level redraws the scene
+cy Uchafswm adlewyrchiadau porth nythog i'w lluniadu; mae pob lefel yn ail-luniadu'r olygfa
+
+@ Max portals per screen with a live view; each one redraws the scene
+cy Uchafswm pyrth fesul sgrin gyda golwg fyw; mae pob un yn ail-luniadu'r olygfa
+
+@ Maximum distance for acquiring and keeping an enemy locked
+cy Pellter mwyaf ar gyfer caffael gelyn a'i gadw dan glo
+
+@ Minimum gap between freezes, so shotgun pellets and rapid fire count once; kills ignore it
+cy Bwlch lleiaf rhwng rhewiadau, fel bod haels dryll a thanio cyflym yn cyfrif unwaith; mae lladd yn ei anwybyddu
+
+@ Modern terminal console with autocomplete popup, history search, ANSI colors, bash shell and piping; off uses the classic Quake console
+cy Consol terfynell modern gyda naidlen awtogwblhau, chwilio hanes, lliwiau ANSI, cragen bash a phibellu; mae i ffwrdd yn defnyddio consol clasurol Quake
+
+@ Monsters take proportionally less damage at higher values; above 100% is harder
+cy Mae angenfilod yn cael llai o ddifrod yn gyfrannol ar werthoedd uwch; mae dros 100% yn anoddach
+
+@ Moving gibs leave blood on surfaces they touch
+cy Mae darnau cnawd sy'n symud yn gadael gwaed ar arwynebau maen nhw'n eu cyffwrdd
+
+@ Multiplier on the freeze when the hit kills the enemy; 1 means no extra
+cy Lluosydd ar y rhewi pan fydd y trawiad yn lladd y gelyn; mae 1 yn golygu dim ychwanegol
+
+@ Multiplies ammo from pickups (up to the normal carry limit); below 100% is harder
+cy Lluosi'r bwledi a gesglir (hyd at y terfyn cario arferol); mae dan 100% yn anoddach
+
+@ Multiplies health from pickups (up to 100, or the item's own limit); below 100% is harder
+cy Lluosi'r iechyd a gesglir (hyd at 100, neu derfyn yr eitem ei hun); mae dan 100% yn anoddach
+
+@ Nails stick to wood and bodies; hard surfaces deflect them to the floor
+cy Mae hoelion yn glynu mewn pren a chyrff; mae arwynebau caled yn eu gwyro i'r llawr
+
+@ Nearest keeps crisp classic pixels; linear smooths textures
+cy Mae agosaf yn cadw picseli clasurol clir; mae llinol yn llyfnhau gweadau
+
+@ New Game: Add-ons
+cy Gêm newydd: Ychwanegion
+
+@ New Game: Customize
+cy Gêm newydd: Addasu
+
+@ Night vision: how much dark areas are brightened; thermal: how strongly heat stands out
+cy Golwg nos: faint mae ardaloedd tywyll yn cael eu goleuo; thermol: pa mor gryf mae gwres yn sefyll allan
+
+@ Night-vision and thermal goggles, cycle normal, night vision and thermal with Change Goggles (Add-ons), or use the Equipment Wheel
+cy Gogls golwg nos a thermol; newidiwch rhwng arferol, golwg nos a thermol gyda Newid gogls (Ychwanegion), neu defnyddiwch yr Olwyn offer
+
+@ No single freeze lasts longer than this, however much damage or kill bonus adds
+cy Nid oes unrhyw rewi'n para'n hirach na hyn, faint bynnag o ddifrod neu fonws lladd a ychwanegir
+
+@ Oldest marks and nails are recycled at this shared limit
+cy Mae'r olion a'r hoelion hynaf yn cael eu hailgylchu wrth y terfyn cyffredin hwn
+
+@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
+cy Ffon a botymau ar y sgrin: mae awto yn eu dangos ar ôl cyffwrdd ac yn eu cuddio pan ddefnyddir dyfais arall
+
+@ Only autosaves: quicksaves and the Save menu are off
+cy Awtogadw yn unig: mae cadw cyflym a'r ddewislen Cadw i ffwrdd
+
+@ Place every weapon at the center, right or left of the view, or hide all viewmodels
+cy Gosod pob arf yn y canol, ar y dde neu ar y chwith, neu guddio pob model arf
+
+@ Play your chosen hit or kill cue when you damage an enemy
+cy Chwarae'r ciw taro neu ladd a ddewiswyd pan fyddwch yn niweidio gelyn
+
+@ Playback speed: faster sounds shorter and higher
+cy Cyflymder chwarae: mae cyflymach yn swnio'n fyrrach ac yn uwch
+
+@ Plays the Quake theme in the main menu when no game is running
+cy Chwarae thema Quake yn y brif ddewislen pan nad oes gêm yn rhedeg
+
+@ Portals farther away than this are drawn as flat discs
+cy Mae pyrth sy'n bellach na hyn yn cael eu lluniadu fel disgiau gwastad
+
+@ Press attack once to keep firing, again to stop
+cy Pwyswch ymosod unwaith i ddal ati i danio, ac eto i stopio
+
+@ Press run once to switch between running and walking
+cy Pwyswch rhedeg unwaith i newid rhwng rhedeg a cherdded
+
+@ Raise or lower the tone independently of sound length
+cy Codi neu ostwng y traw yn annibynnol ar hyd y sain
+
+@ Red screen edges show where damage came from: top is front, bottom is behind; Screen Flashes controls their strength
+cy Mae ymylon coch ar y sgrin yn dangos o ble daeth y difrod: brig yw blaen, gwaelod yw tu ôl; mae Fflachiadau sgrin yn rheoli eu cryfder
+
+@ Replaces the classic dot particles with glowing sparks, smoke and blood; mods with their own particle effects keep them
+cy Disodli'r gronynnau dot clasurol â gwreichion disglair, mwg a gwaed; mae modiau â'u heffeithiau gronynnau eu hunain yn eu cadw
+
+@ Resolution and detail inside portal and teleporter views; lower tiers trim nested effects
+cy Cydraniad a manylder y tu mewn i olygfeydd pyrth a theleportwyr; mae lefelau is yn tocio effeithiau nythog
+
+@ Rippling light patterns on surfaces under water and slime
+cy Patrymau golau crychlyd ar arwynebau o dan ddŵr a llysnafedd
+
+@ Scales all damage you take; above 100% is harder
+cy Graddio pob difrod a gewch; mae dros 100% yn anoddach
+
+@ Screen edge for this element; elements on the same spot stack
+cy Ymyl y sgrin ar gyfer yr elfen hon; mae elfennau yn yr un man yn pentyrru
+
+@ Seconds a monster hit by the boomerang stays stunned
+cy Eiliadau mae anghenfil a darawyd gan y bwmerang yn aros wedi'i syfrdanu
+
+@ Seconds impact marks and stuck nails stay before fading out; independent of Particle Quality
+cy Eiliadau mae olion trawiad a hoelion sownd yn aros cyn pylu; yn annibynnol ar Ansawdd gronynnau
+
+@ Seconds messages at the top of the screen stay up
+cy Eiliadau mae negeseuon ar frig y sgrin yn aros
+
+@ Seconds the flick stick snap takes; lower is faster
+cy Eiliadau mae naid y flick stick yn ei gymryd; mae is yn gyflymach
+
+@ See through enhanced water; enables Water Opacity
+cy Gweld trwy ddŵr gwell; yn galluogi Didreiddedd dŵr
+
+@ Sensor grain, scanlines and flicker of the goggle image
+cy Graen synhwyrydd, llinellau sgan a chryndod delwedd y gogls
+
+@ Shades every anti-aliasing sample; needs Anti-aliasing on
+cy Arlliwio pob sampl gwrth-ddanheddu; angen Gwrth-ddanheddu ymlaen
+
+@ Shifts colors so they stay distinct for the chosen color blindness
+cy Symud lliwiau fel eu bod yn aros yn wahanol ar gyfer y math o ddallineb lliw a ddewiswyd
+
+@ Shotgun hits leave small surface marks (cosmetic only)
+cy Mae ergydion dryll yn gadael olion bach ar arwynebau (cosmetig yn unig)
+
+@ Show corner ticks at screen centre while locked, even with Crosshair off
+cy Dangos marciau cornel yng nghanol y sgrin tra bo wedi cloi, hyd yn oed gyda'r croesflew i ffwrdd
+
+@ Show where grenades and other arcing shots will fly, bounce and land; local play only, not in deathmatch
+cy Dangos ble bydd grenadau ac ergydion bwaog eraill yn hedfan, yn bownsio ac yn glanio; chwarae lleol yn unig, nid mewn deathmatch
+
+@ Shows text for important sounds: doors, alerted enemies, secrets, pickups
+cy Dangos testun ar gyfer synau pwysig: drysau, gelynion effro, cyfrinachau, eitemau a gasglwyd
+
+@ Shows the distance fog that maps and mods set; off always gives clear view
+cy Dangos y niwl pellter mae mapiau a modiau'n ei osod; mae i ffwrdd bob amser yn rhoi golwg glir
+
+@ Shows the player face next to the health number
+cy Dangos wyneb y chwaraewr wrth ymyl y rhif iechyd
+
+@ Simulation detail, step rate, fade-out lifetimes and caps for gibs and shrapnel; low also skips mover collision
+cy Manylder efelychu, cyfradd camau, oes pylu a therfynau ar gyfer darnau cnawd a shrapnel; mae isel hefyd yn hepgor gwrthdaro â gwrthrychau symudol
+
+@ Size of the on-screen buttons and move stick
+cy Maint y botymau a'r ffon symud ar y sgrin
+
+@ Slowly heals up to 100 health after 5 seconds without being hit
+cy Iacháu'n araf hyd at 100 iechyd ar ôl 5 eiliad heb gael eich taro
+
+@ Slows stick look while the crosshair is over an enemy
+cy Arafu edrych â ffon tra bo'r croesflew dros elyn
+
+@ Slows the game down while the weapon wheel is open
+cy Arafu'r gêm tra bo'r olwyn arfau ar agor
+
+@ Slows the whole game down; single player only. Saves and demos stay compatible with other ports
+cy Arafu'r gêm gyfan; un chwaraewr yn unig. Mae ffeiliau cadw a demos yn aros yn gydnaws ag injans eraill
+
+@ Small camera jolt on each freeze; off with Reduce Motion
+cy Ysgytwad bach i'r camera ar bob rhewi; i ffwrdd gyda Lleihau symudiad
+
+@ Snap and track enemies in local play, including split-screen; unavailable online
+cy Neidio at elynion a'u dilyn mewn chwarae lleol, gan gynnwys sgrin hollt; ddim ar gael ar-lein
+
+@ Sparks, smoke, chips, splinters and splashes fly off whatever your shots hit
+cy Mae gwreichion, mwg, sglodion, ysgyrion a thasgiadau'n hedfan oddi ar beth bynnag mae eich ergydion yn ei daro
+
+@ Spawns extra copies of every monster around the original when a level starts
+cy Creu copïau ychwanegol o bob anghenfil o amgylch yr un gwreiddiol pan fydd lefel yn dechrau
+
+@ Strength of the full-screen flashes for damage, pickups and powerups
+cy Cryfder y fflachiadau sgrin lawn ar gyfer difrod, eitemau a hwbiau
+
+@ Stretch or shorten the sound while keeping its pitch
+cy Ymestyn neu fyrhau'r sain gan gadw ei thraw
+
+@ Surface opacity; requires Enhanced Water and Translucent Water
+cy Didreiddedd yr arwyneb; angen Dŵr gwell a Dŵr tryleu
+
+@ The hook latches onto metal surfaces (metal, tech, computer panels, copper)
+cy Mae'r bachyn yn cydio mewn arwynebau metel (metel, tech, paneli cyfrifiadur, copr)
+
+@ The hook latches onto stone, brick, rock and any surface not recognised as wood or metal
+cy Mae'r bachyn yn cydio mewn carreg, brics, craig ac unrhyw arwyneb nad yw'n cael ei adnabod fel pren neu fetel
+
+@ The hook latches onto wooden surfaces (texture names like wood, crate, plank)
+cy Mae'r bachyn yn cydio mewn arwynebau pren (enwau gweadau fel wood, crate, plank)
+
+@ Turn the controller's motion sensor into a look input; needs a pad with a gyroscope
+cy Troi synhwyrydd symud y rheolydd yn fewnbwn edrych; angen pad â gyrosgop
+
+@ Turns off view bob, strafe tilt and the camera kick when hit or firing
+cy Diffodd siglo'r olwg, gogwyddo wrth gamu a hergwd y camera wrth gael eich taro neu danio
+
+@ Turns on the extra liquid effects; Water Settings controls each one
+cy Troi'r effeithiau hylif ychwanegol ymlaen; mae Gosodiadau dŵr yn rheoli pob un
+
+@ Turns the view to follow a moving enemy you are aiming at
+cy Troi'r olwg i ddilyn gelyn sy'n symud rydych yn anelu ato
+
+@ Turns the view when you roll the controller sideways; 0 disables it, negative reverses it
+cy Troi'r olwg pan fyddwch yn rholio'r rheolydd i'r ochr; mae 0 yn ei analluogi, mae negatif yn ei wrthdroi
+
+@ Two-portal gun: fire and alt-fire place linked portals on flat walls; assign a weapon slot in Add-ons
+cy Gwn dau borth: mae tanio a thanio amgen yn gosod pyrth cysylltiedig ar waliau gwastad; neilltuwch slot arf yn Ychwanegion
+
+@ Unlocks the FX Settings page: enhanced particles, impact effects and blood splatter
+cy Datgloi tudalen Gosodiadau effeithiau: gronynnau gwell, effeithiau trawiad a thasgu gwaed
+
+@ Uses the 2021 re-release's smoother MD5 models (and MD3 replacements from mods) instead of the classic ones. Applies on the next map load
+cy Defnyddio modelau MD5 llyfnach ail-ryddhad 2021 (ac amnewidion MD3 o fodiau) yn lle'r rhai clasurol. Yn berthnasol pan lwythir y map nesaf
+
+@ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
+cy Defnyddio golau lliw y map (ffeil .lit neu lwmp BSPX); mae i ffwrdd yn rhoi golau gwyn gwreiddiol. Yn berthnasol pan lwythir y map nesaf
+
+@ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
+cy Segmentau'r jet dŵr, nifer y diferion ac arlliwio hylif sgleiniog: mae isel yn defnyddio ffrydiau tryleu symlach; mae uchel yn defnyddio jetiau llyfn sgleiniog
+
+@ When gyro looking applies: always, off while +gyroaction is held, or only while it is held
+cy Pryd mae edrych â gyro'n berthnasol: bob amser, i ffwrdd wrth ddal +gyroaction, neu dim ond wrth ei ddal
+
+@ Which weapons trigger the freeze; melee covers the axe and any mod weapon used at close range without ammo
+cy Pa arfau sy'n achosi'r rhewi; mae ymladd agos yn cynnwys y fwyell ac unrhyw arf mod a ddefnyddir yn agos heb fwledi
+
+@ Your own rockets and grenades don't hurt you; rocket jumps still work
+cy Nid yw eich rocedi a'ch grenadau eich hun yn eich brifo; mae neidiau roced yn dal i weithio
+
+# ==== ui.txt ====
+
+# Menus and pop-ups outside the options pages: save cards, launch, presets,
+# add-on browser, map packs, hints and dialogs.
+@ Select
+cy Dewis
+
+@ Back
+cy Yn ôl
+
+@ Cancel
+cy Canslo
+
+@ Confirm
+cy Cadarnhau
+
+@ Scroll
+cy Sgrolio
+
+@ Section
+cy Adran
+
+@ Bind
+cy Neilltuo
+
+@ Cancel binding
+cy Canslo neilltuo
+
+@ Clear
+cy Clirio
+
+@ Clear pad
+cy Clirio'r pad
+
+@ Remap
+cy Ail-neilltuo
+
+@ Type
+cy Teipio
+
+@ Shift
+cy Shift
+
+@ Done
+cy Gorffen
+
+@ Del
+cy Del
+
+@ Space
+cy Bwlch
+
+@ Save
+cy Cadw
+
+@ Load
+cy Llwytho
+
+@ Delete
+cy Dileu
+
+@ Play
+cy Chwarae
+
+@ Yes
+cy Ie
+
+@ No
+cy Na
+
+@ OK
+cy Iawn
+
+@ System
+cy System
+
+@ Language
+cy Iaith
+
+@ Help
+cy Cymorth
+
+@ Fixed for this game: it was started without Customize
+cy Sefydlog ar gyfer y gêm hon: cafodd ei dechrau heb Addasu
+
+@ Press a button or key to bind (Start cancels)
+cy Pwyswch fotwm neu fysell i'w neilltuo (mae Start yn canslo)
+
+@ Press button...
+cy Pwyswch fotwm...
+
+@ Press key...
+cy Pwyswch fysell...
+
+@ Replace this binding?
+cy Disodli'r neilltuad hwn?
+
+@ is already assigned
+cy wedi'i neilltuo eisoes
+
+@ {} already assigned
+cy {} wedi'i neilltuo eisoes
+
+@ Open Controls to remap Lock-on?
+cy Agor Rheolyddion i ail-neilltuo Cloi?
+
+@ Lock-on
+cy Cloi
+
+@ Auto-aim Toggle
+cy Anelu awtomatig (togl)
+
+@ Keyboard
+cy Bysellfwrdd
+
+@ Controller
+cy Rheolydd
+
+# main menu, dialogs and screens
+@ Map Packs
+cy Pecynnau mapiau
+
+@ Customize
+cy Addasu
+
+@ Level Select
+cy Dewis lefel
+
+@ Really quit?
+cy Gadael go iawn?
+
+@ You died
+cy Rydych wedi marw
+
+@ Continue from most recent save
+cy Parhau o'r cadw diweddaraf
+
+@ Select save
+cy Dewis ffeil gadw
+
+@ Restart level
+cy Ailddechrau'r lefel
+
+@ Return to main menu
+cy Yn ôl i'r brif ddewislen
+
+@ (disabled)
+cy (wedi'i analluogi)
+
+@ (fixed for this game)
+cy (sefydlog ar gyfer y gêm hon)
+
+@ (off)
+cy (i ffwrdd)
+
+@ Apply Display Changes
+cy Cymhwyso newidiadau'r sgrin
+
+@ Display Mode
+cy Modd dangos
+
+@ Resolution
+cy Cydraniad
+
+@ desktop
+cy bwrdd gwaith
+
+@ Preset
+cy Rhagosodiad
+
+@ Map
+cy Map
+
+@ Reset Shader Settings
+cy Ailosod gosodiadau'r arlliwiwr
+
+@ Reset to Defaults
+cy Ailosod i'r diofyn
+
+@ Searching...
+cy Chwilio...
+
+@ This game only autosaves.
+cy Mae'r gêm hon yn awtogadw yn unig.
+
+@ (No Manual Saves modifier)
+cy (addasydd Dim cadw â llaw)
+
+@ End the current game?
+cy Gorffen y gêm bresennol?
+
+@ Unsaved progress will be lost.
+cy Bydd cynnydd heb ei gadw'n cael ei golli.
+
+@ End game
+cy Gorffen y gêm
+
+@ Overwrite
+cy Trosysgrifo
+
+@ Overwrite "{}"?
+cy Trosysgrifo "{}"?
+
+@ Saved {}
+cy Wedi cadw {}
+
+@ Start a new game?
+cy Dechrau gêm newydd?
+
+@ New game
+cy Gêm newydd
+
+@ New Game
+cy Gêm newydd
+
+@ CUSTOM
+cy ADDASEDIG
+
+@ Customize Experience
+cy Addasu'r profiad
+
+@ Disable All
+cy Analluogi'r cyfan
+
+@ Disable All Modifications
+cy Analluogi pob addasiad
+
+@ Saves load in other source ports too.
+cy Mae ffeiliau cadw'n llwytho mewn injans eraill hefyd.
+
+@ Standard rules, no add-ons.
+cy Rheolau safonol, dim ychwanegion.
+
+@ Choose skill
+cy Dewis anhawster
+
+@ The current game will end
+cy Bydd y gêm bresennol yn dod i ben
+
+@ Easy
+cy Hawdd
+
+@ Normal
+cy Arferol
+
+@ Hard
+cy Anodd
+
+@ Nightmare
+cy Hunllef
+
+# graphics preset pop-up
+@ Choose a Graphics Preset
+cy Dewiswch ragosodiad graffeg
+
+@ Classic
+cy Clasurol
+
+@ Like the re-release: enhanced models,
+cy Fel yr ail-ryddhad: modelau gwell,
+
+@ no added effects.
+cy dim effeithiau ychwanegol.
+
+@ Enhanced
+cy Gwell
+
+@ Every enhancement at its highest quality.
+cy Pob gwelliant ar ei ansawdd uchaf.
+
+@ Needs a capable GPU.
+cy Angen GPU galluog.
+
+@ Low-End
+cy Pŵer isel
+
+@ Fastest. No anti-aliasing, original
+cy Cyflymaf. Dim gwrth-ddanheddu, modelau
+
+@ models, lowest effect quality.
+cy gwreiddiol, ansawdd effeithiau isaf.
+
+@ Esc keeps the defaults
+cy Mae Esc yn cadw'r gosodiadau diofyn
+
+@ Everything can be changed later in Options.
+cy Gellir newid popeth yn nes ymlaen yn Options.
+
+@ Keep Defaults
+cy Cadw'r diofyn
+
+# save and load cards
+@ Save Game
+cy Cadw gêm
+
+@ Load Game
+cy Llwytho gêm
+
+@ Autosaves
+cy Awtogadwau
+
+@ newest first
+cy y diweddaraf yn gyntaf
+
+@ Saves: {}
+cy Ffeiliau cadw: {}
+
+@ Browse Autosaves
+cy Pori awtogadwau
+
+@ Every retained autosave, newest first
+cy Pob awtogadw a gadwyd, y diweddaraf yn gyntaf
+
+@ New save
+cy Cadw newydd
+
+@ Select to save your game here
+cy Dewiswch i gadw eich gêm yma
+
+@ No autosaves yet
+cy Dim awtogadwau eto
+
+@ Autosaves are made on level entry, secrets and more (Options > Gameplay)
+cy Mae awtogadwau'n cael eu gwneud wrth ddechrau lefel, wrth ganfod cyfrinachau a mwy (Options > Chwarae)
+
+@ No saves yet
+cy Dim ffeiliau cadw eto
+
+@ Save from the Single Player menu, or press F6 to quicksave
+cy Cadwch o'r ddewislen Single Player, neu pwyswch F6 i gadw'n gyflym
+
+@ No picture
+cy Dim llun
+
+@ Del: delete save
+cy Del: dileu ffeil gadw
+
+@ Delete "{}"?
+cy Dileu "{}"?
+
+@ This cannot be undone.
+cy Ni ellir dadwneud hyn.
+
+@ Quicksave
+cy Cadw cyflym
+
+@ Autosave: {}
+cy Awtogadw: {}
+
+@ unknown trigger
+cy sbardun anhysbys
+
+@ Latest - {}
+cy Diweddaraf - {}
+
+@ Health {}
+cy Iechyd {}
+
+@ Armor {}
+cy Arfwisg {}
+
+@ Kills {}/{}
+cy Lladdwyd {}/{}
+
+@ Secrets {}/{}
+cy Cyfrinachau {}/{}
+
+@ Split-screen, {} players
+cy Sgrin hollt, {} chwaraewr
+
+@ Co-op
+cy Cydweithredol
+
+@ Customized
+cy Wedi'i addasu
+
+@ Customized, {}
+cy Wedi'i addasu, {}
+
+@ Date unavailable
+cy Dyddiad ddim ar gael
+
+@ Just now
+cy Eiliad yn ôl
+
+@ {} min ago
+cy {} mun yn ôl
+
+@ {} h ago
+cy {} awr yn ôl
+
+@ Level entry
+cy Dechrau lefel
+
+@ Secret found
+cy Cyfrinach wedi'i chanfod
+
+@ All enemies killed
+cy Pob gelyn wedi'i ladd
+
+@ All secrets found
+cy Pob cyfrinach wedi'i chanfod
+
+@ Timer
+cy Amserydd
+
+# customize pages
+@ Standard rules
+cy Rheolau safonol
+
+@ Modifiers changed: {}
+cy Addaswyr wedi newid: {}
+
+@ no add-ons
+cy dim ychwanegion
+
+@ add-ons: {}
+cy ychwanegion: {}
+
+@ Saves of this game are .qsa files: they need this source port.
+cy Mae ffeiliau cadw'r gêm hon yn ffeiliau .qsa: mae angen yr injan hon arnynt.
+
+@ Nothing changed: this plays as standard Quake.
+cy Dim wedi newid: mae hon yn chwarae fel Quake safonol.
+
+@ Changes apply now and are saved with this game (.qsa).
+cy Mae newidiadau'n dod i rym nawr ac yn cael eu cadw gyda'r gêm hon (.qsa).
+
+@ This game started without Customize, so its rules are fixed.
+cy Dechreuwyd y gêm hon heb Addasu, felly mae ei rheolau'n sefydlog.
+
+@ Start a new game and choose Customize Experience.
+cy Dechreuwch gêm newydd a dewis Addasu'r profiad.
+
+@ These rules apply to the next customized game.
+cy Mae'r rheolau hyn yn berthnasol i'r gêm addasedig nesaf.
+
+# add-on browser
+@ Fire
+cy Tanio
+
+@ Alt Fire
+cy Tanio amgen
+
+@ Configure Parameters >
+cy Ffurfweddu paramedrau >
+
+@ Configure
+cy Ffurfweddu
+
+@ Settings
+cy Gosodiadau
+
+@ Change slot
+cy Newid slot
+
+@ Toggle
+cy Toglo
+
+@ Details
+cy Manylion
+
+@ Enter or click the box: toggle
+cy Enter neu glicio'r blwch: toglo
+
+@ Right / Tab / click: details
+cy De / Tab / clicio: manylion
+
+@ Input Remapping
+cy Ail-neilltuo mewnbwn
+
+@ Weapon Slot
+cy Slot arf
+
+@ Customized games save as .qsa files, which need this source port.
+cy Mae gemau addasedig yn cadw fel ffeiliau .qsa, sydd angen yr injan hon.
+
+@ This game started without Customize, so its add-ons are fixed. Customize a new game instead.
+cy Dechreuwyd y gêm hon heb Addasu, felly mae ei hychwanegion yn sefydlog. Addaswch gêm newydd yn lle hynny.
+
+@ Bullet Time
+cy Bullet time
+
+@ Change Goggles
+cy Newid gogls
+
+@ Dodge / Dive
+cy Osgoi / plymio
+
+@ Goggles
+cy Gogls
+
+@ Hitstop
+cy Hitstop
+
+@ Projectile Shotguns
+cy Drylliau taflegrau
+
+@ BULLET TIME: 20%
+cy BULLET TIME: 20%
+
+@ NORMAL SPEED
+cy CYFLYMDER ARFEROL
+
+@ SLOW MOTION: PHYSICAL PELLETS
+cy ARAFU: HAELS FFISEGOL
+
+@ DEMONSTRATION
+cy ARDDANGOSIAD
+
+@ GAMEPLAY
+cy CHWARAE
+
+@ LOOP
+cy DOLEN
+
+@ Preview unavailable
+cy Rhagolwg ddim ar gael
+
+# shader and language help lines
+@ A setting of the chosen shader; arrows step it, Enter is not needed
+cy Un o osodiadau'r arlliwiwr a ddewiswyd; mae'r saethau'n ei newid, nid oes angen Enter
+
+@ Language of the menus, messages and the 2021 re-release's game text; System follows your computer's language
+cy Iaith y dewislenni, y negeseuon a thestun gêm ail-ryddhad 2021; mae System yn dilyn iaith eich cyfrifiadur
+
+@ Puts every setting of the chosen shader back to the preset's defaults
+cy Rhoi pob gosodiad o'r arlliwiwr a ddewiswyd yn ôl i werthoedd diofyn y rhagosodiad
+
+@ RetroArch slang shader on the final image: CRT, scanlines, NTSC, sharpening; add your own in <game>/shaders
+cy Arlliwiwr slang RetroArch ar y ddelwedd derfynol: CRT, llinellau sgan, NTSC, miniogi; ychwanegwch eich rhai eich hun yn <gêm>/shaders
+
+# modern console footer
+@ Shift+PgUp/Dn: height  ` : hide
+cy Shift+PgUp/Dn: uchder  ` : cuddio
+
+@ Tab: complete  Ctrl+R: search  bash | pipe
+cy Tab: cwblhau  Ctrl+R: chwilio  bash | pibell
+
+@ ↑ +{} lines (End to jump) 
+cy ↑ +{} llinell (End i neidio) 
+
+# add-on descriptions
+@ Create two linked portals on flat walls. Fire places the first portal; Alt Fire places the second. Walk through either portal to emerge from the other. Your momentum carries through. Assign a weapon slot below: pressing that slot repeatedly cycles its ordinary weapon and every enabled add-on assigned there. Portal view quality is configurable below.
+cy Crëwch ddau borth cysylltiedig ar waliau gwastad. Mae Tanio yn gosod y porth cyntaf; mae Tanio amgen yn gosod yr ail. Cerddwch drwy'r naill borth i ddod allan o'r llall. Mae eich momentwm yn parhau. Neilltuwch slot arf isod: mae pwyso'r slot hwnnw dro ar ôl tro yn newid rhwng ei arf arferol a phob ychwanegyn wedi'i alluogi a neilltuwyd yno. Gellir ffurfweddu ansawdd golwg y pyrth isod.
+
+@ Hold Fire and sweep the crosshair over monsters to queue targets. Release Fire to throw: the boomerang visits each target, stuns it and returns to you. Alt Fire clears the queue. The weapon slot selects a group, not a separate hotkey: press it again to cycle through the weapons in that slot. Configure stun duration and flight speed below.
+cy Daliwch Tanio a sgubo'r croesflew dros angenfilod i giwio targedau. Gollyngwch Tanio i daflu: mae'r bwmerang yn ymweld â phob targed, yn ei syfrdanu ac yn dychwelyd atoch. Mae Tanio amgen yn clirio'r ciw. Mae'r slot arf yn dewis grŵp, nid bysell boeth ar wahân: pwyswch ef eto i newid rhwng yr arfau yn y slot hwnnw. Ffurfweddwch hyd y syfrdanu a'r cyflymder hedfan isod.
+
+@ Hold Fire to charge a sticky bomb using rocket ammunition; release to launch. A longer charge throws it faster. Bombs cling to walls, doors and monsters. Alt Fire detonates your planted bombs together. Place a trap, retreat, then detonate it when enemies approach. Assign any weapon slot below; repeated presses cycle through the ordinary weapon and add-ons in that slot.
+cy Daliwch Tanio i wefru bom gludiog gan ddefnyddio bwledi rocedi; gollyngwch i'w lansio. Mae gwefru'n hirach yn ei daflu'n gyflymach. Mae bomiau'n glynu wrth waliau, drysau ac angenfilod. Mae Tanio amgen yn ffrwydro eich bomiau i gyd gyda'i gilydd. Gosodwch fagl, ciliwch, yna ffrwydrwch hi pan fydd gelynion yn agosáu. Neilltuwch unrhyw slot arf isod; mae pwyso dro ar ôl tro yn newid rhwng yr arf arferol a'r ychwanegion yn y slot hwnnw.
+
+@ Fire launches a chain hook. It latches onto a permitted surface or enemy and reels you toward the anchor. Fire again or use Alt Fire to let go. Choose which materials and enemies can be hooked in Configure Parameters. Assign it to any weapon slot; repeated presses of the slot's existing binding cycle through its weapons.
+cy Mae Tanio yn lansio bachyn ar gadwyn. Mae'n cydio mewn arwyneb neu elyn a ganiateir ac yn eich tynnu tuag at yr angor. Taniwch eto neu defnyddiwch Tanio amgen i ollwng. Dewiswch pa ddeunyddiau a gelynion y gellir eu bachu yn Ffurfweddu paramedrau. Neilltuwch ef i unrhyw slot arf; mae pwyso bysell bresennol y slot dro ar ôl tro yn newid rhwng ei arfau.
+
+@ A piercing railgun inspired by Quake III. Fire sends a slug through every enemy along its line. Each shot consumes two cells, with a 1.5 second refire interval. Damage and the spiral trail colour are configurable below. Choose a weapon slot: the slot's current binding selects and cycles the weapons assigned to it.
+cy Railgun treiddiol wedi'i ysbrydoli gan Quake III. Mae Tanio yn anfon bwled drwy bob gelyn ar ei llinell. Mae pob ergyd yn defnyddio dwy gell, gydag 1.5 eiliad rhwng ergydion. Gellir ffurfweddu'r difrod a lliw'r trywydd troellog isod. Dewiswch slot arf: mae bysell bresennol y slot yn dewis ac yn newid rhwng yr arfau a neilltuwyd iddo.
+
+@ A Portal-style gel sprayer. Fire sprays blue Repulsion gel: land, jump or run into it to bounce, and landings on it never hurt. Alt Fire sprays orange Propulsion gel: run across it to go much faster. Gel coats floors and walls until washed off with the Powerwasher. Assign a weapon slot below; repeated presses cycle the weapons in that slot.
+cy Chwistrellwr gel yn null Portal. Mae Tanio yn chwistrellu gel Gwrthyrru glas: glaniwch, neidiwch neu redwch iddo i fownsio, ac nid yw glanio arno byth yn brifo. Mae Tanio amgen yn chwistrellu gel Gyrru oren: rhedwch drosto i fynd yn llawer cyflymach. Mae gel yn gorchuddio lloriau a waliau nes ei olchi i ffwrdd â'r Golchwr pŵer. Neilltuwch slot arf isod; mae pwyso dro ar ôl tro yn newid rhwng yr arfau yn y slot hwnnw.
+
+@ A water cannon. Fire shoots a straight jet with limited reach; Alt Fire a wide, shorter fan. The water pushes enemies back, turns projectiles aside and washes away gel and blood. Push strength is configurable below. Assign a weapon slot below; repeated presses cycle the weapons in that slot.
+cy Canon dŵr. Mae Tanio yn saethu jet syth â chyrhaeddiad cyfyngedig; Tanio amgen wyntyll lydan, fyrrach. Mae'r dŵr yn gwthio gelynion yn ôl, yn gwyro taflegrau ac yn golchi gel a gwaed i ffwrdd. Gellir ffurfweddu'r cryfder gwthio isod. Neilltuwch slot arf isod; mae pwyso dro ar ôl tro yn newid rhwng yr arfau yn y slot hwnnw.
+
+@ One equipment add-on includes both night vision and thermal vision. The Change Goggles action cycles Normal, Night Vision, Thermal, then Normal again. Night vision brightens dark rooms; thermal vision highlights living enemies. Goggles do not occupy a weapon slot. Configure intensity and sensor noise below. The binding affects only this add-on.
+cy Mae un ychwanegyn offer yn cynnwys golwg nos a golwg thermol. Mae'r weithred Newid gogls yn newid rhwng Arferol, Golwg nos, Thermol, ac yna Arferol eto. Mae golwg nos yn goleuo ystafelloedd tywyll; mae golwg thermol yn amlygu gelynion byw. Nid yw'r gogls yn defnyddio slot arf. Ffurfweddwch y dwyster a sŵn y synhwyrydd isod. Mae'r neilltuad yn effeithio ar yr ychwanegyn hwn yn unig.
+
+@ Press Dodge with a movement direction on the ground or in midair: dive forward or leap backward and sideways. Diagonals are supported. Each press launches once, with a short recovery. The player body animates in third person. Assign the Dodge action below or in Controls.
+cy Pwyswch Osgoi gyda chyfeiriad symud ar y ddaear neu yn yr awyr: plymiwch ymlaen neu llamwch yn ôl ac i'r ochr. Mae croesliniau'n cael eu cefnogi. Mae pob pwysiad yn lansio unwaith, gydag adferiad byr. Mae corff y chwaraewr wedi'i animeiddio mewn trydydd person. Neilltuwch y weithred Osgoi isod neu yn Rheolyddion.
+
+@ Use the dedicated Bullet Time action to slow the whole local game to 20% speed. Hold is the default; Toggle switches on each press. The optional meter limits use in real seconds and regenerates while inactive. Disable the meter for unlimited use. Remap the action and configure duration and regeneration below.
+cy Defnyddiwch y weithred Bullet time bwrpasol i arafu'r gêm leol gyfan i 20% o'i chyflymder. Dal yw'r diofyn; mae Togl yn newid gyda phob pwysiad. Mae'r mesurydd dewisol yn cyfyngu'r defnydd mewn eiliadau go iawn ac yn adfywio pan nad yw'n weithredol. Analluogwch y mesurydd ar gyfer defnydd diderfyn. Ail-neilltuwch y weithred a ffurfweddwch yr hyd a'r adfywio isod.
+
+@ Both shotguns and enemy grunts fire physical pellets with their original spread and damage. Fast default projectiles feel immediate; lower their speed to dodge incoming fire during bullet time. Configure projectile speed below, or reset it to the default of 10000 units per second.
+cy Mae'r ddau ddryll a'r milwyr gelyn yn tanio haels ffisegol gyda'u gwasgariad a'u difrod gwreiddiol. Mae taflegrau cyflym diofyn yn teimlo'n syth; gostyngwch eu cyflymder i osgoi tân yn ystod bullet time. Ffurfweddwch gyflymder y taflegrau isod, neu ei ailosod i'r gwerth diofyn o 10000 uned yr eiliad.
+
+@ Freezes the game for a split second when you damage an enemy, so hits feel heavier. Single player only. Choose which weapons trigger it (all, melee, ranged or explosives), how long it lasts and how much more a kill freezes. Advanced settings cover enemy toughness, damage scaling, cooldown and the longest freeze.
+cy Rhewi'r gêm am ennyd pan fyddwch yn niweidio gelyn, fel bod trawiadau'n teimlo'n drymach. Un chwaraewr yn unig. Dewiswch pa arfau sy'n ei achosi (pob un, ymladd agos, o bell neu ffrwydron), pa mor hir mae'n para a faint yn fwy mae lladd yn rhewi. Mae'r gosodiadau uwch yn cwmpasu caledwch gelynion, graddio difrod, amser oeri a'r rhewi hiraf.
+
+# map packs and the Quaddicted browser
+@ Get more maps (Quaddicted)...
+cy Rhagor o fapiau (Quaddicted)...
+
+@ Type to filter...
+cy Teipiwch i hidlo...
+
+@ Launch mod
+cy Lansio mod
+
+@ Start first map
+cy Dechrau'r map cyntaf
+
+@ (running)
+cy (yn rhedeg)
+
+@ running
+cy yn rhedeg
+
+@ Recent
+cy Diweddar
+
+@ Name
+cy Enw
+
+@ Dir
+cy Ffolder
+
+@ Default
+cy Diofyn
+
+@ Title
+cy Teitl
+
+@ Sort: {}
+cy Trefnu: {}
+
+@ {} installed
+cy {} wedi'u gosod
+
+@ {}/{} matching
+cy {}/{} yn cyfateb
+
+@ {} maps, {} completed
+cy {} map, {} wedi'u cwblhau
+
+@ {}/{} matching, {} completed
+cy {}/{} yn cyfateb, {} wedi'u cwblhau
+
+@ no maps of its own
+cy dim mapiau ei hun
+
+@ dir: {}
+cy ffolder: {}
+
+@ base: {}
+cy sylfaen: {}
+
+@ Browse the Quaddicted archive of
+cy Poriwch archif Quaddicted o
+
+@ single-player maps and episodes,
+cy fapiau ac episodau un chwaraewr,
+
+@ then download and install them
+cy yna llwythwch nhw i lawr a'u gosod
+
+@ here. Each release gets its own
+cy yma. Mae pob rhyddhad yn cael ei
+
+@ entry in this list.
+cy gofnod ei hun yn y rhestr hon.
+
+@ Needs an internet connection.
+cy Angen cysylltiad â'r rhyngrwyd.
+
+@ Quaddicted Map Archive
+cy Archif Mapiau Quaddicted
+
+@ Newest
+cy Mwyaf newydd
+
+@ Author
+cy Awdur
+
+@ Size
+cy Maint
+
+@ Loading the map list...
+cy Llwytho'r rhestr mapiau...
+
+@ Couldn't load the map list: {}
+cy Methu llwytho'r rhestr mapiau: {}
+
+@ {} single-player releases  -  F5 refreshes
+cy {} rhyddhad un chwaraewr  -  mae F5 yn adnewyddu
+
+@ {} matching
+cy {} yn cyfateb
+
+@ by {}
+cy gan {}
+
+@ requires: {}
+cy angen: {}
+
+@ maps: {}
+cy mapiau: {}
+
+@ Failed: {}
+cy Wedi methu: {}
+
+@ Downloading... {}%
+cy Llwytho i lawr... {}%
+
+@ Unpacking...
+cy Dadbacio...
+
+@ Installed in {}/  -  Enter: play
+cy Wedi'i osod: {}/  -  Enter: chwarae
+
+@ Enter: download and install
+cy Enter: llwytho i lawr a gosod
+
+@ unpacking
+cy dadbacio
+
+@ failed
+cy wedi methu
+
+@ installed
+cy wedi'i osod
+
+@ Downloads are not available in the browser build
+cy Nid yw llwytho i lawr ar gael yn y fersiwn porwr
+
+@ the map list could not be read
+cy nid oedd modd darllen y rhestr mapiau
+
+@ downloading needs the curl program
+cy mae llwytho i lawr angen y rhaglen curl
+
+@ download failed
+cy methodd y llwytho i lawr
+
+@ the download is not a valid zip
+cy nid yw'r ffeil a lwythwyd i lawr yn zip dilys
+
+@ nothing to install for this engine
+cy dim i'w osod ar gyfer yr injan hon
+
+@ needs {} installed first
+cy angen gosod {} yn gyntaf
+
+@ couldn't unpack {}
+cy methu dadbacio {}
+
+# help screen
+@ About
+cy Ynghylch
+
+@ < Back
+cy < Yn ôl
+
+# tr_ctx keys: English shows the short word, the key says which meaning
+@ Save (a manual save, as opposed to a quicksave or autosave)
+cy Cadw
+
+# ==== hud.txt ====
+
+# HUD, weapon and equipment wheels, sound captions and other in-game text.
+# Weapon, monster and item names follow the 2021 re-release's own translations.
+@ Axe
+cy Bwyell
+
+@ Shotgun
+cy Dryll
+
+@ Double-Barrelled Shotgun
+cy Dryll baril dwbl
+
+@ Nailgun
+cy Gwn hoelion
+
+@ Super Nailgun
+cy Uwch-wn hoelion
+
+@ Grenade Launcher
+cy Lansiwr grenadau
+
+@ Rocket Launcher
+cy Lansiwr rocedi
+
+@ Thunderbolt
+cy Taranfollt
+
+@ Portal Gun
+cy Gwn pyrth
+
+@ Boomerang
+cy Bwmerang
+
+@ Stickybomb Launcher
+cy Lansiwr bomiau gludiog
+
+@ Railgun
+cy Railgun
+
+@ Hookshot
+cy Bachyn
+
+@ Gel Sprayer
+cy Chwistrellwr gel
+
+@ Powerwasher
+cy Golchwr pŵer
+
+@ Night Vision Goggles
+cy Gogls golwg nos
+
+@ Thermal Goggles
+cy Gogls thermol
+
+@ Normal vision
+cy Golwg arferol
+
+@ ON
+cy YMLAEN
+
+@ OFF
+cy I FFWRDD
+
+@ {} (turn on)
+cy {} (troi ymlaen)
+
+@ {} (turn off)
+cy {} (diffodd)
+
+@ Move mouse to select, release to toggle
+cy Symudwch y llygoden i ddewis, gollyngwch i doglo
+
+@ Move mouse to select, release to equip
+cy Symudwch y llygoden i ddewis, gollyngwch i arfogi
+
+@ Release to toggle
+cy Gollyngwch i doglo
+
+@ Release to equip
+cy Gollyngwch i arfogi
+
+@ shells
+cy cetris
+
+@ nails
+cy hoelion
+
+@ rockets
+cy rocedi
+
+@ cells
+cy celloedd
+
+@ Kills: {}/{}
+cy Lladdwyd: {}/{}
+
+@ Secrets: {}/{}
+cy Cyfrinachau: {}/{}
+
+@ Time {}
+cy Amser {}
+
+@ Press any button to continue...
+cy Pwyswch unrhyw fotwm i barhau...
+
+@ Press any key to continue...
+cy Pwyswch unrhyw fysell i barhau...
+
+@ BULLET TIME
+cy BULLET TIME
+
+@ AUTO AIM
+cy ANELU AWTO
+
+@ Crosshair
+cy Croesflew
+
+@ + Marker
+cy + Marciwr
+
+@ Hit markers off
+cy Marcwyr taro i ffwrdd
+
+@ On target
+cy Ar darged
+
+@ On kill
+cy Wrth ladd
+
+# sound captions
+@ [Secret found]
+cy [Canfuwyd cyfrinach]
+
+@ [Message]
+cy [Neges]
+
+@ [Switch activated]
+cy [Actifadwyd swits]
+
+@ [Key picked up]
+cy [Casglwyd allwedd]
+
+@ [Rune picked up]
+cy [Casglwyd rŵn]
+
+@ [Teleporter]
+cy [Teleportiwr]
+
+@ [Teleport]
+cy [Teleportio]
+
+@ [Splash]
+cy [Sblash]
+
+@ [Leaving water]
+cy [Gadael y dŵr]
+
+@ [Door]
+cy [Drws]
+
+@ [Platform moving]
+cy [Llwyfan yn symud]
+
+@ [Button]
+cy [Botwm]
+
+@ [Health picked up]
+cy [Casglwyd iechyd]
+
+@ [Armor picked up]
+cy [Casglwyd arfwisg]
+
+@ [Quad Damage wearing off]
+cy [Quad Damage yn darfod]
+
+@ [Quad Damage]
+cy [Quad Damage]
+
+@ [Pentagram wearing off]
+cy [Pentagram yn darfod]
+
+@ [Pentagram of Protection]
+cy [Pentagram Amddiffyn]
+
+@ [Ring wearing off]
+cy [Modrwy yn darfod]
+
+@ [Ring of Shadows]
+cy [Modrwy'r Cysgodion]
+
+@ [Biosuit wearing off]
+cy [Bio-siwt yn darfod]
+
+@ [Biosuit]
+cy [Bio-siwt]
+
+@ [Item picked up]
+cy [Casglwyd eitem]
+
+@ [Weapon picked up]
+cy [Casglwyd arf]
+
+@ [Ammo picked up]
+cy [Casglwyd bwledi]
+
+@ [Explosion]
+cy [Ffrwydrad]
+
+@ [Grenade launched]
+cy [Lansiwyd grenâd]
+
+@ [Grenade bounce]
+cy [Grenâd yn bownsio]
+
+@ [Rocket fired]
+cy [Taniwyd roced]
+
+@ [Nails fired]
+cy [Taniwyd hoelion]
+
+@ [Lightning]
+cy [Mellt]
+
+@ [Thunder]
+cy [Taranau]
+
+@ [Enforcer alerted]
+cy [Gorfodwr yn effro]
+
+@ [Grunt alerted]
+cy [Milwr yn effro]
+
+@ [Rottweiler alerted]
+cy [Rottweiler yn effro]
+
+@ [Knight alerted]
+cy [Marchog yn effro]
+
+@ [Death Knight alerted]
+cy [Marchog Angau yn effro]
+
+@ [Scrag alerted]
+cy [Scrag yn effro]
+
+@ [Ogre alerted]
+cy [Ogr yn effro]
+
+@ [Fiend alerted]
+cy [Ellyll yn effro]
+
+@ [Shambler alerted]
+cy [Shambler yn effro]
+
+@ [Zombie groaning]
+cy [Sombi'n griddfan]
+
+@ [Vore alerted]
+cy [Vore yn effro]
+
+@ [Vore attacking]
+cy [Vore yn ymosod]
+
+@ [Spawn alerted]
+cy [Epil yn effro]
+
+@ [Rotfish]
+cy [Pysgodyn pwdr]
+
+@ [Spawn]
+cy [Epil]
+
+@ [Chthon]
+cy [Chthon]
+
+@ [Hard landing]
+cy [Glanio'n galed]
+
+@ [Drowning]
+cy [Boddi]
+
+@ [Gasping for air]
+cy [Ymladd am anadl]
+
+@ [Burning]
+cy [Llosgi]
+
+@ [Telefrag]
+cy [Telefrag]
+
+@ [Gibbed]
+cy [Chwalwyd yn ddarnau]
+
+# ==== console.txt ====
+
+# Console messages, shown translated only with con_translate 1 (Translate Console).
+# Cvar and command names stay as they are.
+@ Autosaved.
+cy Wedi awtogadw.
+
+@ Game saved.
+cy Gêm wedi'i chadw.
+
+@ Can't save now.
+cy Methu cadw nawr.
+
+@ This game only autosaves (No Manual Saves modifier).
+cy Mae'r gêm hon yn awtogadw yn unig (addasydd Dim cadw â llaw).
+
+@ Loading {}...
+cy Llwytho {}...
+
+@ load failed: {}
+cy methodd llwytho: {}
+
+@ ERROR: autosave failed: {}
+cy GWALL: methodd awtogadw: {}
+
+@ ERROR: couldn't open {}
+cy GWALL: methu agor {}
+
+@ ERROR: couldn't open {}.
+cy GWALL: methu agor {}.
+
+@ ERROR: couldn't write {}: {}
+cy GWALL: methu ysgrifennu {}: {}
+
+@ ERROR: couldn't create {}: {}
+cy GWALL: methu creu {}: {}
+
+@ couldn't write {}: {}
+cy methu ysgrifennu {}: {}
+
+@ Wrote {}
+cy Ysgrifennwyd {}
+
+@ screenshot failed: {}
+cy methodd sgrinlun: {}
+
+@ screenshot: {}
+cy sgrinlun: {}
+
+@ No readable save available. Select save or restart the level.
+cy Dim ffeil gadw ddarllenadwy ar gael. Dewiswch ffeil gadw neu ailddechrau'r lefel.
+
+@ Unknown command "{}"
+cy Gorchymyn anhysbys "{}"
+
+@ couldn't exec {}
+cy methu gweithredu {}
+
+@ execing {}
+cy yn gweithredu {}
+
+@ execing config.cfg (inherited from {})
+cy yn gweithredu config.cfg (wedi'i etifeddu o {})
+
+@ execing config.cfg (mod defaults)
+cy yn gweithredu config.cfg (diofyn y mod)
+
+@ execing default.cfg (built-in)
+cy yn gweithredu default.cfg (mewnol)
+
+@ {} cvars
+cy {} cvar
+
+@ {} commands
+cy {} gorchymyn
+
+@ Can't "cmd", not connected
+cy Methu "cmd", heb gysylltu
+
+@ Looking for Quake servers...
+cy Chwilio am weinyddion Quake...
+
+@ Bad value, must be between 1 and 65534
+cy Gwerth gwael, rhaid iddo fod rhwng 1 a 65534
+
+@ Couldn't handle music file {}
+cy Methu trin ffeil gerddoriaeth {}
+
+@ Bug report written to {}
+cy Adroddiad nam wedi'i ysgrifennu: {}
+
+@ bugreport: can't create {}: {}
+cy bugreport: methu creu {}: {}
+
+@ graphics preset: {}
+cy rhagosodiad graffeg: {}
+
+@ Presets (r_shader_preset <name>):
+cy Rhagosodiadau (r_shader_preset <enw>):
+
+@ Add your own .slangp presets under <game>/shaders/.
+cy Ychwanegwch eich rhagosodiadau .slangp eich hun o dan <gêm>/shaders/.
+
+@ no shader preset loaded (r_shader_preset)
+cy dim rhagosodiad arlliwiwr wedi'i lwytho (r_shader_preset)
+
+@ r_shader_preset: "{}" not found
+cy r_shader_preset: heb ganfod "{}"
+
+@ no parameter "{}" in this preset
+cy dim paramedr "{}" yn y rhagosodiad hwn
+
+@ {} = {} (default {}, {}..{})
+cy {} = {} (diofyn {}, {}..{})
+
+@ Switching to {}...
+cy Yn newid i: {}...
+
+@ game: no game dir "{}" in {}
+cy game: dim ffolder gêm "{}" o fewn {}
+
+@ game: can't find the engine executable
+cy game: methu canfod ffeil weithredadwy'r injan
+
+@ game: exec failed: {}
+cy game: methodd gweithredu: {}
+
+@ game: launch failed: {}
+cy game: methodd lansio: {}
+
+@ loaded {} in {}s
+cy wedi llwytho {} mewn {}e
+
+@ No demos listed with startdemos
+cy Dim demos wedi'u rhestru gyda startdemos
+
+@ Playing demo from {}.
+cy Chwarae demo: {}.
+
+@ {} frames {} seconds {} fps
+cy {} ffrâm {} eiliad {} fps
+
+@ Recording to {}.
+cy Recordio: {}.
+
+@ Completed demo
+cy Demo wedi'i gwblhau
+
+@ Can't record during demo playback
+cy Methu recordio wrth chwarae demo
+
+@ Relative pathnames are not allowed.
+cy Ni chaniateir enwau llwybr cymharol.
+
+@ Can't record - try again when connected
+cy Methu recordio - rhowch gynnig arall ar ôl cysylltu
+
+@ {} demo(s) in loop
+cy {} demo mewn dolen
+
+@ Not recording a demo.
+cy Ddim yn recordio demo.
+
+@ {} joined on a gamepad
+cy Ymunodd {} ar bad gêm
+
+@ goggles: needs a game started with Add-ons and Goggles enabled
+cy goggles: angen gêm wedi'i dechrau gydag Ychwanegion a Gogls wedi'u galluogi
+
+@ equip: needs a game started with Add-ons and Goggles enabled
+cy equip: angen gêm wedi'i dechrau gydag Ychwanegion a Gogls wedi'u galluogi
+
+@ UDP listening on port {}
+cy UDP yn gwrando ar borth {}
+
+@ UDP bind on port {} failed: {}
+cy Methodd rhwymo UDP ar borth {}: {}
+
+@ Connection accepted by {}
+cy Cysylltiad wedi'i dderbyn gan {}
+
+@ Connection failed: {}
+cy Methodd y cysylltiad: {}
+
+@ Couldn't resolve {}
+cy Methu datrys {}
+
+@ Connecting to {}...
+cy Cysylltu â {}...
+
+@ Connecting to QuakeWorld server {}...
+cy Cysylltu â gweinydd QuakeWorld {}...
+
+@ Disconnected: {}
+cy Datgysylltwyd: {}
+
+@ Server disconnected
+cy Gweinydd wedi datgysylltu
+
+@ Client {} connected
+cy Cleient {} wedi cysylltu
+
+@ Client {} timed out
+cy Cleient {} wedi mynd dros amser
+
+@ Couldn't spawn server {}: {}
+cy Methu creu gweinydd {}: {}
+
+@ maxplayers can not be changed while a server is running.
+cy Ni ellir newid maxplayers tra bo gweinydd yn rhedeg.
+
+@ You can't kick yourself!
+cy Allwch chi ddim cicio eich hun!
+
+@ Only the server may changelevel
+cy Dim ond y gweinydd all wneud changelevel
+
+@ {} renamed to {}
+cy {} wedi newid enw: {}

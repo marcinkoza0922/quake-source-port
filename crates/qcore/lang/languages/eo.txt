@@ -1,0 +1,3024 @@
+# eo: the port's own text; English keys from crates/qcore/lang/*.txt.
+# Format in crates/qcore/src/lang/catalog.rs; check with tools/lang_check.py.
+
+# ==== menu.txt ====
+
+# Options pages: page names, row labels and choice values.
+@ 10% speed
+eo rapido 10%
+
+@ 2 split-screen
+eo 2 en dividita ekrano
+
+@ 3 split-screen
+eo 3 en dividita ekrano
+
+@ 4 split-screen
+eo 4 en dividita ekrano
+
+@ 5 split-screen
+eo 5 en dividita ekrano
+
+@ 6 split-screen
+eo 6 en dividita ekrano
+
+@ 2D aiming
+eo 2D-celado
+
+@ 2x monsters
+eo 2x monstroj
+
+@ 3x monsters
+eo 3x monstroj
+
+@ 4x monsters
+eo 4x monstroj
+
+@ 3D resolution
+eo 3D-distingivo
+
+@ 3D view
+eo 3D-vido
+
+@ 8-bit Color
+eo 8-bita koloro
+
+@ Accessibility
+eo Alirebleco
+
+@ Acquisition Cone
+eo Celkapta konuso
+
+@ Activation
+eo Aktivigo
+
+@ Add a ringing room tail after the cue
+eo Aldoni sonoran ĉambran postsonon post la signalo
+
+@ Add delayed repeats after the cue
+eo Aldoni prokrastitajn ripetojn post la signalo
+
+@ Add saturation and distortion
+eo Aldoni saturiĝon kaj distordon
+
+@ Add-ons
+eo Aldonaĵoj
+
+@ Address
+eo Adreso
+
+@ Adds fine noise to hide color banding
+eo Aldonas fajnan bruon por kaŝi kolorajn striojn
+
+@ Advanced Settings
+eo Altnivelaj agordoj
+
+@ Aim Assist
+eo Celhelpo
+
+@ Aim Rotation
+eo Celturnado
+
+@ Aim Slowdown
+eo Celmalrapidigo
+
+@ Aim Style
+eo Celstilo
+
+@ All
+eo Ĉiuj
+
+@ All enemies
+eo Ĉiuj malamikoj
+
+@ Alt Fire (Add-ons)
+eo Alt. pafo (Aldonaĵoj)
+
+@ Always Run
+eo Ĉiam kuri
+
+@ Ambient Occlusion
+eo Ĉirkaŭa ombrigo
+
+@ Ammo Counts
+eo Municikvantoj
+
+@ Ammo Counts Position
+eo Pozicio de municikvantoj
+
+@ Ammo Pickups
+eo Municiaj prenaĵoj
+
+@ Anisotropic
+eo Anizotropa
+
+@ Anti-aliasing
+eo Glatigo de randoj
+
+@ Apply To
+eo Apliki al
+
+@ Armor
+eo Kiraso
+
+@ Armor Position
+eo Pozicio de kiraso
+
+@ Ask
+eo Demandi
+
+@ Attack
+eo Ataki
+
+@ Audio
+eo Aŭdio
+
+@ Auto-aim
+eo Aŭtomata celado
+
+@ Auto-aim Settings
+eo Agordoj de aŭtomata celado
+
+@ Autosave
+eo Aŭtokonservo
+
+@ Autosave Settings
+eo Agordoj de aŭtokonservo
+
+@ Autosave Timer
+eo Tempigilo de aŭtokonservo
+
+@ Autosaves to Keep
+eo Konservotaj aŭtokonservoj
+
+@ Bass
+eo Basoj
+
+@ Blip
+eo Blip
+
+@ Blood Quality
+eo Kvalito de sango
+
+@ Blood Splatter Settings
+eo Agordoj de sangoŝprucoj
+
+@ Blue
+eo Blua
+
+@ Boomerang Settings
+eo Agordoj de bumerango
+
+@ Boost or cut high frequencies in decibels
+eo Plifortigi aŭ malfortigi altajn frekvencojn en decibeloj
+
+@ Boost or cut low frequencies in decibels
+eo Plifortigi aŭ malfortigi malaltajn frekvencojn en decibeloj
+
+@ Brightness
+eo Heleco
+
+@ Bullet Time (Add-ons)
+eo Kuglotempo (Aldonaĵoj)
+
+@ Bullet Time Settings
+eo Agordoj de kuglotempo
+
+@ Button Glyphs
+eo Butonaj simboloj
+
+@ Button Size
+eo Grando de butonoj
+
+@ Camera
+eo Kamerao
+
+@ Caustic Intensity
+eo Intenso de kaŭstikoj
+
+@ Caustics
+eo Kaŭstikoj
+
+@ Center
+eo Centre
+
+@ Center Message Position
+eo Pozicio de centra mesaĝo
+
+@ Center Message Time
+eo Daŭro de centra mesaĝo
+
+@ Center View
+eo Centrigi vidon
+
+@ Change Color on Kill
+eo Ŝanĝi koloron ĉe mortigo
+
+@ Change Color on Target
+eo Ŝanĝi koloron ĉe celo
+
+@ Chime
+eo Sonoreto
+
+@ Click
+eo Klako
+
+@ Clink
+eo Tinto
+
+@ Coin
+eo Monero
+
+@ Color
+eo Koloro
+
+@ Color Filter
+eo Kolorfiltrilo
+
+@ Color of the grenade arc
+eo Koloro de la granatarko
+
+@ Colored Lighting
+eo Kolora lumigado
+
+@ Connect
+eo Konekti
+
+@ Contrast
+eo Kontrasto
+
+@ Controls
+eo Regiloj
+
+@ Cooldown (ms)
+eo Atendotempo (ms)
+
+@ Crosshair Outline
+eo Konturo de celilo
+
+@ Crosshair Shape
+eo Formo de celilo
+
+@ Crosshair Size
+eo Grando de celilo
+
+@ Current Ammo
+eo Nuna municio
+
+@ Current Ammo Position
+eo Pozicio de nuna municio
+
+@ Customize This Game
+eo Adapti ĉi tiun ludon
+
+@ Damage
+eo Damaĝo
+
+@ Damage Taken
+eo Ricevita damaĝo
+
+@ Debris
+eo Derompaĵoj
+
+@ Debris Quality
+eo Kvalito de derompaĵoj
+
+@ Debris Settings
+eo Agordoj de derompaĵoj
+
+@ Directional Damage
+eo Direkta damaĝo
+
+@ Dithering
+eo Punktumado
+
+@ Dodge / Dive (Add-ons)
+eo Evito / Plonĝo (Aldonaĵoj)
+
+@ Dragging up looks down instead of up
+eo Treni supren rigardigas malsupren anstataŭ supren
+
+@ Drive
+eo Saturiĝo
+
+@ Dynamic Lights
+eo Dinamikaj lumoj
+
+@ Echo
+eo Eĥo
+
+@ Enemy Health
+eo Sano de malamikoj
+
+@ Enemy Wounds
+eo Vundoj de malamikoj
+
+@ Enhanced Blood Splatter
+eo Plibonigitaj sangoŝprucoj
+
+@ Enhanced FX
+eo Plibonigitaj efektoj
+
+@ Enhanced Models
+eo Plibonigitaj modeloj
+
+@ Enhanced Particles
+eo Plibonigitaj partikloj
+
+@ Enhanced Water
+eo Plibonigita akvo
+
+@ Enhancements
+eo Plibonigoj
+
+@ Equipment Wheel (Add-ons)
+eo Ekipaĵa rado (Aldonaĵoj)
+
+@ Exploding boxes throw metal shards
+eo Eksplodantaj kestoj ĵetas metalajn splitojn
+
+@ Explosion Damage
+eo Eksploda damaĝo
+
+@ Explosion Scorch Marks
+eo Eksplodaj brulmakuloj
+
+@ Explosions scorch nearby solid surfaces
+eo Eksplodoj bruligas proksimajn solidajn surfacojn
+
+@ Explosives only
+eo Nur eksplodaĵoj
+
+@ Extra Monsters
+eo Kromaj monstroj
+
+@ Extra Per 10 Damage (ms)
+eo Krome po 10 damaĝo (ms)
+
+@ FX Settings
+eo Agordoj de efektoj
+
+@ Field of View
+eo Vidkampo
+
+@ Firing never uses up ammo
+eo Pafado neniam konsumas municion
+
+@ First person
+eo Unua persono
+
+@ Flick Time
+eo Flick-daŭro
+
+@ Flight Speed
+eo Flugrapido
+
+@ Fog
+eo Nebulo
+
+@ Frag Limit
+eo Mortiglimo
+
+@ Freeze Duration (ms)
+eo Daŭro de frosto (ms)
+
+@ GLQuake
+eo GLQuake
+
+@ Game Speed
+eo Ludrapido
+
+@ Game Type
+eo Ludtipo
+
+@ Gameplay
+eo Ludado
+
+@ Gameplay Modifiers
+eo Ludmodifiloj
+
+@ Gel Quality
+eo Kvalito de ĝelo
+
+@ Gib Surface Painting
+eo Karnopecoj makulas surfacojn
+
+@ Gibs
+eo Karnopecoj
+
+@ Gibs and heads tumble and bounce
+eo Karnopecoj kaj kapoj ruliĝas kaj resaltas
+
+@ Goggle Glow Quality
+eo Kvalito de okulvitra brilo
+
+@ Goggle Intensity
+eo Intenso de okulvitroj
+
+@ Goggle Noise
+eo Bruo de okulvitroj
+
+@ Goggles Settings
+eo Agordoj de okulvitroj
+
+@ Graphics
+eo Grafiko
+
+@ Green
+eo Verda
+
+@ Grenade Arc
+eo Granatarko
+
+@ Grenade Arc Settings
+eo Agordoj de granatarko
+
+@ Gun Kick
+eo Pafila repuŝo
+
+@ Gyro
+eo Giroskopo
+
+@ Gyro & Flick Stick
+eo Giroskopo kaj Flick Stick
+
+@ Gyro Active
+eo Giroskopo aktiva
+
+@ Gyro Aiming
+eo Giroskopa celado
+
+@ HUD
+eo HUD
+
+@ HUD Style
+eo HUD-stilo
+
+@ Health
+eo Sano
+
+@ Health Pickups
+eo Sanaj prenaĵoj
+
+@ Health Position
+eo Pozicio de sano
+
+@ Health Regeneration
+eo Sanregenerado
+
+@ Hit & Kill Sounds
+eo Sonoj de trafo kaj mortigo
+
+@ Hit Doors & Lifts
+eo Trafi pordojn kaj liftojn
+
+@ Hit Markers
+eo Trafmarkoj
+
+@ Hit Sound
+eo Trafsono
+
+@ Hitmarker Size
+eo Grando de trafmarko
+
+@ Hitmarker Type
+eo Tipo de trafmarko
+
+@ Hitstop Advanced
+eo Hitstop altnivela
+
+@ Hitstop Settings
+eo Agordoj de hitstop
+
+@ Hold
+eo Teni
+
+@ Hold lock-on
+eo Teni celkapton
+
+@ Hook Enemies
+eo Hoki malamikojn
+
+@ Hook Metal
+eo Hoki metalon
+
+@ Hook Stone
+eo Hoki ŝtonon
+
+@ Hook Wood
+eo Hoki lignon
+
+@ Hooking an enemy pulls you to it
+eo Hoki malamikon tiras vin al ĝi
+
+@ Hookshot Range
+eo Atingo de hokpafilo
+
+@ Hookshot Settings
+eo Agordoj de hokpafilo
+
+@ Host Game
+eo Gastigi ludon
+
+@ How far the hook flies before it retracts
+eo Kiom malproksimen la hoko flugas antaŭ ol retiriĝi
+
+@ How visible the on-screen controls are
+eo Kiom videblaj estas la surekranaj regiloj
+
+@ Impact Lifetime
+eo Daŭro de trafspuroj
+
+@ Infinite Ammo
+eo Senfina municio
+
+@ Input
+eo Enigo
+
+@ Input Scale
+eo Eniga skalo
+
+@ Interpolate Animation
+eo Interpoli animacion
+
+@ Interpolate Movement
+eo Interpoli movadon
+
+@ Invert Look
+eo Inversigi rigardon
+
+@ Invert Mouse
+eo Inversigi muson
+
+@ Invert Stick
+eo Inversigi stangon
+
+@ Jet Quality
+eo Kvalito de ŝprucfluo
+
+@ Join Game
+eo Aliĝi al ludo
+
+@ Jump / Swim Up
+eo Salti / Naĝi supren
+
+@ Jump again in mid-air
+eo Salti denove en la aero
+
+@ Jumps
+eo Saltoj
+
+@ Keys & Powerups
+eo Ŝlosiloj kaj plifortigiloj
+
+@ Keys & Powerups Position
+eo Pozicio de ŝlosiloj kaj plifortigiloj
+
+@ Kill Bonus (x)
+eo Mortigbonuso (x)
+
+@ Kill Sound
+eo Mortigsono
+
+@ Knock
+eo Frapo
+
+@ Left
+eo Maldekstre
+
+@ Length of the motion blur streaks
+eo Longo de la movmalklarigaj strioj
+
+@ Lifetime (seconds)
+eo Daŭro (sekundoj)
+
+@ Live Portal Views
+eo Vivaj portalvidoj
+
+@ Live View Distance
+eo Distanco de vivaj vidoj
+
+@ Local Players
+eo Lokaj ludantoj
+
+@ Local red wounds follow enemy animation
+eo Lokaj ruĝaj vundoj sekvas la animacion de malamikoj
+
+@ Lock Indicator
+eo Indikilo de celkapto
+
+@ Long falls don't hurt
+eo Longaj faloj ne vundas
+
+@ Longest Freeze (ms)
+eo Plej longa frosto (ms)
+
+@ Look Down
+eo Rigardi malsupren
+
+@ Look Speed
+eo Rigardrapido
+
+@ Look Up
+eo Rigardi supren
+
+@ Main Menu Music
+eo Muziko de ĉefmenuo
+
+@ Max FPS
+eo Maks. FPS
+
+@ Max Players
+eo Maks. ludantoj
+
+@ Maximum Impacts
+eo Maks. trafspuroj
+
+@ Maximum Marks
+eo Maks. makuloj
+
+@ Maximum Range
+eo Maks. atingo
+
+@ Melee only
+eo Nur proksima batalo
+
+@ Message Background
+eo Fono de mesaĝoj
+
+@ Message Text Size
+eo Teksta grando de mesaĝoj
+
+@ Messages & Captions
+eo Mesaĝoj kaj subtekstoj
+
+@ Meter Duration (real seconds)
+eo Daŭro de mezurilo (realaj sekundoj)
+
+@ Minimum Damage
+eo Minimuma damaĝo
+
+@ Mode
+eo Reĝimo
+
+@ Modern Console
+eo Moderna konzolo
+
+@ Modern HUD Layout
+eo Moderna HUD-aranĝo
+
+@ Most recent save
+eo Plej lasta konservo
+
+@ Motion Blur
+eo Movmalklarigo
+
+@ Motion Blur Amount
+eo Kvanto de movmalklarigo
+
+@ Motion Blur Quality
+eo Kvalito de movmalklarigo
+
+@ Mouse & Keyboard
+eo Muso kaj klavaro
+
+@ Mouse Speed
+eo Rapido de muso
+
+@ Move Back
+eo Moviĝi malantaŭen
+
+@ Move Forward
+eo Moviĝi antaŭen
+
+@ Music Volume
+eo Laŭteco de muziko
+
+@ Next Weapon
+eo Sekva armilo
+
+@ No Drowning
+eo Neniu dronado
+
+@ No Fall Damage
+eo Neniu faldamaĝo
+
+@ No Manual Saves
+eo Neniuj manaj konservoj
+
+@ No Self Damage
+eo Neniu memdamaĝo
+
+@ Noise Filter
+eo Brufiltrilo
+
+@ Normal Color
+eo Normala koloro
+
+@ Notify Message Position
+eo Pozicio de sciigoj
+
+@ Notify Message Time
+eo Daŭro de sciigoj
+
+@ Number of splatter rays per blood impact
+eo Nombro de ŝprucradioj po sangotrafo
+
+@ Off
+eo Malŝaltita
+
+@ On Death
+eo Ĉe morto
+
+@ On Kill Color
+eo Koloro ĉe mortigo
+
+@ On Target Color
+eo Koloro ĉe celo
+
+@ Opacity
+eo Opakeco
+
+@ Opacity of the grenade arc
+eo Opakeco de la granatarko
+
+@ Pants Color
+eo Koloro de pantalono
+
+@ Particle Quality
+eo Kvalito de partikloj
+
+@ Particles
+eo Partikloj
+
+@ Physical Nail Impacts
+eo Fizikaj najlotrafoj
+
+@ Pistol Start
+eo Komenco de nulo
+
+@ Pitch
+eo Tonalto
+
+@ Pitch Sensitivity
+eo Vertikala sentemo
+
+@ Playback Speed
+eo Reludrapido
+
+@ Player Setup
+eo Agordoj de ludanto
+
+@ Pop
+eo Pop
+
+@ Portal Gun Settings
+eo Agordoj de portalpafilo
+
+@ Portal Recursion
+eo Portala rekursio
+
+@ Portal View Quality
+eo Kvalito de portalvidoj
+
+@ Preview Sound
+eo Antaŭaŭdi sonon
+
+@ Previous Weapon
+eo Antaŭa armilo
+
+@ Projectile Shotguns Settings
+eo Agordoj de projektilaj ĉaspafiloj
+
+@ Projectile Speed (units/s)
+eo Rapido de projektiloj (unuoj/s)
+
+@ Purple
+eo Purpura
+
+@ Push
+eo Puŝo
+
+@ Push Strength
+eo Forto de puŝo
+
+@ Quick Load
+eo Rapida ŝargo
+
+@ Quick Save
+eo Rapida konservo
+
+@ Railgun Settings
+eo Agordoj de relpafilo
+
+@ Ranged only
+eo Nur distancaj atakoj
+
+@ Reacquire While Held
+eo Rekapti dum tenado
+
+@ Red
+eo Ruĝa
+
+@ Reduce Motion
+eo Redukti movadon
+
+@ Regen (seconds per second)
+eo Regenerado (sekundoj po sekundo)
+
+@ Render Scale
+eo Bildiga skalo
+
+@ Reverb
+eo Resono
+
+@ Right
+eo Dekstre
+
+@ Ripple Intensity
+eo Intenso de ondetoj
+
+@ Ripples
+eo Ondetoj
+
+@ Roll Sensitivity
+eo Sentemo de rulado
+
+@ Rumble
+eo Vibrado
+
+@ Run
+eo Kuri
+
+@ Save on All Enemies Killed
+eo Konservi kiam ĉiuj malamikoj mortis
+
+@ Save on All Secrets Found
+eo Konservi kiam ĉiuj sekretoj troviĝis
+
+@ Save on Level Entry
+eo Konservi ĉe eniro en nivelon
+
+@ Save on Secret Found
+eo Konservi ĉe trovo de sekreto
+
+@ Scoreboard
+eo Poenttabulo
+
+@ Screen Flashes
+eo Ekranaj ekbriloj
+
+@ Screen Shader
+eo Ekrana ombrigilo
+
+@ Screen Shake
+eo Ekrana skuado
+
+@ Search LAN
+eo Serĉi en LAN
+
+@ Seconds a center-screen message stays up
+eo Sekundoj dum kiuj centra mesaĝo restas videbla
+
+@ See Through Portals
+eo Vidi tra portaloj
+
+@ See-through Teleporters
+eo Travideblaj teleportiloj
+
+@ Shirt Color
+eo Koloro de ĉemizo
+
+@ Shotgun Bullet Decals
+eo Kuglotruoj de ĉaspafilo
+
+@ Shoulder left
+eo maldekstra ŝultro
+
+@ Shoulder right
+eo dekstra ŝultro
+
+@ Show FPS
+eo Montri FPS
+
+@ Show Face
+eo Montri vizaĝon
+
+@ Shrapnel
+eo Ŝrapnelo
+
+@ Size of on-screen messages and captions
+eo Grando de surekranaj mesaĝoj kaj subtekstoj
+
+@ Skill
+eo Malfacileco
+
+@ Sky Fog
+eo Ĉiela nebulo
+
+@ Smooths the stepped movement of monsters
+eo Glatigas la paŝan movadon de monstroj
+
+@ Sound
+eo Sono
+
+@ Sound Captions
+eo Sonaj subtekstoj
+
+@ Sound Volume
+eo Laŭteco de sono
+
+@ Speed Blur
+eo Rapidmalklarigo
+
+@ Splashes
+eo Plaŭdoj
+
+@ Splatter Amount
+eo Kvanto de ŝprucoj
+
+@ Splatter Size
+eo Grando de ŝprucoj
+
+@ Start Game
+eo Komenci ludon
+
+@ Staying underwater doesn't hurt
+eo Resti subakve ne vundas
+
+@ Stick Look Pitch
+eo Vertikala rigardo per stango
+
+@ Stick Look Yaw
+eo Horizontala rigardo per stango
+
+@ Strafe Left
+eo Flankpaŝi maldekstren
+
+@ Strafe Right
+eo Flankpaŝi dekstren
+
+@ Strength of the surface swell and rings
+eo Forto de la surfaca ŝveliĝo kaj ringoj
+
+@ Stun Duration
+eo Daŭro de svenigo
+
+@ Style
+eo Stilo
+
+@ Supersampling
+eo Supersampligo
+
+@ Surface Hit Effects
+eo Efektoj de surfacaj trafoj
+
+@ Swim Down
+eo Naĝi malsupren
+
+@ Targets
+eo Celoj
+
+@ Teamplay
+eo Teamludo
+
+@ Texture Filter
+eo Teksturfiltrilo
+
+@ Third person
+eo Tria persono
+
+@ Thud
+eo Bato
+
+@ Tick
+eo Tiko
+
+@ Time Limit
+eo Tempolimo
+
+@ Time Stretch
+eo Tempa streĉado
+
+@ Toggle Attack
+eo Baskuli atakon
+
+@ Toggle Run
+eo Baskuli kuradon
+
+@ Toggle auto-aim
+eo Baskuli aŭtomatan celadon
+
+@ Touch Controls
+eo Tuŝregiloj
+
+@ Touchscreen
+eo Tuŝekrano
+
+@ Tough Enemy Health
+eo Sano de fortaj malamikoj
+
+@ Tough enemies only
+eo Nur fortaj malamikoj
+
+@ Trail Colour
+eo Koloro de spuro
+
+@ Translate Console
+eo Traduki konzolon
+
+@ Translucent Water
+eo Duontravidebla akvo
+
+@ Treble
+eo Altoj
+
+@ Turn Left
+eo Turniĝi maldekstren
+
+@ Turn Right
+eo Turniĝi dekstren
+
+@ Underwater FX
+eo Subakvaj efektoj
+
+@ Use Bullet Time Meter
+eo Uzi kuglotempan mezurilon
+
+@ VSync
+eo VSync
+
+@ View Bob
+eo Balanciĝo de vido
+
+@ Viewmodels
+eo Armilmodeloj
+
+@ Volume
+eo Laŭteco
+
+@ Water Opacity
+eo Opakeco de akvo
+
+@ Water Quality
+eo Kvalito de akvo
+
+@ Water Settings
+eo Agordoj de akvo
+
+@ Weapon Wheel
+eo Armila rado
+
+@ Weapon Wheel Slowdown
+eo Malrapidigo de armila rado
+
+@ Weapons
+eo Armiloj
+
+@ Weapons Position
+eo Pozicio de armiloj
+
+@ Where center-screen messages appear
+eo Kie aperas centraj mesaĝoj
+
+@ Where pickup and event messages appear
+eo Kie aperas mesaĝoj pri prenaĵoj kaj eventoj
+
+@ White
+eo Blanka
+
+@ Yaw Sensitivity
+eo Horizontala sentemo
+
+@ Yellow
+eo Flava
+
+# lowercase choice values
+@ T
+eo T
+
+@ always
+eo ĉiam
+
+@ auto
+eo aŭtomate
+
+@ banded
+eo laŭstria
+
+@ borderless
+eo senborda
+
+@ bottom center
+eo malsupre centre
+
+@ bottom left
+eo malsupre maldekstre
+
+@ bottom right
+eo malsupre dekstre
+
+@ box
+eo kadro
+
+@ broken square
+eo rompita kvadrato
+
+@ classic
+eo klasika
+
+@ coarse
+eo kruda
+
+@ cooperative
+eo kunlabora
+
+@ cross
+eo kruco
+
+@ cross + dot
+eo kruco + punkto
+
+@ cyan
+eo cejana
+
+@ dashed
+eo streketa
+
+@ deathmatch
+eo deathmatch
+
+@ deuteranopia
+eo deŭteranopio
+
+@ diagonal streaks
+eo diagonalaj strioj
+
+@ diamond
+eo rombo
+
+@ dot
+eo punkto
+
+@ double
+eo duobla
+
+@ double chevrons
+eo duoblaj ŝevronoj
+
+@ double diagonals
+eo duoblaj diagonaloj
+
+@ easy
+eo facila
+
+@ fine
+eo fajna
+
+@ fit output
+eo laŭ eligo
+
+@ flick stick
+eo flick stick
+
+@ fullscreen
+eo plenekrane
+
+@ gap cross
+eo kruco kun breĉo
+
+@ green
+eo verda
+
+@ grey
+eo griza
+
+@ half speed
+eo duona rapido
+
+@ hard
+eo malfacila
+
+@ high
+eo alta
+
+@ huge
+eo grandega
+
+@ immersive
+eo enmergiĝa
+
+@ intense
+eo intensa
+
+@ large
+eo granda
+
+@ larger
+eo pli granda
+
+@ largest
+eo plej granda
+
+@ linear
+eo lineara
+
+@ low
+eo malalta
+
+@ lower
+eo malsupra
+
+@ magenta
+eo magenta
+
+@ medium
+eo meza
+
+@ middle
+eo mezo
+
+@ middle left
+eo meze maldekstre
+
+@ middle right
+eo meze dekstre
+
+@ modern
+eo moderna
+
+@ nearest
+eo plej proksima
+
+@ nightmare
+eo koŝmaro
+
+@ nintendo
+eo Nintendo
+
+@ no team damage
+eo sen teama damaĝo
+
+@ none
+eo neniu
+
+@ normal
+eo normala
+
+@ off
+eo malŝaltita
+
+@ off while held
+eo malŝaltita dum tenado
+
+@ on
+eo ŝaltita
+
+@ only while held
+eo nur dum tenado
+
+@ playstation
+eo PlayStation
+
+@ protanopia
+eo protanopio
+
+@ quarter speed
+eo kvarona rapido
+
+@ red
+eo ruĝa
+
+@ short diagonals
+eo mallongaj diagonaloj
+
+@ single
+eo unuopa
+
+@ small
+eo malgranda
+
+@ solid
+eo plena
+
+@ spectacle
+eo spektakla
+
+@ subtle
+eo subtila
+
+@ team damage
+eo teama damaĝo
+
+@ top center
+eo supre centre
+
+@ top left
+eo supre maldekstre
+
+@ top right
+eo supre dekstre
+
+@ triple
+eo triobla
+
+@ tritanopia
+eo tritanopio
+
+@ upper
+eo supra
+
+@ white
+eo blanka
+
+@ whole screen
+eo tuta ekrano
+
+@ windowed
+eo fenestre
+
+@ xbox
+eo Xbox
+
+@ yellow
+eo flava
+
+# ==== tooltips.txt ====
+
+# Options help lines (tooltips) and reasons for disabled rows.
+@ 2D aiming turns the view continuously with the right stick; flick stick snaps the view to where you push the stick, then turning the stick rotates it
+eo 2D-celado turnas la vidon senĉese per la dekstra stango; flick stick tuj turnas la vidon al kie vi puŝas la stangon, poste turnado de la stango rotacias ĝin
+
+@ 3D resolution relative to the window; the UI stays sharp
+eo 3D-distingivo rilate al la fenestro; la interfaco restas akra
+
+@ 3D view keeps the HUD and menus sharp; whole screen runs them through the shader too
+eo 3D-vido tenas la HUD kaj menuojn akraj; tuta ekrano ankaŭ trairigas ilin tra la ombrigilo
+
+@ A Quake III style railgun: a slug that pierces every enemy on its line, using 2 cells a shot and refiring every 1.5 s; select it through its assigned weapon slot (Add-ons)
+eo Relpafilo laŭ Quake III: kuglo trapikas ĉiun malamikon sur sia linio, uzas 2 ĉelojn po pafo kaj repafas post 1,5 s; elektu ĝin per ĝia asignita armila fendo (Aldonaĵoj)
+
+@ A Zelda-style hookshot: fire sends a chain hook out; it latches onto hookable surfaces or enemies and reels you in; fire again to let go
+eo Hokpafilo laŭ Zelda: pafo elĵetas ĉenan hokon; ĝi kroĉiĝas al hokeblaj surfacoj aŭ malamikoj kaj tiras vin; pafu denove por malkroĉiĝi
+
+@ Also translates the engine's console messages; off keeps them in English
+eo Ankaŭ tradukas la konzolajn mesaĝojn de la motoro; malŝaltite ili restas en la angla
+
+@ Automatically acquire another enemy while holding Lock-on after losing a target
+eo Aŭtomate kapti alian malamikon dum vi tenas Celkapto post perdo de celo
+
+@ Blends between animation frames of monsters and weapons
+eo Miksas inter animaciaj kadroj de monstroj kaj armiloj
+
+@ Blood stains surfaces and bodies; cosmetic, independent of particle packs
+eo Sango makulas surfacojn kaj korpojn; nur kosmetike, sendepende de partiklaj pakaĵoj
+
+@ Bloom glow around bright lights and heat sources; medium uses 4 taps, high uses 8, low disables halo taps
+eo Bloom-brilo ĉirkaŭ helaj lumoj kaj varmofontoj; meza uzas 4 specimenojn, alta 8, malalta malŝaltas la aŭreolon
+
+@ Blurs fast-moving monsters, projectiles and doors (not camera turns)
+eo Malklarigas rapide moviĝantajn monstrojn, projektilojn kaj pordojn (ne turnojn de la kamerao)
+
+@ Blurs the screen edges during fast falls and launches; keeps the centre clear. Reduce Motion disables it
+eo Malklarigas la ekranrandojn dum rapidaj faloj kaj lanĉoj; la centro restas klara. Redukti movadon malŝaltas ĝin
+
+@ Brightness of the underwater light patterns
+eo Heleco de la subakvaj lumdesegnoj
+
+@ Caps mark count, lifetime, airborne droplets and wound/gib painting; low skips enemy wounds and gib trails
+eo Limigas nombron de makuloj, ilian daŭron, flugantajn gutojn kaj pentradon de vundoj kaj karnopecoj; malalta preterlasas vundojn de malamikoj kaj spurojn de karnopecoj
+
+@ Caps shader input at output size so 200% render scale keeps 3D sharpness without 4x shader cost; low scales stay low-res
+eo Limigas la enigon de la ombrigilo al la eliga grando, por ke 200% bildiga skalo tenu 3D-akrecon sen 4-obla kosto; malaltaj skaloj restas malaltdistingivaj
+
+@ Classic: the original status bar; modern: compact elements at the screen edges
+eo Klasika: la originala statusbreto; moderna: kompaktaj elementoj ĉe la ekranrandoj
+
+@ Coat atlas resolution, rebuild rate and shader detail: low builds smaller coats less often with fast shading; high uses full detail
+eo Distingivo de la tegaĵa atlaso, rekonstrua rapido kaj detaleco de ombrigilo: malalta konstruas pli malgrandajn tegaĵojn malpli ofte kun rapida ombrigo; alta uzas plenan detalecon
+
+@ Colour of the railgun's spiral trail; split-screen players each get the next colour along
+eo Koloro de la spirala spuro de la relpafilo; ĉiu ludanto en dividita ekrano ricevas la sekvan koloron
+
+@ Damage the railgun deals to each enemy it passes through (Quake III: 100)
+eo Damaĝo, kiun la relpafilo kaŭzas al ĉiu trapikita malamiko (Quake III: 100)
+
+@ Dark backdrop behind on-screen messages for readability
+eo Malhela fono malantaŭ surekranaj mesaĝoj por pli bona legebleco
+
+@ Dark border keeps the crosshair visible on any background
+eo Malhela bordero tenas la celilon videbla sur ajna fono
+
+@ Darkens corners and contact areas where geometry meets; higher quality is sharper
+eo Malheligas angulojn kaj kontaktajn areojn de geometrio; pli alta kvalito estas pli akra
+
+@ Debris lands on and is carried or shoved by doors, lifts and platforms
+eo Derompaĵoj surteriĝas sur pordojn, liftojn kaj platformojn kaj estas portataj aŭ puŝataj de ili
+
+@ Detail for caustics, ripples and splashes: low uses smaller budgets and shorter view distance; high uses larger budgets and farther view distance
+eo Detaleco de kaŭstikoj, ondetoj kaj plaŭdoj: malalta uzas pli malgrandajn buĝetojn kaj pli mallongan vidodistancon; alta uzas pli grandajn buĝetojn kaj pli longan vidodistancon
+
+@ Disabled while Enhanced Particles is on: its particles replace the GLQuake and Classic styles
+eo Malŝaltita dum Plibonigitaj partikloj estas ŝaltita: ĝiaj partikloj anstataŭas la stilojn GLQuake kaj klasika
+
+@ Disabled while Enhanced Water is on: its own underwater effects replace the classic and GLQuake view warps
+eo Malŝaltita dum Plibonigita akvo estas ŝaltita: ĝiaj propraj subakvaj efektoj anstataŭas la klasikan kaj GLQuake-distordojn
+
+@ Draw the predicted grenade path as a solid or dashed line
+eo Desegni la antaŭviditan vojon de granato kiel plenan aŭ streketan linion
+
+@ Draw the view out of the linked portal inside each portal; off shows flat discs (fastest)
+eo Montri en ĉiu portalo la vidon el la ligita portalo; malŝaltite montras platajn diskojn (plej rapide)
+
+@ Droplets spray up when things enter or leave water, slime or lava
+eo Gutoj ŝprucas supren kiam io eniras aŭ eliras akvon, ŝlimon aŭ lafon
+
+@ Emulates the original 8-bit palette of software rendering
+eo Imitas la originalan 8-bitan paletron de programara bildigo
+
+@ Every level starts with only the shotgun and axe, as if started fresh
+eo Ĉiu nivelo komenciĝas nur kun la ĉaspafilo kaj hakilo, kvazaŭ freŝe komencita
+
+@ Explosion damage for each remotely detonated sticky bomb
+eo Eksploda damaĝo de ĉiu malproksime detonaciigita glua bombo
+
+@ Extra freeze milliseconds for every 10 damage dealt, so heavy hits stop longer
+eo Kromaj milisekundoj de frosto por ĉiu 10 kaŭzita damaĝo, por ke fortaj trafoj haltigu pli longe
+
+@ First person, a third-person camera centered behind the player, or one over the right or left shoulder; third person hides viewmodels
+eo Unua persono, triapersona kamerao centre malantaŭ la ludanto, aŭ unu super la dekstra aŭ maldekstra ŝultro; tria persono kaŝas armilmodelojn
+
+@ Flash the selected marker on confirmed hits; colors are shared with the crosshair
+eo Ekbriligi la elektitan markon ĉe konfirmitaj trafoj; la koloroj estas komunaj kun la celilo
+
+@ Freeze for every enemy, or only for enemies that were tough before the hit
+eo Frostigi por ĉiu malamiko, aŭ nur por malamikoj, kiuj estis fortaj antaŭ la trafo
+
+@ Freeze the game briefly when you damage an enemy; single player with add-ons only
+eo Mallonge frostigi la ludon kiam vi damaĝas malamikon; nur unuludanta kun aldonaĵoj
+
+@ Gibs tumble and barrels throw shrapnel; shots and blasts push them (cosmetic only)
+eo Karnopecoj ruliĝas kaj bareloj ĵetas ŝrapnelon; pafoj kaj eksplodoj puŝas ilin (nur kosmetike)
+
+@ Health an enemy must have had before the hit to count as tough
+eo Sano, kiun malamiko devis havi antaŭ la trafo por esti konsiderata forta
+
+@ Hits dealing less damage than this do not freeze the game; the default 10 skips nails and shotgun pellets
+eo Trafoj kun malpli da damaĝo ol ĉi tio ne frostigas la ludon; la defaŭlto 10 preterlasas najlojn kaj ĉaspafilajn kugletojn
+
+@ Hold fire and sweep the crosshair over monsters to queue them, release to throw: it stuns each in turn and flies back; alt-fire clears the queue
+eo Tenu pafon kaj svingu la celilon super monstroj por vicigi ilin, malpremu por ĵeti: ĝi svenigas ĉiun laŭvice kaj reflugas; alt-pafo malplenigas la vicon
+
+@ Hold: keep Lock-on held. Toggle: press Auto-aim Toggle to enable automatic acquisition. Click look stick to switch targets
+eo Teni: tenu premita Celkapto. Baskuli: premu Baskuli aŭtomatan celadon por ŝalti aŭtomatan kapton. Klaku la rigardan stangon por ŝanĝi celon
+
+@ How close an enemy must be to the crosshair for automatic acquisition in toggle mode (degrees)
+eo Kiom proksime al la celilo malamiko devas esti por aŭtomata kapto en baskula reĝimo (gradoj)
+
+@ How far the view tilts up and down when you tilt the controller (pitch axis)
+eo Kiom la vido kliniĝas supren kaj malsupren kiam vi klinas la regilon (vertikala akso)
+
+@ How far the view turns left and right when you turn the controller (yaw axis)
+eo Kiom la vido turniĝas maldekstren kaj dekstren kiam vi turnas la regilon (horizontala akso)
+
+@ How far the view turns when you drag on the right half of the screen
+eo Kiom la vido turniĝas kiam vi trenas sur la dekstra duono de la ekrano
+
+@ How fast the boomerang flies (units per second)
+eo Kiom rapide flugas la bumerango (unuoj sekunde)
+
+@ How hard shots and explosions push debris around
+eo Kiom forte pafoj kaj eksplodoj puŝas derompaĵojn
+
+@ How hard the Powerwasher's water pushes enemies
+eo Kiom forte la akvo de la Premlavilo puŝas malamikojn
+
+@ How long a hit freezes the game, in milliseconds
+eo Kiom longe trafo frostigas la ludon, en milisekundoj
+
+@ How strongly fog covers the sky when fog is on
+eo Kiom forte nebulo kovras la ĉielon kiam nebulo estas ŝaltita
+
+@ How the view distorts underwater: Classic ripples the whole screen like software Quake, GLQuake slowly stretches and squashes the view
+eo Kiel la vido distordiĝas subakve: klasika ondigas la tutan ekranon kiel programara Quake, GLQuake malrapide streĉas kaj premas la vidon
+
+@ Ignores gyro rotation slower than this many degrees per second, to hide hand tremor
+eo Ignoras giroskopan rotacion pli malrapidan ol tiom da gradoj sekunde, por kaŝi tremadon de la mano
+
+@ Immersive: appears for a few seconds only when its value changes
+eo Enmergiĝa: aperas dum kelkaj sekundoj nur kiam ĝia valoro ŝanĝiĝas
+
+@ Keeps textures sharp on floors and walls seen at steep angles
+eo Tenas teksturojn akraj sur plankoj kaj muroj viditaj je krutaj anguloj
+
+@ Lights from rockets, muzzle flashes and explosions brighten nearby walls
+eo Lumoj de raketoj, pafbriloj kaj eksplodoj heligas proksimajn murojn
+
+@ Liquid surfaces swell and ring out where things move through them
+eo Likvaj surfacoj ŝveliĝas kaj ondetas kie io moviĝas tra ili
+
+@ Lobs sticky bombs (rockets ammo) that cling to walls, doors and monsters; alt-fire detonates them all
+eo Ĵetas gluajn bombojn (raketa municio), kiuj algluiĝas al muroj, pordoj kaj monstroj; alt-pafo detonaciigas ĉiujn
+
+@ Look of the classic particles: GLQuake draws soft round dots, Classic draws square pixels like software Quake
+eo Aspekto de la klasikaj partikloj: GLQuake desegnas molajn rondajn punktojn, klasika desegnas kvadratajn pikselojn kiel programara Quake
+
+@ Low skips the background smear halo and uses fewer blur samples; high keeps the full halo and smoother streaks
+eo Malalta preterlasas la fonan ŝmiran aŭreolon kaj uzas malpli da specimenoj; alta tenas la plenan aŭreolon kaj pli glatajn striojn
+
+@ Low: hard particle edges, half the scripted particles and fewer hit sparks. Medium: soft edges. High: soft edges checked per MSAA sample, most hit sparks
+eo Malalta: akraj partiklaj randoj, duono de la skriptitaj partikloj kaj malpli da trafsparkoj. Meza: molaj randoj. Alta: molaj randoj kontrolataj po MSAA-specimeno, plej multaj trafsparkoj
+
+@ Marks fade out before expiring; oldest marks are recycled at the limit
+eo Makuloj forvelkas antaŭ ol malaperi; la plej malnovaj estas reuzataj ĉe la limo
+
+@ Max nested portal reflections to draw; each level redraws the scene
+eo Maks. nombro de nestitaj portalaj reflektoj; ĉiu nivelo redesegnas la scenon
+
+@ Max portals per screen with a live view; each one redraws the scene
+eo Maks. nombro de portaloj kun viva vido sur la ekrano; ĉiu redesegnas la scenon
+
+@ Maximum distance for acquiring and keeping an enemy locked
+eo Maksimuma distanco por kapti kaj teni malamikon celkaptita
+
+@ Minimum gap between freezes, so shotgun pellets and rapid fire count once; kills ignore it
+eo Minimuma intervalo inter frostoj, por ke ĉaspafilaj kugletoj kaj rapida pafado kalkuliĝu unufoje; mortigoj ignoras ĝin
+
+@ Modern terminal console with autocomplete popup, history search, ANSI colors, bash shell and piping; off uses the classic Quake console
+eo Moderna terminala konzolo kun aŭtomata kompletigo, serĉo en historio, ANSI-koloroj, bash-ŝelo kaj tubado; malŝaltite uzas la klasikan Quake-konzolon
+
+@ Monsters take proportionally less damage at higher values; above 100% is harder
+eo Monstroj ricevas proporcie malpli da damaĝo ĉe pli altaj valoroj; super 100% estas pli malfacile
+
+@ Moving gibs leave blood on surfaces they touch
+eo Moviĝantaj karnopecoj lasas sangon sur surfacoj, kiujn ili tuŝas
+
+@ Multiplier on the freeze when the hit kills the enemy; 1 means no extra
+eo Multiplikato de la frosto kiam la trafo mortigas la malamikon; 1 signifas neniun kromon
+
+@ Multiplies ammo from pickups (up to the normal carry limit); below 100% is harder
+eo Multiplikas municion el prenaĵoj (ĝis la normala porta limo); sub 100% estas pli malfacile
+
+@ Multiplies health from pickups (up to 100, or the item's own limit); below 100% is harder
+eo Multiplikas sanon el prenaĵoj (ĝis 100, aŭ la propra limo de la objekto); sub 100% estas pli malfacile
+
+@ Nails stick to wood and bodies; hard surfaces deflect them to the floor
+eo Najloj enfiksiĝas en lignon kaj korpojn; malmolaj surfacoj deflankigas ilin al la planko
+
+@ Nearest keeps crisp classic pixels; linear smooths textures
+eo Plej proksima tenas akrajn klasikajn pikselojn; lineara glatigas teksturojn
+
+@ New Game: Add-ons
+eo Nova ludo: Aldonaĵoj
+
+@ New Game: Customize
+eo Nova ludo: Adapti
+
+@ Night vision: how much dark areas are brightened; thermal: how strongly heat stands out
+eo Noktvido: kiom la malhelaj areoj heliĝas; termika: kiom forte varmo elstaras
+
+@ Night-vision and thermal goggles, cycle normal, night vision and thermal with Change Goggles (Add-ons), or use the Equipment Wheel
+eo Noktvidaj kaj termikaj okulvitroj; ŝanĝu inter normala, noktvido kaj termika per Ŝanĝi okulvitrojn (Aldonaĵoj), aŭ uzu la Ekipaĵan radon
+
+@ No single freeze lasts longer than this, however much damage or kill bonus adds
+eo Neniu unuopa frosto daŭras pli longe ol ĉi tio, kiom ajn da damaĝo aŭ mortigbonuso aldoniĝas
+
+@ Oldest marks and nails are recycled at this shared limit
+eo La plej malnovaj makuloj kaj najloj estas reuzataj ĉe ĉi tiu komuna limo
+
+@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
+eo Surekrana stango kaj butonoj: aŭtomate montras ilin post tuŝo kaj kaŝas ilin kiam alia aparato estas uzata
+
+@ Only autosaves: quicksaves and the Save menu are off
+eo Nur aŭtokonservoj: rapidaj konservoj kaj la menuo de konservado estas malŝaltitaj
+
+@ Place every weapon at the center, right or left of the view, or hide all viewmodels
+eo Meti ĉiun armilon centre, dekstre aŭ maldekstre de la vido, aŭ kaŝi ĉiujn armilmodelojn
+
+@ Play your chosen hit or kill cue when you damage an enemy
+eo Ludi vian elektitan sonon de trafo aŭ mortigo kiam vi damaĝas malamikon
+
+@ Playback speed: faster sounds shorter and higher
+eo Reludrapido: pli rapida sonas pli mallonge kaj pli alte
+
+@ Plays the Quake theme in the main menu when no game is running
+eo Ludas la Quake-temon en la ĉefmenuo kiam neniu ludo funkcias
+
+@ Portals farther away than this are drawn as flat discs
+eo Portaloj pli malproksimaj ol ĉi tio estas desegnataj kiel plataj diskoj
+
+@ Press attack once to keep firing, again to stop
+eo Premu atakon unufoje por daŭre pafi, denove por ĉesi
+
+@ Press run once to switch between running and walking
+eo Premu kuri unufoje por ŝanĝi inter kurado kaj irado
+
+@ Raise or lower the tone independently of sound length
+eo Altigi aŭ malaltigi la tonon sendepende de la sonlongo
+
+@ Red screen edges show where damage came from: top is front, bottom is behind; Screen Flashes controls their strength
+eo Ruĝaj ekranrandoj montras, de kie venis damaĝo: supro estas antaŭe, malsupro malantaŭe; Ekranaj ekbriloj regas ilian forton
+
+@ Replaces the classic dot particles with glowing sparks, smoke and blood; mods with their own particle effects keep them
+eo Anstataŭas la klasikajn punktajn partiklojn per brilantaj sparkoj, fumo kaj sango; modoj kun propraj partiklaj efektoj tenas ilin
+
+@ Resolution and detail inside portal and teleporter views; lower tiers trim nested effects
+eo Distingivo kaj detaleco en vidoj tra portaloj kaj teleportiloj; pli malaltaj niveloj reduktas nestitajn efektojn
+
+@ Rippling light patterns on surfaces under water and slime
+eo Ondantaj lumdesegnoj sur surfacoj sub akvo kaj ŝlimo
+
+@ Scales all damage you take; above 100% is harder
+eo Skalas ĉiun damaĝon, kiun vi ricevas; super 100% estas pli malfacile
+
+@ Screen edge for this element; elements on the same spot stack
+eo Ekranrando por ĉi tiu elemento; elementoj en la sama loko stakiĝas
+
+@ Seconds a monster hit by the boomerang stays stunned
+eo Sekundoj dum kiuj monstro trafita de la bumerango restas svenigita
+
+@ Seconds impact marks and stuck nails stay before fading out; independent of Particle Quality
+eo Sekundoj dum kiuj trafmakuloj kaj enfiksitaj najloj restas antaŭ ol forvelki; sendepende de Kvalito de partikloj
+
+@ Seconds messages at the top of the screen stay up
+eo Sekundoj dum kiuj mesaĝoj supre de la ekrano restas videblaj
+
+@ Seconds the flick stick snap takes; lower is faster
+eo Sekundoj, kiujn daŭras la flick stick-turno; malpli estas pli rapide
+
+@ See through enhanced water; enables Water Opacity
+eo Vidi tra plibonigita akvo; ebligas la agordon Opakeco de akvo
+
+@ Sensor grain, scanlines and flicker of the goggle image
+eo Sensila grajno, skanlinioj kaj flagrado de la okulvitra bildo
+
+@ Shades every anti-aliasing sample; needs Anti-aliasing on
+eo Ombrigas ĉiun glatigan specimenon; bezonas, ke Glatigo de randoj estu ŝaltita
+
+@ Shifts colors so they stay distinct for the chosen color blindness
+eo Ŝovas kolorojn por ke ili restu distingeblaj por la elektita kolorblindeco
+
+@ Shotgun hits leave small surface marks (cosmetic only)
+eo Ĉaspafilaj trafoj lasas malgrandajn surfacajn markojn (nur kosmetike)
+
+@ Show corner ticks at screen centre while locked, even with Crosshair off
+eo Montri angulajn strekojn en la ekrancentro dum celkapto, eĉ kun malŝaltita celilo
+
+@ Show where grenades and other arcing shots will fly, bounce and land; local play only, not in deathmatch
+eo Montri kien granatoj kaj aliaj arkaj pafoj flugos, resaltos kaj surteriĝos; nur loka ludo, ne en deathmatch
+
+@ Shows text for important sounds: doors, alerted enemies, secrets, pickups
+eo Montras tekston por gravaj sonoj: pordoj, alarmitaj malamikoj, sekretoj, prenaĵoj
+
+@ Shows the distance fog that maps and mods set; off always gives clear view
+eo Montras la distancan nebulon, kiun mapoj kaj modoj difinas; malŝaltite ĉiam donas klaran vidon
+
+@ Shows the player face next to the health number
+eo Montras la vizaĝon de la ludanto apud la sannombro
+
+@ Simulation detail, step rate, fade-out lifetimes and caps for gibs and shrapnel; low also skips mover collision
+eo Simulada detaleco, paŝrapido, forvelkaj daŭroj kaj limoj por karnopecoj kaj ŝrapnelo; malalta ankaŭ preterlasas kolizion kun moviĝantaj objektoj
+
+@ Size of the on-screen buttons and move stick
+eo Grando de la surekranaj butonoj kaj movstango
+
+@ Slowly heals up to 100 health after 5 seconds without being hit
+eo Malrapide resanigas ĝis 100 sano post 5 sekundoj sen esti trafita
+
+@ Slows stick look while the crosshair is over an enemy
+eo Malrapidigas stangan rigardon dum la celilo estas super malamiko
+
+@ Slows the game down while the weapon wheel is open
+eo Malrapidigas la ludon dum la armila rado estas malfermita
+
+@ Slows the whole game down; single player only. Saves and demos stay compatible with other ports
+eo Malrapidigas la tutan ludon; nur unuludanta. Konservoj kaj demoj restas kongruaj kun aliaj motoroj
+
+@ Small camera jolt on each freeze; off with Reduce Motion
+eo Malgranda skuo de la kamerao ĉe ĉiu frosto; malŝaltita per Redukti movadon
+
+@ Snap and track enemies in local play, including split-screen; unavailable online
+eo Kapti kaj sekvi malamikojn en loka ludo, inkluzive de dividita ekrano; nedisponebla enrete
+
+@ Sparks, smoke, chips, splinters and splashes fly off whatever your shots hit
+eo Sparkoj, fumo, eroj, splitoj kaj plaŭdoj flugas for de ĉio, kion viaj pafoj trafas
+
+@ Spawns extra copies of every monster around the original when a level starts
+eo Kreas kromajn kopiojn de ĉiu monstro ĉirkaŭ la originalo kiam nivelo komenciĝas
+
+@ Strength of the full-screen flashes for damage, pickups and powerups
+eo Forto de la plenekranaj ekbriloj por damaĝo, prenaĵoj kaj plifortigiloj
+
+@ Stretch or shorten the sound while keeping its pitch
+eo Streĉi aŭ mallongigi la sonon konservante ĝian tonalton
+
+@ Surface opacity; requires Enhanced Water and Translucent Water
+eo Opakeco de la surfaco; postulas Plibonigitan akvon kaj Duontravideblan akvon
+
+@ The hook latches onto metal surfaces (metal, tech, computer panels, copper)
+eo La hoko kroĉiĝas al metalaj surfacoj (metalo, teĥniko, komputilaj paneloj, kupro)
+
+@ The hook latches onto stone, brick, rock and any surface not recognised as wood or metal
+eo La hoko kroĉiĝas al ŝtono, briko, roko kaj ĉiu surfaco ne rekonita kiel ligno aŭ metalo
+
+@ The hook latches onto wooden surfaces (texture names like wood, crate, plank)
+eo La hoko kroĉiĝas al lignaj surfacoj (teksturnomoj kiel wood, crate, plank)
+
+@ Turn the controller's motion sensor into a look input; needs a pad with a gyroscope
+eo Uzi la movsensilon de la regilo por rigardi; bezonas ludregilon kun giroskopo
+
+@ Turns off view bob, strafe tilt and the camera kick when hit or firing
+eo Malŝaltas balanciĝon de vido, flankan kliniĝon kaj kamerapuŝon ĉe trafo aŭ pafado
+
+@ Turns on the extra liquid effects; Water Settings controls each one
+eo Ŝaltas la kromajn likvajn efektojn; Agordoj de akvo regas ĉiun el ili
+
+@ Turns the view to follow a moving enemy you are aiming at
+eo Turnas la vidon por sekvi moviĝantan malamikon, al kiu vi celas
+
+@ Turns the view when you roll the controller sideways; 0 disables it, negative reverses it
+eo Turnas la vidon kiam vi rulas la regilon flanken; 0 malŝaltas, negativa inversigas
+
+@ Two-portal gun: fire and alt-fire place linked portals on flat walls; assign a weapon slot in Add-ons
+eo Duportala pafilo: pafo kaj alt-pafo metas ligitajn portalojn sur platajn murojn; asignu armilan fendon en Aldonaĵoj
+
+@ Unlocks the FX Settings page: enhanced particles, impact effects and blood splatter
+eo Malŝlosas la paĝon Agordoj de efektoj: plibonigitaj partikloj, trafefektoj kaj sangoŝprucoj
+
+@ Uses the 2021 re-release's smoother MD5 models (and MD3 replacements from mods) instead of the classic ones. Applies on the next map load
+eo Uzas la pli glatajn MD5-modelojn de la reeldono de 2021 (kaj MD3-anstataŭaĵojn el modoj) anstataŭ la klasikajn. Efektiviĝas ĉe la sekva ŝargo de mapo
+
+@ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
+eo Uzas la koloran lumon de la mapo (dosiero .lit aŭ BSPX-ero); malŝaltite donas la originalan blankan lumon. Efektiviĝas ĉe la sekva ŝargo de mapo
+
+@ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
+eo Segmentoj de akvoŝpruco, nombro de gutoj kaj brila likva ombrigo: malalta uzas pli simplajn duontravideblajn fluojn; alta uzas glatajn brilajn ŝprucojn
+
+@ When gyro looking applies: always, off while +gyroaction is held, or only while it is held
+eo Kiam giroskopa rigardado aplikiĝas: ĉiam, malŝaltita dum +gyroaction estas tenata, aŭ nur dum ĝi estas tenata
+
+@ Which weapons trigger the freeze; melee covers the axe and any mod weapon used at close range without ammo
+eo Kiuj armiloj ekigas la froston; proksima batalo kovras la hakilon kaj ajnan modan armilon uzatan proksime sen municio
+
+@ Your own rockets and grenades don't hurt you; rocket jumps still work
+eo Viaj propraj raketoj kaj granatoj ne vundas vin; raketsaltoj ankoraŭ funkcias
+
+# ==== ui.txt ====
+
+# Menus and pop-ups outside the options pages: save cards, launch, presets,
+# add-on browser, map packs, hints and dialogs.
+@ Select
+eo Elekti
+
+@ Back
+eo Reen
+
+@ Cancel
+eo Nuligi
+
+@ Confirm
+eo Konfirmi
+
+@ Scroll
+eo Rulumi
+
+@ Section
+eo Sekcio
+
+@ Bind
+eo Asigni
+
+@ Cancel binding
+eo Nuligi asignon
+
+@ Clear
+eo Forigi
+
+@ Clear pad
+eo Forigi ludregilan
+
+@ Remap
+eo Reasigni
+
+@ Type
+eo Tajpi
+
+@ Shift
+eo Shift
+
+@ Done
+eo Preta
+
+@ Del
+eo Del
+
+@ Space
+eo Spaceto
+
+@ Save
+eo Konservi
+
+@ Load
+eo Ŝargi
+
+@ Delete
+eo Forigi
+
+@ Play
+eo Ludi
+
+@ Yes
+eo Jes
+
+@ No
+eo Ne
+
+@ OK
+eo Bone
+
+@ System
+eo Sistemo
+
+@ Language
+eo Lingvo
+
+@ Help
+eo Helpo
+
+@ Fixed for this game: it was started without Customize
+eo Fiksita por ĉi tiu ludo: ĝi komenciĝis sen Adapti
+
+@ Press a button or key to bind (Start cancels)
+eo Premu butonon aŭ klavon por asigni (Start nuligas)
+
+@ Press button...
+eo Premu butonon...
+
+@ Press key...
+eo Premu klavon...
+
+@ Replace this binding?
+eo Ĉu anstataŭigi ĉi tiun asignon?
+
+@ is already assigned
+eo jam estas asignita
+
+@ {} already assigned
+eo Jam asignita: {}
+
+@ Open Controls to remap Lock-on?
+eo Ĉu malfermi Regiloj por reasigni Celkapto?
+
+@ Lock-on
+eo Celkapto
+
+@ Auto-aim Toggle
+eo Baskuli aŭtomatan celadon
+
+@ Keyboard
+eo Klavaro
+
+@ Controller
+eo Ludregilo
+
+# main menu, dialogs and screens
+@ Map Packs
+eo Mappakoj
+
+@ Customize
+eo Adapti
+
+@ Level Select
+eo Elekto de nivelo
+
+@ Really quit?
+eo Ĉu vere eliri?
+
+@ You died
+eo Vi mortis
+
+@ Continue from most recent save
+eo Daŭrigi de la plej lasta konservo
+
+@ Select save
+eo Elekti konservon
+
+@ Restart level
+eo Rekomenci nivelon
+
+@ Return to main menu
+eo Reveni al la ĉefmenuo
+
+@ (disabled)
+eo (malebligita)
+
+@ (fixed for this game)
+eo (fiksita por ĉi tiu ludo)
+
+@ (off)
+eo (malŝaltita)
+
+@ Apply Display Changes
+eo Apliki ekranajn ŝanĝojn
+
+@ Display Mode
+eo Ekrana reĝimo
+
+@ Resolution
+eo Distingivo
+
+@ desktop
+eo labortablo
+
+@ Preset
+eo Antaŭagordo
+
+@ Map
+eo Mapo
+
+@ Reset Shader Settings
+eo Restarigi ombrigilajn agordojn
+
+@ Reset to Defaults
+eo Restarigi defaŭltojn
+
+@ Searching...
+eo Serĉante...
+
+@ This game only autosaves.
+eo Ĉi tiu ludo nur aŭtomate konservas.
+
+@ (No Manual Saves modifier)
+eo (modifilo Neniuj manaj konservoj)
+
+@ End the current game?
+eo Ĉu fini la nunan ludon?
+
+@ Unsaved progress will be lost.
+eo Nekonservita progreso perdiĝos.
+
+@ End game
+eo Fini ludon
+
+@ Overwrite
+eo Anstataŭigi
+
+@ Overwrite "{}"?
+eo Ĉu anstataŭigi "{}"?
+
+@ Saved {}
+eo Konservita: {}
+
+@ Start a new game?
+eo Ĉu komenci novan ludon?
+
+@ New game
+eo Nova ludo
+
+@ New Game
+eo Nova ludo
+
+@ CUSTOM
+eo ADAPTITA
+
+@ Customize Experience
+eo Adapti la sperton
+
+@ Disable All
+eo Malŝalti ĉiujn
+
+@ Disable All Modifications
+eo Malŝalti ĉiujn modifojn
+
+@ Saves load in other source ports too.
+eo Konservoj ŝargiĝas ankaŭ en aliaj motoroj.
+
+@ Standard rules, no add-ons.
+eo Normaj reguloj, sen aldonaĵoj.
+
+@ Choose skill
+eo Elektu malfacilecon
+
+@ The current game will end
+eo La nuna ludo finiĝos
+
+@ Easy
+eo Facila
+
+@ Normal
+eo Normala
+
+@ Hard
+eo Malfacila
+
+@ Nightmare
+eo Koŝmaro
+
+# graphics preset pop-up
+@ Choose a Graphics Preset
+eo Elektu grafikan antaŭagordon
+
+@ Classic
+eo Klasika
+
+@ Like the re-release: enhanced models,
+eo Kiel la reeldono: plibonigitaj modeloj,
+
+@ no added effects.
+eo sen aldonitaj efektoj.
+
+@ Enhanced
+eo Plibonigita
+
+@ Every enhancement at its highest quality.
+eo Ĉiu plibonigo je la plej alta kvalito.
+
+@ Needs a capable GPU.
+eo Bezonas kapablan grafikkarton.
+
+@ Low-End
+eo Malforta
+
+@ Fastest. No anti-aliasing, original
+eo Plej rapida. Sen glatigo de randoj, originalaj
+
+@ models, lowest effect quality.
+eo modeloj, plej malalta kvalito de efektoj.
+
+@ Esc keeps the defaults
+eo Esc tenas la defaŭltojn
+
+@ Everything can be changed later in Options.
+eo Ĉio ŝanĝeblas poste en Options.
+
+@ Keep Defaults
+eo Teni defaŭltojn
+
+# save and load cards
+@ Save Game
+eo Konservi ludon
+
+@ Load Game
+eo Ŝargi ludon
+
+@ Autosaves
+eo Aŭtokonservoj
+
+@ newest first
+eo plej novaj unue
+
+@ Saves: {}
+eo Konservoj: {}
+
+@ Browse Autosaves
+eo Foliumi aŭtokonservojn
+
+@ Every retained autosave, newest first
+eo Ĉiuj retenitaj aŭtokonservoj, plej novaj unue
+
+@ New save
+eo Nova konservo
+
+@ Select to save your game here
+eo Elektu por konservi vian ludon ĉi tie
+
+@ No autosaves yet
+eo Ankoraŭ neniuj aŭtokonservoj
+
+@ Autosaves are made on level entry, secrets and more (Options > Gameplay)
+eo Aŭtokonservoj okazas ĉe eniro en nivelon, sekretoj kaj pli (Options > Ludado)
+
+@ No saves yet
+eo Ankoraŭ neniuj konservoj
+
+@ Save from the Single Player menu, or press F6 to quicksave
+eo Konservu el la menuo Single Player, aŭ premu F6 por rapide konservi
+
+@ No picture
+eo Neniu bildo
+
+@ Del: delete save
+eo Del: forigi konservon
+
+@ Delete "{}"?
+eo Ĉu forigi "{}"?
+
+@ This cannot be undone.
+eo Tio ne malfareblas.
+
+@ Quicksave
+eo Rapida konservo
+
+@ Autosave: {}
+eo Aŭtokonservo: {}
+
+@ unknown trigger
+eo nekonata ekigilo
+
+@ Latest - {}
+eo Plej lasta - {}
+
+@ Health {}
+eo Sano {}
+
+@ Armor {}
+eo Kiraso {}
+
+@ Kills {}/{}
+eo Mortigoj {}/{}
+
+@ Secrets {}/{}
+eo Sekretoj {}/{}
+
+@ Split-screen, {} players
+eo Dividita ekrano, ludantoj: {}
+
+@ Co-op
+eo Kunludo
+
+@ Customized
+eo Adaptita
+
+@ Customized, {}
+eo Adaptita, {}
+
+@ Date unavailable
+eo Dato nedisponebla
+
+@ Just now
+eo Ĵus nun
+
+@ {} min ago
+eo antaŭ {} min
+
+@ {} h ago
+eo antaŭ {} h
+
+@ Level entry
+eo Eniro en nivelon
+
+@ Secret found
+eo Sekreto trovita
+
+@ All enemies killed
+eo Ĉiuj malamikoj mortigitaj
+
+@ All secrets found
+eo Ĉiuj sekretoj trovitaj
+
+@ Timer
+eo Tempigilo
+
+# customize pages
+@ Standard rules
+eo Normaj reguloj
+
+@ Modifiers changed: {}
+eo Ŝanĝitaj modifiloj: {}
+
+@ no add-ons
+eo sen aldonaĵoj
+
+@ add-ons: {}
+eo aldonaĵoj: {}
+
+@ Saves of this game are .qsa files: they need this source port.
+eo Konservoj de ĉi tiu ludo estas .qsa-dosieroj: ili bezonas ĉi tiun motoron.
+
+@ Nothing changed: this plays as standard Quake.
+eo Nenio ŝanĝita: ĉi tio ludiĝas kiel norma Quake.
+
+@ Changes apply now and are saved with this game (.qsa).
+eo Ŝanĝoj efektiviĝas tuj kaj konserviĝas kun ĉi tiu ludo (.qsa).
+
+@ This game started without Customize, so its rules are fixed.
+eo Ĉi tiu ludo komenciĝis sen Adapti, do ĝiaj reguloj estas fiksitaj.
+
+@ Start a new game and choose Customize Experience.
+eo Komencu novan ludon kaj elektu Adapti la sperton.
+
+@ These rules apply to the next customized game.
+eo Ĉi tiuj reguloj validas por la sekva adaptita ludo.
+
+# add-on browser
+@ Fire
+eo Pafi
+
+@ Alt Fire
+eo Alt. pafo
+
+@ Configure Parameters >
+eo Agordi parametrojn >
+
+@ Configure
+eo Agordi
+
+@ Settings
+eo Agordoj
+
+@ Change slot
+eo Ŝanĝi fendon
+
+@ Toggle
+eo Baskuli
+
+@ Details
+eo Detaloj
+
+@ Enter or click the box: toggle
+eo Enter aŭ klako sur la skatolo: baskuli
+
+@ Right / Tab / click: details
+eo Dekstren / Tab / klako: detaloj
+
+@ Input Remapping
+eo Reasigno de enigo
+
+@ Weapon Slot
+eo Armila fendo
+
+@ Customized games save as .qsa files, which need this source port.
+eo Adaptitaj ludoj konserviĝas kiel .qsa-dosieroj, kiuj bezonas ĉi tiun motoron.
+
+@ This game started without Customize, so its add-ons are fixed. Customize a new game instead.
+eo Ĉi tiu ludo komenciĝis sen Adapti, do ĝiaj aldonaĵoj estas fiksitaj. Anstataŭe adaptu novan ludon.
+
+@ Bullet Time
+eo Kuglotempo
+
+@ Change Goggles
+eo Ŝanĝi okulvitrojn
+
+@ Dodge / Dive
+eo Evito / Plonĝo
+
+@ Goggles
+eo Okulvitroj
+
+@ Hitstop
+eo Hitstop
+
+@ Projectile Shotguns
+eo Projektilaj ĉaspafiloj
+
+@ BULLET TIME: 20%
+eo KUGLOTEMPO: 20%
+
+@ NORMAL SPEED
+eo NORMALA RAPIDO
+
+@ SLOW MOTION: PHYSICAL PELLETS
+eo MALRAPIDE: FIZIKAJ KUGLETOJ
+
+@ DEMONSTRATION
+eo DEMONSTRO
+
+@ GAMEPLAY
+eo LUDADO
+
+@ LOOP
+eo BUKLO
+
+@ Preview unavailable
+eo Antaŭrigardo nedisponebla
+
+# shader and language help lines
+@ A setting of the chosen shader; arrows step it, Enter is not needed
+eo Agordo de la elektita ombrigilo; la sagoj paŝigas ĝin, Enter ne necesas
+
+@ Language of the menus, messages and the 2021 re-release's game text; System follows your computer's language
+eo Lingvo de la menuoj, mesaĝoj kaj ludteksto de la reeldono de 2021; Sistemo sekvas la lingvon de via komputilo
+
+@ Puts every setting of the chosen shader back to the preset's defaults
+eo Remetas ĉiun agordon de la elektita ombrigilo al la defaŭltoj de la antaŭagordo
+
+@ RetroArch slang shader on the final image: CRT, scanlines, NTSC, sharpening; add your own in <game>/shaders
+eo RetroArch-slang-ombrigilo sur la fina bildo: CRT, skanlinioj, NTSC, akrigo; aldonu viajn proprajn en <game>/shaders
+
+# modern console footer
+@ Shift+PgUp/Dn: height  ` : hide
+eo Shift+PgUp/Dn: alteco  ` : kaŝi
+
+@ Tab: complete  Ctrl+R: search  bash | pipe
+eo Tab: kompletigi  Ctrl+R: serĉi  bash | tubo
+
+@ ↑ +{} lines (End to jump) 
+eo ↑ +{} linioj (End por salti) 
+
+# add-on descriptions
+@ Create two linked portals on flat walls. Fire places the first portal; Alt Fire places the second. Walk through either portal to emerge from the other. Your momentum carries through. Assign a weapon slot below: pressing that slot repeatedly cycles its ordinary weapon and every enabled add-on assigned there. Portal view quality is configurable below.
+eo Kreu du ligitajn portalojn sur plataj muroj. Pafo metas la unuan portalon; Alt. pafo metas la duan. Iru tra iu ajn portalo por eliri el la alia. Via impeto trapasas. Asignu armilan fendon sube: ripeta premado de tiu fendo ŝanĝas inter ĝia ordinara armilo kaj ĉiu ŝaltita aldonaĵo asignita tie. La kvalito de portalvidoj agordeblas sube.
+
+@ Hold Fire and sweep the crosshair over monsters to queue targets. Release Fire to throw: the boomerang visits each target, stuns it and returns to you. Alt Fire clears the queue. The weapon slot selects a group, not a separate hotkey: press it again to cycle through the weapons in that slot. Configure stun duration and flight speed below.
+eo Tenu Pafi kaj svingu la celilon super monstroj por vicigi celojn. Malpremu Pafi por ĵeti: la bumerango vizitas ĉiun celon, svenigas ĝin kaj revenas al vi. Alt. pafo malplenigas la vicon. La armila fendo elektas grupon, ne apartan rapidklavon: premu ĝin denove por ŝanĝi inter la armiloj en tiu fendo. Agordu la daŭron de svenigo kaj la flugrapidon sube.
+
+@ Hold Fire to charge a sticky bomb using rocket ammunition; release to launch. A longer charge throws it faster. Bombs cling to walls, doors and monsters. Alt Fire detonates your planted bombs together. Place a trap, retreat, then detonate it when enemies approach. Assign any weapon slot below; repeated presses cycle through the ordinary weapon and add-ons in that slot.
+eo Tenu Pafi por ŝargi gluan bombon per raketa municio; malpremu por lanĉi. Pli longa ŝargo ĵetas ĝin pli rapide. Bomboj algluiĝas al muroj, pordoj kaj monstroj. Alt. pafo detonaciigas ĉiujn viajn metitajn bombojn samtempe. Metu kaptilon, retiriĝu, kaj detonaciigu ĝin kiam malamikoj alproksimiĝas. Asignu ajnan armilan fendon sube; ripetaj premoj ŝanĝas inter la ordinara armilo kaj la aldonaĵoj en tiu fendo.
+
+@ Fire launches a chain hook. It latches onto a permitted surface or enemy and reels you toward the anchor. Fire again or use Alt Fire to let go. Choose which materials and enemies can be hooked in Configure Parameters. Assign it to any weapon slot; repeated presses of the slot's existing binding cycle through its weapons.
+eo Pafo lanĉas ĉenan hokon. Ĝi kroĉiĝas al permesita surfaco aŭ malamiko kaj tiras vin al la ankro. Pafu denove aŭ uzu Alt. pafo por malkroĉiĝi. Elektu, kiujn materialojn kaj malamikojn eblas hoki, en Agordi parametrojn. Asignu ĝin al ajna armila fendo; ripetaj premoj de la ekzistanta asigno de la fendo ŝanĝas inter ĝiaj armiloj.
+
+@ A piercing railgun inspired by Quake III. Fire sends a slug through every enemy along its line. Each shot consumes two cells, with a 1.5 second refire interval. Damage and the spiral trail colour are configurable below. Choose a weapon slot: the slot's current binding selects and cycles the weapons assigned to it.
+eo Trapika relpafilo inspirita de Quake III. Pafo sendas kuglon tra ĉiu malamiko laŭ sia linio. Ĉiu pafo konsumas du ĉelojn, kun repafa intervalo de 1,5 sekundoj. La damaĝo kaj la koloro de la spirala spuro agordeblas sube. Elektu armilan fendon: la nuna asigno de la fendo elektas kaj ŝanĝas inter la armiloj asignitaj al ĝi.
+
+@ A Portal-style gel sprayer. Fire sprays blue Repulsion gel: land, jump or run into it to bounce, and landings on it never hurt. Alt Fire sprays orange Propulsion gel: run across it to go much faster. Gel coats floors and walls until washed off with the Powerwasher. Assign a weapon slot below; repeated presses cycle the weapons in that slot.
+eo Ĝelŝprucigilo laŭ Portal. Pafo ŝprucigas bluan Repuŝan ĝelon: surteriĝu, saltu aŭ kuru en ĝin por resalti, kaj surteriĝoj sur ĝi neniam vundas. Alt. pafo ŝprucigas oranĝan Propulsan ĝelon: kuru trans ĝi por iri multe pli rapide. Ĝelo kovras plankojn kaj murojn ĝis forlavita per la Premlavilo. Asignu armilan fendon sube; ripetaj premoj ŝanĝas inter la armiloj en tiu fendo.
+
+@ A water cannon. Fire shoots a straight jet with limited reach; Alt Fire a wide, shorter fan. The water pushes enemies back, turns projectiles aside and washes away gel and blood. Push strength is configurable below. Assign a weapon slot below; repeated presses cycle the weapons in that slot.
+eo Akvokanono. Pafo pafas rektan ŝprucon kun limigita atingo; Alt. pafo larĝan, pli mallongan ventumilon. La akvo repuŝas malamikojn, deturnas projektilojn kaj forlavas ĝelon kaj sangon. La forto de puŝo agordeblas sube. Asignu armilan fendon sube; ripetaj premoj ŝanĝas inter la armiloj en tiu fendo.
+
+@ One equipment add-on includes both night vision and thermal vision. The Change Goggles action cycles Normal, Night Vision, Thermal, then Normal again. Night vision brightens dark rooms; thermal vision highlights living enemies. Goggles do not occupy a weapon slot. Configure intensity and sensor noise below. The binding affects only this add-on.
+eo Unu ekipaĵa aldonaĵo enhavas kaj noktvidon kaj termikan vidon. La ago Ŝanĝi okulvitrojn ŝanĝas inter Normala, Noktvido, Termika, kaj denove Normala. Noktvido heligas malhelajn ĉambrojn; termika vido elstarigas vivajn malamikojn. Okulvitroj ne okupas armilan fendon. Agordu la intenson kaj sensilan bruon sube. La asigno efikas nur al ĉi tiu aldonaĵo.
+
+@ Press Dodge with a movement direction on the ground or in midair: dive forward or leap backward and sideways. Diagonals are supported. Each press launches once, with a short recovery. The player body animates in third person. Assign the Dodge action below or in Controls.
+eo Premu Eviti kun movodirekto sur la tero aŭ en la aero: plonĝu antaŭen aŭ saltu malantaŭen kaj flanken. Diagonaloj estas subtenataj. Ĉiu premo lanĉas unufoje, kun mallonga reakiriĝo. La korpo de la ludanto animaciiĝas en tria persono. Asignu la agon Eviti sube aŭ en Regiloj.
+
+@ Use the dedicated Bullet Time action to slow the whole local game to 20% speed. Hold is the default; Toggle switches on each press. The optional meter limits use in real seconds and regenerates while inactive. Disable the meter for unlimited use. Remap the action and configure duration and regeneration below.
+eo Uzu la apartan agon Kuglotempo por malrapidigi la tutan lokan ludon al 20% rapido. Teni estas la defaŭlto; Baskuli ŝaltas/malŝaltas ĉe ĉiu premo. La nedeviga mezurilo limigas la uzon en realaj sekundoj kaj regeneriĝas dum neaktiveco. Malŝaltu la mezurilon por senlima uzo. Reasignu la agon kaj agordu daŭron kaj regeneradon sube.
+
+@ Both shotguns and enemy grunts fire physical pellets with their original spread and damage. Fast default projectiles feel immediate; lower their speed to dodge incoming fire during bullet time. Configure projectile speed below, or reset it to the default of 10000 units per second.
+eo Ambaŭ ĉaspafiloj kaj malamikaj soldatoj pafas fizikajn kugletojn kun la originala disvastiĝo kaj damaĝo. Rapidaj defaŭltaj projektiloj sentiĝas tujaj; malaltigu ilian rapidon por eviti alvenantajn pafojn dum kuglotempo. Agordu la rapidon de projektiloj sube, aŭ restarigu ĝin al la defaŭlto de 10000 unuoj sekunde.
+
+@ Freezes the game for a split second when you damage an enemy, so hits feel heavier. Single player only. Choose which weapons trigger it (all, melee, ranged or explosives), how long it lasts and how much more a kill freezes. Advanced settings cover enemy toughness, damage scaling, cooldown and the longest freeze.
+eo Frostigas la ludon dum frakcio de sekundo kiam vi damaĝas malamikon, por ke trafoj sentiĝu pli pezaj. Nur unuludanta. Elektu, kiuj armiloj ekigas ĝin (ĉiuj, proksima batalo, distancaj aŭ eksplodaĵoj), kiom longe ĝi daŭras kaj kiom pli mortigo frostigas. Altnivelaj agordoj kovras fortecon de malamikoj, skaladon de damaĝo, atendotempon kaj la plej longan froston.
+
+# map packs and the Quaddicted browser
+@ Get more maps (Quaddicted)...
+eo Pliaj mapoj (Quaddicted)...
+
+@ Type to filter...
+eo Tajpu por filtri...
+
+@ Launch mod
+eo Lanĉi modon
+
+@ Start first map
+eo Komenci unuan mapon
+
+@ (running)
+eo (funkcianta)
+
+@ running
+eo funkcianta
+
+@ Recent
+eo Lastatempaj
+
+@ Name
+eo Nomo
+
+@ Dir
+eo Dosierujo
+
+@ Default
+eo Defaŭlta
+
+@ Title
+eo Titolo
+
+@ Sort: {}
+eo Ordigo: {}
+
+@ {} installed
+eo Instalitaj: {}
+
+@ {}/{} matching
+eo Kongruaj: {}/{}
+
+@ {} maps, {} completed
+eo Mapoj: {}, finitaj: {}
+
+@ {}/{} matching, {} completed
+eo Kongruaj: {}/{}, finitaj: {}
+
+@ no maps of its own
+eo neniuj propraj mapoj
+
+@ dir: {}
+eo dosierujo: {}
+
+@ base: {}
+eo bazo: {}
+
+@ Browse the Quaddicted archive of
+eo Foliumu la arkivon Quaddicted de
+
+@ single-player maps and episodes,
+eo unuludantaj mapoj kaj epizodoj,
+
+@ then download and install them
+eo poste elŝutu kaj instalu ilin
+
+@ here. Each release gets its own
+eo ĉi tie. Ĉiu eldono ricevas sian
+
+@ entry in this list.
+eo propran eron en ĉi tiu listo.
+
+@ Needs an internet connection.
+eo Bezonas retkonekton.
+
+@ Quaddicted Map Archive
+eo Mapa arkivo Quaddicted
+
+@ Newest
+eo Plej novaj
+
+@ Author
+eo Aŭtoro
+
+@ Size
+eo Grando
+
+@ Loading the map list...
+eo Ŝargante la mapliston...
+
+@ Couldn't load the map list: {}
+eo Ne eblis ŝargi la mapliston: {}
+
+@ {} single-player releases  -  F5 refreshes
+eo Unuludantaj eldonoj: {}  -  F5 refreŝigas
+
+@ {} matching
+eo Kongruaj: {}
+
+@ by {}
+eo de {}
+
+@ requires: {}
+eo postulas: {}
+
+@ maps: {}
+eo mapoj: {}
+
+@ Failed: {}
+eo Malsukcesis: {}
+
+@ Downloading... {}%
+eo Elŝutante... {}%
+
+@ Unpacking...
+eo Malpakante...
+
+@ Installed in {}/  -  Enter: play
+eo Instalita en {}/  -  Enter: ludi
+
+@ Enter: download and install
+eo Enter: elŝuti kaj instali
+
+@ unpacking
+eo malpakante
+
+@ failed
+eo malsukcesis
+
+@ installed
+eo instalita
+
+@ Downloads are not available in the browser build
+eo Elŝutoj ne disponeblas en la retumila versio
+
+@ the map list could not be read
+eo la maplisto ne legeblis
+
+@ downloading needs the curl program
+eo elŝutado bezonas la programon curl
+
+@ download failed
+eo elŝuto malsukcesis
+
+@ the download is not a valid zip
+eo la elŝutaĵo ne estas valida zip-dosiero
+
+@ nothing to install for this engine
+eo nenio instalebla por ĉi tiu motoro
+
+@ needs {} installed first
+eo unue necesas instali: {}
+
+@ couldn't unpack {}
+eo ne eblis malpaki: {}
+
+# help screen
+@ About
+eo Pri
+
+@ < Back
+eo < Reen
+
+# tr_ctx keys: English shows the short word, the key says which meaning
+@ Save (a manual save, as opposed to a quicksave or autosave)
+eo Konservi
+
+# ==== hud.txt ====
+
+# HUD, weapon and equipment wheels, sound captions and other in-game text.
+# Weapon, monster and item names follow the 2021 re-release's own translations.
+@ Axe
+eo Hakilo
+
+@ Shotgun
+eo Ĉaspafilo
+
+@ Double-Barrelled Shotgun
+eo Duobltuba ĉaspafilo
+
+@ Nailgun
+eo Najlopafilo
+
+@ Super Nailgun
+eo Super-najlopafilo
+
+@ Grenade Launcher
+eo Granatĵetilo
+
+@ Rocket Launcher
+eo Raketĵetilo
+
+@ Thunderbolt
+eo Tondrofulmo
+
+@ Portal Gun
+eo Portalpafilo
+
+@ Boomerang
+eo Bumerango
+
+@ Stickybomb Launcher
+eo Ĵetilo de gluaj bomboj
+
+@ Railgun
+eo Relpafilo
+
+@ Hookshot
+eo Hokpafilo
+
+@ Gel Sprayer
+eo Ĝelŝprucigilo
+
+@ Powerwasher
+eo Premlavilo
+
+@ Night Vision Goggles
+eo Noktvidaj okulvitroj
+
+@ Thermal Goggles
+eo Termikaj okulvitroj
+
+@ Normal vision
+eo Normala vido
+
+@ ON
+eo ŜALTITA
+
+@ OFF
+eo MALŜALTITA
+
+@ {} (turn on)
+eo {} (ŝalti)
+
+@ {} (turn off)
+eo {} (malŝalti)
+
+@ Move mouse to select, release to toggle
+eo Movu la muson por elekti, malpremu por baskuli
+
+@ Move mouse to select, release to equip
+eo Movu la muson por elekti, malpremu por ekipi
+
+@ Release to toggle
+eo Malpremu por baskuli
+
+@ Release to equip
+eo Malpremu por ekipi
+
+@ shells
+eo kartoĉoj
+
+@ nails
+eo najloj
+
+@ rockets
+eo raketoj
+
+@ cells
+eo ĉeloj
+
+@ Kills: {}/{}
+eo Mortigoj: {}/{}
+
+@ Secrets: {}/{}
+eo Sekretoj: {}/{}
+
+@ Time {}
+eo Tempo {}
+
+@ Press any button to continue...
+eo Premu ajnan butonon por daŭrigi...
+
+@ Press any key to continue...
+eo Premu ajnan klavon por daŭrigi...
+
+@ BULLET TIME
+eo KUGLOTEMPO
+
+@ AUTO AIM
+eo AŬTOCELADO
+
+@ Crosshair
+eo Celilo
+
+@ + Marker
+eo + Marko
+
+@ Hit markers off
+eo Trafmarkoj malŝaltitaj
+
+@ On target
+eo Sur celo
+
+@ On kill
+eo Ĉe mortigo
+
+# sound captions
+@ [Secret found]
+eo [Sekreto trovita]
+
+@ [Message]
+eo [Mesaĝo]
+
+@ [Switch activated]
+eo [Ŝaltilo aktivigita]
+
+@ [Key picked up]
+eo [Ŝlosilo prenita]
+
+@ [Rune picked up]
+eo [Runo prenita]
+
+@ [Teleporter]
+eo [Teleportilo]
+
+@ [Teleport]
+eo [Teleporto]
+
+@ [Splash]
+eo [Plaŭdo]
+
+@ [Leaving water]
+eo [Elirado el akvo]
+
+@ [Door]
+eo [Pordo]
+
+@ [Platform moving]
+eo [Platformo moviĝas]
+
+@ [Button]
+eo [Butono]
+
+@ [Health picked up]
+eo [Sano prenita]
+
+@ [Armor picked up]
+eo [Kiraso prenita]
+
+@ [Quad Damage wearing off]
+eo [Kvarobla Damaĝo finiĝas]
+
+@ [Quad Damage]
+eo [Kvarobla Damaĝo]
+
+@ [Pentagram wearing off]
+eo [Pentagramo finiĝas]
+
+@ [Pentagram of Protection]
+eo [Pentagramo de Protekto]
+
+@ [Ring wearing off]
+eo [Ringo finiĝas]
+
+@ [Ring of Shadows]
+eo [Ringo de Ombroj]
+
+@ [Biosuit wearing off]
+eo [Biovesto finiĝas]
+
+@ [Biosuit]
+eo [Biovesto]
+
+@ [Item picked up]
+eo [Objekto prenita]
+
+@ [Weapon picked up]
+eo [Armilo prenita]
+
+@ [Ammo picked up]
+eo [Municio prenita]
+
+@ [Explosion]
+eo [Eksplodo]
+
+@ [Grenade launched]
+eo [Granato lanĉita]
+
+@ [Grenade bounce]
+eo [Granato resaltas]
+
+@ [Rocket fired]
+eo [Raketo pafita]
+
+@ [Nails fired]
+eo [Najloj pafitaj]
+
+@ [Lightning]
+eo [Fulmo]
+
+@ [Thunder]
+eo [Tondro]
+
+@ [Enforcer alerted]
+eo [Devigisto alarmita]
+
+@ [Grunt alerted]
+eo [Soldato alarmita]
+
+@ [Rottweiler alerted]
+eo [Rotvejlero alarmita]
+
+@ [Knight alerted]
+eo [Kavaliro alarmita]
+
+@ [Death Knight alerted]
+eo [Mortkavaliro alarmita]
+
+@ [Scrag alerted]
+eo [Skrago alarmita]
+
+@ [Ogre alerted]
+eo [Ogro alarmita]
+
+@ [Fiend alerted]
+eo [Demono alarmita]
+
+@ [Shambler alerted]
+eo [Ŝamblero alarmita]
+
+@ [Zombie groaning]
+eo [Zombio ĝemas]
+
+@ [Vore alerted]
+eo [Voro alarmita]
+
+@ [Vore attacking]
+eo [Voro atakas]
+
+@ [Spawn alerted]
+eo [Spaŭno alarmita]
+
+@ [Rotfish]
+eo [Putrofiŝo]
+
+@ [Spawn]
+eo [Spaŭno]
+
+@ [Chthon]
+eo [Chthon]
+
+@ [Hard landing]
+eo [Malmola surteriĝo]
+
+@ [Drowning]
+eo [Dronado]
+
+@ [Gasping for air]
+eo [Anhelado]
+
+@ [Burning]
+eo [Brulado]
+
+@ [Telefrag]
+eo [Telefrago]
+
+@ [Gibbed]
+eo [Dispecigita]
+
+# ==== console.txt ====
+
+# Console messages, shown translated only with con_translate 1 (Translate Console).
+# Cvar and command names stay as they are.
+@ Autosaved.
+eo Aŭtomate konservita.
+
+@ Game saved.
+eo Ludo konservita.
+
+@ Can't save now.
+eo Ne eblas konservi nun.
+
+@ This game only autosaves (No Manual Saves modifier).
+eo Ĉi tiu ludo nur aŭtomate konservas (modifilo Neniuj manaj konservoj).
+
+@ Loading {}...
+eo Ŝargado de {}...
+
+@ load failed: {}
+eo ŝargo malsukcesis: {}
+
+@ ERROR: autosave failed: {}
+eo ERARO: aŭtokonservo malsukcesis: {}
+
+@ ERROR: couldn't open {}
+eo ERARO: malfermo de {} malsukcesis
+
+@ ERROR: couldn't open {}.
+eo ERARO: malfermo de {} malsukcesis.
+
+@ ERROR: couldn't write {}: {}
+eo ERARO: skribo de {} malsukcesis: {}
+
+@ ERROR: couldn't create {}: {}
+eo ERARO: kreo de {} malsukcesis: {}
+
+@ couldn't write {}: {}
+eo skribo de {} malsukcesis: {}
+
+@ Wrote {}
+eo Skribita: {}
+
+@ screenshot failed: {}
+eo ekrankopio malsukcesis: {}
+
+@ screenshot: {}
+eo ekrankopio: {}
+
+@ No readable save available. Select save or restart the level.
+eo Neniu legebla konservo disponeblas. Elektu konservon aŭ rekomencu la nivelon.
+
+@ Unknown command "{}"
+eo Nekonata komando "{}"
+
+@ couldn't exec {}
+eo exec de {} malsukcesis
+
+@ execing {}
+eo plenumante: {}
+
+@ execing config.cfg (inherited from {})
+eo plenumante config.cfg (heredita de {})
+
+@ execing config.cfg (mod defaults)
+eo plenumante config.cfg (defaŭltoj de la modo)
+
+@ execing default.cfg (built-in)
+eo plenumante default.cfg (enkonstruita)
+
+@ {} cvars
+eo cvar-oj: {}
+
+@ {} commands
+eo komandoj: {}
+
+@ Can't "cmd", not connected
+eo Ne eblas "cmd", ne konektita
+
+@ Looking for Quake servers...
+eo Serĉante Quake-servilojn...
+
+@ Bad value, must be between 1 and 65534
+eo Malbona valoro, devas esti inter 1 kaj 65534
+
+@ Couldn't handle music file {}
+eo Ne eblis trakti la muzikdosieron {}
+
+@ Bug report written to {}
+eo Cimraporto skribita al {}
+
+@ bugreport: can't create {}: {}
+eo bugreport: kreo de {} malsukcesis: {}
+
+@ graphics preset: {}
+eo grafika antaŭagordo: {}
+
+@ Presets (r_shader_preset <name>):
+eo Antaŭagordoj (r_shader_preset <nomo>):
+
+@ Add your own .slangp presets under <game>/shaders/.
+eo Aldonu viajn proprajn .slangp-antaŭagordojn en <game>/shaders/.
+
+@ no shader preset loaded (r_shader_preset)
+eo neniu ombrigila antaŭagordo ŝargita (r_shader_preset)
+
+@ r_shader_preset: "{}" not found
+eo r_shader_preset: "{}" ne trovita
+
+@ no parameter "{}" in this preset
+eo neniu parametro "{}" en ĉi tiu antaŭagordo
+
+@ {} = {} (default {}, {}..{})
+eo {} = {} (defaŭlte {}, {}..{})
+
+@ Switching to {}...
+eo Ŝanĝante al {}...
+
+@ game: no game dir "{}" in {}
+eo game: neniu luddosierujo "{}" en {}
+
+@ game: can't find the engine executable
+eo game: ne eblas trovi la ruleblan dosieron de la motoro
+
+@ game: exec failed: {}
+eo game: exec malsukcesis: {}
+
+@ game: launch failed: {}
+eo game: lanĉo malsukcesis: {}
+
+@ loaded {} in {}s
+eo {} ŝargita en {}s
+
+@ No demos listed with startdemos
+eo Neniuj demoj listigitaj per startdemos
+
+@ Playing demo from {}.
+eo Ludante demon el {}.
+
+@ {} frames {} seconds {} fps
+eo {} kadroj {} sekundoj {} fps
+
+@ Recording to {}.
+eo Registrado al {}.
+
+@ Completed demo
+eo Demo finita
+
+@ Can't record during demo playback
+eo Ne eblas registri dum demoludado
+
+@ Relative pathnames are not allowed.
+eo Relativaj vojnomoj ne estas permesataj.
+
+@ Can't record - try again when connected
+eo Ne eblas registri - provu denove kiam konektita
+
+@ {} demo(s) in loop
+eo {} demo(j) en buklo
+
+@ Not recording a demo.
+eo Neniu demo estas registrata.
+
+@ {} joined on a gamepad
+eo {} aliĝis per ludregilo
+
+@ goggles: needs a game started with Add-ons and Goggles enabled
+eo goggles: bezonas ludon komencitan kun Aldonaĵoj kaj Okulvitroj ŝaltitaj
+
+@ equip: needs a game started with Add-ons and Goggles enabled
+eo equip: bezonas ludon komencitan kun Aldonaĵoj kaj Okulvitroj ŝaltitaj
+
+@ UDP listening on port {}
+eo UDP aŭskultas ĉe pordo {}
+
+@ UDP bind on port {} failed: {}
+eo UDP-ligo al pordo {} malsukcesis: {}
+
+@ Connection accepted by {}
+eo Konekto akceptita de {}
+
+@ Connection failed: {}
+eo Konekto malsukcesis: {}
+
+@ Couldn't resolve {}
+eo Ne eblis solvi la adreson {}
+
+@ Connecting to {}...
+eo Konektante al {}...
+
+@ Connecting to QuakeWorld server {}...
+eo Konektante al QuakeWorld-servilo {}...
+
+@ Disconnected: {}
+eo Malkonektita: {}
+
+@ Server disconnected
+eo Servilo malkonektiĝis
+
+@ Client {} connected
+eo Kliento {} konektiĝis
+
+@ Client {} timed out
+eo Kliento {} eltempiĝis
+
+@ Couldn't spawn server {}: {}
+eo Ne eblis lanĉi la servilon {}: {}
+
+@ maxplayers can not be changed while a server is running.
+eo maxplayers ne ŝanĝeblas dum servilo funkcias.
+
+@ You can't kick yourself!
+eo Vi ne povas forpeli vin mem!
+
+@ Only the server may changelevel
+eo Nur la servilo rajtas uzi changelevel
+
+@ {} renamed to {}
+eo {} ŝanĝis sian nomon al {}

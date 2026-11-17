@@ -1,0 +1,3024 @@
+# sv: the port's own text; English keys from crates/qcore/lang/*.txt.
+# Format in crates/qcore/src/lang/catalog.rs; check with tools/lang_check.py.
+
+# ==== menu.txt ====
+
+# Options pages: page names, row labels and choice values.
+@ 10% speed
+sv 10 % hastighet
+
+@ 2 split-screen
+sv 2 i delad skärm
+
+@ 3 split-screen
+sv 3 i delad skärm
+
+@ 4 split-screen
+sv 4 i delad skärm
+
+@ 5 split-screen
+sv 5 i delad skärm
+
+@ 6 split-screen
+sv 6 i delad skärm
+
+@ 2D aiming
+sv 2D-sikte
+
+@ 2x monsters
+sv 2× monster
+
+@ 3x monsters
+sv 3× monster
+
+@ 4x monsters
+sv 4× monster
+
+@ 3D resolution
+sv 3D-upplösning
+
+@ 3D view
+sv 3D-vy
+
+@ 8-bit Color
+sv 8-bitarsfärg
+
+@ Accessibility
+sv Tillgänglighet
+
+@ Acquisition Cone
+sv Infångningskon
+
+@ Activation
+sv Aktivering
+
+@ Add a ringing room tail after the cue
+sv Lägger till rumsklang efter signalen
+
+@ Add delayed repeats after the cue
+sv Lägger till fördröjda upprepningar efter signalen
+
+@ Add saturation and distortion
+sv Lägger till mättnad och distorsion
+
+@ Add-ons
+sv Tillägg
+
+@ Address
+sv Adress
+
+@ Adds fine noise to hide color banding
+sv Lägger till fint brus som döljer färgbandning
+
+@ Advanced Settings
+sv Avancerade inställningar
+
+@ Aim Assist
+sv Siktstöd
+
+@ Aim Rotation
+sv Siktrotation
+
+@ Aim Slowdown
+sv Siktinbromsning
+
+@ Aim Style
+sv Siktstil
+
+@ All
+sv Alla
+
+@ All enemies
+sv Alla fiender
+
+@ Alt Fire (Add-ons)
+sv Alternativ eld (tillägg)
+
+@ Always Run
+sv Spring alltid
+
+@ Ambient Occlusion
+sv Ambient ocklusion
+
+@ Ammo Counts
+sv Ammunitionsräknare
+
+@ Ammo Counts Position
+sv Ammunitionsräknarens position
+
+@ Ammo Pickups
+sv Upplockad ammunition
+
+@ Anisotropic
+sv Anisotropisk
+
+@ Anti-aliasing
+sv Kantutjämning
+
+@ Apply To
+sv Tillämpa på
+
+@ Armor
+sv Rustning
+
+@ Armor Position
+sv Rustningens position
+
+@ Ask
+sv Fråga
+
+@ Attack
+sv Attackera
+
+@ Audio
+sv Ljud
+
+@ Auto-aim
+sv Autosikte
+
+@ Auto-aim Settings
+sv Autosiktesinställningar
+
+@ Autosave
+sv Autospara
+
+@ Autosave Settings
+sv Autosparinställningar
+
+@ Autosave Timer
+sv Autosparintervall
+
+@ Autosaves to Keep
+sv Autosparningar att behålla
+
+@ Bass
+sv Bas
+
+@ Blip
+sv Blipp
+
+@ Blood Quality
+sv Blodkvalitet
+
+@ Blood Splatter Settings
+sv Blodstänksinställningar
+
+@ Blue
+sv Blå
+
+@ Boomerang Settings
+sv Bumeranginställningar
+
+@ Boost or cut high frequencies in decibels
+sv Höj eller sänk diskanten i decibel
+
+@ Boost or cut low frequencies in decibels
+sv Höj eller sänk basen i decibel
+
+@ Brightness
+sv Ljusstyrka
+
+@ Bullet Time (Add-ons)
+sv Bullet time (tillägg)
+
+@ Bullet Time Settings
+sv Bullet time-inställningar
+
+@ Button Glyphs
+sv Knappsymboler
+
+@ Button Size
+sv Knappstorlek
+
+@ Camera
+sv Kamera
+
+@ Caustic Intensity
+sv Kaustikintensitet
+
+@ Caustics
+sv Kaustik
+
+@ Center
+sv Mitten
+
+@ Center Message Position
+sv Mittmeddelandets position
+
+@ Center Message Time
+sv Mittmeddelandets tid
+
+@ Center View
+sv Centrera vy
+
+@ Change Color on Kill
+sv Byt färg vid dödande
+
+@ Change Color on Target
+sv Byt färg vid mål
+
+@ Chime
+sv Klockspel
+
+@ Click
+sv Klick
+
+@ Clink
+sv Klirr
+
+@ Coin
+sv Mynt
+
+@ Color
+sv Färg
+
+@ Color Filter
+sv Färgfilter
+
+@ Color of the grenade arc
+sv Färg på granatbanan
+
+@ Colored Lighting
+sv Färgad belysning
+
+@ Connect
+sv Anslut
+
+@ Contrast
+sv Kontrast
+
+@ Controls
+sv Kontroller
+
+@ Cooldown (ms)
+sv Nedkylning (ms)
+
+@ Crosshair Outline
+sv Hårkorsets kontur
+
+@ Crosshair Shape
+sv Hårkorsets form
+
+@ Crosshair Size
+sv Hårkorsets storlek
+
+@ Current Ammo
+sv Aktuell ammunition
+
+@ Current Ammo Position
+sv Aktuell ammunitions position
+
+@ Customize This Game
+sv Anpassa detta spel
+
+@ Damage
+sv Skada
+
+@ Damage Taken
+sv Mottagen skada
+
+@ Debris
+sv Bråte
+
+@ Debris Quality
+sv Bråtekvalitet
+
+@ Debris Settings
+sv Bråteinställningar
+
+@ Directional Damage
+sv Skaderiktning
+
+@ Dithering
+sv Dithering
+
+@ Dodge / Dive (Add-ons)
+sv Undanmanöver / dykning (tillägg)
+
+@ Dragging up looks down instead of up
+sv Att dra uppåt tittar nedåt i stället för uppåt
+
+@ Drive
+sv Mättnad
+
+@ Dynamic Lights
+sv Dynamiska ljus
+
+@ Echo
+sv Eko
+
+@ Enemy Health
+sv Fiendehälsa
+
+@ Enemy Wounds
+sv Fiendesår
+
+@ Enhanced Blood Splatter
+sv Förbättrat blodstänk
+
+@ Enhanced FX
+sv Förbättrade effekter
+
+@ Enhanced Models
+sv Förbättrade modeller
+
+@ Enhanced Particles
+sv Förbättrade partiklar
+
+@ Enhanced Water
+sv Förbättrat vatten
+
+@ Enhancements
+sv Förbättringar
+
+@ Equipment Wheel (Add-ons)
+sv Utrustningshjul (tillägg)
+
+@ Exploding boxes throw metal shards
+sv Exploderande lådor kastar metallsplitter
+
+@ Explosion Damage
+sv Explosionsskada
+
+@ Explosion Scorch Marks
+sv Brännmärken från explosioner
+
+@ Explosions scorch nearby solid surfaces
+sv Explosioner svärtar närliggande fasta ytor
+
+@ Explosives only
+sv Endast sprängvapen
+
+@ Extra Monsters
+sv Extra monster
+
+@ Extra Per 10 Damage (ms)
+sv Extra per 10 skada (ms)
+
+@ FX Settings
+sv Effektinställningar
+
+@ Field of View
+sv Synfält
+
+@ Firing never uses up ammo
+sv Att skjuta förbrukar aldrig ammunition
+
+@ First person
+sv Förstaperson
+
+@ Flick Time
+sv Flick-tid
+
+@ Flight Speed
+sv Flyghastighet
+
+@ Fog
+sv Dimma
+
+@ Frag Limit
+sv Fraggräns
+
+@ Freeze Duration (ms)
+sv Frysningstid (ms)
+
+@ GLQuake
+sv GLQuake
+
+@ Game Speed
+sv Spelhastighet
+
+@ Game Type
+sv Speltyp
+
+@ Gameplay
+sv Spelmekanik
+
+@ Gameplay Modifiers
+sv Spelmodifierare
+
+@ Gel Quality
+sv Gelkvalitet
+
+@ Gib Surface Painting
+sv Fläckar från köttbitar
+
+@ Gibs
+sv Köttbitar
+
+@ Gibs and heads tumble and bounce
+sv Köttbitar och huvuden rullar och studsar
+
+@ Goggle Glow Quality
+sv Glasögonens glödkvalitet
+
+@ Goggle Intensity
+sv Glasögonens intensitet
+
+@ Goggle Noise
+sv Glasögonens brus
+
+@ Goggles Settings
+sv Glasögoninställningar
+
+@ Graphics
+sv Grafik
+
+@ Green
+sv Grön
+
+@ Grenade Arc
+sv Granatbana
+
+@ Grenade Arc Settings
+sv Granatbaneinställningar
+
+@ Gun Kick
+sv Vapenrekyl
+
+@ Gyro
+sv Gyro
+
+@ Gyro & Flick Stick
+sv Gyro & flick-spak
+
+@ Gyro Active
+sv Gyro aktivt
+
+@ Gyro Aiming
+sv Gyrosikte
+
+@ HUD
+sv HUD
+
+@ HUD Style
+sv HUD-stil
+
+@ Health
+sv Hälsa
+
+@ Health Pickups
+sv Upplockad hälsa
+
+@ Health Position
+sv Hälsans position
+
+@ Health Regeneration
+sv Hälsoregenerering
+
+@ Hit & Kill Sounds
+sv Träff- & dödsljud
+
+@ Hit Doors & Lifts
+sv Träffa dörrar & hissar
+
+@ Hit Markers
+sv Träffmarkörer
+
+@ Hit Sound
+sv Träffljud
+
+@ Hitmarker Size
+sv Träffmarkörens storlek
+
+@ Hitmarker Type
+sv Träffmarkörens typ
+
+@ Hitstop Advanced
+sv Hitstop avancerat
+
+@ Hitstop Settings
+sv Hitstop-inställningar
+
+@ Hold
+sv Håll
+
+@ Hold lock-on
+sv Håll mållåsning
+
+@ Hook Enemies
+sv Haka fast fiender
+
+@ Hook Metal
+sv Haka fast i metall
+
+@ Hook Stone
+sv Haka fast i sten
+
+@ Hook Wood
+sv Haka fast i trä
+
+@ Hooking an enemy pulls you to it
+sv En fasthakad fiende drar dig till sig
+
+@ Hookshot Range
+sv Änterhakens räckvidd
+
+@ Hookshot Settings
+sv Änterhaksinställningar
+
+@ Host Game
+sv Starta spel
+
+@ How far the hook flies before it retracts
+sv Hur långt kroken flyger innan den dras tillbaka
+
+@ How visible the on-screen controls are
+sv Hur synliga skärmkontrollerna är
+
+@ Impact Lifetime
+sv Nedslagens livslängd
+
+@ Infinite Ammo
+sv Oändlig ammunition
+
+@ Input
+sv Inmatning
+
+@ Input Scale
+sv Inmatningsskala
+
+@ Interpolate Animation
+sv Interpolera animation
+
+@ Interpolate Movement
+sv Interpolera rörelse
+
+@ Invert Look
+sv Invertera vy
+
+@ Invert Mouse
+sv Invertera mus
+
+@ Invert Stick
+sv Invertera spak
+
+@ Jet Quality
+sv Strålkvalitet
+
+@ Join Game
+sv Gå med i spel
+
+@ Jump / Swim Up
+sv Hoppa / simma upp
+
+@ Jump again in mid-air
+sv Hoppa igen i luften
+
+@ Jumps
+sv Hopp
+
+@ Keys & Powerups
+sv Nycklar & power-ups
+
+@ Keys & Powerups Position
+sv Position för nycklar & power-ups
+
+@ Kill Bonus (x)
+sv Dödsbonus (x)
+
+@ Kill Sound
+sv Dödsljud
+
+@ Knock
+sv Knack
+
+@ Left
+sv Vänster
+
+@ Length of the motion blur streaks
+sv Längden på rörelseoskärpans strimmor
+
+@ Lifetime (seconds)
+sv Livslängd (sekunder)
+
+@ Live Portal Views
+sv Levande portalvyer
+
+@ Live View Distance
+sv Avstånd för levande vy
+
+@ Local Players
+sv Lokala spelare
+
+@ Local red wounds follow enemy animation
+sv Lokala röda sår följer fiendens animation
+
+@ Lock Indicator
+sv Låsindikator
+
+@ Long falls don't hurt
+sv Långa fall skadar inte
+
+@ Longest Freeze (ms)
+sv Längsta frysning (ms)
+
+@ Look Down
+sv Titta ner
+
+@ Look Speed
+sv Tittkänslighet
+
+@ Look Up
+sv Titta upp
+
+@ Main Menu Music
+sv Huvudmenymusik
+
+@ Max FPS
+sv Max FPS
+
+@ Max Players
+sv Max spelare
+
+@ Maximum Impacts
+sv Max antal nedslag
+
+@ Maximum Marks
+sv Max antal märken
+
+@ Maximum Range
+sv Maximal räckvidd
+
+@ Melee only
+sv Endast närstrid
+
+@ Message Background
+sv Meddelandebakgrund
+
+@ Message Text Size
+sv Meddelandetextens storlek
+
+@ Messages & Captions
+sv Meddelanden & undertexter
+
+@ Meter Duration (real seconds)
+sv Mätarens tid (verkliga sekunder)
+
+@ Minimum Damage
+sv Minsta skada
+
+@ Mode
+sv Läge
+
+@ Modern Console
+sv Modern konsol
+
+@ Modern HUD Layout
+sv Modern HUD-layout
+
+@ Most recent save
+sv Senaste sparning
+
+@ Motion Blur
+sv Rörelseoskärpa
+
+@ Motion Blur Amount
+sv Rörelseoskärpans styrka
+
+@ Motion Blur Quality
+sv Rörelseoskärpans kvalitet
+
+@ Mouse & Keyboard
+sv Mus & tangentbord
+
+@ Mouse Speed
+sv Mushastighet
+
+@ Move Back
+sv Gå bakåt
+
+@ Move Forward
+sv Gå framåt
+
+@ Music Volume
+sv Musikvolym
+
+@ Next Weapon
+sv Nästa vapen
+
+@ No Drowning
+sv Ingen drunkning
+
+@ No Fall Damage
+sv Ingen fallskada
+
+@ No Manual Saves
+sv Inga manuella sparningar
+
+@ No Self Damage
+sv Ingen självskada
+
+@ Noise Filter
+sv Brusfilter
+
+@ Normal Color
+sv Normal färg
+
+@ Notify Message Position
+sv Notismeddelandets position
+
+@ Notify Message Time
+sv Notismeddelandets tid
+
+@ Number of splatter rays per blood impact
+sv Antal stänkstrålar per blodträff
+
+@ Off
+sv Av
+
+@ On Death
+sv Vid död
+
+@ On Kill Color
+sv Färg vid dödande
+
+@ On Target Color
+sv Färg vid mål
+
+@ Opacity
+sv Opacitet
+
+@ Opacity of the grenade arc
+sv Granatbanans opacitet
+
+@ Pants Color
+sv Byxfärg
+
+@ Particle Quality
+sv Partikelkvalitet
+
+@ Particles
+sv Partiklar
+
+@ Physical Nail Impacts
+sv Fysiska spiknedslag
+
+@ Pistol Start
+sv Pistolstart
+
+@ Pitch
+sv Tonhöjd
+
+@ Pitch Sensitivity
+sv Vertikal känslighet
+
+@ Playback Speed
+sv Uppspelningshastighet
+
+@ Player Setup
+sv Spelarinställningar
+
+@ Pop
+sv Popp
+
+@ Portal Gun Settings
+sv Portalpistolinställningar
+
+@ Portal Recursion
+sv Portalrekursion
+
+@ Portal View Quality
+sv Portalvyns kvalitet
+
+@ Preview Sound
+sv Förhandslyssna
+
+@ Previous Weapon
+sv Föregående vapen
+
+@ Projectile Shotguns Settings
+sv Projektilhagelgevärsinställningar
+
+@ Projectile Speed (units/s)
+sv Projektilhastighet (enheter/s)
+
+@ Purple
+sv Lila
+
+@ Push
+sv Knuff
+
+@ Push Strength
+sv Knuffstyrka
+
+@ Quick Load
+sv Snabbladda
+
+@ Quick Save
+sv Snabbspara
+
+@ Railgun Settings
+sv Railgun-inställningar
+
+@ Ranged only
+sv Endast avstånd
+
+@ Reacquire While Held
+sv Lås om medan hållen
+
+@ Red
+sv Röd
+
+@ Reduce Motion
+sv Minska rörelse
+
+@ Regen (seconds per second)
+sv Regen (sekunder per sekund)
+
+@ Render Scale
+sv Renderingsskala
+
+@ Reverb
+sv Rumsklang
+
+@ Right
+sv Höger
+
+@ Ripple Intensity
+sv Krusningsintensitet
+
+@ Ripples
+sv Krusningar
+
+@ Roll Sensitivity
+sv Rollkänslighet
+
+@ Rumble
+sv Vibration
+
+@ Run
+sv Spring
+
+@ Save on All Enemies Killed
+sv Spara när alla fiender dödats
+
+@ Save on All Secrets Found
+sv Spara när alla hemligheter hittats
+
+@ Save on Level Entry
+sv Spara vid banstart
+
+@ Save on Secret Found
+sv Spara vid hittad hemlighet
+
+@ Scoreboard
+sv Resultattavla
+
+@ Screen Flashes
+sv Skärmblixtar
+
+@ Screen Shader
+sv Skärmshader
+
+@ Screen Shake
+sv Skärmskakning
+
+@ Search LAN
+sv Sök i LAN
+
+@ Seconds a center-screen message stays up
+sv Sekunder ett mittmeddelande visas
+
+@ See Through Portals
+sv Se genom portaler
+
+@ See-through Teleporters
+sv Genomskinliga teleportrar
+
+@ Shirt Color
+sv Tröjfärg
+
+@ Shotgun Bullet Decals
+sv Hagelmärken
+
+@ Shoulder left
+sv Axel vänster
+
+@ Shoulder right
+sv Axel höger
+
+@ Show FPS
+sv Visa FPS
+
+@ Show Face
+sv Visa ansikte
+
+@ Shrapnel
+sv Splitter
+
+@ Size of on-screen messages and captions
+sv Storlek på meddelanden och undertexter på skärmen
+
+@ Skill
+sv Svårighetsgrad
+
+@ Sky Fog
+sv Himmelsdimma
+
+@ Smooths the stepped movement of monsters
+sv Jämnar ut monstrens hackiga rörelser
+
+@ Sound
+sv Ljud
+
+@ Sound Captions
+sv Ljudtextning
+
+@ Sound Volume
+sv Ljudvolym
+
+@ Speed Blur
+sv Fartoskärpa
+
+@ Splashes
+sv Stänk
+
+@ Splatter Amount
+sv Stänkmängd
+
+@ Splatter Size
+sv Stänkstorlek
+
+@ Start Game
+sv Starta spelet
+
+@ Staying underwater doesn't hurt
+sv Att stanna under vatten skadar inte
+
+@ Stick Look Pitch
+sv Spakvy vertikalt
+
+@ Stick Look Yaw
+sv Spakvy horisontellt
+
+@ Strafe Left
+sv Sidsteg vänster
+
+@ Strafe Right
+sv Sidsteg höger
+
+@ Strength of the surface swell and rings
+sv Styrkan på ytans dyningar och ringar
+
+@ Stun Duration
+sv Bedövningstid
+
+@ Style
+sv Stil
+
+@ Supersampling
+sv Supersampling
+
+@ Surface Hit Effects
+sv Träffeffekter på ytor
+
+@ Swim Down
+sv Simma ner
+
+@ Targets
+sv Mål
+
+@ Teamplay
+sv Lagspel
+
+@ Texture Filter
+sv Texturfilter
+
+@ Third person
+sv Tredjeperson
+
+@ Thud
+sv Duns
+
+@ Tick
+sv Tick
+
+@ Time Limit
+sv Tidsgräns
+
+@ Time Stretch
+sv Tidssträckning
+
+@ Toggle Attack
+sv Växla attack
+
+@ Toggle Run
+sv Växla spring
+
+@ Toggle auto-aim
+sv Växla autosikte
+
+@ Touch Controls
+sv Pekskärmskontroller
+
+@ Touchscreen
+sv Pekskärm
+
+@ Tough Enemy Health
+sv Hälsa för tuffa fiender
+
+@ Tough enemies only
+sv Endast tuffa fiender
+
+@ Trail Colour
+sv Spårfärg
+
+@ Translate Console
+sv Översätt konsolen
+
+@ Translucent Water
+sv Genomskinligt vatten
+
+@ Treble
+sv Diskant
+
+@ Turn Left
+sv Sväng vänster
+
+@ Turn Right
+sv Sväng höger
+
+@ Underwater FX
+sv Undervattenseffekter
+
+@ Use Bullet Time Meter
+sv Använd bullet time-mätare
+
+@ VSync
+sv VSync
+
+@ View Bob
+sv Gungande vy
+
+@ Viewmodels
+sv Vapenmodeller
+
+@ Volume
+sv Volym
+
+@ Water Opacity
+sv Vattnets opacitet
+
+@ Water Quality
+sv Vattenkvalitet
+
+@ Water Settings
+sv Vatteninställningar
+
+@ Weapon Wheel
+sv Vapenhjul
+
+@ Weapon Wheel Slowdown
+sv Vapenhjulets inbromsning
+
+@ Weapons
+sv Vapen
+
+@ Weapons Position
+sv Vapnens position
+
+@ Where center-screen messages appear
+sv Var mittmeddelanden visas
+
+@ Where pickup and event messages appear
+sv Var upplocknings- och händelsemeddelanden visas
+
+@ White
+sv Vit
+
+@ Yaw Sensitivity
+sv Horisontell känslighet
+
+@ Yellow
+sv Gul
+
+# lowercase choice values
+@ T
+sv T
+
+@ always
+sv alltid
+
+@ auto
+sv auto
+
+@ banded
+sv bandad
+
+@ borderless
+sv kantlöst
+
+@ bottom center
+sv nere i mitten
+
+@ bottom left
+sv nere till vänster
+
+@ bottom right
+sv nere till höger
+
+@ box
+sv ruta
+
+@ broken square
+sv bruten kvadrat
+
+@ classic
+sv klassisk
+
+@ coarse
+sv grov
+
+@ cooperative
+sv samarbete
+
+@ cross
+sv kors
+
+@ cross + dot
+sv kors + punkt
+
+@ cyan
+sv cyan
+
+@ dashed
+sv streckad
+
+@ deathmatch
+sv deathmatch
+
+@ deuteranopia
+sv deuteranopi
+
+@ diagonal streaks
+sv diagonala streck
+
+@ diamond
+sv romb
+
+@ dot
+sv punkt
+
+@ double
+sv dubbel
+
+@ double chevrons
+sv dubbla vinklar
+
+@ double diagonals
+sv dubbla diagonaler
+
+@ easy
+sv lätt
+
+@ fine
+sv fin
+
+@ fit output
+sv anpassa till utdata
+
+@ flick stick
+sv flick-spak
+
+@ fullscreen
+sv helskärm
+
+@ gap cross
+sv öppet kors
+
+@ green
+sv grön
+
+@ grey
+sv grå
+
+@ half speed
+sv halv hastighet
+
+@ hard
+sv svår
+
+@ high
+sv hög
+
+@ huge
+sv enorm
+
+@ immersive
+sv inlevelse
+
+@ intense
+sv intensiv
+
+@ large
+sv stor
+
+@ larger
+sv större
+
+@ largest
+sv störst
+
+@ linear
+sv linjär
+
+@ low
+sv låg
+
+@ lower
+sv nedre
+
+@ magenta
+sv magenta
+
+@ medium
+sv medel
+
+@ middle
+sv mitten
+
+@ middle left
+sv mitten vänster
+
+@ middle right
+sv mitten höger
+
+@ modern
+sv modern
+
+@ nearest
+sv närmaste
+
+@ nightmare
+sv mardröm
+
+@ nintendo
+sv Nintendo
+
+@ no team damage
+sv ingen lagskada
+
+@ none
+sv ingen
+
+@ normal
+sv normal
+
+@ off
+sv av
+
+@ off while held
+sv av medan hållen
+
+@ on
+sv på
+
+@ only while held
+sv bara medan hållen
+
+@ playstation
+sv PlayStation
+
+@ protanopia
+sv protanopi
+
+@ quarter speed
+sv kvartshastighet
+
+@ red
+sv röd
+
+@ short diagonals
+sv korta diagonaler
+
+@ single
+sv enkel
+
+@ small
+sv liten
+
+@ solid
+sv heldragen
+
+@ spectacle
+sv spektakel
+
+@ subtle
+sv diskret
+
+@ team damage
+sv lagskada
+
+@ top center
+sv uppe i mitten
+
+@ top left
+sv uppe till vänster
+
+@ top right
+sv uppe till höger
+
+@ triple
+sv trippel
+
+@ tritanopia
+sv tritanopi
+
+@ upper
+sv övre
+
+@ white
+sv vit
+
+@ whole screen
+sv hela skärmen
+
+@ windowed
+sv fönster
+
+@ xbox
+sv Xbox
+
+@ yellow
+sv gul
+
+# ==== tooltips.txt ====
+
+# Options help lines (tooltips) and reasons for disabled rows.
+@ 2D aiming turns the view continuously with the right stick; flick stick snaps the view to where you push the stick, then turning the stick rotates it
+sv 2D-sikte vrider vyn steglöst med höger spak; flick-spak riktar vyn direkt dit du trycker spaken, och att vrida spaken roterar den sedan
+
+@ 3D resolution relative to the window; the UI stays sharp
+sv 3D-upplösning i förhållande till fönstret; gränssnittet förblir skarpt
+
+@ 3D view keeps the HUD and menus sharp; whole screen runs them through the shader too
+sv 3D-vy håller HUD och menyer skarpa; hela skärmen skickar även dem genom shadern
+
+@ A Quake III style railgun: a slug that pierces every enemy on its line, using 2 cells a shot and refiring every 1.5 s; select it through its assigned weapon slot (Add-ons)
+sv En railgun i Quake III-stil: en projektil som går igenom varje fiende i sin linje, 2 celler per skott och nytt skott var 1,5 s; välj den via sin tilldelade vapenplats (tillägg)
+
+@ A Zelda-style hookshot: fire sends a chain hook out; it latches onto hookable surfaces or enemies and reels you in; fire again to let go
+sv En änterhake i Zelda-stil: eld skickar ut en kedjekrok som fastnar i lämpliga ytor eller fiender och drar in dig; skjut igen för att släppa
+
+@ Also translates the engine's console messages; off keeps them in English
+sv Översätter även motorns konsolmeddelanden; av behåller dem på engelska
+
+@ Automatically acquire another enemy while holding Lock-on after losing a target
+sv Lås automatiskt på en annan fiende medan Mållåsning hålls efter att ett mål förlorats
+
+@ Blends between animation frames of monsters and weapons
+sv Tonar mellan animationsbildrutor för monster och vapen
+
+@ Blood stains surfaces and bodies; cosmetic, independent of particle packs
+sv Blod fläckar ytor och kroppar; rent kosmetiskt, oberoende av partikelpaket
+
+@ Bloom glow around bright lights and heat sources; medium uses 4 taps, high uses 8, low disables halo taps
+sv Bloom-glöd kring starka ljus och värmekällor; medel använder 4 samplingar, hög 8, låg stänger av halon
+
+@ Blurs fast-moving monsters, projectiles and doors (not camera turns)
+sv Gör snabba monster, projektiler och dörrar suddiga (inte kameravridningar)
+
+@ Blurs the screen edges during fast falls and launches; keeps the centre clear. Reduce Motion disables it
+sv Gör skärmkanterna suddiga vid snabba fall och avfärder; mitten förblir skarp. Minska rörelse stänger av det
+
+@ Brightness of the underwater light patterns
+sv Ljusstyrkan på ljusmönstren under vatten
+
+@ Caps mark count, lifetime, airborne droplets and wound/gib painting; low skips enemy wounds and gib trails
+sv Begränsar antal märken, livslängd, droppar i luften och sår-/köttbitsfläckar; låg hoppar över fiendesår och köttbitsspår
+
+@ Caps shader input at output size so 200% render scale keeps 3D sharpness without 4x shader cost; low scales stay low-res
+sv Begränsar shaderns indata till utdatastorleken så att 200 % renderingsskala behåller 3D-skärpan utan fyrdubbel shaderkostnad; låga skalor förblir lågupplösta
+
+@ Classic: the original status bar; modern: compact elements at the screen edges
+sv Klassisk: den ursprungliga statusraden; modern: kompakta element vid skärmkanterna
+
+@ Coat atlas resolution, rebuild rate and shader detail: low builds smaller coats less often with fast shading; high uses full detail
+sv Beläggningsatlasens upplösning, ombyggnadstakt och shaderdetalj: låg bygger mindre lager mer sällan med snabb skuggning; hög använder full detalj
+
+@ Colour of the railgun's spiral trail; split-screen players each get the next colour along
+sv Färg på railgunens spiralspår; i delad skärm får varje spelare nästa färg i tur
+
+@ Damage the railgun deals to each enemy it passes through (Quake III: 100)
+sv Skada som railgunen gör på varje fiende den går igenom (Quake III: 100)
+
+@ Dark backdrop behind on-screen messages for readability
+sv Mörk bakgrund bakom meddelanden på skärmen för bättre läsbarhet
+
+@ Dark border keeps the crosshair visible on any background
+sv Mörk kant håller hårkorset synligt mot alla bakgrunder
+
+@ Darkens corners and contact areas where geometry meets; higher quality is sharper
+sv Gör hörn och kontaktytor där geometri möts mörkare; högre kvalitet är skarpare
+
+@ Debris lands on and is carried or shoved by doors, lifts and platforms
+sv Bråte landar på och bärs eller knuffas av dörrar, hissar och plattformar
+
+@ Detail for caustics, ripples and splashes: low uses smaller budgets and shorter view distance; high uses larger budgets and farther view distance
+sv Detalj för kaustik, krusningar och stänk: låg använder mindre budget och kortare synavstånd; hög större budget och längre synavstånd
+
+@ Disabled while Enhanced Particles is on: its particles replace the GLQuake and Classic styles
+sv Inaktiverat när Förbättrade partiklar är på: dess partiklar ersätter stilarna GLQuake och klassisk
+
+@ Disabled while Enhanced Water is on: its own underwater effects replace the classic and GLQuake view warps
+sv Inaktiverat när Förbättrat vatten är på: dess egna undervattenseffekter ersätter den klassiska och GLQuake-förvrängningen
+
+@ Draw the predicted grenade path as a solid or dashed line
+sv Rita den förutsagda granatbanan som heldragen eller streckad linje
+
+@ Draw the view out of the linked portal inside each portal; off shows flat discs (fastest)
+sv Visar vyn från den länkade portalen inuti varje portal; av visar platta skivor (snabbast)
+
+@ Droplets spray up when things enter or leave water, slime or lava
+sv Droppar sprutar upp när något går ner i eller lämnar vatten, slem eller lava
+
+@ Emulates the original 8-bit palette of software rendering
+sv Emulerar den ursprungliga 8-bitarspaletten från mjukvarurenderingen
+
+@ Every level starts with only the shotgun and axe, as if started fresh
+sv Varje bana börjar med bara hagelgeväret och yxan, som vid en ny start
+
+@ Explosion damage for each remotely detonated sticky bomb
+sv Explosionsskada för varje fjärrdetonerad klisterbomb
+
+@ Extra freeze milliseconds for every 10 damage dealt, so heavy hits stop longer
+sv Extra frysmillisekunder för varje 10 skada, så att tunga träffar stannar längre
+
+@ First person, a third-person camera centered behind the player, or one over the right or left shoulder; third person hides viewmodels
+sv Förstaperson, en tredjepersonskamera centrerad bakom spelaren eller en över höger eller vänster axel; tredjeperson döljer vapenmodeller
+
+@ Flash the selected marker on confirmed hits; colors are shared with the crosshair
+sv Blinka den valda markören vid bekräftade träffar; färgerna delas med hårkorset
+
+@ Freeze for every enemy, or only for enemies that were tough before the hit
+sv Frys för varje fiende, eller bara för fiender som var tuffa före träffen
+
+@ Freeze the game briefly when you damage an enemy; single player with add-ons only
+sv Fryser spelet kort när du skadar en fiende; endast enspelare med tillägg
+
+@ Gibs tumble and barrels throw shrapnel; shots and blasts push them (cosmetic only)
+sv Köttbitar rullar och tunnor kastar splitter; skott och explosioner knuffar dem (rent kosmetiskt)
+
+@ Health an enemy must have had before the hit to count as tough
+sv Hälsa en fiende måste ha haft före träffen för att räknas som tuff
+
+@ Hits dealing less damage than this do not freeze the game; the default 10 skips nails and shotgun pellets
+sv Träffar med mindre skada än detta fryser inte spelet; standardvärdet 10 hoppar över spikar och hagel
+
+@ Hold fire and sweep the crosshair over monsters to queue them, release to throw: it stuns each in turn and flies back; alt-fire clears the queue
+sv Håll eld och svep hårkorset över monster för att köa dem, släpp för att kasta: den bedövar var och en i tur och flyger tillbaka; alternativ eld tömmer kön
+
+@ Hold: keep Lock-on held. Toggle: press Auto-aim Toggle to enable automatic acquisition. Click look stick to switch targets
+sv Håll: håll Mållåsning nedtryckt. Växla: tryck Växla autosikte för att slå på automatisk låsning. Klicka på tittspaken för att byta mål
+
+@ How close an enemy must be to the crosshair for automatic acquisition in toggle mode (degrees)
+sv Hur nära hårkorset en fiende måste vara för automatisk låsning i växelläge (grader)
+
+@ How far the view tilts up and down when you tilt the controller (pitch axis)
+sv Hur långt vyn lutar upp och ner när du lutar handkontrollen (nickaxel)
+
+@ How far the view turns left and right when you turn the controller (yaw axis)
+sv Hur långt vyn vrids åt vänster och höger när du vrider handkontrollen (giraxel)
+
+@ How far the view turns when you drag on the right half of the screen
+sv Hur långt vyn vrids när du drar på skärmens högra halva
+
+@ How fast the boomerang flies (units per second)
+sv Hur snabbt bumerangen flyger (enheter per sekund)
+
+@ How hard shots and explosions push debris around
+sv Hur hårt skott och explosioner knuffar omkring bråte
+
+@ How hard the Powerwasher's water pushes enemies
+sv Hur hårt högtryckstvättens vatten knuffar fiender
+
+@ How long a hit freezes the game, in milliseconds
+sv Hur länge en träff fryser spelet, i millisekunder
+
+@ How strongly fog covers the sky when fog is on
+sv Hur starkt dimman täcker himlen när dimma är på
+
+@ How the view distorts underwater: Classic ripples the whole screen like software Quake, GLQuake slowly stretches and squashes the view
+sv Hur vyn förvrängs under vatten: klassisk låter hela skärmen krusa sig som mjukvaru-Quake, GLQuake sträcker och trycker ihop vyn långsamt
+
+@ Ignores gyro rotation slower than this many degrees per second, to hide hand tremor
+sv Ignorerar gyrorotation långsammare än så många grader per sekund, för att dölja handskakningar
+
+@ Immersive: appears for a few seconds only when its value changes
+sv Inlevelse: visas några sekunder bara när värdet ändras
+
+@ Keeps textures sharp on floors and walls seen at steep angles
+sv Håller texturer skarpa på golv och väggar som ses i branta vinklar
+
+@ Lights from rockets, muzzle flashes and explosions brighten nearby walls
+sv Ljus från raketer, mynningsflammor och explosioner lyser upp närliggande väggar
+
+@ Liquid surfaces swell and ring out where things move through them
+sv Vätskeytor gungar och bildar ringar där något rör sig genom dem
+
+@ Lobs sticky bombs (rockets ammo) that cling to walls, doors and monsters; alt-fire detonates them all
+sv Kastar klisterbomber (raketammunition) som fastnar på väggar, dörrar och monster; alternativ eld detonerar alla
+
+@ Look of the classic particles: GLQuake draws soft round dots, Classic draws square pixels like software Quake
+sv Utseendet på klassiska partiklar: GLQuake ritar mjuka runda prickar, klassisk ritar fyrkantiga pixlar som mjukvaru-Quake
+
+@ Low skips the background smear halo and uses fewer blur samples; high keeps the full halo and smoother streaks
+sv Låg hoppar över bakgrundens utsmetade halo och använder färre oskärpesamplingar; hög behåller hela halon och mjukare strimmor
+
+@ Low: hard particle edges, half the scripted particles and fewer hit sparks. Medium: soft edges. High: soft edges checked per MSAA sample, most hit sparks
+sv Låg: hårda partikelkanter, hälften av de skriptade partiklarna och färre träffgnistor. Medel: mjuka kanter. Hög: mjuka kanter per MSAA-sampling, flest gnistor
+
+@ Marks fade out before expiring; oldest marks are recycled at the limit
+sv Märken bleknar innan de försvinner; de äldsta återanvänds vid gränsen
+
+@ Max nested portal reflections to draw; each level redraws the scene
+sv Max antal nästlade portalvyer att rita; varje nivå ritar om scenen
+
+@ Max portals per screen with a live view; each one redraws the scene
+sv Max antal portaler per skärm med levande vy; var och en ritar om scenen
+
+@ Maximum distance for acquiring and keeping an enemy locked
+sv Maximalt avstånd för att låsa på och hålla en fiende
+
+@ Minimum gap between freezes, so shotgun pellets and rapid fire count once; kills ignore it
+sv Minsta mellanrum mellan frysningar, så att hagel och snabbeld räknas en gång; dödande ignorerar det
+
+@ Modern terminal console with autocomplete popup, history search, ANSI colors, bash shell and piping; off uses the classic Quake console
+sv Modern terminalkonsol med autokompletteringsruta, historiksökning, ANSI-färger, bash-skal och rörledningar; av använder den klassiska Quake-konsolen
+
+@ Monsters take proportionally less damage at higher values; above 100% is harder
+sv Monster tar proportionellt mindre skada vid högre värden; över 100 % är svårare
+
+@ Moving gibs leave blood on surfaces they touch
+sv Köttbitar i rörelse lämnar blod på ytor de rör vid
+
+@ Multiplier on the freeze when the hit kills the enemy; 1 means no extra
+sv Multiplikator för frysningen när träffen dödar fienden; 1 betyder ingen extra
+
+@ Multiplies ammo from pickups (up to the normal carry limit); below 100% is harder
+sv Multiplicerar ammunition från upplockningar (upp till normal bärgräns); under 100 % är svårare
+
+@ Multiplies health from pickups (up to 100, or the item's own limit); below 100% is harder
+sv Multiplicerar hälsa från upplockningar (upp till 100 eller föremålets egen gräns); under 100 % är svårare
+
+@ Nails stick to wood and bodies; hard surfaces deflect them to the floor
+sv Spikar fastnar i trä och kroppar; hårda ytor studsar ner dem i golvet
+
+@ Nearest keeps crisp classic pixels; linear smooths textures
+sv Närmaste behåller skarpa klassiska pixlar; linjär jämnar ut texturer
+
+@ New Game: Add-ons
+sv Nytt spel: tillägg
+
+@ New Game: Customize
+sv Nytt spel: anpassa
+
+@ Night vision: how much dark areas are brightened; thermal: how strongly heat stands out
+sv Mörkerseende: hur mycket mörka områden ljusas upp; värmekamera: hur tydligt värme framträder
+
+@ Night-vision and thermal goggles, cycle normal, night vision and thermal with Change Goggles (Add-ons), or use the Equipment Wheel
+sv Mörkerseende- och värmeglasögon: växla mellan normal, mörkerseende och värme med Byt glasögon (tillägg), eller använd utrustningshjulet
+
+@ No single freeze lasts longer than this, however much damage or kill bonus adds
+sv Ingen enskild frysning varar längre än detta, oavsett hur mycket skada eller dödsbonus som tillkommer
+
+@ Oldest marks and nails are recycled at this shared limit
+sv De äldsta märkena och spikarna återanvänds vid denna gemensamma gräns
+
+@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
+sv Skärmspak och knappar: auto visar dem efter en beröring och döljer dem när en annan enhet används
+
+@ Only autosaves: quicksaves and the Save menu are off
+sv Endast autosparningar: snabbsparning och Spara-menyn är avstängda
+
+@ Place every weapon at the center, right or left of the view, or hide all viewmodels
+sv Placera varje vapen i mitten, till höger eller vänster i vyn, eller dölj alla vapenmodeller
+
+@ Play your chosen hit or kill cue when you damage an enemy
+sv Spela ditt valda träff- eller dödsljud när du skadar en fiende
+
+@ Playback speed: faster sounds shorter and higher
+sv Uppspelningshastighet: snabbare låter kortare och ljusare
+
+@ Plays the Quake theme in the main menu when no game is running
+sv Spelar Quake-temat i huvudmenyn när inget spel pågår
+
+@ Portals farther away than this are drawn as flat discs
+sv Portaler längre bort än detta ritas som platta skivor
+
+@ Press attack once to keep firing, again to stop
+sv Tryck attack en gång för att fortsätta skjuta, igen för att sluta
+
+@ Press run once to switch between running and walking
+sv Tryck spring en gång för att växla mellan att springa och gå
+
+@ Raise or lower the tone independently of sound length
+sv Höj eller sänk tonen oberoende av ljudets längd
+
+@ Red screen edges show where damage came from: top is front, bottom is behind; Screen Flashes controls their strength
+sv Röda skärmkanter visar varifrån skadan kom: överst är framför, nederst är bakom; Skärmblixtar styr deras styrka
+
+@ Replaces the classic dot particles with glowing sparks, smoke and blood; mods with their own particle effects keep them
+sv Ersätter de klassiska prickpartiklarna med glödande gnistor, rök och blod; moddar med egna partikeleffekter behåller dem
+
+@ Resolution and detail inside portal and teleporter views; lower tiers trim nested effects
+sv Upplösning och detalj i portal- och teleportervyer; lägre nivåer skalar ner nästlade effekter
+
+@ Rippling light patterns on surfaces under water and slime
+sv Krusande ljusmönster på ytor under vatten och slem
+
+@ Scales all damage you take; above 100% is harder
+sv Skalar all skada du tar; över 100 % är svårare
+
+@ Screen edge for this element; elements on the same spot stack
+sv Skärmkant för detta element; element på samma plats staplas
+
+@ Seconds a monster hit by the boomerang stays stunned
+sv Sekunder ett monster som träffats av bumerangen förblir bedövat
+
+@ Seconds impact marks and stuck nails stay before fading out; independent of Particle Quality
+sv Sekunder som nedslagsmärken och fastsittande spikar finns kvar innan de bleknar; oberoende av Partikelkvalitet
+
+@ Seconds messages at the top of the screen stay up
+sv Sekunder som meddelanden högst upp på skärmen visas
+
+@ Seconds the flick stick snap takes; lower is faster
+sv Sekunder som flick-spakens snäpp tar; lägre är snabbare
+
+@ See through enhanced water; enables Water Opacity
+sv Se genom förbättrat vatten; aktiverar Vattnets opacitet
+
+@ Sensor grain, scanlines and flicker of the goggle image
+sv Sensorkorn, bildlinjer och flimmer i glasögonbilden
+
+@ Shades every anti-aliasing sample; needs Anti-aliasing on
+sv Skuggar varje kantutjämningssampling; kräver att Kantutjämning är på
+
+@ Shifts colors so they stay distinct for the chosen color blindness
+sv Förskjuter färger så att de förblir urskiljbara för den valda färgblindheten
+
+@ Shotgun hits leave small surface marks (cosmetic only)
+sv Hagelträffar lämnar små märken på ytor (rent kosmetiskt)
+
+@ Show corner ticks at screen centre while locked, even with Crosshair off
+sv Visar hörnmarkeringar mitt på skärmen vid låsning, även med hårkorset av
+
+@ Show where grenades and other arcing shots will fly, bounce and land; local play only, not in deathmatch
+sv Visa var granater och andra skott i båge flyger, studsar och landar; endast lokalt spel, inte i deathmatch
+
+@ Shows text for important sounds: doors, alerted enemies, secrets, pickups
+sv Visar text för viktiga ljud: dörrar, larmade fiender, hemligheter, upplockningar
+
+@ Shows the distance fog that maps and mods set; off always gives clear view
+sv Visar avståndsdimman som banor och moddar anger; av ger alltid fri sikt
+
+@ Shows the player face next to the health number
+sv Visar spelarens ansikte bredvid hälsosiffran
+
+@ Simulation detail, step rate, fade-out lifetimes and caps for gibs and shrapnel; low also skips mover collision
+sv Simuleringsdetalj, steghastighet, uttoningstider och gränser för köttbitar och splitter; låg hoppar även över kollision med rörliga delar
+
+@ Size of the on-screen buttons and move stick
+sv Storlek på skärmknapparna och rörelsespaken
+
+@ Slowly heals up to 100 health after 5 seconds without being hit
+sv Läker långsamt upp till 100 hälsa efter 5 sekunder utan att bli träffad
+
+@ Slows stick look while the crosshair is over an enemy
+sv Saktar ner spakvyn medan hårkorset är över en fiende
+
+@ Slows the game down while the weapon wheel is open
+sv Saktar ner spelet medan vapenhjulet är öppet
+
+@ Slows the whole game down; single player only. Saves and demos stay compatible with other ports
+sv Saktar ner hela spelet; endast enspelare. Sparningar och demor förblir kompatibla med andra portar
+
+@ Small camera jolt on each freeze; off with Reduce Motion
+sv Liten kameraskakning vid varje frysning; av med Minska rörelse
+
+@ Snap and track enemies in local play, including split-screen; unavailable online
+sv Lås på och följ fiender i lokalt spel, även i delad skärm; ej tillgängligt online
+
+@ Sparks, smoke, chips, splinters and splashes fly off whatever your shots hit
+sv Gnistor, rök, flisor, spån och stänk flyger från allt dina skott träffar
+
+@ Spawns extra copies of every monster around the original when a level starts
+sv Skapar extra kopior av varje monster runt originalet när en bana startar
+
+@ Strength of the full-screen flashes for damage, pickups and powerups
+sv Styrkan på helskärmsblixtar vid skada, upplockningar och power-ups
+
+@ Stretch or shorten the sound while keeping its pitch
+sv Sträck ut eller korta ljudet med bibehållen tonhöjd
+
+@ Surface opacity; requires Enhanced Water and Translucent Water
+sv Ytans opacitet; kräver Förbättrat vatten och Genomskinligt vatten
+
+@ The hook latches onto metal surfaces (metal, tech, computer panels, copper)
+sv Kroken fastnar i metallytor (metall, teknik, datorpaneler, koppar)
+
+@ The hook latches onto stone, brick, rock and any surface not recognised as wood or metal
+sv Kroken fastnar i sten, tegel, berg och alla ytor som inte känns igen som trä eller metall
+
+@ The hook latches onto wooden surfaces (texture names like wood, crate, plank)
+sv Kroken fastnar i träytor (texturnamn som wood, crate, plank)
+
+@ Turn the controller's motion sensor into a look input; needs a pad with a gyroscope
+sv Gör handkontrollens rörelsesensor till tittstyrning; kräver en handkontroll med gyroskop
+
+@ Turns off view bob, strafe tilt and the camera kick when hit or firing
+sv Stänger av gungande vy, lutning vid sidsteg och kamerastöten vid träff eller skott
+
+@ Turns on the extra liquid effects; Water Settings controls each one
+sv Slår på de extra vätskeeffekterna; Vatteninställningar styr var och en
+
+@ Turns the view to follow a moving enemy you are aiming at
+sv Vrider vyn för att följa en fiende i rörelse som du siktar på
+
+@ Turns the view when you roll the controller sideways; 0 disables it, negative reverses it
+sv Vrider vyn när du rullar handkontrollen åt sidan; 0 stänger av, negativt vänder riktningen
+
+@ Two-portal gun: fire and alt-fire place linked portals on flat walls; assign a weapon slot in Add-ons
+sv Pistol med två portaler: eld och alternativ eld placerar länkade portaler på plana väggar; tilldela en vapenplats under Tillägg
+
+@ Unlocks the FX Settings page: enhanced particles, impact effects and blood splatter
+sv Låser upp sidan Effektinställningar: förbättrade partiklar, nedslagseffekter och blodstänk
+
+@ Uses the 2021 re-release's smoother MD5 models (and MD3 replacements from mods) instead of the classic ones. Applies on the next map load
+sv Använder de mjukare MD5-modellerna från 2021 års nyutgåva (och MD3-ersättningar från moddar) i stället för de klassiska. Gäller från nästa banladdning
+
+@ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
+sv Använder banans färgade ljus (.lit-fil eller BSPX-block); av ger det ursprungliga vita ljuset. Gäller från nästa banladdning
+
+@ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
+sv Vattenstrålens segment, antal droppar och blank vätskeskuggning: låg använder enklare genomskinliga strålar; hög jämna, blanka strålar
+
+@ When gyro looking applies: always, off while +gyroaction is held, or only while it is held
+sv När gyrotittande gäller: alltid, av medan +gyroaction hålls, eller bara medan det hålls
+
+@ Which weapons trigger the freeze; melee covers the axe and any mod weapon used at close range without ammo
+sv Vilka vapen som utlöser frysningen; närstrid omfattar yxan och alla modvapen som används på nära håll utan ammunition
+
+@ Your own rockets and grenades don't hurt you; rocket jumps still work
+sv Dina egna raketer och granater skadar inte dig; raketsprång fungerar fortfarande
+
+# ==== ui.txt ====
+
+# Menus and pop-ups outside the options pages: save cards, launch, presets,
+# add-on browser, map packs, hints and dialogs.
+@ Select
+sv Välj
+
+@ Back
+sv Tillbaka
+
+@ Cancel
+sv Avbryt
+
+@ Confirm
+sv Bekräfta
+
+@ Scroll
+sv Rulla
+
+@ Section
+sv Avsnitt
+
+@ Bind
+sv Tilldela
+
+@ Cancel binding
+sv Avbryt tilldelning
+
+@ Clear
+sv Rensa
+
+@ Clear pad
+sv Rensa handkontroll
+
+@ Remap
+sv Ändra tilldelning
+
+@ Type
+sv Skriv
+
+@ Shift
+sv Skift
+
+@ Done
+sv Klar
+
+@ Del
+sv Del
+
+@ Space
+sv Mellanslag
+
+@ Save
+sv Spara
+
+@ Load
+sv Ladda
+
+@ Delete
+sv Radera
+
+@ Play
+sv Spela
+
+@ Yes
+sv Ja
+
+@ No
+sv Nej
+
+@ OK
+sv OK
+
+@ System
+sv System
+
+@ Language
+sv Språk
+
+@ Help
+sv Hjälp
+
+@ Fixed for this game: it was started without Customize
+sv Låst för detta spel: det startades utan Anpassa
+
+@ Press a button or key to bind (Start cancels)
+sv Tryck på en knapp eller tangent att tilldela (Start avbryter)
+
+@ Press button...
+sv Tryck på knapp...
+
+@ Press key...
+sv Tryck på tangent...
+
+@ Replace this binding?
+sv Ersätta denna tilldelning?
+
+@ is already assigned
+sv är redan tilldelad
+
+@ {} already assigned
+sv {} redan tilldelad
+
+@ Open Controls to remap Lock-on?
+sv Öppna Kontroller för att tilldela Mållåsning?
+
+@ Lock-on
+sv Mållåsning
+
+@ Auto-aim Toggle
+sv Växla autosikte
+
+@ Keyboard
+sv Tangentbord
+
+@ Controller
+sv Handkontroll
+
+# main menu, dialogs and screens
+@ Map Packs
+sv Banpaket
+
+@ Customize
+sv Anpassa
+
+@ Level Select
+sv Välj bana
+
+@ Really quit?
+sv Vill du verkligen avsluta?
+
+@ You died
+sv Du dog
+
+@ Continue from most recent save
+sv Fortsätt från senaste sparning
+
+@ Select save
+sv Välj sparning
+
+@ Restart level
+sv Starta om banan
+
+@ Return to main menu
+sv Tillbaka till huvudmenyn
+
+@ (disabled)
+sv (inaktiverad)
+
+@ (fixed for this game)
+sv (låst för detta spel)
+
+@ (off)
+sv (av)
+
+@ Apply Display Changes
+sv Tillämpa skärmändringar
+
+@ Display Mode
+sv Visningsläge
+
+@ Resolution
+sv Upplösning
+
+@ desktop
+sv skrivbord
+
+@ Preset
+sv Förinställning
+
+@ Map
+sv Bana
+
+@ Reset Shader Settings
+sv Återställ shaderinställningar
+
+@ Reset to Defaults
+sv Återställ standardvärden
+
+@ Searching...
+sv Söker...
+
+@ This game only autosaves.
+sv Det här spelet sparar bara automatiskt.
+
+@ (No Manual Saves modifier)
+sv (modifieraren Inga manuella sparningar)
+
+@ End the current game?
+sv Avsluta det pågående spelet?
+
+@ Unsaved progress will be lost.
+sv Osparade framsteg går förlorade.
+
+@ End game
+sv Avsluta spelet
+
+@ Overwrite
+sv Skriv över
+
+@ Overwrite "{}"?
+sv Skriv över ”{}”?
+
+@ Saved {}
+sv Sparat {}
+
+@ Start a new game?
+sv Starta ett nytt spel?
+
+@ New game
+sv Nytt spel
+
+@ New Game
+sv Nytt spel
+
+@ CUSTOM
+sv ANPASSAT
+
+@ Customize Experience
+sv Anpassa upplevelsen
+
+@ Disable All
+sv Inaktivera alla
+
+@ Disable All Modifications
+sv Inaktivera alla ändringar
+
+@ Saves load in other source ports too.
+sv Sparningar kan laddas i andra källportar också.
+
+@ Standard rules, no add-ons.
+sv Standardregler, inga tillägg.
+
+@ Choose skill
+sv Välj svårighetsgrad
+
+@ The current game will end
+sv Det pågående spelet avslutas
+
+@ Easy
+sv Lätt
+
+@ Normal
+sv Normal
+
+@ Hard
+sv Svår
+
+@ Nightmare
+sv Mardröm
+
+# graphics preset pop-up
+@ Choose a Graphics Preset
+sv Välj en grafikförinställning
+
+@ Classic
+sv Klassisk
+
+@ Like the re-release: enhanced models,
+sv Som nyutgåvan: förbättrade modeller,
+
+@ no added effects.
+sv inga tillagda effekter.
+
+@ Enhanced
+sv Förbättrad
+
+@ Every enhancement at its highest quality.
+sv Alla förbättringar i högsta kvalitet.
+
+@ Needs a capable GPU.
+sv Kräver ett kraftfullt grafikkort.
+
+@ Low-End
+sv Lågpresterande
+
+@ Fastest. No anti-aliasing, original
+sv Snabbast. Ingen kantutjämning, ursprungliga
+
+@ models, lowest effect quality.
+sv modeller, lägsta effektkvalitet.
+
+@ Esc keeps the defaults
+sv Esc behåller standardvärdena
+
+@ Everything can be changed later in Options.
+sv Allt kan ändras senare under Options.
+
+@ Keep Defaults
+sv Behåll standard
+
+# save and load cards
+@ Save Game
+sv Spara spel
+
+@ Load Game
+sv Ladda spel
+
+@ Autosaves
+sv Autosparningar
+
+@ newest first
+sv nyaste först
+
+@ Saves: {}
+sv Sparningar: {}
+
+@ Browse Autosaves
+sv Bläddra bland autosparningar
+
+@ Every retained autosave, newest first
+sv Alla behållna autosparningar, nyaste först
+
+@ New save
+sv Ny sparning
+
+@ Select to save your game here
+sv Välj för att spara ditt spel här
+
+@ No autosaves yet
+sv Inga autosparningar än
+
+@ Autosaves are made on level entry, secrets and more (Options > Gameplay)
+sv Autosparning sker vid banstart, hemligheter med mera (Options > Spelmekanik)
+
+@ No saves yet
+sv Inga sparningar än
+
+@ Save from the Single Player menu, or press F6 to quicksave
+sv Spara från menyn Single Player eller tryck F6 för att snabbspara
+
+@ No picture
+sv Ingen bild
+
+@ Del: delete save
+sv Del: radera sparning
+
+@ Delete "{}"?
+sv Radera ”{}”?
+
+@ This cannot be undone.
+sv Detta kan inte ångras.
+
+@ Quicksave
+sv Snabbsparning
+
+@ Autosave: {}
+sv Autosparning: {}
+
+@ unknown trigger
+sv okänd utlösare
+
+@ Latest - {}
+sv Senaste - {}
+
+@ Health {}
+sv Hälsa {}
+
+@ Armor {}
+sv Rustning {}
+
+@ Kills {}/{}
+sv Dödade {}/{}
+
+@ Secrets {}/{}
+sv Hemligheter {}/{}
+
+@ Split-screen, {} players
+sv Delad skärm, {} spelare
+
+@ Co-op
+sv Samarbete
+
+@ Customized
+sv Anpassat
+
+@ Customized, {}
+sv Anpassat, {}
+
+@ Date unavailable
+sv Datum ej tillgängligt
+
+@ Just now
+sv Alldeles nyss
+
+@ {} min ago
+sv för {} min sedan
+
+@ {} h ago
+sv för {} h sedan
+
+@ Level entry
+sv Banstart
+
+@ Secret found
+sv Hemlighet hittad
+
+@ All enemies killed
+sv Alla fiender dödade
+
+@ All secrets found
+sv Alla hemligheter hittade
+
+@ Timer
+sv Intervall
+
+# customize pages
+@ Standard rules
+sv Standardregler
+
+@ Modifiers changed: {}
+sv Ändrade modifierare: {}
+
+@ no add-ons
+sv inga tillägg
+
+@ add-ons: {}
+sv tillägg: {}
+
+@ Saves of this game are .qsa files: they need this source port.
+sv Sparningar från detta spel är .qsa-filer: de kräver denna källport.
+
+@ Nothing changed: this plays as standard Quake.
+sv Inget ändrat: detta spelas som vanliga Quake.
+
+@ Changes apply now and are saved with this game (.qsa).
+sv Ändringar gäller direkt och sparas med detta spel (.qsa).
+
+@ This game started without Customize, so its rules are fixed.
+sv Detta spel startades utan Anpassa, så dess regler är låsta.
+
+@ Start a new game and choose Customize Experience.
+sv Starta ett nytt spel och välj Anpassa upplevelsen.
+
+@ These rules apply to the next customized game.
+sv Dessa regler gäller för nästa anpassade spel.
+
+# add-on browser
+@ Fire
+sv Eld
+
+@ Alt Fire
+sv Alternativ eld
+
+@ Configure Parameters >
+sv Ställ in parametrar >
+
+@ Configure
+sv Ställ in
+
+@ Settings
+sv Inställningar
+
+@ Change slot
+sv Byt plats
+
+@ Toggle
+sv Växla
+
+@ Details
+sv Detaljer
+
+@ Enter or click the box: toggle
+sv Enter eller klick på rutan: växla
+
+@ Right / Tab / click: details
+sv Höger / Tab / klick: detaljer
+
+@ Input Remapping
+sv Ändra inmatning
+
+@ Weapon Slot
+sv Vapenplats
+
+@ Customized games save as .qsa files, which need this source port.
+sv Anpassade spel sparas som .qsa-filer, som kräver denna källport.
+
+@ This game started without Customize, so its add-ons are fixed. Customize a new game instead.
+sv Detta spel startades utan Anpassa, så dess tillägg är låsta. Anpassa ett nytt spel i stället.
+
+@ Bullet Time
+sv Bullet time
+
+@ Change Goggles
+sv Byt glasögon
+
+@ Dodge / Dive
+sv Undanmanöver / dykning
+
+@ Goggles
+sv Glasögon
+
+@ Hitstop
+sv Hitstop
+
+@ Projectile Shotguns
+sv Projektilhagelgevär
+
+@ BULLET TIME: 20%
+sv BULLET TIME: 20 %
+
+@ NORMAL SPEED
+sv NORMAL HASTIGHET
+
+@ SLOW MOTION: PHYSICAL PELLETS
+sv SLOW MOTION: FYSISKA HAGEL
+
+@ DEMONSTRATION
+sv DEMONSTRATION
+
+@ GAMEPLAY
+sv SPELMEKANIK
+
+@ LOOP
+sv SLINGA
+
+@ Preview unavailable
+sv Förhandsvisning ej tillgänglig
+
+# shader and language help lines
+@ A setting of the chosen shader; arrows step it, Enter is not needed
+sv En inställning för vald shader; piltangenterna ändrar den, Enter behövs inte
+
+@ Language of the menus, messages and the 2021 re-release's game text; System follows your computer's language
+sv Språk för menyer, meddelanden och spelets text från 2021 års nyutgåva; System följer datorns språk
+
+@ Puts every setting of the chosen shader back to the preset's defaults
+sv Återställer alla inställningar för vald shader till förinställningens standardvärden
+
+@ RetroArch slang shader on the final image: CRT, scanlines, NTSC, sharpening; add your own in <game>/shaders
+sv RetroArch slang-shader på den färdiga bilden: CRT, bildlinjer, NTSC, skärpning; lägg egna i <spel>/shaders
+
+# modern console footer
+@ Shift+PgUp/Dn: height  ` : hide
+sv Skift+PgUp/Dn: höjd  ` : dölj
+
+@ Tab: complete  Ctrl+R: search  bash | pipe
+sv Tab: komplettera  Ctrl+R: sök  bash | pipe
+
+@ ↑ +{} lines (End to jump) 
+sv ↑ +{} rader (End för att hoppa)
+
+# add-on descriptions
+@ Create two linked portals on flat walls. Fire places the first portal; Alt Fire places the second. Walk through either portal to emerge from the other. Your momentum carries through. Assign a weapon slot below: pressing that slot repeatedly cycles its ordinary weapon and every enabled add-on assigned there. Portal view quality is configurable below.
+sv Skapa två länkade portaler på plana väggar. Eld placerar den första portalen; Alternativ eld placerar den andra. Gå genom endera portalen för att komma ut ur den andra. Din rörelsemängd följer med. Tilldela en vapenplats nedan: upprepade tryck på den platsen växlar mellan dess vanliga vapen och varje aktivt tillägg som tilldelats där. Portalvyns kvalitet kan ställas in nedan.
+
+@ Hold Fire and sweep the crosshair over monsters to queue targets. Release Fire to throw: the boomerang visits each target, stuns it and returns to you. Alt Fire clears the queue. The weapon slot selects a group, not a separate hotkey: press it again to cycle through the weapons in that slot. Configure stun duration and flight speed below.
+sv Håll Eld och svep hårkorset över monster för att köa mål. Släpp Eld för att kasta: bumerangen besöker varje mål, bedövar det och återvänder till dig. Alternativ eld tömmer kön. Vapenplatsen väljer en grupp, inte en egen snabbtangent: tryck igen för att växla mellan vapnen på den platsen. Ställ in bedövningstid och flyghastighet nedan.
+
+@ Hold Fire to charge a sticky bomb using rocket ammunition; release to launch. A longer charge throws it faster. Bombs cling to walls, doors and monsters. Alt Fire detonates your planted bombs together. Place a trap, retreat, then detonate it when enemies approach. Assign any weapon slot below; repeated presses cycle through the ordinary weapon and add-ons in that slot.
+sv Håll Eld för att ladda en klisterbomb med raketammunition; släpp för att avfyra. Längre laddning kastar den snabbare. Bomber fastnar på väggar, dörrar och monster. Alternativ eld detonerar alla dina utplacerade bomber samtidigt. Lägg en fälla, dra dig tillbaka och detonera den när fiender närmar sig. Tilldela valfri vapenplats nedan; upprepade tryck växlar mellan det vanliga vapnet och tilläggen på den platsen.
+
+@ Fire launches a chain hook. It latches onto a permitted surface or enemy and reels you toward the anchor. Fire again or use Alt Fire to let go. Choose which materials and enemies can be hooked in Configure Parameters. Assign it to any weapon slot; repeated presses of the slot's existing binding cycle through its weapons.
+sv Eld skjuter ut en kedjekrok. Den fastnar i en tillåten yta eller fiende och drar dig mot fästpunkten. Skjut igen eller använd Alternativ eld för att släppa. Välj vilka material och fiender som kan hakas fast under Ställ in parametrar. Tilldela den valfri vapenplats; upprepade tryck på platsens befintliga tilldelning växlar mellan dess vapen.
+
+@ A piercing railgun inspired by Quake III. Fire sends a slug through every enemy along its line. Each shot consumes two cells, with a 1.5 second refire interval. Damage and the spiral trail colour are configurable below. Choose a weapon slot: the slot's current binding selects and cycles the weapons assigned to it.
+sv En genomborrande railgun inspirerad av Quake III. Eld skickar en projektil genom varje fiende längs dess linje. Varje skott förbrukar två celler, med 1,5 sekunders omladdningstid. Skada och spiralspårets färg kan ställas in nedan. Välj en vapenplats: platsens nuvarande tilldelning väljer och växlar mellan de vapen som tilldelats den.
+
+@ A Portal-style gel sprayer. Fire sprays blue Repulsion gel: land, jump or run into it to bounce, and landings on it never hurt. Alt Fire sprays orange Propulsion gel: run across it to go much faster. Gel coats floors and walls until washed off with the Powerwasher. Assign a weapon slot below; repeated presses cycle the weapons in that slot.
+sv En gelspruta i Portal-stil. Eld sprutar blå studsgel: landa, hoppa eller spring in i den för att studsa, och landningar på den skadar aldrig. Alternativ eld sprutar orange fartgel: spring över den för att bli mycket snabbare. Gel täcker golv och väggar tills den tvättas bort med högtryckstvätten. Tilldela en vapenplats nedan; upprepade tryck växlar mellan vapnen på den platsen.
+
+@ A water cannon. Fire shoots a straight jet with limited reach; Alt Fire a wide, shorter fan. The water pushes enemies back, turns projectiles aside and washes away gel and blood. Push strength is configurable below. Assign a weapon slot below; repeated presses cycle the weapons in that slot.
+sv En vattenkanon. Eld skjuter en rak stråle med begränsad räckvidd; Alternativ eld en bred, kortare solfjäder. Vattnet trycker tillbaka fiender, styr undan projektiler och tvättar bort gel och blod. Knuffstyrkan kan ställas in nedan. Tilldela en vapenplats nedan; upprepade tryck växlar mellan vapnen på den platsen.
+
+@ One equipment add-on includes both night vision and thermal vision. The Change Goggles action cycles Normal, Night Vision, Thermal, then Normal again. Night vision brightens dark rooms; thermal vision highlights living enemies. Goggles do not occupy a weapon slot. Configure intensity and sensor noise below. The binding affects only this add-on.
+sv Ett utrustningstillägg innehåller både mörkerseende och värmeseende. Åtgärden Byt glasögon växlar mellan normal, mörkerseende, värme och sedan normal igen. Mörkerseende ljusar upp mörka rum; värmeseende framhäver levande fiender. Glasögonen upptar ingen vapenplats. Ställ in intensitet och sensorbrus nedan. Tilldelningen påverkar bara detta tillägg.
+
+@ Press Dodge with a movement direction on the ground or in midair: dive forward or leap backward and sideways. Diagonals are supported. Each press launches once, with a short recovery. The player body animates in third person. Assign the Dodge action below or in Controls.
+sv Tryck Undanmanöver med en rörelseriktning på marken eller i luften: dyk framåt eller hoppa bakåt och åt sidan. Diagonaler stöds. Varje tryck utlöser en gång, med en kort återhämtning. Spelarkroppen animeras i tredjeperson. Tilldela åtgärden Undanmanöver nedan eller under Kontroller.
+
+@ Use the dedicated Bullet Time action to slow the whole local game to 20% speed. Hold is the default; Toggle switches on each press. The optional meter limits use in real seconds and regenerates while inactive. Disable the meter for unlimited use. Remap the action and configure duration and regeneration below.
+sv Använd den särskilda bullet time-åtgärden för att sakta ner hela det lokala spelet till 20 % hastighet. Håll är standard; Växla slår på och av vid varje tryck. Den valfria mätaren begränsar användningen i verkliga sekunder och laddas upp igen när den inte används. Stäng av mätaren för obegränsad användning. Ändra tilldelningen och ställ in tid och återladdning nedan.
+
+@ Both shotguns and enemy grunts fire physical pellets with their original spread and damage. Fast default projectiles feel immediate; lower their speed to dodge incoming fire during bullet time. Configure projectile speed below, or reset it to the default of 10000 units per second.
+sv Båda hagelgevären och fiendesoldaterna skjuter fysiska hagel med sin ursprungliga spridning och skada. Snabba standardprojektiler känns omedelbara; sänk deras hastighet för att undvika inkommande eld under bullet time. Ställ in projektilhastigheten nedan eller återställ den till standardvärdet 10000 enheter per sekund.
+
+@ Freezes the game for a split second when you damage an enemy, so hits feel heavier. Single player only. Choose which weapons trigger it (all, melee, ranged or explosives), how long it lasts and how much more a kill freezes. Advanced settings cover enemy toughness, damage scaling, cooldown and the longest freeze.
+sv Fryser spelet en bråkdels sekund när du skadar en fiende, så att träffar känns tyngre. Endast enspelare. Välj vilka vapen som utlöser det (alla, närstrid, avstånd eller sprängvapen), hur länge det varar och hur mycket längre ett dödande fryser. Avancerade inställningar omfattar fiendens tålighet, skadeskalning, nedkylning och längsta frysning.
+
+# map packs and the Quaddicted browser
+@ Get more maps (Quaddicted)...
+sv Hämta fler banor (Quaddicted)...
+
+@ Type to filter...
+sv Skriv för att filtrera...
+
+@ Launch mod
+sv Starta mod
+
+@ Start first map
+sv Starta första banan
+
+@ (running)
+sv (körs)
+
+@ running
+sv körs
+
+@ Recent
+sv Senaste
+
+@ Name
+sv Namn
+
+@ Dir
+sv Mapp
+
+@ Default
+sv Standard
+
+@ Title
+sv Titel
+
+@ Sort: {}
+sv Sortering: {}
+
+@ {} installed
+sv {} installerade
+
+@ {}/{} matching
+sv {}/{} matchar
+
+@ {} maps, {} completed
+sv {} banor, {} klarade
+
+@ {}/{} matching, {} completed
+sv {}/{} matchar, {} klarade
+
+@ no maps of its own
+sv inga egna banor
+
+@ dir: {}
+sv mapp: {}
+
+@ base: {}
+sv bas: {}
+
+@ Browse the Quaddicted archive of
+sv Bläddra i Quaddicted-arkivet med
+
+@ single-player maps and episodes,
+sv enspelarbanor och episoder,
+
+@ then download and install them
+sv och ladda sedan ner och installera dem
+
+@ here. Each release gets its own
+sv här. Varje utgåva får en egen
+
+@ entry in this list.
+sv post i den här listan.
+
+@ Needs an internet connection.
+sv Kräver internetanslutning.
+
+@ Quaddicted Map Archive
+sv Quaddicteds banarkiv
+
+@ Newest
+sv Nyaste
+
+@ Author
+sv Upphovsperson
+
+@ Size
+sv Storlek
+
+@ Loading the map list...
+sv Laddar banlistan...
+
+@ Couldn't load the map list: {}
+sv Kunde inte ladda banlistan: {}
+
+@ {} single-player releases  -  F5 refreshes
+sv {} enspelarutgåvor  -  F5 uppdaterar
+
+@ {} matching
+sv {} matchar
+
+@ by {}
+sv av {}
+
+@ requires: {}
+sv kräver: {}
+
+@ maps: {}
+sv banor: {}
+
+@ Failed: {}
+sv Misslyckades: {}
+
+@ Downloading... {}%
+sv Laddar ner... {} %
+
+@ Unpacking...
+sv Packar upp...
+
+@ Installed in {}/  -  Enter: play
+sv Installerad i {}/  -  Enter: spela
+
+@ Enter: download and install
+sv Enter: ladda ner och installera
+
+@ unpacking
+sv packar upp
+
+@ failed
+sv misslyckades
+
+@ installed
+sv installerad
+
+@ Downloads are not available in the browser build
+sv Nedladdningar är inte tillgängliga i webbläsarversionen
+
+@ the map list could not be read
+sv banlistan kunde inte läsas
+
+@ downloading needs the curl program
+sv nedladdning kräver programmet curl
+
+@ download failed
+sv nedladdningen misslyckades
+
+@ the download is not a valid zip
+sv nedladdningen är ingen giltig zip-fil
+
+@ nothing to install for this engine
+sv inget att installera för denna motor
+
+@ needs {} installed first
+sv kräver att {} installeras först
+
+@ couldn't unpack {}
+sv kunde inte packa upp {}
+
+# help screen
+@ About
+sv Om
+
+@ < Back
+sv < Tillbaka
+
+# tr_ctx keys: English shows the short word, the key says which meaning
+@ Save (a manual save, as opposed to a quicksave or autosave)
+sv Sparning
+
+# ==== hud.txt ====
+
+# HUD, weapon and equipment wheels, sound captions and other in-game text.
+# Weapon, monster and item names follow the 2021 re-release's own translations.
+@ Axe
+sv Yxa
+
+@ Shotgun
+sv Hagelgevär
+
+@ Double-Barrelled Shotgun
+sv Dubbelpipigt hagelgevär
+
+@ Nailgun
+sv Spikpistol
+
+@ Super Nailgun
+sv Superspikpistol
+
+@ Grenade Launcher
+sv Granatkastare
+
+@ Rocket Launcher
+sv Raketgevär
+
+@ Thunderbolt
+sv Thunderbolt
+
+@ Portal Gun
+sv Portalpistol
+
+@ Boomerang
+sv Bumerang
+
+@ Stickybomb Launcher
+sv Klisterbombkastare
+
+@ Railgun
+sv Railgun
+
+@ Hookshot
+sv Änterhake
+
+@ Gel Sprayer
+sv Gelspruta
+
+@ Powerwasher
+sv Högtryckstvätt
+
+@ Night Vision Goggles
+sv Mörkerseendeglasögon
+
+@ Thermal Goggles
+sv Värmeglasögon
+
+@ Normal vision
+sv Normal syn
+
+@ ON
+sv PÅ
+
+@ OFF
+sv AV
+
+@ {} (turn on)
+sv {} (slå på)
+
+@ {} (turn off)
+sv {} (slå av)
+
+@ Move mouse to select, release to toggle
+sv Flytta musen för att välja, släpp för att växla
+
+@ Move mouse to select, release to equip
+sv Flytta musen för att välja, släpp för att utrusta
+
+@ Release to toggle
+sv Släpp för att växla
+
+@ Release to equip
+sv Släpp för att utrusta
+
+@ shells
+sv hagel
+
+@ nails
+sv spikar
+
+@ rockets
+sv raketer
+
+@ cells
+sv celler
+
+@ Kills: {}/{}
+sv Dödade: {}/{}
+
+@ Secrets: {}/{}
+sv Hemligheter: {}/{}
+
+@ Time {}
+sv Tid {}
+
+@ Press any button to continue...
+sv Tryck på valfri knapp för att fortsätta...
+
+@ Press any key to continue...
+sv Tryck på valfri tangent för att fortsätta...
+
+@ BULLET TIME
+sv BULLET TIME
+
+@ AUTO AIM
+sv AUTOSIKTE
+
+@ Crosshair
+sv Hårkors
+
+@ + Marker
+sv + Markör
+
+@ Hit markers off
+sv Träffmarkörer av
+
+@ On target
+sv På mål
+
+@ On kill
+sv Vid dödande
+
+# sound captions
+@ [Secret found]
+sv [Hemlighet hittad]
+
+@ [Message]
+sv [Meddelande]
+
+@ [Switch activated]
+sv [Brytare aktiverad]
+
+@ [Key picked up]
+sv [Nyckel upplockad]
+
+@ [Rune picked up]
+sv [Runa upplockad]
+
+@ [Teleporter]
+sv [Teleporter]
+
+@ [Teleport]
+sv [Teleportering]
+
+@ [Splash]
+sv [Plask]
+
+@ [Leaving water]
+sv [Lämnar vattnet]
+
+@ [Door]
+sv [Dörr]
+
+@ [Platform moving]
+sv [Plattform rör sig]
+
+@ [Button]
+sv [Knapp]
+
+@ [Health picked up]
+sv [Hälsa upplockad]
+
+@ [Armor picked up]
+sv [Rustning upplockad]
+
+@ [Quad Damage wearing off]
+sv [Quad Damage avtar]
+
+@ [Quad Damage]
+sv [Quad Damage]
+
+@ [Pentagram wearing off]
+sv [Pentagrammet avtar]
+
+@ [Pentagram of Protection]
+sv [Pentagram of Protection]
+
+@ [Ring wearing off]
+sv [Ringen avtar]
+
+@ [Ring of Shadows]
+sv [Ring of Shadows]
+
+@ [Biosuit wearing off]
+sv [Biosuit avtar]
+
+@ [Biosuit]
+sv [Biosuit]
+
+@ [Item picked up]
+sv [Föremål upplockat]
+
+@ [Weapon picked up]
+sv [Vapen upplockat]
+
+@ [Ammo picked up]
+sv [Ammunition upplockad]
+
+@ [Explosion]
+sv [Explosion]
+
+@ [Grenade launched]
+sv [Granat avfyrad]
+
+@ [Grenade bounce]
+sv [Granat studsar]
+
+@ [Rocket fired]
+sv [Raket avfyrad]
+
+@ [Nails fired]
+sv [Spikar avfyrade]
+
+@ [Lightning]
+sv [Blixt]
+
+@ [Thunder]
+sv [Åska]
+
+@ [Enforcer alerted]
+sv [Enforcer larmad]
+
+@ [Grunt alerted]
+sv [Grunt larmad]
+
+@ [Rottweiler alerted]
+sv [Rottweiler larmad]
+
+@ [Knight alerted]
+sv [Knight larmad]
+
+@ [Death Knight alerted]
+sv [Death Knight larmad]
+
+@ [Scrag alerted]
+sv [Scrag larmad]
+
+@ [Ogre alerted]
+sv [Ogre larmad]
+
+@ [Fiend alerted]
+sv [Fiend larmad]
+
+@ [Shambler alerted]
+sv [Shambler larmad]
+
+@ [Zombie groaning]
+sv [Zombie stönar]
+
+@ [Vore alerted]
+sv [Vore larmad]
+
+@ [Vore attacking]
+sv [Vore anfaller]
+
+@ [Spawn alerted]
+sv [Spawn larmad]
+
+@ [Rotfish]
+sv [Rotfish]
+
+@ [Spawn]
+sv [Spawn]
+
+@ [Chthon]
+sv [Chthon]
+
+@ [Hard landing]
+sv [Hård landning]
+
+@ [Drowning]
+sv [Drunknar]
+
+@ [Gasping for air]
+sv [Kippar efter luft]
+
+@ [Burning]
+sv [Brinner]
+
+@ [Telefrag]
+sv [Telefrag]
+
+@ [Gibbed]
+sv [Sprängd i bitar]
+
+# ==== console.txt ====
+
+# Console messages, shown translated only with con_translate 1 (Translate Console).
+# Cvar and command names stay as they are.
+@ Autosaved.
+sv Autosparat.
+
+@ Game saved.
+sv Spelet sparat.
+
+@ Can't save now.
+sv Kan inte spara nu.
+
+@ This game only autosaves (No Manual Saves modifier).
+sv Det här spelet sparar bara automatiskt (modifieraren Inga manuella sparningar).
+
+@ Loading {}...
+sv Laddar {}...
+
+@ load failed: {}
+sv laddning misslyckades: {}
+
+@ ERROR: autosave failed: {}
+sv FEL: autosparning misslyckades: {}
+
+@ ERROR: couldn't open {}
+sv FEL: kunde inte öppna {}
+
+@ ERROR: couldn't open {}.
+sv FEL: kunde inte öppna {}.
+
+@ ERROR: couldn't write {}: {}
+sv FEL: kunde inte skriva {}: {}
+
+@ ERROR: couldn't create {}: {}
+sv FEL: kunde inte skapa {}: {}
+
+@ couldn't write {}: {}
+sv kunde inte skriva {}: {}
+
+@ Wrote {}
+sv Skrev {}
+
+@ screenshot failed: {}
+sv skärmdump misslyckades: {}
+
+@ screenshot: {}
+sv skärmdump: {}
+
+@ No readable save available. Select save or restart the level.
+sv Ingen läsbar sparning finns. Välj sparning eller starta om banan.
+
+@ Unknown command "{}"
+sv Okänt kommando ”{}”
+
+@ couldn't exec {}
+sv kunde inte köra {}
+
+@ execing {}
+sv kör {}
+
+@ execing config.cfg (inherited from {})
+sv kör config.cfg (ärvd från {})
+
+@ execing config.cfg (mod defaults)
+sv kör config.cfg (modens standard)
+
+@ execing default.cfg (built-in)
+sv kör default.cfg (inbyggd)
+
+@ {} cvars
+sv {} variabler
+
+@ {} commands
+sv {} kommandon
+
+@ Can't "cmd", not connected
+sv Kan inte köra ”cmd”, inte ansluten
+
+@ Looking for Quake servers...
+sv Söker efter Quake-servrar...
+
+@ Bad value, must be between 1 and 65534
+sv Ogiltigt värde, måste vara mellan 1 och 65534
+
+@ Couldn't handle music file {}
+sv Kunde inte hantera musikfilen {}
+
+@ Bug report written to {}
+sv Felrapport skriven till {}
+
+@ bugreport: can't create {}: {}
+sv bugreport: kan inte skapa {}: {}
+
+@ graphics preset: {}
+sv grafikförinställning: {}
+
+@ Presets (r_shader_preset <name>):
+sv Förinställningar (r_shader_preset <namn>):
+
+@ Add your own .slangp presets under <game>/shaders/.
+sv Lägg egna .slangp-förinställningar i <spel>/shaders/.
+
+@ no shader preset loaded (r_shader_preset)
+sv ingen shaderförinställning laddad (r_shader_preset)
+
+@ r_shader_preset: "{}" not found
+sv r_shader_preset: ”{}” hittades inte
+
+@ no parameter "{}" in this preset
+sv ingen parameter ”{}” i denna förinställning
+
+@ {} = {} (default {}, {}..{})
+sv {} = {} (standard {}, {}..{})
+
+@ Switching to {}...
+sv Byter till {}...
+
+@ game: no game dir "{}" in {}
+sv game: ingen spelmapp ”{}” i {}
+
+@ game: can't find the engine executable
+sv game: hittar inte motorns körbara fil
+
+@ game: exec failed: {}
+sv game: körning misslyckades: {}
+
+@ game: launch failed: {}
+sv game: start misslyckades: {}
+
+@ loaded {} in {}s
+sv laddade {} på {} s
+
+@ No demos listed with startdemos
+sv Inga demor listade med startdemos
+
+@ Playing demo from {}.
+sv Spelar upp demo från {}.
+
+@ {} frames {} seconds {} fps
+sv {} bildrutor {} sekunder {} fps
+
+@ Recording to {}.
+sv Spelar in till {}.
+
+@ Completed demo
+sv Demo klar
+
+@ Can't record during demo playback
+sv Kan inte spela in under demouppspelning
+
+@ Relative pathnames are not allowed.
+sv Relativa sökvägar är inte tillåtna.
+
+@ Can't record - try again when connected
+sv Kan inte spela in - försök igen när du är ansluten
+
+@ {} demo(s) in loop
+sv {} demo(r) i slinga
+
+@ Not recording a demo.
+sv Spelar inte in någon demo.
+
+@ {} joined on a gamepad
+sv {} anslöt med en handkontroll
+
+@ goggles: needs a game started with Add-ons and Goggles enabled
+sv goggles: kräver ett spel startat med Tillägg och Glasögon aktiverade
+
+@ equip: needs a game started with Add-ons and Goggles enabled
+sv equip: kräver ett spel startat med Tillägg och Glasögon aktiverade
+
+@ UDP listening on port {}
+sv UDP lyssnar på port {}
+
+@ UDP bind on port {} failed: {}
+sv UDP-bindning till port {} misslyckades: {}
+
+@ Connection accepted by {}
+sv Anslutning accepterad av {}
+
+@ Connection failed: {}
+sv Anslutning misslyckades: {}
+
+@ Couldn't resolve {}
+sv Kunde inte slå upp {}
+
+@ Connecting to {}...
+sv Ansluter till {}...
+
+@ Connecting to QuakeWorld server {}...
+sv Ansluter till QuakeWorld-servern {}...
+
+@ Disconnected: {}
+sv Frånkopplad: {}
+
+@ Server disconnected
+sv Servern kopplade från
+
+@ Client {} connected
+sv Klient {} ansluten
+
+@ Client {} timed out
+sv Klient {} fick tidsgräns
+
+@ Couldn't spawn server {}: {}
+sv Kunde inte starta servern {}: {}
+
+@ maxplayers can not be changed while a server is running.
+sv maxplayers kan inte ändras medan en server körs.
+
+@ You can't kick yourself!
+sv Du kan inte sparka ut dig själv!
+
+@ Only the server may changelevel
+sv Endast servern får använda changelevel
+
+@ {} renamed to {}
+sv {} bytte namn till {}

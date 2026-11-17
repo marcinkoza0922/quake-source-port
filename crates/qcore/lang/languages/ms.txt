@@ -1,0 +1,3024 @@
+# ms: the port's own text; English keys from crates/qcore/lang/*.txt.
+# Format in crates/qcore/src/lang/catalog.rs; check with tools/lang_check.py.
+
+# ==== menu.txt ====
+
+# Options pages: page names, row labels and choice values.
+@ 10% speed
+ms kelajuan 10%
+
+@ 2 split-screen
+ms 2 skrin pisah
+
+@ 3 split-screen
+ms 3 skrin pisah
+
+@ 4 split-screen
+ms 4 skrin pisah
+
+@ 5 split-screen
+ms 5 skrin pisah
+
+@ 6 split-screen
+ms 6 skrin pisah
+
+@ 2D aiming
+ms Bidikan 2D
+
+@ 2x monsters
+ms Raksasa x2
+
+@ 3x monsters
+ms Raksasa x3
+
+@ 4x monsters
+ms Raksasa x4
+
+@ 3D resolution
+ms Resolusi 3D
+
+@ 3D view
+ms Paparan 3D
+
+@ 8-bit Color
+ms Warna 8-bit
+
+@ Accessibility
+ms Kebolehcapaian
+
+@ Acquisition Cone
+ms Kon Pengesanan
+
+@ Activation
+ms Pengaktifan
+
+@ Add a ringing room tail after the cue
+ms Menambah gema bilik yang berdering selepas isyarat
+
+@ Add delayed repeats after the cue
+ms Menambah ulangan tertunda selepas isyarat
+
+@ Add saturation and distortion
+ms Menambah ketepuan dan herotan
+
+@ Add-ons
+ms Tambahan
+
+@ Address
+ms Alamat
+
+@ Adds fine noise to hide color banding
+ms Menambah hingar halus untuk menyembunyikan jalur warna
+
+@ Advanced Settings
+ms Tetapan Lanjutan
+
+@ Aim Assist
+ms Bantuan Bidikan
+
+@ Aim Rotation
+ms Putaran Bidikan
+
+@ Aim Slowdown
+ms Perlahan Bidikan
+
+@ Aim Style
+ms Gaya Bidikan
+
+@ All
+ms Semua
+
+@ All enemies
+ms Semua musuh
+
+@ Alt Fire (Add-ons)
+ms Tembakan Alt (Tambahan)
+
+@ Always Run
+ms Sentiasa Berlari
+
+@ Ambient Occlusion
+ms Oklusi Ambien
+
+@ Ammo Counts
+ms Kiraan Peluru
+
+@ Ammo Counts Position
+ms Kedudukan Kiraan Peluru
+
+@ Ammo Pickups
+ms Peluru Dikutip
+
+@ Anisotropic
+ms Anisotropik
+
+@ Anti-aliasing
+ms Anti-alias
+
+@ Apply To
+ms Guna Pada
+
+@ Armor
+ms Perisai
+
+@ Armor Position
+ms Kedudukan Perisai
+
+@ Ask
+ms Tanya
+
+@ Attack
+ms Serang
+
+@ Audio
+ms Audio
+
+@ Auto-aim
+ms Bidikan Auto
+
+@ Auto-aim Settings
+ms Tetapan Bidikan Auto
+
+@ Autosave
+ms Simpan Auto
+
+@ Autosave Settings
+ms Tetapan Simpan Auto
+
+@ Autosave Timer
+ms Pemasa Simpan Auto
+
+@ Autosaves to Keep
+ms Simpanan Auto Disimpan
+
+@ Bass
+ms Bes
+
+@ Blip
+ms Bip
+
+@ Blood Quality
+ms Kualiti Darah
+
+@ Blood Splatter Settings
+ms Tetapan Percikan Darah
+
+@ Blue
+ms Biru
+
+@ Boomerang Settings
+ms Tetapan Bumerang
+
+@ Boost or cut high frequencies in decibels
+ms Naikkan atau kurangkan frekuensi tinggi dalam desibel
+
+@ Boost or cut low frequencies in decibels
+ms Naikkan atau kurangkan frekuensi rendah dalam desibel
+
+@ Brightness
+ms Kecerahan
+
+@ Bullet Time (Add-ons)
+ms Masa Peluru (Tambahan)
+
+@ Bullet Time Settings
+ms Tetapan Masa Peluru
+
+@ Button Glyphs
+ms Simbol Butang
+
+@ Button Size
+ms Saiz Butang
+
+@ Camera
+ms Kamera
+
+@ Caustic Intensity
+ms Keamatan Kaustik
+
+@ Caustics
+ms Kaustik
+
+@ Center
+ms Tengah
+
+@ Center Message Position
+ms Kedudukan Mesej Tengah
+
+@ Center Message Time
+ms Tempoh Mesej Tengah
+
+@ Center View
+ms Pusatkan Pandangan
+
+@ Change Color on Kill
+ms Tukar Warna Bila Membunuh
+
+@ Change Color on Target
+ms Tukar Warna Pada Sasaran
+
+@ Chime
+ms Loceng
+
+@ Click
+ms Klik
+
+@ Clink
+ms Dentingan
+
+@ Coin
+ms Syiling
+
+@ Color
+ms Warna
+
+@ Color Filter
+ms Penapis Warna
+
+@ Color of the grenade arc
+ms Warna lengkung bom tangan
+
+@ Colored Lighting
+ms Pencahayaan Berwarna
+
+@ Connect
+ms Sambung
+
+@ Contrast
+ms Kontras
+
+@ Controls
+ms Kawalan
+
+@ Cooldown (ms)
+ms Masa Bertenang (ms)
+
+@ Crosshair Outline
+ms Garis Luar Rerambut Silang
+
+@ Crosshair Shape
+ms Bentuk Rerambut Silang
+
+@ Crosshair Size
+ms Saiz Rerambut Silang
+
+@ Current Ammo
+ms Peluru Semasa
+
+@ Current Ammo Position
+ms Kedudukan Peluru Semasa
+
+@ Customize This Game
+ms Ubah Suai Permainan Ini
+
+@ Damage
+ms Kerosakan
+
+@ Damage Taken
+ms Kerosakan Diterima
+
+@ Debris
+ms Serpihan
+
+@ Debris Quality
+ms Kualiti Serpihan
+
+@ Debris Settings
+ms Tetapan Serpihan
+
+@ Directional Damage
+ms Arah Kerosakan
+
+@ Dithering
+ms Dithering
+
+@ Dodge / Dive (Add-ons)
+ms Elak / Terjun (Tambahan)
+
+@ Dragging up looks down instead of up
+ms Seret ke atas memandang ke bawah, bukan ke atas
+
+@ Drive
+ms Ketepuan
+
+@ Dynamic Lights
+ms Lampu Dinamik
+
+@ Echo
+ms Gema
+
+@ Enemy Health
+ms Kesihatan Musuh
+
+@ Enemy Wounds
+ms Luka Musuh
+
+@ Enhanced Blood Splatter
+ms Percikan Darah Dipertingkat
+
+@ Enhanced FX
+ms Kesan Dipertingkat
+
+@ Enhanced Models
+ms Model Dipertingkat
+
+@ Enhanced Particles
+ms Zarah Dipertingkat
+
+@ Enhanced Water
+ms Air Dipertingkat
+
+@ Enhancements
+ms Peningkatan
+
+@ Equipment Wheel (Add-ons)
+ms Roda Kelengkapan (Tambahan)
+
+@ Exploding boxes throw metal shards
+ms Kotak yang meletup melontar serpihan logam
+
+@ Explosion Damage
+ms Kerosakan Letupan
+
+@ Explosion Scorch Marks
+ms Kesan Hangus Letupan
+
+@ Explosions scorch nearby solid surfaces
+ms Letupan menghanguskan permukaan pepejal berdekatan
+
+@ Explosives only
+ms Bahan letupan sahaja
+
+@ Extra Monsters
+ms Raksasa Tambahan
+
+@ Extra Per 10 Damage (ms)
+ms Tambahan Setiap 10 Kerosakan (ms)
+
+@ FX Settings
+ms Tetapan Kesan
+
+@ Field of View
+ms Medan Pandangan
+
+@ Firing never uses up ammo
+ms Menembak tidak pernah menghabiskan peluru
+
+@ First person
+ms Orang pertama
+
+@ Flick Time
+ms Masa Flick
+
+@ Flight Speed
+ms Kelajuan Terbang
+
+@ Fog
+ms Kabus
+
+@ Frag Limit
+ms Had Frag
+
+@ Freeze Duration (ms)
+ms Tempoh Beku (ms)
+
+@ GLQuake
+ms GLQuake
+
+@ Game Speed
+ms Kelajuan Permainan
+
+@ Game Type
+ms Jenis Permainan
+
+@ Gameplay
+ms Permainan
+
+@ Gameplay Modifiers
+ms Pengubah Suai Permainan
+
+@ Gel Quality
+ms Kualiti Gel
+
+@ Gib Surface Painting
+ms Kesan Cebisan Daging
+
+@ Gibs
+ms Cebisan Daging
+
+@ Gibs and heads tumble and bounce
+ms Cebisan daging dan kepala bergolek dan melantun
+
+@ Goggle Glow Quality
+ms Kualiti Cahaya Gogal
+
+@ Goggle Intensity
+ms Keamatan Gogal
+
+@ Goggle Noise
+ms Hingar Gogal
+
+@ Goggles Settings
+ms Tetapan Gogal
+
+@ Graphics
+ms Grafik
+
+@ Green
+ms Hijau
+
+@ Grenade Arc
+ms Lengkung Bom Tangan
+
+@ Grenade Arc Settings
+ms Tetapan Lengkung Bom Tangan
+
+@ Gun Kick
+ms Sentakan Senjata
+
+@ Gyro
+ms Giro
+
+@ Gyro & Flick Stick
+ms Giro & Flick Stick
+
+@ Gyro Active
+ms Giro Aktif
+
+@ Gyro Aiming
+ms Bidikan Giro
+
+@ HUD
+ms HUD
+
+@ HUD Style
+ms Gaya HUD
+
+@ Health
+ms Kesihatan
+
+@ Health Pickups
+ms Kesihatan Dikutip
+
+@ Health Position
+ms Kedudukan Kesihatan
+
+@ Health Regeneration
+ms Pemulihan Kesihatan
+
+@ Hit & Kill Sounds
+ms Bunyi Kena & Bunuh
+
+@ Hit Doors & Lifts
+ms Kena Pintu & Lif
+
+@ Hit Markers
+ms Penanda Kena
+
+@ Hit Sound
+ms Bunyi Kena
+
+@ Hitmarker Size
+ms Saiz Penanda Kena
+
+@ Hitmarker Type
+ms Jenis Penanda Kena
+
+@ Hitstop Advanced
+ms Hitstop Lanjutan
+
+@ Hitstop Settings
+ms Tetapan Hitstop
+
+@ Hold
+ms Tahan
+
+@ Hold lock-on
+ms Tahan kunci sasaran
+
+@ Hook Enemies
+ms Cangkuk Musuh
+
+@ Hook Metal
+ms Cangkuk Logam
+
+@ Hook Stone
+ms Cangkuk Batu
+
+@ Hook Wood
+ms Cangkuk Kayu
+
+@ Hooking an enemy pulls you to it
+ms Mencangkuk musuh menarik anda kepadanya
+
+@ Hookshot Range
+ms Jarak Cangkuk
+
+@ Hookshot Settings
+ms Tetapan Cangkuk
+
+@ Host Game
+ms Hos Permainan
+
+@ How far the hook flies before it retracts
+ms Sejauh mana cangkuk terbang sebelum ditarik balik
+
+@ How visible the on-screen controls are
+ms Sejauh mana kawalan pada skrin kelihatan
+
+@ Impact Lifetime
+ms Jangka Hayat Hentaman
+
+@ Infinite Ammo
+ms Peluru Tanpa Had
+
+@ Input
+ms Input
+
+@ Input Scale
+ms Skala Input
+
+@ Interpolate Animation
+ms Interpolasi Animasi
+
+@ Interpolate Movement
+ms Interpolasi Pergerakan
+
+@ Invert Look
+ms Songsang Pandangan
+
+@ Invert Mouse
+ms Songsang Tetikus
+
+@ Invert Stick
+ms Songsang Stik
+
+@ Jet Quality
+ms Kualiti Pancutan
+
+@ Join Game
+ms Sertai Permainan
+
+@ Jump / Swim Up
+ms Lompat / Berenang Naik
+
+@ Jump again in mid-air
+ms Lompat lagi di udara
+
+@ Jumps
+ms Lompatan
+
+@ Keys & Powerups
+ms Kunci & Kuasa
+
+@ Keys & Powerups Position
+ms Kedudukan Kunci & Kuasa
+
+@ Kill Bonus (x)
+ms Bonus Bunuh (x)
+
+@ Kill Sound
+ms Bunyi Bunuh
+
+@ Knock
+ms Ketuk
+
+@ Left
+ms Kiri
+
+@ Length of the motion blur streaks
+ms Panjang jalur kabur gerakan
+
+@ Lifetime (seconds)
+ms Jangka Hayat (saat)
+
+@ Live Portal Views
+ms Paparan Portal Langsung
+
+@ Live View Distance
+ms Jarak Paparan Langsung
+
+@ Local Players
+ms Pemain Tempatan
+
+@ Local red wounds follow enemy animation
+ms Luka merah setempat mengikut animasi musuh
+
+@ Lock Indicator
+ms Penunjuk Kunci Sasaran
+
+@ Long falls don't hurt
+ms Jatuh tinggi tidak mencederakan
+
+@ Longest Freeze (ms)
+ms Beku Paling Lama (ms)
+
+@ Look Down
+ms Pandang Bawah
+
+@ Look Speed
+ms Kelajuan Pandangan
+
+@ Look Up
+ms Pandang Atas
+
+@ Main Menu Music
+ms Muzik Menu Utama
+
+@ Max FPS
+ms FPS Maks
+
+@ Max Players
+ms Pemain Maks
+
+@ Maximum Impacts
+ms Hentaman Maksimum
+
+@ Maximum Marks
+ms Kesan Maksimum
+
+@ Maximum Range
+ms Jarak Maksimum
+
+@ Melee only
+ms Jarak dekat sahaja
+
+@ Message Background
+ms Latar Mesej
+
+@ Message Text Size
+ms Saiz Teks Mesej
+
+@ Messages & Captions
+ms Mesej & Sari Kata
+
+@ Meter Duration (real seconds)
+ms Tempoh Meter (saat sebenar)
+
+@ Minimum Damage
+ms Kerosakan Minimum
+
+@ Mode
+ms Mod
+
+@ Modern Console
+ms Konsol Moden
+
+@ Modern HUD Layout
+ms Susun Atur HUD Moden
+
+@ Most recent save
+ms Simpanan terbaru
+
+@ Motion Blur
+ms Kabur Gerakan
+
+@ Motion Blur Amount
+ms Jumlah Kabur Gerakan
+
+@ Motion Blur Quality
+ms Kualiti Kabur Gerakan
+
+@ Mouse & Keyboard
+ms Tetikus & Papan Kekunci
+
+@ Mouse Speed
+ms Kelajuan Tetikus
+
+@ Move Back
+ms Undur
+
+@ Move Forward
+ms Maju
+
+@ Music Volume
+ms Kelantangan Muzik
+
+@ Next Weapon
+ms Senjata Seterusnya
+
+@ No Drowning
+ms Tidak Lemas
+
+@ No Fall Damage
+ms Tiada Kerosakan Jatuh
+
+@ No Manual Saves
+ms Tiada Simpan Manual
+
+@ No Self Damage
+ms Tiada Kerosakan Sendiri
+
+@ Noise Filter
+ms Penapis Hingar
+
+@ Normal Color
+ms Warna Biasa
+
+@ Notify Message Position
+ms Kedudukan Pemberitahuan
+
+@ Notify Message Time
+ms Tempoh Pemberitahuan
+
+@ Number of splatter rays per blood impact
+ms Bilangan sinar percikan bagi setiap hentaman darah
+
+@ Off
+ms Mati
+
+@ On Death
+ms Bila Mati
+
+@ On Kill Color
+ms Warna Bila Bunuh
+
+@ On Target Color
+ms Warna Pada Sasaran
+
+@ Opacity
+ms Kelegapan
+
+@ Opacity of the grenade arc
+ms Kelegapan lengkung bom tangan
+
+@ Pants Color
+ms Warna Seluar
+
+@ Particle Quality
+ms Kualiti Zarah
+
+@ Particles
+ms Zarah
+
+@ Physical Nail Impacts
+ms Hentaman Paku Fizikal
+
+@ Pistol Start
+ms Mula Kosong
+
+@ Pitch
+ms Pic
+
+@ Pitch Sensitivity
+ms Kepekaan Menegak
+
+@ Playback Speed
+ms Kelajuan Main Semula
+
+@ Player Setup
+ms Persediaan Pemain
+
+@ Pop
+ms Pop
+
+@ Portal Gun Settings
+ms Tetapan Senapang Portal
+
+@ Portal Recursion
+ms Rekursi Portal
+
+@ Portal View Quality
+ms Kualiti Paparan Portal
+
+@ Preview Sound
+ms Pratonton Bunyi
+
+@ Previous Weapon
+ms Senjata Sebelumnya
+
+@ Projectile Shotguns Settings
+ms Tetapan Senapang Patah Projektil
+
+@ Projectile Speed (units/s)
+ms Kelajuan Projektil (unit/s)
+
+@ Purple
+ms Ungu
+
+@ Push
+ms Tolakan
+
+@ Push Strength
+ms Kekuatan Tolakan
+
+@ Quick Load
+ms Muat Pantas
+
+@ Quick Save
+ms Simpan Pantas
+
+@ Railgun Settings
+ms Tetapan Railgun
+
+@ Ranged only
+ms Jarak jauh sahaja
+
+@ Reacquire While Held
+ms Kunci Semula Semasa Ditahan
+
+@ Red
+ms Merah
+
+@ Reduce Motion
+ms Kurangkan Gerakan
+
+@ Regen (seconds per second)
+ms Pemulihan (saat sesaat)
+
+@ Render Scale
+ms Skala Render
+
+@ Reverb
+ms Gema Bilik
+
+@ Right
+ms Kanan
+
+@ Ripple Intensity
+ms Keamatan Riak
+
+@ Ripples
+ms Riak
+
+@ Roll Sensitivity
+ms Kepekaan Gulung
+
+@ Rumble
+ms Getaran
+
+@ Run
+ms Lari
+
+@ Save on All Enemies Killed
+ms Simpan Bila Semua Musuh Dibunuh
+
+@ Save on All Secrets Found
+ms Simpan Bila Semua Rahsia Ditemui
+
+@ Save on Level Entry
+ms Simpan Bila Masuk Peringkat
+
+@ Save on Secret Found
+ms Simpan Bila Rahsia Ditemui
+
+@ Scoreboard
+ms Papan Markah
+
+@ Screen Flashes
+ms Kilatan Skrin
+
+@ Screen Shader
+ms Shader Skrin
+
+@ Screen Shake
+ms Gegaran Skrin
+
+@ Search LAN
+ms Cari LAN
+
+@ Seconds a center-screen message stays up
+ms Saat mesej di tengah skrin dipaparkan
+
+@ See Through Portals
+ms Lihat Menembusi Portal
+
+@ See-through Teleporters
+ms Teleporter Lut Sinar
+
+@ Shirt Color
+ms Warna Baju
+
+@ Shotgun Bullet Decals
+ms Kesan Peluru Senapang Patah
+
+@ Shoulder left
+ms Bahu kiri
+
+@ Shoulder right
+ms Bahu kanan
+
+@ Show FPS
+ms Papar FPS
+
+@ Show Face
+ms Papar Wajah
+
+@ Shrapnel
+ms Serpihan Letupan
+
+@ Size of on-screen messages and captions
+ms Saiz mesej dan sari kata pada skrin
+
+@ Skill
+ms Tahap Kesukaran
+
+@ Sky Fog
+ms Kabus Langit
+
+@ Smooths the stepped movement of monsters
+ms Melicinkan pergerakan raksasa yang tersentak-sentak
+
+@ Sound
+ms Bunyi
+
+@ Sound Captions
+ms Sari Kata Bunyi
+
+@ Sound Volume
+ms Kelantangan Bunyi
+
+@ Speed Blur
+ms Kabur Kelajuan
+
+@ Splashes
+ms Percikan
+
+@ Splatter Amount
+ms Jumlah Percikan
+
+@ Splatter Size
+ms Saiz Percikan
+
+@ Start Game
+ms Mula Permainan
+
+@ Staying underwater doesn't hurt
+ms Kekal di bawah air tidak mencederakan
+
+@ Stick Look Pitch
+ms Pandangan Stik Menegak
+
+@ Stick Look Yaw
+ms Pandangan Stik Mendatar
+
+@ Strafe Left
+ms Langkah Sisi Kiri
+
+@ Strafe Right
+ms Langkah Sisi Kanan
+
+@ Strength of the surface swell and rings
+ms Kekuatan alun dan gelang di permukaan
+
+@ Stun Duration
+ms Tempoh Pengsan
+
+@ Style
+ms Gaya
+
+@ Supersampling
+ms Supersampling
+
+@ Surface Hit Effects
+ms Kesan Hentaman Permukaan
+
+@ Swim Down
+ms Berenang Turun
+
+@ Targets
+ms Sasaran
+
+@ Teamplay
+ms Main Berpasukan
+
+@ Texture Filter
+ms Penapis Tekstur
+
+@ Third person
+ms Orang ketiga
+
+@ Thud
+ms Debuk
+
+@ Tick
+ms Tik
+
+@ Time Limit
+ms Had Masa
+
+@ Time Stretch
+ms Regangan Masa
+
+@ Toggle Attack
+ms Togol Serang
+
+@ Toggle Run
+ms Togol Lari
+
+@ Toggle auto-aim
+ms Togol bidikan auto
+
+@ Touch Controls
+ms Kawalan Sentuh
+
+@ Touchscreen
+ms Skrin Sentuh
+
+@ Tough Enemy Health
+ms Kesihatan Musuh Kuat
+
+@ Tough enemies only
+ms Musuh kuat sahaja
+
+@ Trail Colour
+ms Warna Jejak
+
+@ Translate Console
+ms Terjemah Konsol
+
+@ Translucent Water
+ms Air Lut Cahaya
+
+@ Treble
+ms Trebel
+
+@ Turn Left
+ms Pusing Kiri
+
+@ Turn Right
+ms Pusing Kanan
+
+@ Underwater FX
+ms Kesan Bawah Air
+
+@ Use Bullet Time Meter
+ms Guna Meter Masa Peluru
+
+@ VSync
+ms VSync
+
+@ View Bob
+ms Ayunan Pandangan
+
+@ Viewmodels
+ms Model Senjata
+
+@ Volume
+ms Kelantangan
+
+@ Water Opacity
+ms Kelegapan Air
+
+@ Water Quality
+ms Kualiti Air
+
+@ Water Settings
+ms Tetapan Air
+
+@ Weapon Wheel
+ms Roda Senjata
+
+@ Weapon Wheel Slowdown
+ms Perlahan Roda Senjata
+
+@ Weapons
+ms Senjata
+
+@ Weapons Position
+ms Kedudukan Senjata
+
+@ Where center-screen messages appear
+ms Tempat mesej tengah skrin dipaparkan
+
+@ Where pickup and event messages appear
+ms Tempat mesej kutipan dan peristiwa dipaparkan
+
+@ White
+ms Putih
+
+@ Yaw Sensitivity
+ms Kepekaan Mendatar
+
+@ Yellow
+ms Kuning
+
+# lowercase choice values
+@ T
+ms T
+
+@ always
+ms sentiasa
+
+@ auto
+ms auto
+
+@ banded
+ms berjalur
+
+@ borderless
+ms tanpa bingkai
+
+@ bottom center
+ms bawah tengah
+
+@ bottom left
+ms bawah kiri
+
+@ bottom right
+ms bawah kanan
+
+@ box
+ms kotak
+
+@ broken square
+ms segi empat putus
+
+@ classic
+ms klasik
+
+@ coarse
+ms kasar
+
+@ cooperative
+ms koperatif
+
+@ cross
+ms pangkah
+
+@ cross + dot
+ms pangkah + titik
+
+@ cyan
+ms sian
+
+@ dashed
+ms putus-putus
+
+@ deathmatch
+ms deathmatch
+
+@ deuteranopia
+ms deuteranopia
+
+@ diagonal streaks
+ms jalur pepenjuru
+
+@ diamond
+ms berlian
+
+@ dot
+ms titik
+
+@ double
+ms berganda
+
+@ double chevrons
+ms cevron berganda
+
+@ double diagonals
+ms pepenjuru berganda
+
+@ easy
+ms mudah
+
+@ fine
+ms halus
+
+@ fit output
+ms ikut output
+
+@ flick stick
+ms flick stick
+
+@ fullscreen
+ms skrin penuh
+
+@ gap cross
+ms pangkah renggang
+
+@ green
+ms hijau
+
+@ grey
+ms kelabu
+
+@ half speed
+ms separuh kelajuan
+
+@ hard
+ms sukar
+
+@ high
+ms tinggi
+
+@ huge
+ms sangat besar
+
+@ immersive
+ms mengasyikkan
+
+@ intense
+ms sengit
+
+@ large
+ms besar
+
+@ larger
+ms lebih besar
+
+@ largest
+ms terbesar
+
+@ linear
+ms linear
+
+@ low
+ms rendah
+
+@ lower
+ms bawah
+
+@ magenta
+ms magenta
+
+@ medium
+ms sederhana
+
+@ middle
+ms tengah
+
+@ middle left
+ms tengah kiri
+
+@ middle right
+ms tengah kanan
+
+@ modern
+ms moden
+
+@ nearest
+ms terdekat
+
+@ nightmare
+ms mimpi ngeri
+
+@ nintendo
+ms nintendo
+
+@ no team damage
+ms tiada kerosakan pasukan
+
+@ none
+ms tiada
+
+@ normal
+ms biasa
+
+@ off
+ms mati
+
+@ off while held
+ms mati semasa ditahan
+
+@ on
+ms hidup
+
+@ only while held
+ms hanya semasa ditahan
+
+@ playstation
+ms playstation
+
+@ protanopia
+ms protanopia
+
+@ quarter speed
+ms suku kelajuan
+
+@ red
+ms merah
+
+@ short diagonals
+ms pepenjuru pendek
+
+@ single
+ms tunggal
+
+@ small
+ms kecil
+
+@ solid
+ms padu
+
+@ spectacle
+ms spektakular
+
+@ subtle
+ms halus
+
+@ team damage
+ms kerosakan pasukan
+
+@ top center
+ms atas tengah
+
+@ top left
+ms atas kiri
+
+@ top right
+ms atas kanan
+
+@ triple
+ms tiga kali
+
+@ tritanopia
+ms tritanopia
+
+@ upper
+ms atas
+
+@ white
+ms putih
+
+@ whole screen
+ms seluruh skrin
+
+@ windowed
+ms tetingkap
+
+@ xbox
+ms xbox
+
+@ yellow
+ms kuning
+
+# ==== tooltips.txt ====
+
+# Options help lines (tooltips) and reasons for disabled rows.
+@ 2D aiming turns the view continuously with the right stick; flick stick snaps the view to where you push the stick, then turning the stick rotates it
+ms Bidikan 2D memusingkan pandangan secara berterusan dengan stik kanan; flick stick menghalakan pandangan ke arah stik ditolak, kemudian memusingkan stik akan memutarnya
+
+@ 3D resolution relative to the window; the UI stays sharp
+ms Resolusi 3D berbanding tetingkap; UI kekal tajam
+
+@ 3D view keeps the HUD and menus sharp; whole screen runs them through the shader too
+ms Paparan 3D mengekalkan HUD dan menu tajam; seluruh skrin turut melalukannya melalui shader
+
+@ A Quake III style railgun: a slug that pierces every enemy on its line, using 2 cells a shot and refiring every 1.5 s; select it through its assigned weapon slot (Add-ons)
+ms Railgun gaya Quake III: peluru yang menembusi setiap musuh dalam laluannya, menggunakan 2 sel setiap tembakan dan menembak semula setiap 1.5 s; pilih melalui slot senjata yang ditetapkan (Tambahan)
+
+@ A Zelda-style hookshot: fire sends a chain hook out; it latches onto hookable surfaces or enemies and reels you in; fire again to let go
+ms Cangkuk gaya Zelda: tembakan melontar cangkuk berantai; ia melekat pada permukaan yang boleh dicangkuk atau pada musuh lalu menarik anda; tembak lagi untuk melepaskan
+
+@ Also translates the engine's console messages; off keeps them in English
+ms Turut menterjemah mesej konsol enjin; mati mengekalkannya dalam bahasa Inggeris
+
+@ Automatically acquire another enemy while holding Lock-on after losing a target
+ms Kunci musuh lain secara automatik semasa menahan Kunci Sasaran selepas kehilangan sasaran
+
+@ Blends between animation frames of monsters and weapons
+ms Mengadun antara bingkai animasi raksasa dan senjata
+
+@ Blood stains surfaces and bodies; cosmetic, independent of particle packs
+ms Darah mengotorkan permukaan dan badan; kosmetik sahaja, bebas daripada pek zarah
+
+@ Bloom glow around bright lights and heat sources; medium uses 4 taps, high uses 8, low disables halo taps
+ms Cahaya bloom di sekeliling lampu terang dan sumber haba; sederhana guna 4 sampel, tinggi guna 8, rendah mematikan halo
+
+@ Blurs fast-moving monsters, projectiles and doors (not camera turns)
+ms Mengaburkan raksasa, projektil dan pintu yang bergerak laju (bukan pusingan kamera)
+
+@ Blurs the screen edges during fast falls and launches; keeps the centre clear. Reduce Motion disables it
+ms Mengaburkan tepi skrin semasa jatuh dan lontaran laju; bahagian tengah kekal jelas. Kurangkan Gerakan mematikannya
+
+@ Brightness of the underwater light patterns
+ms Kecerahan corak cahaya di bawah air
+
+@ Caps mark count, lifetime, airborne droplets and wound/gib painting; low skips enemy wounds and gib trails
+ms Mengehadkan bilangan dan jangka hayat kesan, titisan di udara dan kesan luka/cebisan; rendah melangkau luka musuh dan jejak cebisan
+
+@ Caps shader input at output size so 200% render scale keeps 3D sharpness without 4x shader cost; low scales stay low-res
+ms Mengehadkan input shader pada saiz output supaya skala render 200% mengekalkan ketajaman 3D tanpa kos shader 4x; skala rendah kekal beresolusi rendah
+
+@ Classic: the original status bar; modern: compact elements at the screen edges
+ms Klasik: bar status asal; moden: elemen padat di tepi skrin
+
+@ Coat atlas resolution, rebuild rate and shader detail: low builds smaller coats less often with fast shading; high uses full detail
+ms Resolusi atlas salutan, kadar bina semula dan perincian shader: rendah membina salutan lebih kecil dengan lebih jarang dan pelorekan pantas; tinggi guna perincian penuh
+
+@ Colour of the railgun's spiral trail; split-screen players each get the next colour along
+ms Warna jejak lingkaran railgun; dalam skrin pisah, setiap pemain mendapat warna seterusnya
+
+@ Damage the railgun deals to each enemy it passes through (Quake III: 100)
+ms Kerosakan railgun pada setiap musuh yang ditembusinya (Quake III: 100)
+
+@ Dark backdrop behind on-screen messages for readability
+ms Latar gelap di belakang mesej pada skrin supaya mudah dibaca
+
+@ Dark border keeps the crosshair visible on any background
+ms Garis luar gelap memastikan rerambut silang kelihatan pada sebarang latar
+
+@ Darkens corners and contact areas where geometry meets; higher quality is sharper
+ms Menggelapkan sudut dan kawasan sentuhan antara geometri; kualiti lebih tinggi lebih tajam
+
+@ Debris lands on and is carried or shoved by doors, lifts and platforms
+ms Serpihan mendarat di atas pintu, lif dan platform, lalu dibawa atau ditolak olehnya
+
+@ Detail for caustics, ripples and splashes: low uses smaller budgets and shorter view distance; high uses larger budgets and farther view distance
+ms Perincian kaustik, riak dan percikan: rendah guna bajet lebih kecil dan jarak pandangan lebih pendek; tinggi guna bajet lebih besar dan jarak pandangan lebih jauh
+
+@ Disabled while Enhanced Particles is on: its particles replace the GLQuake and Classic styles
+ms Dimatikan semasa Zarah Dipertingkat hidup: zarahnya menggantikan gaya GLQuake dan Klasik
+
+@ Disabled while Enhanced Water is on: its own underwater effects replace the classic and GLQuake view warps
+ms Dimatikan semasa Air Dipertingkat hidup: kesan bawah airnya sendiri menggantikan herotan pandangan klasik dan GLQuake
+
+@ Draw the predicted grenade path as a solid or dashed line
+ms Lukis laluan ramalan bom tangan sebagai garis padu atau putus-putus
+
+@ Draw the view out of the linked portal inside each portal; off shows flat discs (fastest)
+ms Lukis pandangan dari portal yang dipautkan di dalam setiap portal; mati menunjukkan cakera rata (paling pantas)
+
+@ Droplets spray up when things enter or leave water, slime or lava
+ms Titisan memercik apabila sesuatu memasuki atau keluar dari air, lendir atau lava
+
+@ Emulates the original 8-bit palette of software rendering
+ms Meniru palet 8-bit asal render perisian
+
+@ Every level starts with only the shotgun and axe, as if started fresh
+ms Setiap peringkat bermula dengan senapang patah dan kapak sahaja, seolah-olah dimulakan dari awal
+
+@ Explosion damage for each remotely detonated sticky bomb
+ms Kerosakan letupan bagi setiap bom lekit yang diletupkan dari jauh
+
+@ Extra freeze milliseconds for every 10 damage dealt, so heavy hits stop longer
+ms Milisaat beku tambahan bagi setiap 10 kerosakan, jadi serangan berat membeku lebih lama
+
+@ First person, a third-person camera centered behind the player, or one over the right or left shoulder; third person hides viewmodels
+ms Orang pertama, kamera orang ketiga di tengah belakang pemain, atau di atas bahu kanan atau kiri; orang ketiga menyembunyikan model senjata
+
+@ Flash the selected marker on confirmed hits; colors are shared with the crosshair
+ms Kelipkan penanda terpilih apabila serangan disahkan kena; warna dikongsi dengan rerambut silang
+
+@ Freeze for every enemy, or only for enemies that were tough before the hit
+ms Beku untuk setiap musuh, atau hanya untuk musuh yang kuat sebelum diserang
+
+@ Freeze the game briefly when you damage an enemy; single player with add-ons only
+ms Bekukan permainan seketika apabila anda mencederakan musuh; pemain tunggal dengan tambahan sahaja
+
+@ Gibs tumble and barrels throw shrapnel; shots and blasts push them (cosmetic only)
+ms Cebisan daging bergolek dan tong melontar serpihan; tembakan dan letupan menolaknya (kosmetik sahaja)
+
+@ Health an enemy must have had before the hit to count as tough
+ms Kesihatan yang mesti dimiliki musuh sebelum diserang untuk dikira kuat
+
+@ Hits dealing less damage than this do not freeze the game; the default 10 skips nails and shotgun pellets
+ms Serangan dengan kerosakan kurang daripada ini tidak membekukan permainan; lalai 10 melangkau paku dan butir senapang patah
+
+@ Hold fire and sweep the crosshair over monsters to queue them, release to throw: it stuns each in turn and flies back; alt-fire clears the queue
+ms Tahan tembak dan sapu rerambut silang ke atas raksasa untuk menyenaraikannya, lepaskan untuk membaling: ia memengsankan setiap satu bergilir-gilir lalu terbang kembali; tembakan alt mengosongkan senarai
+
+@ Hold: keep Lock-on held. Toggle: press Auto-aim Toggle to enable automatic acquisition. Click look stick to switch targets
+ms Tahan: terus tahan Kunci Sasaran. Togol: tekan Togol Bidikan Auto untuk menghidupkan penguncian automatik. Klik stik pandangan untuk menukar sasaran
+
+@ How close an enemy must be to the crosshair for automatic acquisition in toggle mode (degrees)
+ms Sejauh mana musuh mesti dekat dengan rerambut silang untuk dikunci secara automatik dalam mod togol (darjah)
+
+@ How far the view tilts up and down when you tilt the controller (pitch axis)
+ms Sejauh mana pandangan condong ke atas dan bawah apabila anda mencondongkan alat kawalan (paksi pic)
+
+@ How far the view turns left and right when you turn the controller (yaw axis)
+ms Sejauh mana pandangan berpusing ke kiri dan kanan apabila anda memusingkan alat kawalan (paksi rewang)
+
+@ How far the view turns when you drag on the right half of the screen
+ms Sejauh mana pandangan berpusing apabila anda menyeret pada separuh kanan skrin
+
+@ How fast the boomerang flies (units per second)
+ms Kelajuan bumerang terbang (unit sesaat)
+
+@ How hard shots and explosions push debris around
+ms Sekuat mana tembakan dan letupan menolak serpihan
+
+@ How hard the Powerwasher's water pushes enemies
+ms Sekuat mana air Pencuci Tekanan menolak musuh
+
+@ How long a hit freezes the game, in milliseconds
+ms Berapa lama serangan membekukan permainan, dalam milisaat
+
+@ How strongly fog covers the sky when fog is on
+ms Sekuat mana kabus menutupi langit apabila kabus hidup
+
+@ How the view distorts underwater: Classic ripples the whole screen like software Quake, GLQuake slowly stretches and squashes the view
+ms Cara pandangan herot di bawah air: Klasik meriakkan seluruh skrin seperti Quake perisian, GLQuake meregang dan memampatkan pandangan secara perlahan
+
+@ Ignores gyro rotation slower than this many degrees per second, to hide hand tremor
+ms Abaikan putaran giro yang lebih perlahan daripada nilai darjah sesaat ini, untuk menyembunyikan gegaran tangan
+
+@ Immersive: appears for a few seconds only when its value changes
+ms Mengasyikkan: muncul beberapa saat hanya apabila nilainya berubah
+
+@ Keeps textures sharp on floors and walls seen at steep angles
+ms Mengekalkan tekstur tajam pada lantai dan dinding yang dilihat dari sudut curam
+
+@ Lights from rockets, muzzle flashes and explosions brighten nearby walls
+ms Cahaya daripada roket, kilatan muncung dan letupan menerangi dinding berdekatan
+
+@ Liquid surfaces swell and ring out where things move through them
+ms Permukaan cecair beralun dan membentuk gelang di tempat sesuatu melaluinya
+
+@ Lobs sticky bombs (rockets ammo) that cling to walls, doors and monsters; alt-fire detonates them all
+ms Melontar bom lekit (peluru roket) yang melekat pada dinding, pintu dan raksasa; tembakan alt meletupkan semuanya
+
+@ Look of the classic particles: GLQuake draws soft round dots, Classic draws square pixels like software Quake
+ms Rupa zarah klasik: GLQuake melukis titik bulat lembut, Klasik melukis piksel segi empat seperti Quake perisian
+
+@ Low skips the background smear halo and uses fewer blur samples; high keeps the full halo and smoother streaks
+ms Rendah melangkau halo calitan latar dan guna lebih sedikit sampel kabur; tinggi mengekalkan halo penuh dan jalur lebih licin
+
+@ Low: hard particle edges, half the scripted particles and fewer hit sparks. Medium: soft edges. High: soft edges checked per MSAA sample, most hit sparks
+ms Rendah: tepi zarah keras, separuh zarah skrip dan kurang percikan api. Sederhana: tepi lembut. Tinggi: tepi lembut disemak bagi setiap sampel MSAA, hampir semua percikan api
+
+@ Marks fade out before expiring; oldest marks are recycled at the limit
+ms Kesan pudar sebelum tamat; kesan paling lama dikitar semula apabila mencapai had
+
+@ Max nested portal reflections to draw; each level redraws the scene
+ms Maksimum pantulan portal bersarang yang dilukis; setiap tahap melukis semula adegan
+
+@ Max portals per screen with a live view; each one redraws the scene
+ms Maksimum portal bagi setiap skrin dengan paparan langsung; setiap satu melukis semula adegan
+
+@ Maximum distance for acquiring and keeping an enemy locked
+ms Jarak maksimum untuk mengunci dan mengekalkan kunci pada musuh
+
+@ Minimum gap between freezes, so shotgun pellets and rapid fire count once; kills ignore it
+ms Jarak minimum antara beku, supaya butir senapang patah dan tembakan pantas dikira sekali; bunuhan mengabaikannya
+
+@ Modern terminal console with autocomplete popup, history search, ANSI colors, bash shell and piping; off uses the classic Quake console
+ms Konsol terminal moden dengan tetingkap autolengkap, carian sejarah, warna ANSI, shell bash dan paip; mati menggunakan konsol Quake klasik
+
+@ Monsters take proportionally less damage at higher values; above 100% is harder
+ms Raksasa menerima kerosakan lebih sedikit secara berkadar pada nilai lebih tinggi; melebihi 100% lebih sukar
+
+@ Moving gibs leave blood on surfaces they touch
+ms Cebisan daging yang bergerak meninggalkan darah pada permukaan yang disentuhnya
+
+@ Multiplier on the freeze when the hit kills the enemy; 1 means no extra
+ms Pendarab beku apabila serangan membunuh musuh; 1 bermaksud tiada tambahan
+
+@ Multiplies ammo from pickups (up to the normal carry limit); below 100% is harder
+ms Mendarabkan peluru daripada kutipan (sehingga had bawaan biasa); kurang daripada 100% lebih sukar
+
+@ Multiplies health from pickups (up to 100, or the item's own limit); below 100% is harder
+ms Mendarabkan kesihatan daripada kutipan (sehingga 100, atau had item itu sendiri); kurang daripada 100% lebih sukar
+
+@ Nails stick to wood and bodies; hard surfaces deflect them to the floor
+ms Paku melekat pada kayu dan badan; permukaan keras memesongkannya ke lantai
+
+@ Nearest keeps crisp classic pixels; linear smooths textures
+ms Terdekat mengekalkan piksel klasik yang tajam; linear melicinkan tekstur
+
+@ New Game: Add-ons
+ms Permainan Baharu: Tambahan
+
+@ New Game: Customize
+ms Permainan Baharu: Ubah Suai
+
+@ Night vision: how much dark areas are brightened; thermal: how strongly heat stands out
+ms Penglihatan malam: sejauh mana kawasan gelap diterangkan; terma: sejauh mana haba menonjol
+
+@ Night-vision and thermal goggles, cycle normal, night vision and thermal with Change Goggles (Add-ons), or use the Equipment Wheel
+ms Gogal penglihatan malam dan terma; tukar antara biasa, penglihatan malam dan terma dengan Tukar Gogal (Tambahan), atau guna Roda Kelengkapan
+
+@ No single freeze lasts longer than this, however much damage or kill bonus adds
+ms Tiada beku tunggal yang lebih lama daripada ini, walau berapa pun tambahan kerosakan atau bonus bunuh
+
+@ Oldest marks and nails are recycled at this shared limit
+ms Kesan dan paku paling lama dikitar semula pada had kongsi ini
+
+@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
+ms Stik dan butang pada skrin: auto memaparkannya selepas sentuhan dan menyembunyikannya apabila peranti lain digunakan
+
+@ Only autosaves: quicksaves and the Save menu are off
+ms Simpanan auto sahaja: simpan pantas dan menu Simpan dimatikan
+
+@ Place every weapon at the center, right or left of the view, or hide all viewmodels
+ms Letakkan setiap senjata di tengah, kanan atau kiri pandangan, atau sembunyikan semua model senjata
+
+@ Play your chosen hit or kill cue when you damage an enemy
+ms Mainkan isyarat kena atau bunuh pilihan anda apabila anda mencederakan musuh
+
+@ Playback speed: faster sounds shorter and higher
+ms Kelajuan main semula: lebih laju berbunyi lebih pendek dan lebih tinggi
+
+@ Plays the Quake theme in the main menu when no game is running
+ms Mainkan tema Quake di menu utama apabila tiada permainan berjalan
+
+@ Portals farther away than this are drawn as flat discs
+ms Portal yang lebih jauh daripada ini dilukis sebagai cakera rata
+
+@ Press attack once to keep firing, again to stop
+ms Tekan serang sekali untuk terus menembak, tekan lagi untuk berhenti
+
+@ Press run once to switch between running and walking
+ms Tekan lari sekali untuk bertukar antara berlari dan berjalan
+
+@ Raise or lower the tone independently of sound length
+ms Naikkan atau turunkan nada tanpa mengubah panjang bunyi
+
+@ Red screen edges show where damage came from: top is front, bottom is behind; Screen Flashes controls their strength
+ms Tepi skrin merah menunjukkan arah datangnya kerosakan: atas ialah depan, bawah ialah belakang; Kilatan Skrin mengawal kekuatannya
+
+@ Replaces the classic dot particles with glowing sparks, smoke and blood; mods with their own particle effects keep them
+ms Menggantikan zarah titik klasik dengan percikan api bercahaya, asap dan darah; mod dengan kesan zarah sendiri mengekalkannya
+
+@ Resolution and detail inside portal and teleporter views; lower tiers trim nested effects
+ms Resolusi dan perincian dalam paparan portal dan teleporter; tahap lebih rendah mengurangkan kesan bersarang
+
+@ Rippling light patterns on surfaces under water and slime
+ms Corak cahaya beralun pada permukaan di bawah air dan lendir
+
+@ Scales all damage you take; above 100% is harder
+ms Menskalakan semua kerosakan yang anda terima; melebihi 100% lebih sukar
+
+@ Screen edge for this element; elements on the same spot stack
+ms Tepi skrin bagi elemen ini; elemen di tempat yang sama disusun bertindan
+
+@ Seconds a monster hit by the boomerang stays stunned
+ms Saat raksasa yang terkena bumerang kekal pengsan
+
+@ Seconds impact marks and stuck nails stay before fading out; independent of Particle Quality
+ms Saat kesan hentaman dan paku tertancap kekal sebelum pudar; bebas daripada Kualiti Zarah
+
+@ Seconds messages at the top of the screen stay up
+ms Saat mesej di bahagian atas skrin dipaparkan
+
+@ Seconds the flick stick snap takes; lower is faster
+ms Saat yang diambil oleh hentakan flick stick; lebih rendah lebih pantas
+
+@ See through enhanced water; enables Water Opacity
+ms Lihat menembusi air dipertingkat; menghidupkan Kelegapan Air
+
+@ Sensor grain, scanlines and flicker of the goggle image
+ms Butiran sensor, garis imbasan dan kelipan imej gogal
+
+@ Shades every anti-aliasing sample; needs Anti-aliasing on
+ms Melorek setiap sampel anti-alias; memerlukan Anti-alias hidup
+
+@ Shifts colors so they stay distinct for the chosen color blindness
+ms Mengalihkan warna supaya kekal berbeza bagi buta warna yang dipilih
+
+@ Shotgun hits leave small surface marks (cosmetic only)
+ms Tembakan senapang patah meninggalkan kesan kecil pada permukaan (kosmetik sahaja)
+
+@ Show corner ticks at screen centre while locked, even with Crosshair off
+ms Papar tanda sudut di tengah skrin semasa dikunci, walaupun Rerambut Silang mati
+
+@ Show where grenades and other arcing shots will fly, bounce and land; local play only, not in deathmatch
+ms Tunjukkan arah bom tangan dan tembakan melengkung lain akan terbang, melantun dan mendarat; permainan tempatan sahaja, bukan deathmatch
+
+@ Shows text for important sounds: doors, alerted enemies, secrets, pickups
+ms Memaparkan teks untuk bunyi penting: pintu, musuh yang berjaga-jaga, rahsia, kutipan
+
+@ Shows the distance fog that maps and mods set; off always gives clear view
+ms Memaparkan kabus jarak yang ditetapkan oleh peta dan mod; mati sentiasa memberi pandangan jelas
+
+@ Shows the player face next to the health number
+ms Memaparkan wajah pemain di sebelah nombor kesihatan
+
+@ Simulation detail, step rate, fade-out lifetimes and caps for gibs and shrapnel; low also skips mover collision
+ms Perincian simulasi, kadar langkah, jangka hayat pudar dan had bagi cebisan daging dan serpihan; rendah juga melangkau perlanggaran dengan objek bergerak
+
+@ Size of the on-screen buttons and move stick
+ms Saiz butang dan stik gerakan pada skrin
+
+@ Slowly heals up to 100 health after 5 seconds without being hit
+ms Memulihkan kesihatan perlahan-lahan sehingga 100 selepas 5 saat tanpa diserang
+
+@ Slows stick look while the crosshair is over an enemy
+ms Memperlahankan pandangan stik semasa rerambut silang berada di atas musuh
+
+@ Slows the game down while the weapon wheel is open
+ms Memperlahankan permainan semasa roda senjata dibuka
+
+@ Slows the whole game down; single player only. Saves and demos stay compatible with other ports
+ms Memperlahankan seluruh permainan; pemain tunggal sahaja. Simpanan dan demo kekal serasi dengan port lain
+
+@ Small camera jolt on each freeze; off with Reduce Motion
+ms Sentakan kamera kecil pada setiap beku; mati dengan Kurangkan Gerakan
+
+@ Snap and track enemies in local play, including split-screen; unavailable online
+ms Kunci dan jejak musuh dalam permainan tempatan, termasuk skrin pisah; tidak tersedia dalam talian
+
+@ Sparks, smoke, chips, splinters and splashes fly off whatever your shots hit
+ms Percikan api, asap, serpihan, selumbar dan percikan cecair terpelanting dari apa sahaja yang terkena tembakan anda
+
+@ Spawns extra copies of every monster around the original when a level starts
+ms Mewujudkan salinan tambahan setiap raksasa di sekeliling yang asal apabila peringkat bermula
+
+@ Strength of the full-screen flashes for damage, pickups and powerups
+ms Kekuatan kilatan skrin penuh untuk kerosakan, kutipan dan kuasa
+
+@ Stretch or shorten the sound while keeping its pitch
+ms Memanjangkan atau memendekkan bunyi sambil mengekalkan picnya
+
+@ Surface opacity; requires Enhanced Water and Translucent Water
+ms Kelegapan permukaan; memerlukan Air Dipertingkat dan Air Lut Cahaya
+
+@ The hook latches onto metal surfaces (metal, tech, computer panels, copper)
+ms Cangkuk melekat pada permukaan logam (logam, teknologi, panel komputer, tembaga)
+
+@ The hook latches onto stone, brick, rock and any surface not recognised as wood or metal
+ms Cangkuk melekat pada batu, bata, batuan dan sebarang permukaan yang tidak dikenali sebagai kayu atau logam
+
+@ The hook latches onto wooden surfaces (texture names like wood, crate, plank)
+ms Cangkuk melekat pada permukaan kayu (nama tekstur seperti wood, crate, plank)
+
+@ Turn the controller's motion sensor into a look input; needs a pad with a gyroscope
+ms Jadikan sensor gerakan alat kawalan sebagai input pandangan; memerlukan alat kawalan dengan giroskop
+
+@ Turns off view bob, strafe tilt and the camera kick when hit or firing
+ms Mematikan ayunan pandangan, kecondongan langkah sisi dan sentakan kamera semasa diserang atau menembak
+
+@ Turns on the extra liquid effects; Water Settings controls each one
+ms Menghidupkan kesan cecair tambahan; Tetapan Air mengawal setiap satu
+
+@ Turns the view to follow a moving enemy you are aiming at
+ms Memusingkan pandangan untuk mengikut musuh bergerak yang anda bidik
+
+@ Turns the view when you roll the controller sideways; 0 disables it, negative reverses it
+ms Memusingkan pandangan apabila anda menggulingkan alat kawalan ke sisi; 0 mematikannya, nilai negatif menyongsangkannya
+
+@ Two-portal gun: fire and alt-fire place linked portals on flat walls; assign a weapon slot in Add-ons
+ms Senapang dua portal: tembakan dan tembakan alt meletakkan portal yang dipautkan pada dinding rata; tetapkan slot senjata dalam Tambahan
+
+@ Unlocks the FX Settings page: enhanced particles, impact effects and blood splatter
+ms Membuka halaman Tetapan Kesan: zarah dipertingkat, kesan hentaman dan percikan darah
+
+@ Uses the 2021 re-release's smoother MD5 models (and MD3 replacements from mods) instead of the classic ones. Applies on the next map load
+ms Menggunakan model MD5 yang lebih licin daripada keluaran semula 2021 (dan pengganti MD3 daripada mod) dan bukannya model klasik. Berkuat kuasa pada pemuatan peta seterusnya
+
+@ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
+ms Menggunakan cahaya berwarna peta (fail .lit atau lump BSPX); mati memberi cahaya putih asal. Berkuat kuasa pada pemuatan peta seterusnya
+
+@ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
+ms Segmen pancutan air, bilangan titisan dan pelorekan cecair berkilat: rendah guna aliran lut cahaya yang lebih ringkas; tinggi guna pancutan berkilat yang licin
+
+@ When gyro looking applies: always, off while +gyroaction is held, or only while it is held
+ms Bila pandangan giro digunakan: sentiasa, mati semasa +gyroaction ditahan, atau hanya semasa ia ditahan
+
+@ Which weapons trigger the freeze; melee covers the axe and any mod weapon used at close range without ammo
+ms Senjata yang mencetuskan beku; jarak dekat merangkumi kapak dan sebarang senjata mod yang digunakan dari dekat tanpa peluru
+
+@ Your own rockets and grenades don't hurt you; rocket jumps still work
+ms Roket dan bom tangan anda sendiri tidak mencederakan anda; lompatan roket masih berfungsi
+
+# ==== ui.txt ====
+
+# Menus and pop-ups outside the options pages: save cards, launch, presets,
+# add-on browser, map packs, hints and dialogs.
+@ Select
+ms Pilih
+
+@ Back
+ms Kembali
+
+@ Cancel
+ms Batal
+
+@ Confirm
+ms Sahkan
+
+@ Scroll
+ms Tatal
+
+@ Section
+ms Bahagian
+
+@ Bind
+ms Ikat
+
+@ Cancel binding
+ms Batal ikatan
+
+@ Clear
+ms Kosongkan
+
+@ Clear pad
+ms Kosongkan pad
+
+@ Remap
+ms Peta semula
+
+@ Type
+ms Taip
+
+@ Shift
+ms Shift
+
+@ Done
+ms Selesai
+
+@ Del
+ms Del
+
+@ Space
+ms Ruang
+
+@ Save
+ms Simpan
+
+@ Load
+ms Muat
+
+@ Delete
+ms Padam
+
+@ Play
+ms Main
+
+@ Yes
+ms Ya
+
+@ No
+ms Tidak
+
+@ OK
+ms OK
+
+@ System
+ms Sistem
+
+@ Language
+ms Bahasa
+
+@ Help
+ms Bantuan
+
+@ Fixed for this game: it was started without Customize
+ms Tetap untuk permainan ini: ia dimulakan tanpa Ubah Suai
+
+@ Press a button or key to bind (Start cancels)
+ms Tekan butang atau kekunci untuk diikat (Start untuk batal)
+
+@ Press button...
+ms Tekan butang...
+
+@ Press key...
+ms Tekan kekunci...
+
+@ Replace this binding?
+ms Ganti ikatan ini?
+
+@ is already assigned
+ms sudah ditetapkan
+
+@ {} already assigned
+ms {} sudah ditetapkan
+
+@ Open Controls to remap Lock-on?
+ms Buka Kawalan untuk memeta semula Kunci Sasaran?
+
+@ Lock-on
+ms Kunci Sasaran
+
+@ Auto-aim Toggle
+ms Togol Bidikan Auto
+
+@ Keyboard
+ms Papan Kekunci
+
+@ Controller
+ms Alat Kawalan
+
+# main menu, dialogs and screens
+@ Map Packs
+ms Pek Peta
+
+@ Customize
+ms Ubah Suai
+
+@ Level Select
+ms Pilih Peringkat
+
+@ Really quit?
+ms Betul-betul keluar?
+
+@ You died
+ms Anda mati
+
+@ Continue from most recent save
+ms Teruskan dari simpanan terbaru
+
+@ Select save
+ms Pilih simpanan
+
+@ Restart level
+ms Mula semula peringkat
+
+@ Return to main menu
+ms Kembali ke menu utama
+
+@ (disabled)
+ms (dimatikan)
+
+@ (fixed for this game)
+ms (tetap untuk permainan ini)
+
+@ (off)
+ms (mati)
+
+@ Apply Display Changes
+ms Guna Perubahan Paparan
+
+@ Display Mode
+ms Mod Paparan
+
+@ Resolution
+ms Resolusi
+
+@ desktop
+ms desktop
+
+@ Preset
+ms Pratetap
+
+@ Map
+ms Peta
+
+@ Reset Shader Settings
+ms Set Semula Tetapan Shader
+
+@ Reset to Defaults
+ms Set Semula ke Lalai
+
+@ Searching...
+ms Mencari...
+
+@ This game only autosaves.
+ms Permainan ini hanya simpan auto.
+
+@ (No Manual Saves modifier)
+ms (pengubah suai Tiada Simpan Manual)
+
+@ End the current game?
+ms Tamatkan permainan semasa?
+
+@ Unsaved progress will be lost.
+ms Kemajuan yang tidak disimpan akan hilang.
+
+@ End game
+ms Tamatkan permainan
+
+@ Overwrite
+ms Tulis ganti
+
+@ Overwrite "{}"?
+ms Tulis ganti "{}"?
+
+@ Saved {}
+ms Disimpan {}
+
+@ Start a new game?
+ms Mulakan permainan baharu?
+
+@ New game
+ms Permainan baharu
+
+@ New Game
+ms Permainan Baharu
+
+@ CUSTOM
+ms UBAH
+
+@ Customize Experience
+ms Ubah Suai Pengalaman
+
+@ Disable All
+ms Matikan Semua
+
+@ Disable All Modifications
+ms Matikan Semua Pengubahsuaian
+
+@ Saves load in other source ports too.
+ms Simpanan boleh dimuat dalam port lain juga.
+
+@ Standard rules, no add-ons.
+ms Peraturan standard, tiada tambahan.
+
+@ Choose skill
+ms Pilih tahap kesukaran
+
+@ The current game will end
+ms Permainan semasa akan tamat
+
+@ Easy
+ms Mudah
+
+@ Normal
+ms Biasa
+
+@ Hard
+ms Sukar
+
+@ Nightmare
+ms Mimpi Ngeri
+
+# graphics preset pop-up
+@ Choose a Graphics Preset
+ms Pilih Pratetap Grafik
+
+@ Classic
+ms Klasik
+
+@ Like the re-release: enhanced models,
+ms Seperti keluaran semula: model dipertingkat,
+
+@ no added effects.
+ms tiada kesan tambahan.
+
+@ Enhanced
+ms Dipertingkat
+
+@ Every enhancement at its highest quality.
+ms Setiap peningkatan pada kualiti tertinggi.
+
+@ Needs a capable GPU.
+ms Memerlukan GPU yang mampu.
+
+@ Low-End
+ms Rendah
+
+@ Fastest. No anti-aliasing, original
+ms Paling pantas. Tiada anti-alias, model
+
+@ models, lowest effect quality.
+ms asal, kualiti kesan terendah.
+
+@ Esc keeps the defaults
+ms Esc mengekalkan lalai
+
+@ Everything can be changed later in Options.
+ms Semuanya boleh diubah kemudian dalam Options.
+
+@ Keep Defaults
+ms Kekalkan Lalai
+
+# save and load cards
+@ Save Game
+ms Simpan Permainan
+
+@ Load Game
+ms Muat Permainan
+
+@ Autosaves
+ms Simpanan Auto
+
+@ newest first
+ms terbaru dahulu
+
+@ Saves: {}
+ms Simpanan: {}
+
+@ Browse Autosaves
+ms Layari Simpanan Auto
+
+@ Every retained autosave, newest first
+ms Setiap simpanan auto yang dikekalkan, terbaru dahulu
+
+@ New save
+ms Simpanan baharu
+
+@ Select to save your game here
+ms Pilih untuk menyimpan permainan anda di sini
+
+@ No autosaves yet
+ms Belum ada simpanan auto
+
+@ Autosaves are made on level entry, secrets and more (Options > Gameplay)
+ms Simpanan auto dibuat semasa masuk peringkat, menemui rahsia dan lain-lain (Options > Permainan)
+
+@ No saves yet
+ms Belum ada simpanan
+
+@ Save from the Single Player menu, or press F6 to quicksave
+ms Simpan dari menu Single Player, atau tekan F6 untuk simpan pantas
+
+@ No picture
+ms Tiada gambar
+
+@ Del: delete save
+ms Del: padam simpanan
+
+@ Delete "{}"?
+ms Padam "{}"?
+
+@ This cannot be undone.
+ms Tindakan ini tidak boleh dibuat asal.
+
+@ Quicksave
+ms Simpan Pantas
+
+@ Autosave: {}
+ms Simpan auto: {}
+
+@ unknown trigger
+ms pencetus tidak diketahui
+
+@ Latest - {}
+ms Terbaru - {}
+
+@ Health {}
+ms Kesihatan {}
+
+@ Armor {}
+ms Perisai {}
+
+@ Kills {}/{}
+ms Bunuhan {}/{}
+
+@ Secrets {}/{}
+ms Rahsia {}/{}
+
+@ Split-screen, {} players
+ms Skrin pisah, {} pemain
+
+@ Co-op
+ms Koperatif
+
+@ Customized
+ms Diubah suai
+
+@ Customized, {}
+ms Diubah suai, {}
+
+@ Date unavailable
+ms Tarikh tidak tersedia
+
+@ Just now
+ms Baru sahaja
+
+@ {} min ago
+ms {} min lalu
+
+@ {} h ago
+ms {} jam lalu
+
+@ Level entry
+ms Masuk peringkat
+
+@ Secret found
+ms Rahsia ditemui
+
+@ All enemies killed
+ms Semua musuh dibunuh
+
+@ All secrets found
+ms Semua rahsia ditemui
+
+@ Timer
+ms Pemasa
+
+# customize pages
+@ Standard rules
+ms Peraturan standard
+
+@ Modifiers changed: {}
+ms Pengubah suai diubah: {}
+
+@ no add-ons
+ms tiada tambahan
+
+@ add-ons: {}
+ms tambahan: {}
+
+@ Saves of this game are .qsa files: they need this source port.
+ms Simpanan permainan ini ialah fail .qsa: ia memerlukan port sumber ini.
+
+@ Nothing changed: this plays as standard Quake.
+ms Tiada perubahan: ini dimainkan seperti Quake standard.
+
+@ Changes apply now and are saved with this game (.qsa).
+ms Perubahan berkuat kuasa sekarang dan disimpan bersama permainan ini (.qsa).
+
+@ This game started without Customize, so its rules are fixed.
+ms Permainan ini dimulakan tanpa Ubah Suai, jadi peraturannya tetap.
+
+@ Start a new game and choose Customize Experience.
+ms Mulakan permainan baharu dan pilih Ubah Suai Pengalaman.
+
+@ These rules apply to the next customized game.
+ms Peraturan ini terpakai pada permainan diubah suai seterusnya.
+
+# add-on browser
+@ Fire
+ms Tembak
+
+@ Alt Fire
+ms Tembakan Alt
+
+@ Configure Parameters >
+ms Konfigurasi Parameter >
+
+@ Configure
+ms Konfigurasi
+
+@ Settings
+ms Tetapan
+
+@ Change slot
+ms Tukar slot
+
+@ Toggle
+ms Togol
+
+@ Details
+ms Butiran
+
+@ Enter or click the box: toggle
+ms Enter atau klik kotak: togol
+
+@ Right / Tab / click: details
+ms Kanan / Tab / klik: butiran
+
+@ Input Remapping
+ms Peta Semula Input
+
+@ Weapon Slot
+ms Slot Senjata
+
+@ Customized games save as .qsa files, which need this source port.
+ms Permainan diubah suai disimpan sebagai fail .qsa, yang memerlukan port sumber ini.
+
+@ This game started without Customize, so its add-ons are fixed. Customize a new game instead.
+ms Permainan ini dimulakan tanpa Ubah Suai, jadi tambahannya tetap. Ubah suai permainan baharu sebaliknya.
+
+@ Bullet Time
+ms Masa Peluru
+
+@ Change Goggles
+ms Tukar Gogal
+
+@ Dodge / Dive
+ms Elak / Terjun
+
+@ Goggles
+ms Gogal
+
+@ Hitstop
+ms Hitstop
+
+@ Projectile Shotguns
+ms Senapang Patah Projektil
+
+@ BULLET TIME: 20%
+ms MASA PELURU: 20%
+
+@ NORMAL SPEED
+ms KELAJUAN BIASA
+
+@ SLOW MOTION: PHYSICAL PELLETS
+ms GERAK PERLAHAN: BUTIR FIZIKAL
+
+@ DEMONSTRATION
+ms DEMONSTRASI
+
+@ GAMEPLAY
+ms PERMAINAN
+
+@ LOOP
+ms GELUNG
+
+@ Preview unavailable
+ms Pratonton tidak tersedia
+
+# shader and language help lines
+@ A setting of the chosen shader; arrows step it, Enter is not needed
+ms Tetapan shader yang dipilih; anak panah mengubahnya, Enter tidak diperlukan
+
+@ Language of the menus, messages and the 2021 re-release's game text; System follows your computer's language
+ms Bahasa menu, mesej dan teks permainan keluaran semula 2021; Sistem mengikut bahasa komputer anda
+
+@ Puts every setting of the chosen shader back to the preset's defaults
+ms Kembalikan setiap tetapan shader yang dipilih kepada lalai pratetap
+
+@ RetroArch slang shader on the final image: CRT, scanlines, NTSC, sharpening; add your own in <game>/shaders
+ms Shader slang RetroArch pada imej akhir: CRT, garis imbasan, NTSC, penajaman; tambah milik anda dalam <permainan>/shaders
+
+# modern console footer
+@ Shift+PgUp/Dn: height  ` : hide
+ms Shift+PgUp/Dn: tinggi  ` : sembunyi
+
+@ Tab: complete  Ctrl+R: search  bash | pipe
+ms Tab: lengkapkan  Ctrl+R: cari  bash | paip
+
+@ ↑ +{} lines (End to jump) 
+ms ↑ +{} baris (End untuk lompat) 
+
+# add-on descriptions
+@ Create two linked portals on flat walls. Fire places the first portal; Alt Fire places the second. Walk through either portal to emerge from the other. Your momentum carries through. Assign a weapon slot below: pressing that slot repeatedly cycles its ordinary weapon and every enabled add-on assigned there. Portal view quality is configurable below.
+ms Cipta dua portal yang dipautkan pada dinding rata. Tembak meletakkan portal pertama; Tembakan Alt meletakkan yang kedua. Berjalan melalui mana-mana portal untuk keluar dari yang satu lagi. Momentum anda dibawa bersama. Tetapkan slot senjata di bawah: menekan slot itu berulang kali bertukar antara senjata biasanya dan setiap tambahan yang dihidupkan dan ditetapkan di situ. Kualiti paparan portal boleh dikonfigurasi di bawah.
+
+@ Hold Fire and sweep the crosshair over monsters to queue targets. Release Fire to throw: the boomerang visits each target, stuns it and returns to you. Alt Fire clears the queue. The weapon slot selects a group, not a separate hotkey: press it again to cycle through the weapons in that slot. Configure stun duration and flight speed below.
+ms Tahan Tembak dan sapu rerambut silang ke atas raksasa untuk menyenaraikan sasaran. Lepaskan Tembak untuk membaling: bumerang melawat setiap sasaran, memengsankannya dan kembali kepada anda. Tembakan Alt mengosongkan senarai. Slot senjata memilih satu kumpulan, bukan kekunci pintas berasingan: tekan lagi untuk bertukar antara senjata dalam slot itu. Konfigurasi tempoh pengsan dan kelajuan terbang di bawah.
+
+@ Hold Fire to charge a sticky bomb using rocket ammunition; release to launch. A longer charge throws it faster. Bombs cling to walls, doors and monsters. Alt Fire detonates your planted bombs together. Place a trap, retreat, then detonate it when enemies approach. Assign any weapon slot below; repeated presses cycle through the ordinary weapon and add-ons in that slot.
+ms Tahan Tembak untuk mengecas bom lekit menggunakan peluru roket; lepaskan untuk melancarkannya. Cas yang lebih lama membalingnya lebih laju. Bom melekat pada dinding, pintu dan raksasa. Tembakan Alt meletupkan semua bom yang anda pasang serentak. Pasang perangkap, berundur, kemudian letupkannya apabila musuh menghampiri. Tetapkan mana-mana slot senjata di bawah; tekanan berulang bertukar antara senjata biasa dan tambahan dalam slot itu.
+
+@ Fire launches a chain hook. It latches onto a permitted surface or enemy and reels you toward the anchor. Fire again or use Alt Fire to let go. Choose which materials and enemies can be hooked in Configure Parameters. Assign it to any weapon slot; repeated presses of the slot's existing binding cycle through its weapons.
+ms Tembak melancarkan cangkuk berantai. Ia melekat pada permukaan atau musuh yang dibenarkan dan menarik anda ke arah sauhnya. Tembak lagi atau guna Tembakan Alt untuk melepaskan. Pilih bahan dan musuh yang boleh dicangkuk dalam Konfigurasi Parameter. Tetapkan pada mana-mana slot senjata; tekanan berulang pada ikatan sedia ada slot itu bertukar antara senjatanya.
+
+@ A piercing railgun inspired by Quake III. Fire sends a slug through every enemy along its line. Each shot consumes two cells, with a 1.5 second refire interval. Damage and the spiral trail colour are configurable below. Choose a weapon slot: the slot's current binding selects and cycles the weapons assigned to it.
+ms Railgun penembus yang diilhamkan oleh Quake III. Tembak menghantar peluru menembusi setiap musuh dalam laluannya. Setiap tembakan menggunakan dua sel, dengan selang tembak semula 1.5 saat. Kerosakan dan warna jejak lingkaran boleh dikonfigurasi di bawah. Pilih slot senjata: ikatan semasa slot itu memilih dan bertukar antara senjata yang ditetapkan padanya.
+
+@ A Portal-style gel sprayer. Fire sprays blue Repulsion gel: land, jump or run into it to bounce, and landings on it never hurt. Alt Fire sprays orange Propulsion gel: run across it to go much faster. Gel coats floors and walls until washed off with the Powerwasher. Assign a weapon slot below; repeated presses cycle the weapons in that slot.
+ms Penyembur gel gaya Portal. Tembak menyembur gel Tolakan biru: mendarat, melompat atau berlari ke atasnya untuk melantun, dan mendarat di atasnya tidak pernah mencederakan. Tembakan Alt menyembur gel Pecutan jingga: berlari di atasnya untuk bergerak lebih laju. Gel menyalut lantai dan dinding sehingga dicuci dengan Pencuci Tekanan. Tetapkan slot senjata di bawah; tekanan berulang bertukar antara senjata dalam slot itu.
+
+@ A water cannon. Fire shoots a straight jet with limited reach; Alt Fire a wide, shorter fan. The water pushes enemies back, turns projectiles aside and washes away gel and blood. Push strength is configurable below. Assign a weapon slot below; repeated presses cycle the weapons in that slot.
+ms Meriam air. Tembak memancutkan pancutan lurus dengan jangkauan terhad; Tembakan Alt kipas lebar yang lebih pendek. Air menolak musuh ke belakang, memesongkan projektil dan mencuci gel serta darah. Kekuatan tolakan boleh dikonfigurasi di bawah. Tetapkan slot senjata di bawah; tekanan berulang bertukar antara senjata dalam slot itu.
+
+@ One equipment add-on includes both night vision and thermal vision. The Change Goggles action cycles Normal, Night Vision, Thermal, then Normal again. Night vision brightens dark rooms; thermal vision highlights living enemies. Goggles do not occupy a weapon slot. Configure intensity and sensor noise below. The binding affects only this add-on.
+ms Satu tambahan kelengkapan merangkumi penglihatan malam dan penglihatan terma. Tindakan Tukar Gogal bertukar antara Biasa, Penglihatan Malam, Terma, kemudian Biasa semula. Penglihatan malam menerangkan bilik gelap; penglihatan terma menonjolkan musuh yang hidup. Gogal tidak menggunakan slot senjata. Konfigurasi keamatan dan hingar sensor di bawah. Ikatan ini hanya mempengaruhi tambahan ini.
+
+@ Press Dodge with a movement direction on the ground or in midair: dive forward or leap backward and sideways. Diagonals are supported. Each press launches once, with a short recovery. The player body animates in third person. Assign the Dodge action below or in Controls.
+ms Tekan Elak bersama arah gerakan di atas tanah atau di udara: terjun ke depan atau lompat ke belakang dan ke sisi. Arah pepenjuru disokong. Setiap tekanan melancarkan sekali, dengan pemulihan singkat. Badan pemain beranimasi dalam orang ketiga. Tetapkan tindakan Elak di bawah atau dalam Kawalan.
+
+@ Use the dedicated Bullet Time action to slow the whole local game to 20% speed. Hold is the default; Toggle switches on each press. The optional meter limits use in real seconds and regenerates while inactive. Disable the meter for unlimited use. Remap the action and configure duration and regeneration below.
+ms Guna tindakan Masa Peluru khusus untuk memperlahankan seluruh permainan tempatan kepada kelajuan 20%. Tahan ialah lalai; Togol bertukar pada setiap tekanan. Meter pilihan mengehadkan penggunaan dalam saat sebenar dan pulih semasa tidak aktif. Matikan meter untuk penggunaan tanpa had. Peta semula tindakan dan konfigurasi tempoh serta pemulihan di bawah.
+
+@ Both shotguns and enemy grunts fire physical pellets with their original spread and damage. Fast default projectiles feel immediate; lower their speed to dodge incoming fire during bullet time. Configure projectile speed below, or reset it to the default of 10000 units per second.
+ms Kedua-dua senapang patah dan askar musuh menembak butir fizikal dengan serakan dan kerosakan asalnya. Projektil lalai yang laju terasa serta-merta; kurangkan kelajuannya untuk mengelak tembakan semasa masa peluru. Konfigurasi kelajuan projektil di bawah, atau set semula kepada lalai 10000 unit sesaat.
+
+@ Freezes the game for a split second when you damage an enemy, so hits feel heavier. Single player only. Choose which weapons trigger it (all, melee, ranged or explosives), how long it lasts and how much more a kill freezes. Advanced settings cover enemy toughness, damage scaling, cooldown and the longest freeze.
+ms Membekukan permainan sepersekian saat apabila anda mencederakan musuh, supaya serangan terasa lebih berat. Pemain tunggal sahaja. Pilih senjata yang mencetuskannya (semua, jarak dekat, jarak jauh atau bahan letupan), berapa lama ia berlangsung dan berapa lebih lama bunuhan membeku. Tetapan lanjutan merangkumi ketahanan musuh, skala kerosakan, masa bertenang dan beku paling lama.
+
+# map packs and the Quaddicted browser
+@ Get more maps (Quaddicted)...
+ms Dapatkan lebih banyak peta (Quaddicted)...
+
+@ Type to filter...
+ms Taip untuk menapis...
+
+@ Launch mod
+ms Lancar mod
+
+@ Start first map
+ms Mula peta pertama
+
+@ (running)
+ms (sedang berjalan)
+
+@ running
+ms sedang berjalan
+
+@ Recent
+ms Terkini
+
+@ Name
+ms Nama
+
+@ Dir
+ms Direktori
+
+@ Default
+ms Lalai
+
+@ Title
+ms Tajuk
+
+@ Sort: {}
+ms Isih: {}
+
+@ {} installed
+ms {} dipasang
+
+@ {}/{} matching
+ms {}/{} sepadan
+
+@ {} maps, {} completed
+ms {} peta, {} selesai
+
+@ {}/{} matching, {} completed
+ms {}/{} sepadan, {} selesai
+
+@ no maps of its own
+ms tiada peta sendiri
+
+@ dir: {}
+ms direktori: {}
+
+@ base: {}
+ms asas: {}
+
+@ Browse the Quaddicted archive of
+ms Layari arkib Quaddicted bagi
+
+@ single-player maps and episodes,
+ms peta dan episod pemain tunggal,
+
+@ then download and install them
+ms kemudian muat turun dan pasangnya
+
+@ here. Each release gets its own
+ms di sini. Setiap keluaran mendapat
+
+@ entry in this list.
+ms entrinya sendiri dalam senarai ini.
+
+@ Needs an internet connection.
+ms Memerlukan sambungan internet.
+
+@ Quaddicted Map Archive
+ms Arkib Peta Quaddicted
+
+@ Newest
+ms Terbaharu
+
+@ Author
+ms Pengarang
+
+@ Size
+ms Saiz
+
+@ Loading the map list...
+ms Memuatkan senarai peta...
+
+@ Couldn't load the map list: {}
+ms Tidak dapat memuatkan senarai peta: {}
+
+@ {} single-player releases  -  F5 refreshes
+ms {} keluaran pemain tunggal  -  F5 muat semula
+
+@ {} matching
+ms {} sepadan
+
+@ by {}
+ms oleh {}
+
+@ requires: {}
+ms memerlukan: {}
+
+@ maps: {}
+ms peta: {}
+
+@ Failed: {}
+ms Gagal: {}
+
+@ Downloading... {}%
+ms Memuat turun... {}%
+
+@ Unpacking...
+ms Membuka pek...
+
+@ Installed in {}/  -  Enter: play
+ms Dipasang dalam {}/  -  Enter: main
+
+@ Enter: download and install
+ms Enter: muat turun dan pasang
+
+@ unpacking
+ms membuka pek
+
+@ failed
+ms gagal
+
+@ installed
+ms dipasang
+
+@ Downloads are not available in the browser build
+ms Muat turun tidak tersedia dalam versi pelayar
+
+@ the map list could not be read
+ms senarai peta tidak dapat dibaca
+
+@ downloading needs the curl program
+ms muat turun memerlukan program curl
+
+@ download failed
+ms muat turun gagal
+
+@ the download is not a valid zip
+ms muat turun bukan zip yang sah
+
+@ nothing to install for this engine
+ms tiada apa untuk dipasang bagi enjin ini
+
+@ needs {} installed first
+ms perlu memasang {} dahulu
+
+@ couldn't unpack {}
+ms tidak dapat membuka pek {}
+
+# help screen
+@ About
+ms Perihal
+
+@ < Back
+ms < Kembali
+
+# tr_ctx keys: English shows the short word, the key says which meaning
+@ Save (a manual save, as opposed to a quicksave or autosave)
+ms Simpanan
+
+# ==== hud.txt ====
+
+# HUD, weapon and equipment wheels, sound captions and other in-game text.
+# Weapon, monster and item names follow the 2021 re-release's own translations.
+@ Axe
+ms Kapak
+
+@ Shotgun
+ms Senapang Patah
+
+@ Double-Barrelled Shotgun
+ms Senapang Patah Dua Laras
+
+@ Nailgun
+ms Senapang Paku
+
+@ Super Nailgun
+ms Senapang Paku Super
+
+@ Grenade Launcher
+ms Pelancar Bom Tangan
+
+@ Rocket Launcher
+ms Pelancar Roket
+
+@ Thunderbolt
+ms Halilintar
+
+@ Portal Gun
+ms Senapang Portal
+
+@ Boomerang
+ms Bumerang
+
+@ Stickybomb Launcher
+ms Pelancar Bom Lekit
+
+@ Railgun
+ms Railgun
+
+@ Hookshot
+ms Cangkuk
+
+@ Gel Sprayer
+ms Penyembur Gel
+
+@ Powerwasher
+ms Pencuci Tekanan
+
+@ Night Vision Goggles
+ms Gogal Penglihatan Malam
+
+@ Thermal Goggles
+ms Gogal Terma
+
+@ Normal vision
+ms Penglihatan biasa
+
+@ ON
+ms HIDUP
+
+@ OFF
+ms MATI
+
+@ {} (turn on)
+ms {} (hidupkan)
+
+@ {} (turn off)
+ms {} (matikan)
+
+@ Move mouse to select, release to toggle
+ms Gerakkan tetikus untuk memilih, lepaskan untuk togol
+
+@ Move mouse to select, release to equip
+ms Gerakkan tetikus untuk memilih, lepaskan untuk guna
+
+@ Release to toggle
+ms Lepaskan untuk togol
+
+@ Release to equip
+ms Lepaskan untuk guna
+
+@ shells
+ms kelongsong
+
+@ nails
+ms paku
+
+@ rockets
+ms roket
+
+@ cells
+ms sel
+
+@ Kills: {}/{}
+ms Bunuhan: {}/{}
+
+@ Secrets: {}/{}
+ms Rahsia: {}/{}
+
+@ Time {}
+ms Masa {}
+
+@ Press any button to continue...
+ms Tekan mana-mana butang untuk teruskan...
+
+@ Press any key to continue...
+ms Tekan mana-mana kekunci untuk teruskan...
+
+@ BULLET TIME
+ms MASA PELURU
+
+@ AUTO AIM
+ms BIDIKAN AUTO
+
+@ Crosshair
+ms Rerambut Silang
+
+@ + Marker
+ms + Penanda
+
+@ Hit markers off
+ms Penanda kena mati
+
+@ On target
+ms Pada sasaran
+
+@ On kill
+ms Bila bunuh
+
+# sound captions
+@ [Secret found]
+ms [Rahsia ditemui]
+
+@ [Message]
+ms [Mesej]
+
+@ [Switch activated]
+ms [Suis diaktifkan]
+
+@ [Key picked up]
+ms [Kunci dikutip]
+
+@ [Rune picked up]
+ms [Rune dikutip]
+
+@ [Teleporter]
+ms [Teleporter]
+
+@ [Teleport]
+ms [Teleport]
+
+@ [Splash]
+ms [Debur]
+
+@ [Leaving water]
+ms [Keluar dari air]
+
+@ [Door]
+ms [Pintu]
+
+@ [Platform moving]
+ms [Platform bergerak]
+
+@ [Button]
+ms [Butang]
+
+@ [Health picked up]
+ms [Kesihatan dikutip]
+
+@ [Armor picked up]
+ms [Perisai dikutip]
+
+@ [Quad Damage wearing off]
+ms [Kerosakan Empat Kali hampir tamat]
+
+@ [Quad Damage]
+ms [Kerosakan Empat Kali]
+
+@ [Pentagram wearing off]
+ms [Pentagram hampir tamat]
+
+@ [Pentagram of Protection]
+ms [Pentagram Perlindungan]
+
+@ [Ring wearing off]
+ms [Cincin hampir tamat]
+
+@ [Ring of Shadows]
+ms [Cincin Bayang]
+
+@ [Biosuit wearing off]
+ms [Sut Bio hampir tamat]
+
+@ [Biosuit]
+ms [Sut Bio]
+
+@ [Item picked up]
+ms [Item dikutip]
+
+@ [Weapon picked up]
+ms [Senjata dikutip]
+
+@ [Ammo picked up]
+ms [Peluru dikutip]
+
+@ [Explosion]
+ms [Letupan]
+
+@ [Grenade launched]
+ms [Bom tangan dilancar]
+
+@ [Grenade bounce]
+ms [Bom tangan melantun]
+
+@ [Rocket fired]
+ms [Roket ditembak]
+
+@ [Nails fired]
+ms [Paku ditembak]
+
+@ [Lightning]
+ms [Kilat]
+
+@ [Thunder]
+ms [Guruh]
+
+@ [Enforcer alerted]
+ms [Enforcer berjaga-jaga]
+
+@ [Grunt alerted]
+ms [Grunt berjaga-jaga]
+
+@ [Rottweiler alerted]
+ms [Rottweiler berjaga-jaga]
+
+@ [Knight alerted]
+ms [Kesatria berjaga-jaga]
+
+@ [Death Knight alerted]
+ms [Kesatria Maut berjaga-jaga]
+
+@ [Scrag alerted]
+ms [Scrag berjaga-jaga]
+
+@ [Ogre alerted]
+ms [Ogre berjaga-jaga]
+
+@ [Fiend alerted]
+ms [Fiend berjaga-jaga]
+
+@ [Shambler alerted]
+ms [Shambler berjaga-jaga]
+
+@ [Zombie groaning]
+ms [Zombi mengerang]
+
+@ [Vore alerted]
+ms [Vore berjaga-jaga]
+
+@ [Vore attacking]
+ms [Vore menyerang]
+
+@ [Spawn alerted]
+ms [Spawn berjaga-jaga]
+
+@ [Rotfish]
+ms [Ikan Busuk]
+
+@ [Spawn]
+ms [Spawn]
+
+@ [Chthon]
+ms [Chthon]
+
+@ [Hard landing]
+ms [Mendarat keras]
+
+@ [Drowning]
+ms [Lemas]
+
+@ [Gasping for air]
+ms [Tercungap-cungap]
+
+@ [Burning]
+ms [Terbakar]
+
+@ [Telefrag]
+ms [Telefrag]
+
+@ [Gibbed]
+ms [Hancur berkecai]
+
+# ==== console.txt ====
+
+# Console messages, shown translated only with con_translate 1 (Translate Console).
+# Cvar and command names stay as they are.
+@ Autosaved.
+ms Simpan auto selesai.
+
+@ Game saved.
+ms Permainan disimpan.
+
+@ Can't save now.
+ms Tidak boleh simpan sekarang.
+
+@ This game only autosaves (No Manual Saves modifier).
+ms Permainan ini hanya simpan auto (pengubah suai Tiada Simpan Manual).
+
+@ Loading {}...
+ms Memuatkan {}...
+
+@ load failed: {}
+ms gagal memuat: {}
+
+@ ERROR: autosave failed: {}
+ms RALAT: simpan auto gagal: {}
+
+@ ERROR: couldn't open {}
+ms RALAT: tidak dapat membuka {}
+
+@ ERROR: couldn't open {}.
+ms RALAT: tidak dapat membuka {}.
+
+@ ERROR: couldn't write {}: {}
+ms RALAT: tidak dapat menulis {}: {}
+
+@ ERROR: couldn't create {}: {}
+ms RALAT: tidak dapat mencipta {}: {}
+
+@ couldn't write {}: {}
+ms tidak dapat menulis {}: {}
+
+@ Wrote {}
+ms Menulis {}
+
+@ screenshot failed: {}
+ms tangkapan skrin gagal: {}
+
+@ screenshot: {}
+ms tangkapan skrin: {}
+
+@ No readable save available. Select save or restart the level.
+ms Tiada simpanan yang boleh dibaca. Pilih simpanan atau mula semula peringkat.
+
+@ Unknown command "{}"
+ms Arahan tidak diketahui "{}"
+
+@ couldn't exec {}
+ms tidak dapat melaksanakan {}
+
+@ execing {}
+ms melaksanakan {}
+
+@ execing config.cfg (inherited from {})
+ms melaksanakan config.cfg (diwarisi daripada {})
+
+@ execing config.cfg (mod defaults)
+ms melaksanakan config.cfg (lalai mod)
+
+@ execing default.cfg (built-in)
+ms melaksanakan default.cfg (terbina dalam)
+
+@ {} cvars
+ms {} cvar
+
+@ {} commands
+ms {} arahan
+
+@ Can't "cmd", not connected
+ms Tidak boleh "cmd", tidak bersambung
+
+@ Looking for Quake servers...
+ms Mencari pelayan Quake...
+
+@ Bad value, must be between 1 and 65534
+ms Nilai tidak sah, mesti antara 1 dan 65534
+
+@ Couldn't handle music file {}
+ms Tidak dapat mengendalikan fail muzik {}
+
+@ Bug report written to {}
+ms Laporan pepijat ditulis ke {}
+
+@ bugreport: can't create {}: {}
+ms bugreport: tidak dapat mencipta {}: {}
+
+@ graphics preset: {}
+ms pratetap grafik: {}
+
+@ Presets (r_shader_preset <name>):
+ms Pratetap (r_shader_preset <nama>):
+
+@ Add your own .slangp presets under <game>/shaders/.
+ms Tambah pratetap .slangp anda sendiri di bawah <permainan>/shaders/.
+
+@ no shader preset loaded (r_shader_preset)
+ms tiada pratetap shader dimuatkan (r_shader_preset)
+
+@ r_shader_preset: "{}" not found
+ms r_shader_preset: "{}" tidak ditemui
+
+@ no parameter "{}" in this preset
+ms tiada parameter "{}" dalam pratetap ini
+
+@ {} = {} (default {}, {}..{})
+ms {} = {} (lalai {}, {}..{})
+
+@ Switching to {}...
+ms Bertukar ke {}...
+
+@ game: no game dir "{}" in {}
+ms game: tiada direktori permainan "{}" dalam {}
+
+@ game: can't find the engine executable
+ms game: tidak dapat mencari fail boleh laku enjin
+
+@ game: exec failed: {}
+ms game: pelaksanaan gagal: {}
+
+@ game: launch failed: {}
+ms game: pelancaran gagal: {}
+
+@ loaded {} in {}s
+ms {} dimuatkan dalam {}s
+
+@ No demos listed with startdemos
+ms Tiada demo disenaraikan dengan startdemos
+
+@ Playing demo from {}.
+ms Memainkan demo dari {}.
+
+@ {} frames {} seconds {} fps
+ms {} bingkai {} saat {} fps
+
+@ Recording to {}.
+ms Merakam ke {}.
+
+@ Completed demo
+ms Demo selesai
+
+@ Can't record during demo playback
+ms Tidak boleh merakam semasa main semula demo
+
+@ Relative pathnames are not allowed.
+ms Nama laluan relatif tidak dibenarkan.
+
+@ Can't record - try again when connected
+ms Tidak boleh merakam - cuba lagi apabila bersambung
+
+@ {} demo(s) in loop
+ms {} demo dalam gelung
+
+@ Not recording a demo.
+ms Tidak sedang merakam demo.
+
+@ {} joined on a gamepad
+ms {} menyertai dengan alat kawalan
+
+@ goggles: needs a game started with Add-ons and Goggles enabled
+ms goggles: memerlukan permainan yang dimulakan dengan Tambahan dan Gogal dihidupkan
+
+@ equip: needs a game started with Add-ons and Goggles enabled
+ms equip: memerlukan permainan yang dimulakan dengan Tambahan dan Gogal dihidupkan
+
+@ UDP listening on port {}
+ms UDP mendengar pada port {}
+
+@ UDP bind on port {} failed: {}
+ms Pengikatan UDP pada port {} gagal: {}
+
+@ Connection accepted by {}
+ms Sambungan diterima oleh {}
+
+@ Connection failed: {}
+ms Sambungan gagal: {}
+
+@ Couldn't resolve {}
+ms Tidak dapat menyelesaikan {}
+
+@ Connecting to {}...
+ms Menyambung ke {}...
+
+@ Connecting to QuakeWorld server {}...
+ms Menyambung ke pelayan QuakeWorld {}...
+
+@ Disconnected: {}
+ms Terputus: {}
+
+@ Server disconnected
+ms Pelayan terputus
+
+@ Client {} connected
+ms Klien {} bersambung
+
+@ Client {} timed out
+ms Klien {} tamat masa
+
+@ Couldn't spawn server {}: {}
+ms Tidak dapat memulakan pelayan {}: {}
+
+@ maxplayers can not be changed while a server is running.
+ms maxplayers tidak boleh diubah semasa pelayan sedang berjalan.
+
+@ You can't kick yourself!
+ms Anda tidak boleh menendang diri sendiri!
+
+@ Only the server may changelevel
+ms Hanya pelayan boleh changelevel
+
+@ {} renamed to {}
+ms {} menukar nama kepada {}

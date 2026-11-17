@@ -1,0 +1,3024 @@
+# is: the port's own text; English keys from crates/qcore/lang/*.txt.
+# Format in crates/qcore/src/lang/catalog.rs; check with tools/lang_check.py.
+
+# ==== menu.txt ====
+
+# Options pages: page names, row labels and choice values.
+@ 10% speed
+is 10% hraði
+
+@ 2 split-screen
+is 2 á skiptum skjá
+
+@ 3 split-screen
+is 3 á skiptum skjá
+
+@ 4 split-screen
+is 4 á skiptum skjá
+
+@ 5 split-screen
+is 5 á skiptum skjá
+
+@ 6 split-screen
+is 6 á skiptum skjá
+
+@ 2D aiming
+is 2D-miðun
+
+@ 2x monsters
+is 2× skrímsli
+
+@ 3x monsters
+is 3× skrímsli
+
+@ 4x monsters
+is 4× skrímsli
+
+@ 3D resolution
+is 3D-upplausn
+
+@ 3D view
+is 3D-sýn
+
+@ 8-bit Color
+is 8 bita litir
+
+@ Accessibility
+is Aðgengi
+
+@ Acquisition Cone
+is Miðunarkeila
+
+@ Activation
+is Virkjun
+
+@ Add a ringing room tail after the cue
+is Bætir hljómandi rýmisómi við eftir merkið
+
+@ Add delayed repeats after the cue
+is Bætir seinkuðum endurtekningum við eftir merkið
+
+@ Add saturation and distortion
+is Bætir við mettun og bjögun
+
+@ Add-ons
+is Viðbætur
+
+@ Address
+is Vistfang
+
+@ Adds fine noise to hide color banding
+is Bætir við fínu suði til að fela litaþrep
+
+@ Advanced Settings
+is Ítarlegar stillingar
+
+@ Aim Assist
+is Miðaðstoð
+
+@ Aim Rotation
+is Miðunarsnúningur
+
+@ Aim Slowdown
+is Miðunarhæging
+
+@ Aim Style
+is Miðunarstíll
+
+@ All
+is Allt
+
+@ All enemies
+is Allir óvinir
+
+@ Alt Fire (Add-ons)
+is Aukaskot (Viðbætur)
+
+@ Always Run
+is Hlaupa alltaf
+
+@ Ambient Occlusion
+is Umhverfisskygging
+
+@ Ammo Counts
+is Skotfæratalning
+
+@ Ammo Counts Position
+is Staða skotfæratalningar
+
+@ Ammo Pickups
+is Skotfærapakkar
+
+@ Anisotropic
+is Anisótrópísk
+
+@ Anti-aliasing
+is Kantjöfnun
+
+@ Apply To
+is Nota á
+
+@ Armor
+is Brynja
+
+@ Armor Position
+is Staða brynju
+
+@ Ask
+is Spyrja
+
+@ Attack
+is Árás
+
+@ Audio
+is Hljóð
+
+@ Auto-aim
+is Sjálfvirk miðun
+
+@ Auto-aim Settings
+is Stillingar sjálfvirkrar miðunar
+
+@ Autosave
+is Sjálfvirk vistun
+
+@ Autosave Settings
+is Stillingar sjálfvirkrar vistunar
+
+@ Autosave Timer
+is Vistunartímabil
+
+@ Autosaves to Keep
+is Fjöldi sjálfvirkra vistana
+
+@ Bass
+is Bassi
+
+@ Blip
+is Blipp
+
+@ Blood Quality
+is Blóðgæði
+
+@ Blood Splatter Settings
+is Stillingar blóðslettna
+
+@ Blue
+is Blár
+
+@ Boomerang Settings
+is Stillingar búmerangs
+
+@ Boost or cut high frequencies in decibels
+is Hækkar eða lækkar háa tíðni í desíbelum
+
+@ Boost or cut low frequencies in decibels
+is Hækkar eða lækkar lága tíðni í desíbelum
+
+@ Brightness
+is Birta
+
+@ Bullet Time (Add-ons)
+is Bullet time (Viðbætur)
+
+@ Bullet Time Settings
+is Stillingar bullet time
+
+@ Button Glyphs
+is Hnappatákn
+
+@ Button Size
+is Hnappastærð
+
+@ Camera
+is Myndavél
+
+@ Caustic Intensity
+is Styrkur ljósbrots
+
+@ Caustics
+is Ljósbrot
+
+@ Center
+is Miðja
+
+@ Center Message Position
+is Staða miðskilaboða
+
+@ Center Message Time
+is Tími miðskilaboða
+
+@ Center View
+is Miðja sjónarhorn
+
+@ Change Color on Kill
+is Litaskipti við dráp
+
+@ Change Color on Target
+is Litaskipti við skotmark
+
+@ Chime
+is Klukknahljómur
+
+@ Click
+is Smellur
+
+@ Clink
+is Glamur
+
+@ Coin
+is Mynt
+
+@ Color
+is Litur
+
+@ Color Filter
+is Litasía
+
+@ Color of the grenade arc
+is Litur sprengjubogans
+
+@ Colored Lighting
+is Lituð lýsing
+
+@ Connect
+is Tengjast
+
+@ Contrast
+is Birtuskil
+
+@ Controls
+is Stýringar
+
+@ Cooldown (ms)
+is Biðtími (ms)
+
+@ Crosshair Outline
+is Útlína miðkross
+
+@ Crosshair Shape
+is Lögun miðkross
+
+@ Crosshair Size
+is Stærð miðkross
+
+@ Current Ammo
+is Núverandi skotfæri
+
+@ Current Ammo Position
+is Staða núverandi skotfæra
+
+@ Customize This Game
+is Sérsníða þennan leik
+
+@ Damage
+is Skaði
+
+@ Damage Taken
+is Móttekinn skaði
+
+@ Debris
+is Brak
+
+@ Debris Quality
+is Gæði braks
+
+@ Debris Settings
+is Stillingar braks
+
+@ Directional Damage
+is Stefna skaða
+
+@ Dithering
+is Dithering
+
+@ Dodge / Dive (Add-ons)
+is Undanvik / Dýfa (Viðbætur)
+
+@ Dragging up looks down instead of up
+is Að draga upp lítur niður í stað upp
+
+@ Drive
+is Mettun
+
+@ Dynamic Lights
+is Kvik ljós
+
+@ Echo
+is Bergmál
+
+@ Enemy Health
+is Heilsa óvina
+
+@ Enemy Wounds
+is Sár óvina
+
+@ Enhanced Blood Splatter
+is Bættar blóðslettur
+
+@ Enhanced FX
+is Bættar brellur
+
+@ Enhanced Models
+is Bætt líkön
+
+@ Enhanced Particles
+is Bættar agnir
+
+@ Enhanced Water
+is Bætt vatn
+
+@ Enhancements
+is Endurbætur
+
+@ Equipment Wheel (Add-ons)
+is Búnaðarhjól (Viðbætur)
+
+@ Exploding boxes throw metal shards
+is Springandi kassar kasta málmflísum
+
+@ Explosion Damage
+is Sprengjuskaði
+
+@ Explosion Scorch Marks
+is Brunaför eftir sprengingar
+
+@ Explosions scorch nearby solid surfaces
+is Sprengingar sviðna nálæga fleti
+
+@ Explosives only
+is Aðeins sprengivopn
+
+@ Extra Monsters
+is Fleiri skrímsli
+
+@ Extra Per 10 Damage (ms)
+is Auka á hverja 10 skaða (ms)
+
+@ FX Settings
+is Stillingar brellna
+
+@ Field of View
+is Sjónsvið
+
+@ Firing never uses up ammo
+is Skothríð eyðir aldrei skotfærum
+
+@ First person
+is Fyrstu persónu
+
+@ Flick Time
+is Flick-tími
+
+@ Flight Speed
+is Flughraði
+
+@ Fog
+is Þoka
+
+@ Frag Limit
+is Drápamörk
+
+@ Freeze Duration (ms)
+is Frystitími (ms)
+
+@ GLQuake
+is GLQuake
+
+@ Game Speed
+is Leikhraði
+
+@ Game Type
+is Leikgerð
+
+@ Gameplay
+is Spilun
+
+@ Gameplay Modifiers
+is Leikbreytur
+
+@ Gel Quality
+is Hlaupgæði
+
+@ Gib Surface Painting
+is Kjötbitaslettur
+
+@ Gibs
+is Kjötbitar
+
+@ Gibs and heads tumble and bounce
+is Kjötbitar og höfuð velta og skoppa
+
+@ Goggle Glow Quality
+is Gæði gleraugnaljóma
+
+@ Goggle Intensity
+is Styrkur gleraugna
+
+@ Goggle Noise
+is Suð gleraugna
+
+@ Goggles Settings
+is Stillingar gleraugna
+
+@ Graphics
+is Grafík
+
+@ Green
+is Grænn
+
+@ Grenade Arc
+is Sprengjubogi
+
+@ Grenade Arc Settings
+is Stillingar sprengjuboga
+
+@ Gun Kick
+is Bakslag vopns
+
+@ Gyro
+is Gyro
+
+@ Gyro & Flick Stick
+is Gyro og flick-stick
+
+@ Gyro Active
+is Gyro virkt
+
+@ Gyro Aiming
+is Gyro-miðun
+
+@ HUD
+is HUD
+
+@ HUD Style
+is HUD-stíll
+
+@ Health
+is Heilsa
+
+@ Health Pickups
+is Heilsupakkar
+
+@ Health Position
+is Staða heilsu
+
+@ Health Regeneration
+is Heilsuendurnýjun
+
+@ Hit & Kill Sounds
+is Hitt- og dráphljóð
+
+@ Hit Doors & Lifts
+is Hitta hurðir og lyftur
+
+@ Hit Markers
+is Hittmerki
+
+@ Hit Sound
+is Hitthljóð
+
+@ Hitmarker Size
+is Stærð hittmerkja
+
+@ Hitmarker Type
+is Gerð hittmerkja
+
+@ Hitstop Advanced
+is Hitstop, ítarlegt
+
+@ Hitstop Settings
+is Stillingar hitstop
+
+@ Hold
+is Halda
+
+@ Hold lock-on
+is Halda miðlæsingu
+
+@ Hook Enemies
+is Krækja óvini
+
+@ Hook Metal
+is Krækja málm
+
+@ Hook Stone
+is Krækja stein
+
+@ Hook Wood
+is Krækja við
+
+@ Hooking an enemy pulls you to it
+is Krókur í óvini dregur þig að honum
+
+@ Hookshot Range
+is Drægni krókbyssu
+
+@ Hookshot Settings
+is Stillingar krókbyssu
+
+@ Host Game
+is Hýsa leik
+
+@ How far the hook flies before it retracts
+is Hversu langt krókurinn flýgur áður en hann snýr við
+
+@ How visible the on-screen controls are
+is Hversu sýnilegar stýringarnar á skjánum eru
+
+@ Impact Lifetime
+is Líftími högga
+
+@ Infinite Ammo
+is Óendanleg skotfæri
+
+@ Input
+is Inntak
+
+@ Input Scale
+is Inntakskvarði
+
+@ Interpolate Animation
+is Brúa hreyfimyndir
+
+@ Interpolate Movement
+is Brúa hreyfingu
+
+@ Invert Look
+is Öfug sjón
+
+@ Invert Mouse
+is Öfug mús
+
+@ Invert Stick
+is Öfugur pinni
+
+@ Jet Quality
+is Bunugæði
+
+@ Join Game
+is Taka þátt í leik
+
+@ Jump / Swim Up
+is Hoppa / Synda upp
+
+@ Jump again in mid-air
+is Hoppa aftur í loftinu
+
+@ Jumps
+is Hopp
+
+@ Keys & Powerups
+is Lyklar og styrkir
+
+@ Keys & Powerups Position
+is Staða lykla og styrkja
+
+@ Kill Bonus (x)
+is Drápsbónus (x)
+
+@ Kill Sound
+is Dráphljóð
+
+@ Knock
+is Bank
+
+@ Left
+is Vinstri
+
+@ Length of the motion blur streaks
+is Lengd hreyfiþokurákanna
+
+@ Lifetime (seconds)
+is Líftími (sekúndur)
+
+@ Live Portal Views
+is Lifandi gáttasýn
+
+@ Live View Distance
+is Drægni lifandi sýnar
+
+@ Local Players
+is Staðbundnir leikmenn
+
+@ Local red wounds follow enemy animation
+is Staðbundin rauð sár fylgja hreyfingu óvina
+
+@ Lock Indicator
+is Læsingarvísir
+
+@ Long falls don't hurt
+is Löng föll meiða ekki
+
+@ Longest Freeze (ms)
+is Lengsta frysting (ms)
+
+@ Look Down
+is Líta niður
+
+@ Look Speed
+is Sjónhraði
+
+@ Look Up
+is Líta upp
+
+@ Main Menu Music
+is Tónlist í aðalvalmynd
+
+@ Max FPS
+is Hámarks-FPS
+
+@ Max Players
+is Hámark leikmanna
+
+@ Maximum Impacts
+is Hámark högga
+
+@ Maximum Marks
+is Hámark merkja
+
+@ Maximum Range
+is Hámarksdrægni
+
+@ Melee only
+is Aðeins návígi
+
+@ Message Background
+is Bakgrunnur skilaboða
+
+@ Message Text Size
+is Leturstærð skilaboða
+
+@ Messages & Captions
+is Skilaboð og skjátextar
+
+@ Meter Duration (real seconds)
+is Lengd mælis (raunsekúndur)
+
+@ Minimum Damage
+is Lágmarksskaði
+
+@ Mode
+is Hamur
+
+@ Modern Console
+is Nútímalegt stjórnborð
+
+@ Modern HUD Layout
+is Nútímalegt HUD-útlit
+
+@ Most recent save
+is Nýjasta vistun
+
+@ Motion Blur
+is Hreyfiþoka
+
+@ Motion Blur Amount
+is Magn hreyfiþoku
+
+@ Motion Blur Quality
+is Gæði hreyfiþoku
+
+@ Mouse & Keyboard
+is Mús og lyklaborð
+
+@ Mouse Speed
+is Músarhraði
+
+@ Move Back
+is Afturábak
+
+@ Move Forward
+is Áfram
+
+@ Music Volume
+is Hljóðstyrkur tónlistar
+
+@ Next Weapon
+is Næsta vopn
+
+@ No Drowning
+is Engin drukknun
+
+@ No Fall Damage
+is Enginn fallskaði
+
+@ No Manual Saves
+is Engar handvirkar vistanir
+
+@ No Self Damage
+is Enginn eigin skaði
+
+@ Noise Filter
+is Suðsía
+
+@ Normal Color
+is Venjulegur litur
+
+@ Notify Message Position
+is Staða tilkynninga
+
+@ Notify Message Time
+is Tími tilkynninga
+
+@ Number of splatter rays per blood impact
+is Fjöldi slettugeisla á hvert blóðhögg
+
+@ Off
+is Af
+
+@ On Death
+is Við dauða
+
+@ On Kill Color
+is Litur við dráp
+
+@ On Target Color
+is Litur á skotmarki
+
+@ Opacity
+is Ógegnsæi
+
+@ Opacity of the grenade arc
+is Ógegnsæi sprengjubogans
+
+@ Pants Color
+is Buxnalitur
+
+@ Particle Quality
+is Agnagæði
+
+@ Particles
+is Agnir
+
+@ Physical Nail Impacts
+is Raunveruleg naglahögg
+
+@ Pistol Start
+is Skammbyssubyrjun
+
+@ Pitch
+is Tónhæð
+
+@ Pitch Sensitivity
+is Lóðrétt næmni
+
+@ Playback Speed
+is Spilunarhraði
+
+@ Player Setup
+is Uppsetning leikmanns
+
+@ Pop
+is Popp
+
+@ Portal Gun Settings
+is Stillingar gáttabyssu
+
+@ Portal Recursion
+is Gáttaendurkvæmni
+
+@ Portal View Quality
+is Gæði gáttasýnar
+
+@ Preview Sound
+is Prófa hljóð
+
+@ Previous Weapon
+is Fyrra vopn
+
+@ Projectile Shotguns Settings
+is Stillingar skeytahaglabyssna
+
+@ Projectile Speed (units/s)
+is Skeytahraði (einingar/s)
+
+@ Purple
+is Fjólublár
+
+@ Push
+is Ýta
+
+@ Push Strength
+is Ýtistyrkur
+
+@ Quick Load
+is Flýtihleðsla
+
+@ Quick Save
+is Flýtivistun
+
+@ Railgun Settings
+is Stillingar Railgun
+
+@ Ranged only
+is Aðeins af færi
+
+@ Reacquire While Held
+is Endurmiða meðan haldið
+
+@ Red
+is Rauður
+
+@ Reduce Motion
+is Draga úr hreyfingu
+
+@ Regen (seconds per second)
+is Endurnýjun (sekúndur á sekúndu)
+
+@ Render Scale
+is Teiknikvarði
+
+@ Reverb
+is Ómur
+
+@ Right
+is Hægri
+
+@ Ripple Intensity
+is Styrkur gára
+
+@ Ripples
+is Gárur
+
+@ Roll Sensitivity
+is Veltinæmni
+
+@ Rumble
+is Titringur
+
+@ Run
+is Hlaupa
+
+@ Save on All Enemies Killed
+is Vista þegar allir óvinir eru dauðir
+
+@ Save on All Secrets Found
+is Vista þegar öll leyndarmál finnast
+
+@ Save on Level Entry
+is Vista við upphaf borðs
+
+@ Save on Secret Found
+is Vista þegar leyndarmál finnst
+
+@ Scoreboard
+is Stigatafla
+
+@ Screen Flashes
+is Skjáleiftur
+
+@ Screen Shader
+is Skjáskyggir
+
+@ Screen Shake
+is Skjáhristingur
+
+@ Search LAN
+is Leita á staðarneti
+
+@ Seconds a center-screen message stays up
+is Sekúndur sem skilaboð á miðjum skjá haldast
+
+@ See Through Portals
+is Sjá í gegnum gáttir
+
+@ See-through Teleporters
+is Gegnsæir fjarflytjarar
+
+@ Shirt Color
+is Skyrtulitur
+
+@ Shotgun Bullet Decals
+is Kúluför haglabyssu
+
+@ Shoulder left
+is Öxl vinstri
+
+@ Shoulder right
+is Öxl hægri
+
+@ Show FPS
+is Sýna FPS
+
+@ Show Face
+is Sýna andlit
+
+@ Shrapnel
+is Sprengjubrot
+
+@ Size of on-screen messages and captions
+is Stærð skilaboða og skjátexta á skjá
+
+@ Skill
+is Erfiðleikastig
+
+@ Sky Fog
+is Himinþoka
+
+@ Smooths the stepped movement of monsters
+is Mýkir rykkjóttar hreyfingar skrímsla
+
+@ Sound
+is Hljóð
+
+@ Sound Captions
+is Hljóðskjátextar
+
+@ Sound Volume
+is Hljóðstyrkur
+
+@ Speed Blur
+is Hraðaþoka
+
+@ Splashes
+is Skvettur
+
+@ Splatter Amount
+is Magn slettna
+
+@ Splatter Size
+is Stærð slettna
+
+@ Start Game
+is Hefja leik
+
+@ Staying underwater doesn't hurt
+is Að vera neðansjávar meiðir ekki
+
+@ Stick Look Pitch
+is Pinnasjón lóðrétt
+
+@ Stick Look Yaw
+is Pinnasjón lárétt
+
+@ Strafe Left
+is Hliðarskref vinstri
+
+@ Strafe Right
+is Hliðarskref hægri
+
+@ Strength of the surface swell and rings
+is Styrkur yfirborðsbylgna og hringja
+
+@ Stun Duration
+is Lengd rotunar
+
+@ Style
+is Stíll
+
+@ Supersampling
+is Ofursýnataka
+
+@ Surface Hit Effects
+is Höggáhrif á fleti
+
+@ Swim Down
+is Synda niður
+
+@ Targets
+is Skotmörk
+
+@ Teamplay
+is Liðsspil
+
+@ Texture Filter
+is Áferðarsía
+
+@ Third person
+is Þriðju persónu
+
+@ Thud
+is Dynkur
+
+@ Tick
+is Tikk
+
+@ Time Limit
+is Tímamörk
+
+@ Time Stretch
+is Tímateygja
+
+@ Toggle Attack
+is Árás af/á
+
+@ Toggle Run
+is Hlaup af/á
+
+@ Toggle auto-aim
+is Sjálfvirk miðun af/á
+
+@ Touch Controls
+is Snertistýringar
+
+@ Touchscreen
+is Snertiskjár
+
+@ Tough Enemy Health
+is Heilsa harðra óvina
+
+@ Tough enemies only
+is Aðeins harðir óvinir
+
+@ Trail Colour
+is Litur slóðar
+
+@ Translate Console
+is Þýða stjórnborð
+
+@ Translucent Water
+is Hálfgegnsætt vatn
+
+@ Treble
+is Diskant
+
+@ Turn Left
+is Snúa til vinstri
+
+@ Turn Right
+is Snúa til hægri
+
+@ Underwater FX
+is Brellur neðansjávar
+
+@ Use Bullet Time Meter
+is Nota bullet time-mæli
+
+@ VSync
+is VSync
+
+@ View Bob
+is Sjónvagg
+
+@ Viewmodels
+is Vopnalíkön
+
+@ Volume
+is Hljóðstyrkur
+
+@ Water Opacity
+is Ógegnsæi vatns
+
+@ Water Quality
+is Vatnsgæði
+
+@ Water Settings
+is Stillingar vatns
+
+@ Weapon Wheel
+is Vopnahjól
+
+@ Weapon Wheel Slowdown
+is Hæging við vopnahjól
+
+@ Weapons
+is Vopn
+
+@ Weapons Position
+is Staða vopna
+
+@ Where center-screen messages appear
+is Hvar skilaboð á miðjum skjá birtast
+
+@ Where pickup and event messages appear
+is Hvar skilaboð um fundi og atburði birtast
+
+@ White
+is Hvítur
+
+@ Yaw Sensitivity
+is Lárétt næmni
+
+@ Yellow
+is Gulur
+
+# lowercase choice values
+@ T
+is T
+
+@ always
+is alltaf
+
+@ auto
+is sjálfvirkt
+
+@ banded
+is þrepaskipt
+
+@ borderless
+is rammalaust
+
+@ bottom center
+is neðst fyrir miðju
+
+@ bottom left
+is neðst til vinstri
+
+@ bottom right
+is neðst til hægri
+
+@ box
+is kassi
+
+@ broken square
+is rofinn ferningur
+
+@ classic
+is klassískt
+
+@ coarse
+is gróft
+
+@ cooperative
+is samvinna
+
+@ cross
+is kross
+
+@ cross + dot
+is kross + punktur
+
+@ cyan
+is blágrænn
+
+@ dashed
+is strikað
+
+@ deathmatch
+is deathmatch
+
+@ deuteranopia
+is grænblinda
+
+@ diagonal streaks
+is skárákir
+
+@ diamond
+is tígull
+
+@ dot
+is punktur
+
+@ double
+is tvöfalt
+
+@ double chevrons
+is tvöföld vinkilmerki
+
+@ double diagonals
+is tvöfaldar skálínur
+
+@ easy
+is auðvelt
+
+@ fine
+is fínt
+
+@ fit output
+is laga að úttaki
+
+@ flick stick
+is flick-stick
+
+@ fullscreen
+is fullur skjár
+
+@ gap cross
+is opinn kross
+
+@ green
+is grænn
+
+@ grey
+is grár
+
+@ half speed
+is hálfur hraði
+
+@ hard
+is erfitt
+
+@ high
+is hátt
+
+@ huge
+is risastórt
+
+@ immersive
+is innlifun
+
+@ intense
+is ákaft
+
+@ large
+is stórt
+
+@ larger
+is stærra
+
+@ largest
+is stærst
+
+@ linear
+is línulegt
+
+@ low
+is lágt
+
+@ lower
+is neðri
+
+@ magenta
+is blárauður
+
+@ medium
+is miðlungs
+
+@ middle
+is miðja
+
+@ middle left
+is miðja vinstri
+
+@ middle right
+is miðja hægri
+
+@ modern
+is nútímalegt
+
+@ nearest
+is næsti nágranni
+
+@ nightmare
+is martröð
+
+@ nintendo
+is Nintendo
+
+@ no team damage
+is enginn liðsskaði
+
+@ none
+is ekkert
+
+@ normal
+is venjulegt
+
+@ off
+is af
+
+@ off while held
+is af meðan haldið
+
+@ on
+is á
+
+@ only while held
+is aðeins meðan haldið
+
+@ playstation
+is PlayStation
+
+@ protanopia
+is rauðblinda
+
+@ quarter speed
+is fjórðungshraði
+
+@ red
+is rauður
+
+@ short diagonals
+is stuttar skálínur
+
+@ single
+is einfalt
+
+@ small
+is lítið
+
+@ solid
+is heilt
+
+@ spectacle
+is sjónarspil
+
+@ subtle
+is hófstillt
+
+@ team damage
+is liðsskaði
+
+@ top center
+is efst fyrir miðju
+
+@ top left
+is efst til vinstri
+
+@ top right
+is efst til hægri
+
+@ triple
+is þrefalt
+
+@ tritanopia
+is blágulblinda
+
+@ upper
+is efri
+
+@ white
+is hvítur
+
+@ whole screen
+is allur skjárinn
+
+@ windowed
+is gluggi
+
+@ xbox
+is Xbox
+
+@ yellow
+is gulur
+
+# ==== tooltips.txt ====
+
+# Options help lines (tooltips) and reasons for disabled rows.
+@ 2D aiming turns the view continuously with the right stick; flick stick snaps the view to where you push the stick, then turning the stick rotates it
+is 2D-miðun snýr sjónarhorninu jafnt með hægri pinnanum; flick-stick beinir sjónarhorninu strax þangað sem þú ýtir pinnanum og snúningur pinnans snýr því síðan áfram
+
+@ 3D resolution relative to the window; the UI stays sharp
+is 3D-upplausn miðað við gluggann; viðmótið helst skarpt
+
+@ 3D view keeps the HUD and menus sharp; whole screen runs them through the shader too
+is 3D-sýn heldur HUD og valmyndum skörpum; allur skjárinn sendir þær líka í gegnum skyggjann
+
+@ A Quake III style railgun: a slug that pierces every enemy on its line, using 2 cells a shot and refiring every 1.5 s; select it through its assigned weapon slot (Add-ons)
+is Railgun í anda Quake III: kúla sem fer í gegnum alla óvini á línunni, notar 2 sellur í skoti og skýtur á 1,5 s fresti; veldu hana í úthlutuðu vopnahólfi (Viðbætur)
+
+@ A Zelda-style hookshot: fire sends a chain hook out; it latches onto hookable surfaces or enemies and reels you in; fire again to let go
+is Krókbyssa í anda Zelda: skot sendir keðjukrók út; hann festist við fleti eða óvini sem hægt er að krækja í og dregur þig að; skjóttu aftur til að sleppa
+
+@ Also translates the engine's console messages; off keeps them in English
+is Þýðir líka stjórnborðsskilaboð vélarinnar; af heldur þeim á ensku
+
+@ Automatically acquire another enemy while holding Lock-on after losing a target
+is Miðar sjálfkrafa á annan óvin meðan Miðlæsingu er haldið eftir að skotmark tapast
+
+@ Blends between animation frames of monsters and weapons
+is Blandar saman hreyfirömmum skrímsla og vopna
+
+@ Blood stains surfaces and bodies; cosmetic, independent of particle packs
+is Blóð litar fleti og líkama; eingöngu útlit, óháð agnapökkum
+
+@ Bloom glow around bright lights and heat sources; medium uses 4 taps, high uses 8, low disables halo taps
+is Bloom-ljómi kringum björt ljós og hitagjafa; miðlungs notar 4 sýni, hátt 8, lágt slekkur á geislabaug
+
+@ Blurs fast-moving monsters, projectiles and doors (not camera turns)
+is Gerir hraðfara skrímsli, skeyti og hurðir óskýr (ekki snúning myndavélar)
+
+@ Blurs the screen edges during fast falls and launches; keeps the centre clear. Reduce Motion disables it
+is Gerir skjábrúnir óskýrar við hröð föll og skot upp í loft; miðjan helst skýr. Draga úr hreyfingu slekkur á því
+
+@ Brightness of the underwater light patterns
+is Birta ljósmynstranna neðansjávar
+
+@ Caps mark count, lifetime, airborne droplets and wound/gib painting; low skips enemy wounds and gib trails
+is Takmarkar fjölda merkja, líftíma, dropa í lofti og sár-/kjötbitaslettur; lágt sleppir sárum óvina og kjötbitaslóðum
+
+@ Caps shader input at output size so 200% render scale keeps 3D sharpness without 4x shader cost; low scales stay low-res
+is Takmarkar inntak skyggjans við úttaksstærð svo 200% teiknikvarði heldur 3D-skerpu án fjórfalds skyggjakostnaðar; lágir kvarðar haldast í lágri upplausn
+
+@ Classic: the original status bar; modern: compact elements at the screen edges
+is Klassískt: upprunalega stöðustikan; nútímalegt: þéttar einingar við skjábrúnirnar
+
+@ Coat atlas resolution, rebuild rate and shader detail: low builds smaller coats less often with fast shading; high uses full detail
+is Upplausn húðunaratlass, uppfærslutíðni og smáatriði skyggja: lágt byggir minni húðanir sjaldnar með hraðri skyggingu; hátt notar full smáatriði
+
+@ Colour of the railgun's spiral trail; split-screen players each get the next colour along
+is Litur gormslóðar railgun; leikmenn á skiptum skjá fá hver sinn næsta lit
+
+@ Damage the railgun deals to each enemy it passes through (Quake III: 100)
+is Skaði sem railgun veldur hverjum óvini sem hún fer í gegnum (Quake III: 100)
+
+@ Dark backdrop behind on-screen messages for readability
+is Dökkur bakgrunnur aftan við skilaboð á skjá til að auðvelda lestur
+
+@ Dark border keeps the crosshair visible on any background
+is Dökk útlína heldur miðkrossinum sýnilegum á hvaða bakgrunni sem er
+
+@ Darkens corners and contact areas where geometry meets; higher quality is sharper
+is Dekkir horn og snertifleti þar sem rúmfræði mætist; meiri gæði eru skarpari
+
+@ Debris lands on and is carried or shoved by doors, lifts and platforms
+is Brak lendir á hurðum, lyftum og pöllum og berst með þeim eða ýtist af þeim
+
+@ Detail for caustics, ripples and splashes: low uses smaller budgets and shorter view distance; high uses larger budgets and farther view distance
+is Smáatriði ljósbrots, gára og skvetta: lágt notar minni kvóta og styttri sjónfjarlægð; hátt notar stærri kvóta og lengri sjónfjarlægð
+
+@ Disabled while Enhanced Particles is on: its particles replace the GLQuake and Classic styles
+is Óvirkt meðan Bættar agnir er á: agnir þess koma í stað GLQuake- og klassíska stílsins
+
+@ Disabled while Enhanced Water is on: its own underwater effects replace the classic and GLQuake view warps
+is Óvirkt meðan Bætt vatn er á: eigin neðansjávarbrellur þess koma í stað klassísku og GLQuake-bjögunarinnar
+
+@ Draw the predicted grenade path as a solid or dashed line
+is Teiknar áætlaða braut handsprengjunnar sem heila eða strikaða línu
+
+@ Draw the view out of the linked portal inside each portal; off shows flat discs (fastest)
+is Sýnir útsýnið úr tengdu gáttinni inni í hverri gátt; af sýnir flata diska (hraðast)
+
+@ Droplets spray up when things enter or leave water, slime or lava
+is Dropar skvettast þegar eitthvað fer ofan í eða upp úr vatni, slími eða hrauni
+
+@ Emulates the original 8-bit palette of software rendering
+is Líkir eftir upprunalegri 8 bita litaspjaldi hugbúnaðarteikningar
+
+@ Every level starts with only the shotgun and axe, as if started fresh
+is Hvert borð hefst aðeins með haglabyssu og exi, eins og leikurinn væri nýhafinn
+
+@ Explosion damage for each remotely detonated sticky bomb
+is Sprengjuskaði hverrar fjarsprengdrar límsprengju
+
+@ Extra freeze milliseconds for every 10 damage dealt, so heavy hits stop longer
+is Auka frystimillisekúndur fyrir hverja 10 í skaða, svo þung högg stöðva lengur
+
+@ First person, a third-person camera centered behind the player, or one over the right or left shoulder; third person hides viewmodels
+is Fyrstu persónu, þriðju persónu myndavél fyrir miðju aftan við leikmanninn, eða yfir hægri eða vinstri öxl; þriðju persónu felur vopnalíkön
+
+@ Flash the selected marker on confirmed hits; colors are shared with the crosshair
+is Lætur valið merki leiftra við staðfest hitt; litirnir eru sameiginlegir með miðkrossinum
+
+@ Freeze for every enemy, or only for enemies that were tough before the hit
+is Frysta við alla óvini, eða aðeins við óvini sem voru harðir fyrir höggið
+
+@ Freeze the game briefly when you damage an enemy; single player with add-ons only
+is Frystir leikinn stutta stund þegar þú særir óvin; aðeins einspilun með viðbótum
+
+@ Gibs tumble and barrels throw shrapnel; shots and blasts push them (cosmetic only)
+is Kjötbitar velta og tunnur kasta sprengjubrotum; skot og sprengingar ýta þeim (eingöngu útlit)
+
+@ Health an enemy must have had before the hit to count as tough
+is Heilsa sem óvinur þarf að hafa haft fyrir höggið til að teljast harður
+
+@ Hits dealing less damage than this do not freeze the game; the default 10 skips nails and shotgun pellets
+is Högg sem valda minni skaða en þetta frysta ekki leikinn; sjálfgefna gildið 10 sleppir nöglum og höglum
+
+@ Hold fire and sweep the crosshair over monsters to queue them, release to throw: it stuns each in turn and flies back; alt-fire clears the queue
+is Haltu skotinu inni og færðu miðkrossinn yfir skrímsli til að setja þau í röð, slepptu til að kasta: það rotar hvert á fætur öðru og flýgur til baka; aukaskot tæmir röðina
+
+@ Hold: keep Lock-on held. Toggle: press Auto-aim Toggle to enable automatic acquisition. Click look stick to switch targets
+is Halda: haltu Miðlæsingu inni. Af/á: ýttu á Sjálfvirk miðun af/á til að virkja sjálfvirka miðun. Smelltu á sjónpinnann til að skipta um skotmark
+
+@ How close an enemy must be to the crosshair for automatic acquisition in toggle mode (degrees)
+is Hversu nálægt miðkrossinum óvinur þarf að vera fyrir sjálfvirka miðun í af/á-ham (gráður)
+
+@ How far the view tilts up and down when you tilt the controller (pitch axis)
+is Hversu mikið sjónarhornið hallast upp og niður þegar þú hallar fjarstýringunni (lóðréttur ás)
+
+@ How far the view turns left and right when you turn the controller (yaw axis)
+is Hversu mikið sjónarhornið snýst til vinstri og hægri þegar þú snýrð fjarstýringunni (láréttur ás)
+
+@ How far the view turns when you drag on the right half of the screen
+is Hversu mikið sjónarhornið snýst þegar þú dregur á hægri helmingi skjásins
+
+@ How fast the boomerang flies (units per second)
+is Hversu hratt búmerangið flýgur (einingar á sekúndu)
+
+@ How hard shots and explosions push debris around
+is Hversu fast skot og sprengingar ýta braki til
+
+@ How hard the Powerwasher's water pushes enemies
+is Hversu fast vatnið úr háþrýstidælunni ýtir óvinum
+
+@ How long a hit freezes the game, in milliseconds
+is Hversu lengi högg frystir leikinn, í millisekúndum
+
+@ How strongly fog covers the sky when fog is on
+is Hversu mikið þokan hylur himininn þegar þoka er á
+
+@ How the view distorts underwater: Classic ripples the whole screen like software Quake, GLQuake slowly stretches and squashes the view
+is Hvernig sjónin bjagast neðansjávar: klassískt gárar allan skjáinn eins og hugbúnaðar-Quake, GLQuake teygir og þjappar sjónarhorninu hægt
+
+@ Ignores gyro rotation slower than this many degrees per second, to hide hand tremor
+is Hunsar gyro-snúning hægari en þetta margar gráður á sekúndu, til að fela handskjálfta
+
+@ Immersive: appears for a few seconds only when its value changes
+is Innlifun: birtist aðeins í nokkrar sekúndur þegar gildið breytist
+
+@ Keeps textures sharp on floors and walls seen at steep angles
+is Heldur áferðum skörpum á gólfum og veggjum sem sjást frá bröttu horni
+
+@ Lights from rockets, muzzle flashes and explosions brighten nearby walls
+is Ljós frá eldflaugum, hlaupblossum og sprengingum lýsa upp nálæga veggi
+
+@ Liquid surfaces swell and ring out where things move through them
+is Vökvayfirborð bylgjast og mynda hringi þar sem eitthvað fer í gegnum þau
+
+@ Lobs sticky bombs (rockets ammo) that cling to walls, doors and monsters; alt-fire detonates them all
+is Varpar límsprengjum (eldflaugaskotfæri) sem festast við veggi, hurðir og skrímsli; aukaskot sprengir þær allar
+
+@ Look of the classic particles: GLQuake draws soft round dots, Classic draws square pixels like software Quake
+is Útlit klassísku agnanna: GLQuake teiknar mjúka, kringlótta punkta, klassískt teiknar ferkantaða díla eins og hugbúnaðar-Quake
+
+@ Low skips the background smear halo and uses fewer blur samples; high keeps the full halo and smoother streaks
+is Lágt sleppir bakgrunnsbaugnum og notar færri óskýrusýni; hátt heldur öllum baugnum og mýkri rákum
+
+@ Low: hard particle edges, half the scripted particles and fewer hit sparks. Medium: soft edges. High: soft edges checked per MSAA sample, most hit sparks
+is Lágt: harðar agnabrúnir, helmingur skriftuðu agnanna og færri neistar. Miðlungs: mjúkar brúnir. Hátt: mjúkar brúnir kannaðar fyrir hvert MSAA-sýni, flestir neistar
+
+@ Marks fade out before expiring; oldest marks are recycled at the limit
+is Merki dofna áður en þau hverfa; elstu merkin eru endurnýtt við hámarkið
+
+@ Max nested portal reflections to draw; each level redraws the scene
+is Hámark hreiðraðra gáttaspeglana sem teiknast; hvert stig teiknar senuna upp á nýtt
+
+@ Max portals per screen with a live view; each one redraws the scene
+is Hámark gátta á skjá með lifandi sýn; hver þeirra teiknar senuna upp á nýtt
+
+@ Maximum distance for acquiring and keeping an enemy locked
+is Hámarksfjarlægð til að miða á óvin og halda honum læstum
+
+@ Minimum gap between freezes, so shotgun pellets and rapid fire count once; kills ignore it
+is Lágmarksbil milli frystinga, svo högl og hraðskot teljist einu sinni; dráp hunsa það
+
+@ Modern terminal console with autocomplete popup, history search, ANSI colors, bash shell and piping; off uses the classic Quake console
+is Nútímalegt skipanastjórnborð með sjálfvirkri útfyllingu, leit í ferli, ANSI-litum, bash-skel og pípum; af notar klassíska Quake-stjórnborðið
+
+@ Monsters take proportionally less damage at higher values; above 100% is harder
+is Skrímsli fá hlutfallslega minni skaða við hærri gildi; yfir 100% er erfiðara
+
+@ Moving gibs leave blood on surfaces they touch
+is Kjötbitar á hreyfingu skilja eftir blóð á flötum sem þeir snerta
+
+@ Multiplier on the freeze when the hit kills the enemy; 1 means no extra
+is Margfaldari á frystinguna þegar höggið drepur óvininn; 1 þýðir enginn auki
+
+@ Multiplies ammo from pickups (up to the normal carry limit); below 100% is harder
+is Margfaldar skotfæri úr pökkum (upp að venjulegu burðarhámarki); undir 100% er erfiðara
+
+@ Multiplies health from pickups (up to 100, or the item's own limit); below 100% is harder
+is Margfaldar heilsu úr pökkum (upp að 100, eða eigin hámarki hlutarins); undir 100% er erfiðara
+
+@ Nails stick to wood and bodies; hard surfaces deflect them to the floor
+is Naglar festast í við og líkömum; harðir fletir beina þeim niður á gólf
+
+@ Nearest keeps crisp classic pixels; linear smooths textures
+is Næsti nágranni heldur skýrum klassískum dílum; línulegt mýkir áferðir
+
+@ New Game: Add-ons
+is Nýr leikur: Viðbætur
+
+@ New Game: Customize
+is Nýr leikur: Sérsníða
+
+@ Night vision: how much dark areas are brightened; thermal: how strongly heat stands out
+is Nætursjón: hversu mikið dimm svæði lýsast; hitasjón: hversu skýrt hiti sker sig úr
+
+@ Night-vision and thermal goggles, cycle normal, night vision and thermal with Change Goggles (Add-ons), or use the Equipment Wheel
+is Nætursjónar- og hitasjónargleraugu; flettu milli venjulegs, nætursjónar og hitasjónar með Skipta um gleraugu (Viðbætur), eða notaðu búnaðarhjólið
+
+@ No single freeze lasts longer than this, however much damage or kill bonus adds
+is Engin einstök frysting varir lengur en þetta, sama hve mikið skaði eða drápsbónus bætir við
+
+@ Oldest marks and nails are recycled at this shared limit
+is Elstu merki og naglar eru endurnýtt við þetta sameiginlega hámark
+
+@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
+is Pinni og hnappar á skjá: sjálfvirkt sýnir þá eftir snertingu og felur þá þegar annað tæki er notað
+
+@ Only autosaves: quicksaves and the Save menu are off
+is Aðeins sjálfvirkar vistanir: flýtivistun og Vista-valmyndin eru óvirkar
+
+@ Place every weapon at the center, right or left of the view, or hide all viewmodels
+is Setur öll vopn fyrir miðju, til hægri eða vinstri í sjónarhorninu, eða felur öll vopnalíkön
+
+@ Play your chosen hit or kill cue when you damage an enemy
+is Spilar valið hitt- eða dráphljóð þegar þú særir óvin
+
+@ Playback speed: faster sounds shorter and higher
+is Spilunarhraði: hraðari hljómar styttra og hærra
+
+@ Plays the Quake theme in the main menu when no game is running
+is Spilar Quake-stefið í aðalvalmyndinni þegar enginn leikur er í gangi
+
+@ Portals farther away than this are drawn as flat discs
+is Gáttir lengra í burtu en þetta eru teiknaðar sem flatir diskar
+
+@ Press attack once to keep firing, again to stop
+is Ýttu einu sinni á árás til að halda áfram að skjóta, aftur til að hætta
+
+@ Press run once to switch between running and walking
+is Ýttu einu sinni á hlaup til að skipta milli hlaups og göngu
+
+@ Raise or lower the tone independently of sound length
+is Hækkar eða lækkar tóninn óháð lengd hljóðsins
+
+@ Red screen edges show where damage came from: top is front, bottom is behind; Screen Flashes controls their strength
+is Rauðar skjábrúnir sýna hvaðan skaðinn kom: efst er framan, neðst er aftan; Skjáleiftur stýrir styrk þeirra
+
+@ Replaces the classic dot particles with glowing sparks, smoke and blood; mods with their own particle effects keep them
+is Skiptir klassísku punktögnunum út fyrir glóandi neista, reyk og blóð; mod með eigin agnabrellur halda þeim
+
+@ Resolution and detail inside portal and teleporter views; lower tiers trim nested effects
+is Upplausn og smáatriði í gátta- og fjarflutningssýn; lægri stig skera niður hreiðraðar brellur
+
+@ Rippling light patterns on surfaces under water and slime
+is Gárandi ljósmynstur á flötum undir vatni og slími
+
+@ Scales all damage you take; above 100% is harder
+is Kvarðar allan skaða sem þú færð; yfir 100% er erfiðara
+
+@ Screen edge for this element; elements on the same spot stack
+is Skjábrún fyrir þessa einingu; einingar á sama stað raðast saman
+
+@ Seconds a monster hit by the boomerang stays stunned
+is Sekúndur sem skrímsli sem búmerangið hittir helst rotað
+
+@ Seconds impact marks and stuck nails stay before fading out; independent of Particle Quality
+is Sekúndur sem höggmerki og fastir naglar haldast áður en þau dofna; óháð Agnagæðum
+
+@ Seconds messages at the top of the screen stay up
+is Sekúndur sem skilaboð efst á skjánum haldast
+
+@ Seconds the flick stick snap takes; lower is faster
+is Sekúndur sem flick-stick-snúningurinn tekur; lægra er hraðara
+
+@ See through enhanced water; enables Water Opacity
+is Sjá í gegnum bætt vatn; virkjar Ógegnsæi vatns
+
+@ Sensor grain, scanlines and flicker of the goggle image
+is Skynjarakorn, skannlínur og flökt í gleraugnamyndinni
+
+@ Shades every anti-aliasing sample; needs Anti-aliasing on
+is Skyggir hvert kantjöfnunarsýni; krefst þess að Kantjöfnun sé á
+
+@ Shifts colors so they stay distinct for the chosen color blindness
+is Hliðrar litum svo þeir haldist aðgreinanlegir fyrir valda litblindu
+
+@ Shotgun hits leave small surface marks (cosmetic only)
+is Haglaskot skilja eftir lítil merki á flötum (eingöngu útlit)
+
+@ Show corner ticks at screen centre while locked, even with Crosshair off
+is Sýnir hornmerki á miðjum skjá meðan læst er, jafnvel þótt miðkross sé af
+
+@ Show where grenades and other arcing shots will fly, bounce and land; local play only, not in deathmatch
+is Sýnir hvert handsprengjur og önnur bogaskot fljúga, skoppa og lenda; aðeins staðbundinn leikur, ekki í deathmatch
+
+@ Shows text for important sounds: doors, alerted enemies, secrets, pickups
+is Sýnir texta fyrir mikilvæg hljóð: hurðir, árvökula óvini, leyndarmál, fundi
+
+@ Shows the distance fog that maps and mods set; off always gives clear view
+is Sýnir fjarlægðarþokuna sem borð og mod stilla; af gefur alltaf skýra sýn
+
+@ Shows the player face next to the health number
+is Sýnir andlit leikmannsins við hliðina á heilsutölunni
+
+@ Simulation detail, step rate, fade-out lifetimes and caps for gibs and shrapnel; low also skips mover collision
+is Smáatriði hermunar, skreftíðni, líftími og hámörk fyrir kjötbita og sprengjubrot; lágt sleppir líka árekstrum við hreyfanlega hluti
+
+@ Size of the on-screen buttons and move stick
+is Stærð hnappanna og hreyfipinnans á skjánum
+
+@ Slowly heals up to 100 health after 5 seconds without being hit
+is Græðir hægt upp í 100 heilsu eftir 5 sekúndur án þess að verða fyrir höggi
+
+@ Slows stick look while the crosshair is over an enemy
+is Hægir á pinnasjón meðan miðkrossinn er yfir óvini
+
+@ Slows the game down while the weapon wheel is open
+is Hægir á leiknum meðan vopnahjólið er opið
+
+@ Slows the whole game down; single player only. Saves and demos stay compatible with other ports
+is Hægir á öllum leiknum; aðeins einspilun. Vistanir og upptökur haldast samhæfðar við önnur port
+
+@ Small camera jolt on each freeze; off with Reduce Motion
+is Smá kippur í myndavél við hverja frystingu; af með Draga úr hreyfingu
+
+@ Snap and track enemies in local play, including split-screen; unavailable online
+is Grípur og fylgir óvinum í staðbundnum leik, líka á skiptum skjá; ekki í boði á netinu
+
+@ Sparks, smoke, chips, splinters and splashes fly off whatever your shots hit
+is Neistar, reykur, flísar, spænir og skvettur fljúga af því sem skotin þín hitta
+
+@ Spawns extra copies of every monster around the original when a level starts
+is Býr til aukaeintök af hverju skrímsli kringum upprunalega þegar borð hefst
+
+@ Strength of the full-screen flashes for damage, pickups and powerups
+is Styrkur leiftra yfir allan skjáinn við skaða, fundi og styrki
+
+@ Stretch or shorten the sound while keeping its pitch
+is Teygir eða styttir hljóðið en heldur tónhæðinni
+
+@ Surface opacity; requires Enhanced Water and Translucent Water
+is Ógegnsæi yfirborðs; krefst Bætts vatns og Hálfgegnsæs vatns
+
+@ The hook latches onto metal surfaces (metal, tech, computer panels, copper)
+is Krókurinn festist við málmfleti (málm, tækni, tölvuspjöld, kopar)
+
+@ The hook latches onto stone, brick, rock and any surface not recognised as wood or metal
+is Krókurinn festist við stein, múrstein, berg og hvern þann flöt sem ekki þekkist sem viður eða málmur
+
+@ The hook latches onto wooden surfaces (texture names like wood, crate, plank)
+is Krókurinn festist við viðarfleti (áferðarheiti eins og wood, crate, plank)
+
+@ Turn the controller's motion sensor into a look input; needs a pad with a gyroscope
+is Gerir hreyfiskynjara fjarstýringarinnar að sjóninntaki; krefst fjarstýringar með snúðu
+
+@ Turns off view bob, strafe tilt and the camera kick when hit or firing
+is Slekkur á sjónvaggi, halla við hliðarskref og myndavélarkippi við högg eða skot
+
+@ Turns on the extra liquid effects; Water Settings controls each one
+is Kveikir á auka vökvabrellunum; Stillingar vatns stýrir hverri þeirra
+
+@ Turns the view to follow a moving enemy you are aiming at
+is Snýr sjónarhorninu til að fylgja óvini á hreyfingu sem þú miðar á
+
+@ Turns the view when you roll the controller sideways; 0 disables it, negative reverses it
+is Snýr sjónarhorninu þegar þú veltir fjarstýringunni til hliðar; 0 slekkur á því, neikvætt snýr því við
+
+@ Two-portal gun: fire and alt-fire place linked portals on flat walls; assign a weapon slot in Add-ons
+is Tveggja gátta byssa: skot og aukaskot setja tengdar gáttir á slétta veggi; úthlutaðu vopnahólfi í Viðbótum
+
+@ Unlocks the FX Settings page: enhanced particles, impact effects and blood splatter
+is Opnar síðuna Stillingar brellna: bættar agnir, höggbrellur og blóðslettur
+
+@ Uses the 2021 re-release's smoother MD5 models (and MD3 replacements from mods) instead of the classic ones. Applies on the next map load
+is Notar mýkri MD5-líkön endurútgáfunnar frá 2021 (og MD3-staðgengla úr mod) í stað þeirra klassísku. Tekur gildi við næstu hleðslu borðs
+
+@ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
+is Notar litaða lýsingu borðsins (.lit-skrá eða BSPX-hluta); af gefur upprunalegt hvítt ljós. Tekur gildi við næstu hleðslu borðs
+
+@ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
+is Bunuhlutar, fjöldi dropa og gljáandi vökvaskygging: lágt notar einfaldari hálfgegnsæjar bunur; hátt notar mjúkar, gljáandi bunur
+
+@ When gyro looking applies: always, off while +gyroaction is held, or only while it is held
+is Hvenær gyro-sjón gildir: alltaf, af meðan +gyroaction er haldið, eða aðeins meðan því er haldið
+
+@ Which weapons trigger the freeze; melee covers the axe and any mod weapon used at close range without ammo
+is Hvaða vopn kalla fram frystinguna; návígi nær yfir exina og hvert mod-vopn sem er notað í návígi án skotfæra
+
+@ Your own rockets and grenades don't hurt you; rocket jumps still work
+is Þínar eigin eldflaugar og handsprengjur meiða þig ekki; eldflaugastökk virka samt
+
+# ==== ui.txt ====
+
+# Menus and pop-ups outside the options pages: save cards, launch, presets,
+# add-on browser, map packs, hints and dialogs.
+@ Select
+is Velja
+
+@ Back
+is Til baka
+
+@ Cancel
+is Hætta við
+
+@ Confirm
+is Staðfesta
+
+@ Scroll
+is Fletta
+
+@ Section
+is Hluti
+
+@ Bind
+is Úthluta
+
+@ Cancel binding
+is Hætta við úthlutun
+
+@ Clear
+is Hreinsa
+
+@ Clear pad
+is Hreinsa fjarstýringu
+
+@ Remap
+is Endurúthluta
+
+@ Type
+is Skrifa
+
+@ Shift
+is Shift
+
+@ Done
+is Lokið
+
+@ Del
+is Del
+
+@ Space
+is Bilslá
+
+@ Save
+is Vista
+
+@ Load
+is Hlaða
+
+@ Delete
+is Eyða
+
+@ Play
+is Spila
+
+@ Yes
+is Já
+
+@ No
+is Nei
+
+@ OK
+is Í lagi
+
+@ System
+is Kerfi
+
+@ Language
+is Tungumál
+
+@ Help
+is Hjálp
+
+@ Fixed for this game: it was started without Customize
+is Fast í þessum leik: hann var hafinn án Sérsníða
+
+@ Press a button or key to bind (Start cancels)
+is Ýttu á hnapp eða lykil til að úthluta (Start hættir við)
+
+@ Press button...
+is Ýttu á hnapp...
+
+@ Press key...
+is Ýttu á lykil...
+
+@ Replace this binding?
+is Skipta út þessari úthlutun?
+
+@ is already assigned
+is er þegar í notkun
+
+@ {} already assigned
+is {} er þegar í notkun
+
+@ Open Controls to remap Lock-on?
+is Opna Stýringar til að endurúthluta Miðlæsingu?
+
+@ Lock-on
+is Miðlæsing
+
+@ Auto-aim Toggle
+is Sjálfvirk miðun af/á
+
+@ Keyboard
+is Lyklaborð
+
+@ Controller
+is Fjarstýring
+
+# main menu, dialogs and screens
+@ Map Packs
+is Borðapakkar
+
+@ Customize
+is Sérsníða
+
+@ Level Select
+is Velja borð
+
+@ Really quit?
+is Hætta í alvöru?
+
+@ You died
+is Þú dóst
+
+@ Continue from most recent save
+is Halda áfram frá nýjustu vistun
+
+@ Select save
+is Velja vistun
+
+@ Restart level
+is Byrja borðið aftur
+
+@ Return to main menu
+is Aftur í aðalvalmynd
+
+@ (disabled)
+is (óvirkt)
+
+@ (fixed for this game)
+is (fast í þessum leik)
+
+@ (off)
+is (af)
+
+@ Apply Display Changes
+is Virkja skjábreytingar
+
+@ Display Mode
+is Skjáhamur
+
+@ Resolution
+is Upplausn
+
+@ desktop
+is skjáborð
+
+@ Preset
+is Forstilling
+
+@ Map
+is Borð
+
+@ Reset Shader Settings
+is Endurstilla skyggjastillingar
+
+@ Reset to Defaults
+is Endurstilla sjálfgildi
+
+@ Searching...
+is Leitar...
+
+@ This game only autosaves.
+is Þessi leikur vistar aðeins sjálfvirkt.
+
+@ (No Manual Saves modifier)
+is (leikbreytan Engar handvirkar vistanir)
+
+@ End the current game?
+is Ljúka núverandi leik?
+
+@ Unsaved progress will be lost.
+is Óvistuð framvinda glatast.
+
+@ End game
+is Ljúka leik
+
+@ Overwrite
+is Skrifa yfir
+
+@ Overwrite "{}"?
+is Skrifa yfir „{}“?
+
+@ Saved {}
+is Vistað: {}
+
+@ Start a new game?
+is Hefja nýjan leik?
+
+@ New game
+is Nýr leikur
+
+@ New Game
+is Nýr leikur
+
+@ CUSTOM
+is SÉRSNIÐIÐ
+
+@ Customize Experience
+is Sérsníða upplifun
+
+@ Disable All
+is Slökkva á öllu
+
+@ Disable All Modifications
+is Slökkva á öllum breytingum
+
+@ Saves load in other source ports too.
+is Vistanir hlaðast líka í öðrum portum.
+
+@ Standard rules, no add-ons.
+is Venjulegar reglur, engar viðbætur.
+
+@ Choose skill
+is Veldu erfiðleikastig
+
+@ The current game will end
+is Núverandi leik lýkur
+
+@ Easy
+is Auðvelt
+
+@ Normal
+is Venjulegt
+
+@ Hard
+is Erfitt
+
+@ Nightmare
+is Martröð
+
+# graphics preset pop-up
+@ Choose a Graphics Preset
+is Veldu grafíkforstillingu
+
+@ Classic
+is Klassískt
+
+@ Like the re-release: enhanced models,
+is Eins og endurútgáfan: bætt líkön,
+
+@ no added effects.
+is engar viðbættar brellur.
+
+@ Enhanced
+is Bætt
+
+@ Every enhancement at its highest quality.
+is Allar endurbætur í hæstu gæðum.
+
+@ Needs a capable GPU.
+is Krefst öflugs skjákorts.
+
+@ Low-End
+is Veik vél
+
+@ Fastest. No anti-aliasing, original
+is Hraðast. Engin kantjöfnun, upprunaleg
+
+@ models, lowest effect quality.
+is líkön, lægstu brellugæði.
+
+@ Esc keeps the defaults
+is Esc heldur sjálfgildum
+
+@ Everything can be changed later in Options.
+is Öllu má breyta síðar í Options.
+
+@ Keep Defaults
+is Halda sjálfgildum
+
+# save and load cards
+@ Save Game
+is Vista leik
+
+@ Load Game
+is Hlaða leik
+
+@ Autosaves
+is Sjálfvirkar vistanir
+
+@ newest first
+is nýjast fyrst
+
+@ Saves: {}
+is Vistanir: {}
+
+@ Browse Autosaves
+is Skoða sjálfvirkar vistanir
+
+@ Every retained autosave, newest first
+is Allar geymdar sjálfvirkar vistanir, nýjast fyrst
+
+@ New save
+is Ný vistun
+
+@ Select to save your game here
+is Veldu til að vista leikinn hér
+
+@ No autosaves yet
+is Engar sjálfvirkar vistanir enn
+
+@ Autosaves are made on level entry, secrets and more (Options > Gameplay)
+is Sjálfvirk vistun gerist við upphaf borðs, leyndarmál og fleira (Options > Spilun)
+
+@ No saves yet
+is Engar vistanir enn
+
+@ Save from the Single Player menu, or press F6 to quicksave
+is Vistaðu úr Single Player-valmyndinni, eða ýttu á F6 til að flýtivista
+
+@ No picture
+is Engin mynd
+
+@ Del: delete save
+is Del: eyða vistun
+
+@ Delete "{}"?
+is Eyða „{}“?
+
+@ This cannot be undone.
+is Ekki er hægt að afturkalla þetta.
+
+@ Quicksave
+is Flýtivistun
+
+@ Autosave: {}
+is Sjálfvirk vistun: {}
+
+@ unknown trigger
+is óþekkt kveikja
+
+@ Latest - {}
+is Nýjast - {}
+
+@ Health {}
+is Heilsa {}
+
+@ Armor {}
+is Brynja {}
+
+@ Kills {}/{}
+is Dráp {}/{}
+
+@ Secrets {}/{}
+is Leyndarmál {}/{}
+
+@ Split-screen, {} players
+is Skiptur skjár, leikmenn: {}
+
+@ Co-op
+is Samvinna
+
+@ Customized
+is Sérsniðið
+
+@ Customized, {}
+is Sérsniðið, {}
+
+@ Date unavailable
+is Dagsetning ekki tiltæk
+
+@ Just now
+is Rétt í þessu
+
+@ {} min ago
+is fyrir {} mín.
+
+@ {} h ago
+is fyrir {} klst.
+
+@ Level entry
+is Upphaf borðs
+
+@ Secret found
+is Leyndarmál fundið
+
+@ All enemies killed
+is Allir óvinir drepnir
+
+@ All secrets found
+is Öll leyndarmál fundin
+
+@ Timer
+is Tímabil
+
+# customize pages
+@ Standard rules
+is Venjulegar reglur
+
+@ Modifiers changed: {}
+is Breyttar leikbreytur: {}
+
+@ no add-ons
+is engar viðbætur
+
+@ add-ons: {}
+is viðbætur: {}
+
+@ Saves of this game are .qsa files: they need this source port.
+is Vistanir þessa leiks eru .qsa-skrár: þær þurfa þetta port.
+
+@ Nothing changed: this plays as standard Quake.
+is Engu breytt: þetta spilast eins og venjulegur Quake.
+
+@ Changes apply now and are saved with this game (.qsa).
+is Breytingar gilda strax og vistast með þessum leik (.qsa).
+
+@ This game started without Customize, so its rules are fixed.
+is Þessi leikur var hafinn án Sérsníða, svo reglur hans eru fastar.
+
+@ Start a new game and choose Customize Experience.
+is Hefðu nýjan leik og veldu Sérsníða upplifun.
+
+@ These rules apply to the next customized game.
+is Þessar reglur gilda fyrir næsta sérsniðna leik.
+
+# add-on browser
+@ Fire
+is Skjóta
+
+@ Alt Fire
+is Aukaskot
+
+@ Configure Parameters >
+is Stilla færibreytur >
+
+@ Configure
+is Stilla
+
+@ Settings
+is Stillingar
+
+@ Change slot
+is Skipta um hólf
+
+@ Toggle
+is Af/á
+
+@ Details
+is Nánar
+
+@ Enter or click the box: toggle
+is Enter eða smellur á reitinn: af/á
+
+@ Right / Tab / click: details
+is Hægri / Tab / smellur: nánar
+
+@ Input Remapping
+is Endurúthlutun inntaks
+
+@ Weapon Slot
+is Vopnahólf
+
+@ Customized games save as .qsa files, which need this source port.
+is Sérsniðnir leikir vistast sem .qsa-skrár, sem þurfa þetta port.
+
+@ This game started without Customize, so its add-ons are fixed. Customize a new game instead.
+is Þessi leikur var hafinn án Sérsníða, svo viðbætur hans eru fastar. Sérsníddu frekar nýjan leik.
+
+@ Bullet Time
+is Bullet time
+
+@ Change Goggles
+is Skipta um gleraugu
+
+@ Dodge / Dive
+is Undanvik / Dýfa
+
+@ Goggles
+is Gleraugu
+
+@ Hitstop
+is Hitstop
+
+@ Projectile Shotguns
+is Skeytahaglabyssur
+
+@ BULLET TIME: 20%
+is BULLET TIME: 20%
+
+@ NORMAL SPEED
+is VENJULEGUR HRAÐI
+
+@ SLOW MOTION: PHYSICAL PELLETS
+is HÆGMYND: RAUNVERULEG HÖGL
+
+@ DEMONSTRATION
+is SÝNIDÆMI
+
+@ GAMEPLAY
+is SPILUN
+
+@ LOOP
+is LYKKJA
+
+@ Preview unavailable
+is Forskoðun ekki tiltæk
+
+# shader and language help lines
+@ A setting of the chosen shader; arrows step it, Enter is not needed
+is Stilling valins skyggja; örvarnar breyta henni, Enter þarf ekki
+
+@ Language of the menus, messages and the 2021 re-release's game text; System follows your computer's language
+is Tungumál valmynda, skilaboða og leiktexta endurútgáfunnar frá 2021; Kerfi fylgir tungumáli tölvunnar
+
+@ Puts every setting of the chosen shader back to the preset's defaults
+is Setur allar stillingar valins skyggja aftur á sjálfgildi forstillingarinnar
+
+@ RetroArch slang shader on the final image: CRT, scanlines, NTSC, sharpening; add your own in <game>/shaders
+is RetroArch slang-skyggir á lokamyndina: CRT, skannlínur, NTSC, skerping; bættu við þínum eigin í <game>/shaders
+
+# modern console footer
+@ Shift+PgUp/Dn: height  ` : hide
+is Shift+PgUp/Dn: hæð  ` : fela
+
+@ Tab: complete  Ctrl+R: search  bash | pipe
+is Tab: klára  Ctrl+R: leita  bash | pípa
+
+@ ↑ +{} lines (End to jump) 
+is ↑ +{} línur (End til að stökkva) 
+
+# add-on descriptions
+@ Create two linked portals on flat walls. Fire places the first portal; Alt Fire places the second. Walk through either portal to emerge from the other. Your momentum carries through. Assign a weapon slot below: pressing that slot repeatedly cycles its ordinary weapon and every enabled add-on assigned there. Portal view quality is configurable below.
+is Búðu til tvær tengdar gáttir á sléttum veggjum. Skot setur fyrri gáttina; Aukaskot setur þá seinni. Gakktu inn í aðra gáttina til að koma út úr hinni. Skriðþunginn helst í gegn. Úthlutaðu vopnahólfi hér fyrir neðan: endurteknar ýtingar á það hólf fletta milli venjulega vopnsins og allra virkra viðbóta sem þar eru. Gæði gáttasýnar má stilla hér fyrir neðan.
+
+@ Hold Fire and sweep the crosshair over monsters to queue targets. Release Fire to throw: the boomerang visits each target, stuns it and returns to you. Alt Fire clears the queue. The weapon slot selects a group, not a separate hotkey: press it again to cycle through the weapons in that slot. Configure stun duration and flight speed below.
+is Haltu Skoti inni og færðu miðkrossinn yfir skrímsli til að setja skotmörk í röð. Slepptu Skoti til að kasta: búmerangið heimsækir hvert skotmark, rotar það og snýr aftur til þín. Aukaskot tæmir röðina. Vopnahólfið velur hóp, ekki sérstakan flýtilykil: ýttu aftur til að fletta milli vopnanna í hólfinu. Stilltu lengd rotunar og flughraða hér fyrir neðan.
+
+@ Hold Fire to charge a sticky bomb using rocket ammunition; release to launch. A longer charge throws it faster. Bombs cling to walls, doors and monsters. Alt Fire detonates your planted bombs together. Place a trap, retreat, then detonate it when enemies approach. Assign any weapon slot below; repeated presses cycle through the ordinary weapon and add-ons in that slot.
+is Haltu Skoti inni til að hlaða límsprengju með eldflaugaskotfærum; slepptu til að skjóta. Lengri hleðsla kastar henni hraðar. Sprengjur festast við veggi, hurðir og skrímsli. Aukaskot sprengir allar sprengjurnar þínar saman. Leggðu gildru, hörfaðu og sprengdu hana þegar óvinir nálgast. Úthlutaðu hvaða vopnahólfi sem er hér fyrir neðan; endurteknar ýtingar fletta milli venjulega vopnsins og viðbótanna í hólfinu.
+
+@ Fire launches a chain hook. It latches onto a permitted surface or enemy and reels you toward the anchor. Fire again or use Alt Fire to let go. Choose which materials and enemies can be hooked in Configure Parameters. Assign it to any weapon slot; repeated presses of the slot's existing binding cycle through its weapons.
+is Skot sendir út keðjukrók. Hann festist við leyfðan flöt eða óvin og dregur þig að festipunktinum. Skjóttu aftur eða notaðu Aukaskot til að sleppa. Veldu hvaða efni og óvini má krækja í undir Stilla færibreytur. Úthlutaðu honum hvaða vopnahólfi sem er; endurteknar ýtingar á núverandi úthlutun hólfsins fletta milli vopna þess.
+
+@ A piercing railgun inspired by Quake III. Fire sends a slug through every enemy along its line. Each shot consumes two cells, with a 1.5 second refire interval. Damage and the spiral trail colour are configurable below. Choose a weapon slot: the slot's current binding selects and cycles the weapons assigned to it.
+is Railgun sem fer í gegnum allt, innblásin af Quake III. Skot sendir kúlu í gegnum alla óvini á línu hennar. Hvert skot notar tvær sellur og 1,5 sekúndur líða milli skota. Skaða og lit gormslóðarinnar má stilla hér fyrir neðan. Veldu vopnahólf: núverandi úthlutun hólfsins velur vopnin í því og flettir milli þeirra.
+
+@ A Portal-style gel sprayer. Fire sprays blue Repulsion gel: land, jump or run into it to bounce, and landings on it never hurt. Alt Fire sprays orange Propulsion gel: run across it to go much faster. Gel coats floors and walls until washed off with the Powerwasher. Assign a weapon slot below; repeated presses cycle the weapons in that slot.
+is Hlaupúðari í anda Portal. Skot úðar bláu fráhrindihlaupi: lentu á því, hoppaðu eða hlauptu á það til að skoppa, og lendingar á því meiða aldrei. Aukaskot úðar appelsínugulu hröðunarhlaupi: hlauptu yfir það til að fara miklu hraðar. Hlaupið þekur gólf og veggi þar til það er skolað af með háþrýstidælunni. Úthlutaðu vopnahólfi hér fyrir neðan; endurteknar ýtingar fletta milli vopnanna í hólfinu.
+
+@ A water cannon. Fire shoots a straight jet with limited reach; Alt Fire a wide, shorter fan. The water pushes enemies back, turns projectiles aside and washes away gel and blood. Push strength is configurable below. Assign a weapon slot below; repeated presses cycle the weapons in that slot.
+is Vatnsbyssa. Skot sendir beina bunu með takmarkaða drægni; Aukaskot breiða, styttri blævængsbunu. Vatnið ýtir óvinum aftur, beinir skeytum til hliðar og skolar burt hlaupi og blóði. Ýtistyrkinn má stilla hér fyrir neðan. Úthlutaðu vopnahólfi hér fyrir neðan; endurteknar ýtingar fletta milli vopnanna í hólfinu.
+
+@ One equipment add-on includes both night vision and thermal vision. The Change Goggles action cycles Normal, Night Vision, Thermal, then Normal again. Night vision brightens dark rooms; thermal vision highlights living enemies. Goggles do not occupy a weapon slot. Configure intensity and sensor noise below. The binding affects only this add-on.
+is Ein búnaðarviðbót inniheldur bæði nætursjón og hitasjón. Aðgerðin Skipta um gleraugu flettir milli Venjulegrar sjónar, Nætursjónar, Hitasjónar og svo aftur Venjulegrar. Nætursjón lýsir upp dimm herbergi; hitasjón dregur fram lifandi óvini. Gleraugun taka ekki vopnahólf. Stilltu styrk og skynjarasuð hér fyrir neðan. Úthlutunin á aðeins við þessa viðbót.
+
+@ Press Dodge with a movement direction on the ground or in midair: dive forward or leap backward and sideways. Diagonals are supported. Each press launches once, with a short recovery. The player body animates in third person. Assign the Dodge action below or in Controls.
+is Ýttu á Undanvik með hreyfistefnu á jörðu eða í lofti: stingdu þér fram eða stökktu aftur á bak og til hliðar. Skástefnur virka líka. Hver ýting skýtur þér einu sinni, með stuttri hvíld á eftir. Líkami leikmannsins hreyfist í þriðju persónu. Úthlutaðu aðgerðinni Undanvik hér fyrir neðan eða í Stýringum.
+
+@ Use the dedicated Bullet Time action to slow the whole local game to 20% speed. Hold is the default; Toggle switches on each press. The optional meter limits use in real seconds and regenerates while inactive. Disable the meter for unlimited use. Remap the action and configure duration and regeneration below.
+is Notaðu sérstöku Bullet time-aðgerðina til að hægja á öllum staðbundna leiknum niður í 20% hraða. Halda er sjálfgefið; Af/á skiptir við hverja ýtingu. Valfrjálsi mælirinn takmarkar notkun í raunsekúndum og fyllist aftur meðan hann er óvirkur. Slökktu á mælinum fyrir ótakmarkaða notkun. Endurúthlutaðu aðgerðinni og stilltu lengd og endurnýjun hér fyrir neðan.
+
+@ Both shotguns and enemy grunts fire physical pellets with their original spread and damage. Fast default projectiles feel immediate; lower their speed to dodge incoming fire during bullet time. Configure projectile speed below, or reset it to the default of 10000 units per second.
+is Báðar haglabyssurnar og óvinahermenn skjóta raunverulegum höglum með upprunalegri dreifingu og skaða. Hröð sjálfgefin skeyti virðast samstundis; lækkaðu hraða þeirra til að forðast skothríð í bullet time. Stilltu skeytahraða hér fyrir neðan, eða endurstilltu hann á sjálfgildið 10000 einingar á sekúndu.
+
+@ Freezes the game for a split second when you damage an enemy, so hits feel heavier. Single player only. Choose which weapons trigger it (all, melee, ranged or explosives), how long it lasts and how much more a kill freezes. Advanced settings cover enemy toughness, damage scaling, cooldown and the longest freeze.
+is Frystir leikinn í sekúndubrot þegar þú særir óvin, svo högg virðast þyngri. Aðeins einspilun. Veldu hvaða vopn kalla það fram (öll, návígi, af færi eða sprengivopn), hve lengi það varir og hve miklu lengur dráp frystir. Ítarlegar stillingar ná yfir hörku óvina, kvörðun skaða, biðtíma og lengstu frystingu.
+
+# map packs and the Quaddicted browser
+@ Get more maps (Quaddicted)...
+is Fleiri borð (Quaddicted)...
+
+@ Type to filter...
+is Skrifaðu til að sía...
+
+@ Launch mod
+is Ræsa mod
+
+@ Start first map
+is Hefja fyrsta borð
+
+@ (running)
+is (í gangi)
+
+@ running
+is í gangi
+
+@ Recent
+is Nýlegt
+
+@ Name
+is Nafn
+
+@ Dir
+is Mappa
+
+@ Default
+is Sjálfgefið
+
+@ Title
+is Titill
+
+@ Sort: {}
+is Röðun: {}
+
+@ {} installed
+is {} uppsett
+
+@ {}/{} matching
+is {}/{} passa
+
+@ {} maps, {} completed
+is {} borð, {} kláruð
+
+@ {}/{} matching, {} completed
+is {}/{} passa, {} kláruð
+
+@ no maps of its own
+is engin eigin borð
+
+@ dir: {}
+is mappa: {}
+
+@ base: {}
+is grunnur: {}
+
+@ Browse the Quaddicted archive of
+is Skoðaðu Quaddicted-safnið með
+
+@ single-player maps and episodes,
+is einspilunarborðum og köflum,
+
+@ then download and install them
+is sæktu þau síðan og settu upp
+
+@ here. Each release gets its own
+is hér. Hver útgáfa fær sína eigin
+
+@ entry in this list.
+is færslu í þessum lista.
+
+@ Needs an internet connection.
+is Krefst nettengingar.
+
+@ Quaddicted Map Archive
+is Quaddicted-borðasafn
+
+@ Newest
+is Nýjast
+
+@ Author
+is Höfundur
+
+@ Size
+is Stærð
+
+@ Loading the map list...
+is Hleð borðalista...
+
+@ Couldn't load the map list: {}
+is Gat ekki hlaðið borðalista: {}
+
+@ {} single-player releases  -  F5 refreshes
+is Einspilunarútgáfur: {}  -  F5 uppfærir
+
+@ {} matching
+is {} passa
+
+@ by {}
+is eftir {}
+
+@ requires: {}
+is krefst: {}
+
+@ maps: {}
+is borð: {}
+
+@ Failed: {}
+is Mistókst: {}
+
+@ Downloading... {}%
+is Sæki... {}%
+
+@ Unpacking...
+is Afþjappa...
+
+@ Installed in {}/  -  Enter: play
+is Uppsett í {}/  -  Enter: spila
+
+@ Enter: download and install
+is Enter: sækja og setja upp
+
+@ unpacking
+is afþjappa
+
+@ failed
+is mistókst
+
+@ installed
+is uppsett
+
+@ Downloads are not available in the browser build
+is Niðurhal er ekki í boði í vafraútgáfunni
+
+@ the map list could not be read
+is ekki tókst að lesa borðalistann
+
+@ downloading needs the curl program
+is niðurhal krefst forritsins curl
+
+@ download failed
+is niðurhal mistókst
+
+@ the download is not a valid zip
+is niðurhalið er ekki gild zip-skrá
+
+@ nothing to install for this engine
+is ekkert að setja upp fyrir þessa vél
+
+@ needs {} installed first
+is {} þarf að vera uppsett fyrst
+
+@ couldn't unpack {}
+is gat ekki afþjappað {}
+
+# help screen
+@ About
+is Um
+
+@ < Back
+is < Til baka
+
+# tr_ctx keys: English shows the short word, the key says which meaning
+@ Save (a manual save, as opposed to a quicksave or autosave)
+is Vistun
+
+# ==== hud.txt ====
+
+# HUD, weapon and equipment wheels, sound captions and other in-game text.
+# Weapon, monster and item names follow the 2021 re-release's own translations.
+@ Axe
+is Öxi
+
+@ Shotgun
+is Shotgun
+
+@ Double-Barrelled Shotgun
+is Super Shotgun
+
+@ Nailgun
+is Nailgun
+
+@ Super Nailgun
+is Super Nailgun
+
+@ Grenade Launcher
+is Grenade Launcher
+
+@ Rocket Launcher
+is Rocket Launcher
+
+@ Thunderbolt
+is Thunderbolt
+
+@ Portal Gun
+is Gáttabyssa
+
+@ Boomerang
+is Búmerang
+
+@ Stickybomb Launcher
+is Límsprengjuvarpa
+
+@ Railgun
+is Railgun
+
+@ Hookshot
+is Krókbyssa
+
+@ Gel Sprayer
+is Hlaupúðari
+
+@ Powerwasher
+is Háþrýstidæla
+
+@ Night Vision Goggles
+is Nætursjónargleraugu
+
+@ Thermal Goggles
+is Hitasjónargleraugu
+
+@ Normal vision
+is Venjuleg sjón
+
+@ ON
+is Á
+
+@ OFF
+is AF
+
+@ {} (turn on)
+is {} (kveikja)
+
+@ {} (turn off)
+is {} (slökkva)
+
+@ Move mouse to select, release to toggle
+is Músin velur, slepptu til að kveikja/slökkva
+
+@ Move mouse to select, release to equip
+is Músin velur, slepptu til að taka í notkun
+
+@ Release to toggle
+is Slepptu til að kveikja/slökkva
+
+@ Release to equip
+is Slepptu til að taka í notkun
+
+@ shells
+is högl
+
+@ nails
+is naglar
+
+@ rockets
+is eldflaugar
+
+@ cells
+is sellur
+
+@ Kills: {}/{}
+is Dráp: {}/{}
+
+@ Secrets: {}/{}
+is Leyndarmál: {}/{}
+
+@ Time {}
+is Tími {}
+
+@ Press any button to continue...
+is Ýttu á hvaða hnapp sem er til að halda áfram...
+
+@ Press any key to continue...
+is Ýttu á hvaða lykil sem er til að halda áfram...
+
+@ BULLET TIME
+is BULLET TIME
+
+@ AUTO AIM
+is SJÁLFV. MIÐUN
+
+@ Crosshair
+is Miðkross
+
+@ + Marker
+is + Merki
+
+@ Hit markers off
+is Hittmerki af
+
+@ On target
+is Á skotmarki
+
+@ On kill
+is Við dráp
+
+# sound captions
+@ [Secret found]
+is [Leyndarmál fundið]
+
+@ [Message]
+is [Skilaboð]
+
+@ [Switch activated]
+is [Rofi virkjaður]
+
+@ [Key picked up]
+is [Lykill tekinn]
+
+@ [Rune picked up]
+is [Rún tekin]
+
+@ [Teleporter]
+is [Fjarflytjari]
+
+@ [Teleport]
+is [Fjarflutningur]
+
+@ [Splash]
+is [Skvett]
+
+@ [Leaving water]
+is [Farið upp úr vatni]
+
+@ [Door]
+is [Hurð]
+
+@ [Platform moving]
+is [Pallur á hreyfingu]
+
+@ [Button]
+is [Hnappur]
+
+@ [Health picked up]
+is [Heilsa tekin]
+
+@ [Armor picked up]
+is [Brynja tekin]
+
+@ [Quad Damage wearing off]
+is [Quad Damage dvínar]
+
+@ [Quad Damage]
+is [Quad Damage]
+
+@ [Pentagram wearing off]
+is [Pentagram dvínar]
+
+@ [Pentagram of Protection]
+is [Pentagram of Protection]
+
+@ [Ring wearing off]
+is [Hringur dvínar]
+
+@ [Ring of Shadows]
+is [Ring of Shadows]
+
+@ [Biosuit wearing off]
+is [Biosuit dvínar]
+
+@ [Biosuit]
+is [Biosuit]
+
+@ [Item picked up]
+is [Hlutur tekinn]
+
+@ [Weapon picked up]
+is [Vopn tekið]
+
+@ [Ammo picked up]
+is [Skotfæri tekin]
+
+@ [Explosion]
+is [Sprenging]
+
+@ [Grenade launched]
+is [Handsprengju skotið]
+
+@ [Grenade bounce]
+is [Handsprengja skoppar]
+
+@ [Rocket fired]
+is [Eldflaug skotið]
+
+@ [Nails fired]
+is [Nöglum skotið]
+
+@ [Lightning]
+is [Elding]
+
+@ [Thunder]
+is [Þruma]
+
+@ [Enforcer alerted]
+is [Enforcer sér þig]
+
+@ [Grunt alerted]
+is [Grunt sér þig]
+
+@ [Rottweiler alerted]
+is [Rottweiler sér þig]
+
+@ [Knight alerted]
+is [Knight sér þig]
+
+@ [Death Knight alerted]
+is [Death Knight sér þig]
+
+@ [Scrag alerted]
+is [Scrag sér þig]
+
+@ [Ogre alerted]
+is [Ogre sér þig]
+
+@ [Fiend alerted]
+is [Fiend sér þig]
+
+@ [Shambler alerted]
+is [Shambler sér þig]
+
+@ [Zombie groaning]
+is [Zombie stynur]
+
+@ [Vore alerted]
+is [Vore sér þig]
+
+@ [Vore attacking]
+is [Vore ræðst á]
+
+@ [Spawn alerted]
+is [Spawn sér þig]
+
+@ [Rotfish]
+is [Rotfish]
+
+@ [Spawn]
+is [Spawn]
+
+@ [Chthon]
+is [Chthon]
+
+@ [Hard landing]
+is [Harkaleg lending]
+
+@ [Drowning]
+is [Drukknar]
+
+@ [Gasping for air]
+is [Grípur andann á lofti]
+
+@ [Burning]
+is [Brennur]
+
+@ [Telefrag]
+is [Telefrag]
+
+@ [Gibbed]
+is [Sundurtættur]
+
+# ==== console.txt ====
+
+# Console messages, shown translated only with con_translate 1 (Translate Console).
+# Cvar and command names stay as they are.
+@ Autosaved.
+is Vistað sjálfvirkt.
+
+@ Game saved.
+is Leikur vistaður.
+
+@ Can't save now.
+is Ekki hægt að vista núna.
+
+@ This game only autosaves (No Manual Saves modifier).
+is Þessi leikur vistar aðeins sjálfvirkt (leikbreytan Engar handvirkar vistanir).
+
+@ Loading {}...
+is Hleð {}...
+
+@ load failed: {}
+is hleðsla mistókst: {}
+
+@ ERROR: autosave failed: {}
+is VILLA: sjálfvirk vistun mistókst: {}
+
+@ ERROR: couldn't open {}
+is VILLA: gat ekki opnað {}
+
+@ ERROR: couldn't open {}.
+is VILLA: gat ekki opnað {}.
+
+@ ERROR: couldn't write {}: {}
+is VILLA: gat ekki skrifað {}: {}
+
+@ ERROR: couldn't create {}: {}
+is VILLA: gat ekki búið til {}: {}
+
+@ couldn't write {}: {}
+is gat ekki skrifað {}: {}
+
+@ Wrote {}
+is Skrifaði {}
+
+@ screenshot failed: {}
+is skjámynd mistókst: {}
+
+@ screenshot: {}
+is skjámynd: {}
+
+@ No readable save available. Select save or restart the level.
+is Engin læsileg vistun tiltæk. Veldu vistun eða byrjaðu borðið aftur.
+
+@ Unknown command "{}"
+is Óþekkt skipun „{}“
+
+@ couldn't exec {}
+is gat ekki keyrt {}
+
+@ execing {}
+is keyri {}
+
+@ execing config.cfg (inherited from {})
+is keyri config.cfg (erft frá {})
+
+@ execing config.cfg (mod defaults)
+is keyri config.cfg (sjálfgildi mods)
+
+@ execing default.cfg (built-in)
+is keyri default.cfg (innbyggt)
+
+@ {} cvars
+is cvar-breytur: {}
+
+@ {} commands
+is skipanir: {}
+
+@ Can't "cmd", not connected
+is Ekki hægt að nota „cmd“, engin tenging
+
+@ Looking for Quake servers...
+is Leita að Quake-þjónum...
+
+@ Bad value, must be between 1 and 65534
+is Ógilt gildi, verður að vera á bilinu 1 til 65534
+
+@ Couldn't handle music file {}
+is Gat ekki unnið úr tónlistarskránni {}
+
+@ Bug report written to {}
+is Villuskýrsla skrifuð í {}
+
+@ bugreport: can't create {}: {}
+is bugreport: get ekki búið til {}: {}
+
+@ graphics preset: {}
+is grafíkforstilling: {}
+
+@ Presets (r_shader_preset <name>):
+is Forstillingar (r_shader_preset <heiti>):
+
+@ Add your own .slangp presets under <game>/shaders/.
+is Bættu við þínum eigin .slangp-forstillingum í <game>/shaders/.
+
+@ no shader preset loaded (r_shader_preset)
+is engin skyggjaforstilling hlaðin (r_shader_preset)
+
+@ r_shader_preset: "{}" not found
+is r_shader_preset: „{}“ fannst ekki
+
+@ no parameter "{}" in this preset
+is engin færibreyta „{}“ í þessari forstillingu
+
+@ {} = {} (default {}, {}..{})
+is {} = {} (sjálfgefið {}, {}..{})
+
+@ Switching to {}...
+is Skipti yfir í {}...
+
+@ game: no game dir "{}" in {}
+is game: engin leikjamappa „{}“ í {}
+
+@ game: can't find the engine executable
+is game: finn ekki keyrsluskrá vélarinnar
+
+@ game: exec failed: {}
+is game: keyrsla mistókst: {}
+
+@ game: launch failed: {}
+is game: ræsing mistókst: {}
+
+@ loaded {} in {}s
+is hlóð {} á {} s
+
+@ No demos listed with startdemos
+is Engar upptökur skráðar með startdemos
+
+@ Playing demo from {}.
+is Spila upptöku úr {}.
+
+@ {} frames {} seconds {} fps
+is {} rammar {} sekúndur {} fps
+
+@ Recording to {}.
+is Tek upp í {}.
+
+@ Completed demo
+is Upptöku lokið
+
+@ Can't record during demo playback
+is Get ekki tekið upp meðan upptaka er spiluð
+
+@ Relative pathnames are not allowed.
+is Afstæðar slóðir eru ekki leyfðar.
+
+@ Can't record - try again when connected
+is Get ekki tekið upp - reyndu aftur þegar tenging er komin
+
+@ {} demo(s) in loop
+is Upptökur í lykkju: {}
+
+@ Not recording a demo.
+is Engin upptaka í gangi.
+
+@ {} joined on a gamepad
+is {} tengdist með fjarstýringu
+
+@ goggles: needs a game started with Add-ons and Goggles enabled
+is goggles: krefst leiks sem var hafinn með Viðbætur og Gleraugu virk
+
+@ equip: needs a game started with Add-ons and Goggles enabled
+is equip: krefst leiks sem var hafinn með Viðbætur og Gleraugu virk
+
+@ UDP listening on port {}
+is UDP hlustar á gátt {}
+
+@ UDP bind on port {} failed: {}
+is UDP-binding á gátt {} mistókst: {}
+
+@ Connection accepted by {}
+is Tenging samþykkt af {}
+
+@ Connection failed: {}
+is Tenging mistókst: {}
+
+@ Couldn't resolve {}
+is Gat ekki flett upp {}
+
+@ Connecting to {}...
+is Tengist {}...
+
+@ Connecting to QuakeWorld server {}...
+is Tengist QuakeWorld-þjóni {}...
+
+@ Disconnected: {}
+is Aftengt: {}
+
+@ Server disconnected
+is Þjónn aftengdist
+
+@ Client {} connected
+is Biðlari {} tengdist
+
+@ Client {} timed out
+is Tímamörk runnu út hjá biðlara {}
+
+@ Couldn't spawn server {}: {}
+is Gat ekki ræst þjón {}: {}
+
+@ maxplayers can not be changed while a server is running.
+is Ekki er hægt að breyta maxplayers meðan þjónn er í gangi.
+
+@ You can't kick yourself!
+is Þú getur ekki sparkað sjálfum þér!
+
+@ Only the server may changelevel
+is Aðeins þjónninn má nota changelevel
+
+@ {} renamed to {}
+is {} heitir nú {}

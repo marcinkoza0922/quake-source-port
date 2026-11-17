@@ -1,0 +1,3024 @@
+# ca: the port's own text; English keys from crates/qcore/lang/*.txt.
+# Format in crates/qcore/src/lang/catalog.rs; check with tools/lang_check.py.
+
+# ==== menu.txt ====
+
+# Options pages: page names, row labels and choice values.
+@ 10% speed
+ca velocitat 10 %
+
+@ 2 split-screen
+ca 2 en pantalla dividida
+
+@ 3 split-screen
+ca 3 en pantalla dividida
+
+@ 4 split-screen
+ca 4 en pantalla dividida
+
+@ 5 split-screen
+ca 5 en pantalla dividida
+
+@ 6 split-screen
+ca 6 en pantalla dividida
+
+@ 2D aiming
+ca punteria 2D
+
+@ 2x monsters
+ca monstres x2
+
+@ 3x monsters
+ca monstres x3
+
+@ 4x monsters
+ca monstres x4
+
+@ 3D resolution
+ca resolució 3D
+
+@ 3D view
+ca vista 3D
+
+@ 8-bit Color
+ca Color de 8 bits
+
+@ Accessibility
+ca Accessibilitat
+
+@ Acquisition Cone
+ca Con d'adquisició
+
+@ Activation
+ca Activació
+
+@ Add a ringing room tail after the cue
+ca Afegeix una cua de reverberació després del senyal
+
+@ Add delayed repeats after the cue
+ca Afegeix repeticions retardades després del senyal
+
+@ Add saturation and distortion
+ca Afegeix saturació i distorsió
+
+@ Add-ons
+ca Complements
+
+@ Address
+ca Adreça
+
+@ Adds fine noise to hide color banding
+ca Afegeix un soroll fi per amagar les bandes de color
+
+@ Advanced Settings
+ca Configuració avançada
+
+@ Aim Assist
+ca Ajuda a apuntar
+
+@ Aim Rotation
+ca Rotació de la mira
+
+@ Aim Slowdown
+ca Alentiment de la mira
+
+@ Aim Style
+ca Estil de punteria
+
+@ All
+ca Tot
+
+@ All enemies
+ca Tots els enemics
+
+@ Alt Fire (Add-ons)
+ca Tret secundari (complements)
+
+@ Always Run
+ca Corre sempre
+
+@ Ambient Occlusion
+ca Oclusió ambiental
+
+@ Ammo Counts
+ca Comptadors de munició
+
+@ Ammo Counts Position
+ca Posició dels comptadors de munició
+
+@ Ammo Pickups
+ca Munició recollida
+
+@ Anisotropic
+ca Anisotròpic
+
+@ Anti-aliasing
+ca Antialiàsing
+
+@ Apply To
+ca Aplica a
+
+@ Armor
+ca Armadura
+
+@ Armor Position
+ca Posició de l'armadura
+
+@ Ask
+ca Pregunta
+
+@ Attack
+ca Ataca
+
+@ Audio
+ca Àudio
+
+@ Auto-aim
+ca Punteria automàtica
+
+@ Auto-aim Settings
+ca Configuració de la punteria automàtica
+
+@ Autosave
+ca Desament automàtic
+
+@ Autosave Settings
+ca Configuració del desament automàtic
+
+@ Autosave Timer
+ca Interval de desament automàtic
+
+@ Autosaves to Keep
+ca Desaments automàtics a conservar
+
+@ Bass
+ca Greus
+
+@ Blip
+ca Bip
+
+@ Blood Quality
+ca Qualitat de la sang
+
+@ Blood Splatter Settings
+ca Configuració de les esquitxades de sang
+
+@ Blue
+ca Blau
+
+@ Boomerang Settings
+ca Configuració del bumerang
+
+@ Boost or cut high frequencies in decibels
+ca Realça o retalla els aguts, en decibels
+
+@ Boost or cut low frequencies in decibels
+ca Realça o retalla els greus, en decibels
+
+@ Brightness
+ca Brillantor
+
+@ Bullet Time (Add-ons)
+ca Temps bala (complements)
+
+@ Bullet Time Settings
+ca Configuració del temps bala
+
+@ Button Glyphs
+ca Icones dels botons
+
+@ Button Size
+ca Mida dels botons
+
+@ Camera
+ca Càmera
+
+@ Caustic Intensity
+ca Intensitat de les càustiques
+
+@ Caustics
+ca Càustiques
+
+@ Center
+ca Centre
+
+@ Center Message Position
+ca Posició dels missatges centrals
+
+@ Center Message Time
+ca Durada dels missatges centrals
+
+@ Center View
+ca Centra la vista
+
+@ Change Color on Kill
+ca Canvia el color en eliminar
+
+@ Change Color on Target
+ca Canvia el color sobre l'objectiu
+
+@ Chime
+ca Campaneta
+
+@ Click
+ca Clic
+
+@ Clink
+ca Dring
+
+@ Coin
+ca Moneda
+
+@ Color
+ca Color
+
+@ Color Filter
+ca Filtre de color
+
+@ Color of the grenade arc
+ca Color de l'arc de la granada
+
+@ Colored Lighting
+ca Il·luminació de color
+
+@ Connect
+ca Connecta
+
+@ Contrast
+ca Contrast
+
+@ Controls
+ca Controls
+
+@ Cooldown (ms)
+ca Refredament (ms)
+
+@ Crosshair Outline
+ca Contorn del punt de mira
+
+@ Crosshair Shape
+ca Forma del punt de mira
+
+@ Crosshair Size
+ca Mida del punt de mira
+
+@ Current Ammo
+ca Munició actual
+
+@ Current Ammo Position
+ca Posició de la munició actual
+
+@ Customize This Game
+ca Personalitza aquesta partida
+
+@ Damage
+ca Dany
+
+@ Damage Taken
+ca Dany rebut
+
+@ Debris
+ca Runa
+
+@ Debris Quality
+ca Qualitat de la runa
+
+@ Debris Settings
+ca Configuració de la runa
+
+@ Directional Damage
+ca Dany direccional
+
+@ Dithering
+ca Tramat
+
+@ Dodge / Dive (Add-ons)
+ca Esquiva / capbussa't (complements)
+
+@ Dragging up looks down instead of up
+ca Arrossegar amunt fa mirar avall en lloc d'amunt
+
+@ Drive
+ca Saturació
+
+@ Dynamic Lights
+ca Llums dinàmics
+
+@ Echo
+ca Eco
+
+@ Enemy Health
+ca Salut dels enemics
+
+@ Enemy Wounds
+ca Ferides dels enemics
+
+@ Enhanced Blood Splatter
+ca Esquitxades de sang millorades
+
+@ Enhanced FX
+ca Efectes millorats
+
+@ Enhanced Models
+ca Models millorats
+
+@ Enhanced Particles
+ca Partícules millorades
+
+@ Enhanced Water
+ca Aigua millorada
+
+@ Enhancements
+ca Millores
+
+@ Equipment Wheel (Add-ons)
+ca Selector d'equip (complements)
+
+@ Exploding boxes throw metal shards
+ca Les caixes explosives llancen estelles de metall
+
+@ Explosion Damage
+ca Dany per explosió
+
+@ Explosion Scorch Marks
+ca Marques de cremades d'explosions
+
+@ Explosions scorch nearby solid surfaces
+ca Les explosions cremen les superfícies sòlides properes
+
+@ Explosives only
+ca Només explosius
+
+@ Extra Monsters
+ca Monstres addicionals
+
+@ Extra Per 10 Damage (ms)
+ca Extra per cada 10 de dany (ms)
+
+@ FX Settings
+ca Configuració dels efectes
+
+@ Field of View
+ca Camp de visió
+
+@ Firing never uses up ammo
+ca Disparar mai no gasta munició
+
+@ First person
+ca primera persona
+
+@ Flick Time
+ca Temps del flick
+
+@ Flight Speed
+ca Velocitat de vol
+
+@ Fog
+ca Boira
+
+@ Frag Limit
+ca Límit de frags
+
+@ Freeze Duration (ms)
+ca Durada de la congelació (ms)
+
+@ GLQuake
+ca GLQuake
+
+@ Game Speed
+ca Velocitat del joc
+
+@ Game Type
+ca Tipus de partida
+
+@ Gameplay
+ca Jugabilitat
+
+@ Gameplay Modifiers
+ca Modificadors de joc
+
+@ Gel Quality
+ca Qualitat del gel
+
+@ Gib Surface Painting
+ca Taques de les restes
+
+@ Gibs
+ca Restes
+
+@ Gibs and heads tumble and bounce
+ca Les restes i els caps rodolen i reboten
+
+@ Goggle Glow Quality
+ca Qualitat de la lluïssor de les ulleres
+
+@ Goggle Intensity
+ca Intensitat de les ulleres
+
+@ Goggle Noise
+ca Soroll de les ulleres
+
+@ Goggles Settings
+ca Configuració de les ulleres
+
+@ Graphics
+ca Gràfics
+
+@ Green
+ca Verd
+
+@ Grenade Arc
+ca Arc de la granada
+
+@ Grenade Arc Settings
+ca Configuració de l'arc de la granada
+
+@ Gun Kick
+ca Retrocés de l'arma
+
+@ Gyro
+ca Giroscopi
+
+@ Gyro & Flick Stick
+ca Giroscopi i flick stick
+
+@ Gyro Active
+ca Giroscopi actiu
+
+@ Gyro Aiming
+ca Punteria amb giroscopi
+
+@ HUD
+ca HUD
+
+@ HUD Style
+ca Estil de l'HUD
+
+@ Health
+ca Salut
+
+@ Health Pickups
+ca Salut recollida
+
+@ Health Position
+ca Posició de la salut
+
+@ Health Regeneration
+ca Regeneració de salut
+
+@ Hit & Kill Sounds
+ca Sons d'impacte i d'eliminació
+
+@ Hit Doors & Lifts
+ca Colpeja portes i ascensors
+
+@ Hit Markers
+ca Marcadors d'impacte
+
+@ Hit Sound
+ca So d'impacte
+
+@ Hitmarker Size
+ca Mida del marcador
+
+@ Hitmarker Type
+ca Tipus de marcador
+
+@ Hitstop Advanced
+ca Hitstop avançat
+
+@ Hitstop Settings
+ca Configuració del hitstop
+
+@ Hold
+ca Mantén
+
+@ Hold lock-on
+ca Fixació mantenint
+
+@ Hook Enemies
+ca Enganxa enemics
+
+@ Hook Metal
+ca Enganxa metall
+
+@ Hook Stone
+ca Enganxa pedra
+
+@ Hook Wood
+ca Enganxa fusta
+
+@ Hooking an enemy pulls you to it
+ca Enganxar un enemic t'estira cap a ell
+
+@ Hookshot Range
+ca Abast del ganxo
+
+@ Hookshot Settings
+ca Configuració del ganxo
+
+@ Host Game
+ca Crea una partida
+
+@ How far the hook flies before it retracts
+ca Distància que recorre el ganxo abans de tornar
+
+@ How visible the on-screen controls are
+ca Visibilitat dels controls en pantalla
+
+@ Impact Lifetime
+ca Durada dels impactes
+
+@ Infinite Ammo
+ca Munició infinita
+
+@ Input
+ca Entrada
+
+@ Input Scale
+ca Escala d'entrada
+
+@ Interpolate Animation
+ca Interpola les animacions
+
+@ Interpolate Movement
+ca Interpola el moviment
+
+@ Invert Look
+ca Inverteix la vista
+
+@ Invert Mouse
+ca Inverteix el ratolí
+
+@ Invert Stick
+ca Inverteix la palanca
+
+@ Jet Quality
+ca Qualitat del raig
+
+@ Join Game
+ca Uneix-te a una partida
+
+@ Jump / Swim Up
+ca Salta / neda amunt
+
+@ Jump again in mid-air
+ca Torna a saltar a l'aire
+
+@ Jumps
+ca Salts
+
+@ Keys & Powerups
+ca Claus i potenciadors
+
+@ Keys & Powerups Position
+ca Posició de claus i potenciadors
+
+@ Kill Bonus (x)
+ca Bonificació per eliminació (x)
+
+@ Kill Sound
+ca So d'eliminació
+
+@ Knock
+ca Cop
+
+@ Left
+ca Esquerra
+
+@ Length of the motion blur streaks
+ca Longitud de les esteles del desenfocament de moviment
+
+@ Lifetime (seconds)
+ca Durada (segons)
+
+@ Live Portal Views
+ca Vistes de portal en directe
+
+@ Live View Distance
+ca Distància de les vistes en directe
+
+@ Local Players
+ca Jugadors locals
+
+@ Local red wounds follow enemy animation
+ca Ferides vermelles localitzades segueixen l'animació de l'enemic
+
+@ Lock Indicator
+ca Indicador de fixació
+
+@ Long falls don't hurt
+ca Les caigudes llargues no fan mal
+
+@ Longest Freeze (ms)
+ca Congelació més llarga (ms)
+
+@ Look Down
+ca Mira avall
+
+@ Look Speed
+ca Velocitat de la vista
+
+@ Look Up
+ca Mira amunt
+
+@ Main Menu Music
+ca Música del menú principal
+
+@ Max FPS
+ca FPS màxims
+
+@ Max Players
+ca Màxim de jugadors
+
+@ Maximum Impacts
+ca Impactes màxims
+
+@ Maximum Marks
+ca Marques màximes
+
+@ Maximum Range
+ca Abast màxim
+
+@ Melee only
+ca Només cos a cos
+
+@ Message Background
+ca Fons dels missatges
+
+@ Message Text Size
+ca Mida del text dels missatges
+
+@ Messages & Captions
+ca Missatges i subtítols
+
+@ Meter Duration (real seconds)
+ca Durada del mesurador (segons reals)
+
+@ Minimum Damage
+ca Dany mínim
+
+@ Mode
+ca Mode
+
+@ Modern Console
+ca Consola moderna
+
+@ Modern HUD Layout
+ca Disposició de l'HUD modern
+
+@ Most recent save
+ca Partida desada més recent
+
+@ Motion Blur
+ca Desenfocament de moviment
+
+@ Motion Blur Amount
+ca Intensitat del desenfocament
+
+@ Motion Blur Quality
+ca Qualitat del desenfocament
+
+@ Mouse & Keyboard
+ca Ratolí i teclat
+
+@ Mouse Speed
+ca Velocitat del ratolí
+
+@ Move Back
+ca Recula
+
+@ Move Forward
+ca Avança
+
+@ Music Volume
+ca Volum de la música
+
+@ Next Weapon
+ca Arma següent
+
+@ No Drowning
+ca Sense ofegament
+
+@ No Fall Damage
+ca Sense dany per caiguda
+
+@ No Manual Saves
+ca Sense desament manual
+
+@ No Self Damage
+ca Sense dany propi
+
+@ Noise Filter
+ca Filtre de soroll
+
+@ Normal Color
+ca Color normal
+
+@ Notify Message Position
+ca Posició de les notificacions
+
+@ Notify Message Time
+ca Durada de les notificacions
+
+@ Number of splatter rays per blood impact
+ca Nombre de raigs d'esquitxada per impacte de sang
+
+@ Off
+ca Desactivat
+
+@ On Death
+ca En morir
+
+@ On Kill Color
+ca Color en eliminar
+
+@ On Target Color
+ca Color sobre l'objectiu
+
+@ Opacity
+ca Opacitat
+
+@ Opacity of the grenade arc
+ca Opacitat de l'arc de la granada
+
+@ Pants Color
+ca Color dels pantalons
+
+@ Particle Quality
+ca Qualitat de les partícules
+
+@ Particles
+ca Partícules
+
+@ Physical Nail Impacts
+ca Impactes físics dels claus
+
+@ Pistol Start
+ca Inici des de zero
+
+@ Pitch
+ca To
+
+@ Pitch Sensitivity
+ca Sensibilitat vertical
+
+@ Playback Speed
+ca Velocitat de reproducció
+
+@ Player Setup
+ca Configura el jugador
+
+@ Pop
+ca Pop
+
+@ Portal Gun Settings
+ca Configuració de la pistola de portals
+
+@ Portal Recursion
+ca Recursió de portals
+
+@ Portal View Quality
+ca Qualitat de la vista dels portals
+
+@ Preview Sound
+ca Escolta el so
+
+@ Previous Weapon
+ca Arma anterior
+
+@ Projectile Shotguns Settings
+ca Configuració de les escopetes de projectils
+
+@ Projectile Speed (units/s)
+ca Velocitat dels projectils (unitats/s)
+
+@ Purple
+ca Morat
+
+@ Push
+ca Empenta
+
+@ Push Strength
+ca Força de l'empenta
+
+@ Quick Load
+ca Càrrega ràpida
+
+@ Quick Save
+ca Desament ràpid
+
+@ Railgun Settings
+ca Configuració del railgun
+
+@ Ranged only
+ca Només a distància
+
+@ Reacquire While Held
+ca Torna a fixar en mantenir
+
+@ Red
+ca Vermell
+
+@ Reduce Motion
+ca Redueix el moviment
+
+@ Regen (seconds per second)
+ca Regeneració (segons per segon)
+
+@ Render Scale
+ca Escala de renderització
+
+@ Reverb
+ca Reverberació
+
+@ Right
+ca Dreta
+
+@ Ripple Intensity
+ca Intensitat de les ones
+
+@ Ripples
+ca Ones
+
+@ Roll Sensitivity
+ca Sensibilitat de balanceig
+
+@ Rumble
+ca Vibració
+
+@ Run
+ca Corre
+
+@ Save on All Enemies Killed
+ca Desa en eliminar tots els enemics
+
+@ Save on All Secrets Found
+ca Desa en trobar tots els secrets
+
+@ Save on Level Entry
+ca Desa en entrar al nivell
+
+@ Save on Secret Found
+ca Desa en trobar un secret
+
+@ Scoreboard
+ca Marcador
+
+@ Screen Flashes
+ca Flaixos de pantalla
+
+@ Screen Shader
+ca Shader de pantalla
+
+@ Screen Shake
+ca Tremolor de pantalla
+
+@ Search LAN
+ca Cerca a la LAN
+
+@ Seconds a center-screen message stays up
+ca Segons que un missatge roman al centre de la pantalla
+
+@ See Through Portals
+ca Veure a través dels portals
+
+@ See-through Teleporters
+ca Teletransportadors transparents
+
+@ Shirt Color
+ca Color de la camisa
+
+@ Shotgun Bullet Decals
+ca Marques de perdigons
+
+@ Shoulder left
+ca espatlla esquerra
+
+@ Shoulder right
+ca espatlla dreta
+
+@ Show FPS
+ca Mostra els FPS
+
+@ Show Face
+ca Mostra la cara
+
+@ Shrapnel
+ca Metralla
+
+@ Size of on-screen messages and captions
+ca Mida dels missatges i subtítols en pantalla
+
+@ Skill
+ca Dificultat
+
+@ Sky Fog
+ca Boira del cel
+
+@ Smooths the stepped movement of monsters
+ca Suavitza el moviment a salts dels monstres
+
+@ Sound
+ca So
+
+@ Sound Captions
+ca Subtítols dels sons
+
+@ Sound Volume
+ca Volum del so
+
+@ Speed Blur
+ca Desenfocament de velocitat
+
+@ Splashes
+ca Esquitxades
+
+@ Splatter Amount
+ca Quantitat d'esquitxades
+
+@ Splatter Size
+ca Mida de les esquitxades
+
+@ Start Game
+ca Inicia la partida
+
+@ Staying underwater doesn't hurt
+ca Romandre sota l'aigua no fa mal
+
+@ Stick Look Pitch
+ca Vista vertical amb palanca
+
+@ Stick Look Yaw
+ca Vista horitzontal amb palanca
+
+@ Strafe Left
+ca Desplaçament a l'esquerra
+
+@ Strafe Right
+ca Desplaçament a la dreta
+
+@ Strength of the surface swell and rings
+ca Força de l'onatge i els anells de la superfície
+
+@ Stun Duration
+ca Durada de l'atordiment
+
+@ Style
+ca Estil
+
+@ Supersampling
+ca Supermostreig
+
+@ Surface Hit Effects
+ca Efectes d'impacte a les superfícies
+
+@ Swim Down
+ca Neda avall
+
+@ Targets
+ca Objectius
+
+@ Teamplay
+ca Joc en equip
+
+@ Texture Filter
+ca Filtre de textures
+
+@ Third person
+ca tercera persona
+
+@ Thud
+ca Cop sord
+
+@ Tick
+ca Tic
+
+@ Time Limit
+ca Límit de temps
+
+@ Time Stretch
+ca Estirament temporal
+
+@ Toggle Attack
+ca Atac alternat
+
+@ Toggle Run
+ca Córrer alternat
+
+@ Toggle auto-aim
+ca Punteria automàtica alternada
+
+@ Touch Controls
+ca Controls tàctils
+
+@ Touchscreen
+ca Pantalla tàctil
+
+@ Tough Enemy Health
+ca Salut dels enemics durs
+
+@ Tough enemies only
+ca Només enemics durs
+
+@ Trail Colour
+ca Color de l'estela
+
+@ Translate Console
+ca Tradueix la consola
+
+@ Translucent Water
+ca Aigua translúcida
+
+@ Treble
+ca Aguts
+
+@ Turn Left
+ca Gira a l'esquerra
+
+@ Turn Right
+ca Gira a la dreta
+
+@ Underwater FX
+ca Efectes sota l'aigua
+
+@ Use Bullet Time Meter
+ca Usa el mesurador de temps bala
+
+@ VSync
+ca Sincronització vertical
+
+@ View Bob
+ca Balanceig de la càmera
+
+@ Viewmodels
+ca Models de l'arma
+
+@ Volume
+ca Volum
+
+@ Water Opacity
+ca Opacitat de l'aigua
+
+@ Water Quality
+ca Qualitat de l'aigua
+
+@ Water Settings
+ca Configuració de l'aigua
+
+@ Weapon Wheel
+ca Selector d'armes
+
+@ Weapon Wheel Slowdown
+ca Alentiment del selector d'armes
+
+@ Weapons
+ca Armes
+
+@ Weapons Position
+ca Posició de les armes
+
+@ Where center-screen messages appear
+ca On apareixen els missatges centrals
+
+@ Where pickup and event messages appear
+ca On apareixen els missatges d'objectes i esdeveniments
+
+@ White
+ca Blanc
+
+@ Yaw Sensitivity
+ca Sensibilitat horitzontal
+
+@ Yellow
+ca Groc
+
+# lowercase choice values
+@ T
+ca T
+
+@ always
+ca sempre
+
+@ auto
+ca auto
+
+@ banded
+ca per bandes
+
+@ borderless
+ca sense vores
+
+@ bottom center
+ca a baix al centre
+
+@ bottom left
+ca a baix a l'esquerra
+
+@ bottom right
+ca a baix a la dreta
+
+@ box
+ca caixa
+
+@ broken square
+ca quadrat trencat
+
+@ classic
+ca clàssic
+
+@ coarse
+ca gruixut
+
+@ cooperative
+ca cooperatiu
+
+@ cross
+ca creu
+
+@ cross + dot
+ca creu + punt
+
+@ cyan
+ca cian
+
+@ dashed
+ca discontinu
+
+@ deathmatch
+ca tots contra tots
+
+@ deuteranopia
+ca deuteranopia
+
+@ diagonal streaks
+ca traços diagonals
+
+@ diamond
+ca rombe
+
+@ dot
+ca punt
+
+@ double
+ca doble
+
+@ double chevrons
+ca doble xebró
+
+@ double diagonals
+ca dobles diagonals
+
+@ easy
+ca fàcil
+
+@ fine
+ca fi
+
+@ fit output
+ca ajusta a la sortida
+
+@ flick stick
+ca flick stick
+
+@ fullscreen
+ca pantalla completa
+
+@ gap cross
+ca creu oberta
+
+@ green
+ca verd
+
+@ grey
+ca gris
+
+@ half speed
+ca mitja velocitat
+
+@ hard
+ca difícil
+
+@ high
+ca alta
+
+@ huge
+ca enorme
+
+@ immersive
+ca immersiu
+
+@ intense
+ca intens
+
+@ large
+ca gran
+
+@ larger
+ca més gran
+
+@ largest
+ca el més gran
+
+@ linear
+ca lineal
+
+@ low
+ca baixa
+
+@ lower
+ca a baix
+
+@ magenta
+ca magenta
+
+@ medium
+ca mitjana
+
+@ middle
+ca al mig
+
+@ middle left
+ca al mig a l'esquerra
+
+@ middle right
+ca al mig a la dreta
+
+@ modern
+ca modern
+
+@ nearest
+ca més proper
+
+@ nightmare
+ca malson
+
+@ nintendo
+ca Nintendo
+
+@ no team damage
+ca sense foc amic
+
+@ none
+ca cap
+
+@ normal
+ca normal
+
+@ off
+ca desactivat
+
+@ off while held
+ca desactivat en mantenir
+
+@ on
+ca activat
+
+@ only while held
+ca només en mantenir
+
+@ playstation
+ca PlayStation
+
+@ protanopia
+ca protanopia
+
+@ quarter speed
+ca un quart de velocitat
+
+@ red
+ca vermell
+
+@ short diagonals
+ca diagonals curtes
+
+@ single
+ca simple
+
+@ small
+ca petit
+
+@ solid
+ca continu
+
+@ spectacle
+ca espectacular
+
+@ subtle
+ca subtil
+
+@ team damage
+ca foc amic
+
+@ top center
+ca a dalt al centre
+
+@ top left
+ca a dalt a l'esquerra
+
+@ top right
+ca a dalt a la dreta
+
+@ triple
+ca triple
+
+@ tritanopia
+ca tritanopia
+
+@ upper
+ca a dalt
+
+@ white
+ca blanc
+
+@ whole screen
+ca pantalla sencera
+
+@ windowed
+ca en finestra
+
+@ xbox
+ca Xbox
+
+@ yellow
+ca groc
+
+# ==== tooltips.txt ====
+
+# Options help lines (tooltips) and reasons for disabled rows.
+@ 2D aiming turns the view continuously with the right stick; flick stick snaps the view to where you push the stick, then turning the stick rotates it
+ca La punteria 2D gira la vista de manera contínua amb la palanca dreta; el flick stick orienta la vista a l'instant cap on empenys la palanca i després girar-la la fa rotar
+
+@ 3D resolution relative to the window; the UI stays sharp
+ca Resolució 3D respecte a la finestra; la interfície es manté nítida
+
+@ 3D view keeps the HUD and menus sharp; whole screen runs them through the shader too
+ca Vista 3D manté nítids l'HUD i els menús; pantalla sencera també els aplica el shader
+
+@ A Quake III style railgun: a slug that pierces every enemy on its line, using 2 cells a shot and refiring every 1.5 s; select it through its assigned weapon slot (Add-ons)
+ca Un railgun a l'estil de Quake III: un projectil que travessa tots els enemics de la seva trajectòria, 2 cel·les per tret i un tret cada 1,5 s; selecciona'l amb la ranura d'arma assignada (complements)
+
+@ A Zelda-style hookshot: fire sends a chain hook out; it latches onto hookable surfaces or enemies and reels you in; fire again to let go
+ca Un ganxo a l'estil de Zelda: disparar llança un ganxo amb cadena que s'enganxa a superfícies aptes o a enemics i t'hi estira; torna a disparar per deixar-te anar
+
+@ Also translates the engine's console messages; off keeps them in English
+ca Tradueix també els missatges de consola del motor; desactivat els deixa en anglès
+
+@ Automatically acquire another enemy while holding Lock-on after losing a target
+ca Fixa automàticament un altre enemic mentre mantens Fixa l'objectiu després de perdre un objectiu
+
+@ Blends between animation frames of monsters and weapons
+ca Combina els fotogrames d'animació de monstres i armes
+
+@ Blood stains surfaces and bodies; cosmetic, independent of particle packs
+ca La sang taca superfícies i cossos; només estètic, independent dels paquets de partícules
+
+@ Bloom glow around bright lights and heat sources; medium uses 4 taps, high uses 8, low disables halo taps
+ca Resplendor bloom al voltant de llums intensos i fonts de calor; mitjana usa 4 mostres, alta 8 i baixa desactiva el halo
+
+@ Blurs fast-moving monsters, projectiles and doors (not camera turns)
+ca Desenfoca monstres, projectils i portes ràpids (no els girs de càmera)
+
+@ Blurs the screen edges during fast falls and launches; keeps the centre clear. Reduce Motion disables it
+ca Desenfoca les vores de la pantalla en caigudes i impulsos ràpids; el centre queda nítid. Redueix el moviment el desactiva
+
+@ Brightness of the underwater light patterns
+ca Brillantor dels reflexos de llum sota l'aigua
+
+@ Caps mark count, lifetime, airborne droplets and wound/gib painting; low skips enemy wounds and gib trails
+ca Limita el nombre i la durada de les marques, les gotes a l'aire i les taques de ferides i restes; baixa omet les ferides enemigues i els rastres de restes
+
+@ Caps shader input at output size so 200% render scale keeps 3D sharpness without 4x shader cost; low scales stay low-res
+ca Limita l'entrada del shader a la mida de sortida, així una escala de renderització del 200 % manté la nitidesa 3D sense quadruplicar-ne el cost; les escales baixes continuen en baixa resolució
+
+@ Classic: the original status bar; modern: compact elements at the screen edges
+ca Clàssic: la barra d'estat original; modern: elements compactes a les vores de la pantalla
+
+@ Coat atlas resolution, rebuild rate and shader detail: low builds smaller coats less often with fast shading; high uses full detail
+ca Resolució de l'atles de capes, freqüència de reconstrucció i detall del shader: baixa crea capes més petites amb menys freqüència i ombrejat ràpid; alta usa tot el detall
+
+@ Colour of the railgun's spiral trail; split-screen players each get the next colour along
+ca Color de l'estela en espiral del railgun; en pantalla dividida cada jugador rep el color següent
+
+@ Damage the railgun deals to each enemy it passes through (Quake III: 100)
+ca Dany que fa el railgun a cada enemic que travessa (Quake III: 100)
+
+@ Dark backdrop behind on-screen messages for readability
+ca Fons fosc darrere dels missatges en pantalla per llegir-los millor
+
+@ Dark border keeps the crosshair visible on any background
+ca Una vora fosca manté visible el punt de mira sobre qualsevol fons
+
+@ Darkens corners and contact areas where geometry meets; higher quality is sharper
+ca Enfosqueix cantonades i zones de contacte entre geometries; una qualitat més alta és més nítida
+
+@ Debris lands on and is carried or shoved by doors, lifts and platforms
+ca La runa cau sobre portes, ascensors i plataformes, que la transporten o l'empenyen
+
+@ Detail for caustics, ripples and splashes: low uses smaller budgets and shorter view distance; high uses larger budgets and farther view distance
+ca Detall de càustiques, ones i esquitxades: baixa usa pressupostos menors i menys distància de visió; alta, pressupostos més grans i més distància de visió
+
+@ Disabled while Enhanced Particles is on: its particles replace the GLQuake and Classic styles
+ca Desactivat mentre Partícules millorades està activat: les seves partícules substitueixen els estils GLQuake i clàssic
+
+@ Disabled while Enhanced Water is on: its own underwater effects replace the classic and GLQuake view warps
+ca Desactivat mentre Aigua millorada està activada: els seus efectes sota l'aigua substitueixen les distorsions clàssica i GLQuake
+
+@ Draw the predicted grenade path as a solid or dashed line
+ca Dibuixa la trajectòria prevista de la granada amb línia contínua o discontínua
+
+@ Draw the view out of the linked portal inside each portal; off shows flat discs (fastest)
+ca Mostra a cada portal la vista des del portal enllaçat; desactivat mostra discos plans (el més ràpid)
+
+@ Droplets spray up when things enter or leave water, slime or lava
+ca Salten gotes quan alguna cosa entra o surt de l'aigua, el llot o la lava
+
+@ Emulates the original 8-bit palette of software rendering
+ca Emula la paleta original de 8 bits de la renderització per programari
+
+@ Every level starts with only the shotgun and axe, as if started fresh
+ca Cada nivell comença només amb l'escopeta i la destral, com si comencessis de zero
+
+@ Explosion damage for each remotely detonated sticky bomb
+ca Dany d'explosió de cada bomba adhesiva detonada a distància
+
+@ Extra freeze milliseconds for every 10 damage dealt, so heavy hits stop longer
+ca Mil·lisegons extra de congelació per cada 10 de dany, perquè els cops forts aturin més
+
+@ First person, a third-person camera centered behind the player, or one over the right or left shoulder; third person hides viewmodels
+ca Primera persona, càmera en tercera persona centrada darrere del jugador, o sobre l'espatlla dreta o esquerra; la tercera persona amaga els models de l'arma
+
+@ Flash the selected marker on confirmed hits; colors are shared with the crosshair
+ca Fa centellejar el marcador triat en impactes confirmats; els colors es comparteixen amb el punt de mira
+
+@ Freeze for every enemy, or only for enemies that were tough before the hit
+ca Congela amb tots els enemics o només amb els que eren durs abans del cop
+
+@ Freeze the game briefly when you damage an enemy; single player with add-ons only
+ca Congela breument el joc en ferir un enemic; només un jugador amb complements
+
+@ Gibs tumble and barrels throw shrapnel; shots and blasts push them (cosmetic only)
+ca Les restes rodolen i els barrils llancen metralla; trets i explosions les empenyen (només estètic)
+
+@ Health an enemy must have had before the hit to count as tough
+ca Salut que ha de tenir un enemic abans del cop per comptar com a dur
+
+@ Hits dealing less damage than this do not freeze the game; the default 10 skips nails and shotgun pellets
+ca Els cops amb menys dany no congelen el joc; el valor per defecte de 10 omet claus i perdigons
+
+@ Hold fire and sweep the crosshair over monsters to queue them, release to throw: it stuns each in turn and flies back; alt-fire clears the queue
+ca Mantén el tret i passa el punt de mira pels monstres per posar-los a la cua, deixa anar per llançar: atordeix cadascun per torns i torna; el tret secundari buida la cua
+
+@ Hold: keep Lock-on held. Toggle: press Auto-aim Toggle to enable automatic acquisition. Click look stick to switch targets
+ca Mantén: mantén premut Fixa l'objectiu. Alternat: prem Punteria automàtica (alternada) per activar la fixació automàtica. Prem la palanca de vista per canviar d'objectiu
+
+@ How close an enemy must be to the crosshair for automatic acquisition in toggle mode (degrees)
+ca Com de prop del punt de mira ha de ser un enemic per fixar-lo automàticament en mode alternat (graus)
+
+@ How far the view tilts up and down when you tilt the controller (pitch axis)
+ca Quant s'inclina la vista amunt i avall en inclinar el comandament (eix de capcineig)
+
+@ How far the view turns left and right when you turn the controller (yaw axis)
+ca Quant gira la vista a esquerra i dreta en girar el comandament (eix de guinyada)
+
+@ How far the view turns when you drag on the right half of the screen
+ca Quant gira la vista en arrossegar a la meitat dreta de la pantalla
+
+@ How fast the boomerang flies (units per second)
+ca Velocitat de vol del bumerang (unitats per segon)
+
+@ How hard shots and explosions push debris around
+ca Amb quina força els trets i les explosions empenyen la runa
+
+@ How hard the Powerwasher's water pushes enemies
+ca Amb quina força l'aigua de la hidronetejadora empeny els enemics
+
+@ How long a hit freezes the game, in milliseconds
+ca Quant de temps congela el joc un cop, en mil·lisegons
+
+@ How strongly fog covers the sky when fog is on
+ca Quant cobreix la boira el cel quan està activada
+
+@ How the view distorts underwater: Classic ripples the whole screen like software Quake, GLQuake slowly stretches and squashes the view
+ca Com es distorsiona la vista sota l'aigua: clàssic ondula tota la pantalla com el Quake per programari, GLQuake estira i aixafa la vista lentament
+
+@ Ignores gyro rotation slower than this many degrees per second, to hide hand tremor
+ca Ignora les rotacions del giroscopi més lentes que aquests graus per segon, per amagar el tremolor de la mà
+
+@ Immersive: appears for a few seconds only when its value changes
+ca Immersiu: apareix uns segons només quan canvia el seu valor
+
+@ Keeps textures sharp on floors and walls seen at steep angles
+ca Manté nítides les textures de terres i parets vistes en angles molt inclinats
+
+@ Lights from rockets, muzzle flashes and explosions brighten nearby walls
+ca Les llums de coets, flamarades de canó i explosions il·luminen les parets properes
+
+@ Liquid surfaces swell and ring out where things move through them
+ca Les superfícies líquides s'agiten i formen anells on alguna cosa les travessa
+
+@ Lobs sticky bombs (rockets ammo) that cling to walls, doors and monsters; alt-fire detonates them all
+ca Llança bombes adhesives (munició de coets) que s'enganxen a parets, portes i monstres; el tret secundari les detona totes
+
+@ Look of the classic particles: GLQuake draws soft round dots, Classic draws square pixels like software Quake
+ca Aspecte de les partícules clàssiques: GLQuake dibuixa punts rodons i suaus; clàssic, píxels quadrats com el Quake per programari
+
+@ Low skips the background smear halo and uses fewer blur samples; high keeps the full halo and smoother streaks
+ca Baixa omet el halo d'arrossegament del fons i usa menys mostres; alta manté el halo complet i esteles més suaus
+
+@ Low: hard particle edges, half the scripted particles and fewer hit sparks. Medium: soft edges. High: soft edges checked per MSAA sample, most hit sparks
+ca Baixa: vores dures, la meitat de les partícules programades i menys espurnes. Mitjana: vores suaus. Alta: vores suaus comprovades per mostra MSAA, gairebé totes les espurnes
+
+@ Marks fade out before expiring; oldest marks are recycled at the limit
+ca Les marques s'esvaeixen abans de desaparèixer; les més antigues es reutilitzen en arribar al límit
+
+@ Max nested portal reflections to draw; each level redraws the scene
+ca Màxim de portals imbricats a dibuixar; cada nivell torna a dibuixar l'escena
+
+@ Max portals per screen with a live view; each one redraws the scene
+ca Màxim de portals per pantalla amb vista en directe; cadascun torna a dibuixar l'escena
+
+@ Maximum distance for acquiring and keeping an enemy locked
+ca Distància màxima per fixar un enemic i mantenir-lo fixat
+
+@ Minimum gap between freezes, so shotgun pellets and rapid fire count once; kills ignore it
+ca Interval mínim entre congelacions, perquè els perdigons i el foc ràpid comptin una sola vegada; les eliminacions l'ignoren
+
+@ Modern terminal console with autocomplete popup, history search, ANSI colors, bash shell and piping; off uses the classic Quake console
+ca Consola moderna tipus terminal amb finestra d'autocompleció, cerca a l'historial, colors ANSI, shell bash i canonades; desactivat usa la consola clàssica de Quake
+
+@ Monsters take proportionally less damage at higher values; above 100% is harder
+ca Els monstres reben proporcionalment menys dany amb valors alts; per sobre del 100 % és més difícil
+
+@ Moving gibs leave blood on surfaces they touch
+ca Les restes en moviment deixen sang a les superfícies que toquen
+
+@ Multiplier on the freeze when the hit kills the enemy; 1 means no extra
+ca Multiplicador de la congelació quan el cop mata l'enemic; 1 vol dir sense extra
+
+@ Multiplies ammo from pickups (up to the normal carry limit); below 100% is harder
+ca Multiplica la munició recollida (fins al límit normal); per sota del 100 % és més difícil
+
+@ Multiplies health from pickups (up to 100, or the item's own limit); below 100% is harder
+ca Multiplica la salut recollida (fins a 100 o el límit propi de l'objecte); per sota del 100 % és més difícil
+
+@ Nails stick to wood and bodies; hard surfaces deflect them to the floor
+ca Els claus es claven a la fusta i als cossos; les superfícies dures els desvien a terra
+
+@ Nearest keeps crisp classic pixels; linear smooths textures
+ca Més proper manté els píxels clàssics nítids; lineal suavitza les textures
+
+@ New Game: Add-ons
+ca Partida nova: complements
+
+@ New Game: Customize
+ca Partida nova: personalitza
+
+@ Night vision: how much dark areas are brightened; thermal: how strongly heat stands out
+ca Visió nocturna: quant s'aclareixen les zones fosques; tèrmica: quant destaca la calor
+
+@ Night-vision and thermal goggles, cycle normal, night vision and thermal with Change Goggles (Add-ons), or use the Equipment Wheel
+ca Ulleres de visió nocturna i tèrmica: alterna normal, nocturna i tèrmica amb Canvia d'ulleres (complements) o fes servir el selector d'equip
+
+@ No single freeze lasts longer than this, however much damage or kill bonus adds
+ca Cap congelació no dura més que això, per molt de dany o bonificació per eliminació que s'hi sumi
+
+@ Oldest marks and nails are recycled at this shared limit
+ca Les marques i els claus més antics es reutilitzen en arribar a aquest límit comú
+
+@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
+ca Palanca i botons en pantalla: auto els mostra després d'un toc i els amaga quan s'usa un altre dispositiu
+
+@ Only autosaves: quicksaves and the Save menu are off
+ca Només desament automàtic: el desament ràpid i el menú Desa estan desactivats
+
+@ Place every weapon at the center, right or left of the view, or hide all viewmodels
+ca Col·loca cada arma al centre, a la dreta o a l'esquerra de la vista, o amaga tots els models
+
+@ Play your chosen hit or kill cue when you damage an enemy
+ca Reprodueix el senyal d'impacte o d'eliminació triat en ferir un enemic
+
+@ Playback speed: faster sounds shorter and higher
+ca Velocitat de reproducció: més ràpid sona més curt i més agut
+
+@ Plays the Quake theme in the main menu when no game is running
+ca Reprodueix el tema de Quake al menú principal quan no hi ha cap partida en curs
+
+@ Portals farther away than this are drawn as flat discs
+ca Els portals més llunyans es dibuixen com a discos plans
+
+@ Press attack once to keep firing, again to stop
+ca Prem atacar una vegada per continuar disparant i una altra per parar
+
+@ Press run once to switch between running and walking
+ca Prem córrer una vegada per alternar entre córrer i caminar
+
+@ Raise or lower the tone independently of sound length
+ca Puja o baixa el to sense canviar la durada del so
+
+@ Red screen edges show where damage came from: top is front, bottom is behind; Screen Flashes controls their strength
+ca Les vores vermelles de la pantalla mostren d'on ve el dany: a dalt és davant, a baix és darrere; Flaixos de pantalla en regula la intensitat
+
+@ Replaces the classic dot particles with glowing sparks, smoke and blood; mods with their own particle effects keep them
+ca Substitueix les partícules clàssiques de punts per espurnes brillants, fum i sang; els mods amb efectes propis els conserven
+
+@ Resolution and detail inside portal and teleporter views; lower tiers trim nested effects
+ca Resolució i detall a les vistes de portals i teletransportadors; els nivells baixos retallen els efectes imbricats
+
+@ Rippling light patterns on surfaces under water and slime
+ca Reflexos de llum ondulants a les superfícies sota l'aigua i el llot
+
+@ Scales all damage you take; above 100% is harder
+ca Escala tot el dany que reps; per sobre del 100 % és més difícil
+
+@ Screen edge for this element; elements on the same spot stack
+ca Vora de la pantalla per a aquest element; els elements al mateix lloc s'apilen
+
+@ Seconds a monster hit by the boomerang stays stunned
+ca Segons que queda atordit un monstre colpejat pel bumerang
+
+@ Seconds impact marks and stuck nails stay before fading out; independent of Particle Quality
+ca Segons que romanen els impactes i els claus clavats abans d'esvair-se; independent de Qualitat de les partícules
+
+@ Seconds messages at the top of the screen stay up
+ca Segons que romanen els missatges a la part superior de la pantalla
+
+@ Seconds the flick stick snap takes; lower is faster
+ca Segons que triga el gir del flick stick; menys és més ràpid
+
+@ See through enhanced water; enables Water Opacity
+ca Permet veure a través de l'aigua millorada; activa Opacitat de l'aigua
+
+@ Sensor grain, scanlines and flicker of the goggle image
+ca Gra del sensor, línies d'escombratge i parpelleig de la imatge de les ulleres
+
+@ Shades every anti-aliasing sample; needs Anti-aliasing on
+ca Ombreja cada mostra de l'antialiàsing; cal tenir l'antialiàsing activat
+
+@ Shifts colors so they stay distinct for the chosen color blindness
+ca Desplaça els colors perquè continuïn sent distingibles amb el daltonisme triat
+
+@ Shotgun hits leave small surface marks (cosmetic only)
+ca Els trets d'escopeta deixen petites marques a les superfícies (només estètic)
+
+@ Show corner ticks at screen centre while locked, even with Crosshair off
+ca Mostra marques de cantonada al centre de la pantalla en fixar, fins i tot sense punt de mira
+
+@ Show where grenades and other arcing shots will fly, bounce and land; local play only, not in deathmatch
+ca Mostra on volaran, rebotaran i cauran les granades i altres trets parabòlics; només en local, no en tots contra tots
+
+@ Shows text for important sounds: doors, alerted enemies, secrets, pickups
+ca Mostra text per als sons importants: portes, enemics alertats, secrets, objectes
+
+@ Shows the distance fog that maps and mods set; off always gives clear view
+ca Mostra la boira de distància que defineixen mapes i mods; desactivat dona sempre una vista clara
+
+@ Shows the player face next to the health number
+ca Mostra la cara del jugador al costat de la salut
+
+@ Simulation detail, step rate, fade-out lifetimes and caps for gibs and shrapnel; low also skips mover collision
+ca Detall de la simulació, freqüència, durada de l'esvaïment i límits de restes i metralla; baixa també omet les col·lisions amb elements mòbils
+
+@ Size of the on-screen buttons and move stick
+ca Mida dels botons i de la palanca de moviment en pantalla
+
+@ Slowly heals up to 100 health after 5 seconds without being hit
+ca Cura lentament fins a 100 de salut després de 5 segons sense rebre cops
+
+@ Slows stick look while the crosshair is over an enemy
+ca Alenteix la vista amb palanca mentre el punt de mira és sobre un enemic
+
+@ Slows the game down while the weapon wheel is open
+ca Alenteix el joc mentre el selector d'armes és obert
+
+@ Slows the whole game down; single player only. Saves and demos stay compatible with other ports
+ca Alenteix tot el joc; només un jugador. Les partides desades i les demos continuen sent compatibles amb altres ports
+
+@ Small camera jolt on each freeze; off with Reduce Motion
+ca Petita sacsejada de càmera a cada congelació; desactivada amb Redueix el moviment
+
+@ Snap and track enemies in local play, including split-screen; unavailable online
+ca Fixa i segueix els enemics en partida local, inclosa la pantalla dividida; no disponible en línia
+
+@ Sparks, smoke, chips, splinters and splashes fly off whatever your shots hit
+ca Espurnes, fum, esquerdills, estelles i esquitxades salten de tot allò que toquen els teus trets
+
+@ Spawns extra copies of every monster around the original when a level starts
+ca Genera còpies addicionals de cada monstre al voltant de l'original quan comença un nivell
+
+@ Strength of the full-screen flashes for damage, pickups and powerups
+ca Intensitat dels flaixos a pantalla completa per dany, objectes i potenciadors
+
+@ Stretch or shorten the sound while keeping its pitch
+ca Allarga o escurça el so mantenint-ne el to
+
+@ Surface opacity; requires Enhanced Water and Translucent Water
+ca Opacitat de la superfície; cal Aigua millorada i Aigua translúcida
+
+@ The hook latches onto metal surfaces (metal, tech, computer panels, copper)
+ca El ganxo s'enganxa a superfícies metàl·liques (metall, tecnologia, panells d'ordinador, coure)
+
+@ The hook latches onto stone, brick, rock and any surface not recognised as wood or metal
+ca El ganxo s'enganxa a pedra, maó, roca i qualsevol superfície no reconeguda com a fusta o metall
+
+@ The hook latches onto wooden surfaces (texture names like wood, crate, plank)
+ca El ganxo s'enganxa a superfícies de fusta (textures amb noms com wood, crate, plank)
+
+@ Turn the controller's motion sensor into a look input; needs a pad with a gyroscope
+ca Fa servir el sensor de moviment del comandament per mirar; cal un comandament amb giroscopi
+
+@ Turns off view bob, strafe tilt and the camera kick when hit or firing
+ca Desactiva el balanceig de la càmera, la inclinació lateral i la sacsejada de càmera en rebre cops o disparar
+
+@ Turns on the extra liquid effects; Water Settings controls each one
+ca Activa els efectes de líquids addicionals; Configuració de l'aigua controla cadascun
+
+@ Turns the view to follow a moving enemy you are aiming at
+ca Gira la vista per seguir l'enemic en moviment al qual apuntes
+
+@ Turns the view when you roll the controller sideways; 0 disables it, negative reverses it
+ca Gira la vista en inclinar el comandament de costat; 0 ho desactiva i un valor negatiu ho inverteix
+
+@ Two-portal gun: fire and alt-fire place linked portals on flat walls; assign a weapon slot in Add-ons
+ca Pistola de dos portals: el tret i el tret secundari col·loquen portals enllaçats en parets planes; assigna una ranura d'arma a Complements
+
+@ Unlocks the FX Settings page: enhanced particles, impact effects and blood splatter
+ca Desbloqueja la pàgina Configuració dels efectes: partícules millorades, efectes d'impacte i esquitxades de sang
+
+@ Uses the 2021 re-release's smoother MD5 models (and MD3 replacements from mods) instead of the classic ones. Applies on the next map load
+ca Fa servir els models MD5 més suaus de la reedició del 2021 (i els reemplaçaments MD3 dels mods) en lloc dels clàssics. S'aplica en carregar el mapa següent
+
+@ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
+ca Fa servir la llum de color del mapa (fitxer .lit o bloc BSPX); desactivat dona la llum blanca original. S'aplica en carregar el mapa següent
+
+@ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
+ca Segments del raig, nombre de gotes i ombrejat brillant del líquid: baixa usa raigs translúcids més simples; alta, raigs suaus i brillants
+
+@ When gyro looking applies: always, off while +gyroaction is held, or only while it is held
+ca Quan s'aplica la vista amb giroscopi: sempre, desactivada en mantenir +gyroaction o només en mantenir-lo
+
+@ Which weapons trigger the freeze; melee covers the axe and any mod weapon used at close range without ammo
+ca Quines armes activen la congelació; cos a cos inclou la destral i qualsevol arma de mod usada de prop sense munició
+
+@ Your own rockets and grenades don't hurt you; rocket jumps still work
+ca Els teus propis coets i granades no et fereixen; els salts amb coet continuen funcionant
+
+# ==== ui.txt ====
+
+# Menus and pop-ups outside the options pages: save cards, launch, presets,
+# add-on browser, map packs, hints and dialogs.
+@ Select
+ca Selecciona
+
+@ Back
+ca Enrere
+
+@ Cancel
+ca Cancel·la
+
+@ Confirm
+ca Confirma
+
+@ Scroll
+ca Desplaça
+
+@ Section
+ca Secció
+
+@ Bind
+ca Assigna
+
+@ Cancel binding
+ca Cancel·la l'assignació
+
+@ Clear
+ca Esborra
+
+@ Clear pad
+ca Esborra comandament
+
+@ Remap
+ca Reassigna
+
+@ Type
+ca Escriu
+
+@ Shift
+ca Maj
+
+@ Done
+ca Fet
+
+@ Del
+ca Supr
+
+@ Space
+ca Espai
+
+@ Save
+ca Desa
+
+@ Load
+ca Carrega
+
+@ Delete
+ca Suprimeix
+
+@ Play
+ca Juga
+
+@ Yes
+ca Sí
+
+@ No
+ca No
+
+@ OK
+ca D'acord
+
+@ System
+ca Sistema
+
+@ Language
+ca Idioma
+
+@ Help
+ca Ajuda
+
+@ Fixed for this game: it was started without Customize
+ca Fix en aquesta partida: es va iniciar sense Personalitza
+
+@ Press a button or key to bind (Start cancels)
+ca Prem un botó o una tecla per assignar (Start cancel·la)
+
+@ Press button...
+ca Prem un botó...
+
+@ Press key...
+ca Prem una tecla...
+
+@ Replace this binding?
+ca Vols substituir aquesta assignació?
+
+@ is already assigned
+ca ja està assignat
+
+@ {} already assigned
+ca {} ja assignat
+
+@ Open Controls to remap Lock-on?
+ca Vols obrir Controls per reassignar Fixa l'objectiu?
+
+@ Lock-on
+ca Fixa l'objectiu
+
+@ Auto-aim Toggle
+ca Punteria automàtica (alternada)
+
+@ Keyboard
+ca Teclat
+
+@ Controller
+ca Comandament
+
+# main menu, dialogs and screens
+@ Map Packs
+ca Paquets de mapes
+
+@ Customize
+ca Personalitza
+
+@ Level Select
+ca Tria el nivell
+
+@ Really quit?
+ca Segur que vols sortir?
+
+@ You died
+ca Has mort
+
+@ Continue from most recent save
+ca Continua des de la partida desada més recent
+
+@ Select save
+ca Tria una partida desada
+
+@ Restart level
+ca Reinicia el nivell
+
+@ Return to main menu
+ca Torna al menú principal
+
+@ (disabled)
+ca (desactivat)
+
+@ (fixed for this game)
+ca (fix en aquesta partida)
+
+@ (off)
+ca (desactivat)
+
+@ Apply Display Changes
+ca Aplica els canvis de pantalla
+
+@ Display Mode
+ca Mode de pantalla
+
+@ Resolution
+ca Resolució
+
+@ desktop
+ca escriptori
+
+@ Preset
+ca Predefinit
+
+@ Map
+ca Mapa
+
+@ Reset Shader Settings
+ca Restableix la configuració del shader
+
+@ Reset to Defaults
+ca Restableix els valors per defecte
+
+@ Searching...
+ca S'està cercant...
+
+@ This game only autosaves.
+ca Aquesta partida només desa automàticament.
+
+@ (No Manual Saves modifier)
+ca (modificador Sense desament manual)
+
+@ End the current game?
+ca Vols acabar la partida actual?
+
+@ Unsaved progress will be lost.
+ca Es perdrà el progrés no desat.
+
+@ End game
+ca Acaba la partida
+
+@ Overwrite
+ca Sobreescriu
+
+@ Overwrite "{}"?
+ca Vols sobreescriure «{}»?
+
+@ Saved {}
+ca Desat {}
+
+@ Start a new game?
+ca Vols començar una partida nova?
+
+@ New game
+ca Partida nova
+
+@ New Game
+ca Partida nova
+
+@ CUSTOM
+ca PERSONALITZADA
+
+@ Customize Experience
+ca Personalitza l'experiència
+
+@ Disable All
+ca Desactiva-ho tot
+
+@ Disable All Modifications
+ca Desactiva totes les modificacions
+
+@ Saves load in other source ports too.
+ca Les partides també es carreguen en altres ports.
+
+@ Standard rules, no add-ons.
+ca Regles estàndard, sense complements.
+
+@ Choose skill
+ca Tria la dificultat
+
+@ The current game will end
+ca La partida actual s'acabarà
+
+@ Easy
+ca Fàcil
+
+@ Normal
+ca Normal
+
+@ Hard
+ca Difícil
+
+@ Nightmare
+ca Malson
+
+# graphics preset pop-up
+@ Choose a Graphics Preset
+ca Tria una configuració gràfica
+
+@ Classic
+ca Clàssic
+
+@ Like the re-release: enhanced models,
+ca Com la reedició: models millorats,
+
+@ no added effects.
+ca sense efectes afegits.
+
+@ Enhanced
+ca Millorat
+
+@ Every enhancement at its highest quality.
+ca Totes les millores a la màxima qualitat.
+
+@ Needs a capable GPU.
+ca Cal una GPU potent.
+
+@ Low-End
+ca Equips modestos
+
+@ Fastest. No anti-aliasing, original
+ca El més ràpid. Sense antialiàsing, models
+
+@ models, lowest effect quality.
+ca originals, efectes al mínim.
+
+@ Esc keeps the defaults
+ca Esc manté els valors per defecte
+
+@ Everything can be changed later in Options.
+ca Tot es pot canviar més tard a Opcions.
+
+@ Keep Defaults
+ca Mantén els valors per defecte
+
+# save and load cards
+@ Save Game
+ca Desa la partida
+
+@ Load Game
+ca Carrega una partida
+
+@ Autosaves
+ca Desaments automàtics
+
+@ newest first
+ca els més recents primer
+
+@ Saves: {}
+ca Partides: {}
+
+@ Browse Autosaves
+ca Mostra els desaments automàtics
+
+@ Every retained autosave, newest first
+ca Tots els desaments automàtics conservats, els més recents primer
+
+@ New save
+ca Partida desada nova
+
+@ Select to save your game here
+ca Selecciona per desar aquí la partida
+
+@ No autosaves yet
+ca Encara no hi ha desaments automàtics
+
+@ Autosaves are made on level entry, secrets and more (Options > Gameplay)
+ca Es desa automàticament en entrar en un nivell, en trobar secrets i més (Opcions > Jugabilitat)
+
+@ No saves yet
+ca Encara no hi ha partides desades
+
+@ Save from the Single Player menu, or press F6 to quicksave
+ca Desa des del menú Un jugador o prem F6 per desar ràpidament
+
+@ No picture
+ca Sense imatge
+
+@ Del: delete save
+ca Supr: suprimeix la partida
+
+@ Delete "{}"?
+ca Vols suprimir «{}»?
+
+@ This cannot be undone.
+ca Això no es pot desfer.
+
+@ Quicksave
+ca Desament ràpid
+
+@ Autosave: {}
+ca Desament automàtic: {}
+
+@ unknown trigger
+ca motiu desconegut
+
+@ Latest - {}
+ca Més recent - {}
+
+@ Health {}
+ca Salut {}
+
+@ Armor {}
+ca Armadura {}
+
+@ Kills {}/{}
+ca Baixes {}/{}
+
+@ Secrets {}/{}
+ca Secrets {}/{}
+
+@ Split-screen, {} players
+ca Pantalla dividida, {} jugadors
+
+@ Co-op
+ca Cooperatiu
+
+@ Customized
+ca Personalitzada
+
+@ Customized, {}
+ca Personalitzada, {}
+
+@ Date unavailable
+ca Data no disponible
+
+@ Just now
+ca Ara mateix
+
+@ {} min ago
+ca fa {} min
+
+@ {} h ago
+ca fa {} h
+
+@ Level entry
+ca Entrada al nivell
+
+@ Secret found
+ca Secret trobat
+
+@ All enemies killed
+ca Tots els enemics morts
+
+@ All secrets found
+ca Tots els secrets trobats
+
+@ Timer
+ca Temporitzador
+
+# customize pages
+@ Standard rules
+ca Regles estàndard
+
+@ Modifiers changed: {}
+ca Modificadors canviats: {}
+
+@ no add-ons
+ca sense complements
+
+@ add-ons: {}
+ca complements: {}
+
+@ Saves of this game are .qsa files: they need this source port.
+ca Les partides desades d'aquesta partida són fitxers .qsa: necessiten aquest port.
+
+@ Nothing changed: this plays as standard Quake.
+ca Res canviat: es juga com el Quake estàndard.
+
+@ Changes apply now and are saved with this game (.qsa).
+ca Els canvis s'apliquen ara i es desen amb aquesta partida (.qsa).
+
+@ This game started without Customize, so its rules are fixed.
+ca Aquesta partida va començar sense Personalitza, així que les seves regles són fixes.
+
+@ Start a new game and choose Customize Experience.
+ca Comença una partida nova i tria Personalitza l'experiència.
+
+@ These rules apply to the next customized game.
+ca Aquestes regles s'apliquen a la propera partida personalitzada.
+
+# add-on browser
+@ Fire
+ca Tret
+
+@ Alt Fire
+ca Tret secundari
+
+@ Configure Parameters >
+ca Configura els paràmetres >
+
+@ Configure
+ca Configura
+
+@ Settings
+ca Configuració
+
+@ Change slot
+ca Canvia la ranura
+
+@ Toggle
+ca Alterna
+
+@ Details
+ca Detalls
+
+@ Enter or click the box: toggle
+ca Retorn o clic a la casella: alterna
+
+@ Right / Tab / click: details
+ca Dreta / Tab / clic: detalls
+
+@ Input Remapping
+ca Reassignació de controls
+
+@ Weapon Slot
+ca Ranura d'arma
+
+@ Customized games save as .qsa files, which need this source port.
+ca Les partides personalitzades es desen com a fitxers .qsa, que necessiten aquest port.
+
+@ This game started without Customize, so its add-ons are fixed. Customize a new game instead.
+ca Aquesta partida va començar sense Personalitza, així que els seus complements són fixos. Personalitza una partida nova.
+
+@ Bullet Time
+ca Temps bala
+
+@ Change Goggles
+ca Canvia d'ulleres
+
+@ Dodge / Dive
+ca Esquiva / capbussa't
+
+@ Goggles
+ca Ulleres
+
+@ Hitstop
+ca Hitstop
+
+@ Projectile Shotguns
+ca Escopetes de projectils
+
+@ BULLET TIME: 20%
+ca TEMPS BALA: 20 %
+
+@ NORMAL SPEED
+ca VELOCITAT NORMAL
+
+@ SLOW MOTION: PHYSICAL PELLETS
+ca CÀMERA LENTA: PERDIGONS FÍSICS
+
+@ DEMONSTRATION
+ca DEMOSTRACIÓ
+
+@ GAMEPLAY
+ca JUGABILITAT
+
+@ LOOP
+ca BUCLE
+
+@ Preview unavailable
+ca Previsualització no disponible
+
+# shader and language help lines
+@ A setting of the chosen shader; arrows step it, Enter is not needed
+ca Un paràmetre del shader triat; les fletxes el canvien, no cal Retorn
+
+@ Language of the menus, messages and the 2021 re-release's game text; System follows your computer's language
+ca Idioma dels menús, dels missatges i dels textos de joc de la reedició del 2021; Sistema segueix l'idioma de l'ordinador
+
+@ Puts every setting of the chosen shader back to the preset's defaults
+ca Torna tots els paràmetres del shader triat als valors per defecte del predefinit
+
+@ RetroArch slang shader on the final image: CRT, scanlines, NTSC, sharpening; add your own in <game>/shaders
+ca Shader slang de RetroArch sobre la imatge final: CRT, línies d'escombratge, NTSC, enfocament; afegeix-ne de teus a <joc>/shaders
+
+# modern console footer
+@ Shift+PgUp/Dn: height  ` : hide
+ca Maj+RePàg/AvPàg: alçada  ` : amaga
+
+@ Tab: complete  Ctrl+R: search  bash | pipe
+ca Tab: completa  Ctrl+R: cerca  bash | canonada
+
+@ ↑ +{} lines (End to jump) 
+ca ↑ +{} línies (Fi per saltar) 
+
+# add-on descriptions
+@ Create two linked portals on flat walls. Fire places the first portal; Alt Fire places the second. Walk through either portal to emerge from the other. Your momentum carries through. Assign a weapon slot below: pressing that slot repeatedly cycles its ordinary weapon and every enabled add-on assigned there. Portal view quality is configurable below.
+ca Crea dos portals enllaçats en parets planes. El tret col·loca el primer portal; el tret secundari, el segon. Travessa qualsevol dels dos per sortir per l'altre conservant l'impuls. Assigna una ranura d'arma a sota: prémer aquesta ranura diverses vegades alterna entre la seva arma normal i cada complement activat que hi estigui assignat. La qualitat de la vista dels portals es configura a sota.
+
+@ Hold Fire and sweep the crosshair over monsters to queue targets. Release Fire to throw: the boomerang visits each target, stuns it and returns to you. Alt Fire clears the queue. The weapon slot selects a group, not a separate hotkey: press it again to cycle through the weapons in that slot. Configure stun duration and flight speed below.
+ca Mantén el tret i passa el punt de mira pels monstres per posar-los a la cua. Deixa anar el tret per llançar: el bumerang visita cada objectiu, l'atordeix i torna a tu. El tret secundari buida la cua. La ranura d'arma selecciona un grup, no una drecera a part: torna-la a prémer per alternar entre les armes d'aquesta ranura. Configura a sota la durada de l'atordiment i la velocitat de vol.
+
+@ Hold Fire to charge a sticky bomb using rocket ammunition; release to launch. A longer charge throws it faster. Bombs cling to walls, doors and monsters. Alt Fire detonates your planted bombs together. Place a trap, retreat, then detonate it when enemies approach. Assign any weapon slot below; repeated presses cycle through the ordinary weapon and add-ons in that slot.
+ca Mantén el tret per carregar una bomba adhesiva amb munició de coets; deixa anar per llançar-la. Com més la carreguis, més ràpid surt. Les bombes s'enganxen a parets, portes i monstres. El tret secundari detona alhora totes les bombes col·locades. Para una trampa, retira't i detona-la quan s'acostin els enemics. Assigna qualsevol ranura d'arma a sota; prémer-la diverses vegades alterna entre l'arma normal i els complements d'aquesta ranura.
+
+@ Fire launches a chain hook. It latches onto a permitted surface or enemy and reels you toward the anchor. Fire again or use Alt Fire to let go. Choose which materials and enemies can be hooked in Configure Parameters. Assign it to any weapon slot; repeated presses of the slot's existing binding cycle through its weapons.
+ca El tret llança un ganxo amb cadena. S'enganxa a una superfície permesa o a un enemic i t'estira cap a l'ancoratge. Torna a disparar o fes servir el tret secundari per deixar-te anar. Tria quins materials i enemics es poden enganxar a Configura els paràmetres. Assigna'l a qualsevol ranura d'arma; prémer diverses vegades la tecla d'aquesta ranura alterna entre les seves armes.
+
+@ A piercing railgun inspired by Quake III. Fire sends a slug through every enemy along its line. Each shot consumes two cells, with a 1.5 second refire interval. Damage and the spiral trail colour are configurable below. Choose a weapon slot: the slot's current binding selects and cycles the weapons assigned to it.
+ca Un railgun perforant inspirat en Quake III. El tret envia un projectil a través de tots els enemics de la seva trajectòria. Cada tret gasta dues cel·les, amb 1,5 segons entre trets. El dany i el color de l'estela en espiral es configuren a sota. Tria una ranura d'arma: la seva tecla actual selecciona i alterna les armes que hi estan assignades.
+
+@ A Portal-style gel sprayer. Fire sprays blue Repulsion gel: land, jump or run into it to bounce, and landings on it never hurt. Alt Fire sprays orange Propulsion gel: run across it to go much faster. Gel coats floors and walls until washed off with the Powerwasher. Assign a weapon slot below; repeated presses cycle the weapons in that slot.
+ca Un polvoritzador de gel a l'estil de Portal. El tret ruixa gel blau de repulsió: aterra-hi, salta-hi o corre-hi a sobre per rebotar, i aterrar-hi mai no fa mal. El tret secundari ruixa gel taronja de propulsió: corre-hi per sobre per anar molt més ràpid. El gel cobreix terres i parets fins que el renteu amb la hidronetejadora. Assigna una ranura d'arma a sota; prémer-la diverses vegades alterna entre les armes d'aquesta ranura.
+
+@ A water cannon. Fire shoots a straight jet with limited reach; Alt Fire a wide, shorter fan. The water pushes enemies back, turns projectiles aside and washes away gel and blood. Push strength is configurable below. Assign a weapon slot below; repeated presses cycle the weapons in that slot.
+ca Un canó d'aigua. El tret dispara un raig recte d'abast limitat; el tret secundari, un ventall ample i més curt. L'aigua fa recular els enemics, desvia els projectils i neteja el gel i la sang. La força de l'empenta es configura a sota. Assigna una ranura d'arma a sota; prémer-la diverses vegades alterna entre les armes d'aquesta ranura.
+
+@ One equipment add-on includes both night vision and thermal vision. The Change Goggles action cycles Normal, Night Vision, Thermal, then Normal again. Night vision brightens dark rooms; thermal vision highlights living enemies. Goggles do not occupy a weapon slot. Configure intensity and sensor noise below. The binding affects only this add-on.
+ca Un sol complement d'equip inclou la visió nocturna i la tèrmica. L'acció Canvia d'ulleres alterna entre normal, visió nocturna, tèrmica i de nou normal. La visió nocturna aclareix les sales fosques; la tèrmica ressalta els enemics vius. Les ulleres no ocupen cap ranura d'arma. Configura a sota la intensitat i el soroll del sensor. L'assignació només afecta aquest complement.
+
+@ Press Dodge with a movement direction on the ground or in midair: dive forward or leap backward and sideways. Diagonals are supported. Each press launches once, with a short recovery. The player body animates in third person. Assign the Dodge action below or in Controls.
+ca Prem Esquiva amb una direcció de moviment, a terra o a l'aire: capbussa't endavant o salta enrere i als costats. Les diagonals funcionen. Cada pulsació impulsa una vegada, amb una breu recuperació. El cos del jugador s'anima en tercera persona. Assigna l'acció Esquiva a sota o a Controls.
+
+@ Use the dedicated Bullet Time action to slow the whole local game to 20% speed. Hold is the default; Toggle switches on each press. The optional meter limits use in real seconds and regenerates while inactive. Disable the meter for unlimited use. Remap the action and configure duration and regeneration below.
+ca Fes servir l'acció Temps bala per alentir tota la partida local al 20 % de velocitat. Mantén és el mode per defecte; Alterna canvia a cada pulsació. El mesurador opcional limita l'ús en segons reals i es regenera mentre està inactiu. Desactiva el mesurador per a un ús il·limitat. Reassigna l'acció i configura a sota la durada i la regeneració.
+
+@ Both shotguns and enemy grunts fire physical pellets with their original spread and damage. Fast default projectiles feel immediate; lower their speed to dodge incoming fire during bullet time. Configure projectile speed below, or reset it to the default of 10000 units per second.
+ca Les dues escopetes i els soldats enemics disparen perdigons físics amb la seva dispersió i dany originals. Els projectils ràpids per defecte semblen instantanis; redueix-ne la velocitat per esquivar els trets durant el temps bala. Configura a sota la velocitat dels projectils o restableix el valor per defecte de 10000 unitats per segon.
+
+@ Freezes the game for a split second when you damage an enemy, so hits feel heavier. Single player only. Choose which weapons trigger it (all, melee, ranged or explosives), how long it lasts and how much more a kill freezes. Advanced settings cover enemy toughness, damage scaling, cooldown and the longest freeze.
+ca Congela el joc una fracció de segon en ferir un enemic, perquè els cops es notin més contundents. Només un jugador. Tria quines armes l'activen (totes, cos a cos, a distància o explosius), quant dura i quant més congela una eliminació. La configuració avançada inclou la duresa dels enemics, l'escala de dany, el refredament i la congelació més llarga.
+
+# map packs and the Quaddicted browser
+@ Get more maps (Quaddicted)...
+ca Més mapes (Quaddicted)...
+
+@ Type to filter...
+ca Escriu per filtrar...
+
+@ Launch mod
+ca Inicia el mod
+
+@ Start first map
+ca Inicia el primer mapa
+
+@ (running)
+ca (en execució)
+
+@ running
+ca en execució
+
+@ Recent
+ca Recents
+
+@ Name
+ca Nom
+
+@ Dir
+ca Carpeta
+
+@ Default
+ca Per defecte
+
+@ Title
+ca Títol
+
+@ Sort: {}
+ca Ordre: {}
+
+@ {} installed
+ca {} instal·lats
+
+@ {}/{} matching
+ca {}/{} coincidents
+
+@ {} maps, {} completed
+ca {} mapes, {} completats
+
+@ {}/{} matching, {} completed
+ca {}/{} coincidents, {} completats
+
+@ no maps of its own
+ca sense mapes propis
+
+@ dir: {}
+ca carpeta: {}
+
+@ base: {}
+ca base: {}
+
+@ Browse the Quaddicted archive of
+ca Explora l'arxiu de Quaddicted
+
+@ single-player maps and episodes,
+ca de mapes i episodis per a un jugador,
+
+@ then download and install them
+ca i després baixa'ls i instal·la'ls
+
+@ here. Each release gets its own
+ca aquí. Cada publicació té la seva
+
+@ entry in this list.
+ca pròpia entrada en aquesta llista.
+
+@ Needs an internet connection.
+ca Cal una connexió a Internet.
+
+@ Quaddicted Map Archive
+ca Arxiu de mapes de Quaddicted
+
+@ Newest
+ca Més recents
+
+@ Author
+ca Autor
+
+@ Size
+ca Mida
+
+@ Loading the map list...
+ca S'està carregant la llista de mapes...
+
+@ Couldn't load the map list: {}
+ca No s'ha pogut carregar la llista de mapes: {}
+
+@ {} single-player releases  -  F5 refreshes
+ca {} publicacions per a un jugador  -  F5 actualitza
+
+@ {} matching
+ca {} coincidents
+
+@ by {}
+ca de {}
+
+@ requires: {}
+ca requereix: {}
+
+@ maps: {}
+ca mapes: {}
+
+@ Failed: {}
+ca Error: {}
+
+@ Downloading... {}%
+ca S'està baixant... {} %
+
+@ Unpacking...
+ca S'està descomprimint...
+
+@ Installed in {}/  -  Enter: play
+ca Instal·lat a {}/  -  Retorn: juga
+
+@ Enter: download and install
+ca Retorn: baixa i instal·la
+
+@ unpacking
+ca s'està descomprimint
+
+@ failed
+ca error
+
+@ installed
+ca instal·lat
+
+@ Downloads are not available in the browser build
+ca Les baixades no estan disponibles a la versió per a navegador
+
+@ the map list could not be read
+ca no s'ha pogut llegir la llista de mapes
+
+@ downloading needs the curl program
+ca per baixar cal el programa curl
+
+@ download failed
+ca la baixada ha fallat
+
+@ the download is not a valid zip
+ca la baixada no és un zip vàlid
+
+@ nothing to install for this engine
+ca res a instal·lar per a aquest motor
+
+@ needs {} installed first
+ca primer cal instal·lar {}
+
+@ couldn't unpack {}
+ca no s'ha pogut descomprimir {}
+
+# help screen
+@ About
+ca Quant a
+
+@ < Back
+ca < Enrere
+
+# tr_ctx keys: English shows the short word, the key says which meaning
+@ Save (a manual save, as opposed to a quicksave or autosave)
+ca Partida desada
+
+# ==== hud.txt ====
+
+# HUD, weapon and equipment wheels, sound captions and other in-game text.
+# Weapon, monster and item names follow the 2021 re-release's own translations.
+@ Axe
+ca Destral
+
+@ Shotgun
+ca Escopeta
+
+@ Double-Barrelled Shotgun
+ca Superescopeta
+
+@ Nailgun
+ca Pistola de claus
+
+@ Super Nailgun
+ca Superpistola de claus
+
+@ Grenade Launcher
+ca Llançagranades
+
+@ Rocket Launcher
+ca Llançacoets
+
+@ Thunderbolt
+ca Llamp
+
+@ Portal Gun
+ca Pistola de portals
+
+@ Boomerang
+ca Bumerang
+
+@ Stickybomb Launcher
+ca Llançabombes adhesives
+
+@ Railgun
+ca Railgun
+
+@ Hookshot
+ca Ganxo
+
+@ Gel Sprayer
+ca Polvoritzador de gel
+
+@ Powerwasher
+ca Hidronetejadora
+
+@ Night Vision Goggles
+ca Ulleres de visió nocturna
+
+@ Thermal Goggles
+ca Ulleres tèrmiques
+
+@ Normal vision
+ca Visió normal
+
+@ ON
+ca SÍ
+
+@ OFF
+ca NO
+
+@ {} (turn on)
+ca {} (activa)
+
+@ {} (turn off)
+ca {} (desactiva)
+
+@ Move mouse to select, release to toggle
+ca Mou el ratolí per triar, deixa anar per alternar
+
+@ Move mouse to select, release to equip
+ca Mou el ratolí per triar, deixa anar per equipar
+
+@ Release to toggle
+ca Deixa anar per alternar
+
+@ Release to equip
+ca Deixa anar per equipar
+
+@ shells
+ca cartutxos
+
+@ nails
+ca claus
+
+@ rockets
+ca coets
+
+@ cells
+ca cel·les
+
+@ Kills: {}/{}
+ca Baixes: {}/{}
+
+@ Secrets: {}/{}
+ca Secrets: {}/{}
+
+@ Time {}
+ca Temps {}
+
+@ Press any button to continue...
+ca Prem qualsevol botó per continuar...
+
+@ Press any key to continue...
+ca Prem qualsevol tecla per continuar...
+
+@ BULLET TIME
+ca TEMPS BALA
+
+@ AUTO AIM
+ca PUNTERIA AUTO
+
+@ Crosshair
+ca Punt de mira
+
+@ + Marker
+ca + marcador
+
+@ Hit markers off
+ca Marcadors d'impacte desactivats
+
+@ On target
+ca Sobre l'objectiu
+
+@ On kill
+ca En eliminar
+
+# sound captions
+@ [Secret found]
+ca [Secret trobat]
+
+@ [Message]
+ca [Missatge]
+
+@ [Switch activated]
+ca [Interruptor activat]
+
+@ [Key picked up]
+ca [Clau recollida]
+
+@ [Rune picked up]
+ca [Runa recollida]
+
+@ [Teleporter]
+ca [Teletransportador]
+
+@ [Teleport]
+ca [Teletransport]
+
+@ [Splash]
+ca [Xipolleig]
+
+@ [Leaving water]
+ca [Sortint de l'aigua]
+
+@ [Door]
+ca [Porta]
+
+@ [Platform moving]
+ca [Plataforma en moviment]
+
+@ [Button]
+ca [Botó]
+
+@ [Health picked up]
+ca [Salut recollida]
+
+@ [Armor picked up]
+ca [Armadura recollida]
+
+@ [Quad Damage wearing off]
+ca [El dany quàdruple s'esgota]
+
+@ [Quad Damage]
+ca [Dany quàdruple]
+
+@ [Pentagram wearing off]
+ca [El pentagrama s'esgota]
+
+@ [Pentagram of Protection]
+ca [Pentagrama de protecció]
+
+@ [Ring wearing off]
+ca [L'anell s'esgota]
+
+@ [Ring of Shadows]
+ca [Anell de les ombres]
+
+@ [Biosuit wearing off]
+ca [El biovestit s'esgota]
+
+@ [Biosuit]
+ca [Biovestit]
+
+@ [Item picked up]
+ca [Objecte recollit]
+
+@ [Weapon picked up]
+ca [Arma recollida]
+
+@ [Ammo picked up]
+ca [Munició recollida]
+
+@ [Explosion]
+ca [Explosió]
+
+@ [Grenade launched]
+ca [Granada llançada]
+
+@ [Grenade bounce]
+ca [Rebot de granada]
+
+@ [Rocket fired]
+ca [Coet disparat]
+
+@ [Nails fired]
+ca [Claus disparats]
+
+@ [Lightning]
+ca [Llamp]
+
+@ [Thunder]
+ca [Tro]
+
+@ [Enforcer alerted]
+ca [Executor alertat]
+
+@ [Grunt alerted]
+ca [Soldat alertat]
+
+@ [Rottweiler alerted]
+ca [Rottweiler alertat]
+
+@ [Knight alerted]
+ca [Cavaller alertat]
+
+@ [Death Knight alerted]
+ca [Cavaller de la mort alertat]
+
+@ [Scrag alerted]
+ca [Scrag alertat]
+
+@ [Ogre alerted]
+ca [Ogre alertat]
+
+@ [Fiend alerted]
+ca [Dimoni alertat]
+
+@ [Shambler alerted]
+ca [Shambler alertat]
+
+@ [Zombie groaning]
+ca [Zombi gemegant]
+
+@ [Vore alerted]
+ca [Vore alertat]
+
+@ [Vore attacking]
+ca [Vore atacant]
+
+@ [Spawn alerted]
+ca [Engendre alertat]
+
+@ [Rotfish]
+ca [Peix podrit]
+
+@ [Spawn]
+ca [Engendre]
+
+@ [Chthon]
+ca [Chthon]
+
+@ [Hard landing]
+ca [Aterratge dur]
+
+@ [Drowning]
+ca [Ofegant-se]
+
+@ [Gasping for air]
+ca [Panteixant]
+
+@ [Burning]
+ca [Cremant-se]
+
+@ [Telefrag]
+ca [Telefrag]
+
+@ [Gibbed]
+ca [Esquarterat]
+
+# ==== console.txt ====
+
+# Console messages, shown translated only with con_translate 1 (Translate Console).
+# Cvar and command names stay as they are.
+@ Autosaved.
+ca Desament automàtic fet.
+
+@ Game saved.
+ca Partida desada.
+
+@ Can't save now.
+ca Ara no es pot desar.
+
+@ This game only autosaves (No Manual Saves modifier).
+ca Aquesta partida només desa automàticament (modificador Sense desament manual).
+
+@ Loading {}...
+ca S'està carregant {}...
+
+@ load failed: {}
+ca error en carregar: {}
+
+@ ERROR: autosave failed: {}
+ca ERROR: ha fallat el desament automàtic: {}
+
+@ ERROR: couldn't open {}
+ca ERROR: no s'ha pogut obrir {}
+
+@ ERROR: couldn't open {}.
+ca ERROR: no s'ha pogut obrir {}.
+
+@ ERROR: couldn't write {}: {}
+ca ERROR: no s'ha pogut escriure {}: {}
+
+@ ERROR: couldn't create {}: {}
+ca ERROR: no s'ha pogut crear {}: {}
+
+@ couldn't write {}: {}
+ca no s'ha pogut escriure {}: {}
+
+@ Wrote {}
+ca S'ha escrit {}
+
+@ screenshot failed: {}
+ca ha fallat la captura de pantalla: {}
+
+@ screenshot: {}
+ca captura de pantalla: {}
+
+@ No readable save available. Select save or restart the level.
+ca No hi ha cap partida desada llegible. Tria una partida o reinicia el nivell.
+
+@ Unknown command "{}"
+ca Ordre desconeguda «{}»
+
+@ couldn't exec {}
+ca no s'ha pogut executar {}
+
+@ execing {}
+ca s'està executant {}
+
+@ execing config.cfg (inherited from {})
+ca s'està executant config.cfg (heretat de {})
+
+@ execing config.cfg (mod defaults)
+ca s'està executant config.cfg (valors del mod)
+
+@ execing default.cfg (built-in)
+ca s'està executant default.cfg (integrat)
+
+@ {} cvars
+ca {} variables
+
+@ {} commands
+ca {} ordres
+
+@ Can't "cmd", not connected
+ca No es pot usar «cmd», sense connexió
+
+@ Looking for Quake servers...
+ca S'estan cercant servidors de Quake...
+
+@ Bad value, must be between 1 and 65534
+ca Valor no vàlid, ha d'estar entre 1 i 65534
+
+@ Couldn't handle music file {}
+ca No s'ha pogut fer servir el fitxer de música {}
+
+@ Bug report written to {}
+ca Informe d'error escrit a {}
+
+@ bugreport: can't create {}: {}
+ca bugreport: no es pot crear {}: {}
+
+@ graphics preset: {}
+ca configuració gràfica: {}
+
+@ Presets (r_shader_preset <name>):
+ca Predefinits (r_shader_preset <nom>):
+
+@ Add your own .slangp presets under <game>/shaders/.
+ca Afegeix els teus propis predefinits .slangp a <joc>/shaders/.
+
+@ no shader preset loaded (r_shader_preset)
+ca no s'ha carregat cap predefinit de shader (r_shader_preset)
+
+@ r_shader_preset: "{}" not found
+ca r_shader_preset: no s'ha trobat «{}»
+
+@ no parameter "{}" in this preset
+ca no hi ha cap paràmetre «{}» en aquest predefinit
+
+@ {} = {} (default {}, {}..{})
+ca {} = {} (per defecte {}, {}..{})
+
+@ Switching to {}...
+ca S'està canviant a {}...
+
+@ game: no game dir "{}" in {}
+ca game: no existeix la carpeta de joc «{}» a {}
+
+@ game: can't find the engine executable
+ca game: no es troba l'executable del motor
+
+@ game: exec failed: {}
+ca game: ha fallat l'execució: {}
+
+@ game: launch failed: {}
+ca game: ha fallat l'inici: {}
+
+@ loaded {} in {}s
+ca {} carregat en {} s
+
+@ No demos listed with startdemos
+ca No hi ha demos indicades amb startdemos
+
+@ Playing demo from {}.
+ca S'està reproduint la demo {}.
+
+@ {} frames {} seconds {} fps
+ca {} fotogrames {} segons {} FPS
+
+@ Recording to {}.
+ca S'està enregistrant a {}.
+
+@ Completed demo
+ca Demo completada
+
+@ Can't record during demo playback
+ca No es pot enregistrar durant la reproducció d'una demo
+
+@ Relative pathnames are not allowed.
+ca No es permeten camins relatius.
+
+@ Can't record - try again when connected
+ca No es pot enregistrar: torna-ho a provar quan estiguis connectat
+
+@ {} demo(s) in loop
+ca {} demo(s) en bucle
+
+@ Not recording a demo.
+ca No s'està enregistrant cap demo.
+
+@ {} joined on a gamepad
+ca {} s'ha unit amb un comandament
+
+@ goggles: needs a game started with Add-ons and Goggles enabled
+ca goggles: cal una partida iniciada amb Complements i Ulleres activats
+
+@ equip: needs a game started with Add-ons and Goggles enabled
+ca equip: cal una partida iniciada amb Complements i Ulleres activats
+
+@ UDP listening on port {}
+ca UDP escoltant al port {}
+
+@ UDP bind on port {} failed: {}
+ca ha fallat la vinculació UDP al port {}: {}
+
+@ Connection accepted by {}
+ca Connexió acceptada per {}
+
+@ Connection failed: {}
+ca Ha fallat la connexió: {}
+
+@ Couldn't resolve {}
+ca No s'ha pogut resoldre {}
+
+@ Connecting to {}...
+ca S'està connectant a {}...
+
+@ Connecting to QuakeWorld server {}...
+ca S'està connectant al servidor QuakeWorld {}...
+
+@ Disconnected: {}
+ca Desconnectat: {}
+
+@ Server disconnected
+ca Servidor desconnectat
+
+@ Client {} connected
+ca Client {} connectat
+
+@ Client {} timed out
+ca S'ha esgotat el temps d'espera del client {}
+
+@ Couldn't spawn server {}: {}
+ca No s'ha pogut iniciar el servidor {}: {}
+
+@ maxplayers can not be changed while a server is running.
+ca maxplayers no es pot canviar amb un servidor en marxa.
+
+@ You can't kick yourself!
+ca No et pots expulsar a tu mateix!
+
+@ Only the server may changelevel
+ca Només el servidor pot fer changelevel
+
+@ {} renamed to {}
+ca {} ara es diu {}

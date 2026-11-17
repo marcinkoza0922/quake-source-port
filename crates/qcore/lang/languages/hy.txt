@@ -1,0 +1,3024 @@
+# hy: the port's own text; English keys from crates/qcore/lang/*.txt.
+# Format in crates/qcore/src/lang/catalog.rs; check with tools/lang_check.py.
+
+# ==== menu.txt ====
+
+# Options pages: page names, row labels and choice values.
+@ 10% speed
+hy 10% արագություն
+
+@ 2 split-screen
+hy 2 բաժանված էկրանին
+
+@ 3 split-screen
+hy 3 բաժանված էկրանին
+
+@ 4 split-screen
+hy 4 բաժանված էկրանին
+
+@ 5 split-screen
+hy 5 բաժանված էկրանին
+
+@ 6 split-screen
+hy 6 բաժանված էկրանին
+
+@ 2D aiming
+hy 2D նշանառում
+
+@ 2x monsters
+hy հրեշներ x2
+
+@ 3x monsters
+hy հրեշներ x3
+
+@ 4x monsters
+hy հրեշներ x4
+
+@ 3D resolution
+hy 3D լուծաչափ
+
+@ 3D view
+hy 3D տեսք
+
+@ 8-bit Color
+hy 8-բիթ գույն
+
+@ Accessibility
+hy Մատչելիություն
+
+@ Acquisition Cone
+hy Գրավման կոն
+
+@ Activation
+hy Ակտիվացում
+
+@ Add a ringing room tail after the cue
+hy Ազդանշանից հետո ավելացնում է սենյակի զնգացող արձագանք
+
+@ Add delayed repeats after the cue
+hy Ազդանշանից հետո ավելացնում է ուշացված կրկնություններ
+
+@ Add saturation and distortion
+hy Ավելացնում է հագեցում և աղավաղում
+
+@ Add-ons
+hy Հավելումներ
+
+@ Address
+hy Հասցե
+
+@ Adds fine noise to hide color banding
+hy Ավելացնում է նուրբ աղմուկ՝ գունային շերտավորումը թաքցնելու համար
+
+@ Advanced Settings
+hy Լրացուցիչ կարգավորումներ
+
+@ Aim Assist
+hy Նշանառման օգնություն
+
+@ Aim Rotation
+hy Նշանառման պտույտ
+
+@ Aim Slowdown
+hy Նշանառման դանդաղում
+
+@ Aim Style
+hy Նշանառման ոճ
+
+@ All
+hy Բոլորը
+
+@ All enemies
+hy Բոլոր թշնամիները
+
+@ Alt Fire (Add-ons)
+hy Այլ. կրակ (հավելումներ)
+
+@ Always Run
+hy Միշտ վազել
+
+@ Ambient Occlusion
+hy Շրջակա ստվերավորում
+
+@ Ammo Counts
+hy Զինամթերքի քանակ
+
+@ Ammo Counts Position
+hy Զինամթերքի քանակի դիրք
+
+@ Ammo Pickups
+hy Զինամթերքի հավաքում
+
+@ Anisotropic
+hy Անիզոտրոպ
+
+@ Anti-aliasing
+hy Հարթեցում
+
+@ Apply To
+hy Կիրառել
+
+@ Armor
+hy Զրահ
+
+@ Armor Position
+hy Զրահի դիրք
+
+@ Ask
+hy Հարցնել
+
+@ Attack
+hy Հարձակում
+
+@ Audio
+hy Ձայն
+
+@ Auto-aim
+hy Ավտոնշանառում
+
+@ Auto-aim Settings
+hy Ավտոնշանառման կարգավորումներ
+
+@ Autosave
+hy Ինքնապահպանում
+
+@ Autosave Settings
+hy Ինքնապահպանման կարգավորումներ
+
+@ Autosave Timer
+hy Ինքնապահպանման ժամաչափ
+
+@ Autosaves to Keep
+hy Պահվող ինքնապահպանումներ
+
+@ Bass
+hy Բաս
+
+@ Blip
+hy Բլիփ
+
+@ Blood Quality
+hy Արյան որակ
+
+@ Blood Splatter Settings
+hy Արյան շաղերի կարգավորումներ
+
+@ Blue
+hy Կապույտ
+
+@ Boomerang Settings
+hy Բումերանգի կարգավորումներ
+
+@ Boost or cut high frequencies in decibels
+hy Ուժեղացնում կամ թուլացնում է բարձր հաճախականությունները դեցիբելներով
+
+@ Boost or cut low frequencies in decibels
+hy Ուժեղացնում կամ թուլացնում է ցածր հաճախականությունները դեցիբելներով
+
+@ Brightness
+hy Պայծառություն
+
+@ Bullet Time (Add-ons)
+hy Դանդաղ ժամանակ (հավելումներ)
+
+@ Bullet Time Settings
+hy Դանդաղ ժամանակի կարգավորումներ
+
+@ Button Glyphs
+hy Կոճակների պատկերներ
+
+@ Button Size
+hy Կոճակների չափ
+
+@ Camera
+hy Տեսախցիկ
+
+@ Caustic Intensity
+hy Կաուստիկայի ուժգնություն
+
+@ Caustics
+hy Կաուստիկա
+
+@ Center
+hy Կենտրոն
+
+@ Center Message Position
+hy Կենտր. հաղորդագրության դիրք
+
+@ Center Message Time
+hy Կենտր. հաղորդագրության տևողություն
+
+@ Center View
+hy Կենտրոնացնել հայացքը
+
+@ Change Color on Kill
+hy Փոխել գույնը սպանելիս
+
+@ Change Color on Target
+hy Փոխել գույնը թիրախի վրա
+
+@ Chime
+hy Զանգակ
+
+@ Click
+hy Չխկոց
+
+@ Clink
+hy Զրնգոց
+
+@ Coin
+hy Մետաղադրամ
+
+@ Color
+hy Գույն
+
+@ Color Filter
+hy Գունային ֆիլտր
+
+@ Color of the grenade arc
+hy Նռնակի հետագծի գույնը
+
+@ Colored Lighting
+hy Գունավոր լուսավորություն
+
+@ Connect
+hy Միանալ
+
+@ Contrast
+hy Կոնտրաստ
+
+@ Controls
+hy Կառավարում
+
+@ Cooldown (ms)
+hy Վերալիցքավորում (մվ)
+
+@ Crosshair Outline
+hy Նշանոցի եզրագիծ
+
+@ Crosshair Shape
+hy Նշանոցի ձև
+
+@ Crosshair Size
+hy Նշանոցի չափ
+
+@ Current Ammo
+hy Ընթացիկ զինամթերք
+
+@ Current Ammo Position
+hy Ընթացիկ զինամթերքի դիրք
+
+@ Customize This Game
+hy Հարմարեցնել այս խաղը
+
+@ Damage
+hy Վնաս
+
+@ Damage Taken
+hy Ստացված վնաս
+
+@ Debris
+hy Բեկորներ
+
+@ Debris Quality
+hy Բեկորների որակ
+
+@ Debris Settings
+hy Բեկորների կարգավորումներ
+
+@ Directional Damage
+hy Վնասի ուղղություն
+
+@ Dithering
+hy Դիզերինգ
+
+@ Dodge / Dive (Add-ons)
+hy Խուսափում / ցատկ (հավելումներ)
+
+@ Dragging up looks down instead of up
+hy Մատը վերև քաշելիս հայացքն իջնում է, ոչ թե բարձրանում
+
+@ Drive
+hy Գերբեռնում
+
+@ Dynamic Lights
+hy Դինամիկ լույսեր
+
+@ Echo
+hy Արձագանք
+
+@ Enemy Health
+hy Թշնամու առողջություն
+
+@ Enemy Wounds
+hy Թշնամու վերքեր
+
+@ Enhanced Blood Splatter
+hy Բարելավված արյան շաղեր
+
+@ Enhanced FX
+hy Բարելավված էֆեկտներ
+
+@ Enhanced Models
+hy Բարելավված մոդելներ
+
+@ Enhanced Particles
+hy Բարելավված մասնիկներ
+
+@ Enhanced Water
+hy Բարելավված ջուր
+
+@ Enhancements
+hy Բարելավումներ
+
+@ Equipment Wheel (Add-ons)
+hy Հանդերձանքի անիվ (հավելումներ)
+
+@ Exploding boxes throw metal shards
+hy Պայթող արկղերը մետաղի բեկորներ են շպրտում
+
+@ Explosion Damage
+hy Պայթյունի վնաս
+
+@ Explosion Scorch Marks
+hy Պայթյունների այրվածքներ
+
+@ Explosions scorch nearby solid surfaces
+hy Պայթյունները խանձում են մոտակա պինդ մակերևույթները
+
+@ Explosives only
+hy Միայն պայթուցիկներ
+
+@ Extra Monsters
+hy Լրացուցիչ հրեշներ
+
+@ Extra Per 10 Damage (ms)
+hy Հավելում ամեն 10 վնասին (մվ)
+
+@ FX Settings
+hy Էֆեկտների կարգավորումներ
+
+@ Field of View
+hy Տեսադաշտ
+
+@ Firing never uses up ammo
+hy Կրակելը երբեք զինամթերք չի ծախսում
+
+@ First person
+hy առաջին դեմքից
+
+@ Flick Time
+hy Ֆլիկի ժամանակ
+
+@ Flight Speed
+hy Թռիչքի արագություն
+
+@ Fog
+hy Մառախուղ
+
+@ Frag Limit
+hy Ֆրագերի սահման
+
+@ Freeze Duration (ms)
+hy Սառեցման տևողություն (մվ)
+
+@ GLQuake
+hy GLQuake
+
+@ Game Speed
+hy Խաղի արագություն
+
+@ Game Type
+hy Խաղի տեսակ
+
+@ Gameplay
+hy Խաղընթաց
+
+@ Gameplay Modifiers
+hy Խաղի մոդիֆիկատորներ
+
+@ Gel Quality
+hy Գելի որակ
+
+@ Gib Surface Painting
+hy Մսակտորների հետքեր
+
+@ Gibs
+hy Մսակտորներ
+
+@ Gibs and heads tumble and bounce
+hy Մսակտորներն ու գլուխները գլորվում և ցատկոտում են
+
+@ Goggle Glow Quality
+hy Ակնոցի փայլի որակ
+
+@ Goggle Intensity
+hy Ակնոցի ուժգնություն
+
+@ Goggle Noise
+hy Ակնոցի աղմուկ
+
+@ Goggles Settings
+hy Ակնոցի կարգավորումներ
+
+@ Graphics
+hy Գրաֆիկա
+
+@ Green
+hy Կանաչ
+
+@ Grenade Arc
+hy Նռնակի հետագիծ
+
+@ Grenade Arc Settings
+hy Նռնակի հետագծի կարգավորումներ
+
+@ Gun Kick
+hy Զենքի հետհարված
+
+@ Gyro
+hy Գիրո
+
+@ Gyro & Flick Stick
+hy Գիրո և ֆլիկ-լծակ
+
+@ Gyro Active
+hy Գիրոն ակտիվ է
+
+@ Gyro Aiming
+hy Գիրո նշանառում
+
+@ HUD
+hy HUD
+
+@ HUD Style
+hy HUD-ի ոճ
+
+@ Health
+hy Առողջություն
+
+@ Health Pickups
+hy Առողջության հավաքում
+
+@ Health Position
+hy Առողջության դիրք
+
+@ Health Regeneration
+hy Առողջության վերականգնում
+
+@ Hit & Kill Sounds
+hy Խոցման և սպանության ձայներ
+
+@ Hit Doors & Lifts
+hy Խոցել դռներ և վերելակներ
+
+@ Hit Markers
+hy Խոցման նշիչներ
+
+@ Hit Sound
+hy Խոցման ձայն
+
+@ Hitmarker Size
+hy Նշիչի չափ
+
+@ Hitmarker Type
+hy Նշիչի տեսակ
+
+@ Hitstop Advanced
+hy Հիթսթոփ՝ լրացուցիչ
+
+@ Hitstop Settings
+hy Հիթսթոփի կարգավորումներ
+
+@ Hold
+hy Պահել
+
+@ Hold lock-on
+hy Գրավում պահելիս
+
+@ Hook Enemies
+hy Կառչել թշնամիներից
+
+@ Hook Metal
+hy Կառչել մետաղից
+
+@ Hook Stone
+hy Կառչել քարից
+
+@ Hook Wood
+hy Կառչել փայտից
+
+@ Hooking an enemy pulls you to it
+hy Թշնամուց կառչելիս կեռիկը ձեզ քաշում է դեպի նա
+
+@ Hookshot Range
+hy Կեռիկի հեռահարություն
+
+@ Hookshot Settings
+hy Կեռիկի կարգավորումներ
+
+@ Host Game
+hy Ստեղծել խաղ
+
+@ How far the hook flies before it retracts
+hy Որքան է թռչում կեռիկը մինչև ետ վերադառնալը
+
+@ How visible the on-screen controls are
+hy Որքան տեսանելի են էկրանային կառավարման տարրերը
+
+@ Impact Lifetime
+hy Հարվածի հետքերի կյանք
+
+@ Infinite Ammo
+hy Անսահման զինամթերք
+
+@ Input
+hy Մուտքագրում
+
+@ Input Scale
+hy Մուտքագրման մասշտաբ
+
+@ Interpolate Animation
+hy Անիմացիայի ինտերպոլացիա
+
+@ Interpolate Movement
+hy Շարժման ինտերպոլացիա
+
+@ Invert Look
+hy Շրջել հայացքը
+
+@ Invert Mouse
+hy Շրջել մկնիկը
+
+@ Invert Stick
+hy Շրջել լծակը
+
+@ Jet Quality
+hy Շիթի որակ
+
+@ Join Game
+hy Միանալ խաղին
+
+@ Jump / Swim Up
+hy Ցատկ / լողալ վեր
+
+@ Jump again in mid-air
+hy Կրկին ցատկել օդում
+
+@ Jumps
+hy Ցատկեր
+
+@ Keys & Powerups
+hy Բանալիներ և ուժեղացումներ
+
+@ Keys & Powerups Position
+hy Բանալիների և ուժեղացումների դիրք
+
+@ Kill Bonus (x)
+hy Սպանության բոնուս (x)
+
+@ Kill Sound
+hy Սպանության ձայն
+
+@ Knock
+hy Թխկոց
+
+@ Left
+hy Ձախ
+
+@ Length of the motion blur streaks
+hy Շարժման լղոզման հետքերի երկարությունը
+
+@ Lifetime (seconds)
+hy Կյանքի տևողություն (վայրկյան)
+
+@ Live Portal Views
+hy Պորտալների կենդանի տեսք
+
+@ Live View Distance
+hy Կենդանի տեսքի հեռավորություն
+
+@ Local Players
+hy Տեղական խաղացողներ
+
+@ Local red wounds follow enemy animation
+hy Կարմիր վերքերը հետևում են թշնամու անիմացիային
+
+@ Lock Indicator
+hy Գրավման ցուցիչ
+
+@ Long falls don't hurt
+hy Բարձրությունից ընկնելը չի վնասում
+
+@ Longest Freeze (ms)
+hy Ամենաերկար սառեցում (մվ)
+
+@ Look Down
+hy Նայել ներքև
+
+@ Look Speed
+hy Նայելու արագություն
+
+@ Look Up
+hy Նայել վերև
+
+@ Main Menu Music
+hy Գլխավոր ընտրացանկի երաժշտություն
+
+@ Max FPS
+hy Առավ. FPS
+
+@ Max Players
+hy Առավ. խաղացողներ
+
+@ Maximum Impacts
+hy Առավ. հարվածի հետքեր
+
+@ Maximum Marks
+hy Առավ. հետքեր
+
+@ Maximum Range
+hy Առավ. հեռահարություն
+
+@ Melee only
+hy Միայն մերձամարտ
+
+@ Message Background
+hy Հաղորդագրության ֆոն
+
+@ Message Text Size
+hy Հաղորդագրության տառաչափ
+
+@ Messages & Captions
+hy Հաղորդագրություններ և ենթագրեր
+
+@ Meter Duration (real seconds)
+hy Սանդղակի տևողություն (իրական վայրկյան)
+
+@ Minimum Damage
+hy Նվազ. վնաս
+
+@ Mode
+hy Ռեժիմ
+
+@ Modern Console
+hy Ժամանակակից կոնսոլ
+
+@ Modern HUD Layout
+hy Ժամանակակից HUD-ի դասավորություն
+
+@ Most recent save
+hy Վերջին պահպանումը
+
+@ Motion Blur
+hy Շարժման լղոզում
+
+@ Motion Blur Amount
+hy Շարժման լղոզման ուժգնություն
+
+@ Motion Blur Quality
+hy Շարժման լղոզման որակ
+
+@ Mouse & Keyboard
+hy Մկնիկ և ստեղնաշար
+
+@ Mouse Speed
+hy Մկնիկի արագություն
+
+@ Move Back
+hy Հետ
+
+@ Move Forward
+hy Առաջ
+
+@ Music Volume
+hy Երաժշտության ձայնաուժ
+
+@ Next Weapon
+hy Հաջորդ զենքը
+
+@ No Drowning
+hy Առանց խեղդվելու
+
+@ No Fall Damage
+hy Առանց ընկնելու վնասի
+
+@ No Manual Saves
+hy Առանց ձեռքով պահպանման
+
+@ No Self Damage
+hy Առանց ինքնավնասի
+
+@ Noise Filter
+hy Աղմուկի ֆիլտր
+
+@ Normal Color
+hy Սովորական գույն
+
+@ Notify Message Position
+hy Ծանուցումների դիրք
+
+@ Notify Message Time
+hy Ծանուցումների տևողություն
+
+@ Number of splatter rays per blood impact
+hy Արյան մեկ հարվածից շաղերի ճառագայթների քանակը
+
+@ Off
+hy Անջ.
+
+@ On Death
+hy Մահվան դեպքում
+
+@ On Kill Color
+hy Սպանության գույն
+
+@ On Target Color
+hy Թիրախի գույն
+
+@ Opacity
+hy Անթափանցություն
+
+@ Opacity of the grenade arc
+hy Նռնակի հետագծի անթափանցությունը
+
+@ Pants Color
+hy Տաբատի գույն
+
+@ Particle Quality
+hy Մասնիկների որակ
+
+@ Particles
+hy Մասնիկներ
+
+@ Physical Nail Impacts
+hy Մեխերի ֆիզիկական հարվածներ
+
+@ Pistol Start
+hy Զրոյից մեկնարկ
+
+@ Pitch
+hy Տոնի բարձրություն
+
+@ Pitch Sensitivity
+hy Ուղղաձիգ զգայունություն
+
+@ Playback Speed
+hy Նվագարկման արագություն
+
+@ Player Setup
+hy Խաղացողի կարգավորում
+
+@ Pop
+hy Փոփ
+
+@ Portal Gun Settings
+hy Պորտալային զենքի կարգավորումներ
+
+@ Portal Recursion
+hy Պորտալների ռեկուրսիա
+
+@ Portal View Quality
+hy Պորտալի տեսքի որակ
+
+@ Preview Sound
+hy Լսել ձայնը
+
+@ Previous Weapon
+hy Նախորդ զենքը
+
+@ Projectile Shotguns Settings
+hy Արկային որսահրացանների կարգավորումներ
+
+@ Projectile Speed (units/s)
+hy Արկի արագություն (միավոր/վ)
+
+@ Purple
+hy Մանուշակագույն
+
+@ Push
+hy Հրում
+
+@ Push Strength
+hy Հրման ուժ
+
+@ Quick Load
+hy Արագ բեռնում
+
+@ Quick Save
+hy Արագ պահպանում
+
+@ Railgun Settings
+hy Ռեյլգանի կարգավորումներ
+
+@ Ranged only
+hy Միայն հեռահար
+
+@ Reacquire While Held
+hy Վերագրավել պահելիս
+
+@ Red
+hy Կարմիր
+
+@ Reduce Motion
+hy Նվազեցնել շարժումը
+
+@ Regen (seconds per second)
+hy Վերականգնում (վայրկյան/վայրկյան)
+
+@ Render Scale
+hy Ռենդերի մասշտաբ
+
+@ Reverb
+hy Ռևերբերացիա
+
+@ Right
+hy Աջ
+
+@ Ripple Intensity
+hy Ալիքների ուժգնություն
+
+@ Ripples
+hy Ալիքներ
+
+@ Roll Sensitivity
+hy Թեքման զգայունություն
+
+@ Rumble
+hy Թրթռում
+
+@ Run
+hy Վազք
+
+@ Save on All Enemies Killed
+hy Պահպանել բոլոր թշնամիներին սպանելիս
+
+@ Save on All Secrets Found
+hy Պահպանել բոլոր գաղտնիքները գտնելիս
+
+@ Save on Level Entry
+hy Պահպանել մակարդակ մտնելիս
+
+@ Save on Secret Found
+hy Պահպանել գաղտնիք գտնելիս
+
+@ Scoreboard
+hy Միավորների աղյուսակ
+
+@ Screen Flashes
+hy Էկրանի բռնկումներ
+
+@ Screen Shader
+hy Էկրանի շեյդեր
+
+@ Screen Shake
+hy Էկրանի ցնցում
+
+@ Search LAN
+hy Որոնել LAN-ում
+
+@ Seconds a center-screen message stays up
+hy Քանի վայրկյան է մնում կենտրոնի հաղորդագրությունը
+
+@ See Through Portals
+hy Տեսնել պորտալների միջով
+
+@ See-through Teleporters
+hy Թափանցիկ տելեպորտներ
+
+@ Shirt Color
+hy Վերնաշապիկի գույն
+
+@ Shotgun Bullet Decals
+hy Կոտորակի հետքեր
+
+@ Shoulder left
+hy ձախ ուսի հետևից
+
+@ Shoulder right
+hy աջ ուսի հետևից
+
+@ Show FPS
+hy Ցույց տալ FPS
+
+@ Show Face
+hy Ցույց տալ դեմքը
+
+@ Shrapnel
+hy Շրապնել
+
+@ Size of on-screen messages and captions
+hy Էկրանային հաղորդագրությունների և ենթագրերի չափը
+
+@ Skill
+hy Բարդություն
+
+@ Sky Fog
+hy Երկնքի մառախուղ
+
+@ Smooths the stepped movement of monsters
+hy Հարթեցնում է հրեշների աստիճանաձև շարժումը
+
+@ Sound
+hy Ձայն
+
+@ Sound Captions
+hy Ձայների ենթագրեր
+
+@ Sound Volume
+hy Էֆեկտների ձայնաուժ
+
+@ Speed Blur
+hy Արագության լղոզում
+
+@ Splashes
+hy Ցայտքեր
+
+@ Splatter Amount
+hy Շաղերի քանակ
+
+@ Splatter Size
+hy Շաղերի չափ
+
+@ Start Game
+hy Սկսել խաղը
+
+@ Staying underwater doesn't hurt
+hy Ջրի տակ մնալը չի վնասում
+
+@ Stick Look Pitch
+hy Լծակով նայել՝ ուղղաձիգ
+
+@ Stick Look Yaw
+hy Լծակով նայել՝ հորիզոնական
+
+@ Strafe Left
+hy Կողաքայլ ձախ
+
+@ Strafe Right
+hy Կողաքայլ աջ
+
+@ Strength of the surface swell and rings
+hy Մակերևույթի ալիքների և շրջանակների ուժը
+
+@ Stun Duration
+hy Ապշեցման տևողություն
+
+@ Style
+hy Ոճ
+
+@ Supersampling
+hy Սուպերսեմփլինգ
+
+@ Surface Hit Effects
+hy Մակերևույթի հարվածի էֆեկտներ
+
+@ Swim Down
+hy Սուզվել
+
+@ Targets
+hy Թիրախներ
+
+@ Teamplay
+hy Թիմային խաղ
+
+@ Texture Filter
+hy Տեքստուրաների ֆիլտր
+
+@ Third person
+hy երրորդ դեմքից
+
+@ Thud
+hy Դմփոց
+
+@ Tick
+hy Տիկ
+
+@ Time Limit
+hy Ժամանակի սահման
+
+@ Time Stretch
+hy Ժամանակի ձգում
+
+@ Toggle Attack
+hy Հարձակում փոխարկմամբ
+
+@ Toggle Run
+hy Վազք փոխարկմամբ
+
+@ Toggle auto-aim
+hy Ավտոնշանառում փոխարկմամբ
+
+@ Touch Controls
+hy Հպումային կառավարում
+
+@ Touchscreen
+hy Հպէկրան
+
+@ Tough Enemy Health
+hy Ուժեղ թշնամիների առողջություն
+
+@ Tough enemies only
+hy Միայն ուժեղ թշնամիներ
+
+@ Trail Colour
+hy Հետքի գույն
+
+@ Translate Console
+hy Թարգմանել կոնսոլը
+
+@ Translucent Water
+hy Կիսաթափանցիկ ջուր
+
+@ Treble
+hy Բարձր
+
+@ Turn Left
+hy Թեքվել ձախ
+
+@ Turn Right
+hy Թեքվել աջ
+
+@ Underwater FX
+hy Ստորջրյա էֆեկտներ
+
+@ Use Bullet Time Meter
+hy Դանդաղ ժամանակի սանդղակ
+
+@ VSync
+hy VSync
+
+@ View Bob
+hy Տեսախցիկի օրորում
+
+@ Viewmodels
+hy Զենքի մոդել
+
+@ Volume
+hy Ձայնաուժ
+
+@ Water Opacity
+hy Ջրի անթափանցություն
+
+@ Water Quality
+hy Ջրի որակ
+
+@ Water Settings
+hy Ջրի կարգավորումներ
+
+@ Weapon Wheel
+hy Զենքի անիվ
+
+@ Weapon Wheel Slowdown
+hy Դանդաղում զենքի անիվում
+
+@ Weapons
+hy Զենքեր
+
+@ Weapons Position
+hy Զենքերի դիրք
+
+@ Where center-screen messages appear
+hy Որտեղ են հայտնվում կենտրոնի հաղորդագրությունները
+
+@ Where pickup and event messages appear
+hy Որտեղ են հայտնվում հավաքման և իրադարձությունների հաղորդագրությունները
+
+@ White
+hy Սպիտակ
+
+@ Yaw Sensitivity
+hy Հորիզոնական զգայունություն
+
+@ Yellow
+hy Դեղին
+
+# lowercase choice values
+@ T
+hy T
+
+@ always
+hy միշտ
+
+@ auto
+hy ավտո
+
+@ banded
+hy շերտերով
+
+@ borderless
+hy առանց շրջանակի
+
+@ bottom center
+hy ներքևում՝ կենտրոնում
+
+@ bottom left
+hy ներքևում՝ ձախ
+
+@ bottom right
+hy ներքևում՝ աջ
+
+@ box
+hy շրջանակ
+
+@ broken square
+hy կտրտված քառակուսի
+
+@ classic
+hy դասական
+
+@ coarse
+hy կոպիտ
+
+@ cooperative
+hy համատեղ խաղ
+
+@ cross
+hy խաչ
+
+@ cross + dot
+hy խաչ + կետ
+
+@ cyan
+hy երկնագույն
+
+@ dashed
+hy ընդհատ
+
+@ deathmatch
+hy դեթմաչ
+
+@ deuteranopia
+hy դեյտերանոպիա
+
+@ diagonal streaks
+hy անկյունագծային գծեր
+
+@ diamond
+hy շեղանկյուն
+
+@ dot
+hy կետ
+
+@ double
+hy կրկնակի
+
+@ double chevrons
+hy կրկնակի շևրոններ
+
+@ double diagonals
+hy կրկնակի անկյունագծեր
+
+@ easy
+hy հեշտ
+
+@ fine
+hy նուրբ
+
+@ fit output
+hy ըստ ելքի չափի
+
+@ flick stick
+hy ֆլիկ-լծակ
+
+@ fullscreen
+hy լիաէկրան
+
+@ gap cross
+hy բացվածքով խաչ
+
+@ green
+hy կանաչ
+
+@ grey
+hy մոխրագույն
+
+@ half speed
+hy կես արագություն
+
+@ hard
+hy դժվար
+
+@ high
+hy բարձր
+
+@ huge
+hy հսկայական
+
+@ immersive
+hy ընկղմող
+
+@ intense
+hy ուժեղ
+
+@ large
+hy մեծ
+
+@ larger
+hy ավելի մեծ
+
+@ largest
+hy ամենամեծ
+
+@ linear
+hy գծային
+
+@ low
+hy ցածր
+
+@ lower
+hy ներքևում
+
+@ magenta
+hy մագենտա
+
+@ medium
+hy միջին
+
+@ middle
+hy մեջտեղում
+
+@ middle left
+hy մեջտեղում՝ ձախ
+
+@ middle right
+hy մեջտեղում՝ աջ
+
+@ modern
+hy ժամանակակից
+
+@ nearest
+hy մոտակա
+
+@ nightmare
+hy մղձավանջ
+
+@ nintendo
+hy Nintendo
+
+@ no team damage
+hy առանց թիմային վնասի
+
+@ none
+hy ոչ մեկը
+
+@ normal
+hy սովորական
+
+@ off
+hy անջ.
+
+@ off while held
+hy անջ. պահելիս
+
+@ on
+hy միաց.
+
+@ only while held
+hy միայն պահելիս
+
+@ playstation
+hy PlayStation
+
+@ protanopia
+hy պրոտանոպիա
+
+@ quarter speed
+hy քառորդ արագություն
+
+@ red
+hy կարմիր
+
+@ short diagonals
+hy կարճ անկյունագծեր
+
+@ single
+hy միակի
+
+@ small
+hy փոքր
+
+@ solid
+hy հոծ
+
+@ spectacle
+hy տպավորիչ
+
+@ subtle
+hy թույլ
+
+@ team damage
+hy թիմային վնաս
+
+@ top center
+hy վերևում՝ կենտրոնում
+
+@ top left
+hy վերևում՝ ձախ
+
+@ top right
+hy վերևում՝ աջ
+
+@ triple
+hy եռակի
+
+@ tritanopia
+hy տրիտանոպիա
+
+@ upper
+hy վերևում
+
+@ white
+hy սպիտակ
+
+@ whole screen
+hy ամբողջ էկրանը
+
+@ windowed
+hy պատուհանում
+
+@ xbox
+hy Xbox
+
+@ yellow
+hy դեղին
+
+# ==== tooltips.txt ====
+
+# Options help lines (tooltips) and reasons for disabled rows.
+@ 2D aiming turns the view continuously with the right stick; flick stick snaps the view to where you push the stick, then turning the stick rotates it
+hy 2D նշանառումը աջ լծակով սահուն պտտում է տեսքը, ֆլիկ-լծակը միանգամից շրջում է տեսքը լծակի թեքման ուղղությամբ, իսկ լծակը պտտելիս տեսքը շարունակում է պտտվել
+
+@ 3D resolution relative to the window; the UI stays sharp
+hy 3D լուծաչափ՝ պատուհանի համեմատ, ինտերֆեյսը մնում է հստակ
+
+@ 3D view keeps the HUD and menus sharp; whole screen runs them through the shader too
+hy 3D տեսքը HUD-ը և ընտրացանկերը թողնում է հստակ, ամբողջ էկրանը դրանք նույնպես անցկացնում է շեյդերով
+
+@ A Quake III style railgun: a slug that pierces every enemy on its line, using 2 cells a shot and refiring every 1.5 s; select it through its assigned weapon slot (Add-ons)
+hy Quake III-ի ոճով ռեյլգան: արկը խոցում է իր գծի բոլոր թշնամիներին, ծախսում է 2 բջիջ մեկ կրակոցի համար և կրկին կրակում 1,5 վ-ն մեկ, ընտրեք այն նշանակված զենքի բնիկով (հավելումներ)
+
+@ A Zelda-style hookshot: fire sends a chain hook out; it latches onto hookable surfaces or enemies and reels you in; fire again to let go
+hy Zelda-ի ոճով կեռիկ: կրակոցը նետում է շղթայով կեռիկը, այն կառչում է հարմար մակերևույթներից կամ թշնամիներից և քաշում ձեզ, կրկին կրակեք՝ բաց թողնելու համար
+
+@ Also translates the engine's console messages; off keeps them in English
+hy Թարգմանում է նաև շարժիչի կոնսոլի հաղորդագրությունները, անջատված լինելիս դրանք մնում են անգլերեն
+
+@ Automatically acquire another enemy while holding Lock-on after losing a target
+hy Թիրախը կորցնելուց հետո ավտոմատ գրավում է մեկ այլ թշնամու, քանի դեռ պահում եք «Թիրախի գրավում»-ը
+
+@ Blends between animation frames of monsters and weapons
+hy Միաձուլում է հրեշների և զենքերի անիմացիայի կադրերը
+
+@ Blood stains surfaces and bodies; cosmetic, independent of particle packs
+hy Արյունը ներկում է մակերևույթներն ու մարմինները, միայն արտաքին էֆեկտ է, կախված չէ մասնիկների փաթեթներից
+
+@ Bloom glow around bright lights and heat sources; medium uses 4 taps, high uses 8, low disables halo taps
+hy Bloom փայլ պայծառ լույսերի և ջերմության աղբյուրների շուրջ։ Միջինն օգտագործում է 4 նմուշ, բարձրը՝ 8, ցածրն անջատում է լուսապսակը
+
+@ Blurs fast-moving monsters, projectiles and doors (not camera turns)
+hy Լղոզում է արագ շարժվող հրեշներին, արկերն ու դռները (ոչ տեսախցիկի պտույտները)
+
+@ Blurs the screen edges during fast falls and launches; keeps the centre clear. Reduce Motion disables it
+hy Արագ ընկնելիս և նետվելիս լղոզում է էկրանի եզրերը, կենտրոնը մնում է հստակ։ «Նվազեցնել շարժումը» կարգավորումն անջատում է այն
+
+@ Brightness of the underwater light patterns
+hy Ստորջրյա լուսային նախշերի պայծառությունը
+
+@ Caps mark count, lifetime, airborne droplets and wound/gib painting; low skips enemy wounds and gib trails
+hy Սահմանափակում է հետքերի քանակը, կյանքը, օդում թռչող կաթիլները և վերքերի ու մսակտորների ներկումը, ցածրը բաց է թողնում թշնամու վերքերն ու մսակտորների հետքերը
+
+@ Caps shader input at output size so 200% render scale keeps 3D sharpness without 4x shader cost; low scales stay low-res
+hy Սահմանափակում է շեյդերի մուտքը ելքի չափով, որպեսզի 200% ռենդերի մասշտաբը պահպանի 3D հստակությունն առանց շեյդերի 4x ծախսի, ցածր մասշտաբները մնում են ցածր լուծաչափով
+
+@ Classic: the original status bar; modern: compact elements at the screen edges
+hy Դասական: սկզբնական կարգավիճակի գոտին, ժամանակակից: կոմպակտ տարրեր էկրանի եզրերին
+
+@ Coat atlas resolution, rebuild rate and shader detail: low builds smaller coats less often with fast shading; high uses full detail
+hy Ծածկույթների ատլասի լուծաչափը, թարմացման հաճախությունն ու շեյդերի մանրամասնությունը։ Ցածրը կառուցում է ավելի փոքր ծածկույթներ ավելի հազվադեպ և արագ ստվերավորմամբ, բարձրը՝ լրիվ մանրամասնությամբ
+
+@ Colour of the railgun's spiral trail; split-screen players each get the next colour along
+hy Ռեյլգանի պարուրաձև հետքի գույնը, բաժանված էկրանի յուրաքանչյուր խաղացող ստանում է հաջորդ գույնը
+
+@ Damage the railgun deals to each enemy it passes through (Quake III: 100)
+hy Վնասը, որ ռեյլգանը հասցնում է իր միջով անցնող յուրաքանչյուր թշնամուն (Quake III: 100)
+
+@ Dark backdrop behind on-screen messages for readability
+hy Մուգ ֆոն էկրանային հաղորդագրությունների հետևում՝ ընթեռնելիության համար
+
+@ Dark border keeps the crosshair visible on any background
+hy Մուգ եզրագիծը նշանոցը տեսանելի է պահում ցանկացած ֆոնի վրա
+
+@ Darkens corners and contact areas where geometry meets; higher quality is sharper
+hy Մգեցնում է անկյուններն ու երկրաչափության հպման հատվածները, բարձր որակն ավելի հստակ է
+
+@ Debris lands on and is carried or shoved by doors, lifts and platforms
+hy Բեկորներն ընկնում են դռների, վերելակների և հարթակների վրա, որոնք տանում կամ հրում են դրանք
+
+@ Detail for caustics, ripples and splashes: low uses smaller budgets and shorter view distance; high uses larger budgets and farther view distance
+hy Կաուստիկայի, ալիքների և ցայտքերի մանրամասնություն։ Ցածրն օգտագործում է փոքր բյուջեներ և կարճ տեսանելիություն, բարձրը՝ մեծ բյուջեներ և ավելի հեռու տեսանելիություն
+
+@ Disabled while Enhanced Particles is on: its particles replace the GLQuake and Classic styles
+hy Անհասանելի է, երբ միացված է «Բարելավված մասնիկներ»-ը։ Դրա մասնիկները փոխարինում են GLQuake և դասական ոճերին
+
+@ Disabled while Enhanced Water is on: its own underwater effects replace the classic and GLQuake view warps
+hy Անհասանելի է, երբ միացված է «Բարելավված ջուր»-ը։ Դրա ստորջրյա էֆեկտները փոխարինում են դասական և GLQuake աղավաղումներին
+
+@ Draw the predicted grenade path as a solid or dashed line
+hy Ցույց տալ նռնակի կանխատեսված հետագիծը հոծ կամ ընդհատ գծով
+
+@ Draw the view out of the linked portal inside each portal; off shows flat discs (fastest)
+hy Յուրաքանչյուր պորտալում ցույց տալ կապակցված պորտալի տեսքը, անջատվածը ցույց է տալիս հարթ սկավառակներ (ամենաարագը)
+
+@ Droplets spray up when things enter or leave water, slime or lava
+hy Կաթիլները ցայտում են, երբ ինչ-որ բան մտնում կամ դուրս է գալիս ջրից, տիղմից կամ լավայից
+
+@ Emulates the original 8-bit palette of software rendering
+hy Նմանակում է ծրագրային ռենդերինգի սկզբնական 8-բիթանոց պալիտրան
+
+@ Every level starts with only the shotgun and axe, as if started fresh
+hy Յուրաքանչյուր մակարդակ սկսվում է միայն որսահրացանով և կացնով, կարծես նորից
+
+@ Explosion damage for each remotely detonated sticky bomb
+hy Պայթյունի վնաս յուրաքանչյուր հեռակա պայթեցված կպչուն ռումբի համար
+
+@ Extra freeze milliseconds for every 10 damage dealt, so heavy hits stop longer
+hy Լրացուցիչ սառեցման միլիվայրկյաններ ամեն 10 հասցված վնասի համար, որպեսզի ծանր հարվածներն ավելի երկար կանգնեցնեն
+
+@ First person, a third-person camera centered behind the player, or one over the right or left shoulder; third person hides viewmodels
+hy Առաջին դեմքից, երրորդ դեմքի տեսախցիկ խաղացողի հետևում՝ կենտրոնում, կամ աջ կամ ձախ ուսի վրայով, երրորդ դեմքը թաքցնում է զենքի մոդելները
+
+@ Flash the selected marker on confirmed hits; colors are shared with the crosshair
+hy Հաստատված խոցումների ժամանակ բռնկեցնել ընտրված նշիչը, գույներն ընդհանուր են նշանոցի հետ
+
+@ Freeze for every enemy, or only for enemies that were tough before the hit
+hy Սառեցնել յուրաքանչյուր թշնամու համար կամ միայն այն թշնամիների, որոնք ուժեղ էին մինչև հարվածը
+
+@ Freeze the game briefly when you damage an enemy; single player with add-ons only
+hy Կարճ ժամանակով սառեցնել խաղը, երբ վնասում եք թշնամուն, միայն միանձնյա խաղում՝ հավելումներով
+
+@ Gibs tumble and barrels throw shrapnel; shots and blasts push them (cosmetic only)
+hy Մսակտորները գլորվում են, իսկ տակառները շրապնել են շպրտում, կրակոցներն ու պայթյունները հրում են դրանք (միայն արտաքին էֆեկտ)
+
+@ Health an enemy must have had before the hit to count as tough
+hy Առողջությունը, որ թշնամին պետք է ունենար մինչև հարվածը, որպեսզի համարվի ուժեղ
+
+@ Hits dealing less damage than this do not freeze the game; the default 10 skips nails and shotgun pellets
+hy Սրանից պակաս վնաս հասցնող հարվածները չեն սառեցնում խաղը, լռելյայն 10-ը բաց է թողնում մեխերն ու կոտորակը
+
+@ Hold fire and sweep the crosshair over monsters to queue them, release to throw: it stuns each in turn and flies back; alt-fire clears the queue
+hy Պահեք կրակը և նշանոցով անցեք հրեշների վրայով՝ նրանց հերթագրելու համար, բաց թողեք՝ նետելու համար: այն հերթով ապշեցնում է յուրաքանչյուրին և վերադառնում, այլընտրանքային կրակը մաքրում է հերթը
+
+@ Hold: keep Lock-on held. Toggle: press Auto-aim Toggle to enable automatic acquisition. Click look stick to switch targets
+hy Պահել: պահեք «Թիրախի գրավում»-ը։ Փոխարկում: սեղմեք «Ավտոնշանառման փոխարկում»՝ ավտոմատ գրավումը միացնելու համար։ Սեղմեք նայելու լծակը՝ թիրախը փոխելու համար
+
+@ How close an enemy must be to the crosshair for automatic acquisition in toggle mode (degrees)
+hy Որքան մոտ պետք է լինի թշնամին նշանոցին փոխարկման ռեժիմում ավտոմատ գրավման համար (աստիճաններ)
+
+@ How far the view tilts up and down when you tilt the controller (pitch axis)
+hy Որքան է տեսքը թեքվում վեր ու վար, երբ թեքում եք կարգավարը (ուղղաձիգ առանցք)
+
+@ How far the view turns left and right when you turn the controller (yaw axis)
+hy Որքան է տեսքը պտտվում աջ ու ձախ, երբ պտտում եք կարգավարը (հորիզոնական առանցք)
+
+@ How far the view turns when you drag on the right half of the screen
+hy Որքան է պտտվում տեսքը, երբ մատը սահեցնում եք էկրանի աջ կեսով
+
+@ How fast the boomerang flies (units per second)
+hy Որքան արագ է թռչում բումերանգը (միավոր/վայրկյան)
+
+@ How hard shots and explosions push debris around
+hy Որքան ուժեղ են կրակոցներն ու պայթյունները հրում բեկորները
+
+@ How hard the Powerwasher's water pushes enemies
+hy Որքան ուժեղ է Հիդրոլվացիչի ջուրը հրում թշնամիներին
+
+@ How long a hit freezes the game, in milliseconds
+hy Որքան է հարվածը սառեցնում խաղը, միլիվայրկյաններով
+
+@ How strongly fog covers the sky when fog is on
+hy Որքան ուժեղ է մառախուղը ծածկում երկինքը, երբ մառախուղը միացված է
+
+@ How the view distorts underwater: Classic ripples the whole screen like software Quake, GLQuake slowly stretches and squashes the view
+hy Ինչպես է տեսքն աղավաղվում ջրի տակ: դասականը ալեկոծում է ամբողջ էկրանը ծրագրային Quake-ի պես, GLQuake-ը դանդաղ ձգում և սեղմում է տեսքը
+
+@ Ignores gyro rotation slower than this many degrees per second, to hide hand tremor
+hy Անտեսում է գիրոյի պտույտը, որը դանդաղ է վայրկյանում այսքան աստիճանից, ձեռքի դողը թաքցնելու համար
+
+@ Immersive: appears for a few seconds only when its value changes
+hy Ընկղմող: հայտնվում է մի քանի վայրկյանով միայն արժեքը փոխվելիս
+
+@ Keeps textures sharp on floors and walls seen at steep angles
+hy Հստակ է պահում սուր անկյան տակ երևացող հատակների և պատերի տեքստուրաները
+
+@ Lights from rockets, muzzle flashes and explosions brighten nearby walls
+hy Հրթիռների, փողաբռնկումների և պայթյունների լույսերը լուսավորում են մոտակա պատերը
+
+@ Liquid surfaces swell and ring out where things move through them
+hy Հեղուկի մակերևույթներն ալեկոծվում են և շրջանակներ տալիս այնտեղ, որտեղով ինչ-որ բան է անցնում
+
+@ Lobs sticky bombs (rockets ammo) that cling to walls, doors and monsters; alt-fire detonates them all
+hy Նետում է կպչուն ռումբեր (հրթիռների զինամթերք), որոնք կպչում են պատերին, դռներին և հրեշներին, այլընտրանքային կրակը պայթեցնում է բոլորը
+
+@ Look of the classic particles: GLQuake draws soft round dots, Classic draws square pixels like software Quake
+hy Դասական մասնիկների տեսքը: GLQuake-ը նկարում է փափուկ կլոր կետեր, դասականը՝ քառակուսի պիքսելներ ծրագրային Quake-ի պես
+
+@ Low skips the background smear halo and uses fewer blur samples; high keeps the full halo and smoother streaks
+hy Ցածրը բաց է թողնում ֆոնային լղոզման լուսապսակը և օգտագործում ավելի քիչ նմուշներ, բարձրը պահում է լրիվ լուսապսակը և ավելի սահուն հետքերը
+
+@ Low: hard particle edges, half the scripted particles and fewer hit sparks. Medium: soft edges. High: soft edges checked per MSAA sample, most hit sparks
+hy Ցածր: մասնիկների կոշտ եզրեր, սցենարային մասնիկների կեսը և ավելի քիչ կայծեր։ Միջին: փափուկ եզրեր։ Բարձր: փափուկ եզրեր՝ ստուգված ըստ MSAA նմուշի, կայծերի մեծ մասը
+
+@ Marks fade out before expiring; oldest marks are recycled at the limit
+hy Հետքերը խամրում են մինչև անհետանալը, սահմանին հասնելիս ամենահին հետքերը վերաօգտագործվում են
+
+@ Max nested portal reflections to draw; each level redraws the scene
+hy Ներդրված պորտալային արտացոլումների առավելագույն քանակը, յուրաքանչյուր մակարդակ վերանկարում է տեսարանը
+
+@ Max portals per screen with a live view; each one redraws the scene
+hy Կենդանի տեսքով պորտալների առավելագույն քանակը էկրանին, յուրաքանչյուրը վերանկարում է տեսարանը
+
+@ Maximum distance for acquiring and keeping an enemy locked
+hy Թշնամուն գրավելու և պահելու առավելագույն հեռավորությունը
+
+@ Minimum gap between freezes, so shotgun pellets and rapid fire count once; kills ignore it
+hy Սառեցումների միջև նվազագույն ընդմիջումը, որպեսզի կոտորակն ու արագ կրակը հաշվվեն մեկ անգամ, սպանությունները դա անտեսում են
+
+@ Modern terminal console with autocomplete popup, history search, ANSI colors, bash shell and piping; off uses the classic Quake console
+hy Ժամանակակից տերմինալային կոնսոլ՝ ավտոլրացման պատուհանով, պատմության որոնմամբ, ANSI գույներով, bash շելով և խողովակներով, անջատվածն օգտագործում է դասական Quake կոնսոլը
+
+@ Monsters take proportionally less damage at higher values; above 100% is harder
+hy Ավելի բարձր արժեքների դեպքում հրեշները համամասնորեն ավելի քիչ վնաս են ստանում, 100%-ից բարձրն ավելի դժվար է
+
+@ Moving gibs leave blood on surfaces they touch
+hy Շարժվող մսակտորներն արյուն են թողնում իրենց դիպչած մակերևույթներին
+
+@ Multiplier on the freeze when the hit kills the enemy; 1 means no extra
+hy Սառեցման բազմապատկիչ, երբ հարվածը սպանում է թշնամուն, 1 նշանակում է առանց հավելման
+
+@ Multiplies ammo from pickups (up to the normal carry limit); below 100% is harder
+hy Բազմապատկում է հավաքված զինամթերքը (մինչև սովորական սահմանը), 100%-ից ցածրն ավելի դժվար է
+
+@ Multiplies health from pickups (up to 100, or the item's own limit); below 100% is harder
+hy Բազմապատկում է հավաքված առողջությունը (մինչև 100 կամ առարկայի սեփական սահմանը), 100%-ից ցածրն ավելի դժվար է
+
+@ Nails stick to wood and bodies; hard surfaces deflect them to the floor
+hy Մեխերը խրվում են փայտի և մարմինների մեջ, կոշտ մակերևույթները շեղում են դրանք դեպի հատակ
+
+@ Nearest keeps crisp classic pixels; linear smooths textures
+hy «Մոտակա»-ն պահում է հստակ դասական պիքսելները, «գծային»-ը հարթեցնում է տեքստուրաները
+
+@ New Game: Add-ons
+hy Նոր խաղ: հավելումներ
+
+@ New Game: Customize
+hy Նոր խաղ: հարմարեցում
+
+@ Night vision: how much dark areas are brightened; thermal: how strongly heat stands out
+hy Գիշերային տեսողություն: որքան են լուսավորվում մութ հատվածները, ջերմային: որքան ուժեղ է առանձնանում ջերմությունը
+
+@ Night-vision and thermal goggles, cycle normal, night vision and thermal with Change Goggles (Add-ons), or use the Equipment Wheel
+hy Գիշերային տեսողության և ջերմային ակնոցներ, փոխարկեք սովորական, գիշերային և ջերմային ռեժիմները «Փոխել ակնոցը» (հավելումներ) գործողությամբ կամ օգտագործեք հանդերձանքի անիվը
+
+@ No single freeze lasts longer than this, however much damage or kill bonus adds
+hy Ոչ մի սառեցում չի տևում սրանից երկար, որքան էլ ավելացնեն վնասը կամ սպանության բոնուսը
+
+@ Oldest marks and nails are recycled at this shared limit
+hy Ամենահին հետքերն ու մեխերը վերաօգտագործվում են այս ընդհանուր սահմանին հասնելիս
+
+@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
+hy Էկրանային լծակ և կոճակներ: ավտոն ցույց է տալիս դրանք հպումից հետո և թաքցնում այլ սարք օգտագործելիս
+
+@ Only autosaves: quicksaves and the Save menu are off
+hy Միայն ինքնապահպանումներ: արագ պահպանումները և պահպանման ընտրացանկն անջատված են
+
+@ Place every weapon at the center, right or left of the view, or hide all viewmodels
+hy Տեղադրել բոլոր զենքերը տեսքի կենտրոնում, աջ կամ ձախ կողմում, կամ թաքցնել բոլոր զենքի մոդելները
+
+@ Play your chosen hit or kill cue when you damage an enemy
+hy Նվագարկել ընտրված խոցման կամ սպանության ձայնը, երբ վնասում եք թշնամուն
+
+@ Playback speed: faster sounds shorter and higher
+hy Նվագարկման արագություն: ավելի արագը հնչում է ավելի կարճ և բարձր
+
+@ Plays the Quake theme in the main menu when no game is running
+hy Գլխավոր ընտրացանկում նվագարկում է Quake-ի թեման, երբ խաղ չի ընթանում
+
+@ Portals farther away than this are drawn as flat discs
+hy Սրանից հեռու պորտալները նկարվում են որպես հարթ սկավառակներ
+
+@ Press attack once to keep firing, again to stop
+hy Սեղմեք հարձակումը մեկ անգամ՝ անընդհատ կրակելու համար, կրկին՝ կանգնեցնելու համար
+
+@ Press run once to switch between running and walking
+hy Սեղմեք վազքը մեկ անգամ՝ վազքի և քայլքի միջև փոխարկելու համար
+
+@ Raise or lower the tone independently of sound length
+hy Բարձրացնել կամ իջեցնել տոնը՝ անկախ ձայնի տևողությունից
+
+@ Red screen edges show where damage came from: top is front, bottom is behind; Screen Flashes controls their strength
+hy Էկրանի կարմիր եզրերը ցույց են տալիս, թե որտեղից է եկել վնասը: վերևը՝ առջևից, ներքևը՝ հետևից, «Էկրանի բռնկումներ»-ը կարգավորում է դրանց ուժը
+
+@ Replaces the classic dot particles with glowing sparks, smoke and blood; mods with their own particle effects keep them
+hy Փոխարինում է դասական կետային մասնիկները փայլող կայծերով, ծխով և արյունով, սեփական մասնիկային էֆեկտներով մոդերը պահպանում են դրանք
+
+@ Resolution and detail inside portal and teleporter views; lower tiers trim nested effects
+hy Լուծաչափ և մանրամասնություն պորտալների և տելեպորտների տեսքերում, ցածր մակարդակները կրճատում են ներդրված էֆեկտները
+
+@ Rippling light patterns on surfaces under water and slime
+hy Ալեկոծվող լուսային նախշեր ջրի և տիղմի տակ գտնվող մակերևույթների վրա
+
+@ Scales all damage you take; above 100% is harder
+hy Մասշտաբավորում է ձեր ստացած ամբողջ վնասը, 100%-ից բարձրն ավելի դժվար է
+
+@ Screen edge for this element; elements on the same spot stack
+hy Էկրանի եզրը այս տարրի համար, նույն տեղում գտնվող տարրերը դասավորվում են իրար վրա
+
+@ Seconds a monster hit by the boomerang stays stunned
+hy Քանի վայրկյան է բումերանգից խոցված հրեշը մնում ապշած
+
+@ Seconds impact marks and stuck nails stay before fading out; independent of Particle Quality
+hy Քանի վայրկյան են հարվածի հետքերն ու խրված մեխերը մնում մինչև խամրելը, կախված չէ մասնիկների որակից
+
+@ Seconds messages at the top of the screen stay up
+hy Քանի վայրկյան են մնում էկրանի վերևի հաղորդագրությունները
+
+@ Seconds the flick stick snap takes; lower is faster
+hy Քանի վայրկյան է տևում ֆլիկ-լծակի շրջումը, ավելի ցածրն ավելի արագ է
+
+@ See through enhanced water; enables Water Opacity
+hy Տեսնել բարելավված ջրի միջով, միացնում է «Ջրի անթափանցություն»-ը
+
+@ Sensor grain, scanlines and flicker of the goggle image
+hy Ակնոցի պատկերի սենսորային հատիկավորությունը, սկանագծերը և թարթումը
+
+@ Shades every anti-aliasing sample; needs Anti-aliasing on
+hy Ստվերավորում է հարթեցման յուրաքանչյուր նմուշը, պահանջում է միացված «Հարթեցում»
+
+@ Shifts colors so they stay distinct for the chosen color blindness
+hy Փոխում է գույները, որպեսզի դրանք տարբերվեն ընտրված դալտոնիզմի դեպքում
+
+@ Shotgun hits leave small surface marks (cosmetic only)
+hy Որսահրացանի հարվածները մակերևույթներին փոքր հետքեր են թողնում (միայն արտաքին էֆեկտ)
+
+@ Show corner ticks at screen centre while locked, even with Crosshair off
+hy Գրավման ժամանակ ցույց տալ անկյունային նշաններ էկրանի կենտրոնում, նույնիսկ անջատված նշանոցով
+
+@ Show where grenades and other arcing shots will fly, bounce and land; local play only, not in deathmatch
+hy Ցույց է տալիս, թե ուր կթռչեն, կցատկեն և կընկնեն նռնակներն ու այլ աղեղնաձև կրակոցները, միայն տեղական խաղում, ոչ դեթմաչում
+
+@ Shows text for important sounds: doors, alerted enemies, secrets, pickups
+hy Ցույց է տալիս տեքստ կարևոր ձայների համար: դռներ, զգաստացած թշնամիներ, գաղտնիքներ, հավաքվող առարկաներ
+
+@ Shows the distance fog that maps and mods set; off always gives clear view
+hy Ցույց է տալիս քարտեզների և մոդերի սահմանած հեռավոր մառախուղը, անջատվածը միշտ տալիս է պարզ տեսք
+
+@ Shows the player face next to the health number
+hy Ցույց է տալիս խաղացողի դեմքը առողջության թվի կողքին
+
+@ Simulation detail, step rate, fade-out lifetimes and caps for gibs and shrapnel; low also skips mover collision
+hy Մոդելավորման մանրամասնությունը, քայլի հաճախականությունը, խամրման ժամանակները և մսակտորների ու շրապնելի սահմանները, ցածրը բաց է թողնում նաև շարժվող օբյեկտների հետ բախումը
+
+@ Size of the on-screen buttons and move stick
+hy Էկրանային կոճակների և շարժման լծակի չափը
+
+@ Slowly heals up to 100 health after 5 seconds without being hit
+hy Դանդաղ բուժում է մինչև 100 առողջություն՝ 5 վայրկյան առանց հարված ստանալուց հետո
+
+@ Slows stick look while the crosshair is over an enemy
+hy Դանդաղեցնում է լծակով նայելը, երբ նշանոցը թշնամու վրա է
+
+@ Slows the game down while the weapon wheel is open
+hy Դանդաղեցնում է խաղը, երբ զենքի անիվը բաց է
+
+@ Slows the whole game down; single player only. Saves and demos stay compatible with other ports
+hy Դանդաղեցնում է ամբողջ խաղը, միայն միանձնյա խաղում։ Պահպանումներն ու դեմոները մնում են համատեղելի այլ պորտերի հետ
+
+@ Small camera jolt on each freeze; off with Reduce Motion
+hy Տեսախցիկի թեթև ցնցում յուրաքանչյուր սառեցման ժամանակ, անջատվում է «Նվազեցնել շարժումը»-ով
+
+@ Snap and track enemies in local play, including split-screen; unavailable online
+hy Գրավել և հետևել թշնամիներին տեղական խաղում, ներառյալ բաժանված էկրանը, անհասանելի է առցանց
+
+@ Sparks, smoke, chips, splinters and splashes fly off whatever your shots hit
+hy Կայծեր, ծուխ, փշուրներ, տաշեղներ և ցայտքեր են թռչում այն ամենից, ինչին կպչում են ձեր կրակոցները
+
+@ Spawns extra copies of every monster around the original when a level starts
+hy Մակարդակի սկզբում յուրաքանչյուր հրեշի շուրջ ստեղծում է նրա լրացուցիչ պատճեններ
+
+@ Strength of the full-screen flashes for damage, pickups and powerups
+hy Վնասի, հավաքվող առարկաների և ուժեղացումների լիաէկրան բռնկումների ուժգնությունը
+
+@ Stretch or shorten the sound while keeping its pitch
+hy Ձգել կամ կրճատել ձայնը՝ պահպանելով տոնը
+
+@ Surface opacity; requires Enhanced Water and Translucent Water
+hy Մակերևույթի անթափանցություն, պահանջում է «Բարելավված ջուր» և «Կիսաթափանցիկ ջուր»
+
+@ The hook latches onto metal surfaces (metal, tech, computer panels, copper)
+hy Կեռիկը կառչում է մետաղական մակերևույթներից (մետաղ, տեխնիկա, համակարգչային վահանակներ, պղինձ)
+
+@ The hook latches onto stone, brick, rock and any surface not recognised as wood or metal
+hy Կեռիկը կառչում է քարից, աղյուսից, ժայռից և ցանկացած մակերևույթից, որը չի ճանաչվել որպես փայտ կամ մետաղ
+
+@ The hook latches onto wooden surfaces (texture names like wood, crate, plank)
+hy Կեռիկը կառչում է փայտե մակերևույթներից (տեքստուրաների անուններ, ինչպիսիք են wood, crate, plank)
+
+@ Turn the controller's motion sensor into a look input; needs a pad with a gyroscope
+hy Կարգավարի շարժման սենսորը դարձնում է նայելու մուտք, պահանջում է գիրոսկոպով կարգավար
+
+@ Turns off view bob, strafe tilt and the camera kick when hit or firing
+hy Անջատում է տեսախցիկի օրորումը, կողաքայլի թեքումը և տեսախցիկի ցնցումը հարվածից կամ կրակելիս
+
+@ Turns on the extra liquid effects; Water Settings controls each one
+hy Միացնում է հեղուկների լրացուցիչ էֆեկտները, «Ջրի կարգավորումներ»-ը կառավարում է յուրաքանչյուրը
+
+@ Turns the view to follow a moving enemy you are aiming at
+hy Պտտում է տեսքը՝ հետևելով այն շարժվող թշնամուն, որին նշան եք բռնել
+
+@ Turns the view when you roll the controller sideways; 0 disables it, negative reverses it
+hy Պտտում է տեսքը, երբ կարգավարը թեքում եք կողքի, 0-ն անջատում է, բացասականը՝ շրջում
+
+@ Two-portal gun: fire and alt-fire place linked portals on flat walls; assign a weapon slot in Add-ons
+hy Երկպորտալ զենք: կրակն ու այլընտրանքային կրակը տեղադրում են կապակցված պորտալներ հարթ պատերին, նշանակեք զենքի բնիկ «Հավելումներ»-ում
+
+@ Unlocks the FX Settings page: enhanced particles, impact effects and blood splatter
+hy Բացում է «Էֆեկտների կարգավորումներ» էջը: բարելավված մասնիկներ, հարվածի էֆեկտներ և արյան շաղեր
+
+@ Uses the 2021 re-release's smoother MD5 models (and MD3 replacements from mods) instead of the classic ones. Applies on the next map load
+hy Դասական մոդելների փոխարեն օգտագործում է 2021 թ. վերաթողարկման ավելի հարթ MD5 մոդելները (և մոդերի MD3 փոխարինումները)։ Կիրառվում է հաջորդ քարտեզը բեռնելիս
+
+@ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
+hy Օգտագործում է քարտեզի գունավոր լույսը (.lit ֆայլ կամ BSPX բլոկ), անջատվածը տալիս է սովորական սպիտակ լույս։ Կիրառվում է հաջորդ քարտեզը բեռնելիս
+
+@ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
+hy Ջրաշիթի հատվածները, կաթիլների քանակը և հեղուկի փայլուն ստվերավորումը: ցածրն օգտագործում է ավելի պարզ կիսաթափանցիկ հոսքեր, բարձրը՝ հարթ փայլուն շիթեր
+
+@ When gyro looking applies: always, off while +gyroaction is held, or only while it is held
+hy Երբ է գործում գիրոյով նայելը: միշտ, անջատված՝ +gyroaction պահելիս, կամ միայն այն պահելիս
+
+@ Which weapons trigger the freeze; melee covers the axe and any mod weapon used at close range without ammo
+hy Որ զենքերն են առաջացնում սառեցումը, մերձամարտը ներառում է կացինը և մոդերի ցանկացած զենք, որն օգտագործվում է մոտիկից առանց զինամթերքի
+
+@ Your own rockets and grenades don't hurt you; rocket jumps still work
+hy Ձեր սեփական հրթիռներն ու նռնակները ձեզ չեն վնասում, հրթիռային ցատկերը դեռ աշխատում են
+
+# ==== ui.txt ====
+
+# Menus and pop-ups outside the options pages: save cards, launch, presets,
+# add-on browser, map packs, hints and dialogs.
+@ Select
+hy Ընտրել
+
+@ Back
+hy Հետ
+
+@ Cancel
+hy Չեղարկել
+
+@ Confirm
+hy Հաստատել
+
+@ Scroll
+hy Ոլորել
+
+@ Section
+hy Բաժին
+
+@ Bind
+hy Նշանակել
+
+@ Cancel binding
+hy Չեղարկել նշանակումը
+
+@ Clear
+hy Մաքրել
+
+@ Clear pad
+hy Մաքրել կարգավարը
+
+@ Remap
+hy Վերանշանակել
+
+@ Type
+hy Մուտքագրել
+
+@ Shift
+hy Shift
+
+@ Done
+hy Պատրաստ է
+
+@ Del
+hy Ջնջ.
+
+@ Space
+hy Բացատ
+
+@ Save
+hy Պահպանել
+
+@ Load
+hy Բեռնել
+
+@ Delete
+hy Ջնջել
+
+@ Play
+hy Խաղալ
+
+@ Yes
+hy Այո
+
+@ No
+hy Ոչ
+
+@ OK
+hy OK
+
+@ System
+hy Համակարգ
+
+@ Language
+hy Լեզու
+
+@ Help
+hy Օգնություն
+
+@ Fixed for this game: it was started without Customize
+hy Ֆիքսված է այս խաղի համար: այն սկսվել է առանց «Հարմարեցում»-ի
+
+@ Press a button or key to bind (Start cancels)
+hy Սեղմեք կոճակ կամ ստեղն նշանակելու համար (Start-ը չեղարկում է)
+
+@ Press button...
+hy Սեղմեք կոճակ...
+
+@ Press key...
+hy Սեղմեք ստեղն...
+
+@ Replace this binding?
+hy Փոխարինե՞լ այս նշանակումը
+
+@ is already assigned
+hy արդեն նշանակված է
+
+@ {} already assigned
+hy {} արդեն նշանակված է
+
+@ Open Controls to remap Lock-on?
+hy Բացե՞լ կառավարումը՝ թիրախի գրավումը վերանշանակելու համար
+
+@ Lock-on
+hy Թիրախի գրավում
+
+@ Auto-aim Toggle
+hy Ավտոնշանառման փոխարկում
+
+@ Keyboard
+hy Ստեղնաշար
+
+@ Controller
+hy Կարգավար
+
+# main menu, dialogs and screens
+@ Map Packs
+hy Քարտեզների փաթեթներ
+
+@ Customize
+hy Հարմարեցում
+
+@ Level Select
+hy Մակարդակի ընտրություն
+
+@ Really quit?
+hy Իսկապե՞ս դուրս գալ
+
+@ You died
+hy Դուք զոհվեցիք
+
+@ Continue from most recent save
+hy Շարունակել վերջին պահպանումից
+
+@ Select save
+hy Ընտրել պահպանում
+
+@ Restart level
+hy Վերսկսել մակարդակը
+
+@ Return to main menu
+hy Վերադառնալ գլխավոր ընտրացանկ
+
+@ (disabled)
+hy (անջատված)
+
+@ (fixed for this game)
+hy (ֆիքսված այս խաղի համար)
+
+@ (off)
+hy (անջ.)
+
+@ Apply Display Changes
+hy Կիրառել էկրանի փոփոխությունները
+
+@ Display Mode
+hy Էկրանի ռեժիմ
+
+@ Resolution
+hy Լուծաչափ
+
+@ desktop
+hy աշխատասեղան
+
+@ Preset
+hy Նախադրվածք
+
+@ Map
+hy Քարտեզ
+
+@ Reset Shader Settings
+hy Զրոյացնել շեյդերի կարգավորումները
+
+@ Reset to Defaults
+hy Վերականգնել լռելյայնները
+
+@ Searching...
+hy Որոնում...
+
+@ This game only autosaves.
+hy Այս խաղը միայն ինքնապահպանվում է։
+
+@ (No Manual Saves modifier)
+hy («Առանց ձեռքով պահպանման» մոդիֆիկատոր)
+
+@ End the current game?
+hy Ավարտե՞լ ընթացիկ խաղը
+
+@ Unsaved progress will be lost.
+hy Չպահպանված առաջընթացը կկորի։
+
+@ End game
+hy Ավարտել խաղը
+
+@ Overwrite
+hy Վերագրել
+
+@ Overwrite "{}"?
+hy Վերագրե՞լ «{}» պահպանումը
+
+@ Saved {}
+hy Պահպանվել է {}
+
+@ Start a new game?
+hy Սկսե՞լ նոր խաղ
+
+@ New game
+hy Նոր խաղ
+
+@ New Game
+hy Նոր խաղ
+
+@ CUSTOM
+hy ՀԱՏՈՒԿ
+
+@ Customize Experience
+hy Հարմարեցնել խաղը
+
+@ Disable All
+hy Անջատել բոլորը
+
+@ Disable All Modifications
+hy Անջատել բոլոր փոփոխությունները
+
+@ Saves load in other source ports too.
+hy Պահպանումները բեռնվում են նաև այլ պորտերում։
+
+@ Standard rules, no add-ons.
+hy Ստանդարտ կանոններ, առանց հավելումների։
+
+@ Choose skill
+hy Ընտրեք բարդությունը
+
+@ The current game will end
+hy Ընթացիկ խաղը կավարտվի
+
+@ Easy
+hy Հեշտ
+
+@ Normal
+hy Նորմալ
+
+@ Hard
+hy Դժվար
+
+@ Nightmare
+hy Մղձավանջ
+
+# graphics preset pop-up
+@ Choose a Graphics Preset
+hy Ընտրեք գրաֆիկայի նախադրվածք
+
+@ Classic
+hy Դասական
+
+@ Like the re-release: enhanced models,
+hy Ինչպես վերաթողարկումում՝ բարելավված մոդելներ,
+
+@ no added effects.
+hy առանց լրացուցիչ էֆեկտների։
+
+@ Enhanced
+hy Բարելավված
+
+@ Every enhancement at its highest quality.
+hy Բոլոր բարելավումները՝ ամենաբարձր որակով։
+
+@ Needs a capable GPU.
+hy Պահանջում է հզոր GPU։
+
+@ Low-End
+hy Թույլ համակարգիչ
+
+@ Fastest. No anti-aliasing, original
+hy Ամենաարագը։ Առանց հարթեցման, սկզբնական
+
+@ models, lowest effect quality.
+hy մոդելներ, էֆեկտների նվազագույն որակ։
+
+@ Esc keeps the defaults
+hy Esc-ը պահում է լռելյայնները
+
+@ Everything can be changed later in Options.
+hy Ամեն ինչ կարելի է փոխել հետո՝ Options-ում։
+
+@ Keep Defaults
+hy Պահել լռելյայնները
+
+# save and load cards
+@ Save Game
+hy Պահպանել խաղը
+
+@ Load Game
+hy Բեռնել խաղը
+
+@ Autosaves
+hy Ինքնապահպանումներ
+
+@ newest first
+hy նորերը սկզբում
+
+@ Saves: {}
+hy Պահպանումներ: {}
+
+@ Browse Autosaves
+hy Դիտել ինքնապահպանումները
+
+@ Every retained autosave, newest first
+hy Բոլոր պահված ինքնապահպանումները՝ նորերը սկզբում
+
+@ New save
+hy Նոր պահպանում
+
+@ Select to save your game here
+hy Ընտրեք՝ խաղն այստեղ պահպանելու համար
+
+@ No autosaves yet
+hy Ինքնապահպանումներ դեռ չկան
+
+@ Autosaves are made on level entry, secrets and more (Options > Gameplay)
+hy Ինքնապահպանումները կատարվում են մակարդակ մտնելիս, գաղտնիքներ գտնելիս և այլն (Options > Խաղընթաց)
+
+@ No saves yet
+hy Պահպանումներ դեռ չկան
+
+@ Save from the Single Player menu, or press F6 to quicksave
+hy Պահպանեք Single Player ընտրացանկից կամ սեղմեք F6՝ արագ պահպանման համար
+
+@ No picture
+hy Պատկեր չկա
+
+@ Del: delete save
+hy Del: ջնջել պահպանումը
+
+@ Delete "{}"?
+hy Ջնջե՞լ «{}» պահպանումը
+
+@ This cannot be undone.
+hy Սա հնարավոր չէ հետարկել։
+
+@ Quicksave
+hy Արագ պահպանում
+
+@ Autosave: {}
+hy Ինքնապահպանում: {}
+
+@ unknown trigger
+hy անհայտ պատճառ
+
+@ Latest - {}
+hy Վերջինը - {}
+
+@ Health {}
+hy Առողջություն {}
+
+@ Armor {}
+hy Զրահ {}
+
+@ Kills {}/{}
+hy Սպանված {}/{}
+
+@ Secrets {}/{}
+hy Գաղտնիքներ {}/{}
+
+@ Split-screen, {} players
+hy Բաժանված էկրան, {} խաղացող
+
+@ Co-op
+hy Համատեղ
+
+@ Customized
+hy Հարմարեցված
+
+@ Customized, {}
+hy Հարմարեցված, {}
+
+@ Date unavailable
+hy Ամսաթիվն անհասանելի է
+
+@ Just now
+hy Հենց նոր
+
+@ {} min ago
+hy {} րոպե առաջ
+
+@ {} h ago
+hy {} ժամ առաջ
+
+@ Level entry
+hy Մակարդակի մուտք
+
+@ Secret found
+hy Գտնված գաղտնիք
+
+@ All enemies killed
+hy Բոլոր թշնամիները սպանված են
+
+@ All secrets found
+hy Բոլոր գաղտնիքները գտնված են
+
+@ Timer
+hy Ժամաչափ
+
+# customize pages
+@ Standard rules
+hy Ստանդարտ կանոններ
+
+@ Modifiers changed: {}
+hy Փոխված մոդիֆիկատորներ: {}
+
+@ no add-ons
+hy առանց հավելումների
+
+@ add-ons: {}
+hy հավելումներ: {}
+
+@ Saves of this game are .qsa files: they need this source port.
+hy Այս խաղի պահպանումները .qsa ֆայլեր են: դրանք պահանջում են այս պորտը։
+
+@ Nothing changed: this plays as standard Quake.
+hy Ոչինչ չի փոխվել: սա ստանդարտ Quake է։
+
+@ Changes apply now and are saved with this game (.qsa).
+hy Փոփոխությունները կիրառվում են հիմա և պահպանվում այս խաղի հետ (.qsa)։
+
+@ This game started without Customize, so its rules are fixed.
+hy Այս խաղը սկսվել է առանց հարմարեցման, ուստի նրա կանոնները ֆիքսված են։
+
+@ Start a new game and choose Customize Experience.
+hy Սկսեք նոր խաղ և ընտրեք «Հարմարեցնել խաղը»։
+
+@ These rules apply to the next customized game.
+hy Այս կանոնները կկիրառվեն հաջորդ հարմարեցված խաղում։
+
+# add-on browser
+@ Fire
+hy Կրակ
+
+@ Alt Fire
+hy Այլ. կրակ
+
+@ Configure Parameters >
+hy Կարգավորել պարամետրերը >
+
+@ Configure
+hy Կարգավորել
+
+@ Settings
+hy Կարգավորումներ
+
+@ Change slot
+hy Փոխել բնիկը
+
+@ Toggle
+hy Փոխարկել
+
+@ Details
+hy Մանրամասներ
+
+@ Enter or click the box: toggle
+hy Enter կամ սեղմել վանդակը: միացնել/անջատել
+
+@ Right / Tab / click: details
+hy Աջ / Tab / սեղմում: մանրամասներ
+
+@ Input Remapping
+hy Կոճակների վերանշանակում
+
+@ Weapon Slot
+hy Զենքի բնիկ
+
+@ Customized games save as .qsa files, which need this source port.
+hy Հարմարեցված խաղերը պահպանվում են որպես .qsa ֆայլեր, որոնք պահանջում են այս պորտը։
+
+@ This game started without Customize, so its add-ons are fixed. Customize a new game instead.
+hy Այս խաղը սկսվել է առանց հարմարեցման, ուստի նրա հավելումները ֆիքսված են։ Փոխարենը հարմարեցրեք նոր խաղ։
+
+@ Bullet Time
+hy Դանդաղ ժամանակ
+
+@ Change Goggles
+hy Փոխել ակնոցը
+
+@ Dodge / Dive
+hy Խուսափում / ցատկ
+
+@ Goggles
+hy Ակնոց
+
+@ Hitstop
+hy Հիթսթոփ
+
+@ Projectile Shotguns
+hy Արկային որսահրացաններ
+
+@ BULLET TIME: 20%
+hy ԴԱՆԴԱՂ ԺԱՄԱՆԱԿ: 20%
+
+@ NORMAL SPEED
+hy ՍՈՎՈՐԱԿԱՆ ԱՐԱԳՈՒԹՅՈՒՆ
+
+@ SLOW MOTION: PHYSICAL PELLETS
+hy ԴԱՆԴԱՂԵՑՈՒՄ: ՖԻԶԻԿԱԿԱՆ ԿՈՏՈՐԱԿ
+
+@ DEMONSTRATION
+hy ՑՈՒՑԱԴՐՈՒԹՅՈՒՆ
+
+@ GAMEPLAY
+hy ԽԱՂԸՆԹԱՑ
+
+@ LOOP
+hy ՑԻԿԼ
+
+@ Preview unavailable
+hy Նախադիտումն անհասանելի է
+
+# shader and language help lines
+@ A setting of the chosen shader; arrows step it, Enter is not needed
+hy Ընտրված շեյդերի կարգավորում, սլաքները փոխում են այն, Enter-ը պետք չէ
+
+@ Language of the menus, messages and the 2021 re-release's game text; System follows your computer's language
+hy Ընտրացանկերի, հաղորդագրությունների և 2021 թ. վերաթողարկման խաղային տեքստի լեզուն, «Համակարգ»-ը հետևում է ձեր համակարգչի լեզվին
+
+@ Puts every setting of the chosen shader back to the preset's defaults
+hy Վերադարձնում է ընտրված շեյդերի բոլոր կարգավորումները նախադրվածքի լռելյայն արժեքներին
+
+@ RetroArch slang shader on the final image: CRT, scanlines, NTSC, sharpening; add your own in <game>/shaders
+hy RetroArch slang շեյդեր վերջնական պատկերի վրա: CRT, սկանագծեր, NTSC, սրացում, ավելացրեք ձերը <game>/shaders-ում
+
+# modern console footer
+@ Shift+PgUp/Dn: height  ` : hide
+hy Shift+PgUp/Dn: բարձրություն  ` : թաքցնել
+
+@ Tab: complete  Ctrl+R: search  bash | pipe
+hy Tab: լրացում  Ctrl+R: որոնում  bash | խողովակ
+
+@ ↑ +{} lines (End to jump) 
+hy ↑ +{} տող (End՝ անցնել) 
+
+# add-on descriptions
+@ Create two linked portals on flat walls. Fire places the first portal; Alt Fire places the second. Walk through either portal to emerge from the other. Your momentum carries through. Assign a weapon slot below: pressing that slot repeatedly cycles its ordinary weapon and every enabled add-on assigned there. Portal view quality is configurable below.
+hy Ստեղծեք երկու կապակցված պորտալ հարթ պատերին։ Կրակը տեղադրում է առաջին պորտալը, այլընտրանքային կրակը՝ երկրորդը։ Անցեք որևէ պորտալով՝ մյուսից դուրս գալու համար։ Ձեր թափը պահպանվում է։ Ստորև նշանակեք զենքի բնիկ: այդ բնիկը կրկնակի սեղմելիս հերթով ընտրվում են նրա սովորական զենքը և այնտեղ նշանակված բոլոր միացված հավելումները։ Պորտալի տեսքի որակը կարգավորվում է ստորև։
+
+@ Hold Fire and sweep the crosshair over monsters to queue targets. Release Fire to throw: the boomerang visits each target, stuns it and returns to you. Alt Fire clears the queue. The weapon slot selects a group, not a separate hotkey: press it again to cycle through the weapons in that slot. Configure stun duration and flight speed below.
+hy Պահեք կրակը և նշանոցով անցեք հրեշների վրայով՝ թիրախները հերթագրելու համար։ Բաց թողեք կրակը՝ նետելու համար: բումերանգն այցելում է յուրաքանչյուր թիրախի, ապշեցնում այն և վերադառնում ձեզ մոտ։ Այլընտրանքային կրակը մաքրում է հերթը։ Զենքի բնիկն ընտրում է խումբ, ոչ թե առանձին ստեղն: սեղմեք այն կրկին՝ այդ բնիկի զենքերի միջով անցնելու համար։ Ապշեցման տևողությունը և թռիչքի արագությունը կարգավորեք ստորև։
+
+@ Hold Fire to charge a sticky bomb using rocket ammunition; release to launch. A longer charge throws it faster. Bombs cling to walls, doors and monsters. Alt Fire detonates your planted bombs together. Place a trap, retreat, then detonate it when enemies approach. Assign any weapon slot below; repeated presses cycle through the ordinary weapon and add-ons in that slot.
+hy Պահեք կրակը՝ կպչուն ռումբը հրթիռների զինամթերքով լիցքավորելու համար, բաց թողեք՝ նետելու համար։ Ավելի երկար լիցքավորումն այն ավելի արագ է նետում։ Ռումբերը կպչում են պատերին, դռներին և հրեշներին։ Այլընտրանքային կրակը միաժամանակ պայթեցնում է ձեր տեղադրած ռումբերը։ Դրեք թակարդ, նահանջեք, ապա պայթեցրեք այն, երբ թշնամիները մոտենան։ Ստորև նշանակեք ցանկացած զենքի բնիկ: կրկնակի սեղմումները հերթով ընտրում են այդ բնիկի սովորական զենքն ու հավելումները։
+
+@ Fire launches a chain hook. It latches onto a permitted surface or enemy and reels you toward the anchor. Fire again or use Alt Fire to let go. Choose which materials and enemies can be hooked in Configure Parameters. Assign it to any weapon slot; repeated presses of the slot's existing binding cycle through its weapons.
+hy Կրակը նետում է շղթայով կեռիկ։ Այն կառչում է թույլատրված մակերևույթից կամ թշնամուց և քաշում ձեզ դեպի խարիսխը։ Կրկին կրակեք կամ օգտագործեք այլընտրանքային կրակը՝ բաց թողնելու համար։ Ընտրեք, թե որ նյութերից և թշնամիներից կարելի է կառչել, «Կարգավորել պարամետրերը» բաժնում։ Նշանակեք այն ցանկացած զենքի բնիկի: բնիկի առկա նշանակման կրկնակի սեղմումները հերթով ընտրում են նրա զենքերը։
+
+@ A piercing railgun inspired by Quake III. Fire sends a slug through every enemy along its line. Each shot consumes two cells, with a 1.5 second refire interval. Damage and the spiral trail colour are configurable below. Choose a weapon slot: the slot's current binding selects and cycles the weapons assigned to it.
+hy Quake III-ից ոգեշնչված խոցող ռեյլգան։ Կրակն արկ է ուղարկում իր գծի բոլոր թշնամիների միջով։ Յուրաքանչյուր կրակոց ծախսում է երկու բջիջ, կրակոցների միջև՝ 1,5 վայրկյան։ Վնասը և պարուրաձև հետքի գույնը կարգավորվում են ստորև։ Ընտրեք զենքի բնիկ: բնիկի ընթացիկ նշանակումն ընտրում և հերթով փոխում է իրեն նշանակված զենքերը։
+
+@ A Portal-style gel sprayer. Fire sprays blue Repulsion gel: land, jump or run into it to bounce, and landings on it never hurt. Alt Fire sprays orange Propulsion gel: run across it to go much faster. Gel coats floors and walls until washed off with the Powerwasher. Assign a weapon slot below; repeated presses cycle the weapons in that slot.
+hy Portal-ի ոճով գելացիր։ Կրակը ցանում է կապույտ վանող գել: վայրէջք կատարեք, ցատկեք կամ վազեք դրա վրա՝ ցատկոտելու համար, իսկ դրա վրա վայրէջքները երբեք չեն վնասում։ Այլընտրանքային կրակը ցանում է նարնջագույն արագացնող գել: վազեք դրա վրայով՝ շատ ավելի արագ շարժվելու համար։ Գելը ծածկում է հատակներն ու պատերը, մինչև այն լվացվի Հիդրոլվացիչով։ Ստորև նշանակեք զենքի բնիկ, կրկնակի սեղմումները հերթով ընտրում են այդ բնիկի զենքերը։
+
+@ A water cannon. Fire shoots a straight jet with limited reach; Alt Fire a wide, shorter fan. The water pushes enemies back, turns projectiles aside and washes away gel and blood. Push strength is configurable below. Assign a weapon slot below; repeated presses cycle the weapons in that slot.
+hy Ջրցան թնդանոթ։ Կրակն արձակում է սահմանափակ հեռահարությամբ ուղիղ շիթ, այլընտրանքային կրակը՝ լայն, ավելի կարճ հովհար։ Ջուրը հետ է մղում թշնամիներին, շեղում արկերը և լվանում գելն ու արյունը։ Հրման ուժը կարգավորվում է ստորև։ Ստորև նշանակեք զենքի բնիկ, կրկնակի սեղմումները հերթով ընտրում են այդ բնիկի զենքերը։
+
+@ One equipment add-on includes both night vision and thermal vision. The Change Goggles action cycles Normal, Night Vision, Thermal, then Normal again. Night vision brightens dark rooms; thermal vision highlights living enemies. Goggles do not occupy a weapon slot. Configure intensity and sensor noise below. The binding affects only this add-on.
+hy Մեկ հանդերձանքային հավելում ներառում է և՛ գիշերային, և՛ ջերմային տեսողություն։ «Փոխել ակնոցը» գործողությունը հերթով ընտրում է Սովորական, Գիշերային տեսողություն, Ջերմային, ապա կրկին Սովորական։ Գիշերային տեսողությունը լուսավորում է մութ սենյակները, ջերմայինն ընդգծում է կենդանի թշնամիներին։ Ակնոցը զենքի բնիկ չի զբաղեցնում։ Ուժգնությունը և սենսորի աղմուկը կարգավորեք ստորև։ Նշանակումն ազդում է միայն այս հավելման վրա։
+
+@ Press Dodge with a movement direction on the ground or in midair: dive forward or leap backward and sideways. Diagonals are supported. Each press launches once, with a short recovery. The player body animates in third person. Assign the Dodge action below or in Controls.
+hy Սեղմեք «Խուսափում»-ը շարժման ուղղության հետ գետնին կամ օդում: նետվեք առաջ կամ ցատկեք հետ և կողքի։ Անկյունագծերն աջակցվում են։ Յուրաքանչյուր սեղմում մեկ անգամ է նետում, կարճ վերականգնմամբ։ Երրորդ դեմքից խաղացողի մարմինն անիմացվում է։ Նշանակեք «Խուսափում» գործողությունը ստորև կամ «Կառավարում» բաժնում։
+
+@ Use the dedicated Bullet Time action to slow the whole local game to 20% speed. Hold is the default; Toggle switches on each press. The optional meter limits use in real seconds and regenerates while inactive. Disable the meter for unlimited use. Remap the action and configure duration and regeneration below.
+hy Օգտագործեք հատուկ «Դանդաղ ժամանակ» գործողությունը՝ ամբողջ տեղական խաղը մինչև 20% արագություն դանդաղեցնելու համար։ Լռելյայն՝ պահել, փոխարկումը միացնում/անջատում է յուրաքանչյուր սեղմումով։ Ընտրովի սանդղակը սահմանափակում է օգտագործումն իրական վայրկյաններով և վերականգնվում է անգործության ժամանակ։ Անջատեք սանդղակը՝ անսահմանափակ օգտագործման համար։ Վերանշանակեք գործողությունը և կարգավորեք տևողությունն ու վերականգնումը ստորև։
+
+@ Both shotguns and enemy grunts fire physical pellets with their original spread and damage. Fast default projectiles feel immediate; lower their speed to dodge incoming fire during bullet time. Configure projectile speed below, or reset it to the default of 10000 units per second.
+hy Երկու որսահրացաններն էլ և թշնամի զինվորները կրակում են ֆիզիկական կոտորակով՝ սկզբնական ցրվածությամբ և վնասով։ Արագ լռելյայն արկերը զգացվում են ակնթարթային, իջեցրեք դրանց արագությունը՝ դանդաղ ժամանակում հակառակորդի կրակից խուսափելու համար։ Կարգավորեք արկի արագությունը ստորև կամ վերադարձրեք լռելյայն 10000 միավոր/վայրկյան արժեքին։
+
+@ Freezes the game for a split second when you damage an enemy, so hits feel heavier. Single player only. Choose which weapons trigger it (all, melee, ranged or explosives), how long it lasts and how much more a kill freezes. Advanced settings cover enemy toughness, damage scaling, cooldown and the longest freeze.
+hy Սառեցնում է խաղը վայրկյանի մի մասով, երբ վնասում եք թշնամուն, որպեսզի հարվածներն ավելի ծանր զգացվեն։ Միայն միանձնյա խաղում։ Ընտրեք, թե որ զենքերն են այն առաջացնում (բոլորը, մերձամարտ, հեռահար կամ պայթուցիկներ), որքան է այն տևում և որքան ավելի է սառեցնում սպանությունը։ Լրացուցիչ կարգավորումները ներառում են թշնամու դիմացկունությունը, վնասի մասշտաբը, վերալիցքավորումը և ամենաերկար սառեցումը։
+
+# map packs and the Quaddicted browser
+@ Get more maps (Quaddicted)...
+hy Ավելի շատ քարտեզներ (Quaddicted)...
+
+@ Type to filter...
+hy Մուտքագրեք՝ զտելու համար...
+
+@ Launch mod
+hy Գործարկել մոդը
+
+@ Start first map
+hy Սկսել առաջին քարտեզը
+
+@ (running)
+hy (գործում է)
+
+@ running
+hy գործում է
+
+@ Recent
+hy Վերջինները
+
+@ Name
+hy Անուն
+
+@ Dir
+hy Պանակ
+
+@ Default
+hy Լռելյայն
+
+@ Title
+hy Վերնագիր
+
+@ Sort: {}
+hy Դասավորել: {}
+
+@ {} installed
+hy {} տեղադրված
+
+@ {}/{} matching
+hy {}/{} համընկնող
+
+@ {} maps, {} completed
+hy {} քարտեզ, {} ավարտված
+
+@ {}/{} matching, {} completed
+hy {}/{} համընկնող, {} ավարտված
+
+@ no maps of its own
+hy սեփական քարտեզներ չկան
+
+@ dir: {}
+hy պանակ: {}
+
+@ base: {}
+hy հիմք: {}
+
+@ Browse the Quaddicted archive of
+hy Դիտեք Quaddicted-ի արխիվը՝
+
+@ single-player maps and episodes,
+hy միանձնյա քարտեզներով և դրվագներով,
+
+@ then download and install them
+hy ապա ներբեռնեք և տեղադրեք դրանք
+
+@ here. Each release gets its own
+hy այստեղ։ Յուրաքանչյուր թողարկում ստանում է
+
+@ entry in this list.
+hy իր տողն այս ցանկում։
+
+@ Needs an internet connection.
+hy Պահանջում է ինտերնետ կապ։
+
+@ Quaddicted Map Archive
+hy Quaddicted քարտեզների արխիվ
+
+@ Newest
+hy Ամենանորերը
+
+@ Author
+hy Հեղինակ
+
+@ Size
+hy Չափ
+
+@ Loading the map list...
+hy Քարտեզների ցանկը բեռնվում է...
+
+@ Couldn't load the map list: {}
+hy Չհաջողվեց բեռնել քարտեզների ցանկը: {}
+
+@ {} single-player releases  -  F5 refreshes
+hy {} միանձնյա թողարկում  -  F5՝ թարմացնել
+
+@ {} matching
+hy {} համընկնող
+
+@ by {}
+hy հեղինակ՝ {}
+
+@ requires: {}
+hy պահանջում է: {}
+
+@ maps: {}
+hy քարտեզներ: {}
+
+@ Failed: {}
+hy Ձախողում: {}
+
+@ Downloading... {}%
+hy Ներբեռնում... {}%
+
+@ Unpacking...
+hy Բացում...
+
+@ Installed in {}/  -  Enter: play
+hy Տեղադրված է {}/ պանակում  -  Enter: խաղալ
+
+@ Enter: download and install
+hy Enter: ներբեռնել և տեղադրել
+
+@ unpacking
+hy բացվում է
+
+@ failed
+hy ձախողվեց
+
+@ installed
+hy տեղադրված է
+
+@ Downloads are not available in the browser build
+hy Ներբեռնումները հասանելի չեն բրաուզերային տարբերակում
+
+@ the map list could not be read
+hy քարտեզների ցանկը հնարավոր չեղավ կարդալ
+
+@ downloading needs the curl program
+hy ներբեռնման համար անհրաժեշտ է curl ծրագիրը
+
+@ download failed
+hy ներբեռնումը ձախողվեց
+
+@ the download is not a valid zip
+hy ներբեռնված ֆայլը վավեր zip չէ
+
+@ nothing to install for this engine
+hy այս շարժիչի համար տեղադրելու բան չկա
+
+@ needs {} installed first
+hy նախ պետք է տեղադրել {}
+
+@ couldn't unpack {}
+hy չհաջողվեց բացել {}
+
+# help screen
+@ About
+hy Ծրագրի մասին
+
+@ < Back
+hy < Հետ
+
+# tr_ctx keys: English shows the short word, the key says which meaning
+@ Save (a manual save, as opposed to a quicksave or autosave)
+hy Պահպանում
+
+# ==== hud.txt ====
+
+# HUD, weapon and equipment wheels, sound captions and other in-game text.
+# Weapon, monster and item names follow the 2021 re-release's own translations.
+@ Axe
+hy Կացին
+
+@ Shotgun
+hy Որսահրացան
+
+@ Double-Barrelled Shotgun
+hy Երկփողանի որսահրացան
+
+@ Nailgun
+hy Մեխաձիգ
+
+@ Super Nailgun
+hy Գերմեխաձիգ
+
+@ Grenade Launcher
+hy Նռնականետ
+
+@ Rocket Launcher
+hy Հրթիռանետ
+
+@ Thunderbolt
+hy Շանթ
+
+@ Portal Gun
+hy Պորտալային զենք
+
+@ Boomerang
+hy Բումերանգ
+
+@ Stickybomb Launcher
+hy Կպչուն ռումբանետ
+
+@ Railgun
+hy Ռեյլգան
+
+@ Hookshot
+hy Կեռիկ
+
+@ Gel Sprayer
+hy Գելացիր
+
+@ Powerwasher
+hy Հիդրոլվացիչ
+
+@ Night Vision Goggles
+hy Գիշերային տեսողության ակնոց
+
+@ Thermal Goggles
+hy Ջերմային ակնոց
+
+@ Normal vision
+hy Սովորական տեսողություն
+
+@ ON
+hy ՄԻԱՑ.
+
+@ OFF
+hy ԱՆՋ.
+
+@ {} (turn on)
+hy {} (միացնել)
+
+@ {} (turn off)
+hy {} (անջատել)
+
+@ Move mouse to select, release to toggle
+hy Շարժեք մկնիկը՝ ընտրելու համար, բաց թողեք՝ փոխարկելու համար
+
+@ Move mouse to select, release to equip
+hy Շարժեք մկնիկը՝ ընտրելու համար, բաց թողեք՝ զինվելու համար
+
+@ Release to toggle
+hy Բաց թողեք՝ փոխարկելու համար
+
+@ Release to equip
+hy Բաց թողեք՝ զինվելու համար
+
+@ shells
+hy պարկուճներ
+
+@ nails
+hy մեխեր
+
+@ rockets
+hy հրթիռներ
+
+@ cells
+hy բջիջներ
+
+@ Kills: {}/{}
+hy Սպանված: {}/{}
+
+@ Secrets: {}/{}
+hy Գաղտնիքներ: {}/{}
+
+@ Time {}
+hy Ժամանակ {}
+
+@ Press any button to continue...
+hy Սեղմեք ցանկացած կոճակ՝ շարունակելու համար...
+
+@ Press any key to continue...
+hy Սեղմեք ցանկացած ստեղն՝ շարունակելու համար...
+
+@ BULLET TIME
+hy ԴԱՆԴԱՂ ԺԱՄԱՆԱԿ
+
+@ AUTO AIM
+hy ԱՎՏՈՆՇԱՆԱՌՈՒՄ
+
+@ Crosshair
+hy Նշանոց
+
+@ + Marker
+hy + Նշիչ
+
+@ Hit markers off
+hy Խոցման նշիչներն անջատված են
+
+@ On target
+hy Թիրախի վրա
+
+@ On kill
+hy Սպանելիս
+
+# sound captions
+@ [Secret found]
+hy [Գաղտնիք է գտնվել]
+
+@ [Message]
+hy [Հաղորդագրություն]
+
+@ [Switch activated]
+hy [Անջատիչն ակտիվացավ]
+
+@ [Key picked up]
+hy [Բանալին վերցվեց]
+
+@ [Rune picked up]
+hy [Ռունան վերցվեց]
+
+@ [Teleporter]
+hy [Տելեպորտ]
+
+@ [Teleport]
+hy [Տելեպորտացում]
+
+@ [Splash]
+hy [Ճողփյուն]
+
+@ [Leaving water]
+hy [Ելք ջրից]
+
+@ [Door]
+hy [Դուռ]
+
+@ [Platform moving]
+hy [Հարթակը շարժվում է]
+
+@ [Button]
+hy [Կոճակ]
+
+@ [Health picked up]
+hy [Առողջությունը վերցվեց]
+
+@ [Armor picked up]
+hy [Զրահը վերցվեց]
+
+@ [Quad Damage wearing off]
+hy [Քառակի վնասը սպառվում է]
+
+@ [Quad Damage]
+hy [Քառակի վնաս]
+
+@ [Pentagram wearing off]
+hy [Պենտագրամը սպառվում է]
+
+@ [Pentagram of Protection]
+hy [Պաշտպանության պենտագրամ]
+
+@ [Ring wearing off]
+hy [Մատանին սպառվում է]
+
+@ [Ring of Shadows]
+hy [Ստվերների մատանի]
+
+@ [Biosuit wearing off]
+hy [Բիոկոստյումը սպառվում է]
+
+@ [Biosuit]
+hy [Բիոկոստյում]
+
+@ [Item picked up]
+hy [Առարկան վերցվեց]
+
+@ [Weapon picked up]
+hy [Զենքը վերցվեց]
+
+@ [Ammo picked up]
+hy [Զինամթերքը վերցվեց]
+
+@ [Explosion]
+hy [Պայթյուն]
+
+@ [Grenade launched]
+hy [Նռնակն արձակվեց]
+
+@ [Grenade bounce]
+hy [Նռնակը ցատկեց]
+
+@ [Rocket fired]
+hy [Հրթիռն արձակվեց]
+
+@ [Nails fired]
+hy [Մեխեր են արձակվում]
+
+@ [Lightning]
+hy [Կայծակ]
+
+@ [Thunder]
+hy [Որոտ]
+
+@ [Enforcer alerted]
+hy [Զրահազինվորը զգաստացավ]
+
+@ [Grunt alerted]
+hy [Զինվորը զգաստացավ]
+
+@ [Rottweiler alerted]
+hy [Ռոտվեյլերը զգաստացավ]
+
+@ [Knight alerted]
+hy [Ասպետը զգաստացավ]
+
+@ [Death Knight alerted]
+hy [Մահվան ասպետը զգաստացավ]
+
+@ [Scrag alerted]
+hy [Սքրեգը զգաստացավ]
+
+@ [Ogre alerted]
+hy [Օգրը զգաստացավ]
+
+@ [Fiend alerted]
+hy [Դևը զգաստացավ]
+
+@ [Shambler alerted]
+hy [Շամբլերը զգաստացավ]
+
+@ [Zombie groaning]
+hy [Զոմբին տնքում է]
+
+@ [Vore alerted]
+hy [Վորը զգաստացավ]
+
+@ [Vore attacking]
+hy [Վորը գրոհում է]
+
+@ [Spawn alerted]
+hy [Սփոնը զգաստացավ]
+
+@ [Rotfish]
+hy [Նեխաձուկ]
+
+@ [Spawn]
+hy [Սփոն]
+
+@ [Chthon]
+hy [Քթոն]
+
+@ [Hard landing]
+hy [Կոշտ վայրէջք]
+
+@ [Drowning]
+hy [Խեղդվում եք]
+
+@ [Gasping for air]
+hy [Շնչակտուր]
+
+@ [Burning]
+hy [Այրվում եք]
+
+@ [Telefrag]
+hy [Տելեֆրագ]
+
+@ [Gibbed]
+hy [Ջախջախված]
+
+# ==== console.txt ====
+
+# Console messages, shown translated only with con_translate 1 (Translate Console).
+# Cvar and command names stay as they are.
+@ Autosaved.
+hy Ինքնապահպանված է։
+
+@ Game saved.
+hy Խաղը պահպանված է։
+
+@ Can't save now.
+hy Հիմա հնարավոր չէ պահպանել։
+
+@ This game only autosaves (No Manual Saves modifier).
+hy Այս խաղը միայն ինքնապահպանվում է («Առանց ձեռքով պահպանման» մոդիֆիկատոր)։
+
+@ Loading {}...
+hy Բեռնվում է {}...
+
+@ load failed: {}
+hy բեռնումը ձախողվեց: {}
+
+@ ERROR: autosave failed: {}
+hy ՍԽԱԼ: ինքնապահպանումը ձախողվեց: {}
+
+@ ERROR: couldn't open {}
+hy ՍԽԱԼ: չհաջողվեց բացել {}
+
+@ ERROR: couldn't open {}.
+hy ՍԽԱԼ: չհաջողվեց բացել {}։
+
+@ ERROR: couldn't write {}: {}
+hy ՍԽԱԼ: չհաջողվեց գրել {}: {}
+
+@ ERROR: couldn't create {}: {}
+hy ՍԽԱԼ: չհաջողվեց ստեղծել {}: {}
+
+@ couldn't write {}: {}
+hy չհաջողվեց գրել {}: {}
+
+@ Wrote {}
+hy Գրված է {}
+
+@ screenshot failed: {}
+hy էկրանանկարը ձախողվեց: {}
+
+@ screenshot: {}
+hy էկրանանկար: {}
+
+@ No readable save available. Select save or restart the level.
+hy Ընթեռնելի պահպանում չկա։ Ընտրեք պահպանում կամ վերսկսեք մակարդակը։
+
+@ Unknown command "{}"
+hy Անհայտ հրաման «{}»
+
+@ couldn't exec {}
+hy չհաջողվեց կատարել {}
+
+@ execing {}
+hy կատարվում է {}
+
+@ execing config.cfg (inherited from {})
+hy կատարվում է config.cfg (ժառանգված՝ {})
+
+@ execing config.cfg (mod defaults)
+hy կատարվում է config.cfg (մոդի լռելյայններ)
+
+@ execing default.cfg (built-in)
+hy կատարվում է default.cfg (ներկառուցված)
+
+@ {} cvars
+hy {} cvar
+
+@ {} commands
+hy {} հրաման
+
+@ Can't "cmd", not connected
+hy Հնարավոր չէ «cmd», կապ չկա
+
+@ Looking for Quake servers...
+hy Quake սերվերների որոնում...
+
+@ Bad value, must be between 1 and 65534
+hy Սխալ արժեք, պետք է լինի 1-ից 65534
+
+@ Couldn't handle music file {}
+hy Չհաջողվեց մշակել երաժշտական ֆայլը {}
+
+@ Bug report written to {}
+hy Սխալի հաշվետվությունը գրվեց՝ {}
+
+@ bugreport: can't create {}: {}
+hy bugreport: չհաջողվեց ստեղծել {}: {}
+
+@ graphics preset: {}
+hy գրաֆիկայի նախադրվածք: {}
+
+@ Presets (r_shader_preset <name>):
+hy Նախադրվածքներ (r_shader_preset <name>):
+
+@ Add your own .slangp presets under <game>/shaders/.
+hy Ավելացրեք ձեր սեփական .slangp նախադրվածքները <game>/shaders/ պանակում։
+
+@ no shader preset loaded (r_shader_preset)
+hy շեյդերի նախադրվածք բեռնված չէ (r_shader_preset)
+
+@ r_shader_preset: "{}" not found
+hy r_shader_preset: «{}» չի գտնվել
+
+@ no parameter "{}" in this preset
+hy այս նախադրվածքում «{}» պարամետր չկա
+
+@ {} = {} (default {}, {}..{})
+hy {} = {} (լռելյայն {}, {}..{})
+
+@ Switching to {}...
+hy Անցում՝ {}...
+
+@ game: no game dir "{}" in {}
+hy game: «{}» խաղի պանակ չկա այստեղ՝ {}
+
+@ game: can't find the engine executable
+hy game: չհաջողվեց գտնել շարժիչի գործարկվող ֆայլը
+
+@ game: exec failed: {}
+hy game: գործարկումը ձախողվեց: {}
+
+@ game: launch failed: {}
+hy game: մեկնարկը ձախողվեց: {}
+
+@ loaded {} in {}s
+hy բեռնվեց {}՝ {} վ-ում
+
+@ No demos listed with startdemos
+hy startdemos-ով դեմոներ նշված չեն
+
+@ Playing demo from {}.
+hy Նվագարկվում է դեմոն՝ {}։
+
+@ {} frames {} seconds {} fps
+hy {} կադր {} վայրկյան {} fps
+
+@ Recording to {}.
+hy Գրառում՝ {}։
+
+@ Completed demo
+hy Դեմոն ավարտվեց
+
+@ Can't record during demo playback
+hy Հնարավոր չէ գրառել դեմոյի նվագարկման ժամանակ
+
+@ Relative pathnames are not allowed.
+hy Հարաբերական ուղիները թույլատրված չեն։
+
+@ Can't record - try again when connected
+hy Հնարավոր չէ գրառել - փորձեք կրկին միանալուց հետո
+
+@ {} demo(s) in loop
+hy {} դեմո ցիկլում
+
+@ Not recording a demo.
+hy Դեմո չի գրառվում։
+
+@ {} joined on a gamepad
+hy {} միացավ կարգավարով
+
+@ goggles: needs a game started with Add-ons and Goggles enabled
+hy goggles: պահանջում է խաղ, որը սկսվել է միացված հավելումներով և ակնոցով
+
+@ equip: needs a game started with Add-ons and Goggles enabled
+hy equip: պահանջում է խաղ, որը սկսվել է միացված հավելումներով և ակնոցով
+
+@ UDP listening on port {}
+hy UDP-ն լսում է {} պորտը
+
+@ UDP bind on port {} failed: {}
+hy UDP կապումը {} պորտին ձախողվեց: {}
+
+@ Connection accepted by {}
+hy {} ընդունեց միացումը
+
+@ Connection failed: {}
+hy Միացումը ձախողվեց: {}
+
+@ Couldn't resolve {}
+hy Չհաջողվեց լուծել {} հասցեն
+
+@ Connecting to {}...
+hy Միացում՝ {}...
+
+@ Connecting to QuakeWorld server {}...
+hy Միացում QuakeWorld սերվերին՝ {}...
+
+@ Disconnected: {}
+hy Անջատված է: {}
+
+@ Server disconnected
+hy Սերվերն անջատվեց
+
+@ Client {} connected
+hy Հաճախորդ {} միացավ
+
+@ Client {} timed out
+hy Հաճախորդ {}՝ սպասման ժամանակը սպառվեց
+
+@ Couldn't spawn server {}: {}
+hy Չհաջողվեց գործարկել {} սերվերը: {}
+
+@ maxplayers can not be changed while a server is running.
+hy maxplayers-ը չի կարելի փոխել, երբ սերվերն աշխատում է։
+
+@ You can't kick yourself!
+hy Չեք կարող ինքներդ ձեզ վտարել։
+
+@ Only the server may changelevel
+hy Միայն սերվերը կարող է changelevel անել
+
+@ {} renamed to {}
+hy {} վերանվանվեց՝ {}

@@ -1,0 +1,3024 @@
+# fi: the port's own text; English keys from crates/qcore/lang/*.txt.
+# Format in crates/qcore/src/lang/catalog.rs; check with tools/lang_check.py.
+
+# ==== menu.txt ====
+
+# Options pages: page names, row labels and choice values.
+@ 10% speed
+fi Nopeus 10 %
+
+@ 2 split-screen
+fi 2 jaetulla ruudulla
+
+@ 3 split-screen
+fi 3 jaetulla ruudulla
+
+@ 4 split-screen
+fi 4 jaetulla ruudulla
+
+@ 5 split-screen
+fi 5 jaetulla ruudulla
+
+@ 6 split-screen
+fi 6 jaetulla ruudulla
+
+@ 2D aiming
+fi 2D-tähtäys
+
+@ 2x monsters
+fi hirviöt x2
+
+@ 3x monsters
+fi hirviöt x3
+
+@ 4x monsters
+fi hirviöt x4
+
+@ 3D resolution
+fi 3D-resoluutio
+
+@ 3D view
+fi 3D-näkymä
+
+@ 8-bit Color
+fi 8-bittiset värit
+
+@ Accessibility
+fi Esteettömyys
+
+@ Acquisition Cone
+fi Hakukartio
+
+@ Activation
+fi Aktivointi
+
+@ Add a ringing room tail after the cue
+fi Lisää äänimerkin perään soivan jälkikaiun
+
+@ Add delayed repeats after the cue
+fi Lisää äänimerkin perään viivästetyt toistot
+
+@ Add saturation and distortion
+fi Lisää saturaatiota ja säröä
+
+@ Add-ons
+fi Lisäosat
+
+@ Address
+fi Osoite
+
+@ Adds fine noise to hide color banding
+fi Lisää hienoa kohinaa peittämään värien porrastumista
+
+@ Advanced Settings
+fi Lisäasetukset
+
+@ Aim Assist
+fi Tähtäysapu
+
+@ Aim Rotation
+fi Tähtäyksen kierto
+
+@ Aim Slowdown
+fi Tähtäyksen hidastus
+
+@ Aim Style
+fi Tähtäystyyli
+
+@ All
+fi Kaikki
+
+@ All enemies
+fi Kaikki viholliset
+
+@ Alt Fire (Add-ons)
+fi Toissijainen tuli (lisäosat)
+
+@ Always Run
+fi Juokse aina
+
+@ Ambient Occlusion
+fi Ympäristön varjostus
+
+@ Ammo Counts
+fi Ammusmäärät
+
+@ Ammo Counts Position
+fi Ammusmäärien sijainti
+
+@ Ammo Pickups
+fi Ammuslöydöt
+
+@ Anisotropic
+fi Anisotrooppinen
+
+@ Anti-aliasing
+fi Reunanpehmennys
+
+@ Apply To
+fi Koskee
+
+@ Armor
+fi Panssari
+
+@ Armor Position
+fi Panssarin sijainti
+
+@ Ask
+fi Kysy
+
+@ Attack
+fi Hyökkää
+
+@ Audio
+fi Ääni
+
+@ Auto-aim
+fi Automaattitähtäys
+
+@ Auto-aim Settings
+fi Automaattitähtäyksen asetukset
+
+@ Autosave
+fi Automaattitallennus
+
+@ Autosave Settings
+fi Automaattitallennuksen asetukset
+
+@ Autosave Timer
+fi Ajastettu tallennus
+
+@ Autosaves to Keep
+fi Säilytettävät tallennukset
+
+@ Bass
+fi Basso
+
+@ Blip
+fi Piip
+
+@ Blood Quality
+fi Veren laatu
+
+@ Blood Splatter Settings
+fi Veriroiskeiden asetukset
+
+@ Blue
+fi Sininen
+
+@ Boomerang Settings
+fi Bumerangin asetukset
+
+@ Boost or cut high frequencies in decibels
+fi Korostaa tai vaimentaa diskanttia desibeleinä
+
+@ Boost or cut low frequencies in decibels
+fi Korostaa tai vaimentaa bassoa desibeleinä
+
+@ Brightness
+fi Kirkkaus
+
+@ Bullet Time (Add-ons)
+fi Bullet time (lisäosat)
+
+@ Bullet Time Settings
+fi Bullet time -asetukset
+
+@ Button Glyphs
+fi Painikesymbolit
+
+@ Button Size
+fi Painikkeiden koko
+
+@ Camera
+fi Kamera
+
+@ Caustic Intensity
+fi Kaustiikan voimakkuus
+
+@ Caustics
+fi Kaustiikka
+
+@ Center
+fi Keskellä
+
+@ Center Message Position
+fi Keskiviestien sijainti
+
+@ Center Message Time
+fi Keskiviestien kesto
+
+@ Center View
+fi Keskitä näkymä
+
+@ Change Color on Kill
+fi Eri väri tapossa
+
+@ Change Color on Target
+fi Eri väri kohteessa
+
+@ Chime
+fi Kello
+
+@ Click
+fi Napsahdus
+
+@ Clink
+fi Kilahdus
+
+@ Coin
+fi Kolikko
+
+@ Color
+fi Väri
+
+@ Color Filter
+fi Värisuodin
+
+@ Color of the grenade arc
+fi Kranaattiradan väri
+
+@ Colored Lighting
+fi Värillinen valaistus
+
+@ Connect
+fi Yhdistä
+
+@ Contrast
+fi Kontrasti
+
+@ Controls
+fi Ohjaus
+
+@ Cooldown (ms)
+fi Odotusaika (ms)
+
+@ Crosshair Outline
+fi Tähtäimen ääriviiva
+
+@ Crosshair Shape
+fi Tähtäimen muoto
+
+@ Crosshair Size
+fi Tähtäimen koko
+
+@ Current Ammo
+fi Nykyiset ammukset
+
+@ Current Ammo Position
+fi Nykyisten ammusten sijainti
+
+@ Customize This Game
+fi Mukauta tätä peliä
+
+@ Damage
+fi Vahinko
+
+@ Damage Taken
+fi Saatu vahinko
+
+@ Debris
+fi Sirpaleet
+
+@ Debris Quality
+fi Sirpaleiden laatu
+
+@ Debris Settings
+fi Sirpaleiden asetukset
+
+@ Directional Damage
+fi Vahingon suunta
+
+@ Dithering
+fi Rasterointi
+
+@ Dodge / Dive (Add-ons)
+fi Väistö / syöksy (lisäosat)
+
+@ Dragging up looks down instead of up
+fi Ylöspäin vetäminen katsoo alas eikä ylös
+
+@ Drive
+fi Saturaatio
+
+@ Dynamic Lights
+fi Dynaamiset valot
+
+@ Echo
+fi Kaiku
+
+@ Enemy Health
+fi Vihollisten terveys
+
+@ Enemy Wounds
+fi Vihollisten haavat
+
+@ Enhanced Blood Splatter
+fi Paremmat veriroiskeet
+
+@ Enhanced FX
+fi Paremmat tehosteet
+
+@ Enhanced Models
+fi Paremmat mallit
+
+@ Enhanced Particles
+fi Paremmat partikkelit
+
+@ Enhanced Water
+fi Parempi vesi
+
+@ Enhancements
+fi Parannukset
+
+@ Equipment Wheel (Add-ons)
+fi Varustekiekko (lisäosat)
+
+@ Exploding boxes throw metal shards
+fi Räjähtävät laatikot sinkoavat metallisirpaleita
+
+@ Explosion Damage
+fi Räjähdysvahinko
+
+@ Explosion Scorch Marks
+fi Räjähdysten nokijäljet
+
+@ Explosions scorch nearby solid surfaces
+fi Räjähdykset kärventävät lähellä olevia pintoja
+
+@ Explosives only
+fi Vain räjähteet
+
+@ Extra Monsters
+fi Lisähirviöt
+
+@ Extra Per 10 Damage (ms)
+fi Lisää per 10 vahinkoa (ms)
+
+@ FX Settings
+fi Tehosteasetukset
+
+@ Field of View
+fi Näkökenttä
+
+@ Firing never uses up ammo
+fi Ampuminen ei kuluta ammuksia
+
+@ First person
+fi Ensimmäinen persoona
+
+@ Flick Time
+fi Flick-aika
+
+@ Flight Speed
+fi Lentonopeus
+
+@ Fog
+fi Sumu
+
+@ Frag Limit
+fi Fragiraja
+
+@ Freeze Duration (ms)
+fi Jäädytyksen kesto (ms)
+
+@ GLQuake
+fi GLQuake
+
+@ Game Speed
+fi Pelinopeus
+
+@ Game Type
+fi Pelityyppi
+
+@ Gameplay
+fi Pelattavuus
+
+@ Gameplay Modifiers
+fi Pelimuokkaimet
+
+@ Gel Quality
+fi Geelin laatu
+
+@ Gib Surface Painting
+fi Lihanpalojen tahrat
+
+@ Gibs
+fi Lihanpalat
+
+@ Gibs and heads tumble and bounce
+fi Lihanpalat ja päät pyörivät ja pomppivat
+
+@ Goggle Glow Quality
+fi Lasien hehkun laatu
+
+@ Goggle Intensity
+fi Lasien voimakkuus
+
+@ Goggle Noise
+fi Lasien kohina
+
+@ Goggles Settings
+fi Lasien asetukset
+
+@ Graphics
+fi Grafiikka
+
+@ Green
+fi Vihreä
+
+@ Grenade Arc
+fi Kranaattirata
+
+@ Grenade Arc Settings
+fi Kranaattiradan asetukset
+
+@ Gun Kick
+fi Aseen potku
+
+@ Gyro
+fi Gyro
+
+@ Gyro & Flick Stick
+fi Gyro ja flick-tikku
+
+@ Gyro Active
+fi Gyro päällä
+
+@ Gyro Aiming
+fi Gyrotähtäys
+
+@ HUD
+fi HUD
+
+@ HUD Style
+fi HUD-tyyli
+
+@ Health
+fi Terveys
+
+@ Health Pickups
+fi Terveyslöydöt
+
+@ Health Position
+fi Terveyden sijainti
+
+@ Health Regeneration
+fi Terveyden palautuminen
+
+@ Hit & Kill Sounds
+fi Osuma- ja tappoäänet
+
+@ Hit Doors & Lifts
+fi Osu oviin ja hisseihin
+
+@ Hit Markers
+fi Osumamerkit
+
+@ Hit Sound
+fi Osumaääni
+
+@ Hitmarker Size
+fi Osumamerkin koko
+
+@ Hitmarker Type
+fi Osumamerkin tyyppi
+
+@ Hitstop Advanced
+fi Hitstopin lisäasetukset
+
+@ Hitstop Settings
+fi Hitstop-asetukset
+
+@ Hold
+fi Pidä
+
+@ Hold lock-on
+fi Lukitus pidettäessä
+
+@ Hook Enemies
+fi Tartu vihollisiin
+
+@ Hook Metal
+fi Tartu metalliin
+
+@ Hook Stone
+fi Tartu kiveen
+
+@ Hook Wood
+fi Tartu puuhun
+
+@ Hooking an enemy pulls you to it
+fi Viholliseen tarttuva koukku vetää sinut sen luo
+
+@ Hookshot Range
+fi Tarttumakoukun kantama
+
+@ Hookshot Settings
+fi Tarttumakoukun asetukset
+
+@ Host Game
+fi Isännöi peliä
+
+@ How far the hook flies before it retracts
+fi Kuinka pitkälle koukku lentää ennen paluuta
+
+@ How visible the on-screen controls are
+fi Kosketusohjainten näkyvyys
+
+@ Impact Lifetime
+fi Osumajälkien kesto
+
+@ Infinite Ammo
+fi Loputtomat ammukset
+
+@ Input
+fi Ohjaimet
+
+@ Input Scale
+fi Syötteen skaalaus
+
+@ Interpolate Animation
+fi Interpoloi animaatiot
+
+@ Interpolate Movement
+fi Interpoloi liike
+
+@ Invert Look
+fi Käänteinen katse
+
+@ Invert Mouse
+fi Käänteinen hiiri
+
+@ Invert Stick
+fi Käänteinen tikku
+
+@ Jet Quality
+fi Suihkun laatu
+
+@ Join Game
+fi Liity peliin
+
+@ Jump / Swim Up
+fi Hyppää / ui ylös
+
+@ Jump again in mid-air
+fi Hyppää uudelleen ilmassa
+
+@ Jumps
+fi Hypyt
+
+@ Keys & Powerups
+fi Avaimet ja bonukset
+
+@ Keys & Powerups Position
+fi Avainten ja bonusten sijainti
+
+@ Kill Bonus (x)
+fi Tappobonus (x)
+
+@ Kill Sound
+fi Tappoääni
+
+@ Knock
+fi Koputus
+
+@ Left
+fi Vasen
+
+@ Length of the motion blur streaks
+fi Liike-epäterävyyden juovien pituus
+
+@ Lifetime (seconds)
+fi Kesto (sekuntia)
+
+@ Live Portal Views
+fi Elävät portaalinäkymät
+
+@ Live View Distance
+fi Elävän näkymän etäisyys
+
+@ Local Players
+fi Paikalliset pelaajat
+
+@ Local red wounds follow enemy animation
+fi Punaiset haavat seuraavat vihollisen animaatiota
+
+@ Lock Indicator
+fi Lukituksen ilmaisin
+
+@ Long falls don't hurt
+fi Pitkät pudotukset eivät satu
+
+@ Longest Freeze (ms)
+fi Pisin jäädytys (ms)
+
+@ Look Down
+fi Katso alas
+
+@ Look Speed
+fi Katseen nopeus
+
+@ Look Up
+fi Katso ylös
+
+@ Main Menu Music
+fi Päävalikon musiikki
+
+@ Max FPS
+fi Maks. FPS
+
+@ Max Players
+fi Maks. pelaajat
+
+@ Maximum Impacts
+fi Osumajälkiä enintään
+
+@ Maximum Marks
+fi Jälkiä enintään
+
+@ Maximum Range
+fi Suurin kantama
+
+@ Melee only
+fi Vain lähitaistelu
+
+@ Message Background
+fi Viestien tausta
+
+@ Message Text Size
+fi Viestien tekstikoko
+
+@ Messages & Captions
+fi Viestit ja tekstitykset
+
+@ Meter Duration (real seconds)
+fi Mittarin kesto (todelliset sekunnit)
+
+@ Minimum Damage
+fi Vähimmäisvahinko
+
+@ Mode
+fi Tila
+
+@ Modern Console
+fi Moderni konsoli
+
+@ Modern HUD Layout
+fi Modernin HUDin asettelu
+
+@ Most recent save
+fi Uusin tallennus
+
+@ Motion Blur
+fi Liike-epäterävyys
+
+@ Motion Blur Amount
+fi Liike-epäterävyyden määrä
+
+@ Motion Blur Quality
+fi Liike-epäterävyyden laatu
+
+@ Mouse & Keyboard
+fi Hiiri ja näppäimistö
+
+@ Mouse Speed
+fi Hiiren nopeus
+
+@ Move Back
+fi Liiku taakse
+
+@ Move Forward
+fi Liiku eteen
+
+@ Music Volume
+fi Musiikin voimakkuus
+
+@ Next Weapon
+fi Seuraava ase
+
+@ No Drowning
+fi Ei hukkumista
+
+@ No Fall Damage
+fi Ei putoamisvahinkoa
+
+@ No Manual Saves
+fi Ei manuaalisia tallennuksia
+
+@ No Self Damage
+fi Ei omaa vahinkoa
+
+@ Noise Filter
+fi Kohinasuodin
+
+@ Normal Color
+fi Normaali väri
+
+@ Notify Message Position
+fi Ilmoitusten sijainti
+
+@ Notify Message Time
+fi Ilmoitusten kesto
+
+@ Number of splatter rays per blood impact
+fi Roiskesäteiden määrä veren osumaa kohden
+
+@ Off
+fi Pois
+
+@ On Death
+fi Kuollessa
+
+@ On Kill Color
+fi Väri tapossa
+
+@ On Target Color
+fi Väri kohteessa
+
+@ Opacity
+fi Peittävyys
+
+@ Opacity of the grenade arc
+fi Kranaattiradan peittävyys
+
+@ Pants Color
+fi Housujen väri
+
+@ Particle Quality
+fi Partikkelien laatu
+
+@ Particles
+fi Partikkelit
+
+@ Physical Nail Impacts
+fi Fyysiset naulojen osumat
+
+@ Pistol Start
+fi Puhdas aloitus
+
+@ Pitch
+fi Sävelkorkeus
+
+@ Pitch Sensitivity
+fi Pystyherkkyys
+
+@ Playback Speed
+fi Toistonopeus
+
+@ Player Setup
+fi Pelaajan asetukset
+
+@ Pop
+fi Poks
+
+@ Portal Gun Settings
+fi Portaaliaseen asetukset
+
+@ Portal Recursion
+fi Portaalien rekursio
+
+@ Portal View Quality
+fi Portaalinäkymän laatu
+
+@ Preview Sound
+fi Kuuntele ääni
+
+@ Previous Weapon
+fi Edellinen ase
+
+@ Projectile Shotguns Settings
+fi Ammushaulikoiden asetukset
+
+@ Projectile Speed (units/s)
+fi Ammuksen nopeus (yksikköä/s)
+
+@ Purple
+fi Violetti
+
+@ Push
+fi Työntö
+
+@ Push Strength
+fi Työnnön voima
+
+@ Quick Load
+fi Pikalataus
+
+@ Quick Save
+fi Pikatallennus
+
+@ Railgun Settings
+fi Railgunin asetukset
+
+@ Ranged only
+fi Vain kaukotaistelu
+
+@ Reacquire While Held
+fi Hae uudelleen pidettäessä
+
+@ Red
+fi Punainen
+
+@ Reduce Motion
+fi Vähennä liikettä
+
+@ Regen (seconds per second)
+fi Palautus (sekuntia sekunnissa)
+
+@ Render Scale
+fi Renderöintiskaala
+
+@ Reverb
+fi Jälkikaiunta
+
+@ Right
+fi Oikea
+
+@ Ripple Intensity
+fi Väreilyn voimakkuus
+
+@ Ripples
+fi Väreily
+
+@ Roll Sensitivity
+fi Kallistusherkkyys
+
+@ Rumble
+fi Tärinä
+
+@ Run
+fi Juokse
+
+@ Save on All Enemies Killed
+fi Tallenna, kun kaikki viholliset on tapettu
+
+@ Save on All Secrets Found
+fi Tallenna, kun kaikki salaisuudet on löydetty
+
+@ Save on Level Entry
+fi Tallenna kentän alussa
+
+@ Save on Secret Found
+fi Tallenna salaisuuden löytyessä
+
+@ Scoreboard
+fi Pistetaulu
+
+@ Screen Flashes
+fi Ruudun välähdykset
+
+@ Screen Shader
+fi Ruudun varjostin
+
+@ Screen Shake
+fi Ruudun tärinä
+
+@ Search LAN
+fi Hae lähiverkosta
+
+@ Seconds a center-screen message stays up
+fi Montako sekuntia keskiviesti pysyy näkyvissä
+
+@ See Through Portals
+fi Näe portaalien läpi
+
+@ See-through Teleporters
+fi Läpinäkyvät teleportit
+
+@ Shirt Color
+fi Paidan väri
+
+@ Shotgun Bullet Decals
+fi Haulien osumajäljet
+
+@ Shoulder left
+fi Olan yli vasemmalta
+
+@ Shoulder right
+fi Olan yli oikealta
+
+@ Show FPS
+fi Näytä FPS
+
+@ Show Face
+fi Näytä kasvot
+
+@ Shrapnel
+fi Sirpaleet
+
+@ Size of on-screen messages and captions
+fi Ruutuviestien ja tekstitysten koko
+
+@ Skill
+fi Vaikeustaso
+
+@ Sky Fog
+fi Taivaan sumu
+
+@ Smooths the stepped movement of monsters
+fi Tasoittaa hirviöiden nykivää liikettä
+
+@ Sound
+fi Ääni
+
+@ Sound Captions
+fi Äänitekstitykset
+
+@ Sound Volume
+fi Äänien voimakkuus
+
+@ Speed Blur
+fi Vauhtiepäterävyys
+
+@ Splashes
+fi Roiskeet
+
+@ Splatter Amount
+fi Roiskeiden määrä
+
+@ Splatter Size
+fi Roiskeiden koko
+
+@ Start Game
+fi Aloita peli
+
+@ Staying underwater doesn't hurt
+fi Veden alla oleminen ei satu
+
+@ Stick Look Pitch
+fi Tikun pystykatse
+
+@ Stick Look Yaw
+fi Tikun vaakakatse
+
+@ Strafe Left
+fi Sivuttain vasemmalle
+
+@ Strafe Right
+fi Sivuttain oikealle
+
+@ Strength of the surface swell and rings
+fi Pinnan aaltoilun ja renkaiden voimakkuus
+
+@ Stun Duration
+fi Tainnutuksen kesto
+
+@ Style
+fi Tyyli
+
+@ Supersampling
+fi Ylinäytteistys
+
+@ Surface Hit Effects
+fi Pintojen osumatehosteet
+
+@ Swim Down
+fi Ui alas
+
+@ Targets
+fi Kohteet
+
+@ Teamplay
+fi Joukkuepeli
+
+@ Texture Filter
+fi Tekstuurisuodatus
+
+@ Third person
+fi Kolmas persoona
+
+@ Thud
+fi Tömähdys
+
+@ Tick
+fi Tikitys
+
+@ Time Limit
+fi Aikaraja
+
+@ Time Stretch
+fi Ajan venytys
+
+@ Toggle Attack
+fi Hyökkäys päälle/pois
+
+@ Toggle Run
+fi Juoksu päälle/pois
+
+@ Toggle auto-aim
+fi Automaattitähtäys päälle/pois
+
+@ Touch Controls
+fi Kosketusohjaus
+
+@ Touchscreen
+fi Kosketusnäyttö
+
+@ Tough Enemy Health
+fi Sitkeiden vihollisten terveys
+
+@ Tough enemies only
+fi Vain sitkeät viholliset
+
+@ Trail Colour
+fi Vanan väri
+
+@ Translate Console
+fi Käännä konsoli
+
+@ Translucent Water
+fi Läpikuultava vesi
+
+@ Treble
+fi Diskantti
+
+@ Turn Left
+fi Käänny vasemmalle
+
+@ Turn Right
+fi Käänny oikealle
+
+@ Underwater FX
+fi Vedenalaiset tehosteet
+
+@ Use Bullet Time Meter
+fi Käytä bullet time -mittaria
+
+@ VSync
+fi VSync
+
+@ View Bob
+fi Näkymän keinunta
+
+@ Viewmodels
+fi Asemallit
+
+@ Volume
+fi Äänenvoimakkuus
+
+@ Water Opacity
+fi Veden peittävyys
+
+@ Water Quality
+fi Veden laatu
+
+@ Water Settings
+fi Veden asetukset
+
+@ Weapon Wheel
+fi Asekiekko
+
+@ Weapon Wheel Slowdown
+fi Asekiekon hidastus
+
+@ Weapons
+fi Aseet
+
+@ Weapons Position
+fi Aseiden sijainti
+
+@ Where center-screen messages appear
+fi Missä keskiviestit näkyvät
+
+@ Where pickup and event messages appear
+fi Missä löytö- ja tapahtumaviestit näkyvät
+
+@ White
+fi Valkoinen
+
+@ Yaw Sensitivity
+fi Vaakaherkkyys
+
+@ Yellow
+fi Keltainen
+
+# lowercase choice values
+@ T
+fi T
+
+@ always
+fi aina
+
+@ auto
+fi auto
+
+@ banded
+fi porrastettu
+
+@ borderless
+fi reunaton
+
+@ bottom center
+fi alhaalla keskellä
+
+@ bottom left
+fi alhaalla vasemmalla
+
+@ bottom right
+fi alhaalla oikealla
+
+@ box
+fi laatikko
+
+@ broken square
+fi katkonainen neliö
+
+@ classic
+fi klassinen
+
+@ coarse
+fi karkea
+
+@ cooperative
+fi yhteistyö
+
+@ cross
+fi risti
+
+@ cross + dot
+fi risti + piste
+
+@ cyan
+fi syaani
+
+@ dashed
+fi katkoviiva
+
+@ deathmatch
+fi deathmatch
+
+@ deuteranopia
+fi deuteranopia
+
+@ diagonal streaks
+fi vinot viirut
+
+@ diamond
+fi vinoneliö
+
+@ dot
+fi piste
+
+@ double
+fi kaksinkertainen
+
+@ double chevrons
+fi kaksoiskulmat
+
+@ double diagonals
+fi kaksoisvinot
+
+@ easy
+fi helppo
+
+@ fine
+fi hieno
+
+@ fit output
+fi sovita ulostuloon
+
+@ flick stick
+fi flick-tikku
+
+@ fullscreen
+fi koko näyttö
+
+@ gap cross
+fi avoin risti
+
+@ green
+fi vihreä
+
+@ grey
+fi harmaa
+
+@ half speed
+fi puolinopeus
+
+@ hard
+fi vaikea
+
+@ high
+fi korkea
+
+@ huge
+fi valtava
+
+@ immersive
+fi immersiivinen
+
+@ intense
+fi voimakas
+
+@ large
+fi suuri
+
+@ larger
+fi suurempi
+
+@ largest
+fi suurin
+
+@ linear
+fi lineaarinen
+
+@ low
+fi matala
+
+@ lower
+fi alhaalla
+
+@ magenta
+fi magenta
+
+@ medium
+fi keskitaso
+
+@ middle
+fi keskellä
+
+@ middle left
+fi keskellä vasemmalla
+
+@ middle right
+fi keskellä oikealla
+
+@ modern
+fi moderni
+
+@ nearest
+fi lähin
+
+@ nightmare
+fi painajainen
+
+@ nintendo
+fi Nintendo
+
+@ no team damage
+fi ei tiimivahinkoa
+
+@ none
+fi ei mitään
+
+@ normal
+fi normaali
+
+@ off
+fi pois
+
+@ off while held
+fi pois pidettäessä
+
+@ on
+fi päällä
+
+@ only while held
+fi vain pidettäessä
+
+@ playstation
+fi PlayStation
+
+@ protanopia
+fi protanopia
+
+@ quarter speed
+fi neljännesnopeus
+
+@ red
+fi punainen
+
+@ short diagonals
+fi lyhyet vinot
+
+@ single
+fi yksinkertainen
+
+@ small
+fi pieni
+
+@ solid
+fi yhtenäinen
+
+@ spectacle
+fi näyttävä
+
+@ subtle
+fi hienovarainen
+
+@ team damage
+fi tiimivahinko
+
+@ top center
+fi ylhäällä keskellä
+
+@ top left
+fi ylhäällä vasemmalla
+
+@ top right
+fi ylhäällä oikealla
+
+@ triple
+fi kolminkertainen
+
+@ tritanopia
+fi tritanopia
+
+@ upper
+fi ylhäällä
+
+@ white
+fi valkoinen
+
+@ whole screen
+fi koko ruutu
+
+@ windowed
+fi ikkuna
+
+@ xbox
+fi Xbox
+
+@ yellow
+fi keltainen
+
+# ==== tooltips.txt ====
+
+# Options help lines (tooltips) and reasons for disabled rows.
+@ 2D aiming turns the view continuously with the right stick; flick stick snaps the view to where you push the stick, then turning the stick rotates it
+fi 2D-tähtäys kääntää näkymää jatkuvasti oikealla tikulla; flick-tikku kääntää näkymän heti tikun suuntaan, minkä jälkeen tikun pyöritys kääntää sitä
+
+@ 3D resolution relative to the window; the UI stays sharp
+fi 3D-resoluutio suhteessa ikkunaan; käyttöliittymä pysyy terävänä
+
+@ 3D view keeps the HUD and menus sharp; whole screen runs them through the shader too
+fi 3D-näkymä pitää HUDin ja valikot terävinä; koko ruutu ajaa nekin varjostimen läpi
+
+@ A Quake III style railgun: a slug that pierces every enemy on its line, using 2 cells a shot and refiring every 1.5 s; select it through its assigned weapon slot (Add-ons)
+fi Quake III -tyylinen railgun: luoti lävistää jokaisen linjallaan olevan vihollisen, kuluttaa 2 kennoa laukaukselta ja ampuu 1,5 s välein; valitse se sille määrätystä asepaikasta (lisäosat)
+
+@ A Zelda-style hookshot: fire sends a chain hook out; it latches onto hookable surfaces or enemies and reels you in; fire again to let go
+fi Zelda-tyylinen tarttumakoukku: tuli ampuu ketjukoukun, joka tarttuu sopiviin pintoihin tai vihollisiin ja kelaa sinut luokseen; ammu uudelleen irrottaaksesi
+
+@ Also translates the engine's console messages; off keeps them in English
+fi Kääntää myös pelimoottorin konsoliviestit; pois päältä ne jäävät englanniksi
+
+@ Automatically acquire another enemy while holding Lock-on after losing a target
+fi Hakee automaattisesti uuden vihollisen, kun Lukitus on pohjassa ja kohde menetetään
+
+@ Blends between animation frames of monsters and weapons
+fi Sulauttaa hirviöiden ja aseiden animaatioruudut toisiinsa
+
+@ Blood stains surfaces and bodies; cosmetic, independent of particle packs
+fi Veri tahrii pintoja ja ruumiita; pelkkä kosmeettinen, partikkelipaketeista riippumaton
+
+@ Bloom glow around bright lights and heat sources; medium uses 4 taps, high uses 8, low disables halo taps
+fi Bloom-hehku kirkkaiden valojen ja lämmönlähteiden ympärillä; keskitaso käyttää 4 näytettä, korkea 8, matala poistaa sädekehän
+
+@ Blurs fast-moving monsters, projectiles and doors (not camera turns)
+fi Sumentaa nopeasti liikkuvat hirviöt, ammukset ja ovet (ei kameran kääntöjä)
+
+@ Blurs the screen edges during fast falls and launches; keeps the centre clear. Reduce Motion disables it
+fi Sumentaa ruudun reunat nopeissa pudotuksissa ja singahduksissa; keskusta pysyy terävänä. Vähennä liikettä poistaa sen
+
+@ Brightness of the underwater light patterns
+fi Vedenalaisten valokuvioiden kirkkaus
+
+@ Caps mark count, lifetime, airborne droplets and wound/gib painting; low skips enemy wounds and gib trails
+fi Rajoittaa jälkien määrää ja kestoa, ilmassa olevia pisaroita sekä haava- ja lihanpalatahroja; matala ohittaa vihollisten haavat ja lihanpalojen vanat
+
+@ Caps shader input at output size so 200% render scale keeps 3D sharpness without 4x shader cost; low scales stay low-res
+fi Rajoittaa varjostimen syötteen ulostulon kokoon, jolloin 200 %:n renderöintiskaala säilyttää 3D-terävyyden ilman nelinkertaista varjostinkuormaa; pienet skaalat pysyvät matalaresoluutioisina
+
+@ Classic: the original status bar; modern: compact elements at the screen edges
+fi Klassinen: alkuperäinen tilapalkki; moderni: kompaktit elementit ruudun reunoilla
+
+@ Coat atlas resolution, rebuild rate and shader detail: low builds smaller coats less often with fast shading; high uses full detail
+fi Pinnoiteatlaksen resoluutio, päivitystahti ja varjostimen yksityiskohdat: matala rakentaa pienempiä pinnoitteita harvemmin nopealla varjostuksella; korkea käyttää täysiä yksityiskohtia
+
+@ Colour of the railgun's spiral trail; split-screen players each get the next colour along
+fi Railgunin spiraalivanan väri; jaetulla ruudulla kukin pelaaja saa seuraavan värin
+
+@ Damage the railgun deals to each enemy it passes through (Quake III: 100)
+fi Railgunin vahinko jokaiselle lävistetylle viholliselle (Quake III: 100)
+
+@ Dark backdrop behind on-screen messages for readability
+fi Tumma tausta ruutuviestien takana luettavuuden parantamiseksi
+
+@ Dark border keeps the crosshair visible on any background
+fi Tumma reunus pitää tähtäimen näkyvissä kaikilla taustoilla
+
+@ Darkens corners and contact areas where geometry meets; higher quality is sharper
+fi Tummentaa nurkkia ja kohtia, joissa geometria kohtaa; korkeampi laatu on terävämpi
+
+@ Debris lands on and is carried or shoved by doors, lifts and platforms
+fi Sirpaleet laskeutuvat oville, hisseille ja tasoille, jotka kantavat tai työntävät niitä
+
+@ Detail for caustics, ripples and splashes: low uses smaller budgets and shorter view distance; high uses larger budgets and farther view distance
+fi Kaustiikan, väreilyn ja roiskeiden yksityiskohdat: matala käyttää pienempiä budjetteja ja lyhyempää näkyvyyttä; korkea suurempia budjetteja ja pidempää näkyvyyttä
+
+@ Disabled while Enhanced Particles is on: its particles replace the GLQuake and Classic styles
+fi Ei käytössä, kun Paremmat partikkelit on päällä: sen partikkelit korvaavat GLQuake- ja klassisen tyylin
+
+@ Disabled while Enhanced Water is on: its own underwater effects replace the classic and GLQuake view warps
+fi Ei käytössä, kun Parempi vesi on päällä: sen omat vedenalaiset tehosteet korvaavat klassisen ja GLQuake-vääristymän
+
+@ Draw the predicted grenade path as a solid or dashed line
+fi Piirrä kranaatin ennustettu lentorata yhtenäisenä tai katkoviivana
+
+@ Draw the view out of the linked portal inside each portal; off shows flat discs (fastest)
+fi Näytä jokaisessa portaalissa näkymä yhdistetystä portaalista; pois näyttää litteät kiekot (nopein)
+
+@ Droplets spray up when things enter or leave water, slime or lava
+fi Pisarat roiskuvat, kun jokin menee veteen, limaan tai laavaan tai nousee sieltä
+
+@ Emulates the original 8-bit palette of software rendering
+fi Jäljittelee ohjelmistorenderöinnin alkuperäistä 8-bittistä palettia
+
+@ Every level starts with only the shotgun and axe, as if started fresh
+fi Jokainen kenttä alkaa pelkällä haulikolla ja kirveellä, kuin alusta aloitettuna
+
+@ Explosion damage for each remotely detonated sticky bomb
+fi Jokaisen kauko-ohjatusti laukaistun tarrapommin räjähdysvahinko
+
+@ Extra freeze milliseconds for every 10 damage dealt, so heavy hits stop longer
+fi Lisää jäädytysmillisekunteja jokaista 10 vahinkoa kohden, joten raskaat osumat pysäyttävät pidempään
+
+@ First person, a third-person camera centered behind the player, or one over the right or left shoulder; third person hides viewmodels
+fi Ensimmäinen persoona, pelaajan taakse keskitetty kolmannen persoonan kamera tai kamera oikean tai vasemman olan yllä; kolmas persoona piilottaa asemallit
+
+@ Flash the selected marker on confirmed hits; colors are shared with the crosshair
+fi Välähdä valittu merkki varmistetuista osumista; värit ovat yhteiset tähtäimen kanssa
+
+@ Freeze for every enemy, or only for enemies that were tough before the hit
+fi Jäädytä jokaisen vihollisen kohdalla tai vain niiden, jotka olivat sitkeitä ennen osumaa
+
+@ Freeze the game briefly when you damage an enemy; single player with add-ons only
+fi Pysäyttää pelin hetkeksi, kun vahingoitat vihollista; vain yksinpeli lisäosien kanssa
+
+@ Gibs tumble and barrels throw shrapnel; shots and blasts push them (cosmetic only)
+fi Lihanpalat pyörivät ja tynnyrit sinkoavat sirpaleita; laukaukset ja räjähdykset työntävät niitä (pelkkä kosmeettinen)
+
+@ Health an enemy must have had before the hit to count as tough
+fi Terveys, joka vihollisella pitää olla ennen osumaa, jotta se lasketaan sitkeäksi
+
+@ Hits dealing less damage than this do not freeze the game; the default 10 skips nails and shotgun pellets
+fi Tätä pienemmän vahingon osumat eivät jäädytä peliä; oletusarvo 10 ohittaa naulat ja haulit
+
+@ Hold fire and sweep the crosshair over monsters to queue them, release to throw: it stuns each in turn and flies back; alt-fire clears the queue
+fi Pidä tulinappia ja pyyhkäise tähtäimellä hirviöiden yli merkitäksesi ne, päästä irti heittääksesi: bumerangi tainnuttaa ne vuorotellen ja palaa takaisin; toissijainen tuli tyhjentää jonon
+
+@ Hold: keep Lock-on held. Toggle: press Auto-aim Toggle to enable automatic acquisition. Click look stick to switch targets
+fi Pidä: pidä Lukitus pohjassa. Päälle/pois: paina Automaattitähtäys päälle/pois -näppäintä ottaaksesi automaattisen haun käyttöön. Vaihda kohdetta painamalla katsetikkua
+
+@ How close an enemy must be to the crosshair for automatic acquisition in toggle mode (degrees)
+fi Kuinka lähellä tähtäintä vihollisen on oltava, jotta se haetaan automaattisesti päälle/pois-tilassa (astetta)
+
+@ How far the view tilts up and down when you tilt the controller (pitch axis)
+fi Kuinka paljon näkymä kallistuu ylös ja alas, kun kallistat ohjainta (pystyakseli)
+
+@ How far the view turns left and right when you turn the controller (yaw axis)
+fi Kuinka paljon näkymä kääntyy vasemmalle ja oikealle, kun käännät ohjainta (vaaka-akseli)
+
+@ How far the view turns when you drag on the right half of the screen
+fi Kuinka paljon näkymä kääntyy, kun vedät ruudun oikealla puoliskolla
+
+@ How fast the boomerang flies (units per second)
+fi Kuinka nopeasti bumerangi lentää (yksikköä sekunnissa)
+
+@ How hard shots and explosions push debris around
+fi Kuinka voimakkaasti laukaukset ja räjähdykset paiskovat sirpaleita
+
+@ How hard the Powerwasher's water pushes enemies
+fi Kuinka voimakkaasti painepesurin vesi työntää vihollisia
+
+@ How long a hit freezes the game, in milliseconds
+fi Kuinka pitkään osuma jäädyttää pelin, millisekunteina
+
+@ How strongly fog covers the sky when fog is on
+fi Kuinka voimakkaasti sumu peittää taivaan, kun sumu on päällä
+
+@ How the view distorts underwater: Classic ripples the whole screen like software Quake, GLQuake slowly stretches and squashes the view
+fi Miten näkymä vääristyy veden alla: klassinen aaltoiluttaa koko ruutua kuin ohjelmisto-Quake, GLQuake venyttää ja litistää näkymää hitaasti
+
+@ Ignores gyro rotation slower than this many degrees per second, to hide hand tremor
+fi Ohittaa tätä hitaammat gyron kierrot (astetta sekunnissa) käden tärinän peittämiseksi
+
+@ Immersive: appears for a few seconds only when its value changes
+fi Immersiivinen: näkyy muutaman sekunnin vain arvon muuttuessa
+
+@ Keeps textures sharp on floors and walls seen at steep angles
+fi Pitää lattioiden ja seinien tekstuurit terävinä jyrkissä katselukulmissa
+
+@ Lights from rockets, muzzle flashes and explosions brighten nearby walls
+fi Rakettien, suuliekkien ja räjähdysten valo kirkastaa lähiseiniä
+
+@ Liquid surfaces swell and ring out where things move through them
+fi Nestepinnat aaltoilevat ja renkaat leviävät, kun jokin liikkuu niiden läpi
+
+@ Lobs sticky bombs (rockets ammo) that cling to walls, doors and monsters; alt-fire detonates them all
+fi Heittää tarrapommeja (raketteja ammuksina), jotka tarttuvat seiniin, oviin ja hirviöihin; toissijainen tuli räjäyttää ne kaikki
+
+@ Look of the classic particles: GLQuake draws soft round dots, Classic draws square pixels like software Quake
+fi Klassisten partikkelien ulkoasu: GLQuake piirtää pehmeitä pyöreitä pisteitä, klassinen neliömäisiä pikseleitä kuin ohjelmisto-Quake
+
+@ Low skips the background smear halo and uses fewer blur samples; high keeps the full halo and smoother streaks
+fi Matala ohittaa taustan sädekehän ja käyttää vähemmän sumennusnäytteitä; korkea säilyttää koko sädekehän ja pehmeämmät juovat
+
+@ Low: hard particle edges, half the scripted particles and fewer hit sparks. Medium: soft edges. High: soft edges checked per MSAA sample, most hit sparks
+fi Matala: terävät partikkelien reunat, puolet skriptatuista partikkeleista ja vähemmän osumakipinöitä. Keskitaso: pehmeät reunat. Korkea: pehmeät reunat MSAA-näytteittäin, eniten kipinöitä
+
+@ Marks fade out before expiring; oldest marks are recycled at the limit
+fi Jäljet haalistuvat ennen katoamista; vanhimmat kierrätetään rajan tullessa vastaan
+
+@ Max nested portal reflections to draw; each level redraws the scene
+fi Piirrettävien sisäkkäisten portaalinäkymien enimmäismäärä; jokainen taso piirtää näkymän uudelleen
+
+@ Max portals per screen with a live view; each one redraws the scene
+fi Elävää näkymää näyttävien portaalien enimmäismäärä ruudulla; jokainen piirtää näkymän uudelleen
+
+@ Maximum distance for acquiring and keeping an enemy locked
+fi Suurin etäisyys vihollisen hakemiseen ja lukittuna pitämiseen
+
+@ Minimum gap between freezes, so shotgun pellets and rapid fire count once; kills ignore it
+fi Vähimmäisväli jäädytysten välillä, jotta haulit ja sarjatuli lasketaan kerran; tapot ohittavat sen
+
+@ Modern terminal console with autocomplete popup, history search, ANSI colors, bash shell and piping; off uses the classic Quake console
+fi Moderni pääteikkunakonsoli: automaattinen täydennys, historiahaku, ANSI-värit, bash-kuori ja putket; pois käyttää klassista Quake-konsolia
+
+@ Monsters take proportionally less damage at higher values; above 100% is harder
+fi Hirviöt ottavat suhteessa vähemmän vahinkoa suuremmilla arvoilla; yli 100 % on vaikeampi
+
+@ Moving gibs leave blood on surfaces they touch
+fi Liikkuvat lihanpalat jättävät verta pintoihin, joihin osuvat
+
+@ Multiplier on the freeze when the hit kills the enemy; 1 means no extra
+fi Jäädytyksen kerroin, kun osuma tappaa vihollisen; 1 tarkoittaa ei lisää
+
+@ Multiplies ammo from pickups (up to the normal carry limit); below 100% is harder
+fi Kertoo löydetyt ammukset (normaaliin kantorajaan asti); alle 100 % on vaikeampi
+
+@ Multiplies health from pickups (up to 100, or the item's own limit); below 100% is harder
+fi Kertoo löydetyn terveyden (100:aan tai esineen omaan rajaan asti); alle 100 % on vaikeampi
+
+@ Nails stick to wood and bodies; hard surfaces deflect them to the floor
+fi Naulat jäävät kiinni puuhun ja ruumiisiin; kovat pinnat kimmottavat ne lattialle
+
+@ Nearest keeps crisp classic pixels; linear smooths textures
+fi Lähin säilyttää terävät klassiset pikselit; lineaarinen pehmentää tekstuureja
+
+@ New Game: Add-ons
+fi Uusi peli: lisäosat
+
+@ New Game: Customize
+fi Uusi peli: mukauta
+
+@ Night vision: how much dark areas are brightened; thermal: how strongly heat stands out
+fi Pimeänäkö: kuinka paljon tummia alueita kirkastetaan; lämpökamera: kuinka selvästi lämpö erottuu
+
+@ Night-vision and thermal goggles, cycle normal, night vision and thermal with Change Goggles (Add-ons), or use the Equipment Wheel
+fi Pimeänäkö- ja lämpökameralasit: vaihda normaalin, pimeänäön ja lämpökameran välillä Vaihda lasit -toiminnolla (lisäosat) tai käytä varustekiekkoa
+
+@ No single freeze lasts longer than this, however much damage or kill bonus adds
+fi Mikään jäädytys ei kestä tätä pidempään, lisäsi vahinko tai tappobonus kuinka paljon tahansa
+
+@ Oldest marks and nails are recycled at this shared limit
+fi Vanhimmat jäljet ja naulat kierrätetään tällä yhteisellä rajalla
+
+@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
+fi Ruudun tikku ja painikkeet: auto näyttää ne kosketuksen jälkeen ja piilottaa, kun käytetään muuta laitetta
+
+@ Only autosaves: quicksaves and the Save menu are off
+fi Vain automaattitallennukset: pikatallennus ja Tallenna-valikko eivät ole käytössä
+
+@ Place every weapon at the center, right or left of the view, or hide all viewmodels
+fi Sijoita jokainen ase näkymän keskelle, oikealle tai vasemmalle, tai piilota kaikki asemallit
+
+@ Play your chosen hit or kill cue when you damage an enemy
+fi Toista valitsemasi osuma- tai tappoääni, kun vahingoitat vihollista
+
+@ Playback speed: faster sounds shorter and higher
+fi Toistonopeus: nopeampi kuulostaa lyhyemmältä ja korkeammalta
+
+@ Plays the Quake theme in the main menu when no game is running
+fi Soittaa Quaken tunnusmusiikkia päävalikossa, kun peliä ei ole käynnissä
+
+@ Portals farther away than this are drawn as flat discs
+fi Tätä kauempana olevat portaalit piirretään litteinä kiekkoina
+
+@ Press attack once to keep firing, again to stop
+fi Paina hyökkäystä kerran ampuaksesi jatkuvasti, uudelleen lopettaaksesi
+
+@ Press run once to switch between running and walking
+fi Paina juoksua kerran vaihtaaksesi juoksun ja kävelyn välillä
+
+@ Raise or lower the tone independently of sound length
+fi Nostaa tai laskee sävelkorkeutta äänen pituudesta riippumatta
+
+@ Red screen edges show where damage came from: top is front, bottom is behind; Screen Flashes controls their strength
+fi Punaiset ruudun reunat näyttävät, mistä vahinko tuli: ylhäällä edestä, alhaalla takaa; Ruudun välähdykset säätää niiden voimakkuutta
+
+@ Replaces the classic dot particles with glowing sparks, smoke and blood; mods with their own particle effects keep them
+fi Korvaa klassiset pistepartikkelit hehkuvilla kipinöillä, savulla ja verellä; modit omine partikkelitehosteineen pitävät omansa
+
+@ Resolution and detail inside portal and teleporter views; lower tiers trim nested effects
+fi Portaali- ja teleporttinäkymien resoluutio ja yksityiskohdat; alemmat tasot karsivat sisäkkäisiä tehosteita
+
+@ Rippling light patterns on surfaces under water and slime
+fi Aaltoilevat valokuviot pinnoilla veden ja liman alla
+
+@ Scales all damage you take; above 100% is harder
+fi Skaalaa kaiken saamasi vahingon; yli 100 % on vaikeampi
+
+@ Screen edge for this element; elements on the same spot stack
+fi Tämän elementin ruudun reuna; samassa kohdassa olevat elementit pinoutuvat
+
+@ Seconds a monster hit by the boomerang stays stunned
+fi Montako sekuntia bumerangin osuma hirviö pysyy tainnuksissa
+
+@ Seconds impact marks and stuck nails stay before fading out; independent of Particle Quality
+fi Montako sekuntia osumajäljet ja kiinni jääneet naulat pysyvät ennen haalistumista; Partikkelien laadusta riippumaton
+
+@ Seconds messages at the top of the screen stay up
+fi Montako sekuntia ruudun yläosan viestit pysyvät näkyvissä
+
+@ Seconds the flick stick snap takes; lower is faster
+fi Flick-tikun käännöksen kesto sekunteina; pienempi on nopeampi
+
+@ See through enhanced water; enables Water Opacity
+fi Näe paremman veden läpi; ottaa käyttöön Veden peittävyyden
+
+@ Sensor grain, scanlines and flicker of the goggle image
+fi Lasien kuvan anturikohina, juovat ja välkyntä
+
+@ Shades every anti-aliasing sample; needs Anti-aliasing on
+fi Varjostaa jokaisen reunanpehmennysnäytteen; vaatii Reunanpehmennyksen
+
+@ Shifts colors so they stay distinct for the chosen color blindness
+fi Siirtää värejä, jotta ne erottuvat valitussa värisokeudessa
+
+@ Shotgun hits leave small surface marks (cosmetic only)
+fi Haulikon osumat jättävät pieniä jälkiä pintoihin (pelkkä kosmeettinen)
+
+@ Show corner ticks at screen centre while locked, even with Crosshair off
+fi Näytä kulmamerkit ruudun keskellä lukituksen aikana, myös ilman tähtäintä
+
+@ Show where grenades and other arcing shots will fly, bounce and land; local play only, not in deathmatch
+fi Näytä, minne kranaatit ja muut kaarevat laukaukset lentävät, kimpoavat ja laskeutuvat; vain paikallinen peli, ei deathmatchissa
+
+@ Shows text for important sounds: doors, alerted enemies, secrets, pickups
+fi Näyttää tekstin tärkeille äänille: ovet, hälytetyt viholliset, salaisuudet, löydöt
+
+@ Shows the distance fog that maps and mods set; off always gives clear view
+fi Näyttää kenttien ja modien asettaman etäisyyssumun; pois antaa aina kirkkaan näkymän
+
+@ Shows the player face next to the health number
+fi Näyttää pelaajan kasvot terveyslukeman vieressä
+
+@ Simulation detail, step rate, fade-out lifetimes and caps for gibs and shrapnel; low also skips mover collision
+fi Lihanpalojen ja sirpaleiden simulaation tarkkuus, päivitystahti, häivytysajat ja rajat; matala ohittaa myös törmäykset liikkuviin osiin
+
+@ Size of the on-screen buttons and move stick
+fi Ruudun painikkeiden ja liiketikun koko
+
+@ Slowly heals up to 100 health after 5 seconds without being hit
+fi Parantaa hitaasti 100 terveyteen asti, kun osumia ei ole tullut 5 sekuntiin
+
+@ Slows stick look while the crosshair is over an enemy
+fi Hidastaa tikkukatsetta, kun tähtäin on vihollisen päällä
+
+@ Slows the game down while the weapon wheel is open
+fi Hidastaa peliä, kun asekiekko on auki
+
+@ Slows the whole game down; single player only. Saves and demos stay compatible with other ports
+fi Hidastaa koko peliä; vain yksinpeli. Tallennukset ja demot pysyvät yhteensopivina muiden porttien kanssa
+
+@ Small camera jolt on each freeze; off with Reduce Motion
+fi Pieni kameran nytkähdys jokaisessa jäädytyksessä; pois Vähennä liikettä -asetuksella
+
+@ Snap and track enemies in local play, including split-screen; unavailable online
+fi Kohdistaa ja seuraa vihollisia paikallisessa pelissä, myös jaetulla ruudulla; ei verkkopelissä
+
+@ Sparks, smoke, chips, splinters and splashes fly off whatever your shots hit
+fi Kipinöitä, savua, siruja, säleitä ja roiskeita lentää kaikesta, mihin laukauksesi osuvat
+
+@ Spawns extra copies of every monster around the original when a level starts
+fi Luo kentän alkaessa jokaisesta hirviöstä lisäkopioita alkuperäisen ympärille
+
+@ Strength of the full-screen flashes for damage, pickups and powerups
+fi Koko ruudun välähdysten voimakkuus vahingosta, löydöistä ja bonuksista
+
+@ Stretch or shorten the sound while keeping its pitch
+fi Venyttää tai lyhentää ääntä säilyttäen sävelkorkeuden
+
+@ Surface opacity; requires Enhanced Water and Translucent Water
+fi Pinnan peittävyys; vaatii Paremman veden ja Läpikuultavan veden
+
+@ The hook latches onto metal surfaces (metal, tech, computer panels, copper)
+fi Koukku tarttuu metallipintoihin (metalli, tekniikka, tietokonepaneelit, kupari)
+
+@ The hook latches onto stone, brick, rock and any surface not recognised as wood or metal
+fi Koukku tarttuu kiveen, tiileen, kallioon ja kaikkiin pintoihin, joita ei tunnisteta puuksi tai metalliksi
+
+@ The hook latches onto wooden surfaces (texture names like wood, crate, plank)
+fi Koukku tarttuu puupintoihin (tekstuurinimet kuten wood, crate, plank)
+
+@ Turn the controller's motion sensor into a look input; needs a pad with a gyroscope
+fi Käyttää ohjaimen liikeanturia katseen ohjaukseen; vaatii gyroskoopilla varustetun ohjaimen
+
+@ Turns off view bob, strafe tilt and the camera kick when hit or firing
+fi Poistaa näkymän keinunnan, sivuttaiskallistuksen ja kameran nytkähdyksen osumista ja ampumisesta
+
+@ Turns on the extra liquid effects; Water Settings controls each one
+fi Ottaa käyttöön lisänestetehosteet; Veden asetukset säätää jokaista erikseen
+
+@ Turns the view to follow a moving enemy you are aiming at
+fi Kääntää näkymää seuraamaan liikkuvaa vihollista, johon tähtäät
+
+@ Turns the view when you roll the controller sideways; 0 disables it, negative reverses it
+fi Kääntää näkymää, kun kallistat ohjainta sivuttain; 0 poistaa käytöstä, negatiivinen kääntää suunnan
+
+@ Two-portal gun: fire and alt-fire place linked portals on flat walls; assign a weapon slot in Add-ons
+fi Kahden portaalin ase: tuli ja toissijainen tuli asettavat yhdistetyt portaalit tasaisille seinille; määritä asepaikka Lisäosissa
+
+@ Unlocks the FX Settings page: enhanced particles, impact effects and blood splatter
+fi Avaa Tehosteasetukset-sivun: paremmat partikkelit, osumatehosteet ja veriroiskeet
+
+@ Uses the 2021 re-release's smoother MD5 models (and MD3 replacements from mods) instead of the classic ones. Applies on the next map load
+fi Käyttää vuoden 2021 uusintajulkaisun pehmeämpiä MD5-malleja (ja modien MD3-korvaajia) klassisten sijaan. Tulee voimaan seuraavan kentän latauksessa
+
+@ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
+fi Käyttää kentän värillistä valoa (.lit-tiedosto tai BSPX-lohko); pois antaa alkuperäisen valkoisen valon. Tulee voimaan seuraavan kentän latauksessa
+
+@ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
+fi Vesisuihkun segmentit, pisaroiden määrä ja kiiltävä nesteen varjostus: matala käyttää yksinkertaisempia läpikuultavia virtoja; korkea pehmeitä kiiltäviä suihkuja
+
+@ When gyro looking applies: always, off while +gyroaction is held, or only while it is held
+fi Milloin gyrokatse on käytössä: aina, pois kun +gyroaction on pohjassa, tai vain kun se on pohjassa
+
+@ Which weapons trigger the freeze; melee covers the axe and any mod weapon used at close range without ammo
+fi Mitkä aseet laukaisevat jäädytyksen; lähitaistelu kattaa kirveen ja kaikki modien aseet, joita käytetään lähietäisyydeltä ilman ammuksia
+
+@ Your own rockets and grenades don't hurt you; rocket jumps still work
+fi Omat rakettisi ja kranaattisi eivät vahingoita sinua; rakettihypyt toimivat yhä
+
+# ==== ui.txt ====
+
+# Menus and pop-ups outside the options pages: save cards, launch, presets,
+# add-on browser, map packs, hints and dialogs.
+@ Select
+fi Valitse
+
+@ Back
+fi Takaisin
+
+@ Cancel
+fi Peruuta
+
+@ Confirm
+fi Vahvista
+
+@ Scroll
+fi Vieritä
+
+@ Section
+fi Osio
+
+@ Bind
+fi Määritä
+
+@ Cancel binding
+fi Peruuta määritys
+
+@ Clear
+fi Tyhjennä
+
+@ Clear pad
+fi Tyhjennä ohjain
+
+@ Remap
+fi Määritä uudelleen
+
+@ Type
+fi Kirjoita
+
+@ Shift
+fi Vaihto
+
+@ Done
+fi Valmis
+
+@ Del
+fi Del
+
+@ Space
+fi Välilyönti
+
+@ Save
+fi Tallenna
+
+@ Load
+fi Lataa
+
+@ Delete
+fi Poista
+
+@ Play
+fi Pelaa
+
+@ Yes
+fi Kyllä
+
+@ No
+fi Ei
+
+@ OK
+fi OK
+
+@ System
+fi Järjestelmä
+
+@ Language
+fi Kieli
+
+@ Help
+fi Ohje
+
+@ Fixed for this game: it was started without Customize
+fi Kiinteä tässä pelissä: se aloitettiin ilman Mukauta-valintaa
+
+@ Press a button or key to bind (Start cancels)
+fi Paina määritettävää painiketta tai näppäintä (Start peruuttaa)
+
+@ Press button...
+fi Paina painiketta...
+
+@ Press key...
+fi Paina näppäintä...
+
+@ Replace this binding?
+fi Korvataanko tämä määritys?
+
+@ is already assigned
+fi on jo määritetty
+
+@ {} already assigned
+fi {} on jo määritetty
+
+@ Open Controls to remap Lock-on?
+fi Avataanko Ohjaus Lukituksen määrittämiseksi?
+
+@ Lock-on
+fi Lukitus
+
+@ Auto-aim Toggle
+fi Automaattitähtäys päälle/pois
+
+@ Keyboard
+fi Näppäimistö
+
+@ Controller
+fi Peliohjain
+
+# main menu, dialogs and screens
+@ Map Packs
+fi Karttapaketit
+
+@ Customize
+fi Mukauta
+
+@ Level Select
+fi Kentän valinta
+
+@ Really quit?
+fi Lopetetaanko?
+
+@ You died
+fi Kuolit
+
+@ Continue from most recent save
+fi Jatka uusimmasta tallennuksesta
+
+@ Select save
+fi Valitse tallennus
+
+@ Restart level
+fi Aloita kenttä alusta
+
+@ Return to main menu
+fi Palaa päävalikkoon
+
+@ (disabled)
+fi (ei käytössä)
+
+@ (fixed for this game)
+fi (kiinteä tässä pelissä)
+
+@ (off)
+fi (pois)
+
+@ Apply Display Changes
+fi Ota näyttömuutokset käyttöön
+
+@ Display Mode
+fi Näyttötila
+
+@ Resolution
+fi Resoluutio
+
+@ desktop
+fi työpöytä
+
+@ Preset
+fi Esiasetus
+
+@ Map
+fi Kenttä
+
+@ Reset Shader Settings
+fi Palauta varjostimen asetukset
+
+@ Reset to Defaults
+fi Palauta oletukset
+
+@ Searching...
+fi Haetaan...
+
+@ This game only autosaves.
+fi Tämä peli tallentuu vain automaattisesti.
+
+@ (No Manual Saves modifier)
+fi (Ei manuaalisia tallennuksia -muokkain)
+
+@ End the current game?
+fi Lopetetaanko nykyinen peli?
+
+@ Unsaved progress will be lost.
+fi Tallentamaton edistyminen menetetään.
+
+@ End game
+fi Lopeta peli
+
+@ Overwrite
+fi Korvaa
+
+@ Overwrite "{}"?
+fi Korvataanko ”{}”?
+
+@ Saved {}
+fi Tallennettu {}
+
+@ Start a new game?
+fi Aloitetaanko uusi peli?
+
+@ New game
+fi Uusi peli
+
+@ New Game
+fi Uusi peli
+
+@ CUSTOM
+fi MUKAUTETTU
+
+@ Customize Experience
+fi Mukauta pelikokemusta
+
+@ Disable All
+fi Poista kaikki käytöstä
+
+@ Disable All Modifications
+fi Poista kaikki muutokset käytöstä
+
+@ Saves load in other source ports too.
+fi Tallennukset latautuvat myös muissa lähdeporteissa.
+
+@ Standard rules, no add-ons.
+fi Vakiosäännöt, ei lisäosia.
+
+@ Choose skill
+fi Valitse vaikeustaso
+
+@ The current game will end
+fi Nykyinen peli päättyy
+
+@ Easy
+fi Helppo
+
+@ Normal
+fi Normaali
+
+@ Hard
+fi Vaikea
+
+@ Nightmare
+fi Painajainen
+
+# graphics preset pop-up
+@ Choose a Graphics Preset
+fi Valitse grafiikan esiasetus
+
+@ Classic
+fi Klassinen
+
+@ Like the re-release: enhanced models,
+fi Kuten uusintajulkaisu: paremmat mallit,
+
+@ no added effects.
+fi ei lisätehosteita.
+
+@ Enhanced
+fi Parannettu
+
+@ Every enhancement at its highest quality.
+fi Kaikki parannukset korkeimmalla laadulla.
+
+@ Needs a capable GPU.
+fi Vaatii tehokkaan näytönohjaimen.
+
+@ Low-End
+fi Kevyt
+
+@ Fastest. No anti-aliasing, original
+fi Nopein. Ei reunanpehmennystä, alkuperäiset
+
+@ models, lowest effect quality.
+fi mallit, matalin tehosteiden laatu.
+
+@ Esc keeps the defaults
+fi Esc säilyttää oletukset
+
+@ Everything can be changed later in Options.
+fi Kaikkea voi muuttaa myöhemmin Options-valikossa.
+
+@ Keep Defaults
+fi Säilytä oletukset
+
+# save and load cards
+@ Save Game
+fi Tallenna peli
+
+@ Load Game
+fi Lataa peli
+
+@ Autosaves
+fi Automaattitallennukset
+
+@ newest first
+fi uusin ensin
+
+@ Saves: {}
+fi Tallennukset: {}
+
+@ Browse Autosaves
+fi Selaa automaattitallennuksia
+
+@ Every retained autosave, newest first
+fi Kaikki säilytetyt automaattitallennukset, uusin ensin
+
+@ New save
+fi Uusi tallennus
+
+@ Select to save your game here
+fi Valitse tallentaaksesi pelisi tähän
+
+@ No autosaves yet
+fi Ei vielä automaattitallennuksia
+
+@ Autosaves are made on level entry, secrets and more (Options > Gameplay)
+fi Automaattitallennus tehdään kentän alussa, salaisuuksista ja muulloin (Options > Pelattavuus)
+
+@ No saves yet
+fi Ei vielä tallennuksia
+
+@ Save from the Single Player menu, or press F6 to quicksave
+fi Tallenna Single Player -valikosta tai pikatallenna painamalla F6
+
+@ No picture
+fi Ei kuvaa
+
+@ Del: delete save
+fi Del: poista tallennus
+
+@ Delete "{}"?
+fi Poistetaanko ”{}”?
+
+@ This cannot be undone.
+fi Tätä ei voi perua.
+
+@ Quicksave
+fi Pikatallennus
+
+@ Autosave: {}
+fi Automaattitallennus: {}
+
+@ unknown trigger
+fi tuntematon laukaisija
+
+@ Latest - {}
+fi Uusin - {}
+
+@ Health {}
+fi Terveys {}
+
+@ Armor {}
+fi Panssari {}
+
+@ Kills {}/{}
+fi Tapot {}/{}
+
+@ Secrets {}/{}
+fi Salaisuudet {}/{}
+
+@ Split-screen, {} players
+fi Jaettu ruutu, {} pelaajaa
+
+@ Co-op
+fi Yhteistyö
+
+@ Customized
+fi Mukautettu
+
+@ Customized, {}
+fi Mukautettu, {}
+
+@ Date unavailable
+fi Päiväys ei saatavilla
+
+@ Just now
+fi Juuri nyt
+
+@ {} min ago
+fi {} min sitten
+
+@ {} h ago
+fi {} h sitten
+
+@ Level entry
+fi Kentän alku
+
+@ Secret found
+fi Salaisuus löydetty
+
+@ All enemies killed
+fi Kaikki viholliset tapettu
+
+@ All secrets found
+fi Kaikki salaisuudet löydetty
+
+@ Timer
+fi Ajastin
+
+# customize pages
+@ Standard rules
+fi Vakiosäännöt
+
+@ Modifiers changed: {}
+fi Muutetut muokkaimet: {}
+
+@ no add-ons
+fi ei lisäosia
+
+@ add-ons: {}
+fi lisäosat: {}
+
+@ Saves of this game are .qsa files: they need this source port.
+fi Tämän pelin tallennukset ovat .qsa-tiedostoja: ne vaativat tämän lähdeportin.
+
+@ Nothing changed: this plays as standard Quake.
+fi Ei muutoksia: tämä pelataan tavallisena Quakena.
+
+@ Changes apply now and are saved with this game (.qsa).
+fi Muutokset tulevat voimaan heti ja tallennetaan tämän pelin mukana (.qsa).
+
+@ This game started without Customize, so its rules are fixed.
+fi Tämä peli aloitettiin ilman Mukauta-valintaa, joten sen säännöt ovat kiinteät.
+
+@ Start a new game and choose Customize Experience.
+fi Aloita uusi peli ja valitse Mukauta pelikokemusta.
+
+@ These rules apply to the next customized game.
+fi Nämä säännöt koskevat seuraavaa mukautettua peliä.
+
+# add-on browser
+@ Fire
+fi Tuli
+
+@ Alt Fire
+fi Toissijainen tuli
+
+@ Configure Parameters >
+fi Määritä parametrit >
+
+@ Configure
+fi Määritä
+
+@ Settings
+fi Asetukset
+
+@ Change slot
+fi Vaihda paikkaa
+
+@ Toggle
+fi Päälle/pois
+
+@ Details
+fi Tiedot
+
+@ Enter or click the box: toggle
+fi Enter tai klikkaa ruutua: päälle/pois
+
+@ Right / Tab / click: details
+fi Oikea / Tab / klikkaus: tiedot
+
+@ Input Remapping
+fi Ohjainten uudelleenmääritys
+
+@ Weapon Slot
+fi Asepaikka
+
+@ Customized games save as .qsa files, which need this source port.
+fi Mukautetut pelit tallentuvat .qsa-tiedostoina, jotka vaativat tämän lähdeportin.
+
+@ This game started without Customize, so its add-ons are fixed. Customize a new game instead.
+fi Tämä peli aloitettiin ilman Mukauta-valintaa, joten sen lisäosat ovat kiinteät. Mukauta sen sijaan uusi peli.
+
+@ Bullet Time
+fi Bullet time
+
+@ Change Goggles
+fi Vaihda lasit
+
+@ Dodge / Dive
+fi Väistö / syöksy
+
+@ Goggles
+fi Lasit
+
+@ Hitstop
+fi Hitstop
+
+@ Projectile Shotguns
+fi Ammushaulikot
+
+@ BULLET TIME: 20%
+fi BULLET TIME: 20 %
+
+@ NORMAL SPEED
+fi NORMAALI NOPEUS
+
+@ SLOW MOTION: PHYSICAL PELLETS
+fi HIDASTUS: FYYSISET HAULIT
+
+@ DEMONSTRATION
+fi ESITTELY
+
+@ GAMEPLAY
+fi PELATTAVUUS
+
+@ LOOP
+fi SILMUKKA
+
+@ Preview unavailable
+fi Esikatselu ei saatavilla
+
+# shader and language help lines
+@ A setting of the chosen shader; arrows step it, Enter is not needed
+fi Valitun varjostimen asetus; nuolet muuttavat sitä, Enteriä ei tarvita
+
+@ Language of the menus, messages and the 2021 re-release's game text; System follows your computer's language
+fi Valikkojen, viestien ja vuoden 2021 uusintajulkaisun pelitekstien kieli; Järjestelmä seuraa tietokoneesi kieltä
+
+@ Puts every setting of the chosen shader back to the preset's defaults
+fi Palauttaa valitun varjostimen kaikki asetukset esiasetuksen oletuksiin
+
+@ RetroArch slang shader on the final image: CRT, scanlines, NTSC, sharpening; add your own in <game>/shaders
+fi RetroArchin slang-varjostin lopulliseen kuvaan: CRT, juovat, NTSC, terävöinti; lisää omasi kansioon <peli>/shaders
+
+# modern console footer
+@ Shift+PgUp/Dn: height  ` : hide
+fi Shift+PgUp/Dn: korkeus  ` : piilota
+
+@ Tab: complete  Ctrl+R: search  bash | pipe
+fi Tab: täydennä  Ctrl+R: hae  bash | putki
+
+@ ↑ +{} lines (End to jump) 
+fi ↑ +{} riviä (End siirtyy loppuun) 
+
+# add-on descriptions
+@ Create two linked portals on flat walls. Fire places the first portal; Alt Fire places the second. Walk through either portal to emerge from the other. Your momentum carries through. Assign a weapon slot below: pressing that slot repeatedly cycles its ordinary weapon and every enabled add-on assigned there. Portal view quality is configurable below.
+fi Luo kaksi yhdistettyä portaalia tasaisille seinille. Tuli asettaa ensimmäisen portaalin, Toissijainen tuli toisen. Kävele kumman tahansa portaalin läpi, niin tulet ulos toisesta. Vauhtisi säilyy. Määritä asepaikka alla: paikan toistuva painaminen kiertää sen tavallisen aseen ja kaikki sinne määritetyt käytössä olevat lisäosat. Portaalinäkymän laatua voi säätää alla.
+
+@ Hold Fire and sweep the crosshair over monsters to queue targets. Release Fire to throw: the boomerang visits each target, stuns it and returns to you. Alt Fire clears the queue. The weapon slot selects a group, not a separate hotkey: press it again to cycle through the weapons in that slot. Configure stun duration and flight speed below.
+fi Pidä Tulta pohjassa ja pyyhkäise tähtäimellä hirviöiden yli lisätäksesi kohteita jonoon. Päästä Tuli irti heittääksesi: bumerangi käy jokaisen kohteen luona, tainnuttaa sen ja palaa luoksesi. Toissijainen tuli tyhjentää jonon. Asepaikka valitsee ryhmän, ei erillistä pikanäppäintä: paina sitä uudelleen kiertääksesi paikan aseita. Säädä tainnutuksen kestoa ja lentonopeutta alla.
+
+@ Hold Fire to charge a sticky bomb using rocket ammunition; release to launch. A longer charge throws it faster. Bombs cling to walls, doors and monsters. Alt Fire detonates your planted bombs together. Place a trap, retreat, then detonate it when enemies approach. Assign any weapon slot below; repeated presses cycle through the ordinary weapon and add-ons in that slot.
+fi Pidä Tulta pohjassa ladataksesi tarrapommin raketteja käyttäen; päästä irti laukaistaksesi. Pidempi lataus heittää sen nopeammin. Pommit tarttuvat seiniin, oviin ja hirviöihin. Toissijainen tuli räjäyttää asettamasi pommit yhtä aikaa. Viritä ansa, vetäydy ja räjäytä se vihollisten lähestyessä. Määritä mikä tahansa asepaikka alla; toistuvat painallukset kiertävät paikan tavallisen aseen ja lisäosat.
+
+@ Fire launches a chain hook. It latches onto a permitted surface or enemy and reels you toward the anchor. Fire again or use Alt Fire to let go. Choose which materials and enemies can be hooked in Configure Parameters. Assign it to any weapon slot; repeated presses of the slot's existing binding cycle through its weapons.
+fi Tuli laukaisee ketjukoukun. Se tarttuu sallittuun pintaan tai viholliseen ja kelaa sinut kiinnityskohtaa kohti. Ammu uudelleen tai käytä Toissijaista tulta irrottaaksesi. Valitse kohdassa Määritä parametrit, mihin materiaaleihin ja vihollisiin koukku tarttuu. Määritä se mihin tahansa asepaikkaan; paikan nykyisen näppäimen toistuvat painallukset kiertävät sen aseita.
+
+@ A piercing railgun inspired by Quake III. Fire sends a slug through every enemy along its line. Each shot consumes two cells, with a 1.5 second refire interval. Damage and the spiral trail colour are configurable below. Choose a weapon slot: the slot's current binding selects and cycles the weapons assigned to it.
+fi Quake III:n innoittama lävistävä railgun. Tuli lähettää luodin jokaisen linjalla olevan vihollisen läpi. Jokainen laukaus kuluttaa kaksi kennoa, ja ampumisväli on 1,5 sekuntia. Vahinkoa ja spiraalivanan väriä voi säätää alla. Valitse asepaikka: paikan nykyinen näppäin valitsee ja kiertää siihen määritettyjä aseita.
+
+@ A Portal-style gel sprayer. Fire sprays blue Repulsion gel: land, jump or run into it to bounce, and landings on it never hurt. Alt Fire sprays orange Propulsion gel: run across it to go much faster. Gel coats floors and walls until washed off with the Powerwasher. Assign a weapon slot below; repeated presses cycle the weapons in that slot.
+fi Portal-tyylinen geeliruisku. Tuli ruiskuttaa sinistä hylkimisgeeliä: laskeudu, hyppää tai juokse siihen pomppiaksesi, eikä siihen laskeutuminen koskaan satu. Toissijainen tuli ruiskuttaa oranssia vauhtigeeliä: juokse sen yli liikkuaksesi paljon nopeammin. Geeli peittää lattiat ja seinät, kunnes se pestään pois painepesurilla. Määritä asepaikka alla; toistuvat painallukset kiertävät paikan aseita.
+
+@ A water cannon. Fire shoots a straight jet with limited reach; Alt Fire a wide, shorter fan. The water pushes enemies back, turns projectiles aside and washes away gel and blood. Push strength is configurable below. Assign a weapon slot below; repeated presses cycle the weapons in that slot.
+fi Vesitykki. Tuli ampuu suoran, rajallisen kantaman suihkun; Toissijainen tuli leveän, lyhyemmän viuhkan. Vesi työntää vihollisia taaksepäin, kääntää ammuksia sivuun ja huuhtoo pois geelin ja veren. Työnnön voimaa voi säätää alla. Määritä asepaikka alla; toistuvat painallukset kiertävät paikan aseita.
+
+@ One equipment add-on includes both night vision and thermal vision. The Change Goggles action cycles Normal, Night Vision, Thermal, then Normal again. Night vision brightens dark rooms; thermal vision highlights living enemies. Goggles do not occupy a weapon slot. Configure intensity and sensor noise below. The binding affects only this add-on.
+fi Yksi varustelisäosa sisältää sekä pimeänäön että lämpökameran. Vaihda lasit -toiminto kiertää Normaali, Pimeänäkö, Lämpökamera ja taas Normaali. Pimeänäkö kirkastaa pimeitä huoneita; lämpökamera korostaa eläviä vihollisia. Lasit eivät vie asepaikkaa. Säädä voimakkuutta ja anturikohinaa alla. Näppäinmääritys koskee vain tätä lisäosaa.
+
+@ Press Dodge with a movement direction on the ground or in midair: dive forward or leap backward and sideways. Diagonals are supported. Each press launches once, with a short recovery. The player body animates in third person. Assign the Dodge action below or in Controls.
+fi Paina Väistöä liikesuunnan kanssa maassa tai ilmassa: syöksy eteenpäin tai loikkaa taakse ja sivuille. Myös vinosuunnat toimivat. Jokainen painallus singauttaa kerran, ja sen jälkeen on lyhyt palautumisaika. Pelaajan keho animoituu kolmannessa persoonassa. Määritä Väistö-toiminto alla tai Ohjaus-sivulla.
+
+@ Use the dedicated Bullet Time action to slow the whole local game to 20% speed. Hold is the default; Toggle switches on each press. The optional meter limits use in real seconds and regenerates while inactive. Disable the meter for unlimited use. Remap the action and configure duration and regeneration below.
+fi Käytä omaa Bullet time -toimintoa hidastaaksesi koko paikallisen pelin 20 %:n nopeuteen. Oletuksena Pidä; Päälle/pois vaihtaa tilaa joka painalluksella. Valinnainen mittari rajoittaa käyttöä todellisina sekunteina ja latautuu, kun toimintoa ei käytetä. Poista mittari käytöstä rajattomaa käyttöä varten. Määritä toiminto uudelleen ja säädä kestoa ja latautumista alla.
+
+@ Both shotguns and enemy grunts fire physical pellets with their original spread and damage. Fast default projectiles feel immediate; lower their speed to dodge incoming fire during bullet time. Configure projectile speed below, or reset it to the default of 10000 units per second.
+fi Molemmat haulikot ja vihollissotilaat ampuvat fyysisiä hauleja alkuperäisellä hajonnalla ja vahingolla. Nopeat oletusammukset tuntuvat välittömiltä; hidasta niitä väistääksesi tulitusta bullet timen aikana. Säädä ammusten nopeutta alla tai palauta oletusarvo 10000 yksikköä sekunnissa.
+
+@ Freezes the game for a split second when you damage an enemy, so hits feel heavier. Single player only. Choose which weapons trigger it (all, melee, ranged or explosives), how long it lasts and how much more a kill freezes. Advanced settings cover enemy toughness, damage scaling, cooldown and the longest freeze.
+fi Pysäyttää pelin sekunnin murto-osaksi, kun vahingoitat vihollista, joten osumat tuntuvat raskaammilta. Vain yksinpeli. Valitse, mitkä aseet laukaisevat sen (kaikki, lähitaistelu, kaukotaistelu tai räjähteet), kuinka kauan se kestää ja kuinka paljon pidempään tappo jäädyttää. Lisäasetukset kattavat vihollisten sitkeyden, vahingon skaalauksen, odotusajan ja pisimmän jäädytyksen.
+
+# map packs and the Quaddicted browser
+@ Get more maps (Quaddicted)...
+fi Lisää karttoja (Quaddicted)...
+
+@ Type to filter...
+fi Kirjoita suodattaaksesi...
+
+@ Launch mod
+fi Käynnistä modi
+
+@ Start first map
+fi Aloita ensimmäinen kenttä
+
+@ (running)
+fi (käynnissä)
+
+@ running
+fi käynnissä
+
+@ Recent
+fi Viimeisimmät
+
+@ Name
+fi Nimi
+
+@ Dir
+fi Kansio
+
+@ Default
+fi Oletus
+
+@ Title
+fi Otsikko
+
+@ Sort: {}
+fi Lajittelu: {}
+
+@ {} installed
+fi {} asennettu
+
+@ {}/{} matching
+fi {}/{} vastaavaa
+
+@ {} maps, {} completed
+fi {} karttaa, {} läpäisty
+
+@ {}/{} matching, {} completed
+fi {}/{} vastaavaa, {} läpäisty
+
+@ no maps of its own
+fi ei omia karttoja
+
+@ dir: {}
+fi kansio: {}
+
+@ base: {}
+fi pohja: {}
+
+@ Browse the Quaddicted archive of
+fi Selaa Quaddictedin arkistoa
+
+@ single-player maps and episodes,
+fi yksinpelikartoista ja -episodeista,
+
+@ then download and install them
+fi lataa ja asenna ne sitten
+
+@ here. Each release gets its own
+fi täällä. Jokainen julkaisu saa oman
+
+@ entry in this list.
+fi rivinsä tähän luetteloon.
+
+@ Needs an internet connection.
+fi Vaatii internetyhteyden.
+
+@ Quaddicted Map Archive
+fi Quaddicted-kartta-arkisto
+
+@ Newest
+fi Uusimmat
+
+@ Author
+fi Tekijä
+
+@ Size
+fi Koko
+
+@ Loading the map list...
+fi Ladataan karttaluetteloa...
+
+@ Couldn't load the map list: {}
+fi Karttaluettelon lataus epäonnistui: {}
+
+@ {} single-player releases  -  F5 refreshes
+fi {} yksinpelijulkaisua  -  F5 päivittää
+
+@ {} matching
+fi {} vastaavaa
+
+@ by {}
+fi tekijä {}
+
+@ requires: {}
+fi vaatii: {}
+
+@ maps: {}
+fi kartat: {}
+
+@ Failed: {}
+fi Epäonnistui: {}
+
+@ Downloading... {}%
+fi Ladataan... {} %
+
+@ Unpacking...
+fi Puretaan...
+
+@ Installed in {}/  -  Enter: play
+fi Asennettu kansioon {}/  -  Enter: pelaa
+
+@ Enter: download and install
+fi Enter: lataa ja asenna
+
+@ unpacking
+fi puretaan
+
+@ failed
+fi epäonnistui
+
+@ installed
+fi asennettu
+
+@ Downloads are not available in the browser build
+fi Lataukset eivät ole käytettävissä selainversiossa
+
+@ the map list could not be read
+fi karttaluetteloa ei voitu lukea
+
+@ downloading needs the curl program
+fi lataaminen vaatii curl-ohjelman
+
+@ download failed
+fi lataus epäonnistui
+
+@ the download is not a valid zip
+fi ladattu tiedosto ei ole kelvollinen zip
+
+@ nothing to install for this engine
+fi ei mitään asennettavaa tälle pelimoottorille
+
+@ needs {} installed first
+fi vaatii ensin asennetun {}
+
+@ couldn't unpack {}
+fi {} purku epäonnistui
+
+# help screen
+@ About
+fi Tietoja
+
+@ < Back
+fi < Takaisin
+
+# tr_ctx keys: English shows the short word, the key says which meaning
+@ Save (a manual save, as opposed to a quicksave or autosave)
+fi Tallennus
+
+# ==== hud.txt ====
+
+# HUD, weapon and equipment wheels, sound captions and other in-game text.
+# Weapon, monster and item names follow the 2021 re-release's own translations.
+@ Axe
+fi Kirves
+
+@ Shotgun
+fi Haulikko
+
+@ Double-Barrelled Shotgun
+fi Kaksoishaulikko
+
+@ Nailgun
+fi Naulapyssy
+
+@ Super Nailgun
+fi Supernaulapyssy
+
+@ Grenade Launcher
+fi Kranaatinheitin
+
+@ Rocket Launcher
+fi Raketinheitin
+
+@ Thunderbolt
+fi Salamanheitin
+
+@ Portal Gun
+fi Portaaliase
+
+@ Boomerang
+fi Bumerangi
+
+@ Stickybomb Launcher
+fi Tarrapomminheitin
+
+@ Railgun
+fi Railgun
+
+@ Hookshot
+fi Tarttumakoukku
+
+@ Gel Sprayer
+fi Geeliruisku
+
+@ Powerwasher
+fi Painepesuri
+
+@ Night Vision Goggles
+fi Pimeänäkölasit
+
+@ Thermal Goggles
+fi Lämpökameralasit
+
+@ Normal vision
+fi Normaali näkö
+
+@ ON
+fi PÄÄLLÄ
+
+@ OFF
+fi POIS
+
+@ {} (turn on)
+fi {} (päälle)
+
+@ {} (turn off)
+fi {} (pois)
+
+@ Move mouse to select, release to toggle
+fi Liikuta hiirtä valitaksesi, päästä irti vaihtaaksesi
+
+@ Move mouse to select, release to equip
+fi Liikuta hiirtä valitaksesi, päästä irti varustaaksesi
+
+@ Release to toggle
+fi Päästä irti vaihtaaksesi
+
+@ Release to equip
+fi Päästä irti varustaaksesi
+
+@ shells
+fi haulit
+
+@ nails
+fi naulat
+
+@ rockets
+fi raketit
+
+@ cells
+fi kennot
+
+@ Kills: {}/{}
+fi Tapot: {}/{}
+
+@ Secrets: {}/{}
+fi Salaisuudet: {}/{}
+
+@ Time {}
+fi Aika {}
+
+@ Press any button to continue...
+fi Jatka painamalla mitä tahansa painiketta...
+
+@ Press any key to continue...
+fi Jatka painamalla mitä tahansa näppäintä...
+
+@ BULLET TIME
+fi BULLET TIME
+
+@ AUTO AIM
+fi AUTOM. TÄHTÄYS
+
+@ Crosshair
+fi Tähtäin
+
+@ + Marker
+fi + merkki
+
+@ Hit markers off
+fi Osumamerkit pois
+
+@ On target
+fi Kohteessa
+
+@ On kill
+fi Tapossa
+
+# sound captions
+@ [Secret found]
+fi [Salaisuus löydetty]
+
+@ [Message]
+fi [Viesti]
+
+@ [Switch activated]
+fi [Kytkin aktivoitu]
+
+@ [Key picked up]
+fi [Avain poimittu]
+
+@ [Rune picked up]
+fi [Riimu poimittu]
+
+@ [Teleporter]
+fi [Teleportti]
+
+@ [Teleport]
+fi [Teleporttaus]
+
+@ [Splash]
+fi [Loiskis]
+
+@ [Leaving water]
+fi [Nousee vedestä]
+
+@ [Door]
+fi [Ovi]
+
+@ [Platform moving]
+fi [Taso liikkuu]
+
+@ [Button]
+fi [Painike]
+
+@ [Health picked up]
+fi [Terveys poimittu]
+
+@ [Armor picked up]
+fi [Panssari poimittu]
+
+@ [Quad Damage wearing off]
+fi [Quad Damage hiipuu]
+
+@ [Quad Damage]
+fi [Quad Damage]
+
+@ [Pentagram wearing off]
+fi [Pentagrammi hiipuu]
+
+@ [Pentagram of Protection]
+fi [Suojeluksen pentagrammi]
+
+@ [Ring wearing off]
+fi [Sormus hiipuu]
+
+@ [Ring of Shadows]
+fi [Varjojen sormus]
+
+@ [Biosuit wearing off]
+fi [Biopuku hiipuu]
+
+@ [Biosuit]
+fi [Biopuku]
+
+@ [Item picked up]
+fi [Esine poimittu]
+
+@ [Weapon picked up]
+fi [Ase poimittu]
+
+@ [Ammo picked up]
+fi [Ammukset poimittu]
+
+@ [Explosion]
+fi [Räjähdys]
+
+@ [Grenade launched]
+fi [Kranaatti laukaistu]
+
+@ [Grenade bounce]
+fi [Kranaatti kimpoaa]
+
+@ [Rocket fired]
+fi [Raketti laukaistu]
+
+@ [Nails fired]
+fi [Nauloja ammuttu]
+
+@ [Lightning]
+fi [Salama]
+
+@ [Thunder]
+fi [Ukkonen]
+
+@ [Enforcer alerted]
+fi [Enforcer hälyttyi]
+
+@ [Grunt alerted]
+fi [Grunt hälyttyi]
+
+@ [Rottweiler alerted]
+fi [Rottweiler hälyttyi]
+
+@ [Knight alerted]
+fi [Knight hälyttyi]
+
+@ [Death Knight alerted]
+fi [Death Knight hälyttyi]
+
+@ [Scrag alerted]
+fi [Scrag hälyttyi]
+
+@ [Ogre alerted]
+fi [Ogre hälyttyi]
+
+@ [Fiend alerted]
+fi [Fiend hälyttyi]
+
+@ [Shambler alerted]
+fi [Shambler hälyttyi]
+
+@ [Zombie groaning]
+fi [Zombi voihkii]
+
+@ [Vore alerted]
+fi [Vore hälyttyi]
+
+@ [Vore attacking]
+fi [Vore hyökkää]
+
+@ [Spawn alerted]
+fi [Spawn hälyttyi]
+
+@ [Rotfish]
+fi [Rotfish]
+
+@ [Spawn]
+fi [Spawn]
+
+@ [Chthon]
+fi [Chthon]
+
+@ [Hard landing]
+fi [Kova lasku]
+
+@ [Drowning]
+fi [Hukkuminen]
+
+@ [Gasping for air]
+fi [Haukkoo henkeä]
+
+@ [Burning]
+fi [Palaminen]
+
+@ [Telefrag]
+fi [Telefrag]
+
+@ [Gibbed]
+fi [Silpoutui]
+
+# ==== console.txt ====
+
+# Console messages, shown translated only with con_translate 1 (Translate Console).
+# Cvar and command names stay as they are.
+@ Autosaved.
+fi Tallennettu automaattisesti.
+
+@ Game saved.
+fi Peli tallennettu.
+
+@ Can't save now.
+fi Tallentaminen ei onnistu nyt.
+
+@ This game only autosaves (No Manual Saves modifier).
+fi Tämä peli tallentuu vain automaattisesti (Ei manuaalisia tallennuksia -muokkain).
+
+@ Loading {}...
+fi Ladataan {}...
+
+@ load failed: {}
+fi lataus epäonnistui: {}
+
+@ ERROR: autosave failed: {}
+fi VIRHE: automaattitallennus epäonnistui: {}
+
+@ ERROR: couldn't open {}
+fi VIRHE: tiedostoa {} ei voitu avata
+
+@ ERROR: couldn't open {}.
+fi VIRHE: tiedostoa {} ei voitu avata.
+
+@ ERROR: couldn't write {}: {}
+fi VIRHE: tiedostoa {} ei voitu kirjoittaa: {}
+
+@ ERROR: couldn't create {}: {}
+fi VIRHE: tiedostoa {} ei voitu luoda: {}
+
+@ couldn't write {}: {}
+fi tiedostoa {} ei voitu kirjoittaa: {}
+
+@ Wrote {}
+fi Kirjoitettu {}
+
+@ screenshot failed: {}
+fi kuvakaappaus epäonnistui: {}
+
+@ screenshot: {}
+fi kuvakaappaus: {}
+
+@ No readable save available. Select save or restart the level.
+fi Luettavaa tallennusta ei ole. Valitse tallennus tai aloita kenttä alusta.
+
+@ Unknown command "{}"
+fi Tuntematon komento ”{}”
+
+@ couldn't exec {}
+fi tiedostoa {} ei voitu suorittaa
+
+@ execing {}
+fi suoritetaan {}
+
+@ execing config.cfg (inherited from {})
+fi suoritetaan config.cfg (peritty kohteesta {})
+
+@ execing config.cfg (mod defaults)
+fi suoritetaan config.cfg (modin oletukset)
+
+@ execing default.cfg (built-in)
+fi suoritetaan default.cfg (sisäänrakennettu)
+
+@ {} cvars
+fi {} muuttujaa
+
+@ {} commands
+fi {} komentoa
+
+@ Can't "cmd", not connected
+fi ”cmd” ei onnistu, ei yhteyttä
+
+@ Looking for Quake servers...
+fi Etsitään Quake-palvelimia...
+
+@ Bad value, must be between 1 and 65534
+fi Virheellinen arvo, oltava välillä 1–65534
+
+@ Couldn't handle music file {}
+fi Musiikkitiedostoa {} ei voitu käsitellä
+
+@ Bug report written to {}
+fi Virheraportti kirjoitettu tiedostoon {}
+
+@ bugreport: can't create {}: {}
+fi bugreport: tiedostoa {} ei voi luoda: {}
+
+@ graphics preset: {}
+fi grafiikan esiasetus: {}
+
+@ Presets (r_shader_preset <name>):
+fi Esiasetukset (r_shader_preset <nimi>):
+
+@ Add your own .slangp presets under <game>/shaders/.
+fi Lisää omat .slangp-esiasetuksesi kansioon <peli>/shaders/.
+
+@ no shader preset loaded (r_shader_preset)
+fi varjostimen esiasetusta ei ole ladattu (r_shader_preset)
+
+@ r_shader_preset: "{}" not found
+fi r_shader_preset: ”{}” ei löytynyt
+
+@ no parameter "{}" in this preset
+fi tässä esiasetuksessa ei ole parametria ”{}”
+
+@ {} = {} (default {}, {}..{})
+fi {} = {} (oletus {}, {}..{})
+
+@ Switching to {}...
+fi Vaihdetaan: {}...
+
+@ game: no game dir "{}" in {}
+fi game: pelikansiota ”{}” ei ole kohteessa {}
+
+@ game: can't find the engine executable
+fi game: pelimoottorin suoritettavaa tiedostoa ei löydy
+
+@ game: exec failed: {}
+fi game: suoritus epäonnistui: {}
+
+@ game: launch failed: {}
+fi game: käynnistys epäonnistui: {}
+
+@ loaded {} in {}s
+fi {} ladattu {} s:ssa
+
+@ No demos listed with startdemos
+fi startdemos ei luettele demoja
+
+@ Playing demo from {}.
+fi Toistetaan demoa: {}.
+
+@ {} frames {} seconds {} fps
+fi {} ruutua {} sekuntia {} fps
+
+@ Recording to {}.
+fi Tallennetaan tiedostoon {}.
+
+@ Completed demo
+fi Demo valmis
+
+@ Can't record during demo playback
+fi Tallennus ei onnistu demon toiston aikana
+
+@ Relative pathnames are not allowed.
+fi Suhteelliset polut eivät ole sallittuja.
+
+@ Can't record - try again when connected
+fi Tallennus ei onnistu - yritä uudelleen, kun yhteys on muodostettu
+
+@ {} demo(s) in loop
+fi {} demoa silmukassa
+
+@ Not recording a demo.
+fi Demoa ei tallenneta.
+
+@ {} joined on a gamepad
+fi {} liittyi peliohjaimella
+
+@ goggles: needs a game started with Add-ons and Goggles enabled
+fi goggles: vaatii pelin, joka on aloitettu Lisäosat ja Lasit käytössä
+
+@ equip: needs a game started with Add-ons and Goggles enabled
+fi equip: vaatii pelin, joka on aloitettu Lisäosat ja Lasit käytössä
+
+@ UDP listening on port {}
+fi UDP kuuntelee porttia {}
+
+@ UDP bind on port {} failed: {}
+fi UDP-sidonta porttiin {} epäonnistui: {}
+
+@ Connection accepted by {}
+fi Yhteyden hyväksyi {}
+
+@ Connection failed: {}
+fi Yhteys epäonnistui: {}
+
+@ Couldn't resolve {}
+fi Osoitetta {} ei voitu selvittää
+
+@ Connecting to {}...
+fi Yhdistetään kohteeseen {}...
+
+@ Connecting to QuakeWorld server {}...
+fi Yhdistetään QuakeWorld-palvelimeen {}...
+
+@ Disconnected: {}
+fi Yhteys katkesi: {}
+
+@ Server disconnected
+fi Palvelin katkaisi yhteyden
+
+@ Client {} connected
+fi Asiakas {} yhdistetty
+
+@ Client {} timed out
+fi Asiakkaan {} aikakatkaisu
+
+@ Couldn't spawn server {}: {}
+fi Palvelimen {} käynnistys epäonnistui: {}
+
+@ maxplayers can not be changed while a server is running.
+fi maxplayers-arvoa ei voi muuttaa palvelimen ollessa käynnissä.
+
+@ You can't kick yourself!
+fi Et voi potkaista itseäsi!
+
+@ Only the server may changelevel
+fi Vain palvelin voi käyttää changelevel-komentoa
+
+@ {} renamed to {}
+fi {} vaihtoi nimekseen {}

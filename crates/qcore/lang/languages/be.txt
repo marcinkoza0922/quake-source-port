@@ -1,0 +1,3024 @@
+# be: the port's own text; English keys from crates/qcore/lang/*.txt.
+# Format in crates/qcore/src/lang/catalog.rs; check with tools/lang_check.py.
+
+# ==== menu.txt ====
+
+# Options pages: page names, row labels and choice values.
+@ 10% speed
+be хуткасць 10%
+
+@ 2 split-screen
+be 2 на падзеленым экране
+
+@ 3 split-screen
+be 3 на падзеленым экране
+
+@ 4 split-screen
+be 4 на падзеленым экране
+
+@ 5 split-screen
+be 5 на падзеленым экране
+
+@ 6 split-screen
+be 6 на падзеленым экране
+
+@ 2D aiming
+be 2D-прыцэльванне
+
+@ 2x monsters
+be монстры x2
+
+@ 3x monsters
+be монстры x3
+
+@ 4x monsters
+be монстры x4
+
+@ 3D resolution
+be 3D-раздзяляльнасць
+
+@ 3D view
+be 3D-выгляд
+
+@ 8-bit Color
+be 8-бітны колер
+
+@ Accessibility
+be Спецмагчымасці
+
+@ Acquisition Cone
+be Конус захопу
+
+@ Activation
+be Актывацыя
+
+@ Add a ringing room tail after the cue
+be Дадае звонкі хвост рэверберацыі пасля сігналу
+
+@ Add delayed repeats after the cue
+be Дадае адкладзеныя паўторы пасля сігналу
+
+@ Add saturation and distortion
+be Дадае насычэнне і скажэнне
+
+@ Add-ons
+be Дапаўненні
+
+@ Address
+be Адрас
+
+@ Adds fine noise to hide color banding
+be Дадае лёгкі шум, які хавае каляровыя палосы
+
+@ Advanced Settings
+be Пашыраныя налады
+
+@ Aim Assist
+be Дапамога ў прыцэльванні
+
+@ Aim Rotation
+be Даварот прыцэла
+
+@ Aim Slowdown
+be Запавольванне прыцэла
+
+@ Aim Style
+be Стыль прыцэльвання
+
+@ All
+be Усе
+
+@ All enemies
+be Усе ворагі
+
+@ Alt Fire (Add-ons)
+be Альт. агонь (дапаўненні)
+
+@ Always Run
+be Заўсёды бегчы
+
+@ Ambient Occlusion
+be Фонавае зацяненне
+
+@ Ammo Counts
+be Лічыльнікі боепрыпасаў
+
+@ Ammo Counts Position
+be Пазіцыя лічыльнікаў боепрыпасаў
+
+@ Ammo Pickups
+be Падбор патронаў
+
+@ Anisotropic
+be Анізатрапія
+
+@ Anti-aliasing
+be Згладжванне
+
+@ Apply To
+be Ужываць да
+
+@ Armor
+be Браня
+
+@ Armor Position
+be Пазіцыя брані
+
+@ Ask
+be Пытацца
+
+@ Attack
+be Атака
+
+@ Audio
+be Гук
+
+@ Auto-aim
+be Аўтапрыцэл
+
+@ Auto-aim Settings
+be Налады аўтапрыцэла
+
+@ Autosave
+be Аўтазахаванне
+
+@ Autosave Settings
+be Налады аўтазахавання
+
+@ Autosave Timer
+be Таймер аўтазахавання
+
+@ Autosaves to Keep
+be Колькасць аўтазахаванняў
+
+@ Bass
+be Нізкія
+
+@ Blip
+be Біп
+
+@ Blood Quality
+be Якасць крыві
+
+@ Blood Splatter Settings
+be Налады пырскаў крыві
+
+@ Blue
+be Сіні
+
+@ Boomerang Settings
+be Налады бумеранга
+
+@ Boost or cut high frequencies in decibels
+be Узмацняе або аслабляе высокія частоты, у дэцыбелах
+
+@ Boost or cut low frequencies in decibels
+be Узмацняе або аслабляе нізкія частоты, у дэцыбелах
+
+@ Brightness
+be Яркасць
+
+@ Bullet Time (Add-ons)
+be Запавольванне часу (дапаўненні)
+
+@ Bullet Time Settings
+be Налады запавольвання часу
+
+@ Button Glyphs
+be Значкі кнопак
+
+@ Button Size
+be Памер кнопак
+
+@ Camera
+be Камера
+
+@ Caustic Intensity
+be Яркасць каўстыкі
+
+@ Caustics
+be Каўстыка
+
+@ Center
+be Па цэнтры
+
+@ Center Message Position
+be Пазіцыя паведамленняў па цэнтры
+
+@ Center Message Time
+be Час паведамленняў па цэнтры
+
+@ Center View
+be Цэнтраваць погляд
+
+@ Change Color on Kill
+be Мяняць колер пры забойстве
+
+@ Change Color on Target
+be Мяняць колер на мэце
+
+@ Chime
+be Перазвон
+
+@ Click
+be Пстрычка
+
+@ Clink
+be Дзынканне
+
+@ Coin
+be Манетка
+
+@ Color
+be Колер
+
+@ Color Filter
+be Каляровы фільтр
+
+@ Color of the grenade arc
+be Колер траекторыі гранаты
+
+@ Colored Lighting
+be Каляровае асвятленне
+
+@ Connect
+be Падлучыцца
+
+@ Contrast
+be Кантраст
+
+@ Controls
+be Кіраванне
+
+@ Cooldown (ms)
+be Перазарадка (мс)
+
+@ Crosshair Outline
+be Абвядзенне прыцэла
+
+@ Crosshair Shape
+be Форма прыцэла
+
+@ Crosshair Size
+be Памер прыцэла
+
+@ Current Ammo
+be Бягучыя патроны
+
+@ Current Ammo Position
+be Пазіцыя бягучых патронаў
+
+@ Customize This Game
+be Наладзіць гэту гульню
+
+@ Damage
+be Шкода
+
+@ Damage Taken
+be Атрыманая шкода
+
+@ Debris
+be Абломкі
+
+@ Debris Quality
+be Якасць абломкаў
+
+@ Debris Settings
+be Налады абломкаў
+
+@ Directional Damage
+be Кірунак шкоды
+
+@ Dithering
+be Дызерынг
+
+@ Dodge / Dive (Add-ons)
+be Ухіл / скачок (дапаўненні)
+
+@ Dragging up looks down instead of up
+be Рух пальца ўгору апускае погляд, а не падымае
+
+@ Drive
+be Перагрузка
+
+@ Dynamic Lights
+be Дынамічнае святло
+
+@ Echo
+be Рэха
+
+@ Enemy Health
+be Здароўе ворагаў
+
+@ Enemy Wounds
+be Раны ворагаў
+
+@ Enhanced Blood Splatter
+be Палепшаныя пырскі крыві
+
+@ Enhanced FX
+be Палепшаныя эфекты
+
+@ Enhanced Models
+be Палепшаныя мадэлі
+
+@ Enhanced Particles
+be Палепшаныя часціцы
+
+@ Enhanced Water
+be Палепшаная вада
+
+@ Enhancements
+be Паляпшэнні
+
+@ Equipment Wheel (Add-ons)
+be Кола рыштунку (дапаўненні)
+
+@ Exploding boxes throw metal shards
+be Скрыні, што выбухаюць, раскідваюць аскепкі металу
+
+@ Explosion Damage
+be Шкода ад выбухаў
+
+@ Explosion Scorch Marks
+be Сляды апёкаў ад выбухаў
+
+@ Explosions scorch nearby solid surfaces
+be Выбухі апякаюць бліжэйшыя цвёрдыя паверхні
+
+@ Explosives only
+be Толькі выбухоўка
+
+@ Extra Monsters
+be Дадатковыя монстры
+
+@ Extra Per 10 Damage (ms)
+be Дадатак за кожныя 10 шкоды (мс)
+
+@ FX Settings
+be Налады эфектаў
+
+@ Field of View
+be Поле зроку
+
+@ Firing never uses up ammo
+be Стральба не марнуе боепрыпасы
+
+@ First person
+be ад першай асобы
+
+@ Flick Time
+be Час фліка
+
+@ Flight Speed
+be Хуткасць палёту
+
+@ Fog
+be Туман
+
+@ Frag Limit
+be Ліміт фрагаў
+
+@ Freeze Duration (ms)
+be Працягласць стоп-кадра (мс)
+
+@ GLQuake
+be GLQuake
+
+@ Game Speed
+be Хуткасць гульні
+
+@ Game Type
+be Тып гульні
+
+@ Gameplay
+be Гульня
+
+@ Gameplay Modifiers
+be Мадыфікатары гульні
+
+@ Gel Quality
+be Якасць гелю
+
+@ Gib Surface Painting
+be Плямы ад ашмёткаў
+
+@ Gibs
+be Ашмёткі
+
+@ Gibs and heads tumble and bounce
+be Ашмёткі і галовы куляюцца і адскокваюць
+
+@ Goggle Glow Quality
+be Якасць свячэння акуляраў
+
+@ Goggle Intensity
+be Інтэнсіўнасць акуляраў
+
+@ Goggle Noise
+be Шум акуляраў
+
+@ Goggles Settings
+be Налады акуляраў
+
+@ Graphics
+be Графіка
+
+@ Green
+be Зялёны
+
+@ Grenade Arc
+be Траекторыя гранаты
+
+@ Grenade Arc Settings
+be Налады траекторыі гранаты
+
+@ Gun Kick
+be Аддача зброі
+
+@ Gyro
+be Гіраскоп
+
+@ Gyro & Flick Stick
+be Гіраскоп і флік-стык
+
+@ Gyro Active
+be Гіраскоп актыўны
+
+@ Gyro Aiming
+be Прыцэльванне гіраскопам
+
+@ HUD
+be Інтэрфейс
+
+@ HUD Style
+be Стыль інтэрфейсу
+
+@ Health
+be Здароўе
+
+@ Health Pickups
+be Падбор аптэчак
+
+@ Health Position
+be Пазіцыя здароўя
+
+@ Health Regeneration
+be Рэгенерацыя здароўя
+
+@ Hit & Kill Sounds
+be Гукі пападанняў і забойстваў
+
+@ Hit Doors & Lifts
+be Пападанні па дзвярах і ліфтах
+
+@ Hit Markers
+be Маркеры пападанняў
+
+@ Hit Sound
+be Гук пападання
+
+@ Hitmarker Size
+be Памер маркера
+
+@ Hitmarker Type
+be Тып маркера
+
+@ Hitstop Advanced
+be Хітстоп: дадаткова
+
+@ Hitstop Settings
+be Налады хітстопу
+
+@ Hold
+be Утрыманне
+
+@ Hold lock-on
+be Захоп пры ўтрыманні
+
+@ Hook Enemies
+be Чапляцца за ворагаў
+
+@ Hook Metal
+be Чапляцца за метал
+
+@ Hook Stone
+be Чапляцца за камень
+
+@ Hook Wood
+be Чапляцца за дрэва
+
+@ Hooking an enemy pulls you to it
+be Зачапіўшыся за ворага, вы падцягваецеся да яго
+
+@ Hookshot Range
+be Далёкасць крука
+
+@ Hookshot Settings
+be Налады крука
+
+@ Host Game
+be Стварыць гульню
+
+@ How far the hook flies before it retracts
+be Як далёка ляціць крук, перш чым вярнуцца
+
+@ How visible the on-screen controls are
+be Наколькі прыкметныя экранныя элементы кіравання
+
+@ Impact Lifetime
+be Час жыцця слядоў пападанняў
+
+@ Infinite Ammo
+be Бясконцыя боепрыпасы
+
+@ Input
+be Увод
+
+@ Input Scale
+be Маштаб уводу
+
+@ Interpolate Animation
+be Інтэрпаляцыя анімацыі
+
+@ Interpolate Movement
+be Інтэрпаляцыя руху
+
+@ Invert Look
+be Інвертаваць агляд
+
+@ Invert Mouse
+be Інвертаваць мыш
+
+@ Invert Stick
+be Інвертаваць стык
+
+@ Jet Quality
+be Якасць струменя
+
+@ Join Game
+be Далучыцца
+
+@ Jump / Swim Up
+be Скачок / усплыць
+
+@ Jump again in mid-air
+be Паўторны скачок у паветры
+
+@ Jumps
+be Скачкі
+
+@ Keys & Powerups
+be Ключы і ўзмацненні
+
+@ Keys & Powerups Position
+be Пазіцыя ключоў і ўзмацненняў
+
+@ Kill Bonus (x)
+be Бонус за забойства (x)
+
+@ Kill Sound
+be Гук забойства
+
+@ Knock
+be Стук
+
+@ Left
+be Злева
+
+@ Length of the motion blur streaks
+be Даўжыня слядоў размыцця ў руху
+
+@ Lifetime (seconds)
+be Час жыцця (секунды)
+
+@ Live Portal Views
+be Жывыя віды парталаў
+
+@ Live View Distance
+be Далёкасць жывых відаў
+
+@ Local Players
+be Лакальныя гульцы
+
+@ Local red wounds follow enemy animation
+be Чырвоныя раны ідуць за анімацыяй ворага
+
+@ Lock Indicator
+be Індыкатар захопу
+
+@ Long falls don't hurt
+be Падзенні з вышыні не раняць
+
+@ Longest Freeze (ms)
+be Найдаўжэйшы стоп-кадр (мс)
+
+@ Look Down
+be Глядзець уніз
+
+@ Look Speed
+be Хуткасць агляду
+
+@ Look Up
+be Глядзець уверх
+
+@ Main Menu Music
+be Музыка галоўнага меню
+
+@ Max FPS
+be Макс. FPS
+
+@ Max Players
+be Максімум гульцоў
+
+@ Maximum Impacts
+be Максімум слядоў пападанняў
+
+@ Maximum Marks
+be Максімум слядоў
+
+@ Maximum Range
+be Максімальная далёкасць
+
+@ Melee only
+be Толькі блізкі бой
+
+@ Message Background
+be Фон паведамленняў
+
+@ Message Text Size
+be Памер тэксту паведамленняў
+
+@ Messages & Captions
+be Паведамленні і субцітры
+
+@ Meter Duration (real seconds)
+be Працягласць шкалы (рэальныя секунды)
+
+@ Minimum Damage
+be Мінімальная шкода
+
+@ Mode
+be Рэжым
+
+@ Modern Console
+be Сучасная кансоль
+
+@ Modern HUD Layout
+be Раскладка сучаснага інтэрфейсу
+
+@ Most recent save
+be Апошняе захаванне
+
+@ Motion Blur
+be Размыццё ў руху
+
+@ Motion Blur Amount
+be Сіла размыцця ў руху
+
+@ Motion Blur Quality
+be Якасць размыцця ў руху
+
+@ Mouse & Keyboard
+be Мыш і клавіятура
+
+@ Mouse Speed
+be Хуткасць мышы
+
+@ Move Back
+be Назад
+
+@ Move Forward
+be Наперад
+
+@ Music Volume
+be Гучнасць музыкі
+
+@ Next Weapon
+be Наступная зброя
+
+@ No Drowning
+be Без утаплення
+
+@ No Fall Damage
+be Без шкоды ад падзення
+
+@ No Manual Saves
+be Без ручных захаванняў
+
+@ No Self Damage
+be Без шкоды сабе
+
+@ Noise Filter
+be Фільтр шуму
+
+@ Normal Color
+be Звычайны колер
+
+@ Notify Message Position
+be Пазіцыя апавяшчэнняў
+
+@ Notify Message Time
+be Час апавяшчэнняў
+
+@ Number of splatter rays per blood impact
+be Колькасць праменяў пырскаў на адно пападанне крыві
+
+@ Off
+be Выкл.
+
+@ On Death
+be Пры смерці
+
+@ On Kill Color
+be Колер пры забойстве
+
+@ On Target Color
+be Колер на мэце
+
+@ Opacity
+be Непразрыстасць
+
+@ Opacity of the grenade arc
+be Непразрыстасць траекторыі гранаты
+
+@ Pants Color
+be Колер штаноў
+
+@ Particle Quality
+be Якасць часціц
+
+@ Particles
+be Часціцы
+
+@ Physical Nail Impacts
+be Фізічныя пападанні цвікоў
+
+@ Pistol Start
+be Старт з нуля
+
+@ Pitch
+be Вышыня тону
+
+@ Pitch Sensitivity
+be Адчувальнасць па вертыкалі
+
+@ Playback Speed
+be Хуткасць прайгравання
+
+@ Player Setup
+be Налады гульца
+
+@ Pop
+be Хлопак
+
+@ Portal Gun Settings
+be Налады партальнай гарматы
+
+@ Portal Recursion
+be Рэкурсія парталаў
+
+@ Portal View Quality
+be Якасць выгляду парталаў
+
+@ Preview Sound
+be Праслухаць гук
+
+@ Previous Weapon
+be Папярэдняя зброя
+
+@ Projectile Shotguns Settings
+be Налады драбавікоў са снарадамі
+
+@ Projectile Speed (units/s)
+be Хуткасць снарадаў (адз./с)
+
+@ Purple
+be Фіялетавы
+
+@ Push
+be Штуршок
+
+@ Push Strength
+be Сіла штуршка
+
+@ Quick Load
+be Хуткая загрузка
+
+@ Quick Save
+be Хуткае захаванне
+
+@ Railgun Settings
+be Налады рэйлгана
+
+@ Ranged only
+be Толькі далёкі бой
+
+@ Reacquire While Held
+be Перазахоп пры ўтрыманні
+
+@ Red
+be Чырвоны
+
+@ Reduce Motion
+be Менш руху
+
+@ Regen (seconds per second)
+be Аднаўленне (секунд за секунду)
+
+@ Render Scale
+be Маштаб рэндэрынгу
+
+@ Reverb
+be Рэверберацыя
+
+@ Right
+be Справа
+
+@ Ripple Intensity
+be Сіла рабізны
+
+@ Ripples
+be Рабізна
+
+@ Roll Sensitivity
+be Адчувальнасць крэну
+
+@ Rumble
+be Вібрацыя
+
+@ Run
+be Бег
+
+@ Save on All Enemies Killed
+be Захоўваць пасля забойства ўсіх ворагаў
+
+@ Save on All Secrets Found
+be Захоўваць, калі знойдзены ўсе схованкі
+
+@ Save on Level Entry
+be Захоўваць пры ўваходзе на ўзровень
+
+@ Save on Secret Found
+be Захоўваць, калі знойдзена схованка
+
+@ Scoreboard
+be Табліца ачкоў
+
+@ Screen Flashes
+be Успышкі экрана
+
+@ Screen Shader
+be Экранны шэйдар
+
+@ Screen Shake
+be Трасянне экрана
+
+@ Search LAN
+be Пошук у лакальнай сетцы
+
+@ Seconds a center-screen message stays up
+be Колькі секунд трымаецца паведамленне ў цэнтры экрана
+
+@ See Through Portals
+be Бачыць праз парталы
+
+@ See-through Teleporters
+be Празрыстыя тэлепорты
+
+@ Shirt Color
+be Колер кашулі
+
+@ Shotgun Bullet Decals
+be Сляды ад шроту
+
+@ Shoulder left
+be з-за левага пляча
+
+@ Shoulder right
+be з-за правага пляча
+
+@ Show FPS
+be Паказваць FPS
+
+@ Show Face
+be Паказваць твар
+
+@ Shrapnel
+be Шрапнэль
+
+@ Size of on-screen messages and captions
+be Памер экранных паведамленняў і субцітраў
+
+@ Skill
+be Складанасць
+
+@ Sky Fog
+be Туман неба
+
+@ Smooths the stepped movement of monsters
+be Згладжвае прыступкавы рух монстраў
+
+@ Sound
+be Гук
+
+@ Sound Captions
+be Субцітры гукаў
+
+@ Sound Volume
+be Гучнасць гуку
+
+@ Speed Blur
+be Размыццё хуткасці
+
+@ Splashes
+be Пырскі
+
+@ Splatter Amount
+be Колькасць пырскаў
+
+@ Splatter Size
+be Памер пырскаў
+
+@ Start Game
+be Пачаць гульню
+
+@ Staying underwater doesn't hurt
+be Знаходжанне пад вадой не раніць
+
+@ Stick Look Pitch
+be Агляд стыкам па вертыкалі
+
+@ Stick Look Yaw
+be Агляд стыкам па гарызанталі
+
+@ Strafe Left
+be Крок улева
+
+@ Strafe Right
+be Крок управа
+
+@ Strength of the surface swell and rings
+be Сіла хваль і кругоў на паверхні
+
+@ Stun Duration
+be Працягласць аглушэння
+
+@ Style
+be Стыль
+
+@ Supersampling
+be Суперсэмплінг
+
+@ Surface Hit Effects
+be Эфекты пападанняў па паверхнях
+
+@ Swim Down
+be Пагрузіцца
+
+@ Targets
+be Мэты
+
+@ Teamplay
+be Камандная гульня
+
+@ Texture Filter
+be Фільтрацыя тэкстур
+
+@ Third person
+be ад трэцяй асобы
+
+@ Thud
+be Глухі ўдар
+
+@ Tick
+be Цік
+
+@ Time Limit
+be Ліміт часу
+
+@ Time Stretch
+be Расцяжэнне часу
+
+@ Toggle Attack
+be Атака пераключэннем
+
+@ Toggle Run
+be Бег пераключэннем
+
+@ Toggle auto-aim
+be Аўтапрыцэл пераключэннем
+
+@ Touch Controls
+be Сэнсарнае кіраванне
+
+@ Touchscreen
+be Сэнсарны экран
+
+@ Tough Enemy Health
+be Здароўе моцных ворагаў
+
+@ Tough enemies only
+be Толькі моцныя ворагі
+
+@ Trail Colour
+be Колер следу
+
+@ Translate Console
+be Перакладаць кансоль
+
+@ Translucent Water
+be Паўпразрыстая вада
+
+@ Treble
+be Высокія
+
+@ Turn Left
+be Паварот налева
+
+@ Turn Right
+be Паварот направа
+
+@ Underwater FX
+be Падводныя эфекты
+
+@ Use Bullet Time Meter
+be Шкала запавольвання
+
+@ VSync
+be Вертыкальная сінхранізацыя
+
+@ View Bob
+be Пагойдванне камеры
+
+@ Viewmodels
+be Мадэль зброі
+
+@ Volume
+be Гучнасць
+
+@ Water Opacity
+be Непразрыстасць вады
+
+@ Water Quality
+be Якасць вады
+
+@ Water Settings
+be Налады вады
+
+@ Weapon Wheel
+be Кола зброі
+
+@ Weapon Wheel Slowdown
+be Запавольванне пры коле зброі
+
+@ Weapons
+be Зброя
+
+@ Weapons Position
+be Пазіцыя зброі
+
+@ Where center-screen messages appear
+be Дзе з’яўляюцца паведамленні па цэнтры экрана
+
+@ Where pickup and event messages appear
+be Дзе з’яўляюцца паведамленні пра падбор і падзеі
+
+@ White
+be Белы
+
+@ Yaw Sensitivity
+be Адчувальнасць па гарызанталі
+
+@ Yellow
+be Жоўты
+
+# lowercase choice values
+@ T
+be T
+
+@ always
+be заўсёды
+
+@ auto
+be аўта
+
+@ banded
+be палосамі
+
+@ borderless
+be акно без рамкі
+
+@ bottom center
+be унізе па цэнтры
+
+@ bottom left
+be унізе злева
+
+@ bottom right
+be унізе справа
+
+@ box
+be рамка
+
+@ broken square
+be разарваны квадрат
+
+@ classic
+be класічны
+
+@ coarse
+be грубы
+
+@ cooperative
+be кааператыў
+
+@ cross
+be крыж
+
+@ cross + dot
+be крыж + кропка
+
+@ cyan
+be блакітны
+
+@ dashed
+be пункцір
+
+@ deathmatch
+be смяротны бой
+
+@ deuteranopia
+be дэйтэранапія
+
+@ diagonal streaks
+be дыяганальныя штрыхі
+
+@ diamond
+be ромб
+
+@ dot
+be кропка
+
+@ double
+be падвойны
+
+@ double chevrons
+be падвойныя шэўроны
+
+@ double diagonals
+be падвойныя дыяганалі
+
+@ easy
+be лёгка
+
+@ fine
+be дробны
+
+@ fit output
+be па памеры вываду
+
+@ flick stick
+be флік-стык
+
+@ fullscreen
+be поўны экран
+
+@ gap cross
+be крыж з прамежкам
+
+@ green
+be зялёны
+
+@ grey
+be шэры
+
+@ half speed
+be палова хуткасці
+
+@ hard
+be цяжка
+
+@ high
+be высокая
+
+@ huge
+be велізарны
+
+@ immersive
+be апусканне
+
+@ intense
+be моцны
+
+@ large
+be вялікі
+
+@ larger
+be большы
+
+@ largest
+be найбольшы
+
+@ linear
+be лінейная
+
+@ low
+be нізкая
+
+@ lower
+be ніжэй
+
+@ magenta
+be пурпуровы
+
+@ medium
+be сярэдняя
+
+@ middle
+be пасярэдзіне
+
+@ middle left
+be пасярэдзіне злева
+
+@ middle right
+be пасярэдзіне справа
+
+@ modern
+be сучасны
+
+@ nearest
+be найбліжэйшы
+
+@ nightmare
+be кашмар
+
+@ nintendo
+be Nintendo
+
+@ no team damage
+be без шкоды саюзнікам
+
+@ none
+be няма
+
+@ normal
+be звычайны
+
+@ off
+be выкл.
+
+@ off while held
+be выкл. пры ўтрыманні
+
+@ on
+be укл.
+
+@ only while held
+be толькі пры ўтрыманні
+
+@ playstation
+be PlayStation
+
+@ protanopia
+be пратанапія
+
+@ quarter speed
+be чвэрць хуткасці
+
+@ red
+be чырвоны
+
+@ short diagonals
+be кароткія дыяганалі
+
+@ single
+be адзінарны
+
+@ small
+be малы
+
+@ solid
+be суцэльная
+
+@ spectacle
+be відовішчны
+
+@ subtle
+be слабы
+
+@ team damage
+be шкода саюзнікам
+
+@ top center
+be уверсе па цэнтры
+
+@ top left
+be уверсе злева
+
+@ top right
+be уверсе справа
+
+@ triple
+be патройны
+
+@ tritanopia
+be трытанапія
+
+@ upper
+be вышэй
+
+@ white
+be белы
+
+@ whole screen
+be увесь экран
+
+@ windowed
+be у акне
+
+@ xbox
+be Xbox
+
+@ yellow
+be жоўты
+
+# ==== tooltips.txt ====
+
+# Options help lines (tooltips) and reasons for disabled rows.
+@ 2D aiming turns the view continuously with the right stick; flick stick snaps the view to where you push the stick, then turning the stick rotates it
+be 2D-прыцэльванне плаўна паварочвае агляд правым стыкам; флік-стык адразу разварочвае агляд у бок нахілу стыка, а кручэнне стыка паварочвае яго далей
+
+@ 3D resolution relative to the window; the UI stays sharp
+be 3D-раздзяляльнасць адносна акна; інтэрфейс застаецца выразным
+
+@ 3D view keeps the HUD and menus sharp; whole screen runs them through the shader too
+be 3D-выгляд пакідае інтэрфейс і меню выразнымі; увесь экран прапускае праз шэйдар і іх
+
+@ A Quake III style railgun: a slug that pierces every enemy on its line, using 2 cells a shot and refiring every 1.5 s; select it through its assigned weapon slot (Add-ons)
+be Рэйлган у стылі Quake III: снарад прабівае ўсіх ворагаў на сваёй лініі, траціць 2 ячэйкі за стрэл і перазараджаецца 1,5 с; выбіраецца праз прызначаны слот зброі (дапаўненні)
+
+@ A Zelda-style hookshot: fire sends a chain hook out; it latches onto hookable surfaces or enemies and reels you in; fire again to let go
+be Крук-кошка ў стылі Zelda: стрэл кідае крук на ланцугу, ён чапляецца за прыдатныя паверхні або ворагаў і падцягвае вас; паўторны стрэл адпускае
+
+@ Also translates the engine's console messages; off keeps them in English
+be Перакладае і паведамленні кансолі рухавіка; калі выключана, яны застаюцца па-англійску
+
+@ Automatically acquire another enemy while holding Lock-on after losing a target
+be Аўтаматычна захоплівае іншага ворага, пакуль утрымліваецца «Захоп мэты», пасля страты мэты
+
+@ Blends between animation frames of monsters and weapons
+be Згладжвае пераходы паміж кадрамі анімацыі монстраў і зброі
+
+@ Blood stains surfaces and bodies; cosmetic, independent of particle packs
+be Кроў пэцкае паверхні і целы; толькі візуальна, не залежыць ад пакетаў часціц
+
+@ Bloom glow around bright lights and heat sources; medium uses 4 taps, high uses 8, low disables halo taps
+be Свячэнне вакол яркіх агнёў і крыніц цяпла; сярэдняя — 4 выбаркі, высокая — 8, нізкая выключае арэол
+
+@ Blurs fast-moving monsters, projectiles and doors (not camera turns)
+be Размывае монстраў, снарады і дзверы, што хутка рухаюцца (не павароты камеры)
+
+@ Blurs the screen edges during fast falls and launches; keeps the centre clear. Reduce Motion disables it
+be Размывае краі экрана падчас хуткіх падзенняў і ўзлётаў; цэнтр застаецца выразным. «Менш руху» выключае эфект
+
+@ Brightness of the underwater light patterns
+be Яркасць светлавых узораў пад вадой
+
+@ Caps mark count, lifetime, airborne droplets and wound/gib painting; low skips enemy wounds and gib trails
+be Абмяжоўвае колькасць і час жыцця слядоў, кроплі ў паветры і плямы ад ран і ашмёткаў; нізкая выключае раны ворагаў і сляды ашмёткаў
+
+@ Caps shader input at output size so 200% render scale keeps 3D sharpness without 4x shader cost; low scales stay low-res
+be Абмяжоўвае ўваход шэйдара памерам вываду: маштаб рэндэрынгу 200% захоўвае выразнасць 3D без чатырохразовай нагрузкі; малыя маштабы застаюцца ў нізкай раздзяляльнасці
+
+@ Classic: the original status bar; modern: compact elements at the screen edges
+be Класічны: арыгінальная панэль стану; сучасны: кампактныя элементы па краях экрана
+
+@ Coat atlas resolution, rebuild rate and shader detail: low builds smaller coats less often with fast shading; high uses full detail
+be Раздзяляльнасць атласа пакрыцця, частата перабудовы і дэталізацыя шэйдара: нізкая будуе меншыя пакрыцці радзей і з хуткім зацяненнем; высокая — поўная дэталізацыя
+
+@ Colour of the railgun's spiral trail; split-screen players each get the next colour along
+be Колер спіральнага следу рэйлгана; на падзеленым экране кожны гулец атрымлівае наступны колер
+
+@ Damage the railgun deals to each enemy it passes through (Quake III: 100)
+be Шкода рэйлгана кожнаму прабітаму ворагу (Quake III: 100)
+
+@ Dark backdrop behind on-screen messages for readability
+be Цёмная падкладка пад экраннымі паведамленнямі для лепшай чытальнасці
+
+@ Dark border keeps the crosshair visible on any background
+be Цёмнае абвядзенне робіць прыцэл прыкметным на любым фоне
+
+@ Darkens corners and contact areas where geometry meets; higher quality is sharper
+be Зацямняе куты і месцы дотыку геаметрыі; вышэйшая якасць — выразней
+
+@ Debris lands on and is carried or shoved by doors, lifts and platforms
+be Абломкі падаюць на дзверы, ліфты і платформы, а тыя іх вязуць або сштурхоўваюць
+
+@ Detail for caustics, ripples and splashes: low uses smaller budgets and shorter view distance; high uses larger budgets and farther view distance
+be Дэталізацыя каўстыкі, рабізны і пырскаў: нізкая — меншыя бюджэты і далёкасць бачнасці; высокая — большыя бюджэты і далёкасць
+
+@ Disabled while Enhanced Particles is on: its particles replace the GLQuake and Classic styles
+be Недаступна, калі ўключаны «Палепшаныя часціцы»: іх часціцы замяняюць стылі GLQuake і класічны
+
+@ Disabled while Enhanced Water is on: its own underwater effects replace the classic and GLQuake view warps
+be Недаступна, калі ўключана «Палепшаная вада»: яе падводныя эфекты замяняюць класічнае скажэнне і скажэнне GLQuake
+
+@ Draw the predicted grenade path as a solid or dashed line
+be Малюе прадказаную траекторыю гранаты суцэльнай або пункцірнай лініяй
+
+@ Draw the view out of the linked portal inside each portal; off shows flat discs (fastest)
+be Паказвае ў кожным партале выгляд са звязанага партала; выкл. — плоскія дыскі (найхутчэй)
+
+@ Droplets spray up when things enter or leave water, slime or lava
+be Пырскі ўзлятаюць, калі нешта трапляе ў ваду, слізь або лаву ці выходзіць з іх
+
+@ Emulates the original 8-bit palette of software rendering
+be Імітуе арыгінальную 8-бітную палітру праграмнага рэндэрынгу
+
+@ Every level starts with only the shotgun and axe, as if started fresh
+be Кожны ўзровень пачынаецца толькі з драбавіком і сякерай, нібы з нуля
+
+@ Explosion damage for each remotely detonated sticky bomb
+be Шкода ад выбуху кожнай ліпкай бомбы, падарванай дыстанцыйна
+
+@ Extra freeze milliseconds for every 10 damage dealt, so heavy hits stop longer
+be Дадатковыя мілісекунды стоп-кадра за кожныя 10 шкоды: моцныя ўдары спыняюць даўжэй
+
+@ First person, a third-person camera centered behind the player, or one over the right or left shoulder; third person hides viewmodels
+be Ад першай асобы, камера ад трэцяй асобы за спіной гульца або з-за правага ці левага пляча; ад трэцяй асобы мадэль зброі схавана
+
+@ Flash the selected marker on confirmed hits; colors are shared with the crosshair
+be Міргае выбраным маркерам пры пацверджаных пападаннях; колеры агульныя з прыцэлам
+
+@ Freeze for every enemy, or only for enemies that were tough before the hit
+be Стоп-кадр для ўсіх ворагаў або толькі для тых, што былі моцнымі да ўдару
+
+@ Freeze the game briefly when you damage an enemy; single player with add-ons only
+be Ненадоўга замарожвае гульню, калі вы раніце ворага; толькі адзіночная гульня з дапаўненнямі
+
+@ Gibs tumble and barrels throw shrapnel; shots and blasts push them (cosmetic only)
+be Ашмёткі куляюцца, бочкі раскідваюць шрапнэль; стрэлы і выбухі штурхаюць іх (толькі візуальна)
+
+@ Health an enemy must have had before the hit to count as tough
+be Здароўе, якое вораг павінен быў мець да ўдару, каб лічыцца моцным
+
+@ Hits dealing less damage than this do not freeze the game; the default 10 skips nails and shotgun pellets
+be Удары, слабейшыя за гэта значэнне, не замарожваюць гульню; стандартнае 10 прапускае цвікі і шрот
+
+@ Hold fire and sweep the crosshair over monsters to queue them, release to throw: it stuns each in turn and flies back; alt-fire clears the queue
+be Утрымлівайце агонь і правядзіце прыцэлам па монстрах, каб паставіць іх у чаргу, адпусціце для кідка: бумеранг аглушыць кожнага па чарзе і вернецца; альт. агонь ачышчае чаргу
+
+@ Hold: keep Lock-on held. Toggle: press Auto-aim Toggle to enable automatic acquisition. Click look stick to switch targets
+be Утрыманне: трымайце «Захоп мэты». Пераключэнне: націсніце «Аўтапрыцэл (пераключэнне)» для аўтаматычнага захопу. Націсканне стыка агляду мяняе мэту
+
+@ How close an enemy must be to the crosshair for automatic acquisition in toggle mode (degrees)
+be Наколькі блізка да прыцэла павінен быць вораг для аўтазахопу ў рэжыме пераключэння (градусы)
+
+@ How far the view tilts up and down when you tilt the controller (pitch axis)
+be Наколькі агляд нахіляецца ўверх і ўніз, калі вы нахіляеце геймпад (вось тангажу)
+
+@ How far the view turns left and right when you turn the controller (yaw axis)
+be Наколькі агляд паварочваецца ўлева і ўправа, калі вы паварочваеце геймпад (вось рыскання)
+
+@ How far the view turns when you drag on the right half of the screen
+be Наколькі паварочваецца агляд, калі вы вядзеце пальцам па правай палове экрана
+
+@ How fast the boomerang flies (units per second)
+be Хуткасць палёту бумеранга (адзінак у секунду)
+
+@ How hard shots and explosions push debris around
+be Наколькі моцна стрэлы і выбухі раскідваюць абломкі
+
+@ How hard the Powerwasher's water pushes enemies
+be Наколькі моцна вада мыйкі высокага ціску адкідвае ворагаў
+
+@ How long a hit freezes the game, in milliseconds
+be Колькі мілісекунд доўжыцца стоп-кадр ад удару
+
+@ How strongly fog covers the sky when fog is on
+be Наколькі туман закрывае неба, калі туман уключаны
+
+@ How the view distorts underwater: Classic ripples the whole screen like software Quake, GLQuake slowly stretches and squashes the view
+be Як скажаецца агляд пад вадой: класічны калыша ўвесь экран, як праграмны Quake, GLQuake павольна расцягвае і сціскае карцінку
+
+@ Ignores gyro rotation slower than this many degrees per second, to hide hand tremor
+be Ігнаруе кручэнне гіраскопа, павольнейшае за гэтую колькасць градусаў у секунду, каб схаваць дрыжанне рук
+
+@ Immersive: appears for a few seconds only when its value changes
+be Апусканне: з’яўляецца на некалькі секунд толькі пры змене значэння
+
+@ Keeps textures sharp on floors and walls seen at steep angles
+be Захоўвае выразнасць тэкстур падлогі і сцен, бачных пад вострым вуглом
+
+@ Lights from rockets, muzzle flashes and explosions brighten nearby walls
+be Святло ракет, успышак стрэлаў і выбухаў асвятляе бліжэйшыя сцены
+
+@ Liquid surfaces swell and ring out where things move through them
+be Паверхня вадкасці ўздымаецца і разыходзіцца кругамі там, дзе праз яе нешта рухаецца
+
+@ Lobs sticky bombs (rockets ammo) that cling to walls, doors and monsters; alt-fire detonates them all
+be Кідае ліпкія бомбы (ракетныя боепрыпасы), якія прыліпаюць да сцен, дзвярэй і монстраў; альт. агонь падрывае іх усе
+
+@ Look of the classic particles: GLQuake draws soft round dots, Classic draws square pixels like software Quake
+be Выгляд класічных часціц: GLQuake малюе мяккія круглыя кропкі, класічны — квадратныя пікселі, як праграмны Quake
+
+@ Low skips the background smear halo and uses fewer blur samples; high keeps the full halo and smoother streaks
+be Нізкая прыбірае фонавы арэол змазу і выкарыстоўвае менш выбарак; высокая захоўвае поўны арэол і плаўнейшыя сляды
+
+@ Low: hard particle edges, half the scripted particles and fewer hit sparks. Medium: soft edges. High: soft edges checked per MSAA sample, most hit sparks
+be Нізкая: рэзкія краі часціц, удвая менш скрыптавых часціц і менш іскраў. Сярэдняя: мяккія краі. Высокая: мяккія краі для кожнай выбаркі MSAA, амаль усе іскры
+
+@ Marks fade out before expiring; oldest marks are recycled at the limit
+be Сляды цьмянеюць перад знікненнем; пасля дасягнення ліміту найстарэйшыя замяняюцца
+
+@ Max nested portal reflections to draw; each level redraws the scene
+be Максімум укладзеных адлюстраванняў парталаў; кожны ўзровень перамалёўвае сцэну
+
+@ Max portals per screen with a live view; each one redraws the scene
+be Максімум парталаў з жывым выглядам на экране; кожны перамалёўвае сцэну
+
+@ Maximum distance for acquiring and keeping an enemy locked
+be Максімальная адлегласць захопу і ўтрымання ворага
+
+@ Minimum gap between freezes, so shotgun pellets and rapid fire count once; kills ignore it
+be Мінімальны інтэрвал паміж стоп-кадрамі, каб шрот і хуткая стральба лічыліся адзін раз; забойствы яго ігнаруюць
+
+@ Modern terminal console with autocomplete popup, history search, ANSI colors, bash shell and piping; off uses the classic Quake console
+be Сучасная кансоль-тэрмінал з аўтадапаўненнем, пошукам у гісторыі, колерамі ANSI, абалонкай bash і канвеерамі; выкл. — класічная кансоль Quake
+
+@ Monsters take proportionally less damage at higher values; above 100% is harder
+be Пры большых значэннях монстры атрымліваюць прапарцыйна менш шкоды; больш за 100% — цяжэй
+
+@ Moving gibs leave blood on surfaces they touch
+be Ашмёткі, што ляцяць, пакідаюць кроў на паверхнях, да якіх датыкаюцца
+
+@ Multiplier on the freeze when the hit kills the enemy; 1 means no extra
+be Множнік стоп-кадра, калі ўдар забівае ворага; 1 — без дадатку
+
+@ Multiplies ammo from pickups (up to the normal carry limit); below 100% is harder
+be Памнажае падабраныя боепрыпасы (да звычайнай мяжы); менш за 100% — цяжэй
+
+@ Multiplies health from pickups (up to 100, or the item's own limit); below 100% is harder
+be Памнажае падабранае здароўе (да 100 або да мяжы прадмета); менш за 100% — цяжэй
+
+@ Nails stick to wood and bodies; hard surfaces deflect them to the floor
+be Цвікі ўтыкаюцца ў дрэва і целы; цвёрдыя паверхні адбіваюць іх на падлогу
+
+@ Nearest keeps crisp classic pixels; linear smooths textures
+be «Найбліжэйшы» захоўвае выразныя класічныя пікселі; «лінейная» згладжвае тэкстуры
+
+@ New Game: Add-ons
+be Новая гульня: дапаўненні
+
+@ New Game: Customize
+be Новая гульня: налады
+
+@ Night vision: how much dark areas are brightened; thermal: how strongly heat stands out
+be Начное бачанне: наколькі асвятляюцца цёмныя ўчасткі; цеплавізар: наколькі вылучаецца цяпло
+
+@ Night-vision and thermal goggles, cycle normal, night vision and thermal with Change Goggles (Add-ons), or use the Equipment Wheel
+be Акуляры начнога бачання і цеплавізар: пераключайце звычайны, начны і цеплавы рэжымы «Зменай акуляраў» (дапаўненні) або колам рыштунку
+
+@ No single freeze lasts longer than this, however much damage or kill bonus adds
+be Ніводзін стоп-кадр не доўжыцца даўжэй, колькі б ні дадалі шкода і бонус за забойства
+
+@ Oldest marks and nails are recycled at this shared limit
+be Найстарэйшыя сляды і цвікі замяняюцца пасля дасягнення гэтага агульнага ліміту
+
+@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
+be Экранны стык і кнопкі: «аўта» паказвае іх пасля дотыку і хавае, калі выкарыстоўваецца іншая прылада
+
+@ Only autosaves: quicksaves and the Save menu are off
+be Толькі аўтазахаванні: хуткае захаванне і меню захавання выключаныя
+
+@ Place every weapon at the center, right or left of the view, or hide all viewmodels
+be Размяшчае зброю па цэнтры, справа ці злева або хавае ўсе мадэлі зброі
+
+@ Play your chosen hit or kill cue when you damage an enemy
+be Прайграе выбраны сігнал пападання ці забойства, калі вы раніце ворага
+
+@ Playback speed: faster sounds shorter and higher
+be Хуткасць прайгравання: хутчэй — карацей і вышэй
+
+@ Plays the Quake theme in the main menu when no game is running
+be Грае тэму Quake у галоўным меню, калі гульня не запушчана
+
+@ Portals farther away than this are drawn as flat discs
+be Парталы далей за гэтую адлегласць малююцца плоскімі дыскамі
+
+@ Press attack once to keep firing, again to stop
+be Націсніце атаку адзін раз, каб страляць бесперапынна, яшчэ раз — каб спыніцца
+
+@ Press run once to switch between running and walking
+be Націсніце бег адзін раз, каб пераключацца паміж бегам і хадою
+
+@ Raise or lower the tone independently of sound length
+be Павышае або паніжае тон незалежна ад працягласці гуку
+
+@ Red screen edges show where damage came from: top is front, bottom is behind; Screen Flashes controls their strength
+be Чырвоныя краі экрана паказваюць, адкуль прыйшла шкода: верх — спераду, ніз — ззаду; іх сілу задаюць «Успышкі экрана»
+
+@ Replaces the classic dot particles with glowing sparks, smoke and blood; mods with their own particle effects keep them
+be Замяняе класічныя кропкавыя часціцы на іскры, што свецяцца, дым і кроў; моды з уласнымі эфектамі часціц захоўваюць іх
+
+@ Resolution and detail inside portal and teleporter views; lower tiers trim nested effects
+be Раздзяляльнасць і дэталізацыя ў выглядах парталаў і тэлепортаў; ніжэйшыя ўзроўні скарачаюць укладзеныя эфекты
+
+@ Rippling light patterns on surfaces under water and slime
+be Мігатлівыя светлавыя ўзоры на паверхнях пад вадой і слізню
+
+@ Scales all damage you take; above 100% is harder
+be Маштабуе ўсю атрыманую шкоду; больш за 100% — цяжэй
+
+@ Screen edge for this element; elements on the same spot stack
+be Край экрана для гэтага элемента; элементы ў адным месцы складаюцца стосам
+
+@ Seconds a monster hit by the boomerang stays stunned
+be Колькі секунд застаецца аглушаным монстр, якога зачапіў бумеранг
+
+@ Seconds impact marks and stuck nails stay before fading out; independent of Particle Quality
+be Колькі секунд трымаюцца сляды пападанняў і цвікі, што ўтыкнуліся; не залежыць ад якасці часціц
+
+@ Seconds messages at the top of the screen stay up
+be Колькі секунд трымаюцца паведамленні ўверсе экрана
+
+@ Seconds the flick stick snap takes; lower is faster
+be Працягласць развароту флік-стыка ў секундах; менш — хутчэй
+
+@ See through enhanced water; enables Water Opacity
+be Празрыстасць палепшанай вады; уключае «Непразрыстасць вады»
+
+@ Sensor grain, scanlines and flicker of the goggle image
+be Зерне сенсара, радкі разгорткі і мігценне выявы акуляраў
+
+@ Shades every anti-aliasing sample; needs Anti-aliasing on
+be Зацяняе кожную выбарку згладжвання; патрабуе ўключанага згладжвання
+
+@ Shifts colors so they stay distinct for the chosen color blindness
+be Зрушвае колеры, каб яны заставаліся адрознымі пры выбраным тыпе дальтанізму
+
+@ Shotgun hits leave small surface marks (cosmetic only)
+be Пападанні шроту пакідаюць невялікія сляды (толькі візуальна)
+
+@ Show corner ticks at screen centre while locked, even with Crosshair off
+be Паказвае кутнія меткі ў цэнтры экрана падчас захопу, нават з выключаным прыцэлам
+
+@ Show where grenades and other arcing shots will fly, bounce and land; local play only, not in deathmatch
+be Паказвае, куды паляцяць, адскочаць і ўпадуць гранаты і іншыя навясныя снарады; толькі лакальная гульня, не ў смяротным баі
+
+@ Shows text for important sounds: doors, alerted enemies, secrets, pickups
+be Паказвае тэкст для важных гукаў: дзверы, устрывожаныя ворагі, схованкі, падбор прадметаў
+
+@ Shows the distance fog that maps and mods set; off always gives clear view
+be Паказвае туман, зададзены картамі і модамі; выкл. — заўсёды ясны агляд
+
+@ Shows the player face next to the health number
+be Паказвае твар гульца побач з лікам здароўя
+
+@ Simulation detail, step rate, fade-out lifetimes and caps for gibs and shrapnel; low also skips mover collision
+be Дэталізацыя сімуляцыі, частата крокаў, час знікнення і ліміты для ашмёткаў і шрапнэлі; нізкая таксама выключае сутыкненні з рухомымі аб’ектамі
+
+@ Size of the on-screen buttons and move stick
+be Памер экранных кнопак і стыка руху
+
+@ Slowly heals up to 100 health after 5 seconds without being hit
+be Павольна аднаўляе здароўе да 100 пасля 5 секунд без пападанняў
+
+@ Slows stick look while the crosshair is over an enemy
+be Запавольвае агляд стыкам, пакуль прыцэл наведзены на ворага
+
+@ Slows the game down while the weapon wheel is open
+be Запавольвае гульню, пакуль адкрыта кола зброі
+
+@ Slows the whole game down; single player only. Saves and demos stay compatible with other ports
+be Запавольвае ўсю гульню; толькі адзіночная гульня. Захаванні і дэма застаюцца сумяшчальнымі з іншымі портамі
+
+@ Small camera jolt on each freeze; off with Reduce Motion
+be Невялікі штуршок камеры пры кожным стоп-кадры; выключаецца праз «Менш руху»
+
+@ Snap and track enemies in local play, including split-screen; unavailable online
+be Наводзіцца на ворагаў і сочыць за імі ў лакальнай гульні, у тым ліку на падзеленым экране; недаступна анлайн
+
+@ Sparks, smoke, chips, splinters and splashes fly off whatever your shots hit
+be Іскры, дым, крошкі, трэскі і пырскі ляцяць ад усяго, у што трапляюць вашы стрэлы
+
+@ Spawns extra copies of every monster around the original when a level starts
+be На пачатку ўзроўню стварае дадатковыя копіі кожнага монстра побач з арыгіналам
+
+@ Strength of the full-screen flashes for damage, pickups and powerups
+be Сіла поўнаэкранных успышак ад шкоды, падбору прадметаў і ўзмацненняў
+
+@ Stretch or shorten the sound while keeping its pitch
+be Расцягвае або скарачае гук, захоўваючы вышыню тону
+
+@ Surface opacity; requires Enhanced Water and Translucent Water
+be Непразрыстасць паверхні; патрабуе «Палепшанай вады» і «Паўпразрыстай вады»
+
+@ The hook latches onto metal surfaces (metal, tech, computer panels, copper)
+be Крук чапляецца за металічныя паверхні (метал, тэхніка, камп’ютарныя панэлі, медзь)
+
+@ The hook latches onto stone, brick, rock and any surface not recognised as wood or metal
+be Крук чапляецца за камень, цэглу, скалу і любую паверхню, не распазнаную як дрэва ці метал
+
+@ The hook latches onto wooden surfaces (texture names like wood, crate, plank)
+be Крук чапляецца за драўляныя паверхні (тэкстуры з назвамі накшталт wood, crate, plank)
+
+@ Turn the controller's motion sensor into a look input; needs a pad with a gyroscope
+be Выкарыстоўвае датчык руху геймпада для агляду; патрэбны геймпад з гіраскопам
+
+@ Turns off view bob, strafe tilt and the camera kick when hit or firing
+be Выключае пагойдванне камеры, нахіл пры страйфе і штуршок камеры ад пападанняў і стральбы
+
+@ Turns on the extra liquid effects; Water Settings controls each one
+be Уключае дадатковыя эфекты вадкасцей; кожны наладжваецца ў «Наладах вады»
+
+@ Turns the view to follow a moving enemy you are aiming at
+be Паварочвае агляд услед за ворагам, які рухаецца і ў якога вы цэліцеся
+
+@ Turns the view when you roll the controller sideways; 0 disables it, negative reverses it
+be Паварочвае агляд, калі вы нахіляеце геймпад убок; 0 выключае, адмоўнае значэнне інвертуе
+
+@ Two-portal gun: fire and alt-fire place linked portals on flat walls; assign a weapon slot in Add-ons
+be Гармата двух парталаў: агонь і альт. агонь ставяць звязаныя парталы на роўных сценах; прызначце слот зброі ў «Дапаўненнях»
+
+@ Unlocks the FX Settings page: enhanced particles, impact effects and blood splatter
+be Адкрывае старонку «Налады эфектаў»: палепшаныя часціцы, эфекты пападанняў і пырскі крыві
+
+@ Uses the 2021 re-release's smoother MD5 models (and MD3 replacements from mods) instead of the classic ones. Applies on the next map load
+be Выкарыстоўвае больш плаўныя мадэлі MD5 з перавыдання 2021 года (і замены MD3 з модаў) замест класічных. Ужываецца пры наступнай загрузцы карты
+
+@ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
+be Выкарыстоўвае каляровае асвятленне карты (файл .lit або блок BSPX); выкл. — арыгінальнае белае святло. Ужываецца пры наступнай загрузцы карты
+
+@ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
+be Сегменты струменя, колькасць кропель і глянцавае зацяненне вадкасці: нізкая — простыя паўпразрыстыя струмені; высокая — гладкія глянцавыя
+
+@ When gyro looking applies: always, off while +gyroaction is held, or only while it is held
+be Калі працуе гіраскоп: заўсёды, выкл. пры ўтрыманні +gyroaction або толькі пры яго ўтрыманні
+
+@ Which weapons trigger the freeze; melee covers the axe and any mod weapon used at close range without ammo
+be Якая зброя выклікае стоп-кадр; блізкі бой — сякера і любая зброя модаў без боепрыпасаў зблізку
+
+@ Your own rockets and grenades don't hurt you; rocket jumps still work
+be Вашы ракеты і гранаты вас не раняць; ракетныя скачкі ўсё яшчэ працуюць
+
+# ==== ui.txt ====
+
+# Menus and pop-ups outside the options pages: save cards, launch, presets,
+# add-on browser, map packs, hints and dialogs.
+@ Select
+be Выбраць
+
+@ Back
+be Назад
+
+@ Cancel
+be Скасаваць
+
+@ Confirm
+be Пацвердзіць
+
+@ Scroll
+be Гартаць
+
+@ Section
+be Раздзел
+
+@ Bind
+be Прызначыць
+
+@ Cancel binding
+be Скасаваць прызначэнне
+
+@ Clear
+be Ачысціць
+
+@ Clear pad
+be Ачысціць геймпад
+
+@ Remap
+be Перапрызначыць
+
+@ Type
+be Увод
+
+@ Shift
+be Shift
+
+@ Done
+be Гатова
+
+@ Del
+be Del
+
+@ Space
+be Прабел
+
+@ Save
+be Захаваць
+
+@ Load
+be Загрузіць
+
+@ Delete
+be Выдаліць
+
+@ Play
+be Гуляць
+
+@ Yes
+be Так
+
+@ No
+be Не
+
+@ OK
+be OK
+
+@ System
+be Сістэмная
+
+@ Language
+be Мова
+
+@ Help
+be Даведка
+
+@ Fixed for this game: it was started without Customize
+be Зафіксавана для гэтай гульні: яе пачалі без налад
+
+@ Press a button or key to bind (Start cancels)
+be Націсніце кнопку або клавішу для прызначэння (Start — скасаваць)
+
+@ Press button...
+be Націсніце кнопку...
+
+@ Press key...
+be Націсніце клавішу...
+
+@ Replace this binding?
+be Замяніць гэта прызначэнне?
+
+@ is already assigned
+be ужо прызначана
+
+@ {} already assigned
+be {} ужо прызначана
+
+@ Open Controls to remap Lock-on?
+be Адкрыць «Кіраванне», каб перапрызначыць «Захоп мэты»?
+
+@ Lock-on
+be Захоп мэты
+
+@ Auto-aim Toggle
+be Аўтапрыцэл (пераключэнне)
+
+@ Keyboard
+be Клавіятура
+
+@ Controller
+be Геймпад
+
+# main menu, dialogs and screens
+@ Map Packs
+be Наборы карт
+
+@ Customize
+be Наладзіць
+
+@ Level Select
+be Выбар узроўню
+
+@ Really quit?
+be Сапраўды выйсці?
+
+@ You died
+be Вы загінулі
+
+@ Continue from most recent save
+be Працягнуць з апошняга захавання
+
+@ Select save
+be Выбраць захаванне
+
+@ Restart level
+be Пачаць узровень нанова
+
+@ Return to main menu
+be Вярнуцца ў галоўнае меню
+
+@ (disabled)
+be (недаступна)
+
+@ (fixed for this game)
+be (зафіксавана для гэтай гульні)
+
+@ (off)
+be (выкл.)
+
+@ Apply Display Changes
+be Ужыць налады экрана
+
+@ Display Mode
+be Рэжым экрана
+
+@ Resolution
+be Раздзяляльнасць
+
+@ desktop
+be як у працоўнага стала
+
+@ Preset
+be Прасэт
+
+@ Map
+be Карта
+
+@ Reset Shader Settings
+be Скінуць налады шэйдара
+
+@ Reset to Defaults
+be Скінуць да стандартных
+
+@ Searching...
+be Пошук...
+
+@ This game only autosaves.
+be У гэтай гульні толькі аўтазахаванні.
+
+@ (No Manual Saves modifier)
+be (мадыфікатар «Без ручных захаванняў»)
+
+@ End the current game?
+be Завяршыць бягучую гульню?
+
+@ Unsaved progress will be lost.
+be Незахаваны прагрэс будзе страчаны.
+
+@ End game
+be Завяршыць гульню
+
+@ Overwrite
+be Перазапісаць
+
+@ Overwrite "{}"?
+be Перазапісаць «{}»?
+
+@ Saved {}
+be Захавана {}
+
+@ Start a new game?
+be Пачаць новую гульню?
+
+@ New game
+be Новая гульня
+
+@ New Game
+be Новая гульня
+
+@ CUSTOM
+be СВАЯ
+
+@ Customize Experience
+be Наладзіць гульню
+
+@ Disable All
+be Выключыць усё
+
+@ Disable All Modifications
+be Выключыць усе змены
+
+@ Saves load in other source ports too.
+be Захаванні загружаюцца і ў іншых портах.
+
+@ Standard rules, no add-ons.
+be Стандартныя правілы, без дапаўненняў.
+
+@ Choose skill
+be Выберыце складанасць
+
+@ The current game will end
+be Бягучая гульня будзе завершана
+
+@ Easy
+be Лёгка
+
+@ Normal
+be Нармальна
+
+@ Hard
+be Цяжка
+
+@ Nightmare
+be Кашмар
+
+# graphics preset pop-up
+@ Choose a Graphics Preset
+be Выберыце графічны прасэт
+
+@ Classic
+be Класіка
+
+@ Like the re-release: enhanced models,
+be Як у перавыданні: палепшаныя мадэлі,
+
+@ no added effects.
+be без дадатковых эфектаў.
+
+@ Enhanced
+be Палепшаны
+
+@ Every enhancement at its highest quality.
+be Усе паляпшэнні на максімальнай якасці.
+
+@ Needs a capable GPU.
+be Патрэбна магутная відэакарта.
+
+@ Low-End
+be Слабы ПК
+
+@ Fastest. No anti-aliasing, original
+be Найхутчэй. Без згладжвання, арыгінальныя
+
+@ models, lowest effect quality.
+be мадэлі, эфекты на мінімуме.
+
+@ Esc keeps the defaults
+be Esc пакідае стандартныя налады
+
+@ Everything can be changed later in Options.
+be Усё можна змяніць пазней у «Наладах».
+
+@ Keep Defaults
+be Пакінуць стандартныя
+
+# save and load cards
+@ Save Game
+be Захаваць гульню
+
+@ Load Game
+be Загрузіць гульню
+
+@ Autosaves
+be Аўтазахаванні
+
+@ newest first
+be спачатку новыя
+
+@ Saves: {}
+be Захаванняў: {}
+
+@ Browse Autosaves
+be Праглядзець аўтазахаванні
+
+@ Every retained autosave, newest first
+be Усе захаваныя аўтазахаванні, спачатку новыя
+
+@ New save
+be Новае захаванне
+
+@ Select to save your game here
+be Выберыце, каб захаваць гульню тут
+
+@ No autosaves yet
+be Аўтазахаванняў пакуль няма
+
+@ Autosaves are made on level entry, secrets and more (Options > Gameplay)
+be Аўтазахаванні ствараюцца на пачатку ўзроўню, пры знаходжанні схованак і г. д. (Налады > Гульня)
+
+@ No saves yet
+be Захаванняў пакуль няма
+
+@ Save from the Single Player menu, or press F6 to quicksave
+be Захоўвайцеся ў меню адзіночнай гульні або націсніце F6 для хуткага захавання
+
+@ No picture
+be Няма выявы
+
+@ Del: delete save
+be Del: выдаліць захаванне
+
+@ Delete "{}"?
+be Выдаліць «{}»?
+
+@ This cannot be undone.
+be Гэта дзеянне нельга адмяніць.
+
+@ Quicksave
+be Хуткае захаванне
+
+@ Autosave: {}
+be Аўтазахаванне: {}
+
+@ unknown trigger
+be невядомая прычына
+
+@ Latest - {}
+be Апошняе - {}
+
+@ Health {}
+be Здароўе {}
+
+@ Armor {}
+be Браня {}
+
+@ Kills {}/{}
+be Забіта {}/{}
+
+@ Secrets {}/{}
+be Схованкі {}/{}
+
+@ Split-screen, {} players
+be Падзелены экран, гульцоў: {}
+
+@ Co-op
+be Кааператыў
+
+@ Customized
+be Наладжаная
+
+@ Customized, {}
+be Наладжаная, {}
+
+@ Date unavailable
+be Дата недаступная
+
+@ Just now
+be Толькі што
+
+@ {} min ago
+be {} хв таму
+
+@ {} h ago
+be {} гадз таму
+
+@ Level entry
+be Пачатак узроўню
+
+@ Secret found
+be Знойдзена схованка
+
+@ All enemies killed
+be Усе ворагі забітыя
+
+@ All secrets found
+be Усе схованкі знойдзены
+
+@ Timer
+be Па таймеры
+
+# customize pages
+@ Standard rules
+be Стандартныя правілы
+
+@ Modifiers changed: {}
+be Зменена мадыфікатараў: {}
+
+@ no add-ons
+be без дапаўненняў
+
+@ add-ons: {}
+be дапаўненні: {}
+
+@ Saves of this game are .qsa files: they need this source port.
+be Захаванні гэтай гульні — файлы .qsa: для іх патрэбны гэты порт.
+
+@ Nothing changed: this plays as standard Quake.
+be Нічога не зменена: гэта звычайны Quake.
+
+@ Changes apply now and are saved with this game (.qsa).
+be Змены ўжываюцца адразу і захоўваюцца з гэтай гульнёй (.qsa).
+
+@ This game started without Customize, so its rules are fixed.
+be Гэтую гульню пачалі без налад, таму яе правілы зафіксаваныя.
+
+@ Start a new game and choose Customize Experience.
+be Пачніце новую гульню і выберыце «Наладзіць гульню».
+
+@ These rules apply to the next customized game.
+be Гэтыя правілы будуць ужытыя да наступнай наладжанай гульні.
+
+# add-on browser
+@ Fire
+be Агонь
+
+@ Alt Fire
+be Альт. агонь
+
+@ Configure Parameters >
+be Наладзіць параметры >
+
+@ Configure
+be Наладзіць
+
+@ Settings
+be Налады
+
+@ Change slot
+be Змяніць слот
+
+@ Toggle
+be Пераключыць
+
+@ Details
+be Падрабязней
+
+@ Enter or click the box: toggle
+be Enter або пстрычка па сцяжку: пераключыць
+
+@ Right / Tab / click: details
+be Управа / Tab / пстрычка: падрабязней
+
+@ Input Remapping
+be Перапрызначэнне кіравання
+
+@ Weapon Slot
+be Слот зброі
+
+@ Customized games save as .qsa files, which need this source port.
+be Наладжаныя гульні захоўваюцца ў файлы .qsa, для якіх патрэбны гэты порт.
+
+@ This game started without Customize, so its add-ons are fixed. Customize a new game instead.
+be Гэтую гульню пачалі без налад, таму яе дапаўненні зафіксаваныя. Лепш наладзьце новую гульню.
+
+@ Bullet Time
+be Запавольванне часу
+
+@ Change Goggles
+be Змяніць акуляры
+
+@ Dodge / Dive
+be Ухіл / скачок
+
+@ Goggles
+be Акуляры
+
+@ Hitstop
+be Хітстоп
+
+@ Projectile Shotguns
+be Драбавікі са снарадамі
+
+@ BULLET TIME: 20%
+be ЗАПАВОЛЬВАННЕ: 20%
+
+@ NORMAL SPEED
+be ЗВЫЧАЙНАЯ ХУТКАСЦЬ
+
+@ SLOW MOTION: PHYSICAL PELLETS
+be ЗАПАВОЛЬВАННЕ: ФІЗІЧНЫ ШРОТ
+
+@ DEMONSTRATION
+be ДЭМАНСТРАЦЫЯ
+
+@ GAMEPLAY
+be ГУЛЬНЯ
+
+@ LOOP
+be ПАЎТОР
+
+@ Preview unavailable
+be Папярэдні прагляд недаступны
+
+# shader and language help lines
+@ A setting of the chosen shader; arrows step it, Enter is not needed
+be Параметр выбранага шэйдара; мяняецца стрэлкамі, Enter не патрэбны
+
+@ Language of the menus, messages and the 2021 re-release's game text; System follows your computer's language
+be Мова меню, паведамленняў і гульнявых тэкстаў перавыдання 2021 года; «Сістэмная» адпавядае мове вашага камп’ютара
+
+@ Puts every setting of the chosen shader back to the preset's defaults
+be Вяртае ўсе параметры выбранага шэйдара да значэнняў прасэта
+
+@ RetroArch slang shader on the final image: CRT, scanlines, NTSC, sharpening; add your own in <game>/shaders
+be Шэйдар RetroArch slang па-над выніковай выявай: CRT, радкі разгорткі, NTSC, рэзкасць; уласныя кладзіце ў <гульня>/shaders
+
+# modern console footer
+@ Shift+PgUp/Dn: height  ` : hide
+be Shift+PgUp/Dn: вышыня  ` : схаваць
+
+@ Tab: complete  Ctrl+R: search  bash | pipe
+be Tab: дапоўніць  Ctrl+R: пошук  bash | канвеер
+
+@ ↑ +{} lines (End to jump) 
+be ↑ +{} радкоў (End — уніз) 
+
+# add-on descriptions
+@ Create two linked portals on flat walls. Fire places the first portal; Alt Fire places the second. Walk through either portal to emerge from the other. Your momentum carries through. Assign a weapon slot below: pressing that slot repeatedly cycles its ordinary weapon and every enabled add-on assigned there. Portal view quality is configurable below.
+be Стварайце два звязаныя парталы на роўных сценах. Агонь ставіць першы партал, альт. агонь — другі. Увайдзіце ў адзін, каб выйсці з другога; інерцыя захоўваецца. Прызначце слот зброі ніжэй: паўторныя націсканні гэтага слота пераключаюць яго звычайную зброю і ўсе ўключаныя дапаўненні ў ім. Якасць выгляду парталаў наладжваецца ніжэй.
+
+@ Hold Fire and sweep the crosshair over monsters to queue targets. Release Fire to throw: the boomerang visits each target, stuns it and returns to you. Alt Fire clears the queue. The weapon slot selects a group, not a separate hotkey: press it again to cycle through the weapons in that slot. Configure stun duration and flight speed below.
+be Утрымлівайце агонь і правядзіце прыцэлам па монстрах, каб паставіць мэты ў чаргу. Адпусціце для кідка: бумеранг абляціць кожную мэту, аглушыць яе і вернецца да вас. Альт. агонь ачышчае чаргу. Слот зброі выбірае групу, а не асобную клавішу: націсніце яго яшчэ раз, каб пераключаць зброю ў гэтым слоце. Працягласць аглушэння і хуткасць палёту наладжваюцца ніжэй.
+
+@ Hold Fire to charge a sticky bomb using rocket ammunition; release to launch. A longer charge throws it faster. Bombs cling to walls, doors and monsters. Alt Fire detonates your planted bombs together. Place a trap, retreat, then detonate it when enemies approach. Assign any weapon slot below; repeated presses cycle through the ordinary weapon and add-ons in that slot.
+be Утрымлівайце агонь, каб зарадзіць ліпкую бомбу ракетнымі боепрыпасамі; адпусціце для запуску. Чым даўжэйшы зарад, тым хутчэйшы кідок. Бомбы прыліпаюць да сцен, дзвярэй і монстраў. Альт. агонь падрывае ўсе ўсталяваныя бомбы разам. Пастаўце пастку, адступіце і падарвіце яе, калі падыдуць ворагі. Прызначце любы слот зброі ніжэй; паўторныя націсканні пераключаюць звычайную зброю і дапаўненні ў гэтым слоце.
+
+@ Fire launches a chain hook. It latches onto a permitted surface or enemy and reels you toward the anchor. Fire again or use Alt Fire to let go. Choose which materials and enemies can be hooked in Configure Parameters. Assign it to any weapon slot; repeated presses of the slot's existing binding cycle through its weapons.
+be Агонь кідае крук на ланцугу. Ён чапляецца за дазволеную паверхню або ворага і падцягвае вас да пункта мацавання. Паўторны агонь або альт. агонь адпускае. Якія матэрыялы і ворагі падыходзяць для крука, выбіраецца ў «Наладзіць параметры». Прызначце яго ў любы слот зброі; паўторныя націсканні клавішы слота пераключаюць яго зброю.
+
+@ A piercing railgun inspired by Quake III. Fire sends a slug through every enemy along its line. Each shot consumes two cells, with a 1.5 second refire interval. Damage and the spiral trail colour are configurable below. Choose a weapon slot: the slot's current binding selects and cycles the weapons assigned to it.
+be Прабіўны рэйлган па матывах Quake III. Агонь пасылае снарад праз усіх ворагаў на лініі. Кожны стрэл траціць дзве ячэйкі, перазарадка — 1,5 секунды. Шкода і колер спіральнага следу наладжваюцца ніжэй. Выберыце слот зброі: яго бягучая клавіша выбірае і пераключае прызначаную зброю.
+
+@ A Portal-style gel sprayer. Fire sprays blue Repulsion gel: land, jump or run into it to bounce, and landings on it never hurt. Alt Fire sprays orange Propulsion gel: run across it to go much faster. Gel coats floors and walls until washed off with the Powerwasher. Assign a weapon slot below; repeated presses cycle the weapons in that slot.
+be Гелямёт у стылі Portal. Агонь распыляе сіні адштурхоўвальны гель: прызямліцеся, скокніце або ўбяжыце ў яго, каб адскочыць, а прызямленне на яго ніколі не раніць. Альт. агонь распыляе аранжавы паскаральны гель: бяжыце па ім, каб рухацца значна хутчэй. Гель пакрывае падлогі і сцены, пакуль яго не змые мыйка высокага ціску. Прызначце слот зброі ніжэй; паўторныя націсканні пераключаюць зброю ў гэтым слоце.
+
+@ A water cannon. Fire shoots a straight jet with limited reach; Alt Fire a wide, shorter fan. The water pushes enemies back, turns projectiles aside and washes away gel and blood. Push strength is configurable below. Assign a weapon slot below; repeated presses cycle the weapons in that slot.
+be Вадамёт. Агонь б’е простым струменем абмежаванай далёкасці, альт. агонь — шырокім кароткім веерам. Вада адкідвае ворагаў, адхіляе снарады і змывае гель і кроў. Сіла штуршка наладжваецца ніжэй. Прызначце слот зброі ніжэй; паўторныя націсканні пераключаюць зброю ў гэтым слоце.
+
+@ One equipment add-on includes both night vision and thermal vision. The Change Goggles action cycles Normal, Night Vision, Thermal, then Normal again. Night vision brightens dark rooms; thermal vision highlights living enemies. Goggles do not occupy a weapon slot. Configure intensity and sensor noise below. The binding affects only this add-on.
+be Адно дапаўненне-рыштунак змяшчае і начное, і цеплавое бачанне. Дзеянне «Змяніць акуляры» пераключае звычайны, начны, цеплавы рэжымы і зноў звычайны. Начное бачанне асвятляе цёмныя пакоі; цеплавое вылучае жывых ворагаў. Акуляры не займаюць слот зброі. Інтэнсіўнасць і шум сенсара наладжваюцца ніжэй. Прызначэнне датычыцца толькі гэтага дапаўнення.
+
+@ Press Dodge with a movement direction on the ground or in midair: dive forward or leap backward and sideways. Diagonals are supported. Each press launches once, with a short recovery. The player body animates in third person. Assign the Dodge action below or in Controls.
+be Націсніце «Ухіл» з кірункам руху на зямлі ці ў паветры: нырок наперад або скачок назад і ўбок. Дыяганалі падтрымліваюцца. Кожнае націсканне дае адзін рывок з кароткім аднаўленнем. Цела гульца аніміруецца ад трэцяй асобы. Прызначце дзеянне «Ухіл» ніжэй або ў «Кіраванні».
+
+@ Use the dedicated Bullet Time action to slow the whole local game to 20% speed. Hold is the default; Toggle switches on each press. The optional meter limits use in real seconds and regenerates while inactive. Disable the meter for unlimited use. Remap the action and configure duration and regeneration below.
+be Асобнае дзеянне «Запавольванне часу» запавольвае ўсю лакальную гульню да 20% хуткасці. Стандартна — утрыманне; рэжым пераключэння мяняе стан кожным націсканнем. Неабавязковая шкала абмяжоўвае выкарыстанне ў рэальных секундах і аднаўляецца ў спакоі. Выключыце шкалу для неабмежаванага выкарыстання. Перапрызначце дзеянне і наладзьце працягласць і аднаўленне ніжэй.
+
+@ Both shotguns and enemy grunts fire physical pellets with their original spread and damage. Fast default projectiles feel immediate; lower their speed to dodge incoming fire during bullet time. Configure projectile speed below, or reset it to the default of 10000 units per second.
+be Абодва драбавікі і ворагі-салдаты страляюць фізічным шротам з арыгінальным роскідам і шкодай. Хуткія стандартныя снарады здаюцца імгненнымі; паменшыце іх хуткасць, каб ухіляцца ад агню падчас запавольвання часу. Наладзьце хуткасць снарадаў ніжэй або вярніце стандартнае значэнне — 10000 адзінак у секунду.
+
+@ Freezes the game for a split second when you damage an enemy, so hits feel heavier. Single player only. Choose which weapons trigger it (all, melee, ranged or explosives), how long it lasts and how much more a kill freezes. Advanced settings cover enemy toughness, damage scaling, cooldown and the longest freeze.
+be Замарожвае гульню на долю секунды, калі вы раніце ворага, каб удары адчуваліся важкімі. Толькі адзіночная гульня. Выберыце, якая зброя гэта выклікае (уся, блізкі бой, далёкі бой ці выбухоўка), колькі доўжыцца стоп-кадр і наколькі ён даўжэйшы пры забойстве. Дадаткова наладжваюцца трываласць ворагаў, маштаб шкоды, перазарадка і найдаўжэйшы стоп-кадр.
+
+# map packs and the Quaddicted browser
+@ Get more maps (Quaddicted)...
+be Больш карт (Quaddicted)...
+
+@ Type to filter...
+be Увядзіце для фільтра...
+
+@ Launch mod
+be Запусціць мод
+
+@ Start first map
+be Пачаць першую карту
+
+@ (running)
+be (запушчаны)
+
+@ running
+be запушчаны
+
+@ Recent
+be Нядаўнія
+
+@ Name
+be Імя
+
+@ Dir
+be Тэчка
+
+@ Default
+be Стандартна
+
+@ Title
+be Назва
+
+@ Sort: {}
+be Сартаванне: {}
+
+@ {} installed
+be Усталявана: {}
+
+@ {}/{} matching
+be Супадзенняў: {}/{}
+
+@ {} maps, {} completed
+be Карт: {}, пройдзена: {}
+
+@ {}/{} matching, {} completed
+be Супадзенняў: {}/{}, пройдзена: {}
+
+@ no maps of its own
+be няма ўласных карт
+
+@ dir: {}
+be тэчка: {}
+
+@ base: {}
+be аснова: {}
+
+@ Browse the Quaddicted archive of
+be Праглядайце архіў Quaddicted
+
+@ single-player maps and episodes,
+be адзіночных карт і эпізодаў,
+
+@ then download and install them
+be а потым спампоўвайце і ўсталёўвайце іх
+
+@ here. Each release gets its own
+be тут. Кожны рэліз атрымлівае свой
+
+@ entry in this list.
+be радок у гэтым спісе.
+
+@ Needs an internet connection.
+be Патрэбна падлучэнне да інтэрнэту.
+
+@ Quaddicted Map Archive
+be Архіў карт Quaddicted
+
+@ Newest
+be Новыя
+
+@ Author
+be Аўтар
+
+@ Size
+be Памер
+
+@ Loading the map list...
+be Загрузка спіса карт...
+
+@ Couldn't load the map list: {}
+be Не ўдалося загрузіць спіс карт: {}
+
+@ {} single-player releases  -  F5 refreshes
+be Адзіночных рэлізаў: {}  -  F5 абнаўляе
+
+@ {} matching
+be Супадзенняў: {}
+
+@ by {}
+be аўтар: {}
+
+@ requires: {}
+be патрабуе: {}
+
+@ maps: {}
+be карты: {}
+
+@ Failed: {}
+be Памылка: {}
+
+@ Downloading... {}%
+be Спампоўка... {}%
+
+@ Unpacking...
+be Распакоўка...
+
+@ Installed in {}/  -  Enter: play
+be Усталявана ў {}/  -  Enter: гуляць
+
+@ Enter: download and install
+be Enter: спампаваць і ўсталяваць
+
+@ unpacking
+be распакоўка
+
+@ failed
+be памылка
+
+@ installed
+be усталявана
+
+@ Downloads are not available in the browser build
+be Спампоўка недаступная ў браўзернай версіі
+
+@ the map list could not be read
+be не ўдалося прачытаць спіс карт
+
+@ downloading needs the curl program
+be для спампоўкі патрэбна праграма curl
+
+@ download failed
+be спампоўка не ўдалася
+
+@ the download is not a valid zip
+be спампаваны файл — не карэктны zip
+
+@ nothing to install for this engine
+be для гэтага рухавіка няма чаго ўсталёўваць
+
+@ needs {} installed first
+be спачатку трэба ўсталяваць {}
+
+@ couldn't unpack {}
+be не ўдалося распакаваць {}
+
+# help screen
+@ About
+be Пра дапаможнік
+
+@ < Back
+be < Назад
+
+# tr_ctx keys: English shows the short word, the key says which meaning
+@ Save (a manual save, as opposed to a quicksave or autosave)
+be Захаванне
+
+# ==== hud.txt ====
+
+# HUD, weapon and equipment wheels, sound captions and other in-game text.
+# Weapon, monster and item names follow the 2021 re-release's own translations.
+@ Axe
+be Сякера
+
+@ Shotgun
+be Драбавік
+
+@ Double-Barrelled Shotgun
+be Двухстволка
+
+@ Nailgun
+be Цвікамёт
+
+@ Super Nailgun
+be Суперцвікамёт
+
+@ Grenade Launcher
+be Гранатамёт
+
+@ Rocket Launcher
+be Ракетамёт
+
+@ Thunderbolt
+be Маланка
+
+@ Portal Gun
+be Партальная гармата
+
+@ Boomerang
+be Бумеранг
+
+@ Stickybomb Launcher
+be Ліпкі бомбамёт
+
+@ Railgun
+be Рэйлган
+
+@ Hookshot
+be Крук-кошка
+
+@ Gel Sprayer
+be Гелямёт
+
+@ Powerwasher
+be Мыйка высокага ціску
+
+@ Night Vision Goggles
+be Акуляры начнога бачання
+
+@ Thermal Goggles
+be Цеплавізійныя акуляры
+
+@ Normal vision
+be Звычайны зрок
+
+@ ON
+be УКЛ
+
+@ OFF
+be ВЫКЛ
+
+@ {} (turn on)
+be {} (уключыць)
+
+@ {} (turn off)
+be {} (выключыць)
+
+@ Move mouse to select, release to toggle
+be Рухайце мыш для выбару, адпусціце для пераключэння
+
+@ Move mouse to select, release to equip
+be Рухайце мыш для выбару, адпусціце, каб узяць
+
+@ Release to toggle
+be Адпусціце для пераключэння
+
+@ Release to equip
+be Адпусціце, каб узяць
+
+@ shells
+be шрот
+
+@ nails
+be цвікі
+
+@ rockets
+be ракеты
+
+@ cells
+be ячэйкі
+
+@ Kills: {}/{}
+be Забіта: {}/{}
+
+@ Secrets: {}/{}
+be Схованкі: {}/{}
+
+@ Time {}
+be Час {}
+
+@ Press any button to continue...
+be Націсніце любую кнопку, каб працягнуць...
+
+@ Press any key to continue...
+be Націсніце любую клавішу, каб працягнуць...
+
+@ BULLET TIME
+be ЗАПАВОЛЬВАННЕ
+
+@ AUTO AIM
+be АЎТАПРЫЦЭЛ
+
+@ Crosshair
+be Прыцэл
+
+@ + Marker
+be + маркер
+
+@ Hit markers off
+be Маркеры пападанняў выкл.
+
+@ On target
+be На мэце
+
+@ On kill
+be Пры забойстве
+
+# sound captions
+@ [Secret found]
+be [Схованка знойдзена]
+
+@ [Message]
+be [Паведамленне]
+
+@ [Switch activated]
+be [Пераключальнік задзейнічаны]
+
+@ [Key picked up]
+be [Ключ падабраны]
+
+@ [Rune picked up]
+be [Руна падабрана]
+
+@ [Teleporter]
+be [Тэлепорт]
+
+@ [Teleport]
+be [Тэлепартацыя]
+
+@ [Splash]
+be [Плёскат]
+
+@ [Leaving water]
+be [Выхад з вады]
+
+@ [Door]
+be [Дзверы]
+
+@ [Platform moving]
+be [Платформа рухаецца]
+
+@ [Button]
+be [Кнопка]
+
+@ [Health picked up]
+be [Аптэчка падабрана]
+
+@ [Armor picked up]
+be [Браня падабрана]
+
+@ [Quad Damage wearing off]
+be [Чатырохразовая шкода сканчаецца]
+
+@ [Quad Damage]
+be [Чатырохразовая шкода]
+
+@ [Pentagram wearing off]
+be [Пентаграма сканчаецца]
+
+@ [Pentagram of Protection]
+be [Пентаграма аховы]
+
+@ [Ring wearing off]
+be [Пярсцёнак сканчаецца]
+
+@ [Ring of Shadows]
+be [Пярсцёнак ценяў]
+
+@ [Biosuit wearing off]
+be [Біякасцюм сканчаецца]
+
+@ [Biosuit]
+be [Біякасцюм]
+
+@ [Item picked up]
+be [Прадмет падабраны]
+
+@ [Weapon picked up]
+be [Зброя падабрана]
+
+@ [Ammo picked up]
+be [Боепрыпасы падабраны]
+
+@ [Explosion]
+be [Выбух]
+
+@ [Grenade launched]
+be [Граната выпушчана]
+
+@ [Grenade bounce]
+be [Адскок гранаты]
+
+@ [Rocket fired]
+be [Ракета выпушчана]
+
+@ [Nails fired]
+be [Цвікі выпушчаны]
+
+@ [Lightning]
+be [Маланка]
+
+@ [Thunder]
+be [Гром]
+
+@ [Enforcer alerted]
+be [Сілавік заўважыў вас]
+
+@ [Grunt alerted]
+be [Салдат заўважыў вас]
+
+@ [Rottweiler alerted]
+be [Ратвейлер заўважыў вас]
+
+@ [Knight alerted]
+be [Рыцар заўважыў вас]
+
+@ [Death Knight alerted]
+be [Рыцар смерці заўважыў вас]
+
+@ [Scrag alerted]
+be [Скраг заўважыў вас]
+
+@ [Ogre alerted]
+be [Огр заўважыў вас]
+
+@ [Fiend alerted]
+be [Дэман заўважыў вас]
+
+@ [Shambler alerted]
+be [Шамблер заўважыў вас]
+
+@ [Zombie groaning]
+be [Зомбі стогне]
+
+@ [Vore alerted]
+be [Шалрат заўважыў вас]
+
+@ [Vore attacking]
+be [Шалрат атакуе]
+
+@ [Spawn alerted]
+be [Згустак заўважыў вас]
+
+@ [Rotfish]
+be [Піранья]
+
+@ [Spawn]
+be [Згустак]
+
+@ [Chthon]
+be [Хтон]
+
+@ [Hard landing]
+be [Жорсткае прызямленне]
+
+@ [Drowning]
+be [Захлынаецца]
+
+@ [Gasping for air]
+be [Хапае паветра]
+
+@ [Burning]
+be [Гарыць]
+
+@ [Telefrag]
+be [Тэлефраг]
+
+@ [Gibbed]
+be [Разарваны]
+
+# ==== console.txt ====
+
+# Console messages, shown translated only with con_translate 1 (Translate Console).
+# Cvar and command names stay as they are.
+@ Autosaved.
+be Аўтазахаванне выканана.
+
+@ Game saved.
+be Гульня захавана.
+
+@ Can't save now.
+be Зараз захаваць нельга.
+
+@ This game only autosaves (No Manual Saves modifier).
+be У гэтай гульні толькі аўтазахаванні (мадыфікатар «Без ручных захаванняў»).
+
+@ Loading {}...
+be Загрузка {}...
+
+@ load failed: {}
+be памылка загрузкі: {}
+
+@ ERROR: autosave failed: {}
+be ПАМЫЛКА: аўтазахаванне не ўдалося: {}
+
+@ ERROR: couldn't open {}
+be ПАМЫЛКА: не ўдалося адкрыць {}
+
+@ ERROR: couldn't open {}.
+be ПАМЫЛКА: не ўдалося адкрыць {}.
+
+@ ERROR: couldn't write {}: {}
+be ПАМЫЛКА: не ўдалося запісаць {}: {}
+
+@ ERROR: couldn't create {}: {}
+be ПАМЫЛКА: не ўдалося стварыць {}: {}
+
+@ couldn't write {}: {}
+be не ўдалося запісаць {}: {}
+
+@ Wrote {}
+be Запісана: {}
+
+@ screenshot failed: {}
+be здымак экрана не ўдаўся: {}
+
+@ screenshot: {}
+be здымак экрана: {}
+
+@ No readable save available. Select save or restart the level.
+be Няма прыдатнага захавання. Выберыце захаванне або пачніце ўзровень нанова.
+
+@ Unknown command "{}"
+be Невядомая каманда «{}»
+
+@ couldn't exec {}
+be не ўдалося выканаць {}
+
+@ execing {}
+be выконваецца {}
+
+@ execing config.cfg (inherited from {})
+be выконваецца config.cfg (успадкавана ад {})
+
+@ execing config.cfg (mod defaults)
+be выконваецца config.cfg (налады мода)
+
+@ execing default.cfg (built-in)
+be выконваецца default.cfg (убудаваны)
+
+@ {} cvars
+be Зменных: {}
+
+@ {} commands
+be Каманд: {}
+
+@ Can't "cmd", not connected
+be «cmd» немагчымая: няма падлучэння
+
+@ Looking for Quake servers...
+be Пошук сервераў Quake...
+
+@ Bad value, must be between 1 and 65534
+be Няправільнае значэнне, павінна быць ад 1 да 65534
+
+@ Couldn't handle music file {}
+be Не ўдалося апрацаваць музычны файл {}
+
+@ Bug report written to {}
+be Справаздача пра памылку запісана ў {}
+
+@ bugreport: can't create {}: {}
+be bugreport: не ўдаецца стварыць {}: {}
+
+@ graphics preset: {}
+be графічны прасэт: {}
+
+@ Presets (r_shader_preset <name>):
+be Прасэты (r_shader_preset <назва>):
+
+@ Add your own .slangp presets under <game>/shaders/.
+be Дадавайце ўласныя прасэты .slangp у <гульня>/shaders/.
+
+@ no shader preset loaded (r_shader_preset)
+be прасэт шэйдара не загружаны (r_shader_preset)
+
+@ r_shader_preset: "{}" not found
+be r_shader_preset: «{}» не знойдзены
+
+@ no parameter "{}" in this preset
+be у гэтым прасэце няма параметра «{}»
+
+@ {} = {} (default {}, {}..{})
+be {} = {} (стандартна {}, {}..{})
+
+@ Switching to {}...
+be Пераключэнне на {}...
+
+@ game: no game dir "{}" in {}
+be game: няма тэчкі гульні «{}» у {}
+
+@ game: can't find the engine executable
+be game: не знойдзены выканальны файл рухавіка
+
+@ game: exec failed: {}
+be game: памылка запуску: {}
+
+@ game: launch failed: {}
+be game: не ўдалося запусціць: {}
+
+@ loaded {} in {}s
+be {} загружана за {} с
+
+@ No demos listed with startdemos
+be У startdemos няма дэма
+
+@ Playing demo from {}.
+be Прайграванне дэма {}.
+
+@ {} frames {} seconds {} fps
+be {} кадраў {} секунд {} FPS
+
+@ Recording to {}.
+be Запіс у {}.
+
+@ Completed demo
+be Дэма завершана
+
+@ Can't record during demo playback
+be Нельга запісваць падчас прайгравання дэма
+
+@ Relative pathnames are not allowed.
+be Адносныя шляхі не дазволены.
+
+@ Can't record - try again when connected
+be Запіс немагчымы — паспрабуйце зноў пасля падлучэння
+
+@ {} demo(s) in loop
+be Дэма ў цыкле: {}
+
+@ Not recording a demo.
+be Дэма не запісваецца.
+
+@ {} joined on a gamepad
+be {} далучыўся з геймпада
+
+@ goggles: needs a game started with Add-ons and Goggles enabled
+be goggles: патрэбна гульня, пачатая з уключанымі дапаўненнямі і акулярамі
+
+@ equip: needs a game started with Add-ons and Goggles enabled
+be equip: патрэбна гульня, пачатая з уключанымі дапаўненнямі і акулярамі
+
+@ UDP listening on port {}
+be UDP слухае порт {}
+
+@ UDP bind on port {} failed: {}
+be не ўдалося заняць UDP-порт {}: {}
+
+@ Connection accepted by {}
+be Падлучэнне прыняў {}
+
+@ Connection failed: {}
+be Памылка падлучэння: {}
+
+@ Couldn't resolve {}
+be Не ўдалося знайсці адрас {}
+
+@ Connecting to {}...
+be Падлучэнне да {}...
+
+@ Connecting to QuakeWorld server {}...
+be Падлучэнне да сервера QuakeWorld {}...
+
+@ Disconnected: {}
+be Адлучана: {}
+
+@ Server disconnected
+be Сервер адлучыўся
+
+@ Client {} connected
+be Кліент {} падлучыўся
+
+@ Client {} timed out
+be Кліент {} не адказвае
+
+@ Couldn't spawn server {}: {}
+be Не ўдалося запусціць сервер {}: {}
+
+@ maxplayers can not be changed while a server is running.
+be maxplayers нельга змяніць, пакуль працуе сервер.
+
+@ You can't kick yourself!
+be Нельга выгнаць самога сябе!
+
+@ Only the server may changelevel
+be Толькі сервер можа выканаць changelevel
+
+@ {} renamed to {}
+be {} цяпер завецца {}

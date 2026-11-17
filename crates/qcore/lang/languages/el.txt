@@ -1,0 +1,3024 @@
+# el: the port's own text; English keys from crates/qcore/lang/*.txt.
+# Format in crates/qcore/src/lang/catalog.rs; check with tools/lang_check.py.
+
+# ==== menu.txt ====
+
+# Options pages: page names, row labels and choice values.
+@ 10% speed
+el ταχύτητα 10%
+
+@ 2 split-screen
+el 2 σε διαιρεμένη οθόνη
+
+@ 3 split-screen
+el 3 σε διαιρεμένη οθόνη
+
+@ 4 split-screen
+el 4 σε διαιρεμένη οθόνη
+
+@ 5 split-screen
+el 5 σε διαιρεμένη οθόνη
+
+@ 6 split-screen
+el 6 σε διαιρεμένη οθόνη
+
+@ 2D aiming
+el Στόχευση 2D
+
+@ 2x monsters
+el Τέρατα ×2
+
+@ 3x monsters
+el Τέρατα ×3
+
+@ 4x monsters
+el Τέρατα ×4
+
+@ 3D resolution
+el Ανάλυση 3D
+
+@ 3D view
+el Προβολή 3D
+
+@ 8-bit Color
+el Χρώμα 8-bit
+
+@ Accessibility
+el Προσβασιμότητα
+
+@ Acquisition Cone
+el Κώνος εντοπισμού
+
+@ Activation
+el Ενεργοποίηση
+
+@ Add a ringing room tail after the cue
+el Προσθέτει αντήχηση χώρου μετά το σήμα
+
+@ Add delayed repeats after the cue
+el Προσθέτει καθυστερημένες επαναλήψεις μετά το σήμα
+
+@ Add saturation and distortion
+el Προσθέτει κορεσμό και παραμόρφωση
+
+@ Add-ons
+el Πρόσθετα
+
+@ Address
+el Διεύθυνση
+
+@ Adds fine noise to hide color banding
+el Προσθέτει λεπτό θόρυβο για να κρύψει τις χρωματικές λωρίδες
+
+@ Advanced Settings
+el Σύνθετες ρυθμίσεις
+
+@ Aim Assist
+el Υποβοήθηση στόχευσης
+
+@ Aim Rotation
+el Περιστροφή στόχευσης
+
+@ Aim Slowdown
+el Επιβράδυνση στόχευσης
+
+@ Aim Style
+el Τύπος στόχευσης
+
+@ All
+el Όλα
+
+@ All enemies
+el Όλοι οι εχθροί
+
+@ Alt Fire (Add-ons)
+el Εναλλ. βολή (Πρόσθετα)
+
+@ Always Run
+el Πάντα τρέξιμο
+
+@ Ambient Occlusion
+el Σκίαση περιβάλλοντος
+
+@ Ammo Counts
+el Μετρητές πυρομαχικών
+
+@ Ammo Counts Position
+el Θέση μετρητών πυρομαχικών
+
+@ Ammo Pickups
+el Συλλογή πυρομαχικών
+
+@ Anisotropic
+el Ανισοτροπικό
+
+@ Anti-aliasing
+el Εξομάλυνση
+
+@ Apply To
+el Εφαρμογή σε
+
+@ Armor
+el Πανοπλία
+
+@ Armor Position
+el Θέση πανοπλίας
+
+@ Ask
+el Ερώτηση
+
+@ Attack
+el Επίθεση
+
+@ Audio
+el Ήχος
+
+@ Auto-aim
+el Αυτόματη στόχευση
+
+@ Auto-aim Settings
+el Ρυθμίσεις αυτόματης στόχευσης
+
+@ Autosave
+el Αυτόματη αποθήκευση
+
+@ Autosave Settings
+el Ρυθμίσεις αυτόματης αποθήκευσης
+
+@ Autosave Timer
+el Χρονόμετρο αυτόματης αποθήκευσης
+
+@ Autosaves to Keep
+el Πλήθος αυτόμ. αποθηκεύσεων
+
+@ Bass
+el Μπάσα
+
+@ Blip
+el Μπιπ
+
+@ Blood Quality
+el Ποιότητα αίματος
+
+@ Blood Splatter Settings
+el Ρυθμίσεις πιτσιλιών αίματος
+
+@ Blue
+el Μπλε
+
+@ Boomerang Settings
+el Ρυθμίσεις μπούμερανγκ
+
+@ Boost or cut high frequencies in decibels
+el Ενισχύει ή μειώνει τις υψηλές συχνότητες σε ντεσιμπέλ
+
+@ Boost or cut low frequencies in decibels
+el Ενισχύει ή μειώνει τις χαμηλές συχνότητες σε ντεσιμπέλ
+
+@ Brightness
+el Φωτεινότητα
+
+@ Bullet Time (Add-ons)
+el Bullet Time (Πρόσθετα)
+
+@ Bullet Time Settings
+el Ρυθμίσεις Bullet Time
+
+@ Button Glyphs
+el Εικονίδια κουμπιών
+
+@ Button Size
+el Μέγεθος κουμπιών
+
+@ Camera
+el Κάμερα
+
+@ Caustic Intensity
+el Ένταση καυστικών
+
+@ Caustics
+el Καυστικά
+
+@ Center
+el Κέντρο
+
+@ Center Message Position
+el Θέση κεντρικών μηνυμάτων
+
+@ Center Message Time
+el Διάρκεια κεντρικών μηνυμάτων
+
+@ Center View
+el Κεντράρισμα θέας
+
+@ Change Color on Kill
+el Αλλαγή χρώματος σε σκότωμα
+
+@ Change Color on Target
+el Αλλαγή χρώματος σε στόχο
+
+@ Chime
+el Καμπανάκι
+
+@ Click
+el Κλικ
+
+@ Clink
+el Τσιν
+
+@ Coin
+el Κέρμα
+
+@ Color
+el Χρώμα
+
+@ Color Filter
+el Φίλτρο χρώματος
+
+@ Color of the grenade arc
+el Χρώμα της τροχιάς χειροβομβίδας
+
+@ Colored Lighting
+el Χρωματιστός φωτισμός
+
+@ Connect
+el Σύνδεση
+
+@ Contrast
+el Αντίθεση
+
+@ Controls
+el Χειρισμός
+
+@ Cooldown (ms)
+el Αναμονή (ms)
+
+@ Crosshair Outline
+el Περίγραμμα στόχαστρου
+
+@ Crosshair Shape
+el Σχήμα στόχαστρου
+
+@ Crosshair Size
+el Μέγεθος στόχαστρου
+
+@ Current Ammo
+el Τρέχοντα πυρομαχικά
+
+@ Current Ammo Position
+el Θέση τρεχόντων πυρομαχικών
+
+@ Customize This Game
+el Προσαρμογή αυτού του παιχνιδιού
+
+@ Damage
+el Ζημιά
+
+@ Damage Taken
+el Ζημιά που δέχεσαι
+
+@ Debris
+el Συντρίμμια
+
+@ Debris Quality
+el Ποιότητα συντριμμιών
+
+@ Debris Settings
+el Ρυθμίσεις συντριμμιών
+
+@ Directional Damage
+el Κατεύθυνση ζημιάς
+
+@ Dithering
+el Dithering
+
+@ Dodge / Dive (Add-ons)
+el Αποφυγή / Βουτιά (Πρόσθετα)
+
+@ Dragging up looks down instead of up
+el Σύρσιμο προς τα πάνω κοιτάζει κάτω αντί για πάνω
+
+@ Drive
+el Κορεσμός
+
+@ Dynamic Lights
+el Δυναμικά φώτα
+
+@ Echo
+el Ηχώ
+
+@ Enemy Health
+el Υγεία εχθρών
+
+@ Enemy Wounds
+el Τραύματα εχθρών
+
+@ Enhanced Blood Splatter
+el Βελτιωμένα πιτσιλίσματα αίματος
+
+@ Enhanced FX
+el Βελτιωμένα εφέ
+
+@ Enhanced Models
+el Βελτιωμένα μοντέλα
+
+@ Enhanced Particles
+el Βελτιωμένα σωματίδια
+
+@ Enhanced Water
+el Βελτιωμένο νερό
+
+@ Enhancements
+el Βελτιώσεις
+
+@ Equipment Wheel (Add-ons)
+el Τροχός εξοπλισμού (Πρόσθετα)
+
+@ Exploding boxes throw metal shards
+el Τα κιβώτια που εκρήγνυνται εκτοξεύουν μεταλλικά θραύσματα
+
+@ Explosion Damage
+el Ζημιά από εκρήξεις
+
+@ Explosion Scorch Marks
+el Καψαλίσματα εκρήξεων
+
+@ Explosions scorch nearby solid surfaces
+el Οι εκρήξεις καψαλίζουν τις κοντινές στερεές επιφάνειες
+
+@ Explosives only
+el Μόνο εκρηκτικά
+
+@ Extra Monsters
+el Επιπλέον τέρατα
+
+@ Extra Per 10 Damage (ms)
+el Επιπλέον ανά 10 ζημιάς (ms)
+
+@ FX Settings
+el Ρυθμίσεις εφέ
+
+@ Field of View
+el Οπτικό πεδίο
+
+@ Firing never uses up ammo
+el Τα πυρά δεν ξοδεύουν ποτέ πυρομαχικά
+
+@ First person
+el Πρώτο πρόσωπο
+
+@ Flick Time
+el Χρόνος flick
+
+@ Flight Speed
+el Ταχύτητα πτήσης
+
+@ Fog
+el Ομίχλη
+
+@ Frag Limit
+el Όριο frags
+
+@ Freeze Duration (ms)
+el Διάρκεια παγώματος (ms)
+
+@ GLQuake
+el GLQuake
+
+@ Game Speed
+el Ταχύτητα παιχνιδιού
+
+@ Game Type
+el Τύπος παιχνιδιού
+
+@ Gameplay
+el Gameplay
+
+@ Gameplay Modifiers
+el Τροποποιητές gameplay
+
+@ Gel Quality
+el Ποιότητα τζελ
+
+@ Gib Surface Painting
+el Κηλίδες από κομμάτια
+
+@ Gibs
+el Κομμάτια σάρκας
+
+@ Gibs and heads tumble and bounce
+el Κομμάτια και κεφάλια κυλούν και αναπηδούν
+
+@ Goggle Glow Quality
+el Ποιότητα λάμψης γυαλιών
+
+@ Goggle Intensity
+el Ένταση γυαλιών
+
+@ Goggle Noise
+el Θόρυβος γυαλιών
+
+@ Goggles Settings
+el Ρυθμίσεις γυαλιών
+
+@ Graphics
+el Γραφικά
+
+@ Green
+el Πράσινο
+
+@ Grenade Arc
+el Τροχιά χειροβομβίδας
+
+@ Grenade Arc Settings
+el Ρυθμίσεις τροχιάς χειροβομβίδας
+
+@ Gun Kick
+el Ανάκρουση όπλου
+
+@ Gyro
+el Γυροσκόπιο
+
+@ Gyro & Flick Stick
+el Γυροσκόπιο & Flick Stick
+
+@ Gyro Active
+el Ενεργό γυροσκόπιο
+
+@ Gyro Aiming
+el Στόχευση με γυροσκόπιο
+
+@ HUD
+el HUD
+
+@ HUD Style
+el Στυλ HUD
+
+@ Health
+el Υγεία
+
+@ Health Pickups
+el Συλλογή υγείας
+
+@ Health Position
+el Θέση υγείας
+
+@ Health Regeneration
+el Αναγέννηση υγείας
+
+@ Hit & Kill Sounds
+el Ήχοι χτυπημάτων & σκοτωμών
+
+@ Hit Doors & Lifts
+el Σύγκρουση με πόρτες & ανελκυστήρες
+
+@ Hit Markers
+el Δείκτες χτυπημάτων
+
+@ Hit Sound
+el Ήχος χτυπήματος
+
+@ Hitmarker Size
+el Μέγεθος δείκτη χτυπήματος
+
+@ Hitmarker Type
+el Τύπος δείκτη χτυπήματος
+
+@ Hitstop Advanced
+el Hitstop: σύνθετες
+
+@ Hitstop Settings
+el Ρυθμίσεις hitstop
+
+@ Hold
+el Κράτημα
+
+@ Hold lock-on
+el Κλείδωμα με κράτημα
+
+@ Hook Enemies
+el Γάντζωμα εχθρών
+
+@ Hook Metal
+el Γάντζωμα σε μέταλλο
+
+@ Hook Stone
+el Γάντζωμα σε πέτρα
+
+@ Hook Wood
+el Γάντζωμα σε ξύλο
+
+@ Hooking an enemy pulls you to it
+el Γαντζώνοντας έναν εχθρό τραβιέσαι προς αυτόν
+
+@ Hookshot Range
+el Εμβέλεια γάντζου
+
+@ Hookshot Settings
+el Ρυθμίσεις γάντζου
+
+@ Host Game
+el Φιλοξενία παιχνιδιού
+
+@ How far the hook flies before it retracts
+el Πόσο μακριά πετά ο γάντζος πριν επιστρέψει
+
+@ How visible the on-screen controls are
+el Πόσο ορατά είναι τα χειριστήρια οθόνης
+
+@ Impact Lifetime
+el Διάρκεια ιχνών πρόσκρουσης
+
+@ Infinite Ammo
+el Άπειρα πυρομαχικά
+
+@ Input
+el Είσοδος
+
+@ Input Scale
+el Κλίμακα εισόδου
+
+@ Interpolate Animation
+el Παρεμβολή κινούμενων εικόνων
+
+@ Interpolate Movement
+el Παρεμβολή κίνησης
+
+@ Invert Look
+el Αντιστροφή θέας
+
+@ Invert Mouse
+el Αντιστροφή ποντικιού
+
+@ Invert Stick
+el Αντιστροφή αναλογικού
+
+@ Jet Quality
+el Ποιότητα πίδακα
+
+@ Join Game
+el Συμμετοχή σε παιχνίδι
+
+@ Jump / Swim Up
+el Άλμα / Κολύμπι πάνω
+
+@ Jump again in mid-air
+el Νέο άλμα στον αέρα
+
+@ Jumps
+el Άλματα
+
+@ Keys & Powerups
+el Κλειδιά & ενισχύσεις
+
+@ Keys & Powerups Position
+el Θέση κλειδιών & ενισχύσεων
+
+@ Kill Bonus (x)
+el Μπόνους σκοτωμού (x)
+
+@ Kill Sound
+el Ήχος σκοτωμού
+
+@ Knock
+el Χτύπος
+
+@ Left
+el Αριστερά
+
+@ Length of the motion blur streaks
+el Μήκος των ιχνών θολώματος κίνησης
+
+@ Lifetime (seconds)
+el Διάρκεια (δευτερόλεπτα)
+
+@ Live Portal Views
+el Ζωντανή θέα πυλών
+
+@ Live View Distance
+el Απόσταση ζωντανής θέας
+
+@ Local Players
+el Τοπικοί παίκτες
+
+@ Local red wounds follow enemy animation
+el Οι κόκκινες πληγές ακολουθούν την κίνηση του εχθρού
+
+@ Lock Indicator
+el Ένδειξη κλειδώματος
+
+@ Long falls don't hurt
+el Οι μεγάλες πτώσεις δεν πονούν
+
+@ Longest Freeze (ms)
+el Μέγιστο πάγωμα (ms)
+
+@ Look Down
+el Κοίτα κάτω
+
+@ Look Speed
+el Ταχύτητα θέας
+
+@ Look Up
+el Κοίτα πάνω
+
+@ Main Menu Music
+el Μουσική κεντρικού μενού
+
+@ Max FPS
+el Μέγ. FPS
+
+@ Max Players
+el Μέγ. παίκτες
+
+@ Maximum Impacts
+el Μέγιστες προσκρούσεις
+
+@ Maximum Marks
+el Μέγιστα σημάδια
+
+@ Maximum Range
+el Μέγιστη εμβέλεια
+
+@ Melee only
+el Μόνο σώμα με σώμα
+
+@ Message Background
+el Φόντο μηνυμάτων
+
+@ Message Text Size
+el Μέγεθος κειμένου μηνυμάτων
+
+@ Messages & Captions
+el Μηνύματα & υπότιτλοι
+
+@ Meter Duration (real seconds)
+el Διάρκεια μπάρας (πραγματικά δευτ.)
+
+@ Minimum Damage
+el Ελάχιστη ζημιά
+
+@ Mode
+el Λειτουργία
+
+@ Modern Console
+el Σύγχρονη κονσόλα
+
+@ Modern HUD Layout
+el Σύγχρονη διάταξη HUD
+
+@ Most recent save
+el Πιο πρόσφατη αποθήκευση
+
+@ Motion Blur
+el Θόλωμα κίνησης
+
+@ Motion Blur Amount
+el Ένταση θολώματος κίνησης
+
+@ Motion Blur Quality
+el Ποιότητα θολώματος κίνησης
+
+@ Mouse & Keyboard
+el Ποντίκι & πληκτρολόγιο
+
+@ Mouse Speed
+el Ταχύτητα ποντικιού
+
+@ Move Back
+el Κίνηση πίσω
+
+@ Move Forward
+el Κίνηση εμπρός
+
+@ Music Volume
+el Ένταση μουσικής
+
+@ Next Weapon
+el Επόμενο όπλο
+
+@ No Drowning
+el Χωρίς πνιγμό
+
+@ No Fall Damage
+el Χωρίς ζημιά πτώσης
+
+@ No Manual Saves
+el Χωρίς χειροκίνητη αποθήκευση
+
+@ No Self Damage
+el Χωρίς αυτοτραυματισμό
+
+@ Noise Filter
+el Φίλτρο θορύβου
+
+@ Normal Color
+el Κανονικό χρώμα
+
+@ Notify Message Position
+el Θέση ειδοποιήσεων
+
+@ Notify Message Time
+el Διάρκεια ειδοποιήσεων
+
+@ Number of splatter rays per blood impact
+el Αριθμός ακτίνων πιτσιλίσματος ανά χτύπημα αίματος
+
+@ Off
+el Ανενεργό
+
+@ On Death
+el Στον θάνατο
+
+@ On Kill Color
+el Χρώμα σε σκότωμα
+
+@ On Target Color
+el Χρώμα σε στόχο
+
+@ Opacity
+el Αδιαφάνεια
+
+@ Opacity of the grenade arc
+el Αδιαφάνεια της τροχιάς χειροβομβίδας
+
+@ Pants Color
+el Χρώμα παντελονιού
+
+@ Particle Quality
+el Ποιότητα σωματιδίων
+
+@ Particles
+el Σωματίδια
+
+@ Physical Nail Impacts
+el Φυσικές προσκρούσεις καρφιών
+
+@ Pistol Start
+el Εκκίνηση από το μηδέν
+
+@ Pitch
+el Τόνος
+
+@ Pitch Sensitivity
+el Κάθετη ευαισθησία
+
+@ Playback Speed
+el Ταχύτητα αναπαραγωγής
+
+@ Player Setup
+el Ρύθμιση παίκτη
+
+@ Pop
+el Ποπ
+
+@ Portal Gun Settings
+el Ρυθμίσεις όπλου πυλών
+
+@ Portal Recursion
+el Αναδρομή πυλών
+
+@ Portal View Quality
+el Ποιότητα θέας πυλών
+
+@ Preview Sound
+el Δοκιμή ήχου
+
+@ Previous Weapon
+el Προηγούμενο όπλο
+
+@ Projectile Shotguns Settings
+el Ρυθμίσεις καραμπινών με βλήματα
+
+@ Projectile Speed (units/s)
+el Ταχύτητα βλημάτων (μονάδες/δ)
+
+@ Purple
+el Μωβ
+
+@ Push
+el Ώθηση
+
+@ Push Strength
+el Δύναμη ώθησης
+
+@ Quick Load
+el Γρήγορη φόρτωση
+
+@ Quick Save
+el Γρήγορη αποθήκευση
+
+@ Railgun Settings
+el Ρυθμίσεις railgun
+
+@ Ranged only
+el Μόνο από απόσταση
+
+@ Reacquire While Held
+el Επανεντοπισμός με κράτημα
+
+@ Red
+el Κόκκινο
+
+@ Reduce Motion
+el Μείωση κίνησης
+
+@ Regen (seconds per second)
+el Αναγέννηση (δευτ. ανά δευτ.)
+
+@ Render Scale
+el Κλίμακα απόδοσης
+
+@ Reverb
+el Αντήχηση
+
+@ Right
+el Δεξιά
+
+@ Ripple Intensity
+el Ένταση κυματισμών
+
+@ Ripples
+el Κυματισμοί
+
+@ Roll Sensitivity
+el Ευαισθησία κύλισης
+
+@ Rumble
+el Δόνηση
+
+@ Run
+el Τρέξιμο
+
+@ Save on All Enemies Killed
+el Αποθήκευση όταν σκοτωθούν όλοι οι εχθροί
+
+@ Save on All Secrets Found
+el Αποθήκευση όταν βρεθούν όλα τα μυστικά
+
+@ Save on Level Entry
+el Αποθήκευση στην είσοδο επιπέδου
+
+@ Save on Secret Found
+el Αποθήκευση όταν βρεθεί μυστικό
+
+@ Scoreboard
+el Πίνακας βαθμολογίας
+
+@ Screen Flashes
+el Αναλαμπές οθόνης
+
+@ Screen Shader
+el Shader οθόνης
+
+@ Screen Shake
+el Κούνημα οθόνης
+
+@ Search LAN
+el Αναζήτηση LAN
+
+@ Seconds a center-screen message stays up
+el Δευτερόλεπτα που μένει ένα μήνυμα στο κέντρο της οθόνης
+
+@ See Through Portals
+el Θέα μέσα από πύλες
+
+@ See-through Teleporters
+el Διάφανοι τηλεμεταφορείς
+
+@ Shirt Color
+el Χρώμα μπλούζας
+
+@ Shotgun Bullet Decals
+el Σημάδια σφαιρών καραμπίνας
+
+@ Shoulder left
+el Ώμος αριστερά
+
+@ Shoulder right
+el Ώμος δεξιά
+
+@ Show FPS
+el Εμφάνιση FPS
+
+@ Show Face
+el Εμφάνιση προσώπου
+
+@ Shrapnel
+el Θραύσματα
+
+@ Size of on-screen messages and captions
+el Μέγεθος μηνυμάτων και υποτίτλων οθόνης
+
+@ Skill
+el Δυσκολία
+
+@ Sky Fog
+el Ομίχλη ουρανού
+
+@ Smooths the stepped movement of monsters
+el Εξομαλύνει την κοφτή κίνηση των τεράτων
+
+@ Sound
+el Ήχος
+
+@ Sound Captions
+el Υπότιτλοι ήχων
+
+@ Sound Volume
+el Ένταση ήχου
+
+@ Speed Blur
+el Θόλωμα ταχύτητας
+
+@ Splashes
+el Πιτσιλιές
+
+@ Splatter Amount
+el Ποσότητα πιτσιλιών
+
+@ Splatter Size
+el Μέγεθος πιτσιλιών
+
+@ Start Game
+el Έναρξη παιχνιδιού
+
+@ Staying underwater doesn't hurt
+el Η παραμονή κάτω από το νερό δεν πονά
+
+@ Stick Look Pitch
+el Κάθετη θέα αναλογικού
+
+@ Stick Look Yaw
+el Οριζόντια θέα αναλογικού
+
+@ Strafe Left
+el Πλάγια αριστερά
+
+@ Strafe Right
+el Πλάγια δεξιά
+
+@ Strength of the surface swell and rings
+el Ένταση των κυμάτων και δαχτυλιδιών της επιφάνειας
+
+@ Stun Duration
+el Διάρκεια ζάλης
+
+@ Style
+el Στυλ
+
+@ Supersampling
+el Supersampling
+
+@ Surface Hit Effects
+el Εφέ χτυπημάτων σε επιφάνειες
+
+@ Swim Down
+el Κολύμπι κάτω
+
+@ Targets
+el Στόχοι
+
+@ Teamplay
+el Ομαδικό παιχνίδι
+
+@ Texture Filter
+el Φίλτρο υφών
+
+@ Third person
+el Τρίτο πρόσωπο
+
+@ Thud
+el Γδούπος
+
+@ Tick
+el Τικ
+
+@ Time Limit
+el Όριο χρόνου
+
+@ Time Stretch
+el Επιμήκυνση χρόνου
+
+@ Toggle Attack
+el Εναλλαγή επίθεσης
+
+@ Toggle Run
+el Εναλλαγή τρεξίματος
+
+@ Toggle auto-aim
+el Εναλλαγή αυτόματης στόχευσης
+
+@ Touch Controls
+el Χειρισμός αφής
+
+@ Touchscreen
+el Οθόνη αφής
+
+@ Tough Enemy Health
+el Υγεία σκληρών εχθρών
+
+@ Tough enemies only
+el Μόνο σκληροί εχθροί
+
+@ Trail Colour
+el Χρώμα ίχνους
+
+@ Translate Console
+el Μετάφραση κονσόλας
+
+@ Translucent Water
+el Ημιδιάφανο νερό
+
+@ Treble
+el Πρίμα
+
+@ Turn Left
+el Στροφή αριστερά
+
+@ Turn Right
+el Στροφή δεξιά
+
+@ Underwater FX
+el Υποβρύχια εφέ
+
+@ Use Bullet Time Meter
+el Χρήση μπάρας Bullet Time
+
+@ VSync
+el VSync
+
+@ View Bob
+el Ταλάντευση θέας
+
+@ Viewmodels
+el Μοντέλα όπλων
+
+@ Volume
+el Ένταση
+
+@ Water Opacity
+el Αδιαφάνεια νερού
+
+@ Water Quality
+el Ποιότητα νερού
+
+@ Water Settings
+el Ρυθμίσεις νερού
+
+@ Weapon Wheel
+el Τροχός όπλων
+
+@ Weapon Wheel Slowdown
+el Επιβράδυνση τροχού όπλων
+
+@ Weapons
+el Όπλα
+
+@ Weapons Position
+el Θέση όπλων
+
+@ Where center-screen messages appear
+el Πού εμφανίζονται τα μηνύματα στο κέντρο της οθόνης
+
+@ Where pickup and event messages appear
+el Πού εμφανίζονται τα μηνύματα συλλογής και συμβάντων
+
+@ White
+el Λευκό
+
+@ Yaw Sensitivity
+el Οριζόντια ευαισθησία
+
+@ Yellow
+el Κίτρινο
+
+# lowercase choice values
+@ T
+el T
+
+@ always
+el πάντα
+
+@ auto
+el αυτόματο
+
+@ banded
+el σε λωρίδες
+
+@ borderless
+el χωρίς πλαίσιο
+
+@ bottom center
+el κάτω κέντρο
+
+@ bottom left
+el κάτω αριστερά
+
+@ bottom right
+el κάτω δεξιά
+
+@ box
+el πλαίσιο
+
+@ broken square
+el σπασμένο τετράγωνο
+
+@ classic
+el κλασικό
+
+@ coarse
+el αδρό
+
+@ cooperative
+el συνεργατικό
+
+@ cross
+el σταυρός
+
+@ cross + dot
+el σταυρός + κουκκίδα
+
+@ cyan
+el κυανό
+
+@ dashed
+el διακεκομμένο
+
+@ deathmatch
+el deathmatch
+
+@ deuteranopia
+el δευτερανωπία
+
+@ diagonal streaks
+el διαγώνιες γραμμές
+
+@ diamond
+el ρόμβος
+
+@ dot
+el κουκκίδα
+
+@ double
+el διπλό
+
+@ double chevrons
+el διπλά σιρίτια
+
+@ double diagonals
+el διπλές διαγώνιες
+
+@ easy
+el εύκολο
+
+@ fine
+el λεπτό
+
+@ fit output
+el προσαρμογή στην έξοδο
+
+@ flick stick
+el flick stick
+
+@ fullscreen
+el πλήρης οθόνη
+
+@ gap cross
+el ανοιχτός σταυρός
+
+@ green
+el πράσινο
+
+@ grey
+el γκρι
+
+@ half speed
+el μισή ταχύτητα
+
+@ hard
+el δύσκολο
+
+@ high
+el υψηλή
+
+@ huge
+el τεράστιο
+
+@ immersive
+el καθηλωτικό
+
+@ intense
+el έντονο
+
+@ large
+el μεγάλο
+
+@ larger
+el μεγαλύτερο
+
+@ largest
+el μέγιστο
+
+@ linear
+el γραμμικό
+
+@ low
+el χαμηλή
+
+@ lower
+el χαμηλότερα
+
+@ magenta
+el ματζέντα
+
+@ medium
+el μεσαία
+
+@ middle
+el μέση
+
+@ middle left
+el μέση αριστερά
+
+@ middle right
+el μέση δεξιά
+
+@ modern
+el σύγχρονο
+
+@ nearest
+el πλησιέστερο
+
+@ nightmare
+el εφιάλτης
+
+@ nintendo
+el nintendo
+
+@ no team damage
+el χωρίς ζημιά ομάδας
+
+@ none
+el κανένα
+
+@ normal
+el κανονικό
+
+@ off
+el ανενεργό
+
+@ off while held
+el ανενεργό με κράτημα
+
+@ on
+el ενεργό
+
+@ only while held
+el μόνο με κράτημα
+
+@ playstation
+el playstation
+
+@ protanopia
+el πρωτανωπία
+
+@ quarter speed
+el τέταρτο ταχύτητας
+
+@ red
+el κόκκινο
+
+@ short diagonals
+el κοντές διαγώνιες
+
+@ single
+el μονό
+
+@ small
+el μικρό
+
+@ solid
+el συμπαγές
+
+@ spectacle
+el θεαματικό
+
+@ subtle
+el διακριτικό
+
+@ team damage
+el ζημιά ομάδας
+
+@ top center
+el πάνω κέντρο
+
+@ top left
+el πάνω αριστερά
+
+@ top right
+el πάνω δεξιά
+
+@ triple
+el τριπλό
+
+@ tritanopia
+el τριτανωπία
+
+@ upper
+el ψηλότερα
+
+@ white
+el λευκό
+
+@ whole screen
+el όλη η οθόνη
+
+@ windowed
+el σε παράθυρο
+
+@ xbox
+el xbox
+
+@ yellow
+el κίτρινο
+
+# ==== tooltips.txt ====
+
+# Options help lines (tooltips) and reasons for disabled rows.
+@ 2D aiming turns the view continuously with the right stick; flick stick snaps the view to where you push the stick, then turning the stick rotates it
+el Η στόχευση 2D γυρίζει τη θέα συνεχώς με το δεξί αναλογικό· το flick stick στρέφει αμέσως τη θέα προς την κατεύθυνση που σπρώχνεις το αναλογικό και η περιστροφή του αναλογικού τη γυρίζει
+
+@ 3D resolution relative to the window; the UI stays sharp
+el Ανάλυση 3D σε σχέση με το παράθυρο· το περιβάλλον χρήστη μένει καθαρό
+
+@ 3D view keeps the HUD and menus sharp; whole screen runs them through the shader too
+el Η προβολή 3D κρατά καθαρά το HUD και τα μενού· η επιλογή «όλη η οθόνη» περνά και αυτά από το shader
+
+@ A Quake III style railgun: a slug that pierces every enemy on its line, using 2 cells a shot and refiring every 1.5 s; select it through its assigned weapon slot (Add-ons)
+el Railgun τύπου Quake III: βλήμα που διαπερνά κάθε εχθρό στη γραμμή του, με 2 κυψέλες ανά βολή και νέα βολή κάθε 1,5 δ· επιλέγεται από την υποδοχή όπλου που του έχει οριστεί (Πρόσθετα)
+
+@ A Zelda-style hookshot: fire sends a chain hook out; it latches onto hookable surfaces or enemies and reels you in; fire again to let go
+el Γάντζος τύπου Zelda: η βολή εκτοξεύει γάντζο με αλυσίδα που πιάνεται σε κατάλληλες επιφάνειες ή εχθρούς και σε τραβά προς τα εκεί· νέα βολή για να αφήσεις
+
+@ Also translates the engine's console messages; off keeps them in English
+el Μεταφράζει και τα μηνύματα κονσόλας της μηχανής· όταν είναι ανενεργό μένουν στα αγγλικά
+
+@ Automatically acquire another enemy while holding Lock-on after losing a target
+el Εντοπίζει αυτόματα άλλον εχθρό όσο κρατάς το Κλείδωμα στόχου, αφού χαθεί ένας στόχος
+
+@ Blends between animation frames of monsters and weapons
+el Ομαλή μετάβαση ανάμεσα στα καρέ κίνησης τεράτων και όπλων
+
+@ Blood stains surfaces and bodies; cosmetic, independent of particle packs
+el Το αίμα λερώνει επιφάνειες και σώματα· μόνο οπτικό, ανεξάρτητο από πακέτα σωματιδίων
+
+@ Bloom glow around bright lights and heat sources; medium uses 4 taps, high uses 8, low disables halo taps
+el Λάμψη bloom γύρω από έντονα φώτα και πηγές θερμότητας· η μεσαία χρησιμοποιεί 4 δείγματα, η υψηλή 8, η χαμηλή καταργεί την άλω
+
+@ Blurs fast-moving monsters, projectiles and doors (not camera turns)
+el Θολώνει τέρατα, βλήματα και πόρτες που κινούνται γρήγορα (όχι τις στροφές της κάμερας)
+
+@ Blurs the screen edges during fast falls and launches; keeps the centre clear. Reduce Motion disables it
+el Θολώνει τις άκρες της οθόνης σε γρήγορες πτώσεις και εκτινάξεις· το κέντρο μένει καθαρό. Απενεργοποιείται με τη Μείωση κίνησης
+
+@ Brightness of the underwater light patterns
+el Φωτεινότητα των υποβρύχιων φωτεινών μοτίβων
+
+@ Caps mark count, lifetime, airborne droplets and wound/gib painting; low skips enemy wounds and gib trails
+el Όρια για πλήθος σημαδιών, διάρκεια, σταγόνες στον αέρα και λεκέδες από πληγές/κομμάτια· η χαμηλή παραλείπει τις πληγές εχθρών και τα ίχνη κομματιών
+
+@ Caps shader input at output size so 200% render scale keeps 3D sharpness without 4x shader cost; low scales stay low-res
+el Περιορίζει την είσοδο του shader στο μέγεθος εξόδου, ώστε η κλίμακα απόδοσης 200% να κρατά την ευκρίνεια 3D χωρίς 4πλάσιο κόστος shader· οι χαμηλές κλίμακες μένουν σε χαμηλή ανάλυση
+
+@ Classic: the original status bar; modern: compact elements at the screen edges
+el Κλασικό: η αρχική γραμμή κατάστασης· σύγχρονο: συμπαγή στοιχεία στις άκρες της οθόνης
+
+@ Coat atlas resolution, rebuild rate and shader detail: low builds smaller coats less often with fast shading; high uses full detail
+el Ανάλυση άτλαντα επικάλυψης, ρυθμός ανανέωσης και λεπτομέρεια shader: η χαμηλή φτιάχνει μικρότερες επικαλύψεις πιο αραιά με γρήγορη σκίαση· η υψηλή χρησιμοποιεί πλήρη λεπτομέρεια
+
+@ Colour of the railgun's spiral trail; split-screen players each get the next colour along
+el Χρώμα του σπειροειδούς ίχνους του railgun· σε διαιρεμένη οθόνη κάθε παίκτης παίρνει το επόμενο χρώμα
+
+@ Damage the railgun deals to each enemy it passes through (Quake III: 100)
+el Ζημιά που προκαλεί το railgun σε κάθε εχθρό που διαπερνά (Quake III: 100)
+
+@ Dark backdrop behind on-screen messages for readability
+el Σκούρο φόντο πίσω από τα μηνύματα οθόνης για καλύτερη ανάγνωση
+
+@ Dark border keeps the crosshair visible on any background
+el Σκούρο περίγραμμα που κρατά το στόχαστρο ορατό σε κάθε φόντο
+
+@ Darkens corners and contact areas where geometry meets; higher quality is sharper
+el Σκουραίνει γωνίες και σημεία επαφής της γεωμετρίας· η υψηλότερη ποιότητα είναι πιο ευκρινής
+
+@ Debris lands on and is carried or shoved by doors, lifts and platforms
+el Τα συντρίμμια προσγειώνονται σε πόρτες, ανελκυστήρες και πλατφόρμες και μεταφέρονται ή σπρώχνονται από αυτά
+
+@ Detail for caustics, ripples and splashes: low uses smaller budgets and shorter view distance; high uses larger budgets and farther view distance
+el Λεπτομέρεια για καυστικά, κυματισμούς και πιτσιλιές: η χαμηλή χρησιμοποιεί μικρότερους προϋπολογισμούς και μικρότερη απόσταση θέασης· η υψηλή μεγαλύτερους προϋπολογισμούς και μεγαλύτερη απόσταση
+
+@ Disabled while Enhanced Particles is on: its particles replace the GLQuake and Classic styles
+el Ανενεργό όσο είναι ενεργά τα Βελτιωμένα σωματίδια: τα σωματίδιά τους αντικαθιστούν τα στυλ GLQuake και Κλασικό
+
+@ Disabled while Enhanced Water is on: its own underwater effects replace the classic and GLQuake view warps
+el Ανενεργό όσο είναι ενεργό το Βελτιωμένο νερό: τα δικά του υποβρύχια εφέ αντικαθιστούν τις κλασικές παραμορφώσεις θέας και του GLQuake
+
+@ Draw the predicted grenade path as a solid or dashed line
+el Σχεδιάζει την προβλεπόμενη πορεία της χειροβομβίδας με συμπαγή ή διακεκομμένη γραμμή
+
+@ Draw the view out of the linked portal inside each portal; off shows flat discs (fastest)
+el Δείχνει μέσα σε κάθε πύλη τη θέα από τη συνδεδεμένη πύλη· όταν είναι ανενεργό δείχνει επίπεδους δίσκους (ταχύτερο)
+
+@ Droplets spray up when things enter or leave water, slime or lava
+el Σταγόνες πετάγονται όταν κάτι μπαίνει ή βγαίνει από νερό, γλίτσα ή λάβα
+
+@ Emulates the original 8-bit palette of software rendering
+el Μιμείται την αρχική 8-bit παλέτα της απόδοσης λογισμικού
+
+@ Every level starts with only the shotgun and axe, as if started fresh
+el Κάθε επίπεδο ξεκινά μόνο με την καραμπίνα και το τσεκούρι, σαν νέο ξεκίνημα
+
+@ Explosion damage for each remotely detonated sticky bomb
+el Ζημιά έκρηξης για κάθε κολλητική βόμβα που πυροδοτείται από απόσταση
+
+@ Extra freeze milliseconds for every 10 damage dealt, so heavy hits stop longer
+el Επιπλέον χιλιοστά δευτερολέπτου παγώματος για κάθε 10 ζημιάς, ώστε τα δυνατά χτυπήματα να σταματούν περισσότερο
+
+@ First person, a third-person camera centered behind the player, or one over the right or left shoulder; third person hides viewmodels
+el Πρώτο πρόσωπο, κάμερα τρίτου προσώπου κεντραρισμένη πίσω από τον παίκτη ή πάνω από τον δεξί ή αριστερό ώμο· το τρίτο πρόσωπο κρύβει τα μοντέλα όπλων
+
+@ Flash the selected marker on confirmed hits; colors are shared with the crosshair
+el Αναβοσβήνει τον επιλεγμένο δείκτη σε επιβεβαιωμένα χτυπήματα· τα χρώματα είναι κοινά με το στόχαστρο
+
+@ Freeze for every enemy, or only for enemies that were tough before the hit
+el Πάγωμα για κάθε εχθρό ή μόνο για εχθρούς που ήταν σκληροί πριν το χτύπημα
+
+@ Freeze the game briefly when you damage an enemy; single player with add-ons only
+el Παγώνει σύντομα το παιχνίδι όταν τραυματίζεις εχθρό· μόνο σε ατομικό παιχνίδι με πρόσθετα
+
+@ Gibs tumble and barrels throw shrapnel; shots and blasts push them (cosmetic only)
+el Τα κομμάτια σάρκας κυλούν και τα βαρέλια εκτοξεύουν θραύσματα· οι βολές και οι εκρήξεις τα σπρώχνουν (μόνο οπτικό)
+
+@ Health an enemy must have had before the hit to count as tough
+el Υγεία που έπρεπε να έχει ένας εχθρός πριν το χτύπημα για να θεωρείται σκληρός
+
+@ Hits dealing less damage than this do not freeze the game; the default 10 skips nails and shotgun pellets
+el Χτυπήματα με λιγότερη ζημιά από αυτή δεν παγώνουν το παιχνίδι· η προεπιλογή 10 παραλείπει καρφιά και σκάγια καραμπίνας
+
+@ Hold fire and sweep the crosshair over monsters to queue them, release to throw: it stuns each in turn and flies back; alt-fire clears the queue
+el Κράτα τη βολή και πέρνα το στόχαστρο πάνω από τέρατα για να τα βάλεις στη σειρά, άφησε για να ρίξεις: ζαλίζει το καθένα με τη σειρά και επιστρέφει· η εναλλακτική βολή καθαρίζει τη σειρά
+
+@ Hold: keep Lock-on held. Toggle: press Auto-aim Toggle to enable automatic acquisition. Click look stick to switch targets
+el Κράτημα: κράτα πατημένο το Κλείδωμα στόχου. Εναλλαγή: πάτα Εναλλαγή αυτόματης στόχευσης για αυτόματο εντοπισμό. Πάτα το αναλογικό θέας για αλλαγή στόχου
+
+@ How close an enemy must be to the crosshair for automatic acquisition in toggle mode (degrees)
+el Πόσο κοντά στο στόχαστρο πρέπει να είναι ένας εχθρός για αυτόματο εντοπισμό σε λειτουργία εναλλαγής (μοίρες)
+
+@ How far the view tilts up and down when you tilt the controller (pitch axis)
+el Πόσο γέρνει η θέα πάνω-κάτω όταν γέρνεις το χειριστήριο (άξονας pitch)
+
+@ How far the view turns left and right when you turn the controller (yaw axis)
+el Πόσο γυρίζει η θέα αριστερά-δεξιά όταν γυρίζεις το χειριστήριο (άξονας yaw)
+
+@ How far the view turns when you drag on the right half of the screen
+el Πόσο γυρίζει η θέα όταν σέρνεις στο δεξί μισό της οθόνης
+
+@ How fast the boomerang flies (units per second)
+el Πόσο γρήγορα πετά το μπούμερανγκ (μονάδες ανά δευτερόλεπτο)
+
+@ How hard shots and explosions push debris around
+el Πόσο δυνατά σπρώχνουν τα συντρίμμια οι βολές και οι εκρήξεις
+
+@ How hard the Powerwasher's water pushes enemies
+el Πόσο δυνατά σπρώχνει τους εχθρούς το νερό του Πλυστικού υψηλής πίεσης
+
+@ How long a hit freezes the game, in milliseconds
+el Πόσο διαρκεί το πάγωμα από ένα χτύπημα, σε χιλιοστά δευτερολέπτου
+
+@ How strongly fog covers the sky when fog is on
+el Πόσο έντονα καλύπτει η ομίχλη τον ουρανό όταν είναι ενεργή
+
+@ How the view distorts underwater: Classic ripples the whole screen like software Quake, GLQuake slowly stretches and squashes the view
+el Πώς παραμορφώνεται η θέα κάτω από το νερό: το Κλασικό κυματίζει όλη την οθόνη όπως το Quake λογισμικού, το GLQuake τεντώνει και συμπιέζει αργά τη θέα
+
+@ Ignores gyro rotation slower than this many degrees per second, to hide hand tremor
+el Αγνοεί περιστροφή γυροσκοπίου πιο αργή από τόσες μοίρες ανά δευτερόλεπτο, για να κρύψει το τρέμουλο του χεριού
+
+@ Immersive: appears for a few seconds only when its value changes
+el Καθηλωτικό: εμφανίζεται για λίγα δευτερόλεπτα μόνο όταν αλλάζει η τιμή του
+
+@ Keeps textures sharp on floors and walls seen at steep angles
+el Κρατά τις υφές ευκρινείς σε πατώματα και τοίχους που φαίνονται υπό απότομη γωνία
+
+@ Lights from rockets, muzzle flashes and explosions brighten nearby walls
+el Τα φώτα από ρουκέτες, λάμψεις κάννης και εκρήξεις φωτίζουν τους κοντινούς τοίχους
+
+@ Liquid surfaces swell and ring out where things move through them
+el Οι επιφάνειες υγρών φουσκώνουν και κυματίζουν όπου κάτι κινείται μέσα τους
+
+@ Lobs sticky bombs (rockets ammo) that cling to walls, doors and monsters; alt-fire detonates them all
+el Εκτοξεύει κολλητικές βόμβες (πυρομαχικά ρουκετών) που κολλούν σε τοίχους, πόρτες και τέρατα· η εναλλακτική βολή τις πυροδοτεί όλες
+
+@ Look of the classic particles: GLQuake draws soft round dots, Classic draws square pixels like software Quake
+el Εμφάνιση των κλασικών σωματιδίων: το GLQuake σχεδιάζει μαλακές στρογγυλές κουκκίδες, το Κλασικό τετράγωνα pixel όπως το Quake λογισμικού
+
+@ Low skips the background smear halo and uses fewer blur samples; high keeps the full halo and smoother streaks
+el Η χαμηλή παραλείπει την άλω θολώματος στο φόντο και χρησιμοποιεί λιγότερα δείγματα· η υψηλή κρατά όλη την άλω και ομαλότερα ίχνη
+
+@ Low: hard particle edges, half the scripted particles and fewer hit sparks. Medium: soft edges. High: soft edges checked per MSAA sample, most hit sparks
+el Χαμηλή: σκληρές άκρες σωματιδίων, τα μισά σωματίδια σεναρίων και λιγότεροι σπινθήρες χτυπημάτων. Μεσαία: μαλακές άκρες. Υψηλή: μαλακές άκρες ανά δείγμα MSAA, οι περισσότεροι σπινθήρες
+
+@ Marks fade out before expiring; oldest marks are recycled at the limit
+el Τα σημάδια σβήνουν σταδιακά πριν λήξουν· στο όριο ανακυκλώνονται τα παλαιότερα
+
+@ Max nested portal reflections to draw; each level redraws the scene
+el Μέγιστες εμφωλευμένες αντανακλάσεις πυλών· κάθε επίπεδο ξανασχεδιάζει τη σκηνή
+
+@ Max portals per screen with a live view; each one redraws the scene
+el Μέγιστες πύλες με ζωντανή θέα ανά οθόνη· καθεμία ξανασχεδιάζει τη σκηνή
+
+@ Maximum distance for acquiring and keeping an enemy locked
+el Μέγιστη απόσταση για εντοπισμό και κλείδωμα εχθρού
+
+@ Minimum gap between freezes, so shotgun pellets and rapid fire count once; kills ignore it
+el Ελάχιστο διάστημα ανάμεσα σε παγώματα, ώστε σκάγια και γρήγορα πυρά να μετρούν μία φορά· οι σκοτωμοί το αγνοούν
+
+@ Modern terminal console with autocomplete popup, history search, ANSI colors, bash shell and piping; off uses the classic Quake console
+el Σύγχρονη κονσόλα τερματικού με αναδυόμενη αυτόματη συμπλήρωση, αναζήτηση ιστορικού, χρώματα ANSI, κέλυφος bash και διοχέτευση· όταν είναι ανενεργό χρησιμοποιείται η κλασική κονσόλα του Quake
+
+@ Monsters take proportionally less damage at higher values; above 100% is harder
+el Τα τέρατα δέχονται αναλογικά λιγότερη ζημιά σε υψηλότερες τιμές· πάνω από 100% είναι δυσκολότερο
+
+@ Moving gibs leave blood on surfaces they touch
+el Τα κομμάτια σάρκας σε κίνηση αφήνουν αίμα στις επιφάνειες που αγγίζουν
+
+@ Multiplier on the freeze when the hit kills the enemy; 1 means no extra
+el Πολλαπλασιαστής παγώματος όταν το χτύπημα σκοτώνει τον εχθρό· 1 σημαίνει χωρίς επιπλέον
+
+@ Multiplies ammo from pickups (up to the normal carry limit); below 100% is harder
+el Πολλαπλασιάζει τα πυρομαχικά από αντικείμενα (έως το κανονικό όριο)· κάτω από 100% είναι δυσκολότερο
+
+@ Multiplies health from pickups (up to 100, or the item's own limit); below 100% is harder
+el Πολλαπλασιάζει την υγεία από αντικείμενα (έως 100 ή το όριο του αντικειμένου)· κάτω από 100% είναι δυσκολότερο
+
+@ Nails stick to wood and bodies; hard surfaces deflect them to the floor
+el Τα καρφιά καρφώνονται σε ξύλο και σώματα· οι σκληρές επιφάνειες τα εκτρέπουν στο πάτωμα
+
+@ Nearest keeps crisp classic pixels; linear smooths textures
+el Το πλησιέστερο κρατά καθαρά κλασικά pixel· το γραμμικό εξομαλύνει τις υφές
+
+@ New Game: Add-ons
+el Νέο παιχνίδι: Πρόσθετα
+
+@ New Game: Customize
+el Νέο παιχνίδι: Προσαρμογή
+
+@ Night vision: how much dark areas are brightened; thermal: how strongly heat stands out
+el Νυχτερινή όραση: πόσο φωτίζονται οι σκοτεινές περιοχές· θερμική: πόσο ξεχωρίζει η θερμότητα
+
+@ Night-vision and thermal goggles, cycle normal, night vision and thermal with Change Goggles (Add-ons), or use the Equipment Wheel
+el Γυαλιά νυχτερινής και θερμικής όρασης· εναλλάξ κανονική, νυχτερινή και θερμική όραση με Αλλαγή γυαλιών (Πρόσθετα) ή με τον Τροχό εξοπλισμού
+
+@ No single freeze lasts longer than this, however much damage or kill bonus adds
+el Κανένα πάγωμα δεν διαρκεί περισσότερο από αυτό, όση ζημιά ή μπόνους σκοτωμού κι αν προστεθεί
+
+@ Oldest marks and nails are recycled at this shared limit
+el Τα παλαιότερα σημάδια και καρφιά ανακυκλώνονται σε αυτό το κοινό όριο
+
+@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
+el Αναλογικό και κουμπιά στην οθόνη: το αυτόματο τα δείχνει μετά από άγγιγμα και τα κρύβει όταν χρησιμοποιείται άλλη συσκευή
+
+@ Only autosaves: quicksaves and the Save menu are off
+el Μόνο αυτόματες αποθηκεύσεις: η γρήγορη αποθήκευση και το μενού Αποθήκευσης είναι ανενεργά
+
+@ Place every weapon at the center, right or left of the view, or hide all viewmodels
+el Τοποθετεί κάθε όπλο στο κέντρο, δεξιά ή αριστερά της θέας, ή κρύβει όλα τα μοντέλα όπλων
+
+@ Play your chosen hit or kill cue when you damage an enemy
+el Παίζει τον επιλεγμένο ήχο χτυπήματος ή σκοτωμού όταν τραυματίζεις εχθρό
+
+@ Playback speed: faster sounds shorter and higher
+el Ταχύτητα αναπαραγωγής: πιο γρήγορα ακούγεται πιο σύντομο και πιο ψηλό
+
+@ Plays the Quake theme in the main menu when no game is running
+el Παίζει το θέμα του Quake στο κεντρικό μενού όταν δεν τρέχει παιχνίδι
+
+@ Portals farther away than this are drawn as flat discs
+el Οι πύλες πιο μακριά από αυτό σχεδιάζονται ως επίπεδοι δίσκοι
+
+@ Press attack once to keep firing, again to stop
+el Πάτα επίθεση μία φορά για συνεχή βολή, ξανά για διακοπή
+
+@ Press run once to switch between running and walking
+el Πάτα τρέξιμο μία φορά για εναλλαγή μεταξύ τρεξίματος και περπατήματος
+
+@ Raise or lower the tone independently of sound length
+el Ανεβάζει ή κατεβάζει τον τόνο ανεξάρτητα από τη διάρκεια του ήχου
+
+@ Red screen edges show where damage came from: top is front, bottom is behind; Screen Flashes controls their strength
+el Κόκκινες άκρες οθόνης δείχνουν από πού ήρθε η ζημιά: πάνω είναι μπροστά, κάτω πίσω· οι Αναλαμπές οθόνης ορίζουν την ένταση
+
+@ Replaces the classic dot particles with glowing sparks, smoke and blood; mods with their own particle effects keep them
+el Αντικαθιστά τα κλασικά σωματίδια κουκκίδες με λαμπερούς σπινθήρες, καπνό και αίμα· τα mods με δικά τους εφέ σωματιδίων τα κρατούν
+
+@ Resolution and detail inside portal and teleporter views; lower tiers trim nested effects
+el Ανάλυση και λεπτομέρεια μέσα στη θέα πυλών και τηλεμεταφορέων· οι χαμηλότερες βαθμίδες περιορίζουν τα εμφωλευμένα εφέ
+
+@ Rippling light patterns on surfaces under water and slime
+el Κυματιστά φωτεινά μοτίβα σε επιφάνειες κάτω από νερό και γλίτσα
+
+@ Scales all damage you take; above 100% is harder
+el Κλιμακώνει όλη τη ζημιά που δέχεσαι· πάνω από 100% είναι δυσκολότερο
+
+@ Screen edge for this element; elements on the same spot stack
+el Άκρη της οθόνης για αυτό το στοιχείο· στοιχεία στην ίδια θέση στοιβάζονται
+
+@ Seconds a monster hit by the boomerang stays stunned
+el Δευτερόλεπτα που μένει ζαλισμένο ένα τέρας που χτύπησε το μπούμερανγκ
+
+@ Seconds impact marks and stuck nails stay before fading out; independent of Particle Quality
+el Δευτερόλεπτα που μένουν τα σημάδια προσκρούσεων και τα καρφωμένα καρφιά πριν σβήσουν· ανεξάρτητο από την Ποιότητα σωματιδίων
+
+@ Seconds messages at the top of the screen stay up
+el Δευτερόλεπτα που μένουν τα μηνύματα στο πάνω μέρος της οθόνης
+
+@ Seconds the flick stick snap takes; lower is faster
+el Δευτερόλεπτα που διαρκεί η στροφή flick stick· λιγότερο είναι γρηγορότερο
+
+@ See through enhanced water; enables Water Opacity
+el Διαφάνεια στο βελτιωμένο νερό· ενεργοποιεί την Αδιαφάνεια νερού
+
+@ Sensor grain, scanlines and flicker of the goggle image
+el Κόκκος αισθητήρα, γραμμές σάρωσης και τρεμόπαιγμα της εικόνας των γυαλιών
+
+@ Shades every anti-aliasing sample; needs Anti-aliasing on
+el Σκιάζει κάθε δείγμα εξομάλυνσης· απαιτεί ενεργή Εξομάλυνση
+
+@ Shifts colors so they stay distinct for the chosen color blindness
+el Μετατοπίζει τα χρώματα ώστε να ξεχωρίζουν για την επιλεγμένη αχρωματοψία
+
+@ Shotgun hits leave small surface marks (cosmetic only)
+el Τα χτυπήματα καραμπίνας αφήνουν μικρά σημάδια στις επιφάνειες (μόνο οπτικό)
+
+@ Show corner ticks at screen centre while locked, even with Crosshair off
+el Δείχνει γωνιακά σημάδια στο κέντρο της οθόνης όσο υπάρχει κλείδωμα, ακόμη και χωρίς στόχαστρο
+
+@ Show where grenades and other arcing shots will fly, bounce and land; local play only, not in deathmatch
+el Δείχνει πού θα πετάξουν, θα αναπηδήσουν και θα προσγειωθούν οι χειροβομβίδες και άλλες καμπύλες βολές· μόνο τοπικά, όχι σε deathmatch
+
+@ Shows text for important sounds: doors, alerted enemies, secrets, pickups
+el Εμφανίζει κείμενο για σημαντικούς ήχους: πόρτες, εχθρούς σε επιφυλακή, μυστικά, αντικείμενα
+
+@ Shows the distance fog that maps and mods set; off always gives clear view
+el Δείχνει την ομίχλη απόστασης που ορίζουν χάρτες και mods· όταν είναι ανενεργό η θέα είναι πάντα καθαρή
+
+@ Shows the player face next to the health number
+el Δείχνει το πρόσωπο του παίκτη δίπλα στον αριθμό υγείας
+
+@ Simulation detail, step rate, fade-out lifetimes and caps for gibs and shrapnel; low also skips mover collision
+el Λεπτομέρεια προσομοίωσης, ρυθμός βημάτων, διάρκειες σβησίματος και όρια για κομμάτια σάρκας και θραύσματα· η χαμηλή παραλείπει και τις συγκρούσεις με κινητά μέρη
+
+@ Size of the on-screen buttons and move stick
+el Μέγεθος των κουμπιών οθόνης και του αναλογικού κίνησης
+
+@ Slowly heals up to 100 health after 5 seconds without being hit
+el Θεραπεύει αργά έως 100 υγεία μετά από 5 δευτερόλεπτα χωρίς χτύπημα
+
+@ Slows stick look while the crosshair is over an enemy
+el Επιβραδύνει τη θέα με αναλογικό όταν το στόχαστρο είναι πάνω σε εχθρό
+
+@ Slows the game down while the weapon wheel is open
+el Επιβραδύνει το παιχνίδι όσο είναι ανοιχτός ο τροχός όπλων
+
+@ Slows the whole game down; single player only. Saves and demos stay compatible with other ports
+el Επιβραδύνει όλο το παιχνίδι· μόνο σε ατομικό παιχνίδι. Οι αποθηκεύσεις και τα demo μένουν συμβατά με άλλα ports
+
+@ Small camera jolt on each freeze; off with Reduce Motion
+el Μικρό τράνταγμα κάμερας σε κάθε πάγωμα· απενεργοποιείται με τη Μείωση κίνησης
+
+@ Snap and track enemies in local play, including split-screen; unavailable online
+el Στρέφει και ακολουθεί εχθρούς σε τοπικό παιχνίδι, και σε διαιρεμένη οθόνη· μη διαθέσιμο online
+
+@ Sparks, smoke, chips, splinters and splashes fly off whatever your shots hit
+el Σπινθήρες, καπνός, θρύμματα, σχίζες και πιτσιλιές πετάγονται από ό,τι χτυπούν οι βολές σου
+
+@ Spawns extra copies of every monster around the original when a level starts
+el Δημιουργεί επιπλέον αντίγραφα κάθε τέρατος γύρω από το αρχικό στην αρχή του επιπέδου
+
+@ Strength of the full-screen flashes for damage, pickups and powerups
+el Ένταση των αναλαμπών πλήρους οθόνης για ζημιά, αντικείμενα και ενισχύσεις
+
+@ Stretch or shorten the sound while keeping its pitch
+el Τεντώνει ή συντομεύει τον ήχο κρατώντας τον τόνο του
+
+@ Surface opacity; requires Enhanced Water and Translucent Water
+el Αδιαφάνεια επιφάνειας· απαιτεί Βελτιωμένο νερό και Ημιδιάφανο νερό
+
+@ The hook latches onto metal surfaces (metal, tech, computer panels, copper)
+el Ο γάντζος πιάνεται σε μεταλλικές επιφάνειες (μέταλλο, τεχνολογία, πάνελ υπολογιστών, χαλκός)
+
+@ The hook latches onto stone, brick, rock and any surface not recognised as wood or metal
+el Ο γάντζος πιάνεται σε πέτρα, τούβλο, βράχο και κάθε επιφάνεια που δεν αναγνωρίζεται ως ξύλο ή μέταλλο
+
+@ The hook latches onto wooden surfaces (texture names like wood, crate, plank)
+el Ο γάντζος πιάνεται σε ξύλινες επιφάνειες (ονόματα υφών όπως wood, crate, plank)
+
+@ Turn the controller's motion sensor into a look input; needs a pad with a gyroscope
+el Κάνει τον αισθητήρα κίνησης του χειριστηρίου είσοδο θέας· απαιτεί χειριστήριο με γυροσκόπιο
+
+@ Turns off view bob, strafe tilt and the camera kick when hit or firing
+el Απενεργοποιεί την ταλάντευση θέας, την κλίση στις πλάγιες κινήσεις και το τράνταγμα κάμερας σε χτυπήματα ή βολές
+
+@ Turns on the extra liquid effects; Water Settings controls each one
+el Ενεργοποιεί τα επιπλέον εφέ υγρών· οι Ρυθμίσεις νερού ελέγχουν το καθένα
+
+@ Turns the view to follow a moving enemy you are aiming at
+el Γυρίζει τη θέα για να ακολουθεί τον κινούμενο εχθρό που σημαδεύεις
+
+@ Turns the view when you roll the controller sideways; 0 disables it, negative reverses it
+el Γυρίζει τη θέα όταν γέρνεις το χειριστήριο στο πλάι· το 0 το απενεργοποιεί, αρνητικές τιμές το αντιστρέφουν
+
+@ Two-portal gun: fire and alt-fire place linked portals on flat walls; assign a weapon slot in Add-ons
+el Όπλο δύο πυλών: η βολή και η εναλλακτική βολή τοποθετούν συνδεδεμένες πύλες σε επίπεδους τοίχους· όρισε υποδοχή όπλου στα Πρόσθετα
+
+@ Unlocks the FX Settings page: enhanced particles, impact effects and blood splatter
+el Ξεκλειδώνει τη σελίδα Ρυθμίσεις εφέ: βελτιωμένα σωματίδια, εφέ προσκρούσεων και πιτσιλίσματα αίματος
+
+@ Uses the 2021 re-release's smoother MD5 models (and MD3 replacements from mods) instead of the classic ones. Applies on the next map load
+el Χρησιμοποιεί τα ομαλότερα μοντέλα MD5 της επανέκδοσης του 2021 (και αντικαταστάσεις MD3 από mods) αντί για τα κλασικά. Ισχύει στην επόμενη φόρτωση χάρτη
+
+@ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
+el Χρησιμοποιεί τον έγχρωμο φωτισμό του χάρτη (αρχείο .lit ή BSPX)· όταν είναι ανενεργό δίνει το αρχικό λευκό φως. Ισχύει στην επόμενη φόρτωση χάρτη
+
+@ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
+el Τμήματα πίδακα νερού, πλήθος σταγόνων και γυαλιστερή σκίαση υγρών: η χαμηλή χρησιμοποιεί απλούστερες ημιδιάφανες ροές· η υψηλή ομαλούς γυαλιστερούς πίδακες
+
+@ When gyro looking applies: always, off while +gyroaction is held, or only while it is held
+el Πότε ισχύει η θέα με γυροσκόπιο: πάντα, ανενεργή όσο κρατιέται το +gyroaction ή μόνο όσο κρατιέται
+
+@ Which weapons trigger the freeze; melee covers the axe and any mod weapon used at close range without ammo
+el Ποια όπλα προκαλούν πάγωμα· το σώμα με σώμα καλύπτει το τσεκούρι και κάθε όπλο mod κοντινής απόστασης χωρίς πυρομαχικά
+
+@ Your own rockets and grenades don't hurt you; rocket jumps still work
+el Οι δικές σου ρουκέτες και χειροβομβίδες δεν σε τραυματίζουν· τα rocket jumps λειτουργούν ακόμη
+
+# ==== ui.txt ====
+
+# Menus and pop-ups outside the options pages: save cards, launch, presets,
+# add-on browser, map packs, hints and dialogs.
+@ Select
+el Επιλογή
+
+@ Back
+el Πίσω
+
+@ Cancel
+el Ακύρωση
+
+@ Confirm
+el Επιβεβαίωση
+
+@ Scroll
+el Κύλιση
+
+@ Section
+el Ενότητα
+
+@ Bind
+el Αντιστοίχιση
+
+@ Cancel binding
+el Ακύρωση αντιστοίχισης
+
+@ Clear
+el Καθαρισμός
+
+@ Clear pad
+el Καθαρισμός χειριστηρίου
+
+@ Remap
+el Αλλαγή
+
+@ Type
+el Πληκτρολόγηση
+
+@ Shift
+el Shift
+
+@ Done
+el Τέλος
+
+@ Del
+el Del
+
+@ Space
+el Διάστημα
+
+@ Save
+el Αποθήκευση
+
+@ Load
+el Φόρτωση
+
+@ Delete
+el Διαγραφή
+
+@ Play
+el Παίξε
+
+@ Yes
+el Ναι
+
+@ No
+el Όχι
+
+@ OK
+el OK
+
+@ System
+el Σύστημα
+
+@ Language
+el Γλώσσα
+
+@ Help
+el Βοήθεια
+
+@ Fixed for this game: it was started without Customize
+el Σταθερό για αυτό το παιχνίδι: ξεκίνησε χωρίς Προσαρμογή
+
+@ Press a button or key to bind (Start cancels)
+el Πάτα ένα κουμπί ή πλήκτρο για αντιστοίχιση (το Start ακυρώνει)
+
+@ Press button...
+el Πάτα κουμπί...
+
+@ Press key...
+el Πάτα πλήκτρο...
+
+@ Replace this binding?
+el Αντικατάσταση αυτής της αντιστοίχισης;
+
+@ is already assigned
+el έχει ήδη αντιστοιχιστεί
+
+@ {} already assigned
+el {} έχει ήδη αντιστοιχιστεί
+
+@ Open Controls to remap Lock-on?
+el Άνοιγμα Χειρισμού για αλλαγή του Κλειδώματος στόχου;
+
+@ Lock-on
+el Κλείδωμα στόχου
+
+@ Auto-aim Toggle
+el Εναλλαγή αυτόματης στόχευσης
+
+@ Keyboard
+el Πληκτρολόγιο
+
+@ Controller
+el Χειριστήριο
+
+# main menu, dialogs and screens
+@ Map Packs
+el Πακέτα χαρτών
+
+@ Customize
+el Προσαρμογή
+
+@ Level Select
+el Επιλογή επιπέδου
+
+@ Really quit?
+el Σίγουρα έξοδος;
+
+@ You died
+el Πέθανες
+
+@ Continue from most recent save
+el Συνέχεια από την πιο πρόσφατη αποθήκευση
+
+@ Select save
+el Επιλογή αποθήκευσης
+
+@ Restart level
+el Επανεκκίνηση επιπέδου
+
+@ Return to main menu
+el Επιστροφή στο κεντρικό μενού
+
+@ (disabled)
+el (ανενεργό)
+
+@ (fixed for this game)
+el (σταθερό για αυτό το παιχνίδι)
+
+@ (off)
+el (ανενεργό)
+
+@ Apply Display Changes
+el Εφαρμογή αλλαγών οθόνης
+
+@ Display Mode
+el Λειτουργία οθόνης
+
+@ Resolution
+el Ανάλυση
+
+@ desktop
+el επιφάνεια εργασίας
+
+@ Preset
+el Προρρύθμιση
+
+@ Map
+el Χάρτης
+
+@ Reset Shader Settings
+el Επαναφορά ρυθμίσεων shader
+
+@ Reset to Defaults
+el Επαναφορά προεπιλογών
+
+@ Searching...
+el Αναζήτηση...
+
+@ This game only autosaves.
+el Αυτό το παιχνίδι κάνει μόνο αυτόματες αποθηκεύσεις.
+
+@ (No Manual Saves modifier)
+el (τροποποιητής Χωρίς χειροκίνητη αποθήκευση)
+
+@ End the current game?
+el Τερματισμός του τρέχοντος παιχνιδιού;
+
+@ Unsaved progress will be lost.
+el Η μη αποθηκευμένη πρόοδος θα χαθεί.
+
+@ End game
+el Τερματισμός
+
+@ Overwrite
+el Αντικατάσταση
+
+@ Overwrite "{}"?
+el Αντικατάσταση του «{}»;
+
+@ Saved {}
+el Αποθηκεύτηκε: {}
+
+@ Start a new game?
+el Έναρξη νέου παιχνιδιού;
+
+@ New game
+el Νέο παιχνίδι
+
+@ New Game
+el Νέο παιχνίδι
+
+@ CUSTOM
+el ΠΡΟΣΑΡΜΟΣΜΕΝΟ
+
+@ Customize Experience
+el Προσαρμογή εμπειρίας
+
+@ Disable All
+el Απενεργοποίηση όλων
+
+@ Disable All Modifications
+el Απενεργοποίηση όλων των αλλαγών
+
+@ Saves load in other source ports too.
+el Οι αποθηκεύσεις φορτώνουν και σε άλλα source ports.
+
+@ Standard rules, no add-ons.
+el Τυπικοί κανόνες, χωρίς πρόσθετα.
+
+@ Choose skill
+el Επιλογή δυσκολίας
+
+@ The current game will end
+el Το τρέχον παιχνίδι θα τερματιστεί
+
+@ Easy
+el Εύκολο
+
+@ Normal
+el Κανονικό
+
+@ Hard
+el Δύσκολο
+
+@ Nightmare
+el Εφιάλτης
+
+# graphics preset pop-up
+@ Choose a Graphics Preset
+el Επιλογή προρρύθμισης γραφικών
+
+@ Classic
+el Κλασικό
+
+@ Like the re-release: enhanced models,
+el Όπως η επανέκδοση: βελτιωμένα μοντέλα,
+
+@ no added effects.
+el χωρίς πρόσθετα εφέ.
+
+@ Enhanced
+el Βελτιωμένο
+
+@ Every enhancement at its highest quality.
+el Κάθε βελτίωση στη μέγιστη ποιότητα.
+
+@ Needs a capable GPU.
+el Απαιτεί ισχυρή κάρτα γραφικών.
+
+@ Low-End
+el Χαμηλών απαιτήσεων
+
+@ Fastest. No anti-aliasing, original
+el Ταχύτατο. Χωρίς εξομάλυνση, αρχικά
+
+@ models, lowest effect quality.
+el μοντέλα, ελάχιστη ποιότητα εφέ.
+
+@ Esc keeps the defaults
+el Το Esc κρατά τις προεπιλογές
+
+@ Everything can be changed later in Options.
+el Όλα αλλάζουν αργότερα από το Options.
+
+@ Keep Defaults
+el Διατήρηση προεπιλογών
+
+# save and load cards
+@ Save Game
+el Αποθήκευση παιχνιδιού
+
+@ Load Game
+el Φόρτωση παιχνιδιού
+
+@ Autosaves
+el Αυτόματες αποθηκεύσεις
+
+@ newest first
+el νεότερες πρώτα
+
+@ Saves: {}
+el Αποθηκεύσεις: {}
+
+@ Browse Autosaves
+el Περιήγηση αυτόματων αποθηκεύσεων
+
+@ Every retained autosave, newest first
+el Όλες οι αυτόματες αποθηκεύσεις, νεότερες πρώτα
+
+@ New save
+el Νέα αποθήκευση
+
+@ Select to save your game here
+el Επίλεξε για να αποθηκεύσεις εδώ το παιχνίδι σου
+
+@ No autosaves yet
+el Καμία αυτόματη αποθήκευση ακόμη
+
+@ Autosaves are made on level entry, secrets and more (Options > Gameplay)
+el Οι αυτόματες αποθηκεύσεις γίνονται στην είσοδο επιπέδου, σε μυστικά κ.ά. (Options > Gameplay)
+
+@ No saves yet
+el Καμία αποθήκευση ακόμη
+
+@ Save from the Single Player menu, or press F6 to quicksave
+el Αποθήκευσε από το μενού Single Player ή πάτα F6 για γρήγορη αποθήκευση
+
+@ No picture
+el Χωρίς εικόνα
+
+@ Del: delete save
+el Del: διαγραφή αποθήκευσης
+
+@ Delete "{}"?
+el Διαγραφή του «{}»;
+
+@ This cannot be undone.
+el Αυτό δεν αναιρείται.
+
+@ Quicksave
+el Γρήγορη αποθήκευση
+
+@ Autosave: {}
+el Αυτόματη αποθήκευση: {}
+
+@ unknown trigger
+el άγνωστη αιτία
+
+@ Latest - {}
+el Τελευταία - {}
+
+@ Health {}
+el Υγεία {}
+
+@ Armor {}
+el Πανοπλία {}
+
+@ Kills {}/{}
+el Σκοτωμοί {}/{}
+
+@ Secrets {}/{}
+el Μυστικά {}/{}
+
+@ Split-screen, {} players
+el Διαιρεμένη οθόνη, {} παίκτες
+
+@ Co-op
+el Συνεργατικό
+
+@ Customized
+el Προσαρμοσμένο
+
+@ Customized, {}
+el Προσαρμοσμένο, {}
+
+@ Date unavailable
+el Μη διαθέσιμη ημερομηνία
+
+@ Just now
+el Μόλις τώρα
+
+@ {} min ago
+el πριν {} λεπ.
+
+@ {} h ago
+el πριν {} ώρ.
+
+@ Level entry
+el Είσοδος επιπέδου
+
+@ Secret found
+el Βρέθηκε μυστικό
+
+@ All enemies killed
+el Σκοτώθηκαν όλοι οι εχθροί
+
+@ All secrets found
+el Βρέθηκαν όλα τα μυστικά
+
+@ Timer
+el Χρονόμετρο
+
+# customize pages
+@ Standard rules
+el Τυπικοί κανόνες
+
+@ Modifiers changed: {}
+el Αλλαγμένοι τροποποιητές: {}
+
+@ no add-ons
+el χωρίς πρόσθετα
+
+@ add-ons: {}
+el πρόσθετα: {}
+
+@ Saves of this game are .qsa files: they need this source port.
+el Οι αποθηκεύσεις αυτού του παιχνιδιού είναι αρχεία .qsa: απαιτούν αυτό το source port.
+
+@ Nothing changed: this plays as standard Quake.
+el Τίποτα δεν άλλαξε: παίζεται ως τυπικό Quake.
+
+@ Changes apply now and are saved with this game (.qsa).
+el Οι αλλαγές ισχύουν αμέσως και αποθηκεύονται με αυτό το παιχνίδι (.qsa).
+
+@ This game started without Customize, so its rules are fixed.
+el Αυτό το παιχνίδι ξεκίνησε χωρίς Προσαρμογή, οπότε οι κανόνες του είναι σταθεροί.
+
+@ Start a new game and choose Customize Experience.
+el Ξεκίνα νέο παιχνίδι και επίλεξε Προσαρμογή εμπειρίας.
+
+@ These rules apply to the next customized game.
+el Αυτοί οι κανόνες ισχύουν στο επόμενο προσαρμοσμένο παιχνίδι.
+
+# add-on browser
+@ Fire
+el Βολή
+
+@ Alt Fire
+el Εναλλ. βολή
+
+@ Configure Parameters >
+el Ρύθμιση παραμέτρων >
+
+@ Configure
+el Ρύθμιση
+
+@ Settings
+el Ρυθμίσεις
+
+@ Change slot
+el Αλλαγή υποδοχής
+
+@ Toggle
+el Εναλλαγή
+
+@ Details
+el Λεπτομέρειες
+
+@ Enter or click the box: toggle
+el Enter ή κλικ στο πλαίσιο: εναλλαγή
+
+@ Right / Tab / click: details
+el Δεξιά / Tab / κλικ: λεπτομέρειες
+
+@ Input Remapping
+el Αντιστοίχιση χειρισμού
+
+@ Weapon Slot
+el Υποδοχή όπλου
+
+@ Customized games save as .qsa files, which need this source port.
+el Τα προσαρμοσμένα παιχνίδια αποθηκεύονται ως αρχεία .qsa, που απαιτούν αυτό το source port.
+
+@ This game started without Customize, so its add-ons are fixed. Customize a new game instead.
+el Αυτό το παιχνίδι ξεκίνησε χωρίς Προσαρμογή, οπότε τα πρόσθετά του είναι σταθερά. Προσάρμοσε ένα νέο παιχνίδι.
+
+@ Bullet Time
+el Bullet Time
+
+@ Change Goggles
+el Αλλαγή γυαλιών
+
+@ Dodge / Dive
+el Αποφυγή / Βουτιά
+
+@ Goggles
+el Γυαλιά
+
+@ Hitstop
+el Hitstop
+
+@ Projectile Shotguns
+el Καραμπίνες με βλήματα
+
+@ BULLET TIME: 20%
+el BULLET TIME: 20%
+
+@ NORMAL SPEED
+el ΚΑΝΟΝΙΚΗ ΤΑΧΥΤΗΤΑ
+
+@ SLOW MOTION: PHYSICAL PELLETS
+el ΑΡΓΗ ΚΙΝΗΣΗ: ΦΥΣΙΚΑ ΣΚΑΓΙΑ
+
+@ DEMONSTRATION
+el ΕΠΙΔΕΙΞΗ
+
+@ GAMEPLAY
+el GAMEPLAY
+
+@ LOOP
+el ΕΠΑΝΑΛΗΨΗ
+
+@ Preview unavailable
+el Μη διαθέσιμη προεπισκόπηση
+
+# shader and language help lines
+@ A setting of the chosen shader; arrows step it, Enter is not needed
+el Μια ρύθμιση του επιλεγμένου shader· τα βέλη την αλλάζουν, δεν χρειάζεται Enter
+
+@ Language of the menus, messages and the 2021 re-release's game text; System follows your computer's language
+el Γλώσσα των μενού, των μηνυμάτων και του κειμένου της επανέκδοσης του 2021· το Σύστημα ακολουθεί τη γλώσσα του υπολογιστή σου
+
+@ Puts every setting of the chosen shader back to the preset's defaults
+el Επαναφέρει κάθε ρύθμιση του επιλεγμένου shader στις προεπιλογές της προρρύθμισης
+
+@ RetroArch slang shader on the final image: CRT, scanlines, NTSC, sharpening; add your own in <game>/shaders
+el Shader RetroArch slang στην τελική εικόνα: CRT, γραμμές σάρωσης, NTSC, όξυνση· πρόσθεσε δικά σου στο <game>/shaders
+
+# modern console footer
+@ Shift+PgUp/Dn: height  ` : hide
+el Shift+PgUp/Dn: ύψος  ` : απόκρυψη
+
+@ Tab: complete  Ctrl+R: search  bash | pipe
+el Tab: συμπλήρωση  Ctrl+R: αναζήτηση  bash | pipe
+
+@ ↑ +{} lines (End to jump) 
+el ↑ +{} γραμμές (End για μετάβαση) 
+
+# add-on descriptions
+@ Create two linked portals on flat walls. Fire places the first portal; Alt Fire places the second. Walk through either portal to emerge from the other. Your momentum carries through. Assign a weapon slot below: pressing that slot repeatedly cycles its ordinary weapon and every enabled add-on assigned there. Portal view quality is configurable below.
+el Δημιουργεί δύο συνδεδεμένες πύλες σε επίπεδους τοίχους. Η Βολή τοποθετεί την πρώτη πύλη· η Εναλλακτική βολή τη δεύτερη. Πέρνα από οποιαδήποτε πύλη για να βγεις από την άλλη. Η ορμή σου διατηρείται. Όρισε παρακάτω υποδοχή όπλου: πατώντας επανειλημμένα αυτή την υποδοχή εναλλάσσεις το κανονικό της όπλο και κάθε ενεργό πρόσθετο που της έχει οριστεί. Η ποιότητα θέας των πυλών ρυθμίζεται παρακάτω.
+
+@ Hold Fire and sweep the crosshair over monsters to queue targets. Release Fire to throw: the boomerang visits each target, stuns it and returns to you. Alt Fire clears the queue. The weapon slot selects a group, not a separate hotkey: press it again to cycle through the weapons in that slot. Configure stun duration and flight speed below.
+el Κράτα τη Βολή και πέρνα το στόχαστρο πάνω από τέρατα για να βάλεις στόχους στη σειρά. Άφησε τη Βολή για να ρίξεις: το μπούμερανγκ επισκέπτεται κάθε στόχο, τον ζαλίζει και επιστρέφει σε σένα. Η Εναλλακτική βολή καθαρίζει τη σειρά. Η υποδοχή όπλου επιλέγει μια ομάδα, όχι ξεχωριστό πλήκτρο: πάτα την ξανά για εναλλαγή των όπλων της υποδοχής. Ρύθμισε παρακάτω τη διάρκεια ζάλης και την ταχύτητα πτήσης.
+
+@ Hold Fire to charge a sticky bomb using rocket ammunition; release to launch. A longer charge throws it faster. Bombs cling to walls, doors and monsters. Alt Fire detonates your planted bombs together. Place a trap, retreat, then detonate it when enemies approach. Assign any weapon slot below; repeated presses cycle through the ordinary weapon and add-ons in that slot.
+el Κράτα τη Βολή για να φορτίσεις μια κολλητική βόμβα με πυρομαχικά ρουκετών· άφησε για εκτόξευση. Μεγαλύτερη φόρτιση τη ρίχνει πιο γρήγορα. Οι βόμβες κολλούν σε τοίχους, πόρτες και τέρατα. Η Εναλλακτική βολή πυροδοτεί όλες τις βόμβες σου μαζί. Στήσε παγίδα, οπισθοχώρησε και πυροδότησέ την όταν πλησιάσουν εχθροί. Όρισε παρακάτω οποιαδήποτε υποδοχή όπλου· επανειλημμένα πατήματα εναλλάσσουν το κανονικό όπλο και τα πρόσθετα της υποδοχής.
+
+@ Fire launches a chain hook. It latches onto a permitted surface or enemy and reels you toward the anchor. Fire again or use Alt Fire to let go. Choose which materials and enemies can be hooked in Configure Parameters. Assign it to any weapon slot; repeated presses of the slot's existing binding cycle through its weapons.
+el Η Βολή εκτοξεύει γάντζο με αλυσίδα. Πιάνεται σε επιτρεπτή επιφάνεια ή εχθρό και σε τραβά προς το σημείο αγκύρωσης. Πάλι Βολή ή Εναλλακτική βολή για να αφήσεις. Διάλεξε ποια υλικά και εχθροί πιάνονται στη Ρύθμιση παραμέτρων. Όρισέ τον σε οποιαδήποτε υποδοχή όπλου· επανειλημμένα πατήματα της υπάρχουσας αντιστοίχισης της υποδοχής εναλλάσσουν τα όπλα της.
+
+@ A piercing railgun inspired by Quake III. Fire sends a slug through every enemy along its line. Each shot consumes two cells, with a 1.5 second refire interval. Damage and the spiral trail colour are configurable below. Choose a weapon slot: the slot's current binding selects and cycles the weapons assigned to it.
+el Railgun που διαπερνά, εμπνευσμένο από το Quake III. Η Βολή στέλνει ένα βλήμα μέσα από κάθε εχθρό στη γραμμή του. Κάθε βολή καταναλώνει δύο κυψέλες, με 1,5 δευτερόλεπτο μέχρι την επόμενη. Η ζημιά και το χρώμα του σπειροειδούς ίχνους ρυθμίζονται παρακάτω. Διάλεξε υποδοχή όπλου: η τρέχουσα αντιστοίχισή της επιλέγει και εναλλάσσει τα όπλα που της έχουν οριστεί.
+
+@ A Portal-style gel sprayer. Fire sprays blue Repulsion gel: land, jump or run into it to bounce, and landings on it never hurt. Alt Fire sprays orange Propulsion gel: run across it to go much faster. Gel coats floors and walls until washed off with the Powerwasher. Assign a weapon slot below; repeated presses cycle the weapons in that slot.
+el Ψεκαστήρας τζελ τύπου Portal. Η Βολή ψεκάζει μπλε τζελ απώθησης: προσγειώσου, πήδα ή τρέξε πάνω του για να αναπηδήσεις, και οι προσγειώσεις πάνω του δεν πονούν ποτέ. Η Εναλλακτική βολή ψεκάζει πορτοκαλί τζελ προώθησης: τρέξε πάνω του για να πας πολύ πιο γρήγορα. Το τζελ καλύπτει πατώματα και τοίχους μέχρι να ξεπλυθεί με το Πλυστικό υψηλής πίεσης. Όρισε παρακάτω υποδοχή όπλου· επανειλημμένα πατήματα εναλλάσσουν τα όπλα της υποδοχής.
+
+@ A water cannon. Fire shoots a straight jet with limited reach; Alt Fire a wide, shorter fan. The water pushes enemies back, turns projectiles aside and washes away gel and blood. Push strength is configurable below. Assign a weapon slot below; repeated presses cycle the weapons in that slot.
+el Κανόνι νερού. Η Βολή ρίχνει ευθύ πίδακα περιορισμένης εμβέλειας· η Εναλλακτική βολή μια φαρδιά, κοντύτερη βεντάλια. Το νερό σπρώχνει πίσω τους εχθρούς, εκτρέπει τα βλήματα και ξεπλένει τζελ και αίμα. Η δύναμη ώθησης ρυθμίζεται παρακάτω. Όρισε παρακάτω υποδοχή όπλου· επανειλημμένα πατήματα εναλλάσσουν τα όπλα της υποδοχής.
+
+@ One equipment add-on includes both night vision and thermal vision. The Change Goggles action cycles Normal, Night Vision, Thermal, then Normal again. Night vision brightens dark rooms; thermal vision highlights living enemies. Goggles do not occupy a weapon slot. Configure intensity and sensor noise below. The binding affects only this add-on.
+el Ένα πρόσθετο εξοπλισμού περιλαμβάνει νυχτερινή και θερμική όραση. Η ενέργεια Αλλαγή γυαλιών εναλλάσσει Κανονική, Νυχτερινή όραση, Θερμική και ξανά Κανονική. Η νυχτερινή όραση φωτίζει τα σκοτεινά δωμάτια· η θερμική τονίζει τους ζωντανούς εχθρούς. Τα γυαλιά δεν πιάνουν υποδοχή όπλου. Ρύθμισε παρακάτω την ένταση και τον θόρυβο αισθητήρα. Η αντιστοίχιση επηρεάζει μόνο αυτό το πρόσθετο.
+
+@ Press Dodge with a movement direction on the ground or in midair: dive forward or leap backward and sideways. Diagonals are supported. Each press launches once, with a short recovery. The player body animates in third person. Assign the Dodge action below or in Controls.
+el Πάτα Αποφυγή με μια κατεύθυνση κίνησης στο έδαφος ή στον αέρα: βουτιά μπροστά ή άλμα πίσω και στο πλάι. Υποστηρίζονται και διαγώνιες. Κάθε πάτημα εκτινάσσει μία φορά, με σύντομη ανάκαμψη. Το σώμα του παίκτη κινείται στο τρίτο πρόσωπο. Όρισε την ενέργεια Αποφυγή παρακάτω ή στον Χειρισμό.
+
+@ Use the dedicated Bullet Time action to slow the whole local game to 20% speed. Hold is the default; Toggle switches on each press. The optional meter limits use in real seconds and regenerates while inactive. Disable the meter for unlimited use. Remap the action and configure duration and regeneration below.
+el Χρησιμοποίησε την ειδική ενέργεια Bullet Time για να επιβραδύνεις όλο το τοπικό παιχνίδι στο 20% της ταχύτητας. Το Κράτημα είναι η προεπιλογή· η Εναλλαγή ενεργοποιεί και απενεργοποιεί με κάθε πάτημα. Η προαιρετική μπάρα περιορίζει τη χρήση σε πραγματικά δευτερόλεπτα και αναπληρώνεται όσο είναι ανενεργή. Απενεργοποίησε τη μπάρα για απεριόριστη χρήση. Άλλαξε την ενέργεια και ρύθμισε διάρκεια και αναπλήρωση παρακάτω.
+
+@ Both shotguns and enemy grunts fire physical pellets with their original spread and damage. Fast default projectiles feel immediate; lower their speed to dodge incoming fire during bullet time. Configure projectile speed below, or reset it to the default of 10000 units per second.
+el Και οι δύο καραμπίνες και οι εχθροί στρατιώτες ρίχνουν φυσικά σκάγια με την αρχική τους διασπορά και ζημιά. Τα γρήγορα προεπιλεγμένα βλήματα μοιάζουν άμεσα· μείωσε την ταχύτητά τους για να αποφεύγεις τα εχθρικά πυρά σε bullet time. Ρύθμισε παρακάτω την ταχύτητα βλημάτων ή επανάφερέ την στην προεπιλογή των 10000 μονάδων ανά δευτερόλεπτο.
+
+@ Freezes the game for a split second when you damage an enemy, so hits feel heavier. Single player only. Choose which weapons trigger it (all, melee, ranged or explosives), how long it lasts and how much more a kill freezes. Advanced settings cover enemy toughness, damage scaling, cooldown and the longest freeze.
+el Παγώνει το παιχνίδι για κλάσμα του δευτερολέπτου όταν τραυματίζεις εχθρό, ώστε τα χτυπήματα να μοιάζουν βαρύτερα. Μόνο σε ατομικό παιχνίδι. Διάλεξε ποια όπλα το προκαλούν (όλα, σώμα με σώμα, από απόσταση ή εκρηκτικά), πόσο διαρκεί και πόσο περισσότερο παγώνει ένας σκοτωμός. Οι σύνθετες ρυθμίσεις καλύπτουν την αντοχή εχθρών, την κλιμάκωση ζημιάς, την αναμονή και το μέγιστο πάγωμα.
+
+# map packs and the Quaddicted browser
+@ Get more maps (Quaddicted)...
+el Περισσότεροι χάρτες (Quaddicted)...
+
+@ Type to filter...
+el Πληκτρολόγησε για φιλτράρισμα...
+
+@ Launch mod
+el Εκκίνηση mod
+
+@ Start first map
+el Έναρξη πρώτου χάρτη
+
+@ (running)
+el (εκτελείται)
+
+@ running
+el εκτελείται
+
+@ Recent
+el Πρόσφατα
+
+@ Name
+el Όνομα
+
+@ Dir
+el Φάκελος
+
+@ Default
+el Προεπιλογή
+
+@ Title
+el Τίτλος
+
+@ Sort: {}
+el Ταξινόμηση: {}
+
+@ {} installed
+el {} εγκατεστημένα
+
+@ {}/{} matching
+el {}/{} ταιριάζουν
+
+@ {} maps, {} completed
+el {} χάρτες, {} ολοκληρωμένοι
+
+@ {}/{} matching, {} completed
+el {}/{} ταιριάζουν, {} ολοκληρωμένοι
+
+@ no maps of its own
+el χωρίς δικούς του χάρτες
+
+@ dir: {}
+el φάκελος: {}
+
+@ base: {}
+el βάση: {}
+
+@ Browse the Quaddicted archive of
+el Περιηγήσου στο αρχείο Quaddicted με
+
+@ single-player maps and episodes,
+el χάρτες και επεισόδια ατομικού παιχνιδιού,
+
+@ then download and install them
+el και κατέβασέ τους και εγκατάστησέ τους
+
+@ here. Each release gets its own
+el εδώ. Κάθε κυκλοφορία παίρνει τη δική
+
+@ entry in this list.
+el της θέση σε αυτή τη λίστα.
+
+@ Needs an internet connection.
+el Απαιτεί σύνδεση στο διαδίκτυο.
+
+@ Quaddicted Map Archive
+el Αρχείο χαρτών Quaddicted
+
+@ Newest
+el Νεότερα
+
+@ Author
+el Δημιουργός
+
+@ Size
+el Μέγεθος
+
+@ Loading the map list...
+el Φόρτωση λίστας χαρτών...
+
+@ Couldn't load the map list: {}
+el Αδύνατη η φόρτωση της λίστας χαρτών: {}
+
+@ {} single-player releases  -  F5 refreshes
+el {} κυκλοφορίες ατομικού παιχνιδιού  -  F5 ανανέωση
+
+@ {} matching
+el {} ταιριάζουν
+
+@ by {}
+el από {}
+
+@ requires: {}
+el απαιτεί: {}
+
+@ maps: {}
+el χάρτες: {}
+
+@ Failed: {}
+el Αποτυχία: {}
+
+@ Downloading... {}%
+el Λήψη... {}%
+
+@ Unpacking...
+el Αποσυμπίεση...
+
+@ Installed in {}/  -  Enter: play
+el Εγκαταστάθηκε στο {}/  -  Enter: παιχνίδι
+
+@ Enter: download and install
+el Enter: λήψη και εγκατάσταση
+
+@ unpacking
+el αποσυμπίεση
+
+@ failed
+el απέτυχε
+
+@ installed
+el εγκατεστημένο
+
+@ Downloads are not available in the browser build
+el Οι λήψεις δεν είναι διαθέσιμες στην έκδοση browser
+
+@ the map list could not be read
+el η λίστα χαρτών δεν διαβάστηκε
+
+@ downloading needs the curl program
+el η λήψη απαιτεί το πρόγραμμα curl
+
+@ download failed
+el η λήψη απέτυχε
+
+@ the download is not a valid zip
+el η λήψη δεν είναι έγκυρο zip
+
+@ nothing to install for this engine
+el τίποτα για εγκατάσταση σε αυτή τη μηχανή
+
+@ needs {} installed first
+el απαιτεί πρώτα εγκατάσταση του {}
+
+@ couldn't unpack {}
+el αδύνατη η αποσυμπίεση του {}
+
+# help screen
+@ About
+el Πληροφορίες
+
+@ < Back
+el < Πίσω
+
+# tr_ctx keys: English shows the short word, the key says which meaning
+@ Save (a manual save, as opposed to a quicksave or autosave)
+el Αποθήκευση
+
+# ==== hud.txt ====
+
+# HUD, weapon and equipment wheels, sound captions and other in-game text.
+# Weapon, monster and item names follow the 2021 re-release's own translations.
+@ Axe
+el Τσεκούρι
+
+@ Shotgun
+el Καραμπίνα
+
+@ Double-Barrelled Shotgun
+el Δίκαννη καραμπίνα
+
+@ Nailgun
+el Καρφωτικό
+
+@ Super Nailgun
+el Σούπερ καρφωτικό
+
+@ Grenade Launcher
+el Εκτοξευτής χειροβομβίδων
+
+@ Rocket Launcher
+el Εκτοξευτής ρουκετών
+
+@ Thunderbolt
+el Κεραυνός
+
+@ Portal Gun
+el Όπλο πυλών
+
+@ Boomerang
+el Μπούμερανγκ
+
+@ Stickybomb Launcher
+el Εκτοξευτής κολλητικών βομβών
+
+@ Railgun
+el Railgun
+
+@ Hookshot
+el Γάντζος
+
+@ Gel Sprayer
+el Ψεκαστήρας τζελ
+
+@ Powerwasher
+el Πλυστικό υψηλής πίεσης
+
+@ Night Vision Goggles
+el Γυαλιά νυχτερινής όρασης
+
+@ Thermal Goggles
+el Θερμικά γυαλιά
+
+@ Normal vision
+el Κανονική όραση
+
+@ ON
+el ΕΝΕΡΓΟ
+
+@ OFF
+el ΑΝΕΝΕΡΓΟ
+
+@ {} (turn on)
+el {} (ενεργοποίηση)
+
+@ {} (turn off)
+el {} (απενεργοποίηση)
+
+@ Move mouse to select, release to toggle
+el Κίνησε το ποντίκι για επιλογή, άφησε για εναλλαγή
+
+@ Move mouse to select, release to equip
+el Κίνησε το ποντίκι για επιλογή, άφησε για εξοπλισμό
+
+@ Release to toggle
+el Άφησε για εναλλαγή
+
+@ Release to equip
+el Άφησε για εξοπλισμό
+
+@ shells
+el φυσίγγια
+
+@ nails
+el καρφιά
+
+@ rockets
+el ρουκέτες
+
+@ cells
+el κυψέλες
+
+@ Kills: {}/{}
+el Σκοτωμοί: {}/{}
+
+@ Secrets: {}/{}
+el Μυστικά: {}/{}
+
+@ Time {}
+el Χρόνος {}
+
+@ Press any button to continue...
+el Πάτα οποιοδήποτε κουμπί για συνέχεια...
+
+@ Press any key to continue...
+el Πάτα οποιοδήποτε πλήκτρο για συνέχεια...
+
+@ BULLET TIME
+el BULLET TIME
+
+@ AUTO AIM
+el ΑΥΤΟΜΑΤΗ ΣΤΟΧΕΥΣΗ
+
+@ Crosshair
+el Στόχαστρο
+
+@ + Marker
+el + Δείκτης
+
+@ Hit markers off
+el Δείκτες χτυπημάτων ανενεργοί
+
+@ On target
+el Σε στόχο
+
+@ On kill
+el Σε σκότωμα
+
+# sound captions
+@ [Secret found]
+el [Βρέθηκε μυστικό]
+
+@ [Message]
+el [Μήνυμα]
+
+@ [Switch activated]
+el [Ενεργοποιήθηκε διακόπτης]
+
+@ [Key picked up]
+el [Πάρθηκε κλειδί]
+
+@ [Rune picked up]
+el [Πάρθηκε ρούνος]
+
+@ [Teleporter]
+el [Τηλεμεταφορέας]
+
+@ [Teleport]
+el [Τηλεμεταφορά]
+
+@ [Splash]
+el [Πλατσούρισμα]
+
+@ [Leaving water]
+el [Έξοδος από το νερό]
+
+@ [Door]
+el [Πόρτα]
+
+@ [Platform moving]
+el [Κινείται πλατφόρμα]
+
+@ [Button]
+el [Κουμπί]
+
+@ [Health picked up]
+el [Πάρθηκε υγεία]
+
+@ [Armor picked up]
+el [Πάρθηκε πανοπλία]
+
+@ [Quad Damage wearing off]
+el [Το Quad Damage τελειώνει]
+
+@ [Quad Damage]
+el [Quad Damage]
+
+@ [Pentagram wearing off]
+el [Το Πεντάγραμμα τελειώνει]
+
+@ [Pentagram of Protection]
+el [Πεντάγραμμα προστασίας]
+
+@ [Ring wearing off]
+el [Το Δαχτυλίδι τελειώνει]
+
+@ [Ring of Shadows]
+el [Δαχτυλίδι των σκιών]
+
+@ [Biosuit wearing off]
+el [Η Βιολογική στολή τελειώνει]
+
+@ [Biosuit]
+el [Βιολογική στολή]
+
+@ [Item picked up]
+el [Πάρθηκε αντικείμενο]
+
+@ [Weapon picked up]
+el [Πάρθηκε όπλο]
+
+@ [Ammo picked up]
+el [Πάρθηκαν πυρομαχικά]
+
+@ [Explosion]
+el [Έκρηξη]
+
+@ [Grenade launched]
+el [Εκτόξευση χειροβομβίδας]
+
+@ [Grenade bounce]
+el [Αναπήδηση χειροβομβίδας]
+
+@ [Rocket fired]
+el [Εκτόξευση ρουκέτας]
+
+@ [Nails fired]
+el [Ριπή καρφιών]
+
+@ [Lightning]
+el [Ηλεκτρική εκκένωση]
+
+@ [Thunder]
+el [Βροντή]
+
+@ [Enforcer alerted]
+el [Enforcer σε επιφυλακή]
+
+@ [Grunt alerted]
+el [Grunt σε επιφυλακή]
+
+@ [Rottweiler alerted]
+el [Rottweiler σε επιφυλακή]
+
+@ [Knight alerted]
+el [Knight σε επιφυλακή]
+
+@ [Death Knight alerted]
+el [Death Knight σε επιφυλακή]
+
+@ [Scrag alerted]
+el [Scrag σε επιφυλακή]
+
+@ [Ogre alerted]
+el [Ogre σε επιφυλακή]
+
+@ [Fiend alerted]
+el [Fiend σε επιφυλακή]
+
+@ [Shambler alerted]
+el [Shambler σε επιφυλακή]
+
+@ [Zombie groaning]
+el [Zombie βογκά]
+
+@ [Vore alerted]
+el [Vore σε επιφυλακή]
+
+@ [Vore attacking]
+el [Vore επιτίθεται]
+
+@ [Spawn alerted]
+el [Spawn σε επιφυλακή]
+
+@ [Rotfish]
+el [Rotfish]
+
+@ [Spawn]
+el [Spawn]
+
+@ [Chthon]
+el [Chthon]
+
+@ [Hard landing]
+el [Σκληρή προσγείωση]
+
+@ [Drowning]
+el [Πνιγμός]
+
+@ [Gasping for air]
+el [Λαχάνιασμα]
+
+@ [Burning]
+el [Κάψιμο]
+
+@ [Telefrag]
+el [Telefrag]
+
+@ [Gibbed]
+el [Κομματιάστηκε]
+
+# ==== console.txt ====
+
+# Console messages, shown translated only with con_translate 1 (Translate Console).
+# Cvar and command names stay as they are.
+@ Autosaved.
+el Αυτόματη αποθήκευση έγινε.
+
+@ Game saved.
+el Το παιχνίδι αποθηκεύτηκε.
+
+@ Can't save now.
+el Δεν είναι δυνατή η αποθήκευση τώρα.
+
+@ This game only autosaves (No Manual Saves modifier).
+el Αυτό το παιχνίδι κάνει μόνο αυτόματες αποθηκεύσεις (τροποποιητής Χωρίς χειροκίνητη αποθήκευση).
+
+@ Loading {}...
+el Φόρτωση {}...
+
+@ load failed: {}
+el η φόρτωση απέτυχε: {}
+
+@ ERROR: autosave failed: {}
+el ΣΦΑΛΜΑ: η αυτόματη αποθήκευση απέτυχε: {}
+
+@ ERROR: couldn't open {}
+el ΣΦΑΛΜΑ: αδύνατο το άνοιγμα του {}
+
+@ ERROR: couldn't open {}.
+el ΣΦΑΛΜΑ: αδύνατο το άνοιγμα του {}.
+
+@ ERROR: couldn't write {}: {}
+el ΣΦΑΛΜΑ: αδύνατη η εγγραφή του {}: {}
+
+@ ERROR: couldn't create {}: {}
+el ΣΦΑΛΜΑ: αδύνατη η δημιουργία του {}: {}
+
+@ couldn't write {}: {}
+el αδύνατη η εγγραφή του {}: {}
+
+@ Wrote {}
+el Γράφτηκε το {}
+
+@ screenshot failed: {}
+el το στιγμιότυπο απέτυχε: {}
+
+@ screenshot: {}
+el στιγμιότυπο: {}
+
+@ No readable save available. Select save or restart the level.
+el Δεν υπάρχει αναγνώσιμη αποθήκευση. Επίλεξε αποθήκευση ή επανεκκίνησε το επίπεδο.
+
+@ Unknown command "{}"
+el Άγνωστη εντολή «{}»
+
+@ couldn't exec {}
+el αδύνατη η εκτέλεση του {}
+
+@ execing {}
+el εκτέλεση {}
+
+@ execing config.cfg (inherited from {})
+el εκτέλεση config.cfg (κληρονομημένο από {})
+
+@ execing config.cfg (mod defaults)
+el εκτέλεση config.cfg (προεπιλογές mod)
+
+@ execing default.cfg (built-in)
+el εκτέλεση default.cfg (ενσωματωμένο)
+
+@ {} cvars
+el {} μεταβλητές
+
+@ {} commands
+el {} εντολές
+
+@ Can't "cmd", not connected
+el Αδύνατο το «cmd», χωρίς σύνδεση
+
+@ Looking for Quake servers...
+el Αναζήτηση διακομιστών Quake...
+
+@ Bad value, must be between 1 and 65534
+el Μη έγκυρη τιμή, πρέπει να είναι μεταξύ 1 και 65534
+
+@ Couldn't handle music file {}
+el Αδύνατη η επεξεργασία του αρχείου μουσικής {}
+
+@ Bug report written to {}
+el Η αναφορά σφάλματος γράφτηκε στο {}
+
+@ bugreport: can't create {}: {}
+el bugreport: αδύνατη η δημιουργία του {}: {}
+
+@ graphics preset: {}
+el προρρύθμιση γραφικών: {}
+
+@ Presets (r_shader_preset <name>):
+el Προρρυθμίσεις (r_shader_preset <όνομα>):
+
+@ Add your own .slangp presets under <game>/shaders/.
+el Πρόσθεσε δικές σου προρρυθμίσεις .slangp στο <game>/shaders/.
+
+@ no shader preset loaded (r_shader_preset)
+el δεν φορτώθηκε προρρύθμιση shader (r_shader_preset)
+
+@ r_shader_preset: "{}" not found
+el r_shader_preset: το «{}» δεν βρέθηκε
+
+@ no parameter "{}" in this preset
+el δεν υπάρχει παράμετρος «{}» σε αυτή την προρρύθμιση
+
+@ {} = {} (default {}, {}..{})
+el {} = {} (προεπιλογή {}, {}..{})
+
+@ Switching to {}...
+el Μετάβαση σε {}...
+
+@ game: no game dir "{}" in {}
+el game: δεν υπάρχει φάκελος παιχνιδιού «{}» στο {}
+
+@ game: can't find the engine executable
+el game: δεν βρέθηκε το εκτελέσιμο της μηχανής
+
+@ game: exec failed: {}
+el game: η εκτέλεση απέτυχε: {}
+
+@ game: launch failed: {}
+el game: η εκκίνηση απέτυχε: {}
+
+@ loaded {} in {}s
+el φορτώθηκε το {} σε {} δ
+
+@ No demos listed with startdemos
+el Δεν υπάρχουν demo στο startdemos
+
+@ Playing demo from {}.
+el Αναπαραγωγή demo από {}.
+
+@ {} frames {} seconds {} fps
+el {} καρέ {} δευτερόλεπτα {} fps
+
+@ Recording to {}.
+el Εγγραφή στο {}.
+
+@ Completed demo
+el Το demo ολοκληρώθηκε
+
+@ Can't record during demo playback
+el Αδύνατη η εγγραφή κατά την αναπαραγωγή demo
+
+@ Relative pathnames are not allowed.
+el Οι σχετικές διαδρομές δεν επιτρέπονται.
+
+@ Can't record - try again when connected
+el Αδύνατη η εγγραφή - δοκίμασε ξανά μετά τη σύνδεση
+
+@ {} demo(s) in loop
+el {} demo σε επανάληψη
+
+@ Not recording a demo.
+el Δεν γίνεται εγγραφή demo.
+
+@ {} joined on a gamepad
+el Ο {} μπήκε με χειριστήριο
+
+@ goggles: needs a game started with Add-ons and Goggles enabled
+el goggles: απαιτεί παιχνίδι με ενεργά τα Πρόσθετα και τα Γυαλιά
+
+@ equip: needs a game started with Add-ons and Goggles enabled
+el equip: απαιτεί παιχνίδι με ενεργά τα Πρόσθετα και τα Γυαλιά
+
+@ UDP listening on port {}
+el UDP σε αναμονή στη θύρα {}
+
+@ UDP bind on port {} failed: {}
+el Η δέσμευση UDP στη θύρα {} απέτυχε: {}
+
+@ Connection accepted by {}
+el Η σύνδεση έγινε δεκτή από {}
+
+@ Connection failed: {}
+el Η σύνδεση απέτυχε: {}
+
+@ Couldn't resolve {}
+el Αδύνατη η επίλυση του {}
+
+@ Connecting to {}...
+el Σύνδεση σε {}...
+
+@ Connecting to QuakeWorld server {}...
+el Σύνδεση στον διακομιστή QuakeWorld {}...
+
+@ Disconnected: {}
+el Αποσυνδέθηκε: {}
+
+@ Server disconnected
+el Ο διακομιστής αποσυνδέθηκε
+
+@ Client {} connected
+el Ο πελάτης {} συνδέθηκε
+
+@ Client {} timed out
+el Λήξη χρόνου για τον πελάτη {}
+
+@ Couldn't spawn server {}: {}
+el Αδύνατη η εκκίνηση του διακομιστή {}: {}
+
+@ maxplayers can not be changed while a server is running.
+el Το maxplayers δεν αλλάζει όσο τρέχει διακομιστής.
+
+@ You can't kick yourself!
+el Δεν μπορείς να διώξεις τον εαυτό σου!
+
+@ Only the server may changelevel
+el Μόνο ο διακομιστής μπορεί να κάνει changelevel
+
+@ {} renamed to {}
+el Ο {} μετονομάστηκε σε {}

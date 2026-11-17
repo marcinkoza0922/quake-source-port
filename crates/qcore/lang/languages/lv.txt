@@ -1,0 +1,3024 @@
+# lv: the port's own text; English keys from crates/qcore/lang/*.txt.
+# Format in crates/qcore/src/lang/catalog.rs; check with tools/lang_check.py.
+
+# ==== menu.txt ====
+
+# Options pages: page names, row labels and choice values.
+@ 10% speed
+lv 10% ātrums
+
+@ 2 split-screen
+lv 2 dalītā ekrānā
+
+@ 3 split-screen
+lv 3 dalītā ekrānā
+
+@ 4 split-screen
+lv 4 dalītā ekrānā
+
+@ 5 split-screen
+lv 5 dalītā ekrānā
+
+@ 6 split-screen
+lv 6 dalītā ekrānā
+
+@ 2D aiming
+lv 2D tēmēšana
+
+@ 2x monsters
+lv 2× monstri
+
+@ 3x monsters
+lv 3× monstri
+
+@ 4x monsters
+lv 4× monstri
+
+@ 3D resolution
+lv 3D izšķirtspēja
+
+@ 3D view
+lv 3D skats
+
+@ 8-bit Color
+lv 8 bitu krāsas
+
+@ Accessibility
+lv Pieejamība
+
+@ Acquisition Cone
+lv Uztveršanas konuss
+
+@ Activation
+lv Aktivizēšana
+
+@ Add a ringing room tail after the cue
+lv Pēc signāla pievieno skanīgu telpas atbalsi
+
+@ Add delayed repeats after the cue
+lv Pēc signāla pievieno aizkavētus atkārtojumus
+
+@ Add saturation and distortion
+lv Pievieno piesātinājumu un kropļojumu
+
+@ Add-ons
+lv Papildinājumi
+
+@ Address
+lv Adrese
+
+@ Adds fine noise to hide color banding
+lv Pievieno smalku troksni, lai slēptu krāsu pārejas joslas
+
+@ Advanced Settings
+lv Papildu iestatījumi
+
+@ Aim Assist
+lv Tēmēšanas palīgs
+
+@ Aim Rotation
+lv Tēmēšanas pagrieziens
+
+@ Aim Slowdown
+lv Tēmēšanas palēninājums
+
+@ Aim Style
+lv Tēmēšanas stils
+
+@ All
+lv Visi
+
+@ All enemies
+lv Visi ienaidnieki
+
+@ Alt Fire (Add-ons)
+lv Alt. šāviens (papild.)
+
+@ Always Run
+lv Vienmēr skriet
+
+@ Ambient Occlusion
+lv Apkārtnes aizēnojums
+
+@ Ammo Counts
+lv Munīcijas skaitītāji
+
+@ Ammo Counts Position
+lv Munīcijas skaitītāju vieta
+
+@ Ammo Pickups
+lv Munīcijas atradumi
+
+@ Anisotropic
+lv Anizotropā
+
+@ Anti-aliasing
+lv Malu nogludināšana
+
+@ Apply To
+lv Lietot
+
+@ Armor
+lv Bruņas
+
+@ Armor Position
+lv Bruņu vieta
+
+@ Ask
+lv Jautāt
+
+@ Attack
+lv Uzbrukt
+
+@ Audio
+lv Audio
+
+@ Auto-aim
+lv Automātiskā tēmēšana
+
+@ Auto-aim Settings
+lv Autotēmēšanas iestatījumi
+
+@ Autosave
+lv Autosaglabāšana
+
+@ Autosave Settings
+lv Autosaglabāšanas iestatījumi
+
+@ Autosave Timer
+lv Autosaglabāšanas intervāls
+
+@ Autosaves to Keep
+lv Paturēt autosaglabājumus
+
+@ Bass
+lv Basi
+
+@ Blip
+lv Pīkstiens
+
+@ Blood Quality
+lv Asiņu kvalitāte
+
+@ Blood Splatter Settings
+lv Asins šļakatu iestatījumi
+
+@ Blue
+lv Zila
+
+@ Boomerang Settings
+lv Bumeranga iestatījumi
+
+@ Boost or cut high frequencies in decibels
+lv Pastiprina vai vājina augstās frekvences decibelos
+
+@ Boost or cut low frequencies in decibels
+lv Pastiprina vai vājina zemās frekvences decibelos
+
+@ Brightness
+lv Spilgtums
+
+@ Bullet Time (Add-ons)
+lv Bullet Time (papild.)
+
+@ Bullet Time Settings
+lv Bullet Time iestatījumi
+
+@ Button Glyphs
+lv Pogu simboli
+
+@ Button Size
+lv Pogu izmērs
+
+@ Camera
+lv Kamera
+
+@ Caustic Intensity
+lv Kaustikas intensitāte
+
+@ Caustics
+lv Kaustika
+
+@ Center
+lv Centrā
+
+@ Center Message Position
+lv Centra ziņu vieta
+
+@ Center Message Time
+lv Centra ziņu ilgums
+
+@ Center View
+lv Centrēt skatu
+
+@ Change Color on Kill
+lv Mainīt krāsu, nogalinot
+
+@ Change Color on Target
+lv Mainīt krāsu uz mērķa
+
+@ Chime
+lv Zvaniņš
+
+@ Click
+lv Klikšķis
+
+@ Clink
+lv Šķindoņa
+
+@ Coin
+lv Monēta
+
+@ Color
+lv Krāsa
+
+@ Color Filter
+lv Krāsu filtrs
+
+@ Color of the grenade arc
+lv Granātas trajektorijas krāsa
+
+@ Colored Lighting
+lv Krāsains apgaismojums
+
+@ Connect
+lv Pievienoties
+
+@ Contrast
+lv Kontrasts
+
+@ Controls
+lv Vadība
+
+@ Cooldown (ms)
+lv Atjaunošanās (ms)
+
+@ Crosshair Outline
+lv Tēmekļa kontūra
+
+@ Crosshair Shape
+lv Tēmekļa forma
+
+@ Crosshair Size
+lv Tēmekļa izmērs
+
+@ Current Ammo
+lv Pašreizējā munīcija
+
+@ Current Ammo Position
+lv Pašreizējās munīcijas vieta
+
+@ Customize This Game
+lv Pielāgot šo spēli
+
+@ Damage
+lv Bojājumi
+
+@ Damage Taken
+lv Saņemtie bojājumi
+
+@ Debris
+lv Atlūzas
+
+@ Debris Quality
+lv Atlūzu kvalitāte
+
+@ Debris Settings
+lv Atlūzu iestatījumi
+
+@ Directional Damage
+lv Bojājumu virziens
+
+@ Dithering
+lv Ditherings
+
+@ Dodge / Dive (Add-ons)
+lv Izvairīšanās / Lēciens (papild.)
+
+@ Dragging up looks down instead of up
+lv Velkot uz augšu, skatās uz leju
+
+@ Drive
+lv Piesātinājums
+
+@ Dynamic Lights
+lv Dinamiskās gaismas
+
+@ Echo
+lv Atbalss
+
+@ Enemy Health
+lv Ienaidnieku veselība
+
+@ Enemy Wounds
+lv Ienaidnieku brūces
+
+@ Enhanced Blood Splatter
+lv Uzlabotas asins šļakatas
+
+@ Enhanced FX
+lv Uzlaboti efekti
+
+@ Enhanced Models
+lv Uzlaboti modeļi
+
+@ Enhanced Particles
+lv Uzlabotas daļiņas
+
+@ Enhanced Water
+lv Uzlabots ūdens
+
+@ Enhancements
+lv Uzlabojumi
+
+@ Equipment Wheel (Add-ons)
+lv Aprīkojuma ripa (papild.)
+
+@ Exploding boxes throw metal shards
+lv Sprāgstošas kastes izsviež metāla šķembas
+
+@ Explosion Damage
+lv Sprādziena bojājumi
+
+@ Explosion Scorch Marks
+lv Sprādzienu apdeguma pēdas
+
+@ Explosions scorch nearby solid surfaces
+lv Sprādzieni apdedzina tuvējās cietās virsmas
+
+@ Explosives only
+lv Tikai spridzekļi
+
+@ Extra Monsters
+lv Papildu monstri
+
+@ Extra Per 10 Damage (ms)
+lv Papildus par 10 bojājumiem (ms)
+
+@ FX Settings
+lv Efektu iestatījumi
+
+@ Field of View
+lv Redzes lauks
+
+@ Firing never uses up ammo
+lv Šaušana nekad netērē munīciju
+
+@ First person
+lv Pirmā persona
+
+@ Flick Time
+lv Flick laiks
+
+@ Flight Speed
+lv Lidojuma ātrums
+
+@ Fog
+lv Migla
+
+@ Frag Limit
+lv Frag limits
+
+@ Freeze Duration (ms)
+lv Sasalšanas ilgums (ms)
+
+@ GLQuake
+lv GLQuake
+
+@ Game Speed
+lv Spēles ātrums
+
+@ Game Type
+lv Spēles veids
+
+@ Gameplay
+lv Spēle
+
+@ Gameplay Modifiers
+lv Spēles modifikatori
+
+@ Gel Quality
+lv Gela kvalitāte
+
+@ Gib Surface Painting
+lv Miesas gabalu traipi
+
+@ Gibs
+lv Miesas gabali
+
+@ Gibs and heads tumble and bounce
+lv Miesas gabali un galvas veļas un atlec
+
+@ Goggle Glow Quality
+lv Briļļu spīduma kvalitāte
+
+@ Goggle Intensity
+lv Briļļu intensitāte
+
+@ Goggle Noise
+lv Briļļu troksnis
+
+@ Goggles Settings
+lv Briļļu iestatījumi
+
+@ Graphics
+lv Grafika
+
+@ Green
+lv Zaļa
+
+@ Grenade Arc
+lv Granātas trajektorija
+
+@ Grenade Arc Settings
+lv Granātas trajektorijas iestatījumi
+
+@ Gun Kick
+lv Ieroča atsitiens
+
+@ Gyro
+lv Žiro
+
+@ Gyro & Flick Stick
+lv Žiro & Flick Stick
+
+@ Gyro Active
+lv Žiro aktīvs
+
+@ Gyro Aiming
+lv Žiro tēmēšana
+
+@ HUD
+lv HUD
+
+@ HUD Style
+lv HUD stils
+
+@ Health
+lv Veselība
+
+@ Health Pickups
+lv Veselības atradumi
+
+@ Health Position
+lv Veselības vieta
+
+@ Health Regeneration
+lv Veselības atjaunošanās
+
+@ Hit & Kill Sounds
+lv Trāpījuma & nāves skaņas
+
+@ Hit Doors & Lifts
+lv Trāpīt durvīm & liftiem
+
+@ Hit Markers
+lv Trāpījumu marķieri
+
+@ Hit Sound
+lv Trāpījuma skaņa
+
+@ Hitmarker Size
+lv Trāpījuma marķiera izmērs
+
+@ Hitmarker Type
+lv Trāpījuma marķiera veids
+
+@ Hitstop Advanced
+lv Trāpījuma pauze: papildu
+
+@ Hitstop Settings
+lv Trāpījuma pauzes iestatījumi
+
+@ Hold
+lv Turēt
+
+@ Hold lock-on
+lv Turēt mērķa fiksāciju
+
+@ Hook Enemies
+lv Āķēt ienaidniekus
+
+@ Hook Metal
+lv Āķēt metālu
+
+@ Hook Stone
+lv Āķēt akmeni
+
+@ Hook Wood
+lv Āķēt koku
+
+@ Hooking an enemy pulls you to it
+lv Aizāķēts ienaidnieks pievelk tevi pie sevis
+
+@ Hookshot Range
+lv Kāša darbības rādiuss
+
+@ Hookshot Settings
+lv Kāša iestatījumi
+
+@ Host Game
+lv Rīkot spēli
+
+@ How far the hook flies before it retracts
+lv Cik tālu kāsis lido, pirms atgriežas
+
+@ How visible the on-screen controls are
+lv Cik redzama ir ekrāna vadība
+
+@ Impact Lifetime
+lv Trieciena pēdu ilgums
+
+@ Infinite Ammo
+lv Bezgalīga munīcija
+
+@ Input
+lv Ievade
+
+@ Input Scale
+lv Ievades mērogs
+
+@ Interpolate Animation
+lv Interpolēt animāciju
+
+@ Interpolate Movement
+lv Interpolēt kustību
+
+@ Invert Look
+lv Invertēt skatu
+
+@ Invert Mouse
+lv Invertēt peli
+
+@ Invert Stick
+lv Invertēt sviru
+
+@ Jet Quality
+lv Strūklas kvalitāte
+
+@ Join Game
+lv Pievienoties spēlei
+
+@ Jump / Swim Up
+lv Lēkt / Peldēt augšup
+
+@ Jump again in mid-air
+lv Lēkt vēlreiz gaisā
+
+@ Jumps
+lv Lēcieni
+
+@ Keys & Powerups
+lv Atslēgas & spēkpapildinājumi
+
+@ Keys & Powerups Position
+lv Atslēgu & spēkpapild. vieta
+
+@ Kill Bonus (x)
+lv Nogalināšanas bonuss (x)
+
+@ Kill Sound
+lv Nogalināšanas skaņa
+
+@ Knock
+lv Klauvējiens
+
+@ Left
+lv Pa kreisi
+
+@ Length of the motion blur streaks
+lv Kustības izplūduma svītru garums
+
+@ Lifetime (seconds)
+lv Ilgums (sekundes)
+
+@ Live Portal Views
+lv Tiešie portālu skati
+
+@ Live View Distance
+lv Tiešā skata attālums
+
+@ Local Players
+lv Lokālie spēlētāji
+
+@ Local red wounds follow enemy animation
+lv Sarkanas brūces seko ienaidnieka animācijai
+
+@ Lock Indicator
+lv Fiksācijas indikators
+
+@ Long falls don't hurt
+lv Gari kritieni nekaitē
+
+@ Longest Freeze (ms)
+lv Ilgākā sasalšana (ms)
+
+@ Look Down
+lv Skatīties lejup
+
+@ Look Speed
+lv Skatīšanās ātrums
+
+@ Look Up
+lv Skatīties augšup
+
+@ Main Menu Music
+lv Galvenās izvēlnes mūzika
+
+@ Max FPS
+lv Maks. FPS
+
+@ Max Players
+lv Maks. spēlētāju
+
+@ Maximum Impacts
+lv Maks. trieciena pēdas
+
+@ Maximum Marks
+lv Maks. pēdas
+
+@ Maximum Range
+lv Maksimālais attālums
+
+@ Melee only
+lv Tikai tuvcīņa
+
+@ Message Background
+lv Ziņu fons
+
+@ Message Text Size
+lv Ziņu teksta izmērs
+
+@ Messages & Captions
+lv Ziņas & subtitri
+
+@ Meter Duration (real seconds)
+lv Joslas ilgums (reālas sekundes)
+
+@ Minimum Damage
+lv Minimālie bojājumi
+
+@ Mode
+lv Režīms
+
+@ Modern Console
+lv Modernā konsole
+
+@ Modern HUD Layout
+lv Moderns HUD izkārtojums
+
+@ Most recent save
+lv Jaunākais saglabājums
+
+@ Motion Blur
+lv Kustības izplūdums
+
+@ Motion Blur Amount
+lv Kustības izplūduma stiprums
+
+@ Motion Blur Quality
+lv Kustības izplūduma kvalitāte
+
+@ Mouse & Keyboard
+lv Pele & tastatūra
+
+@ Mouse Speed
+lv Peles ātrums
+
+@ Move Back
+lv Iet atpakaļ
+
+@ Move Forward
+lv Iet uz priekšu
+
+@ Music Volume
+lv Mūzikas skaļums
+
+@ Next Weapon
+lv Nākamais ierocis
+
+@ No Drowning
+lv Bez noslīkšanas
+
+@ No Fall Damage
+lv Bez kritiena bojājumiem
+
+@ No Manual Saves
+lv Bez manuālas saglabāšanas
+
+@ No Self Damage
+lv Bez paša bojājumiem
+
+@ Noise Filter
+lv Trokšņu filtrs
+
+@ Normal Color
+lv Parastā krāsa
+
+@ Notify Message Position
+lv Paziņojumu vieta
+
+@ Notify Message Time
+lv Paziņojumu ilgums
+
+@ Number of splatter rays per blood impact
+lv Šļakatu staru skaits uz katru asins triecienu
+
+@ Off
+lv Izslēgts
+
+@ On Death
+lv Pēc nāves
+
+@ On Kill Color
+lv Krāsa, nogalinot
+
+@ On Target Color
+lv Krāsa uz mērķa
+
+@ Opacity
+lv Necaurredzamība
+
+@ Opacity of the grenade arc
+lv Granātas trajektorijas necaurredzamība
+
+@ Pants Color
+lv Bikšu krāsa
+
+@ Particle Quality
+lv Daļiņu kvalitāte
+
+@ Particles
+lv Daļiņas
+
+@ Physical Nail Impacts
+lv Fizikāli naglu triecieni
+
+@ Pistol Start
+lv Starts ar pistoli
+
+@ Pitch
+lv Tonis
+
+@ Pitch Sensitivity
+lv Vertikālā jutība
+
+@ Playback Speed
+lv Atskaņošanas ātrums
+
+@ Player Setup
+lv Spēlētāja iestatīšana
+
+@ Pop
+lv Paukš
+
+@ Portal Gun Settings
+lv Portālu ieroča iestatījumi
+
+@ Portal Recursion
+lv Portālu rekursija
+
+@ Portal View Quality
+lv Portālu skata kvalitāte
+
+@ Preview Sound
+lv Noklausīties skaņu
+
+@ Previous Weapon
+lv Iepriekšējais ierocis
+
+@ Projectile Shotguns Settings
+lv Šāviņu bisu iestatījumi
+
+@ Projectile Speed (units/s)
+lv Šāviņa ātrums (vienības/s)
+
+@ Purple
+lv Violeta
+
+@ Push
+lv Grūdiens
+
+@ Push Strength
+lv Grūdiena stiprums
+
+@ Quick Load
+lv Ātrā ielāde
+
+@ Quick Save
+lv Ātrā saglabāšana
+
+@ Railgun Settings
+lv Railgun iestatījumi
+
+@ Ranged only
+lv Tikai tālcīņa
+
+@ Reacquire While Held
+lv Atkārtoti uztvert, turot
+
+@ Red
+lv Sarkana
+
+@ Reduce Motion
+lv Samazināt kustību
+
+@ Regen (seconds per second)
+lv Atjaunošanās (sekundes sekundē)
+
+@ Render Scale
+lv Renderēšanas mērogs
+
+@ Reverb
+lv Reverberācija
+
+@ Right
+lv Pa labi
+
+@ Ripple Intensity
+lv Viļņu intensitāte
+
+@ Ripples
+lv Viļņi
+
+@ Roll Sensitivity
+lv Sānsveres jutība
+
+@ Rumble
+lv Vibrācija
+
+@ Run
+lv Skriet
+
+@ Save on All Enemies Killed
+lv Saglabāt, kad visi ienaidnieki nogalināti
+
+@ Save on All Secrets Found
+lv Saglabāt, kad visi noslēpumi atrasti
+
+@ Save on Level Entry
+lv Saglabāt, ieejot līmenī
+
+@ Save on Secret Found
+lv Saglabāt, atrodot noslēpumu
+
+@ Scoreboard
+lv Rezultātu tabula
+
+@ Screen Flashes
+lv Ekrāna uzliesmojumi
+
+@ Screen Shader
+lv Ekrāna šeideris
+
+@ Screen Shake
+lv Ekrāna drebēšana
+
+@ Search LAN
+lv Meklēt LAN
+
+@ Seconds a center-screen message stays up
+lv Cik sekundes ziņa ekrāna centrā paliek redzama
+
+@ See Through Portals
+lv Redzēt cauri portāliem
+
+@ See-through Teleporters
+lv Caurredzami teleporti
+
+@ Shirt Color
+lv Krekla krāsa
+
+@ Shotgun Bullet Decals
+lv Bises ložu pēdas
+
+@ Shoulder left
+lv Pār kreiso plecu
+
+@ Shoulder right
+lv Pār labo plecu
+
+@ Show FPS
+lv Rādīt FPS
+
+@ Show Face
+lv Rādīt seju
+
+@ Shrapnel
+lv Šķembas
+
+@ Size of on-screen messages and captions
+lv Ekrāna ziņu un subtitru izmērs
+
+@ Skill
+lv Grūtība
+
+@ Sky Fog
+lv Debesu migla
+
+@ Smooths the stepped movement of monsters
+lv Nogludina monstru raustīgo kustību
+
+@ Sound
+lv Skaņa
+
+@ Sound Captions
+lv Skaņu subtitri
+
+@ Sound Volume
+lv Skaņu skaļums
+
+@ Speed Blur
+lv Ātruma izplūdums
+
+@ Splashes
+lv Šļakatas
+
+@ Splatter Amount
+lv Šļakatu daudzums
+
+@ Splatter Size
+lv Šļakatu izmērs
+
+@ Start Game
+lv Sākt spēli
+
+@ Staying underwater doesn't hurt
+lv Palikšana zem ūdens nekaitē
+
+@ Stick Look Pitch
+lv Sviras skats vertikāli
+
+@ Stick Look Yaw
+lv Sviras skats horizontāli
+
+@ Strafe Left
+lv Sānsolis pa kreisi
+
+@ Strafe Right
+lv Sānsolis pa labi
+
+@ Strength of the surface swell and rings
+lv Virsmas viļņošanās un apļu stiprums
+
+@ Stun Duration
+lv Apdullināšanas ilgums
+
+@ Style
+lv Stils
+
+@ Supersampling
+lv Supersampling
+
+@ Surface Hit Effects
+lv Trāpījumu efekti virsmās
+
+@ Swim Down
+lv Peldēt lejup
+
+@ Targets
+lv Mērķi
+
+@ Teamplay
+lv Komandu spēle
+
+@ Texture Filter
+lv Tekstūru filtrs
+
+@ Third person
+lv Trešā persona
+
+@ Thud
+lv Būkšķis
+
+@ Tick
+lv Tikšķis
+
+@ Time Limit
+lv Laika limits
+
+@ Time Stretch
+lv Laika stiepšana
+
+@ Toggle Attack
+lv Pārslēgt uzbrukumu
+
+@ Toggle Run
+lv Pārslēgt skriešanu
+
+@ Toggle auto-aim
+lv Pārslēgt autotēmēšanu
+
+@ Touch Controls
+lv Skārienvadība
+
+@ Touchscreen
+lv Skārienekrāns
+
+@ Tough Enemy Health
+lv Izturīga ienaidnieka veselība
+
+@ Tough enemies only
+lv Tikai izturīgi ienaidnieki
+
+@ Trail Colour
+lv Sliedes krāsa
+
+@ Translate Console
+lv Tulkot konsoli
+
+@ Translucent Water
+lv Caurspīdīgs ūdens
+
+@ Treble
+lv Augstie toņi
+
+@ Turn Left
+lv Pagriezties pa kreisi
+
+@ Turn Right
+lv Pagriezties pa labi
+
+@ Underwater FX
+lv Zemūdens efekti
+
+@ Use Bullet Time Meter
+lv Lietot Bullet Time joslu
+
+@ VSync
+lv VSync
+
+@ View Bob
+lv Skata šūpošanās
+
+@ Viewmodels
+lv Ieroču modeļi
+
+@ Volume
+lv Skaļums
+
+@ Water Opacity
+lv Ūdens necaurredzamība
+
+@ Water Quality
+lv Ūdens kvalitāte
+
+@ Water Settings
+lv Ūdens iestatījumi
+
+@ Weapon Wheel
+lv Ieroču ripa
+
+@ Weapon Wheel Slowdown
+lv Ieroču ripas palēninājums
+
+@ Weapons
+lv Ieroči
+
+@ Weapons Position
+lv Ieroču vieta
+
+@ Where center-screen messages appear
+lv Kur parādās ziņas ekrāna centrā
+
+@ Where pickup and event messages appear
+lv Kur parādās atradumu un notikumu ziņas
+
+@ White
+lv Balta
+
+@ Yaw Sensitivity
+lv Horizontālā jutība
+
+@ Yellow
+lv Dzeltena
+
+# lowercase choice values
+@ T
+lv T
+
+@ always
+lv vienmēr
+
+@ auto
+lv auto
+
+@ banded
+lv joslains
+
+@ borderless
+lv bez rāmja
+
+@ bottom center
+lv apakšā centrā
+
+@ bottom left
+lv apakšā pa kreisi
+
+@ bottom right
+lv apakšā pa labi
+
+@ box
+lv kaste
+
+@ broken square
+lv lauzts kvadrāts
+
+@ classic
+lv klasisks
+
+@ coarse
+lv rupjš
+
+@ cooperative
+lv kooperatīvs
+
+@ cross
+lv krusts
+
+@ cross + dot
+lv krusts + punkts
+
+@ cyan
+lv ciāns
+
+@ dashed
+lv svītrots
+
+@ deathmatch
+lv deathmatch
+
+@ deuteranopia
+lv deiteranopija
+
+@ diagonal streaks
+lv slīpas svītras
+
+@ diamond
+lv rombs
+
+@ dot
+lv punkts
+
+@ double
+lv dubults
+
+@ double chevrons
+lv dubulti leņķi
+
+@ double diagonals
+lv dubultas diagonāles
+
+@ easy
+lv viegls
+
+@ fine
+lv smalks
+
+@ fit output
+lv pēc izvades
+
+@ flick stick
+lv flick stick
+
+@ fullscreen
+lv pilnekrāns
+
+@ gap cross
+lv krusts ar atstarpi
+
+@ green
+lv zaļš
+
+@ grey
+lv pelēks
+
+@ half speed
+lv puse ātruma
+
+@ hard
+lv grūts
+
+@ high
+lv augsts
+
+@ huge
+lv milzīgs
+
+@ immersive
+lv iekļaujošs
+
+@ intense
+lv intensīvs
+
+@ large
+lv liels
+
+@ larger
+lv lielāks
+
+@ largest
+lv vislielākais
+
+@ linear
+lv lineārs
+
+@ low
+lv zems
+
+@ lower
+lv apakšā
+
+@ magenta
+lv fuksīns
+
+@ medium
+lv vidējs
+
+@ middle
+lv vidū
+
+@ middle left
+lv vidū pa kreisi
+
+@ middle right
+lv vidū pa labi
+
+@ modern
+lv moderns
+
+@ nearest
+lv tuvākais
+
+@ nightmare
+lv murgs
+
+@ nintendo
+lv nintendo
+
+@ no team damage
+lv bez komandas bojājumiem
+
+@ none
+lv nav
+
+@ normal
+lv normāls
+
+@ off
+lv izslēgts
+
+@ off while held
+lv izslēgts, turot
+
+@ on
+lv ieslēgts
+
+@ only while held
+lv tikai turot
+
+@ playstation
+lv playstation
+
+@ protanopia
+lv protanopija
+
+@ quarter speed
+lv ceturtdaļātrums
+
+@ red
+lv sarkans
+
+@ short diagonals
+lv īsas diagonāles
+
+@ single
+lv viens
+
+@ small
+lv mazs
+
+@ solid
+lv nepārtraukts
+
+@ spectacle
+lv iespaidīgs
+
+@ subtle
+lv maigs
+
+@ team damage
+lv komandas bojājumi
+
+@ top center
+lv augšā centrā
+
+@ top left
+lv augšā pa kreisi
+
+@ top right
+lv augšā pa labi
+
+@ triple
+lv trīskāršs
+
+@ tritanopia
+lv tritanopija
+
+@ upper
+lv augšā
+
+@ white
+lv balts
+
+@ whole screen
+lv viss ekrāns
+
+@ windowed
+lv logā
+
+@ xbox
+lv xbox
+
+@ yellow
+lv dzeltens
+
+# ==== tooltips.txt ====
+
+# Options help lines (tooltips) and reasons for disabled rows.
+@ 2D aiming turns the view continuously with the right stick; flick stick snaps the view to where you push the stick, then turning the stick rotates it
+lv 2D tēmēšana nepārtraukti griež skatu ar labo sviru; flick stick uzreiz pavērš skatu sviras virzienā, un tālāk sviras griešana to pagriež
+
+@ 3D resolution relative to the window; the UI stays sharp
+lv 3D izšķirtspēja attiecībā pret logu; saskarne paliek asa
+
+@ 3D view keeps the HUD and menus sharp; whole screen runs them through the shader too
+lv 3D skats atstāj HUD un izvēlnes asas; viss ekrāns arī tās laiž caur šeideri
+
+@ A Quake III style railgun: a slug that pierces every enemy on its line, using 2 cells a shot and refiring every 1.5 s; select it through its assigned weapon slot (Add-ons)
+lv Quake III stila railgun: lode caurdur katru ienaidnieku uz savas līnijas, tērē 2 elementus šāvienā un šauj ik pēc 1,5 s; izvēlies to ar piešķirto ieroča slotu (Papildinājumi)
+
+@ A Zelda-style hookshot: fire sends a chain hook out; it latches onto hookable surfaces or enemies and reels you in; fire again to let go
+lv Zelda stila kāsis: šāviens izsviež ķēdes āķi; tas aizķeras aiz piemērotām virsmām vai ienaidniekiem un pievelk tevi; šauj vēlreiz, lai atlaistu
+
+@ Also translates the engine's console messages; off keeps them in English
+lv Tulko arī dzinēja konsoles ziņas; izslēgts atstāj tās angliski
+
+@ Automatically acquire another enemy while holding Lock-on after losing a target
+lv Pēc mērķa zaudēšanas automātiski uztver citu ienaidnieku, kamēr tiek turēta mērķa fiksācija
+
+@ Blends between animation frames of monsters and weapons
+lv Saplūdina monstru un ieroču animācijas kadrus
+
+@ Blood stains surfaces and bodies; cosmetic, independent of particle packs
+lv Asinis notraipa virsmas un ķermeņus; tikai kosmētiski, neatkarīgi no daļiņu pakām
+
+@ Bloom glow around bright lights and heat sources; medium uses 4 taps, high uses 8, low disables halo taps
+lv Bloom spīdums ap spilgtām gaismām un siltuma avotiem; vidējs izmanto 4 paraugus, augsts 8, zems izslēdz oreolu
+
+@ Blurs fast-moving monsters, projectiles and doors (not camera turns)
+lv Izpludina ātri kustīgus monstrus, šāviņus un durvis (ne kameras pagriezienus)
+
+@ Blurs the screen edges during fast falls and launches; keeps the centre clear. Reduce Motion disables it
+lv Ātros kritienos un izsviedienos izpludina ekrāna malas; centrs paliek skaidrs. Samazināt kustību to izslēdz
+
+@ Brightness of the underwater light patterns
+lv Zemūdens gaismas rakstu spilgtums
+
+@ Caps mark count, lifetime, airborne droplets and wound/gib painting; low skips enemy wounds and gib trails
+lv Ierobežo pēdu skaitu, ilgumu, pilienus gaisā un brūču/miesas gabalu traipus; zems izlaiž ienaidnieku brūces un miesas gabalu sliedes
+
+@ Caps shader input at output size so 200% render scale keeps 3D sharpness without 4x shader cost; low scales stay low-res
+lv Ierobežo šeidera ievadi līdz izvades izmēram, lai 200% renderēšanas mērogs saglabā 3D asumu bez 4× šeidera izmaksām; mazi mērogi paliek zemā izšķirtspējā
+
+@ Classic: the original status bar; modern: compact elements at the screen edges
+lv Klasisks: oriģinālā statusa josla; moderns: kompakti elementi ekrāna malās
+
+@ Coat atlas resolution, rebuild rate and shader detail: low builds smaller coats less often with fast shading; high uses full detail
+lv Pārklājumu atlanta izšķirtspēja, pārbūves biežums un šeidera detaļas: zems būvē mazākus pārklājumus retāk ar ātru ēnošanu; augsts izmanto pilnas detaļas
+
+@ Colour of the railgun's spiral trail; split-screen players each get the next colour along
+lv Railgun spirālveida sliedes krāsa; dalītā ekrānā katrs spēlētājs saņem nākamo krāsu
+
+@ Damage the railgun deals to each enemy it passes through (Quake III: 100)
+lv Bojājumi, ko railgun nodara katram caurdurtajam ienaidniekam (Quake III: 100)
+
+@ Dark backdrop behind on-screen messages for readability
+lv Tumšs fons aiz ekrāna ziņām labākai lasāmībai
+
+@ Dark border keeps the crosshair visible on any background
+lv Tumša mala padara tēmekli redzamu uz jebkura fona
+
+@ Darkens corners and contact areas where geometry meets; higher quality is sharper
+lv Aptumšo stūrus un saskares vietas, kur satiekas ģeometrija; augstāka kvalitāte ir asāka
+
+@ Debris lands on and is carried or shoved by doors, lifts and platforms
+lv Atlūzas nokrīt uz durvīm, liftiem un platformām, un tās tiek nestas vai stumtas
+
+@ Detail for caustics, ripples and splashes: low uses smaller budgets and shorter view distance; high uses larger budgets and farther view distance
+lv Kaustikas, viļņu un šļakatu detaļas: zems izmanto mazākus budžetus un īsāku redzamības attālumu; augsts lielākus budžetus un tālāku redzamību
+
+@ Disabled while Enhanced Particles is on: its particles replace the GLQuake and Classic styles
+lv Atspējots, kamēr ieslēgtas Uzlabotas daļiņas: to daļiņas aizstāj GLQuake un klasisko stilu
+
+@ Disabled while Enhanced Water is on: its own underwater effects replace the classic and GLQuake view warps
+lv Atspējots, kamēr ieslēgts Uzlabots ūdens: tā zemūdens efekti aizstāj klasisko un GLQuake skata kropļojumu
+
+@ Draw the predicted grenade path as a solid or dashed line
+lv Zīmē paredzēto granātas trajektoriju kā nepārtrauktu vai svītrotu līniju
+
+@ Draw the view out of the linked portal inside each portal; off shows flat discs (fastest)
+lv Katrā portālā rāda skatu no savienotā portāla; izslēgts rāda plakanus diskus (visātrāk)
+
+@ Droplets spray up when things enter or leave water, slime or lava
+lv Pilieni šļakstās, kad kaut kas iekļūst ūdenī, gļotās vai lavā vai iznāk no tiem
+
+@ Emulates the original 8-bit palette of software rendering
+lv Atdarina programmatūras renderēšanas oriģinālo 8 bitu paleti
+
+@ Every level starts with only the shotgun and axe, as if started fresh
+lv Katrs līmenis sākas tikai ar bisi un cirvi, it kā spēle sāktos no jauna
+
+@ Explosion damage for each remotely detonated sticky bomb
+lv Sprādziena bojājumi katrai attālināti uzspridzinātai lipīgajai bumbai
+
+@ Extra freeze milliseconds for every 10 damage dealt, so heavy hits stop longer
+lv Papildu sasalšanas milisekundes par katriem 10 nodarītajiem bojājumiem, lai smagi trāpījumi apstādina ilgāk
+
+@ First person, a third-person camera centered behind the player, or one over the right or left shoulder; third person hides viewmodels
+lv Pirmā persona, trešās personas kamera aiz spēlētāja vai kamera pār labo vai kreiso plecu; trešā persona paslēpj ieroču modeļus
+
+@ Flash the selected marker on confirmed hits; colors are shared with the crosshair
+lv Apstiprinātos trāpījumos uzzibsnī izvēlētais marķieris; krāsas ir kopīgas ar tēmekli
+
+@ Freeze for every enemy, or only for enemies that were tough before the hit
+lv Sasaldēt pie katra ienaidnieka vai tikai pie ienaidniekiem, kas pirms trāpījuma bija izturīgi
+
+@ Freeze the game briefly when you damage an enemy; single player with add-ons only
+lv Uz īsu brīdi sasaldē spēli, kad ievaino ienaidnieku; tikai viena spēlētāja spēlē ar papildinājumiem
+
+@ Gibs tumble and barrels throw shrapnel; shots and blasts push them (cosmetic only)
+lv Miesas gabali veļas, un mucas izsviež šķembas; šāvieni un sprādzieni tos pagrūž (tikai kosmētiski)
+
+@ Health an enemy must have had before the hit to count as tough
+lv Veselība, kāda ienaidniekam bija jābūt pirms trāpījuma, lai to uzskatītu par izturīgu
+
+@ Hits dealing less damage than this do not freeze the game; the default 10 skips nails and shotgun pellets
+lv Trāpījumi ar mazākiem bojājumiem spēli nesasaldē; noklusējuma 10 izlaiž naglas un bises skrotis
+
+@ Hold fire and sweep the crosshair over monsters to queue them, release to throw: it stuns each in turn and flies back; alt-fire clears the queue
+lv Turi šāvienu un velc tēmekli pāri monstriem, lai tos atzīmētu, atlaid, lai mestu: tas pēc kārtas apdullina katru un lido atpakaļ; alt. šāviens notīra sarakstu
+
+@ Hold: keep Lock-on held. Toggle: press Auto-aim Toggle to enable automatic acquisition. Click look stick to switch targets
+lv Turēt: turi mērķa fiksāciju nospiestu. Pārslēgt: nospied Autotēmēšanas pārslēgšanu, lai ieslēgtu automātisku uztveršanu. Noklikšķini skata sviru, lai mainītu mērķi
+
+@ How close an enemy must be to the crosshair for automatic acquisition in toggle mode (degrees)
+lv Cik tuvu tēmeklim jābūt ienaidniekam, lai pārslēgšanas režīmā to automātiski uztvertu (grādi)
+
+@ How far the view tilts up and down when you tilt the controller (pitch axis)
+lv Cik tālu skats noliecas augšup un lejup, kad noliec kontrolieri (vertikālā ass)
+
+@ How far the view turns left and right when you turn the controller (yaw axis)
+lv Cik tālu skats pagriežas pa kreisi un pa labi, kad pagriez kontrolieri (horizontālā ass)
+
+@ How far the view turns when you drag on the right half of the screen
+lv Cik tālu skats pagriežas, velkot pa ekrāna labo pusi
+
+@ How fast the boomerang flies (units per second)
+lv Cik ātri lido bumerangs (vienības sekundē)
+
+@ How hard shots and explosions push debris around
+lv Cik stipri šāvieni un sprādzieni izmētā atlūzas
+
+@ How hard the Powerwasher's water pushes enemies
+lv Cik stipri augstspiediena mazgātāja ūdens atgrūž ienaidniekus
+
+@ How long a hit freezes the game, in milliseconds
+lv Cik ilgi trāpījums sasaldē spēli, milisekundēs
+
+@ How strongly fog covers the sky when fog is on
+lv Cik stipri migla pārklāj debesis, kad migla ir ieslēgta
+
+@ How the view distorts underwater: Classic ripples the whole screen like software Quake, GLQuake slowly stretches and squashes the view
+lv Kā skats kropļojas zem ūdens: klasisks viļņo visu ekrānu kā programmatūras Quake, GLQuake lēni stiepj un saspiež skatu
+
+@ Ignores gyro rotation slower than this many degrees per second, to hide hand tremor
+lv Ignorē žiroskopa pagriezienus, kas lēnāki par tik grādiem sekundē, lai slēptu roku trīcēšanu
+
+@ Immersive: appears for a few seconds only when its value changes
+lv Iekļaujošs: parādās uz dažām sekundēm tikai tad, kad mainās tā vērtība
+
+@ Keeps textures sharp on floors and walls seen at steep angles
+lv Saglabā tekstūras asas uz grīdām un sienām, kas redzamas slīpā leņķī
+
+@ Lights from rockets, muzzle flashes and explosions brighten nearby walls
+lv Raķešu, šāvienu uzliesmojumu un sprādzienu gaisma izgaismo tuvējās sienas
+
+@ Liquid surfaces swell and ring out where things move through them
+lv Šķidrumu virsmas viļņojas un veido apļus, kur kaut kas tām iet cauri
+
+@ Lobs sticky bombs (rockets ammo) that cling to walls, doors and monsters; alt-fire detonates them all
+lv Met lipīgās bumbas (raķešu munīcija), kas pielīp sienām, durvīm un monstriem; alt. šāviens tās visas uzspridzina
+
+@ Look of the classic particles: GLQuake draws soft round dots, Classic draws square pixels like software Quake
+lv Klasisko daļiņu izskats: GLQuake zīmē mīkstus apaļus punktus, klasisks zīmē kvadrātiskus pikseļus kā programmatūras Quake
+
+@ Low skips the background smear halo and uses fewer blur samples; high keeps the full halo and smoother streaks
+lv Zems izlaiž fona izsmērējuma oreolu un izmanto mazāk izpludināšanas paraugu; augsts saglabā pilnu oreolu un gludākas svītras
+
+@ Low: hard particle edges, half the scripted particles and fewer hit sparks. Medium: soft edges. High: soft edges checked per MSAA sample, most hit sparks
+lv Zems: asas daļiņu malas, puse skriptoto daļiņu un mazāk trāpījumu dzirksteļu. Vidējs: mīkstas malas. Augsts: mīkstas malas katram MSAA paraugam, gandrīz visas dzirksteles
+
+@ Marks fade out before expiring; oldest marks are recycled at the limit
+lv Pēdas izgaist pirms izzušanas; sasniedzot limitu, vecākās pēdas tiek izmantotas atkārtoti
+
+@ Max nested portal reflections to draw; each level redraws the scene
+lv Maks. zīmējamo ligzdoto portālu skatu skaits; katrs līmenis zīmē ainu no jauna
+
+@ Max portals per screen with a live view; each one redraws the scene
+lv Maks. portālu skaits ekrānā ar tiešo skatu; katrs zīmē ainu no jauna
+
+@ Maximum distance for acquiring and keeping an enemy locked
+lv Maksimālais attālums ienaidnieka uztveršanai un fiksācijas noturēšanai
+
+@ Minimum gap between freezes, so shotgun pellets and rapid fire count once; kills ignore it
+lv Minimālā pauze starp sasalšanām, lai skrotis un ātra šaušana skaitās vienreiz; nogalināšanas to ignorē
+
+@ Modern terminal console with autocomplete popup, history search, ANSI colors, bash shell and piping; off uses the classic Quake console
+lv Moderna termināļa konsole ar automātiskās pabeigšanas uznirstošo logu, vēstures meklēšanu, ANSI krāsām, bash čaulu un konveijeriem; izslēgts izmanto klasisko Quake konsoli
+
+@ Monsters take proportionally less damage at higher values; above 100% is harder
+lv Monstri saņem proporcionāli mazāk bojājumu pie lielākām vērtībām; virs 100% ir grūtāk
+
+@ Moving gibs leave blood on surfaces they touch
+lv Kustīgi miesas gabali atstāj asinis uz virsmām, kurām pieskaras
+
+@ Multiplier on the freeze when the hit kills the enemy; 1 means no extra
+lv Sasalšanas reizinātājs, kad trāpījums nogalina ienaidnieku; 1 nozīmē bez papildu
+
+@ Multiplies ammo from pickups (up to the normal carry limit); below 100% is harder
+lv Reizina munīciju no atradumiem (līdz parastajam nēsāšanas limitam); zem 100% ir grūtāk
+
+@ Multiplies health from pickups (up to 100, or the item's own limit); below 100% is harder
+lv Reizina veselību no atradumiem (līdz 100 vai priekšmeta limitam); zem 100% ir grūtāk
+
+@ Nails stick to wood and bodies; hard surfaces deflect them to the floor
+lv Naglas iestrēgst kokā un ķermeņos; cietas virsmas tās novirza uz grīdu
+
+@ Nearest keeps crisp classic pixels; linear smooths textures
+lv Tuvākais saglabā skaidrus klasiskos pikseļus; lineārs nogludina tekstūras
+
+@ New Game: Add-ons
+lv Jauna spēle: papildinājumi
+
+@ New Game: Customize
+lv Jauna spēle: pielāgot
+
+@ Night vision: how much dark areas are brightened; thermal: how strongly heat stands out
+lv Nakts redzamība: cik stipri tiek izgaismotas tumšās vietas; termoredze: cik skaidri izceļas siltums
+
+@ Night-vision and thermal goggles, cycle normal, night vision and thermal with Change Goggles (Add-ons), or use the Equipment Wheel
+lv Nakts redzamības un termoredzes brilles: pārslēdz parasto, nakts redzamību un termoredzi ar Mainīt brilles (Papildinājumi) vai izmanto aprīkojuma ripu
+
+@ No single freeze lasts longer than this, however much damage or kill bonus adds
+lv Neviena sasalšana nav ilgāka par šo, lai cik daudz pievienotu bojājumi vai nogalināšanas bonuss
+
+@ Oldest marks and nails are recycled at this shared limit
+lv Vecākās pēdas un naglas tiek izmantotas atkārtoti pie šī kopīgā limita
+
+@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
+lv Ekrāna svira un pogas: auto tās parāda pēc pieskāriena un paslēpj, kad tiek izmantota cita ierīce
+
+@ Only autosaves: quicksaves and the Save menu are off
+lv Tikai autosaglabāšana: ātrā saglabāšana un saglabāšanas izvēlne ir izslēgtas
+
+@ Place every weapon at the center, right or left of the view, or hide all viewmodels
+lv Novieto katru ieroci skata centrā, pa labi vai pa kreisi, vai paslēp visus ieroču modeļus
+
+@ Play your chosen hit or kill cue when you damage an enemy
+lv Atskaņo izvēlēto trāpījuma vai nogalināšanas signālu, kad ievaino ienaidnieku
+
+@ Playback speed: faster sounds shorter and higher
+lv Atskaņošanas ātrums: ātrāk skan īsāk un augstāk
+
+@ Plays the Quake theme in the main menu when no game is running
+lv Galvenajā izvēlnē atskaņo Quake tēmu, kad neviena spēle nenotiek
+
+@ Portals farther away than this are drawn as flat discs
+lv Portāli, kas atrodas tālāk par šo, tiek zīmēti kā plakani diski
+
+@ Press attack once to keep firing, again to stop
+lv Nospied uzbrukumu vienreiz, lai šautu nepārtraukti, vēlreiz, lai beigtu
+
+@ Press run once to switch between running and walking
+lv Nospied skriešanu vienreiz, lai pārslēgtos starp skriešanu un iešanu
+
+@ Raise or lower the tone independently of sound length
+lv Paaugstina vai pazemina toni neatkarīgi no skaņas garuma
+
+@ Red screen edges show where damage came from: top is front, bottom is behind; Screen Flashes controls their strength
+lv Sarkanas ekrāna malas rāda, no kurienes nāca bojājumi: augša ir priekša, apakša ir aizmugure; Ekrāna uzliesmojumi nosaka to stiprumu
+
+@ Replaces the classic dot particles with glowing sparks, smoke and blood; mods with their own particle effects keep them
+lv Aizstāj klasiskās punktu daļiņas ar spīdošām dzirkstelēm, dūmiem un asinīm; modi ar saviem daļiņu efektiem tos patur
+
+@ Resolution and detail inside portal and teleporter views; lower tiers trim nested effects
+lv Izšķirtspēja un detaļas portālu un teleportu skatos; zemāki līmeņi samazina ligzdotos efektus
+
+@ Rippling light patterns on surfaces under water and slime
+lv Viļņojoši gaismas raksti uz virsmām zem ūdens un gļotām
+
+@ Scales all damage you take; above 100% is harder
+lv Mērogo visus saņemtos bojājumus; virs 100% ir grūtāk
+
+@ Screen edge for this element; elements on the same spot stack
+lv Šī elementa ekrāna mala; elementi vienā vietā tiek sakrauti
+
+@ Seconds a monster hit by the boomerang stays stunned
+lv Cik sekundes bumeranga trāpīts monstrs paliek apdullināts
+
+@ Seconds impact marks and stuck nails stay before fading out; independent of Particle Quality
+lv Cik sekundes trieciena pēdas un iestrēgušas naglas paliek pirms izgaišanas; neatkarīgi no daļiņu kvalitātes
+
+@ Seconds messages at the top of the screen stay up
+lv Cik sekundes ziņas ekrāna augšā paliek redzamas
+
+@ Seconds the flick stick snap takes; lower is faster
+lv Cik sekundes ilgst flick stick pagrieziens; mazāk ir ātrāk
+
+@ See through enhanced water; enables Water Opacity
+lv Redzēt cauri uzlabotajam ūdenim; ieslēdz ūdens necaurredzamību
+
+@ Sensor grain, scanlines and flicker of the goggle image
+lv Briļļu attēla sensora graudainība, skenēšanas līnijas un mirgošana
+
+@ Shades every anti-aliasing sample; needs Anti-aliasing on
+lv Ēno katru malu nogludināšanas paraugu; vajadzīga ieslēgta malu nogludināšana
+
+@ Shifts colors so they stay distinct for the chosen color blindness
+lv Nobīda krāsas, lai tās paliktu atšķiramas izvēlētajam krāsu akluma veidam
+
+@ Shotgun hits leave small surface marks (cosmetic only)
+lv Bises trāpījumi atstāj mazas pēdas uz virsmām (tikai kosmētiski)
+
+@ Show corner ticks at screen centre while locked, even with Crosshair off
+lv Fiksācijas laikā ekrāna centrā rāda stūru atzīmes, pat ja tēmeklis ir izslēgts
+
+@ Show where grenades and other arcing shots will fly, bounce and land; local play only, not in deathmatch
+lv Rāda, kur lidos, atlēks un nokritīs granātas un citi lokveida šāvieni; tikai lokālā spēlē, ne deathmatch
+
+@ Shows text for important sounds: doors, alerted enemies, secrets, pickups
+lv Rāda tekstu svarīgām skaņām: durvīm, satrauktiem ienaidniekiem, noslēpumiem, atradumiem
+
+@ Shows the distance fog that maps and mods set; off always gives clear view
+lv Rāda attāluma miglu, ko iestata kartes un modi; izslēgts vienmēr dod skaidru skatu
+
+@ Shows the player face next to the health number
+lv Rāda spēlētāja seju blakus veselības skaitlim
+
+@ Simulation detail, step rate, fade-out lifetimes and caps for gibs and shrapnel; low also skips mover collision
+lv Miesas gabalu un šķembu simulācijas detaļas, soļu biežums, izgaišanas ilgums un limiti; zems arī izlaiž sadursmes ar kustīgiem objektiem
+
+@ Size of the on-screen buttons and move stick
+lv Ekrāna pogu un kustības sviras izmērs
+
+@ Slowly heals up to 100 health after 5 seconds without being hit
+lv Lēni dziedē līdz 100 veselībai pēc 5 sekundēm bez trāpījumiem
+
+@ Slows stick look while the crosshair is over an enemy
+lv Palēnina sviras skatu, kamēr tēmeklis ir uz ienaidnieka
+
+@ Slows the game down while the weapon wheel is open
+lv Palēnina spēli, kamēr atvērta ieroču ripa
+
+@ Slows the whole game down; single player only. Saves and demos stay compatible with other ports
+lv Palēnina visu spēli; tikai viena spēlētāja režīmā. Saglabājumi un demo paliek saderīgi ar citiem portiem
+
+@ Small camera jolt on each freeze; off with Reduce Motion
+lv Neliels kameras grūdiens katrā sasalšanā; izslēgts ar Samazināt kustību
+
+@ Snap and track enemies in local play, including split-screen; unavailable online
+lv Uztver un seko ienaidniekiem lokālā spēlē, arī dalītā ekrānā; tiešsaistē nav pieejams
+
+@ Sparks, smoke, chips, splinters and splashes fly off whatever your shots hit
+lv Dzirksteles, dūmi, drumslas, skabargas un šļakatas lido no visa, kam trāpa tavi šāvieni
+
+@ Spawns extra copies of every monster around the original when a level starts
+lv Līmeņa sākumā ap katru monstru izveido tā papildu kopijas
+
+@ Strength of the full-screen flashes for damage, pickups and powerups
+lv Pilnekrāna uzliesmojumu stiprums bojājumiem, atradumiem un spēkpapildinājumiem
+
+@ Stretch or shorten the sound while keeping its pitch
+lv Izstiepj vai saīsina skaņu, saglabājot toni
+
+@ Surface opacity; requires Enhanced Water and Translucent Water
+lv Virsmas necaurredzamība; vajadzīgs Uzlabots ūdens un Caurspīdīgs ūdens
+
+@ The hook latches onto metal surfaces (metal, tech, computer panels, copper)
+lv Āķis aizķeras aiz metāla virsmām (metāls, tehnika, datoru paneļi, varš)
+
+@ The hook latches onto stone, brick, rock and any surface not recognised as wood or metal
+lv Āķis aizķeras aiz akmens, ķieģeļiem, klintīm un jebkuras virsmas, kas nav atpazīta kā koks vai metāls
+
+@ The hook latches onto wooden surfaces (texture names like wood, crate, plank)
+lv Āķis aizķeras aiz koka virsmām (tekstūru nosaukumi kā wood, crate, plank)
+
+@ Turn the controller's motion sensor into a look input; needs a pad with a gyroscope
+lv Pārvērš kontroliera kustības sensoru par skata ievadi; vajadzīgs kontrolieris ar žiroskopu
+
+@ Turns off view bob, strafe tilt and the camera kick when hit or firing
+lv Izslēdz skata šūpošanos, sānsoļa sasvēršanos un kameras grūdienu, saņemot trāpījumu vai šaujot
+
+@ Turns on the extra liquid effects; Water Settings controls each one
+lv Ieslēdz papildu šķidrumu efektus; Ūdens iestatījumi kontrolē katru no tiem
+
+@ Turns the view to follow a moving enemy you are aiming at
+lv Pagriež skatu, sekojot kustīgam ienaidniekam, uz kuru tēmē
+
+@ Turns the view when you roll the controller sideways; 0 disables it, negative reverses it
+lv Pagriež skatu, kad sasveri kontrolieri uz sāniem; 0 to izslēdz, negatīvs apgriež
+
+@ Two-portal gun: fire and alt-fire place linked portals on flat walls; assign a weapon slot in Add-ons
+lv Divu portālu ierocis: šāviens un alt. šāviens novieto savienotus portālus uz līdzenām sienām; piešķir ieroča slotu sadaļā Papildinājumi
+
+@ Unlocks the FX Settings page: enhanced particles, impact effects and blood splatter
+lv Atbloķē lapu Efektu iestatījumi: uzlabotas daļiņas, trieciena efekti un asins šļakatas
+
+@ Uses the 2021 re-release's smoother MD5 models (and MD3 replacements from mods) instead of the classic ones. Applies on the next map load
+lv Izmanto 2021. gada atkārtotā izdevuma gludākos MD5 modeļus (un MD3 aizstājējus no modiem) klasisko vietā. Stājas spēkā nākamajā kartes ielādē
+
+@ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
+lv Izmanto kartes krāsaino gaismu (.lit fails vai BSPX bloks); izslēgts dod oriģinālo balto gaismu. Stājas spēkā nākamajā kartes ielādē
+
+@ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
+lv Strūklas segmenti, pilienu skaits un spīdīga šķidruma ēnošana: zems izmanto vienkāršākas caurspīdīgas strūklas; augsts gludas, spīdīgas strūklas
+
+@ When gyro looking applies: always, off while +gyroaction is held, or only while it is held
+lv Kad darbojas žiro skats: vienmēr, izslēgts, kamēr turēts +gyroaction, vai tikai tad, kad tas ir turēts
+
+@ Which weapons trigger the freeze; melee covers the axe and any mod weapon used at close range without ammo
+lv Kuri ieroči izraisa sasalšanu; tuvcīņa ietver cirvi un jebkuru moda ieroci, ko lieto tuvumā bez munīcijas
+
+@ Your own rockets and grenades don't hurt you; rocket jumps still work
+lv Tavas raķetes un granātas tevi neievaino; raķešu lēcieni joprojām darbojas
+
+# ==== ui.txt ====
+
+# Menus and pop-ups outside the options pages: save cards, launch, presets,
+# add-on browser, map packs, hints and dialogs.
+@ Select
+lv Izvēlēties
+
+@ Back
+lv Atpakaļ
+
+@ Cancel
+lv Atcelt
+
+@ Confirm
+lv Apstiprināt
+
+@ Scroll
+lv Ritināt
+
+@ Section
+lv Sadaļa
+
+@ Bind
+lv Piesaistīt
+
+@ Cancel binding
+lv Atcelt piesaisti
+
+@ Clear
+lv Notīrīt
+
+@ Clear pad
+lv Notīrīt kontrolieri
+
+@ Remap
+lv Pārpiesaistīt
+
+@ Type
+lv Rakstīt
+
+@ Shift
+lv Shift
+
+@ Done
+lv Gatavs
+
+@ Del
+lv Del
+
+@ Space
+lv Atstarpe
+
+@ Save
+lv Saglabāt
+
+@ Load
+lv Ielādēt
+
+@ Delete
+lv Dzēst
+
+@ Play
+lv Spēlēt
+
+@ Yes
+lv Jā
+
+@ No
+lv Nē
+
+@ OK
+lv Labi
+
+@ System
+lv Sistēma
+
+@ Language
+lv Valoda
+
+@ Help
+lv Palīdzība
+
+@ Fixed for this game: it was started without Customize
+lv Fiksēts šai spēlei: tā tika sākta bez pielāgošanas
+
+@ Press a button or key to bind (Start cancels)
+lv Nospied pogu vai taustiņu piesaistei (Start atceļ)
+
+@ Press button...
+lv Nospied pogu...
+
+@ Press key...
+lv Nospied taustiņu...
+
+@ Replace this binding?
+lv Aizstāt šo piesaisti?
+
+@ is already assigned
+lv jau ir piešķirts
+
+@ {} already assigned
+lv {} jau piešķirts
+
+@ Open Controls to remap Lock-on?
+lv Atvērt vadību, lai pārpiesaistītu mērķa fiksāciju?
+
+@ Lock-on
+lv Mērķa fiksācija
+
+@ Auto-aim Toggle
+lv Autotēmēšanas pārslēgšana
+
+@ Keyboard
+lv Tastatūra
+
+@ Controller
+lv Kontrolieris
+
+# main menu, dialogs and screens
+@ Map Packs
+lv Karšu pakas
+
+@ Customize
+lv Pielāgot
+
+@ Level Select
+lv Līmeņa izvēle
+
+@ Really quit?
+lv Tiešām iziet?
+
+@ You died
+lv Tu nomiri
+
+@ Continue from most recent save
+lv Turpināt no jaunākā saglabājuma
+
+@ Select save
+lv Izvēlēties saglabājumu
+
+@ Restart level
+lv Sākt līmeni no jauna
+
+@ Return to main menu
+lv Atgriezties galvenajā izvēlnē
+
+@ (disabled)
+lv (atspējots)
+
+@ (fixed for this game)
+lv (fiksēts šai spēlei)
+
+@ (off)
+lv (izslēgts)
+
+@ Apply Display Changes
+lv Lietot displeja izmaiņas
+
+@ Display Mode
+lv Displeja režīms
+
+@ Resolution
+lv Izšķirtspēja
+
+@ desktop
+lv darbvirsma
+
+@ Preset
+lv Iepriekšiestatījums
+
+@ Map
+lv Karte
+
+@ Reset Shader Settings
+lv Atiestatīt šeidera iestatījumus
+
+@ Reset to Defaults
+lv Atjaunot noklusējumus
+
+@ Searching...
+lv Meklē...
+
+@ This game only autosaves.
+lv Šī spēle saglabājas tikai automātiski.
+
+@ (No Manual Saves modifier)
+lv (modifikators Bez manuālas saglabāšanas)
+
+@ End the current game?
+lv Beigt pašreizējo spēli?
+
+@ Unsaved progress will be lost.
+lv Nesaglabātais progress tiks zaudēts.
+
+@ End game
+lv Beigt spēli
+
+@ Overwrite
+lv Pārrakstīt
+
+@ Overwrite "{}"?
+lv Pārrakstīt “{}”?
+
+@ Saved {}
+lv Saglabāts: {}
+
+@ Start a new game?
+lv Sākt jaunu spēli?
+
+@ New game
+lv Jauna spēle
+
+@ New Game
+lv Jauna spēle
+
+@ CUSTOM
+lv PIELĀGOTS
+
+@ Customize Experience
+lv Pielāgot pieredzi
+
+@ Disable All
+lv Atspējot visu
+
+@ Disable All Modifications
+lv Atspējot visas modifikācijas
+
+@ Saves load in other source ports too.
+lv Saglabājumi ielādējas arī citos portos.
+
+@ Standard rules, no add-ons.
+lv Standarta noteikumi, bez papildinājumiem.
+
+@ Choose skill
+lv Izvēlies grūtību
+
+@ The current game will end
+lv Pašreizējā spēle tiks beigta
+
+@ Easy
+lv Viegla
+
+@ Normal
+lv Normāla
+
+@ Hard
+lv Grūta
+
+@ Nightmare
+lv Murgs
+
+# graphics preset pop-up
+@ Choose a Graphics Preset
+lv Izvēlies grafikas iepriekšiestatījumu
+
+@ Classic
+lv Klasisks
+
+@ Like the re-release: enhanced models,
+lv Kā atkārtotajā izdevumā: uzlaboti modeļi,
+
+@ no added effects.
+lv bez papildu efektiem.
+
+@ Enhanced
+lv Uzlabots
+
+@ Every enhancement at its highest quality.
+lv Visi uzlabojumi augstākajā kvalitātē.
+
+@ Needs a capable GPU.
+lv Vajadzīgs jaudīgs GPU.
+
+@ Low-End
+lv Vājš dators
+
+@ Fastest. No anti-aliasing, original
+lv Visātrākais. Bez malu nogludināšanas, oriģinālie
+
+@ models, lowest effect quality.
+lv modeļi, zemākā efektu kvalitāte.
+
+@ Esc keeps the defaults
+lv Esc patur noklusējumus
+
+@ Everything can be changed later in Options.
+lv Visu var mainīt vēlāk sadaļā Options.
+
+@ Keep Defaults
+lv Paturēt noklusējumus
+
+# save and load cards
+@ Save Game
+lv Saglabāt spēli
+
+@ Load Game
+lv Ielādēt spēli
+
+@ Autosaves
+lv Autosaglabājumi
+
+@ newest first
+lv jaunākie vispirms
+
+@ Saves: {}
+lv Saglabājumi: {}
+
+@ Browse Autosaves
+lv Pārlūkot autosaglabājumus
+
+@ Every retained autosave, newest first
+lv Visi paturētie autosaglabājumi, jaunākie vispirms
+
+@ New save
+lv Jauns saglabājums
+
+@ Select to save your game here
+lv Izvēlies, lai saglabātu spēli šeit
+
+@ No autosaves yet
+lv Vēl nav autosaglabājumu
+
+@ Autosaves are made on level entry, secrets and more (Options > Gameplay)
+lv Autosaglabāšana notiek, ieejot līmenī, atrodot noslēpumus u.c. (Options > Spēle)
+
+@ No saves yet
+lv Vēl nav saglabājumu
+
+@ Save from the Single Player menu, or press F6 to quicksave
+lv Saglabā Single Player izvēlnē vai nospied F6 ātrajai saglabāšanai
+
+@ No picture
+lv Nav attēla
+
+@ Del: delete save
+lv Del: dzēst saglabājumu
+
+@ Delete "{}"?
+lv Dzēst “{}”?
+
+@ This cannot be undone.
+lv To nevar atsaukt.
+
+@ Quicksave
+lv Ātrais saglabājums
+
+@ Autosave: {}
+lv Autosaglabājums: {}
+
+@ unknown trigger
+lv nezināms iemesls
+
+@ Latest - {}
+lv Jaunākais - {}
+
+@ Health {}
+lv Veselība {}
+
+@ Armor {}
+lv Bruņas {}
+
+@ Kills {}/{}
+lv Nogalināti {}/{}
+
+@ Secrets {}/{}
+lv Noslēpumi {}/{}
+
+@ Split-screen, {} players
+lv Dalītais ekrāns, spēlētāji: {}
+
+@ Co-op
+lv Kooperatīvs
+
+@ Customized
+lv Pielāgots
+
+@ Customized, {}
+lv Pielāgots, {}
+
+@ Date unavailable
+lv Datums nav pieejams
+
+@ Just now
+lv Tikko
+
+@ {} min ago
+lv pirms {} min
+
+@ {} h ago
+lv pirms {} st.
+
+@ Level entry
+lv Ieeja līmenī
+
+@ Secret found
+lv Atrasts noslēpums
+
+@ All enemies killed
+lv Visi ienaidnieki nogalināti
+
+@ All secrets found
+lv Visi noslēpumi atrasti
+
+@ Timer
+lv Taimeris
+
+# customize pages
+@ Standard rules
+lv Standarta noteikumi
+
+@ Modifiers changed: {}
+lv Mainīti modifikatori: {}
+
+@ no add-ons
+lv bez papildinājumiem
+
+@ add-ons: {}
+lv papildinājumi: {}
+
+@ Saves of this game are .qsa files: they need this source port.
+lv Šīs spēles saglabājumi ir .qsa faili: tiem vajadzīgs šis ports.
+
+@ Nothing changed: this plays as standard Quake.
+lv Nekas nav mainīts: šī ir parasta Quake spēle.
+
+@ Changes apply now and are saved with this game (.qsa).
+lv Izmaiņas stājas spēkā uzreiz un tiek saglabātas ar šo spēli (.qsa).
+
+@ This game started without Customize, so its rules are fixed.
+lv Šī spēle sākta bez pielāgošanas, tāpēc tās noteikumi ir fiksēti.
+
+@ Start a new game and choose Customize Experience.
+lv Sāc jaunu spēli un izvēlies Pielāgot pieredzi.
+
+@ These rules apply to the next customized game.
+lv Šie noteikumi attiecas uz nākamo pielāgoto spēli.
+
+# add-on browser
+@ Fire
+lv Šaut
+
+@ Alt Fire
+lv Alt. šāviens
+
+@ Configure Parameters >
+lv Konfigurēt parametrus >
+
+@ Configure
+lv Konfigurēt
+
+@ Settings
+lv Iestatījumi
+
+@ Change slot
+lv Mainīt slotu
+
+@ Toggle
+lv Pārslēgt
+
+@ Details
+lv Detaļas
+
+@ Enter or click the box: toggle
+lv Enter vai klikšķis uz rūtiņas: pārslēgt
+
+@ Right / Tab / click: details
+lv Pa labi / Tab / klikšķis: detaļas
+
+@ Input Remapping
+lv Ievades pārpiesaiste
+
+@ Weapon Slot
+lv Ieroča slots
+
+@ Customized games save as .qsa files, which need this source port.
+lv Pielāgotās spēles saglabājas kā .qsa faili, kuriem vajadzīgs šis ports.
+
+@ This game started without Customize, so its add-ons are fixed. Customize a new game instead.
+lv Šī spēle sākta bez pielāgošanas, tāpēc tās papildinājumi ir fiksēti. Pielāgo jaunu spēli.
+
+@ Bullet Time
+lv Bullet Time
+
+@ Change Goggles
+lv Mainīt brilles
+
+@ Dodge / Dive
+lv Izvairīšanās / Lēciens
+
+@ Goggles
+lv Brilles
+
+@ Hitstop
+lv Trāpījuma pauze
+
+@ Projectile Shotguns
+lv Šāviņu bises
+
+@ BULLET TIME: 20%
+lv BULLET TIME: 20%
+
+@ NORMAL SPEED
+lv NORMĀLS ĀTRUMS
+
+@ SLOW MOTION: PHYSICAL PELLETS
+lv PALĒNINĀJUMS: FIZIKĀLAS SKROTIS
+
+@ DEMONSTRATION
+lv DEMONSTRĀCIJA
+
+@ GAMEPLAY
+lv SPĒLE
+
+@ LOOP
+lv CILPA
+
+@ Preview unavailable
+lv Priekšskatījums nav pieejams
+
+# shader and language help lines
+@ A setting of the chosen shader; arrows step it, Enter is not needed
+lv Izvēlētā šeidera iestatījums; mainās ar bultiņām, Enter nav vajadzīgs
+
+@ Language of the menus, messages and the 2021 re-release's game text; System follows your computer's language
+lv Izvēlņu, ziņu un 2021. gada atkārtotā izdevuma spēles tekstu valoda; Sistēma seko datora valodai
+
+@ Puts every setting of the chosen shader back to the preset's defaults
+lv Atjauno visus izvēlētā šeidera iestatījumus uz iepriekšiestatījuma noklusējumiem
+
+@ RetroArch slang shader on the final image: CRT, scanlines, NTSC, sharpening; add your own in <game>/shaders
+lv RetroArch slang šeideris gala attēlam: CRT, skenēšanas līnijas, NTSC, asināšana; savus liec mapē <spēle>/shaders
+
+# modern console footer
+@ Shift+PgUp/Dn: height  ` : hide
+lv Shift+PgUp/Dn: augstums  ` : paslēpt
+
+@ Tab: complete  Ctrl+R: search  bash | pipe
+lv Tab: pabeigt  Ctrl+R: meklēt  bash | pipe
+
+@ ↑ +{} lines (End to jump) 
+lv ↑ +{} rindas (End, lai pārietu) 
+
+# add-on descriptions
+@ Create two linked portals on flat walls. Fire places the first portal; Alt Fire places the second. Walk through either portal to emerge from the other. Your momentum carries through. Assign a weapon slot below: pressing that slot repeatedly cycles its ordinary weapon and every enabled add-on assigned there. Portal view quality is configurable below.
+lv Izveido divus savienotus portālus uz līdzenām sienām. Šāviens novieto pirmo portālu, alt. šāviens otro. Ieej vienā portālā, lai izietu no otra; tavs impulss saglabājas. Zemāk piešķir ieroča slotu: atkārtoti spiežot šo slotu, tiek pārslēgts tā parastais ierocis un katrs tam piešķirtais ieslēgtais papildinājums. Portālu skata kvalitāti var iestatīt zemāk.
+
+@ Hold Fire and sweep the crosshair over monsters to queue targets. Release Fire to throw: the boomerang visits each target, stuns it and returns to you. Alt Fire clears the queue. The weapon slot selects a group, not a separate hotkey: press it again to cycle through the weapons in that slot. Configure stun duration and flight speed below.
+lv Turi šāvienu un velc tēmekli pāri monstriem, lai atzīmētu mērķus. Atlaid šāvienu, lai mestu: bumerangs apmeklē katru mērķi, apdullina to un atgriežas pie tevis. Alt. šāviens notīra sarakstu. Ieroča slots izvēlas grupu, nevis atsevišķu taustiņu: nospied to vēlreiz, lai pārslēgtu šī slota ieročus. Apdullināšanas ilgumu un lidojuma ātrumu var iestatīt zemāk.
+
+@ Hold Fire to charge a sticky bomb using rocket ammunition; release to launch. A longer charge throws it faster. Bombs cling to walls, doors and monsters. Alt Fire detonates your planted bombs together. Place a trap, retreat, then detonate it when enemies approach. Assign any weapon slot below; repeated presses cycle through the ordinary weapon and add-ons in that slot.
+lv Turi šāvienu, lai uzlādētu lipīgo bumbu, izmantojot raķešu munīciju; atlaid, lai izšautu. Ilgāka uzlāde to met ātrāk. Bumbas pielīp sienām, durvīm un monstriem. Alt. šāviens uzspridzina visas novietotās bumbas reizē. Uzliec lamatas, atkāpies un uzspridzini tās, kad tuvojas ienaidnieki. Zemāk piešķir jebkuru ieroča slotu; atkārtoti spiežot, tiek pārslēgts parastais ierocis un šī slota papildinājumi.
+
+@ Fire launches a chain hook. It latches onto a permitted surface or enemy and reels you toward the anchor. Fire again or use Alt Fire to let go. Choose which materials and enemies can be hooked in Configure Parameters. Assign it to any weapon slot; repeated presses of the slot's existing binding cycle through its weapons.
+lv Šāviens izsviež ķēdes āķi. Tas aizķeras aiz atļautas virsmas vai ienaidnieka un pievelk tevi pie enkura punkta. Šauj vēlreiz vai izmanto alt. šāvienu, lai atlaistu. Kurus materiālus un ienaidniekus var aizāķēt, izvēlies sadaļā Konfigurēt parametrus. Piešķir to jebkuram ieroča slotam; atkārtoti spiežot slota esošo piesaisti, tiek pārslēgti tā ieroči.
+
+@ A piercing railgun inspired by Quake III. Fire sends a slug through every enemy along its line. Each shot consumes two cells, with a 1.5 second refire interval. Damage and the spiral trail colour are configurable below. Choose a weapon slot: the slot's current binding selects and cycles the weapons assigned to it.
+lv Caurduroša railgun, iedvesmota no Quake III. Šāviens sūta lodi cauri katram ienaidniekam uz tās līnijas. Katrs šāviens patērē divus elementus, un nākamais iespējams pēc 1,5 sekundēm. Bojājumus un spirālveida sliedes krāsu var iestatīt zemāk. Izvēlies ieroča slotu: slota pašreizējā piesaiste izvēlas un pārslēdz tam piešķirtos ieročus.
+
+@ A Portal-style gel sprayer. Fire sprays blue Repulsion gel: land, jump or run into it to bounce, and landings on it never hurt. Alt Fire sprays orange Propulsion gel: run across it to go much faster. Gel coats floors and walls until washed off with the Powerwasher. Assign a weapon slot below; repeated presses cycle the weapons in that slot.
+lv Portal stila gela smidzinātājs. Šāviens smidzina zilo atgrūšanas gelu: piezemējies, uzlec vai ieskrien tajā, lai atlēktu, un piezemēšanās uz tā nekad nekaitē. Alt. šāviens smidzina oranžo paātrinājuma gelu: skrien pa to, lai kustētos daudz ātrāk. Gels pārklāj grīdas un sienas, līdz to nomazgā ar augstspiediena mazgātāju. Zemāk piešķir ieroča slotu; atkārtoti spiežot, tiek pārslēgti šī slota ieroči.
+
+@ A water cannon. Fire shoots a straight jet with limited reach; Alt Fire a wide, shorter fan. The water pushes enemies back, turns projectiles aside and washes away gel and blood. Push strength is configurable below. Assign a weapon slot below; repeated presses cycle the weapons in that slot.
+lv Ūdens lielgabals. Šāviens izšauj taisnu strūklu ar ierobežotu sniedzamību; alt. šāviens plašu, īsāku vēdekli. Ūdens atgrūž ienaidniekus, novirza šāviņus un nomazgā gelu un asinis. Grūdiena stiprumu var iestatīt zemāk. Zemāk piešķir ieroča slotu; atkārtoti spiežot, tiek pārslēgti šī slota ieroči.
+
+@ One equipment add-on includes both night vision and thermal vision. The Change Goggles action cycles Normal, Night Vision, Thermal, then Normal again. Night vision brightens dark rooms; thermal vision highlights living enemies. Goggles do not occupy a weapon slot. Configure intensity and sensor noise below. The binding affects only this add-on.
+lv Viens aprīkojuma papildinājums ietver gan nakts redzamību, gan termoredzi. Darbība Mainīt brilles pārslēdz Parasto, Nakts redzamību, Termoredzi un atkal Parasto. Nakts redzamība izgaismo tumšas telpas; termoredze izceļ dzīvus ienaidniekus. Brilles neaizņem ieroča slotu. Intensitāti un sensora troksni var iestatīt zemāk. Piesaiste attiecas tikai uz šo papildinājumu.
+
+@ Press Dodge with a movement direction on the ground or in midair: dive forward or leap backward and sideways. Diagonals are supported. Each press launches once, with a short recovery. The player body animates in third person. Assign the Dodge action below or in Controls.
+lv Nospied Izvairīties kopā ar kustības virzienu uz zemes vai gaisā: metiens uz priekšu vai lēciens atpakaļ un uz sāniem. Diagonāles tiek atbalstītas. Katrs nospiediens izsviež vienreiz, ar īsu atjaunošanos. Spēlētāja ķermenis tiek animēts trešajā personā. Piešķir darbību Izvairīties zemāk vai sadaļā Vadība.
+
+@ Use the dedicated Bullet Time action to slow the whole local game to 20% speed. Hold is the default; Toggle switches on each press. The optional meter limits use in real seconds and regenerates while inactive. Disable the meter for unlimited use. Remap the action and configure duration and regeneration below.
+lv Izmanto atsevišķo Bullet Time darbību, lai palēninātu visu lokālo spēli līdz 20% ātrumam. Noklusējums ir Turēt; Pārslēgt ieslēdz un izslēdz ar katru nospiedienu. Neobligātā josla ierobežo lietošanu reālās sekundēs un atjaunojas, kad nav aktīva. Izslēdz joslu neierobežotai lietošanai. Pārpiesaisti darbību un iestati ilgumu un atjaunošanos zemāk.
+
+@ Both shotguns and enemy grunts fire physical pellets with their original spread and damage. Fast default projectiles feel immediate; lower their speed to dodge incoming fire during bullet time. Configure projectile speed below, or reset it to the default of 10000 units per second.
+lv Abas bises un ienaidnieku kareivji šauj fizikālas skrotis ar oriģinālo izkliedi un bojājumiem. Ātri noklusējuma šāviņi šķiet tūlītēji; samazini to ātrumu, lai Bullet Time laikā izvairītos no ienākošās uguns. Iestati šāviņu ātrumu zemāk vai atjauno noklusējumu 10000 vienības sekundē.
+
+@ Freezes the game for a split second when you damage an enemy, so hits feel heavier. Single player only. Choose which weapons trigger it (all, melee, ranged or explosives), how long it lasts and how much more a kill freezes. Advanced settings cover enemy toughness, damage scaling, cooldown and the longest freeze.
+lv Uz sekundes daļu sasaldē spēli, kad ievaino ienaidnieku, lai trāpījumi šķistu smagāki. Tikai viena spēlētāja režīmā. Izvēlies, kuri ieroči to izraisa (visi, tuvcīņa, tālcīņa vai spridzekļi), cik ilgi tā ilgst un cik ilgāk sasaldē nogalināšana. Papildu iestatījumi ietver ienaidnieku izturību, bojājumu mērogošanu, atjaunošanos un ilgāko sasalšanu.
+
+# map packs and the Quaddicted browser
+@ Get more maps (Quaddicted)...
+lv Vairāk karšu (Quaddicted)...
+
+@ Type to filter...
+lv Raksti, lai filtrētu...
+
+@ Launch mod
+lv Palaist modu
+
+@ Start first map
+lv Sākt pirmo karti
+
+@ (running)
+lv (darbojas)
+
+@ running
+lv darbojas
+
+@ Recent
+lv Nesenie
+
+@ Name
+lv Nosaukums
+
+@ Dir
+lv Mape
+
+@ Default
+lv Noklusējums
+
+@ Title
+lv Virsraksts
+
+@ Sort: {}
+lv Kārtot: {}
+
+@ {} installed
+lv Instalēti: {}
+
+@ {}/{} matching
+lv Atbilst: {}/{}
+
+@ {} maps, {} completed
+lv Kartes: {}, pabeigtas: {}
+
+@ {}/{} matching, {} completed
+lv Atbilst: {}/{}, pabeigtas: {}
+
+@ no maps of its own
+lv nav savu karšu
+
+@ dir: {}
+lv mape: {}
+
+@ base: {}
+lv bāze: {}
+
+@ Browse the Quaddicted archive of
+lv Pārlūko Quaddicted arhīvu ar
+
+@ single-player maps and episodes,
+lv viena spēlētāja kartēm un epizodēm,
+
+@ then download and install them
+lv tad lejupielādē un instalē tās
+
+@ here. Each release gets its own
+lv šeit. Katrs izlaidums saņem savu
+
+@ entry in this list.
+lv ierakstu šajā sarakstā.
+
+@ Needs an internet connection.
+lv Vajadzīgs interneta savienojums.
+
+@ Quaddicted Map Archive
+lv Quaddicted karšu arhīvs
+
+@ Newest
+lv Jaunākie
+
+@ Author
+lv Autors
+
+@ Size
+lv Izmērs
+
+@ Loading the map list...
+lv Ielādē karšu sarakstu...
+
+@ Couldn't load the map list: {}
+lv Neizdevās ielādēt karšu sarakstu: {}
+
+@ {} single-player releases  -  F5 refreshes
+lv Viena spēlētāja izlaidumi: {}  -  F5 atsvaidzina
+
+@ {} matching
+lv Atbilst: {}
+
+@ by {}
+lv autors: {}
+
+@ requires: {}
+lv vajadzīgs: {}
+
+@ maps: {}
+lv kartes: {}
+
+@ Failed: {}
+lv Neizdevās: {}
+
+@ Downloading... {}%
+lv Lejupielādē... {}%
+
+@ Unpacking...
+lv Atarhivē...
+
+@ Installed in {}/  -  Enter: play
+lv Instalēts mapē {}/  -  Enter: spēlēt
+
+@ Enter: download and install
+lv Enter: lejupielādēt un instalēt
+
+@ unpacking
+lv atarhivē
+
+@ failed
+lv neizdevās
+
+@ installed
+lv instalēts
+
+@ Downloads are not available in the browser build
+lv Pārlūka versijā lejupielāde nav pieejama
+
+@ the map list could not be read
+lv karšu sarakstu nevarēja nolasīt
+
+@ downloading needs the curl program
+lv lejupielādei vajadzīga programma curl
+
+@ download failed
+lv lejupielāde neizdevās
+
+@ the download is not a valid zip
+lv lejupielāde nav derīgs zip
+
+@ nothing to install for this engine
+lv šim dzinējam nav ko instalēt
+
+@ needs {} installed first
+lv vispirms jāinstalē {}
+
+@ couldn't unpack {}
+lv neizdevās atarhivēt: {}
+
+# help screen
+@ About
+lv Par
+
+@ < Back
+lv < Atpakaļ
+
+# tr_ctx keys: English shows the short word, the key says which meaning
+@ Save (a manual save, as opposed to a quicksave or autosave)
+lv Saglabājums
+
+# ==== hud.txt ====
+
+# HUD, weapon and equipment wheels, sound captions and other in-game text.
+# Weapon, monster and item names follow the 2021 re-release's own translations.
+@ Axe
+lv Cirvis
+
+@ Shotgun
+lv Shotgun
+
+@ Double-Barrelled Shotgun
+lv Super Shotgun
+
+@ Nailgun
+lv Nailgun
+
+@ Super Nailgun
+lv Super Nailgun
+
+@ Grenade Launcher
+lv Grenade Launcher
+
+@ Rocket Launcher
+lv Rocket Launcher
+
+@ Thunderbolt
+lv Thunderbolt
+
+@ Portal Gun
+lv Portālu ierocis
+
+@ Boomerang
+lv Bumerangs
+
+@ Stickybomb Launcher
+lv Lipīgo bumbu metējs
+
+@ Railgun
+lv Railgun
+
+@ Hookshot
+lv Kāsis
+
+@ Gel Sprayer
+lv Gela smidzinātājs
+
+@ Powerwasher
+lv Augstspiediena mazgātājs
+
+@ Night Vision Goggles
+lv Nakts redzamības brilles
+
+@ Thermal Goggles
+lv Termoredzes brilles
+
+@ Normal vision
+lv Parasta redze
+
+@ ON
+lv IESL.
+
+@ OFF
+lv IZSL.
+
+@ {} (turn on)
+lv {} (ieslēgt)
+
+@ {} (turn off)
+lv {} (izslēgt)
+
+@ Move mouse to select, release to toggle
+lv Kustini peli, lai izvēlētos, atlaid, lai pārslēgtu
+
+@ Move mouse to select, release to equip
+lv Kustini peli, lai izvēlētos, atlaid, lai paņemtu
+
+@ Release to toggle
+lv Atlaid, lai pārslēgtu
+
+@ Release to equip
+lv Atlaid, lai paņemtu
+
+@ shells
+lv patronas
+
+@ nails
+lv naglas
+
+@ rockets
+lv raķetes
+
+@ cells
+lv elementi
+
+@ Kills: {}/{}
+lv Nogalināti: {}/{}
+
+@ Secrets: {}/{}
+lv Noslēpumi: {}/{}
+
+@ Time {}
+lv Laiks {}
+
+@ Press any button to continue...
+lv Nospied jebkuru pogu, lai turpinātu...
+
+@ Press any key to continue...
+lv Nospied jebkuru taustiņu, lai turpinātu...
+
+@ BULLET TIME
+lv BULLET TIME
+
+@ AUTO AIM
+lv AUTOTĒMĒŠANA
+
+@ Crosshair
+lv Tēmeklis
+
+@ + Marker
+lv + marķieris
+
+@ Hit markers off
+lv Trāpījumu marķieri izslēgti
+
+@ On target
+lv Uz mērķa
+
+@ On kill
+lv Nogalinot
+
+# sound captions
+@ [Secret found]
+lv [Atrasts noslēpums]
+
+@ [Message]
+lv [Ziņa]
+
+@ [Switch activated]
+lv [Slēdzis aktivizēts]
+
+@ [Key picked up]
+lv [Paņemta atslēga]
+
+@ [Rune picked up]
+lv [Paņemta rūna]
+
+@ [Teleporter]
+lv [Teleports]
+
+@ [Teleport]
+lv [Teleportācija]
+
+@ [Splash]
+lv [Šļakstiens]
+
+@ [Leaving water]
+lv [Iznāk no ūdens]
+
+@ [Door]
+lv [Durvis]
+
+@ [Platform moving]
+lv [Platforma kustas]
+
+@ [Button]
+lv [Poga]
+
+@ [Health picked up]
+lv [Paņemta veselība]
+
+@ [Armor picked up]
+lv [Paņemtas bruņas]
+
+@ [Quad Damage wearing off]
+lv [Quad Damage beidzas]
+
+@ [Quad Damage]
+lv [Quad Damage]
+
+@ [Pentagram wearing off]
+lv [Pentagramma beidzas]
+
+@ [Pentagram of Protection]
+lv [Aizsardzības pentagramma]
+
+@ [Ring wearing off]
+lv [Gredzens beidzas]
+
+@ [Ring of Shadows]
+lv [Ēnu gredzens]
+
+@ [Biosuit wearing off]
+lv [Biotērps beidzas]
+
+@ [Biosuit]
+lv [Biotērps]
+
+@ [Item picked up]
+lv [Paņemts priekšmets]
+
+@ [Weapon picked up]
+lv [Paņemts ierocis]
+
+@ [Ammo picked up]
+lv [Paņemta munīcija]
+
+@ [Explosion]
+lv [Sprādziens]
+
+@ [Grenade launched]
+lv [Izšauta granāta]
+
+@ [Grenade bounce]
+lv [Granāta atlec]
+
+@ [Rocket fired]
+lv [Izšauta raķete]
+
+@ [Nails fired]
+lv [Izšautas naglas]
+
+@ [Lightning]
+lv [Zibens]
+
+@ [Thunder]
+lv [Pērkons]
+
+@ [Enforcer alerted]
+lv [Enforcer pamanījis]
+
+@ [Grunt alerted]
+lv [Grunt pamanījis]
+
+@ [Rottweiler alerted]
+lv [Rotveilers pamanījis]
+
+@ [Knight alerted]
+lv [Knight pamanījis]
+
+@ [Death Knight alerted]
+lv [Death Knight pamanījis]
+
+@ [Scrag alerted]
+lv [Scrag pamanījis]
+
+@ [Ogre alerted]
+lv [Ogre pamanījis]
+
+@ [Fiend alerted]
+lv [Fiend pamanījis]
+
+@ [Shambler alerted]
+lv [Shambler pamanījis]
+
+@ [Zombie groaning]
+lv [Zombijs vaid]
+
+@ [Vore alerted]
+lv [Vore pamanījis]
+
+@ [Vore attacking]
+lv [Vore uzbrūk]
+
+@ [Spawn alerted]
+lv [Spawn pamanījis]
+
+@ [Rotfish]
+lv [Rotfish]
+
+@ [Spawn]
+lv [Spawn]
+
+@ [Chthon]
+lv [Chthon]
+
+@ [Hard landing]
+lv [Smaga piezemēšanās]
+
+@ [Drowning]
+lv [Slīkšana]
+
+@ [Gasping for air]
+lv [Gaisa ķeršana]
+
+@ [Burning]
+lv [Degšana]
+
+@ [Telefrag]
+lv [Telefrag]
+
+@ [Gibbed]
+lv [Saplosīts]
+
+# ==== console.txt ====
+
+# Console messages, shown translated only with con_translate 1 (Translate Console).
+# Cvar and command names stay as they are.
+@ Autosaved.
+lv Automātiski saglabāts.
+
+@ Game saved.
+lv Spēle saglabāta.
+
+@ Can't save now.
+lv Pašlaik nevar saglabāt.
+
+@ This game only autosaves (No Manual Saves modifier).
+lv Šī spēle saglabājas tikai automātiski (modifikators Bez manuālas saglabāšanas).
+
+@ Loading {}...
+lv Ielādē: {}...
+
+@ load failed: {}
+lv ielāde neizdevās: {}
+
+@ ERROR: autosave failed: {}
+lv KĻŪDA: autosaglabāšana neizdevās: {}
+
+@ ERROR: couldn't open {}
+lv KĻŪDA: neizdevās atvērt {}
+
+@ ERROR: couldn't open {}.
+lv KĻŪDA: neizdevās atvērt {}.
+
+@ ERROR: couldn't write {}: {}
+lv KĻŪDA: neizdevās ierakstīt {}: {}
+
+@ ERROR: couldn't create {}: {}
+lv KĻŪDA: neizdevās izveidot {}: {}
+
+@ couldn't write {}: {}
+lv neizdevās ierakstīt {}: {}
+
+@ Wrote {}
+lv Ierakstīts: {}
+
+@ screenshot failed: {}
+lv ekrānuzņēmums neizdevās: {}
+
+@ screenshot: {}
+lv ekrānuzņēmums: {}
+
+@ No readable save available. Select save or restart the level.
+lv Nav nolasāma saglabājuma. Izvēlies saglabājumu vai sāc līmeni no jauna.
+
+@ Unknown command "{}"
+lv Nezināma komanda “{}”
+
+@ couldn't exec {}
+lv neizdevās izpildīt {}
+
+@ execing {}
+lv izpilda {}
+
+@ execing config.cfg (inherited from {})
+lv izpilda config.cfg (mantots no {})
+
+@ execing config.cfg (mod defaults)
+lv izpilda config.cfg (moda noklusējumi)
+
+@ execing default.cfg (built-in)
+lv izpilda default.cfg (iebūvēts)
+
+@ {} cvars
+lv Mainīgie: {}
+
+@ {} commands
+lv Komandas: {}
+
+@ Can't "cmd", not connected
+lv Nevar izpildīt “cmd”, nav savienojuma
+
+@ Looking for Quake servers...
+lv Meklē Quake serverus...
+
+@ Bad value, must be between 1 and 65534
+lv Nederīga vērtība, jābūt no 1 līdz 65534
+
+@ Couldn't handle music file {}
+lv Neizdevās apstrādāt mūzikas failu {}
+
+@ Bug report written to {}
+lv Kļūdu atskaite ierakstīta: {}
+
+@ bugreport: can't create {}: {}
+lv bugreport: nevar izveidot {}: {}
+
+@ graphics preset: {}
+lv grafikas iepriekšiestatījums: {}
+
+@ Presets (r_shader_preset <name>):
+lv Iepriekšiestatījumi (r_shader_preset <nosaukums>):
+
+@ Add your own .slangp presets under <game>/shaders/.
+lv Savus .slangp iepriekšiestatījumus liec mapē <spēle>/shaders/.
+
+@ no shader preset loaded (r_shader_preset)
+lv nav ielādēts šeidera iepriekšiestatījums (r_shader_preset)
+
+@ r_shader_preset: "{}" not found
+lv r_shader_preset: “{}” nav atrasts
+
+@ no parameter "{}" in this preset
+lv šajā iepriekšiestatījumā nav parametra “{}”
+
+@ {} = {} (default {}, {}..{})
+lv {} = {} (noklusējums {}, {}..{})
+
+@ Switching to {}...
+lv Pārslēdzas uz: {}...
+
+@ game: no game dir "{}" in {}
+lv game: spēles mape “{}” nav atrodama vietā {}
+
+@ game: can't find the engine executable
+lv game: nevar atrast dzinēja izpildāmo failu
+
+@ game: exec failed: {}
+lv game: izpilde neizdevās: {}
+
+@ game: launch failed: {}
+lv game: palaišana neizdevās: {}
+
+@ loaded {} in {}s
+lv {} ielādēts {} s laikā
+
+@ No demos listed with startdemos
+lv Ar startdemos nav norādīts neviens demo
+
+@ Playing demo from {}.
+lv Atskaņo demo: {}.
+
+@ {} frames {} seconds {} fps
+lv {} kadri {} sekundes {} fps
+
+@ Recording to {}.
+lv Ieraksta: {}.
+
+@ Completed demo
+lv Demo pabeigts
+
+@ Can't record during demo playback
+lv Demo atskaņošanas laikā nevar ierakstīt
+
+@ Relative pathnames are not allowed.
+lv Relatīvi ceļi nav atļauti.
+
+@ Can't record - try again when connected
+lv Nevar ierakstīt - mēģini vēlreiz, kad ir savienojums
+
+@ {} demo(s) in loop
+lv Demo cilpā: {}
+
+@ Not recording a demo.
+lv Demo netiek ierakstīts.
+
+@ {} joined on a gamepad
+lv {} pievienojās ar kontrolieri
+
+@ goggles: needs a game started with Add-ons and Goggles enabled
+lv goggles: vajadzīga spēle, kas sākta ar ieslēgtiem papildinājumiem un brillēm
+
+@ equip: needs a game started with Add-ons and Goggles enabled
+lv equip: vajadzīga spēle, kas sākta ar ieslēgtiem papildinājumiem un brillēm
+
+@ UDP listening on port {}
+lv UDP klausās portā {}
+
+@ UDP bind on port {} failed: {}
+lv UDP piesaiste portam {} neizdevās: {}
+
+@ Connection accepted by {}
+lv Savienojumu pieņēma: {}
+
+@ Connection failed: {}
+lv Savienojums neizdevās: {}
+
+@ Couldn't resolve {}
+lv Neizdevās atrisināt {}
+
+@ Connecting to {}...
+lv Savienojas ar: {}...
+
+@ Connecting to QuakeWorld server {}...
+lv Savienojas ar QuakeWorld serveri: {}...
+
+@ Disconnected: {}
+lv Atvienots: {}
+
+@ Server disconnected
+lv Serveris atvienojās
+
+@ Client {} connected
+lv Klients {} pievienojās
+
+@ Client {} timed out
+lv Klientam {} beidzās gaidīšanas laiks
+
+@ Couldn't spawn server {}: {}
+lv Neizdevās palaist serveri {}: {}
+
+@ maxplayers can not be changed while a server is running.
+lv maxplayers nevar mainīt, kamēr darbojas serveris.
+
+@ You can't kick yourself!
+lv Tu nevari izmest pats sevi!
+
+@ Only the server may changelevel
+lv Tikai serveris drīkst izmantot changelevel
+
+@ {} renamed to {}
+lv {} — jaunais vārds: {}

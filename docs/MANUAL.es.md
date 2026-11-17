@@ -28,12 +28,19 @@ texto lo desplazan.
 ## Idioma
 
 Options → Juego → **Idioma** elige el idioma de los menús, los mensajes en
-pantalla y los textos de juego de la reedición de 2021: inglés, francés,
-alemán, italiano, español o ruso. **Sistema** sigue el idioma de tu
-ordenador. En los idiomas distintos del inglés, los textos pequeños del
-juego usan la fuente de los menús, porque la fuente clásica de Quake no
-tiene tildes ni cirílico. Los mensajes de la consola siguen en inglés salvo
-que actives **Traducir la consola**.
+pantalla y este manual: inglés, francés, alemán, italiano, español, ruso,
+polaco, ucraniano, checo, eslovaco, croata, búlgaro, sueco, finés, danés,
+noruego, neerlandés, griego, húngaro, rumano, portugués (Portugal o
+Brasil), japonés, coreano, chino (simplificado o tradicional), turco,
+indonesio, malayo, filipino, vietnamita, serbio, lituano, letón,
+estonio, maltés, albanés, armenio, georgiano,
+islandés, irlandés, galés, vasco, catalán, gallego, latín, esperanto, bielorruso, macedonio, esloveno o suajili. **Sistema** sigue el idioma de tu
+ordenador. Los textos de juego de la reedición de 2021 solo están
+traducidos al francés, alemán, italiano, español y ruso; los demás idiomas
+los muestran en inglés. En los idiomas distintos del inglés, los textos
+pequeños del juego usan la fuente de los menús, porque la fuente clásica de
+Quake solo tiene letras latinas sin tildes. Los mensajes de la consola
+siguen en inglés salvo que actives **Traducir la consola**.
 
 ## Paquetes de mapas
 

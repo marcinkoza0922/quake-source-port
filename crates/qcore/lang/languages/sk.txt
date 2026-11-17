@@ -1,0 +1,3024 @@
+# sk: the port's own text; English keys from crates/qcore/lang/*.txt.
+# Format in crates/qcore/src/lang/catalog.rs; check with tools/lang_check.py.
+
+# ==== menu.txt ====
+
+# Options pages: page names, row labels and choice values.
+@ 10% speed
+sk rýchlosť 10 %
+
+@ 2 split-screen
+sk 2 na rozdelenej obrazovke
+
+@ 3 split-screen
+sk 3 na rozdelenej obrazovke
+
+@ 4 split-screen
+sk 4 na rozdelenej obrazovke
+
+@ 5 split-screen
+sk 5 na rozdelenej obrazovke
+
+@ 6 split-screen
+sk 6 na rozdelenej obrazovke
+
+@ 2D aiming
+sk 2D mierenie
+
+@ 2x monsters
+sk monštrá x2
+
+@ 3x monsters
+sk monštrá x3
+
+@ 4x monsters
+sk monštrá x4
+
+@ 3D resolution
+sk 3D rozlíšenie
+
+@ 3D view
+sk 3D pohľad
+
+@ 8-bit Color
+sk 8-bitové farby
+
+@ Accessibility
+sk Prístupnosť
+
+@ Acquisition Cone
+sk Kužeľ zamerania
+
+@ Activation
+sk Aktivácia
+
+@ Add a ringing room tail after the cue
+sk Pridá po signáli dozvuk miestnosti
+
+@ Add delayed repeats after the cue
+sk Pridá po signáli oneskorené opakovania
+
+@ Add saturation and distortion
+sk Pridá saturáciu a skreslenie
+
+@ Add-ons
+sk Doplnky
+
+@ Address
+sk Adresa
+
+@ Adds fine noise to hide color banding
+sk Pridá jemný šum na skrytie farebných pásov
+
+@ Advanced Settings
+sk Rozšírené nastavenia
+
+@ Aim Assist
+sk Asistencia mierenia
+
+@ Aim Rotation
+sk Otáčanie pri mierení
+
+@ Aim Slowdown
+sk Spomalenie mierenia
+
+@ Aim Style
+sk Štýl mierenia
+
+@ All
+sk Všetko
+
+@ All enemies
+sk Všetci nepriatelia
+
+@ Alt Fire (Add-ons)
+sk Alternatívna streľba (doplnky)
+
+@ Always Run
+sk Vždy bežať
+
+@ Ambient Occlusion
+sk Ambientná oklúzia
+
+@ Ammo Counts
+sk Počty munície
+
+@ Ammo Counts Position
+sk Pozícia počtov munície
+
+@ Ammo Pickups
+sk Zbieranie munície
+
+@ Anisotropic
+sk Anizotropné
+
+@ Anti-aliasing
+sk Vyhladzovanie hrán
+
+@ Apply To
+sk Použiť na
+
+@ Armor
+sk Brnenie
+
+@ Armor Position
+sk Pozícia brnenia
+
+@ Ask
+sk Opýtať sa
+
+@ Attack
+sk Útok
+
+@ Audio
+sk Zvuk
+
+@ Auto-aim
+sk Automatické mierenie
+
+@ Auto-aim Settings
+sk Nastavenia automatického mierenia
+
+@ Autosave
+sk Automatické ukladanie
+
+@ Autosave Settings
+sk Nastavenia automatického ukladania
+
+@ Autosave Timer
+sk Interval automatického ukladania
+
+@ Autosaves to Keep
+sk Počet automatických uložení
+
+@ Bass
+sk Basy
+
+@ Blip
+sk Pípnutie
+
+@ Blood Quality
+sk Kvalita krvi
+
+@ Blood Splatter Settings
+sk Nastavenia striekania krvi
+
+@ Blue
+sk Modrá
+
+@ Boomerang Settings
+sk Nastavenia bumerangu
+
+@ Boost or cut high frequencies in decibels
+sk Zosilní alebo zoslabí výšky v decibeloch
+
+@ Boost or cut low frequencies in decibels
+sk Zosilní alebo zoslabí basy v decibeloch
+
+@ Brightness
+sk Jas
+
+@ Bullet Time (Add-ons)
+sk Bullet time (doplnky)
+
+@ Bullet Time Settings
+sk Nastavenia bullet time
+
+@ Button Glyphs
+sk Symboly tlačidiel
+
+@ Button Size
+sk Veľkosť tlačidiel
+
+@ Camera
+sk Kamera
+
+@ Caustic Intensity
+sk Intenzita kaustík
+
+@ Caustics
+sk Kaustiky
+
+@ Center
+sk Stred
+
+@ Center Message Position
+sk Pozícia správ v strede
+
+@ Center Message Time
+sk Trvanie správ v strede
+
+@ Center View
+sk Vycentrovať pohľad
+
+@ Change Color on Kill
+sk Zmeniť farbu pri zabití
+
+@ Change Color on Target
+sk Zmeniť farbu na cieli
+
+@ Chime
+sk Zvonenie
+
+@ Click
+sk Klik
+
+@ Clink
+sk Cinknutie
+
+@ Coin
+sk Minca
+
+@ Color
+sk Farba
+
+@ Color Filter
+sk Farebný filter
+
+@ Color of the grenade arc
+sk Farba oblúka granátu
+
+@ Colored Lighting
+sk Farebné osvetlenie
+
+@ Connect
+sk Pripojiť
+
+@ Contrast
+sk Kontrast
+
+@ Controls
+sk Ovládanie
+
+@ Cooldown (ms)
+sk Doba zotavenia (ms)
+
+@ Crosshair Outline
+sk Obrys zameriavača
+
+@ Crosshair Shape
+sk Tvar zameriavača
+
+@ Crosshair Size
+sk Veľkosť zameriavača
+
+@ Current Ammo
+sk Aktuálna munícia
+
+@ Current Ammo Position
+sk Pozícia aktuálnej munície
+
+@ Customize This Game
+sk Prispôsobiť túto hru
+
+@ Damage
+sk Poškodenie
+
+@ Damage Taken
+sk Utrpené poškodenie
+
+@ Debris
+sk Trosky
+
+@ Debris Quality
+sk Kvalita trosiek
+
+@ Debris Settings
+sk Nastavenia trosiek
+
+@ Directional Damage
+sk Smer poškodenia
+
+@ Dithering
+sk Dithering
+
+@ Dodge / Dive (Add-ons)
+sk Úskok / skok (doplnky)
+
+@ Dragging up looks down instead of up
+sk Ťahanie nahor otočí pohľad nadol
+
+@ Drive
+sk Saturácia
+
+@ Dynamic Lights
+sk Dynamické svetlá
+
+@ Echo
+sk Ozvena
+
+@ Enemy Health
+sk Zdravie nepriateľov
+
+@ Enemy Wounds
+sk Zranenia nepriateľov
+
+@ Enhanced Blood Splatter
+sk Vylepšené striekanie krvi
+
+@ Enhanced FX
+sk Vylepšené efekty
+
+@ Enhanced Models
+sk Vylepšené modely
+
+@ Enhanced Particles
+sk Vylepšené častice
+
+@ Enhanced Water
+sk Vylepšená voda
+
+@ Enhancements
+sk Vylepšenia
+
+@ Equipment Wheel (Add-ons)
+sk Koleso vybavenia (doplnky)
+
+@ Exploding boxes throw metal shards
+sk Vybuchujúce debny rozhadzujú kovové úlomky
+
+@ Explosion Damage
+sk Poškodenie výbuchom
+
+@ Explosion Scorch Marks
+sk Stopy po výbuchoch
+
+@ Explosions scorch nearby solid surfaces
+sk Výbuchy opália blízke pevné povrchy
+
+@ Explosives only
+sk Iba výbušniny
+
+@ Extra Monsters
+sk Ďalšie monštrá
+
+@ Extra Per 10 Damage (ms)
+sk Navyše za 10 poškodenia (ms)
+
+@ FX Settings
+sk Nastavenia efektov
+
+@ Field of View
+sk Zorné pole
+
+@ Firing never uses up ammo
+sk Streľba nikdy nespotrebuje muníciu
+
+@ First person
+sk z prvej osoby
+
+@ Flick Time
+sk Čas flicku
+
+@ Flight Speed
+sk Rýchlosť letu
+
+@ Fog
+sk Hmla
+
+@ Frag Limit
+sk Limit fragov
+
+@ Freeze Duration (ms)
+sk Trvanie zmrazenia (ms)
+
+@ GLQuake
+sk GLQuake
+
+@ Game Speed
+sk Rýchlosť hry
+
+@ Game Type
+sk Typ hry
+
+@ Gameplay
+sk Hrateľnosť
+
+@ Gameplay Modifiers
+sk Modifikátory hry
+
+@ Gel Quality
+sk Kvalita gélu
+
+@ Gib Surface Painting
+sk Škvrny od kusov tiel
+
+@ Gibs
+sk Kusy tiel
+
+@ Gibs and heads tumble and bounce
+sk Kusy tiel a hlavy sa kotúľajú a odrážajú
+
+@ Goggle Glow Quality
+sk Kvalita žiary okuliarov
+
+@ Goggle Intensity
+sk Intenzita okuliarov
+
+@ Goggle Noise
+sk Šum okuliarov
+
+@ Goggles Settings
+sk Nastavenia okuliarov
+
+@ Graphics
+sk Grafika
+
+@ Green
+sk Zelená
+
+@ Grenade Arc
+sk Oblúk granátu
+
+@ Grenade Arc Settings
+sk Nastavenia oblúka granátu
+
+@ Gun Kick
+sk Spätný ráz zbrane
+
+@ Gyro
+sk Gyroskop
+
+@ Gyro & Flick Stick
+sk Gyroskop a flick stick
+
+@ Gyro Active
+sk Gyroskop aktívny
+
+@ Gyro Aiming
+sk Mierenie gyroskopom
+
+@ HUD
+sk HUD
+
+@ HUD Style
+sk Štýl HUD
+
+@ Health
+sk Zdravie
+
+@ Health Pickups
+sk Zbieranie zdravia
+
+@ Health Position
+sk Pozícia zdravia
+
+@ Health Regeneration
+sk Regenerácia zdravia
+
+@ Hit & Kill Sounds
+sk Zvuky zásahu a zabitia
+
+@ Hit Doors & Lifts
+sk Zásahy dverí a výťahov
+
+@ Hit Markers
+sk Značky zásahu
+
+@ Hit Sound
+sk Zvuk zásahu
+
+@ Hitmarker Size
+sk Veľkosť značky zásahu
+
+@ Hitmarker Type
+sk Typ značky zásahu
+
+@ Hitstop Advanced
+sk Rozšírený hitstop
+
+@ Hitstop Settings
+sk Nastavenia hitstopu
+
+@ Hold
+sk Držať
+
+@ Hold lock-on
+sk Držať zameranie
+
+@ Hook Enemies
+sk Zachytiť nepriateľov
+
+@ Hook Metal
+sk Zachytiť kov
+
+@ Hook Stone
+sk Zachytiť kameň
+
+@ Hook Wood
+sk Zachytiť drevo
+
+@ Hooking an enemy pulls you to it
+sk Zachytený nepriateľ vás pritiahne k sebe
+
+@ Hookshot Range
+sk Dosah háku
+
+@ Hookshot Settings
+sk Nastavenia háku
+
+@ Host Game
+sk Založiť hru
+
+@ How far the hook flies before it retracts
+sk Ako ďaleko hák letí, kým sa vráti
+
+@ How visible the on-screen controls are
+sk Viditeľnosť ovládacích prvkov na obrazovke
+
+@ Impact Lifetime
+sk Trvanie zásahov
+
+@ Infinite Ammo
+sk Nekonečná munícia
+
+@ Input
+sk Vstup
+
+@ Input Scale
+sk Mierka vstupu
+
+@ Interpolate Animation
+sk Interpolovať animácie
+
+@ Interpolate Movement
+sk Interpolovať pohyb
+
+@ Invert Look
+sk Obrátiť pohľad
+
+@ Invert Mouse
+sk Obrátiť myš
+
+@ Invert Stick
+sk Obrátiť páčku
+
+@ Jet Quality
+sk Kvalita prúdu
+
+@ Join Game
+sk Pripojiť sa k hre
+
+@ Jump / Swim Up
+sk Skok / plávať nahor
+
+@ Jump again in mid-air
+sk Skočiť znova vo vzduchu
+
+@ Jumps
+sk Skoky
+
+@ Keys & Powerups
+sk Kľúče a bonusy
+
+@ Keys & Powerups Position
+sk Pozícia kľúčov a bonusov
+
+@ Kill Bonus (x)
+sk Bonus za zabitie (x)
+
+@ Kill Sound
+sk Zvuk zabitia
+
+@ Knock
+sk Klopnutie
+
+@ Left
+sk Vľavo
+
+@ Length of the motion blur streaks
+sk Dĺžka šmúh rozmazania pohybu
+
+@ Lifetime (seconds)
+sk Trvanie (sekundy)
+
+@ Live Portal Views
+sk Živé pohľady portálov
+
+@ Live View Distance
+sk Dosah živého pohľadu
+
+@ Local Players
+sk Lokálni hráči
+
+@ Local red wounds follow enemy animation
+sk Lokálne červené rany sledujú animáciu nepriateľa
+
+@ Lock Indicator
+sk Indikátor zamerania
+
+@ Long falls don't hurt
+sk Dlhé pády nezraňujú
+
+@ Longest Freeze (ms)
+sk Najdlhšie zmrazenie (ms)
+
+@ Look Down
+sk Pozrieť nadol
+
+@ Look Speed
+sk Rýchlosť pohľadu
+
+@ Look Up
+sk Pozrieť nahor
+
+@ Main Menu Music
+sk Hudba v hlavnom menu
+
+@ Max FPS
+sk Max. FPS
+
+@ Max Players
+sk Max. hráčov
+
+@ Maximum Impacts
+sk Max. počet zásahov
+
+@ Maximum Marks
+sk Max. počet stôp
+
+@ Maximum Range
+sk Maximálny dosah
+
+@ Melee only
+sk Iba na blízko
+
+@ Message Background
+sk Pozadie správ
+
+@ Message Text Size
+sk Veľkosť textu správ
+
+@ Messages & Captions
+sk Správy a titulky
+
+@ Meter Duration (real seconds)
+sk Trvanie ukazovateľa (reálne sekundy)
+
+@ Minimum Damage
+sk Minimálne poškodenie
+
+@ Mode
+sk Režim
+
+@ Modern Console
+sk Moderná konzola
+
+@ Modern HUD Layout
+sk Moderné rozloženie HUD
+
+@ Most recent save
+sk Najnovšie uloženie
+
+@ Motion Blur
+sk Rozmazanie pohybu
+
+@ Motion Blur Amount
+sk Sila rozmazania pohybu
+
+@ Motion Blur Quality
+sk Kvalita rozmazania pohybu
+
+@ Mouse & Keyboard
+sk Myš a klávesnica
+
+@ Mouse Speed
+sk Rýchlosť myši
+
+@ Move Back
+sk Dozadu
+
+@ Move Forward
+sk Dopredu
+
+@ Music Volume
+sk Hlasitosť hudby
+
+@ Next Weapon
+sk Ďalšia zbraň
+
+@ No Drowning
+sk Bez topenia
+
+@ No Fall Damage
+sk Bez poškodenia pádom
+
+@ No Manual Saves
+sk Bez ručného ukladania
+
+@ No Self Damage
+sk Bez vlastného poškodenia
+
+@ Noise Filter
+sk Filter šumu
+
+@ Normal Color
+sk Bežná farba
+
+@ Notify Message Position
+sk Pozícia oznámení
+
+@ Notify Message Time
+sk Trvanie oznámení
+
+@ Number of splatter rays per blood impact
+sk Počet lúčov striekania na jeden zásah krvou
+
+@ Off
+sk Vypnuté
+
+@ On Death
+sk Pri smrti
+
+@ On Kill Color
+sk Farba pri zabití
+
+@ On Target Color
+sk Farba na cieli
+
+@ Opacity
+sk Nepriehľadnosť
+
+@ Opacity of the grenade arc
+sk Nepriehľadnosť oblúka granátu
+
+@ Pants Color
+sk Farba nohavíc
+
+@ Particle Quality
+sk Kvalita častíc
+
+@ Particles
+sk Častice
+
+@ Physical Nail Impacts
+sk Fyzikálne zásahy klincov
+
+@ Pistol Start
+sk Štart od nuly
+
+@ Pitch
+sk Výška tónu
+
+@ Pitch Sensitivity
+sk Vertikálna citlivosť
+
+@ Playback Speed
+sk Rýchlosť prehrávania
+
+@ Player Setup
+sk Nastavenie hráča
+
+@ Pop
+sk Puk
+
+@ Portal Gun Settings
+sk Nastavenia portálovej zbrane
+
+@ Portal Recursion
+sk Rekurzia portálov
+
+@ Portal View Quality
+sk Kvalita pohľadu portálov
+
+@ Preview Sound
+sk Vypočuť zvuk
+
+@ Previous Weapon
+sk Predchádzajúca zbraň
+
+@ Projectile Shotguns Settings
+sk Nastavenia projektilových brokovníc
+
+@ Projectile Speed (units/s)
+sk Rýchlosť projektilov (jednotky/s)
+
+@ Purple
+sk Fialová
+
+@ Push
+sk Odtlačenie
+
+@ Push Strength
+sk Sila odtlačenia
+
+@ Quick Load
+sk Rýchle načítanie
+
+@ Quick Save
+sk Rýchle uloženie
+
+@ Railgun Settings
+sk Nastavenia railgunu
+
+@ Ranged only
+sk Iba na diaľku
+
+@ Reacquire While Held
+sk Znova zamerať pri držaní
+
+@ Red
+sk Červená
+
+@ Reduce Motion
+sk Obmedziť pohyb
+
+@ Regen (seconds per second)
+sk Regenerácia (sekundy za sekundu)
+
+@ Render Scale
+sk Mierka vykresľovania
+
+@ Reverb
+sk Dozvuk
+
+@ Right
+sk Vpravo
+
+@ Ripple Intensity
+sk Intenzita vlnenia
+
+@ Ripples
+sk Vlnenie
+
+@ Roll Sensitivity
+sk Citlivosť náklonu
+
+@ Rumble
+sk Vibrácie
+
+@ Run
+sk Beh
+
+@ Save on All Enemies Killed
+sk Uložiť po zabití všetkých nepriateľov
+
+@ Save on All Secrets Found
+sk Uložiť po nájdení všetkých tajomstiev
+
+@ Save on Level Entry
+sk Uložiť pri vstupe do úrovne
+
+@ Save on Secret Found
+sk Uložiť pri nájdení tajomstva
+
+@ Scoreboard
+sk Tabuľka skóre
+
+@ Screen Flashes
+sk Záblesky obrazovky
+
+@ Screen Shader
+sk Shader obrazovky
+
+@ Screen Shake
+sk Otrasy obrazovky
+
+@ Search LAN
+sk Hľadať v LAN
+
+@ Seconds a center-screen message stays up
+sk Ako dlho ostane správa v strede obrazovky (s)
+
+@ See Through Portals
+sk Vidieť cez portály
+
+@ See-through Teleporters
+sk Priehľadné teleporty
+
+@ Shirt Color
+sk Farba trička
+
+@ Shotgun Bullet Decals
+sk Stopy po brokoch
+
+@ Shoulder left
+sk cez rameno vľavo
+
+@ Shoulder right
+sk cez rameno vpravo
+
+@ Show FPS
+sk Zobraziť FPS
+
+@ Show Face
+sk Zobraziť tvár
+
+@ Shrapnel
+sk Šrapnely
+
+@ Size of on-screen messages and captions
+sk Veľkosť správ a titulkov na obrazovke
+
+@ Skill
+sk Obtiažnosť
+
+@ Sky Fog
+sk Hmla na oblohe
+
+@ Smooths the stepped movement of monsters
+sk Vyhladí trhaný pohyb monštier
+
+@ Sound
+sk Zvuk
+
+@ Sound Captions
+sk Titulky zvukov
+
+@ Sound Volume
+sk Hlasitosť zvukov
+
+@ Speed Blur
+sk Rozmazanie rýchlosťou
+
+@ Splashes
+sk Špliechanie
+
+@ Splatter Amount
+sk Množstvo striekancov
+
+@ Splatter Size
+sk Veľkosť striekancov
+
+@ Start Game
+sk Spustiť hru
+
+@ Staying underwater doesn't hurt
+sk Pobyt pod vodou nezraňuje
+
+@ Stick Look Pitch
+sk Vertikálny pohľad páčkou
+
+@ Stick Look Yaw
+sk Horizontálny pohľad páčkou
+
+@ Strafe Left
+sk Úkrok vľavo
+
+@ Strafe Right
+sk Úkrok vpravo
+
+@ Strength of the surface swell and rings
+sk Sila vzdutia a kruhov na hladine
+
+@ Stun Duration
+sk Trvanie omráčenia
+
+@ Style
+sk Štýl
+
+@ Supersampling
+sk Supersampling
+
+@ Surface Hit Effects
+sk Efekty zásahov povrchov
+
+@ Swim Down
+sk Plávať nadol
+
+@ Targets
+sk Ciele
+
+@ Teamplay
+sk Tímová hra
+
+@ Texture Filter
+sk Filter textúr
+
+@ Third person
+sk z tretej osoby
+
+@ Thud
+sk Buchnutie
+
+@ Tick
+sk Tik
+
+@ Time Limit
+sk Časový limit
+
+@ Time Stretch
+sk Natiahnutie času
+
+@ Toggle Attack
+sk Prepínať útok
+
+@ Toggle Run
+sk Prepínať beh
+
+@ Toggle auto-aim
+sk Prepínať automatické mierenie
+
+@ Touch Controls
+sk Dotykové ovládanie
+
+@ Touchscreen
+sk Dotyková obrazovka
+
+@ Tough Enemy Health
+sk Zdravie odolných nepriateľov
+
+@ Tough enemies only
+sk Iba odolní nepriatelia
+
+@ Trail Colour
+sk Farba stopy
+
+@ Translate Console
+sk Prekladať konzolu
+
+@ Translucent Water
+sk Priesvitná voda
+
+@ Treble
+sk Výšky
+
+@ Turn Left
+sk Otočiť vľavo
+
+@ Turn Right
+sk Otočiť vpravo
+
+@ Underwater FX
+sk Efekty pod vodou
+
+@ Use Bullet Time Meter
+sk Použiť ukazovateľ bullet time
+
+@ VSync
+sk VSync
+
+@ View Bob
+sk Pohupovanie pohľadu
+
+@ Viewmodels
+sk Modely zbraní
+
+@ Volume
+sk Hlasitosť
+
+@ Water Opacity
+sk Nepriehľadnosť vody
+
+@ Water Quality
+sk Kvalita vody
+
+@ Water Settings
+sk Nastavenia vody
+
+@ Weapon Wheel
+sk Koleso zbraní
+
+@ Weapon Wheel Slowdown
+sk Spomalenie pri kolese zbraní
+
+@ Weapons
+sk Zbrane
+
+@ Weapons Position
+sk Pozícia zbraní
+
+@ Where center-screen messages appear
+sk Kde sa zobrazujú správy v strede obrazovky
+
+@ Where pickup and event messages appear
+sk Kde sa zobrazujú správy o predmetoch a udalostiach
+
+@ White
+sk Biela
+
+@ Yaw Sensitivity
+sk Horizontálna citlivosť
+
+@ Yellow
+sk Žltá
+
+# lowercase choice values
+@ T
+sk T
+
+@ always
+sk vždy
+
+@ auto
+sk auto
+
+@ banded
+sk v pásoch
+
+@ borderless
+sk bez okraja
+
+@ bottom center
+sk dole v strede
+
+@ bottom left
+sk dole vľavo
+
+@ bottom right
+sk dole vpravo
+
+@ box
+sk štvorec
+
+@ broken square
+sk prerušený štvorec
+
+@ classic
+sk klasický
+
+@ coarse
+sk hrubé
+
+@ cooperative
+sk kooperácia
+
+@ cross
+sk kríž
+
+@ cross + dot
+sk kríž + bodka
+
+@ cyan
+sk azúrová
+
+@ dashed
+sk čiarkovaný
+
+@ deathmatch
+sk deathmatch
+
+@ deuteranopia
+sk deuteranopia
+
+@ diagonal streaks
+sk diagonálne šmuhy
+
+@ diamond
+sk kosoštvorec
+
+@ dot
+sk bodka
+
+@ double
+sk dvojitý
+
+@ double chevrons
+sk dvojité šípky
+
+@ double diagonals
+sk dvojité diagonály
+
+@ easy
+sk ľahká
+
+@ fine
+sk jemné
+
+@ fit output
+sk podľa výstupu
+
+@ flick stick
+sk flick stick
+
+@ fullscreen
+sk celá obrazovka
+
+@ gap cross
+sk otvorený kríž
+
+@ green
+sk zelená
+
+@ grey
+sk sivá
+
+@ half speed
+sk polovičná rýchlosť
+
+@ hard
+sk ťažká
+
+@ high
+sk vysoká
+
+@ huge
+sk obrovská
+
+@ immersive
+sk pohlcujúci
+
+@ intense
+sk intenzívne
+
+@ large
+sk veľká
+
+@ larger
+sk väčšia
+
+@ largest
+sk najväčšia
+
+@ linear
+sk lineárny
+
+@ low
+sk nízka
+
+@ lower
+sk dole
+
+@ magenta
+sk purpurová
+
+@ medium
+sk stredná
+
+@ middle
+sk v strede
+
+@ middle left
+sk v strede vľavo
+
+@ middle right
+sk v strede vpravo
+
+@ modern
+sk moderný
+
+@ nearest
+sk najbližší
+
+@ nightmare
+sk nočná mora
+
+@ nintendo
+sk nintendo
+
+@ no team damage
+sk bez tímového poškodenia
+
+@ none
+sk žiadne
+
+@ normal
+sk normálna
+
+@ off
+sk vypnuté
+
+@ off while held
+sk vypnuté pri držaní
+
+@ on
+sk zapnuté
+
+@ only while held
+sk iba pri držaní
+
+@ playstation
+sk playstation
+
+@ protanopia
+sk protanopia
+
+@ quarter speed
+sk štvrtinová rýchlosť
+
+@ red
+sk červená
+
+@ short diagonals
+sk krátke diagonály
+
+@ single
+sk jednoduchý
+
+@ small
+sk malá
+
+@ solid
+sk plný
+
+@ spectacle
+sk veľkolepé
+
+@ subtle
+sk jemné
+
+@ team damage
+sk tímové poškodenie
+
+@ top center
+sk hore v strede
+
+@ top left
+sk hore vľavo
+
+@ top right
+sk hore vpravo
+
+@ triple
+sk trojitý
+
+@ tritanopia
+sk tritanopia
+
+@ upper
+sk hore
+
+@ white
+sk biela
+
+@ whole screen
+sk celá obrazovka
+
+@ windowed
+sk v okne
+
+@ xbox
+sk xbox
+
+@ yellow
+sk žltá
+
+# ==== tooltips.txt ====
+
+# Options help lines (tooltips) and reasons for disabled rows.
+@ 2D aiming turns the view continuously with the right stick; flick stick snaps the view to where you push the stick, then turning the stick rotates it
+sk 2D mierenie otáča pohľad plynulo pravou páčkou; flick stick otočí pohľad ihneď smerom, kam páčku zatlačíte, a otáčanie páčky ho potom točí ďalej
+
+@ 3D resolution relative to the window; the UI stays sharp
+sk 3D rozlíšenie vzhľadom na okno; rozhranie zostane ostré
+
+@ 3D view keeps the HUD and menus sharp; whole screen runs them through the shader too
+sk 3D pohľad nechá HUD a menu ostré; celá obrazovka ich tiež prepustí cez shader
+
+@ A Quake III style railgun: a slug that pierces every enemy on its line, using 2 cells a shot and refiring every 1.5 s; select it through its assigned weapon slot (Add-ons)
+sk Railgun v štýle Quake III: projektil, ktorý prestrelí každého nepriateľa na svojej dráhe, 2 články na výstrel, ďalší výstrel o 1,5 s; vyberte ho cez jeho priradený slot zbrane (doplnky)
+
+@ A Zelda-style hookshot: fire sends a chain hook out; it latches onto hookable surfaces or enemies and reels you in; fire again to let go
+sk Hák v štýle Zeldy: streľba vystrelí hák na reťazi, ktorý sa zachytí na vhodných povrchoch alebo nepriateľoch a pritiahne vás; ďalšia streľba ho uvoľní
+
+@ Also translates the engine's console messages; off keeps them in English
+sk Prekladá aj správy konzoly enginu; vypnuté ich ponechá v angličtine
+
+@ Automatically acquire another enemy while holding Lock-on after losing a target
+sk Pri držaní zamerania automaticky zameria ďalšieho nepriateľa po strate cieľa
+
+@ Blends between animation frames of monsters and weapons
+sk Prelína snímky animácie monštier a zbraní
+
+@ Blood stains surfaces and bodies; cosmetic, independent of particle packs
+sk Krv zafarbí povrchy a telá; iba kozmetické, nezávislé od balíkov častíc
+
+@ Bloom glow around bright lights and heat sources; medium uses 4 taps, high uses 8, low disables halo taps
+sk Bloom žiara okolo jasných svetiel a zdrojov tepla; stredná používa 4 vzorky, vysoká 8, nízka vypne halo
+
+@ Blurs fast-moving monsters, projectiles and doors (not camera turns)
+sk Rozmaže rýchlo sa pohybujúce monštrá, projektily a dvere (nie otáčanie kamery)
+
+@ Blurs the screen edges during fast falls and launches; keeps the centre clear. Reduce Motion disables it
+sk Rozmaže okraje obrazovky pri rýchlych pádoch a výstreloch; stred zostane ostrý. Obmedziť pohyb ho vypne
+
+@ Brightness of the underwater light patterns
+sk Jas svetelných vzorov pod vodou
+
+@ Caps mark count, lifetime, airborne droplets and wound/gib painting; low skips enemy wounds and gib trails
+sk Obmedzí počet stôp, ich trvanie, kvapky vo vzduchu a škvrny rán a kusov tiel; nízka vynechá rany nepriateľov a stopy kusov tiel
+
+@ Caps shader input at output size so 200% render scale keeps 3D sharpness without 4x shader cost; low scales stay low-res
+sk Obmedzí vstup shadera na výstupnú veľkosť, takže mierka 200 % zachová ostrosť 3D bez štvornásobnej záťaže shadera; nízke mierky ostanú v nízkom rozlíšení
+
+@ Classic: the original status bar; modern: compact elements at the screen edges
+sk Klasický: pôvodný stavový panel; moderný: kompaktné prvky pri okrajoch obrazovky
+
+@ Coat atlas resolution, rebuild rate and shader detail: low builds smaller coats less often with fast shading; high uses full detail
+sk Rozlíšenie atlasu povlakov, frekvencia obnovy a detail shadera: nízka tvorí menšie povlaky menej často s rýchlym tieňovaním; vysoká používa plný detail
+
+@ Colour of the railgun's spiral trail; split-screen players each get the next colour along
+sk Farba špirálovej stopy railgunu; pri rozdelenej obrazovke dostane každý hráč ďalšiu farbu v poradí
+
+@ Damage the railgun deals to each enemy it passes through (Quake III: 100)
+sk Poškodenie, ktoré railgun spôsobí každému prestrelenému nepriateľovi (Quake III: 100)
+
+@ Dark backdrop behind on-screen messages for readability
+sk Tmavé pozadie za správami na obrazovke pre lepšiu čitateľnosť
+
+@ Dark border keeps the crosshair visible on any background
+sk Tmavý okraj udrží zameriavač viditeľný na akomkoľvek pozadí
+
+@ Darkens corners and contact areas where geometry meets; higher quality is sharper
+sk Stmaví rohy a miesta, kde sa geometria stretáva; vyššia kvalita je ostrejšia
+
+@ Debris lands on and is carried or shoved by doors, lifts and platforms
+sk Trosky dopadajú na dvere, výťahy a plošiny, ktoré ich nesú alebo posúvajú
+
+@ Detail for caustics, ripples and splashes: low uses smaller budgets and shorter view distance; high uses larger budgets and farther view distance
+sk Detail kaustík, vlnenia a špliechania: nízka používa menšie rozpočty a kratšiu dohľadnosť; vysoká väčšie rozpočty a ďalšiu dohľadnosť
+
+@ Disabled while Enhanced Particles is on: its particles replace the GLQuake and Classic styles
+sk Nedostupné, kým sú zapnuté Vylepšené častice: ich častice nahrádzajú štýly GLQuake a klasický
+
+@ Disabled while Enhanced Water is on: its own underwater effects replace the classic and GLQuake view warps
+sk Nedostupné, kým je zapnutá Vylepšená voda: jej vlastné efekty pod vodou nahrádzajú klasické a GLQuake skreslenie
+
+@ Draw the predicted grenade path as a solid or dashed line
+sk Vykreslí predpokladanú dráhu granátu plnou alebo čiarkovanou čiarou
+
+@ Draw the view out of the linked portal inside each portal; off shows flat discs (fastest)
+sk V každom portáli vykreslí pohľad z prepojeného portálu; vypnuté zobrazí ploché disky (najrýchlejšie)
+
+@ Droplets spray up when things enter or leave water, slime or lava
+sk Kvapky vystreknú, keď niečo vojde do vody, slizu alebo lávy alebo z nich vyjde
+
+@ Emulates the original 8-bit palette of software rendering
+sk Napodobní pôvodnú 8-bitovú paletu softvérového vykresľovania
+
+@ Every level starts with only the shotgun and axe, as if started fresh
+sk Každá úroveň začína iba s brokovnicou a sekerou, ako pri novom začiatku
+
+@ Explosion damage for each remotely detonated sticky bomb
+sk Poškodenie výbuchom každej na diaľku odpálenej lepivej bomby
+
+@ Extra freeze milliseconds for every 10 damage dealt, so heavy hits stop longer
+sk Milisekundy zmrazenia navyše za každých 10 poškodenia, aby silné zásahy zastavili hru dlhšie
+
+@ First person, a third-person camera centered behind the player, or one over the right or left shoulder; third person hides viewmodels
+sk Z prvej osoby, kamera z tretej osoby za hráčom alebo ponad pravé či ľavé rameno; tretia osoba skryje modely zbraní
+
+@ Flash the selected marker on confirmed hits; colors are shared with the crosshair
+sk Pri potvrdenom zásahu blikne zvolená značka; farby sú spoločné so zameriavačom
+
+@ Freeze for every enemy, or only for enemies that were tough before the hit
+sk Zmraziť pri každom nepriateľovi, alebo iba pri tých, ktorí boli pred zásahom odolní
+
+@ Freeze the game briefly when you damage an enemy; single player with add-ons only
+sk Pri zranení nepriateľa na chvíľu zmrazí hru; iba hra pre jedného hráča s doplnkami
+
+@ Gibs tumble and barrels throw shrapnel; shots and blasts push them (cosmetic only)
+sk Kusy tiel sa kotúľajú a sudy rozhadzujú šrapnely; strely a výbuchy ich posúvajú (iba kozmetické)
+
+@ Health an enemy must have had before the hit to count as tough
+sk Zdravie, ktoré musel mať nepriateľ pred zásahom, aby sa rátal ako odolný
+
+@ Hits dealing less damage than this do not freeze the game; the default 10 skips nails and shotgun pellets
+sk Zásahy s menším poškodením hru nezmrazia; predvolená hodnota 10 vynechá klince a broky
+
+@ Hold fire and sweep the crosshair over monsters to queue them, release to throw: it stuns each in turn and flies back; alt-fire clears the queue
+sk Držte streľbu a prechádzajte zameriavačom cez monštrá, aby ste ich zaradili, pustením hodíte: omráči ich jedného po druhom a vráti sa; alternatívna streľba vyprázdni poradie
+
+@ Hold: keep Lock-on held. Toggle: press Auto-aim Toggle to enable automatic acquisition. Click look stick to switch targets
+sk Držať: držte Zameranie. Prepínať: stlačte Prepínať automatické mierenie pre automatické zameriavanie. Kliknutím páčky pohľadu prepnete cieľ
+
+@ How close an enemy must be to the crosshair for automatic acquisition in toggle mode (degrees)
+sk Ako blízko k zameriavaču musí byť nepriateľ, aby sa v režime prepínania automaticky zameral (stupne)
+
+@ How far the view tilts up and down when you tilt the controller (pitch axis)
+sk Ako veľmi sa pohľad nakloní nahor a nadol pri naklonení ovládača (os sklonu)
+
+@ How far the view turns left and right when you turn the controller (yaw axis)
+sk Ako veľmi sa pohľad otočí doľava a doprava pri otočení ovládača (os otáčania)
+
+@ How far the view turns when you drag on the right half of the screen
+sk Ako veľmi sa pohľad otočí pri ťahaní po pravej polovici obrazovky
+
+@ How fast the boomerang flies (units per second)
+sk Ako rýchlo bumerang letí (jednotky za sekundu)
+
+@ How hard shots and explosions push debris around
+sk Ako silno strely a výbuchy rozhadzujú trosky
+
+@ How hard the Powerwasher's water pushes enemies
+sk Ako silno voda z tlakového čističa odtláča nepriateľov
+
+@ How long a hit freezes the game, in milliseconds
+sk Ako dlho zásah zmrazí hru, v milisekundách
+
+@ How strongly fog covers the sky when fog is on
+sk Ako silno hmla zakryje oblohu, keď je hmla zapnutá
+
+@ How the view distorts underwater: Classic ripples the whole screen like software Quake, GLQuake slowly stretches and squashes the view
+sk Ako sa pohľad pod vodou skresľuje: klasický vlní celú obrazovku ako softvérový Quake, GLQuake pomaly naťahuje a stláča pohľad
+
+@ Ignores gyro rotation slower than this many degrees per second, to hide hand tremor
+sk Ignoruje otáčanie gyroskopu pomalšie ako toľko stupňov za sekundu, aby skryl trasenie rúk
+
+@ Immersive: appears for a few seconds only when its value changes
+sk Pohlcujúci: zobrazí sa na pár sekúnd iba pri zmene hodnoty
+
+@ Keeps textures sharp on floors and walls seen at steep angles
+sk Udrží textúry na podlahách a stenách ostré aj pod strmým uhlom
+
+@ Lights from rockets, muzzle flashes and explosions brighten nearby walls
+sk Svetlo rakiet, záblesky výstrelov a výbuchy rozjasnia blízke steny
+
+@ Liquid surfaces swell and ring out where things move through them
+sk Hladiny kvapalín sa vlnia a tvoria kruhy, kde nimi niečo prechádza
+
+@ Lobs sticky bombs (rockets ammo) that cling to walls, doors and monsters; alt-fire detonates them all
+sk Hádže lepivé bomby (rakety ako munícia), ktoré sa prilepia na steny, dvere a monštrá; alternatívna streľba ich všetky odpáli
+
+@ Look of the classic particles: GLQuake draws soft round dots, Classic draws square pixels like software Quake
+sk Vzhľad klasických častíc: GLQuake kreslí mäkké okrúhle bodky, klasický štvorcové pixely ako softvérový Quake
+
+@ Low skips the background smear halo and uses fewer blur samples; high keeps the full halo and smoother streaks
+sk Nízka vynechá halo rozmazania pozadia a používa menej vzoriek; vysoká ponechá celé halo a hladšie šmuhy
+
+@ Low: hard particle edges, half the scripted particles and fewer hit sparks. Medium: soft edges. High: soft edges checked per MSAA sample, most hit sparks
+sk Nízka: ostré okraje častíc, polovica skriptovaných častíc a menej iskier pri zásahu. Stredná: mäkké okraje. Vysoká: mäkké okraje pre každú vzorku MSAA, väčšina iskier
+
+@ Marks fade out before expiring; oldest marks are recycled at the limit
+sk Stopy pred zánikom vyblednú; pri limite sa najstaršie stopy recyklujú
+
+@ Max nested portal reflections to draw; each level redraws the scene
+sk Max. počet vnorených pohľadov portálov; každá úroveň vykreslí scénu znova
+
+@ Max portals per screen with a live view; each one redraws the scene
+sk Max. počet portálov na obrazovke so živým pohľadom; každý vykreslí scénu znova
+
+@ Maximum distance for acquiring and keeping an enemy locked
+sk Maximálna vzdialenosť na zameranie a udržanie nepriateľa
+
+@ Minimum gap between freezes, so shotgun pellets and rapid fire count once; kills ignore it
+sk Minimálny odstup medzi zmrazeniami, aby sa broky a rýchla streľba rátali raz; zabitia ho ignorujú
+
+@ Modern terminal console with autocomplete popup, history search, ANSI colors, bash shell and piping; off uses the classic Quake console
+sk Moderná terminálová konzola s ponukou automatického dopĺňania, vyhľadávaním v histórii, farbami ANSI, shellom bash a rúrami; vypnuté použije klasickú konzolu Quake
+
+@ Monsters take proportionally less damage at higher values; above 100% is harder
+sk Monštrá utrpia pri vyšších hodnotách úmerne menšie poškodenie; nad 100 % je to ťažšie
+
+@ Moving gibs leave blood on surfaces they touch
+sk Pohybujúce sa kusy tiel zanechávajú krv na povrchoch, ktorých sa dotknú
+
+@ Multiplier on the freeze when the hit kills the enemy; 1 means no extra
+sk Násobiteľ zmrazenia, keď zásah nepriateľa zabije; 1 znamená nič navyše
+
+@ Multiplies ammo from pickups (up to the normal carry limit); below 100% is harder
+sk Násobí muníciu z predmetov (do bežného limitu nosenia); pod 100 % je to ťažšie
+
+@ Multiplies health from pickups (up to 100, or the item's own limit); below 100% is harder
+sk Násobí zdravie z predmetov (do 100 alebo do limitu predmetu); pod 100 % je to ťažšie
+
+@ Nails stick to wood and bodies; hard surfaces deflect them to the floor
+sk Klince uviaznu v dreve a telách; tvrdé povrchy ich odrazia na zem
+
+@ Nearest keeps crisp classic pixels; linear smooths textures
+sk Najbližší zachová ostré klasické pixely; lineárny vyhladí textúry
+
+@ New Game: Add-ons
+sk Nová hra: doplnky
+
+@ New Game: Customize
+sk Nová hra: prispôsobenie
+
+@ Night vision: how much dark areas are brightened; thermal: how strongly heat stands out
+sk Nočné videnie: ako veľmi sa rozjasnia tmavé miesta; termovízia: ako výrazne vynikne teplo
+
+@ Night-vision and thermal goggles, cycle normal, night vision and thermal with Change Goggles (Add-ons), or use the Equipment Wheel
+sk Okuliare na nočné videnie a termovíziu: prepínajte medzi bežným, nočným videním a termovíziou cez Zmeniť okuliare (doplnky) alebo koleso vybavenia
+
+@ No single freeze lasts longer than this, however much damage or kill bonus adds
+sk Žiadne zmrazenie netrvá dlhšie, nech pridá poškodenie či bonus za zabitie koľkokoľvek
+
+@ Oldest marks and nails are recycled at this shared limit
+sk Pri tomto spoločnom limite sa najstaršie stopy a klince recyklujú
+
+@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
+sk Páčka a tlačidlá na obrazovke: auto ich zobrazí po dotyku a skryje pri použití iného zariadenia
+
+@ Only autosaves: quicksaves and the Save menu are off
+sk Iba automatické ukladanie: rýchle ukladanie a menu Uložiť sú vypnuté
+
+@ Place every weapon at the center, right or left of the view, or hide all viewmodels
+sk Umiestni každú zbraň do stredu, vpravo alebo vľavo v zábere, alebo skryje všetky modely zbraní
+
+@ Play your chosen hit or kill cue when you damage an enemy
+sk Pri zranení nepriateľa prehrá zvolený zvuk zásahu alebo zabitia
+
+@ Playback speed: faster sounds shorter and higher
+sk Rýchlosť prehrávania: rýchlejší zvuk je kratší a vyšší
+
+@ Plays the Quake theme in the main menu when no game is running
+sk Prehráva tému Quake v hlavnom menu, keď nebeží žiadna hra
+
+@ Portals farther away than this are drawn as flat discs
+sk Vzdialenejšie portály sa vykreslia ako ploché disky
+
+@ Press attack once to keep firing, again to stop
+sk Jedným stlačením útoku strieľate nepretržite, ďalším prestanete
+
+@ Press run once to switch between running and walking
+sk Jedným stlačením behu prepnete medzi behom a chôdzou
+
+@ Raise or lower the tone independently of sound length
+sk Zvýši alebo zníži tón nezávisle od dĺžky zvuku
+
+@ Red screen edges show where damage came from: top is front, bottom is behind; Screen Flashes controls their strength
+sk Červené okraje obrazovky ukazujú, odkiaľ prišlo poškodenie: hore je spredu, dole zozadu; ich silu určuje Záblesky obrazovky
+
+@ Replaces the classic dot particles with glowing sparks, smoke and blood; mods with their own particle effects keep them
+sk Nahradí klasické bodové častice žiariacimi iskrami, dymom a krvou; mody s vlastnými efektmi častíc si ich ponechajú
+
+@ Resolution and detail inside portal and teleporter views; lower tiers trim nested effects
+sk Rozlíšenie a detail v pohľadoch portálov a teleportov; nižšie stupne obmedzia vnorené efekty
+
+@ Rippling light patterns on surfaces under water and slime
+sk Vlniace sa svetelné vzory na povrchoch pod vodou a slizom
+
+@ Scales all damage you take; above 100% is harder
+sk Upraví všetko utrpené poškodenie; nad 100 % je to ťažšie
+
+@ Screen edge for this element; elements on the same spot stack
+sk Okraj obrazovky pre tento prvok; prvky na rovnakom mieste sa poskladajú
+
+@ Seconds a monster hit by the boomerang stays stunned
+sk Koľko sekúnd zostane monštrum zasiahnuté bumerangom omráčené
+
+@ Seconds impact marks and stuck nails stay before fading out; independent of Particle Quality
+sk Koľko sekúnd zostanú stopy zásahov a zapichnuté klince, kým vyblednú; nezávislé od kvality častíc
+
+@ Seconds messages at the top of the screen stay up
+sk Koľko sekúnd zostanú správy hore na obrazovke
+
+@ Seconds the flick stick snap takes; lower is faster
+sk Trvanie otočenia flick stickom v sekundách; menej je rýchlejšie
+
+@ See through enhanced water; enables Water Opacity
+sk Vidieť cez vylepšenú vodu; sprístupní Nepriehľadnosť vody
+
+@ Sensor grain, scanlines and flicker of the goggle image
+sk Zrnenie senzora, riadky a blikanie obrazu okuliarov
+
+@ Shades every anti-aliasing sample; needs Anti-aliasing on
+sk Tieňuje každú vzorku vyhladzovania hrán; vyžaduje zapnuté Vyhladzovanie hrán
+
+@ Shifts colors so they stay distinct for the chosen color blindness
+sk Posunie farby, aby zostali rozlíšiteľné pri zvolenej farbosleposti
+
+@ Shotgun hits leave small surface marks (cosmetic only)
+sk Zásahy brokovnicou zanechajú na povrchoch malé stopy (iba kozmetické)
+
+@ Show corner ticks at screen centre while locked, even with Crosshair off
+sk Počas zamerania zobrazí rohové značky v strede obrazovky, aj pri vypnutom zameriavači
+
+@ Show where grenades and other arcing shots will fly, bounce and land; local play only, not in deathmatch
+sk Ukáže, kam granáty a iné strely po oblúku poletia, odrazia sa a dopadnú; iba lokálne, nie v deathmatchi
+
+@ Shows text for important sounds: doors, alerted enemies, secrets, pickups
+sk Zobrazí text pre dôležité zvuky: dvere, vyrušení nepriatelia, tajomstvá, predmety
+
+@ Shows the distance fog that maps and mods set; off always gives clear view
+sk Zobrazí hmlu v diaľke, ktorú nastavia mapy a mody; vypnuté dá vždy čistý výhľad
+
+@ Shows the player face next to the health number
+sk Zobrazí tvár hráča vedľa čísla zdravia
+
+@ Simulation detail, step rate, fade-out lifetimes and caps for gibs and shrapnel; low also skips mover collision
+sk Detail simulácie, frekvencia krokov, doba miznutia a limity pre kusy tiel a šrapnely; nízka vynechá aj kolízie s pohyblivými objektmi
+
+@ Size of the on-screen buttons and move stick
+sk Veľkosť tlačidiel a pohybovej páčky na obrazovke
+
+@ Slowly heals up to 100 health after 5 seconds without being hit
+sk Po 5 sekundách bez zásahu pomaly lieči až na 100 zdravia
+
+@ Slows stick look while the crosshair is over an enemy
+sk Spomalí pohľad páčkou, kým je zameriavač nad nepriateľom
+
+@ Slows the game down while the weapon wheel is open
+sk Spomalí hru, kým je otvorené koleso zbraní
+
+@ Slows the whole game down; single player only. Saves and demos stay compatible with other ports
+sk Spomalí celú hru; iba hra pre jedného hráča. Uložené hry a dema zostanú kompatibilné s inými portmi
+
+@ Small camera jolt on each freeze; off with Reduce Motion
+sk Malé trhnutie kamery pri každom zmrazení; vypnuté pri Obmedziť pohyb
+
+@ Snap and track enemies in local play, including split-screen; unavailable online
+sk Zameria a sleduje nepriateľov v lokálnej hre vrátane rozdelenej obrazovky; online nedostupné
+
+@ Sparks, smoke, chips, splinters and splashes fly off whatever your shots hit
+sk Iskry, dym, úlomky, triesky a striekance odletujú zo všetkého, čo vaše strely zasiahnu
+
+@ Spawns extra copies of every monster around the original when a level starts
+sk Pri štarte úrovne vytvorí okolo každého monštra jeho ďalšie kópie
+
+@ Strength of the full-screen flashes for damage, pickups and powerups
+sk Sila záblesku celej obrazovky pri poškodení, zbieraní predmetov a bonusoch
+
+@ Stretch or shorten the sound while keeping its pitch
+sk Natiahne alebo skráti zvuk pri zachovaní výšky tónu
+
+@ Surface opacity; requires Enhanced Water and Translucent Water
+sk Nepriehľadnosť hladiny; vyžaduje Vylepšenú vodu a Priesvitnú vodu
+
+@ The hook latches onto metal surfaces (metal, tech, computer panels, copper)
+sk Hák sa zachytí na kovových povrchoch (kov, technika, počítačové panely, meď)
+
+@ The hook latches onto stone, brick, rock and any surface not recognised as wood or metal
+sk Hák sa zachytí na kameni, tehle, skale a každom povrchu, ktorý nie je rozpoznaný ako drevo či kov
+
+@ The hook latches onto wooden surfaces (texture names like wood, crate, plank)
+sk Hák sa zachytí na drevených povrchoch (názvy textúr ako wood, crate, plank)
+
+@ Turn the controller's motion sensor into a look input; needs a pad with a gyroscope
+sk Z pohybového senzora ovládača urobí ovládanie pohľadu; vyžaduje ovládač s gyroskopom
+
+@ Turns off view bob, strafe tilt and the camera kick when hit or firing
+sk Vypne pohupovanie pohľadu, náklon pri úkroku a trhnutie kamery pri zásahu či streľbe
+
+@ Turns on the extra liquid effects; Water Settings controls each one
+sk Zapne ďalšie efekty kvapalín; každý z nich ovláda Nastavenia vody
+
+@ Turns the view to follow a moving enemy you are aiming at
+sk Otáča pohľad za pohybujúcim sa nepriateľom, na ktorého mierite
+
+@ Turns the view when you roll the controller sideways; 0 disables it, negative reverses it
+sk Otáča pohľad pri naklonení ovládača do strany; 0 to vypne, záporná hodnota to obráti
+
+@ Two-portal gun: fire and alt-fire place linked portals on flat walls; assign a weapon slot in Add-ons
+sk Zbraň s dvoma portálmi: streľba a alternatívna streľba umiestnia prepojené portály na rovné steny; slot zbrane priraďte v doplnkoch
+
+@ Unlocks the FX Settings page: enhanced particles, impact effects and blood splatter
+sk Sprístupní stránku Nastavenia efektov: vylepšené častice, efekty zásahov a striekanie krvi
+
+@ Uses the 2021 re-release's smoother MD5 models (and MD3 replacements from mods) instead of the classic ones. Applies on the next map load
+sk Použije hladšie modely MD5 z reedície 2021 (a náhrady MD3 z modov) namiesto klasických. Prejaví sa pri ďalšom načítaní mapy
+
+@ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
+sk Použije farebné svetlo mapy (súbor .lit alebo blok BSPX); vypnuté dá pôvodné biele svetlo. Prejaví sa pri ďalšom načítaní mapy
+
+@ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
+sk Segmenty prúdu, počet kvapiek a lesklé tieňovanie kvapaliny: nízka používa jednoduchšie priesvitné prúdy; vysoká hladké lesklé prúdy
+
+@ When gyro looking applies: always, off while +gyroaction is held, or only while it is held
+sk Kedy platí pohľad gyroskopom: vždy, vypnutý pri držaní +gyroaction, alebo iba pri jeho držaní
+
+@ Which weapons trigger the freeze; melee covers the axe and any mod weapon used at close range without ammo
+sk Ktoré zbrane spúšťajú zmrazenie; na blízko zahŕňa sekeru a každú zbraň z modu použitú zblízka bez munície
+
+@ Your own rockets and grenades don't hurt you; rocket jumps still work
+sk Vaše vlastné rakety a granáty vás nezrania; raketové skoky stále fungujú
+
+# ==== ui.txt ====
+
+# Menus and pop-ups outside the options pages: save cards, launch, presets,
+# add-on browser, map packs, hints and dialogs.
+@ Select
+sk Vybrať
+
+@ Back
+sk Späť
+
+@ Cancel
+sk Zrušiť
+
+@ Confirm
+sk Potvrdiť
+
+@ Scroll
+sk Posúvať
+
+@ Section
+sk Sekcia
+
+@ Bind
+sk Priradiť
+
+@ Cancel binding
+sk Zrušiť priradenie
+
+@ Clear
+sk Vymazať
+
+@ Clear pad
+sk Vymazať ovládač
+
+@ Remap
+sk Zmeniť priradenie
+
+@ Type
+sk Písať
+
+@ Shift
+sk Shift
+
+@ Done
+sk Hotovo
+
+@ Del
+sk Del
+
+@ Space
+sk Medzerník
+
+@ Save
+sk Uložiť
+
+@ Load
+sk Načítať
+
+@ Delete
+sk Odstrániť
+
+@ Play
+sk Hrať
+
+@ Yes
+sk Áno
+
+@ No
+sk Nie
+
+@ OK
+sk OK
+
+@ System
+sk Systém
+
+@ Language
+sk Jazyk
+
+@ Help
+sk Pomocník
+
+@ Fixed for this game: it was started without Customize
+sk Pre túto hru pevné: bola spustená bez prispôsobenia
+
+@ Press a button or key to bind (Start cancels)
+sk Stlačte tlačidlo alebo kláves na priradenie (Start zruší)
+
+@ Press button...
+sk Stlačte tlačidlo...
+
+@ Press key...
+sk Stlačte kláves...
+
+@ Replace this binding?
+sk Nahradiť toto priradenie?
+
+@ is already assigned
+sk je už priradené
+
+@ {} already assigned
+sk {} je už priradené
+
+@ Open Controls to remap Lock-on?
+sk Otvoriť Ovládanie a zmeniť priradenie Zamerania?
+
+@ Lock-on
+sk Zameranie
+
+@ Auto-aim Toggle
+sk Prepínať automatické mierenie
+
+@ Keyboard
+sk Klávesnica
+
+@ Controller
+sk Ovládač
+
+# main menu, dialogs and screens
+@ Map Packs
+sk Balíky máp
+
+@ Customize
+sk Prispôsobiť
+
+@ Level Select
+sk Výber úrovne
+
+@ Really quit?
+sk Naozaj ukončiť?
+
+@ You died
+sk Zomreli ste
+
+@ Continue from most recent save
+sk Pokračovať od posledného uloženia
+
+@ Select save
+sk Vybrať uloženú hru
+
+@ Restart level
+sk Reštartovať úroveň
+
+@ Return to main menu
+sk Návrat do hlavného menu
+
+@ (disabled)
+sk (nedostupné)
+
+@ (fixed for this game)
+sk (pre túto hru pevné)
+
+@ (off)
+sk (vypnuté)
+
+@ Apply Display Changes
+sk Použiť zmeny zobrazenia
+
+@ Display Mode
+sk Režim zobrazenia
+
+@ Resolution
+sk Rozlíšenie
+
+@ desktop
+sk pracovná plocha
+
+@ Preset
+sk Predvoľba
+
+@ Map
+sk Mapa
+
+@ Reset Shader Settings
+sk Obnoviť nastavenia shadera
+
+@ Reset to Defaults
+sk Obnoviť predvolené
+
+@ Searching...
+sk Hľadá sa...
+
+@ This game only autosaves.
+sk Táto hra sa ukladá iba automaticky.
+
+@ (No Manual Saves modifier)
+sk (modifikátor Bez ručného ukladania)
+
+@ End the current game?
+sk Ukončiť aktuálnu hru?
+
+@ Unsaved progress will be lost.
+sk Neuložený postup sa stratí.
+
+@ End game
+sk Ukončiť hru
+
+@ Overwrite
+sk Prepísať
+
+@ Overwrite "{}"?
+sk Prepísať „{}“?
+
+@ Saved {}
+sk Uložené {}
+
+@ Start a new game?
+sk Začať novú hru?
+
+@ New game
+sk Nová hra
+
+@ New Game
+sk Nová hra
+
+@ CUSTOM
+sk VLASTNÉ
+
+@ Customize Experience
+sk Prispôsobiť zážitok
+
+@ Disable All
+sk Vypnúť všetko
+
+@ Disable All Modifications
+sk Vypnúť všetky úpravy
+
+@ Saves load in other source ports too.
+sk Uložené hry sa načítajú aj v iných portoch.
+
+@ Standard rules, no add-ons.
+sk Štandardné pravidlá, bez doplnkov.
+
+@ Choose skill
+sk Vyberte obtiažnosť
+
+@ The current game will end
+sk Aktuálna hra sa ukončí
+
+@ Easy
+sk Ľahká
+
+@ Normal
+sk Normálna
+
+@ Hard
+sk Ťažká
+
+@ Nightmare
+sk Nočná mora
+
+# graphics preset pop-up
+@ Choose a Graphics Preset
+sk Vyberte grafickú predvoľbu
+
+@ Classic
+sk Klasická
+
+@ Like the re-release: enhanced models,
+sk Ako reedícia: vylepšené modely,
+
+@ no added effects.
+sk žiadne efekty navyše.
+
+@ Enhanced
+sk Vylepšená
+
+@ Every enhancement at its highest quality.
+sk Všetky vylepšenia v najvyššej kvalite.
+
+@ Needs a capable GPU.
+sk Vyžaduje výkonnú GPU.
+
+@ Low-End
+sk Slabší hardvér
+
+@ Fastest. No anti-aliasing, original
+sk Najrýchlejšia. Bez vyhladzovania hrán, pôvodné
+
+@ models, lowest effect quality.
+sk modely, najnižšia kvalita efektov.
+
+@ Esc keeps the defaults
+sk Esc ponechá predvolené
+
+@ Everything can be changed later in Options.
+sk Všetko sa dá neskôr zmeniť v Options.
+
+@ Keep Defaults
+sk Ponechať predvolené
+
+# save and load cards
+@ Save Game
+sk Uložiť hru
+
+@ Load Game
+sk Načítať hru
+
+@ Autosaves
+sk Automatické uloženia
+
+@ newest first
+sk najnovšie prvé
+
+@ Saves: {}
+sk Uložené hry: {}
+
+@ Browse Autosaves
+sk Prehľadávať automatické uloženia
+
+@ Every retained autosave, newest first
+sk Všetky ponechané automatické uloženia, najnovšie prvé
+
+@ New save
+sk Nové uloženie
+
+@ Select to save your game here
+sk Vyberte na uloženie hry sem
+
+@ No autosaves yet
+sk Zatiaľ žiadne automatické uloženia
+
+@ Autosaves are made on level entry, secrets and more (Options > Gameplay)
+sk Automaticky sa ukladá pri vstupe do úrovne, tajomstvách a inde (Options > Hrateľnosť)
+
+@ No saves yet
+sk Zatiaľ žiadne uložené hry
+
+@ Save from the Single Player menu, or press F6 to quicksave
+sk Uložte v menu Single Player alebo stlačte F6 na rýchle uloženie
+
+@ No picture
+sk Bez obrázka
+
+@ Del: delete save
+sk Del: odstrániť uloženie
+
+@ Delete "{}"?
+sk Odstrániť „{}“?
+
+@ This cannot be undone.
+sk Toto sa nedá vrátiť späť.
+
+@ Quicksave
+sk Rýchle uloženie
+
+@ Autosave: {}
+sk Automatické uloženie: {}
+
+@ unknown trigger
+sk neznámy spúšťač
+
+@ Latest - {}
+sk Najnovšie – {}
+
+@ Health {}
+sk Zdravie {}
+
+@ Armor {}
+sk Brnenie {}
+
+@ Kills {}/{}
+sk Zabitia {}/{}
+
+@ Secrets {}/{}
+sk Tajomstvá {}/{}
+
+@ Split-screen, {} players
+sk Rozdelená obrazovka, hráči: {}
+
+@ Co-op
+sk Kooperácia
+
+@ Customized
+sk Prispôsobená
+
+@ Customized, {}
+sk Prispôsobená, {}
+
+@ Date unavailable
+sk Dátum nedostupný
+
+@ Just now
+sk Práve teraz
+
+@ {} min ago
+sk pred {} min
+
+@ {} h ago
+sk pred {} h
+
+@ Level entry
+sk Vstup do úrovne
+
+@ Secret found
+sk Nájdené tajomstvo
+
+@ All enemies killed
+sk Všetci nepriatelia zabití
+
+@ All secrets found
+sk Všetky tajomstvá nájdené
+
+@ Timer
+sk Časovač
+
+# customize pages
+@ Standard rules
+sk Štandardné pravidlá
+
+@ Modifiers changed: {}
+sk Zmenené modifikátory: {}
+
+@ no add-ons
+sk bez doplnkov
+
+@ add-ons: {}
+sk doplnky: {}
+
+@ Saves of this game are .qsa files: they need this source port.
+sk Uložené hry tejto hry sú súbory .qsa: vyžadujú tento port.
+
+@ Nothing changed: this plays as standard Quake.
+sk Nič nezmenené: hrá sa ako štandardný Quake.
+
+@ Changes apply now and are saved with this game (.qsa).
+sk Zmeny platia hneď a uložia sa s touto hrou (.qsa).
+
+@ This game started without Customize, so its rules are fixed.
+sk Táto hra bola spustená bez prispôsobenia, jej pravidlá sú pevné.
+
+@ Start a new game and choose Customize Experience.
+sk Začnite novú hru a zvoľte Prispôsobiť zážitok.
+
+@ These rules apply to the next customized game.
+sk Tieto pravidlá platia pre ďalšiu prispôsobenú hru.
+
+# add-on browser
+@ Fire
+sk Streľba
+
+@ Alt Fire
+sk Alternatívna streľba
+
+@ Configure Parameters >
+sk Nastaviť parametre >
+
+@ Configure
+sk Nastaviť
+
+@ Settings
+sk Nastavenia
+
+@ Change slot
+sk Zmeniť slot
+
+@ Toggle
+sk Prepnúť
+
+@ Details
+sk Podrobnosti
+
+@ Enter or click the box: toggle
+sk Enter alebo klik na políčko: prepnúť
+
+@ Right / Tab / click: details
+sk Vpravo / Tab / klik: podrobnosti
+
+@ Input Remapping
+sk Zmena priradenia vstupu
+
+@ Weapon Slot
+sk Slot zbrane
+
+@ Customized games save as .qsa files, which need this source port.
+sk Prispôsobené hry sa ukladajú ako súbory .qsa, ktoré vyžadujú tento port.
+
+@ This game started without Customize, so its add-ons are fixed. Customize a new game instead.
+sk Táto hra bola spustená bez prispôsobenia, jej doplnky sú pevné. Prispôsobte radšej novú hru.
+
+@ Bullet Time
+sk Bullet time
+
+@ Change Goggles
+sk Zmeniť okuliare
+
+@ Dodge / Dive
+sk Úskok / skok
+
+@ Goggles
+sk Okuliare
+
+@ Hitstop
+sk Hitstop
+
+@ Projectile Shotguns
+sk Projektilové brokovnice
+
+@ BULLET TIME: 20%
+sk BULLET TIME: 20 %
+
+@ NORMAL SPEED
+sk NORMÁLNA RÝCHLOSŤ
+
+@ SLOW MOTION: PHYSICAL PELLETS
+sk SPOMALENIE: FYZIKÁLNE BROKY
+
+@ DEMONSTRATION
+sk UKÁŽKA
+
+@ GAMEPLAY
+sk HRATEĽNOSŤ
+
+@ LOOP
+sk SLUČKA
+
+@ Preview unavailable
+sk Náhľad nedostupný
+
+# shader and language help lines
+@ A setting of the chosen shader; arrows step it, Enter is not needed
+sk Nastavenie zvoleného shadera; mení sa šípkami, Enter netreba
+
+@ Language of the menus, messages and the 2021 re-release's game text; System follows your computer's language
+sk Jazyk menu, správ a herných textov reedície 2021; Systém sa riadi jazykom vášho počítača
+
+@ Puts every setting of the chosen shader back to the preset's defaults
+sk Vráti všetky nastavenia zvoleného shadera na predvolené hodnoty predvoľby
+
+@ RetroArch slang shader on the final image: CRT, scanlines, NTSC, sharpening; add your own in <game>/shaders
+sk Shader RetroArch slang na výsledný obraz: CRT, riadky, NTSC, zostrenie; vlastné pridajte do <hra>/shaders
+
+# modern console footer
+@ Shift+PgUp/Dn: height  ` : hide
+sk Shift+PgUp/Dn: výška  ` : skryť
+
+@ Tab: complete  Ctrl+R: search  bash | pipe
+sk Tab: doplniť  Ctrl+R: hľadať  bash | rúra
+
+@ ↑ +{} lines (End to jump) 
+sk ↑ +{} riadkov (End na skok) 
+
+# add-on descriptions
+@ Create two linked portals on flat walls. Fire places the first portal; Alt Fire places the second. Walk through either portal to emerge from the other. Your momentum carries through. Assign a weapon slot below: pressing that slot repeatedly cycles its ordinary weapon and every enabled add-on assigned there. Portal view quality is configurable below.
+sk Vytvorte dva prepojené portály na rovných stenách. Streľba umiestni prvý portál, alternatívna streľba druhý. Prejdite ktorýmkoľvek portálom a vyjdete z druhého; vaša hybnosť sa zachová. Nižšie priraďte slot zbrane: opakované stláčanie tohto slotu prepína medzi jeho bežnou zbraňou a každým zapnutým doplnkom, ktorý je doň priradený. Kvalitu pohľadu portálov možno nastaviť nižšie.
+
+@ Hold Fire and sweep the crosshair over monsters to queue targets. Release Fire to throw: the boomerang visits each target, stuns it and returns to you. Alt Fire clears the queue. The weapon slot selects a group, not a separate hotkey: press it again to cycle through the weapons in that slot. Configure stun duration and flight speed below.
+sk Držte streľbu a prechádzajte zameriavačom cez monštrá, aby ste zaradili ciele. Pustením streľby hodíte: bumerang navštívi každý cieľ, omráči ho a vráti sa k vám. Alternatívna streľba vyprázdni poradie. Slot zbrane vyberá skupinu, nie samostatnú klávesovú skratku: ďalším stlačením prepínate zbrane v tomto slote. Trvanie omráčenia a rýchlosť letu možno nastaviť nižšie.
+
+@ Hold Fire to charge a sticky bomb using rocket ammunition; release to launch. A longer charge throws it faster. Bombs cling to walls, doors and monsters. Alt Fire detonates your planted bombs together. Place a trap, retreat, then detonate it when enemies approach. Assign any weapon slot below; repeated presses cycle through the ordinary weapon and add-ons in that slot.
+sk Držte streľbu, aby ste nabili lepivú bombu raketovou muníciou; pustením ju vystrelíte. Dlhšie nabíjanie ju vrhne rýchlejšie. Bomby sa prilepia na steny, dvere a monštrá. Alternatívna streľba odpáli všetky položené bomby naraz. Nastražte pascu, ustúpte a odpáľte ju, keď sa priblížia nepriatelia. Nižšie priraďte ľubovoľný slot zbrane; opakované stláčanie prepína medzi bežnou zbraňou a doplnkami v tomto slote.
+
+@ Fire launches a chain hook. It latches onto a permitted surface or enemy and reels you toward the anchor. Fire again or use Alt Fire to let go. Choose which materials and enemies can be hooked in Configure Parameters. Assign it to any weapon slot; repeated presses of the slot's existing binding cycle through its weapons.
+sk Streľba vystrelí hák na reťazi. Zachytí sa na povolenom povrchu alebo nepriateľovi a pritiahne vás ku kotviacemu bodu. Ďalšia streľba alebo alternatívna streľba ho uvoľní. Ktoré materiály a nepriateľov možno zachytiť, zvolíte v Nastaviť parametre. Priraďte ho ľubovoľnému slotu zbrane; opakované stláčanie existujúceho priradenia slotu prepína jeho zbrane.
+
+@ A piercing railgun inspired by Quake III. Fire sends a slug through every enemy along its line. Each shot consumes two cells, with a 1.5 second refire interval. Damage and the spiral trail colour are configurable below. Choose a weapon slot: the slot's current binding selects and cycles the weapons assigned to it.
+sk Prestreľujúci railgun inšpirovaný Quake III. Streľba pošle projektil cez každého nepriateľa na jeho dráhe. Každý výstrel spotrebuje dva články, ďalší výstrel je možný o 1,5 sekundy. Poškodenie a farbu špirálovej stopy možno nastaviť nižšie. Zvoľte slot zbrane: jeho aktuálne priradenie vyberá a prepína zbrane, ktoré sú doň priradené.
+
+@ A Portal-style gel sprayer. Fire sprays blue Repulsion gel: land, jump or run into it to bounce, and landings on it never hurt. Alt Fire sprays orange Propulsion gel: run across it to go much faster. Gel coats floors and walls until washed off with the Powerwasher. Assign a weapon slot below; repeated presses cycle the weapons in that slot.
+sk Rozprašovač gélu v štýle Portal. Streľba strieka modrý odrazový gél: dopadnite, skočte alebo vbehnite doň a odrazíte sa, a dopady naň nikdy nezraňujú. Alternatívna streľba strieka oranžový zrýchľovací gél: prebehnite po ňom a budete oveľa rýchlejší. Gél pokrýva podlahy a steny, kým ho nezmyje tlakový čistič. Nižšie priraďte slot zbrane; opakované stláčanie prepína zbrane v tomto slote.
+
+@ A water cannon. Fire shoots a straight jet with limited reach; Alt Fire a wide, shorter fan. The water pushes enemies back, turns projectiles aside and washes away gel and blood. Push strength is configurable below. Assign a weapon slot below; repeated presses cycle the weapons in that slot.
+sk Vodné delo. Streľba vystrelí priamy prúd s obmedzeným dosahom, alternatívna streľba široký, kratší vejár. Voda odtláča nepriateľov, odkláňa projektily a zmýva gél a krv. Silu odtlačenia možno nastaviť nižšie. Nižšie priraďte slot zbrane; opakované stláčanie prepína zbrane v tomto slote.
+
+@ One equipment add-on includes both night vision and thermal vision. The Change Goggles action cycles Normal, Night Vision, Thermal, then Normal again. Night vision brightens dark rooms; thermal vision highlights living enemies. Goggles do not occupy a weapon slot. Configure intensity and sensor noise below. The binding affects only this add-on.
+sk Jeden doplnok vybavenia obsahuje nočné videnie aj termovíziu. Akcia Zmeniť okuliare prepína Bežné, Nočné videnie, Termovízia a znova Bežné. Nočné videnie rozjasní tmavé miestnosti; termovízia zvýrazní živých nepriateľov. Okuliare nezaberajú slot zbrane. Intenzitu a šum senzora možno nastaviť nižšie. Priradenie ovplyvňuje iba tento doplnok.
+
+@ Press Dodge with a movement direction on the ground or in midair: dive forward or leap backward and sideways. Diagonals are supported. Each press launches once, with a short recovery. The player body animates in third person. Assign the Dodge action below or in Controls.
+sk Stlačte Úskok so smerom pohybu na zemi alebo vo vzduchu: skočte vpred alebo uskočte dozadu a do strany. Podporované sú aj diagonály. Každé stlačenie odrazí raz, s krátkym zotavením. Telo hráča sa animuje z tretej osoby. Akciu Úskok priraďte nižšie alebo v Ovládaní.
+
+@ Use the dedicated Bullet Time action to slow the whole local game to 20% speed. Hold is the default; Toggle switches on each press. The optional meter limits use in real seconds and regenerates while inactive. Disable the meter for unlimited use. Remap the action and configure duration and regeneration below.
+sk Vlastnou akciou Bullet time spomalíte celú lokálnu hru na 20 % rýchlosti. Predvolené je držanie; Prepínať zapína a vypína pri každom stlačení. Voliteľný ukazovateľ obmedzuje používanie v reálnych sekundách a obnovuje sa pri nečinnosti. Bez ukazovateľa je používanie neobmedzené. Akciu môžete preradiť a trvanie a obnovu nastaviť nižšie.
+
+@ Both shotguns and enemy grunts fire physical pellets with their original spread and damage. Fast default projectiles feel immediate; lower their speed to dodge incoming fire during bullet time. Configure projectile speed below, or reset it to the default of 10000 units per second.
+sk Obe brokovnice aj nepriateľskí vojaci strieľajú fyzikálne broky s pôvodným rozptylom a poškodením. Rýchle predvolené projektily pôsobia okamžite; znížte ich rýchlosť a v bullet time sa budete môcť vyhýbať streľbe. Rýchlosť projektilov nastavte nižšie alebo ju vráťte na predvolených 10000 jednotiek za sekundu.
+
+@ Freezes the game for a split second when you damage an enemy, so hits feel heavier. Single player only. Choose which weapons trigger it (all, melee, ranged or explosives), how long it lasts and how much more a kill freezes. Advanced settings cover enemy toughness, damage scaling, cooldown and the longest freeze.
+sk Pri zranení nepriateľa na zlomok sekundy zmrazí hru, aby zásahy pôsobili ťažšie. Iba hra pre jedného hráča. Zvoľte, ktoré zbrane ho spúšťajú (všetky, na blízko, na diaľku alebo výbušniny), ako dlho trvá a o koľko viac zmrazí zabitie. Rozšírené nastavenia zahŕňajú odolnosť nepriateľov, škálovanie poškodenia, dobu zotavenia a najdlhšie zmrazenie.
+
+# map packs and the Quaddicted browser
+@ Get more maps (Quaddicted)...
+sk Ďalšie mapy (Quaddicted)...
+
+@ Type to filter...
+sk Píšte na filtrovanie...
+
+@ Launch mod
+sk Spustiť mod
+
+@ Start first map
+sk Spustiť prvú mapu
+
+@ (running)
+sk (beží)
+
+@ running
+sk beží
+
+@ Recent
+sk Nedávne
+
+@ Name
+sk Názov
+
+@ Dir
+sk Priečinok
+
+@ Default
+sk Predvolené
+
+@ Title
+sk Titul
+
+@ Sort: {}
+sk Zoradiť: {}
+
+@ {} installed
+sk Nainštalované: {}
+
+@ {}/{} matching
+sk Zodpovedá: {}/{}
+
+@ {} maps, {} completed
+sk Mapy: {}, dokončené: {}
+
+@ {}/{} matching, {} completed
+sk Zodpovedá: {}/{}, dokončené: {}
+
+@ no maps of its own
+sk žiadne vlastné mapy
+
+@ dir: {}
+sk priečinok: {}
+
+@ base: {}
+sk základ: {}
+
+@ Browse the Quaddicted archive of
+sk Prehľadávajte archív Quaddicted
+
+@ single-player maps and episodes,
+sk s mapami a epizódami pre jedného hráča,
+
+@ then download and install them
+sk potom ich stiahnite a nainštalujte
+
+@ here. Each release gets its own
+sk tu. Každé vydanie dostane vlastnú
+
+@ entry in this list.
+sk položku v tomto zozname.
+
+@ Needs an internet connection.
+sk Vyžaduje internetové pripojenie.
+
+@ Quaddicted Map Archive
+sk Archív máp Quaddicted
+
+@ Newest
+sk Najnovšie
+
+@ Author
+sk Autor
+
+@ Size
+sk Veľkosť
+
+@ Loading the map list...
+sk Načítava sa zoznam máp...
+
+@ Couldn't load the map list: {}
+sk Zoznam máp sa nepodarilo načítať: {}
+
+@ {} single-player releases  -  F5 refreshes
+sk Vydania pre jedného hráča: {}  -  F5 obnoví
+
+@ {} matching
+sk Zodpovedá: {}
+
+@ by {}
+sk autor: {}
+
+@ requires: {}
+sk vyžaduje: {}
+
+@ maps: {}
+sk mapy: {}
+
+@ Failed: {}
+sk Zlyhalo: {}
+
+@ Downloading... {}%
+sk Sťahuje sa... {} %
+
+@ Unpacking...
+sk Rozbaľuje sa...
+
+@ Installed in {}/  -  Enter: play
+sk Nainštalované v {}/  -  Enter: hrať
+
+@ Enter: download and install
+sk Enter: stiahnuť a nainštalovať
+
+@ unpacking
+sk rozbaľuje sa
+
+@ failed
+sk zlyhalo
+
+@ installed
+sk nainštalované
+
+@ Downloads are not available in the browser build
+sk Sťahovanie nie je vo verzii pre prehliadač dostupné
+
+@ the map list could not be read
+sk zoznam máp sa nepodarilo prečítať
+
+@ downloading needs the curl program
+sk sťahovanie vyžaduje program curl
+
+@ download failed
+sk sťahovanie zlyhalo
+
+@ the download is not a valid zip
+sk stiahnutý súbor nie je platný ZIP
+
+@ nothing to install for this engine
+sk pre tento engine nie je čo inštalovať
+
+@ needs {} installed first
+sk najprv treba nainštalovať {}
+
+@ couldn't unpack {}
+sk {} sa nepodarilo rozbaliť
+
+# help screen
+@ About
+sk O hre
+
+@ < Back
+sk < Späť
+
+# tr_ctx keys: English shows the short word, the key says which meaning
+@ Save (a manual save, as opposed to a quicksave or autosave)
+sk Uloženie
+
+# ==== hud.txt ====
+
+# HUD, weapon and equipment wheels, sound captions and other in-game text.
+# Weapon, monster and item names follow the 2021 re-release's own translations.
+@ Axe
+sk Sekera
+
+@ Shotgun
+sk Brokovnica
+
+@ Double-Barrelled Shotgun
+sk Superbrokovnica
+
+@ Nailgun
+sk Klincovačka
+
+@ Super Nailgun
+sk Superklincovačka
+
+@ Grenade Launcher
+sk Granátomet
+
+@ Rocket Launcher
+sk Raketomet
+
+@ Thunderbolt
+sk Bleskomet
+
+@ Portal Gun
+sk Portálová zbraň
+
+@ Boomerang
+sk Bumerang
+
+@ Stickybomb Launcher
+sk Vrhač lepivých bômb
+
+@ Railgun
+sk Railgun
+
+@ Hookshot
+sk Hák
+
+@ Gel Sprayer
+sk Rozprašovač gélu
+
+@ Powerwasher
+sk Tlakový čistič
+
+@ Night Vision Goggles
+sk Okuliare na nočné videnie
+
+@ Thermal Goggles
+sk Termovízne okuliare
+
+@ Normal vision
+sk Bežné videnie
+
+@ ON
+sk ZAP
+
+@ OFF
+sk VYP
+
+@ {} (turn on)
+sk {} (zapnúť)
+
+@ {} (turn off)
+sk {} (vypnúť)
+
+@ Move mouse to select, release to toggle
+sk Pohybom myši vyberte, pustením prepnite
+
+@ Move mouse to select, release to equip
+sk Pohybom myši vyberte, pustením vezmite do ruky
+
+@ Release to toggle
+sk Pustením prepnete
+
+@ Release to equip
+sk Pustením vezmete do ruky
+
+@ shells
+sk broky
+
+@ nails
+sk klince
+
+@ rockets
+sk rakety
+
+@ cells
+sk články
+
+@ Kills: {}/{}
+sk Zabitia: {}/{}
+
+@ Secrets: {}/{}
+sk Tajomstvá: {}/{}
+
+@ Time {}
+sk Čas {}
+
+@ Press any button to continue...
+sk Stlačte ľubovoľné tlačidlo...
+
+@ Press any key to continue...
+sk Stlačte ľubovoľný kláves...
+
+@ BULLET TIME
+sk BULLET TIME
+
+@ AUTO AIM
+sk AUTO. MIERENIE
+
+@ Crosshair
+sk Zameriavač
+
+@ + Marker
+sk + značka
+
+@ Hit markers off
+sk Značky zásahu vyp.
+
+@ On target
+sk Na cieli
+
+@ On kill
+sk Pri zabití
+
+# sound captions
+@ [Secret found]
+sk [Nájdené tajomstvo]
+
+@ [Message]
+sk [Správa]
+
+@ [Switch activated]
+sk [Spínač aktivovaný]
+
+@ [Key picked up]
+sk [Zobratý kľúč]
+
+@ [Rune picked up]
+sk [Zobratá runa]
+
+@ [Teleporter]
+sk [Teleport]
+
+@ [Teleport]
+sk [Teleportácia]
+
+@ [Splash]
+sk [Špliechanie]
+
+@ [Leaving water]
+sk [Výstup z vody]
+
+@ [Door]
+sk [Dvere]
+
+@ [Platform moving]
+sk [Pohyb plošiny]
+
+@ [Button]
+sk [Tlačidlo]
+
+@ [Health picked up]
+sk [Zobraté zdravie]
+
+@ [Armor picked up]
+sk [Zobraté brnenie]
+
+@ [Quad Damage wearing off]
+sk [Štvornásobné poškodenie slabne]
+
+@ [Quad Damage]
+sk [Štvornásobné poškodenie]
+
+@ [Pentagram wearing off]
+sk [Pentagram slabne]
+
+@ [Pentagram of Protection]
+sk [Pentagram ochrany]
+
+@ [Ring wearing off]
+sk [Prsteň slabne]
+
+@ [Ring of Shadows]
+sk [Prsteň tieňov]
+
+@ [Biosuit wearing off]
+sk [Biooblek slabne]
+
+@ [Biosuit]
+sk [Biooblek]
+
+@ [Item picked up]
+sk [Zobratý predmet]
+
+@ [Weapon picked up]
+sk [Zobratá zbraň]
+
+@ [Ammo picked up]
+sk [Zobratá munícia]
+
+@ [Explosion]
+sk [Výbuch]
+
+@ [Grenade launched]
+sk [Vystrelený granát]
+
+@ [Grenade bounce]
+sk [Odraz granátu]
+
+@ [Rocket fired]
+sk [Vystrelená raketa]
+
+@ [Nails fired]
+sk [Vystrelené klince]
+
+@ [Lightning]
+sk [Blesk]
+
+@ [Thunder]
+sk [Hrom]
+
+@ [Enforcer alerted]
+sk [Enforcer vás zbadal]
+
+@ [Grunt alerted]
+sk [Vojak vás zbadal]
+
+@ [Rottweiler alerted]
+sk [Rotvajler vás zbadal]
+
+@ [Knight alerted]
+sk [Rytier vás zbadal]
+
+@ [Death Knight alerted]
+sk [Rytier smrti vás zbadal]
+
+@ [Scrag alerted]
+sk [Scrag vás zbadal]
+
+@ [Ogre alerted]
+sk [Zlobor vás zbadal]
+
+@ [Fiend alerted]
+sk [Démon vás zbadal]
+
+@ [Shambler alerted]
+sk [Shambler vás zbadal]
+
+@ [Zombie groaning]
+sk [Zombie stoná]
+
+@ [Vore alerted]
+sk [Vore vás zbadal]
+
+@ [Vore attacking]
+sk [Vore útočí]
+
+@ [Spawn alerted]
+sk [Spawn vás zbadal]
+
+@ [Rotfish]
+sk [Rotfish]
+
+@ [Spawn]
+sk [Spawn]
+
+@ [Chthon]
+sk [Chthon]
+
+@ [Hard landing]
+sk [Tvrdý dopad]
+
+@ [Drowning]
+sk [Topenie]
+
+@ [Gasping for air]
+sk [Lapanie po dychu]
+
+@ [Burning]
+sk [Horenie]
+
+@ [Telefrag]
+sk [Telefrag]
+
+@ [Gibbed]
+sk [Roztrhaný na kusy]
+
+# ==== console.txt ====
+
+# Console messages, shown translated only with con_translate 1 (Translate Console).
+# Cvar and command names stay as they are.
+@ Autosaved.
+sk Automaticky uložené.
+
+@ Game saved.
+sk Hra uložená.
+
+@ Can't save now.
+sk Teraz nie je možné uložiť.
+
+@ This game only autosaves (No Manual Saves modifier).
+sk Táto hra sa ukladá iba automaticky (modifikátor Bez ručného ukladania).
+
+@ Loading {}...
+sk Načítava sa {}...
+
+@ load failed: {}
+sk načítanie zlyhalo: {}
+
+@ ERROR: autosave failed: {}
+sk CHYBA: automatické uloženie zlyhalo: {}
+
+@ ERROR: couldn't open {}
+sk CHYBA: nepodarilo sa otvoriť {}
+
+@ ERROR: couldn't open {}.
+sk CHYBA: nepodarilo sa otvoriť {}.
+
+@ ERROR: couldn't write {}: {}
+sk CHYBA: nepodarilo sa zapísať {}: {}
+
+@ ERROR: couldn't create {}: {}
+sk CHYBA: nepodarilo sa vytvoriť {}: {}
+
+@ couldn't write {}: {}
+sk nepodarilo sa zapísať {}: {}
+
+@ Wrote {}
+sk Zapísané {}
+
+@ screenshot failed: {}
+sk snímka obrazovky zlyhala: {}
+
+@ screenshot: {}
+sk snímka obrazovky: {}
+
+@ No readable save available. Select save or restart the level.
+sk Nie je k dispozícii žiadne čitateľné uloženie. Vyberte uloženú hru alebo reštartujte úroveň.
+
+@ Unknown command "{}"
+sk Neznámy príkaz „{}“
+
+@ couldn't exec {}
+sk nepodarilo sa vykonať {}
+
+@ execing {}
+sk vykonáva sa {}
+
+@ execing config.cfg (inherited from {})
+sk vykonáva sa config.cfg (zdedené z {})
+
+@ execing config.cfg (mod defaults)
+sk vykonáva sa config.cfg (predvolené modu)
+
+@ execing default.cfg (built-in)
+sk vykonáva sa default.cfg (vstavané)
+
+@ {} cvars
+sk premenné: {}
+
+@ {} commands
+sk príkazy: {}
+
+@ Can't "cmd", not connected
+sk „cmd“ nie je možné, nepripojené
+
+@ Looking for Quake servers...
+sk Hľadajú sa servery Quake...
+
+@ Bad value, must be between 1 and 65534
+sk Chybná hodnota, musí byť od 1 do 65534
+
+@ Couldn't handle music file {}
+sk Hudobný súbor {} sa nepodarilo spracovať
+
+@ Bug report written to {}
+sk Hlásenie o chybe zapísané do {}
+
+@ bugreport: can't create {}: {}
+sk bugreport: nepodarilo sa vytvoriť {}: {}
+
+@ graphics preset: {}
+sk grafická predvoľba: {}
+
+@ Presets (r_shader_preset <name>):
+sk Predvoľby (r_shader_preset <názov>):
+
+@ Add your own .slangp presets under <game>/shaders/.
+sk Vlastné predvoľby .slangp pridajte do <hra>/shaders/.
+
+@ no shader preset loaded (r_shader_preset)
+sk nie je načítaná žiadna predvoľba shadera (r_shader_preset)
+
+@ r_shader_preset: "{}" not found
+sk r_shader_preset: „{}“ sa nenašlo
+
+@ no parameter "{}" in this preset
+sk parameter „{}“ v tejto predvoľbe nie je
+
+@ {} = {} (default {}, {}..{})
+sk {} = {} (predvolené {}, {}..{})
+
+@ Switching to {}...
+sk Prepína sa na {}...
+
+@ game: no game dir "{}" in {}
+sk game: herný priečinok „{}“ v {} neexistuje
+
+@ game: can't find the engine executable
+sk game: spustiteľný súbor enginu sa nenašiel
+
+@ game: exec failed: {}
+sk game: vykonanie zlyhalo: {}
+
+@ game: launch failed: {}
+sk game: spustenie zlyhalo: {}
+
+@ loaded {} in {}s
+sk {} načítané za {} s
+
+@ No demos listed with startdemos
+sk Príkazom startdemos nie sú uvedené žiadne dema
+
+@ Playing demo from {}.
+sk Prehráva sa demo z {}.
+
+@ {} frames {} seconds {} fps
+sk {} snímok {} sekúnd {} FPS
+
+@ Recording to {}.
+sk Nahráva sa do {}.
+
+@ Completed demo
+sk Demo dokončené
+
+@ Can't record during demo playback
+sk Počas prehrávania dema nie je možné nahrávať
+
+@ Relative pathnames are not allowed.
+sk Relatívne cesty nie sú povolené.
+
+@ Can't record - try again when connected
+sk Nie je možné nahrávať – skúste znova po pripojení
+
+@ {} demo(s) in loop
+sk Dema v slučke: {}
+
+@ Not recording a demo.
+sk Nenahráva sa žiadne demo.
+
+@ {} joined on a gamepad
+sk {} sa pripojil s gamepadom
+
+@ goggles: needs a game started with Add-ons and Goggles enabled
+sk goggles: vyžaduje hru spustenú so zapnutými doplnkami a okuliarmi
+
+@ equip: needs a game started with Add-ons and Goggles enabled
+sk equip: vyžaduje hru spustenú so zapnutými doplnkami a okuliarmi
+
+@ UDP listening on port {}
+sk UDP počúva na porte {}
+
+@ UDP bind on port {} failed: {}
+sk UDP väzba na port {} zlyhala: {}
+
+@ Connection accepted by {}
+sk Pripojenie prijal {}
+
+@ Connection failed: {}
+sk Pripojenie zlyhalo: {}
+
+@ Couldn't resolve {}
+sk {} sa nepodarilo preložiť
+
+@ Connecting to {}...
+sk Pripája sa k {}...
+
+@ Connecting to QuakeWorld server {}...
+sk Pripája sa k serveru QuakeWorld {}...
+
+@ Disconnected: {}
+sk Odpojené: {}
+
+@ Server disconnected
+sk Server sa odpojil
+
+@ Client {} connected
+sk Klient {} pripojený
+
+@ Client {} timed out
+sk Klientovi {} vypršal časový limit
+
+@ Couldn't spawn server {}: {}
+sk Server {} sa nepodarilo spustiť: {}
+
+@ maxplayers can not be changed while a server is running.
+sk maxplayers nemožno zmeniť, kým beží server.
+
+@ You can't kick yourself!
+sk Nemôžete vyhodiť sami seba!
+
+@ Only the server may changelevel
+sk Iba server môže použiť changelevel
+
+@ {} renamed to {}
+sk {} sa premenoval na {}

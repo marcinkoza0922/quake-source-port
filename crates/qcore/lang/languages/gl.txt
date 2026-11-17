@@ -1,0 +1,3024 @@
+# gl: the port's own text; English keys from crates/qcore/lang/*.txt.
+# Format in crates/qcore/src/lang/catalog.rs; check with tools/lang_check.py.
+
+# ==== menu.txt ====
+
+# Options pages: page names, row labels and choice values.
+@ 10% speed
+gl velocidade 10 %
+
+@ 2 split-screen
+gl 2 en pantalla dividida
+
+@ 3 split-screen
+gl 3 en pantalla dividida
+
+@ 4 split-screen
+gl 4 en pantalla dividida
+
+@ 5 split-screen
+gl 5 en pantalla dividida
+
+@ 6 split-screen
+gl 6 en pantalla dividida
+
+@ 2D aiming
+gl apuntado 2D
+
+@ 2x monsters
+gl monstros x2
+
+@ 3x monsters
+gl monstros x3
+
+@ 4x monsters
+gl monstros x4
+
+@ 3D resolution
+gl resolución 3D
+
+@ 3D view
+gl vista 3D
+
+@ 8-bit Color
+gl Cor de 8 bits
+
+@ Accessibility
+gl Accesibilidade
+
+@ Acquisition Cone
+gl Cono de captación
+
+@ Activation
+gl Activación
+
+@ Add a ringing room tail after the cue
+gl Engade unha cola de reverberación tras o son
+
+@ Add delayed repeats after the cue
+gl Engade repeticións atrasadas tras o son
+
+@ Add saturation and distortion
+gl Engade saturación e distorsión
+
+@ Add-ons
+gl Complementos
+
+@ Address
+gl Enderezo
+
+@ Adds fine noise to hide color banding
+gl Engade un ruído fino para ocultar as bandas de cor
+
+@ Advanced Settings
+gl Axustes avanzados
+
+@ Aim Assist
+gl Axuda á puntaría
+
+@ Aim Rotation
+gl Rotación da mira
+
+@ Aim Slowdown
+gl Ralentización da mira
+
+@ Aim Style
+gl Estilo de puntaría
+
+@ All
+gl Todo
+
+@ All enemies
+gl Todos os inimigos
+
+@ Alt Fire (Add-ons)
+gl Disparo secundario (complementos)
+
+@ Always Run
+gl Correr sempre
+
+@ Ambient Occlusion
+gl Oclusión ambiental
+
+@ Ammo Counts
+gl Contadores de munición
+
+@ Ammo Counts Position
+gl Posición dos contadores de munición
+
+@ Ammo Pickups
+gl Munición recollida
+
+@ Anisotropic
+gl Anisotrópico
+
+@ Anti-aliasing
+gl Antialiasing
+
+@ Apply To
+gl Aplicar a
+
+@ Armor
+gl Armadura
+
+@ Armor Position
+gl Posición da armadura
+
+@ Ask
+gl Preguntar
+
+@ Attack
+gl Atacar
+
+@ Audio
+gl Audio
+
+@ Auto-aim
+gl Puntaría automática
+
+@ Auto-aim Settings
+gl Axustes da puntaría automática
+
+@ Autosave
+gl Gardado automático
+
+@ Autosave Settings
+gl Axustes do gardado automático
+
+@ Autosave Timer
+gl Intervalo de gardado automático
+
+@ Autosaves to Keep
+gl Gardados automáticos que conservar
+
+@ Bass
+gl Graves
+
+@ Blip
+gl Bip
+
+@ Blood Quality
+gl Calidade do sangue
+
+@ Blood Splatter Settings
+gl Axustes das salpicaduras de sangue
+
+@ Blue
+gl Azul
+
+@ Boomerang Settings
+gl Axustes do bumerán
+
+@ Boost or cut high frequencies in decibels
+gl Realza ou recorta os agudos, en decibelios
+
+@ Boost or cut low frequencies in decibels
+gl Realza ou recorta os graves, en decibelios
+
+@ Brightness
+gl Brillo
+
+@ Bullet Time (Add-ons)
+gl Tempo bala (complementos)
+
+@ Bullet Time Settings
+gl Axustes do tempo bala
+
+@ Button Glyphs
+gl Iconas dos botóns
+
+@ Button Size
+gl Tamaño dos botóns
+
+@ Camera
+gl Cámara
+
+@ Caustic Intensity
+gl Intensidade das cáusticas
+
+@ Caustics
+gl Cáusticas
+
+@ Center
+gl Centro
+
+@ Center Message Position
+gl Posición das mensaxes centrais
+
+@ Center Message Time
+gl Duración das mensaxes centrais
+
+@ Center View
+gl Centrar a vista
+
+@ Change Color on Kill
+gl Cambiar a cor ao matar
+
+@ Change Color on Target
+gl Cambiar a cor sobre o obxectivo
+
+@ Chime
+gl Campaíña
+
+@ Click
+gl Clic
+
+@ Clink
+gl Tintineo
+
+@ Coin
+gl Moeda
+
+@ Color
+gl Cor
+
+@ Color Filter
+gl Filtro de cor
+
+@ Color of the grenade arc
+gl Cor do arco da granada
+
+@ Colored Lighting
+gl Iluminación de cor
+
+@ Connect
+gl Conectarse
+
+@ Contrast
+gl Contraste
+
+@ Controls
+gl Controis
+
+@ Cooldown (ms)
+gl Recarga (ms)
+
+@ Crosshair Outline
+gl Contorno do punto de mira
+
+@ Crosshair Shape
+gl Forma do punto de mira
+
+@ Crosshair Size
+gl Tamaño do punto de mira
+
+@ Current Ammo
+gl Munición actual
+
+@ Current Ammo Position
+gl Posición da munición actual
+
+@ Customize This Game
+gl Personalizar esta partida
+
+@ Damage
+gl Dano
+
+@ Damage Taken
+gl Dano recibido
+
+@ Debris
+gl Cascallos
+
+@ Debris Quality
+gl Calidade dos cascallos
+
+@ Debris Settings
+gl Axustes dos cascallos
+
+@ Directional Damage
+gl Dano direccional
+
+@ Dithering
+gl Tramado
+
+@ Dodge / Dive (Add-ons)
+gl Esquivar / lanzarse (complementos)
+
+@ Dragging up looks down instead of up
+gl Arrastrar cara arriba mira cara abaixo
+
+@ Drive
+gl Saturación
+
+@ Dynamic Lights
+gl Luces dinámicas
+
+@ Echo
+gl Eco
+
+@ Enemy Health
+gl Saúde dos inimigos
+
+@ Enemy Wounds
+gl Feridas dos inimigos
+
+@ Enhanced Blood Splatter
+gl Salpicaduras de sangue melloradas
+
+@ Enhanced FX
+gl Efectos mellorados
+
+@ Enhanced Models
+gl Modelos mellorados
+
+@ Enhanced Particles
+gl Partículas melloradas
+
+@ Enhanced Water
+gl Auga mellorada
+
+@ Enhancements
+gl Melloras
+
+@ Equipment Wheel (Add-ons)
+gl Selector de equipo (complementos)
+
+@ Exploding boxes throw metal shards
+gl As caixas explosivas lanzan anacos de metal
+
+@ Explosion Damage
+gl Dano por explosión
+
+@ Explosion Scorch Marks
+gl Marcas de queimadura das explosións
+
+@ Explosions scorch nearby solid surfaces
+gl As explosións queiman as superficies sólidas próximas
+
+@ Explosives only
+gl Só explosivos
+
+@ Extra Monsters
+gl Monstros adicionais
+
+@ Extra Per 10 Damage (ms)
+gl Extra por cada 10 de dano (ms)
+
+@ FX Settings
+gl Axustes de efectos
+
+@ Field of View
+gl Campo de visión
+
+@ Firing never uses up ammo
+gl Disparar nunca gasta munición
+
+@ First person
+gl primeira persoa
+
+@ Flick Time
+gl Tempo do flick
+
+@ Flight Speed
+gl Velocidade de voo
+
+@ Fog
+gl Néboa
+
+@ Frag Limit
+gl Límite de baixas
+
+@ Freeze Duration (ms)
+gl Duración da conxelación (ms)
+
+@ GLQuake
+gl GLQuake
+
+@ Game Speed
+gl Velocidade do xogo
+
+@ Game Type
+gl Tipo de partida
+
+@ Gameplay
+gl Xogo
+
+@ Gameplay Modifiers
+gl Modificadores de xogo
+
+@ Gel Quality
+gl Calidade do xel
+
+@ Gib Surface Painting
+gl Manchas dos restos
+
+@ Gibs
+gl Restos
+
+@ Gibs and heads tumble and bounce
+gl Os restos e as cabezas rodan e rebotan
+
+@ Goggle Glow Quality
+gl Calidade do brillo das lentes
+
+@ Goggle Intensity
+gl Intensidade das lentes
+
+@ Goggle Noise
+gl Ruído das lentes
+
+@ Goggles Settings
+gl Axustes das lentes
+
+@ Graphics
+gl Gráficos
+
+@ Green
+gl Verde
+
+@ Grenade Arc
+gl Arco da granada
+
+@ Grenade Arc Settings
+gl Axustes do arco da granada
+
+@ Gun Kick
+gl Retroceso da arma
+
+@ Gyro
+gl Xiroscopio
+
+@ Gyro & Flick Stick
+gl Xiroscopio e flick stick
+
+@ Gyro Active
+gl Xiroscopio activo
+
+@ Gyro Aiming
+gl Puntaría con xiroscopio
+
+@ HUD
+gl Interface
+
+@ HUD Style
+gl Estilo da interface
+
+@ Health
+gl Saúde
+
+@ Health Pickups
+gl Saúde recollida
+
+@ Health Position
+gl Posición da saúde
+
+@ Health Regeneration
+gl Rexeneración de saúde
+
+@ Hit & Kill Sounds
+gl Sons de impacto e baixa
+
+@ Hit Doors & Lifts
+gl Golpear portas e ascensores
+
+@ Hit Markers
+gl Marcadores de impacto
+
+@ Hit Sound
+gl Son de impacto
+
+@ Hitmarker Size
+gl Tamaño do marcador
+
+@ Hitmarker Type
+gl Tipo de marcador
+
+@ Hitstop Advanced
+gl Hitstop avanzado
+
+@ Hitstop Settings
+gl Axustes do hitstop
+
+@ Hold
+gl Manter
+
+@ Hold lock-on
+gl Fixar mantendo
+
+@ Hook Enemies
+gl Enganchar inimigos
+
+@ Hook Metal
+gl Enganchar metal
+
+@ Hook Stone
+gl Enganchar pedra
+
+@ Hook Wood
+gl Enganchar madeira
+
+@ Hooking an enemy pulls you to it
+gl Enganchar un inimigo achégate a el
+
+@ Hookshot Range
+gl Alcance do gancho
+
+@ Hookshot Settings
+gl Axustes do gancho
+
+@ Host Game
+gl Crear partida
+
+@ How far the hook flies before it retracts
+gl Distancia que percorre o gancho antes de recollerse
+
+@ How visible the on-screen controls are
+gl Visibilidade dos controis en pantalla
+
+@ Impact Lifetime
+gl Duración dos impactos
+
+@ Infinite Ammo
+gl Munición infinita
+
+@ Input
+gl Entrada
+
+@ Input Scale
+gl Escala de entrada
+
+@ Interpolate Animation
+gl Interpolar animacións
+
+@ Interpolate Movement
+gl Interpolar movemento
+
+@ Invert Look
+gl Inverter vista
+
+@ Invert Mouse
+gl Inverter rato
+
+@ Invert Stick
+gl Inverter panca
+
+@ Jet Quality
+gl Calidade do chorro
+
+@ Join Game
+gl Unirse a partida
+
+@ Jump / Swim Up
+gl Saltar / nadar arriba
+
+@ Jump again in mid-air
+gl Saltar outra vez no aire
+
+@ Jumps
+gl Saltos
+
+@ Keys & Powerups
+gl Chaves e potenciadores
+
+@ Keys & Powerups Position
+gl Posición de chaves e potenciadores
+
+@ Kill Bonus (x)
+gl Bonificación por baixa (x)
+
+@ Kill Sound
+gl Son de baixa
+
+@ Knock
+gl Golpe
+
+@ Left
+gl Esquerda
+
+@ Length of the motion blur streaks
+gl Lonxitude das estelas do desenfoque de movemento
+
+@ Lifetime (seconds)
+gl Duración (segundos)
+
+@ Live Portal Views
+gl Vistas de portal en directo
+
+@ Live View Distance
+gl Distancia das vistas en directo
+
+@ Local Players
+gl Xogadores locais
+
+@ Local red wounds follow enemy animation
+gl As feridas vermellas seguen a animación do inimigo
+
+@ Lock Indicator
+gl Indicador de fixación
+
+@ Long falls don't hurt
+gl As caídas longas non fan dano
+
+@ Longest Freeze (ms)
+gl Conxelación máis longa (ms)
+
+@ Look Down
+gl Mirar abaixo
+
+@ Look Speed
+gl Velocidade da vista
+
+@ Look Up
+gl Mirar arriba
+
+@ Main Menu Music
+gl Música do menú principal
+
+@ Max FPS
+gl FPS máximos
+
+@ Max Players
+gl Máximo de xogadores
+
+@ Maximum Impacts
+gl Impactos máximos
+
+@ Maximum Marks
+gl Marcas máximas
+
+@ Maximum Range
+gl Alcance máximo
+
+@ Melee only
+gl Só corpo a corpo
+
+@ Message Background
+gl Fondo das mensaxes
+
+@ Message Text Size
+gl Tamaño do texto das mensaxes
+
+@ Messages & Captions
+gl Mensaxes e subtítulos
+
+@ Meter Duration (real seconds)
+gl Duración do medidor (segundos reais)
+
+@ Minimum Damage
+gl Dano mínimo
+
+@ Mode
+gl Modo
+
+@ Modern Console
+gl Consola moderna
+
+@ Modern HUD Layout
+gl Deseño da interface moderna
+
+@ Most recent save
+gl Partida gardada máis recente
+
+@ Motion Blur
+gl Desenfoque de movemento
+
+@ Motion Blur Amount
+gl Intensidade do desenfoque de movemento
+
+@ Motion Blur Quality
+gl Calidade do desenfoque de movemento
+
+@ Mouse & Keyboard
+gl Rato e teclado
+
+@ Mouse Speed
+gl Velocidade do rato
+
+@ Move Back
+gl Retroceder
+
+@ Move Forward
+gl Avanzar
+
+@ Music Volume
+gl Volume da música
+
+@ Next Weapon
+gl Arma seguinte
+
+@ No Drowning
+gl Sen afogamento
+
+@ No Fall Damage
+gl Sen dano por caída
+
+@ No Manual Saves
+gl Sen gardado manual
+
+@ No Self Damage
+gl Sen dano propio
+
+@ Noise Filter
+gl Filtro de ruído
+
+@ Normal Color
+gl Cor normal
+
+@ Notify Message Position
+gl Posición das notificacións
+
+@ Notify Message Time
+gl Duración das notificacións
+
+@ Number of splatter rays per blood impact
+gl Número de raios de salpicadura por impacto de sangue
+
+@ Off
+gl Desactivado
+
+@ On Death
+gl Ao morrer
+
+@ On Kill Color
+gl Cor ao matar
+
+@ On Target Color
+gl Cor sobre o obxectivo
+
+@ Opacity
+gl Opacidade
+
+@ Opacity of the grenade arc
+gl Opacidade do arco da granada
+
+@ Pants Color
+gl Cor dos pantalóns
+
+@ Particle Quality
+gl Calidade das partículas
+
+@ Particles
+gl Partículas
+
+@ Physical Nail Impacts
+gl Impactos físicos de cravos
+
+@ Pistol Start
+gl Inicio desde cero
+
+@ Pitch
+gl Ton
+
+@ Pitch Sensitivity
+gl Sensibilidade vertical
+
+@ Playback Speed
+gl Velocidade de reprodución
+
+@ Player Setup
+gl Configurar xogador
+
+@ Pop
+gl Pop
+
+@ Portal Gun Settings
+gl Axustes da pistola de portais
+
+@ Portal Recursion
+gl Recursión de portais
+
+@ Portal View Quality
+gl Calidade da vista de portais
+
+@ Preview Sound
+gl Escoitar o son
+
+@ Previous Weapon
+gl Arma anterior
+
+@ Projectile Shotguns Settings
+gl Axustes das escopetas de proxectís
+
+@ Projectile Speed (units/s)
+gl Velocidade dos proxectís (unidades/s)
+
+@ Purple
+gl Morado
+
+@ Push
+gl Empuxe
+
+@ Push Strength
+gl Forza do empuxe
+
+@ Quick Load
+gl Carga rápida
+
+@ Quick Save
+gl Gardado rápido
+
+@ Railgun Settings
+gl Axustes do railgun
+
+@ Ranged only
+gl Só a distancia
+
+@ Reacquire While Held
+gl Volver fixar ao manter
+
+@ Red
+gl Vermello
+
+@ Reduce Motion
+gl Reducir movemento
+
+@ Regen (seconds per second)
+gl Rexeneración (segundos por segundo)
+
+@ Render Scale
+gl Escala de renderizado
+
+@ Reverb
+gl Reverberación
+
+@ Right
+gl Dereita
+
+@ Ripple Intensity
+gl Intensidade das ondas
+
+@ Ripples
+gl Ondas
+
+@ Roll Sensitivity
+gl Sensibilidade de xiro lateral
+
+@ Rumble
+gl Vibración
+
+@ Run
+gl Correr
+
+@ Save on All Enemies Killed
+gl Gardar ao matar todos os inimigos
+
+@ Save on All Secrets Found
+gl Gardar ao atopar todos os segredos
+
+@ Save on Level Entry
+gl Gardar ao entrar no nivel
+
+@ Save on Secret Found
+gl Gardar ao atopar un segredo
+
+@ Scoreboard
+gl Marcador
+
+@ Screen Flashes
+gl Destellos de pantalla
+
+@ Screen Shader
+gl Sombreador de pantalla
+
+@ Screen Shake
+gl Tremor de pantalla
+
+@ Search LAN
+gl Buscar na LAN
+
+@ Seconds a center-screen message stays up
+gl Segundos que permanece unha mensaxe no centro da pantalla
+
+@ See Through Portals
+gl Ver a través dos portais
+
+@ See-through Teleporters
+gl Teletransportadores transparentes
+
+@ Shirt Color
+gl Cor da camisa
+
+@ Shotgun Bullet Decals
+gl Marcas de perdigóns
+
+@ Shoulder left
+gl ombreiro esquerdo
+
+@ Shoulder right
+gl ombreiro dereito
+
+@ Show FPS
+gl Mostrar FPS
+
+@ Show Face
+gl Mostrar a cara
+
+@ Shrapnel
+gl Metralla
+
+@ Size of on-screen messages and captions
+gl Tamaño das mensaxes e subtítulos en pantalla
+
+@ Skill
+gl Dificultade
+
+@ Sky Fog
+gl Néboa do ceo
+
+@ Smooths the stepped movement of monsters
+gl Suaviza o movemento a saltos dos monstros
+
+@ Sound
+gl Son
+
+@ Sound Captions
+gl Subtítulos de sons
+
+@ Sound Volume
+gl Volume do son
+
+@ Speed Blur
+gl Desenfoque de velocidade
+
+@ Splashes
+gl Salpicaduras
+
+@ Splatter Amount
+gl Cantidade de salpicaduras
+
+@ Splatter Size
+gl Tamaño das salpicaduras
+
+@ Start Game
+gl Iniciar partida
+
+@ Staying underwater doesn't hurt
+gl Estar baixo a auga non fai dano
+
+@ Stick Look Pitch
+gl Vista vertical coa panca
+
+@ Stick Look Yaw
+gl Vista horizontal coa panca
+
+@ Strafe Left
+gl Desprazamento á esquerda
+
+@ Strafe Right
+gl Desprazamento á dereita
+
+@ Strength of the surface swell and rings
+gl Forza das ondas e os aneis da superficie
+
+@ Stun Duration
+gl Duración do atordamento
+
+@ Style
+gl Estilo
+
+@ Supersampling
+gl Supermostraxe
+
+@ Surface Hit Effects
+gl Efectos de impacto en superficies
+
+@ Swim Down
+gl Nadar abaixo
+
+@ Targets
+gl Obxectivos
+
+@ Teamplay
+gl Xogo en equipo
+
+@ Texture Filter
+gl Filtro de texturas
+
+@ Third person
+gl terceira persoa
+
+@ Thud
+gl Golpe xordo
+
+@ Tick
+gl Tic
+
+@ Time Limit
+gl Límite de tempo
+
+@ Time Stretch
+gl Estiramento temporal
+
+@ Toggle Attack
+gl Ataque alterno
+
+@ Toggle Run
+gl Correr alterno
+
+@ Toggle auto-aim
+gl Puntaría automática alterna
+
+@ Touch Controls
+gl Controis táctiles
+
+@ Touchscreen
+gl Pantalla táctil
+
+@ Tough Enemy Health
+gl Saúde dos inimigos duros
+
+@ Tough enemies only
+gl Só inimigos duros
+
+@ Trail Colour
+gl Cor da estela
+
+@ Translate Console
+gl Traducir a consola
+
+@ Translucent Water
+gl Auga translúcida
+
+@ Treble
+gl Agudos
+
+@ Turn Left
+gl Xirar á esquerda
+
+@ Turn Right
+gl Xirar á dereita
+
+@ Underwater FX
+gl Efectos baixo a auga
+
+@ Use Bullet Time Meter
+gl Usar o medidor de tempo bala
+
+@ VSync
+gl Sincronización vertical
+
+@ View Bob
+gl Balanceo da cámara
+
+@ Viewmodels
+gl Modelos da arma
+
+@ Volume
+gl Volume
+
+@ Water Opacity
+gl Opacidade da auga
+
+@ Water Quality
+gl Calidade da auga
+
+@ Water Settings
+gl Axustes da auga
+
+@ Weapon Wheel
+gl Selector de armas
+
+@ Weapon Wheel Slowdown
+gl Ralentización do selector de armas
+
+@ Weapons
+gl Armas
+
+@ Weapons Position
+gl Posición das armas
+
+@ Where center-screen messages appear
+gl Onde aparecen as mensaxes centrais
+
+@ Where pickup and event messages appear
+gl Onde aparecen as mensaxes de obxectos e eventos
+
+@ White
+gl Branco
+
+@ Yaw Sensitivity
+gl Sensibilidade horizontal
+
+@ Yellow
+gl Amarelo
+
+# lowercase choice values
+@ T
+gl T
+
+@ always
+gl sempre
+
+@ auto
+gl auto
+
+@ banded
+gl por bandas
+
+@ borderless
+gl sen bordos
+
+@ bottom center
+gl abaixo no centro
+
+@ bottom left
+gl abaixo á esquerda
+
+@ bottom right
+gl abaixo á dereita
+
+@ box
+gl caixa
+
+@ broken square
+gl cadrado roto
+
+@ classic
+gl clásico
+
+@ coarse
+gl groso
+
+@ cooperative
+gl cooperativo
+
+@ cross
+gl cruz
+
+@ cross + dot
+gl cruz + punto
+
+@ cyan
+gl cian
+
+@ dashed
+gl descontinuo
+
+@ deathmatch
+gl todos contra todos
+
+@ deuteranopia
+gl deuteranopía
+
+@ diagonal streaks
+gl trazos diagonais
+
+@ diamond
+gl rombo
+
+@ dot
+gl punto
+
+@ double
+gl dobre
+
+@ double chevrons
+gl dobre cheurón
+
+@ double diagonals
+gl dobres diagonais
+
+@ easy
+gl doado
+
+@ fine
+gl fino
+
+@ fit output
+gl axustar á saída
+
+@ flick stick
+gl flick stick
+
+@ fullscreen
+gl pantalla completa
+
+@ gap cross
+gl cruz aberta
+
+@ green
+gl verde
+
+@ grey
+gl gris
+
+@ half speed
+gl media velocidade
+
+@ hard
+gl difícil
+
+@ high
+gl alta
+
+@ huge
+gl enorme
+
+@ immersive
+gl inmersivo
+
+@ intense
+gl intenso
+
+@ large
+gl grande
+
+@ larger
+gl máis grande
+
+@ largest
+gl o máis grande
+
+@ linear
+gl lineal
+
+@ low
+gl baixa
+
+@ lower
+gl abaixo
+
+@ magenta
+gl maxenta
+
+@ medium
+gl media
+
+@ middle
+gl no medio
+
+@ middle left
+gl no medio á esquerda
+
+@ middle right
+gl no medio á dereita
+
+@ modern
+gl moderno
+
+@ nearest
+gl máis próximo
+
+@ nightmare
+gl pesadelo
+
+@ nintendo
+gl Nintendo
+
+@ no team damage
+gl sen fogo amigo
+
+@ none
+gl ningún
+
+@ normal
+gl normal
+
+@ off
+gl desactivado
+
+@ off while held
+gl desactivado ao manter
+
+@ on
+gl activado
+
+@ only while held
+gl só ao manter
+
+@ playstation
+gl PlayStation
+
+@ protanopia
+gl protanopía
+
+@ quarter speed
+gl cuarto de velocidade
+
+@ red
+gl vermello
+
+@ short diagonals
+gl diagonais curtas
+
+@ single
+gl simple
+
+@ small
+gl pequeno
+
+@ solid
+gl continuo
+
+@ spectacle
+gl espectacular
+
+@ subtle
+gl sutil
+
+@ team damage
+gl fogo amigo
+
+@ top center
+gl arriba no centro
+
+@ top left
+gl arriba á esquerda
+
+@ top right
+gl arriba á dereita
+
+@ triple
+gl triplo
+
+@ tritanopia
+gl tritanopía
+
+@ upper
+gl arriba
+
+@ white
+gl branco
+
+@ whole screen
+gl pantalla completa
+
+@ windowed
+gl en xanela
+
+@ xbox
+gl Xbox
+
+@ yellow
+gl amarelo
+
+# ==== tooltips.txt ====
+
+# Options help lines (tooltips) and reasons for disabled rows.
+@ 2D aiming turns the view continuously with the right stick; flick stick snaps the view to where you push the stick, then turning the stick rotates it
+gl A puntaría 2D xira a vista de forma continua coa panca dereita; o flick stick orienta a vista ao instante cara a onde empurras a panca e despois xirala rótaa
+
+@ 3D resolution relative to the window; the UI stays sharp
+gl Resolución 3D respecto á xanela; a interface mantense nítida
+
+@ 3D view keeps the HUD and menus sharp; whole screen runs them through the shader too
+gl Vista 3D mantén nítidos a interface e os menús; pantalla completa tamén lles aplica o sombreador
+
+@ A Quake III style railgun: a slug that pierces every enemy on its line, using 2 cells a shot and refiring every 1.5 s; select it through its assigned weapon slot (Add-ons)
+gl Un railgun ao estilo de Quake III: un proxectil que atravesa todos os inimigos da súa traxectoria, 2 celas por disparo e un disparo cada 1,5 s; selecciónao coa súa rañura de arma asignada (complementos)
+
+@ A Zelda-style hookshot: fire sends a chain hook out; it latches onto hookable surfaces or enemies and reels you in; fire again to let go
+gl Un gancho ao estilo de Zelda: disparar lanza un garfo con cadea que se engancha a superficies aptas ou a inimigos e achégate; volve disparar para soltarte
+
+@ Also translates the engine's console messages; off keeps them in English
+gl Traduce tamén as mensaxes de consola do motor; desactivado déixaas en inglés
+
+@ Automatically acquire another enemy while holding Lock-on after losing a target
+gl Fixa automaticamente outro inimigo ao manter Fixar obxectivo tras perder un obxectivo
+
+@ Blends between animation frames of monsters and weapons
+gl Mestura os fotogramas de animación de monstros e armas
+
+@ Blood stains surfaces and bodies; cosmetic, independent of particle packs
+gl O sangue mancha superficies e corpos; só estético, independente dos paquetes de partículas
+
+@ Bloom glow around bright lights and heat sources; medium uses 4 taps, high uses 8, low disables halo taps
+gl Resplandor bloom arredor de luces intensas e fontes de calor; media usa 4 mostras, alta 8 e baixa desactiva o halo
+
+@ Blurs fast-moving monsters, projectiles and doors (not camera turns)
+gl Desenfoca monstros, proxectís e portas rápidos (non os xiros de cámara)
+
+@ Blurs the screen edges during fast falls and launches; keeps the centre clear. Reduce Motion disables it
+gl Desenfoca os bordos da pantalla en caídas e impulsos rápidos; o centro queda nítido. Reducir movemento desactívao
+
+@ Brightness of the underwater light patterns
+gl Brillo dos reflexos de luz baixo a auga
+
+@ Caps mark count, lifetime, airborne droplets and wound/gib painting; low skips enemy wounds and gib trails
+gl Limita o número e a duración das marcas, as pingas no aire e as manchas de feridas e restos; baixa omite as feridas inimigas e os rastros de restos
+
+@ Caps shader input at output size so 200% render scale keeps 3D sharpness without 4x shader cost; low scales stay low-res
+gl Limita a entrada do sombreador ao tamaño de saída, así unha escala de renderizado do 200 % mantén a nitidez 3D sen cuadriplicar o seu custo; as escalas baixas seguen en baixa resolución
+
+@ Classic: the original status bar; modern: compact elements at the screen edges
+gl Clásico: a barra de estado orixinal; moderno: elementos compactos nos bordos da pantalla
+
+@ Coat atlas resolution, rebuild rate and shader detail: low builds smaller coats less often with fast shading; high uses full detail
+gl Resolución do atlas de capas, frecuencia de reconstrución e detalle do sombreador: baixa crea capas máis pequenas con menos frecuencia e sombreado rápido; alta usa todo o detalle
+
+@ Colour of the railgun's spiral trail; split-screen players each get the next colour along
+gl Cor da estela en espiral do railgun; en pantalla dividida cada xogador recibe a cor seguinte
+
+@ Damage the railgun deals to each enemy it passes through (Quake III: 100)
+gl Dano que inflixe o railgun a cada inimigo que atravesa (Quake III: 100)
+
+@ Dark backdrop behind on-screen messages for readability
+gl Fondo escuro tras as mensaxes en pantalla para lelas mellor
+
+@ Dark border keeps the crosshair visible on any background
+gl Un bordo escuro mantén visible o punto de mira sobre calquera fondo
+
+@ Darkens corners and contact areas where geometry meets; higher quality is sharper
+gl Escurece esquinas e zonas de contacto entre xeometrías; unha calidade maior é máis nítida
+
+@ Debris lands on and is carried or shoved by doors, lifts and platforms
+gl Os cascallos caen sobre portas, ascensores e plataformas, que os transportan ou empurran
+
+@ Detail for caustics, ripples and splashes: low uses smaller budgets and shorter view distance; high uses larger budgets and farther view distance
+gl Detalle de cáusticas, ondas e salpicaduras: baixa usa orzamentos menores e menos distancia de visión; alta, orzamentos maiores e máis distancia de visión
+
+@ Disabled while Enhanced Particles is on: its particles replace the GLQuake and Classic styles
+gl Desactivado mentres Partículas melloradas está activo: as súas partículas substitúen os estilos GLQuake e clásico
+
+@ Disabled while Enhanced Water is on: its own underwater effects replace the classic and GLQuake view warps
+gl Desactivado mentres Auga mellorada está activa: os seus efectos baixo a auga substitúen as distorsións clásica e GLQuake
+
+@ Draw the predicted grenade path as a solid or dashed line
+gl Debuxa a traxectoria prevista da granada cunha liña continua ou descontinua
+
+@ Draw the view out of the linked portal inside each portal; off shows flat discs (fastest)
+gl Mostra en cada portal a vista desde o portal enlazado; desactivado mostra discos planos (o máis rápido)
+
+@ Droplets spray up when things enter or leave water, slime or lava
+gl Saltan pingas cando algo entra ou sae da auga, o limo ou a lava
+
+@ Emulates the original 8-bit palette of software rendering
+gl Emula a paleta de 8 bits orixinal do renderizado por software
+
+@ Every level starts with only the shotgun and axe, as if started fresh
+gl Cada nivel comeza só coa escopeta e o machado, como se empezases de cero
+
+@ Explosion damage for each remotely detonated sticky bomb
+gl Dano da explosión de cada bomba adhesiva detonada a distancia
+
+@ Extra freeze milliseconds for every 10 damage dealt, so heavy hits stop longer
+gl Milisegundos extra de conxelación por cada 10 de dano, para que os golpes fortes paren máis
+
+@ First person, a third-person camera centered behind the player, or one over the right or left shoulder; third person hides viewmodels
+gl Primeira persoa, cámara en terceira persoa centrada tras o xogador, ou sobre o ombreiro dereito ou esquerdo; a terceira persoa oculta os modelos da arma
+
+@ Flash the selected marker on confirmed hits; colors are shared with the crosshair
+gl Fai destellar o marcador elixido nos impactos confirmados; as cores compártense co punto de mira
+
+@ Freeze for every enemy, or only for enemies that were tough before the hit
+gl Conxelar con todos os inimigos ou só cos que eran duros antes do golpe
+
+@ Freeze the game briefly when you damage an enemy; single player with add-ons only
+gl Conxela brevemente o xogo ao danar un inimigo; só un xogador con complementos
+
+@ Gibs tumble and barrels throw shrapnel; shots and blasts push them (cosmetic only)
+gl Os restos rodan e os barrís lanzan metralla; disparos e explosións empúrranos (só estético)
+
+@ Health an enemy must have had before the hit to count as tough
+gl Saúde que debe ter un inimigo antes do golpe para contar como duro
+
+@ Hits dealing less damage than this do not freeze the game; the default 10 skips nails and shotgun pellets
+gl Os golpes con menos dano non conxelan o xogo; o valor predeterminado de 10 omite cravos e perdigóns
+
+@ Hold fire and sweep the crosshair over monsters to queue them, release to throw: it stuns each in turn and flies back; alt-fire clears the queue
+gl Mantén o disparo e pasa o punto de mira polos monstros para poñelos en cola, solta para lanzar: atorda cada un por quendas e volve; o disparo secundario baleira a cola
+
+@ Hold: keep Lock-on held. Toggle: press Auto-aim Toggle to enable automatic acquisition. Click look stick to switch targets
+gl Manter: mantén premido Fixar obxectivo. Alterno: preme Puntaría automática (alterna) para activar a fixación automática. Preme a panca de vista para cambiar de obxectivo
+
+@ How close an enemy must be to the crosshair for automatic acquisition in toggle mode (degrees)
+gl Canto de preto debe estar un inimigo do punto de mira para fixalo automaticamente no modo alterno (graos)
+
+@ How far the view tilts up and down when you tilt the controller (pitch axis)
+gl Canto se inclina a vista arriba e abaixo ao inclinar o mando (eixe de cabeceo)
+
+@ How far the view turns left and right when you turn the controller (yaw axis)
+gl Canto xira a vista á esquerda e á dereita ao xirar o mando (eixe de guiñada)
+
+@ How far the view turns when you drag on the right half of the screen
+gl Canto xira a vista ao arrastrar na metade dereita da pantalla
+
+@ How fast the boomerang flies (units per second)
+gl Velocidade de voo do bumerán (unidades por segundo)
+
+@ How hard shots and explosions push debris around
+gl Con que forza os disparos e as explosións empurran os cascallos
+
+@ How hard the Powerwasher's water pushes enemies
+gl Con que forza a auga da hidrolimpadora empurra os inimigos
+
+@ How long a hit freezes the game, in milliseconds
+gl Canto tempo conxela o xogo un golpe, en milisegundos
+
+@ How strongly fog covers the sky when fog is on
+gl Canto cobre a néboa o ceo cando está activada
+
+@ How the view distorts underwater: Classic ripples the whole screen like software Quake, GLQuake slowly stretches and squashes the view
+gl Como se distorsiona a vista baixo a auga: clásico ondula toda a pantalla como Quake por software, GLQuake estira e esmaga a vista lentamente
+
+@ Ignores gyro rotation slower than this many degrees per second, to hide hand tremor
+gl Ignora as rotacións do xiroscopio máis lentas ca estes graos por segundo, para ocultar o tremor da man
+
+@ Immersive: appears for a few seconds only when its value changes
+gl Inmersivo: aparece uns segundos só cando cambia o seu valor
+
+@ Keeps textures sharp on floors and walls seen at steep angles
+gl Mantén nítidas as texturas de chans e paredes vistas en ángulos moi inclinados
+
+@ Lights from rockets, muzzle flashes and explosions brighten nearby walls
+gl As luces de foguetes, fogonazos e explosións iluminan as paredes próximas
+
+@ Liquid surfaces swell and ring out where things move through them
+gl As superficies líquidas axítanse e forman aneis onde algo as atravesa
+
+@ Lobs sticky bombs (rockets ammo) that cling to walls, doors and monsters; alt-fire detonates them all
+gl Lanza bombas adhesivas (munición de foguetes) que se pegan a paredes, portas e monstros; o disparo secundario detónaas todas
+
+@ Look of the classic particles: GLQuake draws soft round dots, Classic draws square pixels like software Quake
+gl Aspecto das partículas clásicas: GLQuake debuxa puntos redondos e suaves; clásico, píxeles cadrados como Quake por software
+
+@ Low skips the background smear halo and uses fewer blur samples; high keeps the full halo and smoother streaks
+gl Baixa omite o halo de arrastre do fondo e usa menos mostras; alta mantén o halo completo e estelas máis suaves
+
+@ Low: hard particle edges, half the scripted particles and fewer hit sparks. Medium: soft edges. High: soft edges checked per MSAA sample, most hit sparks
+gl Baixa: bordos duros, a metade das partículas programadas e menos faíscas. Media: bordos suaves. Alta: bordos suaves comprobados por mostra MSAA, case todas as faíscas
+
+@ Marks fade out before expiring; oldest marks are recycled at the limit
+gl As marcas esvaécense antes de desaparecer; as máis antigas reutilízanse ao chegar ao límite
+
+@ Max nested portal reflections to draw; each level redraws the scene
+gl Máximo de portais aniñados que debuxar; cada nivel volve debuxar a escena
+
+@ Max portals per screen with a live view; each one redraws the scene
+gl Máximo de portais por pantalla con vista en directo; cada un volve debuxar a escena
+
+@ Maximum distance for acquiring and keeping an enemy locked
+gl Distancia máxima para fixar e manter fixado un inimigo
+
+@ Minimum gap between freezes, so shotgun pellets and rapid fire count once; kills ignore it
+gl Intervalo mínimo entre conxelacións, para que os perdigóns e o fogo rápido conten unha vez; as baixas ignórano
+
+@ Modern terminal console with autocomplete popup, history search, ANSI colors, bash shell and piping; off uses the classic Quake console
+gl Consola moderna tipo terminal con autocompletado, busca no historial, cores ANSI, shell bash e tubaxes; desactivado usa a consola clásica de Quake
+
+@ Monsters take proportionally less damage at higher values; above 100% is harder
+gl Os monstros reciben proporcionalmente menos dano con valores altos; por riba do 100 % é máis difícil
+
+@ Moving gibs leave blood on surfaces they touch
+gl Os restos en movemento deixan sangue nas superficies que tocan
+
+@ Multiplier on the freeze when the hit kills the enemy; 1 means no extra
+gl Multiplicador da conxelación cando o golpe mata o inimigo; 1 significa sen extra
+
+@ Multiplies ammo from pickups (up to the normal carry limit); below 100% is harder
+gl Multiplica a munición recollida (ata o límite normal); por debaixo do 100 % é máis difícil
+
+@ Multiplies health from pickups (up to 100, or the item's own limit); below 100% is harder
+gl Multiplica a saúde recollida (ata 100 ou o límite propio do obxecto); por debaixo do 100 % é máis difícil
+
+@ Nails stick to wood and bodies; hard surfaces deflect them to the floor
+gl Os cravos crávanse na madeira e nos corpos; as superficies duras desvíanos ao chan
+
+@ Nearest keeps crisp classic pixels; linear smooths textures
+gl Máis próximo mantén píxeles clásicos nítidos; lineal suaviza as texturas
+
+@ New Game: Add-ons
+gl Nova partida: complementos
+
+@ New Game: Customize
+gl Nova partida: personalizar
+
+@ Night vision: how much dark areas are brightened; thermal: how strongly heat stands out
+gl Visión nocturna: canto se aclaran as zonas escuras; térmica: canto destaca a calor
+
+@ Night-vision and thermal goggles, cycle normal, night vision and thermal with Change Goggles (Add-ons), or use the Equipment Wheel
+gl Lentes de visión nocturna e térmica: alterna normal, nocturna e térmica con Cambiar lentes (complementos) ou usa o selector de equipo
+
+@ No single freeze lasts longer than this, however much damage or kill bonus adds
+gl Ningunha conxelación dura máis ca isto, por moito dano ou bonificación por baixa que se sume
+
+@ Oldest marks and nails are recycled at this shared limit
+gl As marcas e os cravos máis antigos reutilízanse ao chegar a este límite común
+
+@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
+gl Panca e botóns en pantalla: auto móstraos tras un toque e ocúltaos ao usar outro dispositivo
+
+@ Only autosaves: quicksaves and the Save menu are off
+gl Só gardado automático: o gardado rápido e o menú Gardar están desactivados
+
+@ Place every weapon at the center, right or left of the view, or hide all viewmodels
+gl Coloca cada arma no centro, á dereita ou á esquerda da vista, ou oculta todos os modelos
+
+@ Play your chosen hit or kill cue when you damage an enemy
+gl Reproduce o son de impacto ou baixa elixido ao danar un inimigo
+
+@ Playback speed: faster sounds shorter and higher
+gl Velocidade de reprodución: máis rápido soa máis curto e máis agudo
+
+@ Plays the Quake theme in the main menu when no game is running
+gl Reproduce o tema de Quake no menú principal cando non hai partida en curso
+
+@ Portals farther away than this are drawn as flat discs
+gl Os portais máis afastados debúxanse como discos planos
+
+@ Press attack once to keep firing, again to stop
+gl Preme atacar unha vez para seguir disparando e outra para parar
+
+@ Press run once to switch between running and walking
+gl Preme correr unha vez para alternar entre correr e camiñar
+
+@ Raise or lower the tone independently of sound length
+gl Sobe ou baixa o ton sen cambiar a duración do son
+
+@ Red screen edges show where damage came from: top is front, bottom is behind; Screen Flashes controls their strength
+gl Os bordos vermellos da pantalla mostran de onde vén o dano: arriba é diante, abaixo é detrás; Destellos de pantalla regula a súa intensidade
+
+@ Replaces the classic dot particles with glowing sparks, smoke and blood; mods with their own particle effects keep them
+gl Substitúe as partículas clásicas de puntos por faíscas brillantes, fume e sangue; os mods con efectos propios consérvanos
+
+@ Resolution and detail inside portal and teleporter views; lower tiers trim nested effects
+gl Resolución e detalle nas vistas de portais e teletransportadores; os niveis baixos recortan os efectos aniñados
+
+@ Rippling light patterns on surfaces under water and slime
+gl Reflexos de luz ondulantes en superficies baixo a auga e o limo
+
+@ Scales all damage you take; above 100% is harder
+gl Escala todo o dano que recibes; por riba do 100 % é máis difícil
+
+@ Screen edge for this element; elements on the same spot stack
+gl Bordo da pantalla para este elemento; os elementos no mesmo sitio apílanse
+
+@ Seconds a monster hit by the boomerang stays stunned
+gl Segundos que queda atordado un monstro golpeado polo bumerán
+
+@ Seconds impact marks and stuck nails stay before fading out; independent of Particle Quality
+gl Segundos que permanecen os impactos e os cravos cravados antes de esvaecerse; independente de Calidade das partículas
+
+@ Seconds messages at the top of the screen stay up
+gl Segundos que permanecen as mensaxes na parte superior da pantalla
+
+@ Seconds the flick stick snap takes; lower is faster
+gl Segundos que tarda o xiro do flick stick; menos é máis rápido
+
+@ See through enhanced water; enables Water Opacity
+gl Ver a través da auga mellorada; activa Opacidade da auga
+
+@ Sensor grain, scanlines and flicker of the goggle image
+gl Gran do sensor, liñas de exploración e escintileo da imaxe das lentes
+
+@ Shades every anti-aliasing sample; needs Anti-aliasing on
+gl Sombrea cada mostra do antialiasing; require o antialiasing activado
+
+@ Shifts colors so they stay distinct for the chosen color blindness
+gl Despraza as cores para que sigan sendo distinguibles co daltonismo elixido
+
+@ Shotgun hits leave small surface marks (cosmetic only)
+gl Os disparos de escopeta deixan pequenas marcas (só estético)
+
+@ Show corner ticks at screen centre while locked, even with Crosshair off
+gl Mostra marcas de esquina no centro da pantalla ao fixar, mesmo sen punto de mira
+
+@ Show where grenades and other arcing shots will fly, bounce and land; local play only, not in deathmatch
+gl Mostra onde voarán, rebotarán e caerán as granadas e outros tiros parabólicos; só en local, non en todos contra todos
+
+@ Shows text for important sounds: doors, alerted enemies, secrets, pickups
+gl Mostra texto para sons importantes: portas, inimigos alertados, segredos, obxectos
+
+@ Shows the distance fog that maps and mods set; off always gives clear view
+gl Mostra a néboa de distancia que fixan mapas e mods; desactivado dá sempre unha vista despexada
+
+@ Shows the player face next to the health number
+gl Mostra a cara do xogador xunto á saúde
+
+@ Simulation detail, step rate, fade-out lifetimes and caps for gibs and shrapnel; low also skips mover collision
+gl Detalle da simulación, frecuencia, duración do esvaecemento e límites de restos e metralla; baixa tamén omite as colisións con elementos móbiles
+
+@ Size of the on-screen buttons and move stick
+gl Tamaño dos botóns e da panca de movemento en pantalla
+
+@ Slowly heals up to 100 health after 5 seconds without being hit
+gl Cura lentamente ata 100 de saúde tras 5 segundos sen recibir golpes
+
+@ Slows stick look while the crosshair is over an enemy
+gl Ralentiza a vista coa panca mentres o punto de mira está sobre un inimigo
+
+@ Slows the game down while the weapon wheel is open
+gl Ralentiza o xogo mentres o selector de armas está aberto
+
+@ Slows the whole game down; single player only. Saves and demos stay compatible with other ports
+gl Ralentiza todo o xogo; só un xogador. As partidas gardadas e as demos seguen sendo compatibles con outros ports
+
+@ Small camera jolt on each freeze; off with Reduce Motion
+gl Pequena sacudida da cámara en cada conxelación; desactivada con Reducir movemento
+
+@ Snap and track enemies in local play, including split-screen; unavailable online
+gl Fixa e segue os inimigos en partida local, incluída a pantalla dividida; non dispoñible en liña
+
+@ Sparks, smoke, chips, splinters and splashes fly off whatever your shots hit
+gl Faíscas, fume, lascas, astelas e salpicaduras saltan de todo o que alcanzan os teus disparos
+
+@ Spawns extra copies of every monster around the original when a level starts
+gl Xera copias adicionais de cada monstro arredor do orixinal ao comezar o nivel
+
+@ Strength of the full-screen flashes for damage, pickups and powerups
+gl Intensidade dos destellos a pantalla completa por dano, obxectos e potenciadores
+
+@ Stretch or shorten the sound while keeping its pitch
+gl Alonga ou acurta o son mantendo o seu ton
+
+@ Surface opacity; requires Enhanced Water and Translucent Water
+gl Opacidade da superficie; require Auga mellorada e Auga translúcida
+
+@ The hook latches onto metal surfaces (metal, tech, computer panels, copper)
+gl O gancho engánchase a superficies metálicas (metal, tecnoloxía, paneis de ordenador, cobre)
+
+@ The hook latches onto stone, brick, rock and any surface not recognised as wood or metal
+gl O gancho engánchase a pedra, ladrillo, rocha e calquera superficie non recoñecida como madeira ou metal
+
+@ The hook latches onto wooden surfaces (texture names like wood, crate, plank)
+gl O gancho engánchase a superficies de madeira (texturas con nomes como wood, crate, plank)
+
+@ Turn the controller's motion sensor into a look input; needs a pad with a gyroscope
+gl Usa o sensor de movemento do mando para mirar; require un mando con xiroscopio
+
+@ Turns off view bob, strafe tilt and the camera kick when hit or firing
+gl Desactiva o balanceo da cámara, a inclinación lateral e a sacudida da cámara ao recibir golpes ou disparar
+
+@ Turns on the extra liquid effects; Water Settings controls each one
+gl Activa os efectos de líquidos adicionais; Axustes da auga controla cada un
+
+@ Turns the view to follow a moving enemy you are aiming at
+gl Xira a vista para seguir o inimigo en movemento ao que apuntas
+
+@ Turns the view when you roll the controller sideways; 0 disables it, negative reverses it
+gl Xira a vista ao inclinar o mando de lado; 0 desactívao e un valor negativo invérteo
+
+@ Two-portal gun: fire and alt-fire place linked portals on flat walls; assign a weapon slot in Add-ons
+gl Pistola de dous portais: o disparo e o secundario colocan portais enlazados en paredes planas; asigna unha rañura de arma en Complementos
+
+@ Unlocks the FX Settings page: enhanced particles, impact effects and blood splatter
+gl Desbloquea a páxina Axustes de efectos: partículas melloradas, efectos de impacto e salpicaduras de sangue
+
+@ Uses the 2021 re-release's smoother MD5 models (and MD3 replacements from mods) instead of the classic ones. Applies on the next map load
+gl Usa os modelos MD5 máis suaves da reedición de 2021 (e os substitutos MD3 dos mods) en lugar dos clásicos. Aplícase ao cargar o seguinte mapa
+
+@ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
+gl Usa a luz de cor do mapa (ficheiro .lit ou bloque BSPX); desactivado dá a luz branca orixinal. Aplícase ao cargar o seguinte mapa
+
+@ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
+gl Segmentos do chorro, número de pingas e sombreado brillante do líquido: baixa usa chorros translúcidos máis simples; alta, chorros suaves e brillantes
+
+@ When gyro looking applies: always, off while +gyroaction is held, or only while it is held
+gl Cando se aplica a vista con xiroscopio: sempre, desactivada ao manter +gyroaction ou só ao mantela
+
+@ Which weapons trigger the freeze; melee covers the axe and any mod weapon used at close range without ammo
+gl Que armas activan a conxelación; corpo a corpo inclúe o machado e calquera arma de mod usada de preto sen munición
+
+@ Your own rockets and grenades don't hurt you; rocket jumps still work
+gl Os teus propios foguetes e granadas non te feren; os saltos con foguete seguen funcionando
+
+# ==== ui.txt ====
+
+# Menus and pop-ups outside the options pages: save cards, launch, presets,
+# add-on browser, map packs, hints and dialogs.
+@ Select
+gl Seleccionar
+
+@ Back
+gl Volver
+
+@ Cancel
+gl Cancelar
+
+@ Confirm
+gl Confirmar
+
+@ Scroll
+gl Desprazar
+
+@ Section
+gl Sección
+
+@ Bind
+gl Asignar
+
+@ Cancel binding
+gl Cancelar asignación
+
+@ Clear
+gl Borrar
+
+@ Clear pad
+gl Borrar mando
+
+@ Remap
+gl Reasignar
+
+@ Type
+gl Escribir
+
+@ Shift
+gl Maiús
+
+@ Done
+gl Feito
+
+@ Del
+gl Supr
+
+@ Space
+gl Espazo
+
+@ Save
+gl Gardar
+
+@ Load
+gl Cargar
+
+@ Delete
+gl Eliminar
+
+@ Play
+gl Xogar
+
+@ Yes
+gl Si
+
+@ No
+gl Non
+
+@ OK
+gl Aceptar
+
+@ System
+gl Sistema
+
+@ Language
+gl Idioma
+
+@ Help
+gl Axuda
+
+@ Fixed for this game: it was started without Customize
+gl Fixo nesta partida: iniciouse sen Personalizar
+
+@ Press a button or key to bind (Start cancels)
+gl Preme un botón ou unha tecla para asignar (Start cancela)
+
+@ Press button...
+gl Preme un botón...
+
+@ Press key...
+gl Preme unha tecla...
+
+@ Replace this binding?
+gl Substituír esta asignación?
+
+@ is already assigned
+gl xa está asignado
+
+@ {} already assigned
+gl {} xa asignado
+
+@ Open Controls to remap Lock-on?
+gl Abrir Controis para reasignar Fixar obxectivo?
+
+@ Lock-on
+gl Fixar obxectivo
+
+@ Auto-aim Toggle
+gl Puntaría automática (alterna)
+
+@ Keyboard
+gl Teclado
+
+@ Controller
+gl Mando
+
+# main menu, dialogs and screens
+@ Map Packs
+gl Paquetes de mapas
+
+@ Customize
+gl Personalizar
+
+@ Level Select
+gl Elixir nivel
+
+@ Really quit?
+gl Seguro que queres saír?
+
+@ You died
+gl Morreches
+
+@ Continue from most recent save
+gl Continuar desde a partida máis recente
+
+@ Select save
+gl Elixir partida gardada
+
+@ Restart level
+gl Reiniciar o nivel
+
+@ Return to main menu
+gl Volver ao menú principal
+
+@ (disabled)
+gl (desactivado)
+
+@ (fixed for this game)
+gl (fixo nesta partida)
+
+@ (off)
+gl (desactivado)
+
+@ Apply Display Changes
+gl Aplicar cambios de pantalla
+
+@ Display Mode
+gl Modo de pantalla
+
+@ Resolution
+gl Resolución
+
+@ desktop
+gl escritorio
+
+@ Preset
+gl Predefinición
+
+@ Map
+gl Mapa
+
+@ Reset Shader Settings
+gl Restablecer axustes do sombreador
+
+@ Reset to Defaults
+gl Restablecer valores predeterminados
+
+@ Searching...
+gl Buscando...
+
+@ This game only autosaves.
+gl Esta partida só usa o gardado automático.
+
+@ (No Manual Saves modifier)
+gl (modificador Sen gardado manual)
+
+@ End the current game?
+gl Rematar a partida actual?
+
+@ Unsaved progress will be lost.
+gl Perderase o progreso non gardado.
+
+@ End game
+gl Rematar partida
+
+@ Overwrite
+gl Sobrescribir
+
+@ Overwrite "{}"?
+gl Sobrescribir «{}»?
+
+@ Saved {}
+gl Gardado {}
+
+@ Start a new game?
+gl Comezar unha partida nova?
+
+@ New game
+gl Nova partida
+
+@ New Game
+gl Nova partida
+
+@ CUSTOM
+gl PERSONALIZADA
+
+@ Customize Experience
+gl Personalizar a experiencia
+
+@ Disable All
+gl Desactivar todo
+
+@ Disable All Modifications
+gl Desactivar todas as modificacións
+
+@ Saves load in other source ports too.
+gl As partidas tamén se cargan noutros ports.
+
+@ Standard rules, no add-ons.
+gl Regras estándar, sen complementos.
+
+@ Choose skill
+gl Elixe a dificultade
+
+@ The current game will end
+gl A partida actual rematará
+
+@ Easy
+gl Doado
+
+@ Normal
+gl Normal
+
+@ Hard
+gl Difícil
+
+@ Nightmare
+gl Pesadelo
+
+# graphics preset pop-up
+@ Choose a Graphics Preset
+gl Elixe unha predefinición gráfica
+
+@ Classic
+gl Clásico
+
+@ Like the re-release: enhanced models,
+gl Como a reedición: modelos mellorados,
+
+@ no added effects.
+gl sen efectos engadidos.
+
+@ Enhanced
+gl Mellorado
+
+@ Every enhancement at its highest quality.
+gl Todas as melloras á máxima calidade.
+
+@ Needs a capable GPU.
+gl Require unha GPU potente.
+
+@ Low-End
+gl Equipos modestos
+
+@ Fastest. No anti-aliasing, original
+gl O máis rápido. Sen antialiasing, modelos
+
+@ models, lowest effect quality.
+gl orixinais, efectos ao mínimo.
+
+@ Esc keeps the defaults
+gl Esc mantén os valores predeterminados
+
+@ Everything can be changed later in Options.
+gl Todo se pode cambiar máis tarde en Opcións.
+
+@ Keep Defaults
+gl Manter predeterminados
+
+# save and load cards
+@ Save Game
+gl Gardar partida
+
+@ Load Game
+gl Cargar partida
+
+@ Autosaves
+gl Gardados automáticos
+
+@ newest first
+gl os máis recentes primeiro
+
+@ Saves: {}
+gl Partidas: {}
+
+@ Browse Autosaves
+gl Ver gardados automáticos
+
+@ Every retained autosave, newest first
+gl Todos os gardados automáticos conservados, os máis recentes primeiro
+
+@ New save
+gl Nova partida gardada
+
+@ Select to save your game here
+gl Selecciona para gardar aquí a túa partida
+
+@ No autosaves yet
+gl Aínda non hai gardados automáticos
+
+@ Autosaves are made on level entry, secrets and more (Options > Gameplay)
+gl Gárdase automaticamente ao entrar nun nivel, ao atopar segredos e máis (Opcións > Xogo)
+
+@ No saves yet
+gl Aínda non hai partidas gardadas
+
+@ Save from the Single Player menu, or press F6 to quicksave
+gl Garda desde o menú Un xogador ou preme F6 para o gardado rápido
+
+@ No picture
+gl Sen imaxe
+
+@ Del: delete save
+gl Supr: eliminar partida
+
+@ Delete "{}"?
+gl Eliminar «{}»?
+
+@ This cannot be undone.
+gl Isto non se pode desfacer.
+
+@ Quicksave
+gl Gardado rápido
+
+@ Autosave: {}
+gl Gardado automático: {}
+
+@ unknown trigger
+gl motivo descoñecido
+
+@ Latest - {}
+gl Máis recente - {}
+
+@ Health {}
+gl Saúde {}
+
+@ Armor {}
+gl Armadura {}
+
+@ Kills {}/{}
+gl Baixas {}/{}
+
+@ Secrets {}/{}
+gl Segredos {}/{}
+
+@ Split-screen, {} players
+gl Pantalla dividida, {} xogadores
+
+@ Co-op
+gl Cooperativo
+
+@ Customized
+gl Personalizada
+
+@ Customized, {}
+gl Personalizada, {}
+
+@ Date unavailable
+gl Data non dispoñible
+
+@ Just now
+gl Agora mesmo
+
+@ {} min ago
+gl hai {} min
+
+@ {} h ago
+gl hai {} h
+
+@ Level entry
+gl Entrada no nivel
+
+@ Secret found
+gl Segredo atopado
+
+@ All enemies killed
+gl Todos os inimigos mortos
+
+@ All secrets found
+gl Todos os segredos atopados
+
+@ Timer
+gl Temporizador
+
+# customize pages
+@ Standard rules
+gl Regras estándar
+
+@ Modifiers changed: {}
+gl Modificadores cambiados: {}
+
+@ no add-ons
+gl sen complementos
+
+@ add-ons: {}
+gl complementos: {}
+
+@ Saves of this game are .qsa files: they need this source port.
+gl As partidas gardadas desta partida son ficheiros .qsa: precisan este port.
+
+@ Nothing changed: this plays as standard Quake.
+gl Nada cambiado: xógase como o Quake estándar.
+
+@ Changes apply now and are saved with this game (.qsa).
+gl Os cambios aplícanse xa e gárdanse con esta partida (.qsa).
+
+@ This game started without Customize, so its rules are fixed.
+gl Esta partida comezou sen Personalizar, así que as súas regras son fixas.
+
+@ Start a new game and choose Customize Experience.
+gl Comeza unha partida nova e elixe Personalizar a experiencia.
+
+@ These rules apply to the next customized game.
+gl Estas regras aplícanse á próxima partida personalizada.
+
+# add-on browser
+@ Fire
+gl Disparo
+
+@ Alt Fire
+gl Disparo secundario
+
+@ Configure Parameters >
+gl Configurar parámetros >
+
+@ Configure
+gl Configurar
+
+@ Settings
+gl Axustes
+
+@ Change slot
+gl Cambiar rañura
+
+@ Toggle
+gl Alternar
+
+@ Details
+gl Detalles
+
+@ Enter or click the box: toggle
+gl Intro ou clic na caixa: alternar
+
+@ Right / Tab / click: details
+gl Dereita / Tab / clic: detalles
+
+@ Input Remapping
+gl Reasignación de controis
+
+@ Weapon Slot
+gl Rañura de arma
+
+@ Customized games save as .qsa files, which need this source port.
+gl As partidas personalizadas gárdanse como ficheiros .qsa, que precisan este port.
+
+@ This game started without Customize, so its add-ons are fixed. Customize a new game instead.
+gl Esta partida comezou sen Personalizar, así que os seus complementos son fixos. Personaliza unha partida nova.
+
+@ Bullet Time
+gl Tempo bala
+
+@ Change Goggles
+gl Cambiar lentes
+
+@ Dodge / Dive
+gl Esquivar / lanzarse
+
+@ Goggles
+gl Lentes
+
+@ Hitstop
+gl Hitstop
+
+@ Projectile Shotguns
+gl Escopetas de proxectís
+
+@ BULLET TIME: 20%
+gl TEMPO BALA: 20 %
+
+@ NORMAL SPEED
+gl VELOCIDADE NORMAL
+
+@ SLOW MOTION: PHYSICAL PELLETS
+gl CÁMARA LENTA: PERDIGÓNS FÍSICOS
+
+@ DEMONSTRATION
+gl DEMOSTRACIÓN
+
+@ GAMEPLAY
+gl XOGO
+
+@ LOOP
+gl BUCLE
+
+@ Preview unavailable
+gl Vista previa non dispoñible
+
+# shader and language help lines
+@ A setting of the chosen shader; arrows step it, Enter is not needed
+gl Un axuste do sombreador elixido; as frechas cámbiano, non fai falta Intro
+
+@ Language of the menus, messages and the 2021 re-release's game text; System follows your computer's language
+gl Idioma dos menús, das mensaxes e dos textos de xogo da reedición de 2021; Sistema segue o idioma do teu ordenador
+
+@ Puts every setting of the chosen shader back to the preset's defaults
+gl Devolve todos os axustes do sombreador elixido aos valores da predefinición
+
+@ RetroArch slang shader on the final image: CRT, scanlines, NTSC, sharpening; add your own in <game>/shaders
+gl Sombreador slang de RetroArch sobre a imaxe final: CRT, liñas de exploración, NTSC, enfoque; engade os teus en <xogo>/shaders
+
+# modern console footer
+@ Shift+PgUp/Dn: height  ` : hide
+gl Maiús+RePáx/AvPáx: altura  ` : ocultar
+
+@ Tab: complete  Ctrl+R: search  bash | pipe
+gl Tab: completar  Ctrl+R: buscar  bash | tubaxe
+
+@ ↑ +{} lines (End to jump) 
+gl ↑ +{} liñas (Fin para saltar) 
+
+# add-on descriptions
+@ Create two linked portals on flat walls. Fire places the first portal; Alt Fire places the second. Walk through either portal to emerge from the other. Your momentum carries through. Assign a weapon slot below: pressing that slot repeatedly cycles its ordinary weapon and every enabled add-on assigned there. Portal view quality is configurable below.
+gl Crea dous portais enlazados en paredes planas. O disparo coloca o primeiro e o secundario o segundo. Atravesa un para saír polo outro conservando o teu impulso. Asigna unha rañura de arma abaixo: premer esa rañura varias veces alterna entre a súa arma normal e cada complemento activo asignado a ela. A calidade da vista dos portais axústase abaixo.
+
+@ Hold Fire and sweep the crosshair over monsters to queue targets. Release Fire to throw: the boomerang visits each target, stuns it and returns to you. Alt Fire clears the queue. The weapon slot selects a group, not a separate hotkey: press it again to cycle through the weapons in that slot. Configure stun duration and flight speed below.
+gl Mantén o disparo e pasa o punto de mira polos monstros para poñelos en cola. Solta para lanzar: o bumerán visita cada obxectivo, atórdao e volve a ti. O disparo secundario baleira a cola. A rañura de arma selecciona un grupo, non un atallo aparte: vólvea premer para alternar entre as armas desa rañura. Axusta abaixo a duración do atordamento e a velocidade de voo.
+
+@ Hold Fire to charge a sticky bomb using rocket ammunition; release to launch. A longer charge throws it faster. Bombs cling to walls, doors and monsters. Alt Fire detonates your planted bombs together. Place a trap, retreat, then detonate it when enemies approach. Assign any weapon slot below; repeated presses cycle through the ordinary weapon and add-ons in that slot.
+gl Mantén o disparo para cargar unha bomba adhesiva con munición de foguetes; solta para lanzala. Canto máis cargues, máis rápido sae. As bombas péganse a paredes, portas e monstros. O disparo secundario detona xuntas todas as túas bombas colocadas. Pon unha trampa, retírate e detónaa cando se acheguen os inimigos. Asigna unha rañura de arma abaixo; premela varias veces alterna entre a arma normal e os complementos desa rañura.
+
+@ Fire launches a chain hook. It latches onto a permitted surface or enemy and reels you toward the anchor. Fire again or use Alt Fire to let go. Choose which materials and enemies can be hooked in Configure Parameters. Assign it to any weapon slot; repeated presses of the slot's existing binding cycle through its weapons.
+gl O disparo lanza un garfo con cadea. Engánchase a unha superficie permitida ou a un inimigo e achégate á ancoraxe. Volve disparar ou usa o secundario para soltarte. Elixe que materiais e inimigos se poden enganchar en Configurar parámetros. Asígnao a calquera rañura de arma; premer varias veces a tecla desa rañura alterna entre as súas armas.
+
+@ A piercing railgun inspired by Quake III. Fire sends a slug through every enemy along its line. Each shot consumes two cells, with a 1.5 second refire interval. Damage and the spiral trail colour are configurable below. Choose a weapon slot: the slot's current binding selects and cycles the weapons assigned to it.
+gl Un railgun perforante inspirado en Quake III. O disparo envía un proxectil a través de todos os inimigos da súa traxectoria. Cada disparo gasta dúas celas, con 1,5 segundos entre disparos. O dano e a cor da estela en espiral axústanse abaixo. Elixe unha rañura de arma: a súa tecla actual selecciona e alterna as armas asignadas.
+
+@ A Portal-style gel sprayer. Fire sprays blue Repulsion gel: land, jump or run into it to bounce, and landings on it never hurt. Alt Fire sprays orange Propulsion gel: run across it to go much faster. Gel coats floors and walls until washed off with the Powerwasher. Assign a weapon slot below; repeated presses cycle the weapons in that slot.
+gl Un pulverizador de xel ao estilo de Portal. O disparo rocía xel azul de repulsión: aterra, salta ou corre cara a el para rebotar, e aterrar sobre el nunca fai dano. O secundario rocía xel laranxa de propulsión: corre sobre el para ir moito máis rápido. O xel cobre chans e paredes ata que o lavas coa hidrolimpadora. Asigna unha rañura de arma abaixo; premela varias veces alterna entre as súas armas.
+
+@ A water cannon. Fire shoots a straight jet with limited reach; Alt Fire a wide, shorter fan. The water pushes enemies back, turns projectiles aside and washes away gel and blood. Push strength is configurable below. Assign a weapon slot below; repeated presses cycle the weapons in that slot.
+gl Un canón de auga. O disparo lanza un chorro recto de alcance limitado; o secundario, un abano ancho e máis curto. A auga empurra os inimigos, desvía os proxectís e limpa o xel e o sangue. A forza do empuxe axústase abaixo. Asigna unha rañura de arma abaixo; premela varias veces alterna entre as súas armas.
+
+@ One equipment add-on includes both night vision and thermal vision. The Change Goggles action cycles Normal, Night Vision, Thermal, then Normal again. Night vision brightens dark rooms; thermal vision highlights living enemies. Goggles do not occupy a weapon slot. Configure intensity and sensor noise below. The binding affects only this add-on.
+gl Un só complemento de equipo inclúe visión nocturna e térmica. A acción Cambiar lentes alterna entre normal, nocturna, térmica e de novo normal. A visión nocturna aclara as salas escuras; a térmica resalta os inimigos vivos. As lentes non ocupan rañura de arma. Axusta abaixo a intensidade e o ruído do sensor. A asignación só afecta a este complemento.
+
+@ Press Dodge with a movement direction on the ground or in midair: dive forward or leap backward and sideways. Diagonals are supported. Each press launches once, with a short recovery. The player body animates in third person. Assign the Dodge action below or in Controls.
+gl Preme Esquivar cunha dirección de movemento, no chan ou no aire: lánzate cara a diante ou salta cara a atrás e aos lados. As diagonais funcionan. Cada pulsación impulsa unha vez, cunha breve recuperación. O corpo do xogador anímase en terceira persoa. Asigna a acción Esquivar abaixo ou en Controis.
+
+@ Use the dedicated Bullet Time action to slow the whole local game to 20% speed. Hold is the default; Toggle switches on each press. The optional meter limits use in real seconds and regenerates while inactive. Disable the meter for unlimited use. Remap the action and configure duration and regeneration below.
+gl Usa a acción Tempo bala para ralentizar toda a partida local ao 20 % de velocidade. Manter é o modo predeterminado; Alternar cambia con cada pulsación. O medidor opcional limita o uso en segundos reais e recárgase mentres está inactivo. Desactívao para un uso ilimitado. Reasigna a acción e axusta a duración e a recarga abaixo.
+
+@ Both shotguns and enemy grunts fire physical pellets with their original spread and damage. Fast default projectiles feel immediate; lower their speed to dodge incoming fire during bullet time. Configure projectile speed below, or reset it to the default of 10000 units per second.
+gl As dúas escopetas e os grunts inimigos disparan perdigóns físicos coa súa dispersión e dano orixinais. Os proxectís rápidos predeterminados parecen instantáneos; reduce a súa velocidade para esquivar os disparos durante o tempo bala. Axusta abaixo a velocidade dos proxectís ou restablece o valor predeterminado de 10000 unidades por segundo.
+
+@ Freezes the game for a split second when you damage an enemy, so hits feel heavier. Single player only. Choose which weapons trigger it (all, melee, ranged or explosives), how long it lasts and how much more a kill freezes. Advanced settings cover enemy toughness, damage scaling, cooldown and the longest freeze.
+gl Conxela o xogo unha fracción de segundo ao danar un inimigo, para que os golpes se sintan máis contundentes. Só un xogador. Elixe que armas o activan (todas, corpo a corpo, a distancia ou explosivos), canto dura e canto máis conxela unha baixa. Os axustes avanzados cobren a dureza dos inimigos, a escala de dano, a recarga e a conxelación máis longa.
+
+# map packs and the Quaddicted browser
+@ Get more maps (Quaddicted)...
+gl Máis mapas (Quaddicted)...
+
+@ Type to filter...
+gl Escribe para filtrar...
+
+@ Launch mod
+gl Iniciar o mod
+
+@ Start first map
+gl Iniciar o primeiro mapa
+
+@ (running)
+gl (en execución)
+
+@ running
+gl en execución
+
+@ Recent
+gl Recentes
+
+@ Name
+gl Nome
+
+@ Dir
+gl Cartafol
+
+@ Default
+gl Predeterminado
+
+@ Title
+gl Título
+
+@ Sort: {}
+gl Orde: {}
+
+@ {} installed
+gl {} instalados
+
+@ {}/{} matching
+gl {}/{} coincidentes
+
+@ {} maps, {} completed
+gl {} mapas, {} completados
+
+@ {}/{} matching, {} completed
+gl {}/{} coincidentes, {} completados
+
+@ no maps of its own
+gl sen mapas propios
+
+@ dir: {}
+gl cartafol: {}
+
+@ base: {}
+gl base: {}
+
+@ Browse the Quaddicted archive of
+gl Explora o arquivo de Quaddicted
+
+@ single-player maps and episodes,
+gl de mapas e episodios para un xogador,
+
+@ then download and install them
+gl e despois descárgaos e instálaos
+
+@ here. Each release gets its own
+gl aquí. Cada publicación ten a súa propia
+
+@ entry in this list.
+gl entrada nesta lista.
+
+@ Needs an internet connection.
+gl Require conexión a Internet.
+
+@ Quaddicted Map Archive
+gl Arquivo de mapas de Quaddicted
+
+@ Newest
+gl Máis recentes
+
+@ Author
+gl Autor
+
+@ Size
+gl Tamaño
+
+@ Loading the map list...
+gl Cargando a lista de mapas...
+
+@ Couldn't load the map list: {}
+gl Non se puido cargar a lista de mapas: {}
+
+@ {} single-player releases  -  F5 refreshes
+gl {} publicacións para un xogador  -  F5 actualiza
+
+@ {} matching
+gl {} coincidentes
+
+@ by {}
+gl de {}
+
+@ requires: {}
+gl require: {}
+
+@ maps: {}
+gl mapas: {}
+
+@ Failed: {}
+gl Erro: {}
+
+@ Downloading... {}%
+gl Descargando... {} %
+
+@ Unpacking...
+gl Descomprimindo...
+
+@ Installed in {}/  -  Enter: play
+gl Instalado en {}/  -  Intro: xogar
+
+@ Enter: download and install
+gl Intro: descargar e instalar
+
+@ unpacking
+gl descomprimindo
+
+@ failed
+gl erro
+
+@ installed
+gl instalado
+
+@ Downloads are not available in the browser build
+gl As descargas non están dispoñibles na versión para navegador
+
+@ the map list could not be read
+gl non se puido ler a lista de mapas
+
+@ downloading needs the curl program
+gl para descargar fai falta o programa curl
+
+@ download failed
+gl a descarga fallou
+
+@ the download is not a valid zip
+gl a descarga non é un zip válido
+
+@ nothing to install for this engine
+gl nada que instalar para este motor
+
+@ needs {} installed first
+gl primeiro precisa {}
+
+@ couldn't unpack {}
+gl non se puido descomprimir {}
+
+# help screen
+@ About
+gl Acerca de
+
+@ < Back
+gl < Volver
+
+# tr_ctx keys: English shows the short word, the key says which meaning
+@ Save (a manual save, as opposed to a quicksave or autosave)
+gl Partida gardada
+
+# ==== hud.txt ====
+
+# HUD, weapon and equipment wheels, sound captions and other in-game text.
+# Weapon, monster and item names follow the 2021 re-release's own translations.
+@ Axe
+gl Machado
+
+@ Shotgun
+gl Escopeta
+
+@ Double-Barrelled Shotgun
+gl Superescopeta
+
+@ Nailgun
+gl Pistola de cravos
+
+@ Super Nailgun
+gl Superpistola de cravos
+
+@ Grenade Launcher
+gl Lanzagranadas
+
+@ Rocket Launcher
+gl Lanzafoguetes
+
+@ Thunderbolt
+gl Lóstrego
+
+@ Portal Gun
+gl Pistola de portais
+
+@ Boomerang
+gl Bumerán
+
+@ Stickybomb Launcher
+gl Lanzabombas adhesivas
+
+@ Railgun
+gl Railgun
+
+@ Hookshot
+gl Gancho
+
+@ Gel Sprayer
+gl Pulverizador de xel
+
+@ Powerwasher
+gl Hidrolimpadora
+
+@ Night Vision Goggles
+gl Lentes de visión nocturna
+
+@ Thermal Goggles
+gl Lentes térmicas
+
+@ Normal vision
+gl Visión normal
+
+@ ON
+gl SI
+
+@ OFF
+gl NON
+
+@ {} (turn on)
+gl {} (activar)
+
+@ {} (turn off)
+gl {} (desactivar)
+
+@ Move mouse to select, release to toggle
+gl Move o rato para elixir, solta para alternar
+
+@ Move mouse to select, release to equip
+gl Move o rato para elixir, solta para equipar
+
+@ Release to toggle
+gl Solta para alternar
+
+@ Release to equip
+gl Solta para equipar
+
+@ shells
+gl cartuchos
+
+@ nails
+gl cravos
+
+@ rockets
+gl foguetes
+
+@ cells
+gl celas
+
+@ Kills: {}/{}
+gl Baixas: {}/{}
+
+@ Secrets: {}/{}
+gl Segredos: {}/{}
+
+@ Time {}
+gl Tempo {}
+
+@ Press any button to continue...
+gl Preme calquera botón para continuar...
+
+@ Press any key to continue...
+gl Preme calquera tecla para continuar...
+
+@ BULLET TIME
+gl TEMPO BALA
+
+@ AUTO AIM
+gl PUNTARÍA AUTO
+
+@ Crosshair
+gl Punto de mira
+
+@ + Marker
+gl + marcador
+
+@ Hit markers off
+gl Marcadores de impacto desactivados
+
+@ On target
+gl Sobre o obxectivo
+
+@ On kill
+gl Ao matar
+
+# sound captions
+@ [Secret found]
+gl [Segredo atopado]
+
+@ [Message]
+gl [Mensaxe]
+
+@ [Switch activated]
+gl [Interruptor activado]
+
+@ [Key picked up]
+gl [Chave recollida]
+
+@ [Rune picked up]
+gl [Runa recollida]
+
+@ [Teleporter]
+gl [Teletransportador]
+
+@ [Teleport]
+gl [Teletransporte]
+
+@ [Splash]
+gl [Chapuzón]
+
+@ [Leaving water]
+gl [Saíndo da auga]
+
+@ [Door]
+gl [Porta]
+
+@ [Platform moving]
+gl [Plataforma en movemento]
+
+@ [Button]
+gl [Botón]
+
+@ [Health picked up]
+gl [Saúde recollida]
+
+@ [Armor picked up]
+gl [Armadura recollida]
+
+@ [Quad Damage wearing off]
+gl [O dano cuádruplo esgótase]
+
+@ [Quad Damage]
+gl [Dano cuádruplo]
+
+@ [Pentagram wearing off]
+gl [O pentagrama esgótase]
+
+@ [Pentagram of Protection]
+gl [Pentagrama de protección]
+
+@ [Ring wearing off]
+gl [O anel esgótase]
+
+@ [Ring of Shadows]
+gl [Anel das sombras]
+
+@ [Biosuit wearing off]
+gl [O biotraxe esgótase]
+
+@ [Biosuit]
+gl [Biotraxe]
+
+@ [Item picked up]
+gl [Obxecto recollido]
+
+@ [Weapon picked up]
+gl [Arma recollida]
+
+@ [Ammo picked up]
+gl [Munición recollida]
+
+@ [Explosion]
+gl [Explosión]
+
+@ [Grenade launched]
+gl [Granada lanzada]
+
+@ [Grenade bounce]
+gl [Rebote de granada]
+
+@ [Rocket fired]
+gl [Foguete disparado]
+
+@ [Nails fired]
+gl [Cravos disparados]
+
+@ [Lightning]
+gl [Raio]
+
+@ [Thunder]
+gl [Trono]
+
+@ [Enforcer alerted]
+gl [Executor alertado]
+
+@ [Grunt alerted]
+gl [Grunt alertado]
+
+@ [Rottweiler alerted]
+gl [Rottweiler alertado]
+
+@ [Knight alerted]
+gl [Cabaleiro alertado]
+
+@ [Death Knight alerted]
+gl [Death Knight alertado]
+
+@ [Scrag alerted]
+gl [Scrag alertado]
+
+@ [Ogre alerted]
+gl [Ogro alertado]
+
+@ [Fiend alerted]
+gl [Demo alertado]
+
+@ [Shambler alerted]
+gl [Shambler alertado]
+
+@ [Zombie groaning]
+gl [Zombi xemendo]
+
+@ [Vore alerted]
+gl [Vore alertado]
+
+@ [Vore attacking]
+gl [Vore atacando]
+
+@ [Spawn alerted]
+gl [Enxendro alertado]
+
+@ [Rotfish]
+gl [Peixe podre]
+
+@ [Spawn]
+gl [Enxendro]
+
+@ [Chthon]
+gl [Chthon]
+
+@ [Hard landing]
+gl [Aterraxe forte]
+
+@ [Drowning]
+gl [Afogando]
+
+@ [Gasping for air]
+gl [Boqueando]
+
+@ [Burning]
+gl [Queimándose]
+
+@ [Telefrag]
+gl [Telefrag]
+
+@ [Gibbed]
+gl [Esnaquizado]
+
+# ==== console.txt ====
+
+# Console messages, shown translated only with con_translate 1 (Translate Console).
+# Cvar and command names stay as they are.
+@ Autosaved.
+gl Gardado automático feito.
+
+@ Game saved.
+gl Partida gardada.
+
+@ Can't save now.
+gl Non se pode gardar agora.
+
+@ This game only autosaves (No Manual Saves modifier).
+gl Esta partida só usa o gardado automático (modificador Sen gardado manual).
+
+@ Loading {}...
+gl Cargando {}...
+
+@ load failed: {}
+gl erro ao cargar: {}
+
+@ ERROR: autosave failed: {}
+gl ERRO: fallou o gardado automático: {}
+
+@ ERROR: couldn't open {}
+gl ERRO: non se puido abrir {}
+
+@ ERROR: couldn't open {}.
+gl ERRO: non se puido abrir {}.
+
+@ ERROR: couldn't write {}: {}
+gl ERRO: non se puido escribir {}: {}
+
+@ ERROR: couldn't create {}: {}
+gl ERRO: non se puido crear {}: {}
+
+@ couldn't write {}: {}
+gl non se puido escribir {}: {}
+
+@ Wrote {}
+gl Escrito {}
+
+@ screenshot failed: {}
+gl erro na captura de pantalla: {}
+
+@ screenshot: {}
+gl captura de pantalla: {}
+
+@ No readable save available. Select save or restart the level.
+gl Non hai ningunha partida lexible. Elixe unha partida ou reinicia o nivel.
+
+@ Unknown command "{}"
+gl Orde descoñecida «{}»
+
+@ couldn't exec {}
+gl non se puido executar {}
+
+@ execing {}
+gl executando {}
+
+@ execing config.cfg (inherited from {})
+gl executando config.cfg (herdado de {})
+
+@ execing config.cfg (mod defaults)
+gl executando config.cfg (valores do mod)
+
+@ execing default.cfg (built-in)
+gl executando default.cfg (integrado)
+
+@ {} cvars
+gl {} variables
+
+@ {} commands
+gl {} ordes
+
+@ Can't "cmd", not connected
+gl Non se pode usar «cmd», sen conexión
+
+@ Looking for Quake servers...
+gl Buscando servidores de Quake...
+
+@ Bad value, must be between 1 and 65534
+gl Valor non válido, debe estar entre 1 e 65534
+
+@ Couldn't handle music file {}
+gl Non se puido usar o ficheiro de música {}
+
+@ Bug report written to {}
+gl Informe de erro escrito en {}
+
+@ bugreport: can't create {}: {}
+gl bugreport: non se pode crear {}: {}
+
+@ graphics preset: {}
+gl predefinición gráfica: {}
+
+@ Presets (r_shader_preset <name>):
+gl Predefinicións (r_shader_preset <nome>):
+
+@ Add your own .slangp presets under <game>/shaders/.
+gl Engade as túas propias predefinicións .slangp en <xogo>/shaders/.
+
+@ no shader preset loaded (r_shader_preset)
+gl non hai ningunha predefinición de sombreador cargada (r_shader_preset)
+
+@ r_shader_preset: "{}" not found
+gl r_shader_preset: non se atopou «{}»
+
+@ no parameter "{}" in this preset
+gl non hai ningún parámetro «{}» nesta predefinición
+
+@ {} = {} (default {}, {}..{})
+gl {} = {} (predeterminado {}, {}..{})
+
+@ Switching to {}...
+gl Cambiando a {}...
+
+@ game: no game dir "{}" in {}
+gl game: non existe o cartafol de xogo «{}» en {}
+
+@ game: can't find the engine executable
+gl game: non se atopa o executable do motor
+
+@ game: exec failed: {}
+gl game: fallou a execución: {}
+
+@ game: launch failed: {}
+gl game: fallou o inicio: {}
+
+@ loaded {} in {}s
+gl {} cargado en {} s
+
+@ No demos listed with startdemos
+gl Non hai demos indicadas con startdemos
+
+@ Playing demo from {}.
+gl Reproducindo a demo {}.
+
+@ {} frames {} seconds {} fps
+gl {} fotogramas {} segundos {} FPS
+
+@ Recording to {}.
+gl Gravando en {}.
+
+@ Completed demo
+gl Demo completada
+
+@ Can't record during demo playback
+gl Non se pode gravar durante a reprodución dunha demo
+
+@ Relative pathnames are not allowed.
+gl Non se permiten rutas relativas.
+
+@ Can't record - try again when connected
+gl Non se pode gravar: téntao de novo cando esteas conectado
+
+@ {} demo(s) in loop
+gl {} demo(s) en bucle
+
+@ Not recording a demo.
+gl Non se está a gravar ningunha demo.
+
+@ {} joined on a gamepad
+gl {} uniuse cun mando
+
+@ goggles: needs a game started with Add-ons and Goggles enabled
+gl goggles: require unha partida iniciada con complementos e lentes activados
+
+@ equip: needs a game started with Add-ons and Goggles enabled
+gl equip: require unha partida iniciada con complementos e lentes activados
+
+@ UDP listening on port {}
+gl UDP escoitando no porto {}
+
+@ UDP bind on port {} failed: {}
+gl fallou a asociación UDP no porto {}: {}
+
+@ Connection accepted by {}
+gl Conexión aceptada por {}
+
+@ Connection failed: {}
+gl Fallou a conexión: {}
+
+@ Couldn't resolve {}
+gl Non se puido resolver {}
+
+@ Connecting to {}...
+gl Conectando con {}...
+
+@ Connecting to QuakeWorld server {}...
+gl Conectando co servidor QuakeWorld {}...
+
+@ Disconnected: {}
+gl Desconectado: {}
+
+@ Server disconnected
+gl Servidor desconectado
+
+@ Client {} connected
+gl Cliente {} conectado
+
+@ Client {} timed out
+gl Esgotouse o tempo de espera do cliente {}
+
+@ Couldn't spawn server {}: {}
+gl Non se puido iniciar o servidor {}: {}
+
+@ maxplayers can not be changed while a server is running.
+gl maxplayers non se pode cambiar cun servidor en marcha.
+
+@ You can't kick yourself!
+gl Non podes expulsarte a ti mesmo!
+
+@ Only the server may changelevel
+gl Só o servidor pode usar changelevel
+
+@ {} renamed to {}
+gl {} renomeado como {}

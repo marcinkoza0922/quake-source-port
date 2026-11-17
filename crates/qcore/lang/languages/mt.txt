@@ -1,0 +1,3024 @@
+# mt: the port's own text; English keys from crates/qcore/lang/*.txt.
+# Format in crates/qcore/src/lang/catalog.rs; check with tools/lang_check.py.
+
+# ==== menu.txt ====
+
+# Options pages: page names, row labels and choice values.
+@ 10% speed
+mt veloċità 10%
+
+@ 2 split-screen
+mt 2 fuq skrin maqsum
+
+@ 3 split-screen
+mt 3 fuq skrin maqsum
+
+@ 4 split-screen
+mt 4 fuq skrin maqsum
+
+@ 5 split-screen
+mt 5 fuq skrin maqsum
+
+@ 6 split-screen
+mt 6 fuq skrin maqsum
+
+@ 2D aiming
+mt immirar 2D
+
+@ 2x monsters
+mt mostri x2
+
+@ 3x monsters
+mt mostri x3
+
+@ 4x monsters
+mt mostri x4
+
+@ 3D resolution
+mt riżoluzzjoni 3D
+
+@ 3D view
+mt veduta 3D
+
+@ 8-bit Color
+mt Kulur 8-bit
+
+@ Accessibility
+mt Aċċessibbiltà
+
+@ Acquisition Cone
+mt Kon tal-akkwist
+
+@ Activation
+mt Attivazzjoni
+
+@ Add a ringing room tail after the cue
+mt Iżid riverberu tal-kamra wara s-sinjal
+
+@ Add delayed repeats after the cue
+mt Iżid ripetizzjonijiet imdewma wara s-sinjal
+
+@ Add saturation and distortion
+mt Iżid saturazzjoni u distorsjoni
+
+@ Add-ons
+mt Add-ons
+
+@ Address
+mt Indirizz
+
+@ Adds fine noise to hide color banding
+mt Iżid storbju fin biex jaħbi l-faxex tal-kulur
+
+@ Advanced Settings
+mt Issettjar avvanzat
+
+@ Aim Assist
+mt Għajnuna fl-immirar
+
+@ Aim Rotation
+mt Rotazzjoni tal-immirar
+
+@ Aim Slowdown
+mt Tnaqqis tal-immirar
+
+@ Aim Style
+mt Stil tal-immirar
+
+@ All
+mt Kollha
+
+@ All enemies
+mt L-għedewwa kollha
+
+@ Alt Fire (Add-ons)
+mt Sparar alternattiv (Add-ons)
+
+@ Always Run
+mt Dejjem iġri
+
+@ Ambient Occlusion
+mt Okklużjoni ambjentali
+
+@ Ammo Counts
+mt Għadd tal-munizzjon
+
+@ Ammo Counts Position
+mt Pożizzjoni tal-għadd tal-munizzjon
+
+@ Ammo Pickups
+mt Munizzjon miġbur
+
+@ Anisotropic
+mt Anisotropiku
+
+@ Anti-aliasing
+mt Anti-aliasing
+
+@ Apply To
+mt Applika għal
+
+@ Armor
+mt Armatura
+
+@ Armor Position
+mt Pożizzjoni tal-armatura
+
+@ Ask
+mt Staqsi
+
+@ Attack
+mt Attakka
+
+@ Audio
+mt Awdjo
+
+@ Auto-aim
+mt Immirar awtomatiku
+
+@ Auto-aim Settings
+mt Issettjar tal-immirar awtomatiku
+
+@ Autosave
+mt Salvataġġ awtomatiku
+
+@ Autosave Settings
+mt Issettjar tas-salvataġġ awtomatiku
+
+@ Autosave Timer
+mt Salvataġġ perjodiku
+
+@ Autosaves to Keep
+mt Salvataġġi awtomatiċi miżmuma
+
+@ Bass
+mt Bass
+
+@ Blip
+mt Blip
+
+@ Blood Quality
+mt Kwalità tad-demm
+
+@ Blood Splatter Settings
+mt Issettjar tat-tixrid tad-demm
+
+@ Blue
+mt Blu
+
+@ Boomerang Settings
+mt Issettjar tal-boomerang
+
+@ Boost or cut high frequencies in decibels
+mt Jgħolli jew inaqqas il-frekwenzi għoljin, f'deċibel
+
+@ Boost or cut low frequencies in decibels
+mt Jgħolli jew inaqqas il-frekwenzi baxxi, f'deċibel
+
+@ Brightness
+mt Luminożità
+
+@ Bullet Time (Add-ons)
+mt Bullet Time (Add-ons)
+
+@ Bullet Time Settings
+mt Issettjar tal-Bullet Time
+
+@ Button Glyphs
+mt Simboli tal-buttuni
+
+@ Button Size
+mt Daqs tal-buttuni
+
+@ Camera
+mt Kamera
+
+@ Caustic Intensity
+mt Intensità tal-kawstiċi
+
+@ Caustics
+mt Kawstiċi
+
+@ Center
+mt Ċentru
+
+@ Center Message Position
+mt Pożizzjoni tal-messaġġi ċentrali
+
+@ Center Message Time
+mt Ħin tal-messaġġi ċentrali
+
+@ Center View
+mt Iċċentra l-veduta
+
+@ Change Color on Kill
+mt Ibdel il-kulur meta toqtol
+
+@ Change Color on Target
+mt Ibdel il-kulur fuq il-mira
+
+@ Chime
+mt Qanpiena
+
+@ Click
+mt Klikk
+
+@ Clink
+mt Tektik
+
+@ Coin
+mt Munita
+
+@ Color
+mt Kulur
+
+@ Color Filter
+mt Filtru tal-kulur
+
+@ Color of the grenade arc
+mt Kulur tal-ark tal-granata
+
+@ Colored Lighting
+mt Dawl ikkulurit
+
+@ Connect
+mt Qabbad
+
+@ Contrast
+mt Kuntrast
+
+@ Controls
+mt Kontrolli
+
+@ Cooldown (ms)
+mt Ħin ta' rkupru (ms)
+
+@ Crosshair Outline
+mt Kontorn tal-crosshair
+
+@ Crosshair Shape
+mt Forma tal-crosshair
+
+@ Crosshair Size
+mt Daqs tal-crosshair
+
+@ Current Ammo
+mt Munizzjon attwali
+
+@ Current Ammo Position
+mt Pożizzjoni tal-munizzjon attwali
+
+@ Customize This Game
+mt Personalizza din il-logħba
+
+@ Damage
+mt Ħsara
+
+@ Damage Taken
+mt Ħsara mġarrba
+
+@ Debris
+mt Fdalijiet
+
+@ Debris Quality
+mt Kwalità tal-fdalijiet
+
+@ Debris Settings
+mt Issettjar tal-fdalijiet
+
+@ Directional Damage
+mt Direzzjoni tal-ħsara
+
+@ Dithering
+mt Dithering
+
+@ Dodge / Dive (Add-ons)
+mt Skansa / Qabża (Add-ons)
+
+@ Dragging up looks down instead of up
+mt Meta tkaxkar 'il fuq tħares 'l isfel minflok 'il fuq
+
+@ Drive
+mt Saturazzjoni
+
+@ Dynamic Lights
+mt Dwal dinamiċi
+
+@ Echo
+mt Eku
+
+@ Enemy Health
+mt Saħħa tal-għedewwa
+
+@ Enemy Wounds
+mt Ġrieħi tal-għedewwa
+
+@ Enhanced Blood Splatter
+mt Tixrid tad-demm imtejjeb
+
+@ Enhanced FX
+mt Effetti mtejba
+
+@ Enhanced Models
+mt Mudelli mtejba
+
+@ Enhanced Particles
+mt Partiċelli mtejba
+
+@ Enhanced Water
+mt Ilma mtejjeb
+
+@ Enhancements
+mt Titjib
+
+@ Equipment Wheel (Add-ons)
+mt Rota tat-tagħmir (Add-ons)
+
+@ Exploding boxes throw metal shards
+mt Il-kaxxi li jisplodu jitfgħu biċċiet tal-metall
+
+@ Explosion Damage
+mt Ħsara tal-isplużjoni
+
+@ Explosion Scorch Marks
+mt Ħruq mill-isplużjonijiet
+
+@ Explosions scorch nearby solid surfaces
+mt L-isplużjonijiet jaħarqu l-uċuħ solidi fil-qrib
+
+@ Explosives only
+mt Splussivi biss
+
+@ Extra Monsters
+mt Mostri żejda
+
+@ Extra Per 10 Damage (ms)
+mt Żieda għal kull 10 ħsara (ms)
+
+@ FX Settings
+mt Issettjar tal-effetti
+
+@ Field of View
+mt Kamp viżiv
+
+@ Firing never uses up ammo
+mt L-isparar qatt ma jonfoq il-munizzjon
+
+@ First person
+mt L-ewwel persuna
+
+@ Flick Time
+mt Ħin tal-flick
+
+@ Flight Speed
+mt Veloċità tat-titjir
+
+@ Fog
+mt Ċpar
+
+@ Frag Limit
+mt Limitu ta' frags
+
+@ Freeze Duration (ms)
+mt Tul tal-iffriżar (ms)
+
+@ GLQuake
+mt GLQuake
+
+@ Game Speed
+mt Veloċità tal-logħba
+
+@ Game Type
+mt Tip ta' logħba
+
+@ Gameplay
+mt Gameplay
+
+@ Gameplay Modifiers
+mt Modifikaturi tal-gameplay
+
+@ Gel Quality
+mt Kwalità tal-ġell
+
+@ Gib Surface Painting
+mt Tbajja' tal-biċċiet tal-laħam
+
+@ Gibs
+mt Biċċiet tal-laħam
+
+@ Gibs and heads tumble and bounce
+mt Il-biċċiet tal-laħam u l-irjus jitqalbu u jaqbżu
+
+@ Goggle Glow Quality
+mt Kwalità tad-dija tan-nuċċali
+
+@ Goggle Intensity
+mt Intensità tan-nuċċali
+
+@ Goggle Noise
+mt Storbju tan-nuċċali
+
+@ Goggles Settings
+mt Issettjar tan-nuċċali
+
+@ Graphics
+mt Grafika
+
+@ Green
+mt Aħdar
+
+@ Grenade Arc
+mt Ark tal-granata
+
+@ Grenade Arc Settings
+mt Issettjar tal-ark tal-granata
+
+@ Gun Kick
+mt Rinkul tal-arma
+
+@ Gyro
+mt Gyro
+
+@ Gyro & Flick Stick
+mt Gyro u Flick Stick
+
+@ Gyro Active
+mt Gyro attiv
+
+@ Gyro Aiming
+mt Immirar bil-gyro
+
+@ HUD
+mt HUD
+
+@ HUD Style
+mt Stil tal-HUD
+
+@ Health
+mt Saħħa
+
+@ Health Pickups
+mt Saħħa miġbura
+
+@ Health Position
+mt Pożizzjoni tas-saħħa
+
+@ Health Regeneration
+mt Riġenerazzjoni tas-saħħa
+
+@ Hit & Kill Sounds
+mt Ħsejjes ta' laqta u qtil
+
+@ Hit Doors & Lifts
+mt Laqtiet fuq bibien u liftijiet
+
+@ Hit Markers
+mt Indikaturi tal-laqta
+
+@ Hit Sound
+mt Ħoss tal-laqta
+
+@ Hitmarker Size
+mt Daqs tal-indikatur
+
+@ Hitmarker Type
+mt Tip ta' indikatur
+
+@ Hitstop Advanced
+mt Hitstop avvanzat
+
+@ Hitstop Settings
+mt Issettjar tal-hitstop
+
+@ Hold
+mt Żomm
+
+@ Hold lock-on
+mt Żomm il-qbid tal-mira
+
+@ Hook Enemies
+mt Ganċ fuq għedewwa
+
+@ Hook Metal
+mt Ganċ fuq metall
+
+@ Hook Stone
+mt Ganċ fuq ġebel
+
+@ Hook Wood
+mt Ganċ fuq injam
+
+@ Hooking an enemy pulls you to it
+mt Meta tganċa għadu, dan jiġbdek lejh
+
+@ Hookshot Range
+mt Medda tal-ganċ
+
+@ Hookshot Settings
+mt Issettjar tal-ganċ
+
+@ Host Game
+mt Ospita logħba
+
+@ How far the hook flies before it retracts
+mt Kemm imur 'il bogħod il-ganċ qabel jerġa' lura
+
+@ How visible the on-screen controls are
+mt Kemm jidhru l-kontrolli fuq l-iskrin
+
+@ Impact Lifetime
+mt Tul tal-impatti
+
+@ Infinite Ammo
+mt Munizzjon bla tmiem
+
+@ Input
+mt Input
+
+@ Input Scale
+mt Skala tal-input
+
+@ Interpolate Animation
+mt Interpola l-animazzjoni
+
+@ Interpolate Movement
+mt Interpola l-moviment
+
+@ Invert Look
+mt Aqleb il-ħarsa
+
+@ Invert Mouse
+mt Aqleb il-maws
+
+@ Invert Stick
+mt Aqleb l-istick
+
+@ Jet Quality
+mt Kwalità tal-ġett
+
+@ Join Game
+mt Ingħaqad ma' logħba
+
+@ Jump / Swim Up
+mt Aqbeż / Għum 'il fuq
+
+@ Jump again in mid-air
+mt Erġa' aqbeż fl-arja
+
+@ Jumps
+mt Qabżiet
+
+@ Keys & Powerups
+mt Ċwievet u power-ups
+
+@ Keys & Powerups Position
+mt Pożizzjoni taċ-ċwievet u l-power-ups
+
+@ Kill Bonus (x)
+mt Bonus tal-qtil (x)
+
+@ Kill Sound
+mt Ħoss tal-qtil
+
+@ Knock
+mt Tħabbit
+
+@ Left
+mt Xellug
+
+@ Length of the motion blur streaks
+mt Tul tal-istrixxi taċ-ċajpra tal-moviment
+
+@ Lifetime (seconds)
+mt Tul (sekondi)
+
+@ Live Portal Views
+mt Veduti ħajjin tal-portali
+
+@ Live View Distance
+mt Distanza tal-veduti ħajjin
+
+@ Local Players
+mt Lagħbiena lokali
+
+@ Local red wounds follow enemy animation
+mt Ġrieħi ħomor isegwu l-animazzjoni tal-għadu
+
+@ Lock Indicator
+mt Indikatur tal-qbid
+
+@ Long falls don't hurt
+mt Il-waqgħat twal ma jweġġgħux
+
+@ Longest Freeze (ms)
+mt L-itwal iffriżar (ms)
+
+@ Look Down
+mt Ħares 'l isfel
+
+@ Look Speed
+mt Veloċità tal-ħarsa
+
+@ Look Up
+mt Ħares 'il fuq
+
+@ Main Menu Music
+mt Mużika tal-menu prinċipali
+
+@ Max FPS
+mt FPS max
+
+@ Max Players
+mt Lagħbiena max
+
+@ Maximum Impacts
+mt Impatti massimi
+
+@ Maximum Marks
+mt Marki massimi
+
+@ Maximum Range
+mt Medda massima
+
+@ Melee only
+mt Ġlied mill-qrib biss
+
+@ Message Background
+mt Sfond tal-messaġġi
+
+@ Message Text Size
+mt Daqs tat-test tal-messaġġi
+
+@ Messages & Captions
+mt Messaġġi u sottotitoli
+
+@ Meter Duration (real seconds)
+mt Tul tal-miżura (sekondi reali)
+
+@ Minimum Damage
+mt Ħsara minima
+
+@ Mode
+mt Modalità
+
+@ Modern Console
+mt Konsol modern
+
+@ Modern HUD Layout
+mt Tqassim modern tal-HUD
+
+@ Most recent save
+mt L-aħħar salvataġġ
+
+@ Motion Blur
+mt Ċajpra tal-moviment
+
+@ Motion Blur Amount
+mt Ammont ta' ċajpra tal-moviment
+
+@ Motion Blur Quality
+mt Kwalità taċ-ċajpra tal-moviment
+
+@ Mouse & Keyboard
+mt Maws u tastiera
+
+@ Mouse Speed
+mt Veloċità tal-maws
+
+@ Move Back
+mt Imxi lura
+
+@ Move Forward
+mt Imxi 'l quddiem
+
+@ Music Volume
+mt Volum tal-mużika
+
+@ Next Weapon
+mt Arma li jmiss
+
+@ No Drowning
+mt Bla għarqa
+
+@ No Fall Damage
+mt Bla ħsara mill-waqgħat
+
+@ No Manual Saves
+mt Bla salvataġġi manwali
+
+@ No Self Damage
+mt Bla ħsara lilek innifsek
+
+@ Noise Filter
+mt Filtru tal-istorbju
+
+@ Normal Color
+mt Kulur normali
+
+@ Notify Message Position
+mt Pożizzjoni tan-notifiki
+
+@ Notify Message Time
+mt Ħin tan-notifiki
+
+@ Number of splatter rays per blood impact
+mt Numru ta' raġġi ta' tixrid għal kull impatt tad-demm
+
+@ Off
+mt Mitfi
+
+@ On Death
+mt Mal-mewt
+
+@ On Kill Color
+mt Kulur mal-qtil
+
+@ On Target Color
+mt Kulur fuq il-mira
+
+@ Opacity
+mt Opaċità
+
+@ Opacity of the grenade arc
+mt Opaċità tal-ark tal-granata
+
+@ Pants Color
+mt Kulur tal-qalziet
+
+@ Particle Quality
+mt Kwalità tal-partiċelli
+
+@ Particles
+mt Partiċelli
+
+@ Physical Nail Impacts
+mt Impatti fiżiċi tal-imsiemer
+
+@ Pistol Start
+mt Bidu minn żero
+
+@ Pitch
+mt Ton
+
+@ Pitch Sensitivity
+mt Sensittività vertikali
+
+@ Playback Speed
+mt Veloċità tad-daqq
+
+@ Player Setup
+mt Profil tal-lagħħab
+
+@ Pop
+mt Pop
+
+@ Portal Gun Settings
+mt Issettjar tal-pistola tal-portali
+
+@ Portal Recursion
+mt Rikorsjoni tal-portali
+
+@ Portal View Quality
+mt Kwalità tal-veduta tal-portali
+
+@ Preview Sound
+mt Isma' l-ħoss
+
+@ Previous Weapon
+mt Arma ta' qabel
+
+@ Projectile Shotguns Settings
+mt Issettjar tas-snieter bi projettili
+
+@ Projectile Speed (units/s)
+mt Veloċità tal-projettili (unitajiet/s)
+
+@ Purple
+mt Vjola
+
+@ Push
+mt Imbuttatura
+
+@ Push Strength
+mt Saħħa tal-imbuttatura
+
+@ Quick Load
+mt Tella' malajr
+
+@ Quick Save
+mt Salva malajr
+
+@ Railgun Settings
+mt Issettjar tar-railgun
+
+@ Ranged only
+mt Mill-bogħod biss
+
+@ Reacquire While Held
+mt Erġa' aqbad waqt li żżomm
+
+@ Red
+mt Aħmar
+
+@ Reduce Motion
+mt Naqqas il-moviment
+
+@ Regen (seconds per second)
+mt Riġenerazzjoni (sekondi kull sekonda)
+
+@ Render Scale
+mt Skala tar-rendering
+
+@ Reverb
+mt Riverberu
+
+@ Right
+mt Lemin
+
+@ Ripple Intensity
+mt Intensità tal-mewġ
+
+@ Ripples
+mt Mewġ
+
+@ Roll Sensitivity
+mt Sensittività tar-roll
+
+@ Rumble
+mt Vibrazzjoni
+
+@ Run
+mt Iġri
+
+@ Save on All Enemies Killed
+mt Salva meta jinqatlu l-għedewwa kollha
+
+@ Save on All Secrets Found
+mt Salva meta jinstabu s-sigrieti kollha
+
+@ Save on Level Entry
+mt Salva fil-bidu tal-livell
+
+@ Save on Secret Found
+mt Salva meta jinstab sigriet
+
+@ Scoreboard
+mt Tabella tal-punti
+
+@ Screen Flashes
+mt Teptip tal-iskrin
+
+@ Screen Shader
+mt Shader tal-iskrin
+
+@ Screen Shake
+mt Theżżiż tal-iskrin
+
+@ Search LAN
+mt Fittex fil-LAN
+
+@ Seconds a center-screen message stays up
+mt Kemm-il sekonda jibqa' jidher messaġġ f'nofs l-iskrin
+
+@ See Through Portals
+mt Ara minn ġol-portali
+
+@ See-through Teleporters
+mt Teleporters trasparenti
+
+@ Shirt Color
+mt Kulur tal-flokk
+
+@ Shotgun Bullet Decals
+mt Marki taċ-ċomb tas-senter
+
+@ Shoulder left
+mt Spalla tax-xellug
+
+@ Shoulder right
+mt Spalla tal-lemin
+
+@ Show FPS
+mt Uri l-FPS
+
+@ Show Face
+mt Uri l-wiċċ
+
+@ Shrapnel
+mt Xrapnell
+
+@ Size of on-screen messages and captions
+mt Daqs tal-messaġġi u s-sottotitoli fuq l-iskrin
+
+@ Skill
+mt Diffikultà
+
+@ Sky Fog
+mt Ċpar tas-sema
+
+@ Smooths the stepped movement of monsters
+mt Itaffi l-moviment imqatta' tal-mostri
+
+@ Sound
+mt Ħoss
+
+@ Sound Captions
+mt Sottotitoli tal-ħsejjes
+
+@ Sound Volume
+mt Volum tal-ħoss
+
+@ Speed Blur
+mt Ċajpra tal-veloċità
+
+@ Splashes
+mt Tixrix
+
+@ Splatter Amount
+mt Ammont ta' tixrid
+
+@ Splatter Size
+mt Daqs tat-tixrid
+
+@ Start Game
+mt Ibda l-logħba
+
+@ Staying underwater doesn't hurt
+mt Li tibqa' taħt l-ilma ma jweġġax
+
+@ Stick Look Pitch
+mt Ħarsa vertikali bl-istick
+
+@ Stick Look Yaw
+mt Ħarsa orizzontali bl-istick
+
+@ Strafe Left
+mt Ġenb lejn ix-xellug
+
+@ Strafe Right
+mt Ġenb lejn il-lemin
+
+@ Strength of the surface swell and rings
+mt Saħħa tal-mewġ u ċ-ċrieki fil-wiċċ
+
+@ Stun Duration
+mt Tul tal-isturdament
+
+@ Style
+mt Stil
+
+@ Supersampling
+mt Supersampling
+
+@ Surface Hit Effects
+mt Effetti tal-laqtiet fuq l-uċuħ
+
+@ Swim Down
+mt Għum 'l isfel
+
+@ Targets
+mt Miri
+
+@ Teamplay
+mt Logħob f'tim
+
+@ Texture Filter
+mt Filtru tat-tessituri
+
+@ Third person
+mt It-tielet persuna
+
+@ Thud
+mt Daqqa sorda
+
+@ Tick
+mt Tik
+
+@ Time Limit
+mt Limitu ta' ħin
+
+@ Time Stretch
+mt Tiġbid tal-ħin
+
+@ Toggle Attack
+mt Attakk bi qlib
+
+@ Toggle Run
+mt Ġiri bi qlib
+
+@ Toggle auto-aim
+mt Immirar awtomatiku bi qlib
+
+@ Touch Controls
+mt Kontrolli tal-mess
+
+@ Touchscreen
+mt Skrin tal-mess
+
+@ Tough Enemy Health
+mt Saħħa tal-għedewwa iebsa
+
+@ Tough enemies only
+mt Għedewwa iebsa biss
+
+@ Trail Colour
+mt Kulur tat-traċċa
+
+@ Translate Console
+mt Ittraduċi l-konsol
+
+@ Translucent Water
+mt Ilma trasluċidu
+
+@ Treble
+mt Treble
+
+@ Turn Left
+mt Dur lejn ix-xellug
+
+@ Turn Right
+mt Dur lejn il-lemin
+
+@ Underwater FX
+mt Effetti taħt l-ilma
+
+@ Use Bullet Time Meter
+mt Uża l-miżura tal-Bullet Time
+
+@ VSync
+mt VSync
+
+@ View Bob
+mt Tbandil tal-veduta
+
+@ Viewmodels
+mt Mudelli tal-armi
+
+@ Volume
+mt Volum
+
+@ Water Opacity
+mt Opaċità tal-ilma
+
+@ Water Quality
+mt Kwalità tal-ilma
+
+@ Water Settings
+mt Issettjar tal-ilma
+
+@ Weapon Wheel
+mt Rota tal-armi
+
+@ Weapon Wheel Slowdown
+mt Rota tal-armi bil-mod
+
+@ Weapons
+mt Armi
+
+@ Weapons Position
+mt Pożizzjoni tal-armi
+
+@ Where center-screen messages appear
+mt Fejn jidhru l-messaġġi f'nofs l-iskrin
+
+@ Where pickup and event messages appear
+mt Fejn jidhru l-messaġġi tal-ġbir u tal-avvenimenti
+
+@ White
+mt Abjad
+
+@ Yaw Sensitivity
+mt Sensittività orizzontali
+
+@ Yellow
+mt Isfar
+
+# lowercase choice values
+@ T
+mt T
+
+@ always
+mt dejjem
+
+@ auto
+mt awto
+
+@ banded
+mt b'faxex
+
+@ borderless
+mt tieqa bla bordura
+
+@ bottom center
+mt isfel fiċ-ċentru
+
+@ bottom left
+mt isfel ix-xellug
+
+@ bottom right
+mt isfel il-lemin
+
+@ box
+mt kaxxa
+
+@ broken square
+mt kwadru miksur
+
+@ classic
+mt klassiku
+
+@ coarse
+mt oħxon
+
+@ cooperative
+mt koperattiv
+
+@ cross
+mt salib
+
+@ cross + dot
+mt salib + tikka
+
+@ cyan
+mt ċjan
+
+@ dashed
+mt imqatta'
+
+@ deathmatch
+mt deathmatch
+
+@ deuteranopia
+mt deuteranopja
+
+@ diagonal streaks
+mt strixxi dijagonali
+
+@ diamond
+mt rombu
+
+@ dot
+mt tikka
+
+@ double
+mt doppju
+
+@ double chevrons
+mt chevrons doppji
+
+@ double diagonals
+mt dijagonali doppji
+
+@ easy
+mt faċli
+
+@ fine
+mt fin
+
+@ fit output
+mt adatta għall-output
+
+@ flick stick
+mt flick stick
+
+@ fullscreen
+mt skrin sħiħ
+
+@ gap cross
+mt salib miftuħ
+
+@ green
+mt aħdar
+
+@ grey
+mt griż
+
+@ half speed
+mt nofs veloċità
+
+@ hard
+mt diffiċli
+
+@ high
+mt għolja
+
+@ huge
+mt enormi
+
+@ immersive
+mt immersiv
+
+@ intense
+mt intens
+
+@ large
+mt kbir
+
+@ larger
+mt akbar
+
+@ largest
+mt l-akbar
+
+@ linear
+mt lineari
+
+@ low
+mt baxxa
+
+@ lower
+mt isfel
+
+@ magenta
+mt maġenta
+
+@ medium
+mt medja
+
+@ middle
+mt nofs
+
+@ middle left
+mt nofs ix-xellug
+
+@ middle right
+mt nofs il-lemin
+
+@ modern
+mt modern
+
+@ nearest
+mt l-eqreb
+
+@ nightmare
+mt ħmar il-lejl
+
+@ nintendo
+mt Nintendo
+
+@ no team damage
+mt bla ħsara lit-tim
+
+@ none
+mt xejn
+
+@ normal
+mt normali
+
+@ off
+mt mitfi
+
+@ off while held
+mt mitfi waqt li żżomm
+
+@ on
+mt mixgħul
+
+@ only while held
+mt biss waqt li żżomm
+
+@ playstation
+mt PlayStation
+
+@ protanopia
+mt protanopja
+
+@ quarter speed
+mt kwart veloċità
+
+@ red
+mt aħmar
+
+@ short diagonals
+mt dijagonali qosra
+
+@ single
+mt singlu
+
+@ small
+mt żgħir
+
+@ solid
+mt solidu
+
+@ spectacle
+mt spettaklu
+
+@ subtle
+mt sottili
+
+@ team damage
+mt ħsara lit-tim
+
+@ top center
+mt fuq fiċ-ċentru
+
+@ top left
+mt fuq ix-xellug
+
+@ top right
+mt fuq il-lemin
+
+@ triple
+mt tripplu
+
+@ tritanopia
+mt tritanopja
+
+@ upper
+mt fuq
+
+@ white
+mt abjad
+
+@ whole screen
+mt skrin kollu
+
+@ windowed
+mt fit-tieqa
+
+@ xbox
+mt Xbox
+
+@ yellow
+mt isfar
+
+# ==== tooltips.txt ====
+
+# Options help lines (tooltips) and reasons for disabled rows.
+@ 2D aiming turns the view continuously with the right stick; flick stick snaps the view to where you push the stick, then turning the stick rotates it
+mt L-immirar 2D idawwar il-veduta kontinwament bl-istick tal-lemin; il-flick stick iġib il-veduta mill-ewwel fejn timbotta l-istick, imbagħad meta ddawwar l-istick iddawwarha
+
+@ 3D resolution relative to the window; the UI stays sharp
+mt Riżoluzzjoni 3D meta mqabbla mat-tieqa; l-interfaċċja tibqa' ċara
+
+@ 3D view keeps the HUD and menus sharp; whole screen runs them through the shader too
+mt Veduta 3D iżżomm il-HUD u l-menus ċari; skrin kollu jgħaddihom ukoll mix-shader
+
+@ A Quake III style railgun: a slug that pierces every enemy on its line, using 2 cells a shot and refiring every 1.5 s; select it through its assigned weapon slot (Add-ons)
+mt Railgun bħal f'Quake III: balla li tinfed kull għadu fuq il-linja tagħha, tuża 2 ċelloli kull tir u tispara kull 1.5 s; agħżilha mill-post tal-arma assenjat lilha (Add-ons)
+
+@ A Zelda-style hookshot: fire sends a chain hook out; it latches onto hookable surfaces or enemies and reels you in; fire again to let go
+mt Ganċ bħal f'Zelda: is-sparar jitfa' ganċ bil-katina; jaqbad ma' uċuħ adattati jew ma' għedewwa u jiġbdek lejhom; erġa' spara biex titlaq
+
+@ Also translates the engine's console messages; off keeps them in English
+mt Jittraduċi wkoll il-messaġġi tal-konsol tal-engine; mitfi jħallihom bl-Ingliż
+
+@ Automatically acquire another enemy while holding Lock-on after losing a target
+mt Jaqbad awtomatikament għadu ieħor waqt li żżomm il-qbid tal-mira wara li titlef mira
+
+@ Blends between animation frames of monsters and weapons
+mt Iħallat bejn il-frejms tal-animazzjoni tal-mostri u tal-armi
+
+@ Blood stains surfaces and bodies; cosmetic, independent of particle packs
+mt Id-demm itebba' l-uċuħ u l-iġsma; kożmetiku biss, indipendenti mill-pakketti tal-partiċelli
+
+@ Bloom glow around bright lights and heat sources; medium uses 4 taps, high uses 8, low disables halo taps
+mt Dija ta' bloom madwar dwal qawwija u sorsi ta' sħana; medja tuża 4 kampjuni, għolja 8, baxxa titfi l-halo
+
+@ Blurs fast-moving monsters, projectiles and doors (not camera turns)
+mt Iċajpar mostri, projettili u bibien li jiċċaqilqu malajr (mhux id-dawran tal-kamera)
+
+@ Blurs the screen edges during fast falls and launches; keeps the centre clear. Reduce Motion disables it
+mt Iċajpar it-truf tal-iskrin waqt waqgħat u tlugħ veloċi; iċ-ċentru jibqa' ċar. Naqqas il-moviment jitfih
+
+@ Brightness of the underwater light patterns
+mt Luminożità tad-disinji tad-dawl taħt l-ilma
+
+@ Caps mark count, lifetime, airborne droplets and wound/gib painting; low skips enemy wounds and gib trails
+mt Jillimita l-għadd u t-tul tal-marki, il-qtar fl-arja u t-tbajja' tal-ġrieħi u tal-biċċiet tal-laħam; baxxa taqbeż il-ġrieħi tal-għedewwa u t-traċċi tal-biċċiet tal-laħam
+
+@ Caps shader input at output size so 200% render scale keeps 3D sharpness without 4x shader cost; low scales stay low-res
+mt Jillimita l-input tax-shader għad-daqs tal-output, biex skala tar-rendering ta' 200% iżżomm id-dehra 3D ċara mingħajr erba' darbiet l-ispiża tax-shader; skali baxxi jibqgħu b'riżoluzzjoni baxxa
+
+@ Classic: the original status bar; modern: compact elements at the screen edges
+mt Klassiku: il-bar tal-istatus oriġinali; modern: elementi kompatti fit-truf tal-iskrin
+
+@ Coat atlas resolution, rebuild rate and shader detail: low builds smaller coats less often with fast shading; high uses full detail
+mt Riżoluzzjoni tal-atlas tas-saffi, rata ta' bini mill-ġdid u dettall tax-shader: baxxa tibni saffi iżgħar inqas spiss b'shading veloċi; għolja tuża d-dettall kollu
+
+@ Colour of the railgun's spiral trail; split-screen players each get the next colour along
+mt Kulur tat-traċċa spirali tar-railgun; fuq skrin maqsum kull lagħħab jieħu l-kulur ta' wara
+
+@ Damage the railgun deals to each enemy it passes through (Quake III: 100)
+mt Ħsara li tagħmel ir-railgun lil kull għadu li tgħaddi minnu (Quake III: 100)
+
+@ Dark backdrop behind on-screen messages for readability
+mt Sfond skur wara l-messaġġi fuq l-iskrin biex jinqraw aħjar
+
+@ Dark border keeps the crosshair visible on any background
+mt Bordura skura żżomm il-crosshair viżibbli fuq kull sfond
+
+@ Darkens corners and contact areas where geometry meets; higher quality is sharper
+mt Isawwad il-kantunieri u l-postijiet fejn tiltaqa' l-ġeometrija; kwalità ogħla hija iktar ċara
+
+@ Debris lands on and is carried or shoved by doors, lifts and platforms
+mt Il-fdalijiet jinżlu fuq bibien, liftijiet u pjattaformi u jinġarru jew jiġu mimbuttati minnhom
+
+@ Detail for caustics, ripples and splashes: low uses smaller budgets and shorter view distance; high uses larger budgets and farther view distance
+mt Dettall għall-kawstiċi, il-mewġ u t-tixrix: baxxa tuża baġits iżgħar u distanza tal-veduta iqsar; għolja baġits ikbar u distanza itwal
+
+@ Disabled while Enhanced Particles is on: its particles replace the GLQuake and Classic styles
+mt Mitfi waqt li Partiċelli mtejba hu mixgħul: il-partiċelli tiegħu jieħdu post l-istili GLQuake u klassiku
+
+@ Disabled while Enhanced Water is on: its own underwater effects replace the classic and GLQuake view warps
+mt Mitfi waqt li Ilma mtejjeb hu mixgħul: l-effetti tiegħu taħt l-ilma jieħdu post id-distorsjonijiet klassika u GLQuake
+
+@ Draw the predicted grenade path as a solid or dashed line
+mt Juri l-mogħdija mbassra tal-granata b'linja solida jew imqatta'
+
+@ Draw the view out of the linked portal inside each portal; off shows flat discs (fastest)
+mt Juri ġo kull portal il-veduta mill-portal marbut miegħu; mitfi juri diski ċatti (l-aktar veloċi)
+
+@ Droplets spray up when things enter or leave water, slime or lava
+mt Qtar jitfarrak 'il fuq meta xi ħaġa tidħol jew toħroġ mill-ilma, mis-slime jew mil-lava
+
+@ Emulates the original 8-bit palette of software rendering
+mt Jimita l-paletta oriġinali 8-bit tar-rendering bis-software
+
+@ Every level starts with only the shotgun and axe, as if started fresh
+mt Kull livell jibda bis-senter u l-mannara biss, bħallikieku bdejt mill-ġdid
+
+@ Explosion damage for each remotely detonated sticky bomb
+mt Ħsara tal-isplużjoni għal kull bomba li teħel sploduta mill-bogħod
+
+@ Extra freeze milliseconds for every 10 damage dealt, so heavy hits stop longer
+mt Millisekondi żejda ta' ffriżar għal kull 10 ħsara, biex il-laqtiet qawwija jieqfu aktar
+
+@ First person, a third-person camera centered behind the player, or one over the right or left shoulder; third person hides viewmodels
+mt L-ewwel persuna, kamera tat-tielet persuna ċċentrata wara l-lagħħab, jew waħda fuq l-ispalla tal-lemin jew tax-xellug; it-tielet persuna taħbi l-mudelli tal-armi
+
+@ Flash the selected marker on confirmed hits; colors are shared with the crosshair
+mt Iteptep l-indikatur magħżul fuq laqtiet ikkonfermati; il-kuluri huma l-istess bħal tal-crosshair
+
+@ Freeze for every enemy, or only for enemies that were tough before the hit
+mt Iffriża għal kull għadu, jew għal għedewwa li kienu iebsa qabel il-laqta biss
+
+@ Freeze the game briefly when you damage an enemy; single player with add-ons only
+mt Jiffriża l-logħba għal ftit meta tagħmel ħsara lil għadu; logħob waħdek b'Add-ons biss
+
+@ Gibs tumble and barrels throw shrapnel; shots and blasts push them (cosmetic only)
+mt Il-biċċiet tal-laħam jitqalbu u l-btieti jitfgħu xrapnell; it-tiri u l-isplużjonijiet jimbuttawhom (kożmetiku biss)
+
+@ Health an enemy must have had before the hit to count as tough
+mt Saħħa li għadu jrid ikollu qabel il-laqta biex jitqies iebes
+
+@ Hits dealing less damage than this do not freeze the game; the default 10 skips nails and shotgun pellets
+mt Laqtiet b'inqas ħsara minn dan ma jiffriżawx il-logħba; il-valur standard ta' 10 jaqbeż l-imsiemer u ċ-ċomb tas-senter
+
+@ Hold fire and sweep the crosshair over monsters to queue them, release to throw: it stuns each in turn and flies back; alt-fire clears the queue
+mt Żomm is-sparar u għaddi l-crosshair fuq il-mostri biex tpoġġihom f'kju, erħi biex titfa': jisturdi lil kull wieħed minnhom wara xulxin u jerġa' lura; is-sparar alternattiv inaddaf il-kju
+
+@ Hold: keep Lock-on held. Toggle: press Auto-aim Toggle to enable automatic acquisition. Click look stick to switch targets
+mt Żomm: żomm il-Qbid tal-mira magħfus. Qlib: agħfas Qlib tal-immirar awtomatiku biex tixgħel il-qbid awtomatiku. Agħfas l-istick tal-ħarsa biex tibdel il-mira
+
+@ How close an enemy must be to the crosshair for automatic acquisition in toggle mode (degrees)
+mt Kemm irid ikun qrib il-crosshair għadu biex jinqabad awtomatikament fil-modalità tal-qlib (gradi)
+
+@ How far the view tilts up and down when you tilt the controller (pitch axis)
+mt Kemm titmejjel il-veduta 'l fuq u 'l isfel meta tmejjel il-kontrollur (assi vertikali)
+
+@ How far the view turns left and right when you turn the controller (yaw axis)
+mt Kemm iddur il-veduta lejn ix-xellug u l-lemin meta ddawwar il-kontrollur (assi orizzontali)
+
+@ How far the view turns when you drag on the right half of the screen
+mt Kemm iddur il-veduta meta tkaxkar fuq in-nofs tal-lemin tal-iskrin
+
+@ How fast the boomerang flies (units per second)
+mt Kemm itir malajr il-boomerang (unitajiet kull sekonda)
+
+@ How hard shots and explosions push debris around
+mt Kemm jimbuttaw bil-qawwa t-tiri u l-isplużjonijiet il-fdalijiet
+
+@ How hard the Powerwasher's water pushes enemies
+mt Kemm jimbotta bil-qawwa l-ilma tal-Powerwasher lill-għedewwa
+
+@ How long a hit freezes the game, in milliseconds
+mt Kemm iddum laqta tiffriża l-logħba, f'millisekondi
+
+@ How strongly fog covers the sky when fog is on
+mt Kemm jgħatti s-sema ċ-ċpar meta ċ-ċpar ikun mixgħul
+
+@ How the view distorts underwater: Classic ripples the whole screen like software Quake, GLQuake slowly stretches and squashes the view
+mt Kif titgħawweġ il-veduta taħt l-ilma: Klassiku jmewweġ l-iskrin kollu bħal Quake bis-software, GLQuake bil-mod jiġbed u jagħfas il-veduta
+
+@ Ignores gyro rotation slower than this many degrees per second, to hide hand tremor
+mt Jinjora r-rotazzjoni tal-gyro iktar bil-mod minn dawn il-gradi kull sekonda, biex jaħbi r-rogħda tal-idejn
+
+@ Immersive: appears for a few seconds only when its value changes
+mt Immersiv: jidher għal ftit sekondi biss meta jinbidel il-valur tiegħu
+
+@ Keeps textures sharp on floors and walls seen at steep angles
+mt Iżomm it-tessituri ċari fuq l-art u l-ħitan li jidhru minn angoli wieqfa
+
+@ Lights from rockets, muzzle flashes and explosions brighten nearby walls
+mt Id-dwal tar-rokits, tal-isparar u tal-isplużjonijiet jixegħlu l-ħitan fil-qrib
+
+@ Liquid surfaces swell and ring out where things move through them
+mt L-uċuħ tal-likwidi jintefħu u jagħmlu ċrieki fejn xi ħaġa tgħaddi minnhom
+
+@ Lobs sticky bombs (rockets ammo) that cling to walls, doors and monsters; alt-fire detonates them all
+mt Jitfa' bombi li jeħlu (munizzjon tar-rokits) li jeħlu mal-ħitan, il-bibien u l-mostri; is-sparar alternattiv jisplodihom kollha
+
+@ Look of the classic particles: GLQuake draws soft round dots, Classic draws square pixels like software Quake
+mt Id-dehra tal-partiċelli klassiċi: GLQuake ipinġi tikek tondi u rotob, Klassiku ipinġi pixels kwadri bħal Quake bis-software
+
+@ Low skips the background smear halo and uses fewer blur samples; high keeps the full halo and smoother streaks
+mt Baxxa taqbeż il-halo tal-isfond u tuża inqas kampjuni taċ-ċajpra; għolja żżomm il-halo kollu u strixxi aktar lixxi
+
+@ Low: hard particle edges, half the scripted particles and fewer hit sparks. Medium: soft edges. High: soft edges checked per MSAA sample, most hit sparks
+mt Baxxa: truf iebsa tal-partiċelli, nofs il-partiċelli tal-iskripts u inqas xrar tal-laqtiet. Medja: truf rotob. Għolja: truf rotob iċċekkjati għal kull kampjun MSAA, kważi x-xrar kollu
+
+@ Marks fade out before expiring; oldest marks are recycled at the limit
+mt Il-marki jisparixxu bil-mod qabel jiskadu; l-eqdem marki jerġgħu jintużaw meta jintlaħaq il-limitu
+
+@ Max nested portal reflections to draw; each level redraws the scene
+mt L-akbar numru ta' riflessjonijiet ta' portali ġo xulxin li jintwerew; kull livell jerġa' jpinġi x-xena
+
+@ Max portals per screen with a live view; each one redraws the scene
+mt L-akbar numru ta' portali kull skrin b'veduta ħajja; kull wieħed jerġa' jpinġi x-xena
+
+@ Maximum distance for acquiring and keeping an enemy locked
+mt Distanza massima biex taqbad u żżomm għadu fil-mira
+
+@ Minimum gap between freezes, so shotgun pellets and rapid fire count once; kills ignore it
+mt L-inqas distanza bejn iffriżar u ieħor, biex iċ-ċomb tas-senter u s-sparar rapidu jgħoddu darba; il-qtil jinjorah
+
+@ Modern terminal console with autocomplete popup, history search, ANSI colors, bash shell and piping; off uses the classic Quake console
+mt Konsol modern tat-tip terminal b'popup ta' awtokompletar, tfittxija fl-istorja, kuluri ANSI, shell bash u piping; mitfi juża l-konsol klassiku ta' Quake
+
+@ Monsters take proportionally less damage at higher values; above 100% is harder
+mt Il-mostri jieħdu proporzjonalment inqas ħsara f'valuri ogħla; 'il fuq minn 100% huwa aktar diffiċli
+
+@ Moving gibs leave blood on surfaces they touch
+mt Il-biċċiet tal-laħam li jiċċaqilqu jħallu d-demm fuq l-uċuħ li jmissu
+
+@ Multiplier on the freeze when the hit kills the enemy; 1 means no extra
+mt Multiplikatur tal-iffriżar meta l-laqta toqtol lill-għadu; 1 tfisser xejn żejjed
+
+@ Multiplies ammo from pickups (up to the normal carry limit); below 100% is harder
+mt Jimmultiplika l-munizzjon miġbur (sal-limitu normali li tista' ġġorr); taħt 100% huwa aktar diffiċli
+
+@ Multiplies health from pickups (up to 100, or the item's own limit); below 100% is harder
+mt Jimmultiplika s-saħħa miġbura (sa 100, jew sal-limitu tal-oġġett innifsu); taħt 100% huwa aktar diffiċli
+
+@ Nails stick to wood and bodies; hard surfaces deflect them to the floor
+mt L-imsiemer jeħlu fl-injam u fl-iġsma; l-uċuħ ibsin jiddevjawhom lejn l-art
+
+@ Nearest keeps crisp classic pixels; linear smooths textures
+mt L-eqreb iżomm pixels klassiċi ċari; lineari jirtab it-tessituri
+
+@ New Game: Add-ons
+mt Logħba ġdida: Add-ons
+
+@ New Game: Customize
+mt Logħba ġdida: Personalizza
+
+@ Night vision: how much dark areas are brightened; thermal: how strongly heat stands out
+mt Viżjoni bil-lejl: kemm jiddawlu l-postijiet mudlama; termika: kemm tispikka s-sħana
+
+@ Night-vision and thermal goggles, cycle normal, night vision and thermal with Change Goggles (Add-ons), or use the Equipment Wheel
+mt Nuċċali għall-viżjoni bil-lejl u termika: aqleb bejn normali, viżjoni bil-lejl u termika b'Ibdel in-nuċċali (Add-ons), jew uża r-Rota tat-tagħmir
+
+@ No single freeze lasts longer than this, however much damage or kill bonus adds
+mt L-ebda ffriżar ma jdum aktar minn dan, tkun kemm tkun il-ħsara jew il-bonus tal-qtil
+
+@ Oldest marks and nails are recycled at this shared limit
+mt L-eqdem marki u msiemer jerġgħu jintużaw meta jintlaħaq dan il-limitu komuni
+
+@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
+mt Stick u buttuni fuq l-iskrin: awto jurihom wara mess u jaħbihom meta jintuża apparat ieħor
+
+@ Only autosaves: quicksaves and the Save menu are off
+mt Salvataġġi awtomatiċi biss: is-salvataġġ malajr u l-menu Salva huma mitfija
+
+@ Place every weapon at the center, right or left of the view, or hide all viewmodels
+mt Poġġi kull arma fiċ-ċentru, fuq il-lemin jew fuq ix-xellug tal-veduta, jew aħbi l-mudelli kollha tal-armi
+
+@ Play your chosen hit or kill cue when you damage an enemy
+mt Idoqq is-sinjal tal-laqta jew tal-qtil li għażilt meta tagħmel ħsara lil għadu
+
+@ Playback speed: faster sounds shorter and higher
+mt Veloċità tar-riproduzzjoni: aktar malajr tinstema' iqsar u ogħla
+
+@ Plays the Quake theme in the main menu when no game is running
+mt Idoqq it-tema ta' Quake fil-menu prinċipali meta ma tkun għaddejja l-ebda logħba
+
+@ Portals farther away than this are drawn as flat discs
+mt Portali iktar 'il bogħod minn dan jintwerew bħala diski ċatti
+
+@ Press attack once to keep firing, again to stop
+mt Agħfas attakka darba biex tibqa' tispara, għal darb'oħra biex tieqaf
+
+@ Press run once to switch between running and walking
+mt Agħfas iġri darba biex taqleb bejn il-ġiri u l-mixi
+
+@ Raise or lower the tone independently of sound length
+mt Għolli jew baxxi t-ton indipendentement mit-tul tal-ħoss
+
+@ Red screen edges show where damage came from: top is front, bottom is behind; Screen Flashes controls their strength
+mt It-truf ħomor tal-iskrin juru minn fejn ġiet il-ħsara: fuq hu quddiem, isfel hu wara; Teptip tal-iskrin jikkontrolla l-qawwa tagħhom
+
+@ Replaces the classic dot particles with glowing sparks, smoke and blood; mods with their own particle effects keep them
+mt Jibdel il-partiċelli klassiċi tat-tikek b'xrar jiddi, duħħan u demm; mods bl-effetti tal-partiċelli tagħhom iżommuhom
+
+@ Resolution and detail inside portal and teleporter views; lower tiers trim nested effects
+mt Riżoluzzjoni u dettall ġol-veduti tal-portali u t-teleporters; livelli aktar baxxi jnaqqsu l-effetti ġo xulxin
+
+@ Rippling light patterns on surfaces under water and slime
+mt Disinji tad-dawl imewġin fuq uċuħ taħt l-ilma u s-slime
+
+@ Scales all damage you take; above 100% is harder
+mt Jiskala l-ħsara kollha li tieħu; 'il fuq minn 100% huwa aktar diffiċli
+
+@ Screen edge for this element; elements on the same spot stack
+mt Tarf tal-iskrin għal dan l-element; elementi fl-istess post jitqiegħdu fuq xulxin
+
+@ Seconds a monster hit by the boomerang stays stunned
+mt Sekondi li mostru milqut mill-boomerang jibqa' sturdut
+
+@ Seconds impact marks and stuck nails stay before fading out; independent of Particle Quality
+mt Sekondi li l-marki tal-impatti u l-imsiemer imwaħħla jibqgħu qabel jisparixxu; indipendenti minn Kwalità tal-partiċelli
+
+@ Seconds messages at the top of the screen stay up
+mt Sekondi li jibqgħu jidhru l-messaġġi fuq nett tal-iskrin
+
+@ Seconds the flick stick snap takes; lower is faster
+mt Sekondi li jieħu l-flick stick biex idur; inqas huwa aktar malajr
+
+@ See through enhanced water; enables Water Opacity
+mt Ara minn ġol-ilma mtejjeb; jixgħel Opaċità tal-ilma
+
+@ Sensor grain, scanlines and flicker of the goggle image
+mt Ħbub tas-sensor, linji tal-iskanjar u teptip tal-immaġni tan-nuċċali
+
+@ Shades every anti-aliasing sample; needs Anti-aliasing on
+mt Jagħmel shading lil kull kampjun tal-anti-aliasing; jeħtieġ l-Anti-aliasing mixgħul
+
+@ Shifts colors so they stay distinct for the chosen color blindness
+mt Ibiddel il-kuluri biex jibqgħu distinti għall-għama tal-kulur magħżula
+
+@ Shotgun hits leave small surface marks (cosmetic only)
+mt Il-laqtiet tas-senter iħallu marki żgħar fuq l-uċuħ (kożmetiku biss)
+
+@ Show corner ticks at screen centre while locked, even with Crosshair off
+mt Juri marki fil-kantunieri f'nofs l-iskrin waqt il-qbid, anki bil-Crosshair mitfi
+
+@ Show where grenades and other arcing shots will fly, bounce and land; local play only, not in deathmatch
+mt Juri fejn se jtiru, jaqbżu u jinżlu l-granati u tiri oħra b'ark; logħob lokali biss, mhux fid-deathmatch
+
+@ Shows text for important sounds: doors, alerted enemies, secrets, pickups
+mt Juri test għal ħsejjes importanti: bibien, għedewwa allarmati, sigrieti, oġġetti miġbura
+
+@ Shows the distance fog that maps and mods set; off always gives clear view
+mt Juri ċ-ċpar tad-distanza li jiffissaw il-mappep u l-mods; mitfi dejjem jagħti veduta ċara
+
+@ Shows the player face next to the health number
+mt Juri l-wiċċ tal-lagħħab ħdejn in-numru tas-saħħa
+
+@ Simulation detail, step rate, fade-out lifetimes and caps for gibs and shrapnel; low also skips mover collision
+mt Dettall tas-simulazzjoni, rata tal-passi, tul qabel jisparixxu u limiti għall-biċċiet tal-laħam u x-xrapnell; baxxa taqbeż ukoll il-ħabtiet mal-partijiet li jiċċaqilqu
+
+@ Size of the on-screen buttons and move stick
+mt Daqs tal-buttuni u tal-istick tal-moviment fuq l-iskrin
+
+@ Slowly heals up to 100 health after 5 seconds without being hit
+mt Ifejjaq bil-mod sa 100 saħħa wara 5 sekondi mingħajr ma tintlaqat
+
+@ Slows stick look while the crosshair is over an enemy
+mt Inaqqas il-veloċità tal-ħarsa bl-istick waqt li l-crosshair ikun fuq għadu
+
+@ Slows the game down while the weapon wheel is open
+mt Inaqqas il-veloċità tal-logħba waqt li r-rota tal-armi tkun miftuħa
+
+@ Slows the whole game down; single player only. Saves and demos stay compatible with other ports
+mt Inaqqas il-veloċità tal-logħba kollha; logħob waħdek biss. Is-salvataġġi u d-demos jibqgħu kompatibbli ma' ports oħra
+
+@ Small camera jolt on each freeze; off with Reduce Motion
+mt Skossa żgħira tal-kamera ma' kull iffriżar; mitfi b'Naqqas il-moviment
+
+@ Snap and track enemies in local play, including split-screen; unavailable online
+mt Jaqbad u jsegwi l-għedewwa fil-logħob lokali, inkluż fuq skrin maqsum; mhux disponibbli online
+
+@ Sparks, smoke, chips, splinters and splashes fly off whatever your shots hit
+mt Xrar, duħħan, frak, xewk tal-injam u tixrix itiru minn kull ma jolqtu t-tiri tiegħek
+
+@ Spawns extra copies of every monster around the original when a level starts
+mt Joħloq kopji żejda ta' kull mostru madwar l-oriġinal meta jibda livell
+
+@ Strength of the full-screen flashes for damage, pickups and powerups
+mt Qawwa tat-teptip fuq l-iskrin kollu għall-ħsara, l-oġġetti miġbura u l-power-ups
+
+@ Stretch or shorten the sound while keeping its pitch
+mt Itawwal jew iqassar il-ħoss filwaqt li jżomm it-ton tiegħu
+
+@ Surface opacity; requires Enhanced Water and Translucent Water
+mt Opaċità tal-wiċċ; jeħtieġ Ilma mtejjeb u Ilma trasluċidu
+
+@ The hook latches onto metal surfaces (metal, tech, computer panels, copper)
+mt Il-ganċ jaqbad ma' uċuħ tal-metall (metall, tech, pannelli tal-kompjuter, ram)
+
+@ The hook latches onto stone, brick, rock and any surface not recognised as wood or metal
+mt Il-ganċ jaqbad mal-ġebel, il-briks, il-blat u kull wiċċ li ma jingħarafx bħala injam jew metall
+
+@ The hook latches onto wooden surfaces (texture names like wood, crate, plank)
+mt Il-ganċ jaqbad ma' uċuħ tal-injam (ismijiet tat-tessituri bħal wood, crate, plank)
+
+@ Turn the controller's motion sensor into a look input; needs a pad with a gyroscope
+mt Jibdel is-sensor tal-moviment tal-kontrollur f'kontroll tal-ħarsa; jeħtieġ kontrollur b'ġiroskopju
+
+@ Turns off view bob, strafe tilt and the camera kick when hit or firing
+mt Jitfi t-tbandil tal-veduta, l-inklinazzjoni meta timxi ġenb u l-iskossa tal-kamera meta tintlaqat jew tispara
+
+@ Turns on the extra liquid effects; Water Settings controls each one
+mt Jixgħel l-effetti żejda tal-likwidi; Issettjar tal-ilma jikkontrolla kull wieħed minnhom
+
+@ Turns the view to follow a moving enemy you are aiming at
+mt Idawwar il-veduta biex issegwi għadu li qed jiċċaqlaq u li qed timmira lejh
+
+@ Turns the view when you roll the controller sideways; 0 disables it, negative reverses it
+mt Idawwar il-veduta meta tmejjel il-kontrollur lejn il-ġenb; 0 jitfih, valur negattiv jaqilbu
+
+@ Two-portal gun: fire and alt-fire place linked portals on flat walls; assign a weapon slot in Add-ons
+mt Pistola b'żewġ portali: is-sparar u s-sparar alternattiv ipoġġu portali marbuta fuq ħitan ċatti; assenja post tal-arma f'Add-ons
+
+@ Unlocks the FX Settings page: enhanced particles, impact effects and blood splatter
+mt Jiftaħ il-paġna Issettjar tal-effetti: partiċelli mtejba, effetti tal-impatti u tixrid tad-demm
+
+@ Uses the 2021 re-release's smoother MD5 models (and MD3 replacements from mods) instead of the classic ones. Applies on the next map load
+mt Juża l-mudelli MD5 aktar lixxi tal-edizzjoni mill-ġdid tal-2021 (u sostituzzjonijiet MD3 mill-mods) minflok dawk klassiċi. Japplika meta tittella' l-mappa li jmiss
+
+@ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
+mt Juża d-dawl ikkulurit tal-mappa (fajl .lit jew lump BSPX); mitfi jagħti d-dawl abjad oriġinali. Japplika meta tittella' l-mappa li jmiss
+
+@ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
+mt Segmenti tal-ġett tal-ilma, għadd ta' qtar u shading tleqq tal-likwidu: baxxa tuża ġettijiet trasluċidi aktar sempliċi; għolja tuża ġettijiet lixxi u tleqq
+
+@ When gyro looking applies: always, off while +gyroaction is held, or only while it is held
+mt Meta tapplika l-ħarsa bil-gyro: dejjem, mitfija waqt li +gyroaction ikun miżmum, jew biss waqt li jkun miżmum
+
+@ Which weapons trigger the freeze; melee covers the axe and any mod weapon used at close range without ammo
+mt Liema armi jqanqlu l-iffriżar; ġlied mill-qrib ikopri l-mannara u kull arma ta' mod użata mill-qrib mingħajr munizzjon
+
+@ Your own rockets and grenades don't hurt you; rocket jumps still work
+mt Ir-rokits u l-granati tiegħek ma jweġġgħukx; ir-rocket jumps xorta jaħdmu
+
+# ==== ui.txt ====
+
+# Menus and pop-ups outside the options pages: save cards, launch, presets,
+# add-on browser, map packs, hints and dialogs.
+@ Select
+mt Agħżel
+
+@ Back
+mt Lura
+
+@ Cancel
+mt Ikkanċella
+
+@ Confirm
+mt Ikkonferma
+
+@ Scroll
+mt Skrollja
+
+@ Section
+mt Taqsima
+
+@ Bind
+mt Assenja
+
+@ Cancel binding
+mt Ikkanċella l-assenjazzjoni
+
+@ Clear
+mt Ħassar
+
+@ Clear pad
+mt Ħassar il-kontrollur
+
+@ Remap
+mt Erġa' assenja
+
+@ Type
+mt Ikteb
+
+@ Shift
+mt Shift
+
+@ Done
+mt Lest
+
+@ Del
+mt Del
+
+@ Space
+mt Spazju
+
+@ Save
+mt Salva
+
+@ Load
+mt Tella'
+
+@ Delete
+mt Ħassar
+
+@ Play
+mt Ilgħab
+
+@ Yes
+mt Iva
+
+@ No
+mt Le
+
+@ OK
+mt OK
+
+@ System
+mt Sistema
+
+@ Language
+mt Lingwa
+
+@ Help
+mt Għajnuna
+
+@ Fixed for this game: it was started without Customize
+mt Fiss għal din il-logħba: inbdiet mingħajr Personalizza
+
+@ Press a button or key to bind (Start cancels)
+mt Agħfas buttuna jew tasta biex tassenja (Start jikkanċella)
+
+@ Press button...
+mt Agħfas buttuna...
+
+@ Press key...
+mt Agħfas tasta...
+
+@ Replace this binding?
+mt Tissostitwixxi din l-assenjazzjoni?
+
+@ is already assigned
+mt diġà assenjata
+
+@ {} already assigned
+mt {} diġà assenjata
+
+@ Open Controls to remap Lock-on?
+mt Tiftaħ il-Kontrolli biex terġa' tassenja l-Qbid tal-mira?
+
+@ Lock-on
+mt Qbid tal-mira
+
+@ Auto-aim Toggle
+mt Qlib tal-immirar awtomatiku
+
+@ Keyboard
+mt Tastiera
+
+@ Controller
+mt Kontrollur
+
+# main menu, dialogs and screens
+@ Map Packs
+mt Pakketti tal-mappep
+
+@ Customize
+mt Personalizza
+
+@ Level Select
+mt Għażla tal-livell
+
+@ Really quit?
+mt Żgur trid toħroġ?
+
+@ You died
+mt Mitt
+
+@ Continue from most recent save
+mt Kompli mill-aħħar salvataġġ
+
+@ Select save
+mt Agħżel salvataġġ
+
+@ Restart level
+mt Erġa' ibda l-livell
+
+@ Return to main menu
+mt Lura għall-menu prinċipali
+
+@ (disabled)
+mt (mitfi)
+
+@ (fixed for this game)
+mt (fiss għal din il-logħba)
+
+@ (off)
+mt (mitfi)
+
+@ Apply Display Changes
+mt Applika t-tibdiliet tal-iskrin
+
+@ Display Mode
+mt Modalità tal-iskrin
+
+@ Resolution
+mt Riżoluzzjoni
+
+@ desktop
+mt desktop
+
+@ Preset
+mt Preset
+
+@ Map
+mt Mappa
+
+@ Reset Shader Settings
+mt Irrisettja l-issettjar tax-shader
+
+@ Reset to Defaults
+mt Irrisettja għall-istandard
+
+@ Searching...
+mt Qed infittex...
+
+@ This game only autosaves.
+mt Din il-logħba ssalva awtomatikament biss.
+
+@ (No Manual Saves modifier)
+mt (modifikatur Bla salvataġġi manwali)
+
+@ End the current game?
+mt Ittemm il-logħba attwali?
+
+@ Unsaved progress will be lost.
+mt Il-progress mhux salvat jintilef.
+
+@ End game
+mt Temm il-logħba
+
+@ Overwrite
+mt Ikteb fuqu
+
+@ Overwrite "{}"?
+mt Tikteb fuq "{}"?
+
+@ Saved {}
+mt Salvat {}
+
+@ Start a new game?
+mt Tibda logħba ġdida?
+
+@ New game
+mt Logħba ġdida
+
+@ New Game
+mt Logħba ġdida
+
+@ CUSTOM
+mt PERSONALIZZATA
+
+@ Customize Experience
+mt Personalizza l-esperjenza
+
+@ Disable All
+mt Itfi kollox
+
+@ Disable All Modifications
+mt Itfi l-modifiki kollha
+
+@ Saves load in other source ports too.
+mt Is-salvataġġi jitilgħu wkoll f'source ports oħra.
+
+@ Standard rules, no add-ons.
+mt Regoli standard, bla add-ons.
+
+@ Choose skill
+mt Agħżel id-diffikultà
+
+@ The current game will end
+mt Il-logħba attwali se tintemm
+
+@ Easy
+mt Faċli
+
+@ Normal
+mt Normali
+
+@ Hard
+mt Diffiċli
+
+@ Nightmare
+mt Ħmar il-lejl
+
+# graphics preset pop-up
+@ Choose a Graphics Preset
+mt Agħżel preset tal-grafika
+
+@ Classic
+mt Klassiku
+
+@ Like the re-release: enhanced models,
+mt Bħall-edizzjoni l-ġdida: mudelli mtejba,
+
+@ no added effects.
+mt bla effetti miżjuda.
+
+@ Enhanced
+mt Imtejjeb
+
+@ Every enhancement at its highest quality.
+mt Kull titjib fl-ogħla kwalità.
+
+@ Needs a capable GPU.
+mt Jeħtieġ GPU b'saħħtu.
+
+@ Low-End
+mt Baxx
+
+@ Fastest. No anti-aliasing, original
+mt L-aktar veloċi. Bla anti-aliasing, mudelli
+
+@ models, lowest effect quality.
+mt oriġinali, l-inqas kwalità tal-effetti.
+
+@ Esc keeps the defaults
+mt Esc iżomm l-istandard
+
+@ Everything can be changed later in Options.
+mt Kollox jista' jinbidel aktar tard f'Options.
+
+@ Keep Defaults
+mt Żomm l-istandard
+
+# save and load cards
+@ Save Game
+mt Salva l-logħba
+
+@ Load Game
+mt Tella' logħba
+
+@ Autosaves
+mt Salvataġġi awtomatiċi
+
+@ newest first
+mt l-aktar ġodda l-ewwel
+
+@ Saves: {}
+mt Salvataġġi: {}
+
+@ Browse Autosaves
+mt Fittex is-salvataġġi awtomatiċi
+
+@ Every retained autosave, newest first
+mt Kull salvataġġ awtomatiku miżmum, l-aktar ġodda l-ewwel
+
+@ New save
+mt Salvataġġ ġdid
+
+@ Select to save your game here
+mt Agħżel biex issalva l-logħba tiegħek hawn
+
+@ No autosaves yet
+mt Għad m'hemmx salvataġġi awtomatiċi
+
+@ Autosaves are made on level entry, secrets and more (Options > Gameplay)
+mt Is-salvataġġi awtomatiċi jsiru fil-bidu tal-livell, mas-sigrieti u aktar (Options > Gameplay)
+
+@ No saves yet
+mt Għad m'hemmx salvataġġi
+
+@ Save from the Single Player menu, or press F6 to quicksave
+mt Salva mill-menu Single Player, jew agħfas F6 għal salvataġġ malajr
+
+@ No picture
+mt Bla stampa
+
+@ Del: delete save
+mt Del: ħassar is-salvataġġ
+
+@ Delete "{}"?
+mt Tħassar "{}"?
+
+@ This cannot be undone.
+mt Dan ma jistax jitreġġa' lura.
+
+@ Quicksave
+mt Salvataġġ malajr
+
+@ Autosave: {}
+mt Salvataġġ awtomatiku: {}
+
+@ unknown trigger
+mt skattatur mhux magħruf
+
+@ Latest - {}
+mt L-aħħar - {}
+
+@ Health {}
+mt Saħħa {}
+
+@ Armor {}
+mt Armatura {}
+
+@ Kills {}/{}
+mt Qtil {}/{}
+
+@ Secrets {}/{}
+mt Sigrieti {}/{}
+
+@ Split-screen, {} players
+mt Skrin maqsum, {} lagħbiena
+
+@ Co-op
+mt Co-op
+
+@ Customized
+mt Personalizzata
+
+@ Customized, {}
+mt Personalizzata, {}
+
+@ Date unavailable
+mt Data mhux disponibbli
+
+@ Just now
+mt Issa stess
+
+@ {} min ago
+mt {} min ilu
+
+@ {} h ago
+mt {} siegħa ilu
+
+@ Level entry
+mt Bidu tal-livell
+
+@ Secret found
+mt Instab sigriet
+
+@ All enemies killed
+mt L-għedewwa kollha maqtula
+
+@ All secrets found
+mt Is-sigrieti kollha nstabu
+
+@ Timer
+mt Perjodiku
+
+# customize pages
+@ Standard rules
+mt Regoli standard
+
+@ Modifiers changed: {}
+mt Modifikaturi mibdula: {}
+
+@ no add-ons
+mt bla add-ons
+
+@ add-ons: {}
+mt add-ons: {}
+
+@ Saves of this game are .qsa files: they need this source port.
+mt Is-salvataġġi ta' din il-logħba huma fajls .qsa: jeħtieġu dan is-source port.
+
+@ Nothing changed: this plays as standard Quake.
+mt Xejn ma nbidel: din tintlagħab bħal Quake standard.
+
+@ Changes apply now and are saved with this game (.qsa).
+mt It-tibdiliet japplikaw issa u jiġu salvati ma' din il-logħba (.qsa).
+
+@ This game started without Customize, so its rules are fixed.
+mt Din il-logħba bdiet mingħajr Personalizza, allura r-regoli tagħha huma fissi.
+
+@ Start a new game and choose Customize Experience.
+mt Ibda logħba ġdida u agħżel Personalizza l-esperjenza.
+
+@ These rules apply to the next customized game.
+mt Dawn ir-regoli japplikaw għall-logħba personalizzata li jmiss.
+
+# add-on browser
+@ Fire
+mt Spara
+
+@ Alt Fire
+mt Sparar alternattiv
+
+@ Configure Parameters >
+mt Ikkonfigura l-parametri >
+
+@ Configure
+mt Ikkonfigura
+
+@ Settings
+mt Issettjar
+
+@ Change slot
+mt Ibdel il-post
+
+@ Toggle
+mt Aqleb
+
+@ Details
+mt Dettalji
+
+@ Enter or click the box: toggle
+mt Enter jew ikklikkja l-kaxxa: aqleb
+
+@ Right / Tab / click: details
+mt Lemin / Tab / klikk: dettalji
+
+@ Input Remapping
+mt Assenjazzjoni tal-kontrolli
+
+@ Weapon Slot
+mt Post tal-arma
+
+@ Customized games save as .qsa files, which need this source port.
+mt Il-logħob personalizzat jiġi salvat bħala fajls .qsa, li jeħtieġu dan is-source port.
+
+@ This game started without Customize, so its add-ons are fixed. Customize a new game instead.
+mt Din il-logħba bdiet mingħajr Personalizza, allura l-add-ons tagħha huma fissi. Minflok, personalizza logħba ġdida.
+
+@ Bullet Time
+mt Bullet Time
+
+@ Change Goggles
+mt Ibdel in-nuċċali
+
+@ Dodge / Dive
+mt Skansa / Qabża
+
+@ Goggles
+mt Nuċċali
+
+@ Hitstop
+mt Hitstop
+
+@ Projectile Shotguns
+mt Snieter bi projettili
+
+@ BULLET TIME: 20%
+mt BULLET TIME: 20%
+
+@ NORMAL SPEED
+mt VELOĊITÀ NORMALI
+
+@ SLOW MOTION: PHYSICAL PELLETS
+mt SLOW MOTION: ĊOMB FIŻIKU
+
+@ DEMONSTRATION
+mt DIMOSTRAZZJONI
+
+@ GAMEPLAY
+mt GAMEPLAY
+
+@ LOOP
+mt LOOP
+
+@ Preview unavailable
+mt Preview mhux disponibbli
+
+# shader and language help lines
+@ A setting of the chosen shader; arrows step it, Enter is not needed
+mt Issettjar tax-shader magħżul; il-vleġeġ ibiddluh, m'hemmx bżonn Enter
+
+@ Language of the menus, messages and the 2021 re-release's game text; System follows your computer's language
+mt Il-lingwa tal-menus, il-messaġġi u t-test tal-logħba tal-edizzjoni l-ġdida tal-2021; Sistema ssegwi l-lingwa tal-kompjuter tiegħek
+
+@ Puts every setting of the chosen shader back to the preset's defaults
+mt Jerġa' jġib kull issettjar tax-shader magħżul għall-valuri standard tal-preset
+
+@ RetroArch slang shader on the final image: CRT, scanlines, NTSC, sharpening; add your own in <game>/shaders
+mt Shader slang ta' RetroArch fuq l-immaġni finali: CRT, linji tal-iskanjar, NTSC, sharpening; żid tiegħek f'<logħba>/shaders
+
+# modern console footer
+@ Shift+PgUp/Dn: height  ` : hide
+mt Shift+PgUp/Dn: għoli  ` : aħbi
+
+@ Tab: complete  Ctrl+R: search  bash | pipe
+mt Tab: ikkompleta  Ctrl+R: fittex  bash | pipe
+
+@ ↑ +{} lines (End to jump) 
+mt ↑ +{} linji (End biex taqbeż) 
+
+# add-on descriptions
+@ Create two linked portals on flat walls. Fire places the first portal; Alt Fire places the second. Walk through either portal to emerge from the other. Your momentum carries through. Assign a weapon slot below: pressing that slot repeatedly cycles its ordinary weapon and every enabled add-on assigned there. Portal view quality is configurable below.
+mt Oħloq żewġ portali marbuta fuq ħitan ċatti. Spara jpoġġi l-ewwel portal; Sparar alternattiv ipoġġi t-tieni wieħed. Imxi minn ġo portal biex toħroġ mill-ieħor. Il-momentum tiegħek jinżamm. Assenja post tal-arma hawn taħt: jekk tagħfas dak il-post għal diversi drabi, taqleb bejn l-arma ordinarja tiegħu u kull add-on attiv assenjat hemm. Il-kwalità tal-veduta tal-portali tista' tiġi kkonfigurata hawn taħt.
+
+@ Hold Fire and sweep the crosshair over monsters to queue targets. Release Fire to throw: the boomerang visits each target, stuns it and returns to you. Alt Fire clears the queue. The weapon slot selects a group, not a separate hotkey: press it again to cycle through the weapons in that slot. Configure stun duration and flight speed below.
+mt Żomm Spara u għaddi l-crosshair fuq il-mostri biex tpoġġi l-miri f'kju. Erħi Spara biex titfa': il-boomerang imur għand kull mira, jisturdiha u jerġa' lura għandek. Sparar alternattiv inaddaf il-kju. Il-post tal-arma jagħżel grupp, mhux tasta separata: erġa' agħfsu biex taqleb bejn l-armi f'dak il-post. Ikkonfigura t-tul tal-isturdament u l-veloċità tat-titjir hawn taħt.
+
+@ Hold Fire to charge a sticky bomb using rocket ammunition; release to launch. A longer charge throws it faster. Bombs cling to walls, doors and monsters. Alt Fire detonates your planted bombs together. Place a trap, retreat, then detonate it when enemies approach. Assign any weapon slot below; repeated presses cycle through the ordinary weapon and add-ons in that slot.
+mt Żomm Spara biex tiċċarġja bomba li teħel bil-munizzjon tar-rokits; erħi biex titfagħha. Iċċarġjar itwal jitfagħha aktar malajr. Il-bombi jeħlu mal-ħitan, il-bibien u l-mostri. Sparar alternattiv jisploda l-bombi kollha li poġġejt flimkien. Poġġi nassa, irtira, imbagħad isplodiha meta joqorbu l-għedewwa. Assenja kwalunkwe post tal-arma hawn taħt; jekk tagħfas diversi drabi taqleb bejn l-arma ordinarja u l-add-ons f'dak il-post.
+
+@ Fire launches a chain hook. It latches onto a permitted surface or enemy and reels you toward the anchor. Fire again or use Alt Fire to let go. Choose which materials and enemies can be hooked in Configure Parameters. Assign it to any weapon slot; repeated presses of the slot's existing binding cycle through its weapons.
+mt Spara jitfa' ganċ bil-katina. Jaqbad ma' wiċċ permess jew ma' għadu u jiġbdek lejn il-punt fejn qabad. Erġa' spara jew uża Sparar alternattiv biex titlaq. Agħżel liema materjali u għedewwa jistgħu jinqabdu f'Ikkonfigura l-parametri. Assenjah lil kwalunkwe post tal-arma; jekk tagħfas diversi drabi t-tasta li diġà għandu dak il-post taqleb bejn l-armi tiegħu.
+
+@ A piercing railgun inspired by Quake III. Fire sends a slug through every enemy along its line. Each shot consumes two cells, with a 1.5 second refire interval. Damage and the spiral trail colour are configurable below. Choose a weapon slot: the slot's current binding selects and cycles the weapons assigned to it.
+mt Railgun li tinfed, ispirata minn Quake III. Spara jibgħat balla minn ġo kull għadu tul il-linja tagħha. Kull tir jonfoq żewġ ċelloli, b'intervall ta' 1.5 sekondi bejn tir u ieħor. Il-ħsara u l-kulur tat-traċċa spirali jistgħu jiġu kkonfigurati hawn taħt. Agħżel post tal-arma: it-tasta attwali ta' dak il-post tagħżel u taqleb bejn l-armi assenjati lilu.
+
+@ A Portal-style gel sprayer. Fire sprays blue Repulsion gel: land, jump or run into it to bounce, and landings on it never hurt. Alt Fire sprays orange Propulsion gel: run across it to go much faster. Gel coats floors and walls until washed off with the Powerwasher. Assign a weapon slot below; repeated presses cycle the weapons in that slot.
+mt Sprejer tal-ġell bħal f'Portal. Spara jisprejja ġell blu ta' Repulsjoni: inżel, aqbeż jew iġri fih biex taqbeż 'il fuq, u l-inżul fuqu qatt ma jweġġa'. Sparar alternattiv jisprejja ġell oranġjo ta' Propulsjoni: iġri fuqu biex tmur ħafna aktar malajr. Il-ġell jiksi l-art u l-ħitan sakemm jinħasel bil-Powerwasher. Assenja post tal-arma hawn taħt; jekk tagħfas diversi drabi taqleb bejn l-armi f'dak il-post.
+
+@ A water cannon. Fire shoots a straight jet with limited reach; Alt Fire a wide, shorter fan. The water pushes enemies back, turns projectiles aside and washes away gel and blood. Push strength is configurable below. Assign a weapon slot below; repeated presses cycle the weapons in that slot.
+mt Kanun tal-ilma. Spara jispara ġett dritt b'medda limitata; Sparar alternattiv imrewħa wiesgħa u iqsar. L-ilma jimbotta lura l-għedewwa, jiddevja l-projettili u jaħsel il-ġell u d-demm. Is-saħħa tal-imbuttatura tista' tiġi kkonfigurata hawn taħt. Assenja post tal-arma hawn taħt; jekk tagħfas diversi drabi taqleb bejn l-armi f'dak il-post.
+
+@ One equipment add-on includes both night vision and thermal vision. The Change Goggles action cycles Normal, Night Vision, Thermal, then Normal again. Night vision brightens dark rooms; thermal vision highlights living enemies. Goggles do not occupy a weapon slot. Configure intensity and sensor noise below. The binding affects only this add-on.
+mt Add-on wieħed ta' tagħmir jinkludi kemm viżjoni bil-lejl kif ukoll viżjoni termika. L-azzjoni Ibdel in-nuċċali taqleb bejn Normali, Viżjoni bil-lejl, Termika, u mbagħad Normali mill-ġdid. Il-viżjoni bil-lejl tixgħel il-kmamar mudlama; il-viżjoni termika tenfasizza l-għedewwa ħajjin. In-nuċċali ma jokkupawx post tal-arma. Ikkonfigura l-intensità u l-istorbju tas-sensor hawn taħt. L-assenjazzjoni taffettwa dan l-add-on biss.
+
+@ Press Dodge with a movement direction on the ground or in midair: dive forward or leap backward and sideways. Diagonals are supported. Each press launches once, with a short recovery. The player body animates in third person. Assign the Dodge action below or in Controls.
+mt Agħfas Skansa flimkien ma' direzzjoni tal-moviment fuq l-art jew fl-arja: itfa' ruħek 'il quddiem jew aqbeż lura u lejn il-ġenb. Id-dijagonali huma appoġġjati. Kull għafsa titfgħek darba, b'irkupru qasir. Il-ġisem tal-lagħħab huwa animat fit-tielet persuna. Assenja l-azzjoni Skansa hawn taħt jew fil-Kontrolli.
+
+@ Use the dedicated Bullet Time action to slow the whole local game to 20% speed. Hold is the default; Toggle switches on each press. The optional meter limits use in real seconds and regenerates while inactive. Disable the meter for unlimited use. Remap the action and configure duration and regeneration below.
+mt Uża l-azzjoni apposta Bullet Time biex tnaqqas il-logħba lokali kollha għal 20% tal-veloċità. Żomm huwa l-istandard; Aqleb jaqleb ma' kull għafsa. Il-miżura mhux obbligatorja tillimita l-użu f'sekondi reali u terġa' timtela meta ma tkunx qed tintuża. Itfi l-miżura għal użu bla limitu. Erġa' assenja l-azzjoni u kkonfigura t-tul u r-riġenerazzjoni hawn taħt.
+
+@ Both shotguns and enemy grunts fire physical pellets with their original spread and damage. Fast default projectiles feel immediate; lower their speed to dodge incoming fire during bullet time. Configure projectile speed below, or reset it to the default of 10000 units per second.
+mt Iż-żewġ snieter u s-suldati għedewwa jisparaw ċomb fiżiku bl-firxa u l-ħsara oriġinali tagħhom. Il-projettili veloċi standard iħossuhom immedjati; naqqas il-veloċità tagħhom biex tiskansa t-tiri waqt il-bullet time. Ikkonfigura l-veloċità tal-projettili hawn taħt, jew irrisettjaha għall-istandard ta' 10000 unità kull sekonda.
+
+@ Freezes the game for a split second when you damage an enemy, so hits feel heavier. Single player only. Choose which weapons trigger it (all, melee, ranged or explosives), how long it lasts and how much more a kill freezes. Advanced settings cover enemy toughness, damage scaling, cooldown and the longest freeze.
+mt Jiffriża l-logħba għal frazzjoni ta' sekonda meta tagħmel ħsara lil għadu, biex il-laqtiet iħossuhom itqal. Logħob waħdek biss. Agħżel liema armi jqanqluh (kollha, ġlied mill-qrib, mill-bogħod jew splussivi), kemm idum u kemm aktar jiffriża l-qtil. L-issettjar avvanzat ikopri r-reżistenza tal-għedewwa, l-iskala tal-ħsara, il-ħin ta' rkupru u l-itwal iffriżar.
+
+# map packs and the Quaddicted browser
+@ Get more maps (Quaddicted)...
+mt Ikseb aktar mappep (Quaddicted)...
+
+@ Type to filter...
+mt Ikteb biex tiffiltra...
+
+@ Launch mod
+mt Ibda l-mod
+
+@ Start first map
+mt Ibda l-ewwel mappa
+
+@ (running)
+mt (għaddej)
+
+@ running
+mt għaddej
+
+@ Recent
+mt Riċenti
+
+@ Name
+mt Isem
+
+@ Dir
+mt Folder
+
+@ Default
+mt Standard
+
+@ Title
+mt Titlu
+
+@ Sort: {}
+mt Ordni: {}
+
+@ {} installed
+mt {} installati
+
+@ {}/{} matching
+mt {}/{} jaqblu
+
+@ {} maps, {} completed
+mt {} mappep, {} lesti
+
+@ {}/{} matching, {} completed
+mt {}/{} jaqblu, {} lesti
+
+@ no maps of its own
+mt l-ebda mappa tiegħu
+
+@ dir: {}
+mt folder: {}
+
+@ base: {}
+mt bażi: {}
+
+@ Browse the Quaddicted archive of
+mt Fittex fl-arkivju ta' Quaddicted
+
+@ single-player maps and episodes,
+mt ta' mappep u episodji single-player,
+
+@ then download and install them
+mt imbagħad niżżilhom u installahom
+
+@ here. Each release gets its own
+mt hawn. Kull rilaxx ikollu l-entrata
+
+@ entry in this list.
+mt tiegħu f'din il-lista.
+
+@ Needs an internet connection.
+mt Jeħtieġ konnessjoni mal-internet.
+
+@ Quaddicted Map Archive
+mt Arkivju tal-mappep Quaddicted
+
+@ Newest
+mt L-aktar ġodda
+
+@ Author
+mt Awtur
+
+@ Size
+mt Daqs
+
+@ Loading the map list...
+mt Qed titella' l-lista tal-mappep...
+
+@ Couldn't load the map list: {}
+mt Ma setgħetx titella' l-lista tal-mappep: {}
+
+@ {} single-player releases  -  F5 refreshes
+mt {} rilaxxi single-player  -  F5 jaġġorna
+
+@ {} matching
+mt {} jaqblu
+
+@ by {}
+mt minn {}
+
+@ requires: {}
+mt jeħtieġ: {}
+
+@ maps: {}
+mt mappep: {}
+
+@ Failed: {}
+mt Falla: {}
+
+@ Downloading... {}%
+mt Qed jitniżżel... {}%
+
+@ Unpacking...
+mt Qed jinfetaħ...
+
+@ Installed in {}/  -  Enter: play
+mt Installat f'{}/  -  Enter: ilgħab
+
+@ Enter: download and install
+mt Enter: niżżel u installa
+
+@ unpacking
+mt qed jinfetaħ
+
+@ failed
+mt falla
+
+@ installed
+mt installat
+
+@ Downloads are not available in the browser build
+mt Id-downloads mhumiex disponibbli fil-verżjoni tal-browser
+
+@ the map list could not be read
+mt il-lista tal-mappep ma setgħetx tinqara
+
+@ downloading needs the curl program
+mt biex tniżżel trid il-programm curl
+
+@ download failed
+mt it-tniżżil falla
+
+@ the download is not a valid zip
+mt il-fajl imniżżel mhuwiex zip validu
+
+@ nothing to install for this engine
+mt xejn x'jiġi installat għal din l-engine
+
+@ needs {} installed first
+mt jeħtieġ li {} ikun installat l-ewwel
+
+@ couldn't unpack {}
+mt ma setax jinfetaħ {}
+
+# help screen
+@ About
+mt Dwar
+
+@ < Back
+mt < Lura
+
+# tr_ctx keys: English shows the short word, the key says which meaning
+@ Save (a manual save, as opposed to a quicksave or autosave)
+mt Salvataġġ
+
+# ==== hud.txt ====
+
+# HUD, weapon and equipment wheels, sound captions and other in-game text.
+# Weapon, monster and item names follow the 2021 re-release's own translations.
+@ Axe
+mt Mannara
+
+@ Shotgun
+mt Senter
+
+@ Double-Barrelled Shotgun
+mt Super Senter
+
+@ Nailgun
+mt Nailgun
+
+@ Super Nailgun
+mt Super Nailgun
+
+@ Grenade Launcher
+mt Grenade Launcher
+
+@ Rocket Launcher
+mt Rocket Launcher
+
+@ Thunderbolt
+mt Thunderbolt
+
+@ Portal Gun
+mt Pistola tal-portali
+
+@ Boomerang
+mt Boomerang
+
+@ Stickybomb Launcher
+mt Launcher tal-bombi li jeħlu
+
+@ Railgun
+mt Railgun
+
+@ Hookshot
+mt Ganċ
+
+@ Gel Sprayer
+mt Sprejer tal-ġell
+
+@ Powerwasher
+mt Powerwasher
+
+@ Night Vision Goggles
+mt Nuċċali tal-viżjoni bil-lejl
+
+@ Thermal Goggles
+mt Nuċċali termiċi
+
+@ Normal vision
+mt Viżjoni normali
+
+@ ON
+mt MIXGĦUL
+
+@ OFF
+mt MITFI
+
+@ {} (turn on)
+mt {} (ixgħel)
+
+@ {} (turn off)
+mt {} (itfi)
+
+@ Move mouse to select, release to toggle
+mt Ċaqlaq il-maws biex tagħżel, erħi biex taqleb
+
+@ Move mouse to select, release to equip
+mt Ċaqlaq il-maws biex tagħżel, erħi biex tgħammar
+
+@ Release to toggle
+mt Erħi biex taqleb
+
+@ Release to equip
+mt Erħi biex tgħammar
+
+@ shells
+mt skrataċ
+
+@ nails
+mt imsiemer
+
+@ rockets
+mt rokits
+
+@ cells
+mt ċelloli
+
+@ Kills: {}/{}
+mt Qtil: {}/{}
+
+@ Secrets: {}/{}
+mt Sigrieti: {}/{}
+
+@ Time {}
+mt Ħin {}
+
+@ Press any button to continue...
+mt Agħfas kwalunkwe buttuna biex tkompli...
+
+@ Press any key to continue...
+mt Agħfas kwalunkwe tasta biex tkompli...
+
+@ BULLET TIME
+mt BULLET TIME
+
+@ AUTO AIM
+mt IMMIRAR AWTO
+
+@ Crosshair
+mt Crosshair
+
+@ + Marker
+mt + Indikatur
+
+@ Hit markers off
+mt Indikaturi tal-laqta mitfija
+
+@ On target
+mt Fuq il-mira
+
+@ On kill
+mt Mal-qtil
+
+# sound captions
+@ [Secret found]
+mt [Instab sigriet]
+
+@ [Message]
+mt [Messaġġ]
+
+@ [Switch activated]
+mt [Swiċċ attivat]
+
+@ [Key picked up]
+mt [Ċavetta miġbura]
+
+@ [Rune picked up]
+mt [Runa miġbura]
+
+@ [Teleporter]
+mt [Teleporter]
+
+@ [Teleport]
+mt [Teleport]
+
+@ [Splash]
+mt [Tixrix]
+
+@ [Leaving water]
+mt [Ħruġ mill-ilma]
+
+@ [Door]
+mt [Bieb]
+
+@ [Platform moving]
+mt [Pjattaforma tiċċaqlaq]
+
+@ [Button]
+mt [Buttuna]
+
+@ [Health picked up]
+mt [Saħħa miġbura]
+
+@ [Armor picked up]
+mt [Armatura miġbura]
+
+@ [Quad Damage wearing off]
+mt [Quad Damage qed jispiċċa]
+
+@ [Quad Damage]
+mt [Quad Damage]
+
+@ [Pentagram wearing off]
+mt [Pentagramma qed jispiċċa]
+
+@ [Pentagram of Protection]
+mt [Pentagramma tal-Protezzjoni]
+
+@ [Ring wearing off]
+mt [Ċurkett qed jispiċċa]
+
+@ [Ring of Shadows]
+mt [Ċurkett tad-Dellijiet]
+
+@ [Biosuit wearing off]
+mt [Biosuit qed jispiċċa]
+
+@ [Biosuit]
+mt [Biosuit]
+
+@ [Item picked up]
+mt [Oġġett miġbur]
+
+@ [Weapon picked up]
+mt [Arma miġbura]
+
+@ [Ammo picked up]
+mt [Munizzjon miġbur]
+
+@ [Explosion]
+mt [Splużjoni]
+
+@ [Grenade launched]
+mt [Granata mitfugħa]
+
+@ [Grenade bounce]
+mt [Granata taqbeż]
+
+@ [Rocket fired]
+mt [Rokit sparat]
+
+@ [Nails fired]
+mt [Imsiemer sparati]
+
+@ [Lightning]
+mt [Sajjetta]
+
+@ [Thunder]
+mt [Ragħad]
+
+@ [Enforcer alerted]
+mt [Enforcer allarmat]
+
+@ [Grunt alerted]
+mt [Grunt allarmat]
+
+@ [Rottweiler alerted]
+mt [Rottweiler allarmat]
+
+@ [Knight alerted]
+mt [Knight allarmat]
+
+@ [Death Knight alerted]
+mt [Death Knight allarmat]
+
+@ [Scrag alerted]
+mt [Scrag allarmat]
+
+@ [Ogre alerted]
+mt [Ogre allarmat]
+
+@ [Fiend alerted]
+mt [Fiend allarmat]
+
+@ [Shambler alerted]
+mt [Shambler allarmat]
+
+@ [Zombie groaning]
+mt [Zombie jgerger]
+
+@ [Vore alerted]
+mt [Vore allarmat]
+
+@ [Vore attacking]
+mt [Vore jattakka]
+
+@ [Spawn alerted]
+mt [Spawn allarmat]
+
+@ [Rotfish]
+mt [Rotfish]
+
+@ [Spawn]
+mt [Spawn]
+
+@ [Chthon]
+mt [Chthon]
+
+@ [Hard landing]
+mt [Inżul iebes]
+
+@ [Drowning]
+mt [Għarqa]
+
+@ [Gasping for air]
+mt [Nifs maqtugħ]
+
+@ [Burning]
+mt [Ħruq]
+
+@ [Telefrag]
+mt [Telefrag]
+
+@ [Gibbed]
+mt [Biċċiet]
+
+# ==== console.txt ====
+
+# Console messages, shown translated only with con_translate 1 (Translate Console).
+# Cvar and command names stay as they are.
+@ Autosaved.
+mt Salvat awtomatikament.
+
+@ Game saved.
+mt Logħba salvata.
+
+@ Can't save now.
+mt Ma tistax issalva issa.
+
+@ This game only autosaves (No Manual Saves modifier).
+mt Din il-logħba ssalva awtomatikament biss (modifikatur Bla salvataġġi manwali).
+
+@ Loading {}...
+mt Qed jitella' {}...
+
+@ load failed: {}
+mt it-tlugħ falla: {}
+
+@ ERROR: autosave failed: {}
+mt ŻBALL: is-salvataġġ awtomatiku falla: {}
+
+@ ERROR: couldn't open {}
+mt ŻBALL: ma setax jinfetaħ {}
+
+@ ERROR: couldn't open {}.
+mt ŻBALL: ma setax jinfetaħ {}.
+
+@ ERROR: couldn't write {}: {}
+mt ŻBALL: ma setax jinkiteb {}: {}
+
+@ ERROR: couldn't create {}: {}
+mt ŻBALL: ma setax jinħoloq {}: {}
+
+@ couldn't write {}: {}
+mt ma setax jinkiteb {}: {}
+
+@ Wrote {}
+mt Inkiteb {}
+
+@ screenshot failed: {}
+mt screenshot falla: {}
+
+@ screenshot: {}
+mt screenshot: {}
+
+@ No readable save available. Select save or restart the level.
+mt M'hemm l-ebda salvataġġ li jista' jinqara. Agħżel salvataġġ jew erġa' ibda l-livell.
+
+@ Unknown command "{}"
+mt Kmand mhux magħruf "{}"
+
+@ couldn't exec {}
+mt ma setax jitħaddem {}
+
+@ execing {}
+mt qed jitħaddem {}
+
+@ execing config.cfg (inherited from {})
+mt qed jitħaddem config.cfg (wiret minn {})
+
+@ execing config.cfg (mod defaults)
+mt qed jitħaddem config.cfg (standard tal-mod)
+
+@ execing default.cfg (built-in)
+mt qed jitħaddem default.cfg (integrat)
+
+@ {} cvars
+mt {} cvars
+
+@ {} commands
+mt {} kmandi
+
+@ Can't "cmd", not connected
+mt "cmd" mhux possibbli, mhux imqabbad
+
+@ Looking for Quake servers...
+mt Qed infittex servers ta' Quake...
+
+@ Bad value, must be between 1 and 65534
+mt Valur ħażin, irid ikun bejn 1 u 65534
+
+@ Couldn't handle music file {}
+mt Ma setax jiġi pproċessat il-fajl tal-mużika {}
+
+@ Bug report written to {}
+mt Rapport tal-bug inkiteb f'{}
+
+@ bugreport: can't create {}: {}
+mt bugreport: ma jistax jinħoloq {}: {}
+
+@ graphics preset: {}
+mt preset tal-grafika: {}
+
+@ Presets (r_shader_preset <name>):
+mt Presets (r_shader_preset <isem>):
+
+@ Add your own .slangp presets under <game>/shaders/.
+mt Żid il-presets .slangp tiegħek f'<logħba>/shaders/.
+
+@ no shader preset loaded (r_shader_preset)
+mt l-ebda preset tax-shader mitellgħa (r_shader_preset)
+
+@ r_shader_preset: "{}" not found
+mt r_shader_preset: "{}" ma nstabx
+
+@ no parameter "{}" in this preset
+mt l-ebda parametru "{}" f'dan il-preset
+
+@ {} = {} (default {}, {}..{})
+mt {} = {} (standard {}, {}..{})
+
+@ Switching to {}...
+mt Qed naqleb għal {}...
+
+@ game: no game dir "{}" in {}
+mt game: l-ebda folder tal-logħba "{}" f'{}
+
+@ game: can't find the engine executable
+mt game: ma jistax jinstab l-eżekutibbli tal-engine
+
+@ game: exec failed: {}
+mt game: l-eżekuzzjoni falliet: {}
+
+@ game: launch failed: {}
+mt game: it-tnedija falliet: {}
+
+@ loaded {} in {}s
+mt {} mitellgħa f'{}s
+
+@ No demos listed with startdemos
+mt L-ebda demo elenkata ma' startdemos
+
+@ Playing demo from {}.
+mt Qed tindaqq id-demo minn {}.
+
+@ {} frames {} seconds {} fps
+mt {} frejms {} sekondi {} fps
+
+@ Recording to {}.
+mt Qed nirrekordja f'{}.
+
+@ Completed demo
+mt Demo lesta
+
+@ Can't record during demo playback
+mt Ma tistax tirrekordja waqt li tkun qed tindaqq demo
+
+@ Relative pathnames are not allowed.
+mt Mogħdijiet relattivi mhumiex permessi.
+
+@ Can't record - try again when connected
+mt Ma tistax tirrekordja - erġa' pprova meta tkun imqabbad
+
+@ {} demo(s) in loop
+mt {} demo(s) f'loop
+
+@ Not recording a demo.
+mt Mhux qed tiġi rrekordjata demo.
+
+@ {} joined on a gamepad
+mt {} ingħaqad b'gamepad
+
+@ goggles: needs a game started with Add-ons and Goggles enabled
+mt goggles: jeħtieġ logħba mibdija b'Add-ons u Nuċċali attivati
+
+@ equip: needs a game started with Add-ons and Goggles enabled
+mt equip: jeħtieġ logħba mibdija b'Add-ons u Nuċċali attivati
+
+@ UDP listening on port {}
+mt UDP qed jisma' fuq il-port {}
+
+@ UDP bind on port {} failed: {}
+mt Il-bind UDP fuq il-port {} falla: {}
+
+@ Connection accepted by {}
+mt Konnessjoni aċċettata minn {}
+
+@ Connection failed: {}
+mt Il-konnessjoni falliet: {}
+
+@ Couldn't resolve {}
+mt Ma setax jiġi riżolt {}
+
+@ Connecting to {}...
+mt Qed nikkonnettja ma' {}...
+
+@ Connecting to QuakeWorld server {}...
+mt Qed nikkonnettja mas-server QuakeWorld {}...
+
+@ Disconnected: {}
+mt Skonnettjat: {}
+
+@ Server disconnected
+mt Is-server skonnettja
+
+@ Client {} connected
+mt Il-klijent {} ikkonnettja
+
+@ Client {} timed out
+mt Il-klijent {} skada l-ħin
+
+@ Couldn't spawn server {}: {}
+mt Ma setax jinbeda s-server {}: {}
+
+@ maxplayers can not be changed while a server is running.
+mt maxplayers ma jistax jinbidel waqt li server ikun għaddej.
+
+@ You can't kick yourself!
+mt Ma tistax tkeċċi lilek innifsek!
+
+@ Only the server may changelevel
+mt Is-server biss jista' jagħmel changelevel
+
+@ {} renamed to {}
+mt {} biddel ismu għal {}

@@ -1,0 +1,3024 @@
+# sq: the port's own text; English keys from crates/qcore/lang/*.txt.
+# Format in crates/qcore/src/lang/catalog.rs; check with tools/lang_check.py.
+
+# ==== menu.txt ====
+
+# Options pages: page names, row labels and choice values.
+@ 10% speed
+sq shpejtësi 10%
+
+@ 2 split-screen
+sq 2 në ekran të ndarë
+
+@ 3 split-screen
+sq 3 në ekran të ndarë
+
+@ 4 split-screen
+sq 4 në ekran të ndarë
+
+@ 5 split-screen
+sq 5 në ekran të ndarë
+
+@ 6 split-screen
+sq 6 në ekran të ndarë
+
+@ 2D aiming
+sq Shënjim 2D
+
+@ 2x monsters
+sq 2× përbindësha
+
+@ 3x monsters
+sq 3× përbindësha
+
+@ 4x monsters
+sq 4× përbindësha
+
+@ 3D resolution
+sq Rezolucioni 3D
+
+@ 3D view
+sq Pamje 3D
+
+@ 8-bit Color
+sq Ngjyra 8-bit
+
+@ Accessibility
+sq Aksesueshmëria
+
+@ Acquisition Cone
+sq Koni i kapjes
+
+@ Activation
+sq Aktivizimi
+
+@ Add a ringing room tail after the cue
+sq Shton një jehonë dhome pas sinjalit
+
+@ Add delayed repeats after the cue
+sq Shton përsëritje të vonuara pas sinjalit
+
+@ Add saturation and distortion
+sq Shton ngopje dhe shtrembërim
+
+@ Add-ons
+sq Shtesat
+
+@ Address
+sq Adresa
+
+@ Adds fine noise to hide color banding
+sq Shton zhurmë të hollë për të fshehur shiritat e ngjyrave
+
+@ Advanced Settings
+sq Cilësime të avancuara
+
+@ Aim Assist
+sq Ndihma në shënjim
+
+@ Aim Rotation
+sq Rrotullimi i shënjimit
+
+@ Aim Slowdown
+sq Ngadalësimi i shënjimit
+
+@ Aim Style
+sq Stili i shënjimit
+
+@ All
+sq Të gjitha
+
+@ All enemies
+sq Të gjithë armiqtë
+
+@ Alt Fire (Add-ons)
+sq Zjarr alternativ (Shtesat)
+
+@ Always Run
+sq Vrapo gjithmonë
+
+@ Ambient Occlusion
+sq Okluzioni ambiental
+
+@ Ammo Counts
+sq Numëruesit e municionit
+
+@ Ammo Counts Position
+sq Pozicioni i numëruesve
+
+@ Ammo Pickups
+sq Municion i mbledhur
+
+@ Anisotropic
+sq Anizotropik
+
+@ Anti-aliasing
+sq Zbutja e skajeve
+
+@ Apply To
+sq Zbato për
+
+@ Armor
+sq Parzmorja
+
+@ Armor Position
+sq Pozicioni i parzmores
+
+@ Ask
+sq Pyet
+
+@ Attack
+sq Sulmo
+
+@ Audio
+sq Audio
+
+@ Auto-aim
+sq Shënjim automatik
+
+@ Auto-aim Settings
+sq Cilësimet e shënjimit automatik
+
+@ Autosave
+sq Autoruajtja
+
+@ Autosave Settings
+sq Cilësimet e autoruajtjes
+
+@ Autosave Timer
+sq Intervali i autoruajtjes
+
+@ Autosaves to Keep
+sq Autoruajtje të mbajtura
+
+@ Bass
+sq Basi
+
+@ Blip
+sq Bip
+
+@ Blood Quality
+sq Cilësia e gjakut
+
+@ Blood Splatter Settings
+sq Cilësimet e spërkatjes së gjakut
+
+@ Blue
+sq Blu
+
+@ Boomerang Settings
+sq Cilësimet e bumerangut
+
+@ Boost or cut high frequencies in decibels
+sq Rrit ose ul frekuencat e larta në decibelë
+
+@ Boost or cut low frequencies in decibels
+sq Rrit ose ul frekuencat e ulëta në decibelë
+
+@ Brightness
+sq Ndriçimi
+
+@ Bullet Time (Add-ons)
+sq Bullet Time (Shtesat)
+
+@ Bullet Time Settings
+sq Cilësimet e Bullet Time
+
+@ Button Glyphs
+sq Simbolet e butonave
+
+@ Button Size
+sq Madhësia e butonave
+
+@ Camera
+sq Kamera
+
+@ Caustic Intensity
+sq Intensiteti i kaustikës
+
+@ Caustics
+sq Kaustika
+
+@ Center
+sq Qendër
+
+@ Center Message Position
+sq Pozicioni i mesazheve qendrore
+
+@ Center Message Time
+sq Kohëzgjatja e mesazheve qendrore
+
+@ Center View
+sq Qendërzo pamjen
+
+@ Change Color on Kill
+sq Ndrysho ngjyrën kur vret
+
+@ Change Color on Target
+sq Ndrysho ngjyrën mbi shenjë
+
+@ Chime
+sq Zile
+
+@ Click
+sq Klik
+
+@ Clink
+sq Tringëllimë
+
+@ Coin
+sq Monedhë
+
+@ Color
+sq Ngjyra
+
+@ Color Filter
+sq Filtri i ngjyrave
+
+@ Color of the grenade arc
+sq Ngjyra e harkut të granatës
+
+@ Colored Lighting
+sq Ndriçim me ngjyra
+
+@ Connect
+sq Lidhu
+
+@ Contrast
+sq Kontrasti
+
+@ Controls
+sq Kontrollet
+
+@ Cooldown (ms)
+sq Rimbushja (ms)
+
+@ Crosshair Outline
+sq Kontura e shënjestrës
+
+@ Crosshair Shape
+sq Forma e shënjestrës
+
+@ Crosshair Size
+sq Madhësia e shënjestrës
+
+@ Current Ammo
+sq Municioni aktual
+
+@ Current Ammo Position
+sq Pozicioni i municionit aktual
+
+@ Customize This Game
+sq Përshtat këtë lojë
+
+@ Damage
+sq Dëmi
+
+@ Damage Taken
+sq Dëmi i marrë
+
+@ Debris
+sq Rrënojat
+
+@ Debris Quality
+sq Cilësia e rrënojave
+
+@ Debris Settings
+sq Cilësimet e rrënojave
+
+@ Directional Damage
+sq Dëmi me drejtim
+
+@ Dithering
+sq Dithering
+
+@ Dodge / Dive (Add-ons)
+sq Shmangie / Zhytje (Shtesat)
+
+@ Dragging up looks down instead of up
+sq Tërheqja lart të bën të shohësh poshtë
+
+@ Drive
+sq Ngopja
+
+@ Dynamic Lights
+sq Drita dinamike
+
+@ Echo
+sq Jehona
+
+@ Enemy Health
+sq Shëndeti i armiqve
+
+@ Enemy Wounds
+sq Plagët e armiqve
+
+@ Enhanced Blood Splatter
+sq Spërkatje gjaku e përmirësuar
+
+@ Enhanced FX
+sq Efekte të përmirësuara
+
+@ Enhanced Models
+sq Modele të përmirësuara
+
+@ Enhanced Particles
+sq Grimca të përmirësuara
+
+@ Enhanced Water
+sq Ujë i përmirësuar
+
+@ Enhancements
+sq Përmirësimet
+
+@ Equipment Wheel (Add-ons)
+sq Rrota e pajisjeve (Shtesat)
+
+@ Exploding boxes throw metal shards
+sq Kutitë që shpërthejnë hedhin copa metali
+
+@ Explosion Damage
+sq Dëmi nga shpërthimet
+
+@ Explosion Scorch Marks
+sq Gjurmë djegieje nga shpërthimet
+
+@ Explosions scorch nearby solid surfaces
+sq Shpërthimet djegin sipërfaqet e ngurta pranë
+
+@ Explosives only
+sq Vetëm eksplozivë
+
+@ Extra Monsters
+sq Përbindësha shtesë
+
+@ Extra Per 10 Damage (ms)
+sq Shtesë për çdo 10 dëm (ms)
+
+@ FX Settings
+sq Cilësimet e efekteve
+
+@ Field of View
+sq Fusha e pamjes
+
+@ Firing never uses up ammo
+sq Qitja nuk harxhon kurrë municion
+
+@ First person
+sq Vetë i pari
+
+@ Flick Time
+sq Koha e flick-ut
+
+@ Flight Speed
+sq Shpejtësia e fluturimit
+
+@ Fog
+sq Mjegulla
+
+@ Frag Limit
+sq Kufiri i fragjeve
+
+@ Freeze Duration (ms)
+sq Kohëzgjatja e ngrirjes (ms)
+
+@ GLQuake
+sq GLQuake
+
+@ Game Speed
+sq Shpejtësia e lojës
+
+@ Game Type
+sq Lloji i lojës
+
+@ Gameplay
+sq Loja
+
+@ Gameplay Modifiers
+sq Modifikuesit e lojës
+
+@ Gel Quality
+sq Cilësia e xhelit
+
+@ Gib Surface Painting
+sq Njollat e copave të mishit
+
+@ Gibs
+sq Copat e mishit
+
+@ Gibs and heads tumble and bounce
+sq Copat e mishit dhe kokat rrokullisen e kërcejnë
+
+@ Goggle Glow Quality
+sq Cilësia e shkëlqimit të syzeve
+
+@ Goggle Intensity
+sq Intensiteti i syzeve
+
+@ Goggle Noise
+sq Zhurma e syzeve
+
+@ Goggles Settings
+sq Cilësimet e syzeve
+
+@ Graphics
+sq Grafika
+
+@ Green
+sq E gjelbër
+
+@ Grenade Arc
+sq Harku i granatës
+
+@ Grenade Arc Settings
+sq Cilësimet e harkut të granatës
+
+@ Gun Kick
+sq Zmbrapsja e armës
+
+@ Gyro
+sq Xhiro
+
+@ Gyro & Flick Stick
+sq Xhiro & Flick Stick
+
+@ Gyro Active
+sq Xhiro aktiv
+
+@ Gyro Aiming
+sq Shënjim me xhiro
+
+@ HUD
+sq HUD
+
+@ HUD Style
+sq Stili i HUD-it
+
+@ Health
+sq Shëndeti
+
+@ Health Pickups
+sq Shëndet i mbledhur
+
+@ Health Position
+sq Pozicioni i shëndetit
+
+@ Health Regeneration
+sq Rigjenerimi i shëndetit
+
+@ Hit & Kill Sounds
+sq Tingujt e goditjes & vrasjes
+
+@ Hit Doors & Lifts
+sq Godit dyert & ashensorët
+
+@ Hit Markers
+sq Shenjat e goditjes
+
+@ Hit Sound
+sq Tingulli i goditjes
+
+@ Hitmarker Size
+sq Madhësia e shenjës së goditjes
+
+@ Hitmarker Type
+sq Lloji i shenjës së goditjes
+
+@ Hitstop Advanced
+sq Hitstop i avancuar
+
+@ Hitstop Settings
+sq Cilësimet e hitstop-it
+
+@ Hold
+sq Mbaj
+
+@ Hold lock-on
+sq Mbaj kapjen e shenjës
+
+@ Hook Enemies
+sq Kap armiqtë
+
+@ Hook Metal
+sq Kap metalin
+
+@ Hook Stone
+sq Kap gurin
+
+@ Hook Wood
+sq Kap drurin
+
+@ Hooking an enemy pulls you to it
+sq Kapja e një armiku të tërheq drejt tij
+
+@ Hookshot Range
+sq Rrezja e grremçit
+
+@ Hookshot Settings
+sq Cilësimet e grremçit
+
+@ Host Game
+sq Krijo lojë
+
+@ How far the hook flies before it retracts
+sq Sa larg fluturon grremçi para se të kthehet
+
+@ How visible the on-screen controls are
+sq Sa të dukshme janë kontrollet në ekran
+
+@ Impact Lifetime
+sq Kohëzgjatja e goditjeve
+
+@ Infinite Ammo
+sq Municion i pafund
+
+@ Input
+sq Hyrja
+
+@ Input Scale
+sq Shkalla e hyrjes
+
+@ Interpolate Animation
+sq Interpolo animacionin
+
+@ Interpolate Movement
+sq Interpolo lëvizjen
+
+@ Invert Look
+sq Përmbys shikimin
+
+@ Invert Mouse
+sq Përmbys miun
+
+@ Invert Stick
+sq Përmbys levën
+
+@ Jet Quality
+sq Cilësia e rrymës
+
+@ Join Game
+sq Bashkohu në lojë
+
+@ Jump / Swim Up
+sq Kërce / Noto lart
+
+@ Jump again in mid-air
+sq Kërce sërish në ajër
+
+@ Jumps
+sq Kërcimet
+
+@ Keys & Powerups
+sq Çelësat & fuqizimet
+
+@ Keys & Powerups Position
+sq Pozicioni i çelësave & fuqizimeve
+
+@ Kill Bonus (x)
+sq Bonusi i vrasjes (x)
+
+@ Kill Sound
+sq Tingulli i vrasjes
+
+@ Knock
+sq Trokitje
+
+@ Left
+sq Majtas
+
+@ Length of the motion blur streaks
+sq Gjatësia e gjurmëve të turbullimit
+
+@ Lifetime (seconds)
+sq Jetëgjatësia (sekonda)
+
+@ Live Portal Views
+sq Pamje të gjalla portalesh
+
+@ Live View Distance
+sq Distanca e pamjes së gjallë
+
+@ Local Players
+sq Lojtarë lokalë
+
+@ Local red wounds follow enemy animation
+sq Plagë të kuqe ndjekin animacionin e armikut
+
+@ Lock Indicator
+sq Treguesi i kapjes
+
+@ Long falls don't hurt
+sq Rëniet e gjata nuk dëmtojnë
+
+@ Longest Freeze (ms)
+sq Ngrirja më e gjatë (ms)
+
+@ Look Down
+sq Shiko poshtë
+
+@ Look Speed
+sq Shpejtësia e shikimit
+
+@ Look Up
+sq Shiko lart
+
+@ Main Menu Music
+sq Muzika e menysë kryesore
+
+@ Max FPS
+sq FPS maks.
+
+@ Max Players
+sq Lojtarë maks.
+
+@ Maximum Impacts
+sq Goditje maksimale
+
+@ Maximum Marks
+sq Gjurmë maksimale
+
+@ Maximum Range
+sq Rrezja maksimale
+
+@ Melee only
+sq Vetëm trupazi
+
+@ Message Background
+sq Sfondi i mesazheve
+
+@ Message Text Size
+sq Madhësia e tekstit të mesazheve
+
+@ Messages & Captions
+sq Mesazhet & titrat
+
+@ Meter Duration (real seconds)
+sq Kohëzgjatja e matësit (sekonda reale)
+
+@ Minimum Damage
+sq Dëmi minimal
+
+@ Mode
+sq Modaliteti
+
+@ Modern Console
+sq Konsolë moderne
+
+@ Modern HUD Layout
+sq Paraqitje moderne e HUD-it
+
+@ Most recent save
+sq Ruajtja më e fundit
+
+@ Motion Blur
+sq Turbullimi i lëvizjes
+
+@ Motion Blur Amount
+sq Sasia e turbullimit
+
+@ Motion Blur Quality
+sq Cilësia e turbullimit
+
+@ Mouse & Keyboard
+sq Miu & tastiera
+
+@ Mouse Speed
+sq Shpejtësia e miut
+
+@ Move Back
+sq Prapa
+
+@ Move Forward
+sq Para
+
+@ Music Volume
+sq Volumi i muzikës
+
+@ Next Weapon
+sq Arma tjetër
+
+@ No Drowning
+sq Pa mbytje
+
+@ No Fall Damage
+sq Pa dëm nga rëniet
+
+@ No Manual Saves
+sq Pa ruajtje manuale
+
+@ No Self Damage
+sq Pa vetëdëmtim
+
+@ Noise Filter
+sq Filtri i zhurmës
+
+@ Normal Color
+sq Ngjyra normale
+
+@ Notify Message Position
+sq Pozicioni i njoftimeve
+
+@ Notify Message Time
+sq Kohëzgjatja e njoftimeve
+
+@ Number of splatter rays per blood impact
+sq Numri i rrezeve të spërkatjes për çdo goditje gjaku
+
+@ Off
+sq Joaktiv
+
+@ On Death
+sq Në vdekje
+
+@ On Kill Color
+sq Ngjyra kur vret
+
+@ On Target Color
+sq Ngjyra mbi shenjë
+
+@ Opacity
+sq Opaciteti
+
+@ Opacity of the grenade arc
+sq Opaciteti i harkut të granatës
+
+@ Pants Color
+sq Ngjyra e pantallonave
+
+@ Particle Quality
+sq Cilësia e grimcave
+
+@ Particles
+sq Grimcat
+
+@ Physical Nail Impacts
+sq Goditje fizike të gozhdëve
+
+@ Pistol Start
+sq Fillim me pistoletë
+
+@ Pitch
+sq Lartësia e tonit
+
+@ Pitch Sensitivity
+sq Ndjeshmëria vertikale
+
+@ Playback Speed
+sq Shpejtësia e luajtjes
+
+@ Player Setup
+sq Profili i lojtarit
+
+@ Pop
+sq Pop
+
+@ Portal Gun Settings
+sq Cilësimet e armës së portaleve
+
+@ Portal Recursion
+sq Rekursioni i portaleve
+
+@ Portal View Quality
+sq Cilësia e pamjes së portaleve
+
+@ Preview Sound
+sq Dëgjo tingullin
+
+@ Previous Weapon
+sq Arma e mëparshme
+
+@ Projectile Shotguns Settings
+sq Cilësimet e pushkëve me predha
+
+@ Projectile Speed (units/s)
+sq Shpejtësia e predhës (njësi/s)
+
+@ Purple
+sq Vjollcë
+
+@ Push
+sq Shtytja
+
+@ Push Strength
+sq Forca e shtytjes
+
+@ Quick Load
+sq Ngarkim i shpejtë
+
+@ Quick Save
+sq Ruajtje e shpejtë
+
+@ Railgun Settings
+sq Cilësimet e railgun-it
+
+@ Ranged only
+sq Vetëm nga larg
+
+@ Reacquire While Held
+sq Rikap duke mbajtur
+
+@ Red
+sq E kuqe
+
+@ Reduce Motion
+sq Pakëso lëvizjet
+
+@ Regen (seconds per second)
+sq Rigjenerimi (sekonda për sekondë)
+
+@ Render Scale
+sq Shkalla e renderimit
+
+@ Reverb
+sq Reverbi
+
+@ Right
+sq Djathtas
+
+@ Ripple Intensity
+sq Intensiteti i valëzimeve
+
+@ Ripples
+sq Valëzimet
+
+@ Roll Sensitivity
+sq Ndjeshmëria e anësimit
+
+@ Rumble
+sq Dridhja
+
+@ Run
+sq Vrapo
+
+@ Save on All Enemies Killed
+sq Ruaj kur vriten të gjithë armiqtë
+
+@ Save on All Secrets Found
+sq Ruaj kur gjenden të gjitha sekretet
+
+@ Save on Level Entry
+sq Ruaj në hyrje të nivelit
+
+@ Save on Secret Found
+sq Ruaj kur gjendet një sekret
+
+@ Scoreboard
+sq Tabela e pikëve
+
+@ Screen Flashes
+sq Ndezjet e ekranit
+
+@ Screen Shader
+sq Shaderi i ekranit
+
+@ Screen Shake
+sq Dridhja e ekranit
+
+@ Search LAN
+sq Kërko në LAN
+
+@ Seconds a center-screen message stays up
+sq Sekonda që qëndron një mesazh në qendër të ekranit
+
+@ See Through Portals
+sq Shiko përmes portaleve
+
+@ See-through Teleporters
+sq Teleportues të tejdukshëm
+
+@ Shirt Color
+sq Ngjyra e bluzës
+
+@ Shotgun Bullet Decals
+sq Gjurmë saçmash
+
+@ Shoulder left
+sq Supi majtas
+
+@ Shoulder right
+sq Supi djathtas
+
+@ Show FPS
+sq Shfaq FPS
+
+@ Show Face
+sq Shfaq fytyrën
+
+@ Shrapnel
+sq Ashklat
+
+@ Size of on-screen messages and captions
+sq Madhësia e mesazheve dhe titrave në ekran
+
+@ Skill
+sq Vështirësia
+
+@ Sky Fog
+sq Mjegulla e qiellit
+
+@ Smooths the stepped movement of monsters
+sq Zbut lëvizjen me hapa të përbindëshave
+
+@ Sound
+sq Tingulli
+
+@ Sound Captions
+sq Titrat e tingujve
+
+@ Sound Volume
+sq Volumi i tingujve
+
+@ Speed Blur
+sq Turbullimi i shpejtësisë
+
+@ Splashes
+sq Spërkatjet
+
+@ Splatter Amount
+sq Sasia e spërkatjes
+
+@ Splatter Size
+sq Madhësia e spërkatjes
+
+@ Start Game
+sq Nis lojën
+
+@ Staying underwater doesn't hurt
+sq Qëndrimi nën ujë nuk dëmton
+
+@ Stick Look Pitch
+sq Shikimi vertikal me levë
+
+@ Stick Look Yaw
+sq Shikimi horizontal me levë
+
+@ Strafe Left
+sq Anash majtas
+
+@ Strafe Right
+sq Anash djathtas
+
+@ Strength of the surface swell and rings
+sq Forca e valëve dhe rrathëve në sipërfaqe
+
+@ Stun Duration
+sq Kohëzgjatja e shtangimit
+
+@ Style
+sq Stili
+
+@ Supersampling
+sq Supersampling
+
+@ Surface Hit Effects
+sq Efektet e goditjes në sipërfaqe
+
+@ Swim Down
+sq Noto poshtë
+
+@ Targets
+sq Shenjat
+
+@ Teamplay
+sq Lojë në ekip
+
+@ Texture Filter
+sq Filtri i teksturave
+
+@ Third person
+sq Vetë i treti
+
+@ Thud
+sq Goditje e shurdhët
+
+@ Tick
+sq Tik
+
+@ Time Limit
+sq Kufiri i kohës
+
+@ Time Stretch
+sq Zgjatja e kohës
+
+@ Toggle Attack
+sq Sulm me ndërrim
+
+@ Toggle Run
+sq Vrap me ndërrim
+
+@ Toggle auto-aim
+sq Ndërro shënjimin automatik
+
+@ Touch Controls
+sq Kontrollet me prekje
+
+@ Touchscreen
+sq Ekrani me prekje
+
+@ Tough Enemy Health
+sq Shëndeti i armiqve të fortë
+
+@ Tough enemies only
+sq Vetëm armiqtë e fortë
+
+@ Trail Colour
+sq Ngjyra e gjurmës
+
+@ Translate Console
+sq Përkthe konsolën
+
+@ Translucent Water
+sq Ujë i tejdukshëm
+
+@ Treble
+sq Diskanti
+
+@ Turn Left
+sq Kthehu majtas
+
+@ Turn Right
+sq Kthehu djathtas
+
+@ Underwater FX
+sq Efektet nën ujë
+
+@ Use Bullet Time Meter
+sq Përdor matësin e Bullet Time
+
+@ VSync
+sq VSync
+
+@ View Bob
+sq Lëkundja e pamjes
+
+@ Viewmodels
+sq Modelet e armëve
+
+@ Volume
+sq Volumi
+
+@ Water Opacity
+sq Opaciteti i ujit
+
+@ Water Quality
+sq Cilësia e ujit
+
+@ Water Settings
+sq Cilësimet e ujit
+
+@ Weapon Wheel
+sq Rrota e armëve
+
+@ Weapon Wheel Slowdown
+sq Ngadalësimi i rrotës së armëve
+
+@ Weapons
+sq Armët
+
+@ Weapons Position
+sq Pozicioni i armëve
+
+@ Where center-screen messages appear
+sq Ku shfaqen mesazhet në qendër të ekranit
+
+@ Where pickup and event messages appear
+sq Ku shfaqen mesazhet e mbledhjes dhe ngjarjeve
+
+@ White
+sq E bardhë
+
+@ Yaw Sensitivity
+sq Ndjeshmëria horizontale
+
+@ Yellow
+sq E verdhë
+
+# lowercase choice values
+@ T
+sq T
+
+@ always
+sq gjithmonë
+
+@ auto
+sq auto
+
+@ banded
+sq me shirita
+
+@ borderless
+sq pa kornizë
+
+@ bottom center
+sq poshtë në qendër
+
+@ bottom left
+sq poshtë majtas
+
+@ bottom right
+sq poshtë djathtas
+
+@ box
+sq kuti
+
+@ broken square
+sq katror i ndërprerë
+
+@ classic
+sq klasik
+
+@ coarse
+sq i trashë
+
+@ cooperative
+sq bashkëpunim
+
+@ cross
+sq kryq
+
+@ cross + dot
+sq kryq + pikë
+
+@ cyan
+sq cian
+
+@ dashed
+sq me viza
+
+@ deathmatch
+sq deathmatch
+
+@ deuteranopia
+sq deuteranopi
+
+@ diagonal streaks
+sq vija diagonale
+
+@ diamond
+sq romb
+
+@ dot
+sq pikë
+
+@ double
+sq dyfish
+
+@ double chevrons
+sq kënde të dyfishta
+
+@ double diagonals
+sq diagonale të dyfishta
+
+@ easy
+sq lehtë
+
+@ fine
+sq i hollë
+
+@ fit output
+sq sipas daljes
+
+@ flick stick
+sq flick stick
+
+@ fullscreen
+sq ekran i plotë
+
+@ gap cross
+sq kryq i hapur
+
+@ green
+sq jeshile
+
+@ grey
+sq gri
+
+@ half speed
+sq gjysmë shpejtësie
+
+@ hard
+sq vështirë
+
+@ high
+sq e lartë
+
+@ huge
+sq shumë i madh
+
+@ immersive
+sq zhytës
+
+@ intense
+sq intensiv
+
+@ large
+sq i madh
+
+@ larger
+sq më i madh
+
+@ largest
+sq më i madhi
+
+@ linear
+sq linear
+
+@ low
+sq e ulët
+
+@ lower
+sq poshtë
+
+@ magenta
+sq magenta
+
+@ medium
+sq mesatare
+
+@ middle
+sq mes
+
+@ middle left
+sq mes majtas
+
+@ middle right
+sq mes djathtas
+
+@ modern
+sq modern
+
+@ nearest
+sq më i afërti
+
+@ nightmare
+sq makth
+
+@ nintendo
+sq nintendo
+
+@ no team damage
+sq pa dëm ndaj ekipit
+
+@ none
+sq asnjë
+
+@ normal
+sq normal
+
+@ off
+sq joaktiv
+
+@ off while held
+sq joaktiv kur mbahet
+
+@ on
+sq aktiv
+
+@ only while held
+sq vetëm kur mbahet
+
+@ playstation
+sq playstation
+
+@ protanopia
+sq protanopi
+
+@ quarter speed
+sq çerek shpejtësie
+
+@ red
+sq e kuqe
+
+@ short diagonals
+sq diagonale të shkurtra
+
+@ single
+sq i vetëm
+
+@ small
+sq i vogël
+
+@ solid
+sq i plotë
+
+@ spectacle
+sq spektakolar
+
+@ subtle
+sq i lehtë
+
+@ team damage
+sq dëm ndaj ekipit
+
+@ top center
+sq lart në qendër
+
+@ top left
+sq lart majtas
+
+@ top right
+sq lart djathtas
+
+@ triple
+sq trefish
+
+@ tritanopia
+sq tritanopi
+
+@ upper
+sq lart
+
+@ white
+sq e bardhë
+
+@ whole screen
+sq i gjithë ekrani
+
+@ windowed
+sq në dritare
+
+@ xbox
+sq xbox
+
+@ yellow
+sq e verdhë
+
+# ==== tooltips.txt ====
+
+# Options help lines (tooltips) and reasons for disabled rows.
+@ 2D aiming turns the view continuously with the right stick; flick stick snaps the view to where you push the stick, then turning the stick rotates it
+sq Shënjimi 2D e kthen pamjen vazhdimisht me levën e djathtë; flick stick e drejton menjëherë pamjen ku shtyn levën, pastaj rrotullimi i levës e kthen
+
+@ 3D resolution relative to the window; the UI stays sharp
+sq Rezolucioni 3D në raport me dritaren; ndërfaqja mbetet e mprehtë
+
+@ 3D view keeps the HUD and menus sharp; whole screen runs them through the shader too
+sq Pamja 3D i mban HUD-in dhe menytë të mprehta; i gjithë ekrani i kalon edhe ato përmes shaderit
+
+@ A Quake III style railgun: a slug that pierces every enemy on its line, using 2 cells a shot and refiring every 1.5 s; select it through its assigned weapon slot (Add-ons)
+sq Një railgun si në Quake III: një predhë që shpon çdo armik në vijën e saj, 2 qeliza për të shtënë dhe një të shtënë çdo 1,5 s; zgjidhe përmes vendit të caktuar të armës (Shtesat)
+
+@ A Zelda-style hookshot: fire sends a chain hook out; it latches onto hookable surfaces or enemies and reels you in; fire again to let go
+sq Një grremç si në Zelda: qitja hedh një grep me zinxhir që kapet në sipërfaqe të përshtatshme ose armiq dhe të tërheq; qit sërish për ta lëshuar
+
+@ Also translates the engine's console messages; off keeps them in English
+sq Përkthen edhe mesazhet e konsolës së motorit; joaktiv i lë në anglisht
+
+@ Automatically acquire another enemy while holding Lock-on after losing a target
+sq Kap automatikisht një armik tjetër duke mbajtur Kapjen e shenjës pasi humbet një shenjë
+
+@ Blends between animation frames of monsters and weapons
+sq Shkrin kornizat e animacionit të përbindëshave dhe armëve
+
+@ Blood stains surfaces and bodies; cosmetic, independent of particle packs
+sq Gjaku njollos sipërfaqet dhe trupat; vetëm kozmetik, i pavarur nga paketat e grimcave
+
+@ Bloom glow around bright lights and heat sources; medium uses 4 taps, high uses 8, low disables halo taps
+sq Shkëlqim rreth dritave të forta dhe burimeve të nxehtësisë; mesatare përdor 4 mostra, e lartë 8, e ulët e çaktivizon halon
+
+@ Blurs fast-moving monsters, projectiles and doors (not camera turns)
+sq Turbullon përbindëshat, predhat dhe dyert e shpejta (jo rrotullimet e kamerës)
+
+@ Blurs the screen edges during fast falls and launches; keeps the centre clear. Reduce Motion disables it
+sq Turbullon skajet e ekranit gjatë rënieve dhe hedhjeve të shpejta; qendra mbetet e qartë. Pakëso lëvizjet e çaktivizon
+
+@ Brightness of the underwater light patterns
+sq Ndriçimi i motiveve të dritës nën ujë
+
+@ Caps mark count, lifetime, airborne droplets and wound/gib painting; low skips enemy wounds and gib trails
+sq Kufizon numrin dhe kohëzgjatjen e gjurmëve, pikat në ajër dhe njollat e plagëve/copave; e ulët kapërcen plagët e armiqve dhe gjurmët e copave
+
+@ Caps shader input at output size so 200% render scale keeps 3D sharpness without 4x shader cost; low scales stay low-res
+sq Kufizon hyrjen e shaderit në madhësinë e daljes, që shkalla 200% të ruajë mprehtësinë 3D pa koston 4× të shaderit; shkallët e ulëta mbeten me rezolucion të ulët
+
+@ Classic: the original status bar; modern: compact elements at the screen edges
+sq Klasik: shiriti origjinal i gjendjes; modern: elemente kompakte në skajet e ekranit
+
+@ Coat atlas resolution, rebuild rate and shader detail: low builds smaller coats less often with fast shading; high uses full detail
+sq Rezolucioni i atlasit të shtresave, ritmi i rindërtimit dhe detajet e shaderit: e ulët ndërton shtresa më të vogla më rrallë me hijezim të shpejtë; e lartë përdor detaje të plota
+
+@ Colour of the railgun's spiral trail; split-screen players each get the next colour along
+sq Ngjyra e gjurmës spirale të railgun-it; në ekran të ndarë çdo lojtar merr ngjyrën pasardhëse
+
+@ Damage the railgun deals to each enemy it passes through (Quake III: 100)
+sq Dëmi që railgun-i i shkakton çdo armiku që përshkon (Quake III: 100)
+
+@ Dark backdrop behind on-screen messages for readability
+sq Sfond i errët pas mesazheve në ekran për lexueshmëri
+
+@ Dark border keeps the crosshair visible on any background
+sq Kontura e errët e mban shënjestrën të dukshme në çdo sfond
+
+@ Darkens corners and contact areas where geometry meets; higher quality is sharper
+sq Errëson qoshet dhe zonat e kontaktit ku takohet gjeometria; cilësia më e lartë është më e mprehtë
+
+@ Debris lands on and is carried or shoved by doors, lifts and platforms
+sq Rrënojat bien mbi dyer, ashensorë dhe platforma dhe barten ose shtyhen prej tyre
+
+@ Detail for caustics, ripples and splashes: low uses smaller budgets and shorter view distance; high uses larger budgets and farther view distance
+sq Detajet e kaustikës, valëzimeve dhe spërkatjeve: e ulët përdor buxhete më të vogla dhe distancë më të shkurtër; e lartë buxhete më të mëdha dhe distancë më të largët
+
+@ Disabled while Enhanced Particles is on: its particles replace the GLQuake and Classic styles
+sq Joaktiv kur Grimca të përmirësuara është aktiv: grimcat e tij zëvendësojnë stilet GLQuake dhe klasik
+
+@ Disabled while Enhanced Water is on: its own underwater effects replace the classic and GLQuake view warps
+sq Joaktiv kur Ujë i përmirësuar është aktiv: efektet e tij nën ujë zëvendësojnë shtrembërimet klasike dhe GLQuake
+
+@ Draw the predicted grenade path as a solid or dashed line
+sq Vizaton rrugën e parashikuar të granatës si vijë të plotë ose me viza
+
+@ Draw the view out of the linked portal inside each portal; off shows flat discs (fastest)
+sq Vizaton brenda çdo portali pamjen nga portali i lidhur; joaktiv shfaq disqe të sheshta (më e shpejta)
+
+@ Droplets spray up when things enter or leave water, slime or lava
+sq Pikat spërkasin kur diçka hyn ose del nga uji, llumi ose lava
+
+@ Emulates the original 8-bit palette of software rendering
+sq Imiton paletën origjinale 8-bit të renderimit me softuer
+
+@ Every level starts with only the shotgun and axe, as if started fresh
+sq Çdo nivel nis vetëm me pushkën me saçma dhe sëpatën, si në një fillim të ri
+
+@ Explosion damage for each remotely detonated sticky bomb
+sq Dëmi i shpërthimit për çdo bombë ngjitëse të shpërthyer nga larg
+
+@ Extra freeze milliseconds for every 10 damage dealt, so heavy hits stop longer
+sq Milisekonda ngrirjeje shtesë për çdo 10 dëm, që goditjet e rënda të ndalin më gjatë
+
+@ First person, a third-person camera centered behind the player, or one over the right or left shoulder; third person hides viewmodels
+sq Vetë i pari, një kamerë vetë i treti pas lojtarit ose mbi supin e djathtë a të majtë; vetë i treti fsheh modelet e armëve
+
+@ Flash the selected marker on confirmed hits; colors are shared with the crosshair
+sq Ndez shenjën e zgjedhur në goditje të konfirmuara; ngjyrat ndahen me shënjestrën
+
+@ Freeze for every enemy, or only for enemies that were tough before the hit
+sq Ngrin për çdo armik ose vetëm për armiqtë që ishin të fortë para goditjes
+
+@ Freeze the game briefly when you damage an enemy; single player with add-ons only
+sq Ngrin lojën shkurtimisht kur dëmton një armik; vetëm një lojtar me shtesa
+
+@ Gibs tumble and barrels throw shrapnel; shots and blasts push them (cosmetic only)
+sq Copat e mishit rrokullisen dhe fuçitë hedhin ashkla; të shtënat dhe shpërthimet i shtyjnë (vetëm kozmetik)
+
+@ Health an enemy must have had before the hit to count as tough
+sq Shëndeti që duhet të ketë pasur një armik para goditjes për t'u quajtur i fortë
+
+@ Hits dealing less damage than this do not freeze the game; the default 10 skips nails and shotgun pellets
+sq Goditjet me më pak dëm se kjo nuk e ngrijnë lojën; vlera 10 si parazgjedhje kapërcen gozhdët dhe saçmat
+
+@ Hold fire and sweep the crosshair over monsters to queue them, release to throw: it stuns each in turn and flies back; alt-fire clears the queue
+sq Mbaj qitjen dhe kalo shënjestrën mbi përbindëshat për t'i radhitur, lësho për të hedhur: shtang secilin me radhë dhe kthehet; zjarri alternativ pastron radhën
+
+@ Hold: keep Lock-on held. Toggle: press Auto-aim Toggle to enable automatic acquisition. Click look stick to switch targets
+sq Mbaj: mbaj shtypur Kapjen e shenjës. Ndërro: shtyp Ndërro shënjimin automatik për kapje automatike. Kliko levën e shikimit për të ndërruar shenjën
+
+@ How close an enemy must be to the crosshair for automatic acquisition in toggle mode (degrees)
+sq Sa afër shënjestrës duhet të jetë një armik për kapje automatike në modalitetin me ndërrim (gradë)
+
+@ How far the view tilts up and down when you tilt the controller (pitch axis)
+sq Sa anon pamja lart e poshtë kur anon kontrolluesin (boshti vertikal)
+
+@ How far the view turns left and right when you turn the controller (yaw axis)
+sq Sa kthehet pamja majtas e djathtas kur kthen kontrolluesin (boshti horizontal)
+
+@ How far the view turns when you drag on the right half of the screen
+sq Sa kthehet pamja kur tërheq në gjysmën e djathtë të ekranit
+
+@ How fast the boomerang flies (units per second)
+sq Sa shpejt fluturon bumerangu (njësi për sekondë)
+
+@ How hard shots and explosions push debris around
+sq Sa fort i shtyjnë rrënojat të shtënat dhe shpërthimet
+
+@ How hard the Powerwasher's water pushes enemies
+sq Sa fort i shtyn armiqtë uji i Pastruesit me presion
+
+@ How long a hit freezes the game, in milliseconds
+sq Sa gjatë e ngrin lojën një goditje, në milisekonda
+
+@ How strongly fog covers the sky when fog is on
+sq Sa fort e mbulon mjegulla qiellin kur mjegulla është aktive
+
+@ How the view distorts underwater: Classic ripples the whole screen like software Quake, GLQuake slowly stretches and squashes the view
+sq Si shtrembërohet pamja nën ujë: Klasik valëzon gjithë ekranin si Quake me softuer, GLQuake e zgjat dhe e shtyp pamjen ngadalë
+
+@ Ignores gyro rotation slower than this many degrees per second, to hide hand tremor
+sq Shpërfill rrotullimin e xhiros më të ngadaltë se kaq gradë në sekondë, për të fshehur dridhjen e dorës
+
+@ Immersive: appears for a few seconds only when its value changes
+sq Zhytës: shfaqet për pak sekonda vetëm kur ndryshon vlera
+
+@ Keeps textures sharp on floors and walls seen at steep angles
+sq I mban teksturat të mprehta në dysheme dhe mure të para në kënde të pjerrëta
+
+@ Lights from rockets, muzzle flashes and explosions brighten nearby walls
+sq Dritat e raketave, flakëve të grykës dhe shpërthimeve ndriçojnë muret pranë
+
+@ Liquid surfaces swell and ring out where things move through them
+sq Sipërfaqet e lëngjeve valëzohen dhe krijojnë rrathë ku diçka lëviz përmes tyre
+
+@ Lobs sticky bombs (rockets ammo) that cling to walls, doors and monsters; alt-fire detonates them all
+sq Hedh bomba ngjitëse (municion raketash) që ngjiten në mure, dyer dhe përbindësha; zjarri alternativ i shpërthen të gjitha
+
+@ Look of the classic particles: GLQuake draws soft round dots, Classic draws square pixels like software Quake
+sq Pamja e grimcave klasike: GLQuake vizaton pika të buta të rrumbullakëta, Klasik piksele katrore si Quake me softuer
+
+@ Low skips the background smear halo and uses fewer blur samples; high keeps the full halo and smoother streaks
+sq E ulët kapërcen halon e njollosjes së sfondit dhe përdor më pak mostra; e lartë mban halon e plotë dhe gjurmë më të buta
+
+@ Low: hard particle edges, half the scripted particles and fewer hit sparks. Medium: soft edges. High: soft edges checked per MSAA sample, most hit sparks
+sq E ulët: skaje të forta grimcash, gjysma e grimcave të skriptuara dhe më pak shkëndija. Mesatare: skaje të buta. E lartë: skaje të buta për çdo mostër MSAA, shumica e shkëndijave
+
+@ Marks fade out before expiring; oldest marks are recycled at the limit
+sq Gjurmët zbehen para se të skadojnë; më të vjetrat riciklohen në kufi
+
+@ Max nested portal reflections to draw; each level redraws the scene
+sq Maksimumi i reflektimeve të ndërthurura të portaleve; çdo nivel e rivizaton skenën
+
+@ Max portals per screen with a live view; each one redraws the scene
+sq Maksimumi i portaleve me pamje të gjallë për ekran; secili e rivizaton skenën
+
+@ Maximum distance for acquiring and keeping an enemy locked
+sq Distanca maksimale për të kapur dhe mbajtur një armik
+
+@ Minimum gap between freezes, so shotgun pellets and rapid fire count once; kills ignore it
+sq Hapësira minimale mes ngrirjeve, që saçmat dhe zjarri i shpejtë të numërohen një herë; vrasjet e shpërfillin
+
+@ Modern terminal console with autocomplete popup, history search, ANSI colors, bash shell and piping; off uses the classic Quake console
+sq Konsolë moderne terminali me plotësim automatik, kërkim në histori, ngjyra ANSI, shell bash dhe pipe; joaktiv përdor konsolën klasike të Quake
+
+@ Monsters take proportionally less damage at higher values; above 100% is harder
+sq Përbindëshat marrin proporcionalisht më pak dëm me vlera më të larta; mbi 100% është më e vështirë
+
+@ Moving gibs leave blood on surfaces they touch
+sq Copat e mishit në lëvizje lënë gjak në sipërfaqet që prekin
+
+@ Multiplier on the freeze when the hit kills the enemy; 1 means no extra
+sq Shumëzuesi i ngrirjes kur goditja e vret armikun; 1 do të thotë pa shtesë
+
+@ Multiplies ammo from pickups (up to the normal carry limit); below 100% is harder
+sq Shumëzon municionin e mbledhur (deri në kufirin normal); nën 100% është më e vështirë
+
+@ Multiplies health from pickups (up to 100, or the item's own limit); below 100% is harder
+sq Shumëzon shëndetin e mbledhur (deri në 100 ose kufirin e sendit); nën 100% është më e vështirë
+
+@ Nails stick to wood and bodies; hard surfaces deflect them to the floor
+sq Gozhdët ngecin në dru dhe trupa; sipërfaqet e forta i devijojnë në dysheme
+
+@ Nearest keeps crisp classic pixels; linear smooths textures
+sq Më i afërti mban piksele klasike të qarta; linear i zbut teksturat
+
+@ New Game: Add-ons
+sq Lojë e re: Shtesat
+
+@ New Game: Customize
+sq Lojë e re: Përshtat
+
+@ Night vision: how much dark areas are brightened; thermal: how strongly heat stands out
+sq Shikimi i natës: sa ndriçohen zonat e errëta; termik: sa dallohet nxehtësia
+
+@ Night-vision and thermal goggles, cycle normal, night vision and thermal with Change Goggles (Add-ons), or use the Equipment Wheel
+sq Syze për shikim nate dhe termike; kalo mes normal, nate dhe termik me Ndërro syzet (Shtesat) ose përdor Rrotën e pajisjeve
+
+@ No single freeze lasts longer than this, however much damage or kill bonus adds
+sq Asnjë ngrirje nuk zgjat më shumë se kaq, sado dëm ose bonus vrasjeje të shtohet
+
+@ Oldest marks and nails are recycled at this shared limit
+sq Gjurmët dhe gozhdët më të vjetra riciklohen në këtë kufi të përbashkët
+
+@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
+sq Leva dhe butonat në ekran: auto i shfaq pas një prekjeje dhe i fsheh kur përdoret një pajisje tjetër
+
+@ Only autosaves: quicksaves and the Save menu are off
+sq Vetëm autoruajtje: ruajtjet e shpejta dhe menyja Ruaj janë joaktive
+
+@ Place every weapon at the center, right or left of the view, or hide all viewmodels
+sq Vendos çdo armë në qendër, djathtas ose majtas të pamjes, ose fshih të gjitha modelet e armëve
+
+@ Play your chosen hit or kill cue when you damage an enemy
+sq Luan sinjalin e zgjedhur të goditjes ose vrasjes kur dëmton një armik
+
+@ Playback speed: faster sounds shorter and higher
+sq Shpejtësia e luajtjes: më shpejt tingëllon më shkurt dhe më lart
+
+@ Plays the Quake theme in the main menu when no game is running
+sq Luan temën e Quake në menynë kryesore kur nuk ka lojë në zhvillim
+
+@ Portals farther away than this are drawn as flat discs
+sq Portalet më larg se kaq vizatohen si disqe të sheshta
+
+@ Press attack once to keep firing, again to stop
+sq Shtyp sulmin një herë për të qitur vazhdimisht, sërish për të ndaluar
+
+@ Press run once to switch between running and walking
+sq Shtyp vrapin një herë për të kaluar mes vrapit dhe ecjes
+
+@ Raise or lower the tone independently of sound length
+sq Ngrit ose ul tonin pavarësisht nga gjatësia e tingullit
+
+@ Red screen edges show where damage came from: top is front, bottom is behind; Screen Flashes controls their strength
+sq Skajet e kuqe të ekranit tregojnë nga erdhi dëmi: lart është përpara, poshtë është prapa; Ndezjet e ekranit kontrollon fuqinë e tyre
+
+@ Replaces the classic dot particles with glowing sparks, smoke and blood; mods with their own particle effects keep them
+sq Zëvendëson grimcat klasike me shkëndija që ndriçojnë, tym dhe gjak; modet me efektet e tyre të grimcave i mbajnë ato
+
+@ Resolution and detail inside portal and teleporter views; lower tiers trim nested effects
+sq Rezolucioni dhe detajet brenda pamjeve të portaleve dhe teleportuesve; nivelet më të ulëta shkurtojnë efektet e ndërthurura
+
+@ Rippling light patterns on surfaces under water and slime
+sq Motive drite që valëzohen në sipërfaqe nën ujë dhe llum
+
+@ Scales all damage you take; above 100% is harder
+sq Shkallëzon gjithë dëmin që merr; mbi 100% është më e vështirë
+
+@ Screen edge for this element; elements on the same spot stack
+sq Skaji i ekranit për këtë element; elementet në të njëjtin vend grumbullohen
+
+@ Seconds a monster hit by the boomerang stays stunned
+sq Sekonda që një përbindësh i goditur nga bumerangu mbetet i shtangur
+
+@ Seconds impact marks and stuck nails stay before fading out; independent of Particle Quality
+sq Sekonda që gjurmët e goditjeve dhe gozhdët e ngecura qëndrojnë para se të zbehen; i pavarur nga Cilësia e grimcave
+
+@ Seconds messages at the top of the screen stay up
+sq Sekonda që mesazhet në krye të ekranit qëndrojnë
+
+@ Seconds the flick stick snap takes; lower is faster
+sq Sekonda që zgjat kthimi i flick stick; më pak është më shpejt
+
+@ See through enhanced water; enables Water Opacity
+sq Shiko përmes ujit të përmirësuar; aktivizon Opacitetin e ujit
+
+@ Sensor grain, scanlines and flicker of the goggle image
+sq Kokrrizimi i sensorit, vijat e skanimit dhe dridhja e figurës së syzeve
+
+@ Shades every anti-aliasing sample; needs Anti-aliasing on
+sq Hijezon çdo mostër të zbutjes së skajeve; kërkon Zbutjen e skajeve aktive
+
+@ Shifts colors so they stay distinct for the chosen color blindness
+sq Zhvendos ngjyrat që të dallohen për daltonizmin e zgjedhur
+
+@ Shotgun hits leave small surface marks (cosmetic only)
+sq Goditjet e pushkës me saçma lënë gjurmë të vogla në sipërfaqe (vetëm kozmetik)
+
+@ Show corner ticks at screen centre while locked, even with Crosshair off
+sq Shfaq shenja këndore në qendër të ekranit gjatë kapjes, edhe pa shënjestër
+
+@ Show where grenades and other arcing shots will fly, bounce and land; local play only, not in deathmatch
+sq Tregon ku do të fluturojnë, kërcejnë dhe bien granatat dhe të shtënat me hark; vetëm në lojë lokale, jo në deathmatch
+
+@ Shows text for important sounds: doors, alerted enemies, secrets, pickups
+sq Shfaq tekst për tingujt e rëndësishëm: dyer, armiq të alarmuar, sekrete, sende të mbledhura
+
+@ Shows the distance fog that maps and mods set; off always gives clear view
+sq Shfaq mjegullën e largësisë që vendosin hartat dhe modet; joaktiv jep gjithmonë pamje të qartë
+
+@ Shows the player face next to the health number
+sq Shfaq fytyrën e lojtarit pranë numrit të shëndetit
+
+@ Simulation detail, step rate, fade-out lifetimes and caps for gibs and shrapnel; low also skips mover collision
+sq Detajet e simulimit, ritmi i hapave, kohët e zbehjes dhe kufijtë për copat e mishit dhe ashklat; e ulët kapërcen edhe përplasjet me pjesët lëvizëse
+
+@ Size of the on-screen buttons and move stick
+sq Madhësia e butonave dhe levës së lëvizjes në ekran
+
+@ Slowly heals up to 100 health after 5 seconds without being hit
+sq Shëron ngadalë deri në 100 shëndet pas 5 sekondash pa u goditur
+
+@ Slows stick look while the crosshair is over an enemy
+sq Ngadalëson shikimin me levë kur shënjestra është mbi një armik
+
+@ Slows the game down while the weapon wheel is open
+sq Ngadalëson lojën kur rrota e armëve është e hapur
+
+@ Slows the whole game down; single player only. Saves and demos stay compatible with other ports
+sq Ngadalëson gjithë lojën; vetëm një lojtar. Ruajtjet dhe demot mbeten të përputhshme me portet e tjera
+
+@ Small camera jolt on each freeze; off with Reduce Motion
+sq Tronditje e vogël e kamerës në çdo ngrirje; joaktive me Pakëso lëvizjet
+
+@ Snap and track enemies in local play, including split-screen; unavailable online
+sq Kap dhe ndjek armiqtë në lojë lokale, edhe në ekran të ndarë; jo në internet
+
+@ Sparks, smoke, chips, splinters and splashes fly off whatever your shots hit
+sq Shkëndija, tym, cifla, ashkla dhe spërkatje fluturojnë nga çdo gjë që godasin të shtënat
+
+@ Spawns extra copies of every monster around the original when a level starts
+sq Krijon kopje shtesë të çdo përbindëshi rreth origjinalit kur nis një nivel
+
+@ Strength of the full-screen flashes for damage, pickups and powerups
+sq Fuqia e ndezjeve në gjithë ekranin për dëmin, sendet e mbledhura dhe fuqizimet
+
+@ Stretch or shorten the sound while keeping its pitch
+sq Zgjat ose shkurton tingullin duke ruajtur tonin
+
+@ Surface opacity; requires Enhanced Water and Translucent Water
+sq Opaciteti i sipërfaqes; kërkon Ujë i përmirësuar dhe Ujë i tejdukshëm
+
+@ The hook latches onto metal surfaces (metal, tech, computer panels, copper)
+sq Grepi kapet në sipërfaqe metalike (metal, teknologji, panele kompjuteri, bakër)
+
+@ The hook latches onto stone, brick, rock and any surface not recognised as wood or metal
+sq Grepi kapet në gur, tullë, shkëmb dhe çdo sipërfaqe që nuk njihet si dru ose metal
+
+@ The hook latches onto wooden surfaces (texture names like wood, crate, plank)
+sq Grepi kapet në sipërfaqe druri (emra teksturash si wood, crate, plank)
+
+@ Turn the controller's motion sensor into a look input; needs a pad with a gyroscope
+sq Kthen sensorin e lëvizjes së kontrolluesit në hyrje shikimi; kërkon kontrollues me xhiroskop
+
+@ Turns off view bob, strafe tilt and the camera kick when hit or firing
+sq Çaktivizon lëkundjen e pamjes, animin anash dhe tronditjen e kamerës kur të godasin ose qit
+
+@ Turns on the extra liquid effects; Water Settings controls each one
+sq Aktivizon efektet shtesë të lëngjeve; Cilësimet e ujit kontrollon secilin
+
+@ Turns the view to follow a moving enemy you are aiming at
+sq Kthen pamjen për të ndjekur një armik në lëvizje që po shënjon
+
+@ Turns the view when you roll the controller sideways; 0 disables it, negative reverses it
+sq Kthen pamjen kur anon kontrolluesin anash; 0 e çaktivizon, negativ e përmbys
+
+@ Two-portal gun: fire and alt-fire place linked portals on flat walls; assign a weapon slot in Add-ons
+sq Armë me dy portale: qitja dhe zjarri alternativ vendosin portale të lidhura në mure të sheshta; cakto një vend arme te Shtesat
+
+@ Unlocks the FX Settings page: enhanced particles, impact effects and blood splatter
+sq Zhbllokon faqen Cilësimet e efekteve: grimca të përmirësuara, efekte goditjeje dhe spërkatje gjaku
+
+@ Uses the 2021 re-release's smoother MD5 models (and MD3 replacements from mods) instead of the classic ones. Applies on the next map load
+sq Përdor modelet MD5 më të lëmuara të ribotimit të 2021 (dhe zëvendësimet MD3 nga modet) në vend të atyre klasike. Zbatohet në ngarkimin e hartës tjetër
+
+@ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
+sq Përdor dritën me ngjyra të hartës (skedar .lit ose bllok BSPX); joaktiv jep dritën e bardhë origjinale. Zbatohet në ngarkimin e hartës tjetër
+
+@ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
+sq Segmentet e rrymës, numri i pikave dhe hijezimi i shndritshëm i lëngut: e ulët përdor rryma më të thjeshta të tejdukshme; e lartë rryma të lëmuara e të shndritshme
+
+@ When gyro looking applies: always, off while +gyroaction is held, or only while it is held
+sq Kur zbatohet shikimi me xhiro: gjithmonë, joaktiv kur mbahet +gyroaction ose vetëm kur mbahet
+
+@ Which weapons trigger the freeze; melee covers the axe and any mod weapon used at close range without ammo
+sq Cilat armë shkaktojnë ngrirjen; trupazi përfshin sëpatën dhe çdo armë modi të përdorur nga afër pa municion
+
+@ Your own rockets and grenades don't hurt you; rocket jumps still work
+sq Raketat dhe granatat e tua nuk të dëmtojnë; kërcimet me raketë funksionojnë ende
+
+# ==== ui.txt ====
+
+# Menus and pop-ups outside the options pages: save cards, launch, presets,
+# add-on browser, map packs, hints and dialogs.
+@ Select
+sq Zgjidh
+
+@ Back
+sq Prapa
+
+@ Cancel
+sq Anulo
+
+@ Confirm
+sq Konfirmo
+
+@ Scroll
+sq Lëviz
+
+@ Section
+sq Seksioni
+
+@ Bind
+sq Cakto
+
+@ Cancel binding
+sq Anulo caktimin
+
+@ Clear
+sq Pastro
+
+@ Clear pad
+sq Pastro kontrolluesin
+
+@ Remap
+sq Ricakto
+
+@ Type
+sq Shkruaj
+
+@ Shift
+sq Shift
+
+@ Done
+sq U krye
+
+@ Del
+sq Del
+
+@ Space
+sq Hapësirë
+
+@ Save
+sq Ruaj
+
+@ Load
+sq Ngarko
+
+@ Delete
+sq Fshi
+
+@ Play
+sq Luaj
+
+@ Yes
+sq Po
+
+@ No
+sq Jo
+
+@ OK
+sq OK
+
+@ System
+sq Sistemi
+
+@ Language
+sq Gjuha
+
+@ Help
+sq Ndihmë
+
+@ Fixed for this game: it was started without Customize
+sq E fiksuar për këtë lojë: nisi pa Përshtat
+
+@ Press a button or key to bind (Start cancels)
+sq Shtyp një buton ose tast për ta caktuar (Start anulon)
+
+@ Press button...
+sq Shtyp butonin...
+
+@ Press key...
+sq Shtyp tastin...
+
+@ Replace this binding?
+sq Të zëvendësohet ky caktim?
+
+@ is already assigned
+sq është caktuar tashmë
+
+@ {} already assigned
+sq {} është caktuar tashmë
+
+@ Open Controls to remap Lock-on?
+sq Të hapen Kontrollet për të ricaktuar Kapjen e shenjës?
+
+@ Lock-on
+sq Kapja e shenjës
+
+@ Auto-aim Toggle
+sq Ndërro shënjimin automatik
+
+@ Keyboard
+sq Tastiera
+
+@ Controller
+sq Kontrolluesi
+
+# main menu, dialogs and screens
+@ Map Packs
+sq Paketat e hartave
+
+@ Customize
+sq Përshtat
+
+@ Level Select
+sq Zgjedhja e nivelit
+
+@ Really quit?
+sq Dil vërtet?
+
+@ You died
+sq Vdiqe
+
+@ Continue from most recent save
+sq Vazhdo nga ruajtja më e fundit
+
+@ Select save
+sq Zgjidh ruajtjen
+
+@ Restart level
+sq Rinis nivelin
+
+@ Return to main menu
+sq Kthehu te menyja kryesore
+
+@ (disabled)
+sq (joaktiv)
+
+@ (fixed for this game)
+sq (e fiksuar për këtë lojë)
+
+@ (off)
+sq (joaktiv)
+
+@ Apply Display Changes
+sq Zbato ndryshimet e ekranit
+
+@ Display Mode
+sq Modaliteti i ekranit
+
+@ Resolution
+sq Rezolucioni
+
+@ desktop
+sq desktop
+
+@ Preset
+sq Paracaktimi
+
+@ Map
+sq Harta
+
+@ Reset Shader Settings
+sq Rivendos cilësimet e shaderit
+
+@ Reset to Defaults
+sq Rivendos parazgjedhjet
+
+@ Searching...
+sq Duke kërkuar...
+
+@ This game only autosaves.
+sq Kjo lojë ruhet vetëm automatikisht.
+
+@ (No Manual Saves modifier)
+sq (Modifikuesi Pa ruajtje manuale)
+
+@ End the current game?
+sq Të përfundohet loja aktuale?
+
+@ Unsaved progress will be lost.
+sq Përparimi i paruajtur do të humbasë.
+
+@ End game
+sq Përfundo lojën
+
+@ Overwrite
+sq Mbishkruaj
+
+@ Overwrite "{}"?
+sq Të mbishkruhet "{}"?
+
+@ Saved {}
+sq Ruajtur {}
+
+@ Start a new game?
+sq Të niset një lojë e re?
+
+@ New game
+sq Lojë e re
+
+@ New Game
+sq Lojë e re
+
+@ CUSTOM
+sq E PËRSHTATUR
+
+@ Customize Experience
+sq Përshtat përvojën
+
+@ Disable All
+sq Çaktivizo të gjitha
+
+@ Disable All Modifications
+sq Çaktivizo të gjitha ndryshimet
+
+@ Saves load in other source ports too.
+sq Ruajtjet ngarkohen edhe në porte të tjera.
+
+@ Standard rules, no add-ons.
+sq Rregulla standarde, pa shtesa.
+
+@ Choose skill
+sq Zgjidh vështirësinë
+
+@ The current game will end
+sq Loja aktuale do të përfundojë
+
+@ Easy
+sq Lehtë
+
+@ Normal
+sq Normal
+
+@ Hard
+sq Vështirë
+
+@ Nightmare
+sq Makth
+
+# graphics preset pop-up
+@ Choose a Graphics Preset
+sq Zgjidh një paracaktim grafik
+
+@ Classic
+sq Klasik
+
+@ Like the re-release: enhanced models,
+sq Si ribotimi: modele të përmirësuara,
+
+@ no added effects.
+sq pa efekte shtesë.
+
+@ Enhanced
+sq I përmirësuar
+
+@ Every enhancement at its highest quality.
+sq Çdo përmirësim në cilësinë më të lartë.
+
+@ Needs a capable GPU.
+sq Kërkon një GPU të fuqishme.
+
+@ Low-End
+sq Minimal
+
+@ Fastest. No anti-aliasing, original
+sq Më i shpejti. Pa zbutje skajesh, modele
+
+@ models, lowest effect quality.
+sq origjinale, cilësia më e ulët e efekteve.
+
+@ Esc keeps the defaults
+sq Esc mban parazgjedhjet
+
+@ Everything can be changed later in Options.
+sq Gjithçka mund të ndryshohet më vonë te Opsionet.
+
+@ Keep Defaults
+sq Mbaj parazgjedhjet
+
+# save and load cards
+@ Save Game
+sq Ruaj lojën
+
+@ Load Game
+sq Ngarko lojën
+
+@ Autosaves
+sq Autoruajtjet
+
+@ newest first
+sq më të rejat së pari
+
+@ Saves: {}
+sq Ruajtje: {}
+
+@ Browse Autosaves
+sq Shfleto autoruajtjet
+
+@ Every retained autosave, newest first
+sq Çdo autoruajtje e mbajtur, më të rejat së pari
+
+@ New save
+sq Ruajtje e re
+
+@ Select to save your game here
+sq Zgjidh për ta ruajtur lojën këtu
+
+@ No autosaves yet
+sq Ende pa autoruajtje
+
+@ Autosaves are made on level entry, secrets and more (Options > Gameplay)
+sq Autoruajtjet bëhen në hyrje të nivelit, te sekretet e më shumë (Opsionet > Loja)
+
+@ No saves yet
+sq Ende pa ruajtje
+
+@ Save from the Single Player menu, or press F6 to quicksave
+sq Ruaj nga menyja Një lojtar ose shtyp F6 për ruajtje të shpejtë
+
+@ No picture
+sq Pa figurë
+
+@ Del: delete save
+sq Del: fshi ruajtjen
+
+@ Delete "{}"?
+sq Të fshihet "{}"?
+
+@ This cannot be undone.
+sq Kjo nuk mund të zhbëhet.
+
+@ Quicksave
+sq Ruajtje e shpejtë
+
+@ Autosave: {}
+sq Autoruajtje: {}
+
+@ unknown trigger
+sq shkak i panjohur
+
+@ Latest - {}
+sq Më e fundit - {}
+
+@ Health {}
+sq Shëndeti {}
+
+@ Armor {}
+sq Parzmorja {}
+
+@ Kills {}/{}
+sq Vrasje {}/{}
+
+@ Secrets {}/{}
+sq Sekrete {}/{}
+
+@ Split-screen, {} players
+sq Ekran i ndarë, {} lojtarë
+
+@ Co-op
+sq Bashkëpunim
+
+@ Customized
+sq E përshtatur
+
+@ Customized, {}
+sq E përshtatur, {}
+
+@ Date unavailable
+sq Data nuk ofrohet
+
+@ Just now
+sq Tani
+
+@ {} min ago
+sq para {} min
+
+@ {} h ago
+sq para {} orësh
+
+@ Level entry
+sq Hyrje në nivel
+
+@ Secret found
+sq U gjet një sekret
+
+@ All enemies killed
+sq Të gjithë armiqtë u vranë
+
+@ All secrets found
+sq Të gjitha sekretet u gjetën
+
+@ Timer
+sq Intervali
+
+# customize pages
+@ Standard rules
+sq Rregulla standarde
+
+@ Modifiers changed: {}
+sq Modifikues të ndryshuar: {}
+
+@ no add-ons
+sq pa shtesa
+
+@ add-ons: {}
+sq shtesa: {}
+
+@ Saves of this game are .qsa files: they need this source port.
+sq Ruajtjet e kësaj loje janë skedarë .qsa: kërkojnë këtë port.
+
+@ Nothing changed: this plays as standard Quake.
+sq Asgjë e ndryshuar: luhet si Quake standard.
+
+@ Changes apply now and are saved with this game (.qsa).
+sq Ndryshimet zbatohen tani dhe ruhen me këtë lojë (.qsa).
+
+@ This game started without Customize, so its rules are fixed.
+sq Kjo lojë nisi pa Përshtat, ndaj rregullat e saj janë të fiksuara.
+
+@ Start a new game and choose Customize Experience.
+sq Nis një lojë të re dhe zgjidh Përshtat përvojën.
+
+@ These rules apply to the next customized game.
+sq Këto rregulla zbatohen në lojën tjetër të përshtatur.
+
+# add-on browser
+@ Fire
+sq Qit
+
+@ Alt Fire
+sq Zjarr alternativ
+
+@ Configure Parameters >
+sq Konfiguro parametrat >
+
+@ Configure
+sq Konfiguro
+
+@ Settings
+sq Cilësimet
+
+@ Change slot
+sq Ndrysho vendin
+
+@ Toggle
+sq Ndërro
+
+@ Details
+sq Detajet
+
+@ Enter or click the box: toggle
+sq Enter ose kliko kutinë: ndërro
+
+@ Right / Tab / click: details
+sq Djathtas / Tab / klik: detajet
+
+@ Input Remapping
+sq Ricaktimi i hyrjes
+
+@ Weapon Slot
+sq Vendi i armës
+
+@ Customized games save as .qsa files, which need this source port.
+sq Lojërat e përshtatura ruhen si skedarë .qsa, që kërkojnë këtë port.
+
+@ This game started without Customize, so its add-ons are fixed. Customize a new game instead.
+sq Kjo lojë nisi pa Përshtat, ndaj shtesat e saj janë të fiksuara. Përshtat një lojë të re.
+
+@ Bullet Time
+sq Bullet Time
+
+@ Change Goggles
+sq Ndërro syzet
+
+@ Dodge / Dive
+sq Shmangie / Zhytje
+
+@ Goggles
+sq Syzet
+
+@ Hitstop
+sq Hitstop
+
+@ Projectile Shotguns
+sq Pushkë me predha
+
+@ BULLET TIME: 20%
+sq BULLET TIME: 20%
+
+@ NORMAL SPEED
+sq SHPEJTËSI NORMALE
+
+@ SLOW MOTION: PHYSICAL PELLETS
+sq LËVIZJE E NGADALËSUAR: SAÇMA FIZIKE
+
+@ DEMONSTRATION
+sq DEMONSTRIM
+
+@ GAMEPLAY
+sq LOJA
+
+@ LOOP
+sq CIKËL
+
+@ Preview unavailable
+sq Parapamja nuk ofrohet
+
+# shader and language help lines
+@ A setting of the chosen shader; arrows step it, Enter is not needed
+sq Një cilësim i shaderit të zgjedhur; shigjetat e ndryshojnë, Enter nuk nevojitet
+
+@ Language of the menus, messages and the 2021 re-release's game text; System follows your computer's language
+sq Gjuha e menyve, mesazheve dhe tekstit të lojës së ribotimit të 2021; Sistemi ndjek gjuhën e kompjuterit
+
+@ Puts every setting of the chosen shader back to the preset's defaults
+sq Rikthen çdo cilësim të shaderit të zgjedhur në parazgjedhjet e paracaktimit
+
+@ RetroArch slang shader on the final image: CRT, scanlines, NTSC, sharpening; add your own in <game>/shaders
+sq Shader slang i RetroArch mbi figurën përfundimtare: CRT, vija skanimi, NTSC, mprehje; shto tuajat në <game>/shaders
+
+# modern console footer
+@ Shift+PgUp/Dn: height  ` : hide
+sq Shift+PgUp/Dn: lartësia  ` : fshih
+
+@ Tab: complete  Ctrl+R: search  bash | pipe
+sq Tab: plotëso  Ctrl+R: kërko  bash | pipe
+
+@ ↑ +{} lines (End to jump) 
+sq ↑ +{} rreshta (End për të kërcyer) 
+
+# add-on descriptions
+@ Create two linked portals on flat walls. Fire places the first portal; Alt Fire places the second. Walk through either portal to emerge from the other. Your momentum carries through. Assign a weapon slot below: pressing that slot repeatedly cycles its ordinary weapon and every enabled add-on assigned there. Portal view quality is configurable below.
+sq Krijo dy portale të lidhura në mure të sheshta. Qitja vendos portalin e parë; Zjarri alternativ të dytin. Kalo përmes njërit për të dalë nga tjetri. Vrulli yt ruhet. Cakto një vend arme më poshtë: shtypja e përsëritur e atij vendi kalon mes armës së zakonshme dhe çdo shtese aktive të caktuar aty. Cilësia e pamjes së portaleve konfigurohet më poshtë.
+
+@ Hold Fire and sweep the crosshair over monsters to queue targets. Release Fire to throw: the boomerang visits each target, stuns it and returns to you. Alt Fire clears the queue. The weapon slot selects a group, not a separate hotkey: press it again to cycle through the weapons in that slot. Configure stun duration and flight speed below.
+sq Mbaj Qitjen dhe kalo shënjestrën mbi përbindëshat për të radhitur shenjat. Lësho Qitjen për të hedhur: bumerangu viziton çdo shenjë, e shtang dhe të kthehet. Zjarri alternativ pastron radhën. Vendi i armës zgjedh një grup, jo një tast të veçantë: shtype sërish për të kaluar nëpër armët e atij vendi. Konfiguro kohëzgjatjen e shtangimit dhe shpejtësinë e fluturimit më poshtë.
+
+@ Hold Fire to charge a sticky bomb using rocket ammunition; release to launch. A longer charge throws it faster. Bombs cling to walls, doors and monsters. Alt Fire detonates your planted bombs together. Place a trap, retreat, then detonate it when enemies approach. Assign any weapon slot below; repeated presses cycle through the ordinary weapon and add-ons in that slot.
+sq Mbaj Qitjen për të ngarkuar një bombë ngjitëse me municion raketash; lësho për ta hedhur. Ngarkimi më i gjatë e hedh më shpejt. Bombat ngjiten në mure, dyer dhe përbindësha. Zjarri alternativ i shpërthen bashkë bombat e vendosura. Ngri një kurth, tërhiqu, pastaj shpërthejë kur afrohen armiqtë. Cakto çdo vend arme më poshtë; shtypjet e përsëritura kalojnë mes armës së zakonshme dhe shtesave të atij vendi.
+
+@ Fire launches a chain hook. It latches onto a permitted surface or enemy and reels you toward the anchor. Fire again or use Alt Fire to let go. Choose which materials and enemies can be hooked in Configure Parameters. Assign it to any weapon slot; repeated presses of the slot's existing binding cycle through its weapons.
+sq Qitja hedh një grep me zinxhir. Ai kapet në një sipërfaqe ose armik të lejuar dhe të tërheq drejt pikës së ankorimit. Qit sërish ose përdor Zjarrin alternativ për ta lëshuar. Zgjidh cilat materiale dhe armiq mund të kapen te Konfiguro parametrat. Caktoje në çdo vend arme; shtypjet e përsëritura të tastit të atij vendi kalojnë nëpër armët e tij.
+
+@ A piercing railgun inspired by Quake III. Fire sends a slug through every enemy along its line. Each shot consumes two cells, with a 1.5 second refire interval. Damage and the spiral trail colour are configurable below. Choose a weapon slot: the slot's current binding selects and cycles the weapons assigned to it.
+sq Një railgun shpues i frymëzuar nga Quake III. Qitja dërgon një predhë përmes çdo armiku në vijën e saj. Çdo e shtënë harxhon dy qeliza, me 1,5 sekonda mes të shtënave. Dëmi dhe ngjyra e gjurmës spirale konfigurohen më poshtë. Zgjidh një vend arme: tasti aktual i atij vendi zgjedh dhe kalon nëpër armët e caktuara aty.
+
+@ A Portal-style gel sprayer. Fire sprays blue Repulsion gel: land, jump or run into it to bounce, and landings on it never hurt. Alt Fire sprays orange Propulsion gel: run across it to go much faster. Gel coats floors and walls until washed off with the Powerwasher. Assign a weapon slot below; repeated presses cycle the weapons in that slot.
+sq Një spërkatës xheli si në Portal. Qitja spërkat xhel blu Zmbrapsës: bjer, kërce ose vrapo mbi të për t'u hedhur, dhe rëniet mbi të nuk dëmtojnë kurrë. Zjarri alternativ spërkat xhel portokalli Shtytës: vrapo mbi të për të shkuar shumë më shpejt. Xheli mbulon dyshemetë dhe muret derisa të lahet me Pastruesin me presion. Cakto një vend arme më poshtë; shtypjet e përsëritura kalojnë nëpër armët e atij vendi.
+
+@ A water cannon. Fire shoots a straight jet with limited reach; Alt Fire a wide, shorter fan. The water pushes enemies back, turns projectiles aside and washes away gel and blood. Push strength is configurable below. Assign a weapon slot below; repeated presses cycle the weapons in that slot.
+sq Një top uji. Qitja lëshon një rrymë të drejtë me rreze të kufizuar; Zjarri alternativ një ventilator të gjerë e më të shkurtër. Uji i shtyn armiqtë prapa, i devijon predhat dhe lan xhelin dhe gjakun. Forca e shtytjes konfigurohet më poshtë. Cakto një vend arme më poshtë; shtypjet e përsëritura kalojnë nëpër armët e atij vendi.
+
+@ One equipment add-on includes both night vision and thermal vision. The Change Goggles action cycles Normal, Night Vision, Thermal, then Normal again. Night vision brightens dark rooms; thermal vision highlights living enemies. Goggles do not occupy a weapon slot. Configure intensity and sensor noise below. The binding affects only this add-on.
+sq Një shtesë pajisjeje përfshin shikimin e natës dhe atë termik. Veprimi Ndërro syzet kalon Normal, Shikim nate, Termik, pastaj sërish Normal. Shikimi i natës ndriçon dhomat e errëta; shikimi termik nxjerr në pah armiqtë e gjallë. Syzet nuk zënë vend arme. Konfiguro intensitetin dhe zhurmën e sensorit më poshtë. Caktimi prek vetëm këtë shtesë.
+
+@ Press Dodge with a movement direction on the ground or in midair: dive forward or leap backward and sideways. Diagonals are supported. Each press launches once, with a short recovery. The player body animates in third person. Assign the Dodge action below or in Controls.
+sq Shtyp Shmangie me një drejtim lëvizjeje në tokë ose në ajër: zhytu përpara ose hidhu prapa dhe anash. Diagonalet mbështeten. Çdo shtypje të hedh një herë, me një rimëkëmbje të shkurtër. Trupi i lojtarit animohet në vetë të tretin. Cakto veprimin Shmangie më poshtë ose te Kontrollet.
+
+@ Use the dedicated Bullet Time action to slow the whole local game to 20% speed. Hold is the default; Toggle switches on each press. The optional meter limits use in real seconds and regenerates while inactive. Disable the meter for unlimited use. Remap the action and configure duration and regeneration below.
+sq Përdor veprimin e posaçëm Bullet Time për ta ngadalësuar gjithë lojën lokale në 20% të shpejtësisë. Mbaj është parazgjedhja; Ndërro e ndez/fik me çdo shtypje. Matësi opsional e kufizon përdorimin në sekonda reale dhe rimbushet kur nuk përdoret. Çaktivizo matësin për përdorim të pakufizuar. Ricakto veprimin dhe konfiguro kohëzgjatjen dhe rimbushjen më poshtë.
+
+@ Both shotguns and enemy grunts fire physical pellets with their original spread and damage. Fast default projectiles feel immediate; lower their speed to dodge incoming fire during bullet time. Configure projectile speed below, or reset it to the default of 10000 units per second.
+sq Të dyja pushkët me saçma dhe ushtarët armiq qitin saçma fizike me shpërndarjen dhe dëmin origjinal. Predhat e shpejta si parazgjedhje ndihen të menjëhershme; ul shpejtësinë e tyre për t'u shmangur zjarrit gjatë bullet time. Konfiguro shpejtësinë e predhave më poshtë ose rivendose në parazgjedhjen 10000 njësi për sekondë.
+
+@ Freezes the game for a split second when you damage an enemy, so hits feel heavier. Single player only. Choose which weapons trigger it (all, melee, ranged or explosives), how long it lasts and how much more a kill freezes. Advanced settings cover enemy toughness, damage scaling, cooldown and the longest freeze.
+sq E ngrin lojën për një çast kur dëmton një armik, që goditjet të ndihen më të rënda. Vetëm një lojtar. Zgjidh cilat armë e shkaktojnë (të gjitha, trupazi, nga larg ose eksplozivë), sa zgjat dhe sa më shumë ngrin një vrasje. Cilësimet e avancuara mbulojnë qëndrueshmërinë e armiqve, shkallëzimin e dëmit, rimbushjen dhe ngrirjen më të gjatë.
+
+# map packs and the Quaddicted browser
+@ Get more maps (Quaddicted)...
+sq Më shumë harta (Quaddicted)...
+
+@ Type to filter...
+sq Shkruaj për të filtruar...
+
+@ Launch mod
+sq Nis modin
+
+@ Start first map
+sq Nis hartën e parë
+
+@ (running)
+sq (në punë)
+
+@ running
+sq në punë
+
+@ Recent
+sq Të fundit
+
+@ Name
+sq Emri
+
+@ Dir
+sq Dosja
+
+@ Default
+sq Parazgjedhje
+
+@ Title
+sq Titulli
+
+@ Sort: {}
+sq Renditja: {}
+
+@ {} installed
+sq {} të instaluara
+
+@ {}/{} matching
+sq {}/{} përputhje
+
+@ {} maps, {} completed
+sq {} harta, {} të përfunduara
+
+@ {}/{} matching, {} completed
+sq {}/{} përputhje, {} të përfunduara
+
+@ no maps of its own
+sq pa harta të veta
+
+@ dir: {}
+sq dosja: {}
+
+@ base: {}
+sq baza: {}
+
+@ Browse the Quaddicted archive of
+sq Shfleto arkivin Quaddicted të
+
+@ single-player maps and episodes,
+sq hartave dhe episodeve për një lojtar,
+
+@ then download and install them
+sq pastaj shkarkoji dhe instaloji
+
+@ here. Each release gets its own
+sq këtu. Çdo publikim merr hyrjen
+
+@ entry in this list.
+sq e vet në këtë listë.
+
+@ Needs an internet connection.
+sq Kërkon lidhje interneti.
+
+@ Quaddicted Map Archive
+sq Arkivi i hartave Quaddicted
+
+@ Newest
+sq Më të rejat
+
+@ Author
+sq Autori
+
+@ Size
+sq Madhësia
+
+@ Loading the map list...
+sq Po ngarkohet lista e hartave...
+
+@ Couldn't load the map list: {}
+sq Lista e hartave nuk u ngarkua: {}
+
+@ {} single-player releases  -  F5 refreshes
+sq {} publikime për një lojtar  -  F5 rifreskon
+
+@ {} matching
+sq {} përputhje
+
+@ by {}
+sq nga {}
+
+@ requires: {}
+sq kërkon: {}
+
+@ maps: {}
+sq harta: {}
+
+@ Failed: {}
+sq Dështoi: {}
+
+@ Downloading... {}%
+sq Po shkarkohet... {}%
+
+@ Unpacking...
+sq Po shpaketohet...
+
+@ Installed in {}/  -  Enter: play
+sq Instaluar në {}/  -  Enter: luaj
+
+@ Enter: download and install
+sq Enter: shkarko dhe instalo
+
+@ unpacking
+sq po shpaketohet
+
+@ failed
+sq dështoi
+
+@ installed
+sq instaluar
+
+@ Downloads are not available in the browser build
+sq Shkarkimet nuk ofrohen në versionin për shfletues
+
+@ the map list could not be read
+sq lista e hartave nuk u lexua
+
+@ downloading needs the curl program
+sq shkarkimi kërkon programin curl
+
+@ download failed
+sq shkarkimi dështoi
+
+@ the download is not a valid zip
+sq shkarkimi nuk është zip i vlefshëm
+
+@ nothing to install for this engine
+sq asgjë për t'u instaluar për këtë motor
+
+@ needs {} installed first
+sq kërkon së pari {} të instaluar
+
+@ couldn't unpack {}
+sq {} nuk u shpaketua
+
+# help screen
+@ About
+sq Rreth
+
+@ < Back
+sq < Prapa
+
+# tr_ctx keys: English shows the short word, the key says which meaning
+@ Save (a manual save, as opposed to a quicksave or autosave)
+sq Ruajtje
+
+# ==== hud.txt ====
+
+# HUD, weapon and equipment wheels, sound captions and other in-game text.
+# Weapon, monster and item names follow the 2021 re-release's own translations.
+@ Axe
+sq Sëpatë
+
+@ Shotgun
+sq Pushkë me saçma
+
+@ Double-Barrelled Shotgun
+sq Çifte
+
+@ Nailgun
+sq Gozhdëhedhës
+
+@ Super Nailgun
+sq Super gozhdëhedhës
+
+@ Grenade Launcher
+sq Granatahedhës
+
+@ Rocket Launcher
+sq Raketahedhës
+
+@ Thunderbolt
+sq Rrufe
+
+@ Portal Gun
+sq Armë portalesh
+
+@ Boomerang
+sq Bumerang
+
+@ Stickybomb Launcher
+sq Hedhës bombash ngjitëse
+
+@ Railgun
+sq Railgun
+
+@ Hookshot
+sq Grremç
+
+@ Gel Sprayer
+sq Spërkatës xheli
+
+@ Powerwasher
+sq Pastrues me presion
+
+@ Night Vision Goggles
+sq Syze nate
+
+@ Thermal Goggles
+sq Syze termike
+
+@ Normal vision
+sq Shikim normal
+
+@ ON
+sq AKTIV
+
+@ OFF
+sq JOAKTIV
+
+@ {} (turn on)
+sq {} (aktivizo)
+
+@ {} (turn off)
+sq {} (çaktivizo)
+
+@ Move mouse to select, release to toggle
+sq Lëviz miun për të zgjedhur, lësho për të ndërruar
+
+@ Move mouse to select, release to equip
+sq Lëviz miun për të zgjedhur, lësho për ta pajisur
+
+@ Release to toggle
+sq Lësho për të ndërruar
+
+@ Release to equip
+sq Lësho për ta pajisur
+
+@ shells
+sq fishekë
+
+@ nails
+sq gozhdë
+
+@ rockets
+sq raketa
+
+@ cells
+sq qeliza
+
+@ Kills: {}/{}
+sq Vrasje: {}/{}
+
+@ Secrets: {}/{}
+sq Sekrete: {}/{}
+
+@ Time {}
+sq Koha {}
+
+@ Press any button to continue...
+sq Shtyp çdo buton për të vazhduar...
+
+@ Press any key to continue...
+sq Shtyp çdo tast për të vazhduar...
+
+@ BULLET TIME
+sq BULLET TIME
+
+@ AUTO AIM
+sq SHËNJIM AUTO
+
+@ Crosshair
+sq Shënjestra
+
+@ + Marker
+sq + Shenja
+
+@ Hit markers off
+sq Shenjat e goditjes joaktive
+
+@ On target
+sq Mbi shenjë
+
+@ On kill
+sq Kur vret
+
+# sound captions
+@ [Secret found]
+sq [U gjet një sekret]
+
+@ [Message]
+sq [Mesazh]
+
+@ [Switch activated]
+sq [Çelësi u aktivizua]
+
+@ [Key picked up]
+sq [U mor një çelës]
+
+@ [Rune picked up]
+sq [U mor një runë]
+
+@ [Teleporter]
+sq [Teleportues]
+
+@ [Teleport]
+sq [Teleportim]
+
+@ [Splash]
+sq [Plluq]
+
+@ [Leaving water]
+sq [Del nga uji]
+
+@ [Door]
+sq [Derë]
+
+@ [Platform moving]
+sq [Platforma lëviz]
+
+@ [Button]
+sq [Buton]
+
+@ [Health picked up]
+sq [U mor shëndet]
+
+@ [Armor picked up]
+sq [U mor parzmore]
+
+@ [Quad Damage wearing off]
+sq [Quad Damage po mbaron]
+
+@ [Quad Damage]
+sq [Quad Damage]
+
+@ [Pentagram wearing off]
+sq [Pentagrami po mbaron]
+
+@ [Pentagram of Protection]
+sq [Pentagrami i Mbrojtjes]
+
+@ [Ring wearing off]
+sq [Unaza po mbaron]
+
+@ [Ring of Shadows]
+sq [Unaza e Hijeve]
+
+@ [Biosuit wearing off]
+sq [Biokostumi po mbaron]
+
+@ [Biosuit]
+sq [Biokostum]
+
+@ [Item picked up]
+sq [U mor një send]
+
+@ [Weapon picked up]
+sq [U mor një armë]
+
+@ [Ammo picked up]
+sq [U mor municion]
+
+@ [Explosion]
+sq [Shpërthim]
+
+@ [Grenade launched]
+sq [U hodh granatë]
+
+@ [Grenade bounce]
+sq [Granata kërcen]
+
+@ [Rocket fired]
+sq [U qit raketë]
+
+@ [Nails fired]
+sq [U qitën gozhdë]
+
+@ [Lightning]
+sq [Rrufe]
+
+@ [Thunder]
+sq [Bubullimë]
+
+@ [Enforcer alerted]
+sq [Enforcer në alarm]
+
+@ [Grunt alerted]
+sq [Grunt në alarm]
+
+@ [Rottweiler alerted]
+sq [Rottweiler në alarm]
+
+@ [Knight alerted]
+sq [Knight në alarm]
+
+@ [Death Knight alerted]
+sq [Death Knight në alarm]
+
+@ [Scrag alerted]
+sq [Scrag në alarm]
+
+@ [Ogre alerted]
+sq [Ogre në alarm]
+
+@ [Fiend alerted]
+sq [Fiend në alarm]
+
+@ [Shambler alerted]
+sq [Shambler në alarm]
+
+@ [Zombie groaning]
+sq [Zombi rënkon]
+
+@ [Vore alerted]
+sq [Vore në alarm]
+
+@ [Vore attacking]
+sq [Vore sulmon]
+
+@ [Spawn alerted]
+sq [Spawn në alarm]
+
+@ [Rotfish]
+sq [Rotfish]
+
+@ [Spawn]
+sq [Spawn]
+
+@ [Chthon]
+sq [Chthon]
+
+@ [Hard landing]
+sq [Rënie e fortë]
+
+@ [Drowning]
+sq [Mbytje]
+
+@ [Gasping for air]
+sq [Gulçim për ajër]
+
+@ [Burning]
+sq [Djegie]
+
+@ [Telefrag]
+sq [Telefrag]
+
+@ [Gibbed]
+sq [Copëtuar]
+
+# ==== console.txt ====
+
+# Console messages, shown translated only with con_translate 1 (Translate Console).
+# Cvar and command names stay as they are.
+@ Autosaved.
+sq U ruajt automatikisht.
+
+@ Game saved.
+sq Loja u ruajt.
+
+@ Can't save now.
+sq Nuk mund të ruhet tani.
+
+@ This game only autosaves (No Manual Saves modifier).
+sq Kjo lojë ruhet vetëm automatikisht (modifikuesi Pa ruajtje manuale).
+
+@ Loading {}...
+sq Po ngarkohet {}...
+
+@ load failed: {}
+sq ngarkimi dështoi: {}
+
+@ ERROR: autosave failed: {}
+sq GABIM: autoruajtja dështoi: {}
+
+@ ERROR: couldn't open {}
+sq GABIM: {} nuk u hap
+
+@ ERROR: couldn't open {}.
+sq GABIM: {} nuk u hap.
+
+@ ERROR: couldn't write {}: {}
+sq GABIM: {} nuk u shkrua: {}
+
+@ ERROR: couldn't create {}: {}
+sq GABIM: {} nuk u krijua: {}
+
+@ couldn't write {}: {}
+sq {} nuk u shkrua: {}
+
+@ Wrote {}
+sq U shkrua {}
+
+@ screenshot failed: {}
+sq pamja e ekranit dështoi: {}
+
+@ screenshot: {}
+sq pamja e ekranit: {}
+
+@ No readable save available. Select save or restart the level.
+sq Nuk ka ruajtje të lexueshme. Zgjidh një ruajtje ose rinis nivelin.
+
+@ Unknown command "{}"
+sq Komandë e panjohur "{}"
+
+@ couldn't exec {}
+sq {} nuk u ekzekutua
+
+@ execing {}
+sq po ekzekutohet {}
+
+@ execing config.cfg (inherited from {})
+sq po ekzekutohet config.cfg (trashëguar nga {})
+
+@ execing config.cfg (mod defaults)
+sq po ekzekutohet config.cfg (parazgjedhjet e modit)
+
+@ execing default.cfg (built-in)
+sq po ekzekutohet default.cfg (i integruar)
+
+@ {} cvars
+sq {} variabla
+
+@ {} commands
+sq {} komanda
+
+@ Can't "cmd", not connected
+sq "cmd" nuk mund të përdoret, pa lidhje
+
+@ Looking for Quake servers...
+sq Po kërkohen serverë Quake...
+
+@ Bad value, must be between 1 and 65534
+sq Vlerë e pavlefshme, duhet të jetë mes 1 dhe 65534
+
+@ Couldn't handle music file {}
+sq Skedari i muzikës {} nuk u përpunua
+
+@ Bug report written to {}
+sq Raporti i gabimit u shkrua në {}
+
+@ bugreport: can't create {}: {}
+sq bugreport: {} nuk mund të krijohet: {}
+
+@ graphics preset: {}
+sq paracaktimi grafik: {}
+
+@ Presets (r_shader_preset <name>):
+sq Paracaktimet (r_shader_preset <name>):
+
+@ Add your own .slangp presets under <game>/shaders/.
+sq Shto paracaktimet e tua .slangp te <game>/shaders/.
+
+@ no shader preset loaded (r_shader_preset)
+sq asnjë paracaktim shaderi i ngarkuar (r_shader_preset)
+
+@ r_shader_preset: "{}" not found
+sq r_shader_preset: "{}" nuk u gjet
+
+@ no parameter "{}" in this preset
+sq nuk ka parametër "{}" në këtë paracaktim
+
+@ {} = {} (default {}, {}..{})
+sq {} = {} (parazgjedhje {}, {}..{})
+
+@ Switching to {}...
+sq Po kalohet te {}...
+
+@ game: no game dir "{}" in {}
+sq game: nuk ka dosje loje "{}" në {}
+
+@ game: can't find the engine executable
+sq game: skedari ekzekutues i motorit nuk u gjet
+
+@ game: exec failed: {}
+sq game: ekzekutimi dështoi: {}
+
+@ game: launch failed: {}
+sq game: nisja dështoi: {}
+
+@ loaded {} in {}s
+sq {} u ngarkua në {} s
+
+@ No demos listed with startdemos
+sq Asnjë demo e listuar me startdemos
+
+@ Playing demo from {}.
+sq Po luhet demoja nga {}.
+
+@ {} frames {} seconds {} fps
+sq {} korniza {} sekonda {} fps
+
+@ Recording to {}.
+sq Po regjistrohet në {}.
+
+@ Completed demo
+sq Demoja përfundoi
+
+@ Can't record during demo playback
+sq Nuk mund të regjistrohet gjatë luajtjes së demos
+
+@ Relative pathnames are not allowed.
+sq Shtigjet relative nuk lejohen.
+
+@ Can't record - try again when connected
+sq Nuk mund të regjistrohet - provo sërish pasi të lidhesh
+
+@ {} demo(s) in loop
+sq {} demo në cikël
+
+@ Not recording a demo.
+sq Nuk po regjistrohet asnjë demo.
+
+@ {} joined on a gamepad
+sq {} u bashkua me kontrollues
+
+@ goggles: needs a game started with Add-ons and Goggles enabled
+sq goggles: kërkon një lojë të nisur me Shtesat dhe Syzet aktive
+
+@ equip: needs a game started with Add-ons and Goggles enabled
+sq equip: kërkon një lojë të nisur me Shtesat dhe Syzet aktive
+
+@ UDP listening on port {}
+sq UDP dëgjon në portën {}
+
+@ UDP bind on port {} failed: {}
+sq Lidhja UDP në portën {} dështoi: {}
+
+@ Connection accepted by {}
+sq Lidhja u pranua nga {}
+
+@ Connection failed: {}
+sq Lidhja dështoi: {}
+
+@ Couldn't resolve {}
+sq {} nuk u zgjidh
+
+@ Connecting to {}...
+sq Po lidhet me {}...
+
+@ Connecting to QuakeWorld server {}...
+sq Po lidhet me serverin QuakeWorld {}...
+
+@ Disconnected: {}
+sq U shkëput: {}
+
+@ Server disconnected
+sq Serveri u shkëput
+
+@ Client {} connected
+sq Klienti {} u lidh
+
+@ Client {} timed out
+sq Klienti {} skadoi
+
+@ Couldn't spawn server {}: {}
+sq Serveri {} nuk u nis: {}
+
+@ maxplayers can not be changed while a server is running.
+sq maxplayers nuk mund të ndryshohet kur një server është në punë.
+
+@ You can't kick yourself!
+sq Nuk mund ta përjashtosh veten!
+
+@ Only the server may changelevel
+sq Vetëm serveri mund të bëjë changelevel
+
+@ {} renamed to {}
+sq {} u riemërua në {}

@@ -709,34 +709,30 @@ fn center_gold(c: &mut Canvas, y: f32, s: &str) {
     c.text_center(320.0, y, s, 13.0, GOLD_FG);
 }
 
-/// ASCII-only, at most `n` columns (with a trailing `~` when cut).
+/// At most `n` columns (wide CJK characters count two), with a trailing
+/// `~` when cut; control characters are dropped.
 fn clip(s: &str, n: usize) -> String {
-    let s: String = s.chars().filter(char::is_ascii).collect();
-    if s.len() <= n || n == 0 {
-        s
-    } else {
-        format!("{}~", &s[..n - 1])
+    let s: String = s.chars().filter(|c| !c.is_control()).collect();
+    if n == 0 || qcore::lang::wrap::cols(&s) <= n {
+        return s;
     }
+    let mut out = String::new();
+    for ch in s.chars() {
+        if qcore::lang::wrap::cols(&out) + qcore::lang::wrap::cols(ch.encode_utf8(&mut [0; 4])) > n - 1 {
+            break;
+        }
+        out.push(ch);
+    }
+    out + "~"
 }
 
-/// Greedy word wrap to `n` columns (long words are cut).
+/// Greedy word wrap to `n` columns (long words are split; Chinese and
+/// Japanese break between characters).
 fn wrap(s: &str, n: usize) -> Vec<String> {
-    let mut out = Vec::new();
-    let mut line = String::new();
-    for w in s.split_whitespace() {
-        let w = clip(w, n);
-        if !line.is_empty() && line.len() + 1 + w.len() > n {
-            out.push(std::mem::take(&mut line));
-        }
-        if !line.is_empty() {
-            line.push(' ');
-        }
-        line += &w;
-    }
-    if !line.is_empty() {
-        out.push(line);
-    }
-    out
+    let s = clip(s, usize::MAX);
+    let mut v = qcore::lang::wrap(&s, n as f32, |t| qcore::lang::wrap::cols(t) as f32);
+    v.retain(|l| !l.is_empty());
+    v
 }
 
 #[cfg(test)]

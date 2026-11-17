@@ -1,0 +1,3024 @@
+# ka: the port's own text; English keys from crates/qcore/lang/*.txt.
+# Format in crates/qcore/src/lang/catalog.rs; check with tools/lang_check.py.
+
+# ==== menu.txt ====
+
+# Options pages: page names, row labels and choice values.
+@ 10% speed
+ka სიჩქარე 10%
+
+@ 2 split-screen
+ka 2 გაყოფილ ეკრანზე
+
+@ 3 split-screen
+ka 3 გაყოფილ ეკრანზე
+
+@ 4 split-screen
+ka 4 გაყოფილ ეკრანზე
+
+@ 5 split-screen
+ka 5 გაყოფილ ეკრანზე
+
+@ 6 split-screen
+ka 6 გაყოფილ ეკრანზე
+
+@ 2D aiming
+ka 2D დამიზნება
+
+@ 2x monsters
+ka 2× მონსტრი
+
+@ 3x monsters
+ka 3× მონსტრი
+
+@ 4x monsters
+ka 4× მონსტრი
+
+@ 3D resolution
+ka 3D გარჩევადობა
+
+@ 3D view
+ka 3D ხედი
+
+@ 8-bit Color
+ka 8-ბიტიანი ფერი
+
+@ Accessibility
+ka ხელმისაწვდომობა
+
+@ Acquisition Cone
+ka მიზნის კონუსი
+
+@ Activation
+ka აქტივაცია
+
+@ Add a ringing room tail after the cue
+ka სიგნალის შემდეგ ამატებს ოთახის რეზონანსულ კუდს
+
+@ Add delayed repeats after the cue
+ka სიგნალის შემდეგ ამატებს დაგვიანებულ გამეორებებს
+
+@ Add saturation and distortion
+ka ამატებს გაჯერებასა და დამახინჯებას
+
+@ Add-ons
+ka დამატებები
+
+@ Address
+ka მისამართი
+
+@ Adds fine noise to hide color banding
+ka ამატებს მსუბუქ ხმაურს ფერთა საფეხურების დასამალად
+
+@ Advanced Settings
+ka დამატებითი პარამეტრები
+
+@ Aim Assist
+ka დამიზნების დახმარება
+
+@ Aim Rotation
+ka მიზნის მობრუნება
+
+@ Aim Slowdown
+ka მიზნის შენელება
+
+@ Aim Style
+ka დამიზნების სტილი
+
+@ All
+ka ყველა
+
+@ All enemies
+ka ყველა მტერი
+
+@ Alt Fire (Add-ons)
+ka ალტ. სროლა (დამატებები)
+
+@ Always Run
+ka მუდამ სირბილი
+
+@ Ambient Occlusion
+ka ამბიენტური დაჩრდილვა
+
+@ Ammo Counts
+ka ვაზნების მთვლელები
+
+@ Ammo Counts Position
+ka ვაზნების მთვლელების პოზიცია
+
+@ Ammo Pickups
+ka ვაზნების აღება
+
+@ Anisotropic
+ka ანიზოტროპია
+
+@ Anti-aliasing
+ka ანტიალიასინგი
+
+@ Apply To
+ka გამოყენება
+
+@ Armor
+ka ჯავშანი
+
+@ Armor Position
+ka ჯავშნის პოზიცია
+
+@ Ask
+ka კითხვა
+
+@ Attack
+ka შეტევა
+
+@ Audio
+ka აუდიო
+
+@ Auto-aim
+ka ავტოდამიზნება
+
+@ Auto-aim Settings
+ka ავტოდამიზნების პარამეტრები
+
+@ Autosave
+ka ავტოშენახვა
+
+@ Autosave Settings
+ka ავტოშენახვის პარამეტრები
+
+@ Autosave Timer
+ka ავტოშენახვის ტაიმერი
+
+@ Autosaves to Keep
+ka შესანახი ავტოშენახვები
+
+@ Bass
+ka ბასი
+
+@ Blip
+ka ბლიპი
+
+@ Blood Quality
+ka სისხლის ხარისხი
+
+@ Blood Splatter Settings
+ka სისხლის შხეფების პარამეტრები
+
+@ Blue
+ka ლურჯი
+
+@ Boomerang Settings
+ka ბუმერანგის პარამეტრები
+
+@ Boost or cut high frequencies in decibels
+ka მაღალი სიხშირეების გაძლიერება ან შესუსტება დეციბელებში
+
+@ Boost or cut low frequencies in decibels
+ka დაბალი სიხშირეების გაძლიერება ან შესუსტება დეციბელებში
+
+@ Brightness
+ka სიკაშკაშე
+
+@ Bullet Time (Add-ons)
+ka ნელი დრო (დამატებები)
+
+@ Bullet Time Settings
+ka ნელი დროის პარამეტრები
+
+@ Button Glyphs
+ka ღილაკების ხატულები
+
+@ Button Size
+ka ღილაკის ზომა
+
+@ Camera
+ka კამერა
+
+@ Caustic Intensity
+ka კაუსტიკის ინტენსივობა
+
+@ Caustics
+ka კაუსტიკა
+
+@ Center
+ka ცენტრი
+
+@ Center Message Position
+ka ცენტრ. შეტყობინების პოზიცია
+
+@ Center Message Time
+ka ცენტრ. შეტყობინების დრო
+
+@ Center View
+ka ხედის ცენტრირება
+
+@ Change Color on Kill
+ka ფერის შეცვლა მოკვლისას
+
+@ Change Color on Target
+ka ფერის შეცვლა მიზანზე
+
+@ Chime
+ka ზარი
+
+@ Click
+ka დაწკაპუნება
+
+@ Clink
+ka წკრიალი
+
+@ Coin
+ka მონეტა
+
+@ Color
+ka ფერი
+
+@ Color Filter
+ka ფერის ფილტრი
+
+@ Color of the grenade arc
+ka ყუმბარის ტრაექტორიის ფერი
+
+@ Colored Lighting
+ka ფერადი განათება
+
+@ Connect
+ka დაკავშირება
+
+@ Contrast
+ka კონტრასტი
+
+@ Controls
+ka მართვა
+
+@ Cooldown (ms)
+ka გადატვირთვა (მწმ)
+
+@ Crosshair Outline
+ka სამიზნის კონტური
+
+@ Crosshair Shape
+ka სამიზნის ფორმა
+
+@ Crosshair Size
+ka სამიზნის ზომა
+
+@ Current Ammo
+ka მიმდინარე ვაზნები
+
+@ Current Ammo Position
+ka მიმდინარე ვაზნების პოზიცია
+
+@ Customize This Game
+ka ამ თამაშის მორგება
+
+@ Damage
+ka დაზიანება
+
+@ Damage Taken
+ka მიღებული დაზიანება
+
+@ Debris
+ka ნამსხვრევები
+
+@ Debris Quality
+ka ნამსხვრევების ხარისხი
+
+@ Debris Settings
+ka ნამსხვრევების პარამეტრები
+
+@ Directional Damage
+ka დაზიანების მიმართულება
+
+@ Dithering
+ka დიზერინგი
+
+@ Dodge / Dive (Add-ons)
+ka აცილება / ხტომა (დამატებები)
+
+@ Dragging up looks down instead of up
+ka ზემოთ გადათრევა ხედს ქვემოთ წევს და არა ზემოთ
+
+@ Drive
+ka გადატვირთვა
+
+@ Dynamic Lights
+ka დინამიკური განათება
+
+@ Echo
+ka ექო
+
+@ Enemy Health
+ka მტრის ჯანმრთელობა
+
+@ Enemy Wounds
+ka მტრის ჭრილობები
+
+@ Enhanced Blood Splatter
+ka გაუმჯობ. სისხლის შხეფები
+
+@ Enhanced FX
+ka გაუმჯობ. ეფექტები
+
+@ Enhanced Models
+ka გაუმჯობ. მოდელები
+
+@ Enhanced Particles
+ka გაუმჯობ. ნაწილაკები
+
+@ Enhanced Water
+ka გაუმჯობ. წყალი
+
+@ Enhancements
+ka გაუმჯობესებები
+
+@ Equipment Wheel (Add-ons)
+ka აღჭურვილობის ბორბალი (დამატებები)
+
+@ Exploding boxes throw metal shards
+ka აფეთქებული ყუთები ლითონის ნატეხებს ისვრის
+
+@ Explosion Damage
+ka აფეთქების დაზიანება
+
+@ Explosion Scorch Marks
+ka აფეთქების ნამწვი კვალი
+
+@ Explosions scorch nearby solid surfaces
+ka აფეთქებები ახლომდებარე მყარ ზედაპირებს წვავს
+
+@ Explosives only
+ka მხოლოდ ასაფეთქებლები
+
+@ Extra Monsters
+ka დამატებითი მონსტრები
+
+@ Extra Per 10 Damage (ms)
+ka დამატება ყოველ 10 დაზიანებაზე (მწმ)
+
+@ FX Settings
+ka ეფექტების პარამეტრები
+
+@ Field of View
+ka ხედვის არე
+
+@ Firing never uses up ammo
+ka სროლა ვაზნებს არასოდეს ხარჯავს
+
+@ First person
+ka პირველი პირიდან
+
+@ Flick Time
+ka ფლიკის დრო
+
+@ Flight Speed
+ka ფრენის სიჩქარე
+
+@ Fog
+ka ნისლი
+
+@ Frag Limit
+ka ფრაგების ლიმიტი
+
+@ Freeze Duration (ms)
+ka გაყინვის ხანგრძლივობა (მწმ)
+
+@ GLQuake
+ka GLQuake
+
+@ Game Speed
+ka თამაშის სიჩქარე
+
+@ Game Type
+ka თამაშის ტიპი
+
+@ Gameplay
+ka გეიმპლეი
+
+@ Gameplay Modifiers
+ka თამაშის მოდიფიკატორები
+
+@ Gel Quality
+ka გელის ხარისხი
+
+@ Gib Surface Painting
+ka ნაფლეთების ლაქები
+
+@ Gibs
+ka ნაფლეთები
+
+@ Gibs and heads tumble and bounce
+ka ნაფლეთები და თავები გორავს და ხტება
+
+@ Goggle Glow Quality
+ka სათვალის ნათების ხარისხი
+
+@ Goggle Intensity
+ka სათვალის ინტენსივობა
+
+@ Goggle Noise
+ka სათვალის ხმაური
+
+@ Goggles Settings
+ka სათვალის პარამეტრები
+
+@ Graphics
+ka გრაფიკა
+
+@ Green
+ka მწვანე
+
+@ Grenade Arc
+ka ყუმბარის ტრაექტორია
+
+@ Grenade Arc Settings
+ka ყუმბარის ტრაექტორიის პარამეტრები
+
+@ Gun Kick
+ka იარაღის უკუცემა
+
+@ Gyro
+ka გიროსკოპი
+
+@ Gyro & Flick Stick
+ka გიროსკოპი და ფლიკ-სტიკი
+
+@ Gyro Active
+ka გიროსკოპი აქტიურია
+
+@ Gyro Aiming
+ka გიროსკოპით დამიზნება
+
+@ HUD
+ka HUD
+
+@ HUD Style
+ka HUD-ის სტილი
+
+@ Health
+ka ჯანმრთელობა
+
+@ Health Pickups
+ka ჯანმრთელობის აღება
+
+@ Health Position
+ka ჯანმრთელობის პოზიცია
+
+@ Health Regeneration
+ka ჯანმრთელობის აღდგენა
+
+@ Hit & Kill Sounds
+ka დარტყმისა და მოკვლის ხმები
+
+@ Hit Doors & Lifts
+ka კარებსა და ლიფტებზე მოხვედრა
+
+@ Hit Markers
+ka მოხვედრის მარკერები
+
+@ Hit Sound
+ka მოხვედრის ხმა
+
+@ Hitmarker Size
+ka მარკერის ზომა
+
+@ Hitmarker Type
+ka მარკერის ტიპი
+
+@ Hitstop Advanced
+ka ჰიტსტოპი: დამატებით
+
+@ Hitstop Settings
+ka ჰიტსტოპის პარამეტრები
+
+@ Hold
+ka დაჭერა
+
+@ Hold lock-on
+ka ჩამიზნება დაჭერით
+
+@ Hook Enemies
+ka მტრებზე ჩაჭიდება
+
+@ Hook Metal
+ka ლითონზე ჩაჭიდება
+
+@ Hook Stone
+ka ქვაზე ჩაჭიდება
+
+@ Hook Wood
+ka ხეზე ჩაჭიდება
+
+@ Hooking an enemy pulls you to it
+ka მტერზე ჩაჭიდებული კაუჭი თქვენ მისკენ გწევთ
+
+@ Hookshot Range
+ka კაუჭის მანძილი
+
+@ Hookshot Settings
+ka კაუჭის პარამეტრები
+
+@ Host Game
+ka თამაშის შექმნა
+
+@ How far the hook flies before it retracts
+ka რამდენად შორს მიფრინავს კაუჭი დაბრუნებამდე
+
+@ How visible the on-screen controls are
+ka რამდენად ხილულია ეკრანული მართვის ელემენტები
+
+@ Impact Lifetime
+ka მოხვედრის კვალის ხანგრძლივობა
+
+@ Infinite Ammo
+ka უსასრულო ვაზნები
+
+@ Input
+ka შეყვანა
+
+@ Input Scale
+ka შეყვანის მასშტაბი
+
+@ Interpolate Animation
+ka ანიმაციის ინტერპოლაცია
+
+@ Interpolate Movement
+ka მოძრაობის ინტერპოლაცია
+
+@ Invert Look
+ka ხედის ინვერსია
+
+@ Invert Mouse
+ka მაუსის ინვერსია
+
+@ Invert Stick
+ka სტიკის ინვერსია
+
+@ Jet Quality
+ka ჭავლის ხარისხი
+
+@ Join Game
+ka შეერთება
+
+@ Jump / Swim Up
+ka ხტომა / ამოცურვა
+
+@ Jump again in mid-air
+ka ჰაერში ხელახლა ხტომა
+
+@ Jumps
+ka ხტომები
+
+@ Keys & Powerups
+ka გასაღებები და გაძლიერებები
+
+@ Keys & Powerups Position
+ka გასაღებების და გაძლიერებების პოზიცია
+
+@ Kill Bonus (x)
+ka მოკვლის ბონუსი (x)
+
+@ Kill Sound
+ka მოკვლის ხმა
+
+@ Knock
+ka კაკუნი
+
+@ Left
+ka მარცხნივ
+
+@ Length of the motion blur streaks
+ka მოძრაობის გადღაბნის ზოლების სიგრძე
+
+@ Lifetime (seconds)
+ka ხანგრძლივობა (წამი)
+
+@ Live Portal Views
+ka პორტალების ცოცხალი ხედი
+
+@ Live View Distance
+ka ცოცხალი ხედის მანძილი
+
+@ Local Players
+ka ლოკალური მოთამაშეები
+
+@ Local red wounds follow enemy animation
+ka წითელი ჭრილობები მტრის ანიმაციას მიჰყვება
+
+@ Lock Indicator
+ka ჩამიზნების ინდიკატორი
+
+@ Long falls don't hurt
+ka მაღლიდან ვარდნა არ გაზიანებთ
+
+@ Longest Freeze (ms)
+ka უგრძესი გაყინვა (მწმ)
+
+@ Look Down
+ka ქვემოთ ყურება
+
+@ Look Speed
+ka ხედის სიჩქარე
+
+@ Look Up
+ka ზემოთ ყურება
+
+@ Main Menu Music
+ka მთავარი მენიუს მუსიკა
+
+@ Max FPS
+ka მაქს. FPS
+
+@ Max Players
+ka მაქს. მოთამაშე
+
+@ Maximum Impacts
+ka მოხვედრის კვალი მაქს.
+
+@ Maximum Marks
+ka კვალი მაქს.
+
+@ Maximum Range
+ka მაქს. მანძილი
+
+@ Melee only
+ka მხოლოდ ახლო ბრძოლა
+
+@ Message Background
+ka შეტყობინების ფონი
+
+@ Message Text Size
+ka შეტყობინების ტექსტის ზომა
+
+@ Messages & Captions
+ka შეტყობინებები და სუბტიტრები
+
+@ Meter Duration (real seconds)
+ka შკალის ხანგრძლივობა (რეალური წამი)
+
+@ Minimum Damage
+ka მინიმალური დაზიანება
+
+@ Mode
+ka რეჟიმი
+
+@ Modern Console
+ka თანამედროვე კონსოლი
+
+@ Modern HUD Layout
+ka თანამედროვე HUD-ის განლაგება
+
+@ Most recent save
+ka ბოლო შენახვა
+
+@ Motion Blur
+ka მოძრაობის გადღაბნა
+
+@ Motion Blur Amount
+ka გადღაბნის სიძლიერე
+
+@ Motion Blur Quality
+ka გადღაბნის ხარისხი
+
+@ Mouse & Keyboard
+ka მაუსი და კლავიატურა
+
+@ Mouse Speed
+ka მაუსის სიჩქარე
+
+@ Move Back
+ka უკან
+
+@ Move Forward
+ka წინ
+
+@ Music Volume
+ka მუსიკის ხმა
+
+@ Next Weapon
+ka შემდეგი იარაღი
+
+@ No Drowning
+ka დახრჩობის გარეშე
+
+@ No Fall Damage
+ka ვარდნის დაზიანების გარეშე
+
+@ No Manual Saves
+ka ხელით შენახვის გარეშე
+
+@ No Self Damage
+ka საკუთარი დაზიანების გარეშე
+
+@ Noise Filter
+ka ხმაურის ფილტრი
+
+@ Normal Color
+ka ჩვეულებრივი ფერი
+
+@ Notify Message Position
+ka შეტყობინებების პოზიცია
+
+@ Notify Message Time
+ka შეტყობინებების დრო
+
+@ Number of splatter rays per blood impact
+ka შხეფების სხივები სისხლის თითო მოხვედრაზე
+
+@ Off
+ka გამორთ.
+
+@ On Death
+ka სიკვდილისას
+
+@ On Kill Color
+ka ფერი მოკვლისას
+
+@ On Target Color
+ka ფერი მიზანზე
+
+@ Opacity
+ka გაუმჭვირვალობა
+
+@ Opacity of the grenade arc
+ka ყუმბარის ტრაექტორიის გაუმჭვირვალობა
+
+@ Pants Color
+ka შარვლის ფერი
+
+@ Particle Quality
+ka ნაწილაკების ხარისხი
+
+@ Particles
+ka ნაწილაკები
+
+@ Physical Nail Impacts
+ka ლურსმნების ფიზიკური მოხვედრა
+
+@ Pistol Start
+ka სტარტი ნულიდან
+
+@ Pitch
+ka ტონის სიმაღლე
+
+@ Pitch Sensitivity
+ka ვერტიკალური მგრძნობელობა
+
+@ Playback Speed
+ka დაკვრის სიჩქარე
+
+@ Player Setup
+ka მოთამაშის აწყობა
+
+@ Pop
+ka ტკაცანი
+
+@ Portal Gun Settings
+ka პორტალის იარაღის პარამეტრები
+
+@ Portal Recursion
+ka პორტალების რეკურსია
+
+@ Portal View Quality
+ka პორტალის ხედის ხარისხი
+
+@ Preview Sound
+ka ხმის მოსმენა
+
+@ Previous Weapon
+ka წინა იარაღი
+
+@ Projectile Shotguns Settings
+ka ჭურვიანი თოფების პარამეტრები
+
+@ Projectile Speed (units/s)
+ka ჭურვის სიჩქარე (ერთ./წმ)
+
+@ Purple
+ka იისფერი
+
+@ Push
+ka ბიძგი
+
+@ Push Strength
+ka ბიძგის ძალა
+
+@ Quick Load
+ka სწრაფი ჩატვირთვა
+
+@ Quick Save
+ka სწრაფი შენახვა
+
+@ Railgun Settings
+ka რეილგანის პარამეტრები
+
+@ Ranged only
+ka მხოლოდ შორი ბრძოლა
+
+@ Reacquire While Held
+ka ხელახალი ჩამიზნება დაჭერისას
+
+@ Red
+ka წითელი
+
+@ Reduce Motion
+ka მოძრაობის შემცირება
+
+@ Regen (seconds per second)
+ka აღდგენა (წამი წამში)
+
+@ Render Scale
+ka რენდერის მასშტაბი
+
+@ Reverb
+ka რევერბი
+
+@ Right
+ka მარჯვნივ
+
+@ Ripple Intensity
+ka ტალღების ინტენსივობა
+
+@ Ripples
+ka ტალღები
+
+@ Roll Sensitivity
+ka გადახრის მგრძნობელობა
+
+@ Rumble
+ka ვიბრაცია
+
+@ Run
+ka სირბილი
+
+@ Save on All Enemies Killed
+ka შენახვა ყველა მტრის მოკვლისას
+
+@ Save on All Secrets Found
+ka შენახვა ყველა საიდუმლოს პოვნისას
+
+@ Save on Level Entry
+ka შენახვა დონეზე შესვლისას
+
+@ Save on Secret Found
+ka შენახვა საიდუმლოს პოვნისას
+
+@ Scoreboard
+ka ქულების ცხრილი
+
+@ Screen Flashes
+ka ეკრანის ციმციმი
+
+@ Screen Shader
+ka ეკრანის შეიდერი
+
+@ Screen Shake
+ka ეკრანის რყევა
+
+@ Search LAN
+ka ძებნა LAN-ში
+
+@ Seconds a center-screen message stays up
+ka რამდენ წამს რჩება შეტყობინება ეკრანის ცენტრში
+
+@ See Through Portals
+ka პორტალებში დანახვა
+
+@ See-through Teleporters
+ka გამჭვირვალე ტელეპორტები
+
+@ Shirt Color
+ka პერანგის ფერი
+
+@ Shotgun Bullet Decals
+ka საფანტის კვალი
+
+@ Shoulder left
+ka მარცხენა მხრიდან
+
+@ Shoulder right
+ka მარჯვენა მხრიდან
+
+@ Show FPS
+ka FPS-ის ჩვენება
+
+@ Show Face
+ka სახის ჩვენება
+
+@ Shrapnel
+ka შრაპნელი
+
+@ Size of on-screen messages and captions
+ka ეკრანული შეტყობინებების და სუბტიტრების ზომა
+
+@ Skill
+ka სირთულე
+
+@ Sky Fog
+ka ცის ნისლი
+
+@ Smooths the stepped movement of monsters
+ka ასწორებს მონსტრების საფეხურებრივ მოძრაობას
+
+@ Sound
+ka ხმა
+
+@ Sound Captions
+ka ხმის სუბტიტრები
+
+@ Sound Volume
+ka ხმის სიმაღლე
+
+@ Speed Blur
+ka სიჩქარის გადღაბნა
+
+@ Splashes
+ka შხეფები
+
+@ Splatter Amount
+ka შხეფების რაოდენობა
+
+@ Splatter Size
+ka შხეფების ზომა
+
+@ Start Game
+ka თამაშის დაწყება
+
+@ Staying underwater doesn't hurt
+ka წყალქვეშ ყოფნა არ გაზიანებთ
+
+@ Stick Look Pitch
+ka სტიკით ხედი ვერტიკ.
+
+@ Stick Look Yaw
+ka სტიკით ხედი ჰორიზ.
+
+@ Strafe Left
+ka გვერდით მარცხნივ
+
+@ Strafe Right
+ka გვერდით მარჯვნივ
+
+@ Strength of the surface swell and rings
+ka ზედაპირის ტალღებისა და რგოლების სიძლიერე
+
+@ Stun Duration
+ka გაბრუების ხანგრძლივობა
+
+@ Style
+ka სტილი
+
+@ Supersampling
+ka სუპერსემპლინგი
+
+@ Surface Hit Effects
+ka ზედაპირზე მოხვედრის ეფექტები
+
+@ Swim Down
+ka ჩაყვინთვა
+
+@ Targets
+ka სამიზნეები
+
+@ Teamplay
+ka გუნდური თამაში
+
+@ Texture Filter
+ka ტექსტურის ფილტრი
+
+@ Third person
+ka მესამე პირიდან
+
+@ Thud
+ka ყრუ დარტყმა
+
+@ Tick
+ka ტიკი
+
+@ Time Limit
+ka დროის ლიმიტი
+
+@ Time Stretch
+ka დროის გაწელვა
+
+@ Toggle Attack
+ka შეტევა გადართვით
+
+@ Toggle Run
+ka სირბილი გადართვით
+
+@ Toggle auto-aim
+ka ავტოდამიზნება გადართვით
+
+@ Touch Controls
+ka სენსორული მართვა
+
+@ Touchscreen
+ka სენსორული ეკრანი
+
+@ Tough Enemy Health
+ka ძლიერი მტრის ჯანმრთელობა
+
+@ Tough enemies only
+ka მხოლოდ ძლიერი მტრები
+
+@ Trail Colour
+ka კვალის ფერი
+
+@ Translate Console
+ka კონსოლის თარგმნა
+
+@ Translucent Water
+ka გამჭვირვალე წყალი
+
+@ Treble
+ka მაღალი
+
+@ Turn Left
+ka მარცხნივ მობრუნება
+
+@ Turn Right
+ka მარჯვნივ მობრუნება
+
+@ Underwater FX
+ka წყალქვეშა ეფექტები
+
+@ Use Bullet Time Meter
+ka ნელი დროის შკალა
+
+@ VSync
+ka VSync
+
+@ View Bob
+ka ხედის რხევა
+
+@ Viewmodels
+ka იარაღის მოდელები
+
+@ Volume
+ka ხმა
+
+@ Water Opacity
+ka წყლის გაუმჭვირვალობა
+
+@ Water Quality
+ka წყლის ხარისხი
+
+@ Water Settings
+ka წყლის პარამეტრები
+
+@ Weapon Wheel
+ka იარაღის ბორბალი
+
+@ Weapon Wheel Slowdown
+ka ბორბლის შენელება
+
+@ Weapons
+ka იარაღი
+
+@ Weapons Position
+ka იარაღის პოზიცია
+
+@ Where center-screen messages appear
+ka სად ჩნდება შეტყობინებები ეკრანის ცენტრში
+
+@ Where pickup and event messages appear
+ka სად ჩნდება აღებისა და მოვლენების შეტყობინებები
+
+@ White
+ka თეთრი
+
+@ Yaw Sensitivity
+ka ჰორიზონტალური მგრძნობელობა
+
+@ Yellow
+ka ყვითელი
+
+# lowercase choice values
+@ T
+ka T
+
+@ always
+ka ყოველთვის
+
+@ auto
+ka ავტო
+
+@ banded
+ka ზოლებად
+
+@ borderless
+ka უჩარჩოო
+
+@ bottom center
+ka ქვემოთ ცენტრში
+
+@ bottom left
+ka ქვემოთ მარცხნივ
+
+@ bottom right
+ka ქვემოთ მარჯვნივ
+
+@ box
+ka ჩარჩო
+
+@ broken square
+ka გაწყვეტილი კვადრატი
+
+@ classic
+ka კლასიკური
+
+@ coarse
+ka უხეში
+
+@ cooperative
+ka კოოპერატივი
+
+@ cross
+ka ჯვარი
+
+@ cross + dot
+ka ჯვარი + წერტილი
+
+@ cyan
+ka ცისფერი
+
+@ dashed
+ka პუნქტირი
+
+@ deathmatch
+ka deathmatch
+
+@ deuteranopia
+ka დეიტერანოპია
+
+@ diagonal streaks
+ka დიაგონალური შტრიხები
+
+@ diamond
+ka რომბი
+
+@ dot
+ka წერტილი
+
+@ double
+ka ორმაგი
+
+@ double chevrons
+ka ორმაგი შევრონები
+
+@ double diagonals
+ka ორმაგი დიაგონალები
+
+@ easy
+ka მარტივი
+
+@ fine
+ka წვრილი
+
+@ fit output
+ka გამოსავლის ზომით
+
+@ flick stick
+ka ფლიკ-სტიკი
+
+@ fullscreen
+ka სრული ეკრანი
+
+@ gap cross
+ka ღია ჯვარი
+
+@ green
+ka მწვანე
+
+@ grey
+ka ნაცრისფერი
+
+@ half speed
+ka ნახევარი სიჩქარე
+
+@ hard
+ka რთული
+
+@ high
+ka მაღალი
+
+@ huge
+ka უზარმაზარი
+
+@ immersive
+ka იმერსიული
+
+@ intense
+ka ძლიერი
+
+@ large
+ka დიდი
+
+@ larger
+ka უფრო დიდი
+
+@ largest
+ka უდიდესი
+
+@ linear
+ka წრფივი
+
+@ low
+ka დაბალი
+
+@ lower
+ka ქვედა
+
+@ magenta
+ka ფუქსია
+
+@ medium
+ka საშუალო
+
+@ middle
+ka შუა
+
+@ middle left
+ka შუა მარცხნივ
+
+@ middle right
+ka შუა მარჯვნივ
+
+@ modern
+ka თანამედროვე
+
+@ nearest
+ka უახლოესი
+
+@ nightmare
+ka კოშმარი
+
+@ nintendo
+ka Nintendo
+
+@ no team damage
+ka გუნდის დაზიანების გარეშე
+
+@ none
+ka არცერთი
+
+@ normal
+ka ნორმალური
+
+@ off
+ka გამორთ.
+
+@ off while held
+ka გამორთ. დაჭერისას
+
+@ on
+ka ჩართ.
+
+@ only while held
+ka მხოლოდ დაჭერისას
+
+@ playstation
+ka PlayStation
+
+@ protanopia
+ka პროტანოპია
+
+@ quarter speed
+ka მეოთხედი სიჩქარე
+
+@ red
+ka წითელი
+
+@ short diagonals
+ka მოკლე დიაგონალები
+
+@ single
+ka ერთმაგი
+
+@ small
+ka პატარა
+
+@ solid
+ka მთლიანი
+
+@ spectacle
+ka სანახაობრივი
+
+@ subtle
+ka სუსტი
+
+@ team damage
+ka გუნდის დაზიანება
+
+@ top center
+ka ზემოთ ცენტრში
+
+@ top left
+ka ზემოთ მარცხნივ
+
+@ top right
+ka ზემოთ მარჯვნივ
+
+@ triple
+ka სამმაგი
+
+@ tritanopia
+ka ტრიტანოპია
+
+@ upper
+ka ზედა
+
+@ white
+ka თეთრი
+
+@ whole screen
+ka მთელი ეკრანი
+
+@ windowed
+ka ფანჯარაში
+
+@ xbox
+ka Xbox
+
+@ yellow
+ka ყვითელი
+
+# ==== tooltips.txt ====
+
+# Options help lines (tooltips) and reasons for disabled rows.
+@ 2D aiming turns the view continuously with the right stick; flick stick snaps the view to where you push the stick, then turning the stick rotates it
+ka 2D დამიზნება ხედს მარჯვენა სტიკით შეუფერხებლად აბრუნებს; ფლიკ-სტიკი ხედს მაშინვე სტიკის მიმართულებით აბრუნებს, შემდეგ სტიკის ბრუნვა მას შემდგომ ატრიალებს
+
+@ 3D resolution relative to the window; the UI stays sharp
+ka 3D გარჩევადობა ფანჯრის მიმართ; ინტერფეისი მკვეთრი რჩება
+
+@ 3D view keeps the HUD and menus sharp; whole screen runs them through the shader too
+ka 3D ხედი HUD-სა და მენიუებს მკვეთრად ტოვებს; მთელი ეკრანი მათაც შეიდერში ატარებს
+
+@ A Quake III style railgun: a slug that pierces every enemy on its line, using 2 cells a shot and refiring every 1.5 s; select it through its assigned weapon slot (Add-ons)
+ka Quake III-ის სტილის რეილგანი: ჭურვი, რომელიც ხაზზე მყოფ ყველა მტერს ხვრეტს, ხარჯავს 2 ელემენტს გასროლაზე და ყოველ 1,5 წმ-ში ისვრის; აირჩიეთ მინიჭებული იარაღის სლოტით (დამატებები)
+
+@ A Zelda-style hookshot: fire sends a chain hook out; it latches onto hookable surfaces or enemies and reels you in; fire again to let go
+ka Zelda-ს სტილის კაუჭი: სროლა ჯაჭვიან კაუჭს ისვრის; ის ედება შესაფერის ზედაპირებს ან მტრებს და თქვენ მიგათრევთ; ხელახლა სროლა მას უშვებს
+
+@ Also translates the engine's console messages; off keeps them in English
+ka თარგმნის ძრავის კონსოლის შეტყობინებებსაც; გამორთვისას ისინი ინგლისურად რჩება
+
+@ Automatically acquire another enemy while holding Lock-on after losing a target
+ka სამიზნის დაკარგვის შემდეგ ავტომატურად იჭერს სხვა მტერს, სანამ ჩამიზნება დაჭერილია
+
+@ Blends between animation frames of monsters and weapons
+ka აერთიანებს მონსტრებისა და იარაღის ანიმაციის კადრებს
+
+@ Blood stains surfaces and bodies; cosmetic, independent of particle packs
+ka სისხლი ზედაპირებსა და სხეულებს სვრის; მხოლოდ ვიზუალურია, ნაწილაკების პაკეტებისგან დამოუკიდებელი
+
+@ Bloom glow around bright lights and heat sources; medium uses 4 taps, high uses 8, low disables halo taps
+ka ნათება კაშკაშა სინათლეებისა და სითბოს წყაროების ირგვლივ; საშუალო იყენებს 4 ნიმუშს, მაღალი 8-ს, დაბალი შარავანდედს თიშავს
+
+@ Blurs fast-moving monsters, projectiles and doors (not camera turns)
+ka ბუნდოვანს ხდის სწრაფად მოძრავ მონსტრებს, ჭურვებს და კარებს (არა კამერის მობრუნებას)
+
+@ Blurs the screen edges during fast falls and launches; keeps the centre clear. Reduce Motion disables it
+ka ბუნდოვანს ხდის ეკრანის კიდეებს სწრაფი ვარდნისა და აფრენისას; ცენტრი მკვეთრი რჩება. „მოძრაობის შემცირება“ მას თიშავს
+
+@ Brightness of the underwater light patterns
+ka წყალქვეშა სინათლის ნახატების სიკაშკაშე
+
+@ Caps mark count, lifetime, airborne droplets and wound/gib painting; low skips enemy wounds and gib trails
+ka ზღუდავს კვალის რაოდენობას, ხანგრძლივობას, ჰაერში წვეთებს და ჭრილობების/ნაფლეთების ლაქებს; დაბალი გამოტოვებს მტრის ჭრილობებს და ნაფლეთების კვალს
+
+@ Caps shader input at output size so 200% render scale keeps 3D sharpness without 4x shader cost; low scales stay low-res
+ka ზღუდავს შეიდერის შესავალს გამოსავლის ზომით, ასე რომ 200% რენდერის მასშტაბი 3D სიმკვეთრეს ინარჩუნებს შეიდერის 4-ჯერადი დანახარჯის გარეშე; დაბალი მასშტაბები დაბალი გარჩევადობით რჩება
+
+@ Classic: the original status bar; modern: compact elements at the screen edges
+ka კლასიკური: ორიგინალური სტატუსის ზოლი; თანამედროვე: კომპაქტური ელემენტები ეკრანის კიდეებზე
+
+@ Coat atlas resolution, rebuild rate and shader detail: low builds smaller coats less often with fast shading; high uses full detail
+ka საფარის ატლასის გარჩევადობა, აღდგენის სიხშირე და შეიდერის დეტალიზაცია: დაბალი აგებს პატარა საფარს უფრო იშვიათად სწრაფი დაჩრდილვით; მაღალი იყენებს სრულ დეტალიზაციას
+
+@ Colour of the railgun's spiral trail; split-screen players each get the next colour along
+ka რეილგანის სპირალური კვალის ფერი; გაყოფილ ეკრანზე თითოეული მოთამაშე მომდევნო ფერს იღებს
+
+@ Damage the railgun deals to each enemy it passes through (Quake III: 100)
+ka დაზიანება, რომელსაც რეილგანი თითოეულ გახვრეტილ მტერს აყენებს (Quake III: 100)
+
+@ Dark backdrop behind on-screen messages for readability
+ka მუქი ფონი ეკრანული შეტყობინებების ქვეშ წაკითხვადობისთვის
+
+@ Dark border keeps the crosshair visible on any background
+ka მუქი კონტური სამიზნეს ნებისმიერ ფონზე ხილულს ხდის
+
+@ Darkens corners and contact areas where geometry meets; higher quality is sharper
+ka აბნელებს კუთხეებს და გეომეტრიის შეხების ადგილებს; მაღალი ხარისხი უფრო მკვეთრია
+
+@ Debris lands on and is carried or shoved by doors, lifts and platforms
+ka ნამსხვრევები ეცემა კარებს, ლიფტებს და პლატფორმებს, ისინი კი მათ ატარებს ან აწვება
+
+@ Detail for caustics, ripples and splashes: low uses smaller budgets and shorter view distance; high uses larger budgets and farther view distance
+ka კაუსტიკის, ტალღებისა და შხეფების დეტალიზაცია: დაბალი იყენებს ნაკლებ ბიუჯეტს და მოკლე ხედვის მანძილს; მაღალი — მეტ ბიუჯეტს და შორ მანძილს
+
+@ Disabled while Enhanced Particles is on: its particles replace the GLQuake and Classic styles
+ka გამორთულია, სანამ „გაუმჯობ. ნაწილაკები“ ჩართულია: მისი ნაწილაკები ცვლის GLQuake და კლასიკურ სტილებს
+
+@ Disabled while Enhanced Water is on: its own underwater effects replace the classic and GLQuake view warps
+ka გამორთულია, სანამ „გაუმჯობ. წყალი“ ჩართულია: მისი წყალქვეშა ეფექტები ცვლის კლასიკურ და GLQuake დამახინჯებას
+
+@ Draw the predicted grenade path as a solid or dashed line
+ka ყუმბარის ნაწინასწარმეტყველები ტრაექტორია მთლიანი ან პუნქტირის ხაზით
+
+@ Draw the view out of the linked portal inside each portal; off shows flat discs (fastest)
+ka თითოეულ პორტალში აჩვენებს ხედს დაკავშირებული პორტალიდან; გამორთვისას ბრტყელი დისკებია (ყველაზე სწრაფი)
+
+@ Droplets spray up when things enter or leave water, slime or lava
+ka წვეთები იფრქვევა, როცა რამე წყალში, ლორწოში ან ლავაში შედის ან გამოდის
+
+@ Emulates the original 8-bit palette of software rendering
+ka ახდენს პროგრამული რენდერინგის ორიგინალური 8-ბიტიანი პალიტრის ემულაციას
+
+@ Every level starts with only the shotgun and axe, as if started fresh
+ka ყოველი დონე იწყება მხოლოდ თოფითა და ცულით, თითქოს თავიდან
+
+@ Explosion damage for each remotely detonated sticky bomb
+ka თითოეული დისტანციურად აფეთქებული წებოვანი ბომბის აფეთქების დაზიანება
+
+@ Extra freeze milliseconds for every 10 damage dealt, so heavy hits stop longer
+ka გაყინვის დამატებითი მილიწამები ყოველ 10 დაზიანებაზე, ასე რომ ძლიერი დარტყმები უფრო დიდხანს აჩერებს
+
+@ First person, a third-person camera centered behind the player, or one over the right or left shoulder; third person hides viewmodels
+ka პირველი პირიდან, მესამე პირის კამერა მოთამაშის უკან ან მარჯვენა ან მარცხენა მხრიდან; მესამე პირიდან იარაღის მოდელები დამალულია
+
+@ Flash the selected marker on confirmed hits; colors are shared with the crosshair
+ka დადასტურებული მოხვედრისას ციმციმებს არჩეული მარკერით; ფერები სამიზნესთან საერთოა
+
+@ Freeze for every enemy, or only for enemies that were tough before the hit
+ka გაყინვა ყველა მტერზე ან მხოლოდ მათზე, ვინც დარტყმამდე ძლიერი იყო
+
+@ Freeze the game briefly when you damage an enemy; single player with add-ons only
+ka მტრის დაზიანებისას თამაშს მოკლედ ყინავს; მხოლოდ ერთმოთამაშიანი თამაში დამატებებით
+
+@ Gibs tumble and barrels throw shrapnel; shots and blasts push them (cosmetic only)
+ka ნაფლეთები გორავს, კასრები შრაპნელს ისვრის; გასროლები და აფეთქებები მათ აწვება (მხოლოდ ვიზუალურია)
+
+@ Health an enemy must have had before the hit to count as tough
+ka ჯანმრთელობა, რომელიც მტერს დარტყმამდე უნდა ჰქონოდა, რომ ძლიერად ჩაითვალოს
+
+@ Hits dealing less damage than this do not freeze the game; the default 10 skips nails and shotgun pellets
+ka ამაზე ნაკლები დაზიანების დარტყმები თამაშს არ ყინავს; ნაგულისხმევი 10 გამოტოვებს ლურსმნებს და საფანტს
+
+@ Hold fire and sweep the crosshair over monsters to queue them, release to throw: it stuns each in turn and flies back; alt-fire clears the queue
+ka დაიჭირეთ სროლა და სამიზნე მონსტრებზე გადაატარეთ რიგში ჩასაყენებლად, გაუშვით სასროლად: ის რიგრიგობით აბრუებს თითოეულს და ბრუნდება; ალტ. სროლა რიგს ასუფთავებს
+
+@ Hold: keep Lock-on held. Toggle: press Auto-aim Toggle to enable automatic acquisition. Click look stick to switch targets
+ka დაჭერა: ჩამიზნება დაჭერილი გეჭიროთ. გადართვა: დააჭირეთ ავტოდამიზნების გადართვას ავტომატური ჩამიზნებისთვის. სამიზნის შესაცვლელად დააწკაპუნეთ ხედის სტიკს
+
+@ How close an enemy must be to the crosshair for automatic acquisition in toggle mode (degrees)
+ka რამდენად ახლოს უნდა იყოს მტერი სამიზნესთან ავტომატური ჩამიზნებისთვის გადართვის რეჟიმში (გრადუსი)
+
+@ How far the view tilts up and down when you tilt the controller (pitch axis)
+ka რამდენად იხრება ხედი ზემოთ და ქვემოთ კონტროლერის დახრისას (ვერტიკალური ღერძი)
+
+@ How far the view turns left and right when you turn the controller (yaw axis)
+ka რამდენად ბრუნავს ხედი მარცხნივ და მარჯვნივ კონტროლერის მობრუნებისას (ჰორიზონტალური ღერძი)
+
+@ How far the view turns when you drag on the right half of the screen
+ka რამდენად ბრუნავს ხედი ეკრანის მარჯვენა ნახევარზე გადათრევისას
+
+@ How fast the boomerang flies (units per second)
+ka რა სისწრაფით მიფრინავს ბუმერანგი (ერთეული წამში)
+
+@ How hard shots and explosions push debris around
+ka რამდენად ძლიერად აწვება გასროლები და აფეთქებები ნამსხვრევებს
+
+@ How hard the Powerwasher's water pushes enemies
+ka რამდენად ძლიერად აწვება სარეცხი აპარატის წყალი მტრებს
+
+@ How long a hit freezes the game, in milliseconds
+ka რამდენ ხანს ყინავს დარტყმა თამაშს, მილიწამებში
+
+@ How strongly fog covers the sky when fog is on
+ka რამდენად ფარავს ნისლი ცას, როცა ნისლი ჩართულია
+
+@ How the view distorts underwater: Classic ripples the whole screen like software Quake, GLQuake slowly stretches and squashes the view
+ka როგორ მახინჯდება ხედი წყალქვეშ: კლასიკური მთელ ეკრანს ატალღებს პროგრამული Quake-ის მსგავსად, GLQuake ხედს ნელა წელავს და კუმშავს
+
+@ Ignores gyro rotation slower than this many degrees per second, to hide hand tremor
+ka უგულებელყოფს გიროსკოპის ბრუნვას, რომელიც ამდენ გრადუს წამში ნელია, ხელის კანკალის დასამალად
+
+@ Immersive: appears for a few seconds only when its value changes
+ka იმერსიული: ჩნდება რამდენიმე წამით მხოლოდ მაშინ, როცა მისი მნიშვნელობა იცვლება
+
+@ Keeps textures sharp on floors and walls seen at steep angles
+ka ტექსტურებს მკვეთრად ტოვებს ციცაბო კუთხით დანახულ იატაკსა და კედლებზე
+
+@ Lights from rockets, muzzle flashes and explosions brighten nearby walls
+ka რაკეტების, გასროლის ალისა და აფეთქებების სინათლე ახლომდებარე კედლებს ანათებს
+
+@ Liquid surfaces swell and ring out where things move through them
+ka სითხის ზედაპირები ტალღდება და რგოლებს ქმნის იქ, სადაც მასში რამე მოძრაობს
+
+@ Lobs sticky bombs (rockets ammo) that cling to walls, doors and monsters; alt-fire detonates them all
+ka ისვრის წებოვან ბომბებს (რაკეტების ვაზნები), რომლებიც ეკვრის კედლებს, კარებს და მონსტრებს; ალტ. სროლა ყველას აფეთქებს
+
+@ Look of the classic particles: GLQuake draws soft round dots, Classic draws square pixels like software Quake
+ka კლასიკური ნაწილაკების იერსახე: GLQuake ხატავს რბილ მრგვალ წერტილებს, კლასიკური — კვადრატულ პიქსელებს პროგრამული Quake-ის მსგავსად
+
+@ Low skips the background smear halo and uses fewer blur samples; high keeps the full halo and smoother streaks
+ka დაბალი გამოტოვებს ფონის გადღაბნის შარავანდედს და ნაკლებ ნიმუშს იყენებს; მაღალი ინარჩუნებს სრულ შარავანდედს და გლუვ ზოლებს
+
+@ Low: hard particle edges, half the scripted particles and fewer hit sparks. Medium: soft edges. High: soft edges checked per MSAA sample, most hit sparks
+ka დაბალი: ნაწილაკების მკვეთრი კიდეები, სკრიპტული ნაწილაკების ნახევარი და ნაკლები ნაპერწკალი. საშუალო: რბილი კიდეები. მაღალი: რბილი კიდეები თითოეულ MSAA ნიმუშზე, მეტი ნაპერწკალი
+
+@ Marks fade out before expiring; oldest marks are recycled at the limit
+ka კვალი ქრება ამოწურვამდე; ლიმიტზე უძველესი კვალი ხელახლა გამოიყენება
+
+@ Max nested portal reflections to draw; each level redraws the scene
+ka ჩადგმული პორტალური ასახვების მაქს. რაოდენობა; ყოველი დონე სცენას ხელახლა ხატავს
+
+@ Max portals per screen with a live view; each one redraws the scene
+ka ცოცხალი ხედის მქონე პორტალების მაქს. რაოდენობა ეკრანზე; თითოეული სცენას ხელახლა ხატავს
+
+@ Maximum distance for acquiring and keeping an enemy locked
+ka მაქსიმალური მანძილი მტრის ჩამიზნებისა და შენარჩუნებისთვის
+
+@ Minimum gap between freezes, so shotgun pellets and rapid fire count once; kills ignore it
+ka მინიმალური შუალედი გაყინვებს შორის, რომ საფანტი და სწრაფი სროლა ერთხელ ჩაითვალოს; მოკვლები ამას უგულებელყოფს
+
+@ Modern terminal console with autocomplete popup, history search, ANSI colors, bash shell and piping; off uses the classic Quake console
+ka თანამედროვე ტერმინალური კონსოლი ავტოშევსების ფანჯრით, ისტორიაში ძებნით, ANSI ფერებით, bash გარსით და მილებით; გამორთვისას კლასიკური Quake კონსოლია
+
+@ Monsters take proportionally less damage at higher values; above 100% is harder
+ka მაღალ მნიშვნელობებზე მონსტრები პროპორციულად ნაკლებ დაზიანებას იღებენ; 100%-ზე მეტი უფრო რთულია
+
+@ Moving gibs leave blood on surfaces they touch
+ka მოძრავი ნაფლეთები სისხლს ტოვებს ზედაპირებზე, რომლებსაც ეხება
+
+@ Multiplier on the freeze when the hit kills the enemy; 1 means no extra
+ka გაყინვის მამრავლი, როცა დარტყმა მტერს კლავს; 1 ნიშნავს დამატების გარეშე
+
+@ Multiplies ammo from pickups (up to the normal carry limit); below 100% is harder
+ka ამრავლებს აღებულ ვაზნებს (ჩვეულებრივ ლიმიტამდე); 100%-ზე ნაკლები უფრო რთულია
+
+@ Multiplies health from pickups (up to 100, or the item's own limit); below 100% is harder
+ka ამრავლებს აღებულ ჯანმრთელობას (100-მდე ან ნივთის საკუთარ ლიმიტამდე); 100%-ზე ნაკლები უფრო რთულია
+
+@ Nails stick to wood and bodies; hard surfaces deflect them to the floor
+ka ლურსმნები ერჭობა ხეს და სხეულებს; მყარი ზედაპირები მათ იატაკზე აგდებს
+
+@ Nearest keeps crisp classic pixels; linear smooths textures
+ka უახლოესი ინარჩუნებს მკვეთრ კლასიკურ პიქსელებს; წრფივი ტექსტურებს არბილებს
+
+@ New Game: Add-ons
+ka ახალი თამაში: დამატებები
+
+@ New Game: Customize
+ka ახალი თამაში: მორგება
+
+@ Night vision: how much dark areas are brightened; thermal: how strongly heat stands out
+ka ღამის ხედვა: რამდენად ნათდება ბნელი ადგილები; თერმული: რამდენად გამოირჩევა სითბო
+
+@ Night-vision and thermal goggles, cycle normal, night vision and thermal with Change Goggles (Add-ons), or use the Equipment Wheel
+ka ღამის ხედვისა და თერმული სათვალე; გადართეთ ჩვეულებრივ, ღამის და თერმულ რეჟიმებს შორის „სათვალის შეცვლით“ (დამატებები) ან აღჭურვილობის ბორბლით
+
+@ No single freeze lasts longer than this, however much damage or kill bonus adds
+ka ერთი გაყინვა ამაზე მეტხანს არ გრძელდება, რაც არ უნდა დაამატოს დაზიანებამ ან მოკვლის ბონუსმა
+
+@ Oldest marks and nails are recycled at this shared limit
+ka ამ საერთო ლიმიტზე უძველესი კვალი და ლურსმნები ხელახლა გამოიყენება
+
+@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
+ka ეკრანული სტიკი და ღილაკები: ავტო აჩენს მათ შეხების შემდეგ და მალავს სხვა მოწყობილობის გამოყენებისას
+
+@ Only autosaves: quicksaves and the Save menu are off
+ka მხოლოდ ავტოშენახვები: სწრაფი შენახვა და შენახვის მენიუ გამორთულია
+
+@ Place every weapon at the center, right or left of the view, or hide all viewmodels
+ka ყველა იარაღის განთავსება ხედის ცენტრში, მარჯვნივ ან მარცხნივ, ან ყველა იარაღის მოდელის დამალვა
+
+@ Play your chosen hit or kill cue when you damage an enemy
+ka მტრის დაზიანებისას უკრავს არჩეულ მოხვედრის ან მოკვლის ხმას
+
+@ Playback speed: faster sounds shorter and higher
+ka დაკვრის სიჩქარე: სწრაფი ხმა უფრო მოკლე და მაღალია
+
+@ Plays the Quake theme in the main menu when no game is running
+ka მთავარ მენიუში, როცა თამაში არ მიდის, Quake-ის თემას უკრავს
+
+@ Portals farther away than this are drawn as flat discs
+ka ამაზე შორს მყოფი პორტალები ბრტყელ დისკებად იხატება
+
+@ Press attack once to keep firing, again to stop
+ka დააჭირეთ შეტევას ერთხელ სროლის გასაგრძელებლად, ხელახლა — გასაჩერებლად
+
+@ Press run once to switch between running and walking
+ka დააჭირეთ სირბილს ერთხელ სირბილსა და სიარულს შორის გადასართავად
+
+@ Raise or lower the tone independently of sound length
+ka ტონის აწევა ან დაწევა ხმის ხანგრძლივობისგან დამოუკიდებლად
+
+@ Red screen edges show where damage came from: top is front, bottom is behind; Screen Flashes controls their strength
+ka ეკრანის წითელი კიდეები აჩვენებს, საიდან მოვიდა დაზიანება: ზედა — წინიდან, ქვედა — უკნიდან; სიძლიერეს „ეკრანის ციმციმი“ არეგულირებს
+
+@ Replaces the classic dot particles with glowing sparks, smoke and blood; mods with their own particle effects keep them
+ka კლასიკურ წერტილოვან ნაწილაკებს ცვლის მანათობელი ნაპერწკლებით, კვამლით და სისხლით; მოდები საკუთარი ეფექტებით მათ ინარჩუნებენ
+
+@ Resolution and detail inside portal and teleporter views; lower tiers trim nested effects
+ka გარჩევადობა და დეტალიზაცია პორტალებისა და ტელეპორტების ხედებში; დაბალი დონეები ჩადგმულ ეფექტებს ამცირებს
+
+@ Rippling light patterns on surfaces under water and slime
+ka სინათლის ტალღოვანი ნახატები წყლისა და ლორწოს ქვეშ მყოფ ზედაპირებზე
+
+@ Scales all damage you take; above 100% is harder
+ka მიღებული დაზიანების მასშტაბი; 100%-ზე მეტი უფრო რთულია
+
+@ Screen edge for this element; elements on the same spot stack
+ka ეკრანის კიდე ამ ელემენტისთვის; ერთსა და იმავე ადგილზე ელემენტები ერთმანეთზე ლაგდება
+
+@ Seconds a monster hit by the boomerang stays stunned
+ka რამდენ წამს რჩება ბუმერანგით დარტყმული მონსტრი გაბრუებული
+
+@ Seconds impact marks and stuck nails stay before fading out; independent of Particle Quality
+ka რამდენ წამს რჩება მოხვედრის კვალი და ჩარჭობილი ლურსმნები გაქრობამდე; ნაწილაკების ხარისხისგან დამოუკიდებელია
+
+@ Seconds messages at the top of the screen stay up
+ka რამდენ წამს რჩება შეტყობინებები ეკრანის ზედა ნაწილში
+
+@ Seconds the flick stick snap takes; lower is faster
+ka ფლიკ-სტიკის მობრუნების დრო წამებში; ნაკლები უფრო სწრაფია
+
+@ See through enhanced water; enables Water Opacity
+ka გაუმჯობესებული წყლის გამჭვირვალობა; რთავს წყლის გაუმჭვირვალობას
+
+@ Sensor grain, scanlines and flicker of the goggle image
+ka სათვალის გამოსახულების სენსორის მარცვლოვნება, ხაზები და ციმციმი
+
+@ Shades every anti-aliasing sample; needs Anti-aliasing on
+ka ანტიალიასინგის თითოეული ნიმუშის დაჩრდილვა; საჭიროებს ჩართულ ანტიალიასინგს
+
+@ Shifts colors so they stay distinct for the chosen color blindness
+ka ცვლის ფერებს, რომ არჩეული დალტონიზმისას განსხვავებადი დარჩეს
+
+@ Shotgun hits leave small surface marks (cosmetic only)
+ka თოფის მოხვედრები ზედაპირზე პატარა კვალს ტოვებს (მხოლოდ ვიზუალურია)
+
+@ Show corner ticks at screen centre while locked, even with Crosshair off
+ka ჩამიზნებისას ეკრანის ცენტრში კუთხის ნიშნებს აჩვენებს, სამიზნის გამორთვის დროსაც
+
+@ Show where grenades and other arcing shots will fly, bounce and land; local play only, not in deathmatch
+ka აჩვენებს, სად გაფრინდება, აისხლიტება და დაეცემა ყუმბარები და სხვა რკალისებრი გასროლები; მხოლოდ ლოკალურ თამაშში, არა deathmatch-ში
+
+@ Shows text for important sounds: doors, alerted enemies, secrets, pickups
+ka აჩვენებს ტექსტს მნიშვნელოვანი ხმებისთვის: კარები, გაფრთხილებული მტრები, საიდუმლოები, აღებული ნივთები
+
+@ Shows the distance fog that maps and mods set; off always gives clear view
+ka აჩვენებს რუკებისა და მოდების მიერ დაყენებულ შორეულ ნისლს; გამორთვისას ხედი ყოველთვის სუფთაა
+
+@ Shows the player face next to the health number
+ka აჩვენებს მოთამაშის სახეს ჯანმრთელობის რიცხვის გვერდით
+
+@ Simulation detail, step rate, fade-out lifetimes and caps for gibs and shrapnel; low also skips mover collision
+ka სიმულაციის დეტალიზაცია, ბიჯის სიხშირე, გაქრობის დრო და ლიმიტები ნაფლეთებისა და შრაპნელისთვის; დაბალი გამოტოვებს მოძრავ ობიექტებთან შეჯახებასაც
+
+@ Size of the on-screen buttons and move stick
+ka ეკრანული ღილაკებისა და მოძრაობის სტიკის ზომა
+
+@ Slowly heals up to 100 health after 5 seconds without being hit
+ka 5 წამის განმავლობაში დარტყმის გარეშე ნელა აღადგენს ჯანმრთელობას 100-მდე
+
+@ Slows stick look while the crosshair is over an enemy
+ka ანელებს სტიკით ხედს, როცა სამიზნე მტერზეა
+
+@ Slows the game down while the weapon wheel is open
+ka ანელებს თამაშს, სანამ იარაღის ბორბალი ღიაა
+
+@ Slows the whole game down; single player only. Saves and demos stay compatible with other ports
+ka ანელებს მთელ თამაშს; მხოლოდ ერთმოთამაშიანი. შენახვები და დემოები სხვა პორტებთან თავსებადი რჩება
+
+@ Small camera jolt on each freeze; off with Reduce Motion
+ka კამერის მცირე ბიძგი ყოველ გაყინვაზე; გამორთულია „მოძრაობის შემცირებით“
+
+@ Snap and track enemies in local play, including split-screen; unavailable online
+ka მტრებზე მიზნის მიბმა და თვალყურის დევნება ლოკალურ თამაშში, გაყოფილი ეკრანის ჩათვლით; ონლაინ მიუწვდომელია
+
+@ Sparks, smoke, chips, splinters and splashes fly off whatever your shots hit
+ka ნაპერწკლები, კვამლი, ნატეხები, ხის ბურბუშელა და შხეფები სცვივა ყველაფერს, რასაც თქვენი გასროლა ხვდება
+
+@ Spawns extra copies of every monster around the original when a level starts
+ka დონის დაწყებისას თითოეული მონსტრის დამატებით ასლებს აჩენს ორიგინალის გარშემო
+
+@ Strength of the full-screen flashes for damage, pickups and powerups
+ka სრულეკრანიანი ციმციმის სიძლიერე დაზიანების, ნივთების აღებისა და გაძლიერებებისთვის
+
+@ Stretch or shorten the sound while keeping its pitch
+ka ხმის გაწელვა ან შემოკლება ტონის შენარჩუნებით
+
+@ Surface opacity; requires Enhanced Water and Translucent Water
+ka ზედაპირის გაუმჭვირვალობა; საჭიროებს გაუმჯობ. წყალს და გამჭვირვალე წყალს
+
+@ The hook latches onto metal surfaces (metal, tech, computer panels, copper)
+ka კაუჭი ედება ლითონის ზედაპირებს (ლითონი, ტექნიკა, კომპიუტერის პანელები, სპილენძი)
+
+@ The hook latches onto stone, brick, rock and any surface not recognised as wood or metal
+ka კაუჭი ედება ქვას, აგურს, კლდეს და ნებისმიერ ზედაპირს, რომელიც ხედ ან ლითონად არ არის ამოცნობილი
+
+@ The hook latches onto wooden surfaces (texture names like wood, crate, plank)
+ka კაუჭი ედება ხის ზედაპირებს (ტექსტურის სახელები, როგორიცაა wood, crate, plank)
+
+@ Turn the controller's motion sensor into a look input; needs a pad with a gyroscope
+ka კონტროლერის მოძრაობის სენსორს ხედის მართვად აქცევს; საჭიროებს გიროსკოპიან კონტროლერს
+
+@ Turns off view bob, strafe tilt and the camera kick when hit or firing
+ka თიშავს ხედის რხევას, გვერდით დახრას და კამერის ბიძგს დარტყმისა და სროლისას
+
+@ Turns on the extra liquid effects; Water Settings controls each one
+ka რთავს სითხის დამატებით ეფექტებს; თითოეულს „წყლის პარამეტრები“ არეგულირებს
+
+@ Turns the view to follow a moving enemy you are aiming at
+ka ხედს აბრუნებს მოძრავი მტრის მიმართულებით, რომელსაც უმიზნებთ
+
+@ Turns the view when you roll the controller sideways; 0 disables it, negative reverses it
+ka ხედს აბრუნებს კონტროლერის გვერდზე გადახრისას; 0 თიშავს, უარყოფითი აბრუნებს
+
+@ Two-portal gun: fire and alt-fire place linked portals on flat walls; assign a weapon slot in Add-ons
+ka ორპორტალიანი იარაღი: სროლა და ალტ. სროლა ბრტყელ კედლებზე დაკავშირებულ პორტალებს ათავსებს; მიანიჭეთ იარაღის სლოტი დამატებებში
+
+@ Unlocks the FX Settings page: enhanced particles, impact effects and blood splatter
+ka ხსნის ეფექტების პარამეტრების გვერდს: გაუმჯობ. ნაწილაკები, მოხვედრის ეფექტები და სისხლის შხეფები
+
+@ Uses the 2021 re-release's smoother MD5 models (and MD3 replacements from mods) instead of the classic ones. Applies on the next map load
+ka იყენებს 2021 წლის ხელახალი გამოშვების უფრო გლუვ MD5 მოდელებს (და მოდების MD3 შემცვლელებს) კლასიკურის ნაცვლად. მოქმედებს შემდეგი რუკის ჩატვირთვისას
+
+@ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
+ka იყენებს რუკის ფერად განათებას (.lit ფაილი ან BSPX ბლოკი); გამორთვისას ორიგინალური თეთრი სინათლეა. მოქმედებს შემდეგი რუკის ჩატვირთვისას
+
+@ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
+ka წყლის ჭავლის სეგმენტები, წვეთების რაოდენობა და სითხის პრიალა დაჩრდილვა: დაბალი იყენებს მარტივ გამჭვირვალე ნაკადებს; მაღალი — გლუვ პრიალა ჭავლებს
+
+@ When gyro looking applies: always, off while +gyroaction is held, or only while it is held
+ka როდის მოქმედებს გიროსკოპით ყურება: ყოველთვის, გამორთულია +gyroaction-ის დაჭერისას, ან მხოლოდ მისი დაჭერისას
+
+@ Which weapons trigger the freeze; melee covers the axe and any mod weapon used at close range without ammo
+ka რომელი იარაღი იწვევს გაყინვას; ახლო ბრძოლა მოიცავს ცულს და მოდის ნებისმიერ იარაღს, რომელიც ახლოდან ვაზნების გარეშე გამოიყენება
+
+@ Your own rockets and grenades don't hurt you; rocket jumps still work
+ka თქვენი რაკეტები და ყუმბარები თქვენ არ გაზიანებთ; რაკეტით ხტომა კვლავ მუშაობს
+
+# ==== ui.txt ====
+
+# Menus and pop-ups outside the options pages: save cards, launch, presets,
+# add-on browser, map packs, hints and dialogs.
+@ Select
+ka არჩევა
+
+@ Back
+ka უკან
+
+@ Cancel
+ka გაუქმება
+
+@ Confirm
+ka დადასტურება
+
+@ Scroll
+ka გადახვევა
+
+@ Section
+ka სექცია
+
+@ Bind
+ka მინიჭება
+
+@ Cancel binding
+ka მინიჭების გაუქმება
+
+@ Clear
+ka გასუფთავება
+
+@ Clear pad
+ka პადის გასუფთავება
+
+@ Remap
+ka გადანიშვნა
+
+@ Type
+ka აკრეფა
+
+@ Shift
+ka Shift
+
+@ Done
+ka მზადაა
+
+@ Del
+ka Del
+
+@ Space
+ka Space
+
+@ Save
+ka შენახვა
+
+@ Load
+ka ჩატვირთვა
+
+@ Delete
+ka წაშლა
+
+@ Play
+ka თამაში
+
+@ Yes
+ka დიახ
+
+@ No
+ka არა
+
+@ OK
+ka OK
+
+@ System
+ka სისტემური
+
+@ Language
+ka ენა
+
+@ Help
+ka დახმარება
+
+@ Fixed for this game: it was started without Customize
+ka ამ თამაშისთვის ფიქსირებულია: ის მორგების გარეშე დაიწყო
+
+@ Press a button or key to bind (Start cancels)
+ka დააჭირეთ ღილაკს მისანიჭებლად (Start აუქმებს)
+
+@ Press button...
+ka დააჭირეთ ღილაკს...
+
+@ Press key...
+ka დააჭირეთ კლავიშს...
+
+@ Replace this binding?
+ka შეიცვალოს ეს მინიჭება?
+
+@ is already assigned
+ka უკვე მინიჭებულია
+
+@ {} already assigned
+ka {} უკვე მინიჭებულია
+
+@ Open Controls to remap Lock-on?
+ka გავხსნათ მართვა ჩამიზნების გადასანიშნად?
+
+@ Lock-on
+ka ჩამიზნება
+
+@ Auto-aim Toggle
+ka ავტოდამიზნების გადართვა
+
+@ Keyboard
+ka კლავიატურა
+
+@ Controller
+ka კონტროლერი
+
+# main menu, dialogs and screens
+@ Map Packs
+ka რუკების პაკეტები
+
+@ Customize
+ka მორგება
+
+@ Level Select
+ka დონის არჩევა
+
+@ Really quit?
+ka ნამდვილად გასვლა?
+
+@ You died
+ka თქვენ მოკვდით
+
+@ Continue from most recent save
+ka გაგრძელება ბოლო შენახვიდან
+
+@ Select save
+ka შენახვის არჩევა
+
+@ Restart level
+ka დონის თავიდან დაწყება
+
+@ Return to main menu
+ka მთავარ მენიუში დაბრუნება
+
+@ (disabled)
+ka (გამორთულია)
+
+@ (fixed for this game)
+ka (ფიქსირებულია ამ თამაშისთვის)
+
+@ (off)
+ka (გამორთ.)
+
+@ Apply Display Changes
+ka ეკრანის ცვლილებების გამოყენება
+
+@ Display Mode
+ka ეკრანის რეჟიმი
+
+@ Resolution
+ka გარჩევადობა
+
+@ desktop
+ka სამუშაო მაგიდა
+
+@ Preset
+ka პრესეტი
+
+@ Map
+ka რუკა
+
+@ Reset Shader Settings
+ka შეიდერის პარამეტრების დაბრუნება
+
+@ Reset to Defaults
+ka ნაგულისხმევზე დაბრუნება
+
+@ Searching...
+ka ძებნა...
+
+@ This game only autosaves.
+ka ეს თამაში მხოლოდ ავტომატურად ინახება.
+
+@ (No Manual Saves modifier)
+ka (მოდიფიკატორი „ხელით შენახვის გარეშე“)
+
+@ End the current game?
+ka დასრულდეს მიმდინარე თამაში?
+
+@ Unsaved progress will be lost.
+ka შეუნახავი პროგრესი დაიკარგება.
+
+@ End game
+ka თამაშის დასრულება
+
+@ Overwrite
+ka გადაწერა
+
+@ Overwrite "{}"?
+ka გადაიწეროს „{}“?
+
+@ Saved {}
+ka შენახულია {}
+
+@ Start a new game?
+ka დავიწყოთ ახალი თამაში?
+
+@ New game
+ka ახალი თამაში
+
+@ New Game
+ka ახალი თამაში
+
+@ CUSTOM
+ka მორგებული
+
+@ Customize Experience
+ka გამოცდილების მორგება
+
+@ Disable All
+ka ყველას გამორთვა
+
+@ Disable All Modifications
+ka ყველა ცვლილების გამორთვა
+
+@ Saves load in other source ports too.
+ka შენახვები სხვა პორტებშიც იტვირთება.
+
+@ Standard rules, no add-ons.
+ka სტანდარტული წესები, დამატებების გარეშე.
+
+@ Choose skill
+ka აირჩიეთ სირთულე
+
+@ The current game will end
+ka მიმდინარე თამაში დასრულდება
+
+@ Easy
+ka მარტივი
+
+@ Normal
+ka ნორმალური
+
+@ Hard
+ka რთული
+
+@ Nightmare
+ka კოშმარი
+
+# graphics preset pop-up
+@ Choose a Graphics Preset
+ka აირჩიეთ გრაფიკის პრესეტი
+
+@ Classic
+ka კლასიკური
+
+@ Like the re-release: enhanced models,
+ka როგორც ხელახალ გამოშვებაში: გაუმჯობ. მოდელები,
+
+@ no added effects.
+ka დამატებითი ეფექტების გარეშე.
+
+@ Enhanced
+ka გაუმჯობესებული
+
+@ Every enhancement at its highest quality.
+ka ყველა გაუმჯობესება უმაღლესი ხარისხით.
+
+@ Needs a capable GPU.
+ka საჭიროებს ძლიერ GPU-ს.
+
+@ Low-End
+ka სუსტი სისტემა
+
+@ Fastest. No anti-aliasing, original
+ka ყველაზე სწრაფი. ანტიალიასინგის გარეშე, ორიგინალური
+
+@ models, lowest effect quality.
+ka მოდელები, ეფექტების უდაბლესი ხარისხი.
+
+@ Esc keeps the defaults
+ka Esc ინარჩუნებს ნაგულისხმევს
+
+@ Everything can be changed later in Options.
+ka ყველაფრის შეცვლა შეგიძლიათ მოგვიანებით პარამეტრებში.
+
+@ Keep Defaults
+ka ნაგულისხმევის დატოვება
+
+# save and load cards
+@ Save Game
+ka თამაშის შენახვა
+
+@ Load Game
+ka თამაშის ჩატვირთვა
+
+@ Autosaves
+ka ავტოშენახვები
+
+@ newest first
+ka ჯერ უახლესი
+
+@ Saves: {}
+ka შენახვები: {}
+
+@ Browse Autosaves
+ka ავტოშენახვების დათვალიერება
+
+@ Every retained autosave, newest first
+ka ყველა შენახული ავტოშენახვა, ჯერ უახლესი
+
+@ New save
+ka ახალი შენახვა
+
+@ Select to save your game here
+ka აირჩიეთ თამაშის აქ შესანახად
+
+@ No autosaves yet
+ka ავტოშენახვები ჯერ არ არის
+
+@ Autosaves are made on level entry, secrets and more (Options > Gameplay)
+ka ავტოშენახვა ხდება დონეზე შესვლისას, საიდუმლოებზე და სხვა (პარამეტრები > გეიმპლეი)
+
+@ No saves yet
+ka შენახვები ჯერ არ არის
+
+@ Save from the Single Player menu, or press F6 to quicksave
+ka შეინახეთ ერთმოთამაშიანი მენიუდან ან დააჭირეთ F6-ს სწრაფი შენახვისთვის
+
+@ No picture
+ka სურათი არ არის
+
+@ Del: delete save
+ka Del: შენახვის წაშლა
+
+@ Delete "{}"?
+ka წაიშალოს „{}“?
+
+@ This cannot be undone.
+ka ამის გაუქმება შეუძლებელია.
+
+@ Quicksave
+ka სწრაფი შენახვა
+
+@ Autosave: {}
+ka ავტოშენახვა: {}
+
+@ unknown trigger
+ka უცნობი მიზეზი
+
+@ Latest - {}
+ka უახლესი - {}
+
+@ Health {}
+ka ჯანმრთელობა {}
+
+@ Armor {}
+ka ჯავშანი {}
+
+@ Kills {}/{}
+ka მოკლული {}/{}
+
+@ Secrets {}/{}
+ka საიდუმლოები {}/{}
+
+@ Split-screen, {} players
+ka გაყოფილი ეკრანი, {} მოთამაშე
+
+@ Co-op
+ka კოოპ.
+
+@ Customized
+ka მორგებული
+
+@ Customized, {}
+ka მორგებული, {}
+
+@ Date unavailable
+ka თარიღი მიუწვდომელია
+
+@ Just now
+ka ახლახან
+
+@ {} min ago
+ka {} წთ წინ
+
+@ {} h ago
+ka {} სთ წინ
+
+@ Level entry
+ka დონეზე შესვლა
+
+@ Secret found
+ka საიდუმლო ნაპოვნია
+
+@ All enemies killed
+ka ყველა მტერი მოკლულია
+
+@ All secrets found
+ka ყველა საიდუმლო ნაპოვნია
+
+@ Timer
+ka ტაიმერი
+
+# customize pages
+@ Standard rules
+ka სტანდარტული წესები
+
+@ Modifiers changed: {}
+ka შეცვლილი მოდიფიკატორები: {}
+
+@ no add-ons
+ka დამატებების გარეშე
+
+@ add-ons: {}
+ka დამატებები: {}
+
+@ Saves of this game are .qsa files: they need this source port.
+ka ამ თამაშის შენახვები .qsa ფაილებია: მათ ეს პორტი სჭირდება.
+
+@ Nothing changed: this plays as standard Quake.
+ka არაფერი შეცვლილა: ეს სტანდარტული Quake-ია.
+
+@ Changes apply now and are saved with this game (.qsa).
+ka ცვლილებები მოქმედებს ახლავე და ინახება ამ თამაშთან (.qsa).
+
+@ This game started without Customize, so its rules are fixed.
+ka ეს თამაში მორგების გარეშე დაიწყო, ამიტომ მისი წესები ფიქსირებულია.
+
+@ Start a new game and choose Customize Experience.
+ka დაიწყეთ ახალი თამაში და აირჩიეთ „გამოცდილების მორგება“.
+
+@ These rules apply to the next customized game.
+ka ეს წესები მოქმედებს შემდეგ მორგებულ თამაშზე.
+
+# add-on browser
+@ Fire
+ka სროლა
+
+@ Alt Fire
+ka ალტ. სროლა
+
+@ Configure Parameters >
+ka პარამეტრების კონფიგურაცია >
+
+@ Configure
+ka კონფიგურაცია
+
+@ Settings
+ka პარამეტრები
+
+@ Change slot
+ka სლოტის შეცვლა
+
+@ Toggle
+ka გადართვა
+
+@ Details
+ka დეტალები
+
+@ Enter or click the box: toggle
+ka Enter ან ველზე დაწკაპუნება: გადართვა
+
+@ Right / Tab / click: details
+ka მარჯვნივ / Tab / დაწკაპუნება: დეტალები
+
+@ Input Remapping
+ka შეყვანის გადანიშვნა
+
+@ Weapon Slot
+ka იარაღის სლოტი
+
+@ Customized games save as .qsa files, which need this source port.
+ka მორგებული თამაშები ინახება .qsa ფაილებად, რომლებსაც ეს პორტი სჭირდება.
+
+@ This game started without Customize, so its add-ons are fixed. Customize a new game instead.
+ka ეს თამაში მორგების გარეშე დაიწყო, ამიტომ მისი დამატებები ფიქსირებულია. სანაცვლოდ მოირგეთ ახალი თამაში.
+
+@ Bullet Time
+ka ნელი დრო
+
+@ Change Goggles
+ka სათვალის შეცვლა
+
+@ Dodge / Dive
+ka აცილება / ხტომა
+
+@ Goggles
+ka სათვალე
+
+@ Hitstop
+ka ჰიტსტოპი
+
+@ Projectile Shotguns
+ka ჭურვიანი თოფები
+
+@ BULLET TIME: 20%
+ka ნელი დრო: 20%
+
+@ NORMAL SPEED
+ka ნორმალური სიჩქარე
+
+@ SLOW MOTION: PHYSICAL PELLETS
+ka შენელება: ფიზიკური საფანტი
+
+@ DEMONSTRATION
+ka დემონსტრაცია
+
+@ GAMEPLAY
+ka გეიმპლეი
+
+@ LOOP
+ka ციკლი
+
+@ Preview unavailable
+ka გადახედვა მიუწვდომელია
+
+# shader and language help lines
+@ A setting of the chosen shader; arrows step it, Enter is not needed
+ka არჩეული შეიდერის პარამეტრი; ისრები ცვლის მას, Enter საჭირო არ არის
+
+@ Language of the menus, messages and the 2021 re-release's game text; System follows your computer's language
+ka მენიუების, შეტყობინებების და 2021 წლის ხელახალი გამოშვების ტექსტის ენა; „სისტემური“ მიჰყვება კომპიუტერის ენას
+
+@ Puts every setting of the chosen shader back to the preset's defaults
+ka არჩეული შეიდერის ყველა პარამეტრს პრესეტის ნაგულისხმევზე აბრუნებს
+
+@ RetroArch slang shader on the final image: CRT, scanlines, NTSC, sharpening; add your own in <game>/shaders
+ka RetroArch slang შეიდერი საბოლოო გამოსახულებაზე: CRT, ხაზები, NTSC, სიმკვეთრე; დაამატეთ საკუთარი <game>/shaders-ში
+
+# modern console footer
+@ Shift+PgUp/Dn: height  ` : hide
+ka Shift+PgUp/Dn: სიმაღლე  ` : დამალვა
+
+@ Tab: complete  Ctrl+R: search  bash | pipe
+ka Tab: დასრულება  Ctrl+R: ძებნა  bash | მილი
+
+@ ↑ +{} lines (End to jump) 
+ka ↑ +{} ხაზი (End — ბოლოში) 
+
+# add-on descriptions
+@ Create two linked portals on flat walls. Fire places the first portal; Alt Fire places the second. Walk through either portal to emerge from the other. Your momentum carries through. Assign a weapon slot below: pressing that slot repeatedly cycles its ordinary weapon and every enabled add-on assigned there. Portal view quality is configurable below.
+ka შექმენით ორი დაკავშირებული პორტალი ბრტყელ კედლებზე. სროლა ათავსებს პირველ პორტალს, ალტ. სროლა — მეორეს. შედით ერთში, რომ მეორიდან გამოხვიდეთ; ინერცია ნარჩუნდება. მიანიჭეთ იარაღის სლოტი ქვემოთ: ამ სლოტის განმეორებით დაჭერა გადართავს მის ჩვეულებრივ იარაღს და მასზე მინიჭებულ ყველა ჩართულ დამატებას. პორტალის ხედის ხარისხი ქვემოთ რეგულირდება.
+
+@ Hold Fire and sweep the crosshair over monsters to queue targets. Release Fire to throw: the boomerang visits each target, stuns it and returns to you. Alt Fire clears the queue. The weapon slot selects a group, not a separate hotkey: press it again to cycle through the weapons in that slot. Configure stun duration and flight speed below.
+ka დაიჭირეთ სროლა და სამიზნე მონსტრებზე გადაატარეთ მიზნების რიგში ჩასაყენებლად. გაუშვით სროლა სასროლად: ბუმერანგი თითოეულ მიზანს მიფრინავს, აბრუებს მას და თქვენთან ბრუნდება. ალტ. სროლა რიგს ასუფთავებს. იარაღის სლოტი ჯგუფს ირჩევს და არა ცალკე ღილაკს: ხელახლა დააჭირეთ ამ სლოტის იარაღებს შორის გადასართავად. გაბრუების ხანგრძლივობა და ფრენის სიჩქარე ქვემოთ რეგულირდება.
+
+@ Hold Fire to charge a sticky bomb using rocket ammunition; release to launch. A longer charge throws it faster. Bombs cling to walls, doors and monsters. Alt Fire detonates your planted bombs together. Place a trap, retreat, then detonate it when enemies approach. Assign any weapon slot below; repeated presses cycle through the ordinary weapon and add-ons in that slot.
+ka დაიჭირეთ სროლა წებოვანი ბომბის დასამუხტად რაკეტების ვაზნებით; გაუშვით გასაშვებად. ხანგრძლივი დამუხტვა მას უფრო სწრაფად ისვრის. ბომბები ეკვრის კედლებს, კარებს და მონსტრებს. ალტ. სროლა ყველა დაყენებულ ბომბს ერთად აფეთქებს. დააყენეთ ხაფანგი, დაიხიეთ და აფეთქეთ, როცა მტრები მოახლოვდებიან. მიანიჭეთ ნებისმიერი იარაღის სლოტი ქვემოთ; განმეორებითი დაჭერა გადართავს ჩვეულებრივ იარაღსა და ამ სლოტის დამატებებს.
+
+@ Fire launches a chain hook. It latches onto a permitted surface or enemy and reels you toward the anchor. Fire again or use Alt Fire to let go. Choose which materials and enemies can be hooked in Configure Parameters. Assign it to any weapon slot; repeated presses of the slot's existing binding cycle through its weapons.
+ka სროლა ჯაჭვიან კაუჭს ისვრის. ის ედება დაშვებულ ზედაპირს ან მტერს და თქვენ საყრდენი წერტილისკენ მიგათრევთ. გასაშვებად ისევ ისროლეთ ან გამოიყენეთ ალტ. სროლა. რომელ მასალებსა და მტრებს შეიძლება მოედოს კაუჭი, აირჩიეთ „პარამეტრების კონფიგურაციაში“. მიანიჭეთ ნებისმიერ იარაღის სლოტს; სლოტის არსებული ღილაკის განმეორებით დაჭერა მის იარაღებს გადართავს.
+
+@ A piercing railgun inspired by Quake III. Fire sends a slug through every enemy along its line. Each shot consumes two cells, with a 1.5 second refire interval. Damage and the spiral trail colour are configurable below. Choose a weapon slot: the slot's current binding selects and cycles the weapons assigned to it.
+ka Quake III-ით შთაგონებული გამხვრეტი რეილგანი. სროლა ჭურვს უშვებს ხაზზე მყოფი ყველა მტრის გავლით. თითოეული გასროლა ორ ელემენტს ხარჯავს, 1,5 წამიანი ინტერვალით. დაზიანება და სპირალური კვალის ფერი ქვემოთ რეგულირდება. აირჩიეთ იარაღის სლოტი: სლოტის მიმდინარე ღილაკი ირჩევს და გადართავს მასზე მინიჭებულ იარაღებს.
+
+@ A Portal-style gel sprayer. Fire sprays blue Repulsion gel: land, jump or run into it to bounce, and landings on it never hurt. Alt Fire sprays orange Propulsion gel: run across it to go much faster. Gel coats floors and walls until washed off with the Powerwasher. Assign a weapon slot below; repeated presses cycle the weapons in that slot.
+ka Portal-ის სტილის გელის გამფრქვევი. სროლა ასხამს ლურჯ განმზიდავ გელს: დაეშვით, გადახტით ან შეირბინეთ მასში ასახლეტად, მასზე დაშვება კი არასოდეს გაზიანებთ. ალტ. სროლა ასხამს ნარინჯისფერ ამაჩქარებელ გელს: გადაირბინეთ მასზე ბევრად უფრო სწრაფად მოძრაობისთვის. გელი ფარავს იატაკსა და კედლებს, სანამ სარეცხი აპარატით არ ჩამოირეცხება. მიანიჭეთ იარაღის სლოტი ქვემოთ; განმეორებითი დაჭერა ამ სლოტის იარაღებს გადართავს.
+
+@ A water cannon. Fire shoots a straight jet with limited reach; Alt Fire a wide, shorter fan. The water pushes enemies back, turns projectiles aside and washes away gel and blood. Push strength is configurable below. Assign a weapon slot below; repeated presses cycle the weapons in that slot.
+ka წყლის ჭავლი. სროლა ისვრის სწორ ჭავლს შეზღუდული მანძილით; ალტ. სროლა — ფართო, უფრო მოკლე მარაოს. წყალი მტრებს უკან აგდებს, ჭურვებს გვერდზე უხვევს და გელსა და სისხლს რეცხავს. ბიძგის ძალა ქვემოთ რეგულირდება. მიანიჭეთ იარაღის სლოტი ქვემოთ; განმეორებითი დაჭერა ამ სლოტის იარაღებს გადართავს.
+
+@ One equipment add-on includes both night vision and thermal vision. The Change Goggles action cycles Normal, Night Vision, Thermal, then Normal again. Night vision brightens dark rooms; thermal vision highlights living enemies. Goggles do not occupy a weapon slot. Configure intensity and sensor noise below. The binding affects only this add-on.
+ka აღჭურვილობის ერთი დამატება მოიცავს ღამის და თერმულ ხედვას. მოქმედება „სათვალის შეცვლა“ გადართავს ჩვეულებრივს, ღამის ხედვას, თერმულს და ისევ ჩვეულებრივს. ღამის ხედვა ბნელ ოთახებს ანათებს; თერმული ხედვა ცოცხალ მტრებს გამოყოფს. სათვალე იარაღის სლოტს არ იკავებს. ინტენსივობა და სენსორის ხმაური ქვემოთ რეგულირდება. მინიჭება მხოლოდ ამ დამატებაზე მოქმედებს.
+
+@ Press Dodge with a movement direction on the ground or in midair: dive forward or leap backward and sideways. Diagonals are supported. Each press launches once, with a short recovery. The player body animates in third person. Assign the Dodge action below or in Controls.
+ka დააჭირეთ აცილებას მოძრაობის მიმართულებასთან ერთად მიწაზე ან ჰაერში: ისკუპეთ წინ ან გადახტით უკან და გვერდზე. დიაგონალებიც მუშაობს. ყოველი დაჭერა ერთხელ გისვრით, მოკლე აღდგენით. მოთამაშის სხეული მესამე პირიდან ანიმირებულია. მიანიჭეთ მოქმედება „აცილება“ ქვემოთ ან მართვაში.
+
+@ Use the dedicated Bullet Time action to slow the whole local game to 20% speed. Hold is the default; Toggle switches on each press. The optional meter limits use in real seconds and regenerates while inactive. Disable the meter for unlimited use. Remap the action and configure duration and regeneration below.
+ka გამოიყენეთ ცალკე მოქმედება „ნელი დრო“ მთელი ლოკალური თამაშის 20% სიჩქარემდე შესანელებლად. ნაგულისხმევია დაჭერა; გადართვა ყოველ დაჭერაზე იცვლება. არასავალდებულო შკალა ზღუდავს გამოყენებას რეალურ წამებში და უმოქმედობისას აღდგება. გამორთეთ შკალა შეუზღუდავი გამოყენებისთვის. გადანიშნეთ მოქმედება და დააყენეთ ხანგრძლივობა და აღდგენა ქვემოთ.
+
+@ Both shotguns and enemy grunts fire physical pellets with their original spread and damage. Fast default projectiles feel immediate; lower their speed to dodge incoming fire during bullet time. Configure projectile speed below, or reset it to the default of 10000 units per second.
+ka ორივე თოფი და მტერი ჯარისკაცები ისვრიან ფიზიკურ საფანტს ორიგინალური გაფანტვითა და დაზიანებით. სწრაფი ნაგულისხმევი ჭურვები მყისიერად აღიქმება; შეამცირეთ მათი სიჩქარე, რომ ნელ დროში შემომავალ ცეცხლს აარიდოთ თავი. დააყენეთ ჭურვის სიჩქარე ქვემოთ ან დააბრუნეთ ნაგულისხმევი 10000 ერთეული წამში.
+
+@ Freezes the game for a split second when you damage an enemy, so hits feel heavier. Single player only. Choose which weapons trigger it (all, melee, ranged or explosives), how long it lasts and how much more a kill freezes. Advanced settings cover enemy toughness, damage scaling, cooldown and the longest freeze.
+ka მტრის დაზიანებისას თამაშს წამის ნაწილით ყინავს, რომ დარტყმები უფრო მძიმედ იგრძნობოდეს. მხოლოდ ერთმოთამაშიანი. აირჩიეთ, რომელი იარაღი იწვევს მას (ყველა, ახლო ბრძოლა, შორი ბრძოლა ან ასაფეთქებლები), რამდენ ხანს გრძელდება და რამდენად მეტს ყინავს მოკვლა. დამატებითი პარამეტრები მოიცავს მტრის სიძლიერეს, დაზიანების მასშტაბს, გადატვირთვას და უგრძეს გაყინვას.
+
+# map packs and the Quaddicted browser
+@ Get more maps (Quaddicted)...
+ka მეტი რუკა (Quaddicted)...
+
+@ Type to filter...
+ka აკრიფეთ ფილტრისთვის...
+
+@ Launch mod
+ka მოდის გაშვება
+
+@ Start first map
+ka პირველი რუკის დაწყება
+
+@ (running)
+ka (გაშვებულია)
+
+@ running
+ka გაშვებულია
+
+@ Recent
+ka ბოლოს
+
+@ Name
+ka სახელი
+
+@ Dir
+ka საქაღალდე
+
+@ Default
+ka ნაგულისხმევი
+
+@ Title
+ka სათაური
+
+@ Sort: {}
+ka დალაგება: {}
+
+@ {} installed
+ka დაყენებულია: {}
+
+@ {}/{} matching
+ka დამთხვევა: {}/{}
+
+@ {} maps, {} completed
+ka რუკები: {}, გავლილი: {}
+
+@ {}/{} matching, {} completed
+ka დამთხვევა: {}/{}, გავლილი: {}
+
+@ no maps of its own
+ka საკუთარი რუკები არ აქვს
+
+@ dir: {}
+ka საქაღალდე: {}
+
+@ base: {}
+ka საფუძველი: {}
+
+@ Browse the Quaddicted archive of
+ka დაათვალიერეთ Quaddicted-ის არქივი
+
+@ single-player maps and episodes,
+ka ერთმოთამაშიანი რუკებითა და ეპიზოდებით,
+
+@ then download and install them
+ka შემდეგ ჩამოტვირთეთ და დააყენეთ
+
+@ here. Each release gets its own
+ka აქვე. თითოეული გამოშვება იღებს
+
+@ entry in this list.
+ka საკუთარ ჩანაწერს ამ სიაში.
+
+@ Needs an internet connection.
+ka საჭიროა ინტერნეტ-კავშირი.
+
+@ Quaddicted Map Archive
+ka Quaddicted-ის რუკების არქივი
+
+@ Newest
+ka უახლესი
+
+@ Author
+ka ავტორი
+
+@ Size
+ka ზომა
+
+@ Loading the map list...
+ka რუკების სია იტვირთება...
+
+@ Couldn't load the map list: {}
+ka რუკების სიის ჩატვირთვა ვერ მოხერხდა: {}
+
+@ {} single-player releases  -  F5 refreshes
+ka ერთმოთამაშიანი გამოშვებები: {}  -  F5 განაახლებს
+
+@ {} matching
+ka დამთხვევა: {}
+
+@ by {}
+ka ავტორი: {}
+
+@ requires: {}
+ka საჭიროებს: {}
+
+@ maps: {}
+ka რუკები: {}
+
+@ Failed: {}
+ka შეცდომა: {}
+
+@ Downloading... {}%
+ka ჩამოტვირთვა... {}%
+
+@ Unpacking...
+ka გახსნა...
+
+@ Installed in {}/  -  Enter: play
+ka დაყენებულია {}/-ში  -  Enter: თამაში
+
+@ Enter: download and install
+ka Enter: ჩამოტვირთვა და დაყენება
+
+@ unpacking
+ka იხსნება
+
+@ failed
+ka შეცდომა
+
+@ installed
+ka დაყენებულია
+
+@ Downloads are not available in the browser build
+ka ჩამოტვირთვები ბრაუზერის ვერსიაში მიუწვდომელია
+
+@ the map list could not be read
+ka რუკების სიის წაკითხვა ვერ მოხერხდა
+
+@ downloading needs the curl program
+ka ჩამოტვირთვას curl პროგრამა სჭირდება
+
+@ download failed
+ka ჩამოტვირთვა ვერ მოხერხდა
+
+@ the download is not a valid zip
+ka ჩამოტვირთული ფაილი სწორი zip არ არის
+
+@ nothing to install for this engine
+ka ამ ძრავისთვის დასაყენებელი არაფერია
+
+@ needs {} installed first
+ka ჯერ უნდა დაყენდეს {}
+
+@ couldn't unpack {}
+ka {} ვერ გაიხსნა
+
+# help screen
+@ About
+ka შესახებ
+
+@ < Back
+ka < უკან
+
+# tr_ctx keys: English shows the short word, the key says which meaning
+@ Save (a manual save, as opposed to a quicksave or autosave)
+ka შენახვა
+
+# ==== hud.txt ====
+
+# HUD, weapon and equipment wheels, sound captions and other in-game text.
+# Weapon, monster and item names follow the 2021 re-release's own translations.
+@ Axe
+ka ცული
+
+@ Shotgun
+ka თოფი
+
+@ Double-Barrelled Shotgun
+ka ორლულიანი თოფი
+
+@ Nailgun
+ka ლურსმნის თოფი
+
+@ Super Nailgun
+ka სუპერ ლურსმნის თოფი
+
+@ Grenade Launcher
+ka ყუმბარმტყორცნი
+
+@ Rocket Launcher
+ka რაკეტმტყორცნი
+
+@ Thunderbolt
+ka მეხი
+
+@ Portal Gun
+ka პორტალის იარაღი
+
+@ Boomerang
+ka ბუმერანგი
+
+@ Stickybomb Launcher
+ka წებოვანი ბომბმტყორცნი
+
+@ Railgun
+ka რეილგანი
+
+@ Hookshot
+ka კაუჭი
+
+@ Gel Sprayer
+ka გელის გამფრქვევი
+
+@ Powerwasher
+ka სარეცხი აპარატი
+
+@ Night Vision Goggles
+ka ღამის ხედვის სათვალე
+
+@ Thermal Goggles
+ka თერმული სათვალე
+
+@ Normal vision
+ka ჩვეულებრივი ხედვა
+
+@ ON
+ka ჩართ.
+
+@ OFF
+ka გამორთ.
+
+@ {} (turn on)
+ka {} (ჩართვა)
+
+@ {} (turn off)
+ka {} (გამორთვა)
+
+@ Move mouse to select, release to toggle
+ka ამოძრავეთ მაუსი ასარჩევად, გაუშვით გადასართავად
+
+@ Move mouse to select, release to equip
+ka ამოძრავეთ მაუსი ასარჩევად, გაუშვით ასაღებად
+
+@ Release to toggle
+ka გაუშვით გადასართავად
+
+@ Release to equip
+ka გაუშვით ასაღებად
+
+@ shells
+ka საფანტი
+
+@ nails
+ka ლურსმნები
+
+@ rockets
+ka რაკეტები
+
+@ cells
+ka ელემენტები
+
+@ Kills: {}/{}
+ka მოკლული: {}/{}
+
+@ Secrets: {}/{}
+ka საიდუმლოები: {}/{}
+
+@ Time {}
+ka დრო {}
+
+@ Press any button to continue...
+ka დააჭირეთ ნებისმიერ ღილაკს გასაგრძელებლად...
+
+@ Press any key to continue...
+ka დააჭირეთ ნებისმიერ კლავიშს გასაგრძელებლად...
+
+@ BULLET TIME
+ka ნელი დრო
+
+@ AUTO AIM
+ka ავტოდამიზნება
+
+@ Crosshair
+ka სამიზნე
+
+@ + Marker
+ka + მარკერი
+
+@ Hit markers off
+ka მოხვედრის მარკერები გამორთულია
+
+@ On target
+ka მიზანზე
+
+@ On kill
+ka მოკვლისას
+
+# sound captions
+@ [Secret found]
+ka [საიდუმლო ნაპოვნია]
+
+@ [Message]
+ka [შეტყობინება]
+
+@ [Switch activated]
+ka [გადამრთველი ჩაირთო]
+
+@ [Key picked up]
+ka [გასაღები აღებულია]
+
+@ [Rune picked up]
+ka [რუნა აღებულია]
+
+@ [Teleporter]
+ka [ტელეპორტი]
+
+@ [Teleport]
+ka [ტელეპორტაცია]
+
+@ [Splash]
+ka [შხეფი]
+
+@ [Leaving water]
+ka [წყლიდან გამოსვლა]
+
+@ [Door]
+ka [კარი]
+
+@ [Platform moving]
+ka [პლატფორმა მოძრაობს]
+
+@ [Button]
+ka [ღილაკი]
+
+@ [Health picked up]
+ka [ჯანმრთელობა აღებულია]
+
+@ [Armor picked up]
+ka [ჯავშანი აღებულია]
+
+@ [Quad Damage wearing off]
+ka [ოთხმაგი დაზიანება სრულდება]
+
+@ [Quad Damage]
+ka [ოთხმაგი დაზიანება]
+
+@ [Pentagram wearing off]
+ka [პენტაგრამა სრულდება]
+
+@ [Pentagram of Protection]
+ka [დაცვის პენტაგრამა]
+
+@ [Ring wearing off]
+ka [ბეჭედი სრულდება]
+
+@ [Ring of Shadows]
+ka [ჩრდილების ბეჭედი]
+
+@ [Biosuit wearing off]
+ka [ბიოკოსტიუმი სრულდება]
+
+@ [Biosuit]
+ka [ბიოკოსტიუმი]
+
+@ [Item picked up]
+ka [ნივთი აღებულია]
+
+@ [Weapon picked up]
+ka [იარაღი აღებულია]
+
+@ [Ammo picked up]
+ka [ვაზნები აღებულია]
+
+@ [Explosion]
+ka [აფეთქება]
+
+@ [Grenade launched]
+ka [ყუმბარა გასროლილია]
+
+@ [Grenade bounce]
+ka [ყუმბარა ასხლტა]
+
+@ [Rocket fired]
+ka [რაკეტა გასროლილია]
+
+@ [Nails fired]
+ka [ლურსმნები გასროლილია]
+
+@ [Lightning]
+ka [ელვა]
+
+@ [Thunder]
+ka [ქუხილი]
+
+@ [Enforcer alerted]
+ka [ენფორსერმა შეგამჩნიათ]
+
+@ [Grunt alerted]
+ka [ჯარისკაცმა შეგამჩნიათ]
+
+@ [Rottweiler alerted]
+ka [როტვეილერმა შეგამჩნიათ]
+
+@ [Knight alerted]
+ka [რაინდმა შეგამჩნიათ]
+
+@ [Death Knight alerted]
+ka [სიკვდილის რაინდმა შეგამჩნიათ]
+
+@ [Scrag alerted]
+ka [სკრაგმა შეგამჩნიათ]
+
+@ [Ogre alerted]
+ka [ოგრმა შეგამჩნიათ]
+
+@ [Fiend alerted]
+ka [დემონმა შეგამჩნიათ]
+
+@ [Shambler alerted]
+ka [შამბლერმა შეგამჩნიათ]
+
+@ [Zombie groaning]
+ka [ზომბი კვნესის]
+
+@ [Vore alerted]
+ka [ვორმა შეგამჩნიათ]
+
+@ [Vore attacking]
+ka [ვორი უტევს]
+
+@ [Spawn alerted]
+ka [სპონმა შეგამჩნიათ]
+
+@ [Rotfish]
+ka [პირანია]
+
+@ [Spawn]
+ka [სპონი]
+
+@ [Chthon]
+ka [ქთონი]
+
+@ [Hard landing]
+ka [მძიმე დაშვება]
+
+@ [Drowning]
+ka [იხრჩობა]
+
+@ [Gasping for air]
+ka [ჰაერს ხარბად ისუნთქავს]
+
+@ [Burning]
+ka [იწვის]
+
+@ [Telefrag]
+ka [ტელეფრაგი]
+
+@ [Gibbed]
+ka [ნაფლეთებად იქცა]
+
+# ==== console.txt ====
+
+# Console messages, shown translated only with con_translate 1 (Translate Console).
+# Cvar and command names stay as they are.
+@ Autosaved.
+ka ავტომატურად შენახულია.
+
+@ Game saved.
+ka თამაში შენახულია.
+
+@ Can't save now.
+ka ახლა შენახვა შეუძლებელია.
+
+@ This game only autosaves (No Manual Saves modifier).
+ka ეს თამაში მხოლოდ ავტომატურად ინახება (მოდიფიკატორი „ხელით შენახვის გარეშე“).
+
+@ Loading {}...
+ka {} იტვირთება...
+
+@ load failed: {}
+ka ჩატვირთვა ვერ მოხერხდა: {}
+
+@ ERROR: autosave failed: {}
+ka შეცდომა: ავტოშენახვა ვერ მოხერხდა: {}
+
+@ ERROR: couldn't open {}
+ka შეცდომა: {} ვერ გაიხსნა
+
+@ ERROR: couldn't open {}.
+ka შეცდომა: {} ვერ გაიხსნა.
+
+@ ERROR: couldn't write {}: {}
+ka შეცდომა: {} ვერ ჩაიწერა: {}
+
+@ ERROR: couldn't create {}: {}
+ka შეცდომა: {} ვერ შეიქმნა: {}
+
+@ couldn't write {}: {}
+ka {} ვერ ჩაიწერა: {}
+
+@ Wrote {}
+ka ჩაიწერა {}
+
+@ screenshot failed: {}
+ka ეკრანის სურათი ვერ შეიქმნა: {}
+
+@ screenshot: {}
+ka ეკრანის სურათი: {}
+
+@ No readable save available. Select save or restart the level.
+ka წაკითხვადი შენახვა არ არის. აირჩიეთ შენახვა ან დაიწყეთ დონე თავიდან.
+
+@ Unknown command "{}"
+ka უცნობი ბრძანება „{}“
+
+@ couldn't exec {}
+ka {} ვერ შესრულდა
+
+@ execing {}
+ka სრულდება {}
+
+@ execing config.cfg (inherited from {})
+ka სრულდება config.cfg (მემკვიდრეობით {}-დან)
+
+@ execing config.cfg (mod defaults)
+ka სრულდება config.cfg (მოდის ნაგულისხმევი)
+
+@ execing default.cfg (built-in)
+ka სრულდება default.cfg (ჩაშენებული)
+
+@ {} cvars
+ka ცვლადები: {}
+
+@ {} commands
+ka ბრძანებები: {}
+
+@ Can't "cmd", not connected
+ka „cmd“ შეუძლებელია: კავშირი არ არის
+
+@ Looking for Quake servers...
+ka Quake სერვერების ძებნა...
+
+@ Bad value, must be between 1 and 65534
+ka არასწორი მნიშვნელობა, უნდა იყოს 1-დან 65534-მდე
+
+@ Couldn't handle music file {}
+ka მუსიკალური ფაილი {} ვერ დამუშავდა
+
+@ Bug report written to {}
+ka შეცდომის ანგარიში ჩაიწერა: {}
+
+@ bugreport: can't create {}: {}
+ka bugreport: {} ვერ შეიქმნა: {}
+
+@ graphics preset: {}
+ka გრაფიკის პრესეტი: {}
+
+@ Presets (r_shader_preset <name>):
+ka პრესეტები (r_shader_preset <სახელი>):
+
+@ Add your own .slangp presets under <game>/shaders/.
+ka დაამატეთ საკუთარი .slangp პრესეტები <game>/shaders/-ში.
+
+@ no shader preset loaded (r_shader_preset)
+ka შეიდერის პრესეტი არ არის ჩატვირთული (r_shader_preset)
+
+@ r_shader_preset: "{}" not found
+ka r_shader_preset: „{}“ ვერ მოიძებნა
+
+@ no parameter "{}" in this preset
+ka ამ პრესეტში პარამეტრი „{}“ არ არის
+
+@ {} = {} (default {}, {}..{})
+ka {} = {} (ნაგულისხმევი {}, {}..{})
+
+@ Switching to {}...
+ka გადართვა: {}...
+
+@ game: no game dir "{}" in {}
+ka game: თამაშის საქაღალდე „{}“ არ არის {}-ში
+
+@ game: can't find the engine executable
+ka game: ძრავის შესრულებადი ფაილი ვერ მოიძებნა
+
+@ game: exec failed: {}
+ka game: შესრულება ვერ მოხერხდა: {}
+
+@ game: launch failed: {}
+ka game: გაშვება ვერ მოხერხდა: {}
+
+@ loaded {} in {}s
+ka {} ჩაიტვირთა {} წმ-ში
+
+@ No demos listed with startdemos
+ka startdemos-ში დემოები არ არის
+
+@ Playing demo from {}.
+ka დემოს დაკვრა: {}.
+
+@ {} frames {} seconds {} fps
+ka {} კადრი {} წამი {} FPS
+
+@ Recording to {}.
+ka ჩაწერა: {}.
+
+@ Completed demo
+ka დემო დასრულდა
+
+@ Can't record during demo playback
+ka დემოს დაკვრისას ჩაწერა შეუძლებელია
+
+@ Relative pathnames are not allowed.
+ka ფარდობითი გზები დაუშვებელია.
+
+@ Can't record - try again when connected
+ka ჩაწერა შეუძლებელია - სცადეთ დაკავშირების შემდეგ
+
+@ {} demo(s) in loop
+ka დემოები ციკლში: {}
+
+@ Not recording a demo.
+ka დემო არ იწერება.
+
+@ {} joined on a gamepad
+ka {} შემოუერთდა გეიმპადით
+
+@ goggles: needs a game started with Add-ons and Goggles enabled
+ka goggles: საჭიროა თამაში, დაწყებული ჩართული დამატებებით და სათვალით
+
+@ equip: needs a game started with Add-ons and Goggles enabled
+ka equip: საჭიროა თამაში, დაწყებული ჩართული დამატებებით და სათვალით
+
+@ UDP listening on port {}
+ka UDP უსმენს პორტს {}
+
+@ UDP bind on port {} failed: {}
+ka UDP პორტის {} დაკავება ვერ მოხერხდა: {}
+
+@ Connection accepted by {}
+ka კავშირი მიიღო {}
+
+@ Connection failed: {}
+ka დაკავშირება ვერ მოხერხდა: {}
+
+@ Couldn't resolve {}
+ka {} მისამართი ვერ დადგინდა
+
+@ Connecting to {}...
+ka დაკავშირება {}...
+
+@ Connecting to QuakeWorld server {}...
+ka დაკავშირება QuakeWorld სერვერთან {}...
+
+@ Disconnected: {}
+ka კავშირი გაწყდა: {}
+
+@ Server disconnected
+ka სერვერმა კავშირი გაწყვიტა
+
+@ Client {} connected
+ka კლიენტი {} დაკავშირდა
+
+@ Client {} timed out
+ka კლიენტი {} არ პასუხობს
+
+@ Couldn't spawn server {}: {}
+ka სერვერი {} ვერ გაეშვა: {}
+
+@ maxplayers can not be changed while a server is running.
+ka maxplayers ვერ შეიცვლება, სანამ სერვერი მუშაობს.
+
+@ You can't kick yourself!
+ka საკუთარი თავის გაგდება არ შეგიძლიათ!
+
+@ Only the server may changelevel
+ka changelevel მხოლოდ სერვერს შეუძლია
+
+@ {} renamed to {}
+ka {} ახლა არის {}

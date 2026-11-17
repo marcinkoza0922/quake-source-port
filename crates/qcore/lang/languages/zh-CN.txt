@@ -1,0 +1,3024 @@
+# zh-CN: the port's own text; English keys from crates/qcore/lang/*.txt.
+# Format in crates/qcore/src/lang/catalog.rs; check with tools/lang_check.py.
+
+# ==== menu.txt ====
+
+# Options pages: page names, row labels and choice values.
+@ 10% speed
+zh-CN 10% 速度
+
+@ 2 split-screen
+zh-CN 2 人分屏
+
+@ 3 split-screen
+zh-CN 3 人分屏
+
+@ 4 split-screen
+zh-CN 4 人分屏
+
+@ 5 split-screen
+zh-CN 5 人分屏
+
+@ 6 split-screen
+zh-CN 6 人分屏
+
+@ 2D aiming
+zh-CN 2D 瞄准
+
+@ 2x monsters
+zh-CN 2 倍怪物
+
+@ 3x monsters
+zh-CN 3 倍怪物
+
+@ 4x monsters
+zh-CN 4 倍怪物
+
+@ 3D resolution
+zh-CN 3D 分辨率
+
+@ 3D view
+zh-CN 3D 视图
+
+@ 8-bit Color
+zh-CN 8 位色彩
+
+@ Accessibility
+zh-CN 辅助功能
+
+@ Acquisition Cone
+zh-CN 锁定锥角
+
+@ Activation
+zh-CN 激活方式
+
+@ Add a ringing room tail after the cue
+zh-CN 在提示音后添加房间混响尾音
+
+@ Add delayed repeats after the cue
+zh-CN 在提示音后添加延迟回声
+
+@ Add saturation and distortion
+zh-CN 添加饱和与失真效果
+
+@ Add-ons
+zh-CN 附加功能
+
+@ Address
+zh-CN 地址
+
+@ Adds fine noise to hide color banding
+zh-CN 添加细微噪点以消除色带
+
+@ Advanced Settings
+zh-CN 高级设置
+
+@ Aim Assist
+zh-CN 辅助瞄准
+
+@ Aim Rotation
+zh-CN 瞄准转向
+
+@ Aim Slowdown
+zh-CN 瞄准减速
+
+@ Aim Style
+zh-CN 瞄准方式
+
+@ All
+zh-CN 全部
+
+@ All enemies
+zh-CN 所有敌人
+
+@ Alt Fire (Add-ons)
+zh-CN 副武器开火（附加功能）
+
+@ Always Run
+zh-CN 总是奔跑
+
+@ Ambient Occlusion
+zh-CN 环境光遮蔽
+
+@ Ammo Counts
+zh-CN 弹药数量
+
+@ Ammo Counts Position
+zh-CN 弹药数量位置
+
+@ Ammo Pickups
+zh-CN 拾取弹药
+
+@ Anisotropic
+zh-CN 各向异性
+
+@ Anti-aliasing
+zh-CN 抗锯齿
+
+@ Apply To
+zh-CN 应用于
+
+@ Armor
+zh-CN 护甲
+
+@ Armor Position
+zh-CN 护甲位置
+
+@ Ask
+zh-CN 询问
+
+@ Attack
+zh-CN 攻击
+
+@ Audio
+zh-CN 音频
+
+@ Auto-aim
+zh-CN 自动瞄准
+
+@ Auto-aim Settings
+zh-CN 自动瞄准设置
+
+@ Autosave
+zh-CN 自动存档
+
+@ Autosave Settings
+zh-CN 自动存档设置
+
+@ Autosave Timer
+zh-CN 定时自动存档
+
+@ Autosaves to Keep
+zh-CN 保留自动存档数
+
+@ Bass
+zh-CN 低音
+
+@ Blip
+zh-CN 哔声
+
+@ Blood Quality
+zh-CN 血液质量
+
+@ Blood Splatter Settings
+zh-CN 血液飞溅设置
+
+@ Blue
+zh-CN 蓝色
+
+@ Boomerang Settings
+zh-CN 回旋镖设置
+
+@ Boost or cut high frequencies in decibels
+zh-CN 以分贝为单位增强或削减高频
+
+@ Boost or cut low frequencies in decibels
+zh-CN 以分贝为单位增强或削减低频
+
+@ Brightness
+zh-CN 亮度
+
+@ Bullet Time (Add-ons)
+zh-CN 子弹时间（附加功能）
+
+@ Bullet Time Settings
+zh-CN 子弹时间设置
+
+@ Button Glyphs
+zh-CN 按键图标
+
+@ Button Size
+zh-CN 按钮大小
+
+@ Camera
+zh-CN 镜头
+
+@ Caustic Intensity
+zh-CN 焦散强度
+
+@ Caustics
+zh-CN 焦散
+
+@ Center
+zh-CN 居中
+
+@ Center Message Position
+zh-CN 中央消息位置
+
+@ Center Message Time
+zh-CN 中央消息时长
+
+@ Center View
+zh-CN 视角归中
+
+@ Change Color on Kill
+zh-CN 击杀时变色
+
+@ Change Color on Target
+zh-CN 瞄准目标时变色
+
+@ Chime
+zh-CN 钟声
+
+@ Click
+zh-CN 咔哒声
+
+@ Clink
+zh-CN 叮当声
+
+@ Coin
+zh-CN 硬币
+
+@ Color
+zh-CN 颜色
+
+@ Color Filter
+zh-CN 色彩滤镜
+
+@ Color of the grenade arc
+zh-CN 手榴弹抛物线的颜色
+
+@ Colored Lighting
+zh-CN 彩色光照
+
+@ Connect
+zh-CN 连接
+
+@ Contrast
+zh-CN 对比度
+
+@ Controls
+zh-CN 控制
+
+@ Cooldown (ms)
+zh-CN 冷却时间（毫秒）
+
+@ Crosshair Outline
+zh-CN 准星描边
+
+@ Crosshair Shape
+zh-CN 准星形状
+
+@ Crosshair Size
+zh-CN 准星大小
+
+@ Current Ammo
+zh-CN 当前弹药
+
+@ Current Ammo Position
+zh-CN 当前弹药位置
+
+@ Customize This Game
+zh-CN 自定义本局游戏
+
+@ Damage
+zh-CN 伤害
+
+@ Damage Taken
+zh-CN 受到伤害
+
+@ Debris
+zh-CN 碎片
+
+@ Debris Quality
+zh-CN 碎片质量
+
+@ Debris Settings
+zh-CN 碎片设置
+
+@ Directional Damage
+zh-CN 伤害方向指示
+
+@ Dithering
+zh-CN 抖动
+
+@ Dodge / Dive (Add-ons)
+zh-CN 闪避/飞扑（附加功能）
+
+@ Dragging up looks down instead of up
+zh-CN 向上拖动时视角向下
+
+@ Drive
+zh-CN 失真度
+
+@ Dynamic Lights
+zh-CN 动态光源
+
+@ Echo
+zh-CN 回声
+
+@ Enemy Health
+zh-CN 敌人生命值
+
+@ Enemy Wounds
+zh-CN 敌人伤口
+
+@ Enhanced Blood Splatter
+zh-CN 增强血液飞溅
+
+@ Enhanced FX
+zh-CN 增强特效
+
+@ Enhanced Models
+zh-CN 增强模型
+
+@ Enhanced Particles
+zh-CN 增强粒子
+
+@ Enhanced Water
+zh-CN 增强水面
+
+@ Enhancements
+zh-CN 增强效果
+
+@ Equipment Wheel (Add-ons)
+zh-CN 装备轮盘（附加功能）
+
+@ Exploding boxes throw metal shards
+zh-CN 爆炸的箱子会飞出金属碎片
+
+@ Explosion Damage
+zh-CN 爆炸伤害
+
+@ Explosion Scorch Marks
+zh-CN 爆炸焦痕
+
+@ Explosions scorch nearby solid surfaces
+zh-CN 爆炸会烧焦附近的固体表面
+
+@ Explosives only
+zh-CN 仅限爆炸物
+
+@ Extra Monsters
+zh-CN 额外怪物
+
+@ Extra Per 10 Damage (ms)
+zh-CN 每 10 点伤害额外时长（毫秒）
+
+@ FX Settings
+zh-CN 特效设置
+
+@ Field of View
+zh-CN 视野
+
+@ Firing never uses up ammo
+zh-CN 开火从不消耗弹药
+
+@ First person
+zh-CN 第一人称
+
+@ Flick Time
+zh-CN 甩动时间
+
+@ Flight Speed
+zh-CN 飞行速度
+
+@ Fog
+zh-CN 雾
+
+@ Frag Limit
+zh-CN 击杀上限
+
+@ Freeze Duration (ms)
+zh-CN 冻结时长（毫秒）
+
+@ GLQuake
+zh-CN GLQuake
+
+@ Game Speed
+zh-CN 游戏速度
+
+@ Game Type
+zh-CN 游戏类型
+
+@ Gameplay
+zh-CN 游戏性
+
+@ Gameplay Modifiers
+zh-CN 游戏修改项
+
+@ Gel Quality
+zh-CN 凝胶质量
+
+@ Gib Surface Painting
+zh-CN 碎肉表面染色
+
+@ Gibs
+zh-CN 碎肉
+
+@ Gibs and heads tumble and bounce
+zh-CN 碎肉和头颅会翻滚弹跳
+
+@ Goggle Glow Quality
+zh-CN 目镜光晕质量
+
+@ Goggle Intensity
+zh-CN 目镜强度
+
+@ Goggle Noise
+zh-CN 目镜噪点
+
+@ Goggles Settings
+zh-CN 目镜设置
+
+@ Graphics
+zh-CN 图形
+
+@ Green
+zh-CN 绿色
+
+@ Grenade Arc
+zh-CN 手榴弹抛物线
+
+@ Grenade Arc Settings
+zh-CN 手榴弹抛物线设置
+
+@ Gun Kick
+zh-CN 武器后坐
+
+@ Gyro
+zh-CN 陀螺仪
+
+@ Gyro & Flick Stick
+zh-CN 陀螺仪与甩动摇杆
+
+@ Gyro Active
+zh-CN 陀螺仪激活
+
+@ Gyro Aiming
+zh-CN 陀螺仪瞄准
+
+@ HUD
+zh-CN HUD
+
+@ HUD Style
+zh-CN HUD 样式
+
+@ Health
+zh-CN 生命值
+
+@ Health Pickups
+zh-CN 拾取生命
+
+@ Health Position
+zh-CN 生命值位置
+
+@ Health Regeneration
+zh-CN 生命值恢复
+
+@ Hit & Kill Sounds
+zh-CN 命中与击杀音效
+
+@ Hit Doors & Lifts
+zh-CN 可命中门和升降梯
+
+@ Hit Markers
+zh-CN 命中标记
+
+@ Hit Sound
+zh-CN 命中音效
+
+@ Hitmarker Size
+zh-CN 命中标记大小
+
+@ Hitmarker Type
+zh-CN 命中标记类型
+
+@ Hitstop Advanced
+zh-CN 顿帧高级设置
+
+@ Hitstop Settings
+zh-CN 顿帧设置
+
+@ Hold
+zh-CN 按住
+
+@ Hold lock-on
+zh-CN 按住锁定
+
+@ Hook Enemies
+zh-CN 钩取敌人
+
+@ Hook Metal
+zh-CN 钩取金属
+
+@ Hook Stone
+zh-CN 钩取石头
+
+@ Hook Wood
+zh-CN 钩取木头
+
+@ Hooking an enemy pulls you to it
+zh-CN 钩中敌人会将你拉向它
+
+@ Hookshot Range
+zh-CN 钩爪射程
+
+@ Hookshot Settings
+zh-CN 钩爪设置
+
+@ Host Game
+zh-CN 创建游戏
+
+@ How far the hook flies before it retracts
+zh-CN 钩爪收回前飞行的距离
+
+@ How visible the on-screen controls are
+zh-CN 屏幕控件的可见程度
+
+@ Impact Lifetime
+zh-CN 弹痕持续时间
+
+@ Infinite Ammo
+zh-CN 无限弹药
+
+@ Input
+zh-CN 输入
+
+@ Input Scale
+zh-CN 输入缩放
+
+@ Interpolate Animation
+zh-CN 动画插值
+
+@ Interpolate Movement
+zh-CN 移动插值
+
+@ Invert Look
+zh-CN 反转视角
+
+@ Invert Mouse
+zh-CN 反转鼠标
+
+@ Invert Stick
+zh-CN 反转摇杆
+
+@ Jet Quality
+zh-CN 水柱质量
+
+@ Join Game
+zh-CN 加入游戏
+
+@ Jump / Swim Up
+zh-CN 跳跃/上浮
+
+@ Jump again in mid-air
+zh-CN 在空中再次跳跃
+
+@ Jumps
+zh-CN 跳跃次数
+
+@ Keys & Powerups
+zh-CN 钥匙与强化道具
+
+@ Keys & Powerups Position
+zh-CN 钥匙与强化道具位置
+
+@ Kill Bonus (x)
+zh-CN 击杀奖励（倍）
+
+@ Kill Sound
+zh-CN 击杀音效
+
+@ Knock
+zh-CN 敲击声
+
+@ Left
+zh-CN 左
+
+@ Length of the motion blur streaks
+zh-CN 动态模糊拖影的长度
+
+@ Lifetime (seconds)
+zh-CN 持续时间（秒）
+
+@ Live Portal Views
+zh-CN 实时传送门画面
+
+@ Live View Distance
+zh-CN 实时画面距离
+
+@ Local Players
+zh-CN 本地玩家
+
+@ Local red wounds follow enemy animation
+zh-CN 局部红色伤口跟随敌人动画
+
+@ Lock Indicator
+zh-CN 锁定指示器
+
+@ Long falls don't hurt
+zh-CN 高处坠落不会受伤
+
+@ Longest Freeze (ms)
+zh-CN 最长冻结（毫秒）
+
+@ Look Down
+zh-CN 向下看
+
+@ Look Speed
+zh-CN 视角速度
+
+@ Look Up
+zh-CN 向上看
+
+@ Main Menu Music
+zh-CN 主菜单音乐
+
+@ Max FPS
+zh-CN 最大帧率
+
+@ Max Players
+zh-CN 最大玩家数
+
+@ Maximum Impacts
+zh-CN 最大弹痕数
+
+@ Maximum Marks
+zh-CN 最大痕迹数
+
+@ Maximum Range
+zh-CN 最大射程
+
+@ Melee only
+zh-CN 仅限近战
+
+@ Message Background
+zh-CN 消息背景
+
+@ Message Text Size
+zh-CN 消息文字大小
+
+@ Messages & Captions
+zh-CN 消息与字幕
+
+@ Meter Duration (real seconds)
+zh-CN 计量条时长（真实秒数）
+
+@ Minimum Damage
+zh-CN 最低伤害
+
+@ Mode
+zh-CN 模式
+
+@ Modern Console
+zh-CN 现代控制台
+
+@ Modern HUD Layout
+zh-CN 现代 HUD 布局
+
+@ Most recent save
+zh-CN 最新存档
+
+@ Motion Blur
+zh-CN 动态模糊
+
+@ Motion Blur Amount
+zh-CN 动态模糊强度
+
+@ Motion Blur Quality
+zh-CN 动态模糊质量
+
+@ Mouse & Keyboard
+zh-CN 鼠标与键盘
+
+@ Mouse Speed
+zh-CN 鼠标速度
+
+@ Move Back
+zh-CN 后退
+
+@ Move Forward
+zh-CN 前进
+
+@ Music Volume
+zh-CN 音乐音量
+
+@ Next Weapon
+zh-CN 下一把武器
+
+@ No Drowning
+zh-CN 不会溺水
+
+@ No Fall Damage
+zh-CN 无坠落伤害
+
+@ No Manual Saves
+zh-CN 禁止手动存档
+
+@ No Self Damage
+zh-CN 无自身伤害
+
+@ Noise Filter
+zh-CN 降噪滤波
+
+@ Normal Color
+zh-CN 常规颜色
+
+@ Notify Message Position
+zh-CN 通知消息位置
+
+@ Notify Message Time
+zh-CN 通知消息时长
+
+@ Number of splatter rays per blood impact
+zh-CN 每次血液命中的飞溅射线数
+
+@ Off
+zh-CN 关
+
+@ On Death
+zh-CN 死亡时
+
+@ On Kill Color
+zh-CN 击杀时颜色
+
+@ On Target Color
+zh-CN 瞄准目标时颜色
+
+@ Opacity
+zh-CN 不透明度
+
+@ Opacity of the grenade arc
+zh-CN 手榴弹抛物线的不透明度
+
+@ Pants Color
+zh-CN 裤子颜色
+
+@ Particle Quality
+zh-CN 粒子质量
+
+@ Particles
+zh-CN 粒子
+
+@ Physical Nail Impacts
+zh-CN 钉子物理弹痕
+
+@ Pistol Start
+zh-CN 手枪开局
+
+@ Pitch
+zh-CN 音调
+
+@ Pitch Sensitivity
+zh-CN 纵向灵敏度
+
+@ Playback Speed
+zh-CN 播放速度
+
+@ Player Setup
+zh-CN 玩家设置
+
+@ Pop
+zh-CN 啵声
+
+@ Portal Gun Settings
+zh-CN 传送门枪设置
+
+@ Portal Recursion
+zh-CN 传送门递归
+
+@ Portal View Quality
+zh-CN 传送门画面质量
+
+@ Preview Sound
+zh-CN 试听音效
+
+@ Previous Weapon
+zh-CN 上一把武器
+
+@ Projectile Shotguns Settings
+zh-CN 弹丸霰弹枪设置
+
+@ Projectile Speed (units/s)
+zh-CN 弹丸速度（单位/秒）
+
+@ Purple
+zh-CN 紫色
+
+@ Push
+zh-CN 推力
+
+@ Push Strength
+zh-CN 推力强度
+
+@ Quick Load
+zh-CN 快速读档
+
+@ Quick Save
+zh-CN 快速存档
+
+@ Railgun Settings
+zh-CN 轨道炮设置
+
+@ Ranged only
+zh-CN 仅限远程
+
+@ Reacquire While Held
+zh-CN 按住时重新锁定
+
+@ Red
+zh-CN 红色
+
+@ Reduce Motion
+zh-CN 减少动态效果
+
+@ Regen (seconds per second)
+zh-CN 恢复速度（秒/秒）
+
+@ Render Scale
+zh-CN 渲染缩放
+
+@ Reverb
+zh-CN 混响
+
+@ Right
+zh-CN 右
+
+@ Ripple Intensity
+zh-CN 波纹强度
+
+@ Ripples
+zh-CN 波纹
+
+@ Roll Sensitivity
+zh-CN 横滚灵敏度
+
+@ Rumble
+zh-CN 震动
+
+@ Run
+zh-CN 奔跑
+
+@ Save on All Enemies Killed
+zh-CN 消灭所有敌人时存档
+
+@ Save on All Secrets Found
+zh-CN 找到所有秘密时存档
+
+@ Save on Level Entry
+zh-CN 进入关卡时存档
+
+@ Save on Secret Found
+zh-CN 找到秘密时存档
+
+@ Scoreboard
+zh-CN 计分板
+
+@ Screen Flashes
+zh-CN 屏幕闪光
+
+@ Screen Shader
+zh-CN 屏幕着色器
+
+@ Screen Shake
+zh-CN 屏幕震动
+
+@ Search LAN
+zh-CN 搜索局域网
+
+@ Seconds a center-screen message stays up
+zh-CN 屏幕中央消息的显示秒数
+
+@ See Through Portals
+zh-CN 透过传送门观看
+
+@ See-through Teleporters
+zh-CN 透视传送点
+
+@ Shirt Color
+zh-CN 上衣颜色
+
+@ Shotgun Bullet Decals
+zh-CN 霰弹弹痕
+
+@ Shoulder left
+zh-CN 左肩
+
+@ Shoulder right
+zh-CN 右肩
+
+@ Show FPS
+zh-CN 显示帧率
+
+@ Show Face
+zh-CN 显示头像
+
+@ Shrapnel
+zh-CN 弹片
+
+@ Size of on-screen messages and captions
+zh-CN 屏幕消息和字幕的大小
+
+@ Skill
+zh-CN 难度
+
+@ Sky Fog
+zh-CN 天空雾
+
+@ Smooths the stepped movement of monsters
+zh-CN 平滑怪物的跳帧移动
+
+@ Sound
+zh-CN 声音
+
+@ Sound Captions
+zh-CN 音效字幕
+
+@ Sound Volume
+zh-CN 音效音量
+
+@ Speed Blur
+zh-CN 速度模糊
+
+@ Splashes
+zh-CN 水花
+
+@ Splatter Amount
+zh-CN 飞溅数量
+
+@ Splatter Size
+zh-CN 飞溅大小
+
+@ Start Game
+zh-CN 开始游戏
+
+@ Staying underwater doesn't hurt
+zh-CN 待在水下不会受伤
+
+@ Stick Look Pitch
+zh-CN 摇杆纵向视角
+
+@ Stick Look Yaw
+zh-CN 摇杆横向视角
+
+@ Strafe Left
+zh-CN 向左平移
+
+@ Strafe Right
+zh-CN 向右平移
+
+@ Strength of the surface swell and rings
+zh-CN 水面涌动与涟漪的强度
+
+@ Stun Duration
+zh-CN 眩晕时长
+
+@ Style
+zh-CN 样式
+
+@ Supersampling
+zh-CN 超级采样
+
+@ Surface Hit Effects
+zh-CN 表面命中效果
+
+@ Swim Down
+zh-CN 下潜
+
+@ Targets
+zh-CN 目标
+
+@ Teamplay
+zh-CN 团队模式
+
+@ Texture Filter
+zh-CN 纹理过滤
+
+@ Third person
+zh-CN 第三人称
+
+@ Thud
+zh-CN 闷响
+
+@ Tick
+zh-CN 嘀嗒声
+
+@ Time Limit
+zh-CN 时间上限
+
+@ Time Stretch
+zh-CN 时间拉伸
+
+@ Toggle Attack
+zh-CN 切换式攻击
+
+@ Toggle Run
+zh-CN 切换式奔跑
+
+@ Toggle auto-aim
+zh-CN 切换自动瞄准
+
+@ Touch Controls
+zh-CN 触屏控制
+
+@ Touchscreen
+zh-CN 触摸屏
+
+@ Tough Enemy Health
+zh-CN 强敌生命值
+
+@ Tough enemies only
+zh-CN 仅限强敌
+
+@ Trail Colour
+zh-CN 拖尾颜色
+
+@ Translate Console
+zh-CN 翻译控制台
+
+@ Translucent Water
+zh-CN 半透明水面
+
+@ Treble
+zh-CN 高音
+
+@ Turn Left
+zh-CN 向左转
+
+@ Turn Right
+zh-CN 向右转
+
+@ Underwater FX
+zh-CN 水下特效
+
+@ Use Bullet Time Meter
+zh-CN 使用子弹时间计量条
+
+@ VSync
+zh-CN 垂直同步
+
+@ View Bob
+zh-CN 视角晃动
+
+@ Viewmodels
+zh-CN 武器模型
+
+@ Volume
+zh-CN 音量
+
+@ Water Opacity
+zh-CN 水面不透明度
+
+@ Water Quality
+zh-CN 水面质量
+
+@ Water Settings
+zh-CN 水面设置
+
+@ Weapon Wheel
+zh-CN 武器轮盘
+
+@ Weapon Wheel Slowdown
+zh-CN 武器轮盘减速
+
+@ Weapons
+zh-CN 武器
+
+@ Weapons Position
+zh-CN 武器位置
+
+@ Where center-screen messages appear
+zh-CN 屏幕中央消息的显示位置
+
+@ Where pickup and event messages appear
+zh-CN 拾取与事件消息的显示位置
+
+@ White
+zh-CN 白色
+
+@ Yaw Sensitivity
+zh-CN 横向灵敏度
+
+@ Yellow
+zh-CN 黄色
+
+# lowercase choice values
+@ T
+zh-CN T 形
+
+@ always
+zh-CN 始终
+
+@ auto
+zh-CN 自动
+
+@ banded
+zh-CN 分段
+
+@ borderless
+zh-CN 无边框
+
+@ bottom center
+zh-CN 底部居中
+
+@ bottom left
+zh-CN 左下
+
+@ bottom right
+zh-CN 右下
+
+@ box
+zh-CN 方框
+
+@ broken square
+zh-CN 断开方框
+
+@ classic
+zh-CN 经典
+
+@ coarse
+zh-CN 粗糙
+
+@ cooperative
+zh-CN 合作
+
+@ cross
+zh-CN 十字
+
+@ cross + dot
+zh-CN 十字 + 点
+
+@ cyan
+zh-CN 青色
+
+@ dashed
+zh-CN 虚线
+
+@ deathmatch
+zh-CN 死亡竞赛
+
+@ deuteranopia
+zh-CN 绿色盲
+
+@ diagonal streaks
+zh-CN 斜线条纹
+
+@ diamond
+zh-CN 菱形
+
+@ dot
+zh-CN 点
+
+@ double
+zh-CN 双重
+
+@ double chevrons
+zh-CN 双 V 形
+
+@ double diagonals
+zh-CN 双斜线
+
+@ easy
+zh-CN 简单
+
+@ fine
+zh-CN 精细
+
+@ fit output
+zh-CN 适应输出
+
+@ flick stick
+zh-CN 甩动摇杆
+
+@ fullscreen
+zh-CN 全屏
+
+@ gap cross
+zh-CN 空心十字
+
+@ green
+zh-CN 绿色
+
+@ grey
+zh-CN 灰色
+
+@ half speed
+zh-CN 半速
+
+@ hard
+zh-CN 困难
+
+@ high
+zh-CN 高
+
+@ huge
+zh-CN 巨大
+
+@ immersive
+zh-CN 沉浸
+
+@ intense
+zh-CN 强烈
+
+@ large
+zh-CN 大
+
+@ larger
+zh-CN 较大
+
+@ largest
+zh-CN 最大
+
+@ linear
+zh-CN 线性
+
+@ low
+zh-CN 低
+
+@ lower
+zh-CN 偏下
+
+@ magenta
+zh-CN 品红
+
+@ medium
+zh-CN 中
+
+@ middle
+zh-CN 中间
+
+@ middle left
+zh-CN 左侧居中
+
+@ middle right
+zh-CN 右侧居中
+
+@ modern
+zh-CN 现代
+
+@ nearest
+zh-CN 最近邻
+
+@ nightmare
+zh-CN 噩梦
+
+@ nintendo
+zh-CN 任天堂
+
+@ no team damage
+zh-CN 无友军伤害
+
+@ none
+zh-CN 无
+
+@ normal
+zh-CN 普通
+
+@ off
+zh-CN 关
+
+@ off while held
+zh-CN 按住时关闭
+
+@ on
+zh-CN 开
+
+@ only while held
+zh-CN 仅按住时
+
+@ playstation
+zh-CN PlayStation
+
+@ protanopia
+zh-CN 红色盲
+
+@ quarter speed
+zh-CN 四分之一速
+
+@ red
+zh-CN 红色
+
+@ short diagonals
+zh-CN 短斜线
+
+@ single
+zh-CN 单次
+
+@ small
+zh-CN 小
+
+@ solid
+zh-CN 实线
+
+@ spectacle
+zh-CN 华丽
+
+@ subtle
+zh-CN 轻微
+
+@ team damage
+zh-CN 友军伤害
+
+@ top center
+zh-CN 顶部居中
+
+@ top left
+zh-CN 左上
+
+@ top right
+zh-CN 右上
+
+@ triple
+zh-CN 三重
+
+@ tritanopia
+zh-CN 蓝色盲
+
+@ upper
+zh-CN 偏上
+
+@ white
+zh-CN 白色
+
+@ whole screen
+zh-CN 全屏幕
+
+@ windowed
+zh-CN 窗口
+
+@ xbox
+zh-CN Xbox
+
+@ yellow
+zh-CN 黄色
+
+# ==== tooltips.txt ====
+
+# Options help lines (tooltips) and reasons for disabled rows.
+@ 2D aiming turns the view continuously with the right stick; flick stick snaps the view to where you push the stick, then turning the stick rotates it
+zh-CN 2D 瞄准：右摇杆持续转动视角；甩动摇杆：视角立即转向摇杆推动的方向，之后转动摇杆可旋转视角
+
+@ 3D resolution relative to the window; the UI stays sharp
+zh-CN 3D 画面相对于窗口的分辨率；界面保持清晰
+
+@ 3D view keeps the HUD and menus sharp; whole screen runs them through the shader too
+zh-CN 3D 视图：HUD 和菜单保持清晰；全屏幕：它们也会经过着色器处理
+
+@ A Quake III style railgun: a slug that pierces every enemy on its line, using 2 cells a shot and refiring every 1.5 s; select it through its assigned weapon slot (Add-ons)
+zh-CN Quake III 风格的轨道炮：弹体可贯穿直线上的所有敌人，每发消耗 2 个电池，每 1.5 秒射击一次；通过为其分配的武器槽选择（附加功能）
+
+@ A Zelda-style hookshot: fire sends a chain hook out; it latches onto hookable surfaces or enemies and reels you in; fire again to let go
+zh-CN 塞尔达风格的钩爪：开火射出链钩，钩住可钩取的表面或敌人后将你拉过去；再次开火可松开
+
+@ Also translates the engine's console messages; off keeps them in English
+zh-CN 同时翻译引擎的控制台消息；关闭则保持英文
+
+@ Automatically acquire another enemy while holding Lock-on after losing a target
+zh-CN 按住锁定时，失去目标后自动锁定另一个敌人
+
+@ Blends between animation frames of monsters and weapons
+zh-CN 在怪物和武器的动画帧之间平滑过渡
+
+@ Blood stains surfaces and bodies; cosmetic, independent of particle packs
+zh-CN 血迹会沾染表面和尸体；纯视觉效果，与粒子包无关
+
+@ Bloom glow around bright lights and heat sources; medium uses 4 taps, high uses 8, low disables halo taps
+zh-CN 强光和热源周围的泛光；中使用 4 次采样，高使用 8 次，低则关闭光晕采样
+
+@ Blurs fast-moving monsters, projectiles and doors (not camera turns)
+zh-CN 模糊快速移动的怪物、弹体和门（不包括镜头转动）
+
+@ Blurs the screen edges during fast falls and launches; keeps the centre clear. Reduce Motion disables it
+zh-CN 快速坠落和弹射时模糊屏幕边缘，保持中央清晰。“减少动态效果”会将其关闭
+
+@ Brightness of the underwater light patterns
+zh-CN 水下光纹的亮度
+
+@ Caps mark count, lifetime, airborne droplets and wound/gib painting; low skips enemy wounds and gib trails
+zh-CN 限制痕迹数量、持续时间、空中血滴以及伤口/碎肉染色；低会跳过敌人伤口和碎肉血迹
+
+@ Caps shader input at output size so 200% render scale keeps 3D sharpness without 4x shader cost; low scales stay low-res
+zh-CN 将着色器输入限制为输出尺寸，使 200% 渲染缩放保持 3D 清晰度而无需 4 倍着色器开销；低缩放仍保持低分辨率
+
+@ Classic: the original status bar; modern: compact elements at the screen edges
+zh-CN 经典：原版状态栏；现代：位于屏幕边缘的紧凑元素
+
+@ Coat atlas resolution, rebuild rate and shader detail: low builds smaller coats less often with fast shading; high uses full detail
+zh-CN 涂层图集分辨率、重建频率和着色细节：低会以较低频率构建较小的涂层并使用快速着色；高使用完整细节
+
+@ Colour of the railgun's spiral trail; split-screen players each get the next colour along
+zh-CN 轨道炮螺旋轨迹的颜色；分屏时每位玩家依次使用下一种颜色
+
+@ Damage the railgun deals to each enemy it passes through (Quake III: 100)
+zh-CN 轨道炮对贯穿的每个敌人造成的伤害（Quake III：100）
+
+@ Dark backdrop behind on-screen messages for readability
+zh-CN 在屏幕消息后方加暗色背景以便阅读
+
+@ Dark border keeps the crosshair visible on any background
+zh-CN 深色描边让准星在任何背景上都清晰可见
+
+@ Darkens corners and contact areas where geometry meets; higher quality is sharper
+zh-CN 使几何体相接的角落和接触区域变暗；质量越高越清晰
+
+@ Debris lands on and is carried or shoved by doors, lifts and platforms
+zh-CN 碎片会落在门、升降梯和平台上，并被其带动或推开
+
+@ Detail for caustics, ripples and splashes: low uses smaller budgets and shorter view distance; high uses larger budgets and farther view distance
+zh-CN 焦散、波纹和水花的细节：低使用较小预算和较短的可视距离；高使用较大预算和较远的可视距离
+
+@ Disabled while Enhanced Particles is on: its particles replace the GLQuake and Classic styles
+zh-CN “增强粒子”开启时不可用：其粒子会取代 GLQuake 和经典样式
+
+@ Disabled while Enhanced Water is on: its own underwater effects replace the classic and GLQuake view warps
+zh-CN “增强水面”开启时不可用：其水下效果会取代经典和 GLQuake 的画面扭曲
+
+@ Draw the predicted grenade path as a solid or dashed line
+zh-CN 以实线或虚线绘制预测的手榴弹轨迹
+
+@ Draw the view out of the linked portal inside each portal; off shows flat discs (fastest)
+zh-CN 在每个传送门内绘制相连传送门另一侧的画面；关闭则显示平面圆盘（最快）
+
+@ Droplets spray up when things enter or leave water, slime or lava
+zh-CN 物体进出水、毒液或岩浆时会溅起水花
+
+@ Emulates the original 8-bit palette of software rendering
+zh-CN 模拟软件渲染的原版 8 位调色板
+
+@ Every level starts with only the shotgun and axe, as if started fresh
+zh-CN 每个关卡开始时只有霰弹枪和斧头，如同重新开始
+
+@ Explosion damage for each remotely detonated sticky bomb
+zh-CN 每颗遥控引爆的粘性炸弹造成的爆炸伤害
+
+@ Extra freeze milliseconds for every 10 damage dealt, so heavy hits stop longer
+zh-CN 每造成 10 点伤害额外冻结的毫秒数，重击停顿更久
+
+@ First person, a third-person camera centered behind the player, or one over the right or left shoulder; third person hides viewmodels
+zh-CN 第一人称、位于玩家正后方的第三人称镜头，或越过右肩/左肩的镜头；第三人称会隐藏武器模型
+
+@ Flash the selected marker on confirmed hits; colors are shared with the crosshair
+zh-CN 确认命中时闪烁所选标记；颜色与准星共用
+
+@ Freeze for every enemy, or only for enemies that were tough before the hit
+zh-CN 对所有敌人冻结，或仅对受击前属于强敌的敌人冻结
+
+@ Freeze the game briefly when you damage an enemy; single player with add-ons only
+zh-CN 对敌人造成伤害时短暂冻结游戏；仅限启用附加功能的单人游戏
+
+@ Gibs tumble and barrels throw shrapnel; shots and blasts push them (cosmetic only)
+zh-CN 碎肉会翻滚，爆炸的桶会飞出弹片；射击和爆炸会推动它们（纯视觉效果）
+
+@ Health an enemy must have had before the hit to count as tough
+zh-CN 敌人在受击前需拥有的生命值，达到才算强敌
+
+@ Hits dealing less damage than this do not freeze the game; the default 10 skips nails and shotgun pellets
+zh-CN 伤害低于此值的命中不会冻结游戏；默认值 10 会跳过钉子和霰弹弹丸
+
+@ Hold fire and sweep the crosshair over monsters to queue them, release to throw: it stuns each in turn and flies back; alt-fire clears the queue
+zh-CN 按住开火并用准星扫过怪物将其加入队列，松开即投掷：依次眩晕每个目标后飞回；副开火清空队列
+
+@ Hold: keep Lock-on held. Toggle: press Auto-aim Toggle to enable automatic acquisition. Click look stick to switch targets
+zh-CN 按住：保持按住锁定。切换：按下“切换自动瞄准”以启用自动锁定。按下视角摇杆可切换目标
+
+@ How close an enemy must be to the crosshair for automatic acquisition in toggle mode (degrees)
+zh-CN 切换模式下自动锁定时，敌人与准星的最大夹角（度）
+
+@ How far the view tilts up and down when you tilt the controller (pitch axis)
+zh-CN 前后倾斜手柄时视角上下转动的幅度（俯仰轴）
+
+@ How far the view turns left and right when you turn the controller (yaw axis)
+zh-CN 左右转动手柄时视角左右转动的幅度（偏航轴）
+
+@ How far the view turns when you drag on the right half of the screen
+zh-CN 在屏幕右半边拖动时视角转动的幅度
+
+@ How fast the boomerang flies (units per second)
+zh-CN 回旋镖的飞行速度（单位/秒）
+
+@ How hard shots and explosions push debris around
+zh-CN 射击和爆炸推动碎片的力度
+
+@ How hard the Powerwasher's water pushes enemies
+zh-CN 高压水枪的水流推动敌人的力度
+
+@ How long a hit freezes the game, in milliseconds
+zh-CN 命中时冻结游戏的时长（毫秒）
+
+@ How strongly fog covers the sky when fog is on
+zh-CN 开启雾时，雾对天空的覆盖程度
+
+@ How the view distorts underwater: Classic ripples the whole screen like software Quake, GLQuake slowly stretches and squashes the view
+zh-CN 水下画面的扭曲方式：经典会像软件版 Quake 一样使整个屏幕波动，GLQuake 会缓慢拉伸和压缩画面
+
+@ Ignores gyro rotation slower than this many degrees per second, to hide hand tremor
+zh-CN 忽略低于此角速度（度/秒）的陀螺仪转动，以消除手部抖动
+
+@ Immersive: appears for a few seconds only when its value changes
+zh-CN 沉浸：仅在数值变化时显示几秒
+
+@ Keeps textures sharp on floors and walls seen at steep angles
+zh-CN 让以陡峭角度看到的地面和墙面纹理保持清晰
+
+@ Lights from rockets, muzzle flashes and explosions brighten nearby walls
+zh-CN 火箭、枪口火光和爆炸的光线会照亮附近的墙壁
+
+@ Liquid surfaces swell and ring out where things move through them
+zh-CN 物体穿过液体表面时会产生涌动和涟漪
+
+@ Lobs sticky bombs (rockets ammo) that cling to walls, doors and monsters; alt-fire detonates them all
+zh-CN 抛出粘性炸弹（消耗火箭弹），可粘在墙壁、门和怪物上；副开火将其全部引爆
+
+@ Look of the classic particles: GLQuake draws soft round dots, Classic draws square pixels like software Quake
+zh-CN 经典粒子的外观：GLQuake 绘制柔和的圆点，经典则像软件版 Quake 一样绘制方形像素
+
+@ Low skips the background smear halo and uses fewer blur samples; high keeps the full halo and smoother streaks
+zh-CN 低会跳过背景拖影光晕并使用较少模糊采样；高保留完整光晕和更平滑的拖影
+
+@ Low: hard particle edges, half the scripted particles and fewer hit sparks. Medium: soft edges. High: soft edges checked per MSAA sample, most hit sparks
+zh-CN 低：粒子边缘生硬，脚本粒子减半，命中火花较少。中：柔和边缘。高：按每个 MSAA 采样检测柔和边缘，命中火花最多
+
+@ Marks fade out before expiring; oldest marks are recycled at the limit
+zh-CN 痕迹在消失前会淡出；达到上限时回收最旧的痕迹
+
+@ Max nested portal reflections to draw; each level redraws the scene
+zh-CN 绘制传送门嵌套反射的最大层数；每一层都会重新绘制场景
+
+@ Max portals per screen with a live view; each one redraws the scene
+zh-CN 每个屏幕上显示实时画面的传送门的最大数量；每个都会重新绘制场景
+
+@ Maximum distance for acquiring and keeping an enemy locked
+zh-CN 锁定并保持锁定敌人的最大距离
+
+@ Minimum gap between freezes, so shotgun pellets and rapid fire count once; kills ignore it
+zh-CN 两次冻结之间的最小间隔，使霰弹弹丸和速射只计算一次；击杀不受此限制
+
+@ Modern terminal console with autocomplete popup, history search, ANSI colors, bash shell and piping; off uses the classic Quake console
+zh-CN 现代终端式控制台，带自动补全弹窗、历史搜索、ANSI 颜色、bash 命令行和管道；关闭则使用经典 Quake 控制台
+
+@ Monsters take proportionally less damage at higher values; above 100% is harder
+zh-CN 数值越高，怪物受到的伤害按比例越少；超过 100% 更难
+
+@ Moving gibs leave blood on surfaces they touch
+zh-CN 移动中的碎肉会在接触的表面上留下血迹
+
+@ Multiplier on the freeze when the hit kills the enemy; 1 means no extra
+zh-CN 击杀敌人时冻结时长的倍数；1 表示不额外增加
+
+@ Multiplies ammo from pickups (up to the normal carry limit); below 100% is harder
+zh-CN 拾取弹药的倍数（不超过正常携带上限）；低于 100% 更难
+
+@ Multiplies health from pickups (up to 100, or the item's own limit); below 100% is harder
+zh-CN 拾取生命值的倍数（不超过 100 或该物品自身上限）；低于 100% 更难
+
+@ Nails stick to wood and bodies; hard surfaces deflect them to the floor
+zh-CN 钉子会钉在木头和躯体上；坚硬表面会将其弹落到地上
+
+@ Nearest keeps crisp classic pixels; linear smooths textures
+zh-CN 最近邻保留清晰的经典像素；线性使纹理平滑
+
+@ New Game: Add-ons
+zh-CN 新游戏：附加功能
+
+@ New Game: Customize
+zh-CN 新游戏：自定义
+
+@ Night vision: how much dark areas are brightened; thermal: how strongly heat stands out
+zh-CN 夜视：暗处的提亮程度；热成像：热源的突出程度
+
+@ Night-vision and thermal goggles, cycle normal, night vision and thermal with Change Goggles (Add-ons), or use the Equipment Wheel
+zh-CN 夜视和热成像目镜：用“切换目镜（附加功能）”在普通、夜视和热成像之间切换，或使用装备轮盘
+
+@ No single freeze lasts longer than this, however much damage or kill bonus adds
+zh-CN 无论伤害或击杀奖励增加多少，单次冻结都不会超过此时长
+
+@ Oldest marks and nails are recycled at this shared limit
+zh-CN 痕迹和钉子共用此上限，超出时回收最旧的
+
+@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
+zh-CN 屏幕上的摇杆和按钮：自动模式下触摸后显示，使用其他设备时隐藏
+
+@ Only autosaves: quicksaves and the Save menu are off
+zh-CN 仅限自动存档：快速存档和存档菜单均不可用
+
+@ Place every weapon at the center, right or left of the view, or hide all viewmodels
+zh-CN 将所有武器置于视野中央、右侧或左侧，或隐藏所有武器模型
+
+@ Play your chosen hit or kill cue when you damage an enemy
+zh-CN 对敌人造成伤害时播放所选的命中或击杀提示音
+
+@ Playback speed: faster sounds shorter and higher
+zh-CN 播放速度：越快声音越短越高
+
+@ Plays the Quake theme in the main menu when no game is running
+zh-CN 未运行游戏时在主菜单播放 Quake 主题曲
+
+@ Portals farther away than this are drawn as flat discs
+zh-CN 超过此距离的传送门显示为平面圆盘
+
+@ Press attack once to keep firing, again to stop
+zh-CN 按一次攻击键持续开火，再按一次停止
+
+@ Press run once to switch between running and walking
+zh-CN 按一次奔跑键在奔跑和行走之间切换
+
+@ Raise or lower the tone independently of sound length
+zh-CN 独立于声音长度调高或调低音调
+
+@ Red screen edges show where damage came from: top is front, bottom is behind; Screen Flashes controls their strength
+zh-CN 屏幕边缘的红色显示伤害来源方向：上方为前方，下方为后方；其强度由“屏幕闪光”控制
+
+@ Replaces the classic dot particles with glowing sparks, smoke and blood; mods with their own particle effects keep them
+zh-CN 用发光火花、烟雾和血液取代经典的点状粒子；自带粒子效果的模组保持不变
+
+@ Resolution and detail inside portal and teleporter views; lower tiers trim nested effects
+zh-CN 传送门和传送点画面内的分辨率和细节；较低档位会削减嵌套效果
+
+@ Rippling light patterns on surfaces under water and slime
+zh-CN 水和毒液下表面的波动光纹
+
+@ Scales all damage you take; above 100% is harder
+zh-CN 调整你受到的所有伤害；超过 100% 更难
+
+@ Screen edge for this element; elements on the same spot stack
+zh-CN 此元素所在的屏幕边缘；同一位置的元素会堆叠
+
+@ Seconds a monster hit by the boomerang stays stunned
+zh-CN 被回旋镖击中的怪物保持眩晕的秒数
+
+@ Seconds impact marks and stuck nails stay before fading out; independent of Particle Quality
+zh-CN 弹痕和钉在表面的钉子在淡出前停留的秒数；与粒子质量无关
+
+@ Seconds messages at the top of the screen stay up
+zh-CN 屏幕顶部消息的显示秒数
+
+@ Seconds the flick stick snap takes; lower is faster
+zh-CN 甩动摇杆转向所需的秒数；越低越快
+
+@ See through enhanced water; enables Water Opacity
+zh-CN 可以看穿增强水面；启用“水面不透明度”
+
+@ Sensor grain, scanlines and flicker of the goggle image
+zh-CN 目镜画面的传感器噪点、扫描线和闪烁
+
+@ Shades every anti-aliasing sample; needs Anti-aliasing on
+zh-CN 对每个抗锯齿采样进行着色；需要开启抗锯齿
+
+@ Shifts colors so they stay distinct for the chosen color blindness
+zh-CN 调整颜色，使其在所选色盲类型下仍可区分
+
+@ Shotgun hits leave small surface marks (cosmetic only)
+zh-CN 霰弹命中会在表面留下小痕迹（纯视觉效果）
+
+@ Show corner ticks at screen centre while locked, even with Crosshair off
+zh-CN 锁定时在屏幕中央显示角标，即使准星已关闭
+
+@ Show where grenades and other arcing shots will fly, bounce and land; local play only, not in deathmatch
+zh-CN 显示手榴弹等抛射物的飞行、弹跳和落点；仅限本地游戏，死亡竞赛中不可用
+
+@ Shows text for important sounds: doors, alerted enemies, secrets, pickups
+zh-CN 为重要声音显示文字：门、被惊动的敌人、秘密、拾取物品
+
+@ Shows the distance fog that maps and mods set; off always gives clear view
+zh-CN 显示地图和模组设置的距离雾；关闭则始终视野清晰
+
+@ Shows the player face next to the health number
+zh-CN 在生命值数字旁显示玩家头像
+
+@ Simulation detail, step rate, fade-out lifetimes and caps for gibs and shrapnel; low also skips mover collision
+zh-CN 碎肉和弹片的模拟细节、步进频率、淡出时间和数量上限；低还会跳过与移动物体的碰撞
+
+@ Size of the on-screen buttons and move stick
+zh-CN 屏幕按钮和移动摇杆的大小
+
+@ Slowly heals up to 100 health after 5 seconds without being hit
+zh-CN 5 秒未受攻击后缓慢恢复生命值，最多至 100
+
+@ Slows stick look while the crosshair is over an enemy
+zh-CN 准星位于敌人身上时减慢摇杆视角速度
+
+@ Slows the game down while the weapon wheel is open
+zh-CN 打开武器轮盘时放慢游戏速度
+
+@ Slows the whole game down; single player only. Saves and demos stay compatible with other ports
+zh-CN 放慢整个游戏速度；仅限单人游戏。存档和录像仍与其他移植版兼容
+
+@ Small camera jolt on each freeze; off with Reduce Motion
+zh-CN 每次冻结时镜头轻微震动；开启“减少动态效果”时关闭
+
+@ Snap and track enemies in local play, including split-screen; unavailable online
+zh-CN 在本地游戏（包括分屏）中吸附并追踪敌人；联机时不可用
+
+@ Sparks, smoke, chips, splinters and splashes fly off whatever your shots hit
+zh-CN 射击命中处会飞出火花、烟雾、碎屑、木片和水花
+
+@ Spawns extra copies of every monster around the original when a level starts
+zh-CN 关卡开始时在每个怪物周围生成额外的副本
+
+@ Strength of the full-screen flashes for damage, pickups and powerups
+zh-CN 受到伤害、拾取物品和强化道具时全屏闪光的强度
+
+@ Stretch or shorten the sound while keeping its pitch
+zh-CN 拉伸或缩短声音，同时保持音调不变
+
+@ Surface opacity; requires Enhanced Water and Translucent Water
+zh-CN 水面不透明度；需要开启“增强水面”和“半透明水面”
+
+@ The hook latches onto metal surfaces (metal, tech, computer panels, copper)
+zh-CN 钩爪可钩住金属表面（金属、科技、电脑面板、铜）
+
+@ The hook latches onto stone, brick, rock and any surface not recognised as wood or metal
+zh-CN 钩爪可钩住石头、砖块、岩石及任何未被识别为木头或金属的表面
+
+@ The hook latches onto wooden surfaces (texture names like wood, crate, plank)
+zh-CN 钩爪可钩住木质表面（纹理名称如 wood、crate、plank）
+
+@ Turn the controller's motion sensor into a look input; needs a pad with a gyroscope
+zh-CN 将手柄的体感传感器用作视角输入；需要带陀螺仪的手柄
+
+@ Turns off view bob, strafe tilt and the camera kick when hit or firing
+zh-CN 关闭视角晃动、平移倾斜以及受击或开火时的镜头抖动
+
+@ Turns on the extra liquid effects; Water Settings controls each one
+zh-CN 开启额外的液体效果；各项效果在“水面设置”中控制
+
+@ Turns the view to follow a moving enemy you are aiming at
+zh-CN 瞄准移动中的敌人时视角跟随其转动
+
+@ Turns the view when you roll the controller sideways; 0 disables it, negative reverses it
+zh-CN 向侧面翻转手柄时转动视角；0 为关闭，负值为反向
+
+@ Two-portal gun: fire and alt-fire place linked portals on flat walls; assign a weapon slot in Add-ons
+zh-CN 双传送门枪：开火和副开火在平坦墙面上放置相连的传送门；在“附加功能”中分配武器槽
+
+@ Unlocks the FX Settings page: enhanced particles, impact effects and blood splatter
+zh-CN 解锁“特效设置”页面：增强粒子、命中效果和血液飞溅
+
+@ Uses the 2021 re-release's smoother MD5 models (and MD3 replacements from mods) instead of the classic ones. Applies on the next map load
+zh-CN 使用 2021 重制版更平滑的 MD5 模型（以及模组提供的 MD3 替换模型）代替经典模型。下次载入地图时生效
+
+@ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
+zh-CN 使用地图的彩色光照（.lit 文件或 BSPX 数据块）；关闭则为原版白光。下次载入地图时生效
+
+@ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
+zh-CN 水柱分段、水滴数量和液体光泽着色：低使用简单的半透明水流；高使用平滑有光泽的水柱
+
+@ When gyro looking applies: always, off while +gyroaction is held, or only while it is held
+zh-CN 陀螺仪视角的生效时机：始终、按住 +gyroaction 时关闭，或仅在按住时生效
+
+@ Which weapons trigger the freeze; melee covers the axe and any mod weapon used at close range without ammo
+zh-CN 触发冻结的武器；近战包括斧头以及任何不耗弹药的近距离模组武器
+
+@ Your own rockets and grenades don't hurt you; rocket jumps still work
+zh-CN 你自己的火箭和手榴弹不会伤害你；火箭跳仍然有效
+
+# ==== ui.txt ====
+
+# Menus and pop-ups outside the options pages: save cards, launch, presets,
+# add-on browser, map packs, hints and dialogs.
+@ Select
+zh-CN 选择
+
+@ Back
+zh-CN 返回
+
+@ Cancel
+zh-CN 取消
+
+@ Confirm
+zh-CN 确认
+
+@ Scroll
+zh-CN 滚动
+
+@ Section
+zh-CN 分区
+
+@ Bind
+zh-CN 绑定
+
+@ Cancel binding
+zh-CN 取消绑定
+
+@ Clear
+zh-CN 清除
+
+@ Clear pad
+zh-CN 清除手柄
+
+@ Remap
+zh-CN 重新映射
+
+@ Type
+zh-CN 输入
+
+@ Shift
+zh-CN Shift
+
+@ Done
+zh-CN 完成
+
+@ Del
+zh-CN Del
+
+@ Space
+zh-CN 空格
+
+@ Save
+zh-CN 保存
+
+@ Load
+zh-CN 载入
+
+@ Delete
+zh-CN 删除
+
+@ Play
+zh-CN 开始
+
+@ Yes
+zh-CN 是
+
+@ No
+zh-CN 否
+
+@ OK
+zh-CN 确定
+
+@ System
+zh-CN 系统
+
+@ Language
+zh-CN 语言
+
+@ Help
+zh-CN 帮助
+
+@ Fixed for this game: it was started without Customize
+zh-CN 本局游戏固定：开始时未使用自定义
+
+@ Press a button or key to bind (Start cancels)
+zh-CN 按下按钮或按键进行绑定（Start 取消）
+
+@ Press button...
+zh-CN 请按按钮……
+
+@ Press key...
+zh-CN 请按按键……
+
+@ Replace this binding?
+zh-CN 替换此绑定？
+
+@ is already assigned
+zh-CN 已被绑定
+
+@ {} already assigned
+zh-CN {} 已被绑定
+
+@ Open Controls to remap Lock-on?
+zh-CN 打开“控制”重新映射锁定键？
+
+@ Lock-on
+zh-CN 锁定
+
+@ Auto-aim Toggle
+zh-CN 切换自动瞄准
+
+@ Keyboard
+zh-CN 键盘
+
+@ Controller
+zh-CN 手柄
+
+# main menu, dialogs and screens
+@ Map Packs
+zh-CN 地图包
+
+@ Customize
+zh-CN 自定义
+
+@ Level Select
+zh-CN 选择关卡
+
+@ Really quit?
+zh-CN 确定要退出吗？
+
+@ You died
+zh-CN 你死了
+
+@ Continue from most recent save
+zh-CN 从最新存档继续
+
+@ Select save
+zh-CN 选择存档
+
+@ Restart level
+zh-CN 重新开始关卡
+
+@ Return to main menu
+zh-CN 返回主菜单
+
+@ (disabled)
+zh-CN （已禁用）
+
+@ (fixed for this game)
+zh-CN （本局固定）
+
+@ (off)
+zh-CN （关）
+
+@ Apply Display Changes
+zh-CN 应用显示更改
+
+@ Display Mode
+zh-CN 显示模式
+
+@ Resolution
+zh-CN 分辨率
+
+@ desktop
+zh-CN 桌面
+
+@ Preset
+zh-CN 预设
+
+@ Map
+zh-CN 地图
+
+@ Reset Shader Settings
+zh-CN 重置着色器设置
+
+@ Reset to Defaults
+zh-CN 恢复默认设置
+
+@ Searching...
+zh-CN 正在搜索……
+
+@ This game only autosaves.
+zh-CN 本局游戏仅自动存档。
+
+@ (No Manual Saves modifier)
+zh-CN （“禁止手动存档”修改项）
+
+@ End the current game?
+zh-CN 结束当前游戏？
+
+@ Unsaved progress will be lost.
+zh-CN 未保存的进度将会丢失。
+
+@ End game
+zh-CN 结束游戏
+
+@ Overwrite
+zh-CN 覆盖
+
+@ Overwrite "{}"?
+zh-CN 覆盖“{}”？
+
+@ Saved {}
+zh-CN 已保存 {}
+
+@ Start a new game?
+zh-CN 开始新游戏？
+
+@ New game
+zh-CN 新游戏
+
+@ New Game
+zh-CN 新游戏
+
+@ CUSTOM
+zh-CN 自定义
+
+@ Customize Experience
+zh-CN 自定义体验
+
+@ Disable All
+zh-CN 全部禁用
+
+@ Disable All Modifications
+zh-CN 禁用所有修改
+
+@ Saves load in other source ports too.
+zh-CN 存档也可在其他移植版中载入。
+
+@ Standard rules, no add-ons.
+zh-CN 标准规则，无附加功能。
+
+@ Choose skill
+zh-CN 选择难度
+
+@ The current game will end
+zh-CN 当前游戏将会结束
+
+@ Easy
+zh-CN 简单
+
+@ Normal
+zh-CN 普通
+
+@ Hard
+zh-CN 困难
+
+@ Nightmare
+zh-CN 噩梦
+
+# graphics preset pop-up
+@ Choose a Graphics Preset
+zh-CN 选择图形预设
+
+@ Classic
+zh-CN 经典
+
+@ Like the re-release: enhanced models,
+zh-CN 与重制版相同：增强模型，
+
+@ no added effects.
+zh-CN 不添加额外效果。
+
+@ Enhanced
+zh-CN 增强
+
+@ Every enhancement at its highest quality.
+zh-CN 所有增强效果均为最高质量。
+
+@ Needs a capable GPU.
+zh-CN 需要性能较强的显卡。
+
+@ Low-End
+zh-CN 低配
+
+@ Fastest. No anti-aliasing, original
+zh-CN 最快。无抗锯齿，原版
+
+@ models, lowest effect quality.
+zh-CN 模型，最低效果质量。
+
+@ Esc keeps the defaults
+zh-CN Esc 保留默认设置
+
+@ Everything can be changed later in Options.
+zh-CN 所有设置之后都可在“选项”中更改。
+
+@ Keep Defaults
+zh-CN 保留默认
+
+# save and load cards
+@ Save Game
+zh-CN 保存游戏
+
+@ Load Game
+zh-CN 载入游戏
+
+@ Autosaves
+zh-CN 自动存档
+
+@ newest first
+zh-CN 最新在前
+
+@ Saves: {}
+zh-CN 存档：{}
+
+@ Browse Autosaves
+zh-CN 浏览自动存档
+
+@ Every retained autosave, newest first
+zh-CN 所有保留的自动存档，最新在前
+
+@ New save
+zh-CN 新存档
+
+@ Select to save your game here
+zh-CN 选择此处保存游戏
+
+@ No autosaves yet
+zh-CN 暂无自动存档
+
+@ Autosaves are made on level entry, secrets and more (Options > Gameplay)
+zh-CN 进入关卡、发现秘密等情况下会自动存档（选项 > 游戏性）
+
+@ No saves yet
+zh-CN 暂无存档
+
+@ Save from the Single Player menu, or press F6 to quicksave
+zh-CN 在单人游戏菜单中存档，或按 F6 快速存档
+
+@ No picture
+zh-CN 无图片
+
+@ Del: delete save
+zh-CN Del：删除存档
+
+@ Delete "{}"?
+zh-CN 删除“{}”？
+
+@ This cannot be undone.
+zh-CN 此操作无法撤销。
+
+@ Quicksave
+zh-CN 快速存档
+
+@ Autosave: {}
+zh-CN 自动存档：{}
+
+@ unknown trigger
+zh-CN 未知触发
+
+@ Latest - {}
+zh-CN 最新 - {}
+
+@ Health {}
+zh-CN 生命 {}
+
+@ Armor {}
+zh-CN 护甲 {}
+
+@ Kills {}/{}
+zh-CN 击杀 {}/{}
+
+@ Secrets {}/{}
+zh-CN 秘密 {}/{}
+
+@ Split-screen, {} players
+zh-CN 分屏，{} 名玩家
+
+@ Co-op
+zh-CN 合作
+
+@ Customized
+zh-CN 已自定义
+
+@ Customized, {}
+zh-CN 已自定义，{}
+
+@ Date unavailable
+zh-CN 日期不可用
+
+@ Just now
+zh-CN 刚刚
+
+@ {} min ago
+zh-CN {} 分钟前
+
+@ {} h ago
+zh-CN {} 小时前
+
+@ Level entry
+zh-CN 进入关卡
+
+@ Secret found
+zh-CN 发现秘密
+
+@ All enemies killed
+zh-CN 消灭所有敌人
+
+@ All secrets found
+zh-CN 找到所有秘密
+
+@ Timer
+zh-CN 定时
+
+# customize pages
+@ Standard rules
+zh-CN 标准规则
+
+@ Modifiers changed: {}
+zh-CN 已更改修改项：{}
+
+@ no add-ons
+zh-CN 无附加功能
+
+@ add-ons: {}
+zh-CN 附加功能：{}
+
+@ Saves of this game are .qsa files: they need this source port.
+zh-CN 本局游戏的存档为 .qsa 文件：需要本移植版才能载入。
+
+@ Nothing changed: this plays as standard Quake.
+zh-CN 未做任何更改：将以标准 Quake 进行游戏。
+
+@ Changes apply now and are saved with this game (.qsa).
+zh-CN 更改立即生效，并随本局游戏一起保存（.qsa）。
+
+@ This game started without Customize, so its rules are fixed.
+zh-CN 本局游戏开始时未使用自定义，因此规则已固定。
+
+@ Start a new game and choose Customize Experience.
+zh-CN 请开始新游戏并选择“自定义体验”。
+
+@ These rules apply to the next customized game.
+zh-CN 这些规则将应用于下一局自定义游戏。
+
+# add-on browser
+@ Fire
+zh-CN 开火
+
+@ Alt Fire
+zh-CN 副开火
+
+@ Configure Parameters >
+zh-CN 配置参数 >
+
+@ Configure
+zh-CN 配置
+
+@ Settings
+zh-CN 设置
+
+@ Change slot
+zh-CN 更改武器槽
+
+@ Toggle
+zh-CN 切换
+
+@ Details
+zh-CN 详情
+
+@ Enter or click the box: toggle
+zh-CN Enter 或点击方框：切换
+
+@ Right / Tab / click: details
+zh-CN 右 / Tab / 点击：详情
+
+@ Input Remapping
+zh-CN 输入重新映射
+
+@ Weapon Slot
+zh-CN 武器槽
+
+@ Customized games save as .qsa files, which need this source port.
+zh-CN 自定义游戏的存档为 .qsa 文件，需要本移植版才能载入。
+
+@ This game started without Customize, so its add-ons are fixed. Customize a new game instead.
+zh-CN 本局游戏开始时未使用自定义，因此附加功能已固定。请改为自定义一局新游戏。
+
+@ Bullet Time
+zh-CN 子弹时间
+
+@ Change Goggles
+zh-CN 切换目镜
+
+@ Dodge / Dive
+zh-CN 闪避/飞扑
+
+@ Goggles
+zh-CN 目镜
+
+@ Hitstop
+zh-CN 顿帧
+
+@ Projectile Shotguns
+zh-CN 弹丸霰弹枪
+
+@ BULLET TIME: 20%
+zh-CN 子弹时间：20%
+
+@ NORMAL SPEED
+zh-CN 正常速度
+
+@ SLOW MOTION: PHYSICAL PELLETS
+zh-CN 慢动作：实体弹丸
+
+@ DEMONSTRATION
+zh-CN 演示
+
+@ GAMEPLAY
+zh-CN 游戏玩法
+
+@ LOOP
+zh-CN 循环
+
+@ Preview unavailable
+zh-CN 预览不可用
+
+# shader and language help lines
+@ A setting of the chosen shader; arrows step it, Enter is not needed
+zh-CN 所选着色器的设置项；用方向键调整，无需按 Enter
+
+@ Language of the menus, messages and the 2021 re-release's game text; System follows your computer's language
+zh-CN 菜单、消息以及 2021 重制版游戏文本的语言；“系统”将跟随电脑的语言
+
+@ Puts every setting of the chosen shader back to the preset's defaults
+zh-CN 将所选着色器的所有设置恢复为预设的默认值
+
+@ RetroArch slang shader on the final image: CRT, scanlines, NTSC, sharpening; add your own in <game>/shaders
+zh-CN 对最终画面应用 RetroArch slang 着色器：CRT、扫描线、NTSC、锐化；可在 <game>/shaders 中添加你自己的着色器
+
+# modern console footer
+@ Shift+PgUp/Dn: height  ` : hide
+zh-CN Shift+PgUp/Dn：高度  `：隐藏
+
+@ Tab: complete  Ctrl+R: search  bash | pipe
+zh-CN Tab：补全  Ctrl+R：搜索  bash | 管道
+
+@ ↑ +{} lines (End to jump) 
+zh-CN ↑ +{} 行（按 End 跳转） 
+
+# add-on descriptions
+@ Create two linked portals on flat walls. Fire places the first portal; Alt Fire places the second. Walk through either portal to emerge from the other. Your momentum carries through. Assign a weapon slot below: pressing that slot repeatedly cycles its ordinary weapon and every enabled add-on assigned there. Portal view quality is configurable below.
+zh-CN 在平坦墙面上创建两个相连的传送门。开火放置第一个传送门，副开火放置第二个。走进任意一个传送门即可从另一个出来，动量也会保留。在下方分配武器槽：反复按该武器槽键会在其常规武器和分配到该槽的所有已启用附加功能之间循环。传送门画面质量可在下方配置。
+
+@ Hold Fire and sweep the crosshair over monsters to queue targets. Release Fire to throw: the boomerang visits each target, stuns it and returns to you. Alt Fire clears the queue. The weapon slot selects a group, not a separate hotkey: press it again to cycle through the weapons in that slot. Configure stun duration and flight speed below.
+zh-CN 按住开火并用准星扫过怪物以将其加入目标队列。松开开火即可投掷：回旋镖会依次飞向每个目标，将其眩晕后飞回你手中。副开火清空队列。武器槽选择的是一组武器，而非单独的快捷键：再次按下可在该槽的武器之间循环。眩晕时长和飞行速度可在下方配置。
+
+@ Hold Fire to charge a sticky bomb using rocket ammunition; release to launch. A longer charge throws it faster. Bombs cling to walls, doors and monsters. Alt Fire detonates your planted bombs together. Place a trap, retreat, then detonate it when enemies approach. Assign any weapon slot below; repeated presses cycle through the ordinary weapon and add-ons in that slot.
+zh-CN 按住开火为粘性炸弹蓄力（消耗火箭弹），松开即发射。蓄力越久，投掷越快。炸弹会粘在墙壁、门和怪物上。副开火同时引爆你放置的所有炸弹。布下陷阱后撤退，等敌人靠近时引爆。在下方分配任意武器槽；反复按下可在该槽的常规武器和附加功能之间循环。
+
+@ Fire launches a chain hook. It latches onto a permitted surface or enemy and reels you toward the anchor. Fire again or use Alt Fire to let go. Choose which materials and enemies can be hooked in Configure Parameters. Assign it to any weapon slot; repeated presses of the slot's existing binding cycle through its weapons.
+zh-CN 开火射出链钩。它会钩住允许的表面或敌人，并将你拉向锚点。再次开火或使用副开火可松开。可在“配置参数”中选择能钩取的材质和敌人。可分配到任意武器槽；反复按该槽的现有绑定键可在其武器之间循环。
+
+@ A piercing railgun inspired by Quake III. Fire sends a slug through every enemy along its line. Each shot consumes two cells, with a 1.5 second refire interval. Damage and the spiral trail colour are configurable below. Choose a weapon slot: the slot's current binding selects and cycles the weapons assigned to it.
+zh-CN 受 Quake III 启发的贯穿式轨道炮。开火射出的弹体会贯穿直线上的所有敌人。每发消耗两个电池，射击间隔 1.5 秒。伤害和螺旋轨迹颜色可在下方配置。选择一个武器槽：该槽的现有绑定键可选择并循环分配到该槽的武器。
+
+@ A Portal-style gel sprayer. Fire sprays blue Repulsion gel: land, jump or run into it to bounce, and landings on it never hurt. Alt Fire sprays orange Propulsion gel: run across it to go much faster. Gel coats floors and walls until washed off with the Powerwasher. Assign a weapon slot below; repeated presses cycle the weapons in that slot.
+zh-CN Portal 风格的凝胶喷射器。开火喷出蓝色排斥凝胶：落在上面、在上面跳跃或跑进去都会弹起，落在上面也不会受伤。副开火喷出橙色推进凝胶：在上面奔跑速度会大幅提升。凝胶会覆盖地面和墙壁，直到被高压水枪冲掉。在下方分配武器槽；反复按下可在该槽的武器之间循环。
+
+@ A water cannon. Fire shoots a straight jet with limited reach; Alt Fire a wide, shorter fan. The water pushes enemies back, turns projectiles aside and washes away gel and blood. Push strength is configurable below. Assign a weapon slot below; repeated presses cycle the weapons in that slot.
+zh-CN 一把水炮。开火射出射程有限的直线水柱；副开火喷出更宽、更短的扇形水流。水流会击退敌人、偏转弹体，并冲掉凝胶和血迹。推力强度可在下方配置。在下方分配武器槽；反复按下可在该槽的武器之间循环。
+
+@ One equipment add-on includes both night vision and thermal vision. The Change Goggles action cycles Normal, Night Vision, Thermal, then Normal again. Night vision brightens dark rooms; thermal vision highlights living enemies. Goggles do not occupy a weapon slot. Configure intensity and sensor noise below. The binding affects only this add-on.
+zh-CN 一个装备类附加功能同时包含夜视和热成像。“切换目镜”操作会在普通、夜视、热成像之间循环，然后回到普通。夜视可照亮黑暗的房间；热成像可突出显示活着的敌人。目镜不占用武器槽。强度和传感器噪点可在下方配置。该绑定仅影响此附加功能。
+
+@ Press Dodge with a movement direction on the ground or in midair: dive forward or leap backward and sideways. Diagonals are supported. Each press launches once, with a short recovery. The player body animates in third person. Assign the Dodge action below or in Controls.
+zh-CN 在地面或空中按下闪避并配合移动方向：向前飞扑，或向后、向侧面跃开。支持斜向。每次按下触发一次，之后有短暂恢复时间。第三人称下玩家身体会有动画。可在下方或“控制”中分配闪避操作。
+
+@ Use the dedicated Bullet Time action to slow the whole local game to 20% speed. Hold is the default; Toggle switches on each press. The optional meter limits use in real seconds and regenerates while inactive. Disable the meter for unlimited use. Remap the action and configure duration and regeneration below.
+zh-CN 使用专门的子弹时间操作将整个本地游戏放慢到 20% 速度。默认为按住；切换模式则每按一次切换一次。可选的计量条以真实秒数限制使用时长，不使用时会恢复。关闭计量条即可无限使用。可在下方重新映射该操作并配置时长和恢复速度。
+
+@ Both shotguns and enemy grunts fire physical pellets with their original spread and damage. Fast default projectiles feel immediate; lower their speed to dodge incoming fire during bullet time. Configure projectile speed below, or reset it to the default of 10000 units per second.
+zh-CN 两种霰弹枪和敌方士兵都会发射实体弹丸，保持原有的散布和伤害。默认弹丸速度很快，感觉与即时命中无异；降低速度后可在子弹时间中躲避来袭的火力。可在下方配置弹丸速度，或将其恢复为默认的每秒 10000 单位。
+
+@ Freezes the game for a split second when you damage an enemy, so hits feel heavier. Single player only. Choose which weapons trigger it (all, melee, ranged or explosives), how long it lasts and how much more a kill freezes. Advanced settings cover enemy toughness, damage scaling, cooldown and the longest freeze.
+zh-CN 对敌人造成伤害时让游戏冻结一瞬间，使命中更有分量。仅限单人游戏。可选择触发的武器（全部、近战、远程或爆炸物）、持续时长以及击杀时额外冻结多久。高级设置包括敌人强度、伤害缩放、冷却时间和最长冻结时长。
+
+# map packs and the Quaddicted browser
+@ Get more maps (Quaddicted)...
+zh-CN 获取更多地图（Quaddicted）……
+
+@ Type to filter...
+zh-CN 输入以筛选……
+
+@ Launch mod
+zh-CN 启动模组
+
+@ Start first map
+zh-CN 开始第一张地图
+
+@ (running)
+zh-CN （运行中）
+
+@ running
+zh-CN 运行中
+
+@ Recent
+zh-CN 最近
+
+@ Name
+zh-CN 名称
+
+@ Dir
+zh-CN 目录
+
+@ Default
+zh-CN 默认
+
+@ Title
+zh-CN 标题
+
+@ Sort: {}
+zh-CN 排序：{}
+
+@ {} installed
+zh-CN 已安装 {} 个
+
+@ {}/{} matching
+zh-CN {}/{} 个匹配
+
+@ {} maps, {} completed
+zh-CN {} 张地图，已完成 {} 张
+
+@ {}/{} matching, {} completed
+zh-CN {}/{} 个匹配，已完成 {} 个
+
+@ no maps of its own
+zh-CN 没有自带地图
+
+@ dir: {}
+zh-CN 目录：{}
+
+@ base: {}
+zh-CN 基础：{}
+
+@ Browse the Quaddicted archive of
+zh-CN 浏览 Quaddicted 的
+
+@ single-player maps and episodes,
+zh-CN 单人地图和剧集存档，
+
+@ then download and install them
+zh-CN 然后在此处下载
+
+@ here. Each release gets its own
+zh-CN 并安装。每个发布版本在
+
+@ entry in this list.
+zh-CN 此列表中都有独立条目。
+
+@ Needs an internet connection.
+zh-CN 需要互联网连接。
+
+@ Quaddicted Map Archive
+zh-CN Quaddicted 地图存档
+
+@ Newest
+zh-CN 最新
+
+@ Author
+zh-CN 作者
+
+@ Size
+zh-CN 大小
+
+@ Loading the map list...
+zh-CN 正在加载地图列表……
+
+@ Couldn't load the map list: {}
+zh-CN 无法加载地图列表：{}
+
+@ {} single-player releases  -  F5 refreshes
+zh-CN {} 个单人游戏发布  -  按 F5 刷新
+
+@ {} matching
+zh-CN {} 个匹配
+
+@ by {}
+zh-CN 作者：{}
+
+@ requires: {}
+zh-CN 需要：{}
+
+@ maps: {}
+zh-CN 地图：{}
+
+@ Failed: {}
+zh-CN 失败：{}
+
+@ Downloading... {}%
+zh-CN 正在下载……{}%
+
+@ Unpacking...
+zh-CN 正在解压……
+
+@ Installed in {}/  -  Enter: play
+zh-CN 已安装到 {}/  -  Enter：开始游戏
+
+@ Enter: download and install
+zh-CN Enter：下载并安装
+
+@ unpacking
+zh-CN 解压中
+
+@ failed
+zh-CN 失败
+
+@ installed
+zh-CN 已安装
+
+@ Downloads are not available in the browser build
+zh-CN 浏览器版本不支持下载
+
+@ the map list could not be read
+zh-CN 无法读取地图列表
+
+@ downloading needs the curl program
+zh-CN 下载需要 curl 程序
+
+@ download failed
+zh-CN 下载失败
+
+@ the download is not a valid zip
+zh-CN 下载的文件不是有效的 zip
+
+@ nothing to install for this engine
+zh-CN 没有可供此引擎安装的内容
+
+@ needs {} installed first
+zh-CN 需要先安装 {}
+
+@ couldn't unpack {}
+zh-CN 无法解压 {}
+
+# help screen
+@ About
+zh-CN 关于
+
+@ < Back
+zh-CN < 返回
+
+# tr_ctx keys: English shows the short word, the key says which meaning
+@ Save (a manual save, as opposed to a quicksave or autosave)
+zh-CN 存档
+
+# ==== hud.txt ====
+
+# HUD, weapon and equipment wheels, sound captions and other in-game text.
+# Weapon, monster and item names follow the 2021 re-release's own translations.
+@ Axe
+zh-CN 斧头
+
+@ Shotgun
+zh-CN 霰弹枪
+
+@ Double-Barrelled Shotgun
+zh-CN 双管霰弹枪
+
+@ Nailgun
+zh-CN 钉枪
+
+@ Super Nailgun
+zh-CN 超级钉枪
+
+@ Grenade Launcher
+zh-CN 榴弹发射器
+
+@ Rocket Launcher
+zh-CN 火箭发射器
+
+@ Thunderbolt
+zh-CN 雷电枪
+
+@ Portal Gun
+zh-CN 传送门枪
+
+@ Boomerang
+zh-CN 回旋镖
+
+@ Stickybomb Launcher
+zh-CN 粘弹发射器
+
+@ Railgun
+zh-CN 轨道炮
+
+@ Hookshot
+zh-CN 钩爪
+
+@ Gel Sprayer
+zh-CN 凝胶喷射器
+
+@ Powerwasher
+zh-CN 高压水枪
+
+@ Night Vision Goggles
+zh-CN 夜视目镜
+
+@ Thermal Goggles
+zh-CN 热成像目镜
+
+@ Normal vision
+zh-CN 普通视觉
+
+@ ON
+zh-CN 开
+
+@ OFF
+zh-CN 关
+
+@ {} (turn on)
+zh-CN {}（开启）
+
+@ {} (turn off)
+zh-CN {}（关闭）
+
+@ Move mouse to select, release to toggle
+zh-CN 移动鼠标选择，松开切换
+
+@ Move mouse to select, release to equip
+zh-CN 移动鼠标选择，松开装备
+
+@ Release to toggle
+zh-CN 松开切换
+
+@ Release to equip
+zh-CN 松开装备
+
+@ shells
+zh-CN 霰弹
+
+@ nails
+zh-CN 钉子
+
+@ rockets
+zh-CN 火箭弹
+
+@ cells
+zh-CN 电池
+
+@ Kills: {}/{}
+zh-CN 击杀：{}/{}
+
+@ Secrets: {}/{}
+zh-CN 秘密：{}/{}
+
+@ Time {}
+zh-CN 时间 {}
+
+@ Press any button to continue...
+zh-CN 按任意按钮继续……
+
+@ Press any key to continue...
+zh-CN 按任意键继续……
+
+@ BULLET TIME
+zh-CN 子弹时间
+
+@ AUTO AIM
+zh-CN 自动瞄准
+
+@ Crosshair
+zh-CN 准星
+
+@ + Marker
+zh-CN + 标记
+
+@ Hit markers off
+zh-CN 命中标记已关闭
+
+@ On target
+zh-CN 瞄准时
+
+@ On kill
+zh-CN 击杀时
+
+# sound captions
+@ [Secret found]
+zh-CN [发现秘密]
+
+@ [Message]
+zh-CN [消息]
+
+@ [Switch activated]
+zh-CN [开关已激活]
+
+@ [Key picked up]
+zh-CN [拾取钥匙]
+
+@ [Rune picked up]
+zh-CN [拾取符文]
+
+@ [Teleporter]
+zh-CN [传送点]
+
+@ [Teleport]
+zh-CN [传送]
+
+@ [Splash]
+zh-CN [落水]
+
+@ [Leaving water]
+zh-CN [出水]
+
+@ [Door]
+zh-CN [门]
+
+@ [Platform moving]
+zh-CN [平台移动]
+
+@ [Button]
+zh-CN [按钮]
+
+@ [Health picked up]
+zh-CN [拾取生命]
+
+@ [Armor picked up]
+zh-CN [拾取护甲]
+
+@ [Quad Damage wearing off]
+zh-CN [四倍伤害即将消失]
+
+@ [Quad Damage]
+zh-CN [四倍伤害]
+
+@ [Pentagram wearing off]
+zh-CN [五芒星即将消失]
+
+@ [Pentagram of Protection]
+zh-CN [守护五芒星]
+
+@ [Ring wearing off]
+zh-CN [戒指即将消失]
+
+@ [Ring of Shadows]
+zh-CN [暗影之戒]
+
+@ [Biosuit wearing off]
+zh-CN [防护服即将消失]
+
+@ [Biosuit]
+zh-CN [生化防护服]
+
+@ [Item picked up]
+zh-CN [拾取物品]
+
+@ [Weapon picked up]
+zh-CN [拾取武器]
+
+@ [Ammo picked up]
+zh-CN [拾取弹药]
+
+@ [Explosion]
+zh-CN [爆炸]
+
+@ [Grenade launched]
+zh-CN [发射榴弹]
+
+@ [Grenade bounce]
+zh-CN [榴弹弹跳]
+
+@ [Rocket fired]
+zh-CN [发射火箭]
+
+@ [Nails fired]
+zh-CN [发射钉子]
+
+@ [Lightning]
+zh-CN [闪电]
+
+@ [Thunder]
+zh-CN [雷声]
+
+@ [Enforcer alerted]
+zh-CN [执法者察觉]
+
+@ [Grunt alerted]
+zh-CN [士兵察觉]
+
+@ [Rottweiler alerted]
+zh-CN [罗威纳犬察觉]
+
+@ [Knight alerted]
+zh-CN [骑士察觉]
+
+@ [Death Knight alerted]
+zh-CN [死亡骑士察觉]
+
+@ [Scrag alerted]
+zh-CN [飞灵察觉]
+
+@ [Ogre alerted]
+zh-CN [食人魔察觉]
+
+@ [Fiend alerted]
+zh-CN [魔鬼察觉]
+
+@ [Shambler alerted]
+zh-CN [蹒跚者察觉]
+
+@ [Zombie groaning]
+zh-CN [僵尸呻吟]
+
+@ [Vore alerted]
+zh-CN [沃尔察觉]
+
+@ [Vore attacking]
+zh-CN [沃尔攻击]
+
+@ [Spawn alerted]
+zh-CN [卵怪察觉]
+
+@ [Rotfish]
+zh-CN [腐鱼]
+
+@ [Spawn]
+zh-CN [卵怪]
+
+@ [Chthon]
+zh-CN [克苏恩]
+
+@ [Hard landing]
+zh-CN [重重落地]
+
+@ [Drowning]
+zh-CN [溺水]
+
+@ [Gasping for air]
+zh-CN [大口喘气]
+
+@ [Burning]
+zh-CN [燃烧]
+
+@ [Telefrag]
+zh-CN [传送击杀]
+
+@ [Gibbed]
+zh-CN [被炸碎]
+
+# ==== console.txt ====
+
+# Console messages, shown translated only with con_translate 1 (Translate Console).
+# Cvar and command names stay as they are.
+@ Autosaved.
+zh-CN 已自动存档。
+
+@ Game saved.
+zh-CN 游戏已保存。
+
+@ Can't save now.
+zh-CN 现在无法存档。
+
+@ This game only autosaves (No Manual Saves modifier).
+zh-CN 本局游戏仅自动存档（“禁止手动存档”修改项）。
+
+@ Loading {}...
+zh-CN 正在载入 {}……
+
+@ load failed: {}
+zh-CN 载入失败：{}
+
+@ ERROR: autosave failed: {}
+zh-CN 错误：自动存档失败：{}
+
+@ ERROR: couldn't open {}
+zh-CN 错误：无法打开 {}
+
+@ ERROR: couldn't open {}.
+zh-CN 错误：无法打开 {}。
+
+@ ERROR: couldn't write {}: {}
+zh-CN 错误：无法写入 {}：{}
+
+@ ERROR: couldn't create {}: {}
+zh-CN 错误：无法创建 {}：{}
+
+@ couldn't write {}: {}
+zh-CN 无法写入 {}：{}
+
+@ Wrote {}
+zh-CN 已写入 {}
+
+@ screenshot failed: {}
+zh-CN 截图失败：{}
+
+@ screenshot: {}
+zh-CN 截图：{}
+
+@ No readable save available. Select save or restart the level.
+zh-CN 没有可读取的存档。请选择存档或重新开始关卡。
+
+@ Unknown command "{}"
+zh-CN 未知命令“{}”
+
+@ couldn't exec {}
+zh-CN 无法执行 {}
+
+@ execing {}
+zh-CN 正在执行 {}
+
+@ execing config.cfg (inherited from {})
+zh-CN 正在执行 config.cfg（继承自 {}）
+
+@ execing config.cfg (mod defaults)
+zh-CN 正在执行 config.cfg（模组默认值）
+
+@ execing default.cfg (built-in)
+zh-CN 正在执行 default.cfg（内置）
+
+@ {} cvars
+zh-CN {} 个控制台变量
+
+@ {} commands
+zh-CN {} 个命令
+
+@ Can't "cmd", not connected
+zh-CN 无法使用“cmd”，未连接
+
+@ Looking for Quake servers...
+zh-CN 正在查找 Quake 服务器……
+
+@ Bad value, must be between 1 and 65534
+zh-CN 数值无效，必须介于 1 到 65534 之间
+
+@ Couldn't handle music file {}
+zh-CN 无法处理音乐文件 {}
+
+@ Bug report written to {}
+zh-CN 错误报告已写入 {}
+
+@ bugreport: can't create {}: {}
+zh-CN bugreport：无法创建 {}：{}
+
+@ graphics preset: {}
+zh-CN 图形预设：{}
+
+@ Presets (r_shader_preset <name>):
+zh-CN 预设（r_shader_preset <名称>）：
+
+@ Add your own .slangp presets under <game>/shaders/.
+zh-CN 可在 <game>/shaders/ 下添加你自己的 .slangp 预设。
+
+@ no shader preset loaded (r_shader_preset)
+zh-CN 未载入着色器预设（r_shader_preset）
+
+@ r_shader_preset: "{}" not found
+zh-CN r_shader_preset：未找到“{}”
+
+@ no parameter "{}" in this preset
+zh-CN 此预设中没有参数“{}”
+
+@ {} = {} (default {}, {}..{})
+zh-CN {} = {}（默认 {}，{}..{}）
+
+@ Switching to {}...
+zh-CN 正在切换到 {}……
+
+@ game: no game dir "{}" in {}
+zh-CN game：没有游戏目录“{}”（位于 {}）
+
+@ game: can't find the engine executable
+zh-CN game：找不到引擎可执行文件
+
+@ game: exec failed: {}
+zh-CN game：执行失败：{}
+
+@ game: launch failed: {}
+zh-CN game：启动失败：{}
+
+@ loaded {} in {}s
+zh-CN 已载入 {}，用时 {} 秒
+
+@ No demos listed with startdemos
+zh-CN startdemos 未列出任何录像
+
+@ Playing demo from {}.
+zh-CN 正在从 {} 播放录像。
+
+@ {} frames {} seconds {} fps
+zh-CN {} 帧 {} 秒 {} fps
+
+@ Recording to {}.
+zh-CN 正在录制到 {}。
+
+@ Completed demo
+zh-CN 录像已完成
+
+@ Can't record during demo playback
+zh-CN 播放录像时无法录制
+
+@ Relative pathnames are not allowed.
+zh-CN 不允许使用相对路径。
+
+@ Can't record - try again when connected
+zh-CN 无法录制 - 请在连接后重试
+
+@ {} demo(s) in loop
+zh-CN 循环中有 {} 个录像
+
+@ Not recording a demo.
+zh-CN 当前未在录制录像。
+
+@ {} joined on a gamepad
+zh-CN {} 使用手柄加入
+
+@ goggles: needs a game started with Add-ons and Goggles enabled
+zh-CN goggles：需要在启用附加功能和目镜的情况下开始游戏
+
+@ equip: needs a game started with Add-ons and Goggles enabled
+zh-CN equip：需要在启用附加功能和目镜的情况下开始游戏
+
+@ UDP listening on port {}
+zh-CN UDP 正在监听端口 {}
+
+@ UDP bind on port {} failed: {}
+zh-CN UDP 绑定端口 {} 失败：{}
+
+@ Connection accepted by {}
+zh-CN {} 已接受连接
+
+@ Connection failed: {}
+zh-CN 连接失败：{}
+
+@ Couldn't resolve {}
+zh-CN 无法解析 {}
+
+@ Connecting to {}...
+zh-CN 正在连接到 {}……
+
+@ Connecting to QuakeWorld server {}...
+zh-CN 正在连接到 QuakeWorld 服务器 {}……
+
+@ Disconnected: {}
+zh-CN 已断开连接：{}
+
+@ Server disconnected
+zh-CN 服务器已断开连接
+
+@ Client {} connected
+zh-CN 客户端 {} 已连接
+
+@ Client {} timed out
+zh-CN 客户端 {} 连接超时
+
+@ Couldn't spawn server {}: {}
+zh-CN 无法启动服务器 {}：{}
+
+@ maxplayers can not be changed while a server is running.
+zh-CN 服务器运行时无法更改 maxplayers。
+
+@ You can't kick yourself!
+zh-CN 你不能踢出自己！
+
+@ Only the server may changelevel
+zh-CN 只有服务器可以更换关卡
+
+@ {} renamed to {}
+zh-CN {} 已改名为 {}

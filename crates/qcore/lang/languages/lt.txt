@@ -1,0 +1,3024 @@
+# lt: the port's own text; English keys from crates/qcore/lang/*.txt.
+# Format in crates/qcore/src/lang/catalog.rs; check with tools/lang_check.py.
+
+# ==== menu.txt ====
+
+# Options pages: page names, row labels and choice values.
+@ 10% speed
+lt 10 % greičio
+
+@ 2 split-screen
+lt 2 padalytame ekrane
+
+@ 3 split-screen
+lt 3 padalytame ekrane
+
+@ 4 split-screen
+lt 4 padalytame ekrane
+
+@ 5 split-screen
+lt 5 padalytame ekrane
+
+@ 6 split-screen
+lt 6 padalytame ekrane
+
+@ 2D aiming
+lt 2D taikymas
+
+@ 2x monsters
+lt 2× monstrų
+
+@ 3x monsters
+lt 3× monstrų
+
+@ 4x monsters
+lt 4× monstrų
+
+@ 3D resolution
+lt 3D raiška
+
+@ 3D view
+lt 3D vaizdas
+
+@ 8-bit Color
+lt 8 bitų spalvos
+
+@ Accessibility
+lt Prieinamumas
+
+@ Acquisition Cone
+lt Taikymo kūgis
+
+@ Activation
+lt Aktyvinimas
+
+@ Add a ringing room tail after the cue
+lt Po signalo prideda skambantį patalpos aidą
+
+@ Add delayed repeats after the cue
+lt Po signalo prideda uždelstus pakartojimus
+
+@ Add saturation and distortion
+lt Prideda sodrumo ir iškraipymo
+
+@ Add-ons
+lt Priedai
+
+@ Address
+lt Adresas
+
+@ Adds fine noise to hide color banding
+lt Prideda smulkų triukšmą spalvų pakopoms paslėpti
+
+@ Advanced Settings
+lt Išplėstiniai nustatymai
+
+@ Aim Assist
+lt Taikymo pagalba
+
+@ Aim Rotation
+lt Taikymo sukimas
+
+@ Aim Slowdown
+lt Taikymo sulėtinimas
+
+@ Aim Style
+lt Taikymo stilius
+
+@ All
+lt Visi
+
+@ All enemies
+lt Visi priešai
+
+@ Alt Fire (Add-ons)
+lt Alternatyvus šūvis (priedai)
+
+@ Always Run
+lt Visada bėgti
+
+@ Ambient Occlusion
+lt Aplinkos užtamsinimas
+
+@ Ammo Counts
+lt Šaudmenų kiekiai
+
+@ Ammo Counts Position
+lt Šaudmenų kiekių padėtis
+
+@ Ammo Pickups
+lt Šaudmenų radiniai
+
+@ Anisotropic
+lt Anizotropinis
+
+@ Anti-aliasing
+lt Kraštų glodinimas
+
+@ Apply To
+lt Taikyti
+
+@ Armor
+lt Šarvai
+
+@ Armor Position
+lt Šarvų padėtis
+
+@ Ask
+lt Klausti
+
+@ Attack
+lt Pulti
+
+@ Audio
+lt Garsas
+
+@ Auto-aim
+lt Automatinis taikymas
+
+@ Auto-aim Settings
+lt Automatinio taikymo nustatymai
+
+@ Autosave
+lt Automatinis išsaugojimas
+
+@ Autosave Settings
+lt Automatinio išsaugojimo nustatymai
+
+@ Autosave Timer
+lt Automatinio išsaugojimo laikas
+
+@ Autosaves to Keep
+lt Laikomi automatiniai išsaugojimai
+
+@ Bass
+lt Žemi dažniai
+
+@ Blip
+lt Pyptelėjimas
+
+@ Blood Quality
+lt Kraujo kokybė
+
+@ Blood Splatter Settings
+lt Kraujo purslų nustatymai
+
+@ Blue
+lt Mėlyna
+
+@ Boomerang Settings
+lt Bumerango nustatymai
+
+@ Boost or cut high frequencies in decibels
+lt Sustiprina ar susilpnina aukštus dažnius decibelais
+
+@ Boost or cut low frequencies in decibels
+lt Sustiprina ar susilpnina žemus dažnius decibelais
+
+@ Brightness
+lt Ryškumas
+
+@ Bullet Time (Add-ons)
+lt Bullet Time (priedai)
+
+@ Bullet Time Settings
+lt Bullet Time nustatymai
+
+@ Button Glyphs
+lt Mygtukų simboliai
+
+@ Button Size
+lt Mygtukų dydis
+
+@ Camera
+lt Kamera
+
+@ Caustic Intensity
+lt Kaustikos intensyvumas
+
+@ Caustics
+lt Kaustika
+
+@ Center
+lt Centre
+
+@ Center Message Position
+lt Centrinių pranešimų padėtis
+
+@ Center Message Time
+lt Centrinių pranešimų trukmė
+
+@ Center View
+lt Centruoti vaizdą
+
+@ Change Color on Kill
+lt Keisti spalvą nužudžius
+
+@ Change Color on Target
+lt Keisti spalvą taikantis
+
+@ Chime
+lt Varpelis
+
+@ Click
+lt Spragtelėjimas
+
+@ Clink
+lt Dzingtelėjimas
+
+@ Coin
+lt Moneta
+
+@ Color
+lt Spalva
+
+@ Color Filter
+lt Spalvų filtras
+
+@ Color of the grenade arc
+lt Granatos trajektorijos spalva
+
+@ Colored Lighting
+lt Spalvotas apšvietimas
+
+@ Connect
+lt Prisijungti
+
+@ Contrast
+lt Kontrastas
+
+@ Controls
+lt Valdymas
+
+@ Cooldown (ms)
+lt Atvėsimas (ms)
+
+@ Crosshair Outline
+lt Taikiklio kontūras
+
+@ Crosshair Shape
+lt Taikiklio forma
+
+@ Crosshair Size
+lt Taikiklio dydis
+
+@ Current Ammo
+lt Dabartiniai šaudmenys
+
+@ Current Ammo Position
+lt Dabartinių šaudmenų padėtis
+
+@ Customize This Game
+lt Pritaikyti šį žaidimą
+
+@ Damage
+lt Žala
+
+@ Damage Taken
+lt Gauta žala
+
+@ Debris
+lt Nuolaužos
+
+@ Debris Quality
+lt Nuolaužų kokybė
+
+@ Debris Settings
+lt Nuolaužų nustatymai
+
+@ Directional Damage
+lt Žalos kryptis
+
+@ Dithering
+lt Ditheringas
+
+@ Dodge / Dive (Add-ons)
+lt Išsisukimas / nėrimas (priedai)
+
+@ Dragging up looks down instead of up
+lt Tempiant aukštyn žiūrima žemyn, ne aukštyn
+
+@ Drive
+lt Iškraipymas
+
+@ Dynamic Lights
+lt Dinaminis apšvietimas
+
+@ Echo
+lt Aidas
+
+@ Enemy Health
+lt Priešų sveikata
+
+@ Enemy Wounds
+lt Priešų žaizdos
+
+@ Enhanced Blood Splatter
+lt Patobulinti kraujo purslai
+
+@ Enhanced FX
+lt Patobulinti efektai
+
+@ Enhanced Models
+lt Patobulinti modeliai
+
+@ Enhanced Particles
+lt Patobulintos dalelės
+
+@ Enhanced Water
+lt Patobulintas vanduo
+
+@ Enhancements
+lt Patobulinimai
+
+@ Equipment Wheel (Add-ons)
+lt Įrangos ratas (priedai)
+
+@ Exploding boxes throw metal shards
+lt Sprogstančios dėžės svaido metalo skeveldras
+
+@ Explosion Damage
+lt Sprogimų žala
+
+@ Explosion Scorch Marks
+lt Sprogimų nudegimai
+
+@ Explosions scorch nearby solid surfaces
+lt Sprogimai apdegina netoliese esančius paviršius
+
+@ Explosives only
+lt Tik sprogstamieji
+
+@ Extra Monsters
+lt Papildomi monstrai
+
+@ Extra Per 10 Damage (ms)
+lt Priedas už 10 žalos (ms)
+
+@ FX Settings
+lt Efektų nustatymai
+
+@ Field of View
+lt Matymo laukas
+
+@ Firing never uses up ammo
+lt Šaudant šaudmenys niekada nesibaigia
+
+@ First person
+lt Pirmasis asmuo
+
+@ Flick Time
+lt Flick laikas
+
+@ Flight Speed
+lt Skrydžio greitis
+
+@ Fog
+lt Rūkas
+
+@ Frag Limit
+lt Fragų riba
+
+@ Freeze Duration (ms)
+lt Sustingdymo trukmė (ms)
+
+@ GLQuake
+lt GLQuake
+
+@ Game Speed
+lt Žaidimo greitis
+
+@ Game Type
+lt Žaidimo tipas
+
+@ Gameplay
+lt Žaidimas
+
+@ Gameplay Modifiers
+lt Žaidimo modifikatoriai
+
+@ Gel Quality
+lt Gelio kokybė
+
+@ Gib Surface Painting
+lt Kūno gabalų dėmės
+
+@ Gibs
+lt Kūno gabalai
+
+@ Gibs and heads tumble and bounce
+lt Kūno gabalai ir galvos rieda ir atšoka
+
+@ Goggle Glow Quality
+lt Akinių švytėjimo kokybė
+
+@ Goggle Intensity
+lt Akinių intensyvumas
+
+@ Goggle Noise
+lt Akinių triukšmas
+
+@ Goggles Settings
+lt Akinių nustatymai
+
+@ Graphics
+lt Grafika
+
+@ Green
+lt Žalia
+
+@ Grenade Arc
+lt Granatos trajektorija
+
+@ Grenade Arc Settings
+lt Granatos trajektorijos nustatymai
+
+@ Gun Kick
+lt Ginklo atatranka
+
+@ Gyro
+lt Giroskopas
+
+@ Gyro & Flick Stick
+lt Giroskopas ir flick stick
+
+@ Gyro Active
+lt Giroskopas aktyvus
+
+@ Gyro Aiming
+lt Taikymas giroskopu
+
+@ HUD
+lt HUD
+
+@ HUD Style
+lt HUD stilius
+
+@ Health
+lt Sveikata
+
+@ Health Pickups
+lt Sveikatos radiniai
+
+@ Health Position
+lt Sveikatos padėtis
+
+@ Health Regeneration
+lt Sveikatos atsistatymas
+
+@ Hit & Kill Sounds
+lt Pataikymo ir nužudymo garsai
+
+@ Hit Doors & Lifts
+lt Pataikyti duris ir liftus
+
+@ Hit Markers
+lt Pataikymo žymekliai
+
+@ Hit Sound
+lt Pataikymo garsas
+
+@ Hitmarker Size
+lt Pataikymo žymeklio dydis
+
+@ Hitmarker Type
+lt Pataikymo žymeklio tipas
+
+@ Hitstop Advanced
+lt Hitstop išplėstiniai
+
+@ Hitstop Settings
+lt Hitstop nustatymai
+
+@ Hold
+lt Laikyti
+
+@ Hold lock-on
+lt Laikyti fiksavimą
+
+@ Hook Enemies
+lt Kabinti priešus
+
+@ Hook Metal
+lt Kabinti metalą
+
+@ Hook Stone
+lt Kabinti akmenį
+
+@ Hook Wood
+lt Kabinti medį
+
+@ Hooking an enemy pulls you to it
+lt Užkabintas priešas pritraukia jus prie savęs
+
+@ Hookshot Range
+lt Kablio nuotolis
+
+@ Hookshot Settings
+lt Kablio nustatymai
+
+@ Host Game
+lt Kurti žaidimą
+
+@ How far the hook flies before it retracts
+lt Kaip toli kablys nuskrenda prieš grįždamas
+
+@ How visible the on-screen controls are
+lt Kiek matomi ekrano valdikliai
+
+@ Impact Lifetime
+lt Smūgio žymių trukmė
+
+@ Infinite Ammo
+lt Begaliniai šaudmenys
+
+@ Input
+lt Įvestis
+
+@ Input Scale
+lt Įvesties mastelis
+
+@ Interpolate Animation
+lt Interpoliuoti animaciją
+
+@ Interpolate Movement
+lt Interpoliuoti judėjimą
+
+@ Invert Look
+lt Apversti žvilgsnį
+
+@ Invert Mouse
+lt Apversti pelę
+
+@ Invert Stick
+lt Apversti svirtelę
+
+@ Jet Quality
+lt Srovės kokybė
+
+@ Join Game
+lt Prisijungti prie žaidimo
+
+@ Jump / Swim Up
+lt Šokti / plaukti aukštyn
+
+@ Jump again in mid-air
+lt Šokti dar kartą ore
+
+@ Jumps
+lt Šuoliai
+
+@ Keys & Powerups
+lt Raktai ir sustiprinimai
+
+@ Keys & Powerups Position
+lt Raktų ir sustiprinimų padėtis
+
+@ Kill Bonus (x)
+lt Nužudymo premija (x)
+
+@ Kill Sound
+lt Nužudymo garsas
+
+@ Knock
+lt Beldimas
+
+@ Left
+lt Kairėje
+
+@ Length of the motion blur streaks
+lt Judesio suliejimo ruožų ilgis
+
+@ Lifetime (seconds)
+lt Trukmė (sekundėmis)
+
+@ Live Portal Views
+lt Gyvi portalų vaizdai
+
+@ Live View Distance
+lt Gyvo vaizdo atstumas
+
+@ Local Players
+lt Vietiniai žaidėjai
+
+@ Local red wounds follow enemy animation
+lt Raudonos žaizdos seka priešo animaciją
+
+@ Lock Indicator
+lt Fiksavimo indikatorius
+
+@ Long falls don't hurt
+lt Ilgi kritimai nežeidžia
+
+@ Longest Freeze (ms)
+lt Ilgiausias sustingimas (ms)
+
+@ Look Down
+lt Žiūrėti žemyn
+
+@ Look Speed
+lt Žvilgsnio greitis
+
+@ Look Up
+lt Žiūrėti aukštyn
+
+@ Main Menu Music
+lt Pagrindinio meniu muzika
+
+@ Max FPS
+lt Maks. FPS
+
+@ Max Players
+lt Maks. žaidėjų
+
+@ Maximum Impacts
+lt Daugiausia smūgio žymių
+
+@ Maximum Marks
+lt Daugiausia žymių
+
+@ Maximum Range
+lt Didžiausias nuotolis
+
+@ Melee only
+lt Tik artima kova
+
+@ Message Background
+lt Pranešimų fonas
+
+@ Message Text Size
+lt Pranešimų teksto dydis
+
+@ Messages & Captions
+lt Pranešimai ir subtitrai
+
+@ Meter Duration (real seconds)
+lt Juostos trukmė (realiomis sekundėmis)
+
+@ Minimum Damage
+lt Mažiausia žala
+
+@ Mode
+lt Režimas
+
+@ Modern Console
+lt Moderni konsolė
+
+@ Modern HUD Layout
+lt Modernus HUD išdėstymas
+
+@ Most recent save
+lt Naujausias išsaugojimas
+
+@ Motion Blur
+lt Judesio suliejimas
+
+@ Motion Blur Amount
+lt Judesio suliejimo stiprumas
+
+@ Motion Blur Quality
+lt Judesio suliejimo kokybė
+
+@ Mouse & Keyboard
+lt Pelė ir klaviatūra
+
+@ Mouse Speed
+lt Pelės greitis
+
+@ Move Back
+lt Judėti atgal
+
+@ Move Forward
+lt Judėti pirmyn
+
+@ Music Volume
+lt Muzikos garsumas
+
+@ Next Weapon
+lt Kitas ginklas
+
+@ No Drowning
+lt Be skendimo
+
+@ No Fall Damage
+lt Be kritimo žalos
+
+@ No Manual Saves
+lt Be rankinio išsaugojimo
+
+@ No Self Damage
+lt Be žalos sau
+
+@ Noise Filter
+lt Triukšmo filtras
+
+@ Normal Color
+lt Įprasta spalva
+
+@ Notify Message Position
+lt Pranešimų padėtis
+
+@ Notify Message Time
+lt Pranešimų trukmė
+
+@ Number of splatter rays per blood impact
+lt Purslų spindulių skaičius vienam kraujo smūgiui
+
+@ Off
+lt Išjungta
+
+@ On Death
+lt Mirus
+
+@ On Kill Color
+lt Nužudymo spalva
+
+@ On Target Color
+lt Taikinio spalva
+
+@ Opacity
+lt Neskaidrumas
+
+@ Opacity of the grenade arc
+lt Granatos trajektorijos neskaidrumas
+
+@ Pants Color
+lt Kelnių spalva
+
+@ Particle Quality
+lt Dalelių kokybė
+
+@ Particles
+lt Dalelės
+
+@ Physical Nail Impacts
+lt Fiziniai vinių smūgiai
+
+@ Pistol Start
+lt Pistoleto startas
+
+@ Pitch
+lt Tono aukštis
+
+@ Pitch Sensitivity
+lt Vertikalus jautrumas
+
+@ Playback Speed
+lt Atkūrimo greitis
+
+@ Player Setup
+lt Žaidėjo nustatymai
+
+@ Pop
+lt Pokštelėjimas
+
+@ Portal Gun Settings
+lt Portalų ginklo nustatymai
+
+@ Portal Recursion
+lt Portalų rekursija
+
+@ Portal View Quality
+lt Portalų vaizdo kokybė
+
+@ Preview Sound
+lt Perklausyti garsą
+
+@ Previous Weapon
+lt Ankstesnis ginklas
+
+@ Projectile Shotguns Settings
+lt Fizinių šratų nustatymai
+
+@ Projectile Speed (units/s)
+lt Sviedinio greitis (vnt./s)
+
+@ Purple
+lt Violetinė
+
+@ Push
+lt Stūmimas
+
+@ Push Strength
+lt Stūmimo jėga
+
+@ Quick Load
+lt Greitas įkėlimas
+
+@ Quick Save
+lt Greitas išsaugojimas
+
+@ Railgun Settings
+lt Railgun nustatymai
+
+@ Ranged only
+lt Tik tolima kova
+
+@ Reacquire While Held
+lt Iš naujo fiksuoti laikant
+
+@ Red
+lt Raudona
+
+@ Reduce Motion
+lt Mažinti judesį
+
+@ Regen (seconds per second)
+lt Atsistatymas (sekundžių per sekundę)
+
+@ Render Scale
+lt Atvaizdavimo mastelis
+
+@ Reverb
+lt Reverberacija
+
+@ Right
+lt Dešinėje
+
+@ Ripple Intensity
+lt Raibuliavimo intensyvumas
+
+@ Ripples
+lt Raibuliavimas
+
+@ Roll Sensitivity
+lt Posvyrio jautrumas
+
+@ Rumble
+lt Vibracija
+
+@ Run
+lt Bėgti
+
+@ Save on All Enemies Killed
+lt Išsaugoti nukovus visus priešus
+
+@ Save on All Secrets Found
+lt Išsaugoti radus visas slaptavietes
+
+@ Save on Level Entry
+lt Išsaugoti pradedant lygį
+
+@ Save on Secret Found
+lt Išsaugoti radus slaptavietę
+
+@ Scoreboard
+lt Rezultatų lentelė
+
+@ Screen Flashes
+lt Ekrano blyksniai
+
+@ Screen Shader
+lt Ekrano šešėliuoklis
+
+@ Screen Shake
+lt Ekrano drebėjimas
+
+@ Search LAN
+lt Ieškoti LAN
+
+@ Seconds a center-screen message stays up
+lt Kiek sekundžių rodomas pranešimas ekrano centre
+
+@ See Through Portals
+lt Matyti pro portalus
+
+@ See-through Teleporters
+lt Permatomi teleportai
+
+@ Shirt Color
+lt Marškinių spalva
+
+@ Shotgun Bullet Decals
+lt Šratų pėdsakai
+
+@ Shoulder left
+lt Per petį kairėje
+
+@ Shoulder right
+lt Per petį dešinėje
+
+@ Show FPS
+lt Rodyti FPS
+
+@ Show Face
+lt Rodyti veidą
+
+@ Shrapnel
+lt Skeveldros
+
+@ Size of on-screen messages and captions
+lt Ekrano pranešimų ir subtitrų dydis
+
+@ Skill
+lt Sunkumas
+
+@ Sky Fog
+lt Dangaus rūkas
+
+@ Smooths the stepped movement of monsters
+lt Sušvelnina trūkčiojantį monstrų judėjimą
+
+@ Sound
+lt Garsas
+
+@ Sound Captions
+lt Garsų subtitrai
+
+@ Sound Volume
+lt Garsų garsumas
+
+@ Speed Blur
+lt Greičio suliejimas
+
+@ Splashes
+lt Purslai
+
+@ Splatter Amount
+lt Purslų kiekis
+
+@ Splatter Size
+lt Purslų dydis
+
+@ Start Game
+lt Pradėti žaidimą
+
+@ Staying underwater doesn't hurt
+lt Buvimas po vandeniu nežeidžia
+
+@ Stick Look Pitch
+lt Svirtelės žvilgsnis vertikaliai
+
+@ Stick Look Yaw
+lt Svirtelės žvilgsnis horizontaliai
+
+@ Strafe Left
+lt Žingsnis kairėn
+
+@ Strafe Right
+lt Žingsnis dešinėn
+
+@ Strength of the surface swell and rings
+lt Paviršiaus bangavimo ir ratilų stiprumas
+
+@ Stun Duration
+lt Apsvaiginimo trukmė
+
+@ Style
+lt Stilius
+
+@ Supersampling
+lt Supersampling
+
+@ Surface Hit Effects
+lt Pataikymo į paviršių efektai
+
+@ Swim Down
+lt Plaukti žemyn
+
+@ Targets
+lt Taikiniai
+
+@ Teamplay
+lt Komandinis žaidimas
+
+@ Texture Filter
+lt Tekstūrų filtras
+
+@ Third person
+lt Trečiasis asmuo
+
+@ Thud
+lt Dunkstelėjimas
+
+@ Tick
+lt Tiksėjimas
+
+@ Time Limit
+lt Laiko riba
+
+@ Time Stretch
+lt Laiko ištempimas
+
+@ Toggle Attack
+lt Perjungti puolimą
+
+@ Toggle Run
+lt Perjungti bėgimą
+
+@ Toggle auto-aim
+lt Perjungti autotaikymą
+
+@ Touch Controls
+lt Jutikliniai valdikliai
+
+@ Touchscreen
+lt Jutiklinis ekranas
+
+@ Tough Enemy Health
+lt Stiprių priešų sveikata
+
+@ Tough enemies only
+lt Tik stiprūs priešai
+
+@ Trail Colour
+lt Pėdsako spalva
+
+@ Translate Console
+lt Versti konsolę
+
+@ Translucent Water
+lt Permatomas vanduo
+
+@ Treble
+lt Aukšti dažniai
+
+@ Turn Left
+lt Suktis kairėn
+
+@ Turn Right
+lt Suktis dešinėn
+
+@ Underwater FX
+lt Povandeniniai efektai
+
+@ Use Bullet Time Meter
+lt Naudoti Bullet Time juostą
+
+@ VSync
+lt VSync
+
+@ View Bob
+lt Vaizdo siūbavimas
+
+@ Viewmodels
+lt Ginklų modeliai
+
+@ Volume
+lt Garsumas
+
+@ Water Opacity
+lt Vandens neskaidrumas
+
+@ Water Quality
+lt Vandens kokybė
+
+@ Water Settings
+lt Vandens nustatymai
+
+@ Weapon Wheel
+lt Ginklų ratas
+
+@ Weapon Wheel Slowdown
+lt Ginklų rato sulėtinimas
+
+@ Weapons
+lt Ginklai
+
+@ Weapons Position
+lt Ginklų padėtis
+
+@ Where center-screen messages appear
+lt Kur rodomi pranešimai ekrano centre
+
+@ Where pickup and event messages appear
+lt Kur rodomi radinių ir įvykių pranešimai
+
+@ White
+lt Balta
+
+@ Yaw Sensitivity
+lt Horizontalus jautrumas
+
+@ Yellow
+lt Geltona
+
+# lowercase choice values
+@ T
+lt T
+
+@ always
+lt visada
+
+@ auto
+lt auto
+
+@ banded
+lt pakopinis
+
+@ borderless
+lt be rėmelio
+
+@ bottom center
+lt apačioje centre
+
+@ bottom left
+lt apačioje kairėje
+
+@ bottom right
+lt apačioje dešinėje
+
+@ box
+lt kvadratas
+
+@ broken square
+lt nutrauktas kvadratas
+
+@ classic
+lt klasikinis
+
+@ coarse
+lt stambus
+
+@ cooperative
+lt kooperatinis
+
+@ cross
+lt kryžius
+
+@ cross + dot
+lt kryžius + taškas
+
+@ cyan
+lt žydra
+
+@ dashed
+lt brūkšninis
+
+@ deathmatch
+lt deathmatch
+
+@ deuteranopia
+lt deuteranopija
+
+@ diagonal streaks
+lt įstrižos linijos
+
+@ diamond
+lt rombas
+
+@ dot
+lt taškas
+
+@ double
+lt dvigubas
+
+@ double chevrons
+lt dvigubi kampai
+
+@ double diagonals
+lt dvigubos įstrižainės
+
+@ easy
+lt lengvas
+
+@ fine
+lt smulkus
+
+@ fit output
+lt pagal išvestį
+
+@ flick stick
+lt flick stick
+
+@ fullscreen
+lt per visą ekraną
+
+@ gap cross
+lt kryžius su tarpu
+
+@ green
+lt žalia
+
+@ grey
+lt pilka
+
+@ half speed
+lt pusė greičio
+
+@ hard
+lt sunkus
+
+@ high
+lt aukšta
+
+@ huge
+lt milžiniškas
+
+@ immersive
+lt įtraukiantis
+
+@ intense
+lt intensyvus
+
+@ large
+lt didelis
+
+@ larger
+lt didesnis
+
+@ largest
+lt didžiausias
+
+@ linear
+lt tiesinis
+
+@ low
+lt žema
+
+@ lower
+lt apačioje
+
+@ magenta
+lt purpurinė
+
+@ medium
+lt vidutinė
+
+@ middle
+lt viduryje
+
+@ middle left
+lt viduryje kairėje
+
+@ middle right
+lt viduryje dešinėje
+
+@ modern
+lt modernus
+
+@ nearest
+lt artimiausias
+
+@ nightmare
+lt košmaras
+
+@ nintendo
+lt nintendo
+
+@ no team damage
+lt be komandos žalos
+
+@ none
+lt nėra
+
+@ normal
+lt normalus
+
+@ off
+lt išjungta
+
+@ off while held
+lt išjungta laikant
+
+@ on
+lt įjungta
+
+@ only while held
+lt tik laikant
+
+@ playstation
+lt playstation
+
+@ protanopia
+lt protanopija
+
+@ quarter speed
+lt ketvirtis greičio
+
+@ red
+lt raudona
+
+@ short diagonals
+lt trumpos įstrižainės
+
+@ single
+lt vienas
+
+@ small
+lt mažas
+
+@ solid
+lt ištisinis
+
+@ spectacle
+lt įspūdingas
+
+@ subtle
+lt subtilus
+
+@ team damage
+lt komandos žala
+
+@ top center
+lt viršuje centre
+
+@ top left
+lt viršuje kairėje
+
+@ top right
+lt viršuje dešinėje
+
+@ triple
+lt trigubas
+
+@ tritanopia
+lt tritanopija
+
+@ upper
+lt viršuje
+
+@ white
+lt balta
+
+@ whole screen
+lt visas ekranas
+
+@ windowed
+lt lange
+
+@ xbox
+lt xbox
+
+@ yellow
+lt geltona
+
+# ==== tooltips.txt ====
+
+# Options help lines (tooltips) and reasons for disabled rows.
+@ 2D aiming turns the view continuously with the right stick; flick stick snaps the view to where you push the stick, then turning the stick rotates it
+lt 2D taikymas tolygiai suka vaizdą dešiniąja svirtele; flick stick akimirksniu nukreipia vaizdą ten, kur pastumiate svirtelę, o sukant svirtelę vaizdas sukasi toliau
+
+@ 3D resolution relative to the window; the UI stays sharp
+lt 3D raiška lango atžvilgiu; sąsaja lieka ryški
+
+@ 3D view keeps the HUD and menus sharp; whole screen runs them through the shader too
+lt 3D vaizdas palieka HUD ir meniu ryškius; visas ekranas juos irgi perleidžia per šešėliuoklį
+
+@ A Quake III style railgun: a slug that pierces every enemy on its line, using 2 cells a shot and refiring every 1.5 s; select it through its assigned weapon slot (Add-ons)
+lt Quake III stiliaus railgun: šovinys pramuša kiekvieną priešą savo linijoje, naudoja 2 elementus šūviui ir šauna kas 1,5 s; pasirinkite per priskirtą ginklo vietą (priedai)
+
+@ A Zelda-style hookshot: fire sends a chain hook out; it latches onto hookable surfaces or enemies and reels you in; fire again to let go
+lt Zeldos stiliaus kablys: šūvis išmeta kablį ant grandinės; jis užsikabina už tinkamų paviršių ar priešų ir pritraukia jus; šaukite dar kartą, kad paleistumėte
+
+@ Also translates the engine's console messages; off keeps them in English
+lt Verčia ir variklio konsolės pranešimus; išjungus jie lieka angliški
+
+@ Automatically acquire another enemy while holding Lock-on after losing a target
+lt Praradus taikinį, laikant fiksavimą automatiškai užfiksuoja kitą priešą
+
+@ Blends between animation frames of monsters and weapons
+lt Sulieja monstrų ir ginklų animacijos kadrus
+
+@ Blood stains surfaces and bodies; cosmetic, independent of particle packs
+lt Kraujas dažo paviršius ir kūnus; tik kosmetinis, nepriklauso nuo dalelių paketų
+
+@ Bloom glow around bright lights and heat sources; medium uses 4 taps, high uses 8, low disables halo taps
+lt Švytėjimas aplink ryškias šviesas ir šilumos šaltinius; vidutinė naudoja 4 imtis, aukšta – 8, žema išjungia aureolę
+
+@ Blurs fast-moving monsters, projectiles and doors (not camera turns)
+lt Sulieja greitai judančius monstrus, sviedinius ir duris (ne kameros posūkius)
+
+@ Blurs the screen edges during fast falls and launches; keeps the centre clear. Reduce Motion disables it
+lt Sulieja ekrano kraštus greitai krentant ir skrendant; centras lieka aiškus. Išjungiama su „Mažinti judesį“
+
+@ Brightness of the underwater light patterns
+lt Šviesos raštų po vandeniu ryškumas
+
+@ Caps mark count, lifetime, airborne droplets and wound/gib painting; low skips enemy wounds and gib trails
+lt Riboja žymių skaičių, trukmę, lašus ore ir žaizdų bei kūno gabalų dėmes; žema praleidžia priešų žaizdas ir kūno gabalų pėdsakus
+
+@ Caps shader input at output size so 200% render scale keeps 3D sharpness without 4x shader cost; low scales stay low-res
+lt Riboja šešėliuoklio įvestį išvesties dydžiu, kad 200 % atvaizdavimo mastelis išlaikytų 3D ryškumą be keturgubos kainos; maži masteliai lieka žemos raiškos
+
+@ Classic: the original status bar; modern: compact elements at the screen edges
+lt Klasikinis: originali būsenos juosta; modernus: kompaktiški elementai ekrano kraštuose
+
+@ Coat atlas resolution, rebuild rate and shader detail: low builds smaller coats less often with fast shading; high uses full detail
+lt Dangos atlaso raiška, atnaujinimo dažnis ir šešėliavimo detalumas: žema rečiau kuria mažesnes dangas su greitu šešėliavimu; aukšta naudoja visą detalumą
+
+@ Colour of the railgun's spiral trail; split-screen players each get the next colour along
+lt Railgun spiralinio pėdsako spalva; padalytame ekrane kiekvienas žaidėjas gauna kitą spalvą
+
+@ Damage the railgun deals to each enemy it passes through (Quake III: 100)
+lt Žala, kurią railgun padaro kiekvienam pramuštam priešui (Quake III: 100)
+
+@ Dark backdrop behind on-screen messages for readability
+lt Tamsus fonas už ekrano pranešimų, kad būtų lengviau skaityti
+
+@ Dark border keeps the crosshair visible on any background
+lt Tamsus kraštas palieka taikiklį matomą ant bet kokio fono
+
+@ Darkens corners and contact areas where geometry meets; higher quality is sharper
+lt Patamsina kampus ir sąlyčio vietas, kur susiduria geometrija; aukštesnė kokybė ryškesnė
+
+@ Debris lands on and is carried or shoved by doors, lifts and platforms
+lt Nuolaužos nukrenta ant durų, liftų ir platformų, kurios jas neša ar stumia
+
+@ Detail for caustics, ripples and splashes: low uses smaller budgets and shorter view distance; high uses larger budgets and farther view distance
+lt Kaustikos, raibuliavimo ir purslų detalumas: žema naudoja mažesnius biudžetus ir trumpesnį matymo atstumą; aukšta – didesnius biudžetus ir tolimesnį atstumą
+
+@ Disabled while Enhanced Particles is on: its particles replace the GLQuake and Classic styles
+lt Išjungta, kol įjungtos „Patobulintos dalelės“: jų dalelės pakeičia GLQuake ir klasikinį stilius
+
+@ Disabled while Enhanced Water is on: its own underwater effects replace the classic and GLQuake view warps
+lt Išjungta, kol įjungtas „Patobulintas vanduo“: jo povandeniniai efektai pakeičia klasikinį ir GLQuake vaizdo iškraipymą
+
+@ Draw the predicted grenade path as a solid or dashed line
+lt Piešti numatomą granatos kelią ištisine arba brūkšnine linija
+
+@ Draw the view out of the linked portal inside each portal; off shows flat discs (fastest)
+lt Kiekviename portale rodyti vaizdą iš susieto portalo; išjungus rodomi plokšti diskai (greičiausia)
+
+@ Droplets spray up when things enter or leave water, slime or lava
+lt Lašai taško, kai kas nors įneria ar išneria iš vandens, gleivių ar lavos
+
+@ Emulates the original 8-bit palette of software rendering
+lt Imituoja originalią programinio atvaizdavimo 8 bitų paletę
+
+@ Every level starts with only the shotgun and axe, as if started fresh
+lt Kiekvienas lygis prasideda tik su šratiniu šautuvu ir kirviu, lyg žaidimas būtų pradėtas iš naujo
+
+@ Explosion damage for each remotely detonated sticky bomb
+lt Kiekvienos nuotoliniu būdu susprogdintos lipnios bombos žala
+
+@ Extra freeze milliseconds for every 10 damage dealt, so heavy hits stop longer
+lt Papildomos sustingdymo milisekundės už kas 10 žalos, kad stiprūs smūgiai stabdytų ilgiau
+
+@ First person, a third-person camera centered behind the player, or one over the right or left shoulder; third person hides viewmodels
+lt Pirmasis asmuo, trečiojo asmens kamera centre už žaidėjo arba virš dešinio ar kairio peties; trečiasis asmuo paslepia ginklų modelius
+
+@ Flash the selected marker on confirmed hits; colors are shared with the crosshair
+lt Patvirtinto pataikymo metu sublyksi pasirinktas žymeklis; spalvos bendros su taikikliu
+
+@ Freeze for every enemy, or only for enemies that were tough before the hit
+lt Sustingdyti dėl kiekvieno priešo ar tik dėl priešų, kurie prieš smūgį buvo stiprūs
+
+@ Freeze the game briefly when you damage an enemy; single player with add-ons only
+lt Trumpam sustingdo žaidimą, kai sužeidžiate priešą; tik vieno žaidėjo režime su priedais
+
+@ Gibs tumble and barrels throw shrapnel; shots and blasts push them (cosmetic only)
+lt Kūno gabalai rieda, o statinės svaido skeveldras; šūviai ir sprogimai juos stumia (tik kosmetinis)
+
+@ Health an enemy must have had before the hit to count as tough
+lt Kiek sveikatos priešas turi turėti prieš smūgį, kad būtų laikomas stipriu
+
+@ Hits dealing less damage than this do not freeze the game; the default 10 skips nails and shotgun pellets
+lt Mažesnės žalos smūgiai žaidimo nesustingdo; numatytoji vertė 10 praleidžia vinis ir šratus
+
+@ Hold fire and sweep the crosshair over monsters to queue them, release to throw: it stuns each in turn and flies back; alt-fire clears the queue
+lt Laikykite šūvį ir veskite taikiklį per monstrus, kad juos pažymėtumėte, atleiskite metimui: jis paeiliui apsvaigina kiekvieną ir grįžta; alternatyvus šūvis išvalo sąrašą
+
+@ Hold: keep Lock-on held. Toggle: press Auto-aim Toggle to enable automatic acquisition. Click look stick to switch targets
+lt Laikyti: laikykite fiksavimą. Perjungti: paspauskite automatinio taikymo perjungimą, kad įjungtumėte automatinį fiksavimą. Spustelėkite žvilgsnio svirtelę taikiniui pakeisti
+
+@ How close an enemy must be to the crosshair for automatic acquisition in toggle mode (degrees)
+lt Kaip arti taikiklio turi būti priešas, kad perjungimo režime būtų automatiškai užfiksuotas (laipsniais)
+
+@ How far the view tilts up and down when you tilt the controller (pitch axis)
+lt Kiek vaizdas pakrypsta aukštyn ir žemyn, kai pakreipiate valdiklį (vertikali ašis)
+
+@ How far the view turns left and right when you turn the controller (yaw axis)
+lt Kiek vaizdas pasisuka kairėn ir dešinėn, kai pasukate valdiklį (horizontali ašis)
+
+@ How far the view turns when you drag on the right half of the screen
+lt Kiek vaizdas pasisuka, kai tempiate dešiniąja ekrano puse
+
+@ How fast the boomerang flies (units per second)
+lt Kaip greitai skrenda bumerangas (vienetais per sekundę)
+
+@ How hard shots and explosions push debris around
+lt Kaip stipriai šūviai ir sprogimai stumdo nuolaužas
+
+@ How hard the Powerwasher's water pushes enemies
+lt Kaip stipriai plovimo aparato vanduo stumia priešus
+
+@ How long a hit freezes the game, in milliseconds
+lt Kiek milisekundžių smūgis sustingdo žaidimą
+
+@ How strongly fog covers the sky when fog is on
+lt Kaip stipriai rūkas dengia dangų, kai rūkas įjungtas
+
+@ How the view distorts underwater: Classic ripples the whole screen like software Quake, GLQuake slowly stretches and squashes the view
+lt Kaip vaizdas iškraipomas po vandeniu: klasikinis banguoja visą ekraną kaip programinis Quake, GLQuake lėtai ištempia ir suspaudžia vaizdą
+
+@ Ignores gyro rotation slower than this many degrees per second, to hide hand tremor
+lt Nepaiso giroskopo sukimo, lėtesnio nei tiek laipsnių per sekundę, kad paslėptų rankų drebėjimą
+
+@ Immersive: appears for a few seconds only when its value changes
+lt Įtraukiantis: rodomas kelias sekundes tik pasikeitus vertei
+
+@ Keeps textures sharp on floors and walls seen at steep angles
+lt Išlaiko tekstūras ryškias ant grindų ir sienų, matomų smailiu kampu
+
+@ Lights from rockets, muzzle flashes and explosions brighten nearby walls
+lt Raketų, šūvių blyksnių ir sprogimų šviesa apšviečia netoliese esančias sienas
+
+@ Liquid surfaces swell and ring out where things move through them
+lt Skysčių paviršiai banguoja ir raibuliuoja ten, kur kas nors juda
+
+@ Lobs sticky bombs (rockets ammo) that cling to walls, doors and monsters; alt-fire detonates them all
+lt Svaido lipnias bombas (raketų šaudmenys), kurios prilimpa prie sienų, durų ir monstrų; alternatyvus šūvis susprogdina jas visas
+
+@ Look of the classic particles: GLQuake draws soft round dots, Classic draws square pixels like software Quake
+lt Klasikinių dalelių išvaizda: GLQuake piešia minkštus apvalius taškus, klasikinis – kvadratinius pikselius kaip programinis Quake
+
+@ Low skips the background smear halo and uses fewer blur samples; high keeps the full halo and smoother streaks
+lt Žema praleidžia fono tepinio aureolę ir naudoja mažiau suliejimo imčių; aukšta palieka visą aureolę ir glotnesnius ruožus
+
+@ Low: hard particle edges, half the scripted particles and fewer hit sparks. Medium: soft edges. High: soft edges checked per MSAA sample, most hit sparks
+lt Žema: kieti dalelių kraštai, perpus mažiau scenarijaus dalelių ir mažiau kibirkščių. Vidutinė: minkšti kraštai. Aukšta: minkšti kraštai kiekvienai MSAA imčiai, beveik visos kibirkštys
+
+@ Marks fade out before expiring; oldest marks are recycled at the limit
+lt Žymės išblunka prieš išnykdamos; pasiekus ribą seniausios panaudojamos iš naujo
+
+@ Max nested portal reflections to draw; each level redraws the scene
+lt Kiek daugiausia įdėtinių portalų vaizdų piešti; kiekvienas lygmuo perpiešia sceną
+
+@ Max portals per screen with a live view; each one redraws the scene
+lt Kiek daugiausia portalų ekrane rodo gyvą vaizdą; kiekvienas perpiešia sceną
+
+@ Maximum distance for acquiring and keeping an enemy locked
+lt Didžiausias atstumas priešui užfiksuoti ir išlaikyti
+
+@ Minimum gap between freezes, so shotgun pellets and rapid fire count once; kills ignore it
+lt Mažiausias tarpas tarp sustingdymų, kad šratai ir greita ugnis būtų skaičiuojami kartą; nužudymams negalioja
+
+@ Modern terminal console with autocomplete popup, history search, ANSI colors, bash shell and piping; off uses the classic Quake console
+lt Moderni terminalo konsolė su automatinio užbaigimo langu, istorijos paieška, ANSI spalvomis, bash apvalkalu ir kanalais; išjungus naudojama klasikinė Quake konsolė
+
+@ Monsters take proportionally less damage at higher values; above 100% is harder
+lt Esant didesnėms vertėms monstrai gauna proporcingai mažiau žalos; virš 100 % sunkiau
+
+@ Moving gibs leave blood on surfaces they touch
+lt Judantys kūno gabalai palieka kraują ant paliestų paviršių
+
+@ Multiplier on the freeze when the hit kills the enemy; 1 means no extra
+lt Sustingdymo daugiklis, kai smūgis nužudo priešą; 1 reiškia be priedo
+
+@ Multiplies ammo from pickups (up to the normal carry limit); below 100% is harder
+lt Padaugina šaudmenis iš radinių (iki įprastos ribos); žemiau 100 % sunkiau
+
+@ Multiplies health from pickups (up to 100, or the item's own limit); below 100% is harder
+lt Padaugina sveikatą iš radinių (iki 100 arba paties daikto ribos); žemiau 100 % sunkiau
+
+@ Nails stick to wood and bodies; hard surfaces deflect them to the floor
+lt Vinys įsminga į medį ir kūnus; kieti paviršiai jas nukreipia ant grindų
+
+@ Nearest keeps crisp classic pixels; linear smooths textures
+lt Artimiausias išlaiko ryškius klasikinius pikselius; tiesinis išlygina tekstūras
+
+@ New Game: Add-ons
+lt Naujas žaidimas: priedai
+
+@ New Game: Customize
+lt Naujas žaidimas: pritaikymas
+
+@ Night vision: how much dark areas are brightened; thermal: how strongly heat stands out
+lt Naktinis matymas: kiek pašviesinamos tamsios vietos; terminis: kaip ryškiai išsiskiria šiluma
+
+@ Night-vision and thermal goggles, cycle normal, night vision and thermal with Change Goggles (Add-ons), or use the Equipment Wheel
+lt Naktinio matymo ir terminiai akiniai: perjunkite įprastą, naktinį ir terminį režimą su „Keisti akinius“ (priedai) arba naudokite įrangos ratą
+
+@ No single freeze lasts longer than this, however much damage or kill bonus adds
+lt Joks sustingdymas netrunka ilgiau, nesvarbu, kiek prideda žala ar nužudymo premija
+
+@ Oldest marks and nails are recycled at this shared limit
+lt Pasiekus šią bendrą ribą, seniausios žymės ir vinys panaudojamos iš naujo
+
+@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
+lt Ekrano svirtelė ir mygtukai: auto rodo juos palietus ekraną ir paslepia naudojant kitą įrenginį
+
+@ Only autosaves: quicksaves and the Save menu are off
+lt Tik automatiniai išsaugojimai: greitas išsaugojimas ir išsaugojimo meniu išjungti
+
+@ Place every weapon at the center, right or left of the view, or hide all viewmodels
+lt Rodyti kiekvieną ginklą vaizdo centre, dešinėje ar kairėje arba paslėpti visus ginklų modelius
+
+@ Play your chosen hit or kill cue when you damage an enemy
+lt Groti pasirinktą pataikymo ar nužudymo signalą, kai sužeidžiate priešą
+
+@ Playback speed: faster sounds shorter and higher
+lt Atkūrimo greitis: greitesnis skamba trumpiau ir aukščiau
+
+@ Plays the Quake theme in the main menu when no game is running
+lt Pagrindiniame meniu groja Quake temą, kai žaidimas nevyksta
+
+@ Portals farther away than this are drawn as flat discs
+lt Toliau esantys portalai piešiami kaip plokšti diskai
+
+@ Press attack once to keep firing, again to stop
+lt Paspauskite puolimą kartą, kad šaudytumėte nuolat, ir dar kartą, kad sustotumėte
+
+@ Press run once to switch between running and walking
+lt Paspauskite bėgimą kartą, kad perjungtumėte bėgimą ir ėjimą
+
+@ Raise or lower the tone independently of sound length
+lt Pakelia ar nuleidžia toną nekeičiant garso trukmės
+
+@ Red screen edges show where damage came from: top is front, bottom is behind; Screen Flashes controls their strength
+lt Raudoni ekrano kraštai rodo, iš kur atėjo žala: viršus – priekis, apačia – užnugaris; stiprumą valdo „Ekrano blyksniai“
+
+@ Replaces the classic dot particles with glowing sparks, smoke and blood; mods with their own particle effects keep them
+lt Pakeičia klasikines taškines daleles švytinčiomis kibirkštimis, dūmais ir krauju; modifikacijos su savo dalelių efektais juos išlaiko
+
+@ Resolution and detail inside portal and teleporter views; lower tiers trim nested effects
+lt Raiška ir detalumas portalų ir teleportų vaizduose; žemesni lygiai apkarpo įdėtinius efektus
+
+@ Rippling light patterns on surfaces under water and slime
+lt Raibuliuojantys šviesos raštai ant paviršių po vandeniu ir gleivėmis
+
+@ Scales all damage you take; above 100% is harder
+lt Keičia visą gaunamą žalą; virš 100 % sunkiau
+
+@ Screen edge for this element; elements on the same spot stack
+lt Šio elemento vieta ekrane; toje pačioje vietoje esantys elementai sudedami vienas po kito
+
+@ Seconds a monster hit by the boomerang stays stunned
+lt Kiek sekundžių bumerango pataikytas monstras lieka apsvaigęs
+
+@ Seconds impact marks and stuck nails stay before fading out; independent of Particle Quality
+lt Kiek sekundžių smūgio žymės ir įsmigusios vinys išlieka prieš išblukdamos; nepriklauso nuo dalelių kokybės
+
+@ Seconds messages at the top of the screen stay up
+lt Kiek sekundžių rodomi pranešimai ekrano viršuje
+
+@ Seconds the flick stick snap takes; lower is faster
+lt Kiek sekundžių trunka flick stick posūkis; mažiau – greičiau
+
+@ See through enhanced water; enables Water Opacity
+lt Matyti pro patobulintą vandenį; įjungia „Vandens neskaidrumas“
+
+@ Sensor grain, scanlines and flicker of the goggle image
+lt Akinių vaizdo jutiklio grūdėtumas, skenavimo linijos ir mirgėjimas
+
+@ Shades every anti-aliasing sample; needs Anti-aliasing on
+lt Šešėliuoja kiekvieną kraštų glodinimo imtį; reikia įjungti kraštų glodinimą
+
+@ Shifts colors so they stay distinct for the chosen color blindness
+lt Paslenka spalvas, kad jos išliktų atskiriamos esant pasirinktam daltonizmui
+
+@ Shotgun hits leave small surface marks (cosmetic only)
+lt Šratai palieka mažas žymes ant paviršių (tik kosmetinis)
+
+@ Show corner ticks at screen centre while locked, even with Crosshair off
+lt Fiksuojant rodyti kampų žymes ekrano centre, net kai taikiklis išjungtas
+
+@ Show where grenades and other arcing shots will fly, bounce and land; local play only, not in deathmatch
+lt Rodo, kur skris, atšoks ir nukris granatos bei kiti lanku skriejantys šūviai; tik vietiniame žaidime, ne deathmatch
+
+@ Shows text for important sounds: doors, alerted enemies, secrets, pickups
+lt Rodo tekstą svarbiems garsams: durims, sunerimusiems priešams, slaptavietėms, radiniams
+
+@ Shows the distance fog that maps and mods set; off always gives clear view
+lt Rodo žemėlapių ir modifikacijų nustatytą tolimą rūką; išjungus vaizdas visada aiškus
+
+@ Shows the player face next to the health number
+lt Rodo žaidėjo veidą šalia sveikatos skaičiaus
+
+@ Simulation detail, step rate, fade-out lifetimes and caps for gibs and shrapnel; low also skips mover collision
+lt Kūno gabalų ir skeveldrų simuliacijos detalumas, žingsnio dažnis, išblukimo trukmė ir ribos; žema praleidžia ir susidūrimus su judančiais objektais
+
+@ Size of the on-screen buttons and move stick
+lt Ekrano mygtukų ir judėjimo svirtelės dydis
+
+@ Slowly heals up to 100 health after 5 seconds without being hit
+lt Po 5 sekundžių be smūgių lėtai atkuria sveikatą iki 100
+
+@ Slows stick look while the crosshair is over an enemy
+lt Sulėtina svirtelės žvilgsnį, kol taikiklis ant priešo
+
+@ Slows the game down while the weapon wheel is open
+lt Sulėtina žaidimą, kol atidarytas ginklų ratas
+
+@ Slows the whole game down; single player only. Saves and demos stay compatible with other ports
+lt Sulėtina visą žaidimą; tik vieno žaidėjo režime. Išsaugojimai ir demonstracijos lieka suderinami su kitais portais
+
+@ Small camera jolt on each freeze; off with Reduce Motion
+lt Nedidelis kameros smūgtelėjimas kiekvieno sustingdymo metu; išjungiamas su „Mažinti judesį“
+
+@ Snap and track enemies in local play, including split-screen; unavailable online
+lt Užfiksuoja ir seka priešus vietiniame žaidime, įskaitant padalytą ekraną; internete neprieinama
+
+@ Sparks, smoke, chips, splinters and splashes fly off whatever your shots hit
+lt Kibirkštys, dūmai, skeveldros, skiedros ir purslai lekia nuo visko, kur pataiko jūsų šūviai
+
+@ Spawns extra copies of every monster around the original when a level starts
+lt Lygio pradžioje aplink kiekvieną monstrą sukuria papildomų jo kopijų
+
+@ Strength of the full-screen flashes for damage, pickups and powerups
+lt Viso ekrano blyksnių stiprumas dėl žalos, radinių ir sustiprinimų
+
+@ Stretch or shorten the sound while keeping its pitch
+lt Ištempia ar sutrumpina garsą išlaikant toną
+
+@ Surface opacity; requires Enhanced Water and Translucent Water
+lt Paviršiaus neskaidrumas; reikia „Patobulintas vanduo“ ir „Permatomas vanduo“
+
+@ The hook latches onto metal surfaces (metal, tech, computer panels, copper)
+lt Kablys užsikabina už metalinių paviršių (metalas, technika, kompiuterių pultai, varis)
+
+@ The hook latches onto stone, brick, rock and any surface not recognised as wood or metal
+lt Kablys užsikabina už akmens, plytų, uolų ir bet kokio paviršiaus, neatpažinto kaip medis ar metalas
+
+@ The hook latches onto wooden surfaces (texture names like wood, crate, plank)
+lt Kablys užsikabina už medinių paviršių (tekstūrų pavadinimai kaip wood, crate, plank)
+
+@ Turn the controller's motion sensor into a look input; needs a pad with a gyroscope
+lt Valdiklio judesio jutiklis tampa žvilgsnio valdymu; reikia pultelio su giroskopu
+
+@ Turns off view bob, strafe tilt and the camera kick when hit or firing
+lt Išjungia vaizdo siūbavimą, pakrypimą einant šonu ir kameros smūgtelėjimą pataikius ar šaudant
+
+@ Turns on the extra liquid effects; Water Settings controls each one
+lt Įjungia papildomus skysčių efektus; kiekvieną valdo „Vandens nustatymai“
+
+@ Turns the view to follow a moving enemy you are aiming at
+lt Suka vaizdą paskui judantį priešą, į kurį taikotės
+
+@ Turns the view when you roll the controller sideways; 0 disables it, negative reverses it
+lt Suka vaizdą, kai pakreipiate valdiklį į šoną; 0 išjungia, neigiama vertė apverčia
+
+@ Two-portal gun: fire and alt-fire place linked portals on flat walls; assign a weapon slot in Add-ons
+lt Dviejų portalų ginklas: šūvis ir alternatyvus šūvis padeda susietus portalus ant plokščių sienų; ginklo vietą priskirkite prieduose
+
+@ Unlocks the FX Settings page: enhanced particles, impact effects and blood splatter
+lt Atrakina efektų nustatymų puslapį: patobulintos dalelės, smūgių efektai ir kraujo purslai
+
+@ Uses the 2021 re-release's smoother MD5 models (and MD3 replacements from mods) instead of the classic ones. Applies on the next map load
+lt Naudoja glotnesnius 2021 m. pakartotinio leidimo MD5 modelius (ir MD3 pakaitalus iš modifikacijų) vietoj klasikinių. Galioja įkėlus kitą žemėlapį
+
+@ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
+lt Naudoja spalvotą žemėlapio apšvietimą (.lit failas arba BSPX blokas); išjungus – originali balta šviesa. Galioja įkėlus kitą žemėlapį
+
+@ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
+lt Vandens srovės segmentai, lašų skaičius ir blizgus skysčio šešėliavimas: žema naudoja paprastesnes permatomas sroves; aukšta – glotnias blizgias sroves
+
+@ When gyro looking applies: always, off while +gyroaction is held, or only while it is held
+lt Kada veikia giroskopo žvilgsnis: visada, išjungta laikant +gyroaction arba tik jį laikant
+
+@ Which weapons trigger the freeze; melee covers the axe and any mod weapon used at close range without ammo
+lt Kurie ginklai sukelia sustingdymą; artima kova apima kirvį ir bet kurį modifikacijos ginklą, naudojamą iš arti be šaudmenų
+
+@ Your own rockets and grenades don't hurt you; rocket jumps still work
+lt Jūsų pačių raketos ir granatos jūsų nežeidžia; raketų šuoliai vis tiek veikia
+
+# ==== ui.txt ====
+
+# Menus and pop-ups outside the options pages: save cards, launch, presets,
+# add-on browser, map packs, hints and dialogs.
+@ Select
+lt Pasirinkti
+
+@ Back
+lt Atgal
+
+@ Cancel
+lt Atšaukti
+
+@ Confirm
+lt Patvirtinti
+
+@ Scroll
+lt Slinkti
+
+@ Section
+lt Skyrius
+
+@ Bind
+lt Priskirti
+
+@ Cancel binding
+lt Atšaukti priskyrimą
+
+@ Clear
+lt Išvalyti
+
+@ Clear pad
+lt Išvalyti pultelio
+
+@ Remap
+lt Perskirti
+
+@ Type
+lt Rašyti
+
+@ Shift
+lt Shift
+
+@ Done
+lt Baigta
+
+@ Del
+lt Del
+
+@ Space
+lt Tarpas
+
+@ Save
+lt Išsaugoti
+
+@ Load
+lt Įkelti
+
+@ Delete
+lt Ištrinti
+
+@ Play
+lt Žaisti
+
+@ Yes
+lt Taip
+
+@ No
+lt Ne
+
+@ OK
+lt Gerai
+
+@ System
+lt Sistemos
+
+@ Language
+lt Kalba
+
+@ Help
+lt Pagalba
+
+@ Fixed for this game: it was started without Customize
+lt Šiam žaidimui nekeičiama: jis pradėtas be pritaikymo
+
+@ Press a button or key to bind (Start cancels)
+lt Paspauskite mygtuką ar klavišą priskyrimui (Start atšaukia)
+
+@ Press button...
+lt Paspauskite mygtuką...
+
+@ Press key...
+lt Paspauskite klavišą...
+
+@ Replace this binding?
+lt Pakeisti šį priskyrimą?
+
+@ is already assigned
+lt jau priskirtas
+
+@ {} already assigned
+lt Jau priskirta: {}
+
+@ Open Controls to remap Lock-on?
+lt Atverti valdymą ir perskirti fiksavimą?
+
+@ Lock-on
+lt Fiksavimas
+
+@ Auto-aim Toggle
+lt Automatinio taikymo perjungimas
+
+@ Keyboard
+lt Klaviatūra
+
+@ Controller
+lt Valdiklis
+
+# main menu, dialogs and screens
+@ Map Packs
+lt Žemėlapių paketai
+
+@ Customize
+lt Pritaikyti
+
+@ Level Select
+lt Lygio pasirinkimas
+
+@ Really quit?
+lt Tikrai išeiti?
+
+@ You died
+lt Jūs žuvote
+
+@ Continue from most recent save
+lt Tęsti nuo naujausio išsaugojimo
+
+@ Select save
+lt Pasirinkti išsaugojimą
+
+@ Restart level
+lt Pradėti lygį iš naujo
+
+@ Return to main menu
+lt Grįžti į pagrindinį meniu
+
+@ (disabled)
+lt (išjungta)
+
+@ (fixed for this game)
+lt (šiam žaidimui nekeičiama)
+
+@ (off)
+lt (išjungta)
+
+@ Apply Display Changes
+lt Taikyti ekrano pakeitimus
+
+@ Display Mode
+lt Ekrano režimas
+
+@ Resolution
+lt Raiška
+
+@ desktop
+lt darbalaukis
+
+@ Preset
+lt Šablonas
+
+@ Map
+lt Žemėlapis
+
+@ Reset Shader Settings
+lt Atkurti šešėliuoklio nustatymus
+
+@ Reset to Defaults
+lt Atkurti numatytuosius
+
+@ Searching...
+lt Ieškoma...
+
+@ This game only autosaves.
+lt Šis žaidimas išsaugomas tik automatiškai.
+
+@ (No Manual Saves modifier)
+lt (modifikatorius „Be rankinio išsaugojimo“)
+
+@ End the current game?
+lt Baigti dabartinį žaidimą?
+
+@ Unsaved progress will be lost.
+lt Neišsaugota pažanga bus prarasta.
+
+@ End game
+lt Baigti žaidimą
+
+@ Overwrite
+lt Perrašyti
+
+@ Overwrite "{}"?
+lt Perrašyti „{}“?
+
+@ Saved {}
+lt Išsaugota {}
+
+@ Start a new game?
+lt Pradėti naują žaidimą?
+
+@ New game
+lt Naujas žaidimas
+
+@ New Game
+lt Naujas žaidimas
+
+@ CUSTOM
+lt PRITAIKYTAS
+
+@ Customize Experience
+lt Pritaikyti žaidimo patirtį
+
+@ Disable All
+lt Išjungti viską
+
+@ Disable All Modifications
+lt Išjungti visus pakeitimus
+
+@ Saves load in other source ports too.
+lt Išsaugojimai įkeliami ir kituose portuose.
+
+@ Standard rules, no add-ons.
+lt Standartinės taisyklės, be priedų.
+
+@ Choose skill
+lt Pasirinkite sunkumą
+
+@ The current game will end
+lt Dabartinis žaidimas bus baigtas
+
+@ Easy
+lt Lengvas
+
+@ Normal
+lt Normalus
+
+@ Hard
+lt Sunkus
+
+@ Nightmare
+lt Košmaras
+
+# graphics preset pop-up
+@ Choose a Graphics Preset
+lt Pasirinkite grafikos šabloną
+
+@ Classic
+lt Klasikinis
+
+@ Like the re-release: enhanced models,
+lt Kaip pakartotiniame leidime: patobulinti modeliai,
+
+@ no added effects.
+lt be papildomų efektų.
+
+@ Enhanced
+lt Patobulintas
+
+@ Every enhancement at its highest quality.
+lt Visi patobulinimai aukščiausios kokybės.
+
+@ Needs a capable GPU.
+lt Reikia pajėgios vaizdo plokštės.
+
+@ Low-End
+lt Silpnam kompiuteriui
+
+@ Fastest. No anti-aliasing, original
+lt Greičiausias. Be kraštų glodinimo, originalūs
+
+@ models, lowest effect quality.
+lt modeliai, žemiausia efektų kokybė.
+
+@ Esc keeps the defaults
+lt Esc palieka numatytuosius
+
+@ Everything can be changed later in Options.
+lt Viską vėliau galima pakeisti nustatymuose.
+
+@ Keep Defaults
+lt Palikti numatytuosius
+
+# save and load cards
+@ Save Game
+lt Išsaugoti žaidimą
+
+@ Load Game
+lt Įkelti žaidimą
+
+@ Autosaves
+lt Automatiniai išsaugojimai
+
+@ newest first
+lt naujausi pirmiau
+
+@ Saves: {}
+lt Išsaugojimai: {}
+
+@ Browse Autosaves
+lt Naršyti automatinius išsaugojimus
+
+@ Every retained autosave, newest first
+lt Visi laikomi automatiniai išsaugojimai, naujausi pirmiau
+
+@ New save
+lt Naujas išsaugojimas
+
+@ Select to save your game here
+lt Pasirinkite, kad išsaugotumėte čia
+
+@ No autosaves yet
+lt Automatinių išsaugojimų dar nėra
+
+@ Autosaves are made on level entry, secrets and more (Options > Gameplay)
+lt Automatiškai išsaugoma pradedant lygį, radus slaptavietę ir kt. (Nustatymai > Žaidimas)
+
+@ No saves yet
+lt Išsaugojimų dar nėra
+
+@ Save from the Single Player menu, or press F6 to quicksave
+lt Išsaugokite per vieno žaidėjo meniu arba paspauskite F6 greitam išsaugojimui
+
+@ No picture
+lt Nėra vaizdo
+
+@ Del: delete save
+lt Del: ištrinti išsaugojimą
+
+@ Delete "{}"?
+lt Ištrinti „{}“?
+
+@ This cannot be undone.
+lt To nebus galima atšaukti.
+
+@ Quicksave
+lt Greitas išsaugojimas
+
+@ Autosave: {}
+lt Automatinis išsaugojimas: {}
+
+@ unknown trigger
+lt nežinomas įvykis
+
+@ Latest - {}
+lt Naujausias - {}
+
+@ Health {}
+lt Sveikata {}
+
+@ Armor {}
+lt Šarvai {}
+
+@ Kills {}/{}
+lt Nužudyta {}/{}
+
+@ Secrets {}/{}
+lt Slaptavietės {}/{}
+
+@ Split-screen, {} players
+lt Padalytas ekranas, žaidėjų: {}
+
+@ Co-op
+lt Kooperatinis
+
+@ Customized
+lt Pritaikytas
+
+@ Customized, {}
+lt Pritaikytas, {}
+
+@ Date unavailable
+lt Data nežinoma
+
+@ Just now
+lt Ką tik
+
+@ {} min ago
+lt prieš {} min.
+
+@ {} h ago
+lt prieš {} val.
+
+@ Level entry
+lt Lygio pradžia
+
+@ Secret found
+lt Rasta slaptavietė
+
+@ All enemies killed
+lt Visi priešai nukauti
+
+@ All secrets found
+lt Visos slaptavietės rastos
+
+@ Timer
+lt Laikmatis
+
+# customize pages
+@ Standard rules
+lt Standartinės taisyklės
+
+@ Modifiers changed: {}
+lt Pakeista modifikatorių: {}
+
+@ no add-ons
+lt be priedų
+
+@ add-ons: {}
+lt priedai: {}
+
+@ Saves of this game are .qsa files: they need this source port.
+lt Šio žaidimo išsaugojimai yra .qsa failai: jiems reikia šio porto.
+
+@ Nothing changed: this plays as standard Quake.
+lt Niekas nepakeista: žaidžiama kaip standartinis Quake.
+
+@ Changes apply now and are saved with this game (.qsa).
+lt Pakeitimai galioja iškart ir išsaugomi su šiuo žaidimu (.qsa).
+
+@ This game started without Customize, so its rules are fixed.
+lt Šis žaidimas pradėtas be pritaikymo, todėl jo taisyklės nekeičiamos.
+
+@ Start a new game and choose Customize Experience.
+lt Pradėkite naują žaidimą ir pasirinkite „Pritaikyti žaidimo patirtį“.
+
+@ These rules apply to the next customized game.
+lt Šios taisyklės galios kitam pritaikytam žaidimui.
+
+# add-on browser
+@ Fire
+lt Šūvis
+
+@ Alt Fire
+lt Alternatyvus šūvis
+
+@ Configure Parameters >
+lt Konfigūruoti parametrus >
+
+@ Configure
+lt Konfigūruoti
+
+@ Settings
+lt Nustatymai
+
+@ Change slot
+lt Keisti vietą
+
+@ Toggle
+lt Perjungti
+
+@ Details
+lt Išsamiau
+
+@ Enter or click the box: toggle
+lt Enter arba spustelėkite langelį: perjungti
+
+@ Right / Tab / click: details
+lt Dešinėn / Tab / spustelėjimas: išsamiau
+
+@ Input Remapping
+lt Įvesties perskyrimas
+
+@ Weapon Slot
+lt Ginklo vieta
+
+@ Customized games save as .qsa files, which need this source port.
+lt Pritaikyti žaidimai išsaugomi kaip .qsa failai, kuriems reikia šio porto.
+
+@ This game started without Customize, so its add-ons are fixed. Customize a new game instead.
+lt Šis žaidimas pradėtas be pritaikymo, todėl jo priedai nekeičiami. Verčiau pritaikykite naują žaidimą.
+
+@ Bullet Time
+lt Bullet Time
+
+@ Change Goggles
+lt Keisti akinius
+
+@ Dodge / Dive
+lt Išsisukimas / nėrimas
+
+@ Goggles
+lt Akiniai
+
+@ Hitstop
+lt Hitstop
+
+@ Projectile Shotguns
+lt Fiziniai šratai
+
+@ BULLET TIME: 20%
+lt BULLET TIME: 20 %
+
+@ NORMAL SPEED
+lt ĮPRASTAS GREITIS
+
+@ SLOW MOTION: PHYSICAL PELLETS
+lt SULĖTINTAI: FIZINIAI ŠRATAI
+
+@ DEMONSTRATION
+lt DEMONSTRACIJA
+
+@ GAMEPLAY
+lt ŽAIDIMAS
+
+@ LOOP
+lt KARTOJIMAS
+
+@ Preview unavailable
+lt Peržiūra neprieinama
+
+# shader and language help lines
+@ A setting of the chosen shader; arrows step it, Enter is not needed
+lt Pasirinkto šešėliuoklio nustatymas; keičiamas rodyklėmis, Enter nereikia
+
+@ Language of the menus, messages and the 2021 re-release's game text; System follows your computer's language
+lt Meniu, pranešimų ir 2021 m. pakartotinio leidimo žaidimo tekstų kalba; „Sistemos“ naudoja jūsų kompiuterio kalbą
+
+@ Puts every setting of the chosen shader back to the preset's defaults
+lt Grąžina visus pasirinkto šešėliuoklio nustatymus į šablono numatytuosius
+
+@ RetroArch slang shader on the final image: CRT, scanlines, NTSC, sharpening; add your own in <game>/shaders
+lt RetroArch slang šešėliuoklis galutiniam vaizdui: CRT, skenavimo linijos, NTSC, ryškinimas; savus dėkite į <žaidimas>/shaders
+
+# modern console footer
+@ Shift+PgUp/Dn: height  ` : hide
+lt Shift+PgUp/Dn: aukštis  ` : slėpti
+
+@ Tab: complete  Ctrl+R: search  bash | pipe
+lt Tab: užbaigti  Ctrl+R: paieška  bash | pipe
+
+@ ↑ +{} lines (End to jump) 
+lt ↑ +{} eil. (End – į pabaigą) 
+
+# add-on descriptions
+@ Create two linked portals on flat walls. Fire places the first portal; Alt Fire places the second. Walk through either portal to emerge from the other. Your momentum carries through. Assign a weapon slot below: pressing that slot repeatedly cycles its ordinary weapon and every enabled add-on assigned there. Portal view quality is configurable below.
+lt Sukurkite du susietus portalus ant plokščių sienų. Šūvis padeda pirmąjį portalą, alternatyvus šūvis – antrąjį. Įėję į vieną portalą, išeisite iš kito, o jūsų inercija išlieka. Žemiau priskirkite ginklo vietą: kartojant tos vietos paspaudimą perjungiamas įprastas jos ginklas ir kiekvienas ten priskirtas įjungtas priedas. Portalų vaizdo kokybę galima nustatyti žemiau.
+
+@ Hold Fire and sweep the crosshair over monsters to queue targets. Release Fire to throw: the boomerang visits each target, stuns it and returns to you. Alt Fire clears the queue. The weapon slot selects a group, not a separate hotkey: press it again to cycle through the weapons in that slot. Configure stun duration and flight speed below.
+lt Laikykite šūvį ir veskite taikiklį per monstrus, kad pažymėtumėte taikinius. Atleiskite šūvį metimui: bumerangas aplanko kiekvieną taikinį, jį apsvaigina ir grįžta pas jus. Alternatyvus šūvis išvalo sąrašą. Ginklo vieta pasirenka grupę, o ne atskirą klavišą: paspauskite dar kartą, kad perjungtumėte tos vietos ginklus. Apsvaiginimo trukmę ir skrydžio greitį nustatykite žemiau.
+
+@ Hold Fire to charge a sticky bomb using rocket ammunition; release to launch. A longer charge throws it faster. Bombs cling to walls, doors and monsters. Alt Fire detonates your planted bombs together. Place a trap, retreat, then detonate it when enemies approach. Assign any weapon slot below; repeated presses cycle through the ordinary weapon and add-ons in that slot.
+lt Laikykite šūvį, kad užtaisytumėte lipnią bombą raketų šaudmenimis; atleiskite paleidimui. Ilgiau užtaisyta skrieja greičiau. Bombos prilimpa prie sienų, durų ir monstrų. Alternatyvus šūvis kartu susprogdina visas padėtas bombas. Paspęskite spąstus, atsitraukite ir susprogdinkite, kai artinsis priešai. Žemiau priskirkite bet kurią ginklo vietą; kartotiniai paspaudimai perjungia įprastą ginklą ir tos vietos priedus.
+
+@ Fire launches a chain hook. It latches onto a permitted surface or enemy and reels you toward the anchor. Fire again or use Alt Fire to let go. Choose which materials and enemies can be hooked in Configure Parameters. Assign it to any weapon slot; repeated presses of the slot's existing binding cycle through its weapons.
+lt Šūvis išmeta kablį ant grandinės. Jis užsikabina už leidžiamo paviršiaus ar priešo ir pritraukia jus prie inkaro. Šaukite dar kartą arba naudokite alternatyvų šūvį, kad paleistumėte. Kurias medžiagas ir priešus galima užkabinti, pasirinkite skiltyje „Konfigūruoti parametrus“. Priskirkite jį bet kuriai ginklo vietai; kartojant esamo tos vietos klavišo paspaudimą perjungiami jos ginklai.
+
+@ A piercing railgun inspired by Quake III. Fire sends a slug through every enemy along its line. Each shot consumes two cells, with a 1.5 second refire interval. Damage and the spiral trail colour are configurable below. Choose a weapon slot: the slot's current binding selects and cycles the weapons assigned to it.
+lt Pramušantis railgun, įkvėptas Quake III. Šūvis pasiunčia šovinį per kiekvieną priešą jo linijoje. Kiekvienas šūvis sunaudoja du elementus, o kitą šūvį galima paleisti po 1,5 sekundės. Žalą ir spiralinio pėdsako spalvą galima nustatyti žemiau. Pasirinkite ginklo vietą: esamas tos vietos klavišas pasirenka ir perjungia jai priskirtus ginklus.
+
+@ A Portal-style gel sprayer. Fire sprays blue Repulsion gel: land, jump or run into it to bounce, and landings on it never hurt. Alt Fire sprays orange Propulsion gel: run across it to go much faster. Gel coats floors and walls until washed off with the Powerwasher. Assign a weapon slot below; repeated presses cycle the weapons in that slot.
+lt Portal stiliaus gelio purkštuvas. Šūvis purškia mėlyną atstūmimo gelį: nusileiskite, pašokite ar įbėkite į jį, kad atšoktumėte, o nusileidimas ant jo niekada nežeidžia. Alternatyvus šūvis purškia oranžinį pagreičio gelį: bėkite juo, kad judėtumėte daug greičiau. Gelis dengia grindis ir sienas, kol nuplaunamas plovimo aparatu. Žemiau priskirkite ginklo vietą; kartotiniai paspaudimai perjungia tos vietos ginklus.
+
+@ A water cannon. Fire shoots a straight jet with limited reach; Alt Fire a wide, shorter fan. The water pushes enemies back, turns projectiles aside and washes away gel and blood. Push strength is configurable below. Assign a weapon slot below; repeated presses cycle the weapons in that slot.
+lt Vandens patranka. Šūvis paleidžia tiesią riboto nuotolio srovę, alternatyvus šūvis – platų, trumpesnį vėduoklės pavidalo srautą. Vanduo atstumia priešus, nukreipia sviedinius ir nuplauna gelį bei kraują. Stūmimo jėgą galima nustatyti žemiau. Žemiau priskirkite ginklo vietą; kartotiniai paspaudimai perjungia tos vietos ginklus.
+
+@ One equipment add-on includes both night vision and thermal vision. The Change Goggles action cycles Normal, Night Vision, Thermal, then Normal again. Night vision brightens dark rooms; thermal vision highlights living enemies. Goggles do not occupy a weapon slot. Configure intensity and sensor noise below. The binding affects only this add-on.
+lt Vienas įrangos priedas apima ir naktinį, ir terminį matymą. Veiksmas „Keisti akinius“ paeiliui perjungia įprastą, naktinį, terminį ir vėl įprastą režimą. Naktinis matymas pašviesina tamsias patalpas, terminis išryškina gyvus priešus. Akiniai neužima ginklo vietos. Intensyvumą ir jutiklio triukšmą nustatykite žemiau. Priskyrimas veikia tik šį priedą.
+
+@ Press Dodge with a movement direction on the ground or in midair: dive forward or leap backward and sideways. Diagonals are supported. Each press launches once, with a short recovery. The player body animates in third person. Assign the Dodge action below or in Controls.
+lt Paspauskite išsisukimą kartu su judėjimo kryptimi ant žemės ar ore: nerkite pirmyn arba šokite atgal ir į šonus. Palaikomos ir įstrižainės. Kiekvienas paspaudimas paleidžia vieną kartą, su trumpu atsigavimu. Trečiuoju asmeniu žaidėjo kūnas animuojamas. Veiksmą „Išsisukimas“ priskirkite žemiau arba skiltyje „Valdymas“.
+
+@ Use the dedicated Bullet Time action to slow the whole local game to 20% speed. Hold is the default; Toggle switches on each press. The optional meter limits use in real seconds and regenerates while inactive. Disable the meter for unlimited use. Remap the action and configure duration and regeneration below.
+lt Naudokite atskirą Bullet Time veiksmą, kad sulėtintumėte visą vietinį žaidimą iki 20 % greičio. Numatytasis režimas – laikyti; perjungimo režimas įjungia ir išjungia kiekvienu paspaudimu. Pasirinktinė juosta riboja naudojimą realiomis sekundėmis ir atsikuria, kol nenaudojama. Išjunkite juostą, jei norite naudoti be ribų. Veiksmą perskirkite, o trukmę ir atsikūrimą nustatykite žemiau.
+
+@ Both shotguns and enemy grunts fire physical pellets with their original spread and damage. Fast default projectiles feel immediate; lower their speed to dodge incoming fire during bullet time. Configure projectile speed below, or reset it to the default of 10000 units per second.
+lt Abu šratiniai šautuvai ir priešai kareiviai šaudo fiziniais šratais su originalia sklaida ir žala. Greiti numatytieji sviediniai pataiko beveik akimirksniu; sumažinkite jų greitį, kad per Bullet Time galėtumėte išsisukti nuo šūvių. Sviedinių greitį nustatykite žemiau arba grąžinkite numatytąjį – 10000 vienetų per sekundę.
+
+@ Freezes the game for a split second when you damage an enemy, so hits feel heavier. Single player only. Choose which weapons trigger it (all, melee, ranged or explosives), how long it lasts and how much more a kill freezes. Advanced settings cover enemy toughness, damage scaling, cooldown and the longest freeze.
+lt Kai sužeidžiate priešą, sekundės daliai sustingdo žaidimą, kad smūgiai jaustųsi sunkesni. Tik vieno žaidėjo režime. Pasirinkite, kurie ginklai jį sukelia (visi, artimos kovos, tolimos kovos ar sprogstamieji), kiek jis trunka ir kiek ilgiau sustingdo nužudymas. Išplėstiniai nustatymai apima priešų stiprumą, žalos mastelį, atvėsimą ir ilgiausią sustingimą.
+
+# map packs and the Quaddicted browser
+@ Get more maps (Quaddicted)...
+lt Daugiau žemėlapių (Quaddicted)...
+
+@ Type to filter...
+lt Rašykite filtrui...
+
+@ Launch mod
+lt Paleisti modifikaciją
+
+@ Start first map
+lt Pradėti pirmą žemėlapį
+
+@ (running)
+lt (veikia)
+
+@ running
+lt veikia
+
+@ Recent
+lt Naujausi
+
+@ Name
+lt Pavadinimas
+
+@ Dir
+lt Aplankas
+
+@ Default
+lt Numatytasis
+
+@ Title
+lt Antraštė
+
+@ Sort: {}
+lt Rikiuoti: {}
+
+@ {} installed
+lt Įdiegta: {}
+
+@ {}/{} matching
+lt Atitinka: {}/{}
+
+@ {} maps, {} completed
+lt Žemėlapių: {}, įveikta: {}
+
+@ {}/{} matching, {} completed
+lt Atitinka: {}/{}, įveikta: {}
+
+@ no maps of its own
+lt nėra savų žemėlapių
+
+@ dir: {}
+lt aplankas: {}
+
+@ base: {}
+lt bazė: {}
+
+@ Browse the Quaddicted archive of
+lt Naršykite Quaddicted archyvo
+
+@ single-player maps and episodes,
+lt vieno žaidėjo žemėlapius ir epizodus,
+
+@ then download and install them
+lt tada atsisiųskite ir įdiekite juos
+
+@ here. Each release gets its own
+lt čia. Kiekvienas leidimas gauna savo
+
+@ entry in this list.
+lt įrašą šiame sąraše.
+
+@ Needs an internet connection.
+lt Reikia interneto ryšio.
+
+@ Quaddicted Map Archive
+lt Quaddicted žemėlapių archyvas
+
+@ Newest
+lt Naujausi
+
+@ Author
+lt Autorius
+
+@ Size
+lt Dydis
+
+@ Loading the map list...
+lt Įkeliamas žemėlapių sąrašas...
+
+@ Couldn't load the map list: {}
+lt Nepavyko įkelti žemėlapių sąrašo: {}
+
+@ {} single-player releases  -  F5 refreshes
+lt Vieno žaidėjo leidimų: {}  -  F5 atnaujina
+
+@ {} matching
+lt Atitinka: {}
+
+@ by {}
+lt autorius: {}
+
+@ requires: {}
+lt reikia: {}
+
+@ maps: {}
+lt žemėlapiai: {}
+
+@ Failed: {}
+lt Nepavyko: {}
+
+@ Downloading... {}%
+lt Atsisiunčiama... {} %
+
+@ Unpacking...
+lt Išpakuojama...
+
+@ Installed in {}/  -  Enter: play
+lt Įdiegta į {}/  -  Enter: žaisti
+
+@ Enter: download and install
+lt Enter: atsisiųsti ir įdiegti
+
+@ unpacking
+lt išpakuojama
+
+@ failed
+lt nepavyko
+
+@ installed
+lt įdiegta
+
+@ Downloads are not available in the browser build
+lt Naršyklės versijoje atsisiuntimai neprieinami
+
+@ the map list could not be read
+lt nepavyko perskaityti žemėlapių sąrašo
+
+@ downloading needs the curl program
+lt atsisiuntimui reikia programos curl
+
+@ download failed
+lt atsisiuntimas nepavyko
+
+@ the download is not a valid zip
+lt atsisiųstas failas nėra tinkamas ZIP
+
+@ nothing to install for this engine
+lt šiam varikliui nėra ką įdiegti
+
+@ needs {} installed first
+lt pirmiausia reikia įdiegti {}
+
+@ couldn't unpack {}
+lt nepavyko išpakuoti {}
+
+# help screen
+@ About
+lt Apie
+
+@ < Back
+lt < Atgal
+
+# tr_ctx keys: English shows the short word, the key says which meaning
+@ Save (a manual save, as opposed to a quicksave or autosave)
+lt Išsaugojimas
+
+# ==== hud.txt ====
+
+# HUD, weapon and equipment wheels, sound captions and other in-game text.
+# Weapon, monster and item names follow the 2021 re-release's own translations.
+@ Axe
+lt Kirvis
+
+@ Shotgun
+lt Šratinis šautuvas
+
+@ Double-Barrelled Shotgun
+lt Dvivamzdis šautuvas
+
+@ Nailgun
+lt Vinių šautuvas
+
+@ Super Nailgun
+lt Super vinių šautuvas
+
+@ Grenade Launcher
+lt Granatsvaidis
+
+@ Rocket Launcher
+lt Raketsvaidis
+
+@ Thunderbolt
+lt Žaibasvaidis
+
+@ Portal Gun
+lt Portalų ginklas
+
+@ Boomerang
+lt Bumerangas
+
+@ Stickybomb Launcher
+lt Lipnių bombų svaidyklė
+
+@ Railgun
+lt Railgun
+
+@ Hookshot
+lt Kablys
+
+@ Gel Sprayer
+lt Gelio purkštuvas
+
+@ Powerwasher
+lt Plovimo aparatas
+
+@ Night Vision Goggles
+lt Naktinio matymo akiniai
+
+@ Thermal Goggles
+lt Terminiai akiniai
+
+@ Normal vision
+lt Įprastas matymas
+
+@ ON
+lt ĮJ.
+
+@ OFF
+lt IŠJ.
+
+@ {} (turn on)
+lt {} (įjungti)
+
+@ {} (turn off)
+lt {} (išjungti)
+
+@ Move mouse to select, release to toggle
+lt Judinkite pelę rinktis, atleiskite perjungti
+
+@ Move mouse to select, release to equip
+lt Judinkite pelę rinktis, atleiskite pasiimti
+
+@ Release to toggle
+lt Atleiskite perjungti
+
+@ Release to equip
+lt Atleiskite pasiimti
+
+@ shells
+lt šratai
+
+@ nails
+lt vinys
+
+@ rockets
+lt raketos
+
+@ cells
+lt elementai
+
+@ Kills: {}/{}
+lt Nužudyta: {}/{}
+
+@ Secrets: {}/{}
+lt Slaptavietės: {}/{}
+
+@ Time {}
+lt Laikas {}
+
+@ Press any button to continue...
+lt Paspauskite bet kurį mygtuką, kad tęstumėte...
+
+@ Press any key to continue...
+lt Paspauskite bet kurį klavišą, kad tęstumėte...
+
+@ BULLET TIME
+lt BULLET TIME
+
+@ AUTO AIM
+lt AUTO TAIKYMAS
+
+@ Crosshair
+lt Taikiklis
+
+@ + Marker
+lt + žymeklis
+
+@ Hit markers off
+lt Be žymeklių
+
+@ On target
+lt Ant taikinio
+
+@ On kill
+lt Nužudžius
+
+# sound captions
+@ [Secret found]
+lt [Rasta slaptavietė]
+
+@ [Message]
+lt [Pranešimas]
+
+@ [Switch activated]
+lt [Jungiklis įjungtas]
+
+@ [Key picked up]
+lt [Paimtas raktas]
+
+@ [Rune picked up]
+lt [Paimta runa]
+
+@ [Teleporter]
+lt [Teleportas]
+
+@ [Teleport]
+lt [Teleportacija]
+
+@ [Splash]
+lt [Pliūkštelėjimas]
+
+@ [Leaving water]
+lt [Išnirimas iš vandens]
+
+@ [Door]
+lt [Durys]
+
+@ [Platform moving]
+lt [Juda platforma]
+
+@ [Button]
+lt [Mygtukas]
+
+@ [Health picked up]
+lt [Paimta sveikata]
+
+@ [Armor picked up]
+lt [Paimti šarvai]
+
+@ [Quad Damage wearing off]
+lt [Quad Damage baigia veikti]
+
+@ [Quad Damage]
+lt [Quad Damage]
+
+@ [Pentagram wearing off]
+lt [Pentagrama baigia veikti]
+
+@ [Pentagram of Protection]
+lt [Apsaugos pentagrama]
+
+@ [Ring wearing off]
+lt [Žiedas baigia veikti]
+
+@ [Ring of Shadows]
+lt [Šešėlių žiedas]
+
+@ [Biosuit wearing off]
+lt [Biokostiumas baigia veikti]
+
+@ [Biosuit]
+lt [Biokostiumas]
+
+@ [Item picked up]
+lt [Paimtas daiktas]
+
+@ [Weapon picked up]
+lt [Paimtas ginklas]
+
+@ [Ammo picked up]
+lt [Paimti šaudmenys]
+
+@ [Explosion]
+lt [Sprogimas]
+
+@ [Grenade launched]
+lt [Paleista granata]
+
+@ [Grenade bounce]
+lt [Granata atšoka]
+
+@ [Rocket fired]
+lt [Paleista raketa]
+
+@ [Nails fired]
+lt [Paleistos vinys]
+
+@ [Lightning]
+lt [Žaibas]
+
+@ [Thunder]
+lt [Griaustinis]
+
+@ [Enforcer alerted]
+lt [Enforcer sunerimo]
+
+@ [Grunt alerted]
+lt [Kareivis sunerimo]
+
+@ [Rottweiler alerted]
+lt [Rotveileris sunerimo]
+
+@ [Knight alerted]
+lt [Riteris sunerimo]
+
+@ [Death Knight alerted]
+lt [Mirties riteris sunerimo]
+
+@ [Scrag alerted]
+lt [Scrag sunerimo]
+
+@ [Ogre alerted]
+lt [Ogras sunerimo]
+
+@ [Fiend alerted]
+lt [Fiend sunerimo]
+
+@ [Shambler alerted]
+lt [Shambler sunerimo]
+
+@ [Zombie groaning]
+lt [Zombis dejuoja]
+
+@ [Vore alerted]
+lt [Vore sunerimo]
+
+@ [Vore attacking]
+lt [Vore puola]
+
+@ [Spawn alerted]
+lt [Spawn sunerimo]
+
+@ [Rotfish]
+lt [Rotfish]
+
+@ [Spawn]
+lt [Spawn]
+
+@ [Chthon]
+lt [Chthon]
+
+@ [Hard landing]
+lt [Kietas nusileidimas]
+
+@ [Drowning]
+lt [Skendimas]
+
+@ [Gasping for air]
+lt [Gaudo orą]
+
+@ [Burning]
+lt [Degimas]
+
+@ [Telefrag]
+lt [Telefragas]
+
+@ [Gibbed]
+lt [Sudraskytas]
+
+# ==== console.txt ====
+
+# Console messages, shown translated only with con_translate 1 (Translate Console).
+# Cvar and command names stay as they are.
+@ Autosaved.
+lt Išsaugota automatiškai.
+
+@ Game saved.
+lt Žaidimas išsaugotas.
+
+@ Can't save now.
+lt Dabar išsaugoti negalima.
+
+@ This game only autosaves (No Manual Saves modifier).
+lt Šis žaidimas išsaugomas tik automatiškai (modifikatorius „Be rankinio išsaugojimo“).
+
+@ Loading {}...
+lt Įkeliama: {}...
+
+@ load failed: {}
+lt įkelti nepavyko: {}
+
+@ ERROR: autosave failed: {}
+lt KLAIDA: automatinis išsaugojimas nepavyko: {}
+
+@ ERROR: couldn't open {}
+lt KLAIDA: nepavyko atverti {}
+
+@ ERROR: couldn't open {}.
+lt KLAIDA: nepavyko atverti {}.
+
+@ ERROR: couldn't write {}: {}
+lt KLAIDA: nepavyko įrašyti {}: {}
+
+@ ERROR: couldn't create {}: {}
+lt KLAIDA: nepavyko sukurti {}: {}
+
+@ couldn't write {}: {}
+lt nepavyko įrašyti {}: {}
+
+@ Wrote {}
+lt Įrašyta: {}
+
+@ screenshot failed: {}
+lt ekrano nuotrauka nepavyko: {}
+
+@ screenshot: {}
+lt ekrano nuotrauka: {}
+
+@ No readable save available. Select save or restart the level.
+lt Nėra skaitomo išsaugojimo. Pasirinkite išsaugojimą arba pradėkite lygį iš naujo.
+
+@ Unknown command "{}"
+lt Nežinoma komanda „{}“
+
+@ couldn't exec {}
+lt nepavyko vykdyti {}
+
+@ execing {}
+lt vykdoma: {}
+
+@ execing config.cfg (inherited from {})
+lt vykdoma config.cfg (paveldėta iš {})
+
+@ execing config.cfg (mod defaults)
+lt vykdoma config.cfg (modifikacijos numatytieji)
+
+@ execing default.cfg (built-in)
+lt vykdoma default.cfg (įtaisytas)
+
+@ {} cvars
+lt Kintamųjų: {}
+
+@ {} commands
+lt Komandų: {}
+
+@ Can't "cmd", not connected
+lt „cmd“ negalima, neprisijungta
+
+@ Looking for Quake servers...
+lt Ieškoma Quake serverių...
+
+@ Bad value, must be between 1 and 65534
+lt Bloga vertė, turi būti tarp 1 ir 65534
+
+@ Couldn't handle music file {}
+lt Nepavyko apdoroti muzikos failo {}
+
+@ Bug report written to {}
+lt Klaidos ataskaita įrašyta į {}
+
+@ bugreport: can't create {}: {}
+lt bugreport: nepavyko sukurti {}: {}
+
+@ graphics preset: {}
+lt grafikos šablonas: {}
+
+@ Presets (r_shader_preset <name>):
+lt Šablonai (r_shader_preset <pavadinimas>):
+
+@ Add your own .slangp presets under <game>/shaders/.
+lt Savus .slangp šablonus dėkite į <žaidimas>/shaders/.
+
+@ no shader preset loaded (r_shader_preset)
+lt neįkeltas joks šešėliuoklio šablonas (r_shader_preset)
+
+@ r_shader_preset: "{}" not found
+lt r_shader_preset: „{}“ nerastas
+
+@ no parameter "{}" in this preset
+lt šiame šablone nėra parametro „{}“
+
+@ {} = {} (default {}, {}..{})
+lt {} = {} (numatyta {}, {}..{})
+
+@ Switching to {}...
+lt Perjungiama į {}...
+
+@ game: no game dir "{}" in {}
+lt game: žaidimo aplanko „{}“ nėra kataloge {}
+
+@ game: can't find the engine executable
+lt game: nerastas variklio vykdomasis failas
+
+@ game: exec failed: {}
+lt game: vykdyti nepavyko: {}
+
+@ game: launch failed: {}
+lt game: paleisti nepavyko: {}
+
+@ loaded {} in {}s
+lt įkelta: {} per {} s
+
+@ No demos listed with startdemos
+lt Su startdemos neišvardyta jokių demo įrašų
+
+@ Playing demo from {}.
+lt Leidžiamas demo įrašas: {}.
+
+@ {} frames {} seconds {} fps
+lt kadrų: {}, sekundžių: {}, {} fps
+
+@ Recording to {}.
+lt Įrašoma į {}.
+
+@ Completed demo
+lt Demo įrašas baigtas
+
+@ Can't record during demo playback
+lt Negalima įrašinėti, kol leidžiamas demo įrašas
+
+@ Relative pathnames are not allowed.
+lt Santykiniai keliai neleidžiami.
+
+@ Can't record - try again when connected
+lt Negalima įrašinėti – bandykite dar kartą prisijungę
+
+@ {} demo(s) in loop
+lt Demo įrašų cikle: {}
+
+@ Not recording a demo.
+lt Demo įrašas neįrašinėjamas.
+
+@ {} joined on a gamepad
+lt {} prisijungė su pulteliu
+
+@ goggles: needs a game started with Add-ons and Goggles enabled
+lt goggles: reikia žaidimo, pradėto su įjungtais priedais ir akiniais
+
+@ equip: needs a game started with Add-ons and Goggles enabled
+lt equip: reikia žaidimo, pradėto su įjungtais priedais ir akiniais
+
+@ UDP listening on port {}
+lt UDP klausosi prievado {}
+
+@ UDP bind on port {} failed: {}
+lt UDP susieti su prievadu {} nepavyko: {}
+
+@ Connection accepted by {}
+lt Ryšį priėmė {}
+
+@ Connection failed: {}
+lt Ryšys nepavyko: {}
+
+@ Couldn't resolve {}
+lt Nepavyko išspręsti adreso {}
+
+@ Connecting to {}...
+lt Jungiamasi prie {}...
+
+@ Connecting to QuakeWorld server {}...
+lt Jungiamasi prie QuakeWorld serverio {}...
+
+@ Disconnected: {}
+lt Atsijungta: {}
+
+@ Server disconnected
+lt Serveris atsijungė
+
+@ Client {} connected
+lt Klientas {} prisijungė
+
+@ Client {} timed out
+lt Baigėsi kliento {} laukimo laikas
+
+@ Couldn't spawn server {}: {}
+lt Nepavyko paleisti serverio {}: {}
+
+@ maxplayers can not be changed while a server is running.
+lt maxplayers negalima keisti, kol veikia serveris.
+
+@ You can't kick yourself!
+lt Negalite išmesti savęs!
+
+@ Only the server may changelevel
+lt Tik serveris gali vykdyti changelevel
+
+@ {} renamed to {}
+lt {} dabar vadinasi {}

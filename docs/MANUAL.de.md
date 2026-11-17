@@ -28,12 +28,21 @@ ihn.
 ## Sprache
 
 Options → Gameplay → **Sprache** wählt die Sprache der Menüs, der
-Bildschirmnachrichten und der Spieltexte der Neuauflage von 2021: Englisch,
-Französisch, Deutsch, Italienisch, Spanisch oder Russisch. **System** folgt
-der Sprache deines Computers. In anderen Sprachen als Englisch nutzen die
-kleinen Spieltexte die Menüschrift, da die klassische Quake-Schrift weder
-Umlaute noch Kyrillisch kennt. Konsolenmeldungen bleiben auf Englisch,
-außer **Konsole übersetzen** ist an.
+Bildschirmnachrichten und dieses Handbuchs: Englisch, Französisch, Deutsch,
+Italienisch, Spanisch, Russisch, Polnisch, Ukrainisch, Tschechisch,
+Slowakisch, Kroatisch, Bulgarisch, Schwedisch, Finnisch, Dänisch,
+Norwegisch, Niederländisch, Griechisch, Ungarisch, Rumänisch, Portugiesisch
+(Portugal oder Brasilien), Japanisch, Koreanisch, Chinesisch (vereinfacht
+oder traditionell), Türkisch, Indonesisch, Malaiisch, Filipino,
+Vietnamesisch, Serbisch, Litauisch, Lettisch, Estnisch, Maltesisch,
+Albanisch, Armenisch, Georgisch, Isländisch, Irisch, Walisisch, Baskisch, Katalanisch, Galicisch, Latein,
+Esperanto, Belarussisch, Mazedonisch, Slowenisch oder
+Suaheli. **System** folgt der Sprache deines Computers. Die Spieltexte
+der Neuauflage von 2021 gibt es nur auf Französisch, Deutsch, Italienisch,
+Spanisch und Russisch; andere Sprachen zeigen sie auf Englisch. In anderen
+Sprachen als Englisch nutzen die kleinen Spieltexte die Menüschrift, da die
+klassische Quake-Schrift nur lateinische Buchstaben ohne Akzente kennt.
+Konsolenmeldungen bleiben auf Englisch, außer **Konsole übersetzen** ist an.
 
 ## Kartenpakete (Mod-Browser)
 

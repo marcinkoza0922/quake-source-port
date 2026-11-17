@@ -26,11 +26,21 @@ shoulder buttons or the mouse wheel over the text scroll it.
 ## Language
 
 Options → Gameplay → **Language** picks the language of the menus, on-screen
-messages and the 2021 re-release's game text: English, French, German,
-Italian, Spanish or Russian. **System** follows your computer's language.
-Other languages draw the small in-game text with the menu font, since the
-classic Quake font has no accents or Cyrillic. Console messages stay in
-English unless **Translate Console** is on.
+messages and this manual: English, French, German, Italian, Spanish,
+Russian, Polish, Ukrainian, Czech, Slovak, Croatian, Bulgarian, Swedish,
+Finnish, Danish, Norwegian, Dutch, Greek, Hungarian, Romanian, Portuguese
+(Portugal or Brazil), Japanese, Korean, Chinese (Simplified or
+Traditional), Turkish, Indonesian, Malay, Filipino, Vietnamese,
+Serbian, Lithuanian, Latvian, Estonian, Maltese, Albanian, Armenian,
+Georgian, Icelandic, Irish, Welsh, Basque, Catalan, Galician, Latin,
+Esperanto, Belarusian, Macedonian, Slovenian or
+Swahili.
+**System** follows your computer's language. The 2021 re-release's own game
+text is translated only into French, German, Italian, Spanish and Russian;
+other languages show it in English. In languages other than English the
+small in-game text uses the menu font, since the classic Quake font has
+only unaccented Latin letters. Console messages stay in English unless
+**Translate Console** is on.
 
 ## Map Packs (mod browser)
 

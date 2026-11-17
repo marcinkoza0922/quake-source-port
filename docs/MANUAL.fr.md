@@ -28,12 +28,20 @@ défiler.
 ## Langue
 
 Options → Jouabilité → **Langue** choisit la langue des menus, des messages
-à l'écran et des textes de jeu de la réédition 2021 : anglais, français,
-allemand, italien, espagnol ou russe. **Système** suit la langue de votre
-ordinateur. Dans les autres langues que l'anglais, les petits textes en jeu
-utilisent la police des menus, car la police classique de Quake n'a ni
-accents ni cyrillique. Les messages de la console restent en anglais sauf
-si **Traduire la console** est activé.
+à l'écran et de ce manuel : anglais, français, allemand, italien, espagnol,
+russe, polonais, ukrainien, tchèque, slovaque, croate, bulgare, suédois,
+finnois, danois, norvégien, néerlandais, grec, hongrois, roumain, portugais
+(Portugal ou Brésil), japonais, coréen, chinois (simplifié ou
+traditionnel), turc, indonésien, malais, filipino, vietnamien,
+serbe, lituanien, letton, estonien, maltais, albanais, arménien,
+géorgien, islandais, irlandais, gallois, basque, catalan, galicien, latin, espéranto, biélorusse, macédonien, slovène ou swahili.
+**Système** suit la langue de votre ordinateur. Les textes de jeu de la
+réédition 2021 ne sont traduits qu'en français, allemand, italien, espagnol
+et russe ; les autres langues les affichent en anglais. Dans les autres
+langues que l'anglais, les petits textes en jeu utilisent la police des
+menus, car la police classique de Quake n'a que des lettres latines sans
+accents. Les messages de la console restent en anglais sauf si **Traduire
+la console** est activé.
 
 ## Packs de cartes (navigateur de mods)
 

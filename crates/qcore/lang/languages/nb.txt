@@ -1,0 +1,3024 @@
+# nb: the port's own text; English keys from crates/qcore/lang/*.txt.
+# Format in crates/qcore/src/lang/catalog.rs; check with tools/lang_check.py.
+
+# ==== menu.txt ====
+
+# Options pages: page names, row labels and choice values.
+@ 10% speed
+nb 10 % fart
+
+@ 2 split-screen
+nb 2 på delt skjerm
+
+@ 3 split-screen
+nb 3 på delt skjerm
+
+@ 4 split-screen
+nb 4 på delt skjerm
+
+@ 5 split-screen
+nb 5 på delt skjerm
+
+@ 6 split-screen
+nb 6 på delt skjerm
+
+@ 2D aiming
+nb 2D-sikting
+
+@ 2x monsters
+nb 2× monstre
+
+@ 3x monsters
+nb 3× monstre
+
+@ 4x monsters
+nb 4× monstre
+
+@ 3D resolution
+nb 3D-oppløsning
+
+@ 3D view
+nb 3D-visning
+
+@ 8-bit Color
+nb 8-biters farger
+
+@ Accessibility
+nb Tilgjengelighet
+
+@ Acquisition Cone
+nb Låsekjegle
+
+@ Activation
+nb Aktivering
+
+@ Add a ringing room tail after the cue
+nb Legger til romklang etter signalet
+
+@ Add delayed repeats after the cue
+nb Legger til forsinkede gjentakelser etter signalet
+
+@ Add saturation and distortion
+nb Legger til metning og forvrengning
+
+@ Add-ons
+nb Tillegg
+
+@ Address
+nb Adresse
+
+@ Adds fine noise to hide color banding
+nb Legger til fin støy for å skjule fargestriper
+
+@ Advanced Settings
+nb Avanserte innstillinger
+
+@ Aim Assist
+nb Siktehjelp
+
+@ Aim Rotation
+nb Siktedreining
+
+@ Aim Slowdown
+nb Siktebremsing
+
+@ Aim Style
+nb Siktestil
+
+@ All
+nb Alle
+
+@ All enemies
+nb Alle fiender
+
+@ Alt Fire (Add-ons)
+nb Alternativ ild (Tillegg)
+
+@ Always Run
+nb Alltid løp
+
+@ Ambient Occlusion
+nb Ambient okklusjon
+
+@ Ammo Counts
+nb Ammotellere
+
+@ Ammo Counts Position
+nb Plassering av ammotellere
+
+@ Ammo Pickups
+nb Ammunisjonsfunn
+
+@ Anisotropic
+nb Anisotropisk
+
+@ Anti-aliasing
+nb Kantutjevning
+
+@ Apply To
+nb Bruk på
+
+@ Armor
+nb Rustning
+
+@ Armor Position
+nb Plassering av rustning
+
+@ Ask
+nb Spør
+
+@ Attack
+nb Angrep
+
+@ Audio
+nb Lyd
+
+@ Auto-aim
+nb Autosikting
+
+@ Auto-aim Settings
+nb Autosikting-innstillinger
+
+@ Autosave
+nb Autolagring
+
+@ Autosave Settings
+nb Autolagring-innstillinger
+
+@ Autosave Timer
+nb Autolagringstidtaker
+
+@ Autosaves to Keep
+nb Autolagringer å beholde
+
+@ Bass
+nb Bass
+
+@ Blip
+nb Blipp
+
+@ Blood Quality
+nb Blodkvalitet
+
+@ Blood Splatter Settings
+nb Blodsprut-innstillinger
+
+@ Blue
+nb Blå
+
+@ Boomerang Settings
+nb Bumerang-innstillinger
+
+@ Boost or cut high frequencies in decibels
+nb Hever eller senker diskanten i desibel
+
+@ Boost or cut low frequencies in decibels
+nb Hever eller senker bassen i desibel
+
+@ Brightness
+nb Lysstyrke
+
+@ Bullet Time (Add-ons)
+nb Bullet time (Tillegg)
+
+@ Bullet Time Settings
+nb Bullet time-innstillinger
+
+@ Button Glyphs
+nb Knappesymboler
+
+@ Button Size
+nb Knappestørrelse
+
+@ Camera
+nb Kamera
+
+@ Caustic Intensity
+nb Kaustikkstyrke
+
+@ Caustics
+nb Kaustikk
+
+@ Center
+nb Midten
+
+@ Center Message Position
+nb Plassering av midtmeldinger
+
+@ Center Message Time
+nb Varighet for midtmeldinger
+
+@ Center View
+nb Sentrer visning
+
+@ Change Color on Kill
+nb Bytt farge ved drap
+
+@ Change Color on Target
+nb Bytt farge ved mål
+
+@ Chime
+nb Klokkespill
+
+@ Click
+nb Klikk
+
+@ Clink
+nb Klirr
+
+@ Coin
+nb Mynt
+
+@ Color
+nb Farge
+
+@ Color Filter
+nb Fargefilter
+
+@ Color of the grenade arc
+nb Farge på granatbuen
+
+@ Colored Lighting
+nb Farget belysning
+
+@ Connect
+nb Koble til
+
+@ Contrast
+nb Kontrast
+
+@ Controls
+nb Kontroller
+
+@ Cooldown (ms)
+nb Nedkjøling (ms)
+
+@ Crosshair Outline
+nb Trådkorskontur
+
+@ Crosshair Shape
+nb Trådkorsform
+
+@ Crosshair Size
+nb Trådkorsstørrelse
+
+@ Current Ammo
+nb Gjeldende ammo
+
+@ Current Ammo Position
+nb Plassering av gjeldende ammo
+
+@ Customize This Game
+nb Tilpass dette spillet
+
+@ Damage
+nb Skade
+
+@ Damage Taken
+nb Skade mottatt
+
+@ Debris
+nb Rusk
+
+@ Debris Quality
+nb Ruskkvalitet
+
+@ Debris Settings
+nb Rusk-innstillinger
+
+@ Directional Damage
+nb Skaderetning
+
+@ Dithering
+nb Dithering
+
+@ Dodge / Dive (Add-ons)
+nb Unnvik / dykk (Tillegg)
+
+@ Dragging up looks down instead of up
+nb Å dra opp ser ned i stedet for opp
+
+@ Drive
+nb Metning
+
+@ Dynamic Lights
+nb Dynamiske lys
+
+@ Echo
+nb Ekko
+
+@ Enemy Health
+nb Fiendehelse
+
+@ Enemy Wounds
+nb Fiendesår
+
+@ Enhanced Blood Splatter
+nb Forbedret blodsprut
+
+@ Enhanced FX
+nb Forbedrede effekter
+
+@ Enhanced Models
+nb Forbedrede modeller
+
+@ Enhanced Particles
+nb Forbedrede partikler
+
+@ Enhanced Water
+nb Forbedret vann
+
+@ Enhancements
+nb Forbedringer
+
+@ Equipment Wheel (Add-ons)
+nb Utstyrshjul (Tillegg)
+
+@ Exploding boxes throw metal shards
+nb Eksploderende kasser kaster metallsplinter
+
+@ Explosion Damage
+nb Eksplosjonsskade
+
+@ Explosion Scorch Marks
+nb Svimerker fra eksplosjoner
+
+@ Explosions scorch nearby solid surfaces
+nb Eksplosjoner svir nære faste flater
+
+@ Explosives only
+nb Kun eksplosiver
+
+@ Extra Monsters
+nb Ekstra monstre
+
+@ Extra Per 10 Damage (ms)
+nb Ekstra per 10 skade (ms)
+
+@ FX Settings
+nb Effektinnstillinger
+
+@ Field of View
+nb Synsfelt
+
+@ Firing never uses up ammo
+nb Skyting bruker aldri ammo
+
+@ First person
+nb Førsteperson
+
+@ Flick Time
+nb Flick-tid
+
+@ Flight Speed
+nb Flyfart
+
+@ Fog
+nb Tåke
+
+@ Frag Limit
+nb Fraggrense
+
+@ Freeze Duration (ms)
+nb Frysetid (ms)
+
+@ GLQuake
+nb GLQuake
+
+@ Game Speed
+nb Spillfart
+
+@ Game Type
+nb Spilltype
+
+@ Gameplay
+nb Spilling
+
+@ Gameplay Modifiers
+nb Spillmodifikatorer
+
+@ Gel Quality
+nb Gelkvalitet
+
+@ Gib Surface Painting
+nb Kjøttbitflekker
+
+@ Gibs
+nb Kjøttbiter
+
+@ Gibs and heads tumble and bounce
+nb Kjøttbiter og hoder ruller og spretter
+
+@ Goggle Glow Quality
+nb Brilleglødkvalitet
+
+@ Goggle Intensity
+nb Brillestyrke
+
+@ Goggle Noise
+nb Brillestøy
+
+@ Goggles Settings
+nb Brille-innstillinger
+
+@ Graphics
+nb Grafikk
+
+@ Green
+nb Grønn
+
+@ Grenade Arc
+nb Granatbue
+
+@ Grenade Arc Settings
+nb Granatbue-innstillinger
+
+@ Gun Kick
+nb Våpenrekyl
+
+@ Gyro
+nb Gyro
+
+@ Gyro & Flick Stick
+nb Gyro og flick-stick
+
+@ Gyro Active
+nb Gyro aktiv
+
+@ Gyro Aiming
+nb Gyrosikting
+
+@ HUD
+nb HUD
+
+@ HUD Style
+nb HUD-stil
+
+@ Health
+nb Helse
+
+@ Health Pickups
+nb Helsefunn
+
+@ Health Position
+nb Plassering av helse
+
+@ Health Regeneration
+nb Helseregenerering
+
+@ Hit & Kill Sounds
+nb Treff- og drapslyder
+
+@ Hit Doors & Lifts
+nb Treff dører og heiser
+
+@ Hit Markers
+nb Treffmarkører
+
+@ Hit Sound
+nb Trefflyd
+
+@ Hitmarker Size
+nb Treffmarkørstørrelse
+
+@ Hitmarker Type
+nb Treffmarkørtype
+
+@ Hitstop Advanced
+nb Hitstop avansert
+
+@ Hitstop Settings
+nb Hitstop-innstillinger
+
+@ Hold
+nb Hold
+
+@ Hold lock-on
+nb Hold mållåsing
+
+@ Hook Enemies
+nb Hekt fiender
+
+@ Hook Metal
+nb Hekt metall
+
+@ Hook Stone
+nb Hekt stein
+
+@ Hook Wood
+nb Hekt tre
+
+@ Hooking an enemy pulls you to it
+nb Å hekte en fiende trekker deg til den
+
+@ Hookshot Range
+nb Entrehakens rekkevidde
+
+@ Hookshot Settings
+nb Entrehake-innstillinger
+
+@ Host Game
+nb Vær vert
+
+@ How far the hook flies before it retracts
+nb Hvor langt kroken flyr før den trekkes inn
+
+@ How visible the on-screen controls are
+nb Hvor synlige skjermkontrollene er
+
+@ Impact Lifetime
+nb Levetid for nedslag
+
+@ Infinite Ammo
+nb Uendelig ammo
+
+@ Input
+nb Inndata
+
+@ Input Scale
+nb Inndataskala
+
+@ Interpolate Animation
+nb Interpoler animasjon
+
+@ Interpolate Movement
+nb Interpoler bevegelse
+
+@ Invert Look
+nb Inverter blikk
+
+@ Invert Mouse
+nb Inverter mus
+
+@ Invert Stick
+nb Inverter spak
+
+@ Jet Quality
+nb Strålekvalitet
+
+@ Join Game
+nb Bli med i spill
+
+@ Jump / Swim Up
+nb Hopp / svøm opp
+
+@ Jump again in mid-air
+nb Hopp igjen i luften
+
+@ Jumps
+nb Hopp
+
+@ Keys & Powerups
+nb Nøkler og power-ups
+
+@ Keys & Powerups Position
+nb Plassering av nøkler og power-ups
+
+@ Kill Bonus (x)
+nb Drapsbonus (x)
+
+@ Kill Sound
+nb Drapslyd
+
+@ Knock
+nb Bank
+
+@ Left
+nb Venstre
+
+@ Length of the motion blur streaks
+nb Lengden på bevegelsesuskarphetens striper
+
+@ Lifetime (seconds)
+nb Levetid (sekunder)
+
+@ Live Portal Views
+nb Direkte portalvisning
+
+@ Live View Distance
+nb Direktevisningsavstand
+
+@ Local Players
+nb Lokale spillere
+
+@ Local red wounds follow enemy animation
+nb Lokale røde sår følger fiendens animasjon
+
+@ Lock Indicator
+nb Mållåsindikator
+
+@ Long falls don't hurt
+nb Lange fall skader ikke
+
+@ Longest Freeze (ms)
+nb Lengste frysing (ms)
+
+@ Look Down
+nb Se ned
+
+@ Look Speed
+nb Blikkfart
+
+@ Look Up
+nb Se opp
+
+@ Main Menu Music
+nb Hovedmenymusikk
+
+@ Max FPS
+nb Maks FPS
+
+@ Max Players
+nb Maks spillere
+
+@ Maximum Impacts
+nb Maks nedslag
+
+@ Maximum Marks
+nb Maks merker
+
+@ Maximum Range
+nb Maks rekkevidde
+
+@ Melee only
+nb Kun nærkamp
+
+@ Message Background
+nb Meldingsbakgrunn
+
+@ Message Text Size
+nb Tekststørrelse for meldinger
+
+@ Messages & Captions
+nb Meldinger og teksting
+
+@ Meter Duration (real seconds)
+nb Målervarighet (ekte sekunder)
+
+@ Minimum Damage
+nb Minste skade
+
+@ Mode
+nb Modus
+
+@ Modern Console
+nb Moderne konsoll
+
+@ Modern HUD Layout
+nb Moderne HUD-oppsett
+
+@ Most recent save
+nb Nyeste lagring
+
+@ Motion Blur
+nb Bevegelsesuskarphet
+
+@ Motion Blur Amount
+nb Mengde bevegelsesuskarphet
+
+@ Motion Blur Quality
+nb Kvalitet på bevegelsesuskarphet
+
+@ Mouse & Keyboard
+nb Mus og tastatur
+
+@ Mouse Speed
+nb Musefart
+
+@ Move Back
+nb Gå bakover
+
+@ Move Forward
+nb Gå fremover
+
+@ Music Volume
+nb Musikkvolum
+
+@ Next Weapon
+nb Neste våpen
+
+@ No Drowning
+nb Ingen drukning
+
+@ No Fall Damage
+nb Ingen fallskade
+
+@ No Manual Saves
+nb Ingen manuell lagring
+
+@ No Self Damage
+nb Ingen egenskade
+
+@ Noise Filter
+nb Støyfilter
+
+@ Normal Color
+nb Normal farge
+
+@ Notify Message Position
+nb Plassering av varsler
+
+@ Notify Message Time
+nb Varighet for varsler
+
+@ Number of splatter rays per blood impact
+nb Antall sprutstråler per blodtreff
+
+@ Off
+nb Av
+
+@ On Death
+nb Ved død
+
+@ On Kill Color
+nb Farge ved drap
+
+@ On Target Color
+nb Farge på mål
+
+@ Opacity
+nb Dekkevne
+
+@ Opacity of the grenade arc
+nb Granatbuens dekkevne
+
+@ Pants Color
+nb Buksefarge
+
+@ Particle Quality
+nb Partikkelkvalitet
+
+@ Particles
+nb Partikler
+
+@ Physical Nail Impacts
+nb Fysiske spikernedslag
+
+@ Pistol Start
+nb Pistolstart
+
+@ Pitch
+nb Tonehøyde
+
+@ Pitch Sensitivity
+nb Vertikal følsomhet
+
+@ Playback Speed
+nb Avspillingsfart
+
+@ Player Setup
+nb Spilleroppsett
+
+@ Pop
+nb Popp
+
+@ Portal Gun Settings
+nb Portalkanon-innstillinger
+
+@ Portal Recursion
+nb Portalrekursjon
+
+@ Portal View Quality
+nb Portalvisningskvalitet
+
+@ Preview Sound
+nb Forhåndslytt
+
+@ Previous Weapon
+nb Forrige våpen
+
+@ Projectile Shotguns Settings
+nb Prosjektilhagler-innstillinger
+
+@ Projectile Speed (units/s)
+nb Prosjektilfart (enheter/s)
+
+@ Purple
+nb Lilla
+
+@ Push
+nb Dytt
+
+@ Push Strength
+nb Dyttestyrke
+
+@ Quick Load
+nb Hurtiglast
+
+@ Quick Save
+nb Hurtiglagre
+
+@ Railgun Settings
+nb Railgun-innstillinger
+
+@ Ranged only
+nb Kun avstand
+
+@ Reacquire While Held
+nb Lås på nytt mens holdt
+
+@ Red
+nb Rød
+
+@ Reduce Motion
+nb Reduser bevegelse
+
+@ Regen (seconds per second)
+nb Regen (sekunder per sekund)
+
+@ Render Scale
+nb Gjengivelsesskala
+
+@ Reverb
+nb Romklang
+
+@ Right
+nb Høyre
+
+@ Ripple Intensity
+nb Bølgestyrke
+
+@ Ripples
+nb Bølger
+
+@ Roll Sensitivity
+nb Rullefølsomhet
+
+@ Rumble
+nb Vibrasjon
+
+@ Run
+nb Løp
+
+@ Save on All Enemies Killed
+nb Lagre når alle fiender er drept
+
+@ Save on All Secrets Found
+nb Lagre når alle hemmeligheter er funnet
+
+@ Save on Level Entry
+nb Lagre ved banestart
+
+@ Save on Secret Found
+nb Lagre ved funnet hemmelighet
+
+@ Scoreboard
+nb Poengtavle
+
+@ Screen Flashes
+nb Skjermblink
+
+@ Screen Shader
+nb Skjermshader
+
+@ Screen Shake
+nb Skjermristing
+
+@ Search LAN
+nb Søk i LAN
+
+@ Seconds a center-screen message stays up
+nb Sekunder en melding midt på skjermen vises
+
+@ See Through Portals
+nb Se gjennom portaler
+
+@ See-through Teleporters
+nb Gjennomsiktige teleportere
+
+@ Shirt Color
+nb Skjortefarge
+
+@ Shotgun Bullet Decals
+nb Hagleskuddmerker
+
+@ Shoulder left
+nb Skulder venstre
+
+@ Shoulder right
+nb Skulder høyre
+
+@ Show FPS
+nb Vis FPS
+
+@ Show Face
+nb Vis ansikt
+
+@ Shrapnel
+nb Splinter
+
+@ Size of on-screen messages and captions
+nb Størrelse på skjermmeldinger og teksting
+
+@ Skill
+nb Vanskelighet
+
+@ Sky Fog
+nb Himmeltåke
+
+@ Smooths the stepped movement of monsters
+nb Glatter ut monstrenes hakkete bevegelse
+
+@ Sound
+nb Lyd
+
+@ Sound Captions
+nb Lydteksting
+
+@ Sound Volume
+nb Lydvolum
+
+@ Speed Blur
+nb Fartsuskarphet
+
+@ Splashes
+nb Sprut
+
+@ Splatter Amount
+nb Sprutmengde
+
+@ Splatter Size
+nb Sprutstørrelse
+
+@ Start Game
+nb Start spill
+
+@ Staying underwater doesn't hurt
+nb Å være under vann skader ikke
+
+@ Stick Look Pitch
+nb Spakblikk vertikalt
+
+@ Stick Look Yaw
+nb Spakblikk horisontalt
+
+@ Strafe Left
+nb Sidesteg venstre
+
+@ Strafe Right
+nb Sidesteg høyre
+
+@ Strength of the surface swell and rings
+nb Styrken på overflatedønninger og ringer
+
+@ Stun Duration
+nb Lammelsestid
+
+@ Style
+nb Stil
+
+@ Supersampling
+nb Supersampling
+
+@ Surface Hit Effects
+nb Treffeffekter på flater
+
+@ Swim Down
+nb Svøm ned
+
+@ Targets
+nb Mål
+
+@ Teamplay
+nb Lagspill
+
+@ Texture Filter
+nb Teksturfilter
+
+@ Third person
+nb Tredjeperson
+
+@ Thud
+nb Dunk
+
+@ Tick
+nb Tikk
+
+@ Time Limit
+nb Tidsgrense
+
+@ Time Stretch
+nb Tidsstrekk
+
+@ Toggle Attack
+nb Angrep av/på
+
+@ Toggle Run
+nb Løp av/på
+
+@ Toggle auto-aim
+nb Autosikting av/på
+
+@ Touch Controls
+nb Berøringskontroller
+
+@ Touchscreen
+nb Berøringsskjerm
+
+@ Tough Enemy Health
+nb Helse for tøffe fiender
+
+@ Tough enemies only
+nb Kun tøffe fiender
+
+@ Trail Colour
+nb Sporfarge
+
+@ Translate Console
+nb Oversett konsollen
+
+@ Translucent Water
+nb Gjennomskinnelig vann
+
+@ Treble
+nb Diskant
+
+@ Turn Left
+nb Snu til venstre
+
+@ Turn Right
+nb Snu til høyre
+
+@ Underwater FX
+nb Undervannseffekter
+
+@ Use Bullet Time Meter
+nb Bruk bullet time-måler
+
+@ VSync
+nb VSync
+
+@ View Bob
+nb Kameravugging
+
+@ Viewmodels
+nb Våpenmodeller
+
+@ Volume
+nb Volum
+
+@ Water Opacity
+nb Vannets dekkevne
+
+@ Water Quality
+nb Vannkvalitet
+
+@ Water Settings
+nb Vann-innstillinger
+
+@ Weapon Wheel
+nb Våpenhjul
+
+@ Weapon Wheel Slowdown
+nb Våpenhjul-nedbremsing
+
+@ Weapons
+nb Våpen
+
+@ Weapons Position
+nb Plassering av våpen
+
+@ Where center-screen messages appear
+nb Hvor meldinger midt på skjermen vises
+
+@ Where pickup and event messages appear
+nb Hvor funn- og hendelsesmeldinger vises
+
+@ White
+nb Hvit
+
+@ Yaw Sensitivity
+nb Horisontal følsomhet
+
+@ Yellow
+nb Gul
+
+# lowercase choice values
+@ T
+nb T
+
+@ always
+nb alltid
+
+@ auto
+nb auto
+
+@ banded
+nb stripete
+
+@ borderless
+nb kantløst
+
+@ bottom center
+nb nede i midten
+
+@ bottom left
+nb nede til venstre
+
+@ bottom right
+nb nede til høyre
+
+@ box
+nb boks
+
+@ broken square
+nb brutt firkant
+
+@ classic
+nb klassisk
+
+@ coarse
+nb grov
+
+@ cooperative
+nb samarbeid
+
+@ cross
+nb kryss
+
+@ cross + dot
+nb kryss + prikk
+
+@ cyan
+nb cyan
+
+@ dashed
+nb stiplet
+
+@ deathmatch
+nb deathmatch
+
+@ deuteranopia
+nb deuteranopi
+
+@ diagonal streaks
+nb diagonale striper
+
+@ diamond
+nb rute
+
+@ dot
+nb prikk
+
+@ double
+nb dobbel
+
+@ double chevrons
+nb doble vinkler
+
+@ double diagonals
+nb doble diagonaler
+
+@ easy
+nb lett
+
+@ fine
+nb fin
+
+@ fit output
+nb tilpass utgang
+
+@ flick stick
+nb flick-stick
+
+@ fullscreen
+nb fullskjerm
+
+@ gap cross
+nb åpent kryss
+
+@ green
+nb grønn
+
+@ grey
+nb grå
+
+@ half speed
+nb halv fart
+
+@ hard
+nb vanskelig
+
+@ high
+nb høy
+
+@ huge
+nb enorm
+
+@ immersive
+nb oppslukende
+
+@ intense
+nb intens
+
+@ large
+nb stor
+
+@ larger
+nb større
+
+@ largest
+nb størst
+
+@ linear
+nb lineær
+
+@ low
+nb lav
+
+@ lower
+nb nedre
+
+@ magenta
+nb magenta
+
+@ medium
+nb middels
+
+@ middle
+nb midten
+
+@ middle left
+nb midt venstre
+
+@ middle right
+nb midt høyre
+
+@ modern
+nb moderne
+
+@ nearest
+nb nærmeste
+
+@ nightmare
+nb mareritt
+
+@ nintendo
+nb nintendo
+
+@ no team damage
+nb ingen lagskade
+
+@ none
+nb ingen
+
+@ normal
+nb normal
+
+@ off
+nb av
+
+@ off while held
+nb av mens holdt
+
+@ on
+nb på
+
+@ only while held
+nb kun mens holdt
+
+@ playstation
+nb playstation
+
+@ protanopia
+nb protanopi
+
+@ quarter speed
+nb kvart fart
+
+@ red
+nb rød
+
+@ short diagonals
+nb korte diagonaler
+
+@ single
+nb enkel
+
+@ small
+nb liten
+
+@ solid
+nb heltrukket
+
+@ spectacle
+nb spektakulær
+
+@ subtle
+nb diskré
+
+@ team damage
+nb lagskade
+
+@ top center
+nb oppe i midten
+
+@ top left
+nb oppe til venstre
+
+@ top right
+nb oppe til høyre
+
+@ triple
+nb trippel
+
+@ tritanopia
+nb tritanopi
+
+@ upper
+nb øvre
+
+@ white
+nb hvit
+
+@ whole screen
+nb hele skjermen
+
+@ windowed
+nb vindu
+
+@ xbox
+nb xbox
+
+@ yellow
+nb gul
+
+# ==== tooltips.txt ====
+
+# Options help lines (tooltips) and reasons for disabled rows.
+@ 2D aiming turns the view continuously with the right stick; flick stick snaps the view to where you push the stick, then turning the stick rotates it
+nb 2D-sikting dreier visningen jevnt med høyre spak; flick-stick vender visningen straks dit du skyver spaken, og å dreie spaken roterer den videre
+
+@ 3D resolution relative to the window; the UI stays sharp
+nb 3D-oppløsning i forhold til vinduet; grensesnittet forblir skarpt
+
+@ 3D view keeps the HUD and menus sharp; whole screen runs them through the shader too
+nb 3D-visning holder HUD og menyer skarpe; hele skjermen sender dem også gjennom shaderen
+
+@ A Quake III style railgun: a slug that pierces every enemy on its line, using 2 cells a shot and refiring every 1.5 s; select it through its assigned weapon slot (Add-ons)
+nb En railgun i Quake III-stil: et prosjektil som gjennomborer alle fiender på linjen, bruker 2 celler per skudd og kan skyte hvert 1,5 s; velg den via våpenplassen den er tildelt (Tillegg)
+
+@ A Zelda-style hookshot: fire sends a chain hook out; it latches onto hookable surfaces or enemies and reels you in; fire again to let go
+nb En entrehake i Zelda-stil: skyt for å sende ut en kjedekrok; den fester seg til egnede flater eller fiender og drar deg inn; skyt igjen for å slippe
+
+@ Also translates the engine's console messages; off keeps them in English
+nb Oversetter også motorens konsollmeldinger; av beholder dem på engelsk
+
+@ Automatically acquire another enemy while holding Lock-on after losing a target
+nb Lås automatisk på en annen fiende mens Mållåsing holdes etter at et mål er mistet
+
+@ Blends between animation frames of monsters and weapons
+nb Glir mellom animasjonsrammer for monstre og våpen
+
+@ Blood stains surfaces and bodies; cosmetic, independent of particle packs
+nb Blod farger flater og kropper; kosmetisk, uavhengig av partikkelpakker
+
+@ Bloom glow around bright lights and heat sources; medium uses 4 taps, high uses 8, low disables halo taps
+nb Bloom-glød rundt sterke lys og varmekilder; middels bruker 4 prøver, høy bruker 8, lav slår av glorien
+
+@ Blurs fast-moving monsters, projectiles and doors (not camera turns)
+nb Gjør raske monstre, prosjektiler og dører uskarpe (ikke kameradreining)
+
+@ Blurs the screen edges during fast falls and launches; keeps the centre clear. Reduce Motion disables it
+nb Gjør skjermkantene uskarpe ved raske fall og utskytinger; midten forblir klar. Reduser bevegelse slår det av
+
+@ Brightness of the underwater light patterns
+nb Lysstyrken på lysmønstrene under vann
+
+@ Caps mark count, lifetime, airborne droplets and wound/gib painting; low skips enemy wounds and gib trails
+nb Begrenser antall merker, levetid, dråper i luften og sår/kjøttbitflekker; lav hopper over fiendesår og kjøttbitspor
+
+@ Caps shader input at output size so 200% render scale keeps 3D sharpness without 4x shader cost; low scales stay low-res
+nb Begrenser shaderens inndata til utgangsstørrelsen, så 200 % gjengivelsesskala beholder 3D-skarpheten uten 4x shaderkostnad; lave skalaer forblir lavoppløste
+
+@ Classic: the original status bar; modern: compact elements at the screen edges
+nb Klassisk: den originale statuslinjen; moderne: kompakte elementer langs skjermkantene
+
+@ Coat atlas resolution, rebuild rate and shader detail: low builds smaller coats less often with fast shading; high uses full detail
+nb Atlasoppløsning, oppdateringsrate og shaderdetalj for belegg: lav bygger mindre belegg sjeldnere med rask skyggelegging; høy bruker full detalj
+
+@ Colour of the railgun's spiral trail; split-screen players each get the next colour along
+nb Fargen på railgunens spiralspor; spillere på delt skjerm får hver sin neste farge
+
+@ Damage the railgun deals to each enemy it passes through (Quake III: 100)
+nb Skaden railgunen gjør på hver fiende den går gjennom (Quake III: 100)
+
+@ Dark backdrop behind on-screen messages for readability
+nb Mørk bakgrunn bak skjermmeldinger for bedre lesbarhet
+
+@ Dark border keeps the crosshair visible on any background
+nb Mørk kant holder trådkorset synlig på enhver bakgrunn
+
+@ Darkens corners and contact areas where geometry meets; higher quality is sharper
+nb Gjør hjørner og kontaktflater der geometri møtes mørkere; høyere kvalitet er skarpere
+
+@ Debris lands on and is carried or shoved by doors, lifts and platforms
+nb Rusk lander på og bæres eller dyttes av dører, heiser og plattformer
+
+@ Detail for caustics, ripples and splashes: low uses smaller budgets and shorter view distance; high uses larger budgets and farther view distance
+nb Detalj for kaustikk, bølger og sprut: lav bruker mindre budsjetter og kortere synsavstand; høy bruker større budsjetter og lengre synsavstand
+
+@ Disabled while Enhanced Particles is on: its particles replace the GLQuake and Classic styles
+nb Deaktivert mens Forbedrede partikler er på: partiklene der erstatter GLQuake- og Klassisk-stilene
+
+@ Disabled while Enhanced Water is on: its own underwater effects replace the classic and GLQuake view warps
+nb Deaktivert mens Forbedret vann er på: egne undervannseffekter erstatter de klassiske og GLQuake-forvrengningene
+
+@ Draw the predicted grenade path as a solid or dashed line
+nb Tegn den forventede granatbanen som heltrukket eller stiplet linje
+
+@ Draw the view out of the linked portal inside each portal; off shows flat discs (fastest)
+nb Vis utsikten fra den koblede portalen inne i hver portal; av viser flate skiver (raskest)
+
+@ Droplets spray up when things enter or leave water, slime or lava
+nb Dråper spruter opp når noe går inn i eller ut av vann, slim eller lava
+
+@ Emulates the original 8-bit palette of software rendering
+nb Etterligner den originale 8-biters paletten fra programvaregjengivelse
+
+@ Every level starts with only the shotgun and axe, as if started fresh
+nb Hver bane starter med kun hagla og øksa, som en ny start
+
+@ Explosion damage for each remotely detonated sticky bomb
+nb Eksplosjonsskade for hver fjernutløste klebebombe
+
+@ Extra freeze milliseconds for every 10 damage dealt, so heavy hits stop longer
+nb Ekstra frysemillisekunder for hver 10 skade, så tunge treff stopper lenger
+
+@ First person, a third-person camera centered behind the player, or one over the right or left shoulder; third person hides viewmodels
+nb Førsteperson, et tredjepersonskamera sentrert bak spilleren, eller over høyre eller venstre skulder; tredjeperson skjuler våpenmodeller
+
+@ Flash the selected marker on confirmed hits; colors are shared with the crosshair
+nb Blink valgt markør ved bekreftede treff; fargene deles med trådkorset
+
+@ Freeze for every enemy, or only for enemies that were tough before the hit
+nb Frys for alle fiender, eller kun for fiender som var tøffe før treffet
+
+@ Freeze the game briefly when you damage an enemy; single player with add-ons only
+nb Frys spillet kort når du skader en fiende; kun enspiller med tillegg
+
+@ Gibs tumble and barrels throw shrapnel; shots and blasts push them (cosmetic only)
+nb Kjøttbiter ruller og tønner kaster splinter; skudd og eksplosjoner dytter dem (kun kosmetisk)
+
+@ Health an enemy must have had before the hit to count as tough
+nb Helsen en fiende må ha hatt før treffet for å regnes som tøff
+
+@ Hits dealing less damage than this do not freeze the game; the default 10 skips nails and shotgun pellets
+nb Treff med mindre skade enn dette fryser ikke spillet; standardverdien 10 hopper over spiker og haglehagl
+
+@ Hold fire and sweep the crosshair over monsters to queue them, release to throw: it stuns each in turn and flies back; alt-fire clears the queue
+nb Hold ild og før trådkorset over monstre for å sette dem i kø, slipp for å kaste: den lammer hver av dem etter tur og flyr tilbake; alternativ ild tømmer køen
+
+@ Hold: keep Lock-on held. Toggle: press Auto-aim Toggle to enable automatic acquisition. Click look stick to switch targets
+nb Hold: hold Mållåsing inne. Av/på: trykk Autosikting av/på for automatisk låsing. Klikk blikkspaken for å bytte mål
+
+@ How close an enemy must be to the crosshair for automatic acquisition in toggle mode (degrees)
+nb Hvor nær trådkorset en fiende må være for automatisk låsing i av/på-modus (grader)
+
+@ How far the view tilts up and down when you tilt the controller (pitch axis)
+nb Hvor langt visningen vipper opp og ned når du vipper kontrolleren (vertikal akse)
+
+@ How far the view turns left and right when you turn the controller (yaw axis)
+nb Hvor langt visningen dreier til venstre og høyre når du dreier kontrolleren (horisontal akse)
+
+@ How far the view turns when you drag on the right half of the screen
+nb Hvor langt visningen dreier når du drar på høyre halvdel av skjermen
+
+@ How fast the boomerang flies (units per second)
+nb Hvor fort bumerangen flyr (enheter per sekund)
+
+@ How hard shots and explosions push debris around
+nb Hvor hardt skudd og eksplosjoner dytter rusk rundt
+
+@ How hard the Powerwasher's water pushes enemies
+nb Hvor hardt vannet fra høytrykksspyleren dytter fiender
+
+@ How long a hit freezes the game, in milliseconds
+nb Hvor lenge et treff fryser spillet, i millisekunder
+
+@ How strongly fog covers the sky when fog is on
+nb Hvor kraftig tåken dekker himmelen når tåke er på
+
+@ How the view distorts underwater: Classic ripples the whole screen like software Quake, GLQuake slowly stretches and squashes the view
+nb Hvordan visningen forvrenges under vann: Klassisk bølger hele skjermen som programvare-Quake, GLQuake strekker og klemmer visningen sakte
+
+@ Ignores gyro rotation slower than this many degrees per second, to hide hand tremor
+nb Ignorerer gyrorotasjon langsommere enn så mange grader per sekund, for å skjule skjelvende hender
+
+@ Immersive: appears for a few seconds only when its value changes
+nb Oppslukende: vises i noen sekunder kun når verdien endres
+
+@ Keeps textures sharp on floors and walls seen at steep angles
+nb Holder teksturer skarpe på gulv og vegger sett fra skrå vinkler
+
+@ Lights from rockets, muzzle flashes and explosions brighten nearby walls
+nb Lys fra raketter, munningsflammer og eksplosjoner lyser opp nære vegger
+
+@ Liquid surfaces swell and ring out where things move through them
+nb Væskeoverflater hever seg og ringer ut der noe beveger seg gjennom dem
+
+@ Lobs sticky bombs (rockets ammo) that cling to walls, doors and monsters; alt-fire detonates them all
+nb Lobber klebebomber (rakettammo) som fester seg til vegger, dører og monstre; alternativ ild utløser alle
+
+@ Look of the classic particles: GLQuake draws soft round dots, Classic draws square pixels like software Quake
+nb Utseendet til de klassiske partiklene: GLQuake tegner myke runde prikker, Klassisk tegner firkantede piksler som programvare-Quake
+
+@ Low skips the background smear halo and uses fewer blur samples; high keeps the full halo and smoother streaks
+nb Lav hopper over bakgrunnsglorien og bruker færre uskarphetsprøver; høy beholder hele glorien og jevnere striper
+
+@ Low: hard particle edges, half the scripted particles and fewer hit sparks. Medium: soft edges. High: soft edges checked per MSAA sample, most hit sparks
+nb Lav: harde partikkelkanter, halvparten av de skriptede partiklene og færre treffgnister. Middels: myke kanter. Høy: myke kanter sjekket per MSAA-prøve, flest treffgnister
+
+@ Marks fade out before expiring; oldest marks are recycled at the limit
+nb Merker tones ut før de forsvinner; de eldste gjenbrukes ved grensen
+
+@ Max nested portal reflections to draw; each level redraws the scene
+nb Maks antall nøstede portalrefleksjoner; hvert nivå tegner scenen på nytt
+
+@ Max portals per screen with a live view; each one redraws the scene
+nb Maks portaler per skjerm med direkte visning; hver tegner scenen på nytt
+
+@ Maximum distance for acquiring and keeping an enemy locked
+nb Maks avstand for å låse og holde en fiende
+
+@ Minimum gap between freezes, so shotgun pellets and rapid fire count once; kills ignore it
+nb Minste pause mellom frysinger, så haglehagl og rask ild teller én gang; drap ignorerer den
+
+@ Modern terminal console with autocomplete popup, history search, ANSI colors, bash shell and piping; off uses the classic Quake console
+nb Moderne terminalkonsoll med autofullføring, historikksøk, ANSI-farger, bash-skall og rør; av bruker den klassiske Quake-konsollen
+
+@ Monsters take proportionally less damage at higher values; above 100% is harder
+nb Monstre tar forholdsmessig mindre skade ved høyere verdier; over 100 % er vanskeligere
+
+@ Moving gibs leave blood on surfaces they touch
+nb Kjøttbiter i bevegelse etterlater blod på flater de berører
+
+@ Multiplier on the freeze when the hit kills the enemy; 1 means no extra
+nb Multiplikator på frysingen når treffet dreper fienden; 1 betyr ingen ekstra
+
+@ Multiplies ammo from pickups (up to the normal carry limit); below 100% is harder
+nb Ganger ammo fra funn (opp til normal bæregrense); under 100 % er vanskeligere
+
+@ Multiplies health from pickups (up to 100, or the item's own limit); below 100% is harder
+nb Ganger helse fra funn (opp til 100, eller gjenstandens egen grense); under 100 % er vanskeligere
+
+@ Nails stick to wood and bodies; hard surfaces deflect them to the floor
+nb Spiker setter seg fast i tre og kropper; harde flater avleder dem mot gulvet
+
+@ Nearest keeps crisp classic pixels; linear smooths textures
+nb Nærmeste beholder skarpe klassiske piksler; lineær glatter teksturene
+
+@ New Game: Add-ons
+nb Nytt spill: Tillegg
+
+@ New Game: Customize
+nb Nytt spill: Tilpass
+
+@ Night vision: how much dark areas are brightened; thermal: how strongly heat stands out
+nb Nattsyn: hvor mye mørke områder lyses opp; varmesyn: hvor sterkt varme skiller seg ut
+
+@ Night-vision and thermal goggles, cycle normal, night vision and thermal with Change Goggles (Add-ons), or use the Equipment Wheel
+nb Nattsyn- og varmesynbriller; bytt mellom normal, nattsyn og varmesyn med Bytt briller (Tillegg), eller bruk utstyrshjulet
+
+@ No single freeze lasts longer than this, however much damage or kill bonus adds
+nb Ingen enkelt frysing varer lenger enn dette, uansett hvor mye skade eller drapsbonus legger til
+
+@ Oldest marks and nails are recycled at this shared limit
+nb De eldste merkene og spikrene gjenbrukes ved denne felles grensen
+
+@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
+nb Spak og knapper på skjermen: auto viser dem etter berøring og skjuler dem når en annen enhet brukes
+
+@ Only autosaves: quicksaves and the Save menu are off
+nb Kun autolagring: hurtiglagring og Lagre-menyen er av
+
+@ Place every weapon at the center, right or left of the view, or hide all viewmodels
+nb Plasser alle våpen i midten, til høyre eller venstre i visningen, eller skjul alle våpenmodeller
+
+@ Play your chosen hit or kill cue when you damage an enemy
+nb Spill valgt treff- eller drapslyd når du skader en fiende
+
+@ Playback speed: faster sounds shorter and higher
+nb Avspillingsfart: raskere låter kortere og lysere
+
+@ Plays the Quake theme in the main menu when no game is running
+nb Spiller Quake-temaet i hovedmenyen når ingen spill kjører
+
+@ Portals farther away than this are drawn as flat discs
+nb Portaler lenger unna enn dette tegnes som flate skiver
+
+@ Press attack once to keep firing, again to stop
+nb Trykk angrep én gang for å fortsette å skyte, igjen for å stoppe
+
+@ Press run once to switch between running and walking
+nb Trykk løp én gang for å bytte mellom løping og gåing
+
+@ Raise or lower the tone independently of sound length
+nb Hev eller senk tonen uavhengig av lydens lengde
+
+@ Red screen edges show where damage came from: top is front, bottom is behind; Screen Flashes controls their strength
+nb Røde skjermkanter viser hvor skaden kom fra: topp er foran, bunn er bak; Skjermblink styrer styrken
+
+@ Replaces the classic dot particles with glowing sparks, smoke and blood; mods with their own particle effects keep them
+nb Erstatter de klassiske prikkpartiklene med glødende gnister, røyk og blod; moder med egne partikkeleffekter beholder dem
+
+@ Resolution and detail inside portal and teleporter views; lower tiers trim nested effects
+nb Oppløsning og detalj i portal- og teleportervisninger; lavere nivåer kutter nøstede effekter
+
+@ Rippling light patterns on surfaces under water and slime
+nb Bølgende lysmønstre på flater under vann og slim
+
+@ Scales all damage you take; above 100% is harder
+nb Skalerer all skade du tar; over 100 % er vanskeligere
+
+@ Screen edge for this element; elements on the same spot stack
+nb Skjermkant for dette elementet; elementer på samme sted stables
+
+@ Seconds a monster hit by the boomerang stays stunned
+nb Sekunder et monster truffet av bumerangen forblir lammet
+
+@ Seconds impact marks and stuck nails stay before fading out; independent of Particle Quality
+nb Sekunder treffmerker og fastsittende spiker blir værende før de tones ut; uavhengig av Partikkelkvalitet
+
+@ Seconds messages at the top of the screen stay up
+nb Sekunder meldinger øverst på skjermen vises
+
+@ Seconds the flick stick snap takes; lower is faster
+nb Sekunder flick-stick-vendingen tar; lavere er raskere
+
+@ See through enhanced water; enables Water Opacity
+nb Se gjennom forbedret vann; aktiverer Vannets dekkevne
+
+@ Sensor grain, scanlines and flicker of the goggle image
+nb Sensorkorn, skannelinjer og flimmer i brillebildet
+
+@ Shades every anti-aliasing sample; needs Anti-aliasing on
+nb Skyggelegger hver kantutjevningsprøve; krever at Kantutjevning er på
+
+@ Shifts colors so they stay distinct for the chosen color blindness
+nb Forskyver farger så de forblir tydelige for valgt fargeblindhet
+
+@ Shotgun hits leave small surface marks (cosmetic only)
+nb Haglskudd etterlater små merker på flater (kun kosmetisk)
+
+@ Show corner ticks at screen centre while locked, even with Crosshair off
+nb Vis hjørnemerker midt på skjermen ved låsing, selv med trådkorset av
+
+@ Show where grenades and other arcing shots will fly, bounce and land; local play only, not in deathmatch
+nb Vis hvor granater og andre buede skudd vil fly, sprette og lande; kun lokalt spill, ikke i deathmatch
+
+@ Shows text for important sounds: doors, alerted enemies, secrets, pickups
+nb Viser tekst for viktige lyder: dører, varslede fiender, hemmeligheter, funn
+
+@ Shows the distance fog that maps and mods set; off always gives clear view
+nb Viser avstandståken som baner og moder setter; av gir alltid klar sikt
+
+@ Shows the player face next to the health number
+nb Viser spillerens ansikt ved siden av helsetallet
+
+@ Simulation detail, step rate, fade-out lifetimes and caps for gibs and shrapnel; low also skips mover collision
+nb Simuleringsdetalj, steglengde, levetider og grenser for kjøttbiter og splinter; lav hopper også over kollisjon med bevegelige deler
+
+@ Size of the on-screen buttons and move stick
+nb Størrelsen på knappene og bevegelsesspaken på skjermen
+
+@ Slowly heals up to 100 health after 5 seconds without being hit
+nb Leger sakte opp til 100 helse etter 5 sekunder uten å bli truffet
+
+@ Slows stick look while the crosshair is over an enemy
+nb Bremser spakblikket mens trådkorset er over en fiende
+
+@ Slows the game down while the weapon wheel is open
+nb Senker farten i spillet mens våpenhjulet er åpent
+
+@ Slows the whole game down; single player only. Saves and demos stay compatible with other ports
+nb Senker farten i hele spillet; kun enspiller. Lagringer og demoer forblir kompatible med andre porter
+
+@ Small camera jolt on each freeze; off with Reduce Motion
+nb Lite kamerarykk ved hver frysing; av med Reduser bevegelse
+
+@ Snap and track enemies in local play, including split-screen; unavailable online
+nb Lås og følg fiender i lokalt spill, også delt skjerm; ikke tilgjengelig på nett
+
+@ Sparks, smoke, chips, splinters and splashes fly off whatever your shots hit
+nb Gnister, røyk, fliser, splinter og sprut flyr av det skuddene dine treffer
+
+@ Spawns extra copies of every monster around the original when a level starts
+nb Lager ekstra kopier av hvert monster rundt originalen når en bane starter
+
+@ Strength of the full-screen flashes for damage, pickups and powerups
+nb Styrken på fullskjermblink for skade, funn og power-ups
+
+@ Stretch or shorten the sound while keeping its pitch
+nb Strekk eller forkort lyden og behold tonehøyden
+
+@ Surface opacity; requires Enhanced Water and Translucent Water
+nb Overflatens dekkevne; krever Forbedret vann og Gjennomskinnelig vann
+
+@ The hook latches onto metal surfaces (metal, tech, computer panels, copper)
+nb Kroken fester seg til metallflater (metall, teknikk, datapaneler, kobber)
+
+@ The hook latches onto stone, brick, rock and any surface not recognised as wood or metal
+nb Kroken fester seg til stein, murstein, fjell og alle flater som ikke gjenkjennes som tre eller metall
+
+@ The hook latches onto wooden surfaces (texture names like wood, crate, plank)
+nb Kroken fester seg til treflater (teksturnavn som wood, crate, plank)
+
+@ Turn the controller's motion sensor into a look input; needs a pad with a gyroscope
+nb Gjør kontrollerens bevegelsessensor til en blikkinndata; krever en kontroller med gyroskop
+
+@ Turns off view bob, strafe tilt and the camera kick when hit or firing
+nb Slår av kameravugging, sidestegshelning og kamerarykk ved treff eller skyting
+
+@ Turns on the extra liquid effects; Water Settings controls each one
+nb Slår på de ekstra væskeeffektene; Vann-innstillinger styrer hver av dem
+
+@ Turns the view to follow a moving enemy you are aiming at
+nb Dreier visningen for å følge en fiende i bevegelse som du sikter på
+
+@ Turns the view when you roll the controller sideways; 0 disables it, negative reverses it
+nb Dreier visningen når du ruller kontrolleren sidelengs; 0 slår av, negativ snur den
+
+@ Two-portal gun: fire and alt-fire place linked portals on flat walls; assign a weapon slot in Add-ons
+nb Toportalskanon: ild og alternativ ild plasserer koblede portaler på flate vegger; tildel en våpenplass i Tillegg
+
+@ Unlocks the FX Settings page: enhanced particles, impact effects and blood splatter
+nb Låser opp siden Effektinnstillinger: forbedrede partikler, treffeffekter og blodsprut
+
+@ Uses the 2021 re-release's smoother MD5 models (and MD3 replacements from mods) instead of the classic ones. Applies on the next map load
+nb Bruker de jevnere MD5-modellene fra 2021-utgaven (og MD3-erstatninger fra moder) i stedet for de klassiske. Trer i kraft ved neste banelasting
+
+@ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
+nb Bruker banens fargede lys (.lit-fil eller BSPX-lump); av gir vanlig hvitt lys. Trer i kraft ved neste banelasting
+
+@ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
+nb Vannstrålesegmenter, antall dråper og blank væskeskyggelegging: lav bruker enklere gjennomskinnelige stråler; høy bruker jevne, blanke stråler
+
+@ When gyro looking applies: always, off while +gyroaction is held, or only while it is held
+nb Når gyroblikk gjelder: alltid, av mens +gyroaction holdes, eller kun mens den holdes
+
+@ Which weapons trigger the freeze; melee covers the axe and any mod weapon used at close range without ammo
+nb Hvilke våpen som utløser frysingen; nærkamp dekker øksa og alle modvåpen brukt på nært hold uten ammo
+
+@ Your own rockets and grenades don't hurt you; rocket jumps still work
+nb Dine egne raketter og granater skader deg ikke; rakettopp virker fortsatt
+
+# ==== ui.txt ====
+
+# Menus and pop-ups outside the options pages: save cards, launch, presets,
+# add-on browser, map packs, hints and dialogs.
+@ Select
+nb Velg
+
+@ Back
+nb Tilbake
+
+@ Cancel
+nb Avbryt
+
+@ Confirm
+nb Bekreft
+
+@ Scroll
+nb Rull
+
+@ Section
+nb Seksjon
+
+@ Bind
+nb Tilordne
+
+@ Cancel binding
+nb Avbryt tilordning
+
+@ Clear
+nb Fjern
+
+@ Clear pad
+nb Fjern kontroller
+
+@ Remap
+nb Tilordne på nytt
+
+@ Type
+nb Skriv
+
+@ Shift
+nb Shift
+
+@ Done
+nb Ferdig
+
+@ Del
+nb Del
+
+@ Space
+nb Mellomrom
+
+@ Save
+nb Lagre
+
+@ Load
+nb Last inn
+
+@ Delete
+nb Slett
+
+@ Play
+nb Spill
+
+@ Yes
+nb Ja
+
+@ No
+nb Nei
+
+@ OK
+nb OK
+
+@ System
+nb System
+
+@ Language
+nb Språk
+
+@ Help
+nb Hjelp
+
+@ Fixed for this game: it was started without Customize
+nb Låst for dette spillet: det ble startet uten Tilpass
+
+@ Press a button or key to bind (Start cancels)
+nb Trykk en knapp eller tast for å tilordne (Start avbryter)
+
+@ Press button...
+nb Trykk knapp...
+
+@ Press key...
+nb Trykk tast...
+
+@ Replace this binding?
+nb Erstatte denne tilordningen?
+
+@ is already assigned
+nb er allerede tilordnet
+
+@ {} already assigned
+nb {} er allerede tilordnet
+
+@ Open Controls to remap Lock-on?
+nb Åpne Kontroller for å tilordne Mållåsing på nytt?
+
+@ Lock-on
+nb Mållåsing
+
+@ Auto-aim Toggle
+nb Autosikting av/på
+
+@ Keyboard
+nb Tastatur
+
+@ Controller
+nb Spillkontroller
+
+# main menu, dialogs and screens
+@ Map Packs
+nb Banepakker
+
+@ Customize
+nb Tilpass
+
+@ Level Select
+nb Banevalg
+
+@ Really quit?
+nb Vil du virkelig avslutte?
+
+@ You died
+nb Du døde
+
+@ Continue from most recent save
+nb Fortsett fra nyeste lagring
+
+@ Select save
+nb Velg lagring
+
+@ Restart level
+nb Start banen på nytt
+
+@ Return to main menu
+nb Tilbake til hovedmenyen
+
+@ (disabled)
+nb (deaktivert)
+
+@ (fixed for this game)
+nb (låst for dette spillet)
+
+@ (off)
+nb (av)
+
+@ Apply Display Changes
+nb Bruk skjermendringer
+
+@ Display Mode
+nb Skjermmodus
+
+@ Resolution
+nb Oppløsning
+
+@ desktop
+nb skrivebord
+
+@ Preset
+nb Forhåndsinnstilling
+
+@ Map
+nb Bane
+
+@ Reset Shader Settings
+nb Tilbakestill shaderinnstillinger
+
+@ Reset to Defaults
+nb Tilbakestill til standard
+
+@ Searching...
+nb Søker...
+
+@ This game only autosaves.
+nb Dette spillet bruker kun autolagring.
+
+@ (No Manual Saves modifier)
+nb (modifikatoren Ingen manuell lagring)
+
+@ End the current game?
+nb Avslutte gjeldende spill?
+
+@ Unsaved progress will be lost.
+nb Ulagret fremgang går tapt.
+
+@ End game
+nb Avslutt spill
+
+@ Overwrite
+nb Overskriv
+
+@ Overwrite "{}"?
+nb Overskrive «{}»?
+
+@ Saved {}
+nb Lagret {}
+
+@ Start a new game?
+nb Starte et nytt spill?
+
+@ New game
+nb Nytt spill
+
+@ New Game
+nb Nytt spill
+
+@ CUSTOM
+nb TILPASSET
+
+@ Customize Experience
+nb Tilpass opplevelsen
+
+@ Disable All
+nb Slå av alt
+
+@ Disable All Modifications
+nb Slå av alle endringer
+
+@ Saves load in other source ports too.
+nb Lagringer kan også lastes i andre kildeporter.
+
+@ Standard rules, no add-ons.
+nb Standardregler, ingen tillegg.
+
+@ Choose skill
+nb Velg vanskelighet
+
+@ The current game will end
+nb Gjeldende spill avsluttes
+
+@ Easy
+nb Lett
+
+@ Normal
+nb Normal
+
+@ Hard
+nb Vanskelig
+
+@ Nightmare
+nb Mareritt
+
+# graphics preset pop-up
+@ Choose a Graphics Preset
+nb Velg en grafikkinnstilling
+
+@ Classic
+nb Klassisk
+
+@ Like the re-release: enhanced models,
+nb Som nyutgivelsen: forbedrede modeller,
+
+@ no added effects.
+nb ingen ekstra effekter.
+
+@ Enhanced
+nb Forbedret
+
+@ Every enhancement at its highest quality.
+nb Alle forbedringer i høyeste kvalitet.
+
+@ Needs a capable GPU.
+nb Krever et kraftig grafikkort.
+
+@ Low-End
+nb Svak maskin
+
+@ Fastest. No anti-aliasing, original
+nb Raskest. Ingen kantutjevning, originale
+
+@ models, lowest effect quality.
+nb modeller, laveste effektkvalitet.
+
+@ Esc keeps the defaults
+nb Esc beholder standardverdiene
+
+@ Everything can be changed later in Options.
+nb Alt kan endres senere i Options.
+
+@ Keep Defaults
+nb Behold standard
+
+# save and load cards
+@ Save Game
+nb Lagre spill
+
+@ Load Game
+nb Last inn spill
+
+@ Autosaves
+nb Autolagringer
+
+@ newest first
+nb nyeste først
+
+@ Saves: {}
+nb Lagringer: {}
+
+@ Browse Autosaves
+nb Bla i autolagringer
+
+@ Every retained autosave, newest first
+nb Alle beholdte autolagringer, nyeste først
+
+@ New save
+nb Ny lagring
+
+@ Select to save your game here
+nb Velg for å lagre spillet her
+
+@ No autosaves yet
+nb Ingen autolagringer ennå
+
+@ Autosaves are made on level entry, secrets and more (Options > Gameplay)
+nb Autolagring skjer ved banestart, hemmeligheter og mer (Options > Spilling)
+
+@ No saves yet
+nb Ingen lagringer ennå
+
+@ Save from the Single Player menu, or press F6 to quicksave
+nb Lagre fra Single Player-menyen, eller trykk F6 for hurtiglagring
+
+@ No picture
+nb Ingen bilde
+
+@ Del: delete save
+nb Del: slett lagring
+
+@ Delete "{}"?
+nb Slette «{}»?
+
+@ This cannot be undone.
+nb Dette kan ikke angres.
+
+@ Quicksave
+nb Hurtiglagring
+
+@ Autosave: {}
+nb Autolagring: {}
+
+@ unknown trigger
+nb ukjent utløser
+
+@ Latest - {}
+nb Nyeste - {}
+
+@ Health {}
+nb Helse {}
+
+@ Armor {}
+nb Rustning {}
+
+@ Kills {}/{}
+nb Drap {}/{}
+
+@ Secrets {}/{}
+nb Hemmeligheter {}/{}
+
+@ Split-screen, {} players
+nb Delt skjerm, {} spillere
+
+@ Co-op
+nb Samarbeid
+
+@ Customized
+nb Tilpasset
+
+@ Customized, {}
+nb Tilpasset, {}
+
+@ Date unavailable
+nb Dato utilgjengelig
+
+@ Just now
+nb Akkurat nå
+
+@ {} min ago
+nb {} min siden
+
+@ {} h ago
+nb {} t siden
+
+@ Level entry
+nb Banestart
+
+@ Secret found
+nb Hemmelighet funnet
+
+@ All enemies killed
+nb Alle fiender drept
+
+@ All secrets found
+nb Alle hemmeligheter funnet
+
+@ Timer
+nb Tidtaker
+
+# customize pages
+@ Standard rules
+nb Standardregler
+
+@ Modifiers changed: {}
+nb Endrede modifikatorer: {}
+
+@ no add-ons
+nb ingen tillegg
+
+@ add-ons: {}
+nb tillegg: {}
+
+@ Saves of this game are .qsa files: they need this source port.
+nb Lagringer fra dette spillet er .qsa-filer: de krever denne kildeporten.
+
+@ Nothing changed: this plays as standard Quake.
+nb Ingenting endret: dette spilles som vanlig Quake.
+
+@ Changes apply now and are saved with this game (.qsa).
+nb Endringer gjelder nå og lagres med dette spillet (.qsa).
+
+@ This game started without Customize, so its rules are fixed.
+nb Dette spillet ble startet uten Tilpass, så reglene er låst.
+
+@ Start a new game and choose Customize Experience.
+nb Start et nytt spill og velg Tilpass opplevelsen.
+
+@ These rules apply to the next customized game.
+nb Disse reglene gjelder for neste tilpassede spill.
+
+# add-on browser
+@ Fire
+nb Ild
+
+@ Alt Fire
+nb Alternativ ild
+
+@ Configure Parameters >
+nb Still inn parametere >
+
+@ Configure
+nb Still inn
+
+@ Settings
+nb Innstillinger
+
+@ Change slot
+nb Bytt plass
+
+@ Toggle
+nb Av/på
+
+@ Details
+nb Detaljer
+
+@ Enter or click the box: toggle
+nb Enter eller klikk på boksen: av/på
+
+@ Right / Tab / click: details
+nb Høyre / Tab / klikk: detaljer
+
+@ Input Remapping
+nb Tilordning av inndata
+
+@ Weapon Slot
+nb Våpenplass
+
+@ Customized games save as .qsa files, which need this source port.
+nb Tilpassede spill lagres som .qsa-filer, som krever denne kildeporten.
+
+@ This game started without Customize, so its add-ons are fixed. Customize a new game instead.
+nb Dette spillet ble startet uten Tilpass, så tilleggene er låst. Tilpass et nytt spill i stedet.
+
+@ Bullet Time
+nb Bullet time
+
+@ Change Goggles
+nb Bytt briller
+
+@ Dodge / Dive
+nb Unnvik / dykk
+
+@ Goggles
+nb Briller
+
+@ Hitstop
+nb Hitstop
+
+@ Projectile Shotguns
+nb Prosjektilhagler
+
+@ BULLET TIME: 20%
+nb BULLET TIME: 20 %
+
+@ NORMAL SPEED
+nb NORMAL FART
+
+@ SLOW MOTION: PHYSICAL PELLETS
+nb SAKTE FILM: FYSISKE HAGL
+
+@ DEMONSTRATION
+nb DEMONSTRASJON
+
+@ GAMEPLAY
+nb SPILLING
+
+@ LOOP
+nb SLØYFE
+
+@ Preview unavailable
+nb Forhåndsvisning utilgjengelig
+
+# shader and language help lines
+@ A setting of the chosen shader; arrows step it, Enter is not needed
+nb En innstilling for valgt shader; piltastene endrer den, Enter trengs ikke
+
+@ Language of the menus, messages and the 2021 re-release's game text; System follows your computer's language
+nb Språket i menyer, meldinger og spilltekstene fra 2021-utgaven; System følger datamaskinens språk
+
+@ Puts every setting of the chosen shader back to the preset's defaults
+nb Setter alle innstillingene for valgt shader tilbake til forhåndsinnstillingens standardverdier
+
+@ RetroArch slang shader on the final image: CRT, scanlines, NTSC, sharpening; add your own in <game>/shaders
+nb RetroArch slang-shader på det ferdige bildet: CRT, skannelinjer, NTSC, skarphet; legg til egne i <game>/shaders
+
+# modern console footer
+@ Shift+PgUp/Dn: height  ` : hide
+nb Shift+PgUp/Dn: høyde  ` : skjul
+
+@ Tab: complete  Ctrl+R: search  bash | pipe
+nb Tab: fullfør  Ctrl+R: søk  bash | rør
+
+@ ↑ +{} lines (End to jump) 
+nb ↑ +{} linjer (End for å hoppe) 
+
+# add-on descriptions
+@ Create two linked portals on flat walls. Fire places the first portal; Alt Fire places the second. Walk through either portal to emerge from the other. Your momentum carries through. Assign a weapon slot below: pressing that slot repeatedly cycles its ordinary weapon and every enabled add-on assigned there. Portal view quality is configurable below.
+nb Lag to koblede portaler på flate vegger. Ild plasserer den første portalen; Alternativ ild plasserer den andre. Gå gjennom en av portalene for å komme ut av den andre. Farten din blir med gjennom. Tildel en våpenplass nedenfor: gjentatte trykk på den plassen bytter mellom det vanlige våpenet og alle aktiverte tillegg som er tildelt der. Portalvisningskvaliteten kan stilles inn nedenfor.
+
+@ Hold Fire and sweep the crosshair over monsters to queue targets. Release Fire to throw: the boomerang visits each target, stuns it and returns to you. Alt Fire clears the queue. The weapon slot selects a group, not a separate hotkey: press it again to cycle through the weapons in that slot. Configure stun duration and flight speed below.
+nb Hold Ild og før trådkorset over monstre for å sette mål i kø. Slipp Ild for å kaste: bumerangen besøker hvert mål, lammer det og kommer tilbake til deg. Alternativ ild tømmer køen. Våpenplassen velger en gruppe, ikke en egen hurtigtast: trykk den igjen for å bytte mellom våpnene på plassen. Still inn lammelsestid og flyfart nedenfor.
+
+@ Hold Fire to charge a sticky bomb using rocket ammunition; release to launch. A longer charge throws it faster. Bombs cling to walls, doors and monsters. Alt Fire detonates your planted bombs together. Place a trap, retreat, then detonate it when enemies approach. Assign any weapon slot below; repeated presses cycle through the ordinary weapon and add-ons in that slot.
+nb Hold Ild for å lade en klebebombe med rakettammunisjon; slipp for å skyte. Lengre lading kaster den raskere. Bomber fester seg til vegger, dører og monstre. Alternativ ild utløser alle bombene dine samtidig. Sett en felle, trekk deg tilbake og utløs den når fiender nærmer seg. Tildel en hvilken som helst våpenplass nedenfor; gjentatte trykk bytter mellom det vanlige våpenet og tilleggene på plassen.
+
+@ Fire launches a chain hook. It latches onto a permitted surface or enemy and reels you toward the anchor. Fire again or use Alt Fire to let go. Choose which materials and enemies can be hooked in Configure Parameters. Assign it to any weapon slot; repeated presses of the slot's existing binding cycle through its weapons.
+nb Ild skyter ut en kjedekrok. Den fester seg til en tillatt flate eller fiende og drar deg mot ankeret. Skyt igjen eller bruk Alternativ ild for å slippe. Velg hvilke materialer og fiender som kan hektes i Still inn parametere. Tildel den til en hvilken som helst våpenplass; gjentatte trykk på plassens eksisterende tilordning bytter mellom våpnene der.
+
+@ A piercing railgun inspired by Quake III. Fire sends a slug through every enemy along its line. Each shot consumes two cells, with a 1.5 second refire interval. Damage and the spiral trail colour are configurable below. Choose a weapon slot: the slot's current binding selects and cycles the weapons assigned to it.
+nb En gjennomborende railgun inspirert av Quake III. Ild sender et prosjektil gjennom alle fiender langs linjen. Hvert skudd bruker to celler, med 1,5 sekunder mellom skuddene. Skade og farge på spiralsporet kan stilles inn nedenfor. Velg en våpenplass: plassens gjeldende tilordning velger og bytter mellom våpnene som er tildelt den.
+
+@ A Portal-style gel sprayer. Fire sprays blue Repulsion gel: land, jump or run into it to bounce, and landings on it never hurt. Alt Fire sprays orange Propulsion gel: run across it to go much faster. Gel coats floors and walls until washed off with the Powerwasher. Assign a weapon slot below; repeated presses cycle the weapons in that slot.
+nb En gelsprøyte i Portal-stil. Ild sprøyter blå frastøtningsgel: land, hopp eller løp inn i den for å sprette, og landinger på den skader aldri. Alternativ ild sprøyter oransje fremdriftsgel: løp over den for å bli mye raskere. Gel dekker gulv og vegger til den vaskes bort med høytrykksspyleren. Tildel en våpenplass nedenfor; gjentatte trykk bytter mellom våpnene på plassen.
+
+@ A water cannon. Fire shoots a straight jet with limited reach; Alt Fire a wide, shorter fan. The water pushes enemies back, turns projectiles aside and washes away gel and blood. Push strength is configurable below. Assign a weapon slot below; repeated presses cycle the weapons in that slot.
+nb En vannkanon. Ild skyter en rett stråle med begrenset rekkevidde; Alternativ ild en bred, kortere vifte. Vannet dytter fiender tilbake, avleder prosjektiler og vasker bort gel og blod. Dyttestyrken kan stilles inn nedenfor. Tildel en våpenplass nedenfor; gjentatte trykk bytter mellom våpnene på plassen.
+
+@ One equipment add-on includes both night vision and thermal vision. The Change Goggles action cycles Normal, Night Vision, Thermal, then Normal again. Night vision brightens dark rooms; thermal vision highlights living enemies. Goggles do not occupy a weapon slot. Configure intensity and sensor noise below. The binding affects only this add-on.
+nb Ett utstyrstillegg inneholder både nattsyn og varmesyn. Handlingen Bytt briller veksler mellom Normal, Nattsyn, Varmesyn og så Normal igjen. Nattsyn lyser opp mørke rom; varmesyn fremhever levende fiender. Brillene bruker ingen våpenplass. Still inn styrke og sensorstøy nedenfor. Tilordningen gjelder kun dette tillegget.
+
+@ Press Dodge with a movement direction on the ground or in midair: dive forward or leap backward and sideways. Diagonals are supported. Each press launches once, with a short recovery. The player body animates in third person. Assign the Dodge action below or in Controls.
+nb Trykk Unnvik med en bevegelsesretning på bakken eller i luften: dykk fremover eller hopp bakover og sidelengs. Diagonaler støttes. Hvert trykk gir ett utfall, med en kort pause etterpå. Spillerkroppen animeres i tredjeperson. Tildel Unnvik-handlingen nedenfor eller i Kontroller.
+
+@ Use the dedicated Bullet Time action to slow the whole local game to 20% speed. Hold is the default; Toggle switches on each press. The optional meter limits use in real seconds and regenerates while inactive. Disable the meter for unlimited use. Remap the action and configure duration and regeneration below.
+nb Bruk den egne Bullet time-handlingen for å senke hele det lokale spillet til 20 % fart. Hold er standard; Av/på bytter ved hvert trykk. Den valgfrie måleren begrenser bruken i ekte sekunder og fylles opp igjen mens den er inaktiv. Slå av måleren for ubegrenset bruk. Tilordne handlingen på nytt og still inn varighet og regenerering nedenfor.
+
+@ Both shotguns and enemy grunts fire physical pellets with their original spread and damage. Fast default projectiles feel immediate; lower their speed to dodge incoming fire during bullet time. Configure projectile speed below, or reset it to the default of 10000 units per second.
+nb Begge haglene og fiendtlige grunts skyter fysiske hagl med original spredning og skade. Raske standardprosjektiler føles umiddelbare; senk farten for å unngå innkommende ild under bullet time. Still inn prosjektilfart nedenfor, eller tilbakestill til standarden på 10000 enheter per sekund.
+
+@ Freezes the game for a split second when you damage an enemy, so hits feel heavier. Single player only. Choose which weapons trigger it (all, melee, ranged or explosives), how long it lasts and how much more a kill freezes. Advanced settings cover enemy toughness, damage scaling, cooldown and the longest freeze.
+nb Fryser spillet et brøkdels sekund når du skader en fiende, så treffene føles tyngre. Kun enspiller. Velg hvilke våpen som utløser det (alle, nærkamp, avstand eller eksplosiver), hvor lenge det varer og hvor mye mer et drap fryser. Avanserte innstillinger dekker fiendens tøffhet, skadeskalering, nedkjøling og lengste frysing.
+
+# map packs and the Quaddicted browser
+@ Get more maps (Quaddicted)...
+nb Hent flere baner (Quaddicted)...
+
+@ Type to filter...
+nb Skriv for å filtrere...
+
+@ Launch mod
+nb Start mod
+
+@ Start first map
+nb Start første bane
+
+@ (running)
+nb (kjører)
+
+@ running
+nb kjører
+
+@ Recent
+nb Nylig
+
+@ Name
+nb Navn
+
+@ Dir
+nb Mappe
+
+@ Default
+nb Standard
+
+@ Title
+nb Tittel
+
+@ Sort: {}
+nb Sortering: {}
+
+@ {} installed
+nb {} installert
+
+@ {}/{} matching
+nb {}/{} treff
+
+@ {} maps, {} completed
+nb {} baner, {} fullført
+
+@ {}/{} matching, {} completed
+nb {}/{} treff, {} fullført
+
+@ no maps of its own
+nb ingen egne baner
+
+@ dir: {}
+nb mappe: {}
+
+@ base: {}
+nb basis: {}
+
+@ Browse the Quaddicted archive of
+nb Bla gjennom Quaddicted-arkivet med
+
+@ single-player maps and episodes,
+nb enspillerbaner og episoder, og
+
+@ then download and install them
+nb last dem ned og installer dem
+
+@ here. Each release gets its own
+nb her. Hver utgivelse får sin egen
+
+@ entry in this list.
+nb oppføring i denne listen.
+
+@ Needs an internet connection.
+nb Krever internettforbindelse.
+
+@ Quaddicted Map Archive
+nb Quaddicted-banearkiv
+
+@ Newest
+nb Nyeste
+
+@ Author
+nb Forfatter
+
+@ Size
+nb Størrelse
+
+@ Loading the map list...
+nb Laster banelisten...
+
+@ Couldn't load the map list: {}
+nb Kunne ikke laste banelisten: {}
+
+@ {} single-player releases  -  F5 refreshes
+nb {} enspillerutgivelser  -  F5 oppdaterer
+
+@ {} matching
+nb {} treff
+
+@ by {}
+nb av {}
+
+@ requires: {}
+nb krever: {}
+
+@ maps: {}
+nb baner: {}
+
+@ Failed: {}
+nb Mislyktes: {}
+
+@ Downloading... {}%
+nb Laster ned... {} %
+
+@ Unpacking...
+nb Pakker ut...
+
+@ Installed in {}/  -  Enter: play
+nb Installert i {}/  -  Enter: spill
+
+@ Enter: download and install
+nb Enter: last ned og installer
+
+@ unpacking
+nb pakker ut
+
+@ failed
+nb mislyktes
+
+@ installed
+nb installert
+
+@ Downloads are not available in the browser build
+nb Nedlastinger er ikke tilgjengelige i nettleserversjonen
+
+@ the map list could not be read
+nb banelisten kunne ikke leses
+
+@ downloading needs the curl program
+nb nedlasting krever programmet curl
+
+@ download failed
+nb nedlastingen mislyktes
+
+@ the download is not a valid zip
+nb nedlastingen er ikke en gyldig zip
+
+@ nothing to install for this engine
+nb ingenting å installere for denne motoren
+
+@ needs {} installed first
+nb krever at {} installeres først
+
+@ couldn't unpack {}
+nb kunne ikke pakke ut {}
+
+# help screen
+@ About
+nb Om
+
+@ < Back
+nb < Tilbake
+
+# tr_ctx keys: English shows the short word, the key says which meaning
+@ Save (a manual save, as opposed to a quicksave or autosave)
+nb Lagring
+
+# ==== hud.txt ====
+
+# HUD, weapon and equipment wheels, sound captions and other in-game text.
+# Weapon, monster and item names follow the 2021 re-release's own translations.
+@ Axe
+nb Øks
+
+@ Shotgun
+nb Shotgun
+
+@ Double-Barrelled Shotgun
+nb Super Shotgun
+
+@ Nailgun
+nb Nailgun
+
+@ Super Nailgun
+nb Super Nailgun
+
+@ Grenade Launcher
+nb Grenade Launcher
+
+@ Rocket Launcher
+nb Rocket Launcher
+
+@ Thunderbolt
+nb Thunderbolt
+
+@ Portal Gun
+nb Portalkanon
+
+@ Boomerang
+nb Bumerang
+
+@ Stickybomb Launcher
+nb Klebebombekaster
+
+@ Railgun
+nb Railgun
+
+@ Hookshot
+nb Entrehake
+
+@ Gel Sprayer
+nb Gelsprøyte
+
+@ Powerwasher
+nb Høytrykksspyler
+
+@ Night Vision Goggles
+nb Nattsynbriller
+
+@ Thermal Goggles
+nb Varmesynbriller
+
+@ Normal vision
+nb Normalt syn
+
+@ ON
+nb PÅ
+
+@ OFF
+nb AV
+
+@ {} (turn on)
+nb {} (slå på)
+
+@ {} (turn off)
+nb {} (slå av)
+
+@ Move mouse to select, release to toggle
+nb Beveg musen for å velge, slipp for å slå av/på
+
+@ Move mouse to select, release to equip
+nb Beveg musen for å velge, slipp for å ta i bruk
+
+@ Release to toggle
+nb Slipp for å slå av/på
+
+@ Release to equip
+nb Slipp for å ta i bruk
+
+@ shells
+nb hagl
+
+@ nails
+nb spiker
+
+@ rockets
+nb raketter
+
+@ cells
+nb celler
+
+@ Kills: {}/{}
+nb Drap: {}/{}
+
+@ Secrets: {}/{}
+nb Hemmeligheter: {}/{}
+
+@ Time {}
+nb Tid {}
+
+@ Press any button to continue...
+nb Trykk en knapp for å fortsette...
+
+@ Press any key to continue...
+nb Trykk en tast for å fortsette...
+
+@ BULLET TIME
+nb BULLET TIME
+
+@ AUTO AIM
+nb AUTOSIKTING
+
+@ Crosshair
+nb Trådkors
+
+@ + Marker
+nb + Markør
+
+@ Hit markers off
+nb Treffmarkører av
+
+@ On target
+nb På mål
+
+@ On kill
+nb Ved drap
+
+# sound captions
+@ [Secret found]
+nb [Hemmelighet funnet]
+
+@ [Message]
+nb [Melding]
+
+@ [Switch activated]
+nb [Bryter aktivert]
+
+@ [Key picked up]
+nb [Nøkkel plukket opp]
+
+@ [Rune picked up]
+nb [Rune plukket opp]
+
+@ [Teleporter]
+nb [Teleporter]
+
+@ [Teleport]
+nb [Teleportering]
+
+@ [Splash]
+nb [Plask]
+
+@ [Leaving water]
+nb [Forlater vannet]
+
+@ [Door]
+nb [Dør]
+
+@ [Platform moving]
+nb [Plattform beveger seg]
+
+@ [Button]
+nb [Knapp]
+
+@ [Health picked up]
+nb [Helse plukket opp]
+
+@ [Armor picked up]
+nb [Rustning plukket opp]
+
+@ [Quad Damage wearing off]
+nb [Quad Damage avtar]
+
+@ [Quad Damage]
+nb [Quad Damage]
+
+@ [Pentagram wearing off]
+nb [Pentagram avtar]
+
+@ [Pentagram of Protection]
+nb [Pentagram of Protection]
+
+@ [Ring wearing off]
+nb [Ring avtar]
+
+@ [Ring of Shadows]
+nb [Ring of Shadows]
+
+@ [Biosuit wearing off]
+nb [Biosuit avtar]
+
+@ [Biosuit]
+nb [Biosuit]
+
+@ [Item picked up]
+nb [Gjenstand plukket opp]
+
+@ [Weapon picked up]
+nb [Våpen plukket opp]
+
+@ [Ammo picked up]
+nb [Ammo plukket opp]
+
+@ [Explosion]
+nb [Eksplosjon]
+
+@ [Grenade launched]
+nb [Granat avfyrt]
+
+@ [Grenade bounce]
+nb [Granat spretter]
+
+@ [Rocket fired]
+nb [Rakett avfyrt]
+
+@ [Nails fired]
+nb [Spiker avfyrt]
+
+@ [Lightning]
+nb [Lyn]
+
+@ [Thunder]
+nb [Torden]
+
+@ [Enforcer alerted]
+nb [Enforcer varslet]
+
+@ [Grunt alerted]
+nb [Grunt varslet]
+
+@ [Rottweiler alerted]
+nb [Rottweiler varslet]
+
+@ [Knight alerted]
+nb [Knight varslet]
+
+@ [Death Knight alerted]
+nb [Death Knight varslet]
+
+@ [Scrag alerted]
+nb [Scrag varslet]
+
+@ [Ogre alerted]
+nb [Ogre varslet]
+
+@ [Fiend alerted]
+nb [Fiend varslet]
+
+@ [Shambler alerted]
+nb [Shambler varslet]
+
+@ [Zombie groaning]
+nb [Zombie stønner]
+
+@ [Vore alerted]
+nb [Vore varslet]
+
+@ [Vore attacking]
+nb [Vore angriper]
+
+@ [Spawn alerted]
+nb [Spawn varslet]
+
+@ [Rotfish]
+nb [Rotfish]
+
+@ [Spawn]
+nb [Spawn]
+
+@ [Chthon]
+nb [Chthon]
+
+@ [Hard landing]
+nb [Hard landing]
+
+@ [Drowning]
+nb [Drukner]
+
+@ [Gasping for air]
+nb [Gisper etter luft]
+
+@ [Burning]
+nb [Brenner]
+
+@ [Telefrag]
+nb [Telefrag]
+
+@ [Gibbed]
+nb [Sprengt i biter]
+
+# ==== console.txt ====
+
+# Console messages, shown translated only with con_translate 1 (Translate Console).
+# Cvar and command names stay as they are.
+@ Autosaved.
+nb Autolagret.
+
+@ Game saved.
+nb Spill lagret.
+
+@ Can't save now.
+nb Kan ikke lagre nå.
+
+@ This game only autosaves (No Manual Saves modifier).
+nb Dette spillet bruker kun autolagring (modifikatoren Ingen manuell lagring).
+
+@ Loading {}...
+nb Laster {}...
+
+@ load failed: {}
+nb innlasting mislyktes: {}
+
+@ ERROR: autosave failed: {}
+nb FEIL: autolagring mislyktes: {}
+
+@ ERROR: couldn't open {}
+nb FEIL: kunne ikke åpne {}
+
+@ ERROR: couldn't open {}.
+nb FEIL: kunne ikke åpne {}.
+
+@ ERROR: couldn't write {}: {}
+nb FEIL: kunne ikke skrive {}: {}
+
+@ ERROR: couldn't create {}: {}
+nb FEIL: kunne ikke opprette {}: {}
+
+@ couldn't write {}: {}
+nb kunne ikke skrive {}: {}
+
+@ Wrote {}
+nb Skrev {}
+
+@ screenshot failed: {}
+nb skjermbilde mislyktes: {}
+
+@ screenshot: {}
+nb skjermbilde: {}
+
+@ No readable save available. Select save or restart the level.
+nb Ingen lesbar lagring tilgjengelig. Velg lagring eller start banen på nytt.
+
+@ Unknown command "{}"
+nb Ukjent kommando «{}»
+
+@ couldn't exec {}
+nb kunne ikke kjøre {}
+
+@ execing {}
+nb kjører {}
+
+@ execing config.cfg (inherited from {})
+nb kjører config.cfg (arvet fra {})
+
+@ execing config.cfg (mod defaults)
+nb kjører config.cfg (modstandard)
+
+@ execing default.cfg (built-in)
+nb kjører default.cfg (innebygd)
+
+@ {} cvars
+nb {} variabler
+
+@ {} commands
+nb {} kommandoer
+
+@ Can't "cmd", not connected
+nb Kan ikke bruke «cmd», ikke tilkoblet
+
+@ Looking for Quake servers...
+nb Leter etter Quake-servere...
+
+@ Bad value, must be between 1 and 65534
+nb Ugyldig verdi, må være mellom 1 og 65534
+
+@ Couldn't handle music file {}
+nb Kunne ikke håndtere musikkfilen {}
+
+@ Bug report written to {}
+nb Feilrapport skrevet til {}
+
+@ bugreport: can't create {}: {}
+nb bugreport: kan ikke opprette {}: {}
+
+@ graphics preset: {}
+nb grafikkinnstilling: {}
+
+@ Presets (r_shader_preset <name>):
+nb Forhåndsinnstillinger (r_shader_preset <name>):
+
+@ Add your own .slangp presets under <game>/shaders/.
+nb Legg til egne .slangp-forhåndsinnstillinger under <game>/shaders/.
+
+@ no shader preset loaded (r_shader_preset)
+nb ingen shaderforhåndsinnstilling lastet (r_shader_preset)
+
+@ r_shader_preset: "{}" not found
+nb r_shader_preset: «{}» ble ikke funnet
+
+@ no parameter "{}" in this preset
+nb ingen parameter «{}» i denne forhåndsinnstillingen
+
+@ {} = {} (default {}, {}..{})
+nb {} = {} (standard {}, {}..{})
+
+@ Switching to {}...
+nb Bytter til {}...
+
+@ game: no game dir "{}" in {}
+nb game: ingen spillmappe «{}» i {}
+
+@ game: can't find the engine executable
+nb game: finner ikke motorens kjørbare fil
+
+@ game: exec failed: {}
+nb game: kjøring mislyktes: {}
+
+@ game: launch failed: {}
+nb game: oppstart mislyktes: {}
+
+@ loaded {} in {}s
+nb lastet {} på {} s
+
+@ No demos listed with startdemos
+nb Ingen demoer oppført med startdemos
+
+@ Playing demo from {}.
+nb Spiller av demo fra {}.
+
+@ {} frames {} seconds {} fps
+nb {} bilder {} sekunder {} fps
+
+@ Recording to {}.
+nb Tar opp til {}.
+
+@ Completed demo
+nb Demo fullført
+
+@ Can't record during demo playback
+nb Kan ikke ta opp under demoavspilling
+
+@ Relative pathnames are not allowed.
+nb Relative stier er ikke tillatt.
+
+@ Can't record - try again when connected
+nb Kan ikke ta opp - prøv igjen når du er tilkoblet
+
+@ {} demo(s) in loop
+nb {} demo(er) i sløyfe
+
+@ Not recording a demo.
+nb Tar ikke opp noen demo.
+
+@ {} joined on a gamepad
+nb {} ble med på en kontroller
+
+@ goggles: needs a game started with Add-ons and Goggles enabled
+nb goggles: krever et spill startet med Tillegg og Briller aktivert
+
+@ equip: needs a game started with Add-ons and Goggles enabled
+nb equip: krever et spill startet med Tillegg og Briller aktivert
+
+@ UDP listening on port {}
+nb UDP lytter på port {}
+
+@ UDP bind on port {} failed: {}
+nb UDP-binding til port {} mislyktes: {}
+
+@ Connection accepted by {}
+nb Tilkobling godtatt av {}
+
+@ Connection failed: {}
+nb Tilkobling mislyktes: {}
+
+@ Couldn't resolve {}
+nb Kunne ikke slå opp {}
+
+@ Connecting to {}...
+nb Kobler til {}...
+
+@ Connecting to QuakeWorld server {}...
+nb Kobler til QuakeWorld-server {}...
+
+@ Disconnected: {}
+nb Frakoblet: {}
+
+@ Server disconnected
+nb Serveren koblet fra
+
+@ Client {} connected
+nb Klient {} tilkoblet
+
+@ Client {} timed out
+nb Tidsavbrudd for klient {}
+
+@ Couldn't spawn server {}: {}
+nb Kunne ikke starte server {}: {}
+
+@ maxplayers can not be changed while a server is running.
+nb maxplayers kan ikke endres mens en server kjører.
+
+@ You can't kick yourself!
+nb Du kan ikke sparke deg selv!
+
+@ Only the server may changelevel
+nb Bare serveren kan bruke changelevel
+
+@ {} renamed to {}
+nb {} har byttet navn til {}

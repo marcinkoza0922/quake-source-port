@@ -1,0 +1,3024 @@
+# la: the port's own text; English keys from crates/qcore/lang/*.txt.
+# Format in crates/qcore/src/lang/catalog.rs; check with tools/lang_check.py.
+
+# ==== menu.txt ====
+
+# Options pages: page names, row labels and choice values.
+@ 10% speed
+la Celeritas 10%
+
+@ 2 split-screen
+la 2 in quadro diviso
+
+@ 3 split-screen
+la 3 in quadro diviso
+
+@ 4 split-screen
+la 4 in quadro diviso
+
+@ 5 split-screen
+la 5 in quadro diviso
+
+@ 6 split-screen
+la 6 in quadro diviso
+
+@ 2D aiming
+la Collimatio 2D
+
+@ 2x monsters
+la Monstra ×2
+
+@ 3x monsters
+la Monstra ×3
+
+@ 4x monsters
+la Monstra ×4
+
+@ 3D resolution
+la Resolutio 3D
+
+@ 3D view
+la Visus 3D
+
+@ 8-bit Color
+la Colores 8-bit
+
+@ Accessibility
+la Accessibilitas
+
+@ Acquisition Cone
+la Conus captandi
+
+@ Activation
+la Activatio
+
+@ Add a ringing room tail after the cue
+la Post signum resonantiam conclavis addit
+
+@ Add delayed repeats after the cue
+la Post signum iterationes moratas addit
+
+@ Add saturation and distortion
+la Saturationem et distortionem addit
+
+@ Add-ons
+la Additamenta
+
+@ Address
+la Inscriptio
+
+@ Adds fine noise to hide color banding
+la Strepitum tenuem addit ut gradus colorum celet
+
+@ Advanced Settings
+la Optiones provectae
+
+@ Aim Assist
+la Auxilium collimandi
+
+@ Aim Rotation
+la Rotatio collimandi
+
+@ Aim Slowdown
+la Retardatio collimandi
+
+@ Aim Style
+la Modus collimandi
+
+@ All
+la Omnia
+
+@ All enemies
+la Omnes hostes
+
+@ Alt Fire (Add-ons)
+la Ictus alter (Additamenta)
+
+@ Always Run
+la Semper currere
+
+@ Ambient Occlusion
+la Occlusio ambiens
+
+@ Ammo Counts
+la Numeri munitionum
+
+@ Ammo Counts Position
+la Locus numerorum munitionum
+
+@ Ammo Pickups
+la Munitiones collectae
+
+@ Anisotropic
+la Anisotropicum
+
+@ Anti-aliasing
+la Laevigatio marginum
+
+@ Apply To
+la Adhibere ad
+
+@ Armor
+la Lorica
+
+@ Armor Position
+la Locus loricae
+
+@ Ask
+la Rogare
+
+@ Attack
+la Ferire
+
+@ Audio
+la Sonus
+
+@ Auto-aim
+la Collimatio automatica
+
+@ Auto-aim Settings
+la Optiones collimationis automaticae
+
+@ Autosave
+la Autoservatio
+
+@ Autosave Settings
+la Optiones autoservationis
+
+@ Autosave Timer
+la Intervallum autoservationis
+
+@ Autosaves to Keep
+la Autoservationes retinendae
+
+@ Bass
+la Graves
+
+@ Blip
+la Blip
+
+@ Blood Quality
+la Qualitas sanguinis
+
+@ Blood Splatter Settings
+la Optiones aspersionis sanguinis
+
+@ Blue
+la Caeruleus
+
+@ Boomerang Settings
+la Optiones boomerang
+
+@ Boost or cut high frequencies in decibels
+la Frequentias altas in decibelis auget vel minuit
+
+@ Boost or cut low frequencies in decibels
+la Frequentias graves in decibelis auget vel minuit
+
+@ Brightness
+la Claritas
+
+@ Bullet Time (Add-ons)
+la Tempus lentum (Additamenta)
+
+@ Bullet Time Settings
+la Optiones temporis lenti
+
+@ Button Glyphs
+la Signa globulorum
+
+@ Button Size
+la Magnitudo globulorum
+
+@ Camera
+la Camera
+
+@ Caustic Intensity
+la Vis causticorum
+
+@ Caustics
+la Caustica
+
+@ Center
+la Medium
+
+@ Center Message Position
+la Locus nuntiorum mediorum
+
+@ Center Message Time
+la Duratio nuntiorum mediorum
+
+@ Center View
+la Aspectum centrare
+
+@ Change Color on Kill
+la Colorem mutare in caede
+
+@ Change Color on Target
+la Colorem mutare in scopo
+
+@ Chime
+la Tintinnabulum
+
+@ Click
+la Crepitus
+
+@ Clink
+la Tinnitus
+
+@ Coin
+la Nummus
+
+@ Color
+la Color
+
+@ Color Filter
+la Filtrum coloris
+
+@ Color of the grenade arc
+la Color arcus pyroboli
+
+@ Colored Lighting
+la Lumen coloratum
+
+@ Connect
+la Conectere
+
+@ Contrast
+la Contrastus
+
+@ Controls
+la Moderamina
+
+@ Cooldown (ms)
+la Mora (ms)
+
+@ Crosshair Outline
+la Ambitus reticuli
+
+@ Crosshair Shape
+la Forma reticuli
+
+@ Crosshair Size
+la Magnitudo reticuli
+
+@ Current Ammo
+la Munitio praesens
+
+@ Current Ammo Position
+la Locus munitionis praesentis
+
+@ Customize This Game
+la Hunc lusum accommodare
+
+@ Damage
+la Damnum
+
+@ Damage Taken
+la Damnum acceptum
+
+@ Debris
+la Rudera
+
+@ Debris Quality
+la Qualitas ruderum
+
+@ Debris Settings
+la Optiones ruderum
+
+@ Directional Damage
+la Directio damni
+
+@ Dithering
+la Dithering
+
+@ Dodge / Dive (Add-ons)
+la Declinatio / Saltus (Additamenta)
+
+@ Dragging up looks down instead of up
+la Sursum trahere deorsum spectat, non sursum
+
+@ Drive
+la Saturatio
+
+@ Dynamic Lights
+la Lumina dynamica
+
+@ Echo
+la Echo
+
+@ Enemy Health
+la Salus hostium
+
+@ Enemy Wounds
+la Vulnera hostium
+
+@ Enhanced Blood Splatter
+la Aspersio sanguinis aucta
+
+@ Enhanced FX
+la Effectus aucti
+
+@ Enhanced Models
+la Exemplaria aucta
+
+@ Enhanced Particles
+la Particulae auctae
+
+@ Enhanced Water
+la Aqua aucta
+
+@ Enhancements
+la Augmenta
+
+@ Equipment Wheel (Add-ons)
+la Rota instrumentorum (Additamenta)
+
+@ Exploding boxes throw metal shards
+la Capsae explodentes fragmenta metalli iaciunt
+
+@ Explosion Damage
+la Damnum explosionis
+
+@ Explosion Scorch Marks
+la Vestigia ustionis
+
+@ Explosions scorch nearby solid surfaces
+la Explosiones superficies solidas propinquas adurunt
+
+@ Explosives only
+la Explosiva tantum
+
+@ Extra Monsters
+la Monstra addita
+
+@ Extra Per 10 Damage (ms)
+la Additum per 10 damni (ms)
+
+@ FX Settings
+la Optiones effectuum
+
+@ Field of View
+la Campus visus
+
+@ Firing never uses up ammo
+la Iaculatio numquam munitionem consumit
+
+@ First person
+la Prima persona
+
+@ Flick Time
+la Tempus flick
+
+@ Flight Speed
+la Celeritas volatus
+
+@ Fog
+la Nebula
+
+@ Frag Limit
+la Limes caedium
+
+@ Freeze Duration (ms)
+la Duratio congelationis (ms)
+
+@ GLQuake
+la GLQuake
+
+@ Game Speed
+la Celeritas lusus
+
+@ Game Type
+la Genus lusus
+
+@ Gameplay
+la Ratio ludendi
+
+@ Gameplay Modifiers
+la Modificatores lusus
+
+@ Gel Quality
+la Qualitas gelatinae
+
+@ Gib Surface Painting
+la Maculae frustorum
+
+@ Gibs
+la Frusta
+
+@ Gibs and heads tumble and bounce
+la Frusta et capita volvuntur et resiliunt
+
+@ Goggle Glow Quality
+la Qualitas fulgoris perspicillorum
+
+@ Goggle Intensity
+la Vis perspicillorum
+
+@ Goggle Noise
+la Strepitus perspicillorum
+
+@ Goggles Settings
+la Optiones perspicillorum
+
+@ Graphics
+la Graphica
+
+@ Green
+la Viridis
+
+@ Grenade Arc
+la Arcus pyroboli
+
+@ Grenade Arc Settings
+la Optiones arcus pyroboli
+
+@ Gun Kick
+la Repercussus teli
+
+@ Gyro
+la Gyroscopium
+
+@ Gyro & Flick Stick
+la Gyroscopium et flick stick
+
+@ Gyro Active
+la Gyroscopium activum
+
+@ Gyro Aiming
+la Collimatio gyroscopica
+
+@ HUD
+la HUD
+
+@ HUD Style
+la Stilus HUD
+
+@ Health
+la Salus
+
+@ Health Pickups
+la Salus collecta
+
+@ Health Position
+la Locus salutis
+
+@ Health Regeneration
+la Regeneratio salutis
+
+@ Hit & Kill Sounds
+la Soni ictuum et caedium
+
+@ Hit Doors & Lifts
+la Ferire ianuas et pegmata
+
+@ Hit Markers
+la Signa ictuum
+
+@ Hit Sound
+la Sonus ictus
+
+@ Hitmarker Size
+la Magnitudo signi ictus
+
+@ Hitmarker Type
+la Genus signi ictus
+
+@ Hitstop Advanced
+la Hitstop provectum
+
+@ Hitstop Settings
+la Optiones hitstop
+
+@ Hold
+la Tenere
+
+@ Hold lock-on
+la Capturam tenere
+
+@ Hook Enemies
+la Hostes unco capere
+
+@ Hook Metal
+la Metallum unco capere
+
+@ Hook Stone
+la Lapidem unco capere
+
+@ Hook Wood
+la Lignum unco capere
+
+@ Hooking an enemy pulls you to it
+la Hostis unco captus te ad se trahit
+
+@ Hookshot Range
+la Spatium unci
+
+@ Hookshot Settings
+la Optiones unci
+
+@ Host Game
+la Lusum hospitari
+
+@ How far the hook flies before it retracts
+la Quam longe uncus volet antequam redeat
+
+@ How visible the on-screen controls are
+la Quam conspicua sint moderamina in quadro
+
+@ Impact Lifetime
+la Duratio ictuum
+
+@ Infinite Ammo
+la Munitio infinita
+
+@ Input
+la Initus
+
+@ Input Scale
+la Scala initus
+
+@ Interpolate Animation
+la Animationem interpolare
+
+@ Interpolate Movement
+la Motum interpolare
+
+@ Invert Look
+la Aspectum invertere
+
+@ Invert Mouse
+la Murem invertere
+
+@ Invert Stick
+la Vectem invertere
+
+@ Jet Quality
+la Qualitas iacti
+
+@ Join Game
+la Lusui se adiungere
+
+@ Jump / Swim Up
+la Salire / Sursum natare
+
+@ Jump again in mid-air
+la Iterum in aere salire
+
+@ Jumps
+la Saltus
+
+@ Keys & Powerups
+la Claves et potentiae
+
+@ Keys & Powerups Position
+la Locus clavium et potentiarum
+
+@ Kill Bonus (x)
+la Praemium caedis (x)
+
+@ Kill Sound
+la Sonus caedis
+
+@ Knock
+la Pulsus
+
+@ Left
+la Sinistra
+
+@ Length of the motion blur streaks
+la Longitudo striarum obscuritatis motus
+
+@ Lifetime (seconds)
+la Duratio (secundae)
+
+@ Live Portal Views
+la Aspectus portarum vivi
+
+@ Live View Distance
+la Distantia aspectus vivi
+
+@ Local Players
+la Lusores locales
+
+@ Local red wounds follow enemy animation
+la Vulnera rubra animationem hostis sequuntur
+
+@ Lock Indicator
+la Index capturae
+
+@ Long falls don't hurt
+la Casus longi non nocent
+
+@ Longest Freeze (ms)
+la Congelatio longissima (ms)
+
+@ Look Down
+la Deorsum spectare
+
+@ Look Speed
+la Celeritas aspectus
+
+@ Look Up
+la Sursum spectare
+
+@ Main Menu Music
+la Musica indicis principalis
+
+@ Max FPS
+la FPS max.
+
+@ Max Players
+la Lusores max.
+
+@ Maximum Impacts
+la Ictus maximi
+
+@ Maximum Marks
+la Vestigia maxima
+
+@ Maximum Range
+la Spatium maximum
+
+@ Melee only
+la Comminus tantum
+
+@ Message Background
+la Fundus nuntiorum
+
+@ Message Text Size
+la Magnitudo textus nuntiorum
+
+@ Messages & Captions
+la Nuntii et subscriptiones
+
+@ Meter Duration (real seconds)
+la Duratio mensurae (secundae verae)
+
+@ Minimum Damage
+la Damnum minimum
+
+@ Mode
+la Modus
+
+@ Modern Console
+la Consolatorium modernum
+
+@ Modern HUD Layout
+la Dispositio HUD moderna
+
+@ Most recent save
+la Servatio recentissima
+
+@ Motion Blur
+la Obscuritas motus
+
+@ Motion Blur Amount
+la Copia obscuritatis motus
+
+@ Motion Blur Quality
+la Qualitas obscuritatis motus
+
+@ Mouse & Keyboard
+la Mus et claviatura
+
+@ Mouse Speed
+la Celeritas muris
+
+@ Move Back
+la Retro ire
+
+@ Move Forward
+la Prorsus ire
+
+@ Music Volume
+la Volumen musicae
+
+@ Next Weapon
+la Telum sequens
+
+@ No Drowning
+la Nulla submersio
+
+@ No Fall Damage
+la Nullum damnum casus
+
+@ No Manual Saves
+la Nullae servationes manuales
+
+@ No Self Damage
+la Nullum damnum sui
+
+@ Noise Filter
+la Filtrum strepitus
+
+@ Normal Color
+la Color solitus
+
+@ Notify Message Position
+la Locus notitiarum
+
+@ Notify Message Time
+la Duratio notitiarum
+
+@ Number of splatter rays per blood impact
+la Numerus radiorum aspersionis per ictum sanguinis
+
+@ Off
+la Inactivum
+
+@ On Death
+la In morte
+
+@ On Kill Color
+la Color in caede
+
+@ On Target Color
+la Color in scopo
+
+@ Opacity
+la Opacitas
+
+@ Opacity of the grenade arc
+la Opacitas arcus pyroboli
+
+@ Pants Color
+la Color bracarum
+
+@ Particle Quality
+la Qualitas particularum
+
+@ Particles
+la Particulae
+
+@ Physical Nail Impacts
+la Ictus clavorum physici
+
+@ Pistol Start
+la Initium nudum
+
+@ Pitch
+la Altitudo soni
+
+@ Pitch Sensitivity
+la Sensibilitas verticalis
+
+@ Playback Speed
+la Celeritas reproductionis
+
+@ Player Setup
+la Lusoris configuratio
+
+@ Pop
+la Pop
+
+@ Portal Gun Settings
+la Optiones teli portarum
+
+@ Portal Recursion
+la Recursio portarum
+
+@ Portal View Quality
+la Qualitas aspectus portarum
+
+@ Preview Sound
+la Sonum audire
+
+@ Previous Weapon
+la Telum prius
+
+@ Projectile Shotguns Settings
+la Optiones sclopetorum proiectilium
+
+@ Projectile Speed (units/s)
+la Celeritas proiectilium (unitates/s)
+
+@ Purple
+la Purpureus
+
+@ Push
+la Impulsus
+
+@ Push Strength
+la Vis impulsus
+
+@ Quick Load
+la Celeriter onerare
+
+@ Quick Save
+la Celeriter servare
+
+@ Railgun Settings
+la Optiones railgun
+
+@ Ranged only
+la Eminus tantum
+
+@ Reacquire While Held
+la Tenendo iterum capere
+
+@ Red
+la Ruber
+
+@ Reduce Motion
+la Motum minuere
+
+@ Regen (seconds per second)
+la Regeneratio (secundae per secundam)
+
+@ Render Scale
+la Scala reddendi
+
+@ Reverb
+la Resonantia
+
+@ Right
+la Dextra
+
+@ Ripple Intensity
+la Vis undularum
+
+@ Ripples
+la Undulae
+
+@ Roll Sensitivity
+la Sensibilitas volutationis
+
+@ Rumble
+la Vibratio
+
+@ Run
+la Currere
+
+@ Save on All Enemies Killed
+la Servare omnibus hostibus necatis
+
+@ Save on All Secrets Found
+la Servare omnibus arcanis inventis
+
+@ Save on Level Entry
+la Servare in initio tabulae
+
+@ Save on Secret Found
+la Servare arcano invento
+
+@ Scoreboard
+la Tabula punctorum
+
+@ Screen Flashes
+la Fulgura quadri
+
+@ Screen Shader
+la Shader quadri
+
+@ Screen Shake
+la Tremor quadri
+
+@ Search LAN
+la In LAN quaerere
+
+@ Seconds a center-screen message stays up
+la Secundae quibus nuntius in medio quadro manet
+
+@ See Through Portals
+la Per portas videre
+
+@ See-through Teleporters
+la Teleportatores perspicui
+
+@ Shirt Color
+la Color tunicae
+
+@ Shotgun Bullet Decals
+la Vestigia glandium sclopeti
+
+@ Shoulder left
+la Umerus sinister
+
+@ Shoulder right
+la Umerus dexter
+
+@ Show FPS
+la FPS monstrare
+
+@ Show Face
+la Vultum monstrare
+
+@ Shrapnel
+la Schidiae
+
+@ Size of on-screen messages and captions
+la Magnitudo nuntiorum et subscriptionum in quadro
+
+@ Skill
+la Difficultas
+
+@ Sky Fog
+la Nebula caeli
+
+@ Smooths the stepped movement of monsters
+la Motum gradatim monstrorum lenit
+
+@ Sound
+la Sonus
+
+@ Sound Captions
+la Subscriptiones sonorum
+
+@ Sound Volume
+la Volumen sonorum
+
+@ Speed Blur
+la Obscuritas celeritatis
+
+@ Splashes
+la Aspergines
+
+@ Splatter Amount
+la Copia aspersionis
+
+@ Splatter Size
+la Magnitudo aspersionis
+
+@ Start Game
+la Lusum incipere
+
+@ Staying underwater doesn't hurt
+la Sub aqua manere non nocet
+
+@ Stick Look Pitch
+la Aspectus verticalis vectis
+
+@ Stick Look Yaw
+la Aspectus horizontalis vectis
+
+@ Strafe Left
+la Gradus sinistrorsum
+
+@ Strafe Right
+la Gradus dextrorsum
+
+@ Strength of the surface swell and rings
+la Vis tumoris et circulorum superficiei
+
+@ Stun Duration
+la Duratio stuporis
+
+@ Style
+la Stilus
+
+@ Supersampling
+la Supersampling
+
+@ Surface Hit Effects
+la Effectus ictuum in superficie
+
+@ Swim Down
+la Deorsum natare
+
+@ Targets
+la Scopi
+
+@ Teamplay
+la Lusus turmarum
+
+@ Texture Filter
+la Filtrum texturarum
+
+@ Third person
+la Tertia persona
+
+@ Thud
+la Fragor
+
+@ Tick
+la Tic
+
+@ Time Limit
+la Limes temporis
+
+@ Time Stretch
+la Extensio temporis
+
+@ Toggle Attack
+la Ferire alternans
+
+@ Toggle Run
+la Currere alternans
+
+@ Toggle auto-aim
+la Collimatio automatica alternans
+
+@ Touch Controls
+la Moderamina tactilia
+
+@ Touchscreen
+la Quadrum tactile
+
+@ Tough Enemy Health
+la Salus hostium durorum
+
+@ Tough enemies only
+la Hostes duri tantum
+
+@ Trail Colour
+la Color vestigii
+
+@ Translate Console
+la Consolatorium vertere
+
+@ Translucent Water
+la Aqua translucida
+
+@ Treble
+la Acuti
+
+@ Turn Left
+la Sinistrorsum vertere
+
+@ Turn Right
+la Dextrorsum vertere
+
+@ Underwater FX
+la Effectus subaquatici
+
+@ Use Bullet Time Meter
+la Mensuram temporis lenti adhibere
+
+@ VSync
+la VSync
+
+@ View Bob
+la Nutatio aspectus
+
+@ Viewmodels
+la Exemplaria telorum
+
+@ Volume
+la Volumen
+
+@ Water Opacity
+la Opacitas aquae
+
+@ Water Quality
+la Qualitas aquae
+
+@ Water Settings
+la Optiones aquae
+
+@ Weapon Wheel
+la Rota telorum
+
+@ Weapon Wheel Slowdown
+la Retardatio rotae telorum
+
+@ Weapons
+la Tela
+
+@ Weapons Position
+la Locus telorum
+
+@ Where center-screen messages appear
+la Ubi nuntii in medio quadro appareant
+
+@ Where pickup and event messages appear
+la Ubi nuntii rerum collectarum et eventuum appareant
+
+@ White
+la Albus
+
+@ Yaw Sensitivity
+la Sensibilitas horizontalis
+
+@ Yellow
+la Flavus
+
+# lowercase choice values
+@ T
+la T
+
+@ always
+la semper
+
+@ auto
+la auto
+
+@ banded
+la fasciatum
+
+@ borderless
+la sine margine
+
+@ bottom center
+la imo medio
+
+@ bottom left
+la imo sinistro
+
+@ bottom right
+la imo dextro
+
+@ box
+la quadratum
+
+@ broken square
+la quadratum fractum
+
+@ classic
+la classicus
+
+@ coarse
+la crassum
+
+@ cooperative
+la cooperativus
+
+@ cross
+la crux
+
+@ cross + dot
+la crux + punctum
+
+@ cyan
+la cyaneus
+
+@ dashed
+la lineolatum
+
+@ deathmatch
+la deathmatch
+
+@ deuteranopia
+la deuteranopia
+
+@ diagonal streaks
+la striae obliquae
+
+@ diamond
+la rhombus
+
+@ dot
+la punctum
+
+@ double
+la duplex
+
+@ double chevrons
+la anguli duplices
+
+@ double diagonals
+la obliquae duplices
+
+@ easy
+la facilis
+
+@ fine
+la subtile
+
+@ fit output
+la ad exitum aptare
+
+@ flick stick
+la flick stick
+
+@ fullscreen
+la plenum quadrum
+
+@ gap cross
+la crux aperta
+
+@ green
+la viridis
+
+@ grey
+la cinereus
+
+@ half speed
+la dimidia celeritas
+
+@ hard
+la difficilis
+
+@ high
+la alta
+
+@ huge
+la ingens
+
+@ immersive
+la immersivus
+
+@ intense
+la intensus
+
+@ large
+la magnus
+
+@ larger
+la maior
+
+@ largest
+la maximus
+
+@ linear
+la linearis
+
+@ low
+la humilis
+
+@ lower
+la inferior
+
+@ magenta
+la magenta
+
+@ medium
+la media
+
+@ middle
+la medium
+
+@ middle left
+la medio sinistro
+
+@ middle right
+la medio dextro
+
+@ modern
+la modernus
+
+@ nearest
+la proximus
+
+@ nightmare
+la incubus
+
+@ nintendo
+la Nintendo
+
+@ no team damage
+la sine damno sociorum
+
+@ none
+la nullum
+
+@ normal
+la solitum
+
+@ off
+la inactivum
+
+@ off while held
+la inactivum dum tenetur
+
+@ on
+la activum
+
+@ only while held
+la tantum dum tenetur
+
+@ playstation
+la PlayStation
+
+@ protanopia
+la protanopia
+
+@ quarter speed
+la quarta celeritas
+
+@ red
+la ruber
+
+@ short diagonals
+la obliquae breves
+
+@ single
+la simplex
+
+@ small
+la parvus
+
+@ solid
+la continuum
+
+@ spectacle
+la spectaculum
+
+@ subtle
+la modicus
+
+@ team damage
+la damnum sociorum
+
+@ top center
+la summo medio
+
+@ top left
+la summo sinistro
+
+@ top right
+la summo dextro
+
+@ triple
+la triplex
+
+@ tritanopia
+la tritanopia
+
+@ upper
+la superior
+
+@ white
+la albus
+
+@ whole screen
+la totum quadrum
+
+@ windowed
+la in fenestra
+
+@ xbox
+la Xbox
+
+@ yellow
+la flavus
+
+# ==== tooltips.txt ====
+
+# Options help lines (tooltips) and reasons for disabled rows.
+@ 2D aiming turns the view continuously with the right stick; flick stick snaps the view to where you push the stick, then turning the stick rotates it
+la Collimatio 2D aspectum vecte dextro continenter vertit; flick stick aspectum statim eo dirigit quo vectem impellis, deinde vectis rotatus eum vertit
+
+@ 3D resolution relative to the window; the UI stays sharp
+la Resolutio 3D ad fenestram relata; interfacies acuta manet
+
+@ 3D view keeps the HUD and menus sharp; whole screen runs them through the shader too
+la Visus 3D HUD et indices acutos servat; totum quadrum eos quoque per shader mittit
+
+@ A Quake III style railgun: a slug that pierces every enemy on its line, using 2 cells a shot and refiring every 1.5 s; select it through its assigned weapon slot (Add-ons)
+la Railgun more Quake III: glans quae omnem hostem in linea sua transfigit, 2 cellas per ictum consumit et singulis 1,5 s iterum ferit; per locum teli sibi assignatum elige (Additamenta)
+
+@ A Zelda-style hookshot: fire sends a chain hook out; it latches onto hookable surfaces or enemies and reels you in; fire again to let go
+la Uncus more Zelda: ictus uncum catenatum emittit, qui superficiebus aptis vel hostibus haeret teque attrahit; iterum feri ut dimittas
+
+@ Also translates the engine's console messages; off keeps them in English
+la Nuntios consolatorii machinae quoque vertit; inactivum eos Anglice servat
+
+@ Automatically acquire another enemy while holding Lock-on after losing a target
+la Alium hostem sponte capit, dum Captura tenetur, scopo amisso
+
+@ Blends between animation frames of monsters and weapons
+la Imagines animationis monstrorum et telorum inter se miscet
+
+@ Blood stains surfaces and bodies; cosmetic, independent of particle packs
+la Sanguis superficies et corpora maculat; ad speciem tantum, a fasciculis particularum independens
+
+@ Bloom glow around bright lights and heat sources; medium uses 4 taps, high uses 8, low disables halo taps
+la Fulgor circa lumina clara et fontes caloris; media 4 exempla adhibet, alta 8, humilis halonem tollit
+
+@ Blurs fast-moving monsters, projectiles and doors (not camera turns)
+la Monstra, proiectilia et ianuas celeriter moventia obscurat (non conversiones camerae)
+
+@ Blurs the screen edges during fast falls and launches; keeps the centre clear. Reduce Motion disables it
+la Margines quadri in casibus et iactibus celeribus obscurat; medium clarum manet. Motum minuere id tollit
+
+@ Brightness of the underwater light patterns
+la Claritas figurarum lucis sub aqua
+
+@ Caps mark count, lifetime, airborne droplets and wound/gib painting; low skips enemy wounds and gib trails
+la Numerum et durationem vestigiorum, guttas volantes et maculas vulnerum/frustorum terminat; humilis vulnera hostium et vestigia frustorum omittit
+
+@ Caps shader input at output size so 200% render scale keeps 3D sharpness without 4x shader cost; low scales stay low-res
+la Initum shader ad magnitudinem exitus terminat, ut scala reddendi 200% aciem 3D sine quadruplici impensa shader servet; scalae humiles resolutione humili manent
+
+@ Classic: the original status bar; modern: compact elements at the screen edges
+la Classicus: tabula status originalis; modernus: elementa compacta in marginibus quadri
+
+@ Coat atlas resolution, rebuild rate and shader detail: low builds smaller coats less often with fast shading; high uses full detail
+la Resolutio atlantis tegumentorum, frequentia reficiendi et subtilitas shader: humilis tegumenta minora rarius cum umbratione celeri facit; alta plenam subtilitatem adhibet
+
+@ Colour of the railgun's spiral trail; split-screen players each get the next colour along
+la Color vestigii spiralis railgun; in quadro diviso quisque lusor colorem sequentem accipit
+
+@ Damage the railgun deals to each enemy it passes through (Quake III: 100)
+la Damnum quod railgun cuique hosti transfixo infert (Quake III: 100)
+
+@ Dark backdrop behind on-screen messages for readability
+la Fundus obscurus post nuntios in quadro, ut facilius legantur
+
+@ Dark border keeps the crosshair visible on any background
+la Margo obscurus reticulum in quovis fundo conspicuum servat
+
+@ Darkens corners and contact areas where geometry meets; higher quality is sharper
+la Angulos et loca contactus ubi geometria concurrit obscurat; qualitas altior acutior est
+
+@ Debris lands on and is carried or shoved by doors, lifts and platforms
+la Rudera in ianuis, pegmatis et suggestis consistunt et ab eis feruntur vel truduntur
+
+@ Detail for caustics, ripples and splashes: low uses smaller budgets and shorter view distance; high uses larger budgets and farther view distance
+la Subtilitas causticorum, undularum et asperginum: humilis copias minores et distantiam aspectus breviorem adhibet; alta copias maiores et distantiam longiorem
+
+@ Disabled while Enhanced Particles is on: its particles replace the GLQuake and Classic styles
+la Inactivum dum Particulae auctae activae sunt: earum particulae stilos GLQuake et classicum substituunt
+
+@ Disabled while Enhanced Water is on: its own underwater effects replace the classic and GLQuake view warps
+la Inactivum dum Aqua aucta activa est: eius effectus subaquatici distortiones classicam et GLQuake substituunt
+
+@ Draw the predicted grenade path as a solid or dashed line
+la Iter praedictum pyroboli linea continua vel lineolata pingit
+
+@ Draw the view out of the linked portal inside each portal; off shows flat discs (fastest)
+la In quaque porta aspectum ex porta coniuncta pingit; inactivum discos planos monstrat (celerrimum)
+
+@ Droplets spray up when things enter or leave water, slime or lava
+la Guttae exsiliunt cum res aquam, limum vel lavam intrant aut relinquunt
+
+@ Emulates the original 8-bit palette of software rendering
+la Paletam originalem 8-bit reddendi programmatici imitatur
+
+@ Every level starts with only the shotgun and axe, as if started fresh
+la Quaeque tabula cum sclopeto et securi tantum incipit, quasi ab integro
+
+@ Explosion damage for each remotely detonated sticky bomb
+la Damnum explosionis cuiusque bombae glutinosae procul accensae
+
+@ Extra freeze milliseconds for every 10 damage dealt, so heavy hits stop longer
+la Millisecundae congelationis additae pro singulis 10 damni illati, ut ictus graves diutius sistant
+
+@ First person, a third-person camera centered behind the player, or one over the right or left shoulder; third person hides viewmodels
+la Prima persona, camera tertiae personae post lusorem centrata, vel supra umerum dextrum aut sinistrum; tertia persona exemplaria telorum celat
+
+@ Flash the selected marker on confirmed hits; colors are shared with the crosshair
+la Signum electum in ictibus confirmatis fulget; colores cum reticulo communes sunt
+
+@ Freeze for every enemy, or only for enemies that were tough before the hit
+la Congelatio pro omni hoste, vel tantum pro hostibus qui ante ictum duri erant
+
+@ Freeze the game briefly when you damage an enemy; single player with add-ons only
+la Lusum breviter congelat cum hostem laedis; tantum lusor singularis cum additamentis
+
+@ Gibs tumble and barrels throw shrapnel; shots and blasts push them (cosmetic only)
+la Frusta volvuntur et dolia schidias iaciunt; ictus et explosiones ea impellunt (ad speciem tantum)
+
+@ Health an enemy must have had before the hit to count as tough
+la Salus quam hostis ante ictum habuisse debet ut durus habeatur
+
+@ Hits dealing less damage than this do not freeze the game; the default 10 skips nails and shotgun pellets
+la Ictus minoris damni lusum non congelant; valor praefinitus 10 clavos et globulos sclopeti omittit
+
+@ Hold fire and sweep the crosshair over monsters to queue them, release to throw: it stuns each in turn and flies back; alt-fire clears the queue
+la Ictum tene et reticulum super monstra duc ut in ordinem redigantur, dimitte ut iacias: singula vicissim stupefacit et revolat; ictus alter ordinem purgat
+
+@ Hold: keep Lock-on held. Toggle: press Auto-aim Toggle to enable automatic acquisition. Click look stick to switch targets
+la Tenere: Capturam tene. Alternans: preme Collimationem automaticam alternantem ut captura automatica activetur. Vectem aspectus preme ut scopos mutes
+
+@ How close an enemy must be to the crosshair for automatic acquisition in toggle mode (degrees)
+la Quam prope reticulum hostis esse debeat ut modo alternanti sponte capiatur (gradus)
+
+@ How far the view tilts up and down when you tilt the controller (pitch axis)
+la Quantum aspectus sursum deorsumque inclinetur cum moderatrum inclinas (axis verticalis)
+
+@ How far the view turns left and right when you turn the controller (yaw axis)
+la Quantum aspectus sinistrorsum dextrorsumque vertatur cum moderatrum vertis (axis horizontalis)
+
+@ How far the view turns when you drag on the right half of the screen
+la Quantum aspectus vertatur cum in dimidia parte dextra quadri trahis
+
+@ How fast the boomerang flies (units per second)
+la Quam celeriter boomerang volet (unitates per secundam)
+
+@ How hard shots and explosions push debris around
+la Quam fortiter ictus et explosiones rudera impellant
+
+@ How hard the Powerwasher's water pushes enemies
+la Quam fortiter aqua Lavatoris pressorii hostes impellat
+
+@ How long a hit freezes the game, in milliseconds
+la Quamdiu ictus lusum congelet, in millisecundis
+
+@ How strongly fog covers the sky when fog is on
+la Quam valde nebula caelum tegat cum nebula activa est
+
+@ How the view distorts underwater: Classic ripples the whole screen like software Quake, GLQuake slowly stretches and squashes the view
+la Quomodo aspectus sub aqua distorqueatur: classicus totum quadrum undulat ut Quake programmaticum, GLQuake aspectum lente extendit et comprimit
+
+@ Ignores gyro rotation slower than this many degrees per second, to hide hand tremor
+la Rotationem gyroscopii tardiorem tot gradibus per secundam neglegit, ut tremor manus celetur
+
+@ Immersive: appears for a few seconds only when its value changes
+la Immersivus: paucas secundas tantum apparet cum valor mutatur
+
+@ Keeps textures sharp on floors and walls seen at steep angles
+la Texturas in pavimentis et parietibus sub angulis acutis visis acutas servat
+
+@ Lights from rockets, muzzle flashes and explosions brighten nearby walls
+la Lumina rochetarum, fulgurum ictuum et explosionum parietes propinquos illustrant
+
+@ Liquid surfaces swell and ring out where things move through them
+la Superficies liquidae tument et circulos faciunt ubi res per eas moventur
+
+@ Lobs sticky bombs (rockets ammo) that cling to walls, doors and monsters; alt-fire detonates them all
+la Bombas glutinosas (munitio rochetarum) iacit quae parietibus, ianuis et monstris haerent; ictus alter omnes accendit
+
+@ Look of the classic particles: GLQuake draws soft round dots, Classic draws square pixels like software Quake
+la Species particularum classicarum: GLQuake puncta rotunda et mollia pingit, classicus pixella quadrata ut Quake programmaticum
+
+@ Low skips the background smear halo and uses fewer blur samples; high keeps the full halo and smoother streaks
+la Humilis halonem fundi omittit et pauciora exempla adhibet; alta halonem plenum et strias leniores servat
+
+@ Low: hard particle edges, half the scripted particles and fewer hit sparks. Medium: soft edges. High: soft edges checked per MSAA sample, most hit sparks
+la Humilis: margines particularum duri, dimidium particularum scriptarum et pauciores scintillae. Media: margines molles. Alta: margines molles per exemplum MSAA probati, plurimae scintillae
+
+@ Marks fade out before expiring; oldest marks are recycled at the limit
+la Vestigia evanescunt antequam exstinguantur; vetustissima ad limitem iterum adhibentur
+
+@ Max nested portal reflections to draw; each level redraws the scene
+la Maximus numerus portarum insitarum pingendarum; quisque gradus scaenam iterum pingit
+
+@ Max portals per screen with a live view; each one redraws the scene
+la Maximus numerus portarum cum aspectu vivo in quadro; quaeque scaenam iterum pingit
+
+@ Maximum distance for acquiring and keeping an enemy locked
+la Distantia maxima ad hostem capiendum et tenendum
+
+@ Minimum gap between freezes, so shotgun pellets and rapid fire count once; kills ignore it
+la Intervallum minimum inter congelationes, ut globuli sclopeti et ictus crebri semel numerentur; caedes id neglegunt
+
+@ Modern terminal console with autocomplete popup, history search, ANSI colors, bash shell and piping; off uses the classic Quake console
+la Consolatorium modernum terminalis cum complemento automatico, quaestione historiae, coloribus ANSI, testa bash et fistulis; inactivum consolatorium classicum Quake adhibet
+
+@ Monsters take proportionally less damage at higher values; above 100% is harder
+la Monstra valoribus altioribus pro rata minus damni accipiunt; supra 100% difficilius est
+
+@ Moving gibs leave blood on surfaces they touch
+la Frusta moventia sanguinem in superficiebus tactis relinquunt
+
+@ Multiplier on the freeze when the hit kills the enemy; 1 means no extra
+la Multiplicator congelationis cum ictus hostem necat; 1 nihil additum significat
+
+@ Multiplies ammo from pickups (up to the normal carry limit); below 100% is harder
+la Munitionem collectam multiplicat (usque ad limitem solitum); infra 100% difficilius est
+
+@ Multiplies health from pickups (up to 100, or the item's own limit); below 100% is harder
+la Salutem collectam multiplicat (usque ad 100, vel limitem rei propriam); infra 100% difficilius est
+
+@ Nails stick to wood and bodies; hard surfaces deflect them to the floor
+la Clavi ligno et corporibus haerent; superficies durae eos ad pavimentum deflectunt
+
+@ Nearest keeps crisp classic pixels; linear smooths textures
+la Proximus pixella classica acuta servat; linearis texturas lenit
+
+@ New Game: Add-ons
+la Novus lusus: Additamenta
+
+@ New Game: Customize
+la Novus lusus: Accommodare
+
+@ Night vision: how much dark areas are brightened; thermal: how strongly heat stands out
+la Visio nocturna: quantum loca obscura illustrentur; thermica: quam valde calor emineat
+
+@ Night-vision and thermal goggles, cycle normal, night vision and thermal with Change Goggles (Add-ons), or use the Equipment Wheel
+la Perspicilla nocturna et thermica: inter solitum, nocturnum et thermicum alterna per Perspicilla mutare (Additamenta), vel Rotam instrumentorum adhibe
+
+@ No single freeze lasts longer than this, however much damage or kill bonus adds
+la Nulla congelatio diutius durat, quantumcumque damnum vel praemium caedis addit
+
+@ Oldest marks and nails are recycled at this shared limit
+la Vestigia et clavi vetustissimi ad hunc limitem communem iterum adhibentur
+
+@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
+la Vectis et globuli in quadro: auto ea post tactum monstrat et celat cum aliud instrumentum adhibetur
+
+@ Only autosaves: quicksaves and the Save menu are off
+la Autoservationes tantum: servationes celeres et index servandi inactiva sunt
+
+@ Place every weapon at the center, right or left of the view, or hide all viewmodels
+la Omne telum in medio, dextra vel sinistra aspectus pone, vel omnia exemplaria telorum cela
+
+@ Play your chosen hit or kill cue when you damage an enemy
+la Signum ictus vel caedis electum sonat cum hostem laedis
+
+@ Playback speed: faster sounds shorter and higher
+la Celeritas reproductionis: celerior brevior et acutior sonat
+
+@ Plays the Quake theme in the main menu when no game is running
+la Thema Quake in indice principali canit cum nullus lusus agitur
+
+@ Portals farther away than this are drawn as flat discs
+la Portae longius remotae ut disci plani pinguntur
+
+@ Press attack once to keep firing, again to stop
+la Ferire semel preme ut perpetuo ferias, iterum ut desinas
+
+@ Press run once to switch between running and walking
+la Currere semel preme ut inter cursum et ambulationem alternes
+
+@ Raise or lower the tone independently of sound length
+la Sonum acuit vel gravat sine respectu longitudinis
+
+@ Red screen edges show where damage came from: top is front, bottom is behind; Screen Flashes controls their strength
+la Margines quadri rubri monstrant unde damnum venerit: summum ante, imum post; Fulgura quadri vim eorum regunt
+
+@ Replaces the classic dot particles with glowing sparks, smoke and blood; mods with their own particle effects keep them
+la Particulas classicas punctorum scintillis lucentibus, fumo et sanguine substituit; modi cum effectibus particularum propriis eos servant
+
+@ Resolution and detail inside portal and teleporter views; lower tiers trim nested effects
+la Resolutio et subtilitas in aspectibus portarum et teleportatorum; gradus inferiores effectus insitos minuunt
+
+@ Rippling light patterns on surfaces under water and slime
+la Figurae lucis undulantes in superficiebus sub aqua et limo
+
+@ Scales all damage you take; above 100% is harder
+la Omne damnum acceptum scalat; supra 100% difficilius est
+
+@ Screen edge for this element; elements on the same spot stack
+la Margo quadri huius elementi; elementa eodem loco cumulantur
+
+@ Seconds a monster hit by the boomerang stays stunned
+la Secundae quibus monstrum boomerang ictum stupefactum manet
+
+@ Seconds impact marks and stuck nails stay before fading out; independent of Particle Quality
+la Secundae quibus vestigia ictuum et clavi fixi manent antequam evanescant; a Qualitate particularum independens
+
+@ Seconds messages at the top of the screen stay up
+la Secundae quibus nuntii in summo quadro manent
+
+@ Seconds the flick stick snap takes; lower is faster
+la Secundae quas saltus flick stick sumit; minus celerius est
+
+@ See through enhanced water; enables Water Opacity
+la Per aquam auctam videre; Opacitatem aquae activat
+
+@ Sensor grain, scanlines and flicker of the goggle image
+la Granum sensorii, lineae explorationis et tremor imaginis perspicillorum
+
+@ Shades every anti-aliasing sample; needs Anti-aliasing on
+la Omne exemplum laevigationis umbrat; Laevigationem marginum activam requirit
+
+@ Shifts colors so they stay distinct for the chosen color blindness
+la Colores movet ut pro caecitate colorum electa distincti maneant
+
+@ Shotgun hits leave small surface marks (cosmetic only)
+la Ictus sclopeti parva vestigia in superficiebus relinquunt (ad speciem tantum)
+
+@ Show corner ticks at screen centre while locked, even with Crosshair off
+la Notas angulares in medio quadro monstrat dum hostis captus est, etiam reticulo inactivo
+
+@ Show where grenades and other arcing shots will fly, bounce and land; local play only, not in deathmatch
+la Monstrat quo pyroboli et alii ictus arcuati volaturi, resilituri et casuri sint; lusus localis tantum, non in deathmatch
+
+@ Shows text for important sounds: doors, alerted enemies, secrets, pickups
+la Textum pro sonis gravibus monstrat: ianuae, hostes excitati, arcana, res collectae
+
+@ Shows the distance fog that maps and mods set; off always gives clear view
+la Nebulam distantiae a tabulis et modis statutam monstrat; inactivum semper aspectum clarum praebet
+
+@ Shows the player face next to the health number
+la Vultum lusoris iuxta numerum salutis monstrat
+
+@ Simulation detail, step rate, fade-out lifetimes and caps for gibs and shrapnel; low also skips mover collision
+la Subtilitas simulationis, frequentia graduum, durationes evanescendi et limites frustorum et schidiarum; humilis etiam collisiones cum rebus moventibus omittit
+
+@ Size of the on-screen buttons and move stick
+la Magnitudo globulorum et vectis motus in quadro
+
+@ Slowly heals up to 100 health after 5 seconds without being hit
+la Post 5 secundas sine ictu lente usque ad 100 salutis sanat
+
+@ Slows stick look while the crosshair is over an enemy
+la Aspectum vectis retardat dum reticulum super hostem est
+
+@ Slows the game down while the weapon wheel is open
+la Lusum retardat dum rota telorum aperta est
+
+@ Slows the whole game down; single player only. Saves and demos stay compatible with other ports
+la Totum lusum retardat; lusor singularis tantum. Servationes et demonstrationes cum aliis versionibus congruae manent
+
+@ Small camera jolt on each freeze; off with Reduce Motion
+la Parvus camerae concussus in quaque congelatione; inactivum cum Motum minuere
+
+@ Snap and track enemies in local play, including split-screen; unavailable online
+la Hostes in lusu locali capit et sequitur, etiam in quadro diviso; in rete non praesto
+
+@ Sparks, smoke, chips, splinters and splashes fly off whatever your shots hit
+la Scintillae, fumus, fragmenta, assulae et aspergines ex omni re quam ictus tui feriunt evolant
+
+@ Spawns extra copies of every monster around the original when a level starts
+la Initio tabulae exemplaria addita cuiusque monstri circa originale gignit
+
+@ Strength of the full-screen flashes for damage, pickups and powerups
+la Vis fulgurum totius quadri pro damno, rebus collectis et potentiis
+
+@ Stretch or shorten the sound while keeping its pitch
+la Sonum extendit vel contrahit altitudine servata
+
+@ Surface opacity; requires Enhanced Water and Translucent Water
+la Opacitas superficiei; Aquam auctam et Aquam translucidam requirit
+
+@ The hook latches onto metal surfaces (metal, tech, computer panels, copper)
+la Uncus superficiebus metallicis haeret (metallum, technica, tabulae computatrales, cuprum)
+
+@ The hook latches onto stone, brick, rock and any surface not recognised as wood or metal
+la Uncus lapidi, lateri, saxo et omni superficiei haeret quae non ut lignum vel metallum agnoscitur
+
+@ The hook latches onto wooden surfaces (texture names like wood, crate, plank)
+la Uncus superficiebus ligneis haeret (nomina texturarum ut wood, crate, plank)
+
+@ Turn the controller's motion sensor into a look input; needs a pad with a gyroscope
+la Sensorium motus moderatri in initum aspectus vertit; moderatrum cum gyroscopio requirit
+
+@ Turns off view bob, strafe tilt and the camera kick when hit or firing
+la Nutationem aspectus, inclinationem lateralem et concussum camerae in ictu vel iaculatione tollit
+
+@ Turns on the extra liquid effects; Water Settings controls each one
+la Effectus liquidorum additos activat; Optiones aquae singulos regunt
+
+@ Turns the view to follow a moving enemy you are aiming at
+la Aspectum vertit ut hostem moventem quem collimas sequatur
+
+@ Turns the view when you roll the controller sideways; 0 disables it, negative reverses it
+la Aspectum vertit cum moderatrum in latus volvis; 0 tollit, valor negativus invertit
+
+@ Two-portal gun: fire and alt-fire place linked portals on flat walls; assign a weapon slot in Add-ons
+la Telum duarum portarum: ictus et ictus alter portas coniunctas in parietibus planis ponunt; locum teli in Additamentis assigna
+
+@ Unlocks the FX Settings page: enhanced particles, impact effects and blood splatter
+la Paginam Optiones effectuum reserat: particulae auctae, effectus ictuum et aspersio sanguinis
+
+@ Uses the 2021 re-release's smoother MD5 models (and MD3 replacements from mods) instead of the classic ones. Applies on the next map load
+la Exemplaria MD5 leniora editionis anni 2021 (et substituta MD3 ex modis) pro classicis adhibet. Valet cum tabula proxima oneratur
+
+@ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
+la Lumen coloratum tabulae adhibet (plica .lit vel frustum BSPX); inactivum lumen album originale praebet. Valet cum tabula proxima oneratur
+
+@ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
+la Segmenta iacti, numerus guttarum et umbratio nitida liquoris: humilis rivos translucidos simpliciores adhibet; alta iactus lenes et nitidos
+
+@ When gyro looking applies: always, off while +gyroaction is held, or only while it is held
+la Quando aspectus gyroscopicus valeat: semper, inactivum dum +gyroaction tenetur, vel tantum dum tenetur
+
+@ Which weapons trigger the freeze; melee covers the axe and any mod weapon used at close range without ammo
+la Quae tela congelationem excitent; comminus securim et omne telum modi comminus sine munitione adhibitum complectitur
+
+@ Your own rockets and grenades don't hurt you; rocket jumps still work
+la Rochetae et pyroboli tui te non laedunt; saltus rochetarum adhuc valent
+
+# ==== ui.txt ====
+
+# Menus and pop-ups outside the options pages: save cards, launch, presets,
+# add-on browser, map packs, hints and dialogs.
+@ Select
+la Eligere
+
+@ Back
+la Retro
+
+@ Cancel
+la Abrogare
+
+@ Confirm
+la Confirmare
+
+@ Scroll
+la Volvere
+
+@ Section
+la Sectio
+
+@ Bind
+la Assignare
+
+@ Cancel binding
+la Assignationem abrogare
+
+@ Clear
+la Purgare
+
+@ Clear pad
+la Moderatrum purgare
+
+@ Remap
+la Reassignare
+
+@ Type
+la Scribere
+
+@ Shift
+la Shift
+
+@ Done
+la Factum
+
+@ Del
+la Dele
+
+@ Space
+la Spatium
+
+@ Save
+la Servare
+
+@ Load
+la Onerare
+
+@ Delete
+la Delere
+
+@ Play
+la Ludere
+
+@ Yes
+la Ita
+
+@ No
+la Non
+
+@ OK
+la OK
+
+@ System
+la Systema
+
+@ Language
+la Lingua
+
+@ Help
+la Auxilium
+
+@ Fixed for this game: it was started without Customize
+la Huic lusui fixum: sine Accommodare incohatus est
+
+@ Press a button or key to bind (Start cancels)
+la Preme globulum vel clavem assignandam (Start abrogat)
+
+@ Press button...
+la Preme globulum...
+
+@ Press key...
+la Preme clavem...
+
+@ Replace this binding?
+la Hanc assignationem substituere?
+
+@ is already assigned
+la iam assignatum est
+
+@ {} already assigned
+la {}: iam assignatum
+
+@ Open Controls to remap Lock-on?
+la Moderamina aperire ut Captura reassignetur?
+
+@ Lock-on
+la Captura
+
+@ Auto-aim Toggle
+la Collimatio automatica alternans
+
+@ Keyboard
+la Claviatura
+
+@ Controller
+la Moderatrum
+
+# main menu, dialogs and screens
+@ Map Packs
+la Fasciculi tabularum
+
+@ Customize
+la Accommodare
+
+@ Level Select
+la Tabulam eligere
+
+@ Really quit?
+la Vere exire?
+
+@ You died
+la Mortuus es
+
+@ Continue from most recent save
+la A servatione recentissima pergere
+
+@ Select save
+la Servationem eligere
+
+@ Restart level
+la Tabulam iterum incipere
+
+@ Return to main menu
+la Ad indicem principalem redire
+
+@ (disabled)
+la (inactivum)
+
+@ (fixed for this game)
+la (huic lusui fixum)
+
+@ (off)
+la (inactivum)
+
+@ Apply Display Changes
+la Mutationes ostensionis adhibere
+
+@ Display Mode
+la Modus ostensionis
+
+@ Resolution
+la Resolutio
+
+@ desktop
+la mensa
+
+@ Preset
+la Praeconfiguratio
+
+@ Map
+la Tabula
+
+@ Reset Shader Settings
+la Optiones shader restituere
+
+@ Reset to Defaults
+la Praefinita restituere
+
+@ Searching...
+la Quaerens...
+
+@ This game only autosaves.
+la Hic lusus tantum sponte servat.
+
+@ (No Manual Saves modifier)
+la (modificator Nullae servationes manuales)
+
+@ End the current game?
+la Lusum praesentem finire?
+
+@ Unsaved progress will be lost.
+la Progressus non servatus amittetur.
+
+@ End game
+la Lusum finire
+
+@ Overwrite
+la Superscribere
+
+@ Overwrite "{}"?
+la "{}" superscribere?
+
+@ Saved {}
+la Servatum: {}
+
+@ Start a new game?
+la Novum lusum incipere?
+
+@ New game
+la Novus lusus
+
+@ New Game
+la Novus lusus
+
+@ CUSTOM
+la PROPRIUM
+
+@ Customize Experience
+la Experientiam accommodare
+
+@ Disable All
+la Omnia tollere
+
+@ Disable All Modifications
+la Omnes modificationes tollere
+
+@ Saves load in other source ports too.
+la Servationes etiam in aliis versionibus onerantur.
+
+@ Standard rules, no add-ons.
+la Regulae solitae, nulla additamenta.
+
+@ Choose skill
+la Difficultatem eligere
+
+@ The current game will end
+la Lusus praesens finietur
+
+@ Easy
+la Facilis
+
+@ Normal
+la Solitus
+
+@ Hard
+la Difficilis
+
+@ Nightmare
+la Incubus
+
+# graphics preset pop-up
+@ Choose a Graphics Preset
+la Praeconfigurationem graphicam elige
+
+@ Classic
+la Classicus
+
+@ Like the re-release: enhanced models,
+la Ut editio nova: exemplaria aucta,
+
+@ no added effects.
+la nulli effectus additi.
+
+@ Enhanced
+la Auctus
+
+@ Every enhancement at its highest quality.
+la Omnia augmenta summa qualitate.
+
+@ Needs a capable GPU.
+la GPU validam requirit.
+
+@ Low-End
+la Modicus
+
+@ Fastest. No anti-aliasing, original
+la Celerrimus. Sine laevigatione, exemplaria
+
+@ models, lowest effect quality.
+la originalia, effectus infima qualitate.
+
+@ Esc keeps the defaults
+la Esc praefinita servat
+
+@ Everything can be changed later in Options.
+la Omnia postea in Options mutari possunt.
+
+@ Keep Defaults
+la Praefinita servare
+
+# save and load cards
+@ Save Game
+la Lusum servare
+
+@ Load Game
+la Lusum onerare
+
+@ Autosaves
+la Autoservationes
+
+@ newest first
+la recentissimae primae
+
+@ Saves: {}
+la Servationes: {}
+
+@ Browse Autosaves
+la Autoservationes perlustrare
+
+@ Every retained autosave, newest first
+la Omnes autoservationes retentae, recentissimae primae
+
+@ New save
+la Nova servatio
+
+@ Select to save your game here
+la Elige ut lusum hic serves
+
+@ No autosaves yet
+la Nondum autoservationes
+
+@ Autosaves are made on level entry, secrets and more (Options > Gameplay)
+la Autoservationes fiunt initio tabulae, arcanis inventis et aliter (Options > Ratio ludendi)
+
+@ No saves yet
+la Nondum servationes
+
+@ Save from the Single Player menu, or press F6 to quicksave
+la Serva ex indice Single Player, vel F6 preme ut celeriter serves
+
+@ No picture
+la Nulla imago
+
+@ Del: delete save
+la Del: servationem delere
+
+@ Delete "{}"?
+la "{}" delere?
+
+@ This cannot be undone.
+la Hoc revocari non potest.
+
+@ Quicksave
+la Servatio celeris
+
+@ Autosave: {}
+la Autoservatio: {}
+
+@ unknown trigger
+la causa ignota
+
+@ Latest - {}
+la Recentissima - {}
+
+@ Health {}
+la Salus {}
+
+@ Armor {}
+la Lorica {}
+
+@ Kills {}/{}
+la Caedes {}/{}
+
+@ Secrets {}/{}
+la Arcana {}/{}
+
+@ Split-screen, {} players
+la Quadrum divisum, lusores: {}
+
+@ Co-op
+la Cooperatio
+
+@ Customized
+la Accommodatus
+
+@ Customized, {}
+la Accommodatus, {}
+
+@ Date unavailable
+la Dies ignotus
+
+@ Just now
+la Modo
+
+@ {} min ago
+la ante {} min.
+
+@ {} h ago
+la ante {} h
+
+@ Level entry
+la Initium tabulae
+
+@ Secret found
+la Arcanum inventum
+
+@ All enemies killed
+la Omnes hostes necati
+
+@ All secrets found
+la Omnia arcana inventa
+
+@ Timer
+la Intervallum
+
+# customize pages
+@ Standard rules
+la Regulae solitae
+
+@ Modifiers changed: {}
+la Modificatores mutati: {}
+
+@ no add-ons
+la nulla additamenta
+
+@ add-ons: {}
+la additamenta: {}
+
+@ Saves of this game are .qsa files: they need this source port.
+la Servationes huius lusus plicae .qsa sunt: hanc versionem requirunt.
+
+@ Nothing changed: this plays as standard Quake.
+la Nihil mutatum: hic lusus ut Quake solitum agitur.
+
+@ Changes apply now and are saved with this game (.qsa).
+la Mutationes statim valent et cum hoc lusu servantur (.qsa).
+
+@ This game started without Customize, so its rules are fixed.
+la Hic lusus sine Accommodare incohatus est, itaque regulae eius fixae sunt.
+
+@ Start a new game and choose Customize Experience.
+la Novum lusum incipe et Experientiam accommodare elige.
+
+@ These rules apply to the next customized game.
+la Hae regulae proximo lusui accommodato valent.
+
+# add-on browser
+@ Fire
+la Ictus
+
+@ Alt Fire
+la Ictus alter
+
+@ Configure Parameters >
+la Parametros configurare >
+
+@ Configure
+la Configurare
+
+@ Settings
+la Optiones
+
+@ Change slot
+la Locum mutare
+
+@ Toggle
+la Alternare
+
+@ Details
+la Singula
+
+@ Enter or click the box: toggle
+la Enter vel capsam preme: alternare
+
+@ Right / Tab / click: details
+la Dextra / Tab / preme: singula
+
+@ Input Remapping
+la Reassignatio initus
+
+@ Weapon Slot
+la Locus teli
+
+@ Customized games save as .qsa files, which need this source port.
+la Lusus accommodati ut plicae .qsa servantur, quae hanc versionem requirunt.
+
+@ This game started without Customize, so its add-ons are fixed. Customize a new game instead.
+la Hic lusus sine Accommodare incohatus est, itaque additamenta eius fixa sunt. Novum lusum potius accommoda.
+
+@ Bullet Time
+la Tempus lentum
+
+@ Change Goggles
+la Perspicilla mutare
+
+@ Dodge / Dive
+la Declinatio / Saltus
+
+@ Goggles
+la Perspicilla
+
+@ Hitstop
+la Hitstop
+
+@ Projectile Shotguns
+la Sclopeta proiectilia
+
+@ BULLET TIME: 20%
+la TEMPUS LENTUM: 20%
+
+@ NORMAL SPEED
+la CELERITAS SOLITA
+
+@ SLOW MOTION: PHYSICAL PELLETS
+la MOTUS LENTUS: GLOBULI PHYSICI
+
+@ DEMONSTRATION
+la DEMONSTRATIO
+
+@ GAMEPLAY
+la RATIO LUDENDI
+
+@ LOOP
+la ITERATIO
+
+@ Preview unavailable
+la Praevisio non praesto
+
+# shader and language help lines
+@ A setting of the chosen shader; arrows step it, Enter is not needed
+la Optio shader electi; sagittae eam mutant, Enter non necesse est
+
+@ Language of the menus, messages and the 2021 re-release's game text; System follows your computer's language
+la Lingua indicum, nuntiorum et textus lusus editionis anni 2021; Systema linguam computatri tui sequitur
+
+@ Puts every setting of the chosen shader back to the preset's defaults
+la Omnes optiones shader electi ad praefinita praeconfigurationis restituit
+
+@ RetroArch slang shader on the final image: CRT, scanlines, NTSC, sharpening; add your own in <game>/shaders
+la Shader slang RetroArch in imagine finali: CRT, lineae explorationis, NTSC, acuendum; tuos adde in <lusus>/shaders
+
+# modern console footer
+@ Shift+PgUp/Dn: height  ` : hide
+la Shift+PgUp/Dn: altitudo  ` : celare
+
+@ Tab: complete  Ctrl+R: search  bash | pipe
+la Tab: complere  Ctrl+R: quaerere  bash | fistula
+
+@ ↑ +{} lines (End to jump) 
+la ↑ +{} lineae (End ut salias) 
+
+# add-on descriptions
+@ Create two linked portals on flat walls. Fire places the first portal; Alt Fire places the second. Walk through either portal to emerge from the other. Your momentum carries through. Assign a weapon slot below: pressing that slot repeatedly cycles its ordinary weapon and every enabled add-on assigned there. Portal view quality is configurable below.
+la Duas portas coniunctas in parietibus planis crea. Ictus primam portam ponit; Ictus alter secundam. Per alterutram portam ambula ut ex altera exeas. Impetus tuus transit. Infra locum teli assigna: eundem locum iterum premendo inter telum eius solitum et omnia additamenta activa ibi assignata alternas. Qualitas aspectus portarum infra configurari potest.
+
+@ Hold Fire and sweep the crosshair over monsters to queue targets. Release Fire to throw: the boomerang visits each target, stuns it and returns to you. Alt Fire clears the queue. The weapon slot selects a group, not a separate hotkey: press it again to cycle through the weapons in that slot. Configure stun duration and flight speed below.
+la Ictum tene et reticulum super monstra duc ut scopos in ordinem redigas. Ictum dimitte ut iacias: boomerang quemque scopum petit, stupefacit et ad te redit. Ictus alter ordinem purgat. Locus teli turmam eligit, non clavem propriam: iterum preme ut per tela eius loci alternes. Durationem stuporis et celeritatem volatus infra configura.
+
+@ Hold Fire to charge a sticky bomb using rocket ammunition; release to launch. A longer charge throws it faster. Bombs cling to walls, doors and monsters. Alt Fire detonates your planted bombs together. Place a trap, retreat, then detonate it when enemies approach. Assign any weapon slot below; repeated presses cycle through the ordinary weapon and add-ons in that slot.
+la Ictum tene ut bombam glutinosam munitione rochetarum ones; dimitte ut emittas. Onus longius eam celerius iacit. Bombae parietibus, ianuis et monstris haerent. Ictus alter bombas positas simul accendit. Insidias pone, recede, deinde accende cum hostes appropinquant. Infra quemvis locum teli assigna; iterum premendo inter telum solitum et additamenta eius loci alternas.
+
+@ Fire launches a chain hook. It latches onto a permitted surface or enemy and reels you toward the anchor. Fire again or use Alt Fire to let go. Choose which materials and enemies can be hooked in Configure Parameters. Assign it to any weapon slot; repeated presses of the slot's existing binding cycle through its weapons.
+la Ictus uncum catenatum emittit. Superficiei permissae vel hosti haeret teque ad ancoram attrahit. Iterum feri vel Ictum alterum adhibe ut dimittas. Quae materiae et qui hostes unco capi possint in Parametros configurare elige. Cuivis loco teli assigna; clavem eius loci iterum premendo per tela eius alternas.
+
+@ A piercing railgun inspired by Quake III. Fire sends a slug through every enemy along its line. Each shot consumes two cells, with a 1.5 second refire interval. Damage and the spiral trail colour are configurable below. Choose a weapon slot: the slot's current binding selects and cycles the weapons assigned to it.
+la Railgun transfigens a Quake III inspiratum. Ictus glandem per omnem hostem in linea sua mittit. Quisque ictus duas cellas consumit, cum intervallo 1,5 secundarum. Damnum et color vestigii spiralis infra configurari possunt. Locum teli elige: clavis eius loci tela ei assignata eligit et alternat.
+
+@ A Portal-style gel sprayer. Fire sprays blue Repulsion gel: land, jump or run into it to bounce, and landings on it never hurt. Alt Fire sprays orange Propulsion gel: run across it to go much faster. Gel coats floors and walls until washed off with the Powerwasher. Assign a weapon slot below; repeated presses cycle the weapons in that slot.
+la Aspersorium gelatinae more Portal. Ictus gelatinam caeruleam Repulsionis spargit: in eam descende, sali vel curre ut resilias, et descensus in eam numquam nocent. Ictus alter gelatinam aurantiam Propulsionis spargit: per eam curre ut multo celerius eas. Gelatina pavimenta et parietes tegit donec Lavatore pressorio abluatur. Infra locum teli assigna; iterum premendo per tela eius loci alternas.
+
+@ A water cannon. Fire shoots a straight jet with limited reach; Alt Fire a wide, shorter fan. The water pushes enemies back, turns projectiles aside and washes away gel and blood. Push strength is configurable below. Assign a weapon slot below; repeated presses cycle the weapons in that slot.
+la Tormentum aquarium. Ictus iactum rectum spatio limitato emittit; Ictus alter flabellum latum et brevius. Aqua hostes repellit, proiectilia avertit et gelatinam sanguinemque abluit. Vis impulsus infra configurari potest. Infra locum teli assigna; iterum premendo per tela eius loci alternas.
+
+@ One equipment add-on includes both night vision and thermal vision. The Change Goggles action cycles Normal, Night Vision, Thermal, then Normal again. Night vision brightens dark rooms; thermal vision highlights living enemies. Goggles do not occupy a weapon slot. Configure intensity and sensor noise below. The binding affects only this add-on.
+la Unum additamentum instrumenti visionem nocturnam et thermicam continet. Actio Perspicilla mutare alternat Solitam, Nocturnam, Thermicam, deinde iterum Solitam. Visio nocturna conclavia obscura illustrat; visio thermica hostes vivos extollit. Perspicilla locum teli non occupant. Vim et strepitum sensorii infra configura. Assignatio hoc tantum additamentum afficit.
+
+@ Press Dodge with a movement direction on the ground or in midair: dive forward or leap backward and sideways. Diagonals are supported. Each press launches once, with a short recovery. The player body animates in third person. Assign the Dodge action below or in Controls.
+la Declinationem preme cum directione motus in solo vel in aere: prorsus te praecipita vel retro et in latus sali. Directiones obliquae sustinentur. Quaeque pressio semel emittit, cum brevi recuperatione. Corpus lusoris in tertia persona movetur. Actionem Declinatio infra vel in Moderaminibus assigna.
+
+@ Use the dedicated Bullet Time action to slow the whole local game to 20% speed. Hold is the default; Toggle switches on each press. The optional meter limits use in real seconds and regenerates while inactive. Disable the meter for unlimited use. Remap the action and configure duration and regeneration below.
+la Actione propria Tempus lentum adhibe ut totum lusum localem ad celeritatem 20% retardes. Tenere praefinitum est; Alternare quaque pressione mutat. Mensura optionalis usum in secundis veris terminat et dum inactiva est regeneratur. Mensuram tolle ut sine fine utaris. Actionem reassigna et durationem regenerationemque infra configura.
+
+@ Both shotguns and enemy grunts fire physical pellets with their original spread and damage. Fast default projectiles feel immediate; lower their speed to dodge incoming fire during bullet time. Configure projectile speed below, or reset it to the default of 10000 units per second.
+la Ambo sclopeta et milites hostiles globulos physicos cum dispersione et damno originalibus iaciunt. Proiectilia praefinita celeria statim feriunt; celeritatem eorum minue ut tempore lento ictus venientes declines. Celeritatem proiectilium infra configura, vel ad praefinitum 10000 unitatum per secundam restitue.
+
+@ Freezes the game for a split second when you damage an enemy, so hits feel heavier. Single player only. Choose which weapons trigger it (all, melee, ranged or explosives), how long it lasts and how much more a kill freezes. Advanced settings cover enemy toughness, damage scaling, cooldown and the longest freeze.
+la Lusum per momentum congelat cum hostem laedis, ut ictus graviores videantur. Lusor singularis tantum. Elige quae tela id excitent (omnia, comminus, eminus vel explosiva), quamdiu duret et quanto diutius caedes congelet. Optiones provectae duritiam hostium, scalam damni, moram et congelationem longissimam complectuntur.
+
+# map packs and the Quaddicted browser
+@ Get more maps (Quaddicted)...
+la Plures tabulae (Quaddicted)...
+
+@ Type to filter...
+la Scribe ut eliquas...
+
+@ Launch mod
+la Modum incipere
+
+@ Start first map
+la Primam tabulam incipere
+
+@ (running)
+la (agitur)
+
+@ running
+la agitur
+
+@ Recent
+la Recentia
+
+@ Name
+la Nomen
+
+@ Dir
+la Index
+
+@ Default
+la Praefinitum
+
+@ Title
+la Titulus
+
+@ Sort: {}
+la Ordo: {}
+
+@ {} installed
+la Installata: {}
+
+@ {}/{} matching
+la Congruentia: {}/{}
+
+@ {} maps, {} completed
+la Tabulae: {}, perfectae: {}
+
+@ {}/{} matching, {} completed
+la Congruentia: {}/{}, perfecta: {}
+
+@ no maps of its own
+la nullae tabulae propriae
+
+@ dir: {}
+la index: {}
+
+@ base: {}
+la basis: {}
+
+@ Browse the Quaddicted archive of
+la Archivum Quaddicted perlustra
+
+@ single-player maps and episodes,
+la tabularum et episodiorum singularium,
+
+@ then download and install them
+la deinde ea hic deprome et
+
+@ here. Each release gets its own
+la installa. Quaeque editio suam
+
+@ entry in this list.
+la inscriptionem in hoc indice habet.
+
+@ Needs an internet connection.
+la Conexionem interretialem requirit.
+
+@ Quaddicted Map Archive
+la Archivum tabularum Quaddicted
+
+@ Newest
+la Recentissima
+
+@ Author
+la Auctor
+
+@ Size
+la Magnitudo
+
+@ Loading the map list...
+la Index tabularum oneratur...
+
+@ Couldn't load the map list: {}
+la Index tabularum onerari non potuit: {}
+
+@ {} single-player releases  -  F5 refreshes
+la Editiones singulares: {}  -  F5 renovat
+
+@ {} matching
+la Congruentia: {}
+
+@ by {}
+la auctor: {}
+
+@ requires: {}
+la requirit: {}
+
+@ maps: {}
+la tabulae: {}
+
+@ Failed: {}
+la Defecit: {}
+
+@ Downloading... {}%
+la Depromitur... {}%
+
+@ Unpacking...
+la Expanditur...
+
+@ Installed in {}/  -  Enter: play
+la Installatum in {}/  -  Enter: ludere
+
+@ Enter: download and install
+la Enter: depromere et installare
+
+@ unpacking
+la expanditur
+
+@ failed
+la defecit
+
+@ installed
+la installatum
+
+@ Downloads are not available in the browser build
+la Depromptiones in versione navigatri non praesto sunt
+
+@ the map list could not be read
+la index tabularum legi non potuit
+
+@ downloading needs the curl program
+la depromptio programma curl requirit
+
+@ download failed
+la depromptio defecit
+
+@ the download is not a valid zip
+la depromptum non est zip validum
+
+@ nothing to install for this engine
+la nihil huic machinae installandum
+
+@ needs {} installed first
+la prius installandum: {}
+
+@ couldn't unpack {}
+la expandi non potuit: {}
+
+# help screen
+@ About
+la De programmate
+
+@ < Back
+la < Retro
+
+# tr_ctx keys: English shows the short word, the key says which meaning
+@ Save (a manual save, as opposed to a quicksave or autosave)
+la Servatio
+
+# ==== hud.txt ====
+
+# HUD, weapon and equipment wheels, sound captions and other in-game text.
+# Weapon, monster and item names follow the 2021 re-release's own translations.
+@ Axe
+la Securis
+
+@ Shotgun
+la Sclopetum
+
+@ Double-Barrelled Shotgun
+la Sclopetum duplex
+
+@ Nailgun
+la Sclopetum clavarium
+
+@ Super Nailgun
+la Sclopetum clavarium maius
+
+@ Grenade Launcher
+la Iaculator pyrobolorum
+
+@ Rocket Launcher
+la Iaculator rochetarum
+
+@ Thunderbolt
+la Fulmen
+
+@ Portal Gun
+la Telum portarum
+
+@ Boomerang
+la Boomerang
+
+@ Stickybomb Launcher
+la Iaculator bombarum glutinosarum
+
+@ Railgun
+la Railgun
+
+@ Hookshot
+la Uncus
+
+@ Gel Sprayer
+la Aspersorium gelatinae
+
+@ Powerwasher
+la Lavator pressorius
+
+@ Night Vision Goggles
+la Perspicilla nocturna
+
+@ Thermal Goggles
+la Perspicilla thermica
+
+@ Normal vision
+la Visio solita
+
+@ ON
+la ACTIVUM
+
+@ OFF
+la INACTIVUM
+
+@ {} (turn on)
+la {} (activare)
+
+@ {} (turn off)
+la {} (inactivare)
+
+@ Move mouse to select, release to toggle
+la Murem move ut eligas, dimitte ut alternes
+
+@ Move mouse to select, release to equip
+la Murem move ut eligas, dimitte ut instruas
+
+@ Release to toggle
+la Dimitte ut alternes
+
+@ Release to equip
+la Dimitte ut instruas
+
+@ shells
+la tubuli
+
+@ nails
+la clavi
+
+@ rockets
+la rochetae
+
+@ cells
+la cellae
+
+@ Kills: {}/{}
+la Caedes: {}/{}
+
+@ Secrets: {}/{}
+la Arcana: {}/{}
+
+@ Time {}
+la Tempus {}
+
+@ Press any button to continue...
+la Preme quemvis globulum ut pergas...
+
+@ Press any key to continue...
+la Preme quamvis clavem ut pergas...
+
+@ BULLET TIME
+la TEMPUS LENTUM
+
+@ AUTO AIM
+la COLLIMATIO AUTO.
+
+@ Crosshair
+la Reticulum
+
+@ + Marker
+la + Signum
+
+@ Hit markers off
+la Signa ictuum inactiva
+
+@ On target
+la In scopo
+
+@ On kill
+la In caede
+
+# sound captions
+@ [Secret found]
+la [Arcanum inventum]
+
+@ [Message]
+la [Nuntius]
+
+@ [Switch activated]
+la [Commutator activatus]
+
+@ [Key picked up]
+la [Clavis collecta]
+
+@ [Rune picked up]
+la [Runa collecta]
+
+@ [Teleporter]
+la [Teleportator]
+
+@ [Teleport]
+la [Teleportatio]
+
+@ [Splash]
+la [Plausus aquae]
+
+@ [Leaving water]
+la [Exitus ex aqua]
+
+@ [Door]
+la [Ianua]
+
+@ [Platform moving]
+la [Suggestus movetur]
+
+@ [Button]
+la [Globulus]
+
+@ [Health picked up]
+la [Salus collecta]
+
+@ [Armor picked up]
+la [Lorica collecta]
+
+@ [Quad Damage wearing off]
+la [Quad Damage deficit]
+
+@ [Quad Damage]
+la [Quad Damage]
+
+@ [Pentagram wearing off]
+la [Pentagramma deficit]
+
+@ [Pentagram of Protection]
+la [Pentagramma tutelae]
+
+@ [Ring wearing off]
+la [Anulus deficit]
+
+@ [Ring of Shadows]
+la [Anulus umbrarum]
+
+@ [Biosuit wearing off]
+la [Vestis biologica deficit]
+
+@ [Biosuit]
+la [Vestis biologica]
+
+@ [Item picked up]
+la [Res collecta]
+
+@ [Weapon picked up]
+la [Telum collectum]
+
+@ [Ammo picked up]
+la [Munitio collecta]
+
+@ [Explosion]
+la [Explosio]
+
+@ [Grenade launched]
+la [Pyrobolus iactus]
+
+@ [Grenade bounce]
+la [Pyrobolus resilit]
+
+@ [Rocket fired]
+la [Rocheta emissa]
+
+@ [Nails fired]
+la [Clavi emissi]
+
+@ [Lightning]
+la [Fulgur]
+
+@ [Thunder]
+la [Tonitrus]
+
+@ [Enforcer alerted]
+la [Exsecutor excitatus]
+
+@ [Grunt alerted]
+la [Miles excitatus]
+
+@ [Rottweiler alerted]
+la [Rottweiler excitatus]
+
+@ [Knight alerted]
+la [Eques excitatus]
+
+@ [Death Knight alerted]
+la [Eques mortis excitatus]
+
+@ [Scrag alerted]
+la [Scrag excitatus]
+
+@ [Ogre alerted]
+la [Ogrus excitatus]
+
+@ [Fiend alerted]
+la [Daemon excitatus]
+
+@ [Shambler alerted]
+la [Shambler excitatus]
+
+@ [Zombie groaning]
+la [Zombi gemit]
+
+@ [Vore alerted]
+la [Vore excitatus]
+
+@ [Vore attacking]
+la [Vore oppugnat]
+
+@ [Spawn alerted]
+la [Proles excitata]
+
+@ [Rotfish]
+la [Piscis putridus]
+
+@ [Spawn]
+la [Proles]
+
+@ [Chthon]
+la [Chthon]
+
+@ [Hard landing]
+la [Descensus durus]
+
+@ [Drowning]
+la [Submersio]
+
+@ [Gasping for air]
+la [Anhelitus]
+
+@ [Burning]
+la [Ustio]
+
+@ [Telefrag]
+la [Telefrag]
+
+@ [Gibbed]
+la [In frusta discerptus]
+
+# ==== console.txt ====
+
+# Console messages, shown translated only with con_translate 1 (Translate Console).
+# Cvar and command names stay as they are.
+@ Autosaved.
+la Sponte servatum.
+
+@ Game saved.
+la Lusus servatus.
+
+@ Can't save now.
+la Nunc servari non potest.
+
+@ This game only autosaves (No Manual Saves modifier).
+la Hic lusus tantum sponte servat (modificator Nullae servationes manuales).
+
+@ Loading {}...
+la Oneratur: {}...
+
+@ load failed: {}
+la oneratio defecit: {}
+
+@ ERROR: autosave failed: {}
+la ERROR: autoservatio defecit: {}
+
+@ ERROR: couldn't open {}
+la ERROR: aperiri non potuit: {}
+
+@ ERROR: couldn't open {}.
+la ERROR: aperiri non potuit: {}.
+
+@ ERROR: couldn't write {}: {}
+la ERROR: scribi non potuit {}: {}
+
+@ ERROR: couldn't create {}: {}
+la ERROR: creari non potuit {}: {}
+
+@ couldn't write {}: {}
+la scribi non potuit {}: {}
+
+@ Wrote {}
+la Scriptum: {}
+
+@ screenshot failed: {}
+la imago quadri defecit: {}
+
+@ screenshot: {}
+la imago quadri: {}
+
+@ No readable save available. Select save or restart the level.
+la Nulla servatio legibilis. Servationem elige vel tabulam iterum incipe.
+
+@ Unknown command "{}"
+la Mandatum ignotum "{}"
+
+@ couldn't exec {}
+la exsequi non potuit: {}
+
+@ execing {}
+la exsequitur: {}
+
+@ execing config.cfg (inherited from {})
+la exsequitur config.cfg (hereditas ex {})
+
+@ execing config.cfg (mod defaults)
+la exsequitur config.cfg (praefinita modi)
+
+@ execing default.cfg (built-in)
+la exsequitur default.cfg (insitum)
+
+@ {} cvars
+la Variabiles: {}
+
+@ {} commands
+la Mandata: {}
+
+@ Can't "cmd", not connected
+la "cmd" non potest, non conexus
+
+@ Looking for Quake servers...
+la Ministratra Quake quaeruntur...
+
+@ Bad value, must be between 1 and 65534
+la Valor malus, inter 1 et 65534 esse debet
+
+@ Couldn't handle music file {}
+la Plica musicae tractari non potuit: {}
+
+@ Bug report written to {}
+la Relatio errorum scripta in {}
+
+@ bugreport: can't create {}: {}
+la bugreport: creari non potest {}: {}
+
+@ graphics preset: {}
+la praeconfiguratio graphica: {}
+
+@ Presets (r_shader_preset <name>):
+la Praeconfigurationes (r_shader_preset <nomen>):
+
+@ Add your own .slangp presets under <game>/shaders/.
+la Tuas praeconfigurationes .slangp in <lusus>/shaders/ adde.
+
+@ no shader preset loaded (r_shader_preset)
+la nulla praeconfiguratio shader onerata (r_shader_preset)
+
+@ r_shader_preset: "{}" not found
+la r_shader_preset: "{}" non inventum
+
+@ no parameter "{}" in this preset
+la nullus parametrus "{}" in hac praeconfiguratione
+
+@ {} = {} (default {}, {}..{})
+la {} = {} (praefinitum {}, {}..{})
+
+@ Switching to {}...
+la Transitur ad {}...
+
+@ game: no game dir "{}" in {}
+la game: nullus index lusus "{}" in {}
+
+@ game: can't find the engine executable
+la game: plica exsecutabilis machinae non invenitur
+
+@ game: exec failed: {}
+la game: exsecutio defecit: {}
+
+@ game: launch failed: {}
+la game: initium defecit: {}
+
+@ loaded {} in {}s
+la oneratum {} ({}s)
+
+@ No demos listed with startdemos
+la Nullae demonstrationes per startdemos enumeratae
+
+@ Playing demo from {}.
+la Demonstratio luditur ex {}.
+
+@ {} frames {} seconds {} fps
+la imagines {}, secundae {}, fps {}
+
+@ Recording to {}.
+la Registratur in {}.
+
+@ Completed demo
+la Demonstratio perfecta
+
+@ Can't record during demo playback
+la Dum demonstratio luditur registrari non potest
+
+@ Relative pathnames are not allowed.
+la Viae relativae non permittuntur.
+
+@ Can't record - try again when connected
+la Registrari non potest - iterum tempta cum conexus eris
+
+@ {} demo(s) in loop
+la Demonstrationes in iteratione: {}
+
+@ Not recording a demo.
+la Nulla demonstratio registratur.
+
+@ {} joined on a gamepad
+la {} moderatro accessit
+
+@ goggles: needs a game started with Add-ons and Goggles enabled
+la goggles: lusum requirit cum Additamentis et Perspicillis activis incohatum
+
+@ equip: needs a game started with Add-ons and Goggles enabled
+la equip: lusum requirit cum Additamentis et Perspicillis activis incohatum
+
+@ UDP listening on port {}
+la UDP auscultat in porta {}
+
+@ UDP bind on port {} failed: {}
+la UDP ligatio in porta {} defecit: {}
+
+@ Connection accepted by {}
+la Conexio accepta a {}
+
+@ Connection failed: {}
+la Conexio defecit: {}
+
+@ Couldn't resolve {}
+la Resolvi non potuit: {}
+
+@ Connecting to {}...
+la Conectitur ad {}...
+
+@ Connecting to QuakeWorld server {}...
+la Conectitur ad ministratrum QuakeWorld {}...
+
+@ Disconnected: {}
+la Disiunctum: {}
+
+@ Server disconnected
+la Ministratrum disiunctum
+
+@ Client {} connected
+la Cliens {} conexus
+
+@ Client {} timed out
+la Cliens {} tempore excessit
+
+@ Couldn't spawn server {}: {}
+la Ministratrum {} incohari non potuit: {}
+
+@ maxplayers can not be changed while a server is running.
+la maxplayers mutari non potest dum ministratrum agitur.
+
+@ You can't kick yourself!
+la Te ipsum eicere non potes!
+
+@ Only the server may changelevel
+la Solum ministratrum changelevel adhibere potest
+
+@ {} renamed to {}
+la {} nunc appellatur {}

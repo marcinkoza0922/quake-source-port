@@ -1,0 +1,3024 @@
+# vi: the port's own text; English keys from crates/qcore/lang/*.txt.
+# Format in crates/qcore/src/lang/catalog.rs; check with tools/lang_check.py.
+
+# ==== menu.txt ====
+
+# Options pages: page names, row labels and choice values.
+@ 10% speed
+vi Tốc độ 10%
+
+@ 2 split-screen
+vi 2 người chia màn hình
+
+@ 3 split-screen
+vi 3 người chia màn hình
+
+@ 4 split-screen
+vi 4 người chia màn hình
+
+@ 5 split-screen
+vi 5 người chia màn hình
+
+@ 6 split-screen
+vi 6 người chia màn hình
+
+@ 2D aiming
+vi Ngắm 2D
+
+@ 2x monsters
+vi Quái vật x2
+
+@ 3x monsters
+vi Quái vật x3
+
+@ 4x monsters
+vi Quái vật x4
+
+@ 3D resolution
+vi Độ phân giải 3D
+
+@ 3D view
+vi Khung nhìn 3D
+
+@ 8-bit Color
+vi Màu 8-bit
+
+@ Accessibility
+vi Trợ năng
+
+@ Acquisition Cone
+vi Nón khóa mục tiêu
+
+@ Activation
+vi Kích hoạt
+
+@ Add a ringing room tail after the cue
+vi Thêm dư âm vang phòng sau tín hiệu
+
+@ Add delayed repeats after the cue
+vi Thêm các tiếng lặp trễ sau tín hiệu
+
+@ Add saturation and distortion
+vi Thêm độ bão hòa và méo tiếng
+
+@ Add-ons
+vi Tiện ích
+
+@ Address
+vi Địa chỉ
+
+@ Adds fine noise to hide color banding
+vi Thêm nhiễu mịn để che dải màu
+
+@ Advanced Settings
+vi Cài đặt nâng cao
+
+@ Aim Assist
+vi Hỗ trợ ngắm
+
+@ Aim Rotation
+vi Xoay theo mục tiêu
+
+@ Aim Slowdown
+vi Giảm tốc khi ngắm
+
+@ Aim Style
+vi Kiểu ngắm
+
+@ All
+vi Tất cả
+
+@ All enemies
+vi Mọi kẻ địch
+
+@ Alt Fire (Add-ons)
+vi Bắn phụ (Tiện ích)
+
+@ Always Run
+vi Luôn chạy
+
+@ Ambient Occlusion
+vi Che bóng môi trường
+
+@ Ammo Counts
+vi Số đạn
+
+@ Ammo Counts Position
+vi Vị trí số đạn
+
+@ Ammo Pickups
+vi Nhặt đạn
+
+@ Anisotropic
+vi Dị hướng
+
+@ Anti-aliasing
+vi Khử răng cưa
+
+@ Apply To
+vi Áp dụng cho
+
+@ Armor
+vi Giáp
+
+@ Armor Position
+vi Vị trí giáp
+
+@ Ask
+vi Hỏi
+
+@ Attack
+vi Tấn công
+
+@ Audio
+vi Âm thanh
+
+@ Auto-aim
+vi Tự động ngắm
+
+@ Auto-aim Settings
+vi Cài đặt tự động ngắm
+
+@ Autosave
+vi Tự động lưu
+
+@ Autosave Settings
+vi Cài đặt tự động lưu
+
+@ Autosave Timer
+vi Hẹn giờ tự động lưu
+
+@ Autosaves to Keep
+vi Số bản tự lưu giữ lại
+
+@ Bass
+vi Âm trầm
+
+@ Blip
+vi Bíp
+
+@ Blood Quality
+vi Chất lượng máu
+
+@ Blood Splatter Settings
+vi Cài đặt vết máu
+
+@ Blue
+vi Xanh dương
+
+@ Boomerang Settings
+vi Cài đặt boomerang
+
+@ Boost or cut high frequencies in decibels
+vi Tăng hoặc giảm âm cao theo decibel
+
+@ Boost or cut low frequencies in decibels
+vi Tăng hoặc giảm âm trầm theo decibel
+
+@ Brightness
+vi Độ sáng
+
+@ Bullet Time (Add-ons)
+vi Bullet Time (Tiện ích)
+
+@ Bullet Time Settings
+vi Cài đặt Bullet Time
+
+@ Button Glyphs
+vi Biểu tượng nút
+
+@ Button Size
+vi Cỡ nút
+
+@ Camera
+vi Camera
+
+@ Caustic Intensity
+vi Cường độ tụ quang
+
+@ Caustics
+vi Tụ quang
+
+@ Center
+vi Giữa
+
+@ Center Message Position
+vi Vị trí thông báo giữa
+
+@ Center Message Time
+vi Thời gian thông báo giữa
+
+@ Center View
+vi Căn giữa góc nhìn
+
+@ Change Color on Kill
+vi Đổi màu khi hạ gục
+
+@ Change Color on Target
+vi Đổi màu khi nhắm trúng
+
+@ Chime
+vi Chuông
+
+@ Click
+vi Tách
+
+@ Clink
+vi Leng keng
+
+@ Coin
+vi Đồng xu
+
+@ Color
+vi Màu
+
+@ Color Filter
+vi Bộ lọc màu
+
+@ Color of the grenade arc
+vi Màu đường bay lựu đạn
+
+@ Colored Lighting
+vi Ánh sáng màu
+
+@ Connect
+vi Kết nối
+
+@ Contrast
+vi Độ tương phản
+
+@ Controls
+vi Điều khiển
+
+@ Cooldown (ms)
+vi Thời gian hồi (ms)
+
+@ Crosshair Outline
+vi Viền tâm ngắm
+
+@ Crosshair Shape
+vi Hình tâm ngắm
+
+@ Crosshair Size
+vi Cỡ tâm ngắm
+
+@ Current Ammo
+vi Đạn hiện tại
+
+@ Current Ammo Position
+vi Vị trí đạn hiện tại
+
+@ Customize This Game
+vi Tùy chỉnh ván chơi này
+
+@ Damage
+vi Sát thương
+
+@ Damage Taken
+vi Sát thương nhận
+
+@ Debris
+vi Mảnh vỡ
+
+@ Debris Quality
+vi Chất lượng mảnh vỡ
+
+@ Debris Settings
+vi Cài đặt mảnh vỡ
+
+@ Directional Damage
+vi Hướng sát thương
+
+@ Dithering
+vi Hòa sắc
+
+@ Dodge / Dive (Add-ons)
+vi Né / Lao (Tiện ích)
+
+@ Dragging up looks down instead of up
+vi Kéo lên sẽ nhìn xuống thay vì nhìn lên
+
+@ Drive
+vi Bão hòa
+
+@ Dynamic Lights
+vi Ánh sáng động
+
+@ Echo
+vi Tiếng vọng
+
+@ Enemy Health
+vi Máu kẻ địch
+
+@ Enemy Wounds
+vi Vết thương kẻ địch
+
+@ Enhanced Blood Splatter
+vi Vết máu nâng cao
+
+@ Enhanced FX
+vi Hiệu ứng nâng cao
+
+@ Enhanced Models
+vi Mô hình nâng cao
+
+@ Enhanced Particles
+vi Hạt nâng cao
+
+@ Enhanced Water
+vi Nước nâng cao
+
+@ Enhancements
+vi Cải tiến
+
+@ Equipment Wheel (Add-ons)
+vi Vòng trang bị (Tiện ích)
+
+@ Exploding boxes throw metal shards
+vi Thùng nổ văng ra mảnh kim loại
+
+@ Explosion Damage
+vi Sát thương nổ
+
+@ Explosion Scorch Marks
+vi Vết cháy do nổ
+
+@ Explosions scorch nearby solid surfaces
+vi Vụ nổ làm cháy xém bề mặt rắn gần đó
+
+@ Explosives only
+vi Chỉ vũ khí nổ
+
+@ Extra Monsters
+vi Thêm quái vật
+
+@ Extra Per 10 Damage (ms)
+vi Thêm mỗi 10 sát thương (ms)
+
+@ FX Settings
+vi Cài đặt hiệu ứng
+
+@ Field of View
+vi Trường nhìn
+
+@ Firing never uses up ammo
+vi Bắn không bao giờ tốn đạn
+
+@ First person
+vi Ngôi thứ nhất
+
+@ Flick Time
+vi Thời gian vẩy
+
+@ Flight Speed
+vi Tốc độ bay
+
+@ Fog
+vi Sương mù
+
+@ Frag Limit
+vi Giới hạn frag
+
+@ Freeze Duration (ms)
+vi Thời gian đóng băng (ms)
+
+@ GLQuake
+vi GLQuake
+
+@ Game Speed
+vi Tốc độ trò chơi
+
+@ Game Type
+vi Chế độ chơi
+
+@ Gameplay
+vi Lối chơi
+
+@ Gameplay Modifiers
+vi Điều chỉnh lối chơi
+
+@ Gel Quality
+vi Chất lượng gel
+
+@ Gib Surface Painting
+vi Vết mảnh thịt trên bề mặt
+
+@ Gibs
+vi Mảnh thịt
+
+@ Gibs and heads tumble and bounce
+vi Mảnh thịt và đầu lăn, nảy tung
+
+@ Goggle Glow Quality
+vi Chất lượng phát sáng kính
+
+@ Goggle Intensity
+vi Cường độ kính
+
+@ Goggle Noise
+vi Nhiễu kính
+
+@ Goggles Settings
+vi Cài đặt kính
+
+@ Graphics
+vi Đồ họa
+
+@ Green
+vi Xanh lá
+
+@ Grenade Arc
+vi Đường bay lựu đạn
+
+@ Grenade Arc Settings
+vi Cài đặt đường bay lựu đạn
+
+@ Gun Kick
+vi Độ giật súng
+
+@ Gyro
+vi Con quay
+
+@ Gyro & Flick Stick
+vi Con quay & Flick Stick
+
+@ Gyro Active
+vi Kích hoạt con quay
+
+@ Gyro Aiming
+vi Ngắm bằng con quay
+
+@ HUD
+vi HUD
+
+@ HUD Style
+vi Kiểu HUD
+
+@ Health
+vi Máu
+
+@ Health Pickups
+vi Nhặt máu
+
+@ Health Position
+vi Vị trí máu
+
+@ Health Regeneration
+vi Hồi máu
+
+@ Hit & Kill Sounds
+vi Âm trúng & hạ gục
+
+@ Hit Doors & Lifts
+vi Bắn trúng cửa & thang máy
+
+@ Hit Markers
+vi Dấu trúng
+
+@ Hit Sound
+vi Âm bắn trúng
+
+@ Hitmarker Size
+vi Cỡ dấu trúng
+
+@ Hitmarker Type
+vi Kiểu dấu trúng
+
+@ Hitstop Advanced
+vi Hitstop nâng cao
+
+@ Hitstop Settings
+vi Cài đặt hitstop
+
+@ Hold
+vi Giữ
+
+@ Hold lock-on
+vi Giữ khóa mục tiêu
+
+@ Hook Enemies
+vi Móc kẻ địch
+
+@ Hook Metal
+vi Móc kim loại
+
+@ Hook Stone
+vi Móc đá
+
+@ Hook Wood
+vi Móc gỗ
+
+@ Hooking an enemy pulls you to it
+vi Móc trúng kẻ địch sẽ kéo bạn tới nó
+
+@ Hookshot Range
+vi Tầm móc kéo
+
+@ Hookshot Settings
+vi Cài đặt móc kéo
+
+@ Host Game
+vi Tổ chức trận
+
+@ How far the hook flies before it retracts
+vi Móc bay xa bao nhiêu trước khi thu về
+
+@ How visible the on-screen controls are
+vi Độ hiện rõ của nút điều khiển trên màn hình
+
+@ Impact Lifetime
+vi Thời gian tồn tại vết đạn
+
+@ Infinite Ammo
+vi Vô hạn đạn
+
+@ Input
+vi Thiết bị nhập
+
+@ Input Scale
+vi Hệ số đầu vào
+
+@ Interpolate Animation
+vi Nội suy hoạt ảnh
+
+@ Interpolate Movement
+vi Nội suy chuyển động
+
+@ Invert Look
+vi Đảo chiều nhìn
+
+@ Invert Mouse
+vi Đảo chuột
+
+@ Invert Stick
+vi Đảo cần
+
+@ Jet Quality
+vi Chất lượng tia
+
+@ Join Game
+vi Tham gia trận
+
+@ Jump / Swim Up
+vi Nhảy / Bơi lên
+
+@ Jump again in mid-air
+vi Nhảy thêm lần nữa trên không
+
+@ Jumps
+vi Số lần nhảy
+
+@ Keys & Powerups
+vi Chìa khóa & Vật phẩm
+
+@ Keys & Powerups Position
+vi Vị trí chìa khóa & vật phẩm
+
+@ Kill Bonus (x)
+vi Thưởng hạ gục (x)
+
+@ Kill Sound
+vi Âm hạ gục
+
+@ Knock
+vi Gõ
+
+@ Left
+vi Trái
+
+@ Length of the motion blur streaks
+vi Độ dài vệt nhòe chuyển động
+
+@ Lifetime (seconds)
+vi Thời gian tồn tại (giây)
+
+@ Live Portal Views
+vi Xem trực tiếp qua cổng
+
+@ Live View Distance
+vi Khoảng cách xem trực tiếp
+
+@ Local Players
+vi Người chơi cục bộ
+
+@ Local red wounds follow enemy animation
+vi Vết thương đỏ bám theo hoạt ảnh kẻ địch
+
+@ Lock Indicator
+vi Chỉ báo khóa mục tiêu
+
+@ Long falls don't hurt
+vi Rơi từ cao không bị thương
+
+@ Longest Freeze (ms)
+vi Đóng băng lâu nhất (ms)
+
+@ Look Down
+vi Nhìn xuống
+
+@ Look Speed
+vi Tốc độ nhìn
+
+@ Look Up
+vi Nhìn lên
+
+@ Main Menu Music
+vi Nhạc menu chính
+
+@ Max FPS
+vi FPS tối đa
+
+@ Max Players
+vi Số người chơi tối đa
+
+@ Maximum Impacts
+vi Số vết đạn tối đa
+
+@ Maximum Marks
+vi Số vết tối đa
+
+@ Maximum Range
+vi Tầm tối đa
+
+@ Melee only
+vi Chỉ cận chiến
+
+@ Message Background
+vi Nền thông báo
+
+@ Message Text Size
+vi Cỡ chữ thông báo
+
+@ Messages & Captions
+vi Thông báo & Phụ đề
+
+@ Meter Duration (real seconds)
+vi Thời lượng thanh (giây thực)
+
+@ Minimum Damage
+vi Sát thương tối thiểu
+
+@ Mode
+vi Chế độ
+
+@ Modern Console
+vi Console hiện đại
+
+@ Modern HUD Layout
+vi Bố cục HUD hiện đại
+
+@ Most recent save
+vi Bản lưu mới nhất
+
+@ Motion Blur
+vi Nhòe chuyển động
+
+@ Motion Blur Amount
+vi Mức nhòe chuyển động
+
+@ Motion Blur Quality
+vi Chất lượng nhòe chuyển động
+
+@ Mouse & Keyboard
+vi Chuột & Bàn phím
+
+@ Mouse Speed
+vi Tốc độ chuột
+
+@ Move Back
+vi Lùi
+
+@ Move Forward
+vi Tiến
+
+@ Music Volume
+vi Âm lượng nhạc
+
+@ Next Weapon
+vi Vũ khí kế tiếp
+
+@ No Drowning
+vi Không chết đuối
+
+@ No Fall Damage
+vi Không sát thương rơi
+
+@ No Manual Saves
+vi Không lưu thủ công
+
+@ No Self Damage
+vi Không tự gây sát thương
+
+@ Noise Filter
+vi Lọc nhiễu
+
+@ Normal Color
+vi Màu thường
+
+@ Notify Message Position
+vi Vị trí thông báo nhanh
+
+@ Notify Message Time
+vi Thời gian thông báo nhanh
+
+@ Number of splatter rays per blood impact
+vi Số tia máu bắn ra mỗi lần trúng
+
+@ Off
+vi Tắt
+
+@ On Death
+vi Khi chết
+
+@ On Kill Color
+vi Màu khi hạ gục
+
+@ On Target Color
+vi Màu khi nhắm trúng
+
+@ Opacity
+vi Độ mờ đục
+
+@ Opacity of the grenade arc
+vi Độ mờ đục đường bay lựu đạn
+
+@ Pants Color
+vi Màu quần
+
+@ Particle Quality
+vi Chất lượng hạt
+
+@ Particles
+vi Hạt
+
+@ Physical Nail Impacts
+vi Đinh va chạm vật lý
+
+@ Pistol Start
+vi Bắt đầu tay trắng
+
+@ Pitch
+vi Cao độ
+
+@ Pitch Sensitivity
+vi Độ nhạy dọc
+
+@ Playback Speed
+vi Tốc độ phát
+
+@ Player Setup
+vi Thiết lập người chơi
+
+@ Pop
+vi Bụp
+
+@ Portal Gun Settings
+vi Cài đặt súng cổng
+
+@ Portal Recursion
+vi Đệ quy cổng
+
+@ Portal View Quality
+vi Chất lượng khung nhìn cổng
+
+@ Preview Sound
+vi Nghe thử
+
+@ Previous Weapon
+vi Vũ khí trước
+
+@ Projectile Shotguns Settings
+vi Cài đặt súng săn đạn vật lý
+
+@ Projectile Speed (units/s)
+vi Tốc độ đạn (đơn vị/giây)
+
+@ Purple
+vi Tím
+
+@ Push
+vi Đẩy
+
+@ Push Strength
+vi Lực đẩy
+
+@ Quick Load
+vi Tải nhanh
+
+@ Quick Save
+vi Lưu nhanh
+
+@ Railgun Settings
+vi Cài đặt railgun
+
+@ Ranged only
+vi Chỉ đánh xa
+
+@ Reacquire While Held
+vi Bắt lại mục tiêu khi giữ
+
+@ Red
+vi Đỏ
+
+@ Reduce Motion
+vi Giảm chuyển động
+
+@ Regen (seconds per second)
+vi Hồi phục (giây mỗi giây)
+
+@ Render Scale
+vi Tỷ lệ kết xuất
+
+@ Reverb
+vi Vang
+
+@ Right
+vi Phải
+
+@ Ripple Intensity
+vi Cường độ gợn sóng
+
+@ Ripples
+vi Gợn sóng
+
+@ Roll Sensitivity
+vi Độ nhạy nghiêng
+
+@ Rumble
+vi Rung
+
+@ Run
+vi Chạy
+
+@ Save on All Enemies Killed
+vi Lưu khi hạ hết kẻ địch
+
+@ Save on All Secrets Found
+vi Lưu khi tìm hết bí mật
+
+@ Save on Level Entry
+vi Lưu khi vào màn
+
+@ Save on Secret Found
+vi Lưu khi tìm thấy bí mật
+
+@ Scoreboard
+vi Bảng điểm
+
+@ Screen Flashes
+vi Chớp màn hình
+
+@ Screen Shader
+vi Shader màn hình
+
+@ Screen Shake
+vi Rung màn hình
+
+@ Search LAN
+vi Tìm trong mạng LAN
+
+@ Seconds a center-screen message stays up
+vi Số giây thông báo giữa màn hình hiển thị
+
+@ See Through Portals
+vi Nhìn xuyên cổng
+
+@ See-through Teleporters
+vi Máy dịch chuyển nhìn xuyên
+
+@ Shirt Color
+vi Màu áo
+
+@ Shotgun Bullet Decals
+vi Vết đạn súng săn
+
+@ Shoulder left
+vi Qua vai trái
+
+@ Shoulder right
+vi Qua vai phải
+
+@ Show FPS
+vi Hiện FPS
+
+@ Show Face
+vi Hiện khuôn mặt
+
+@ Shrapnel
+vi Mảnh văng
+
+@ Size of on-screen messages and captions
+vi Cỡ thông báo và phụ đề trên màn hình
+
+@ Skill
+vi Độ khó
+
+@ Sky Fog
+vi Sương mù bầu trời
+
+@ Smooths the stepped movement of monsters
+vi Làm mượt chuyển động giật cục của quái vật
+
+@ Sound
+vi Âm thanh
+
+@ Sound Captions
+vi Phụ đề âm thanh
+
+@ Sound Volume
+vi Âm lượng hiệu ứng
+
+@ Speed Blur
+vi Nhòe tốc độ
+
+@ Splashes
+vi Bắn tóe
+
+@ Splatter Amount
+vi Lượng vết bắn
+
+@ Splatter Size
+vi Cỡ vết bắn
+
+@ Start Game
+vi Bắt đầu
+
+@ Staying underwater doesn't hurt
+vi Ở dưới nước không bị thương
+
+@ Stick Look Pitch
+vi Cần nhìn dọc
+
+@ Stick Look Yaw
+vi Cần nhìn ngang
+
+@ Strafe Left
+vi Né sang trái
+
+@ Strafe Right
+vi Né sang phải
+
+@ Strength of the surface swell and rings
+vi Độ mạnh của sóng và vòng gợn trên mặt nước
+
+@ Stun Duration
+vi Thời gian choáng
+
+@ Style
+vi Kiểu
+
+@ Supersampling
+vi Siêu lấy mẫu
+
+@ Surface Hit Effects
+vi Hiệu ứng va chạm bề mặt
+
+@ Swim Down
+vi Bơi xuống
+
+@ Targets
+vi Mục tiêu
+
+@ Teamplay
+vi Đấu đội
+
+@ Texture Filter
+vi Lọc texture
+
+@ Third person
+vi Ngôi thứ ba
+
+@ Thud
+vi Thịch
+
+@ Tick
+vi Tích
+
+@ Time Limit
+vi Giới hạn thời gian
+
+@ Time Stretch
+vi Giãn thời gian
+
+@ Toggle Attack
+vi Bật/tắt tấn công
+
+@ Toggle Run
+vi Bật/tắt chạy
+
+@ Toggle auto-aim
+vi Bật/tắt tự động ngắm
+
+@ Touch Controls
+vi Điều khiển cảm ứng
+
+@ Touchscreen
+vi Màn hình cảm ứng
+
+@ Tough Enemy Health
+vi Máu kẻ địch trâu
+
+@ Tough enemies only
+vi Chỉ kẻ địch trâu
+
+@ Trail Colour
+vi Màu vệt
+
+@ Translate Console
+vi Dịch console
+
+@ Translucent Water
+vi Nước trong suốt
+
+@ Treble
+vi Âm cao
+
+@ Turn Left
+vi Quay trái
+
+@ Turn Right
+vi Quay phải
+
+@ Underwater FX
+vi Hiệu ứng dưới nước
+
+@ Use Bullet Time Meter
+vi Dùng thanh Bullet Time
+
+@ VSync
+vi VSync
+
+@ View Bob
+vi Nhún góc nhìn
+
+@ Viewmodels
+vi Mô hình vũ khí
+
+@ Volume
+vi Âm lượng
+
+@ Water Opacity
+vi Độ đục của nước
+
+@ Water Quality
+vi Chất lượng nước
+
+@ Water Settings
+vi Cài đặt nước
+
+@ Weapon Wheel
+vi Vòng vũ khí
+
+@ Weapon Wheel Slowdown
+vi Chậm khi mở vòng vũ khí
+
+@ Weapons
+vi Vũ khí
+
+@ Weapons Position
+vi Vị trí vũ khí
+
+@ Where center-screen messages appear
+vi Vị trí hiện thông báo giữa màn hình
+
+@ Where pickup and event messages appear
+vi Vị trí hiện thông báo nhặt đồ và sự kiện
+
+@ White
+vi Trắng
+
+@ Yaw Sensitivity
+vi Độ nhạy ngang
+
+@ Yellow
+vi Vàng
+
+# lowercase choice values
+@ T
+vi T
+
+@ always
+vi luôn luôn
+
+@ auto
+vi tự động
+
+@ banded
+vi theo dải
+
+@ borderless
+vi không viền
+
+@ bottom center
+vi giữa dưới
+
+@ bottom left
+vi dưới trái
+
+@ bottom right
+vi dưới phải
+
+@ box
+vi hộp
+
+@ broken square
+vi vuông hở
+
+@ classic
+vi cổ điển
+
+@ coarse
+vi thô
+
+@ cooperative
+vi hợp tác
+
+@ cross
+vi chữ thập
+
+@ cross + dot
+vi chữ thập + chấm
+
+@ cyan
+vi lục lam
+
+@ dashed
+vi nét đứt
+
+@ deathmatch
+vi deathmatch
+
+@ deuteranopia
+vi mù màu lục
+
+@ diagonal streaks
+vi vệt chéo
+
+@ diamond
+vi hình thoi
+
+@ dot
+vi chấm
+
+@ double
+vi đôi
+
+@ double chevrons
+vi mũi tên đôi
+
+@ double diagonals
+vi chéo đôi
+
+@ easy
+vi dễ
+
+@ fine
+vi mịn
+
+@ fit output
+vi theo đầu ra
+
+@ flick stick
+vi flick stick
+
+@ fullscreen
+vi toàn màn hình
+
+@ gap cross
+vi chữ thập hở
+
+@ green
+vi xanh lá
+
+@ grey
+vi xám
+
+@ half speed
+vi nửa tốc độ
+
+@ hard
+vi khó
+
+@ high
+vi cao
+
+@ huge
+vi cực lớn
+
+@ immersive
+vi nhập vai
+
+@ intense
+vi mạnh
+
+@ large
+vi lớn
+
+@ larger
+vi lớn hơn
+
+@ largest
+vi lớn nhất
+
+@ linear
+vi tuyến tính
+
+@ low
+vi thấp
+
+@ lower
+vi dưới
+
+@ magenta
+vi đỏ tươi
+
+@ medium
+vi trung bình
+
+@ middle
+vi giữa
+
+@ middle left
+vi giữa trái
+
+@ middle right
+vi giữa phải
+
+@ modern
+vi hiện đại
+
+@ nearest
+vi gần nhất
+
+@ nightmare
+vi ác mộng
+
+@ nintendo
+vi nintendo
+
+@ no team damage
+vi không sát thương đồng đội
+
+@ none
+vi không có
+
+@ normal
+vi thường
+
+@ off
+vi tắt
+
+@ off while held
+vi tắt khi giữ
+
+@ on
+vi bật
+
+@ only while held
+vi chỉ khi giữ
+
+@ playstation
+vi playstation
+
+@ protanopia
+vi mù màu đỏ
+
+@ quarter speed
+vi 1/4 tốc độ
+
+@ red
+vi đỏ
+
+@ short diagonals
+vi chéo ngắn
+
+@ single
+vi đơn
+
+@ small
+vi nhỏ
+
+@ solid
+vi liền
+
+@ spectacle
+vi hoành tráng
+
+@ subtle
+vi nhẹ
+
+@ team damage
+vi sát thương đồng đội
+
+@ top center
+vi giữa trên
+
+@ top left
+vi trên trái
+
+@ top right
+vi trên phải
+
+@ triple
+vi ba
+
+@ tritanopia
+vi mù màu lam
+
+@ upper
+vi trên
+
+@ white
+vi trắng
+
+@ whole screen
+vi cả màn hình
+
+@ windowed
+vi cửa sổ
+
+@ xbox
+vi xbox
+
+@ yellow
+vi vàng
+
+# ==== tooltips.txt ====
+
+# Options help lines (tooltips) and reasons for disabled rows.
+@ 2D aiming turns the view continuously with the right stick; flick stick snaps the view to where you push the stick, then turning the stick rotates it
+vi Ngắm 2D xoay góc nhìn liên tục bằng cần phải; flick stick hướng ngay góc nhìn về phía bạn đẩy cần, sau đó xoay cần để xoay tiếp
+
+@ 3D resolution relative to the window; the UI stays sharp
+vi Độ phân giải 3D so với cửa sổ; giao diện vẫn sắc nét
+
+@ 3D view keeps the HUD and menus sharp; whole screen runs them through the shader too
+vi Khung nhìn 3D giữ HUD và menu sắc nét; cả màn hình áp dụng shader cho cả chúng
+
+@ A Quake III style railgun: a slug that pierces every enemy on its line, using 2 cells a shot and refiring every 1.5 s; select it through its assigned weapon slot (Add-ons)
+vi Railgun kiểu Quake III: viên đạn xuyên qua mọi kẻ địch trên đường bay, tốn 2 pin mỗi phát và bắn lại sau 1,5 giây; chọn qua ô vũ khí được gán (Tiện ích)
+
+@ A Zelda-style hookshot: fire sends a chain hook out; it latches onto hookable surfaces or enemies and reels you in; fire again to let go
+vi Móc kéo kiểu Zelda: bắn để phóng móc xích; nó bám vào bề mặt móc được hoặc kẻ địch và kéo bạn lại; bắn lần nữa để thả
+
+@ Also translates the engine's console messages; off keeps them in English
+vi Dịch cả thông báo console của engine; tắt thì giữ tiếng Anh
+
+@ Automatically acquire another enemy while holding Lock-on after losing a target
+vi Tự động bắt kẻ địch khác khi đang giữ Khóa mục tiêu sau khi mất mục tiêu
+
+@ Blends between animation frames of monsters and weapons
+vi Chuyển mượt giữa các khung hoạt ảnh của quái vật và vũ khí
+
+@ Blood stains surfaces and bodies; cosmetic, independent of particle packs
+vi Máu nhuộm bề mặt và cơ thể; chỉ để trang trí, độc lập với gói hạt
+
+@ Bloom glow around bright lights and heat sources; medium uses 4 taps, high uses 8, low disables halo taps
+vi Hào quang bloom quanh nguồn sáng mạnh và nguồn nhiệt; trung bình dùng 4 mẫu, cao dùng 8, thấp tắt hào quang
+
+@ Blurs fast-moving monsters, projectiles and doors (not camera turns)
+vi Làm nhòe quái vật, đạn và cửa di chuyển nhanh (không áp dụng khi xoay camera)
+
+@ Blurs the screen edges during fast falls and launches; keeps the centre clear. Reduce Motion disables it
+vi Làm nhòe rìa màn hình khi rơi hoặc bị phóng đi nhanh; giữ rõ phần giữa. Giảm chuyển động sẽ tắt nó
+
+@ Brightness of the underwater light patterns
+vi Độ sáng của vân sáng dưới nước
+
+@ Caps mark count, lifetime, airborne droplets and wound/gib painting; low skips enemy wounds and gib trails
+vi Giới hạn số vết, thời gian tồn tại, giọt bay trong không khí và vết thương/vết mảnh thịt; thấp bỏ vết thương kẻ địch và vệt mảnh thịt
+
+@ Caps shader input at output size so 200% render scale keeps 3D sharpness without 4x shader cost; low scales stay low-res
+vi Giới hạn đầu vào shader ở kích thước đầu ra để tỷ lệ kết xuất 200% giữ độ nét 3D mà không tốn gấp 4 lần shader; tỷ lệ thấp vẫn ở độ phân giải thấp
+
+@ Classic: the original status bar; modern: compact elements at the screen edges
+vi Cổ điển: thanh trạng thái gốc; hiện đại: các thành phần gọn ở rìa màn hình
+
+@ Coat atlas resolution, rebuild rate and shader detail: low builds smaller coats less often with fast shading; high uses full detail
+vi Độ phân giải atlas lớp phủ, tần suất dựng lại và chi tiết shader: thấp dựng lớp nhỏ hơn, ít thường xuyên hơn với đổ bóng nhanh; cao dùng chi tiết đầy đủ
+
+@ Colour of the railgun's spiral trail; split-screen players each get the next colour along
+vi Màu vệt xoắn ốc của railgun; khi chia màn hình, mỗi người chơi nhận màu kế tiếp
+
+@ Damage the railgun deals to each enemy it passes through (Quake III: 100)
+vi Sát thương railgun gây cho mỗi kẻ địch mà nó xuyên qua (Quake III: 100)
+
+@ Dark backdrop behind on-screen messages for readability
+vi Nền tối phía sau thông báo trên màn hình để dễ đọc
+
+@ Dark border keeps the crosshair visible on any background
+vi Viền tối giúp tâm ngắm luôn dễ thấy trên mọi nền
+
+@ Darkens corners and contact areas where geometry meets; higher quality is sharper
+vi Làm tối các góc và chỗ tiếp xúc giữa các khối hình; chất lượng cao hơn thì sắc nét hơn
+
+@ Debris lands on and is carried or shoved by doors, lifts and platforms
+vi Mảnh vỡ rơi lên cửa, thang máy và bệ, rồi được chúng mang theo hoặc đẩy đi
+
+@ Detail for caustics, ripples and splashes: low uses smaller budgets and shorter view distance; high uses larger budgets and farther view distance
+vi Chi tiết của tụ quang, gợn sóng và bắn tóe: thấp dùng ngân sách nhỏ hơn và tầm nhìn ngắn hơn; cao dùng ngân sách lớn hơn và tầm nhìn xa hơn
+
+@ Disabled while Enhanced Particles is on: its particles replace the GLQuake and Classic styles
+vi Bị tắt khi bật Hạt nâng cao: hạt của nó thay thế kiểu GLQuake và Cổ điển
+
+@ Disabled while Enhanced Water is on: its own underwater effects replace the classic and GLQuake view warps
+vi Bị tắt khi bật Nước nâng cao: hiệu ứng dưới nước của nó thay thế hiệu ứng méo hình cổ điển và GLQuake
+
+@ Draw the predicted grenade path as a solid or dashed line
+vi Vẽ quỹ đạo dự đoán của lựu đạn bằng nét liền hoặc nét đứt
+
+@ Draw the view out of the linked portal inside each portal; off shows flat discs (fastest)
+vi Hiện bên trong mỗi cổng cảnh nhìn từ cổng được nối; tắt thì hiện đĩa phẳng (nhanh nhất)
+
+@ Droplets spray up when things enter or leave water, slime or lava
+vi Giọt nước bắn lên khi vật thể vào hoặc ra khỏi nước, chất nhờn hoặc dung nham
+
+@ Emulates the original 8-bit palette of software rendering
+vi Mô phỏng bảng màu 8-bit gốc của kết xuất phần mềm
+
+@ Every level starts with only the shotgun and axe, as if started fresh
+vi Mỗi màn chơi bắt đầu chỉ với súng săn và rìu, như chơi mới từ đầu
+
+@ Explosion damage for each remotely detonated sticky bomb
+vi Sát thương nổ của mỗi quả bom dính kích nổ từ xa
+
+@ Extra freeze milliseconds for every 10 damage dealt, so heavy hits stop longer
+vi Số mili giây đóng băng thêm cho mỗi 10 sát thương gây ra, để đòn nặng dừng lâu hơn
+
+@ First person, a third-person camera centered behind the player, or one over the right or left shoulder; third person hides viewmodels
+vi Ngôi thứ nhất, camera ngôi thứ ba ở chính giữa sau lưng người chơi, hoặc qua vai phải hay vai trái; ngôi thứ ba ẩn mô hình vũ khí
+
+@ Flash the selected marker on confirmed hits; colors are shared with the crosshair
+vi Nháy dấu đã chọn khi xác nhận trúng; dùng chung màu với tâm ngắm
+
+@ Freeze for every enemy, or only for enemies that were tough before the hit
+vi Đóng băng với mọi kẻ địch, hoặc chỉ với kẻ địch trâu trước đòn đánh
+
+@ Freeze the game briefly when you damage an enemy; single player with add-ons only
+vi Dừng hình trò chơi chốc lát khi bạn gây sát thương cho kẻ địch; chỉ chơi đơn có tiện ích
+
+@ Gibs tumble and barrels throw shrapnel; shots and blasts push them (cosmetic only)
+vi Mảnh thịt lăn lộn và thùng văng mảnh; đạn và vụ nổ đẩy chúng đi (chỉ để trang trí)
+
+@ Health an enemy must have had before the hit to count as tough
+vi Lượng máu kẻ địch cần có trước đòn đánh để được tính là trâu
+
+@ Hits dealing less damage than this do not freeze the game; the default 10 skips nails and shotgun pellets
+vi Đòn gây ít sát thương hơn mức này sẽ không đóng băng trò chơi; mặc định 10 bỏ qua đinh và hạt đạn súng săn
+
+@ Hold fire and sweep the crosshair over monsters to queue them, release to throw: it stuns each in turn and flies back; alt-fire clears the queue
+vi Giữ nút bắn và lướt tâm ngắm qua quái vật để xếp hàng, thả ra để ném: nó lần lượt làm choáng từng con rồi bay về; bắn phụ xóa hàng chờ
+
+@ Hold: keep Lock-on held. Toggle: press Auto-aim Toggle to enable automatic acquisition. Click look stick to switch targets
+vi Giữ: giữ nút Khóa mục tiêu. Bật/tắt: nhấn Bật/tắt tự động ngắm để bật tự động bắt mục tiêu. Nhấn cần nhìn để đổi mục tiêu
+
+@ How close an enemy must be to the crosshair for automatic acquisition in toggle mode (degrees)
+vi Kẻ địch phải gần tâm ngắm bao nhiêu để được tự động bắt ở chế độ bật/tắt (độ)
+
+@ How far the view tilts up and down when you tilt the controller (pitch axis)
+vi Góc nhìn ngẩng lên và cúi xuống bao nhiêu khi bạn nghiêng tay cầm (trục dọc)
+
+@ How far the view turns left and right when you turn the controller (yaw axis)
+vi Góc nhìn xoay trái phải bao nhiêu khi bạn xoay tay cầm (trục ngang)
+
+@ How far the view turns when you drag on the right half of the screen
+vi Góc nhìn xoay bao nhiêu khi bạn kéo trên nửa phải màn hình
+
+@ How fast the boomerang flies (units per second)
+vi Tốc độ bay của boomerang (đơn vị mỗi giây)
+
+@ How hard shots and explosions push debris around
+vi Đạn và vụ nổ đẩy mảnh vỡ mạnh đến đâu
+
+@ How hard the Powerwasher's water pushes enemies
+vi Nước của Máy xịt rửa đẩy kẻ địch mạnh đến đâu
+
+@ How long a hit freezes the game, in milliseconds
+vi Một đòn đánh đóng băng trò chơi bao lâu, tính bằng mili giây
+
+@ How strongly fog covers the sky when fog is on
+vi Mức sương mù che bầu trời khi bật sương mù
+
+@ How the view distorts underwater: Classic ripples the whole screen like software Quake, GLQuake slowly stretches and squashes the view
+vi Cách góc nhìn bị méo dưới nước: Cổ điển làm gợn cả màn hình như Quake phần mềm, GLQuake từ từ kéo giãn và nén góc nhìn
+
+@ Ignores gyro rotation slower than this many degrees per second, to hide hand tremor
+vi Bỏ qua chuyển động xoay của con quay chậm hơn số độ mỗi giây này, để che run tay
+
+@ Immersive: appears for a few seconds only when its value changes
+vi Nhập vai: chỉ xuất hiện vài giây khi giá trị thay đổi
+
+@ Keeps textures sharp on floors and walls seen at steep angles
+vi Giữ texture sắc nét trên sàn và tường khi nhìn ở góc nghiêng
+
+@ Lights from rockets, muzzle flashes and explosions brighten nearby walls
+vi Ánh sáng từ tên lửa, lửa đầu nòng và vụ nổ chiếu sáng tường gần đó
+
+@ Liquid surfaces swell and ring out where things move through them
+vi Mặt chất lỏng dâng sóng và tạo vòng gợn ở nơi vật thể đi qua
+
+@ Lobs sticky bombs (rockets ammo) that cling to walls, doors and monsters; alt-fire detonates them all
+vi Ném bom dính (dùng đạn tên lửa) bám vào tường, cửa và quái vật; bắn phụ kích nổ tất cả
+
+@ Look of the classic particles: GLQuake draws soft round dots, Classic draws square pixels like software Quake
+vi Kiểu hạt cổ điển: GLQuake vẽ chấm tròn mềm, Cổ điển vẽ điểm ảnh vuông như Quake phần mềm
+
+@ Low skips the background smear halo and uses fewer blur samples; high keeps the full halo and smoother streaks
+vi Thấp bỏ quầng nhòe nền và dùng ít mẫu nhòe hơn; cao giữ trọn quầng và vệt mượt hơn
+
+@ Low: hard particle edges, half the scripted particles and fewer hit sparks. Medium: soft edges. High: soft edges checked per MSAA sample, most hit sparks
+vi Thấp: viền hạt cứng, một nửa số hạt theo script và ít tia lửa va chạm hơn. Trung bình: viền mềm. Cao: viền mềm kiểm tra theo từng mẫu MSAA, gần như đủ tia lửa
+
+@ Marks fade out before expiring; oldest marks are recycled at the limit
+vi Vết mờ dần trước khi biến mất; khi đạt giới hạn, vết cũ nhất được tái sử dụng
+
+@ Max nested portal reflections to draw; each level redraws the scene
+vi Số lớp cổng lồng nhau tối đa được vẽ; mỗi lớp vẽ lại cảnh
+
+@ Max portals per screen with a live view; each one redraws the scene
+vi Số cổng tối đa trên màn hình có khung nhìn trực tiếp; mỗi cổng vẽ lại cảnh
+
+@ Maximum distance for acquiring and keeping an enemy locked
+vi Khoảng cách tối đa để bắt và giữ khóa kẻ địch
+
+@ Minimum gap between freezes, so shotgun pellets and rapid fire count once; kills ignore it
+vi Khoảng cách tối thiểu giữa các lần đóng băng, để hạt đạn súng săn và bắn liên thanh chỉ tính một lần; đòn hạ gục bỏ qua mức này
+
+@ Modern terminal console with autocomplete popup, history search, ANSI colors, bash shell and piping; off uses the classic Quake console
+vi Console kiểu terminal hiện đại với gợi ý tự hoàn thành, tìm lịch sử, màu ANSI, shell bash và pipe; tắt thì dùng console Quake cổ điển
+
+@ Monsters take proportionally less damage at higher values; above 100% is harder
+vi Quái vật nhận ít sát thương hơn theo tỷ lệ khi giá trị cao hơn; trên 100% là khó hơn
+
+@ Moving gibs leave blood on surfaces they touch
+vi Mảnh thịt đang bay để lại máu trên bề mặt chúng chạm vào
+
+@ Multiplier on the freeze when the hit kills the enemy; 1 means no extra
+vi Hệ số nhân thời gian đóng băng khi đòn đánh hạ gục kẻ địch; 1 nghĩa là không thêm
+
+@ Multiplies ammo from pickups (up to the normal carry limit); below 100% is harder
+vi Nhân lượng đạn nhặt được (tối đa giới hạn mang thường); dưới 100% là khó hơn
+
+@ Multiplies health from pickups (up to 100, or the item's own limit); below 100% is harder
+vi Nhân lượng máu nhặt được (tối đa 100, hoặc giới hạn riêng của vật phẩm); dưới 100% là khó hơn
+
+@ Nails stick to wood and bodies; hard surfaces deflect them to the floor
+vi Đinh cắm vào gỗ và cơ thể; bề mặt cứng làm chúng bật xuống sàn
+
+@ Nearest keeps crisp classic pixels; linear smooths textures
+vi Gần nhất giữ điểm ảnh cổ điển sắc nét; tuyến tính làm mượt texture
+
+@ New Game: Add-ons
+vi Trò chơi mới: Tiện ích
+
+@ New Game: Customize
+vi Trò chơi mới: Tùy chỉnh
+
+@ Night vision: how much dark areas are brightened; thermal: how strongly heat stands out
+vi Nhìn đêm: mức làm sáng vùng tối; tầm nhiệt: mức nổi bật của nguồn nhiệt
+
+@ Night-vision and thermal goggles, cycle normal, night vision and thermal with Change Goggles (Add-ons), or use the Equipment Wheel
+vi Kính nhìn đêm và tầm nhiệt; chuyển giữa thường, nhìn đêm và tầm nhiệt bằng Đổi kính (Tiện ích), hoặc dùng Vòng trang bị
+
+@ No single freeze lasts longer than this, however much damage or kill bonus adds
+vi Không lần đóng băng nào kéo dài hơn mức này, dù sát thương hay thưởng hạ gục cộng thêm bao nhiêu
+
+@ Oldest marks and nails are recycled at this shared limit
+vi Vết và đinh cũ nhất được tái sử dụng khi đạt giới hạn chung này
+
+@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
+vi Cần và nút trên màn hình: tự động hiện chúng sau khi chạm và ẩn khi dùng thiết bị khác
+
+@ Only autosaves: quicksaves and the Save menu are off
+vi Chỉ tự động lưu: lưu nhanh và menu Lưu bị tắt
+
+@ Place every weapon at the center, right or left of the view, or hide all viewmodels
+vi Đặt mọi vũ khí ở giữa, bên phải hoặc bên trái khung nhìn, hoặc ẩn mọi mô hình vũ khí
+
+@ Play your chosen hit or kill cue when you damage an enemy
+vi Phát âm báo trúng hoặc hạ gục đã chọn khi bạn gây sát thương cho kẻ địch
+
+@ Playback speed: faster sounds shorter and higher
+vi Tốc độ phát: nhanh hơn thì âm ngắn và cao hơn
+
+@ Plays the Quake theme in the main menu when no game is running
+vi Phát nhạc chủ đề Quake ở menu chính khi không có trận nào đang chạy
+
+@ Portals farther away than this are drawn as flat discs
+vi Các cổng ở xa hơn mức này được vẽ thành đĩa phẳng
+
+@ Press attack once to keep firing, again to stop
+vi Nhấn tấn công một lần để bắn liên tục, nhấn lần nữa để dừng
+
+@ Press run once to switch between running and walking
+vi Nhấn chạy một lần để chuyển giữa chạy và đi bộ
+
+@ Raise or lower the tone independently of sound length
+vi Nâng hoặc hạ cao độ mà không đổi độ dài âm
+
+@ Red screen edges show where damage came from: top is front, bottom is behind; Screen Flashes controls their strength
+vi Viền đỏ màn hình cho biết sát thương đến từ đâu: trên là phía trước, dưới là phía sau; Chớp màn hình chỉnh độ mạnh
+
+@ Replaces the classic dot particles with glowing sparks, smoke and blood; mods with their own particle effects keep them
+vi Thay hạt chấm cổ điển bằng tia lửa phát sáng, khói và máu; mod có hiệu ứng hạt riêng vẫn giữ hiệu ứng của chúng
+
+@ Resolution and detail inside portal and teleporter views; lower tiers trim nested effects
+vi Độ phân giải và chi tiết trong khung nhìn của cổng và máy dịch chuyển; mức thấp hơn cắt bớt hiệu ứng lồng nhau
+
+@ Rippling light patterns on surfaces under water and slime
+vi Vân sáng gợn sóng trên bề mặt dưới nước và chất nhờn
+
+@ Scales all damage you take; above 100% is harder
+vi Điều chỉnh mọi sát thương bạn nhận; trên 100% là khó hơn
+
+@ Screen edge for this element; elements on the same spot stack
+vi Rìa màn hình cho thành phần này; các thành phần cùng vị trí sẽ xếp chồng
+
+@ Seconds a monster hit by the boomerang stays stunned
+vi Số giây quái vật bị boomerang trúng vẫn bị choáng
+
+@ Seconds impact marks and stuck nails stay before fading out; independent of Particle Quality
+vi Số giây vết đạn và đinh cắm tồn tại trước khi mờ đi; độc lập với Chất lượng hạt
+
+@ Seconds messages at the top of the screen stay up
+vi Số giây thông báo ở đầu màn hình hiển thị
+
+@ Seconds the flick stick snap takes; lower is faster
+vi Số giây cho cú vẩy của flick stick; thấp hơn thì nhanh hơn
+
+@ See through enhanced water; enables Water Opacity
+vi Nhìn xuyên qua nước nâng cao; bật Độ đục của nước
+
+@ Sensor grain, scanlines and flicker of the goggle image
+vi Hạt nhiễu cảm biến, đường quét và nhấp nháy của hình ảnh kính
+
+@ Shades every anti-aliasing sample; needs Anti-aliasing on
+vi Đổ bóng mọi mẫu khử răng cưa; cần bật Khử răng cưa
+
+@ Shifts colors so they stay distinct for the chosen color blindness
+vi Dịch chuyển màu để chúng vẫn phân biệt được với dạng mù màu đã chọn
+
+@ Shotgun hits leave small surface marks (cosmetic only)
+vi Phát bắn súng săn để lại vết nhỏ trên bề mặt (chỉ để trang trí)
+
+@ Show corner ticks at screen centre while locked, even with Crosshair off
+vi Hiện dấu góc ở giữa màn hình khi đang khóa, kể cả khi tắt tâm ngắm
+
+@ Show where grenades and other arcing shots will fly, bounce and land; local play only, not in deathmatch
+vi Hiện nơi lựu đạn và các phát bắn cầu vồng khác sẽ bay, nảy và rơi; chỉ khi chơi cục bộ, không có trong deathmatch
+
+@ Shows text for important sounds: doors, alerted enemies, secrets, pickups
+vi Hiện chữ cho âm thanh quan trọng: cửa, kẻ địch bị đánh động, bí mật, vật phẩm
+
+@ Shows the distance fog that maps and mods set; off always gives clear view
+vi Hiện sương mù xa do bản đồ và mod đặt; tắt thì luôn nhìn rõ
+
+@ Shows the player face next to the health number
+vi Hiện khuôn mặt người chơi cạnh chỉ số máu
+
+@ Simulation detail, step rate, fade-out lifetimes and caps for gibs and shrapnel; low also skips mover collision
+vi Chi tiết mô phỏng, tần suất bước, thời gian mờ dần và giới hạn cho mảnh thịt và mảnh văng; thấp còn bỏ va chạm với vật di động
+
+@ Size of the on-screen buttons and move stick
+vi Kích cỡ nút và cần di chuyển trên màn hình
+
+@ Slowly heals up to 100 health after 5 seconds without being hit
+vi Từ từ hồi đến 100 máu sau 5 giây không bị trúng đòn
+
+@ Slows stick look while the crosshair is over an enemy
+vi Làm chậm cần nhìn khi tâm ngắm nằm trên kẻ địch
+
+@ Slows the game down while the weapon wheel is open
+vi Làm chậm trò chơi khi vòng vũ khí đang mở
+
+@ Slows the whole game down; single player only. Saves and demos stay compatible with other ports
+vi Làm chậm toàn bộ trò chơi; chỉ chơi đơn. Bản lưu và demo vẫn tương thích với các bản port khác
+
+@ Small camera jolt on each freeze; off with Reduce Motion
+vi Camera giật nhẹ mỗi lần đóng băng; tắt bởi Giảm chuyển động
+
+@ Snap and track enemies in local play, including split-screen; unavailable online
+vi Bắt và bám theo kẻ địch khi chơi cục bộ, kể cả chia màn hình; không dùng được khi chơi trực tuyến
+
+@ Sparks, smoke, chips, splinters and splashes fly off whatever your shots hit
+vi Tia lửa, khói, mảnh vụn, dăm gỗ và bọt nước bắn ra từ bất cứ thứ gì bạn bắn trúng
+
+@ Spawns extra copies of every monster around the original when a level starts
+vi Sinh thêm bản sao của mọi quái vật quanh con gốc khi màn chơi bắt đầu
+
+@ Strength of the full-screen flashes for damage, pickups and powerups
+vi Độ mạnh của chớp toàn màn hình khi bị sát thương, nhặt đồ và vật phẩm sức mạnh
+
+@ Stretch or shorten the sound while keeping its pitch
+vi Kéo dài hoặc rút ngắn âm mà vẫn giữ cao độ
+
+@ Surface opacity; requires Enhanced Water and Translucent Water
+vi Độ đục bề mặt; cần Nước nâng cao và Nước trong suốt
+
+@ The hook latches onto metal surfaces (metal, tech, computer panels, copper)
+vi Móc bám vào bề mặt kim loại (kim loại, công nghệ, bảng máy tính, đồng)
+
+@ The hook latches onto stone, brick, rock and any surface not recognised as wood or metal
+vi Móc bám vào đá, gạch, đá tảng và mọi bề mặt không được nhận là gỗ hay kim loại
+
+@ The hook latches onto wooden surfaces (texture names like wood, crate, plank)
+vi Móc bám vào bề mặt gỗ (texture có tên như wood, crate, plank)
+
+@ Turn the controller's motion sensor into a look input; needs a pad with a gyroscope
+vi Biến cảm biến chuyển động của tay cầm thành đầu vào góc nhìn; cần tay cầm có con quay hồi chuyển
+
+@ Turns off view bob, strafe tilt and the camera kick when hit or firing
+vi Tắt nhún góc nhìn, nghiêng khi né ngang và camera giật khi trúng đòn hoặc khi bắn
+
+@ Turns on the extra liquid effects; Water Settings controls each one
+vi Bật các hiệu ứng chất lỏng bổ sung; Cài đặt nước điều chỉnh từng hiệu ứng
+
+@ Turns the view to follow a moving enemy you are aiming at
+vi Xoay góc nhìn theo kẻ địch đang di chuyển mà bạn nhắm vào
+
+@ Turns the view when you roll the controller sideways; 0 disables it, negative reverses it
+vi Xoay góc nhìn khi bạn nghiêng tay cầm sang bên; 0 để tắt, giá trị âm để đảo chiều
+
+@ Two-portal gun: fire and alt-fire place linked portals on flat walls; assign a weapon slot in Add-ons
+vi Súng hai cổng: bắn và bắn phụ đặt hai cổng nối nhau lên tường phẳng; gán ô vũ khí trong Tiện ích
+
+@ Unlocks the FX Settings page: enhanced particles, impact effects and blood splatter
+vi Mở khóa trang Cài đặt hiệu ứng: hạt nâng cao, hiệu ứng va chạm và vết máu
+
+@ Uses the 2021 re-release's smoother MD5 models (and MD3 replacements from mods) instead of the classic ones. Applies on the next map load
+vi Dùng mô hình MD5 mượt hơn của bản phát hành lại 2021 (và mô hình MD3 thay thế từ mod) thay cho mô hình cổ điển. Áp dụng khi tải bản đồ tiếp theo
+
+@ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
+vi Dùng ánh sáng màu của bản đồ (tệp .lit hoặc khối BSPX); tắt thì dùng ánh sáng trắng gốc. Áp dụng khi tải bản đồ tiếp theo
+
+@ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
+vi Số đoạn tia nước, số giọt và đổ bóng chất lỏng bóng loáng: thấp dùng dòng nước trong mờ đơn giản hơn; cao dùng tia nước mượt và bóng
+
+@ When gyro looking applies: always, off while +gyroaction is held, or only while it is held
+vi Khi nào dùng ngắm con quay: luôn luôn, tắt khi giữ +gyroaction, hoặc chỉ khi giữ nó
+
+@ Which weapons trigger the freeze; melee covers the axe and any mod weapon used at close range without ammo
+vi Vũ khí nào kích hoạt đóng băng; cận chiến gồm rìu và mọi vũ khí mod dùng ở tầm gần không cần đạn
+
+@ Your own rockets and grenades don't hurt you; rocket jumps still work
+vi Tên lửa và lựu đạn của chính bạn không làm bạn bị thương; nhảy tên lửa vẫn hoạt động
+
+# ==== ui.txt ====
+
+# Menus and pop-ups outside the options pages: save cards, launch, presets,
+# add-on browser, map packs, hints and dialogs.
+@ Select
+vi Chọn
+
+@ Back
+vi Quay lại
+
+@ Cancel
+vi Hủy
+
+@ Confirm
+vi Xác nhận
+
+@ Scroll
+vi Cuộn
+
+@ Section
+vi Mục
+
+@ Bind
+vi Gán
+
+@ Cancel binding
+vi Hủy gán phím
+
+@ Clear
+vi Xóa
+
+@ Clear pad
+vi Xóa tay cầm
+
+@ Remap
+vi Gán lại
+
+@ Type
+vi Nhập
+
+@ Shift
+vi Shift
+
+@ Done
+vi Xong
+
+@ Del
+vi Del
+
+@ Space
+vi Dấu cách
+
+@ Save
+vi Lưu
+
+@ Load
+vi Tải
+
+@ Delete
+vi Xóa
+
+@ Play
+vi Chơi
+
+@ Yes
+vi Có
+
+@ No
+vi Không
+
+@ OK
+vi OK
+
+@ System
+vi Hệ thống
+
+@ Language
+vi Ngôn ngữ
+
+@ Help
+vi Trợ giúp
+
+@ Fixed for this game: it was started without Customize
+vi Cố định cho ván này: nó được bắt đầu mà không qua Tùy chỉnh
+
+@ Press a button or key to bind (Start cancels)
+vi Nhấn nút hoặc phím để gán (Start để hủy)
+
+@ Press button...
+vi Nhấn nút...
+
+@ Press key...
+vi Nhấn phím...
+
+@ Replace this binding?
+vi Thay thế phím gán này?
+
+@ is already assigned
+vi đã được gán
+
+@ {} already assigned
+vi {} đã được gán
+
+@ Open Controls to remap Lock-on?
+vi Mở Điều khiển để gán lại Khóa mục tiêu?
+
+@ Lock-on
+vi Khóa mục tiêu
+
+@ Auto-aim Toggle
+vi Bật/tắt tự động ngắm
+
+@ Keyboard
+vi Bàn phím
+
+@ Controller
+vi Tay cầm
+
+# main menu, dialogs and screens
+@ Map Packs
+vi Gói bản đồ
+
+@ Customize
+vi Tùy chỉnh
+
+@ Level Select
+vi Chọn màn
+
+@ Really quit?
+vi Thật sự thoát?
+
+@ You died
+vi Bạn đã chết
+
+@ Continue from most recent save
+vi Tiếp tục từ bản lưu mới nhất
+
+@ Select save
+vi Chọn bản lưu
+
+@ Restart level
+vi Chơi lại màn
+
+@ Return to main menu
+vi Về menu chính
+
+@ (disabled)
+vi (đã tắt)
+
+@ (fixed for this game)
+vi (cố định cho ván này)
+
+@ (off)
+vi (tắt)
+
+@ Apply Display Changes
+vi Áp dụng thay đổi hiển thị
+
+@ Display Mode
+vi Chế độ hiển thị
+
+@ Resolution
+vi Độ phân giải
+
+@ desktop
+vi màn hình nền
+
+@ Preset
+vi Thiết lập sẵn
+
+@ Map
+vi Bản đồ
+
+@ Reset Shader Settings
+vi Đặt lại cài đặt shader
+
+@ Reset to Defaults
+vi Khôi phục mặc định
+
+@ Searching...
+vi Đang tìm...
+
+@ This game only autosaves.
+vi Ván này chỉ tự động lưu.
+
+@ (No Manual Saves modifier)
+vi (Điều chỉnh Không lưu thủ công)
+
+@ End the current game?
+vi Kết thúc ván hiện tại?
+
+@ Unsaved progress will be lost.
+vi Tiến trình chưa lưu sẽ bị mất.
+
+@ End game
+vi Kết thúc ván
+
+@ Overwrite
+vi Ghi đè
+
+@ Overwrite "{}"?
+vi Ghi đè "{}"?
+
+@ Saved {}
+vi Đã lưu {}
+
+@ Start a new game?
+vi Bắt đầu ván mới?
+
+@ New game
+vi Ván mới
+
+@ New Game
+vi Trò chơi mới
+
+@ CUSTOM
+vi TÙY CHỈNH
+
+@ Customize Experience
+vi Tùy chỉnh trải nghiệm
+
+@ Disable All
+vi Tắt tất cả
+
+@ Disable All Modifications
+vi Tắt mọi thay đổi
+
+@ Saves load in other source ports too.
+vi Bản lưu cũng tải được trong các bản port khác.
+
+@ Standard rules, no add-ons.
+vi Luật chuẩn, không tiện ích.
+
+@ Choose skill
+vi Chọn độ khó
+
+@ The current game will end
+vi Ván hiện tại sẽ kết thúc
+
+@ Easy
+vi Dễ
+
+@ Normal
+vi Thường
+
+@ Hard
+vi Khó
+
+@ Nightmare
+vi Ác mộng
+
+# graphics preset pop-up
+@ Choose a Graphics Preset
+vi Chọn thiết lập đồ họa
+
+@ Classic
+vi Cổ điển
+
+@ Like the re-release: enhanced models,
+vi Như bản phát hành lại: mô hình nâng cao,
+
+@ no added effects.
+vi không thêm hiệu ứng.
+
+@ Enhanced
+vi Nâng cao
+
+@ Every enhancement at its highest quality.
+vi Mọi cải tiến ở chất lượng cao nhất.
+
+@ Needs a capable GPU.
+vi Cần GPU đủ mạnh.
+
+@ Low-End
+vi Máy yếu
+
+@ Fastest. No anti-aliasing, original
+vi Nhanh nhất. Không khử răng cưa, mô hình
+
+@ models, lowest effect quality.
+vi gốc, hiệu ứng chất lượng thấp nhất.
+
+@ Esc keeps the defaults
+vi Esc giữ mặc định
+
+@ Everything can be changed later in Options.
+vi Mọi thứ có thể đổi sau trong Options.
+
+@ Keep Defaults
+vi Giữ mặc định
+
+# save and load cards
+@ Save Game
+vi Lưu trò chơi
+
+@ Load Game
+vi Tải trò chơi
+
+@ Autosaves
+vi Bản tự lưu
+
+@ newest first
+vi mới nhất trước
+
+@ Saves: {}
+vi Bản lưu: {}
+
+@ Browse Autosaves
+vi Xem bản tự lưu
+
+@ Every retained autosave, newest first
+vi Mọi bản tự lưu được giữ lại, mới nhất trước
+
+@ New save
+vi Bản lưu mới
+
+@ Select to save your game here
+vi Chọn để lưu trò chơi tại đây
+
+@ No autosaves yet
+vi Chưa có bản tự lưu
+
+@ Autosaves are made on level entry, secrets and more (Options > Gameplay)
+vi Tự động lưu khi vào màn, tìm thấy bí mật và hơn nữa (Options > Lối chơi)
+
+@ No saves yet
+vi Chưa có bản lưu
+
+@ Save from the Single Player menu, or press F6 to quicksave
+vi Lưu từ menu Single Player, hoặc nhấn F6 để lưu nhanh
+
+@ No picture
+vi Không có ảnh
+
+@ Del: delete save
+vi Del: xóa bản lưu
+
+@ Delete "{}"?
+vi Xóa "{}"?
+
+@ This cannot be undone.
+vi Không thể hoàn tác.
+
+@ Quicksave
+vi Lưu nhanh
+
+@ Autosave: {}
+vi Tự lưu: {}
+
+@ unknown trigger
+vi tác nhân không rõ
+
+@ Latest - {}
+vi Mới nhất - {}
+
+@ Health {}
+vi Máu {}
+
+@ Armor {}
+vi Giáp {}
+
+@ Kills {}/{}
+vi Hạ gục {}/{}
+
+@ Secrets {}/{}
+vi Bí mật {}/{}
+
+@ Split-screen, {} players
+vi Chia màn hình, {} người chơi
+
+@ Co-op
+vi Co-op
+
+@ Customized
+vi Tùy chỉnh
+
+@ Customized, {}
+vi Tùy chỉnh, {}
+
+@ Date unavailable
+vi Không có ngày
+
+@ Just now
+vi Vừa xong
+
+@ {} min ago
+vi {} phút trước
+
+@ {} h ago
+vi {} giờ trước
+
+@ Level entry
+vi Vào màn
+
+@ Secret found
+vi Tìm thấy bí mật
+
+@ All enemies killed
+vi Hạ hết kẻ địch
+
+@ All secrets found
+vi Tìm hết bí mật
+
+@ Timer
+vi Hẹn giờ
+
+# customize pages
+@ Standard rules
+vi Luật chuẩn
+
+@ Modifiers changed: {}
+vi Điều chỉnh đã đổi: {}
+
+@ no add-ons
+vi không tiện ích
+
+@ add-ons: {}
+vi tiện ích: {}
+
+@ Saves of this game are .qsa files: they need this source port.
+vi Bản lưu của ván này là tệp .qsa: chúng cần bản port này.
+
+@ Nothing changed: this plays as standard Quake.
+vi Không có gì thay đổi: chơi như Quake chuẩn.
+
+@ Changes apply now and are saved with this game (.qsa).
+vi Thay đổi áp dụng ngay và được lưu cùng ván này (.qsa).
+
+@ This game started without Customize, so its rules are fixed.
+vi Ván này bắt đầu mà không qua Tùy chỉnh, nên luật đã cố định.
+
+@ Start a new game and choose Customize Experience.
+vi Hãy bắt đầu ván mới và chọn Tùy chỉnh trải nghiệm.
+
+@ These rules apply to the next customized game.
+vi Các luật này áp dụng cho ván tùy chỉnh tiếp theo.
+
+# add-on browser
+@ Fire
+vi Bắn
+
+@ Alt Fire
+vi Bắn phụ
+
+@ Configure Parameters >
+vi Cấu hình tham số >
+
+@ Configure
+vi Cấu hình
+
+@ Settings
+vi Cài đặt
+
+@ Change slot
+vi Đổi ô
+
+@ Toggle
+vi Bật/tắt
+
+@ Details
+vi Chi tiết
+
+@ Enter or click the box: toggle
+vi Enter hoặc nhấp vào ô: bật/tắt
+
+@ Right / Tab / click: details
+vi Phải / Tab / nhấp: chi tiết
+
+@ Input Remapping
+vi Gán lại điều khiển
+
+@ Weapon Slot
+vi Ô vũ khí
+
+@ Customized games save as .qsa files, which need this source port.
+vi Ván tùy chỉnh được lưu thành tệp .qsa, cần bản port này.
+
+@ This game started without Customize, so its add-ons are fixed. Customize a new game instead.
+vi Ván này bắt đầu mà không qua Tùy chỉnh, nên tiện ích đã cố định. Hãy tùy chỉnh một ván mới.
+
+@ Bullet Time
+vi Bullet Time
+
+@ Change Goggles
+vi Đổi kính
+
+@ Dodge / Dive
+vi Né / Lao
+
+@ Goggles
+vi Kính
+
+@ Hitstop
+vi Hitstop
+
+@ Projectile Shotguns
+vi Súng săn đạn vật lý
+
+@ BULLET TIME: 20%
+vi BULLET TIME: 20%
+
+@ NORMAL SPEED
+vi TỐC ĐỘ THƯỜNG
+
+@ SLOW MOTION: PHYSICAL PELLETS
+vi QUAY CHẬM: HẠT ĐẠN VẬT LÝ
+
+@ DEMONSTRATION
+vi MINH HỌA
+
+@ GAMEPLAY
+vi LỐI CHƠI
+
+@ LOOP
+vi LẶP LẠI
+
+@ Preview unavailable
+vi Không có bản xem trước
+
+# shader and language help lines
+@ A setting of the chosen shader; arrows step it, Enter is not needed
+vi Một cài đặt của shader đã chọn; dùng phím mũi tên để đổi, không cần Enter
+
+@ Language of the menus, messages and the 2021 re-release's game text; System follows your computer's language
+vi Ngôn ngữ của menu, thông báo và văn bản trò chơi của bản phát hành lại 2021; Hệ thống theo ngôn ngữ máy tính của bạn
+
+@ Puts every setting of the chosen shader back to the preset's defaults
+vi Đưa mọi cài đặt của shader đã chọn về mặc định của thiết lập sẵn
+
+@ RetroArch slang shader on the final image: CRT, scanlines, NTSC, sharpening; add your own in <game>/shaders
+vi Shader slang RetroArch cho hình ảnh cuối: CRT, đường quét, NTSC, làm nét; thêm shader của bạn vào <game>/shaders
+
+# modern console footer
+@ Shift+PgUp/Dn: height  ` : hide
+vi Shift+PgUp/Dn: chiều cao  ` : ẩn
+
+@ Tab: complete  Ctrl+R: search  bash | pipe
+vi Tab: hoàn thành  Ctrl+R: tìm  bash | pipe
+
+@ ↑ +{} lines (End to jump) 
+vi ↑ +{} dòng (End để nhảy tới) 
+
+# add-on descriptions
+@ Create two linked portals on flat walls. Fire places the first portal; Alt Fire places the second. Walk through either portal to emerge from the other. Your momentum carries through. Assign a weapon slot below: pressing that slot repeatedly cycles its ordinary weapon and every enabled add-on assigned there. Portal view quality is configurable below.
+vi Tạo hai cổng nối nhau trên tường phẳng. Bắn đặt cổng thứ nhất; Bắn phụ đặt cổng thứ hai. Đi qua cổng này để ra ở cổng kia. Đà di chuyển của bạn được giữ nguyên. Gán ô vũ khí bên dưới: nhấn ô đó nhiều lần sẽ chuyển giữa vũ khí thường của nó và mọi tiện ích đang bật được gán vào đó. Chất lượng khung nhìn cổng có thể chỉnh bên dưới.
+
+@ Hold Fire and sweep the crosshair over monsters to queue targets. Release Fire to throw: the boomerang visits each target, stuns it and returns to you. Alt Fire clears the queue. The weapon slot selects a group, not a separate hotkey: press it again to cycle through the weapons in that slot. Configure stun duration and flight speed below.
+vi Giữ Bắn và lướt tâm ngắm qua quái vật để xếp hàng mục tiêu. Thả Bắn để ném: boomerang lần lượt bay tới từng mục tiêu, làm choáng nó rồi quay về với bạn. Bắn phụ xóa hàng chờ. Ô vũ khí chọn một nhóm, không phải phím tắt riêng: nhấn lần nữa để chuyển qua các vũ khí trong ô đó. Chỉnh thời gian choáng và tốc độ bay bên dưới.
+
+@ Hold Fire to charge a sticky bomb using rocket ammunition; release to launch. A longer charge throws it faster. Bombs cling to walls, doors and monsters. Alt Fire detonates your planted bombs together. Place a trap, retreat, then detonate it when enemies approach. Assign any weapon slot below; repeated presses cycle through the ordinary weapon and add-ons in that slot.
+vi Giữ Bắn để nạp một quả bom dính dùng đạn tên lửa; thả ra để phóng. Nạp càng lâu thì ném càng nhanh. Bom bám vào tường, cửa và quái vật. Bắn phụ kích nổ cùng lúc mọi quả bom đã gài. Đặt bẫy, lùi lại, rồi kích nổ khi kẻ địch đến gần. Gán ô vũ khí bất kỳ bên dưới; nhấn nhiều lần sẽ chuyển giữa vũ khí thường và các tiện ích trong ô đó.
+
+@ Fire launches a chain hook. It latches onto a permitted surface or enemy and reels you toward the anchor. Fire again or use Alt Fire to let go. Choose which materials and enemies can be hooked in Configure Parameters. Assign it to any weapon slot; repeated presses of the slot's existing binding cycle through its weapons.
+vi Bắn để phóng móc xích. Nó bám vào bề mặt hoặc kẻ địch được phép và kéo bạn về phía điểm neo. Bắn lần nữa hoặc dùng Bắn phụ để thả. Chọn vật liệu và kẻ địch có thể móc trong Cấu hình tham số. Gán nó vào ô vũ khí bất kỳ; nhấn phím hiện có của ô đó nhiều lần sẽ chuyển qua các vũ khí của ô.
+
+@ A piercing railgun inspired by Quake III. Fire sends a slug through every enemy along its line. Each shot consumes two cells, with a 1.5 second refire interval. Damage and the spiral trail colour are configurable below. Choose a weapon slot: the slot's current binding selects and cycles the weapons assigned to it.
+vi Railgun xuyên phá lấy cảm hứng từ Quake III. Bắn để gửi một viên đạn xuyên qua mọi kẻ địch trên đường bay. Mỗi phát tốn hai pin, cách nhau 1,5 giây. Sát thương và màu vệt xoắn ốc có thể chỉnh bên dưới. Chọn một ô vũ khí: phím hiện tại của ô đó chọn và chuyển qua các vũ khí được gán vào ô.
+
+@ A Portal-style gel sprayer. Fire sprays blue Repulsion gel: land, jump or run into it to bounce, and landings on it never hurt. Alt Fire sprays orange Propulsion gel: run across it to go much faster. Gel coats floors and walls until washed off with the Powerwasher. Assign a weapon slot below; repeated presses cycle the weapons in that slot.
+vi Súng phun gel kiểu Portal. Bắn phun gel Đẩy bật màu xanh: đáp xuống, nhảy hoặc chạy vào để nảy lên, và tiếp đất trên gel không bao giờ bị thương. Bắn phụ phun gel Tăng tốc màu cam: chạy qua để đi nhanh hơn nhiều. Gel phủ sàn và tường cho đến khi bị rửa sạch bằng Máy xịt rửa. Gán ô vũ khí bên dưới; nhấn nhiều lần sẽ chuyển qua các vũ khí trong ô đó.
+
+@ A water cannon. Fire shoots a straight jet with limited reach; Alt Fire a wide, shorter fan. The water pushes enemies back, turns projectiles aside and washes away gel and blood. Push strength is configurable below. Assign a weapon slot below; repeated presses cycle the weapons in that slot.
+vi Súng phun nước. Bắn phóng một tia thẳng có tầm hạn chế; Bắn phụ phun một hình quạt rộng, ngắn hơn. Nước đẩy lùi kẻ địch, làm lệch hướng đạn và rửa trôi gel và máu. Lực đẩy có thể chỉnh bên dưới. Gán ô vũ khí bên dưới; nhấn nhiều lần sẽ chuyển qua các vũ khí trong ô đó.
+
+@ One equipment add-on includes both night vision and thermal vision. The Change Goggles action cycles Normal, Night Vision, Thermal, then Normal again. Night vision brightens dark rooms; thermal vision highlights living enemies. Goggles do not occupy a weapon slot. Configure intensity and sensor noise below. The binding affects only this add-on.
+vi Một tiện ích trang bị gồm cả nhìn đêm và nhìn tầm nhiệt. Hành động Đổi kính chuyển qua Thường, Nhìn đêm, Tầm nhiệt, rồi lại Thường. Nhìn đêm làm sáng phòng tối; tầm nhiệt làm nổi bật kẻ địch còn sống. Kính không chiếm ô vũ khí. Chỉnh cường độ và nhiễu cảm biến bên dưới. Phím gán chỉ ảnh hưởng đến tiện ích này.
+
+@ Press Dodge with a movement direction on the ground or in midair: dive forward or leap backward and sideways. Diagonals are supported. Each press launches once, with a short recovery. The player body animates in third person. Assign the Dodge action below or in Controls.
+vi Nhấn Né cùng một hướng di chuyển khi ở trên mặt đất hoặc trên không: lao về phía trước hoặc bật lùi và sang ngang. Hỗ trợ cả hướng chéo. Mỗi lần nhấn phóng đi một lần, với thời gian hồi ngắn. Cơ thể người chơi có hoạt ảnh ở ngôi thứ ba. Gán hành động Né bên dưới hoặc trong Điều khiển.
+
+@ Use the dedicated Bullet Time action to slow the whole local game to 20% speed. Hold is the default; Toggle switches on each press. The optional meter limits use in real seconds and regenerates while inactive. Disable the meter for unlimited use. Remap the action and configure duration and regeneration below.
+vi Dùng hành động Bullet Time riêng để làm chậm toàn bộ trò chơi cục bộ xuống 20% tốc độ. Mặc định là Giữ; Bật/tắt chuyển trạng thái mỗi lần nhấn. Thanh năng lượng tùy chọn giới hạn thời gian dùng theo giây thực và hồi lại khi không dùng. Tắt thanh để dùng không giới hạn. Gán lại hành động và chỉnh thời lượng và tốc độ hồi bên dưới.
+
+@ Both shotguns and enemy grunts fire physical pellets with their original spread and damage. Fast default projectiles feel immediate; lower their speed to dodge incoming fire during bullet time. Configure projectile speed below, or reset it to the default of 10000 units per second.
+vi Cả hai khẩu súng săn và lính Grunt của địch đều bắn hạt đạn vật lý với độ tỏa và sát thương gốc. Đạn mặc định bay nhanh nên cảm giác tức thì; giảm tốc độ của chúng để né đạn trong bullet time. Chỉnh tốc độ đạn bên dưới, hoặc đặt lại mặc định 10000 đơn vị mỗi giây.
+
+@ Freezes the game for a split second when you damage an enemy, so hits feel heavier. Single player only. Choose which weapons trigger it (all, melee, ranged or explosives), how long it lasts and how much more a kill freezes. Advanced settings cover enemy toughness, damage scaling, cooldown and the longest freeze.
+vi Dừng hình trò chơi trong tích tắc khi bạn gây sát thương cho kẻ địch, để đòn đánh có cảm giác nặng hơn. Chỉ chơi đơn. Chọn vũ khí nào kích hoạt (tất cả, cận chiến, đánh xa hoặc vũ khí nổ), kéo dài bao lâu và đòn hạ gục đóng băng lâu thêm bao nhiêu. Cài đặt nâng cao gồm độ trâu của kẻ địch, tỷ lệ sát thương, thời gian hồi và lần đóng băng lâu nhất.
+
+# map packs and the Quaddicted browser
+@ Get more maps (Quaddicted)...
+vi Thêm bản đồ (Quaddicted)...
+
+@ Type to filter...
+vi Gõ để lọc...
+
+@ Launch mod
+vi Chạy mod
+
+@ Start first map
+vi Chơi bản đồ đầu tiên
+
+@ (running)
+vi (đang chạy)
+
+@ running
+vi đang chạy
+
+@ Recent
+vi Gần đây
+
+@ Name
+vi Tên
+
+@ Dir
+vi Thư mục
+
+@ Default
+vi Mặc định
+
+@ Title
+vi Tiêu đề
+
+@ Sort: {}
+vi Sắp xếp: {}
+
+@ {} installed
+vi Đã cài {}
+
+@ {}/{} matching
+vi {}/{} khớp
+
+@ {} maps, {} completed
+vi {} bản đồ, {} đã hoàn thành
+
+@ {}/{} matching, {} completed
+vi {}/{} khớp, {} đã hoàn thành
+
+@ no maps of its own
+vi không có bản đồ riêng
+
+@ dir: {}
+vi thư mục: {}
+
+@ base: {}
+vi gốc: {}
+
+@ Browse the Quaddicted archive of
+vi Duyệt kho lưu trữ Quaddicted gồm
+
+@ single-player maps and episodes,
+vi các bản đồ và chương chơi đơn,
+
+@ then download and install them
+vi rồi tải về và cài đặt chúng
+
+@ here. Each release gets its own
+vi ngay tại đây. Mỗi bản phát hành có
+
+@ entry in this list.
+vi một mục riêng trong danh sách này.
+
+@ Needs an internet connection.
+vi Cần kết nối Internet.
+
+@ Quaddicted Map Archive
+vi Kho bản đồ Quaddicted
+
+@ Newest
+vi Mới nhất
+
+@ Author
+vi Tác giả
+
+@ Size
+vi Kích thước
+
+@ Loading the map list...
+vi Đang tải danh sách bản đồ...
+
+@ Couldn't load the map list: {}
+vi Không tải được danh sách bản đồ: {}
+
+@ {} single-player releases  -  F5 refreshes
+vi {} bản phát hành chơi đơn  -  F5 để làm mới
+
+@ {} matching
+vi {} khớp
+
+@ by {}
+vi của {}
+
+@ requires: {}
+vi cần: {}
+
+@ maps: {}
+vi bản đồ: {}
+
+@ Failed: {}
+vi Thất bại: {}
+
+@ Downloading... {}%
+vi Đang tải về... {}%
+
+@ Unpacking...
+vi Đang giải nén...
+
+@ Installed in {}/  -  Enter: play
+vi Đã cài vào {}/  -  Enter: chơi
+
+@ Enter: download and install
+vi Enter: tải về và cài đặt
+
+@ unpacking
+vi đang giải nén
+
+@ failed
+vi thất bại
+
+@ installed
+vi đã cài
+
+@ Downloads are not available in the browser build
+vi Không thể tải về trong bản chạy trên trình duyệt
+
+@ the map list could not be read
+vi không đọc được danh sách bản đồ
+
+@ downloading needs the curl program
+vi cần chương trình curl để tải về
+
+@ download failed
+vi tải về thất bại
+
+@ the download is not a valid zip
+vi tệp tải về không phải zip hợp lệ
+
+@ nothing to install for this engine
+vi không có gì để cài cho engine này
+
+@ needs {} installed first
+vi cần cài {} trước
+
+@ couldn't unpack {}
+vi không giải nén được {}
+
+# help screen
+@ About
+vi Giới thiệu
+
+@ < Back
+vi < Quay lại
+
+# tr_ctx keys: English shows the short word, the key says which meaning
+@ Save (a manual save, as opposed to a quicksave or autosave)
+vi Bản lưu
+
+# ==== hud.txt ====
+
+# HUD, weapon and equipment wheels, sound captions and other in-game text.
+# Weapon, monster and item names follow the 2021 re-release's own translations.
+@ Axe
+vi Rìu
+
+@ Shotgun
+vi Súng săn
+
+@ Double-Barrelled Shotgun
+vi Súng săn hai nòng
+
+@ Nailgun
+vi Súng bắn đinh
+
+@ Super Nailgun
+vi Siêu súng bắn đinh
+
+@ Grenade Launcher
+vi Súng phóng lựu
+
+@ Rocket Launcher
+vi Súng phóng tên lửa
+
+@ Thunderbolt
+vi Thunderbolt
+
+@ Portal Gun
+vi Súng cổng
+
+@ Boomerang
+vi Boomerang
+
+@ Stickybomb Launcher
+vi Súng phóng bom dính
+
+@ Railgun
+vi Railgun
+
+@ Hookshot
+vi Móc kéo
+
+@ Gel Sprayer
+vi Súng phun gel
+
+@ Powerwasher
+vi Máy xịt rửa
+
+@ Night Vision Goggles
+vi Kính nhìn đêm
+
+@ Thermal Goggles
+vi Kính tầm nhiệt
+
+@ Normal vision
+vi Nhìn thường
+
+@ ON
+vi BẬT
+
+@ OFF
+vi TẮT
+
+@ {} (turn on)
+vi {} (bật)
+
+@ {} (turn off)
+vi {} (tắt)
+
+@ Move mouse to select, release to toggle
+vi Di chuột để chọn, thả để bật/tắt
+
+@ Move mouse to select, release to equip
+vi Di chuột để chọn, thả để trang bị
+
+@ Release to toggle
+vi Thả để bật/tắt
+
+@ Release to equip
+vi Thả để trang bị
+
+@ shells
+vi đạn ghém
+
+@ nails
+vi đinh
+
+@ rockets
+vi tên lửa
+
+@ cells
+vi pin
+
+@ Kills: {}/{}
+vi Hạ gục: {}/{}
+
+@ Secrets: {}/{}
+vi Bí mật: {}/{}
+
+@ Time {}
+vi Thời gian {}
+
+@ Press any button to continue...
+vi Nhấn nút bất kỳ để tiếp tục...
+
+@ Press any key to continue...
+vi Nhấn phím bất kỳ để tiếp tục...
+
+@ BULLET TIME
+vi BULLET TIME
+
+@ AUTO AIM
+vi TỰ ĐỘNG NGẮM
+
+@ Crosshair
+vi Tâm ngắm
+
+@ + Marker
+vi + Dấu trúng
+
+@ Hit markers off
+vi Tắt dấu trúng
+
+@ On target
+vi Khi nhắm trúng
+
+@ On kill
+vi Khi hạ gục
+
+# sound captions
+@ [Secret found]
+vi [Tìm thấy bí mật]
+
+@ [Message]
+vi [Thông báo]
+
+@ [Switch activated]
+vi [Công tắc được bật]
+
+@ [Key picked up]
+vi [Nhặt chìa khóa]
+
+@ [Rune picked up]
+vi [Nhặt cổ ngữ]
+
+@ [Teleporter]
+vi [Máy dịch chuyển]
+
+@ [Teleport]
+vi [Dịch chuyển]
+
+@ [Splash]
+vi [Tõm]
+
+@ [Leaving water]
+vi [Ra khỏi nước]
+
+@ [Door]
+vi [Cửa]
+
+@ [Platform moving]
+vi [Bệ đang di chuyển]
+
+@ [Button]
+vi [Nút bấm]
+
+@ [Health picked up]
+vi [Nhặt máu]
+
+@ [Armor picked up]
+vi [Nhặt giáp]
+
+@ [Quad Damage wearing off]
+vi [Quad Damage sắp hết]
+
+@ [Quad Damage]
+vi [Quad Damage]
+
+@ [Pentagram wearing off]
+vi [Ngôi sao Bảo hộ sắp hết]
+
+@ [Pentagram of Protection]
+vi [Ngôi sao Bảo hộ]
+
+@ [Ring wearing off]
+vi [Nhẫn sắp hết]
+
+@ [Ring of Shadows]
+vi [Nhẫn Bóng tối]
+
+@ [Biosuit wearing off]
+vi [Bộ đồ sinh học sắp hết]
+
+@ [Biosuit]
+vi [Bộ đồ sinh học]
+
+@ [Item picked up]
+vi [Nhặt vật phẩm]
+
+@ [Weapon picked up]
+vi [Nhặt vũ khí]
+
+@ [Ammo picked up]
+vi [Nhặt đạn]
+
+@ [Explosion]
+vi [Vụ nổ]
+
+@ [Grenade launched]
+vi [Phóng lựu đạn]
+
+@ [Grenade bounce]
+vi [Lựu đạn nảy]
+
+@ [Rocket fired]
+vi [Bắn tên lửa]
+
+@ [Nails fired]
+vi [Bắn đinh]
+
+@ [Lightning]
+vi [Tia sét]
+
+@ [Thunder]
+vi [Sấm]
+
+@ [Enforcer alerted]
+vi [Enforcer bị đánh động]
+
+@ [Grunt alerted]
+vi [Grunt bị đánh động]
+
+@ [Rottweiler alerted]
+vi [Rottweiler bị đánh động]
+
+@ [Knight alerted]
+vi [Knight bị đánh động]
+
+@ [Death Knight alerted]
+vi [Death Knight bị đánh động]
+
+@ [Scrag alerted]
+vi [Scrag bị đánh động]
+
+@ [Ogre alerted]
+vi [Ogre bị đánh động]
+
+@ [Fiend alerted]
+vi [Fiend bị đánh động]
+
+@ [Shambler alerted]
+vi [Shambler bị đánh động]
+
+@ [Zombie groaning]
+vi [Zombie rên rỉ]
+
+@ [Vore alerted]
+vi [Vore bị đánh động]
+
+@ [Vore attacking]
+vi [Vore tấn công]
+
+@ [Spawn alerted]
+vi [Spawn bị đánh động]
+
+@ [Rotfish]
+vi [Rotfish]
+
+@ [Spawn]
+vi [Spawn]
+
+@ [Chthon]
+vi [Chthon]
+
+@ [Hard landing]
+vi [Tiếp đất mạnh]
+
+@ [Drowning]
+vi [Chết đuối]
+
+@ [Gasping for air]
+vi [Thở hổn hển]
+
+@ [Burning]
+vi [Bị bỏng]
+
+@ [Telefrag]
+vi [Telefrag]
+
+@ [Gibbed]
+vi [Nát bấy]
+
+# ==== console.txt ====
+
+# Console messages, shown translated only with con_translate 1 (Translate Console).
+# Cvar and command names stay as they are.
+@ Autosaved.
+vi Đã tự động lưu.
+
+@ Game saved.
+vi Đã lưu trò chơi.
+
+@ Can't save now.
+vi Không thể lưu lúc này.
+
+@ This game only autosaves (No Manual Saves modifier).
+vi Ván này chỉ tự động lưu (điều chỉnh Không lưu thủ công).
+
+@ Loading {}...
+vi Đang tải {}...
+
+@ load failed: {}
+vi tải thất bại: {}
+
+@ ERROR: autosave failed: {}
+vi LỖI: tự động lưu thất bại: {}
+
+@ ERROR: couldn't open {}
+vi LỖI: không mở được {}
+
+@ ERROR: couldn't open {}.
+vi LỖI: không mở được {}.
+
+@ ERROR: couldn't write {}: {}
+vi LỖI: không ghi được {}: {}
+
+@ ERROR: couldn't create {}: {}
+vi LỖI: không tạo được {}: {}
+
+@ couldn't write {}: {}
+vi không ghi được {}: {}
+
+@ Wrote {}
+vi Đã ghi {}
+
+@ screenshot failed: {}
+vi chụp màn hình thất bại: {}
+
+@ screenshot: {}
+vi ảnh chụp màn hình: {}
+
+@ No readable save available. Select save or restart the level.
+vi Không có bản lưu đọc được. Hãy chọn bản lưu hoặc chơi lại màn.
+
+@ Unknown command "{}"
+vi Lệnh không xác định "{}"
+
+@ couldn't exec {}
+vi không thực thi được {}
+
+@ execing {}
+vi đang thực thi {}
+
+@ execing config.cfg (inherited from {})
+vi đang thực thi config.cfg (kế thừa từ {})
+
+@ execing config.cfg (mod defaults)
+vi đang thực thi config.cfg (mặc định của mod)
+
+@ execing default.cfg (built-in)
+vi đang thực thi default.cfg (tích hợp sẵn)
+
+@ {} cvars
+vi {} biến
+
+@ {} commands
+vi {} lệnh
+
+@ Can't "cmd", not connected
+vi Không thể "cmd", chưa kết nối
+
+@ Looking for Quake servers...
+vi Đang tìm máy chủ Quake...
+
+@ Bad value, must be between 1 and 65534
+vi Giá trị sai, phải nằm trong khoảng 1 đến 65534
+
+@ Couldn't handle music file {}
+vi Không xử lý được tệp nhạc {}
+
+@ Bug report written to {}
+vi Đã ghi báo cáo lỗi vào {}
+
+@ bugreport: can't create {}: {}
+vi bugreport: không tạo được {}: {}
+
+@ graphics preset: {}
+vi thiết lập đồ họa: {}
+
+@ Presets (r_shader_preset <name>):
+vi Thiết lập sẵn (r_shader_preset <tên>):
+
+@ Add your own .slangp presets under <game>/shaders/.
+vi Thêm thiết lập .slangp của bạn vào <game>/shaders/.
+
+@ no shader preset loaded (r_shader_preset)
+vi chưa tải thiết lập shader nào (r_shader_preset)
+
+@ r_shader_preset: "{}" not found
+vi r_shader_preset: không tìm thấy "{}"
+
+@ no parameter "{}" in this preset
+vi thiết lập này không có tham số "{}"
+
+@ {} = {} (default {}, {}..{})
+vi {} = {} (mặc định {}, {}..{})
+
+@ Switching to {}...
+vi Đang chuyển sang {}...
+
+@ game: no game dir "{}" in {}
+vi game: không có thư mục game "{}" trong {}
+
+@ game: can't find the engine executable
+vi game: không tìm thấy tệp thực thi của engine
+
+@ game: exec failed: {}
+vi game: thực thi thất bại: {}
+
+@ game: launch failed: {}
+vi game: khởi chạy thất bại: {}
+
+@ loaded {} in {}s
+vi đã tải {} trong {} giây
+
+@ No demos listed with startdemos
+vi Không có demo nào được liệt kê bằng startdemos
+
+@ Playing demo from {}.
+vi Đang phát demo từ {}.
+
+@ {} frames {} seconds {} fps
+vi {} khung hình {} giây {} fps
+
+@ Recording to {}.
+vi Đang ghi vào {}.
+
+@ Completed demo
+vi Demo đã kết thúc
+
+@ Can't record during demo playback
+vi Không thể ghi khi đang phát demo
+
+@ Relative pathnames are not allowed.
+vi Không cho phép đường dẫn tương đối.
+
+@ Can't record - try again when connected
+vi Không thể ghi - hãy thử lại khi đã kết nối
+
+@ {} demo(s) in loop
+vi {} demo đang lặp
+
+@ Not recording a demo.
+vi Không có demo nào đang được ghi.
+
+@ {} joined on a gamepad
+vi {} đã tham gia bằng tay cầm
+
+@ goggles: needs a game started with Add-ons and Goggles enabled
+vi goggles: cần ván được bắt đầu với Tiện ích và Kính được bật
+
+@ equip: needs a game started with Add-ons and Goggles enabled
+vi equip: cần ván được bắt đầu với Tiện ích và Kính được bật
+
+@ UDP listening on port {}
+vi UDP đang lắng nghe trên cổng {}
+
+@ UDP bind on port {} failed: {}
+vi Gắn UDP vào cổng {} thất bại: {}
+
+@ Connection accepted by {}
+vi Kết nối được chấp nhận bởi {}
+
+@ Connection failed: {}
+vi Kết nối thất bại: {}
+
+@ Couldn't resolve {}
+vi Không phân giải được {}
+
+@ Connecting to {}...
+vi Đang kết nối tới {}...
+
+@ Connecting to QuakeWorld server {}...
+vi Đang kết nối tới máy chủ QuakeWorld {}...
+
+@ Disconnected: {}
+vi Đã ngắt kết nối: {}
+
+@ Server disconnected
+vi Máy chủ đã ngắt kết nối
+
+@ Client {} connected
+vi Máy khách {} đã kết nối
+
+@ Client {} timed out
+vi Máy khách {} hết thời gian chờ
+
+@ Couldn't spawn server {}: {}
+vi Không khởi tạo được máy chủ {}: {}
+
+@ maxplayers can not be changed while a server is running.
+vi Không thể đổi maxplayers khi máy chủ đang chạy.
+
+@ You can't kick yourself!
+vi Bạn không thể tự đá chính mình!
+
+@ Only the server may changelevel
+vi Chỉ máy chủ mới được dùng changelevel
+
+@ {} renamed to {}
+vi {} đã đổi tên thành {}
