@@ -34,7 +34,8 @@ danese, norvegese, olandese, greco, ungherese, rumeno, portoghese
 tradizionale), turco, indonesiano, malese, filippino, vietnamita,
 serbo, lituano, lettone, estone, maltese, albanese, armeno, georgiano,
 islandese, irlandese, gallese, basco, catalano, galiziano, latino, esperanto, bielorusso, macedone,
-sloveno o swahili.
+sloveno, swahili, arabo, ebraico, persiano, urdu, hindi, marathi, bengalese,
+punjabi, gujarati, tamil, telugu, thailandese, khmer, amarico o cantonese.
 **Sistema** segue la lingua del computer. I testi di gioco della
 riedizione 2021 sono tradotti solo in francese, tedesco, italiano, spagnolo
 e russo; le altre lingue li mostrano in inglese. Nelle lingue diverse

@@ -33,8 +33,9 @@ Finnish, Danish, Norwegian, Dutch, Greek, Hungarian, Romanian, Portuguese
 Traditional), Turkish, Indonesian, Malay, Filipino, Vietnamese,
 Serbian, Lithuanian, Latvian, Estonian, Maltese, Albanian, Armenian,
 Georgian, Icelandic, Irish, Welsh, Basque, Catalan, Galician, Latin,
-Esperanto, Belarusian, Macedonian, Slovenian or
-Swahili.
+Esperanto, Belarusian, Macedonian, Slovenian, Swahili, Arabic, Hebrew,
+Persian, Urdu, Hindi, Marathi, Bengali, Punjabi, Gujarati, Tamil, Telugu,
+Thai, Khmer, Amharic or Cantonese.
 **System** follows your computer's language. The 2021 re-release's own game
 text is translated only into French, German, Italian, Spanish and Russian;
 other languages show it in English. In languages other than English the

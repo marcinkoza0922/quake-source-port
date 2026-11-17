@@ -32,8 +32,9 @@ norvegiană, neerlandeză, greacă, maghiară, română, portugheză (Portugalia
 Brazilia), japoneză, coreeană, chineză (simplificată sau tradițională), turcă,
 indoneziană, malaieziană, filipineză, vietnameză, sârbă, lituaniană, letonă,
 estonă, malteză, albaneză, armeană, georgiană, islandeză, irlandeză, galeză,
-bască, catalană, galiciană, latină, esperanto, belarusă, macedoneană, slovenă
-sau swahili.
+bască, catalană, galiciană, latină, esperanto, belarusă, macedoneană, slovenă,
+swahili, arabă, ebraică, persană, urdu, hindi, marathi, bengaleză, punjabi,
+gujarati, tamilă, telugu, thailandeză, khmeră, amharică sau cantoneză.
 **Sistem** urmează limba calculatorului tău. Textele de joc proprii ale
 reeditării din 2021 sunt traduse doar în franceză, germană, italiană,
 spaniolă și rusă; celelalte limbi le afișează în engleză. În alte limbi

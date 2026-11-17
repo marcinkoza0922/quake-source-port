@@ -36,7 +36,9 @@ traditam), Turcicam, Indonesianam, Malaianam, Philippinam, Vietnamicam,
 Serbicam, Lituanicam, Lettonicam, Estonicam, Melitensem, Albanicam,
 Armeniacam, Georgianam, Islandicam, Hibernicam, Cambricam, Vasconicam,
 Catalanicam, Gallaecam, Latinam, Esperantam, Ruthenicam albam,
-Macedonicam, Slovenicam vel Suahilicam.
+Macedonicam, Slovenicam, Suahilicam, Arabicam, Hebraicam, Persicam, Urdicam,
+Hindicam, Marathicam, Bengalicam, Panjabicam, Gujaraticam, Tamulicam,
+Telugicam, Thaicam, Khmericam, Amharicam vel Cantonensem.
 **Systema** linguam computatri tui sequitur. Textus lusus proprius
 editionis anni 2021 tantum Francogallice, Theodisce, Italice, Hispanice et
 Russice versus est; aliae linguae eum Anglice monstrant. In linguis

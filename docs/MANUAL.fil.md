@@ -35,7 +35,9 @@ Finnish, Danes, Norwegian, Olandes, Griyego, Hungarian, Romanian, Portuges
 Traditional), Turko, Indonesian, Malay, Filipino, Vietnamese,
 Serbian, Lithuanian, Latvian, Estonian, Maltese, Albanian, Armenian,
 Georgian, Icelandic, Irish, Welsh, Basque, Catalan, Galician, Latin,
-Esperanto, Belarusian, Macedonian, Slovenian o Swahili.
+Esperanto, Belarusian, Macedonian, Slovenian, Swahili, Arabe, Hebreo,
+Persian, Urdu, Hindi, Marathi, Bengali, Punjabi, Gujarati, Tamil, Telugu,
+Thai, Khmer, Amharic o Cantonese.
 Sinusunod ng **System** ang wika ng computer mo. Sa Pranses, Aleman,
 Italyano, Espanyol at Ruso lang isinalin ang sariling teksto ng laro ng 2021
 re-release; sa ibang wika, Ingles ito. Sa mga wikang hindi Ingles, ginagamit

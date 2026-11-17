@@ -34,7 +34,9 @@ dana, norvega, nederlanda, greka, hungara, rumana, portugala (Portugalio aŭ
 Brazilo), japana, korea, ĉina (simpligita aŭ tradicia), turka, indonezia,
 malaja, filipina, vjetnama, serba, litova, latva, estona, malta, albana,
 armena, kartvela, islanda, irlanda, kimra, eŭska, kataluna, galega, latina,
-Esperanto, belorusa, makedona, slovena aŭ svahila.
+Esperanto, belorusa, makedona, slovena, svahila, araba, hebrea, persa,
+urdua, hindia, marata, bengala, panĝaba, guĝarata, tamila, telugua, taja,
+kmera, amhara aŭ kantona.
 **Sistemo** sekvas la lingvon de via komputilo. La propra ludteksto de la
 reeldono de 2021 estas tradukita nur al la franca, germana, itala, hispana
 kaj rusa; aliaj lingvoj montras ĝin en la angla. En lingvoj krom la angla

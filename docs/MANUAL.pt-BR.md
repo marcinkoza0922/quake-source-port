@@ -34,7 +34,9 @@ português (Portugal ou Brasil), japonês, coreano, chinês (simplificado ou
 tradicional), turco, indonésio, malaio, filipino, vietnamita, sérvio,
 lituano, letão, estoniano, maltês, albanês, armênio, georgiano, islandês,
 irlandês, galês, basco, catalão, galego, latim, esperanto, bielorrusso,
-macedônio, esloveno ou suaíli.
+macedônio, esloveno, suaíli, árabe, hebraico, persa, urdu, híndi, marati,
+bengali, punjabi, guzerate, tâmil, télugo, tailandês, khmer, amárico ou
+cantonês.
 **Sistema** segue o idioma do seu computador. Os textos do próprio jogo no
 relançamento de 2021 só estão traduzidos para francês, alemão, italiano,
 espanhol e russo; os outros idiomas os mostram em inglês. Em idiomas

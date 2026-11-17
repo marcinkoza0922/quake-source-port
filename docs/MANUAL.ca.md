@@ -33,7 +33,9 @@ noruec, neerlandès, grec, hongarès, romanès, portuguès (Portugal o Brasil),
 japonès, coreà, xinès (simplificat o tradicional), turc, indonesi, malai,
 filipí, vietnamita, serbi, lituà, letó, estonià, maltès, albanès, armeni,
 georgià, islandès, irlandès, gal·lès, basc, català, gallec, llatí,
-esperanto, bielorús, macedoni, eslovè o suahili.
+esperanto, bielorús, macedoni, eslovè, suahili, àrab, hebreu, persa, urdú,
+hindi, marathi, bengalí, panjabi, gujarati, tàmil, telugu, tai, khmer,
+amhàric o cantonès.
 **Sistema** segueix l'idioma de l'ordinador. Els textos de joc de la
 reedició del 2021 només estan traduïts al francès, l'alemany, l'italià, el
 castellà i el rus; els altres idiomes els mostren en anglès. En els idiomes

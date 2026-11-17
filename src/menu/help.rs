@@ -59,6 +59,21 @@ const MANUALS: [&str; qcore::lang::Lang::ALL.len()] = [
     include_str!("../../docs/MANUAL.mk.md"),
     include_str!("../../docs/MANUAL.sl.md"),
     include_str!("../../docs/MANUAL.sw.md"),
+    include_str!("../../docs/MANUAL.ar.md"),
+    include_str!("../../docs/MANUAL.he.md"),
+    include_str!("../../docs/MANUAL.fa.md"),
+    include_str!("../../docs/MANUAL.ur.md"),
+    include_str!("../../docs/MANUAL.hi.md"),
+    include_str!("../../docs/MANUAL.mr.md"),
+    include_str!("../../docs/MANUAL.bn.md"),
+    include_str!("../../docs/MANUAL.pa.md"),
+    include_str!("../../docs/MANUAL.gu.md"),
+    include_str!("../../docs/MANUAL.ta.md"),
+    include_str!("../../docs/MANUAL.te.md"),
+    include_str!("../../docs/MANUAL.th.md"),
+    include_str!("../../docs/MANUAL.km.md"),
+    include_str!("../../docs/MANUAL.am.md"),
+    include_str!("../../docs/MANUAL.yue.md"),
 ];
 
 /// Section list (left) and text pane (right), in 640x360 menu units.
@@ -339,9 +354,16 @@ impl Help {
         let sc = self.scroll.get().min(self.max_scroll());
         self.scroll.set(sc);
         let vis = visible_lines();
+        let rtl = qcore::lang::rtl();
         for (k, (x, s, head)) in lines.iter().skip(sc).take(vis).enumerate() {
             let y = TOP + PAD + k as f32 * LINE_H;
-            c.text(TEXT_X + PAD + x, y, s, TXT, if *head { GOLD_FG } else { FG });
+            let color = if *head { GOLD_FG } else { FG };
+            if rtl {
+                // right-to-left: ragged left edge, indents from the right
+                c.text_right(TEXT_X + TEXT_W - PAD - x, y, s, TXT, color);
+            } else {
+                c.text(TEXT_X + PAD + x, y, s, TXT, color);
+            }
         }
         if lines.len() > vis {
             let track = BOTTOM - TOP - 8.0;

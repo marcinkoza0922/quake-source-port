@@ -1,0 +1,3024 @@
+# he: the port's own text; English keys from crates/qcore/lang/*.txt.
+# Format in crates/qcore/src/lang/catalog.rs; check with tools/lang_check.py.
+
+# ==== menu.txt ====
+
+# Options pages: page names, row labels and choice values.
+@ 10% speed
+he מהירות 10%
+
+@ 2 split-screen
+he 2 במסך מפוצל
+
+@ 3 split-screen
+he 3 במסך מפוצל
+
+@ 4 split-screen
+he 4 במסך מפוצל
+
+@ 5 split-screen
+he 5 במסך מפוצל
+
+@ 6 split-screen
+he 6 במסך מפוצל
+
+@ 2D aiming
+he כיוון דו-ממדי
+
+@ 2x monsters
+he מפלצות x2
+
+@ 3x monsters
+he מפלצות x3
+
+@ 4x monsters
+he מפלצות x4
+
+@ 3D resolution
+he רזולוציית תלת-ממד
+
+@ 3D view
+he תצוגת תלת-ממד
+
+@ 8-bit Color
+he צבע 8 ביט
+
+@ Accessibility
+he נגישות
+
+@ Acquisition Cone
+he חרוט נעילה
+
+@ Activation
+he הפעלה
+
+@ Add a ringing room tail after the cue
+he מוסיף הדהוד חדר אחרי הצליל
+
+@ Add delayed repeats after the cue
+he מוסיף חזרות מושהות אחרי הצליל
+
+@ Add saturation and distortion
+he מוסיף רוויה ועיוות
+
+@ Add-ons
+he תוספים
+
+@ Address
+he כתובת
+
+@ Adds fine noise to hide color banding
+he מוסיף רעש עדין להסתרת פסי צבע
+
+@ Advanced Settings
+he הגדרות מתקדמות
+
+@ Aim Assist
+he סיוע בכיוון
+
+@ Aim Rotation
+he סיבוב כיוון
+
+@ Aim Slowdown
+he האטת כיוון
+
+@ Aim Style
+he סגנון כיוון
+
+@ All
+he הכול
+
+@ All enemies
+he כל האויבים
+
+@ Alt Fire (Add-ons)
+he ירי משני (תוספים)
+
+@ Always Run
+he ריצה תמידית
+
+@ Ambient Occlusion
+he הצללה סביבתית
+
+@ Ammo Counts
+he מוני תחמושת
+
+@ Ammo Counts Position
+he מיקום מוני התחמושת
+
+@ Ammo Pickups
+he איסוף תחמושת
+
+@ Anisotropic
+he אניזוטרופי
+
+@ Anti-aliasing
+he החלקת קצוות
+
+@ Apply To
+he החל על
+
+@ Armor
+he שריון
+
+@ Armor Position
+he מיקום השריון
+
+@ Ask
+he לשאול
+
+@ Attack
+he תקיפה
+
+@ Audio
+he שמע
+
+@ Auto-aim
+he כיוון אוטומטי
+
+@ Auto-aim Settings
+he הגדרות כיוון אוטומטי
+
+@ Autosave
+he שמירה אוטומטית
+
+@ Autosave Settings
+he הגדרות שמירה אוטומטית
+
+@ Autosave Timer
+he שמירה אוטומטית מתוזמנת
+
+@ Autosaves to Keep
+he שמירות אוטומטיות לשמור
+
+@ Bass
+he בס
+
+@ Blip
+he ביפ
+
+@ Blood Quality
+he איכות הדם
+
+@ Blood Splatter Settings
+he הגדרות התזות דם
+
+@ Blue
+he כחול
+
+@ Boomerang Settings
+he הגדרות בומרנג
+
+@ Boost or cut high frequencies in decibels
+he הגברה או הנחתה של תדרים גבוהים בדציבלים
+
+@ Boost or cut low frequencies in decibels
+he הגברה או הנחתה של תדרים נמוכים בדציבלים
+
+@ Brightness
+he בהירות
+
+@ Bullet Time (Add-ons)
+he בולט טיים (תוספים)
+
+@ Bullet Time Settings
+he הגדרות בולט טיים
+
+@ Button Glyphs
+he סמלי כפתורים
+
+@ Button Size
+he גודל כפתורים
+
+@ Camera
+he מצלמה
+
+@ Caustic Intensity
+he עוצמת השתקפויות
+
+@ Caustics
+he השתקפויות אור במים
+
+@ Center
+he מרכז
+
+@ Center Message Position
+he מיקום הודעות מרכזיות
+
+@ Center Message Time
+he משך הודעות מרכזיות
+
+@ Center View
+he מרכוז מבט
+
+@ Change Color on Kill
+he שינוי צבע בהריגה
+
+@ Change Color on Target
+he שינוי צבע על מטרה
+
+@ Chime
+he צלצול
+
+@ Click
+he קליק
+
+@ Clink
+he צלצול מתכת
+
+@ Coin
+he מטבע
+
+@ Color
+he צבע
+
+@ Color Filter
+he מסנן צבע
+
+@ Color of the grenade arc
+he צבע קשת הרימון
+
+@ Colored Lighting
+he תאורה צבעונית
+
+@ Connect
+he התחבר
+
+@ Contrast
+he ניגודיות
+
+@ Controls
+he שליטה
+
+@ Cooldown (ms)
+he זמן התאוששות (ms)
+
+@ Crosshair Outline
+he מתאר הכוונת
+
+@ Crosshair Shape
+he צורת הכוונת
+
+@ Crosshair Size
+he גודל הכוונת
+
+@ Current Ammo
+he תחמושת נוכחית
+
+@ Current Ammo Position
+he מיקום התחמושת הנוכחית
+
+@ Customize This Game
+he התאמת המשחק הזה
+
+@ Damage
+he נזק
+
+@ Damage Taken
+he נזק שספגת
+
+@ Debris
+he שברים
+
+@ Debris Quality
+he איכות השברים
+
+@ Debris Settings
+he הגדרות שברים
+
+@ Directional Damage
+he כיוון הנזק
+
+@ Dithering
+he דית'רינג
+
+@ Dodge / Dive (Add-ons)
+he התחמקות / זינוק (תוספים)
+
+@ Dragging up looks down instead of up
+he גרירה למעלה מסיטה את המבט למטה
+
+@ Drive
+he רוויה
+
+@ Dynamic Lights
+he תאורה דינמית
+
+@ Echo
+he הד
+
+@ Enemy Health
+he בריאות האויבים
+
+@ Enemy Wounds
+he פצעי אויבים
+
+@ Enhanced Blood Splatter
+he התזות דם משופרות
+
+@ Enhanced FX
+he אפקטים משופרים
+
+@ Enhanced Models
+he מודלים משופרים
+
+@ Enhanced Particles
+he חלקיקים משופרים
+
+@ Enhanced Water
+he מים משופרים
+
+@ Enhancements
+he שיפורים
+
+@ Equipment Wheel (Add-ons)
+he גלגל ציוד (תוספים)
+
+@ Exploding boxes throw metal shards
+he ארגזים מתפוצצים מעיפים רסיסי מתכת
+
+@ Explosion Damage
+he נזק פיצוץ
+
+@ Explosion Scorch Marks
+he סימני חריכה מפיצוצים
+
+@ Explosions scorch nearby solid surfaces
+he פיצוצים חורכים משטחים מוצקים סמוכים
+
+@ Explosives only
+he חומרי נפץ בלבד
+
+@ Extra Monsters
+he מפלצות נוספות
+
+@ Extra Per 10 Damage (ms)
+he תוספת לכל 10 נזק (ms)
+
+@ FX Settings
+he הגדרות אפקטים
+
+@ Field of View
+he שדה ראייה
+
+@ Firing never uses up ammo
+he ירי לעולם לא צורך תחמושת
+
+@ First person
+he גוף ראשון
+
+@ Flick Time
+he זמן הצלפה
+
+@ Flight Speed
+he מהירות מעוף
+
+@ Fog
+he ערפל
+
+@ Frag Limit
+he מגבלת הריגות
+
+@ Freeze Duration (ms)
+he משך הקפאה (ms)
+
+@ GLQuake
+he GLQuake
+
+@ Game Speed
+he מהירות המשחק
+
+@ Game Type
+he סוג משחק
+
+@ Gameplay
+he משחקיות
+
+@ Gameplay Modifiers
+he משני משחק
+
+@ Gel Quality
+he איכות הג'ל
+
+@ Gib Surface Painting
+he כתמי איברים על משטחים
+
+@ Gibs
+he איברים
+
+@ Gibs and heads tumble and bounce
+he איברים וראשים מתגלגלים וקופצים
+
+@ Goggle Glow Quality
+he איכות זוהר המשקפת
+
+@ Goggle Intensity
+he עוצמת המשקפת
+
+@ Goggle Noise
+he רעש המשקפת
+
+@ Goggles Settings
+he הגדרות משקפת
+
+@ Graphics
+he גרפיקה
+
+@ Green
+he ירוק
+
+@ Grenade Arc
+he קשת רימון
+
+@ Grenade Arc Settings
+he הגדרות קשת רימון
+
+@ Gun Kick
+he רתע הנשק
+
+@ Gyro
+he ג'ירו
+
+@ Gyro & Flick Stick
+he ג'ירו ו-Flick Stick
+
+@ Gyro Active
+he ג'ירו פעיל
+
+@ Gyro Aiming
+he כיוון בג'ירו
+
+@ HUD
+he HUD
+
+@ HUD Style
+he סגנון HUD
+
+@ Health
+he בריאות
+
+@ Health Pickups
+he איסוף בריאות
+
+@ Health Position
+he מיקום הבריאות
+
+@ Health Regeneration
+he התחדשות בריאות
+
+@ Hit & Kill Sounds
+he צלילי פגיעה והריגה
+
+@ Hit Doors & Lifts
+he פגיעה בדלתות ומעליות
+
+@ Hit Markers
+he סמני פגיעה
+
+@ Hit Sound
+he צליל פגיעה
+
+@ Hitmarker Size
+he גודל סמן הפגיעה
+
+@ Hitmarker Type
+he סוג סמן הפגיעה
+
+@ Hitstop Advanced
+he עצירת פגיעה מתקדם
+
+@ Hitstop Settings
+he הגדרות עצירת פגיעה
+
+@ Hold
+he החזקה
+
+@ Hold lock-on
+he נעילה בהחזקה
+
+@ Hook Enemies
+he תפיסת אויבים
+
+@ Hook Metal
+he תפיסת מתכת
+
+@ Hook Stone
+he תפיסת אבן
+
+@ Hook Wood
+he תפיסת עץ
+
+@ Hooking an enemy pulls you to it
+he תפיסת אויב מושכת אתכם אליו
+
+@ Hookshot Range
+he טווח הקרס
+
+@ Hookshot Settings
+he הגדרות הקרס
+
+@ Host Game
+he אירוח משחק
+
+@ How far the hook flies before it retracts
+he כמה רחוק הקרס עף לפני שהוא חוזר
+
+@ How visible the on-screen controls are
+he עד כמה נראים פקדי המסך
+
+@ Impact Lifetime
+he משך סימני פגיעה
+
+@ Infinite Ammo
+he תחמושת אינסופית
+
+@ Input
+he קלט
+
+@ Input Scale
+he קנה מידה של קלט
+
+@ Interpolate Animation
+he החלקת אנימציה
+
+@ Interpolate Movement
+he החלקת תנועה
+
+@ Invert Look
+he היפוך מבט
+
+@ Invert Mouse
+he היפוך עכבר
+
+@ Invert Stick
+he היפוך סטיק
+
+@ Jet Quality
+he איכות הסילון
+
+@ Join Game
+he הצטרפות למשחק
+
+@ Jump / Swim Up
+he קפיצה / שחייה למעלה
+
+@ Jump again in mid-air
+he קפיצה נוספת באוויר
+
+@ Jumps
+he קפיצות
+
+@ Keys & Powerups
+he מפתחות ושדרוגים
+
+@ Keys & Powerups Position
+he מיקום מפתחות ושדרוגים
+
+@ Kill Bonus (x)
+he בונוס הריגה (x)
+
+@ Kill Sound
+he צליל הריגה
+
+@ Knock
+he דפיקה
+
+@ Left
+he שמאל
+
+@ Length of the motion blur streaks
+he אורך פסי טשטוש התנועה
+
+@ Lifetime (seconds)
+he משך חיים (שניות)
+
+@ Live Portal Views
+he תצוגות פורטל חיות
+
+@ Live View Distance
+he טווח תצוגה חיה
+
+@ Local Players
+he שחקנים מקומיים
+
+@ Local red wounds follow enemy animation
+he פצעים אדומים עוקבים אחר אנימציית האויב
+
+@ Lock Indicator
+he מחוון נעילה
+
+@ Long falls don't hurt
+he נפילות ארוכות לא פוגעות
+
+@ Longest Freeze (ms)
+he הקפאה ארוכה ביותר (ms)
+
+@ Look Down
+he מבט למטה
+
+@ Look Speed
+he מהירות מבט
+
+@ Look Up
+he מבט למעלה
+
+@ Main Menu Music
+he מוזיקת התפריט הראשי
+
+@ Max FPS
+he FPS מרבי
+
+@ Max Players
+he מספר שחקנים מרבי
+
+@ Maximum Impacts
+he מספר פגיעות מרבי
+
+@ Maximum Marks
+he מספר סימנים מרבי
+
+@ Maximum Range
+he טווח מרבי
+
+@ Melee only
+he קרב מגע בלבד
+
+@ Message Background
+he רקע הודעות
+
+@ Message Text Size
+he גודל טקסט ההודעות
+
+@ Messages & Captions
+he הודעות וכתוביות
+
+@ Meter Duration (real seconds)
+he משך המד (שניות אמיתיות)
+
+@ Minimum Damage
+he נזק מינימלי
+
+@ Mode
+he מצב
+
+@ Modern Console
+he קונסולה מודרנית
+
+@ Modern HUD Layout
+he פריסת HUD מודרנית
+
+@ Most recent save
+he השמירה האחרונה
+
+@ Motion Blur
+he טשטוש תנועה
+
+@ Motion Blur Amount
+he עוצמת טשטוש תנועה
+
+@ Motion Blur Quality
+he איכות טשטוש תנועה
+
+@ Mouse & Keyboard
+he עכבר ומקלדת
+
+@ Mouse Speed
+he מהירות העכבר
+
+@ Move Back
+he תנועה אחורה
+
+@ Move Forward
+he תנועה קדימה
+
+@ Music Volume
+he עוצמת מוזיקה
+
+@ Next Weapon
+he הנשק הבא
+
+@ No Drowning
+he ללא טביעה
+
+@ No Fall Damage
+he ללא נזק נפילה
+
+@ No Manual Saves
+he ללא שמירה ידנית
+
+@ No Self Damage
+he ללא נזק עצמי
+
+@ Noise Filter
+he מסנן רעש
+
+@ Normal Color
+he צבע רגיל
+
+@ Notify Message Position
+he מיקום התראות
+
+@ Notify Message Time
+he משך התראות
+
+@ Number of splatter rays per blood impact
+he מספר קרני התזה לכל פגיעת דם
+
+@ Off
+he כבוי
+
+@ On Death
+he במוות
+
+@ On Kill Color
+he צבע בהריגה
+
+@ On Target Color
+he צבע על מטרה
+
+@ Opacity
+he אטימות
+
+@ Opacity of the grenade arc
+he אטימות קשת הרימון
+
+@ Pants Color
+he צבע מכנסיים
+
+@ Particle Quality
+he איכות חלקיקים
+
+@ Particles
+he חלקיקים
+
+@ Physical Nail Impacts
+he פגיעות מסמרים פיזיקליות
+
+@ Pistol Start
+he התחלה מאפס
+
+@ Pitch
+he גובה צליל
+
+@ Pitch Sensitivity
+he רגישות אנכית
+
+@ Playback Speed
+he מהירות הפעלה
+
+@ Player Setup
+he הגדרות שחקן
+
+@ Pop
+he פופ
+
+@ Portal Gun Settings
+he הגדרות אקדח הפורטלים
+
+@ Portal Recursion
+he רקורסיית פורטלים
+
+@ Portal View Quality
+he איכות תצוגת פורטלים
+
+@ Preview Sound
+he השמעת הצליל
+
+@ Previous Weapon
+he הנשק הקודם
+
+@ Projectile Shotguns Settings
+he הגדרות רובי ציד קליעיים
+
+@ Projectile Speed (units/s)
+he מהירות קליע (יחידות/ש')
+
+@ Purple
+he סגול
+
+@ Push
+he דחיפה
+
+@ Push Strength
+he עוצמת דחיפה
+
+@ Quick Load
+he טעינה מהירה
+
+@ Quick Save
+he שמירה מהירה
+
+@ Railgun Settings
+he הגדרות רובה המסילה
+
+@ Ranged only
+he טווח רחוק בלבד
+
+@ Reacquire While Held
+he נעילה מחדש בהחזקה
+
+@ Red
+he אדום
+
+@ Reduce Motion
+he הפחתת תנועה
+
+@ Regen (seconds per second)
+he התחדשות (שניות לשנייה)
+
+@ Render Scale
+he קנה מידה של עיבוד
+
+@ Reverb
+he הדהוד
+
+@ Right
+he ימין
+
+@ Ripple Intensity
+he עוצמת אדוות
+
+@ Ripples
+he אדוות
+
+@ Roll Sensitivity
+he רגישות גלגול
+
+@ Rumble
+he רטט
+
+@ Run
+he ריצה
+
+@ Save on All Enemies Killed
+he שמירה כשכל האויבים הובסו
+
+@ Save on All Secrets Found
+he שמירה כשכל הסודות נמצאו
+
+@ Save on Level Entry
+he שמירה בכניסה לשלב
+
+@ Save on Secret Found
+he שמירה במציאת סוד
+
+@ Scoreboard
+he לוח תוצאות
+
+@ Screen Flashes
+he הבזקי מסך
+
+@ Screen Shader
+he שיידר מסך
+
+@ Screen Shake
+he רעידות מסך
+
+@ Search LAN
+he חיפוש ברשת מקומית
+
+@ Seconds a center-screen message stays up
+he כמה שניות הודעה במרכז המסך נשארת
+
+@ See Through Portals
+he ראייה דרך פורטלים
+
+@ See-through Teleporters
+he טלפורטרים שקופים
+
+@ Shirt Color
+he צבע חולצה
+
+@ Shotgun Bullet Decals
+he סימני כדוריות
+
+@ Shoulder left
+he כתף שמאל
+
+@ Shoulder right
+he כתף ימין
+
+@ Show FPS
+he הצגת FPS
+
+@ Show Face
+he הצגת פנים
+
+@ Shrapnel
+he רסיסים
+
+@ Size of on-screen messages and captions
+he גודל ההודעות והכתוביות על המסך
+
+@ Skill
+he רמת קושי
+
+@ Sky Fog
+he ערפל שמיים
+
+@ Smooths the stepped movement of monsters
+he מחליק את התנועה המקוטעת של המפלצות
+
+@ Sound
+he צליל
+
+@ Sound Captions
+he כתוביות צלילים
+
+@ Sound Volume
+he עוצמת צלילים
+
+@ Speed Blur
+he טשטוש מהירות
+
+@ Splashes
+he התזות
+
+@ Splatter Amount
+he כמות התזות
+
+@ Splatter Size
+he גודל התזות
+
+@ Start Game
+he התחלת משחק
+
+@ Staying underwater doesn't hurt
+he שהייה מתחת למים לא פוגעת
+
+@ Stick Look Pitch
+he מבט אנכי בסטיק
+
+@ Stick Look Yaw
+he מבט אופקי בסטיק
+
+@ Strafe Left
+he צעד הצידה שמאלה
+
+@ Strafe Right
+he צעד הצידה ימינה
+
+@ Strength of the surface swell and rings
+he עוצמת הגלים והטבעות על פני המים
+
+@ Stun Duration
+he משך הלם
+
+@ Style
+he סגנון
+
+@ Supersampling
+he דגימת-על
+
+@ Surface Hit Effects
+he אפקטי פגיעה במשטחים
+
+@ Swim Down
+he שחייה למטה
+
+@ Targets
+he מטרות
+
+@ Teamplay
+he משחק קבוצתי
+
+@ Texture Filter
+he סינון טקסטורות
+
+@ Third person
+he גוף שלישי
+
+@ Thud
+he חבטה
+
+@ Tick
+he תקתוק
+
+@ Time Limit
+he מגבלת זמן
+
+@ Time Stretch
+he מתיחת זמן
+
+@ Toggle Attack
+he תקיפה במיתוג
+
+@ Toggle Run
+he ריצה במיתוג
+
+@ Toggle auto-aim
+he כיוון אוטומטי במיתוג
+
+@ Touch Controls
+he פקדי מגע
+
+@ Touchscreen
+he מסך מגע
+
+@ Tough Enemy Health
+he בריאות אויבים קשוחים
+
+@ Tough enemies only
+he אויבים קשוחים בלבד
+
+@ Trail Colour
+he צבע השובל
+
+@ Translate Console
+he תרגום הקונסולה
+
+@ Translucent Water
+he מים שקופים למחצה
+
+@ Treble
+he טרבל
+
+@ Turn Left
+he פנייה שמאלה
+
+@ Turn Right
+he פנייה ימינה
+
+@ Underwater FX
+he אפקטים תת-מימיים
+
+@ Use Bullet Time Meter
+he שימוש במד בולט טיים
+
+@ VSync
+he VSync
+
+@ View Bob
+he נדנוד מבט
+
+@ Viewmodels
+he מודלי נשק
+
+@ Volume
+he עוצמה
+
+@ Water Opacity
+he אטימות המים
+
+@ Water Quality
+he איכות המים
+
+@ Water Settings
+he הגדרות מים
+
+@ Weapon Wheel
+he גלגל נשקים
+
+@ Weapon Wheel Slowdown
+he האטה בגלגל הנשקים
+
+@ Weapons
+he נשקים
+
+@ Weapons Position
+he מיקום הנשקים
+
+@ Where center-screen messages appear
+he היכן מופיעות הודעות מרכז המסך
+
+@ Where pickup and event messages appear
+he היכן מופיעות הודעות איסוף ואירועים
+
+@ White
+he לבן
+
+@ Yaw Sensitivity
+he רגישות אופקית
+
+@ Yellow
+he צהוב
+
+# lowercase choice values
+@ T
+he T
+
+@ always
+he תמיד
+
+@ auto
+he אוטומטי
+
+@ banded
+he בפסים
+
+@ borderless
+he ללא מסגרת
+
+@ bottom center
+he למטה במרכז
+
+@ bottom left
+he למטה משמאל
+
+@ bottom right
+he למטה מימין
+
+@ box
+he ריבוע
+
+@ broken square
+he ריבוע שבור
+
+@ classic
+he קלאסי
+
+@ coarse
+he גס
+
+@ cooperative
+he שיתופי
+
+@ cross
+he צלב
+
+@ cross + dot
+he צלב + נקודה
+
+@ cyan
+he טורקיז
+
+@ dashed
+he מקווקו
+
+@ deathmatch
+he דת'מאץ'
+
+@ deuteranopia
+he דויטרנופיה
+
+@ diagonal streaks
+he פסים אלכסוניים
+
+@ diamond
+he מעוין
+
+@ dot
+he נקודה
+
+@ double
+he כפול
+
+@ double chevrons
+he שברונים כפולים
+
+@ double diagonals
+he אלכסונים כפולים
+
+@ easy
+he קל
+
+@ fine
+he עדין
+
+@ fit output
+he התאמה לפלט
+
+@ flick stick
+he flick stick
+
+@ fullscreen
+he מסך מלא
+
+@ gap cross
+he צלב פתוח
+
+@ green
+he ירוק
+
+@ grey
+he אפור
+
+@ half speed
+he חצי מהירות
+
+@ hard
+he קשה
+
+@ high
+he גבוהה
+
+@ huge
+he ענק
+
+@ immersive
+he סוחף
+
+@ intense
+he עז
+
+@ large
+he גדול
+
+@ larger
+he גדול יותר
+
+@ largest
+he הגדול ביותר
+
+@ linear
+he ליניארי
+
+@ low
+he נמוכה
+
+@ lower
+he תחתון
+
+@ magenta
+he מג'נטה
+
+@ medium
+he בינונית
+
+@ middle
+he אמצע
+
+@ middle left
+he באמצע משמאל
+
+@ middle right
+he באמצע מימין
+
+@ modern
+he מודרני
+
+@ nearest
+he השכן הקרוב
+
+@ nightmare
+he סיוט
+
+@ nintendo
+he Nintendo
+
+@ no team damage
+he ללא נזק לקבוצה
+
+@ none
+he ללא
+
+@ normal
+he רגיל
+
+@ off
+he כבוי
+
+@ off while held
+he כבוי בהחזקה
+
+@ on
+he פועל
+
+@ only while held
+he רק בהחזקה
+
+@ playstation
+he PlayStation
+
+@ protanopia
+he פרוטנופיה
+
+@ quarter speed
+he רבע מהירות
+
+@ red
+he אדום
+
+@ short diagonals
+he אלכסונים קצרים
+
+@ single
+he יחיד
+
+@ small
+he קטן
+
+@ solid
+he מלא
+
+@ spectacle
+he ראוותני
+
+@ subtle
+he עדין
+
+@ team damage
+he נזק לקבוצה
+
+@ top center
+he למעלה במרכז
+
+@ top left
+he למעלה משמאל
+
+@ top right
+he למעלה מימין
+
+@ triple
+he משולש
+
+@ tritanopia
+he טריטנופיה
+
+@ upper
+he עליון
+
+@ white
+he לבן
+
+@ whole screen
+he כל המסך
+
+@ windowed
+he חלון
+
+@ xbox
+he Xbox
+
+@ yellow
+he צהוב
+
+# ==== tooltips.txt ====
+
+# Options help lines (tooltips) and reasons for disabled rows.
+@ 2D aiming turns the view continuously with the right stick; flick stick snaps the view to where you push the stick, then turning the stick rotates it
+he כיוון דו-ממדי מסובב את המבט ברציפות עם הסטיק הימני; flick stick מקפיץ את המבט לכיוון שאליו דוחפים את הסטיק, ואז סיבוב הסטיק מסובב אותו
+
+@ 3D resolution relative to the window; the UI stays sharp
+he רזולוציית התלת-ממד ביחס לחלון; הממשק נשאר חד
+
+@ 3D view keeps the HUD and menus sharp; whole screen runs them through the shader too
+he תצוגת תלת-ממד משאירה את ה-HUD והתפריטים חדים; כל המסך מעביר גם אותם דרך השיידר
+
+@ A Quake III style railgun: a slug that pierces every enemy on its line, using 2 cells a shot and refiring every 1.5 s; select it through its assigned weapon slot (Add-ons)
+he רובה מסילה בסגנון Quake III: קליע שחודר כל אויב בקו שלו, צורך 2 תאים לירייה ויורה שוב כל 1.5 שנ'; בוחרים אותו דרך משבצת הנשק שהוקצתה לו (תוספים)
+
+@ A Zelda-style hookshot: fire sends a chain hook out; it latches onto hookable surfaces or enemies and reels you in; fire again to let go
+he קרס בסגנון Zelda: ירי שולח קרס בשרשרת; הוא נתפס במשטחים מתאימים או באויבים ומושך אתכם אליהם; ירי נוסף משחרר
+
+@ Also translates the engine's console messages; off keeps them in English
+he מתרגם גם את הודעות הקונסולה של המנוע; כבוי משאיר אותן באנגלית
+
+@ Automatically acquire another enemy while holding Lock-on after losing a target
+he נעילה אוטומטית על אויב אחר בזמן החזקת נעילה, אחרי איבוד מטרה
+
+@ Blends between animation frames of monsters and weapons
+he ממזג בין פריימי האנימציה של מפלצות ונשקים
+
+@ Blood stains surfaces and bodies; cosmetic, independent of particle packs
+he הדם מכתים משטחים וגופות; קוסמטי בלבד, ללא תלות בחבילות חלקיקים
+
+@ Bloom glow around bright lights and heat sources; medium uses 4 taps, high uses 8, low disables halo taps
+he זוהר סביב אורות חזקים ומקורות חום; בינונית משתמשת ב-4 דגימות, גבוהה ב-8, נמוכה מבטלת את ההילה
+
+@ Blurs fast-moving monsters, projectiles and doors (not camera turns)
+he מטשטש מפלצות, קליעים ודלתות בתנועה מהירה (לא סיבובי מצלמה)
+
+@ Blurs the screen edges during fast falls and launches; keeps the centre clear. Reduce Motion disables it
+he מטשטש את שולי המסך בנפילות והזנקות מהירות; המרכז נשאר חד. הפחתת תנועה מבטלת זאת
+
+@ Brightness of the underwater light patterns
+he בהירות דפוסי האור מתחת למים
+
+@ Caps mark count, lifetime, airborne droplets and wound/gib painting; low skips enemy wounds and gib trails
+he מגביל את מספר הכתמים, משך חייהם, הטיפות באוויר וצביעת פצעים ואיברים; נמוכה מדלגת על פצעי אויבים ושובלי איברים
+
+@ Caps shader input at output size so 200% render scale keeps 3D sharpness without 4x shader cost; low scales stay low-res
+he מגביל את קלט השיידר לגודל הפלט, כך שקנה מידה של 200% שומר על חדות התלת-ממד בלי לפי 4 בעלות השיידר; קני מידה נמוכים נשארים ברזולוציה נמוכה
+
+@ Classic: the original status bar; modern: compact elements at the screen edges
+he קלאסי: שורת המצב המקורית; מודרני: רכיבים קומפקטיים בשולי המסך
+
+@ Coat atlas resolution, rebuild rate and shader detail: low builds smaller coats less often with fast shading; high uses full detail
+he רזולוציית אטלס הציפוי, קצב הבנייה מחדש ופירוט השיידר: נמוכה בונה ציפויים קטנים יותר בתדירות נמוכה עם הצללה מהירה; גבוהה משתמשת בפירוט מלא
+
+@ Colour of the railgun's spiral trail; split-screen players each get the next colour along
+he צבע השובל הספירלי של רובה המסילה; במסך מפוצל כל שחקן מקבל את הצבע הבא
+
+@ Damage the railgun deals to each enemy it passes through (Quake III: 100)
+he הנזק שרובה המסילה גורם לכל אויב שהוא חודר (Quake III: 100)
+
+@ Dark backdrop behind on-screen messages for readability
+he רקע כהה מאחורי הודעות המסך לשיפור הקריאות
+
+@ Dark border keeps the crosshair visible on any background
+he מסגרת כהה משאירה את הכוונת גלויה על כל רקע
+
+@ Darkens corners and contact areas where geometry meets; higher quality is sharper
+he מכהה פינות ואזורי מגע בין משטחים; איכות גבוהה יותר חדה יותר
+
+@ Debris lands on and is carried or shoved by doors, lifts and platforms
+he שברים נוחתים על דלתות, מעליות ופלטפורמות, ואלה נושאים או דוחפים אותם
+
+@ Detail for caustics, ripples and splashes: low uses smaller budgets and shorter view distance; high uses larger budgets and farther view distance
+he פירוט השתקפויות, אדוות והתזות: נמוכה משתמשת בתקציבים קטנים וטווח תצוגה קצר; גבוהה בתקציבים גדולים וטווח רחוק יותר
+
+@ Disabled while Enhanced Particles is on: its particles replace the GLQuake and Classic styles
+he מושבת כשחלקיקים משופרים פועל: החלקיקים שלו מחליפים את סגנונות GLQuake והקלאסי
+
+@ Disabled while Enhanced Water is on: its own underwater effects replace the classic and GLQuake view warps
+he מושבת כשמים משופרים פועל: האפקטים התת-מימיים שלו מחליפים את עיוותי המבט הקלאסי ו-GLQuake
+
+@ Draw the predicted grenade path as a solid or dashed line
+he מצייר את מסלול הרימון החזוי כקו מלא או מקווקו
+
+@ Draw the view out of the linked portal inside each portal; off shows flat discs (fastest)
+he מציג בתוך כל פורטל את המבט מהפורטל המקושר; כבוי מציג דיסקות שטוחות (הכי מהיר)
+
+@ Droplets spray up when things enter or leave water, slime or lava
+he טיפות ניתזות כשמשהו נכנס למים, לרפש או ללבה או יוצא מהם
+
+@ Emulates the original 8-bit palette of software rendering
+he מדמה את פלטת 8 הביט המקורית של העיבוד בתוכנה
+
+@ Every level starts with only the shotgun and axe, as if started fresh
+he כל שלב מתחיל רק עם רובה הציד והגרזן, כאילו התחלת מחדש
+
+@ Explosion damage for each remotely detonated sticky bomb
+he נזק הפיצוץ של כל פצצה דביקה שמפוצצת מרחוק
+
+@ Extra freeze milliseconds for every 10 damage dealt, so heavy hits stop longer
+he אלפיות שנייה נוספות של הקפאה לכל 10 נזק, כך שפגיעות כבדות עוצרות יותר זמן
+
+@ First person, a third-person camera centered behind the player, or one over the right or left shoulder; third person hides viewmodels
+he גוף ראשון, מצלמת גוף שלישי ממורכזת מאחורי השחקן, או מעל הכתף הימנית או השמאלית; גוף שלישי מסתיר את מודלי הנשק
+
+@ Flash the selected marker on confirmed hits; colors are shared with the crosshair
+he מהבהב את הסמן הנבחר בפגיעות מאושרות; הצבעים משותפים עם הכוונת
+
+@ Freeze for every enemy, or only for enemies that were tough before the hit
+he הקפאה לכל אויב, או רק לאויבים שהיו קשוחים לפני הפגיעה
+
+@ Freeze the game briefly when you damage an enemy; single player with add-ons only
+he מקפיא את המשחק לרגע כשאתם פוגעים באויב; משחק יחיד עם תוספים בלבד
+
+@ Gibs tumble and barrels throw shrapnel; shots and blasts push them (cosmetic only)
+he איברים מתגלגלים וחביות מעיפות רסיסים; יריות ופיצוצים דוחפים אותם (קוסמטי בלבד)
+
+@ Health an enemy must have had before the hit to count as tough
+he הבריאות שהייתה לאויב לפני הפגיעה כדי שייחשב קשוח
+
+@ Hits dealing less damage than this do not freeze the game; the default 10 skips nails and shotgun pellets
+he פגיעות עם נזק נמוך מזה לא מקפיאות את המשחק; ברירת המחדל 10 מדלגת על מסמרים וכדוריות רובה ציד
+
+@ Hold fire and sweep the crosshair over monsters to queue them, release to throw: it stuns each in turn and flies back; alt-fire clears the queue
+he החזיקו ירי והעבירו את הכוונת על מפלצות כדי להכניס אותן לתור, שחררו כדי לזרוק: הבומרנג מהמם כל אחת בתורה וחוזר; ירי משני מנקה את התור
+
+@ Hold: keep Lock-on held. Toggle: press Auto-aim Toggle to enable automatic acquisition. Click look stick to switch targets
+he החזקה: להחזיק את נעילה. מיתוג: ללחוץ על כיוון אוטומטי במיתוג כדי להפעיל נעילה אוטומטית. לחיצה על סטיק המבט מחליפה מטרה
+
+@ How close an enemy must be to the crosshair for automatic acquisition in toggle mode (degrees)
+he כמה קרוב לכוונת צריך אויב להיות לנעילה אוטומטית במצב מיתוג (מעלות)
+
+@ How far the view tilts up and down when you tilt the controller (pitch axis)
+he כמה המבט נוטה למעלה ולמטה כשמטים את הבקר (ציר עלרוד)
+
+@ How far the view turns left and right when you turn the controller (yaw axis)
+he כמה המבט מסתובב שמאלה וימינה כשמסובבים את הבקר (ציר סבסוב)
+
+@ How far the view turns when you drag on the right half of the screen
+he כמה המבט מסתובב כשגוררים על החצי הימני של המסך
+
+@ How fast the boomerang flies (units per second)
+he מהירות מעוף הבומרנג (יחידות לשנייה)
+
+@ How hard shots and explosions push debris around
+he כמה חזק יריות ופיצוצים דוחפים שברים
+
+@ How hard the Powerwasher's water pushes enemies
+he כמה חזק המים של מכונת השטיפה דוחפים אויבים
+
+@ How long a hit freezes the game, in milliseconds
+he כמה זמן פגיעה מקפיאה את המשחק, באלפיות שנייה
+
+@ How strongly fog covers the sky when fog is on
+he כמה חזק הערפל מכסה את השמיים כשהערפל פועל
+
+@ How the view distorts underwater: Classic ripples the whole screen like software Quake, GLQuake slowly stretches and squashes the view
+he איך המבט מתעוות מתחת למים: קלאסי מגלגל את כל המסך כמו Quake בתוכנה, GLQuake מותח ומכווץ את המבט לאט
+
+@ Ignores gyro rotation slower than this many degrees per second, to hide hand tremor
+he מתעלם מסיבוב ג'ירו איטי ממספר המעלות לשנייה הזה, כדי להסתיר רעד ידיים
+
+@ Immersive: appears for a few seconds only when its value changes
+he סוחף: מופיע לכמה שניות רק כשהערך שלו משתנה
+
+@ Keeps textures sharp on floors and walls seen at steep angles
+he שומר על טקסטורות חדות ברצפות וקירות שנראים בזווית חדה
+
+@ Lights from rockets, muzzle flashes and explosions brighten nearby walls
+he אורות של טילים, הבזקי ירי ופיצוצים מאירים קירות סמוכים
+
+@ Liquid surfaces swell and ring out where things move through them
+he פני נוזלים גועשים ויוצרים טבעות במקום שבו משהו עובר בהם
+
+@ Lobs sticky bombs (rockets ammo) that cling to walls, doors and monsters; alt-fire detonates them all
+he משגר פצצות דביקות (תחמושת טילים) שנצמדות לקירות, דלתות ומפלצות; ירי משני מפוצץ את כולן
+
+@ Look of the classic particles: GLQuake draws soft round dots, Classic draws square pixels like software Quake
+he מראה החלקיקים הקלאסיים: GLQuake מצייר נקודות עגולות ורכות, קלאסי מצייר פיקסלים מרובעים כמו Quake בתוכנה
+
+@ Low skips the background smear halo and uses fewer blur samples; high keeps the full halo and smoother streaks
+he נמוכה מדלגת על הילת המריחה ברקע ומשתמשת בפחות דגימות טשטוש; גבוהה שומרת על ההילה המלאה ופסים חלקים יותר
+
+@ Low: hard particle edges, half the scripted particles and fewer hit sparks. Medium: soft edges. High: soft edges checked per MSAA sample, most hit sparks
+he נמוכה: קצוות חלקיקים חדים, חצי מהחלקיקים המתוסרטים ופחות ניצוצות פגיעה. בינונית: קצוות רכים. גבוהה: קצוות רכים לכל דגימת MSAA, הכי הרבה ניצוצות
+
+@ Marks fade out before expiring; oldest marks are recycled at the limit
+he סימנים דועכים לפני שהם נעלמים; הישנים ביותר ממוחזרים כשמגיעים למגבלה
+
+@ Max nested portal reflections to draw; each level redraws the scene
+he מספר מרבי של פורטלים מקוננים לציור; כל רמה מציירת את הסצנה מחדש
+
+@ Max portals per screen with a live view; each one redraws the scene
+he מספר מרבי של פורטלים עם תצוגה חיה במסך; כל אחד מצייר את הסצנה מחדש
+
+@ Maximum distance for acquiring and keeping an enemy locked
+he המרחק המרבי לנעילה על אויב ולשמירתה
+
+@ Minimum gap between freezes, so shotgun pellets and rapid fire count once; kills ignore it
+he מרווח מינימלי בין הקפאות, כך שכדוריות רובה ציד וירי מהיר נספרים פעם אחת; הריגות מתעלמות ממנו
+
+@ Modern terminal console with autocomplete popup, history search, ANSI colors, bash shell and piping; off uses the classic Quake console
+he קונסולת טרמינל מודרנית עם השלמה אוטומטית, חיפוש בהיסטוריה, צבעי ANSI, מעטפת bash וצינורות; כבוי משתמש בקונסולת Quake הקלאסית
+
+@ Monsters take proportionally less damage at higher values; above 100% is harder
+he מפלצות סופגות פחות נזק באופן יחסי בערכים גבוהים; מעל 100% קשה יותר
+
+@ Moving gibs leave blood on surfaces they touch
+he איברים בתנועה משאירים דם על משטחים שהם נוגעים בהם
+
+@ Multiplier on the freeze when the hit kills the enemy; 1 means no extra
+he מכפיל ההקפאה כשהפגיעה הורגת את האויב; 1 פירושו ללא תוספת
+
+@ Multiplies ammo from pickups (up to the normal carry limit); below 100% is harder
+he מכפיל תחמושת שנאספת (עד מגבלת הנשיאה הרגילה); מתחת ל-100% קשה יותר
+
+@ Multiplies health from pickups (up to 100, or the item's own limit); below 100% is harder
+he מכפיל בריאות שנאספת (עד 100, או מגבלת הפריט עצמו); מתחת ל-100% קשה יותר
+
+@ Nails stick to wood and bodies; hard surfaces deflect them to the floor
+he מסמרים ננעצים בעץ ובגופות; משטחים קשים מסיטים אותם לרצפה
+
+@ Nearest keeps crisp classic pixels; linear smooths textures
+he השכן הקרוב שומר על פיקסלים קלאסיים חדים; ליניארי מחליק טקסטורות
+
+@ New Game: Add-ons
+he משחק חדש: תוספים
+
+@ New Game: Customize
+he משחק חדש: התאמה אישית
+
+@ Night vision: how much dark areas are brightened; thermal: how strongly heat stands out
+he ראיית לילה: כמה אזורים חשוכים מוארים; תרמי: כמה חום בולט
+
+@ Night-vision and thermal goggles, cycle normal, night vision and thermal with Change Goggles (Add-ons), or use the Equipment Wheel
+he משקפת ראיית לילה ותרמית: מעבר בין רגיל, ראיית לילה ותרמי עם החלפת משקפת (תוספים), או דרך גלגל הציוד
+
+@ No single freeze lasts longer than this, however much damage or kill bonus adds
+he אף הקפאה לא נמשכת יותר מזה, לא משנה כמה נזק או בונוס הריגה מוסיפים
+
+@ Oldest marks and nails are recycled at this shared limit
+he הסימנים והמסמרים הישנים ביותר ממוחזרים במגבלה המשותפת הזו
+
+@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
+he סטיק וכפתורים על המסך: אוטומטי מציג אותם אחרי נגיעה ומסתיר אותם כשמשתמשים בהתקן אחר
+
+@ Only autosaves: quicksaves and the Save menu are off
+he שמירות אוטומטיות בלבד: שמירה מהירה ותפריט השמירה מושבתים
+
+@ Place every weapon at the center, right or left of the view, or hide all viewmodels
+he מציב כל נשק במרכז, מימין או משמאל למבט, או מסתיר את כל מודלי הנשק
+
+@ Play your chosen hit or kill cue when you damage an enemy
+he משמיע את צליל הפגיעה או ההריגה שבחרתם כשאתם פוגעים באויב
+
+@ Playback speed: faster sounds shorter and higher
+he מהירות הפעלה: מהיר יותר נשמע קצר וגבוה יותר
+
+@ Plays the Quake theme in the main menu when no game is running
+he מנגן את נעימת Quake בתפריט הראשי כשאין משחק פעיל
+
+@ Portals farther away than this are drawn as flat discs
+he פורטלים רחוקים מזה מצוירים כדיסקות שטוחות
+
+@ Press attack once to keep firing, again to stop
+he לחיצה אחת על תקיפה ממשיכה לירות, לחיצה נוספת עוצרת
+
+@ Press run once to switch between running and walking
+he לחיצה אחת על ריצה עוברת בין ריצה להליכה
+
+@ Raise or lower the tone independently of sound length
+he מגביה או מנמיך את הטון בלי לשנות את אורך הצליל
+
+@ Red screen edges show where damage came from: top is front, bottom is behind; Screen Flashes controls their strength
+he שולי מסך אדומים מראים מאיפה הגיע הנזק: למעלה זה מלפנים, למטה מאחור; הבזקי מסך קובע את עוצמתם
+
+@ Replaces the classic dot particles with glowing sparks, smoke and blood; mods with their own particle effects keep them
+he מחליף את חלקיקי הנקודות הקלאסיים בניצוצות זוהרים, עשן ודם; מודים עם אפקטי חלקיקים משלהם שומרים עליהם
+
+@ Resolution and detail inside portal and teleporter views; lower tiers trim nested effects
+he רזולוציה ופירוט בתוך תצוגות פורטלים וטלפורטרים; רמות נמוכות מקצצות אפקטים מקוננים
+
+@ Rippling light patterns on surfaces under water and slime
+he דפוסי אור גליים על משטחים מתחת למים ולרפש
+
+@ Scales all damage you take; above 100% is harder
+he משנה את כל הנזק שאתם סופגים; מעל 100% קשה יותר
+
+@ Screen edge for this element; elements on the same spot stack
+he שולי המסך של רכיב זה; רכיבים באותו מקום נערמים זה על זה
+
+@ Seconds a monster hit by the boomerang stays stunned
+he כמה שניות מפלצת שנפגעה מהבומרנג נשארת המומה
+
+@ Seconds impact marks and stuck nails stay before fading out; independent of Particle Quality
+he כמה שניות סימני פגיעה ומסמרים נעוצים נשארים לפני שהם דועכים; ללא תלות באיכות חלקיקים
+
+@ Seconds messages at the top of the screen stay up
+he כמה שניות הודעות בראש המסך נשארות
+
+@ Seconds the flick stick snap takes; lower is faster
+he כמה שניות לוקחת הקפיצה של flick stick; נמוך יותר מהיר יותר
+
+@ See through enhanced water; enables Water Opacity
+he ראייה דרך המים המשופרים; מפעיל את אטימות המים
+
+@ Sensor grain, scanlines and flicker of the goggle image
+he גרעיניות חיישן, קווי סריקה והבהוב בתמונת המשקפת
+
+@ Shades every anti-aliasing sample; needs Anti-aliasing on
+he מצלל כל דגימת החלקת קצוות; דורש החלקת קצוות פעילה
+
+@ Shifts colors so they stay distinct for the chosen color blindness
+he מזיז צבעים כדי שיישארו מובחנים לסוג עיוורון הצבעים שנבחר
+
+@ Shotgun hits leave small surface marks (cosmetic only)
+he פגיעות רובה ציד משאירות סימנים קטנים על משטחים (קוסמטי בלבד)
+
+@ Show corner ticks at screen centre while locked, even with Crosshair off
+he מציג סימני פינות במרכז המסך בזמן נעילה, גם כשהכוונת כבויה
+
+@ Show where grenades and other arcing shots will fly, bounce and land; local play only, not in deathmatch
+he מראה לאן רימונים ויריות מעוקלות אחרות יעופו, יקפצו וינחתו; משחק מקומי בלבד, לא בדת'מאץ'
+
+@ Shows text for important sounds: doors, alerted enemies, secrets, pickups
+he מציג טקסט לצלילים חשובים: דלתות, אויבים שהתעוררו, סודות, פריטים שנאספו
+
+@ Shows the distance fog that maps and mods set; off always gives clear view
+he מציג את ערפל המרחק שמפות ומודים מגדירים; כבוי נותן תמיד מבט צלול
+
+@ Shows the player face next to the health number
+he מציג את פני השחקן ליד מספר הבריאות
+
+@ Simulation detail, step rate, fade-out lifetimes and caps for gibs and shrapnel; low also skips mover collision
+he פירוט סימולציה, קצב צעדים, משכי דעיכה ומגבלות לאיברים ורסיסים; נמוכה מדלגת גם על התנגשות עם גופים נעים
+
+@ Size of the on-screen buttons and move stick
+he גודל הכפתורים וסטיק התנועה על המסך
+
+@ Slowly heals up to 100 health after 5 seconds without being hit
+he מרפא לאט עד 100 בריאות אחרי 5 שניות בלי להיפגע
+
+@ Slows stick look while the crosshair is over an enemy
+he מאט את המבט בסטיק כשהכוונת נמצאת על אויב
+
+@ Slows the game down while the weapon wheel is open
+he מאט את המשחק כשגלגל הנשקים פתוח
+
+@ Slows the whole game down; single player only. Saves and demos stay compatible with other ports
+he מאט את כל המשחק; משחק יחיד בלבד. שמירות והדגמות נשארות תואמות לגרסאות אחרות
+
+@ Small camera jolt on each freeze; off with Reduce Motion
+he טלטלת מצלמה קטנה בכל הקפאה; כבויה עם הפחתת תנועה
+
+@ Snap and track enemies in local play, including split-screen; unavailable online
+he נעילה ומעקב אחר אויבים במשחק מקומי, כולל מסך מפוצל; לא זמין ברשת
+
+@ Sparks, smoke, chips, splinters and splashes fly off whatever your shots hit
+he ניצוצות, עשן, שבבים, קיסמים והתזות עפים מכל מה שהיריות שלכם פוגעות בו
+
+@ Spawns extra copies of every monster around the original when a level starts
+he יוצר עותקים נוספים של כל מפלצת סביב המקורית בתחילת השלב
+
+@ Strength of the full-screen flashes for damage, pickups and powerups
+he עוצמת ההבזקים במסך מלא לנזק, איסוף פריטים ושדרוגים
+
+@ Stretch or shorten the sound while keeping its pitch
+he מאריך או מקצר את הצליל תוך שמירה על גובהו
+
+@ Surface opacity; requires Enhanced Water and Translucent Water
+he אטימות פני המים; דורש מים משופרים ומים שקופים למחצה
+
+@ The hook latches onto metal surfaces (metal, tech, computer panels, copper)
+he הקרס נתפס במשטחי מתכת (מתכת, טכנולוגיה, לוחות מחשב, נחושת)
+
+@ The hook latches onto stone, brick, rock and any surface not recognised as wood or metal
+he הקרס נתפס באבן, לבנים, סלע וכל משטח שלא זוהה כעץ או מתכת
+
+@ The hook latches onto wooden surfaces (texture names like wood, crate, plank)
+he הקרס נתפס במשטחי עץ (שמות טקסטורה כמו wood, crate, plank)
+
+@ Turn the controller's motion sensor into a look input; needs a pad with a gyroscope
+he הופך את חיישן התנועה של הבקר לקלט מבט; דורש בקר עם ג'ירוסקופ
+
+@ Turns off view bob, strafe tilt and the camera kick when hit or firing
+he מבטל את נדנוד המבט, ההטיה בצעד הצידה ורתע המצלמה בפגיעה או בירי
+
+@ Turns on the extra liquid effects; Water Settings controls each one
+he מפעיל את אפקטי הנוזלים הנוספים; הגדרות מים שולט בכל אחד מהם
+
+@ Turns the view to follow a moving enemy you are aiming at
+he מסובב את המבט כדי לעקוב אחרי אויב נע שאתם מכוונים אליו
+
+@ Turns the view when you roll the controller sideways; 0 disables it, negative reverses it
+he מסובב את המבט כשמגלגלים את הבקר הצידה; 0 מבטל, ערך שלילי הופך את הכיוון
+
+@ Two-portal gun: fire and alt-fire place linked portals on flat walls; assign a weapon slot in Add-ons
+he אקדח שני פורטלים: ירי וירי משני מציבים פורטלים מקושרים על קירות שטוחים; הקצו משבצת נשק בתוספים
+
+@ Unlocks the FX Settings page: enhanced particles, impact effects and blood splatter
+he פותח את עמוד הגדרות אפקטים: חלקיקים משופרים, אפקטי פגיעה והתזות דם
+
+@ Uses the 2021 re-release's smoother MD5 models (and MD3 replacements from mods) instead of the classic ones. Applies on the next map load
+he משתמש במודלי MD5 החלקים יותר של המהדורה המחודשת מ-2021 (ובתחליפי MD3 ממודים) במקום הקלאסיים. חל בטעינת המפה הבאה
+
+@ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
+he משתמש בתאורה הצבעונית של המפה (קובץ .lit או BSPX lump); כבוי נותן אור לבן מקורי. חל בטעינת המפה הבאה
+
+@ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
+he מקטעי סילון המים, מספר הטיפות והצללת נוזל מבריקה: נמוכה משתמשת בזרמים שקופים פשוטים; גבוהה בסילונים חלקים ומבריקים
+
+@ When gyro looking applies: always, off while +gyroaction is held, or only while it is held
+he מתי מבט בג'ירו פועל: תמיד, כבוי בזמן החזקת +gyroaction, או רק בזמן החזקתו
+
+@ Which weapons trigger the freeze; melee covers the axe and any mod weapon used at close range without ammo
+he אילו נשקים מפעילים את ההקפאה; קרב מגע כולל את הגרזן וכל נשק ממוד שמשמש מטווח קצר ללא תחמושת
+
+@ Your own rockets and grenades don't hurt you; rocket jumps still work
+he הטילים והרימונים שלכם לא פוגעים בכם; קפיצות טיל עדיין עובדות
+
+# ==== ui.txt ====
+
+# Menus and pop-ups outside the options pages: save cards, launch, presets,
+# add-on browser, map packs, hints and dialogs.
+@ Select
+he בחירה
+
+@ Back
+he חזרה
+
+@ Cancel
+he ביטול
+
+@ Confirm
+he אישור
+
+@ Scroll
+he גלילה
+
+@ Section
+he קטע
+
+@ Bind
+he הקצאה
+
+@ Cancel binding
+he ביטול הקצאה
+
+@ Clear
+he ניקוי
+
+@ Clear pad
+he ניקוי בקר
+
+@ Remap
+he מיפוי מחדש
+
+@ Type
+he הקלדה
+
+@ Shift
+he Shift
+
+@ Done
+he סיום
+
+@ Del
+he Del
+
+@ Space
+he רווח
+
+@ Save
+he שמירה
+
+@ Load
+he טעינה
+
+@ Delete
+he מחיקה
+
+@ Play
+he שחק
+
+@ Yes
+he כן
+
+@ No
+he לא
+
+@ OK
+he אישור
+
+@ System
+he מערכת
+
+@ Language
+he שפה
+
+@ Help
+he עזרה
+
+@ Fixed for this game: it was started without Customize
+he קבוע למשחק זה: הוא התחיל ללא התאמה אישית
+
+@ Press a button or key to bind (Start cancels)
+he לחצו על כפתור או מקש להקצאה (Start מבטל)
+
+@ Press button...
+he לחצו על כפתור...
+
+@ Press key...
+he לחצו על מקש...
+
+@ Replace this binding?
+he להחליף את ההקצאה הזו?
+
+@ is already assigned
+he כבר מוקצה
+
+@ {} already assigned
+he {} כבר מוקצה
+
+@ Open Controls to remap Lock-on?
+he לפתוח את שליטה כדי למפות מחדש את נעילה?
+
+@ Lock-on
+he נעילה
+
+@ Auto-aim Toggle
+he כיוון אוטומטי במיתוג
+
+@ Keyboard
+he מקלדת
+
+@ Controller
+he בקר
+
+# main menu, dialogs and screens
+@ Map Packs
+he חבילות מפות
+
+@ Customize
+he התאמה אישית
+
+@ Level Select
+he בחירת שלב
+
+@ Really quit?
+he באמת לצאת?
+
+@ You died
+he מתת
+
+@ Continue from most recent save
+he המשך מהשמירה האחרונה
+
+@ Select save
+he בחירת שמירה
+
+@ Restart level
+he התחלת השלב מחדש
+
+@ Return to main menu
+he חזרה לתפריט הראשי
+
+@ (disabled)
+he (מושבת)
+
+@ (fixed for this game)
+he (קבוע למשחק זה)
+
+@ (off)
+he (כבוי)
+
+@ Apply Display Changes
+he החלת שינויי תצוגה
+
+@ Display Mode
+he מצב תצוגה
+
+@ Resolution
+he רזולוציה
+
+@ desktop
+he שולחן העבודה
+
+@ Preset
+he הגדרה מוכנה
+
+@ Map
+he מפה
+
+@ Reset Shader Settings
+he איפוס הגדרות השיידר
+
+@ Reset to Defaults
+he איפוס לברירות המחדל
+
+@ Searching...
+he מחפש...
+
+@ This game only autosaves.
+he משחק זה שומר רק אוטומטית.
+
+@ (No Manual Saves modifier)
+he (משנה ללא שמירה ידנית)
+
+@ End the current game?
+he לסיים את המשחק הנוכחי?
+
+@ Unsaved progress will be lost.
+he התקדמות שלא נשמרה תאבד.
+
+@ End game
+he סיום משחק
+
+@ Overwrite
+he דריסה
+
+@ Overwrite "{}"?
+he לדרוס את "{}"?
+
+@ Saved {}
+he נשמר {}
+
+@ Start a new game?
+he להתחיל משחק חדש?
+
+@ New game
+he משחק חדש
+
+@ New Game
+he משחק חדש
+
+@ CUSTOM
+he מותאם
+
+@ Customize Experience
+he התאמה אישית של החוויה
+
+@ Disable All
+he השבתת הכול
+
+@ Disable All Modifications
+he השבתת כל השינויים
+
+@ Saves load in other source ports too.
+he השמירות נטענות גם בגרסאות מקור אחרות.
+
+@ Standard rules, no add-ons.
+he חוקים רגילים, ללא תוספים.
+
+@ Choose skill
+he בחירת רמת קושי
+
+@ The current game will end
+he המשחק הנוכחי יסתיים
+
+@ Easy
+he קל
+
+@ Normal
+he רגיל
+
+@ Hard
+he קשה
+
+@ Nightmare
+he סיוט
+
+# graphics preset pop-up
+@ Choose a Graphics Preset
+he בחירת הגדרה גרפית מוכנה
+
+@ Classic
+he קלאסי
+
+@ Like the re-release: enhanced models,
+he כמו המהדורה המחודשת: מודלים משופרים,
+
+@ no added effects.
+he ללא אפקטים נוספים.
+
+@ Enhanced
+he משופר
+
+@ Every enhancement at its highest quality.
+he כל שיפור באיכות הגבוהה ביותר.
+
+@ Needs a capable GPU.
+he דורש כרטיס מסך חזק.
+
+@ Low-End
+he חלש
+
+@ Fastest. No anti-aliasing, original
+he הכי מהיר. ללא החלקת קצוות, מודלים
+
+@ models, lowest effect quality.
+he מקוריים, איכות אפקטים נמוכה ביותר.
+
+@ Esc keeps the defaults
+he Esc שומר על ברירות המחדל
+
+@ Everything can be changed later in Options.
+he אפשר לשנות הכול מאוחר יותר באפשרויות.
+
+@ Keep Defaults
+he השארת ברירות המחדל
+
+# save and load cards
+@ Save Game
+he שמירת משחק
+
+@ Load Game
+he טעינת משחק
+
+@ Autosaves
+he שמירות אוטומטיות
+
+@ newest first
+he החדשות קודם
+
+@ Saves: {}
+he שמירות: {}
+
+@ Browse Autosaves
+he עיון בשמירות אוטומטיות
+
+@ Every retained autosave, newest first
+he כל השמירות האוטומטיות שנשמרו, החדשות קודם
+
+@ New save
+he שמירה חדשה
+
+@ Select to save your game here
+he בחרו כדי לשמור את המשחק כאן
+
+@ No autosaves yet
+he אין עדיין שמירות אוטומטיות
+
+@ Autosaves are made on level entry, secrets and more (Options > Gameplay)
+he שמירות אוטומטיות נעשות בכניסה לשלב, במציאת סודות ועוד (אפשרויות > משחקיות)
+
+@ No saves yet
+he אין עדיין שמירות
+
+@ Save from the Single Player menu, or press F6 to quicksave
+he שמרו מתפריט משחק יחיד, או לחצו F6 לשמירה מהירה
+
+@ No picture
+he אין תמונה
+
+@ Del: delete save
+he Del: מחיקת שמירה
+
+@ Delete "{}"?
+he למחוק את "{}"?
+
+@ This cannot be undone.
+he לא ניתן לבטל פעולה זו.
+
+@ Quicksave
+he שמירה מהירה
+
+@ Autosave: {}
+he שמירה אוטומטית: {}
+
+@ unknown trigger
+he טריגר לא ידוע
+
+@ Latest - {}
+he אחרונה - {}
+
+@ Health {}
+he בריאות {}
+
+@ Armor {}
+he שריון {}
+
+@ Kills {}/{}
+he הריגות {}/{}
+
+@ Secrets {}/{}
+he סודות {}/{}
+
+@ Split-screen, {} players
+he מסך מפוצל, {} שחקנים
+
+@ Co-op
+he שיתופי
+
+@ Customized
+he מותאם אישית
+
+@ Customized, {}
+he מותאם אישית, {}
+
+@ Date unavailable
+he התאריך לא זמין
+
+@ Just now
+he הרגע
+
+@ {} min ago
+he לפני {} דק'
+
+@ {} h ago
+he לפני {} שע'
+
+@ Level entry
+he כניסה לשלב
+
+@ Secret found
+he נמצא סוד
+
+@ All enemies killed
+he כל האויבים הובסו
+
+@ All secrets found
+he כל הסודות נמצאו
+
+@ Timer
+he טיימר
+
+# customize pages
+@ Standard rules
+he חוקים רגילים
+
+@ Modifiers changed: {}
+he משנים ששונו: {}
+
+@ no add-ons
+he ללא תוספים
+
+@ add-ons: {}
+he תוספים: {}
+
+@ Saves of this game are .qsa files: they need this source port.
+he השמירות של משחק זה הן קובצי .qsa: הן דורשות את גרסת המקור הזו.
+
+@ Nothing changed: this plays as standard Quake.
+he שום דבר לא השתנה: המשחק יתנהג כמו Quake רגיל.
+
+@ Changes apply now and are saved with this game (.qsa).
+he השינויים חלים מיד ונשמרים עם משחק זה (.qsa).
+
+@ This game started without Customize, so its rules are fixed.
+he משחק זה התחיל ללא התאמה אישית, ולכן החוקים שלו קבועים.
+
+@ Start a new game and choose Customize Experience.
+he התחילו משחק חדש ובחרו התאמה אישית של החוויה.
+
+@ These rules apply to the next customized game.
+he חוקים אלה יחולו על המשחק המותאם הבא.
+
+# add-on browser
+@ Fire
+he ירי
+
+@ Alt Fire
+he ירי משני
+
+@ Configure Parameters >
+he הגדרת פרמטרים >
+
+@ Configure
+he הגדרה
+
+@ Settings
+he הגדרות
+
+@ Change slot
+he החלפת משבצת
+
+@ Toggle
+he מיתוג
+
+@ Details
+he פרטים
+
+@ Enter or click the box: toggle
+he Enter או לחיצה על התיבה: מיתוג
+
+@ Right / Tab / click: details
+he ימינה / Tab / לחיצה: פרטים
+
+@ Input Remapping
+he מיפוי קלט מחדש
+
+@ Weapon Slot
+he משבצת נשק
+
+@ Customized games save as .qsa files, which need this source port.
+he משחקים מותאמים נשמרים כקובצי .qsa, שדורשים את גרסת המקור הזו.
+
+@ This game started without Customize, so its add-ons are fixed. Customize a new game instead.
+he משחק זה התחיל ללא התאמה אישית, ולכן התוספים שלו קבועים. התאימו אישית משחק חדש במקום זאת.
+
+@ Bullet Time
+he בולט טיים
+
+@ Change Goggles
+he החלפת משקפת
+
+@ Dodge / Dive
+he התחמקות / זינוק
+
+@ Goggles
+he משקפת
+
+@ Hitstop
+he עצירת פגיעה
+
+@ Projectile Shotguns
+he רובי ציד קליעיים
+
+@ BULLET TIME: 20%
+he בולט טיים: 20%
+
+@ NORMAL SPEED
+he מהירות רגילה
+
+@ SLOW MOTION: PHYSICAL PELLETS
+he הילוך איטי: כדוריות פיזיקליות
+
+@ DEMONSTRATION
+he הדגמה
+
+@ GAMEPLAY
+he משחקיות
+
+@ LOOP
+he לולאה
+
+@ Preview unavailable
+he תצוגה מקדימה לא זמינה
+
+# shader and language help lines
+@ A setting of the chosen shader; arrows step it, Enter is not needed
+he הגדרה של השיידר הנבחר; החצים משנים אותה, אין צורך ב-Enter
+
+@ Language of the menus, messages and the 2021 re-release's game text; System follows your computer's language
+he שפת התפריטים, ההודעות וטקסט המשחק של המהדורה המחודשת מ-2021; מערכת עוקבת אחר שפת המחשב שלכם
+
+@ Puts every setting of the chosen shader back to the preset's defaults
+he מחזיר כל הגדרה של השיידר הנבחר לברירות המחדל של ההגדרה המוכנה
+
+@ RetroArch slang shader on the final image: CRT, scanlines, NTSC, sharpening; add your own in <game>/shaders
+he שיידר slang של RetroArch על התמונה הסופית: CRT, קווי סריקה, NTSC, חידוד; הוסיפו משלכם ב-<game>/shaders
+
+# modern console footer
+@ Shift+PgUp/Dn: height  ` : hide
+he Shift+PgUp/Dn: גובה  ` : הסתרה
+
+@ Tab: complete  Ctrl+R: search  bash | pipe
+he Tab: השלמה  Ctrl+R: חיפוש  bash | צינור
+
+@ ↑ +{} lines (End to jump) 
+he ↑ +{} שורות (End לקפיצה) 
+
+# add-on descriptions
+@ Create two linked portals on flat walls. Fire places the first portal; Alt Fire places the second. Walk through either portal to emerge from the other. Your momentum carries through. Assign a weapon slot below: pressing that slot repeatedly cycles its ordinary weapon and every enabled add-on assigned there. Portal view quality is configurable below.
+he יוצרים שני פורטלים מקושרים על קירות שטוחים. ירי מציב את הפורטל הראשון; ירי משני מציב את השני. עוברים דרך אחד הפורטלים ויוצאים מהשני, והתנופה נשמרת. הקצו משבצת נשק למטה: לחיצות חוזרות על המשבצת עוברות בין הנשק הרגיל שלה לכל תוסף פעיל שהוקצה לה. את איכות תצוגת הפורטלים אפשר להגדיר למטה.
+
+@ Hold Fire and sweep the crosshair over monsters to queue targets. Release Fire to throw: the boomerang visits each target, stuns it and returns to you. Alt Fire clears the queue. The weapon slot selects a group, not a separate hotkey: press it again to cycle through the weapons in that slot. Configure stun duration and flight speed below.
+he החזיקו ירי והעבירו את הכוונת על מפלצות כדי להכניס מטרות לתור. שחררו את הירי כדי לזרוק: הבומרנג מגיע לכל מטרה, מהמם אותה וחוזר אליכם. ירי משני מנקה את התור. משבצת הנשק בוחרת קבוצה, לא מקש קיצור נפרד: לחצו עליה שוב כדי לעבור בין הנשקים שבמשבצת. את משך ההלם ומהירות המעוף מגדירים למטה.
+
+@ Hold Fire to charge a sticky bomb using rocket ammunition; release to launch. A longer charge throws it faster. Bombs cling to walls, doors and monsters. Alt Fire detonates your planted bombs together. Place a trap, retreat, then detonate it when enemies approach. Assign any weapon slot below; repeated presses cycle through the ordinary weapon and add-ons in that slot.
+he החזיקו ירי כדי לטעון פצצה דביקה בתחמושת טילים; שחררו כדי לשגר. טעינה ארוכה יותר זורקת אותה מהר יותר. הפצצות נצמדות לקירות, דלתות ומפלצות. ירי משני מפוצץ את כל הפצצות שהצבתם יחד. הציבו מלכודת, סגו לאחור ופוצצו אותה כשאויבים מתקרבים. הקצו משבצת נשק כלשהי למטה; לחיצות חוזרות עוברות בין הנשק הרגיל לתוספים שבמשבצת.
+
+@ Fire launches a chain hook. It latches onto a permitted surface or enemy and reels you toward the anchor. Fire again or use Alt Fire to let go. Choose which materials and enemies can be hooked in Configure Parameters. Assign it to any weapon slot; repeated presses of the slot's existing binding cycle through its weapons.
+he ירי משגר קרס בשרשרת. הוא נתפס במשטח מותר או באויב ומושך אתכם לעבר נקודת העיגון. ירי נוסף או ירי משני משחררים. בחרו אילו חומרים ואויבים אפשר לתפוס בהגדרת פרמטרים. הקצו אותו לכל משבצת נשק; לחיצות חוזרות על המקש הקיים של המשבצת עוברות בין הנשקים שלה.
+
+@ A piercing railgun inspired by Quake III. Fire sends a slug through every enemy along its line. Each shot consumes two cells, with a 1.5 second refire interval. Damage and the spiral trail colour are configurable below. Choose a weapon slot: the slot's current binding selects and cycles the weapons assigned to it.
+he רובה מסילה חודר בהשראת Quake III. ירי שולח קליע דרך כל אויב לאורך הקו שלו. כל ירייה צורכת שני תאים, עם מרווח של 1.5 שניות בין יריות. את הנזק ואת צבע השובל הספירלי מגדירים למטה. בחרו משבצת נשק: המקש הנוכחי של המשבצת בוחר ועובר בין הנשקים שהוקצו לה.
+
+@ A Portal-style gel sprayer. Fire sprays blue Repulsion gel: land, jump or run into it to bounce, and landings on it never hurt. Alt Fire sprays orange Propulsion gel: run across it to go much faster. Gel coats floors and walls until washed off with the Powerwasher. Assign a weapon slot below; repeated presses cycle the weapons in that slot.
+he מרסס ג'ל בסגנון Portal. ירי מרסס ג'ל דחייה כחול: נחיתה, קפיצה או ריצה לתוכו מקפיצות אתכם, ונחיתה עליו לעולם לא פוגעת. ירי משני מרסס ג'ל הנעה כתום: ריצה עליו מאיצה אתכם מאוד. הג'ל מצפה רצפות וקירות עד שנשטף במכונת השטיפה. הקצו משבצת נשק למטה; לחיצות חוזרות עוברות בין הנשקים שבמשבצת.
+
+@ A water cannon. Fire shoots a straight jet with limited reach; Alt Fire a wide, shorter fan. The water pushes enemies back, turns projectiles aside and washes away gel and blood. Push strength is configurable below. Assign a weapon slot below; repeated presses cycle the weapons in that slot.
+he תותח מים. ירי יורה סילון ישר בטווח מוגבל; ירי משני מניפה רחבה וקצרה יותר. המים הודפים אויבים, מסיטים קליעים ושוטפים ג'ל ודם. את עוצמת הדחיפה מגדירים למטה. הקצו משבצת נשק למטה; לחיצות חוזרות עוברות בין הנשקים שבמשבצת.
+
+@ One equipment add-on includes both night vision and thermal vision. The Change Goggles action cycles Normal, Night Vision, Thermal, then Normal again. Night vision brightens dark rooms; thermal vision highlights living enemies. Goggles do not occupy a weapon slot. Configure intensity and sensor noise below. The binding affects only this add-on.
+he תוסף ציוד אחד כולל גם ראיית לילה וגם ראייה תרמית. הפעולה החלפת משקפת עוברת בין רגיל, ראיית לילה, תרמי ושוב רגיל. ראיית לילה מאירה חדרים חשוכים; ראייה תרמית מבליטה אויבים חיים. המשקפת לא תופסת משבצת נשק. את העוצמה ורעש החיישן מגדירים למטה. ההקצאה משפיעה רק על תוסף זה.
+
+@ Press Dodge with a movement direction on the ground or in midair: dive forward or leap backward and sideways. Diagonals are supported. Each press launches once, with a short recovery. The player body animates in third person. Assign the Dodge action below or in Controls.
+he לחצו על התחמקות יחד עם כיוון תנועה, על הקרקע או באוויר: זינוק קדימה או קפיצה אחורה והצידה. גם אלכסונים נתמכים. כל לחיצה משגרת פעם אחת, עם התאוששות קצרה. גוף השחקן מונפש בגוף שלישי. הקצו את פעולת ההתחמקות למטה או בשליטה.
+
+@ Use the dedicated Bullet Time action to slow the whole local game to 20% speed. Hold is the default; Toggle switches on each press. The optional meter limits use in real seconds and regenerates while inactive. Disable the meter for unlimited use. Remap the action and configure duration and regeneration below.
+he השתמשו בפעולת בולט טיים הייעודית כדי להאט את כל המשחק המקומי ל-20% מהמהירות. החזקה היא ברירת המחדל; מיתוג מחליף מצב בכל לחיצה. המד האופציונלי מגביל את השימוש בשניות אמיתיות ומתמלא כשאינו פעיל. השביתו את המד לשימוש בלתי מוגבל. מפו מחדש את הפעולה והגדירו משך והתחדשות למטה.
+
+@ Both shotguns and enemy grunts fire physical pellets with their original spread and damage. Fast default projectiles feel immediate; lower their speed to dodge incoming fire during bullet time. Configure projectile speed below, or reset it to the default of 10000 units per second.
+he שני רובי הציד וחיילי האויב יורים כדוריות פיזיקליות עם הפיזור והנזק המקוריים. הקליעים המהירים כברירת מחדל מרגישים מיידיים; הורידו את מהירותם כדי להתחמק מירי בזמן בולט טיים. הגדירו את מהירות הקליעים למטה, או אפסו אותה לברירת המחדל של 10000 יחידות לשנייה.
+
+@ Freezes the game for a split second when you damage an enemy, so hits feel heavier. Single player only. Choose which weapons trigger it (all, melee, ranged or explosives), how long it lasts and how much more a kill freezes. Advanced settings cover enemy toughness, damage scaling, cooldown and the longest freeze.
+he מקפיא את המשחק לשבריר שנייה כשאתם פוגעים באויב, כך שהפגיעות מרגישות כבדות יותר. משחק יחיד בלבד. בחרו אילו נשקים מפעילים אותו (הכול, קרב מגע, טווח רחוק או חומרי נפץ), כמה זמן הוא נמשך וכמה יותר הריגה מקפיאה. ההגדרות המתקדמות כוללות את קשיחות האויבים, קנה המידה של הנזק, זמן ההתאוששות וההקפאה הארוכה ביותר.
+
+# map packs and the Quaddicted browser
+@ Get more maps (Quaddicted)...
+he עוד מפות (Quaddicted)...
+
+@ Type to filter...
+he הקלידו לסינון...
+
+@ Launch mod
+he הפעלת מוד
+
+@ Start first map
+he התחלת המפה הראשונה
+
+@ (running)
+he (פועל)
+
+@ running
+he פועל
+
+@ Recent
+he אחרונים
+
+@ Name
+he שם
+
+@ Dir
+he תיקייה
+
+@ Default
+he ברירת מחדל
+
+@ Title
+he כותרת
+
+@ Sort: {}
+he מיון: {}
+
+@ {} installed
+he {} מותקנים
+
+@ {}/{} matching
+he {}/{} תואמים
+
+@ {} maps, {} completed
+he {} מפות, {} הושלמו
+
+@ {}/{} matching, {} completed
+he {}/{} תואמות, {} הושלמו
+
+@ no maps of its own
+he אין לו מפות משלו
+
+@ dir: {}
+he תיקייה: {}
+
+@ base: {}
+he בסיס: {}
+
+@ Browse the Quaddicted archive of
+he עיינו בארכיון Quaddicted של
+
+@ single-player maps and episodes,
+he מפות ופרקים למשחק יחיד,
+
+@ then download and install them
+he ואז הורידו והתקינו אותם
+
+@ here. Each release gets its own
+he כאן. כל הוצאה מקבלת רשומה
+
+@ entry in this list.
+he משלה ברשימה זו.
+
+@ Needs an internet connection.
+he דורש חיבור לאינטרנט.
+
+@ Quaddicted Map Archive
+he ארכיון המפות Quaddicted
+
+@ Newest
+he החדשות ביותר
+
+@ Author
+he יוצר
+
+@ Size
+he גודל
+
+@ Loading the map list...
+he טוען את רשימת המפות...
+
+@ Couldn't load the map list: {}
+he לא ניתן לטעון את רשימת המפות: {}
+
+@ {} single-player releases  -  F5 refreshes
+he {} הוצאות למשחק יחיד  -  F5 מרענן
+
+@ {} matching
+he {} תואמות
+
+@ by {}
+he מאת {}
+
+@ requires: {}
+he דורש: {}
+
+@ maps: {}
+he מפות: {}
+
+@ Failed: {}
+he נכשל: {}
+
+@ Downloading... {}%
+he מוריד... {}%
+
+@ Unpacking...
+he מחלץ...
+
+@ Installed in {}/  -  Enter: play
+he הותקן ב-{}/  -  Enter: שחק
+
+@ Enter: download and install
+he Enter: הורדה והתקנה
+
+@ unpacking
+he מחלץ
+
+@ failed
+he נכשל
+
+@ installed
+he מותקן
+
+@ Downloads are not available in the browser build
+he הורדות אינן זמינות בגרסת הדפדפן
+
+@ the map list could not be read
+he לא ניתן לקרוא את רשימת המפות
+
+@ downloading needs the curl program
+he ההורדה דורשת את התוכנה curl
+
+@ download failed
+he ההורדה נכשלה
+
+@ the download is not a valid zip
+he הקובץ שהורד אינו zip תקין
+
+@ nothing to install for this engine
+he אין מה להתקין עבור מנוע זה
+
+@ needs {} installed first
+he דורש התקנה של {} קודם
+
+@ couldn't unpack {}
+he לא ניתן לחלץ את {}
+
+# help screen
+@ About
+he אודות
+
+@ < Back
+he < חזרה
+
+# tr_ctx keys: English shows the short word, the key says which meaning
+@ Save (a manual save, as opposed to a quicksave or autosave)
+he שמירה
+
+# ==== hud.txt ====
+
+# HUD, weapon and equipment wheels, sound captions and other in-game text.
+# Weapon, monster and item names follow the 2021 re-release's own translations.
+@ Axe
+he גרזן
+
+@ Shotgun
+he רובה ציד
+
+@ Double-Barrelled Shotgun
+he רובה ציד דו-קני
+
+@ Nailgun
+he רובה מסמרים
+
+@ Super Nailgun
+he רובה מסמרים כבד
+
+@ Grenade Launcher
+he משגר רימונים
+
+@ Rocket Launcher
+he משגר טילים
+
+@ Thunderbolt
+he ברק
+
+@ Portal Gun
+he אקדח פורטלים
+
+@ Boomerang
+he בומרנג
+
+@ Stickybomb Launcher
+he משגר פצצות דביקות
+
+@ Railgun
+he רובה מסילה
+
+@ Hookshot
+he קרס
+
+@ Gel Sprayer
+he מרסס ג'ל
+
+@ Powerwasher
+he מכונת שטיפה
+
+@ Night Vision Goggles
+he משקפת ראיית לילה
+
+@ Thermal Goggles
+he משקפת תרמית
+
+@ Normal vision
+he ראייה רגילה
+
+@ ON
+he פועל
+
+@ OFF
+he כבוי
+
+@ {} (turn on)
+he {} (הפעלה)
+
+@ {} (turn off)
+he {} (כיבוי)
+
+@ Move mouse to select, release to toggle
+he הזיזו את העכבר לבחירה, שחררו למיתוג
+
+@ Move mouse to select, release to equip
+he הזיזו את העכבר לבחירה, שחררו לצידוד
+
+@ Release to toggle
+he שחררו למיתוג
+
+@ Release to equip
+he שחררו לצידוד
+
+@ shells
+he פגזים
+
+@ nails
+he מסמרים
+
+@ rockets
+he טילים
+
+@ cells
+he תאים
+
+@ Kills: {}/{}
+he הריגות: {}/{}
+
+@ Secrets: {}/{}
+he סודות: {}/{}
+
+@ Time {}
+he זמן {}
+
+@ Press any button to continue...
+he לחצו על כפתור כלשהו כדי להמשיך...
+
+@ Press any key to continue...
+he לחצו על מקש כלשהו כדי להמשיך...
+
+@ BULLET TIME
+he בולט טיים
+
+@ AUTO AIM
+he כיוון אוטומטי
+
+@ Crosshair
+he כוונת
+
+@ + Marker
+he + סמן
+
+@ Hit markers off
+he סמני פגיעה כבויים
+
+@ On target
+he על מטרה
+
+@ On kill
+he בהריגה
+
+# sound captions
+@ [Secret found]
+he [נמצא סוד]
+
+@ [Message]
+he [הודעה]
+
+@ [Switch activated]
+he [מתג הופעל]
+
+@ [Key picked up]
+he [נאסף מפתח]
+
+@ [Rune picked up]
+he [נאספה רונה]
+
+@ [Teleporter]
+he [טלפורטר]
+
+@ [Teleport]
+he [טלפורטציה]
+
+@ [Splash]
+he [התזת מים]
+
+@ [Leaving water]
+he [יציאה מהמים]
+
+@ [Door]
+he [דלת]
+
+@ [Platform moving]
+he [פלטפורמה נעה]
+
+@ [Button]
+he [כפתור]
+
+@ [Health picked up]
+he [נאספה בריאות]
+
+@ [Armor picked up]
+he [נאסף שריון]
+
+@ [Quad Damage wearing off]
+he [נזק מרובע פג]
+
+@ [Quad Damage]
+he [נזק מרובע]
+
+@ [Pentagram wearing off]
+he [הפנטגרם פג]
+
+@ [Pentagram of Protection]
+he [פנטגרם ההגנה]
+
+@ [Ring wearing off]
+he [הטבעת פגה]
+
+@ [Ring of Shadows]
+he [טבעת הצללים]
+
+@ [Biosuit wearing off]
+he [חליפת המגן פגה]
+
+@ [Biosuit]
+he [חליפת מגן]
+
+@ [Item picked up]
+he [נאסף פריט]
+
+@ [Weapon picked up]
+he [נאסף נשק]
+
+@ [Ammo picked up]
+he [נאספה תחמושת]
+
+@ [Explosion]
+he [פיצוץ]
+
+@ [Grenade launched]
+he [רימון שוגר]
+
+@ [Grenade bounce]
+he [רימון קופץ]
+
+@ [Rocket fired]
+he [טיל נורה]
+
+@ [Nails fired]
+he [מסמרים נורו]
+
+@ [Lightning]
+he [ברק]
+
+@ [Thunder]
+he [רעם]
+
+@ [Enforcer alerted]
+he [אנפורסר הבחין]
+
+@ [Grunt alerted]
+he [גראנט הבחין]
+
+@ [Rottweiler alerted]
+he [רוטווילר הבחין]
+
+@ [Knight alerted]
+he [אביר הבחין]
+
+@ [Death Knight alerted]
+he [אביר מוות הבחין]
+
+@ [Scrag alerted]
+he [סקראג הבחין]
+
+@ [Ogre alerted]
+he [אוגר הבחין]
+
+@ [Fiend alerted]
+he [שד הבחין]
+
+@ [Shambler alerted]
+he [שמבלר הבחין]
+
+@ [Zombie groaning]
+he [זומבי גונח]
+
+@ [Vore alerted]
+he [וור הבחין]
+
+@ [Vore attacking]
+he [וור תוקף]
+
+@ [Spawn alerted]
+he [שרץ הבחין]
+
+@ [Rotfish]
+he [דג רקוב]
+
+@ [Spawn]
+he [שרץ]
+
+@ [Chthon]
+he [כת'ון]
+
+@ [Hard landing]
+he [נחיתה קשה]
+
+@ [Drowning]
+he [טביעה]
+
+@ [Gasping for air]
+he [התנשמות]
+
+@ [Burning]
+he [בעירה]
+
+@ [Telefrag]
+he [טלפראג]
+
+@ [Gibbed]
+he [רוסק לחתיכות]
+
+# ==== console.txt ====
+
+# Console messages, shown translated only with con_translate 1 (Translate Console).
+# Cvar and command names stay as they are.
+@ Autosaved.
+he נשמר אוטומטית.
+
+@ Game saved.
+he המשחק נשמר.
+
+@ Can't save now.
+he לא ניתן לשמור כעת.
+
+@ This game only autosaves (No Manual Saves modifier).
+he משחק זה שומר רק אוטומטית (משנה ללא שמירה ידנית).
+
+@ Loading {}...
+he טוען את {}...
+
+@ load failed: {}
+he הטעינה נכשלה: {}
+
+@ ERROR: autosave failed: {}
+he שגיאה: השמירה האוטומטית נכשלה: {}
+
+@ ERROR: couldn't open {}
+he שגיאה: לא ניתן לפתוח את {}
+
+@ ERROR: couldn't open {}.
+he שגיאה: לא ניתן לפתוח את {}.
+
+@ ERROR: couldn't write {}: {}
+he שגיאה: לא ניתן לכתוב את {}: {}
+
+@ ERROR: couldn't create {}: {}
+he שגיאה: לא ניתן ליצור את {}: {}
+
+@ couldn't write {}: {}
+he לא ניתן לכתוב את {}: {}
+
+@ Wrote {}
+he נכתב {}
+
+@ screenshot failed: {}
+he צילום המסך נכשל: {}
+
+@ screenshot: {}
+he צילום מסך: {}
+
+@ No readable save available. Select save or restart the level.
+he אין שמירה קריאה זמינה. בחרו שמירה או התחילו את השלב מחדש.
+
+@ Unknown command "{}"
+he פקודה לא ידועה "{}"
+
+@ couldn't exec {}
+he לא ניתן להריץ את {}
+
+@ execing {}
+he מריץ את {}
+
+@ execing config.cfg (inherited from {})
+he מריץ את config.cfg (בירושה מ-{})
+
+@ execing config.cfg (mod defaults)
+he מריץ את config.cfg (ברירות המחדל של המוד)
+
+@ execing default.cfg (built-in)
+he מריץ את default.cfg (מובנה)
+
+@ {} cvars
+he {} משתנים
+
+@ {} commands
+he {} פקודות
+
+@ Can't "cmd", not connected
+he לא ניתן להריץ "cmd", אין חיבור
+
+@ Looking for Quake servers...
+he מחפש שרתי Quake...
+
+@ Bad value, must be between 1 and 65534
+he ערך שגוי, חייב להיות בין 1 ל-65534
+
+@ Couldn't handle music file {}
+he לא ניתן לטפל בקובץ המוזיקה {}
+
+@ Bug report written to {}
+he דוח באג נכתב אל {}
+
+@ bugreport: can't create {}: {}
+he bugreport: לא ניתן ליצור את {}: {}
+
+@ graphics preset: {}
+he הגדרה גרפית מוכנה: {}
+
+@ Presets (r_shader_preset <name>):
+he הגדרות מוכנות (r_shader_preset <name>):
+
+@ Add your own .slangp presets under <game>/shaders/.
+he הוסיפו הגדרות .slangp משלכם תחת <game>/shaders/.
+
+@ no shader preset loaded (r_shader_preset)
+he לא נטענה הגדרת שיידר מוכנה (r_shader_preset)
+
+@ r_shader_preset: "{}" not found
+he r_shader_preset: "{}" לא נמצא
+
+@ no parameter "{}" in this preset
+he אין פרמטר "{}" בהגדרה מוכנה זו
+
+@ {} = {} (default {}, {}..{})
+he {} = {} (ברירת מחדל {}, {}..{})
+
+@ Switching to {}...
+he עובר אל {}...
+
+@ game: no game dir "{}" in {}
+he game: אין תיקיית משחק "{}" ב-{}
+
+@ game: can't find the engine executable
+he game: לא נמצא קובץ ההפעלה של המנוע
+
+@ game: exec failed: {}
+he game: ההרצה נכשלה: {}
+
+@ game: launch failed: {}
+he game: ההפעלה נכשלה: {}
+
+@ loaded {} in {}s
+he {} נטען תוך {} שנ'
+
+@ No demos listed with startdemos
+he לא הוגדרו הדגמות עם startdemos
+
+@ Playing demo from {}.
+he מפעיל הדגמה מ-{}.
+
+@ {} frames {} seconds {} fps
+he {} פריימים {} שניות {} fps
+
+@ Recording to {}.
+he מקליט אל {}.
+
+@ Completed demo
+he ההדגמה הסתיימה
+
+@ Can't record during demo playback
+he לא ניתן להקליט בזמן הפעלת הדגמה
+
+@ Relative pathnames are not allowed.
+he נתיבים יחסיים אינם מותרים.
+
+@ Can't record - try again when connected
+he לא ניתן להקליט - נסו שוב כשיש חיבור
+
+@ {} demo(s) in loop
+he {} הדגמות בלולאה
+
+@ Not recording a demo.
+he לא מתבצעת הקלטת הדגמה.
+
+@ {} joined on a gamepad
+he {} הצטרף עם בקר
+
+@ goggles: needs a game started with Add-ons and Goggles enabled
+he goggles: דורש משחק שהתחיל עם תוספים ומשקפת מופעלים
+
+@ equip: needs a game started with Add-ons and Goggles enabled
+he equip: דורש משחק שהתחיל עם תוספים ומשקפת מופעלים
+
+@ UDP listening on port {}
+he UDP מאזין בפורט {}
+
+@ UDP bind on port {} failed: {}
+he קישור UDP לפורט {} נכשל: {}
+
+@ Connection accepted by {}
+he החיבור התקבל על ידי {}
+
+@ Connection failed: {}
+he החיבור נכשל: {}
+
+@ Couldn't resolve {}
+he לא ניתן לפענח את {}
+
+@ Connecting to {}...
+he מתחבר אל {}...
+
+@ Connecting to QuakeWorld server {}...
+he מתחבר לשרת QuakeWorld {}...
+
+@ Disconnected: {}
+he מנותק: {}
+
+@ Server disconnected
+he השרת התנתק
+
+@ Client {} connected
+he הלקוח {} התחבר
+
+@ Client {} timed out
+he תם הזמן של הלקוח {}
+
+@ Couldn't spawn server {}: {}
+he לא ניתן להפעיל את השרת {}: {}
+
+@ maxplayers can not be changed while a server is running.
+he לא ניתן לשנות את maxplayers בזמן ששרת פועל.
+
+@ You can't kick yourself!
+he אי אפשר להעיף את עצמך!
+
+@ Only the server may changelevel
+he רק השרת רשאי להריץ changelevel
+
+@ {} renamed to {}
+he {} שינה את שמו ל-{}

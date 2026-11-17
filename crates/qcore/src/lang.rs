@@ -27,6 +27,8 @@ pub use wrap::wrap;
 
 /// The supported languages: the 2021 re-release's six first, then the
 /// port's own translations (`crates/qcore/lang/languages/<code>.txt`).
+/// Arabic to Amharic need text shaping (`src/font/shape.rs`); Arabic,
+/// Hebrew, Persian and Urdu also right-to-left layout ([`Lang::rtl`]).
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash)]
 pub enum Lang {
     English,
@@ -80,10 +82,25 @@ pub enum Lang {
     Macedonian,
     Slovenian,
     Swahili,
+    Arabic,
+    Hebrew,
+    Persian,
+    Urdu,
+    Hindi,
+    Marathi,
+    Bengali,
+    Punjabi,
+    Gujarati,
+    Tamil,
+    Telugu,
+    Thai,
+    Khmer,
+    Amharic,
+    Cantonese,
 }
 
 /// (language, `language` cvar name, catalog code, own name).
-const INFO: [(Lang, &str, &str, &str); 51] = [
+const INFO: [(Lang, &str, &str, &str); 66] = [
     (Lang::English, "english", "en", "English"),
     (Lang::French, "french", "fr", "Français"),
     (Lang::German, "german", "de", "Deutsch"),
@@ -135,6 +152,21 @@ const INFO: [(Lang, &str, &str, &str); 51] = [
     (Lang::Macedonian, "macedonian", "mk", "Македонски"),
     (Lang::Slovenian, "slovenian", "sl", "Slovenščina"),
     (Lang::Swahili, "swahili", "sw", "Kiswahili"),
+    (Lang::Arabic, "arabic", "ar", "العربية"),
+    (Lang::Hebrew, "hebrew", "he", "עברית"),
+    (Lang::Persian, "persian", "fa", "فارسی"),
+    (Lang::Urdu, "urdu", "ur", "اردو"),
+    (Lang::Hindi, "hindi", "hi", "हिन्दी"),
+    (Lang::Marathi, "marathi", "mr", "मराठी"),
+    (Lang::Bengali, "bengali", "bn", "বাংলা"),
+    (Lang::Punjabi, "punjabi", "pa", "ਪੰਜਾਬੀ"),
+    (Lang::Gujarati, "gujarati", "gu", "ગુજરાતી"),
+    (Lang::Tamil, "tamil", "ta", "தமிழ்"),
+    (Lang::Telugu, "telugu", "te", "తెలుగు"),
+    (Lang::Thai, "thai", "th", "ไทย"),
+    (Lang::Khmer, "khmer", "km", "ខ្មែរ"),
+    (Lang::Amharic, "amharic", "am", "አማርኛ"),
+    (Lang::Cantonese, "cantonese", "yue", "廣東話"),
 ];
 
 impl Lang {
@@ -168,8 +200,18 @@ impl Lang {
         INFO[self as usize].3
     }
 
+    /// A `language` cvar value (`farsi` is also Persian).
     pub fn from_name(s: &str) -> Option<Lang> {
-        Lang::ALL.into_iter().find(|l| l.name().eq_ignore_ascii_case(s.trim()))
+        let s = s.trim();
+        if s.eq_ignore_ascii_case("farsi") {
+            return Some(Lang::Persian);
+        }
+        Lang::ALL.into_iter().find(|l| l.name().eq_ignore_ascii_case(s))
+    }
+
+    /// Written right to left (Arabic, Hebrew, Persian, Urdu).
+    pub fn rtl(self) -> bool {
+        matches!(self, Lang::Arabic | Lang::Hebrew | Lang::Persian | Lang::Urdu)
     }
 
     /// A catalog code or a system locale (`pt_BR.UTF-8`, `zh-Hant-TW`,
@@ -182,11 +224,14 @@ impl Lang {
         let has = |x: &str| rest.contains(&x);
         Some(match base {
             "pt" if has("br") => Lang::Brazilian,
+            "zh" if has("yue") => Lang::Cantonese,
             "zh" if has("hant") || has("tw") || has("hk") || has("mo") => Lang::TChinese,
             "zh" => Lang::SChinese,
             "no" | "nn" => Lang::Norwegian,
             "tl" => Lang::Filipino,
             "in" => Lang::Indonesian,
+            "iw" => Lang::Hebrew,
+            "pes" | "prs" => Lang::Persian,
             _ => return Lang::ALL.into_iter().find(|l| l.code().eq_ignore_ascii_case(base)),
         })
     }
@@ -221,6 +266,11 @@ pub fn set_console(on: bool) {
 
 pub fn console() -> bool {
     CONSOLE.load(Ordering::Relaxed)
+}
+
+/// The current language is written right to left.
+pub fn rtl() -> bool {
+    current().rtl()
 }
 
 /// True when text may hold non-ASCII (UTF-8) characters, which the 8×8

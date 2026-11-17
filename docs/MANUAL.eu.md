@@ -37,7 +37,9 @@ Brasil), japoniera, koreera, txinera (sinplifikatua edo tradizionala),
 turkiera, indonesiera, malaysiera, filipinera, vietnamera, serbiera,
 lituaniera, letoniera, estoniera, maltera, albaniera, armeniera, georgiera,
 islandiera, irlandera, galesa, euskara, katalana, galiziera, latina,
-esperantoa, bielorrusiera, mazedoniera, esloveniera edo swahilia.
+esperantoa, bielorrusiera, mazedoniera, esloveniera, swahilia, arabiera,
+hebreera, persiera, urdua, hindia, marathera, bengalera, punjabera,
+gujaratera, tamilera, telugua, thailandiera, khmerera, amharera edo kantonera.
 **Sistema** aukerak ordenagailuaren hizkuntza jarraitzen du. 2021eko
 berrargitalpenaren joko-testua frantsesera, alemanera, italierara,
 gaztelaniara eta errusierara soilik dago itzulita; beste hizkuntzetan

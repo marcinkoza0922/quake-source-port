@@ -34,10 +34,23 @@ fn locale_codes_with_regions() {
         ("tl-PH", Lang::Filipino),
         ("fil", Lang::Filipino),
         ("ja_JP", Lang::Japanese),
+        ("th_TH.UTF-8", Lang::Thai),
+        ("iw-IL", Lang::Hebrew),
+        ("he", Lang::Hebrew),
+        ("fa-IR", Lang::Persian),
+        ("ur_PK", Lang::Urdu),
+        ("pa-IN", Lang::Punjabi),
+        ("km-KH", Lang::Khmer),
+        ("am_ET", Lang::Amharic),
+        ("yue-Hant-HK", Lang::Cantonese),
+        ("zh-yue", Lang::Cantonese),
     ] {
         assert_eq!(Lang::from_code(s), Some(l), "{s}");
     }
-    assert_eq!(Lang::from_code("th"), None);
+    assert_eq!(Lang::from_code("lo"), None);
+    assert_eq!(Lang::from_name("Farsi"), Some(Lang::Persian));
+    let rtl: Vec<Lang> = Lang::ALL.into_iter().filter(|l| l.rtl()).collect();
+    assert_eq!(rtl, [Lang::Arabic, Lang::Hebrew, Lang::Persian, Lang::Urdu]);
 }
 
 #[test]
@@ -113,4 +126,24 @@ fn ascii_folding() {
     assert_eq!(to_ascii("ÜBER KILL!"), "UBER KILL!");
     assert_eq!(to_ascii("QUAKE™ l’été"), "QUAKE(TM) l'ete");
     assert_eq!(to_ascii("Привет"), "Privet");
+}
+
+/// Thai and Khmer have no spaces between words: lines can only break where
+/// the text marks word boundaries with U+200B (see `wrap`).
+#[test]
+fn thai_and_khmer_mark_word_breaks() {
+    for (_, e) in catalog::all().0 {
+        for (l, s) in &e.texts {
+            let letters = match l {
+                Lang::Thai => 0x0E00..=0x0E7F,
+                Lang::Khmer => 0x1780..=0x17FF,
+                _ => continue,
+            };
+            let mut run = 0;
+            for c in s.chars() {
+                run = if letters.contains(&(c as u32)) { run + 1 } else { 0 };
+                assert!(run <= 18, "{} text for {:?} needs U+200B word breaks: {s:?}", l.code(), e.key);
+            }
+        }
+    }
 }

@@ -32,7 +32,9 @@ norra, hollandi, kreeka, ungari, rumeenia, portugali (Portugal või
 Brasiilia), jaapani, korea, hiina (lihtsustatud või traditsiooniline),
 türgi, indoneesia, malai, filipiini, vietnami, serbia, leedu, läti, eesti,
 malta, albaania, armeenia, gruusia, islandi, iiri, kõmri, baski, katalaani,
-galeegi, ladina, esperanto, valgevene, makedoonia, sloveeni või suahiili.
+galeegi, ladina, esperanto, valgevene, makedoonia, sloveeni, suahiili,
+araabia, heebrea, pärsia, urdu, hindi, marathi, bengali, pandžabi,
+gudžarati, tamili, telugu, tai, khmeeri, amhara või kantoni.
 **System** järgib arvuti keelt. 2021. aasta uusväljaande enda mängutekst on
 tõlgitud ainult prantsuse, saksa, itaalia, hispaania ja vene keelde;
 teistes keeltes näidatakse seda inglise keeles. Muudes keeltes peale

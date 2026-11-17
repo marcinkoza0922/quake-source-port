@@ -380,21 +380,21 @@ pub fn center_wrap_cols(vw: f32) -> usize {
     (w.clamp(320.0, 400.0) as usize) >> 3
 }
 
-/// Translated text with Chinese/Japanese/Korean characters (valid UTF-8 in
-/// the Quake text stream, drawn with the TTF), which [`word_wrap`]'s
-/// byte columns would cut mid-character.
+/// Translated text with Chinese/Japanese/Korean characters or scripts with
+/// combining marks (valid UTF-8 in the Quake text stream, drawn with the
+/// TTF), which [`word_wrap`]'s byte columns would cut mid-character.
 fn wide_text(b: &[u8]) -> Option<&str> {
     if !qcore::lang::unicode_text() || b.is_ascii() {
         return None;
     }
-    std::str::from_utf8(b).ok().filter(|s| s.chars().any(qcore::lang::wrap::is_wide))
+    std::str::from_utf8(b).ok().filter(|s| qcore::lang::wrap::needs_cluster_wrap(s))
 }
 
-/// [`word_wrap`] by character width (a CJK glyph at `QTEXT_SIZE` is about
-/// 9/8 of a column), breaking between CJK characters.
+/// [`word_wrap`] by grapheme clusters (a CJK glyph at `QTEXT_SIZE` is about
+/// 9/8 of a column), breaking between CJK characters and at Thai/Khmer
+/// zero width spaces.
 fn wrap_wide(s: &str, maxcols: usize) -> String {
-    let w = |t: &str| t.chars().map(|c| if qcore::lang::wrap::is_wide(c) { 1.125 } else { 1.0 }).sum::<f32>();
-    let lines: Vec<String> = s.split('\n').flat_map(|l| qcore::lang::wrap(l, maxcols as f32, w)).collect();
+    let lines: Vec<String> = s.split('\n').flat_map(|l| qcore::lang::wrap(l, maxcols as f32, qcore::lang::wrap::cluster_cols)).collect();
     qcore::lang::quake_encode(&lines.join("\n")).into_owned()
 }
 

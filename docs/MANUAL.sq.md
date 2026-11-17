@@ -33,7 +33,10 @@ koreanisht, kinezisht (e thjeshtuar ose tradicionale), turqisht,
 indonezisht, malajisht, filipinisht, vietnamisht, serbisht, lituanisht,
 letonisht, estonisht, maltisht, shqip, armenisht, gjeorgjisht, islandisht,
 irlandisht, uellsisht, baskisht, katalanisht, galicisht, latinisht,
-esperanto, bjellorusisht, maqedonisht, sllovenisht ose suahili.
+esperanto, bjellorusisht, maqedonisht, sllovenisht, suahili, arabisht,
+hebraisht, persisht, urdu, hindisht, marathi, bengalisht, panxhabisht,
+guxharatisht, tamilisht, telugu, tajlandisht, kmerisht, amharisht ose
+kantonisht.
 **Sistemi** ndjek gjuhën e kompjuterit tënd. Teksti i lojës
 i ribotimit të 2021 është përkthyer vetëm në frëngjisht, gjermanisht,
 italisht, spanjisht dhe rusisht; gjuhët e tjera e shfaqin në anglisht. Në

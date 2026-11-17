@@ -33,8 +33,9 @@ nederlandsk, græsk, ungarsk, rumænsk, portugisisk (Portugal eller Brasilien),
 japansk, koreansk, kinesisk (forenklet eller traditionelt), tyrkisk,
 indonesisk, malajisk, filipino, vietnamesisk, serbisk, litauisk, lettisk,
 estisk, maltesisk, albansk, armensk, georgisk, islandsk, irsk, walisisk,
-baskisk, catalansk, galicisk, latin, esperanto, belarusisk, makedonsk, slovensk
-eller swahili.
+baskisk, catalansk, galicisk, latin, esperanto, belarusisk, makedonsk, slovensk,
+swahili, arabisk, hebraisk, persisk, urdu, hindi, marathi, bengali, punjabi,
+gujarati, tamil, telugu, thai, khmer, amharisk eller kantonesisk.
 **System** følger din computers sprog. Genudgivelsen fra 2021's
 egen spiltekst er kun oversat til fransk, tysk, italiensk, spansk og
 russisk; andre sprog viser den på engelsk. På andre sprog end engelsk

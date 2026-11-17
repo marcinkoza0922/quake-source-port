@@ -33,7 +33,9 @@ finnsku, dönsku, norsku, hollensku, grísku, ungversku, rúmensku, portúgölsk
 hefðbundna), tyrknesku, indónesísku, malaísku, filippseysku, víetnömsku,
 serbnesku, litháísku, lettnesku, eistnesku, möltnesku, albönsku, armensku,
 georgísku, íslensku, írsku, velsku, basknesku, katalónsku, galisísku,
-latínu, esperantó, hvítrússnesku, makedónsku, slóvensku eða svahílí.
+latínu, esperantó, hvítrússnesku, makedónsku, slóvensku, svahílí, arabísku,
+hebresku, persnesku, úrdú, hindí, maratí, bengölsku, púnjabí, gújaratí,
+tamílsku, telúgú, taílensku, kmer, amharísku eða kantónsku.
 **Kerfi** fylgir tungumáli tölvunnar. Leiktexti endurútgáfunnar frá 2021
 er aðeins þýddur á frönsku, þýsku, ítölsku, spænsku og rússnesku; önnur
 tungumál sýna hann á ensku. Á öðrum tungumálum en ensku notar smái

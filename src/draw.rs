@@ -285,18 +285,14 @@ impl Canvas {
         let (x0, base) = (x0.round(), (y0 + px * 0.8).round());
         let a = crate::font::UiText::atlas_size() as f32;
         let lay = ui.layout(s, px);
-        let width = lay.last().map_or(0.0, |&(_, x, adv)| x + adv);
-        for (ch, pen, _) in lay {
-            if ch == ' ' {
-                continue;
-            }
-            if let Some(g) = ui.glyph(ch, px as u16) {
-                let (gx, gy) = (x0 + pen + g.ox as f32, base + g.oy as f32);
+        for p in &lay.glyphs {
+            if let Some((g, pen)) = ui.placed(p, px as u16) {
+                let (gx, gy) = (x0 + pen + g.ox as f32, base + p.y + g.oy as f32);
                 let uv = [g.x as f32 / a, g.y as f32 / a, (g.x + g.w) as f32 / a, (g.y + g.h) as f32 / a];
                 self.push(Draw2D::Pic { x: gx, y: gy, w: g.w as f32, h: g.h as f32, pic, uv, color });
             }
         }
-        width / self.scale
+        lay.width / self.scale
     }
 
     /// Text right-aligned to `x`.

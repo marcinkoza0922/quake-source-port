@@ -435,6 +435,14 @@ fn draw_cell_row(
         }
     }
 
+    // letters that need shaping or bidi can't be drawn a cell at a time:
+    // such a row is drawn as proportional text in its first colour
+    if cells.iter().take(limit).any(|cell| crate::font::complex(cell.ch)) {
+        let s: String = cells.iter().take(limit).map(|cell| cell.ch).collect();
+        let fg = cells.iter().find(|cell| cell.ch > ' ').map_or([1.0; 4], |cell| cell.style.effective_fg());
+        c.text_raw(x, y, s.trim_end(), FONT_SZ, fg);
+        return;
+    }
     let Some(ui) = c.ui.clone() else { return };
     let mut ui = ui.borrow_mut();
     let Some(pic) = ui.pic else { return };

@@ -36,8 +36,10 @@ Norwegisch, Niederländisch, Griechisch, Ungarisch, Rumänisch, Portugiesisch
 oder traditionell), Türkisch, Indonesisch, Malaiisch, Filipino,
 Vietnamesisch, Serbisch, Litauisch, Lettisch, Estnisch, Maltesisch,
 Albanisch, Armenisch, Georgisch, Isländisch, Irisch, Walisisch, Baskisch, Katalanisch, Galicisch, Latein,
-Esperanto, Belarussisch, Mazedonisch, Slowenisch oder
-Suaheli. **System** folgt der Sprache deines Computers. Die Spieltexte
+Esperanto, Belarussisch, Mazedonisch, Slowenisch, Suaheli, Arabisch,
+Hebräisch, Persisch, Urdu, Hindi, Marathi, Bengalisch, Punjabi, Gujarati,
+Tamil, Telugu, Thai, Khmer, Amharisch oder Kantonesisch. **System** folgt der Sprache deines
+Computers. Die Spieltexte
 der Neuauflage von 2021 gibt es nur auf Französisch, Deutsch, Italienisch,
 Spanisch und Russisch; andere Sprachen zeigen sie auf Englisch. In anderen
 Sprachen als Englisch nutzen die kleinen Spieltexte die Menüschrift, da die

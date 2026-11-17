@@ -1,0 +1,3024 @@
+# fa: the port's own text; English keys from crates/qcore/lang/*.txt.
+# Format in crates/qcore/src/lang/catalog.rs; check with tools/lang_check.py.
+
+# ==== menu.txt ====
+
+# Options pages: page names, row labels and choice values.
+@ 10% speed
+fa سرعت 10%
+
+@ 2 split-screen
+fa صفحه‌ی دوقسمتی
+
+@ 3 split-screen
+fa صفحه‌ی سه‌قسمتی
+
+@ 4 split-screen
+fa صفحه‌ی چهارقسمتی
+
+@ 5 split-screen
+fa صفحه‌ی پنج‌قسمتی
+
+@ 6 split-screen
+fa صفحه‌ی شش‌قسمتی
+
+@ 2D aiming
+fa نشانه‌گیری دوبعدی
+
+@ 2x monsters
+fa هیولاهای ×2
+
+@ 3x monsters
+fa هیولاهای ×3
+
+@ 4x monsters
+fa هیولاهای ×4
+
+@ 3D resolution
+fa وضوح سه‌بعدی
+
+@ 3D view
+fa نمای سه‌بعدی
+
+@ 8-bit Color
+fa رنگ 8 بیتی
+
+@ Accessibility
+fa دسترس‌پذیری
+
+@ Acquisition Cone
+fa مخروط هدف‌گیری
+
+@ Activation
+fa فعال‌سازی
+
+@ Add a ringing room tail after the cue
+fa افزودن دنباله‌ی طنین اتاق پس از صدا
+
+@ Add delayed repeats after the cue
+fa افزودن تکرارهای تأخیری پس از صدا
+
+@ Add saturation and distortion
+fa افزودن اشباع و اعوجاج
+
+@ Add-ons
+fa افزونه‌ها
+
+@ Address
+fa نشانی
+
+@ Adds fine noise to hide color banding
+fa نویز ریز برای پنهان کردن نوارهای رنگی
+
+@ Advanced Settings
+fa تنظیمات پیشرفته
+
+@ Aim Assist
+fa کمک نشانه‌گیری
+
+@ Aim Rotation
+fa چرخش هدف
+
+@ Aim Slowdown
+fa کندشدن هدف
+
+@ Aim Style
+fa سبک نشانه‌گیری
+
+@ All
+fa همه
+
+@ All enemies
+fa همه‌ی دشمنان
+
+@ Alt Fire (Add-ons)
+fa شلیک دوم (افزونه‌ها)
+
+@ Always Run
+fa همیشه دویدن
+
+@ Ambient Occlusion
+fa انسداد محیطی
+
+@ Ammo Counts
+fa تعداد مهمات
+
+@ Ammo Counts Position
+fa جای تعداد مهمات
+
+@ Ammo Pickups
+fa برداشتن مهمات
+
+@ Anisotropic
+fa ناهمسانگرد
+
+@ Anti-aliasing
+fa ضدپله‌پله‌شدن
+
+@ Apply To
+fa اعمال روی
+
+@ Armor
+fa زره
+
+@ Armor Position
+fa جای زره
+
+@ Ask
+fa پرسیدن
+
+@ Attack
+fa حمله
+
+@ Audio
+fa صدا
+
+@ Auto-aim
+fa هدف‌گیری خودکار
+
+@ Auto-aim Settings
+fa تنظیمات هدف‌گیری خودکار
+
+@ Autosave
+fa ذخیره‌ی خودکار
+
+@ Autosave Settings
+fa تنظیمات ذخیره‌ی خودکار
+
+@ Autosave Timer
+fa زمان‌سنج ذخیره‌ی خودکار
+
+@ Autosaves to Keep
+fa ذخیره‌های خودکار نگه‌داشته
+
+@ Bass
+fa بم
+
+@ Blip
+fa بیپ
+
+@ Blood Quality
+fa کیفیت خون
+
+@ Blood Splatter Settings
+fa تنظیمات پاشش خون
+
+@ Blue
+fa آبی
+
+@ Boomerang Settings
+fa تنظیمات بومرنگ
+
+@ Boost or cut high frequencies in decibels
+fa تقویت یا کاهش بسامدهای بالا به دسی‌بل
+
+@ Boost or cut low frequencies in decibels
+fa تقویت یا کاهش بسامدهای پایین به دسی‌بل
+
+@ Brightness
+fa روشنایی
+
+@ Bullet Time (Add-ons)
+fa زمان آهسته (افزونه‌ها)
+
+@ Bullet Time Settings
+fa تنظیمات زمان آهسته
+
+@ Button Glyphs
+fa نماد دکمه‌ها
+
+@ Button Size
+fa اندازه‌ی دکمه
+
+@ Camera
+fa دوربین
+
+@ Caustic Intensity
+fa شدت سوسوی نور آب
+
+@ Caustics
+fa سوسوی نور آب
+
+@ Center
+fa وسط
+
+@ Center Message Position
+fa جای پیام وسط
+
+@ Center Message Time
+fa مدت پیام وسط
+
+@ Center View
+fa مرکز کردن دید
+
+@ Change Color on Kill
+fa تغییر رنگ با کشتن
+
+@ Change Color on Target
+fa تغییر رنگ روی هدف
+
+@ Chime
+fa زنگ
+
+@ Click
+fa کلیک
+
+@ Clink
+fa جرینگ
+
+@ Coin
+fa سکه
+
+@ Color
+fa رنگ
+
+@ Color Filter
+fa فیلتر رنگ
+
+@ Color of the grenade arc
+fa رنگ کمان نارنجک
+
+@ Colored Lighting
+fa نورپردازی رنگی
+
+@ Connect
+fa اتصال
+
+@ Contrast
+fa کنتراست
+
+@ Controls
+fa کنترل‌ها
+
+@ Cooldown (ms)
+fa زمان بازیابی (ms)
+
+@ Crosshair Outline
+fa دورگیری نشانگر
+
+@ Crosshair Shape
+fa شکل نشانگر
+
+@ Crosshair Size
+fa اندازه‌ی نشانگر
+
+@ Current Ammo
+fa مهمات فعلی
+
+@ Current Ammo Position
+fa جای مهمات فعلی
+
+@ Customize This Game
+fa سفارشی‌سازی این بازی
+
+@ Damage
+fa آسیب
+
+@ Damage Taken
+fa آسیب دریافتی
+
+@ Debris
+fa آوار
+
+@ Debris Quality
+fa کیفیت آوار
+
+@ Debris Settings
+fa تنظیمات آوار
+
+@ Directional Damage
+fa آسیب جهت‌دار
+
+@ Dithering
+fa دیترینگ
+
+@ Dodge / Dive (Add-ons)
+fa جاخالی / شیرجه (افزونه‌ها)
+
+@ Dragging up looks down instead of up
+fa کشیدن به بالا نگاه را پایین می‌برد
+
+@ Drive
+fa اشباع
+
+@ Dynamic Lights
+fa نورهای پویا
+
+@ Echo
+fa پژواک
+
+@ Enemy Health
+fa سلامت دشمن
+
+@ Enemy Wounds
+fa زخم‌های دشمن
+
+@ Enhanced Blood Splatter
+fa پاشش خون پیشرفته
+
+@ Enhanced FX
+fa جلوه‌های پیشرفته
+
+@ Enhanced Models
+fa مدل‌های پیشرفته
+
+@ Enhanced Particles
+fa ذرات پیشرفته
+
+@ Enhanced Water
+fa آب پیشرفته
+
+@ Enhancements
+fa بهبودها
+
+@ Equipment Wheel (Add-ons)
+fa چرخ تجهیزات (افزونه‌ها)
+
+@ Exploding boxes throw metal shards
+fa جعبه‌های منفجرشونده ترکش فلزی پرتاب می‌کنند
+
+@ Explosion Damage
+fa آسیب انفجار
+
+@ Explosion Scorch Marks
+fa جای سوختگی انفجار
+
+@ Explosions scorch nearby solid surfaces
+fa انفجارها سطوح جامد نزدیک را می‌سوزانند
+
+@ Explosives only
+fa فقط مواد منفجره
+
+@ Extra Monsters
+fa هیولاهای اضافه
+
+@ Extra Per 10 Damage (ms)
+fa اضافه به ازای هر 10 آسیب (ms)
+
+@ FX Settings
+fa تنظیمات جلوه‌ها
+
+@ Field of View
+fa میدان دید
+
+@ Firing never uses up ammo
+fa شلیک هرگز مهمات مصرف نمی‌کند
+
+@ First person
+fa اول‌شخص
+
+@ Flick Time
+fa زمان فلیک
+
+@ Flight Speed
+fa سرعت پرواز
+
+@ Fog
+fa مه
+
+@ Frag Limit
+fa سقف فرگ
+
+@ Freeze Duration (ms)
+fa مدت انجماد (ms)
+
+@ GLQuake
+fa GLQuake
+
+@ Game Speed
+fa سرعت بازی
+
+@ Game Type
+fa نوع بازی
+
+@ Gameplay
+fa گیم‌پلی
+
+@ Gameplay Modifiers
+fa تغییردهنده‌های گیم‌پلی
+
+@ Gel Quality
+fa کیفیت ژل
+
+@ Gib Surface Painting
+fa رنگ‌آمیزی سطوح با تکه‌ها
+
+@ Gibs
+fa تکه‌های بدن
+
+@ Gibs and heads tumble and bounce
+fa تکه‌ها و سرها می‌غلتند و جهش می‌کنند
+
+@ Goggle Glow Quality
+fa کیفیت درخشش عینک
+
+@ Goggle Intensity
+fa شدت عینک
+
+@ Goggle Noise
+fa نویز عینک
+
+@ Goggles Settings
+fa تنظیمات عینک
+
+@ Graphics
+fa گرافیک
+
+@ Green
+fa سبز
+
+@ Grenade Arc
+fa کمان نارنجک
+
+@ Grenade Arc Settings
+fa تنظیمات کمان نارنجک
+
+@ Gun Kick
+fa لگد سلاح
+
+@ Gyro
+fa ژیروسکوپ
+
+@ Gyro & Flick Stick
+fa ژیروسکوپ و فلیک استیک
+
+@ Gyro Active
+fa ژیروسکوپ فعال
+
+@ Gyro Aiming
+fa نشانه‌گیری ژیروسکوپی
+
+@ HUD
+fa HUD
+
+@ HUD Style
+fa سبک HUD
+
+@ Health
+fa سلامت
+
+@ Health Pickups
+fa برداشتن سلامت
+
+@ Health Position
+fa جای سلامت
+
+@ Health Regeneration
+fa بازیابی سلامت
+
+@ Hit & Kill Sounds
+fa صداهای اصابت و کشتن
+
+@ Hit Doors & Lifts
+fa اصابت به درها و آسانسورها
+
+@ Hit Markers
+fa نشانگر اصابت
+
+@ Hit Sound
+fa صدای اصابت
+
+@ Hitmarker Size
+fa اندازه‌ی نشانگر اصابت
+
+@ Hitmarker Type
+fa نوع نشانگر اصابت
+
+@ Hitstop Advanced
+fa هیت‌استاپ پیشرفته
+
+@ Hitstop Settings
+fa تنظیمات هیت‌استاپ
+
+@ Hold
+fa نگه‌داشتن
+
+@ Hold lock-on
+fa نگه‌داشتن قفل هدف
+
+@ Hook Enemies
+fa قلاب به دشمنان
+
+@ Hook Metal
+fa قلاب به فلز
+
+@ Hook Stone
+fa قلاب به سنگ
+
+@ Hook Wood
+fa قلاب به چوب
+
+@ Hooking an enemy pulls you to it
+fa قلاب‌زدن به دشمن شما را به سمتش می‌کشد
+
+@ Hookshot Range
+fa برد قلاب
+
+@ Hookshot Settings
+fa تنظیمات قلاب
+
+@ Host Game
+fa میزبانی بازی
+
+@ How far the hook flies before it retracts
+fa قلاب پیش از برگشتن تا کجا پرواز می‌کند
+
+@ How visible the on-screen controls are
+fa میزان دیده‌شدن کنترل‌های روی صفحه
+
+@ Impact Lifetime
+fa ماندگاری اصابت
+
+@ Infinite Ammo
+fa مهمات بی‌پایان
+
+@ Input
+fa ورودی
+
+@ Input Scale
+fa مقیاس ورودی
+
+@ Interpolate Animation
+fa درون‌یابی انیمیشن
+
+@ Interpolate Movement
+fa درون‌یابی حرکت
+
+@ Invert Look
+fa وارونه‌کردن نگاه
+
+@ Invert Mouse
+fa وارونه‌کردن موس
+
+@ Invert Stick
+fa وارونه‌کردن استیک
+
+@ Jet Quality
+fa کیفیت فواره
+
+@ Join Game
+fa پیوستن به بازی
+
+@ Jump / Swim Up
+fa پرش / شنا به بالا
+
+@ Jump again in mid-air
+fa پرش دوباره در هوا
+
+@ Jumps
+fa پرش‌ها
+
+@ Keys & Powerups
+fa کلیدها و نیروزاها
+
+@ Keys & Powerups Position
+fa جای کلیدها و نیروزاها
+
+@ Kill Bonus (x)
+fa پاداش کشتن (×)
+
+@ Kill Sound
+fa صدای کشتن
+
+@ Knock
+fa تق
+
+@ Left
+fa چپ
+
+@ Length of the motion blur streaks
+fa طول رگه‌های تاری حرکت
+
+@ Lifetime (seconds)
+fa ماندگاری (ثانیه)
+
+@ Live Portal Views
+fa نمای زنده‌ی پورتال
+
+@ Live View Distance
+fa فاصله‌ی نمای زنده
+
+@ Local Players
+fa بازیکنان محلی
+
+@ Local red wounds follow enemy animation
+fa زخم‌های سرخ با انیمیشن دشمن حرکت می‌کنند
+
+@ Lock Indicator
+fa نشانگر قفل
+
+@ Long falls don't hurt
+fa سقوط از بلندی آسیب نمی‌زند
+
+@ Longest Freeze (ms)
+fa بیشترین انجماد (ms)
+
+@ Look Down
+fa نگاه به پایین
+
+@ Look Speed
+fa سرعت نگاه
+
+@ Look Up
+fa نگاه به بالا
+
+@ Main Menu Music
+fa موسیقی منوی اصلی
+
+@ Max FPS
+fa بیشینه‌ی FPS
+
+@ Max Players
+fa بیشینه‌ی بازیکنان
+
+@ Maximum Impacts
+fa بیشینه‌ی اصابت‌ها
+
+@ Maximum Marks
+fa بیشینه‌ی نشان‌ها
+
+@ Maximum Range
+fa بیشینه‌ی برد
+
+@ Melee only
+fa فقط نبرد تن‌به‌تن
+
+@ Message Background
+fa پس‌زمینه‌ی پیام
+
+@ Message Text Size
+fa اندازه‌ی متن پیام
+
+@ Messages & Captions
+fa پیام‌ها و زیرنویس‌ها
+
+@ Meter Duration (real seconds)
+fa مدت نوار (ثانیه‌ی واقعی)
+
+@ Minimum Damage
+fa کمینه‌ی آسیب
+
+@ Mode
+fa حالت
+
+@ Modern Console
+fa کنسول مدرن
+
+@ Modern HUD Layout
+fa چیدمان مدرن HUD
+
+@ Most recent save
+fa آخرین ذخیره
+
+@ Motion Blur
+fa تاری حرکت
+
+@ Motion Blur Amount
+fa میزان تاری حرکت
+
+@ Motion Blur Quality
+fa کیفیت تاری حرکت
+
+@ Mouse & Keyboard
+fa موس و صفحه‌کلید
+
+@ Mouse Speed
+fa سرعت موس
+
+@ Move Back
+fa حرکت به عقب
+
+@ Move Forward
+fa حرکت به جلو
+
+@ Music Volume
+fa بلندی موسیقی
+
+@ Next Weapon
+fa سلاح بعدی
+
+@ No Drowning
+fa بدون غرق‌شدن
+
+@ No Fall Damage
+fa بدون آسیب سقوط
+
+@ No Manual Saves
+fa بدون ذخیره‌ی دستی
+
+@ No Self Damage
+fa بدون آسیب به خود
+
+@ Noise Filter
+fa فیلتر نویز
+
+@ Normal Color
+fa رنگ عادی
+
+@ Notify Message Position
+fa جای پیام اعلان
+
+@ Notify Message Time
+fa مدت پیام اعلان
+
+@ Number of splatter rays per blood impact
+fa تعداد پرتوهای پاشش در هر اصابت خون
+
+@ Off
+fa خاموش
+
+@ On Death
+fa هنگام مرگ
+
+@ On Kill Color
+fa رنگ هنگام کشتن
+
+@ On Target Color
+fa رنگ روی هدف
+
+@ Opacity
+fa کدری
+
+@ Opacity of the grenade arc
+fa کدری کمان نارنجک
+
+@ Pants Color
+fa رنگ شلوار
+
+@ Particle Quality
+fa کیفیت ذرات
+
+@ Particles
+fa ذرات
+
+@ Physical Nail Impacts
+fa اصابت فیزیکی میخ‌ها
+
+@ Pistol Start
+fa شروع با تپانچه
+
+@ Pitch
+fa زیر و بمی
+
+@ Pitch Sensitivity
+fa حساسیت عمودی
+
+@ Playback Speed
+fa سرعت پخش
+
+@ Player Setup
+fa تنظیم بازیکن
+
+@ Pop
+fa پاپ
+
+@ Portal Gun Settings
+fa تنظیمات تفنگ پورتال
+
+@ Portal Recursion
+fa تودرتویی پورتال
+
+@ Portal View Quality
+fa کیفیت نمای پورتال
+
+@ Preview Sound
+fa پیش‌نمایش صدا
+
+@ Previous Weapon
+fa سلاح قبلی
+
+@ Projectile Shotguns Settings
+fa تنظیمات شاتگان پرتابه‌ای
+
+@ Projectile Speed (units/s)
+fa سرعت پرتابه (واحد/ثانیه)
+
+@ Purple
+fa بنفش
+
+@ Push
+fa هل‌دادن
+
+@ Push Strength
+fa قدرت هل‌دادن
+
+@ Quick Load
+fa بارگذاری سریع
+
+@ Quick Save
+fa ذخیره‌ی سریع
+
+@ Railgun Settings
+fa تنظیمات ریل‌گان
+
+@ Ranged only
+fa فقط دوربرد
+
+@ Reacquire While Held
+fa هدف‌گیری دوباره هنگام نگه‌داشتن
+
+@ Red
+fa قرمز
+
+@ Reduce Motion
+fa کاهش حرکت
+
+@ Regen (seconds per second)
+fa بازیابی (ثانیه در ثانیه)
+
+@ Render Scale
+fa مقیاس رندر
+
+@ Reverb
+fa طنین
+
+@ Right
+fa راست
+
+@ Ripple Intensity
+fa شدت موج‌ها
+
+@ Ripples
+fa موج‌ها
+
+@ Roll Sensitivity
+fa حساسیت غلت
+
+@ Rumble
+fa لرزش
+
+@ Run
+fa دویدن
+
+@ Save on All Enemies Killed
+fa ذخیره با کشتن همه‌ی دشمنان
+
+@ Save on All Secrets Found
+fa ذخیره با یافتن همه‌ی رازها
+
+@ Save on Level Entry
+fa ذخیره با ورود به مرحله
+
+@ Save on Secret Found
+fa ذخیره با یافتن راز
+
+@ Scoreboard
+fa جدول امتیازات
+
+@ Screen Flashes
+fa فلاش صفحه
+
+@ Screen Shader
+fa سایه‌زن صفحه
+
+@ Screen Shake
+fa لرزش صفحه
+
+@ Search LAN
+fa جستجو در LAN
+
+@ Seconds a center-screen message stays up
+fa مدت ماندن پیام وسط صفحه به ثانیه
+
+@ See Through Portals
+fa دیدن از میان پورتال‌ها
+
+@ See-through Teleporters
+fa تله‌پورت‌های شفاف
+
+@ Shirt Color
+fa رنگ پیراهن
+
+@ Shotgun Bullet Decals
+fa جای گلوله‌ی شاتگان
+
+@ Shoulder left
+fa شانه‌ی چپ
+
+@ Shoulder right
+fa شانه‌ی راست
+
+@ Show FPS
+fa نمایش FPS
+
+@ Show Face
+fa نمایش چهره
+
+@ Shrapnel
+fa ترکش
+
+@ Size of on-screen messages and captions
+fa اندازه‌ی پیام‌ها و زیرنویس‌های روی صفحه
+
+@ Skill
+fa سختی
+
+@ Sky Fog
+fa مه آسمان
+
+@ Smooths the stepped movement of monsters
+fa حرکت پله‌ای هیولاها را نرم می‌کند
+
+@ Sound
+fa صدا
+
+@ Sound Captions
+fa زیرنویس صداها
+
+@ Sound Volume
+fa بلندی صدا
+
+@ Speed Blur
+fa تاری سرعت
+
+@ Splashes
+fa پاشیدن آب
+
+@ Splatter Amount
+fa میزان پاشش
+
+@ Splatter Size
+fa اندازه‌ی پاشش
+
+@ Start Game
+fa شروع بازی
+
+@ Staying underwater doesn't hurt
+fa ماندن زیر آب آسیب نمی‌زند
+
+@ Stick Look Pitch
+fa نگاه عمودی با استیک
+
+@ Stick Look Yaw
+fa نگاه افقی با استیک
+
+@ Strafe Left
+fa گام به چپ
+
+@ Strafe Right
+fa گام به راست
+
+@ Strength of the surface swell and rings
+fa قدرت برآمدگی و حلقه‌های سطح
+
+@ Stun Duration
+fa مدت گیجی
+
+@ Style
+fa سبک
+
+@ Supersampling
+fa ابرنمونه‌برداری
+
+@ Surface Hit Effects
+fa جلوه‌های اصابت به سطح
+
+@ Swim Down
+fa شنا به پایین
+
+@ Targets
+fa هدف‌ها
+
+@ Teamplay
+fa بازی تیمی
+
+@ Texture Filter
+fa فیلتر بافت
+
+@ Third person
+fa سوم‌شخص
+
+@ Thud
+fa گرومپ
+
+@ Tick
+fa تیک
+
+@ Time Limit
+fa محدودیت زمان
+
+@ Time Stretch
+fa کش‌آمدن زمان
+
+@ Toggle Attack
+fa حمله‌ی تغییری
+
+@ Toggle Run
+fa دویدن تغییری
+
+@ Toggle auto-aim
+fa تغییر هدف‌گیری خودکار
+
+@ Touch Controls
+fa کنترل‌های لمسی
+
+@ Touchscreen
+fa صفحه‌ی لمسی
+
+@ Tough Enemy Health
+fa سلامت دشمن سرسخت
+
+@ Tough enemies only
+fa فقط دشمنان سرسخت
+
+@ Trail Colour
+fa رنگ دنباله
+
+@ Translate Console
+fa ترجمه‌ی کنسول
+
+@ Translucent Water
+fa آب نیمه‌شفاف
+
+@ Treble
+fa زیر
+
+@ Turn Left
+fa چرخش به چپ
+
+@ Turn Right
+fa چرخش به راست
+
+@ Underwater FX
+fa جلوه‌های زیر آب
+
+@ Use Bullet Time Meter
+fa استفاده از نوار زمان آهسته
+
+@ VSync
+fa VSync
+
+@ View Bob
+fa تکان دید
+
+@ Viewmodels
+fa مدل‌های سلاح
+
+@ Volume
+fa بلندی صدا
+
+@ Water Opacity
+fa کدری آب
+
+@ Water Quality
+fa کیفیت آب
+
+@ Water Settings
+fa تنظیمات آب
+
+@ Weapon Wheel
+fa چرخ سلاح
+
+@ Weapon Wheel Slowdown
+fa کندی چرخ سلاح
+
+@ Weapons
+fa سلاح‌ها
+
+@ Weapons Position
+fa جای سلاح‌ها
+
+@ Where center-screen messages appear
+fa جای نمایش پیام‌های وسط صفحه
+
+@ Where pickup and event messages appear
+fa جای نمایش پیام‌های برداشتن و رویدادها
+
+@ White
+fa سفید
+
+@ Yaw Sensitivity
+fa حساسیت افقی
+
+@ Yellow
+fa زرد
+
+# lowercase choice values
+@ T
+fa T
+
+@ always
+fa همیشه
+
+@ auto
+fa خودکار
+
+@ banded
+fa نواری
+
+@ borderless
+fa بدون حاشیه
+
+@ bottom center
+fa پایین وسط
+
+@ bottom left
+fa پایین چپ
+
+@ bottom right
+fa پایین راست
+
+@ box
+fa مربع
+
+@ broken square
+fa مربع شکسته
+
+@ classic
+fa کلاسیک
+
+@ coarse
+fa درشت
+
+@ cooperative
+fa همکاری
+
+@ cross
+fa بعلاوه
+
+@ cross + dot
+fa بعلاوه + نقطه
+
+@ cyan
+fa فیروزه‌ای
+
+@ dashed
+fa خط‌چین
+
+@ deathmatch
+fa دث‌مچ
+
+@ deuteranopia
+fa دوترانوپی
+
+@ diagonal streaks
+fa رگه‌های مورب
+
+@ diamond
+fa لوزی
+
+@ dot
+fa نقطه
+
+@ double
+fa دوتایی
+
+@ double chevrons
+fa شورون دوتایی
+
+@ double diagonals
+fa مورب دوتایی
+
+@ easy
+fa آسان
+
+@ fine
+fa ریز
+
+@ fit output
+fa هم‌اندازه‌ی خروجی
+
+@ flick stick
+fa فلیک استیک
+
+@ fullscreen
+fa تمام‌صفحه
+
+@ gap cross
+fa بعلاوه‌ی باز
+
+@ green
+fa سبز
+
+@ grey
+fa خاکستری
+
+@ half speed
+fa نصف سرعت
+
+@ hard
+fa سخت
+
+@ high
+fa زیاد
+
+@ huge
+fa بسیار بزرگ
+
+@ immersive
+fa غوطه‌ور
+
+@ intense
+fa شدید
+
+@ large
+fa بزرگ
+
+@ larger
+fa بزرگ‌تر
+
+@ largest
+fa بزرگ‌ترین
+
+@ linear
+fa خطی
+
+@ low
+fa کم
+
+@ lower
+fa پایین
+
+@ magenta
+fa سرخابی
+
+@ medium
+fa متوسط
+
+@ middle
+fa وسط
+
+@ middle left
+fa وسط چپ
+
+@ middle right
+fa وسط راست
+
+@ modern
+fa مدرن
+
+@ nearest
+fa نزدیک‌ترین
+
+@ nightmare
+fa کابوس
+
+@ nintendo
+fa نینتندو
+
+@ no team damage
+fa بدون آسیب تیمی
+
+@ none
+fa هیچ
+
+@ normal
+fa عادی
+
+@ off
+fa خاموش
+
+@ off while held
+fa خاموش هنگام نگه‌داشتن
+
+@ on
+fa روشن
+
+@ only while held
+fa فقط هنگام نگه‌داشتن
+
+@ playstation
+fa پلی‌استیشن
+
+@ protanopia
+fa پروتانوپی
+
+@ quarter speed
+fa ربع سرعت
+
+@ red
+fa قرمز
+
+@ short diagonals
+fa مورب کوتاه
+
+@ single
+fa تکی
+
+@ small
+fa کوچک
+
+@ solid
+fa توپر
+
+@ spectacle
+fa تماشایی
+
+@ subtle
+fa ملایم
+
+@ team damage
+fa آسیب تیمی
+
+@ top center
+fa بالا وسط
+
+@ top left
+fa بالا چپ
+
+@ top right
+fa بالا راست
+
+@ triple
+fa سه‌تایی
+
+@ tritanopia
+fa تریتانوپی
+
+@ upper
+fa بالا
+
+@ white
+fa سفید
+
+@ whole screen
+fa کل صفحه
+
+@ windowed
+fa پنجره‌ای
+
+@ xbox
+fa ایکس‌باکس
+
+@ yellow
+fa زرد
+
+# ==== tooltips.txt ====
+
+# Options help lines (tooltips) and reasons for disabled rows.
+@ 2D aiming turns the view continuously with the right stick; flick stick snaps the view to where you push the stick, then turning the stick rotates it
+fa نشانه‌گیری دوبعدی دید را با استیک راست پیوسته می‌چرخاند؛ فلیک استیک دید را فوراً به جهتی که استیک را فشار می‌دهید می‌برد و سپس چرخاندن استیک آن را می‌چرخاند
+
+@ 3D resolution relative to the window; the UI stays sharp
+fa وضوح سه‌بعدی نسبت به پنجره؛ رابط کاربری تیز می‌ماند
+
+@ 3D view keeps the HUD and menus sharp; whole screen runs them through the shader too
+fa نمای سه‌بعدی HUD و منوها را تیز نگه می‌دارد؛ کل صفحه آن‌ها را هم از سایه‌زن می‌گذراند
+
+@ A Quake III style railgun: a slug that pierces every enemy on its line, using 2 cells a shot and refiring every 1.5 s; select it through its assigned weapon slot (Add-ons)
+fa ریل‌گانی به سبک Quake III: گلوله‌ای که از همه‌ی دشمنان در مسیرش می‌گذرد، با مصرف 2 سلول در هر شلیک و شلیک دوباره هر 1.5 ثانیه؛ آن را با جایگاه سلاح تعیین‌شده انتخاب کنید (افزونه‌ها)
+
+@ A Zelda-style hookshot: fire sends a chain hook out; it latches onto hookable surfaces or enemies and reels you in; fire again to let go
+fa قلابی به سبک Zelda: شلیک یک قلاب زنجیری می‌فرستد؛ به سطوح قابل‌قلاب یا دشمنان می‌چسبد و شما را به سمت خود می‌کشد؛ برای رها کردن دوباره شلیک کنید
+
+@ Also translates the engine's console messages; off keeps them in English
+fa پیام‌های کنسول موتور را هم ترجمه می‌کند؛ خاموش آن‌ها را انگلیسی نگه می‌دارد
+
+@ Automatically acquire another enemy while holding Lock-on after losing a target
+fa پس از گم کردن هدف، هنگام نگه‌داشتن قفل هدف به‌طور خودکار دشمن دیگری را هدف می‌گیرد
+
+@ Blends between animation frames of monsters and weapons
+fa بین فریم‌های انیمیشن هیولاها و سلاح‌ها ترکیب می‌کند
+
+@ Blood stains surfaces and bodies; cosmetic, independent of particle packs
+fa خون سطوح و بدن‌ها را لکه‌دار می‌کند؛ ظاهری است و مستقل از بسته‌های ذرات
+
+@ Bloom glow around bright lights and heat sources; medium uses 4 taps, high uses 8, low disables halo taps
+fa درخشش بلوم پیرامون نورهای روشن و منابع گرما؛ متوسط 4 نمونه، زیاد 8 نمونه، و کم هاله را خاموش می‌کند
+
+@ Blurs fast-moving monsters, projectiles and doors (not camera turns)
+fa هیولاها، پرتابه‌ها و درهای سریع را تار می‌کند (نه چرخش دوربین)
+
+@ Blurs the screen edges during fast falls and launches; keeps the centre clear. Reduce Motion disables it
+fa لبه‌های صفحه را هنگام سقوط‌ها و پرتاب‌های سریع تار می‌کند؛ مرکز واضح می‌ماند. کاهش حرکت آن را خاموش می‌کند
+
+@ Brightness of the underwater light patterns
+fa روشنایی نقش‌های نوری زیر آب
+
+@ Caps mark count, lifetime, airborne droplets and wound/gib painting; low skips enemy wounds and gib trails
+fa تعداد نشان‌ها، ماندگاری، قطره‌های معلق و رنگ‌آمیزی زخم/تکه‌ها را محدود می‌کند؛ کم زخم‌های دشمن و رد تکه‌ها را حذف می‌کند
+
+@ Caps shader input at output size so 200% render scale keeps 3D sharpness without 4x shader cost; low scales stay low-res
+fa ورودی سایه‌زن را به اندازه‌ی خروجی محدود می‌کند تا مقیاس رندر 200% تیزی سه‌بعدی را بدون هزینه‌ی 4 برابری سایه‌زن نگه دارد؛ مقیاس‌های پایین کم‌وضوح می‌مانند
+
+@ Classic: the original status bar; modern: compact elements at the screen edges
+fa کلاسیک: نوار وضعیت اصلی؛ مدرن: اجزای فشرده در لبه‌های صفحه
+
+@ Coat atlas resolution, rebuild rate and shader detail: low builds smaller coats less often with fast shading; high uses full detail
+fa وضوح اطلس پوشش، نرخ بازسازی و جزئیات سایه‌زن: کم پوشش‌های کوچک‌تر را کمتر می‌سازد و سایه‌زنی سریع دارد؛ زیاد جزئیات کامل دارد
+
+@ Colour of the railgun's spiral trail; split-screen players each get the next colour along
+fa رنگ دنباله‌ی مارپیچ ریل‌گان؛ هر بازیکن صفحه‌ی چندقسمتی رنگ بعدی را می‌گیرد
+
+@ Damage the railgun deals to each enemy it passes through (Quake III: 100)
+fa آسیبی که ریل‌گان به هر دشمن در مسیرش می‌زند (Quake III: 100)
+
+@ Dark backdrop behind on-screen messages for readability
+fa پس‌زمینه‌ی تیره پشت پیام‌های روی صفحه برای خوانایی
+
+@ Dark border keeps the crosshair visible on any background
+fa حاشیه‌ی تیره نشانگر را روی هر پس‌زمینه‌ای دیدنی نگه می‌دارد
+
+@ Darkens corners and contact areas where geometry meets; higher quality is sharper
+fa گوشه‌ها و محل تماس هندسه را تیره می‌کند؛ کیفیت بالاتر تیزتر است
+
+@ Debris lands on and is carried or shoved by doors, lifts and platforms
+fa آوار روی درها، آسانسورها و سکوها می‌نشیند و با آن‌ها جابه‌جا یا هل داده می‌شود
+
+@ Detail for caustics, ripples and splashes: low uses smaller budgets and shorter view distance; high uses larger budgets and farther view distance
+fa جزئیات سوسوی نور، موج‌ها و پاشیدن آب: کم بودجه‌ی کمتر و فاصله‌ی دید کوتاه‌تر؛ زیاد بودجه‌ی بیشتر و فاصله‌ی دید دورتر
+
+@ Disabled while Enhanced Particles is on: its particles replace the GLQuake and Classic styles
+fa وقتی ذرات پیشرفته روشن است غیرفعال است: ذرات آن جای سبک‌های GLQuake و کلاسیک را می‌گیرند
+
+@ Disabled while Enhanced Water is on: its own underwater effects replace the classic and GLQuake view warps
+fa وقتی آب پیشرفته روشن است غیرفعال است: جلوه‌های زیر آب خودش جای اعوجاج‌های کلاسیک و GLQuake را می‌گیرند
+
+@ Draw the predicted grenade path as a solid or dashed line
+fa مسیر پیش‌بینی‌شده‌ی نارنجک را با خط پیوسته یا خط‌چین بکش
+
+@ Draw the view out of the linked portal inside each portal; off shows flat discs (fastest)
+fa درون هر پورتال، نمای پورتال متصل را بکش؛ خاموش دیسک‌های تخت نشان می‌دهد (سریع‌ترین)
+
+@ Droplets spray up when things enter or leave water, slime or lava
+fa وقتی چیزی وارد آب، لجن یا گدازه می‌شود یا از آن بیرون می‌آید قطره‌ها به بالا می‌پاشند
+
+@ Emulates the original 8-bit palette of software rendering
+fa پالت 8 بیتی اصلی رندر نرم‌افزاری را شبیه‌سازی می‌کند
+
+@ Every level starts with only the shotgun and axe, as if started fresh
+fa هر مرحله فقط با شاتگان و تبر شروع می‌شود، گویی از نو شروع شده
+
+@ Explosion damage for each remotely detonated sticky bomb
+fa آسیب انفجار هر بمب چسبنده که از راه دور منفجر می‌شود
+
+@ Extra freeze milliseconds for every 10 damage dealt, so heavy hits stop longer
+fa میلی‌ثانیه‌های انجماد اضافه به ازای هر 10 آسیب، تا ضربه‌های سنگین بیشتر متوقف کنند
+
+@ First person, a third-person camera centered behind the player, or one over the right or left shoulder; third person hides viewmodels
+fa اول‌شخص، دوربین سوم‌شخص پشت بازیکن، یا روی شانه‌ی راست یا چپ؛ سوم‌شخص مدل‌های سلاح را پنهان می‌کند
+
+@ Flash the selected marker on confirmed hits; colors are shared with the crosshair
+fa نشانگر انتخاب‌شده را هنگام اصابت تأییدشده فلاش بزن؛ رنگ‌ها با نشانگر مشترک‌اند
+
+@ Freeze for every enemy, or only for enemies that were tough before the hit
+fa انجماد برای هر دشمن، یا فقط دشمنانی که پیش از ضربه سرسخت بودند
+
+@ Freeze the game briefly when you damage an enemy; single player with add-ons only
+fa هنگام آسیب زدن به دشمن بازی را کوتاه منجمد کن؛ فقط تک‌نفره با افزونه‌ها
+
+@ Gibs tumble and barrels throw shrapnel; shots and blasts push them (cosmetic only)
+fa تکه‌ها می‌غلتند و بشکه‌ها ترکش پرتاب می‌کنند؛ شلیک‌ها و انفجارها آن‌ها را هل می‌دهند (فقط ظاهری)
+
+@ Health an enemy must have had before the hit to count as tough
+fa سلامتی که دشمن پیش از ضربه باید داشته باشد تا سرسخت حساب شود
+
+@ Hits dealing less damage than this do not freeze the game; the default 10 skips nails and shotgun pellets
+fa ضربه‌های با آسیب کمتر از این بازی را منجمد نمی‌کنند؛ پیش‌فرض 10 از میخ‌ها و ساچمه‌های شاتگان می‌گذرد
+
+@ Hold fire and sweep the crosshair over monsters to queue them, release to throw: it stuns each in turn and flies back; alt-fire clears the queue
+fa شلیک را نگه دارید و نشانگر را روی هیولاها بکشید تا در صف قرار گیرند، برای پرتاب رها کنید: هر کدام را به نوبت گیج می‌کند و برمی‌گردد؛ شلیک دوم صف را پاک می‌کند
+
+@ Hold: keep Lock-on held. Toggle: press Auto-aim Toggle to enable automatic acquisition. Click look stick to switch targets
+fa نگه‌داشتن: قفل هدف را نگه دارید. تغییری: برای هدف‌گیری خودکار، تغییر هدف‌گیری خودکار را بزنید. برای عوض کردن هدف، استیک نگاه را فشار دهید
+
+@ How close an enemy must be to the crosshair for automatic acquisition in toggle mode (degrees)
+fa فاصله‌ی دشمن تا نشانگر برای هدف‌گیری خودکار در حالت تغییری (درجه)
+
+@ How far the view tilts up and down when you tilt the controller (pitch axis)
+fa میزان کج‌شدن دید به بالا و پایین با کج کردن دسته (محور عمودی)
+
+@ How far the view turns left and right when you turn the controller (yaw axis)
+fa میزان چرخش دید به چپ و راست با چرخاندن دسته (محور افقی)
+
+@ How far the view turns when you drag on the right half of the screen
+fa میزان چرخش دید هنگام کشیدن روی نیمه‌ی راست صفحه
+
+@ How fast the boomerang flies (units per second)
+fa سرعت پرواز بومرنگ (واحد در ثانیه)
+
+@ How hard shots and explosions push debris around
+fa میزان هل‌دادن آوار با شلیک‌ها و انفجارها
+
+@ How hard the Powerwasher's water pushes enemies
+fa میزان هل‌دادن دشمنان با آب کارواش
+
+@ How long a hit freezes the game, in milliseconds
+fa مدت انجماد بازی با هر ضربه، به میلی‌ثانیه
+
+@ How strongly fog covers the sky when fog is on
+fa میزان پوشش آسمان با مه وقتی مه روشن است
+
+@ How the view distorts underwater: Classic ripples the whole screen like software Quake, GLQuake slowly stretches and squashes the view
+fa اعوجاج دید زیر آب: کلاسیک کل صفحه را مانند Quake نرم‌افزاری موج‌دار می‌کند، GLQuake دید را آرام می‌کشد و می‌فشارد
+
+@ Ignores gyro rotation slower than this many degrees per second, to hide hand tremor
+fa چرخش ژیروسکوپ کندتر از این تعداد درجه در ثانیه را نادیده می‌گیرد تا لرزش دست پنهان شود
+
+@ Immersive: appears for a few seconds only when its value changes
+fa غوطه‌ور: فقط هنگام تغییر مقدارش چند ثانیه نمایان می‌شود
+
+@ Keeps textures sharp on floors and walls seen at steep angles
+fa بافت‌های کف و دیوارهایی را که با زاویه‌ی تند دیده می‌شوند تیز نگه می‌دارد
+
+@ Lights from rockets, muzzle flashes and explosions brighten nearby walls
+fa نور موشک‌ها، شعله‌ی دهانه‌ی سلاح و انفجارها دیوارهای نزدیک را روشن می‌کند
+
+@ Liquid surfaces swell and ring out where things move through them
+fa سطح مایعات جایی که چیزی از آن می‌گذرد برآمده می‌شود و حلقه می‌زند
+
+@ Lobs sticky bombs (rockets ammo) that cling to walls, doors and monsters; alt-fire detonates them all
+fa بمب‌های چسبنده (مهمات موشک) پرتاب می‌کند که به دیوارها، درها و هیولاها می‌چسبند؛ شلیک دوم همه را منفجر می‌کند
+
+@ Look of the classic particles: GLQuake draws soft round dots, Classic draws square pixels like software Quake
+fa ظاهر ذرات کلاسیک: GLQuake نقطه‌های گرد نرم می‌کشد، کلاسیک پیکسل‌های مربعی مانند Quake نرم‌افزاری
+
+@ Low skips the background smear halo and uses fewer blur samples; high keeps the full halo and smoother streaks
+fa کم هاله‌ی پس‌زمینه را حذف می‌کند و نمونه‌های تاری کمتری دارد؛ زیاد هاله‌ی کامل و رگه‌های نرم‌تر دارد
+
+@ Low: hard particle edges, half the scripted particles and fewer hit sparks. Medium: soft edges. High: soft edges checked per MSAA sample, most hit sparks
+fa کم: لبه‌های سخت ذرات، نصف ذرات اسکریپتی و جرقه‌های اصابت کمتر. متوسط: لبه‌های نرم. زیاد: لبه‌های نرم بررسی‌شده برای هر نمونه‌ی MSAA، بیشترین جرقه‌ها
+
+@ Marks fade out before expiring; oldest marks are recycled at the limit
+fa نشان‌ها پیش از پایان محو می‌شوند؛ در سقف، قدیمی‌ترین‌ها بازیافت می‌شوند
+
+@ Max nested portal reflections to draw; each level redraws the scene
+fa بیشینه‌ی بازتاب‌های تودرتوی پورتال؛ هر سطح صحنه را دوباره می‌کشد
+
+@ Max portals per screen with a live view; each one redraws the scene
+fa بیشینه‌ی پورتال‌های دارای نمای زنده در صفحه؛ هر کدام صحنه را دوباره می‌کشد
+
+@ Maximum distance for acquiring and keeping an enemy locked
+fa بیشینه‌ی فاصله برای هدف‌گیری و نگه‌داشتن قفل روی دشمن
+
+@ Minimum gap between freezes, so shotgun pellets and rapid fire count once; kills ignore it
+fa کمینه‌ی فاصله‌ی بین انجمادها، تا ساچمه‌های شاتگان و شلیک سریع یک بار حساب شوند؛ کشتن‌ها آن را نادیده می‌گیرند
+
+@ Modern terminal console with autocomplete popup, history search, ANSI colors, bash shell and piping; off uses the classic Quake console
+fa کنسول ترمینال مدرن با پنجره‌ی تکمیل خودکار، جستجوی تاریخچه، رنگ‌های ANSI، پوسته‌ی bash و پایپ؛ خاموش کنسول کلاسیک Quake را به کار می‌برد
+
+@ Monsters take proportionally less damage at higher values; above 100% is harder
+fa هیولاها در مقادیر بالاتر به نسبت آسیب کمتری می‌گیرند؛ بالای 100% سخت‌تر است
+
+@ Moving gibs leave blood on surfaces they touch
+fa تکه‌های متحرک روی سطوحی که لمس می‌کنند خون می‌گذارند
+
+@ Multiplier on the freeze when the hit kills the enemy; 1 means no extra
+fa ضریب انجماد وقتی ضربه دشمن را می‌کشد؛ 1 یعنی بدون اضافه
+
+@ Multiplies ammo from pickups (up to the normal carry limit); below 100% is harder
+fa مهمات برداشتنی‌ها را چند برابر می‌کند (تا سقف عادی حمل)؛ زیر 100% سخت‌تر است
+
+@ Multiplies health from pickups (up to 100, or the item's own limit); below 100% is harder
+fa سلامت برداشتنی‌ها را چند برابر می‌کند (تا 100، یا سقف خود آیتم)؛ زیر 100% سخت‌تر است
+
+@ Nails stick to wood and bodies; hard surfaces deflect them to the floor
+fa میخ‌ها در چوب و بدن‌ها فرو می‌روند؛ سطوح سخت آن‌ها را به کف منحرف می‌کنند
+
+@ Nearest keeps crisp classic pixels; linear smooths textures
+fa نزدیک‌ترین پیکسل‌های کلاسیک را تیز نگه می‌دارد؛ خطی بافت‌ها را نرم می‌کند
+
+@ New Game: Add-ons
+fa بازی جدید: افزونه‌ها
+
+@ New Game: Customize
+fa بازی جدید: سفارشی‌سازی
+
+@ Night vision: how much dark areas are brightened; thermal: how strongly heat stands out
+fa دید در شب: میزان روشن شدن مناطق تاریک؛ حرارتی: میزان برجستگی گرما
+
+@ Night-vision and thermal goggles, cycle normal, night vision and thermal with Change Goggles (Add-ons), or use the Equipment Wheel
+fa عینک دید در شب و حرارتی؛ با تغییر عینک (افزونه‌ها) بین عادی، دید در شب و حرارتی بچرخید، یا از چرخ تجهیزات استفاده کنید
+
+@ No single freeze lasts longer than this, however much damage or kill bonus adds
+fa هیچ انجمادی بیش از این طول نمی‌کشد، هر قدر آسیب یا پاداش کشتن اضافه کند
+
+@ Oldest marks and nails are recycled at this shared limit
+fa قدیمی‌ترین نشان‌ها و میخ‌ها در این سقف مشترک بازیافت می‌شوند
+
+@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
+fa استیک و دکمه‌های روی صفحه: خودکار پس از لمس نشانشان می‌دهد و با استفاده از دستگاه دیگر پنهانشان می‌کند
+
+@ Only autosaves: quicksaves and the Save menu are off
+fa فقط ذخیره‌ی خودکار: ذخیره‌ی سریع و منوی ذخیره خاموش‌اند
+
+@ Place every weapon at the center, right or left of the view, or hide all viewmodels
+fa همه‌ی سلاح‌ها را در وسط، راست یا چپ دید قرار بده، یا همه‌ی مدل‌های سلاح را پنهان کن
+
+@ Play your chosen hit or kill cue when you damage an enemy
+fa هنگام آسیب زدن به دشمن، صدای اصابت یا کشتن انتخابی شما پخش می‌شود
+
+@ Playback speed: faster sounds shorter and higher
+fa سرعت پخش: سریع‌تر کوتاه‌تر و زیرتر به نظر می‌رسد
+
+@ Plays the Quake theme in the main menu when no game is running
+fa وقتی بازی‌ای در جریان نیست، آهنگ Quake را در منوی اصلی پخش می‌کند
+
+@ Portals farther away than this are drawn as flat discs
+fa پورتال‌های دورتر از این به شکل دیسک تخت کشیده می‌شوند
+
+@ Press attack once to keep firing, again to stop
+fa یک بار حمله را بزنید تا شلیک ادامه یابد، دوباره برای توقف
+
+@ Press run once to switch between running and walking
+fa یک بار دویدن را بزنید تا بین دویدن و راه رفتن جابه‌جا شوید
+
+@ Raise or lower the tone independently of sound length
+fa زیر و بمی صدا را مستقل از طول صدا بالا یا پایین ببرید
+
+@ Red screen edges show where damage came from: top is front, bottom is behind; Screen Flashes controls their strength
+fa لبه‌های قرمز صفحه جهت آسیب را نشان می‌دهند: بالا جلو است، پایین پشت؛ فلاش صفحه شدت آن‌ها را تنظیم می‌کند
+
+@ Replaces the classic dot particles with glowing sparks, smoke and blood; mods with their own particle effects keep them
+fa ذرات نقطه‌ای کلاسیک را با جرقه‌های درخشان، دود و خون جایگزین می‌کند؛ مادهایی با جلوه‌های ذرات خودشان آن‌ها را نگه می‌دارند
+
+@ Resolution and detail inside portal and teleporter views; lower tiers trim nested effects
+fa وضوح و جزئیات درون نمای پورتال‌ها و تله‌پورت‌ها؛ سطوح پایین‌تر جلوه‌های تودرتو را کم می‌کنند
+
+@ Rippling light patterns on surfaces under water and slime
+fa نقش‌های نوری موج‌دار روی سطوح زیر آب و لجن
+
+@ Scales all damage you take; above 100% is harder
+fa همه‌ی آسیب‌های دریافتی را مقیاس می‌دهد؛ بالای 100% سخت‌تر است
+
+@ Screen edge for this element; elements on the same spot stack
+fa لبه‌ی صفحه برای این جزء؛ اجزای هم‌جا روی هم چیده می‌شوند
+
+@ Seconds a monster hit by the boomerang stays stunned
+fa چند ثانیه هیولای خورده به بومرنگ گیج می‌ماند
+
+@ Seconds impact marks and stuck nails stay before fading out; independent of Particle Quality
+fa چند ثانیه نشان‌های اصابت و میخ‌های فرورفته پیش از محو شدن می‌مانند؛ مستقل از کیفیت ذرات
+
+@ Seconds messages at the top of the screen stay up
+fa چند ثانیه پیام‌های بالای صفحه می‌مانند
+
+@ Seconds the flick stick snap takes; lower is faster
+fa چند ثانیه چرخش سریع فلیک استیک طول می‌کشد؛ کمتر سریع‌تر است
+
+@ See through enhanced water; enables Water Opacity
+fa دیدن از میان آب پیشرفته؛ کدری آب را فعال می‌کند
+
+@ Sensor grain, scanlines and flicker of the goggle image
+fa دانه‌های حسگر، خطوط اسکن و سوسوی تصویر عینک
+
+@ Shades every anti-aliasing sample; needs Anti-aliasing on
+fa هر نمونه‌ی ضدپله‌پله‌شدن را سایه‌زنی می‌کند؛ ضدپله‌پله‌شدن باید روشن باشد
+
+@ Shifts colors so they stay distinct for the chosen color blindness
+fa رنگ‌ها را جابه‌جا می‌کند تا برای کوررنگی انتخابی متمایز بمانند
+
+@ Shotgun hits leave small surface marks (cosmetic only)
+fa اصابت شاتگان نشان‌های کوچکی روی سطح می‌گذارد (فقط ظاهری)
+
+@ Show corner ticks at screen centre while locked, even with Crosshair off
+fa هنگام قفل، گوشه‌نماها را در مرکز صفحه نشان بده، حتی اگر نشانگر خاموش باشد
+
+@ Show where grenades and other arcing shots will fly, bounce and land; local play only, not in deathmatch
+fa نشان می‌دهد نارنجک‌ها و دیگر پرتابه‌های کمانی کجا پرواز می‌کنند، جهش می‌کنند و فرود می‌آیند؛ فقط بازی محلی، نه در دث‌مچ
+
+@ Shows text for important sounds: doors, alerted enemies, secrets, pickups
+fa برای صداهای مهم متن نشان می‌دهد: درها، دشمنان هشیار، رازها، برداشتنی‌ها
+
+@ Shows the distance fog that maps and mods set; off always gives clear view
+fa مه فاصله‌ای را که نقشه‌ها و مادها تعیین می‌کنند نشان می‌دهد؛ خاموش همیشه دید واضح می‌دهد
+
+@ Shows the player face next to the health number
+fa چهره‌ی بازیکن را کنار عدد سلامت نشان می‌دهد
+
+@ Simulation detail, step rate, fade-out lifetimes and caps for gibs and shrapnel; low also skips mover collision
+fa جزئیات شبیه‌سازی، نرخ گام، ماندگاری محو شدن و سقف تکه‌ها و ترکش‌ها؛ کم برخورد با اجسام متحرک را هم حذف می‌کند
+
+@ Size of the on-screen buttons and move stick
+fa اندازه‌ی دکمه‌ها و استیک حرکت روی صفحه
+
+@ Slowly heals up to 100 health after 5 seconds without being hit
+fa پس از 5 ثانیه بدون ضربه خوردن، آرام تا 100 سلامت بهبود می‌یابد
+
+@ Slows stick look while the crosshair is over an enemy
+fa وقتی نشانگر روی دشمن است نگاه با استیک را کند می‌کند
+
+@ Slows the game down while the weapon wheel is open
+fa وقتی چرخ سلاح باز است بازی را کند می‌کند
+
+@ Slows the whole game down; single player only. Saves and demos stay compatible with other ports
+fa کل بازی را کند می‌کند؛ فقط تک‌نفره. ذخیره‌ها و دموها با پورت‌های دیگر سازگار می‌مانند
+
+@ Small camera jolt on each freeze; off with Reduce Motion
+fa تکان کوچک دوربین در هر انجماد؛ با کاهش حرکت خاموش است
+
+@ Snap and track enemies in local play, including split-screen; unavailable online
+fa در بازی محلی، از جمله صفحه‌ی چندقسمتی، دشمنان را می‌گیرد و دنبال می‌کند؛ در بازی آنلاین در دسترس نیست
+
+@ Sparks, smoke, chips, splinters and splashes fly off whatever your shots hit
+fa جرقه، دود، تراشه، خرده‌چوب و پاشش از هر چه شلیک‌هایتان به آن بخورد پرتاب می‌شود
+
+@ Spawns extra copies of every monster around the original when a level starts
+fa هنگام شروع مرحله، نسخه‌های اضافه‌ای از هر هیولا پیرامون اصلی پدید می‌آورد
+
+@ Strength of the full-screen flashes for damage, pickups and powerups
+fa شدت فلاش‌های تمام‌صفحه برای آسیب، برداشتنی‌ها و نیروزاها
+
+@ Stretch or shorten the sound while keeping its pitch
+fa صدا را با حفظ زیر و بمی آن کش بده یا کوتاه کن
+
+@ Surface opacity; requires Enhanced Water and Translucent Water
+fa کدری سطح؛ آب پیشرفته و آب نیمه‌شفاف لازم است
+
+@ The hook latches onto metal surfaces (metal, tech, computer panels, copper)
+fa قلاب به سطوح فلزی می‌چسبد (فلز، تک، پنل‌های رایانه، مس)
+
+@ The hook latches onto stone, brick, rock and any surface not recognised as wood or metal
+fa قلاب به سنگ، آجر، صخره و هر سطحی که چوب یا فلز شناخته نشود می‌چسبد
+
+@ The hook latches onto wooden surfaces (texture names like wood, crate, plank)
+fa قلاب به سطوح چوبی می‌چسبد (نام بافت‌هایی مانند wood، crate، plank)
+
+@ Turn the controller's motion sensor into a look input; needs a pad with a gyroscope
+fa حسگر حرکت دسته را به ورودی نگاه تبدیل می‌کند؛ دسته‌ای با ژیروسکوپ لازم است
+
+@ Turns off view bob, strafe tilt and the camera kick when hit or firing
+fa تکان دید، کج‌شدن هنگام گام جانبی و لگد دوربین هنگام ضربه یا شلیک را خاموش می‌کند
+
+@ Turns on the extra liquid effects; Water Settings controls each one
+fa جلوه‌های اضافی مایعات را روشن می‌کند؛ تنظیمات آب هر کدام را کنترل می‌کند
+
+@ Turns the view to follow a moving enemy you are aiming at
+fa دید را برای دنبال کردن دشمن متحرکی که نشانه گرفته‌اید می‌چرخاند
+
+@ Turns the view when you roll the controller sideways; 0 disables it, negative reverses it
+fa با غلتاندن دسته به پهلو دید را می‌چرخاند؛ 0 خاموش می‌کند، منفی آن را وارونه می‌کند
+
+@ Two-portal gun: fire and alt-fire place linked portals on flat walls; assign a weapon slot in Add-ons
+fa تفنگ دوپورتالی: شلیک و شلیک دوم پورتال‌های متصل روی دیوارهای صاف می‌گذارند؛ در افزونه‌ها یک جایگاه سلاح تعیین کنید
+
+@ Unlocks the FX Settings page: enhanced particles, impact effects and blood splatter
+fa صفحه‌ی تنظیمات جلوه‌ها را باز می‌کند: ذرات پیشرفته، جلوه‌های اصابت و پاشش خون
+
+@ Uses the 2021 re-release's smoother MD5 models (and MD3 replacements from mods) instead of the classic ones. Applies on the next map load
+fa به جای مدل‌های کلاسیک، مدل‌های MD5 نرم‌تر نسخه‌ی بازانتشار 2021 (و جایگزین‌های MD3 مادها) را به کار می‌برد. در بارگذاری نقشه‌ی بعدی اعمال می‌شود
+
+@ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
+fa نور رنگی نقشه را به کار می‌برد (فایل .lit یا بخش BSPX)؛ خاموش نور سفید اصلی می‌دهد. در بارگذاری نقشه‌ی بعدی اعمال می‌شود
+
+@ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
+fa بخش‌های فواره‌ی آب، تعداد قطره‌ها و سایه‌زنی براق مایع: کم جریان‌های نیمه‌شفاف ساده‌تر؛ زیاد فواره‌های نرم و براق
+
+@ When gyro looking applies: always, off while +gyroaction is held, or only while it is held
+fa زمان اعمال نگاه ژیروسکوپی: همیشه، خاموش هنگام نگه‌داشتن +gyroaction، یا فقط هنگام نگه‌داشتن آن
+
+@ Which weapons trigger the freeze; melee covers the axe and any mod weapon used at close range without ammo
+fa کدام سلاح‌ها انجماد را فعال می‌کنند؛ نبرد تن‌به‌تن شامل تبر و هر سلاح ماد بدون مهمات در فاصله‌ی نزدیک است
+
+@ Your own rockets and grenades don't hurt you; rocket jumps still work
+fa موشک‌ها و نارنجک‌های خودتان به شما آسیب نمی‌زنند؛ پرش با موشک همچنان کار می‌کند
+
+# ==== ui.txt ====
+
+# Menus and pop-ups outside the options pages: save cards, launch, presets,
+# add-on browser, map packs, hints and dialogs.
+@ Select
+fa انتخاب
+
+@ Back
+fa بازگشت
+
+@ Cancel
+fa لغو
+
+@ Confirm
+fa تأیید
+
+@ Scroll
+fa پیمایش
+
+@ Section
+fa بخش
+
+@ Bind
+fa تخصیص
+
+@ Cancel binding
+fa لغو تخصیص
+
+@ Clear
+fa پاک کردن
+
+@ Clear pad
+fa پاک کردن دسته
+
+@ Remap
+fa تخصیص دوباره
+
+@ Type
+fa تایپ
+
+@ Shift
+fa Shift
+
+@ Done
+fa انجام شد
+
+@ Del
+fa Del
+
+@ Space
+fa فاصله
+
+@ Save
+fa ذخیره
+
+@ Load
+fa بارگذاری
+
+@ Delete
+fa حذف
+
+@ Play
+fa اجرا
+
+@ Yes
+fa بله
+
+@ No
+fa خیر
+
+@ OK
+fa تأیید
+
+@ System
+fa سیستم
+
+@ Language
+fa زبان
+
+@ Help
+fa راهنما
+
+@ Fixed for this game: it was started without Customize
+fa برای این بازی ثابت است: بدون سفارشی‌سازی شروع شده
+
+@ Press a button or key to bind (Start cancels)
+fa یک دکمه یا کلید را برای تخصیص بزنید (Start لغو می‌کند)
+
+@ Press button...
+fa دکمه را بزنید...
+
+@ Press key...
+fa کلید را بزنید...
+
+@ Replace this binding?
+fa این تخصیص جایگزین شود؟
+
+@ is already assigned
+fa قبلاً تخصیص یافته است
+
+@ {} already assigned
+fa {} قبلاً تخصیص یافته است
+
+@ Open Controls to remap Lock-on?
+fa برای تخصیص دوباره‌ی قفل هدف، کنترل‌ها باز شود؟
+
+@ Lock-on
+fa قفل هدف
+
+@ Auto-aim Toggle
+fa تغییر هدف‌گیری خودکار
+
+@ Keyboard
+fa صفحه‌کلید
+
+@ Controller
+fa دسته‌ی بازی
+
+# main menu, dialogs and screens
+@ Map Packs
+fa بسته‌های نقشه
+
+@ Customize
+fa سفارشی‌سازی
+
+@ Level Select
+fa انتخاب مرحله
+
+@ Really quit?
+fa واقعاً خارج می‌شوید؟
+
+@ You died
+fa شما مردید
+
+@ Continue from most recent save
+fa ادامه از آخرین ذخیره
+
+@ Select save
+fa انتخاب ذخیره
+
+@ Restart level
+fa شروع دوباره‌ی مرحله
+
+@ Return to main menu
+fa بازگشت به منوی اصلی
+
+@ (disabled)
+fa (غیرفعال)
+
+@ (fixed for this game)
+fa (ثابت برای این بازی)
+
+@ (off)
+fa (خاموش)
+
+@ Apply Display Changes
+fa اعمال تغییرات نمایش
+
+@ Display Mode
+fa حالت نمایش
+
+@ Resolution
+fa وضوح
+
+@ desktop
+fa دسکتاپ
+
+@ Preset
+fa پیش‌تنظیم
+
+@ Map
+fa نقشه
+
+@ Reset Shader Settings
+fa بازنشانی تنظیمات سایه‌زن
+
+@ Reset to Defaults
+fa بازنشانی به پیش‌فرض‌ها
+
+@ Searching...
+fa در حال جستجو...
+
+@ This game only autosaves.
+fa این بازی فقط ذخیره‌ی خودکار دارد.
+
+@ (No Manual Saves modifier)
+fa (تغییردهنده‌ی بدون ذخیره‌ی دستی)
+
+@ End the current game?
+fa بازی فعلی پایان یابد؟
+
+@ Unsaved progress will be lost.
+fa پیشرفت ذخیره‌نشده از دست می‌رود.
+
+@ End game
+fa پایان بازی
+
+@ Overwrite
+fa بازنویسی
+
+@ Overwrite "{}"?
+fa «{}» بازنویسی شود؟
+
+@ Saved {}
+fa {} ذخیره شد
+
+@ Start a new game?
+fa بازی جدید شروع شود؟
+
+@ New game
+fa بازی جدید
+
+@ New Game
+fa بازی جدید
+
+@ CUSTOM
+fa سفارشی
+
+@ Customize Experience
+fa سفارشی‌سازی تجربه
+
+@ Disable All
+fa غیرفعال کردن همه
+
+@ Disable All Modifications
+fa غیرفعال کردن همه‌ی تغییرات
+
+@ Saves load in other source ports too.
+fa ذخیره‌ها در سورس‌پورت‌های دیگر هم بارگذاری می‌شوند.
+
+@ Standard rules, no add-ons.
+fa قوانین استاندارد، بدون افزونه.
+
+@ Choose skill
+fa انتخاب سختی
+
+@ The current game will end
+fa بازی فعلی پایان می‌یابد
+
+@ Easy
+fa آسان
+
+@ Normal
+fa عادی
+
+@ Hard
+fa سخت
+
+@ Nightmare
+fa کابوس
+
+# graphics preset pop-up
+@ Choose a Graphics Preset
+fa یک پیش‌تنظیم گرافیکی انتخاب کنید
+
+@ Classic
+fa کلاسیک
+
+@ Like the re-release: enhanced models,
+fa مانند بازانتشار: مدل‌های پیشرفته،
+
+@ no added effects.
+fa بدون جلوه‌های افزوده.
+
+@ Enhanced
+fa پیشرفته
+
+@ Every enhancement at its highest quality.
+fa همه‌ی بهبودها با بالاترین کیفیت.
+
+@ Needs a capable GPU.
+fa به GPU توانمند نیاز دارد.
+
+@ Low-End
+fa سیستم ضعیف
+
+@ Fastest. No anti-aliasing, original
+fa سریع‌ترین. بدون ضدپله‌پله‌شدن، مدل‌های
+
+@ models, lowest effect quality.
+fa اصلی، کمترین کیفیت جلوه‌ها.
+
+@ Esc keeps the defaults
+fa Esc پیش‌فرض‌ها را نگه می‌دارد
+
+@ Everything can be changed later in Options.
+fa همه‌چیز را بعداً در گزینه‌ها می‌توان تغییر داد.
+
+@ Keep Defaults
+fa نگه‌داشتن پیش‌فرض‌ها
+
+# save and load cards
+@ Save Game
+fa ذخیره‌ی بازی
+
+@ Load Game
+fa بارگذاری بازی
+
+@ Autosaves
+fa ذخیره‌های خودکار
+
+@ newest first
+fa جدیدترین اول
+
+@ Saves: {}
+fa ذخیره‌ها: {}
+
+@ Browse Autosaves
+fa مرور ذخیره‌های خودکار
+
+@ Every retained autosave, newest first
+fa همه‌ی ذخیره‌های خودکار نگه‌داشته، جدیدترین اول
+
+@ New save
+fa ذخیره‌ی جدید
+
+@ Select to save your game here
+fa برای ذخیره‌ی بازی در اینجا انتخاب کنید
+
+@ No autosaves yet
+fa هنوز ذخیره‌ی خودکاری نیست
+
+@ Autosaves are made on level entry, secrets and more (Options > Gameplay)
+fa ذخیره‌ی خودکار با ورود به مرحله، یافتن راز و موارد دیگر انجام می‌شود (گزینه‌ها > گیم‌پلی)
+
+@ No saves yet
+fa هنوز ذخیره‌ای نیست
+
+@ Save from the Single Player menu, or press F6 to quicksave
+fa از منوی تک‌نفره ذخیره کنید، یا برای ذخیره‌ی سریع F6 را بزنید
+
+@ No picture
+fa بدون تصویر
+
+@ Del: delete save
+fa Del: حذف ذخیره
+
+@ Delete "{}"?
+fa «{}» حذف شود؟
+
+@ This cannot be undone.
+fa این کار برگشت‌پذیر نیست.
+
+@ Quicksave
+fa ذخیره‌ی سریع
+
+@ Autosave: {}
+fa ذخیره‌ی خودکار: {}
+
+@ unknown trigger
+fa محرک ناشناخته
+
+@ Latest - {}
+fa آخرین - {}
+
+@ Health {}
+fa سلامت {}
+
+@ Armor {}
+fa زره {}
+
+@ Kills {}/{}
+fa کشته‌ها {}/{}
+
+@ Secrets {}/{}
+fa رازها {}/{}
+
+@ Split-screen, {} players
+fa صفحه‌ی چندقسمتی، {} بازیکن
+
+@ Co-op
+fa همکاری
+
+@ Customized
+fa سفارشی
+
+@ Customized, {}
+fa سفارشی، {}
+
+@ Date unavailable
+fa تاریخ در دسترس نیست
+
+@ Just now
+fa همین حالا
+
+@ {} min ago
+fa {} دقیقه پیش
+
+@ {} h ago
+fa {} ساعت پیش
+
+@ Level entry
+fa ورود به مرحله
+
+@ Secret found
+fa راز یافته شد
+
+@ All enemies killed
+fa همه‌ی دشمنان کشته شدند
+
+@ All secrets found
+fa همه‌ی رازها یافته شدند
+
+@ Timer
+fa زمان‌سنج
+
+# customize pages
+@ Standard rules
+fa قوانین استاندارد
+
+@ Modifiers changed: {}
+fa تغییردهنده‌های عوض‌شده: {}
+
+@ no add-ons
+fa بدون افزونه
+
+@ add-ons: {}
+fa افزونه‌ها: {}
+
+@ Saves of this game are .qsa files: they need this source port.
+fa ذخیره‌های این بازی فایل .qsa هستند: به این سورس‌پورت نیاز دارند.
+
+@ Nothing changed: this plays as standard Quake.
+fa چیزی تغییر نکرده: این بازی مانند Quake استاندارد اجرا می‌شود.
+
+@ Changes apply now and are saved with this game (.qsa).
+fa تغییرات اکنون اعمال و با این بازی ذخیره می‌شوند (.qsa).
+
+@ This game started without Customize, so its rules are fixed.
+fa این بازی بدون سفارشی‌سازی شروع شده، پس قوانینش ثابت است.
+
+@ Start a new game and choose Customize Experience.
+fa یک بازی جدید شروع کنید و سفارشی‌سازی تجربه را انتخاب کنید.
+
+@ These rules apply to the next customized game.
+fa این قوانین برای بازی سفارشی بعدی اعمال می‌شوند.
+
+# add-on browser
+@ Fire
+fa شلیک
+
+@ Alt Fire
+fa شلیک دوم
+
+@ Configure Parameters >
+fa پیکربندی پارامترها >
+
+@ Configure
+fa پیکربندی
+
+@ Settings
+fa تنظیمات
+
+@ Change slot
+fa تغییر جایگاه
+
+@ Toggle
+fa روشن/خاموش
+
+@ Details
+fa جزئیات
+
+@ Enter or click the box: toggle
+fa Enter یا کلیک روی جعبه: روشن/خاموش
+
+@ Right / Tab / click: details
+fa راست / Tab / کلیک: جزئیات
+
+@ Input Remapping
+fa تخصیص دوباره‌ی ورودی
+
+@ Weapon Slot
+fa جایگاه سلاح
+
+@ Customized games save as .qsa files, which need this source port.
+fa بازی‌های سفارشی به شکل فایل .qsa ذخیره می‌شوند که به این سورس‌پورت نیاز دارند.
+
+@ This game started without Customize, so its add-ons are fixed. Customize a new game instead.
+fa این بازی بدون سفارشی‌سازی شروع شده، پس افزونه‌هایش ثابت‌اند. به جای آن یک بازی جدید را سفارشی کنید.
+
+@ Bullet Time
+fa زمان آهسته
+
+@ Change Goggles
+fa تغییر عینک
+
+@ Dodge / Dive
+fa جاخالی / شیرجه
+
+@ Goggles
+fa عینک
+
+@ Hitstop
+fa هیت‌استاپ
+
+@ Projectile Shotguns
+fa شاتگان‌های پرتابه‌ای
+
+@ BULLET TIME: 20%
+fa زمان آهسته: 20%
+
+@ NORMAL SPEED
+fa سرعت عادی
+
+@ SLOW MOTION: PHYSICAL PELLETS
+fa حرکت آهسته: ساچمه‌های فیزیکی
+
+@ DEMONSTRATION
+fa نمایش
+
+@ GAMEPLAY
+fa گیم‌پلی
+
+@ LOOP
+fa تکرار
+
+@ Preview unavailable
+fa پیش‌نمایش در دسترس نیست
+
+# shader and language help lines
+@ A setting of the chosen shader; arrows step it, Enter is not needed
+fa یکی از تنظیمات سایه‌زن انتخابی؛ با جهت‌نماها تغییر می‌کند، Enter لازم نیست
+
+@ Language of the menus, messages and the 2021 re-release's game text; System follows your computer's language
+fa زبان منوها، پیام‌ها و متن بازی بازانتشار 2021؛ سیستم از زبان رایانه‌ی شما پیروی می‌کند
+
+@ Puts every setting of the chosen shader back to the preset's defaults
+fa همه‌ی تنظیمات سایه‌زن انتخابی را به پیش‌فرض‌های پیش‌تنظیم برمی‌گرداند
+
+@ RetroArch slang shader on the final image: CRT, scanlines, NTSC, sharpening; add your own in <game>/shaders
+fa سایه‌زن slang رتروآرچ روی تصویر نهایی: CRT، خطوط اسکن، NTSC، تیزسازی؛ سایه‌زن‌های خود را در <game>/shaders بگذارید
+
+# modern console footer
+@ Shift+PgUp/Dn: height  ` : hide
+fa Shift+PgUp/Dn: ارتفاع  ` : پنهان
+
+@ Tab: complete  Ctrl+R: search  bash | pipe
+fa Tab: تکمیل  Ctrl+R: جستجو  bash | pipe
+
+@ ↑ +{} lines (End to jump) 
+fa ↑ +{} خط (End برای پرش) 
+
+# add-on descriptions
+@ Create two linked portals on flat walls. Fire places the first portal; Alt Fire places the second. Walk through either portal to emerge from the other. Your momentum carries through. Assign a weapon slot below: pressing that slot repeatedly cycles its ordinary weapon and every enabled add-on assigned there. Portal view quality is configurable below.
+fa دو پورتال متصل روی دیوارهای صاف بسازید. شلیک پورتال اول را می‌گذارد؛ شلیک دوم پورتال دوم را. از هر پورتال بگذرید تا از دیگری بیرون بیایید. تکانه‌ی شما حفظ می‌شود. در پایین یک جایگاه سلاح تعیین کنید: زدن پیاپی آن جایگاه بین سلاح عادی آن و همه‌ی افزونه‌های فعال تعیین‌شده در آن می‌چرخد. کیفیت نمای پورتال در پایین قابل تنظیم است.
+
+@ Hold Fire and sweep the crosshair over monsters to queue targets. Release Fire to throw: the boomerang visits each target, stuns it and returns to you. Alt Fire clears the queue. The weapon slot selects a group, not a separate hotkey: press it again to cycle through the weapons in that slot. Configure stun duration and flight speed below.
+fa شلیک را نگه دارید و نشانگر را روی هیولاها بکشید تا هدف‌ها در صف قرار گیرند. برای پرتاب، شلیک را رها کنید: بومرنگ به سراغ هر هدف می‌رود، گیجش می‌کند و به سوی شما برمی‌گردد. شلیک دوم صف را پاک می‌کند. جایگاه سلاح یک گروه را انتخاب می‌کند، نه یک کلید میانبر جدا: دوباره بزنید تا بین سلاح‌های آن جایگاه بچرخید. مدت گیجی و سرعت پرواز را در پایین تنظیم کنید.
+
+@ Hold Fire to charge a sticky bomb using rocket ammunition; release to launch. A longer charge throws it faster. Bombs cling to walls, doors and monsters. Alt Fire detonates your planted bombs together. Place a trap, retreat, then detonate it when enemies approach. Assign any weapon slot below; repeated presses cycle through the ordinary weapon and add-ons in that slot.
+fa شلیک را نگه دارید تا یک بمب چسبنده با مهمات موشک شارژ شود؛ برای پرتاب رها کنید. شارژ طولانی‌تر آن را سریع‌تر پرتاب می‌کند. بمب‌ها به دیوارها، درها و هیولاها می‌چسبند. شلیک دوم بمب‌های کار‌گذاشته‌ی شما را با هم منفجر می‌کند. تله بگذارید، عقب بنشینید و وقتی دشمنان نزدیک شدند منفجرش کنید. در پایین هر جایگاه سلاحی را تعیین کنید؛ زدن پیاپی بین سلاح عادی و افزونه‌های آن جایگاه می‌چرخد.
+
+@ Fire launches a chain hook. It latches onto a permitted surface or enemy and reels you toward the anchor. Fire again or use Alt Fire to let go. Choose which materials and enemies can be hooked in Configure Parameters. Assign it to any weapon slot; repeated presses of the slot's existing binding cycle through its weapons.
+fa شلیک یک قلاب زنجیری پرتاب می‌کند. به سطح یا دشمن مجاز می‌چسبد و شما را به سوی لنگر می‌کشد. برای رها کردن دوباره شلیک کنید یا از شلیک دوم استفاده کنید. در پیکربندی پارامترها انتخاب کنید کدام مواد و دشمنان قابل‌قلاب باشند. آن را به هر جایگاه سلاحی تعیین کنید؛ زدن پیاپی کلید فعلی آن جایگاه بین سلاح‌هایش می‌چرخد.
+
+@ A piercing railgun inspired by Quake III. Fire sends a slug through every enemy along its line. Each shot consumes two cells, with a 1.5 second refire interval. Damage and the spiral trail colour are configurable below. Choose a weapon slot: the slot's current binding selects and cycles the weapons assigned to it.
+fa ریل‌گانی نافذ با الهام از Quake III. شلیک گلوله‌ای را از میان همه‌ی دشمنان در مسیرش می‌فرستد. هر شلیک دو سلول مصرف می‌کند و فاصله‌ی شلیک دوباره 1.5 ثانیه است. آسیب و رنگ دنباله‌ی مارپیچ در پایین قابل تنظیم است. یک جایگاه سلاح انتخاب کنید: کلید فعلی آن جایگاه سلاح‌های تعیین‌شده‌اش را انتخاب می‌کند و بینشان می‌چرخد.
+
+@ A Portal-style gel sprayer. Fire sprays blue Repulsion gel: land, jump or run into it to bounce, and landings on it never hurt. Alt Fire sprays orange Propulsion gel: run across it to go much faster. Gel coats floors and walls until washed off with the Powerwasher. Assign a weapon slot below; repeated presses cycle the weapons in that slot.
+fa ژل‌پاشی به سبک Portal. شلیک ژل آبی دافعه می‌پاشد: روی آن فرود بیایید، بپرید یا بدوید تا به بالا جهش کنید، و فرود روی آن هرگز آسیب نمی‌زند. شلیک دوم ژل نارنجی پیشرانه می‌پاشد: روی آن بدوید تا بسیار سریع‌تر شوید. ژل کف و دیوارها را می‌پوشاند تا با کارواش شسته شود. در پایین یک جایگاه سلاح تعیین کنید؛ زدن پیاپی بین سلاح‌های آن جایگاه می‌چرخد.
+
+@ A water cannon. Fire shoots a straight jet with limited reach; Alt Fire a wide, shorter fan. The water pushes enemies back, turns projectiles aside and washes away gel and blood. Push strength is configurable below. Assign a weapon slot below; repeated presses cycle the weapons in that slot.
+fa یک توپ آب‌پاش. شلیک فواره‌ای مستقیم با برد محدود می‌زند؛ شلیک دوم یک بادبزن پهن و کوتاه‌تر. آب دشمنان را عقب می‌راند، پرتابه‌ها را منحرف می‌کند و ژل و خون را می‌شوید. قدرت هل‌دادن در پایین قابل تنظیم است. در پایین یک جایگاه سلاح تعیین کنید؛ زدن پیاپی بین سلاح‌های آن جایگاه می‌چرخد.
+
+@ One equipment add-on includes both night vision and thermal vision. The Change Goggles action cycles Normal, Night Vision, Thermal, then Normal again. Night vision brightens dark rooms; thermal vision highlights living enemies. Goggles do not occupy a weapon slot. Configure intensity and sensor noise below. The binding affects only this add-on.
+fa یک افزونه‌ی تجهیزات هم دید در شب و هم دید حرارتی دارد. فرمان تغییر عینک بین عادی، دید در شب، حرارتی و دوباره عادی می‌چرخد. دید در شب اتاق‌های تاریک را روشن می‌کند؛ دید حرارتی دشمنان زنده را برجسته می‌کند. عینک جایگاه سلاحی اشغال نمی‌کند. شدت و نویز حسگر را در پایین تنظیم کنید. این تخصیص فقط بر این افزونه اثر دارد.
+
+@ Press Dodge with a movement direction on the ground or in midair: dive forward or leap backward and sideways. Diagonals are supported. Each press launches once, with a short recovery. The player body animates in third person. Assign the Dodge action below or in Controls.
+fa جاخالی را همراه با یک جهت حرکت روی زمین یا در هوا بزنید: به جلو شیرجه بزنید یا به عقب و پهلو بجهید. جهت‌های مورب پشتیبانی می‌شوند. هر بار زدن یک پرش با بازیابی کوتاه است. بدن بازیکن در سوم‌شخص متحرک است. فرمان جاخالی را در پایین یا در کنترل‌ها تعیین کنید.
+
+@ Use the dedicated Bullet Time action to slow the whole local game to 20% speed. Hold is the default; Toggle switches on each press. The optional meter limits use in real seconds and regenerates while inactive. Disable the meter for unlimited use. Remap the action and configure duration and regeneration below.
+fa با فرمان ویژه‌ی زمان آهسته، کل بازی محلی را به سرعت 20% کند کنید. نگه‌داشتن پیش‌فرض است؛ تغییری با هر بار زدن روشن یا خاموش می‌کند. نوار اختیاری استفاده را به ثانیه‌های واقعی محدود می‌کند و هنگام غیرفعال بودن پر می‌شود. برای استفاده‌ی نامحدود نوار را خاموش کنید. فرمان را دوباره تخصیص دهید و مدت و بازیابی را در پایین تنظیم کنید.
+
+@ Both shotguns and enemy grunts fire physical pellets with their original spread and damage. Fast default projectiles feel immediate; lower their speed to dodge incoming fire during bullet time. Configure projectile speed below, or reset it to the default of 10000 units per second.
+fa هر دو شاتگان و سربازان دشمن ساچمه‌های فیزیکی با پخش و آسیب اصلی شلیک می‌کنند. پرتابه‌های سریع پیش‌فرض آنی حس می‌شوند؛ سرعتشان را کم کنید تا در زمان آهسته از تیرهای دشمن جاخالی دهید. سرعت پرتابه را در پایین تنظیم کنید یا آن را به پیش‌فرض 10000 واحد در ثانیه بازنشانی کنید.
+
+@ Freezes the game for a split second when you damage an enemy, so hits feel heavier. Single player only. Choose which weapons trigger it (all, melee, ranged or explosives), how long it lasts and how much more a kill freezes. Advanced settings cover enemy toughness, damage scaling, cooldown and the longest freeze.
+fa وقتی به دشمن آسیب می‌زنید بازی را برای کسری از ثانیه منجمد می‌کند تا ضربه‌ها سنگین‌تر حس شوند. فقط تک‌نفره. انتخاب کنید کدام سلاح‌ها آن را فعال کنند (همه، تن‌به‌تن، دوربرد یا مواد منفجره)، چقدر طول بکشد و کشتن چقدر بیشتر منجمد کند. تنظیمات پیشرفته شامل سرسختی دشمن، مقیاس آسیب، زمان بازیابی و طولانی‌ترین انجماد است.
+
+# map packs and the Quaddicted browser
+@ Get more maps (Quaddicted)...
+fa نقشه‌های بیشتر (Quaddicted)...
+
+@ Type to filter...
+fa برای فیلتر تایپ کنید...
+
+@ Launch mod
+fa اجرای ماد
+
+@ Start first map
+fa شروع نقشه‌ی اول
+
+@ (running)
+fa (در حال اجرا)
+
+@ running
+fa در حال اجرا
+
+@ Recent
+fa اخیر
+
+@ Name
+fa نام
+
+@ Dir
+fa پوشه
+
+@ Default
+fa پیش‌فرض
+
+@ Title
+fa عنوان
+
+@ Sort: {}
+fa مرتب‌سازی: {}
+
+@ {} installed
+fa {} نصب‌شده
+
+@ {}/{} matching
+fa {}/{} منطبق
+
+@ {} maps, {} completed
+fa {} نقشه، {} تمام‌شده
+
+@ {}/{} matching, {} completed
+fa {}/{} منطبق، {} تمام‌شده
+
+@ no maps of its own
+fa بدون نقشه‌ی خودی
+
+@ dir: {}
+fa پوشه: {}
+
+@ base: {}
+fa پایه: {}
+
+@ Browse the Quaddicted archive of
+fa آرشیو Quaddicted را برای نقشه‌ها
+
+@ single-player maps and episodes,
+fa و اپیزودهای تک‌نفره مرور کنید،
+
+@ then download and install them
+fa سپس آن‌ها را همین‌جا دانلود
+
+@ here. Each release gets its own
+fa و نصب کنید. هر انتشار یک مدخل
+
+@ entry in this list.
+fa جدا در این فهرست دارد.
+
+@ Needs an internet connection.
+fa به اتصال اینترنت نیاز دارد.
+
+@ Quaddicted Map Archive
+fa آرشیو نقشه‌ی Quaddicted
+
+@ Newest
+fa جدیدترین
+
+@ Author
+fa سازنده
+
+@ Size
+fa اندازه
+
+@ Loading the map list...
+fa در حال بارگذاری فهرست نقشه‌ها...
+
+@ Couldn't load the map list: {}
+fa بارگذاری فهرست نقشه‌ها ممکن نشد: {}
+
+@ {} single-player releases  -  F5 refreshes
+fa {} انتشار تک‌نفره  -  F5 تازه‌سازی
+
+@ {} matching
+fa {} منطبق
+
+@ by {}
+fa از {}
+
+@ requires: {}
+fa نیازمند: {}
+
+@ maps: {}
+fa نقشه‌ها: {}
+
+@ Failed: {}
+fa ناموفق: {}
+
+@ Downloading... {}%
+fa در حال دانلود... {}%
+
+@ Unpacking...
+fa در حال استخراج...
+
+@ Installed in {}/  -  Enter: play
+fa نصب‌شده در {}/  -  Enter: بازی
+
+@ Enter: download and install
+fa Enter: دانلود و نصب
+
+@ unpacking
+fa در حال استخراج
+
+@ failed
+fa ناموفق
+
+@ installed
+fa نصب‌شده
+
+@ Downloads are not available in the browser build
+fa دانلود در نسخه‌ی مرورگر در دسترس نیست
+
+@ the map list could not be read
+fa فهرست نقشه‌ها خوانده نشد
+
+@ downloading needs the curl program
+fa دانلود به برنامه‌ی curl نیاز دارد
+
+@ download failed
+fa دانلود ناموفق بود
+
+@ the download is not a valid zip
+fa فایل دانلودشده zip معتبری نیست
+
+@ nothing to install for this engine
+fa چیزی برای نصب روی این موتور نیست
+
+@ needs {} installed first
+fa ابتدا باید {} نصب شود
+
+@ couldn't unpack {}
+fa استخراج {} ممکن نشد
+
+# help screen
+@ About
+fa درباره
+
+@ < Back
+fa < بازگشت
+
+# tr_ctx keys: English shows the short word, the key says which meaning
+@ Save (a manual save, as opposed to a quicksave or autosave)
+fa ذخیره
+
+# ==== hud.txt ====
+
+# HUD, weapon and equipment wheels, sound captions and other in-game text.
+# Weapon, monster and item names follow the 2021 re-release's own translations.
+@ Axe
+fa تبر
+
+@ Shotgun
+fa شاتگان
+
+@ Double-Barrelled Shotgun
+fa شاتگان دولول
+
+@ Nailgun
+fa میخ‌انداز
+
+@ Super Nailgun
+fa میخ‌انداز سنگین
+
+@ Grenade Launcher
+fa نارنجک‌انداز
+
+@ Rocket Launcher
+fa موشک‌انداز
+
+@ Thunderbolt
+fa صاعقه‌افکن
+
+@ Portal Gun
+fa تفنگ پورتال
+
+@ Boomerang
+fa بومرنگ
+
+@ Stickybomb Launcher
+fa بمب‌انداز چسبنده
+
+@ Railgun
+fa ریل‌گان
+
+@ Hookshot
+fa قلاب‌انداز
+
+@ Gel Sprayer
+fa ژل‌پاش
+
+@ Powerwasher
+fa کارواش
+
+@ Night Vision Goggles
+fa عینک دید در شب
+
+@ Thermal Goggles
+fa عینک حرارتی
+
+@ Normal vision
+fa دید عادی
+
+@ ON
+fa روشن
+
+@ OFF
+fa خاموش
+
+@ {} (turn on)
+fa {} (روشن کردن)
+
+@ {} (turn off)
+fa {} (خاموش کردن)
+
+@ Move mouse to select, release to toggle
+fa برای انتخاب موس را حرکت دهید، برای روشن/خاموش رها کنید
+
+@ Move mouse to select, release to equip
+fa برای انتخاب موس را حرکت دهید، برای برداشتن رها کنید
+
+@ Release to toggle
+fa برای روشن/خاموش رها کنید
+
+@ Release to equip
+fa برای برداشتن رها کنید
+
+@ shells
+fa فشنگ
+
+@ nails
+fa میخ
+
+@ rockets
+fa موشک
+
+@ cells
+fa سلول
+
+@ Kills: {}/{}
+fa کشته‌ها: {}/{}
+
+@ Secrets: {}/{}
+fa رازها: {}/{}
+
+@ Time {}
+fa زمان {}
+
+@ Press any button to continue...
+fa برای ادامه هر دکمه‌ای را بزنید...
+
+@ Press any key to continue...
+fa برای ادامه هر کلیدی را بزنید...
+
+@ BULLET TIME
+fa زمان آهسته
+
+@ AUTO AIM
+fa هدف‌گیری خودکار
+
+@ Crosshair
+fa نشانگر
+
+@ + Marker
+fa + نشانگر اصابت
+
+@ Hit markers off
+fa نشانگر اصابت خاموش
+
+@ On target
+fa روی هدف
+
+@ On kill
+fa هنگام کشتن
+
+# sound captions
+@ [Secret found]
+fa [راز یافته شد]
+
+@ [Message]
+fa [پیام]
+
+@ [Switch activated]
+fa [سوئیچ فعال شد]
+
+@ [Key picked up]
+fa [کلید برداشته شد]
+
+@ [Rune picked up]
+fa [رون برداشته شد]
+
+@ [Teleporter]
+fa [تله‌پورتر]
+
+@ [Teleport]
+fa [تله‌پورت]
+
+@ [Splash]
+fa [شلپ]
+
+@ [Leaving water]
+fa [بیرون آمدن از آب]
+
+@ [Door]
+fa [در]
+
+@ [Platform moving]
+fa [حرکت سکو]
+
+@ [Button]
+fa [دکمه]
+
+@ [Health picked up]
+fa [سلامت برداشته شد]
+
+@ [Armor picked up]
+fa [زره برداشته شد]
+
+@ [Quad Damage wearing off]
+fa [پایان آسیب چهاربرابر]
+
+@ [Quad Damage]
+fa [آسیب چهاربرابر]
+
+@ [Pentagram wearing off]
+fa [پایان پنتاگرام]
+
+@ [Pentagram of Protection]
+fa [پنتاگرام محافظت]
+
+@ [Ring wearing off]
+fa [پایان حلقه]
+
+@ [Ring of Shadows]
+fa [حلقه‌ی سایه‌ها]
+
+@ [Biosuit wearing off]
+fa [پایان لباس زیستی]
+
+@ [Biosuit]
+fa [لباس زیستی]
+
+@ [Item picked up]
+fa [آیتم برداشته شد]
+
+@ [Weapon picked up]
+fa [سلاح برداشته شد]
+
+@ [Ammo picked up]
+fa [مهمات برداشته شد]
+
+@ [Explosion]
+fa [انفجار]
+
+@ [Grenade launched]
+fa [پرتاب نارنجک]
+
+@ [Grenade bounce]
+fa [جهش نارنجک]
+
+@ [Rocket fired]
+fa [شلیک موشک]
+
+@ [Nails fired]
+fa [شلیک میخ]
+
+@ [Lightning]
+fa [آذرخش]
+
+@ [Thunder]
+fa [تندر]
+
+@ [Enforcer alerted]
+fa [انفورسر هشیار شد]
+
+@ [Grunt alerted]
+fa [سرباز هشیار شد]
+
+@ [Rottweiler alerted]
+fa [روتوایلر هشیار شد]
+
+@ [Knight alerted]
+fa [شوالیه هشیار شد]
+
+@ [Death Knight alerted]
+fa [شوالیه‌ی مرگ هشیار شد]
+
+@ [Scrag alerted]
+fa [اسکرگ هشیار شد]
+
+@ [Ogre alerted]
+fa [اوگر هشیار شد]
+
+@ [Fiend alerted]
+fa [فیند هشیار شد]
+
+@ [Shambler alerted]
+fa [شمبلر هشیار شد]
+
+@ [Zombie groaning]
+fa [ناله‌ی زامبی]
+
+@ [Vore alerted]
+fa [وور هشیار شد]
+
+@ [Vore attacking]
+fa [حمله‌ی وور]
+
+@ [Spawn alerted]
+fa [اسپاون هشیار شد]
+
+@ [Rotfish]
+fa [ماهی گندیده]
+
+@ [Spawn]
+fa [اسپاون]
+
+@ [Chthon]
+fa [کتون]
+
+@ [Hard landing]
+fa [فرود سخت]
+
+@ [Drowning]
+fa [غرق شدن]
+
+@ [Gasping for air]
+fa [نفس‌نفس زدن]
+
+@ [Burning]
+fa [سوختن]
+
+@ [Telefrag]
+fa [تله‌فرگ]
+
+@ [Gibbed]
+fa [تکه‌تکه شد]
+
+# ==== console.txt ====
+
+# Console messages, shown translated only with con_translate 1 (Translate Console).
+# Cvar and command names stay as they are.
+@ Autosaved.
+fa ذخیره‌ی خودکار انجام شد.
+
+@ Game saved.
+fa بازی ذخیره شد.
+
+@ Can't save now.
+fa اکنون نمی‌توان ذخیره کرد.
+
+@ This game only autosaves (No Manual Saves modifier).
+fa این بازی فقط ذخیره‌ی خودکار دارد (تغییردهنده‌ی بدون ذخیره‌ی دستی).
+
+@ Loading {}...
+fa در حال بارگذاری {}...
+
+@ load failed: {}
+fa بارگذاری ناموفق: {}
+
+@ ERROR: autosave failed: {}
+fa خطا: ذخیره‌ی خودکار ناموفق بود: {}
+
+@ ERROR: couldn't open {}
+fa خطا: باز کردن {} ممکن نشد
+
+@ ERROR: couldn't open {}.
+fa خطا: باز کردن {} ممکن نشد.
+
+@ ERROR: couldn't write {}: {}
+fa خطا: نوشتن {} ممکن نشد: {}
+
+@ ERROR: couldn't create {}: {}
+fa خطا: ساختن {} ممکن نشد: {}
+
+@ couldn't write {}: {}
+fa نوشتن {} ممکن نشد: {}
+
+@ Wrote {}
+fa {} نوشته شد
+
+@ screenshot failed: {}
+fa گرفتن تصویر صفحه ناموفق بود: {}
+
+@ screenshot: {}
+fa تصویر صفحه: {}
+
+@ No readable save available. Select save or restart the level.
+fa ذخیره‌ی خوانایی در دسترس نیست. ذخیره‌ای انتخاب کنید یا مرحله را از نو شروع کنید.
+
+@ Unknown command "{}"
+fa فرمان ناشناخته «{}»
+
+@ couldn't exec {}
+fa اجرای {} ممکن نشد
+
+@ execing {}
+fa در حال اجرای {}
+
+@ execing config.cfg (inherited from {})
+fa در حال اجرای config.cfg (به ارث رسیده از {})
+
+@ execing config.cfg (mod defaults)
+fa در حال اجرای config.cfg (پیش‌فرض‌های ماد)
+
+@ execing default.cfg (built-in)
+fa در حال اجرای default.cfg (داخلی)
+
+@ {} cvars
+fa {} cvar
+
+@ {} commands
+fa {} فرمان
+
+@ Can't "cmd", not connected
+fa اجرای «cmd» ممکن نیست، متصل نیستید
+
+@ Looking for Quake servers...
+fa در حال جستجوی سرورهای Quake...
+
+@ Bad value, must be between 1 and 65534
+fa مقدار نادرست، باید بین 1 و 65534 باشد
+
+@ Couldn't handle music file {}
+fa پردازش فایل موسیقی {} ممکن نشد
+
+@ Bug report written to {}
+fa گزارش اشکال در {} نوشته شد
+
+@ bugreport: can't create {}: {}
+fa bugreport: ساختن {} ممکن نشد: {}
+
+@ graphics preset: {}
+fa پیش‌تنظیم گرافیکی: {}
+
+@ Presets (r_shader_preset <name>):
+fa پیش‌تنظیم‌ها (r_shader_preset <name>):
+
+@ Add your own .slangp presets under <game>/shaders/.
+fa پیش‌تنظیم‌های .slangp خود را در <game>/shaders/ بگذارید.
+
+@ no shader preset loaded (r_shader_preset)
+fa هیچ پیش‌تنظیم سایه‌زنی بارگذاری نشده (r_shader_preset)
+
+@ r_shader_preset: "{}" not found
+fa r_shader_preset: «{}» یافت نشد
+
+@ no parameter "{}" in this preset
+fa پارامتر «{}» در این پیش‌تنظیم نیست
+
+@ {} = {} (default {}, {}..{})
+fa {} = {} (پیش‌فرض {}، {}..{})
+
+@ Switching to {}...
+fa در حال رفتن به {}...
+
+@ game: no game dir "{}" in {}
+fa game: پوشه‌ی بازی «{}» در {} نیست
+
+@ game: can't find the engine executable
+fa game: فایل اجرایی موتور یافت نشد
+
+@ game: exec failed: {}
+fa game: اجرا ناموفق بود: {}
+
+@ game: launch failed: {}
+fa game: راه‌اندازی ناموفق بود: {}
+
+@ loaded {} in {}s
+fa {} در {} ثانیه بارگذاری شد
+
+@ No demos listed with startdemos
+fa هیچ دمویی با startdemos فهرست نشده
+
+@ Playing demo from {}.
+fa پخش دمو از {}.
+
+@ {} frames {} seconds {} fps
+fa {} فریم، {} ثانیه، {} fps
+
+@ Recording to {}.
+fa ضبط در {}.
+
+@ Completed demo
+fa دمو تمام شد
+
+@ Can't record during demo playback
+fa هنگام پخش دمو نمی‌توان ضبط کرد
+
+@ Relative pathnames are not allowed.
+fa مسیرهای نسبی مجاز نیستند.
+
+@ Can't record - try again when connected
+fa ضبط ممکن نیست - پس از اتصال دوباره تلاش کنید
+
+@ {} demo(s) in loop
+fa {} دمو در چرخه
+
+@ Not recording a demo.
+fa دمویی ضبط نمی‌شود.
+
+@ {} joined on a gamepad
+fa {} با دسته‌ی بازی پیوست
+
+@ goggles: needs a game started with Add-ons and Goggles enabled
+fa goggles: به بازی‌ای نیاز دارد که با افزونه‌ها و عینک فعال شروع شده باشد
+
+@ equip: needs a game started with Add-ons and Goggles enabled
+fa equip: به بازی‌ای نیاز دارد که با افزونه‌ها و عینک فعال شروع شده باشد
+
+@ UDP listening on port {}
+fa UDP روی درگاه {} گوش می‌دهد
+
+@ UDP bind on port {} failed: {}
+fa اتصال UDP به درگاه {} ناموفق بود: {}
+
+@ Connection accepted by {}
+fa اتصال توسط {} پذیرفته شد
+
+@ Connection failed: {}
+fa اتصال ناموفق: {}
+
+@ Couldn't resolve {}
+fa نشانی {} یافت نشد
+
+@ Connecting to {}...
+fa در حال اتصال به {}...
+
+@ Connecting to QuakeWorld server {}...
+fa در حال اتصال به سرور QuakeWorld {}...
+
+@ Disconnected: {}
+fa قطع شد: {}
+
+@ Server disconnected
+fa سرور قطع شد
+
+@ Client {} connected
+fa کلاینت {} متصل شد
+
+@ Client {} timed out
+fa مهلت کلاینت {} به پایان رسید
+
+@ Couldn't spawn server {}: {}
+fa راه‌اندازی سرور {} ممکن نشد: {}
+
+@ maxplayers can not be changed while a server is running.
+fa maxplayers را هنگام اجرای سرور نمی‌توان تغییر داد.
+
+@ You can't kick yourself!
+fa نمی‌توانید خودتان را بیرون کنید!
+
+@ Only the server may changelevel
+fa فقط سرور می‌تواند changelevel کند
+
+@ {} renamed to {}
+fa {} به {} تغییر نام داد

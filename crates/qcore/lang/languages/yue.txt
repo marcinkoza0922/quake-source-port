@@ -1,0 +1,3024 @@
+# yue: the port's own text; English keys from crates/qcore/lang/*.txt.
+# Format in crates/qcore/src/lang/catalog.rs; check with tools/lang_check.py.
+
+# ==== menu.txt ====
+
+# Options pages: page names, row labels and choice values.
+@ 10% speed
+yue 10%速度
+
+@ 2 split-screen
+yue 2人分割畫面
+
+@ 3 split-screen
+yue 3人分割畫面
+
+@ 4 split-screen
+yue 4人分割畫面
+
+@ 5 split-screen
+yue 5人分割畫面
+
+@ 6 split-screen
+yue 6人分割畫面
+
+@ 2D aiming
+yue 2D瞄準
+
+@ 2x monsters
+yue 2倍怪物
+
+@ 3x monsters
+yue 3倍怪物
+
+@ 4x monsters
+yue 4倍怪物
+
+@ 3D resolution
+yue 3D解像度
+
+@ 3D view
+yue 3D視角
+
+@ 8-bit Color
+yue 8位元色彩
+
+@ Accessibility
+yue 無障礙
+
+@ Acquisition Cone
+yue 鎖定錐角
+
+@ Activation
+yue 啟動方式
+
+@ Add a ringing room tail after the cue
+yue 喺提示音之後加返空間迴響
+
+@ Add delayed repeats after the cue
+yue 喺提示音之後加延遲重複
+
+@ Add saturation and distortion
+yue 加入飽和同失真效果
+
+@ Add-ons
+yue 附加功能
+
+@ Address
+yue 地址
+
+@ Adds fine noise to hide color banding
+yue 加啲細微雜訊嚟遮住色彩斷層
+
+@ Advanced Settings
+yue 進階設定
+
+@ Aim Assist
+yue 輔助瞄準
+
+@ Aim Rotation
+yue 瞄準轉向
+
+@ Aim Slowdown
+yue 瞄準減速
+
+@ Aim Style
+yue 瞄準方式
+
+@ All
+yue 全部
+
+@ All enemies
+yue 所有敵人
+
+@ Alt Fire (Add-ons)
+yue 副射擊（附加功能）
+
+@ Always Run
+yue 一直跑
+
+@ Ambient Occlusion
+yue 環境光遮蔽
+
+@ Ammo Counts
+yue 彈藥數量
+
+@ Ammo Counts Position
+yue 彈藥數量位置
+
+@ Ammo Pickups
+yue 彈藥拾取
+
+@ Anisotropic
+yue 各向異性
+
+@ Anti-aliasing
+yue 反鋸齒
+
+@ Apply To
+yue 套用到
+
+@ Armor
+yue 護甲
+
+@ Armor Position
+yue 護甲位置
+
+@ Ask
+yue 問我
+
+@ Attack
+yue 攻擊
+
+@ Audio
+yue 聲音
+
+@ Auto-aim
+yue 自動瞄準
+
+@ Auto-aim Settings
+yue 自動瞄準設定
+
+@ Autosave
+yue 自動存檔
+
+@ Autosave Settings
+yue 自動存檔設定
+
+@ Autosave Timer
+yue 自動存檔間隔
+
+@ Autosaves to Keep
+yue 保留自動存檔數
+
+@ Bass
+yue 低音
+
+@ Blip
+yue 嗶聲
+
+@ Blood Quality
+yue 血液質素
+
+@ Blood Splatter Settings
+yue 血跡飛濺設定
+
+@ Blue
+yue 藍
+
+@ Boomerang Settings
+yue 迴力鏢設定
+
+@ Boost or cut high frequencies in decibels
+yue 以分貝調高或者調低高頻
+
+@ Boost or cut low frequencies in decibels
+yue 以分貝調高或者調低低頻
+
+@ Brightness
+yue 光暗
+
+@ Bullet Time (Add-ons)
+yue 子彈時間（附加功能）
+
+@ Bullet Time Settings
+yue 子彈時間設定
+
+@ Button Glyphs
+yue 按鈕圖示
+
+@ Button Size
+yue 按鈕大小
+
+@ Camera
+yue 鏡頭
+
+@ Caustic Intensity
+yue 焦散強度
+
+@ Caustics
+yue 焦散
+
+@ Center
+yue 置中
+
+@ Center Message Position
+yue 中央訊息位置
+
+@ Center Message Time
+yue 中央訊息時間
+
+@ Center View
+yue 視角置中
+
+@ Change Color on Kill
+yue 殺敵時變色
+
+@ Change Color on Target
+yue 瞄準目標時變色
+
+@ Chime
+yue 鈴聲
+
+@ Click
+yue 咔嗒
+
+@ Clink
+yue 叮噹
+
+@ Coin
+yue 金幣
+
+@ Color
+yue 顏色
+
+@ Color Filter
+yue 色彩濾鏡
+
+@ Color of the grenade arc
+yue 榴彈軌跡嘅顏色
+
+@ Colored Lighting
+yue 彩色光照
+
+@ Connect
+yue 連線
+
+@ Contrast
+yue 對比
+
+@ Controls
+yue 控制
+
+@ Cooldown (ms)
+yue 冷卻（毫秒）
+
+@ Crosshair Outline
+yue 準星外框
+
+@ Crosshair Shape
+yue 準星形狀
+
+@ Crosshair Size
+yue 準星大小
+
+@ Current Ammo
+yue 而家彈藥
+
+@ Current Ammo Position
+yue 而家彈藥位置
+
+@ Customize This Game
+yue 自訂呢場遊戲
+
+@ Damage
+yue 傷害
+
+@ Damage Taken
+yue 受到傷害
+
+@ Debris
+yue 碎片
+
+@ Debris Quality
+yue 碎片質素
+
+@ Debris Settings
+yue 碎片設定
+
+@ Directional Damage
+yue 傷害方向
+
+@ Dithering
+yue 抖色
+
+@ Dodge / Dive (Add-ons)
+yue 閃避／飛撲（附加功能）
+
+@ Dragging up looks down instead of up
+yue 向上拖會變成向下望
+
+@ Drive
+yue 過載
+
+@ Dynamic Lights
+yue 動態光源
+
+@ Echo
+yue 回音
+
+@ Enemy Health
+yue 敵人生命值
+
+@ Enemy Wounds
+yue 敵人傷口
+
+@ Enhanced Blood Splatter
+yue 強化血跡飛濺
+
+@ Enhanced FX
+yue 強化特效
+
+@ Enhanced Models
+yue 強化模型
+
+@ Enhanced Particles
+yue 強化粒子
+
+@ Enhanced Water
+yue 強化水面
+
+@ Enhancements
+yue 強化功能
+
+@ Equipment Wheel (Add-ons)
+yue 裝備輪盤（附加功能）
+
+@ Exploding boxes throw metal shards
+yue 爆炸箱會噴出金屬碎片
+
+@ Explosion Damage
+yue 爆炸傷害
+
+@ Explosion Scorch Marks
+yue 爆炸焦痕
+
+@ Explosions scorch nearby solid surfaces
+yue 爆炸會燒燶附近嘅實體表面
+
+@ Explosives only
+yue 只限爆炸武器
+
+@ Extra Monsters
+yue 額外怪物
+
+@ Extra Per 10 Damage (ms)
+yue 每10點傷害追加（毫秒）
+
+@ FX Settings
+yue 特效設定
+
+@ Field of View
+yue 視野
+
+@ Firing never uses up ammo
+yue 開槍唔使彈藥
+
+@ First person
+yue 第一身
+
+@ Flick Time
+yue 甩桿時間
+
+@ Flight Speed
+yue 飛行速度
+
+@ Fog
+yue 霧
+
+@ Frag Limit
+yue 殺敵上限
+
+@ Freeze Duration (ms)
+yue 凍結時間（毫秒）
+
+@ GLQuake
+yue GLQuake
+
+@ Game Speed
+yue 遊戲速度
+
+@ Game Type
+yue 遊戲類型
+
+@ Gameplay
+yue 玩法
+
+@ Gameplay Modifiers
+yue 玩法調整
+
+@ Gel Quality
+yue 凝膠質素
+
+@ Gib Surface Painting
+yue 碎肉血漬
+
+@ Gibs
+yue 碎肉
+
+@ Gibs and heads tumble and bounce
+yue 碎肉同人頭會翻滾彈跳
+
+@ Goggle Glow Quality
+yue 夜視鏡光暈質素
+
+@ Goggle Intensity
+yue 夜視鏡強度
+
+@ Goggle Noise
+yue 夜視鏡雜訊
+
+@ Goggles Settings
+yue 夜視鏡設定
+
+@ Graphics
+yue 畫面
+
+@ Green
+yue 綠
+
+@ Grenade Arc
+yue 榴彈軌跡
+
+@ Grenade Arc Settings
+yue 榴彈軌跡設定
+
+@ Gun Kick
+yue 武器後座力
+
+@ Gyro
+yue 陀螺儀
+
+@ Gyro & Flick Stick
+yue 陀螺儀同甩桿
+
+@ Gyro Active
+yue 陀螺儀啟用
+
+@ Gyro Aiming
+yue 陀螺儀瞄準
+
+@ HUD
+yue HUD
+
+@ HUD Style
+yue HUD樣式
+
+@ Health
+yue 生命值
+
+@ Health Pickups
+yue 生命值拾取
+
+@ Health Position
+yue 生命值位置
+
+@ Health Regeneration
+yue 生命值回復
+
+@ Hit & Kill Sounds
+yue 命中同殺敵音效
+
+@ Hit Doors & Lifts
+yue 俾門同升降機推
+
+@ Hit Markers
+yue 命中標記
+
+@ Hit Sound
+yue 命中音效
+
+@ Hitmarker Size
+yue 命中標記大小
+
+@ Hitmarker Type
+yue 命中標記類型
+
+@ Hitstop Advanced
+yue 命中停頓進階
+
+@ Hitstop Settings
+yue 命中停頓設定
+
+@ Hold
+yue 撳住
+
+@ Hold lock-on
+yue 撳住鎖定
+
+@ Hook Enemies
+yue 勾住敵人
+
+@ Hook Metal
+yue 勾住金屬
+
+@ Hook Stone
+yue 勾住石頭
+
+@ Hook Wood
+yue 勾住木頭
+
+@ Hooking an enemy pulls you to it
+yue 勾住敵人會將你扯過去
+
+@ Hookshot Range
+yue 鉤爪射程
+
+@ Hookshot Settings
+yue 鉤爪設定
+
+@ Host Game
+yue 開遊戲
+
+@ How far the hook flies before it retracts
+yue 鉤爪收返之前可以飛幾遠
+
+@ How visible the on-screen controls are
+yue 螢幕操控按鈕有幾清楚
+
+@ Impact Lifetime
+yue 彈痕留存時間
+
+@ Infinite Ammo
+yue 無限彈藥
+
+@ Input
+yue 輸入
+
+@ Input Scale
+yue 輸入縮放
+
+@ Interpolate Animation
+yue 動畫插補
+
+@ Interpolate Movement
+yue 移動插補
+
+@ Invert Look
+yue 反轉視角
+
+@ Invert Mouse
+yue 反轉滑鼠
+
+@ Invert Stick
+yue 反轉搖桿
+
+@ Jet Quality
+yue 水柱質素
+
+@ Join Game
+yue 加入遊戲
+
+@ Jump / Swim Up
+yue 跳／向上游
+
+@ Jump again in mid-air
+yue 喺半空再跳多次
+
+@ Jumps
+yue 跳躍次數
+
+@ Keys & Powerups
+yue 鎖匙同強化道具
+
+@ Keys & Powerups Position
+yue 鎖匙同強化道具位置
+
+@ Kill Bonus (x)
+yue 殺敵加成（倍）
+
+@ Kill Sound
+yue 殺敵音效
+
+@ Knock
+yue 敲擊
+
+@ Left
+yue 左
+
+@ Length of the motion blur streaks
+yue 動態模糊拖影嘅長度
+
+@ Lifetime (seconds)
+yue 留存時間（秒）
+
+@ Live Portal Views
+yue 即時傳送門畫面
+
+@ Live View Distance
+yue 即時畫面距離
+
+@ Local Players
+yue 本機玩家
+
+@ Local red wounds follow enemy animation
+yue 紅色傷口會跟住敵人動畫
+
+@ Lock Indicator
+yue 鎖定指示
+
+@ Long falls don't hurt
+yue 高處跌落唔會受傷
+
+@ Longest Freeze (ms)
+yue 最長凍結（毫秒）
+
+@ Look Down
+yue 向下望
+
+@ Look Speed
+yue 視角速度
+
+@ Look Up
+yue 向上望
+
+@ Main Menu Music
+yue 主選單音樂
+
+@ Max FPS
+yue 最高FPS
+
+@ Max Players
+yue 最多玩家數
+
+@ Maximum Impacts
+yue 最多彈痕數
+
+@ Maximum Marks
+yue 最多痕跡數
+
+@ Maximum Range
+yue 最大射程
+
+@ Melee only
+yue 只限近戰
+
+@ Message Background
+yue 訊息背景
+
+@ Message Text Size
+yue 訊息文字大小
+
+@ Messages & Captions
+yue 訊息同字幕
+
+@ Meter Duration (real seconds)
+yue 計量條時間（真實秒數）
+
+@ Minimum Damage
+yue 最低傷害
+
+@ Mode
+yue 模式
+
+@ Modern Console
+yue 現代控制台
+
+@ Modern HUD Layout
+yue 現代HUD版面
+
+@ Most recent save
+yue 最新存檔
+
+@ Motion Blur
+yue 動態模糊
+
+@ Motion Blur Amount
+yue 動態模糊強度
+
+@ Motion Blur Quality
+yue 動態模糊質素
+
+@ Mouse & Keyboard
+yue 滑鼠同鍵盤
+
+@ Mouse Speed
+yue 滑鼠速度
+
+@ Move Back
+yue 後退
+
+@ Move Forward
+yue 前進
+
+@ Music Volume
+yue 音樂音量
+
+@ Next Weapon
+yue 下一件武器
+
+@ No Drowning
+yue 唔會遇溺
+
+@ No Fall Damage
+yue 冇跌落傷害
+
+@ No Manual Saves
+yue 禁止手動存檔
+
+@ No Self Damage
+yue 冇自身傷害
+
+@ Noise Filter
+yue 雜訊過濾
+
+@ Normal Color
+yue 一般顏色
+
+@ Notify Message Position
+yue 通知訊息位置
+
+@ Notify Message Time
+yue 通知訊息時間
+
+@ Number of splatter rays per blood impact
+yue 每次血液噴濺嘅飛濺射線數
+
+@ Off
+yue 關閉
+
+@ On Death
+yue 死亡時
+
+@ On Kill Color
+yue 殺敵時顏色
+
+@ On Target Color
+yue 瞄準目標時顏色
+
+@ Opacity
+yue 不透明度
+
+@ Opacity of the grenade arc
+yue 榴彈軌跡嘅不透明度
+
+@ Pants Color
+yue 褲顏色
+
+@ Particle Quality
+yue 粒子質素
+
+@ Particles
+yue 粒子
+
+@ Physical Nail Impacts
+yue 物理鐵釘彈痕
+
+@ Pistol Start
+yue 手槍開局
+
+@ Pitch
+yue 音高
+
+@ Pitch Sensitivity
+yue 垂直靈敏度
+
+@ Playback Speed
+yue 播放速度
+
+@ Player Setup
+yue 玩家設定
+
+@ Pop
+yue 啵聲
+
+@ Portal Gun Settings
+yue 傳送門槍設定
+
+@ Portal Recursion
+yue 傳送門遞歸
+
+@ Portal View Quality
+yue 傳送門畫面質素
+
+@ Preview Sound
+yue 試聽音效
+
+@ Previous Weapon
+yue 上一件武器
+
+@ Projectile Shotguns Settings
+yue 實體彈散彈槍設定
+
+@ Projectile Speed (units/s)
+yue 彈體速度（單位/秒）
+
+@ Purple
+yue 紫
+
+@ Push
+yue 衝力
+
+@ Push Strength
+yue 推力強度
+
+@ Quick Load
+yue 快速載入
+
+@ Quick Save
+yue 快速存檔
+
+@ Railgun Settings
+yue 磁軌炮設定
+
+@ Ranged only
+yue 只限遠程
+
+@ Reacquire While Held
+yue 撳住時重新鎖定
+
+@ Red
+yue 紅
+
+@ Reduce Motion
+yue 減少動態效果
+
+@ Regen (seconds per second)
+yue 回復（每秒秒數）
+
+@ Render Scale
+yue 渲染比例
+
+@ Reverb
+yue 殘響
+
+@ Right
+yue 右
+
+@ Ripple Intensity
+yue 波紋強度
+
+@ Ripples
+yue 波紋
+
+@ Roll Sensitivity
+yue 翻滾靈敏度
+
+@ Rumble
+yue 震動
+
+@ Run
+yue 跑
+
+@ Save on All Enemies Killed
+yue 殺晒所有敵人時存檔
+
+@ Save on All Secrets Found
+yue 搵齊所有秘密時存檔
+
+@ Save on Level Entry
+yue 入關時存檔
+
+@ Save on Secret Found
+yue 搵到秘密時存檔
+
+@ Scoreboard
+yue 計分板
+
+@ Screen Flashes
+yue 螢幕閃光
+
+@ Screen Shader
+yue 螢幕著色器
+
+@ Screen Shake
+yue 螢幕震動
+
+@ Search LAN
+yue 搜尋區域網絡
+
+@ Seconds a center-screen message stays up
+yue 畫面中央訊息停留幾多秒
+
+@ See Through Portals
+yue 睇穿傳送門
+
+@ See-through Teleporters
+yue 睇得穿嘅傳送點
+
+@ Shirt Color
+yue 衫顏色
+
+@ Shotgun Bullet Decals
+yue 散彈彈孔
+
+@ Shoulder left
+yue 左膊頭視角
+
+@ Shoulder right
+yue 右膊頭視角
+
+@ Show FPS
+yue 顯示FPS
+
+@ Show Face
+yue 顯示塊面
+
+@ Shrapnel
+yue 破片
+
+@ Size of on-screen messages and captions
+yue 畫面訊息同字幕嘅大小
+
+@ Skill
+yue 難度
+
+@ Sky Fog
+yue 天空霧
+
+@ Smooths the stepped movement of monsters
+yue 等怪物嘅一格格移動順滑啲
+
+@ Sound
+yue 聲音
+
+@ Sound Captions
+yue 聲音字幕
+
+@ Sound Volume
+yue 音效音量
+
+@ Speed Blur
+yue 速度模糊
+
+@ Splashes
+yue 水花
+
+@ Splatter Amount
+yue 飛濺量
+
+@ Splatter Size
+yue 飛濺大小
+
+@ Start Game
+yue 開始遊戲
+
+@ Staying underwater doesn't hurt
+yue 留喺水底唔會受傷
+
+@ Stick Look Pitch
+yue 搖桿垂直視角
+
+@ Stick Look Yaw
+yue 搖桿水平視角
+
+@ Strafe Left
+yue 向左橫移
+
+@ Strafe Right
+yue 向右橫移
+
+@ Strength of the surface swell and rings
+yue 水面起伏同漣漪嘅強度
+
+@ Stun Duration
+yue 暈眩時間
+
+@ Style
+yue 樣式
+
+@ Supersampling
+yue 超取樣
+
+@ Surface Hit Effects
+yue 表面命中效果
+
+@ Swim Down
+yue 向下潛
+
+@ Targets
+yue 目標
+
+@ Teamplay
+yue 團隊模式
+
+@ Texture Filter
+yue 材質過濾
+
+@ Third person
+yue 第三身
+
+@ Thud
+yue 悶響
+
+@ Tick
+yue 滴答
+
+@ Time Limit
+yue 時間限制
+
+@ Time Stretch
+yue 時間延展
+
+@ Toggle Attack
+yue 切換攻擊
+
+@ Toggle Run
+yue 切換跑步
+
+@ Toggle auto-aim
+yue 切換自動瞄準
+
+@ Touch Controls
+yue 觸控操作
+
+@ Touchscreen
+yue 觸控螢幕
+
+@ Tough Enemy Health
+yue 強敵生命值
+
+@ Tough enemies only
+yue 只限強敵
+
+@ Trail Colour
+yue 軌跡顏色
+
+@ Translate Console
+yue 翻譯控制台
+
+@ Translucent Water
+yue 半透明水面
+
+@ Treble
+yue 高音
+
+@ Turn Left
+yue 向左轉
+
+@ Turn Right
+yue 向右轉
+
+@ Underwater FX
+yue 水底特效
+
+@ Use Bullet Time Meter
+yue 用子彈時間計量條
+
+@ VSync
+yue 垂直同步
+
+@ View Bob
+yue 視角晃動
+
+@ Viewmodels
+yue 武器模型
+
+@ Volume
+yue 音量
+
+@ Water Opacity
+yue 水面不透明度
+
+@ Water Quality
+yue 水面質素
+
+@ Water Settings
+yue 水面設定
+
+@ Weapon Wheel
+yue 武器輪盤
+
+@ Weapon Wheel Slowdown
+yue 武器輪盤減速
+
+@ Weapons
+yue 武器
+
+@ Weapons Position
+yue 武器位置
+
+@ Where center-screen messages appear
+yue 畫面中央訊息喺邊度出現
+
+@ Where pickup and event messages appear
+yue 拾取同事件訊息喺邊度出現
+
+@ White
+yue 白
+
+@ Yaw Sensitivity
+yue 水平靈敏度
+
+@ Yellow
+yue 黃
+
+# lowercase choice values
+@ T
+yue T
+
+@ always
+yue 一直
+
+@ auto
+yue 自動
+
+@ banded
+yue 色階
+
+@ borderless
+yue 無邊框
+
+@ bottom center
+yue 下方中間
+
+@ bottom left
+yue 左下
+
+@ bottom right
+yue 右下
+
+@ box
+yue 方框
+
+@ broken square
+yue 斷線方框
+
+@ classic
+yue 經典
+
+@ coarse
+yue 粗略
+
+@ cooperative
+yue 合作
+
+@ cross
+yue 十字
+
+@ cross + dot
+yue 十字＋點
+
+@ cyan
+yue 青
+
+@ dashed
+yue 虛線
+
+@ deathmatch
+yue 死鬥
+
+@ deuteranopia
+yue 綠色盲
+
+@ diagonal streaks
+yue 斜向條紋
+
+@ diamond
+yue 菱形
+
+@ dot
+yue 點
+
+@ double
+yue 二段跳
+
+@ double chevrons
+yue 雙V形
+
+@ double diagonals
+yue 雙斜線
+
+@ easy
+yue 簡單
+
+@ fine
+yue 精細
+
+@ fit output
+yue 配合輸出
+
+@ flick stick
+yue 甩桿
+
+@ fullscreen
+yue 全螢幕
+
+@ gap cross
+yue 空心十字
+
+@ green
+yue 綠
+
+@ grey
+yue 灰
+
+@ half speed
+yue 半速
+
+@ hard
+yue 困難
+
+@ high
+yue 高
+
+@ huge
+yue 特大
+
+@ immersive
+yue 沉浸
+
+@ intense
+yue 強烈
+
+@ large
+yue 大
+
+@ larger
+yue 較大
+
+@ largest
+yue 最大
+
+@ linear
+yue 線性
+
+@ low
+yue 低
+
+@ lower
+yue 下方
+
+@ magenta
+yue 洋紅
+
+@ medium
+yue 中
+
+@ middle
+yue 中間
+
+@ middle left
+yue 左側中間
+
+@ middle right
+yue 右側中間
+
+@ modern
+yue 現代
+
+@ nearest
+yue 最近鄰
+
+@ nightmare
+yue 夢魘
+
+@ nintendo
+yue Nintendo
+
+@ no team damage
+yue 冇隊友傷害
+
+@ none
+yue 冇
+
+@ normal
+yue 普通
+
+@ off
+yue 關閉
+
+@ off while held
+yue 撳住時關閉
+
+@ on
+yue 開啟
+
+@ only while held
+yue 淨係撳住時
+
+@ playstation
+yue PlayStation
+
+@ protanopia
+yue 紅色盲
+
+@ quarter speed
+yue 四分之一速
+
+@ red
+yue 紅
+
+@ short diagonals
+yue 短斜線
+
+@ single
+yue 一段跳
+
+@ small
+yue 細
+
+@ solid
+yue 實線
+
+@ spectacle
+yue 華麗
+
+@ subtle
+yue 輕微
+
+@ team damage
+yue 隊友傷害
+
+@ top center
+yue 上方中間
+
+@ top left
+yue 左上
+
+@ top right
+yue 右上
+
+@ triple
+yue 三段跳
+
+@ tritanopia
+yue 藍色盲
+
+@ upper
+yue 上方
+
+@ white
+yue 白
+
+@ whole screen
+yue 成個畫面
+
+@ windowed
+yue 視窗
+
+@ xbox
+yue Xbox
+
+@ yellow
+yue 黃
+
+# ==== tooltips.txt ====
+
+# Options help lines (tooltips) and reasons for disabled rows.
+@ 2D aiming turns the view continuously with the right stick; flick stick snaps the view to where you push the stick, then turning the stick rotates it
+yue 2D瞄準用右搖桿連續轉動視角；甩桿會令視角即刻轉去你推搖桿嘅方向，之後轉搖桿就可以旋轉視角
+
+@ 3D resolution relative to the window; the UI stays sharp
+yue 相對於視窗嘅3D解像度；介面保持清晰
+
+@ 3D view keeps the HUD and menus sharp; whole screen runs them through the shader too
+yue 3D視角令HUD同選單保持清晰；成個畫面就連佢哋都會經過著色器
+
+@ A Quake III style railgun: a slug that pierces every enemy on its line, using 2 cells a shot and refiring every 1.5 s; select it through its assigned weapon slot (Add-ons)
+yue Quake III風格嘅磁軌炮：彈頭會貫穿直線上所有敵人，每發用2粒電池，每1.5秒先可以再射；用指定嘅武器欄位揀佢（附加功能）
+
+@ A Zelda-style hookshot: fire sends a chain hook out; it latches onto hookable surfaces or enemies and reels you in; fire again to let go
+yue 薩爾達風格嘅鉤爪：射擊會射出鎖鏈鉤，勾住可以勾嘅表面或者敵人之後將你扯過去；再射一次就放手
+
+@ Also translates the engine's console messages; off keeps them in English
+yue 連引擎嘅控制台訊息都一齊翻譯；關閉就保留英文
+
+@ Automatically acquire another enemy while holding Lock-on after losing a target
+yue 撳住鎖定嗰陣，失去目標之後自動鎖定另一個敵人
+
+@ Blends between animation frames of monsters and weapons
+yue 喺怪物同武器嘅動畫影格之間順滑過渡
+
+@ Blood stains surfaces and bodies; cosmetic, independent of particle packs
+yue 血會沾到表面同屍體上面；純粹外觀效果，同粒子包無關
+
+@ Bloom glow around bright lights and heat sources; medium uses 4 taps, high uses 8, low disables halo taps
+yue 明亮光源同熱源周圍嘅泛光；中用4次取樣，高用8次，低就停用光暈取樣
+
+@ Blurs fast-moving monsters, projectiles and doors (not camera turns)
+yue 模糊快速移動嘅怪物、投射物同門（唔包鏡頭轉動）
+
+@ Blurs the screen edges during fast falls and launches; keeps the centre clear. Reduce Motion disables it
+yue 快速跌落同彈射時模糊畫面邊緣，中間保持清晰。「減少動態效果」會停用佢
+
+@ Brightness of the underwater light patterns
+yue 水底光紋嘅光度
+
+@ Caps mark count, lifetime, airborne droplets and wound/gib painting; low skips enemy wounds and gib trails
+yue 限制痕跡數量、留存時間、空中血滴同傷口／碎肉血漬；低會略過敵人傷口同碎肉血跡
+
+@ Caps shader input at output size so 200% render scale keeps 3D sharpness without 4x shader cost; low scales stay low-res
+yue 將著色器輸入限制喺輸出尺寸，等200%渲染比例保持3D清晰度又唔使4倍著色器負擔；低比例就維持低解像度
+
+@ Classic: the original status bar; modern: compact elements at the screen edges
+yue 經典：原版狀態列；現代：擺喺畫面邊緣嘅精簡元素
+
+@ Coat atlas resolution, rebuild rate and shader detail: low builds smaller coats less often with fast shading; high uses full detail
+yue 塗層圖集解像度、重建頻率同著色細節：低會用較低頻率建立較細嘅塗層同用快速著色；高就用完整細節
+
+@ Colour of the railgun's spiral trail; split-screen players each get the next colour along
+yue 磁軌炮螺旋軌跡嘅顏色；分割畫面入面每位玩家順序用下一隻顏色
+
+@ Damage the railgun deals to each enemy it passes through (Quake III: 100)
+yue 磁軌炮對每個貫穿嘅敵人造成嘅傷害（Quake III：100）
+
+@ Dark backdrop behind on-screen messages for readability
+yue 喺畫面訊息後面加深色底，方便閱讀
+
+@ Dark border keeps the crosshair visible on any background
+yue 深色外框令準星喺任何背景都睇得清楚
+
+@ Darkens corners and contact areas where geometry meets; higher quality is sharper
+yue 令幾何體交接嘅角落同接觸位變暗；質素越高越銳利
+
+@ Debris lands on and is carried or shoved by doors, lifts and platforms
+yue 碎片會跌落門、升降機同平台上面，俾佢哋載住或者推開
+
+@ Detail for caustics, ripples and splashes: low uses smaller budgets and shorter view distance; high uses larger budgets and farther view distance
+yue 焦散、波紋同水花嘅細節：低用較少資源同較短可視距離；高用較多資源同較遠可視距離
+
+@ Disabled while Enhanced Particles is on: its particles replace the GLQuake and Classic styles
+yue 「強化粒子」開咗時停用：佢嘅粒子會取代GLQuake同經典樣式
+
+@ Disabled while Enhanced Water is on: its own underwater effects replace the classic and GLQuake view warps
+yue 「強化水面」開咗時停用：佢自己嘅水底效果會取代經典同GLQuake嘅畫面扭曲
+
+@ Draw the predicted grenade path as a solid or dashed line
+yue 用實線或者虛線畫出預測嘅榴彈路線
+
+@ Draw the view out of the linked portal inside each portal; off shows flat discs (fastest)
+yue 喺每個傳送門入面畫出相連傳送門另一邊嘅畫面；關閉就顯示平面圓盤（最快）
+
+@ Droplets spray up when things enter or leave water, slime or lava
+yue 物件出入水、黏液或者岩漿時會濺起水滴
+
+@ Emulates the original 8-bit palette of software rendering
+yue 模擬軟件渲染原本嘅8位元調色盤
+
+@ Every level starts with only the shotgun and axe, as if started fresh
+yue 每個關卡開始時淨係得散彈槍同斧頭，好似重新開始咁
+
+@ Explosion damage for each remotely detonated sticky bomb
+yue 每粒遙控引爆黏彈嘅爆炸傷害
+
+@ Extra freeze milliseconds for every 10 damage dealt, so heavy hits stop longer
+yue 每造成10點傷害追加嘅凍結毫秒數，等重擊停得耐啲
+
+@ First person, a third-person camera centered behind the player, or one over the right or left shoulder; third person hides viewmodels
+yue 第一身、喺玩家正後面嘅第三身鏡頭，或者越過右膊頭或左膊頭嘅鏡頭；第三身會隱藏武器模型
+
+@ Flash the selected marker on confirmed hits; colors are shared with the crosshair
+yue 確認命中時閃出所揀嘅標記；顏色同準星共用
+
+@ Freeze for every enemy, or only for enemies that were tough before the hit
+yue 對所有敵人凍結，定係淨係對命中前屬於強敵嘅敵人凍結
+
+@ Freeze the game briefly when you damage an enemy; single player with add-ons only
+yue 傷到敵人時令遊戲短暫凍結；只限開咗附加功能嘅單人遊戲
+
+@ Gibs tumble and barrels throw shrapnel; shots and blasts push them (cosmetic only)
+yue 碎肉會翻滾、油桶會噴出破片；射擊同爆炸會推動佢哋（純粹外觀效果）
+
+@ Health an enemy must have had before the hit to count as tough
+yue 敵人喺命中前要有幾多生命值先算強敵
+
+@ Hits dealing less damage than this do not freeze the game; the default 10 skips nails and shotgun pellets
+yue 傷害低過呢個數值嘅命中唔會凍結遊戲；預設值10會略過鐵釘同散彈彈丸
+
+@ Hold fire and sweep the crosshair over monsters to queue them, release to throw: it stuns each in turn and flies back; alt-fire clears the queue
+yue 撳住射擊再將準星掃過怪物嚟排隊，放手就擲：迴力鏢會逐個擊暈目標再飛返嚟；副射擊可以清除排隊
+
+@ Hold: keep Lock-on held. Toggle: press Auto-aim Toggle to enable automatic acquisition. Click look stick to switch targets
+yue 撳住：一直撳住鎖定。切換：撳自動瞄準切換鍵啟用自動鎖定。撳落視角搖桿可以轉目標
+
+@ How close an enemy must be to the crosshair for automatic acquisition in toggle mode (degrees)
+yue 切換模式下，敵人要離準星幾近先會自動鎖定（度）
+
+@ How far the view tilts up and down when you tilt the controller (pitch axis)
+yue 傾側手掣時視角上下傾斜嘅幅度（俯仰軸）
+
+@ How far the view turns left and right when you turn the controller (yaw axis)
+yue 轉動手掣時視角左右轉動嘅幅度（偏航軸）
+
+@ How far the view turns when you drag on the right half of the screen
+yue 喺螢幕右半邊拖動時視角轉動嘅幅度
+
+@ How fast the boomerang flies (units per second)
+yue 迴力鏢飛行速度（每秒單位數）
+
+@ How hard shots and explosions push debris around
+yue 射擊同爆炸推動碎片嘅力度
+
+@ How hard the Powerwasher's water pushes enemies
+yue 高壓清洗機水柱推動敵人嘅力度
+
+@ How long a hit freezes the game, in milliseconds
+yue 命中時遊戲凍結嘅時間（毫秒）
+
+@ How strongly fog covers the sky when fog is on
+yue 開咗霧時霧氣遮住天空嘅程度
+
+@ How the view distorts underwater: Classic ripples the whole screen like software Quake, GLQuake slowly stretches and squashes the view
+yue 水底畫面嘅扭曲方式：經典會好似軟件版Quake咁令成個畫面波動，GLQuake就慢慢拉闊同壓扁畫面
+
+@ Ignores gyro rotation slower than this many degrees per second, to hide hand tremor
+yue 忽略低過每秒呢個度數嘅陀螺儀轉動，用嚟消除手震
+
+@ Immersive: appears for a few seconds only when its value changes
+yue 沉浸：淨係喺數值變化時顯示幾秒
+
+@ Keeps textures sharp on floors and walls seen at steep angles
+yue 令斜角睇到嘅地板同牆身材質保持清晰
+
+@ Lights from rockets, muzzle flashes and explosions brighten nearby walls
+yue 火箭、槍口火光同爆炸嘅光會照亮附近牆身
+
+@ Liquid surfaces swell and ring out where things move through them
+yue 物件穿過液體表面時會產生起伏同漣漪
+
+@ Lobs sticky bombs (rockets ammo) that cling to walls, doors and monsters; alt-fire detonates them all
+yue 拋出會黐住牆、門同怪物嘅黏彈（用火箭彈藥）；副射擊可以一次過引爆晒
+
+@ Look of the classic particles: GLQuake draws soft round dots, Classic draws square pixels like software Quake
+yue 經典粒子嘅外觀：GLQuake畫柔和圓點，經典就好似軟件版Quake咁畫方形像素
+
+@ Low skips the background smear halo and uses fewer blur samples; high keeps the full halo and smoother streaks
+yue 低會略過背景拖影光暈同用較少模糊取樣；高就保留完整光暈同更順滑嘅拖影
+
+@ Low: hard particle edges, half the scripted particles and fewer hit sparks. Medium: soft edges. High: soft edges checked per MSAA sample, most hit sparks
+yue 低：粒子邊緣銳利、腳本粒子減半同命中火花較少。中：柔和邊緣。高：逐個MSAA取樣檢查柔和邊緣，命中火花最多
+
+@ Marks fade out before expiring; oldest marks are recycled at the limit
+yue 痕跡會喺消失前淡出；到咗上限就會回收最舊嘅痕跡
+
+@ Max nested portal reflections to draw; each level redraws the scene
+yue 畫巢狀傳送門畫面嘅最多層數；每一層都會重新畫一次場景
+
+@ Max portals per screen with a live view; each one redraws the scene
+yue 每個畫面顯示即時畫面嘅傳送門上限；每一個都會重新畫一次場景
+
+@ Maximum distance for acquiring and keeping an enemy locked
+yue 鎖定同維持鎖定敵人嘅最大距離
+
+@ Minimum gap between freezes, so shotgun pellets and rapid fire count once; kills ignore it
+yue 兩次凍結之間嘅最短間隔，等散彈彈丸同連射只計一次；殺敵唔受呢個限制
+
+@ Modern terminal console with autocomplete popup, history search, ANSI colors, bash shell and piping; off uses the classic Quake console
+yue 現代終端控制台，有自動完成彈出視窗、歷史搜尋、ANSI色彩、bash殼層同管線；關閉就用經典Quake控制台
+
+@ Monsters take proportionally less damage at higher values; above 100% is harder
+yue 數值越高，怪物受到嘅傷害按比例越少；高過100%會更難
+
+@ Moving gibs leave blood on surfaces they touch
+yue 郁緊嘅碎肉會喺掂到嘅表面留低血跡
+
+@ Multiplier on the freeze when the hit kills the enemy; 1 means no extra
+yue 命中殺死敵人時嘅凍結倍率；1即係唔額外增加
+
+@ Multiplies ammo from pickups (up to the normal carry limit); below 100% is harder
+yue 倍增拾取嘅彈藥（唔超過一般攜帶上限）；低過100%會更難
+
+@ Multiplies health from pickups (up to 100, or the item's own limit); below 100% is harder
+yue 倍增拾取嘅生命值（最多100，或者道具本身嘅上限）；低過100%會更難
+
+@ Nails stick to wood and bodies; hard surfaces deflect them to the floor
+yue 鐵釘會插喺木同屍體上面；硬嘅表面會令鐵釘彈落地
+
+@ Nearest keeps crisp classic pixels; linear smooths textures
+yue 最近鄰保留清晰嘅經典像素；線性令材質順滑
+
+@ New Game: Add-ons
+yue 新遊戲：附加功能
+
+@ New Game: Customize
+yue 新遊戲：自訂
+
+@ Night vision: how much dark areas are brightened; thermal: how strongly heat stands out
+yue 夜視：暗位提亮嘅程度；熱能：熱源突出嘅程度
+
+@ Night-vision and thermal goggles, cycle normal, night vision and thermal with Change Goggles (Add-ons), or use the Equipment Wheel
+yue 夜視同熱能護目鏡，可以用「切換護目鏡」（附加功能）喺一般、夜視同熱能之間循環，或者用裝備輪盤
+
+@ No single freeze lasts longer than this, however much damage or kill bonus adds
+yue 無論傷害或者殺敵加成加幾多，單次凍結都唔會超過呢個時間
+
+@ Oldest marks and nails are recycled at this shared limit
+yue 到咗呢個共用上限就會回收最舊嘅痕跡同鐵釘
+
+@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
+yue 螢幕搖桿同按鈕：自動會喺觸碰後顯示，用其他裝置時就隱藏
+
+@ Only autosaves: quicksaves and the Save menu are off
+yue 淨係自動存檔：停用快速存檔同存檔選單
+
+@ Place every weapon at the center, right or left of the view, or hide all viewmodels
+yue 將所有武器擺喺畫面中間、右邊或者左邊，或者隱藏所有武器模型
+
+@ Play your chosen hit or kill cue when you damage an enemy
+yue 傷到敵人時播放所揀嘅命中或者殺敵提示音
+
+@ Playback speed: faster sounds shorter and higher
+yue 播放速度：越快聲音越短、越高
+
+@ Plays the Quake theme in the main menu when no game is running
+yue 冇玩緊遊戲時，喺主選單播Quake主題曲
+
+@ Portals farther away than this are drawn as flat discs
+yue 超過呢個距離嘅傳送門會畫成平面圓盤
+
+@ Press attack once to keep firing, again to stop
+yue 撳一下攻擊就一直射，再撳一下就停
+
+@ Press run once to switch between running and walking
+yue 撳一下跑步就喺跑同行之間切換
+
+@ Raise or lower the tone independently of sound length
+yue 調高或者調低音調，唔影響聲音長度
+
+@ Red screen edges show where damage came from: top is front, bottom is behind; Screen Flashes controls their strength
+yue 紅色畫面邊緣顯示傷害嚟源：上面係前面，下面係後面；強度由「螢幕閃光」控制
+
+@ Replaces the classic dot particles with glowing sparks, smoke and blood; mods with their own particle effects keep them
+yue 用發光火花、煙同血取代經典點狀粒子；有自己粒子效果嘅模組會保留佢哋嘅效果
+
+@ Resolution and detail inside portal and teleporter views; lower tiers trim nested effects
+yue 傳送門同傳送點畫面入面嘅解像度同細節；較低等級會削減巢狀效果
+
+@ Rippling light patterns on surfaces under water and slime
+yue 水同黏液下面表面嘅波動光紋
+
+@ Scales all damage you take; above 100% is harder
+yue 調整你受到嘅所有傷害；高過100%會更難
+
+@ Screen edge for this element; elements on the same spot stack
+yue 呢個元素所在嘅畫面邊緣；同一位置嘅元素會疊埋一齊
+
+@ Seconds a monster hit by the boomerang stays stunned
+yue 俾迴力鏢打中嘅怪物暈幾多秒
+
+@ Seconds impact marks and stuck nails stay before fading out; independent of Particle Quality
+yue 彈痕同插住嘅鐵釘淡出前留幾多秒；同粒子質素無關
+
+@ Seconds messages at the top of the screen stay up
+yue 畫面上方訊息停留幾多秒
+
+@ Seconds the flick stick snap takes; lower is faster
+yue 甩桿轉向需要嘅秒數；越低越快
+
+@ See through enhanced water; enables Water Opacity
+yue 睇得穿強化水面；啟用「水面不透明度」
+
+@ Sensor grain, scanlines and flicker of the goggle image
+yue 護目鏡畫面嘅感光顆粒、掃描線同閃爍
+
+@ Shades every anti-aliasing sample; needs Anti-aliasing on
+yue 對每個反鋸齒取樣做著色；要開咗反鋸齒
+
+@ Shifts colors so they stay distinct for the chosen color blindness
+yue 調整色彩，等所揀類型嘅色盲都分得清
+
+@ Shotgun hits leave small surface marks (cosmetic only)
+yue 散彈命中會喺表面留低細彈孔（純粹外觀效果）
+
+@ Show corner ticks at screen centre while locked, even with Crosshair off
+yue 鎖定時喺畫面中間顯示角標，就算準星關咗都會顯示
+
+@ Show where grenades and other arcing shots will fly, bounce and land; local play only, not in deathmatch
+yue 顯示榴彈同其他拋物線射擊會點飛、點彈同跌喺邊；只限本機遊戲，死鬥無效
+
+@ Shows text for important sounds: doors, alerted enemies, secrets, pickups
+yue 為重要聲音顯示文字：門、警覺嘅敵人、秘密、拾取物
+
+@ Shows the distance fog that maps and mods set; off always gives clear view
+yue 顯示地圖同模組設定嘅遠景霧；關閉就一直保持清晰視野
+
+@ Shows the player face next to the health number
+yue 喺生命值數字隔籬顯示玩家塊面
+
+@ Simulation detail, step rate, fade-out lifetimes and caps for gibs and shrapnel; low also skips mover collision
+yue 碎肉同破片嘅模擬細節、步進頻率、淡出時間同上限；低仲會略過同移動物件嘅碰撞
+
+@ Size of the on-screen buttons and move stick
+yue 螢幕按鈕同移動搖桿嘅大小
+
+@ Slowly heals up to 100 health after 5 seconds without being hit
+yue 5秒冇俾人打之後，慢慢回復到100生命值
+
+@ Slows stick look while the crosshair is over an enemy
+yue 準星喺敵人身上時，減慢搖桿視角速度
+
+@ Slows the game down while the weapon wheel is open
+yue 開咗武器輪盤時令遊戲慢落嚟
+
+@ Slows the whole game down; single player only. Saves and demos stay compatible with other ports
+yue 令成個遊戲慢落嚟；只限單人遊戲。存檔同示範錄影仍然同其他移植版兼容
+
+@ Small camera jolt on each freeze; off with Reduce Motion
+yue 每次凍結時鏡頭輕微震一震；開咗「減少動態效果」就會關閉
+
+@ Snap and track enemies in local play, including split-screen; unavailable online
+yue 喺本機遊戲（包括分割畫面）鎖定同追蹤敵人；網上用唔到
+
+@ Sparks, smoke, chips, splinters and splashes fly off whatever your shots hit
+yue 射中嘅物件會飛出火花、煙、碎屑、木碎同水花
+
+@ Spawns extra copies of every monster around the original when a level starts
+yue 關卡開始時，喺每隻怪物周圍生成額外複製體
+
+@ Strength of the full-screen flashes for damage, pickups and powerups
+yue 受傷、拾取同強化道具全螢幕閃光嘅強度
+
+@ Stretch or shorten the sound while keeping its pitch
+yue 保持音高嘅同時拉長或者縮短聲音
+
+@ Surface opacity; requires Enhanced Water and Translucent Water
+yue 水面不透明度；要開咗「強化水面」同「半透明水面」
+
+@ The hook latches onto metal surfaces (metal, tech, computer panels, copper)
+yue 鉤爪可以勾住金屬表面（金屬、科技、電腦面板、銅）
+
+@ The hook latches onto stone, brick, rock and any surface not recognised as wood or metal
+yue 鉤爪可以勾住石、磚、岩石，同埋任何認唔出係木或者金屬嘅表面
+
+@ The hook latches onto wooden surfaces (texture names like wood, crate, plank)
+yue 鉤爪可以勾住木質表面（材質名例如wood、crate、plank）
+
+@ Turn the controller's motion sensor into a look input; needs a pad with a gyroscope
+yue 將手掣嘅動作感應器用嚟控制視角；要有陀螺儀嘅手掣
+
+@ Turns off view bob, strafe tilt and the camera kick when hit or firing
+yue 關閉視角晃動、橫移傾斜，同埋受擊或者射擊時嘅鏡頭後座
+
+@ Turns on the extra liquid effects; Water Settings controls each one
+yue 開啟額外嘅液體效果；每項效果由「水面設定」控制
+
+@ Turns the view to follow a moving enemy you are aiming at
+yue 轉動視角跟住你瞄緊嘅移動敵人
+
+@ Turns the view when you roll the controller sideways; 0 disables it, negative reverses it
+yue 側向翻滾手掣時轉動視角；0即係停用，負數就反轉
+
+@ Two-portal gun: fire and alt-fire place linked portals on flat walls; assign a weapon slot in Add-ons
+yue 雙傳送門槍：射擊同副射擊會喺平坦牆身放相連嘅傳送門；請喺附加功能指定武器欄位
+
+@ Unlocks the FX Settings page: enhanced particles, impact effects and blood splatter
+yue 解鎖特效設定頁：強化粒子、命中效果同血跡飛濺
+
+@ Uses the 2021 re-release's smoother MD5 models (and MD3 replacements from mods) instead of the classic ones. Applies on the next map load
+yue 用2021年重製版較順滑嘅MD5模型（同埋模組嘅MD3替換模型）取代經典模型。下次載入地圖時生效
+
+@ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
+yue 用地圖嘅彩色光照（.lit檔案或者BSPX區塊）；關閉就係原版白光。下次載入地圖時生效
+
+@ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
+yue 水柱分段、水滴數量同光澤液體著色：低用較簡單嘅半透明水流；高用順滑有光澤嘅水柱
+
+@ When gyro looking applies: always, off while +gyroaction is held, or only while it is held
+yue 陀螺儀視角幾時生效：一直、撳住+gyroaction時關閉，或者淨係撳住時生效
+
+@ Which weapons trigger the freeze; melee covers the axe and any mod weapon used at close range without ammo
+yue 邊啲武器會觸發凍結；近戰包括斧頭，同埋任何唔使彈藥、近距離用嘅模組武器
+
+@ Your own rockets and grenades don't hurt you; rocket jumps still work
+yue 自己嘅火箭同榴彈唔會傷到你；火箭跳照樣得
+
+# ==== ui.txt ====
+
+# Menus and pop-ups outside the options pages: save cards, launch, presets,
+# add-on browser, map packs, hints and dialogs.
+@ Select
+yue 揀選
+
+@ Back
+yue 返回
+
+@ Cancel
+yue 取消
+
+@ Confirm
+yue 確認
+
+@ Scroll
+yue 捲動
+
+@ Section
+yue 章節
+
+@ Bind
+yue 綁定
+
+@ Cancel binding
+yue 取消綁定
+
+@ Clear
+yue 清除
+
+@ Clear pad
+yue 清除手掣
+
+@ Remap
+yue 重新設定
+
+@ Type
+yue 輸入
+
+@ Shift
+yue Shift
+
+@ Done
+yue 完成
+
+@ Del
+yue Del
+
+@ Space
+yue 空格鍵
+
+@ Save
+yue 儲存
+
+@ Load
+yue 載入
+
+@ Delete
+yue 刪除
+
+@ Play
+yue 開始玩
+
+@ Yes
+yue 係
+
+@ No
+yue 唔係
+
+@ OK
+yue 確定
+
+@ System
+yue 系統
+
+@ Language
+yue 語言
+
+@ Help
+yue 說明
+
+@ Fixed for this game: it was started without Customize
+yue 呢場遊戲已固定：開始時冇用自訂
+
+@ Press a button or key to bind (Start cancels)
+yue 撳要綁定嘅按鈕或者按鍵（Start取消）
+
+@ Press button...
+yue 撳按鈕……
+
+@ Press key...
+yue 撳按鍵……
+
+@ Replace this binding?
+yue 要取代呢個綁定？
+
+@ is already assigned
+yue 已經指定咗
+
+@ {} already assigned
+yue {}已經指定咗
+
+@ Open Controls to remap Lock-on?
+yue 要開控制設定重新設定鎖定？
+
+@ Lock-on
+yue 鎖定
+
+@ Auto-aim Toggle
+yue 自動瞄準切換
+
+@ Keyboard
+yue 鍵盤
+
+@ Controller
+yue 手掣
+
+# main menu, dialogs and screens
+@ Map Packs
+yue 地圖包
+
+@ Customize
+yue 自訂
+
+@ Level Select
+yue 揀關卡
+
+@ Really quit?
+yue 真係要離開？
+
+@ You died
+yue 你死咗
+
+@ Continue from most recent save
+yue 由最新存檔繼續
+
+@ Select save
+yue 揀存檔
+
+@ Restart level
+yue 重新開始關卡
+
+@ Return to main menu
+yue 返回主選單
+
+@ (disabled)
+yue （已停用）
+
+@ (fixed for this game)
+yue （呢場遊戲已固定）
+
+@ (off)
+yue （關閉）
+
+@ Apply Display Changes
+yue 套用顯示變更
+
+@ Display Mode
+yue 顯示模式
+
+@ Resolution
+yue 解像度
+
+@ desktop
+yue 桌面
+
+@ Preset
+yue 預設組合
+
+@ Map
+yue 地圖
+
+@ Reset Shader Settings
+yue 重設著色器設定
+
+@ Reset to Defaults
+yue 還原預設值
+
+@ Searching...
+yue 搜尋緊……
+
+@ This game only autosaves.
+yue 呢場遊戲只可以自動存檔。
+
+@ (No Manual Saves modifier)
+yue （禁止手動存檔規則）
+
+@ End the current game?
+yue 要結束而家呢場遊戲？
+
+@ Unsaved progress will be lost.
+yue 未儲存嘅進度會冇咗。
+
+@ End game
+yue 結束遊戲
+
+@ Overwrite
+yue 覆蓋
+
+@ Overwrite "{}"?
+yue 要覆蓋「{}」？
+
+@ Saved {}
+yue 已儲存{}
+
+@ Start a new game?
+yue 要開始新遊戲？
+
+@ New game
+yue 新遊戲
+
+@ New Game
+yue 新遊戲
+
+@ CUSTOM
+yue 自訂
+
+@ Customize Experience
+yue 自訂遊戲體驗
+
+@ Disable All
+yue 全部停用
+
+@ Disable All Modifications
+yue 停用所有修改
+
+@ Saves load in other source ports too.
+yue 存檔喺其他移植版都載入到。
+
+@ Standard rules, no add-ons.
+yue 標準規則，冇附加功能。
+
+@ Choose skill
+yue 揀難度
+
+@ The current game will end
+yue 而家呢場遊戲會結束
+
+@ Easy
+yue 簡單
+
+@ Normal
+yue 普通
+
+@ Hard
+yue 困難
+
+@ Nightmare
+yue 夢魘
+
+# graphics preset pop-up
+@ Choose a Graphics Preset
+yue 揀畫面預設組合
+
+@ Classic
+yue 經典
+
+@ Like the re-release: enhanced models,
+yue 好似重製版咁：強化模型，
+
+@ no added effects.
+yue 唔加額外特效。
+
+@ Enhanced
+yue 強化
+
+@ Every enhancement at its highest quality.
+yue 所有強化功能都係最高質素。
+
+@ Needs a capable GPU.
+yue 要夠力嘅GPU。
+
+@ Low-End
+yue 低階
+
+@ Fastest. No anti-aliasing, original
+yue 最快。冇反鋸齒、原版
+
+@ models, lowest effect quality.
+yue 模型、最低特效質素。
+
+@ Esc keeps the defaults
+yue Esc保留預設值
+
+@ Everything can be changed later in Options.
+yue 之後全部都可以喺Options度改。
+
+@ Keep Defaults
+yue 保留預設值
+
+# save and load cards
+@ Save Game
+yue 儲存遊戲
+
+@ Load Game
+yue 載入遊戲
+
+@ Autosaves
+yue 自動存檔
+
+@ newest first
+yue 最新嘅排先
+
+@ Saves: {}
+yue 存檔：{}
+
+@ Browse Autosaves
+yue 瀏覽自動存檔
+
+@ Every retained autosave, newest first
+yue 所有保留咗嘅自動存檔，最新嘅排先
+
+@ New save
+yue 新存檔
+
+@ Select to save your game here
+yue 揀呢度儲存遊戲
+
+@ No autosaves yet
+yue 仲未有自動存檔
+
+@ Autosaves are made on level entry, secrets and more (Options > Gameplay)
+yue 入關、搵到秘密等時候會自動存檔（Options > 玩法）
+
+@ No saves yet
+yue 仲未有存檔
+
+@ Save from the Single Player menu, or press F6 to quicksave
+yue 請喺Single Player選單存檔，或者撳F6快速存檔
+
+@ No picture
+yue 冇圖片
+
+@ Del: delete save
+yue Del：刪除存檔
+
+@ Delete "{}"?
+yue 要刪除「{}」？
+
+@ This cannot be undone.
+yue 呢個操作冇得還原。
+
+@ Quicksave
+yue 快速存檔
+
+@ Autosave: {}
+yue 自動存檔：{}
+
+@ unknown trigger
+yue 未知觸發條件
+
+@ Latest - {}
+yue 最新－{}
+
+@ Health {}
+yue 生命值{}
+
+@ Armor {}
+yue 護甲{}
+
+@ Kills {}/{}
+yue 殺敵{}/{}
+
+@ Secrets {}/{}
+yue 秘密{}/{}
+
+@ Split-screen, {} players
+yue 分割畫面，{}位玩家
+
+@ Co-op
+yue 合作
+
+@ Customized
+yue 自訂
+
+@ Customized, {}
+yue 自訂，{}
+
+@ Date unavailable
+yue 冇日期資料
+
+@ Just now
+yue 啱啱
+
+@ {} min ago
+yue {}分鐘前
+
+@ {} h ago
+yue {}小時前
+
+@ Level entry
+yue 入關
+
+@ Secret found
+yue 搵到秘密
+
+@ All enemies killed
+yue 殺晒所有敵人
+
+@ All secrets found
+yue 搵齊所有秘密
+
+@ Timer
+yue 定時
+
+# customize pages
+@ Standard rules
+yue 標準規則
+
+@ Modifiers changed: {}
+yue 改咗嘅規則：{}
+
+@ no add-ons
+yue 冇附加功能
+
+@ add-ons: {}
+yue 附加功能：{}
+
+@ Saves of this game are .qsa files: they need this source port.
+yue 呢場遊戲嘅存檔係.qsa檔案：要用呢個移植版先開到。
+
+@ Nothing changed: this plays as standard Quake.
+yue 冇任何改動：玩法同標準Quake一樣。
+
+@ Changes apply now and are saved with this game (.qsa).
+yue 改動即刻生效，並同呢場遊戲一齊儲存（.qsa）。
+
+@ This game started without Customize, so its rules are fixed.
+yue 呢場遊戲開始時冇用自訂，所以規則已固定。
+
+@ Start a new game and choose Customize Experience.
+yue 請開始新遊戲，再揀「自訂遊戲體驗」。
+
+@ These rules apply to the next customized game.
+yue 呢啲規則會套用到下一場自訂遊戲。
+
+# add-on browser
+@ Fire
+yue 射擊
+
+@ Alt Fire
+yue 副射擊
+
+@ Configure Parameters >
+yue 設定參數 >
+
+@ Configure
+yue 設定
+
+@ Settings
+yue 設定
+
+@ Change slot
+yue 轉欄位
+
+@ Toggle
+yue 切換
+
+@ Details
+yue 詳細資料
+
+@ Enter or click the box: toggle
+yue Enter或者撳方框：切換
+
+@ Right / Tab / click: details
+yue 右／Tab／撳：詳細資料
+
+@ Input Remapping
+yue 重新設定按鍵
+
+@ Weapon Slot
+yue 武器欄位
+
+@ Customized games save as .qsa files, which need this source port.
+yue 自訂遊戲會儲存做.qsa檔案，要用呢個移植版先開到。
+
+@ This game started without Customize, so its add-ons are fixed. Customize a new game instead.
+yue 呢場遊戲開始時冇用自訂，所以附加功能已固定。請改為自訂一場新遊戲。
+
+@ Bullet Time
+yue 子彈時間
+
+@ Change Goggles
+yue 切換護目鏡
+
+@ Dodge / Dive
+yue 閃避／飛撲
+
+@ Goggles
+yue 護目鏡
+
+@ Hitstop
+yue 命中停頓
+
+@ Projectile Shotguns
+yue 實體彈散彈槍
+
+@ BULLET TIME: 20%
+yue 子彈時間：20%
+
+@ NORMAL SPEED
+yue 正常速度
+
+@ SLOW MOTION: PHYSICAL PELLETS
+yue 慢鏡：物理彈丸
+
+@ DEMONSTRATION
+yue 示範
+
+@ GAMEPLAY
+yue 實際遊玩
+
+@ LOOP
+yue 循環
+
+@ Preview unavailable
+yue 預覽唔到
+
+# shader and language help lines
+@ A setting of the chosen shader; arrows step it, Enter is not needed
+yue 所揀著色器嘅一項設定；用方向鍵調整，唔使撳Enter
+
+@ Language of the menus, messages and the 2021 re-release's game text; System follows your computer's language
+yue 選單、訊息同2021年重製版遊戲文字嘅語言；系統會跟你部電腦嘅語言
+
+@ Puts every setting of the chosen shader back to the preset's defaults
+yue 將所揀著色器嘅所有設定還原做預設組合嘅預設值
+
+@ RetroArch slang shader on the final image: CRT, scanlines, NTSC, sharpening; add your own in <game>/shaders
+yue 套用喺最終畫面嘅RetroArch slang著色器：CRT、掃描線、NTSC、銳化；可以將自己嘅著色器放入<game>/shaders
+
+# modern console footer
+@ Shift+PgUp/Dn: height  ` : hide
+yue Shift+PgUp/Dn：高度  `：隱藏
+
+@ Tab: complete  Ctrl+R: search  bash | pipe
+yue Tab：自動完成  Ctrl+R：搜尋  bash | 管線
+
+@ ↑ +{} lines (End to jump) 
+yue ↑ +{}行（撳End跳去底部） 
+
+# add-on descriptions
+@ Create two linked portals on flat walls. Fire places the first portal; Alt Fire places the second. Walk through either portal to emerge from the other. Your momentum carries through. Assign a weapon slot below: pressing that slot repeatedly cycles its ordinary weapon and every enabled add-on assigned there. Portal view quality is configurable below.
+yue 喺平坦牆身建立兩個相連嘅傳送門。射擊放第一個傳送門，副射擊放第二個。行入任何一個傳送門就會由另一個出返嚟，動量都會保留。請喺下面指定武器欄位：重複撳嗰個欄位，會喺原本嘅武器同指定咗喺嗰度嘅所有已啟用附加功能之間循環。傳送門畫面質素可以喺下面設定。
+
+@ Hold Fire and sweep the crosshair over monsters to queue targets. Release Fire to throw: the boomerang visits each target, stuns it and returns to you. Alt Fire clears the queue. The weapon slot selects a group, not a separate hotkey: press it again to cycle through the weapons in that slot. Configure stun duration and flight speed below.
+yue 撳住射擊再將準星掃過怪物，將佢哋排入目標隊列。放開射擊就擲出：迴力鏢會逐個飛去每個目標，擊暈佢再返嚟你手上。副射擊可以清除隊列。武器欄位揀嘅係一組武器，唔係獨立快捷鍵：再撳一次就喺嗰個欄位嘅武器之間循環。暈眩時間同飛行速度可以喺下面設定。
+
+@ Hold Fire to charge a sticky bomb using rocket ammunition; release to launch. A longer charge throws it faster. Bombs cling to walls, doors and monsters. Alt Fire detonates your planted bombs together. Place a trap, retreat, then detonate it when enemies approach. Assign any weapon slot below; repeated presses cycle through the ordinary weapon and add-ons in that slot.
+yue 撳住射擊用火箭彈藥為黏彈儲力，放手就射出。儲力越耐擲得越快。黏彈會黐住牆、門同怪物。副射擊會一次過引爆你放低嘅所有黏彈。設好陷阱、退後，等敵人行埋嚟先引爆。請喺下面指定任何一個武器欄位；重複撳會喺嗰個欄位嘅原本武器同附加功能之間循環。
+
+@ Fire launches a chain hook. It latches onto a permitted surface or enemy and reels you toward the anchor. Fire again or use Alt Fire to let go. Choose which materials and enemies can be hooked in Configure Parameters. Assign it to any weapon slot; repeated presses of the slot's existing binding cycle through its weapons.
+yue 射擊會射出鎖鏈鉤。鉤爪勾住允許嘅表面或者敵人之後，會將你扯向錨點。再射一次或者用副射擊就放手。可以喺「設定參數」揀邊啲材質同敵人勾得住。可以指定到任何一個武器欄位；重複撳嗰個欄位原有嘅按鍵就會喺佢嘅武器之間循環。
+
+@ A piercing railgun inspired by Quake III. Fire sends a slug through every enemy along its line. Each shot consumes two cells, with a 1.5 second refire interval. Damage and the spiral trail colour are configurable below. Choose a weapon slot: the slot's current binding selects and cycles the weapons assigned to it.
+yue 靈感嚟自Quake III嘅貫穿型磁軌炮。射擊時彈頭會貫穿直線上所有敵人。每發用兩粒電池，射擊間隔1.5秒。傷害同螺旋軌跡顏色可以喺下面設定。請揀武器欄位：嗰個欄位而家嘅按鍵會揀選同循環指定咗喺度嘅武器。
+
+@ A Portal-style gel sprayer. Fire sprays blue Repulsion gel: land, jump or run into it to bounce, and landings on it never hurt. Alt Fire sprays orange Propulsion gel: run across it to go much faster. Gel coats floors and walls until washed off with the Powerwasher. Assign a weapon slot below; repeated presses cycle the weapons in that slot.
+yue Portal風格嘅凝膠噴射器。射擊噴出藍色彈跳凝膠：落喺上面、跳上去或者跑入去都會彈起，而且落喺上面永遠唔會受傷。副射擊噴出橙色加速凝膠：跑過去就會快好多。凝膠會一直鋪喺地板同牆身，直到用高壓清洗機沖走為止。請喺下面指定武器欄位；重複撳會喺嗰個欄位嘅武器之間循環。
+
+@ A water cannon. Fire shoots a straight jet with limited reach; Alt Fire a wide, shorter fan. The water pushes enemies back, turns projectiles aside and washes away gel and blood. Push strength is configurable below. Assign a weapon slot below; repeated presses cycle the weapons in that slot.
+yue 水炮。射擊會噴出射程有限嘅直線水柱；副射擊就噴出較闊、較短嘅扇形水流。水流會推開敵人、撥開投射物，同沖走凝膠同血跡。衝力可以喺下面設定。請喺下面指定武器欄位；重複撳會喺嗰個欄位嘅武器之間循環。
+
+@ One equipment add-on includes both night vision and thermal vision. The Change Goggles action cycles Normal, Night Vision, Thermal, then Normal again. Night vision brightens dark rooms; thermal vision highlights living enemies. Goggles do not occupy a weapon slot. Configure intensity and sensor noise below. The binding affects only this add-on.
+yue 一個裝備附加功能同時有夜視同熱能視覺。「切換護目鏡」動作會順序切換一般、夜視、熱能，再返去一般。夜視可以照光黑暗嘅房；熱能視覺會突出生勾勾嘅敵人。護目鏡唔佔武器欄位。強度同感光雜訊可以喺下面設定。呢個按鍵綁定只影響呢個附加功能。
+
+@ Press Dodge with a movement direction on the ground or in midair: dive forward or leap backward and sideways. Diagonals are supported. Each press launches once, with a short recovery. The player body animates in third person. Assign the Dodge action below or in Controls.
+yue 喺地面或者半空撳閃避，配合移動方向：向前飛撲，或者向後、向側面跳開。支援斜向。每撳一次發動一次，之後有短暫恢復時間。第三身會顯示玩家身體動畫。可以喺下面或者「控制」指定閃避動作。
+
+@ Use the dedicated Bullet Time action to slow the whole local game to 20% speed. Hold is the default; Toggle switches on each press. The optional meter limits use in real seconds and regenerates while inactive. Disable the meter for unlimited use. Remap the action and configure duration and regeneration below.
+yue 用專屬嘅子彈時間動作，令成個本機遊戲慢到20%速度。預設係撳住；切換就每撳一次開關一次。可選嘅計量條會用真實秒數限制使用時間，冇用嗰陣會回復。停用計量條就可以無限使用。可以喺下面重新設定動作，同設定持續時間同回復速度。
+
+@ Both shotguns and enemy grunts fire physical pellets with their original spread and damage. Fast default projectiles feel immediate; lower their speed to dodge incoming fire during bullet time. Configure projectile speed below, or reset it to the default of 10000 units per second.
+yue 兩把散彈槍同敵方士兵都會射出實體彈丸，保留原本嘅散佈同傷害。預設嘅高速彈體感覺同即時命中冇分別；調低速度就可以喺子彈時間閃避射埋嚟嘅火力。可以喺下面設定彈體速度，或者還原做預設嘅每秒10000單位。
+
+@ Freezes the game for a split second when you damage an enemy, so hits feel heavier. Single player only. Choose which weapons trigger it (all, melee, ranged or explosives), how long it lasts and how much more a kill freezes. Advanced settings cover enemy toughness, damage scaling, cooldown and the longest freeze.
+yue 傷到敵人時令遊戲凍結一剎那，等命中更有打擊感。只限單人遊戲。可以揀邊啲武器觸發（全部、近戰、遠程或者爆炸武器）、持續幾耐，同埋殺敵時額外凍結幾耐。進階設定包括敵人強度、傷害比例、冷卻時間同最長凍結時間。
+
+# map packs and the Quaddicted browser
+@ Get more maps (Quaddicted)...
+yue 攞更多地圖（Quaddicted）……
+
+@ Type to filter...
+yue 打字篩選……
+
+@ Launch mod
+yue 啟動模組
+
+@ Start first map
+yue 開始第一張地圖
+
+@ (running)
+yue （運行緊）
+
+@ running
+yue 運行緊
+
+@ Recent
+yue 最近
+
+@ Name
+yue 名稱
+
+@ Dir
+yue 目錄
+
+@ Default
+yue 預設
+
+@ Title
+yue 標題
+
+@ Sort: {}
+yue 排序：{}
+
+@ {} installed
+yue 已安裝{}個
+
+@ {}/{} matching
+yue {}/{}個符合
+
+@ {} maps, {} completed
+yue {}張地圖，完成咗{}張
+
+@ {}/{} matching, {} completed
+yue {}/{}個符合，完成咗{}個
+
+@ no maps of its own
+yue 冇自己嘅地圖
+
+@ dir: {}
+yue 目錄：{}
+
+@ base: {}
+yue 基礎：{}
+
+@ Browse the Quaddicted archive of
+yue 瀏覽Quaddicted收藏嘅
+
+@ single-player maps and episodes,
+yue 單人地圖同章節，
+
+@ then download and install them
+yue 再直接喺呢度下載、
+
+@ here. Each release gets its own
+yue 安裝。每個作品喺呢個清單
+
+@ entry in this list.
+yue 都有自己嘅項目。
+
+@ Needs an internet connection.
+yue 要有網絡連線。
+
+@ Quaddicted Map Archive
+yue Quaddicted地圖資料庫
+
+@ Newest
+yue 最新
+
+@ Author
+yue 作者
+
+@ Size
+yue 大小
+
+@ Loading the map list...
+yue 載入緊地圖清單……
+
+@ Couldn't load the map list: {}
+yue 載入唔到地圖清單：{}
+
+@ {} single-player releases  -  F5 refreshes
+yue {}個單人作品  -  F5重新整理
+
+@ {} matching
+yue {}個符合
+
+@ by {}
+yue 作者：{}
+
+@ requires: {}
+yue 需要：{}
+
+@ maps: {}
+yue 地圖：{}
+
+@ Failed: {}
+yue 失敗：{}
+
+@ Downloading... {}%
+yue 下載緊……{}%
+
+@ Unpacking...
+yue 解壓緊……
+
+@ Installed in {}/  -  Enter: play
+yue 已安裝喺{}/  -  Enter：開始玩
+
+@ Enter: download and install
+yue Enter：下載並安裝
+
+@ unpacking
+yue 解壓緊
+
+@ failed
+yue 失敗
+
+@ installed
+yue 已安裝
+
+@ Downloads are not available in the browser build
+yue 瀏覽器版本下載唔到
+
+@ the map list could not be read
+yue 讀唔到地圖清單
+
+@ downloading needs the curl program
+yue 下載要用curl程式
+
+@ download failed
+yue 下載失敗
+
+@ the download is not a valid zip
+yue 下載嘅檔案唔係有效嘅zip
+
+@ nothing to install for this engine
+yue 冇適用於呢個引擎嘅安裝內容
+
+@ needs {} installed first
+yue 要先安裝{}
+
+@ couldn't unpack {}
+yue 解壓唔到{}
+
+# help screen
+@ About
+yue 關於
+
+@ < Back
+yue < 返回
+
+# tr_ctx keys: English shows the short word, the key says which meaning
+@ Save (a manual save, as opposed to a quicksave or autosave)
+yue 存檔
+
+# ==== hud.txt ====
+
+# HUD, weapon and equipment wheels, sound captions and other in-game text.
+# Weapon, monster and item names follow the 2021 re-release's own translations.
+@ Axe
+yue 斧頭
+
+@ Shotgun
+yue 散彈槍
+
+@ Double-Barrelled Shotgun
+yue 雙管散彈槍
+
+@ Nailgun
+yue 釘槍
+
+@ Super Nailgun
+yue 超級釘槍
+
+@ Grenade Launcher
+yue 榴彈發射器
+
+@ Rocket Launcher
+yue 火箭發射器
+
+@ Thunderbolt
+yue 雷電槍
+
+@ Portal Gun
+yue 傳送門槍
+
+@ Boomerang
+yue 迴力鏢
+
+@ Stickybomb Launcher
+yue 黏彈發射器
+
+@ Railgun
+yue 磁軌炮
+
+@ Hookshot
+yue 鉤爪
+
+@ Gel Sprayer
+yue 凝膠噴射器
+
+@ Powerwasher
+yue 高壓清洗機
+
+@ Night Vision Goggles
+yue 夜視護目鏡
+
+@ Thermal Goggles
+yue 熱能護目鏡
+
+@ Normal vision
+yue 一般視覺
+
+@ ON
+yue 開
+
+@ OFF
+yue 關
+
+@ {} (turn on)
+yue {}（開啟）
+
+@ {} (turn off)
+yue {}（關閉）
+
+@ Move mouse to select, release to toggle
+yue 郁滑鼠揀選，放手就切換
+
+@ Move mouse to select, release to equip
+yue 郁滑鼠揀選，放手就裝備
+
+@ Release to toggle
+yue 放手就切換
+
+@ Release to equip
+yue 放手就裝備
+
+@ shells
+yue 散彈
+
+@ nails
+yue 鐵釘
+
+@ rockets
+yue 火箭
+
+@ cells
+yue 電池
+
+@ Kills: {}/{}
+yue 殺敵：{}/{}
+
+@ Secrets: {}/{}
+yue 秘密：{}/{}
+
+@ Time {}
+yue 時間{}
+
+@ Press any button to continue...
+yue 撳任何按鈕繼續……
+
+@ Press any key to continue...
+yue 撳任何鍵繼續……
+
+@ BULLET TIME
+yue 子彈時間
+
+@ AUTO AIM
+yue 自動瞄準
+
+@ Crosshair
+yue 準星
+
+@ + Marker
+yue ＋標記
+
+@ Hit markers off
+yue 命中標記關閉
+
+@ On target
+yue 瞄準目標
+
+@ On kill
+yue 殺敵時
+
+# sound captions
+@ [Secret found]
+yue [搵到秘密]
+
+@ [Message]
+yue [訊息]
+
+@ [Switch activated]
+yue [開關啟動]
+
+@ [Key picked up]
+yue [攞到鎖匙]
+
+@ [Rune picked up]
+yue [攞到符文]
+
+@ [Teleporter]
+yue [傳送點]
+
+@ [Teleport]
+yue [傳送]
+
+@ [Splash]
+yue [水花聲]
+
+@ [Leaving water]
+yue [離開水面]
+
+@ [Door]
+yue [門]
+
+@ [Platform moving]
+yue [平台移動緊]
+
+@ [Button]
+yue [按鈕]
+
+@ [Health picked up]
+yue [攞到生命值]
+
+@ [Armor picked up]
+yue [攞到護甲]
+
+@ [Quad Damage wearing off]
+yue [四倍傷害就快失效]
+
+@ [Quad Damage]
+yue [四倍傷害]
+
+@ [Pentagram wearing off]
+yue [五芒星就快失效]
+
+@ [Pentagram of Protection]
+yue [守護五芒星]
+
+@ [Ring wearing off]
+yue [戒指就快失效]
+
+@ [Ring of Shadows]
+yue [暗影之戒]
+
+@ [Biosuit wearing off]
+yue [防護衣就快失效]
+
+@ [Biosuit]
+yue [生化防護衣]
+
+@ [Item picked up]
+yue [攞到物品]
+
+@ [Weapon picked up]
+yue [攞到武器]
+
+@ [Ammo picked up]
+yue [攞到彈藥]
+
+@ [Explosion]
+yue [爆炸]
+
+@ [Grenade launched]
+yue [發射榴彈]
+
+@ [Grenade bounce]
+yue [榴彈彈跳]
+
+@ [Rocket fired]
+yue [發射火箭]
+
+@ [Nails fired]
+yue [發射鐵釘]
+
+@ [Lightning]
+yue [閃電]
+
+@ [Thunder]
+yue [雷聲]
+
+@ [Enforcer alerted]
+yue [執法者警覺]
+
+@ [Grunt alerted]
+yue [士兵警覺]
+
+@ [Rottweiler alerted]
+yue [羅威拿犬警覺]
+
+@ [Knight alerted]
+yue [騎士警覺]
+
+@ [Death Knight alerted]
+yue [死亡騎士警覺]
+
+@ [Scrag alerted]
+yue [飛魔警覺]
+
+@ [Ogre alerted]
+yue [食人魔警覺]
+
+@ [Fiend alerted]
+yue [惡魔警覺]
+
+@ [Shambler alerted]
+yue [蹣跚巨獸警覺]
+
+@ [Zombie groaning]
+yue [殭屍呻吟]
+
+@ [Vore alerted]
+yue [吞噬者警覺]
+
+@ [Vore attacking]
+yue [吞噬者攻擊]
+
+@ [Spawn alerted]
+yue [黏液怪警覺]
+
+@ [Rotfish]
+yue [腐魚]
+
+@ [Spawn]
+yue [黏液怪]
+
+@ [Chthon]
+yue [克頌]
+
+@ [Hard landing]
+yue [重重跌落地]
+
+@ [Drowning]
+yue [遇溺]
+
+@ [Gasping for air]
+yue [大啖抖氣]
+
+@ [Burning]
+yue [燒緊]
+
+@ [Telefrag]
+yue [傳送擊殺]
+
+@ [Gibbed]
+yue [碎屍]
+
+# ==== console.txt ====
+
+# Console messages, shown translated only with con_translate 1 (Translate Console).
+# Cvar and command names stay as they are.
+@ Autosaved.
+yue 已自動存檔。
+
+@ Game saved.
+yue 遊戲已儲存。
+
+@ Can't save now.
+yue 而家存唔到檔。
+
+@ This game only autosaves (No Manual Saves modifier).
+yue 呢場遊戲只可以自動存檔（禁止手動存檔規則）。
+
+@ Loading {}...
+yue 載入緊{}……
+
+@ load failed: {}
+yue 載入失敗：{}
+
+@ ERROR: autosave failed: {}
+yue 錯誤：自動存檔失敗：{}
+
+@ ERROR: couldn't open {}
+yue 錯誤：開唔到{}
+
+@ ERROR: couldn't open {}.
+yue 錯誤：開唔到{}。
+
+@ ERROR: couldn't write {}: {}
+yue 錯誤：寫唔到{}：{}
+
+@ ERROR: couldn't create {}: {}
+yue 錯誤：建立唔到{}：{}
+
+@ couldn't write {}: {}
+yue 寫唔到{}：{}
+
+@ Wrote {}
+yue 已寫入{}
+
+@ screenshot failed: {}
+yue 截圖失敗：{}
+
+@ screenshot: {}
+yue 截圖：{}
+
+@ No readable save available. Select save or restart the level.
+yue 冇可以讀取嘅存檔。請揀存檔或者重新開始關卡。
+
+@ Unknown command "{}"
+yue 未知指令「{}」
+
+@ couldn't exec {}
+yue 執行唔到{}
+
+@ execing {}
+yue 執行緊{}
+
+@ execing config.cfg (inherited from {})
+yue 執行緊config.cfg（繼承自{}）
+
+@ execing config.cfg (mod defaults)
+yue 執行緊config.cfg（模組預設）
+
+@ execing default.cfg (built-in)
+yue 執行緊default.cfg（內置）
+
+@ {} cvars
+yue {}個變數
+
+@ {} commands
+yue {}個指令
+
+@ Can't "cmd", not connected
+yue 用唔到「cmd」，未連線
+
+@ Looking for Quake servers...
+yue 搜尋緊Quake伺服器……
+
+@ Bad value, must be between 1 and 65534
+yue 數值無效，一定要喺1至65534之間
+
+@ Couldn't handle music file {}
+yue 處理唔到音樂檔案{}
+
+@ Bug report written to {}
+yue 錯誤報告已寫入{}
+
+@ bugreport: can't create {}: {}
+yue bugreport：建立唔到{}：{}
+
+@ graphics preset: {}
+yue 畫面預設組合：{}
+
+@ Presets (r_shader_preset <name>):
+yue 預設組合（r_shader_preset <name>）：
+
+@ Add your own .slangp presets under <game>/shaders/.
+yue 可以將自己嘅.slangp預設組合放喺<game>/shaders/。
+
+@ no shader preset loaded (r_shader_preset)
+yue 未載入著色器預設組合（r_shader_preset）
+
+@ r_shader_preset: "{}" not found
+yue r_shader_preset：搵唔到「{}」
+
+@ no parameter "{}" in this preset
+yue 呢個預設組合冇參數「{}」
+
+@ {} = {} (default {}, {}..{})
+yue {} = {}（預設{}，{}..{}）
+
+@ Switching to {}...
+yue 轉緊去{}……
+
+@ game: no game dir "{}" in {}
+yue game：冇遊戲目錄「{}」（喺{}）
+
+@ game: can't find the engine executable
+yue game：搵唔到引擎執行檔
+
+@ game: exec failed: {}
+yue game：執行失敗：{}
+
+@ game: launch failed: {}
+yue game：啟動失敗：{}
+
+@ loaded {} in {}s
+yue 已載入{}，用咗{}秒
+
+@ No demos listed with startdemos
+yue startdemos冇列出任何示範錄影
+
+@ Playing demo from {}.
+yue 播緊示範錄影：{}。
+
+@ {} frames {} seconds {} fps
+yue {}影格 {}秒 {}fps
+
+@ Recording to {}.
+yue 錄製緊到{}。
+
+@ Completed demo
+yue 示範錄影完咗
+
+@ Can't record during demo playback
+yue 播緊示範錄影時唔可以錄製
+
+@ Relative pathnames are not allowed.
+yue 唔可以用相對路徑。
+
+@ Can't record - try again when connected
+yue 錄製唔到－連線之後再試
+
+@ {} demo(s) in loop
+yue 循環入面有{}個示範錄影
+
+@ Not recording a demo.
+yue 而家冇錄緊示範錄影。
+
+@ {} joined on a gamepad
+yue {}用手掣加入咗
+
+@ goggles: needs a game started with Add-ons and Goggles enabled
+yue goggles：要喺開咗附加功能同護目鏡嘅情況下開始遊戲
+
+@ equip: needs a game started with Add-ons and Goggles enabled
+yue equip：要喺開咗附加功能同護目鏡嘅情況下開始遊戲
+
+@ UDP listening on port {}
+yue UDP喺連接埠{}監聽緊
+
+@ UDP bind on port {} failed: {}
+yue UDP綁定連接埠{}失敗：{}
+
+@ Connection accepted by {}
+yue {}接受咗連線
+
+@ Connection failed: {}
+yue 連線失敗：{}
+
+@ Couldn't resolve {}
+yue 解析唔到{}
+
+@ Connecting to {}...
+yue 連線緊{}……
+
+@ Connecting to QuakeWorld server {}...
+yue 連線緊QuakeWorld伺服器{}……
+
+@ Disconnected: {}
+yue 已中斷連線：{}
+
+@ Server disconnected
+yue 伺服器已中斷連線
+
+@ Client {} connected
+yue 用戶端{}已連線
+
+@ Client {} timed out
+yue 用戶端{}連線逾時
+
+@ Couldn't spawn server {}: {}
+yue 啟動唔到伺服器{}：{}
+
+@ maxplayers can not be changed while a server is running.
+yue 伺服器運行緊時唔可以改maxplayers。
+
+@ You can't kick yourself!
+yue 你唔可以踢走自己！
+
+@ Only the server may changelevel
+yue 淨係伺服器可以用changelevel
+
+@ {} renamed to {}
+yue {}改咗名做{}

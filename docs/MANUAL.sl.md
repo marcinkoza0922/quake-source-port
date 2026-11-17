@@ -34,7 +34,10 @@ tradicionalna), turščina, indonezijščina, malajščina, filipinščina,
 vietnamščina, srbščina, litovščina, latvijščina, estonščina, malteščina,
 albanščina, armenščina, gruzijščina, islandščina, irščina, valižanščina,
 baskovščina, katalonščina, galicijščina, latinščina, esperanto,
-beloruščina, makedonščina, slovenščina ali svahili.
+beloruščina, makedonščina, slovenščina, svahili, arabščina, hebrejščina,
+perzijščina, urdujščina, hindijščina, maratščina, bengalščina, pandžabščina,
+gudžaratščina, tamilščina, telugijščina, tajščina, kmerščina, amharščina ali
+kantonščina.
 **Sistem** sledi jeziku vašega računalnika. Besedila igre iz izdaje 2021
 so prevedena samo v francoščino, nemščino, italijanščino, španščino in
 ruščino; drugi jeziki jih prikažejo v angleščini. V jezikih razen

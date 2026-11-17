@@ -1,0 +1,3024 @@
+# km: the port's own text; English keys from crates/qcore/lang/*.txt.
+# Format in crates/qcore/src/lang/catalog.rs; check with tools/lang_check.py.
+
+# ==== menu.txt ====
+
+# Options pages: page names, row labels and choice values.
+@ 10% speed
+km ល្បឿន 10%
+
+@ 2 split-screen
+km បំបែក​អេក្រង់ 2
+
+@ 3 split-screen
+km បំបែក​អេក្រង់ 3
+
+@ 4 split-screen
+km បំបែក​អេក្រង់ 4
+
+@ 5 split-screen
+km បំបែក​អេក្រង់ 5
+
+@ 6 split-screen
+km បំបែក​អេក្រង់ 6
+
+@ 2D aiming
+km ការ​តម្រង់ 2D
+
+@ 2x monsters
+km បិសាច 2x
+
+@ 3x monsters
+km បិសាច 3x
+
+@ 4x monsters
+km បិសាច 4x
+
+@ 3D resolution
+km គុណភាព​បង្ហាញ 3D
+
+@ 3D view
+km ទិដ្ឋភាព 3D
+
+@ 8-bit Color
+km ពណ៌ 8-bit
+
+@ Accessibility
+km ភាព​ងាយ​ស្រួល​ប្រើ
+
+@ Acquisition Cone
+km កោណ​ចាប់​គោលដៅ
+
+@ Activation
+km ការ​ធ្វើ​ឱ្យ​សកម្ម
+
+@ Add a ringing room tail after the cue
+km បន្ថែម​សំឡេង​បន្ទរ​បន្ទប់​ក្រោយ​សំឡេង​សញ្ញា
+
+@ Add delayed repeats after the cue
+km បន្ថែម​សំឡេង​ខ្ទរ​ពន្យារ​ក្រោយ​សំឡេង​សញ្ញា
+
+@ Add saturation and distortion
+km បន្ថែម​ភាព​ឆ្អែត​និង​ការ​បង្ខូច​សំឡេង
+
+@ Add-ons
+km គ្រឿង​បន្ថែម
+
+@ Address
+km អាសយដ្ឋាន
+
+@ Adds fine noise to hide color banding
+km បន្ថែម​ចំណុច​រំខាន​ល្អិតៗ​ដើម្បី​លាក់​ឆ្នូត​ពណ៌
+
+@ Advanced Settings
+km ការ​កំណត់​កម្រិត​ខ្ពស់
+
+@ Aim Assist
+km ជំនួយ​ការ​តម្រង់
+
+@ Aim Rotation
+km ការ​បង្វិល​តម្រង់
+
+@ Aim Slowdown
+km ការ​បន្ថយ​ល្បឿន​តម្រង់
+
+@ Aim Style
+km របៀប​តម្រង់
+
+@ All
+km ទាំង​អស់
+
+@ All enemies
+km សត្រូវ​ទាំង​អស់
+
+@ Alt Fire (Add-ons)
+km បាញ់​ជំនួស (គ្រឿង​បន្ថែម)
+
+@ Always Run
+km រត់​ជានិច្ច
+
+@ Ambient Occlusion
+km ស្រមោល​បរិយាកាស
+
+@ Ammo Counts
+km ចំនួន​គ្រាប់
+
+@ Ammo Counts Position
+km ទីតាំង​ចំនួន​គ្រាប់
+
+@ Ammo Pickups
+km គ្រាប់​ដែល​រើស​បាន
+
+@ Anisotropic
+km Anisotropic
+
+@ Anti-aliasing
+km ការ​រលោង​គែម
+
+@ Apply To
+km អនុវត្ត​ចំពោះ
+
+@ Armor
+km អាវ​ក្រោះ
+
+@ Armor Position
+km ទីតាំង​អាវ​ក្រោះ
+
+@ Ask
+km សួរ
+
+@ Attack
+km វាយ​ប្រហារ
+
+@ Audio
+km សំឡេង
+
+@ Auto-aim
+km តម្រង់​ស្វ័យ​ប្រវត្តិ
+
+@ Auto-aim Settings
+km ការ​កំណត់​តម្រង់​ស្វ័យ​ប្រវត្តិ
+
+@ Autosave
+km រក្សា​ទុក​ស្វ័យ​ប្រវត្តិ
+
+@ Autosave Settings
+km ការ​កំណត់​រក្សា​ទុក​ស្វ័យ​ប្រវត្តិ
+
+@ Autosave Timer
+km ម៉ោង​រក្សា​ទុក​ស្វ័យ​ប្រវត្តិ
+
+@ Autosaves to Keep
+km ចំនួន​ការ​រក្សា​ទុក​ស្វ័យ​ប្រវត្តិ
+
+@ Bass
+km បាស
+
+@ Blip
+km ប៊ីប
+
+@ Blood Quality
+km គុណភាព​ឈាម
+
+@ Blood Splatter Settings
+km ការ​កំណត់​ស្នាម​ឈាម​ខ្ទាត
+
+@ Blue
+km ខៀវ
+
+@ Boomerang Settings
+km ការ​កំណត់​ប៊ូមឺរ៉ង់
+
+@ Boost or cut high frequencies in decibels
+km បង្កើន​ឬ​កាត់​ប្រេកង់​ខ្ពស់​គិត​ជា​ដេស៊ីបែល
+
+@ Boost or cut low frequencies in decibels
+km បង្កើន​ឬ​កាត់​ប្រេកង់​ទាប​គិត​ជា​ដេស៊ីបែល
+
+@ Brightness
+km ពន្លឺ
+
+@ Bullet Time (Add-ons)
+km ពេល​យឺត (គ្រឿង​បន្ថែម)
+
+@ Bullet Time Settings
+km ការ​កំណត់​ពេល​យឺត
+
+@ Button Glyphs
+km រូប​ប៊ូតុង
+
+@ Button Size
+km ទំហំ​ប៊ូតុង
+
+@ Camera
+km កាមេរ៉ា
+
+@ Caustic Intensity
+km កម្រិត​ពន្លឺ​ក្រោម​ទឹក
+
+@ Caustics
+km ពន្លឺ​ក្រោម​ទឹក
+
+@ Center
+km កណ្ដាល
+
+@ Center Message Position
+km ទីតាំង​សារ​កណ្ដាល
+
+@ Center Message Time
+km រយៈ​ពេល​សារ​កណ្ដាល
+
+@ Center View
+km តម្រង់​ទិដ្ឋភាព​កណ្ដាល
+
+@ Change Color on Kill
+km ប្ដូរ​ពណ៌​ពេល​សម្លាប់
+
+@ Change Color on Target
+km ប្ដូរ​ពណ៌​ពេល​ចំ​គោលដៅ
+
+@ Chime
+km កណ្ដឹង
+
+@ Click
+km គ្លីក
+
+@ Clink
+km គ្រាំង
+
+@ Coin
+km កាក់
+
+@ Color
+km ពណ៌
+
+@ Color Filter
+km តម្រង​ពណ៌
+
+@ Color of the grenade arc
+km ពណ៌​ខ្សែ​កោង​គ្រាប់​បែក
+
+@ Colored Lighting
+km ពន្លឺ​ពណ៌
+
+@ Connect
+km ភ្ជាប់
+
+@ Contrast
+km ភាព​ផ្ទុយ​ពណ៌
+
+@ Controls
+km ការ​បញ្ជា
+
+@ Cooldown (ms)
+km រយៈ​ពេល​សម្រាក (ms)
+
+@ Crosshair Outline
+km គែម​សញ្ញា​តម្រង់
+
+@ Crosshair Shape
+km រាង​សញ្ញា​តម្រង់
+
+@ Crosshair Size
+km ទំហំ​សញ្ញា​តម្រង់
+
+@ Current Ammo
+km គ្រាប់​បច្ចុប្បន្ន
+
+@ Current Ammo Position
+km ទីតាំង​គ្រាប់​បច្ចុប្បន្ន
+
+@ Customize This Game
+km ប្ដូរ​ហ្គេម​នេះ​តាម​បំណង
+
+@ Damage
+km ការ​ខូចខាត
+
+@ Damage Taken
+km ការ​ខូចខាត​ដែល​ទទួល
+
+@ Debris
+km កម្ទេច​កម្ទី
+
+@ Debris Quality
+km គុណភាព​កម្ទេច​កម្ទី
+
+@ Debris Settings
+km ការ​កំណត់​កម្ទេច​កម្ទី
+
+@ Directional Damage
+km ទិស​នៃ​ការ​ខូចខាត
+
+@ Dithering
+km Dithering
+
+@ Dodge / Dive (Add-ons)
+km គេច / លោត​ផ្លោះ (គ្រឿង​បន្ថែម)
+
+@ Dragging up looks down instead of up
+km អូស​ឡើង​លើ​មើល​ចុះ​ក្រោម​ជំនួស​ឱ្យ​ឡើង​លើ
+
+@ Drive
+km បង្ខូច​សំឡេង
+
+@ Dynamic Lights
+km ពន្លឺ​ឌីណាមិក
+
+@ Echo
+km បន្ទរ
+
+@ Enemy Health
+km សុខភាព​សត្រូវ
+
+@ Enemy Wounds
+km របួស​សត្រូវ
+
+@ Enhanced Blood Splatter
+km ស្នាម​ឈាម​ខ្ទាត​ប្រសើរ
+
+@ Enhanced FX
+km ឥទ្ធិពល​ប្រសើរ
+
+@ Enhanced Models
+km ម៉ូដែល​ប្រសើរ
+
+@ Enhanced Particles
+km ភាគ​ល្អិត​ប្រសើរ
+
+@ Enhanced Water
+km ទឹក​ប្រសើរ
+
+@ Enhancements
+km ការ​កែ​លម្អ
+
+@ Equipment Wheel (Add-ons)
+km កង់​ឧបករណ៍ (គ្រឿង​បន្ថែម)
+
+@ Exploding boxes throw metal shards
+km ប្រអប់​ផ្ទុះ​បាច​បំណែក​ដែក
+
+@ Explosion Damage
+km ការ​ខូចខាត​ពី​ការ​ផ្ទុះ
+
+@ Explosion Scorch Marks
+km ស្នាម​ឆេះ​ពី​ការ​ផ្ទុះ
+
+@ Explosions scorch nearby solid surfaces
+km ការ​ផ្ទុះ​ដុត​ផ្ទៃ​រឹង​ក្បែរ​នោះ
+
+@ Explosives only
+km តែ​គ្រឿង​ផ្ទុះ
+
+@ Extra Monsters
+km បិសាច​បន្ថែម
+
+@ Extra Per 10 Damage (ms)
+km បន្ថែម​រៀង​រាល់ 10 ការ​ខូចខាត (ms)
+
+@ FX Settings
+km ការ​កំណត់​ឥទ្ធិពល
+
+@ Field of View
+km មុំ​មើល
+
+@ Firing never uses up ammo
+km ការ​បាញ់​មិន​អស់​គ្រាប់​ឡើយ
+
+@ First person
+km មនុស្ស​ទី​មួយ
+
+@ Flick Time
+km រយៈ​ពេល​ផ្លិច
+
+@ Flight Speed
+km ល្បឿន​ហោះ
+
+@ Fog
+km អ័ព្ទ
+
+@ Frag Limit
+km ដែន​កំណត់​ការ​សម្លាប់
+
+@ Freeze Duration (ms)
+km រយៈ​ពេល​កក (ms)
+
+@ GLQuake
+km GLQuake
+
+@ Game Speed
+km ល្បឿន​ហ្គេម
+
+@ Game Type
+km ប្រភេទ​ហ្គេម
+
+@ Gameplay
+km ការ​លេង
+
+@ Gameplay Modifiers
+km កត្តា​កែប្រែ​ការ​លេង
+
+@ Gel Quality
+km គុណភាព​ជែល
+
+@ Gib Surface Painting
+km ស្នាម​សាច់​ខ្ទេច​លើ​ផ្ទៃ
+
+@ Gibs
+km សាច់​ខ្ទេច
+
+@ Gibs and heads tumble and bounce
+km សាច់​ខ្ទេច​និង​ក្បាល​ក្រឡាប់​និង​លោត
+
+@ Goggle Glow Quality
+km គុណភាព​ពន្លឺ​វ៉ែនតា
+
+@ Goggle Intensity
+km កម្រិត​ខ្លាំង​វ៉ែនតា
+
+@ Goggle Noise
+km សញ្ញា​រំខាន​វ៉ែនតា
+
+@ Goggles Settings
+km ការ​កំណត់​វ៉ែនតា
+
+@ Graphics
+km ក្រាហ្វិក
+
+@ Green
+km បៃតង
+
+@ Grenade Arc
+km ខ្សែ​កោង​គ្រាប់​បែក
+
+@ Grenade Arc Settings
+km ការ​កំណត់​ខ្សែ​កោង​គ្រាប់​បែក
+
+@ Gun Kick
+km ការ​រញ្ជួយ​កាំភ្លើង
+
+@ Gyro
+km ជីរ៉ូ
+
+@ Gyro & Flick Stick
+km ជីរ៉ូ & ដង​បញ្ជា​ផ្លិច
+
+@ Gyro Active
+km ជីរ៉ូ​សកម្ម
+
+@ Gyro Aiming
+km តម្រង់​ដោយ​ជីរ៉ូ
+
+@ HUD
+km HUD
+
+@ HUD Style
+km រចនា​ប័ទ្ម HUD
+
+@ Health
+km សុខភាព
+
+@ Health Pickups
+km សុខភាព​ដែល​រើស​បាន
+
+@ Health Position
+km ទីតាំង​សុខភាព
+
+@ Health Regeneration
+km ការ​ស្ដារ​សុខភាព
+
+@ Hit & Kill Sounds
+km សំឡេង​ចំ & សម្លាប់
+
+@ Hit Doors & Lifts
+km ប៉ះ​ទ្វារ & ជណ្ដើរ​យន្ត
+
+@ Hit Markers
+km សញ្ញា​ចំ​គោលដៅ
+
+@ Hit Sound
+km សំឡេង​ចំ
+
+@ Hitmarker Size
+km ទំហំ​សញ្ញា​ចំ
+
+@ Hitmarker Type
+km ប្រភេទ​សញ្ញា​ចំ
+
+@ Hitstop Advanced
+km កក​ពេល​ចំ​កម្រិត​ខ្ពស់
+
+@ Hitstop Settings
+km ការ​កំណត់​កក​ពេល​ចំ
+
+@ Hold
+km សង្កត់​ជាប់
+
+@ Hold lock-on
+km សង្កត់​ចាក់​សោ​គោលដៅ
+
+@ Hook Enemies
+km ទំពក់​សត្រូវ
+
+@ Hook Metal
+km ទំពក់​ដែក
+
+@ Hook Stone
+km ទំពក់​ថ្ម
+
+@ Hook Wood
+km ទំពក់​ឈើ
+
+@ Hooking an enemy pulls you to it
+km ការ​ទំពក់​សត្រូវ​ទាញ​អ្នក​ទៅ​រក​វា
+
+@ Hookshot Range
+km ចម្ងាយ​ខ្សែ​ទំពក់
+
+@ Hookshot Settings
+km ការ​កំណត់​ខ្សែ​ទំពក់
+
+@ Host Game
+km បង្កើត​ហ្គេម
+
+@ How far the hook flies before it retracts
+km ចម្ងាយ​ដែល​ទំពក់​ហោះ​មុន​ពេល​ទាញ​ត្រឡប់
+
+@ How visible the on-screen controls are
+km កម្រិត​មើល​ឃើញ​នៃ​ការ​បញ្ជា​លើ​អេក្រង់
+
+@ Impact Lifetime
+km អាយុ​ស្នាម​ប៉ះ
+
+@ Infinite Ammo
+km គ្រាប់​គ្មាន​ដែន​កំណត់
+
+@ Input
+km ការ​បញ្ចូល
+
+@ Input Scale
+km មាត្រដ្ឋាន​បញ្ចូល
+
+@ Interpolate Animation
+km រលោង​ជីវចល
+
+@ Interpolate Movement
+km រលោង​ការ​ផ្លាស់​ទី
+
+@ Invert Look
+km បញ្ច្រាស​ការ​មើល
+
+@ Invert Mouse
+km បញ្ច្រាស​កណ្ដុរ
+
+@ Invert Stick
+km បញ្ច្រាស​ដង​បញ្ជា
+
+@ Jet Quality
+km គុណភាព​ទឹក​បាញ់
+
+@ Join Game
+km ចូល​ហ្គេម
+
+@ Jump / Swim Up
+km លោត / ហែល​ឡើង
+
+@ Jump again in mid-air
+km លោត​ម្ដង​ទៀត​លើ​អាកាស
+
+@ Jumps
+km ការ​លោត
+
+@ Keys & Powerups
+km កូនសោ & ថាមពល​បន្ថែម
+
+@ Keys & Powerups Position
+km ទីតាំង​កូនសោ & ថាមពល​បន្ថែម
+
+@ Kill Bonus (x)
+km រង្វាន់​សម្លាប់ (x)
+
+@ Kill Sound
+km សំឡេង​សម្លាប់
+
+@ Knock
+km គោះ
+
+@ Left
+km ឆ្វេង
+
+@ Length of the motion blur streaks
+km ប្រវែង​ឆ្នូត​ព្រិល​ចលនា
+
+@ Lifetime (seconds)
+km អាយុ​កាល (វិនាទី)
+
+@ Live Portal Views
+km ទិដ្ឋភាព​ផតថល​ផ្ទាល់
+
+@ Live View Distance
+km ចម្ងាយ​ទិដ្ឋភាព​ផ្ទាល់
+
+@ Local Players
+km អ្នក​លេង​ក្នុង​ម៉ាស៊ីន
+
+@ Local red wounds follow enemy animation
+km របួស​ក្រហម​តាម​ចលនា​សត្រូវ
+
+@ Lock Indicator
+km សញ្ញា​ចាក់​សោ​គោលដៅ
+
+@ Long falls don't hurt
+km ការ​ធ្លាក់​ពី​ខ្ពស់​មិន​ឈឺ
+
+@ Longest Freeze (ms)
+km ការ​កក​យូរ​បំផុត (ms)
+
+@ Look Down
+km មើល​ចុះ​ក្រោម
+
+@ Look Speed
+km ល្បឿន​មើល
+
+@ Look Up
+km មើល​ឡើង​លើ
+
+@ Main Menu Music
+km តន្ត្រី​ម៉ឺនុយ​មេ
+
+@ Max FPS
+km FPS អតិបរមា
+
+@ Max Players
+km អ្នក​លេង​អតិបរមា
+
+@ Maximum Impacts
+km ស្នាម​ប៉ះ​អតិបរមា
+
+@ Maximum Marks
+km ស្នាម​អតិបរមា
+
+@ Maximum Range
+km ចម្ងាយ​អតិបរមា
+
+@ Melee only
+km តែ​ប្រយុទ្ធ​ជិត
+
+@ Message Background
+km ផ្ទៃ​ខាង​ក្រោយ​សារ
+
+@ Message Text Size
+km ទំហំ​អក្សរ​សារ
+
+@ Messages & Captions
+km សារ & អក្សរ​ពិពណ៌នា
+
+@ Meter Duration (real seconds)
+km រយៈ​ពេល​របារ (វិនាទី​ពិត)
+
+@ Minimum Damage
+km ការ​ខូចខាត​អប្បបរមា
+
+@ Mode
+km របៀប
+
+@ Modern Console
+km កុងសូល​ទំនើប
+
+@ Modern HUD Layout
+km ប្លង់ HUD ទំនើប
+
+@ Most recent save
+km ការ​រក្សា​ទុក​ចុង​ក្រោយ
+
+@ Motion Blur
+km ព្រិល​ចលនា
+
+@ Motion Blur Amount
+km កម្រិត​ព្រិល​ចលនា
+
+@ Motion Blur Quality
+km គុណភាព​ព្រិល​ចលនា
+
+@ Mouse & Keyboard
+km កណ្ដុរ & ក្ដារ​ចុច
+
+@ Mouse Speed
+km ល្បឿន​កណ្ដុរ
+
+@ Move Back
+km ដើរ​ថយ​ក្រោយ
+
+@ Move Forward
+km ដើរ​ទៅ​មុខ
+
+@ Music Volume
+km កម្រិត​សំឡេង​តន្ត្រី
+
+@ Next Weapon
+km អាវុធ​បន្ទាប់
+
+@ No Drowning
+km មិន​លង់​ទឹក
+
+@ No Fall Damage
+km គ្មាន​ការ​ខូចខាត​ពេល​ធ្លាក់
+
+@ No Manual Saves
+km គ្មាន​ការ​រក្សា​ទុក​ដោយ​ដៃ
+
+@ No Self Damage
+km គ្មាន​ការ​ខូចខាត​ខ្លួន​ឯង
+
+@ Noise Filter
+km តម្រង​សញ្ញា​រំខាន
+
+@ Normal Color
+km ពណ៌​ធម្មតា
+
+@ Notify Message Position
+km ទីតាំង​សារ​ជូន​ដំណឹង
+
+@ Notify Message Time
+km រយៈ​ពេល​សារ​ជូន​ដំណឹង
+
+@ Number of splatter rays per blood impact
+km ចំនួន​កាំ​ខ្ទាត​ក្នុង​មួយ​ស្នាម​ឈាម
+
+@ Off
+km បិទ
+
+@ On Death
+km ពេល​ស្លាប់
+
+@ On Kill Color
+km ពណ៌​ពេល​សម្លាប់
+
+@ On Target Color
+km ពណ៌​ពេល​ចំ​គោលដៅ
+
+@ Opacity
+km ភាព​ស្រអាប់
+
+@ Opacity of the grenade arc
+km ភាព​ស្រអាប់​ខ្សែ​កោង​គ្រាប់​បែក
+
+@ Pants Color
+km ពណ៌​ខោ
+
+@ Particle Quality
+km គុណភាព​ភាគ​ល្អិត
+
+@ Particles
+km ភាគ​ល្អិត
+
+@ Physical Nail Impacts
+km ដែក​គោល​ដោត​ជាប់​ជាក់​ស្ដែង
+
+@ Pistol Start
+km ចាប់​ផ្ដើម​ដោយ​កាំភ្លើង​ខ្លី
+
+@ Pitch
+km កម្ពស់​សំឡេង
+
+@ Pitch Sensitivity
+km ភាព​រសើប​ឡើង​ចុះ
+
+@ Playback Speed
+km ល្បឿន​ចាក់
+
+@ Player Setup
+km ការ​រៀបចំ​អ្នក​លេង
+
+@ Pop
+km ផាប់
+
+@ Portal Gun Settings
+km ការ​កំណត់​កាំភ្លើង​ផតថល
+
+@ Portal Recursion
+km ផតថល​ក្នុង​ផតថល
+
+@ Portal View Quality
+km គុណភាព​ទិដ្ឋភាព​ផតថល
+
+@ Preview Sound
+km សាក​ស្ដាប់​សំឡេង
+
+@ Previous Weapon
+km អាវុធ​មុន
+
+@ Projectile Shotguns Settings
+km ការ​កំណត់​កាំភ្លើង​ស្នប់​គ្រាប់​រូបវន្ត
+
+@ Projectile Speed (units/s)
+km ល្បឿន​គ្រាប់ (ឯកតា/វិ)
+
+@ Purple
+km ស្វាយ
+
+@ Push
+km រុញ
+
+@ Push Strength
+km កម្លាំង​រុញ
+
+@ Quick Load
+km ផ្ទុក​រហ័ស
+
+@ Quick Save
+km រក្សា​ទុក​រហ័ស
+
+@ Railgun Settings
+km ការ​កំណត់​រ៉េលហ្គាន
+
+@ Ranged only
+km តែ​វាយ​ពី​ចម្ងាយ
+
+@ Reacquire While Held
+km ចាប់​គោលដៅ​ថ្មី​ពេល​សង្កត់
+
+@ Red
+km ក្រហម
+
+@ Reduce Motion
+km កាត់​បន្ថយ​ចលនា
+
+@ Regen (seconds per second)
+km ការ​ស្ដារ (វិនាទី​ក្នុង​មួយ​វិនាទី)
+
+@ Render Scale
+km មាត្រដ្ឋាន​បង្ហាញ
+
+@ Reverb
+km បន្ទរ​បន្ទប់
+
+@ Right
+km ស្ដាំ
+
+@ Ripple Intensity
+km កម្រិត​រលក​ទឹក
+
+@ Ripples
+km រលក​ទឹក
+
+@ Roll Sensitivity
+km ភាព​រសើប​ផ្អៀង
+
+@ Rumble
+km ការ​ញ័រ
+
+@ Run
+km រត់
+
+@ Save on All Enemies Killed
+km រក្សា​ទុក​ពេល​សម្លាប់​សត្រូវ​ទាំង​អស់
+
+@ Save on All Secrets Found
+km រក្សា​ទុក​ពេល​រក​ឃើញ​សម្ងាត់​ទាំង​អស់
+
+@ Save on Level Entry
+km រក្សា​ទុក​ពេល​ចូល​វគ្គ
+
+@ Save on Secret Found
+km រក្សា​ទុក​ពេល​រក​ឃើញ​សម្ងាត់
+
+@ Scoreboard
+km តារាង​ពិន្ទុ
+
+@ Screen Flashes
+km ការ​ភ្លឺ​អេក្រង់
+
+@ Screen Shader
+km Shader អេក្រង់
+
+@ Screen Shake
+km ការ​ញ័រ​អេក្រង់
+
+@ Search LAN
+km ស្វែង​រក LAN
+
+@ Seconds a center-screen message stays up
+km ចំនួន​វិនាទី​ដែល​សារ​កណ្ដាល​អេក្រង់​នៅ​បង្ហាញ
+
+@ See Through Portals
+km មើល​ឆ្លង​ផតថល
+
+@ See-through Teleporters
+km ច្រក​ផ្លាស់​ទី​មើល​ឆ្លង​បាន
+
+@ Shirt Color
+km ពណ៌​អាវ
+
+@ Shotgun Bullet Decals
+km ស្នាម​គ្រាប់​កាំភ្លើង​ស្នប់
+
+@ Shoulder left
+km ស្មា​ឆ្វេង
+
+@ Shoulder right
+km ស្មា​ស្ដាំ
+
+@ Show FPS
+km បង្ហាញ FPS
+
+@ Show Face
+km បង្ហាញ​មុខ
+
+@ Shrapnel
+km បំណែក​ផ្ទុះ
+
+@ Size of on-screen messages and captions
+km ទំហំ​សារ​និង​អក្សរ​ពិពណ៌នា​លើ​អេក្រង់
+
+@ Skill
+km កម្រិត​លំបាក
+
+@ Sky Fog
+km អ័ព្ទ​មេឃ
+
+@ Smooths the stepped movement of monsters
+km ធ្វើ​ឱ្យ​ចលនា​ជា​ជំហាន​របស់​បិសាច​រលូន
+
+@ Sound
+km សំឡេង
+
+@ Sound Captions
+km អក្សរ​ពិពណ៌នា​សំឡេង
+
+@ Sound Volume
+km កម្រិត​សំឡេង
+
+@ Speed Blur
+km ព្រិល​ល្បឿន
+
+@ Splashes
+km ការ​ខ្ទាត​ទឹក
+
+@ Splatter Amount
+km បរិមាណ​ស្នាម​ខ្ទាត
+
+@ Splatter Size
+km ទំហំ​ស្នាម​ខ្ទាត
+
+@ Start Game
+km ចាប់​ផ្ដើម​ហ្គេម
+
+@ Staying underwater doesn't hurt
+km ការ​នៅ​ក្រោម​ទឹក​មិន​ឈឺ
+
+@ Stick Look Pitch
+km ដង​បញ្ជា​មើល​ឡើង​ចុះ
+
+@ Stick Look Yaw
+km ដង​បញ្ជា​មើល​ឆ្វេង​ស្ដាំ
+
+@ Strafe Left
+km រំកិល​ទៅ​ឆ្វេង
+
+@ Strafe Right
+km រំកិល​ទៅ​ស្ដាំ
+
+@ Strength of the surface swell and rings
+km កម្លាំង​រលក​ផ្ទៃ​ទឹក​និង​រង្វង់
+
+@ Stun Duration
+km រយៈ​ពេល​ស្រឹក
+
+@ Style
+km រចនា​ប័ទ្ម
+
+@ Supersampling
+km Supersampling
+
+@ Surface Hit Effects
+km ឥទ្ធិពល​ប៉ះ​ផ្ទៃ
+
+@ Swim Down
+km ហែល​ចុះ
+
+@ Targets
+km គោលដៅ
+
+@ Teamplay
+km លេង​ជា​ក្រុម
+
+@ Texture Filter
+km តម្រង​វាយនភាព
+
+@ Third person
+km មនុស្ស​ទី​បី
+
+@ Thud
+km ធុក
+
+@ Tick
+km ទិក
+
+@ Time Limit
+km ដែន​កំណត់​ពេល
+
+@ Time Stretch
+km ពន្លូត​ពេល
+
+@ Toggle Attack
+km វាយ​ប្រហារ​បិទ/បើក
+
+@ Toggle Run
+km រត់​បិទ/បើក
+
+@ Toggle auto-aim
+km បិទ/បើក​តម្រង់​ស្វ័យ​ប្រវត្តិ
+
+@ Touch Controls
+km ការ​បញ្ជា​ប៉ះ
+
+@ Touchscreen
+km អេក្រង់​ប៉ះ
+
+@ Tough Enemy Health
+km សុខភាព​សត្រូវ​រឹង​មាំ
+
+@ Tough enemies only
+km តែ​សត្រូវ​រឹង​មាំ
+
+@ Trail Colour
+km ពណ៌​ស្នាម​ផ្លូវ
+
+@ Translate Console
+km បក​ប្រែ​កុងសូល
+
+@ Translucent Water
+km ទឹក​ថ្លា
+
+@ Treble
+km សំឡេង​ខ្ពស់
+
+@ Turn Left
+km បត់​ឆ្វេង
+
+@ Turn Right
+km បត់​ស្ដាំ
+
+@ Underwater FX
+km ឥទ្ធិពល​ក្រោម​ទឹក
+
+@ Use Bullet Time Meter
+km ប្រើ​របារ​ពេល​យឺត
+
+@ VSync
+km VSync
+
+@ View Bob
+km ការ​យោល​ទិដ្ឋភាព
+
+@ Viewmodels
+km ម៉ូដែល​អាវុធ
+
+@ Volume
+km កម្រិត​សំឡេង
+
+@ Water Opacity
+km ភាព​ស្រអាប់​ទឹក
+
+@ Water Quality
+km គុណភាព​ទឹក
+
+@ Water Settings
+km ការ​កំណត់​ទឹក
+
+@ Weapon Wheel
+km កង់​អាវុធ
+
+@ Weapon Wheel Slowdown
+km កង់​អាវុធ​បន្ថយ​ល្បឿន
+
+@ Weapons
+km អាវុធ
+
+@ Weapons Position
+km ទីតាំង​អាវុធ
+
+@ Where center-screen messages appear
+km ទីតាំង​ដែល​សារ​កណ្ដាល​អេក្រង់​បង្ហាញ
+
+@ Where pickup and event messages appear
+km ទីតាំង​ដែល​សារ​រើស​វត្ថុ​និង​ព្រឹត្តិការណ៍​បង្ហាញ
+
+@ White
+km ស
+
+@ Yaw Sensitivity
+km ភាព​រសើប​ឆ្វេង​ស្ដាំ
+
+@ Yellow
+km លឿង
+
+# lowercase choice values
+@ T
+km T
+
+@ always
+km ជានិច្ច
+
+@ auto
+km ស្វ័យ​ប្រវត្តិ
+
+@ banded
+km ជា​ឆ្នូត
+
+@ borderless
+km គ្មាន​ស៊ុម
+
+@ bottom center
+km ក្រោម​កណ្ដាល
+
+@ bottom left
+km ក្រោម​ឆ្វេង
+
+@ bottom right
+km ក្រោម​ស្ដាំ
+
+@ box
+km ប្រអប់
+
+@ broken square
+km ការ៉េ​ដាច់
+
+@ classic
+km បុរាណ
+
+@ coarse
+km គ្រើម
+
+@ cooperative
+km សហការ
+
+@ cross
+km កាកបាទ
+
+@ cross + dot
+km កាកបាទ + ចំណុច
+
+@ cyan
+km ខៀវ​ខ្ចី
+
+@ dashed
+km ដាច់ៗ
+
+@ deathmatch
+km ប្រយុទ្ធ​ស្លាប់
+
+@ deuteranopia
+km ខ្វាក់​ពណ៌​បៃតង
+
+@ diagonal streaks
+km ឆ្នូត​ទ្រេត
+
+@ diamond
+km ពេជ្រ
+
+@ dot
+km ចំណុច
+
+@ double
+km ពីរ​ដង
+
+@ double chevrons
+km សញ្ញា​ព្រួញ​ទ្វេ
+
+@ double diagonals
+km ខ្សែ​ទ្រេត​ទ្វេ
+
+@ easy
+km ងាយ
+
+@ fine
+km ល្អិត
+
+@ fit output
+km តាម​ទំហំ​លទ្ធផល
+
+@ flick stick
+km ដង​បញ្ជា​ផ្លិច
+
+@ fullscreen
+km ពេញ​អេក្រង់
+
+@ gap cross
+km កាកបាទ​មាន​ចន្លោះ
+
+@ green
+km បៃតង
+
+@ grey
+km ប្រផេះ
+
+@ half speed
+km ល្បឿន​ពាក់​កណ្ដាល
+
+@ hard
+km ពិបាក
+
+@ high
+km ខ្ពស់
+
+@ huge
+km ធំ​សម្បើម
+
+@ immersive
+km ស៊ីជម្រៅ
+
+@ intense
+km ខ្លាំង
+
+@ large
+km ធំ
+
+@ larger
+km ធំ​ជាង
+
+@ largest
+km ធំ​បំផុត
+
+@ linear
+km លីនេអ៊ែរ
+
+@ low
+km ទាប
+
+@ lower
+km ទាប​ជាង
+
+@ magenta
+km ស្វាយ​ក្រហម
+
+@ medium
+km មធ្យម
+
+@ middle
+km កណ្ដាល
+
+@ middle left
+km កណ្ដាល​ឆ្វេង
+
+@ middle right
+km កណ្ដាល​ស្ដាំ
+
+@ modern
+km ទំនើប
+
+@ nearest
+km ជិត​បំផុត
+
+@ nightmare
+km សុបិន​អាក្រក់
+
+@ nintendo
+km Nintendo
+
+@ no team damage
+km គ្មាន​ការ​ខូចខាត​ក្រុម
+
+@ none
+km គ្មាន
+
+@ normal
+km ធម្មតា
+
+@ off
+km បិទ
+
+@ off while held
+km បិទ​ពេល​សង្កត់
+
+@ on
+km បើក
+
+@ only while held
+km តែ​ពេល​សង្កត់
+
+@ playstation
+km PlayStation
+
+@ protanopia
+km ខ្វាក់​ពណ៌​ក្រហម
+
+@ quarter speed
+km ល្បឿន​មួយ​ភាគ​បួន
+
+@ red
+km ក្រហម
+
+@ short diagonals
+km ខ្សែ​ទ្រេត​ខ្លី
+
+@ single
+km មួយ​ដង
+
+@ small
+km តូច
+
+@ solid
+km ពេញ
+
+@ spectacle
+km អស្ចារ្យ
+
+@ subtle
+km ស្រាល
+
+@ team damage
+km ការ​ខូចខាត​ក្រុម
+
+@ top center
+km លើ​កណ្ដាល
+
+@ top left
+km លើ​ឆ្វេង
+
+@ top right
+km លើ​ស្ដាំ
+
+@ triple
+km បី​ដង
+
+@ tritanopia
+km ខ្វាក់​ពណ៌​ខៀវ
+
+@ upper
+km ខ្ពស់​ជាង
+
+@ white
+km ស
+
+@ whole screen
+km អេក្រង់​ទាំង​មូល
+
+@ windowed
+km ក្នុង​វីនដូ
+
+@ xbox
+km Xbox
+
+@ yellow
+km លឿង
+
+# ==== tooltips.txt ====
+
+# Options help lines (tooltips) and reasons for disabled rows.
+@ 2D aiming turns the view continuously with the right stick; flick stick snaps the view to where you push the stick, then turning the stick rotates it
+km ការ​តម្រង់ 2D បង្វិល​ទិដ្ឋភាព​ជា​បន្ត​បន្ទាប់​ដោយ​ដង​បញ្ជា​ស្ដាំ; ដង​បញ្ជា​ផ្លិច​បង្វែរ​ទិដ្ឋភាព​ភ្លាម​ទៅ​ទិស​ដែល​អ្នក​រុញ​ដង​បញ្ជា រួច​ការ​បង្វិល​ដង​បញ្ជា​នឹង​បង្វិល​ទិដ្ឋភាព
+
+@ 3D resolution relative to the window; the UI stays sharp
+km គុណភាព​បង្ហាញ 3D ធៀប​នឹង​វីនដូ; UI នៅ​តែ​ច្បាស់
+
+@ 3D view keeps the HUD and menus sharp; whole screen runs them through the shader too
+km ទិដ្ឋភាព 3D រក្សា HUD និង​ម៉ឺនុយ​ឱ្យ​ច្បាស់; អេក្រង់​ទាំង​មូល​ដាក់​វា​ឆ្លង​កាត់ shader ដែរ
+
+@ A Quake III style railgun: a slug that pierces every enemy on its line, using 2 cells a shot and refiring every 1.5 s; select it through its assigned weapon slot (Add-ons)
+km រ៉េលហ្គាន​បែប Quake III: គ្រាប់​ដែល​ទម្លុះ​សត្រូវ​គ្រប់​រូប​លើ​ខ្សែ​របស់​វា ប្រើ​ថ្ម​ថាមពល 2 ក្នុង​មួយ​គ្រាប់ និង​បាញ់​ម្ដង​ទៀត​រៀង​រាល់ 1.5 វិនាទី; ជ្រើស​វា​តាម​រន្ធ​អាវុធ​ដែល​បាន​កំណត់ (គ្រឿង​បន្ថែម)
+
+@ A Zelda-style hookshot: fire sends a chain hook out; it latches onto hookable surfaces or enemies and reels you in; fire again to let go
+km ខ្សែ​ទំពក់​បែប Zelda: ការ​បាញ់​បញ្ជូន​ទំពក់​ច្រវាក់​ចេញ; វា​ជាប់​នឹង​ផ្ទៃ​ឬ​សត្រូវ​ដែល​អាច​ទំពក់​បាន ហើយ​ទាញ​អ្នក​ចូល; បាញ់​ម្ដង​ទៀត​ដើម្បី​លែង
+
+@ Also translates the engine's console messages; off keeps them in English
+km បក​ប្រែ​សារ​កុងសូល​របស់​ម៉ាស៊ីន​ហ្គេម​ផង​ដែរ; បិទ​រក្សា​វា​ជា​ភាសា​អង់គ្លេស
+
+@ Automatically acquire another enemy while holding Lock-on after losing a target
+km ចាប់​សត្រូវ​ផ្សេង​ទៀត​ដោយ​ស្វ័យ​ប្រវត្តិ​ពេល​សង្កត់ ចាក់​សោ​គោលដៅ ក្រោយ​ពេល​បាត់​គោលដៅ
+
+@ Blends between animation frames of monsters and weapons
+km លាយ​រវាង​ស៊ុម​ជីវចល​របស់​បិសាច​និង​អាវុធ
+
+@ Blood stains surfaces and bodies; cosmetic, independent of particle packs
+km ឈាម​ប្រឡាក់​ផ្ទៃ​និង​សាក​សព; សម្រាប់​តែ​រូប​រាង មិន​ពឹង​លើ​កញ្ចប់​ភាគ​ល្អិត
+
+@ Bloom glow around bright lights and heat sources; medium uses 4 taps, high uses 8, low disables halo taps
+km ពន្លឺ​ព្រាល​ជុំវិញ​ភ្លើង​ភ្លឺ​និង​ប្រភព​កម្ដៅ; មធ្យម​ប្រើ 4 taps ខ្ពស់​ប្រើ 8 ទាប​បិទ taps រង្វង់​ពន្លឺ
+
+@ Blurs fast-moving monsters, projectiles and doors (not camera turns)
+km ធ្វើ​ឱ្យ​ព្រិល​បិសាច គ្រាប់ និង​ទ្វារ​ដែល​ផ្លាស់​ទី​លឿន (មិន​មែន​ការ​បង្វិល​កាមេរ៉ា​ទេ)
+
+@ Blurs the screen edges during fast falls and launches; keeps the centre clear. Reduce Motion disables it
+km ធ្វើ​ឱ្យ​ព្រិល​គែម​អេក្រង់​ពេល​ធ្លាក់​ឬ​ហោះ​លឿន; រក្សា​កណ្ដាល​ឱ្យ​ច្បាស់។ កាត់​បន្ថយ​ចលនា​បិទ​វា
+
+@ Brightness of the underwater light patterns
+km ពន្លឺ​នៃ​លំនាំ​ពន្លឺ​ក្រោម​ទឹក
+
+@ Caps mark count, lifetime, airborne droplets and wound/gib painting; low skips enemy wounds and gib trails
+km កំណត់​ចំនួន​ស្នាម អាយុ​កាល ដំណក់​ក្នុង​អាកាស និង​ការ​គូរ​របួស/សាច់​ខ្ទេច; ទាប​រំលង​របួស​សត្រូវ​និង​ស្នាម​សាច់​ខ្ទេច
+
+@ Caps shader input at output size so 200% render scale keeps 3D sharpness without 4x shader cost; low scales stay low-res
+km កំណត់​ការ​បញ្ចូល shader ត្រឹម​ទំហំ​លទ្ធផល ដូច្នេះ​មាត្រដ្ឋាន​បង្ហាញ 200% រក្សា​ភាព​ច្បាស់ 3D ដោយ​គ្មាន​តម្លៃ shader 4x; មាត្រដ្ឋាន​ទាប​នៅ​តែ​ច្បាស់​ទាប
+
+@ Classic: the original status bar; modern: compact elements at the screen edges
+km បុរាណ: របារ​ស្ថានភាព​ដើម; ទំនើប: ធាតុ​តូចៗ​នៅ​គែម​អេក្រង់
+
+@ Coat atlas resolution, rebuild rate and shader detail: low builds smaller coats less often with fast shading; high uses full detail
+km គុណភាព​បង្ហាញ​អាត្លាស​ស្រទាប់ អត្រា​បង្កើត​ឡើង​វិញ និង​លម្អិត shader: ទាប​បង្កើត​ស្រទាប់​តូចៗ​តិច​ដង​ជាមួយ​ការ​ដាក់​ស្រមោល​លឿន; ខ្ពស់​ប្រើ​លម្អិត​ពេញ​លេញ
+
+@ Colour of the railgun's spiral trail; split-screen players each get the next colour along
+km ពណ៌​ស្នាម​រមួល​របស់​រ៉េលហ្គាន; អ្នក​លេង​បំបែក​អេក្រង់​ម្នាក់ៗ​ទទួល​បាន​ពណ៌​បន្ទាប់
+
+@ Damage the railgun deals to each enemy it passes through (Quake III: 100)
+km ការ​ខូចខាត​ដែល​រ៉េលហ្គាន​ធ្វើ​លើ​សត្រូវ​នីមួយៗ​ដែល​វា​ឆ្លង​កាត់ (Quake III: 100)
+
+@ Dark backdrop behind on-screen messages for readability
+km ផ្ទៃ​ងងឹត​នៅ​ពី​ក្រោយ​សារ​លើ​អេក្រង់​ដើម្បី​ងាយ​អាន
+
+@ Dark border keeps the crosshair visible on any background
+km គែម​ងងឹត​ធ្វើ​ឱ្យ​សញ្ញា​តម្រង់​មើល​ឃើញ​លើ​ផ្ទៃ​ណា​ក៏​ដោយ
+
+@ Darkens corners and contact areas where geometry meets; higher quality is sharper
+km ធ្វើ​ឱ្យ​ងងឹត​ជ្រុង​និង​កន្លែង​ដែល​ធរណីមាត្រ​ប៉ះ​គ្នា; គុណភាព​ខ្ពស់​ជាង​គឺ​ច្បាស់​ជាង
+
+@ Debris lands on and is carried or shoved by doors, lifts and platforms
+km កម្ទេច​កម្ទី​ធ្លាក់​លើ ហើយ​ត្រូវ​បាន​ដឹក​ឬ​រុញ​ដោយ​ទ្វារ ជណ្ដើរ​យន្ត និង​វេទិកា
+
+@ Detail for caustics, ripples and splashes: low uses smaller budgets and shorter view distance; high uses larger budgets and farther view distance
+km លម្អិត​សម្រាប់​ពន្លឺ​ក្រោម​ទឹក រលក​ទឹក និង​ការ​ខ្ទាត​ទឹក: ទាប​ប្រើ​ថវិកា​តូច​ជាង​និង​ចម្ងាយ​មើល​ខ្លី​ជាង; ខ្ពស់​ប្រើ​ថវិកា​ធំ​ជាង​និង​ចម្ងាយ​មើល​ឆ្ងាយ​ជាង
+
+@ Disabled while Enhanced Particles is on: its particles replace the GLQuake and Classic styles
+km បិទ​ពេល ភាគ​ល្អិត​ប្រសើរ បើក: ភាគ​ល្អិត​របស់​វា​ជំនួស​រចនា​ប័ទ្ម GLQuake និង​បុរាណ
+
+@ Disabled while Enhanced Water is on: its own underwater effects replace the classic and GLQuake view warps
+km បិទ​ពេល ទឹក​ប្រសើរ បើក: ឥទ្ធិពល​ក្រោម​ទឹក​ផ្ទាល់​របស់​វា​ជំនួស​ការ​បង្ខូច​ទិដ្ឋភាព​បុរាណ​និង GLQuake
+
+@ Draw the predicted grenade path as a solid or dashed line
+km គូរ​ផ្លូវ​គ្រាប់​បែក​ដែល​បាន​ទស្សន៍​ទាយ​ជា​ខ្សែ​ពេញ​ឬ​ដាច់ៗ
+
+@ Draw the view out of the linked portal inside each portal; off shows flat discs (fastest)
+km គូរ​ទិដ្ឋភាព​ពី​ផតថល​ដែល​ភ្ជាប់​នៅ​ក្នុង​ផតថល​នីមួយៗ; បិទ​បង្ហាញ​ថាស​រាប​ស្មើ (លឿន​បំផុត)
+
+@ Droplets spray up when things enter or leave water, slime or lava
+km ដំណក់​ទឹក​ខ្ទាត​ឡើង​ពេល​វត្ថុ​ចូល​ឬ​ចេញ​ពី​ទឹក ស្លាយ ឬ​កម្អែ​ភ្នំ​ភ្លើង
+
+@ Emulates the original 8-bit palette of software rendering
+km ត្រាប់​តាម​ក្ដារ​ពណ៌ 8-bit ដើម​នៃ​ការ​បង្ហាញ​ដោយ​កម្មវិធី
+
+@ Every level starts with only the shotgun and axe, as if started fresh
+km វគ្គ​នីមួយៗ​ចាប់​ផ្ដើម​ដោយ​មាន​តែ​កាំភ្លើង​ស្នប់​និង​ពូថៅ ដូច​ជា​ចាប់​ផ្ដើម​ថ្មី
+
+@ Explosion damage for each remotely detonated sticky bomb
+km ការ​ខូចខាត​ផ្ទុះ​សម្រាប់​គ្រាប់​បែក​ស្អិត​នីមួយៗ​ដែល​បំផ្ទុះ​ពី​ចម្ងាយ
+
+@ Extra freeze milliseconds for every 10 damage dealt, so heavy hits stop longer
+km មិល្លី​វិនាទី​កក​បន្ថែម​រៀង​រាល់ 10 ការ​ខូចខាត ដូច្នេះ​ការ​វាយ​ធ្ងន់​ឈប់​យូរ​ជាង
+
+@ First person, a third-person camera centered behind the player, or one over the right or left shoulder; third person hides viewmodels
+km មនុស្ស​ទី​មួយ កាមេរ៉ា​មនុស្ស​ទី​បី​នៅ​កណ្ដាល​ពី​ក្រោយ​អ្នក​លេង ឬ​កាមេរ៉ា​លើ​ស្មា​ស្ដាំ​ឬ​ឆ្វេង; មនុស្ស​ទី​បី​លាក់​ម៉ូដែល​អាវុធ
+
+@ Flash the selected marker on confirmed hits; colors are shared with the crosshair
+km បញ្ចេញ​សញ្ញា​ដែល​បាន​ជ្រើស​ពេល​វាយ​ត្រូវ; ពណ៌​ប្រើ​រួម​ជាមួយ​សញ្ញា​តម្រង់
+
+@ Freeze for every enemy, or only for enemies that were tough before the hit
+km កក​សម្រាប់​សត្រូវ​គ្រប់​រូប ឬ​តែ​សត្រូវ​ដែល​រឹង​មាំ​មុន​ពេល​ត្រូវ​វាយ
+
+@ Freeze the game briefly when you damage an enemy; single player with add-ons only
+km ផ្អាក​ហ្គេម​មួយ​ភ្លែត​ពេល​អ្នក​ធ្វើ​ឱ្យ​សត្រូវ​រង​របួស; សម្រាប់​តែ​អ្នក​លេង​ម្នាក់​ដែល​មាន​គ្រឿង​បន្ថែម
+
+@ Gibs tumble and barrels throw shrapnel; shots and blasts push them (cosmetic only)
+km សាច់​ខ្ទេច​ក្រឡាប់​ហើយ​ធុង​បាច​បំណែក; ការ​បាញ់​និង​ការ​ផ្ទុះ​រុញ​វា (សម្រាប់​តែ​រូប​រាង)
+
+@ Health an enemy must have had before the hit to count as tough
+km សុខភាព​ដែល​សត្រូវ​ត្រូវ​មាន​មុន​ពេល​ត្រូវ​វាយ​ដើម្បី​ចាត់​ទុក​ថា​រឹង​មាំ
+
+@ Hits dealing less damage than this do not freeze the game; the default 10 skips nails and shotgun pellets
+km ការ​វាយ​ដែល​ខូចខាត​តិច​ជាង​នេះ​មិន​ធ្វើ​ឱ្យ​ហ្គេម​កក​ទេ; លំនាំ​ដើម 10 រំលង​ដែក​គោល​និង​គ្រាប់​កាំភ្លើង​ស្នប់
+
+@ Hold fire and sweep the crosshair over monsters to queue them, release to throw: it stuns each in turn and flies back; alt-fire clears the queue
+km សង្កត់​បាញ់​ហើយ​អូស​សញ្ញា​តម្រង់​លើ​បិសាច​ដើម្បី​តម្រៀប​វា លែង​ដើម្បី​បោះ: វា​ធ្វើ​ឱ្យ​ម្នាក់ៗ​ស្រឹក​តាម​វេន​ហើយ​ហោះ​ត្រឡប់​មក​វិញ; បាញ់​ជំនួស​សម្អាត​ជួរ
+
+@ Hold: keep Lock-on held. Toggle: press Auto-aim Toggle to enable automatic acquisition. Click look stick to switch targets
+km សង្កត់​ជាប់: សង្កត់ ចាក់​សោ​គោលដៅ​ជាប់។ បិទ/បើក: ចុច បិទ/បើក​តម្រង់​ស្វ័យ​ប្រវត្តិ ដើម្បី​បើក​ការ​ចាប់​គោលដៅ​ស្វ័យ​ប្រវត្តិ។ ចុច​ដង​បញ្ជា​មើល​ដើម្បី​ប្ដូរ​គោលដៅ
+
+@ How close an enemy must be to the crosshair for automatic acquisition in toggle mode (degrees)
+km ភាព​ជិត​ដែល​សត្រូវ​ត្រូវ​នៅ​ពី​សញ្ញា​តម្រង់​ដើម្បី​ចាប់​ស្វ័យ​ប្រវត្តិ​ក្នុង​របៀប​បិទ/បើក (ដឺក្រេ)
+
+@ How far the view tilts up and down when you tilt the controller (pitch axis)
+km កម្រិត​ដែល​ទិដ្ឋភាព​ផ្ងារ​ឡើង​ចុះ​ពេល​អ្នក​ផ្អៀង​ឧបករណ៍​បញ្ជា (អ័ក្ស pitch)
+
+@ How far the view turns left and right when you turn the controller (yaw axis)
+km កម្រិត​ដែល​ទិដ្ឋភាព​បត់​ឆ្វេង​ស្ដាំ​ពេល​អ្នក​បង្វិល​ឧបករណ៍​បញ្ជា (អ័ក្ស yaw)
+
+@ How far the view turns when you drag on the right half of the screen
+km កម្រិត​ដែល​ទិដ្ឋភាព​បត់​ពេល​អ្នក​អូស​លើ​ពាក់​កណ្ដាល​ស្ដាំ​នៃ​អេក្រង់
+
+@ How fast the boomerang flies (units per second)
+km ល្បឿន​ហោះ​របស់​ប៊ូមឺរ៉ង់ (ឯកតា​ក្នុង​មួយ​វិនាទី)
+
+@ How hard shots and explosions push debris around
+km កម្លាំង​ដែល​ការ​បាញ់​និង​ការ​ផ្ទុះ​រុញ​កម្ទេច​កម្ទី
+
+@ How hard the Powerwasher's water pushes enemies
+km កម្លាំង​ដែល​ទឹក​របស់​ម៉ាស៊ីន​បាញ់​ទឹក​រុញ​សត្រូវ
+
+@ How long a hit freezes the game, in milliseconds
+km រយៈ​ពេល​ដែល​ការ​វាយ​ធ្វើ​ឱ្យ​ហ្គេម​កក គិត​ជា​មិល្លី​វិនាទី
+
+@ How strongly fog covers the sky when fog is on
+km កម្រិត​ដែល​អ័ព្ទ​គ្រប​មេឃ​ពេល​អ័ព្ទ​បើក
+
+@ How the view distorts underwater: Classic ripples the whole screen like software Quake, GLQuake slowly stretches and squashes the view
+km របៀប​ដែល​ទិដ្ឋភាព​បង្ខូច​ក្រោម​ទឹក: បុរាណ​ធ្វើ​ឱ្យ​អេក្រង់​ទាំង​មូល​រលក​ដូច Quake software ចំណែក GLQuake ពន្លូត​និង​សង្កត់​ទិដ្ឋភាព​យឺតៗ
+
+@ Ignores gyro rotation slower than this many degrees per second, to hide hand tremor
+km មិន​អើពើ​ការ​បង្វិល​ជីរ៉ូ​ដែល​យឺត​ជាង​ចំនួន​ដឺក្រេ​ក្នុង​មួយ​វិនាទី​នេះ ដើម្បី​លាក់​ការ​ញ័រ​ដៃ
+
+@ Immersive: appears for a few seconds only when its value changes
+km ស៊ីជម្រៅ: បង្ហាញ​តែ​ពីរ​បី​វិនាទី​ពេល​តម្លៃ​របស់​វា​ប្ដូរ
+
+@ Keeps textures sharp on floors and walls seen at steep angles
+km រក្សា​វាយនភាព​ឱ្យ​ច្បាស់​លើ​កម្រាល​និង​ជញ្ជាំង​ដែល​មើល​ពី​មុំ​ចោត
+
+@ Lights from rockets, muzzle flashes and explosions brighten nearby walls
+km ពន្លឺ​ពី​រ៉ុក្កែត ពន្លឺ​មាត់​កាំភ្លើង និង​ការ​ផ្ទុះ​ធ្វើ​ឱ្យ​ជញ្ជាំង​ក្បែរ​នោះ​ភ្លឺ
+
+@ Liquid surfaces swell and ring out where things move through them
+km ផ្ទៃ​វត្ថុ​រាវ​ហើម​និង​រលក​ជា​រង្វង់​កន្លែង​ដែល​វត្ថុ​ផ្លាស់​ទី​កាត់
+
+@ Lobs sticky bombs (rockets ammo) that cling to walls, doors and monsters; alt-fire detonates them all
+km បោះ​គ្រាប់​បែក​ស្អិត (គ្រាប់​រ៉ុក្កែត) ដែល​ជាប់​នឹង​ជញ្ជាំង ទ្វារ និង​បិសាច; បាញ់​ជំនួស​បំផ្ទុះ​វា​ទាំង​អស់
+
+@ Look of the classic particles: GLQuake draws soft round dots, Classic draws square pixels like software Quake
+km រូប​រាង​ភាគ​ល្អិត​បុរាណ: GLQuake គូរ​ចំណុច​មូល​ទន់ ចំណែក​បុរាណ​គូរ​ភីកសែល​ការ៉េ​ដូច Quake software
+
+@ Low skips the background smear halo and uses fewer blur samples; high keeps the full halo and smoother streaks
+km ទាប​រំលង​រង្វង់​ព្រិល​ផ្ទៃ​ក្រោយ​និង​ប្រើ​គំរូ​ព្រិល​តិច​ជាង; ខ្ពស់​រក្សា​រង្វង់​ពេញ​និង​ឆ្នូត​រលូន​ជាង
+
+@ Low: hard particle edges, half the scripted particles and fewer hit sparks. Medium: soft edges. High: soft edges checked per MSAA sample, most hit sparks
+km ទាប: គែម​ភាគ​ល្អិត​រឹង ភាគ​ល្អិត​ស្គ្រីប​ពាក់​កណ្ដាល និង​ផ្កា​ភ្លើង​ប៉ះ​តិច​ជាង។ មធ្យម: គែម​ទន់។ ខ្ពស់: គែម​ទន់​ពិនិត្យ​តាម​គំរូ MSAA នីមួយៗ ផ្កា​ភ្លើង​ប៉ះ​ច្រើន​បំផុត
+
+@ Marks fade out before expiring; oldest marks are recycled at the limit
+km ស្នាម​រសាត់​បាត់​មុន​ផុត​កំណត់; ស្នាម​ចាស់​បំផុត​ត្រូវ​យក​មក​ប្រើ​ឡើង​វិញ​ពេល​ដល់​ដែន​កំណត់
+
+@ Max nested portal reflections to draw; each level redraws the scene
+km ចំនួន​អតិបរមា​នៃ​ផតថល​ក្នុង​ផតថល​ដែល​ត្រូវ​គូរ; កម្រិត​នីមួយៗ​គូរ​ឈុត​ឆាក​ឡើង​វិញ
+
+@ Max portals per screen with a live view; each one redraws the scene
+km ចំនួន​ផតថល​អតិបរមា​ក្នុង​មួយ​អេក្រង់​ដែល​មាន​ទិដ្ឋភាព​ផ្ទាល់; នីមួយៗ​គូរ​ឈុត​ឆាក​ឡើង​វិញ
+
+@ Maximum distance for acquiring and keeping an enemy locked
+km ចម្ងាយ​អតិបរមា​ដើម្បី​ចាប់​និង​រក្សា​ការ​ចាក់​សោ​សត្រូវ
+
+@ Minimum gap between freezes, so shotgun pellets and rapid fire count once; kills ignore it
+km ចន្លោះ​អប្បបរមា​រវាង​ការ​កក ដូច្នេះ​គ្រាប់​កាំភ្លើង​ស្នប់​និង​ការ​បាញ់​លឿន​រាប់​តែ​ម្ដង; ការ​សម្លាប់​មិន​គិត​វា
+
+@ Modern terminal console with autocomplete popup, history search, ANSI colors, bash shell and piping; off uses the classic Quake console
+km កុងសូល​ទំនើប​ជាមួយ​ផ្ទាំង​បំពេញ​ស្វ័យ​ប្រវត្តិ ការ​ស្វែង​រក​ប្រវត្តិ ពណ៌ ANSI, bash shell និង piping; បិទ​ប្រើ​កុងសូល Quake បុរាណ
+
+@ Monsters take proportionally less damage at higher values; above 100% is harder
+km បិសាច​រង​ការ​ខូចខាត​តិច​ជាង​តាម​សមាមាត្រ​នៅ​តម្លៃ​ខ្ពស់; លើស 100% ពិបាក​ជាង
+
+@ Moving gibs leave blood on surfaces they touch
+km សាច់​ខ្ទេច​ដែល​កំពុង​ផ្លាស់​ទី​ទុក​ឈាម​លើ​ផ្ទៃ​ដែល​វា​ប៉ះ
+
+@ Multiplier on the freeze when the hit kills the enemy; 1 means no extra
+km មេគុណ​ការ​កក​ពេល​ការ​វាយ​សម្លាប់​សត្រូវ; 1 មាន​ន័យ​ថា​គ្មាន​បន្ថែម
+
+@ Multiplies ammo from pickups (up to the normal carry limit); below 100% is harder
+km គុណ​គ្រាប់​ពី​វត្ថុ​ដែល​រើស (រហូត​ដល់​ដែន​កំណត់​ផ្ទុក​ធម្មតា); ក្រោម 100% ពិបាក​ជាង
+
+@ Multiplies health from pickups (up to 100, or the item's own limit); below 100% is harder
+km គុណ​សុខភាព​ពី​វត្ថុ​ដែល​រើស (រហូត​ដល់ 100 ឬ​ដែន​កំណត់​របស់​វត្ថុ); ក្រោម 100% ពិបាក​ជាង
+
+@ Nails stick to wood and bodies; hard surfaces deflect them to the floor
+km ដែក​គោល​ដោត​ជាប់​ឈើ​និង​សាក​សព; ផ្ទៃ​រឹង​បង្វែរ​វា​ធ្លាក់​ដល់​ឥដ្ឋ
+
+@ Nearest keeps crisp classic pixels; linear smooths textures
+km ជិត​បំផុត​រក្សា​ភីកសែល​បុរាណ​ច្បាស់; លីនេអ៊ែរ​ធ្វើ​ឱ្យ​វាយនភាព​រលូន
+
+@ New Game: Add-ons
+km ហ្គេម​ថ្មី: គ្រឿង​បន្ថែម
+
+@ New Game: Customize
+km ហ្គេម​ថ្មី: ប្ដូរ​តាម​បំណង
+
+@ Night vision: how much dark areas are brightened; thermal: how strongly heat stands out
+km មើល​ពេល​យប់: កម្រិត​ដែល​តំបន់​ងងឹត​ត្រូវ​ធ្វើ​ឱ្យ​ភ្លឺ; មើល​កម្ដៅ: កម្រិត​ដែល​កម្ដៅ​លេច​ធ្លោ
+
+@ Night-vision and thermal goggles, cycle normal, night vision and thermal with Change Goggles (Add-ons), or use the Equipment Wheel
+km វ៉ែនតា​មើល​ពេល​យប់​និង​កម្ដៅ ប្ដូរ​វេន​ធម្មតា មើល​ពេល​យប់ និង​មើល​កម្ដៅ​ដោយ ប្ដូរ​វ៉ែនតា (គ្រឿង​បន្ថែម) ឬ​ប្រើ កង់​ឧបករណ៍
+
+@ No single freeze lasts longer than this, however much damage or kill bonus adds
+km គ្មាន​ការ​កក​ណា​មួយ​អូស​បន្លាយ​យូរ​ជាង​នេះ​ទេ ទោះ​ការ​ខូចខាត​ឬ​រង្វាន់​សម្លាប់​បន្ថែម​ប៉ុណ្ណា​ក៏​ដោយ
+
+@ Oldest marks and nails are recycled at this shared limit
+km ស្នាម​និង​ដែក​គោល​ចាស់​បំផុត​ត្រូវ​ប្រើ​ឡើង​វិញ​ពេល​ដល់​ដែន​កំណត់​រួម​នេះ
+
+@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
+km ដង​បញ្ជា​និង​ប៊ូតុង​លើ​អេក្រង់: ស្វ័យ​ប្រវត្តិ​បង្ហាញ​វា​ក្រោយ​ពេល​ប៉ះ​ហើយ​លាក់​វា​ពេល​ប្រើ​ឧបករណ៍​ផ្សេង
+
+@ Only autosaves: quicksaves and the Save menu are off
+km តែ​រក្សា​ទុក​ស្វ័យ​ប្រវត្តិ: រក្សា​ទុក​រហ័ស​និង​ម៉ឺនុយ​រក្សា​ទុក​ត្រូវ​បិទ
+
+@ Place every weapon at the center, right or left of the view, or hide all viewmodels
+km ដាក់​អាវុធ​ទាំង​អស់​នៅ​កណ្ដាល ស្ដាំ ឬ​ឆ្វេង​នៃ​ទិដ្ឋភាព ឬ​លាក់​ម៉ូដែល​អាវុធ​ទាំង​អស់
+
+@ Play your chosen hit or kill cue when you damage an enemy
+km ចាក់​សំឡេង​ចំ​ឬ​សម្លាប់​ដែល​អ្នក​បាន​ជ្រើស​ពេល​អ្នក​វាយ​ត្រូវ​សត្រូវ
+
+@ Playback speed: faster sounds shorter and higher
+km ល្បឿន​ចាក់: លឿន​ជាង​ស្ដាប់​ទៅ​ខ្លី​ជាង​និង​ខ្ពស់​ជាង
+
+@ Plays the Quake theme in the main menu when no game is running
+km ចាក់​បទ Quake នៅ​ក្នុង​ម៉ឺនុយ​មេ​ពេល​គ្មាន​ហ្គេម​កំពុង​ដំណើរ​ការ
+
+@ Portals farther away than this are drawn as flat discs
+km ផតថល​ដែល​នៅ​ឆ្ងាយ​ជាង​នេះ​ត្រូវ​គូរ​ជា​ថាស​រាប​ស្មើ
+
+@ Press attack once to keep firing, again to stop
+km ចុច​វាយ​ប្រហារ​ម្ដង​ដើម្បី​បាញ់​ជាប់ ចុច​ម្ដង​ទៀត​ដើម្បី​ឈប់
+
+@ Press run once to switch between running and walking
+km ចុច​រត់​ម្ដង​ដើម្បី​ប្ដូរ​រវាង​រត់​និង​ដើរ
+
+@ Raise or lower the tone independently of sound length
+km បង្កើន​ឬ​បន្ថយ​កម្ពស់​សំឡេង​ដោយ​មិន​ប៉ះពាល់​ប្រវែង​សំឡេង
+
+@ Red screen edges show where damage came from: top is front, bottom is behind; Screen Flashes controls their strength
+km គែម​អេក្រង់​ក្រហម​បង្ហាញ​ទិស​ដែល​ការ​ខូចខាត​មក​ពី: លើ​គឺ​ខាង​មុខ ក្រោម​គឺ​ខាង​ក្រោយ; ការ​ភ្លឺ​អេក្រង់​គ្រប់​គ្រង​កម្លាំង​របស់​វា
+
+@ Replaces the classic dot particles with glowing sparks, smoke and blood; mods with their own particle effects keep them
+km ជំនួស​ភាគ​ល្អិត​ចំណុច​បុរាណ​ដោយ​ផ្កា​ភ្លើង​ភ្លឺ ផ្សែង និង​ឈាម; mod ដែល​មាន​ឥទ្ធិពល​ភាគ​ល្អិត​ផ្ទាល់​ខ្លួន​រក្សា​វា​ទុក
+
+@ Resolution and detail inside portal and teleporter views; lower tiers trim nested effects
+km គុណភាព​បង្ហាញ​និង​លម្អិត​ក្នុង​ទិដ្ឋភាព​ផតថល​និង​ច្រក​ផ្លាស់​ទី; កម្រិត​ទាប​កាត់​ឥទ្ធិពល​ជាន់​គ្នា
+
+@ Rippling light patterns on surfaces under water and slime
+km លំនាំ​ពន្លឺ​រលក​លើ​ផ្ទៃ​ក្រោម​ទឹក​និង​ស្លាយ
+
+@ Scales all damage you take; above 100% is harder
+km កំណត់​មាត្រដ្ឋាន​ការ​ខូចខាត​ទាំង​អស់​ដែល​អ្នក​ទទួល; លើស 100% ពិបាក​ជាង
+
+@ Screen edge for this element; elements on the same spot stack
+km គែម​អេក្រង់​សម្រាប់​ធាតុ​នេះ; ធាតុ​នៅ​កន្លែង​ដូច​គ្នា​តម្រៀប​លើ​គ្នា
+
+@ Seconds a monster hit by the boomerang stays stunned
+km ចំនួន​វិនាទី​ដែល​បិសាច​ត្រូវ​ប៊ូមឺរ៉ង់​នៅ​ស្រឹក
+
+@ Seconds impact marks and stuck nails stay before fading out; independent of Particle Quality
+km ចំនួន​វិនាទី​ដែល​ស្នាម​ប៉ះ​និង​ដែក​គោល​ដោត​នៅ​មុន​រសាត់​បាត់; មិន​ពឹង​លើ គុណភាព​ភាគ​ល្អិត
+
+@ Seconds messages at the top of the screen stay up
+km ចំនួន​វិនាទី​ដែល​សារ​នៅ​ផ្នែក​ខាង​លើ​អេក្រង់​នៅ​បង្ហាញ
+
+@ Seconds the flick stick snap takes; lower is faster
+km ចំនួន​វិនាទី​ដែល​ការ​បង្វែរ​ដង​បញ្ជា​ផ្លិច​ប្រើ; ទាប​ជាង​គឺ​លឿន​ជាង
+
+@ See through enhanced water; enables Water Opacity
+km មើល​ឆ្លង​ទឹក​ប្រសើរ; បើក ភាព​ស្រអាប់​ទឹក
+
+@ Sensor grain, scanlines and flicker of the goggle image
+km គ្រាប់​សេនស័រ ខ្សែ​ស្កេន និង​ការ​ភ្លឹប​ភ្លែត​នៃ​រូប​វ៉ែនតា
+
+@ Shades every anti-aliasing sample; needs Anti-aliasing on
+km ដាក់​ស្រមោល​គ្រប់​គំរូ​រលោង​គែម; ត្រូវ​ការ ការ​រលោង​គែម​បើក
+
+@ Shifts colors so they stay distinct for the chosen color blindness
+km ផ្លាស់​ប្ដូរ​ពណ៌​ដើម្បី​ឱ្យ​វា​នៅ​តែ​ខុស​គ្នា​ច្បាស់​សម្រាប់​ប្រភេទ​ខ្វាក់​ពណ៌​ដែល​បាន​ជ្រើស
+
+@ Shotgun hits leave small surface marks (cosmetic only)
+km គ្រាប់​កាំភ្លើង​ស្នប់​ទុក​ស្នាម​តូចៗ​លើ​ផ្ទៃ (សម្រាប់​តែ​រូប​រាង)
+
+@ Show corner ticks at screen centre while locked, even with Crosshair off
+km បង្ហាញ​សញ្ញា​ជ្រុង​នៅ​កណ្ដាល​អេក្រង់​ពេល​ចាក់​សោ ទោះ​បី សញ្ញា​តម្រង់ បិទ​ក៏​ដោយ
+
+@ Show where grenades and other arcing shots will fly, bounce and land; local play only, not in deathmatch
+km បង្ហាញ​កន្លែង​ដែល​គ្រាប់​បែក​និង​គ្រាប់​កោង​ផ្សេង​ទៀត​នឹង​ហោះ លោត និង​ធ្លាក់; សម្រាប់​តែ​ការ​លេង​ក្នុង​ម៉ាស៊ីន មិន​មែន​ក្នុង​ប្រយុទ្ធ​ស្លាប់​ទេ
+
+@ Shows text for important sounds: doors, alerted enemies, secrets, pickups
+km បង្ហាញ​អក្សរ​សម្រាប់​សំឡេង​សំខាន់ៗ: ទ្វារ សត្រូវ​ដែល​ដឹង​ខ្លួន កន្លែង​សម្ងាត់ វត្ថុ​ដែល​រើស
+
+@ Shows the distance fog that maps and mods set; off always gives clear view
+km បង្ហាញ​អ័ព្ទ​ចម្ងាយ​ដែល​ផែនទី​និង mod កំណត់; បិទ​ផ្ដល់​ទិដ្ឋភាព​ច្បាស់​ជានិច្ច
+
+@ Shows the player face next to the health number
+km បង្ហាញ​មុខ​អ្នក​លេង​ក្បែរ​លេខ​សុខភាព
+
+@ Simulation detail, step rate, fade-out lifetimes and caps for gibs and shrapnel; low also skips mover collision
+km លម្អិត​ការ​ក្លែង​ធ្វើ អត្រា​ជំហាន អាយុ​កាល​រសាត់ និង​ដែន​កំណត់​សម្រាប់​សាច់​ខ្ទេច​និង​បំណែក​ផ្ទុះ; ទាប​ក៏​រំលង​ការ​ប៉ះ​ទង្គិច​ជាមួយ​វត្ថុ​ផ្លាស់​ទី
+
+@ Size of the on-screen buttons and move stick
+km ទំហំ​ប៊ូតុង​លើ​អេក្រង់​និង​ដង​បញ្ជា​ដើរ
+
+@ Slowly heals up to 100 health after 5 seconds without being hit
+km ព្យាបាល​បន្តិច​ម្ដងៗ​រហូត​ដល់​សុខភាព 100 ក្រោយ 5 វិនាទី​ដោយ​មិន​ត្រូវ​វាយ
+
+@ Slows stick look while the crosshair is over an enemy
+km បន្ថយ​ល្បឿន​មើល​ដោយ​ដង​បញ្ជា​ពេល​សញ្ញា​តម្រង់​នៅ​លើ​សត្រូវ
+
+@ Slows the game down while the weapon wheel is open
+km បន្ថយ​ល្បឿន​ហ្គេម​ពេល​កង់​អាវុធ​បើក
+
+@ Slows the whole game down; single player only. Saves and demos stay compatible with other ports
+km បន្ថយ​ល្បឿន​ហ្គេម​ទាំង​មូល; សម្រាប់​តែ​អ្នក​លេង​ម្នាក់។ ការ​រក្សា​ទុក​និង​ដេម៉ូ​នៅ​តែ​ត្រូវ​គ្នា​ជាមួយ source port ផ្សេង​ទៀត
+
+@ Small camera jolt on each freeze; off with Reduce Motion
+km ការ​រញ្ជួយ​កាមេរ៉ា​តិចៗ​ពេល​កក​នីមួយៗ; បិទ​ដោយ កាត់​បន្ថយ​ចលនា
+
+@ Snap and track enemies in local play, including split-screen; unavailable online
+km ចាប់​និង​តាម​ដាន​សត្រូវ​ក្នុង​ការ​លេង​ក្នុង​ម៉ាស៊ីន រួម​ទាំង​បំបែក​អេក្រង់; មិន​អាច​ប្រើ​តាម​អ៊ីនធឺណិត
+
+@ Sparks, smoke, chips, splinters and splashes fly off whatever your shots hit
+km ផ្កា​ភ្លើង ផ្សែង កម្ទេច ចំណិត​ឈើ និង​ទឹក​ខ្ទាត​ហោះ​ចេញ​ពី​អ្វី​ដែល​គ្រាប់​អ្នក​ប៉ះ
+
+@ Spawns extra copies of every monster around the original when a level starts
+km បង្កើត​ច្បាប់​ចម្លង​បន្ថែម​នៃ​បិសាច​នីមួយៗ​នៅ​ជុំវិញ​ច្បាប់​ដើម​ពេល​វគ្គ​ចាប់​ផ្ដើម
+
+@ Strength of the full-screen flashes for damage, pickups and powerups
+km កម្លាំង​ពន្លឺ​ភ្លឺ​ពេញ​អេក្រង់​សម្រាប់​ការ​ខូចខាត ការ​រើស​វត្ថុ និង​ថាមពល​បន្ថែម
+
+@ Stretch or shorten the sound while keeping its pitch
+km ពន្លូត​ឬ​បង្រួម​សំឡេង​ដោយ​រក្សា​កម្ពស់​សំឡេង
+
+@ Surface opacity; requires Enhanced Water and Translucent Water
+km ភាព​ស្រអាប់​ផ្ទៃ; ត្រូវ​ការ ទឹក​ប្រសើរ និង ទឹក​ថ្លា
+
+@ The hook latches onto metal surfaces (metal, tech, computer panels, copper)
+km ទំពក់​ជាប់​ផ្ទៃ​ដែក (ដែក បច្ចេកវិទ្យា ផ្ទាំង​កុំព្យូទ័រ ស្ពាន់)
+
+@ The hook latches onto stone, brick, rock and any surface not recognised as wood or metal
+km ទំពក់​ជាប់​ថ្ម ឥដ្ឋ ផ្ទាំង​ថ្ម និង​ផ្ទៃ​ណា​ដែល​មិន​ត្រូវ​បាន​ស្គាល់​ថា​ជា​ឈើ​ឬ​ដែក
+
+@ The hook latches onto wooden surfaces (texture names like wood, crate, plank)
+km ទំពក់​ជាប់​ផ្ទៃ​ឈើ (ឈ្មោះ​វាយនភាព​ដូច​ជា wood, crate, plank)
+
+@ Turn the controller's motion sensor into a look input; needs a pad with a gyroscope
+km ប្រើ​សេនស័រ​ចលនា​របស់​ឧបករណ៍​បញ្ជា​ជា​ការ​បញ្ចូល​មើល; ត្រូវ​ការ​ឧបករណ៍​បញ្ជា​ដែល​មាន​ជីរ៉ូ​ស្កុប
+
+@ Turns off view bob, strafe tilt and the camera kick when hit or firing
+km បិទ​ការ​យោល​ទិដ្ឋភាព ការ​ផ្អៀង​ពេល​រំកិល និង​ការ​រញ្ជួយ​កាមេរ៉ា​ពេល​ត្រូវ​វាយ​ឬ​បាញ់
+
+@ Turns on the extra liquid effects; Water Settings controls each one
+km បើក​ឥទ្ធិពល​វត្ថុ​រាវ​បន្ថែម; ការ​កំណត់​ទឹក​គ្រប់​គ្រង​ឥទ្ធិពល​នីមួយៗ
+
+@ Turns the view to follow a moving enemy you are aiming at
+km បង្វិល​ទិដ្ឋភាព​ឱ្យ​តាម​សត្រូវ​ដែល​កំពុង​ផ្លាស់​ទី​ដែល​អ្នក​កំពុង​តម្រង់
+
+@ Turns the view when you roll the controller sideways; 0 disables it, negative reverses it
+km បង្វិល​ទិដ្ឋភាព​ពេល​អ្នក​ផ្អៀង​ឧបករណ៍​បញ្ជា​ទៅ​ចំហៀង; 0 បិទ​វា តម្លៃ​អវិជ្ជមាន​បញ្ច្រាស​វា
+
+@ Two-portal gun: fire and alt-fire place linked portals on flat walls; assign a weapon slot in Add-ons
+km កាំភ្លើង​ផតថល​ពីរ: បាញ់​និង​បាញ់​ជំនួស​ដាក់​ផតថល​ភ្ជាប់​គ្នា​លើ​ជញ្ជាំង​រាប​ស្មើ; កំណត់​រន្ធ​អាវុធ​ក្នុង គ្រឿង​បន្ថែម
+
+@ Unlocks the FX Settings page: enhanced particles, impact effects and blood splatter
+km ដោះ​សោ​ទំព័រ ការ​កំណត់​ឥទ្ធិពល: ភាគ​ល្អិត​ប្រសើរ ឥទ្ធិពល​ប៉ះ និង​ស្នាម​ឈាម​ខ្ទាត
+
+@ Uses the 2021 re-release's smoother MD5 models (and MD3 replacements from mods) instead of the classic ones. Applies on the next map load
+km ប្រើ​ម៉ូដែល MD5 រលូន​ជាង​របស់​កំណែ​ចេញ​ឡើង​វិញ​ឆ្នាំ 2021 (និង​ម៉ូដែល​ជំនួស MD3 ពី mod) ជំនួស​ឱ្យ​ម៉ូដែល​បុរាណ។ មាន​ប្រសិទ្ធភាព​នៅ​ពេល​ផ្ទុក​ផែនទី​បន្ទាប់
+
+@ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
+km ប្រើ​ពន្លឺ​ពណ៌​របស់​ផែនទី (ឯកសារ .lit ឬ BSPX lump); បិទ​ផ្ដល់​ពន្លឺ​ស​ដើម។ មាន​ប្រសិទ្ធភាព​នៅ​ពេល​ផ្ទុក​ផែនទី​បន្ទាប់
+
+@ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
+km ផ្នែក​ទឹក​បាញ់ ចំនួន​ដំណក់ និង​ការ​ដាក់​ស្រមោល​វត្ថុ​រាវ​ភ្លឺ​រលោង: ទាប​ប្រើ​ខ្សែ​ទឹក​ថ្លា​សាមញ្ញ​ជាង; ខ្ពស់​ប្រើ​ទឹក​បាញ់​រលូន​ភ្លឺ​រលោង
+
+@ When gyro looking applies: always, off while +gyroaction is held, or only while it is held
+km ពេល​ដែល​ការ​មើល​ដោយ​ជីរ៉ូ​ដំណើរ​ការ: ជានិច្ច បិទ​ពេល​សង្កត់ +gyroaction ឬ​តែ​ពេល​សង្កត់​វា
+
+@ Which weapons trigger the freeze; melee covers the axe and any mod weapon used at close range without ammo
+km អាវុធ​ណា​ដែល​បង្ក​ការ​កក; ប្រយុទ្ធ​ជិត​រួម​មាន​ពូថៅ​និង​អាវុធ mod ណា​ដែល​ប្រើ​ពី​ចម្ងាយ​ជិត​ដោយ​គ្មាន​គ្រាប់
+
+@ Your own rockets and grenades don't hurt you; rocket jumps still work
+km រ៉ុក្កែត​និង​គ្រាប់​បែក​របស់​អ្នក​មិន​ធ្វើ​ឱ្យ​អ្នក​ឈឺ​ទេ; ការ​លោត​ដោយ​រ៉ុក្កែត​នៅ​តែ​ដំណើរ​ការ
+
+# ==== ui.txt ====
+
+# Menus and pop-ups outside the options pages: save cards, launch, presets,
+# add-on browser, map packs, hints and dialogs.
+@ Select
+km ជ្រើស​រើស
+
+@ Back
+km ថយ​ក្រោយ
+
+@ Cancel
+km បោះ​បង់
+
+@ Confirm
+km បញ្ជាក់
+
+@ Scroll
+km រំកិល
+
+@ Section
+km ផ្នែក
+
+@ Bind
+km កំណត់​គ្រាប់​ចុច
+
+@ Cancel binding
+km បោះ​បង់​ការ​កំណត់
+
+@ Clear
+km សម្អាត
+
+@ Clear pad
+km សម្អាត​ឧបករណ៍​បញ្ជា
+
+@ Remap
+km កំណត់​ឡើង​វិញ
+
+@ Type
+km វាយ​អក្សរ
+
+@ Shift
+km Shift
+
+@ Done
+km រួច​រាល់
+
+@ Del
+km Del
+
+@ Space
+km ដក​ឃ្លា
+
+@ Save
+km រក្សា​ទុក
+
+@ Load
+km ផ្ទុក
+
+@ Delete
+km លុប
+
+@ Play
+km លេង
+
+@ Yes
+km បាទ/ចាស
+
+@ No
+km ទេ
+
+@ OK
+km យល់​ព្រម
+
+@ System
+km ប្រព័ន្ធ
+
+@ Language
+km ភាសា
+
+@ Help
+km ជំនួយ
+
+@ Fixed for this game: it was started without Customize
+km ថេរ​សម្រាប់​ហ្គេម​នេះ: វា​ត្រូវ​បាន​ចាប់​ផ្ដើម​ដោយ​គ្មាន ប្ដូរ​តាម​បំណង
+
+@ Press a button or key to bind (Start cancels)
+km ចុច​ប៊ូតុង​ឬ​គ្រាប់​ចុច​ដើម្បី​កំណត់ (Start បោះ​បង់)
+
+@ Press button...
+km ចុច​ប៊ូតុង...
+
+@ Press key...
+km ចុច​គ្រាប់​ចុច...
+
+@ Replace this binding?
+km ជំនួស​ការ​កំណត់​នេះ?
+
+@ is already assigned
+km ត្រូវ​បាន​កំណត់​រួច​ហើយ
+
+@ {} already assigned
+km {} ត្រូវ​បាន​កំណត់​រួច​ហើយ
+
+@ Open Controls to remap Lock-on?
+km បើក ការ​បញ្ជា ដើម្បី​កំណត់ ចាក់​សោ​គោលដៅ​ឡើង​វិញ?
+
+@ Lock-on
+km ចាក់​សោ​គោលដៅ
+
+@ Auto-aim Toggle
+km បិទ/បើក​តម្រង់​ស្វ័យ​ប្រវត្តិ
+
+@ Keyboard
+km ក្ដារ​ចុច
+
+@ Controller
+km ឧបករណ៍​បញ្ជា
+
+# main menu, dialogs and screens
+@ Map Packs
+km កញ្ចប់​ផែនទី
+
+@ Customize
+km ប្ដូរ​តាម​បំណង
+
+@ Level Select
+km ជ្រើស​វគ្គ
+
+@ Really quit?
+km ពិត​ជា​ចង់​ចាក​ចេញ​មែន​ទេ?
+
+@ You died
+km អ្នក​បាន​ស្លាប់
+
+@ Continue from most recent save
+km បន្ត​ពី​ការ​រក្សា​ទុក​ចុង​ក្រោយ
+
+@ Select save
+km ជ្រើស​ការ​រក្សា​ទុក
+
+@ Restart level
+km ចាប់​ផ្ដើម​វគ្គ​ឡើង​វិញ
+
+@ Return to main menu
+km ត្រឡប់​ទៅ​ម៉ឺនុយ​មេ
+
+@ (disabled)
+km (បាន​បិទ)
+
+@ (fixed for this game)
+km (ថេរ​សម្រាប់​ហ្គេម​នេះ)
+
+@ (off)
+km (បិទ)
+
+@ Apply Display Changes
+km អនុវត្ត​ការ​ផ្លាស់​ប្ដូរ​ការ​បង្ហាញ
+
+@ Display Mode
+km របៀប​បង្ហាញ
+
+@ Resolution
+km គុណភាព​បង្ហាញ
+
+@ desktop
+km ផ្ទៃ​តុ
+
+@ Preset
+km ការ​កំណត់​ស្រាប់
+
+@ Map
+km ផែនទី
+
+@ Reset Shader Settings
+km កំណត់ shader ឡើង​វិញ
+
+@ Reset to Defaults
+km កំណត់​ទៅ​លំនាំ​ដើម​វិញ
+
+@ Searching...
+km កំពុង​ស្វែង​រក...
+
+@ This game only autosaves.
+km ហ្គេម​នេះ​រក្សា​ទុក​តែ​ស្វ័យ​ប្រវត្តិ​ប៉ុណ្ណោះ។
+
+@ (No Manual Saves modifier)
+km (កត្តា​កែប្រែ គ្មាន​ការ​រក្សា​ទុក​ដោយ​ដៃ)
+
+@ End the current game?
+km បញ្ចប់​ហ្គេម​បច្ចុប្បន្ន?
+
+@ Unsaved progress will be lost.
+km វឌ្ឍនភាព​ដែល​មិន​ទាន់​រក្សា​ទុក​នឹង​បាត់​បង់។
+
+@ End game
+km បញ្ចប់​ហ្គេម
+
+@ Overwrite
+km សរសេរ​ជាន់
+
+@ Overwrite "{}"?
+km សរសេរ​ជាន់ "{}"?
+
+@ Saved {}
+km បាន​រក្សា​ទុក {}
+
+@ Start a new game?
+km ចាប់​ផ្ដើម​ហ្គេម​ថ្មី?
+
+@ New game
+km ហ្គេម​ថ្មី
+
+@ New Game
+km ហ្គេម​ថ្មី
+
+@ CUSTOM
+km ផ្ទាល់​ខ្លួន
+
+@ Customize Experience
+km ប្ដូរ​បទ​ពិសោធន៍​តាម​បំណង
+
+@ Disable All
+km បិទ​ទាំង​អស់
+
+@ Disable All Modifications
+km បិទ​ការ​កែប្រែ​ទាំង​អស់
+
+@ Saves load in other source ports too.
+km ការ​រក្សា​ទុក​ផ្ទុក​បាន​ក្នុង source port ផ្សេង​ទៀត​ដែរ។
+
+@ Standard rules, no add-ons.
+km ច្បាប់​ស្តង់ដារ គ្មាន​គ្រឿង​បន្ថែម។
+
+@ Choose skill
+km ជ្រើស​កម្រិត​លំបាក
+
+@ The current game will end
+km ហ្គេម​បច្ចុប្បន្ន​នឹង​បញ្ចប់
+
+@ Easy
+km ងាយ
+
+@ Normal
+km ធម្មតា
+
+@ Hard
+km ពិបាក
+
+@ Nightmare
+km សុបិន​អាក្រក់
+
+# graphics preset pop-up
+@ Choose a Graphics Preset
+km ជ្រើស​ការ​កំណត់​ក្រាហ្វិក​ស្រាប់
+
+@ Classic
+km បុរាណ
+
+@ Like the re-release: enhanced models,
+km ដូច​កំណែ​ចេញ​ឡើង​វិញ: ម៉ូដែល​ប្រសើរ
+
+@ no added effects.
+km គ្មាន​ឥទ្ធិពល​បន្ថែម។
+
+@ Enhanced
+km ប្រសើរ
+
+@ Every enhancement at its highest quality.
+km ការ​កែ​លម្អ​ទាំង​អស់​នៅ​គុណភាព​ខ្ពស់​បំផុត។
+
+@ Needs a capable GPU.
+km ត្រូវ​ការ GPU ខ្លាំង។
+
+@ Low-End
+km កម្រិត​ទាប
+
+@ Fastest. No anti-aliasing, original
+km លឿន​បំផុត។ គ្មាន​ការ​រលោង​គែម ម៉ូដែល
+
+@ models, lowest effect quality.
+km ដើម គុណភាព​ឥទ្ធិពល​ទាប​បំផុត។
+
+@ Esc keeps the defaults
+km Esc រក្សា​លំនាំ​ដើម
+
+@ Everything can be changed later in Options.
+km អ្វីៗ​ទាំង​អស់​អាច​ប្ដូរ​បាន​ពេល​ក្រោយ​ក្នុង ជម្រើស។
+
+@ Keep Defaults
+km រក្សា​លំនាំ​ដើម
+
+# save and load cards
+@ Save Game
+km រក្សា​ទុក​ហ្គេម
+
+@ Load Game
+km ផ្ទុក​ហ្គេម
+
+@ Autosaves
+km ការ​រក្សា​ទុក​ស្វ័យ​ប្រវត្តិ
+
+@ newest first
+km ថ្មី​បំផុត​មុន
+
+@ Saves: {}
+km ការ​រក្សា​ទុក: {}
+
+@ Browse Autosaves
+km រក​មើល​ការ​រក្សា​ទុក​ស្វ័យ​ប្រវត្តិ
+
+@ Every retained autosave, newest first
+km រាល់​ការ​រក្សា​ទុក​ស្វ័យ​ប្រវត្តិ​ដែល​នៅ​សល់ ថ្មី​បំផុត​មុន
+
+@ New save
+km ការ​រក្សា​ទុក​ថ្មី
+
+@ Select to save your game here
+km ជ្រើស​ដើម្បី​រក្សា​ទុក​ហ្គេម​របស់​អ្នក​នៅ​ទីនេះ
+
+@ No autosaves yet
+km មិន​ទាន់​មាន​ការ​រក្សា​ទុក​ស្វ័យ​ប្រវត្តិ
+
+@ Autosaves are made on level entry, secrets and more (Options > Gameplay)
+km ការ​រក្សា​ទុក​ស្វ័យ​ប្រវត្តិ​កើត​ឡើង​ពេល​ចូល​វគ្គ រក​ឃើញ​សម្ងាត់ និង​ច្រើន​ទៀត (ជម្រើស > ការ​លេង)
+
+@ No saves yet
+km មិន​ទាន់​មាន​ការ​រក្សា​ទុក
+
+@ Save from the Single Player menu, or press F6 to quicksave
+km រក្សា​ទុក​ពី​ម៉ឺនុយ​អ្នក​លេង​ម្នាក់ ឬ​ចុច F6 ដើម្បី​រក្សា​ទុក​រហ័ស
+
+@ No picture
+km គ្មាន​រូប​ភាព
+
+@ Del: delete save
+km Del: លុប​ការ​រក្សា​ទុក
+
+@ Delete "{}"?
+km លុប "{}"?
+
+@ This cannot be undone.
+km សកម្មភាព​នេះ​មិន​អាច​ត្រឡប់​វិញ​បាន​ទេ។
+
+@ Quicksave
+km រក្សា​ទុក​រហ័ស
+
+@ Autosave: {}
+km រក្សា​ទុក​ស្វ័យ​ប្រវត្តិ: {}
+
+@ unknown trigger
+km មូល​ហេតុ​មិន​ស្គាល់
+
+@ Latest - {}
+km ចុង​ក្រោយ - {}
+
+@ Health {}
+km សុខភាព {}
+
+@ Armor {}
+km អាវ​ក្រោះ {}
+
+@ Kills {}/{}
+km សម្លាប់ {}/{}
+
+@ Secrets {}/{}
+km សម្ងាត់ {}/{}
+
+@ Split-screen, {} players
+km បំបែក​អេក្រង់ អ្នក​លេង {} នាក់
+
+@ Co-op
+km សហការ
+
+@ Customized
+km បាន​ប្ដូរ​តាម​បំណង
+
+@ Customized, {}
+km បាន​ប្ដូរ​តាម​បំណង, {}
+
+@ Date unavailable
+km គ្មាន​កាល​បរិច្ឆេទ
+
+@ Just now
+km មុន​នេះ​បន្តិច
+
+@ {} min ago
+km {} នាទី​មុន
+
+@ {} h ago
+km {} ម៉ោង​មុន
+
+@ Level entry
+km ចូល​វគ្គ
+
+@ Secret found
+km រក​ឃើញ​សម្ងាត់
+
+@ All enemies killed
+km សម្លាប់​សត្រូវ​ទាំង​អស់
+
+@ All secrets found
+km រក​ឃើញ​សម្ងាត់​ទាំង​អស់
+
+@ Timer
+km ម៉ោង​កំណត់
+
+# customize pages
+@ Standard rules
+km ច្បាប់​ស្តង់ដារ
+
+@ Modifiers changed: {}
+km កត្តា​កែប្រែ​ដែល​បាន​ប្ដូរ: {}
+
+@ no add-ons
+km គ្មាន​គ្រឿង​បន្ថែម
+
+@ add-ons: {}
+km គ្រឿង​បន្ថែម: {}
+
+@ Saves of this game are .qsa files: they need this source port.
+km ការ​រក្សា​ទុក​ហ្គេម​នេះ​ជា​ឯកសារ .qsa: វា​ត្រូវ​ការ source port នេះ។
+
+@ Nothing changed: this plays as standard Quake.
+km គ្មាន​អ្វី​ផ្លាស់​ប្ដូរ: ហ្គេម​នេះ​លេង​ដូច Quake ស្តង់ដារ។
+
+@ Changes apply now and are saved with this game (.qsa).
+km ការ​ផ្លាស់​ប្ដូរ​មាន​ប្រសិទ្ធភាព​ឥឡូវ ហើយ​ត្រូវ​រក្សា​ទុក​ជាមួយ​ហ្គេម​នេះ (.qsa)។
+
+@ This game started without Customize, so its rules are fixed.
+km ហ្គេម​នេះ​ចាប់​ផ្ដើម​ដោយ​គ្មាន ប្ដូរ​តាម​បំណង ដូច្នេះ​ច្បាប់​របស់​វា​ថេរ។
+
+@ Start a new game and choose Customize Experience.
+km ចាប់​ផ្ដើម​ហ្គេម​ថ្មី ហើយ​ជ្រើស ប្ដូរ​បទ​ពិសោធន៍​តាម​បំណង។
+
+@ These rules apply to the next customized game.
+km ច្បាប់​ទាំង​នេះ​អនុវត្ត​ចំពោះ​ហ្គេម​ប្ដូរ​តាម​បំណង​បន្ទាប់។
+
+# add-on browser
+@ Fire
+km បាញ់
+
+@ Alt Fire
+km បាញ់​ជំនួស
+
+@ Configure Parameters >
+km កំណត់​ប៉ារ៉ាម៉ែត្រ >
+
+@ Configure
+km កំណត់​រចនា​សម្ព័ន្ធ
+
+@ Settings
+km ការ​កំណត់
+
+@ Change slot
+km ប្ដូរ​រន្ធ
+
+@ Toggle
+km បិទ/បើក
+
+@ Details
+km ព័ត៌មាន​លម្អិត
+
+@ Enter or click the box: toggle
+km Enter ឬ​ចុច​ប្រអប់: បិទ/បើក
+
+@ Right / Tab / click: details
+km ស្ដាំ / Tab / ចុច: ព័ត៌មាន​លម្អិត
+
+@ Input Remapping
+km ការ​កំណត់​បញ្ជា​ឡើង​វិញ
+
+@ Weapon Slot
+km រន្ធ​អាវុធ
+
+@ Customized games save as .qsa files, which need this source port.
+km ហ្គេម​ប្ដូរ​តាម​បំណង​រក្សា​ទុក​ជា​ឯកសារ .qsa ដែល​ត្រូវ​ការ source port នេះ។
+
+@ This game started without Customize, so its add-ons are fixed. Customize a new game instead.
+km ហ្គេម​នេះ​ចាប់​ផ្ដើម​ដោយ​គ្មាន ប្ដូរ​តាម​បំណង ដូច្នេះ​គ្រឿង​បន្ថែម​របស់​វា​ថេរ។ សូម​ប្ដូរ​ហ្គេម​ថ្មី​តាម​បំណង​ជំនួស​វិញ។
+
+@ Bullet Time
+km ពេល​យឺត
+
+@ Change Goggles
+km ប្ដូរ​វ៉ែនតា
+
+@ Dodge / Dive
+km គេច / លោត​ផ្លោះ
+
+@ Goggles
+km វ៉ែនតា
+
+@ Hitstop
+km កក​ពេល​ចំ
+
+@ Projectile Shotguns
+km កាំភ្លើង​ស្នប់​គ្រាប់​រូបវន្ត
+
+@ BULLET TIME: 20%
+km ពេល​យឺត: 20%
+
+@ NORMAL SPEED
+km ល្បឿន​ធម្មតា
+
+@ SLOW MOTION: PHYSICAL PELLETS
+km ចលនា​យឺត: គ្រាប់​រូបវន្ត
+
+@ DEMONSTRATION
+km ការ​បង្ហាញ
+
+@ GAMEPLAY
+km ការ​លេង
+
+@ LOOP
+km វិល​ជុំ
+
+@ Preview unavailable
+km មិន​មាន​ការ​មើល​ជា​មុន
+
+# shader and language help lines
+@ A setting of the chosen shader; arrows step it, Enter is not needed
+km ការ​កំណត់​មួយ​នៃ shader ដែល​បាន​ជ្រើស; ព្រួញ​ប្ដូរ​វា​ម្ដង​មួយ​ជំហាន មិន​ចាំបាច់ Enter ទេ
+
+@ Language of the menus, messages and the 2021 re-release's game text; System follows your computer's language
+km ភាសា​នៃ​ម៉ឺនុយ សារ និង​អត្ថបទ​ហ្គេម​នៃ​កំណែ​ចេញ​ឡើង​វិញ​ឆ្នាំ 2021; ប្រព័ន្ធ​ធ្វើ​តាម​ភាសា​កុំព្យូទ័រ​របស់​អ្នក
+
+@ Puts every setting of the chosen shader back to the preset's defaults
+km ដាក់​ការ​កំណត់​ទាំង​អស់​នៃ shader ដែល​បាន​ជ្រើស​ត្រឡប់​ទៅ​លំនាំ​ដើម​នៃ​ការ​កំណត់​ស្រាប់
+
+@ RetroArch slang shader on the final image: CRT, scanlines, NTSC, sharpening; add your own in <game>/shaders
+km shader slang របស់ RetroArch លើ​រូប​ភាព​ចុង​ក្រោយ: CRT ខ្សែ​ស្កេន NTSC ការ​ធ្វើ​ឱ្យ​ច្បាស់; បន្ថែម​របស់​អ្នក​ផ្ទាល់​ក្នុង <game>/shaders
+
+# modern console footer
+@ Shift+PgUp/Dn: height  ` : hide
+km Shift+PgUp/Dn: កម្ពស់  ` : លាក់
+
+@ Tab: complete  Ctrl+R: search  bash | pipe
+km Tab: បំពេញ  Ctrl+R: ស្វែង​រក  bash | pipe
+
+@ ↑ +{} lines (End to jump) 
+km ↑ +{} បន្ទាត់ (End ដើម្បី​លោត) 
+
+# add-on descriptions
+@ Create two linked portals on flat walls. Fire places the first portal; Alt Fire places the second. Walk through either portal to emerge from the other. Your momentum carries through. Assign a weapon slot below: pressing that slot repeatedly cycles its ordinary weapon and every enabled add-on assigned there. Portal view quality is configurable below.
+km បង្កើត​ផតថល​ពីរ​ដែល​ភ្ជាប់​គ្នា​លើ​ជញ្ជាំង​រាប​ស្មើ។ បាញ់​ដាក់​ផតថល​ទី​មួយ; បាញ់​ជំនួស​ដាក់​ផតថល​ទី​ពីរ។ ដើរ​ឆ្លង​កាត់​ផតថល​ណា​មួយ​ដើម្បី​ចេញ​ពី​ផតថល​មួយ​ទៀត។ សន្ទុះ​របស់​អ្នក​នៅ​តែ​បន្ត។ កំណត់​រន្ធ​អាវុធ​ខាង​ក្រោម: ការ​ចុច​រន្ធ​នោះ​ម្ដង​ហើយ​ម្ដង​ទៀត​ប្ដូរ​វេន​រវាង​អាវុធ​ធម្មតា​របស់​វា​និង​គ្រឿង​បន្ថែម​ដែល​បាន​បើក​ទាំង​អស់​ដែល​កំណត់​នៅ​ទី​នោះ។ គុណភាព​ទិដ្ឋភាព​ផតថល​អាច​កំណត់​បាន​ខាង​ក្រោម។
+
+@ Hold Fire and sweep the crosshair over monsters to queue targets. Release Fire to throw: the boomerang visits each target, stuns it and returns to you. Alt Fire clears the queue. The weapon slot selects a group, not a separate hotkey: press it again to cycle through the weapons in that slot. Configure stun duration and flight speed below.
+km សង្កត់​បាញ់​ហើយ​អូស​សញ្ញា​តម្រង់​លើ​បិសាច​ដើម្បី​តម្រៀប​គោលដៅ។ លែង​បាញ់​ដើម្បី​បោះ: ប៊ូមឺរ៉ង់​ទៅ​រក​គោលដៅ​នីមួយៗ ធ្វើ​ឱ្យ​វា​ស្រឹក​ហើយ​ត្រឡប់​មក​រក​អ្នក​វិញ។ បាញ់​ជំនួស​សម្អាត​ជួរ។ រន្ធ​អាវុធ​ជ្រើស​ក្រុម​មួយ មិន​មែន​គ្រាប់​ចុច​ដាច់​ដោយ​ឡែក​ទេ: ចុច​វា​ម្ដង​ទៀត​ដើម្បី​ប្ដូរ​វេន​អាវុធ​ក្នុង​រន្ធ​នោះ។ កំណត់​រយៈ​ពេល​ស្រឹក​និង​ល្បឿន​ហោះ​ខាង​ក្រោម។
+
+@ Hold Fire to charge a sticky bomb using rocket ammunition; release to launch. A longer charge throws it faster. Bombs cling to walls, doors and monsters. Alt Fire detonates your planted bombs together. Place a trap, retreat, then detonate it when enemies approach. Assign any weapon slot below; repeated presses cycle through the ordinary weapon and add-ons in that slot.
+km សង្កត់​បាញ់​ដើម្បី​សាក​គ្រាប់​បែក​ស្អិត​ដោយ​ប្រើ​គ្រាប់​រ៉ុក្កែត; លែង​ដើម្បី​បាញ់។ ការ​សាក​យូរ​ជាង​បោះ​វា​លឿន​ជាង។ គ្រាប់​បែក​ជាប់​នឹង​ជញ្ជាំង ទ្វារ និង​បិសាច។ បាញ់​ជំនួស​បំផ្ទុះ​គ្រាប់​បែក​ដែល​អ្នក​បាន​ដាក់​ព្រម​គ្នា។ ដាក់​អន្ទាក់ ថយ​ក្រោយ រួច​បំផ្ទុះ​វា​ពេល​សត្រូវ​មក​ជិត។ កំណត់​រន្ធ​អាវុធ​ណា​មួយ​ខាង​ក្រោម; ការ​ចុច​ម្ដង​ហើយ​ម្ដង​ទៀត​ប្ដូរ​វេន​រវាង​អាវុធ​ធម្មតា​និង​គ្រឿង​បន្ថែម​ក្នុង​រន្ធ​នោះ។
+
+@ Fire launches a chain hook. It latches onto a permitted surface or enemy and reels you toward the anchor. Fire again or use Alt Fire to let go. Choose which materials and enemies can be hooked in Configure Parameters. Assign it to any weapon slot; repeated presses of the slot's existing binding cycle through its weapons.
+km បាញ់​បញ្ចេញ​ទំពក់​ច្រវាក់។ វា​ជាប់​នឹង​ផ្ទៃ​ឬ​សត្រូវ​ដែល​អនុញ្ញាត​ហើយ​ទាញ​អ្នក​ទៅ​រក​ចំណុច​យុថ្កា។ បាញ់​ម្ដង​ទៀត​ឬ​ប្រើ​បាញ់​ជំនួស​ដើម្បី​លែង។ ជ្រើស​សម្ភារៈ​និង​សត្រូវ​ដែល​អាច​ទំពក់​បាន​ក្នុង កំណត់​ប៉ារ៉ាម៉ែត្រ។ កំណត់​វា​ទៅ​រន្ធ​អាវុធ​ណា​មួយ; ការ​ចុច​គ្រាប់​ចុច​ដែល​មាន​ស្រាប់​របស់​រន្ធ​ម្ដង​ហើយ​ម្ដង​ទៀត​ប្ដូរ​វេន​អាវុធ​របស់​វា។
+
+@ A piercing railgun inspired by Quake III. Fire sends a slug through every enemy along its line. Each shot consumes two cells, with a 1.5 second refire interval. Damage and the spiral trail colour are configurable below. Choose a weapon slot: the slot's current binding selects and cycles the weapons assigned to it.
+km រ៉េលហ្គាន​ទម្លុះ​ដែល​បំផុស​គំនិត​ពី Quake III។ បាញ់​បញ្ជូន​គ្រាប់​ឆ្លង​កាត់​សត្រូវ​គ្រប់​រូប​តាម​ខ្សែ​របស់​វា។ ការ​បាញ់​នីមួយៗ​ប្រើ​ថ្ម​ថាមពល​ពីរ ដោយ​មាន​ចន្លោះ​បាញ់​ម្ដង​ទៀត 1.5 វិនាទី។ ការ​ខូចខាត​និង​ពណ៌​ស្នាម​រមួល​អាច​កំណត់​បាន​ខាង​ក្រោម។ ជ្រើស​រន្ធ​អាវុធ: គ្រាប់​ចុច​បច្ចុប្បន្ន​របស់​រន្ធ​ជ្រើស​និង​ប្ដូរ​វេន​អាវុធ​ដែល​បាន​កំណត់​ឱ្យ​វា។
+
+@ A Portal-style gel sprayer. Fire sprays blue Repulsion gel: land, jump or run into it to bounce, and landings on it never hurt. Alt Fire sprays orange Propulsion gel: run across it to go much faster. Gel coats floors and walls until washed off with the Powerwasher. Assign a weapon slot below; repeated presses cycle the weapons in that slot.
+km ម៉ាស៊ីន​បាញ់​ជែល​បែប Portal។ ការ​បាញ់​ផ្សាយ​ជែល​ច្រាន​ពណ៌​ខៀវ: ធ្លាក់ លោត ឬ​រត់​ចូល​វា​ដើម្បី​លោត​ខ្ពស់ ហើយ​ការ​ធ្លាក់​លើ​វា​មិន​ដែល​ឈឺ​ទេ។ បាញ់​ជំនួស​ផ្សាយ​ជែល​រុញ​ពណ៌​ទឹក​ក្រូច: រត់​កាត់​វា​ដើម្បី​ទៅ​លឿន​ជាង​មុន​ច្រើន។ ជែល​គ្រប​កម្រាល​និង​ជញ្ជាំង​រហូត​ដល់​លាង​ចេញ​ដោយ ម៉ាស៊ីន​បាញ់​ទឹក។ កំណត់​រន្ធ​អាវុធ​ខាង​ក្រោម; ការ​ចុច​ម្ដង​ហើយ​ម្ដង​ទៀត​ប្ដូរ​វេន​អាវុធ​ក្នុង​រន្ធ​នោះ។
+
+@ A water cannon. Fire shoots a straight jet with limited reach; Alt Fire a wide, shorter fan. The water pushes enemies back, turns projectiles aside and washes away gel and blood. Push strength is configurable below. Assign a weapon slot below; repeated presses cycle the weapons in that slot.
+km កាំភ្លើង​ទឹក។ បាញ់​បញ្ចេញ​ទឹក​ត្រង់​ដែល​មាន​ចម្ងាយ​កំណត់; បាញ់​ជំនួស​បញ្ចេញ​ទឹក​ជា​ផ្លិត​ធំ​ខ្លី​ជាង។ ទឹក​រុញ​សត្រូវ​ថយ​ក្រោយ បង្វែរ​គ្រាប់​ចេញ ហើយ​លាង​ជែល​និង​ឈាម​ចេញ។ កម្លាំង​រុញ​អាច​កំណត់​បាន​ខាង​ក្រោម។ កំណត់​រន្ធ​អាវុធ​ខាង​ក្រោម; ការ​ចុច​ម្ដង​ហើយ​ម្ដង​ទៀត​ប្ដូរ​វេន​អាវុធ​ក្នុង​រន្ធ​នោះ។
+
+@ One equipment add-on includes both night vision and thermal vision. The Change Goggles action cycles Normal, Night Vision, Thermal, then Normal again. Night vision brightens dark rooms; thermal vision highlights living enemies. Goggles do not occupy a weapon slot. Configure intensity and sensor noise below. The binding affects only this add-on.
+km គ្រឿង​បន្ថែម​ឧបករណ៍​មួយ​រួម​មាន​ទាំង​ការ​មើល​ពេល​យប់​និង​ការ​មើល​កម្ដៅ។ សកម្មភាព ប្ដូរ​វ៉ែនតា ប្ដូរ​វេន ធម្មតា មើល​ពេល​យប់ មើល​កម្ដៅ រួច​ធម្មតា​វិញ។ ការ​មើល​ពេល​យប់​ធ្វើ​ឱ្យ​បន្ទប់​ងងឹត​ភ្លឺ; ការ​មើល​កម្ដៅ​បង្ហាញ​សត្រូវ​ដែល​នៅ​រស់​ឱ្យ​លេច​ធ្លោ។ វ៉ែនតា​មិន​យក​រន្ធ​អាវុធ​ទេ។ កំណត់​កម្រិត​ខ្លាំង​និង​សញ្ញា​រំខាន​សេនស័រ​ខាង​ក្រោម។ ការ​កំណត់​គ្រាប់​ចុច​ប៉ះពាល់​តែ​គ្រឿង​បន្ថែម​នេះ​ប៉ុណ្ណោះ។
+
+@ Press Dodge with a movement direction on the ground or in midair: dive forward or leap backward and sideways. Diagonals are supported. Each press launches once, with a short recovery. The player body animates in third person. Assign the Dodge action below or in Controls.
+km ចុច គេច ជាមួយ​ទិស​ចលនា​នៅ​លើ​ដី​ឬ​លើ​អាកាស: លោត​ផ្លោះ​ទៅ​មុខ​ឬ​លោត​ថយ​ក្រោយ​និង​ទៅ​ចំហៀង។ ទិស​ទ្រេត​ក៏​អាច​ប្រើ​បាន។ ការ​ចុច​នីមួយៗ​លោត​ម្ដង ដោយ​មាន​ពេល​ស្ដារ​ខ្លី។ រាង​កាយ​អ្នក​លេង​មាន​ចលនា​ក្នុង​ទិដ្ឋភាព​មនុស្ស​ទី​បី។ កំណត់​សកម្មភាព គេច ខាង​ក្រោម​ឬ​ក្នុង ការ​បញ្ជា។
+
+@ Use the dedicated Bullet Time action to slow the whole local game to 20% speed. Hold is the default; Toggle switches on each press. The optional meter limits use in real seconds and regenerates while inactive. Disable the meter for unlimited use. Remap the action and configure duration and regeneration below.
+km ប្រើ​សកម្មភាព ពេល​យឺត ផ្ទាល់​ដើម្បី​បន្ថយ​ល្បឿន​ហ្គេម​ក្នុង​ម៉ាស៊ីន​ទាំង​មូល​មក 20%។ សង្កត់​ជាប់​គឺ​លំនាំ​ដើម; បិទ/បើក​ប្ដូរ​រាល់​ពេល​ចុច។ របារ​ជា​ជម្រើស​កំណត់​ការ​ប្រើ​ជា​វិនាទី​ពិត​ហើយ​បំពេញ​ឡើង​វិញ​ពេល​មិន​ប្រើ។ បិទ​របារ​ដើម្បី​ប្រើ​គ្មាន​ដែន​កំណត់។ កំណត់​គ្រាប់​ចុច​សកម្មភាព​ឡើង​វិញ​និង​កំណត់​រយៈ​ពេល​និង​ការ​បំពេញ​ឡើង​វិញ​ខាង​ក្រោម។
+
+@ Both shotguns and enemy grunts fire physical pellets with their original spread and damage. Fast default projectiles feel immediate; lower their speed to dodge incoming fire during bullet time. Configure projectile speed below, or reset it to the default of 10000 units per second.
+km កាំភ្លើង​ស្នប់​ទាំង​ពីរ​និង​ទាហាន​សត្រូវ​បាញ់​គ្រាប់​រូបវន្ត​ដោយ​ការ​ខ្ចាត់​ខ្ចាយ​និង​ការ​ខូចខាត​ដើម។ គ្រាប់​លំនាំ​ដើម​លឿន​មាន​អារម្មណ៍​ភ្លាមៗ; បន្ថយ​ល្បឿន​វា​ដើម្បី​គេច​ពី​ការ​បាញ់​ក្នុង​ពេល​យឺត។ កំណត់​ល្បឿន​គ្រាប់​ខាង​ក្រោម ឬ​កំណត់​វា​ទៅ​លំនាំ​ដើម 10000 ឯកតា​ក្នុង​មួយ​វិនាទី​វិញ។
+
+@ Freezes the game for a split second when you damage an enemy, so hits feel heavier. Single player only. Choose which weapons trigger it (all, melee, ranged or explosives), how long it lasts and how much more a kill freezes. Advanced settings cover enemy toughness, damage scaling, cooldown and the longest freeze.
+km ផ្អាក​ហ្គេម​មួយ​ភ្លែត​ពេល​អ្នក​ធ្វើ​ឱ្យ​សត្រូវ​រង​របួស ដូច្នេះ​ការ​វាយ​មាន​អារម្មណ៍​ធ្ងន់​ជាង។ សម្រាប់​តែ​អ្នក​លេង​ម្នាក់។ ជ្រើស​អាវុធ​ណា​ដែល​បង្ក​វា (ទាំង​អស់ ប្រយុទ្ធ​ជិត ពី​ចម្ងាយ ឬ​គ្រឿង​ផ្ទុះ) រយៈ​ពេល​របស់​វា និង​ការ​សម្លាប់​កក​ច្រើន​ជាង​ប៉ុន្មាន។ ការ​កំណត់​កម្រិត​ខ្ពស់​គ្រប​ដណ្ដប់​ភាព​រឹង​មាំ​សត្រូវ មាត្រដ្ឋាន​ការ​ខូចខាត រយៈ​ពេល​សម្រាក និង​ការ​កក​យូរ​បំផុត។
+
+# map packs and the Quaddicted browser
+@ Get more maps (Quaddicted)...
+km យក​ផែនទី​បន្ថែម (Quaddicted)...
+
+@ Type to filter...
+km វាយ​ដើម្បី​ត្រង...
+
+@ Launch mod
+km បើក mod
+
+@ Start first map
+km ចាប់​ផ្ដើម​ផែនទី​ទី​មួយ
+
+@ (running)
+km (កំពុង​ដំណើរ​ការ)
+
+@ running
+km កំពុង​ដំណើរ​ការ
+
+@ Recent
+km ថ្មីៗ
+
+@ Name
+km ឈ្មោះ
+
+@ Dir
+km ថត
+
+@ Default
+km លំនាំ​ដើម
+
+@ Title
+km ចំណង​ជើង
+
+@ Sort: {}
+km តម្រៀប: {}
+
+@ {} installed
+km បាន​ដំឡើង {}
+
+@ {}/{} matching
+km ត្រូវ​គ្នា {}/{}
+
+@ {} maps, {} completed
+km ផែនទី {} បាន​បញ្ចប់ {}
+
+@ {}/{} matching, {} completed
+km ត្រូវ​គ្នា {}/{} បាន​បញ្ចប់ {}
+
+@ no maps of its own
+km គ្មាន​ផែនទី​ផ្ទាល់​ខ្លួន
+
+@ dir: {}
+km ថត: {}
+
+@ base: {}
+km មូល​ដ្ឋាន: {}
+
+@ Browse the Quaddicted archive of
+km រក​មើល​បណ្ណសារ Quaddicted នៃ
+
+@ single-player maps and episodes,
+km ផែនទី​និង​ភាគ​សម្រាប់​អ្នក​លេង​ម្នាក់
+
+@ then download and install them
+km រួច​ទាញ​យក​និង​ដំឡើង​វា
+
+@ here. Each release gets its own
+km នៅ​ទីនេះ។ ការ​ចេញ​ផ្សាយ​នីមួយៗ​មាន
+
+@ entry in this list.
+km ធាតុ​ផ្ទាល់​ខ្លួន​ក្នុង​បញ្ជី​នេះ។
+
+@ Needs an internet connection.
+km ត្រូវ​ការ​ការ​តភ្ជាប់​អ៊ីនធឺណិត។
+
+@ Quaddicted Map Archive
+km បណ្ណសារ​ផែនទី Quaddicted
+
+@ Newest
+km ថ្មី​បំផុត
+
+@ Author
+km អ្នក​និពន្ធ
+
+@ Size
+km ទំហំ
+
+@ Loading the map list...
+km កំពុង​ផ្ទុក​បញ្ជី​ផែនទី...
+
+@ Couldn't load the map list: {}
+km មិន​អាច​ផ្ទុក​បញ្ជី​ផែនទី​បាន: {}
+
+@ {} single-player releases  -  F5 refreshes
+km ការ​ចេញ​ផ្សាយ​សម្រាប់​អ្នក​លេង​ម្នាក់ {}  -  F5 ផ្ទុក​ឡើង​វិញ
+
+@ {} matching
+km ត្រូវ​គ្នា {}
+
+@ by {}
+km ដោយ {}
+
+@ requires: {}
+km ត្រូវ​ការ: {}
+
+@ maps: {}
+km ផែនទី: {}
+
+@ Failed: {}
+km បរាជ័យ: {}
+
+@ Downloading... {}%
+km កំពុង​ទាញ​យក... {}%
+
+@ Unpacking...
+km កំពុង​ពន្លា...
+
+@ Installed in {}/  -  Enter: play
+km បាន​ដំឡើង​ក្នុង {}/  -  Enter: លេង
+
+@ Enter: download and install
+km Enter: ទាញ​យក​និង​ដំឡើង
+
+@ unpacking
+km កំពុង​ពន្លា
+
+@ failed
+km បរាជ័យ
+
+@ installed
+km បាន​ដំឡើង
+
+@ Downloads are not available in the browser build
+km ការ​ទាញ​យក​មិន​មាន​ក្នុង​កំណែ​កម្មវិធី​រុករក
+
+@ the map list could not be read
+km មិន​អាច​អាន​បញ្ជី​ផែនទី​បាន
+
+@ downloading needs the curl program
+km ការ​ទាញ​យក​ត្រូវ​ការ​កម្មវិធី curl
+
+@ download failed
+km ការ​ទាញ​យក​បរាជ័យ
+
+@ the download is not a valid zip
+km ឯកសារ​ដែល​ទាញ​យក​មិន​មែន​ជា zip ត្រឹម​ត្រូវ
+
+@ nothing to install for this engine
+km គ្មាន​អ្វី​ត្រូវ​ដំឡើង​សម្រាប់​ម៉ាស៊ីន​នេះ
+
+@ needs {} installed first
+km ត្រូវ​ដំឡើង {} ជា​មុន
+
+@ couldn't unpack {}
+km មិន​អាច​ពន្លា {}
+
+# help screen
+@ About
+km អំពី
+
+@ < Back
+km < ថយ​ក្រោយ
+
+# tr_ctx keys: English shows the short word, the key says which meaning
+@ Save (a manual save, as opposed to a quicksave or autosave)
+km រក្សា​ទុក
+
+# ==== hud.txt ====
+
+# HUD, weapon and equipment wheels, sound captions and other in-game text.
+# Weapon, monster and item names follow the 2021 re-release's own translations.
+@ Axe
+km ពូថៅ
+
+@ Shotgun
+km កាំភ្លើង​ស្នប់
+
+@ Double-Barrelled Shotgun
+km កាំភ្លើង​ស្នប់​ពីរ​បំពង់
+
+@ Nailgun
+km កាំភ្លើង​ដែក​គោល
+
+@ Super Nailgun
+km កាំភ្លើង​ដែក​គោល​ធំ
+
+@ Grenade Launcher
+km កាំភ្លើង​បាញ់​គ្រាប់​បែក
+
+@ Rocket Launcher
+km កាំភ្លើង​បាញ់​រ៉ុក្កែត
+
+@ Thunderbolt
+km ផ្គរ​រន្ទះ
+
+@ Portal Gun
+km កាំភ្លើង​ផតថល
+
+@ Boomerang
+km ប៊ូមឺរ៉ង់
+
+@ Stickybomb Launcher
+km កាំភ្លើង​គ្រាប់​បែក​ស្អិត
+
+@ Railgun
+km រ៉េលហ្គាន
+
+@ Hookshot
+km ខ្សែ​ទំពក់
+
+@ Gel Sprayer
+km ម៉ាស៊ីន​បាញ់​ជែល
+
+@ Powerwasher
+km ម៉ាស៊ីន​បាញ់​ទឹក
+
+@ Night Vision Goggles
+km វ៉ែនតា​មើល​ពេល​យប់
+
+@ Thermal Goggles
+km វ៉ែនតា​មើល​កម្ដៅ
+
+@ Normal vision
+km ការ​មើល​ធម្មតា
+
+@ ON
+km បើក
+
+@ OFF
+km បិទ
+
+@ {} (turn on)
+km {} (បើក)
+
+@ {} (turn off)
+km {} (បិទ)
+
+@ Move mouse to select, release to toggle
+km រំកិល​កណ្ដុរ​ដើម្បី​ជ្រើស លែង​ដើម្បី​បិទ/បើក
+
+@ Move mouse to select, release to equip
+km រំកិល​កណ្ដុរ​ដើម្បី​ជ្រើស លែង​ដើម្បី​កាន់
+
+@ Release to toggle
+km លែង​ដើម្បី​បិទ/បើក
+
+@ Release to equip
+km លែង​ដើម្បី​កាន់
+
+@ shells
+km សំបក​គ្រាប់
+
+@ nails
+km ដែក​គោល
+
+@ rockets
+km រ៉ុក្កែត
+
+@ cells
+km ថ្ម​ថាមពល
+
+@ Kills: {}/{}
+km សម្លាប់: {}/{}
+
+@ Secrets: {}/{}
+km សម្ងាត់: {}/{}
+
+@ Time {}
+km ពេល​វេលា {}
+
+@ Press any button to continue...
+km ចុច​ប៊ូតុង​ណា​មួយ​ដើម្បី​បន្ត...
+
+@ Press any key to continue...
+km ចុច​គ្រាប់​ចុច​ណា​មួយ​ដើម្បី​បន្ត...
+
+@ BULLET TIME
+km ពេល​យឺត
+
+@ AUTO AIM
+km តម្រង់​ស្វ័យ​ប្រវត្តិ
+
+@ Crosshair
+km សញ្ញា​តម្រង់
+
+@ + Marker
+km + សញ្ញា​ចំ
+
+@ Hit markers off
+km សញ្ញា​ចំ​បិទ
+
+@ On target
+km ចំ​គោលដៅ
+
+@ On kill
+km ពេល​សម្លាប់
+
+# sound captions
+@ [Secret found]
+km [រក​ឃើញ​សម្ងាត់]
+
+@ [Message]
+km [សារ]
+
+@ [Switch activated]
+km [កុងតាក់​ត្រូវ​បាន​បើក]
+
+@ [Key picked up]
+km [រើស​បាន​កូនសោ]
+
+@ [Rune picked up]
+km [រើស​បាន​រូន]
+
+@ [Teleporter]
+km [ច្រក​ផ្លាស់​ទី]
+
+@ [Teleport]
+km [ការ​ផ្លាស់​ទី​ភ្លាមៗ]
+
+@ [Splash]
+km [ទឹក​ខ្ទាត]
+
+@ [Leaving water]
+km [ចេញ​ពី​ទឹក]
+
+@ [Door]
+km [ទ្វារ]
+
+@ [Platform moving]
+km [វេទិកា​កំពុង​ផ្លាស់​ទី]
+
+@ [Button]
+km [ប៊ូតុង]
+
+@ [Health picked up]
+km [រើស​បាន​សុខភាព]
+
+@ [Armor picked up]
+km [រើស​បាន​អាវ​ក្រោះ]
+
+@ [Quad Damage wearing off]
+km [ខូចខាត​បួន​ដង​ជិត​អស់]
+
+@ [Quad Damage]
+km [ខូចខាត​បួន​ដង]
+
+@ [Pentagram wearing off]
+km [ផេនតាក្រាម​ជិត​អស់]
+
+@ [Pentagram of Protection]
+km [ផេនតាក្រាម​ការពារ]
+
+@ [Ring wearing off]
+km [ចិញ្ចៀន​ជិត​អស់]
+
+@ [Ring of Shadows]
+km [ចិញ្ចៀន​ស្រមោល]
+
+@ [Biosuit wearing off]
+km [ឈុត​ការពារ​ជិត​អស់]
+
+@ [Biosuit]
+km [ឈុត​ការពារ​ជីវៈ]
+
+@ [Item picked up]
+km [រើស​បាន​វត្ថុ]
+
+@ [Weapon picked up]
+km [រើស​បាន​អាវុធ]
+
+@ [Ammo picked up]
+km [រើស​បាន​គ្រាប់]
+
+@ [Explosion]
+km [ការ​ផ្ទុះ]
+
+@ [Grenade launched]
+km [បាញ់​គ្រាប់​បែក]
+
+@ [Grenade bounce]
+km [គ្រាប់​បែក​លោត]
+
+@ [Rocket fired]
+km [បាញ់​រ៉ុក្កែត]
+
+@ [Nails fired]
+km [បាញ់​ដែក​គោល]
+
+@ [Lightning]
+km [រន្ទះ]
+
+@ [Thunder]
+km [ផ្គរ]
+
+@ [Enforcer alerted]
+km [Enforcer ដឹង​ខ្លួន]
+
+@ [Grunt alerted]
+km [Grunt ដឹង​ខ្លួន]
+
+@ [Rottweiler alerted]
+km [ឆ្កែ Rottweiler ដឹង​ខ្លួន]
+
+@ [Knight alerted]
+km [Knight ដឹង​ខ្លួន]
+
+@ [Death Knight alerted]
+km [Death Knight ដឹង​ខ្លួន]
+
+@ [Scrag alerted]
+km [Scrag ដឹង​ខ្លួន]
+
+@ [Ogre alerted]
+km [Ogre ដឹង​ខ្លួន]
+
+@ [Fiend alerted]
+km [Fiend ដឹង​ខ្លួន]
+
+@ [Shambler alerted]
+km [Shambler ដឹង​ខ្លួន]
+
+@ [Zombie groaning]
+km [Zombie ថ្ងូរ]
+
+@ [Vore alerted]
+km [Vore ដឹង​ខ្លួន]
+
+@ [Vore attacking]
+km [Vore វាយ​ប្រហារ]
+
+@ [Spawn alerted]
+km [Spawn ដឹង​ខ្លួន]
+
+@ [Rotfish]
+km [ត្រី Rotfish]
+
+@ [Spawn]
+km [Spawn]
+
+@ [Chthon]
+km [Chthon]
+
+@ [Hard landing]
+km [ធ្លាក់​ខ្លាំង]
+
+@ [Drowning]
+km [លង់​ទឹក]
+
+@ [Gasping for air]
+km [ដក​ដង្ហើម​ធំ]
+
+@ [Burning]
+km [ឆេះ]
+
+@ [Telefrag]
+km [Telefrag]
+
+@ [Gibbed]
+km [ខ្ទេច​ខ្ទី]
+
+# ==== console.txt ====
+
+# Console messages, shown translated only with con_translate 1 (Translate Console).
+# Cvar and command names stay as they are.
+@ Autosaved.
+km បាន​រក្សា​ទុក​ស្វ័យ​ប្រវត្តិ។
+
+@ Game saved.
+km បាន​រក្សា​ទុក​ហ្គេម។
+
+@ Can't save now.
+km មិន​អាច​រក្សា​ទុក​ឥឡូវ​នេះ​បាន​ទេ។
+
+@ This game only autosaves (No Manual Saves modifier).
+km ហ្គេម​នេះ​រក្សា​ទុក​តែ​ស្វ័យ​ប្រវត្តិ (កត្តា​កែប្រែ គ្មាន​ការ​រក្សា​ទុក​ដោយ​ដៃ)។
+
+@ Loading {}...
+km កំពុង​ផ្ទុក {}...
+
+@ load failed: {}
+km ផ្ទុក​បរាជ័យ: {}
+
+@ ERROR: autosave failed: {}
+km កំហុស: រក្សា​ទុក​ស្វ័យ​ប្រវត្តិ​បរាជ័យ: {}
+
+@ ERROR: couldn't open {}
+km កំហុស: មិន​អាច​បើក {}
+
+@ ERROR: couldn't open {}.
+km កំហុស: មិន​អាច​បើក {}។
+
+@ ERROR: couldn't write {}: {}
+km កំហុស: មិន​អាច​សរសេរ {}: {}
+
+@ ERROR: couldn't create {}: {}
+km កំហុស: មិន​អាច​បង្កើត {}: {}
+
+@ couldn't write {}: {}
+km មិន​អាច​សរសេរ {}: {}
+
+@ Wrote {}
+km បាន​សរសេរ {}
+
+@ screenshot failed: {}
+km ថត​អេក្រង់​បរាជ័យ: {}
+
+@ screenshot: {}
+km ថត​អេក្រង់: {}
+
+@ No readable save available. Select save or restart the level.
+km គ្មាន​ការ​រក្សា​ទុក​ដែល​អាច​អាន​បាន។ ជ្រើស​ការ​រក្សា​ទុក ឬ​ចាប់​ផ្ដើម​វគ្គ​ឡើង​វិញ។
+
+@ Unknown command "{}"
+km ពាក្យ​បញ្ជា​មិន​ស្គាល់ "{}"
+
+@ couldn't exec {}
+km មិន​អាច​ដំណើរ​ការ {}
+
+@ execing {}
+km កំពុង​ដំណើរ​ការ {}
+
+@ execing config.cfg (inherited from {})
+km កំពុង​ដំណើរ​ការ config.cfg (ទទួល​មរតក​ពី {})
+
+@ execing config.cfg (mod defaults)
+km កំពុង​ដំណើរ​ការ config.cfg (លំនាំ​ដើម​របស់ mod)
+
+@ execing default.cfg (built-in)
+km កំពុង​ដំណើរ​ការ default.cfg (ភ្ជាប់​មក​ជាមួយ)
+
+@ {} cvars
+km cvar {}
+
+@ {} commands
+km ពាក្យ​បញ្ជា {}
+
+@ Can't "cmd", not connected
+km មិន​អាច "cmd" មិន​បាន​ភ្ជាប់
+
+@ Looking for Quake servers...
+km កំពុង​ស្វែង​រក​ម៉ាស៊ីន​មេ Quake...
+
+@ Bad value, must be between 1 and 65534
+km តម្លៃ​មិន​ត្រឹម​ត្រូវ ត្រូវ​តែ​នៅ​ចន្លោះ 1 និង 65534
+
+@ Couldn't handle music file {}
+km មិន​អាច​ដំណើរ​ការ​ឯកសារ​តន្ត្រី {}
+
+@ Bug report written to {}
+km បាន​សរសេរ​របាយការណ៍​កំហុស​ទៅ {}
+
+@ bugreport: can't create {}: {}
+km bugreport: មិន​អាច​បង្កើត {}: {}
+
+@ graphics preset: {}
+km ការ​កំណត់​ក្រាហ្វិក​ស្រាប់: {}
+
+@ Presets (r_shader_preset <name>):
+km ការ​កំណត់​ស្រាប់ (r_shader_preset <name>):
+
+@ Add your own .slangp presets under <game>/shaders/.
+km បន្ថែម​ការ​កំណត់​ស្រាប់ .slangp របស់​អ្នក​ក្នុង <game>/shaders/។
+
+@ no shader preset loaded (r_shader_preset)
+km មិន​ទាន់​ផ្ទុក​ការ​កំណត់ shader ស្រាប់ (r_shader_preset)
+
+@ r_shader_preset: "{}" not found
+km r_shader_preset: រក "{}" មិន​ឃើញ
+
+@ no parameter "{}" in this preset
+km គ្មាន​ប៉ារ៉ាម៉ែត្រ "{}" ក្នុង​ការ​កំណត់​ស្រាប់​នេះ
+
+@ {} = {} (default {}, {}..{})
+km {} = {} (លំនាំ​ដើម {}, {}..{})
+
+@ Switching to {}...
+km កំពុង​ប្ដូរ​ទៅ {}...
+
+@ game: no game dir "{}" in {}
+km game: គ្មាន​ថត​ហ្គេម "{}" ក្នុង {}
+
+@ game: can't find the engine executable
+km game: រក​មិន​ឃើញ​ឯកសារ​ដំណើរ​ការ​របស់​ម៉ាស៊ីន
+
+@ game: exec failed: {}
+km game: ដំណើរ​ការ​បរាជ័យ: {}
+
+@ game: launch failed: {}
+km game: ការ​បើក​បរាជ័យ: {}
+
+@ loaded {} in {}s
+km បាន​ផ្ទុក {} ក្នុង {} វិនាទី
+
+@ No demos listed with startdemos
+km គ្មាន​ដេម៉ូ​ក្នុង​បញ្ជី startdemos
+
+@ Playing demo from {}.
+km កំពុង​ចាក់​ដេម៉ូ​ពី {}។
+
+@ {} frames {} seconds {} fps
+km {} ស៊ុម {} វិនាទី {} fps
+
+@ Recording to {}.
+km កំពុង​ថត​ទៅ {}។
+
+@ Completed demo
+km បាន​បញ្ចប់​ដេម៉ូ
+
+@ Can't record during demo playback
+km មិន​អាច​ថត​ពេល​កំពុង​ចាក់​ដេម៉ូ
+
+@ Relative pathnames are not allowed.
+km មិន​អនុញ្ញាត​ផ្លូវ​ឯកសារ​ដែល​ទាក់ទង​ទេ។
+
+@ Can't record - try again when connected
+km មិន​អាច​ថត - សាក​ម្ដង​ទៀត​ពេល​បាន​ភ្ជាប់
+
+@ {} demo(s) in loop
+km ដេម៉ូ {} ក្នុង​វិល​ជុំ
+
+@ Not recording a demo.
+km មិន​កំពុង​ថត​ដេម៉ូ​ទេ។
+
+@ {} joined on a gamepad
+km {} បាន​ចូល​រួម​ដោយ​ឧបករណ៍​បញ្ជា
+
+@ goggles: needs a game started with Add-ons and Goggles enabled
+km goggles: ត្រូវ​ការ​ហ្គេម​ដែល​ចាប់​ផ្ដើម​ជាមួយ គ្រឿង​បន្ថែម និង វ៉ែនតា​បើក
+
+@ equip: needs a game started with Add-ons and Goggles enabled
+km equip: ត្រូវ​ការ​ហ្គេម​ដែល​ចាប់​ផ្ដើម​ជាមួយ គ្រឿង​បន្ថែម និង វ៉ែនតា​បើក
+
+@ UDP listening on port {}
+km UDP កំពុង​ស្ដាប់​លើ​ច្រក {}
+
+@ UDP bind on port {} failed: {}
+km UDP bind លើ​ច្រក {} បរាជ័យ: {}
+
+@ Connection accepted by {}
+km ការ​តភ្ជាប់​ត្រូវ​បាន​ទទួល​ដោយ {}
+
+@ Connection failed: {}
+km ការ​តភ្ជាប់​បរាជ័យ: {}
+
+@ Couldn't resolve {}
+km រក​អាសយដ្ឋាន {} មិន​ឃើញ
+
+@ Connecting to {}...
+km កំពុង​ភ្ជាប់​ទៅ {}...
+
+@ Connecting to QuakeWorld server {}...
+km កំពុង​ភ្ជាប់​ទៅ​ម៉ាស៊ីន​មេ QuakeWorld {}...
+
+@ Disconnected: {}
+km បាន​ផ្ដាច់: {}
+
+@ Server disconnected
+km ម៉ាស៊ីន​មេ​បាន​ផ្ដាច់
+
+@ Client {} connected
+km ម៉ាស៊ីន​ភ្ញៀវ {} បាន​ភ្ជាប់
+
+@ Client {} timed out
+km ម៉ាស៊ីន​ភ្ញៀវ {} អស់​ពេល
+
+@ Couldn't spawn server {}: {}
+km មិន​អាច​បង្កើត​ម៉ាស៊ីន​មេ {}: {}
+
+@ maxplayers can not be changed while a server is running.
+km មិន​អាច​ប្ដូរ maxplayers ពេល​ម៉ាស៊ីន​មេ​កំពុង​ដំណើរ​ការ​ទេ។
+
+@ You can't kick yourself!
+km អ្នក​មិន​អាច​ទាត់​ខ្លួន​ឯង​ចេញ​បាន​ទេ!
+
+@ Only the server may changelevel
+km មាន​តែ​ម៉ាស៊ីន​មេ​ទេ​ដែល​អាច changelevel
+
+@ {} renamed to {}
+km {} បាន​ប្ដូរ​ឈ្មោះ​ទៅ {}

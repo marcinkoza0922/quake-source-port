@@ -1,4 +1,9 @@
-Copyright 2022 The Noto Project Authors (https://github.com/notofonts/armenian)
+Copyright 2022-2025 The Noto Project Authors (https://github.com/notofonts/armenian,
+georgian, arabic, hebrew, devanagari, bengali, gurmukhi, gujarati, tamil, telugu,
+thai, khmer, ethiopic)
+
+Applies to the NotoSans*-Regular.ttf and NotoSans*-Subset.ttf files here (the
+Subset files are subsets made by tools/script_fonts.py).
 
 This Font Software is licensed under the SIL Open Font License, Version 1.1.
 This license is copied below, and is also available with a FAQ at:

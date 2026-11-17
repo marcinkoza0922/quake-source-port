@@ -32,7 +32,9 @@ Daniż, Norveġiż, Olandiż, Grieg, Ungeriż, Rumen, Portugiż (il-Portugall je
 il-Brażil), Ġappuniż, Korean, Ċiniż (Simplifikat jew Tradizzjonali), Tork,
 Indoneżjan, Malajan, Filippin, Vjetnamiż, Serb, Litwan, Latvjan, Estonjan,
 Malti, Albaniż, Armen, Ġorġjan, Iżlandiż, Irlandiż, Welsh, Bask, Katalan,
-Galizjan, Latin, Esperanto, Belarussu, Maċedonjan, Sloven jew Swaħili.
+Galizjan, Latin, Esperanto, Belarussu, Maċedonjan, Sloven, Swaħili, Għarbi,
+Ebrajk, Persjan, Urdu, Ħindi, Marathi, Bengali, Punġabi, Guġarati, Tamil,
+Telugu, Tajlandiż, Kmer, Amhariku jew Kantoniż.
 **Sistema** ssegwi l-lingwa tal-kompjuter tiegħek. It-test tal-logħba
 tal-edizzjoni l-ġdida tal-2021 huwa tradott biss bil-Franċiż, bil-Ġermaniż,
 bit-Taljan, bl-Ispanjol u bir-Russu; lingwi oħra juruh bl-Ingliż. F'lingwi

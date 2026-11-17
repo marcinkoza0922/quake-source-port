@@ -33,7 +33,9 @@ japāņu, korejiešu, ķīniešu (vienkāršotā vai tradicionālā), turku,
 indonēziešu, malajiešu, filipīniešu, vjetnamiešu, serbu, lietuviešu,
 latviešu, igauņu, maltiešu, albāņu, armēņu, gruzīnu, islandiešu, īru,
 velsiešu, basku, katalāņu, galisiešu, latīņu, esperanto, baltkrievu,
-maķedoniešu, slovēņu vai svahili.
+maķedoniešu, slovēņu, svahili, arābu, ebreju, persiešu, urdu, hindi,
+marathu, bengāļu, pandžabu, gudžaratu, tamilu, telugu, taju, khmeru, amharu vai
+kantoniešu.
 **Sistēma** seko datora valodai. 2021. gada atkārtotā izdevuma spēles
 teksti ir tulkoti tikai franču, vācu, itāļu, spāņu un krievu valodā; citās
 valodās tie tiek rādīti angliski. Valodās, kas nav angļu, sīkais spēles
