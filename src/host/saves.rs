@@ -12,7 +12,7 @@ impl Host {
         self.clean_shot = false;
         let (w, h, px) = match captured {
             Ok(c) => c.expect("pending returned above"),
-            Err(e) => return self.con.print(&format!("screenshot failed: {e:?}\n")),
+            Err(e) => return self.con.print(&qcore::ctr!("screenshot failed: {}\n", format!("{e:?}"))),
         };
         if let Some(name) = shot {
             self.write_screenshot(&name, w, h, &px);
@@ -34,8 +34,8 @@ impl Host {
                     if p.extension().is_none() { p.with_extension("png") } else { p }
                 };
                 match qcore::vfs::write(&path, &png) {
-                    Ok(()) => self.con.print(&format!("Wrote {}\n", path.display())),
-                    Err(e) => self.con.print(&format!("screenshot: {e}\n")),
+                    Ok(()) => self.con.print(&qcore::ctr!("Wrote {}\n", path.display())),
+                    Err(e) => self.con.print(&qcore::ctr!("screenshot: {}\n", e)),
                 }
             }
         }
@@ -104,10 +104,10 @@ impl Host {
             let text = qserver::addons::save::set_comment(&text, &format!("AUTOSAVE_{}", reason.replace(' ', "_")));
             match crate::autosave::rotate(&self.user_dir(), keep, &text, crate::autosave::ext(self.server.qsa_saves())) {
                 Ok(()) => {
-                    self.print("Autosaved.\n");
+                    self.print(&qcore::ctr!("Autosaved.\n"));
                     self.thumb = Some(self.user_dir().join(format!("autosave0.{}", crate::autosave::THUMB_EXT)));
                 }
-                Err(e) => self.print(&format!("ERROR: autosave failed: {e}\n")),
+                Err(e) => self.print(&qcore::ctr!("ERROR: autosave failed: {}\n", e)),
             }
         }
     }
@@ -167,7 +167,7 @@ impl Host {
     pub(super) fn write_thumb(&mut self, path: &std::path::Path, w: u32, h: u32, px: &[u8]) {
         let data = encode_thumb(w, h, px);
         if let Err(e) = qcore::vfs::write(path, &data) {
-            self.con.print(&format!("couldn't write {}: {e}\n", path.display()));
+            self.con.print(&qcore::ctr!("couldn't write {}: {}\n", path.display(), e));
         }
     }
 }
@@ -257,11 +257,11 @@ pub(super) fn register(c: &mut Commands<Host>) {
             return;
         }
         if !h.server.active() || h.cl.intermission != 0 || h.cl.stats[STAT_HEALTH] <= 0 {
-            h.print("Can't save now.\n");
+            h.print(&qcore::ctr!("Can't save now.\n"));
             return;
         }
         if qserver::modifiers::value(&h.server.core, "modifier_nosaves") != 0.0 {
-            h.print("This game only autosaves (No Manual Saves modifier).\n");
+            h.print(&qcore::ctr!("This game only autosaves (No Manual Saves modifier).\n"));
             return;
         }
         let text = h.server.save_game();
@@ -272,10 +272,10 @@ pub(super) fn register(c: &mut Commands<Host>) {
                 if let (Some(d), Some(stem)) = (p.parent(), p.file_stem().and_then(|s| s.to_str())) {
                     let _ = crate::autosave::remove_other_exts(d, stem, p.extension().and_then(|e| e.to_str()));
                 }
-                h.print("Game saved.\n");
+                h.print(&qcore::ctr!("Game saved.\n"));
                 h.thumb = Some(p.with_extension(crate::autosave::THUMB_EXT));
             }
-            Err(e) => h.print(&format!("ERROR: couldn't write {}: {e}\n", p.display())),
+            Err(e) => h.print(&qcore::ctr!("ERROR: couldn't write {}: {}\n", p.display(), e)),
         }
     });
     c.add("load", |h, a| {
@@ -284,21 +284,21 @@ pub(super) fn register(c: &mut Commands<Host>) {
             return;
         }
         let Some(p) = h.find_save(a.argv(1)) else {
-            h.print(&format!("ERROR: couldn't open {}\n", h.savegame_path(a.argv(1)).display()));
+            h.print(&qcore::ctr!("ERROR: couldn't open {}\n", h.savegame_path(a.argv(1)).display()));
             return;
         };
         let Ok(bytes) = qcore::vfs::read(&p) else {
-            h.print(&format!("ERROR: couldn't open {}\n", p.display()));
+            h.print(&qcore::ctr!("ERROR: couldn't open {}\n", p.display()));
             return;
         };
         let text = qcore::text::decode(&bytes);
-        h.print(&format!("Loading {}...\n", save_stem(a.argv(1))));
+        h.print(&qcore::ctr!("Loading {}...\n", save_stem(a.argv(1))));
         if let Some(i) = h.local.take() {
             h.server.drop_client(i, false);
         }
         h.disconnect_client();
         if let Err(e) = h.server.load_game(&text) {
-            h.print(&format!("load failed: {e}\n"));
+            h.print(&qcore::ctr!("load failed: {}\n", e));
         }
         h.drain_server_log();
     });

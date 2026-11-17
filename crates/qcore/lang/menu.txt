@@ -1,0 +1,3125 @@
+# Translations of the port's own text; format in crates/qcore/src/lang/catalog.rs.
+# Options pages: page names, row labels and choice values.
+
+@ 10% speed
+fr vitesse 10 %
+de 10 % Tempo
+it velocità 10%
+es velocidad 10 %
+ru скорость 10%
+
+@ 2 split-screen
+fr 2 en écran partagé
+de 2 im Splitscreen
+it 2 a schermo diviso
+es 2 en pantalla dividida
+ru 2 на разделённом экране
+
+@ 3 split-screen
+fr 3 en écran partagé
+de 3 im Splitscreen
+it 3 a schermo diviso
+es 3 en pantalla dividida
+ru 3 на разделённом экране
+
+@ 4 split-screen
+fr 4 en écran partagé
+de 4 im Splitscreen
+it 4 a schermo diviso
+es 4 en pantalla dividida
+ru 4 на разделённом экране
+
+@ 5 split-screen
+fr 5 en écran partagé
+de 5 im Splitscreen
+it 5 a schermo diviso
+es 5 en pantalla dividida
+ru 5 на разделённом экране
+
+@ 6 split-screen
+fr 6 en écran partagé
+de 6 im Splitscreen
+it 6 a schermo diviso
+es 6 en pantalla dividida
+ru 6 на разделённом экране
+
+@ 2D aiming
+fr visée 2D
+de 2D-Zielen
+it mira 2D
+es apuntado 2D
+ru 2D-прицеливание
+
+@ 2x monsters
+fr monstres x2
+de 2× Monster
+it mostri x2
+es monstruos x2
+ru монстры x2
+
+@ 3x monsters
+fr monstres x3
+de 3× Monster
+it mostri x3
+es monstruos x3
+ru монстры x3
+
+@ 4x monsters
+fr monstres x4
+de 4× Monster
+it mostri x4
+es monstruos x4
+ru монстры x4
+
+@ 3D resolution
+fr résolution 3D
+de 3D-Auflösung
+it risoluzione 3D
+es resolución 3D
+ru 3D-разрешение
+
+@ 3D view
+fr vue 3D
+de 3D-Ansicht
+it vista 3D
+es vista 3D
+ru 3D-вид
+
+@ 8-bit Color
+fr Couleurs 8 bits
+de 8-Bit-Farben
+it Colore a 8 bit
+es Color de 8 bits
+ru 8-битный цвет
+
+@ Accessibility
+fr Accessibilité
+de Barrierefreiheit
+it Accessibilità
+es Accesibilidad
+ru Спецвозможности
+
+@ Acquisition Cone
+fr Cône d'acquisition
+de Erfassungskegel
+it Cono di acquisizione
+es Cono de adquisición
+ru Конус захвата
+
+@ Activation
+fr Activation
+de Aktivierung
+it Attivazione
+es Activación
+ru Активация
+
+@ Add a ringing room tail after the cue
+fr Ajoute une réverbération de pièce après le signal
+de Fügt nach dem Signal einen klingenden Raumhall hinzu
+it Aggiunge una coda di riverbero dopo il segnale
+es Añade una cola de reverberación tras la señal
+ru Добавляет звенящий хвост реверберации после сигнала
+
+@ Add delayed repeats after the cue
+fr Ajoute des répétitions retardées après le signal
+de Fügt nach dem Signal verzögerte Wiederholungen hinzu
+it Aggiunge ripetizioni ritardate dopo il segnale
+es Añade repeticiones retardadas tras la señal
+ru Добавляет задержанные повторы после сигнала
+
+@ Add saturation and distortion
+fr Ajoute de la saturation et de la distorsion
+de Fügt Sättigung und Verzerrung hinzu
+it Aggiunge saturazione e distorsione
+es Añade saturación y distorsión
+ru Добавляет насыщение и искажение
+
+@ Add-ons
+fr Extensions
+de Add-ons
+it Add-on
+es Complementos
+ru Дополнения
+
+@ Address
+fr Adresse
+de Adresse
+it Indirizzo
+es Dirección
+ru Адрес
+
+@ Adds fine noise to hide color banding
+fr Ajoute un léger bruit pour masquer les bandes de couleur
+de Fügt feines Rauschen hinzu, um Farbstufen zu verbergen
+it Aggiunge un leggero rumore per nascondere le bande di colore
+es Añade un ruido fino para ocultar las bandas de color
+ru Добавляет лёгкий шум, скрывающий цветовые полосы
+
+@ Advanced Settings
+fr Réglages avancés
+de Erweiterte Einstellungen
+it Impostazioni avanzate
+es Ajustes avanzados
+ru Расширенные настройки
+
+@ Aim Assist
+fr Aide à la visée
+de Zielhilfe
+it Mira assistita
+es Ayuda al apuntar
+ru Помощь в прицеливании
+
+@ Aim Rotation
+fr Rotation de visée
+de Zieldrehung
+it Rotazione della mira
+es Rotación de la mira
+ru Доворот прицела
+
+@ Aim Slowdown
+fr Ralentissement de visée
+de Zielverlangsamung
+it Rallentamento della mira
+es Ralentización de la mira
+ru Замедление прицела
+
+@ Aim Style
+fr Style de visée
+de Zielstil
+it Stile di mira
+es Estilo de apuntado
+ru Стиль прицеливания
+
+@ All
+fr Tous
+de Alle
+it Tutti
+es Todo
+ru Все
+
+@ All enemies
+fr Tous les ennemis
+de Alle Gegner
+it Tutti i nemici
+es Todos los enemigos
+ru Все враги
+
+@ Alt Fire (Add-ons)
+fr Tir secondaire (extensions)
+de Alternativfeuer (Add-ons)
+it Fuoco secondario (add-on)
+es Disparo secundario (complementos)
+ru Альт. огонь (дополнения)
+
+@ Always Run
+fr Toujours courir
+de Immer rennen
+it Corsa automatica
+es Correr siempre
+ru Всегда бежать
+
+@ Ambient Occlusion
+fr Occlusion ambiante
+de Umgebungsverdeckung
+it Occlusione ambientale
+es Oclusión ambiental
+ru Фоновое затенение
+
+@ Ammo Counts
+fr Compteurs de munitions
+de Munitionszähler
+it Contatori munizioni
+es Contadores de munición
+ru Счётчики боеприпасов
+
+@ Ammo Counts Position
+fr Position des compteurs de munitions
+de Position der Munitionszähler
+it Posizione contatori munizioni
+es Posición de contadores de munición
+ru Положение счётчиков боеприпасов
+
+@ Ammo Pickups
+fr Munitions ramassées
+de Munitionsfunde
+it Munizioni raccolte
+es Munición recogida
+ru Подбор патронов
+
+@ Anisotropic
+fr Anisotrope
+de Anisotrop
+it Anisotropico
+es Anisotrópico
+ru Анизотропия
+
+@ Anti-aliasing
+fr Anticrénelage
+de Kantenglättung
+it Antialiasing
+es Antialiasing
+ru Сглаживание
+
+@ Apply To
+fr Appliquer à
+de Anwenden auf
+it Applica a
+es Aplicar a
+ru Применять к
+
+@ Armor
+fr Armure
+de Rüstung
+it Armatura
+es Armadura
+ru Броня
+
+@ Armor Position
+fr Position de l'armure
+de Rüstungsposition
+it Posizione armatura
+es Posición de la armadura
+ru Положение брони
+
+@ Ask
+fr Demander
+de Fragen
+it Chiedi
+es Preguntar
+ru Спросить
+
+@ Attack
+fr Attaquer
+de Angreifen
+it Attacca
+es Atacar
+ru Атаковать
+
+@ Audio
+fr Audio
+de Audio
+it Audio
+es Audio
+ru Звук
+
+@ Auto-aim
+fr Visée automatique
+de Automatisches Zielen
+it Mira automatica
+es Apuntado automático
+ru Автоприцел
+
+@ Auto-aim Settings
+fr Réglages de la visée automatique
+de Einstellungen Automatisches Zielen
+it Impostazioni mira automatica
+es Ajustes de apuntado automático
+ru Настройки автоприцела
+
+@ Autosave
+fr Sauvegarde auto
+de Autospeichern
+it Salvataggio automatico
+es Autoguardado
+ru Автосохранение
+
+@ Autosave Settings
+fr Réglages de sauvegarde auto
+de Autospeichern-Einstellungen
+it Impostazioni salvataggio automatico
+es Ajustes de autoguardado
+ru Настройки автосохранения
+
+@ Autosave Timer
+fr Sauvegarde auto périodique
+de Autospeichern-Intervall
+it Intervallo salvataggio automatico
+es Intervalo de autoguardado
+ru Таймер автосохранения
+
+@ Autosaves to Keep
+fr Sauvegardes auto conservées
+de Behaltene Autospeicherstände
+it Salvataggi automatici da conservare
+es Autoguardados que conservar
+ru Хранить автосохранений
+
+@ Bass
+fr Graves
+de Bass
+it Bassi
+es Graves
+ru Низкие
+
+@ Blip
+fr Bip
+de Blip
+it Blip
+es Bip
+ru Блип
+
+@ Blood Quality
+fr Qualité du sang
+de Blutqualität
+it Qualità del sangue
+es Calidad de la sangre
+ru Качество крови
+
+@ Blood Splatter Settings
+fr Réglages des éclaboussures de sang
+de Blutspritzer-Einstellungen
+it Impostazioni schizzi di sangue
+es Ajustes de salpicaduras de sangre
+ru Настройки брызг крови
+
+@ Blue
+fr Bleu
+de Blau
+it Blu
+es Azul
+ru Синий
+
+@ Boomerang Settings
+fr Réglages du boomerang
+de Bumerang-Einstellungen
+it Impostazioni boomerang
+es Ajustes del bumerán
+ru Настройки бумеранга
+
+@ Boost or cut high frequencies in decibels
+fr Renforce ou coupe les aigus, en décibels
+de Hebt oder senkt die Höhen in Dezibel
+it Aumenta o riduce le frequenze alte, in decibel
+es Realza o recorta los agudos, en decibelios
+ru Усиливает или ослабляет высокие частоты, в децибелах
+
+@ Boost or cut low frequencies in decibels
+fr Renforce ou coupe les graves, en décibels
+de Hebt oder senkt die Tiefen in Dezibel
+it Aumenta o riduce le frequenze basse, in decibel
+es Realza o recorta los graves, en decibelios
+ru Усиливает или ослабляет низкие частоты, в децибелах
+
+@ Brightness
+fr Luminosité
+de Helligkeit
+it Luminosità
+es Brillo
+ru Яркость
+
+@ Bullet Time (Add-ons)
+fr Bullet time (extensions)
+de Bullet-Time (Add-ons)
+it Bullet time (add-on)
+es Tiempo bala (complementos)
+ru Замедление времени (дополнения)
+
+@ Bullet Time Settings
+fr Réglages du bullet time
+de Bullet-Time-Einstellungen
+it Impostazioni bullet time
+es Ajustes del tiempo bala
+ru Настройки замедления времени
+
+@ Button Glyphs
+fr Symboles des boutons
+de Tastensymbole
+it Simboli dei pulsanti
+es Iconos de botones
+ru Значки кнопок
+
+@ Button Size
+fr Taille des boutons
+de Tastengröße
+it Dimensione pulsanti
+es Tamaño de los botones
+ru Размер кнопок
+
+@ Camera
+fr Caméra
+de Kamera
+it Telecamera
+es Cámara
+ru Камера
+
+@ Caustic Intensity
+fr Intensité des caustiques
+de Kaustik-Intensität
+it Intensità caustiche
+es Intensidad de cáusticas
+ru Яркость каустики
+
+@ Caustics
+fr Caustiques
+de Kaustiken
+it Caustiche
+es Cáusticas
+ru Каустика
+
+@ Center
+fr Centre
+de Mitte
+it Centro
+es Centro
+ru По центру
+
+@ Center Message Position
+fr Position des messages centraux
+de Position der Mittelnachrichten
+it Posizione messaggi centrali
+es Posición de mensajes centrales
+ru Положение сообщений по центру
+
+@ Center Message Time
+fr Durée des messages centraux
+de Dauer der Mittelnachrichten
+it Durata messaggi centrali
+es Duración de mensajes centrales
+ru Время сообщений по центру
+
+@ Center View
+fr Centrer caméra
+de Sicht zentrieren
+it Centra visuale
+es Centrar vista
+ru Центрировать взгляд
+
+@ Change Color on Kill
+fr Couleur différente à l'élimination
+de Farbe bei Abschuss ändern
+it Cambia colore all'uccisione
+es Cambiar color al matar
+ru Менять цвет при убийстве
+
+@ Change Color on Target
+fr Couleur différente sur cible
+de Farbe bei Ziel ändern
+it Cambia colore sul bersaglio
+es Cambiar color sobre objetivo
+ru Менять цвет на цели
+
+@ Chime
+fr Carillon
+de Glockenspiel
+it Rintocco
+es Campanilla
+ru Перезвон
+
+@ Click
+fr Clic
+de Klick
+it Clic
+es Clic
+ru Щелчок
+
+@ Clink
+fr Tintement
+de Klirren
+it Tintinnio
+es Tintineo
+ru Звяканье
+
+@ Coin
+fr Pièce
+de Münze
+it Moneta
+es Moneda
+ru Монетка
+
+@ Color
+fr Couleur
+de Farbe
+it Colore
+es Color
+ru Цвет
+
+@ Color Filter
+fr Filtre de couleur
+de Farbfilter
+it Filtro colore
+es Filtro de color
+ru Цветовой фильтр
+
+@ Color of the grenade arc
+fr Couleur de l'arc de grenade
+de Farbe des Granatenbogens
+it Colore dell'arco della granata
+es Color del arco de la granada
+ru Цвет траектории гранаты
+
+@ Colored Lighting
+fr Éclairage coloré
+de Farbiges Licht
+it Illuminazione colorata
+es Iluminación de color
+ru Цветное освещение
+
+@ Connect
+fr Se connecter
+de Verbinden
+it Connetti
+es Conectarse
+ru Подключиться
+
+@ Contrast
+fr Contraste
+de Kontrast
+it Contrasto
+es Contraste
+ru Контраст
+
+@ Controls
+fr Commandes
+de Steuerung
+it Comandi
+es Controles
+ru Управление
+
+@ Cooldown (ms)
+fr Temps de recharge (ms)
+de Abklingzeit (ms)
+it Tempo di ricarica (ms)
+es Enfriamiento (ms)
+ru Перезарядка (мс)
+
+@ Crosshair Outline
+fr Contour du réticule
+de Fadenkreuz-Umriss
+it Contorno del mirino
+es Contorno del punto de mira
+ru Обводка прицела
+
+@ Crosshair Shape
+fr Forme du réticule
+de Fadenkreuzform
+it Forma del mirino
+es Forma del punto de mira
+ru Форма прицела
+
+@ Crosshair Size
+fr Taille du réticule
+de Fadenkreuzgröße
+it Dimensione del mirino
+es Tamaño del punto de mira
+ru Размер прицела
+
+@ Current Ammo
+fr Munitions actuelles
+de Aktuelle Munition
+it Munizioni attuali
+es Munición actual
+ru Текущие патроны
+
+@ Current Ammo Position
+fr Position des munitions actuelles
+de Position der aktuellen Munition
+it Posizione munizioni attuali
+es Posición de la munición actual
+ru Положение текущих патронов
+
+@ Customize This Game
+fr Personnaliser cette partie
+de Dieses Spiel anpassen
+it Personalizza questa partita
+es Personalizar esta partida
+ru Настроить эту игру
+
+@ Damage
+fr Dégâts
+de Schaden
+it Danni
+es Daño
+ru Урон
+
+@ Damage Taken
+fr Dégâts subis
+de Erlittener Schaden
+it Danni subiti
+es Daño recibido
+ru Получаемый урон
+
+@ Debris
+fr Débris
+de Trümmer
+it Detriti
+es Escombros
+ru Обломки
+
+@ Debris Quality
+fr Qualité des débris
+de Trümmerqualität
+it Qualità dei detriti
+es Calidad de los escombros
+ru Качество обломков
+
+@ Debris Settings
+fr Réglages des débris
+de Trümmer-Einstellungen
+it Impostazioni detriti
+es Ajustes de escombros
+ru Настройки обломков
+
+@ Directional Damage
+fr Dégâts directionnels
+de Schadensrichtung
+it Danno direzionale
+es Daño direccional
+ru Направление урона
+
+@ Dithering
+fr Tramage
+de Dithering
+it Dithering
+es Tramado
+ru Дизеринг
+
+@ Dodge / Dive (Add-ons)
+fr Esquive / plongeon (extensions)
+de Ausweichen / Hechten (Add-ons)
+it Schivata / tuffo (add-on)
+es Esquivar / lanzarse (complementos)
+ru Уклон / прыжок (дополнения)
+
+@ Dragging up looks down instead of up
+fr Glisser vers le haut fait regarder vers le bas
+de Nach oben ziehen blickt nach unten statt nach oben
+it Trascinare verso l'alto guarda in basso invece che in alto
+es Arrastrar hacia arriba mira hacia abajo en vez de arriba
+ru Движение пальца вверх опускает взгляд, а не поднимает
+
+@ Drive
+fr Saturation
+de Sättigung
+it Saturazione
+es Saturación
+ru Перегруз
+
+@ Dynamic Lights
+fr Lumières dynamiques
+de Dynamische Lichter
+it Luci dinamiche
+es Luces dinámicas
+ru Динамический свет
+
+@ Echo
+fr Écho
+de Echo
+it Eco
+es Eco
+ru Эхо
+
+@ Enemy Health
+fr Santé des ennemis
+de Gegnergesundheit
+it Salute dei nemici
+es Salud de los enemigos
+ru Здоровье врагов
+
+@ Enemy Wounds
+fr Blessures des ennemis
+de Gegnerwunden
+it Ferite dei nemici
+es Heridas de los enemigos
+ru Раны врагов
+
+@ Enhanced Blood Splatter
+fr Éclaboussures de sang améliorées
+de Verbesserte Blutspritzer
+it Schizzi di sangue migliorati
+es Salpicaduras de sangre mejoradas
+ru Улучшенные брызги крови
+
+@ Enhanced FX
+fr Effets améliorés
+de Verbesserte Effekte
+it Effetti migliorati
+es Efectos mejorados
+ru Улучшенные эффекты
+
+@ Enhanced Models
+fr Modèles améliorés
+de Verbesserte Modelle
+it Modelli migliorati
+es Modelos mejorados
+ru Улучшенные модели
+
+@ Enhanced Particles
+fr Particules améliorées
+de Verbesserte Partikel
+it Particelle migliorate
+es Partículas mejoradas
+ru Улучшенные частицы
+
+@ Enhanced Water
+fr Eau améliorée
+de Verbessertes Wasser
+it Acqua migliorata
+es Agua mejorada
+ru Улучшенная вода
+
+@ Enhancements
+fr Améliorations
+de Verbesserungen
+it Miglioramenti
+es Mejoras
+ru Улучшения
+
+@ Equipment Wheel (Add-ons)
+fr Roue d'équipement (extensions)
+de Ausrüstungsrad (Add-ons)
+it Ruota dell'equipaggiamento (add-on)
+es Selector de equipo (complementos)
+ru Колесо снаряжения (дополнения)
+
+@ Exploding boxes throw metal shards
+fr Les caisses qui explosent projettent des éclats de métal
+de Explodierende Kisten schleudern Metallsplitter
+it Le casse esplosive scagliano schegge di metallo
+es Las cajas explosivas lanzan esquirlas de metal
+ru Взрывающиеся ящики разбрасывают осколки металла
+
+@ Explosion Damage
+fr Dégâts d'explosion
+de Explosionsschaden
+it Danni da esplosione
+es Daño por explosión
+ru Урон от взрывов
+
+@ Explosion Scorch Marks
+fr Traces de brûlure d'explosion
+de Explosions-Brandspuren
+it Bruciature delle esplosioni
+es Marcas de quemadura de explosiones
+ru Подпалины от взрывов
+
+@ Explosions scorch nearby solid surfaces
+fr Les explosions brûlent les surfaces solides proches
+de Explosionen versengen nahe feste Oberflächen
+it Le esplosioni bruciano le superfici solide vicine
+es Las explosiones queman las superficies sólidas cercanas
+ru Взрывы опаляют ближайшие твёрдые поверхности
+
+@ Explosives only
+fr Explosifs uniquement
+de Nur Sprengwaffen
+it Solo esplosivi
+es Solo explosivos
+ru Только взрывчатка
+
+@ Extra Monsters
+fr Monstres supplémentaires
+de Zusätzliche Monster
+it Mostri aggiuntivi
+es Monstruos adicionales
+ru Дополнительные монстры
+
+@ Extra Per 10 Damage (ms)
+fr Bonus par 10 dégâts (ms)
+de Zusatz pro 10 Schaden (ms)
+it Extra ogni 10 danni (ms)
+es Extra por cada 10 de daño (ms)
+ru Добавка за каждые 10 урона (мс)
+
+@ FX Settings
+fr Réglages des effets
+de Effekt-Einstellungen
+it Impostazioni effetti
+es Ajustes de efectos
+ru Настройки эффектов
+
+@ Field of View
+fr Champ de vision
+de Sichtfeld
+it Campo visivo
+es Campo visual
+ru Поле зрения
+
+@ Firing never uses up ammo
+fr Tirer ne consomme jamais de munitions
+de Schießen verbraucht nie Munition
+it Sparare non consuma mai munizioni
+es Disparar nunca gasta munición
+ru Стрельба не расходует боеприпасы
+
+@ First person
+fr première personne
+de Egoperspektive
+it prima persona
+es primera persona
+ru от первого лица
+
+@ Flick Time
+fr Durée du flick
+de Flick-Zeit
+it Tempo del flick
+es Tiempo del flick
+ru Время флика
+
+@ Flight Speed
+fr Vitesse de vol
+de Fluggeschwindigkeit
+it Velocità di volo
+es Velocidad de vuelo
+ru Скорость полёта
+
+@ Fog
+fr Brouillard
+de Nebel
+it Nebbia
+es Niebla
+ru Туман
+
+@ Frag Limit
+fr Limite de frags
+de Frag-Limit
+it Limite uccisioni
+es Límite de bajas
+ru Лимит фрагов
+
+@ Freeze Duration (ms)
+fr Durée du gel (ms)
+de Einfrierdauer (ms)
+it Durata del blocco (ms)
+es Duración de la congelación (ms)
+ru Длительность стоп-кадра (мс)
+
+@ GLQuake
+fr GLQuake
+de GLQuake
+it GLQuake
+es GLQuake
+ru GLQuake
+
+@ Game Speed
+fr Vitesse du jeu
+de Spieltempo
+it Velocità di gioco
+es Velocidad del juego
+ru Скорость игры
+
+@ Game Type
+fr Type de partie
+de Spieltyp
+it Tipo di partita
+es Tipo de partida
+ru Тип игры
+
+@ Gameplay
+fr Jouabilité
+de Gameplay
+it Gioco
+es Juego
+ru Игра
+
+@ Gameplay Modifiers
+fr Modificateurs de jeu
+de Spielmodifikatoren
+it Modificatori di gioco
+es Modificadores de juego
+ru Модификаторы игры
+
+@ Gel Quality
+fr Qualité du gel
+de Gel-Qualität
+it Qualità del gel
+es Calidad del gel
+ru Качество геля
+
+@ Gib Surface Painting
+fr Taches des morceaux de chair
+de Fleischfetzen-Flecken
+it Macchie dei brandelli
+es Manchas de los despojos
+ru Пятна от ошмётков
+
+@ Gibs
+fr Morceaux de chair
+de Fleischfetzen
+it Brandelli
+es Despojos
+ru Ошмётки
+
+@ Gibs and heads tumble and bounce
+fr Les morceaux de chair et les têtes roulent et rebondissent
+de Fleischfetzen und Köpfe rollen und springen
+it Brandelli e teste rotolano e rimbalzano
+es Los despojos y las cabezas ruedan y rebotan
+ru Ошмётки и головы кувыркаются и отскакивают
+
+@ Goggle Glow Quality
+fr Qualité de la lueur des lunettes
+de Leuchtqualität der Brille
+it Qualità del bagliore dei visori
+es Calidad del brillo de las gafas
+ru Качество свечения очков
+
+@ Goggle Intensity
+fr Intensité des lunettes
+de Brillenintensität
+it Intensità dei visori
+es Intensidad de las gafas
+ru Интенсивность очков
+
+@ Goggle Noise
+fr Bruit des lunettes
+de Brillenrauschen
+it Rumore dei visori
+es Ruido de las gafas
+ru Шум очков
+
+@ Goggles Settings
+fr Réglages des lunettes
+de Brillen-Einstellungen
+it Impostazioni visori
+es Ajustes de las gafas
+ru Настройки очков
+
+@ Graphics
+fr Graphismes
+de Grafik
+it Grafica
+es Gráficos
+ru Графика
+
+@ Green
+fr Vert
+de Grün
+it Verde
+es Verde
+ru Зелёный
+
+@ Grenade Arc
+fr Arc de grenade
+de Granatenbogen
+it Arco della granata
+es Arco de granada
+ru Траектория гранаты
+
+@ Grenade Arc Settings
+fr Réglages de l'arc de grenade
+de Granatenbogen-Einstellungen
+it Impostazioni arco della granata
+es Ajustes del arco de granada
+ru Настройки траектории гранаты
+
+@ Gun Kick
+fr Recul de l'arme
+de Waffenrückstoß
+it Rinculo dell'arma
+es Retroceso del arma
+ru Отдача оружия
+
+@ Gyro
+fr Gyroscope
+de Gyro
+it Giroscopio
+es Giroscopio
+ru Гироскоп
+
+@ Gyro & Flick Stick
+fr Gyroscope et flick stick
+de Gyro & Flick-Stick
+it Giroscopio e flick stick
+es Giroscopio y flick stick
+ru Гироскоп и флик-стик
+
+@ Gyro Active
+fr Gyroscope actif
+de Gyro aktiv
+it Giroscopio attivo
+es Giroscopio activo
+ru Гироскоп активен
+
+@ Gyro Aiming
+fr Visée gyroscopique
+de Gyro-Zielen
+it Mira con giroscopio
+es Apuntado con giroscopio
+ru Прицеливание гироскопом
+
+@ HUD
+fr ATH
+de HUD
+it Interfaccia
+es Interfaz
+ru Интерфейс
+
+@ HUD Style
+fr Style ATH
+de HUD-Stil
+it Stile interfaccia
+es Estilo de interfaz
+ru Стиль интерфейса
+
+@ Health
+fr Santé
+de Gesundheit
+it Salute
+es Salud
+ru Здоровье
+
+@ Health Pickups
+fr Soins ramassés
+de Gesundheitsfunde
+it Salute raccolta
+es Salud recogida
+ru Подбор аптечек
+
+@ Health Position
+fr Position de la santé
+de Gesundheitsposition
+it Posizione salute
+es Posición de la salud
+ru Положение здоровья
+
+@ Health Regeneration
+fr Régénération de santé
+de Gesundheitsregeneration
+it Rigenerazione della salute
+es Regeneración de salud
+ru Регенерация здоровья
+
+@ Hit & Kill Sounds
+fr Sons de touche et d'élimination
+de Treffer- & Abschussgeräusche
+it Suoni di colpo e uccisione
+es Sonidos de impacto y baja
+ru Звуки попаданий и убийств
+
+@ Hit Doors & Lifts
+fr Toucher portes et ascenseurs
+de Türen & Aufzüge treffen
+it Colpisci porte e ascensori
+es Golpear puertas y ascensores
+ru Попадания по дверям и лифтам
+
+@ Hit Markers
+fr Marqueurs de touche
+de Trefferanzeigen
+it Indicatori di colpo
+es Marcadores de impacto
+ru Маркеры попаданий
+
+@ Hit Sound
+fr Son de touche
+de Treffergeräusch
+it Suono di colpo
+es Sonido de impacto
+ru Звук попадания
+
+@ Hitmarker Size
+fr Taille du marqueur
+de Größe der Trefferanzeige
+it Dimensione indicatore
+es Tamaño del marcador
+ru Размер маркера
+
+@ Hitmarker Type
+fr Type de marqueur
+de Art der Trefferanzeige
+it Tipo di indicatore
+es Tipo de marcador
+ru Тип маркера
+
+@ Hitstop Advanced
+fr Hitstop avancé
+de Hitstop erweitert
+it Hitstop avanzato
+es Hitstop avanzado
+ru Хитстоп: дополнительно
+
+@ Hitstop Settings
+fr Réglages du hitstop
+de Hitstop-Einstellungen
+it Impostazioni hitstop
+es Ajustes del hitstop
+ru Настройки хитстопа
+
+@ Hold
+fr Maintenir
+de Halten
+it Tieni premuto
+es Mantener
+ru Удержание
+
+@ Hold lock-on
+fr Verrouillage maintenu
+de Zielerfassung halten
+it Aggancio tenendo premuto
+es Fijar manteniendo
+ru Захват при удержании
+
+@ Hook Enemies
+fr Accrocher les ennemis
+de Gegner einhaken
+it Aggancia i nemici
+es Enganchar enemigos
+ru Цеплять врагов
+
+@ Hook Metal
+fr Accrocher le métal
+de Metall einhaken
+it Aggancia il metallo
+es Enganchar metal
+ru Цеплять металл
+
+@ Hook Stone
+fr Accrocher la pierre
+de Stein einhaken
+it Aggancia la pietra
+es Enganchar piedra
+ru Цеплять камень
+
+@ Hook Wood
+fr Accrocher le bois
+de Holz einhaken
+it Aggancia il legno
+es Enganchar madera
+ru Цеплять дерево
+
+@ Hooking an enemy pulls you to it
+fr Accrocher un ennemi vous tire vers lui
+de Ein eingehakter Gegner zieht dich zu sich
+it Agganciare un nemico ti tira verso di lui
+es Enganchar a un enemigo te atrae hacia él
+ru Зацепившись за врага, вы подтягиваетесь к нему
+
+@ Hookshot Range
+fr Portée du grappin
+de Reichweite des Enterhakens
+it Portata del rampino
+es Alcance del gancho
+ru Дальность крюка
+
+@ Hookshot Settings
+fr Réglages du grappin
+de Enterhaken-Einstellungen
+it Impostazioni rampino
+es Ajustes del gancho
+ru Настройки крюка
+
+@ Host Game
+fr Héberger une partie
+de Spiel hosten
+it Ospita partita
+es Crear partida
+ru Создать игру
+
+@ How far the hook flies before it retracts
+fr Distance parcourue par le grappin avant de revenir
+de Wie weit der Haken fliegt, bevor er zurückkehrt
+it Quanto vola il rampino prima di ritirarsi
+es Distancia que recorre el gancho antes de recogerse
+ru Как далеко летит крюк, прежде чем вернуться
+
+@ How visible the on-screen controls are
+fr Visibilité des commandes à l'écran
+de Wie sichtbar die Bildschirmsteuerung ist
+it Visibilità dei comandi su schermo
+es Visibilidad de los controles en pantalla
+ru Насколько заметны экранные элементы управления
+
+@ Impact Lifetime
+fr Durée des impacts
+de Lebensdauer der Einschläge
+it Durata degli impatti
+es Duración de los impactos
+ru Время жизни следов попаданий
+
+@ Infinite Ammo
+fr Munitions infinies
+de Unendlich Munition
+it Munizioni infinite
+es Munición infinita
+ru Бесконечные боеприпасы
+
+@ Input
+fr Périphériques
+de Eingabe
+it Input
+es Entrada
+ru Ввод
+
+@ Input Scale
+fr Échelle d'entrée
+de Eingabeskalierung
+it Scala dell'input
+es Escala de entrada
+ru Масштаб ввода
+
+@ Interpolate Animation
+fr Interpoler les animations
+de Animationen interpolieren
+it Interpola le animazioni
+es Interpolar animaciones
+ru Интерполяция анимации
+
+@ Interpolate Movement
+fr Interpoler les mouvements
+de Bewegung interpolieren
+it Interpola il movimento
+es Interpolar movimiento
+ru Интерполяция движения
+
+@ Invert Look
+fr Inverser la vue
+de Blick umkehren
+it Inverti visuale
+es Invertir vista
+ru Инвертировать обзор
+
+@ Invert Mouse
+fr Inverser la souris
+de Maus umkehren
+it Inverti mouse
+es Invertir ratón
+ru Инвертировать мышь
+
+@ Invert Stick
+fr Inverser le stick
+de Stick umkehren
+it Inverti levetta
+es Invertir palanca
+ru Инвертировать стик
+
+@ Jet Quality
+fr Qualité du jet
+de Strahlqualität
+it Qualità del getto
+es Calidad del chorro
+ru Качество струи
+
+@ Join Game
+fr Rejoindre une partie
+de Spiel beitreten
+it Unisciti a una partita
+es Unirse a partida
+ru Присоединиться
+
+@ Jump / Swim Up
+fr Sauter / nager vers le haut
+de Springen / Auftauchen
+it Salta / nuota su
+es Saltar / nadar arriba
+ru Прыжок / всплыть
+
+@ Jump again in mid-air
+fr Sauter à nouveau en plein vol
+de In der Luft erneut springen
+it Salta di nuovo a mezz'aria
+es Saltar otra vez en el aire
+ru Повторный прыжок в воздухе
+
+@ Jumps
+fr Sauts
+de Sprünge
+it Salti
+es Saltos
+ru Прыжки
+
+@ Keys & Powerups
+fr Clés et bonus
+de Schlüssel & Power-ups
+it Chiavi e potenziamenti
+es Llaves y potenciadores
+ru Ключи и усилители
+
+@ Keys & Powerups Position
+fr Position des clés et bonus
+de Position von Schlüsseln & Power-ups
+it Posizione chiavi e potenziamenti
+es Posición de llaves y potenciadores
+ru Положение ключей и усилителей
+
+@ Kill Bonus (x)
+fr Bonus d'élimination (x)
+de Abschussbonus (x)
+it Bonus uccisione (x)
+es Bonificación por baja (x)
+ru Бонус за убийство (x)
+
+@ Kill Sound
+fr Son d'élimination
+de Abschussgeräusch
+it Suono di uccisione
+es Sonido de baja
+ru Звук убийства
+
+@ Knock
+fr Toc
+de Klopfen
+it Colpo
+es Golpe
+ru Стук
+
+@ Left
+fr Gauche
+de Links
+it Sinistra
+es Izquierda
+ru Слева
+
+@ Length of the motion blur streaks
+fr Longueur des traînées du flou cinétique
+de Länge der Bewegungsunschärfe-Schlieren
+it Lunghezza delle scie del motion blur
+es Longitud de las estelas del desenfoque de movimiento
+ru Длина следов размытия в движении
+
+@ Lifetime (seconds)
+fr Durée de vie (secondes)
+de Lebensdauer (Sekunden)
+it Durata (secondi)
+es Duración (segundos)
+ru Время жизни (секунды)
+
+@ Live Portal Views
+fr Vues de portail en direct
+de Live-Portalansichten
+it Viste dei portali in tempo reale
+es Vistas de portal en directo
+ru Живые виды порталов
+
+@ Live View Distance
+fr Distance des vues en direct
+de Live-Sichtweite
+it Distanza delle viste in tempo reale
+es Distancia de las vistas en directo
+ru Дальность живых видов
+
+@ Local Players
+fr Joueurs locaux
+de Lokale Spieler
+it Giocatori locali
+es Jugadores locales
+ru Локальные игроки
+
+@ Local red wounds follow enemy animation
+fr Des blessures rouges suivent l'animation de l'ennemi
+de Rote Wunden folgen der Gegneranimation
+it Ferite rosse localizzate seguono l'animazione del nemico
+es Heridas rojas localizadas siguen la animación del enemigo
+ru Красные раны следуют за анимацией врага
+
+@ Lock Indicator
+fr Indicateur de verrouillage
+de Zielerfassungsanzeige
+it Indicatore di aggancio
+es Indicador de fijación
+ru Индикатор захвата
+
+@ Long falls don't hurt
+fr Les longues chutes ne blessent pas
+de Tiefe Stürze schaden nicht
+it Le cadute lunghe non fanno male
+es Las caídas largas no hacen daño
+ru Падения с высоты не ранят
+
+@ Longest Freeze (ms)
+fr Gel le plus long (ms)
+de Längstes Einfrieren (ms)
+it Blocco più lungo (ms)
+es Congelación más larga (ms)
+ru Самый долгий стоп-кадр (мс)
+
+@ Look Down
+fr Regarder en bas
+de Nach unten sehen
+it Guarda giù
+es Mirar abajo
+ru Смотреть вниз
+
+@ Look Speed
+fr Vitesse de la vue
+de Blickgeschwindigkeit
+it Velocità visuale
+es Velocidad de la vista
+ru Скорость обзора
+
+@ Look Up
+fr Regarder en haut
+de Nach oben sehen
+it Guarda su
+es Mirar arriba
+ru Смотреть вверх
+
+@ Main Menu Music
+fr Musique du menu principal
+de Hauptmenümusik
+it Musica del menu principale
+es Música del menú principal
+ru Музыка главного меню
+
+@ Max FPS
+fr IPS max
+de Max. FPS
+it FPS max
+es FPS máximos
+ru Макс. FPS
+
+@ Max Players
+fr Joueurs max
+de Max. Spieler
+it Max giocatori
+es Máximo de jugadores
+ru Максимум игроков
+
+@ Maximum Impacts
+fr Impacts maximum
+de Maximale Einschläge
+it Impatti massimi
+es Impactos máximos
+ru Максимум следов попаданий
+
+@ Maximum Marks
+fr Traces maximum
+de Maximale Spuren
+it Segni massimi
+es Marcas máximas
+ru Максимум следов
+
+@ Maximum Range
+fr Portée maximale
+de Maximale Reichweite
+it Portata massima
+es Alcance máximo
+ru Максимальная дальность
+
+@ Melee only
+fr Corps à corps uniquement
+de Nur Nahkampf
+it Solo corpo a corpo
+es Solo cuerpo a cuerpo
+ru Только ближний бой
+
+@ Message Background
+fr Fond des messages
+de Nachrichtenhintergrund
+it Sfondo dei messaggi
+es Fondo de los mensajes
+ru Фон сообщений
+
+@ Message Text Size
+fr Taille du texte des messages
+de Textgröße der Nachrichten
+it Dimensione testo dei messaggi
+es Tamaño del texto de los mensajes
+ru Размер текста сообщений
+
+@ Messages & Captions
+fr Messages et sous-titres
+de Nachrichten & Untertitel
+it Messaggi e didascalie
+es Mensajes y subtítulos
+ru Сообщения и субтитры
+
+@ Meter Duration (real seconds)
+fr Durée de la jauge (secondes réelles)
+de Leistendauer (echte Sekunden)
+it Durata della barra (secondi reali)
+es Duración del medidor (segundos reales)
+ru Длительность шкалы (реальные секунды)
+
+@ Minimum Damage
+fr Dégâts minimum
+de Mindestschaden
+it Danno minimo
+es Daño mínimo
+ru Минимальный урон
+
+@ Mode
+fr Mode
+de Modus
+it Modalità
+es Modo
+ru Режим
+
+@ Modern Console
+fr Console moderne
+de Moderne Konsole
+it Console moderna
+es Consola moderna
+ru Современная консоль
+
+@ Modern HUD Layout
+fr Disposition de l'ATH moderne
+de Modernes HUD-Layout
+it Layout interfaccia moderna
+es Diseño de la interfaz moderna
+ru Раскладка современного интерфейса
+
+@ Most recent save
+fr Sauvegarde la plus récente
+de Neuester Spielstand
+it Salvataggio più recente
+es Partida guardada más reciente
+ru Последнее сохранение
+
+@ Motion Blur
+fr Flou cinétique
+de Bewegungsunschärfe
+it Motion blur
+es Desenfoque de movimiento
+ru Размытие в движении
+
+@ Motion Blur Amount
+fr Intensité du flou cinétique
+de Stärke der Bewegungsunschärfe
+it Intensità del motion blur
+es Intensidad del desenfoque de movimiento
+ru Сила размытия в движении
+
+@ Motion Blur Quality
+fr Qualité du flou cinétique
+de Qualität der Bewegungsunschärfe
+it Qualità del motion blur
+es Calidad del desenfoque de movimiento
+ru Качество размытия в движении
+
+@ Mouse & Keyboard
+fr Souris et clavier
+de Maus & Tastatur
+it Mouse e tastiera
+es Ratón y teclado
+ru Мышь и клавиатура
+
+@ Mouse Speed
+fr Vitesse de la souris
+de Mausgeschwindigkeit
+it Velocità del mouse
+es Velocidad del ratón
+ru Скорость мыши
+
+@ Move Back
+fr Reculer
+de Rückwärts
+it Indietro
+es Retroceder
+ru Назад
+
+@ Move Forward
+fr Avancer
+de Vorwärts
+it Avanti
+es Avanzar
+ru Вперёд
+
+@ Music Volume
+fr Volume de la musique
+de Musiklautstärke
+it Volume musica
+es Volumen de la música
+ru Громкость музыки
+
+@ Next Weapon
+fr Arme suivante
+de Nächste Waffe
+it Arma successiva
+es Arma siguiente
+ru Следующее оружие
+
+@ No Drowning
+fr Pas de noyade
+de Kein Ertrinken
+it Niente annegamento
+es Sin ahogamiento
+ru Без утопления
+
+@ No Fall Damage
+fr Pas de dégâts de chute
+de Kein Fallschaden
+it Niente danni da caduta
+es Sin daño por caída
+ru Без урона от падения
+
+@ No Manual Saves
+fr Pas de sauvegarde manuelle
+de Kein manuelles Speichern
+it Niente salvataggi manuali
+es Sin guardado manual
+ru Без ручных сохранений
+
+@ No Self Damage
+fr Pas d'auto-dégâts
+de Kein Eigenschaden
+it Niente danni a se stessi
+es Sin daño propio
+ru Без урона себе
+
+@ Noise Filter
+fr Filtre anti-bruit
+de Rauschfilter
+it Filtro antirumore
+es Filtro de ruido
+ru Фильтр шума
+
+@ Normal Color
+fr Couleur normale
+de Normale Farbe
+it Colore normale
+es Color normal
+ru Обычный цвет
+
+@ Notify Message Position
+fr Position des notifications
+de Position der Meldungen
+it Posizione delle notifiche
+es Posición de las notificaciones
+ru Положение уведомлений
+
+@ Notify Message Time
+fr Durée des notifications
+de Dauer der Meldungen
+it Durata delle notifiche
+es Duración de las notificaciones
+ru Время уведомлений
+
+@ Number of splatter rays per blood impact
+fr Nombre de rayons d'éclaboussure par impact de sang
+de Anzahl der Spritzerstrahlen pro Bluteinschlag
+it Numero di raggi di schizzo per impatto di sangue
+es Número de rayos de salpicadura por impacto de sangre
+ru Число лучей брызг на одно попадание крови
+
+@ Off
+fr Désactivé
+de Aus
+it Disattivato
+es Desactivado
+ru Выкл.
+
+@ On Death
+fr À la mort
+de Beim Tod
+it Alla morte
+es Al morir
+ru При смерти
+
+@ On Kill Color
+fr Couleur à l'élimination
+de Farbe bei Abschuss
+it Colore all'uccisione
+es Color al matar
+ru Цвет при убийстве
+
+@ On Target Color
+fr Couleur sur cible
+de Farbe auf Ziel
+it Colore sul bersaglio
+es Color sobre objetivo
+ru Цвет на цели
+
+@ Opacity
+fr Opacité
+de Deckkraft
+it Opacità
+es Opacidad
+ru Непрозрачность
+
+@ Opacity of the grenade arc
+fr Opacité de l'arc de grenade
+de Deckkraft des Granatenbogens
+it Opacità dell'arco della granata
+es Opacidad del arco de la granada
+ru Непрозрачность траектории гранаты
+
+@ Pants Color
+fr Couleur du pantalon
+de Hosenfarbe
+it Colore pantaloni
+es Color del pantalón
+ru Цвет штанов
+
+@ Particle Quality
+fr Qualité des particules
+de Partikelqualität
+it Qualità delle particelle
+es Calidad de las partículas
+ru Качество частиц
+
+@ Particles
+fr Particules
+de Partikel
+it Particelle
+es Partículas
+ru Частицы
+
+@ Physical Nail Impacts
+fr Impacts physiques des clous
+de Physikalische Nageleinschläge
+it Impatti fisici dei chiodi
+es Impactos físicos de clavos
+ru Физические попадания гвоздей
+
+@ Pistol Start
+fr Départ à zéro
+de Pistolenstart
+it Partenza da zero
+es Inicio desde cero
+ru Старт с нуля
+
+@ Pitch
+fr Hauteur
+de Tonhöhe
+it Tono
+es Tono
+ru Высота тона
+
+@ Pitch Sensitivity
+fr Sensibilité verticale
+de Vertikale Empfindlichkeit
+it Sensibilità verticale
+es Sensibilidad vertical
+ru Чувствительность по вертикали
+
+@ Playback Speed
+fr Vitesse de lecture
+de Wiedergabetempo
+it Velocità di riproduzione
+es Velocidad de reproducción
+ru Скорость воспроизведения
+
+@ Player Setup
+fr Profil du joueur
+de Spieler einrichten
+it Impostazioni giocatore
+es Configurar jugador
+ru Настройка игрока
+
+@ Pop
+fr Pop
+de Plopp
+it Pop
+es Pop
+ru Хлопок
+
+@ Portal Gun Settings
+fr Réglages du pistolet à portails
+de Portalkanonen-Einstellungen
+it Impostazioni pistola dei portali
+es Ajustes de la pistola de portales
+ru Настройки портальной пушки
+
+@ Portal Recursion
+fr Récursion des portails
+de Portal-Rekursion
+it Ricorsione dei portali
+es Recursión de portales
+ru Рекурсия порталов
+
+@ Portal View Quality
+fr Qualité de la vue des portails
+de Qualität der Portalansicht
+it Qualità della vista dei portali
+es Calidad de la vista de portales
+ru Качество вида порталов
+
+@ Preview Sound
+fr Écouter le son
+de Ton anhören
+it Ascolta il suono
+es Escuchar sonido
+ru Прослушать звук
+
+@ Previous Weapon
+fr Arme précédente
+de Vorherige Waffe
+it Arma precedente
+es Arma anterior
+ru Предыдущее оружие
+
+@ Projectile Shotguns Settings
+fr Réglages des fusils à projectiles
+de Einstellungen Projektil-Schrotflinten
+it Impostazioni fucili a proiettili
+es Ajustes de escopetas de proyectiles
+ru Настройки дробовиков со снарядами
+
+@ Projectile Speed (units/s)
+fr Vitesse des projectiles (unités/s)
+de Projektiltempo (Einheiten/s)
+it Velocità dei proiettili (unità/s)
+es Velocidad de los proyectiles (unidades/s)
+ru Скорость снарядов (ед./с)
+
+@ Purple
+fr Violet
+de Lila
+it Viola
+es Morado
+ru Фиолетовый
+
+@ Push
+fr Poussée
+de Schub
+it Spinta
+es Empuje
+ru Толчок
+
+@ Push Strength
+fr Force de poussée
+de Schubstärke
+it Forza della spinta
+es Fuerza del empuje
+ru Сила толчка
+
+@ Quick Load
+fr Chargement rapide
+de Schnellladen
+it Caricamento rapido
+es Carga rápida
+ru Быстрая загрузка
+
+@ Quick Save
+fr Sauvegarde rapide
+de Schnellspeichern
+it Salvataggio rapido
+es Guardado rápido
+ru Быстрое сохранение
+
+@ Railgun Settings
+fr Réglages du railgun
+de Railgun-Einstellungen
+it Impostazioni railgun
+es Ajustes del railgun
+ru Настройки рейлгана
+
+@ Ranged only
+fr Distance uniquement
+de Nur Fernkampf
+it Solo a distanza
+es Solo a distancia
+ru Только дальний бой
+
+@ Reacquire While Held
+fr Réacquérir en maintenant
+de Bei Halten neu erfassen
+it Riaggancia tenendo premuto
+es Volver a fijar al mantener
+ru Перезахват при удержании
+
+@ Red
+fr Rouge
+de Rot
+it Rosso
+es Rojo
+ru Красный
+
+@ Reduce Motion
+fr Réduire les animations
+de Bewegung reduzieren
+it Riduci il movimento
+es Reducir movimiento
+ru Уменьшить движение
+
+@ Regen (seconds per second)
+fr Régénération (secondes par seconde)
+de Regeneration (Sekunden pro Sekunde)
+it Rigenerazione (secondi al secondo)
+es Regeneración (segundos por segundo)
+ru Восстановление (секунд в секунду)
+
+@ Render Scale
+fr Échelle de rendu
+de Renderskalierung
+it Scala di rendering
+es Escala de renderizado
+ru Масштаб рендеринга
+
+@ Reverb
+fr Réverbération
+de Hall
+it Riverbero
+es Reverberación
+ru Реверберация
+
+@ Right
+fr Droite
+de Rechts
+it Destra
+es Derecha
+ru Справа
+
+@ Ripple Intensity
+fr Intensité des ondulations
+de Wellenintensität
+it Intensità delle increspature
+es Intensidad de las ondas
+ru Сила ряби
+
+@ Ripples
+fr Ondulations
+de Wellen
+it Increspature
+es Ondas
+ru Рябь
+
+@ Roll Sensitivity
+fr Sensibilité de roulis
+de Roll-Empfindlichkeit
+it Sensibilità di rollio
+es Sensibilidad de giro lateral
+ru Чувствительность крена
+
+@ Rumble
+fr Vibrations
+de Vibration
+it Vibrazione
+es Vibración
+ru Вибрация
+
+@ Run
+fr Courir
+de Rennen
+it Corri
+es Correr
+ru Бег
+
+@ Save on All Enemies Killed
+fr Sauvegarder quand tous les ennemis sont tués
+de Speichern, wenn alle Gegner besiegt sind
+it Salva quando tutti i nemici sono uccisi
+es Guardar al matar a todos los enemigos
+ru Сохранять после убийства всех врагов
+
+@ Save on All Secrets Found
+fr Sauvegarder quand tous les secrets sont trouvés
+de Speichern, wenn alle Geheimnisse gefunden sind
+it Salva quando tutti i segreti sono trovati
+es Guardar al encontrar todos los secretos
+ru Сохранять после нахождения всех тайников
+
+@ Save on Level Entry
+fr Sauvegarder en début de niveau
+de Speichern bei Levelbeginn
+it Salva all'inizio del livello
+es Guardar al entrar en el nivel
+ru Сохранять при входе на уровень
+
+@ Save on Secret Found
+fr Sauvegarder à chaque secret trouvé
+de Speichern bei gefundenem Geheimnis
+it Salva quando trovi un segreto
+es Guardar al encontrar un secreto
+ru Сохранять при нахождении тайника
+
+@ Scoreboard
+fr Tableau des scores
+de Punktetafel
+it Tabellone punteggi
+es Marcador
+ru Таблица очков
+
+@ Screen Flashes
+fr Flashs de l'écran
+de Bildschirmblitze
+it Lampi dello schermo
+es Destellos de pantalla
+ru Вспышки экрана
+
+@ Screen Shader
+fr Shader d'écran
+de Bildschirm-Shader
+it Shader dello schermo
+es Sombreador de pantalla
+ru Экранный шейдер
+
+@ Screen Shake
+fr Tremblement de l'écran
+de Bildschirmwackeln
+it Tremolio dello schermo
+es Temblor de pantalla
+ru Тряска экрана
+
+@ Search LAN
+fr Rechercher en réseau local
+de Im LAN suchen
+it Cerca in LAN
+es Buscar en LAN
+ru Поиск в локальной сети
+
+@ Seconds a center-screen message stays up
+fr Secondes d'affichage d'un message au centre de l'écran
+de Sekunden, die eine Nachricht in der Bildschirmmitte bleibt
+it Secondi di permanenza di un messaggio al centro dello schermo
+es Segundos que permanece un mensaje en el centro de la pantalla
+ru Сколько секунд держится сообщение в центре экрана
+
+@ See Through Portals
+fr Voir à travers les portails
+de Durch Portale sehen
+it Vedi attraverso i portali
+es Ver a través de los portales
+ru Видеть сквозь порталы
+
+@ See-through Teleporters
+fr Téléporteurs transparents
+de Durchsichtige Teleporter
+it Teletrasporti trasparenti
+es Teletransportadores transparentes
+ru Прозрачные телепорты
+
+@ Shirt Color
+fr Couleur du haut
+de Shirtfarbe
+it Colore maglia
+es Color de la camisa
+ru Цвет рубашки
+
+@ Shotgun Bullet Decals
+fr Impacts de plombs
+de Schrotkugel-Einschüsse
+it Fori dei pallini
+es Marcas de perdigones
+ru Следы от дроби
+
+@ Shoulder left
+fr épaule gauche
+de Schulter links
+it spalla sinistra
+es hombro izquierdo
+ru из-за левого плеча
+
+@ Shoulder right
+fr épaule droite
+de Schulter rechts
+it spalla destra
+es hombro derecho
+ru из-за правого плеча
+
+@ Show FPS
+fr Afficher les IPS
+de FPS anzeigen
+it Mostra FPS
+es Mostrar FPS
+ru Показывать FPS
+
+@ Show Face
+fr Afficher le visage
+de Gesicht anzeigen
+it Mostra il volto
+es Mostrar la cara
+ru Показывать лицо
+
+@ Shrapnel
+fr Éclats
+de Splitter
+it Schegge
+es Metralla
+ru Шрапнель
+
+@ Size of on-screen messages and captions
+fr Taille des messages et sous-titres à l'écran
+de Größe der Bildschirmnachrichten und Untertitel
+it Dimensione dei messaggi e delle didascalie su schermo
+es Tamaño de los mensajes y subtítulos en pantalla
+ru Размер экранных сообщений и субтитров
+
+@ Skill
+fr Difficulté
+de Schwierigkeit
+it Difficoltà
+es Dificultad
+ru Сложность
+
+@ Sky Fog
+fr Brouillard du ciel
+de Himmelsnebel
+it Nebbia del cielo
+es Niebla del cielo
+ru Туман неба
+
+@ Smooths the stepped movement of monsters
+fr Adoucit le mouvement saccadé des monstres
+de Glättet die ruckartige Bewegung der Monster
+it Rende fluido il movimento a scatti dei mostri
+es Suaviza el movimiento a saltos de los monstruos
+ru Сглаживает ступенчатое движение монстров
+
+@ Sound
+fr Son
+de Sound
+it Audio
+es Sonido
+ru Звук
+
+@ Sound Captions
+fr Sous-titres des sons
+de Geräusch-Untertitel
+it Didascalie dei suoni
+es Subtítulos de sonidos
+ru Субтитры звуков
+
+@ Sound Volume
+fr Volume du son
+de Lautstärke
+it Volume effetti sonori
+es Volumen de sonido
+ru Громкость звука
+
+@ Speed Blur
+fr Flou de vitesse
+de Geschwindigkeitsunschärfe
+it Sfocatura da velocità
+es Desenfoque de velocidad
+ru Размытие скорости
+
+@ Splashes
+fr Éclaboussures
+de Spritzer
+it Spruzzi
+es Salpicaduras
+ru Брызги
+
+@ Splatter Amount
+fr Quantité d'éclaboussures
+de Spritzermenge
+it Quantità di schizzi
+es Cantidad de salpicaduras
+ru Количество брызг
+
+@ Splatter Size
+fr Taille des éclaboussures
+de Spritzergröße
+it Dimensione degli schizzi
+es Tamaño de las salpicaduras
+ru Размер брызг
+
+@ Start Game
+fr Lancer la partie
+de Spiel starten
+it Avvia partita
+es Iniciar partida
+ru Начать игру
+
+@ Staying underwater doesn't hurt
+fr Rester sous l'eau ne blesse pas
+de Unter Wasser bleiben schadet nicht
+it Restare sott'acqua non fa male
+es Permanecer bajo el agua no hace daño
+ru Пребывание под водой не ранит
+
+@ Stick Look Pitch
+fr Vue verticale au stick
+de Stick-Blick vertikal
+it Visuale verticale con levetta
+es Vista vertical con palanca
+ru Обзор стиком по вертикали
+
+@ Stick Look Yaw
+fr Vue horizontale au stick
+de Stick-Blick horizontal
+it Visuale orizzontale con levetta
+es Vista horizontal con palanca
+ru Обзор стиком по горизонтали
+
+@ Strafe Left
+fr Pas latéral gauche
+de Seitwärts links
+it Passo laterale a sinistra
+es Desplazamiento lateral izquierdo
+ru Шаг влево
+
+@ Strafe Right
+fr Pas latéral droit
+de Seitwärts rechts
+it Passo laterale a destra
+es Desplazamiento lateral derecho
+ru Шаг вправо
+
+@ Strength of the surface swell and rings
+fr Force de la houle et des cercles à la surface
+de Stärke der Oberflächenwellen und Ringe
+it Intensità delle onde e dei cerchi in superficie
+es Fuerza del oleaje y los anillos de la superficie
+ru Сила волн и кругов на поверхности
+
+@ Stun Duration
+fr Durée d'étourdissement
+de Betäubungsdauer
+it Durata dello stordimento
+es Duración del aturdimiento
+ru Длительность оглушения
+
+@ Style
+fr Style
+de Stil
+it Stile
+es Estilo
+ru Стиль
+
+@ Supersampling
+fr Suréchantillonnage
+de Supersampling
+it Supersampling
+es Supermuestreo
+ru Суперсэмплинг
+
+@ Surface Hit Effects
+fr Effets d'impact sur les surfaces
+de Oberflächen-Treffereffekte
+it Effetti d'impatto sulle superfici
+es Efectos de impacto en superficies
+ru Эффекты попаданий по поверхностям
+
+@ Swim Down
+fr Nager vers le bas
+de Abtauchen
+it Nuota giù
+es Nadar abajo
+ru Погрузиться
+
+@ Targets
+fr Cibles
+de Ziele
+it Bersagli
+es Objetivos
+ru Цели
+
+@ Teamplay
+fr Jeu en équipe
+de Teamspiel
+it Gioco di squadra
+es Juego en equipo
+ru Командная игра
+
+@ Texture Filter
+fr Filtrage des textures
+de Texturfilter
+it Filtro delle texture
+es Filtro de texturas
+ru Фильтрация текстур
+
+@ Third person
+fr troisième personne
+de Verfolgerperspektive
+it terza persona
+es tercera persona
+ru от третьего лица
+
+@ Thud
+fr Bruit sourd
+de Dumpf
+it Tonfo
+es Golpe sordo
+ru Глухой удар
+
+@ Tick
+fr Tic
+de Tick
+it Tic
+es Tic
+ru Тик
+
+@ Time Limit
+fr Limite de temps
+de Zeitlimit
+it Limite di tempo
+es Límite de tiempo
+ru Лимит времени
+
+@ Time Stretch
+fr Étirement temporel
+de Zeitdehnung
+it Allungamento temporale
+es Estiramiento temporal
+ru Растяжение времени
+
+@ Toggle Attack
+fr Attaque en bascule
+de Angriff umschalten
+it Attacco a commutazione
+es Ataque alterno
+ru Атака переключением
+
+@ Toggle Run
+fr Course en bascule
+de Rennen umschalten
+it Corsa a commutazione
+es Correr alterno
+ru Бег переключением
+
+@ Toggle auto-aim
+fr Visée auto en bascule
+de Auto-Zielen umschalten
+it Mira automatica a commutazione
+es Apuntado automático alterno
+ru Автоприцел переключением
+
+@ Touch Controls
+fr Commandes tactiles
+de Touch-Steuerung
+it Comandi touch
+es Controles táctiles
+ru Сенсорное управление
+
+@ Touchscreen
+fr Écran tactile
+de Touchscreen
+it Touchscreen
+es Pantalla táctil
+ru Сенсорный экран
+
+@ Tough Enemy Health
+fr Santé des ennemis coriaces
+de Gesundheit zäher Gegner
+it Salute dei nemici resistenti
+es Salud de los enemigos duros
+ru Здоровье крепких врагов
+
+@ Tough enemies only
+fr Ennemis coriaces uniquement
+de Nur zähe Gegner
+it Solo nemici resistenti
+es Solo enemigos duros
+ru Только крепкие враги
+
+@ Trail Colour
+fr Couleur de la traînée
+de Spurfarbe
+it Colore della scia
+es Color de la estela
+ru Цвет следа
+
+@ Translate Console
+fr Traduire la console
+de Konsole übersetzen
+it Traduci la console
+es Traducir la consola
+ru Переводить консоль
+
+@ Translucent Water
+fr Eau translucide
+de Durchscheinendes Wasser
+it Acqua traslucida
+es Agua translúcida
+ru Полупрозрачная вода
+
+@ Treble
+fr Aigus
+de Höhen
+it Acuti
+es Agudos
+ru Высокие
+
+@ Turn Left
+fr Tourner à gauche
+de Links drehen
+it Gira a sinistra
+es Girar a la izquierda
+ru Поворот налево
+
+@ Turn Right
+fr Tourner à droite
+de Rechts drehen
+it Gira a destra
+es Girar a la derecha
+ru Поворот направо
+
+@ Underwater FX
+fr Effets sous-marins
+de Unterwassereffekte
+it Effetti subacquei
+es Efectos bajo el agua
+ru Подводные эффекты
+
+@ Use Bullet Time Meter
+fr Utiliser la jauge de bullet time
+de Bullet-Time-Leiste verwenden
+it Usa la barra del bullet time
+es Usar el medidor de tiempo bala
+ru Использовать шкалу замедления
+
+@ VSync
+fr Synchro verticale
+de VSync
+it VSync
+es Sincronización vertical
+ru Вертикальная синхронизация
+
+@ View Bob
+fr Balancement de la vue
+de Kamerawippen
+it Ondeggiamento visuale
+es Balanceo de la cámara
+ru Покачивание камеры
+
+@ Viewmodels
+fr Modèles d'arme
+de Waffenmodelle
+it Modelli dell'arma
+es Modelos del arma
+ru Модель оружия
+
+@ Volume
+fr Volume
+de Lautstärke
+it Volume
+es Volumen
+ru Громкость
+
+@ Water Opacity
+fr Opacité de l'eau
+de Wasserdeckkraft
+it Opacità dell'acqua
+es Opacidad del agua
+ru Непрозрачность воды
+
+@ Water Quality
+fr Qualité de l'eau
+de Wasserqualität
+it Qualità dell'acqua
+es Calidad del agua
+ru Качество воды
+
+@ Water Settings
+fr Réglages de l'eau
+de Wasser-Einstellungen
+it Impostazioni acqua
+es Ajustes del agua
+ru Настройки воды
+
+@ Weapon Wheel
+fr Roue des armes
+de Waffenrad
+it Ruota delle armi
+es Selector de armas
+ru Колесо оружия
+
+@ Weapon Wheel Slowdown
+fr Ralenti de la roue des armes
+de Verlangsamung beim Waffenrad
+it Rallentamento della ruota delle armi
+es Ralentización del selector de armas
+ru Замедление при колесе оружия
+
+@ Weapons
+fr Armes
+de Waffen
+it Armi
+es Armas
+ru Оружие
+
+@ Weapons Position
+fr Position des armes
+de Waffenposition
+it Posizione armi
+es Posición de las armas
+ru Положение оружия
+
+@ Where center-screen messages appear
+fr Emplacement des messages au centre de l'écran
+de Wo Nachrichten der Bildschirmmitte erscheinen
+it Dove appaiono i messaggi al centro dello schermo
+es Dónde aparecen los mensajes centrales
+ru Где появляются сообщения по центру экрана
+
+@ Where pickup and event messages appear
+fr Emplacement des messages de ramassage et d'événement
+de Wo Fund- und Ereignisnachrichten erscheinen
+it Dove appaiono i messaggi di raccolta e di evento
+es Dónde aparecen los mensajes de objetos y eventos
+ru Где появляются сообщения о подборе и событиях
+
+@ White
+fr Blanc
+de Weiß
+it Bianco
+es Blanco
+ru Белый
+
+@ Yaw Sensitivity
+fr Sensibilité horizontale
+de Horizontale Empfindlichkeit
+it Sensibilità orizzontale
+es Sensibilidad horizontal
+ru Чувствительность по горизонтали
+
+@ Yellow
+fr Jaune
+de Gelb
+it Giallo
+es Amarillo
+ru Жёлтый
+
+# lowercase choice values
+@ T
+fr T
+de T
+it T
+es T
+ru T
+
+@ always
+fr toujours
+de immer
+it sempre
+es siempre
+ru всегда
+
+@ auto
+fr auto
+de auto
+it auto
+es auto
+ru авто
+
+@ banded
+fr par bandes
+de gestuft
+it a bande
+es por bandas
+ru полосами
+
+@ borderless
+fr fenêtre sans bordure
+de randlos
+it senza bordi
+es sin bordes
+ru окно без рамки
+
+@ bottom center
+fr en bas au centre
+de unten mittig
+it in basso al centro
+es abajo en el centro
+ru внизу по центру
+
+@ bottom left
+fr en bas à gauche
+de unten links
+it in basso a sinistra
+es abajo a la izquierda
+ru внизу слева
+
+@ bottom right
+fr en bas à droite
+de unten rechts
+it in basso a destra
+es abajo a la derecha
+ru внизу справа
+
+@ box
+fr carré
+de Kasten
+it riquadro
+es caja
+ru рамка
+
+@ broken square
+fr carré brisé
+de unterbrochenes Quadrat
+it quadrato spezzato
+es cuadrado roto
+ru разорванный квадрат
+
+@ classic
+fr classique
+de klassisch
+it classico
+es clásico
+ru классический
+
+@ coarse
+fr grossier
+de grob
+it grossolano
+es grueso
+ru грубый
+
+@ cooperative
+fr coopératif
+de Koop
+it cooperativa
+es cooperativo
+ru совместная игра
+
+@ cross
+fr croix
+de Kreuz
+it croce
+es cruz
+ru крест
+
+@ cross + dot
+fr croix + point
+de Kreuz + Punkt
+it croce + punto
+es cruz + punto
+ru крест + точка
+
+@ cyan
+fr cyan
+de Cyan
+it ciano
+es cian
+ru голубой
+
+@ dashed
+fr pointillés
+de gestrichelt
+it tratteggiato
+es discontinuo
+ru пунктир
+
+@ deathmatch
+fr match à mort
+de Deathmatch
+it deathmatch
+es partida a muerte
+ru смертельный бой
+
+@ deuteranopia
+fr deutéranopie
+de Deuteranopie
+it deuteranopia
+es deuteranopía
+ru дейтеранопия
+
+@ diagonal streaks
+fr traits diagonaux
+de diagonale Striche
+it tratti diagonali
+es trazos diagonales
+ru диагональные штрихи
+
+@ diamond
+fr losange
+de Raute
+it rombo
+es rombo
+ru ромб
+
+@ dot
+fr point
+de Punkt
+it punto
+es punto
+ru точка
+
+@ double
+fr double
+de doppelt
+it doppio
+es doble
+ru двойной
+
+@ double chevrons
+fr doubles chevrons
+de doppelte Winkel
+it doppie frecce
+es doble cheurón
+ru двойные шевроны
+
+@ double diagonals
+fr doubles diagonales
+de doppelte Diagonalen
+it doppie diagonali
+es dobles diagonales
+ru двойные диагонали
+
+@ easy
+fr facile
+de einfach
+it facile
+es fácil
+ru легко
+
+@ fine
+fr fin
+de fein
+it fine
+es fino
+ru мелкий
+
+@ fit output
+fr adapter à la sortie
+de an Ausgabe anpassen
+it adatta all'uscita
+es ajustar a la salida
+ru по размеру вывода
+
+@ flick stick
+fr flick stick
+de Flick-Stick
+it flick stick
+es flick stick
+ru флик-стик
+
+@ fullscreen
+fr plein écran
+de Vollbild
+it schermo intero
+es pantalla completa
+ru полный экран
+
+@ gap cross
+fr croix ouverte
+de offenes Kreuz
+it croce aperta
+es cruz abierta
+ru крест с зазором
+
+@ green
+fr vert
+de grün
+it verde
+es verde
+ru зелёный
+
+@ grey
+fr gris
+de grau
+it grigio
+es gris
+ru серый
+
+@ half speed
+fr demi-vitesse
+de halbes Tempo
+it metà velocità
+es media velocidad
+ru половинная скорость
+
+@ hard
+fr difficile
+de schwer
+it difficile
+es difícil
+ru тяжело
+
+@ high
+fr élevée
+de hoch
+it alta
+es alta
+ru высокое
+
+@ huge
+fr énorme
+de riesig
+it enorme
+es enorme
+ru огромный
+
+@ immersive
+fr immersif
+de immersiv
+it immersivo
+es inmersivo
+ru погружение
+
+@ intense
+fr intense
+de intensiv
+it intenso
+es intenso
+ru сильный
+
+@ large
+fr grand
+de groß
+it grande
+es grande
+ru большой
+
+@ larger
+fr plus grand
+de größer
+it più grande
+es más grande
+ru крупнее
+
+@ largest
+fr le plus grand
+de am größten
+it il più grande
+es el más grande
+ru самый крупный
+
+@ linear
+fr linéaire
+de linear
+it lineare
+es lineal
+ru линейная
+
+@ low
+fr faible
+de niedrig
+it bassa
+es baja
+ru низкое
+
+@ lower
+fr bas
+de unten
+it in basso
+es abajo
+ru ниже
+
+@ magenta
+fr magenta
+de Magenta
+it magenta
+es magenta
+ru пурпурный
+
+@ medium
+fr moyenne
+de mittel
+it media
+es media
+ru среднее
+
+@ middle
+fr milieu
+de Mitte
+it al centro
+es en medio
+ru посередине
+
+@ middle left
+fr au milieu à gauche
+de Mitte links
+it al centro a sinistra
+es en medio a la izquierda
+ru посередине слева
+
+@ middle right
+fr au milieu à droite
+de Mitte rechts
+it al centro a destra
+es en medio a la derecha
+ru посередине справа
+
+@ modern
+fr moderne
+de modern
+it moderno
+es moderno
+ru современный
+
+@ nearest
+fr au plus proche
+de nächster Nachbar
+it più vicino
+es más cercano
+ru ближайший
+
+@ nightmare
+fr cauchemar
+de Albtraum
+it incubo
+es pesadilla
+ru кошмар
+
+@ nintendo
+fr Nintendo
+de Nintendo
+it Nintendo
+es Nintendo
+ru Nintendo
+
+@ no team damage
+fr sans tir allié
+de kein Teamschaden
+it niente fuoco amico
+es sin fuego amigo
+ru без урона союзникам
+
+@ none
+fr aucun
+de keins
+it nessuno
+es ninguno
+ru нет
+
+@ normal
+fr normal
+de normal
+it normale
+es normal
+ru обычный
+
+@ off
+fr désactivé
+de aus
+it disattivato
+es desactivado
+ru выкл.
+
+@ off while held
+fr désactivé en maintenant
+de aus beim Halten
+it disattivato tenendo premuto
+es desactivado al mantener
+ru выкл. при удержании
+
+@ on
+fr activé
+de an
+it attivato
+es activado
+ru вкл.
+
+@ only while held
+fr seulement en maintenant
+de nur beim Halten
+it solo tenendo premuto
+es solo al mantener
+ru только при удержании
+
+@ playstation
+fr PlayStation
+de PlayStation
+it PlayStation
+es PlayStation
+ru PlayStation
+
+@ protanopia
+fr protanopie
+de Protanopie
+it protanopia
+es protanopía
+ru протанопия
+
+@ quarter speed
+fr quart de vitesse
+de Vierteltempo
+it un quarto di velocità
+es un cuarto de velocidad
+ru четверть скорости
+
+@ red
+fr rouge
+de rot
+it rosso
+es rojo
+ru красный
+
+@ short diagonals
+fr diagonales courtes
+de kurze Diagonalen
+it diagonali corte
+es diagonales cortas
+ru короткие диагонали
+
+@ single
+fr simple
+de einfach
+it singolo
+es simple
+ru одинарный
+
+@ small
+fr petit
+de klein
+it piccolo
+es pequeño
+ru маленький
+
+@ solid
+fr plein
+de durchgezogen
+it continuo
+es continuo
+ru сплошная
+
+@ spectacle
+fr spectaculaire
+de spektakulär
+it spettacolare
+es espectacular
+ru зрелищный
+
+@ subtle
+fr discret
+de dezent
+it lieve
+es sutil
+ru слабый
+
+@ team damage
+fr tir allié
+de Teamschaden
+it fuoco amico
+es fuego amigo
+ru урон союзникам
+
+@ top center
+fr en haut au centre
+de oben mittig
+it in alto al centro
+es arriba en el centro
+ru вверху по центру
+
+@ top left
+fr en haut à gauche
+de oben links
+it in alto a sinistra
+es arriba a la izquierda
+ru вверху слева
+
+@ top right
+fr en haut à droite
+de oben rechts
+it in alto a destra
+es arriba a la derecha
+ru вверху справа
+
+@ triple
+fr triple
+de dreifach
+it triplo
+es triple
+ru тройной
+
+@ tritanopia
+fr tritanopie
+de Tritanopie
+it tritanopia
+es tritanopía
+ru тританопия
+
+@ upper
+fr haut
+de oben
+it in alto
+es arriba
+ru выше
+
+@ white
+fr blanc
+de weiß
+it bianco
+es blanco
+ru белый
+
+@ whole screen
+fr écran entier
+de ganzer Bildschirm
+it schermo intero
+es pantalla completa
+ru весь экран
+
+@ windowed
+fr fenêtré
+de Fenster
+it in finestra
+es en ventana
+ru в окне
+
+@ xbox
+fr Xbox
+de Xbox
+it Xbox
+es Xbox
+ru Xbox
+
+@ yellow
+fr jaune
+de gelb
+it giallo
+es amarillo
+ru жёлтый

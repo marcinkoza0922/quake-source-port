@@ -12,67 +12,67 @@ const MAX_SHOWN: usize = 4;
 /// (sound path prefix, caption). The first matching prefix wins, so put
 /// specific paths before their directory.
 const TABLE: &[(&str, &str)] = &[
-    ("misc/secret", "[Secret found]"),
-    ("misc/talk", "[Message]"),
-    ("misc/trigger1", "[Switch activated]"),
-    ("misc/medkey", "[Key picked up]"),
-    ("misc/runekey", "[Rune picked up]"),
-    ("misc/basekey", "[Key picked up]"),
-    ("misc/power", "[Teleporter]"),
-    ("misc/r_tele", "[Teleport]"),
-    ("misc/h2ohit", "[Splash]"),
-    ("misc/water", "[Splash]"),
-    ("misc/outwater", "[Leaving water]"),
+    ("misc/secret", qcore::t!("[Secret found]")),
+    ("misc/talk", qcore::t!("[Message]")),
+    ("misc/trigger1", qcore::t!("[Switch activated]")),
+    ("misc/medkey", qcore::t!("[Key picked up]")),
+    ("misc/runekey", qcore::t!("[Rune picked up]")),
+    ("misc/basekey", qcore::t!("[Key picked up]")),
+    ("misc/power", qcore::t!("[Teleporter]")),
+    ("misc/r_tele", qcore::t!("[Teleport]")),
+    ("misc/h2ohit", qcore::t!("[Splash]")),
+    ("misc/water", qcore::t!("[Splash]")),
+    ("misc/outwater", qcore::t!("[Leaving water]")),
     ("misc/null", ""),
-    ("doors/", "[Door]"),
-    ("plats/", "[Platform moving]"),
-    ("buttons/", "[Button]"),
-    ("items/r_item", "[Health picked up]"),
-    ("items/health", "[Health picked up]"),
-    ("items/armor", "[Armor picked up]"),
-    ("items/damage3", "[Quad Damage wearing off]"),
-    ("items/damage", "[Quad Damage]"),
-    ("items/protect3", "[Pentagram wearing off]"),
-    ("items/protect", "[Pentagram of Protection]"),
-    ("items/inv3", "[Ring wearing off]"),
-    ("items/inv", "[Ring of Shadows]"),
-    ("items/suit2", "[Biosuit wearing off]"),
-    ("items/suit", "[Biosuit]"),
-    ("items/itembk2", "[Item picked up]"),
-    ("weapons/pkup", "[Weapon picked up]"),
-    ("weapons/lock4", "[Ammo picked up]"),
-    ("weapons/r_exp3", "[Explosion]"),
-    ("weapons/grenade", "[Grenade launched]"),
-    ("weapons/bounce", "[Grenade bounce]"),
-    ("weapons/sgun1", "[Rocket fired]"),
-    ("weapons/spike2", "[Nails fired]"),
-    ("weapons/lhit", "[Lightning]"),
-    ("ambience/thunder", "[Thunder]"),
-    ("enforcer/sight", "[Enforcer alerted]"),
-    ("soldier/sight", "[Grunt alerted]"),
-    ("dog/dsight", "[Rottweiler alerted]"),
-    ("knight/ksight", "[Knight alerted]"),
-    ("hknight/sight", "[Death Knight alerted]"),
-    ("wizard/wsight", "[Scrag alerted]"),
-    ("ogre/ogwake", "[Ogre alerted]"),
-    ("demon/sight", "[Fiend alerted]"),
-    ("shambler/ssight", "[Shambler alerted]"),
-    ("zombie/z_idle", "[Zombie groaning]"),
-    ("shalrath/sight", "[Vore alerted]"),
-    ("shalrath/attack", "[Vore attacking]"),
-    ("tarbaby/sight", "[Spawn alerted]"),
-    ("fish/", "[Rotfish]"),
-    ("blob/", "[Spawn]"),
-    ("boss1/", "[Chthon]"),
-    ("player/land2", "[Hard landing]"),
-    ("player/drown", "[Drowning]"),
-    ("player/gasp", "[Gasping for air]"),
-    ("player/lburn", "[Burning]"),
-    ("player/slimbrn", "[Burning]"),
-    ("player/teledth", "[Telefrag]"),
-    ("player/tornoff", "[Gibbed]"),
-    ("player/gib", "[Gibbed]"),
-    ("player/udeath", "[Gibbed]"),
+    ("doors/", qcore::t!("[Door]")),
+    ("plats/", qcore::t!("[Platform moving]")),
+    ("buttons/", qcore::t!("[Button]")),
+    ("items/r_item", qcore::t!("[Health picked up]")),
+    ("items/health", qcore::t!("[Health picked up]")),
+    ("items/armor", qcore::t!("[Armor picked up]")),
+    ("items/damage3", qcore::t!("[Quad Damage wearing off]")),
+    ("items/damage", qcore::t!("[Quad Damage]")),
+    ("items/protect3", qcore::t!("[Pentagram wearing off]")),
+    ("items/protect", qcore::t!("[Pentagram of Protection]")),
+    ("items/inv3", qcore::t!("[Ring wearing off]")),
+    ("items/inv", qcore::t!("[Ring of Shadows]")),
+    ("items/suit2", qcore::t!("[Biosuit wearing off]")),
+    ("items/suit", qcore::t!("[Biosuit]")),
+    ("items/itembk2", qcore::t!("[Item picked up]")),
+    ("weapons/pkup", qcore::t!("[Weapon picked up]")),
+    ("weapons/lock4", qcore::t!("[Ammo picked up]")),
+    ("weapons/r_exp3", qcore::t!("[Explosion]")),
+    ("weapons/grenade", qcore::t!("[Grenade launched]")),
+    ("weapons/bounce", qcore::t!("[Grenade bounce]")),
+    ("weapons/sgun1", qcore::t!("[Rocket fired]")),
+    ("weapons/spike2", qcore::t!("[Nails fired]")),
+    ("weapons/lhit", qcore::t!("[Lightning]")),
+    ("ambience/thunder", qcore::t!("[Thunder]")),
+    ("enforcer/sight", qcore::t!("[Enforcer alerted]")),
+    ("soldier/sight", qcore::t!("[Grunt alerted]")),
+    ("dog/dsight", qcore::t!("[Rottweiler alerted]")),
+    ("knight/ksight", qcore::t!("[Knight alerted]")),
+    ("hknight/sight", qcore::t!("[Death Knight alerted]")),
+    ("wizard/wsight", qcore::t!("[Scrag alerted]")),
+    ("ogre/ogwake", qcore::t!("[Ogre alerted]")),
+    ("demon/sight", qcore::t!("[Fiend alerted]")),
+    ("shambler/ssight", qcore::t!("[Shambler alerted]")),
+    ("zombie/z_idle", qcore::t!("[Zombie groaning]")),
+    ("shalrath/sight", qcore::t!("[Vore alerted]")),
+    ("shalrath/attack", qcore::t!("[Vore attacking]")),
+    ("tarbaby/sight", qcore::t!("[Spawn alerted]")),
+    ("fish/", qcore::t!("[Rotfish]")),
+    ("blob/", qcore::t!("[Spawn]")),
+    ("boss1/", qcore::t!("[Chthon]")),
+    ("player/land2", qcore::t!("[Hard landing]")),
+    ("player/drown", qcore::t!("[Drowning]")),
+    ("player/gasp", qcore::t!("[Gasping for air]")),
+    ("player/lburn", qcore::t!("[Burning]")),
+    ("player/slimbrn", qcore::t!("[Burning]")),
+    ("player/teledth", qcore::t!("[Telefrag]")),
+    ("player/tornoff", qcore::t!("[Gibbed]")),
+    ("player/gib", qcore::t!("[Gibbed]")),
+    ("player/udeath", qcore::t!("[Gibbed]")),
 ];
 
 /// Caption for a sound path, if it has one.
@@ -120,6 +120,7 @@ impl Captions {
         let mut y = bottom - row * self.shown.len() as f32;
         let r = c.upx(size * 0.35);
         for &(text, _, n) in &self.shown {
+            let text = qcore::lang::tr(text);
             let s = if n > 1 { format!("{text}  x{n}") } else { text.to_string() };
             let w = c.text_w(&s, size);
             c.shape(cx - w / 2.0 - pad_x, y, w + pad_x * 2.0, size + pad_y * 2.0, Shape::Round { r }, TEXT_BG);
@@ -137,11 +138,12 @@ impl Captions {
         let vw = c.vw();
         let mut y = bottom - 12.0 * self.shown.len() as f32;
         for &(text, _, n) in &self.shown {
+            let text = qcore::lang::tr(text);
             let s = if n > 1 { format!("{text} x{n}") } else { text.to_string() };
-            let w = s.len() as f32 * 8.0;
+            let w = c.ptext_w(&s);
             let x = ((vw - w) / 2.0).floor();
             c.fill(x - 4.0, y - 2.0, w + 8.0, 12.0, TEXT_BG);
-            c.string(x, y, &s);
+            c.ptext(x, y, &s, WHITE);
             y += 12.0;
         }
         c.scale = base;

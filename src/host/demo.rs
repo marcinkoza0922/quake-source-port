@@ -64,7 +64,7 @@ impl Host {
         if self.demonum as usize >= self.demos.len() {
             self.demonum = 0;
             if self.demos.is_empty() {
-                self.con.print("No demos listed with startdemos\n");
+                self.con.print(&qcore::ctr!("No demos listed with startdemos\n"));
                 self.demonum = -1;
                 return false;
             }
@@ -82,11 +82,11 @@ impl Host {
         // Recorded demos live in the user dir, which isn't a search path.
         let data = self.server.core.fs.open(&file).or_else(|| qcore::vfs::read(&self.user_dir().join(&file)).ok());
         let Some(data) = data else {
-            self.con.print(&format!("ERROR: couldn't open {file}.\n"));
+            self.con.print(&qcore::ctr!("ERROR: couldn't open {}.\n", file));
             self.demonum = -1;
             return;
         };
-        self.con.print(&format!("Playing demo from {file}.\n"));
+        self.con.print(&qcore::ctr!("Playing demo from {}.\n", file));
         self.cl = ClientState::new();
         self.cl.demoplayback = true;
         self.demo = Some(crate::demo::Demo::new(data));
@@ -98,7 +98,7 @@ impl Host {
         let Some((frames, start)) = self.timedemo.take() else { return };
         let frames = frames.saturating_sub(1);
         let t = start.elapsed().as_secs_f64().max(1e-6);
-        self.con.print(&format!("{frames} frames {t:5.1} seconds {:5.1} fps\n", frames as f64 / t));
+        self.con.print(&qcore::ctr!("{} frames {} seconds {} fps\n", frames, format!("{t:5.1}"), format!("{:5.1}", frames as f64 / t)));
     }
 
     /// True while a timedemo runs: the main loop drops its frame cap.
@@ -109,10 +109,10 @@ impl Host {
     pub(super) fn start_recording(&mut self, path: &std::path::Path, track: i32) {
         match crate::demo::DemoWriter::create(path, track) {
             Ok(w) => {
-                self.con.print(&format!("Recording to {}.\n", path.display()));
+                self.con.print(&qcore::ctr!("Recording to {}.\n", path.display()));
                 self.recording = Some(w);
             }
-            Err(e) => self.con.print(&format!("ERROR: couldn't create {}: {e}\n", path.display())),
+            Err(e) => self.con.print(&qcore::ctr!("ERROR: couldn't create {}: {}\n", path.display(), e)),
         }
     }
 
@@ -123,7 +123,7 @@ impl Host {
         let r = w.write(self.cl.viewangles, &[qnet::protocol::SVC_DISCONNECT]).and_then(|_| w.finish());
         match r {
             Ok(()) => {
-                self.con.print("Completed demo\n");
+                self.con.print(&qcore::ctr!("Completed demo\n"));
                 self.convert_demo(path);
             }
             Err(e) => self.con.print(&format!("demo write failed: {e}\n")),
@@ -164,7 +164,7 @@ impl Host {
     pub(super) fn record(&mut self, a: &Args) {
         use qnet::protocol::*;
         if self.demo.is_some() {
-            self.print("Can't record during demo playback\n");
+            self.print(&qcore::ctr!("Can't record during demo playback\n"));
             return;
         }
         if self.recording.is_some() {
@@ -177,12 +177,12 @@ impl Host {
         }
         let name = a.argv(1);
         if name.contains("..") {
-            self.print("Relative pathnames are not allowed.\n");
+            self.print(&qcore::ctr!("Relative pathnames are not allowed.\n"));
             return;
         }
         let connected = self.local.is_some() && self.server.active();
         if c == 2 && connected && self.cl.signon < 2 {
-            self.print("Can't record - try again when connected\n");
+            self.print(&qcore::ctr!("Can't record - try again when connected\n"));
             return;
         }
         let track = if c == 4 { a.argv(3).parse().unwrap_or(-1) } else { -1 };
@@ -256,7 +256,7 @@ impl Host {
 pub(super) fn register(c: &mut Commands<Host>) {
     c.add("startdemos", |h, a| {
         h.demos = (1..a.argc()).map(|i| a.argv(i).to_string()).collect();
-        h.print(&format!("{} demo(s) in loop\n", h.demos.len()));
+        h.print(&qcore::ctr!("{} demo(s) in loop\n", h.demos.len()));
         if !h.server.active() && !h.dedicated && !h.remote() && h.demonum != -1 && h.demo.is_none() {
             h.demonum = 0;
             if h.cv("cl_startdemos") == 0.0 {
@@ -287,7 +287,7 @@ pub(super) fn register(c: &mut Commands<Host>) {
     });
     c.add("stop", |h, _| {
         if h.recording.is_none() {
-            h.print("Not recording a demo.\n");
+            h.print(&qcore::ctr!("Not recording a demo.\n"));
         }
         h.stop_recording();
     });

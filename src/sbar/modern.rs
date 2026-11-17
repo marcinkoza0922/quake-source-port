@@ -138,19 +138,23 @@ impl<'a, 'b> Sbar<'a, 'b> {
                 } else {
                     [IT_SHELLS, IT_NAILS, IT_ROCKETS, IT_CELLS]
                 };
-                let names = ["shells", "nails", "rockets", "cells"];
+                let names = [qcore::t!("shells"), qcore::t!("nails"), qcore::t!("rockets"), qcore::t!("cells")];
+                // name column as wide as the longest name, then the count
+                let name_w = names.iter().map(|n| self.c.ptext_w(n)).fold(0.0, f32::max);
+                let col = [1.0, 1.0, 1.0, self.alpha];
                 for i in 0..4 {
-                    let s = if right {
-                        format!("{:>7} {:>3}", names[i], st[STAT_SHELLS + i])
-                    } else {
-                        format!("{:<7} {:>3}", names[i], st[STAT_SHELLS + i])
-                    };
-                    let sx = if right { x + w - s.len() as f32 * 8.0 } else { x };
+                    let sx = if right { x + w - name_w - 32.0 } else { x };
+                    let ny = y + i as f32 * 9.0;
                     let gold = cl.items & bits[i] != 0;
-                    for (k, b) in s.bytes().enumerate() {
+                    let nx = if right { sx + name_w - self.c.ptext_w(names[i]) } else { sx };
+                    let num = format!("{:>3}", st[STAT_SHELLS + i]);
+                    if gold {
                         // conchars: +128 is the gold/brown alternate set
-                        let ch = if gold && b != b' ' { b | 128 } else { b };
-                        self.c.ch_color(sx + k as f32 * 8.0, y + i as f32 * 9.0, ch, [1.0, 1.0, 1.0, self.alpha]);
+                        self.c.ptext_gold(nx, ny, names[i], col);
+                        self.c.ptext_gold(sx + name_w + 8.0, ny, &num, col);
+                    } else {
+                        self.c.ptext(nx, ny, names[i], col);
+                        self.c.ptext(sx + name_w + 8.0, ny, &num, col);
                     }
                 }
             }
@@ -164,9 +168,7 @@ impl<'a, 'b> Sbar<'a, 'b> {
                         let (pw, ph) = ((pw as f32 * scale) as u32, (ph as f32 * scale) as u32);
                         self.c.pic_color(wx, wy + (12.0 - ph as f32) / 2.0, Some((id, pw, ph)), color);
                     } else {
-                        for (j, b) in weapon.label.bytes().enumerate() {
-                            self.c.ch_color(wx + 1.0 + j as f32 * 8.0, wy + 2.0, b, color);
-                        }
+                        self.c.ptext(wx + 1.0, wy + 2.0, weapon.label, color);
                     }
                 }
             }

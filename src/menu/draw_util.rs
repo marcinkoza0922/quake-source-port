@@ -39,11 +39,9 @@ pub fn txt_gold(c: &mut Canvas, x: f32, y: f32, s: &str) -> f32 {
     c.text(x, y, s, TXT, GOLD_FG)
 }
 
-/// Brown/gold conchars text.
-pub fn gold(c: &mut Canvas, x: f32, y: f32, s: &str) {
-    for (k, b) in s.bytes().enumerate() {
-        c.ch(x + k as f32 * 8.0, y, b | 128);
-    }
+/// Brown/gold 8×8 text, translated ([`Canvas::ptext_gold`]); returns its width.
+pub fn gold(c: &mut Canvas, x: f32, y: f32, s: &str) -> f32 {
+    c.ptext_gold(x, y, s, crate::draw::WHITE)
 }
 
 /// Translucent box behind `n` option rows starting at `top`.

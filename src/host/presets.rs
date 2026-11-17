@@ -110,7 +110,7 @@ pub(super) fn register_preset_commands(c: &mut Commands<Host>) {
         for (n, v) in vals {
             h.server.core.cvars.set(n, v);
         }
-        h.print(&format!("graphics preset: {}\n", a.argv(1).to_ascii_lowercase()));
+        h.print(&qcore::ctr!("graphics preset: {}\n", a.argv(1).to_ascii_lowercase()));
     });
     c.add("menu_preset", |h, _| {
         h.menu.open(Screen::Main);

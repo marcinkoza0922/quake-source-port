@@ -9,7 +9,7 @@ pub(super) struct Osk {
 }
 
 pub(super) const OSK_ROWS: [&str; 4] = ["1234567890", "qwertyuiop", "asdfghjkl.", "zxcvbnm-_:"];
-pub(super) const OSK_ACTIONS: [&str; 4] = ["Shift", "Space", "Del", "Done"];
+pub(super) const OSK_ACTIONS: [&str; 4] = [qcore::t!("Shift"), qcore::t!("Space"), qcore::t!("Del"), qcore::t!("Done")];
 pub(super) const OSK_KEY: (f32, f32) = (20.0, 14.0);
 pub(super) const OSK_Y: f32 = 240.0;
 

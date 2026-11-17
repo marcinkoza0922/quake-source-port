@@ -68,7 +68,7 @@ impl Host {
             dir = root.join(format!("{stamp}_{map}_{i}"));
         }
         if let Err(e) = qcore::vfs::create_dir_all(&dir) {
-            self.print(&format!("bugreport: can't create {}: {e}\n", dir.display()));
+            self.print(&qcore::ctr!("bugreport: can't create {}: {}\n", dir.display(), e));
             return;
         }
         
@@ -94,7 +94,7 @@ impl Host {
         // Screenshot of the next rendered frame, with no console on top.
         self.screenshot = Some(dir.join("screenshot.png").to_string_lossy().into_owned());
         self.clean_shot = true;
-        self.print(&format!("Bug report written to {}\n", dir.display()));
+        self.print(&qcore::ctr!("Bug report written to {}\n", dir.display()));
     }
 
     fn bugreport_json(&self, text: &str, iso: &str, save: Option<&str>, shot: bool) -> String {

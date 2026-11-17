@@ -20,8 +20,8 @@ impl Equip {
 
     pub fn name(self) -> &'static str {
         match self {
-            Equip::NightVision => "Night Vision Goggles",
-            Equip::Thermal => "Thermal Goggles",
+            Equip::NightVision => qcore::t!("Night Vision Goggles"),
+            Equip::Thermal => qcore::t!("Thermal Goggles"),
         }
     }
     /// Short label drawn in the wheel slot.

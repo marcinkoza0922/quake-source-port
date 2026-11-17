@@ -36,6 +36,7 @@ pub(super) const HOST_CVARS: &[(&str, &str, u32)] = &[
     ("assist_grenadearc_alpha", "0.6", CVAR_ARCHIVE),
     ("ui_levelselect", "0", CVAR_ARCHIVE),
     ("ui_menufont", "0", CVAR_ARCHIVE),
+    ("language", "auto", CVAR_ARCHIVE),
     ("ui_fontfile", "", CVAR_ARCHIVE),
     ("scr_centertime", "2", CVAR_ARCHIVE),
     ("scr_printspeed", "8", 0),
@@ -146,6 +147,7 @@ pub(super) const HOST_CVARS: &[(&str, &str, u32)] = &[
     ("saved4", "0", CVAR_ARCHIVE),
     ("con_notifytime", "3", CVAR_ARCHIVE),
     ("con_modern", "1", CVAR_ARCHIVE),
+    ("con_translate", "0", CVAR_ARCHIVE),
     ("scr_conspeed", "500", CVAR_ARCHIVE),
     ("scr_sbaralpha", "0.75", CVAR_ARCHIVE),
     // Accessibility page.

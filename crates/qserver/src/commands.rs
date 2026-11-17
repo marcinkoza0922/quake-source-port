@@ -58,7 +58,7 @@ fn cmd_maxplayers(s: &mut Server, a: &Args) {
         return;
     }
     if s.active() {
-        s.core.print("maxplayers can not be changed while a server is running.\n");
+        s.core.print(&qcore::ctr!("maxplayers can not be changed while a server is running.\n"));
         return;
     }
     s.set_maxclients(n);
@@ -181,7 +181,7 @@ fn cmd_kick(s: &mut Server, a: &Args) {
     };
     let Some(i) = target else { return };
     if s.core.clients[i].local {
-        s.core.print("You can't kick yourself!\n");
+        s.core.print(&qcore::ctr!("You can't kick yourself!\n"));
         return;
     }
     let (_, who) = sender(s);
@@ -256,7 +256,7 @@ fn cmd_changelevel(s: &mut Server, a: &Args) {
         return;
     }
     if !s.active() {
-        s.core.print("Only the server may changelevel\n");
+        s.core.print(&qcore::ctr!("Only the server may changelevel\n"));
         return;
     }
     let level = a.argv(1).to_string();
@@ -425,7 +425,7 @@ fn cmd_name(s: &mut Server, a: &Args) {
     let name: String = raw.chars().take(15).collect();
     let old = std::mem::replace(&mut s.core.clients[i].name, name.clone());
     if !old.is_empty() && old != name {
-        s.core.print(&format!("{old} renamed to {name}\n"));
+        s.core.print(&qcore::ctr!("{} renamed to {}\n", old, name));
     }
     if let Some(l) = s.level.as_mut()
         && s.core.clients[i].spawned

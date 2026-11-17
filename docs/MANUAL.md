@@ -23,6 +23,15 @@ it.
 In Help, up/down picks a section; Page Up/Page Down, left/right, the
 shoulder buttons or the mouse wheel over the text scroll it.
 
+## Language
+
+Options → Gameplay → **Language** picks the language of the menus, on-screen
+messages and the 2021 re-release's game text: English, French, German,
+Italian, Spanish or Russian. **System** follows your computer's language.
+Other languages draw the small in-game text with the menu font, since the
+classic Quake font has no accents or Cyrillic. Console messages stay in
+English unless **Translate Console** is on.
+
 ## Map Packs (mod browser)
 
 Main menu → Map Packs lists every installed mod and map pack with its

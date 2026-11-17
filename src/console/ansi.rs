@@ -204,6 +204,10 @@ pub fn append_styled(
         style.fg = BRONZE_FG;
         s = &s[1..];
     }
+    // translated text: UTF-8 decoded, conchars high bytes moved to the PUA
+    let view = if qcore::lang::unicode_text() { qcore::text::unicode_view(s) } else { None };
+    let unicode = view.is_some();
+    let s = view.as_deref().unwrap_or(s);
     let mut chars = s.chars().peekable();
     while let Some(c) = chars.next() {
         if c == '\x1b' {
@@ -271,7 +275,11 @@ pub fn append_styled(
                 }
             }
             _ => {
-                let (ch, cell_style) = decode_quake_char(c, *style);
+                let (ch, cell_style) = match qcore::text::pua_byte(c) {
+                    Some(b) => decode_quake_char(char::from(b), *style),
+                    None if unicode && (c as u32) >= 128 => (c, *style),
+                    None => decode_quake_char(c, *style),
+                };
                 if ch < ' ' {
                     continue;
                 }

@@ -1,0 +1,507 @@
+# Translations of the port's own text; format in crates/qcore/src/lang/catalog.rs.
+# Console messages, shown translated only with con_translate 1 (Translate Console).
+# Cvar and command names stay as they are.
+
+@ Autosaved.
+fr Sauvegarde auto effectuée.
+de Automatisch gespeichert.
+it Salvataggio automatico eseguito.
+es Autoguardado realizado.
+ru Автосохранение выполнено.
+
+@ Game saved.
+fr Partie sauvegardée.
+de Spiel gespeichert.
+it Partita salvata.
+es Partida guardada.
+ru Игра сохранена.
+
+@ Can't save now.
+fr Impossible de sauvegarder maintenant.
+de Speichern ist gerade nicht möglich.
+it Impossibile salvare ora.
+es No se puede guardar ahora.
+ru Сейчас сохранить нельзя.
+
+@ This game only autosaves (No Manual Saves modifier).
+fr Cette partie n'utilise que la sauvegarde auto (modificateur Pas de sauvegarde manuelle).
+de Dieses Spiel speichert nur automatisch (Modifikator Kein manuelles Speichern).
+it Questa partita usa solo il salvataggio automatico (modificatore Niente salvataggi manuali).
+es Esta partida solo usa el autoguardado (modificador Sin guardado manual).
+ru В этой игре только автосохранения (модификатор «Без ручных сохранений»).
+
+@ Loading {}...
+fr Chargement de {}...
+de {} wird geladen...
+it Caricamento di {}...
+es Cargando {}...
+ru Загрузка {}...
+
+@ load failed: {}
+fr échec du chargement : {}
+de Laden fehlgeschlagen: {}
+it caricamento non riuscito: {}
+es error al cargar: {}
+ru ошибка загрузки: {}
+
+@ ERROR: autosave failed: {}
+fr ERREUR : échec de la sauvegarde auto : {}
+de FEHLER: automatisches Speichern fehlgeschlagen: {}
+it ERRORE: salvataggio automatico non riuscito: {}
+es ERROR: falló el autoguardado: {}
+ru ОШИБКА: автосохранение не удалось: {}
+
+@ ERROR: couldn't open {}
+fr ERREUR : impossible d'ouvrir {}
+de FEHLER: {} konnte nicht geöffnet werden
+it ERRORE: impossibile aprire {}
+es ERROR: no se pudo abrir {}
+ru ОШИБКА: не удалось открыть {}
+
+@ ERROR: couldn't open {}.
+fr ERREUR : impossible d'ouvrir {}.
+de FEHLER: {} konnte nicht geöffnet werden.
+it ERRORE: impossibile aprire {}.
+es ERROR: no se pudo abrir {}.
+ru ОШИБКА: не удалось открыть {}.
+
+@ ERROR: couldn't write {}: {}
+fr ERREUR : impossible d'écrire {} : {}
+de FEHLER: {} konnte nicht geschrieben werden: {}
+it ERRORE: impossibile scrivere {}: {}
+es ERROR: no se pudo escribir {}: {}
+ru ОШИБКА: не удалось записать {}: {}
+
+@ ERROR: couldn't create {}: {}
+fr ERREUR : impossible de créer {} : {}
+de FEHLER: {} konnte nicht erstellt werden: {}
+it ERRORE: impossibile creare {}: {}
+es ERROR: no se pudo crear {}: {}
+ru ОШИБКА: не удалось создать {}: {}
+
+@ couldn't write {}: {}
+fr impossible d'écrire {} : {}
+de {} konnte nicht geschrieben werden: {}
+it impossibile scrivere {}: {}
+es no se pudo escribir {}: {}
+ru не удалось записать {}: {}
+
+@ Wrote {}
+fr {} enregistré
+de {} geschrieben
+it Scritto {}
+es Escrito {}
+ru Записано: {}
+
+@ screenshot failed: {}
+fr échec de la capture d'écran : {}
+de Bildschirmfoto fehlgeschlagen: {}
+it screenshot non riuscito: {}
+es error en la captura de pantalla: {}
+ru снимок экрана не удался: {}
+
+@ screenshot: {}
+fr capture d'écran : {}
+de Bildschirmfoto: {}
+it screenshot: {}
+es captura de pantalla: {}
+ru снимок экрана: {}
+
+@ No readable save available. Select save or restart the level.
+fr Aucune sauvegarde lisible. Choisissez une sauvegarde ou recommencez le niveau.
+de Kein lesbarer Spielstand vorhanden. Spielstand wählen oder Level neu starten.
+it Nessun salvataggio leggibile. Scegli un salvataggio o ricomincia il livello.
+es No hay ninguna partida legible. Elige una partida o reinicia el nivel.
+ru Нет читаемого сохранения. Выберите сохранение или начните уровень заново.
+
+@ Unknown command "{}"
+fr Commande inconnue « {} »
+de Unbekannter Befehl „{}“
+it Comando sconosciuto "{}"
+es Comando desconocido «{}»
+ru Неизвестная команда «{}»
+
+@ couldn't exec {}
+fr impossible d'exécuter {}
+de {} konnte nicht ausgeführt werden
+it impossibile eseguire {}
+es no se pudo ejecutar {}
+ru не удалось выполнить {}
+
+@ execing {}
+fr exécution de {}
+de führe {} aus
+it esecuzione di {}
+es ejecutando {}
+ru выполняется {}
+
+@ execing config.cfg (inherited from {})
+fr exécution de config.cfg (hérité de {})
+de führe config.cfg aus (geerbt von {})
+it esecuzione di config.cfg (ereditato da {})
+es ejecutando config.cfg (heredado de {})
+ru выполняется config.cfg (унаследован от {})
+
+@ execing config.cfg (mod defaults)
+fr exécution de config.cfg (réglages du mod)
+de führe config.cfg aus (Mod-Standard)
+it esecuzione di config.cfg (predefiniti della mod)
+es ejecutando config.cfg (valores del mod)
+ru выполняется config.cfg (настройки мода)
+
+@ execing default.cfg (built-in)
+fr exécution de default.cfg (intégré)
+de führe default.cfg aus (eingebaut)
+it esecuzione di default.cfg (integrato)
+es ejecutando default.cfg (integrado)
+ru выполняется default.cfg (встроенный)
+
+@ {} cvars
+fr {} variables
+de {} Variablen
+it {} variabili
+es {} variables
+ru Переменных: {}
+
+@ {} commands
+fr {} commandes
+de {} Befehle
+it {} comandi
+es {} comandos
+ru Команд: {}
+
+@ Can't "cmd", not connected
+fr « cmd » impossible, non connecté
+de „cmd“ nicht möglich, nicht verbunden
+it Impossibile usare "cmd", non connesso
+es No se puede usar «cmd», sin conexión
+ru «cmd» невозможна: нет подключения
+
+@ Looking for Quake servers...
+fr Recherche de serveurs Quake...
+de Suche nach Quake-Servern...
+it Ricerca di server Quake...
+es Buscando servidores de Quake...
+ru Поиск серверов Quake...
+
+@ Bad value, must be between 1 and 65534
+fr Valeur incorrecte, elle doit être comprise entre 1 et 65534
+de Ungültiger Wert, muss zwischen 1 und 65534 liegen
+it Valore non valido, deve essere tra 1 e 65534
+es Valor no válido, debe estar entre 1 y 65534
+ru Неверное значение, должно быть от 1 до 65534
+
+@ Couldn't handle music file {}
+fr Impossible de lire le fichier musical {}
+de Musikdatei {} konnte nicht verarbeitet werden
+it Impossibile gestire il file musicale {}
+es No se pudo usar el archivo de música {}
+ru Не удалось обработать музыкальный файл {}
+
+@ Bug report written to {}
+fr Rapport de bug écrit dans {}
+de Fehlerbericht geschrieben nach {}
+it Segnalazione di bug scritta in {}
+es Informe de error escrito en {}
+ru Отчёт об ошибке записан в {}
+
+@ bugreport: can't create {}: {}
+fr bugreport : impossible de créer {} : {}
+de bugreport: {} kann nicht erstellt werden: {}
+it bugreport: impossibile creare {}: {}
+es bugreport: no se puede crear {}: {}
+ru bugreport: не удаётся создать {}: {}
+
+@ graphics preset: {}
+fr préréglage graphique : {}
+de Grafikvoreinstellung: {}
+it preimpostazione grafica: {}
+es preajuste gráfico: {}
+ru графический пресет: {}
+
+@ Presets (r_shader_preset <name>):
+fr Préréglages (r_shader_preset <nom>) :
+de Voreinstellungen (r_shader_preset <Name>):
+it Preimpostazioni (r_shader_preset <nome>):
+es Preajustes (r_shader_preset <nombre>):
+ru Пресеты (r_shader_preset <имя>):
+
+@ Add your own .slangp presets under <game>/shaders/.
+fr Ajoutez vos propres préréglages .slangp dans <jeu>/shaders/.
+de Eigene .slangp-Voreinstellungen unter <Spiel>/shaders/ ablegen.
+it Aggiungi le tue preimpostazioni .slangp in <gioco>/shaders/.
+es Añade tus propios preajustes .slangp en <juego>/shaders/.
+ru Добавляйте свои пресеты .slangp в <игра>/shaders/.
+
+@ no shader preset loaded (r_shader_preset)
+fr aucun préréglage de shader chargé (r_shader_preset)
+de keine Shader-Voreinstellung geladen (r_shader_preset)
+it nessuna preimpostazione shader caricata (r_shader_preset)
+es no hay ningún preajuste de sombreador cargado (r_shader_preset)
+ru пресет шейдера не загружен (r_shader_preset)
+
+@ r_shader_preset: "{}" not found
+fr r_shader_preset : « {} » introuvable
+de r_shader_preset: „{}“ nicht gefunden
+it r_shader_preset: "{}" non trovato
+es r_shader_preset: no se encontró «{}»
+ru r_shader_preset: «{}» не найден
+
+@ no parameter "{}" in this preset
+fr aucun paramètre « {} » dans ce préréglage
+de kein Parameter „{}“ in dieser Voreinstellung
+it nessun parametro "{}" in questa preimpostazione
+es no hay ningún parámetro «{}» en este preajuste
+ru в этом пресете нет параметра «{}»
+
+@ {} = {} (default {}, {}..{})
+fr {} = {} (défaut {}, {}..{})
+de {} = {} (Standard {}, {}..{})
+it {} = {} (predefinito {}, {}..{})
+es {} = {} (predeterminado {}, {}..{})
+ru {} = {} (по умолчанию {}, {}..{})
+
+@ Switching to {}...
+fr Passage à {}...
+de Wechsel zu {}...
+it Passaggio a {}...
+es Cambiando a {}...
+ru Переключение на {}...
+
+@ game: no game dir "{}" in {}
+fr game : aucun dossier de jeu « {} » dans {}
+de game: kein Spielordner „{}“ in {}
+it game: nessuna cartella di gioco "{}" in {}
+es game: no existe la carpeta de juego «{}» en {}
+ru game: нет папки игры «{}» в {}
+
+@ game: can't find the engine executable
+fr game : exécutable du moteur introuvable
+de game: ausführbare Datei der Engine nicht gefunden
+it game: impossibile trovare l'eseguibile del motore
+es game: no se encuentra el ejecutable del motor
+ru game: не найден исполняемый файл движка
+
+@ game: exec failed: {}
+fr game : échec de l'exécution : {}
+de game: Ausführung fehlgeschlagen: {}
+it game: esecuzione non riuscita: {}
+es game: falló la ejecución: {}
+ru game: ошибка запуска: {}
+
+@ game: launch failed: {}
+fr game : échec du lancement : {}
+de game: Start fehlgeschlagen: {}
+it game: avvio non riuscito: {}
+es game: falló el inicio: {}
+ru game: не удалось запустить: {}
+
+@ loaded {} in {}s
+fr {} chargé en {} s
+de {} in {} s geladen
+it {} caricato in {} s
+es {} cargado en {} s
+ru {} загружен за {} с
+
+@ No demos listed with startdemos
+fr Aucune démo listée avec startdemos
+de Keine Demos mit startdemos aufgelistet
+it Nessuna demo elencata con startdemos
+es No hay demos indicadas con startdemos
+ru В startdemos нет демо
+
+@ Playing demo from {}.
+fr Lecture de la démo {}.
+de Demo wird abgespielt: {}.
+it Riproduzione della demo {}.
+es Reproduciendo la demo {}.
+ru Воспроизведение демо {}.
+
+@ {} frames {} seconds {} fps
+fr {} images {} secondes {} IPS
+de {} Bilder {} Sekunden {} FPS
+it {} fotogrammi {} secondi {} FPS
+es {} fotogramas {} segundos {} FPS
+ru {} кадров {} секунд {} FPS
+
+@ Recording to {}.
+fr Enregistrement dans {}.
+de Aufnahme nach {}.
+it Registrazione in {}.
+es Grabando en {}.
+ru Запись в {}.
+
+@ Completed demo
+fr Démo terminée
+de Demo abgeschlossen
+it Demo completata
+es Demo completada
+ru Демо завершено
+
+@ Can't record during demo playback
+fr Impossible d'enregistrer pendant la lecture d'une démo
+de Aufnahme während der Demo-Wiedergabe nicht möglich
+it Impossibile registrare durante la riproduzione di una demo
+es No se puede grabar durante la reproducción de una demo
+ru Нельзя записывать во время воспроизведения демо
+
+@ Relative pathnames are not allowed.
+fr Les chemins relatifs ne sont pas autorisés.
+de Relative Pfade sind nicht erlaubt.
+it I percorsi relativi non sono consentiti.
+es No se permiten rutas relativas.
+ru Относительные пути не допускаются.
+
+@ Can't record - try again when connected
+fr Enregistrement impossible : réessayez une fois connecté
+de Aufnahme nicht möglich - nach dem Verbinden erneut versuchen
+it Impossibile registrare - riprova quando sei connesso
+es No se puede grabar: inténtalo de nuevo al estar conectado
+ru Запись невозможна — повторите после подключения
+
+@ {} demo(s) in loop
+fr {} démo(s) en boucle
+de {} Demo(s) in der Schleife
+it {} demo in ciclo
+es {} demo(s) en bucle
+ru Демо в цикле: {}
+
+@ Not recording a demo.
+fr Aucune démo en cours d'enregistrement.
+de Es wird keine Demo aufgenommen.
+it Nessuna demo in registrazione.
+es No se está grabando ninguna demo.
+ru Демо не записывается.
+
+@ {} joined on a gamepad
+fr {} a rejoint avec une manette
+de {} ist mit einem Gamepad beigetreten
+it {} si è unito con un controller
+es {} se ha unido con un mando
+ru {} присоединился с геймпада
+
+@ goggles: needs a game started with Add-ons and Goggles enabled
+fr goggles : nécessite une partie lancée avec les extensions et les lunettes activées
+de goggles: erfordert ein Spiel mit aktivierten Add-ons und Brille
+it goggles: richiede una partita avviata con add-on e visori attivi
+es goggles: requiere una partida iniciada con complementos y gafas activados
+ru goggles: нужна игра, начатая с включёнными дополнениями и очками
+
+@ equip: needs a game started with Add-ons and Goggles enabled
+fr equip : nécessite une partie lancée avec les extensions et les lunettes activées
+de equip: erfordert ein Spiel mit aktivierten Add-ons und Brille
+it equip: richiede una partita avviata con add-on e visori attivi
+es equip: requiere una partida iniciada con complementos y gafas activados
+ru equip: нужна игра, начатая с включёнными дополнениями и очками
+
+@ UDP listening on port {}
+fr UDP en écoute sur le port {}
+de UDP lauscht auf Port {}
+it UDP in ascolto sulla porta {}
+es UDP escuchando en el puerto {}
+ru UDP слушает порт {}
+
+@ UDP bind on port {} failed: {}
+fr échec de la liaison UDP sur le port {} : {}
+de UDP-Bindung an Port {} fehlgeschlagen: {}
+it binding UDP sulla porta {} non riuscito: {}
+es falló la asociación UDP en el puerto {}: {}
+ru не удалось занять UDP-порт {}: {}
+
+@ Connection accepted by {}
+fr Connexion acceptée par {}
+de Verbindung angenommen von {}
+it Connessione accettata da {}
+es Conexión aceptada por {}
+ru Подключение принято {}
+
+@ Connection failed: {}
+fr Échec de la connexion : {}
+de Verbindung fehlgeschlagen: {}
+it Connessione non riuscita: {}
+es Falló la conexión: {}
+ru Ошибка подключения: {}
+
+@ Couldn't resolve {}
+fr Impossible de résoudre {}
+de {} konnte nicht aufgelöst werden
+it Impossibile risolvere {}
+es No se pudo resolver {}
+ru Не удалось найти адрес {}
+
+@ Connecting to {}...
+fr Connexion à {}...
+de Verbinde mit {}...
+it Connessione a {}...
+es Conectando a {}...
+ru Подключение к {}...
+
+@ Connecting to QuakeWorld server {}...
+fr Connexion au serveur QuakeWorld {}...
+de Verbinde mit QuakeWorld-Server {}...
+it Connessione al server QuakeWorld {}...
+es Conectando al servidor QuakeWorld {}...
+ru Подключение к серверу QuakeWorld {}...
+
+@ Disconnected: {}
+fr Déconnecté : {}
+de Getrennt: {}
+it Disconnesso: {}
+es Desconectado: {}
+ru Отключено: {}
+
+@ Server disconnected
+fr Serveur déconnecté
+de Server getrennt
+it Server disconnesso
+es Servidor desconectado
+ru Сервер отключился
+
+@ Client {} connected
+fr Client {} connecté
+de Client {} verbunden
+it Client {} connesso
+es Cliente {} conectado
+ru Клиент {} подключён
+
+@ Client {} timed out
+fr Délai dépassé pour le client {}
+de Zeitüberschreitung bei Client {}
+it Timeout del client {}
+es Tiempo de espera agotado para el cliente {}
+ru Клиент {} не отвечает
+
+@ Couldn't spawn server {}: {}
+fr Impossible de lancer le serveur {} : {}
+de Server {} konnte nicht gestartet werden: {}
+it Impossibile avviare il server {}: {}
+es No se pudo iniciar el servidor {}: {}
+ru Не удалось запустить сервер {}: {}
+
+@ maxplayers can not be changed while a server is running.
+fr maxplayers ne peut pas être modifié pendant qu'un serveur tourne.
+de maxplayers kann nicht geändert werden, während ein Server läuft.
+it maxplayers non si può cambiare mentre un server è attivo.
+es maxplayers no se puede cambiar con un servidor en marcha.
+ru maxplayers нельзя изменить, пока работает сервер.
+
+@ You can't kick yourself!
+fr Vous ne pouvez pas vous expulser vous-même !
+de Du kannst dich nicht selbst rauswerfen!
+it Non puoi espellere te stesso!
+es ¡No puedes expulsarte a ti mismo!
+ru Нельзя выгнать самого себя!
+
+@ Only the server may changelevel
+fr Seul le serveur peut utiliser changelevel
+de Nur der Server darf changelevel nutzen
+it Solo il server può usare changelevel
+es Solo el servidor puede usar changelevel
+ru Только сервер может выполнить changelevel
+
+@ {} renamed to {}
+fr {} s'appelle désormais {}
+de {} heißt jetzt {}
+it {} ha cambiato nome in {}
+es {} ahora se llama {}
+ru {} теперь зовётся {}

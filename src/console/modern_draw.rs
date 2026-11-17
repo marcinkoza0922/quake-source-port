@@ -145,11 +145,11 @@ impl Console {
         c.text(PAD_X + bw + 6.0, 3.2, &status, 5.5, [0.78, 0.82, 0.88, 1.0]);
 
         let right_hint = if self.backscroll > 0 {
-            format!("↑ +{} lines (End to jump) ", self.backscroll)
+            qcore::tr!("↑ +{} lines (End to jump) ", self.backscroll)
         } else if in_bash {
-            "Shift+PgUp/Dn: height  ` : hide".to_string()
+            qcore::tr!("Shift+PgUp/Dn: height  ` : hide")
         } else {
-            "Tab: complete  Ctrl+R: search  bash | pipe".to_string()
+            qcore::tr!("Tab: complete  Ctrl+R: search  bash | pipe")
         };
         c.text_right(vw - PAD_X, 3.2, &right_hint, 5.2, TEXT_DIM);
     }

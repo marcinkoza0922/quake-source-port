@@ -6,9 +6,9 @@ use super::*;
 
 /// Pop-up rows: title, two description lines, console name.
 const CHOICES: [(&str, [&str; 2], &str); 3] = [
-    ("Classic", ["Like the re-release: enhanced models,", "no added effects."], "classic"),
-    ("Enhanced", ["Every enhancement at its highest quality.", "Needs a capable GPU."], "enhanced"),
-    ("Low-End", ["Fastest. No anti-aliasing, original", "models, lowest effect quality."], "lowend"),
+    (qcore::t!("Classic"), [qcore::t!("Like the re-release: enhanced models,"), qcore::t!("no added effects.")], "classic"),
+    (qcore::t!("Enhanced"), [qcore::t!("Every enhancement at its highest quality."), qcore::t!("Needs a capable GPU.")], "enhanced"),
+    (qcore::t!("Low-End"), [qcore::t!("Fastest. No anti-aliasing, original"), qcore::t!("models, lowest effect quality.")], "lowend"),
 ];
 
 /// Pop-up box: x, y, w, h (menu units).

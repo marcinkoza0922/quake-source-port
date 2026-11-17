@@ -39,7 +39,7 @@ impl Host {
         // taken over first; otherwise a new player joins.
         if start && let Some(k) = self.guests.iter().position(|g| g.pad.is_none()) {
             self.guests[k].pad = Some(id);
-            self.con.print(&format!("{} joined on a gamepad\n", self.guests[k].cl.name));
+            self.con.print(&qcore::ctr!("{} joined on a gamepad\n", self.guests[k].cl.name));
             return;
         }
         if start && self.join_open() {

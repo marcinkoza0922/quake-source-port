@@ -82,7 +82,7 @@ impl Menu {
         c.menu_layout();
         c.fill(110.0, 152.0, 420.0, 94.0, [0.04, 0.04, 0.04, 1.0]);
         c.frame(110.0, 152.0, 420.0, 94.0, BORDER);
-        let label = "is already assigned";
+        let label = qcore::t!("is already assigned");
         let w = crate::glyphs::width(c, key, self.glyphs.family, crate::glyphs::HINT_H)
             + 5.0 + c.text_w(label, TXT);
         let x = 320.0 - w / 2.0;

@@ -322,10 +322,11 @@ impl Host {
                 // QC accepts the exit after 2 s (5 s in deathmatch).
                 let wait = if self.cl.gametype == 1 { 5.0 } else { 2.0 };
                 if self.cl.intermission == 1 && self.cl.time - self.cl.completed_time >= wait && !self.menu.active() {
-                    let s = if pad_ui { "Press any button to continue..." } else { "Press any key to continue..." };
+                    let s = if pad_ui { qcore::t!("Press any button to continue...") } else { qcore::t!("Press any key to continue...") };
                     c.center_320x200();
-                    let x = ((320.0 - s.len() as f32 * 8.0) / 2.0).floor();
-                    c.fill(x - 6.0, 185.0, s.len() as f32 * 8.0 + 12.0, 14.0, [0.0, 0.0, 0.0, 0.6]);
+                    let w = c.ptext_w(s);
+                    let x = ((320.0 - w) / 2.0).floor();
+                    c.fill(x - 6.0, 185.0, w + 12.0, 14.0, [0.0, 0.0, 0.0, 0.6]);
                     crate::menu::gold(&mut c, x, 188.0, s);
                     c.reset_origin();
                 }
@@ -357,15 +358,15 @@ impl Host {
                 }
                 let s = format!("{:4.0} fps", self.fps.2);
                 c.reset_origin();
-                let x = c.vw() - s.len() as f32 * 8.0 - 8.0;
-                c.string(x, 8.0, &s);
+                let x = c.vw() - c.ptext_w(&s) - 8.0;
+                c.ptext(x, 8.0, &s, crate::draw::WHITE);
             }
             if let Some(s) = speed.filter(|_| ingame && !self.menu.active()) {
                 // Just below the crosshair, centred (ironwail's CANVAS_CROSSHAIR).
                 c.reset_origin();
                 let ofs = self.cv("scr_showspeed_ofs");
                 let y = (c.vh() / 2.0 + 4.0 + ofs).clamp(0.0, c.vh() - 8.0);
-                c.string((c.vw() / 2.0 - s.len() as f32 * 4.0).floor(), y.floor(), &s);
+                c.ptext((c.vw() / 2.0 - c.ptext_w(&s) / 2.0).floor(), y.floor(), &s, crate::draw::WHITE);
             }
         }
         let styles: Vec<i32> = (0..qnet::protocol::MAX_LIGHTSTYLES).map(|i| self.cl.lightstyle_value(i)).collect();

@@ -6,7 +6,15 @@ use std::cell::Cell;
 
 use super::*;
 
-const MANUAL: &str = include_str!("../../docs/MANUAL.md");
+/// The manual per language, in [`qcore::lang::Lang::ALL`] order.
+const MANUALS: [&str; 6] = [
+    include_str!("../../docs/MANUAL.md"),
+    include_str!("../../docs/MANUAL.fr.md"),
+    include_str!("../../docs/MANUAL.de.md"),
+    include_str!("../../docs/MANUAL.it.md"),
+    include_str!("../../docs/MANUAL.es.md"),
+    include_str!("../../docs/MANUAL.ru.md"),
+];
 
 /// Section list (left) and text pane (right), in 640x360 menu units.
 const LIST_X: f32 = 24.0;
@@ -71,13 +79,16 @@ fn cells(line: &str) -> Vec<String> {
 
 /// Splits the manual into `##` sections (the text before the first one is
 /// "About"). `###` become headings; tables become one paragraph per row.
+/// The manual follows the current language; every translation has the same
+/// sections, so the selected one stays valid when the language changes.
 pub(super) fn sections() -> &'static [Section] {
-    static S: std::sync::OnceLock<Vec<Section>> = std::sync::OnceLock::new();
-    S.get_or_init(parse)
+    static S: [std::sync::OnceLock<Vec<Section>>; 6] = [const { std::sync::OnceLock::new() }; 6];
+    let i = qcore::lang::Lang::ALL.iter().position(|&l| l == qcore::lang::current()).unwrap_or(0);
+    S[i].get_or_init(|| parse(MANUALS[i], qcore::lang::Lang::ALL[i]))
 }
 
-fn parse() -> Vec<Section> {
-    let mut out = vec![Section { title: "About".into(), blocks: Vec::new() }];
+fn parse(manual: &str, lang: qcore::lang::Lang) -> Vec<Section> {
+    let mut out = vec![Section { title: qcore::lang::tr_in(lang, qcore::t!("About")).into_owned(), blocks: Vec::new() }];
     let mut para: Option<(String, Option<String>)> = None;
     let mut header: Option<Vec<String>> = None;
     fn flush(sec: &mut Section, para: &mut Option<(String, Option<String>)>) {
@@ -85,7 +96,7 @@ fn parse() -> Vec<Section> {
             sec.blocks.push(Block::Para { text, bullet });
         }
     }
-    for line in MANUAL.lines() {
+    for line in manual.lines() {
         let t = line.trim();
         let sec = out.last_mut().unwrap();
         if t.starts_with("# ") {
@@ -271,7 +282,13 @@ impl Help {
             if i == sel {
                 c.fill(LIST_X + 2.0, y, LIST_W - 4.0, ROW_H, HILITE);
             }
-            c.text(LIST_X + 8.0, y + 2.0, &s.title, TXT, if i == sel { GOLD_FG } else { FG });
+            // long (translated) titles are cut to the list width
+            let mut title = s.title.clone();
+            if c.text_w_raw(&title, TXT) > LIST_W - 12.0 {
+                while c.text_w_raw(&format!("{title}…"), TXT) > LIST_W - 12.0 && title.pop().is_some() {}
+                title = format!("{}…", title.trim_end());
+            }
+            c.text_raw(LIST_X + 8.0, y + 2.0, &title, TXT, if i == sel { GOLD_FG } else { FG });
         }
         // text pane
         c.fill(TEXT_X, TOP, TEXT_W, BOTTOM - TOP, [0.0, 0.0, 0.0, 0.6]);
@@ -299,6 +316,16 @@ impl Help {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn translated_manuals_have_the_same_sections() {
+        let n = parse(MANUALS[0], qcore::lang::Lang::English).len();
+        for (i, m) in MANUALS.iter().enumerate() {
+            let s = parse(m, qcore::lang::Lang::ALL[i]);
+            assert_eq!(s.len(), n, "{:?} manual has {} sections, English {n}", qcore::lang::Lang::ALL[i], s.len());
+            assert!(s.iter().all(|x| !x.blocks.is_empty()), "{:?} has an empty section", qcore::lang::Lang::ALL[i]);
+        }
+    }
 
     #[test]
     fn manual_parses_into_sections() {

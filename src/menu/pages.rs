@@ -44,6 +44,8 @@ pub(super) enum Item {
     ResetShaderParams,
     /// Opens a nested options page.
     Sub { label: &'static str, page: Page },
+    /// `language`: System (auto) or one of the re-release's languages.
+    Language,
 }
 
 #[derive(Clone, Copy, PartialEq, Eq)]
@@ -196,6 +198,8 @@ pub(super) const fn toggle(label: &'static str, cvar: &'static str) -> Item {
 }
 
 pub(super) const GAMEPLAY: &[Item] = &[
+    Item::Language,
+    toggle("Translate Console", "con_translate"),
     slider("Field of View", "fov", 60.0, 130.0, 5.0),
     Item::Choice { label: "Camera", cvar: "cl_camera", choices: &[("First person", 0.0), ("Third person", 1.0), ("Shoulder right", 2.0), ("Shoulder left", 3.0)] },
     Item::Choice { label: "Viewmodels", cvar: "r_drawviewmodel", choices: &[("Center", 1.0), ("Right", 2.0), ("Left", 3.0), ("Off", 0.0)] },

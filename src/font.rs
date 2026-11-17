@@ -63,6 +63,9 @@ pub struct Slot {
 pub struct UiText {
     font: FontArc,
     mono: FontArc,
+    /// Inter, for characters the chosen menu font lacks (Cyrillic in
+    /// Rajdhani, Titillium and Kreon).
+    fallback: FontArc,
     /// (ui_menufont, ui_fontfile) the font was loaded for.
     pub source: (i32, String),
     pub pic: Option<qrender::PicId>,
@@ -82,9 +85,11 @@ impl Default for UiText {
 impl UiText {
     pub fn new(font: FontArc) -> Self {
         let mono = FontArc::try_from_slice(MONO_FONT).expect("bundled mono font");
+        let fallback = FontArc::try_from_slice(FONTS[0].1).expect("bundled font");
         Self {
             font,
             mono,
+            fallback,
             source: (0, String::new()),
             pic: None,
             px: vec![0; ATLAS * ATLAS * 4],
@@ -168,21 +173,33 @@ impl UiText {
 
     /// (char, pen x, advance) for each char, pen rounded to whole px.
     pub fn layout(&self, s: &str, px: f32) -> Vec<(char, f32, f32)> {
-        let sf = self.font.as_scaled(PxScale::from(px));
+        let scale = PxScale::from(px);
         let mut pen = 0f32;
         let mut prev = None;
         let mut out = Vec::with_capacity(s.len());
         for ch in s.chars() {
-            let id = self.font.glyph_id(ch);
-            if let Some(p) = prev {
+            let (font, own) = self.font_for(ch);
+            let sf = font.as_scaled(scale);
+            let id = font.glyph_id(ch);
+            if let Some(p) = prev.filter(|_| own) {
                 pen += sf.kern(p, id);
             }
             let adv = sf.h_advance(id);
             out.push((ch, pen.round(), adv));
             pen += adv;
-            prev = Some(id);
+            prev = own.then_some(id);
         }
         out
+    }
+
+    /// The menu font, or the fallback when it has no glyph for `ch`
+    /// (second value: whether it is the menu font).
+    fn font_for(&self, ch: char) -> (&FontArc, bool) {
+        if self.font.glyph_id(ch).0 == 0 && self.fallback.glyph_id(ch).0 != 0 {
+            (&self.fallback, false)
+        } else {
+            (&self.font, true)
+        }
     }
 
     /// Atlas slot of `ch` at `px` (rasterised on first use).
@@ -206,7 +223,7 @@ impl UiText {
         if let Some(s) = self.map.get(&key) {
             return *s;
         }
-        let font = if mono { &self.mono } else { &self.font };
+        let font = if mono { &self.mono } else { self.font_for(ch).0 };
         let id = font.glyph_id(ch);
         let g = id.with_scale_and_position(PxScale::from(px as f32), ab_glyph::point(0.0, 0.0));
         let slot = match font.outline_glyph(g) {

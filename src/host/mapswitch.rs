@@ -32,7 +32,7 @@ impl Host {
             return;
         }
         let Some(info) = qui::mods::scan(&basedir).into_iter().find(|m| m.dir.eq_ignore_ascii_case(dir)) else {
-            self.con.print(&format!("game: no game dir \"{dir}\" in {}\n", basedir.display()));
+            self.con.print(&qcore::ctr!("game: no game dir \"{}\" in {}\n", dir, basedir.display()));
             return;
         };
         let mut args = relaunch_args(&self.cmdline);
@@ -42,10 +42,10 @@ impl Host {
         }
         self.write_config();
         let Ok(exe) = std::env::current_exe() else {
-            self.con.print("game: can't find the engine executable\n");
+            self.con.print(&qcore::ctr!("game: can't find the engine executable\n"));
             return;
         };
-        self.con.print(&format!("Switching to {}...\n", info.title));
+        self.con.print(&qcore::ctr!("Switching to {}...\n", info.title));
         let mut cmd = std::process::Command::new(exe);
         cmd.args(&args);
         #[cfg(unix)]
@@ -55,12 +55,12 @@ impl Host {
             self.window = None;
             self.snd = None;
             let e = cmd.exec();
-            self.con.print(&format!("game: exec failed: {e}\n"));
+            self.con.print(&qcore::ctr!("game: exec failed: {}\n", e));
         }
         #[cfg(not(unix))]
         match cmd.spawn() {
             Ok(_) => self.quit = true,
-            Err(e) => self.con.print(&format!("game: launch failed: {e}\n")),
+            Err(e) => self.con.print(&qcore::ctr!("game: launch failed: {}\n", e)),
         }
     }
 
@@ -119,7 +119,7 @@ impl Host {
         self.impacts.clear();
         self.hitfx.clear();
         self.tracers.clear();
-        self.con.print(&format!("loaded {} in {:.2}s\n", self.level.mapname, t0.elapsed().as_secs_f32()));
+        self.con.print(&qcore::ctr!("loaded {} in {}s\n", self.level.mapname, format!("{:.2}", t0.elapsed().as_secs_f32())));
     }
 }
 

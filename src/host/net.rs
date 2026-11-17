@@ -125,11 +125,11 @@ impl Host {
         if want && self.net_server.is_none() {
             match crate::net::NetServer::listen(self.net_port) {
                 Ok(n) => {
-                    self.con.print(&format!("UDP listening on port {}\n", n.port()));
+                    self.con.print(&qcore::ctr!("UDP listening on port {}\n", n.port()));
                     self.net_server = Some(n);
                 }
                 Err(e) => {
-                    self.con.print(&format!("UDP bind on port {} failed: {e}\n", self.net_port));
+                    self.con.print(&qcore::ctr!("UDP bind on port {} failed: {}\n", self.net_port, e));
                     self.net_port = 0; // don't retry every frame; next try takes any port
                 }
             }
@@ -147,12 +147,12 @@ impl Host {
             crate::net::ClientPoll::Messages(m) => {
                 if !was && n.connected() {
                     let a = n.server;
-                    self.con.print(&format!("Connection accepted by {a}\n"));
+                    self.con.print(&qcore::ctr!("Connection accepted by {}\n", a));
                 }
                 self.deliver_seq(m);
             }
             crate::net::ClientPoll::Failed(why) => {
-                self.con.print(&format!("Connection failed: {why}"));
+                self.con.print(&qcore::ctr!("Connection failed: {}", why));
                 self.disconnect_client();
             }
         }
@@ -240,7 +240,7 @@ impl Host {
     /// `connect <address>`.
     pub(super) fn connect_remote(&mut self, addr: &str) {
         let Some(a) = crate::net::resolve(addr) else {
-            self.con.print(&format!("Couldn't resolve {addr}\n"));
+            self.con.print(&qcore::ctr!("Couldn't resolve {}\n", addr));
             return;
         };
         self.stop_game();
@@ -249,13 +249,13 @@ impl Host {
         self.cl = ClientState::new();
         self.cl.name = self.cvs("_cl_name").to_string();
         self.cl.color = self.cv("_cl_color") as i32;
-        self.con.print(&format!("Connecting to {a}...\n"));
+        self.con.print(&qcore::ctr!("Connecting to {}...\n", a));
         match crate::net::NetClient::connect(a, self.realtime) {
             Ok(n) => {
                 self.net_client = Some(n);
                 self.last_server = Some((a, false));
             }
-            Err(e) => self.con.print(&format!("Connection failed: {e}\n")),
+            Err(e) => self.con.print(&qcore::ctr!("Connection failed: {}\n", e)),
         }
     }
 
@@ -267,7 +267,7 @@ impl Host {
     /// `connect qw://<address>` / `qwconnect <address>`.
     pub(super) fn connect_qw(&mut self, addr: &str) {
         let Some(a) = crate::qw::resolve(addr) else {
-            self.con.print(&format!("Couldn't resolve {addr}\n"));
+            self.con.print(&qcore::ctr!("Couldn't resolve {}\n", addr));
             return;
         };
         self.stop_game();
@@ -286,13 +286,13 @@ impl Host {
         ] {
             qnet::qw::info_set(&mut ui, k, &v);
         }
-        self.con.print(&format!("Connecting to QuakeWorld server {a}...\n"));
+        self.con.print(&qcore::ctr!("Connecting to QuakeWorld server {}...\n", a));
         match crate::qw::QwClient::connect(a, ui, self.realtime) {
             Ok(q) => {
                 self.qw_client = Some(q);
                 self.last_server = Some((a, true));
             }
-            Err(e) => self.con.print(&format!("Connection failed: {e}\n")),
+            Err(e) => self.con.print(&qcore::ctr!("Connection failed: {}\n", e)),
         }
     }
 
@@ -308,7 +308,7 @@ impl Host {
                 self.deliver(m);
             }
             crate::qw::QwPoll::Failed(why) => {
-                self.con.print(&format!("Disconnected: {why}"));
+                self.con.print(&qcore::ctr!("Disconnected: {}", why));
                 self.disconnect_client();
             }
         }
@@ -488,7 +488,7 @@ impl Host {
                 // Host_EndGame during playback moves on to the next demo.
                 ClientEvent::Disconnect if self.demo.is_some() => self.end_demo(),
                 ClientEvent::Disconnect => {
-                    self.con.print("Server disconnected\n");
+                    self.con.print(&qcore::ctr!("Server disconnected\n"));
                     if self.remote() {
                         self.disconnect_client();
                         return;

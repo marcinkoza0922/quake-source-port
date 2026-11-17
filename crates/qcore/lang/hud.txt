@@ -1,0 +1,676 @@
+# Translations of the port's own text; format in crates/qcore/src/lang/catalog.rs.
+# HUD, weapon and equipment wheels, sound captions and other in-game text.
+# Weapon, monster and item names follow the 2021 re-release's own translations.
+
+@ Axe
+fr Hache
+de Axt
+it Ascia
+es Hacha
+ru Топор
+
+@ Shotgun
+fr Fusil à pompe
+de Shotgun
+it Fucile a pompa
+es Escopeta
+ru Дробовик
+
+@ Double-Barrelled Shotgun
+fr Super fusil à pompe
+de Super Shotgun
+it Doppietta
+es Superescopeta
+ru Супердробовик
+
+@ Nailgun
+fr Pistolet à clous
+de Nailgun
+it Sparachiodi
+es Pistola neumática
+ru Гвоздомёт
+
+@ Super Nailgun
+fr Super pistolet à clous
+de Super Nailgun
+it Super sparachiodi
+es Superpistola neumática
+ru Супергвоздомёт
+
+@ Grenade Launcher
+fr Lance-grenades
+de Grenade Launcher
+it Lanciagranate
+es Lanzagranadas
+ru Гранатомёт
+
+@ Rocket Launcher
+fr Lance-roquettes
+de Rocket Launcher
+it Lanciarazzi
+es Lanzamisiles
+ru Ракетница
+
+@ Thunderbolt
+fr Tonnerre hurlant
+de Thunderbolt
+it Fulminatore
+es Trueno
+ru Гроза
+
+@ Portal Gun
+fr Pistolet à portails
+de Portalkanone
+it Pistola dei portali
+es Pistola de portales
+ru Портальная пушка
+
+@ Boomerang
+fr Boomerang
+de Bumerang
+it Boomerang
+es Bumerán
+ru Бумеранг
+
+@ Stickybomb Launcher
+fr Lance-bombes collantes
+de Haftbombenwerfer
+it Lanciabombe adesive
+es Lanzabombas adhesivas
+ru Липкий бомбомёт
+
+@ Railgun
+fr Railgun
+de Railgun
+it Railgun
+es Railgun
+ru Рейлган
+
+@ Hookshot
+fr Grappin
+de Enterhaken
+it Rampino
+es Gancho
+ru Крюк-кошка
+
+@ Gel Sprayer
+fr Pulvérisateur de gel
+de Gelsprüher
+it Spruzzagel
+es Pulverizador de gel
+ru Гелемёт
+
+@ Powerwasher
+fr Nettoyeur haute pression
+de Hochdruckreiniger
+it Idropulitrice
+es Hidrolimpiadora
+ru Мойка высокого давления
+
+@ Night Vision Goggles
+fr Lunettes de vision nocturne
+de Nachtsichtbrille
+it Visore notturno
+es Gafas de visión nocturna
+ru Очки ночного видения
+
+@ Thermal Goggles
+fr Lunettes thermiques
+de Wärmebildbrille
+it Visore termico
+es Gafas térmicas
+ru Тепловизионные очки
+
+@ Normal vision
+fr Vision normale
+de Normale Sicht
+it Visione normale
+es Visión normal
+ru Обычное зрение
+
+@ ON
+fr ACTIF
+de AN
+it ON
+es SÍ
+ru ВКЛ
+
+@ OFF
+fr INACTIF
+de AUS
+it OFF
+es NO
+ru ВЫКЛ
+
+@ {} (turn on)
+fr {} (activer)
+de {} (einschalten)
+it {} (attiva)
+es {} (activar)
+ru {} (включить)
+
+@ {} (turn off)
+fr {} (désactiver)
+de {} (ausschalten)
+it {} (disattiva)
+es {} (desactivar)
+ru {} (выключить)
+
+@ Move mouse to select, release to toggle
+fr Bougez la souris pour choisir, relâchez pour basculer
+de Maus bewegen zum Wählen, loslassen zum Umschalten
+it Muovi il mouse per scegliere, rilascia per attivare o disattivare
+es Mueve el ratón para elegir, suelta para alternar
+ru Двигайте мышь для выбора, отпустите для переключения
+
+@ Move mouse to select, release to equip
+fr Bougez la souris pour choisir, relâchez pour équiper
+de Maus bewegen zum Wählen, loslassen zum Ausrüsten
+it Muovi il mouse per scegliere, rilascia per equipaggiare
+es Mueve el ratón para elegir, suelta para equipar
+ru Двигайте мышь для выбора, отпустите, чтобы взять
+
+@ Release to toggle
+fr Relâcher pour basculer
+de Loslassen zum Umschalten
+it Rilascia per attivare o disattivare
+es Suelta para alternar
+ru Отпустите для переключения
+
+@ Release to equip
+fr Relâcher pour équiper
+de Loslassen zum Ausrüsten
+it Rilascia per equipaggiare
+es Suelta para equipar
+ru Отпустите, чтобы взять
+
+@ shells
+fr cartouches
+de Schrot
+it cartucce
+es cartuchos
+ru дробь
+
+@ nails
+fr clous
+de Nägel
+it chiodi
+es clavos
+ru гвозди
+
+@ rockets
+fr roquettes
+de Raketen
+it razzi
+es cohetes
+ru ракеты
+
+@ cells
+fr cellules
+de Zellen
+it celle
+es celdas
+ru ячейки
+
+@ Kills: {}/{}
+fr Victimes : {}/{}
+de Abschüsse: {}/{}
+it Uccisioni: {}/{}
+es Bajas: {}/{}
+ru Убито: {}/{}
+
+@ Secrets: {}/{}
+fr Secrets : {}/{}
+de Geheimnisse: {}/{}
+it Segreti: {}/{}
+es Secretos: {}/{}
+ru Тайники: {}/{}
+
+@ Time {}
+fr Temps {}
+de Zeit {}
+it Tempo {}
+es Tiempo {}
+ru Время {}
+
+@ Press any button to continue...
+fr Appuyez sur un bouton pour continuer...
+de Beliebige Taste drücken, um fortzufahren...
+it Premi un pulsante per continuare...
+es Pulsa cualquier botón para continuar...
+ru Нажмите любую кнопку, чтобы продолжить...
+
+@ Press any key to continue...
+fr Appuyez sur une touche pour continuer...
+de Beliebige Taste drücken, um fortzufahren...
+it Premi un tasto per continuare...
+es Pulsa cualquier tecla para continuar...
+ru Нажмите любую клавишу, чтобы продолжить...
+
+@ BULLET TIME
+fr BULLET TIME
+de BULLET-TIME
+it BULLET TIME
+es TIEMPO BALA
+ru ЗАМЕДЛЕНИЕ
+
+@ AUTO AIM
+fr VISÉE AUTO
+de AUTO-ZIELEN
+it MIRA AUTO
+es APUNTADO AUTO
+ru АВТОПРИЦЕЛ
+
+@ Crosshair
+fr Réticule
+de Fadenkreuz
+it Mirino
+es Punto de mira
+ru Прицел
+
+@ + Marker
+fr + marqueur
+de + Anzeige
+it + indicatore
+es + marcador
+ru + маркер
+
+@ Hit markers off
+fr Marqueurs de touche désactivés
+de Trefferanzeigen aus
+it Indicatori di colpo disattivati
+es Marcadores de impacto desactivados
+ru Маркеры попаданий выключены
+
+@ On target
+fr Sur cible
+de Auf Ziel
+it Sul bersaglio
+es Sobre objetivo
+ru На цели
+
+@ On kill
+fr À l'élimination
+de Bei Abschuss
+it All'uccisione
+es Al matar
+ru При убийстве
+
+# sound captions
+@ [Secret found]
+fr [Secret trouvé]
+de [Geheimnis gefunden]
+it [Segreto trovato]
+es [Secreto encontrado]
+ru [Тайник найден]
+
+@ [Message]
+fr [Message]
+de [Nachricht]
+it [Messaggio]
+es [Mensaje]
+ru [Сообщение]
+
+@ [Switch activated]
+fr [Interrupteur activé]
+de [Schalter betätigt]
+it [Interruttore attivato]
+es [Interruptor activado]
+ru [Переключатель задействован]
+
+@ [Key picked up]
+fr [Clé ramassée]
+de [Schlüssel aufgehoben]
+it [Chiave raccolta]
+es [Llave recogida]
+ru [Ключ подобран]
+
+@ [Rune picked up]
+fr [Rune ramassée]
+de [Rune aufgehoben]
+it [Runa raccolta]
+es [Runa recogida]
+ru [Руна подобрана]
+
+@ [Teleporter]
+fr [Téléporteur]
+de [Teleporter]
+it [Teletrasporto]
+es [Teletransportador]
+ru [Телепорт]
+
+@ [Teleport]
+fr [Téléportation]
+de [Teleportation]
+it [Teletrasporto]
+es [Teletransporte]
+ru [Телепортация]
+
+@ [Splash]
+fr [Plouf]
+de [Platschen]
+it [Tonfo in acqua]
+es [Chapoteo]
+ru [Всплеск]
+
+@ [Leaving water]
+fr [Sortie de l'eau]
+de [Wasser verlassen]
+it [Uscita dall'acqua]
+es [Saliendo del agua]
+ru [Выход из воды]
+
+@ [Door]
+fr [Porte]
+de [Tür]
+it [Porta]
+es [Puerta]
+ru [Дверь]
+
+@ [Platform moving]
+fr [Plateforme en mouvement]
+de [Plattform bewegt sich]
+it [Piattaforma in movimento]
+es [Plataforma en movimiento]
+ru [Платформа движется]
+
+@ [Button]
+fr [Bouton]
+de [Knopf]
+it [Pulsante]
+es [Botón]
+ru [Кнопка]
+
+@ [Health picked up]
+fr [Santé ramassée]
+de [Gesundheit aufgehoben]
+it [Salute raccolta]
+es [Salud recogida]
+ru [Аптечка подобрана]
+
+@ [Armor picked up]
+fr [Armure ramassée]
+de [Rüstung aufgehoben]
+it [Armatura raccolta]
+es [Armadura recogida]
+ru [Броня подобрана]
+
+@ [Quad Damage wearing off]
+fr [Fin du quadruple dégâts]
+de [Quad Damage lässt nach]
+it [Il Quad Damage sta finendo]
+es [El daño cuádruple se agota]
+ru [Четверной урон заканчивается]
+
+@ [Quad Damage]
+fr [Quadruple dégâts]
+de [Quad Damage]
+it [Quad Damage]
+es [Daño cuádruple]
+ru [Четверной урон]
+
+@ [Pentagram wearing off]
+fr [Fin du pentagramme]
+de [Pentagramm lässt nach]
+it [Il pentagramma sta finendo]
+es [El pentagrama se agota]
+ru [Пентаграмма заканчивается]
+
+@ [Pentagram of Protection]
+fr [Pentagramme de protection]
+de [Pentagramm des Schutzes]
+it [Pentagramma della protezione]
+es [Pentagrama de protección]
+ru [Пентаграмма защиты]
+
+@ [Ring wearing off]
+fr [Fin de l'anneau]
+de [Ring lässt nach]
+it [L'anello sta finendo]
+es [El anillo se agota]
+ru [Кольцо заканчивается]
+
+@ [Ring of Shadows]
+fr [Anneau des ombres]
+de [Ring der Schatten]
+it [Anello delle ombre]
+es [Anillo de las sombras]
+ru [Кольцо теней]
+
+@ [Biosuit wearing off]
+fr [Fin de la combinaison bio]
+de [Biosuit lässt nach]
+it [La tuta biologica sta finendo]
+es [El biotraje se agota]
+ru [Биокостюм заканчивается]
+
+@ [Biosuit]
+fr [Combinaison bio]
+de [Biosuit]
+it [Tuta biologica]
+es [Biotraje]
+ru [Биокостюм]
+
+@ [Item picked up]
+fr [Objet ramassé]
+de [Gegenstand aufgehoben]
+it [Oggetto raccolto]
+es [Objeto recogido]
+ru [Предмет подобран]
+
+@ [Weapon picked up]
+fr [Arme ramassée]
+de [Waffe aufgehoben]
+it [Arma raccolta]
+es [Arma recogida]
+ru [Оружие подобрано]
+
+@ [Ammo picked up]
+fr [Munitions ramassées]
+de [Munition aufgehoben]
+it [Munizioni raccolte]
+es [Munición recogida]
+ru [Боеприпасы подобраны]
+
+@ [Explosion]
+fr [Explosion]
+de [Explosion]
+it [Esplosione]
+es [Explosión]
+ru [Взрыв]
+
+@ [Grenade launched]
+fr [Grenade lancée]
+de [Granate abgefeuert]
+it [Granata lanciata]
+es [Granada lanzada]
+ru [Граната выпущена]
+
+@ [Grenade bounce]
+fr [Rebond de grenade]
+de [Granate prallt ab]
+it [Rimbalzo della granata]
+es [Rebote de granada]
+ru [Отскок гранаты]
+
+@ [Rocket fired]
+fr [Roquette tirée]
+de [Rakete abgefeuert]
+it [Razzo sparato]
+es [Cohete disparado]
+ru [Выпущена ракета]
+
+@ [Nails fired]
+fr [Clous tirés]
+de [Nägel abgefeuert]
+it [Chiodi sparati]
+es [Clavos disparados]
+ru [Выпущены гвозди]
+
+@ [Lightning]
+fr [Éclair]
+de [Blitz]
+it [Fulmine]
+es [Rayo]
+ru [Молния]
+
+@ [Thunder]
+fr [Tonnerre]
+de [Donner]
+it [Tuono]
+es [Trueno]
+ru [Гром]
+
+@ [Enforcer alerted]
+fr [Exécuteur alerté]
+de [Enforcer alarmiert]
+it [Esecutore in allerta]
+es [Ejecutor alertado]
+ru [Головорез заметил вас]
+
+@ [Grunt alerted]
+fr [Grunt alerté]
+de [Grunt alarmiert]
+it [Grunt in allerta]
+es [Grunt alertado]
+ru [Солдат заметил вас]
+
+@ [Rottweiler alerted]
+fr [Rottweiler alerté]
+de [Rottweiler alarmiert]
+it [Rottweiler in allerta]
+es [Rottweiler alertado]
+ru [Ротвейлер заметил вас]
+
+@ [Knight alerted]
+fr [Chevalier alerté]
+de [Knight alarmiert]
+it [Cavaliere in allerta]
+es [Caballero alertado]
+ru [Рыцарь заметил вас]
+
+@ [Death Knight alerted]
+fr [Death Knight alerté]
+de [Death Knight alarmiert]
+it [Cavaliere della morte in allerta]
+es [Death Knight alertado]
+ru [Рыцарь смерти заметил вас]
+
+@ [Scrag alerted]
+fr [Scrag alerté]
+de [Scrag alarmiert]
+it [Scrag in allerta]
+es [Scrag alertado]
+ru [Скраг заметил вас]
+
+@ [Ogre alerted]
+fr [Ogre alerté]
+de [Oger alarmiert]
+it [Orco in allerta]
+es [Ogro alertado]
+ru [Огр заметил вас]
+
+@ [Fiend alerted]
+fr [Démon alerté]
+de [Fiend alarmiert]
+it [Demonio in allerta]
+es [Demonio alertado]
+ru [Исчадие заметило вас]
+
+@ [Shambler alerted]
+fr [Lourdaud alerté]
+de [Shambler alarmiert]
+it [Shambler in allerta]
+es [Shambler alertado]
+ru [Шамблер заметил вас]
+
+@ [Zombie groaning]
+fr [Zombie qui gémit]
+de [Zombie stöhnt]
+it [Zombi che geme]
+es [Zombi gimiendo]
+ru [Стонет зомби]
+
+@ [Vore alerted]
+fr [Vore alerté]
+de [Vore alarmiert]
+it [Aracnodemone in allerta]
+es [Vore alertado]
+ru [Шалрат заметил вас]
+
+@ [Vore attacking]
+fr [Vore à l'attaque]
+de [Vore greift an]
+it [Aracnodemone all'attacco]
+es [Vore atacando]
+ru [Шалрат атакует]
+
+@ [Spawn alerted]
+fr [Rejeton alerté]
+de [Spawn alarmiert]
+it [Progenie in allerta]
+es [Engendro alertado]
+ru [Сгусток заметил вас]
+
+@ [Rotfish]
+fr [Piranha]
+de [Rotfish]
+it [Pesce marcio]
+es [Pez podrido]
+ru [Пиранья]
+
+@ [Spawn]
+fr [Rejeton]
+de [Spawn]
+it [Progenie]
+es [Engendro]
+ru [Сгусток]
+
+@ [Chthon]
+fr [Chthon]
+de [Chthon]
+it [Chthon]
+es [Chthon]
+ru [Хтон]
+
+@ [Hard landing]
+fr [Atterrissage brutal]
+de [Harte Landung]
+it [Atterraggio violento]
+es [Aterrizaje duro]
+ru [Жёсткое приземление]
+
+@ [Drowning]
+fr [Noyade]
+de [Ertrinken]
+it [Annegamento]
+es [Ahogándose]
+ru [Захлёбывается]
+
+@ [Gasping for air]
+fr [Reprise de souffle]
+de [Nach Luft schnappen]
+it [Boccheggia]
+es [Jadeando]
+ru [Хватает воздух]
+
+@ [Burning]
+fr [Brûlure]
+de [Brennen]
+it [In fiamme]
+es [Quemándose]
+ru [Горит]
+
+@ [Telefrag]
+fr [Téléfrag]
+de [Telefrag]
+it [Telefrag]
+es [Telefrag]
+ru [Телефраг]
+
+@ [Gibbed]
+fr [Réduit en morceaux]
+de [Zerfetzt]
+it [Fatto a pezzi]
+es [Despedazado]
+ru [Разорван]

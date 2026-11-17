@@ -194,6 +194,14 @@ pub fn ticks_ns() -> u64 {
 }
 
 /// High-resolution counter (nanoseconds) and its frequency.
+/// The browser's preferred languages (`navigator.languages`).
+pub fn preferred_languages() -> Vec<String> {
+    let Some(nav) = web_sys::window().map(|w| w.navigator()) else { return Vec::new() };
+    let list = js_sys::Reflect::get(&nav, &"languages".into()).ok();
+    let arr: Option<js_sys::Array> = list.and_then(|v| v.dyn_into().ok());
+    arr.map(|a| a.iter().filter_map(|v| v.as_string()).collect()).unwrap_or_default()
+}
+
 pub fn performance_counter() -> (u64, u64) {
     (ticks_ns(), 1_000_000_000)
 }

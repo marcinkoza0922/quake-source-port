@@ -10,14 +10,14 @@ pub struct Slot {
 }
 
 pub const SLOTS: [Slot; 8] = [
-    Slot { impulse: 1, item: 4096, name: "Axe", icon: None, ammo: None },
-    Slot { impulse: 2, item: 1, name: "Shotgun", icon: Some("inv_shotgun"), ammo: Some(STAT_SHELLS) },
-    Slot { impulse: 3, item: 2, name: "Double-Barrelled Shotgun", icon: Some("inv_sshotgun"), ammo: Some(STAT_SHELLS) },
-    Slot { impulse: 4, item: 4, name: "Nailgun", icon: Some("inv_nailgun"), ammo: Some(STAT_NAILS) },
-    Slot { impulse: 5, item: 8, name: "Super Nailgun", icon: Some("inv_snailgun"), ammo: Some(STAT_NAILS) },
-    Slot { impulse: 6, item: 16, name: "Grenade Launcher", icon: Some("inv_rlaunch"), ammo: Some(STAT_ROCKETS) },
-    Slot { impulse: 7, item: 32, name: "Rocket Launcher", icon: Some("inv_srlaunch"), ammo: Some(STAT_ROCKETS) },
-    Slot { impulse: 8, item: 64, name: "Thunderbolt", icon: Some("inv_lightng"), ammo: Some(STAT_CELLS) },
+    Slot { impulse: 1, item: 4096, name: qcore::t!("Axe"), icon: None, ammo: None },
+    Slot { impulse: 2, item: 1, name: qcore::t!("Shotgun"), icon: Some("inv_shotgun"), ammo: Some(STAT_SHELLS) },
+    Slot { impulse: 3, item: 2, name: qcore::t!("Double-Barrelled Shotgun"), icon: Some("inv_sshotgun"), ammo: Some(STAT_SHELLS) },
+    Slot { impulse: 4, item: 4, name: qcore::t!("Nailgun"), icon: Some("inv_nailgun"), ammo: Some(STAT_NAILS) },
+    Slot { impulse: 5, item: 8, name: qcore::t!("Super Nailgun"), icon: Some("inv_snailgun"), ammo: Some(STAT_NAILS) },
+    Slot { impulse: 6, item: 16, name: qcore::t!("Grenade Launcher"), icon: Some("inv_rlaunch"), ammo: Some(STAT_ROCKETS) },
+    Slot { impulse: 7, item: 32, name: qcore::t!("Rocket Launcher"), icon: Some("inv_srlaunch"), ammo: Some(STAT_ROCKETS) },
+    Slot { impulse: 8, item: 64, name: qcore::t!("Thunderbolt"), icon: Some("inv_lightng"), ammo: Some(STAT_CELLS) },
 ];
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]

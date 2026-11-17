@@ -132,9 +132,7 @@ impl Wheel {
                     c.pic_color(x - w as f32 / 2.0, y - h as f32 + 2.0, Some((id, w, h)), tint);
                 }
                 None => {
-                    for (k, b) in s.label().bytes().enumerate() {
-                        c.ch_color(x - 8.0 + k as f32 * 8.0, y - 7.0, b, tint);
-                    }
+                    c.ptext(x - 8.0, y - 7.0, s.label(), tint);
                 }
             }
             if let (Some(a), true) = (s.ammo(), has) {
@@ -150,8 +148,9 @@ impl Wheel {
         if let Some(entry) = self.sel.and_then(|i| self.entries.get(i)) {
             let n = if entry.owned(cl) { entry.name() } else { "--" };
             let y = cy - r - d / 2.0 - 16.0;
-            c.fill(cx - n.len() as f32 * 4.0 - 4.0, y - 2.0, n.len() as f32 * 8.0 + 8.0, 12.0, [0.0, 0.0, 0.0, 0.6]);
-            crate::menu::gold(c, cx - n.len() as f32 * 4.0, y, n);
+            let w = c.ptext_w(n);
+            c.fill(cx - w / 2.0 - 4.0, y - 2.0, w + 8.0, 12.0, [0.0, 0.0, 0.0, 0.6]);
+            crate::menu::gold(c, cx - w / 2.0, y, n);
         }
         let hint_y = cy + r + d / 2.0 + 8.0;
         let back = |c: &mut Canvas, w: f32| c.fill(cx - w / 2.0 - 6.0, hint_y - 3.0, w + 12.0, 16.0, [0.0, 0.0, 0.0, 0.7]);
@@ -161,9 +160,10 @@ impl Wheel {
             back(c, w);
             g.hints_centered(c, cx, hint_y, &items);
         } else {
-            let s = "Move mouse to select, release to equip";
-            back(c, s.len() as f32 * 8.0);
-            c.string(cx - s.len() as f32 * 4.0, hint_y + 1.0, s);
+            let s = qcore::t!("Move mouse to select, release to equip");
+            let w = c.ptext_w(s);
+            back(c, w);
+            c.ptext(cx - w / 2.0, hint_y + 1.0, s, crate::draw::WHITE);
         }
     }
 }

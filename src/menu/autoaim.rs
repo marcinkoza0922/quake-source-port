@@ -49,7 +49,7 @@ impl Menu {
         c.fill(90.0, 160.0, 460.0, 92.0, [0.04, 0.04, 0.04, 1.0]);
         c.frame(90.0, 160.0, 460.0, 92.0, BORDER);
         let keys = self.autoaim_conflicts.iter().map(|&k| keynum_to_string(k)).collect::<Vec<_>>().join(" / ");
-        c.text_center(320.0, 172.0, &format!("{keys} already assigned"), TXT, FG);
+        c.text_center(320.0, 172.0, &qcore::tr!("{} already assigned", keys), TXT, FG);
         c.text_center(320.0, 194.0, "Open Controls to remap Lock-on?", TXT, FG);
         c.text_center(270.0, 226.0, "Yes", TXT, if self.autoaim_yes { GOLD_FG } else { MUTED });
         c.text_center(370.0, 226.0, "No", TXT, if self.autoaim_yes { MUTED } else { GOLD_FG });

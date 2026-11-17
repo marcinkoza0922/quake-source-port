@@ -15,10 +15,10 @@ pub(super) fn register_commands(c: &mut Commands<Host>) {
         {
             h.cbuf.insert_text("_paddefaults_merge\n");
             h.cbuf.insert_text(&t);
-            h.print(&format!("execing config.cfg (inherited from {g})\n"));
+            h.print(&qcore::ctr!("execing config.cfg (inherited from {})\n", g));
             if let Some(d) = h.fs().open(name).filter(|_| h.fs().origin(name).is_some_and(|o| o.game.eq_ignore_ascii_case(h.game_name()))) {
                 h.cbuf.insert_text(&String::from_utf8_lossy(&d));
-                h.print("execing config.cfg (mod defaults)\n");
+                h.print(&qcore::ctr!("execing config.cfg (mod defaults)\n"));
             }
             return;
         }
@@ -31,14 +31,14 @@ pub(super) fn register_commands(c: &mut Commands<Host>) {
                     h.cbuf.insert_text("_paddefaults_merge\n");
                 }
                 h.cbuf.insert_text(&t);
-                h.print(&format!("execing {name}\n"));
+                h.print(&qcore::ctr!("execing {}\n", name));
             }
             None if name.eq_ignore_ascii_case("default.cfg") => {
                 h.cbuf.insert_text(PAD_DEFAULTS);
                 h.cbuf.insert_text(DEFAULT_CFG);
-                h.print("execing default.cfg (built-in)\n");
+                h.print(&qcore::ctr!("execing default.cfg (built-in)\n"));
             }
-            None => h.print(&format!("couldn't exec {name}\n")),
+            None => h.print(&qcore::ctr!("couldn't exec {}\n", name)),
         }
     });
     c.add("hitfeedback_preview", |h, a| {
@@ -104,7 +104,7 @@ pub(super) fn register_commands(c: &mut Commands<Host>) {
         for s in l {
             h.print(&s);
         }
-        h.print(&format!("{n} cvars\n"));
+        h.print(&qcore::ctr!("{} cvars\n", n));
     });
     c.add("cmdlist", |h, a| {
         let mut l: Vec<String> = h.cmds.complete(a.argv(1)).into_iter().map(str::to_string).collect();
@@ -113,7 +113,7 @@ pub(super) fn register_commands(c: &mut Commands<Host>) {
         for s in &l {
             h.print(&format!("   {s}\n"));
         }
-        h.print(&format!("{} commands\n", l.len()));
+        h.print(&qcore::ctr!("{} commands\n", l.len()));
     });
     c.add("quit", |h, _| h.quit = true);
     c.add("r_visibility", |h, a| {
@@ -390,7 +390,7 @@ pub(super) fn register_commands(c: &mut Commands<Host>) {
     // Cmd_ForwardToServer_f.
     c.add("cmd", |h, a| {
         if !h.remote() && h.local.is_none() {
-            h.print("Can't \"cmd\", not connected\n");
+            h.print(&qcore::ctr!("Can't \"cmd\", not connected\n"));
             return;
         }
         if a.args().trim() == "pext" {
@@ -442,7 +442,7 @@ pub(super) fn register_commands(c: &mut Commands<Host>) {
         }
         match crate::net::LanSearch::start(h.net_port, h.realtime) {
             Ok(ls) => {
-                h.print("Looking for Quake servers...\n");
+                h.print(&qcore::ctr!("Looking for Quake servers...\n"));
                 h.lan_search = Some(ls);
                 h.menu.servers.clear();
                 h.menu.searching = true;
@@ -468,14 +468,14 @@ pub(super) fn register_commands(c: &mut Commands<Host>) {
                     n.shutdown(&mut h.server, h.realtime);
                 }
             }
-            _ => h.print("Bad value, must be between 1 and 65534\n"),
+            _ => h.print(&qcore::ctr!("Bad value, must be between 1 and 65534\n")),
         }
     });
     c.add("music", |h, a| {
         if let Some(s) = &mut h.snd
             && !s.play_music(a.argv(1), true)
         {
-            h.con.print(&format!("Couldn't handle music file {}\n", a.argv(1)));
+            h.con.print(&qcore::ctr!("Couldn't handle music file {}\n", a.argv(1)));
         }
     });
     c.add("music_stop", |h, _| {

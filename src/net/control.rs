@@ -34,7 +34,7 @@ impl NetServer {
                     return self.reply(from, Ccrep::Reject { reason: "Server is not running.\n".into() });
                 }
                 sv.core.clients[slot].max_datagram = qserver::msg::DATAGRAM_MTU;
-                sv.core.print(&format!("Client {from} connected\n"));
+                sv.core.print(&qcore::ctr!("Client {} connected\n", from));
                 self.remotes.push(Remote { addr: from, slot, conn: Connection::new(), connect_time: now, last_send: now, closing: None });
                 self.reply(from, Ccrep::Accept { port });
             }

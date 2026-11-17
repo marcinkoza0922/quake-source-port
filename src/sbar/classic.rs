@@ -144,28 +144,29 @@ impl<'a, 'b> Sbar<'a, 'b> {
         // Row 1: level name centered across the 320px scorebar so long names
         // never collide with the kills/secrets counters.
         let name: String = cl.levelname.chars().take(38).collect();
-        let nx = (160.0 - name.len() as f32 * 4.0).max(8.0);
+        let nx = (160.0 - self.c.string_w(&name) / 2.0).max(8.0);
         self.draw_string(nx, 4.0, &name);
 
         // Row 2: Kills on the left, Secrets on the right, Time in the gap between.
-        let kills = format!("Kills: {}/{}", st[STAT_MONSTERS], st[STAT_TOTALMONSTERS]);
-        let secrets = format!("Secrets: {}/{}", st[STAT_SECRETS], st[STAT_TOTALSECRETS]);
+        let kills = qcore::qtr!("Kills: {}/{}", st[STAT_MONSTERS], st[STAT_TOTALMONSTERS]);
+        let secrets = qcore::qtr!("Secrets: {}/{}", st[STAT_SECRETS], st[STAT_TOTALSECRETS]);
         self.draw_string(8.0, 12.0, &kills);
-        let right = 312.0 - secrets.len() as f32 * 8.0;
+        let right = 312.0 - self.c.string_w(&secrets);
         self.draw_string(right, 12.0, &secrets);
 
-        let left = 8.0 + kills.len() as f32 * 8.0;
+        let left = 8.0 + self.c.string_w(&kills);
         let t = cl.time as i32;
         let (m, s) = (t / 60, t % 60);
-        let long_t = format!("Time {m}:{s:02}");
         let short_t = format!("{m}:{s:02}");
-        let t_str = if long_t.len() as f32 * 8.0 + 8.0 <= right - left {
+        let long_t = qcore::qtr!("Time {}", short_t);
+        let t_str = if self.c.string_w(&long_t) + 8.0 <= right - left {
             long_t
         } else {
             short_t
         };
-        let tx = ((left + right) / 2.0 - t_str.len() as f32 * 4.0).floor();
-        if tx >= left + 4.0 && tx + t_str.len() as f32 * 8.0 <= right - 4.0 {
+        let tw = self.c.string_w(&t_str);
+        let tx = ((left + right) / 2.0 - tw / 2.0).floor();
+        if tx >= left + 4.0 && tx + tw <= right - 4.0 {
             self.draw_string(tx, 12.0, &t_str);
         }
     }

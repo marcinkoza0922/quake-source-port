@@ -118,7 +118,7 @@ pub(crate) fn preview(c: &mut Canvas, cv: &Cvars) {
     c.frame(x, y, w, h, crate::menu::BORDER);
     c.text_center(x + w * 0.25, y + 8.0, "Crosshair", 8.0, crate::menu::GOLD_FG);
     c.text_center(x + w * 0.75, y + 8.0, "+ Marker", 8.0, crate::menu::GOLD_FG);
-    for (row, (label, target, kill)) in [("Normal", false, false), ("On target", true, false), ("On kill", false, true)].into_iter().enumerate() {
+    for (row, (label, target, kill)) in [(qcore::t!("Normal"), false, false), (qcore::t!("On target"), true, false), (qcore::t!("On kill"), false, true)].into_iter().enumerate() {
         let top = y + 26.0 + row as f32 * 76.0;
         c.text_center(x + w * 0.5, top, label, 8.0, crate::menu::FG);
         let tint = color(cv, target, kill);
