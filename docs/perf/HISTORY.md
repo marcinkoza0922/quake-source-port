@@ -1,4 +1,8 @@
-# Performance optimisation plan
+# Performance optimisation plan (2026-11-13 – 2026-11-16, superseded)
+
+Superseded on 2026-11-17 by the two-part plan in [README.md](README.md).
+Kept for its results log and the reasoning behind items 1–23. Open items
+are carried over in the new plan; re-baseline them there before acting.
 
 Findings from the `qprof` suite (2026-11-13, 1280×720 headless, RTX 3060 Ti,
 single runs; noise about ±150 µs/frame). Function shares are of engine CPU

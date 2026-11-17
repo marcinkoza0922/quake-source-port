@@ -12,6 +12,13 @@ ironwail 3354; ad_tears about 3050–3150 vs 2816 (DESIGN.md, M7). Frames are
 **CPU-bound**: the GPU is busy about 180 µs of a 310 µs frame, and resolution
 barely changes fps. Look at CPU work first.
 
+The plan lives in `docs/perf/`: `README.md` (shared rules, 540p/4K
+resolutions, retooling steps R1–R8), `VANILLA.md` (Part 1: vanilla ultra
+vs ironwail/vkQuake, visual parity), `ADDITIONS.md` (Part 2: our
+enhancements, portal gun, gels, split-screen), `HISTORY.md` (the old
+plan and its results log). The tool descriptions below reflect the
+tools before retooling; update them as R1–R8 land.
+
 ## Pick the right measurement
 
 | Question | Tool |
