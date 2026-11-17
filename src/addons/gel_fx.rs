@@ -157,10 +157,11 @@ impl GelFx {
         let firing = self.spraying.get(owner).is_some_and(|&t| time - t < 0.15);
         let shake = if firing { (time as f32 * 60.0).sin() * 0.25 } else { 0.0 };
         let bob = (time as f32 * 2.5).sin() * 0.15;
-        let (f, rt, u) = angle_vectors(view.angles.into());
-        let origin = (Vec3::from(view.origin) + f * (24.0 + shake) + rt * 0.0 - u * (21.0 + bob)).to_array();
-        // muzzle tipped up a little so the nozzle shows past the canisters
-        let angles = [-view.angles[0] - 7.0, view.angles[1], view.angles[2]];
+        let (f, _, u) = angle_vectors(view.angles.into());
+        // low and level, looking down past the canisters along the barrel;
+        // the stock reaches back past the near plane
+        let origin = (Vec3::from(view.origin) + f * (18.5 + shake) - u * (11.5 + bob)).to_array();
+        let angles = [-view.angles[0], view.angles[1], view.angles[2]];
         Some(RenderEntity { model: id, origin, angles, viewmodel: true, ..Default::default() })
     }
 
