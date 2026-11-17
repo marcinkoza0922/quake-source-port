@@ -56,6 +56,10 @@ pub struct RunSpec<'a> {
     pub display: Display,
     /// Record a MangoHud frame log of the demo.
     pub mangohud: bool,
+    /// Cold start: the NVIDIA driver's shader disk cache off
+    /// (`__GL_SHADER_DISK_CACHE=0`, GL and Vulkan); neither ours nor vkQuake
+    /// keeps a pipeline cache of its own.
+    pub cold: bool,
     /// Engine settings (`+cvar value` pairs) after [`Engine::base_args`].
     pub args: Vec<String>,
     /// Console lines written to `<game>/perfkit/<run>.cfg` in the sandbox
@@ -137,6 +141,9 @@ fn run_argv(spec: &RunSpec, argv: &[String], control: &str) -> Result<RunResult,
         .stdin(Stdio::null())
         .stdout(Stdio::piped())
         .stderr(Stdio::piped());
+    if spec.cold {
+        cmd.env("__GL_SHADER_DISK_CACHE", "0");
+    }
     if let Some(u) = spec.user_data {
         cmd.env("XDG_DATA_HOME", u);
     }
@@ -270,7 +277,7 @@ mod tests {
             let spec = RunSpec {
                 engine: e, bin: Path::new("/home/someone/Games/vkQuake/vkquake.AppImage"), base: Path::new("."),
                 user_data: None, game: "func_mapjam5", width: 3840, height: 2160,
-                display: Display::Gamescope { out_w: 2560, out_h: 1440 }, mangohud: true, args, cfg,
+                display: Display::Gamescope { out_w: 2560, out_h: 1440 }, mangohud: true, cold: false, args, cfg,
                 timedemo: "perfkit/spin-sepulcher-fte-full", timeout: Duration::from_secs(1), out: &out,
             };
             let argv = spec.argv(&format!("perfkit/r{}.cfg", u32::MAX));
@@ -293,6 +300,7 @@ mod tests {
             height: 540,
             display: Display::Gamescope { out_w: 2560, out_h: 1440 },
             mangohud: true,
+            cold: false,
             args: vec!["+vid_fsaa".into(), "8".into()],
             cfg: vec!["r_dynamic \"1\"".into()],
             timedemo: "perfkit/x",

@@ -153,7 +153,7 @@ fn calibrate(o: &Opts) {
         let (args, cfg) = o.profile.map(|p| settings::split(p, c.engine)).unwrap_or_default();
         let spec = RunSpec {
             engine: c.engine, bin, base: &sandbox.dir, user_data: Some(&sandbox.userdata), game: &o.game,
-            width: c.res.0, height: c.res.1, display: c.display, mangohud: c.mangohud,
+            width: c.res.0, height: c.res.1, display: c.display, mangohud: c.mangohud, cold: false,
             args, cfg, timedemo: &demo, timeout: Duration::from_secs(o.timeout), out: &out,
         };
         runner::run(&spec)

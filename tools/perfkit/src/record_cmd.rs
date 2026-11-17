@@ -137,7 +137,7 @@ fn verify(o: &Opts, s: &Scene, r: &Recorded, sb: &Sandbox, root: &Path, out: &Pa
         let run_out = out.join("verify").join(format!("{}-{}", s.name, e.name()));
         let spec = RunSpec {
             engine: e, bin: &bin, base: &sb.dir, user_data: Some(&sb.userdata), game: s.game, width: 960, height: 540,
-            display: Display::Window, mangohud: false, args, cfg, timedemo: &demo,
+            display: Display::Window, mangohud: false, cold: false, args, cfg, timedemo: &demo,
             timeout: Duration::from_secs(o.timeout), out: &run_out,
         };
         match runner::run(&spec) {

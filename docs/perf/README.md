@@ -138,10 +138,15 @@ scene list, runner, baselines, report schema) goes in a small library crate
   `sv_fteparticles` (not the client's `r_fteparticles`) decides what AD
   shows; without FTE, AD sends classic particle messages every frame
   (`spin-sepulcher.dem` is 134 MB against 12.5 MB with FTE).
-- **R4. qbench → Part 1.** All demos × both resolutions × three engines,
-  medians and percentiles, plus the particle suite and the cold-start pass.
-  `report.json` gains machine info, resolution and percentiles; update the
-  `compare_qbench` tool in `tools/qmcp` for the new schema.
+- **R4. qbench → Part 1 — tool done 2026-11-17.** qbench now runs on
+  perfkit (DESIGN.md, Tooling): `main` and `fte` suites, 540p window and
+  4K gamescope, cold-start + warm-up + interleaved fps and MangoHud
+  rounds, `report.{json,md}` with machine header, percentiles and cold
+  hitches; `compare_qbench` (qmcp) reads both report formats, keys Part 1
+  cells by scene/profile/engine/resolution, and reports p99 change and
+  machine differences. The r_partinfo particle-count check between ours
+  and vkQuake (FTE suite) is still manual. First full results:
+  [VANILLA.md](VANILLA.md#results).
 - **R5. Parity stills.** Fixed camera positions captured in all three
   engines and compared with a perceptual metric plus an HTML side-by-side
   gallery (VANILLA.md, Visual parity).

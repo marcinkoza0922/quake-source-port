@@ -6,18 +6,17 @@ description: Measure and improve frame-time performance of this Quake port again
 # Performance work
 
 Target (PROPOSAL): within spitting distance of ironwail/vkQuake, ideally
-faster. AD's large maps (ad_sepulcher, ad_tears) are the yardstick. Last
-recorded numbers at 1280×720 on an RTX 3060 Ti: ad_sepulcher 3252 fps vs
-ironwail 3354; ad_tears about 3050–3150 vs 2816 (DESIGN.md, M7). Frames are
-**CPU-bound**: the GPU is busy about 180 µs of a 310 µs frame, and resolution
-barely changes fps. Look at CPU work first.
+faster. Current parity numbers are in `docs/perf/VANILLA.md` (Results);
+the 1280×720 MSAA-off numbers in DESIGN.md (M7) predate Part 1 and aren't
+comparable. At 540p frames are CPU-bound; at 4K with 8× MSAA the GPU
+matters. qbench measures both.
 
 The plan lives in `docs/perf/`: `README.md` (shared rules, 540p/4K
 resolutions, retooling steps R1–R8), `VANILLA.md` (Part 1: vanilla ultra
 vs ironwail/vkQuake, visual parity), `ADDITIONS.md` (Part 2: our
 enhancements, portal gun, gels, split-screen), `HISTORY.md` (the old
-plan and its results log). The tool descriptions below reflect the
-tools before retooling; update them as R1–R8 land.
+plan and its results log). qbench below is retooled (R1–R4); qprof is
+not yet (R6).
 
 ## Pick the right measurement
 
@@ -32,20 +31,20 @@ tools before retooling; update them as R1–R8 land.
 
 ```sh
 cargo build --release
-target/release/qbench                                   # ad_sepulcher ad_tears, ours+ironwail+vkquake, 3 runs
-target/release/qbench -game ad -runs 3 -secs 24 -width 1280 -height 720 -engines ours,ironwail ad_tears
+target/release/perfkit record -verify          # demo set → target/perf/demos/latest (once per engine change)
+target/release/qbench                          # full Part 1: both suites, 540p + 4K, ~1–1.5 h
+target/release/qbench -only spin-e1m1 -res 540 -runs 3 -mhruns 0 -nocold   # quick check
 ```
 
-It records the demo headless with our engine (god, 30°/s spin at the spawn
-point) into `target/qbench/demos`, builds a sandbox base dir in
-`target/qbench/base`, and runs each engine with
-`-window +vid_vsync 0 <pinned settings> +timedemo qbench/<map>`: MSAA off,
-8× anisotropy, render scale 1, each in that engine's cvar names. Then it
-reads the fps line and kills the process group. Medians go to
-`target/qbench/report.json`. `-rerecord` re-makes the demo. ironwail is
-extracted from `<basedir>/ironwail-*-linux-x64.7z` on first use; vkQuake is
-`<basedir>/vkquake.AppImage`. It needs the user's display, so tell them
-before you run it.
+qbench plays `perfkit record`'s demos in every engine with the
+"vanilla ultra" pins (`perfkit settings`), 960×540 in a window and
+3840×2160 in gamescope, and writes `target/qbench/report.{md,json}`
+(fps median/min/max, p99 from MangoHud runs, cold-start hitches). Our
+engine runs with `XDG_DATA_HOME` in the sandbox, so it never touches the
+user's configs or saves. Compare two reports with the `compare_qbench`
+MCP tool. It opens windows (4K ones fill the screen) for the whole run,
+so tell the user before running it. Details: DESIGN.md (Tooling: perfkit,
+qbench) and `docs/perf/`.
 
 ### Headless timedemo (quick A/B, no window)
 

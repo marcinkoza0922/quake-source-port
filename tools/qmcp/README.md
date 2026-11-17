@@ -49,11 +49,14 @@ or `KEY==value` (exact). Map queries accept qdata mount lists such as
 qbot comparison reports lost kills/secrets/events/exits, missing/added maps,
 new failed goals/errors and developer log lines. It strips qbot timestamp/count
 prefixes before comparing against baseline logs. It never updates baselines.
-qbench comparison matches game/map/engine/resolution and reports FPS change,
+qbench comparison matches scene/profile/engine/resolution for Part 1 reports
+(an object with `machine`, `demo_set` and `cells`; old flat-array reports by
+game/map/engine/resolution) and reports FPS change, frame-time change, p99
 frame-time change, raw runs, missing cases and failed measurements. A positive
 frame-time change means slower. Missing cases are explicitly incomplete and
-flag `has_regressions`. Reports do not record every graphics setting or GPU;
-check equivalent workloads before attributing performance differences.
+flag `has_regressions`. Part 1 reports also list which machine fields differ
+(`machine_differs`) and both demo sets; check they match before attributing
+performance differences.
 
 Capture needs `cargo build --release` and a working Vulkan driver. It uses
 current graphics settings, disables autosaves, enables god/notarget, optionally

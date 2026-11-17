@@ -1,78 +1,69 @@
-//! qbench: timedemo fps comparison against ironwail and vkQuake.
+//! qbench: Part 1 of the performance plan (`docs/perf/VANILLA.md`), our
+//! engine against ironwail and vkQuake at "vanilla ultra" settings.
 //!
-//! Each engine gets the same GPU-relevant settings on the command line
-//! (MSAA off, 8x anisotropy, render scale 1; see `settings`).
+//! Usage: qbench [-suite main|fte|all] [-only scene,...] [-engines ours,...]
+//!               [-res 540,4k] [-runs N] [-mhruns N] [-nocold]
+//!               [-output 2560x1440] [-timeout SECS] [-basedir DIR]
 //!
-//! Usage: qbench [-basedir <dir>] [-game <dir>] [-width W] [-height H]
-//!               [-runs N] [-secs S] [-engines ours,ironwail,vkquake]
-//!               [-rerecord] [map ...]
+//! Plays the demo set recorded by `perfkit record` (target/perf/demos/latest)
+//! through the perfkit runner:
+//! - `main`: six scenes, profile `ultra` (classic particles), all engines;
+//! - `fte`: `spin-sepulcher-fte` (ours and vkQuake play the `.qsd` with
+//!   AD's FTE particles, ironwail the plain `.dem`) and `combat-e1m3`
+//!   (ours and vkQuake), profile `ultra-fte`.
 //!
-//! For each map (default: ad_sepulcher ad_tears with -game ad):
-//! 1. Record a benchmark demo with our engine, headless: god mode, a slow
-//!    360° spin from the spawn point for `-secs` seconds. Cached in
-//!    `target/qbench/demos/<game>_<map>.dem` (`-rerecord` to redo).
-//! 2. Build `target/qbench/base`: symlinks to id1 and the game's files, plus
-//!    `<game>/qbench/<map>.dem`, so the game data dir is never written to.
-//! 3. Run `timedemo qbench/<map>` windowed in each engine (cwd = that base,
-//!    `-basedir .`), read the "N frames S seconds F fps" line from stdout and
-//!    kill the process (the references don't quit after a timedemo).
-//!
-//! The median of `-runs` runs per engine goes to stdout and
-//! `target/qbench/report.json`. ironwail is extracted from the basedir's
-//! `ironwail-*-linux-x64.7z` into `target/refengines` on first use; vkQuake
-//! is `<basedir>/vkquake.AppImage`.
+//! Resolutions: 960×540 in a plain window (CPU-bound) and 3840×2160 inside
+//! gamescope scaled to `-output` (GPU-bound). Per scene and engine: a
+//! cold-start run with the driver's shader cache off (MangoHud, worst
+//! frames), one warm-up, then `-runs` fps runs without MangoHud and
+//! `-mhruns` with it for frame-time percentiles, interleaved in rounds.
+//! Results: target/qbench/report.{json,md}, per-run logs in target/qbench/runs.
 
-use std::io::{BufRead, BufReader};
+mod report;
+
+use perfkit::engine::{abs, Engine};
+use perfkit::guard::ConfigGuard;
+use perfkit::machine::Machine;
+use perfkit::runner::{self, Display, RunResult, RunSpec};
+use perfkit::sandbox::Sandbox;
+use perfkit::scenes::{self, Scene};
+use perfkit::settings::{self, Profile};
+use std::collections::BTreeMap;
 use std::path::{Path, PathBuf};
-use std::process::{Command, Stdio};
-use std::time::{Duration, Instant};
+use std::time::Duration;
 
-struct Opts {
+pub struct Opts {
     basedir: PathBuf,
-    game: String,
-    width: u32,
-    height: u32,
+    suites: Vec<&'static str>,
+    only: Vec<String>,
+    engines: Vec<Engine>,
+    res: Vec<Res>,
     runs: usize,
-    secs: u32,
-    engines: Vec<String>,
-    rerecord: bool,
-    maps: Vec<String>,
+    mhruns: usize,
+    cold: bool,
+    output: (u32, u32),
+    timeout: u64,
 }
 
-fn parse_args() -> Opts {
-    let mut o = Opts {
-        basedir: std::env::var_os("QUAKE_BASEDIR")
-            .map(PathBuf::from)
-            .unwrap_or_else(|| PathBuf::from("vkQuake directory with maps")),
-        game: "ad".into(),
-        width: 1280,
-        height: 720,
-        runs: 3,
-        secs: 24,
-        engines: vec!["ours".into(), "ironwail".into(), "vkquake".into()],
-        rerecord: false,
-        maps: Vec::new(),
-    };
-    let mut it = std::env::args().skip(1);
-    while let Some(a) = it.next() {
-        let mut v = || it.next().unwrap_or_else(|| die(&format!("{a} needs a value")));
-        match a.as_str() {
-            "-basedir" => o.basedir = v().into(),
-            "-game" => o.game = v(),
-            "-width" => o.width = v().parse().unwrap_or(o.width),
-            "-height" => o.height = v().parse().unwrap_or(o.height),
-            "-runs" => o.runs = v().parse::<usize>().unwrap_or(3).max(1),
-            "-secs" => o.secs = v().parse().unwrap_or(o.secs),
-            "-engines" => o.engines = v().split(',').map(str::to_string).collect(),
-            "-rerecord" => o.rerecord = true,
-            m if !m.starts_with('-') => o.maps.push(m.to_string()),
-            _ => die(&format!("unknown option {a}")),
+#[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Debug)]
+pub enum Res {
+    P540,
+    K4,
+}
+
+impl Res {
+    pub fn size(self) -> (u32, u32) {
+        match self {
+            Res::P540 => (960, 540),
+            Res::K4 => (3840, 2160),
         }
     }
-    if o.maps.is_empty() {
-        o.maps = if o.game == "ad" { vec!["ad_sepulcher".into(), "ad_tears".into()] } else { vec!["start".into()] };
+    fn display(self, output: (u32, u32)) -> Display {
+        match self {
+            Res::P540 => Display::Window,
+            Res::K4 => Display::Gamescope { out_w: output.0, out_h: output.1 },
+        }
     }
-    o
 }
 
 fn die(m: &str) -> ! {
@@ -80,234 +71,234 @@ fn die(m: &str) -> ! {
     std::process::exit(2)
 }
 
-/// "1500 frames   5.4 seconds 278.2 fps" -> (frames, secs, fps).
-fn parse_fps(line: &str) -> Option<(u32, f64, f64)> {
-    let w: Vec<&str> = line.split_whitespace().collect();
-    let i = w.iter().position(|s| *s == "frames")?;
-    if w.get(i + 2) != Some(&"seconds") || w.get(i + 4) != Some(&"fps") {
-        return None;
-    }
-    Some((w[i - 1].parse().ok()?, w[i + 1].parse().ok()?, w[i + 3].parse().ok()?))
-}
-
-fn abs(p: &Path) -> PathBuf {
-    std::fs::canonicalize(p).unwrap_or_else(|_| p.to_path_buf())
-}
-
-fn user_dir(game: &str) -> PathBuf {
-    let root = std::env::var_os("XDG_DATA_HOME")
-        .map(PathBuf::from)
-        .or_else(|| std::env::var_os("HOME").map(|h| PathBuf::from(h).join(".local/share")))
-        .unwrap_or_else(|| PathBuf::from("."));
-    root.join("quake-source-port").join(game.to_ascii_lowercase())
-}
-
-/// Record the benchmark demo with our engine (headless, simulated time).
-fn record(o: &Opts, ours: &Path, map: &str, out: &Path) -> bool {
-    let name = format!("qbench_{map}");
-    let st = Command::new(ours)
-        .args(["-basedir"]).arg(&o.basedir)
-        .args(["-headless", "-game", &o.game, "-autoquit", &(o.secs + 3).to_string()])
-        .arg(format!("+record {name} {map}"))
-        .args(["+god", "+cl_yawspeed 30", "+\"+right\""])
-        .arg(format!("+delay {} stop", o.secs))
-        .stdout(Stdio::null())
-        .stderr(Stdio::null())
-        .status();
-    let src = user_dir(&o.game).join(format!("{name}.dem"));
-    if !st.is_ok_and(|s| s.success()) || !src.is_file() {
-        return false;
-    }
-    std::fs::rename(&src, out).or_else(|_| std::fs::copy(&src, out).map(|_| ())).is_ok()
-}
-
-/// target/qbench/base: id1 + game as symlinks, demos as real files.
-fn build_base(o: &Opts, base: &Path) -> std::io::Result<()> {
-    let src = abs(&o.basedir);
-    std::fs::create_dir_all(base.join(&o.game).join("qbench"))?;
-    let link = |from: PathBuf, to: PathBuf| -> std::io::Result<()> {
-        if to.symlink_metadata().is_err() {
-            std::os::unix::fs::symlink(from, to)?;
-        }
-        Ok(())
+fn parse_args() -> Opts {
+    let mut o = Opts {
+        basedir: std::env::var_os("QUAKE_BASEDIR").map(PathBuf::from).unwrap_or_else(|| "vkQuake directory with maps".into()),
+        suites: vec!["main", "fte"],
+        only: Vec::new(),
+        engines: Engine::ALL.to_vec(),
+        res: vec![Res::P540, Res::K4],
+        runs: 3,
+        mhruns: 1,
+        cold: true,
+        output: (2560, 1440),
+        timeout: 180,
     };
-    link(src.join("id1"), base.join("id1"))?;
-    if o.game != "id1" {
-        for e in std::fs::read_dir(src.join(&o.game))? {
-            let e = e?;
-            link(e.path(), base.join(&o.game).join(e.file_name()))?;
+    let mut it = std::env::args().skip(1);
+    while let Some(a) = it.next() {
+        let mut v = || it.next().unwrap_or_else(|| die(&format!("{a} needs a value")));
+        match a.as_str() {
+            "-basedir" => o.basedir = v().into(),
+            "-suite" => {
+                o.suites = match v().as_str() {
+                    "main" => vec!["main"],
+                    "fte" => vec!["fte"],
+                    "all" => vec!["main", "fte"],
+                    s => die(&format!("unknown suite {s}")),
+                }
+            }
+            "-only" => o.only = v().split(',').map(String::from).collect(),
+            "-engines" => o.engines = Engine::parse_list(&v()).unwrap_or_else(|e| die(&e)),
+            "-res" => {
+                o.res = v()
+                    .split(',')
+                    .map(|r| match r {
+                        "540" | "540p" => Res::P540,
+                        "4k" | "2160" | "2160p" => Res::K4,
+                        _ => die(&format!("unknown resolution {r} (540 or 4k)")),
+                    })
+                    .collect()
+            }
+            "-runs" => o.runs = v().parse().unwrap_or_else(|_| die("bad -runs")),
+            "-mhruns" => o.mhruns = v().parse().unwrap_or_else(|_| die("bad -mhruns")),
+            "-nocold" => o.cold = false,
+            "-output" => {
+                let s = v();
+                o.output = s
+                    .split_once('x')
+                    .and_then(|(w, h)| Some((w.parse().ok()?, h.parse().ok()?)))
+                    .unwrap_or_else(|| die("bad -output"))
+            }
+            "-timeout" => o.timeout = v().parse().unwrap_or_else(|_| die("bad -timeout")),
+            _ => die(&format!("unknown option {a}")),
         }
     }
-    Ok(())
+    o
 }
 
-fn ironwail(o: &Opts, refdir: &Path) -> Option<PathBuf> {
-    let find = || {
-        std::fs::read_dir(refdir).ok()?.flatten().map(|e| e.path().join("ironwail")).find(|p| p.is_file())
-    };
-    if let Some(p) = find() {
-        return Some(p);
-    }
-    let arc = std::fs::read_dir(&o.basedir).ok()?.flatten().map(|e| e.path()).find(|p| {
-        let n = p.file_name().unwrap_or_default().to_string_lossy();
-        n.starts_with("ironwail-") && n.ends_with("-linux-x64.7z")
-    })?;
-    std::fs::create_dir_all(refdir).ok()?;
-    let ok = Command::new("7z").arg("x").arg("-y").arg(format!("-o{}", refdir.display())).arg(abs(&arc))
-        .stdout(Stdio::null()).status().is_ok_and(|s| s.success());
-    if ok { find() } else { None }
+/// One scene played with one profile by some engines.
+pub struct Case {
+    pub suite: &'static str,
+    pub scene: &'static Scene,
+    pub profile: Profile,
+    pub engines: Vec<Engine>,
 }
 
-/// Read lines until a timedemo result appears; keeps draining afterwards so
-/// the engine never blocks on a full pipe.
-fn scan(out: Box<dyn std::io::Read + Send>, tx: std::sync::mpsc::Sender<(u32, f64, f64)>) {
-    let mut r = BufReader::new(out);
-    let mut buf = Vec::new();
-    while r.read_until(b'\n', &mut buf).is_ok_and(|n| n > 0) {
-        if let Some(v) = parse_fps(&String::from_utf8_lossy(&buf)) {
-            let _ = tx.send(v);
+fn cases(o: &Opts) -> Vec<Case> {
+    let scene = |n| scenes::find(n).expect("scene in catalogue");
+    let mut v = Vec::new();
+    if o.suites.contains(&"main") {
+        for n in ["spin-e1m1", "spin-e2m2", "spin-mg1", "spin-sepulcher", "spin-tears", "combat-e1m3"] {
+            v.push(Case { suite: "main", scene: scene(n), profile: Profile::Ultra, engines: Engine::ALL.to_vec() });
         }
-        buf.clear();
     }
+    if o.suites.contains(&"fte") {
+        v.push(Case { suite: "fte", scene: scene("spin-sepulcher-fte"), profile: Profile::UltraFte, engines: Engine::ALL.to_vec() });
+        // ironwail would repeat its main-suite run: it has no FTE particles.
+        v.push(Case { suite: "fte", scene: scene("combat-e1m3"), profile: Profile::UltraFte, engines: vec![Engine::Ours, Engine::VkQuake] });
+    }
+    v.retain(|c| o.only.is_empty() || o.only.iter().any(|n| n == c.scene.name));
+    for c in &mut v {
+        c.engines.retain(|e| o.engines.contains(e));
+    }
+    v
 }
 
-/// Pins the settings that cost GPU time to the same values in every engine
-/// (otherwise each uses its saved config): no MSAA, 8x anisotropy, full
-/// render scale.
-fn settings(bin: &Path) -> Vec<&'static str> {
-    let name = bin.file_name().unwrap_or_default().to_string_lossy().to_ascii_lowercase();
-    if name.contains("ironwail") {
-        vec!["+vid_fsaa", "0", "+gl_texture_anisotropy", "8", "+r_scale", "1"]
-    } else if name.contains("vkquake") {
-        vec!["+vid_fsaa", "0", "+r_scale", "1"]
+/// Measurements of one (case, engine, resolution).
+#[derive(Default)]
+pub struct Cell {
+    pub file: &'static str,
+    pub frames: u32,
+    pub fps: Vec<f64>,
+    pub frame_ms: Vec<Vec<f32>>,
+    pub cold: Option<Vec<f32>>,
+    pub errors: Vec<String>,
+}
+
+/// Key: (case index, engine, resolution).
+pub type Cells = BTreeMap<(usize, &'static str, Res), Cell>;
+
+/// The demo an engine plays for a case: the `.qsd` (with FTE particle
+/// messages) for ours and vkQuake under `ultra-fte` when there is one.
+fn demo_file(case: &Case, e: Engine, dir: &Path) -> (&'static str, PathBuf) {
+    let qsd = dir.join(format!("{}.qsd", case.scene.name));
+    if case.profile == Profile::UltraFte && e != Engine::Ironwail && qsd.is_file() {
+        ("full", qsd)
     } else {
-        vec!["+r_msaa", "0", "+r_anisotropy", "8", "+r_renderscale", "1"]
+        ("plain", dir.join(format!("{}.dem", case.scene.name)))
     }
 }
 
-/// One timedemo run; kills the engine once the fps line appears.
-fn run_timedemo(bin: &Path, o: &Opts, base: &Path, map: &str) -> Result<(u32, f64, f64), String> {
-    use std::os::unix::process::CommandExt;
-    // stdio in the C engines is block-buffered on a pipe, so the fps line
-    // would only arrive at exit: force line buffering. Own process group so
-    // the AppImage's child dies with it.
-    let mut child = Command::new("stdbuf")
-        .arg("-oL")
-        .arg(bin)
-        .process_group(0)
-        .current_dir(base)
-        .args(["-basedir", ".", "-game", &o.game, "-window"])
-        .args(["-width", &o.width.to_string(), "-height", &o.height.to_string()])
-        .args(["+vid_vsync", "0"])
-        .args(settings(bin))
-        .args(["+timedemo", &format!("qbench/{map}")])
-        .stdin(Stdio::null())
-        .stdout(Stdio::piped())
-        .stderr(Stdio::piped())
-        .spawn()
-        .map_err(|e| format!("spawn {}: {e}", bin.display()))?;
-    // Our engine prints the console to stderr, the references to stdout.
-    let (tx, rx) = std::sync::mpsc::channel();
-    let out: Box<dyn std::io::Read + Send> = Box::new(child.stdout.take().expect("piped"));
-    let err: Box<dyn std::io::Read + Send> = Box::new(child.stderr.take().expect("piped"));
-    for (out, tx) in [(out, tx.clone()), (err, tx)] {
-        std::thread::spawn(move || scan(out, tx));
+struct Ctx<'a> {
+    o: &'a Opts,
+    out: PathBuf,
+    refdir: PathBuf,
+}
+
+/// How one run is made.
+#[derive(Clone, Copy)]
+struct How<'a> {
+    res: Res,
+    mangohud: bool,
+    cold: bool,
+    label: &'a str,
+}
+
+impl Ctx<'_> {
+    fn run(&self, case: &Case, e: Engine, sb: &Sandbox, demo: &str, how: How) -> Result<RunResult, String> {
+        let bin = e.locate(&self.o.basedir, &self.refdir).ok_or("engine not found")?;
+        let (args, cfg) = settings::split(case.profile, e);
+        let (w, h) = how.res.size();
+        let tag = format!("{}-{}-{}-{}x{}-{}", case.scene.name, case.profile.name(), e.name(), w, h, how.label);
+        let out = self.out.join("runs").join(tag);
+        let spec = RunSpec {
+            engine: e, bin: &bin, base: &sb.dir, user_data: Some(&sb.userdata), game: case.scene.game, width: w, height: h,
+            display: how.res.display(self.o.output), mangohud: how.mangohud, cold: how.cold, args, cfg, timedemo: demo,
+            timeout: Duration::from_secs(self.o.timeout), out: &out,
+        };
+        runner::run(&spec)
     }
-    let deadline = Instant::now() + Duration::from_secs(o.secs as u64 * 10 + 60);
-    let res = loop {
-        if let Ok(v) = rx.recv_timeout(Duration::from_millis(200)) {
-            break Ok(v);
-        }
-        if let Ok(Some(s)) = child.try_wait() {
-            break rx.try_recv().map_err(|_| format!("exited ({s}) without a timedemo result"));
-        }
-        if Instant::now() > deadline {
-            break Err("timeout".into());
-        }
-    };
-    let _ = Command::new("kill").args(["-KILL", "--", &format!("-{}", child.id())]).status();
-    let _ = child.kill();
-    let _ = child.wait();
-    res
 }
 
 fn main() {
     let o = parse_args();
-    if !o.basedir.join("id1").is_dir() {
-        die(&format!("no id1 in {}", o.basedir.display()));
+    let demos = std::fs::canonicalize("target/perf/demos/latest").unwrap_or_else(|_| die("no target/perf/demos/latest: run `target/release/perfkit record -verify` first"));
+    let machine = Machine::detect();
+    for w in machine.warnings() {
+        eprintln!("qbench: warning: {w}");
     }
-    let root = PathBuf::from("target/qbench");
-    let base = root.join("base");
-    let demos = root.join("demos");
-    std::fs::create_dir_all(&demos).unwrap_or_else(|e| die(&e.to_string()));
-    build_base(&o, &base).unwrap_or_else(|e| die(&format!("base dir: {e}")));
-    let base = abs(&base);
-    let ours = abs(Path::new("target/release/quake-source-port"));
-    if !ours.is_file() {
-        die("target/release/quake-source-port missing (cargo build --release)");
-    }
-
-    let mut engines: Vec<(String, PathBuf)> = Vec::new();
-    for e in &o.engines {
-        let bin = match e.as_str() {
-            "ours" => Some(ours.clone()),
-            "ironwail" => ironwail(&o, &root.parent().unwrap_or(&root).join("refengines")).map(|p| abs(&p)),
-            "vkquake" => Some(abs(&o.basedir.join("vkquake.AppImage"))).filter(|p| p.is_file()),
-            _ => die(&format!("unknown engine {e}")),
-        };
-        match bin {
-            Some(b) => engines.push((e.clone(), b)),
-            None => eprintln!("qbench: {e} not found, skipped"),
+    let cases = cases(&o);
+    let runs_per = o.res.len() * (o.runs + o.mhruns) + if o.cold { 2 } else { 1 };
+    let total: usize = cases.iter().map(|c| c.engines.len() * runs_per).sum();
+    eprintln!("qbench: {} cases, {total} runs; windows open on the display for the whole run", cases.len());
+    let ctx = Ctx { o: &o, out: abs(Path::new("target/qbench")), refdir: abs(Path::new("target")).join("refengines") };
+    let _ = std::fs::remove_dir_all(ctx.out.join("runs"));
+    let root = PathBuf::from("target/perf");
+    let mut cells: Cells = BTreeMap::new();
+    let mut changed = Vec::new();
+    for (ci, case) in cases.iter().enumerate() {
+        let guard = ConfigGuard::for_game(&o.basedir, case.scene.game);
+        let sb = Sandbox::build(&o.basedir, &root, case.scene.game).unwrap_or_else(|e| die(&format!("sandbox: {e}")));
+        eprintln!("qbench: {} [{}] {}", case.scene.name, case.profile.name(), case.engines.iter().map(|e| e.name()).collect::<Vec<_>>().join(","));
+        let mut installed = BTreeMap::new();
+        for &e in &case.engines {
+            let (file, src) = demo_file(case, e, &demos);
+            let name = format!("{}-{file}", case.scene.name);
+            match sb.install_demo(case.scene.game, &name, &src) {
+                Ok(d) => {
+                    installed.insert(e.name(), d);
+                }
+                Err(err) => eprintln!("qbench:   {} demo {}: {err}", e.name(), src.display()),
+            }
+            for &r in &o.res {
+                cells.entry((ci, e.name(), r)).or_default().file = file;
+            }
         }
-    }
-
-    let mut json = String::from("[\n");
-    println!("{:<16} {:>10} {:>10} {:>10}", "map", "engine", "fps", "frames");
-    for map in &o.maps {
-        let dem = demos.join(format!("{}_{map}.dem", o.game));
-        if (o.rerecord || !dem.is_file()) && !record(&o, &ours, map, &dem) {
-            eprintln!("qbench: recording {map} failed");
-            continue;
-        }
-        let _ = std::fs::copy(&dem, base.join(&o.game).join("qbench").join(format!("{map}.dem")));
-        for (name, bin) in &engines {
-            let mut fps = Vec::new();
-            let mut frames = 0;
-            let mut err = None;
-            for _ in 0..o.runs {
-                match run_timedemo(bin, &o, &base, map) {
-                    Ok((f, _, v)) => {
-                        frames = f;
-                        fps.push(v);
+        let go = |e: Engine, how: How, cells: &mut Cells| {
+            let Some(demo) = installed.get(e.name()) else { return };
+            let res = ctx.run(case, e, &sb, demo, how);
+            let cell = cells.get_mut(&(ci, e.name(), how.res)).expect("cell");
+            let label = how.label;
+            match res {
+                Ok(run) if label == "warmup" => cell.frames = run.frames,
+                Ok(run) if how.cold => cell.cold = run.frame_ms,
+                Ok(run) => {
+                    cell.frames = run.frames;
+                    match run.frame_ms {
+                        Some(ms) => cell.frame_ms.push(ms),
+                        None => cell.fps.push(run.fps),
                     }
-                    Err(e) => err = Some(e),
+                }
+                Err(err) => {
+                    eprintln!("qbench:   {} {label} failed: {err}", e.name());
+                    cell.errors.push(format!("{label}: {err}"));
                 }
             }
-            fps.sort_by(f64::total_cmp);
-            let med = fps.get(fps.len() / 2).copied();
-            match med {
-                Some(m) => println!("{map:<16} {name:>10} {m:>10.1} {frames:>10}"),
-                None => println!("{map:<16} {name:>10} {:>10}", err.as_deref().unwrap_or("failed")),
+        };
+        for &e in &case.engines {
+            if o.cold {
+                go(e, How { res: Res::P540, mangohud: true, cold: true, label: "cold" }, &mut cells);
             }
-            if json.len() > 2 {
-                json.push_str(",\n");
+            go(e, How { res: Res::P540, mangohud: false, cold: false, label: "warmup" }, &mut cells);
+        }
+        for r in 0..o.runs.max(o.mhruns) {
+            for &res in &o.res {
+                for &e in &case.engines {
+                    if r < o.runs {
+                        go(e, How { res, mangohud: false, cold: false, label: &format!("fps{r}") }, &mut cells);
+                    }
+                    if r < o.mhruns {
+                        go(e, How { res, mangohud: true, cold: false, label: &format!("mh{r}") }, &mut cells);
+                    }
+                }
             }
-            json.push_str(&format!(
-                "  {{\"game\": \"{}\", \"map\": \"{map}\", \"engine\": \"{name}\", \"width\": {}, \"height\": {}, \
-                 \"frames\": {frames}, \"fps_median\": {}, \"runs\": {:?}}}",
-                o.game, o.width, o.height, med.map_or("null".into(), |m| format!("{m:.1}")), fps
-            ));
+        }
+        for (k, c) in cells.range((ci, "", Res::P540)..(ci + 1, "", Res::P540)) {
+            if let Some(m) = perfkit::stats::median(&c.fps) {
+                eprintln!("qbench:   {:<9} {:>4}  {m:>8.1} fps", k.1, if k.2 == Res::P540 { "540p" } else { "4k" });
+            }
+        }
+        let c = guard.changed();
+        if !c.is_empty() {
+            eprintln!("qbench: CONFIGS CHANGED, restored: {c:?}");
+            guard.restore();
+            changed.extend(c);
         }
     }
-    json.push_str("\n]\n");
-    let _ = std::fs::write(root.join("report.json"), json);
-}
-
-#[cfg(test)]
-mod tests {
-    #[test]
-    fn fps_line() {
-        assert_eq!(super::parse_fps("1500 frames   5.4 seconds 278.2 fps\n"), Some((1500, 5.4, 278.2)));
-        assert_eq!(super::parse_fps("Playing demo from qbench/s.dem."), None);
-    }
+    let demo_set = demos.file_name().unwrap_or_default().to_string_lossy().to_string();
+    let (json, md) = report::write(&o, &machine, &demo_set, &cases, &cells, &changed);
+    let _ = std::fs::create_dir_all(&ctx.out);
+    let _ = std::fs::write(ctx.out.join("report.json"), json);
+    let _ = std::fs::write(ctx.out.join("report.md"), &md);
+    println!("{md}");
 }
