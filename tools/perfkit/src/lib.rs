@@ -11,8 +11,11 @@
 //! - [`scenes`]: Part 1's demo set and how each demo is recorded.
 //! - [`settings`]: Part 1's "vanilla ultra" pins in each engine's cvars.
 //! - [`stats`]: medians, spreads and percentiles.
+//! - [`stills`] and [`demofile`]: the visual parity views, their demos and
+//!   the `screenshot` stufftext patched into them.
 //! - [`machine`]: the test machine's description for report headers.
 
+pub mod demofile;
 pub mod engine;
 pub mod guard;
 pub mod machine;
@@ -22,6 +25,7 @@ pub mod sandbox;
 pub mod scenes;
 pub mod settings;
 pub mod stats;
+pub mod stills;
 
 /// Minimal JSON string escaping for the hand-written reports.
 pub fn json_str(s: &str) -> String {

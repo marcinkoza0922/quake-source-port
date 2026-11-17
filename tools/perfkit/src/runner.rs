@@ -107,31 +107,67 @@ impl RunSpec<'_> {
         }
         v.extend(["stdbuf".into(), "-oL".into(), self.bin.display().to_string()]);
         v.extend(["-basedir", ".", "-game", self.game, "-window", "-width", &w, "-height", &h].map(String::from));
-        v.extend(self.engine.base_args());
+        // A run's own `+cvar value` replaces the base one rather than
+        // following it: the references read `vid_*` from the command line
+        // and take the first occurrence.
+        let base = self.engine.base_args();
+        for pair in base.chunks(2) {
+            if !self.args.iter().any(|a| *a == pair[0]) {
+                v.extend(pair.iter().cloned());
+            }
+        }
         v.extend(self.args.iter().cloned());
         v.extend(["+exec".into(), cfg.into()]);
         v
     }
 }
 
+/// How a run plays its demo and when it is over.
+#[derive(Clone, Copy)]
+enum Mode<'m> {
+    /// `timedemo`; over at the fps line.
+    Timedemo,
+    /// `playdemo` in real time; over when a console line contains `marker`,
+    /// then the engine gets `linger` more before the SIGKILL.
+    Play { marker: &'m str, linger: Duration },
+}
+
 /// Runs the timedemo and returns its result (and frame log).
 pub fn run(spec: &RunSpec) -> Result<RunResult, String> {
+    launch(spec, Mode::Timedemo)
+}
+
+/// Plays the demo with `playdemo` (real time, so wall-clock work such as
+/// the console sliding away is done before the demo reaches its views)
+/// until the console prints `marker`, which the demo itself stuffs. Then
+/// waits `linger` so work the engine finishes in the background (vkQuake
+/// writes screenshots from a worker task) lands before the SIGKILL.
+pub fn play_until(spec: &RunSpec, marker: &str, linger: Duration) -> Result<(), String> {
+    launch(spec, Mode::Play { marker, linger }).map(|_| ())
+}
+
+fn launch(spec: &RunSpec, mode: Mode) -> Result<RunResult, String> {
     std::fs::create_dir_all(spec.out).map_err(|e| format!("{}: {e}", spec.out.display()))?;
     let id = RUN_ID.fetch_add(1, std::sync::atomic::Ordering::Relaxed);
     let control = format!("perfkit-{}-{id}", std::process::id());
     // Short: the references count every command-line character (256 max).
     let cfg_name = format!("perfkit/r{id}.cfg");
     let cfg_path = spec.base.join(spec.game).join(&cfg_name);
-    let text = spec.cfg_lines().join("\n") + "\n";
+    let mut lines = spec.cfg_lines();
+    if let Mode::Play { .. } = mode {
+        let last = lines.len() - 1;
+        lines[last] = format!("playdemo {}", spec.timedemo);
+    }
+    let text = lines.join("\n") + "\n";
     std::fs::write(&cfg_path, &text).map_err(|e| format!("{}: {e}", cfg_path.display()))?;
     let _ = std::fs::write(spec.out.join("run.cfg"), text);
     let argv = spec.argv(&cfg_name);
-    let res = run_argv(spec, &argv, &control);
+    let res = run_argv(spec, &argv, &control, mode);
     let _ = std::fs::remove_file(&cfg_path);
     res
 }
 
-fn run_argv(spec: &RunSpec, argv: &[String], control: &str) -> Result<RunResult, String> {
+fn run_argv(spec: &RunSpec, argv: &[String], control: &str, mode: Mode) -> Result<RunResult, String> {
     use std::os::unix::process::CommandExt;
     let mut cmd = Command::new(&argv[0]);
     cmd.args(&argv[1..])
@@ -173,7 +209,10 @@ fn run_argv(spec: &RunSpec, argv: &[String], control: &str) -> Result<RunResult,
     let res = loop {
         match rx.recv_timeout(Duration::from_millis(50)) {
             Ok(line) => {
-                let result = crate::engine::parse_fps(&line);
+                let result = match mode {
+                    Mode::Timedemo => crate::engine::parse_fps(&line),
+                    Mode::Play { marker, .. } => line.contains(marker).then_some((0, 0.0, 0.0)),
+                };
                 let playing = line.contains("Playing demo from");
                 let fatal = is_fatal(&line);
                 console.push(line);
@@ -206,6 +245,9 @@ fn run_argv(spec: &RunSpec, argv: &[String], control: &str) -> Result<RunResult,
             break Err("timeout".into());
         }
     };
+    if let (Ok(_), Mode::Play { linger, .. }) = (&res, mode) {
+        std::thread::sleep(linger);
+    }
     let _ = Command::new("kill").args(["-KILL", "--", &format!("-{}", child.id())]).status();
     let _ = child.kill();
     let _ = child.wait();
@@ -316,6 +358,10 @@ mod tests {
         assert_eq!(spec.cfg_lines(), ["r_dynamic \"1\"", "timedemo perfkit/x"]);
         let plain = RunSpec { display: Display::Window, mangohud: false, engine: Engine::Ours, ..spec };
         assert!(plain.argv("c").join(" ").starts_with("stdbuf -oL /x/ironwail"));
+        // A run's own vsync replaces the base one (first occurrence wins in the references).
+        let vsync = RunSpec { args: vec!["+vid_vsync".into(), "1".into()], ..plain };
+        assert!(vsync.argv("c").join(" ").ends_with("-height 540 +vid_vsync 1 +exec c"), "{:?}", vsync.argv("c"));
+        let plain = RunSpec { args: vec![], ..vsync };
         assert_eq!(plain.cfg_lines()[0], "sv_autosave \"0\"");
         let console = ["Unknown command \"r_dynamic\"".to_string(), "Unknown command \"v_cshift\"".to_string()];
         assert_eq!(rejected_pins(&plain, &console), ["r_dynamic"]);

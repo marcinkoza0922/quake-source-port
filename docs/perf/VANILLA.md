@@ -126,25 +126,51 @@ using `sv_horde`, which is a gameplay modifier.
 
 ## Visual parity
 
-Fixed camera positions, 2–3 per map, chosen for what can go wrong: an md5
-monster close-up, fog with sky, water/lava/slime, coloured lighting, a
-fence texture, and, for the FTE suite, AD rain.
+`perfkit stills` (R5) captures fixed views in all three engines and
+compares them. The views (`perfkit::stills::VIEWS`) are chosen for what
+can go wrong:
 
-- Capture each position in all three engines at 1920×1080 (step R5). The
-  capture method has to be settled first. DESIGN.md notes that `+map` is
-  ignored by vkQuake on AD (no `stuffcmds` in AD's quake.rc; work around
-  it with an overlay `quake.rc`). Scripted waits don't work in vkQuake.
-  Candidates: a per-run autoexec in the sandbox overlay dir that runs
-  `setpos` + `screenshot`, or window capture with `spectacle`.
-- Mask the HUD; prefer views without moving entities, and for model
-  close-ups freeze time if every engine supports it.
-- Metric: SSIM (ImageMagick `compare`). The references differ from each
-  other too, so the allowed band is set by them: our distance to each
-  reference must not exceed the ironwail↔vkQuake distance by more than a
-  margin set from the first baseline. Every run also writes a side-by-side
-  HTML gallery for a human look.
-- Inside our engine the old rule still applies: an optimisation keeps
-  `compare -metric AE` = 0 on these stills.
+| view | map | checks |
+|---|---|---|
+| e1m1-start, e1m1-back | e1m1 | world, lightmaps, flame models |
+| e1m1-grunts | e1m1 | md5 grunt and dog close-up |
+| e2m2-start | e2m2 | world, lightmaps |
+| mg1-start, mg1-back | mg1 start | fog, fence textures |
+| sepulcher-start | ad_sepulcher | coloured light, fog, sky |
+| tears-waterfall | ad_tears | coloured light, translucent water, waterfall |
+| sepulcher-fte-start | ad_sepulcher, FTE | AD sky rain, `misc_gtkmodel` decorations |
+
+How the capture works, and why:
+
+- **One demo per map, recorded by our engine.** The demo runs noclip and
+  notarget, then `setpos` to each view, holding it 2 s. Before each view,
+  a quarter second at the same spot turned 45° works as a separator, so
+  two views with the same angles are still told apart. Console scripts
+  can't do this: vkQuake runs a startup `map` only once its command buffer
+  is empty, so a `wait` chain after it never sees the map.
+- **`screenshot` patched into the demo.** A `svc_stufftext "screenshot"`
+  goes three quarters into each hold (`perfkit::demofile`), and the demo
+  echoes a marker before its final `svc_disconnect`. Each engine plays it
+  with `playdemo` in a 1920×1080 window, with the view's profile and the
+  HUD, crosshair, weapon and notify lines off. So all three shoot the same
+  moment of the same demo, with the same entity state.
+- **`playdemo` with vsync on, not `timedemo`.** vkQuake 1.34.1's
+  screenshot copies `swapchain_images[current_cb_index]`: the swapchain
+  image matching the command buffer index, not the image it just drew.
+  With vsync off one image can stay untouched since startup, and shots
+  showed the startup console; with FIFO the images rotate and the copy is
+  at most a few frames old. At timedemo speed vkQuake also reached the
+  first view before its console had slid away.
+- **The metric is DSSIM** (ImageMagick 7, 0 = identical), for every pair
+  of engines. The references set the band: ours is OFF when its distance
+  to either reference exceeds 1.5 × the ironwail↔vkQuake distance +
+  0.005. A flat +0.02 margin let ad_tears' opaque water through
+  (0.029 against a band of 0.0135). FTE views compare ours with vkQuake
+  only and get no verdict.
+- **Gallery.** `target/perf/stills/<commit>/index.html` shows each view
+  side by side, with ours' difference images (×4) against both
+  references. Inside our engine the old rule still applies: an
+  optimisation keeps `compare -metric AE` = 0 on these stills.
 
 ## Items
 
@@ -174,10 +200,21 @@ From the first baseline (Results, 2026-11-17):
   references'.
 - **V3**: the r_partinfo particle-count check (Particle suite) is still to
   do before the FTE numbers count as a like-for-like comparison.
+- **V4**: the first results below are void. R5 found that ours drew its
+  main menu over every `+timedemo` (the startup menu opened because a demo
+  isn't a running server), and that AD's `quake.rc` runs `menu_main` after
+  `stuffcmds`, which put AD's menu over every AD timedemo in all three
+  engines. Both are fixed (`src/host/frame.rs`; the sandbox's `quake.rc`
+  copy). Rerun qbench before acting on V1/V2.
+- **V5**: ad_tears' waterfall looks whiter and more streaky in ours than
+  the references' blue glow (`tears-waterfall`, DSSIM 0.019 against a
+  0.0135 band, within the limit). Find out which texture or alpha differs.
 
 ## Results
 
-**2026-11-17, commit 6fcd456, demo set `e53154d-dirty`.** qbench
+**2026-11-17, commit 6fcd456, demo set `e53154d-dirty`. Void (V4): ours
+ran with its main menu over every demo, and every engine with AD's menu
+over the AD demos.** qbench
 defaults: 3 fps runs + 1 MangoHud run per cell, median fps (min–max), p99
 from the MangoHud run. 540p is in a window, 4K in gamescope. No errors, and
 no config changed. A copy of the report is in `target/perf/part1-6fcd456/`.
@@ -216,3 +253,27 @@ comparable. Run spread is under 1% except where shown (and for vkQuake at
 The last parity numbers recorded before this suite (1280×720, MSAA off, 8×
 anisotropy, no md5, 2026-11-11) are in HISTORY.md and DESIGN.md (M7).
 They are not comparable with these.
+
+### Parity stills
+
+**2026-11-17**, after the water fix (`r_wateralpha`, see DESIGN.md).
+DSSIM, 1920×1080, `ultra` (`ultra-fte` for the FTE view), vsync on:
+
+| view | ours↔ironwail | ours↔vkQuake | ironwail↔vkQuake | verdict |
+|---|--:|--:|--:|---|
+| e1m1-start | 0.0024 | 0.0012 | 0.0023 | ok |
+| e1m1-back | 0.0016 | 0.0006 | 0.0016 | ok |
+| e1m1-grunts | 0.0036 | 0.0045 | 0.0030 | ok |
+| e2m2-start | 0.0031 | 0.0023 | 0.0023 | ok |
+| mg1-start | 0.0079 | 0.0053 | 0.0070 | ok |
+| mg1-back | 0.0101 | 0.0123 | 0.0093 | ok |
+| sepulcher-start | 0.0092 | 0.0131 | 0.0079 | ok |
+| tears-waterfall | 0.0186 | 0.0185 | 0.0135 | ok (V5) |
+| sepulcher-fte-start | 0.0115 | 0.0162 | 0.0117 | FTE, no verdict |
+
+Before the fix, ours drew vanilla water opaque. ironwail and vkQuake
+take the alpha from the map's `wateralpha` key, otherwise `r_wateralpha`
+on maps whose VIS sees through water, and AD's progs sets `r_wateralpha`
+from each map's `water_alpha`. Ours applied `r_wateralpha` only with
+Enhanced Water's translucency on. ad_tears was 0.0286 from both
+references until then.

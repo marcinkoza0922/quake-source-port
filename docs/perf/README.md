@@ -18,6 +18,42 @@ excluded too: they replace the look instead of adding work. The one known
 cost there (slang CRT presets, HISTORY item 22) gets a single regression
 check at 4K, not a tier sweep.
 
+## Status (2026-11-17)
+
+Branch `improve/perf-plan`. Details for each step are under Retooling
+steps below; items are in [VANILLA.md](VANILLA.md#items) and
+[ADDITIONS.md](ADDITIONS.md#items).
+
+Done:
+
+- R1–R3: the perfkit runner, the vanilla ultra settings table and the
+  recorded demo set.
+- R4: qbench runs Part 1 (both suites, 540p and 4K). The first full run's
+  numbers are **void** (VANILLA.md, V4).
+- R5: `perfkit stills`, with all nine parity views within the band.
+- Engine fixes R5 found:
+  - water alpha follows the map and `r_wateralpha` (default now 1);
+  - no startup menu over a command-line demo.
+- Tooling fixes R5 found: the sandbox's `quake.rc` without `menu_main`,
+  and a run's own `+cvar` replacing the base one.
+
+Next, in order:
+
+1. **Rerun qbench** (`target/release/qbench`, about 70 min) on the fixed
+   engine. Re-record the demo set first if engine changes since `e53154d`
+   matter (`perfkit record -verify`). Replace VANILLA.md's Results table
+   and re-check V1/V2 against the new numbers.
+2. **V3**: compare `r_partinfo` particle counts between ours and vkQuake
+   on the FTE scenes before treating the FTE numbers as like-for-like.
+3. **V5**: why ad_tears' waterfall looks whiter in ours than in the
+   references.
+4. **V1/V2** (if they hold after the rerun): classic-particle CPU cost on
+   ad_sepulcher at 540p; the FTE cold-start hitch.
+5. **R6**: qprof → Part 2 (ADDITIONS.md, steps A0–A5), including pinning
+   `r_enhancedfx` in its baseline.
+6. **R7**, if A0 shows portal and gel state replays from demos; then
+   **R8**, the docs pass.
+
 ## Resolutions
 
 Every measurement runs at two resolutions, each answering one question:
@@ -149,12 +185,26 @@ scene list, runner, baselines, report schema) goes in a small library crate
   70 minutes and covered 46 cells with no errors. We lead the fastest
   reference in every main-suite cell (+17% to +47%) except
   `spin-sepulcher` at 540p (−2%, within noise), and our p99 is the lowest
-  everywhere. Numbers and new items V1–V3:
+  everywhere. **Void** (R5 found menus drawn over the demos; rerun
+  pending). Numbers and new items V1–V3:
   [VANILLA.md](VANILLA.md#results). In the FTE suite, "ours vs fastest
   ref" counts only references that played the same file as ours.
-- **R5. Parity stills.** Fixed camera positions captured in all three
-  engines and compared with a perceptual metric plus an HTML side-by-side
-  gallery (VANILLA.md, Visual parity).
+- **R5. Parity stills — done 2026-11-17.** `perfkit stills` (VANILLA.md,
+  Visual parity): nine views on five maps, recorded once by our engine as
+  demos with `screenshot` stufftexts patched in, played with `playdemo` in
+  all three engines, compared with DSSIM against the band the references
+  set, plus an HTML gallery. Every view is within the band. What it found:
+  - Ours drew vanilla water opaque. It now takes the map's `wateralpha`
+    key, otherwise `r_wateralpha` on water-vised maps, like the
+    references. `r_wateralpha` now defaults to 1, and the Enhanced
+    preset sets 0.5 with Translucent Water.
+  - Ours drew its main menu over every `+timedemo`, and AD's `quake.rc`
+    drew AD's menu over every AD timedemo in all three engines. Both are
+    fixed, so R4's numbers are void until qbench is rerun (VANILLA.md, V4).
+  - vkQuake 1.34.1's screenshots copy the wrong swapchain image unless
+    vsync is on, and the references take the *first* `+vid_*` on their
+    command line. A run's own `+cvar` now replaces the base one instead of
+    following it.
 - **R6. qprof → Part 2.** Baseline becomes vanilla ultra; scenarios
   regrouped into additions with tier sweeps; add-on scenarios other than
   the portal gun and gels removed; split-screen scenarios added; windowed

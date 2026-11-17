@@ -34,6 +34,7 @@ cargo build --release
 target/release/perfkit record -verify          # demo set → target/perf/demos/latest (once per engine change)
 target/release/qbench                          # full Part 1: both suites, 540p + 4K, ~1–1.5 h
 target/release/qbench -only spin-e1m1 -res 540 -runs 3 -mhruns 0 -nocold   # quick check
+target/release/perfkit stills                  # parity stills, all engines, ~6 min → target/perf/stills/latest/index.html
 ```
 
 qbench plays `perfkit record`'s demos in every engine with the

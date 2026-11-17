@@ -7,6 +7,15 @@
 //!   the user's own settings;
 //! - a config an engine writes lands in the sandbox, never in the game data.
 //!
+//! A mod's `quake.rc` is a copy with `menu_main`/`togglemenu` commented out
+//! ([`quiet_rc`]): AD's runs `stuffcmds` (the run's `+exec`, so the
+//! timedemo) and then `menu_main`, which drew AD's main menu over every
+//! AD timedemo in every engine.
+//!
+//! Saves, top-level images and `screenshots/` aren't linked either
+//! ([`is_user_output`]): engines write those, and writing through a link
+//! (or into a linked dir) would land in the user's data.
+//!
 //! Real files the engines left in the sandbox are deleted on every build, so
 //! one session can't leak settings into the next. Demos are copied into
 //! `<root>/base/<game>/perfkit/`.
@@ -25,6 +34,28 @@ pub const ENGINE_CONFIGS: [&str; 4] = ["config.cfg", "vkquake.cfg", "ironwail.cf
 
 pub fn is_engine_config(name: &str) -> bool {
     ENGINE_CONFIGS.contains(&name.to_ascii_lowercase().as_str())
+}
+
+/// Files and dirs engines write into a game dir: saves and screenshots.
+pub fn is_user_output(name: &str) -> bool {
+    let n = name.to_ascii_lowercase();
+    n == "screenshots" || [".sav", ".png", ".tga", ".jpg"].iter().any(|x| n.ends_with(x))
+}
+
+/// `quake.rc` without the lines that open a menu.
+pub fn quiet_rc(text: &str) -> String {
+    text.lines()
+        .map(|l| {
+            let cmd = l.trim_start().split(|c: char| c.is_whitespace() || c == ';').next().unwrap_or("");
+            if cmd.eq_ignore_ascii_case("menu_main") || cmd.eq_ignore_ascii_case("togglemenu") {
+                format!("// perfkit: {l}")
+            } else {
+                l.to_string()
+            }
+        })
+        .collect::<Vec<_>>()
+        .join("\n")
+        + "\n"
 }
 
 pub struct Sandbox {
@@ -64,12 +95,21 @@ impl Sandbox {
                 let ty = e.file_type()?;
                 if ty.is_file() && name.ends_with(".cfg") {
                     std::fs::remove_file(e.path())?; // written by an engine
+                } else if ty.is_symlink() && is_user_output(&name) {
+                    std::fs::remove_file(e.path())?; // a link from an older layout (the target stays)
                 }
             }
             for e in std::fs::read_dir(src.join(g))?.flatten() {
                 let name = e.file_name().to_string_lossy().into_owned();
                 let link = to.join(&name);
-                if is_engine_config(&name) || name == "perfkit" || link.symlink_metadata().is_ok() {
+                if name.eq_ignore_ascii_case("quake.rc") && e.path().is_file() {
+                    if link.symlink_metadata().is_ok_and(|m| m.file_type().is_symlink()) {
+                        std::fs::remove_file(&link)?; // linked by an older layout
+                    }
+                    std::fs::write(&link, quiet_rc(&std::fs::read_to_string(e.path())?))?;
+                    continue;
+                }
+                if is_engine_config(&name) || is_user_output(&name) || name == "perfkit" || link.symlink_metadata().is_ok() {
                     continue;
                 }
                 std::os::unix::fs::symlink(e.path(), link)?;
@@ -123,6 +163,22 @@ mod tests {
         assert!(!ours.join("autosave0.sav").exists());
         assert!(sb.userdata.join("quake-source-port").join("id1").join("config.cfg").is_file());
         assert_eq!(std::fs::read(data.join("mod").join("config.cfg")).unwrap(), b"user");
+        // Saves and screenshots stay out; an old link to one goes, its target stays.
+        std::fs::write(data.join("mod").join("s0.sav"), b"save").unwrap();
+        std::fs::create_dir_all(data.join("mod").join("screenshots")).unwrap();
+        std::os::unix::fs::symlink(data.join("mod").join("s0.sav"), sb.dir.join("mod").join("s0.sav")).unwrap();
+        let sb = Sandbox::build(&data, &t.join("out"), "mod").unwrap();
+        assert!(sb.dir.join("mod").join("s0.sav").symlink_metadata().is_err());
+        assert!(sb.dir.join("mod").join("screenshots").symlink_metadata().is_err());
+        assert_eq!(std::fs::read(data.join("mod").join("s0.sav")).unwrap(), b"save");
+        assert!(is_user_output("Shot.PNG") && is_user_output("screenshots") && !is_user_output("pak0.pak"));
+        // quake.rc is a real copy without the menu.
+        std::fs::write(data.join("mod").join("quake.rc"), "exec default.cfg\nstuffcmds\nmenu_main\n").unwrap();
+        let sb = Sandbox::build(&data, &t.join("out"), "mod").unwrap();
+        let rc = sb.dir.join("mod").join("quake.rc");
+        assert!(!rc.symlink_metadata().unwrap().file_type().is_symlink());
+        assert_eq!(std::fs::read_to_string(&rc).unwrap(), "exec default.cfg\nstuffcmds\n// perfkit: menu_main\n");
+        assert_eq!(std::fs::read_to_string(data.join("mod").join("quake.rc")).unwrap(), "exec default.cfg\nstuffcmds\nmenu_main\n");
         let _ = std::fs::remove_dir_all(&t);
     }
 }

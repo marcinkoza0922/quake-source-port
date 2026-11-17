@@ -8,6 +8,7 @@
 //!                          [-out DIR]
 //!        perfkit settings [ultra|ultra-fte]
 //!        perfkit record [-only a,b] [-verify] ... (see `src/record_cmd.rs`)
+//!        perfkit stills [-only view,view] ... (see `src/stills_cmd.rs`)
 //!
 //! `settings` prints Part 1's settings table (`perfkit::settings`) as
 //! Markdown. `-profile` pins those settings in calibration runs; without it
@@ -21,6 +22,8 @@
 //! warm-up run per engine fills shader caches first.
 
 mod record_cmd;
+mod stills_cmd;
+mod stills_html;
 
 use perfkit::engine::{abs, Engine};
 use perfkit::guard::ConfigGuard;
@@ -278,10 +281,11 @@ fn main() {
     match args.first().map(String::as_str) {
         Some("calibrate") => calibrate(&parse_args(&args[1..])),
         Some("record") => record_cmd::run(&args[1..]),
+        Some("stills") => stills_cmd::run(&args[1..]),
         Some("settings") => {
             let p = args.get(1).map_or(Some(Profile::Ultra), |s| Profile::parse(s));
             print!("{}", settings::markdown(p.unwrap_or_else(|| die("profile is ultra or ultra-fte"))));
         }
-        _ => die("usage: perfkit calibrate|settings|record [options] (see tools/perfkit/src/main.rs)"),
+        _ => die("usage: perfkit calibrate|settings|record|stills [options] (see tools/perfkit/src/main.rs)"),
     }
 }

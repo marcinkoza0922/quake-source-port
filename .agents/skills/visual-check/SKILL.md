@@ -93,6 +93,12 @@ exits normally (`-autoquit`, `quit`, SIGTERM) **saves `config.cfg` with your
 
 ## Comparing with the reference engines
 
+For the fixed parity views (Part 1), run `target/release/perfkit stills
+[-only view,...]`: it captures every view in all three engines the same
+way and writes a side-by-side gallery with DSSIM numbers
+(`target/perf/stills/latest/index.html`; views in
+`tools/perfkit/src/stills.rs`). For a one-off view, do it by hand:
+
 ironwail and vkQuake are windowed only. Extract ironwail with
 `7z x "$QUAKE_BASEDIR"/ironwail-*-linux-x64.7z -otarget/refengines` (qbench
 does this on first use). vkQuake is `$QUAKE_BASEDIR/vkquake.AppImage`.
