@@ -157,6 +157,12 @@ pub(super) const HOOKSHOT: &[Item] = &[
     toggle("Hook Stone", "addon_hook_stone"),
     toggle("Hook Enemies", "addon_hook_enemies"),
 ];
+/// Reached from the Add-ons pages: cable length, sockets and bolt damage.
+pub(super) const CABLE: &[Item] = &[
+    slider("Cable Length", "addon_cable_length", 128.0, 2048.0, 64.0),
+    toggle("Plug Into Metal", "addon_cable_metal"),
+    slider("Bolt Damage", "addon_cable_damage", 5.0, 100.0, 5.0),
+];
 pub(super) const PORTAL_DEPTH: &[(&str, f32)] =
     &[("Off", 0.0), ("1", 1.0), ("2", 2.0), ("3", 3.0), ("4", 4.0), ("6", 6.0)];
 pub(super) const PORTAL_MAX: &[(&str, f32)] = &[("1", 1.0), ("2", 2.0), ("3", 3.0), ("4", 4.0)];

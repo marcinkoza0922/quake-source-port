@@ -54,7 +54,7 @@ pub struct Portals {
     /// Indexed by client slot.
     pub pairs: Vec<[Option<Portal>; 2]>,
     /// Usercmd buttons last frame (edge detection).
-    prev_buttons: Vec<u8>,
+    prev_buttons: Vec<u16>,
     /// Client has been sent the full portal state since it spawned.
     synced: Vec<bool>,
     /// Pending stufftext for every client.

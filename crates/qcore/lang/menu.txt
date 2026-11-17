@@ -3123,3 +3123,52 @@ de gelb
 it giallo
 es amarillo
 ru жёлтый
+
+@ Male-to-Male Cable
+fr Câble mâle-mâle
+de Stecker-Stecker-Kabel
+it Cavo maschio-maschio
+es Cable macho-macho
+ru Кабель «папа-папа»
+
+@ Cable Length
+fr Longueur du câble
+de Kabellänge
+it Lunghezza del cavo
+es Longitud del cable
+ru Длина кабеля
+
+@ Plug Into Metal
+fr Brancher sur le métal
+de In Metall stecken
+it Collega al metallo
+es Enchufar en metal
+ru Подключать к металлу
+
+@ Bolt Damage
+fr Dégâts de l'arc
+de Blitzschaden
+it Danno della scarica
+es Daño del rayo
+ru Урон разряда
+
+@ How far the cable reaches from its socket, measured along the cable
+fr Portée du câble depuis sa prise, mesurée le long du câble
+de Wie weit das Kabel von der Buchse reicht, gemessen entlang des Kabels
+it Fin dove arriva il cavo dalla presa, misurato lungo il cavo
+es Hasta dónde llega el cable desde su toma, medido a lo largo del cable
+ru Как далеко кабель достаёт от гнезда, по длине кабеля
+
+@ Any metal surface takes the plug, not just electronics
+fr Toute surface métallique accepte la fiche, pas seulement l'électronique
+de Jede Metallfläche nimmt den Stecker auf, nicht nur Elektronik
+it Qualsiasi superficie metallica accetta la spina, non solo l'elettronica
+es Cualquier superficie metálica admite el enchufe, no solo la electrónica
+ru Штекер подходит к любой металлической поверхности, а не только к электронике
+
+@ Lightning damage every tenth of a second (the stock lightning gun does 30)
+fr Dégâts de l'éclair tous les dixièmes de seconde (le fulgurant d'origine en fait 30)
+de Blitzschaden pro Zehntelsekunde (die normale Blitzkanone macht 30)
+it Danno del fulmine ogni decimo di secondo (il fulminatore originale ne fa 30)
+es Daño del rayo cada décima de segundo (el cañón de rayos original hace 30)
+ru Урон молнии каждую десятую секунды (обычная молниевая пушка наносит 30)

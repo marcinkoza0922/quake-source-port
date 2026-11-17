@@ -1343,6 +1343,27 @@ ar Xbox
 @ yellow
 ar أصفر
 
+@ Male-to-Male Cable
+ar كابل ذكر-ذكر
+
+@ Cable Length
+ar طول الكابل
+
+@ Plug Into Metal
+ar التوصيل بالمعدن
+
+@ Bolt Damage
+ar ضرر التفريغ
+
+@ How far the cable reaches from its socket, measured along the cable
+ar إلى أي مدى يصل الكابل من المقبس، مقيسًا على طول الكابل
+
+@ Any metal surface takes the plug, not just electronics
+ar يقبل أي سطح معدني القابس، وليس الإلكترونيات فقط
+
+@ Lightning damage every tenth of a second (the stock lightning gun does 30)
+ar ضرر البرق كل عُشر ثانية (مدفع البرق الأصلي يُحدث 30)
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2509,6 +2530,9 @@ ar < رجوع
 # tr_ctx keys: English shows the short word, the key says which meaning
 @ Save (a manual save, as opposed to a quicksave or autosave)
 ar حفظ
+
+@ Alt Fire on a glowing electronics panel within reach plugs one end in; the other end then shoots lightning with unlimited ammunition. The cable tethers you to the socket and catches on corners. Alt Fire or switching weapons yanks it out.
+ar الإطلاق الثانوي على لوحة إلكترونية متوهجة في متناول اليد يوصل أحد الطرفين؛ ثم يطلق الطرف الآخر البرق بذخيرة غير محدودة. يربطك الكابل بالمقبس ويعلق بالزوايا. الإطلاق الثانوي أو تبديل السلاح ينتزعه.
 
 # ==== hud.txt ====
 

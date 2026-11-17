@@ -179,6 +179,7 @@ pub(super) fn register_commands(c: &mut Commands<Host>) {
             "gel" => Some(Page::Gel),
             "washer" => Some(Page::Washer),
             "hookshot" => Some(Page::Hookshot),
+            "cable" => Some(Page::Cable),
             "boomerang" => Some(Page::Boomerang),
             "goggles" => Some(Page::Goggles),
             "projectileshotguns" => Some(Page::ProjectileShotguns),

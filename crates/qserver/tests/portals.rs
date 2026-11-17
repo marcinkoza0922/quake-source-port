@@ -4,7 +4,7 @@ use std::path::{Path, PathBuf};
 
 use qcore::cvar::Cvars;
 use qcore::fs::Fs;
-use qserver::addons::{BUTTON_TOY_ALT, BUTTON_TOY_FIRE, TOY_SHIFT, Toy};
+use qserver::addons::{BUTTON_TOY_ALT, BUTTON_TOY_FIRE, Toy};
 use qserver::{ClientMove, Server};
 
 fn basedir() -> Option<PathBuf> {
@@ -47,8 +47,8 @@ fn origin(sv: &Server) -> [f32; 3] {
     l.vm.ent_v(1, sv.core.sv.fields.origin)
 }
 
-fn gun(angles: [f32; 3], buttons: u8) -> ClientMove {
-    ClientMove { angles, buttons: Toy::PortalGun.id() << TOY_SHIFT | buttons, ..Default::default() }
+fn gun(angles: [f32; 3], buttons: u16) -> ClientMove {
+    ClientMove { angles, buttons: Toy::PortalGun.bits() | buttons, ..Default::default() }
 }
 
 /// Fire down at the floor (blue) and along the start corridor (orange).
@@ -312,7 +312,7 @@ fn gel_sprays_through_portal() {
     sv.command("setpos 480 200 60");
     let gel_fire = ClientMove {
         angles: [85.0, 90.0, 0.0],
-        buttons: Toy::GelSprayer.id() << TOY_SHIFT | BUTTON_TOY_FIRE,
+        buttons: Toy::GelSprayer.bits() | BUTTON_TOY_FIRE,
         ..Default::default()
     };
     run(&mut sv, c, 45, gel_fire);

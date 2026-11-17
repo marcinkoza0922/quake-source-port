@@ -6,6 +6,7 @@
 pub mod music;
 pub mod feedback;
 pub mod gel;
+pub mod cable;
 pub mod hookshot;
 pub mod boomerang;
 pub mod portal;

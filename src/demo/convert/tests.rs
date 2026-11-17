@@ -45,7 +45,7 @@ fn record() -> Option<Vec<u8>> {
         let mv = ClientMove {
             angles: [0.0, (frame as f32 * 0.9) % 360.0, 0.0],
             forward: 200.0,
-            buttons: u8::from(frame % 20 < 3),
+            buttons: u16::from(frame % 20 < 3),
             impulse: if frame == 5 { 9 } else { 0 },
             ..Default::default()
         };

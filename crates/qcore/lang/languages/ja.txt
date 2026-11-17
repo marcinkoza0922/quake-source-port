@@ -1343,6 +1343,27 @@ ja Xbox
 @ yellow
 ja 黄
 
+@ Male-to-Male Cable
+ja オス-オスケーブル
+
+@ Cable Length
+ja ケーブルの長さ
+
+@ Plug Into Metal
+ja 金属にも差し込む
+
+@ Bolt Damage
+ja 放電ダメージ
+
+@ How far the cable reaches from its socket, measured along the cable
+ja 差し込み口からケーブルが届く距離（ケーブルに沿って測定）
+
+@ Any metal surface takes the plug, not just electronics
+ja 電子機器だけでなく、あらゆる金属面にプラグを差し込めます
+
+@ Lightning damage every tenth of a second (the stock lightning gun does 30)
+ja 0.1秒ごとの稲妻ダメージ（通常のライトニングガンは30）
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2509,6 +2530,9 @@ ja < 戻る
 # tr_ctx keys: English shows the short word, the key says which meaning
 @ Save (a manual save, as opposed to a quicksave or autosave)
 ja セーブ
+
+@ Alt Fire on a glowing electronics panel within reach plugs one end in; the other end then shoots lightning with unlimited ammunition. The cable tethers you to the socket and catches on corners. Alt Fire or switching weapons yanks it out.
+ja 手の届く範囲で光っている電子パネルにサブ射撃を当てると片方の端を差し込みます。もう片方の端は弾数無制限で稲妻を放ちます。ケーブルはあなたを差し込み口につなぎ止め、角に引っ掛かります。サブ射撃か武器の切り替えで引き抜きます。
 
 # ==== hud.txt ====
 

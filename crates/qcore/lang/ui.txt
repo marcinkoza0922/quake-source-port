@@ -1720,3 +1720,10 @@ de Spielstand
 it Salvataggio
 es Partida guardada
 ru Сохранение
+
+@ Alt Fire on a glowing electronics panel within reach plugs one end in; the other end then shoots lightning with unlimited ammunition. The cable tethers you to the socket and catches on corners. Alt Fire or switching weapons yanks it out.
+fr Le tir secondaire sur un panneau électronique lumineux à portée y branche une extrémité ; l'autre lance alors des éclairs avec des munitions illimitées. Le câble vous attache à la prise et s'accroche aux angles. Le tir secondaire ou un changement d'arme l'arrache.
+de Alternativfeuer auf ein leuchtendes Elektronikpaneel in Reichweite steckt ein Ende ein; das andere Ende schießt dann Blitze mit unbegrenzter Munition. Das Kabel bindet dich an die Buchse und verfängt sich an Ecken. Alternativfeuer oder ein Waffenwechsel reißt es heraus.
+it Il fuoco secondario su un pannello elettronico luminoso a portata inserisce un'estremità; l'altra spara fulmini con munizioni illimitate. Il cavo ti lega alla presa e si impiglia negli angoli. Il fuoco secondario o il cambio d'arma lo strappa via.
+es El disparo secundario sobre un panel electrónico iluminado a tu alcance enchufa un extremo; el otro dispara rayos con munición ilimitada. El cable te ata a la toma y se engancha en las esquinas. El secundario o cambiar de arma lo arranca.
+ru Альт. огонь по светящейся электронной панели рядом втыкает один конец; другой конец стреляет молниями с бесконечными боеприпасами. Кабель привязывает вас к гнезду и цепляется за углы. Альт. огонь или смена оружия выдёргивает его.

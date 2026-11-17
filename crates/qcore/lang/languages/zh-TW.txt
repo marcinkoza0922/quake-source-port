@@ -1343,6 +1343,27 @@ zh-TW Xbox
 @ yellow
 zh-TW 黃
 
+@ Male-to-Male Cable
+zh-TW 公對公線纜
+
+@ Cable Length
+zh-TW 線纜長度
+
+@ Plug Into Metal
+zh-TW 可插入金屬
+
+@ Bolt Damage
+zh-TW 放電傷害
+
+@ How far the cable reaches from its socket, measured along the cable
+zh-TW 線纜從插座能延伸多遠（沿線纜測量）
+
+@ Any metal surface takes the plug, not just electronics
+zh-TW 不只電子設備，任何金屬表面都能插入插頭
+
+@ Lightning damage every tenth of a second (the stock lightning gun does 30)
+zh-TW 每 0.1 秒的閃電傷害（原版雷電槍為 30）
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2509,6 +2530,9 @@ zh-TW < 返回
 # tr_ctx keys: English shows the short word, the key says which meaning
 @ Save (a manual save, as opposed to a quicksave or autosave)
 zh-TW 存檔
+
+@ Alt Fire on a glowing electronics panel within reach plugs one end in; the other end then shoots lightning with unlimited ammunition. The cable tethers you to the socket and catches on corners. Alt Fire or switching weapons yanks it out.
+zh-TW 對觸手可及的發光電子面板使用副開火可插入一端；另一端隨即以無限彈藥發射閃電。線纜會把你拴在插座上，並會掛住轉角。副開火或切換武器會將其拔出。
 
 # ==== hud.txt ====
 

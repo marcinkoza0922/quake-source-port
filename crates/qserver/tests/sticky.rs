@@ -4,7 +4,7 @@ use std::path::{Path, PathBuf};
 
 use qcore::cvar::Cvars;
 use qcore::fs::Fs;
-use qserver::addons::{BUTTON_TOY_ALT, BUTTON_TOY_FIRE, TOY_SHIFT, Toy};
+use qserver::addons::{BUTTON_TOY_ALT, BUTTON_TOY_FIRE, Toy};
 use qserver::{ClientMove, Server};
 
 fn start() -> Option<(Server, usize)> {
@@ -34,8 +34,8 @@ fn run(sv: &mut Server, c: usize, frames: usize, mv: ClientMove) {
     }
 }
 
-fn toy(buttons: u8) -> ClientMove {
-    ClientMove { angles: [30.0, 90.0, 0.0], buttons: Toy::Sticky.id() << TOY_SHIFT | buttons, ..Default::default() }
+fn toy(buttons: u16) -> ClientMove {
+    ClientMove { angles: [30.0, 90.0, 0.0], buttons: Toy::Sticky.bits() | buttons, ..Default::default() }
 }
 
 fn rockets(sv: &Server) -> f32 {

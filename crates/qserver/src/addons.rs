@@ -13,6 +13,8 @@ use crate::ents::Ents;
 use crate::server::{Core, Level};
 
 pub mod boomerang;
+pub mod cable;
+pub mod cable_rope;
 pub mod fall;
 pub mod dodge;
 pub mod gel;
@@ -95,6 +97,12 @@ pub const CVARS: &[(&str, &str, u32)] = &[
     ("addon_washer", "0", CVAR_ARCHIVE),
     ("addon_washer_push", "1", CVAR_ARCHIVE),
     ("addon_washer_quality", "1", CVAR_ARCHIVE),
+    // male-to-male cable: on/off, slot, rope length, metal sockets, bolt damage per 0.1 s
+    ("addon_cable", "0", CVAR_ARCHIVE),
+    ("addon_cable_slot", "8", CVAR_ARCHIVE),
+    ("addon_cable_length", "512", CVAR_ARCHIVE),
+    ("addon_cable_metal", "0", CVAR_ARCHIVE),
+    ("addon_cable_damage", "30", CVAR_ARCHIVE),
 ];
 
 /// Switches every add-on on (they all default to off); for tests and tools.
@@ -105,13 +113,16 @@ pub fn enable_all(cvars: &mut qcore::cvar::Cvars) {
     }
 }
 
-/// Usercmd button bits (bit 0 attack and bit 1 jump are QC's).
-pub const BUTTON_TOY_FIRE: u8 = 1 << 2;
-pub const BUTTON_TOY_ALT: u8 = 1 << 3;
-/// The held toy's id sits in bits 4..6 (0 = none). Bit 7 is dodge.
-pub const TOY_SHIFT: u8 = 4;
+/// Usercmd button bits (bit 0 attack and bit 1 jump are QC's). The add-on
+/// bits only exist on local clients' moves (add-ons never run with a remote
+/// client), so they may use the whole `u16`.
+pub const BUTTON_TOY_FIRE: u16 = 1 << 2;
+pub const BUTTON_TOY_ALT: u16 = 1 << 3;
+/// The held toy's id sits in bits 4..7 (0 = none).
+pub const TOY_SHIFT: u16 = 4;
+const TOY_MASK: u16 = 0xf << TOY_SHIFT;
 /// Directional dodge press, independent of weapon buttons.
-pub const BUTTON_DODGE: u8 = 1 << 7;
+pub const BUTTON_DODGE: u16 = 1 << 8;
 
 /// Add-on weapons, in stable order within a shared weapon slot.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
@@ -123,14 +134,19 @@ pub enum Toy {
     Railgun,
     GelSprayer,
     Washer,
+    Cable,
 }
 
 impl Toy {
-    pub const ALL: [Toy; 7] = [Toy::PortalGun, Toy::Boomerang, Toy::Sticky, Toy::Hookshot, Toy::Railgun, Toy::GelSprayer, Toy::Washer];
+    pub const ALL: [Toy; 8] = [Toy::PortalGun, Toy::Boomerang, Toy::Sticky, Toy::Hookshot, Toy::Railgun, Toy::GelSprayer, Toy::Washer, Toy::Cable];
 
     /// Wire id (1..=15).
     pub fn id(self) -> u8 {
         self as u8 + 1
+    }
+    /// The usercmd button bits that say this toy is held.
+    pub fn bits(self) -> u16 {
+        u16::from(self.id()) << TOY_SHIFT
     }
     pub fn from_id(id: u8) -> Option<Toy> {
         Self::ALL.get((id as usize).checked_sub(1)?).copied()
@@ -144,6 +160,7 @@ impl Toy {
             Toy::Hookshot => qcore::t!("Hookshot"),
             Toy::GelSprayer => qcore::t!("Gel Sprayer"),
             Toy::Washer => qcore::t!("Powerwasher"),
+            Toy::Cable => qcore::t!("Male-to-Male Cable"),
         }
     }
     /// Name in savegame headers.
@@ -156,6 +173,7 @@ impl Toy {
             Toy::Hookshot => "hookshot",
             Toy::GelSprayer => "gel",
             Toy::Washer => "washer",
+            Toy::Cable => "cable",
         }
     }
     pub fn from_key(key: &str) -> Option<Toy> {
@@ -171,6 +189,7 @@ impl Toy {
             Toy::Hookshot => "addon_hookshot",
             Toy::GelSprayer => "addon_gel",
             Toy::Washer => "addon_washer",
+            Toy::Cable => "addon_cable",
         }
     }
     /// Archived weapon slot assignment (10 is displayed as 0).
@@ -183,6 +202,7 @@ impl Toy {
             Toy::Railgun => "addon_railgun_slot",
             Toy::GelSprayer => "addon_gel_slot",
             Toy::Washer => "addon_washer_slot",
+            Toy::Cable => "addon_cable_slot",
         }
     }
     /// The toys switched on in the menu.
@@ -190,8 +210,8 @@ impl Toy {
         Self::ALL.into_iter().filter(|t| cv.value_of(t.cvar()) != 0.0)
     }
     /// The toy (if any) a usercmd's buttons say is held.
-    pub fn from_buttons(buttons: u8) -> Option<Toy> {
-        Self::from_id((buttons & !BUTTON_DODGE) >> TOY_SHIFT)
+    pub fn from_buttons(buttons: u16) -> Option<Toy> {
+        Self::from_id(((buttons & TOY_MASK) >> TOY_SHIFT) as u8)
     }
 }
 
@@ -268,6 +288,14 @@ pub(crate) fn frame(l: &mut Level, c: &mut Core) {
     hookshot::frame(&mut l.hooks, &l.world, &mut Ents { vm: &mut l.vm, c: &mut *c }, &mut clients, rules, hook, time);
     c.clients = clients;
     gel_frame(l, c);
+    let cable = c.cvars.value_of(Toy::Cable.cvar()) != 0.0;
+    if cable || l.cables.state.iter().any(|s| matches!(s, cable::State::Plugged(_))) {
+        let mut cables = std::mem::take(&mut l.cables);
+        let hooks = std::mem::take(&mut l.hooks);
+        cable::frame(&mut cables, &hooks.surfaces, l, c, cable);
+        l.hooks = hooks;
+        l.cables = cables;
+    }
     if gun {
         fall::frame(&mut l.falls, &mut l.vm, c, &mut l.world);
     } else {
@@ -389,6 +417,7 @@ pub(crate) fn shut_down(l: &mut Level, c: &mut Core) {
     l.gel.clear(&mut c.clients);
     l.washers.reset();
     l.hooks.reset();
+    l.cables.reset();
 }
 
 /// No remote client is connected.
@@ -403,10 +432,10 @@ mod tests {
     #[test]
     fn toy_ids_round_trip_through_buttons() {
         for t in Toy::ALL {
-            let b = t.id() << TOY_SHIFT | BUTTON_TOY_FIRE | 1;
+            let b = t.bits() | BUTTON_TOY_FIRE | BUTTON_DODGE | 1;
             assert_eq!(Toy::from_buttons(b), Some(t));
         }
-        assert_eq!(Toy::from_buttons(0b11), None);
+        assert_eq!(Toy::from_buttons(0b11 | BUTTON_DODGE), None);
         assert_eq!(Toy::from_id(15), None);
     }
 }

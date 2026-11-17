@@ -4,7 +4,7 @@ use std::path::{Path, PathBuf};
 
 use qcore::cvar::Cvars;
 use qcore::fs::Fs;
-use qserver::addons::{BUTTON_TOY_FIRE, TOY_SHIFT, Toy};
+use qserver::addons::{BUTTON_TOY_FIRE, Toy};
 use qserver::{ClientMove, Server};
 use qworld::{F, V};
 
@@ -90,7 +90,7 @@ fn aim(sv: &Server, m: u32) -> [f32; 3] {
 }
 
 fn toy(angles: [f32; 3], fire: bool) -> ClientMove {
-    let b = Toy::Boomerang.id() << TOY_SHIFT | if fire { BUTTON_TOY_FIRE } else { 0 };
+    let b = Toy::Boomerang.bits() | if fire { BUTTON_TOY_FIRE } else { 0 };
     ClientMove {
         angles,
         buttons: b,

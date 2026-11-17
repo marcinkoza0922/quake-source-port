@@ -24,6 +24,23 @@ const METAL: &[&str] = &[
     "metal", "met", "tech", "comp", "cop", "slip", "grate", "grill", "pipe", "iron", "steel", "rivet", "bolt", "plat_", "plate", "chain", "mmetal",
 ];
 
+/// Name fragments of electronics textures (computer panels, tech walls and
+/// lights, buttons and switches, slipgates): where the cable add-on plugs in.
+const ELECTRONIC: &[&str] = &[
+    "comp", "tech", "twall", "tlight", "htek", "basebtn", "basebutn", "butn", "button", "mtlsw", "swtch", "floorsw", "slip", "screen",
+    "monitor", "console", "panel", "circuit", "terminal", "keypad", "elec", "generat", "reactor", "fuse", "socket", "outlet",
+];
+
+/// The texture shows electronics (case-insensitive, like [`classify`]).
+pub fn electronic(name: &str) -> bool {
+    if classify(name) == Material::None {
+        return false;
+    }
+    let n = name.to_ascii_lowercase();
+    let n = n.strip_prefix('+').map(|s| s.get(1..).unwrap_or("")).unwrap_or(&n);
+    ELECTRONIC.iter().any(|e| n.contains(e))
+}
+
 /// Classifies a texture name (case-insensitive; animation `+0`/`+a` and
 /// toggle prefixes are ignored).
 pub fn classify(name: &str) -> Material {
@@ -41,11 +58,13 @@ pub fn classify(name: &str) -> Material {
     }
 }
 
-struct Face {
-    normal: Vec3,
-    dist: f32,
-    verts: Vec<Vec3>,
-    material: Material,
+pub struct Face {
+    pub normal: Vec3,
+    pub dist: f32,
+    /// Polygon in submodel space.
+    pub verts: Vec<Vec3>,
+    pub material: Material,
+    pub electronic: bool,
 }
 
 /// Per brush submodel, its faces with their material (built once per map).
@@ -72,6 +91,7 @@ impl Surfaces {
                 dist: pl.dist * sign,
                 verts,
                 material: name.map_or(Material::Stone, |t| classify(&t.name)),
+                electronic: name.is_some_and(|t| electronic(&t.name)),
             })
         };
         let models = bsp
@@ -88,23 +108,33 @@ impl Surfaces {
     /// Material of submodel `sub` at local point `p` on a surface facing
     /// `normal` (Stone when no face matches).
     pub fn at(&self, sub: usize, p: Vec3, normal: Vec3) -> Material {
-        let Some(faces) = self.models.get(sub) else { return Material::Stone };
-        let mut best: Option<(f32, Material)> = None;
+        self.face(sub, p, normal).map_or(Material::Stone, |f| f.material)
+    }
+
+    /// The face of submodel `sub` at local point `p` facing `normal`.
+    pub fn face(&self, sub: usize, p: Vec3, normal: Vec3) -> Option<&Face> {
+        let faces = self.models.get(sub)?;
+        let mut best: Option<(f32, &Face)> = None;
         for f in faces {
             let d = (p.dot(f.normal) - f.dist).abs();
             if d > 1.0 || f.normal.dot(normal) < 0.9 || f.verts.len() < 3 {
                 continue;
             }
             if inside(&f.verts, f.normal, p) && best.is_none_or(|(bd, _)| d < bd) {
-                best = Some((d, f.material));
+                best = Some((d, f));
             }
         }
-        best.map_or(Material::Stone, |(_, m)| m)
+        best.map(|(_, f)| f)
+    }
+
+    /// Every face of submodel `sub`.
+    pub fn faces(&self, sub: usize) -> &[Face] {
+        self.models.get(sub).map_or(&[], |v| v.as_slice())
     }
 }
 
 /// `p` lies within the convex polygon (either winding), with a little slack.
-fn inside(verts: &[Vec3], n: Vec3, p: Vec3) -> bool {
+pub fn inside(verts: &[Vec3], n: Vec3, p: Vec3) -> bool {
     let mut sign = 0.0f32;
     for i in 0..verts.len() {
         let (a, b) = (verts[i], verts[(i + 1) % verts.len()]);
@@ -158,6 +188,16 @@ mod tests {
         ];
         for (name, want) in cases {
             assert_eq!(classify(name), want, "{name}");
+        }
+    }
+
+    #[test]
+    fn electronics_are_tech_panels_buttons_and_slipgates() {
+        for name in ["comp1_1", "TECH04_3", "twall2_1", "tlight01", "+0basebtn", "+abutn", "+1mtlsw", "+0slip", "htek04_2", "mswtch_2"] {
+            assert!(electronic(name), "{name}");
+        }
+        for name in ["wood1_1", "metal1_1", "wizmet1_2", "stone1_3", "rune1_1", "wswitch1", "*slime0", "sky1", "trigger"] {
+            assert!(!electronic(name), "{name}");
         }
     }
 

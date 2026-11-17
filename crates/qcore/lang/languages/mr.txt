@@ -1343,6 +1343,27 @@ mr Xbox
 @ yellow
 mr पिवळा
 
+@ Male-to-Male Cable
+mr मेल-टू-मेल केबल
+
+@ Cable Length
+mr केबलची लांबी
+
+@ Plug Into Metal
+mr धातूत लावा
+
+@ Bolt Damage
+mr डिस्चार्ज नुकसान
+
+@ How far the cable reaches from its socket, measured along the cable
+mr सॉकेटपासून केबल किती दूर पोहोचते, केबलच्या बाजूने मोजलेले
+
+@ Any metal surface takes the plug, not just electronics
+mr फक्त इलेक्ट्रॉनिक्स नव्हे, कोणतीही धातूची पृष्ठभूमी प्लग स्वीकारते
+
+@ Lightning damage every tenth of a second (the stock lightning gun does 30)
+mr प्रत्येक सेकंदाच्या दहाव्या भागात विजेचे नुकसान (सामान्य लायटनिंग गन 30 देते)
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2509,6 +2530,9 @@ mr < मागे
 # tr_ctx keys: English shows the short word, the key says which meaning
 @ Save (a manual save, as opposed to a quicksave or autosave)
 mr सेव्ह
+
+@ Alt Fire on a glowing electronics panel within reach plugs one end in; the other end then shoots lightning with unlimited ammunition. The cable tethers you to the socket and catches on corners. Alt Fire or switching weapons yanks it out.
+mr आवाक्यातील चमकणाऱ्या इलेक्ट्रॉनिक पॅनेलवर पर्यायी फायर एक टोक जोडतो; दुसरे टोक मग अमर्याद दारूगोळ्यासह वीज सोडते. केबल तुम्हाला सॉकेटला बांधते आणि कोपऱ्यांत अडकते. पर्यायी फायर किंवा शस्त्र बदलल्याने ती उपटली जाते.
 
 # ==== hud.txt ====
 

@@ -374,7 +374,7 @@ impl Bot<'_> {
                     self.rep.exited = true;
                     break;
                 }
-                mv.buttons = ((t * 4.0) as i64 % 2 == 0) as u8;
+                mv.buttons = ((t * 4.0) as i64 % 2 == 0) as u16;
             } else {
                 if t - last_refill > 5.0 {
                     // All weapons and ammo, then back to the current weapon.

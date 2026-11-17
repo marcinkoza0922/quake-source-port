@@ -98,6 +98,15 @@ const ADDON: &[Addon] = &[
         description: qcore::t!("A water cannon. Fire shoots a straight jet with limited reach; Alt Fire a wide, shorter fan. The water pushes enemies back, turns projectiles aside and washes away gel and blood. Push strength is configurable below. Assign a weapon slot below; repeated presses cycle the weapons in that slot."),
     },
     Addon {
+        name: qcore::t!("Male-to-Male Cable"),
+        id: "cable",
+        cvar: "addon_cable",
+        weapons: &[Weapon { name: qcore::t!("Male-to-Male Cable"), slot: "addon_cable_slot" }],
+        page: Some(Page::Cable),
+        alt: true,
+        description: qcore::t!("Alt Fire on a glowing electronics panel within reach plugs one end in; the other end then shoots lightning with unlimited ammunition. The cable tethers you to the socket and catches on corners. Alt Fire or switching weapons yanks it out."),
+    },
+    Addon {
         name: qcore::t!("Goggles"),
         id: "goggles",
         cvar: "addon_goggles",

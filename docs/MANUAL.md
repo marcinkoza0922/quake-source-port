@@ -214,6 +214,7 @@ your usual attack buttons.
 | **Boomerang** | Hold to mark enemies, release to throw; it stuns each in turn | Clear marks | None |
 | **Gel sprayer** | Blue repulsion gel (bouncy) | Orange propulsion gel (fast) | None |
 | **Powerwasher** | Long water jet that pushes enemies and washes gel off | Wide fan of jets | None |
+| **Male-to-male cable** | Lightning bolt from the free plug, once the other end is plugged in | Plug into a glowing electronics surface within reach, or yank the plug out | None (you stay tethered to the socket) |
 
 Portals go on flat world surfaces and carry you, monsters and thrown objects
 through with their momentum. With **See Through Portals** on you see the

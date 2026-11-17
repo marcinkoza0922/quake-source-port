@@ -1343,6 +1343,27 @@ tr xbox
 @ yellow
 tr sarı
 
+@ Male-to-Male Cable
+tr Erkek-erkek kablo
+
+@ Cable Length
+tr Kablo uzunluğu
+
+@ Plug Into Metal
+tr Metale tak
+
+@ Bolt Damage
+tr Deşarj hasarı
+
+@ How far the cable reaches from its socket, measured along the cable
+tr Kablonun prizden ne kadar uzağa uzandığı, kablo boyunca ölçülür
+
+@ Any metal surface takes the plug, not just electronics
+tr Fiş yalnızca elektroniğe değil, her metal yüzeye takılır
+
+@ Lightning damage every tenth of a second (the stock lightning gun does 30)
+tr Saniyenin her onda birinde yıldırım hasarı (standart yıldırım silahı 30 verir)
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2509,6 +2530,9 @@ tr < Geri
 # tr_ctx keys: English shows the short word, the key says which meaning
 @ Save (a manual save, as opposed to a quicksave or autosave)
 tr Kayıt
+
+@ Alt Fire on a glowing electronics panel within reach plugs one end in; the other end then shoots lightning with unlimited ammunition. The cable tethers you to the socket and catches on corners. Alt Fire or switching weapons yanks it out.
+tr Erişim mesafesindeki parlayan bir elektronik panele ikincil ateş, bir ucu takar; diğer uç sınırsız cephaneyle yıldırım atar. Kablo seni prize bağlar ve köşelere takılır. İkincil ateş ya da silah değiştirmek onu söker.
 
 # ==== hud.txt ====
 

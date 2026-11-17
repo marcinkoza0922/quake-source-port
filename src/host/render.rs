@@ -75,57 +75,11 @@ impl Host {
             if self.cv("r_drawentities") == 0.0 {
                 ents.clear();
             }
-            if self.toy.held == Some(qserver::addons::Toy::PortalGun) && self.cl.intermission == 0 && self.cl.stats[0] > 0
-                && cv.viewmodel.visible() && self.cl.items & crate::sbar::IT_INVISIBILITY == 0
-                && let Some(mut g) = self.portal_fx.weapon(self.cl.viewentity.saturating_sub(1), self.cl.time, *v,
-                    &mut self.level, &self.server.core.fs, &mut self.r) {
-                g.origin = (Vec3::from(g.origin) + cv.viewmodel.offset(v.angles)).to_array();
-                ents.push(g);
-            }
-            let rail = self.toy.held == Some(qserver::addons::Toy::Railgun) && self.cl.intermission == 0 && self.cl.stats[0] > 0;
-            self.rail_fx.hum(self.cl.viewentity.saturating_sub(1), rail, self.snd.as_ref());
-            if rail && cv.viewmodel.visible() && self.cl.items & crate::sbar::IT_INVISIBILITY == 0
-                && let Some(mut g) = self.rail_fx.weapon(self.cl.viewentity.saturating_sub(1), self.cl.time, *v,
-                    &mut self.level, &self.server.core.fs, &mut self.r) {
-                g.origin = (Vec3::from(g.origin) + cv.viewmodel.offset(v.angles)).to_array();
-                ents.push(g);
-            }
-            if self.toy.held == Some(qserver::addons::Toy::Boomerang) && self.cl.intermission == 0 && self.cl.stats[0] > 0
-                && cv.viewmodel.visible() && self.cl.items & crate::sbar::IT_INVISIBILITY == 0
-                && let Some(mut g) = self.boomerang_fx.weapon(self.cl.viewentity.saturating_sub(1), self.cl.time, *v,
-                    &mut self.level, &self.server.core.fs, &mut self.r) {
-                g.origin = (Vec3::from(g.origin) + cv.viewmodel.offset(v.angles)).to_array();
-                ents.push(g);
-            }
-            if self.toy.held == Some(qserver::addons::Toy::Hookshot) && self.cl.intermission == 0 && self.cl.stats[0] > 0
-                && cv.viewmodel.visible() && self.cl.items & crate::sbar::IT_INVISIBILITY == 0
-                && let Some(mut g) = self.hook_fx.weapon(self.cl.viewentity.saturating_sub(1), self.cl.time, *v,
-                    &mut self.level, &self.server.core.fs, &mut self.r) {
-                g.origin = (Vec3::from(g.origin) + cv.viewmodel.offset(v.angles)).to_array();
-                ents.push(g);
-            }
-            if self.toy.held == Some(qserver::addons::Toy::Sticky) && self.cl.intermission == 0 && self.cl.stats[0] > 0
-                && cv.viewmodel.visible() && self.cl.items & crate::sbar::IT_INVISIBILITY == 0
-                && let Some(mut g) = crate::addons::sticky_draw::weapon(self.cl.time, *v, &mut self.level, &self.server.core.fs, &mut self.r) {
-                g.origin = (Vec3::from(g.origin) + cv.viewmodel.offset(v.angles)).to_array();
-                ents.push(g);
-            }
-            let me = self.cl.viewentity.saturating_sub(1);
-            let held = |t| self.toy.held == Some(t) && self.cl.intermission == 0 && self.cl.stats[0] > 0
-                && cv.viewmodel.visible() && self.cl.items & crate::sbar::IT_INVISIBILITY == 0;
-            let toy_gun = if held(qserver::addons::Toy::GelSprayer) {
-                self.gel_fx.weapon(me, self.cl.time, *v, &mut self.level, &self.server.core.fs, &mut self.r)
-            } else if held(qserver::addons::Toy::Washer) {
-                self.water_fx.weapon(me, self.cl.time, *v, &mut self.level, &self.server.core.fs, &mut self.r)
-            } else {
-                None
-            };
-            if let Some(mut g) = toy_gun {
-                g.origin = (Vec3::from(g.origin) + cv.viewmodel.offset(v.angles)).to_array();
-                ents.push(g);
-            }
+            let cable_held = self.toy_view_models(v, &cv, &mut ents);
             crate::addons::sticky_draw::bombs(&self.cl, &mut self.level, &self.server.core.fs, &mut self.r, &mut ents, &mut dls);
             self.boomerang_fx.entities(self.cl.time, &mut self.level, &self.server.core.fs, &mut self.r, self.snd.as_ref(), &mut ents);
+            let cable_grav = if self.cv("sv_gravity") > 0.0 { self.cv("sv_gravity") } else { 800.0 };
+            self.cable_fx.entities(&self.cl, self.cl.viewentity.saturating_sub(1), cable_held, self.cl.time, cable_grav, &mut self.level, &self.server.core.fs, &mut self.r, &mut ents);
             if let Some(g) = gun {
                 ents.push(g);
             }
@@ -152,6 +106,8 @@ impl Host {
             self.rail_fx.frame(self.cl.time, v, &mut self.r, &mut fte);
             self.grenade_arc_frame(v, &mut fte);
             self.hook_fx.frame(&self.cl, self.cl.viewentity.saturating_sub(1), v, &mut self.r, &mut fte);
+            let cable_metal = self.cv("addon_cable_metal") != 0.0;
+            self.cable_fx.frame(&self.cl, self.cl.viewentity.saturating_sub(1), cable_held, cable_metal, &self.level, v, &mut self.r, &mut fte);
             self.boomerang_fx.frame(self.cl.time, &self.cl, v, &mut self.r, &mut fte);
             let grav = self.cv("sv_gravity");
             let grav = if grav > 0.0 { grav } else { 800.0 };
