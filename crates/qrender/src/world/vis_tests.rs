@@ -104,6 +104,8 @@ fn water_vised_skips_novis_only_when_pvs_crosses_liquid_boundaries() {
     w.visdata = vec![1, 2];
     w.water_vised = w.check_water_vis();
     assert!(w.needs_transparent_novis([0.3, 1.0, 1.0, 1.0]));
+    // Vanilla r_wateralpha doesn't apply here (ironwail's contentstransparent).
+    assert!(!w.liquid_seethrough(0));
     // Absent liquid types (lava, slime, tele) do not trigger novis.
     assert!(!w.needs_transparent_novis([1.0, 0.3, 0.3, 0.3]));
 
@@ -111,9 +113,12 @@ fn water_vised_skips_novis_only_when_pvs_crosses_liquid_boundaries() {
     w.visdata = vec![1, 3];
     w.water_vised = w.check_water_vis();
     assert!(!w.needs_transparent_novis([0.3, 0.3, 0.3, 0.3]));
+    assert!(w.liquid_seethrough(0));
 
     // Missing visdata still requires novis whenever any liquid is translucent.
     w.visdata.clear();
     w.water_vised = w.check_water_vis();
     assert!(w.needs_transparent_novis([0.3, 1.0, 1.0, 1.0]));
+    // ...but with no VIS at all every liquid counts as see-through.
+    assert!(w.liquid_seethrough(0));
 }

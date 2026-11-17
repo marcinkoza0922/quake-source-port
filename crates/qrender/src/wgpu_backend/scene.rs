@@ -209,7 +209,10 @@ impl Renderer {
         ];
         let vs = setup_view(view, sw, sh);
         let st = &fr.settings;
-        let alphas = liquid_alphas(st);
+        let mut alphas = liquid_alphas(st);
+        if st.wateralpha_vised_only && self.world.as_ref().is_some_and(|w| !w.cpu.liquid_seethrough(0)) {
+            alphas[0] = 1.0;
+        }
         let fog = fr.fog;
         let soft = crate::softemu::scene_params(st);
         lists.frame_u.push(FrameU {

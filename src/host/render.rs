@@ -331,14 +331,20 @@ impl Host {
         let fog_on = self.cv("r_fog") != 0.0;
         let fog = qrender::Fog { density: if fog_on { self.cl.fog.density } else { 0.0 }, color: self.cl.fog.color };
         let v = |n: &str| self.cv(n);
+        let enhanced_alpha = v("r_enhancedwater") != 0.0 && v("r_watertranslucency") != 0.0;
         let settings = Settings {
             gamma: v("gamma").clamp(0.3, 3.0),
             contrast: v("contrast").clamp(0.5, 3.0),
-            // Enhanced water explicitly controls opacity; other liquid types
-            // retain map overrides and zero-to-water fallback.
-            wateralpha: if v("r_enhancedwater") != 0.0 && v("r_watertranslucency") != 0.0 {
-                v("r_wateralpha").clamp(0.0, 1.0)
-            } else { 1.0 },
+            // As ironwail/vkQuake: the map's worldspawn `wateralpha`, else
+            // `r_wateralpha` (default 1; mods set it too: AD's progs stuffs
+            // its maps' `water_alpha`). Translucent Enhanced Water lets
+            // `r_wateralpha` override the map (and VIS: translucent liquids
+            // then skip leaf PVS). Other liquid types retain map overrides
+            // and zero-to-water fallback.
+            wateralpha: if enhanced_alpha { v("r_wateralpha") } else { self.level.liquid_alpha[0].unwrap_or(v("r_wateralpha")) }.clamp(0.0, 1.0),
+            // ironwail sets r_wateralpha's map alpha to 1 at load where VIS
+            // can't see through water; the map's own key applies anyway.
+            wateralpha_vised_only: !enhanced_alpha && self.level.liquid_alpha[0].is_none(),
             lavaalpha: self.level.liquid_alpha[1].or(Some(v("r_lavaalpha"))).filter(|&a| a > 0.0).map(|a| a.min(1.0)),
             slimealpha: self.level.liquid_alpha[2].or(Some(v("r_slimealpha"))).filter(|&a| a > 0.0).map(|a| a.min(1.0)),
             telealpha: self.level.liquid_alpha[3].or(Some(v("r_telealpha"))).filter(|&a| a > 0.0).map(|a| a.min(1.0)),

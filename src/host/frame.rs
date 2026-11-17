@@ -160,7 +160,15 @@ impl Host {
                 self.stuff_cmds();
                 self.exec_cbuf();
             }
-            if self.startup == 2 && !self.server.active() && self.cbuf.is_empty() && self.delayed.is_empty() && self.con.pty.is_none() {
+            // Not over a demo the command line started (`+timedemo`): the
+            // references draw it bare, and benchmarks would time the menu.
+            if self.startup == 2
+                && !self.server.active()
+                && self.demo.is_none()
+                && self.cbuf.is_empty()
+                && self.delayed.is_empty()
+                && self.con.pty.is_none()
+            {
                 self.menu.open(Screen::Main);
             }
         }

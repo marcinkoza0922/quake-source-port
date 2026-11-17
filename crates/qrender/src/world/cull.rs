@@ -19,6 +19,13 @@ impl World {
             .any(|(i, &a)| a < 1.0 && (self.water_vised & (1 << i)) == 0)
     }
 
+    /// The map's VIS sees through liquid type `i` (0 water, 1 lava, 2 slime,
+    /// 3 tele), or the map has no VIS at all: ironwail's
+    /// `contentstransparent`, which decides whether `r_wateralpha` applies.
+    pub(crate) fn liquid_seethrough(&self, i: usize) -> bool {
+        self.visdata.is_empty() || self.water_vised & (1 << i) != 0
+    }
+
     /// Port of ironwail's `Mod_CheckWaterVis`: detects which liquid types
     /// (bits 0..4 = water, lava, slime, tele) have VIS seeing across liquid
     /// boundaries. Absent liquid types are treated as safe.

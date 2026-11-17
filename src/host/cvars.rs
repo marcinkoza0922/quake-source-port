@@ -65,7 +65,7 @@ pub(super) const HOST_CVARS: &[(&str, &str, u32)] = &[
     ("s_kill_reverb", "0", CVAR_ARCHIVE),
     ("gamma", "1", CVAR_ARCHIVE),
     ("contrast", "1", CVAR_ARCHIVE),
-    ("r_wateralpha", "0.5", CVAR_ARCHIVE),
+    ("r_wateralpha", "1", CVAR_ARCHIVE),
     ("r_skyfog", "0.5", CVAR_ARCHIVE),
     ("r_fog", "1", CVAR_ARCHIVE),
     ("r_coloredlight", "1", CVAR_ARCHIVE),
