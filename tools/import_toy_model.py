@@ -3,6 +3,7 @@
 blender -b --factory-startup --python tools/import_toy_model.py -- \
     SOURCE(.zip|dir|.fbx|.glb) [OUT] [NAME] [--out DIR] [--name NAME] [--length 36]
     [--anchor bbox|centroid|origin] [--back B] [--forward F] [--flip] [--flat]
+    [--mirror]
     [--size 512] [--gain 0.5] [--glow] [--glow-blue] [--keep-uv]
 
 Generalised from tools/import_portal_gun.py. Writes OUT/NAME.mdl.zlib (MDL v6,
@@ -11,6 +12,7 @@ palette-converted at load) and OUT/import.json. Placement: the model is scaled
 so its longest axis is --length units along +X (muzzle forward), +Z up.
   --flip    source muzzle faces -X: turn half a turn about Z.
   --flat    thinnest axis becomes Z (thrown props such as the boomerang).
+  --mirror  mirror left/right after placement (source came out mirrored).
   --anchor  bbox: centred on the bounding box, or with --back the rear end
             sits B units behind the origin; centroid: centred on the vertex
             centroid, moved --forward units (default 6) forward; origin: y/z
@@ -88,6 +90,8 @@ def main():
     args.add_argument('--forward', type=float, default=6.0)
     args.add_argument('--flip', action='store_true', help='source muzzle faces -X')
     args.add_argument('--flat', action='store_true', help='thinnest axis becomes Z')
+    args.add_argument('--mirror', action='store_true',
+                      help='mirror left/right (negate Y, keep faces outward)')
     args.add_argument('--size', type=int, default=512)
     args.add_argument('--gain', type=float, default=0.5)
     args.add_argument('--glow', action='store_true')
@@ -124,6 +128,10 @@ def main():
         obj = objects[0]
         bpy.context.view_layer.objects.active = obj
         place(obj, opts)
+        if opts.mirror:
+            for vertex in obj.data.vertices:
+                vertex.co.y = -vertex.co.y
+            obj.data.flip_normals()
         obj.matrix_world.identity()
         obj.data.update()
         # Load the supplied PNG explicitly, avoiding FBX extracted JPEG copies.
