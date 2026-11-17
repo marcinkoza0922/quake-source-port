@@ -2,7 +2,7 @@
   "source": "model.glb",
   "source_triangles": 2502,
   "triangles": 2498,
-  "vertices": 4701,
+  "vertices": 5050,
   "texture_size": 512,
   "removed_packed_degenerates": 4,
   "bounds": [
@@ -22,5 +22,10 @@
   "anchor": "bbox",
   "flip": true,
   "flat": false,
-  "gain": 0.6
+  "gain": 0.6,
+  "cleanup": [
+    "blender -b --factory-startup --python tools/relayout_toy_uv.py -- OLD/model.mdl.zlib assets/washer/model.mdl.zlib",
+    "python3 tools/clean_toy_texture.py assets/washer --from OLD/model.mdl.zlib --ramps 0,10 --gain 0.7 --chroma 6 --luma 8 --detail 0.15 --contrast 0.6 --wear 0.06 --edges 0.06 --grime 0.08 --rust 0.08 --scratches 0.35 --grain 0.015",
+    "(OLD = the importer output, i.e. this model before relayout)"
+  ]
 }

@@ -130,7 +130,10 @@ eight owner/slot skins, retaining paired chamber/emblem colors and switching
 muzzle energy with the last fired slot. The native renderer supplies lighting;
 the FBX's PBR normal, metallic and roughness maps are not used.
 The model is uploaded once per level and drawn as a depth-compressed view weapon,
-with idle movement and firing recoil.
+with idle movement and firing recoil. The atlas was cleaned and given
+procedural wear (chipped edges, grime, rust, scratches) afterwards by
+`tools/clean_toy_texture.py --keep-mask` (command in
+`assets/portal-gun/import.json`; rerun it after a reimport, see DESIGN.md).
 
 Reimport with `blender -b --factory-startup --python-exit-code 1 --python
 tools/import_portal_gun.py -- /path/to/Meshy_export.zip`. This offline Blender
@@ -241,7 +244,9 @@ point follows the entity's origin.
   converted by `blender -b --factory-startup --python
   tools/import_toy_model.py -- SRC.zip assets/hookshot --length 30 --anchor
   centroid` (longest horizontal axis to +X, texture ×0.5 for alias
-  overbright, no mask); `hook_model.rs` palette-quantises it.
+  overbright, no mask); `hook_model.rs` palette-quantises it. Atlas cleaned
+  and worn by `tools/clean_toy_texture.py` (command in
+  `assets/hookshot/import.json`).
 - Tests: `crates/qserver/tests/hookshot.rs` (e1m1, game data).
 ### Stickybomb launcher (`addon_sticky`, `addons/sticky.rs`)
 TF2 homage. Holding fire charges, releasing launches a bomb on the grenade
@@ -276,7 +281,11 @@ A player leaving detonates theirs; the toy switched off removes all.
   `blender -b --factory-startup --python tools/import_toy_model.py --
   DIR_OR_ZIP --out assets/stickybomb --back 12 --gain 0.6` (no mask), then
   `python3 tools/retint_toy_texture.py assets/stickybomb/texture.rgb.zlib`
-  (dark warm iron with rust specks, grained wood, no Meshy blue fill), skin
+  (dark warm iron with rust specks, grained wood, no Meshy blue fill), then
+  re-unwrapped by `tools/relayout_toy_uv.py` (the import used 7% of the atlas)
+  and cleaned by `tools/clean_toy_texture.py --from` (commands in
+  `assets/stickybomb/import.json`): dark steel sides, rust-brown body,
+  chipped edges, rust and scratches, skin
   quantized to the active palette's non-fullbright colours. The imported
   mesh's muzzle is at −X, so `sticky_draw::weapon` turns it 180° (taking the
   view pitch un-inverted and the opposite roll), scales it ×1.05, holds it
@@ -400,6 +409,13 @@ over each other. `MAX_SPLATS` 1024, oldest out. No ammo.
   Saturated blue/orange texels (the canisters) become a true-colour glow
   layer (`toy_model::gel_glow`, up to ×2 with all channels scaled together
   so orange keeps its hue), since the palette has no bright blue.
+  Re-unwrapped by `tools/relayout_toy_uv.py` (Meshy's own layout varied
+  a lot in texel density), then `tools/clean_toy_texture.py --from
+  --keep-glow` (command in `assets/gel/import.json`) keeps the canisters and
+  turns the rest into worn grey steel, removing the glowing blue/orange flecks
+  Meshy left on the barrel; cleaned texels are kept out of the glow test, and
+  its rust uses the muted ramp 10 (the gel's bright lighting makes copper
+  rust look orange).
 - Tests: `crates/qserver/tests/gel.rs` (e1m1: spray, save, wash, bounce,
   no fall damage on blue, orange speed); `gel_coat` unit tests (seams
   between splats are filled, walls and floors stay separate).
@@ -429,7 +445,10 @@ floor gel within 44 u (+0.6 r) is washed off.
 - Model: `assets/washer/` (nano-banana-pro concept
   `01a1d71e-0b15-7650-b42c-64a73647d9fd`, meshy-t2.5 2,498 tris + meshy-7,
   task `01a1d721-4189-74a0-b4a3-702bf531235d`), imported with `--length 30
-  --gain 0.6 --flip`.
+  --gain 0.6 --flip`, then re-unwrapped (`tools/relayout_toy_uv.py`; the import
+  left one island per triangle on 5.6% of the atlas) and cleaned by
+  `tools/clean_toy_texture.py --from` to a worn copper-brown tank and dark
+  steel hose (commands in `assets/washer/import.json`).
 - Menu: Add-ons → Gel Sprayer (Gel Quality `addon_gel_quality` low/high, default high), Powerwasher, Powerwasher Push, Jet Quality (`addon_washer_quality` low/high, default high) (`menu_options gel` / `menu_options washer`).
 ### Male-to-male cable (`addon_cable`, `addons/cable.rs`, `cable_rope.rs`; `src/addons/cable_fx.rs`, `cable_rope_fx.rs`, `cable_glow.rs`)
 The player holds one plug in each hand. Alt-fire on a surface that takes
