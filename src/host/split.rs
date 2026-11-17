@@ -146,9 +146,8 @@ impl Host {
                 }
                 if g.toy.held == Some(qserver::addons::Toy::Cable) && g.cl.intermission == 0 && g.cl.stats[0] > 0
                     && cv.viewmodel.visible() && g.cl.items & crate::sbar::IT_INVISIBILITY == 0 {
-                    let off = cv.viewmodel.offset(v.angles);
-                    for mut weapon in self.cable_fx.weapon(g.cl.viewentity.saturating_sub(1), &g.cl, self.cl.time, v, &mut self.level, &self.server.core.fs, &mut self.r) {
-                        weapon.origin = (Vec3::from(weapon.origin) + off).to_array();
+                    // two-handed: no left/right view model alignment
+                    for weapon in self.cable_fx.weapon(g.cl.viewentity.saturating_sub(1), &g.cl, self.cl.time, v, &mut self.level, &self.server.core.fs, &mut self.r) {
                         ents.push(RenderEntity { views: bit, ..weapon });
                     }
                 }

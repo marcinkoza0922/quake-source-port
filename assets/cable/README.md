@@ -9,7 +9,8 @@ assets, not Quake or id Software data.
 - `hand_left/`, `hand_right/`: one gloved fist each (the pair split at the
   bounding box centre), the owner's view direction along +X, 7.5 units deep.
   The fist's grip hole runs along Y (thumb side inwards).
-- `plug/`: the connector, pins along +X, 12 units long.
+- `plug/`: the connector, pins along -X (the cable tail along +X), 12 units
+  long.
 - Each holds `model.mdl.zlib` (zlib MDL v6, one pose), `texture.rgb.zlib`
   (512×512 RGB8 keeping the Meshy UV layout) and `import.json`.
 

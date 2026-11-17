@@ -67,12 +67,9 @@ impl Host {
             ents.push(g);
         }
         let cable_held = self.toy.held == Some(qserver::addons::Toy::Cable) && self.cl.intermission == 0 && self.cl.stats[0] > 0;
+        // two-handed, so it ignores the left/right view model alignment
         if cable_held && cv.viewmodel.visible() && self.cl.items & crate::sbar::IT_INVISIBILITY == 0 {
-            let off = cv.viewmodel.offset(v.angles);
-            for mut g in self.cable_fx.weapon(self.cl.viewentity.saturating_sub(1), &self.cl, self.cl.time, *v, &mut self.level, &self.server.core.fs, &mut self.r) {
-                g.origin = (Vec3::from(g.origin) + off).to_array();
-                ents.push(g);
-            }
+            ents.extend(self.cable_fx.weapon(self.cl.viewentity.saturating_sub(1), &self.cl, self.cl.time, *v, &mut self.level, &self.server.core.fs, &mut self.r));
         }
         if self.toy.held == Some(qserver::addons::Toy::Sticky) && self.cl.intermission == 0 && self.cl.stats[0] > 0
             && cv.viewmodel.visible() && self.cl.items & crate::sbar::IT_INVISIBILITY == 0

@@ -14,6 +14,8 @@ const MAX_NODES: usize = 96;
 const PASSES: usize = 20;
 const DAMP: f32 = 0.985;
 const HALF_WIDTH: f32 = 0.9;
+/// Seconds without a step after which a rope is laid afresh.
+const STALE: f64 = 0.25;
 
 /// World point trace: impact point and normal when blocked.
 pub type Hit<'a> = &'a dyn Fn(Vec3, Vec3) -> Option<(Vec3, Vec3)>;
@@ -68,10 +70,47 @@ impl RopeSim {
         self.rest = vec![0.0; spans.len()];
     }
 
+    /// Moves the free nodes of a two-anchor rope rigidly with its ends
+    /// (their midpoint, and their heading about the vertical), so a loop
+    /// held between the hands is carried along instead of dragged: walking
+    /// and turning would otherwise whip it up past the eye. Call before
+    /// [`Self::step`] with the same anchors.
+    pub fn carry(&mut self, anchors: &[Vec3]) {
+        let [a1, b1] = anchors else { return };
+        if self.anchor_at.len() != 2 || self.pts.is_empty() {
+            return;
+        }
+        let (a0, b0) = (self.pts[self.anchor_at[0]], self.pts[self.anchor_at[1]]);
+        let (m0, m1) = ((a0 + b0) * 0.5, (*a1 + *b1) * 0.5);
+        let heading = |d: Vec3| (d.x * d.x + d.y * d.y > 1.0).then(|| d.y.atan2(d.x));
+        let turn = heading(*b1 - *a1).zip(heading(b0 - a0)).map_or(0.0, |(h1, h0)| h1 - h0);
+        let (s, c) = turn.sin_cos();
+        let move_ = |p: Vec3| {
+            let d = p - m0;
+            m1 + Vec3::new(d.x * c - d.y * s, d.x * s + d.y * c, d.z)
+        };
+        for i in 0..self.pts.len() {
+            if !self.anchor_at.contains(&i) {
+                self.pts[i] = move_(self.pts[i]);
+                self.old[i] = move_(self.old[i]);
+            }
+        }
+    }
+
     /// Advance to `time` with the anchors at `anchors` (socket first).
     pub fn step(&mut self, anchors: &[Vec3], length: f32, time: f64, gravity: f32, hit: Hit) {
         if anchors.len() < 2 {
             return;
+        }
+        // not stepped for a while (put away, or the hand loop while
+        // plugged in) or an anchor jumped further than the rope reaches
+        // (teleport): the old nodes would stay behind, stretched out or
+        // caught behind walls, so lay a fresh rope
+        let stale = time - self.time > STALE
+            || (self.anchor_at.len() == anchors.len()
+                && self.anchor_at.iter().zip(anchors).any(|(&i, &a)| self.pts.get(i).is_none_or(|&p| (p - a).length() > length)));
+        if stale {
+            self.pts.clear();
         }
         if self.anchor_at.len() != anchors.len() || self.pts.is_empty() {
             self.rebuild(anchors, length);
@@ -245,6 +284,57 @@ mod tests {
         }
         let sag = taut.points().iter().map(|p| 40.0 - p.z).fold(0.0, f32::max);
         assert!(sag < 6.0, "taut rope sags {sag}");
+    }
+
+    #[test]
+    fn a_rope_picked_up_again_elsewhere_is_laid_afresh() {
+        // a wall at x = 500 that no node may cross
+        let wall = |a: Vec3, b: Vec3| -> Option<(Vec3, Vec3)> {
+            ((a.x - 500.0) * (b.x - 500.0) < 0.0).then(|| (Vec3::new(500.0, b.y, b.z), Vec3::new((a.x - 500.0).signum(), 0.0, 0.0)))
+        };
+        let near = |r: &RopeSim, at: Vec3| r.points().iter().all(|p| (*p - at).length() < 80.0);
+        let here = [Vec3::new(1000.0, 0.0, 40.0), Vec3::new(1010.0, 0.0, 40.0)];
+        let there = [Vec3::new(0.0, 0.0, 40.0), Vec3::new(10.0, 0.0, 40.0)];
+        // put away for a second (or plugged in), then held behind the wall
+        let mut rope = RopeSim::default();
+        for k in 0..60 {
+            rope.step(&here, 70.0, k as f64 / 60.0, 800.0, &wall);
+        }
+        rope.step(&there, 70.0, 2.0, 800.0, &wall);
+        assert!(near(&rope, there[0]), "{:?}", rope.points());
+        // teleported while held: the very next frame
+        let mut rope = RopeSim::default();
+        for k in 0..60 {
+            rope.step(&here, 70.0, k as f64 / 60.0, 800.0, &wall);
+        }
+        rope.step(&there, 70.0, 1.0, 800.0, &wall);
+        assert!(near(&rope, there[0]), "{:?}", rope.points());
+    }
+
+    #[test]
+    fn a_carried_hand_loop_never_whips_above_the_hands() {
+        let floor = |a: Vec3, b: Vec3| -> Option<(Vec3, Vec3)> {
+            (b.z < 0.0 && a.z >= 0.0).then(|| (a.lerp(b, a.z / (a.z - b.z)), Vec3::new(0.0, 0.0, 1.0)))
+        };
+        let hands = |k: usize| {
+            // walking 320 u/s, stopping and turning back and forth
+            let t = k as f32 / 120.0;
+            let at = Vec3::new(320.0 * t.min(1.0) - 320.0 * (t - 2.0).clamp(0.0, 1.0), 0.0, 30.0);
+            let yaw = (t * 3.0).sin() * 1.5;
+            let side = Vec3::new(-yaw.sin(), yaw.cos(), 0.0) * 9.0;
+            [at - side, at + side]
+        };
+        let mut rope = RopeSim::default();
+        let mut top = f32::MIN;
+        for k in 0..600 {
+            let a = hands(k);
+            rope.carry(&a);
+            rope.step(&a, 70.0, k as f64 / 120.0, 800.0, &floor);
+            if k > 30 {
+                top = rope.points().iter().map(|p| p.z).fold(top, f32::max);
+            }
+        }
+        assert!(top <= 30.5, "the loop rose to {top} with the hands at 30");
     }
 
     #[test]

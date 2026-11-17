@@ -304,7 +304,8 @@ playback and capture instructions are in [ADDONS.md](ADDONS.md).
 
 Gameplay → Viewmodels archives `r_drawviewmodel`: 0 Off, 1 Center (default),
 2 Right, 3 Left. `view::weapon::Alignment` translates every stock/mod/add-on
-weapon eight camera-right units for side placement, independently per split view.
+weapon eight camera-right units for side placement, independently per split view
+(the two-handed cable view model ignores it).
 Gameplay → Camera archives `cl_camera` (0 first person, 1 centered third person, 2/3 right/left
 shoulder); `view::camera` traces the offset against the world hull, draws the own body and
 hides viewmodels (row disabled) in third person. The camera turns toward where the eye's aim ray

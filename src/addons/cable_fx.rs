@@ -11,10 +11,17 @@ use std::sync::Arc;
 use super::cable_glow::SocketGlow;
 use super::cable_rope_fx::{Geometry, RopeSim, draw, rubber_pic};
 
-/// Plug model half length (pins along +X) and the cable hanging between
+/// Plug model half length (pins along -X) and the cable hanging between
 /// the hands while nothing is plugged in.
 const PLUG_HALF: f32 = 6.0;
 const HAND_LOOP: f32 = 70.0;
+/// Where the plug sits in a fist model: towards the knuckles, the palm and
+/// out of the thumb side.
+const GRIP_UP: f32 = 2.5;
+const GRIP_IN: f32 = 0.5;
+const GRIP_OUT: f32 = 3.0;
+/// How much further out the free plug sits when it points ahead.
+const GRIP_TAIL: f32 = 3.5;
 /// Seconds to swap between the two-handed and the plugged pose.
 const POSE_TIME: f32 = 0.25;
 
@@ -63,6 +70,26 @@ pub struct CableFx {
     plugged: Vec<bool>,
     pic: Option<PicId>,
     glow: SocketGlow,
+}
+
+/// Entity angles (pitch, yaw, roll as R_RotateForEntity applies them)
+/// that turn the model's +X to `x` and its +Z as near `z` as possible.
+fn angles_basis(x: Vec3, z: Vec3) -> [f32; 3] {
+    let [pitch, yaw, _] = angles_of(x);
+    let (s, c) = yaw.to_radians().sin_cos();
+    let left = Vec3::new(-s, c, 0.0);
+    let up = x.normalize().cross(left);
+    [pitch, yaw, (-z.dot(left)).atan2(z.dot(up)).to_degrees()]
+}
+
+/// The pose of a gloved fist at `at` (its model: knuckles +Z, palm +X,
+/// right thumb +Y and left thumb -Y) whose forearm runs along `arm` and
+/// whose grip runs along `grip` (exact), and the centre of the plug in it.
+fn fist(at: Vec3, arm: Vec3, grip: Vec3, left: bool) -> ([f32; 3], Vec3) {
+    let y = if left { grip * -1.0 } else { grip };
+    let palm = y.cross(arm).normalize();
+    let knuckles = palm.cross(y).normalize();
+    (angles_basis(palm, knuckles), at + knuckles * GRIP_UP + palm * GRIP_IN + grip * GRIP_OUT)
 }
 
 /// Entity angles (pitch up positive) of direction `d`, unrounded.
@@ -151,28 +178,34 @@ impl CableFx {
         let t = h.pose * h.pose * (3.0 - 2.0 * h.pose);
         let sway = rt * h.hands.x[0] + up * h.hands.x[1];
         let bob = up * ((time as f32 * 2.2).sin() * 0.25);
+        let jiggle = |s: &Spring| (rt * s.x[0] + up * s.x[1]) * (0.5 / (PLUG_HALF * 2.5));
         let mut out = Vec::new();
-        // left hand: holds the other plug until it is plugged in, then drops away
-        let gl = eye + f * 21.0 - rt * (8.5 + 6.0 * t) - up * (8.0 + 24.0 * t) + sway + bob;
-        let dl = (f * 0.9 + rt).normalize();
-        let tip_l = gl + dl * PLUG_HALF * 2.5 + rt * h.plugs[0].x[0] * 0.5 + up * h.plugs[0].x[1] * 0.5;
-        let dl2 = (tip_l - gl).normalize();
-        h.left_back = gl - dl2 * PLUG_HALF * 0.1;
+        // Each fist holds its plug in a hammer grip: `arm` runs from the
+        // wrist to the knuckles, `grip` from the little finger to the
+        // thumb (the plug's pins). Left hand: holds the other plug pins up
+        // until it is plugged in, then drops away.
+        let arm_l = f + up * 0.45 + rt * 0.55;
+        let grip_l = (up + f * 0.55 + rt * 0.25 + jiggle(&h.plugs[0])).normalize();
+        let gl = eye + f * 18.0 - rt * (10.0 + 6.0 * t) - up * (10.5 + 24.0 * t) + sway + bob;
+        let (pose_l, plug_l) = fist(gl, arm_l, grip_l, true);
+        h.left_back = plug_l - grip_l * PLUG_HALF;
         if t < 0.95 {
-            let fl = (f - rt * 0.9).normalize();
-            out.push(RenderEntity { model: hand_l, origin: gl.to_array(), angles: angles_of(fl), viewmodel: true, ..Default::default() });
-            out.push(RenderEntity { model: plug, origin: (gl + dl2 * PLUG_HALF * 0.9).to_array(), angles: angles_of(dl2), viewmodel: true, ..Default::default() });
+            out.push(RenderEntity { model: hand_l, origin: gl.to_array(), angles: pose_l, viewmodel: true, ..Default::default() });
+            out.push(RenderEntity { model: plug, origin: plug_l.to_array(), angles: angles_of(grip_l * -1.0), viewmodel: true, ..Default::default() });
         }
-        // right hand: from across the body to pointing the plug ahead
-        let gr = eye + f * (21.0 + 1.0 * t) + rt * (8.5 - 2.5 * t) - up * (8.0 - 1.0 * t) + sway + bob;
-        let dr = ((f * 0.9 - rt).normalize().lerp((f * 2.2 - rt + up * 0.35).normalize(), t)).normalize();
-        let tip_r = gr + dr * PLUG_HALF * 2.5 + rt * h.plugs[1].x[0] * 0.5 + up * h.plugs[1].x[1] * 0.5;
-        let dr2 = (tip_r - gr).normalize();
-        let fr = (f + rt * 0.9).normalize().lerp((f + rt * 0.45).normalize(), t).normalize();
-        out.push(RenderEntity { model: hand_r, origin: gr.to_array(), angles: angles_of(fr), viewmodel: true, ..Default::default() });
-        out.push(RenderEntity { model: plug, origin: (gr + dr2 * PLUG_HALF * 0.9).to_array(), angles: angles_of(dr2), viewmodel: true, ..Default::default() });
-        h.tip = gr + dr2 * PLUG_HALF * 1.9;
-        h.back = gr - dr2 * PLUG_HALF * 0.1;
+        // right hand: from holding its plug pins up to pointing it ahead,
+        // the wrist cocked so the pins show past the fist
+        let arm_r = (f + up * 0.45 - rt * 0.55).lerp(f * 0.8 + up * 0.9 - rt * 0.1, t);
+        let grip_r = (up + f * 0.55 - rt * 0.25).normalize().lerp((f + up * 0.25 - rt * 0.15).normalize(), t);
+        let grip_r = (grip_r + jiggle(&h.plugs[1])).normalize();
+        let gr = eye + f * (18.0 + 4.0 * t) + rt * (10.0 + 1.0 * t) - up * (10.5 + 2.5 * t) + sway + bob;
+        let (pose_r, plug_r) = fist(gr, arm_r, grip_r, false);
+        // held by its tail once it points ahead
+        let plug_r = plug_r + grip_r * (GRIP_TAIL * t);
+        out.push(RenderEntity { model: hand_r, origin: gr.to_array(), angles: pose_r, viewmodel: true, ..Default::default() });
+        out.push(RenderEntity { model: plug, origin: plug_r.to_array(), angles: angles_of(grip_r * -1.0), viewmodel: true, ..Default::default() });
+        h.tip = plug_r + grip_r * PLUG_HALF;
+        h.back = plug_r - grip_r * PLUG_HALF;
         out
     }
 
@@ -195,7 +228,7 @@ impl CableFx {
             let n = Vec3::from(c.normal);
             if let Some(plug) = plug {
                 let centre = socket + n * (PLUG_HALF - 1.5);
-                ents.push(RenderEntity { model: plug, origin: centre.to_array(), angles: angles_of(n * -1.0), ..Default::default() });
+                ents.push(RenderEntity { model: plug, origin: centre.to_array(), angles: angles_of(n), ..Default::default() });
             }
             let body = cl.entities.get(c.owner as usize + 1).map(|e| Vec3::from(e.origin));
             let Some(body) = body else { continue };
@@ -229,6 +262,7 @@ impl CableFx {
         if holding && let Some(h) = self.held.get_mut(me) && h.pose < 0.95 {
             let anchors = [h.left_back, h.back];
             if time > h.hand_loop.time || h.hand_loop.points().is_empty() {
+                h.hand_loop.carry(&anchors);
                 h.hand_loop.step(&anchors, HAND_LOOP, time, gravity, &hit);
             }
         }

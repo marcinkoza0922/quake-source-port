@@ -143,7 +143,7 @@ death, invisibility and intermission hide it like the normal weapon.
 Gameplay → Viewmodels controls all weapons: Center (default), Right, Left, Off
 (`r_drawviewmodel` 1, 2, 3, 0 respectively, archived). Side placement translates
 eight units along each camera's right axis without changing aim or mirroring
-meshes. The portal gun follows the camera basis with negated alias pitch,
+meshes (except the two-handed cable, which stays centred). The portal gun follows the camera basis with negated alias pitch,
 without the former fixed yaw/side offset, so looking up/down keeps its pose.
 
 The authoritative server broadcasts transient reliable comment messages
@@ -462,16 +462,23 @@ the entity) both work.
 - Toy id 8 needed a fourth id bit: usercmd buttons are `u16` in
   `ClientMove`/`UserCmd` (toy id bits 4–7, dodge bit 8). Only the low byte
   goes on the wire; add-ons never run with remote clients.
-- Client: view model = two Meshy gloved fists (`assets/cable/`), plugs
-  pointing at each other; each plug's aim is a damped spring kicked by
-  turning and acceleration (buzzing while the bolt fires), the hands sway
-  on a stiffer one. Plugging in drops the left hand out of view and turns
-  the right plug towards the crosshair (0.25 s). A world plug sits in the
+- Client: view model = two Meshy gloved fists (`assets/cable/`) low in
+  the corners, each holding its plug pins up in a hammer grip (the fist is
+  posed from forearm and grip directions with roll, `cable_fx::fist`);
+  each plug's aim is a damped spring kicked by turning and acceleration
+  (buzzing while the bolt fires) that the fist follows, the hands sway on
+  a stiffer one. Plugging in drops the left hand out of view and cocks the
+  right wrist so its plug, held by the tail, points ahead (0.25 s). Being
+  two-handed, the cable ignores the Viewmodels left/right alignment. A world plug sits in the
   socket. Ropes are verlet chains (`RopeSim`, ~10 u links, ≤ 96 nodes)
   between the socket, the server's pivots and the owner's body, sharing
   the slack between spans, point-traced against the client BSP so they lie
   on floors; the owner's own rope ends at his plug. A 70 u loop hangs
-  between the hands while unplugged. Ribbons are camera-facing dark rubber
+  between the hands while unplugged, carried rigidly with them before each
+  step (`RopeSim::carry`) so walking and turning only make it sway instead
+  of whipping up past the eye. A rope not stepped for 0.25 s (put away,
+  or the hand loop while plugged in) or whose anchor jumps further than its
+  length (teleport) is laid afresh between its anchors. Ribbons are camera-facing dark rubber
   quads. The bolt is stock `progs/bolt2.mdl` segments from the plug's pins.
 - Highlight (`cable_glow`): while the cable is held and not plugged,
   socket faces facing the eye within 320 u get a faint pulsing cyan
