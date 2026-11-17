@@ -387,12 +387,19 @@ over each other. `MAX_SPLATS` 1024, oldest out. No ammo.
   (owner entity, channel 7), splat, blue footstep = rubber-band stretch
   squeak gliding up, bounce = spring boing, orange footstep = swept zip in
   three tiers by speed (>450, >750 u/s brighter and higher).
-- Model: `assets/gel/` from Meshy (nano-banana-pro concept
-  `01a1d71e-09d5-7552-bef1-1f2f2b5f3751`, meshy-t2.5 2,476 tris + meshy-7
-  texture, task `01a1d721-3df9-7197-b9bd-ea79a741f53d`), imported with
-  `tools/import_toy_model.py -- model.glb assets/gel --length 28 --gain
-  0.6`. Saturated blue/orange texels (the canisters) become a true-colour
-  glow layer (`toy_model::gel_glow`), since the palette has no bright blue.
+- Model (2026-11-16): `assets/gel/`, a rusty rifle-like cannon with twin
+  octagonal-capped canisters (orange left, blue right) beside the barrel, box
+  magazine and skeletal stock. From Meshy: nano-banana-pro concept
+  `01a1e795-1889-7343-aee4-7e0b64b5de7c` (a clean 3/4 view redrawn from a
+  six-view reference sheet), meshy-t2.5 3,548 → 3,484 tris + meshy-7 texture,
+  task `01a1e795-e03c-7203-bd55-81c256f9a193`. Imported with
+  `tools/import_toy_model.py -- model.glb --out assets/gel --length 40
+  --gain 1.0 --keep-uv --flip --mirror` (the Meshy mesh faced -X and came
+  out with the canisters swapped). Drawn level, 18.5 u ahead and 11.5 u
+  below the eye, so the view looks down past the canisters along the barrel.
+  Saturated blue/orange texels (the canisters) become a true-colour glow
+  layer (`toy_model::gel_glow`, up to ×2 with all channels scaled together
+  so orange keeps its hue), since the palette has no bright blue.
 - Tests: `crates/qserver/tests/gel.rs` (e1m1: spray, save, wash, bounce,
   no fall damage on blue, orange speed); `gel_coat` unit tests (seams
   between splats are filled, walls and floors stay separate).

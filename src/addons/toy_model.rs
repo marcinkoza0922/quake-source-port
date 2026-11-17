@@ -27,7 +27,9 @@ pub fn gel_glow(rgb_zlib: &[u8]) -> Vec<u8> {
             let blue = b > 90 && b > r + 50 && b > g + 10;
             let orange = r > 110 && r > b + 70 && r > g + 25 && g > b;
             if blue || orange {
-                let k = |v: i32| (v * 2).min(255) as u8;
+                // up to ×2, scaled together so a bright texel keeps its hue
+                let s = (255.0 / r.max(g).max(b) as f32).min(2.0);
+                let k = |v: i32| (v as f32 * s).round().min(255.0) as u8;
                 [k(r), k(g), k(b), 255]
             } else {
                 [0; 4]
