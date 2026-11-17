@@ -13,8 +13,11 @@ a win.
 ## Settings
 
 "Vanilla ultra": 8× MSAA, no supersampling, 16× anisotropic filtering,
-remaster md5 models, everything else the classic look. Pinned on the
-command line in every run, in each engine's names:
+remaster md5 models, everything else the classic look. The table is code:
+`tools/perfkit/src/settings.rs`, printed by `perfkit settings [ultra|
+ultra-fte]` (step R2, done 2026-11-17). Benchmarked binaries: ironwail
+0.8.1, vkQuake **1.34.1** (the AppImage; the `vkQuake/` source checkout is
+newer).
 
 | Setting | ours | ironwail | vkQuake |
 |---|---|---|---|
@@ -22,7 +25,7 @@ command line in every run, in each engine's names:
 | no supersampling | `vid_fsaamode 0` | `vid_fsaamode 0` | `vid_fsaamode 0` |
 | 16× anisotropic | `r_anisotropy 16` | `gl_texture_anisotropy 16` | `vid_anisotropic 1` (device max, 16×) |
 | classic texture filter | `r_texfilter 0` | `gl_texturemode GL_NEAREST_MIPMAP_LINEAR` | `vid_filter 1` |
-| render scale 1 | `r_renderscale 1` | `r_scale 1` | `r_scale 1` |
+| render scale 1 | `r_renderscale 1` | `r_scale 1` | – (vkQuake has no render scale) |
 | remaster md5 models | `r_enhancedmodels 1` | `r_enhancedmodels 1` | `r_allow_replacement_md5models 1` |
 | model/move lerping | `r_lerpmodels 1`, `r_lerpmove 1` | same | same |
 | dynamic lights | `r_dynamic 1` | same | same |
@@ -31,16 +34,34 @@ command line in every run, in each engine's names:
 | gamma / contrast | `gamma 1`, `contrast 1` | same | same (defaults are 0.9 / 1.4) |
 | no vsync | `vid_vsync 0` | same | same |
 | vkQuake extras off | – | – | `r_rtshadows 0`, `vid_palettize 0` |
+| our enhancements and add-ons off | `r_ssao 0`, `r_motionblur 0`, `r_speedblur 0`, `r_enhancedwater 0`, `r_teleportwindows 0`, `r_enhancedfx 0`, `r_enhancedparticles 0`, `r_particle_quality 1`, `r_impact_fx 0` (+ bullets, nails, scorches, tracers), `r_blood 0`, `r_debris 0`, `r_softemu 0`, `r_dither 0`, `r_colorblind 0`, `custom_enable 0`, `addon_hitstop 0` | – | – |
+| particles, `ultra` | `r_fteparticles 0`, `r_particles 2` | `r_particles 2` | `r_fteparticles 0`, `r_particles 2` |
+| particles, `ultra-fte` | `r_fteparticles 1`, `r_particledesc classic`, `r_softparticles 0`, `r_quadparticles 1`, `r_particles 2` | `r_particles 2` | same without `r_softparticles` (1.34.1 has none) |
 
-Every enhancement and add-on of ours is off (the qprof `VANILLA` pins,
-with the rows above overriding them). vkQuake's ray-traced shadows are
-switched off because we have no equivalent. Its `r_waterquality` and
-`r_sky_quality` stay at their defaults; note them in the report.
+How the pins reach each engine (perfkit runner):
 
-Particles: the main suite uses each engine's **classic** particles so the
-three engines draw the same thing (`r_fteparticles 0` in ours and vkQuake,
-the same `r_particles` value everywhere). FTE particles have their own
-suite below.
+- `vid_*` cvars go on the command line, since the references read video
+  cvars from there before creating the window; everything else goes into
+  a generated cfg in the sandbox, run with `+exec` before `+timedemo`.
+  ironwail cuts off a long command line: with every pin on it, it stopped
+  at `+r_sca…` and never started the demo.
+- Every engine starts from its defaults: the sandbox leaves out the game
+  data's configs, and ours gets `XDG_DATA_HOME` pointed at a sandbox
+  folder with an empty `config.cfg`, so it never reads (or writes) the
+  user's settings and saves.
+- A run fails if the engine answers any pinned cvar with `Unknown
+  command`. That caught `r_scale`, which vkQuake doesn't have (qbench's
+  vkQuake pin has been a no-op), and `r_softparticles`, which the 1.34.1
+  binary lacks. `perfkit`'s tests check every pin against each engine's
+  source as well.
+- `r_particles 2` (square, software look) is both references' default;
+  ours defaults to 1 (round, GLQuake look). vkQuake's ray-traced shadows
+  are off because we have no equivalent; its `r_waterquality` and
+  `r_sky_quality` stay at their defaults.
+
+Particles: the main suite uses each engine's **classic** particles
+(`ultra`) so the three engines draw the same thing. FTE particles have
+their own suite below (`ultra-fte`).
 
 ## Scenes
 
@@ -71,10 +92,14 @@ ironwail has classic particles only; vkQuake and we have FTE scripted
 particles. So there are two comparisons:
 
 - **Classic, three engines:** `combat-e1m3` and `spin-sepulcher` with
-  classic particles. First, check that AD's progs sees the same thing in
-  all three. AD drops its `misc_gtkmodel` decorations when it doesn't see
-  FTE particle support, so with FTE off in ours and vkQuake, all three must
-  show the same decoration count on ad_sepulcher before the numbers count.
+  classic particles. In a timedemo the entities come from the demo, so the
+  engine that *records* decides what AD shows: AD's progs drops its 1703
+  `misc_gtkmodel` decorations on ad_sepulcher when the server doesn't
+  advertise FTE particles, and ours advertises them only while
+  `r_fteparticles` is on. R3 therefore records AD demos with a stated
+  `r_fteparticles` (with decorations for the FTE suite; decide for the
+  main suite) and writes it into the demo's name, and every engine then
+  plays back the same entities.
 - **FTE, ours and vkQuake:** `spin-sepulcher` (AD's sky rain from
   `_texpart_*` emitters) and `combat-e1m3`, both with `r_fteparticles 1`,
   `r_particledesc classic`. Before comparing, check with `r_partinfo` (both

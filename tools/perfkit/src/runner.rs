@@ -47,6 +47,9 @@ pub struct RunSpec<'a> {
     pub bin: &'a Path,
     /// The sandbox dir (cwd, `-basedir .`).
     pub base: &'a Path,
+    /// `XDG_DATA_HOME` for the engine ([`crate::sandbox::Sandbox::userdata`]),
+    /// so ours never touches the user's configs and saves.
+    pub user_data: Option<&'a Path>,
     pub game: &'a str,
     pub width: u32,
     pub height: u32,
@@ -55,6 +58,9 @@ pub struct RunSpec<'a> {
     pub mangohud: bool,
     /// Engine settings (`+cvar value` pairs) after [`Engine::base_args`].
     pub args: Vec<String>,
+    /// Console lines written to `<game>/perfkit/<run>.cfg` in the sandbox
+    /// and `exec`ed before the timedemo (see [`crate::settings::split`]).
+    pub cfg: Vec<String>,
     /// Demo name as `timedemo` takes it.
     pub timedemo: &'a str,
     pub timeout: Duration,
@@ -74,8 +80,8 @@ pub struct RunResult {
 static RUN_ID: std::sync::atomic::AtomicU32 = std::sync::atomic::AtomicU32::new(0);
 
 impl RunSpec<'_> {
-    /// The full argv (program first).
-    pub fn argv(&self) -> Vec<String> {
+    /// The full argv (program first); `cfg` names the pin cfg to `exec`.
+    pub fn argv(&self, cfg: Option<&str>) -> Vec<String> {
         let (w, h) = (self.width.to_string(), self.height.to_string());
         let mut v: Vec<String> = Vec::new();
         if let Display::Gamescope { out_w, out_h } = self.display {
@@ -88,6 +94,9 @@ impl RunSpec<'_> {
         v.extend(["-basedir", ".", "-game", self.game, "-window", "-width", &w, "-height", &h].map(String::from));
         v.extend(self.engine.base_args());
         v.extend(self.args.iter().cloned());
+        if let Some(c) = cfg {
+            v.extend(["+exec".into(), c.into()]);
+        }
         v.extend(["+timedemo".into(), self.timedemo.into()]);
         v
     }
@@ -95,9 +104,24 @@ impl RunSpec<'_> {
 
 /// Runs the timedemo and returns its result (and frame log).
 pub fn run(spec: &RunSpec) -> Result<RunResult, String> {
-    use std::os::unix::process::CommandExt;
     std::fs::create_dir_all(spec.out).map_err(|e| format!("{}: {e}", spec.out.display()))?;
-    let argv = spec.argv();
+    let id = RUN_ID.fetch_add(1, std::sync::atomic::Ordering::Relaxed);
+    let control = format!("perfkit-{}-{id}", std::process::id());
+    let cfg_name = format!("perfkit/run-{}-{id}.cfg", std::process::id());
+    let cfg_path = spec.base.join(spec.game).join(&cfg_name);
+    if !spec.cfg.is_empty() {
+        let text = spec.cfg.join("\n") + "\n";
+        std::fs::write(&cfg_path, &text).map_err(|e| format!("{}: {e}", cfg_path.display()))?;
+        let _ = std::fs::write(spec.out.join("pins.cfg"), text);
+    }
+    let argv = spec.argv((!spec.cfg.is_empty()).then_some(cfg_name.as_str()));
+    let res = run_argv(spec, &argv, &control);
+    let _ = std::fs::remove_file(&cfg_path);
+    res
+}
+
+fn run_argv(spec: &RunSpec, argv: &[String], control: &str) -> Result<RunResult, String> {
+    use std::os::unix::process::CommandExt;
     let mut cmd = Command::new(&argv[0]);
     cmd.args(&argv[1..])
         .current_dir(spec.base)
@@ -106,11 +130,13 @@ pub fn run(spec: &RunSpec) -> Result<RunResult, String> {
         .stdin(Stdio::null())
         .stdout(Stdio::piped())
         .stderr(Stdio::piped());
-    let control = format!("perfkit-{}-{}", std::process::id(), RUN_ID.fetch_add(1, std::sync::atomic::Ordering::Relaxed));
+    if let Some(u) = spec.user_data {
+        cmd.env("XDG_DATA_HOME", u);
+    }
     if spec.mangohud {
         let empty = spec.out.join("mangohud.conf");
         std::fs::write(&empty, "").map_err(|e| e.to_string())?;
-        cmd.env("MANGOHUD_CONFIGFILE", &empty).env("MANGOHUD_CONFIG", mangohud::config(spec.out, &control));
+        cmd.env("MANGOHUD_CONFIGFILE", &empty).env("MANGOHUD_CONFIG", mangohud::config(spec.out, control));
     }
     let mut child = cmd.spawn().map_err(|e| format!("spawn {}: {e}", argv[0]))?;
     let (tx, rx) = mpsc::channel::<String>();
@@ -137,7 +163,7 @@ pub fn run(spec: &RunSpec) -> Result<RunResult, String> {
                 let playing = line.contains("Playing demo from");
                 console.push(line);
                 if playing && spec.mangohud && ctl.is_none() {
-                    match mangohud::Control::connect(&control, Duration::from_secs(5)).and_then(|mut c| c.start_logging().map(|_| c)) {
+                    match mangohud::Control::connect(control, Duration::from_secs(5)).and_then(|mut c| c.start_logging().map(|_| c)) {
                         Ok(c) => ctl = Some(c),
                         Err(e) => break Err(format!("mangohud control socket {control}: {e}")),
                     }
@@ -165,11 +191,26 @@ pub fn run(spec: &RunSpec) -> Result<RunResult, String> {
     let _ = child.kill();
     let _ = child.wait();
     console.extend(rx.try_iter());
-    write_console(spec.out, &argv, &console);
+    write_console(spec.out, argv, &console);
 
+    let res = res.and_then(|r| match rejected_pins(spec, &console) {
+        bad if bad.is_empty() => Ok(r),
+        bad => Err(format!("the engine doesn't know pinned cvars {bad:?}")),
+    });
     let (frames, secs, fps) = res.map_err(|e| format!("{e} (console: {})", spec.out.join("console.txt").display()))?;
     let frame_ms = if spec.mangohud { Some(frame_log(spec.out, frames, secs)?) } else { None };
     Ok(RunResult { frames, secs, fps, frame_ms })
+}
+
+/// Pinned cvars the engine answered with `Unknown command "<name>"`: the
+/// binary differs from the source the settings table was checked against.
+fn rejected_pins(spec: &RunSpec, console: &[String]) -> Vec<String> {
+    let names = spec
+        .args
+        .iter()
+        .filter_map(|a| a.strip_prefix('+'))
+        .chain(spec.cfg.iter().filter_map(|l| l.split_whitespace().next()));
+    names.filter(|n| console.iter().any(|l| l.contains(&format!("Unknown command \"{n}\"")))).map(String::from).collect()
 }
 
 fn write_console(dir: &Path, argv: &[String], lines: &[String]) {
@@ -205,24 +246,30 @@ mod tests {
             engine: Engine::Ironwail,
             bin: Path::new("/x/ironwail"),
             base: Path::new("."),
+            user_data: None,
             game: "ad",
             width: 960,
             height: 540,
             display: Display::Gamescope { out_w: 2560, out_h: 1440 },
             mangohud: true,
             args: vec!["+vid_fsaa".into(), "8".into()],
+            cfg: vec!["r_dynamic \"1\"".into()],
             timedemo: "perfkit/x",
             timeout: Duration::from_secs(1),
             out: &out,
         };
-        let a = spec.argv().join(" ");
+        let a = spec.argv(Some("perfkit/run.cfg")).join(" ");
         assert_eq!(
             a,
             "gamescope -w 960 -h 540 -W 2560 -H 1440 -- mangohud stdbuf -oL /x/ironwail -basedir . -game ad \
-             -window -width 960 -height 540 +vid_vsync 0 +vid_fsaa 8 +timedemo perfkit/x"
+             -window -width 960 -height 540 +vid_vsync 0 +vid_fsaa 8 +exec perfkit/run.cfg +timedemo perfkit/x"
         );
         let plain = RunSpec { display: Display::Window, mangohud: false, engine: Engine::Ours, ..spec };
-        assert!(plain.argv().join(" ").starts_with("stdbuf -oL /x/ironwail"));
-        assert!(plain.argv().contains(&"+sv_autosave".to_string()));
+        assert!(plain.argv(None).join(" ").starts_with("stdbuf -oL /x/ironwail"));
+        assert!(plain.argv(None).contains(&"+sv_autosave".to_string()));
+        assert!(!plain.argv(None).contains(&"+exec".to_string()));
+        let console = ["Unknown command \"r_dynamic\"".to_string(), "Unknown command \"v_cshift\"".to_string()];
+        assert_eq!(rejected_pins(&plain, &console), ["r_dynamic"]);
+        assert!(rejected_pins(&plain, &console[1..]).is_empty());
     }
 }

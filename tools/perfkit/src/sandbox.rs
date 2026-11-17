@@ -10,6 +10,13 @@
 //! Real files the engines left in the sandbox are deleted on every build, so
 //! one session can't leak settings into the next. Demos are copied into
 //! `<root>/base/<game>/perfkit/`.
+//!
+//! Our engine keeps its settings and saves in `$XDG_DATA_HOME/
+//! quake-source-port/<game>`, not in the base dir, so the runner points
+//! `XDG_DATA_HOME` at `<root>/userdata`, recreated on every build with an
+//! empty `config.cfg` per game (which also keeps the first-run preset
+//! pop-up away). Ours then starts from its defaults like the references and
+//! never reads or writes the user's own configs and saves.
 
 use std::path::{Path, PathBuf};
 
@@ -22,10 +29,13 @@ pub fn is_engine_config(name: &str) -> bool {
 
 pub struct Sandbox {
     pub dir: PathBuf,
+    /// `XDG_DATA_HOME` for our engine.
+    pub userdata: PathBuf,
 }
 
 impl Sandbox {
-    /// Builds (or refreshes) `<root>/base` for `id1` and `game`.
+    /// Builds (or refreshes) `<root>/base` and `<root>/userdata` for `id1`
+    /// and `game`.
     pub fn build(basedir: &Path, root: &Path, game: &str) -> std::io::Result<Sandbox> {
         let src = crate::engine::abs(basedir);
         let dir = root.join("base");
@@ -33,6 +43,15 @@ impl Sandbox {
         let mut games = vec!["id1"];
         if !game.eq_ignore_ascii_case("id1") {
             games.push(game);
+        }
+        let userdata = root.join("userdata");
+        if userdata.is_dir() {
+            std::fs::remove_dir_all(&userdata)?;
+        }
+        for &g in &games {
+            let d = userdata.join("quake-source-port").join(g.to_ascii_lowercase());
+            std::fs::create_dir_all(&d)?;
+            std::fs::write(d.join("config.cfg"), "")?;
         }
         for g in games {
             let to = dir.join(g);
@@ -56,7 +75,7 @@ impl Sandbox {
                 std::os::unix::fs::symlink(e.path(), link)?;
             }
         }
-        Ok(Sandbox { dir: crate::engine::abs(&dir) })
+        Ok(Sandbox { dir: crate::engine::abs(&dir), userdata: crate::engine::abs(&userdata) })
     }
 
     /// Copies a demo in; returns the name to pass to `timedemo`.
@@ -92,10 +111,17 @@ mod tests {
             assert!(sb.dir.join(g).join("pak0.pak").symlink_metadata().unwrap().file_type().is_symlink());
             assert!(!sb.dir.join(g).join("config.cfg").exists());
         }
+        let ours = sb.userdata.join("quake-source-port").join("mod");
+        assert_eq!(std::fs::read(ours.join("config.cfg")).unwrap(), b"");
         // A config an engine wrote into the sandbox is gone after a rebuild.
         std::fs::write(sb.dir.join("mod").join("ironwail.cfg"), b"engine").unwrap();
+        std::fs::write(ours.join("config.cfg"), b"r_msaa 4").unwrap();
+        std::fs::write(ours.join("autosave0.sav"), b"save").unwrap();
         let sb = Sandbox::build(&data, &t.join("out"), "mod").unwrap();
         assert!(!sb.dir.join("mod").join("ironwail.cfg").exists());
+        assert_eq!(std::fs::read(ours.join("config.cfg")).unwrap(), b"");
+        assert!(!ours.join("autosave0.sav").exists());
+        assert!(sb.userdata.join("quake-source-port").join("id1").join("config.cfg").is_file());
         assert_eq!(std::fs::read(data.join("mod").join("config.cfg")).unwrap(), b"user");
         let _ = std::fs::remove_dir_all(&t);
     }

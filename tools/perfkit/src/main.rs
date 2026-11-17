@@ -4,7 +4,13 @@
 //! Usage: perfkit calibrate [-basedir DIR] [-game G] [-demo FILE] [-runs N]
 //!                          [-engines ours,ironwail,vkquake]
 //!                          [-res 960x540,1920x1080] [-output 2560x1440]
+//!                          [-profile ultra|ultra-fte] [-timeout SECS]
 //!                          [-out DIR]
+//!        perfkit settings [ultra|ultra-fte]
+//!
+//! `settings` prints Part 1's settings table (`perfkit::settings`) as
+//! Markdown. `-profile` pins those settings in calibration runs; without it
+//! each engine runs at its defaults (ours with an empty user config).
 //!
 //! For each engine and resolution it runs the same timedemo four ways: a
 //! plain window, inside gamescope, and each of those with MangoHud logging.
@@ -18,6 +24,7 @@ use perfkit::guard::ConfigGuard;
 use perfkit::machine::Machine;
 use perfkit::runner::{self, Display, RunSpec};
 use perfkit::sandbox::Sandbox;
+use perfkit::settings::{self, Profile};
 use perfkit::stats::{self, Frames};
 use std::fmt::Write as _;
 use std::path::{Path, PathBuf};
@@ -32,6 +39,9 @@ struct Opts {
     res: Vec<(u32, u32)>,
     output: (u32, u32),
     out: PathBuf,
+    profile: Option<Profile>,
+    /// Per-run limit in seconds (startup, load and demo).
+    timeout: u64,
 }
 
 fn die(m: &str) -> ! {
@@ -54,6 +64,8 @@ fn parse_args(args: &[String]) -> Opts {
         res: vec![(960, 540), (1920, 1080)],
         output: (2560, 1440),
         out: "target/perf/calibrate".into(),
+        profile: None,
+        timeout: 90,
     };
     let mut it = args.iter();
     while let Some(a) = it.next() {
@@ -67,6 +79,8 @@ fn parse_args(args: &[String]) -> Opts {
             "-res" => o.res = v().split(',').map(|r| parse_res(r).unwrap_or_else(|| die(&format!("bad resolution {r}")))).collect(),
             "-output" => o.output = parse_res(&v()).unwrap_or_else(|| die("bad -output")),
             "-out" => o.out = v().into(),
+            "-timeout" => o.timeout = v().parse().unwrap_or_else(|_| die("bad -timeout")),
+            "-profile" => o.profile = Some(Profile::parse(&v()).unwrap_or_else(|| die("profile is ultra or ultra-fte"))),
             _ => die(&format!("unknown option {a}")),
         }
     }
@@ -133,10 +147,11 @@ fn calibrate(o: &Opts) {
     let run = |c: &Config, label: &str| {
         let bin = &bins.iter().find(|b| b.0 == c.engine).expect("located").1;
         let out = abs(&o.out).join("runs").join(format!("{}-{label}", c.tag()));
+        let (args, cfg) = o.profile.map(|p| settings::split(p, c.engine)).unwrap_or_default();
         let spec = RunSpec {
-            engine: c.engine, bin, base: &sandbox.dir, game: &o.game, width: c.res.0, height: c.res.1,
-            display: c.display, mangohud: c.mangohud, args: Vec::new(), timedemo: &demo,
-            timeout: Duration::from_secs(90), out: &out,
+            engine: c.engine, bin, base: &sandbox.dir, user_data: Some(&sandbox.userdata), game: &o.game,
+            width: c.res.0, height: c.res.1, display: c.display, mangohud: c.mangohud,
+            args, cfg, timedemo: &demo, timeout: Duration::from_secs(o.timeout), out: &out,
         };
         runner::run(&spec)
     };
@@ -193,7 +208,11 @@ fn pair_cost(a: Option<&Cell>, b: Option<&Cell>) -> Option<f64> {
 fn report(o: &Opts, m: &Machine, configs: &[Config], cells: &[Cell], changed: &[PathBuf]) -> (String, String) {
     let mut md = String::new();
     let _ = writeln!(md, "# perfkit calibration\n\n{}\n", m.summary());
-    let _ = writeln!(md, "Demo `{}`, game `{}`, {} runs per cell, gamescope output {}x{}.\n", o.demo.display(), o.game, o.runs, o.output.0, o.output.1);
+    let settings = o.profile.map_or("engine defaults".to_string(), |p| format!("profile `{}`", p.name()));
+    let _ = writeln!(
+        md, "Demo `{}`, game `{}`, {} runs per cell, gamescope output {}x{}, {settings}.\n",
+        o.demo.display(), o.game, o.runs, o.output.0, o.output.1
+    );
     let _ = writeln!(md, "| engine | resolution | display | MangoHud | median fps | min–max | p50 ms | p99 ms | max ms | errors |");
     let _ = writeln!(md, "|---|---|---|---|--:|--:|--:|--:|--:|--:|");
     let mut json = format!("{{\n  \"machine\": {},\n  \"demo\": {},\n  \"cells\": [\n", m.to_json(), perfkit::json_str(&o.demo.display().to_string()));
@@ -255,6 +274,10 @@ fn main() {
     let args: Vec<String> = std::env::args().skip(1).collect();
     match args.first().map(String::as_str) {
         Some("calibrate") => calibrate(&parse_args(&args[1..])),
+        Some("settings") => {
+            let p = args.get(1).map_or(Some(Profile::Ultra), |s| Profile::parse(s));
+            print!("{}", settings::markdown(p.unwrap_or_else(|| die("profile is ultra or ultra-fte"))));
+        }
         _ => die("usage: perfkit calibrate [options] (see tools/perfkit/src/main.rs)"),
     }
 }

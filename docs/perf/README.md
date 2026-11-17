@@ -98,10 +98,18 @@ scene list, runner, baselines, report schema) goes in a small library crate
   resolutions on this map: it is CPU-bound on the FTE rain and the 1703
   `misc_gtkmodel` decorations only it shows (DESIGN.md, M5). Every
   ironwail MangoHud run has one ~13.5 ms frame, right after the load.
-- **R2. Settings table.** One table of "vanilla ultra" settings with each
-  engine's cvar names, replacing `qbench::settings()` (see
-  [VANILLA.md](VANILLA.md#settings)). A test checks every row names a cvar
-  that exists in our engine.
+- **R2. Settings table — done 2026-11-17.** `perfkit::settings`
+  (profiles `ultra` and `ultra-fte`, table in
+  [VANILLA.md](VANILLA.md#settings)). Tests check every pin against each
+  engine's source; at run time a pin the binary answers with `Unknown
+  command` fails the run. Ours now runs with `XDG_DATA_HOME` in the
+  sandbox, and pins go through a generated cfg because ironwail truncates
+  long command lines. Checked with one `-profile` calibration round per
+  profile in all three engines (`target/perf/r2check-*`): every run
+  completed, no pin rejected, vkQuake reports "8 AA Samples". qbench keeps
+  its old pins (MSAA off, 8× aniso; its vkQuake `r_scale` was a no-op)
+  until R4 moves it onto the perfkit runner, so its numbers stay
+  comparable with the history until then.
 - **R3. Demo set.** Record the Part 1 demos (VANILLA.md, Scenes) with our
   engine into `target/perf/demos`, keyed by commit; verify each plays to
   the end in ironwail and vkQuake before it is used.
