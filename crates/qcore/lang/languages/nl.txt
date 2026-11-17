@@ -1,0 +1,3024 @@
+# nl: the port's own text; English keys from crates/qcore/lang/*.txt.
+# Format in crates/qcore/src/lang/catalog.rs; check with tools/lang_check.py.
+
+# ==== menu.txt ====
+
+# Options pages: page names, row labels and choice values.
+@ 10% speed
+nl 10% snelheid
+
+@ 2 split-screen
+nl 2 op gesplitst scherm
+
+@ 3 split-screen
+nl 3 op gesplitst scherm
+
+@ 4 split-screen
+nl 4 op gesplitst scherm
+
+@ 5 split-screen
+nl 5 op gesplitst scherm
+
+@ 6 split-screen
+nl 6 op gesplitst scherm
+
+@ 2D aiming
+nl 2D-richten
+
+@ 2x monsters
+nl 2× monsters
+
+@ 3x monsters
+nl 3× monsters
+
+@ 4x monsters
+nl 4× monsters
+
+@ 3D resolution
+nl 3D-resolutie
+
+@ 3D view
+nl 3D-beeld
+
+@ 8-bit Color
+nl 8-bit kleur
+
+@ Accessibility
+nl Toegankelijkheid
+
+@ Acquisition Cone
+nl Richtkegel
+
+@ Activation
+nl Activering
+
+@ Add a ringing room tail after the cue
+nl Voegt na het signaal een galmende ruimteklank toe
+
+@ Add delayed repeats after the cue
+nl Voegt na het signaal vertraagde herhalingen toe
+
+@ Add saturation and distortion
+nl Voegt saturatie en vervorming toe
+
+@ Add-ons
+nl Add-ons
+
+@ Address
+nl Adres
+
+@ Adds fine noise to hide color banding
+nl Voegt fijne ruis toe om kleurbanden te verbergen
+
+@ Advanced Settings
+nl Geavanceerde instellingen
+
+@ Aim Assist
+nl Richthulp
+
+@ Aim Rotation
+nl Richtrotatie
+
+@ Aim Slowdown
+nl Richtvertraging
+
+@ Aim Style
+nl Richtstijl
+
+@ All
+nl Alle
+
+@ All enemies
+nl Alle vijanden
+
+@ Alt Fire (Add-ons)
+nl Alt. vuur (add-ons)
+
+@ Always Run
+nl Altijd rennen
+
+@ Ambient Occlusion
+nl Ambient occlusion
+
+@ Ammo Counts
+nl Munitietellers
+
+@ Ammo Counts Position
+nl Positie munitietellers
+
+@ Ammo Pickups
+nl Opgepakte munitie
+
+@ Anisotropic
+nl Anisotroop
+
+@ Anti-aliasing
+nl Anti-aliasing
+
+@ Apply To
+nl Toepassen op
+
+@ Armor
+nl Pantser
+
+@ Armor Position
+nl Positie pantser
+
+@ Ask
+nl Vragen
+
+@ Attack
+nl Aanvallen
+
+@ Audio
+nl Audio
+
+@ Auto-aim
+nl Automatisch richten
+
+@ Auto-aim Settings
+nl Instellingen auto-richten
+
+@ Autosave
+nl Autosave
+
+@ Autosave Settings
+nl Autosave-instellingen
+
+@ Autosave Timer
+nl Autosave-timer
+
+@ Autosaves to Keep
+nl Te bewaren autosaves
+
+@ Bass
+nl Bas
+
+@ Blip
+nl Blip
+
+@ Blood Quality
+nl Bloedkwaliteit
+
+@ Blood Splatter Settings
+nl Instellingen bloedspatten
+
+@ Blue
+nl Blauw
+
+@ Boomerang Settings
+nl Boemeranginstellingen
+
+@ Boost or cut high frequencies in decibels
+nl Versterkt of verzwakt hoge tonen in decibel
+
+@ Boost or cut low frequencies in decibels
+nl Versterkt of verzwakt lage tonen in decibel
+
+@ Brightness
+nl Helderheid
+
+@ Bullet Time (Add-ons)
+nl Bullet time (add-ons)
+
+@ Bullet Time Settings
+nl Bullet time-instellingen
+
+@ Button Glyphs
+nl Knopsymbolen
+
+@ Button Size
+nl Knopgrootte
+
+@ Camera
+nl Camera
+
+@ Caustic Intensity
+nl Caustiekintensiteit
+
+@ Caustics
+nl Caustieken
+
+@ Center
+nl Midden
+
+@ Center Message Position
+nl Positie middenberichten
+
+@ Center Message Time
+nl Duur middenberichten
+
+@ Center View
+nl Beeld centreren
+
+@ Change Color on Kill
+nl Kleur wisselen bij kill
+
+@ Change Color on Target
+nl Kleur wisselen op doelwit
+
+@ Chime
+nl Klokkenspel
+
+@ Click
+nl Klik
+
+@ Clink
+nl Tinkel
+
+@ Coin
+nl Munt
+
+@ Color
+nl Kleur
+
+@ Color Filter
+nl Kleurfilter
+
+@ Color of the grenade arc
+nl Kleur van de granaatboog
+
+@ Colored Lighting
+nl Gekleurde verlichting
+
+@ Connect
+nl Verbinden
+
+@ Contrast
+nl Contrast
+
+@ Controls
+nl Besturing
+
+@ Cooldown (ms)
+nl Afkoeltijd (ms)
+
+@ Crosshair Outline
+nl Vizierrand
+
+@ Crosshair Shape
+nl Viziervorm
+
+@ Crosshair Size
+nl Viziergrootte
+
+@ Current Ammo
+nl Huidige munitie
+
+@ Current Ammo Position
+nl Positie huidige munitie
+
+@ Customize This Game
+nl Dit spel aanpassen
+
+@ Damage
+nl Schade
+
+@ Damage Taken
+nl Ontvangen schade
+
+@ Debris
+nl Puin
+
+@ Debris Quality
+nl Puinkwaliteit
+
+@ Debris Settings
+nl Puininstellingen
+
+@ Directional Damage
+nl Schaderichting
+
+@ Dithering
+nl Dithering
+
+@ Dodge / Dive (Add-ons)
+nl Ontwijken / duiken (add-ons)
+
+@ Dragging up looks down instead of up
+nl Omhoog slepen kijkt omlaag in plaats van omhoog
+
+@ Drive
+nl Oversturing
+
+@ Dynamic Lights
+nl Dynamische lichten
+
+@ Echo
+nl Echo
+
+@ Enemy Health
+nl Gezondheid vijanden
+
+@ Enemy Wounds
+nl Verwondingen vijanden
+
+@ Enhanced Blood Splatter
+nl Verbeterde bloedspatten
+
+@ Enhanced FX
+nl Verbeterde effecten
+
+@ Enhanced Models
+nl Verbeterde modellen
+
+@ Enhanced Particles
+nl Verbeterde deeltjes
+
+@ Enhanced Water
+nl Verbeterd water
+
+@ Enhancements
+nl Verbeteringen
+
+@ Equipment Wheel (Add-ons)
+nl Uitrustingswiel (add-ons)
+
+@ Exploding boxes throw metal shards
+nl Exploderende kisten slingeren metaalscherven weg
+
+@ Explosion Damage
+nl Explosieschade
+
+@ Explosion Scorch Marks
+nl Schroeiplekken explosies
+
+@ Explosions scorch nearby solid surfaces
+nl Explosies schroeien nabije vaste oppervlakken
+
+@ Explosives only
+nl Alleen explosieven
+
+@ Extra Monsters
+nl Extra monsters
+
+@ Extra Per 10 Damage (ms)
+nl Extra per 10 schade (ms)
+
+@ FX Settings
+nl Effectinstellingen
+
+@ Field of View
+nl Gezichtsveld
+
+@ Firing never uses up ammo
+nl Schieten kost nooit munitie
+
+@ First person
+nl Eerste persoon
+
+@ Flick Time
+nl Flick-tijd
+
+@ Flight Speed
+nl Vliegsnelheid
+
+@ Fog
+nl Mist
+
+@ Frag Limit
+nl Fraglimiet
+
+@ Freeze Duration (ms)
+nl Bevriesduur (ms)
+
+@ GLQuake
+nl GLQuake
+
+@ Game Speed
+nl Spelsnelheid
+
+@ Game Type
+nl Speltype
+
+@ Gameplay
+nl Gameplay
+
+@ Gameplay Modifiers
+nl Spelmodifiers
+
+@ Gel Quality
+nl Gelkwaliteit
+
+@ Gib Surface Painting
+nl Gibvlekken
+
+@ Gibs
+nl Gibs
+
+@ Gibs and heads tumble and bounce
+nl Gibs en hoofden tuimelen en stuiteren
+
+@ Goggle Glow Quality
+nl Gloedkwaliteit bril
+
+@ Goggle Intensity
+nl Intensiteit bril
+
+@ Goggle Noise
+nl Ruis bril
+
+@ Goggles Settings
+nl Brilinstellingen
+
+@ Graphics
+nl Graphics
+
+@ Green
+nl Groen
+
+@ Grenade Arc
+nl Granaatboog
+
+@ Grenade Arc Settings
+nl Granaatbooginstellingen
+
+@ Gun Kick
+nl Wapenterugslag
+
+@ Gyro
+nl Gyro
+
+@ Gyro & Flick Stick
+nl Gyro & flick-stick
+
+@ Gyro Active
+nl Gyro actief
+
+@ Gyro Aiming
+nl Gyro-richten
+
+@ HUD
+nl HUD
+
+@ HUD Style
+nl HUD-stijl
+
+@ Health
+nl Gezondheid
+
+@ Health Pickups
+nl Opgepakte gezondheid
+
+@ Health Position
+nl Positie gezondheid
+
+@ Health Regeneration
+nl Gezondheidsherstel
+
+@ Hit & Kill Sounds
+nl Hit- & killgeluiden
+
+@ Hit Doors & Lifts
+nl Deuren & liften raken
+
+@ Hit Markers
+nl Hitmarkers
+
+@ Hit Sound
+nl Hitgeluid
+
+@ Hitmarker Size
+nl Hitmarkergrootte
+
+@ Hitmarker Type
+nl Hitmarkertype
+
+@ Hitstop Advanced
+nl Hitstop geavanceerd
+
+@ Hitstop Settings
+nl Hitstop-instellingen
+
+@ Hold
+nl Vasthouden
+
+@ Hold lock-on
+nl Lock-on vasthouden
+
+@ Hook Enemies
+nl Vijanden haken
+
+@ Hook Metal
+nl Metaal haken
+
+@ Hook Stone
+nl Steen haken
+
+@ Hook Wood
+nl Hout haken
+
+@ Hooking an enemy pulls you to it
+nl Een geraakte vijand trekt je naar zich toe
+
+@ Hookshot Range
+nl Bereik enterhaak
+
+@ Hookshot Settings
+nl Enterhaakinstellingen
+
+@ Host Game
+nl Spel hosten
+
+@ How far the hook flies before it retracts
+nl Hoe ver de haak vliegt voordat hij terugkeert
+
+@ How visible the on-screen controls are
+nl Hoe zichtbaar de schermbediening is
+
+@ Impact Lifetime
+nl Levensduur inslagen
+
+@ Infinite Ammo
+nl Oneindige munitie
+
+@ Input
+nl Invoer
+
+@ Input Scale
+nl Invoerschaal
+
+@ Interpolate Animation
+nl Animatie interpoleren
+
+@ Interpolate Movement
+nl Beweging interpoleren
+
+@ Invert Look
+nl Kijken omkeren
+
+@ Invert Mouse
+nl Muis omkeren
+
+@ Invert Stick
+nl Stick omkeren
+
+@ Jet Quality
+nl Straalkwaliteit
+
+@ Join Game
+nl Deelnemen
+
+@ Jump / Swim Up
+nl Springen / omhoog zwemmen
+
+@ Jump again in mid-air
+nl Spring nogmaals in de lucht
+
+@ Jumps
+nl Sprongen
+
+@ Keys & Powerups
+nl Sleutels & power-ups
+
+@ Keys & Powerups Position
+nl Positie sleutels & power-ups
+
+@ Kill Bonus (x)
+nl Killbonus (x)
+
+@ Kill Sound
+nl Killgeluid
+
+@ Knock
+nl Klop
+
+@ Left
+nl Links
+
+@ Length of the motion blur streaks
+nl Lengte van de bewegingsonscherpte-strepen
+
+@ Lifetime (seconds)
+nl Levensduur (seconden)
+
+@ Live Portal Views
+nl Live portaalbeelden
+
+@ Live View Distance
+nl Live zichtafstand
+
+@ Local Players
+nl Lokale spelers
+
+@ Local red wounds follow enemy animation
+nl Rode wonden volgen de animatie van de vijand
+
+@ Lock Indicator
+nl Lock-on-indicator
+
+@ Long falls don't hurt
+nl Lange vallen doen geen pijn
+
+@ Longest Freeze (ms)
+nl Langste bevriezing (ms)
+
+@ Look Down
+nl Omlaag kijken
+
+@ Look Speed
+nl Kijksnelheid
+
+@ Look Up
+nl Omhoog kijken
+
+@ Main Menu Music
+nl Muziek hoofdmenu
+
+@ Max FPS
+nl Max. FPS
+
+@ Max Players
+nl Max. spelers
+
+@ Maximum Impacts
+nl Max. inslagen
+
+@ Maximum Marks
+nl Max. sporen
+
+@ Maximum Range
+nl Max. bereik
+
+@ Melee only
+nl Alleen melee
+
+@ Message Background
+nl Berichtachtergrond
+
+@ Message Text Size
+nl Tekstgrootte berichten
+
+@ Messages & Captions
+nl Berichten & ondertitels
+
+@ Meter Duration (real seconds)
+nl Meterduur (echte seconden)
+
+@ Minimum Damage
+nl Minimale schade
+
+@ Mode
+nl Modus
+
+@ Modern Console
+nl Moderne console
+
+@ Modern HUD Layout
+nl Moderne HUD-indeling
+
+@ Most recent save
+nl Meest recente save
+
+@ Motion Blur
+nl Bewegingsonscherpte
+
+@ Motion Blur Amount
+nl Sterkte bewegingsonscherpte
+
+@ Motion Blur Quality
+nl Kwaliteit bewegingsonscherpte
+
+@ Mouse & Keyboard
+nl Muis & toetsenbord
+
+@ Mouse Speed
+nl Muissnelheid
+
+@ Move Back
+nl Achteruit
+
+@ Move Forward
+nl Vooruit
+
+@ Music Volume
+nl Muziekvolume
+
+@ Next Weapon
+nl Volgend wapen
+
+@ No Drowning
+nl Geen verdrinking
+
+@ No Fall Damage
+nl Geen valschade
+
+@ No Manual Saves
+nl Geen handmatig opslaan
+
+@ No Self Damage
+nl Geen eigen schade
+
+@ Noise Filter
+nl Ruisfilter
+
+@ Normal Color
+nl Normale kleur
+
+@ Notify Message Position
+nl Positie meldingen
+
+@ Notify Message Time
+nl Duur meldingen
+
+@ Number of splatter rays per blood impact
+nl Aantal spatstralen per bloedinslag
+
+@ Off
+nl Uit
+
+@ On Death
+nl Bij dood
+
+@ On Kill Color
+nl Kleur bij kill
+
+@ On Target Color
+nl Kleur op doelwit
+
+@ Opacity
+nl Dekking
+
+@ Opacity of the grenade arc
+nl Dekking van de granaatboog
+
+@ Pants Color
+nl Broekkleur
+
+@ Particle Quality
+nl Deeltjeskwaliteit
+
+@ Particles
+nl Deeltjes
+
+@ Physical Nail Impacts
+nl Fysieke spijkerinslagen
+
+@ Pistol Start
+nl Pistoolstart
+
+@ Pitch
+nl Toonhoogte
+
+@ Pitch Sensitivity
+nl Verticale gevoeligheid
+
+@ Playback Speed
+nl Afspeelsnelheid
+
+@ Player Setup
+nl Spelerinstellingen
+
+@ Pop
+nl Plop
+
+@ Portal Gun Settings
+nl Portaalkanoninstellingen
+
+@ Portal Recursion
+nl Portaalrecursie
+
+@ Portal View Quality
+nl Kwaliteit portaalbeeld
+
+@ Preview Sound
+nl Geluid beluisteren
+
+@ Previous Weapon
+nl Vorig wapen
+
+@ Projectile Shotguns Settings
+nl Instellingen projectiel-shotguns
+
+@ Projectile Speed (units/s)
+nl Projectielsnelheid (eenheden/s)
+
+@ Purple
+nl Paars
+
+@ Push
+nl Duw
+
+@ Push Strength
+nl Duwkracht
+
+@ Quick Load
+nl Snel laden
+
+@ Quick Save
+nl Snel opslaan
+
+@ Railgun Settings
+nl Railgun-instellingen
+
+@ Ranged only
+nl Alleen afstand
+
+@ Reacquire While Held
+nl Nieuw doel bij vasthouden
+
+@ Red
+nl Rood
+
+@ Reduce Motion
+nl Beweging beperken
+
+@ Regen (seconds per second)
+nl Herstel (seconden per seconde)
+
+@ Render Scale
+nl Renderschaal
+
+@ Reverb
+nl Galm
+
+@ Right
+nl Rechts
+
+@ Ripple Intensity
+nl Rimpelintensiteit
+
+@ Ripples
+nl Rimpelingen
+
+@ Roll Sensitivity
+nl Rolgevoeligheid
+
+@ Rumble
+nl Trillen
+
+@ Run
+nl Rennen
+
+@ Save on All Enemies Killed
+nl Opslaan als alle vijanden dood zijn
+
+@ Save on All Secrets Found
+nl Opslaan als alle geheimen gevonden zijn
+
+@ Save on Level Entry
+nl Opslaan bij levelstart
+
+@ Save on Secret Found
+nl Opslaan bij gevonden geheim
+
+@ Scoreboard
+nl Scorebord
+
+@ Screen Flashes
+nl Schermflitsen
+
+@ Screen Shader
+nl Schermshader
+
+@ Screen Shake
+nl Schermschudden
+
+@ Search LAN
+nl LAN doorzoeken
+
+@ Seconds a center-screen message stays up
+nl Seconden dat een bericht midden in beeld blijft staan
+
+@ See Through Portals
+nl Door portalen kijken
+
+@ See-through Teleporters
+nl Doorzichtige teleporters
+
+@ Shirt Color
+nl Shirtkleur
+
+@ Shotgun Bullet Decals
+nl Hagelinslagen shotgun
+
+@ Shoulder left
+nl Schouder links
+
+@ Shoulder right
+nl Schouder rechts
+
+@ Show FPS
+nl FPS tonen
+
+@ Show Face
+nl Gezicht tonen
+
+@ Shrapnel
+nl Granaatscherven
+
+@ Size of on-screen messages and captions
+nl Grootte van berichten en ondertitels in beeld
+
+@ Skill
+nl Moeilijkheid
+
+@ Sky Fog
+nl Hemelmist
+
+@ Smooths the stepped movement of monsters
+nl Maakt de schokkerige beweging van monsters vloeiender
+
+@ Sound
+nl Geluid
+
+@ Sound Captions
+nl Geluidsondertitels
+
+@ Sound Volume
+nl Geluidsvolume
+
+@ Speed Blur
+nl Snelheidsonscherpte
+
+@ Splashes
+nl Spetters
+
+@ Splatter Amount
+nl Hoeveelheid spatten
+
+@ Splatter Size
+nl Spatgrootte
+
+@ Start Game
+nl Spel starten
+
+@ Staying underwater doesn't hurt
+nl Onder water blijven doet geen pijn
+
+@ Stick Look Pitch
+nl Stick verticaal kijken
+
+@ Stick Look Yaw
+nl Stick horizontaal kijken
+
+@ Strafe Left
+nl Zijwaarts links
+
+@ Strafe Right
+nl Zijwaarts rechts
+
+@ Strength of the surface swell and rings
+nl Sterkte van de golfslag en kringen op het oppervlak
+
+@ Stun Duration
+nl Verdovingsduur
+
+@ Style
+nl Stijl
+
+@ Supersampling
+nl Supersampling
+
+@ Surface Hit Effects
+nl Inslageffecten oppervlak
+
+@ Swim Down
+nl Omlaag zwemmen
+
+@ Targets
+nl Doelen
+
+@ Teamplay
+nl Teamspel
+
+@ Texture Filter
+nl Texturefilter
+
+@ Third person
+nl Derde persoon
+
+@ Thud
+nl Bonk
+
+@ Tick
+nl Tik
+
+@ Time Limit
+nl Tijdslimiet
+
+@ Time Stretch
+nl Tijdrekking
+
+@ Toggle Attack
+nl Aanvallen aan/uit
+
+@ Toggle Run
+nl Rennen aan/uit
+
+@ Toggle auto-aim
+nl Auto-richten aan/uit
+
+@ Touch Controls
+nl Aanraakbediening
+
+@ Touchscreen
+nl Touchscreen
+
+@ Tough Enemy Health
+nl Gezondheid taaie vijanden
+
+@ Tough enemies only
+nl Alleen taaie vijanden
+
+@ Trail Colour
+nl Spoorkleur
+
+@ Translate Console
+nl Console vertalen
+
+@ Translucent Water
+nl Doorschijnend water
+
+@ Treble
+nl Hoge tonen
+
+@ Turn Left
+nl Links draaien
+
+@ Turn Right
+nl Rechts draaien
+
+@ Underwater FX
+nl Onderwatereffecten
+
+@ Use Bullet Time Meter
+nl Bullet time-meter gebruiken
+
+@ VSync
+nl VSync
+
+@ View Bob
+nl Hoofdbeweging
+
+@ Viewmodels
+nl Wapenmodellen
+
+@ Volume
+nl Volume
+
+@ Water Opacity
+nl Waterdekking
+
+@ Water Quality
+nl Waterkwaliteit
+
+@ Water Settings
+nl Waterinstellingen
+
+@ Weapon Wheel
+nl Wapenwiel
+
+@ Weapon Wheel Slowdown
+nl Vertraging wapenwiel
+
+@ Weapons
+nl Wapens
+
+@ Weapons Position
+nl Positie wapens
+
+@ Where center-screen messages appear
+nl Waar berichten midden in beeld verschijnen
+
+@ Where pickup and event messages appear
+nl Waar oppak- en gebeurtenisberichten verschijnen
+
+@ White
+nl Wit
+
+@ Yaw Sensitivity
+nl Horizontale gevoeligheid
+
+@ Yellow
+nl Geel
+
+# lowercase choice values
+@ T
+nl T
+
+@ always
+nl altijd
+
+@ auto
+nl auto
+
+@ banded
+nl in banden
+
+@ borderless
+nl randloos
+
+@ bottom center
+nl onder midden
+
+@ bottom left
+nl linksonder
+
+@ bottom right
+nl rechtsonder
+
+@ box
+nl vierkant
+
+@ broken square
+nl onderbroken vierkant
+
+@ classic
+nl klassiek
+
+@ coarse
+nl grof
+
+@ cooperative
+nl coöperatief
+
+@ cross
+nl kruis
+
+@ cross + dot
+nl kruis + punt
+
+@ cyan
+nl cyaan
+
+@ dashed
+nl gestreept
+
+@ deathmatch
+nl deathmatch
+
+@ deuteranopia
+nl deuteranopie
+
+@ diagonal streaks
+nl diagonale strepen
+
+@ diamond
+nl ruit
+
+@ dot
+nl punt
+
+@ double
+nl dubbel
+
+@ double chevrons
+nl dubbele punthaken
+
+@ double diagonals
+nl dubbele diagonalen
+
+@ easy
+nl makkelijk
+
+@ fine
+nl fijn
+
+@ fit output
+nl passend op uitvoer
+
+@ flick stick
+nl flick-stick
+
+@ fullscreen
+nl volledig scherm
+
+@ gap cross
+nl open kruis
+
+@ green
+nl groen
+
+@ grey
+nl grijs
+
+@ half speed
+nl halve snelheid
+
+@ hard
+nl moeilijk
+
+@ high
+nl hoog
+
+@ huge
+nl enorm
+
+@ immersive
+nl meeslepend
+
+@ intense
+nl intens
+
+@ large
+nl groot
+
+@ larger
+nl groter
+
+@ largest
+nl grootst
+
+@ linear
+nl lineair
+
+@ low
+nl laag
+
+@ lower
+nl onder
+
+@ magenta
+nl magenta
+
+@ medium
+nl gemiddeld
+
+@ middle
+nl midden
+
+@ middle left
+nl midden links
+
+@ middle right
+nl midden rechts
+
+@ modern
+nl modern
+
+@ nearest
+nl dichtstbijzijnde
+
+@ nightmare
+nl nachtmerrie
+
+@ nintendo
+nl Nintendo
+
+@ no team damage
+nl geen teamschade
+
+@ none
+nl geen
+
+@ normal
+nl normaal
+
+@ off
+nl uit
+
+@ off while held
+nl uit bij vasthouden
+
+@ on
+nl aan
+
+@ only while held
+nl alleen bij vasthouden
+
+@ playstation
+nl PlayStation
+
+@ protanopia
+nl protanopie
+
+@ quarter speed
+nl kwart snelheid
+
+@ red
+nl rood
+
+@ short diagonals
+nl korte diagonalen
+
+@ single
+nl enkel
+
+@ small
+nl klein
+
+@ solid
+nl doorgetrokken
+
+@ spectacle
+nl spektakel
+
+@ subtle
+nl subtiel
+
+@ team damage
+nl teamschade
+
+@ top center
+nl boven midden
+
+@ top left
+nl linksboven
+
+@ top right
+nl rechtsboven
+
+@ triple
+nl drievoudig
+
+@ tritanopia
+nl tritanopie
+
+@ upper
+nl boven
+
+@ white
+nl wit
+
+@ whole screen
+nl hele scherm
+
+@ windowed
+nl venster
+
+@ xbox
+nl Xbox
+
+@ yellow
+nl geel
+
+# ==== tooltips.txt ====
+
+# Options help lines (tooltips) and reasons for disabled rows.
+@ 2D aiming turns the view continuously with the right stick; flick stick snaps the view to where you push the stick, then turning the stick rotates it
+nl 2D-richten draait het beeld traploos met de rechterstick; flick-stick richt het beeld meteen naar waar je de stick duwt, daarna draait het mee met de stick
+
+@ 3D resolution relative to the window; the UI stays sharp
+nl 3D-resolutie ten opzichte van het venster; de interface blijft scherp
+
+@ 3D view keeps the HUD and menus sharp; whole screen runs them through the shader too
+nl 3D-beeld houdt HUD en menu's scherp; hele scherm stuurt ook die door de shader
+
+@ A Quake III style railgun: a slug that pierces every enemy on its line, using 2 cells a shot and refiring every 1.5 s; select it through its assigned weapon slot (Add-ons)
+nl Een railgun zoals in Quake III: een projectiel dat elke vijand op zijn lijn doorboort, 2 cellen per schot en elke 1,5 s opnieuw klaar; kies hem via zijn toegewezen wapenslot (add-ons)
+
+@ A Zelda-style hookshot: fire sends a chain hook out; it latches onto hookable surfaces or enemies and reels you in; fire again to let go
+nl Een enterhaak zoals in Zelda: vuren schiet een kettinghaak weg die zich vastgrijpt aan geschikte oppervlakken of vijanden en je ernaartoe trekt; vuur opnieuw om los te laten
+
+@ Also translates the engine's console messages; off keeps them in English
+nl Vertaalt ook de consoleberichten van de engine; uit laat ze in het Engels
+
+@ Automatically acquire another enemy while holding Lock-on after losing a target
+nl Kiest automatisch een andere vijand terwijl je Lock-on vasthoudt nadat een doelwit verloren is
+
+@ Blends between animation frames of monsters and weapons
+nl Laat animatieframes van monsters en wapens vloeiend in elkaar overgaan
+
+@ Blood stains surfaces and bodies; cosmetic, independent of particle packs
+nl Bloed bevlekt oppervlakken en lichamen; alleen cosmetisch, los van deeltjespakketten
+
+@ Bloom glow around bright lights and heat sources; medium uses 4 taps, high uses 8, low disables halo taps
+nl Bloomgloed rond felle lichten en hittebronnen; gemiddeld gebruikt 4 samples, hoog 8, laag schakelt de halo uit
+
+@ Blurs fast-moving monsters, projectiles and doors (not camera turns)
+nl Maakt snel bewegende monsters, projectielen en deuren onscherp (niet het draaien van de camera)
+
+@ Blurs the screen edges during fast falls and launches; keeps the centre clear. Reduce Motion disables it
+nl Maakt de schermranden onscherp bij snelle vallen en lanceringen; het midden blijft scherp. Beweging beperken schakelt het uit
+
+@ Brightness of the underwater light patterns
+nl Helderheid van de lichtpatronen onder water
+
+@ Caps mark count, lifetime, airborne droplets and wound/gib painting; low skips enemy wounds and gib trails
+nl Begrenst aantal sporen, levensduur, druppels in de lucht en wond-/gibvlekken; laag slaat vijandwonden en gibsporen over
+
+@ Caps shader input at output size so 200% render scale keeps 3D sharpness without 4x shader cost; low scales stay low-res
+nl Begrenst de shaderinvoer tot de uitvoergrootte, zodat 200% renderschaal 3D scherp houdt zonder 4× shaderkosten; lage schalen blijven lage resolutie
+
+@ Classic: the original status bar; modern: compact elements at the screen edges
+nl Klassiek: de originele statusbalk; modern: compacte elementen aan de schermranden
+
+@ Coat atlas resolution, rebuild rate and shader detail: low builds smaller coats less often with fast shading; high uses full detail
+nl Atlasresolutie, bijwerktempo en shaderdetail van de laag: laag bouwt kleinere lagen minder vaak met snelle shading; hoog gebruikt volledig detail
+
+@ Colour of the railgun's spiral trail; split-screen players each get the next colour along
+nl Kleur van het spiraalspoor van de railgun; spelers op gesplitst scherm krijgen elk de volgende kleur
+
+@ Damage the railgun deals to each enemy it passes through (Quake III: 100)
+nl Schade die de railgun doet aan elke vijand waar hij doorheen gaat (Quake III: 100)
+
+@ Dark backdrop behind on-screen messages for readability
+nl Donkere achtergrond achter berichten in beeld voor betere leesbaarheid
+
+@ Dark border keeps the crosshair visible on any background
+nl Donkere rand houdt het vizier zichtbaar op elke achtergrond
+
+@ Darkens corners and contact areas where geometry meets; higher quality is sharper
+nl Verduistert hoeken en raakvlakken waar geometrie samenkomt; hogere kwaliteit is scherper
+
+@ Debris lands on and is carried or shoved by doors, lifts and platforms
+nl Puin landt op deuren, liften en platforms en wordt erdoor meegenomen of weggeduwd
+
+@ Detail for caustics, ripples and splashes: low uses smaller budgets and shorter view distance; high uses larger budgets and farther view distance
+nl Detail voor caustieken, rimpelingen en spetters: laag gebruikt kleinere budgetten en een kortere zichtafstand; hoog grotere budgetten en een verdere zichtafstand
+
+@ Disabled while Enhanced Particles is on: its particles replace the GLQuake and Classic styles
+nl Uitgeschakeld zolang Verbeterde deeltjes aan staat: die deeltjes vervangen de stijlen GLQuake en Klassiek
+
+@ Disabled while Enhanced Water is on: its own underwater effects replace the classic and GLQuake view warps
+nl Uitgeschakeld zolang Verbeterd water aan staat: de eigen onderwatereffecten vervangen de klassieke en GLQuake-beeldvervorming
+
+@ Draw the predicted grenade path as a solid or dashed line
+nl Teken het voorspelde granaatpad als doorgetrokken of gestreepte lijn
+
+@ Draw the view out of the linked portal inside each portal; off shows flat discs (fastest)
+nl Toon in elk portaal het beeld uit het gekoppelde portaal; uit toont platte schijven (snelst)
+
+@ Droplets spray up when things enter or leave water, slime or lava
+nl Druppels spatten op wanneer iets water, slijm of lava in- of uitgaat
+
+@ Emulates the original 8-bit palette of software rendering
+nl Bootst het originele 8-bit palet van softwarerendering na
+
+@ Every level starts with only the shotgun and axe, as if started fresh
+nl Elk level begint met alleen de shotgun en de bijl, alsof je opnieuw begint
+
+@ Explosion damage for each remotely detonated sticky bomb
+nl Explosieschade van elke op afstand ontstoken kleefbom
+
+@ Extra freeze milliseconds for every 10 damage dealt, so heavy hits stop longer
+nl Extra milliseconden bevriezing per 10 toegebrachte schade, zodat zware treffers langer stilstaan
+
+@ First person, a third-person camera centered behind the player, or one over the right or left shoulder; third person hides viewmodels
+nl Eerste persoon, een camera in derde persoon midden achter de speler, of een boven de rechter- of linkerschouder; derde persoon verbergt wapenmodellen
+
+@ Flash the selected marker on confirmed hits; colors are shared with the crosshair
+nl Laat de gekozen marker oplichten bij bevestigde treffers; de kleuren zijn dezelfde als die van het vizier
+
+@ Freeze for every enemy, or only for enemies that were tough before the hit
+nl Bevries bij elke vijand, of alleen bij vijanden die vóór de treffer taai waren
+
+@ Freeze the game briefly when you damage an enemy; single player with add-ons only
+nl Bevriest het spel kort wanneer je een vijand schade toebrengt; alleen singleplayer met add-ons
+
+@ Gibs tumble and barrels throw shrapnel; shots and blasts push them (cosmetic only)
+nl Gibs tuimelen en vaten slingeren scherven; schoten en ontploffingen duwen ze weg (alleen cosmetisch)
+
+@ Health an enemy must have had before the hit to count as tough
+nl Gezondheid die een vijand vóór de treffer moet hebben gehad om als taai te gelden
+
+@ Hits dealing less damage than this do not freeze the game; the default 10 skips nails and shotgun pellets
+nl Treffers met minder schade dan dit bevriezen het spel niet; de standaardwaarde 10 slaat spijkers en shotgunhagel over
+
+@ Hold fire and sweep the crosshair over monsters to queue them, release to throw: it stuns each in turn and flies back; alt-fire clears the queue
+nl Houd vuur ingedrukt en beweeg het vizier over monsters om ze in de rij te zetten, laat los om te werpen: hij verdooft ze een voor een en vliegt terug; alt. vuur wist de rij
+
+@ Hold: keep Lock-on held. Toggle: press Auto-aim Toggle to enable automatic acquisition. Click look stick to switch targets
+nl Vasthouden: houd Lock-on ingedrukt. Aan/uit: druk op Auto-richten aan/uit om automatisch vastzetten in te schakelen. Klik de kijkstick in om van doelwit te wisselen
+
+@ How close an enemy must be to the crosshair for automatic acquisition in toggle mode (degrees)
+nl Hoe dicht een vijand bij het vizier moet zijn voor automatisch vastzetten in de aan/uit-modus (graden)
+
+@ How far the view tilts up and down when you tilt the controller (pitch axis)
+nl Hoe ver het beeld op en neer kantelt als je de controller kantelt (pitch-as)
+
+@ How far the view turns left and right when you turn the controller (yaw axis)
+nl Hoe ver het beeld naar links en rechts draait als je de controller draait (yaw-as)
+
+@ How far the view turns when you drag on the right half of the screen
+nl Hoe ver het beeld draait als je over de rechterhelft van het scherm sleept
+
+@ How fast the boomerang flies (units per second)
+nl Hoe snel de boemerang vliegt (eenheden per seconde)
+
+@ How hard shots and explosions push debris around
+nl Hoe hard schoten en explosies puin wegduwen
+
+@ How hard the Powerwasher's water pushes enemies
+nl Hoe hard het water van de hogedrukspuit vijanden wegduwt
+
+@ How long a hit freezes the game, in milliseconds
+nl Hoe lang een treffer het spel bevriest, in milliseconden
+
+@ How strongly fog covers the sky when fog is on
+nl Hoe sterk mist de hemel bedekt als mist aan staat
+
+@ How the view distorts underwater: Classic ripples the whole screen like software Quake, GLQuake slowly stretches and squashes the view
+nl Hoe het beeld onder water vervormt: Klassiek laat het hele scherm golven zoals software-Quake, GLQuake rekt en drukt het beeld langzaam samen
+
+@ Ignores gyro rotation slower than this many degrees per second, to hide hand tremor
+nl Negeert gyrodraaiingen langzamer dan dit aantal graden per seconde, om trillende handen te verbergen
+
+@ Immersive: appears for a few seconds only when its value changes
+nl Meeslepend: verschijnt alleen een paar seconden als de waarde verandert
+
+@ Keeps textures sharp on floors and walls seen at steep angles
+nl Houdt textures scherp op vloeren en muren die je onder een scherpe hoek ziet
+
+@ Lights from rockets, muzzle flashes and explosions brighten nearby walls
+nl Licht van raketten, mondingsvuur en explosies verlicht muren in de buurt
+
+@ Liquid surfaces swell and ring out where things move through them
+nl Vloeistofoppervlakken golven en vormen kringen waar iets doorheen beweegt
+
+@ Lobs sticky bombs (rockets ammo) that cling to walls, doors and monsters; alt-fire detonates them all
+nl Werpt kleefbommen (raketmunitie) die aan muren, deuren en monsters blijven plakken; alt. vuur laat ze allemaal ontploffen
+
+@ Look of the classic particles: GLQuake draws soft round dots, Classic draws square pixels like software Quake
+nl Uiterlijk van de klassieke deeltjes: GLQuake tekent zachte ronde stippen, Klassiek tekent vierkante pixels zoals software-Quake
+
+@ Low skips the background smear halo and uses fewer blur samples; high keeps the full halo and smoother streaks
+nl Laag slaat de vegende achtergrondhalo over en gebruikt minder samples; hoog behoudt de volledige halo en vloeiendere strepen
+
+@ Low: hard particle edges, half the scripted particles and fewer hit sparks. Medium: soft edges. High: soft edges checked per MSAA sample, most hit sparks
+nl Laag: harde deeltjesranden, de helft van de gescripte deeltjes en minder vonken. Gemiddeld: zachte randen. Hoog: zachte randen per MSAA-sample, de meeste vonken
+
+@ Marks fade out before expiring; oldest marks are recycled at the limit
+nl Sporen vervagen voordat ze verdwijnen; bij de limiet worden de oudste hergebruikt
+
+@ Max nested portal reflections to draw; each level redraws the scene
+nl Max. aantal geneste portaalreflecties; elk niveau tekent de scène opnieuw
+
+@ Max portals per screen with a live view; each one redraws the scene
+nl Max. aantal portalen per scherm met een live beeld; elk portaal tekent de scène opnieuw
+
+@ Maximum distance for acquiring and keeping an enemy locked
+nl Maximale afstand om een vijand vast te zetten en vast te houden
+
+@ Minimum gap between freezes, so shotgun pellets and rapid fire count once; kills ignore it
+nl Minimale tijd tussen bevriezingen, zodat shotgunhagel en snelvuur één keer tellen; kills negeren dit
+
+@ Modern terminal console with autocomplete popup, history search, ANSI colors, bash shell and piping; off uses the classic Quake console
+nl Moderne terminalconsole met automatisch aanvullen, zoeken in geschiedenis, ANSI-kleuren, bash-shell en pipes; uit gebruikt de klassieke Quake-console
+
+@ Monsters take proportionally less damage at higher values; above 100% is harder
+nl Monsters krijgen bij hogere waarden naar verhouding minder schade; boven 100% is moeilijker
+
+@ Moving gibs leave blood on surfaces they touch
+nl Bewegende gibs laten bloed achter op oppervlakken die ze raken
+
+@ Multiplier on the freeze when the hit kills the enemy; 1 means no extra
+nl Vermenigvuldiger voor de bevriezing als de treffer de vijand doodt; 1 betekent geen extra
+
+@ Multiplies ammo from pickups (up to the normal carry limit); below 100% is harder
+nl Vermenigvuldigt munitie uit pickups (tot de normale draaglimiet); onder 100% is moeilijker
+
+@ Multiplies health from pickups (up to 100, or the item's own limit); below 100% is harder
+nl Vermenigvuldigt gezondheid uit pickups (tot 100, of de eigen limiet van het item); onder 100% is moeilijker
+
+@ Nails stick to wood and bodies; hard surfaces deflect them to the floor
+nl Spijkers blijven steken in hout en lichamen; harde oppervlakken kaatsen ze naar de vloer
+
+@ Nearest keeps crisp classic pixels; linear smooths textures
+nl Dichtstbijzijnde houdt scherpe klassieke pixels; lineair maakt textures vloeiend
+
+@ New Game: Add-ons
+nl Nieuw spel: add-ons
+
+@ New Game: Customize
+nl Nieuw spel: aanpassen
+
+@ Night vision: how much dark areas are brightened; thermal: how strongly heat stands out
+nl Nachtzicht: hoeveel donkere gebieden worden opgehelderd; warmtebeeld: hoe sterk warmte opvalt
+
+@ Night-vision and thermal goggles, cycle normal, night vision and thermal with Change Goggles (Add-ons), or use the Equipment Wheel
+nl Nachtzicht- en warmtebeeldbril: wissel tussen normaal, nachtzicht en warmtebeeld met Bril wisselen (add-ons), of gebruik het uitrustingswiel
+
+@ No single freeze lasts longer than this, however much damage or kill bonus adds
+nl Geen enkele bevriezing duurt langer dan dit, hoeveel schade of killbonus er ook bijkomt
+
+@ Oldest marks and nails are recycled at this shared limit
+nl Bij deze gedeelde limiet worden de oudste sporen en spijkers hergebruikt
+
+@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
+nl Stick en knoppen in beeld: auto toont ze na een aanraking en verbergt ze als een ander apparaat wordt gebruikt
+
+@ Only autosaves: quicksaves and the Save menu are off
+nl Alleen autosaves: snel opslaan en het opslagmenu zijn uitgeschakeld
+
+@ Place every weapon at the center, right or left of the view, or hide all viewmodels
+nl Plaats elk wapen in het midden, rechts of links in beeld, of verberg alle wapenmodellen
+
+@ Play your chosen hit or kill cue when you damage an enemy
+nl Speel je gekozen hit- of killgeluid af wanneer je een vijand schade toebrengt
+
+@ Playback speed: faster sounds shorter and higher
+nl Afspeelsnelheid: sneller klinkt korter en hoger
+
+@ Plays the Quake theme in the main menu when no game is running
+nl Speelt het Quake-thema in het hoofdmenu als er geen spel loopt
+
+@ Portals farther away than this are drawn as flat discs
+nl Portalen verder weg dan dit worden als platte schijven getekend
+
+@ Press attack once to keep firing, again to stop
+nl Druk één keer op aanvallen om te blijven vuren, nog eens om te stoppen
+
+@ Press run once to switch between running and walking
+nl Druk één keer op rennen om te wisselen tussen rennen en lopen
+
+@ Raise or lower the tone independently of sound length
+nl Verhoog of verlaag de toon zonder de lengte van het geluid te veranderen
+
+@ Red screen edges show where damage came from: top is front, bottom is behind; Screen Flashes controls their strength
+nl Rode schermranden tonen waar schade vandaan kwam: boven is voor, onder is achter; Schermflitsen bepaalt hun sterkte
+
+@ Replaces the classic dot particles with glowing sparks, smoke and blood; mods with their own particle effects keep them
+nl Vervangt de klassieke stipdeeltjes door gloeiende vonken, rook en bloed; mods met eigen deeltjeseffecten houden die
+
+@ Resolution and detail inside portal and teleporter views; lower tiers trim nested effects
+nl Resolutie en detail in portaal- en teleporterbeelden; lagere niveaus beperken geneste effecten
+
+@ Rippling light patterns on surfaces under water and slime
+nl Golvende lichtpatronen op oppervlakken onder water en slijm
+
+@ Scales all damage you take; above 100% is harder
+nl Schaalt alle schade die je krijgt; boven 100% is moeilijker
+
+@ Screen edge for this element; elements on the same spot stack
+nl Schermrand voor dit element; elementen op dezelfde plek worden gestapeld
+
+@ Seconds a monster hit by the boomerang stays stunned
+nl Seconden dat een door de boemerang geraakt monster verdoofd blijft
+
+@ Seconds impact marks and stuck nails stay before fading out; independent of Particle Quality
+nl Seconden dat inslagsporen en vastzittende spijkers blijven voordat ze vervagen; los van Deeltjeskwaliteit
+
+@ Seconds messages at the top of the screen stay up
+nl Seconden dat berichten boven in beeld blijven staan
+
+@ Seconds the flick stick snap takes; lower is faster
+nl Seconden die de flick-stick-sprong duurt; lager is sneller
+
+@ See through enhanced water; enables Water Opacity
+nl Kijk door verbeterd water heen; schakelt Waterdekking in
+
+@ Sensor grain, scanlines and flicker of the goggle image
+nl Sensorkorrel, scanlines en flikkering van het brilbeeld
+
+@ Shades every anti-aliasing sample; needs Anti-aliasing on
+nl Shadet elke anti-aliasingsample; vereist dat Anti-aliasing aan staat
+
+@ Shifts colors so they stay distinct for the chosen color blindness
+nl Verschuift kleuren zodat ze te onderscheiden blijven bij de gekozen kleurenblindheid
+
+@ Shotgun hits leave small surface marks (cosmetic only)
+nl Shotguntreffers laten kleine sporen op oppervlakken achter (alleen cosmetisch)
+
+@ Show corner ticks at screen centre while locked, even with Crosshair off
+nl Toon hoekmarkeringen in het midden van het scherm tijdens lock-on, ook als het vizier uit staat
+
+@ Show where grenades and other arcing shots will fly, bounce and land; local play only, not in deathmatch
+nl Toon waar granaten en andere boogschoten heen vliegen, stuiteren en landen; alleen lokaal spel, niet in deathmatch
+
+@ Shows text for important sounds: doors, alerted enemies, secrets, pickups
+nl Toont tekst voor belangrijke geluiden: deuren, gealarmeerde vijanden, geheimen, pickups
+
+@ Shows the distance fog that maps and mods set; off always gives clear view
+nl Toont de afstandsmist die maps en mods instellen; uit geeft altijd vrij zicht
+
+@ Shows the player face next to the health number
+nl Toont het gezicht van de speler naast het gezondheidsgetal
+
+@ Simulation detail, step rate, fade-out lifetimes and caps for gibs and shrapnel; low also skips mover collision
+nl Simulatiedetail, stapfrequentie, vervaagtijden en limieten voor gibs en scherven; laag slaat ook botsingen met bewegende objecten over
+
+@ Size of the on-screen buttons and move stick
+nl Grootte van de knoppen en de bewegingsstick in beeld
+
+@ Slowly heals up to 100 health after 5 seconds without being hit
+nl Herstelt langzaam tot 100 gezondheid na 5 seconden zonder geraakt te worden
+
+@ Slows stick look while the crosshair is over an enemy
+nl Vertraagt kijken met de stick zolang het vizier op een vijand staat
+
+@ Slows the game down while the weapon wheel is open
+nl Vertraagt het spel zolang het wapenwiel open is
+
+@ Slows the whole game down; single player only. Saves and demos stay compatible with other ports
+nl Vertraagt het hele spel; alleen singleplayer. Saves en demo's blijven compatibel met andere ports
+
+@ Small camera jolt on each freeze; off with Reduce Motion
+nl Kleine camerastoot bij elke bevriezing; uit met Beweging beperken
+
+@ Snap and track enemies in local play, including split-screen; unavailable online
+nl Vijanden vastzetten en volgen in lokaal spel, ook op gesplitst scherm; niet beschikbaar online
+
+@ Sparks, smoke, chips, splinters and splashes fly off whatever your shots hit
+nl Vonken, rook, splinters en spetters vliegen af van alles wat je schoten raken
+
+@ Spawns extra copies of every monster around the original when a level starts
+nl Plaatst bij de start van een level extra kopieën van elk monster rond het origineel
+
+@ Strength of the full-screen flashes for damage, pickups and powerups
+nl Sterkte van de schermvullende flitsen bij schade, pickups en power-ups
+
+@ Stretch or shorten the sound while keeping its pitch
+nl Rek het geluid uit of verkort het met behoud van de toonhoogte
+
+@ Surface opacity; requires Enhanced Water and Translucent Water
+nl Dekking van het oppervlak; vereist Verbeterd water en Doorschijnend water
+
+@ The hook latches onto metal surfaces (metal, tech, computer panels, copper)
+nl De haak grijpt zich vast aan metalen oppervlakken (metaal, tech, computerpanelen, koper)
+
+@ The hook latches onto stone, brick, rock and any surface not recognised as wood or metal
+nl De haak grijpt zich vast aan steen, baksteen, rots en elk oppervlak dat niet als hout of metaal wordt herkend
+
+@ The hook latches onto wooden surfaces (texture names like wood, crate, plank)
+nl De haak grijpt zich vast aan houten oppervlakken (texturenamen zoals wood, crate, plank)
+
+@ Turn the controller's motion sensor into a look input; needs a pad with a gyroscope
+nl Maakt van de bewegingssensor van de controller een kijkinvoer; vereist een controller met gyroscoop
+
+@ Turns off view bob, strafe tilt and the camera kick when hit or firing
+nl Schakelt hoofdbeweging, kanteling bij zijwaarts lopen en de camerastoot bij treffers of vuren uit
+
+@ Turns on the extra liquid effects; Water Settings controls each one
+nl Schakelt de extra vloeistofeffecten in; Waterinstellingen regelt elk effect
+
+@ Turns the view to follow a moving enemy you are aiming at
+nl Draait het beeld mee met een bewegende vijand waar je op richt
+
+@ Turns the view when you roll the controller sideways; 0 disables it, negative reverses it
+nl Draait het beeld als je de controller zijwaarts kantelt; 0 schakelt het uit, negatief keert het om
+
+@ Two-portal gun: fire and alt-fire place linked portals on flat walls; assign a weapon slot in Add-ons
+nl Pistool met twee portalen: vuur en alt. vuur plaatsen gekoppelde portalen op vlakke muren; wijs een wapenslot toe in Add-ons
+
+@ Unlocks the FX Settings page: enhanced particles, impact effects and blood splatter
+nl Ontgrendelt de pagina Effectinstellingen: verbeterde deeltjes, inslageffecten en bloedspatten
+
+@ Uses the 2021 re-release's smoother MD5 models (and MD3 replacements from mods) instead of the classic ones. Applies on the next map load
+nl Gebruikt de vloeiendere MD5-modellen van de heruitgave uit 2021 (en MD3-vervangingen uit mods) in plaats van de klassieke. Geldt vanaf het laden van de volgende map
+
+@ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
+nl Gebruikt het gekleurde licht van de map (.lit-bestand of BSPX-lump); uit geeft het originele witte licht. Geldt vanaf het laden van de volgende map
+
+@ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
+nl Waterstraalsegmenten, aantal druppels en glanzende vloeistofshading: laag gebruikt eenvoudigere doorschijnende stralen; hoog vloeiende glanzende stralen
+
+@ When gyro looking applies: always, off while +gyroaction is held, or only while it is held
+nl Wanneer gyrokijken geldt: altijd, uit zolang +gyroaction wordt vastgehouden, of alleen zolang het wordt vastgehouden
+
+@ Which weapons trigger the freeze; melee covers the axe and any mod weapon used at close range without ammo
+nl Welke wapens de bevriezing activeren; melee omvat de bijl en elk modwapen dat op korte afstand zonder munitie wordt gebruikt
+
+@ Your own rockets and grenades don't hurt you; rocket jumps still work
+nl Je eigen raketten en granaten doen je geen pijn; raketsprongen werken nog steeds
+
+# ==== ui.txt ====
+
+# Menus and pop-ups outside the options pages: save cards, launch, presets,
+# add-on browser, map packs, hints and dialogs.
+@ Select
+nl Selecteren
+
+@ Back
+nl Terug
+
+@ Cancel
+nl Annuleren
+
+@ Confirm
+nl Bevestigen
+
+@ Scroll
+nl Scrollen
+
+@ Section
+nl Sectie
+
+@ Bind
+nl Toewijzen
+
+@ Cancel binding
+nl Toewijzen annuleren
+
+@ Clear
+nl Wissen
+
+@ Clear pad
+nl Controller wissen
+
+@ Remap
+nl Opnieuw toewijzen
+
+@ Type
+nl Typen
+
+@ Shift
+nl Shift
+
+@ Done
+nl Klaar
+
+@ Del
+nl Del
+
+@ Space
+nl Spatie
+
+@ Save
+nl Opslaan
+
+@ Load
+nl Laden
+
+@ Delete
+nl Verwijderen
+
+@ Play
+nl Spelen
+
+@ Yes
+nl Ja
+
+@ No
+nl Nee
+
+@ OK
+nl OK
+
+@ System
+nl Systeem
+
+@ Language
+nl Taal
+
+@ Help
+nl Help
+
+@ Fixed for this game: it was started without Customize
+nl Vast voor dit spel: het is gestart zonder Aanpassen
+
+@ Press a button or key to bind (Start cancels)
+nl Druk op een knop of toets om toe te wijzen (Start annuleert)
+
+@ Press button...
+nl Druk op een knop...
+
+@ Press key...
+nl Druk op een toets...
+
+@ Replace this binding?
+nl Deze toewijzing vervangen?
+
+@ is already assigned
+nl is al toegewezen
+
+@ {} already assigned
+nl {} al toegewezen
+
+@ Open Controls to remap Lock-on?
+nl Besturing openen om Lock-on opnieuw toe te wijzen?
+
+@ Lock-on
+nl Lock-on
+
+@ Auto-aim Toggle
+nl Auto-richten aan/uit
+
+@ Keyboard
+nl Toetsenbord
+
+@ Controller
+nl Controller
+
+# main menu, dialogs and screens
+@ Map Packs
+nl Mappakketten
+
+@ Customize
+nl Aanpassen
+
+@ Level Select
+nl Level kiezen
+
+@ Really quit?
+nl Echt afsluiten?
+
+@ You died
+nl Je bent dood
+
+@ Continue from most recent save
+nl Doorgaan vanaf meest recente save
+
+@ Select save
+nl Save kiezen
+
+@ Restart level
+nl Level herstarten
+
+@ Return to main menu
+nl Terug naar hoofdmenu
+
+@ (disabled)
+nl (uitgeschakeld)
+
+@ (fixed for this game)
+nl (vast voor dit spel)
+
+@ (off)
+nl (uit)
+
+@ Apply Display Changes
+nl Beeldwijzigingen toepassen
+
+@ Display Mode
+nl Weergavemodus
+
+@ Resolution
+nl Resolutie
+
+@ desktop
+nl bureaublad
+
+@ Preset
+nl Voorinstelling
+
+@ Map
+nl Map
+
+@ Reset Shader Settings
+nl Shaderinstellingen herstellen
+
+@ Reset to Defaults
+nl Standaardwaarden herstellen
+
+@ Searching...
+nl Zoeken...
+
+@ This game only autosaves.
+nl Dit spel slaat alleen automatisch op.
+
+@ (No Manual Saves modifier)
+nl (modifier Geen handmatig opslaan)
+
+@ End the current game?
+nl Huidig spel beëindigen?
+
+@ Unsaved progress will be lost.
+nl Niet-opgeslagen voortgang gaat verloren.
+
+@ End game
+nl Spel beëindigen
+
+@ Overwrite
+nl Overschrijven
+
+@ Overwrite "{}"?
+nl "{}" overschrijven?
+
+@ Saved {}
+nl {} opgeslagen
+
+@ Start a new game?
+nl Nieuw spel starten?
+
+@ New game
+nl Nieuw spel
+
+@ New Game
+nl Nieuw spel
+
+@ CUSTOM
+nl AANGEPAST
+
+@ Customize Experience
+nl Ervaring aanpassen
+
+@ Disable All
+nl Alles uitschakelen
+
+@ Disable All Modifications
+nl Alle aanpassingen uitschakelen
+
+@ Saves load in other source ports too.
+nl Saves laden ook in andere source ports.
+
+@ Standard rules, no add-ons.
+nl Standaardregels, geen add-ons.
+
+@ Choose skill
+nl Kies moeilijkheid
+
+@ The current game will end
+nl Het huidige spel wordt beëindigd
+
+@ Easy
+nl Makkelijk
+
+@ Normal
+nl Normaal
+
+@ Hard
+nl Moeilijk
+
+@ Nightmare
+nl Nachtmerrie
+
+# graphics preset pop-up
+@ Choose a Graphics Preset
+nl Kies een grafische voorinstelling
+
+@ Classic
+nl Klassiek
+
+@ Like the re-release: enhanced models,
+nl Zoals de heruitgave: verbeterde modellen,
+
+@ no added effects.
+nl geen toegevoegde effecten.
+
+@ Enhanced
+nl Verbeterd
+
+@ Every enhancement at its highest quality.
+nl Elke verbetering op de hoogste kwaliteit.
+
+@ Needs a capable GPU.
+nl Vereist een krachtige GPU.
+
+@ Low-End
+nl Low-end
+
+@ Fastest. No anti-aliasing, original
+nl Snelst. Geen anti-aliasing, originele
+
+@ models, lowest effect quality.
+nl modellen, laagste effectkwaliteit.
+
+@ Esc keeps the defaults
+nl Esc behoudt de standaardwaarden
+
+@ Everything can be changed later in Options.
+nl Alles kan later worden gewijzigd in Options.
+
+@ Keep Defaults
+nl Standaard behouden
+
+# save and load cards
+@ Save Game
+nl Spel opslaan
+
+@ Load Game
+nl Spel laden
+
+@ Autosaves
+nl Autosaves
+
+@ newest first
+nl nieuwste eerst
+
+@ Saves: {}
+nl Saves: {}
+
+@ Browse Autosaves
+nl Autosaves doorbladeren
+
+@ Every retained autosave, newest first
+nl Alle bewaarde autosaves, nieuwste eerst
+
+@ New save
+nl Nieuwe save
+
+@ Select to save your game here
+nl Selecteer om je spel hier op te slaan
+
+@ No autosaves yet
+nl Nog geen autosaves
+
+@ Autosaves are made on level entry, secrets and more (Options > Gameplay)
+nl Autosaves worden gemaakt bij levelstart, geheimen en meer (Options > Gameplay)
+
+@ No saves yet
+nl Nog geen saves
+
+@ Save from the Single Player menu, or press F6 to quicksave
+nl Sla op vanuit het menu Single Player, of druk op F6 om snel op te slaan
+
+@ No picture
+nl Geen afbeelding
+
+@ Del: delete save
+nl Del: save verwijderen
+
+@ Delete "{}"?
+nl "{}" verwijderen?
+
+@ This cannot be undone.
+nl Dit kan niet ongedaan worden gemaakt.
+
+@ Quicksave
+nl Quicksave
+
+@ Autosave: {}
+nl Autosave: {}
+
+@ unknown trigger
+nl onbekende trigger
+
+@ Latest - {}
+nl Nieuwste - {}
+
+@ Health {}
+nl Gezondheid {}
+
+@ Armor {}
+nl Pantser {}
+
+@ Kills {}/{}
+nl Kills {}/{}
+
+@ Secrets {}/{}
+nl Geheimen {}/{}
+
+@ Split-screen, {} players
+nl Gesplitst scherm, {} spelers
+
+@ Co-op
+nl Co-op
+
+@ Customized
+nl Aangepast
+
+@ Customized, {}
+nl Aangepast, {}
+
+@ Date unavailable
+nl Datum niet beschikbaar
+
+@ Just now
+nl Zojuist
+
+@ {} min ago
+nl {} min geleden
+
+@ {} h ago
+nl {} u geleden
+
+@ Level entry
+nl Levelstart
+
+@ Secret found
+nl Geheim gevonden
+
+@ All enemies killed
+nl Alle vijanden gedood
+
+@ All secrets found
+nl Alle geheimen gevonden
+
+@ Timer
+nl Timer
+
+# customize pages
+@ Standard rules
+nl Standaardregels
+
+@ Modifiers changed: {}
+nl Modifiers gewijzigd: {}
+
+@ no add-ons
+nl geen add-ons
+
+@ add-ons: {}
+nl add-ons: {}
+
+@ Saves of this game are .qsa files: they need this source port.
+nl Saves van dit spel zijn .qsa-bestanden: ze vereisen deze source port.
+
+@ Nothing changed: this plays as standard Quake.
+nl Niets gewijzigd: dit speelt als standaard Quake.
+
+@ Changes apply now and are saved with this game (.qsa).
+nl Wijzigingen gelden nu en worden met dit spel opgeslagen (.qsa).
+
+@ This game started without Customize, so its rules are fixed.
+nl Dit spel is gestart zonder Aanpassen, dus de regels liggen vast.
+
+@ Start a new game and choose Customize Experience.
+nl Start een nieuw spel en kies Ervaring aanpassen.
+
+@ These rules apply to the next customized game.
+nl Deze regels gelden voor het volgende aangepaste spel.
+
+# add-on browser
+@ Fire
+nl Vuren
+
+@ Alt Fire
+nl Alt. vuur
+
+@ Configure Parameters >
+nl Parameters instellen >
+
+@ Configure
+nl Instellen
+
+@ Settings
+nl Instellingen
+
+@ Change slot
+nl Slot wijzigen
+
+@ Toggle
+nl Aan/uit
+
+@ Details
+nl Details
+
+@ Enter or click the box: toggle
+nl Enter of klik op het vakje: aan/uit
+
+@ Right / Tab / click: details
+nl Rechts / Tab / klik: details
+
+@ Input Remapping
+nl Invoer opnieuw toewijzen
+
+@ Weapon Slot
+nl Wapenslot
+
+@ Customized games save as .qsa files, which need this source port.
+nl Aangepaste spellen worden opgeslagen als .qsa-bestanden, die deze source port vereisen.
+
+@ This game started without Customize, so its add-ons are fixed. Customize a new game instead.
+nl Dit spel is gestart zonder Aanpassen, dus de add-ons liggen vast. Pas in plaats daarvan een nieuw spel aan.
+
+@ Bullet Time
+nl Bullet time
+
+@ Change Goggles
+nl Bril wisselen
+
+@ Dodge / Dive
+nl Ontwijken / duiken
+
+@ Goggles
+nl Bril
+
+@ Hitstop
+nl Hitstop
+
+@ Projectile Shotguns
+nl Projectiel-shotguns
+
+@ BULLET TIME: 20%
+nl BULLET TIME: 20%
+
+@ NORMAL SPEED
+nl NORMALE SNELHEID
+
+@ SLOW MOTION: PHYSICAL PELLETS
+nl SLOW MOTION: FYSIEKE HAGEL
+
+@ DEMONSTRATION
+nl DEMONSTRATIE
+
+@ GAMEPLAY
+nl GAMEPLAY
+
+@ LOOP
+nl LUS
+
+@ Preview unavailable
+nl Voorbeeld niet beschikbaar
+
+# shader and language help lines
+@ A setting of the chosen shader; arrows step it, Enter is not needed
+nl Een instelling van de gekozen shader; pijltjes passen hem aan, Enter is niet nodig
+
+@ Language of the menus, messages and the 2021 re-release's game text; System follows your computer's language
+nl Taal van de menu's, berichten en de speltekst van de heruitgave uit 2021; Systeem volgt de taal van je computer
+
+@ Puts every setting of the chosen shader back to the preset's defaults
+nl Zet elke instelling van de gekozen shader terug naar de standaardwaarden van de voorinstelling
+
+@ RetroArch slang shader on the final image: CRT, scanlines, NTSC, sharpening; add your own in <game>/shaders
+nl RetroArch-slangshader op het eindbeeld: CRT, scanlines, NTSC, verscherping; voeg je eigen toe in <game>/shaders
+
+# modern console footer
+@ Shift+PgUp/Dn: height  ` : hide
+nl Shift+PgUp/Dn: hoogte  ` : verbergen
+
+@ Tab: complete  Ctrl+R: search  bash | pipe
+nl Tab: aanvullen  Ctrl+R: zoeken  bash | pipe
+
+@ ↑ +{} lines (End to jump) 
+nl ↑ +{} regels (End om te springen) 
+
+# add-on descriptions
+@ Create two linked portals on flat walls. Fire places the first portal; Alt Fire places the second. Walk through either portal to emerge from the other. Your momentum carries through. Assign a weapon slot below: pressing that slot repeatedly cycles its ordinary weapon and every enabled add-on assigned there. Portal view quality is configurable below.
+nl Maak twee gekoppelde portalen op vlakke muren. Vuren plaatst het eerste portaal, Alt. vuur het tweede. Loop door een van beide portalen om uit het andere te komen. Je vaart blijft behouden. Wijs hieronder een wapenslot toe: herhaaldelijk op dat slot drukken wisselt tussen het gewone wapen en elke ingeschakelde add-on op dat slot. De kwaliteit van het portaalbeeld kun je hieronder instellen.
+
+@ Hold Fire and sweep the crosshair over monsters to queue targets. Release Fire to throw: the boomerang visits each target, stuns it and returns to you. Alt Fire clears the queue. The weapon slot selects a group, not a separate hotkey: press it again to cycle through the weapons in that slot. Configure stun duration and flight speed below.
+nl Houd Vuren ingedrukt en beweeg het vizier over monsters om doelwitten in de rij te zetten. Laat Vuren los om te werpen: de boemerang bezoekt elk doelwit, verdooft het en keert terug naar jou. Alt. vuur wist de rij. Het wapenslot kiest een groep, geen aparte sneltoets: druk er opnieuw op om door de wapens in dat slot te wisselen. Stel hieronder verdovingsduur en vliegsnelheid in.
+
+@ Hold Fire to charge a sticky bomb using rocket ammunition; release to launch. A longer charge throws it faster. Bombs cling to walls, doors and monsters. Alt Fire detonates your planted bombs together. Place a trap, retreat, then detonate it when enemies approach. Assign any weapon slot below; repeated presses cycle through the ordinary weapon and add-ons in that slot.
+nl Houd Vuren ingedrukt om een kleefbom op te laden met raketmunitie; laat los om te lanceren. Hoe langer je oplaadt, hoe sneller hij vliegt. Bommen blijven plakken aan muren, deuren en monsters. Alt. vuur laat je geplaatste bommen tegelijk ontploffen. Zet een val, trek je terug en laat hem ontploffen als vijanden naderen. Wijs hieronder een wapenslot toe; herhaaldelijk drukken wisselt tussen het gewone wapen en de add-ons in dat slot.
+
+@ Fire launches a chain hook. It latches onto a permitted surface or enemy and reels you toward the anchor. Fire again or use Alt Fire to let go. Choose which materials and enemies can be hooked in Configure Parameters. Assign it to any weapon slot; repeated presses of the slot's existing binding cycle through its weapons.
+nl Vuren lanceert een kettinghaak. Die grijpt zich vast aan een toegestaan oppervlak of een vijand en trekt je naar het ankerpunt. Vuur opnieuw of gebruik Alt. vuur om los te laten. Kies in Parameters instellen welke materialen en vijanden gehaakt kunnen worden. Wijs hem toe aan een wapenslot; herhaaldelijk op de bestaande toets van dat slot drukken wisselt tussen de wapens.
+
+@ A piercing railgun inspired by Quake III. Fire sends a slug through every enemy along its line. Each shot consumes two cells, with a 1.5 second refire interval. Damage and the spiral trail colour are configurable below. Choose a weapon slot: the slot's current binding selects and cycles the weapons assigned to it.
+nl Een doorborende railgun, geïnspireerd op Quake III. Vuren stuurt een projectiel door elke vijand op zijn lijn. Elk schot kost twee cellen, met 1,5 seconde tussen schoten. Schade en de kleur van het spiraalspoor kun je hieronder instellen. Kies een wapenslot: de huidige toets van het slot selecteert en wisselt de wapens die eraan zijn toegewezen.
+
+@ A Portal-style gel sprayer. Fire sprays blue Repulsion gel: land, jump or run into it to bounce, and landings on it never hurt. Alt Fire sprays orange Propulsion gel: run across it to go much faster. Gel coats floors and walls until washed off with the Powerwasher. Assign a weapon slot below; repeated presses cycle the weapons in that slot.
+nl Een gelspuit zoals in Portal. Vuren spuit blauwe afstotingsgel: land, spring of ren erop om te stuiteren, en landen erop doet nooit pijn. Alt. vuur spuit oranje voortstuwingsgel: ren eroverheen om veel sneller te gaan. Gel bedekt vloeren en muren tot hij wordt weggespoten met de hogedrukspuit. Wijs hieronder een wapenslot toe; herhaaldelijk drukken wisselt tussen de wapens in dat slot.
+
+@ A water cannon. Fire shoots a straight jet with limited reach; Alt Fire a wide, shorter fan. The water pushes enemies back, turns projectiles aside and washes away gel and blood. Push strength is configurable below. Assign a weapon slot below; repeated presses cycle the weapons in that slot.
+nl Een waterkanon. Vuren spuit een rechte straal met beperkt bereik; Alt. vuur een brede, kortere waaier. Het water duwt vijanden terug, buigt projectielen af en spoelt gel en bloed weg. De duwkracht kun je hieronder instellen. Wijs hieronder een wapenslot toe; herhaaldelijk drukken wisselt tussen de wapens in dat slot.
+
+@ One equipment add-on includes both night vision and thermal vision. The Change Goggles action cycles Normal, Night Vision, Thermal, then Normal again. Night vision brightens dark rooms; thermal vision highlights living enemies. Goggles do not occupy a weapon slot. Configure intensity and sensor noise below. The binding affects only this add-on.
+nl Eén uitrustings-add-on bevat zowel nachtzicht als warmtebeeld. De actie Bril wisselen wisselt tussen Normaal, Nachtzicht, Warmtebeeld en weer Normaal. Nachtzicht maakt donkere ruimtes lichter; warmtebeeld laat levende vijanden oplichten. De bril neemt geen wapenslot in. Stel hieronder intensiteit en sensorruis in. De toewijzing geldt alleen voor deze add-on.
+
+@ Press Dodge with a movement direction on the ground or in midair: dive forward or leap backward and sideways. Diagonals are supported. Each press launches once, with a short recovery. The player body animates in third person. Assign the Dodge action below or in Controls.
+nl Druk op Ontwijken met een bewegingsrichting, op de grond of in de lucht: duik vooruit of spring achteruit en opzij. Diagonalen worden ondersteund. Elke druk lanceert je één keer, met een korte hersteltijd. Het lichaam van de speler wordt in derde persoon geanimeerd. Wijs de actie Ontwijken hieronder of in Besturing toe.
+
+@ Use the dedicated Bullet Time action to slow the whole local game to 20% speed. Hold is the default; Toggle switches on each press. The optional meter limits use in real seconds and regenerates while inactive. Disable the meter for unlimited use. Remap the action and configure duration and regeneration below.
+nl Gebruik de eigen actie Bullet time om het hele lokale spel te vertragen tot 20% snelheid. Vasthouden is de standaard; Aan/uit schakelt bij elke druk. De optionele meter beperkt het gebruik in echte seconden en laadt op als hij niet actief is. Schakel de meter uit voor onbeperkt gebruik. Wijs de actie opnieuw toe en stel duur en herstel hieronder in.
+
+@ Both shotguns and enemy grunts fire physical pellets with their original spread and damage. Fast default projectiles feel immediate; lower their speed to dodge incoming fire during bullet time. Configure projectile speed below, or reset it to the default of 10000 units per second.
+nl Beide shotguns en vijandige grunts vuren fysieke hagel af met hun originele spreiding en schade. Snelle standaardprojectielen voelen direct aan; verlaag hun snelheid om tijdens bullet time inkomend vuur te ontwijken. Stel hieronder de projectielsnelheid in, of zet die terug op de standaard van 10000 eenheden per seconde.
+
+@ Freezes the game for a split second when you damage an enemy, so hits feel heavier. Single player only. Choose which weapons trigger it (all, melee, ranged or explosives), how long it lasts and how much more a kill freezes. Advanced settings cover enemy toughness, damage scaling, cooldown and the longest freeze.
+nl Bevriest het spel een fractie van een seconde wanneer je een vijand schade toebrengt, zodat treffers zwaarder aanvoelen. Alleen singleplayer. Kies welke wapens het activeren (alle, melee, afstand of explosieven), hoe lang het duurt en hoeveel langer een kill bevriest. Geavanceerde instellingen omvatten taaiheid van vijanden, schadeschaal, afkoeltijd en de langste bevriezing.
+
+# map packs and the Quaddicted browser
+@ Get more maps (Quaddicted)...
+nl Meer maps downloaden (Quaddicted)...
+
+@ Type to filter...
+nl Typ om te filteren...
+
+@ Launch mod
+nl Mod starten
+
+@ Start first map
+nl Eerste map starten
+
+@ (running)
+nl (actief)
+
+@ running
+nl actief
+
+@ Recent
+nl Recent
+
+@ Name
+nl Naam
+
+@ Dir
+nl Map
+
+@ Default
+nl Standaard
+
+@ Title
+nl Titel
+
+@ Sort: {}
+nl Sortering: {}
+
+@ {} installed
+nl {} geïnstalleerd
+
+@ {}/{} matching
+nl {}/{} overeenkomend
+
+@ {} maps, {} completed
+nl {} maps, {} voltooid
+
+@ {}/{} matching, {} completed
+nl {}/{} overeenkomend, {} voltooid
+
+@ no maps of its own
+nl geen eigen maps
+
+@ dir: {}
+nl map: {}
+
+@ base: {}
+nl basis: {}
+
+@ Browse the Quaddicted archive of
+nl Blader door het Quaddicted-archief van
+
+@ single-player maps and episodes,
+nl singleplayer-maps en -episodes,
+
+@ then download and install them
+nl en download en installeer ze
+
+@ here. Each release gets its own
+nl hier. Elke release krijgt een eigen
+
+@ entry in this list.
+nl vermelding in deze lijst.
+
+@ Needs an internet connection.
+nl Vereist een internetverbinding.
+
+@ Quaddicted Map Archive
+nl Quaddicted-maparchief
+
+@ Newest
+nl Nieuwste
+
+@ Author
+nl Auteur
+
+@ Size
+nl Grootte
+
+@ Loading the map list...
+nl Maplijst laden...
+
+@ Couldn't load the map list: {}
+nl Kon de maplijst niet laden: {}
+
+@ {} single-player releases  -  F5 refreshes
+nl {} singleplayer-releases  -  F5 vernieuwt
+
+@ {} matching
+nl {} overeenkomend
+
+@ by {}
+nl door {}
+
+@ requires: {}
+nl vereist: {}
+
+@ maps: {}
+nl maps: {}
+
+@ Failed: {}
+nl Mislukt: {}
+
+@ Downloading... {}%
+nl Downloaden... {}%
+
+@ Unpacking...
+nl Uitpakken...
+
+@ Installed in {}/  -  Enter: play
+nl Geïnstalleerd in {}/  -  Enter: spelen
+
+@ Enter: download and install
+nl Enter: downloaden en installeren
+
+@ unpacking
+nl uitpakken
+
+@ failed
+nl mislukt
+
+@ installed
+nl geïnstalleerd
+
+@ Downloads are not available in the browser build
+nl Downloads zijn niet beschikbaar in de browserversie
+
+@ the map list could not be read
+nl de maplijst kon niet worden gelezen
+
+@ downloading needs the curl program
+nl downloaden vereist het programma curl
+
+@ download failed
+nl download mislukt
+
+@ the download is not a valid zip
+nl de download is geen geldige zip
+
+@ nothing to install for this engine
+nl niets te installeren voor deze engine
+
+@ needs {} installed first
+nl vereist eerst dat {} is geïnstalleerd
+
+@ couldn't unpack {}
+nl kon {} niet uitpakken
+
+# help screen
+@ About
+nl Over
+
+@ < Back
+nl < Terug
+
+# tr_ctx keys: English shows the short word, the key says which meaning
+@ Save (a manual save, as opposed to a quicksave or autosave)
+nl Save
+
+# ==== hud.txt ====
+
+# HUD, weapon and equipment wheels, sound captions and other in-game text.
+# Weapon, monster and item names follow the 2021 re-release's own translations.
+@ Axe
+nl Bijl
+
+@ Shotgun
+nl Shotgun
+
+@ Double-Barrelled Shotgun
+nl Dubbelloops shotgun
+
+@ Nailgun
+nl Spijkergeweer
+
+@ Super Nailgun
+nl Superspijkergeweer
+
+@ Grenade Launcher
+nl Granaatwerper
+
+@ Rocket Launcher
+nl Raketwerper
+
+@ Thunderbolt
+nl Thunderbolt
+
+@ Portal Gun
+nl Portaalkanon
+
+@ Boomerang
+nl Boemerang
+
+@ Stickybomb Launcher
+nl Kleefbomwerper
+
+@ Railgun
+nl Railgun
+
+@ Hookshot
+nl Enterhaak
+
+@ Gel Sprayer
+nl Gelspuit
+
+@ Powerwasher
+nl Hogedrukspuit
+
+@ Night Vision Goggles
+nl Nachtzichtbril
+
+@ Thermal Goggles
+nl Warmtebeeldbril
+
+@ Normal vision
+nl Normaal zicht
+
+@ ON
+nl AAN
+
+@ OFF
+nl UIT
+
+@ {} (turn on)
+nl {} (aanzetten)
+
+@ {} (turn off)
+nl {} (uitzetten)
+
+@ Move mouse to select, release to toggle
+nl Beweeg de muis om te kiezen, laat los om te schakelen
+
+@ Move mouse to select, release to equip
+nl Beweeg de muis om te kiezen, laat los om uit te rusten
+
+@ Release to toggle
+nl Loslaten om te schakelen
+
+@ Release to equip
+nl Loslaten om uit te rusten
+
+@ shells
+nl patronen
+
+@ nails
+nl spijkers
+
+@ rockets
+nl raketten
+
+@ cells
+nl cellen
+
+@ Kills: {}/{}
+nl Kills: {}/{}
+
+@ Secrets: {}/{}
+nl Geheimen: {}/{}
+
+@ Time {}
+nl Tijd {}
+
+@ Press any button to continue...
+nl Druk op een knop om door te gaan...
+
+@ Press any key to continue...
+nl Druk op een toets om door te gaan...
+
+@ BULLET TIME
+nl BULLET TIME
+
+@ AUTO AIM
+nl AUTO-RICHTEN
+
+@ Crosshair
+nl Vizier
+
+@ + Marker
+nl + marker
+
+@ Hit markers off
+nl Hitmarkers uit
+
+@ On target
+nl Op doelwit
+
+@ On kill
+nl Bij kill
+
+# sound captions
+@ [Secret found]
+nl [Geheim gevonden]
+
+@ [Message]
+nl [Bericht]
+
+@ [Switch activated]
+nl [Schakelaar geactiveerd]
+
+@ [Key picked up]
+nl [Sleutel opgepakt]
+
+@ [Rune picked up]
+nl [Rune opgepakt]
+
+@ [Teleporter]
+nl [Teleporter]
+
+@ [Teleport]
+nl [Teleport]
+
+@ [Splash]
+nl [Plons]
+
+@ [Leaving water]
+nl [Water verlaten]
+
+@ [Door]
+nl [Deur]
+
+@ [Platform moving]
+nl [Platform beweegt]
+
+@ [Button]
+nl [Knop]
+
+@ [Health picked up]
+nl [Gezondheid opgepakt]
+
+@ [Armor picked up]
+nl [Pantser opgepakt]
+
+@ [Quad Damage wearing off]
+nl [Quad Damage raakt op]
+
+@ [Quad Damage]
+nl [Quad Damage]
+
+@ [Pentagram wearing off]
+nl [Pentagram raakt op]
+
+@ [Pentagram of Protection]
+nl [Pentagram van bescherming]
+
+@ [Ring wearing off]
+nl [Ring raakt op]
+
+@ [Ring of Shadows]
+nl [Ring der schaduwen]
+
+@ [Biosuit wearing off]
+nl [Biosuit raakt op]
+
+@ [Biosuit]
+nl [Biosuit]
+
+@ [Item picked up]
+nl [Item opgepakt]
+
+@ [Weapon picked up]
+nl [Wapen opgepakt]
+
+@ [Ammo picked up]
+nl [Munitie opgepakt]
+
+@ [Explosion]
+nl [Explosie]
+
+@ [Grenade launched]
+nl [Granaat afgevuurd]
+
+@ [Grenade bounce]
+nl [Granaat stuitert]
+
+@ [Rocket fired]
+nl [Raket afgevuurd]
+
+@ [Nails fired]
+nl [Spijkers afgevuurd]
+
+@ [Lightning]
+nl [Bliksem]
+
+@ [Thunder]
+nl [Donder]
+
+@ [Enforcer alerted]
+nl [Enforcer gealarmeerd]
+
+@ [Grunt alerted]
+nl [Grunt gealarmeerd]
+
+@ [Rottweiler alerted]
+nl [Rottweiler gealarmeerd]
+
+@ [Knight alerted]
+nl [Knight gealarmeerd]
+
+@ [Death Knight alerted]
+nl [Death Knight gealarmeerd]
+
+@ [Scrag alerted]
+nl [Scrag gealarmeerd]
+
+@ [Ogre alerted]
+nl [Ogre gealarmeerd]
+
+@ [Fiend alerted]
+nl [Fiend gealarmeerd]
+
+@ [Shambler alerted]
+nl [Shambler gealarmeerd]
+
+@ [Zombie groaning]
+nl [Zombie kreunt]
+
+@ [Vore alerted]
+nl [Vore gealarmeerd]
+
+@ [Vore attacking]
+nl [Vore valt aan]
+
+@ [Spawn alerted]
+nl [Spawn gealarmeerd]
+
+@ [Rotfish]
+nl [Rotfish]
+
+@ [Spawn]
+nl [Spawn]
+
+@ [Chthon]
+nl [Chthon]
+
+@ [Hard landing]
+nl [Harde landing]
+
+@ [Drowning]
+nl [Verdrinkt]
+
+@ [Gasping for air]
+nl [Hapt naar lucht]
+
+@ [Burning]
+nl [Brandt]
+
+@ [Telefrag]
+nl [Telefrag]
+
+@ [Gibbed]
+nl [Aan flarden]
+
+# ==== console.txt ====
+
+# Console messages, shown translated only with con_translate 1 (Translate Console).
+# Cvar and command names stay as they are.
+@ Autosaved.
+nl Automatisch opgeslagen.
+
+@ Game saved.
+nl Spel opgeslagen.
+
+@ Can't save now.
+nl Kan nu niet opslaan.
+
+@ This game only autosaves (No Manual Saves modifier).
+nl Dit spel slaat alleen automatisch op (modifier Geen handmatig opslaan).
+
+@ Loading {}...
+nl {} laden...
+
+@ load failed: {}
+nl laden mislukt: {}
+
+@ ERROR: autosave failed: {}
+nl FOUT: automatisch opslaan mislukt: {}
+
+@ ERROR: couldn't open {}
+nl FOUT: kon {} niet openen
+
+@ ERROR: couldn't open {}.
+nl FOUT: kon {} niet openen.
+
+@ ERROR: couldn't write {}: {}
+nl FOUT: kon {} niet schrijven: {}
+
+@ ERROR: couldn't create {}: {}
+nl FOUT: kon {} niet aanmaken: {}
+
+@ couldn't write {}: {}
+nl kon {} niet schrijven: {}
+
+@ Wrote {}
+nl {} geschreven
+
+@ screenshot failed: {}
+nl screenshot mislukt: {}
+
+@ screenshot: {}
+nl screenshot: {}
+
+@ No readable save available. Select save or restart the level.
+nl Geen leesbare save beschikbaar. Kies een save of herstart het level.
+
+@ Unknown command "{}"
+nl Onbekend commando "{}"
+
+@ couldn't exec {}
+nl kon {} niet uitvoeren
+
+@ execing {}
+nl {} uitvoeren
+
+@ execing config.cfg (inherited from {})
+nl config.cfg uitvoeren (overgenomen van {})
+
+@ execing config.cfg (mod defaults)
+nl config.cfg uitvoeren (standaardwaarden mod)
+
+@ execing default.cfg (built-in)
+nl default.cfg uitvoeren (ingebouwd)
+
+@ {} cvars
+nl {} cvars
+
+@ {} commands
+nl {} commando's
+
+@ Can't "cmd", not connected
+nl Kan "cmd" niet uitvoeren, niet verbonden
+
+@ Looking for Quake servers...
+nl Zoeken naar Quake-servers...
+
+@ Bad value, must be between 1 and 65534
+nl Ongeldige waarde, moet tussen 1 en 65534 liggen
+
+@ Couldn't handle music file {}
+nl Kon muziekbestand {} niet verwerken
+
+@ Bug report written to {}
+nl Bugrapport geschreven naar {}
+
+@ bugreport: can't create {}: {}
+nl bugreport: kan {} niet aanmaken: {}
+
+@ graphics preset: {}
+nl grafische voorinstelling: {}
+
+@ Presets (r_shader_preset <name>):
+nl Voorinstellingen (r_shader_preset <naam>):
+
+@ Add your own .slangp presets under <game>/shaders/.
+nl Voeg je eigen .slangp-voorinstellingen toe in <game>/shaders/.
+
+@ no shader preset loaded (r_shader_preset)
+nl geen shadervoorinstelling geladen (r_shader_preset)
+
+@ r_shader_preset: "{}" not found
+nl r_shader_preset: "{}" niet gevonden
+
+@ no parameter "{}" in this preset
+nl geen parameter "{}" in deze voorinstelling
+
+@ {} = {} (default {}, {}..{})
+nl {} = {} (standaard {}, {}..{})
+
+@ Switching to {}...
+nl Overschakelen naar {}...
+
+@ game: no game dir "{}" in {}
+nl game: geen spelmap "{}" in {}
+
+@ game: can't find the engine executable
+nl game: kan het uitvoerbare bestand van de engine niet vinden
+
+@ game: exec failed: {}
+nl game: uitvoeren mislukt: {}
+
+@ game: launch failed: {}
+nl game: starten mislukt: {}
+
+@ loaded {} in {}s
+nl {} geladen in {} s
+
+@ No demos listed with startdemos
+nl Geen demo's opgegeven met startdemos
+
+@ Playing demo from {}.
+nl Demo afspelen vanaf {}.
+
+@ {} frames {} seconds {} fps
+nl {} frames {} seconden {} fps
+
+@ Recording to {}.
+nl Opnemen naar {}.
+
+@ Completed demo
+nl Demo voltooid
+
+@ Can't record during demo playback
+nl Kan niet opnemen tijdens het afspelen van een demo
+
+@ Relative pathnames are not allowed.
+nl Relatieve padnamen zijn niet toegestaan.
+
+@ Can't record - try again when connected
+nl Kan niet opnemen - probeer het opnieuw als je verbonden bent
+
+@ {} demo(s) in loop
+nl {} demo('s) in de lus
+
+@ Not recording a demo.
+nl Er wordt geen demo opgenomen.
+
+@ {} joined on a gamepad
+nl {} doet mee met een gamepad
+
+@ goggles: needs a game started with Add-ons and Goggles enabled
+nl goggles: vereist een spel gestart met Add-ons en Bril ingeschakeld
+
+@ equip: needs a game started with Add-ons and Goggles enabled
+nl equip: vereist een spel gestart met Add-ons en Bril ingeschakeld
+
+@ UDP listening on port {}
+nl UDP luistert op poort {}
+
+@ UDP bind on port {} failed: {}
+nl UDP-binding op poort {} mislukt: {}
+
+@ Connection accepted by {}
+nl Verbinding geaccepteerd door {}
+
+@ Connection failed: {}
+nl Verbinding mislukt: {}
+
+@ Couldn't resolve {}
+nl Kon {} niet omzetten
+
+@ Connecting to {}...
+nl Verbinden met {}...
+
+@ Connecting to QuakeWorld server {}...
+nl Verbinden met QuakeWorld-server {}...
+
+@ Disconnected: {}
+nl Verbinding verbroken: {}
+
+@ Server disconnected
+nl Server heeft de verbinding verbroken
+
+@ Client {} connected
+nl Client {} verbonden
+
+@ Client {} timed out
+nl Time-out van client {}
+
+@ Couldn't spawn server {}: {}
+nl Kon server {} niet starten: {}
+
+@ maxplayers can not be changed while a server is running.
+nl maxplayers kan niet worden gewijzigd terwijl een server draait.
+
+@ You can't kick yourself!
+nl Je kunt jezelf niet kicken!
+
+@ Only the server may changelevel
+nl Alleen de server mag changelevel uitvoeren
+
+@ {} renamed to {}
+nl {} heet nu {}

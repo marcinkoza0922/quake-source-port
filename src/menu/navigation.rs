@@ -132,15 +132,5 @@ fn wrap_tooltip_lines(c: &Canvas, s: &str, max_w: f32, size: f32) -> Vec<String>
     if c.text_w(s, size) <= max_w {
         return vec![s.to_string()];
     }
-    let mut lines = vec![String::new()];
-    for word in s.split_whitespace() {
-        let cur = lines.last_mut().unwrap();
-        let candidate = if cur.is_empty() { word.to_string() } else { format!("{cur} {word}") };
-        if !cur.is_empty() && c.text_w(&candidate, size) > max_w {
-            lines.push(word.to_string());
-        } else {
-            *cur = candidate;
-        }
-    }
-    lines
+    qcore::lang::wrap(s, max_w, |t| c.text_w(t, size))
 }

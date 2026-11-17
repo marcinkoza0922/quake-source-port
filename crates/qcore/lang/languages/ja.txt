@@ -1,0 +1,3024 @@
+# ja: the port's own text; English keys from crates/qcore/lang/*.txt.
+# Format in crates/qcore/src/lang/catalog.rs; check with tools/lang_check.py.
+
+# ==== menu.txt ====
+
+# Options pages: page names, row labels and choice values.
+@ 10% speed
+ja 10%速度
+
+@ 2 split-screen
+ja 2人画面分割
+
+@ 3 split-screen
+ja 3人画面分割
+
+@ 4 split-screen
+ja 4人画面分割
+
+@ 5 split-screen
+ja 5人画面分割
+
+@ 6 split-screen
+ja 6人画面分割
+
+@ 2D aiming
+ja 2Dエイム
+
+@ 2x monsters
+ja モンスター2倍
+
+@ 3x monsters
+ja モンスター3倍
+
+@ 4x monsters
+ja モンスター4倍
+
+@ 3D resolution
+ja 3D解像度
+
+@ 3D view
+ja 3Dビュー
+
+@ 8-bit Color
+ja 8ビットカラー
+
+@ Accessibility
+ja アクセシビリティ
+
+@ Acquisition Cone
+ja 捕捉範囲
+
+@ Activation
+ja 有効化
+
+@ Add a ringing room tail after the cue
+ja 合図の後に響く残響を加えます
+
+@ Add delayed repeats after the cue
+ja 合図の後に遅延した繰り返しを加えます
+
+@ Add saturation and distortion
+ja サチュレーションと歪みを加えます
+
+@ Add-ons
+ja アドオン
+
+@ Address
+ja アドレス
+
+@ Adds fine noise to hide color banding
+ja 細かいノイズでカラーバンディングを隠します
+
+@ Advanced Settings
+ja 詳細設定
+
+@ Aim Assist
+ja エイムアシスト
+
+@ Aim Rotation
+ja エイム回転
+
+@ Aim Slowdown
+ja エイム減速
+
+@ Aim Style
+ja エイム方式
+
+@ All
+ja すべて
+
+@ All enemies
+ja すべての敵
+
+@ Alt Fire (Add-ons)
+ja サブ射撃（アドオン）
+
+@ Always Run
+ja 常に走る
+
+@ Ambient Occlusion
+ja アンビエントオクルージョン
+
+@ Ammo Counts
+ja 弾数
+
+@ Ammo Counts Position
+ja 弾数の位置
+
+@ Ammo Pickups
+ja 弾薬アイテム
+
+@ Anisotropic
+ja 異方性
+
+@ Anti-aliasing
+ja アンチエイリアス
+
+@ Apply To
+ja 適用対象
+
+@ Armor
+ja アーマー
+
+@ Armor Position
+ja アーマーの位置
+
+@ Ask
+ja 確認する
+
+@ Attack
+ja 攻撃
+
+@ Audio
+ja オーディオ
+
+@ Auto-aim
+ja オートエイム
+
+@ Auto-aim Settings
+ja オートエイム設定
+
+@ Autosave
+ja オートセーブ
+
+@ Autosave Settings
+ja オートセーブ設定
+
+@ Autosave Timer
+ja オートセーブ間隔
+
+@ Autosaves to Keep
+ja オートセーブ保持数
+
+@ Bass
+ja 低音
+
+@ Blip
+ja ブリップ
+
+@ Blood Quality
+ja 血の品質
+
+@ Blood Splatter Settings
+ja 血しぶき設定
+
+@ Blue
+ja 青
+
+@ Boomerang Settings
+ja ブーメラン設定
+
+@ Boost or cut high frequencies in decibels
+ja 高音域をデシベル単位で増減します
+
+@ Boost or cut low frequencies in decibels
+ja 低音域をデシベル単位で増減します
+
+@ Brightness
+ja 明るさ
+
+@ Bullet Time (Add-ons)
+ja バレットタイム（アドオン）
+
+@ Bullet Time Settings
+ja バレットタイム設定
+
+@ Button Glyphs
+ja ボタンアイコン
+
+@ Button Size
+ja ボタンサイズ
+
+@ Camera
+ja カメラ
+
+@ Caustic Intensity
+ja コースティクス強度
+
+@ Caustics
+ja コースティクス
+
+@ Center
+ja 中央
+
+@ Center Message Position
+ja 中央メッセージの位置
+
+@ Center Message Time
+ja 中央メッセージの表示時間
+
+@ Center View
+ja 視点を中央へ
+
+@ Change Color on Kill
+ja キル時に色を変更
+
+@ Change Color on Target
+ja 照準時に色を変更
+
+@ Chime
+ja チャイム
+
+@ Click
+ja クリック
+
+@ Clink
+ja カチン
+
+@ Coin
+ja コイン
+
+@ Color
+ja 色
+
+@ Color Filter
+ja カラーフィルター
+
+@ Color of the grenade arc
+ja グレネード軌道の色
+
+@ Colored Lighting
+ja カラーライティング
+
+@ Connect
+ja 接続
+
+@ Contrast
+ja コントラスト
+
+@ Controls
+ja 操作
+
+@ Cooldown (ms)
+ja クールダウン（ms）
+
+@ Crosshair Outline
+ja クロスヘアの縁取り
+
+@ Crosshair Shape
+ja クロスヘアの形
+
+@ Crosshair Size
+ja クロスヘアのサイズ
+
+@ Current Ammo
+ja 現在の弾薬
+
+@ Current Ammo Position
+ja 現在の弾薬の位置
+
+@ Customize This Game
+ja このゲームをカスタマイズ
+
+@ Damage
+ja ダメージ
+
+@ Damage Taken
+ja 被ダメージ
+
+@ Debris
+ja 破片
+
+@ Debris Quality
+ja 破片の品質
+
+@ Debris Settings
+ja 破片設定
+
+@ Directional Damage
+ja ダメージ方向表示
+
+@ Dithering
+ja ディザリング
+
+@ Dodge / Dive (Add-ons)
+ja 回避／ダイブ（アドオン）
+
+@ Dragging up looks down instead of up
+ja 上にドラッグすると下を向きます
+
+@ Drive
+ja ドライブ
+
+@ Dynamic Lights
+ja 動的ライト
+
+@ Echo
+ja エコー
+
+@ Enemy Health
+ja 敵の体力
+
+@ Enemy Wounds
+ja 敵の傷
+
+@ Enhanced Blood Splatter
+ja 強化血しぶき
+
+@ Enhanced FX
+ja 強化エフェクト
+
+@ Enhanced Models
+ja 強化モデル
+
+@ Enhanced Particles
+ja 強化パーティクル
+
+@ Enhanced Water
+ja 強化水面
+
+@ Enhancements
+ja 強化
+
+@ Equipment Wheel (Add-ons)
+ja 装備ホイール（アドオン）
+
+@ Exploding boxes throw metal shards
+ja 爆発する箱が金属片を飛ばします
+
+@ Explosion Damage
+ja 爆発ダメージ
+
+@ Explosion Scorch Marks
+ja 爆発の焦げ跡
+
+@ Explosions scorch nearby solid surfaces
+ja 爆発が近くの面を焦がします
+
+@ Explosives only
+ja 爆発物のみ
+
+@ Extra Monsters
+ja 追加モンスター
+
+@ Extra Per 10 Damage (ms)
+ja 10ダメージごとの追加（ms）
+
+@ FX Settings
+ja エフェクト設定
+
+@ Field of View
+ja 視野角
+
+@ Firing never uses up ammo
+ja 射撃で弾薬を消費しません
+
+@ First person
+ja 一人称
+
+@ Flick Time
+ja フリック時間
+
+@ Flight Speed
+ja 飛行速度
+
+@ Fog
+ja フォグ
+
+@ Frag Limit
+ja フラグ上限
+
+@ Freeze Duration (ms)
+ja 凍結時間（ms）
+
+@ GLQuake
+ja GLQuake
+
+@ Game Speed
+ja ゲーム速度
+
+@ Game Type
+ja ゲームタイプ
+
+@ Gameplay
+ja ゲームプレイ
+
+@ Gameplay Modifiers
+ja ゲームプレイ調整
+
+@ Gel Quality
+ja ジェルの品質
+
+@ Gib Surface Painting
+ja 肉片の跡
+
+@ Gibs
+ja 肉片
+
+@ Gibs and heads tumble and bounce
+ja 肉片や頭部が転がり跳ねます
+
+@ Goggle Glow Quality
+ja ゴーグル発光の品質
+
+@ Goggle Intensity
+ja ゴーグル強度
+
+@ Goggle Noise
+ja ゴーグルのノイズ
+
+@ Goggles Settings
+ja ゴーグル設定
+
+@ Graphics
+ja グラフィック
+
+@ Green
+ja 緑
+
+@ Grenade Arc
+ja グレネード軌道
+
+@ Grenade Arc Settings
+ja グレネード軌道設定
+
+@ Gun Kick
+ja 射撃反動
+
+@ Gyro
+ja ジャイロ
+
+@ Gyro & Flick Stick
+ja ジャイロ＆フリックスティック
+
+@ Gyro Active
+ja ジャイロ有効
+
+@ Gyro Aiming
+ja ジャイロエイム
+
+@ HUD
+ja HUD
+
+@ HUD Style
+ja HUDスタイル
+
+@ Health
+ja 体力
+
+@ Health Pickups
+ja 体力アイテム
+
+@ Health Position
+ja 体力の位置
+
+@ Health Regeneration
+ja 体力回復
+
+@ Hit & Kill Sounds
+ja ヒット＆キル音
+
+@ Hit Doors & Lifts
+ja ドアやリフトにもヒット
+
+@ Hit Markers
+ja ヒットマーカー
+
+@ Hit Sound
+ja ヒット音
+
+@ Hitmarker Size
+ja ヒットマーカーのサイズ
+
+@ Hitmarker Type
+ja ヒットマーカーの種類
+
+@ Hitstop Advanced
+ja ヒットストップ詳細
+
+@ Hitstop Settings
+ja ヒットストップ設定
+
+@ Hold
+ja 長押し
+
+@ Hold lock-on
+ja ロックオン維持
+
+@ Hook Enemies
+ja 敵に引っ掛ける
+
+@ Hook Metal
+ja 金属に引っ掛ける
+
+@ Hook Stone
+ja 石に引っ掛ける
+
+@ Hook Wood
+ja 木に引っ掛ける
+
+@ Hooking an enemy pulls you to it
+ja 敵に引っ掛けると敵の方へ引き寄せられます
+
+@ Hookshot Range
+ja フックショットの射程
+
+@ Hookshot Settings
+ja フックショット設定
+
+@ Host Game
+ja ゲームをホスト
+
+@ How far the hook flies before it retracts
+ja フックが戻るまでに飛ぶ距離
+
+@ How visible the on-screen controls are
+ja 画面上の操作ボタンの見えやすさ
+
+@ Impact Lifetime
+ja 着弾痕の持続時間
+
+@ Infinite Ammo
+ja 弾薬無限
+
+@ Input
+ja 入力
+
+@ Input Scale
+ja 入力スケール
+
+@ Interpolate Animation
+ja アニメーション補間
+
+@ Interpolate Movement
+ja 移動補間
+
+@ Invert Look
+ja 視点の上下反転
+
+@ Invert Mouse
+ja マウス反転
+
+@ Invert Stick
+ja スティック反転
+
+@ Jet Quality
+ja 噴射の品質
+
+@ Join Game
+ja ゲームに参加
+
+@ Jump / Swim Up
+ja ジャンプ／浮上
+
+@ Jump again in mid-air
+ja 空中でもう一度ジャンプ
+
+@ Jumps
+ja ジャンプ回数
+
+@ Keys & Powerups
+ja 鍵＆パワーアップ
+
+@ Keys & Powerups Position
+ja 鍵＆パワーアップの位置
+
+@ Kill Bonus (x)
+ja キルボーナス（x）
+
+@ Kill Sound
+ja キル音
+
+@ Knock
+ja ノック
+
+@ Left
+ja 左
+
+@ Length of the motion blur streaks
+ja モーションブラーの筋の長さ
+
+@ Lifetime (seconds)
+ja 持続時間（秒）
+
+@ Live Portal Views
+ja ポータルのライブ映像
+
+@ Live View Distance
+ja ライブ映像の距離
+
+@ Local Players
+ja ローカルプレイヤー
+
+@ Local red wounds follow enemy animation
+ja 敵の赤い傷がアニメーションに追従します
+
+@ Lock Indicator
+ja ロック表示
+
+@ Long falls don't hurt
+ja 高所からの落下でダメージなし
+
+@ Longest Freeze (ms)
+ja 最長停止時間（ms）
+
+@ Look Down
+ja 下を見る
+
+@ Look Speed
+ja 視点速度
+
+@ Look Up
+ja 上を見る
+
+@ Main Menu Music
+ja メインメニューBGM
+
+@ Max FPS
+ja 最大FPS
+
+@ Max Players
+ja 最大プレイヤー数
+
+@ Maximum Impacts
+ja 着弾痕の最大数
+
+@ Maximum Marks
+ja 跡の最大数
+
+@ Maximum Range
+ja 最大射程
+
+@ Melee only
+ja 近接のみ
+
+@ Message Background
+ja メッセージ背景
+
+@ Message Text Size
+ja メッセージ文字サイズ
+
+@ Messages & Captions
+ja メッセージ＆字幕
+
+@ Meter Duration (real seconds)
+ja ゲージ持続時間（実時間秒）
+
+@ Minimum Damage
+ja 最小ダメージ
+
+@ Mode
+ja モード
+
+@ Modern Console
+ja モダンコンソール
+
+@ Modern HUD Layout
+ja モダンHUDレイアウト
+
+@ Most recent save
+ja 最新のセーブ
+
+@ Motion Blur
+ja モーションブラー
+
+@ Motion Blur Amount
+ja モーションブラー量
+
+@ Motion Blur Quality
+ja モーションブラー品質
+
+@ Mouse & Keyboard
+ja マウス＆キーボード
+
+@ Mouse Speed
+ja マウス速度
+
+@ Move Back
+ja 後退
+
+@ Move Forward
+ja 前進
+
+@ Music Volume
+ja BGM音量
+
+@ Next Weapon
+ja 次の武器
+
+@ No Drowning
+ja 溺れない
+
+@ No Fall Damage
+ja 落下ダメージなし
+
+@ No Manual Saves
+ja 手動セーブなし
+
+@ No Self Damage
+ja 自爆ダメージなし
+
+@ Noise Filter
+ja ノイズフィルター
+
+@ Normal Color
+ja 通常の色
+
+@ Notify Message Position
+ja 通知メッセージの位置
+
+@ Notify Message Time
+ja 通知メッセージの表示時間
+
+@ Number of splatter rays per blood impact
+ja 血の着弾1回あたりの飛沫線の数
+
+@ Off
+ja オフ
+
+@ On Death
+ja 死亡時
+
+@ On Kill Color
+ja キル時の色
+
+@ On Target Color
+ja 照準時の色
+
+@ Opacity
+ja 不透明度
+
+@ Opacity of the grenade arc
+ja グレネード軌道の不透明度
+
+@ Pants Color
+ja ズボンの色
+
+@ Particle Quality
+ja パーティクル品質
+
+@ Particles
+ja パーティクル
+
+@ Physical Nail Impacts
+ja 物理ネイル着弾
+
+@ Pistol Start
+ja ピストルスタート
+
+@ Pitch
+ja ピッチ
+
+@ Pitch Sensitivity
+ja 縦感度
+
+@ Playback Speed
+ja 再生速度
+
+@ Player Setup
+ja プレイヤー設定
+
+@ Pop
+ja ポン
+
+@ Portal Gun Settings
+ja ポータルガン設定
+
+@ Portal Recursion
+ja ポータル再帰
+
+@ Portal View Quality
+ja ポータル映像品質
+
+@ Preview Sound
+ja サウンド試聴
+
+@ Previous Weapon
+ja 前の武器
+
+@ Projectile Shotguns Settings
+ja 弾丸式ショットガン設定
+
+@ Projectile Speed (units/s)
+ja 弾速（ユニット/秒）
+
+@ Purple
+ja 紫
+
+@ Push
+ja 押し出し
+
+@ Push Strength
+ja 押し出しの強さ
+
+@ Quick Load
+ja クイックロード
+
+@ Quick Save
+ja クイックセーブ
+
+@ Railgun Settings
+ja レールガン設定
+
+@ Ranged only
+ja 遠距離のみ
+
+@ Reacquire While Held
+ja 長押し中に再捕捉
+
+@ Red
+ja 赤
+
+@ Reduce Motion
+ja 動きを抑える
+
+@ Regen (seconds per second)
+ja 回復量（毎秒の秒数）
+
+@ Render Scale
+ja レンダースケール
+
+@ Reverb
+ja リバーブ
+
+@ Right
+ja 右
+
+@ Ripple Intensity
+ja 波紋の強さ
+
+@ Ripples
+ja 波紋
+
+@ Roll Sensitivity
+ja ロール感度
+
+@ Rumble
+ja 振動
+
+@ Run
+ja 走る
+
+@ Save on All Enemies Killed
+ja 敵全滅時にセーブ
+
+@ Save on All Secrets Found
+ja 全シークレット発見時にセーブ
+
+@ Save on Level Entry
+ja レベル開始時にセーブ
+
+@ Save on Secret Found
+ja シークレット発見時にセーブ
+
+@ Scoreboard
+ja スコアボード
+
+@ Screen Flashes
+ja 画面フラッシュ
+
+@ Screen Shader
+ja 画面シェーダー
+
+@ Screen Shake
+ja 画面の揺れ
+
+@ Search LAN
+ja LANを検索
+
+@ Seconds a center-screen message stays up
+ja 中央メッセージが表示される秒数
+
+@ See Through Portals
+ja ポータル越しに見る
+
+@ See-through Teleporters
+ja 透けるテレポーター
+
+@ Shirt Color
+ja シャツの色
+
+@ Shotgun Bullet Decals
+ja ショットガンの弾痕
+
+@ Shoulder left
+ja 左肩越し
+
+@ Shoulder right
+ja 右肩越し
+
+@ Show FPS
+ja FPSを表示
+
+@ Show Face
+ja 顔を表示
+
+@ Shrapnel
+ja 榴散弾
+
+@ Size of on-screen messages and captions
+ja 画面メッセージと字幕のサイズ
+
+@ Skill
+ja 難易度
+
+@ Sky Fog
+ja 空のフォグ
+
+@ Smooths the stepped movement of monsters
+ja モンスターのカクカクした動きを滑らかにします
+
+@ Sound
+ja サウンド
+
+@ Sound Captions
+ja 効果音字幕
+
+@ Sound Volume
+ja 効果音量
+
+@ Speed Blur
+ja スピードブラー
+
+@ Splashes
+ja 水しぶき
+
+@ Splatter Amount
+ja 飛沫の量
+
+@ Splatter Size
+ja 飛沫のサイズ
+
+@ Start Game
+ja ゲーム開始
+
+@ Staying underwater doesn't hurt
+ja 水中にいてもダメージなし
+
+@ Stick Look Pitch
+ja スティック視点（縦）
+
+@ Stick Look Yaw
+ja スティック視点（横）
+
+@ Strafe Left
+ja 左へ平行移動
+
+@ Strafe Right
+ja 右へ平行移動
+
+@ Strength of the surface swell and rings
+ja 水面のうねりと波紋の強さ
+
+@ Stun Duration
+ja スタン時間
+
+@ Style
+ja スタイル
+
+@ Supersampling
+ja スーパーサンプリング
+
+@ Surface Hit Effects
+ja 着弾エフェクト
+
+@ Swim Down
+ja 潜る
+
+@ Targets
+ja 対象
+
+@ Teamplay
+ja チームプレイ
+
+@ Texture Filter
+ja テクスチャフィルター
+
+@ Third person
+ja 三人称
+
+@ Thud
+ja ドスン
+
+@ Tick
+ja チック
+
+@ Time Limit
+ja 制限時間
+
+@ Time Stretch
+ja 時間伸長
+
+@ Toggle Attack
+ja 攻撃切り替え
+
+@ Toggle Run
+ja 走り切り替え
+
+@ Toggle auto-aim
+ja オートエイム切り替え
+
+@ Touch Controls
+ja タッチ操作
+
+@ Touchscreen
+ja タッチスクリーン
+
+@ Tough Enemy Health
+ja 強敵の体力
+
+@ Tough enemies only
+ja 強敵のみ
+
+@ Trail Colour
+ja 軌跡の色
+
+@ Translate Console
+ja コンソールを翻訳
+
+@ Translucent Water
+ja 半透明の水
+
+@ Treble
+ja 高音
+
+@ Turn Left
+ja 左旋回
+
+@ Turn Right
+ja 右旋回
+
+@ Underwater FX
+ja 水中エフェクト
+
+@ Use Bullet Time Meter
+ja バレットタイムゲージを使用
+
+@ VSync
+ja 垂直同期
+
+@ View Bob
+ja 視点の揺れ
+
+@ Viewmodels
+ja 武器モデル
+
+@ Volume
+ja 音量
+
+@ Water Opacity
+ja 水の不透明度
+
+@ Water Quality
+ja 水の品質
+
+@ Water Settings
+ja 水の設定
+
+@ Weapon Wheel
+ja 武器ホイール
+
+@ Weapon Wheel Slowdown
+ja 武器ホイール中の減速
+
+@ Weapons
+ja 武器
+
+@ Weapons Position
+ja 武器の位置
+
+@ Where center-screen messages appear
+ja 中央メッセージの表示位置
+
+@ Where pickup and event messages appear
+ja 取得・イベントメッセージの表示位置
+
+@ White
+ja 白
+
+@ Yaw Sensitivity
+ja 横感度
+
+@ Yellow
+ja 黄
+
+# lowercase choice values
+@ T
+ja T
+
+@ always
+ja 常時
+
+@ auto
+ja 自動
+
+@ banded
+ja 階調
+
+@ borderless
+ja ボーダーレス
+
+@ bottom center
+ja 下中央
+
+@ bottom left
+ja 左下
+
+@ bottom right
+ja 右下
+
+@ box
+ja 四角
+
+@ broken square
+ja 欠けた四角
+
+@ classic
+ja クラシック
+
+@ coarse
+ja 粗い
+
+@ cooperative
+ja 協力プレイ
+
+@ cross
+ja 十字
+
+@ cross + dot
+ja 十字＋点
+
+@ cyan
+ja シアン
+
+@ dashed
+ja 破線
+
+@ deathmatch
+ja デスマッチ
+
+@ deuteranopia
+ja 2型色覚
+
+@ diagonal streaks
+ja 斜めの筋
+
+@ diamond
+ja ひし形
+
+@ dot
+ja 点
+
+@ double
+ja 2段
+
+@ double chevrons
+ja 二重山形
+
+@ double diagonals
+ja 二重斜線
+
+@ easy
+ja イージー
+
+@ fine
+ja 細かい
+
+@ fit output
+ja 出力に合わせる
+
+@ flick stick
+ja フリックスティック
+
+@ fullscreen
+ja フルスクリーン
+
+@ gap cross
+ja 隙間十字
+
+@ green
+ja 緑
+
+@ grey
+ja 灰
+
+@ half speed
+ja 半速
+
+@ hard
+ja ハード
+
+@ high
+ja 高
+
+@ huge
+ja 特大
+
+@ immersive
+ja 没入型
+
+@ intense
+ja 強烈
+
+@ large
+ja 大
+
+@ larger
+ja より大
+
+@ largest
+ja 最大
+
+@ linear
+ja リニア
+
+@ low
+ja 低
+
+@ lower
+ja 下
+
+@ magenta
+ja マゼンタ
+
+@ medium
+ja 中
+
+@ middle
+ja 中央
+
+@ middle left
+ja 左中央
+
+@ middle right
+ja 右中央
+
+@ modern
+ja モダン
+
+@ nearest
+ja ニアレスト
+
+@ nightmare
+ja ナイトメア
+
+@ nintendo
+ja Nintendo
+
+@ no team damage
+ja 味方ダメージなし
+
+@ none
+ja なし
+
+@ normal
+ja ノーマル
+
+@ off
+ja オフ
+
+@ off while held
+ja 長押し中はオフ
+
+@ on
+ja オン
+
+@ only while held
+ja 長押し中のみ
+
+@ playstation
+ja PlayStation
+
+@ protanopia
+ja 1型色覚
+
+@ quarter speed
+ja 1/4速
+
+@ red
+ja 赤
+
+@ short diagonals
+ja 短い斜線
+
+@ single
+ja 1段
+
+@ small
+ja 小
+
+@ solid
+ja 実線
+
+@ spectacle
+ja 派手
+
+@ subtle
+ja 控えめ
+
+@ team damage
+ja 味方ダメージあり
+
+@ top center
+ja 上中央
+
+@ top left
+ja 左上
+
+@ top right
+ja 右上
+
+@ triple
+ja 3段
+
+@ tritanopia
+ja 3型色覚
+
+@ upper
+ja 上
+
+@ white
+ja 白
+
+@ whole screen
+ja 画面全体
+
+@ windowed
+ja ウィンドウ
+
+@ xbox
+ja Xbox
+
+@ yellow
+ja 黄
+
+# ==== tooltips.txt ====
+
+# Options help lines (tooltips) and reasons for disabled rows.
+@ 2D aiming turns the view continuously with the right stick; flick stick snaps the view to where you push the stick, then turning the stick rotates it
+ja 2Dエイムは右スティックで視点を連続回転させます。フリックスティックはスティックを倒した方向へ視点を即座に向け、その後スティックを回すと視点が回転します
+
+@ 3D resolution relative to the window; the UI stays sharp
+ja ウィンドウに対する3D解像度です。UIは鮮明なままです
+
+@ 3D view keeps the HUD and menus sharp; whole screen runs them through the shader too
+ja 3DビューではHUDとメニューは鮮明なまま、画面全体ではそれらにもシェーダーをかけます
+
+@ A Quake III style railgun: a slug that pierces every enemy on its line, using 2 cells a shot and refiring every 1.5 s; select it through its assigned weapon slot (Add-ons)
+ja Quake III風のレールガン。直線上のすべての敵を貫通する弾を撃ち、1発でセル2個を消費、1.5秒ごとに再発射可能です。割り当てられた武器スロットで選択します（アドオン）
+
+@ A Zelda-style hookshot: fire sends a chain hook out; it latches onto hookable surfaces or enemies and reels you in; fire again to let go
+ja ゼルダ風のフックショット。発射するとチェーン付きのフックが飛び、引っ掛けられる面や敵に刺さってプレイヤーを引き寄せます。もう一度撃つと離します
+
+@ Also translates the engine's console messages; off keeps them in English
+ja エンジンのコンソールメッセージも翻訳します。オフにすると英語のままです
+
+@ Automatically acquire another enemy while holding Lock-on after losing a target
+ja ロックオンを長押し中、対象を見失うと自動的に別の敵を捕捉します
+
+@ Blends between animation frames of monsters and weapons
+ja モンスターと武器のアニメーションフレーム間を補間します
+
+@ Blood stains surfaces and bodies; cosmetic, independent of particle packs
+ja 血が地形や体を汚します。見た目のみで、パーティクルパックとは無関係です
+
+@ Bloom glow around bright lights and heat sources; medium uses 4 taps, high uses 8, low disables halo taps
+ja 明るい光や熱源の周りのブルーム発光。中は4タップ、高は8タップ、低はハロータップを無効にします
+
+@ Blurs fast-moving monsters, projectiles and doors (not camera turns)
+ja 高速で動くモンスター、弾、ドアをぼかします（視点の回転は対象外）
+
+@ Blurs the screen edges during fast falls and launches; keeps the centre clear. Reduce Motion disables it
+ja 高速落下や打ち上げ時に画面の端をぼかし、中央は鮮明に保ちます。「動きを抑える」で無効になります
+
+@ Brightness of the underwater light patterns
+ja 水中の光の模様の明るさ
+
+@ Caps mark count, lifetime, airborne droplets and wound/gib painting; low skips enemy wounds and gib trails
+ja 跡の数、持続時間、空中の飛沫、傷や肉片の跡を制限します。低では敵の傷と肉片の軌跡を省略します
+
+@ Caps shader input at output size so 200% render scale keeps 3D sharpness without 4x shader cost; low scales stay low-res
+ja シェーダー入力を出力サイズに制限し、レンダースケール200%でもシェーダー負荷を4倍にせず3Dの鮮明さを保ちます。低スケールは低解像度のままです
+
+@ Classic: the original status bar; modern: compact elements at the screen edges
+ja クラシック：オリジナルのステータスバー。モダン：画面端のコンパクトな表示
+
+@ Coat atlas resolution, rebuild rate and shader detail: low builds smaller coats less often with fast shading; high uses full detail
+ja コーティングアトラスの解像度、再構築頻度、シェーダーの詳細度。低は小さいコートを低頻度で構築し高速に描画、高はフル詳細を使用します
+
+@ Colour of the railgun's spiral trail; split-screen players each get the next colour along
+ja レールガンの螺旋軌跡の色。画面分割では各プレイヤーが順に次の色になります
+
+@ Damage the railgun deals to each enemy it passes through (Quake III: 100)
+ja レールガンが貫通する各敵に与えるダメージ（Quake III：100）
+
+@ Dark backdrop behind on-screen messages for readability
+ja 読みやすくするため画面メッセージの背後を暗くします
+
+@ Dark border keeps the crosshair visible on any background
+ja 暗い縁取りでどんな背景でもクロスヘアを見やすくします
+
+@ Darkens corners and contact areas where geometry meets; higher quality is sharper
+ja ジオメトリが接する角や接触部分を暗くします。品質が高いほど鮮明です
+
+@ Debris lands on and is carried or shoved by doors, lifts and platforms
+ja 破片がドア、リフト、足場の上に落ち、運ばれたり押されたりします
+
+@ Detail for caustics, ripples and splashes: low uses smaller budgets and shorter view distance; high uses larger budgets and farther view distance
+ja コースティクス、波紋、水しぶきの詳細度。低は予算が少なく描画距離が短く、高は予算が多く描画距離が長くなります
+
+@ Disabled while Enhanced Particles is on: its particles replace the GLQuake and Classic styles
+ja 「強化パーティクル」がオンの間は無効です。そのパーティクルがGLQuakeとクラシックのスタイルを置き換えます
+
+@ Disabled while Enhanced Water is on: its own underwater effects replace the classic and GLQuake view warps
+ja 「強化水面」がオンの間は無効です。独自の水中エフェクトがクラシックとGLQuakeの画面のゆがみを置き換えます
+
+@ Draw the predicted grenade path as a solid or dashed line
+ja 予測されるグレネードの軌道を実線または破線で描画します
+
+@ Draw the view out of the linked portal inside each portal; off shows flat discs (fastest)
+ja 各ポータルの中に、つながったポータルからの景色を描画します。オフでは平らな円盤を表示します（最速）
+
+@ Droplets spray up when things enter or leave water, slime or lava
+ja 水、スライム、溶岩に出入りすると水しぶきが上がります
+
+@ Emulates the original 8-bit palette of software rendering
+ja ソフトウェアレンダリングのオリジナル8ビットパレットを再現します
+
+@ Every level starts with only the shotgun and axe, as if started fresh
+ja 毎レベル、ショットガンと斧だけで新規開始のように始まります
+
+@ Explosion damage for each remotely detonated sticky bomb
+ja 遠隔起爆する粘着爆弾1個ごとの爆発ダメージ
+
+@ Extra freeze milliseconds for every 10 damage dealt, so heavy hits stop longer
+ja 10ダメージごとに追加で停止するミリ秒数。強力な攻撃ほど長く止まります
+
+@ First person, a third-person camera centered behind the player, or one over the right or left shoulder; third person hides viewmodels
+ja 一人称、プレイヤー真後ろの三人称カメラ、または右肩・左肩越しのカメラ。三人称では武器モデルを隠します
+
+@ Flash the selected marker on confirmed hits; colors are shared with the crosshair
+ja 命中確定時に選んだマーカーを点滅させます。色はクロスヘアと共通です
+
+@ Freeze for every enemy, or only for enemies that were tough before the hit
+ja すべての敵で停止するか、命中前に強敵だった敵のみで停止するか
+
+@ Freeze the game briefly when you damage an enemy; single player with add-ons only
+ja 敵にダメージを与えたときにゲームを一瞬停止します。アドオン有効のシングルプレイのみ
+
+@ Gibs tumble and barrels throw shrapnel; shots and blasts push them (cosmetic only)
+ja 肉片が転がり、樽が榴散弾を飛ばします。射撃や爆風で動きます（見た目のみ）
+
+@ Health an enemy must have had before the hit to count as tough
+ja 強敵とみなされるために命中前に敵が持っていた体力
+
+@ Hits dealing less damage than this do not freeze the game; the default 10 skips nails and shotgun pellets
+ja これ未満のダメージではゲームは停止しません。初期値10ではネイルとショットガンの散弾は対象外です
+
+@ Hold fire and sweep the crosshair over monsters to queue them, release to throw: it stuns each in turn and flies back; alt-fire clears the queue
+ja 射撃ボタンを長押ししてクロスヘアでモンスターをなぞると順番に登録、離すと投げます。順にスタンさせて戻ってきます。サブ射撃で登録を解除します
+
+@ Hold: keep Lock-on held. Toggle: press Auto-aim Toggle to enable automatic acquisition. Click look stick to switch targets
+ja 長押し：ロックオンを押し続けます。切り替え：「オートエイム切り替え」を押すと自動捕捉が有効になります。視点スティックを押し込むと対象を切り替えます
+
+@ How close an enemy must be to the crosshair for automatic acquisition in toggle mode (degrees)
+ja 切り替えモードで自動捕捉するために敵がクロスヘアにどれだけ近い必要があるか（度）
+
+@ How far the view tilts up and down when you tilt the controller (pitch axis)
+ja コントローラーを傾けたときに視点が上下に傾く量（ピッチ軸）
+
+@ How far the view turns left and right when you turn the controller (yaw axis)
+ja コントローラーを回したときに視点が左右に回る量（ヨー軸）
+
+@ How far the view turns when you drag on the right half of the screen
+ja 画面の右半分をドラッグしたときに視点が回る量
+
+@ How fast the boomerang flies (units per second)
+ja ブーメランの飛ぶ速さ（ユニット/秒）
+
+@ How hard shots and explosions push debris around
+ja 射撃や爆発が破片を押し飛ばす強さ
+
+@ How hard the Powerwasher's water pushes enemies
+ja 高圧洗浄機の水が敵を押す強さ
+
+@ How long a hit freezes the game, in milliseconds
+ja 命中時にゲームが停止する時間（ミリ秒）
+
+@ How strongly fog covers the sky when fog is on
+ja フォグがオンのとき空を覆うフォグの濃さ
+
+@ How the view distorts underwater: Classic ripples the whole screen like software Quake, GLQuake slowly stretches and squashes the view
+ja 水中での画面のゆがみ方。クラシックはソフトウェア版Quakeのように画面全体を波打たせ、GLQuakeはゆっくり伸縮させます
+
+@ Ignores gyro rotation slower than this many degrees per second, to hide hand tremor
+ja 手ぶれを隠すため、毎秒この角度より遅いジャイロ回転を無視します
+
+@ Immersive: appears for a few seconds only when its value changes
+ja 没入型：値が変化したときだけ数秒間表示されます
+
+@ Keeps textures sharp on floors and walls seen at steep angles
+ja 急な角度で見た床や壁のテクスチャを鮮明に保ちます
+
+@ Lights from rockets, muzzle flashes and explosions brighten nearby walls
+ja ロケット、マズルフラッシュ、爆発の光が近くの壁を照らします
+
+@ Liquid surfaces swell and ring out where things move through them
+ja 物が通過した液体の表面がうねり、波紋が広がります
+
+@ Lobs sticky bombs (rockets ammo) that cling to walls, doors and monsters; alt-fire detonates them all
+ja 壁、ドア、モンスターに貼り付く粘着爆弾（ロケット弾を使用）を投げます。サブ射撃ですべて起爆します
+
+@ Look of the classic particles: GLQuake draws soft round dots, Classic draws square pixels like software Quake
+ja クラシックパーティクルの見た目。GLQuakeは柔らかい丸い点、クラシックはソフトウェア版Quakeのような四角いピクセルで描画します
+
+@ Low skips the background smear halo and uses fewer blur samples; high keeps the full halo and smoother streaks
+ja 低は背景のにじみハローを省略しブラーのサンプル数を減らします。高はハローを残し筋をより滑らかにします
+
+@ Low: hard particle edges, half the scripted particles and fewer hit sparks. Medium: soft edges. High: soft edges checked per MSAA sample, most hit sparks
+ja 低：硬いパーティクルの縁、スクリプトパーティクル半分、着弾火花少なめ。中：柔らかい縁。高：MSAAサンプルごとに柔らかい縁、火花ほぼすべて
+
+@ Marks fade out before expiring; oldest marks are recycled at the limit
+ja 跡は消える前にフェードアウトします。上限に達すると古い跡から再利用されます
+
+@ Max nested portal reflections to draw; each level redraws the scene
+ja 描画するポータルの入れ子の最大数。1段ごとにシーンを再描画します
+
+@ Max portals per screen with a live view; each one redraws the scene
+ja 画面内でライブ映像を表示するポータルの最大数。それぞれシーンを再描画します
+
+@ Maximum distance for acquiring and keeping an enemy locked
+ja 敵を捕捉しロックを維持できる最大距離
+
+@ Minimum gap between freezes, so shotgun pellets and rapid fire count once; kills ignore it
+ja 停止の最小間隔。ショットガンの散弾や連射を1回とみなします。キルは対象外です
+
+@ Modern terminal console with autocomplete popup, history search, ANSI colors, bash shell and piping; off uses the classic Quake console
+ja 自動補完ポップアップ、履歴検索、ANSIカラー、bashシェル、パイプを備えたモダンなターミナル風コンソール。オフでクラシックなQuakeコンソールになります
+
+@ Monsters take proportionally less damage at higher values; above 100% is harder
+ja 値が高いほどモンスターが受けるダメージが減ります。100%超で難しくなります
+
+@ Moving gibs leave blood on surfaces they touch
+ja 動く肉片が触れた面に血を残します
+
+@ Multiplier on the freeze when the hit kills the enemy; 1 means no extra
+ja 命中で敵を倒したときの停止時間の倍率。1で追加なし
+
+@ Multiplies ammo from pickups (up to the normal carry limit); below 100% is harder
+ja アイテムから得る弾薬の倍率（通常の所持上限まで）。100%未満で難しくなります
+
+@ Multiplies health from pickups (up to 100, or the item's own limit); below 100% is harder
+ja アイテムから得る体力の倍率（100またはアイテム固有の上限まで）。100%未満で難しくなります
+
+@ Nails stick to wood and bodies; hard surfaces deflect them to the floor
+ja ネイルは木や体に刺さり、硬い面では弾かれて床に落ちます
+
+@ Nearest keeps crisp classic pixels; linear smooths textures
+ja ニアレストはくっきりしたクラシックなピクセル、リニアはテクスチャを滑らかにします
+
+@ New Game: Add-ons
+ja ニューゲーム：アドオン
+
+@ New Game: Customize
+ja ニューゲーム：カスタマイズ
+
+@ Night vision: how much dark areas are brightened; thermal: how strongly heat stands out
+ja 暗視：暗い部分を明るくする度合い。サーマル：熱源を目立たせる度合い
+
+@ Night-vision and thermal goggles, cycle normal, night vision and thermal with Change Goggles (Add-ons), or use the Equipment Wheel
+ja 暗視ゴーグルとサーマルゴーグル。「ゴーグル切り替え」（アドオン）で通常・暗視・サーマルを切り替えるか、装備ホイールを使います
+
+@ No single freeze lasts longer than this, however much damage or kill bonus adds
+ja ダメージやキルボーナスがどれだけ加わっても、1回の停止はこれより長くなりません
+
+@ Oldest marks and nails are recycled at this shared limit
+ja この共通の上限に達すると古い跡やネイルから再利用されます
+
+@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
+ja 画面上のスティックとボタン。自動ではタッチ後に表示し、他のデバイスを使うと隠します
+
+@ Only autosaves: quicksaves and the Save menu are off
+ja オートセーブのみ。クイックセーブとセーブメニューは無効です
+
+@ Place every weapon at the center, right or left of the view, or hide all viewmodels
+ja 武器を画面の中央・右・左に表示するか、武器モデルをすべて隠します
+
+@ Play your chosen hit or kill cue when you damage an enemy
+ja 敵にダメージを与えたときに選んだヒット音またはキル音を鳴らします
+
+@ Playback speed: faster sounds shorter and higher
+ja 再生速度。速くすると短く高い音になります
+
+@ Plays the Quake theme in the main menu when no game is running
+ja ゲームを実行していないとき、メインメニューでQuakeのテーマを流します
+
+@ Portals farther away than this are drawn as flat discs
+ja これより遠いポータルは平らな円盤として描画されます
+
+@ Press attack once to keep firing, again to stop
+ja 攻撃を1回押すと撃ち続け、もう一度押すと止まります
+
+@ Press run once to switch between running and walking
+ja 走るを1回押すと走りと歩きを切り替えます
+
+@ Raise or lower the tone independently of sound length
+ja 音の長さを変えずに音程を上げ下げします
+
+@ Red screen edges show where damage came from: top is front, bottom is behind; Screen Flashes controls their strength
+ja 画面端の赤色でダメージの方向を示します。上が前方、下が後方。強さは「画面フラッシュ」で調整します
+
+@ Replaces the classic dot particles with glowing sparks, smoke and blood; mods with their own particle effects keep them
+ja クラシックな点のパーティクルを光る火花、煙、血に置き換えます。独自のパーティクルエフェクトを持つMODはそれを維持します
+
+@ Resolution and detail inside portal and teleporter views; lower tiers trim nested effects
+ja ポータルとテレポーター内の映像の解像度と詳細度。低い段階では入れ子のエフェクトを省略します
+
+@ Rippling light patterns on surfaces under water and slime
+ja 水中やスライム中の面に揺らめく光の模様
+
+@ Scales all damage you take; above 100% is harder
+ja 受けるすべてのダメージの倍率。100%超で難しくなります
+
+@ Screen edge for this element; elements on the same spot stack
+ja この要素を置く画面の位置。同じ位置の要素は積み重なります
+
+@ Seconds a monster hit by the boomerang stays stunned
+ja ブーメランが命中したモンスターがスタンする秒数
+
+@ Seconds impact marks and stuck nails stay before fading out; independent of Particle Quality
+ja 着弾痕と刺さったネイルが消え始めるまでの秒数。パーティクル品質とは無関係です
+
+@ Seconds messages at the top of the screen stay up
+ja 画面上部のメッセージが表示される秒数
+
+@ Seconds the flick stick snap takes; lower is faster
+ja フリックスティックで視点が向きを変えるまでの秒数。小さいほど速くなります
+
+@ See through enhanced water; enables Water Opacity
+ja 強化水面を透かして見ます。「水の不透明度」が有効になります
+
+@ Sensor grain, scanlines and flicker of the goggle image
+ja ゴーグル映像のセンサーノイズ、走査線、ちらつき
+
+@ Shades every anti-aliasing sample; needs Anti-aliasing on
+ja アンチエイリアスのサンプルごとにシェーディングします。アンチエイリアスが必要です
+
+@ Shifts colors so they stay distinct for the chosen color blindness
+ja 選んだ色覚特性でも区別できるよう色を調整します
+
+@ Shotgun hits leave small surface marks (cosmetic only)
+ja ショットガンの命中で面に小さな跡が残ります（見た目のみ）
+
+@ Show corner ticks at screen centre while locked, even with Crosshair off
+ja クロスヘアがオフでも、ロック中は画面中央に角マークを表示します
+
+@ Show where grenades and other arcing shots will fly, bounce and land; local play only, not in deathmatch
+ja グレネードなど放物線を描く弾の飛ぶ先、跳ね方、着地点を表示します。ローカルプレイのみ、デスマッチでは無効
+
+@ Shows text for important sounds: doors, alerted enemies, secrets, pickups
+ja 重要な音を文字で表示します：ドア、気づいた敵、シークレット、アイテム
+
+@ Shows the distance fog that maps and mods set; off always gives clear view
+ja マップやMODが設定した距離フォグを表示します。オフでは常に視界がクリアになります
+
+@ Shows the player face next to the health number
+ja 体力の数値の横にプレイヤーの顔を表示します
+
+@ Simulation detail, step rate, fade-out lifetimes and caps for gibs and shrapnel; low also skips mover collision
+ja 肉片と榴散弾のシミュレーション詳細度、更新頻度、消えるまでの時間と上限。低では動く物体との衝突も省略します
+
+@ Size of the on-screen buttons and move stick
+ja 画面上のボタンと移動スティックのサイズ
+
+@ Slowly heals up to 100 health after 5 seconds without being hit
+ja 5秒間攻撃を受けないと体力が100までゆっくり回復します
+
+@ Slows stick look while the crosshair is over an enemy
+ja クロスヘアが敵に重なっている間、スティックの視点移動を遅くします
+
+@ Slows the game down while the weapon wheel is open
+ja 武器ホイールを開いている間、ゲームを遅くします
+
+@ Slows the whole game down; single player only. Saves and demos stay compatible with other ports
+ja ゲーム全体を遅くします。シングルプレイのみ。セーブとデモは他のソースポートと互換性を保ちます
+
+@ Small camera jolt on each freeze; off with Reduce Motion
+ja 停止のたびに小さくカメラを揺らします。「動きを抑える」でオフになります
+
+@ Snap and track enemies in local play, including split-screen; unavailable online
+ja 画面分割を含むローカルプレイで敵に照準を合わせて追従します。オンラインでは使えません
+
+@ Sparks, smoke, chips, splinters and splashes fly off whatever your shots hit
+ja 弾が当たったものから火花、煙、破片、木片、しぶきが飛び散ります
+
+@ Spawns extra copies of every monster around the original when a level starts
+ja レベル開始時、すべてのモンスターの周りに追加のコピーを出現させます
+
+@ Strength of the full-screen flashes for damage, pickups and powerups
+ja ダメージ、アイテム、パワーアップ時の全画面フラッシュの強さ
+
+@ Stretch or shorten the sound while keeping its pitch
+ja 音程を保ったまま音を伸ばしたり縮めたりします
+
+@ Surface opacity; requires Enhanced Water and Translucent Water
+ja 水面の不透明度。「強化水面」と「半透明の水」が必要です
+
+@ The hook latches onto metal surfaces (metal, tech, computer panels, copper)
+ja フックが金属面（金属、メカ、コンピューターパネル、銅）に引っ掛かります
+
+@ The hook latches onto stone, brick, rock and any surface not recognised as wood or metal
+ja フックが石、レンガ、岩、および木や金属と認識されないすべての面に引っ掛かります
+
+@ The hook latches onto wooden surfaces (texture names like wood, crate, plank)
+ja フックが木の面（wood、crate、plankなどのテクスチャ名）に引っ掛かります
+
+@ Turn the controller's motion sensor into a look input; needs a pad with a gyroscope
+ja コントローラーのモーションセンサーを視点操作に使います。ジャイロ搭載のパッドが必要です
+
+@ Turns off view bob, strafe tilt and the camera kick when hit or firing
+ja 視点の揺れ、平行移動時の傾き、被弾・射撃時のカメラの跳ねをオフにします
+
+@ Turns on the extra liquid effects; Water Settings controls each one
+ja 追加の液体エフェクトをオンにします。個別の設定は「水の設定」で行います
+
+@ Turns the view to follow a moving enemy you are aiming at
+ja 狙っている敵の動きに合わせて視点を回します
+
+@ Turns the view when you roll the controller sideways; 0 disables it, negative reverses it
+ja コントローラーを横に傾けたときに視点を回します。0で無効、負の値で反転します
+
+@ Two-portal gun: fire and alt-fire place linked portals on flat walls; assign a weapon slot in Add-ons
+ja 2つのポータルを作る銃。射撃とサブ射撃で平らな壁につながったポータルを設置します。アドオンで武器スロットを割り当てます
+
+@ Unlocks the FX Settings page: enhanced particles, impact effects and blood splatter
+ja 「エフェクト設定」ページを開放します：強化パーティクル、着弾エフェクト、血しぶき
+
+@ Uses the 2021 re-release's smoother MD5 models (and MD3 replacements from mods) instead of the classic ones. Applies on the next map load
+ja クラシックなモデルの代わりに2021年リマスター版の滑らかなMD5モデル（およびMODのMD3代替モデル）を使います。次のマップ読み込みから適用されます
+
+@ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
+ja マップの色付きライト（.litファイルまたはBSPXランプ）を使います。オフでオリジナルの白い光になります。次のマップ読み込みから適用されます
+
+@ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
+ja 水流のセグメント数、飛沫の数、液体の光沢表現。低は簡素な半透明の水流、高は滑らかで光沢のある水流になります
+
+@ When gyro looking applies: always, off while +gyroaction is held, or only while it is held
+ja ジャイロ視点が働くタイミング：常時、+gyroaction長押し中はオフ、または長押し中のみ
+
+@ Which weapons trigger the freeze; melee covers the axe and any mod weapon used at close range without ammo
+ja 停止を発生させる武器。近接には斧と、弾薬を使わず至近距離で使うMOD武器が含まれます
+
+@ Your own rockets and grenades don't hurt you; rocket jumps still work
+ja 自分のロケットやグレネードでダメージを受けません。ロケットジャンプは可能です
+
+# ==== ui.txt ====
+
+# Menus and pop-ups outside the options pages: save cards, launch, presets,
+# add-on browser, map packs, hints and dialogs.
+@ Select
+ja 選択
+
+@ Back
+ja 戻る
+
+@ Cancel
+ja キャンセル
+
+@ Confirm
+ja 決定
+
+@ Scroll
+ja スクロール
+
+@ Section
+ja セクション
+
+@ Bind
+ja 割り当て
+
+@ Cancel binding
+ja 割り当てを中止
+
+@ Clear
+ja 消去
+
+@ Clear pad
+ja パッドの割り当てを消去
+
+@ Remap
+ja 再割り当て
+
+@ Type
+ja 入力
+
+@ Shift
+ja Shift
+
+@ Done
+ja 完了
+
+@ Del
+ja Del
+
+@ Space
+ja スペース
+
+@ Save
+ja セーブ
+
+@ Load
+ja ロード
+
+@ Delete
+ja 削除
+
+@ Play
+ja プレイ
+
+@ Yes
+ja はい
+
+@ No
+ja いいえ
+
+@ OK
+ja OK
+
+@ System
+ja システム
+
+@ Language
+ja 言語
+
+@ Help
+ja ヘルプ
+
+@ Fixed for this game: it was started without Customize
+ja このゲームでは固定：カスタマイズなしで開始されました
+
+@ Press a button or key to bind (Start cancels)
+ja 割り当てるボタンかキーを押してください（Startで中止）
+
+@ Press button...
+ja ボタンを押してください...
+
+@ Press key...
+ja キーを押してください...
+
+@ Replace this binding?
+ja この割り当てを置き換えますか？
+
+@ is already assigned
+ja は割り当て済みです
+
+@ {} already assigned
+ja {}は割り当て済み
+
+@ Open Controls to remap Lock-on?
+ja 操作設定を開いてロックオンを再割り当てしますか？
+
+@ Lock-on
+ja ロックオン
+
+@ Auto-aim Toggle
+ja オートエイム切り替え
+
+@ Keyboard
+ja キーボード
+
+@ Controller
+ja コントローラー
+
+# main menu, dialogs and screens
+@ Map Packs
+ja マップパック
+
+@ Customize
+ja カスタマイズ
+
+@ Level Select
+ja レベル選択
+
+@ Really quit?
+ja 本当に終了しますか？
+
+@ You died
+ja 死亡しました
+
+@ Continue from most recent save
+ja 最新のセーブから再開
+
+@ Select save
+ja セーブを選択
+
+@ Restart level
+ja レベルをやり直す
+
+@ Return to main menu
+ja メインメニューに戻る
+
+@ (disabled)
+ja （無効）
+
+@ (fixed for this game)
+ja （このゲームでは固定）
+
+@ (off)
+ja （オフ）
+
+@ Apply Display Changes
+ja 画面設定を適用
+
+@ Display Mode
+ja 表示モード
+
+@ Resolution
+ja 解像度
+
+@ desktop
+ja デスクトップ
+
+@ Preset
+ja プリセット
+
+@ Map
+ja マップ
+
+@ Reset Shader Settings
+ja シェーダー設定をリセット
+
+@ Reset to Defaults
+ja 初期設定に戻す
+
+@ Searching...
+ja 検索中...
+
+@ This game only autosaves.
+ja このゲームはオートセーブのみです。
+
+@ (No Manual Saves modifier)
+ja （「手動セーブなし」調整）
+
+@ End the current game?
+ja 現在のゲームを終了しますか？
+
+@ Unsaved progress will be lost.
+ja セーブしていない進行状況は失われます。
+
+@ End game
+ja ゲーム終了
+
+@ Overwrite
+ja 上書き
+
+@ Overwrite "{}"?
+ja 「{}」を上書きしますか？
+
+@ Saved {}
+ja セーブ：{}
+
+@ Start a new game?
+ja 新しいゲームを始めますか？
+
+@ New game
+ja ニューゲーム
+
+@ New Game
+ja ニューゲーム
+
+@ CUSTOM
+ja カスタム
+
+@ Customize Experience
+ja ゲーム体験をカスタマイズ
+
+@ Disable All
+ja すべて無効化
+
+@ Disable All Modifications
+ja すべての変更を無効化
+
+@ Saves load in other source ports too.
+ja セーブは他のソースポートでもロードできます。
+
+@ Standard rules, no add-ons.
+ja 標準ルール、アドオンなし。
+
+@ Choose skill
+ja 難易度を選択
+
+@ The current game will end
+ja 現在のゲームは終了します
+
+@ Easy
+ja イージー
+
+@ Normal
+ja ノーマル
+
+@ Hard
+ja ハード
+
+@ Nightmare
+ja ナイトメア
+
+# graphics preset pop-up
+@ Choose a Graphics Preset
+ja グラフィックプリセットを選択
+
+@ Classic
+ja クラシック
+
+@ Like the re-release: enhanced models,
+ja リマスター版と同様：強化モデル、
+
+@ no added effects.
+ja 追加エフェクトなし。
+
+@ Enhanced
+ja 強化
+
+@ Every enhancement at its highest quality.
+ja すべての強化を最高品質で。
+
+@ Needs a capable GPU.
+ja 高性能なGPUが必要です。
+
+@ Low-End
+ja ローエンド
+
+@ Fastest. No anti-aliasing, original
+ja 最速。アンチエイリアスなし、オリジナル
+
+@ models, lowest effect quality.
+ja モデル、エフェクト品質は最低。
+
+@ Esc keeps the defaults
+ja Escで初期設定のまま
+
+@ Everything can be changed later in Options.
+ja すべて後からOptionsで変更できます。
+
+@ Keep Defaults
+ja 初期設定のまま
+
+# save and load cards
+@ Save Game
+ja セーブ
+
+@ Load Game
+ja ロード
+
+@ Autosaves
+ja オートセーブ
+
+@ newest first
+ja 新しい順
+
+@ Saves: {}
+ja セーブ：{}
+
+@ Browse Autosaves
+ja オートセーブを参照
+
+@ Every retained autosave, newest first
+ja 保持されているすべてのオートセーブ（新しい順）
+
+@ New save
+ja 新規セーブ
+
+@ Select to save your game here
+ja 選択してここにセーブ
+
+@ No autosaves yet
+ja オートセーブはまだありません
+
+@ Autosaves are made on level entry, secrets and more (Options > Gameplay)
+ja オートセーブはレベル開始時やシークレット発見時などに作成されます（Options > ゲームプレイ）
+
+@ No saves yet
+ja セーブはまだありません
+
+@ Save from the Single Player menu, or press F6 to quicksave
+ja Single Playerメニューでセーブするか、F6でクイックセーブします
+
+@ No picture
+ja 画像なし
+
+@ Del: delete save
+ja Del：セーブを削除
+
+@ Delete "{}"?
+ja 「{}」を削除しますか？
+
+@ This cannot be undone.
+ja この操作は元に戻せません。
+
+@ Quicksave
+ja クイックセーブ
+
+@ Autosave: {}
+ja オートセーブ：{}
+
+@ unknown trigger
+ja 不明なきっかけ
+
+@ Latest - {}
+ja 最新 - {}
+
+@ Health {}
+ja 体力 {}
+
+@ Armor {}
+ja アーマー {}
+
+@ Kills {}/{}
+ja キル {}/{}
+
+@ Secrets {}/{}
+ja シークレット {}/{}
+
+@ Split-screen, {} players
+ja 画面分割、{}人
+
+@ Co-op
+ja 協力プレイ
+
+@ Customized
+ja カスタマイズ済み
+
+@ Customized, {}
+ja カスタマイズ済み、{}
+
+@ Date unavailable
+ja 日付不明
+
+@ Just now
+ja たった今
+
+@ {} min ago
+ja {}分前
+
+@ {} h ago
+ja {}時間前
+
+@ Level entry
+ja レベル開始
+
+@ Secret found
+ja シークレット発見
+
+@ All enemies killed
+ja 敵全滅
+
+@ All secrets found
+ja 全シークレット発見
+
+@ Timer
+ja タイマー
+
+# customize pages
+@ Standard rules
+ja 標準ルール
+
+@ Modifiers changed: {}
+ja 変更した調整：{}
+
+@ no add-ons
+ja アドオンなし
+
+@ add-ons: {}
+ja アドオン：{}
+
+@ Saves of this game are .qsa files: they need this source port.
+ja このゲームのセーブは.qsaファイルで、このソースポートが必要です。
+
+@ Nothing changed: this plays as standard Quake.
+ja 変更なし：標準のQuakeとしてプレイします。
+
+@ Changes apply now and are saved with this game (.qsa).
+ja 変更はすぐに適用され、このゲームと一緒に保存されます（.qsa）。
+
+@ This game started without Customize, so its rules are fixed.
+ja このゲームはカスタマイズなしで開始されたため、ルールは固定です。
+
+@ Start a new game and choose Customize Experience.
+ja 新しいゲームを始めて「ゲーム体験をカスタマイズ」を選んでください。
+
+@ These rules apply to the next customized game.
+ja これらのルールは次のカスタマイズゲームに適用されます。
+
+# add-on browser
+@ Fire
+ja 射撃
+
+@ Alt Fire
+ja サブ射撃
+
+@ Configure Parameters >
+ja パラメーター設定 >
+
+@ Configure
+ja 設定
+
+@ Settings
+ja 設定
+
+@ Change slot
+ja スロット変更
+
+@ Toggle
+ja 切り替え
+
+@ Details
+ja 詳細
+
+@ Enter or click the box: toggle
+ja Enterまたはボックスをクリック：切り替え
+
+@ Right / Tab / click: details
+ja 右／Tab／クリック：詳細
+
+@ Input Remapping
+ja 入力の再割り当て
+
+@ Weapon Slot
+ja 武器スロット
+
+@ Customized games save as .qsa files, which need this source port.
+ja カスタマイズしたゲームは.qsaファイルとして保存され、このソースポートが必要です。
+
+@ This game started without Customize, so its add-ons are fixed. Customize a new game instead.
+ja このゲームはカスタマイズなしで開始されたため、アドオンは固定です。新しいゲームをカスタマイズしてください。
+
+@ Bullet Time
+ja バレットタイム
+
+@ Change Goggles
+ja ゴーグル切り替え
+
+@ Dodge / Dive
+ja 回避／ダイブ
+
+@ Goggles
+ja ゴーグル
+
+@ Hitstop
+ja ヒットストップ
+
+@ Projectile Shotguns
+ja 弾丸式ショットガン
+
+@ BULLET TIME: 20%
+ja バレットタイム：20%
+
+@ NORMAL SPEED
+ja 通常速度
+
+@ SLOW MOTION: PHYSICAL PELLETS
+ja スローモーション：物理散弾
+
+@ DEMONSTRATION
+ja デモンストレーション
+
+@ GAMEPLAY
+ja ゲームプレイ
+
+@ LOOP
+ja ループ
+
+@ Preview unavailable
+ja プレビューは利用できません
+
+# shader and language help lines
+@ A setting of the chosen shader; arrows step it, Enter is not needed
+ja 選んだシェーダーの設定。矢印キーで変更でき、Enterは不要です
+
+@ Language of the menus, messages and the 2021 re-release's game text; System follows your computer's language
+ja メニュー、メッセージ、2021年リマスター版のゲーム内テキストの言語。「システム」はコンピューターの言語に従います
+
+@ Puts every setting of the chosen shader back to the preset's defaults
+ja 選んだシェーダーのすべての設定をプリセットの初期値に戻します
+
+@ RetroArch slang shader on the final image: CRT, scanlines, NTSC, sharpening; add your own in <game>/shaders
+ja 最終画像にかけるRetroArchのslangシェーダー：CRT、走査線、NTSC、シャープ化。独自のものは<game>/shadersに追加できます
+
+# modern console footer
+@ Shift+PgUp/Dn: height  ` : hide
+ja Shift+PgUp/Dn：高さ  ` ：隠す
+
+@ Tab: complete  Ctrl+R: search  bash | pipe
+ja Tab：補完  Ctrl+R：検索  bash | パイプ
+
+@ ↑ +{} lines (End to jump) 
+ja ↑ +{}行（Endで移動） 
+
+# add-on descriptions
+@ Create two linked portals on flat walls. Fire places the first portal; Alt Fire places the second. Walk through either portal to emerge from the other. Your momentum carries through. Assign a weapon slot below: pressing that slot repeatedly cycles its ordinary weapon and every enabled add-on assigned there. Portal view quality is configurable below.
+ja 平らな壁につながった2つのポータルを作ります。射撃で1つ目、サブ射撃で2つ目のポータルを設置します。どちらかに入るともう一方から出てきます。勢いはそのまま保たれます。下で武器スロットを割り当ててください。そのスロットを繰り返し押すと、通常の武器とそこに割り当てた有効なアドオンを順に切り替えます。ポータル映像の品質は下で設定できます。
+
+@ Hold Fire and sweep the crosshair over monsters to queue targets. Release Fire to throw: the boomerang visits each target, stuns it and returns to you. Alt Fire clears the queue. The weapon slot selects a group, not a separate hotkey: press it again to cycle through the weapons in that slot. Configure stun duration and flight speed below.
+ja 射撃を長押ししてクロスヘアでモンスターをなぞり、標的を登録します。射撃を離すと投げます。ブーメランは各標的を回ってスタンさせ、手元に戻ってきます。サブ射撃で登録を解除します。武器スロットは専用キーではなくグループを選びます。もう一度押すとそのスロットの武器を順に切り替えます。スタン時間と飛行速度は下で設定できます。
+
+@ Hold Fire to charge a sticky bomb using rocket ammunition; release to launch. A longer charge throws it faster. Bombs cling to walls, doors and monsters. Alt Fire detonates your planted bombs together. Place a trap, retreat, then detonate it when enemies approach. Assign any weapon slot below; repeated presses cycle through the ordinary weapon and add-ons in that slot.
+ja 射撃を長押しするとロケット弾を使って粘着爆弾をチャージし、離すと発射します。長くチャージするほど速く飛びます。爆弾は壁、ドア、モンスターに貼り付きます。サブ射撃で設置した爆弾をまとめて起爆します。罠を仕掛けて下がり、敵が近づいたら起爆しましょう。下で任意の武器スロットを割り当ててください。繰り返し押すと、そのスロットの通常の武器とアドオンを順に切り替えます。
+
+@ Fire launches a chain hook. It latches onto a permitted surface or enemy and reels you toward the anchor. Fire again or use Alt Fire to let go. Choose which materials and enemies can be hooked in Configure Parameters. Assign it to any weapon slot; repeated presses of the slot's existing binding cycle through its weapons.
+ja 射撃でチェーン付きのフックを発射します。許可された面や敵に引っ掛かると、その地点へ引き寄せられます。もう一度射撃するかサブ射撃で離します。引っ掛けられる素材と敵は「パラメーター設定」で選べます。任意の武器スロットに割り当てられます。そのスロットの既存のキーを繰り返し押すと武器を順に切り替えます。
+
+@ A piercing railgun inspired by Quake III. Fire sends a slug through every enemy along its line. Each shot consumes two cells, with a 1.5 second refire interval. Damage and the spiral trail colour are configurable below. Choose a weapon slot: the slot's current binding selects and cycles the weapons assigned to it.
+ja Quake IIIに着想を得た貫通レールガン。射撃すると直線上のすべての敵を弾が貫きます。1発でセルを2個消費し、再発射まで1.5秒かかります。ダメージと螺旋軌跡の色は下で設定できます。武器スロットを選んでください。そのスロットの現在のキーで割り当てた武器を選択・切り替えできます。
+
+@ A Portal-style gel sprayer. Fire sprays blue Repulsion gel: land, jump or run into it to bounce, and landings on it never hurt. Alt Fire sprays orange Propulsion gel: run across it to go much faster. Gel coats floors and walls until washed off with the Powerwasher. Assign a weapon slot below; repeated presses cycle the weapons in that slot.
+ja Portal風のジェル噴射器。射撃で青い反発ジェルを噴射します。着地、ジャンプ、走り込むと跳ね返り、その上への着地ではダメージを受けません。サブ射撃でオレンジの推進ジェルを噴射します。上を走るとずっと速くなります。ジェルは高圧洗浄機で洗い流すまで床や壁に残ります。下で武器スロットを割り当ててください。繰り返し押すとそのスロットの武器を順に切り替えます。
+
+@ A water cannon. Fire shoots a straight jet with limited reach; Alt Fire a wide, shorter fan. The water pushes enemies back, turns projectiles aside and washes away gel and blood. Push strength is configurable below. Assign a weapon slot below; repeated presses cycle the weapons in that slot.
+ja 放水砲。射撃で射程の限られたまっすぐな水流、サブ射撃で広く短い扇状の水流を放ちます。水は敵を押し戻し、飛び道具をそらし、ジェルや血を洗い流します。押し出しの強さは下で設定できます。下で武器スロットを割り当ててください。繰り返し押すとそのスロットの武器を順に切り替えます。
+
+@ One equipment add-on includes both night vision and thermal vision. The Change Goggles action cycles Normal, Night Vision, Thermal, then Normal again. Night vision brightens dark rooms; thermal vision highlights living enemies. Goggles do not occupy a weapon slot. Configure intensity and sensor noise below. The binding affects only this add-on.
+ja 暗視とサーマルの両方を備えた装備アドオンです。「ゴーグル切り替え」で通常、暗視、サーマル、通常の順に切り替わります。暗視は暗い部屋を明るくし、サーマルは生きている敵を強調表示します。ゴーグルは武器スロットを使いません。強度とセンサーノイズは下で設定できます。この割り当てはこのアドオンにのみ影響します。
+
+@ Press Dodge with a movement direction on the ground or in midair: dive forward or leap backward and sideways. Diagonals are supported. Each press launches once, with a short recovery. The player body animates in third person. Assign the Dodge action below or in Controls.
+ja 地上または空中で移動方向と一緒に「回避」を押すと、前方へダイブするか、後方や横へ跳びます。斜め方向にも対応しています。1回押すごとに1回発動し、短い硬直があります。三人称ではプレイヤーの体がアニメーションします。「回避」アクションは下か操作設定で割り当ててください。
+
+@ Use the dedicated Bullet Time action to slow the whole local game to 20% speed. Hold is the default; Toggle switches on each press. The optional meter limits use in real seconds and regenerates while inactive. Disable the meter for unlimited use. Remap the action and configure duration and regeneration below.
+ja 専用のバレットタイムアクションで、ローカルのゲーム全体を20%の速度に落とします。初期設定は長押しで、切り替えでは押すたびにオン・オフします。任意のゲージは実時間の秒数で使用を制限し、未使用時に回復します。ゲージを無効にすると無制限に使えます。アクションの再割り当て、持続時間と回復量は下で設定できます。
+
+@ Both shotguns and enemy grunts fire physical pellets with their original spread and damage. Fast default projectiles feel immediate; lower their speed to dodge incoming fire during bullet time. Configure projectile speed below, or reset it to the default of 10000 units per second.
+ja 両方のショットガンと敵のグラントが、オリジナルの拡散とダメージのまま物理的な散弾を撃ちます。初期設定の高速な弾はほぼ即着弾です。弾速を下げればバレットタイム中に敵の攻撃を避けられます。弾速は下で設定するか、初期値の毎秒10000ユニットに戻せます。
+
+@ Freezes the game for a split second when you damage an enemy, so hits feel heavier. Single player only. Choose which weapons trigger it (all, melee, ranged or explosives), how long it lasts and how much more a kill freezes. Advanced settings cover enemy toughness, damage scaling, cooldown and the longest freeze.
+ja 敵にダメージを与えたときにゲームを一瞬停止させ、攻撃の手応えを重くします。シングルプレイのみ。発動する武器（すべて、近接、遠距離、爆発物）、停止時間、キル時の追加停止量を選べます。詳細設定では敵の強さ、ダメージ倍率、クールダウン、最長停止時間を調整できます。
+
+# map packs and the Quaddicted browser
+@ Get more maps (Quaddicted)...
+ja マップを追加（Quaddicted）...
+
+@ Type to filter...
+ja 入力して絞り込み...
+
+@ Launch mod
+ja MODを起動
+
+@ Start first map
+ja 最初のマップを開始
+
+@ (running)
+ja （実行中）
+
+@ running
+ja 実行中
+
+@ Recent
+ja 最近
+
+@ Name
+ja 名前
+
+@ Dir
+ja フォルダー
+
+@ Default
+ja 標準
+
+@ Title
+ja タイトル
+
+@ Sort: {}
+ja 並び順：{}
+
+@ {} installed
+ja {}個インストール済み
+
+@ {}/{} matching
+ja {}/{}件一致
+
+@ {} maps, {} completed
+ja {}マップ、{}クリア
+
+@ {}/{} matching, {} completed
+ja {}/{}件一致、{}クリア
+
+@ no maps of its own
+ja 独自のマップなし
+
+@ dir: {}
+ja フォルダー：{}
+
+@ base: {}
+ja ベース：{}
+
+@ Browse the Quaddicted archive of
+ja Quaddictedのアーカイブから
+
+@ single-player maps and episodes,
+ja シングルプレイ用のマップやエピソードを
+
+@ then download and install them
+ja 探して、ここでダウンロードと
+
+@ here. Each release gets its own
+ja インストールができます。各リリースは
+
+@ entry in this list.
+ja このリストに個別に表示されます。
+
+@ Needs an internet connection.
+ja インターネット接続が必要です。
+
+@ Quaddicted Map Archive
+ja Quaddictedマップアーカイブ
+
+@ Newest
+ja 新着
+
+@ Author
+ja 作者
+
+@ Size
+ja サイズ
+
+@ Loading the map list...
+ja マップリストを読み込み中...
+
+@ Couldn't load the map list: {}
+ja マップリストを読み込めませんでした：{}
+
+@ {} single-player releases  -  F5 refreshes
+ja シングルプレイ用リリース{}件  -  F5で更新
+
+@ {} matching
+ja {}件一致
+
+@ by {}
+ja 作者：{}
+
+@ requires: {}
+ja 必要：{}
+
+@ maps: {}
+ja マップ：{}
+
+@ Failed: {}
+ja 失敗：{}
+
+@ Downloading... {}%
+ja ダウンロード中... {}%
+
+@ Unpacking...
+ja 展開中...
+
+@ Installed in {}/  -  Enter: play
+ja {}/にインストール済み  -  Enter：プレイ
+
+@ Enter: download and install
+ja Enter：ダウンロードしてインストール
+
+@ unpacking
+ja 展開中
+
+@ failed
+ja 失敗
+
+@ installed
+ja インストール済み
+
+@ Downloads are not available in the browser build
+ja ブラウザー版ではダウンロードできません
+
+@ the map list could not be read
+ja マップリストを読み取れませんでした
+
+@ downloading needs the curl program
+ja ダウンロードにはcurlプログラムが必要です
+
+@ download failed
+ja ダウンロードに失敗しました
+
+@ the download is not a valid zip
+ja ダウンロードしたファイルは有効なzipではありません
+
+@ nothing to install for this engine
+ja このエンジン用にインストールするものがありません
+
+@ needs {} installed first
+ja 先に{}のインストールが必要です
+
+@ couldn't unpack {}
+ja {}を展開できませんでした
+
+# help screen
+@ About
+ja 情報
+
+@ < Back
+ja < 戻る
+
+# tr_ctx keys: English shows the short word, the key says which meaning
+@ Save (a manual save, as opposed to a quicksave or autosave)
+ja セーブ
+
+# ==== hud.txt ====
+
+# HUD, weapon and equipment wheels, sound captions and other in-game text.
+# Weapon, monster and item names follow the 2021 re-release's own translations.
+@ Axe
+ja 斧
+
+@ Shotgun
+ja ショットガン
+
+@ Double-Barrelled Shotgun
+ja スーパーショットガン
+
+@ Nailgun
+ja ネイルガン
+
+@ Super Nailgun
+ja スーパーネイルガン
+
+@ Grenade Launcher
+ja グレネードランチャー
+
+@ Rocket Launcher
+ja ロケットランチャー
+
+@ Thunderbolt
+ja サンダーボルト
+
+@ Portal Gun
+ja ポータルガン
+
+@ Boomerang
+ja ブーメラン
+
+@ Stickybomb Launcher
+ja 粘着爆弾ランチャー
+
+@ Railgun
+ja レールガン
+
+@ Hookshot
+ja フックショット
+
+@ Gel Sprayer
+ja ジェル噴射器
+
+@ Powerwasher
+ja 高圧洗浄機
+
+@ Night Vision Goggles
+ja 暗視ゴーグル
+
+@ Thermal Goggles
+ja サーマルゴーグル
+
+@ Normal vision
+ja 通常視界
+
+@ ON
+ja オン
+
+@ OFF
+ja オフ
+
+@ {} (turn on)
+ja {}（オンにする）
+
+@ {} (turn off)
+ja {}（オフにする）
+
+@ Move mouse to select, release to toggle
+ja マウスで選択、離して切り替え
+
+@ Move mouse to select, release to equip
+ja マウスで選択、離して装備
+
+@ Release to toggle
+ja 離して切り替え
+
+@ Release to equip
+ja 離して装備
+
+@ shells
+ja シェル
+
+@ nails
+ja ネイル
+
+@ rockets
+ja ロケット
+
+@ cells
+ja セル
+
+@ Kills: {}/{}
+ja キル：{}/{}
+
+@ Secrets: {}/{}
+ja シークレット：{}/{}
+
+@ Time {}
+ja タイム {}
+
+@ Press any button to continue...
+ja ボタンを押して続行...
+
+@ Press any key to continue...
+ja キーを押して続行...
+
+@ BULLET TIME
+ja バレットタイム
+
+@ AUTO AIM
+ja オートエイム
+
+@ Crosshair
+ja クロスヘア
+
+@ + Marker
+ja ＋マーカー
+
+@ Hit markers off
+ja ヒットマーカーオフ
+
+@ On target
+ja 照準時
+
+@ On kill
+ja キル時
+
+# sound captions
+@ [Secret found]
+ja [シークレット発見]
+
+@ [Message]
+ja [メッセージ]
+
+@ [Switch activated]
+ja [スイッチ作動]
+
+@ [Key picked up]
+ja [鍵を入手]
+
+@ [Rune picked up]
+ja [ルーンを入手]
+
+@ [Teleporter]
+ja [テレポーター]
+
+@ [Teleport]
+ja [テレポート]
+
+@ [Splash]
+ja [水しぶき]
+
+@ [Leaving water]
+ja [水から出る]
+
+@ [Door]
+ja [ドア]
+
+@ [Platform moving]
+ja [足場が移動]
+
+@ [Button]
+ja [ボタン]
+
+@ [Health picked up]
+ja [体力を入手]
+
+@ [Armor picked up]
+ja [アーマーを入手]
+
+@ [Quad Damage wearing off]
+ja [クアッドダメージ終了間近]
+
+@ [Quad Damage]
+ja [クアッドダメージ]
+
+@ [Pentagram wearing off]
+ja [ペンタグラム終了間近]
+
+@ [Pentagram of Protection]
+ja [守護のペンタグラム]
+
+@ [Ring wearing off]
+ja [指輪終了間近]
+
+@ [Ring of Shadows]
+ja [影の指輪]
+
+@ [Biosuit wearing off]
+ja [バイオスーツ終了間近]
+
+@ [Biosuit]
+ja [バイオスーツ]
+
+@ [Item picked up]
+ja [アイテムを入手]
+
+@ [Weapon picked up]
+ja [武器を入手]
+
+@ [Ammo picked up]
+ja [弾薬を入手]
+
+@ [Explosion]
+ja [爆発]
+
+@ [Grenade launched]
+ja [グレネード発射]
+
+@ [Grenade bounce]
+ja [グレネードが跳ねる]
+
+@ [Rocket fired]
+ja [ロケット発射]
+
+@ [Nails fired]
+ja [ネイル発射]
+
+@ [Lightning]
+ja [稲妻]
+
+@ [Thunder]
+ja [雷鳴]
+
+@ [Enforcer alerted]
+ja [エンフォーサーが気づいた]
+
+@ [Grunt alerted]
+ja [グラントが気づいた]
+
+@ [Rottweiler alerted]
+ja [ロットワイラーが気づいた]
+
+@ [Knight alerted]
+ja [ナイトが気づいた]
+
+@ [Death Knight alerted]
+ja [デスナイトが気づいた]
+
+@ [Scrag alerted]
+ja [スクラッグが気づいた]
+
+@ [Ogre alerted]
+ja [オーガが気づいた]
+
+@ [Fiend alerted]
+ja [フィーンドが気づいた]
+
+@ [Shambler alerted]
+ja [シャンブラーが気づいた]
+
+@ [Zombie groaning]
+ja [ゾンビのうめき声]
+
+@ [Vore alerted]
+ja [ヴォアが気づいた]
+
+@ [Vore attacking]
+ja [ヴォアの攻撃]
+
+@ [Spawn alerted]
+ja [スポーンが気づいた]
+
+@ [Rotfish]
+ja [ロットフィッシュ]
+
+@ [Spawn]
+ja [スポーン]
+
+@ [Chthon]
+ja [クトン]
+
+@ [Hard landing]
+ja [激しい着地]
+
+@ [Drowning]
+ja [溺れている]
+
+@ [Gasping for air]
+ja [息継ぎ]
+
+@ [Burning]
+ja [燃えている]
+
+@ [Telefrag]
+ja [テレフラグ]
+
+@ [Gibbed]
+ja [バラバラ]
+
+# ==== console.txt ====
+
+# Console messages, shown translated only with con_translate 1 (Translate Console).
+# Cvar and command names stay as they are.
+@ Autosaved.
+ja オートセーブしました。
+
+@ Game saved.
+ja ゲームをセーブしました。
+
+@ Can't save now.
+ja 今はセーブできません。
+
+@ This game only autosaves (No Manual Saves modifier).
+ja このゲームはオートセーブのみです（「手動セーブなし」調整）。
+
+@ Loading {}...
+ja {}を読み込み中...
+
+@ load failed: {}
+ja 読み込み失敗：{}
+
+@ ERROR: autosave failed: {}
+ja エラー：オートセーブ失敗：{}
+
+@ ERROR: couldn't open {}
+ja エラー：{}を開けませんでした
+
+@ ERROR: couldn't open {}.
+ja エラー：{}を開けませんでした。
+
+@ ERROR: couldn't write {}: {}
+ja エラー：{}を書き込めませんでした：{}
+
+@ ERROR: couldn't create {}: {}
+ja エラー：{}を作成できませんでした：{}
+
+@ couldn't write {}: {}
+ja {}を書き込めませんでした：{}
+
+@ Wrote {}
+ja {}を書き込みました
+
+@ screenshot failed: {}
+ja スクリーンショット失敗：{}
+
+@ screenshot: {}
+ja スクリーンショット：{}
+
+@ No readable save available. Select save or restart the level.
+ja 読み込めるセーブがありません。セーブを選択するかレベルをやり直してください。
+
+@ Unknown command "{}"
+ja 不明なコマンド「{}」
+
+@ couldn't exec {}
+ja {}を実行できませんでした
+
+@ execing {}
+ja {}を実行中
+
+@ execing config.cfg (inherited from {})
+ja config.cfgを実行中（{}から継承）
+
+@ execing config.cfg (mod defaults)
+ja config.cfgを実行中（MODの初期設定）
+
+@ execing default.cfg (built-in)
+ja default.cfgを実行中（内蔵）
+
+@ {} cvars
+ja {}個のcvar
+
+@ {} commands
+ja {}個のコマンド
+
+@ Can't "cmd", not connected
+ja 「cmd」は使えません。接続していません
+
+@ Looking for Quake servers...
+ja Quakeサーバーを検索中...
+
+@ Bad value, must be between 1 and 65534
+ja 無効な値です。1から65534の間で指定してください
+
+@ Couldn't handle music file {}
+ja 音楽ファイル{}を処理できませんでした
+
+@ Bug report written to {}
+ja バグレポートを{}に書き込みました
+
+@ bugreport: can't create {}: {}
+ja bugreport：{}を作成できません：{}
+
+@ graphics preset: {}
+ja グラフィックプリセット：{}
+
+@ Presets (r_shader_preset <name>):
+ja プリセット（r_shader_preset <name>）：
+
+@ Add your own .slangp presets under <game>/shaders/.
+ja 独自の.slangpプリセットは<game>/shaders/に追加できます。
+
+@ no shader preset loaded (r_shader_preset)
+ja シェーダープリセットが読み込まれていません（r_shader_preset）
+
+@ r_shader_preset: "{}" not found
+ja r_shader_preset：「{}」が見つかりません
+
+@ no parameter "{}" in this preset
+ja このプリセットにパラメーター「{}」はありません
+
+@ {} = {} (default {}, {}..{})
+ja {} = {}（初期値 {}、{}..{}）
+
+@ Switching to {}...
+ja {}に切り替え中...
+
+@ game: no game dir "{}" in {}
+ja game：ゲームフォルダー「{}」が{}にありません
+
+@ game: can't find the engine executable
+ja game：エンジンの実行ファイルが見つかりません
+
+@ game: exec failed: {}
+ja game：実行失敗：{}
+
+@ game: launch failed: {}
+ja game：起動失敗：{}
+
+@ loaded {} in {}s
+ja {}を{}秒で読み込みました
+
+@ No demos listed with startdemos
+ja startdemosにデモが登録されていません
+
+@ Playing demo from {}.
+ja {}からデモを再生中。
+
+@ {} frames {} seconds {} fps
+ja {}フレーム {}秒 {} fps
+
+@ Recording to {}.
+ja {}に録画中。
+
+@ Completed demo
+ja デモ終了
+
+@ Can't record during demo playback
+ja デモ再生中は録画できません
+
+@ Relative pathnames are not allowed.
+ja 相対パスは使用できません。
+
+@ Can't record - try again when connected
+ja 録画できません。接続後にもう一度試してください
+
+@ {} demo(s) in loop
+ja {}個のデモをループ中
+
+@ Not recording a demo.
+ja デモを録画していません。
+
+@ {} joined on a gamepad
+ja {}がゲームパッドで参加しました
+
+@ goggles: needs a game started with Add-ons and Goggles enabled
+ja goggles：アドオンとゴーグルを有効にして開始したゲームが必要です
+
+@ equip: needs a game started with Add-ons and Goggles enabled
+ja equip：アドオンとゴーグルを有効にして開始したゲームが必要です
+
+@ UDP listening on port {}
+ja UDPポート{}で待機中
+
+@ UDP bind on port {} failed: {}
+ja UDPポート{}のバインドに失敗：{}
+
+@ Connection accepted by {}
+ja {}が接続を受け入れました
+
+@ Connection failed: {}
+ja 接続失敗：{}
+
+@ Couldn't resolve {}
+ja {}を解決できませんでした
+
+@ Connecting to {}...
+ja {}に接続中...
+
+@ Connecting to QuakeWorld server {}...
+ja QuakeWorldサーバー{}に接続中...
+
+@ Disconnected: {}
+ja 切断されました：{}
+
+@ Server disconnected
+ja サーバーが切断されました
+
+@ Client {} connected
+ja クライアント{}が接続しました
+
+@ Client {} timed out
+ja クライアント{}がタイムアウトしました
+
+@ Couldn't spawn server {}: {}
+ja サーバー{}を起動できませんでした：{}
+
+@ maxplayers can not be changed while a server is running.
+ja サーバー実行中はmaxplayersを変更できません。
+
+@ You can't kick yourself!
+ja 自分をキックすることはできません！
+
+@ Only the server may changelevel
+ja changelevelはサーバーのみ使用できます
+
+@ {} renamed to {}
+ja {}が{}に改名しました

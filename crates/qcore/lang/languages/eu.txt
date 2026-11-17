@@ -1,0 +1,3024 @@
+# eu: the port's own text; English keys from crates/qcore/lang/*.txt.
+# Format in crates/qcore/src/lang/catalog.rs; check with tools/lang_check.py.
+
+# ==== menu.txt ====
+
+# Options pages: page names, row labels and choice values.
+@ 10% speed
+eu % 10eko abiadura
+
+@ 2 split-screen
+eu 2 pantaila zatituan
+
+@ 3 split-screen
+eu 3 pantaila zatituan
+
+@ 4 split-screen
+eu 4 pantaila zatituan
+
+@ 5 split-screen
+eu 5 pantaila zatituan
+
+@ 6 split-screen
+eu 6 pantaila zatituan
+
+@ 2D aiming
+eu 2D xedea
+
+@ 2x monsters
+eu 2x munstro
+
+@ 3x monsters
+eu 3x munstro
+
+@ 4x monsters
+eu 4x munstro
+
+@ 3D resolution
+eu 3D bereizmena
+
+@ 3D view
+eu 3D ikuspegia
+
+@ 8-bit Color
+eu 8 biteko kolorea
+
+@ Accessibility
+eu Irisgarritasuna
+
+@ Acquisition Cone
+eu Finkatze-konoa
+
+@ Activation
+eu Aktibazioa
+
+@ Add a ringing room tail after the cue
+eu Gehitu gelako oihartzun-isatsa seinalearen ondoren
+
+@ Add delayed repeats after the cue
+eu Gehitu errepikapen atzeratuak seinalearen ondoren
+
+@ Add saturation and distortion
+eu Gehitu saturazioa eta distortsioa
+
+@ Add-ons
+eu Gehigarriak
+
+@ Address
+eu Helbidea
+
+@ Adds fine noise to hide color banding
+eu Zarata fina gehitzen du kolore-bandak ezkutatzeko
+
+@ Advanced Settings
+eu Ezarpen aurreratuak
+
+@ Aim Assist
+eu Xede-laguntza
+
+@ Aim Rotation
+eu Xedearen biraketa
+
+@ Aim Slowdown
+eu Xedearen moteltzea
+
+@ Aim Style
+eu Xede-estiloa
+
+@ All
+eu Denak
+
+@ All enemies
+eu Etsai guztiak
+
+@ Alt Fire (Add-ons)
+eu Tiro alternatiboa (gehigarriak)
+
+@ Always Run
+eu Beti korrika
+
+@ Ambient Occlusion
+eu Giro-oklusioa
+
+@ Ammo Counts
+eu Munizio-kontagailuak
+
+@ Ammo Counts Position
+eu Munizio-kontagailuen kokapena
+
+@ Ammo Pickups
+eu Jasotako munizioa
+
+@ Anisotropic
+eu Anisotropikoa
+
+@ Anti-aliasing
+eu Antialiasinga
+
+@ Apply To
+eu Aplikatu honi
+
+@ Armor
+eu Armadura
+
+@ Armor Position
+eu Armaduraren kokapena
+
+@ Ask
+eu Galdetu
+
+@ Attack
+eu Eraso
+
+@ Audio
+eu Audioa
+
+@ Auto-aim
+eu Xede automatikoa
+
+@ Auto-aim Settings
+eu Xede automatikoaren ezarpenak
+
+@ Autosave
+eu Autogordetzea
+
+@ Autosave Settings
+eu Autogordetze-ezarpenak
+
+@ Autosave Timer
+eu Autogordetze-tartea
+
+@ Autosaves to Keep
+eu Autogordetze kopurua
+
+@ Bass
+eu Baxuak
+
+@ Blip
+eu Blip
+
+@ Blood Quality
+eu Odolaren kalitatea
+
+@ Blood Splatter Settings
+eu Odol-zipriztinen ezarpenak
+
+@ Blue
+eu Urdina
+
+@ Boomerang Settings
+eu Bumeranaren ezarpenak
+
+@ Boost or cut high frequencies in decibels
+eu Igo edo jaitsi maiztasun altuak dezibeletan
+
+@ Boost or cut low frequencies in decibels
+eu Igo edo jaitsi maiztasun baxuak dezibeletan
+
+@ Brightness
+eu Distira
+
+@ Bullet Time (Add-ons)
+eu Bala-denbora (gehigarriak)
+
+@ Bullet Time Settings
+eu Bala-denboraren ezarpenak
+
+@ Button Glyphs
+eu Botoi-ikurrak
+
+@ Button Size
+eu Botoien tamaina
+
+@ Camera
+eu Kamera
+
+@ Caustic Intensity
+eu Kaustikoen intentsitatea
+
+@ Caustics
+eu Kaustikoak
+
+@ Center
+eu Erdian
+
+@ Center Message Position
+eu Erdiko mezuen kokapena
+
+@ Center Message Time
+eu Erdiko mezuen iraupena
+
+@ Center View
+eu Ikuspegia erdiratu
+
+@ Change Color on Kill
+eu Kolorea aldatu hiltzean
+
+@ Change Color on Target
+eu Kolorea aldatu xedean
+
+@ Chime
+eu Kanpaitxoa
+
+@ Click
+eu Klik
+
+@ Clink
+eu Tintin
+
+@ Coin
+eu Txanpona
+
+@ Color
+eu Kolorea
+
+@ Color Filter
+eu Kolore-iragazkia
+
+@ Color of the grenade arc
+eu Granada-arkuaren kolorea
+
+@ Colored Lighting
+eu Argiztapen koloreduna
+
+@ Connect
+eu Konektatu
+
+@ Contrast
+eu Kontrastea
+
+@ Controls
+eu Kontrolak
+
+@ Cooldown (ms)
+eu Itxarotea (ms)
+
+@ Crosshair Outline
+eu Miraren ingerada
+
+@ Crosshair Shape
+eu Miraren forma
+
+@ Crosshair Size
+eu Miraren tamaina
+
+@ Current Ammo
+eu Uneko munizioa
+
+@ Current Ammo Position
+eu Uneko munizioaren kokapena
+
+@ Customize This Game
+eu Pertsonalizatu partida hau
+
+@ Damage
+eu Kaltea
+
+@ Damage Taken
+eu Jasotako kaltea
+
+@ Debris
+eu Hondakinak
+
+@ Debris Quality
+eu Hondakinen kalitatea
+
+@ Debris Settings
+eu Hondakinen ezarpenak
+
+@ Directional Damage
+eu Kaltearen norabidea
+
+@ Dithering
+eu Dithering-a
+
+@ Dodge / Dive (Add-ons)
+eu Saihestu / jauzi egin (gehigarriak)
+
+@ Dragging up looks down instead of up
+eu Gora arrastatzean behera begiratzen da
+
+@ Drive
+eu Saturazioa
+
+@ Dynamic Lights
+eu Argi dinamikoak
+
+@ Echo
+eu Oihartzuna
+
+@ Enemy Health
+eu Etsaien osasuna
+
+@ Enemy Wounds
+eu Etsaien zauriak
+
+@ Enhanced Blood Splatter
+eu Odol-zipriztin hobetuak
+
+@ Enhanced FX
+eu Efektu hobetuak
+
+@ Enhanced Models
+eu Eredu hobetuak
+
+@ Enhanced Particles
+eu Partikula hobetuak
+
+@ Enhanced Water
+eu Ur hobetua
+
+@ Enhancements
+eu Hobekuntzak
+
+@ Equipment Wheel (Add-ons)
+eu Ekipamendu-gurpila (gehigarriak)
+
+@ Exploding boxes throw metal shards
+eu Kutxa leherkorrek metal-ezpalak jaurtitzen dituzte
+
+@ Explosion Damage
+eu Leherketa-kaltea
+
+@ Explosion Scorch Marks
+eu Leherketen erre-markak
+
+@ Explosions scorch nearby solid surfaces
+eu Leherketek inguruko gainazal solidoak erretzen dituzte
+
+@ Explosives only
+eu Lehergailuak soilik
+
+@ Extra Monsters
+eu Munstro gehigarriak
+
+@ Extra Per 10 Damage (ms)
+eu Gehigarria 10 kalteko (ms)
+
+@ FX Settings
+eu Efektuen ezarpenak
+
+@ Field of View
+eu Ikus-eremua
+
+@ Firing never uses up ammo
+eu Tiro egiteak ez du inoiz munizioa gastatzen
+
+@ First person
+eu Lehen pertsona
+
+@ Flick Time
+eu Flick denbora
+
+@ Flight Speed
+eu Hegaldi-abiadura
+
+@ Fog
+eu Lainoa
+
+@ Frag Limit
+eu Frag muga
+
+@ Freeze Duration (ms)
+eu Izozte-iraupena (ms)
+
+@ GLQuake
+eu GLQuake
+
+@ Game Speed
+eu Jokoaren abiadura
+
+@ Game Type
+eu Partida mota
+
+@ Gameplay
+eu Jokoa
+
+@ Gameplay Modifiers
+eu Joko-aldatzaileak
+
+@ Gel Quality
+eu Gelaren kalitatea
+
+@ Gib Surface Painting
+eu Haragi-pusken orbanak
+
+@ Gibs
+eu Haragi-puskak
+
+@ Gibs and heads tumble and bounce
+eu Haragi-puskak eta buruak biraka eta errebotean
+
+@ Goggle Glow Quality
+eu Betaurreko-distiraren kalitatea
+
+@ Goggle Intensity
+eu Betaurrekoen intentsitatea
+
+@ Goggle Noise
+eu Betaurrekoen zarata
+
+@ Goggles Settings
+eu Betaurrekoen ezarpenak
+
+@ Graphics
+eu Grafikoak
+
+@ Green
+eu Berdea
+
+@ Grenade Arc
+eu Granada-arkua
+
+@ Grenade Arc Settings
+eu Granada-arkuaren ezarpenak
+
+@ Gun Kick
+eu Armaren atzerakada
+
+@ Gyro
+eu Giroskopioa
+
+@ Gyro & Flick Stick
+eu Giroskopioa eta flick stick
+
+@ Gyro Active
+eu Giroskopioa aktibo
+
+@ Gyro Aiming
+eu Giroskopio bidezko xedea
+
+@ HUD
+eu HUD
+
+@ HUD Style
+eu HUD estiloa
+
+@ Health
+eu Osasuna
+
+@ Health Pickups
+eu Jasotako osasuna
+
+@ Health Position
+eu Osasunaren kokapena
+
+@ Health Regeneration
+eu Osasunaren berroneratzea
+
+@ Hit & Kill Sounds
+eu Kolpe- eta hilketa-soinuak
+
+@ Hit Doors & Lifts
+eu Jo ateak eta igogailuak
+
+@ Hit Markers
+eu Kolpe-markak
+
+@ Hit Sound
+eu Kolpe-soinua
+
+@ Hitmarker Size
+eu Kolpe-markaren tamaina
+
+@ Hitmarker Type
+eu Kolpe-marka mota
+
+@ Hitstop Advanced
+eu Hitstop aurreratua
+
+@ Hitstop Settings
+eu Hitstop ezarpenak
+
+@ Hold
+eu Eutsi
+
+@ Hold lock-on
+eu Eutsi xedea finkatzeko
+
+@ Hook Enemies
+eu Kakotu etsaiak
+
+@ Hook Metal
+eu Kakotu metala
+
+@ Hook Stone
+eu Kakotu harria
+
+@ Hook Wood
+eu Kakotu egurra
+
+@ Hooking an enemy pulls you to it
+eu Etsai bat kakotzean harengana eramaten zaitu
+
+@ Hookshot Range
+eu Kakoaren irismena
+
+@ Hookshot Settings
+eu Kakoaren ezarpenak
+
+@ Host Game
+eu Sortu partida
+
+@ How far the hook flies before it retracts
+eu Kakoak zenbat hegan egiten duen itzuli aurretik
+
+@ How visible the on-screen controls are
+eu Pantailako kontrolen ikusgaitasuna
+
+@ Impact Lifetime
+eu Talken iraupena
+
+@ Infinite Ammo
+eu Munizio mugagabea
+
+@ Input
+eu Sarrera
+
+@ Input Scale
+eu Sarrera-eskala
+
+@ Interpolate Animation
+eu Interpolatu animazioa
+
+@ Interpolate Movement
+eu Interpolatu mugimendua
+
+@ Invert Look
+eu Alderantzikatu begirada
+
+@ Invert Mouse
+eu Alderantzikatu sagua
+
+@ Invert Stick
+eu Alderantzikatu palanka
+
+@ Jet Quality
+eu Zorrotadaren kalitatea
+
+@ Join Game
+eu Batu partidara
+
+@ Jump / Swim Up
+eu Jauzi / igeri gora
+
+@ Jump again in mid-air
+eu Jauzi berriro airean
+
+@ Jumps
+eu Jauziak
+
+@ Keys & Powerups
+eu Giltzak eta indargarriak
+
+@ Keys & Powerups Position
+eu Giltzen eta indargarrien kokapena
+
+@ Kill Bonus (x)
+eu Hilketa-saria (x)
+
+@ Kill Sound
+eu Hilketa-soinua
+
+@ Knock
+eu Kolpea
+
+@ Left
+eu Ezkerrean
+
+@ Length of the motion blur streaks
+eu Mugimendu-lausotzearen arrastoen luzera
+
+@ Lifetime (seconds)
+eu Iraupena (segundoak)
+
+@ Live Portal Views
+eu Atarien zuzeneko ikuspegiak
+
+@ Live View Distance
+eu Zuzeneko ikuspegien distantzia
+
+@ Local Players
+eu Tokiko jokalariak
+
+@ Local red wounds follow enemy animation
+eu Zauri gorriek etsaiaren animazioa jarraitzen dute
+
+@ Lock Indicator
+eu Finkatze-adierazlea
+
+@ Long falls don't hurt
+eu Erorketa luzeek ez dute minik egiten
+
+@ Longest Freeze (ms)
+eu Izozte luzeena (ms)
+
+@ Look Down
+eu Begiratu behera
+
+@ Look Speed
+eu Begiratzeko abiadura
+
+@ Look Up
+eu Begiratu gora
+
+@ Main Menu Music
+eu Menu nagusiko musika
+
+@ Max FPS
+eu FPS gehienez
+
+@ Max Players
+eu Jokalariak gehienez
+
+@ Maximum Impacts
+eu Talkak gehienez
+
+@ Maximum Marks
+eu Markak gehienez
+
+@ Maximum Range
+eu Irismen maximoa
+
+@ Melee only
+eu Gertuko erasoak soilik
+
+@ Message Background
+eu Mezuen atzeko planoa
+
+@ Message Text Size
+eu Mezuen testu-tamaina
+
+@ Messages & Captions
+eu Mezuak eta azpitituluak
+
+@ Meter Duration (real seconds)
+eu Neurgailuaren iraupena (benetako segundoak)
+
+@ Minimum Damage
+eu Gutxieneko kaltea
+
+@ Mode
+eu Modua
+
+@ Modern Console
+eu Kontsola modernoa
+
+@ Modern HUD Layout
+eu HUD diseinu modernoa
+
+@ Most recent save
+eu Gordetako azkena
+
+@ Motion Blur
+eu Mugimendu-lausotzea
+
+@ Motion Blur Amount
+eu Mugimendu-lausotzearen maila
+
+@ Motion Blur Quality
+eu Mugimendu-lausotzearen kalitatea
+
+@ Mouse & Keyboard
+eu Sagua eta teklatua
+
+@ Mouse Speed
+eu Saguaren abiadura
+
+@ Move Back
+eu Atzera
+
+@ Move Forward
+eu Aurrera
+
+@ Music Volume
+eu Musikaren bolumena
+
+@ Next Weapon
+eu Hurrengo arma
+
+@ No Drowning
+eu Itotzerik ez
+
+@ No Fall Damage
+eu Erorketa-kalterik ez
+
+@ No Manual Saves
+eu Eskuzko gordetzerik ez
+
+@ No Self Damage
+eu Norberaren kalterik ez
+
+@ Noise Filter
+eu Zarata-iragazkia
+
+@ Normal Color
+eu Kolore normala
+
+@ Notify Message Position
+eu Jakinarazpenen kokapena
+
+@ Notify Message Time
+eu Jakinarazpenen iraupena
+
+@ Number of splatter rays per blood impact
+eu Zipriztin-izpi kopurua odol-talka bakoitzeko
+
+@ Off
+eu Desaktibatuta
+
+@ On Death
+eu Hiltzean
+
+@ On Kill Color
+eu Hilketa-kolorea
+
+@ On Target Color
+eu Xede-kolorea
+
+@ Opacity
+eu Opakutasuna
+
+@ Opacity of the grenade arc
+eu Granada-arkuaren opakutasuna
+
+@ Pants Color
+eu Galtzen kolorea
+
+@ Particle Quality
+eu Partikulen kalitatea
+
+@ Particles
+eu Partikulak
+
+@ Physical Nail Impacts
+eu Iltzeen talka fisikoak
+
+@ Pistol Start
+eu Pistolarekin hasi
+
+@ Pitch
+eu Tonua
+
+@ Pitch Sensitivity
+eu Sentikortasun bertikala
+
+@ Playback Speed
+eu Erreprodukzio-abiadura
+
+@ Player Setup
+eu Jokalariaren konfigurazioa
+
+@ Pop
+eu Pop
+
+@ Portal Gun Settings
+eu Atari-pistolaren ezarpenak
+
+@ Portal Recursion
+eu Atarien errekurtsioa
+
+@ Portal View Quality
+eu Atari-ikuspegiaren kalitatea
+
+@ Preview Sound
+eu Entzun soinua
+
+@ Previous Weapon
+eu Aurreko arma
+
+@ Projectile Shotguns Settings
+eu Proiektil-eskopeten ezarpenak
+
+@ Projectile Speed (units/s)
+eu Proiektilen abiadura (unitate/s)
+
+@ Purple
+eu Morea
+
+@ Push
+eu Bultzada
+
+@ Push Strength
+eu Bultzadaren indarra
+
+@ Quick Load
+eu Karga azkarra
+
+@ Quick Save
+eu Gordetze azkarra
+
+@ Railgun Settings
+eu Railgun ezarpenak
+
+@ Ranged only
+eu Urrutiko erasoak soilik
+
+@ Reacquire While Held
+eu Berriz finkatu eustean
+
+@ Red
+eu Gorria
+
+@ Reduce Motion
+eu Murriztu mugimendua
+
+@ Regen (seconds per second)
+eu Berroneratzea (segundo segundoko)
+
+@ Render Scale
+eu Errendatze-eskala
+
+@ Reverb
+eu Erreberberazioa
+
+@ Right
+eu Eskuinean
+
+@ Ripple Intensity
+eu Uhinen intentsitatea
+
+@ Ripples
+eu Uhinak
+
+@ Roll Sensitivity
+eu Albo-biraketaren sentikortasuna
+
+@ Rumble
+eu Bibrazioa
+
+@ Run
+eu Korrika
+
+@ Save on All Enemies Killed
+eu Gorde etsai guztiak hiltzean
+
+@ Save on All Secrets Found
+eu Gorde sekretu guztiak aurkitzean
+
+@ Save on Level Entry
+eu Gorde mailan sartzean
+
+@ Save on Secret Found
+eu Gorde sekretu bat aurkitzean
+
+@ Scoreboard
+eu Puntuazio-taula
+
+@ Screen Flashes
+eu Pantaila-distirak
+
+@ Screen Shader
+eu Pantaila-shaderra
+
+@ Screen Shake
+eu Pantailaren dardara
+
+@ Search LAN
+eu Bilatu LANean
+
+@ Seconds a center-screen message stays up
+eu Erdiko mezu bat pantailan dirauen segundoak
+
+@ See Through Portals
+eu Ikusi atarien bidez
+
+@ See-through Teleporters
+eu Teleportagailu gardenak
+
+@ Shirt Color
+eu Alkandoraren kolorea
+
+@ Shotgun Bullet Decals
+eu Perdigoi-markak
+
+@ Shoulder left
+eu sorbalda ezkerra
+
+@ Shoulder right
+eu sorbalda eskuina
+
+@ Show FPS
+eu Erakutsi FPSak
+
+@ Show Face
+eu Erakutsi aurpegia
+
+@ Shrapnel
+eu Metraila
+
+@ Size of on-screen messages and captions
+eu Pantailako mezuen eta azpitituluen tamaina
+
+@ Skill
+eu Zailtasuna
+
+@ Sky Fog
+eu Zeruko lainoa
+
+@ Smooths the stepped movement of monsters
+eu Munstroen mugimendu sakatua leuntzen du
+
+@ Sound
+eu Soinua
+
+@ Sound Captions
+eu Soinuen azpitituluak
+
+@ Sound Volume
+eu Soinuaren bolumena
+
+@ Speed Blur
+eu Abiadura-lausotzea
+
+@ Splashes
+eu Zipriztinak
+
+@ Splatter Amount
+eu Zipriztin kopurua
+
+@ Splatter Size
+eu Zipriztinen tamaina
+
+@ Start Game
+eu Hasi partida
+
+@ Staying underwater doesn't hurt
+eu Urpean egoteak ez du minik egiten
+
+@ Stick Look Pitch
+eu Palanka: begirada bertikala
+
+@ Stick Look Yaw
+eu Palanka: begirada horizontala
+
+@ Strafe Left
+eu Alboz ezkerrera
+
+@ Strafe Right
+eu Alboz eskuinera
+
+@ Strength of the surface swell and rings
+eu Gainazaleko olatuen eta eraztunen indarra
+
+@ Stun Duration
+eu Zorabioaren iraupena
+
+@ Style
+eu Estiloa
+
+@ Supersampling
+eu Supersampling-a
+
+@ Surface Hit Effects
+eu Gainazaleko talka-efektuak
+
+@ Swim Down
+eu Igeri behera
+
+@ Targets
+eu Xedeak
+
+@ Teamplay
+eu Talde-jokoa
+
+@ Texture Filter
+eu Testura-iragazkia
+
+@ Third person
+eu Hirugarren pertsona
+
+@ Thud
+eu Kolpe gorra
+
+@ Tick
+eu Tik
+
+@ Time Limit
+eu Denbora-muga
+
+@ Time Stretch
+eu Denbora-luzapena
+
+@ Toggle Attack
+eu Erasoa txandakatu
+
+@ Toggle Run
+eu Korrika txandakatu
+
+@ Toggle auto-aim
+eu Xede automatikoa txandakatu
+
+@ Touch Controls
+eu Ukipen-kontrolak
+
+@ Touchscreen
+eu Ukipen-pantaila
+
+@ Tough Enemy Health
+eu Etsai gogorren osasuna
+
+@ Tough enemies only
+eu Etsai gogorrak soilik
+
+@ Trail Colour
+eu Arrastoaren kolorea
+
+@ Translate Console
+eu Itzuli kontsola
+
+@ Translucent Water
+eu Ur zeharrargitsua
+
+@ Treble
+eu Altuak
+
+@ Turn Left
+eu Biratu ezkerrera
+
+@ Turn Right
+eu Biratu eskuinera
+
+@ Underwater FX
+eu Urpeko efektuak
+
+@ Use Bullet Time Meter
+eu Erabili bala-denboraren neurgailua
+
+@ VSync
+eu VSync
+
+@ View Bob
+eu Kameraren kulunka
+
+@ Viewmodels
+eu Armen ereduak
+
+@ Volume
+eu Bolumena
+
+@ Water Opacity
+eu Uraren opakutasuna
+
+@ Water Quality
+eu Uraren kalitatea
+
+@ Water Settings
+eu Uraren ezarpenak
+
+@ Weapon Wheel
+eu Arma-gurpila
+
+@ Weapon Wheel Slowdown
+eu Arma-gurpilaren moteltzea
+
+@ Weapons
+eu Armak
+
+@ Weapons Position
+eu Armen kokapena
+
+@ Where center-screen messages appear
+eu Non agertzen diren erdiko mezuak
+
+@ Where pickup and event messages appear
+eu Non agertzen diren objektu- eta gertaera-mezuak
+
+@ White
+eu Zuria
+
+@ Yaw Sensitivity
+eu Sentikortasun horizontala
+
+@ Yellow
+eu Horia
+
+# lowercase choice values
+@ T
+eu T
+
+@ always
+eu beti
+
+@ auto
+eu auto
+
+@ banded
+eu bandaka
+
+@ borderless
+eu ertzik gabe
+
+@ bottom center
+eu behean erdian
+
+@ bottom left
+eu behean ezkerrean
+
+@ bottom right
+eu behean eskuinean
+
+@ box
+eu kutxa
+
+@ broken square
+eu karratu etena
+
+@ classic
+eu klasikoa
+
+@ coarse
+eu lodia
+
+@ cooperative
+eu kooperatiboa
+
+@ cross
+eu gurutzea
+
+@ cross + dot
+eu gurutzea + puntua
+
+@ cyan
+eu ziana
+
+@ dashed
+eu marratua
+
+@ deathmatch
+eu deathmatch
+
+@ deuteranopia
+eu deuteranopia
+
+@ diagonal streaks
+eu marra diagonalak
+
+@ diamond
+eu erronboa
+
+@ dot
+eu puntua
+
+@ double
+eu bikoitza
+
+@ double chevrons
+eu txebroi bikoitzak
+
+@ double diagonals
+eu diagonal bikoitzak
+
+@ easy
+eu erraza
+
+@ fine
+eu fina
+
+@ fit output
+eu egokitu irteerara
+
+@ flick stick
+eu flick stick
+
+@ fullscreen
+eu pantaila osoa
+
+@ gap cross
+eu gurutze irekia
+
+@ green
+eu berdea
+
+@ grey
+eu grisa
+
+@ half speed
+eu abiadura erdia
+
+@ hard
+eu zaila
+
+@ high
+eu altua
+
+@ huge
+eu erraldoia
+
+@ immersive
+eu murgilgarria
+
+@ intense
+eu bizia
+
+@ large
+eu handia
+
+@ larger
+eu handiagoa
+
+@ largest
+eu handiena
+
+@ linear
+eu lineala
+
+@ low
+eu baxua
+
+@ lower
+eu behean
+
+@ magenta
+eu magenta
+
+@ medium
+eu ertaina
+
+@ middle
+eu erdian
+
+@ middle left
+eu erdian ezkerrean
+
+@ middle right
+eu erdian eskuinean
+
+@ modern
+eu modernoa
+
+@ nearest
+eu hurbilena
+
+@ nightmare
+eu amesgaiztoa
+
+@ nintendo
+eu Nintendo
+
+@ no team damage
+eu talde-kalterik ez
+
+@ none
+eu bat ere ez
+
+@ normal
+eu normala
+
+@ off
+eu desaktibatuta
+
+@ off while held
+eu desaktibatuta eustean
+
+@ on
+eu aktibatuta
+
+@ only while held
+eu eustean soilik
+
+@ playstation
+eu PlayStation
+
+@ protanopia
+eu protanopia
+
+@ quarter speed
+eu abiaduraren laurdena
+
+@ red
+eu gorria
+
+@ short diagonals
+eu diagonal laburrak
+
+@ single
+eu bakuna
+
+@ small
+eu txikia
+
+@ solid
+eu jarraitua
+
+@ spectacle
+eu ikusgarria
+
+@ subtle
+eu leuna
+
+@ team damage
+eu talde-kaltea
+
+@ top center
+eu goian erdian
+
+@ top left
+eu goian ezkerrean
+
+@ top right
+eu goian eskuinean
+
+@ triple
+eu hirukoitza
+
+@ tritanopia
+eu tritanopia
+
+@ upper
+eu goian
+
+@ white
+eu zuria
+
+@ whole screen
+eu pantaila osoa
+
+@ windowed
+eu leihoan
+
+@ xbox
+eu Xbox
+
+@ yellow
+eu horia
+
+# ==== tooltips.txt ====
+
+# Options help lines (tooltips) and reasons for disabled rows.
+@ 2D aiming turns the view continuously with the right stick; flick stick snaps the view to where you push the stick, then turning the stick rotates it
+eu 2D xedeak ikuspegia etengabe biratzen du eskuineko palankarekin; flick stick-ek ikuspegia palanka bultzatzen duzun norabidera eramaten du, eta gero palanka biratuz biratzen da
+
+@ 3D resolution relative to the window; the UI stays sharp
+eu 3D bereizmena leihoarekiko; interfazea garbi mantentzen da
+
+@ 3D view keeps the HUD and menus sharp; whole screen runs them through the shader too
+eu 3D ikuspegiak HUDa eta menuak garbi mantentzen ditu; pantaila osoak haiek ere shaderretik pasatzen ditu
+
+@ A Quake III style railgun: a slug that pierces every enemy on its line, using 2 cells a shot and refiring every 1.5 s; select it through its assigned weapon slot (Add-ons)
+eu Quake III estiloko railgun bat: bere lerroko etsai guztiak zeharkatzen dituen bala, 2 zelula tiro bakoitzeko eta 1,5 s-ro tiro bat; hautatu esleitutako arma-zirrikituaren bidez (gehigarriak)
+
+@ A Zelda-style hookshot: fire sends a chain hook out; it latches onto hookable surfaces or enemies and reels you in; fire again to let go
+eu Zelda estiloko kakoa: tiro eginez kate-kako bat jaurtitzen da; gainazal egokietan edo etsaietan heltzen da eta zu erakartzen zaitu; egin tiro berriro askatzeko
+
+@ Also translates the engine's console messages; off keeps them in English
+eu Motorraren kontsola-mezuak ere itzultzen ditu; desaktibatuta ingelesez uzten ditu
+
+@ Automatically acquire another enemy while holding Lock-on after losing a target
+eu Xedea galdu ondoren, beste etsai bat automatikoki finkatzen du Finkatu xedea sakatuta dagoen bitartean
+
+@ Blends between animation frames of monsters and weapons
+eu Munstroen eta armen animazio-fotogramak nahasten ditu
+
+@ Blood stains surfaces and bodies; cosmetic, independent of particle packs
+eu Odolak gainazalak eta gorputzak zikintzen ditu; apaingarria soilik, partikula-paketeetatik independentea
+
+@ Bloom glow around bright lights and heat sources; medium uses 4 taps, high uses 8, low disables halo taps
+eu Bloom distira argi biziak eta bero-iturrien inguruan; ertainak 4 lagin erabiltzen ditu, altuak 8, baxuak haloa desgaitzen du
+
+@ Blurs fast-moving monsters, projectiles and doors (not camera turns)
+eu Mugimendu azkarreko munstroak, proiektilak eta ateak lausotzen ditu (ez kameraren birak)
+
+@ Blurs the screen edges during fast falls and launches; keeps the centre clear. Reduce Motion disables it
+eu Pantailaren ertzak lausotzen ditu erorketa eta jaurtiketa azkarretan; erdigunea garbi geratzen da. Murriztu mugimendua aukerak desgaitzen du
+
+@ Brightness of the underwater light patterns
+eu Urpeko argi-ereduen distira
+
+@ Caps mark count, lifetime, airborne droplets and wound/gib painting; low skips enemy wounds and gib trails
+eu Marken kopurua, iraupena, airean dauden tantak eta zauri/haragi-pusken orbanak mugatzen ditu; baxuak etsaien zauriak eta haragi-pusken arrastoak saltatzen ditu
+
+@ Caps shader input at output size so 200% render scale keeps 3D sharpness without 4x shader cost; low scales stay low-res
+eu Shaderraren sarrera irteera-tamainara mugatzen du; horrela % 200eko errendatze-eskalak 3D garbitasuna mantentzen du shaderraren 4x kostua gabe; eskala baxuek bereizmen baxua mantentzen dute
+
+@ Classic: the original status bar; modern: compact elements at the screen edges
+eu Klasikoa: jatorrizko egoera-barra; modernoa: elementu trinkoak pantailaren ertzetan
+
+@ Coat atlas resolution, rebuild rate and shader detail: low builds smaller coats less often with fast shading; high uses full detail
+eu Geruza-atlasaren bereizmena, berreraikitze-maiztasuna eta shader-xehetasuna: baxuak geruza txikiagoak sortzen ditu gutxiagotan, itzaldura azkarrarekin; altuak xehetasun osoa erabiltzen du
+
+@ Colour of the railgun's spiral trail; split-screen players each get the next colour along
+eu Railgunaren arrasto espiralaren kolorea; pantaila zatituan jokalari bakoitzak hurrengo kolorea jasotzen du
+
+@ Damage the railgun deals to each enemy it passes through (Quake III: 100)
+eu Railgunak zeharkatzen duen etsai bakoitzari eragiten dion kaltea (Quake III: 100)
+
+@ Dark backdrop behind on-screen messages for readability
+eu Atzeko plano iluna pantailako mezuen atzean, irakurtzeko errazago
+
+@ Dark border keeps the crosshair visible on any background
+eu Ertz ilunak mira ikusgai mantentzen du edozein atzeko planotan
+
+@ Darkens corners and contact areas where geometry meets; higher quality is sharper
+eu Geometria elkartzen den txokoak eta kontaktu-guneak iluntzen ditu; kalitate altuagoa zorrotzagoa da
+
+@ Debris lands on and is carried or shoved by doors, lifts and platforms
+eu Hondakinak ate, igogailu eta plataformen gainean erortzen dira, eta haiek eraman edo bultzatzen dituzte
+
+@ Detail for caustics, ripples and splashes: low uses smaller budgets and shorter view distance; high uses larger budgets and farther view distance
+eu Kaustiko, uhin eta zipriztinen xehetasuna: baxuak aurrekontu txikiagoak eta ikus-distantzia laburragoa erabiltzen ditu; altuak aurrekontu handiagoak eta ikus-distantzia luzeagoa
+
+@ Disabled while Enhanced Particles is on: its particles replace the GLQuake and Classic styles
+eu Desgaituta Partikula hobetuak aktibatuta dagoen bitartean: haren partikulek GLQuake eta klasikoa estiloak ordezkatzen dituzte
+
+@ Disabled while Enhanced Water is on: its own underwater effects replace the classic and GLQuake view warps
+eu Desgaituta Ur hobetua aktibatuta dagoen bitartean: haren urpeko efektuek ikuspegiaren distortsio klasikoa eta GLQuake ordezkatzen dituzte
+
+@ Draw the predicted grenade path as a solid or dashed line
+eu Marraztu granadaren aurreikusitako ibilbidea marra jarraitu edo marratu gisa
+
+@ Draw the view out of the linked portal inside each portal; off shows flat discs (fastest)
+eu Marraztu atari bakoitzaren barruan lotutako ataritik ikusten dena; desaktibatuta disko lauak erakusten ditu (azkarrena)
+
+@ Droplets spray up when things enter or leave water, slime or lava
+eu Tantak zipriztintzen dira zerbait uretan, lohian edo laban sartu edo irtetean
+
+@ Emulates the original 8-bit palette of software rendering
+eu Software bidezko errendatzearen jatorrizko 8 biteko paleta emulatzen du
+
+@ Every level starts with only the shotgun and axe, as if started fresh
+eu Maila bakoitza eskopetarekin eta aizkorarekin soilik hasten da, hutsetik hasiko bazina bezala
+
+@ Explosion damage for each remotely detonated sticky bomb
+eu Urrunetik lehertutako bonba itsaskor bakoitzaren leherketa-kaltea
+
+@ Extra freeze milliseconds for every 10 damage dealt, so heavy hits stop longer
+eu Izozte-milisegundo gehigarriak eragindako 10 kalteko, kolpe gogorrek gehiago gelditu dezaten
+
+@ First person, a third-person camera centered behind the player, or one over the right or left shoulder; third person hides viewmodels
+eu Lehen pertsona, jokalariaren atzean erdiratutako hirugarren pertsonako kamera, edo eskuineko edo ezkerreko sorbaldaren gainekoa; hirugarren pertsonak armen ereduak ezkutatzen ditu
+
+@ Flash the selected marker on confirmed hits; colors are shared with the crosshair
+eu Hautatutako marka distirarazten du kolpe berretsietan; koloreak mirarekin partekatzen dira
+
+@ Freeze for every enemy, or only for enemies that were tough before the hit
+eu Izoztu etsai guztiekin, edo kolpearen aurretik gogorrak ziren etsaiekin soilik
+
+@ Freeze the game briefly when you damage an enemy; single player with add-ons only
+eu Jokoa une batez izozten du etsai bati kalte egitean; jokalari bakarra gehigarriekin soilik
+
+@ Gibs tumble and barrels throw shrapnel; shots and blasts push them (cosmetic only)
+eu Haragi-puskak biraka doaz eta upelek metraila jaurtitzen dute; tiroek eta eztandek bultzatzen dituzte (apaingarria soilik)
+
+@ Health an enemy must have had before the hit to count as tough
+eu Etsai batek kolpearen aurretik izan behar duen osasuna gogortzat hartzeko
+
+@ Hits dealing less damage than this do not freeze the game; the default 10 skips nails and shotgun pellets
+eu Hau baino kalte txikiagoko kolpeek ez dute jokoa izozten; 10 lehenetsiak iltzeak eta perdigoiak saltatzen ditu
+
+@ Hold fire and sweep the crosshair over monsters to queue them, release to throw: it stuns each in turn and flies back; alt-fire clears the queue
+eu Eutsi tiroari eta pasa mira munstroen gainetik ilaran jartzeko, askatu jaurtitzeko: bakoitza txandaka zorabiatzen du eta itzuli egiten da; tiro alternatiboak ilara husten du
+
+@ Hold: keep Lock-on held. Toggle: press Auto-aim Toggle to enable automatic acquisition. Click look stick to switch targets
+eu Eutsi: eutsi Finkatu xedea sakatuta. Txandakatu: sakatu Xede automatikoa (txandakatu) finkatze automatikoa gaitzeko. Sakatu begirada-palanka xedea aldatzeko
+
+@ How close an enemy must be to the crosshair for automatic acquisition in toggle mode (degrees)
+eu Etsai batek miratik zein gertu egon behar duen txandakatze moduan automatikoki finkatzeko (graduak)
+
+@ How far the view tilts up and down when you tilt the controller (pitch axis)
+eu Kontrolagailua okertzean ikuspegia gora eta behera zenbat okertzen den (pitch ardatza)
+
+@ How far the view turns left and right when you turn the controller (yaw axis)
+eu Kontrolagailua biratzean ikuspegia ezkerrera eta eskuinera zenbat biratzen den (yaw ardatza)
+
+@ How far the view turns when you drag on the right half of the screen
+eu Pantailaren eskuineko erdian arrastatzean ikuspegia zenbat biratzen den
+
+@ How fast the boomerang flies (units per second)
+eu Bumeranaren hegaldi-abiadura (unitate segundoko)
+
+@ How hard shots and explosions push debris around
+eu Tiroek eta leherketek hondakinak zein indartsu bultzatzen dituzten
+
+@ How hard the Powerwasher's water pushes enemies
+eu Presio-garbigailuaren urak etsaiak zein indartsu bultzatzen dituen
+
+@ How long a hit freezes the game, in milliseconds
+eu Kolpe batek jokoa zenbat denboraz izozten duen, milisegundotan
+
+@ How strongly fog covers the sky when fog is on
+eu Lainoak zerua zenbat estaltzen duen lainoa aktibatuta dagoenean
+
+@ How the view distorts underwater: Classic ripples the whole screen like software Quake, GLQuake slowly stretches and squashes the view
+eu Ikuspegia urpean nola distortsionatzen den: klasikoak pantaila osoa uhintzen du software bidezko Quake-n bezala, GLQuake-k ikuspegia poliki luzatu eta zapaltzen du
+
+@ Ignores gyro rotation slower than this many degrees per second, to hide hand tremor
+eu Segundoko gradu hauek baino motelagoak diren giroskopio-birak baztertzen ditu, eskuaren dardara ezkutatzeko
+
+@ Immersive: appears for a few seconds only when its value changes
+eu Murgilgarria: balioa aldatzen denean soilik agertzen da segundo batzuetan
+
+@ Keeps textures sharp on floors and walls seen at steep angles
+eu Testurak garbi mantentzen ditu angelu zorrotzetik ikusitako zoru eta hormetan
+
+@ Lights from rockets, muzzle flashes and explosions brighten nearby walls
+eu Suzirien, tiro-distiren eta leherketen argiek inguruko hormak argitzen dituzte
+
+@ Liquid surfaces swell and ring out where things move through them
+eu Gainazal likidoak uhindu eta eraztunak sortzen dituzte zerbait haietatik pasatzen den lekuan
+
+@ Lobs sticky bombs (rockets ammo) that cling to walls, doors and monsters; alt-fire detonates them all
+eu Bonba itsaskorrak jaurtitzen ditu (suzirien munizioa), hormetan, ateetan eta munstroetan itsasten direnak; tiro alternatiboak denak lehertzen ditu
+
+@ Look of the classic particles: GLQuake draws soft round dots, Classic draws square pixels like software Quake
+eu Partikula klasikoen itxura: GLQuake-k puntu biribil leunak marrazten ditu, klasikoak pixel karratuak software bidezko Quake-n bezala
+
+@ Low skips the background smear halo and uses fewer blur samples; high keeps the full halo and smoother streaks
+eu Baxuak atzeko planoko lausotze-haloa saltatzen du eta lagin gutxiago erabiltzen ditu; altuak halo osoa eta arrasto leunagoak mantentzen ditu
+
+@ Low: hard particle edges, half the scripted particles and fewer hit sparks. Medium: soft edges. High: soft edges checked per MSAA sample, most hit sparks
+eu Baxua: partikula-ertz gogorrak, script bidezko partikulen erdia eta kolpe-txinparta gutxiago. Ertaina: ertz leunak. Altua: ertz leunak MSAA lagin bakoitzeko egiaztatuta, txinparta gehienak
+
+@ Marks fade out before expiring; oldest marks are recycled at the limit
+eu Markak desagertu aurretik itzaltzen dira; zaharrenak berrerabiltzen dira mugara iristean
+
+@ Max nested portal reflections to draw; each level redraws the scene
+eu Marraztu beharreko atari habiaratuen gehienezko kopurua; maila bakoitzak eszena berriro marrazten du
+
+@ Max portals per screen with a live view; each one redraws the scene
+eu Zuzeneko ikuspegia duten atarien gehienezko kopurua pantailako; bakoitzak eszena berriro marrazten du
+
+@ Maximum distance for acquiring and keeping an enemy locked
+eu Etsai bat finkatzeko eta finkatuta mantentzeko gehienezko distantzia
+
+@ Minimum gap between freezes, so shotgun pellets and rapid fire count once; kills ignore it
+eu Izozteen arteko gutxieneko tartea, perdigoiek eta tiro azkarrak behin bakarrik zenba dezaten; hilketek ez diote kasurik egiten
+
+@ Modern terminal console with autocomplete popup, history search, ANSI colors, bash shell and piping; off uses the classic Quake console
+eu Terminal-kontsola modernoa: autoosatze-leihoa, historia-bilaketa, ANSI koloreak, bash shell-a eta hodiak; desaktibatuta Quake-ren kontsola klasikoa erabiltzen du
+
+@ Monsters take proportionally less damage at higher values; above 100% is harder
+eu Munstroek proportzionalki kalte gutxiago jasotzen dute balio altuagoetan; % 100etik gora zailagoa da
+
+@ Moving gibs leave blood on surfaces they touch
+eu Mugitzen diren haragi-puskek odola uzten dute ukitzen dituzten gainazaletan
+
+@ Multiplier on the freeze when the hit kills the enemy; 1 means no extra
+eu Kolpeak etsaia hiltzen duenean izozteari aplikatzen zaion biderkatzailea; 1 = gehigarririk ez
+
+@ Multiplies ammo from pickups (up to the normal carry limit); below 100% is harder
+eu Jasotako munizioa biderkatzen du (eraman daitekeen muga arruntera arte); % 100etik behera zailagoa da
+
+@ Multiplies health from pickups (up to 100, or the item's own limit); below 100% is harder
+eu Jasotako osasuna biderkatzen du (100era arte, edo objektuaren beraren mugara); % 100etik behera zailagoa da
+
+@ Nails stick to wood and bodies; hard surfaces deflect them to the floor
+eu Iltzeak egurrean eta gorputzetan iltzatzen dira; gainazal gogorrek lurrera desbideratzen dituzte
+
+@ Nearest keeps crisp classic pixels; linear smooths textures
+eu Hurbilenak pixel klasiko garbiak mantentzen ditu; linealak testurak leuntzen ditu
+
+@ New Game: Add-ons
+eu Partida berria: gehigarriak
+
+@ New Game: Customize
+eu Partida berria: pertsonalizatu
+
+@ Night vision: how much dark areas are brightened; thermal: how strongly heat stands out
+eu Gaueko ikusmena: eremu ilunak zenbat argitzen diren; termikoa: beroa zenbat nabarmentzen den
+
+@ Night-vision and thermal goggles, cycle normal, night vision and thermal with Change Goggles (Add-ons), or use the Equipment Wheel
+eu Gaueko ikusmeneko eta betaurreko termikoak: txandakatu normala, gaueko ikusmena eta termikoa Aldatu betaurrekoak (gehigarriak) erabiliz, edo erabili Ekipamendu-gurpila
+
+@ No single freeze lasts longer than this, however much damage or kill bonus adds
+eu Izozte bakar batek ere ez du hau baino gehiago irauten, kalteak edo hilketa-sariak zenbat gehitu arren
+
+@ Oldest marks and nails are recycled at this shared limit
+eu Marka eta iltze zaharrenak berrerabiltzen dira muga partekatu honetara iristean
+
+@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
+eu Pantailako palanka eta botoiak: auto-k ukitu baten ondoren erakusten ditu eta beste gailu bat erabiltzean ezkutatzen ditu
+
+@ Only autosaves: quicksaves and the Save menu are off
+eu Autogordetzeak soilik: gordetze azkarrak eta Gorde menua desaktibatuta daude
+
+@ Place every weapon at the center, right or left of the view, or hide all viewmodels
+eu Jarri arma bakoitza ikuspegiaren erdian, eskuinean edo ezkerrean, edo ezkutatu armen eredu guztiak
+
+@ Play your chosen hit or kill cue when you damage an enemy
+eu Erreproduzitu aukeratutako kolpe- edo hilketa-seinalea etsai bati kalte egitean
+
+@ Playback speed: faster sounds shorter and higher
+eu Erreprodukzio-abiadura: azkarragoak laburrago eta altuago jotzen du
+
+@ Plays the Quake theme in the main menu when no game is running
+eu Quake-ren gaia jotzen du menu nagusian partidarik ez dagoenean
+
+@ Portals farther away than this are drawn as flat discs
+eu Hau baino urrunago dauden atariak disko lau gisa marrazten dira
+
+@ Press attack once to keep firing, again to stop
+eu Sakatu eraso behin tiro egiten jarraitzeko, eta berriro gelditzeko
+
+@ Press run once to switch between running and walking
+eu Sakatu korrika behin korrika eta oinez txandakatzeko
+
+@ Raise or lower the tone independently of sound length
+eu Igo edo jaitsi tonua soinuaren iraupena aldatu gabe
+
+@ Red screen edges show where damage came from: top is front, bottom is behind; Screen Flashes controls their strength
+eu Pantailaren ertz gorriek kaltea nondik datorren erakusten dute: goian aurrean da, behean atzean; Pantaila-distirak aukerak haien indarra kontrolatzen du
+
+@ Replaces the classic dot particles with glowing sparks, smoke and blood; mods with their own particle effects keep them
+eu Puntu-partikula klasikoak txinparta distiratsuekin, keaz eta odolez ordezkatzen ditu; partikula-efektu propioak dituzten modek beraienak mantentzen dituzte
+
+@ Resolution and detail inside portal and teleporter views; lower tiers trim nested effects
+eu Atari- eta teleportagailu-ikuspegien barruko bereizmena eta xehetasuna; maila baxuagoek efektu habiaratuak murrizten dituzte
+
+@ Rippling light patterns on surfaces under water and slime
+eu Argi-eredu uhinduak ur eta lohi azpiko gainazaletan
+
+@ Scales all damage you take; above 100% is harder
+eu Jasotzen duzun kalte guztia eskalatzen du; % 100etik gora zailagoa da
+
+@ Screen edge for this element; elements on the same spot stack
+eu Elementu honen pantaila-ertza; leku berean dauden elementuak pilatu egiten dira
+
+@ Seconds a monster hit by the boomerang stays stunned
+eu Bumeranak jotako munstroa zorabiatuta geratzen den segundoak
+
+@ Seconds impact marks and stuck nails stay before fading out; independent of Particle Quality
+eu Talka-markek eta iltzatutako iltzeek itzali aurretik irauten duten segundoak; Partikulen kalitatea aukeratik independentea
+
+@ Seconds messages at the top of the screen stay up
+eu Pantailaren goiko mezuek irauten duten segundoak
+
+@ Seconds the flick stick snap takes; lower is faster
+eu Flick stick-en jauziak behar dituen segundoak; txikiagoa azkarragoa da
+
+@ See through enhanced water; enables Water Opacity
+eu Ikusi ur hobetuaren zehar; Uraren opakutasuna gaitzen du
+
+@ Sensor grain, scanlines and flicker of the goggle image
+eu Betaurrekoen irudiaren sentsore-pikorra, eskaneatze-lerroak eta dirdira
+
+@ Shades every anti-aliasing sample; needs Anti-aliasing on
+eu Antialiasing-lagin bakoitza itzaltzen du; Antialiasinga aktibatuta behar du
+
+@ Shifts colors so they stay distinct for the chosen color blindness
+eu Koloreak desplazatzen ditu aukeratutako daltonismoarekin bereizgarri izan daitezen
+
+@ Shotgun hits leave small surface marks (cosmetic only)
+eu Eskopeta-tiroek marka txikiak uzten dituzte gainazaletan (apaingarria soilik)
+
+@ Show corner ticks at screen centre while locked, even with Crosshair off
+eu Erakutsi izkina-markak pantailaren erdian finkatuta dagoen bitartean, mira desaktibatuta egonda ere
+
+@ Show where grenades and other arcing shots will fly, bounce and land; local play only, not in deathmatch
+eu Erakutsi granadak eta beste tiro kurbatuak nora hegan egin, errebotatu eta eroriko diren; tokiko jokoan soilik, ez deathmatchean
+
+@ Shows text for important sounds: doors, alerted enemies, secrets, pickups
+eu Soinu garrantzitsuen testua erakusten du: ateak, alertan dauden etsaiak, sekretuak, objektuak
+
+@ Shows the distance fog that maps and mods set; off always gives clear view
+eu Mapek eta modek ezarritako distantzia-lainoa erakusten du; desaktibatuta beti ikuspegi garbia ematen du
+
+@ Shows the player face next to the health number
+eu Jokalariaren aurpegia erakusten du osasun-zenbakiaren ondoan
+
+@ Simulation detail, step rate, fade-out lifetimes and caps for gibs and shrapnel; low also skips mover collision
+eu Simulazio-xehetasuna, urrats-maiztasuna, desagertze-iraupenak eta mugak haragi-puska eta metrailarentzat; baxuak elementu mugikorrekiko talkak ere saltatzen ditu
+
+@ Size of the on-screen buttons and move stick
+eu Pantailako botoien eta mugimendu-palankaren tamaina
+
+@ Slowly heals up to 100 health after 5 seconds without being hit
+eu Poliki sendatzen du 100 osasunera arte, 5 segundoz kolperik jaso gabe egon ondoren
+
+@ Slows stick look while the crosshair is over an enemy
+eu Palankarekin begiratzea moteltzen du mira etsai baten gainean dagoen bitartean
+
+@ Slows the game down while the weapon wheel is open
+eu Jokoa moteltzen du arma-gurpila irekita dagoen bitartean
+
+@ Slows the whole game down; single player only. Saves and demos stay compatible with other ports
+eu Joko osoa moteltzen du; jokalari bakarra soilik. Gordetako partidak eta demoak beste portekin bateragarriak dira
+
+@ Small camera jolt on each freeze; off with Reduce Motion
+eu Kamera-astindu txikia izozte bakoitzean; desaktibatuta Murriztu mugimendua aukerarekin
+
+@ Snap and track enemies in local play, including split-screen; unavailable online
+eu Finkatu eta jarraitu etsaiak tokiko jokoan, pantaila zatitua barne; ez dago erabilgarri sarean
+
+@ Sparks, smoke, chips, splinters and splashes fly off whatever your shots hit
+eu Txinpartak, kea, ezpalak, zotzak eta zipriztinak irteten dira zure tiroek jotzen duten guztitik
+
+@ Spawns extra copies of every monster around the original when a level starts
+eu Munstro bakoitzaren kopia gehigarriak sortzen ditu jatorrizkoaren inguruan maila hastean
+
+@ Strength of the full-screen flashes for damage, pickups and powerups
+eu Kalte, objektu eta indargarrien pantaila osoko distiren indarra
+
+@ Stretch or shorten the sound while keeping its pitch
+eu Luzatu edo laburtu soinua tonua mantenduz
+
+@ Surface opacity; requires Enhanced Water and Translucent Water
+eu Gainazalaren opakutasuna; Ur hobetua eta Ur zeharrargitsua behar ditu
+
+@ The hook latches onto metal surfaces (metal, tech, computer panels, copper)
+eu Kakoa metalezko gainazaletan heltzen da (metala, teknologia, ordenagailu-panelak, kobrea)
+
+@ The hook latches onto stone, brick, rock and any surface not recognised as wood or metal
+eu Kakoa harrian, adreiluan, arrokan eta egurtzat edo metaltzat ezagutzen ez den edozein gainazaletan heltzen da
+
+@ The hook latches onto wooden surfaces (texture names like wood, crate, plank)
+eu Kakoa egurrezko gainazaletan heltzen da (wood, crate, plank bezalako testura-izenak)
+
+@ Turn the controller's motion sensor into a look input; needs a pad with a gyroscope
+eu Kontrolagailuaren mugimendu-sentsorea begiratzeko erabiltzen du; giroskopiodun kontrolagailua behar da
+
+@ Turns off view bob, strafe tilt and the camera kick when hit or firing
+eu Kameraren kulunka, alboko okerdura eta kolpea jasotzean edo tiro egitean kameraren astindua desaktibatzen ditu
+
+@ Turns on the extra liquid effects; Water Settings controls each one
+eu Likidoen efektu gehigarriak aktibatzen ditu; Uraren ezarpenak orriak bakoitza kontrolatzen du
+
+@ Turns the view to follow a moving enemy you are aiming at
+eu Ikuspegia biratzen du xede duzun etsai mugikorrari jarraitzeko
+
+@ Turns the view when you roll the controller sideways; 0 disables it, negative reverses it
+eu Ikuspegia biratzen du kontrolagailua albora okertzean; 0k desgaitzen du, balio negatiboak alderantzikatzen du
+
+@ Two-portal gun: fire and alt-fire place linked portals on flat walls; assign a weapon slot in Add-ons
+eu Bi atariko pistola: tiroak eta tiro alternatiboak atari lotuak jartzen dituzte horma lauetan; esleitu arma-zirrikitu bat Gehigarriak atalean
+
+@ Unlocks the FX Settings page: enhanced particles, impact effects and blood splatter
+eu Efektuen ezarpenak orria desblokeatzen du: partikula hobetuak, talka-efektuak eta odol-zipriztinak
+
+@ Uses the 2021 re-release's smoother MD5 models (and MD3 replacements from mods) instead of the classic ones. Applies on the next map load
+eu 2021eko berrargitalpenaren MD5 eredu leunagoak (eta moden MD3 ordezkoak) erabiltzen ditu klasikoen ordez. Hurrengo mapa kargatzean aplikatzen da
+
+@ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
+eu Maparen argi koloreduna erabiltzen du (.lit fitxategia edo BSPX blokea); desaktibatuta jatorrizko argi zuria ematen du. Hurrengo mapa kargatzean aplikatzen da
+
+@ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
+eu Zorrotada-segmentuak, tanta kopurua eta likido distiratsuaren itzaldura: baxuak zorrotada zeharrargitsu sinpleagoak erabiltzen ditu; altuak zorrotada leun eta distiratsuak
+
+@ When gyro looking applies: always, off while +gyroaction is held, or only while it is held
+eu Giroskopio bidezko begirada noiz aplikatzen den: beti, desaktibatuta +gyroaction sakatuta dagoen bitartean, edo hura sakatuta dagoen bitartean soilik
+
+@ Which weapons trigger the freeze; melee covers the axe and any mod weapon used at close range without ammo
+eu Zein armek eragiten duten izoztea; gertuko erasoak aizkora eta gertutik munizio gabe erabilitako edozein mod-arma hartzen ditu
+
+@ Your own rockets and grenades don't hurt you; rocket jumps still work
+eu Zure suziriek eta granadek ez dizute minik egiten; suziri-jauziek funtzionatzen jarraitzen dute
+
+# ==== ui.txt ====
+
+# Menus and pop-ups outside the options pages: save cards, launch, presets,
+# add-on browser, map packs, hints and dialogs.
+@ Select
+eu Hautatu
+
+@ Back
+eu Atzera
+
+@ Cancel
+eu Utzi
+
+@ Confirm
+eu Berretsi
+
+@ Scroll
+eu Korritu
+
+@ Section
+eu Atala
+
+@ Bind
+eu Esleitu
+
+@ Cancel binding
+eu Utzi esleipena
+
+@ Clear
+eu Garbitu
+
+@ Clear pad
+eu Garbitu kontrolagailua
+
+@ Remap
+eu Berresleitu
+
+@ Type
+eu Idatzi
+
+@ Shift
+eu Maius
+
+@ Done
+eu Eginda
+
+@ Del
+eu Ezab
+
+@ Space
+eu Zuriunea
+
+@ Save
+eu Gorde
+
+@ Load
+eu Kargatu
+
+@ Delete
+eu Ezabatu
+
+@ Play
+eu Jokatu
+
+@ Yes
+eu Bai
+
+@ No
+eu Ez
+
+@ OK
+eu Ados
+
+@ System
+eu Sistema
+
+@ Language
+eu Hizkuntza
+
+@ Help
+eu Laguntza
+
+@ Fixed for this game: it was started without Customize
+eu Partida honetan finkoa: Pertsonalizatu gabe hasi zen
+
+@ Press a button or key to bind (Start cancels)
+eu Sakatu botoi edo tekla bat esleitzeko (Start-ek bertan behera uzten du)
+
+@ Press button...
+eu Sakatu botoia...
+
+@ Press key...
+eu Sakatu tekla...
+
+@ Replace this binding?
+eu Esleipen hau ordeztu?
+
+@ is already assigned
+eu esleituta dago jada
+
+@ {} already assigned
+eu {} esleituta dago jada
+
+@ Open Controls to remap Lock-on?
+eu Ireki Kontrolak Finkatu xedea berresleitzeko?
+
+@ Lock-on
+eu Finkatu xedea
+
+@ Auto-aim Toggle
+eu Xede automatikoa (txandakatu)
+
+@ Keyboard
+eu Teklatua
+
+@ Controller
+eu Kontrolagailua
+
+# main menu, dialogs and screens
+@ Map Packs
+eu Mapa-paketeak
+
+@ Customize
+eu Pertsonalizatu
+
+@ Level Select
+eu Hautatu maila
+
+@ Really quit?
+eu Benetan irten?
+
+@ You died
+eu Hil zara
+
+@ Continue from most recent save
+eu Jarraitu gordetako azkenetik
+
+@ Select save
+eu Hautatu gordetakoa
+
+@ Restart level
+eu Berrabiarazi maila
+
+@ Return to main menu
+eu Itzuli menu nagusira
+
+@ (disabled)
+eu (desgaituta)
+
+@ (fixed for this game)
+eu (finkoa partida honetan)
+
+@ (off)
+eu (desaktibatuta)
+
+@ Apply Display Changes
+eu Aplikatu pantaila-aldaketak
+
+@ Display Mode
+eu Pantaila modua
+
+@ Resolution
+eu Bereizmena
+
+@ desktop
+eu mahaigaina
+
+@ Preset
+eu Aurrezarpena
+
+@ Map
+eu Mapa
+
+@ Reset Shader Settings
+eu Berrezarri shader-ezarpenak
+
+@ Reset to Defaults
+eu Berrezarri lehenetsiak
+
+@ Searching...
+eu Bilatzen...
+
+@ This game only autosaves.
+eu Partida honek gordetze automatikoa soilik du.
+
+@ (No Manual Saves modifier)
+eu (Eskuzko gordetzerik ez aldatzailea)
+
+@ End the current game?
+eu Uneko partida amaitu?
+
+@ Unsaved progress will be lost.
+eu Gorde gabeko aurrerapena galduko da.
+
+@ End game
+eu Amaitu partida
+
+@ Overwrite
+eu Gainidatzi
+
+@ Overwrite "{}"?
+eu "{}" gainidatzi?
+
+@ Saved {}
+eu Gordeta: {}
+
+@ Start a new game?
+eu Partida berri bat hasi?
+
+@ New game
+eu Partida berria
+
+@ New Game
+eu Partida berria
+
+@ CUSTOM
+eu PERTSONALIZATUA
+
+@ Customize Experience
+eu Pertsonalizatu esperientzia
+
+@ Disable All
+eu Desgaitu dena
+
+@ Disable All Modifications
+eu Desgaitu aldaketa guztiak
+
+@ Saves load in other source ports too.
+eu Gordetakoak beste source port batzuetan ere kargatzen dira.
+
+@ Standard rules, no add-ons.
+eu Arau estandarrak, gehigarririk gabe.
+
+@ Choose skill
+eu Aukeratu zailtasuna
+
+@ The current game will end
+eu Uneko partida amaituko da
+
+@ Easy
+eu Erraza
+
+@ Normal
+eu Normala
+
+@ Hard
+eu Zaila
+
+@ Nightmare
+eu Amesgaiztoa
+
+# graphics preset pop-up
+@ Choose a Graphics Preset
+eu Aukeratu aurrezarpen grafiko bat
+
+@ Classic
+eu Klasikoa
+
+@ Like the re-release: enhanced models,
+eu Berrargitalpena bezala: eredu hobetuak,
+
+@ no added effects.
+eu efektu gehigarririk gabe.
+
+@ Enhanced
+eu Hobetua
+
+@ Every enhancement at its highest quality.
+eu Hobekuntza guztiak kalitaterik onenean.
+
+@ Needs a capable GPU.
+eu GPU ahaltsua behar du.
+
+@ Low-End
+eu Ekipo apalak
+
+@ Fastest. No anti-aliasing, original
+eu Azkarrena. Antialiasingik gabe, jatorrizko
+
+@ models, lowest effect quality.
+eu ereduak, efektuen kalitate txikiena.
+
+@ Esc keeps the defaults
+eu Esc-ek lehenetsiak mantentzen ditu
+
+@ Everything can be changed later in Options.
+eu Dena alda daiteke geroago Options menuan.
+
+@ Keep Defaults
+eu Mantendu lehenetsiak
+
+# save and load cards
+@ Save Game
+eu Gorde partida
+
+@ Load Game
+eu Kargatu partida
+
+@ Autosaves
+eu Autogordetzeak
+
+@ newest first
+eu berrienak lehenik
+
+@ Saves: {}
+eu Gordetakoak: {}
+
+@ Browse Autosaves
+eu Arakatu autogordetzeak
+
+@ Every retained autosave, newest first
+eu Gordetako autogordetze guztiak, berrienak lehenik
+
+@ New save
+eu Gordetze berria
+
+@ Select to save your game here
+eu Hautatu partida hemen gordetzeko
+
+@ No autosaves yet
+eu Oraindik ez dago autogordetzerik
+
+@ Autosaves are made on level entry, secrets and more (Options > Gameplay)
+eu Mailan sartzean, sekretuetan eta gehiagotan gordetzen da automatikoki (Options > Jokoa)
+
+@ No saves yet
+eu Oraindik ez dago gordetakorik
+
+@ Save from the Single Player menu, or press F6 to quicksave
+eu Gorde Single Player menutik, edo sakatu F6 azkar gordetzeko
+
+@ No picture
+eu Irudirik ez
+
+@ Del: delete save
+eu Ezab: ezabatu gordetakoa
+
+@ Delete "{}"?
+eu "{}" ezabatu?
+
+@ This cannot be undone.
+eu Ezin da desegin.
+
+@ Quicksave
+eu Gordetze azkarra
+
+@ Autosave: {}
+eu Autogordetzea: {}
+
+@ unknown trigger
+eu abiarazle ezezaguna
+
+@ Latest - {}
+eu Azkena - {}
+
+@ Health {}
+eu Osasuna {}
+
+@ Armor {}
+eu Armadura {}
+
+@ Kills {}/{}
+eu Hilketak {}/{}
+
+@ Secrets {}/{}
+eu Sekretuak {}/{}
+
+@ Split-screen, {} players
+eu Pantaila zatitua, {} jokalari
+
+@ Co-op
+eu Koop.
+
+@ Customized
+eu Pertsonalizatua
+
+@ Customized, {}
+eu Pertsonalizatua, {}
+
+@ Date unavailable
+eu Data ez dago erabilgarri
+
+@ Just now
+eu Oraintxe
+
+@ {} min ago
+eu Duela {} min
+
+@ {} h ago
+eu Duela {} h
+
+@ Level entry
+eu Mailan sartzea
+
+@ Secret found
+eu Sekretua aurkituta
+
+@ All enemies killed
+eu Etsai guztiak hilda
+
+@ All secrets found
+eu Sekretu guztiak aurkituta
+
+@ Timer
+eu Tenporizadorea
+
+# customize pages
+@ Standard rules
+eu Arau estandarrak
+
+@ Modifiers changed: {}
+eu Aldatutako aldatzaileak: {}
+
+@ no add-ons
+eu gehigarririk ez
+
+@ add-ons: {}
+eu gehigarriak: {}
+
+@ Saves of this game are .qsa files: they need this source port.
+eu Partida honen gordetakoak .qsa fitxategiak dira: source port hau behar dute.
+
+@ Nothing changed: this plays as standard Quake.
+eu Ezer ez da aldatu: Quake estandarra bezala jokatzen da.
+
+@ Changes apply now and are saved with this game (.qsa).
+eu Aldaketak orain aplikatzen dira eta partida honekin gordetzen dira (.qsa).
+
+@ This game started without Customize, so its rules are fixed.
+eu Partida hau Pertsonalizatu gabe hasi zen; beraz, bere arauak finkoak dira.
+
+@ Start a new game and choose Customize Experience.
+eu Hasi partida berri bat eta aukeratu Pertsonalizatu esperientzia.
+
+@ These rules apply to the next customized game.
+eu Arau hauek hurrengo partida pertsonalizatuari aplikatzen zaizkio.
+
+# add-on browser
+@ Fire
+eu Tiroa
+
+@ Alt Fire
+eu Tiro alternatiboa
+
+@ Configure Parameters >
+eu Konfiguratu parametroak >
+
+@ Configure
+eu Konfiguratu
+
+@ Settings
+eu Ezarpenak
+
+@ Change slot
+eu Aldatu zirrikitua
+
+@ Toggle
+eu Txandakatu
+
+@ Details
+eu Xehetasunak
+
+@ Enter or click the box: toggle
+eu Enter edo klik laukian: txandakatu
+
+@ Right / Tab / click: details
+eu Eskuinera / Tab / klik: xehetasunak
+
+@ Input Remapping
+eu Sarrerak berresleitzea
+
+@ Weapon Slot
+eu Arma-zirrikitua
+
+@ Customized games save as .qsa files, which need this source port.
+eu Partida pertsonalizatuak .qsa fitxategi gisa gordetzen dira, eta source port hau behar dute.
+
+@ This game started without Customize, so its add-ons are fixed. Customize a new game instead.
+eu Partida hau Pertsonalizatu gabe hasi zen; beraz, bere gehigarriak finkoak dira. Pertsonalizatu partida berri bat.
+
+@ Bullet Time
+eu Bala-denbora
+
+@ Change Goggles
+eu Aldatu betaurrekoak
+
+@ Dodge / Dive
+eu Saihestu / jauzi egin
+
+@ Goggles
+eu Betaurrekoak
+
+@ Hitstop
+eu Hitstop
+
+@ Projectile Shotguns
+eu Proiektil-eskopetak
+
+@ BULLET TIME: 20%
+eu BALA-DENBORA: % 20
+
+@ NORMAL SPEED
+eu ABIADURA NORMALA
+
+@ SLOW MOTION: PHYSICAL PELLETS
+eu KAMERA GELDOA: PERDIGOI FISIKOAK
+
+@ DEMONSTRATION
+eu ERAKUSKETA
+
+@ GAMEPLAY
+eu JOKOA
+
+@ LOOP
+eu BEGIZTA
+
+@ Preview unavailable
+eu Aurrebista ez dago erabilgarri
+
+# shader and language help lines
+@ A setting of the chosen shader; arrows step it, Enter is not needed
+eu Aukeratutako shaderraren ezarpen bat; geziek aldatzen dute, ez da Enter behar
+
+@ Language of the menus, messages and the 2021 re-release's game text; System follows your computer's language
+eu Menuen, mezuen eta 2021eko berrargitalpenaren joko-testuen hizkuntza; Sistemak ordenagailuaren hizkuntza jarraitzen du
+
+@ Puts every setting of the chosen shader back to the preset's defaults
+eu Aukeratutako shaderraren ezarpen guztiak aurrezarpenaren balio lehenetsietara itzultzen ditu
+
+@ RetroArch slang shader on the final image: CRT, scanlines, NTSC, sharpening; add your own in <game>/shaders
+eu RetroArch slang shaderra azken irudian: CRT, eskaneatze-lerroak, NTSC, enfokea; gehitu zureak <game>/shaders karpetan
+
+# modern console footer
+@ Shift+PgUp/Dn: height  ` : hide
+eu Shift+PgUp/Dn: altuera  ` : ezkutatu
+
+@ Tab: complete  Ctrl+R: search  bash | pipe
+eu Tab: osatu  Ctrl+R: bilatu  bash | hodia
+
+@ ↑ +{} lines (End to jump) 
+eu ↑ +{} lerro (End jauzi egiteko) 
+
+# add-on descriptions
+@ Create two linked portals on flat walls. Fire places the first portal; Alt Fire places the second. Walk through either portal to emerge from the other. Your momentum carries through. Assign a weapon slot below: pressing that slot repeatedly cycles its ordinary weapon and every enabled add-on assigned there. Portal view quality is configurable below.
+eu Sortu bi atari lotu horma lauetan. Tiroak lehen ataria jartzen du; Tiro alternatiboak bigarrena. Ibili atari batetik eta bestetik aterako zara. Zure abiadurari eusten zaio. Esleitu arma-zirrikitu bat behean: zirrikitu hori behin eta berriz sakatuz bere arma arrunta eta bertan esleitutako gehigarri gaitu guztiak txandakatzen dira. Atari-ikuspegiaren kalitatea behean konfigura daiteke.
+
+@ Hold Fire and sweep the crosshair over monsters to queue targets. Release Fire to throw: the boomerang visits each target, stuns it and returns to you. Alt Fire clears the queue. The weapon slot selects a group, not a separate hotkey: press it again to cycle through the weapons in that slot. Configure stun duration and flight speed below.
+eu Eutsi Tiroari eta pasa mira munstroen gainetik xedeak ilaran jartzeko. Askatu Tiroa jaurtitzeko: bumeranak xede bakoitza bisitatzen du, zorabiatzen du eta zuregana itzultzen da. Tiro alternatiboak ilara husten du. Arma-zirrikituak talde bat hautatzen du, ez lasterbide bereizi bat: sakatu berriro zirrikitu horretako armak txandakatzeko. Konfiguratu zorabioaren iraupena eta hegaldi-abiadura behean.
+
+@ Hold Fire to charge a sticky bomb using rocket ammunition; release to launch. A longer charge throws it faster. Bombs cling to walls, doors and monsters. Alt Fire detonates your planted bombs together. Place a trap, retreat, then detonate it when enemies approach. Assign any weapon slot below; repeated presses cycle through the ordinary weapon and add-ons in that slot.
+eu Eutsi Tiroari bonba itsaskor bat kargatzeko suzirien munizioarekin; askatu jaurtitzeko. Zenbat eta gehiago kargatu, orduan eta azkarrago jaurtitzen da. Bonbak hormetan, ateetan eta munstroetan itsasten dira. Tiro alternatiboak jarritako bonba guztiak batera lehertzen ditu. Jarri tranpa bat, erretiratu eta lehertu etsaiak hurbiltzean. Esleitu edozein arma-zirrikitu behean; behin eta berriz sakatuz zirrikitu horretako arma arrunta eta gehigarriak txandakatzen dira.
+
+@ Fire launches a chain hook. It latches onto a permitted surface or enemy and reels you toward the anchor. Fire again or use Alt Fire to let go. Choose which materials and enemies can be hooked in Configure Parameters. Assign it to any weapon slot; repeated presses of the slot's existing binding cycle through its weapons.
+eu Tiroak kate-kako bat jaurtitzen du. Gainazal edo etsai baimendu batean heltzen da eta ainguraraino erakartzen zaitu. Egin tiro berriro edo erabili Tiro alternatiboa askatzeko. Aukeratu zein material eta etsai kakotu daitezkeen Konfiguratu parametroak atalean. Esleitu edozein arma-zirrikitutara; zirrikituaren tekla behin eta berriz sakatuz bere armak txandakatzen dira.
+
+@ A piercing railgun inspired by Quake III. Fire sends a slug through every enemy along its line. Each shot consumes two cells, with a 1.5 second refire interval. Damage and the spiral trail colour are configurable below. Choose a weapon slot: the slot's current binding selects and cycles the weapons assigned to it.
+eu Quake III-n oinarritutako railgun zulatzailea. Tiroak bala bat bidaltzen du bere lerroko etsai guztiak zeharkatuz. Tiro bakoitzak bi zelula kontsumitzen ditu, 1,5 segundoko tartearekin. Kaltea eta arrasto espiralaren kolorea behean konfigura daitezke. Aukeratu arma-zirrikitu bat: zirrikituaren uneko teklak hari esleitutako armak hautatu eta txandakatzen ditu.
+
+@ A Portal-style gel sprayer. Fire sprays blue Repulsion gel: land, jump or run into it to bounce, and landings on it never hurt. Alt Fire sprays orange Propulsion gel: run across it to go much faster. Gel coats floors and walls until washed off with the Powerwasher. Assign a weapon slot below; repeated presses cycle the weapons in that slot.
+eu Portal estiloko gel-ihinztagailua. Tiroak Errepultsio-gel urdina botatzen du: lurreratu, jauzi egin edo korrika sartu bertan errebotatzeko, eta haren gainean lurreratzeak ez du inoiz minik egiten. Tiro alternatiboak Propultsio-gel laranja botatzen du: korrika zeharkatu askoz azkarrago joateko. Gelak zoruak eta hormak estaltzen ditu Presio-garbigailuarekin garbitu arte. Esleitu arma-zirrikitu bat behean; behin eta berriz sakatuz zirrikitu horretako armak txandakatzen dira.
+
+@ A water cannon. Fire shoots a straight jet with limited reach; Alt Fire a wide, shorter fan. The water pushes enemies back, turns projectiles aside and washes away gel and blood. Push strength is configurable below. Assign a weapon slot below; repeated presses cycle the weapons in that slot.
+eu Ur-kanoi bat. Tiroak irismen mugatuko zorrotada zuzen bat jaurtitzen du; Tiro alternatiboak haizemaile zabal eta laburrago bat. Urak etsaiak atzera bultzatzen ditu, proiektilak desbideratzen ditu eta gela eta odola garbitzen ditu. Bultzadaren indarra behean konfigura daiteke. Esleitu arma-zirrikitu bat behean; behin eta berriz sakatuz zirrikitu horretako armak txandakatzen dira.
+
+@ One equipment add-on includes both night vision and thermal vision. The Change Goggles action cycles Normal, Night Vision, Thermal, then Normal again. Night vision brightens dark rooms; thermal vision highlights living enemies. Goggles do not occupy a weapon slot. Configure intensity and sensor noise below. The binding affects only this add-on.
+eu Ekipamendu-gehigarri bakar batek gaueko ikusmena eta ikusmen termikoa ditu. Aldatu betaurrekoak ekintzak Normala, Gaueko ikusmena, Termikoa eta berriro Normala txandakatzen ditu. Gaueko ikusmenak gela ilunak argitzen ditu; ikusmen termikoak etsai biziak nabarmentzen ditu. Betaurrekoek ez dute arma-zirrikiturik hartzen. Konfiguratu intentsitatea eta sentsore-zarata behean. Esleipenak gehigarri honi soilik eragiten dio.
+
+@ Press Dodge with a movement direction on the ground or in midair: dive forward or leap backward and sideways. Diagonals are supported. Each press launches once, with a short recovery. The player body animates in third person. Assign the Dodge action below or in Controls.
+eu Sakatu Saihestu mugimendu-norabide batekin lurrean edo airean: murgildu aurrera edo egin jauzi atzera eta alboetara. Diagonalak onartzen dira. Sakatze bakoitzak behin jaurtitzen zaitu, berreskuratze labur batekin. Jokalariaren gorputza hirugarren pertsonan animatzen da. Esleitu Saihestu ekintza behean edo Kontrolak atalean.
+
+@ Use the dedicated Bullet Time action to slow the whole local game to 20% speed. Hold is the default; Toggle switches on each press. The optional meter limits use in real seconds and regenerates while inactive. Disable the meter for unlimited use. Remap the action and configure duration and regeneration below.
+eu Erabili Bala-denbora ekintza berezia tokiko joko osoa % 20ko abiadurara moteltzeko. Eutsi da lehenetsia; Txandakatu aldatu egiten da sakatze bakoitzean. Aukerako neurgailuak erabilera benetako segundotan mugatzen du eta inaktibo dagoen bitartean berroneratzen da. Desgaitu neurgailua erabilera mugagabea izateko. Berresleitu ekintza eta konfiguratu iraupena eta berroneratzea behean.
+
+@ Both shotguns and enemy grunts fire physical pellets with their original spread and damage. Fast default projectiles feel immediate; lower their speed to dodge incoming fire during bullet time. Configure projectile speed below, or reset it to the default of 10000 units per second.
+eu Bi eskopetek eta grunt etsaiek perdigoi fisikoak jaurtitzen dituzte jatorrizko sakabanaketa eta kaltearekin. Proiektil azkar lehenetsiak berehalakoak dirudite; jaitsi haien abiadura bala-denboran datozen tiroak saihesteko. Konfiguratu proiektilen abiadura behean, edo berrezarri 10000 unitate segundoko balio lehenetsira.
+
+@ Freezes the game for a split second when you damage an enemy, so hits feel heavier. Single player only. Choose which weapons trigger it (all, melee, ranged or explosives), how long it lasts and how much more a kill freezes. Advanced settings cover enemy toughness, damage scaling, cooldown and the longest freeze.
+eu Jokoa segundo-zati batez izozten du etsai bati kalte egitean, kolpeak astunagoak senti daitezen. Jokalari bakarra soilik. Aukeratu zein armek eragiten duten (guztiak, gertukoak, urrutikoak edo lehergailuak), zenbat irauten duen eta hilketa batek zenbat gehiago izozten duen. Ezarpen aurreratuek etsaien gogortasuna, kaltearen eskalatzea, itxarotea eta izozte luzeena hartzen dituzte.
+
+# map packs and the Quaddicted browser
+@ Get more maps (Quaddicted)...
+eu Mapa gehiago (Quaddicted)...
+
+@ Type to filter...
+eu Idatzi iragazteko...
+
+@ Launch mod
+eu Abiarazi mod-a
+
+@ Start first map
+eu Hasi lehen mapa
+
+@ (running)
+eu (martxan)
+
+@ running
+eu martxan
+
+@ Recent
+eu Azkenak
+
+@ Name
+eu Izena
+
+@ Dir
+eu Karpeta
+
+@ Default
+eu Lehenetsia
+
+@ Title
+eu Izenburua
+
+@ Sort: {}
+eu Ordena: {}
+
+@ {} installed
+eu Instalatuta: {}
+
+@ {}/{} matching
+eu Bat datoz: {}/{}
+
+@ {} maps, {} completed
+eu Mapak: {}, osatuta: {}
+
+@ {}/{} matching, {} completed
+eu Bat datoz: {}/{}, osatuta: {}
+
+@ no maps of its own
+eu ez du mapa propiorik
+
+@ dir: {}
+eu karpeta: {}
+
+@ base: {}
+eu oinarria: {}
+
+@ Browse the Quaddicted archive of
+eu Arakatu Quaddicted artxiboko
+
+@ single-player maps and episodes,
+eu jokalari bakarreko mapak eta atalak,
+
+@ then download and install them
+eu eta ondoren deskargatu eta instalatu
+
+@ here. Each release gets its own
+eu hemen. Argitalpen bakoitzak bere
+
+@ entry in this list.
+eu sarrera du zerrenda honetan.
+
+@ Needs an internet connection.
+eu Interneteko konexioa behar du.
+
+@ Quaddicted Map Archive
+eu Quaddicted mapa-artxiboa
+
+@ Newest
+eu Berrienak
+
+@ Author
+eu Egilea
+
+@ Size
+eu Tamaina
+
+@ Loading the map list...
+eu Mapa-zerrenda kargatzen...
+
+@ Couldn't load the map list: {}
+eu Ezin izan da mapa-zerrenda kargatu: {}
+
+@ {} single-player releases  -  F5 refreshes
+eu Jokalari bakarreko argitalpenak: {}  -  F5ek freskatzen du
+
+@ {} matching
+eu Bat datoz: {}
+
+@ by {}
+eu Egilea: {}
+
+@ requires: {}
+eu behar du: {}
+
+@ maps: {}
+eu mapak: {}
+
+@ Failed: {}
+eu Huts egin du: {}
+
+@ Downloading... {}%
+eu Deskargatzen... % {}
+
+@ Unpacking...
+eu Deskonprimitzen...
+
+@ Installed in {}/  -  Enter: play
+eu Instalatuta hemen: {}/  -  Enter: jokatu
+
+@ Enter: download and install
+eu Enter: deskargatu eta instalatu
+
+@ unpacking
+eu deskonprimitzen
+
+@ failed
+eu huts egin du
+
+@ installed
+eu instalatuta
+
+@ Downloads are not available in the browser build
+eu Deskargak ez daude erabilgarri nabigatzaileko bertsioan
+
+@ the map list could not be read
+eu ezin izan da mapa-zerrenda irakurri
+
+@ downloading needs the curl program
+eu deskargatzeko curl programa behar da
+
+@ download failed
+eu deskargak huts egin du
+
+@ the download is not a valid zip
+eu deskarga ez da zip baliozkoa
+
+@ nothing to install for this engine
+eu ez dago ezer instalatzeko motor honetarako
+
+@ needs {} installed first
+eu lehenik {} instalatu behar da
+
+@ couldn't unpack {}
+eu ezin izan da deskonprimitu: {}
+
+# help screen
+@ About
+eu Honi buruz
+
+@ < Back
+eu < Atzera
+
+# tr_ctx keys: English shows the short word, the key says which meaning
+@ Save (a manual save, as opposed to a quicksave or autosave)
+eu Gordetakoa
+
+# ==== hud.txt ====
+
+# HUD, weapon and equipment wheels, sound captions and other in-game text.
+# Weapon, monster and item names follow the 2021 re-release's own translations.
+@ Axe
+eu Aizkora
+
+@ Shotgun
+eu Eskopeta
+
+@ Double-Barrelled Shotgun
+eu Kanoi bikoitzeko eskopeta
+
+@ Nailgun
+eu Iltze-pistola
+
+@ Super Nailgun
+eu Super iltze-pistola
+
+@ Grenade Launcher
+eu Granada-jaurtigailua
+
+@ Rocket Launcher
+eu Suziri-jaurtigailua
+
+@ Thunderbolt
+eu Thunderbolt
+
+@ Portal Gun
+eu Atari-pistola
+
+@ Boomerang
+eu Bumerana
+
+@ Stickybomb Launcher
+eu Bonba itsaskorren jaurtigailua
+
+@ Railgun
+eu Railgun
+
+@ Hookshot
+eu Kakoa
+
+@ Gel Sprayer
+eu Gel-ihinztagailua
+
+@ Powerwasher
+eu Presio-garbigailua
+
+@ Night Vision Goggles
+eu Gaueko ikusmeneko betaurrekoak
+
+@ Thermal Goggles
+eu Betaurreko termikoak
+
+@ Normal vision
+eu Ikusmen normala
+
+@ ON
+eu BAI
+
+@ OFF
+eu EZ
+
+@ {} (turn on)
+eu {} (aktibatu)
+
+@ {} (turn off)
+eu {} (desaktibatu)
+
+@ Move mouse to select, release to toggle
+eu Mugitu sagua hautatzeko, askatu txandakatzeko
+
+@ Move mouse to select, release to equip
+eu Mugitu sagua hautatzeko, askatu hartzeko
+
+@ Release to toggle
+eu Askatu txandakatzeko
+
+@ Release to equip
+eu Askatu hartzeko
+
+@ shells
+eu kartutxoak
+
+@ nails
+eu iltzeak
+
+@ rockets
+eu suziriak
+
+@ cells
+eu zelulak
+
+@ Kills: {}/{}
+eu Hilketak: {}/{}
+
+@ Secrets: {}/{}
+eu Sekretuak: {}/{}
+
+@ Time {}
+eu Denbora {}
+
+@ Press any button to continue...
+eu Sakatu edozein botoi jarraitzeko...
+
+@ Press any key to continue...
+eu Sakatu edozein tekla jarraitzeko...
+
+@ BULLET TIME
+eu BALA-DENBORA
+
+@ AUTO AIM
+eu XEDE AUTOM.
+
+@ Crosshair
+eu Mira
+
+@ + Marker
+eu + Marka
+
+@ Hit markers off
+eu Kolpe-markak desaktibatuta
+
+@ On target
+eu Xedean
+
+@ On kill
+eu Hiltzean
+
+# sound captions
+@ [Secret found]
+eu [Sekretua aurkituta]
+
+@ [Message]
+eu [Mezua]
+
+@ [Switch activated]
+eu [Etengailua aktibatuta]
+
+@ [Key picked up]
+eu [Giltza hartuta]
+
+@ [Rune picked up]
+eu [Erruna hartuta]
+
+@ [Teleporter]
+eu [Teleportagailua]
+
+@ [Teleport]
+eu [Teleportazioa]
+
+@ [Splash]
+eu [Zipriztina]
+
+@ [Leaving water]
+eu [Uretatik irteten]
+
+@ [Door]
+eu [Atea]
+
+@ [Platform moving]
+eu [Plataforma mugitzen]
+
+@ [Button]
+eu [Botoia]
+
+@ [Health picked up]
+eu [Osasuna hartuta]
+
+@ [Armor picked up]
+eu [Armadura hartuta]
+
+@ [Quad Damage wearing off]
+eu [Kalte laukoitza amaitzen]
+
+@ [Quad Damage]
+eu [Kalte laukoitza]
+
+@ [Pentagram wearing off]
+eu [Pentagrama amaitzen]
+
+@ [Pentagram of Protection]
+eu [Babes-pentagrama]
+
+@ [Ring wearing off]
+eu [Eraztuna amaitzen]
+
+@ [Ring of Shadows]
+eu [Itzalen eraztuna]
+
+@ [Biosuit wearing off]
+eu [Bio-jantzia amaitzen]
+
+@ [Biosuit]
+eu [Bio-jantzia]
+
+@ [Item picked up]
+eu [Objektua hartuta]
+
+@ [Weapon picked up]
+eu [Arma hartuta]
+
+@ [Ammo picked up]
+eu [Munizioa hartuta]
+
+@ [Explosion]
+eu [Leherketa]
+
+@ [Grenade launched]
+eu [Granada jaurtita]
+
+@ [Grenade bounce]
+eu [Granadaren errebotea]
+
+@ [Rocket fired]
+eu [Suziria jaurtita]
+
+@ [Nails fired]
+eu [Iltzeak jaurtita]
+
+@ [Lightning]
+eu [Tximista]
+
+@ [Thunder]
+eu [Trumoia]
+
+@ [Enforcer alerted]
+eu [Enforcer alertan]
+
+@ [Grunt alerted]
+eu [Grunt alertan]
+
+@ [Rottweiler alerted]
+eu [Rottweiler alertan]
+
+@ [Knight alerted]
+eu [Knight alertan]
+
+@ [Death Knight alerted]
+eu [Death Knight alertan]
+
+@ [Scrag alerted]
+eu [Scrag alertan]
+
+@ [Ogre alerted]
+eu [Ogroa alertan]
+
+@ [Fiend alerted]
+eu [Fiend alertan]
+
+@ [Shambler alerted]
+eu [Shambler alertan]
+
+@ [Zombie groaning]
+eu [Zonbia intzirika]
+
+@ [Vore alerted]
+eu [Vore alertan]
+
+@ [Vore attacking]
+eu [Vore erasoan]
+
+@ [Spawn alerted]
+eu [Spawn alertan]
+
+@ [Rotfish]
+eu [Rotfish]
+
+@ [Spawn]
+eu [Spawn]
+
+@ [Chthon]
+eu [Chthon]
+
+@ [Hard landing]
+eu [Lurreratze gogorra]
+
+@ [Drowning]
+eu [Itotzen]
+
+@ [Gasping for air]
+eu [Arnasestuka]
+
+@ [Burning]
+eu [Erretzen]
+
+@ [Telefrag]
+eu [Telefrag]
+
+@ [Gibbed]
+eu [Zatikatuta]
+
+# ==== console.txt ====
+
+# Console messages, shown translated only with con_translate 1 (Translate Console).
+# Cvar and command names stay as they are.
+@ Autosaved.
+eu Automatikoki gordeta.
+
+@ Game saved.
+eu Partida gordeta.
+
+@ Can't save now.
+eu Ezin da orain gorde.
+
+@ This game only autosaves (No Manual Saves modifier).
+eu Partida honek gordetze automatikoa soilik du (Eskuzko gordetzerik ez aldatzailea).
+
+@ Loading {}...
+eu Kargatzen: {}...
+
+@ load failed: {}
+eu kargatzeak huts egin du: {}
+
+@ ERROR: autosave failed: {}
+eu ERROREA: autogordetzeak huts egin du: {}
+
+@ ERROR: couldn't open {}
+eu ERROREA: ezin izan da ireki: {}
+
+@ ERROR: couldn't open {}.
+eu ERROREA: ezin izan da ireki: {}.
+
+@ ERROR: couldn't write {}: {}
+eu ERROREA: ezin izan da idatzi {}: {}
+
+@ ERROR: couldn't create {}: {}
+eu ERROREA: ezin izan da sortu {}: {}
+
+@ couldn't write {}: {}
+eu ezin izan da idatzi {}: {}
+
+@ Wrote {}
+eu Idatzita: {}
+
+@ screenshot failed: {}
+eu pantaila-argazkiak huts egin du: {}
+
+@ screenshot: {}
+eu pantaila-argazkia: {}
+
+@ No readable save available. Select save or restart the level.
+eu Ez dago gordetako partida irakurgarririk. Hautatu gordetakoa edo berrabiarazi maila.
+
+@ Unknown command "{}"
+eu Komando ezezaguna: "{}"
+
+@ couldn't exec {}
+eu ezin izan da exekutatu: {}
+
+@ execing {}
+eu exekutatzen: {}
+
+@ execing config.cfg (inherited from {})
+eu config.cfg exekutatzen (jatorria: {})
+
+@ execing config.cfg (mod defaults)
+eu config.cfg exekutatzen (modaren lehenetsiak)
+
+@ execing default.cfg (built-in)
+eu default.cfg exekutatzen (barnekoa)
+
+@ {} cvars
+eu Aldagaiak: {}
+
+@ {} commands
+eu Komandoak: {}
+
+@ Can't "cmd", not connected
+eu Ezin da "cmd" erabili, ez dago konektatuta
+
+@ Looking for Quake servers...
+eu Quake zerbitzariak bilatzen...
+
+@ Bad value, must be between 1 and 65534
+eu Balio okerra, 1 eta 65534 artean egon behar du
+
+@ Couldn't handle music file {}
+eu Ezin izan da musika-fitxategia erabili: {}
+
+@ Bug report written to {}
+eu Errore-txostena idatzita: {}
+
+@ bugreport: can't create {}: {}
+eu bugreport: ezin da sortu {}: {}
+
+@ graphics preset: {}
+eu aurrezarpen grafikoa: {}
+
+@ Presets (r_shader_preset <name>):
+eu Aurrezarpenak (r_shader_preset <izena>):
+
+@ Add your own .slangp presets under <game>/shaders/.
+eu Gehitu zure .slangp aurrezarpenak <game>/shaders/ karpetan.
+
+@ no shader preset loaded (r_shader_preset)
+eu ez dago shader-aurrezarpenik kargatuta (r_shader_preset)
+
+@ r_shader_preset: "{}" not found
+eu r_shader_preset: ez da aurkitu "{}"
+
+@ no parameter "{}" in this preset
+eu aurrezarpen honek ez du "{}" parametrorik
+
+@ {} = {} (default {}, {}..{})
+eu {} = {} (lehenetsia {}, {}..{})
+
+@ Switching to {}...
+eu Aldatzen: {}...
+
+@ game: no game dir "{}" in {}
+eu game: "{}" joko-karpeta ez dago hemen: {}
+
+@ game: can't find the engine executable
+eu game: ezin da motorraren exekutagarria aurkitu
+
+@ game: exec failed: {}
+eu game: exekuzioak huts egin du: {}
+
+@ game: launch failed: {}
+eu game: abiarazteak huts egin du: {}
+
+@ loaded {} in {}s
+eu kargatuta: {} ({} s)
+
+@ No demos listed with startdemos
+eu Ez dago demorik startdemos-ekin zerrendatuta
+
+@ Playing demo from {}.
+eu Demoa erreproduzitzen: {}.
+
+@ {} frames {} seconds {} fps
+eu {} fotograma {} segundo {} fps
+
+@ Recording to {}.
+eu Grabatzen: {}.
+
+@ Completed demo
+eu Demoa osatuta
+
+@ Can't record during demo playback
+eu Ezin da grabatu demo bat erreproduzitzen den bitartean
+
+@ Relative pathnames are not allowed.
+eu Bide-izen erlatiboak ez dira onartzen.
+
+@ Can't record - try again when connected
+eu Ezin da grabatu - saiatu berriro konektatuta zaudenean
+
+@ {} demo(s) in loop
+eu Demoak begiztan: {}
+
+@ Not recording a demo.
+eu Ez da demorik grabatzen ari.
+
+@ {} joined on a gamepad
+eu {}: kontrolagailu batekin batu da
+
+@ goggles: needs a game started with Add-ons and Goggles enabled
+eu goggles: Gehigarriak eta Betaurrekoak gaituta hasitako partida behar du
+
+@ equip: needs a game started with Add-ons and Goggles enabled
+eu equip: Gehigarriak eta Betaurrekoak gaituta hasitako partida behar du
+
+@ UDP listening on port {}
+eu UDP entzuten ataka honetan: {}
+
+@ UDP bind on port {} failed: {}
+eu UDP lotzeak huts egin du ({} ataka): {}
+
+@ Connection accepted by {}
+eu Konexioa onartuta: {}
+
+@ Connection failed: {}
+eu Konexioak huts egin du: {}
+
+@ Couldn't resolve {}
+eu Ezin izan da ebatzi: {}
+
+@ Connecting to {}...
+eu Konektatzen: {}...
+
+@ Connecting to QuakeWorld server {}...
+eu QuakeWorld zerbitzarira konektatzen: {}...
+
+@ Disconnected: {}
+eu Deskonektatuta: {}
+
+@ Server disconnected
+eu Zerbitzaria deskonektatuta
+
+@ Client {} connected
+eu Bezeroa konektatuta: {}
+
+@ Client {} timed out
+eu Bezeroaren denbora-muga gaindituta: {}
+
+@ Couldn't spawn server {}: {}
+eu Ezin izan da zerbitzaria abiarazi {}: {}
+
+@ maxplayers can not be changed while a server is running.
+eu maxplayers ezin da aldatu zerbitzari bat martxan dagoen bitartean.
+
+@ You can't kick yourself!
+eu Ezin duzu zure burua kanporatu!
+
+@ Only the server may changelevel
+eu Zerbitzariak soilik erabil dezake changelevel
+
+@ {} renamed to {}
+eu Izen-aldaketa: {} → {}

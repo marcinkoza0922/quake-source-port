@@ -1,0 +1,3024 @@
+# zh-TW: the port's own text; English keys from crates/qcore/lang/*.txt.
+# Format in crates/qcore/src/lang/catalog.rs; check with tools/lang_check.py.
+
+# ==== menu.txt ====
+
+# Options pages: page names, row labels and choice values.
+@ 10% speed
+zh-TW 10%速度
+
+@ 2 split-screen
+zh-TW 2人分割畫面
+
+@ 3 split-screen
+zh-TW 3人分割畫面
+
+@ 4 split-screen
+zh-TW 4人分割畫面
+
+@ 5 split-screen
+zh-TW 5人分割畫面
+
+@ 6 split-screen
+zh-TW 6人分割畫面
+
+@ 2D aiming
+zh-TW 2D瞄準
+
+@ 2x monsters
+zh-TW 2倍怪物
+
+@ 3x monsters
+zh-TW 3倍怪物
+
+@ 4x monsters
+zh-TW 4倍怪物
+
+@ 3D resolution
+zh-TW 3D解析度
+
+@ 3D view
+zh-TW 3D視角
+
+@ 8-bit Color
+zh-TW 8位元色彩
+
+@ Accessibility
+zh-TW 協助工具
+
+@ Acquisition Cone
+zh-TW 鎖定錐角
+
+@ Activation
+zh-TW 啟動方式
+
+@ Add a ringing room tail after the cue
+zh-TW 在提示音後加上迴響的空間殘響
+
+@ Add delayed repeats after the cue
+zh-TW 在提示音後加上延遲重複
+
+@ Add saturation and distortion
+zh-TW 加入飽和與失真效果
+
+@ Add-ons
+zh-TW 附加功能
+
+@ Address
+zh-TW 位址
+
+@ Adds fine noise to hide color banding
+zh-TW 加入細微雜訊以掩蓋色彩斷層
+
+@ Advanced Settings
+zh-TW 進階設定
+
+@ Aim Assist
+zh-TW 輔助瞄準
+
+@ Aim Rotation
+zh-TW 瞄準轉向
+
+@ Aim Slowdown
+zh-TW 瞄準減速
+
+@ Aim Style
+zh-TW 瞄準方式
+
+@ All
+zh-TW 全部
+
+@ All enemies
+zh-TW 所有敵人
+
+@ Alt Fire (Add-ons)
+zh-TW 次要射擊（附加功能）
+
+@ Always Run
+zh-TW 永遠奔跑
+
+@ Ambient Occlusion
+zh-TW 環境光遮蔽
+
+@ Ammo Counts
+zh-TW 彈藥數量
+
+@ Ammo Counts Position
+zh-TW 彈藥數量位置
+
+@ Ammo Pickups
+zh-TW 彈藥拾取
+
+@ Anisotropic
+zh-TW 異向性
+
+@ Anti-aliasing
+zh-TW 反鋸齒
+
+@ Apply To
+zh-TW 套用至
+
+@ Armor
+zh-TW 護甲
+
+@ Armor Position
+zh-TW 護甲位置
+
+@ Ask
+zh-TW 詢問
+
+@ Attack
+zh-TW 攻擊
+
+@ Audio
+zh-TW 音效
+
+@ Auto-aim
+zh-TW 自動瞄準
+
+@ Auto-aim Settings
+zh-TW 自動瞄準設定
+
+@ Autosave
+zh-TW 自動存檔
+
+@ Autosave Settings
+zh-TW 自動存檔設定
+
+@ Autosave Timer
+zh-TW 自動存檔間隔
+
+@ Autosaves to Keep
+zh-TW 保留自動存檔數
+
+@ Bass
+zh-TW 低音
+
+@ Blip
+zh-TW 嗶聲
+
+@ Blood Quality
+zh-TW 血液品質
+
+@ Blood Splatter Settings
+zh-TW 血跡飛濺設定
+
+@ Blue
+zh-TW 藍
+
+@ Boomerang Settings
+zh-TW 迴力鏢設定
+
+@ Boost or cut high frequencies in decibels
+zh-TW 以分貝提高或降低高頻
+
+@ Boost or cut low frequencies in decibels
+zh-TW 以分貝提高或降低低頻
+
+@ Brightness
+zh-TW 亮度
+
+@ Bullet Time (Add-ons)
+zh-TW 子彈時間（附加功能）
+
+@ Bullet Time Settings
+zh-TW 子彈時間設定
+
+@ Button Glyphs
+zh-TW 按鈕圖示
+
+@ Button Size
+zh-TW 按鈕大小
+
+@ Camera
+zh-TW 鏡頭
+
+@ Caustic Intensity
+zh-TW 焦散強度
+
+@ Caustics
+zh-TW 焦散
+
+@ Center
+zh-TW 置中
+
+@ Center Message Position
+zh-TW 中央訊息位置
+
+@ Center Message Time
+zh-TW 中央訊息時間
+
+@ Center View
+zh-TW 視角置中
+
+@ Change Color on Kill
+zh-TW 擊殺時變色
+
+@ Change Color on Target
+zh-TW 瞄準目標時變色
+
+@ Chime
+zh-TW 鈴聲
+
+@ Click
+zh-TW 喀嗒
+
+@ Clink
+zh-TW 叮噹
+
+@ Coin
+zh-TW 硬幣
+
+@ Color
+zh-TW 顏色
+
+@ Color Filter
+zh-TW 色彩濾鏡
+
+@ Color of the grenade arc
+zh-TW 榴彈軌跡的顏色
+
+@ Colored Lighting
+zh-TW 彩色光照
+
+@ Connect
+zh-TW 連線
+
+@ Contrast
+zh-TW 對比
+
+@ Controls
+zh-TW 控制
+
+@ Cooldown (ms)
+zh-TW 冷卻（毫秒）
+
+@ Crosshair Outline
+zh-TW 準星外框
+
+@ Crosshair Shape
+zh-TW 準星形狀
+
+@ Crosshair Size
+zh-TW 準星大小
+
+@ Current Ammo
+zh-TW 目前彈藥
+
+@ Current Ammo Position
+zh-TW 目前彈藥位置
+
+@ Customize This Game
+zh-TW 自訂這場遊戲
+
+@ Damage
+zh-TW 傷害
+
+@ Damage Taken
+zh-TW 承受傷害
+
+@ Debris
+zh-TW 碎片
+
+@ Debris Quality
+zh-TW 碎片品質
+
+@ Debris Settings
+zh-TW 碎片設定
+
+@ Directional Damage
+zh-TW 傷害方向
+
+@ Dithering
+zh-TW 抖色
+
+@ Dodge / Dive (Add-ons)
+zh-TW 閃避／飛撲（附加功能）
+
+@ Dragging up looks down instead of up
+zh-TW 向上拖曳時改為向下看
+
+@ Drive
+zh-TW 過載
+
+@ Dynamic Lights
+zh-TW 動態光源
+
+@ Echo
+zh-TW 回音
+
+@ Enemy Health
+zh-TW 敵人生命值
+
+@ Enemy Wounds
+zh-TW 敵人傷口
+
+@ Enhanced Blood Splatter
+zh-TW 強化血跡飛濺
+
+@ Enhanced FX
+zh-TW 強化特效
+
+@ Enhanced Models
+zh-TW 強化模型
+
+@ Enhanced Particles
+zh-TW 強化粒子
+
+@ Enhanced Water
+zh-TW 強化水面
+
+@ Enhancements
+zh-TW 強化功能
+
+@ Equipment Wheel (Add-ons)
+zh-TW 裝備輪盤（附加功能）
+
+@ Exploding boxes throw metal shards
+zh-TW 爆炸箱會噴出金屬碎片
+
+@ Explosion Damage
+zh-TW 爆炸傷害
+
+@ Explosion Scorch Marks
+zh-TW 爆炸焦痕
+
+@ Explosions scorch nearby solid surfaces
+zh-TW 爆炸會燒焦附近的實體表面
+
+@ Explosives only
+zh-TW 僅限爆炸武器
+
+@ Extra Monsters
+zh-TW 額外怪物
+
+@ Extra Per 10 Damage (ms)
+zh-TW 每10點傷害追加（毫秒）
+
+@ FX Settings
+zh-TW 特效設定
+
+@ Field of View
+zh-TW 視野
+
+@ Firing never uses up ammo
+zh-TW 射擊不消耗彈藥
+
+@ First person
+zh-TW 第一人稱
+
+@ Flick Time
+zh-TW 甩桿時間
+
+@ Flight Speed
+zh-TW 飛行速度
+
+@ Fog
+zh-TW 霧
+
+@ Frag Limit
+zh-TW 擊殺上限
+
+@ Freeze Duration (ms)
+zh-TW 凍結時間（毫秒）
+
+@ GLQuake
+zh-TW GLQuake
+
+@ Game Speed
+zh-TW 遊戲速度
+
+@ Game Type
+zh-TW 遊戲類型
+
+@ Gameplay
+zh-TW 遊戲玩法
+
+@ Gameplay Modifiers
+zh-TW 玩法調整
+
+@ Gel Quality
+zh-TW 凝膠品質
+
+@ Gib Surface Painting
+zh-TW 碎肉血漬
+
+@ Gibs
+zh-TW 碎肉
+
+@ Gibs and heads tumble and bounce
+zh-TW 碎肉與頭顱會翻滾彈跳
+
+@ Goggle Glow Quality
+zh-TW 夜視鏡光暈品質
+
+@ Goggle Intensity
+zh-TW 夜視鏡強度
+
+@ Goggle Noise
+zh-TW 夜視鏡雜訊
+
+@ Goggles Settings
+zh-TW 夜視鏡設定
+
+@ Graphics
+zh-TW 畫面
+
+@ Green
+zh-TW 綠
+
+@ Grenade Arc
+zh-TW 榴彈軌跡
+
+@ Grenade Arc Settings
+zh-TW 榴彈軌跡設定
+
+@ Gun Kick
+zh-TW 武器後座力
+
+@ Gyro
+zh-TW 陀螺儀
+
+@ Gyro & Flick Stick
+zh-TW 陀螺儀與甩桿
+
+@ Gyro Active
+zh-TW 陀螺儀啟用
+
+@ Gyro Aiming
+zh-TW 陀螺儀瞄準
+
+@ HUD
+zh-TW HUD
+
+@ HUD Style
+zh-TW HUD樣式
+
+@ Health
+zh-TW 生命值
+
+@ Health Pickups
+zh-TW 生命值拾取
+
+@ Health Position
+zh-TW 生命值位置
+
+@ Health Regeneration
+zh-TW 生命值回復
+
+@ Hit & Kill Sounds
+zh-TW 命中與擊殺音效
+
+@ Hit Doors & Lifts
+zh-TW 受門與升降梯推動
+
+@ Hit Markers
+zh-TW 命中標記
+
+@ Hit Sound
+zh-TW 命中音效
+
+@ Hitmarker Size
+zh-TW 命中標記大小
+
+@ Hitmarker Type
+zh-TW 命中標記類型
+
+@ Hitstop Advanced
+zh-TW 命中停頓進階
+
+@ Hitstop Settings
+zh-TW 命中停頓設定
+
+@ Hold
+zh-TW 按住
+
+@ Hold lock-on
+zh-TW 按住鎖定
+
+@ Hook Enemies
+zh-TW 勾住敵人
+
+@ Hook Metal
+zh-TW 勾住金屬
+
+@ Hook Stone
+zh-TW 勾住石頭
+
+@ Hook Wood
+zh-TW 勾住木頭
+
+@ Hooking an enemy pulls you to it
+zh-TW 勾住敵人時會將你拉過去
+
+@ Hookshot Range
+zh-TW 鉤爪射程
+
+@ Hookshot Settings
+zh-TW 鉤爪設定
+
+@ Host Game
+zh-TW 建立遊戲
+
+@ How far the hook flies before it retracts
+zh-TW 鉤爪收回前能飛多遠
+
+@ How visible the on-screen controls are
+zh-TW 螢幕操控按鈕的可見度
+
+@ Impact Lifetime
+zh-TW 彈痕存留時間
+
+@ Infinite Ammo
+zh-TW 無限彈藥
+
+@ Input
+zh-TW 輸入
+
+@ Input Scale
+zh-TW 輸入縮放
+
+@ Interpolate Animation
+zh-TW 動畫插補
+
+@ Interpolate Movement
+zh-TW 移動插補
+
+@ Invert Look
+zh-TW 反轉視角
+
+@ Invert Mouse
+zh-TW 反轉滑鼠
+
+@ Invert Stick
+zh-TW 反轉搖桿
+
+@ Jet Quality
+zh-TW 水柱品質
+
+@ Join Game
+zh-TW 加入遊戲
+
+@ Jump / Swim Up
+zh-TW 跳躍／上浮
+
+@ Jump again in mid-air
+zh-TW 在空中再次跳躍
+
+@ Jumps
+zh-TW 跳躍次數
+
+@ Keys & Powerups
+zh-TW 鑰匙與強化道具
+
+@ Keys & Powerups Position
+zh-TW 鑰匙與強化道具位置
+
+@ Kill Bonus (x)
+zh-TW 擊殺加成（倍）
+
+@ Kill Sound
+zh-TW 擊殺音效
+
+@ Knock
+zh-TW 敲擊
+
+@ Left
+zh-TW 左
+
+@ Length of the motion blur streaks
+zh-TW 動態模糊拖影的長度
+
+@ Lifetime (seconds)
+zh-TW 存留時間（秒）
+
+@ Live Portal Views
+zh-TW 即時傳送門畫面
+
+@ Live View Distance
+zh-TW 即時畫面距離
+
+@ Local Players
+zh-TW 本機玩家
+
+@ Local red wounds follow enemy animation
+zh-TW 紅色傷口會跟隨敵人動畫
+
+@ Lock Indicator
+zh-TW 鎖定指示
+
+@ Long falls don't hurt
+zh-TW 高處墜落不會受傷
+
+@ Longest Freeze (ms)
+zh-TW 最長凍結（毫秒）
+
+@ Look Down
+zh-TW 向下看
+
+@ Look Speed
+zh-TW 視角速度
+
+@ Look Up
+zh-TW 向上看
+
+@ Main Menu Music
+zh-TW 主選單音樂
+
+@ Max FPS
+zh-TW 最高FPS
+
+@ Max Players
+zh-TW 最多玩家數
+
+@ Maximum Impacts
+zh-TW 最多彈痕數
+
+@ Maximum Marks
+zh-TW 最多痕跡數
+
+@ Maximum Range
+zh-TW 最大射程
+
+@ Melee only
+zh-TW 僅限近戰
+
+@ Message Background
+zh-TW 訊息背景
+
+@ Message Text Size
+zh-TW 訊息文字大小
+
+@ Messages & Captions
+zh-TW 訊息與字幕
+
+@ Meter Duration (real seconds)
+zh-TW 計量條時間（真實秒）
+
+@ Minimum Damage
+zh-TW 最低傷害
+
+@ Mode
+zh-TW 模式
+
+@ Modern Console
+zh-TW 現代主控台
+
+@ Modern HUD Layout
+zh-TW 現代HUD配置
+
+@ Most recent save
+zh-TW 最新存檔
+
+@ Motion Blur
+zh-TW 動態模糊
+
+@ Motion Blur Amount
+zh-TW 動態模糊強度
+
+@ Motion Blur Quality
+zh-TW 動態模糊品質
+
+@ Mouse & Keyboard
+zh-TW 滑鼠與鍵盤
+
+@ Mouse Speed
+zh-TW 滑鼠速度
+
+@ Move Back
+zh-TW 後退
+
+@ Move Forward
+zh-TW 前進
+
+@ Music Volume
+zh-TW 音樂音量
+
+@ Next Weapon
+zh-TW 下一把武器
+
+@ No Drowning
+zh-TW 不會溺水
+
+@ No Fall Damage
+zh-TW 無墜落傷害
+
+@ No Manual Saves
+zh-TW 禁止手動存檔
+
+@ No Self Damage
+zh-TW 無自身傷害
+
+@ Noise Filter
+zh-TW 雜訊過濾
+
+@ Normal Color
+zh-TW 一般顏色
+
+@ Notify Message Position
+zh-TW 通知訊息位置
+
+@ Notify Message Time
+zh-TW 通知訊息時間
+
+@ Number of splatter rays per blood impact
+zh-TW 每次血液噴濺的飛濺射線數
+
+@ Off
+zh-TW 關閉
+
+@ On Death
+zh-TW 死亡時
+
+@ On Kill Color
+zh-TW 擊殺時顏色
+
+@ On Target Color
+zh-TW 瞄準目標時顏色
+
+@ Opacity
+zh-TW 不透明度
+
+@ Opacity of the grenade arc
+zh-TW 榴彈軌跡的不透明度
+
+@ Pants Color
+zh-TW 褲子顏色
+
+@ Particle Quality
+zh-TW 粒子品質
+
+@ Particles
+zh-TW 粒子
+
+@ Physical Nail Impacts
+zh-TW 物理鐵釘彈痕
+
+@ Pistol Start
+zh-TW 手槍開局
+
+@ Pitch
+zh-TW 音高
+
+@ Pitch Sensitivity
+zh-TW 垂直靈敏度
+
+@ Playback Speed
+zh-TW 播放速度
+
+@ Player Setup
+zh-TW 玩家設定
+
+@ Pop
+zh-TW 啵聲
+
+@ Portal Gun Settings
+zh-TW 傳送門槍設定
+
+@ Portal Recursion
+zh-TW 傳送門遞迴
+
+@ Portal View Quality
+zh-TW 傳送門畫面品質
+
+@ Preview Sound
+zh-TW 試聽音效
+
+@ Previous Weapon
+zh-TW 上一把武器
+
+@ Projectile Shotguns Settings
+zh-TW 實體彈霰彈槍設定
+
+@ Projectile Speed (units/s)
+zh-TW 彈體速度（單位/秒）
+
+@ Purple
+zh-TW 紫
+
+@ Push
+zh-TW 沖力
+
+@ Push Strength
+zh-TW 推力強度
+
+@ Quick Load
+zh-TW 快速載入
+
+@ Quick Save
+zh-TW 快速存檔
+
+@ Railgun Settings
+zh-TW 磁軌砲設定
+
+@ Ranged only
+zh-TW 僅限遠程
+
+@ Reacquire While Held
+zh-TW 按住時重新鎖定
+
+@ Red
+zh-TW 紅
+
+@ Reduce Motion
+zh-TW 減少動態效果
+
+@ Regen (seconds per second)
+zh-TW 回復（每秒秒數）
+
+@ Render Scale
+zh-TW 渲染比例
+
+@ Reverb
+zh-TW 殘響
+
+@ Right
+zh-TW 右
+
+@ Ripple Intensity
+zh-TW 波紋強度
+
+@ Ripples
+zh-TW 波紋
+
+@ Roll Sensitivity
+zh-TW 滾轉靈敏度
+
+@ Rumble
+zh-TW 震動
+
+@ Run
+zh-TW 奔跑
+
+@ Save on All Enemies Killed
+zh-TW 消滅所有敵人時存檔
+
+@ Save on All Secrets Found
+zh-TW 找到所有秘密時存檔
+
+@ Save on Level Entry
+zh-TW 進入關卡時存檔
+
+@ Save on Secret Found
+zh-TW 找到秘密時存檔
+
+@ Scoreboard
+zh-TW 計分板
+
+@ Screen Flashes
+zh-TW 螢幕閃光
+
+@ Screen Shader
+zh-TW 螢幕著色器
+
+@ Screen Shake
+zh-TW 螢幕震動
+
+@ Search LAN
+zh-TW 搜尋區域網路
+
+@ Seconds a center-screen message stays up
+zh-TW 畫面中央訊息的停留秒數
+
+@ See Through Portals
+zh-TW 透視傳送門
+
+@ See-through Teleporters
+zh-TW 可透視的傳送點
+
+@ Shirt Color
+zh-TW 上衣顏色
+
+@ Shotgun Bullet Decals
+zh-TW 霰彈彈孔
+
+@ Shoulder left
+zh-TW 左肩視角
+
+@ Shoulder right
+zh-TW 右肩視角
+
+@ Show FPS
+zh-TW 顯示FPS
+
+@ Show Face
+zh-TW 顯示臉部
+
+@ Shrapnel
+zh-TW 破片
+
+@ Size of on-screen messages and captions
+zh-TW 畫面訊息與字幕的大小
+
+@ Skill
+zh-TW 難度
+
+@ Sky Fog
+zh-TW 天空霧
+
+@ Smooths the stepped movement of monsters
+zh-TW 讓怪物的步進式移動更平滑
+
+@ Sound
+zh-TW 音效
+
+@ Sound Captions
+zh-TW 音效字幕
+
+@ Sound Volume
+zh-TW 音效音量
+
+@ Speed Blur
+zh-TW 速度模糊
+
+@ Splashes
+zh-TW 水花
+
+@ Splatter Amount
+zh-TW 飛濺量
+
+@ Splatter Size
+zh-TW 飛濺大小
+
+@ Start Game
+zh-TW 開始遊戲
+
+@ Staying underwater doesn't hurt
+zh-TW 待在水中不會受傷
+
+@ Stick Look Pitch
+zh-TW 搖桿垂直視角
+
+@ Stick Look Yaw
+zh-TW 搖桿水平視角
+
+@ Strafe Left
+zh-TW 向左平移
+
+@ Strafe Right
+zh-TW 向右平移
+
+@ Strength of the surface swell and rings
+zh-TW 水面起伏與漣漪的強度
+
+@ Stun Duration
+zh-TW 暈眩時間
+
+@ Style
+zh-TW 樣式
+
+@ Supersampling
+zh-TW 超取樣
+
+@ Surface Hit Effects
+zh-TW 表面命中效果
+
+@ Swim Down
+zh-TW 下潛
+
+@ Targets
+zh-TW 目標
+
+@ Teamplay
+zh-TW 團隊模式
+
+@ Texture Filter
+zh-TW 材質過濾
+
+@ Third person
+zh-TW 第三人稱
+
+@ Thud
+zh-TW 悶響
+
+@ Tick
+zh-TW 滴答
+
+@ Time Limit
+zh-TW 時間限制
+
+@ Time Stretch
+zh-TW 時間延展
+
+@ Toggle Attack
+zh-TW 切換攻擊
+
+@ Toggle Run
+zh-TW 切換奔跑
+
+@ Toggle auto-aim
+zh-TW 切換自動瞄準
+
+@ Touch Controls
+zh-TW 觸控操作
+
+@ Touchscreen
+zh-TW 觸控螢幕
+
+@ Tough Enemy Health
+zh-TW 強敵生命值
+
+@ Tough enemies only
+zh-TW 僅限強敵
+
+@ Trail Colour
+zh-TW 軌跡顏色
+
+@ Translate Console
+zh-TW 翻譯主控台
+
+@ Translucent Water
+zh-TW 半透明水面
+
+@ Treble
+zh-TW 高音
+
+@ Turn Left
+zh-TW 向左轉
+
+@ Turn Right
+zh-TW 向右轉
+
+@ Underwater FX
+zh-TW 水下特效
+
+@ Use Bullet Time Meter
+zh-TW 使用子彈時間計量條
+
+@ VSync
+zh-TW 垂直同步
+
+@ View Bob
+zh-TW 視角晃動
+
+@ Viewmodels
+zh-TW 武器模型
+
+@ Volume
+zh-TW 音量
+
+@ Water Opacity
+zh-TW 水面不透明度
+
+@ Water Quality
+zh-TW 水面品質
+
+@ Water Settings
+zh-TW 水面設定
+
+@ Weapon Wheel
+zh-TW 武器輪盤
+
+@ Weapon Wheel Slowdown
+zh-TW 武器輪盤減速
+
+@ Weapons
+zh-TW 武器
+
+@ Weapons Position
+zh-TW 武器位置
+
+@ Where center-screen messages appear
+zh-TW 畫面中央訊息的顯示位置
+
+@ Where pickup and event messages appear
+zh-TW 拾取與事件訊息的顯示位置
+
+@ White
+zh-TW 白
+
+@ Yaw Sensitivity
+zh-TW 水平靈敏度
+
+@ Yellow
+zh-TW 黃
+
+# lowercase choice values
+@ T
+zh-TW T
+
+@ always
+zh-TW 永遠
+
+@ auto
+zh-TW 自動
+
+@ banded
+zh-TW 色階
+
+@ borderless
+zh-TW 無邊框
+
+@ bottom center
+zh-TW 下方中央
+
+@ bottom left
+zh-TW 左下
+
+@ bottom right
+zh-TW 右下
+
+@ box
+zh-TW 方框
+
+@ broken square
+zh-TW 斷線方框
+
+@ classic
+zh-TW 經典
+
+@ coarse
+zh-TW 粗略
+
+@ cooperative
+zh-TW 合作
+
+@ cross
+zh-TW 十字
+
+@ cross + dot
+zh-TW 十字＋點
+
+@ cyan
+zh-TW 青
+
+@ dashed
+zh-TW 虛線
+
+@ deathmatch
+zh-TW 死鬥
+
+@ deuteranopia
+zh-TW 綠色盲
+
+@ diagonal streaks
+zh-TW 斜向條紋
+
+@ diamond
+zh-TW 菱形
+
+@ dot
+zh-TW 點
+
+@ double
+zh-TW 二段跳
+
+@ double chevrons
+zh-TW 雙V形
+
+@ double diagonals
+zh-TW 雙斜線
+
+@ easy
+zh-TW 簡單
+
+@ fine
+zh-TW 精細
+
+@ fit output
+zh-TW 符合輸出
+
+@ flick stick
+zh-TW 甩桿
+
+@ fullscreen
+zh-TW 全螢幕
+
+@ gap cross
+zh-TW 空心十字
+
+@ green
+zh-TW 綠
+
+@ grey
+zh-TW 灰
+
+@ half speed
+zh-TW 半速
+
+@ hard
+zh-TW 困難
+
+@ high
+zh-TW 高
+
+@ huge
+zh-TW 特大
+
+@ immersive
+zh-TW 沉浸
+
+@ intense
+zh-TW 強烈
+
+@ large
+zh-TW 大
+
+@ larger
+zh-TW 較大
+
+@ largest
+zh-TW 最大
+
+@ linear
+zh-TW 線性
+
+@ low
+zh-TW 低
+
+@ lower
+zh-TW 下方
+
+@ magenta
+zh-TW 洋紅
+
+@ medium
+zh-TW 中
+
+@ middle
+zh-TW 中央
+
+@ middle left
+zh-TW 左側中央
+
+@ middle right
+zh-TW 右側中央
+
+@ modern
+zh-TW 現代
+
+@ nearest
+zh-TW 最近鄰
+
+@ nightmare
+zh-TW 夢魘
+
+@ nintendo
+zh-TW Nintendo
+
+@ no team damage
+zh-TW 無隊友傷害
+
+@ none
+zh-TW 無
+
+@ normal
+zh-TW 普通
+
+@ off
+zh-TW 關閉
+
+@ off while held
+zh-TW 按住時關閉
+
+@ on
+zh-TW 開啟
+
+@ only while held
+zh-TW 僅在按住時
+
+@ playstation
+zh-TW PlayStation
+
+@ protanopia
+zh-TW 紅色盲
+
+@ quarter speed
+zh-TW 四分之一速
+
+@ red
+zh-TW 紅
+
+@ short diagonals
+zh-TW 短斜線
+
+@ single
+zh-TW 一段跳
+
+@ small
+zh-TW 小
+
+@ solid
+zh-TW 實線
+
+@ spectacle
+zh-TW 華麗
+
+@ subtle
+zh-TW 輕微
+
+@ team damage
+zh-TW 隊友傷害
+
+@ top center
+zh-TW 上方中央
+
+@ top left
+zh-TW 左上
+
+@ top right
+zh-TW 右上
+
+@ triple
+zh-TW 三段跳
+
+@ tritanopia
+zh-TW 藍色盲
+
+@ upper
+zh-TW 上方
+
+@ white
+zh-TW 白
+
+@ whole screen
+zh-TW 整個畫面
+
+@ windowed
+zh-TW 視窗
+
+@ xbox
+zh-TW Xbox
+
+@ yellow
+zh-TW 黃
+
+# ==== tooltips.txt ====
+
+# Options help lines (tooltips) and reasons for disabled rows.
+@ 2D aiming turns the view continuously with the right stick; flick stick snaps the view to where you push the stick, then turning the stick rotates it
+zh-TW 2D瞄準以右搖桿連續轉動視角；甩桿會讓視角立即轉向搖桿推動的方向，之後轉動搖桿即可旋轉視角
+
+@ 3D resolution relative to the window; the UI stays sharp
+zh-TW 相對於視窗的3D解析度；介面維持清晰
+
+@ 3D view keeps the HUD and menus sharp; whole screen runs them through the shader too
+zh-TW 3D視角讓HUD與選單維持清晰；整個畫面則讓它們也套用著色器
+
+@ A Quake III style railgun: a slug that pierces every enemy on its line, using 2 cells a shot and refiring every 1.5 s; select it through its assigned weapon slot (Add-ons)
+zh-TW Quake III風格的磁軌砲：彈頭會貫穿直線上的所有敵人，每發消耗2個電池，每1.5秒可再次射擊；透過指定的武器欄位選用（附加功能）
+
+@ A Zelda-style hookshot: fire sends a chain hook out; it latches onto hookable surfaces or enemies and reels you in; fire again to let go
+zh-TW 薩爾達風格的鉤爪：射擊會射出鎖鏈鉤，勾住可勾的表面或敵人後把你拉過去；再次射擊即可放開
+
+@ Also translates the engine's console messages; off keeps them in English
+zh-TW 同時翻譯引擎的主控台訊息；關閉則保留英文
+
+@ Automatically acquire another enemy while holding Lock-on after losing a target
+zh-TW 按住鎖定時，失去目標後自動鎖定另一名敵人
+
+@ Blends between animation frames of monsters and weapons
+zh-TW 在怪物與武器的動畫影格之間平滑過渡
+
+@ Blood stains surfaces and bodies; cosmetic, independent of particle packs
+zh-TW 血液會沾染表面與屍體；僅為外觀效果，與粒子包無關
+
+@ Bloom glow around bright lights and heat sources; medium uses 4 taps, high uses 8, low disables halo taps
+zh-TW 明亮光源與熱源周圍的泛光；中使用4次取樣，高使用8次，低則停用光暈取樣
+
+@ Blurs fast-moving monsters, projectiles and doors (not camera turns)
+zh-TW 模糊快速移動的怪物、投射物與門（不含鏡頭轉動）
+
+@ Blurs the screen edges during fast falls and launches; keeps the centre clear. Reduce Motion disables it
+zh-TW 快速墜落與彈射時模糊畫面邊緣，中央保持清晰。「減少動態效果」會停用此功能
+
+@ Brightness of the underwater light patterns
+zh-TW 水下光紋的亮度
+
+@ Caps mark count, lifetime, airborne droplets and wound/gib painting; low skips enemy wounds and gib trails
+zh-TW 限制痕跡數量、存留時間、空中血滴與傷口／碎肉血漬；低會略過敵人傷口與碎肉血跡
+
+@ Caps shader input at output size so 200% render scale keeps 3D sharpness without 4x shader cost; low scales stay low-res
+zh-TW 將著色器輸入限制在輸出尺寸，讓200%渲染比例保有3D清晰度而不需4倍著色器負擔；低比例則維持低解析度
+
+@ Classic: the original status bar; modern: compact elements at the screen edges
+zh-TW 經典：原版狀態列；現代：位於畫面邊緣的精簡元素
+
+@ Coat atlas resolution, rebuild rate and shader detail: low builds smaller coats less often with fast shading; high uses full detail
+zh-TW 塗層圖集解析度、重建頻率與著色細節：低會以較低頻率建立較小的塗層並使用快速著色；高則使用完整細節
+
+@ Colour of the railgun's spiral trail; split-screen players each get the next colour along
+zh-TW 磁軌砲螺旋軌跡的顏色；分割畫面中每位玩家依序使用下一個顏色
+
+@ Damage the railgun deals to each enemy it passes through (Quake III: 100)
+zh-TW 磁軌砲對每個貫穿敵人造成的傷害（Quake III：100）
+
+@ Dark backdrop behind on-screen messages for readability
+zh-TW 在畫面訊息後方加上深色底，方便閱讀
+
+@ Dark border keeps the crosshair visible on any background
+zh-TW 深色外框讓準星在任何背景上都清晰可見
+
+@ Darkens corners and contact areas where geometry meets; higher quality is sharper
+zh-TW 讓幾何體交接的角落與接觸處變暗；品質越高越銳利
+
+@ Debris lands on and is carried or shoved by doors, lifts and platforms
+zh-TW 碎片會落在門、升降梯與平台上，並被其載運或推動
+
+@ Detail for caustics, ripples and splashes: low uses smaller budgets and shorter view distance; high uses larger budgets and farther view distance
+zh-TW 焦散、波紋與水花的細節：低使用較少資源與較短的可視距離；高使用較多資源與較遠的可視距離
+
+@ Disabled while Enhanced Particles is on: its particles replace the GLQuake and Classic styles
+zh-TW 「強化粒子」開啟時停用：其粒子會取代GLQuake與經典樣式
+
+@ Disabled while Enhanced Water is on: its own underwater effects replace the classic and GLQuake view warps
+zh-TW 「強化水面」開啟時停用：其水下效果會取代經典與GLQuake的畫面扭曲
+
+@ Draw the predicted grenade path as a solid or dashed line
+zh-TW 以實線或虛線繪製預測的榴彈路徑
+
+@ Draw the view out of the linked portal inside each portal; off shows flat discs (fastest)
+zh-TW 在每個傳送門內繪製連結傳送門另一側的畫面；關閉則顯示平面圓盤（最快）
+
+@ Droplets spray up when things enter or leave water, slime or lava
+zh-TW 物體進出水、黏液或岩漿時會濺起水滴
+
+@ Emulates the original 8-bit palette of software rendering
+zh-TW 模擬軟體渲染原本的8位元調色盤
+
+@ Every level starts with only the shotgun and axe, as if started fresh
+zh-TW 每個關卡開始時只有霰彈槍與斧頭，如同重新開始
+
+@ Explosion damage for each remotely detonated sticky bomb
+zh-TW 每顆遙控引爆黏彈的爆炸傷害
+
+@ Extra freeze milliseconds for every 10 damage dealt, so heavy hits stop longer
+zh-TW 每造成10點傷害追加的凍結毫秒數，讓重擊停頓更久
+
+@ First person, a third-person camera centered behind the player, or one over the right or left shoulder; third person hides viewmodels
+zh-TW 第一人稱、位於玩家正後方的第三人稱鏡頭，或是越過右肩或左肩的鏡頭；第三人稱會隱藏武器模型
+
+@ Flash the selected marker on confirmed hits; colors are shared with the crosshair
+zh-TW 確認命中時閃現所選標記；顏色與準星共用
+
+@ Freeze for every enemy, or only for enemies that were tough before the hit
+zh-TW 對所有敵人凍結，或只對命中前屬於強敵的敵人凍結
+
+@ Freeze the game briefly when you damage an enemy; single player with add-ons only
+zh-TW 傷害敵人時讓遊戲短暫凍結；僅限啟用附加功能的單人遊戲
+
+@ Gibs tumble and barrels throw shrapnel; shots and blasts push them (cosmetic only)
+zh-TW 碎肉會翻滾、油桶會噴出破片；射擊與爆炸會推動它們（僅為外觀效果）
+
+@ Health an enemy must have had before the hit to count as tough
+zh-TW 敵人在命中前需具備多少生命值才算強敵
+
+@ Hits dealing less damage than this do not freeze the game; the default 10 skips nails and shotgun pellets
+zh-TW 傷害低於此值的命中不會凍結遊戲；預設值10會略過鐵釘與霰彈彈丸
+
+@ Hold fire and sweep the crosshair over monsters to queue them, release to throw: it stuns each in turn and flies back; alt-fire clears the queue
+zh-TW 按住射擊並將準星掃過怪物以排入佇列，放開即投擲：迴力鏢會依序擊暈每個目標後飛回；次要射擊可清除佇列
+
+@ Hold: keep Lock-on held. Toggle: press Auto-aim Toggle to enable automatic acquisition. Click look stick to switch targets
+zh-TW 按住：持續按住鎖定。切換：按下自動瞄準切換鍵以啟用自動鎖定。按下視角搖桿可切換目標
+
+@ How close an enemy must be to the crosshair for automatic acquisition in toggle mode (degrees)
+zh-TW 切換模式下，敵人需離準星多近才會自動鎖定（度）
+
+@ How far the view tilts up and down when you tilt the controller (pitch axis)
+zh-TW 傾斜手把時視角上下傾斜的幅度（俯仰軸）
+
+@ How far the view turns left and right when you turn the controller (yaw axis)
+zh-TW 轉動手把時視角左右轉動的幅度（偏航軸）
+
+@ How far the view turns when you drag on the right half of the screen
+zh-TW 在螢幕右半邊拖曳時視角轉動的幅度
+
+@ How fast the boomerang flies (units per second)
+zh-TW 迴力鏢的飛行速度（每秒單位數）
+
+@ How hard shots and explosions push debris around
+zh-TW 射擊與爆炸推動碎片的力道
+
+@ How hard the Powerwasher's water pushes enemies
+zh-TW 高壓清洗機的水柱推動敵人的力道
+
+@ How long a hit freezes the game, in milliseconds
+zh-TW 命中時遊戲凍結的時間（毫秒）
+
+@ How strongly fog covers the sky when fog is on
+zh-TW 開啟霧時霧氣覆蓋天空的程度
+
+@ How the view distorts underwater: Classic ripples the whole screen like software Quake, GLQuake slowly stretches and squashes the view
+zh-TW 水下畫面的扭曲方式：經典會像軟體版Quake一樣讓整個畫面波動，GLQuake則緩慢拉伸與壓縮畫面
+
+@ Ignores gyro rotation slower than this many degrees per second, to hide hand tremor
+zh-TW 忽略低於每秒此度數的陀螺儀轉動，以消除手部顫抖
+
+@ Immersive: appears for a few seconds only when its value changes
+zh-TW 沉浸：只在數值變化時顯示幾秒
+
+@ Keeps textures sharp on floors and walls seen at steep angles
+zh-TW 讓以斜角觀看的地板與牆面材質保持清晰
+
+@ Lights from rockets, muzzle flashes and explosions brighten nearby walls
+zh-TW 火箭彈、槍口火光與爆炸的光線會照亮附近牆面
+
+@ Liquid surfaces swell and ring out where things move through them
+zh-TW 物體穿過液體表面時會產生起伏與漣漪
+
+@ Lobs sticky bombs (rockets ammo) that cling to walls, doors and monsters; alt-fire detonates them all
+zh-TW 拋出會黏在牆面、門與怪物上的黏彈（使用火箭彈）；次要射擊可全部引爆
+
+@ Look of the classic particles: GLQuake draws soft round dots, Classic draws square pixels like software Quake
+zh-TW 經典粒子的外觀：GLQuake繪製柔和圓點，經典則像軟體版Quake一樣繪製方形像素
+
+@ Low skips the background smear halo and uses fewer blur samples; high keeps the full halo and smoother streaks
+zh-TW 低會略過背景拖影光暈並使用較少模糊取樣；高則保留完整光暈與更平滑的拖影
+
+@ Low: hard particle edges, half the scripted particles and fewer hit sparks. Medium: soft edges. High: soft edges checked per MSAA sample, most hit sparks
+zh-TW 低：粒子邊緣銳利、腳本粒子減半且命中火花較少。中：柔和邊緣。高：逐MSAA取樣檢查柔和邊緣，命中火花最多
+
+@ Marks fade out before expiring; oldest marks are recycled at the limit
+zh-TW 痕跡會在消失前淡出；達到上限時會回收最舊的痕跡
+
+@ Max nested portal reflections to draw; each level redraws the scene
+zh-TW 繪製巢狀傳送門畫面的最大層數；每一層都會重新繪製場景
+
+@ Max portals per screen with a live view; each one redraws the scene
+zh-TW 每個畫面中顯示即時畫面的傳送門上限；每一個都會重新繪製場景
+
+@ Maximum distance for acquiring and keeping an enemy locked
+zh-TW 鎖定並維持鎖定敵人的最大距離
+
+@ Minimum gap between freezes, so shotgun pellets and rapid fire count once; kills ignore it
+zh-TW 兩次凍結之間的最短間隔，讓霰彈彈丸與連射只計算一次；擊殺不受此限
+
+@ Modern terminal console with autocomplete popup, history search, ANSI colors, bash shell and piping; off uses the classic Quake console
+zh-TW 具備自動完成彈出視窗、歷史搜尋、ANSI色彩、bash殼層與管線的現代終端主控台；關閉則使用經典Quake主控台
+
+@ Monsters take proportionally less damage at higher values; above 100% is harder
+zh-TW 數值越高，怪物承受的傷害按比例越少；高於100%會更困難
+
+@ Moving gibs leave blood on surfaces they touch
+zh-TW 移動中的碎肉會在接觸的表面留下血跡
+
+@ Multiplier on the freeze when the hit kills the enemy; 1 means no extra
+zh-TW 命中擊殺敵人時的凍結倍率；1代表不額外增加
+
+@ Multiplies ammo from pickups (up to the normal carry limit); below 100% is harder
+zh-TW 倍增拾取的彈藥（不超過一般攜帶上限）；低於100%會更困難
+
+@ Multiplies health from pickups (up to 100, or the item's own limit); below 100% is harder
+zh-TW 倍增拾取的生命值（最多100，或該道具本身的上限）；低於100%會更困難
+
+@ Nails stick to wood and bodies; hard surfaces deflect them to the floor
+zh-TW 鐵釘會插在木頭與屍體上；堅硬表面會讓鐵釘彈落地面
+
+@ Nearest keeps crisp classic pixels; linear smooths textures
+zh-TW 最近鄰保留清晰的經典像素；線性則讓材質平滑
+
+@ New Game: Add-ons
+zh-TW 新遊戲：附加功能
+
+@ New Game: Customize
+zh-TW 新遊戲：自訂
+
+@ Night vision: how much dark areas are brightened; thermal: how strongly heat stands out
+zh-TW 夜視：暗處提亮的程度；熱成像：熱源突顯的程度
+
+@ Night-vision and thermal goggles, cycle normal, night vision and thermal with Change Goggles (Add-ons), or use the Equipment Wheel
+zh-TW 夜視與熱成像護目鏡，可用「切換護目鏡」（附加功能）在一般、夜視與熱成像之間循環，或使用裝備輪盤
+
+@ No single freeze lasts longer than this, however much damage or kill bonus adds
+zh-TW 無論傷害或擊殺加成增加多少，單次凍結都不會超過此時間
+
+@ Oldest marks and nails are recycled at this shared limit
+zh-TW 達到此共用上限時會回收最舊的痕跡與鐵釘
+
+@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
+zh-TW 螢幕搖桿與按鈕：自動會在觸碰後顯示，並在使用其他裝置時隱藏
+
+@ Only autosaves: quicksaves and the Save menu are off
+zh-TW 僅限自動存檔：停用快速存檔與存檔選單
+
+@ Place every weapon at the center, right or left of the view, or hide all viewmodels
+zh-TW 將所有武器置於畫面中央、右側或左側，或隱藏所有武器模型
+
+@ Play your chosen hit or kill cue when you damage an enemy
+zh-TW 傷害敵人時播放所選的命中或擊殺提示音
+
+@ Playback speed: faster sounds shorter and higher
+zh-TW 播放速度：越快聲音越短、越高
+
+@ Plays the Quake theme in the main menu when no game is running
+zh-TW 未進行遊戲時，在主選單播放Quake主題曲
+
+@ Portals farther away than this are drawn as flat discs
+zh-TW 超過此距離的傳送門會繪製為平面圓盤
+
+@ Press attack once to keep firing, again to stop
+zh-TW 按一下攻擊持續射擊，再按一下停止
+
+@ Press run once to switch between running and walking
+zh-TW 按一下奔跑即可切換奔跑與行走
+
+@ Raise or lower the tone independently of sound length
+zh-TW 提高或降低音調，不影響聲音長度
+
+@ Red screen edges show where damage came from: top is front, bottom is behind; Screen Flashes controls their strength
+zh-TW 紅色畫面邊緣顯示傷害來源：上方為前方，下方為後方；強度由「螢幕閃光」控制
+
+@ Replaces the classic dot particles with glowing sparks, smoke and blood; mods with their own particle effects keep them
+zh-TW 以發光火花、煙霧與血液取代經典點狀粒子；自帶粒子效果的模組會保留其效果
+
+@ Resolution and detail inside portal and teleporter views; lower tiers trim nested effects
+zh-TW 傳送門與傳送點畫面內的解析度與細節；較低等級會削減巢狀效果
+
+@ Rippling light patterns on surfaces under water and slime
+zh-TW 水與黏液下方表面的波動光紋
+
+@ Scales all damage you take; above 100% is harder
+zh-TW 調整你承受的所有傷害；高於100%會更困難
+
+@ Screen edge for this element; elements on the same spot stack
+zh-TW 此元素所在的畫面邊緣；位置相同的元素會堆疊
+
+@ Seconds a monster hit by the boomerang stays stunned
+zh-TW 被迴力鏢擊中的怪物暈眩的秒數
+
+@ Seconds impact marks and stuck nails stay before fading out; independent of Particle Quality
+zh-TW 彈痕與插著的鐵釘在淡出前存留的秒數；與粒子品質無關
+
+@ Seconds messages at the top of the screen stay up
+zh-TW 畫面上方訊息的停留秒數
+
+@ Seconds the flick stick snap takes; lower is faster
+zh-TW 甩桿轉向所需的秒數；越低越快
+
+@ See through enhanced water; enables Water Opacity
+zh-TW 可看穿強化水面；啟用「水面不透明度」
+
+@ Sensor grain, scanlines and flicker of the goggle image
+zh-TW 護目鏡畫面的感光顆粒、掃描線與閃爍
+
+@ Shades every anti-aliasing sample; needs Anti-aliasing on
+zh-TW 對每個反鋸齒取樣進行著色；需開啟反鋸齒
+
+@ Shifts colors so they stay distinct for the chosen color blindness
+zh-TW 調整色彩，讓所選類型的色盲也能清楚分辨
+
+@ Shotgun hits leave small surface marks (cosmetic only)
+zh-TW 霰彈命中會在表面留下小彈孔（僅為外觀效果）
+
+@ Show corner ticks at screen centre while locked, even with Crosshair off
+zh-TW 鎖定時在畫面中央顯示角標，即使準星已關閉
+
+@ Show where grenades and other arcing shots will fly, bounce and land; local play only, not in deathmatch
+zh-TW 顯示榴彈與其他拋物線射擊的飛行、彈跳與落點；僅限本機遊戲，死鬥中無效
+
+@ Shows text for important sounds: doors, alerted enemies, secrets, pickups
+zh-TW 為重要聲音顯示文字：門、警覺的敵人、秘密、拾取物
+
+@ Shows the distance fog that maps and mods set; off always gives clear view
+zh-TW 顯示地圖與模組設定的遠景霧；關閉則永遠保持清晰視野
+
+@ Shows the player face next to the health number
+zh-TW 在生命值數字旁顯示玩家臉部
+
+@ Simulation detail, step rate, fade-out lifetimes and caps for gibs and shrapnel; low also skips mover collision
+zh-TW 碎肉與破片的模擬細節、步進頻率、淡出時間與上限；低也會略過與移動物體的碰撞
+
+@ Size of the on-screen buttons and move stick
+zh-TW 螢幕按鈕與移動搖桿的大小
+
+@ Slowly heals up to 100 health after 5 seconds without being hit
+zh-TW 5秒未受攻擊後，緩慢回復至100生命值
+
+@ Slows stick look while the crosshair is over an enemy
+zh-TW 準星位於敵人身上時，降低搖桿視角速度
+
+@ Slows the game down while the weapon wheel is open
+zh-TW 開啟武器輪盤時讓遊戲變慢
+
+@ Slows the whole game down; single player only. Saves and demos stay compatible with other ports
+zh-TW 讓整個遊戲變慢；僅限單人遊戲。存檔與示範錄影仍與其他移植版相容
+
+@ Small camera jolt on each freeze; off with Reduce Motion
+zh-TW 每次凍結時鏡頭輕微震動；開啟「減少動態效果」時關閉
+
+@ Snap and track enemies in local play, including split-screen; unavailable online
+zh-TW 在本機遊戲中鎖定並追蹤敵人，包括分割畫面；線上無法使用
+
+@ Sparks, smoke, chips, splinters and splashes fly off whatever your shots hit
+zh-TW 射擊命中的物體會飛出火花、煙霧、碎屑、木屑與水花
+
+@ Spawns extra copies of every monster around the original when a level starts
+zh-TW 關卡開始時，在每隻怪物周圍生成額外的複製體
+
+@ Strength of the full-screen flashes for damage, pickups and powerups
+zh-TW 受傷、拾取與強化道具全螢幕閃光的強度
+
+@ Stretch or shorten the sound while keeping its pitch
+zh-TW 在保持音高的同時拉長或縮短聲音
+
+@ Surface opacity; requires Enhanced Water and Translucent Water
+zh-TW 水面不透明度；需開啟「強化水面」與「半透明水面」
+
+@ The hook latches onto metal surfaces (metal, tech, computer panels, copper)
+zh-TW 鉤爪可勾住金屬表面（金屬、科技、電腦面板、銅）
+
+@ The hook latches onto stone, brick, rock and any surface not recognised as wood or metal
+zh-TW 鉤爪可勾住石材、磚塊、岩石，以及任何未被辨識為木頭或金屬的表面
+
+@ The hook latches onto wooden surfaces (texture names like wood, crate, plank)
+zh-TW 鉤爪可勾住木質表面（材質名稱如wood、crate、plank）
+
+@ Turn the controller's motion sensor into a look input; needs a pad with a gyroscope
+zh-TW 將手把的動作感應器用於控制視角；需要具備陀螺儀的手把
+
+@ Turns off view bob, strafe tilt and the camera kick when hit or firing
+zh-TW 關閉視角晃動、平移傾斜，以及受擊或射擊時的鏡頭後座
+
+@ Turns on the extra liquid effects; Water Settings controls each one
+zh-TW 開啟額外的液體效果；各項效果由「水面設定」控制
+
+@ Turns the view to follow a moving enemy you are aiming at
+zh-TW 轉動視角以跟隨你瞄準的移動中敵人
+
+@ Turns the view when you roll the controller sideways; 0 disables it, negative reverses it
+zh-TW 側向滾轉手把時轉動視角；0為停用，負值則反轉
+
+@ Two-portal gun: fire and alt-fire place linked portals on flat walls; assign a weapon slot in Add-ons
+zh-TW 雙傳送門槍：射擊與次要射擊會在平坦牆面放置相連的傳送門；請在附加功能中指定武器欄位
+
+@ Unlocks the FX Settings page: enhanced particles, impact effects and blood splatter
+zh-TW 解鎖特效設定頁面：強化粒子、命中效果與血跡飛濺
+
+@ Uses the 2021 re-release's smoother MD5 models (and MD3 replacements from mods) instead of the classic ones. Applies on the next map load
+zh-TW 使用2021年重製版較平滑的MD5模型（以及模組的MD3替換模型）取代經典模型。下次載入地圖時生效
+
+@ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
+zh-TW 使用地圖的彩色光照（.lit檔案或BSPX區塊）；關閉則為原版白光。下次載入地圖時生效
+
+@ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
+zh-TW 水柱分段、水滴數量與光澤液體著色：低使用較簡單的半透明水流；高使用平滑有光澤的水柱
+
+@ When gyro looking applies: always, off while +gyroaction is held, or only while it is held
+zh-TW 陀螺儀視角的作用時機：永遠、按住+gyroaction時關閉，或僅在按住時作用
+
+@ Which weapons trigger the freeze; melee covers the axe and any mod weapon used at close range without ammo
+zh-TW 哪些武器會觸發凍結；近戰包含斧頭，以及任何不耗彈藥、近距離使用的模組武器
+
+@ Your own rockets and grenades don't hurt you; rocket jumps still work
+zh-TW 自己的火箭彈與榴彈不會傷到你；火箭跳仍然有效
+
+# ==== ui.txt ====
+
+# Menus and pop-ups outside the options pages: save cards, launch, presets,
+# add-on browser, map packs, hints and dialogs.
+@ Select
+zh-TW 選擇
+
+@ Back
+zh-TW 返回
+
+@ Cancel
+zh-TW 取消
+
+@ Confirm
+zh-TW 確認
+
+@ Scroll
+zh-TW 捲動
+
+@ Section
+zh-TW 章節
+
+@ Bind
+zh-TW 綁定
+
+@ Cancel binding
+zh-TW 取消綁定
+
+@ Clear
+zh-TW 清除
+
+@ Clear pad
+zh-TW 清除手把
+
+@ Remap
+zh-TW 重新設定
+
+@ Type
+zh-TW 輸入
+
+@ Shift
+zh-TW Shift
+
+@ Done
+zh-TW 完成
+
+@ Del
+zh-TW Del
+
+@ Space
+zh-TW 空白鍵
+
+@ Save
+zh-TW 儲存
+
+@ Load
+zh-TW 載入
+
+@ Delete
+zh-TW 刪除
+
+@ Play
+zh-TW 遊玩
+
+@ Yes
+zh-TW 是
+
+@ No
+zh-TW 否
+
+@ OK
+zh-TW 確定
+
+@ System
+zh-TW 系統
+
+@ Language
+zh-TW 語言
+
+@ Help
+zh-TW 說明
+
+@ Fixed for this game: it was started without Customize
+zh-TW 此遊戲已固定：開始時未使用自訂
+
+@ Press a button or key to bind (Start cancels)
+zh-TW 按下要綁定的按鈕或按鍵（Start取消）
+
+@ Press button...
+zh-TW 按下按鈕……
+
+@ Press key...
+zh-TW 按下按鍵……
+
+@ Replace this binding?
+zh-TW 要取代此綁定嗎？
+
+@ is already assigned
+zh-TW 已被指定
+
+@ {} already assigned
+zh-TW {}已被指定
+
+@ Open Controls to remap Lock-on?
+zh-TW 要開啟控制設定以重新設定鎖定嗎？
+
+@ Lock-on
+zh-TW 鎖定
+
+@ Auto-aim Toggle
+zh-TW 自動瞄準切換
+
+@ Keyboard
+zh-TW 鍵盤
+
+@ Controller
+zh-TW 手把
+
+# main menu, dialogs and screens
+@ Map Packs
+zh-TW 地圖包
+
+@ Customize
+zh-TW 自訂
+
+@ Level Select
+zh-TW 選擇關卡
+
+@ Really quit?
+zh-TW 確定要離開嗎？
+
+@ You died
+zh-TW 你死了
+
+@ Continue from most recent save
+zh-TW 從最新存檔繼續
+
+@ Select save
+zh-TW 選擇存檔
+
+@ Restart level
+zh-TW 重新開始關卡
+
+@ Return to main menu
+zh-TW 返回主選單
+
+@ (disabled)
+zh-TW （已停用）
+
+@ (fixed for this game)
+zh-TW （此遊戲已固定）
+
+@ (off)
+zh-TW （關閉）
+
+@ Apply Display Changes
+zh-TW 套用顯示變更
+
+@ Display Mode
+zh-TW 顯示模式
+
+@ Resolution
+zh-TW 解析度
+
+@ desktop
+zh-TW 桌面
+
+@ Preset
+zh-TW 預設組合
+
+@ Map
+zh-TW 地圖
+
+@ Reset Shader Settings
+zh-TW 重設著色器設定
+
+@ Reset to Defaults
+zh-TW 恢復預設值
+
+@ Searching...
+zh-TW 搜尋中……
+
+@ This game only autosaves.
+zh-TW 此遊戲僅能自動存檔。
+
+@ (No Manual Saves modifier)
+zh-TW （禁止手動存檔規則）
+
+@ End the current game?
+zh-TW 要結束目前的遊戲嗎？
+
+@ Unsaved progress will be lost.
+zh-TW 未儲存的進度將會遺失。
+
+@ End game
+zh-TW 結束遊戲
+
+@ Overwrite
+zh-TW 覆寫
+
+@ Overwrite "{}"?
+zh-TW 要覆寫「{}」嗎？
+
+@ Saved {}
+zh-TW 已儲存{}
+
+@ Start a new game?
+zh-TW 要開始新遊戲嗎？
+
+@ New game
+zh-TW 新遊戲
+
+@ New Game
+zh-TW 新遊戲
+
+@ CUSTOM
+zh-TW 自訂
+
+@ Customize Experience
+zh-TW 自訂遊戲體驗
+
+@ Disable All
+zh-TW 全部停用
+
+@ Disable All Modifications
+zh-TW 停用所有修改
+
+@ Saves load in other source ports too.
+zh-TW 存檔也能在其他移植版中載入。
+
+@ Standard rules, no add-ons.
+zh-TW 標準規則，無附加功能。
+
+@ Choose skill
+zh-TW 選擇難度
+
+@ The current game will end
+zh-TW 目前的遊戲將會結束
+
+@ Easy
+zh-TW 簡單
+
+@ Normal
+zh-TW 普通
+
+@ Hard
+zh-TW 困難
+
+@ Nightmare
+zh-TW 夢魘
+
+# graphics preset pop-up
+@ Choose a Graphics Preset
+zh-TW 選擇畫面預設組合
+
+@ Classic
+zh-TW 經典
+
+@ Like the re-release: enhanced models,
+zh-TW 如同重製版：強化模型，
+
+@ no added effects.
+zh-TW 不加額外特效。
+
+@ Enhanced
+zh-TW 強化
+
+@ Every enhancement at its highest quality.
+zh-TW 所有強化功能皆為最高品質。
+
+@ Needs a capable GPU.
+zh-TW 需要效能足夠的GPU。
+
+@ Low-End
+zh-TW 低階
+
+@ Fastest. No anti-aliasing, original
+zh-TW 最快速。無反鋸齒、原版
+
+@ models, lowest effect quality.
+zh-TW 模型、最低特效品質。
+
+@ Esc keeps the defaults
+zh-TW Esc保留預設值
+
+@ Everything can be changed later in Options.
+zh-TW 之後都可以在Options中變更。
+
+@ Keep Defaults
+zh-TW 保留預設值
+
+# save and load cards
+@ Save Game
+zh-TW 儲存遊戲
+
+@ Load Game
+zh-TW 載入遊戲
+
+@ Autosaves
+zh-TW 自動存檔
+
+@ newest first
+zh-TW 最新的在前
+
+@ Saves: {}
+zh-TW 存檔：{}
+
+@ Browse Autosaves
+zh-TW 瀏覽自動存檔
+
+@ Every retained autosave, newest first
+zh-TW 所有保留的自動存檔，最新的在前
+
+@ New save
+zh-TW 新存檔
+
+@ Select to save your game here
+zh-TW 選擇以在此儲存遊戲
+
+@ No autosaves yet
+zh-TW 尚無自動存檔
+
+@ Autosaves are made on level entry, secrets and more (Options > Gameplay)
+zh-TW 自動存檔會在進入關卡、找到秘密等時機建立（Options > 遊戲玩法）
+
+@ No saves yet
+zh-TW 尚無存檔
+
+@ Save from the Single Player menu, or press F6 to quicksave
+zh-TW 請從Single Player選單存檔，或按F6快速存檔
+
+@ No picture
+zh-TW 無圖片
+
+@ Del: delete save
+zh-TW Del：刪除存檔
+
+@ Delete "{}"?
+zh-TW 要刪除「{}」嗎？
+
+@ This cannot be undone.
+zh-TW 此操作無法復原。
+
+@ Quicksave
+zh-TW 快速存檔
+
+@ Autosave: {}
+zh-TW 自動存檔：{}
+
+@ unknown trigger
+zh-TW 未知觸發條件
+
+@ Latest - {}
+zh-TW 最新－{}
+
+@ Health {}
+zh-TW 生命值{}
+
+@ Armor {}
+zh-TW 護甲{}
+
+@ Kills {}/{}
+zh-TW 擊殺{}/{}
+
+@ Secrets {}/{}
+zh-TW 秘密{}/{}
+
+@ Split-screen, {} players
+zh-TW 分割畫面，{}名玩家
+
+@ Co-op
+zh-TW 合作
+
+@ Customized
+zh-TW 自訂
+
+@ Customized, {}
+zh-TW 自訂，{}
+
+@ Date unavailable
+zh-TW 無日期資訊
+
+@ Just now
+zh-TW 剛剛
+
+@ {} min ago
+zh-TW {}分鐘前
+
+@ {} h ago
+zh-TW {}小時前
+
+@ Level entry
+zh-TW 進入關卡
+
+@ Secret found
+zh-TW 找到秘密
+
+@ All enemies killed
+zh-TW 消滅所有敵人
+
+@ All secrets found
+zh-TW 找到所有秘密
+
+@ Timer
+zh-TW 定時
+
+# customize pages
+@ Standard rules
+zh-TW 標準規則
+
+@ Modifiers changed: {}
+zh-TW 已變更的規則：{}
+
+@ no add-ons
+zh-TW 無附加功能
+
+@ add-ons: {}
+zh-TW 附加功能：{}
+
+@ Saves of this game are .qsa files: they need this source port.
+zh-TW 此遊戲的存檔為.qsa檔案：需要使用本移植版。
+
+@ Nothing changed: this plays as standard Quake.
+zh-TW 沒有任何變更：遊玩方式與標準Quake相同。
+
+@ Changes apply now and are saved with this game (.qsa).
+zh-TW 變更立即生效，並隨此遊戲一同儲存（.qsa）。
+
+@ This game started without Customize, so its rules are fixed.
+zh-TW 此遊戲開始時未使用自訂，因此規則已固定。
+
+@ Start a new game and choose Customize Experience.
+zh-TW 請開始新遊戲並選擇「自訂遊戲體驗」。
+
+@ These rules apply to the next customized game.
+zh-TW 這些規則會套用到下一場自訂遊戲。
+
+# add-on browser
+@ Fire
+zh-TW 射擊
+
+@ Alt Fire
+zh-TW 次要射擊
+
+@ Configure Parameters >
+zh-TW 設定參數 >
+
+@ Configure
+zh-TW 設定
+
+@ Settings
+zh-TW 設定
+
+@ Change slot
+zh-TW 變更欄位
+
+@ Toggle
+zh-TW 切換
+
+@ Details
+zh-TW 詳細資訊
+
+@ Enter or click the box: toggle
+zh-TW Enter或點擊方框：切換
+
+@ Right / Tab / click: details
+zh-TW 右／Tab／點擊：詳細資訊
+
+@ Input Remapping
+zh-TW 重新設定按鍵
+
+@ Weapon Slot
+zh-TW 武器欄位
+
+@ Customized games save as .qsa files, which need this source port.
+zh-TW 自訂遊戲會儲存為.qsa檔案，需要使用本移植版。
+
+@ This game started without Customize, so its add-ons are fixed. Customize a new game instead.
+zh-TW 此遊戲開始時未使用自訂，因此附加功能已固定。請改為自訂一場新遊戲。
+
+@ Bullet Time
+zh-TW 子彈時間
+
+@ Change Goggles
+zh-TW 切換護目鏡
+
+@ Dodge / Dive
+zh-TW 閃避／飛撲
+
+@ Goggles
+zh-TW 護目鏡
+
+@ Hitstop
+zh-TW 命中停頓
+
+@ Projectile Shotguns
+zh-TW 實體彈霰彈槍
+
+@ BULLET TIME: 20%
+zh-TW 子彈時間：20%
+
+@ NORMAL SPEED
+zh-TW 正常速度
+
+@ SLOW MOTION: PHYSICAL PELLETS
+zh-TW 慢動作：物理彈丸
+
+@ DEMONSTRATION
+zh-TW 示範
+
+@ GAMEPLAY
+zh-TW 實際遊玩
+
+@ LOOP
+zh-TW 循環
+
+@ Preview unavailable
+zh-TW 無法預覽
+
+# shader and language help lines
+@ A setting of the chosen shader; arrows step it, Enter is not needed
+zh-TW 所選著色器的一項設定；以方向鍵調整，不需按Enter
+
+@ Language of the menus, messages and the 2021 re-release's game text; System follows your computer's language
+zh-TW 選單、訊息與2021年重製版遊戲文字的語言；系統會依照電腦的語言設定
+
+@ Puts every setting of the chosen shader back to the preset's defaults
+zh-TW 將所選著色器的所有設定恢復為預設組合的預設值
+
+@ RetroArch slang shader on the final image: CRT, scanlines, NTSC, sharpening; add your own in <game>/shaders
+zh-TW 套用於最終畫面的RetroArch slang著色器：CRT、掃描線、NTSC、銳利化；可將自己的著色器放入<game>/shaders
+
+# modern console footer
+@ Shift+PgUp/Dn: height  ` : hide
+zh-TW Shift+PgUp/Dn：高度  `：隱藏
+
+@ Tab: complete  Ctrl+R: search  bash | pipe
+zh-TW Tab：自動完成  Ctrl+R：搜尋  bash | 管線
+
+@ ↑ +{} lines (End to jump) 
+zh-TW ↑ +{}行（按End跳至底部）
+
+# add-on descriptions
+@ Create two linked portals on flat walls. Fire places the first portal; Alt Fire places the second. Walk through either portal to emerge from the other. Your momentum carries through. Assign a weapon slot below: pressing that slot repeatedly cycles its ordinary weapon and every enabled add-on assigned there. Portal view quality is configurable below.
+zh-TW 在平坦牆面上建立兩個相連的傳送門。射擊放置第一個傳送門，次要射擊放置第二個。走進任一傳送門即可從另一個出來，動量也會保留。請在下方指定武器欄位：重複按下該欄位，會在原本的武器與指定到該欄位的所有已啟用附加功能之間循環。傳送門畫面品質可在下方設定。
+
+@ Hold Fire and sweep the crosshair over monsters to queue targets. Release Fire to throw: the boomerang visits each target, stuns it and returns to you. Alt Fire clears the queue. The weapon slot selects a group, not a separate hotkey: press it again to cycle through the weapons in that slot. Configure stun duration and flight speed below.
+zh-TW 按住射擊並將準星掃過怪物以排入目標佇列。放開射擊即投擲：迴力鏢會依序飛向每個目標並將其擊暈，然後回到你手上。次要射擊可清除佇列。武器欄位選擇的是一組武器，而非獨立快捷鍵：再按一次即可在該欄位的武器之間循環。暈眩時間與飛行速度可在下方設定。
+
+@ Hold Fire to charge a sticky bomb using rocket ammunition; release to launch. A longer charge throws it faster. Bombs cling to walls, doors and monsters. Alt Fire detonates your planted bombs together. Place a trap, retreat, then detonate it when enemies approach. Assign any weapon slot below; repeated presses cycle through the ordinary weapon and add-ons in that slot.
+zh-TW 按住射擊以火箭彈蓄力發射黏彈，放開即射出。蓄力越久投擲越快。黏彈會黏在牆面、門與怪物上。次要射擊會同時引爆所有已放置的黏彈。設下陷阱、後退，等敵人靠近時再引爆。請在下方指定任一武器欄位；重複按下會在該欄位的原本武器與附加功能之間循環。
+
+@ Fire launches a chain hook. It latches onto a permitted surface or enemy and reels you toward the anchor. Fire again or use Alt Fire to let go. Choose which materials and enemies can be hooked in Configure Parameters. Assign it to any weapon slot; repeated presses of the slot's existing binding cycle through its weapons.
+zh-TW 射擊會射出鎖鏈鉤。鉤爪勾住允許的表面或敵人後，會把你拉向錨點。再次射擊或使用次要射擊即可放開。可在「設定參數」中選擇哪些材質與敵人可以被勾住。可指定到任一武器欄位；重複按下該欄位原有的按鍵即可在其武器之間循環。
+
+@ A piercing railgun inspired by Quake III. Fire sends a slug through every enemy along its line. Each shot consumes two cells, with a 1.5 second refire interval. Damage and the spiral trail colour are configurable below. Choose a weapon slot: the slot's current binding selects and cycles the weapons assigned to it.
+zh-TW 靈感來自Quake III的貫穿型磁軌砲。射擊時彈頭會貫穿直線上的所有敵人。每發消耗兩個電池，射擊間隔1.5秒。傷害與螺旋軌跡顏色可在下方設定。請選擇武器欄位：該欄位目前的按鍵會選取並循環指定到該欄位的武器。
+
+@ A Portal-style gel sprayer. Fire sprays blue Repulsion gel: land, jump or run into it to bounce, and landings on it never hurt. Alt Fire sprays orange Propulsion gel: run across it to go much faster. Gel coats floors and walls until washed off with the Powerwasher. Assign a weapon slot below; repeated presses cycle the weapons in that slot.
+zh-TW Portal風格的凝膠噴射器。射擊噴出藍色彈跳凝膠：落在上面、跳上去或跑進去都會彈起，而且落在上面永遠不會受傷。次要射擊噴出橘色加速凝膠：跑過去就能大幅加速。凝膠會覆蓋地板與牆面，直到用高壓清洗機沖掉為止。請在下方指定武器欄位；重複按下會在該欄位的武器之間循環。
+
+@ A water cannon. Fire shoots a straight jet with limited reach; Alt Fire a wide, shorter fan. The water pushes enemies back, turns projectiles aside and washes away gel and blood. Push strength is configurable below. Assign a weapon slot below; repeated presses cycle the weapons in that slot.
+zh-TW 水砲。射擊會噴出射程有限的直線水柱；次要射擊則噴出較寬、較短的扇形水流。水流會擊退敵人、偏轉投射物，並沖掉凝膠與血跡。沖力可在下方設定。請在下方指定武器欄位；重複按下會在該欄位的武器之間循環。
+
+@ One equipment add-on includes both night vision and thermal vision. The Change Goggles action cycles Normal, Night Vision, Thermal, then Normal again. Night vision brightens dark rooms; thermal vision highlights living enemies. Goggles do not occupy a weapon slot. Configure intensity and sensor noise below. The binding affects only this add-on.
+zh-TW 一個裝備附加功能同時具備夜視與熱成像。「切換護目鏡」動作會依序切換一般、夜視、熱成像，再回到一般。夜視可照亮黑暗的房間；熱成像會凸顯活著的敵人。護目鏡不佔用武器欄位。強度與感光雜訊可在下方設定。此按鍵綁定只影響這個附加功能。
+
+@ Press Dodge with a movement direction on the ground or in midair: dive forward or leap backward and sideways. Diagonals are supported. Each press launches once, with a short recovery. The player body animates in third person. Assign the Dodge action below or in Controls.
+zh-TW 在地面或空中按下閃避並配合移動方向：向前飛撲，或向後、向側面跳躍。支援斜向。每按一次發動一次，之後有短暫的恢復時間。第三人稱下會顯示玩家身體的動畫。可在下方或「控制」中指定閃避動作。
+
+@ Use the dedicated Bullet Time action to slow the whole local game to 20% speed. Hold is the default; Toggle switches on each press. The optional meter limits use in real seconds and regenerates while inactive. Disable the meter for unlimited use. Remap the action and configure duration and regeneration below.
+zh-TW 使用專屬的子彈時間動作，讓整個本機遊戲減速至20%。預設為按住；切換則是每按一次開關一次。可選的計量條會以真實秒數限制使用時間，未使用時會回復。停用計量條即可無限使用。可在下方重新設定動作，並設定持續時間與回復速度。
+
+@ Both shotguns and enemy grunts fire physical pellets with their original spread and damage. Fast default projectiles feel immediate; lower their speed to dodge incoming fire during bullet time. Configure projectile speed below, or reset it to the default of 10000 units per second.
+zh-TW 兩把霰彈槍與敵方士兵都會發射實體彈丸，保有原本的散佈與傷害。預設的高速彈體感覺與即時命中無異；降低速度即可在子彈時間中閃避來襲的火力。可在下方設定彈體速度，或恢復為預設的每秒10000單位。
+
+@ Freezes the game for a split second when you damage an enemy, so hits feel heavier. Single player only. Choose which weapons trigger it (all, melee, ranged or explosives), how long it lasts and how much more a kill freezes. Advanced settings cover enemy toughness, damage scaling, cooldown and the longest freeze.
+zh-TW 傷害敵人時讓遊戲凍結一瞬間，讓命中更有打擊感。僅限單人遊戲。可選擇觸發的武器（全部、近戰、遠程或爆炸武器）、持續時間，以及擊殺時額外凍結多久。進階設定包含敵人強度、傷害比例、冷卻時間與最長凍結時間。
+
+# map packs and the Quaddicted browser
+@ Get more maps (Quaddicted)...
+zh-TW 取得更多地圖（Quaddicted）……
+
+@ Type to filter...
+zh-TW 輸入文字以篩選……
+
+@ Launch mod
+zh-TW 啟動模組
+
+@ Start first map
+zh-TW 開始第一張地圖
+
+@ (running)
+zh-TW （執行中）
+
+@ running
+zh-TW 執行中
+
+@ Recent
+zh-TW 最近
+
+@ Name
+zh-TW 名稱
+
+@ Dir
+zh-TW 目錄
+
+@ Default
+zh-TW 預設
+
+@ Title
+zh-TW 標題
+
+@ Sort: {}
+zh-TW 排序：{}
+
+@ {} installed
+zh-TW 已安裝{}個
+
+@ {}/{} matching
+zh-TW {}/{}個符合
+
+@ {} maps, {} completed
+zh-TW {}張地圖，已完成{}張
+
+@ {}/{} matching, {} completed
+zh-TW {}/{}個符合，已完成{}個
+
+@ no maps of its own
+zh-TW 沒有自己的地圖
+
+@ dir: {}
+zh-TW 目錄：{}
+
+@ base: {}
+zh-TW 基礎：{}
+
+@ Browse the Quaddicted archive of
+zh-TW 瀏覽Quaddicted收藏的
+
+@ single-player maps and episodes,
+zh-TW 單人地圖與章節，
+
+@ then download and install them
+zh-TW 並直接在這裡下載、
+
+@ here. Each release gets its own
+zh-TW 安裝。每個作品在此清單中
+
+@ entry in this list.
+zh-TW 都有自己的項目。
+
+@ Needs an internet connection.
+zh-TW 需要網路連線。
+
+@ Quaddicted Map Archive
+zh-TW Quaddicted地圖資料庫
+
+@ Newest
+zh-TW 最新
+
+@ Author
+zh-TW 作者
+
+@ Size
+zh-TW 大小
+
+@ Loading the map list...
+zh-TW 正在載入地圖清單……
+
+@ Couldn't load the map list: {}
+zh-TW 無法載入地圖清單：{}
+
+@ {} single-player releases  -  F5 refreshes
+zh-TW {}個單人作品  -  F5重新整理
+
+@ {} matching
+zh-TW {}個符合
+
+@ by {}
+zh-TW 作者：{}
+
+@ requires: {}
+zh-TW 需要：{}
+
+@ maps: {}
+zh-TW 地圖：{}
+
+@ Failed: {}
+zh-TW 失敗：{}
+
+@ Downloading... {}%
+zh-TW 下載中……{}%
+
+@ Unpacking...
+zh-TW 解壓縮中……
+
+@ Installed in {}/  -  Enter: play
+zh-TW 已安裝至{}/  -  Enter：遊玩
+
+@ Enter: download and install
+zh-TW Enter：下載並安裝
+
+@ unpacking
+zh-TW 解壓縮中
+
+@ failed
+zh-TW 失敗
+
+@ installed
+zh-TW 已安裝
+
+@ Downloads are not available in the browser build
+zh-TW 瀏覽器版本無法下載
+
+@ the map list could not be read
+zh-TW 無法讀取地圖清單
+
+@ downloading needs the curl program
+zh-TW 下載需要curl程式
+
+@ download failed
+zh-TW 下載失敗
+
+@ the download is not a valid zip
+zh-TW 下載的檔案不是有效的zip
+
+@ nothing to install for this engine
+zh-TW 沒有適用於此引擎的安裝內容
+
+@ needs {} installed first
+zh-TW 需要先安裝{}
+
+@ couldn't unpack {}
+zh-TW 無法解壓縮{}
+
+# help screen
+@ About
+zh-TW 關於
+
+@ < Back
+zh-TW < 返回
+
+# tr_ctx keys: English shows the short word, the key says which meaning
+@ Save (a manual save, as opposed to a quicksave or autosave)
+zh-TW 存檔
+
+# ==== hud.txt ====
+
+# HUD, weapon and equipment wheels, sound captions and other in-game text.
+# Weapon, monster and item names follow the 2021 re-release's own translations.
+@ Axe
+zh-TW 斧頭
+
+@ Shotgun
+zh-TW 霰彈槍
+
+@ Double-Barrelled Shotgun
+zh-TW 雙管霰彈槍
+
+@ Nailgun
+zh-TW 釘槍
+
+@ Super Nailgun
+zh-TW 超級釘槍
+
+@ Grenade Launcher
+zh-TW 榴彈發射器
+
+@ Rocket Launcher
+zh-TW 火箭發射器
+
+@ Thunderbolt
+zh-TW 雷電槍
+
+@ Portal Gun
+zh-TW 傳送門槍
+
+@ Boomerang
+zh-TW 迴力鏢
+
+@ Stickybomb Launcher
+zh-TW 黏彈發射器
+
+@ Railgun
+zh-TW 磁軌砲
+
+@ Hookshot
+zh-TW 鉤爪
+
+@ Gel Sprayer
+zh-TW 凝膠噴射器
+
+@ Powerwasher
+zh-TW 高壓清洗機
+
+@ Night Vision Goggles
+zh-TW 夜視護目鏡
+
+@ Thermal Goggles
+zh-TW 熱成像護目鏡
+
+@ Normal vision
+zh-TW 一般視覺
+
+@ ON
+zh-TW 開
+
+@ OFF
+zh-TW 關
+
+@ {} (turn on)
+zh-TW {}（開啟）
+
+@ {} (turn off)
+zh-TW {}（關閉）
+
+@ Move mouse to select, release to toggle
+zh-TW 移動滑鼠選擇，放開即切換
+
+@ Move mouse to select, release to equip
+zh-TW 移動滑鼠選擇，放開即裝備
+
+@ Release to toggle
+zh-TW 放開即切換
+
+@ Release to equip
+zh-TW 放開即裝備
+
+@ shells
+zh-TW 霰彈
+
+@ nails
+zh-TW 鐵釘
+
+@ rockets
+zh-TW 火箭彈
+
+@ cells
+zh-TW 電池
+
+@ Kills: {}/{}
+zh-TW 擊殺：{}/{}
+
+@ Secrets: {}/{}
+zh-TW 秘密：{}/{}
+
+@ Time {}
+zh-TW 時間{}
+
+@ Press any button to continue...
+zh-TW 按任意按鈕繼續……
+
+@ Press any key to continue...
+zh-TW 按任意鍵繼續……
+
+@ BULLET TIME
+zh-TW 子彈時間
+
+@ AUTO AIM
+zh-TW 自動瞄準
+
+@ Crosshair
+zh-TW 準星
+
+@ + Marker
+zh-TW ＋標記
+
+@ Hit markers off
+zh-TW 命中標記關閉
+
+@ On target
+zh-TW 瞄準目標
+
+@ On kill
+zh-TW 擊殺時
+
+# sound captions
+@ [Secret found]
+zh-TW [找到秘密]
+
+@ [Message]
+zh-TW [訊息]
+
+@ [Switch activated]
+zh-TW [開關啟動]
+
+@ [Key picked up]
+zh-TW [拾取鑰匙]
+
+@ [Rune picked up]
+zh-TW [拾取符文]
+
+@ [Teleporter]
+zh-TW [傳送點]
+
+@ [Teleport]
+zh-TW [傳送]
+
+@ [Splash]
+zh-TW [水花聲]
+
+@ [Leaving water]
+zh-TW [離開水中]
+
+@ [Door]
+zh-TW [門]
+
+@ [Platform moving]
+zh-TW [平台移動]
+
+@ [Button]
+zh-TW [按鈕]
+
+@ [Health picked up]
+zh-TW [拾取生命值]
+
+@ [Armor picked up]
+zh-TW [拾取護甲]
+
+@ [Quad Damage wearing off]
+zh-TW [四倍傷害即將失效]
+
+@ [Quad Damage]
+zh-TW [四倍傷害]
+
+@ [Pentagram wearing off]
+zh-TW [五芒星即將失效]
+
+@ [Pentagram of Protection]
+zh-TW [守護五芒星]
+
+@ [Ring wearing off]
+zh-TW [戒指即將失效]
+
+@ [Ring of Shadows]
+zh-TW [暗影之戒]
+
+@ [Biosuit wearing off]
+zh-TW [防護服即將失效]
+
+@ [Biosuit]
+zh-TW [生化防護服]
+
+@ [Item picked up]
+zh-TW [拾取物品]
+
+@ [Weapon picked up]
+zh-TW [拾取武器]
+
+@ [Ammo picked up]
+zh-TW [拾取彈藥]
+
+@ [Explosion]
+zh-TW [爆炸]
+
+@ [Grenade launched]
+zh-TW [發射榴彈]
+
+@ [Grenade bounce]
+zh-TW [榴彈彈跳]
+
+@ [Rocket fired]
+zh-TW [發射火箭彈]
+
+@ [Nails fired]
+zh-TW [發射鐵釘]
+
+@ [Lightning]
+zh-TW [閃電]
+
+@ [Thunder]
+zh-TW [雷聲]
+
+@ [Enforcer alerted]
+zh-TW [執法者警覺]
+
+@ [Grunt alerted]
+zh-TW [士兵警覺]
+
+@ [Rottweiler alerted]
+zh-TW [羅威納犬警覺]
+
+@ [Knight alerted]
+zh-TW [騎士警覺]
+
+@ [Death Knight alerted]
+zh-TW [死亡騎士警覺]
+
+@ [Scrag alerted]
+zh-TW [飛魔警覺]
+
+@ [Ogre alerted]
+zh-TW [食人魔警覺]
+
+@ [Fiend alerted]
+zh-TW [惡魔警覺]
+
+@ [Shambler alerted]
+zh-TW [蹣跚巨獸警覺]
+
+@ [Zombie groaning]
+zh-TW [殭屍呻吟]
+
+@ [Vore alerted]
+zh-TW [吞噬者警覺]
+
+@ [Vore attacking]
+zh-TW [吞噬者攻擊]
+
+@ [Spawn alerted]
+zh-TW [黏液怪警覺]
+
+@ [Rotfish]
+zh-TW [腐魚]
+
+@ [Spawn]
+zh-TW [黏液怪]
+
+@ [Chthon]
+zh-TW [克頌]
+
+@ [Hard landing]
+zh-TW [重重落地]
+
+@ [Drowning]
+zh-TW [溺水]
+
+@ [Gasping for air]
+zh-TW [大口喘氣]
+
+@ [Burning]
+zh-TW [燃燒]
+
+@ [Telefrag]
+zh-TW [傳送擊殺]
+
+@ [Gibbed]
+zh-TW [碎屍]
+
+# ==== console.txt ====
+
+# Console messages, shown translated only with con_translate 1 (Translate Console).
+# Cvar and command names stay as they are.
+@ Autosaved.
+zh-TW 已自動存檔。
+
+@ Game saved.
+zh-TW 遊戲已儲存。
+
+@ Can't save now.
+zh-TW 目前無法存檔。
+
+@ This game only autosaves (No Manual Saves modifier).
+zh-TW 此遊戲僅能自動存檔（禁止手動存檔規則）。
+
+@ Loading {}...
+zh-TW 正在載入{}……
+
+@ load failed: {}
+zh-TW 載入失敗：{}
+
+@ ERROR: autosave failed: {}
+zh-TW 錯誤：自動存檔失敗：{}
+
+@ ERROR: couldn't open {}
+zh-TW 錯誤：無法開啟{}
+
+@ ERROR: couldn't open {}.
+zh-TW 錯誤：無法開啟{}。
+
+@ ERROR: couldn't write {}: {}
+zh-TW 錯誤：無法寫入{}：{}
+
+@ ERROR: couldn't create {}: {}
+zh-TW 錯誤：無法建立{}：{}
+
+@ couldn't write {}: {}
+zh-TW 無法寫入{}：{}
+
+@ Wrote {}
+zh-TW 已寫入{}
+
+@ screenshot failed: {}
+zh-TW 螢幕截圖失敗：{}
+
+@ screenshot: {}
+zh-TW 螢幕截圖：{}
+
+@ No readable save available. Select save or restart the level.
+zh-TW 沒有可讀取的存檔。請選擇存檔或重新開始關卡。
+
+@ Unknown command "{}"
+zh-TW 未知的指令「{}」
+
+@ couldn't exec {}
+zh-TW 無法執行{}
+
+@ execing {}
+zh-TW 正在執行{}
+
+@ execing config.cfg (inherited from {})
+zh-TW 正在執行config.cfg（繼承自{}）
+
+@ execing config.cfg (mod defaults)
+zh-TW 正在執行config.cfg（模組預設）
+
+@ execing default.cfg (built-in)
+zh-TW 正在執行default.cfg（內建）
+
+@ {} cvars
+zh-TW {}個變數
+
+@ {} commands
+zh-TW {}個指令
+
+@ Can't "cmd", not connected
+zh-TW 無法使用「cmd」，尚未連線
+
+@ Looking for Quake servers...
+zh-TW 正在搜尋Quake伺服器……
+
+@ Bad value, must be between 1 and 65534
+zh-TW 數值無效，必須介於1到65534之間
+
+@ Couldn't handle music file {}
+zh-TW 無法處理音樂檔案{}
+
+@ Bug report written to {}
+zh-TW 錯誤報告已寫入{}
+
+@ bugreport: can't create {}: {}
+zh-TW bugreport：無法建立{}：{}
+
+@ graphics preset: {}
+zh-TW 畫面預設組合：{}
+
+@ Presets (r_shader_preset <name>):
+zh-TW 預設組合（r_shader_preset <name>）：
+
+@ Add your own .slangp presets under <game>/shaders/.
+zh-TW 可將自己的.slangp預設組合放在<game>/shaders/下。
+
+@ no shader preset loaded (r_shader_preset)
+zh-TW 未載入著色器預設組合（r_shader_preset）
+
+@ r_shader_preset: "{}" not found
+zh-TW r_shader_preset：找不到「{}」
+
+@ no parameter "{}" in this preset
+zh-TW 此預設組合中沒有參數「{}」
+
+@ {} = {} (default {}, {}..{})
+zh-TW {} = {}（預設{}，{}..{}）
+
+@ Switching to {}...
+zh-TW 正在切換至{}……
+
+@ game: no game dir "{}" in {}
+zh-TW game：沒有遊戲目錄「{}」（位於{}）
+
+@ game: can't find the engine executable
+zh-TW game：找不到引擎執行檔
+
+@ game: exec failed: {}
+zh-TW game：執行失敗：{}
+
+@ game: launch failed: {}
+zh-TW game：啟動失敗：{}
+
+@ loaded {} in {}s
+zh-TW 已載入{}，耗時{}秒
+
+@ No demos listed with startdemos
+zh-TW startdemos未列出任何示範錄影
+
+@ Playing demo from {}.
+zh-TW 正在播放示範錄影：{}。
+
+@ {} frames {} seconds {} fps
+zh-TW {}影格 {}秒 {}fps
+
+@ Recording to {}.
+zh-TW 正在錄製至{}。
+
+@ Completed demo
+zh-TW 示範錄影已完成
+
+@ Can't record during demo playback
+zh-TW 播放示範錄影時無法錄製
+
+@ Relative pathnames are not allowed.
+zh-TW 不允許使用相對路徑。
+
+@ Can't record - try again when connected
+zh-TW 無法錄製－請在連線後再試一次
+
+@ {} demo(s) in loop
+zh-TW 循環中有{}個示範錄影
+
+@ Not recording a demo.
+zh-TW 目前未錄製示範錄影。
+
+@ {} joined on a gamepad
+zh-TW {}已使用手把加入
+
+@ goggles: needs a game started with Add-ons and Goggles enabled
+zh-TW goggles：需要在啟用附加功能與護目鏡的情況下開始遊戲
+
+@ equip: needs a game started with Add-ons and Goggles enabled
+zh-TW equip：需要在啟用附加功能與護目鏡的情況下開始遊戲
+
+@ UDP listening on port {}
+zh-TW UDP正在監聽連接埠{}
+
+@ UDP bind on port {} failed: {}
+zh-TW UDP綁定連接埠{}失敗：{}
+
+@ Connection accepted by {}
+zh-TW {}已接受連線
+
+@ Connection failed: {}
+zh-TW 連線失敗：{}
+
+@ Couldn't resolve {}
+zh-TW 無法解析{}
+
+@ Connecting to {}...
+zh-TW 正在連線至{}……
+
+@ Connecting to QuakeWorld server {}...
+zh-TW 正在連線至QuakeWorld伺服器{}……
+
+@ Disconnected: {}
+zh-TW 已中斷連線：{}
+
+@ Server disconnected
+zh-TW 伺服器已中斷連線
+
+@ Client {} connected
+zh-TW 用戶端{}已連線
+
+@ Client {} timed out
+zh-TW 用戶端{}連線逾時
+
+@ Couldn't spawn server {}: {}
+zh-TW 無法啟動伺服器{}：{}
+
+@ maxplayers can not be changed while a server is running.
+zh-TW 伺服器執行時無法變更maxplayers。
+
+@ You can't kick yourself!
+zh-TW 你不能踢出自己！
+
+@ Only the server may changelevel
+zh-TW 只有伺服器可以使用changelevel
+
+@ {} renamed to {}
+zh-TW {}已改名為{}

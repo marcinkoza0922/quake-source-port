@@ -1,0 +1,3024 @@
+# mk: the port's own text; English keys from crates/qcore/lang/*.txt.
+# Format in crates/qcore/src/lang/catalog.rs; check with tools/lang_check.py.
+
+# ==== menu.txt ====
+
+# Options pages: page names, row labels and choice values.
+@ 10% speed
+mk брзина 10%
+
+@ 2 split-screen
+mk 2 на поделен екран
+
+@ 3 split-screen
+mk 3 на поделен екран
+
+@ 4 split-screen
+mk 4 на поделен екран
+
+@ 5 split-screen
+mk 5 на поделен екран
+
+@ 6 split-screen
+mk 6 на поделен екран
+
+@ 2D aiming
+mk 2D нишанење
+
+@ 2x monsters
+mk чудовишта x2
+
+@ 3x monsters
+mk чудовишта x3
+
+@ 4x monsters
+mk чудовишта x4
+
+@ 3D resolution
+mk 3D резолуција
+
+@ 3D view
+mk 3D поглед
+
+@ 8-bit Color
+mk 8-битна боја
+
+@ Accessibility
+mk Пристапност
+
+@ Acquisition Cone
+mk Конус на зафаќање
+
+@ Activation
+mk Активирање
+
+@ Add a ringing room tail after the cue
+mk Додава ѕвонлив одек на просторијата по сигналот
+
+@ Add delayed repeats after the cue
+mk Додава задоцнети повторувања по сигналот
+
+@ Add saturation and distortion
+mk Додава заситеност и изобличување
+
+@ Add-ons
+mk Додатоци
+
+@ Address
+mk Адреса
+
+@ Adds fine noise to hide color banding
+mk Додава фин шум што ги крие боените ленти
+
+@ Advanced Settings
+mk Напредни поставки
+
+@ Aim Assist
+mk Помош при нишанење
+
+@ Aim Rotation
+mk Вртење кон целта
+
+@ Aim Slowdown
+mk Забавување на нишанот
+
+@ Aim Style
+mk Стил на нишанење
+
+@ All
+mk Сите
+
+@ All enemies
+mk Сите непријатели
+
+@ Alt Fire (Add-ons)
+mk Алт. пукање (додатоци)
+
+@ Always Run
+mk Секогаш трчај
+
+@ Ambient Occlusion
+mk Амбиентна оклузија
+
+@ Ammo Counts
+mk Бројачи на муниција
+
+@ Ammo Counts Position
+mk Позиција на бројачите
+
+@ Ammo Pickups
+mk Подигање муниција
+
+@ Anisotropic
+mk Анизотропно
+
+@ Anti-aliasing
+mk Измазнување
+
+@ Apply To
+mk Примени на
+
+@ Armor
+mk Оклоп
+
+@ Armor Position
+mk Позиција на оклопот
+
+@ Ask
+mk Прашај
+
+@ Attack
+mk Напад
+
+@ Audio
+mk Звук
+
+@ Auto-aim
+mk Автонишан
+
+@ Auto-aim Settings
+mk Поставки за автонишан
+
+@ Autosave
+mk Автозачувување
+
+@ Autosave Settings
+mk Поставки за автозачувување
+
+@ Autosave Timer
+mk Тајмер за автозачувување
+
+@ Autosaves to Keep
+mk Чувани автозачувувања
+
+@ Bass
+mk Бас
+
+@ Blip
+mk Блип
+
+@ Blood Quality
+mk Квалитет на крвта
+
+@ Blood Splatter Settings
+mk Поставки за прскање крв
+
+@ Blue
+mk Сина
+
+@ Boomerang Settings
+mk Поставки за бумеранг
+
+@ Boost or cut high frequencies in decibels
+mk Засилува или ослабува високи фреквенции во dB
+
+@ Boost or cut low frequencies in decibels
+mk Засилува или ослабува ниски фреквенции во dB
+
+@ Brightness
+mk Осветленост
+
+@ Bullet Time (Add-ons)
+mk Забавено време (додатоци)
+
+@ Bullet Time Settings
+mk Поставки за забавено време
+
+@ Button Glyphs
+mk Икони на копчињата
+
+@ Button Size
+mk Големина на копчињата
+
+@ Camera
+mk Камера
+
+@ Caustic Intensity
+mk Јачина на каустика
+
+@ Caustics
+mk Каустика
+
+@ Center
+mk Центар
+
+@ Center Message Position
+mk Позиција на пораките во центар
+
+@ Center Message Time
+mk Време на пораките во центар
+
+@ Center View
+mk Центрирај поглед
+
+@ Change Color on Kill
+mk Боја при убиство
+
+@ Change Color on Target
+mk Боја при цел
+
+@ Chime
+mk Ѕвонче
+
+@ Click
+mk Клик
+
+@ Clink
+mk Ѕвекот
+
+@ Coin
+mk Паричка
+
+@ Color
+mk Боја
+
+@ Color Filter
+mk Филтер за боја
+
+@ Color of the grenade arc
+mk Боја на патеката на гранатата
+
+@ Colored Lighting
+mk Обоено осветлување
+
+@ Connect
+mk Поврзи се
+
+@ Contrast
+mk Контраст
+
+@ Controls
+mk Контроли
+
+@ Cooldown (ms)
+mk Пауза (мс)
+
+@ Crosshair Outline
+mk Раб на нишанот
+
+@ Crosshair Shape
+mk Облик на нишанот
+
+@ Crosshair Size
+mk Големина на нишанот
+
+@ Current Ammo
+mk Тековна муниција
+
+@ Current Ammo Position
+mk Позиција на тековната муниција
+
+@ Customize This Game
+mk Прилагоди ја играва
+
+@ Damage
+mk Штета
+
+@ Damage Taken
+mk Примена штета
+
+@ Debris
+mk Крхотини
+
+@ Debris Quality
+mk Квалитет на крхотини
+
+@ Debris Settings
+mk Поставки за крхотини
+
+@ Directional Damage
+mk Насока на штетата
+
+@ Dithering
+mk Дитеринг
+
+@ Dodge / Dive (Add-ons)
+mk Избегнување / нуркање (додатоци)
+
+@ Dragging up looks down instead of up
+mk Влечењето нагоре го спушта погледот надолу
+
+@ Drive
+mk Преоптоварување
+
+@ Dynamic Lights
+mk Динамично светло
+
+@ Echo
+mk Ехо
+
+@ Enemy Health
+mk Здравје на непријателите
+
+@ Enemy Wounds
+mk Рани на непријателите
+
+@ Enhanced Blood Splatter
+mk Подобрено прскање крв
+
+@ Enhanced FX
+mk Подобрени ефекти
+
+@ Enhanced Models
+mk Подобрени модели
+
+@ Enhanced Particles
+mk Подобрени честички
+
+@ Enhanced Water
+mk Подобрена вода
+
+@ Enhancements
+mk Подобрувања
+
+@ Equipment Wheel (Add-ons)
+mk Тркало за опрема (додатоци)
+
+@ Exploding boxes throw metal shards
+mk Кутиите што експлодираат фрлаат метални парчиња
+
+@ Explosion Damage
+mk Штета од експлозии
+
+@ Explosion Scorch Marks
+mk Траги од експлозии
+
+@ Explosions scorch nearby solid surfaces
+mk Експлозиите ги нагоруваат блиските цврсти површини
+
+@ Explosives only
+mk Само експлозиви
+
+@ Extra Monsters
+mk Дополнителни чудовишта
+
+@ Extra Per 10 Damage (ms)
+mk Додаток на 10 штета (мс)
+
+@ FX Settings
+mk Поставки за ефекти
+
+@ Field of View
+mk Видно поле
+
+@ Firing never uses up ammo
+mk Пукањето никогаш не троши муниција
+
+@ First person
+mk прво лице
+
+@ Flick Time
+mk Време на флик
+
+@ Flight Speed
+mk Брзина на летање
+
+@ Fog
+mk Магла
+
+@ Frag Limit
+mk Лимит на фрагови
+
+@ Freeze Duration (ms)
+mk Траење на замрзнување (мс)
+
+@ GLQuake
+mk GLQuake
+
+@ Game Speed
+mk Брзина на играта
+
+@ Game Type
+mk Вид на игра
+
+@ Gameplay
+mk Играње
+
+@ Gameplay Modifiers
+mk Модификатори на играта
+
+@ Gel Quality
+mk Квалитет на гелот
+
+@ Gib Surface Painting
+mk Дамки од парчиња
+
+@ Gibs
+mk Парчиња
+
+@ Gibs and heads tumble and bounce
+mk Парчињата и главите се тркалаат и отскокнуваат
+
+@ Goggle Glow Quality
+mk Квалитет на сјајот на очилата
+
+@ Goggle Intensity
+mk Јачина на очилата
+
+@ Goggle Noise
+mk Шум на очилата
+
+@ Goggles Settings
+mk Поставки за очила
+
+@ Graphics
+mk Графика
+
+@ Green
+mk Зелена
+
+@ Grenade Arc
+mk Патека на граната
+
+@ Grenade Arc Settings
+mk Поставки за патеката
+
+@ Gun Kick
+mk Одбив на оружјето
+
+@ Gyro
+mk Жироскоп
+
+@ Gyro & Flick Stick
+mk Жироскоп и флик-стик
+
+@ Gyro Active
+mk Жироскоп активен
+
+@ Gyro Aiming
+mk Нишанење со жироскоп
+
+@ HUD
+mk HUD
+
+@ HUD Style
+mk Стил на HUD
+
+@ Health
+mk Здравје
+
+@ Health Pickups
+mk Подигање здравје
+
+@ Health Position
+mk Позиција на здравјето
+
+@ Health Regeneration
+mk Обновување здравје
+
+@ Hit & Kill Sounds
+mk Звуци за погодок и убиство
+
+@ Hit Doors & Lifts
+mk Погодоци по врати и лифтови
+
+@ Hit Markers
+mk Ознаки за погодок
+
+@ Hit Sound
+mk Звук за погодок
+
+@ Hitmarker Size
+mk Големина на ознаката
+
+@ Hitmarker Type
+mk Вид на ознака
+
+@ Hitstop Advanced
+mk Хитстоп: напредно
+
+@ Hitstop Settings
+mk Поставки за хитстоп
+
+@ Hold
+mk Држење
+
+@ Hold lock-on
+mk Зафат при држење
+
+@ Hook Enemies
+mk Закачи непријатели
+
+@ Hook Metal
+mk Закачи метал
+
+@ Hook Stone
+mk Закачи камен
+
+@ Hook Wood
+mk Закачи дрво
+
+@ Hooking an enemy pulls you to it
+mk Закачениот непријател те влече кон себе
+
+@ Hookshot Range
+mk Дострел на куката
+
+@ Hookshot Settings
+mk Поставки за куката
+
+@ Host Game
+mk Создај игра
+
+@ How far the hook flies before it retracts
+mk Колку далеку лета куката пред да се врати
+
+@ How visible the on-screen controls are
+mk Колку се видливи контролите на екранот
+
+@ Impact Lifetime
+mk Траење на трагите
+
+@ Infinite Ammo
+mk Бесконечна муниција
+
+@ Input
+mk Влез
+
+@ Input Scale
+mk Скала на влезот
+
+@ Interpolate Animation
+mk Интерполирај анимација
+
+@ Interpolate Movement
+mk Интерполирај движење
+
+@ Invert Look
+mk Обратен поглед
+
+@ Invert Mouse
+mk Обратен глушец
+
+@ Invert Stick
+mk Обратен стик
+
+@ Jet Quality
+mk Квалитет на млазот
+
+@ Join Game
+mk Приклучи се
+
+@ Jump / Swim Up
+mk Скок / пливај нагоре
+
+@ Jump again in mid-air
+mk Повторен скок во воздух
+
+@ Jumps
+mk Скокови
+
+@ Keys & Powerups
+mk Клучеви и засилувања
+
+@ Keys & Powerups Position
+mk Позиција на клучевите
+
+@ Kill Bonus (x)
+mk Бонус за убиство (x)
+
+@ Kill Sound
+mk Звук за убиство
+
+@ Knock
+mk Чукање
+
+@ Left
+mk Лево
+
+@ Length of the motion blur streaks
+mk Должина на трагите од заматување
+
+@ Lifetime (seconds)
+mk Траење (секунди)
+
+@ Live Portal Views
+mk Живи погледи низ портали
+
+@ Live View Distance
+mk Дострел на живите погледи
+
+@ Local Players
+mk Локални играчи
+
+@ Local red wounds follow enemy animation
+mk Црвените рани ја следат анимацијата на непријателот
+
+@ Lock Indicator
+mk Индикатор за зафат
+
+@ Long falls don't hurt
+mk Долгите падови не повредуваат
+
+@ Longest Freeze (ms)
+mk Најдолго замрзнување (мс)
+
+@ Look Down
+mk Погледни надолу
+
+@ Look Speed
+mk Брзина на погледот
+
+@ Look Up
+mk Погледни нагоре
+
+@ Main Menu Music
+mk Музика во главното мени
+
+@ Max FPS
+mk Макс. FPS
+
+@ Max Players
+mk Макс. играчи
+
+@ Maximum Impacts
+mk Макс. траги од удари
+
+@ Maximum Marks
+mk Макс. траги
+
+@ Maximum Range
+mk Максимален дострел
+
+@ Melee only
+mk Само близок бој
+
+@ Message Background
+mk Позадина на пораките
+
+@ Message Text Size
+mk Големина на текстот
+
+@ Messages & Captions
+mk Пораки и титлови
+
+@ Meter Duration (real seconds)
+mk Траење на скалата (реални секунди)
+
+@ Minimum Damage
+mk Минимална штета
+
+@ Mode
+mk Режим
+
+@ Modern Console
+mk Модерна конзола
+
+@ Modern HUD Layout
+mk Модерен распоред на HUD
+
+@ Most recent save
+mk Последно зачувување
+
+@ Motion Blur
+mk Заматување при движење
+
+@ Motion Blur Amount
+mk Јачина на заматувањето
+
+@ Motion Blur Quality
+mk Квалитет на заматувањето
+
+@ Mouse & Keyboard
+mk Глушец и тастатура
+
+@ Mouse Speed
+mk Брзина на глушецот
+
+@ Move Back
+mk Назад
+
+@ Move Forward
+mk Напред
+
+@ Music Volume
+mk Јачина на музиката
+
+@ Next Weapon
+mk Следно оружје
+
+@ No Drowning
+mk Без давење
+
+@ No Fall Damage
+mk Без штета од паѓање
+
+@ No Manual Saves
+mk Без рачно зачувување
+
+@ No Self Damage
+mk Без штета на себе
+
+@ Noise Filter
+mk Филтер за шум
+
+@ Normal Color
+mk Нормална боја
+
+@ Notify Message Position
+mk Позиција на известувањата
+
+@ Notify Message Time
+mk Време на известувањата
+
+@ Number of splatter rays per blood impact
+mk Број на зраци прскање по погодок со крв
+
+@ Off
+mk Искл.
+
+@ On Death
+mk При смрт
+
+@ On Kill Color
+mk Боја при убиство
+
+@ On Target Color
+mk Боја при цел
+
+@ Opacity
+mk Непроѕирност
+
+@ Opacity of the grenade arc
+mk Непроѕирност на патеката на гранатата
+
+@ Pants Color
+mk Боја на панталоните
+
+@ Particle Quality
+mk Квалитет на честичките
+
+@ Particles
+mk Честички
+
+@ Physical Nail Impacts
+mk Физички удари на клинци
+
+@ Pistol Start
+mk Почеток од нула
+
+@ Pitch
+mk Висина на тонот
+
+@ Pitch Sensitivity
+mk Вертикална чувствителност
+
+@ Playback Speed
+mk Брзина на репродукција
+
+@ Player Setup
+mk Поставување на играчот
+
+@ Pop
+mk Пукнување
+
+@ Portal Gun Settings
+mk Поставки за порталниот пиштол
+
+@ Portal Recursion
+mk Рекурзија на порталите
+
+@ Portal View Quality
+mk Квалитет на погледот низ портал
+
+@ Preview Sound
+mk Слушни звук
+
+@ Previous Weapon
+mk Претходно оружје
+
+@ Projectile Shotguns Settings
+mk Поставки за пушки со проектили
+
+@ Projectile Speed (units/s)
+mk Брзина на проектилот (ед./с)
+
+@ Purple
+mk Виолетова
+
+@ Push
+mk Туркање
+
+@ Push Strength
+mk Сила на туркањето
+
+@ Quick Load
+mk Брзо вчитување
+
+@ Quick Save
+mk Брзо зачувување
+
+@ Railgun Settings
+mk Поставки за рејлган
+
+@ Ranged only
+mk Само далечен бој
+
+@ Reacquire While Held
+mk Повторен зафат при држење
+
+@ Red
+mk Црвена
+
+@ Reduce Motion
+mk Намали движење
+
+@ Regen (seconds per second)
+mk Обнова (секунди во секунда)
+
+@ Render Scale
+mk Скала на рендерирање
+
+@ Reverb
+mk Реверб
+
+@ Right
+mk Десно
+
+@ Ripple Intensity
+mk Јачина на брановите
+
+@ Ripples
+mk Бранови
+
+@ Roll Sensitivity
+mk Чувствителност на навалување
+
+@ Rumble
+mk Вибрации
+
+@ Run
+mk Трчање
+
+@ Save on All Enemies Killed
+mk Зачувај кога сите непријатели се убиени
+
+@ Save on All Secrets Found
+mk Зачувај кога сите тајни се пронајдени
+
+@ Save on Level Entry
+mk Зачувај при влез во ниво
+
+@ Save on Secret Found
+mk Зачувај при пронајдена тајна
+
+@ Scoreboard
+mk Табела со резултати
+
+@ Screen Flashes
+mk Блесоци на екранот
+
+@ Screen Shader
+mk Екрански шејдер
+
+@ Screen Shake
+mk Тресење на екранот
+
+@ Search LAN
+mk Барај во LAN
+
+@ Seconds a center-screen message stays up
+mk Секунди колку останува пораката во центар
+
+@ See Through Portals
+mk Гледај низ портали
+
+@ See-through Teleporters
+mk Проѕирни телепорти
+
+@ Shirt Color
+mk Боја на кошулата
+
+@ Shotgun Bullet Decals
+mk Траги од сачми
+
+@ Shoulder left
+mk Рамо лево
+
+@ Shoulder right
+mk Рамо десно
+
+@ Show FPS
+mk Прикажи FPS
+
+@ Show Face
+mk Прикажи лице
+
+@ Shrapnel
+mk Шрапнели
+
+@ Size of on-screen messages and captions
+mk Големина на пораките и титловите на екранот
+
+@ Skill
+mk Тежина
+
+@ Sky Fog
+mk Магла на небото
+
+@ Smooths the stepped movement of monsters
+mk Го измазнува скокотното движење на чудовиштата
+
+@ Sound
+mk Звук
+
+@ Sound Captions
+mk Титлови за звуци
+
+@ Sound Volume
+mk Јачина на звукот
+
+@ Speed Blur
+mk Заматување од брзина
+
+@ Splashes
+mk Прскања
+
+@ Splatter Amount
+mk Количина прскање
+
+@ Splatter Size
+mk Големина на прскањето
+
+@ Start Game
+mk Започни игра
+
+@ Staying underwater doesn't hurt
+mk Престојот под вода не повредува
+
+@ Stick Look Pitch
+mk Стик: вертикален поглед
+
+@ Stick Look Yaw
+mk Стик: хоризонтален поглед
+
+@ Strafe Left
+mk Чекор лево
+
+@ Strafe Right
+mk Чекор десно
+
+@ Strength of the surface swell and rings
+mk Јачина на брановите и круговите по површината
+
+@ Stun Duration
+mk Траење на зашеметување
+
+@ Style
+mk Стил
+
+@ Supersampling
+mk Суперсемплирање
+
+@ Surface Hit Effects
+mk Ефекти од погодоци
+
+@ Swim Down
+mk Нурни надолу
+
+@ Targets
+mk Цели
+
+@ Teamplay
+mk Тимска игра
+
+@ Texture Filter
+mk Филтер на текстури
+
+@ Third person
+mk трето лице
+
+@ Thud
+mk Тап
+
+@ Tick
+mk Тик
+
+@ Time Limit
+mk Временски лимит
+
+@ Time Stretch
+mk Растегнување на времето
+
+@ Toggle Attack
+mk Напад со префрлање
+
+@ Toggle Run
+mk Трчање со префрлање
+
+@ Toggle auto-aim
+mk Автонишан со префрлање
+
+@ Touch Controls
+mk Контроли на допир
+
+@ Touchscreen
+mk Екран на допир
+
+@ Tough Enemy Health
+mk Здравје на силните непријатели
+
+@ Tough enemies only
+mk Само силни непријатели
+
+@ Trail Colour
+mk Боја на трагата
+
+@ Translate Console
+mk Преведи ја конзолата
+
+@ Translucent Water
+mk Проѕирна вода
+
+@ Treble
+mk Високи
+
+@ Turn Left
+mk Сврти лево
+
+@ Turn Right
+mk Сврти десно
+
+@ Underwater FX
+mk Подводни ефекти
+
+@ Use Bullet Time Meter
+mk Скала за забавено време
+
+@ VSync
+mk VSync
+
+@ View Bob
+mk Нишање на погледот
+
+@ Viewmodels
+mk Модели на оружје
+
+@ Volume
+mk Јачина
+
+@ Water Opacity
+mk Непроѕирност на водата
+
+@ Water Quality
+mk Квалитет на водата
+
+@ Water Settings
+mk Поставки за вода
+
+@ Weapon Wheel
+mk Тркало за оружје
+
+@ Weapon Wheel Slowdown
+mk Забавување со тркалото
+
+@ Weapons
+mk Оружја
+
+@ Weapons Position
+mk Позиција на оружјата
+
+@ Where center-screen messages appear
+mk Каде се појавуваат пораките во центар
+
+@ Where pickup and event messages appear
+mk Каде се појавуваат пораките за предмети и настани
+
+@ White
+mk Бела
+
+@ Yaw Sensitivity
+mk Хоризонтална чувствителност
+
+@ Yellow
+mk Жолта
+
+# lowercase choice values
+@ T
+mk T
+
+@ always
+mk секогаш
+
+@ auto
+mk авто
+
+@ banded
+mk во ленти
+
+@ borderless
+mk без рамка
+
+@ bottom center
+mk долу во центар
+
+@ bottom left
+mk долу лево
+
+@ bottom right
+mk долу десно
+
+@ box
+mk рамка
+
+@ broken square
+mk прекинат квадрат
+
+@ classic
+mk класичен
+
+@ coarse
+mk груб
+
+@ cooperative
+mk кооперативна
+
+@ cross
+mk крст
+
+@ cross + dot
+mk крст + точка
+
+@ cyan
+mk цијан
+
+@ dashed
+mk испрекинато
+
+@ deathmatch
+mk deathmatch
+
+@ deuteranopia
+mk деутеранопија
+
+@ diagonal streaks
+mk дијагонални црти
+
+@ diamond
+mk ромб
+
+@ dot
+mk точка
+
+@ double
+mk двоен
+
+@ double chevrons
+mk двојни шеврони
+
+@ double diagonals
+mk двојни дијагонали
+
+@ easy
+mk лесно
+
+@ fine
+mk фин
+
+@ fit output
+mk според излезот
+
+@ flick stick
+mk флик-стик
+
+@ fullscreen
+mk цел екран
+
+@ gap cross
+mk крст со отвор
+
+@ green
+mk зелена
+
+@ grey
+mk сива
+
+@ half speed
+mk половина брзина
+
+@ hard
+mk тешко
+
+@ high
+mk високо
+
+@ huge
+mk огромно
+
+@ immersive
+mk потопувачки
+
+@ intense
+mk силно
+
+@ large
+mk големо
+
+@ larger
+mk поголемо
+
+@ largest
+mk најголемо
+
+@ linear
+mk линеарно
+
+@ low
+mk ниско
+
+@ lower
+mk пониско
+
+@ magenta
+mk магента
+
+@ medium
+mk средно
+
+@ middle
+mk средина
+
+@ middle left
+mk средина лево
+
+@ middle right
+mk средина десно
+
+@ modern
+mk модерен
+
+@ nearest
+mk најблиску
+
+@ nightmare
+mk кошмар
+
+@ nintendo
+mk Nintendo
+
+@ no team damage
+mk без тимска штета
+
+@ none
+mk нема
+
+@ normal
+mk нормално
+
+@ off
+mk искл.
+
+@ off while held
+mk искл. при држење
+
+@ on
+mk вкл.
+
+@ only while held
+mk само при држење
+
+@ playstation
+mk PlayStation
+
+@ protanopia
+mk протанопија
+
+@ quarter speed
+mk четвртина брзина
+
+@ red
+mk црвена
+
+@ short diagonals
+mk кратки дијагонали
+
+@ single
+mk единечен
+
+@ small
+mk мало
+
+@ solid
+mk полна
+
+@ spectacle
+mk спектакуларно
+
+@ subtle
+mk суптилно
+
+@ team damage
+mk тимска штета
+
+@ top center
+mk горе во центар
+
+@ top left
+mk горе лево
+
+@ top right
+mk горе десно
+
+@ triple
+mk троен
+
+@ tritanopia
+mk тританопија
+
+@ upper
+mk погоре
+
+@ white
+mk бела
+
+@ whole screen
+mk цел екран
+
+@ windowed
+mk во прозорец
+
+@ xbox
+mk Xbox
+
+@ yellow
+mk жолта
+
+# ==== tooltips.txt ====
+
+# Options help lines (tooltips) and reasons for disabled rows.
+@ 2D aiming turns the view continuously with the right stick; flick stick snaps the view to where you push the stick, then turning the stick rotates it
+mk 2D нишанењето го врти погледот постојано со десниот стик; флик-стикот веднаш го свртува погледот кон насоката на стикот, а вртењето на стикот го ротира понатаму
+
+@ 3D resolution relative to the window; the UI stays sharp
+mk 3D резолуција во однос на прозорецот; интерфејсот останува остар
+
+@ 3D view keeps the HUD and menus sharp; whole screen runs them through the shader too
+mk 3D поглед ги остава HUD и менијата остри; цел екран ги пушта и нив низ шејдерот
+
+@ A Quake III style railgun: a slug that pierces every enemy on its line, using 2 cells a shot and refiring every 1.5 s; select it through its assigned weapon slot (Add-ons)
+mk Рејлган во стилот на Quake III: проектил што го пробива секој непријател на својата линија, троши 2 ќелии по истрел и пука на секои 1,5 с; се избира преку доделениот слот за оружје (додатоци)
+
+@ A Zelda-style hookshot: fire sends a chain hook out; it latches onto hookable surfaces or enemies and reels you in; fire again to let go
+mk Кука во стилот на Zelda: пукањето исфрла кука на синџир; таа се закачува за погодни површини или непријатели и те привлекува; пукни пак за да ја пуштиш
+
+@ Also translates the engine's console messages; off keeps them in English
+mk Ги преведува и пораките на конзолата од моторот; искл. ги остава на англиски
+
+@ Automatically acquire another enemy while holding Lock-on after losing a target
+mk Автоматски зафаќа друг непријател додека се држи Зафат, откако ќе се изгуби целта
+
+@ Blends between animation frames of monsters and weapons
+mk Мазни премини меѓу рамките на анимацијата на чудовиштата и оружјата
+
+@ Blood stains surfaces and bodies; cosmetic, independent of particle packs
+mk Крвта остава дамки по површините и телата; само козметика, независно од пакетите честички
+
+@ Bloom glow around bright lights and heat sources; medium uses 4 taps, high uses 8, low disables halo taps
+mk Сјај околу силни светла и извори на топлина; средно користи 4 примероци, високо 8, ниско го исклучува ореолот
+
+@ Blurs fast-moving monsters, projectiles and doors (not camera turns)
+mk Ги заматува брзите чудовишта, проектили и врати (не и вртењето на камерата)
+
+@ Blurs the screen edges during fast falls and launches; keeps the centre clear. Reduce Motion disables it
+mk Ги заматува рабовите на екранот при брзи падови и исфрлања; центарот останува чист. Намали движење го исклучува
+
+@ Brightness of the underwater light patterns
+mk Осветленост на подводните светлосни шари
+
+@ Caps mark count, lifetime, airborne droplets and wound/gib painting; low skips enemy wounds and gib trails
+mk Ограничува број траги, траење, капки во воздух и боење од рани/парчиња; ниско ги прескокнува раните на непријателите и трагите од парчиња
+
+@ Caps shader input at output size so 200% render scale keeps 3D sharpness without 4x shader cost; low scales stay low-res
+mk Го ограничува влезот на шејдерот на излезната големина, така 200% скала на рендерирање ја задржува 3D острината без 4x цена на шејдерот; ниските скали остануваат со ниска резолуција
+
+@ Classic: the original status bar; modern: compact elements at the screen edges
+mk Класичен: оригиналната статусна лента; модерен: компактни елементи на рабовите на екранот
+
+@ Coat atlas resolution, rebuild rate and shader detail: low builds smaller coats less often with fast shading; high uses full detail
+mk Резолуција на атласот на премазот, брзина на обновување и детали на шејдерот: ниско гради помали премази поретко со брзо сенчење; високо користи полни детали
+
+@ Colour of the railgun's spiral trail; split-screen players each get the next colour along
+mk Боја на спиралната трага на рејлганот; секој играч на поделен екран ја добива следната боја
+
+@ Damage the railgun deals to each enemy it passes through (Quake III: 100)
+mk Штета што рејлганот ја нанесува на секој непријател низ кој минува (Quake III: 100)
+
+@ Dark backdrop behind on-screen messages for readability
+mk Темна позадина зад пораките на екранот за подобра читливост
+
+@ Dark border keeps the crosshair visible on any background
+mk Темен раб го држи нишанот видлив на секоја позадина
+
+@ Darkens corners and contact areas where geometry meets; higher quality is sharper
+mk Ги затемнува аглите и местата каде што геометријата се допира; повисокиот квалитет е поостар
+
+@ Debris lands on and is carried or shoved by doors, lifts and platforms
+mk Крхотините паѓаат на врати, лифтови и платформи и се носат или туркаат од нив
+
+@ Detail for caustics, ripples and splashes: low uses smaller budgets and shorter view distance; high uses larger budgets and farther view distance
+mk Детали за каустика, бранови и прскања: ниско користи помали буџети и пократок поглед; високо користи поголеми буџети и подалечен поглед
+
+@ Disabled while Enhanced Particles is on: its particles replace the GLQuake and Classic styles
+mk Оневозможено додека е вклучено Подобрени честички: неговите честички ги заменуваат стиловите GLQuake и Класичен
+
+@ Disabled while Enhanced Water is on: its own underwater effects replace the classic and GLQuake view warps
+mk Оневозможено додека е вклучено Подобрена вода: нејзините подводни ефекти ги заменуваат класичните и GLQuake изобличувања на погледот
+
+@ Draw the predicted grenade path as a solid or dashed line
+mk Ја црта предвидената патека на гранатата со полна или испрекината линија
+
+@ Draw the view out of the linked portal inside each portal; off shows flat discs (fastest)
+mk Во секој портал го црта погледот од поврзаниот портал; искл. прикажува рамни дискови (најбрзо)
+
+@ Droplets spray up when things enter or leave water, slime or lava
+mk Капки прскаат кога нешто влегува или излегува од вода, слуз или лава
+
+@ Emulates the original 8-bit palette of software rendering
+mk Ја емулира оригиналната 8-битна палета на софтверското рендерирање
+
+@ Every level starts with only the shotgun and axe, as if started fresh
+mk Секое ниво почнува само со сачмарката и секирата, како да почнуваш одново
+
+@ Explosion damage for each remotely detonated sticky bomb
+mk Штета од експлозија за секоја далечински активирана леплива бомба
+
+@ Extra freeze milliseconds for every 10 damage dealt, so heavy hits stop longer
+mk Дополнителни милисекунди замрзнување за секои 10 нанесена штета, па силните удари запираат подолго
+
+@ First person, a third-person camera centered behind the player, or one over the right or left shoulder; third person hides viewmodels
+mk Прво лице, камера во трето лице зад играчот или над десното или левото рамо; третото лице ги крие моделите на оружјето
+
+@ Flash the selected marker on confirmed hits; colors are shared with the crosshair
+mk Ја трепка избраната ознака при потврдени погодоци; боите се заеднички со нишанот
+
+@ Freeze for every enemy, or only for enemies that were tough before the hit
+mk Замрзнување за секој непријател или само за непријателите што биле силни пред ударот
+
+@ Freeze the game briefly when you damage an enemy; single player with add-ons only
+mk Накратко ја замрзнува играта кога ќе раниш непријател; само за еден играч со додатоци
+
+@ Gibs tumble and barrels throw shrapnel; shots and blasts push them (cosmetic only)
+mk Парчињата се тркалаат, а бурињата фрлаат шрапнели; истрелите и експлозиите ги туркаат (само козметика)
+
+@ Health an enemy must have had before the hit to count as tough
+mk Здравје што непријателот мора да го имал пред ударот за да се смета за силен
+
+@ Hits dealing less damage than this do not freeze the game; the default 10 skips nails and shotgun pellets
+mk Удари со помала штета од ова не ја замрзнуваат играта; стандардното 10 ги прескокнува клинците и сачмите
+
+@ Hold fire and sweep the crosshair over monsters to queue them, release to throw: it stuns each in turn and flies back; alt-fire clears the queue
+mk Држи пукање и помини со нишанот преку чудовиштата за да ги наредиш, пушти за да фрлиш: го зашеметува секое по ред и се враќа; алт. пукање ја празни редицата
+
+@ Hold: keep Lock-on held. Toggle: press Auto-aim Toggle to enable automatic acquisition. Click look stick to switch targets
+mk Држење: држи Зафат. Префрлање: притисни Автонишан со префрлање за автоматски зафат. Притисни го стикот за поглед за да ја смениш целта
+
+@ How close an enemy must be to the crosshair for automatic acquisition in toggle mode (degrees)
+mk Колку близу до нишанот мора да е непријателот за автоматски зафат во режим префрлање (степени)
+
+@ How far the view tilts up and down when you tilt the controller (pitch axis)
+mk Колку погледот се навалува горе-долу кога го навалуваш контролерот (оска pitch)
+
+@ How far the view turns left and right when you turn the controller (yaw axis)
+mk Колку погледот се врти лево-десно кога го вртиш контролерот (оска yaw)
+
+@ How far the view turns when you drag on the right half of the screen
+mk Колку се врти погледот кога влечеш по десната половина на екранот
+
+@ How fast the boomerang flies (units per second)
+mk Колку брзо лета бумерангот (единици во секунда)
+
+@ How hard shots and explosions push debris around
+mk Колку силно истрелите и експлозиите ги туркаат крхотините
+
+@ How hard the Powerwasher's water pushes enemies
+mk Колку силно водата од перачот под притисок ги турка непријателите
+
+@ How long a hit freezes the game, in milliseconds
+mk Колку долго ударот ја замрзнува играта, во милисекунди
+
+@ How strongly fog covers the sky when fog is on
+mk Колку силно маглата го покрива небото кога е вклучена
+
+@ How the view distorts underwater: Classic ripples the whole screen like software Quake, GLQuake slowly stretches and squashes the view
+mk Како се изобличува погледот под вода: Класичен го брановидно мрда целиот екран како софтверски Quake, GLQuake полека го растегнува и стиска погледот
+
+@ Ignores gyro rotation slower than this many degrees per second, to hide hand tremor
+mk Ја игнорира ротацијата на жироскопот побавна од овие степени во секунда, за да го скрие тресењето на раката
+
+@ Immersive: appears for a few seconds only when its value changes
+mk Потопувачки: се појавува неколку секунди само кога вредноста ќе се смени
+
+@ Keeps textures sharp on floors and walls seen at steep angles
+mk Ги држи текстурите остри на подови и ѕидови гледани под остар агол
+
+@ Lights from rockets, muzzle flashes and explosions brighten nearby walls
+mk Светлата од ракети, блесоци од цевки и експлозии ги осветлуваат блиските ѕидови
+
+@ Liquid surfaces swell and ring out where things move through them
+mk Течните површини се брануваат и прават кругови каде што нешто минува низ нив
+
+@ Lobs sticky bombs (rockets ammo) that cling to walls, doors and monsters; alt-fire detonates them all
+mk Фрла лепливи бомби (муниција за ракети) што се лепат за ѕидови, врати и чудовишта; алт. пукање ги активира сите
+
+@ Look of the classic particles: GLQuake draws soft round dots, Classic draws square pixels like software Quake
+mk Изглед на класичните честички: GLQuake црта меки тркалезни точки, Класичен црта квадратни пиксели како софтверски Quake
+
+@ Low skips the background smear halo and uses fewer blur samples; high keeps the full halo and smoother streaks
+mk Ниско го прескокнува ореолот на позадината и користи помалку примероци; високо го задржува целиот ореол и помазни траги
+
+@ Low: hard particle edges, half the scripted particles and fewer hit sparks. Medium: soft edges. High: soft edges checked per MSAA sample, most hit sparks
+mk Ниско: остри рабови на честичките, половина скриптирани честички и помалку искри. Средно: меки рабови. Високо: меки рабови проверени по MSAA примерок, најмногу искри
+
+@ Marks fade out before expiring; oldest marks are recycled at the limit
+mk Трагите избледуваат пред да истечат; најстарите се рециклираат кога ќе се достигне лимитот
+
+@ Max nested portal reflections to draw; each level redraws the scene
+mk Макс. вгнездени портални одрази за цртање; секое ниво повторно ја црта сцената
+
+@ Max portals per screen with a live view; each one redraws the scene
+mk Макс. портали на екран со жив поглед; секој повторно ја црта сцената
+
+@ Maximum distance for acquiring and keeping an enemy locked
+mk Максимално растојание за зафаќање и задржување на непријател
+
+@ Minimum gap between freezes, so shotgun pellets and rapid fire count once; kills ignore it
+mk Минимален размак меѓу замрзнувањата, па сачмите и брзото пукање се бројат еднаш; убиствата не се ограничени
+
+@ Modern terminal console with autocomplete popup, history search, ANSI colors, bash shell and piping; off uses the classic Quake console
+mk Модерна терминална конзола со скок-прозорец за автодовршување, пребарување историја, ANSI бои, bash школка и цевки; искл. ја користи класичната конзола на Quake
+
+@ Monsters take proportionally less damage at higher values; above 100% is harder
+mk Чудовиштата примаат сразмерно помала штета при повисоки вредности; над 100% е потешко
+
+@ Moving gibs leave blood on surfaces they touch
+mk Парчињата во движење оставаат крв на површините што ги допираат
+
+@ Multiplier on the freeze when the hit kills the enemy; 1 means no extra
+mk Множител на замрзнувањето кога ударот го убива непријателот; 1 значи без додаток
+
+@ Multiplies ammo from pickups (up to the normal carry limit); below 100% is harder
+mk Ја множи муницијата од подигнатите предмети (до нормалниот лимит); под 100% е потешко
+
+@ Multiplies health from pickups (up to 100, or the item's own limit); below 100% is harder
+mk Го множи здравјето од подигнатите предмети (до 100 или лимитот на предметот); под 100% е потешко
+
+@ Nails stick to wood and bodies; hard surfaces deflect them to the floor
+mk Клинците се забиваат во дрво и тела; тврдите површини ги одбиваат на подот
+
+@ Nearest keeps crisp classic pixels; linear smooths textures
+mk Најблиску задржува остри класични пиксели; линеарно ги измазнува текстурите
+
+@ New Game: Add-ons
+mk Нова игра: додатоци
+
+@ New Game: Customize
+mk Нова игра: прилагодување
+
+@ Night vision: how much dark areas are brightened; thermal: how strongly heat stands out
+mk Ноќно гледање: колку се осветлуваат темните места; термално: колку се истакнува топлината
+
+@ Night-vision and thermal goggles, cycle normal, night vision and thermal with Change Goggles (Add-ons), or use the Equipment Wheel
+mk Очила за ноќно и термално гледање; менувај нормално, ноќно и термално со Смени очила (додатоци) или користи го тркалото за опрема
+
+@ No single freeze lasts longer than this, however much damage or kill bonus adds
+mk Ниедно замрзнување не трае подолго од ова, колку и да додаваат штетата или бонусот за убиство
+
+@ Oldest marks and nails are recycled at this shared limit
+mk Најстарите траги и клинци се рециклираат при овој заеднички лимит
+
+@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
+mk Стик и копчиња на екранот: авто ги прикажува по допир и ги крие кога се користи друг уред
+
+@ Only autosaves: quicksaves and the Save menu are off
+mk Само автозачувувања: брзото зачувување и менито за зачувување се исклучени
+
+@ Place every weapon at the center, right or left of the view, or hide all viewmodels
+mk Постави го секое оружје во центар, десно или лево од погледот, или скриј ги сите модели на оружје
+
+@ Play your chosen hit or kill cue when you damage an enemy
+mk Го пушта избраниот звук за погодок или убиство кога ќе раниш непријател
+
+@ Playback speed: faster sounds shorter and higher
+mk Брзина на репродукција: побрзо звучи пократко и повисоко
+
+@ Plays the Quake theme in the main menu when no game is running
+mk Ја пушта темата на Quake во главното мени кога не тече игра
+
+@ Portals farther away than this are drawn as flat discs
+mk Порталите подалеку од ова се цртаат како рамни дискови
+
+@ Press attack once to keep firing, again to stop
+mk Притисни напад еднаш за постојано пукање, повторно за да запреш
+
+@ Press run once to switch between running and walking
+mk Притисни трчање еднаш за префрлање меѓу трчање и одење
+
+@ Raise or lower the tone independently of sound length
+mk Го крева или спушта тонот независно од должината на звукот
+
+@ Red screen edges show where damage came from: top is front, bottom is behind; Screen Flashes controls their strength
+mk Црвените рабови на екранот покажуваат од каде дошла штетата: горе е напред, долу е назад; Блесоци на екранот ја одредува нивната јачина
+
+@ Replaces the classic dot particles with glowing sparks, smoke and blood; mods with their own particle effects keep them
+mk Ги заменува класичните точкести честички со светли искри, чад и крв; модовите со свои ефекти на честички ги задржуваат
+
+@ Resolution and detail inside portal and teleporter views; lower tiers trim nested effects
+mk Резолуција и детали во погледите низ портали и телепорти; пониските нивоа ги кратат вгнездените ефекти
+
+@ Rippling light patterns on surfaces under water and slime
+mk Брановидни светлосни шари на површините под вода и слуз
+
+@ Scales all damage you take; above 100% is harder
+mk Ја скалира целата штета што ја примаш; над 100% е потешко
+
+@ Screen edge for this element; elements on the same spot stack
+mk Раб на екранот за овој елемент; елементите на исто место се редат еден до друг
+
+@ Seconds a monster hit by the boomerang stays stunned
+mk Секунди колку чудовиштето погодено со бумерангот останува зашеметено
+
+@ Seconds impact marks and stuck nails stay before fading out; independent of Particle Quality
+mk Секунди колку трагите од удари и забиените клинци остануваат пред да избледат; независно од Квалитет на честичките
+
+@ Seconds messages at the top of the screen stay up
+mk Секунди колку остануваат пораките на врвот на екранот
+
+@ Seconds the flick stick snap takes; lower is faster
+mk Секунди за свртувањето на флик-стикот; помалку е побрзо
+
+@ See through enhanced water; enables Water Opacity
+mk Гледај низ подобрената вода; овозможува Непроѕирност на водата
+
+@ Sensor grain, scanlines and flicker of the goggle image
+mk Зрнестост на сензорот, линии и треперење на сликата од очилата
+
+@ Shades every anti-aliasing sample; needs Anti-aliasing on
+mk Го сенчи секој примерок на измазнувањето; бара вклучено Измазнување
+
+@ Shifts colors so they stay distinct for the chosen color blindness
+mk Ги поместува боите за да останат различни за избраниот вид далтонизам
+
+@ Shotgun hits leave small surface marks (cosmetic only)
+mk Погодоците од сачмарка оставаат мали траги по површините (само козметика)
+
+@ Show corner ticks at screen centre while locked, even with Crosshair off
+mk Прикажува аголни ознаки во центарот на екранот при зафат, дури и со исклучен нишан
+
+@ Show where grenades and other arcing shots will fly, bounce and land; local play only, not in deathmatch
+mk Покажува каде ќе летаат, отскокнуваат и паѓаат гранатите и другите лачни истрели; само локална игра, не во deathmatch
+
+@ Shows text for important sounds: doors, alerted enemies, secrets, pickups
+mk Прикажува текст за важни звуци: врати, алармирани непријатели, тајни, предмети
+
+@ Shows the distance fog that maps and mods set; off always gives clear view
+mk Ја прикажува далечинската магла што ја поставуваат мапите и модовите; искл. секогаш дава чист поглед
+
+@ Shows the player face next to the health number
+mk Го прикажува лицето на играчот покрај бројот на здравјето
+
+@ Simulation detail, step rate, fade-out lifetimes and caps for gibs and shrapnel; low also skips mover collision
+mk Детали на симулацијата, чекор, траење на избледувањето и лимити за парчиња и шрапнели; ниско ги прескокнува и судирите со подвижни објекти
+
+@ Size of the on-screen buttons and move stick
+mk Големина на копчињата и стикот за движење на екранот
+
+@ Slowly heals up to 100 health after 5 seconds without being hit
+mk Полека лекува до 100 здравје по 5 секунди без да бидеш погоден
+
+@ Slows stick look while the crosshair is over an enemy
+mk Го забавува погледот со стик додека нишанот е над непријател
+
+@ Slows the game down while the weapon wheel is open
+mk Ја забавува играта додека е отворено тркалото за оружје
+
+@ Slows the whole game down; single player only. Saves and demos stay compatible with other ports
+mk Ја забавува целата игра; само за еден играч. Зачувувањата и демо-снимките остануваат компатибилни со другите портови
+
+@ Small camera jolt on each freeze; off with Reduce Motion
+mk Мал трзок на камерата при секое замрзнување; исклучено со Намали движење
+
+@ Snap and track enemies in local play, including split-screen; unavailable online
+mk Брзо зафаќа и следи непријатели во локална игра, вклучително поделен екран; не е достапно онлајн
+
+@ Sparks, smoke, chips, splinters and splashes fly off whatever your shots hit
+mk Искри, чад, парченца, иверки и прскања летаат од сè што погодуваат истрелите
+
+@ Spawns extra copies of every monster around the original when a level starts
+mk Создава дополнителни копии од секое чудовиште околу оригиналот кога почнува нивото
+
+@ Strength of the full-screen flashes for damage, pickups and powerups
+mk Јачина на блесоците на целиот екран при штета, предмети и засилувања
+
+@ Stretch or shorten the sound while keeping its pitch
+mk Го растегнува или скратува звукот задржувајќи ја висината на тонот
+
+@ Surface opacity; requires Enhanced Water and Translucent Water
+mk Непроѕирност на површината; бара Подобрена вода и Проѕирна вода
+
+@ The hook latches onto metal surfaces (metal, tech, computer panels, copper)
+mk Куката се закачува за метални површини (метал, техника, компјутерски панели, бакар)
+
+@ The hook latches onto stone, brick, rock and any surface not recognised as wood or metal
+mk Куката се закачува за камен, тула, карпа и секоја површина што не е препознаена како дрво или метал
+
+@ The hook latches onto wooden surfaces (texture names like wood, crate, plank)
+mk Куката се закачува за дрвени површини (имиња на текстури како wood, crate, plank)
+
+@ Turn the controller's motion sensor into a look input; needs a pad with a gyroscope
+mk Сензорот за движење на контролерот станува влез за поглед; бара контролер со жироскоп
+
+@ Turns off view bob, strafe tilt and the camera kick when hit or firing
+mk Ги исклучува нишањето на погледот, навалувањето при чекорење и трзокот на камерата при погодок или пукање
+
+@ Turns on the extra liquid effects; Water Settings controls each one
+mk Ги вклучува дополнителните ефекти на течностите; Поставки за вода го одредува секој од нив
+
+@ Turns the view to follow a moving enemy you are aiming at
+mk Го врти погледот за да го следи непријателот во движење кон кој нишаниш
+
+@ Turns the view when you roll the controller sideways; 0 disables it, negative reverses it
+mk Го врти погледот кога го навалуваш контролерот настрана; 0 го исклучува, негативно го обрнува
+
+@ Two-portal gun: fire and alt-fire place linked portals on flat walls; assign a weapon slot in Add-ons
+mk Пиштол со два портала: пукање и алт. пукање поставуваат поврзани портали на рамни ѕидови; додели слот за оружје во Додатоци
+
+@ Unlocks the FX Settings page: enhanced particles, impact effects and blood splatter
+mk Ја отклучува страницата Поставки за ефекти: подобрени честички, ефекти од удари и прскање крв
+
+@ Uses the 2021 re-release's smoother MD5 models (and MD3 replacements from mods) instead of the classic ones. Applies on the next map load
+mk Ги користи помазните MD5 модели од реизданието од 2021 (и MD3 замени од модови) наместо класичните. Се применува при следното вчитување мапа
+
+@ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
+mk Ја користи обоената светлина на мапата (.lit датотека или BSPX lump); искл. дава обична бела светлина. Се применува при следното вчитување мапа
+
+@ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
+mk Сегменти на водениот млаз, број на капки и сјајно сенчење на течноста: ниско користи поедноставни проѕирни млазови; високо користи мазни сјајни млазови
+
+@ When gyro looking applies: always, off while +gyroaction is held, or only while it is held
+mk Кога важи гледањето со жироскоп: секогаш, искл. додека се држи +gyroaction или само додека се држи
+
+@ Which weapons trigger the freeze; melee covers the axe and any mod weapon used at close range without ammo
+mk Кои оружја предизвикуваат замрзнување; близок бој ја опфаќа секирата и секое мод-оружје без муниција за близок бој
+
+@ Your own rockets and grenades don't hurt you; rocket jumps still work
+mk Твоите ракети и гранати не те повредуваат; ракетните скокови сè уште работат
+
+# ==== ui.txt ====
+
+# Menus and pop-ups outside the options pages: save cards, launch, presets,
+# add-on browser, map packs, hints and dialogs.
+@ Select
+mk Избери
+
+@ Back
+mk Назад
+
+@ Cancel
+mk Откажи
+
+@ Confirm
+mk Потврди
+
+@ Scroll
+mk Лизгај
+
+@ Section
+mk Дел
+
+@ Bind
+mk Додели
+
+@ Cancel binding
+mk Откажи доделување
+
+@ Clear
+mk Избриши
+
+@ Clear pad
+mk Избриши контролер
+
+@ Remap
+mk Додели повторно
+
+@ Type
+mk Пишувај
+
+@ Shift
+mk Shift
+
+@ Done
+mk Готово
+
+@ Del
+mk Del
+
+@ Space
+mk Празно место
+
+@ Save
+mk Зачувај
+
+@ Load
+mk Вчитај
+
+@ Delete
+mk Избриши
+
+@ Play
+mk Играј
+
+@ Yes
+mk Да
+
+@ No
+mk Не
+
+@ OK
+mk OK
+
+@ System
+mk Систем
+
+@ Language
+mk Јазик
+
+@ Help
+mk Помош
+
+@ Fixed for this game: it was started without Customize
+mk Фиксно за оваа игра: започната е без прилагодување
+
+@ Press a button or key to bind (Start cancels)
+mk Притисни копче или тастер за доделување (Start откажува)
+
+@ Press button...
+mk Притисни копче...
+
+@ Press key...
+mk Притисни тастер...
+
+@ Replace this binding?
+mk Да се замени доделувањето?
+
+@ is already assigned
+mk е веќе доделено
+
+@ {} already assigned
+mk {} е веќе доделено
+
+@ Open Controls to remap Lock-on?
+mk Да се отворат Контроли за доделување на Зафат?
+
+@ Lock-on
+mk Зафат
+
+@ Auto-aim Toggle
+mk Автонишан со префрлање
+
+@ Keyboard
+mk Тастатура
+
+@ Controller
+mk Контролер
+
+# main menu, dialogs and screens
+@ Map Packs
+mk Пакети мапи
+
+@ Customize
+mk Прилагоди
+
+@ Level Select
+mk Избор на ниво
+
+@ Really quit?
+mk Навистина излез?
+
+@ You died
+mk Загина
+
+@ Continue from most recent save
+mk Продолжи од последното зачувување
+
+@ Select save
+mk Избери зачувување
+
+@ Restart level
+mk Рестартирај ниво
+
+@ Return to main menu
+mk Врати се во главното мени
+
+@ (disabled)
+mk (оневозможено)
+
+@ (fixed for this game)
+mk (фиксно за оваа игра)
+
+@ (off)
+mk (искл.)
+
+@ Apply Display Changes
+mk Примени промени на екранот
+
+@ Display Mode
+mk Режим на приказ
+
+@ Resolution
+mk Резолуција
+
+@ desktop
+mk десктоп
+
+@ Preset
+mk Предлошка
+
+@ Map
+mk Мапа
+
+@ Reset Shader Settings
+mk Ресетирај поставки на шејдерот
+
+@ Reset to Defaults
+mk Врати стандардни
+
+@ Searching...
+mk Барање...
+
+@ This game only autosaves.
+mk Оваа игра само автоматски зачувува.
+
+@ (No Manual Saves modifier)
+mk (модификатор Без рачно зачувување)
+
+@ End the current game?
+mk Да се заврши тековната игра?
+
+@ Unsaved progress will be lost.
+mk Незачуваниот напредок ќе се изгуби.
+
+@ End game
+mk Заврши игра
+
+@ Overwrite
+mk Презапиши
+
+@ Overwrite "{}"?
+mk Да се презапише „{}“?
+
+@ Saved {}
+mk Зачувано {}
+
+@ Start a new game?
+mk Да се започне нова игра?
+
+@ New game
+mk Нова игра
+
+@ New Game
+mk Нова игра
+
+@ CUSTOM
+mk СВОЈА
+
+@ Customize Experience
+mk Прилагоди го искуството
+
+@ Disable All
+mk Исклучи сè
+
+@ Disable All Modifications
+mk Исклучи ги сите измени
+
+@ Saves load in other source ports too.
+mk Зачувувањата се вчитуваат и во другите портови.
+
+@ Standard rules, no add-ons.
+mk Стандардни правила, без додатоци.
+
+@ Choose skill
+mk Избери тежина
+
+@ The current game will end
+mk Тековната игра ќе заврши
+
+@ Easy
+mk Лесно
+
+@ Normal
+mk Нормално
+
+@ Hard
+mk Тешко
+
+@ Nightmare
+mk Кошмар
+
+# graphics preset pop-up
+@ Choose a Graphics Preset
+mk Избери графичка предлошка
+
+@ Classic
+mk Класично
+
+@ Like the re-release: enhanced models,
+mk Како реизданието: подобрени модели,
+
+@ no added effects.
+mk без додадени ефекти.
+
+@ Enhanced
+mk Подобрено
+
+@ Every enhancement at its highest quality.
+mk Секое подобрување со највисок квалитет.
+
+@ Needs a capable GPU.
+mk Бара моќна графичка картичка.
+
+@ Low-End
+mk Слаб компјутер
+
+@ Fastest. No anti-aliasing, original
+mk Најбрзо. Без измазнување, оригинални
+
+@ models, lowest effect quality.
+mk модели, најнизок квалитет на ефекти.
+
+@ Esc keeps the defaults
+mk Esc ги задржува стандардните
+
+@ Everything can be changed later in Options.
+mk Сè може да се смени подоцна во Options.
+
+@ Keep Defaults
+mk Задржи стандардни
+
+# save and load cards
+@ Save Game
+mk Зачувај игра
+
+@ Load Game
+mk Вчитај игра
+
+@ Autosaves
+mk Автозачувувања
+
+@ newest first
+mk најновите прво
+
+@ Saves: {}
+mk Зачувувања: {}
+
+@ Browse Autosaves
+mk Прегледај автозачувувања
+
+@ Every retained autosave, newest first
+mk Секое задржано автозачувување, најновите прво
+
+@ New save
+mk Ново зачувување
+
+@ Select to save your game here
+mk Избери за да ја зачуваш играта тука
+
+@ No autosaves yet
+mk Сè уште нема автозачувувања
+
+@ Autosaves are made on level entry, secrets and more (Options > Gameplay)
+mk Автозачувувањата се прават при влез во ниво, тајни и друго (Options > Играње)
+
+@ No saves yet
+mk Сè уште нема зачувувања
+
+@ Save from the Single Player menu, or press F6 to quicksave
+mk Зачувај од менито Single Player или притисни F6 за брзо зачувување
+
+@ No picture
+mk Нема слика
+
+@ Del: delete save
+mk Del: избриши зачувување
+
+@ Delete "{}"?
+mk Да се избрише „{}“?
+
+@ This cannot be undone.
+mk Ова не може да се врати.
+
+@ Quicksave
+mk Брзо зачувување
+
+@ Autosave: {}
+mk Автозачувување: {}
+
+@ unknown trigger
+mk непозната причина
+
+@ Latest - {}
+mk Последно - {}
+
+@ Health {}
+mk Здравје {}
+
+@ Armor {}
+mk Оклоп {}
+
+@ Kills {}/{}
+mk Убиства {}/{}
+
+@ Secrets {}/{}
+mk Тајни {}/{}
+
+@ Split-screen, {} players
+mk Поделен екран, {} играчи
+
+@ Co-op
+mk Кооп
+
+@ Customized
+mk Прилагодена
+
+@ Customized, {}
+mk Прилагодена, {}
+
+@ Date unavailable
+mk Датумот е недостапен
+
+@ Just now
+mk Штотуку
+
+@ {} min ago
+mk пред {} мин
+
+@ {} h ago
+mk пред {} ч
+
+@ Level entry
+mk Влез во ниво
+
+@ Secret found
+mk Пронајдена тајна
+
+@ All enemies killed
+mk Сите непријатели убиени
+
+@ All secrets found
+mk Сите тајни пронајдени
+
+@ Timer
+mk Тајмер
+
+# customize pages
+@ Standard rules
+mk Стандардни правила
+
+@ Modifiers changed: {}
+mk Променети модификатори: {}
+
+@ no add-ons
+mk без додатоци
+
+@ add-ons: {}
+mk додатоци: {}
+
+@ Saves of this game are .qsa files: they need this source port.
+mk Зачувувањата од оваа игра се .qsa датотеки: им треба овој порт.
+
+@ Nothing changed: this plays as standard Quake.
+mk Ништо не е променето: ова се игра како стандарден Quake.
+
+@ Changes apply now and are saved with this game (.qsa).
+mk Промените важат веднаш и се зачувуваат со играва (.qsa).
+
+@ This game started without Customize, so its rules are fixed.
+mk Оваа игра започна без прилагодување, па нејзините правила се фиксни.
+
+@ Start a new game and choose Customize Experience.
+mk Започни нова игра и избери Прилагоди го искуството.
+
+@ These rules apply to the next customized game.
+mk Овие правила важат за следната прилагодена игра.
+
+# add-on browser
+@ Fire
+mk Пукање
+
+@ Alt Fire
+mk Алт. пукање
+
+@ Configure Parameters >
+mk Конфигурирај параметри >
+
+@ Configure
+mk Конфигурирај
+
+@ Settings
+mk Поставки
+
+@ Change slot
+mk Смени слот
+
+@ Toggle
+mk Префрли
+
+@ Details
+mk Детали
+
+@ Enter or click the box: toggle
+mk Enter или клик на полето: префрли
+
+@ Right / Tab / click: details
+mk Десно / Tab / клик: детали
+
+@ Input Remapping
+mk Пренасочување на влезот
+
+@ Weapon Slot
+mk Слот за оружје
+
+@ Customized games save as .qsa files, which need this source port.
+mk Прилагодените игри се зачувуваат како .qsa датотеки, на кои им треба овој порт.
+
+@ This game started without Customize, so its add-ons are fixed. Customize a new game instead.
+mk Оваа игра започна без прилагодување, па нејзините додатоци се фиксни. Наместо тоа, прилагоди нова игра.
+
+@ Bullet Time
+mk Забавено време
+
+@ Change Goggles
+mk Смени очила
+
+@ Dodge / Dive
+mk Избегнување / нуркање
+
+@ Goggles
+mk Очила
+
+@ Hitstop
+mk Хитстоп
+
+@ Projectile Shotguns
+mk Пушки со проектили
+
+@ BULLET TIME: 20%
+mk ЗАБАВЕНО ВРЕМЕ: 20%
+
+@ NORMAL SPEED
+mk НОРМАЛНА БРЗИНА
+
+@ SLOW MOTION: PHYSICAL PELLETS
+mk ЗАБАВЕНО: ФИЗИЧКИ САЧМИ
+
+@ DEMONSTRATION
+mk ДЕМОНСТРАЦИЈА
+
+@ GAMEPLAY
+mk ИГРАЊЕ
+
+@ LOOP
+mk ПОВТОРУВАЊЕ
+
+@ Preview unavailable
+mk Прегледот е недостапен
+
+# shader and language help lines
+@ A setting of the chosen shader; arrows step it, Enter is not needed
+mk Поставка на избраниот шејдер; стрелките ја менуваат, Enter не е потребен
+
+@ Language of the menus, messages and the 2021 re-release's game text; System follows your computer's language
+mk Јазик на менијата, пораките и текстот на играта од реизданието од 2021; Систем го следи јазикот на компјутерот
+
+@ Puts every setting of the chosen shader back to the preset's defaults
+mk Ги враќа сите поставки на избраниот шејдер на стандардните од предлошката
+
+@ RetroArch slang shader on the final image: CRT, scanlines, NTSC, sharpening; add your own in <game>/shaders
+mk RetroArch slang шејдер на конечната слика: CRT, линии, NTSC, изострување; додај свои во <game>/shaders
+
+# modern console footer
+@ Shift+PgUp/Dn: height  ` : hide
+mk Shift+PgUp/Dn: висина  ` : скриј
+
+@ Tab: complete  Ctrl+R: search  bash | pipe
+mk Tab: довршување  Ctrl+R: барање  bash | цевка
+
+@ ↑ +{} lines (End to jump) 
+mk ↑ +{} линии (End за скок) 
+
+# add-on descriptions
+@ Create two linked portals on flat walls. Fire places the first portal; Alt Fire places the second. Walk through either portal to emerge from the other. Your momentum carries through. Assign a weapon slot below: pressing that slot repeatedly cycles its ordinary weapon and every enabled add-on assigned there. Portal view quality is configurable below.
+mk Создава два поврзани портала на рамни ѕидови. Пукање го поставува првиот портал; Алт. пукање го поставува вториот. Мини низ кој било портал за да излезеш од другиот. Твојот замав се пренесува. Додели слот за оружје подолу: повторното притискање на тој слот ги менува неговото обично оружје и секој вклучен додаток доделен таму. Квалитетот на погледот низ портал се поставува подолу.
+
+@ Hold Fire and sweep the crosshair over monsters to queue targets. Release Fire to throw: the boomerang visits each target, stuns it and returns to you. Alt Fire clears the queue. The weapon slot selects a group, not a separate hotkey: press it again to cycle through the weapons in that slot. Configure stun duration and flight speed below.
+mk Држи Пукање и помини со нишанот преку чудовиштата за да ги наредиш целите. Пушти Пукање за да фрлиш: бумерангот ја посетува секоја цел, ја зашеметува и се враќа кај тебе. Алт. пукање ја празни редицата. Слотот за оружје избира група, не посебен тастер: притисни го повторно за да ги менуваш оружјата во тој слот. Траењето на зашеметувањето и брзината на летање се поставуваат подолу.
+
+@ Hold Fire to charge a sticky bomb using rocket ammunition; release to launch. A longer charge throws it faster. Bombs cling to walls, doors and monsters. Alt Fire detonates your planted bombs together. Place a trap, retreat, then detonate it when enemies approach. Assign any weapon slot below; repeated presses cycle through the ordinary weapon and add-ons in that slot.
+mk Држи Пукање за да полниш леплива бомба со муниција за ракети; пушти за да ја исфрлиш. Подолгото полнење ја фрла побрзо. Бомбите се лепат за ѕидови, врати и чудовишта. Алт. пукање ги активира поставените бомби заедно. Постави замка, повлечи се, па активирај ја кога ќе се приближат непријателите. Додели кој било слот за оружје подолу; повторното притискање ги менува обичното оружје и додатоците во тој слот.
+
+@ Fire launches a chain hook. It latches onto a permitted surface or enemy and reels you toward the anchor. Fire again or use Alt Fire to let go. Choose which materials and enemies can be hooked in Configure Parameters. Assign it to any weapon slot; repeated presses of the slot's existing binding cycle through its weapons.
+mk Пукање исфрла кука на синџир. Таа се закачува за дозволена површина или непријател и те привлекува кон сидрото. Пукни повторно или користи Алт. пукање за да ја пуштиш. Избери кои материјали и непријатели може да се закачат во Конфигурирај параметри. Додели ја на кој било слот за оружје; повторното притискање на постојното доделување на слотот ги менува неговите оружја.
+
+@ A piercing railgun inspired by Quake III. Fire sends a slug through every enemy along its line. Each shot consumes two cells, with a 1.5 second refire interval. Damage and the spiral trail colour are configurable below. Choose a weapon slot: the slot's current binding selects and cycles the weapons assigned to it.
+mk Пробивачки рејлган инспириран од Quake III. Пукање испраќа проектил низ секој непријател на неговата линија. Секој истрел троши две ќелии, со пауза од 1,5 секунди меѓу истрелите. Штетата и бојата на спиралната трага се поставуваат подолу. Избери слот за оружје: тековното доделување на слотот ги избира и менува оружјата доделени на него.
+
+@ A Portal-style gel sprayer. Fire sprays blue Repulsion gel: land, jump or run into it to bounce, and landings on it never hurt. Alt Fire sprays orange Propulsion gel: run across it to go much faster. Gel coats floors and walls until washed off with the Powerwasher. Assign a weapon slot below; repeated presses cycle the weapons in that slot.
+mk Прскалка за гел во стилот на Portal. Пукање прска син гел за одбивање: слетај, скокни или налети на него за да отскокнеш, а слетувањата на него никогаш не повредуваат. Алт. пукање прска портокалов гел за забрзување: трчај преку него за да одиш многу побрзо. Гелот ги покрива подовите и ѕидовите додека не се измие со перачот под притисок. Додели слот за оружје подолу; повторното притискање ги менува оружјата во тој слот.
+
+@ A water cannon. Fire shoots a straight jet with limited reach; Alt Fire a wide, shorter fan. The water pushes enemies back, turns projectiles aside and washes away gel and blood. Push strength is configurable below. Assign a weapon slot below; repeated presses cycle the weapons in that slot.
+mk Воден топ. Пукање исфрла прав млаз со ограничен дострел; Алт. пукање широка, пократка лепеза. Водата ги турка непријателите назад, ги скршнува проектилите и ги мие гелот и крвта. Силата на туркањето се поставува подолу. Додели слот за оружје подолу; повторното притискање ги менува оружјата во тој слот.
+
+@ One equipment add-on includes both night vision and thermal vision. The Change Goggles action cycles Normal, Night Vision, Thermal, then Normal again. Night vision brightens dark rooms; thermal vision highlights living enemies. Goggles do not occupy a weapon slot. Configure intensity and sensor noise below. The binding affects only this add-on.
+mk Еден додаток за опрема вклучува и ноќно и термално гледање. Дејството Смени очила менува Нормално, Ноќно гледање, Термално, па пак Нормално. Ноќното гледање ги осветлува темните простории; термалното ги истакнува живите непријатели. Очилата не заземаат слот за оружје. Јачината и шумот на сензорот се поставуваат подолу. Доделувањето влијае само на овој додаток.
+
+@ Press Dodge with a movement direction on the ground or in midair: dive forward or leap backward and sideways. Diagonals are supported. Each press launches once, with a short recovery. The player body animates in third person. Assign the Dodge action below or in Controls.
+mk Притисни Избегнување со насока на движење на земја или во воздух: нурни напред или скокни назад и настрана. Дијагоналите се поддржани. Секое притискање исфрла еднаш, со кратко закрепнување. Телото на играчот е анимирано во трето лице. Додели го дејството Избегнување подолу или во Контроли.
+
+@ Use the dedicated Bullet Time action to slow the whole local game to 20% speed. Hold is the default; Toggle switches on each press. The optional meter limits use in real seconds and regenerates while inactive. Disable the meter for unlimited use. Remap the action and configure duration and regeneration below.
+mk Користи го посебното дејство Забавено време за да ја забавиш целата локална игра на 20% брзина. Држење е стандардно; Префрлање се вклучува при секое притискање. Опционалната скала ја ограничува употребата во реални секунди и се обновува кога е неактивна. Исклучи ја скалата за неограничена употреба. Пренасочи го дејството и постави траење и обновување подолу.
+
+@ Both shotguns and enemy grunts fire physical pellets with their original spread and damage. Fast default projectiles feel immediate; lower their speed to dodge incoming fire during bullet time. Configure projectile speed below, or reset it to the default of 10000 units per second.
+mk Двете сачмарки и непријателските војници пукаат физички сачми со нивното оригинално расејување и штета. Брзите стандардни проектили делуваат веднаш; намали им ја брзината за да избегнуваш истрели за време на забавеното време. Брзината на проектилите се поставува подолу или се враќа на стандардните 10000 единици во секунда.
+
+@ Freezes the game for a split second when you damage an enemy, so hits feel heavier. Single player only. Choose which weapons trigger it (all, melee, ranged or explosives), how long it lasts and how much more a kill freezes. Advanced settings cover enemy toughness, damage scaling, cooldown and the longest freeze.
+mk Ја замрзнува играта за делче од секунда кога ќе раниш непријател, за ударите да се чувствуваат потешки. Само за еден играч. Избери кои оружја го предизвикуваат (сите, близок бој, далечен бој или експлозиви), колку трае и колку подолго замрзнува убиство. Напредните поставки ги опфаќаат силата на непријателите, скалирањето на штетата, паузата и најдолгото замрзнување.
+
+# map packs and the Quaddicted browser
+@ Get more maps (Quaddicted)...
+mk Повеќе мапи (Quaddicted)...
+
+@ Type to filter...
+mk Пишувај за филтрирање...
+
+@ Launch mod
+mk Стартувај мод
+
+@ Start first map
+mk Почни ја првата мапа
+
+@ (running)
+mk (активно)
+
+@ running
+mk активно
+
+@ Recent
+mk Неодамнешни
+
+@ Name
+mk Име
+
+@ Dir
+mk Папка
+
+@ Default
+mk Стандардно
+
+@ Title
+mk Наслов
+
+@ Sort: {}
+mk Подредување: {}
+
+@ {} installed
+mk {} инсталирани
+
+@ {}/{} matching
+mk {}/{} се совпаѓаат
+
+@ {} maps, {} completed
+mk {} мапи, {} завршени
+
+@ {}/{} matching, {} completed
+mk {}/{} се совпаѓаат, {} завршени
+
+@ no maps of its own
+mk нема свои мапи
+
+@ dir: {}
+mk папка: {}
+
+@ base: {}
+mk основа: {}
+
+@ Browse the Quaddicted archive of
+mk Прелистај ја архивата Quaddicted
+
+@ single-player maps and episodes,
+mk со мапи и епизоди за еден играч,
+
+@ then download and install them
+mk потоа преземи ги и инсталирај ги
+
+@ here. Each release gets its own
+mk тука. Секое издание добива свој
+
+@ entry in this list.
+mk запис во оваа листа.
+
+@ Needs an internet connection.
+mk Бара интернет врска.
+
+@ Quaddicted Map Archive
+mk Архива на мапи Quaddicted
+
+@ Newest
+mk Најнови
+
+@ Author
+mk Автор
+
+@ Size
+mk Големина
+
+@ Loading the map list...
+mk Се вчитува листата на мапи...
+
+@ Couldn't load the map list: {}
+mk Листата на мапи не може да се вчита: {}
+
+@ {} single-player releases  -  F5 refreshes
+mk Изданија за еден играч: {}  -  F5 освежува
+
+@ {} matching
+mk {} се совпаѓаат
+
+@ by {}
+mk од {}
+
+@ requires: {}
+mk бара: {}
+
+@ maps: {}
+mk мапи: {}
+
+@ Failed: {}
+mk Неуспешно: {}
+
+@ Downloading... {}%
+mk Преземање... {}%
+
+@ Unpacking...
+mk Распакување...
+
+@ Installed in {}/  -  Enter: play
+mk Инсталирано во {}/  -  Enter: играј
+
+@ Enter: download and install
+mk Enter: преземи и инсталирај
+
+@ unpacking
+mk распакување
+
+@ failed
+mk неуспешно
+
+@ installed
+mk инсталирано
+
+@ Downloads are not available in the browser build
+mk Преземањата не се достапни во верзијата за прелистувач
+
+@ the map list could not be read
+mk листата на мапи не може да се прочита
+
+@ downloading needs the curl program
+mk за преземање е потребна програмата curl
+
+@ download failed
+mk преземањето не успеа
+
+@ the download is not a valid zip
+mk преземеното не е валиден zip
+
+@ nothing to install for this engine
+mk нема ништо за инсталирање за овој мотор
+
+@ needs {} installed first
+mk прво треба да се инсталира {}
+
+@ couldn't unpack {}
+mk не може да се распакува {}
+
+# help screen
+@ About
+mk За играта
+
+@ < Back
+mk < Назад
+
+# tr_ctx keys: English shows the short word, the key says which meaning
+@ Save (a manual save, as opposed to a quicksave or autosave)
+mk Зачувај
+
+# ==== hud.txt ====
+
+# HUD, weapon and equipment wheels, sound captions and other in-game text.
+# Weapon, monster and item names follow the 2021 re-release's own translations.
+@ Axe
+mk Секира
+
+@ Shotgun
+mk Сачмарка
+
+@ Double-Barrelled Shotgun
+mk Двоцевка
+
+@ Nailgun
+mk Клинцомет
+
+@ Super Nailgun
+mk Супер клинцомет
+
+@ Grenade Launcher
+mk Фрлач на гранати
+
+@ Rocket Launcher
+mk Ракетен фрлач
+
+@ Thunderbolt
+mk Громовник
+
+@ Portal Gun
+mk Портален пиштол
+
+@ Boomerang
+mk Бумеранг
+
+@ Stickybomb Launcher
+mk Фрлач на лепливи бомби
+
+@ Railgun
+mk Рејлган
+
+@ Hookshot
+mk Кука
+
+@ Gel Sprayer
+mk Прскалка за гел
+
+@ Powerwasher
+mk Перач под притисок
+
+@ Night Vision Goggles
+mk Очила за ноќно гледање
+
+@ Thermal Goggles
+mk Термални очила
+
+@ Normal vision
+mk Нормален вид
+
+@ ON
+mk ВКЛ.
+
+@ OFF
+mk ИСКЛ.
+
+@ {} (turn on)
+mk {} (вклучи)
+
+@ {} (turn off)
+mk {} (исклучи)
+
+@ Move mouse to select, release to toggle
+mk Мрдни го глушецот за избор, пушти за префрлање
+
+@ Move mouse to select, release to equip
+mk Мрдни го глушецот за избор, пушти за опремување
+
+@ Release to toggle
+mk Пушти за префрлање
+
+@ Release to equip
+mk Пушти за опремување
+
+@ shells
+mk сачми
+
+@ nails
+mk клинци
+
+@ rockets
+mk ракети
+
+@ cells
+mk ќелии
+
+@ Kills: {}/{}
+mk Убиства: {}/{}
+
+@ Secrets: {}/{}
+mk Тајни: {}/{}
+
+@ Time {}
+mk Време {}
+
+@ Press any button to continue...
+mk Притисни кое било копче за продолжување...
+
+@ Press any key to continue...
+mk Притисни кој било тастер за продолжување...
+
+@ BULLET TIME
+mk ЗАБАВЕНО ВРЕМЕ
+
+@ AUTO AIM
+mk АВТОНИШАН
+
+@ Crosshair
+mk Нишан
+
+@ + Marker
+mk + ознака
+
+@ Hit markers off
+mk Ознаки за погодок искл.
+
+@ On target
+mk На цел
+
+@ On kill
+mk При убиство
+
+# sound captions
+@ [Secret found]
+mk [Пронајдена тајна]
+
+@ [Message]
+mk [Порака]
+
+@ [Switch activated]
+mk [Активиран прекинувач]
+
+@ [Key picked up]
+mk [Земен клуч]
+
+@ [Rune picked up]
+mk [Земена руна]
+
+@ [Teleporter]
+mk [Телепорт]
+
+@ [Teleport]
+mk [Телепортирање]
+
+@ [Splash]
+mk [Пљусок]
+
+@ [Leaving water]
+mk [Излегување од вода]
+
+@ [Door]
+mk [Врата]
+
+@ [Platform moving]
+mk [Платформа се движи]
+
+@ [Button]
+mk [Копче]
+
+@ [Health picked up]
+mk [Земено здравје]
+
+@ [Armor picked up]
+mk [Земен оклоп]
+
+@ [Quad Damage wearing off]
+mk [Четирикратна штета истекува]
+
+@ [Quad Damage]
+mk [Четирикратна штета]
+
+@ [Pentagram wearing off]
+mk [Пентаграмот истекува]
+
+@ [Pentagram of Protection]
+mk [Пентаграм на заштита]
+
+@ [Ring wearing off]
+mk [Прстенот истекува]
+
+@ [Ring of Shadows]
+mk [Прстен на сенките]
+
+@ [Biosuit wearing off]
+mk [Биооделото истекува]
+
+@ [Biosuit]
+mk [Биоодело]
+
+@ [Item picked up]
+mk [Земен предмет]
+
+@ [Weapon picked up]
+mk [Земено оружје]
+
+@ [Ammo picked up]
+mk [Земена муниција]
+
+@ [Explosion]
+mk [Експлозија]
+
+@ [Grenade launched]
+mk [Исфрлена граната]
+
+@ [Grenade bounce]
+mk [Граната отскокнува]
+
+@ [Rocket fired]
+mk [Испукана ракета]
+
+@ [Nails fired]
+mk [Испукани клинци]
+
+@ [Lightning]
+mk [Молња]
+
+@ [Thunder]
+mk [Гром]
+
+@ [Enforcer alerted]
+mk [Казнувачот те забележа]
+
+@ [Grunt alerted]
+mk [Војникот те забележа]
+
+@ [Rottweiler alerted]
+mk [Ротвајлерот те забележа]
+
+@ [Knight alerted]
+mk [Витезот те забележа]
+
+@ [Death Knight alerted]
+mk [Витезот на смртта те забележа]
+
+@ [Scrag alerted]
+mk [Скрагот те забележа]
+
+@ [Ogre alerted]
+mk [Огрот те забележа]
+
+@ [Fiend alerted]
+mk [Ѓаволот те забележа]
+
+@ [Shambler alerted]
+mk [Шамблерот те забележа]
+
+@ [Zombie groaning]
+mk [Зомби стенка]
+
+@ [Vore alerted]
+mk [Шалратот те забележа]
+
+@ [Vore attacking]
+mk [Шалратот напаѓа]
+
+@ [Spawn alerted]
+mk [Грутката те забележа]
+
+@ [Rotfish]
+mk [Пирана]
+
+@ [Spawn]
+mk [Грутка]
+
+@ [Chthon]
+mk [Хтон]
+
+@ [Hard landing]
+mk [Тешко слетување]
+
+@ [Drowning]
+mk [Давење]
+
+@ [Gasping for air]
+mk [Здив за воздух]
+
+@ [Burning]
+mk [Горење]
+
+@ [Telefrag]
+mk [Телефраг]
+
+@ [Gibbed]
+mk [Распарчен]
+
+# ==== console.txt ====
+
+# Console messages, shown translated only with con_translate 1 (Translate Console).
+# Cvar and command names stay as they are.
+@ Autosaved.
+mk Автоматски зачувано.
+
+@ Game saved.
+mk Играта е зачувана.
+
+@ Can't save now.
+mk Сега не може да се зачува.
+
+@ This game only autosaves (No Manual Saves modifier).
+mk Оваа игра само автоматски зачувува (модификатор Без рачно зачувување).
+
+@ Loading {}...
+mk Се вчитува {}...
+
+@ load failed: {}
+mk вчитувањето не успеа: {}
+
+@ ERROR: autosave failed: {}
+mk ГРЕШКА: автозачувувањето не успеа: {}
+
+@ ERROR: couldn't open {}
+mk ГРЕШКА: не може да се отвори {}
+
+@ ERROR: couldn't open {}.
+mk ГРЕШКА: не може да се отвори {}.
+
+@ ERROR: couldn't write {}: {}
+mk ГРЕШКА: не може да се запише {}: {}
+
+@ ERROR: couldn't create {}: {}
+mk ГРЕШКА: не може да се создаде {}: {}
+
+@ couldn't write {}: {}
+mk не може да се запише {}: {}
+
+@ Wrote {}
+mk Запишано {}
+
+@ screenshot failed: {}
+mk снимката на екранот не успеа: {}
+
+@ screenshot: {}
+mk снимка на екранот: {}
+
+@ No readable save available. Select save or restart the level.
+mk Нема читливо зачувување. Избери зачувување или рестартирај го нивото.
+
+@ Unknown command "{}"
+mk Непозната команда „{}“
+
+@ couldn't exec {}
+mk не може да се изврши {}
+
+@ execing {}
+mk се извршува {}
+
+@ execing config.cfg (inherited from {})
+mk се извршува config.cfg (наследено од {})
+
+@ execing config.cfg (mod defaults)
+mk се извршува config.cfg (стандардно за модот)
+
+@ execing default.cfg (built-in)
+mk се извршува default.cfg (вградено)
+
+@ {} cvars
+mk {} cvar-и
+
+@ {} commands
+mk {} команди
+
+@ Can't "cmd", not connected
+mk Не може „cmd“, нема врска
+
+@ Looking for Quake servers...
+mk Се бараат Quake сервери...
+
+@ Bad value, must be between 1 and 65534
+mk Лоша вредност, мора да е меѓу 1 и 65534
+
+@ Couldn't handle music file {}
+mk Музичката датотека {} не може да се обработи
+
+@ Bug report written to {}
+mk Извештајот за грешка е запишан во {}
+
+@ bugreport: can't create {}: {}
+mk bugreport: не може да се создаде {}: {}
+
+@ graphics preset: {}
+mk графичка предлошка: {}
+
+@ Presets (r_shader_preset <name>):
+mk Предлошки (r_shader_preset <name>):
+
+@ Add your own .slangp presets under <game>/shaders/.
+mk Додај свои .slangp предлошки во <game>/shaders/.
+
+@ no shader preset loaded (r_shader_preset)
+mk нема вчитана предлошка на шејдер (r_shader_preset)
+
+@ r_shader_preset: "{}" not found
+mk r_shader_preset: „{}“ не е пронајдена
+
+@ no parameter "{}" in this preset
+mk нема параметар „{}“ во оваа предлошка
+
+@ {} = {} (default {}, {}..{})
+mk {} = {} (стандардно {}, {}..{})
+
+@ Switching to {}...
+mk Префрлање на {}...
+
+@ game: no game dir "{}" in {}
+mk game: нема папка за игра „{}“ во {}
+
+@ game: can't find the engine executable
+mk game: не може да се најде извршната датотека на моторот
+
+@ game: exec failed: {}
+mk game: извршувањето не успеа: {}
+
+@ game: launch failed: {}
+mk game: стартувањето не успеа: {}
+
+@ loaded {} in {}s
+mk {} вчитано за {} с
+
+@ No demos listed with startdemos
+mk Нема демо-снимки наведени со startdemos
+
+@ Playing demo from {}.
+mk Се пушта демо од {}.
+
+@ {} frames {} seconds {} fps
+mk {} рамки {} секунди {} fps
+
+@ Recording to {}.
+mk Снимање во {}.
+
+@ Completed demo
+mk Демото заврши
+
+@ Can't record during demo playback
+mk Не може да се снима за време на репродукција на демо
+
+@ Relative pathnames are not allowed.
+mk Релативни патеки не се дозволени.
+
+@ Can't record - try again when connected
+mk Не може да се снима - обиди се повторно кога ќе се поврзеш
+
+@ {} demo(s) in loop
+mk {} демо(а) во циклус
+
+@ Not recording a demo.
+mk Не се снима демо.
+
+@ {} joined on a gamepad
+mk {} се приклучи со контролер
+
+@ goggles: needs a game started with Add-ons and Goggles enabled
+mk goggles: бара игра започната со вклучени Додатоци и Очила
+
+@ equip: needs a game started with Add-ons and Goggles enabled
+mk equip: бара игра започната со вклучени Додатоци и Очила
+
+@ UDP listening on port {}
+mk UDP слуша на порта {}
+
+@ UDP bind on port {} failed: {}
+mk UDP поврзувањето на порта {} не успеа: {}
+
+@ Connection accepted by {}
+mk Врската е прифатена од {}
+
+@ Connection failed: {}
+mk Врската не успеа: {}
+
+@ Couldn't resolve {}
+mk {} не може да се разреши
+
+@ Connecting to {}...
+mk Поврзување со {}...
+
+@ Connecting to QuakeWorld server {}...
+mk Поврзување со QuakeWorld серверот {}...
+
+@ Disconnected: {}
+mk Исклучено: {}
+
+@ Server disconnected
+mk Серверот ја прекина врската
+
+@ Client {} connected
+mk Клиентот {} се поврза
+
+@ Client {} timed out
+mk Клиентот {} истече
+
+@ Couldn't spawn server {}: {}
+mk Серверот {} не може да се стартува: {}
+
+@ maxplayers can not be changed while a server is running.
+mk maxplayers не може да се менува додека серверот работи.
+
+@ You can't kick yourself!
+mk Не можеш да се исфрлиш самиот себе!
+
+@ Only the server may changelevel
+mk Само серверот може да прави changelevel
+
+@ {} renamed to {}
+mk {} се преименува во {}

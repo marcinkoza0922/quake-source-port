@@ -1,0 +1,3024 @@
+# hu: the port's own text; English keys from crates/qcore/lang/*.txt.
+# Format in crates/qcore/src/lang/catalog.rs; check with tools/lang_check.py.
+
+# ==== menu.txt ====
+
+# Options pages: page names, row labels and choice values.
+@ 10% speed
+hu 10%-os sebesség
+
+@ 2 split-screen
+hu 2 osztott képernyőn
+
+@ 3 split-screen
+hu 3 osztott képernyőn
+
+@ 4 split-screen
+hu 4 osztott képernyőn
+
+@ 5 split-screen
+hu 5 osztott képernyőn
+
+@ 6 split-screen
+hu 6 osztott képernyőn
+
+@ 2D aiming
+hu 2D célzás
+
+@ 2x monsters
+hu 2× szörny
+
+@ 3x monsters
+hu 3× szörny
+
+@ 4x monsters
+hu 4× szörny
+
+@ 3D resolution
+hu 3D felbontás
+
+@ 3D view
+hu 3D nézet
+
+@ 8-bit Color
+hu 8 bites színek
+
+@ Accessibility
+hu Akadálymentesség
+
+@ Acquisition Cone
+hu Befogási kúp
+
+@ Activation
+hu Aktiválás
+
+@ Add a ringing room tail after the cue
+hu Csengő teremlecsengést ad a jelzés után
+
+@ Add delayed repeats after the cue
+hu Késleltetett ismétléseket ad a jelzés után
+
+@ Add saturation and distortion
+hu Telítettséget és torzítást ad hozzá
+
+@ Add-ons
+hu Kiegészítők
+
+@ Address
+hu Cím
+
+@ Adds fine noise to hide color banding
+hu Finom zajt ad a színsávosodás elrejtésére
+
+@ Advanced Settings
+hu Speciális beállítások
+
+@ Aim Assist
+hu Célzássegéd
+
+@ Aim Rotation
+hu Célzás forgatása
+
+@ Aim Slowdown
+hu Célzás lassítása
+
+@ Aim Style
+hu Célzási stílus
+
+@ All
+hu Mind
+
+@ All enemies
+hu Minden ellenség
+
+@ Alt Fire (Add-ons)
+hu Másodlagos tűz (kiegészítők)
+
+@ Always Run
+hu Mindig fut
+
+@ Ambient Occlusion
+hu Környezeti takarás
+
+@ Ammo Counts
+hu Lőszerszámlálók
+
+@ Ammo Counts Position
+hu Lőszerszámlálók helye
+
+@ Ammo Pickups
+hu Felvett lőszer
+
+@ Anisotropic
+hu Anizotróp
+
+@ Anti-aliasing
+hu Élsimítás
+
+@ Apply To
+hu Alkalmazás erre
+
+@ Armor
+hu Páncél
+
+@ Armor Position
+hu Páncél helye
+
+@ Ask
+hu Kérdezzen
+
+@ Attack
+hu Támadás
+
+@ Audio
+hu Hang
+
+@ Auto-aim
+hu Automatikus célzás
+
+@ Auto-aim Settings
+hu Automatikus célzás beállításai
+
+@ Autosave
+hu Automentés
+
+@ Autosave Settings
+hu Automentés beállításai
+
+@ Autosave Timer
+hu Automentés időzítése
+
+@ Autosaves to Keep
+hu Megtartott automentések
+
+@ Bass
+hu Mély
+
+@ Blip
+hu Csipogás
+
+@ Blood Quality
+hu Vér minősége
+
+@ Blood Splatter Settings
+hu Vérfröccs beállításai
+
+@ Blue
+hu Kék
+
+@ Boomerang Settings
+hu Bumeráng beállításai
+
+@ Boost or cut high frequencies in decibels
+hu A magas hangok erősítése vagy vágása decibelben
+
+@ Boost or cut low frequencies in decibels
+hu A mély hangok erősítése vagy vágása decibelben
+
+@ Brightness
+hu Fényerő
+
+@ Bullet Time (Add-ons)
+hu Bullet time (kiegészítők)
+
+@ Bullet Time Settings
+hu Bullet time beállításai
+
+@ Button Glyphs
+hu Gombikonok
+
+@ Button Size
+hu Gombméret
+
+@ Camera
+hu Kamera
+
+@ Caustic Intensity
+hu Kausztika erőssége
+
+@ Caustics
+hu Kausztika
+
+@ Center
+hu Közép
+
+@ Center Message Position
+hu Középső üzenet helye
+
+@ Center Message Time
+hu Középső üzenet ideje
+
+@ Center View
+hu Nézet középre
+
+@ Change Color on Kill
+hu Színváltás öléskor
+
+@ Change Color on Target
+hu Színváltás célponton
+
+@ Chime
+hu Harang
+
+@ Click
+hu Kattanás
+
+@ Clink
+hu Csilingelés
+
+@ Coin
+hu Érme
+
+@ Color
+hu Szín
+
+@ Color Filter
+hu Színszűrő
+
+@ Color of the grenade arc
+hu A gránát ívének színe
+
+@ Colored Lighting
+hu Színes megvilágítás
+
+@ Connect
+hu Csatlakozás
+
+@ Contrast
+hu Kontraszt
+
+@ Controls
+hu Irányítás
+
+@ Cooldown (ms)
+hu Visszatöltés (ms)
+
+@ Crosshair Outline
+hu Célkereszt körvonala
+
+@ Crosshair Shape
+hu Célkereszt alakja
+
+@ Crosshair Size
+hu Célkereszt mérete
+
+@ Current Ammo
+hu Aktuális lőszer
+
+@ Current Ammo Position
+hu Aktuális lőszer helye
+
+@ Customize This Game
+hu A játék testreszabása
+
+@ Damage
+hu Sebzés
+
+@ Damage Taken
+hu Elszenvedett sebzés
+
+@ Debris
+hu Törmelék
+
+@ Debris Quality
+hu Törmelék minősége
+
+@ Debris Settings
+hu Törmelék beállításai
+
+@ Directional Damage
+hu Sebzés iránya
+
+@ Dithering
+hu Dithering
+
+@ Dodge / Dive (Add-ons)
+hu Kitérés / vetődés (kiegészítők)
+
+@ Dragging up looks down instead of up
+hu Felfelé húzás lefelé néz, nem felfelé
+
+@ Drive
+hu Telítés
+
+@ Dynamic Lights
+hu Dinamikus fények
+
+@ Echo
+hu Visszhang
+
+@ Enemy Health
+hu Ellenség életereje
+
+@ Enemy Wounds
+hu Ellenség sebei
+
+@ Enhanced Blood Splatter
+hu Továbbfejlesztett vérfröccs
+
+@ Enhanced FX
+hu Továbbfejlesztett effektek
+
+@ Enhanced Models
+hu Továbbfejlesztett modellek
+
+@ Enhanced Particles
+hu Továbbfejlesztett részecskék
+
+@ Enhanced Water
+hu Továbbfejlesztett víz
+
+@ Enhancements
+hu Fejlesztések
+
+@ Equipment Wheel (Add-ons)
+hu Felszereléskerék (kiegészítők)
+
+@ Exploding boxes throw metal shards
+hu A felrobbanó ládák fémszilánkokat szórnak
+
+@ Explosion Damage
+hu Robbanási sebzés
+
+@ Explosion Scorch Marks
+hu Robbanási égésnyomok
+
+@ Explosions scorch nearby solid surfaces
+hu A robbanások megperzselik a közeli szilárd felületeket
+
+@ Explosives only
+hu Csak robbanóanyagok
+
+@ Extra Monsters
+hu Extra szörnyek
+
+@ Extra Per 10 Damage (ms)
+hu Extra 10 sebzésenként (ms)
+
+@ FX Settings
+hu Effektbeállítások
+
+@ Field of View
+hu Látómező
+
+@ Firing never uses up ammo
+hu A lövés sosem fogyaszt lőszert
+
+@ First person
+hu Belső nézet
+
+@ Flick Time
+hu Csapásidő
+
+@ Flight Speed
+hu Repülési sebesség
+
+@ Fog
+hu Köd
+
+@ Frag Limit
+hu Fraglimit
+
+@ Freeze Duration (ms)
+hu Fagyasztás hossza (ms)
+
+@ GLQuake
+hu GLQuake
+
+@ Game Speed
+hu Játéksebesség
+
+@ Game Type
+hu Játéktípus
+
+@ Gameplay
+hu Játékmenet
+
+@ Gameplay Modifiers
+hu Játékmódosítók
+
+@ Gel Quality
+hu Zselé minősége
+
+@ Gib Surface Painting
+hu Cafatnyomok a felületeken
+
+@ Gibs
+hu Húscafatok
+
+@ Gibs and heads tumble and bounce
+hu A húscafatok és fejek gurulnak, pattognak
+
+@ Goggle Glow Quality
+hu Szemüveg fényének minősége
+
+@ Goggle Intensity
+hu Szemüveg erőssége
+
+@ Goggle Noise
+hu Szemüveg zaja
+
+@ Goggles Settings
+hu Szemüveg beállításai
+
+@ Graphics
+hu Grafika
+
+@ Green
+hu Zöld
+
+@ Grenade Arc
+hu Gránátív
+
+@ Grenade Arc Settings
+hu Gránátív beállításai
+
+@ Gun Kick
+hu Fegyver rúgása
+
+@ Gyro
+hu Giroszkóp
+
+@ Gyro & Flick Stick
+hu Giroszkóp és flick stick
+
+@ Gyro Active
+hu Giroszkóp aktív
+
+@ Gyro Aiming
+hu Giroszkópos célzás
+
+@ HUD
+hu HUD
+
+@ HUD Style
+hu HUD stílusa
+
+@ Health
+hu Életerő
+
+@ Health Pickups
+hu Felvett életerő
+
+@ Health Position
+hu Életerő helye
+
+@ Health Regeneration
+hu Életerő-regeneráció
+
+@ Hit & Kill Sounds
+hu Találat- és öléshangok
+
+@ Hit Doors & Lifts
+hu Ajtók és liftek találata
+
+@ Hit Markers
+hu Találatjelzők
+
+@ Hit Sound
+hu Találathang
+
+@ Hitmarker Size
+hu Találatjelző mérete
+
+@ Hitmarker Type
+hu Találatjelző típusa
+
+@ Hitstop Advanced
+hu Speciális hitstop
+
+@ Hitstop Settings
+hu Hitstop beállításai
+
+@ Hold
+hu Nyomva tartás
+
+@ Hold lock-on
+hu Befogás nyomva tartva
+
+@ Hook Enemies
+hu Ellenségek beakasztása
+
+@ Hook Metal
+hu Fémbe akasztás
+
+@ Hook Stone
+hu Kőbe akasztás
+
+@ Hook Wood
+hu Fába akasztás
+
+@ Hooking an enemy pulls you to it
+hu A beakasztott ellenség magához húz
+
+@ Hookshot Range
+hu Csáklya hatótávja
+
+@ Hookshot Settings
+hu Csáklya beállításai
+
+@ Host Game
+hu Játék indítása
+
+@ How far the hook flies before it retracts
+hu Milyen messzire repül a csáklya visszahúzás előtt
+
+@ How visible the on-screen controls are
+hu Mennyire látható a képernyős irányítás
+
+@ Impact Lifetime
+hu Becsapódások élettartama
+
+@ Infinite Ammo
+hu Végtelen lőszer
+
+@ Input
+hu Bemenet
+
+@ Input Scale
+hu Bemenet skálázása
+
+@ Interpolate Animation
+hu Animáció interpolálása
+
+@ Interpolate Movement
+hu Mozgás interpolálása
+
+@ Invert Look
+hu Nézés megfordítása
+
+@ Invert Mouse
+hu Egér megfordítása
+
+@ Invert Stick
+hu Kar megfordítása
+
+@ Jet Quality
+hu Sugár minősége
+
+@ Join Game
+hu Csatlakozás játékhoz
+
+@ Jump / Swim Up
+hu Ugrás / felúszás
+
+@ Jump again in mid-air
+hu Újabb ugrás a levegőben
+
+@ Jumps
+hu Ugrások
+
+@ Keys & Powerups
+hu Kulcsok és bónuszok
+
+@ Keys & Powerups Position
+hu Kulcsok és bónuszok helye
+
+@ Kill Bonus (x)
+hu Ölési bónusz (x)
+
+@ Kill Sound
+hu Öléshang
+
+@ Knock
+hu Kopogás
+
+@ Left
+hu Bal
+
+@ Length of the motion blur streaks
+hu A mozgási elmosódás csíkjainak hossza
+
+@ Lifetime (seconds)
+hu Élettartam (másodperc)
+
+@ Live Portal Views
+hu Élő portálnézetek
+
+@ Live View Distance
+hu Élő nézet távolsága
+
+@ Local Players
+hu Helyi játékosok
+
+@ Local red wounds follow enemy animation
+hu Helyi vörös sebek követik az ellenség animációját
+
+@ Lock Indicator
+hu Befogásjelző
+
+@ Long falls don't hurt
+hu A nagy esések nem sebeznek
+
+@ Longest Freeze (ms)
+hu Leghosszabb fagyasztás (ms)
+
+@ Look Down
+hu Lenézés
+
+@ Look Speed
+hu Nézési sebesség
+
+@ Look Up
+hu Felnézés
+
+@ Main Menu Music
+hu Főmenü zenéje
+
+@ Max FPS
+hu Max. FPS
+
+@ Max Players
+hu Max. játékos
+
+@ Maximum Impacts
+hu Becsapódások max. száma
+
+@ Maximum Marks
+hu Nyomok max. száma
+
+@ Maximum Range
+hu Max. hatótáv
+
+@ Melee only
+hu Csak közelharc
+
+@ Message Background
+hu Üzenet háttere
+
+@ Message Text Size
+hu Üzenetek betűmérete
+
+@ Messages & Captions
+hu Üzenetek és feliratok
+
+@ Meter Duration (real seconds)
+hu Mérő időtartama (valós mp)
+
+@ Minimum Damage
+hu Minimális sebzés
+
+@ Mode
+hu Mód
+
+@ Modern Console
+hu Modern konzol
+
+@ Modern HUD Layout
+hu Modern HUD-elrendezés
+
+@ Most recent save
+hu Legutóbbi mentés
+
+@ Motion Blur
+hu Mozgási elmosódás
+
+@ Motion Blur Amount
+hu Mozgási elmosódás mértéke
+
+@ Motion Blur Quality
+hu Mozgási elmosódás minősége
+
+@ Mouse & Keyboard
+hu Egér és billentyűzet
+
+@ Mouse Speed
+hu Egérsebesség
+
+@ Move Back
+hu Hátra
+
+@ Move Forward
+hu Előre
+
+@ Music Volume
+hu Zene hangereje
+
+@ Next Weapon
+hu Következő fegyver
+
+@ No Drowning
+hu Nincs fulladás
+
+@ No Fall Damage
+hu Nincs esési sebzés
+
+@ No Manual Saves
+hu Nincs kézi mentés
+
+@ No Self Damage
+hu Nincs önsebzés
+
+@ Noise Filter
+hu Zajszűrő
+
+@ Normal Color
+hu Normál szín
+
+@ Notify Message Position
+hu Értesítések helye
+
+@ Notify Message Time
+hu Értesítések ideje
+
+@ Number of splatter rays per blood impact
+hu Fröccssugarak száma vérbecsapódásonként
+
+@ Off
+hu Ki
+
+@ On Death
+hu Halálkor
+
+@ On Kill Color
+hu Szín öléskor
+
+@ On Target Color
+hu Szín célponton
+
+@ Opacity
+hu Átlátszatlanság
+
+@ Opacity of the grenade arc
+hu A gránátív átlátszatlansága
+
+@ Pants Color
+hu Nadrág színe
+
+@ Particle Quality
+hu Részecskék minősége
+
+@ Particles
+hu Részecskék
+
+@ Physical Nail Impacts
+hu Fizikai szögbecsapódások
+
+@ Pistol Start
+hu Kezdés nulláról
+
+@ Pitch
+hu Hangmagasság
+
+@ Pitch Sensitivity
+hu Függőleges érzékenység
+
+@ Playback Speed
+hu Lejátszási sebesség
+
+@ Player Setup
+hu Játékosbeállítás
+
+@ Pop
+hu Pukkanás
+
+@ Portal Gun Settings
+hu Portálfegyver beállításai
+
+@ Portal Recursion
+hu Portálrekurzió
+
+@ Portal View Quality
+hu Portálnézet minősége
+
+@ Preview Sound
+hu Hang meghallgatása
+
+@ Previous Weapon
+hu Előző fegyver
+
+@ Projectile Shotguns Settings
+hu Lövedékes sörétesek beállításai
+
+@ Projectile Speed (units/s)
+hu Lövedéksebesség (egység/s)
+
+@ Purple
+hu Lila
+
+@ Push
+hu Lökés
+
+@ Push Strength
+hu Lökés ereje
+
+@ Quick Load
+hu Gyorsbetöltés
+
+@ Quick Save
+hu Gyorsmentés
+
+@ Railgun Settings
+hu Railgun beállításai
+
+@ Ranged only
+hu Csak távolsági
+
+@ Reacquire While Held
+hu Újrabefogás nyomva tartva
+
+@ Red
+hu Piros
+
+@ Reduce Motion
+hu Kevesebb mozgás
+
+@ Regen (seconds per second)
+hu Regeneráció (mp/mp)
+
+@ Render Scale
+hu Renderelési skála
+
+@ Reverb
+hu Zengetés
+
+@ Right
+hu Jobb
+
+@ Ripple Intensity
+hu Hullámzás erőssége
+
+@ Ripples
+hu Hullámzás
+
+@ Roll Sensitivity
+hu Dőlési érzékenység
+
+@ Rumble
+hu Rezgés
+
+@ Run
+hu Futás
+
+@ Save on All Enemies Killed
+hu Mentés, ha minden ellenség halott
+
+@ Save on All Secrets Found
+hu Mentés, ha minden titok megvan
+
+@ Save on Level Entry
+hu Mentés pályakezdéskor
+
+@ Save on Secret Found
+hu Mentés titok megtalálásakor
+
+@ Scoreboard
+hu Eredménytábla
+
+@ Screen Flashes
+hu Képernyővillanások
+
+@ Screen Shader
+hu Képernyő-shader
+
+@ Screen Shake
+hu Képernyőrázkódás
+
+@ Search LAN
+hu Keresés LAN-on
+
+@ Seconds a center-screen message stays up
+hu Ennyi másodpercig látszik egy középső üzenet
+
+@ See Through Portals
+hu Átlátás a portálokon
+
+@ See-through Teleporters
+hu Átlátszó teleporterek
+
+@ Shirt Color
+hu Ing színe
+
+@ Shotgun Bullet Decals
+hu Sörétnyomok
+
+@ Shoulder left
+hu váll balra
+
+@ Shoulder right
+hu váll jobbra
+
+@ Show FPS
+hu FPS kijelzése
+
+@ Show Face
+hu Arc megjelenítése
+
+@ Shrapnel
+hu Repeszek
+
+@ Size of on-screen messages and captions
+hu A képernyőüzenetek és feliratok mérete
+
+@ Skill
+hu Nehézség
+
+@ Sky Fog
+hu Égbolt köde
+
+@ Smooths the stepped movement of monsters
+hu Kisimítja a szörnyek lépcsőzetes mozgását
+
+@ Sound
+hu Hang
+
+@ Sound Captions
+hu Hangfeliratok
+
+@ Sound Volume
+hu Effekthangerő
+
+@ Speed Blur
+hu Sebességi elmosódás
+
+@ Splashes
+hu Csobbanások
+
+@ Splatter Amount
+hu Fröccsök mennyisége
+
+@ Splatter Size
+hu Fröccsök mérete
+
+@ Start Game
+hu Játék indítása
+
+@ Staying underwater doesn't hurt
+hu A víz alatt maradás nem sebez
+
+@ Stick Look Pitch
+hu Kar függőleges nézés
+
+@ Stick Look Yaw
+hu Kar vízszintes nézés
+
+@ Strafe Left
+hu Oldalazás balra
+
+@ Strafe Right
+hu Oldalazás jobbra
+
+@ Strength of the surface swell and rings
+hu A felszíni hullámok és gyűrűk erőssége
+
+@ Stun Duration
+hu Kábítás hossza
+
+@ Style
+hu Stílus
+
+@ Supersampling
+hu Supersampling
+
+@ Surface Hit Effects
+hu Felületi találateffektek
+
+@ Swim Down
+hu Lemerülés
+
+@ Targets
+hu Célpontok
+
+@ Teamplay
+hu Csapatjáték
+
+@ Texture Filter
+hu Textúraszűrés
+
+@ Third person
+hu Külső nézet
+
+@ Thud
+hu Puffanás
+
+@ Tick
+hu Ketyegés
+
+@ Time Limit
+hu Időkorlát
+
+@ Time Stretch
+hu Időnyújtás
+
+@ Toggle Attack
+hu Támadás kapcsolása
+
+@ Toggle Run
+hu Futás kapcsolása
+
+@ Toggle auto-aim
+hu Automatikus célzás kapcsolása
+
+@ Touch Controls
+hu Érintésvezérlés
+
+@ Touchscreen
+hu Érintőképernyő
+
+@ Tough Enemy Health
+hu Szívós ellenség életereje
+
+@ Tough enemies only
+hu Csak szívós ellenségek
+
+@ Trail Colour
+hu Csóva színe
+
+@ Translate Console
+hu Konzol fordítása
+
+@ Translucent Water
+hu Áttetsző víz
+
+@ Treble
+hu Magas
+
+@ Turn Left
+hu Fordulás balra
+
+@ Turn Right
+hu Fordulás jobbra
+
+@ Underwater FX
+hu Víz alatti effektek
+
+@ Use Bullet Time Meter
+hu Bullet time mérő használata
+
+@ VSync
+hu VSync
+
+@ View Bob
+hu Nézet billegése
+
+@ Viewmodels
+hu Fegyvermodellek
+
+@ Volume
+hu Hangerő
+
+@ Water Opacity
+hu Víz átlátszatlansága
+
+@ Water Quality
+hu Víz minősége
+
+@ Water Settings
+hu Víz beállításai
+
+@ Weapon Wheel
+hu Fegyverkerék
+
+@ Weapon Wheel Slowdown
+hu Lassítás a fegyverkeréknél
+
+@ Weapons
+hu Fegyverek
+
+@ Weapons Position
+hu Fegyverek helye
+
+@ Where center-screen messages appear
+hu Hol jelennek meg a középső üzenetek
+
+@ Where pickup and event messages appear
+hu Hol jelennek meg a felvételi és eseményüzenetek
+
+@ White
+hu Fehér
+
+@ Yaw Sensitivity
+hu Vízszintes érzékenység
+
+@ Yellow
+hu Sárga
+
+# lowercase choice values
+@ T
+hu T
+
+@ always
+hu mindig
+
+@ auto
+hu auto
+
+@ banded
+hu sávos
+
+@ borderless
+hu keret nélküli
+
+@ bottom center
+hu lent középen
+
+@ bottom left
+hu lent balra
+
+@ bottom right
+hu lent jobbra
+
+@ box
+hu doboz
+
+@ broken square
+hu tört négyzet
+
+@ classic
+hu klasszikus
+
+@ coarse
+hu durva
+
+@ cooperative
+hu kooperatív
+
+@ cross
+hu kereszt
+
+@ cross + dot
+hu kereszt + pont
+
+@ cyan
+hu cián
+
+@ dashed
+hu szaggatott
+
+@ deathmatch
+hu deathmatch
+
+@ deuteranopia
+hu deuteranópia
+
+@ diagonal streaks
+hu átlós csíkok
+
+@ diamond
+hu rombusz
+
+@ dot
+hu pont
+
+@ double
+hu dupla
+
+@ double chevrons
+hu dupla nyilak
+
+@ double diagonals
+hu dupla átlók
+
+@ easy
+hu könnyű
+
+@ fine
+hu finom
+
+@ fit output
+hu kimenethez igazítva
+
+@ flick stick
+hu flick stick
+
+@ fullscreen
+hu teljes képernyő
+
+@ gap cross
+hu nyitott kereszt
+
+@ green
+hu zöld
+
+@ grey
+hu szürke
+
+@ half speed
+hu fél sebesség
+
+@ hard
+hu nehéz
+
+@ high
+hu magas
+
+@ huge
+hu óriási
+
+@ immersive
+hu immerzív
+
+@ intense
+hu intenzív
+
+@ large
+hu nagy
+
+@ larger
+hu nagyobb
+
+@ largest
+hu legnagyobb
+
+@ linear
+hu lineáris
+
+@ low
+hu alacsony
+
+@ lower
+hu alsó
+
+@ magenta
+hu bíbor
+
+@ medium
+hu közepes
+
+@ middle
+hu közép
+
+@ middle left
+hu középen balra
+
+@ middle right
+hu középen jobbra
+
+@ modern
+hu modern
+
+@ nearest
+hu legközelebbi
+
+@ nightmare
+hu rémálom
+
+@ nintendo
+hu Nintendo
+
+@ no team damage
+hu nincs csapatsebzés
+
+@ none
+hu nincs
+
+@ normal
+hu normál
+
+@ off
+hu ki
+
+@ off while held
+hu nyomva tartva ki
+
+@ on
+hu be
+
+@ only while held
+hu csak nyomva tartva
+
+@ playstation
+hu PlayStation
+
+@ protanopia
+hu protanópia
+
+@ quarter speed
+hu negyed sebesség
+
+@ red
+hu piros
+
+@ short diagonals
+hu rövid átlók
+
+@ single
+hu egyszeres
+
+@ small
+hu kicsi
+
+@ solid
+hu folytonos
+
+@ spectacle
+hu látványos
+
+@ subtle
+hu visszafogott
+
+@ team damage
+hu csapatsebzés
+
+@ top center
+hu fent középen
+
+@ top left
+hu fent balra
+
+@ top right
+hu fent jobbra
+
+@ triple
+hu tripla
+
+@ tritanopia
+hu tritanópia
+
+@ upper
+hu felső
+
+@ white
+hu fehér
+
+@ whole screen
+hu egész képernyő
+
+@ windowed
+hu ablakos
+
+@ xbox
+hu Xbox
+
+@ yellow
+hu sárga
+
+# ==== tooltips.txt ====
+
+# Options help lines (tooltips) and reasons for disabled rows.
+@ 2D aiming turns the view continuously with the right stick; flick stick snaps the view to where you push the stick, then turning the stick rotates it
+hu A 2D célzás folyamatosan forgatja a nézetet a jobb karral; a flick stick azonnal arra fordítja a nézetet, amerre a kart nyomod, majd a kar forgatása tovább forgatja
+
+@ 3D resolution relative to the window; the UI stays sharp
+hu 3D felbontás az ablakhoz képest; a kezelőfelület éles marad
+
+@ 3D view keeps the HUD and menus sharp; whole screen runs them through the shader too
+hu A 3D nézet élesen hagyja a HUD-ot és a menüket; az egész képernyő őket is átküldi a shaderen
+
+@ A Quake III style railgun: a slug that pierces every enemy on its line, using 2 cells a shot and refiring every 1.5 s; select it through its assigned weapon slot (Add-ons)
+hu Quake III-stílusú railgun: a lövedék a vonalában minden ellenségen áthatol, lövésenként 2 cellát használ, 1,5 mp-enként tüzelhet; a kijelölt fegyverhelyén választható ki (kiegészítők)
+
+@ A Zelda-style hookshot: fire sends a chain hook out; it latches onto hookable surfaces or enemies and reels you in; fire again to let go
+hu Zelda-stílusú csáklya: a tüzelés kilő egy láncos kampót, amely beakad az arra alkalmas felületekbe vagy ellenségekbe és odahúz; újabb tüzelés elenged
+
+@ Also translates the engine's console messages; off keeps them in English
+hu A motor konzolüzeneteit is lefordítja; kikapcsolva angolul maradnak
+
+@ Automatically acquire another enemy while holding Lock-on after losing a target
+hu Célpont elvesztése után automatikusan új ellenséget fog be, amíg a Célbefogás nyomva van
+
+@ Blends between animation frames of monsters and weapons
+hu Átmenetet képez a szörnyek és fegyverek animációs képkockái között
+
+@ Blood stains surfaces and bodies; cosmetic, independent of particle packs
+hu A vér megfesti a felületeket és testeket; csak látvány, független a részecskecsomagoktól
+
+@ Bloom glow around bright lights and heat sources; medium uses 4 taps, high uses 8, low disables halo taps
+hu Bloom fény az erős fények és hőforrások körül; a közepes 4, a magas 8 mintát használ, az alacsony kikapcsolja a fényudvart
+
+@ Blurs fast-moving monsters, projectiles and doors (not camera turns)
+hu Elmossa a gyorsan mozgó szörnyeket, lövedékeket és ajtókat (a kamera forgását nem)
+
+@ Blurs the screen edges during fast falls and launches; keeps the centre clear. Reduce Motion disables it
+hu Gyors zuhanáskor és kilövéskor elmossa a képernyő széleit; a közép tiszta marad. A Kevesebb mozgás kikapcsolja
+
+@ Brightness of the underwater light patterns
+hu A víz alatti fényminták fényereje
+
+@ Caps mark count, lifetime, airborne droplets and wound/gib painting; low skips enemy wounds and gib trails
+hu Korlátozza a nyomok számát és élettartamát, a repülő cseppeket és a seb-/cafatfestést; az alacsony kihagyja az ellenségsebeket és a cafatnyomokat
+
+@ Caps shader input at output size so 200% render scale keeps 3D sharpness without 4x shader cost; low scales stay low-res
+hu A shader bemenetét a kimeneti méretre korlátozza, így a 200%-os renderelési skála négyszeres shaderköltség nélkül tartja meg a 3D élességét; a kis skálák alacsony felbontásúak maradnak
+
+@ Classic: the original status bar; modern: compact elements at the screen edges
+hu Klasszikus: az eredeti állapotsáv; modern: kompakt elemek a képernyő szélein
+
+@ Coat atlas resolution, rebuild rate and shader detail: low builds smaller coats less often with fast shading; high uses full detail
+hu A bevonat-atlasz felbontása, újraépítési gyakorisága és shaderrészletessége: az alacsony kisebb bevonatokat ritkábban épít gyors árnyalással; a magas teljes részletességű
+
+@ Colour of the railgun's spiral trail; split-screen players each get the next colour along
+hu A railgun spirális csóvájának színe; osztott képernyőn minden játékos a következő színt kapja
+
+@ Damage the railgun deals to each enemy it passes through (Quake III: 100)
+hu A railgun sebzése minden ellenségen, amelyen áthalad (Quake III: 100)
+
+@ Dark backdrop behind on-screen messages for readability
+hu Sötét háttér a képernyőüzenetek mögött az olvashatóságért
+
+@ Dark border keeps the crosshair visible on any background
+hu A sötét keret bármilyen háttéren láthatóvá teszi a célkeresztet
+
+@ Darkens corners and contact areas where geometry meets; higher quality is sharper
+hu Sötétíti a sarkokat és az érintkezési felületeket, ahol a geometria találkozik; a magasabb minőség élesebb
+
+@ Debris lands on and is carried or shoved by doors, lifts and platforms
+hu A törmelék rá tud esni az ajtókra, liftekre és platformokra, amelyek viszik vagy tolják
+
+@ Detail for caustics, ripples and splashes: low uses smaller budgets and shorter view distance; high uses larger budgets and farther view distance
+hu A kausztika, hullámzás és csobbanások részletessége: az alacsony kisebb kerettel és rövidebb látótávval, a magas nagyobb kerettel és nagyobb látótávval dolgozik
+
+@ Disabled while Enhanced Particles is on: its particles replace the GLQuake and Classic styles
+hu Nem elérhető, amíg a Továbbfejlesztett részecskék be van kapcsolva: annak részecskéi helyettesítik a GLQuake és a klasszikus stílust
+
+@ Disabled while Enhanced Water is on: its own underwater effects replace the classic and GLQuake view warps
+hu Nem elérhető, amíg a Továbbfejlesztett víz be van kapcsolva: saját víz alatti effektjei helyettesítik a klasszikus és a GLQuake nézettorzítást
+
+@ Draw the predicted grenade path as a solid or dashed line
+hu A gránát várható pályájának megjelenítése folytonos vagy szaggatott vonallal
+
+@ Draw the view out of the linked portal inside each portal; off shows flat discs (fastest)
+hu Minden portálban a hozzá kapcsolt portálból látható kép megjelenítése; kikapcsolva lapos korongok látszanak (leggyorsabb)
+
+@ Droplets spray up when things enter or leave water, slime or lava
+hu Cseppek fröccsennek, amikor valami vízbe, nyálkába vagy lávába kerül vagy kilép belőle
+
+@ Emulates the original 8-bit palette of software rendering
+hu A szoftveres renderelés eredeti 8 bites palettáját utánozza
+
+@ Every level starts with only the shotgun and axe, as if started fresh
+hu Minden pálya csak a sörétes puskával és a baltával kezdődik, mintha elölről kezdenéd
+
+@ Explosion damage for each remotely detonated sticky bomb
+hu Minden távolról felrobbantott tapadóbomba robbanási sebzése
+
+@ Extra freeze milliseconds for every 10 damage dealt, so heavy hits stop longer
+hu Extra fagyasztás milliszekundumban minden 10 okozott sebzésért, így a nagy találatok tovább állítanak meg
+
+@ First person, a third-person camera centered behind the player, or one over the right or left shoulder; third person hides viewmodels
+hu Belső nézet, a játékos mögé középre helyezett külső kamera, vagy a jobb vagy bal váll fölötti nézet; külső nézetben a fegyvermodellek rejtve vannak
+
+@ Flash the selected marker on confirmed hits; colors are shared with the crosshair
+hu Megerősített találatkor felvillan a választott jelző; a színek közösek a célkereszttel
+
+@ Freeze for every enemy, or only for enemies that were tough before the hit
+hu Fagyasztás minden ellenségnél, vagy csak azoknál, amelyek a találat előtt szívósak voltak
+
+@ Freeze the game briefly when you damage an enemy; single player with add-ons only
+hu Rövid időre megállítja a játékot, amikor megsebzel egy ellenséget; csak egyjátékos módban, kiegészítőkkel
+
+@ Gibs tumble and barrels throw shrapnel; shots and blasts push them (cosmetic only)
+hu A húscafatok gurulnak, a hordók repeszeket szórnak; a lövések és robbanások meglökik őket (csak látvány)
+
+@ Health an enemy must have had before the hit to count as tough
+hu Ennyi életereje kell legyen egy ellenségnek a találat előtt, hogy szívósnak számítson
+
+@ Hits dealing less damage than this do not freeze the game; the default 10 skips nails and shotgun pellets
+hu Az ennél kisebb sebzésű találatok nem állítják meg a játékot; az alapértelmezett 10 kihagyja a szögeket és a söréteket
+
+@ Hold fire and sweep the crosshair over monsters to queue them, release to throw: it stuns each in turn and flies back; alt-fire clears the queue
+hu Tartsd lenyomva a tüzelést és húzd végig a célkeresztet a szörnyeken, hogy sorba állítsd őket, majd engedd el a dobáshoz: sorban mindegyiket elkábítja, aztán visszarepül; a másodlagos tűz törli a sort
+
+@ Hold: keep Lock-on held. Toggle: press Auto-aim Toggle to enable automatic acquisition. Click look stick to switch targets
+hu Nyomva tartás: tartsd lenyomva a Célbefogást. Kapcsolás: az Automatikus célzás kapcsolása bekapcsolja az automatikus befogást. A nézőkar lenyomása célpontot vált
+
+@ How close an enemy must be to the crosshair for automatic acquisition in toggle mode (degrees)
+hu Kapcsolás módban milyen közel kell lennie egy ellenségnek a célkereszthez az automatikus befogáshoz (fok)
+
+@ How far the view tilts up and down when you tilt the controller (pitch axis)
+hu Mennyire dől fel és le a nézet, amikor a kontrollert billented (függőleges tengely)
+
+@ How far the view turns left and right when you turn the controller (yaw axis)
+hu Mennyire fordul balra és jobbra a nézet, amikor a kontrollert elforgatod (vízszintes tengely)
+
+@ How far the view turns when you drag on the right half of the screen
+hu Mennyire fordul a nézet, amikor a képernyő jobb felén húzod az ujjad
+
+@ How fast the boomerang flies (units per second)
+hu Milyen gyorsan repül a bumeráng (egység másodpercenként)
+
+@ How hard shots and explosions push debris around
+hu Milyen erősen lökik a lövések és robbanások a törmeléket
+
+@ How hard the Powerwasher's water pushes enemies
+hu Milyen erősen löki a nagynyomású mosó vize az ellenségeket
+
+@ How long a hit freezes the game, in milliseconds
+hu Mennyi ideig állítja meg egy találat a játékot, milliszekundumban
+
+@ How strongly fog covers the sky when fog is on
+hu Milyen erősen takarja a köd az égboltot, ha a köd be van kapcsolva
+
+@ How the view distorts underwater: Classic ripples the whole screen like software Quake, GLQuake slowly stretches and squashes the view
+hu Hogyan torzul a nézet a víz alatt: a klasszikus a szoftveres Quake-hez hasonlóan az egész képernyőt hullámoztatja, a GLQuake lassan nyújtja és nyomja össze a nézetet
+
+@ Ignores gyro rotation slower than this many degrees per second, to hide hand tremor
+hu Figyelmen kívül hagyja az ennél lassabb (fok/másodperc) giroszkópos forgást, hogy elrejtse a kézremegést
+
+@ Immersive: appears for a few seconds only when its value changes
+hu Immerzív: csak néhány másodpercre jelenik meg, amikor az értéke változik
+
+@ Keeps textures sharp on floors and walls seen at steep angles
+hu Élesen tartja a textúrákat a meredek szögből látott padlókon és falakon
+
+@ Lights from rockets, muzzle flashes and explosions brighten nearby walls
+hu A rakéták, torkolattüzek és robbanások fényei megvilágítják a közeli falakat
+
+@ Liquid surfaces swell and ring out where things move through them
+hu A folyadékfelszín hullámzik és gyűrűzik, ahol valami áthalad rajta
+
+@ Lobs sticky bombs (rockets ammo) that cling to walls, doors and monsters; alt-fire detonates them all
+hu Tapadóbombákat lő (rakétalőszerrel), amelyek megtapadnak a falakon, ajtókon és szörnyeken; a másodlagos tűz mindet felrobbantja
+
+@ Look of the classic particles: GLQuake draws soft round dots, Classic draws square pixels like software Quake
+hu A klasszikus részecskék megjelenése: a GLQuake lágy, kerek pontokat, a klasszikus a szoftveres Quake-hez hasonló négyzetes pixeleket rajzol
+
+@ Low skips the background smear halo and uses fewer blur samples; high keeps the full halo and smoother streaks
+hu Az alacsony kihagyja a háttér elkenődő fényudvarát és kevesebb mintát használ; a magas megtartja a teljes fényudvart és simább csíkokat ad
+
+@ Low: hard particle edges, half the scripted particles and fewer hit sparks. Medium: soft edges. High: soft edges checked per MSAA sample, most hit sparks
+hu Alacsony: kemény részecskeszélek, feleannyi szkriptelt részecske és kevesebb szikra. Közepes: lágy szélek. Magas: MSAA-mintánként ellenőrzött lágy szélek, a legtöbb szikra
+
+@ Marks fade out before expiring; oldest marks are recycled at the limit
+hu A nyomok elhalványulnak, mielőtt eltűnnek; a korlát elérésekor a legrégebbiek újrahasznosulnak
+
+@ Max nested portal reflections to draw; each level redraws the scene
+hu Megjelenített egymásba ágyazott portáltükröződések max. száma; minden szint újrarajzolja a jelenetet
+
+@ Max portals per screen with a live view; each one redraws the scene
+hu Élő nézetű portálok max. száma képernyőnként; mindegyik újrarajzolja a jelenetet
+
+@ Maximum distance for acquiring and keeping an enemy locked
+hu Az ellenség befogásának és befogva tartásának legnagyobb távolsága
+
+@ Minimum gap between freezes, so shotgun pellets and rapid fire count once; kills ignore it
+hu Legkisebb szünet két fagyasztás között, hogy a sörétek és a gyorstüzelés csak egyszer számítson; az ölésekre nem vonatkozik
+
+@ Modern terminal console with autocomplete popup, history search, ANSI colors, bash shell and piping; off uses the classic Quake console
+hu Modern terminálkonzol automatikus kiegészítéssel, előzménykereséssel, ANSI-színekkel, bash héjjal és csővezetékekkel; kikapcsolva a klasszikus Quake-konzol marad
+
+@ Monsters take proportionally less damage at higher values; above 100% is harder
+hu Magasabb értéknél a szörnyek arányosan kisebb sebzést kapnak; 100% fölött nehezebb
+
+@ Moving gibs leave blood on surfaces they touch
+hu A mozgó húscafatok vérnyomot hagynak a felületeken, amelyekhez érnek
+
+@ Multiplier on the freeze when the hit kills the enemy; 1 means no extra
+hu A fagyasztás szorzója, ha a találat megöli az ellenséget; az 1 azt jelenti, hogy nincs többlet
+
+@ Multiplies ammo from pickups (up to the normal carry limit); below 100% is harder
+hu Megszorozza a felvett lőszert (a szokásos hordozási korlátig); 100% alatt nehezebb
+
+@ Multiplies health from pickups (up to 100, or the item's own limit); below 100% is harder
+hu Megszorozza a felvett életerőt (100-ig vagy a tárgy saját korlátjáig); 100% alatt nehezebb
+
+@ Nails stick to wood and bodies; hard surfaces deflect them to the floor
+hu A szögek beleállnak a fába és a testekbe; a kemény felületekről a padlóra pattannak
+
+@ Nearest keeps crisp classic pixels; linear smooths textures
+hu A legközelebbi éles, klasszikus pixeleket ad; a lineáris kisimítja a textúrákat
+
+@ New Game: Add-ons
+hu Új játék: kiegészítők
+
+@ New Game: Customize
+hu Új játék: testreszabás
+
+@ Night vision: how much dark areas are brightened; thermal: how strongly heat stands out
+hu Éjjellátó: mennyire világosodnak ki a sötét részek; hőkamera: mennyire emelkedik ki a hő
+
+@ Night-vision and thermal goggles, cycle normal, night vision and thermal with Change Goggles (Add-ons), or use the Equipment Wheel
+hu Éjjellátó és hőkamerás szemüveg; a Szemüvegváltás (kiegészítők) vált a normál, az éjjellátó és a hőkamerás mód között, vagy használd a felszereléskereket
+
+@ No single freeze lasts longer than this, however much damage or kill bonus adds
+hu Egyetlen fagyasztás sem tart ennél tovább, bármennyi sebzés vagy ölési bónusz adódik hozzá
+
+@ Oldest marks and nails are recycled at this shared limit
+hu E közös korlát elérésekor a legrégebbi nyomok és szögek újrahasznosulnak
+
+@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
+hu Képernyős kar és gombok: az auto érintéskor megjeleníti, más eszköz használatakor elrejti őket
+
+@ Only autosaves: quicksaves and the Save menu are off
+hu Csak automentések: a gyorsmentés és a Mentés menü ki van kapcsolva
+
+@ Place every weapon at the center, right or left of the view, or hide all viewmodels
+hu Minden fegyver a nézet közepére, jobb vagy bal oldalára, vagy minden fegyvermodell elrejtése
+
+@ Play your chosen hit or kill cue when you damage an enemy
+hu A választott találat- vagy öléshang lejátszása, amikor megsebzel egy ellenséget
+
+@ Playback speed: faster sounds shorter and higher
+hu Lejátszási sebesség: a gyorsabb rövidebb és magasabb hangot ad
+
+@ Plays the Quake theme in the main menu when no game is running
+hu A Quake főcímzenéje szól a főmenüben, amikor nem fut játék
+
+@ Portals farther away than this are drawn as flat discs
+hu Az ennél távolabbi portálok lapos korongként jelennek meg
+
+@ Press attack once to keep firing, again to stop
+hu Egy támadás gombnyomás folyamatos tüzelést indít, egy újabb leállítja
+
+@ Press run once to switch between running and walking
+hu Egy futás gombnyomás vált a futás és a gyaloglás között
+
+@ Raise or lower the tone independently of sound length
+hu A hangmagasság emelése vagy csökkentése a hang hosszától függetlenül
+
+@ Red screen edges show where damage came from: top is front, bottom is behind; Screen Flashes controls their strength
+hu A vörös képernyőszélek mutatják, honnan jött a sebzés: a felső elöl, az alsó hátul; a Képernyővillanások szabályozza az erősségüket
+
+@ Replaces the classic dot particles with glowing sparks, smoke and blood; mods with their own particle effects keep them
+hu A klasszikus pontrészecskéket izzó szikrákra, füstre és vérre cseréli; a saját részecskeeffektekkel rendelkező modok megtartják azokat
+
+@ Resolution and detail inside portal and teleporter views; lower tiers trim nested effects
+hu Felbontás és részletesség a portál- és teleporternézetekben; az alacsonyabb szintek csökkentik az egymásba ágyazott effekteket
+
+@ Rippling light patterns on surfaces under water and slime
+hu Hullámzó fényminták a víz és a nyálka alatti felületeken
+
+@ Scales all damage you take; above 100% is harder
+hu Minden elszenvedett sebzést skáláz; 100% fölött nehezebb
+
+@ Screen edge for this element; elements on the same spot stack
+hu Az elem képernyőszéle; az azonos helyen lévő elemek egymásra kerülnek
+
+@ Seconds a monster hit by the boomerang stays stunned
+hu Ennyi másodpercig marad kábult a bumeránggal eltalált szörny
+
+@ Seconds impact marks and stuck nails stay before fading out; independent of Particle Quality
+hu Ennyi másodpercig maradnak a becsapódásnyomok és beállt szögek, mielőtt elhalványulnak; független a Részecskék minőségétől
+
+@ Seconds messages at the top of the screen stay up
+hu Ennyi másodpercig látszanak a képernyő tetején az üzenetek
+
+@ Seconds the flick stick snap takes; lower is faster
+hu A flick stick ugrásának ideje másodpercben; a kisebb gyorsabb
+
+@ See through enhanced water; enables Water Opacity
+hu Átlátás a továbbfejlesztett vízen; engedélyezi a Víz átlátszatlansága beállítást
+
+@ Sensor grain, scanlines and flicker of the goggle image
+hu A szemüveg képének szenzorszemcsézettsége, sorai és villódzása
+
+@ Shades every anti-aliasing sample; needs Anti-aliasing on
+hu Minden élsimítási mintát külön árnyal; bekapcsolt Élsimítást igényel
+
+@ Shifts colors so they stay distinct for the chosen color blindness
+hu Eltolja a színeket, hogy a választott színtévesztés mellett is megkülönböztethetők maradjanak
+
+@ Shotgun hits leave small surface marks (cosmetic only)
+hu A sörétes találatok apró nyomot hagynak a felületen (csak látvány)
+
+@ Show corner ticks at screen centre while locked, even with Crosshair off
+hu Befogáskor sarokjeleket mutat a képernyő közepén, kikapcsolt célkereszt mellett is
+
+@ Show where grenades and other arcing shots will fly, bounce and land; local play only, not in deathmatch
+hu Megmutatja, hova repülnek, pattannak és érnek földet a gránátok és más íves lövedékek; csak helyi játékban, deathmatchben nem
+
+@ Shows text for important sounds: doors, alerted enemies, secrets, pickups
+hu Feliratot mutat a fontos hangokhoz: ajtók, riadó ellenségek, titkok, felvett tárgyak
+
+@ Shows the distance fog that maps and mods set; off always gives clear view
+hu Megjeleníti a pályák és modok által beállított távoli ködöt; kikapcsolva mindig tiszta a kilátás
+
+@ Shows the player face next to the health number
+hu Megjeleníti a játékos arcát az életerő mellett
+
+@ Simulation detail, step rate, fade-out lifetimes and caps for gibs and shrapnel; low also skips mover collision
+hu Szimulációs részletesség, lépésgyakoriság, elhalványulási idő és korlátok a húscafatokhoz és repeszekhez; az alacsony a mozgó tárgyakkal való ütközést is kihagyja
+
+@ Size of the on-screen buttons and move stick
+hu A képernyős gombok és a mozgatókar mérete
+
+@ Slowly heals up to 100 health after 5 seconds without being hit
+hu 5 másodperc sérülésmentesség után lassan 100-ig gyógyít
+
+@ Slows stick look while the crosshair is over an enemy
+hu Lassítja a karos nézést, amíg a célkereszt egy ellenségen van
+
+@ Slows the game down while the weapon wheel is open
+hu Lassítja a játékot, amíg a fegyverkerék nyitva van
+
+@ Slows the whole game down; single player only. Saves and demos stay compatible with other ports
+hu Lelassítja az egész játékot; csak egyjátékos módban. A mentések és demók kompatibilisek maradnak más portokkal
+
+@ Small camera jolt on each freeze; off with Reduce Motion
+hu Kis kamerarándulás minden fagyasztáskor; a Kevesebb mozgás kikapcsolja
+
+@ Snap and track enemies in local play, including split-screen; unavailable online
+hu Ellenségek befogása és követése helyi játékban, osztott képernyőn is; online nem érhető el
+
+@ Sparks, smoke, chips, splinters and splashes fly off whatever your shots hit
+hu Szikrák, füst, forgácsok, szilánkok és fröccsök repülnek arról, amit eltalálsz
+
+@ Spawns extra copies of every monster around the original when a level starts
+hu Pályakezdéskor minden szörnyből extra példányokat hoz létre az eredeti körül
+
+@ Strength of the full-screen flashes for damage, pickups and powerups
+hu A sebzés, felvett tárgyak és bónuszok teljes képernyős villanásainak erőssége
+
+@ Stretch or shorten the sound while keeping its pitch
+hu A hang nyújtása vagy rövidítése a hangmagasság megtartásával
+
+@ Surface opacity; requires Enhanced Water and Translucent Water
+hu A felszín átlátszatlansága; Továbbfejlesztett vizet és Áttetsző vizet igényel
+
+@ The hook latches onto metal surfaces (metal, tech, computer panels, copper)
+hu A kampó fémfelületekbe akad (fém, techno, számítógép-panelek, réz)
+
+@ The hook latches onto stone, brick, rock and any surface not recognised as wood or metal
+hu A kampó kőbe, téglába, sziklába és minden olyan felületbe akad, amely nem fa vagy fém
+
+@ The hook latches onto wooden surfaces (texture names like wood, crate, plank)
+hu A kampó fafelületekbe akad (wood, crate, plank nevű textúrák)
+
+@ Turn the controller's motion sensor into a look input; needs a pad with a gyroscope
+hu A kontroller mozgásérzékelőjét nézésre használja; giroszkópos kontroller kell hozzá
+
+@ Turns off view bob, strafe tilt and the camera kick when hit or firing
+hu Kikapcsolja a nézet billegését, az oldalazási dőlést és a kamerarándulást találatkor vagy lövéskor
+
+@ Turns on the extra liquid effects; Water Settings controls each one
+hu Bekapcsolja az extra folyadékeffekteket; a Víz beállításai mindegyiket külön szabályozza
+
+@ Turns the view to follow a moving enemy you are aiming at
+hu A nézet követi a mozgó ellenséget, amelyre célzol
+
+@ Turns the view when you roll the controller sideways; 0 disables it, negative reverses it
+hu A nézet fordul, amikor a kontrollert oldalra dönted; a 0 kikapcsolja, a negatív megfordítja
+
+@ Two-portal gun: fire and alt-fire place linked portals on flat walls; assign a weapon slot in Add-ons
+hu Kétportálos fegyver: a tüzelés és a másodlagos tűz összekapcsolt portálokat helyez sík falakra; a fegyverhelyet a Kiegészítőkben jelöld ki
+
+@ Unlocks the FX Settings page: enhanced particles, impact effects and blood splatter
+hu Feloldja az Effektbeállítások oldalt: továbbfejlesztett részecskék, becsapódási effektek és vérfröccs
+
+@ Uses the 2021 re-release's smoother MD5 models (and MD3 replacements from mods) instead of the classic ones. Applies on the next map load
+hu A 2021-es újrakiadás simább MD5 modelljeit (és a modok MD3 cseréit) használja a klasszikusak helyett. A következő pályabetöltéskor lép életbe
+
+@ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
+hu A pálya színes fényét használja (.lit fájl vagy BSPX lump); kikapcsolva az eredeti fehér fény marad. A következő pályabetöltéskor lép életbe
+
+@ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
+hu Vízsugárszakaszok, cseppek száma és fényes folyadékárnyalás: az alacsony egyszerűbb áttetsző sugarakat, a magas sima, fényes sugarakat ad
+
+@ When gyro looking applies: always, off while +gyroaction is held, or only while it is held
+hu Mikor működik a giroszkópos nézés: mindig, kikapcsolva a +gyroaction nyomva tartásakor, vagy csak annak nyomva tartásakor
+
+@ Which weapons trigger the freeze; melee covers the axe and any mod weapon used at close range without ammo
+hu Mely fegyverek váltják ki a fagyasztást; a közelharc a baltát és minden közelről, lőszer nélkül használt modfegyvert lefed
+
+@ Your own rockets and grenades don't hurt you; rocket jumps still work
+hu A saját rakétáid és gránátjaid nem sebeznek meg; a rakétaugrás továbbra is működik
+
+# ==== ui.txt ====
+
+# Menus and pop-ups outside the options pages: save cards, launch, presets,
+# add-on browser, map packs, hints and dialogs.
+@ Select
+hu Kiválasztás
+
+@ Back
+hu Vissza
+
+@ Cancel
+hu Mégse
+
+@ Confirm
+hu Megerősítés
+
+@ Scroll
+hu Görgetés
+
+@ Section
+hu Szakasz
+
+@ Bind
+hu Hozzárendelés
+
+@ Cancel binding
+hu Hozzárendelés megszakítása
+
+@ Clear
+hu Törlés
+
+@ Clear pad
+hu Kontroller törlése
+
+@ Remap
+hu Átállítás
+
+@ Type
+hu Gépelés
+
+@ Shift
+hu Shift
+
+@ Done
+hu Kész
+
+@ Del
+hu Töröl
+
+@ Space
+hu Szóköz
+
+@ Save
+hu Mentés
+
+@ Load
+hu Betöltés
+
+@ Delete
+hu Törlés
+
+@ Play
+hu Játék
+
+@ Yes
+hu Igen
+
+@ No
+hu Nem
+
+@ OK
+hu OK
+
+@ System
+hu Rendszer
+
+@ Language
+hu Nyelv
+
+@ Help
+hu Súgó
+
+@ Fixed for this game: it was started without Customize
+hu Ebben a játékban rögzített: testreszabás nélkül indult
+
+@ Press a button or key to bind (Start cancels)
+hu Nyomj meg egy gombot vagy billentyűt a hozzárendeléshez (Start: mégse)
+
+@ Press button...
+hu Nyomj meg egy gombot...
+
+@ Press key...
+hu Nyomj meg egy billentyűt...
+
+@ Replace this binding?
+hu Lecseréled ezt a hozzárendelést?
+
+@ is already assigned
+hu már foglalt
+
+@ {} already assigned
+hu {} már foglalt
+
+@ Open Controls to remap Lock-on?
+hu Megnyitod az Irányítást a Célbefogás átállításához?
+
+@ Lock-on
+hu Célbefogás
+
+@ Auto-aim Toggle
+hu Automatikus célzás kapcsolása
+
+@ Keyboard
+hu Billentyűzet
+
+@ Controller
+hu Kontroller
+
+# main menu, dialogs and screens
+@ Map Packs
+hu Pályacsomagok
+
+@ Customize
+hu Testreszabás
+
+@ Level Select
+hu Pályaválasztás
+
+@ Really quit?
+hu Biztosan kilépsz?
+
+@ You died
+hu Meghaltál
+
+@ Continue from most recent save
+hu Folytatás a legutóbbi mentéstől
+
+@ Select save
+hu Mentés kiválasztása
+
+@ Restart level
+hu Pálya újrakezdése
+
+@ Return to main menu
+hu Vissza a főmenübe
+
+@ (disabled)
+hu (letiltva)
+
+@ (fixed for this game)
+hu (ebben a játékban rögzített)
+
+@ (off)
+hu (ki)
+
+@ Apply Display Changes
+hu Megjelenítési változások alkalmazása
+
+@ Display Mode
+hu Megjelenítési mód
+
+@ Resolution
+hu Felbontás
+
+@ desktop
+hu asztali
+
+@ Preset
+hu Előbeállítás
+
+@ Map
+hu Pálya
+
+@ Reset Shader Settings
+hu Shaderbeállítások visszaállítása
+
+@ Reset to Defaults
+hu Alapértékek visszaállítása
+
+@ Searching...
+hu Keresés...
+
+@ This game only autosaves.
+hu Ez a játék csak automatikusan ment.
+
+@ (No Manual Saves modifier)
+hu (Nincs kézi mentés módosító)
+
+@ End the current game?
+hu Befejezed a jelenlegi játékot?
+
+@ Unsaved progress will be lost.
+hu A nem mentett előrehaladás elvész.
+
+@ End game
+hu Játék befejezése
+
+@ Overwrite
+hu Felülírás
+
+@ Overwrite "{}"?
+hu Felülírod: „{}”?
+
+@ Saved {}
+hu Mentve: {}
+
+@ Start a new game?
+hu Új játékot kezdesz?
+
+@ New game
+hu Új játék
+
+@ New Game
+hu Új játék
+
+@ CUSTOM
+hu EGYEDI
+
+@ Customize Experience
+hu Játékélmény testreszabása
+
+@ Disable All
+hu Mind ki
+
+@ Disable All Modifications
+hu Minden módosítás kikapcsolása
+
+@ Saves load in other source ports too.
+hu A mentések más portokban is betölthetők.
+
+@ Standard rules, no add-ons.
+hu Szabványos szabályok, kiegészítők nélkül.
+
+@ Choose skill
+hu Válassz nehézséget
+
+@ The current game will end
+hu A jelenlegi játék véget ér
+
+@ Easy
+hu Könnyű
+
+@ Normal
+hu Normál
+
+@ Hard
+hu Nehéz
+
+@ Nightmare
+hu Rémálom
+
+# graphics preset pop-up
+@ Choose a Graphics Preset
+hu Válassz grafikai előbeállítást
+
+@ Classic
+hu Klasszikus
+
+@ Like the re-release: enhanced models,
+hu Mint az újrakiadás: továbbfejlesztett modellek,
+
+@ no added effects.
+hu további effektek nélkül.
+
+@ Enhanced
+hu Továbbfejlesztett
+
+@ Every enhancement at its highest quality.
+hu Minden fejlesztés a legmagasabb minőségen.
+
+@ Needs a capable GPU.
+hu Erős GPU kell hozzá.
+
+@ Low-End
+hu Gyenge gép
+
+@ Fastest. No anti-aliasing, original
+hu A leggyorsabb. Nincs élsimítás, eredeti
+
+@ models, lowest effect quality.
+hu modellek, legalacsonyabb effektminőség.
+
+@ Esc keeps the defaults
+hu Esc: az alapértékek maradnak
+
+@ Everything can be changed later in Options.
+hu Később mindent módosíthatsz az Options menüben.
+
+@ Keep Defaults
+hu Alapértékek megtartása
+
+# save and load cards
+@ Save Game
+hu Játék mentése
+
+@ Load Game
+hu Játék betöltése
+
+@ Autosaves
+hu Automentések
+
+@ newest first
+hu legújabb elöl
+
+@ Saves: {}
+hu Mentések: {}
+
+@ Browse Autosaves
+hu Automentések böngészése
+
+@ Every retained autosave, newest first
+hu Minden megőrzött automentés, legújabb elöl
+
+@ New save
+hu Új mentés
+
+@ Select to save your game here
+hu Válaszd ki, hogy ide mentsd a játékot
+
+@ No autosaves yet
+hu Még nincs automentés
+
+@ Autosaves are made on level entry, secrets and more (Options > Gameplay)
+hu Automentés készül pályakezdéskor, titkoknál és máskor is (Options > Játékmenet)
+
+@ No saves yet
+hu Még nincs mentés
+
+@ Save from the Single Player menu, or press F6 to quicksave
+hu Ments a Single Player menüből, vagy nyomd meg az F6-ot a gyorsmentéshez
+
+@ No picture
+hu Nincs kép
+
+@ Del: delete save
+hu Del: mentés törlése
+
+@ Delete "{}"?
+hu Törlöd: „{}”?
+
+@ This cannot be undone.
+hu Ez nem vonható vissza.
+
+@ Quicksave
+hu Gyorsmentés
+
+@ Autosave: {}
+hu Automentés: {}
+
+@ unknown trigger
+hu ismeretlen ok
+
+@ Latest - {}
+hu Legutóbbi - {}
+
+@ Health {}
+hu Életerő: {}
+
+@ Armor {}
+hu Páncél: {}
+
+@ Kills {}/{}
+hu Ölések: {}/{}
+
+@ Secrets {}/{}
+hu Titkok: {}/{}
+
+@ Split-screen, {} players
+hu Osztott képernyő, játékosok: {}
+
+@ Co-op
+hu Kooperatív
+
+@ Customized
+hu Testreszabott
+
+@ Customized, {}
+hu Testreszabott, {}
+
+@ Date unavailable
+hu A dátum nem elérhető
+
+@ Just now
+hu Az imént
+
+@ {} min ago
+hu {} perce
+
+@ {} h ago
+hu {} órája
+
+@ Level entry
+hu Pályakezdés
+
+@ Secret found
+hu Titok megtalálva
+
+@ All enemies killed
+hu Minden ellenség halott
+
+@ All secrets found
+hu Minden titok megvan
+
+@ Timer
+hu Időzítő
+
+# customize pages
+@ Standard rules
+hu Szabványos szabályok
+
+@ Modifiers changed: {}
+hu Megváltozott módosítók: {}
+
+@ no add-ons
+hu nincs kiegészítő
+
+@ add-ons: {}
+hu kiegészítők: {}
+
+@ Saves of this game are .qsa files: they need this source port.
+hu A játék mentései .qsa fájlok: ehhez a porthoz kötöttek.
+
+@ Nothing changed: this plays as standard Quake.
+hu Nincs változás: ez szabványos Quake-ként játszható.
+
+@ Changes apply now and are saved with this game (.qsa).
+hu A változások azonnal érvényesek, és a játékkal együtt mentődnek (.qsa).
+
+@ This game started without Customize, so its rules are fixed.
+hu Ez a játék testreszabás nélkül indult, ezért a szabályai rögzítettek.
+
+@ Start a new game and choose Customize Experience.
+hu Kezdj új játékot, és válaszd a Játékélmény testreszabása lehetőséget.
+
+@ These rules apply to the next customized game.
+hu Ezek a szabályok a következő testreszabott játékra vonatkoznak.
+
+# add-on browser
+@ Fire
+hu Tüzelés
+
+@ Alt Fire
+hu Másodlagos tűz
+
+@ Configure Parameters >
+hu Paraméterek beállítása >
+
+@ Configure
+hu Beállítás
+
+@ Settings
+hu Beállítások
+
+@ Change slot
+hu Fegyverhely váltása
+
+@ Toggle
+hu Kapcsolás
+
+@ Details
+hu Részletek
+
+@ Enter or click the box: toggle
+hu Enter vagy kattintás a négyzetre: kapcsolás
+
+@ Right / Tab / click: details
+hu Jobbra / Tab / kattintás: részletek
+
+@ Input Remapping
+hu Bemenet-átállítás
+
+@ Weapon Slot
+hu Fegyverhely
+
+@ Customized games save as .qsa files, which need this source port.
+hu A testreszabott játékok .qsa fájlba mentenek, amelyekhez ez a port kell.
+
+@ This game started without Customize, so its add-ons are fixed. Customize a new game instead.
+hu Ez a játék testreszabás nélkül indult, ezért a kiegészítői rögzítettek. Inkább egy új játékot szabj testre.
+
+@ Bullet Time
+hu Bullet time
+
+@ Change Goggles
+hu Szemüvegváltás
+
+@ Dodge / Dive
+hu Kitérés / vetődés
+
+@ Goggles
+hu Szemüveg
+
+@ Hitstop
+hu Hitstop
+
+@ Projectile Shotguns
+hu Lövedékes sörétesek
+
+@ BULLET TIME: 20%
+hu BULLET TIME: 20%
+
+@ NORMAL SPEED
+hu NORMÁL SEBESSÉG
+
+@ SLOW MOTION: PHYSICAL PELLETS
+hu LASSÍTÁS: FIZIKAI SÖRÉTEK
+
+@ DEMONSTRATION
+hu BEMUTATÓ
+
+@ GAMEPLAY
+hu JÁTÉKMENET
+
+@ LOOP
+hu ISMÉTLÉS
+
+@ Preview unavailable
+hu Az előnézet nem elérhető
+
+# shader and language help lines
+@ A setting of the chosen shader; arrows step it, Enter is not needed
+hu A választott shader egyik beállítása; a nyilak léptetik, Enter nem kell
+
+@ Language of the menus, messages and the 2021 re-release's game text; System follows your computer's language
+hu A menük, üzenetek és a 2021-es újrakiadás játékszövegeinek nyelve; a Rendszer a számítógép nyelvét követi
+
+@ Puts every setting of the chosen shader back to the preset's defaults
+hu A választott shader minden beállítását visszaállítja az előbeállítás alapértékeire
+
+@ RetroArch slang shader on the final image: CRT, scanlines, NTSC, sharpening; add your own in <game>/shaders
+hu RetroArch slang shader a végső képen: CRT, képsorok, NTSC, élesítés; sajátot a <game>/shaders mappába tehetsz
+
+# modern console footer
+@ Shift+PgUp/Dn: height  ` : hide
+hu Shift+PgUp/Dn: magasság  ` : elrejtés
+
+@ Tab: complete  Ctrl+R: search  bash | pipe
+hu Tab: kiegészítés  Ctrl+R: keresés  bash | cső
+
+@ ↑ +{} lines (End to jump) 
+hu ↑ +{} sor (End: ugrás a végére) 
+
+# add-on descriptions
+@ Create two linked portals on flat walls. Fire places the first portal; Alt Fire places the second. Walk through either portal to emerge from the other. Your momentum carries through. Assign a weapon slot below: pressing that slot repeatedly cycles its ordinary weapon and every enabled add-on assigned there. Portal view quality is configurable below.
+hu Két összekapcsolt portált hoz létre sík falakon. A Tüzelés az első, a Másodlagos tűz a második portált helyezi el. Bármelyik portálon belépve a másikon jössz ki, a lendületed megmarad. Lent rendelj hozzá fegyverhelyet: a hely ismételt megnyomása végiglépteti a szokásos fegyvert és minden oda rendelt, engedélyezett kiegészítőt. A portálnézet minősége lent állítható.
+
+@ Hold Fire and sweep the crosshair over monsters to queue targets. Release Fire to throw: the boomerang visits each target, stuns it and returns to you. Alt Fire clears the queue. The weapon slot selects a group, not a separate hotkey: press it again to cycle through the weapons in that slot. Configure stun duration and flight speed below.
+hu Tartsd lenyomva a Tüzelést, és húzd végig a célkeresztet a szörnyeken, hogy célpontokat jelölj ki. A Tüzelés elengedésével dobsz: a bumeráng sorra meglátogatja a célpontokat, elkábítja őket, majd visszatér hozzád. A Másodlagos tűz törli a sort. A fegyverhely egy csoportot választ ki, nem külön gyorsgombot: újbóli megnyomása végiglépteti a hely fegyvereit. A kábítás hossza és a repülési sebesség lent állítható.
+
+@ Hold Fire to charge a sticky bomb using rocket ammunition; release to launch. A longer charge throws it faster. Bombs cling to walls, doors and monsters. Alt Fire detonates your planted bombs together. Place a trap, retreat, then detonate it when enemies approach. Assign any weapon slot below; repeated presses cycle through the ordinary weapon and add-ons in that slot.
+hu Tartsd lenyomva a Tüzelést egy tapadóbomba feltöltéséhez rakétalőszerből; elengedve kilövöd. Minél tovább töltöd, annál gyorsabban repül. A bombák megtapadnak a falakon, ajtókon és szörnyeken. A Másodlagos tűz egyszerre robbantja fel a lerakott bombáidat. Állíts csapdát, vonulj vissza, és robbantsd fel, amikor közelednek az ellenségek. Lent bármelyik fegyverhelyet hozzárendelheted; az ismételt megnyomás végiglépteti a hely szokásos fegyverét és kiegészítőit.
+
+@ Fire launches a chain hook. It latches onto a permitted surface or enemy and reels you toward the anchor. Fire again or use Alt Fire to let go. Choose which materials and enemies can be hooked in Configure Parameters. Assign it to any weapon slot; repeated presses of the slot's existing binding cycle through its weapons.
+hu A Tüzelés kilő egy láncos kampót. Ez beakad egy engedélyezett felületbe vagy ellenségbe, és a rögzítési pont felé húz. Újabb Tüzeléssel vagy a Másodlagos tűzzel elengedheted. A Paraméterek beállítása részben választhatod ki, mely anyagokba és ellenségekbe akadhat. Bármelyik fegyverhelyhez rendelheted; a hely meglévő gombjának ismételt megnyomása végiglépteti a fegyvereit.
+
+@ A piercing railgun inspired by Quake III. Fire sends a slug through every enemy along its line. Each shot consumes two cells, with a 1.5 second refire interval. Damage and the spiral trail colour are configurable below. Choose a weapon slot: the slot's current binding selects and cycles the weapons assigned to it.
+hu A Quake III ihlette, átütő railgun. A Tüzelés a vonalában minden ellenségen átküld egy lövedéket. Minden lövés két cellát fogyaszt, 1,5 másodperces újratüzelési idővel. A sebzés és a spirális csóva színe lent állítható. Válassz fegyverhelyet: a hely jelenlegi gombja kiválasztja és végiglépteti a hozzárendelt fegyvereket.
+
+@ A Portal-style gel sprayer. Fire sprays blue Repulsion gel: land, jump or run into it to bounce, and landings on it never hurt. Alt Fire sprays orange Propulsion gel: run across it to go much faster. Gel coats floors and walls until washed off with the Powerwasher. Assign a weapon slot below; repeated presses cycle the weapons in that slot.
+hu Portal-stílusú zselészóró. A Tüzelés kék Taszító zselét szór: ha ráérkezel, ráugrasz vagy belefutsz, felpattansz, és a rá érkezés sosem sebez. A Másodlagos tűz narancssárga Gyorsító zselét szór: ha átfutsz rajta, sokkal gyorsabb leszel. A zselé addig borítja a padlót és a falakat, amíg a nagynyomású mosóval le nem mosod. Lent rendelj hozzá fegyverhelyet; az ismételt megnyomás végiglépteti a hely fegyvereit.
+
+@ A water cannon. Fire shoots a straight jet with limited reach; Alt Fire a wide, shorter fan. The water pushes enemies back, turns projectiles aside and washes away gel and blood. Push strength is configurable below. Assign a weapon slot below; repeated presses cycle the weapons in that slot.
+hu Vízágyú. A Tüzelés korlátozott hatótávú egyenes sugarat lő, a Másodlagos tűz széles, rövidebb legyezőt. A víz hátralöki az ellenségeket, eltéríti a lövedékeket, és lemossa a zselét és a vért. A lökés ereje lent állítható. Lent rendelj hozzá fegyverhelyet; az ismételt megnyomás végiglépteti a hely fegyvereit.
+
+@ One equipment add-on includes both night vision and thermal vision. The Change Goggles action cycles Normal, Night Vision, Thermal, then Normal again. Night vision brightens dark rooms; thermal vision highlights living enemies. Goggles do not occupy a weapon slot. Configure intensity and sensor noise below. The binding affects only this add-on.
+hu Egyetlen felszerelés-kiegészítő tartalmazza az éjjellátást és a hőkamerát is. A Szemüvegváltás művelet sorban vált: normál, éjjellátó, hőkamera, majd ismét normál. Az éjjellátó kivilágosítja a sötét termeket, a hőkamera kiemeli az élő ellenségeket. A szemüveg nem foglal fegyverhelyet. Az erősség és a szenzorzaj lent állítható. A hozzárendelés csak erre a kiegészítőre vonatkozik.
+
+@ Press Dodge with a movement direction on the ground or in midair: dive forward or leap backward and sideways. Diagonals are supported. Each press launches once, with a short recovery. The player body animates in third person. Assign the Dodge action below or in Controls.
+hu Nyomd meg a Kitérést egy mozgásiránnyal a földön vagy a levegőben: előrevetődsz, vagy hátra és oldalra ugrasz. Átlós irányok is működnek. Minden nyomás egyszer lendít, rövid regenerálódással. Külső nézetben a játékos teste animálva van. A Kitérés műveletet lent vagy az Irányításban rendelheted hozzá.
+
+@ Use the dedicated Bullet Time action to slow the whole local game to 20% speed. Hold is the default; Toggle switches on each press. The optional meter limits use in real seconds and regenerates while inactive. Disable the meter for unlimited use. Remap the action and configure duration and regeneration below.
+hu Használd a külön Bullet time műveletet, hogy az egész helyi játékot 20%-os sebességre lassítsd. Az alapértelmezés a nyomva tartás; a kapcsolás minden nyomásra vált. Az opcionális mérő valós másodpercekben korlátozza a használatot, és használaton kívül töltődik. Kapcsold ki a mérőt a korlátlan használathoz. A műveletet átállíthatod, az időtartamot és a töltődést lent állíthatod be.
+
+@ Both shotguns and enemy grunts fire physical pellets with their original spread and damage. Fast default projectiles feel immediate; lower their speed to dodge incoming fire during bullet time. Configure projectile speed below, or reset it to the default of 10000 units per second.
+hu Mindkét sörétes puska és az ellenséges katonák fizikai söréteket lőnek, eredeti szórással és sebzéssel. A gyors alapértelmezett lövedékek azonnalinak hatnak; csökkentsd a sebességüket, hogy bullet time alatt kitérhess előlük. A lövedéksebesség lent állítható, vagy visszaállítható az alapértelmezett 10000 egység/másodpercre.
+
+@ Freezes the game for a split second when you damage an enemy, so hits feel heavier. Single player only. Choose which weapons trigger it (all, melee, ranged or explosives), how long it lasts and how much more a kill freezes. Advanced settings cover enemy toughness, damage scaling, cooldown and the longest freeze.
+hu Egy pillanatra megállítja a játékot, amikor megsebzel egy ellenséget, így a találatok súlyosabbnak hatnak. Csak egyjátékos módban. Válaszd ki, mely fegyverek váltják ki (mind, közelharci, távolsági vagy robbanó), meddig tart, és mennyivel tovább fagyaszt egy ölés. A speciális beállítások az ellenségek szívósságát, a sebzés skálázását, a visszatöltést és a leghosszabb fagyasztást fedik le.
+
+# map packs and the Quaddicted browser
+@ Get more maps (Quaddicted)...
+hu További pályák (Quaddicted)...
+
+@ Type to filter...
+hu Gépelj a szűréshez...
+
+@ Launch mod
+hu Mod indítása
+
+@ Start first map
+hu Első pálya indítása
+
+@ (running)
+hu (fut)
+
+@ running
+hu fut
+
+@ Recent
+hu Legutóbbi
+
+@ Name
+hu Név
+
+@ Dir
+hu Mappa
+
+@ Default
+hu Alapértelmezett
+
+@ Title
+hu Cím
+
+@ Sort: {}
+hu Rendezés: {}
+
+@ {} installed
+hu Telepítve: {}
+
+@ {}/{} matching
+hu Találat: {}/{}
+
+@ {} maps, {} completed
+hu Pályák: {}, teljesítve: {}
+
+@ {}/{} matching, {} completed
+hu Találat: {}/{}, teljesítve: {}
+
+@ no maps of its own
+hu nincsenek saját pályái
+
+@ dir: {}
+hu mappa: {}
+
+@ base: {}
+hu alap: {}
+
+@ Browse the Quaddicted archive of
+hu Böngészd a Quaddicted archívum
+
+@ single-player maps and episodes,
+hu egyjátékos pályáit és epizódjait,
+
+@ then download and install them
+hu majd töltsd le és telepítsd őket
+
+@ here. Each release gets its own
+hu innen. Minden kiadás saját
+
+@ entry in this list.
+hu bejegyzést kap ebben a listában.
+
+@ Needs an internet connection.
+hu Internetkapcsolat szükséges.
+
+@ Quaddicted Map Archive
+hu Quaddicted pályaarchívum
+
+@ Newest
+hu Legújabb
+
+@ Author
+hu Szerző
+
+@ Size
+hu Méret
+
+@ Loading the map list...
+hu A pályalista betöltése...
+
+@ Couldn't load the map list: {}
+hu Nem sikerült betölteni a pályalistát: {}
+
+@ {} single-player releases  -  F5 refreshes
+hu Egyjátékos kiadások: {}  -  F5: frissítés
+
+@ {} matching
+hu Találat: {}
+
+@ by {}
+hu Szerző: {}
+
+@ requires: {}
+hu Szükséges: {}
+
+@ maps: {}
+hu Pályák: {}
+
+@ Failed: {}
+hu Sikertelen: {}
+
+@ Downloading... {}%
+hu Letöltés... {}%
+
+@ Unpacking...
+hu Kicsomagolás...
+
+@ Installed in {}/  -  Enter: play
+hu Telepítve ide: {}/  -  Enter: játék
+
+@ Enter: download and install
+hu Enter: letöltés és telepítés
+
+@ unpacking
+hu kicsomagolás
+
+@ failed
+hu sikertelen
+
+@ installed
+hu telepítve
+
+@ Downloads are not available in the browser build
+hu A letöltés a böngészős változatban nem érhető el
+
+@ the map list could not be read
+hu a pályalista nem olvasható
+
+@ downloading needs the curl program
+hu a letöltéshez a curl program kell
+
+@ download failed
+hu a letöltés sikertelen
+
+@ the download is not a valid zip
+hu a letöltés nem érvényes zip
+
+@ nothing to install for this engine
+hu nincs mit telepíteni ehhez a motorhoz
+
+@ needs {} installed first
+hu előbb ezt kell telepíteni: {}
+
+@ couldn't unpack {}
+hu nem sikerült kicsomagolni: {}
+
+# help screen
+@ About
+hu Névjegy
+
+@ < Back
+hu < Vissza
+
+# tr_ctx keys: English shows the short word, the key says which meaning
+@ Save (a manual save, as opposed to a quicksave or autosave)
+hu Mentés
+
+# ==== hud.txt ====
+
+# HUD, weapon and equipment wheels, sound captions and other in-game text.
+# Weapon, monster and item names follow the 2021 re-release's own translations.
+@ Axe
+hu Balta
+
+@ Shotgun
+hu Sörétes puska
+
+@ Double-Barrelled Shotgun
+hu Duplacsövű sörétes
+
+@ Nailgun
+hu Szögvető
+
+@ Super Nailgun
+hu Szuper szögvető
+
+@ Grenade Launcher
+hu Gránátvető
+
+@ Rocket Launcher
+hu Rakétavető
+
+@ Thunderbolt
+hu Villámvető
+
+@ Portal Gun
+hu Portálfegyver
+
+@ Boomerang
+hu Bumeráng
+
+@ Stickybomb Launcher
+hu Tapadóbomba-vető
+
+@ Railgun
+hu Railgun
+
+@ Hookshot
+hu Csáklya
+
+@ Gel Sprayer
+hu Zselészóró
+
+@ Powerwasher
+hu Nagynyomású mosó
+
+@ Night Vision Goggles
+hu Éjjellátó szemüveg
+
+@ Thermal Goggles
+hu Hőkamerás szemüveg
+
+@ Normal vision
+hu Normál látás
+
+@ ON
+hu BE
+
+@ OFF
+hu KI
+
+@ {} (turn on)
+hu {} (bekapcsolás)
+
+@ {} (turn off)
+hu {} (kikapcsolás)
+
+@ Move mouse to select, release to toggle
+hu Egér: választás, elengedés: kapcsolás
+
+@ Move mouse to select, release to equip
+hu Egér: választás, elengedés: felszerelés
+
+@ Release to toggle
+hu Engedd el a kapcsoláshoz
+
+@ Release to equip
+hu Engedd el a felszereléshez
+
+@ shells
+hu sörét
+
+@ nails
+hu szög
+
+@ rockets
+hu rakéta
+
+@ cells
+hu cella
+
+@ Kills: {}/{}
+hu Ölések: {}/{}
+
+@ Secrets: {}/{}
+hu Titkok: {}/{}
+
+@ Time {}
+hu Idő: {}
+
+@ Press any button to continue...
+hu Nyomj meg egy gombot a folytatáshoz...
+
+@ Press any key to continue...
+hu Nyomj meg egy billentyűt a folytatáshoz...
+
+@ BULLET TIME
+hu BULLET TIME
+
+@ AUTO AIM
+hu AUTO-CÉLZÁS
+
+@ Crosshair
+hu Célkereszt
+
+@ + Marker
+hu + jelző
+
+@ Hit markers off
+hu Találatjelzők kikapcsolva
+
+@ On target
+hu Célponton
+
+@ On kill
+hu Öléskor
+
+# sound captions
+@ [Secret found]
+hu [Titok megtalálva]
+
+@ [Message]
+hu [Üzenet]
+
+@ [Switch activated]
+hu [Kapcsoló aktiválva]
+
+@ [Key picked up]
+hu [Kulcs felvéve]
+
+@ [Rune picked up]
+hu [Rúna felvéve]
+
+@ [Teleporter]
+hu [Teleporter]
+
+@ [Teleport]
+hu [Teleportálás]
+
+@ [Splash]
+hu [Csobbanás]
+
+@ [Leaving water]
+hu [Kilépés a vízből]
+
+@ [Door]
+hu [Ajtó]
+
+@ [Platform moving]
+hu [Platform mozog]
+
+@ [Button]
+hu [Gomb]
+
+@ [Health picked up]
+hu [Életerő felvéve]
+
+@ [Armor picked up]
+hu [Páncél felvéve]
+
+@ [Quad Damage wearing off]
+hu [A Quad Damage lejár]
+
+@ [Quad Damage]
+hu [Quad Damage]
+
+@ [Pentagram wearing off]
+hu [A pentagramma lejár]
+
+@ [Pentagram of Protection]
+hu [A védelem pentagrammája]
+
+@ [Ring wearing off]
+hu [A gyűrű lejár]
+
+@ [Ring of Shadows]
+hu [Az árnyak gyűrűje]
+
+@ [Biosuit wearing off]
+hu [A bioruha lejár]
+
+@ [Biosuit]
+hu [Bioruha]
+
+@ [Item picked up]
+hu [Tárgy felvéve]
+
+@ [Weapon picked up]
+hu [Fegyver felvéve]
+
+@ [Ammo picked up]
+hu [Lőszer felvéve]
+
+@ [Explosion]
+hu [Robbanás]
+
+@ [Grenade launched]
+hu [Gránát kilőve]
+
+@ [Grenade bounce]
+hu [Gránát pattan]
+
+@ [Rocket fired]
+hu [Rakéta kilőve]
+
+@ [Nails fired]
+hu [Szögek kilőve]
+
+@ [Lightning]
+hu [Villám]
+
+@ [Thunder]
+hu [Mennydörgés]
+
+@ [Enforcer alerted]
+hu [Enforcer felfigyelt]
+
+@ [Grunt alerted]
+hu [Grunt felfigyelt]
+
+@ [Rottweiler alerted]
+hu [Rottweiler felfigyelt]
+
+@ [Knight alerted]
+hu [Lovag felfigyelt]
+
+@ [Death Knight alerted]
+hu [Halállovag felfigyelt]
+
+@ [Scrag alerted]
+hu [Scrag felfigyelt]
+
+@ [Ogre alerted]
+hu [Ogre felfigyelt]
+
+@ [Fiend alerted]
+hu [Fiend felfigyelt]
+
+@ [Shambler alerted]
+hu [Shambler felfigyelt]
+
+@ [Zombie groaning]
+hu [Zombi nyög]
+
+@ [Vore alerted]
+hu [Vore felfigyelt]
+
+@ [Vore attacking]
+hu [Vore támad]
+
+@ [Spawn alerted]
+hu [Spawn felfigyelt]
+
+@ [Rotfish]
+hu [Rothal]
+
+@ [Spawn]
+hu [Spawn]
+
+@ [Chthon]
+hu [Chthon]
+
+@ [Hard landing]
+hu [Kemény landolás]
+
+@ [Drowning]
+hu [Fulladás]
+
+@ [Gasping for air]
+hu [Levegő után kapkodás]
+
+@ [Burning]
+hu [Égés]
+
+@ [Telefrag]
+hu [Telefrag]
+
+@ [Gibbed]
+hu [Szétloccsantva]
+
+# ==== console.txt ====
+
+# Console messages, shown translated only with con_translate 1 (Translate Console).
+# Cvar and command names stay as they are.
+@ Autosaved.
+hu Automatikus mentés kész.
+
+@ Game saved.
+hu Játék elmentve.
+
+@ Can't save now.
+hu Most nem lehet menteni.
+
+@ This game only autosaves (No Manual Saves modifier).
+hu Ez a játék csak automatikusan ment (Nincs kézi mentés módosító).
+
+@ Loading {}...
+hu Betöltés: {}...
+
+@ load failed: {}
+hu betöltés sikertelen: {}
+
+@ ERROR: autosave failed: {}
+hu HIBA: az automatikus mentés sikertelen: {}
+
+@ ERROR: couldn't open {}
+hu HIBA: nem nyitható meg: {}
+
+@ ERROR: couldn't open {}.
+hu HIBA: nem nyitható meg: {}.
+
+@ ERROR: couldn't write {}: {}
+hu HIBA: nem írható: {}: {}
+
+@ ERROR: couldn't create {}: {}
+hu HIBA: nem hozható létre: {}: {}
+
+@ couldn't write {}: {}
+hu nem írható: {}: {}
+
+@ Wrote {}
+hu Kiírva: {}
+
+@ screenshot failed: {}
+hu képernyőkép sikertelen: {}
+
+@ screenshot: {}
+hu képernyőkép: {}
+
+@ No readable save available. Select save or restart the level.
+hu Nincs olvasható mentés. Válassz mentést, vagy kezdd újra a pályát.
+
+@ Unknown command "{}"
+hu Ismeretlen parancs: "{}"
+
+@ couldn't exec {}
+hu nem futtatható: {}
+
+@ execing {}
+hu futtatás: {}
+
+@ execing config.cfg (inherited from {})
+hu config.cfg futtatása (örökölve innen: {})
+
+@ execing config.cfg (mod defaults)
+hu config.cfg futtatása (mod alapértékei)
+
+@ execing default.cfg (built-in)
+hu default.cfg futtatása (beépített)
+
+@ {} cvars
+hu Változók: {}
+
+@ {} commands
+hu Parancsok: {}
+
+@ Can't "cmd", not connected
+hu A "cmd" nem használható, nincs kapcsolat
+
+@ Looking for Quake servers...
+hu Quake-szerverek keresése...
+
+@ Bad value, must be between 1 and 65534
+hu Hibás érték, 1 és 65534 között kell lennie
+
+@ Couldn't handle music file {}
+hu A zenefájl nem kezelhető: {}
+
+@ Bug report written to {}
+hu Hibajelentés kiírva ide: {}
+
+@ bugreport: can't create {}: {}
+hu bugreport: nem hozható létre: {}: {}
+
+@ graphics preset: {}
+hu grafikai előbeállítás: {}
+
+@ Presets (r_shader_preset <name>):
+hu Előbeállítások (r_shader_preset <név>):
+
+@ Add your own .slangp presets under <game>/shaders/.
+hu Saját .slangp előbeállításokat a <game>/shaders/ mappába tehetsz.
+
+@ no shader preset loaded (r_shader_preset)
+hu nincs betöltött shader-előbeállítás (r_shader_preset)
+
+@ r_shader_preset: "{}" not found
+hu r_shader_preset: "{}" nem található
+
+@ no parameter "{}" in this preset
+hu ebben az előbeállításban nincs "{}" paraméter
+
+@ {} = {} (default {}, {}..{})
+hu {} = {} (alapérték {}, {}..{})
+
+@ Switching to {}...
+hu Váltás erre: {}...
+
+@ game: no game dir "{}" in {}
+hu game: nincs "{}" játékmappa itt: {}
+
+@ game: can't find the engine executable
+hu game: a motor futtatható fájlja nem található
+
+@ game: exec failed: {}
+hu game: exec sikertelen: {}
+
+@ game: launch failed: {}
+hu game: az indítás sikertelen: {}
+
+@ loaded {} in {}s
+hu betöltve: {}, {} mp alatt
+
+@ No demos listed with startdemos
+hu A startdemos nem sorol fel demót
+
+@ Playing demo from {}.
+hu Demó lejátszása: {}.
+
+@ {} frames {} seconds {} fps
+hu {} képkocka {} másodperc {} fps
+
+@ Recording to {}.
+hu Felvétel ide: {}.
+
+@ Completed demo
+hu Demó befejezve
+
+@ Can't record during demo playback
+hu Demólejátszás közben nem lehet felvenni
+
+@ Relative pathnames are not allowed.
+hu Relatív útvonalak nem engedélyezettek.
+
+@ Can't record - try again when connected
+hu Nem lehet felvenni - próbáld újra csatlakozás után
+
+@ {} demo(s) in loop
+hu Demók a ciklusban: {}
+
+@ Not recording a demo.
+hu Nincs folyamatban demófelvétel.
+
+@ {} joined on a gamepad
+hu Kontrolleren csatlakozott: {}
+
+@ goggles: needs a game started with Add-ons and Goggles enabled
+hu goggles: kiegészítőkkel és engedélyezett szemüveggel indított játék kell
+
+@ equip: needs a game started with Add-ons and Goggles enabled
+hu equip: kiegészítőkkel és engedélyezett szemüveggel indított játék kell
+
+@ UDP listening on port {}
+hu UDP figyelés (port: {})
+
+@ UDP bind on port {} failed: {}
+hu UDP kötés sikertelen (port: {}): {}
+
+@ Connection accepted by {}
+hu Kapcsolat elfogadva: {}
+
+@ Connection failed: {}
+hu Sikertelen kapcsolódás: {}
+
+@ Couldn't resolve {}
+hu Nem oldható fel: {}
+
+@ Connecting to {}...
+hu Kapcsolódás: {}...
+
+@ Connecting to QuakeWorld server {}...
+hu Kapcsolódás a QuakeWorld-szerverhez: {}...
+
+@ Disconnected: {}
+hu Kapcsolat bontva: {}
+
+@ Server disconnected
+hu A szerver bontotta a kapcsolatot
+
+@ Client {} connected
+hu Kliens csatlakozott: {}
+
+@ Client {} timed out
+hu Kliens időtúllépés: {}
+
+@ Couldn't spawn server {}: {}
+hu A szerver nem indítható: {}: {}
+
+@ maxplayers can not be changed while a server is running.
+hu A maxplayers nem módosítható, amíg szerver fut.
+
+@ You can't kick yourself!
+hu Saját magadat nem rúghatod ki!
+
+@ Only the server may changelevel
+hu Csak a szerver válthat pályát
+
+@ {} renamed to {}
+hu {} új neve: {}

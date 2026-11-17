@@ -1,0 +1,3024 @@
+# sw: the port's own text; English keys from crates/qcore/lang/*.txt.
+# Format in crates/qcore/src/lang/catalog.rs; check with tools/lang_check.py.
+
+# ==== menu.txt ====
+
+# Options pages: page names, row labels and choice values.
+@ 10% speed
+sw kasi 10%
+
+@ 2 split-screen
+sw 2 skrini iliyogawanywa
+
+@ 3 split-screen
+sw 3 skrini iliyogawanywa
+
+@ 4 split-screen
+sw 4 skrini iliyogawanywa
+
+@ 5 split-screen
+sw 5 skrini iliyogawanywa
+
+@ 6 split-screen
+sw 6 skrini iliyogawanywa
+
+@ 2D aiming
+sw Kulenga 2D
+
+@ 2x monsters
+sw Mazimwi mara 2
+
+@ 3x monsters
+sw Mazimwi mara 3
+
+@ 4x monsters
+sw Mazimwi mara 4
+
+@ 3D resolution
+sw Ubora wa 3D
+
+@ 3D view
+sw Mwonekano wa 3D
+
+@ 8-bit Color
+sw Rangi za 8-bit
+
+@ Accessibility
+sw Ufikivu
+
+@ Acquisition Cone
+sw Koni ya Kunasa
+
+@ Activation
+sw Uwashaji
+
+@ Add a ringing room tail after the cue
+sw Ongeza mwangwi wa chumba baada ya ishara
+
+@ Add delayed repeats after the cue
+sw Ongeza marudio yaliyochelewa baada ya ishara
+
+@ Add saturation and distortion
+sw Ongeza ukolezaji na upotoshaji
+
+@ Add-ons
+sw Viongezi
+
+@ Address
+sw Anwani
+
+@ Adds fine noise to hide color banding
+sw Huongeza kelele nyembamba kuficha mistari ya rangi
+
+@ Advanced Settings
+sw Mipangilio ya Kina
+
+@ Aim Assist
+sw Usaidizi wa Kulenga
+
+@ Aim Rotation
+sw Mzunguko wa Kulenga
+
+@ Aim Slowdown
+sw Kupunguza Kasi Ukilenga
+
+@ Aim Style
+sw Mtindo wa Kulenga
+
+@ All
+sw Zote
+
+@ All enemies
+sw Maadui wote
+
+@ Alt Fire (Add-ons)
+sw Mlipuo Mbadala (Viongezi)
+
+@ Always Run
+sw Kimbia Daima
+
+@ Ambient Occlusion
+sw Kivuli cha Mazingira
+
+@ Ammo Counts
+sw Idadi ya Risasi
+
+@ Ammo Counts Position
+sw Nafasi ya Idadi ya Risasi
+
+@ Ammo Pickups
+sw Risasi Zinazookotwa
+
+@ Anisotropic
+sw Anisotropic
+
+@ Anti-aliasing
+sw Kulainisha Kingo
+
+@ Apply To
+sw Tumia Kwa
+
+@ Armor
+sw Deraya
+
+@ Armor Position
+sw Nafasi ya Deraya
+
+@ Ask
+sw Uliza
+
+@ Attack
+sw Shambulia
+
+@ Audio
+sw Sauti
+
+@ Auto-aim
+sw Kulenga Kiotomatiki
+
+@ Auto-aim Settings
+sw Mipangilio ya Kulenga Kiotomatiki
+
+@ Autosave
+sw Hifadhi Kiotomatiki
+
+@ Autosave Settings
+sw Mipangilio ya Kuhifadhi Kiotomatiki
+
+@ Autosave Timer
+sw Muda wa Kuhifadhi Kiotomatiki
+
+@ Autosaves to Keep
+sw Hifadhi za Kiotomatiki za Kuweka
+
+@ Bass
+sw Besi
+
+@ Blip
+sw Blip
+
+@ Blood Quality
+sw Ubora wa Damu
+
+@ Blood Splatter Settings
+sw Mipangilio ya Matone ya Damu
+
+@ Blue
+sw Bluu
+
+@ Boomerang Settings
+sw Mipangilio ya Bumerangi
+
+@ Boost or cut high frequencies in decibels
+sw Ongeza au punguza masafa ya juu kwa desibeli
+
+@ Boost or cut low frequencies in decibels
+sw Ongeza au punguza masafa ya chini kwa desibeli
+
+@ Brightness
+sw Mwangaza
+
+@ Bullet Time (Add-ons)
+sw Bullet Time (Viongezi)
+
+@ Bullet Time Settings
+sw Mipangilio ya Bullet Time
+
+@ Button Glyphs
+sw Alama za Vitufe
+
+@ Button Size
+sw Ukubwa wa Vitufe
+
+@ Camera
+sw Kamera
+
+@ Caustic Intensity
+sw Ukali wa Caustics
+
+@ Caustics
+sw Caustics
+
+@ Center
+sw Katikati
+
+@ Center Message Position
+sw Nafasi ya Ujumbe wa Kati
+
+@ Center Message Time
+sw Muda wa Ujumbe wa Kati
+
+@ Center View
+sw Elekeza Mwonekano Katikati
+
+@ Change Color on Kill
+sw Badilisha Rangi Ukiua
+
+@ Change Color on Target
+sw Badilisha Rangi Ukilenga
+
+@ Chime
+sw Kengele
+
+@ Click
+sw Bofya
+
+@ Clink
+sw Mlio
+
+@ Coin
+sw Sarafu
+
+@ Color
+sw Rangi
+
+@ Color Filter
+sw Kichujio cha Rangi
+
+@ Color of the grenade arc
+sw Rangi ya tao la guruneti
+
+@ Colored Lighting
+sw Mwanga wa Rangi
+
+@ Connect
+sw Unganisha
+
+@ Contrast
+sw Utofautishaji
+
+@ Controls
+sw Vidhibiti
+
+@ Cooldown (ms)
+sw Muda wa Kupoa (ms)
+
+@ Crosshair Outline
+sw Ukingo wa Kilenga
+
+@ Crosshair Shape
+sw Umbo la Kilenga
+
+@ Crosshair Size
+sw Ukubwa wa Kilenga
+
+@ Current Ammo
+sw Risasi za Sasa
+
+@ Current Ammo Position
+sw Nafasi ya Risasi za Sasa
+
+@ Customize This Game
+sw Binafsisha Mchezo Huu
+
+@ Damage
+sw Madhara
+
+@ Damage Taken
+sw Madhara Uliyopata
+
+@ Debris
+sw Vifusi
+
+@ Debris Quality
+sw Ubora wa Vifusi
+
+@ Debris Settings
+sw Mipangilio ya Vifusi
+
+@ Directional Damage
+sw Mwelekeo wa Madhara
+
+@ Dithering
+sw Dithering
+
+@ Dodge / Dive (Add-ons)
+sw Kukwepa / Kuruka (Viongezi)
+
+@ Dragging up looks down instead of up
+sw Kuburuta juu kunaangalia chini badala ya juu
+
+@ Drive
+sw Ukolezaji
+
+@ Dynamic Lights
+sw Taa Zinazobadilika
+
+@ Echo
+sw Mwangwi
+
+@ Enemy Health
+sw Afya ya Maadui
+
+@ Enemy Wounds
+sw Majeraha ya Maadui
+
+@ Enhanced Blood Splatter
+sw Matone ya Damu Bora
+
+@ Enhanced FX
+sw Athari Bora
+
+@ Enhanced Models
+sw Modeli Bora
+
+@ Enhanced Particles
+sw Chembechembe Bora
+
+@ Enhanced Water
+sw Maji Bora
+
+@ Enhancements
+sw Maboresho
+
+@ Equipment Wheel (Add-ons)
+sw Gurudumu la Vifaa (Viongezi)
+
+@ Exploding boxes throw metal shards
+sw Masanduku yanayolipuka hurusha vipande vya chuma
+
+@ Explosion Damage
+sw Madhara ya Mlipuko
+
+@ Explosion Scorch Marks
+sw Alama za Kuungua za Mlipuko
+
+@ Explosions scorch nearby solid surfaces
+sw Milipuko huunguza nyuso ngumu zilizo karibu
+
+@ Explosives only
+sw Vilipuzi pekee
+
+@ Extra Monsters
+sw Mazimwi ya Ziada
+
+@ Extra Per 10 Damage (ms)
+sw Ziada kwa Kila Madhara 10 (ms)
+
+@ FX Settings
+sw Mipangilio ya Athari
+
+@ Field of View
+sw Uga wa Mwonekano
+
+@ Firing never uses up ammo
+sw Kufyatua hakutumii risasi kamwe
+
+@ First person
+sw Mtu wa kwanza
+
+@ Flick Time
+sw Muda wa Flick
+
+@ Flight Speed
+sw Kasi ya Kuruka Hewani
+
+@ Fog
+sw Ukungu
+
+@ Frag Limit
+sw Kikomo cha Frag
+
+@ Freeze Duration (ms)
+sw Muda wa Kuganda (ms)
+
+@ GLQuake
+sw GLQuake
+
+@ Game Speed
+sw Kasi ya Mchezo
+
+@ Game Type
+sw Aina ya Mchezo
+
+@ Gameplay
+sw Uchezaji
+
+@ Gameplay Modifiers
+sw Virekebishaji vya Mchezo
+
+@ Gel Quality
+sw Ubora wa Jeli
+
+@ Gib Surface Painting
+sw Madoa ya Vipande vya Nyama
+
+@ Gibs
+sw Vipande vya Nyama
+
+@ Gibs and heads tumble and bounce
+sw Vipande vya nyama na vichwa huviringika na kudunda
+
+@ Goggle Glow Quality
+sw Ubora wa Mng'ao wa Miwani
+
+@ Goggle Intensity
+sw Ukali wa Miwani
+
+@ Goggle Noise
+sw Kelele ya Miwani
+
+@ Goggles Settings
+sw Mipangilio ya Miwani
+
+@ Graphics
+sw Michoro
+
+@ Green
+sw Kijani
+
+@ Grenade Arc
+sw Tao la Guruneti
+
+@ Grenade Arc Settings
+sw Mipangilio ya Tao la Guruneti
+
+@ Gun Kick
+sw Kurudi kwa Silaha
+
+@ Gyro
+sw Gyro
+
+@ Gyro & Flick Stick
+sw Gyro na Flick Stick
+
+@ Gyro Active
+sw Gyro Inatumika
+
+@ Gyro Aiming
+sw Kulenga kwa Gyro
+
+@ HUD
+sw HUD
+
+@ HUD Style
+sw Mtindo wa HUD
+
+@ Health
+sw Afya
+
+@ Health Pickups
+sw Afya Inayookotwa
+
+@ Health Position
+sw Nafasi ya Afya
+
+@ Health Regeneration
+sw Kurejesha Afya
+
+@ Hit & Kill Sounds
+sw Sauti za Kugonga na Kuua
+
+@ Hit Doors & Lifts
+sw Gonga Milango na Lifti
+
+@ Hit Markers
+sw Alama za Kugonga
+
+@ Hit Sound
+sw Sauti ya Kugonga
+
+@ Hitmarker Size
+sw Ukubwa wa Alama ya Kugonga
+
+@ Hitmarker Type
+sw Aina ya Alama ya Kugonga
+
+@ Hitstop Advanced
+sw Hitstop ya Kina
+
+@ Hitstop Settings
+sw Mipangilio ya Hitstop
+
+@ Hold
+sw Shikilia
+
+@ Hold lock-on
+sw Shikilia ili kufunga lengo
+
+@ Hook Enemies
+sw Nasa Maadui
+
+@ Hook Metal
+sw Nasa Chuma
+
+@ Hook Stone
+sw Nasa Jiwe
+
+@ Hook Wood
+sw Nasa Mbao
+
+@ Hooking an enemy pulls you to it
+sw Ukinasa adui, anakuvuta kwake
+
+@ Hookshot Range
+sw Masafa ya Ndoano
+
+@ Hookshot Settings
+sw Mipangilio ya Ndoano
+
+@ Host Game
+sw Andaa Mchezo
+
+@ How far the hook flies before it retracts
+sw Umbali ndoano inaruka kabla ya kurudi
+
+@ How visible the on-screen controls are
+sw Uonekanaji wa vidhibiti vya skrini
+
+@ Impact Lifetime
+sw Muda wa Alama za Athari
+
+@ Infinite Ammo
+sw Risasi Zisizoisha
+
+@ Input
+sw Ingizo
+
+@ Input Scale
+sw Kipimo cha Ingizo
+
+@ Interpolate Animation
+sw Lainisha Uhuishaji
+
+@ Interpolate Movement
+sw Lainisha Mwendo
+
+@ Invert Look
+sw Geuza Kuangalia
+
+@ Invert Mouse
+sw Geuza Kipanya
+
+@ Invert Stick
+sw Geuza Stick
+
+@ Jet Quality
+sw Ubora wa Mkondo
+
+@ Join Game
+sw Jiunge na Mchezo
+
+@ Jump / Swim Up
+sw Ruka / Ogelea Juu
+
+@ Jump again in mid-air
+sw Ruka tena ukiwa hewani
+
+@ Jumps
+sw Miruko
+
+@ Keys & Powerups
+sw Funguo na Nguvu
+
+@ Keys & Powerups Position
+sw Nafasi ya Funguo na Nguvu
+
+@ Kill Bonus (x)
+sw Bonasi ya Kuua (x)
+
+@ Kill Sound
+sw Sauti ya Kuua
+
+@ Knock
+sw Kubisha
+
+@ Left
+sw Kushoto
+
+@ Length of the motion blur streaks
+sw Urefu wa michirizi ya ukungu wa mwendo
+
+@ Lifetime (seconds)
+sw Muda wa Kudumu (sekunde)
+
+@ Live Portal Views
+sw Mionekano Hai ya Lango
+
+@ Live View Distance
+sw Umbali wa Mwonekano Hai
+
+@ Local Players
+sw Wachezaji wa Hapa
+
+@ Local red wounds follow enemy animation
+sw Majeraha mekundu hufuata uhuishaji wa adui
+
+@ Lock Indicator
+sw Kiashiria cha Kufunga Lengo
+
+@ Long falls don't hurt
+sw Kuanguka mbali hakuumizi
+
+@ Longest Freeze (ms)
+sw Kuganda Kurefu Zaidi (ms)
+
+@ Look Down
+sw Angalia Chini
+
+@ Look Speed
+sw Kasi ya Kuangalia
+
+@ Look Up
+sw Angalia Juu
+
+@ Main Menu Music
+sw Muziki wa Menyu Kuu
+
+@ Max FPS
+sw FPS za Juu
+
+@ Max Players
+sw Wachezaji wa Juu
+
+@ Maximum Impacts
+sw Upeo wa Alama za Athari
+
+@ Maximum Marks
+sw Upeo wa Alama
+
+@ Maximum Range
+sw Masafa ya Juu
+
+@ Melee only
+sw Ana kwa ana pekee
+
+@ Message Background
+sw Mandharinyuma ya Ujumbe
+
+@ Message Text Size
+sw Ukubwa wa Maandishi
+
+@ Messages & Captions
+sw Ujumbe na Manukuu
+
+@ Meter Duration (real seconds)
+sw Muda wa Kipimo (sekunde halisi)
+
+@ Minimum Damage
+sw Madhara ya Chini
+
+@ Mode
+sw Hali
+
+@ Modern Console
+sw Konsoli ya Kisasa
+
+@ Modern HUD Layout
+sw Mpangilio wa HUD ya Kisasa
+
+@ Most recent save
+sw Hifadhi ya karibuni
+
+@ Motion Blur
+sw Ukungu wa Mwendo
+
+@ Motion Blur Amount
+sw Kiasi cha Ukungu wa Mwendo
+
+@ Motion Blur Quality
+sw Ubora wa Ukungu wa Mwendo
+
+@ Mouse & Keyboard
+sw Kipanya na Kibodi
+
+@ Mouse Speed
+sw Kasi ya Kipanya
+
+@ Move Back
+sw Rudi Nyuma
+
+@ Move Forward
+sw Songa Mbele
+
+@ Music Volume
+sw Sauti ya Muziki
+
+@ Next Weapon
+sw Silaha Inayofuata
+
+@ No Drowning
+sw Hakuna Kuzama
+
+@ No Fall Damage
+sw Hakuna Madhara ya Kuanguka
+
+@ No Manual Saves
+sw Hakuna Kuhifadhi kwa Mkono
+
+@ No Self Damage
+sw Hakuna Kujiumiza
+
+@ Noise Filter
+sw Kichujio cha Kelele
+
+@ Normal Color
+sw Rangi ya Kawaida
+
+@ Notify Message Position
+sw Nafasi ya Arifa
+
+@ Notify Message Time
+sw Muda wa Arifa
+
+@ Number of splatter rays per blood impact
+sw Idadi ya miale ya matone kwa kila pigo la damu
+
+@ Off
+sw Zima
+
+@ On Death
+sw Ukifa
+
+@ On Kill Color
+sw Rangi Ukiua
+
+@ On Target Color
+sw Rangi Ukilenga
+
+@ Opacity
+sw Uangavu
+
+@ Opacity of the grenade arc
+sw Uangavu wa tao la guruneti
+
+@ Pants Color
+sw Rangi ya Suruali
+
+@ Particle Quality
+sw Ubora wa Chembechembe
+
+@ Particles
+sw Chembechembe
+
+@ Physical Nail Impacts
+sw Misumari Halisi Inapogonga
+
+@ Pistol Start
+sw Anza na Bastola
+
+@ Pitch
+sw Toni
+
+@ Pitch Sensitivity
+sw Unyeti wa Wima
+
+@ Playback Speed
+sw Kasi ya Kucheza
+
+@ Player Setup
+sw Mipangilio ya Mchezaji
+
+@ Pop
+sw Pop
+
+@ Portal Gun Settings
+sw Mipangilio ya Bunduki ya Lango
+
+@ Portal Recursion
+sw Lango Ndani ya Lango
+
+@ Portal View Quality
+sw Ubora wa Mwonekano wa Lango
+
+@ Preview Sound
+sw Sikiliza Sauti
+
+@ Previous Weapon
+sw Silaha Iliyotangulia
+
+@ Projectile Shotguns Settings
+sw Mipangilio ya Shotgun za Risasi Halisi
+
+@ Projectile Speed (units/s)
+sw Kasi ya Risasi (vipimo/s)
+
+@ Purple
+sw Zambarau
+
+@ Push
+sw Msukumo
+
+@ Push Strength
+sw Nguvu ya Msukumo
+
+@ Quick Load
+sw Pakia Haraka
+
+@ Quick Save
+sw Hifadhi Haraka
+
+@ Railgun Settings
+sw Mipangilio ya Railgun
+
+@ Ranged only
+sw Mbali pekee
+
+@ Reacquire While Held
+sw Lenga Upya Ukishikilia
+
+@ Red
+sw Nyekundu
+
+@ Reduce Motion
+sw Punguza Mwendo
+
+@ Regen (seconds per second)
+sw Kurejesha (sekunde kwa sekunde)
+
+@ Render Scale
+sw Kipimo cha Uonyeshaji
+
+@ Reverb
+sw Mwangwi wa Chumba
+
+@ Right
+sw Kulia
+
+@ Ripple Intensity
+sw Ukali wa Mawimbi
+
+@ Ripples
+sw Mawimbi
+
+@ Roll Sensitivity
+sw Unyeti wa Kuviringisha
+
+@ Rumble
+sw Mtetemo
+
+@ Run
+sw Kimbia
+
+@ Save on All Enemies Killed
+sw Hifadhi Maadui Wote Wakiuawa
+
+@ Save on All Secrets Found
+sw Hifadhi Siri Zote Zikipatikana
+
+@ Save on Level Entry
+sw Hifadhi Ukiingia Ngazi
+
+@ Save on Secret Found
+sw Hifadhi Siri Ikipatikana
+
+@ Scoreboard
+sw Ubao wa Alama
+
+@ Screen Flashes
+sw Mimweko ya Skrini
+
+@ Screen Shader
+sw Shader ya Skrini
+
+@ Screen Shake
+sw Mtikisiko wa Skrini
+
+@ Search LAN
+sw Tafuta LAN
+
+@ Seconds a center-screen message stays up
+sw Sekunde ujumbe wa katikati ya skrini unakaa
+
+@ See Through Portals
+sw Ona Kupitia Malango
+
+@ See-through Teleporters
+sw Teleporta za Kuona Kupitia
+
+@ Shirt Color
+sw Rangi ya Shati
+
+@ Shotgun Bullet Decals
+sw Alama za Risasi za Shotgun
+
+@ Shoulder left
+sw Bega kushoto
+
+@ Shoulder right
+sw Bega kulia
+
+@ Show FPS
+sw Onyesha FPS
+
+@ Show Face
+sw Onyesha Uso
+
+@ Shrapnel
+sw Vipande
+
+@ Size of on-screen messages and captions
+sw Ukubwa wa ujumbe na manukuu ya skrini
+
+@ Skill
+sw Ugumu
+
+@ Sky Fog
+sw Ukungu wa Anga
+
+@ Smooths the stepped movement of monsters
+sw Hulainisha mwendo wa hatua wa mazimwi
+
+@ Sound
+sw Sauti
+
+@ Sound Captions
+sw Manukuu ya Sauti
+
+@ Sound Volume
+sw Kiwango cha Sauti
+
+@ Speed Blur
+sw Ukungu wa Kasi
+
+@ Splashes
+sw Mirushiko
+
+@ Splatter Amount
+sw Kiasi cha Matone
+
+@ Splatter Size
+sw Ukubwa wa Matone
+
+@ Start Game
+sw Anza Mchezo
+
+@ Staying underwater doesn't hurt
+sw Kukaa chini ya maji hakuumizi
+
+@ Stick Look Pitch
+sw Stick: Kuangalia Wima
+
+@ Stick Look Yaw
+sw Stick: Kuangalia Mlalo
+
+@ Strafe Left
+sw Hamia Kushoto
+
+@ Strafe Right
+sw Hamia Kulia
+
+@ Strength of the surface swell and rings
+sw Nguvu ya mawimbi na pete za uso wa maji
+
+@ Stun Duration
+sw Muda wa Kuduwaza
+
+@ Style
+sw Mtindo
+
+@ Supersampling
+sw Supersampling
+
+@ Surface Hit Effects
+sw Athari za Kugonga Nyuso
+
+@ Swim Down
+sw Ogelea Chini
+
+@ Targets
+sw Malengo
+
+@ Teamplay
+sw Mchezo wa Timu
+
+@ Texture Filter
+sw Kichujio cha Tekstua
+
+@ Third person
+sw Mtu wa tatu
+
+@ Thud
+sw Kishindo
+
+@ Tick
+sw Tik
+
+@ Time Limit
+sw Kikomo cha Muda
+
+@ Time Stretch
+sw Kunyoosha Muda
+
+@ Toggle Attack
+sw Badili Shambulio
+
+@ Toggle Run
+sw Badili Kukimbia
+
+@ Toggle auto-aim
+sw Badili kulenga kiotomatiki
+
+@ Touch Controls
+sw Vidhibiti vya Mguso
+
+@ Touchscreen
+sw Skrini ya Mguso
+
+@ Tough Enemy Health
+sw Afya ya Maadui Sugu
+
+@ Tough enemies only
+sw Maadui sugu pekee
+
+@ Trail Colour
+sw Rangi ya Mkondo
+
+@ Translate Console
+sw Tafsiri Konsoli
+
+@ Translucent Water
+sw Maji Angavu
+
+@ Treble
+sw Treble
+
+@ Turn Left
+sw Geuka Kushoto
+
+@ Turn Right
+sw Geuka Kulia
+
+@ Underwater FX
+sw Athari za Chini ya Maji
+
+@ Use Bullet Time Meter
+sw Tumia Kipimo cha Bullet Time
+
+@ VSync
+sw VSync
+
+@ View Bob
+sw Mtikisiko wa Mwonekano
+
+@ Viewmodels
+sw Modeli za Silaha
+
+@ Volume
+sw Kiwango cha Sauti
+
+@ Water Opacity
+sw Uangavu wa Maji
+
+@ Water Quality
+sw Ubora wa Maji
+
+@ Water Settings
+sw Mipangilio ya Maji
+
+@ Weapon Wheel
+sw Gurudumu la Silaha
+
+@ Weapon Wheel Slowdown
+sw Kupunguza Kasi kwa Gurudumu
+
+@ Weapons
+sw Silaha
+
+@ Weapons Position
+sw Nafasi ya Silaha
+
+@ Where center-screen messages appear
+sw Mahali ujumbe wa katikati ya skrini unapotokea
+
+@ Where pickup and event messages appear
+sw Mahali ujumbe wa vitu na matukio unapotokea
+
+@ White
+sw Nyeupe
+
+@ Yaw Sensitivity
+sw Unyeti wa Mlalo
+
+@ Yellow
+sw Njano
+
+# lowercase choice values
+@ T
+sw T
+
+@ always
+sw daima
+
+@ auto
+sw kiotomatiki
+
+@ banded
+sw kwa mikanda
+
+@ borderless
+sw bila mpaka
+
+@ bottom center
+sw chini katikati
+
+@ bottom left
+sw chini kushoto
+
+@ bottom right
+sw chini kulia
+
+@ box
+sw kisanduku
+
+@ broken square
+sw mraba uliovunjika
+
+@ classic
+sw asili
+
+@ coarse
+sw ghafi
+
+@ cooperative
+sw ushirikiano
+
+@ cross
+sw msalaba
+
+@ cross + dot
+sw msalaba + nukta
+
+@ cyan
+sw samawati
+
+@ dashed
+sw vistari
+
+@ deathmatch
+sw deathmatch
+
+@ deuteranopia
+sw deuteranopia
+
+@ diagonal streaks
+sw mistari ya mshazari
+
+@ diamond
+sw almasi
+
+@ dot
+sw nukta
+
+@ double
+sw mara mbili
+
+@ double chevrons
+sw vishale viwili
+
+@ double diagonals
+sw mishazari miwili
+
+@ easy
+sw rahisi
+
+@ fine
+sw laini
+
+@ fit output
+sw linganisha na pato
+
+@ flick stick
+sw flick stick
+
+@ fullscreen
+sw skrini nzima
+
+@ gap cross
+sw msalaba wenye pengo
+
+@ green
+sw kijani
+
+@ grey
+sw kijivu
+
+@ half speed
+sw nusu kasi
+
+@ hard
+sw ngumu
+
+@ high
+sw juu
+
+@ huge
+sw kubwa mno
+
+@ immersive
+sw ya kuzama ndani
+
+@ intense
+sw kali
+
+@ large
+sw kubwa
+
+@ larger
+sw kubwa zaidi
+
+@ largest
+sw kubwa kabisa
+
+@ linear
+sw mstari
+
+@ low
+sw chini
+
+@ lower
+sw chini
+
+@ magenta
+sw majenta
+
+@ medium
+sw wastani
+
+@ middle
+sw katikati
+
+@ middle left
+sw katikati kushoto
+
+@ middle right
+sw katikati kulia
+
+@ modern
+sw kisasa
+
+@ nearest
+sw jirani wa karibu
+
+@ nightmare
+sw jinamizi
+
+@ nintendo
+sw nintendo
+
+@ no team damage
+sw bila madhara ya timu
+
+@ none
+sw hakuna
+
+@ normal
+sw kawaida
+
+@ off
+sw zima
+
+@ off while held
+sw zima ukishikilia
+
+@ on
+sw washa
+
+@ only while held
+sw ukishikilia tu
+
+@ playstation
+sw playstation
+
+@ protanopia
+sw protanopia
+
+@ quarter speed
+sw robo kasi
+
+@ red
+sw nyekundu
+
+@ short diagonals
+sw mishazari mifupi
+
+@ single
+sw moja
+
+@ small
+sw ndogo
+
+@ solid
+sw mfululizo
+
+@ spectacle
+sw ya kuvutia
+
+@ subtle
+sw hafifu
+
+@ team damage
+sw madhara ya timu
+
+@ top center
+sw juu katikati
+
+@ top left
+sw juu kushoto
+
+@ top right
+sw juu kulia
+
+@ triple
+sw mara tatu
+
+@ tritanopia
+sw tritanopia
+
+@ upper
+sw juu
+
+@ white
+sw nyeupe
+
+@ whole screen
+sw skrini nzima
+
+@ windowed
+sw dirisha
+
+@ xbox
+sw xbox
+
+@ yellow
+sw njano
+
+# ==== tooltips.txt ====
+
+# Options help lines (tooltips) and reasons for disabled rows.
+@ 2D aiming turns the view continuously with the right stick; flick stick snaps the view to where you push the stick, then turning the stick rotates it
+sw Kulenga 2D huzungusha mwonekano mfululizo kwa stick ya kulia; flick stick huelekeza mwonekano papo hapo upande unaosukuma stick, kisha kuzungusha stick kunauzungusha
+
+@ 3D resolution relative to the window; the UI stays sharp
+sw Ubora wa 3D ukilinganishwa na dirisha; kiolesura kinabaki kikali
+
+@ 3D view keeps the HUD and menus sharp; whole screen runs them through the shader too
+sw Mwonekano wa 3D huacha HUD na menyu zikiwa kali; skrini nzima huzipitisha pia kwenye shader
+
+@ A Quake III style railgun: a slug that pierces every enemy on its line, using 2 cells a shot and refiring every 1.5 s; select it through its assigned weapon slot (Add-ons)
+sw Railgun ya mtindo wa Quake III: risasi inayopenya kila adui kwenye mstari wake, inatumia seli 2 kwa kila risasi na inafyatua tena kila sekunde 1.5; ichague kupitia nafasi ya silaha uliyoipangia (Viongezi)
+
+@ A Zelda-style hookshot: fire sends a chain hook out; it latches onto hookable surfaces or enemies and reels you in; fire again to let go
+sw Ndoano ya mtindo wa Zelda: kufyatua kunarusha ndoano ya mnyororo; inanasa nyuso zinazonasika au maadui na kukuvuta; fyatua tena kuachilia
+
+@ Also translates the engine's console messages; off keeps them in English
+sw Pia hutafsiri ujumbe wa konsoli wa injini; ukizima, unabaki kwa Kiingereza
+
+@ Automatically acquire another enemy while holding Lock-on after losing a target
+sw Hunasa adui mwingine kiotomatiki ukiwa umeshikilia Kufunga Lengo baada ya kupoteza lengo
+
+@ Blends between animation frames of monsters and weapons
+sw Huchanganya fremu za uhuishaji za mazimwi na silaha
+
+@ Blood stains surfaces and bodies; cosmetic, independent of particle packs
+sw Damu huchafua nyuso na miili; ni ya mapambo tu, haitegemei vifurushi vya chembechembe
+
+@ Bloom glow around bright lights and heat sources; medium uses 4 taps, high uses 8, low disables halo taps
+sw Mng'ao wa bloom kuzunguka taa angavu na vyanzo vya joto; wastani hutumia sampuli 4, juu 8, chini huzima halo
+
+@ Blurs fast-moving monsters, projectiles and doors (not camera turns)
+sw Hutia ukungu mazimwi, makombora na milango yanayosonga kwa kasi (si mzunguko wa kamera)
+
+@ Blurs the screen edges during fast falls and launches; keeps the centre clear. Reduce Motion disables it
+sw Hutia ukungu kingo za skrini wakati wa kuanguka au kurushwa kwa kasi; katikati hubaki wazi. Punguza Mwendo huuzima
+
+@ Brightness of the underwater light patterns
+sw Mwangaza wa mifumo ya mwanga chini ya maji
+
+@ Caps mark count, lifetime, airborne droplets and wound/gib painting; low skips enemy wounds and gib trails
+sw Hudhibiti idadi ya alama, muda wake, matone hewani na madoa ya majeraha/vipande; chini huruka majeraha ya maadui na michirizi ya vipande
+
+@ Caps shader input at output size so 200% render scale keeps 3D sharpness without 4x shader cost; low scales stay low-res
+sw Huweka kikomo cha ingizo la shader kwenye ukubwa wa pato ili kipimo cha 200% kibaki kikali bila gharama ya shader mara 4; vipimo vya chini hubaki na ubora wa chini
+
+@ Classic: the original status bar; modern: compact elements at the screen edges
+sw Asili: upau wa hali wa awali; kisasa: vipengele vidogo kwenye kingo za skrini
+
+@ Coat atlas resolution, rebuild rate and shader detail: low builds smaller coats less often with fast shading; high uses full detail
+sw Ubora wa atlasi ya tabaka, kasi ya kujenga upya na undani wa shader: chini hujenga tabaka ndogo mara chache kwa kivuli cha haraka; juu hutumia undani kamili
+
+@ Colour of the railgun's spiral trail; split-screen players each get the next colour along
+sw Rangi ya mkondo wa ond wa railgun; kwenye skrini iliyogawanywa kila mchezaji hupata rangi inayofuata
+
+@ Damage the railgun deals to each enemy it passes through (Quake III: 100)
+sw Madhara ambayo railgun huleta kwa kila adui inayempenya (Quake III: 100)
+
+@ Dark backdrop behind on-screen messages for readability
+sw Mandharinyuma meusi nyuma ya ujumbe wa skrini ili usomeke vizuri
+
+@ Dark border keeps the crosshair visible on any background
+sw Ukingo mweusi huweka kilenga kionekane kwenye mandharinyuma yoyote
+
+@ Darkens corners and contact areas where geometry meets; higher quality is sharper
+sw Huweka giza pembeni na mahali maumbo yanapokutana; ubora wa juu ni mkali zaidi
+
+@ Debris lands on and is carried or shoved by doors, lifts and platforms
+sw Vifusi hutua juu ya milango, lifti na majukwaa, na hubebwa au kusukumwa navyo
+
+@ Detail for caustics, ripples and splashes: low uses smaller budgets and shorter view distance; high uses larger budgets and farther view distance
+sw Undani wa caustics, mawimbi na mirushiko: chini hutumia bajeti ndogo na umbali mfupi wa kuona; juu hutumia bajeti kubwa na umbali mrefu wa kuona
+
+@ Disabled while Enhanced Particles is on: its particles replace the GLQuake and Classic styles
+sw Imezimwa wakati Chembechembe Bora zimewashwa: chembechembe zake huchukua nafasi ya mitindo ya GLQuake na asili
+
+@ Disabled while Enhanced Water is on: its own underwater effects replace the classic and GLQuake view warps
+sw Imezimwa wakati Maji Bora yamewashwa: athari zake za chini ya maji huchukua nafasi ya mipotoko ya asili na ya GLQuake
+
+@ Draw the predicted grenade path as a solid or dashed line
+sw Chora njia inayotabiriwa ya guruneti kama mstari mfululizo au wa vistari
+
+@ Draw the view out of the linked portal inside each portal; off shows flat discs (fastest)
+sw Onyesha ndani ya kila lango mwonekano kutoka lango lililounganishwa; ukizima, huonyesha diski bapa (haraka zaidi)
+
+@ Droplets spray up when things enter or leave water, slime or lava
+sw Matone hurushwa vitu vinapoingia au kutoka kwenye maji, ute au lava
+
+@ Emulates the original 8-bit palette of software rendering
+sw Huiga paleti ya awali ya 8-bit ya uchoraji wa programu
+
+@ Every level starts with only the shotgun and axe, as if started fresh
+sw Kila ngazi huanza na shotgun na shoka pekee, kana kwamba ni mwanzo mpya
+
+@ Explosion damage for each remotely detonated sticky bomb
+sw Madhara ya mlipuko kwa kila bomu linalonata linalolipuliwa kwa mbali
+
+@ Extra freeze milliseconds for every 10 damage dealt, so heavy hits stop longer
+sw Milisekunde za ziada za kuganda kwa kila madhara 10, ili mapigo mazito yasimamishe muda mrefu zaidi
+
+@ First person, a third-person camera centered behind the player, or one over the right or left shoulder; third person hides viewmodels
+sw Mtu wa kwanza, kamera ya mtu wa tatu nyuma ya mchezaji, au juu ya bega la kulia au kushoto; mtu wa tatu huficha modeli za silaha
+
+@ Flash the selected marker on confirmed hits; colors are shared with the crosshair
+sw Mulika alama iliyochaguliwa pigo linapothibitishwa; rangi zinashirikiwa na kilenga
+
+@ Freeze for every enemy, or only for enemies that were tough before the hit
+sw Ganda kwa kila adui, au kwa maadui waliokuwa sugu kabla ya pigo tu
+
+@ Freeze the game briefly when you damage an enemy; single player with add-ons only
+sw Gandisha mchezo kwa muda mfupi unapomjeruhi adui; mchezaji mmoja na viongezi pekee
+
+@ Gibs tumble and barrels throw shrapnel; shots and blasts push them (cosmetic only)
+sw Vipande vya nyama huviringika na mapipa hurusha vipande; risasi na milipuko huvisukuma (mapambo tu)
+
+@ Health an enemy must have had before the hit to count as tough
+sw Afya ambayo adui alipaswa kuwa nayo kabla ya pigo ili ahesabiwe kuwa sugu
+
+@ Hits dealing less damage than this do not freeze the game; the default 10 skips nails and shotgun pellets
+sw Mapigo yenye madhara chini ya haya hayagandishi mchezo; chaguo-msingi 10 huruka misumari na chembe za shotgun
+
+@ Hold fire and sweep the crosshair over monsters to queue them, release to throw: it stuns each in turn and flies back; alt-fire clears the queue
+sw Shikilia kufyatua na pitisha kilenga juu ya mazimwi kuyapanga, achilia kurusha: huduwaza kila moja kwa zamu na kurudi; mlipuo mbadala hufuta foleni
+
+@ Hold: keep Lock-on held. Toggle: press Auto-aim Toggle to enable automatic acquisition. Click look stick to switch targets
+sw Shikilia: endelea kushikilia Kufunga Lengo. Badili: bonyeza Badili Kulenga Kiotomatiki kuwasha unasaji wa kiotomatiki. Bofya stick ya kuangalia kubadili lengo
+
+@ How close an enemy must be to the crosshair for automatic acquisition in toggle mode (degrees)
+sw Ukaribu wa adui kwa kilenga ili anaswe kiotomatiki katika hali ya kubadili (nyuzi)
+
+@ How far the view tilts up and down when you tilt the controller (pitch axis)
+sw Kiasi mwonekano unainama juu na chini unapoinamisha kidhibiti (mhimili wa pitch)
+
+@ How far the view turns left and right when you turn the controller (yaw axis)
+sw Kiasi mwonekano unageuka kushoto na kulia unapogeuza kidhibiti (mhimili wa yaw)
+
+@ How far the view turns when you drag on the right half of the screen
+sw Kiasi mwonekano unageuka unapoburuta kwenye nusu ya kulia ya skrini
+
+@ How fast the boomerang flies (units per second)
+sw Kasi ya bumerangi kuruka (vipimo kwa sekunde)
+
+@ How hard shots and explosions push debris around
+sw Nguvu ya risasi na milipuko kusukuma vifusi
+
+@ How hard the Powerwasher's water pushes enemies
+sw Nguvu ya maji ya Powerwasher kusukuma maadui
+
+@ How long a hit freezes the game, in milliseconds
+sw Muda ambao pigo hugandisha mchezo, kwa milisekunde
+
+@ How strongly fog covers the sky when fog is on
+sw Kiasi ukungu unafunika anga ukungu ukiwa umewashwa
+
+@ How the view distorts underwater: Classic ripples the whole screen like software Quake, GLQuake slowly stretches and squashes the view
+sw Jinsi mwonekano unavyopotoka chini ya maji: Asili hutikisa skrini nzima kama Quake ya programu, GLQuake hunyoosha na kubana mwonekano polepole
+
+@ Ignores gyro rotation slower than this many degrees per second, to hide hand tremor
+sw Hupuuza mzunguko wa gyro ulio polepole kuliko nyuzi hizi kwa sekunde, kuficha mtetemo wa mkono
+
+@ Immersive: appears for a few seconds only when its value changes
+sw Ya kuzama ndani: huonekana kwa sekunde chache tu thamani yake inapobadilika
+
+@ Keeps textures sharp on floors and walls seen at steep angles
+sw Huweka tekstua kali kwenye sakafu na kuta zinazoonekana kwa pembe kali
+
+@ Lights from rockets, muzzle flashes and explosions brighten nearby walls
+sw Mwanga wa roketi, mimweko ya mdomo wa bunduki na milipuko hung'arisha kuta zilizo karibu
+
+@ Liquid surfaces swell and ring out where things move through them
+sw Nyuso za vimiminika hufura na kutoa pete vitu vinapopita ndani yake
+
+@ Lobs sticky bombs (rockets ammo) that cling to walls, doors and monsters; alt-fire detonates them all
+sw Hurusha mabomu yanayonata (risasi za roketi) yanayoshikamana na kuta, milango na mazimwi; mlipuo mbadala huyalipua yote
+
+@ Look of the classic particles: GLQuake draws soft round dots, Classic draws square pixels like software Quake
+sw Mwonekano wa chembechembe za asili: GLQuake huchora nukta laini za mviringo, Asili huchora pikseli za mraba kama Quake ya programu
+
+@ Low skips the background smear halo and uses fewer blur samples; high keeps the full halo and smoother streaks
+sw Chini huruka halo ya mandharinyuma na hutumia sampuli chache za ukungu; juu huweka halo kamili na michirizi laini zaidi
+
+@ Low: hard particle edges, half the scripted particles and fewer hit sparks. Medium: soft edges. High: soft edges checked per MSAA sample, most hit sparks
+sw Chini: kingo kali za chembechembe, nusu ya chembechembe za hati na cheche chache. Wastani: kingo laini. Juu: kingo laini zinazokaguliwa kwa kila sampuli ya MSAA, cheche nyingi zaidi
+
+@ Marks fade out before expiring; oldest marks are recycled at the limit
+sw Alama hufifia kabla ya kuisha; alama za zamani zaidi hutumika upya kikomo kikifikiwa
+
+@ Max nested portal reflections to draw; each level redraws the scene
+sw Upeo wa uakisi wa malango ndani ya malango; kila ngazi huchora upya mandhari
+
+@ Max portals per screen with a live view; each one redraws the scene
+sw Upeo wa malango yenye mwonekano hai kwa kila skrini; kila moja huchora upya mandhari
+
+@ Maximum distance for acquiring and keeping an enemy locked
+sw Umbali wa juu wa kunasa adui na kumfunga kama lengo
+
+@ Minimum gap between freezes, so shotgun pellets and rapid fire count once; kills ignore it
+sw Pengo la chini kati ya kuganda, ili chembe za shotgun na ufyatuaji wa haraka zihesabiwe mara moja; kuua hakuathiriwi
+
+@ Modern terminal console with autocomplete popup, history search, ANSI colors, bash shell and piping; off uses the classic Quake console
+sw Konsoli ya kisasa ya terminal yenye ukamilishaji kiotomatiki, utafutaji wa historia, rangi za ANSI, bash na mabomba; ukizima, hutumia konsoli ya asili ya Quake
+
+@ Monsters take proportionally less damage at higher values; above 100% is harder
+sw Mazimwi hupata madhara kidogo kwa uwiano thamani ikiwa juu; zaidi ya 100% ni ngumu zaidi
+
+@ Moving gibs leave blood on surfaces they touch
+sw Vipande vya nyama vinavyosonga huacha damu kwenye nyuso vinavyogusa
+
+@ Multiplier on the freeze when the hit kills the enemy; 1 means no extra
+sw Kizidishi cha kuganda pigo linapomuua adui; 1 inamaanisha hakuna ziada
+
+@ Multiplies ammo from pickups (up to the normal carry limit); below 100% is harder
+sw Huzidisha risasi zinazookotwa (hadi kikomo cha kawaida cha kubeba); chini ya 100% ni ngumu zaidi
+
+@ Multiplies health from pickups (up to 100, or the item's own limit); below 100% is harder
+sw Huzidisha afya inayookotwa (hadi 100, au kikomo cha kitu chenyewe); chini ya 100% ni ngumu zaidi
+
+@ Nails stick to wood and bodies; hard surfaces deflect them to the floor
+sw Misumari hukwama kwenye mbao na miili; nyuso ngumu huirudisha sakafuni
+
+@ Nearest keeps crisp classic pixels; linear smooths textures
+sw Jirani wa karibu huweka pikseli kali za asili; mstari hulainisha tekstua
+
+@ New Game: Add-ons
+sw Mchezo Mpya: Viongezi
+
+@ New Game: Customize
+sw Mchezo Mpya: Binafsisha
+
+@ Night vision: how much dark areas are brightened; thermal: how strongly heat stands out
+sw Maono ya usiku: kiasi maeneo meusi yanavyong'arishwa; joto: jinsi joto linavyojitokeza
+
+@ Night-vision and thermal goggles, cycle normal, night vision and thermal with Change Goggles (Add-ons), or use the Equipment Wheel
+sw Miwani ya maono ya usiku na ya joto; zungusha kawaida, maono ya usiku na joto kwa Badilisha Miwani (Viongezi), au tumia Gurudumu la Vifaa
+
+@ No single freeze lasts longer than this, however much damage or kill bonus adds
+sw Hakuna kuganda kunakozidi muda huu, hata madhara au bonasi ya kuua ikiongeza kiasi gani
+
+@ Oldest marks and nails are recycled at this shared limit
+sw Alama na misumari ya zamani zaidi hutumika upya kwenye kikomo hiki cha pamoja
+
+@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
+sw Stick na vitufe vya skrini: kiotomatiki huvionyesha baada ya mguso na kuvificha kifaa kingine kinapotumika
+
+@ Only autosaves: quicksaves and the Save menu are off
+sw Hifadhi za kiotomatiki pekee: hifadhi za haraka na menyu ya Kuhifadhi zimezimwa
+
+@ Place every weapon at the center, right or left of the view, or hide all viewmodels
+sw Weka kila silaha katikati, kulia au kushoto ya mwonekano, au ficha modeli zote za silaha
+
+@ Play your chosen hit or kill cue when you damage an enemy
+sw Cheza sauti uliyochagua ya kugonga au kuua unapomjeruhi adui
+
+@ Playback speed: faster sounds shorter and higher
+sw Kasi ya kucheza: haraka zaidi ni fupi na ya juu zaidi
+
+@ Plays the Quake theme in the main menu when no game is running
+sw Hucheza wimbo wa Quake kwenye menyu kuu wakati hakuna mchezo unaoendelea
+
+@ Portals farther away than this are drawn as flat discs
+sw Malango yaliyo mbali zaidi ya hapa huchorwa kama diski bapa
+
+@ Press attack once to keep firing, again to stop
+sw Bonyeza shambulio mara moja kuendelea kufyatua, tena kusimama
+
+@ Press run once to switch between running and walking
+sw Bonyeza kukimbia mara moja kubadili kati ya kukimbia na kutembea
+
+@ Raise or lower the tone independently of sound length
+sw Panda au shusha toni bila kubadilisha urefu wa sauti
+
+@ Red screen edges show where damage came from: top is front, bottom is behind; Screen Flashes controls their strength
+sw Kingo nyekundu za skrini huonyesha madhara yalikotoka: juu ni mbele, chini ni nyuma; Mimweko ya Skrini hudhibiti nguvu yake
+
+@ Replaces the classic dot particles with glowing sparks, smoke and blood; mods with their own particle effects keep them
+sw Hubadilisha chembechembe za nukta za asili kwa cheche zinazong'aa, moshi na damu; mods zenye athari zao za chembechembe huzibakiza
+
+@ Resolution and detail inside portal and teleporter views; lower tiers trim nested effects
+sw Ubora na undani ndani ya mionekano ya malango na teleporta; viwango vya chini hupunguza athari za ndani
+
+@ Rippling light patterns on surfaces under water and slime
+sw Mifumo ya mwanga inayotikisika kwenye nyuso chini ya maji na ute
+
+@ Scales all damage you take; above 100% is harder
+sw Hupima madhara yote unayopata; zaidi ya 100% ni ngumu zaidi
+
+@ Screen edge for this element; elements on the same spot stack
+sw Ukingo wa skrini wa kipengele hiki; vipengele vya mahali pamoja hupangana
+
+@ Seconds a monster hit by the boomerang stays stunned
+sw Sekunde ambazo zimwi lililopigwa na bumerangi hubaki limeduwaa
+
+@ Seconds impact marks and stuck nails stay before fading out; independent of Particle Quality
+sw Sekunde ambazo alama za athari na misumari iliyokwama hukaa kabla ya kufifia; haitegemei Ubora wa Chembechembe
+
+@ Seconds messages at the top of the screen stay up
+sw Sekunde ambazo ujumbe ulio juu ya skrini hukaa
+
+@ Seconds the flick stick snap takes; lower is faster
+sw Sekunde ambazo kuelekeza kwa flick stick huchukua; chini ni haraka zaidi
+
+@ See through enhanced water; enables Water Opacity
+sw Ona ndani ya maji bora; huwasha Uangavu wa Maji
+
+@ Sensor grain, scanlines and flicker of the goggle image
+sw Chembe za kihisi, mistari ya skrini na kumeta kwa picha ya miwani
+
+@ Shades every anti-aliasing sample; needs Anti-aliasing on
+sw Hutia kivuli kila sampuli ya kulainisha kingo; inahitaji Kulainisha Kingo kuwashwa
+
+@ Shifts colors so they stay distinct for the chosen color blindness
+sw Hubadilisha rangi ili zibaki tofauti kwa aina iliyochaguliwa ya upofu wa rangi
+
+@ Shotgun hits leave small surface marks (cosmetic only)
+sw Risasi za shotgun huacha alama ndogo kwenye nyuso (mapambo tu)
+
+@ Show corner ticks at screen centre while locked, even with Crosshair off
+sw Onyesha alama za pembe katikati ya skrini lengo likiwa limefungwa, hata kilenga kikiwa kimezimwa
+
+@ Show where grenades and other arcing shots will fly, bounce and land; local play only, not in deathmatch
+sw Onyesha mahali maguruneti na risasi nyingine za tao zitakaporuka, kudunda na kutua; mchezo wa hapa tu, si deathmatch
+
+@ Shows text for important sounds: doors, alerted enemies, secrets, pickups
+sw Huonyesha maandishi kwa sauti muhimu: milango, maadui walioshtuka, siri, vitu vinavyookotwa
+
+@ Shows the distance fog that maps and mods set; off always gives clear view
+sw Huonyesha ukungu wa umbali ulioainishwa na ramani na mods; ukizima, mwonekano huwa wazi daima
+
+@ Shows the player face next to the health number
+sw Huonyesha uso wa mchezaji kando ya namba ya afya
+
+@ Simulation detail, step rate, fade-out lifetimes and caps for gibs and shrapnel; low also skips mover collision
+sw Undani wa uigaji, kasi ya hatua, muda wa kufifia na vikomo vya vipande vya nyama na vipande; chini pia huruka mgongano na vitu vinavyosonga
+
+@ Size of the on-screen buttons and move stick
+sw Ukubwa wa vitufe vya skrini na stick ya kusonga
+
+@ Slowly heals up to 100 health after 5 seconds without being hit
+sw Huponya polepole hadi afya 100 baada ya sekunde 5 bila kupigwa
+
+@ Slows stick look while the crosshair is over an enemy
+sw Hupunguza kasi ya kuangalia kwa stick kilenga kikiwa juu ya adui
+
+@ Slows the game down while the weapon wheel is open
+sw Hupunguza kasi ya mchezo gurudumu la silaha likiwa wazi
+
+@ Slows the whole game down; single player only. Saves and demos stay compatible with other ports
+sw Hupunguza kasi ya mchezo mzima; mchezaji mmoja pekee. Hifadhi na demo zinabaki zinaendana na ports nyingine
+
+@ Small camera jolt on each freeze; off with Reduce Motion
+sw Mtikiso mdogo wa kamera kila unapoganda; huzimwa na Punguza Mwendo
+
+@ Snap and track enemies in local play, including split-screen; unavailable online
+sw Elekeza na fuatilia maadui katika mchezo wa hapa, ikijumuisha skrini iliyogawanywa; haipatikani mtandaoni
+
+@ Sparks, smoke, chips, splinters and splashes fly off whatever your shots hit
+sw Cheche, moshi, chembe, vibanzi na mirushiko huruka kutoka chochote risasi zako zinachogonga
+
+@ Spawns extra copies of every monster around the original when a level starts
+sw Huzalisha nakala za ziada za kila zimwi karibu na la asili ngazi inapoanza
+
+@ Strength of the full-screen flashes for damage, pickups and powerups
+sw Nguvu ya mimweko ya skrini nzima kwa madhara, vitu vinavyookotwa na nguvu
+
+@ Stretch or shorten the sound while keeping its pitch
+sw Nyoosha au fupisha sauti huku ukibakiza toni yake
+
+@ Surface opacity; requires Enhanced Water and Translucent Water
+sw Uangavu wa uso; inahitaji Maji Bora na Maji Angavu
+
+@ The hook latches onto metal surfaces (metal, tech, computer panels, copper)
+sw Ndoano hunasa nyuso za chuma (chuma, teknolojia, paneli za kompyuta, shaba)
+
+@ The hook latches onto stone, brick, rock and any surface not recognised as wood or metal
+sw Ndoano hunasa mawe, matofali, miamba na uso wowote usiotambuliwa kama mbao au chuma
+
+@ The hook latches onto wooden surfaces (texture names like wood, crate, plank)
+sw Ndoano hunasa nyuso za mbao (majina ya tekstua kama wood, crate, plank)
+
+@ Turn the controller's motion sensor into a look input; needs a pad with a gyroscope
+sw Geuza kihisi cha mwendo cha kidhibiti kuwa ingizo la kuangalia; inahitaji kidhibiti chenye gyroscope
+
+@ Turns off view bob, strafe tilt and the camera kick when hit or firing
+sw Huzima mtikisiko wa mwonekano, kuinama kwa kuhamia upande na mshtuko wa kamera unapopigwa au kufyatua
+
+@ Turns on the extra liquid effects; Water Settings controls each one
+sw Huwasha athari za ziada za vimiminika; Mipangilio ya Maji hudhibiti kila moja
+
+@ Turns the view to follow a moving enemy you are aiming at
+sw Hugeuza mwonekano kufuata adui anayesonga unayemlenga
+
+@ Turns the view when you roll the controller sideways; 0 disables it, negative reverses it
+sw Hugeuza mwonekano unapoviringisha kidhibiti upande; 0 huzima, hasi hugeuza mwelekeo
+
+@ Two-portal gun: fire and alt-fire place linked portals on flat walls; assign a weapon slot in Add-ons
+sw Bunduki ya malango mawili: kufyatua na mlipuo mbadala huweka malango yaliyounganishwa kwenye kuta bapa; panga nafasi ya silaha katika Viongezi
+
+@ Unlocks the FX Settings page: enhanced particles, impact effects and blood splatter
+sw Hufungua ukurasa wa Mipangilio ya Athari: chembechembe bora, athari za kugonga na matone ya damu
+
+@ Uses the 2021 re-release's smoother MD5 models (and MD3 replacements from mods) instead of the classic ones. Applies on the next map load
+sw Hutumia modeli laini za MD5 za toleo jipya la 2021 (na mbadala za MD3 kutoka mods) badala ya za asili. Hutumika ramani inayofuata ikipakiwa
+
+@ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
+sw Hutumia mwanga wa rangi wa ramani (faili .lit au BSPX lump); ukizima, mwanga ni mweupe wa asili. Hutumika ramani inayofuata ikipakiwa
+
+@ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
+sw Vipande vya mkondo wa maji, idadi ya matone na kivuli cha kung'aa cha vimiminika: chini hutumia mikondo rahisi angavu; juu hutumia mikondo laini inayong'aa
+
+@ When gyro looking applies: always, off while +gyroaction is held, or only while it is held
+sw Wakati kuangalia kwa gyro kunatumika: daima, zima ukishikilia +gyroaction, au ukiishikilia tu
+
+@ Which weapons trigger the freeze; melee covers the axe and any mod weapon used at close range without ammo
+sw Silaha zipi husababisha kuganda; ana kwa ana inajumuisha shoka na silaha yoyote ya mod inayotumika karibu bila risasi
+
+@ Your own rockets and grenades don't hurt you; rocket jumps still work
+sw Roketi na maguruneti yako hayakudhuru; kuruka kwa roketi bado kunafanya kazi
+
+# ==== ui.txt ====
+
+# Menus and pop-ups outside the options pages: save cards, launch, presets,
+# add-on browser, map packs, hints and dialogs.
+@ Select
+sw Chagua
+
+@ Back
+sw Rudi
+
+@ Cancel
+sw Ghairi
+
+@ Confirm
+sw Thibitisha
+
+@ Scroll
+sw Sogeza
+
+@ Section
+sw Sehemu
+
+@ Bind
+sw Panga
+
+@ Cancel binding
+sw Ghairi upangaji
+
+@ Clear
+sw Futa
+
+@ Clear pad
+sw Futa kidhibiti
+
+@ Remap
+sw Panga upya
+
+@ Type
+sw Andika
+
+@ Shift
+sw Shift
+
+@ Done
+sw Imekamilika
+
+@ Del
+sw Del
+
+@ Space
+sw Nafasi
+
+@ Save
+sw Hifadhi
+
+@ Load
+sw Pakia
+
+@ Delete
+sw Futa
+
+@ Play
+sw Cheza
+
+@ Yes
+sw Ndiyo
+
+@ No
+sw Hapana
+
+@ OK
+sw Sawa
+
+@ System
+sw Mfumo
+
+@ Language
+sw Lugha
+
+@ Help
+sw Msaada
+
+@ Fixed for this game: it was started without Customize
+sw Imewekwa kwa mchezo huu: ulianzishwa bila Binafsisha
+
+@ Press a button or key to bind (Start cancels)
+sw Bonyeza kitufe ili kupanga (Start hughairi)
+
+@ Press button...
+sw Bonyeza kitufe...
+
+@ Press key...
+sw Bonyeza kitufe...
+
+@ Replace this binding?
+sw Badilisha upangaji huu?
+
+@ is already assigned
+sw tayari imepangwa
+
+@ {} already assigned
+sw {} tayari imepangwa
+
+@ Open Controls to remap Lock-on?
+sw Fungua Vidhibiti ili upange upya Kufunga Lengo?
+
+@ Lock-on
+sw Kufunga Lengo
+
+@ Auto-aim Toggle
+sw Badili Kulenga Kiotomatiki
+
+@ Keyboard
+sw Kibodi
+
+@ Controller
+sw Kidhibiti
+
+# main menu, dialogs and screens
+@ Map Packs
+sw Vifurushi vya Ramani
+
+@ Customize
+sw Binafsisha
+
+@ Level Select
+sw Chagua Ngazi
+
+@ Really quit?
+sw Kweli unataka kutoka?
+
+@ You died
+sw Umekufa
+
+@ Continue from most recent save
+sw Endelea kutoka hifadhi ya karibuni
+
+@ Select save
+sw Chagua hifadhi
+
+@ Restart level
+sw Anza ngazi upya
+
+@ Return to main menu
+sw Rudi kwenye menyu kuu
+
+@ (disabled)
+sw (imezimwa)
+
+@ (fixed for this game)
+sw (imewekwa kwa mchezo huu)
+
+@ (off)
+sw (zima)
+
+@ Apply Display Changes
+sw Tumia Mabadiliko ya Skrini
+
+@ Display Mode
+sw Hali ya Skrini
+
+@ Resolution
+sw Ubora wa Skrini
+
+@ desktop
+sw eneo-kazi
+
+@ Preset
+sw Mpangilio Tayari
+
+@ Map
+sw Ramani
+
+@ Reset Shader Settings
+sw Rejesha Mipangilio ya Shader
+
+@ Reset to Defaults
+sw Rejesha Chaguo-msingi
+
+@ Searching...
+sw Inatafuta...
+
+@ This game only autosaves.
+sw Mchezo huu huhifadhi kiotomatiki tu.
+
+@ (No Manual Saves modifier)
+sw (kirekebishaji Hakuna Kuhifadhi kwa Mkono)
+
+@ End the current game?
+sw Maliza mchezo wa sasa?
+
+@ Unsaved progress will be lost.
+sw Maendeleo ambayo hayajahifadhiwa yatapotea.
+
+@ End game
+sw Maliza mchezo
+
+@ Overwrite
+sw Andika juu
+
+@ Overwrite "{}"?
+sw Andika juu ya "{}"?
+
+@ Saved {}
+sw Imehifadhiwa: {}
+
+@ Start a new game?
+sw Anza mchezo mpya?
+
+@ New game
+sw Mchezo mpya
+
+@ New Game
+sw Mchezo Mpya
+
+@ CUSTOM
+sw MAALUM
+
+@ Customize Experience
+sw Binafsisha Uzoefu
+
+@ Disable All
+sw Zima Zote
+
+@ Disable All Modifications
+sw Zima Mabadiliko Yote
+
+@ Saves load in other source ports too.
+sw Hifadhi hupakiwa pia kwenye ports nyingine.
+
+@ Standard rules, no add-ons.
+sw Sheria za kawaida, bila viongezi.
+
+@ Choose skill
+sw Chagua ugumu
+
+@ The current game will end
+sw Mchezo wa sasa utaisha
+
+@ Easy
+sw Rahisi
+
+@ Normal
+sw Kawaida
+
+@ Hard
+sw Ngumu
+
+@ Nightmare
+sw Jinamizi
+
+# graphics preset pop-up
+@ Choose a Graphics Preset
+sw Chagua Mpangilio wa Michoro
+
+@ Classic
+sw Asili
+
+@ Like the re-release: enhanced models,
+sw Kama toleo jipya: modeli bora,
+
+@ no added effects.
+sw bila athari za ziada.
+
+@ Enhanced
+sw Bora
+
+@ Every enhancement at its highest quality.
+sw Kila uboreshaji kwa ubora wake wa juu.
+
+@ Needs a capable GPU.
+sw Inahitaji GPU yenye uwezo.
+
+@ Low-End
+sw Kiwango cha Chini
+
+@ Fastest. No anti-aliasing, original
+sw Haraka zaidi. Bila kulainisha kingo,
+
+@ models, lowest effect quality.
+sw modeli asili, athari za ubora wa chini.
+
+@ Esc keeps the defaults
+sw Esc huweka chaguo-msingi
+
+@ Everything can be changed later in Options.
+sw Kila kitu kinaweza kubadilishwa baadaye katika Options.
+
+@ Keep Defaults
+sw Weka Chaguo-msingi
+
+# save and load cards
+@ Save Game
+sw Hifadhi Mchezo
+
+@ Load Game
+sw Pakia Mchezo
+
+@ Autosaves
+sw Hifadhi za Kiotomatiki
+
+@ newest first
+sw mpya kwanza
+
+@ Saves: {}
+sw Hifadhi: {}
+
+@ Browse Autosaves
+sw Vinjari Hifadhi za Kiotomatiki
+
+@ Every retained autosave, newest first
+sw Kila hifadhi ya kiotomatiki iliyobaki, mpya kwanza
+
+@ New save
+sw Hifadhi mpya
+
+@ Select to save your game here
+sw Chagua ili kuhifadhi mchezo wako hapa
+
+@ No autosaves yet
+sw Bado hakuna hifadhi za kiotomatiki
+
+@ Autosaves are made on level entry, secrets and more (Options > Gameplay)
+sw Hifadhi za kiotomatiki hufanywa ukiingia ngazi, ukipata siri na zaidi (Options > Uchezaji)
+
+@ No saves yet
+sw Bado hakuna hifadhi
+
+@ Save from the Single Player menu, or press F6 to quicksave
+sw Hifadhi kutoka menyu ya Single Player, au bonyeza F6 kuhifadhi haraka
+
+@ No picture
+sw Hakuna picha
+
+@ Del: delete save
+sw Del: futa hifadhi
+
+@ Delete "{}"?
+sw Futa "{}"?
+
+@ This cannot be undone.
+sw Hili haliwezi kutenduliwa.
+
+@ Quicksave
+sw Hifadhi ya haraka
+
+@ Autosave: {}
+sw Hifadhi kiotomatiki: {}
+
+@ unknown trigger
+sw kichochezi kisichojulikana
+
+@ Latest - {}
+sw Karibuni - {}
+
+@ Health {}
+sw Afya {}
+
+@ Armor {}
+sw Deraya {}
+
+@ Kills {}/{}
+sw Waliouawa {}/{}
+
+@ Secrets {}/{}
+sw Siri {}/{}
+
+@ Split-screen, {} players
+sw Skrini iliyogawanywa, wachezaji {}
+
+@ Co-op
+sw Ushirikiano
+
+@ Customized
+sw Umebinafsishwa
+
+@ Customized, {}
+sw Umebinafsishwa, {}
+
+@ Date unavailable
+sw Tarehe haipatikani
+
+@ Just now
+sw Sasa hivi
+
+@ {} min ago
+sw Dakika {} zilizopita
+
+@ {} h ago
+sw Saa {} zilizopita
+
+@ Level entry
+sw Kuingia ngazi
+
+@ Secret found
+sw Siri imepatikana
+
+@ All enemies killed
+sw Maadui wote wameuawa
+
+@ All secrets found
+sw Siri zote zimepatikana
+
+@ Timer
+sw Kipima muda
+
+# customize pages
+@ Standard rules
+sw Sheria za kawaida
+
+@ Modifiers changed: {}
+sw Virekebishaji vilivyobadilishwa: {}
+
+@ no add-ons
+sw bila viongezi
+
+@ add-ons: {}
+sw viongezi: {}
+
+@ Saves of this game are .qsa files: they need this source port.
+sw Hifadhi za mchezo huu ni faili .qsa: zinahitaji port hii.
+
+@ Nothing changed: this plays as standard Quake.
+sw Hakuna kilichobadilika: huu ni mchezo wa kawaida wa Quake.
+
+@ Changes apply now and are saved with this game (.qsa).
+sw Mabadiliko yanatumika sasa na yanahifadhiwa na mchezo huu (.qsa).
+
+@ This game started without Customize, so its rules are fixed.
+sw Mchezo huu ulianzishwa bila Binafsisha, kwa hivyo sheria zake haziwezi kubadilishwa.
+
+@ Start a new game and choose Customize Experience.
+sw Anza mchezo mpya na uchague Binafsisha Uzoefu.
+
+@ These rules apply to the next customized game.
+sw Sheria hizi zitatumika kwa mchezo ujao uliobinafsishwa.
+
+# add-on browser
+@ Fire
+sw Fyatua
+
+@ Alt Fire
+sw Mlipuo Mbadala
+
+@ Configure Parameters >
+sw Weka Vigezo >
+
+@ Configure
+sw Weka
+
+@ Settings
+sw Mipangilio
+
+@ Change slot
+sw Badilisha nafasi
+
+@ Toggle
+sw Washa/Zima
+
+@ Details
+sw Maelezo
+
+@ Enter or click the box: toggle
+sw Enter au bofya kisanduku: washa/zima
+
+@ Right / Tab / click: details
+sw Kulia / Tab / bofya: maelezo
+
+@ Input Remapping
+sw Kupanga Upya Ingizo
+
+@ Weapon Slot
+sw Nafasi ya Silaha
+
+@ Customized games save as .qsa files, which need this source port.
+sw Michezo iliyobinafsishwa huhifadhiwa kama faili .qsa, zinazohitaji port hii.
+
+@ This game started without Customize, so its add-ons are fixed. Customize a new game instead.
+sw Mchezo huu ulianzishwa bila Binafsisha, kwa hivyo viongezi vyake haviwezi kubadilishwa. Binafsisha mchezo mpya badala yake.
+
+@ Bullet Time
+sw Bullet Time
+
+@ Change Goggles
+sw Badilisha Miwani
+
+@ Dodge / Dive
+sw Kukwepa / Kuruka
+
+@ Goggles
+sw Miwani
+
+@ Hitstop
+sw Hitstop
+
+@ Projectile Shotguns
+sw Shotgun za Risasi Halisi
+
+@ BULLET TIME: 20%
+sw BULLET TIME: 20%
+
+@ NORMAL SPEED
+sw KASI YA KAWAIDA
+
+@ SLOW MOTION: PHYSICAL PELLETS
+sw MWENDO WA POLEPOLE: CHEMBE HALISI
+
+@ DEMONSTRATION
+sw ONYESHO
+
+@ GAMEPLAY
+sw UCHEZAJI
+
+@ LOOP
+sw MZUNGUKO
+
+@ Preview unavailable
+sw Onyesho la awali halipatikani
+
+# shader and language help lines
+@ A setting of the chosen shader; arrows step it, Enter is not needed
+sw Mpangilio wa shader iliyochaguliwa; mishale huubadilisha, Enter haihitajiki
+
+@ Language of the menus, messages and the 2021 re-release's game text; System follows your computer's language
+sw Lugha ya menyu, ujumbe na maandishi ya mchezo ya toleo jipya la 2021; Mfumo hufuata lugha ya kompyuta yako
+
+@ Puts every setting of the chosen shader back to the preset's defaults
+sw Hurejesha kila mpangilio wa shader iliyochaguliwa kwenye chaguo-msingi za mpangilio tayari
+
+@ RetroArch slang shader on the final image: CRT, scanlines, NTSC, sharpening; add your own in <game>/shaders
+sw Shader ya slang ya RetroArch kwenye picha ya mwisho: CRT, mistari ya skrini, NTSC, kunoa; ongeza zako katika <game>/shaders
+
+# modern console footer
+@ Shift+PgUp/Dn: height  ` : hide
+sw Shift+PgUp/Dn: urefu  ` : ficha
+
+@ Tab: complete  Ctrl+R: search  bash | pipe
+sw Tab: kamilisha  Ctrl+R: tafuta  bash | bomba
+
+@ ↑ +{} lines (End to jump) 
+sw ↑ mistari +{} (End kuruka chini) 
+
+# add-on descriptions
+@ Create two linked portals on flat walls. Fire places the first portal; Alt Fire places the second. Walk through either portal to emerge from the other. Your momentum carries through. Assign a weapon slot below: pressing that slot repeatedly cycles its ordinary weapon and every enabled add-on assigned there. Portal view quality is configurable below.
+sw Unda malango mawili yaliyounganishwa kwenye kuta bapa. Fyatua huweka lango la kwanza; Mlipuo Mbadala huweka la pili. Pita kwenye lango lolote utokee kwenye jingine. Kasi yako inaendelea. Panga nafasi ya silaha hapa chini: kubonyeza nafasi hiyo mara kwa mara huzungusha silaha yake ya kawaida na kila kiongezi kilichowashwa kilichopangiwa hapo. Ubora wa mwonekano wa lango unaweza kuwekwa hapa chini.
+
+@ Hold Fire and sweep the crosshair over monsters to queue targets. Release Fire to throw: the boomerang visits each target, stuns it and returns to you. Alt Fire clears the queue. The weapon slot selects a group, not a separate hotkey: press it again to cycle through the weapons in that slot. Configure stun duration and flight speed below.
+sw Shikilia Fyatua na pitisha kilenga juu ya mazimwi kupanga malengo. Achilia Fyatua kurusha: bumerangi hutembelea kila lengo, huliduwaza na kurudi kwako. Mlipuo Mbadala hufuta foleni. Nafasi ya silaha huchagua kikundi, si kitufe tofauti: ibonyeze tena kuzungusha silaha zilizo katika nafasi hiyo. Weka muda wa kuduwaza na kasi ya kuruka hapa chini.
+
+@ Hold Fire to charge a sticky bomb using rocket ammunition; release to launch. A longer charge throws it faster. Bombs cling to walls, doors and monsters. Alt Fire detonates your planted bombs together. Place a trap, retreat, then detonate it when enemies approach. Assign any weapon slot below; repeated presses cycle through the ordinary weapon and add-ons in that slot.
+sw Shikilia Fyatua kuchaji bomu linalonata kwa kutumia risasi za roketi; achilia kulirusha. Kuchaji kwa muda mrefu hulirusha kwa kasi zaidi. Mabomu hushikamana na kuta, milango na mazimwi. Mlipuo Mbadala hulipua mabomu yako yote pamoja. Tega mtego, rudi nyuma, kisha uulipue maadui wakikaribia. Panga nafasi yoyote ya silaha hapa chini; kubonyeza mara kwa mara huzungusha silaha ya kawaida na viongezi vilivyo katika nafasi hiyo.
+
+@ Fire launches a chain hook. It latches onto a permitted surface or enemy and reels you toward the anchor. Fire again or use Alt Fire to let go. Choose which materials and enemies can be hooked in Configure Parameters. Assign it to any weapon slot; repeated presses of the slot's existing binding cycle through its weapons.
+sw Fyatua hurusha ndoano ya mnyororo. Hunasa uso au adui anayeruhusiwa na kukuvuta kuelekea nanga. Fyatua tena au tumia Mlipuo Mbadala kuachilia. Chagua nyenzo na maadui wanaoweza kunaswa katika Weka Vigezo. Ipange kwenye nafasi yoyote ya silaha; kubonyeza mara kwa mara kitufe cha nafasi hiyo huzungusha silaha zake.
+
+@ A piercing railgun inspired by Quake III. Fire sends a slug through every enemy along its line. Each shot consumes two cells, with a 1.5 second refire interval. Damage and the spiral trail colour are configurable below. Choose a weapon slot: the slot's current binding selects and cycles the weapons assigned to it.
+sw Railgun inayopenya iliyohamasishwa na Quake III. Fyatua hupeleka risasi kupitia kila adui kwenye mstari wake. Kila risasi hutumia seli mbili, na muda wa sekunde 1.5 kabla ya kufyatua tena. Madhara na rangi ya mkondo wa ond vinaweza kuwekwa hapa chini. Chagua nafasi ya silaha: kitufe cha sasa cha nafasi hiyo huchagua na kuzungusha silaha zilizopangiwa humo.
+
+@ A Portal-style gel sprayer. Fire sprays blue Repulsion gel: land, jump or run into it to bounce, and landings on it never hurt. Alt Fire sprays orange Propulsion gel: run across it to go much faster. Gel coats floors and walls until washed off with the Powerwasher. Assign a weapon slot below; repeated presses cycle the weapons in that slot.
+sw Kinyunyizi cha jeli cha mtindo wa Portal. Fyatua hunyunyiza jeli ya bluu ya Kurudisha: tua, ruka au kimbia ndani yake kudunda, na kutua juu yake hakuumizi kamwe. Mlipuo Mbadala hunyunyiza jeli ya machungwa ya Kusukuma: kimbia juu yake kwenda kasi zaidi. Jeli hufunika sakafu na kuta hadi ioshwe kwa Powerwasher. Panga nafasi ya silaha hapa chini; kubonyeza mara kwa mara huzungusha silaha katika nafasi hiyo.
+
+@ A water cannon. Fire shoots a straight jet with limited reach; Alt Fire a wide, shorter fan. The water pushes enemies back, turns projectiles aside and washes away gel and blood. Push strength is configurable below. Assign a weapon slot below; repeated presses cycle the weapons in that slot.
+sw Mzinga wa maji. Fyatua hurusha mkondo ulionyooka wenye masafa mafupi; Mlipuo Mbadala hutoa mkondo mpana na mfupi zaidi. Maji husukuma maadui nyuma, hugeuza makombora na kuosha jeli na damu. Nguvu ya msukumo inaweza kuwekwa hapa chini. Panga nafasi ya silaha hapa chini; kubonyeza mara kwa mara huzungusha silaha katika nafasi hiyo.
+
+@ One equipment add-on includes both night vision and thermal vision. The Change Goggles action cycles Normal, Night Vision, Thermal, then Normal again. Night vision brightens dark rooms; thermal vision highlights living enemies. Goggles do not occupy a weapon slot. Configure intensity and sensor noise below. The binding affects only this add-on.
+sw Kiongezi kimoja cha vifaa kinajumuisha maono ya usiku na maono ya joto. Kitendo cha Badilisha Miwani huzungusha Kawaida, Maono ya Usiku, Joto, kisha Kawaida tena. Maono ya usiku hung'arisha vyumba vyenye giza; maono ya joto huangazia maadui walio hai. Miwani haichukui nafasi ya silaha. Weka ukali na kelele ya kihisi hapa chini. Kitufe hiki kinaathiri kiongezi hiki tu.
+
+@ Press Dodge with a movement direction on the ground or in midair: dive forward or leap backward and sideways. Diagonals are supported. Each press launches once, with a short recovery. The player body animates in third person. Assign the Dodge action below or in Controls.
+sw Bonyeza Kukwepa pamoja na mwelekeo wa mwendo ukiwa ardhini au hewani: ruka mbele au ruka nyuma na kando. Mishazari inaruhusiwa. Kila mbonyezo hurusha mara moja, kwa muda mfupi wa kupona. Mwili wa mchezaji huhuishwa katika mtu wa tatu. Panga kitendo cha Kukwepa hapa chini au katika Vidhibiti.
+
+@ Use the dedicated Bullet Time action to slow the whole local game to 20% speed. Hold is the default; Toggle switches on each press. The optional meter limits use in real seconds and regenerates while inactive. Disable the meter for unlimited use. Remap the action and configure duration and regeneration below.
+sw Tumia kitendo maalum cha Bullet Time kupunguza kasi ya mchezo mzima wa hapa hadi 20%. Shikilia ni chaguo-msingi; Badili huwasha au kuzima kwa kila mbonyezo. Kipimo cha hiari huweka kikomo cha matumizi kwa sekunde halisi na hujaa tena kisipotumika. Zima kipimo kwa matumizi bila kikomo. Panga upya kitendo na uweke muda na ujazaji hapa chini.
+
+@ Both shotguns and enemy grunts fire physical pellets with their original spread and damage. Fast default projectiles feel immediate; lower their speed to dodge incoming fire during bullet time. Configure projectile speed below, or reset it to the default of 10000 units per second.
+sw Shotgun zote mbili na askari maadui hufyatua chembe halisi zenye mtawanyiko na madhara ya awali. Makombora ya kasi ya chaguo-msingi huhisi papo hapo; punguza kasi yao ili kukwepa risasi zinazokuja wakati wa bullet time. Weka kasi ya makombora hapa chini, au irejeshe kwenye chaguo-msingi ya vipimo 10000 kwa sekunde.
+
+@ Freezes the game for a split second when you damage an enemy, so hits feel heavier. Single player only. Choose which weapons trigger it (all, melee, ranged or explosives), how long it lasts and how much more a kill freezes. Advanced settings cover enemy toughness, damage scaling, cooldown and the longest freeze.
+sw Hugandisha mchezo kwa sekunde moja unapomjeruhi adui, ili mapigo yahisi mazito zaidi. Mchezaji mmoja pekee. Chagua silaha zinazousababisha (zote, ana kwa ana, mbali au vilipuzi), unadumu kwa muda gani na kuua kunagandisha zaidi kiasi gani. Mipangilio ya kina inahusu usugu wa maadui, kipimo cha madhara, muda wa kupoa na kuganda kurefu zaidi.
+
+# map packs and the Quaddicted browser
+@ Get more maps (Quaddicted)...
+sw Pata ramani zaidi (Quaddicted)...
+
+@ Type to filter...
+sw Andika ili kuchuja...
+
+@ Launch mod
+sw Zindua mod
+
+@ Start first map
+sw Anza ramani ya kwanza
+
+@ (running)
+sw (inaendeshwa)
+
+@ running
+sw inaendeshwa
+
+@ Recent
+sw Za karibuni
+
+@ Name
+sw Jina
+
+@ Dir
+sw Saraka
+
+@ Default
+sw Chaguo-msingi
+
+@ Title
+sw Kichwa
+
+@ Sort: {}
+sw Panga: {}
+
+@ {} installed
+sw Zilizosakinishwa: {}
+
+@ {}/{} matching
+sw Zinazolingana: {}/{}
+
+@ {} maps, {} completed
+sw Ramani {}, zilizokamilika: {}
+
+@ {}/{} matching, {} completed
+sw Zinazolingana: {}/{}, zilizokamilika: {}
+
+@ no maps of its own
+sw haina ramani zake
+
+@ dir: {}
+sw saraka: {}
+
+@ base: {}
+sw msingi: {}
+
+@ Browse the Quaddicted archive of
+sw Vinjari hifadhi ya Quaddicted ya
+
+@ single-player maps and episodes,
+sw ramani na vipindi vya mchezaji mmoja,
+
+@ then download and install them
+sw kisha uzipakue na kuzisakinisha
+
+@ here. Each release gets its own
+sw hapa. Kila toleo hupata nafasi
+
+@ entry in this list.
+sw yake katika orodha hii.
+
+@ Needs an internet connection.
+sw Inahitaji muunganisho wa intaneti.
+
+@ Quaddicted Map Archive
+sw Hifadhi ya Ramani ya Quaddicted
+
+@ Newest
+sw Mpya zaidi
+
+@ Author
+sw Mwandishi
+
+@ Size
+sw Ukubwa
+
+@ Loading the map list...
+sw Inapakia orodha ya ramani...
+
+@ Couldn't load the map list: {}
+sw Imeshindwa kupakia orodha ya ramani: {}
+
+@ {} single-player releases  -  F5 refreshes
+sw Matoleo {} ya mchezaji mmoja  -  F5 huonyesha upya
+
+@ {} matching
+sw Zinazolingana: {}
+
+@ by {}
+sw na {}
+
+@ requires: {}
+sw inahitaji: {}
+
+@ maps: {}
+sw ramani: {}
+
+@ Failed: {}
+sw Imeshindwa: {}
+
+@ Downloading... {}%
+sw Inapakua... {}%
+
+@ Unpacking...
+sw Inafungua...
+
+@ Installed in {}/  -  Enter: play
+sw Imesakinishwa katika {}/  -  Enter: cheza
+
+@ Enter: download and install
+sw Enter: pakua na usakinishe
+
+@ unpacking
+sw inafungua
+
+@ failed
+sw imeshindwa
+
+@ installed
+sw imesakinishwa
+
+@ Downloads are not available in the browser build
+sw Upakuaji haupatikani kwenye toleo la kivinjari
+
+@ the map list could not be read
+sw orodha ya ramani haikuweza kusomwa
+
+@ downloading needs the curl program
+sw kupakua kunahitaji programu ya curl
+
+@ download failed
+sw upakuaji umeshindwa
+
+@ the download is not a valid zip
+sw upakuaji si zip halali
+
+@ nothing to install for this engine
+sw hakuna cha kusakinisha kwa injini hii
+
+@ needs {} installed first
+sw inahitaji {} isakinishwe kwanza
+
+@ couldn't unpack {}
+sw imeshindwa kufungua {}
+
+# help screen
+@ About
+sw Kuhusu
+
+@ < Back
+sw < Rudi
+
+# tr_ctx keys: English shows the short word, the key says which meaning
+@ Save (a manual save, as opposed to a quicksave or autosave)
+sw Hifadhi
+
+# ==== hud.txt ====
+
+# HUD, weapon and equipment wheels, sound captions and other in-game text.
+# Weapon, monster and item names follow the 2021 re-release's own translations.
+@ Axe
+sw Shoka
+
+@ Shotgun
+sw Shotgun
+
+@ Double-Barrelled Shotgun
+sw Super Shotgun
+
+@ Nailgun
+sw Nailgun
+
+@ Super Nailgun
+sw Super Nailgun
+
+@ Grenade Launcher
+sw Kirusha Guruneti
+
+@ Rocket Launcher
+sw Kirusha Roketi
+
+@ Thunderbolt
+sw Thunderbolt
+
+@ Portal Gun
+sw Bunduki ya Lango
+
+@ Boomerang
+sw Bumerangi
+
+@ Stickybomb Launcher
+sw Kirusha Mabomu Nata
+
+@ Railgun
+sw Railgun
+
+@ Hookshot
+sw Ndoano
+
+@ Gel Sprayer
+sw Kinyunyizi cha Jeli
+
+@ Powerwasher
+sw Powerwasher
+
+@ Night Vision Goggles
+sw Miwani ya Maono ya Usiku
+
+@ Thermal Goggles
+sw Miwani ya Joto
+
+@ Normal vision
+sw Maono ya kawaida
+
+@ ON
+sw WASHA
+
+@ OFF
+sw ZIMA
+
+@ {} (turn on)
+sw {} (washa)
+
+@ {} (turn off)
+sw {} (zima)
+
+@ Move mouse to select, release to toggle
+sw Sogeza kipanya kuchagua, achilia kuwasha/kuzima
+
+@ Move mouse to select, release to equip
+sw Sogeza kipanya kuchagua, achilia kuvaa
+
+@ Release to toggle
+sw Achilia kuwasha/kuzima
+
+@ Release to equip
+sw Achilia kuvaa
+
+@ shells
+sw katriji
+
+@ nails
+sw misumari
+
+@ rockets
+sw roketi
+
+@ cells
+sw seli
+
+@ Kills: {}/{}
+sw Waliouawa: {}/{}
+
+@ Secrets: {}/{}
+sw Siri: {}/{}
+
+@ Time {}
+sw Muda {}
+
+@ Press any button to continue...
+sw Bonyeza kitufe chochote kuendelea...
+
+@ Press any key to continue...
+sw Bonyeza kitufe chochote kuendelea...
+
+@ BULLET TIME
+sw BULLET TIME
+
+@ AUTO AIM
+sw KULENGA KIOTOMATIKI
+
+@ Crosshair
+sw Kilenga
+
+@ + Marker
+sw + Alama
+
+@ Hit markers off
+sw Alama za kugonga zimezimwa
+
+@ On target
+sw Ukilenga
+
+@ On kill
+sw Ukiua
+
+# sound captions
+@ [Secret found]
+sw [Siri imepatikana]
+
+@ [Message]
+sw [Ujumbe]
+
+@ [Switch activated]
+sw [Swichi imewashwa]
+
+@ [Key picked up]
+sw [Ufunguo umeokotwa]
+
+@ [Rune picked up]
+sw [Rune imeokotwa]
+
+@ [Teleporter]
+sw [Teleporta]
+
+@ [Teleport]
+sw [Kusafirishwa]
+
+@ [Splash]
+sw [Mrusho wa maji]
+
+@ [Leaving water]
+sw [Kutoka majini]
+
+@ [Door]
+sw [Mlango]
+
+@ [Platform moving]
+sw [Jukwaa linasonga]
+
+@ [Button]
+sw [Kitufe]
+
+@ [Health picked up]
+sw [Afya imeokotwa]
+
+@ [Armor picked up]
+sw [Deraya imeokotwa]
+
+@ [Quad Damage wearing off]
+sw [Quad Damage inaisha]
+
+@ [Quad Damage]
+sw [Quad Damage]
+
+@ [Pentagram wearing off]
+sw [Pentagramu inaisha]
+
+@ [Pentagram of Protection]
+sw [Pentagramu ya Ulinzi]
+
+@ [Ring wearing off]
+sw [Pete inaisha]
+
+@ [Ring of Shadows]
+sw [Pete ya Vivuli]
+
+@ [Biosuit wearing off]
+sw [Biosuit inaisha]
+
+@ [Biosuit]
+sw [Biosuit]
+
+@ [Item picked up]
+sw [Kitu kimeokotwa]
+
+@ [Weapon picked up]
+sw [Silaha imeokotwa]
+
+@ [Ammo picked up]
+sw [Risasi zimeokotwa]
+
+@ [Explosion]
+sw [Mlipuko]
+
+@ [Grenade launched]
+sw [Guruneti imerushwa]
+
+@ [Grenade bounce]
+sw [Guruneti inadunda]
+
+@ [Rocket fired]
+sw [Roketi imefyatuliwa]
+
+@ [Nails fired]
+sw [Misumari imefyatuliwa]
+
+@ [Lightning]
+sw [Radi]
+
+@ [Thunder]
+sw [Ngurumo]
+
+@ [Enforcer alerted]
+sw [Enforcer ameshtuka]
+
+@ [Grunt alerted]
+sw [Grunt ameshtuka]
+
+@ [Rottweiler alerted]
+sw [Rottweiler ameshtuka]
+
+@ [Knight alerted]
+sw [Knight ameshtuka]
+
+@ [Death Knight alerted]
+sw [Death Knight ameshtuka]
+
+@ [Scrag alerted]
+sw [Scrag ameshtuka]
+
+@ [Ogre alerted]
+sw [Ogre ameshtuka]
+
+@ [Fiend alerted]
+sw [Fiend ameshtuka]
+
+@ [Shambler alerted]
+sw [Shambler ameshtuka]
+
+@ [Zombie groaning]
+sw [Zombie anaugua]
+
+@ [Vore alerted]
+sw [Vore ameshtuka]
+
+@ [Vore attacking]
+sw [Vore anashambulia]
+
+@ [Spawn alerted]
+sw [Spawn ameshtuka]
+
+@ [Rotfish]
+sw [Rotfish]
+
+@ [Spawn]
+sw [Spawn]
+
+@ [Chthon]
+sw [Chthon]
+
+@ [Hard landing]
+sw [Kutua kwa nguvu]
+
+@ [Drowning]
+sw [Kuzama]
+
+@ [Gasping for air]
+sw [Kutweta kwa hewa]
+
+@ [Burning]
+sw [Kuungua]
+
+@ [Telefrag]
+sw [Telefrag]
+
+@ [Gibbed]
+sw [Kusagwa vipande]
+
+# ==== console.txt ====
+
+# Console messages, shown translated only with con_translate 1 (Translate Console).
+# Cvar and command names stay as they are.
+@ Autosaved.
+sw Imehifadhiwa kiotomatiki.
+
+@ Game saved.
+sw Mchezo umehifadhiwa.
+
+@ Can't save now.
+sw Huwezi kuhifadhi sasa.
+
+@ This game only autosaves (No Manual Saves modifier).
+sw Mchezo huu huhifadhi kiotomatiki tu (kirekebishaji Hakuna Kuhifadhi kwa Mkono).
+
+@ Loading {}...
+sw Inapakia {}...
+
+@ load failed: {}
+sw upakiaji umeshindwa: {}
+
+@ ERROR: autosave failed: {}
+sw HITILAFU: kuhifadhi kiotomatiki kumeshindwa: {}
+
+@ ERROR: couldn't open {}
+sw HITILAFU: imeshindwa kufungua {}
+
+@ ERROR: couldn't open {}.
+sw HITILAFU: imeshindwa kufungua {}.
+
+@ ERROR: couldn't write {}: {}
+sw HITILAFU: imeshindwa kuandika {}: {}
+
+@ ERROR: couldn't create {}: {}
+sw HITILAFU: imeshindwa kuunda {}: {}
+
+@ couldn't write {}: {}
+sw imeshindwa kuandika {}: {}
+
+@ Wrote {}
+sw Imeandikwa: {}
+
+@ screenshot failed: {}
+sw picha ya skrini imeshindwa: {}
+
+@ screenshot: {}
+sw picha ya skrini: {}
+
+@ No readable save available. Select save or restart the level.
+sw Hakuna hifadhi inayosomeka. Chagua hifadhi au anza ngazi upya.
+
+@ Unknown command "{}"
+sw Amri isiyojulikana "{}"
+
+@ couldn't exec {}
+sw imeshindwa kutekeleza {}
+
+@ execing {}
+sw inatekeleza {}
+
+@ execing config.cfg (inherited from {})
+sw inatekeleza config.cfg (imerithiwa kutoka {})
+
+@ execing config.cfg (mod defaults)
+sw inatekeleza config.cfg (chaguo-msingi za mod)
+
+@ execing default.cfg (built-in)
+sw inatekeleza default.cfg (iliyojengwa ndani)
+
+@ {} cvars
+sw cvar {}
+
+@ {} commands
+sw amri {}
+
+@ Can't "cmd", not connected
+sw Haiwezekani "cmd", hujaunganishwa
+
+@ Looking for Quake servers...
+sw Inatafuta seva za Quake...
+
+@ Bad value, must be between 1 and 65534
+sw Thamani mbaya, lazima iwe kati ya 1 na 65534
+
+@ Couldn't handle music file {}
+sw Imeshindwa kushughulikia faili la muziki {}
+
+@ Bug report written to {}
+sw Ripoti ya hitilafu imeandikwa kwenye {}
+
+@ bugreport: can't create {}: {}
+sw bugreport: imeshindwa kuunda {}: {}
+
+@ graphics preset: {}
+sw mpangilio wa michoro: {}
+
+@ Presets (r_shader_preset <name>):
+sw Mipangilio tayari (r_shader_preset <jina>):
+
+@ Add your own .slangp presets under <game>/shaders/.
+sw Ongeza mipangilio yako ya .slangp katika <game>/shaders/.
+
+@ no shader preset loaded (r_shader_preset)
+sw hakuna mpangilio wa shader uliopakiwa (r_shader_preset)
+
+@ r_shader_preset: "{}" not found
+sw r_shader_preset: "{}" haikupatikana
+
+@ no parameter "{}" in this preset
+sw hakuna kigezo "{}" katika mpangilio huu
+
+@ {} = {} (default {}, {}..{})
+sw {} = {} (chaguo-msingi {}, {}..{})
+
+@ Switching to {}...
+sw Inabadilisha hadi {}...
+
+@ game: no game dir "{}" in {}
+sw game: hakuna saraka ya mchezo "{}" katika {}
+
+@ game: can't find the engine executable
+sw game: haiwezi kupata programu ya injini
+
+@ game: exec failed: {}
+sw game: utekelezaji umeshindwa: {}
+
+@ game: launch failed: {}
+sw game: uzinduzi umeshindwa: {}
+
+@ loaded {} in {}s
+sw {} imepakiwa kwa sekunde {}
+
+@ No demos listed with startdemos
+sw Hakuna demo zilizoorodheshwa na startdemos
+
+@ Playing demo from {}.
+sw Inacheza demo kutoka {}.
+
+@ {} frames {} seconds {} fps
+sw fremu {}, sekunde {}, fps {}
+
+@ Recording to {}.
+sw Inarekodi kwenye {}.
+
+@ Completed demo
+sw Demo imekamilika
+
+@ Can't record during demo playback
+sw Haiwezekani kurekodi wakati demo inachezwa
+
+@ Relative pathnames are not allowed.
+sw Njia za faili zinazohusiana haziruhusiwi.
+
+@ Can't record - try again when connected
+sw Haiwezekani kurekodi - jaribu tena ukiunganishwa
+
+@ {} demo(s) in loop
+sw Demo {} kwenye mzunguko
+
+@ Not recording a demo.
+sw Hakuna demo inayorekodiwa.
+
+@ {} joined on a gamepad
+sw {} amejiunga kwa kidhibiti
+
+@ goggles: needs a game started with Add-ons and Goggles enabled
+sw goggles: inahitaji mchezo ulioanzishwa na Viongezi na Miwani vimewashwa
+
+@ equip: needs a game started with Add-ons and Goggles enabled
+sw equip: inahitaji mchezo ulioanzishwa na Viongezi na Miwani vimewashwa
+
+@ UDP listening on port {}
+sw UDP inasikiliza kwenye port {}
+
+@ UDP bind on port {} failed: {}
+sw UDP bind kwenye port {} imeshindwa: {}
+
+@ Connection accepted by {}
+sw Muunganisho umekubaliwa na {}
+
+@ Connection failed: {}
+sw Muunganisho umeshindwa: {}
+
+@ Couldn't resolve {}
+sw Imeshindwa kutambua {}
+
+@ Connecting to {}...
+sw Inaunganisha na {}...
+
+@ Connecting to QuakeWorld server {}...
+sw Inaunganisha na seva ya QuakeWorld {}...
+
+@ Disconnected: {}
+sw Imetenganishwa: {}
+
+@ Server disconnected
+sw Seva imetenganisha
+
+@ Client {} connected
+sw Mteja {} ameunganishwa
+
+@ Client {} timed out
+sw Muda wa mteja {} umeisha
+
+@ Couldn't spawn server {}: {}
+sw Imeshindwa kuanzisha seva {}: {}
+
+@ maxplayers can not be changed while a server is running.
+sw maxplayers haiwezi kubadilishwa seva ikiendelea.
+
+@ You can't kick yourself!
+sw Huwezi kujifukuza mwenyewe!
+
+@ Only the server may changelevel
+sw Seva pekee inaweza kubadilisha ngazi
+
+@ {} renamed to {}
+sw {} amebadilisha jina kuwa {}

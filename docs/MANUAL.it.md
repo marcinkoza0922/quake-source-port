@@ -27,10 +27,19 @@ scorrere.
 ## Lingua
 
 Options → Gioco → **Lingua** sceglie la lingua di menu, messaggi su schermo
-e testi di gioco della riedizione 2021: inglese, francese, tedesco,
-italiano, spagnolo o russo. **Sistema** segue la lingua del computer. Nelle
-lingue diverse dall'inglese i piccoli testi di gioco usano il carattere dei
-menu, perché il carattere classico di Quake non ha accenti né cirillico. I
+e di questo manuale: inglese, francese, tedesco, italiano, spagnolo, russo,
+polacco, ucraino, ceco, slovacco, croato, bulgaro, svedese, finlandese,
+danese, norvegese, olandese, greco, ungherese, rumeno, portoghese
+(Portogallo o Brasile), giapponese, coreano, cinese (semplificato o
+tradizionale), turco, indonesiano, malese, filippino, vietnamita,
+serbo, lituano, lettone, estone, maltese, albanese, armeno, georgiano,
+islandese, irlandese, gallese, basco, catalano, galiziano, latino, esperanto, bielorusso, macedone,
+sloveno o swahili.
+**Sistema** segue la lingua del computer. I testi di gioco della
+riedizione 2021 sono tradotti solo in francese, tedesco, italiano, spagnolo
+e russo; le altre lingue li mostrano in inglese. Nelle lingue diverse
+dall'inglese i piccoli testi di gioco usano il carattere dei menu, perché
+il carattere classico di Quake ha solo lettere latine senza accenti. I
 messaggi della console restano in inglese, a meno che **Traduci la
 console** sia attivo.
 

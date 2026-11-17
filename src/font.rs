@@ -11,6 +11,8 @@ use std::collections::HashMap;
 
 use ab_glyph::{Font, FontArc, PxScale, ScaleFont};
 
+mod fallback;
+
 /// Bundled fonts: (menu name, bytes).
 pub const FONTS: [(&str, &[u8]); 4] = [
     ("Inter", include_bytes!("../assets/fonts/Inter-Regular.ttf")),
@@ -44,7 +46,9 @@ pub enum Shape {
 
 #[derive(Clone, Copy, PartialEq, Eq, Hash)]
 enum Key {
-    Glyph { ch: char, px: u16, mono: bool },
+    /// `cjk`: the CJK font order ([`fallback::cjk_order`]) it was drawn with.
+    /// `inter`: drawn with Inter in place of a menu font that lacks the language.
+    Glyph { ch: char, px: u16, mono: bool, cjk: [u8; 4], inter: bool },
     Shape { s: Shape, w: u16, h: u16 },
 }
 
@@ -63,9 +67,9 @@ pub struct Slot {
 pub struct UiText {
     font: FontArc,
     mono: FontArc,
-    /// Inter, for characters the chosen menu font lacks (Cyrillic in
-    /// Rajdhani, Titillium and Kreon).
-    fallback: FontArc,
+    /// For characters the chosen menu font lacks (Cyrillic in Rajdhani,
+    /// Titillium and Kreon; Armenian, Georgian, CJK in all of them).
+    fallback: fallback::Fallbacks,
     /// (ui_menufont, ui_fontfile) the font was loaded for.
     pub source: (i32, String),
     pub pic: Option<qrender::PicId>,
@@ -74,6 +78,8 @@ pub struct UiText {
     shelf: (usize, usize, usize),
     pub dirty: bool,
     full: bool,
+    /// Cached [`fallback::covers`] answer: `lang << 1 | covered`, or `u16::MAX`.
+    covers: std::sync::atomic::AtomicU16,
 }
 
 impl Default for UiText {
@@ -85,7 +91,7 @@ impl Default for UiText {
 impl UiText {
     pub fn new(font: FontArc) -> Self {
         let mono = FontArc::try_from_slice(MONO_FONT).expect("bundled mono font");
-        let fallback = FontArc::try_from_slice(FONTS[0].1).expect("bundled font");
+        let fallback = fallback::Fallbacks::default();
         Self {
             font,
             mono,
@@ -97,6 +103,7 @@ impl UiText {
             shelf: (1, 1, 0),
             dirty: true,
             full: false,
+            covers: std::sync::atomic::AtomicU16::new(u16::MAX),
         }
     }
 
@@ -117,6 +124,7 @@ impl UiText {
         let idx = (menufont.max(0) as usize).min(FONTS.len() - 1);
         self.font = custom.unwrap_or_else(|| FontArc::try_from_slice(FONTS[idx].1).expect("bundled font"));
         self.source = (menufont, file.to_string());
+        self.covers.store(u16::MAX, std::sync::atomic::Ordering::Relaxed);
         self.clear();
         warn
     }
@@ -192,14 +200,34 @@ impl UiText {
         out
     }
 
-    /// The menu font, or the fallback when it has no glyph for `ch`
-    /// (second value: whether it is the menu font).
+    /// The menu font, or the first fallback with a glyph for `ch` (second
+    /// value: whether it is the menu font).
     fn font_for(&self, ch: char) -> (&FontArc, bool) {
-        if self.font.glyph_id(ch).0 == 0 && self.fallback.glyph_id(ch).0 != 0 {
-            (&self.fallback, false)
+        self.font_in(self.menu_font(), ch, fallback::cjk_order(qcore::lang::current()))
+    }
+
+    /// The menu font, or Inter when the menu font has only some of the
+    /// current language's letters (Vietnamese, Esperanto, Romanian ț, Greek
+    /// in Rajdhani/Titillium/Kreon), so words don't mix two fonts.
+    fn menu_font(&self) -> &FontArc {
+        use std::sync::atomic::Ordering::Relaxed;
+        let l = qcore::lang::current() as u16;
+        let c = self.covers.load(Relaxed);
+        let ok = if c != u16::MAX && c >> 1 == l {
+            c & 1 == 1
         } else {
-            (&self.font, true)
+            let ok = fallback::covers(&self.font, qcore::lang::current());
+            self.covers.store(l << 1 | u16::from(ok), Relaxed);
+            ok
+        };
+        if ok { &self.font } else { &self.fallback.scripts[0] }
+    }
+
+    fn font_in<'a>(&'a self, first: &'a FontArc, ch: char, cjk: [u8; 4]) -> (&'a FontArc, bool) {
+        if first.glyph_id(ch).0 != 0 {
+            return (first, true);
         }
+        self.fallback.find(ch, cjk).map_or((first, true), |f| (f, false))
     }
 
     /// Atlas slot of `ch` at `px` (rasterised on first use).
@@ -219,11 +247,13 @@ impl UiText {
     }
 
     fn glyph_from(&mut self, ch: char, px: u16, mono: bool) -> Option<Slot> {
-        let key = Key::Glyph { ch, px, mono };
+        let cjk = fallback::cjk_order(qcore::lang::current());
+        let inter = !mono && !std::ptr::eq(self.menu_font(), &self.font);
+        let key = Key::Glyph { ch, px, mono, cjk, inter };
         if let Some(s) = self.map.get(&key) {
             return *s;
         }
-        let font = if mono { &self.mono } else { self.font_for(ch).0 };
+        let font = self.font_in(if mono { &self.mono } else { self.menu_font() }, ch, cjk).0;
         let id = font.glyph_id(ch);
         let g = id.with_scale_and_position(PxScale::from(px as f32), ab_glyph::point(0.0, 0.0));
         let slot = match font.outline_glyph(g) {

@@ -1,0 +1,3024 @@
+# ga: the port's own text; English keys from crates/qcore/lang/*.txt.
+# Format in crates/qcore/src/lang/catalog.rs; check with tools/lang_check.py.
+
+# ==== menu.txt ====
+
+# Options pages: page names, row labels and choice values.
+@ 10% speed
+ga luas 10%
+
+@ 2 split-screen
+ga 2 ar scáileán scoilte
+
+@ 3 split-screen
+ga 3 ar scáileán scoilte
+
+@ 4 split-screen
+ga 4 ar scáileán scoilte
+
+@ 5 split-screen
+ga 5 ar scáileán scoilte
+
+@ 6 split-screen
+ga 6 ar scáileán scoilte
+
+@ 2D aiming
+ga Aimsiú 2T
+
+@ 2x monsters
+ga Arrachtaí x2
+
+@ 3x monsters
+ga Arrachtaí x3
+
+@ 4x monsters
+ga Arrachtaí x4
+
+@ 3D resolution
+ga Taifeach 3T
+
+@ 3D view
+ga Radharc 3T
+
+@ 8-bit Color
+ga Dath 8-giotán
+
+@ Accessibility
+ga Inrochtaineacht
+
+@ Acquisition Cone
+ga Cón Aimsithe
+
+@ Activation
+ga Gníomhachtú
+
+@ Add a ringing room tail after the cue
+ga Cuir eireaball macalla seomra i ndiaidh na leide
+
+@ Add delayed repeats after the cue
+ga Cuir athrá moillithe i ndiaidh na leide
+
+@ Add saturation and distortion
+ga Cuir sáithiú agus díchumadh leis
+
+@ Add-ons
+ga Breiseáin
+
+@ Address
+ga Seoladh
+
+@ Adds fine noise to hide color banding
+ga Cuireann torann mín leis chun bandáil datha a cheilt
+
+@ Advanced Settings
+ga Ardsocruithe
+
+@ Aim Assist
+ga Cúnamh Aimsithe
+
+@ Aim Rotation
+ga Rothlú Aimsithe
+
+@ Aim Slowdown
+ga Moilliú Aimsithe
+
+@ Aim Style
+ga Stíl Aimsithe
+
+@ All
+ga Gach rud
+
+@ All enemies
+ga Gach namhaid
+
+@ Alt Fire (Add-ons)
+ga Lámhach Malartach (Breiseáin)
+
+@ Always Run
+ga Rith i gCónaí
+
+@ Ambient Occlusion
+ga Coimhthiú Comhthimpeallach
+
+@ Ammo Counts
+ga Áireamh Armlóin
+
+@ Ammo Counts Position
+ga Suíomh Áireamh Armlóin
+
+@ Ammo Pickups
+ga Armlón a Phiocadh
+
+@ Anisotropic
+ga Ainiseatrópach
+
+@ Anti-aliasing
+ga Frith-ailiasáil
+
+@ Apply To
+ga Cuir i bhFeidhm Ar
+
+@ Armor
+ga Armúr
+
+@ Armor Position
+ga Suíomh an Armúir
+
+@ Ask
+ga Fiafraigh
+
+@ Attack
+ga Ionsaigh
+
+@ Audio
+ga Fuaim
+
+@ Auto-aim
+ga Uathaimsiú
+
+@ Auto-aim Settings
+ga Socruithe Uathaimsithe
+
+@ Autosave
+ga Uathshábháil
+
+@ Autosave Settings
+ga Socruithe Uathshábhála
+
+@ Autosave Timer
+ga Amadóir Uathshábhála
+
+@ Autosaves to Keep
+ga Uathshábhálacha le Coinneáil
+
+@ Bass
+ga Dord
+
+@ Blip
+ga Blíp
+
+@ Blood Quality
+ga Cáilíocht na Fola
+
+@ Blood Splatter Settings
+ga Socruithe Steallta Fola
+
+@ Blue
+ga Gorm
+
+@ Boomerang Settings
+ga Socruithe Búmaraing
+
+@ Boost or cut high frequencies in decibels
+ga Treisigh nó gearr ardmhinicíochtaí i ndeicibeilí
+
+@ Boost or cut low frequencies in decibels
+ga Treisigh nó gearr ísealmhinicíochtaí i ndeicibeilí
+
+@ Brightness
+ga Gile
+
+@ Bullet Time (Add-ons)
+ga Am Piléir (Breiseáin)
+
+@ Bullet Time Settings
+ga Socruithe Am Piléir
+
+@ Button Glyphs
+ga Siombailí Cnaipí
+
+@ Button Size
+ga Méid na gCnaipí
+
+@ Camera
+ga Ceamara
+
+@ Caustic Intensity
+ga Déine Cháistice
+
+@ Caustics
+ga Cáistic
+
+@ Center
+ga Lár
+
+@ Center Message Position
+ga Suíomh Teachtaireachtaí Láir
+
+@ Center Message Time
+ga Am Teachtaireachtaí Láir
+
+@ Center View
+ga Láraigh an Radharc
+
+@ Change Color on Kill
+ga Athraigh Dath ar Mharú
+
+@ Change Color on Target
+ga Athraigh Dath ar Sprioc
+
+@ Chime
+ga Cling
+
+@ Click
+ga Cliceáil
+
+@ Clink
+ga Gligín
+
+@ Coin
+ga Bonn
+
+@ Color
+ga Dath
+
+@ Color Filter
+ga Scagaire Datha
+
+@ Color of the grenade arc
+ga Dath stua na gránáide
+
+@ Colored Lighting
+ga Soilsiú Daite
+
+@ Connect
+ga Ceangail
+
+@ Contrast
+ga Codarsnacht
+
+@ Controls
+ga Rialuithe
+
+@ Cooldown (ms)
+ga Fuarú (ms)
+
+@ Crosshair Outline
+ga Imlíne an Chrosribe
+
+@ Crosshair Shape
+ga Cruth an Chrosribe
+
+@ Crosshair Size
+ga Méid an Chrosribe
+
+@ Current Ammo
+ga Armlón Reatha
+
+@ Current Ammo Position
+ga Suíomh an Armlóin Reatha
+
+@ Customize This Game
+ga Saincheap an Cluiche Seo
+
+@ Damage
+ga Damáiste
+
+@ Damage Taken
+ga Damáiste Faighte
+
+@ Debris
+ga Smionagar
+
+@ Debris Quality
+ga Cáilíocht an Smionagair
+
+@ Debris Settings
+ga Socruithe Smionagair
+
+@ Directional Damage
+ga Damáiste Treorach
+
+@ Dithering
+ga Díodánú
+
+@ Dodge / Dive (Add-ons)
+ga Seachain / Tum (Breiseáin)
+
+@ Dragging up looks down instead of up
+ga Breathnaíonn tarraingt suas síos in ionad suas
+
+@ Drive
+ga Sáithiú
+
+@ Dynamic Lights
+ga Soilse Dinimiciúla
+
+@ Echo
+ga Macalla
+
+@ Enemy Health
+ga Sláinte Naimhde
+
+@ Enemy Wounds
+ga Créachtaí Naimhde
+
+@ Enhanced Blood Splatter
+ga Steall Fola Feabhsaithe
+
+@ Enhanced FX
+ga Maisíochtaí Feabhsaithe
+
+@ Enhanced Models
+ga Samhlacha Feabhsaithe
+
+@ Enhanced Particles
+ga Cáithníní Feabhsaithe
+
+@ Enhanced Water
+ga Uisce Feabhsaithe
+
+@ Enhancements
+ga Feabhsuithe
+
+@ Equipment Wheel (Add-ons)
+ga Roth Trealaimh (Breiseáin)
+
+@ Exploding boxes throw metal shards
+ga Caitheann boscaí pléascacha bloghanna miotail
+
+@ Explosion Damage
+ga Damáiste Pléasctha
+
+@ Explosion Scorch Marks
+ga Rianta Dóite Pléasctha
+
+@ Explosions scorch nearby solid surfaces
+ga Dónn pléascanna dromchlaí soladacha in aice láimhe
+
+@ Explosives only
+ga Pléascáin amháin
+
+@ Extra Monsters
+ga Arrachtaí Breise
+
+@ Extra Per 10 Damage (ms)
+ga Breis in aghaidh 10 Damáiste (ms)
+
+@ FX Settings
+ga Socruithe Maisíochtaí
+
+@ Field of View
+ga Réimse Amhairc
+
+@ Firing never uses up ammo
+ga Ní úsáideann lámhach armlón riamh
+
+@ First person
+ga An chéad phearsa
+
+@ Flick Time
+ga Am Smeachta
+
+@ Flight Speed
+ga Luas Eitilte
+
+@ Fog
+ga Ceo
+
+@ Frag Limit
+ga Teorainn Marú
+
+@ Freeze Duration (ms)
+ga Fad Reoite (ms)
+
+@ GLQuake
+ga GLQuake
+
+@ Game Speed
+ga Luas an Chluiche
+
+@ Game Type
+ga Cineál Cluiche
+
+@ Gameplay
+ga Imirt
+
+@ Gameplay Modifiers
+ga Mionathraitheoirí Imeartha
+
+@ Gel Quality
+ga Cáilíocht an Ghlóthaigh
+
+@ Gib Surface Painting
+ga Smálú Dromchla le Feoil
+
+@ Gibs
+ga Giotaí Feola
+
+@ Gibs and heads tumble and bounce
+ga Rollann agus preabann giotaí feola agus cinn
+
+@ Goggle Glow Quality
+ga Cáilíocht Lonrú na nGloiní
+
+@ Goggle Intensity
+ga Déine na nGloiní
+
+@ Goggle Noise
+ga Torann na nGloiní
+
+@ Goggles Settings
+ga Socruithe Gloiní
+
+@ Graphics
+ga Grafaic
+
+@ Green
+ga Glas
+
+@ Grenade Arc
+ga Stua Gránáide
+
+@ Grenade Arc Settings
+ga Socruithe Stua Gránáide
+
+@ Gun Kick
+ga Cic an Ghunna
+
+@ Gyro
+ga Gíreascóp
+
+@ Gyro & Flick Stick
+ga Gíreascóp & Smeach-Mhaide
+
+@ Gyro Active
+ga Gíreascóp Gníomhach
+
+@ Gyro Aiming
+ga Aimsiú Gíreascóip
+
+@ HUD
+ga HUD
+
+@ HUD Style
+ga Stíl HUD
+
+@ Health
+ga Sláinte
+
+@ Health Pickups
+ga Sláinte a Phiocadh
+
+@ Health Position
+ga Suíomh na Sláinte
+
+@ Health Regeneration
+ga Athghiniúint Sláinte
+
+@ Hit & Kill Sounds
+ga Fuaimeanna Buailte & Marú
+
+@ Hit Doors & Lifts
+ga Buail Doirse & Ardaitheoirí
+
+@ Hit Markers
+ga Marcóirí Buailte
+
+@ Hit Sound
+ga Fuaim Bhuailte
+
+@ Hitmarker Size
+ga Méid an Mharcóra Bhuailte
+
+@ Hitmarker Type
+ga Cineál an Mharcóra Bhuailte
+
+@ Hitstop Advanced
+ga Hitstop Casta
+
+@ Hitstop Settings
+ga Socruithe Hitstop
+
+@ Hold
+ga Coinnigh
+
+@ Hold lock-on
+ga Coinnigh an ghlasáil
+
+@ Hook Enemies
+ga Crúcáil Naimhde
+
+@ Hook Metal
+ga Crúcáil Miotal
+
+@ Hook Stone
+ga Crúcáil Cloch
+
+@ Hook Wood
+ga Crúcáil Adhmad
+
+@ Hooking an enemy pulls you to it
+ga Tarraingíonn namhaid crúcáilte chuige thú
+
+@ Hookshot Range
+ga Raon an Chrúca
+
+@ Hookshot Settings
+ga Socruithe an Chrúca
+
+@ Host Game
+ga Óstáil Cluiche
+
+@ How far the hook flies before it retracts
+ga An fad a eitlíonn an crúca sula bhfilleann sé
+
+@ How visible the on-screen controls are
+ga Cé chomh feiceálach is atá na rialuithe ar an scáileán
+
+@ Impact Lifetime
+ga Saolré na dTuairteanna
+
+@ Infinite Ammo
+ga Armlón Gan Teorainn
+
+@ Input
+ga Ionchur
+
+@ Input Scale
+ga Scála Ionchuir
+
+@ Interpolate Animation
+ga Idirshuigh Beochan
+
+@ Interpolate Movement
+ga Idirshuigh Gluaiseacht
+
+@ Invert Look
+ga Inbhéartaigh an tAmharc
+
+@ Invert Mouse
+ga Inbhéartaigh an Luch
+
+@ Invert Stick
+ga Inbhéartaigh an Maide
+
+@ Jet Quality
+ga Cáilíocht an Scaird
+
+@ Join Game
+ga Glac Páirt i gCluiche
+
+@ Jump / Swim Up
+ga Léim / Snámh Suas
+
+@ Jump again in mid-air
+ga Léim arís san aer
+
+@ Jumps
+ga Léimeanna
+
+@ Keys & Powerups
+ga Eochracha & Cumhachtaí
+
+@ Keys & Powerups Position
+ga Suíomh Eochracha & Cumhachtaí
+
+@ Kill Bonus (x)
+ga Bónas Maraithe (x)
+
+@ Kill Sound
+ga Fuaim Mharaithe
+
+@ Knock
+ga Cnag
+
+@ Left
+ga Clé
+
+@ Length of the motion blur streaks
+ga Fad stríoca an mhaolú gluaisne
+
+@ Lifetime (seconds)
+ga Saolré (soicindí)
+
+@ Live Portal Views
+ga Radharcanna Beo Tairseach
+
+@ Live View Distance
+ga Fad an Radhairc Bheo
+
+@ Local Players
+ga Imreoirí Áitiúla
+
+@ Local red wounds follow enemy animation
+ga Leanann créachtaí dearga beochan an namhad
+
+@ Lock Indicator
+ga Táscaire Glasála
+
+@ Long falls don't hurt
+ga Ní ghortaíonn titimí fada
+
+@ Longest Freeze (ms)
+ga Reo is Faide (ms)
+
+@ Look Down
+ga Féach Síos
+
+@ Look Speed
+ga Luas Amhairc
+
+@ Look Up
+ga Féach Suas
+
+@ Main Menu Music
+ga Ceol an Phríomhroghchláir
+
+@ Max FPS
+ga Uasmhéid FPS
+
+@ Max Players
+ga Uasmhéid Imreoirí
+
+@ Maximum Impacts
+ga Uasmhéid Tuairteanna
+
+@ Maximum Marks
+ga Uasmhéid Rianta
+
+@ Maximum Range
+ga Uasraon
+
+@ Melee only
+ga Cóngarach amháin
+
+@ Message Background
+ga Cúlra Teachtaireachta
+
+@ Message Text Size
+ga Méid Téacs Teachtaireachta
+
+@ Messages & Captions
+ga Teachtaireachtaí & Fotheidil
+
+@ Meter Duration (real seconds)
+ga Fad an Mhéadair (fíorshoicindí)
+
+@ Minimum Damage
+ga Íosdamáiste
+
+@ Mode
+ga Mód
+
+@ Modern Console
+ga Consól Nua-aimseartha
+
+@ Modern HUD Layout
+ga Leagan Amach Nua-aimseartha HUD
+
+@ Most recent save
+ga An sábháil is déanaí
+
+@ Motion Blur
+ga Maolú Gluaisne
+
+@ Motion Blur Amount
+ga Méid an Mhaolaithe Gluaisne
+
+@ Motion Blur Quality
+ga Cáilíocht an Mhaolaithe Gluaisne
+
+@ Mouse & Keyboard
+ga Luch & Méarchlár
+
+@ Mouse Speed
+ga Luas na Luiche
+
+@ Move Back
+ga Bog Siar
+
+@ Move Forward
+ga Bog Ar Aghaidh
+
+@ Music Volume
+ga Airde an Cheoil
+
+@ Next Weapon
+ga An Chéad Arm Eile
+
+@ No Drowning
+ga Gan Bá
+
+@ No Fall Damage
+ga Gan Damáiste Titime
+
+@ No Manual Saves
+ga Gan Sábháil de Láimh
+
+@ No Self Damage
+ga Gan Féindamáiste
+
+@ Noise Filter
+ga Scagaire Torainn
+
+@ Normal Color
+ga Gnáthdhath
+
+@ Notify Message Position
+ga Suíomh Fógraí
+
+@ Notify Message Time
+ga Am Fógraí
+
+@ Number of splatter rays per blood impact
+ga Líon gathanna steallta in aghaidh gach tuairte fola
+
+@ Off
+ga As
+
+@ On Death
+ga Ar Bhás
+
+@ On Kill Color
+ga Dath ar Mharú
+
+@ On Target Color
+ga Dath ar Sprioc
+
+@ Opacity
+ga Teimhneacht
+
+@ Opacity of the grenade arc
+ga Teimhneacht stua na gránáide
+
+@ Pants Color
+ga Dath an Bhríste
+
+@ Particle Quality
+ga Cáilíocht na gCáithníní
+
+@ Particles
+ga Cáithníní
+
+@ Physical Nail Impacts
+ga Tuairteanna Fisiciúla Tairní
+
+@ Pistol Start
+ga Tús le Piostal
+
+@ Pitch
+ga Tuinairde
+
+@ Pitch Sensitivity
+ga Íogaireacht Ingearach
+
+@ Playback Speed
+ga Luas Athsheinnte
+
+@ Player Setup
+ga Socrú an Imreora
+
+@ Pop
+ga Pop
+
+@ Portal Gun Settings
+ga Socruithe an Ghunna Tairseach
+
+@ Portal Recursion
+ga Athchúrsáil Tairseach
+
+@ Portal View Quality
+ga Cáilíocht Radhairc na dTairseach
+
+@ Preview Sound
+ga Éist leis an bhFuaim
+
+@ Previous Weapon
+ga An tArm Roimhe Seo
+
+@ Projectile Shotguns Settings
+ga Socruithe Gunnaí Gráin Teilgeán
+
+@ Projectile Speed (units/s)
+ga Luas Teilgeán (aonaid/s)
+
+@ Purple
+ga Corcra
+
+@ Push
+ga Brú
+
+@ Push Strength
+ga Neart an Bhrú
+
+@ Quick Load
+ga Mear-Lódáil
+
+@ Quick Save
+ga Mear-Shábháil
+
+@ Railgun Settings
+ga Socruithe Railgun
+
+@ Ranged only
+ga Fadraon amháin
+
+@ Reacquire While Held
+ga Athaimsigh Agus É Coinnithe
+
+@ Red
+ga Dearg
+
+@ Reduce Motion
+ga Laghdaigh Gluaiseacht
+
+@ Regen (seconds per second)
+ga Athghiniúint (soic. in aghaidh soic.)
+
+@ Render Scale
+ga Scála Rindreála
+
+@ Reverb
+ga Aisfhuaimniú
+
+@ Right
+ga Deas
+
+@ Ripple Intensity
+ga Déine na gCuilithíní
+
+@ Ripples
+ga Cuilithíní
+
+@ Roll Sensitivity
+ga Íogaireacht Rollta
+
+@ Rumble
+ga Crith
+
+@ Run
+ga Rith
+
+@ Save on All Enemies Killed
+ga Sábháil Nuair a Mharaítear Gach Namhaid
+
+@ Save on All Secrets Found
+ga Sábháil Nuair a Aimsítear Gach Rún
+
+@ Save on Level Entry
+ga Sábháil ag Tús Leibhéil
+
+@ Save on Secret Found
+ga Sábháil ar Rún a Aimsiú
+
+@ Scoreboard
+ga Clár Scóir
+
+@ Screen Flashes
+ga Splancanna Scáileáin
+
+@ Screen Shader
+ga Scáthóir Scáileáin
+
+@ Screen Shake
+ga Croitheadh Scáileáin
+
+@ Search LAN
+ga Cuardaigh LAN
+
+@ Seconds a center-screen message stays up
+ga Soicindí a fhanann teachtaireacht i lár an scáileáin
+
+@ See Through Portals
+ga Féach Trí Thairseacha
+
+@ See-through Teleporters
+ga Teileapórtálaithe Tréshoilseacha
+
+@ Shirt Color
+ga Dath na Léine
+
+@ Shotgun Bullet Decals
+ga Rianta Piléar Gunna Gráin
+
+@ Shoulder left
+ga Gualainn chlé
+
+@ Shoulder right
+ga Gualainn dheas
+
+@ Show FPS
+ga Taispeáin FPS
+
+@ Show Face
+ga Taispeáin Aghaidh
+
+@ Shrapnel
+ga Sceanfhéar
+
+@ Size of on-screen messages and captions
+ga Méid teachtaireachtaí agus fotheideal ar an scáileán
+
+@ Skill
+ga Deacracht
+
+@ Sky Fog
+ga Ceo na Spéire
+
+@ Smooths the stepped movement of monsters
+ga Déanann sé gluaiseacht chéimneach na n-arrachtaí a mhíniú
+
+@ Sound
+ga Fuaim
+
+@ Sound Captions
+ga Fotheidil Fuaime
+
+@ Sound Volume
+ga Airde na Fuaime
+
+@ Speed Blur
+ga Maolú Luais
+
+@ Splashes
+ga Steallta
+
+@ Splatter Amount
+ga Méid Steallta
+
+@ Splatter Size
+ga Méid na Steallta
+
+@ Start Game
+ga Tosaigh an Cluiche
+
+@ Staying underwater doesn't hurt
+ga Ní ghortaíonn fanacht faoi uisce
+
+@ Stick Look Pitch
+ga Amharc Ingearach le Maide
+
+@ Stick Look Yaw
+ga Amharc Cothrománach le Maide
+
+@ Strafe Left
+ga Taobhchéim Clé
+
+@ Strafe Right
+ga Taobhchéim Deas
+
+@ Strength of the surface swell and rings
+ga Neart an tsúil agus na bhfáinní ar an dromchla
+
+@ Stun Duration
+ga Fad Néal
+
+@ Style
+ga Stíl
+
+@ Supersampling
+ga Forshampláil
+
+@ Surface Hit Effects
+ga Maisíochtaí Buailte Dromchla
+
+@ Swim Down
+ga Snámh Síos
+
+@ Targets
+ga Spriocanna
+
+@ Teamplay
+ga Imirt Foirne
+
+@ Texture Filter
+ga Scagaire Uigeachta
+
+@ Third person
+ga An tríú pearsa
+
+@ Thud
+ga Tormán Bodhar
+
+@ Tick
+ga Ticeáil
+
+@ Time Limit
+ga Teorainn Ama
+
+@ Time Stretch
+ga Síneadh Ama
+
+@ Toggle Attack
+ga Scoránaigh Ionsaí
+
+@ Toggle Run
+ga Scoránaigh Rith
+
+@ Toggle auto-aim
+ga Scoránaigh uathaimsiú
+
+@ Touch Controls
+ga Rialuithe Tadhaill
+
+@ Touchscreen
+ga Scáileán Tadhaill
+
+@ Tough Enemy Health
+ga Sláinte Naimhde Righne
+
+@ Tough enemies only
+ga Naimhde righne amháin
+
+@ Trail Colour
+ga Dath an Rian
+
+@ Translate Console
+ga Aistrigh an Consól
+
+@ Translucent Water
+ga Uisce Tréshoilseach
+
+@ Treble
+ga Tribil
+
+@ Turn Left
+ga Cas ar Clé
+
+@ Turn Right
+ga Cas ar Dheis
+
+@ Underwater FX
+ga Maisíochtaí Faoi Uisce
+
+@ Use Bullet Time Meter
+ga Úsáid Méadar Am Piléir
+
+@ VSync
+ga VSync
+
+@ View Bob
+ga Luascadh Amhairc
+
+@ Viewmodels
+ga Samhlacha Airm
+
+@ Volume
+ga Airde Fuaime
+
+@ Water Opacity
+ga Teimhneacht an Uisce
+
+@ Water Quality
+ga Cáilíocht an Uisce
+
+@ Water Settings
+ga Socruithe Uisce
+
+@ Weapon Wheel
+ga Roth Arm
+
+@ Weapon Wheel Slowdown
+ga Moilliú an Rotha Arm
+
+@ Weapons
+ga Airm
+
+@ Weapons Position
+ga Suíomh na nArm
+
+@ Where center-screen messages appear
+ga An áit a dtaispeántar teachtaireachtaí i lár an scáileáin
+
+@ Where pickup and event messages appear
+ga An áit a dtaispeántar teachtaireachtaí piocála agus imeachtaí
+
+@ White
+ga Bán
+
+@ Yaw Sensitivity
+ga Íogaireacht Chothrománach
+
+@ Yellow
+ga Buí
+
+# lowercase choice values
+@ T
+ga T
+
+@ always
+ga i gcónaí
+
+@ auto
+ga uath
+
+@ banded
+ga bandáilte
+
+@ borderless
+ga gan imlíne
+
+@ bottom center
+ga thíos sa lár
+
+@ bottom left
+ga thíos ar clé
+
+@ bottom right
+ga thíos ar dheis
+
+@ box
+ga bosca
+
+@ broken square
+ga cearnóg bhriste
+
+@ classic
+ga clasaiceach
+
+@ coarse
+ga garbh
+
+@ cooperative
+ga comhoibríoch
+
+@ cross
+ga cros
+
+@ cross + dot
+ga cros + ponc
+
+@ cyan
+ga cian
+
+@ dashed
+ga briste
+
+@ deathmatch
+ga deathmatch
+
+@ deuteranopia
+ga deotranóipe
+
+@ diagonal streaks
+ga stríoca fiara
+
+@ diamond
+ga muileata
+
+@ dot
+ga ponc
+
+@ double
+ga dúbailte
+
+@ double chevrons
+ga sabhrain dhúbailte
+
+@ double diagonals
+ga fiarlínte dúbailte
+
+@ easy
+ga éasca
+
+@ fine
+ga mín
+
+@ fit output
+ga oiriúnaigh don aschur
+
+@ flick stick
+ga smeach-mhaide
+
+@ fullscreen
+ga lánscáileán
+
+@ gap cross
+ga cros oscailte
+
+@ green
+ga glas
+
+@ grey
+ga liath
+
+@ half speed
+ga leathluas
+
+@ hard
+ga deacair
+
+@ high
+ga ard
+
+@ huge
+ga ollmhór
+
+@ immersive
+ga tumtha
+
+@ intense
+ga dian
+
+@ large
+ga mór
+
+@ larger
+ga níos mó
+
+@ largest
+ga is mó
+
+@ linear
+ga líneach
+
+@ low
+ga íseal
+
+@ lower
+ga íochtar
+
+@ magenta
+ga maigeanta
+
+@ medium
+ga meánach
+
+@ middle
+ga lár
+
+@ middle left
+ga lár ar clé
+
+@ middle right
+ga lár ar dheis
+
+@ modern
+ga nua-aimseartha
+
+@ nearest
+ga is gaire
+
+@ nightmare
+ga tromluí
+
+@ nintendo
+ga Nintendo
+
+@ no team damage
+ga gan damáiste foirne
+
+@ none
+ga dada
+
+@ normal
+ga gnáth
+
+@ off
+ga as
+
+@ off while held
+ga as agus é coinnithe
+
+@ on
+ga ar
+
+@ only while held
+ga ach agus é coinnithe
+
+@ playstation
+ga PlayStation
+
+@ protanopia
+ga prótanóipe
+
+@ quarter speed
+ga ceathrú luais
+
+@ red
+ga dearg
+
+@ short diagonals
+ga fiarlínte gearra
+
+@ single
+ga singil
+
+@ small
+ga beag
+
+@ solid
+ga soladach
+
+@ spectacle
+ga seó
+
+@ subtle
+ga séimh
+
+@ team damage
+ga damáiste foirne
+
+@ top center
+ga thuas sa lár
+
+@ top left
+ga thuas ar clé
+
+@ top right
+ga thuas ar dheis
+
+@ triple
+ga faoi thrí
+
+@ tritanopia
+ga tritanóipe
+
+@ upper
+ga uachtar
+
+@ white
+ga bán
+
+@ whole screen
+ga an scáileán ar fad
+
+@ windowed
+ga i bhfuinneog
+
+@ xbox
+ga Xbox
+
+@ yellow
+ga buí
+
+# ==== tooltips.txt ====
+
+# Options help lines (tooltips) and reasons for disabled rows.
+@ 2D aiming turns the view continuously with the right stick; flick stick snaps the view to where you push the stick, then turning the stick rotates it
+ga Casann aimsiú 2T an radharc go leanúnach leis an maide deas; léimeann smeach-mhaide an radharc chuig an treo a bhrúnn tú an maide, agus ansin rothlaíonn casadh an mhaide é
+
+@ 3D resolution relative to the window; the UI stays sharp
+ga Taifeach 3T i gcoibhneas leis an bhfuinneog; fanann an comhéadan géar
+
+@ 3D view keeps the HUD and menus sharp; whole screen runs them through the shader too
+ga Coinníonn Radharc 3T an HUD agus na roghchláir géar; cuireann an scáileán ar fad tríd an scáthóir iad freisin
+
+@ A Quake III style railgun: a slug that pierces every enemy on its line, using 2 cells a shot and refiring every 1.5 s; select it through its assigned weapon slot (Add-ons)
+ga Railgun i stíl Quake III: urchar a théann trí gach namhaid ar a líne, 2 chill in aghaidh an urchair agus lámhach arís gach 1.5 s; roghnaigh é trína shliotán airm (Breiseáin)
+
+@ A Zelda-style hookshot: fire sends a chain hook out; it latches onto hookable surfaces or enemies and reels you in; fire again to let go
+ga Crúca i stíl Zelda: seolann lámhach crúca slabhra amach; greamaíonn sé de dhromchlaí oiriúnacha nó de naimhde agus tarraingíonn sé isteach thú; lámhach arís chun scaoileadh
+
+@ Also translates the engine's console messages; off keeps them in English
+ga Aistríonn sé teachtaireachtaí consóil an innill freisin; má tá sé as, fanann siad i mBéarla
+
+@ Automatically acquire another enemy while holding Lock-on after losing a target
+ga Aimsigh namhaid eile go huathoibríoch agus Glasáil á coinneáil tar éis duit sprioc a chailleadh
+
+@ Blends between animation frames of monsters and weapons
+ga Cumascann sé frámaí beochana na n-arrachtaí agus na n-arm
+
+@ Blood stains surfaces and bodies; cosmetic, independent of particle packs
+ga Smálaíonn fuil dromchlaí agus coirp; cosmaideach amháin, neamhspleách ar phacáistí cáithníní
+
+@ Bloom glow around bright lights and heat sources; medium uses 4 taps, high uses 8, low disables halo taps
+ga Lonrú bláthaithe timpeall soilse geala agus foinsí teasa; úsáideann meánach 4 shampla, ard 8, múchann íseal an halla
+
+@ Blurs fast-moving monsters, projectiles and doors (not camera turns)
+ga Maolaíonn sé arrachtaí, teilgeáin agus doirse a ghluaiseann go tapa (ní casadh an cheamara)
+
+@ Blurs the screen edges during fast falls and launches; keeps the centre clear. Reduce Motion disables it
+ga Maolaíonn sé imill an scáileáin le linn titimí agus lainseálacha tapa; fanann an lár glan. Múchann Laghdaigh Gluaiseacht é
+
+@ Brightness of the underwater light patterns
+ga Gile na bpatrún solais faoi uisce
+
+@ Caps mark count, lifetime, airborne droplets and wound/gib painting; low skips enemy wounds and gib trails
+ga Teorannaíonn sé líon na rianta, a saolré, braonta san aer agus smálú créachtaí/feola; fágann íseal créachtaí naimhde agus rianta feola ar lár
+
+@ Caps shader input at output size so 200% render scale keeps 3D sharpness without 4x shader cost; low scales stay low-res
+ga Teorannaíonn sé ionchur an scáthóra ag méid an aschuir, ionas go gcoinníonn scála rindreála 200% géire 3T gan costas scáthóra x4; fanann scálaí ísle ar thaifeach íseal
+
+@ Classic: the original status bar; modern: compact elements at the screen edges
+ga Clasaiceach: an barra stádais bunaidh; nua-aimseartha: eilimintí dlútha ag imill an scáileáin
+
+@ Coat atlas resolution, rebuild rate and shader detail: low builds smaller coats less often with fast shading; high uses full detail
+ga Taifeach an atlais bratanna, ráta atógála agus mionsonraí scáthóra: tógann íseal bratanna níos lú níos annaimhe le scáthú tapa; úsáideann ard mionsonraí iomlána
+
+@ Colour of the railgun's spiral trail; split-screen players each get the next colour along
+ga Dath rian bíse an railgun; faigheann gach imreoir ar scáileán scoilte an chéad dath eile
+
+@ Damage the railgun deals to each enemy it passes through (Quake III: 100)
+ga An damáiste a dhéanann an railgun do gach namhaid a dtéann sé tríd (Quake III: 100)
+
+@ Dark backdrop behind on-screen messages for readability
+ga Cúlra dorcha taobh thiar de theachtaireachtaí ar an scáileán le go mbeidh siad soléite
+
+@ Dark border keeps the crosshair visible on any background
+ga Coinníonn imlíne dhorcha an crosribe le feiceáil ar aon chúlra
+
+@ Darkens corners and contact areas where geometry meets; higher quality is sharper
+ga Dorchaíonn sé coirnéil agus limistéir tadhaill ina dtagann céimseata le chéile; is géire cáilíocht níos airde
+
+@ Debris lands on and is carried or shoved by doors, lifts and platforms
+ga Tuirlingíonn smionagar ar dhoirse, ar ardaitheoirí agus ar ardáin, agus iompraíonn nó brúnn siadsan é
+
+@ Detail for caustics, ripples and splashes: low uses smaller budgets and shorter view distance; high uses larger budgets and farther view distance
+ga Mionsonraí do cháistic, cuilithíní agus steallta: úsáideann íseal buiséid níos lú agus fad amhairc níos giorra; úsáideann ard buiséid níos mó agus fad amhairc níos faide
+
+@ Disabled while Enhanced Particles is on: its particles replace the GLQuake and Classic styles
+ga Díchumasaithe fad atá Cáithníní Feabhsaithe air: cuireann a cháithníní siúd in ionad na stíleanna GLQuake agus Clasaiceach
+
+@ Disabled while Enhanced Water is on: its own underwater effects replace the classic and GLQuake view warps
+ga Díchumasaithe fad atá Uisce Feabhsaithe air: cuireann a mhaisíochtaí féin faoi uisce in ionad shaobhadh radhairc clasaiceach agus GLQuake
+
+@ Draw the predicted grenade path as a solid or dashed line
+ga Tarraing cosán tuartha na gránáide mar líne sholadach nó bhriste
+
+@ Draw the view out of the linked portal inside each portal; off shows flat discs (fastest)
+ga Taispeáin an radharc as an tairseach nasctha laistigh de gach tairseach; má tá sé as, taispeántar dioscaí cothroma (is tapúla)
+
+@ Droplets spray up when things enter or leave water, slime or lava
+ga Spréann braonta suas nuair a théann rudaí isteach in uisce, sláim nó laibhe, nó amach as
+
+@ Emulates the original 8-bit palette of software rendering
+ga Aithrisíonn sé pailéad bunaidh 8-giotán an rindreála bogearraí
+
+@ Every level starts with only the shotgun and axe, as if started fresh
+ga Tosaíonn gach leibhéal leis an ngunna gráin agus an tua amháin, amhail is dá mba thús úr é
+
+@ Explosion damage for each remotely detonated sticky bomb
+ga Damáiste pléasctha do gach buama greamaitheach a phléasctar i gcéin
+
+@ Extra freeze milliseconds for every 10 damage dealt, so heavy hits stop longer
+ga Milleasoicindí breise reoite do gach 10 damáiste, ionas go stopann buillí troma níos faide
+
+@ First person, a third-person camera centered behind the player, or one over the right or left shoulder; third person hides viewmodels
+ga An chéad phearsa, ceamara tríú pearsa i lár taobh thiar den imreoir, nó ceann os cionn na gualainne deise nó clé; ceileann an tríú pearsa samhlacha airm
+
+@ Flash the selected marker on confirmed hits; colors are shared with the crosshair
+ga Las an marcóir roghnaithe ar bhuillí deimhnithe; roinntear na dathanna leis an gcrosribe
+
+@ Freeze for every enemy, or only for enemies that were tough before the hit
+ga Reoigh do gach namhaid, nó do naimhde a bhí righin roimh an mbuille amháin
+
+@ Freeze the game briefly when you damage an enemy; single player with add-ons only
+ga Reoigh an cluiche go gairid nuair a dhéanann tú damáiste do namhaid; aonimreoir le breiseáin amháin
+
+@ Gibs tumble and barrels throw shrapnel; shots and blasts push them (cosmetic only)
+ga Rollann giotaí feola agus caitheann bairillí sceanfhéar; brúnn urchair agus pléascanna iad (cosmaideach amháin)
+
+@ Health an enemy must have had before the hit to count as tough
+ga An tsláinte a chaithfidh a bheith ag namhaid roimh an mbuille le háireamh mar righin
+
+@ Hits dealing less damage than this do not freeze the game; the default 10 skips nails and shotgun pellets
+ga Ní reonn buillí a dhéanann níos lú damáiste ná seo an cluiche; scipeálann an réamhshocrú 10 tairní agus pillíní gunna gráin
+
+@ Hold fire and sweep the crosshair over monsters to queue them, release to throw: it stuns each in turn and flies back; alt-fire clears the queue
+ga Coinnigh lámhach agus scuab an crosribe thar arrachtaí chun iad a chur sa scuaine, scaoil chun caitheamh: cuireann sé néal ar gach ceann ina sheal agus filleann sé; glanann lámhach malartach an scuaine
+
+@ Hold: keep Lock-on held. Toggle: press Auto-aim Toggle to enable automatic acquisition. Click look stick to switch targets
+ga Coinnigh: coinnigh Glasáil brúite. Scoránaigh: brúigh Scoránaigh uathaimsiú chun aimsiú uathoibríoch a chumasú. Cliceáil an maide amhairc chun sprioc a athrú
+
+@ How close an enemy must be to the crosshair for automatic acquisition in toggle mode (degrees)
+ga Cé chomh gar don chrosribe a chaithfidh namhaid a bheith le haimsiú uathoibríoch sa mhód scoránaithe (céimeanna)
+
+@ How far the view tilts up and down when you tilt the controller (pitch axis)
+ga An méid a chlaonann an radharc suas agus síos nuair a chlaonann tú an rialtán (ais tuinairde)
+
+@ How far the view turns left and right when you turn the controller (yaw axis)
+ga An méid a chasann an radharc ar clé agus ar dheis nuair a chasann tú an rialtán (ais luascadh)
+
+@ How far the view turns when you drag on the right half of the screen
+ga An méid a chasann an radharc nuair a tharraingíonn tú ar an leath dheas den scáileán
+
+@ How fast the boomerang flies (units per second)
+ga Cé chomh tapa a eitlíonn an búmarang (aonaid in aghaidh an tsoicind)
+
+@ How hard shots and explosions push debris around
+ga Cé chomh láidir a bhrúnn urchair agus pléascanna an smionagar
+
+@ How hard the Powerwasher's water pushes enemies
+ga Cé chomh láidir a bhrúnn uisce an Ghlantóra Ardbhrú naimhde
+
+@ How long a hit freezes the game, in milliseconds
+ga Cé chomh fada a reonn buille an cluiche, i milleasoicindí
+
+@ How strongly fog covers the sky when fog is on
+ga Cé chomh láidir a chlúdaíonn an ceo an spéir nuair atá ceo air
+
+@ How the view distorts underwater: Classic ripples the whole screen like software Quake, GLQuake slowly stretches and squashes the view
+ga Conas a shaobhtar an radharc faoi uisce: cuireann Clasaiceach cuilithíní ar an scáileán ar fad mar a dhéanann Quake bogearraí, síneann agus brúnn GLQuake an radharc go mall
+
+@ Ignores gyro rotation slower than this many degrees per second, to hide hand tremor
+ga Déanann sé neamhaird de rothlú gíreascóip níos moille ná an líon seo céimeanna in aghaidh an tsoicind, chun crith láimhe a cheilt
+
+@ Immersive: appears for a few seconds only when its value changes
+ga Tumtha: ní thaispeántar é ach ar feadh cúpla soicind nuair a athraíonn a luach
+
+@ Keeps textures sharp on floors and walls seen at steep angles
+ga Coinníonn sé uigeachtaí géar ar urláir agus ballaí a fheictear ó uillinneacha géara
+
+@ Lights from rockets, muzzle flashes and explosions brighten nearby walls
+ga Soilsíonn solas ó roicéid, ó splancanna béil agus ó phléascanna na ballaí in aice láimhe
+
+@ Liquid surfaces swell and ring out where things move through them
+ga Ataíonn dromchlaí leachtacha agus déantar fáinní orthu san áit a ghluaiseann rudaí tríothu
+
+@ Lobs sticky bombs (rockets ammo) that cling to walls, doors and monsters; alt-fire detonates them all
+ga Caitheann sé buamaí greamaitheacha (armlón roicéad) a ghreamaíonn de bhallaí, de dhoirse agus d'arrachtaí; pléascann lámhach malartach iad go léir
+
+@ Look of the classic particles: GLQuake draws soft round dots, Classic draws square pixels like software Quake
+ga Cuma na gcáithníní clasaiceacha: tarraingíonn GLQuake poncanna boga cruinne, tarraingíonn Clasaiceach picteilíní cearnacha mar a dhéanann Quake bogearraí
+
+@ Low skips the background smear halo and uses fewer blur samples; high keeps the full halo and smoother streaks
+ga Fágann íseal halla smearaidh an chúlra ar lár agus úsáideann sé níos lú samplaí maolaithe; coinníonn ard an halla iomlán agus stríoca níos míne
+
+@ Low: hard particle edges, half the scripted particles and fewer hit sparks. Medium: soft edges. High: soft edges checked per MSAA sample, most hit sparks
+ga Íseal: imill chrua cáithníní, leath na gcáithníní scriptithe agus níos lú drithlí buailte. Meánach: imill bhoga. Ard: imill bhoga seiceáilte in aghaidh gach samplach MSAA, an chuid is mó de na drithlí
+
+@ Marks fade out before expiring; oldest marks are recycled at the limit
+ga Téann rianta i léig sula n-imíonn siad; athchúrsáiltear na rianta is sine ag an teorainn
+
+@ Max nested portal reflections to draw; each level redraws the scene
+ga Uasmhéid na bhfrithchaitheamh neadaithe tairseach le tarraingt; atarraingíonn gach leibhéal an radharc
+
+@ Max portals per screen with a live view; each one redraws the scene
+ga Uasmhéid tairseach in aghaidh an scáileáin le radharc beo; atarraingíonn gach ceann acu an radharc
+
+@ Maximum distance for acquiring and keeping an enemy locked
+ga An fad is mó chun namhaid a aimsiú agus a choinneáil glasáilte
+
+@ Minimum gap between freezes, so shotgun pellets and rapid fire count once; kills ignore it
+ga An bhearna is lú idir reonna, ionas nach n-áirítear pillíní gunna gráin ná lámhach tapa ach uair amháin; ní bhaineann sé le maruithe
+
+@ Modern terminal console with autocomplete popup, history search, ANSI colors, bash shell and piping; off uses the classic Quake console
+ga Consól teirminéil nua-aimseartha le preabfhuinneog uathchríochnaithe, cuardach staire, dathanna ANSI, blaosc bash agus píopáil; má tá sé as, úsáidtear an consól clasaiceach Quake
+
+@ Monsters take proportionally less damage at higher values; above 100% is harder
+ga Faigheann arrachtaí níos lú damáiste go comhréireach ag luachanna níos airde; tá os cionn 100% níos deacra
+
+@ Moving gibs leave blood on surfaces they touch
+ga Fágann giotaí feola atá ag gluaiseacht fuil ar na dromchlaí a mbaineann siad leo
+
+@ Multiplier on the freeze when the hit kills the enemy; 1 means no extra
+ga Iolraitheoir ar an reo nuair a mharaíonn an buille an namhaid; ciallaíonn 1 gan bhreis
+
+@ Multiplies ammo from pickups (up to the normal carry limit); below 100% is harder
+ga Iolraíonn sé armlón ó phiocáil (suas go dtí an ghnáth-theorainn iompair); tá faoi bhun 100% níos deacra
+
+@ Multiplies health from pickups (up to 100, or the item's own limit); below 100% is harder
+ga Iolraíonn sé sláinte ó phiocáil (suas go 100, nó teorainn an earra féin); tá faoi bhun 100% níos deacra
+
+@ Nails stick to wood and bodies; hard surfaces deflect them to the floor
+ga Greamaíonn tairní d'adhmad agus de choirp; sciorrann dromchlaí crua chun an urláir iad
+
+@ Nearest keeps crisp classic pixels; linear smooths textures
+ga Coinníonn Is gaire picteilíní clasaiceacha géara; déanann Líneach uigeachtaí a mhíniú
+
+@ New Game: Add-ons
+ga Cluiche Nua: Breiseáin
+
+@ New Game: Customize
+ga Cluiche Nua: Saincheap
+
+@ Night vision: how much dark areas are brightened; thermal: how strongly heat stands out
+ga Radharc oíche: an méid a ghealtar limistéir dhorcha; teirmeach: cé chomh láidir a sheasann teas amach
+
+@ Night-vision and thermal goggles, cycle normal, night vision and thermal with Change Goggles (Add-ons), or use the Equipment Wheel
+ga Gloiní radhairc oíche agus teirmeacha: athraigh idir gnáth, radharc oíche agus teirmeach le hAthraigh Gloiní (Breiseáin), nó úsáid an Roth Trealaimh
+
+@ No single freeze lasts longer than this, however much damage or kill bonus adds
+ga Ní mhaireann aon reo amháin níos faide ná seo, is cuma cé mhéad a chuireann damáiste nó bónas maraithe leis
+
+@ Oldest marks and nails are recycled at this shared limit
+ga Athchúrsáiltear na rianta agus na tairní is sine ag an teorainn chomhroinnte seo
+
+@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
+ga Maide agus cnaipí ar an scáileán: taispeánann uath iad tar éis tadhaill agus ceileann sé iad nuair a úsáidtear gléas eile
+
+@ Only autosaves: quicksaves and the Save menu are off
+ga Uathshábhálacha amháin: tá mear-shábháil agus an roghchlár Sábháil as
+
+@ Place every weapon at the center, right or left of the view, or hide all viewmodels
+ga Cuir gach arm i lár, ar dheis nó ar clé an radhairc, nó ceil gach samhail airm
+
+@ Play your chosen hit or kill cue when you damage an enemy
+ga Seinn an leid bhuailte nó mharaithe a roghnaigh tú nuair a dhéanann tú damáiste do namhaid
+
+@ Playback speed: faster sounds shorter and higher
+ga Luas athsheinnte: bíonn luas níos tapúla níos giorra agus níos airde
+
+@ Plays the Quake theme in the main menu when no game is running
+ga Seinneann sé téama Quake sa phríomhroghchlár nuair nach bhfuil aon chluiche ar siúl
+
+@ Portals farther away than this are drawn as flat discs
+ga Tarraingítear tairseacha níos faide ná seo mar dhioscaí cothroma
+
+@ Press attack once to keep firing, again to stop
+ga Brúigh ionsaí uair amháin chun leanúint ag lámhach, arís chun stopadh
+
+@ Press run once to switch between running and walking
+ga Brúigh rith uair amháin chun aistriú idir rith agus siúl
+
+@ Raise or lower the tone independently of sound length
+ga Ardaigh nó ísligh an ton beag beann ar fhad na fuaime
+
+@ Red screen edges show where damage came from: top is front, bottom is behind; Screen Flashes controls their strength
+ga Taispeánann imill dhearga an scáileáin cá as a tháinig an damáiste: barr = tosach, bun = taobh thiar; rialaíonn Splancanna Scáileáin a neart
+
+@ Replaces the classic dot particles with glowing sparks, smoke and blood; mods with their own particle effects keep them
+ga Cuireann sé drithlí lonracha, deatach agus fuil in ionad na gcáithníní ponc clasaiceacha; coinníonn modanna a bhfuil a maisíochtaí cáithníní féin acu iad sin
+
+@ Resolution and detail inside portal and teleporter views; lower tiers trim nested effects
+ga Taifeach agus mionsonraí laistigh de radharcanna tairseach agus teileapórtálaithe; baineann leibhéil níos ísle maisíochtaí neadaithe
+
+@ Rippling light patterns on surfaces under water and slime
+ga Patrúin solais chuilitheacha ar dhromchlaí faoi uisce agus faoi shláim
+
+@ Scales all damage you take; above 100% is harder
+ga Scálaíonn sé gach damáiste a fhaigheann tú; tá os cionn 100% níos deacra
+
+@ Screen edge for this element; elements on the same spot stack
+ga Imeall an scáileáin don eilimint seo; cruachtar eilimintí ar an láthair chéanna
+
+@ Seconds a monster hit by the boomerang stays stunned
+ga Soicindí a fhanann arracht a bhuail an búmarang i néal
+
+@ Seconds impact marks and stuck nails stay before fading out; independent of Particle Quality
+ga Soicindí a fhanann rianta tuairte agus tairní greamaithe sula dtéann siad i léig; neamhspleách ar Cháilíocht na gCáithníní
+
+@ Seconds messages at the top of the screen stay up
+ga Soicindí a fhanann teachtaireachtaí ag barr an scáileáin
+
+@ Seconds the flick stick snap takes; lower is faster
+ga Soicindí a thógann léim an smeach-mhaide; is tapúla níos ísle
+
+@ See through enhanced water; enables Water Opacity
+ga Féach trí uisce feabhsaithe; cumasaíonn sé Teimhneacht an Uisce
+
+@ Sensor grain, scanlines and flicker of the goggle image
+ga Gráinne braiteora, línte scanta agus preabarnach íomhá na ngloiní
+
+@ Shades every anti-aliasing sample; needs Anti-aliasing on
+ga Scáthaíonn sé gach sampla frith-ailiasála; teastaíonn Frith-ailiasáil air
+
+@ Shifts colors so they stay distinct for the chosen color blindness
+ga Aistríonn sé dathanna ionas go bhfanann siad sainiúil don dathdhaille roghnaithe
+
+@ Shotgun hits leave small surface marks (cosmetic only)
+ga Fágann buillí gunna gráin rianta beaga ar dhromchlaí (cosmaideach amháin)
+
+@ Show corner ticks at screen centre while locked, even with Crosshair off
+ga Taispeáin marcanna cúinne i lár an scáileáin agus glasáilte, fiú leis an gCrosribe as
+
+@ Show where grenades and other arcing shots will fly, bounce and land; local play only, not in deathmatch
+ga Taispeáin cá n-eitleoidh, cá bpreabfaidh agus cá dtuirlingeoidh gránáidí agus urchair stuacha eile; imirt áitiúil amháin, ní i deathmatch
+
+@ Shows text for important sounds: doors, alerted enemies, secrets, pickups
+ga Taispeánann sé téacs d'fhuaimeanna tábhachtacha: doirse, naimhde airdeallacha, rúin, piocáil
+
+@ Shows the distance fog that maps and mods set; off always gives clear view
+ga Taispeánann sé an ceo achair a shocraíonn léarscáileanna agus modanna; má tá sé as, bíonn radharc glan i gcónaí
+
+@ Shows the player face next to the health number
+ga Taispeánann sé aghaidh an imreora in aice le huimhir na sláinte
+
+@ Simulation detail, step rate, fade-out lifetimes and caps for gibs and shrapnel; low also skips mover collision
+ga Mionsonraí insamhalta, ráta céime, saolré céimnithe agus teorainneacha do ghiotaí feola agus sceanfhéar; fágann íseal imbhualadh le gluaiseáin ar lár freisin
+
+@ Size of the on-screen buttons and move stick
+ga Méid na gcnaipí ar an scáileán agus an mhaide gluaiseachta
+
+@ Slowly heals up to 100 health after 5 seconds without being hit
+ga Leigheasann sé go mall suas go 100 sláinte tar éis 5 shoicind gan bhuille
+
+@ Slows stick look while the crosshair is over an enemy
+ga Moillíonn sé amharc an mhaide fad atá an crosribe os cionn namhad
+
+@ Slows the game down while the weapon wheel is open
+ga Moillíonn sé an cluiche fad atá an roth arm oscailte
+
+@ Slows the whole game down; single player only. Saves and demos stay compatible with other ports
+ga Moillíonn sé an cluiche ar fad; aonimreoir amháin. Fanann sábhálacha agus taispeántais comhoiriúnach le calafoirt eile
+
+@ Small camera jolt on each freeze; off with Reduce Motion
+ga Croitheadh beag ceamara ar gach reo; as le Laghdaigh Gluaiseacht
+
+@ Snap and track enemies in local play, including split-screen; unavailable online
+ga Aimsigh agus lean naimhde in imirt áitiúil, scáileán scoilte san áireamh; níl sé ar fáil ar líne
+
+@ Sparks, smoke, chips, splinters and splashes fly off whatever your shots hit
+ga Eitlíonn drithlí, deatach, sliseanna, scealpa agus steallta ó gach rud a bhuaileann d'urchair
+
+@ Spawns extra copies of every monster around the original when a level starts
+ga Gintear cóipeanna breise de gach arracht timpeall ar an mbunleagan nuair a thosaíonn leibhéal
+
+@ Strength of the full-screen flashes for damage, pickups and powerups
+ga Neart na splancanna lánscáileáin do dhamáiste, piocáil agus cumhachtaí
+
+@ Stretch or shorten the sound while keeping its pitch
+ga Sín nó giorraigh an fhuaim agus a tuinairde á coinneáil
+
+@ Surface opacity; requires Enhanced Water and Translucent Water
+ga Teimhneacht an dromchla; teastaíonn Uisce Feabhsaithe agus Uisce Tréshoilseach
+
+@ The hook latches onto metal surfaces (metal, tech, computer panels, copper)
+ga Greamaíonn an crúca de dhromchlaí miotail (miotal, teicneolaíocht, painéil ríomhaire, copar)
+
+@ The hook latches onto stone, brick, rock and any surface not recognised as wood or metal
+ga Greamaíonn an crúca de chloch, brící, carraig agus aon dromchla nach n-aithnítear mar adhmad nó miotal
+
+@ The hook latches onto wooden surfaces (texture names like wood, crate, plank)
+ga Greamaíonn an crúca de dhromchlaí adhmaid (ainmneacha uigeachta mar wood, crate, plank)
+
+@ Turn the controller's motion sensor into a look input; needs a pad with a gyroscope
+ga Úsáid braiteoir gluaisne an rialtáin chun féachaint; teastaíonn rialtán le gíreascóp
+
+@ Turns off view bob, strafe tilt and the camera kick when hit or firing
+ga Múchann sé luascadh amhairc, claonadh taobhchéime agus cic an cheamara nuair a bhuailtear thú nó nuair a lámhachann tú
+
+@ Turns on the extra liquid effects; Water Settings controls each one
+ga Cuireann sé na maisíochtaí breise leachta ar siúl; rialaíonn Socruithe Uisce gach ceann acu
+
+@ Turns the view to follow a moving enemy you are aiming at
+ga Casann sé an radharc chun namhaid atá ag gluaiseacht a leanúint agus tú ag aimsiú air
+
+@ Turns the view when you roll the controller sideways; 0 disables it, negative reverses it
+ga Casann sé an radharc nuair a rollann tú an rialtán i leataobh; díchumasaíonn 0 é, aisiompaíonn luach diúltach é
+
+@ Two-portal gun: fire and alt-fire place linked portals on flat walls; assign a weapon slot in Add-ons
+ga Gunna dhá thairseach: cuireann lámhach agus lámhach malartach tairseacha nasctha ar bhallaí cothroma; sann sliotán airm i mBreiseáin
+
+@ Unlocks the FX Settings page: enhanced particles, impact effects and blood splatter
+ga Díghlasálann sé an leathanach Socruithe Maisíochtaí: cáithníní feabhsaithe, maisíochtaí tuairte agus steall fola
+
+@ Uses the 2021 re-release's smoother MD5 models (and MD3 replacements from mods) instead of the classic ones. Applies on the next map load
+ga Úsáideann sé samhlacha MD5 níos míne an atheisiúna 2021 (agus samhlacha MD3 ó mhodanna) in ionad na samhlacha clasaiceacha. Cuirtear i bhfeidhm é ag an gcéad lódáil léarscáile eile
+
+@ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
+ga Úsáideann sé solas daite na léarscáile (comhad .lit nó cnap BSPX); má tá sé as, faightear an solas bán bunaidh. Cuirtear i bhfeidhm é ag an gcéad lódáil léarscáile eile
+
+@ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
+ga Míreanna scaird uisce, líon na mbraonta agus scáthú snasta leachta: úsáideann íseal sruthanna tréshoilseacha níos simplí; úsáideann ard scairdeanna míne snasta
+
+@ When gyro looking applies: always, off while +gyroaction is held, or only while it is held
+ga Cathain a bhíonn amharc gíreascóip i bhfeidhm: i gcónaí, as fad atá +gyroaction coinnithe, nó ach fad atá sé coinnithe
+
+@ Which weapons trigger the freeze; melee covers the axe and any mod weapon used at close range without ammo
+ga Na hairm a spreagann an reo; clúdaíonn cóngarach an tua agus aon arm moid a úsáidtear go gar gan armlón
+
+@ Your own rockets and grenades don't hurt you; rocket jumps still work
+ga Ní ghortaíonn do roicéid ná do ghránáidí féin thú; oibríonn léimeanna roicéid fós
+
+# ==== ui.txt ====
+
+# Menus and pop-ups outside the options pages: save cards, launch, presets,
+# add-on browser, map packs, hints and dialogs.
+@ Select
+ga Roghnaigh
+
+@ Back
+ga Siar
+
+@ Cancel
+ga Cealaigh
+
+@ Confirm
+ga Deimhnigh
+
+@ Scroll
+ga Scrollaigh
+
+@ Section
+ga Roinn
+
+@ Bind
+ga Sann
+
+@ Cancel binding
+ga Cealaigh sannadh
+
+@ Clear
+ga Glan
+
+@ Clear pad
+ga Glan rialtán
+
+@ Remap
+ga Athmhapáil
+
+@ Type
+ga Clóscríobh
+
+@ Shift
+ga Shift
+
+@ Done
+ga Déanta
+
+@ Del
+ga Scrios
+
+@ Space
+ga Spás
+
+@ Save
+ga Sábháil
+
+@ Load
+ga Lódáil
+
+@ Delete
+ga Scrios
+
+@ Play
+ga Imir
+
+@ Yes
+ga Tá
+
+@ No
+ga Níl
+
+@ OK
+ga OK
+
+@ System
+ga Córas
+
+@ Language
+ga Teanga
+
+@ Help
+ga Cabhair
+
+@ Fixed for this game: it was started without Customize
+ga Socraithe don chluiche seo: tosaíodh é gan Saincheap
+
+@ Press a button or key to bind (Start cancels)
+ga Brúigh cnaipe nó eochair le sannadh (cealaíonn Start)
+
+@ Press button...
+ga Brúigh cnaipe...
+
+@ Press key...
+ga Brúigh eochair...
+
+@ Replace this binding?
+ga Ionadaigh an sannadh seo?
+
+@ is already assigned
+ga sannta cheana
+
+@ {} already assigned
+ga {} sannta cheana
+
+@ Open Controls to remap Lock-on?
+ga Oscail Rialuithe chun Glasáil a athmhapáil?
+
+@ Lock-on
+ga Glasáil
+
+@ Auto-aim Toggle
+ga Scoránaigh uathaimsiú
+
+@ Keyboard
+ga Méarchlár
+
+@ Controller
+ga Rialtán
+
+# main menu, dialogs and screens
+@ Map Packs
+ga Pacáistí Léarscáileanna
+
+@ Customize
+ga Saincheap
+
+@ Level Select
+ga Roghnú Leibhéil
+
+@ Really quit?
+ga An bhfuil tú cinnte gur mian leat scor?
+
+@ You died
+ga Fuair tú bás
+
+@ Continue from most recent save
+ga Lean ar aghaidh ón sábháil is déanaí
+
+@ Select save
+ga Roghnaigh sábháil
+
+@ Restart level
+ga Atosaigh an leibhéal
+
+@ Return to main menu
+ga Fill ar an bpríomhroghchlár
+
+@ (disabled)
+ga (díchumasaithe)
+
+@ (fixed for this game)
+ga (socraithe don chluiche seo)
+
+@ (off)
+ga (as)
+
+@ Apply Display Changes
+ga Cuir Athruithe Taispeána i bhFeidhm
+
+@ Display Mode
+ga Mód Taispeána
+
+@ Resolution
+ga Taifeach
+
+@ desktop
+ga deasc
+
+@ Preset
+ga Réamhshocrú
+
+@ Map
+ga Léarscáil
+
+@ Reset Shader Settings
+ga Athshocraigh Socruithe Scáthóra
+
+@ Reset to Defaults
+ga Athshocraigh go Réamhshocruithe
+
+@ Searching...
+ga Ag cuardach...
+
+@ This game only autosaves.
+ga Ní dhéanann an cluiche seo ach uathshábháil.
+
+@ (No Manual Saves modifier)
+ga (mionathraitheoir Gan Sábháil de Láimh)
+
+@ End the current game?
+ga Cuir deireadh leis an gcluiche reatha?
+
+@ Unsaved progress will be lost.
+ga Caillfear dul chun cinn nár sábháladh.
+
+@ End game
+ga Críochnaigh an cluiche
+
+@ Overwrite
+ga Forscríobh
+
+@ Overwrite "{}"?
+ga Forscríobh "{}"?
+
+@ Saved {}
+ga Sábháladh {}
+
+@ Start a new game?
+ga Tosaigh cluiche nua?
+
+@ New game
+ga Cluiche nua
+
+@ New Game
+ga Cluiche Nua
+
+@ CUSTOM
+ga SAINCHEAPTHA
+
+@ Customize Experience
+ga Saincheap an tEispéireas
+
+@ Disable All
+ga Díchumasaigh Gach Rud
+
+@ Disable All Modifications
+ga Díchumasaigh Gach Athrú
+
+@ Saves load in other source ports too.
+ga Lódálann sábhálacha i gcalafoirt eile freisin.
+
+@ Standard rules, no add-ons.
+ga Rialacha caighdeánacha, gan bhreiseáin.
+
+@ Choose skill
+ga Roghnaigh deacracht
+
+@ The current game will end
+ga Críochnófar an cluiche reatha
+
+@ Easy
+ga Éasca
+
+@ Normal
+ga Gnáth
+
+@ Hard
+ga Deacair
+
+@ Nightmare
+ga Tromluí
+
+# graphics preset pop-up
+@ Choose a Graphics Preset
+ga Roghnaigh Réamhshocrú Grafaice
+
+@ Classic
+ga Clasaiceach
+
+@ Like the re-release: enhanced models,
+ga Cosúil leis an atheisiúint: samhlacha feabhsaithe,
+
+@ no added effects.
+ga gan aon mhaisíochtaí breise.
+
+@ Enhanced
+ga Feabhsaithe
+
+@ Every enhancement at its highest quality.
+ga Gach feabhsú ag an gcáilíocht is airde.
+
+@ Needs a capable GPU.
+ga Teastaíonn GPU cumasach.
+
+@ Low-End
+ga Íseal-Leibhéal
+
+@ Fastest. No anti-aliasing, original
+ga An ceann is tapúla. Gan frith-ailiasáil, samhlacha
+
+@ models, lowest effect quality.
+ga bunaidh, an cháilíocht maisíochtaí is ísle.
+
+@ Esc keeps the defaults
+ga Coinníonn Esc na réamhshocruithe
+
+@ Everything can be changed later in Options.
+ga Is féidir gach rud a athrú níos déanaí in Options.
+
+@ Keep Defaults
+ga Coinnigh Réamhshocruithe
+
+# save and load cards
+@ Save Game
+ga Sábháil Cluiche
+
+@ Load Game
+ga Lódáil Cluiche
+
+@ Autosaves
+ga Uathshábhálacha
+
+@ newest first
+ga is nuaí ar dtús
+
+@ Saves: {}
+ga Sábhálacha: {}
+
+@ Browse Autosaves
+ga Brabhsáil Uathshábhálacha
+
+@ Every retained autosave, newest first
+ga Gach uathshábháil a coinníodh, is nuaí ar dtús
+
+@ New save
+ga Sábháil nua
+
+@ Select to save your game here
+ga Roghnaigh chun do chluiche a shábháil anseo
+
+@ No autosaves yet
+ga Níl aon uathshábháil fós
+
+@ Autosaves are made on level entry, secrets and more (Options > Gameplay)
+ga Déantar uathshábhálacha ag tús leibhéil, ag rúin agus eile (Options > Imirt)
+
+@ No saves yet
+ga Níl aon sábháil fós
+
+@ Save from the Single Player menu, or press F6 to quicksave
+ga Sábháil ón roghchlár Single Player, nó brúigh F6 le mear-shábháil
+
+@ No picture
+ga Gan pictiúr
+
+@ Del: delete save
+ga Del: scrios an tsábháil
+
+@ Delete "{}"?
+ga Scrios "{}"?
+
+@ This cannot be undone.
+ga Ní féidir é seo a chealú.
+
+@ Quicksave
+ga Mear-Shábháil
+
+@ Autosave: {}
+ga Uathshábháil: {}
+
+@ unknown trigger
+ga truicear anaithnid
+
+@ Latest - {}
+ga Is déanaí - {}
+
+@ Health {}
+ga Sláinte {}
+
+@ Armor {}
+ga Armúr {}
+
+@ Kills {}/{}
+ga Maruithe {}/{}
+
+@ Secrets {}/{}
+ga Rúin {}/{}
+
+@ Split-screen, {} players
+ga Scáileán scoilte, imreoirí: {}
+
+@ Co-op
+ga Comhoibriú
+
+@ Customized
+ga Saincheaptha
+
+@ Customized, {}
+ga Saincheaptha, {}
+
+@ Date unavailable
+ga Dáta ar iarraidh
+
+@ Just now
+ga Díreach anois
+
+@ {} min ago
+ga {} nóim ó shin
+
+@ {} h ago
+ga {} u ó shin
+
+@ Level entry
+ga Tús leibhéil
+
+@ Secret found
+ga Rún aimsithe
+
+@ All enemies killed
+ga Gach namhaid maraithe
+
+@ All secrets found
+ga Gach rún aimsithe
+
+@ Timer
+ga Amadóir
+
+# customize pages
+@ Standard rules
+ga Rialacha caighdeánacha
+
+@ Modifiers changed: {}
+ga Mionathraitheoirí athraithe: {}
+
+@ no add-ons
+ga gan bhreiseáin
+
+@ add-ons: {}
+ga breiseáin: {}
+
+@ Saves of this game are .qsa files: they need this source port.
+ga Is comhaid .qsa iad sábhálacha an chluiche seo: teastaíonn an calafort foinse seo uathu.
+
+@ Nothing changed: this plays as standard Quake.
+ga Níor athraíodh aon rud: imrítear é seo mar ghnáth-Quake.
+
+@ Changes apply now and are saved with this game (.qsa).
+ga Cuirtear athruithe i bhfeidhm anois agus sábháiltear iad leis an gcluiche seo (.qsa).
+
+@ This game started without Customize, so its rules are fixed.
+ga Tosaíodh an cluiche seo gan Saincheap, mar sin tá a rialacha socraithe.
+
+@ Start a new game and choose Customize Experience.
+ga Tosaigh cluiche nua agus roghnaigh Saincheap an tEispéireas.
+
+@ These rules apply to the next customized game.
+ga Baineann na rialacha seo leis an gcéad chluiche saincheaptha eile.
+
+# add-on browser
+@ Fire
+ga Lámhach
+
+@ Alt Fire
+ga Lámhach Malartach
+
+@ Configure Parameters >
+ga Cumraigh Paraiméadair >
+
+@ Configure
+ga Cumraigh
+
+@ Settings
+ga Socruithe
+
+@ Change slot
+ga Athraigh sliotán
+
+@ Toggle
+ga Scoránaigh
+
+@ Details
+ga Sonraí
+
+@ Enter or click the box: toggle
+ga Enter nó cliceáil an bosca: scoránaigh
+
+@ Right / Tab / click: details
+ga Deas / Tab / cliceáil: sonraí
+
+@ Input Remapping
+ga Athmhapáil Ionchuir
+
+@ Weapon Slot
+ga Sliotán Airm
+
+@ Customized games save as .qsa files, which need this source port.
+ga Sábháiltear cluichí saincheaptha mar chomhaid .qsa, a dteastaíonn an calafort foinse seo uathu.
+
+@ This game started without Customize, so its add-ons are fixed. Customize a new game instead.
+ga Tosaíodh an cluiche seo gan Saincheap, mar sin tá a bhreiseáin socraithe. Saincheap cluiche nua ina ionad.
+
+@ Bullet Time
+ga Am Piléir
+
+@ Change Goggles
+ga Athraigh Gloiní
+
+@ Dodge / Dive
+ga Seachain / Tum
+
+@ Goggles
+ga Gloiní
+
+@ Hitstop
+ga Hitstop
+
+@ Projectile Shotguns
+ga Gunnaí Gráin Teilgeán
+
+@ BULLET TIME: 20%
+ga AM PILÉIR: 20%
+
+@ NORMAL SPEED
+ga GNÁTHLUAS
+
+@ SLOW MOTION: PHYSICAL PELLETS
+ga MALL: PILLÍNÍ FISICIÚLA
+
+@ DEMONSTRATION
+ga TAISPEÁNTAS
+
+@ GAMEPLAY
+ga IMIRT
+
+@ LOOP
+ga LÚB
+
+@ Preview unavailable
+ga Níl réamhamharc ar fáil
+
+# shader and language help lines
+@ A setting of the chosen shader; arrows step it, Enter is not needed
+ga Socrú den scáthóir roghnaithe; athraíonn na saigheada é, ní gá Enter
+
+@ Language of the menus, messages and the 2021 re-release's game text; System follows your computer's language
+ga Teanga na roghchlár, na dteachtaireachtaí agus théacs cluiche an atheisiúna 2021; leanann Córas teanga do ríomhaire
+
+@ Puts every setting of the chosen shader back to the preset's defaults
+ga Cuireann sé gach socrú den scáthóir roghnaithe ar ais go réamhshocruithe an réamhshocraithe
+
+@ RetroArch slang shader on the final image: CRT, scanlines, NTSC, sharpening; add your own in <game>/shaders
+ga Scáthóir slang RetroArch ar an íomhá dheiridh: CRT, línte scanta, NTSC, géarú; cuir do chuid féin in <cluiche>/shaders
+
+# modern console footer
+@ Shift+PgUp/Dn: height  ` : hide
+ga Shift+PgUp/Dn: airde  ` : ceil
+
+@ Tab: complete  Ctrl+R: search  bash | pipe
+ga Tab: críochnaigh  Ctrl+R: cuardaigh  bash | píopa
+
+@ ↑ +{} lines (End to jump) 
+ga ↑ +{} líne (End le léim) 
+
+# add-on descriptions
+@ Create two linked portals on flat walls. Fire places the first portal; Alt Fire places the second. Walk through either portal to emerge from the other. Your momentum carries through. Assign a weapon slot below: pressing that slot repeatedly cycles its ordinary weapon and every enabled add-on assigned there. Portal view quality is configurable below.
+ga Cruthaigh dhá thairseach nasctha ar bhallaí cothroma. Cuireann Lámhach an chéad tairseach; cuireann Lámhach Malartach an dara ceann. Siúil trí cheachtar tairseach chun teacht amach as an gceann eile. Coinnítear do mhóiminteam. Sann sliotán airm thíos: má bhrúnn tú an sliotán sin arís is arís, athraítear idir a ghnátharm agus gach breiseán cumasaithe atá sannta dó. Is féidir cáilíocht radhairc na dtairseach a chumrú thíos.
+
+@ Hold Fire and sweep the crosshair over monsters to queue targets. Release Fire to throw: the boomerang visits each target, stuns it and returns to you. Alt Fire clears the queue. The weapon slot selects a group, not a separate hotkey: press it again to cycle through the weapons in that slot. Configure stun duration and flight speed below.
+ga Coinnigh Lámhach agus scuab an crosribe thar arrachtaí chun spriocanna a chur sa scuaine. Scaoil Lámhach chun caitheamh: tugann an búmarang cuairt ar gach sprioc, cuireann sé néal uirthi agus filleann sé ort. Glanann Lámhach Malartach an scuaine. Roghnaíonn an sliotán airm grúpa, ní eochair aicearra ar leith: brúigh arís é chun dul trí na hairm sa sliotán sin. Cumraigh fad an néil agus luas eitilte thíos.
+
+@ Hold Fire to charge a sticky bomb using rocket ammunition; release to launch. A longer charge throws it faster. Bombs cling to walls, doors and monsters. Alt Fire detonates your planted bombs together. Place a trap, retreat, then detonate it when enemies approach. Assign any weapon slot below; repeated presses cycle through the ordinary weapon and add-ons in that slot.
+ga Coinnigh Lámhach chun buama greamaitheach a luchtú le harmlón roicéad; scaoil chun é a lainseáil. Dá fhaide an luchtú, is tapúla a chaitear é. Greamaíonn buamaí de bhallaí, de dhoirse agus d'arrachtaí. Pléascann Lámhach Malartach do bhuamaí curtha le chéile. Leag gaiste, cúlaigh, agus pléasc é nuair a thagann naimhde in aice leis. Sann aon sliotán airm thíos; má bhrúnn tú arís is arís, téann tú tríd an ngnátharm agus na breiseáin sa sliotán sin.
+
+@ Fire launches a chain hook. It latches onto a permitted surface or enemy and reels you toward the anchor. Fire again or use Alt Fire to let go. Choose which materials and enemies can be hooked in Configure Parameters. Assign it to any weapon slot; repeated presses of the slot's existing binding cycle through its weapons.
+ga Lainseálann Lámhach crúca slabhra. Greamaíonn sé de dhromchla nó de namhaid ceadaithe agus tarraingíonn sé thú i dtreo an ancaire. Lámhach arís nó úsáid Lámhach Malartach chun scaoileadh. Roghnaigh cé na hábhair agus na naimhde is féidir a chrúcáil in Cumraigh Paraiméadair. Sann é d'aon sliotán airm; má bhrúnn tú sannadh reatha an tsliotáin arís is arís, téann tú trína chuid arm.
+
+@ A piercing railgun inspired by Quake III. Fire sends a slug through every enemy along its line. Each shot consumes two cells, with a 1.5 second refire interval. Damage and the spiral trail colour are configurable below. Choose a weapon slot: the slot's current binding selects and cycles the weapons assigned to it.
+ga Railgun a théann tríd, spreagtha ag Quake III. Seolann Lámhach urchar trí gach namhaid ar a líne. Úsáideann gach urchar dhá chill, le 1.5 soicind idir urchair. Is féidir an damáiste agus dath an rian bíse a chumrú thíos. Roghnaigh sliotán airm: roghnaíonn sannadh reatha an tsliotáin na hairm atá sannta dó agus téann sé tríothu.
+
+@ A Portal-style gel sprayer. Fire sprays blue Repulsion gel: land, jump or run into it to bounce, and landings on it never hurt. Alt Fire sprays orange Propulsion gel: run across it to go much faster. Gel coats floors and walls until washed off with the Powerwasher. Assign a weapon slot below; repeated presses cycle the weapons in that slot.
+ga Spréire glóthaigh i stíl Portal. Spréann Lámhach glóthach Aisbhrú gorm: tuirling, léim nó rith isteach ann chun preabadh, agus ní ghortaíonn tuirlingt air riamh. Spréann Lámhach Malartach glóthach Tiomána oráiste: rith trasna air chun dul i bhfad níos tapúla. Clúdaíonn glóthach urláir agus ballaí go dtí go nitear é leis an nGlantóir Ardbhrú. Sann sliotán airm thíos; má bhrúnn tú arís is arís, téann tú trí na hairm sa sliotán sin.
+
+@ A water cannon. Fire shoots a straight jet with limited reach; Alt Fire a wide, shorter fan. The water pushes enemies back, turns projectiles aside and washes away gel and blood. Push strength is configurable below. Assign a weapon slot below; repeated presses cycle the weapons in that slot.
+ga Gunna uisce. Scaoileann Lámhach scaird dhíreach le raon teoranta; scaoileann Lámhach Malartach gaothrán leathan níos giorra. Brúnn an t-uisce naimhde siar, casann sé teilgeáin i leataobh agus níonn sé glóthach agus fuil. Is féidir neart an bhrú a chumrú thíos. Sann sliotán airm thíos; má bhrúnn tú arís is arís, téann tú trí na hairm sa sliotán sin.
+
+@ One equipment add-on includes both night vision and thermal vision. The Change Goggles action cycles Normal, Night Vision, Thermal, then Normal again. Night vision brightens dark rooms; thermal vision highlights living enemies. Goggles do not occupy a weapon slot. Configure intensity and sensor noise below. The binding affects only this add-on.
+ga Tá radharc oíche agus radharc teirmeach araon in aon bhreiseán trealaimh amháin. Téann an gníomh Athraigh Gloiní trí Gnáth, Radharc Oíche, Teirmeach, agus ar ais go Gnáth. Gealann radharc oíche seomraí dorcha; aibhsíonn radharc teirmeach naimhde beo. Ní thógann gloiní sliotán airm. Cumraigh an déine agus torann an bhraiteora thíos. Ní bhaineann an sannadh ach leis an mbreiseán seo.
+
+@ Press Dodge with a movement direction on the ground or in midair: dive forward or leap backward and sideways. Diagonals are supported. Each press launches once, with a short recovery. The player body animates in third person. Assign the Dodge action below or in Controls.
+ga Brúigh Seachain le treo gluaiseachta ar an talamh nó san aer: tum ar aghaidh nó léim siar agus i leataobh. Tacaítear le treonna fiara. Lainseálann gach brú uair amháin, le téarnamh gearr. Beochtar corp an imreora sa tríú pearsa. Sann an gníomh Seachain thíos nó in Rialuithe.
+
+@ Use the dedicated Bullet Time action to slow the whole local game to 20% speed. Hold is the default; Toggle switches on each press. The optional meter limits use in real seconds and regenerates while inactive. Disable the meter for unlimited use. Remap the action and configure duration and regeneration below.
+ga Úsáid an gníomh tiomnaithe Am Piléir chun an cluiche áitiúil ar fad a mhoilliú go luas 20%. Is é Coinnigh an réamhshocrú; athraíonn Scoránaigh le gach brú. Teorannaíonn an méadar roghnach an úsáid i bhfíorshoicindí agus athghintear é nuair nach bhfuil sé in úsáid. Díchumasaigh an méadar le haghaidh úsáide gan teorainn. Athmhapáil an gníomh agus cumraigh an fad agus an athghiniúint thíos.
+
+@ Both shotguns and enemy grunts fire physical pellets with their original spread and damage. Fast default projectiles feel immediate; lower their speed to dodge incoming fire during bullet time. Configure projectile speed below, or reset it to the default of 10000 units per second.
+ga Scaoileann an dá ghunna gráin agus na grunts namhaid pillíní fisiciúla lena scaipeadh agus a ndamáiste bunaidh. Mothaíonn teilgeáin tapa réamhshocraithe láithreach; ísligh a luas chun urchair isteach a sheachaint le linn am piléir. Cumraigh luas na dteilgeán thíos, nó athshocraigh é go dtí an réamhshocrú de 10000 aonad in aghaidh an tsoicind.
+
+@ Freezes the game for a split second when you damage an enemy, so hits feel heavier. Single player only. Choose which weapons trigger it (all, melee, ranged or explosives), how long it lasts and how much more a kill freezes. Advanced settings cover enemy toughness, damage scaling, cooldown and the longest freeze.
+ga Reonn sé an cluiche ar feadh sciorta de shoicind nuair a dhéanann tú damáiste do namhaid, ionas go mothaíonn buillí níos troime. Aonimreoir amháin. Roghnaigh cé na hairm a spreagann é (gach ceann, cóngarach, fadraon nó pléascáin), cé chomh fada a mhaireann sé agus cé mhéad níos mó a reonn marú. Clúdaíonn ardsocruithe righneas naimhde, scálú damáiste, fuarú agus an reo is faide.
+
+# map packs and the Quaddicted browser
+@ Get more maps (Quaddicted)...
+ga Faigh tuilleadh léarscáileanna (Quaddicted)...
+
+@ Type to filter...
+ga Clóscríobh le scagadh...
+
+@ Launch mod
+ga Lainseáil mod
+
+@ Start first map
+ga Tosaigh an chéad léarscáil
+
+@ (running)
+ga (ar siúl)
+
+@ running
+ga ar siúl
+
+@ Recent
+ga Le déanaí
+
+@ Name
+ga Ainm
+
+@ Dir
+ga Fillteán
+
+@ Default
+ga Réamhshocrú
+
+@ Title
+ga Teideal
+
+@ Sort: {}
+ga Sórtáil: {}
+
+@ {} installed
+ga Suiteáilte: {}
+
+@ {}/{} matching
+ga {}/{} ag teacht leis
+
+@ {} maps, {} completed
+ga Léarscáileanna: {}, críochnaithe: {}
+
+@ {}/{} matching, {} completed
+ga {}/{} ag teacht leis, críochnaithe: {}
+
+@ no maps of its own
+ga gan léarscáileanna dá chuid féin
+
+@ dir: {}
+ga fillteán: {}
+
+@ base: {}
+ga bun: {}
+
+@ Browse the Quaddicted archive of
+ga Brabhsáil cartlann Quaddicted
+
+@ single-player maps and episodes,
+ga de léarscáileanna agus eipeasóidí aonimreora,
+
+@ then download and install them
+ga ansin íoslódáil agus suiteáil iad
+
+@ here. Each release gets its own
+ga anseo. Faigheann gach eisiúint a
+
+@ entry in this list.
+ga hiontráil féin sa liosta seo.
+
+@ Needs an internet connection.
+ga Teastaíonn ceangal idirlín.
+
+@ Quaddicted Map Archive
+ga Cartlann Léarscáileanna Quaddicted
+
+@ Newest
+ga Is nuaí
+
+@ Author
+ga Údar
+
+@ Size
+ga Méid
+
+@ Loading the map list...
+ga Ag lódáil liosta na léarscáileanna...
+
+@ Couldn't load the map list: {}
+ga Níorbh fhéidir liosta na léarscáileanna a lódáil: {}
+
+@ {} single-player releases  -  F5 refreshes
+ga Eisiúintí aonimreora: {}  -  athnuann F5
+
+@ {} matching
+ga {} ag teacht leis
+
+@ by {}
+ga le {}
+
+@ requires: {}
+ga teastaíonn: {}
+
+@ maps: {}
+ga léarscáileanna: {}
+
+@ Failed: {}
+ga Theip: {}
+
+@ Downloading... {}%
+ga Ag íoslódáil... {}%
+
+@ Unpacking...
+ga Ag díphacáil...
+
+@ Installed in {}/  -  Enter: play
+ga Suiteáilte in {}/  -  Enter: imir
+
+@ Enter: download and install
+ga Enter: íoslódáil agus suiteáil
+
+@ unpacking
+ga ag díphacáil
+
+@ failed
+ga theip
+
+@ installed
+ga suiteáilte
+
+@ Downloads are not available in the browser build
+ga Níl íoslódálacha ar fáil sa leagan brabhsálaí
+
+@ the map list could not be read
+ga níorbh fhéidir liosta na léarscáileanna a léamh
+
+@ downloading needs the curl program
+ga teastaíonn an clár curl le híoslódáil
+
+@ download failed
+ga theip ar an íoslódáil
+
+@ the download is not a valid zip
+ga ní comhad zip bailí é an íoslódáil
+
+@ nothing to install for this engine
+ga níl aon rud le suiteáil don inneall seo
+
+@ needs {} installed first
+ga ní mór {} a shuiteáil ar dtús
+
+@ couldn't unpack {}
+ga níorbh fhéidir {} a dhíphacáil
+
+# help screen
+@ About
+ga Faoi
+
+@ < Back
+ga < Siar
+
+# tr_ctx keys: English shows the short word, the key says which meaning
+@ Save (a manual save, as opposed to a quicksave or autosave)
+ga Sábháil
+
+# ==== hud.txt ====
+
+# HUD, weapon and equipment wheels, sound captions and other in-game text.
+# Weapon, monster and item names follow the 2021 re-release's own translations.
+@ Axe
+ga Tua
+
+@ Shotgun
+ga Gunna Gráin
+
+@ Double-Barrelled Shotgun
+ga Gunna Gráin Dhá Bhairille
+
+@ Nailgun
+ga Gunna Tairní
+
+@ Super Nailgun
+ga Sár-Ghunna Tairní
+
+@ Grenade Launcher
+ga Lainseálaí Gránáidí
+
+@ Rocket Launcher
+ga Lainseálaí Roicéad
+
+@ Thunderbolt
+ga Caor Thine
+
+@ Portal Gun
+ga Gunna Tairseach
+
+@ Boomerang
+ga Búmarang
+
+@ Stickybomb Launcher
+ga Lainseálaí Greambhuamaí
+
+@ Railgun
+ga Railgun
+
+@ Hookshot
+ga Crúca
+
+@ Gel Sprayer
+ga Spréire Glóthaigh
+
+@ Powerwasher
+ga Glantóir Ardbhrú
+
+@ Night Vision Goggles
+ga Gloiní Radhairc Oíche
+
+@ Thermal Goggles
+ga Gloiní Teirmeacha
+
+@ Normal vision
+ga Gnáthradharc
+
+@ ON
+ga AR
+
+@ OFF
+ga AS
+
+@ {} (turn on)
+ga {} (cuir air)
+
+@ {} (turn off)
+ga {} (múch)
+
+@ Move mouse to select, release to toggle
+ga Bog an luch le roghnú, scaoil le scoránú
+
+@ Move mouse to select, release to equip
+ga Bog an luch le roghnú, scaoil le trealmhú
+
+@ Release to toggle
+ga Scaoil le scoránú
+
+@ Release to equip
+ga Scaoil le trealmhú
+
+@ shells
+ga sliogáin
+
+@ nails
+ga tairní
+
+@ rockets
+ga roicéid
+
+@ cells
+ga cealla
+
+@ Kills: {}/{}
+ga Maruithe: {}/{}
+
+@ Secrets: {}/{}
+ga Rúin: {}/{}
+
+@ Time {}
+ga Am {}
+
+@ Press any button to continue...
+ga Brúigh aon chnaipe le leanúint ar aghaidh...
+
+@ Press any key to continue...
+ga Brúigh aon eochair le leanúint ar aghaidh...
+
+@ BULLET TIME
+ga AM PILÉIR
+
+@ AUTO AIM
+ga UATHAIMSIÚ
+
+@ Crosshair
+ga Crosribe
+
+@ + Marker
+ga + Marcóir
+
+@ Hit markers off
+ga Marcóirí buailte as
+
+@ On target
+ga Ar sprioc
+
+@ On kill
+ga Ar mharú
+
+# sound captions
+@ [Secret found]
+ga [Rún aimsithe]
+
+@ [Message]
+ga [Teachtaireacht]
+
+@ [Switch activated]
+ga [Lasc gníomhachtaithe]
+
+@ [Key picked up]
+ga [Eochair piocta suas]
+
+@ [Rune picked up]
+ga [Rúnchloch piocta suas]
+
+@ [Teleporter]
+ga [Teileapórtálaí]
+
+@ [Teleport]
+ga [Teileapórtáil]
+
+@ [Splash]
+ga [Plab]
+
+@ [Leaving water]
+ga [Ag fágáil an uisce]
+
+@ [Door]
+ga [Doras]
+
+@ [Platform moving]
+ga [Ardán ag gluaiseacht]
+
+@ [Button]
+ga [Cnaipe]
+
+@ [Health picked up]
+ga [Sláinte piocta suas]
+
+@ [Armor picked up]
+ga [Armúr piocta suas]
+
+@ [Quad Damage wearing off]
+ga [Damáiste Faoi Cheathair ag dul in éag]
+
+@ [Quad Damage]
+ga [Damáiste Faoi Cheathair]
+
+@ [Pentagram wearing off]
+ga [Peinteagram ag dul in éag]
+
+@ [Pentagram of Protection]
+ga [Peinteagram Cosanta]
+
+@ [Ring wearing off]
+ga [Fáinne ag dul in éag]
+
+@ [Ring of Shadows]
+ga [Fáinne na Scáth]
+
+@ [Biosuit wearing off]
+ga [Bithchulaith ag dul in éag]
+
+@ [Biosuit]
+ga [Bithchulaith]
+
+@ [Item picked up]
+ga [Earra piocta suas]
+
+@ [Weapon picked up]
+ga [Arm piocta suas]
+
+@ [Ammo picked up]
+ga [Armlón piocta suas]
+
+@ [Explosion]
+ga [Pléasc]
+
+@ [Grenade launched]
+ga [Gránáid lainseáilte]
+
+@ [Grenade bounce]
+ga [Gránáid ag preabadh]
+
+@ [Rocket fired]
+ga [Roicéad scaoilte]
+
+@ [Nails fired]
+ga [Tairní scaoilte]
+
+@ [Lightning]
+ga [Tintreach]
+
+@ [Thunder]
+ga [Toirneach]
+
+@ [Enforcer alerted]
+ga [Enforcer ar an airdeall]
+
+@ [Grunt alerted]
+ga [Grunt ar an airdeall]
+
+@ [Rottweiler alerted]
+ga [Rottweiler ar an airdeall]
+
+@ [Knight alerted]
+ga [Knight ar an airdeall]
+
+@ [Death Knight alerted]
+ga [Death Knight ar an airdeall]
+
+@ [Scrag alerted]
+ga [Scrag ar an airdeall]
+
+@ [Ogre alerted]
+ga [Ogre ar an airdeall]
+
+@ [Fiend alerted]
+ga [Fiend ar an airdeall]
+
+@ [Shambler alerted]
+ga [Shambler ar an airdeall]
+
+@ [Zombie groaning]
+ga [Zombie ag cnáimhseáil]
+
+@ [Vore alerted]
+ga [Vore ar an airdeall]
+
+@ [Vore attacking]
+ga [Vore ag ionsaí]
+
+@ [Spawn alerted]
+ga [Spawn ar an airdeall]
+
+@ [Rotfish]
+ga [Rotfish]
+
+@ [Spawn]
+ga [Spawn]
+
+@ [Chthon]
+ga [Chthon]
+
+@ [Hard landing]
+ga [Tuirlingt chrua]
+
+@ [Drowning]
+ga [Ag bá]
+
+@ [Gasping for air]
+ga [Ag cnagadh anála]
+
+@ [Burning]
+ga [Ag dó]
+
+@ [Telefrag]
+ga [Telefrag]
+
+@ [Gibbed]
+ga [Stróicthe as a chéile]
+
+# ==== console.txt ====
+
+# Console messages, shown translated only with con_translate 1 (Translate Console).
+# Cvar and command names stay as they are.
+@ Autosaved.
+ga Uathshábháilte.
+
+@ Game saved.
+ga Sábháladh an cluiche.
+
+@ Can't save now.
+ga Ní féidir sábháil anois.
+
+@ This game only autosaves (No Manual Saves modifier).
+ga Ní dhéanann an cluiche seo ach uathshábháil (mionathraitheoir Gan Sábháil de Láimh).
+
+@ Loading {}...
+ga Ag lódáil {}...
+
+@ load failed: {}
+ga theip ar lódáil: {}
+
+@ ERROR: autosave failed: {}
+ga EARRÁID: theip ar uathshábháil: {}
+
+@ ERROR: couldn't open {}
+ga EARRÁID: níorbh fhéidir {} a oscailt
+
+@ ERROR: couldn't open {}.
+ga EARRÁID: níorbh fhéidir {} a oscailt.
+
+@ ERROR: couldn't write {}: {}
+ga EARRÁID: níorbh fhéidir {} a scríobh: {}
+
+@ ERROR: couldn't create {}: {}
+ga EARRÁID: níorbh fhéidir {} a chruthú: {}
+
+@ couldn't write {}: {}
+ga níorbh fhéidir {} a scríobh: {}
+
+@ Wrote {}
+ga Scríobhadh {}
+
+@ screenshot failed: {}
+ga theip ar ghabháil scáileáin: {}
+
+@ screenshot: {}
+ga gabháil scáileáin: {}
+
+@ No readable save available. Select save or restart the level.
+ga Níl aon sábháil inléite ar fáil. Roghnaigh sábháil nó atosaigh an leibhéal.
+
+@ Unknown command "{}"
+ga Ordú anaithnid "{}"
+
+@ couldn't exec {}
+ga níorbh fhéidir {} a rith
+
+@ execing {}
+ga ag rith {}
+
+@ execing config.cfg (inherited from {})
+ga ag rith config.cfg (oidhreacht ó {})
+
+@ execing config.cfg (mod defaults)
+ga ag rith config.cfg (réamhshocruithe an mhoid)
+
+@ execing default.cfg (built-in)
+ga ag rith default.cfg (ionsuite)
+
+@ {} cvars
+ga Athróga: {}
+
+@ {} commands
+ga Orduithe: {}
+
+@ Can't "cmd", not connected
+ga Ní féidir "cmd" a úsáid, níl ceangal ann
+
+@ Looking for Quake servers...
+ga Ag cuardach freastalaithe Quake...
+
+@ Bad value, must be between 1 and 65534
+ga Luach mícheart, caithfidh sé a bheith idir 1 agus 65534
+
+@ Couldn't handle music file {}
+ga Níorbh fhéidir an comhad ceoil {} a láimhseáil
+
+@ Bug report written to {}
+ga Scríobhadh tuairisc fhabht chuig {}
+
+@ bugreport: can't create {}: {}
+ga bugreport: ní féidir {} a chruthú: {}
+
+@ graphics preset: {}
+ga réamhshocrú grafaice: {}
+
+@ Presets (r_shader_preset <name>):
+ga Réamhshocruithe (r_shader_preset <ainm>):
+
+@ Add your own .slangp presets under <game>/shaders/.
+ga Cuir do réamhshocruithe .slangp féin faoi <cluiche>/shaders/.
+
+@ no shader preset loaded (r_shader_preset)
+ga níl aon réamhshocrú scáthóra lódáilte (r_shader_preset)
+
+@ r_shader_preset: "{}" not found
+ga r_shader_preset: níor aimsíodh "{}"
+
+@ no parameter "{}" in this preset
+ga níl paraiméadar "{}" sa réamhshocrú seo
+
+@ {} = {} (default {}, {}..{})
+ga {} = {} (réamhshocrú {}, {}..{})
+
+@ Switching to {}...
+ga Ag aistriú go {}...
+
+@ game: no game dir "{}" in {}
+ga game: níl fillteán cluiche "{}" in {}
+
+@ game: can't find the engine executable
+ga game: ní féidir comhad inrite an innill a aimsiú
+
+@ game: exec failed: {}
+ga game: theip ar rith: {}
+
+@ game: launch failed: {}
+ga game: theip ar lainseáil: {}
+
+@ loaded {} in {}s
+ga lódáladh {} in {}s
+
+@ No demos listed with startdemos
+ga Níl aon taispeántas liostaithe le startdemos
+
+@ Playing demo from {}.
+ga Ag seinm taispeántais ó {}.
+
+@ {} frames {} seconds {} fps
+ga frámaí: {}, soicindí: {}, fps: {}
+
+@ Recording to {}.
+ga Ag taifeadadh chuig {}.
+
+@ Completed demo
+ga Taispeántas críochnaithe
+
+@ Can't record during demo playback
+ga Ní féidir taifeadadh le linn athsheinm taispeántais
+
+@ Relative pathnames are not allowed.
+ga Ní cheadaítear ainmneacha conaire coibhneasta.
+
+@ Can't record - try again when connected
+ga Ní féidir taifeadadh - bain triail eile as nuair atá ceangal ann
+
+@ {} demo(s) in loop
+ga Taispeántais sa lúb: {}
+
+@ Not recording a demo.
+ga Níl taispeántas á thaifeadadh.
+
+@ {} joined on a gamepad
+ga Tháinig {} isteach ar cheap stiúrtha
+
+@ goggles: needs a game started with Add-ons and Goggles enabled
+ga goggles: teastaíonn cluiche a tosaíodh le Breiseáin agus Gloiní cumasaithe
+
+@ equip: needs a game started with Add-ons and Goggles enabled
+ga equip: teastaíonn cluiche a tosaíodh le Breiseáin agus Gloiní cumasaithe
+
+@ UDP listening on port {}
+ga UDP ag éisteacht ar phort {}
+
+@ UDP bind on port {} failed: {}
+ga Theip ar cheangal UDP ar phort {}: {}
+
+@ Connection accepted by {}
+ga Ceangal glactha ag {}
+
+@ Connection failed: {}
+ga Theip ar an gceangal: {}
+
+@ Couldn't resolve {}
+ga Níorbh fhéidir {} a réiteach
+
+@ Connecting to {}...
+ga Ag ceangal le {}...
+
+@ Connecting to QuakeWorld server {}...
+ga Ag ceangal le freastalaí QuakeWorld {}...
+
+@ Disconnected: {}
+ga Dícheangailte: {}
+
+@ Server disconnected
+ga Dícheangail an freastalaí
+
+@ Client {} connected
+ga Cliant {} ceangailte
+
+@ Client {} timed out
+ga Cliant {}: thar am
+
+@ Couldn't spawn server {}: {}
+ga Níorbh fhéidir freastalaí {} a ghiniúint: {}
+
+@ maxplayers can not be changed while a server is running.
+ga Ní féidir maxplayers a athrú fad atá freastalaí ar siúl.
+
+@ You can't kick yourself!
+ga Ní féidir leat tú féin a chaitheamh amach!
+
+@ Only the server may changelevel
+ga Níl ach an freastalaí in ann changelevel a úsáid
+
+@ {} renamed to {}
+ga {} athainmnithe mar {}

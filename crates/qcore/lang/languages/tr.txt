@@ -1,0 +1,3024 @@
+# tr: the port's own text; English keys from crates/qcore/lang/*.txt.
+# Format in crates/qcore/src/lang/catalog.rs; check with tools/lang_check.py.
+
+# ==== menu.txt ====
+
+# Options pages: page names, row labels and choice values.
+@ 10% speed
+tr %10 hız
+
+@ 2 split-screen
+tr 2 (bölünmüş ekran)
+
+@ 3 split-screen
+tr 3 (bölünmüş ekran)
+
+@ 4 split-screen
+tr 4 (bölünmüş ekran)
+
+@ 5 split-screen
+tr 5 (bölünmüş ekran)
+
+@ 6 split-screen
+tr 6 (bölünmüş ekran)
+
+@ 2D aiming
+tr 2D nişan
+
+@ 2x monsters
+tr 2x canavar
+
+@ 3x monsters
+tr 3x canavar
+
+@ 4x monsters
+tr 4x canavar
+
+@ 3D resolution
+tr 3D çözünürlük
+
+@ 3D view
+tr 3D görünüm
+
+@ 8-bit Color
+tr 8-bit Renk
+
+@ Accessibility
+tr Erişilebilirlik
+
+@ Acquisition Cone
+tr Kilitlenme Konisi
+
+@ Activation
+tr Etkinleştirme
+
+@ Add a ringing room tail after the cue
+tr İşaretten sonra yankılı oda kuyruğu ekler
+
+@ Add delayed repeats after the cue
+tr İşaretten sonra gecikmeli tekrarlar ekler
+
+@ Add saturation and distortion
+tr Doygunluk ve bozulma ekler
+
+@ Add-ons
+tr Eklentiler
+
+@ Address
+tr Adres
+
+@ Adds fine noise to hide color banding
+tr Renk bantlarını gizlemek için ince gürültü ekler
+
+@ Advanced Settings
+tr Gelişmiş Ayarlar
+
+@ Aim Assist
+tr Nişan Yardımı
+
+@ Aim Rotation
+tr Nişan Dönüşü
+
+@ Aim Slowdown
+tr Nişan Yavaşlatma
+
+@ Aim Style
+tr Nişan Stili
+
+@ All
+tr Tümü
+
+@ All enemies
+tr Tüm düşmanlar
+
+@ Alt Fire (Add-ons)
+tr Alternatif Ateş (Eklentiler)
+
+@ Always Run
+tr Hep Koş
+
+@ Ambient Occlusion
+tr Ortam Perdeleme
+
+@ Ammo Counts
+tr Cephane Sayıları
+
+@ Ammo Counts Position
+tr Cephane Sayıları Konumu
+
+@ Ammo Pickups
+tr Cephane Toplama
+
+@ Anisotropic
+tr Anizotropik
+
+@ Anti-aliasing
+tr Kenar Yumuşatma
+
+@ Apply To
+tr Uygula
+
+@ Armor
+tr Zırh
+
+@ Armor Position
+tr Zırh Konumu
+
+@ Ask
+tr Sor
+
+@ Attack
+tr Saldırı
+
+@ Audio
+tr Ses
+
+@ Auto-aim
+tr Otomatik Nişan
+
+@ Auto-aim Settings
+tr Otomatik Nişan Ayarları
+
+@ Autosave
+tr Otomatik Kayıt
+
+@ Autosave Settings
+tr Otomatik Kayıt Ayarları
+
+@ Autosave Timer
+tr Otomatik Kayıt Süresi
+
+@ Autosaves to Keep
+tr Saklanacak Otomatik Kayıt
+
+@ Bass
+tr Bas
+
+@ Blip
+tr Bip
+
+@ Blood Quality
+tr Kan Kalitesi
+
+@ Blood Splatter Settings
+tr Kan Sıçraması Ayarları
+
+@ Blue
+tr Mavi
+
+@ Boomerang Settings
+tr Bumerang Ayarları
+
+@ Boost or cut high frequencies in decibels
+tr Tizleri desibel cinsinden yükseltir veya azaltır
+
+@ Boost or cut low frequencies in decibels
+tr Basları desibel cinsinden yükseltir veya azaltır
+
+@ Brightness
+tr Parlaklık
+
+@ Bullet Time (Add-ons)
+tr Bullet Time (Eklentiler)
+
+@ Bullet Time Settings
+tr Bullet Time Ayarları
+
+@ Button Glyphs
+tr Düğme Simgeleri
+
+@ Button Size
+tr Düğme Boyutu
+
+@ Camera
+tr Kamera
+
+@ Caustic Intensity
+tr Kostik Yoğunluğu
+
+@ Caustics
+tr Kostikler
+
+@ Center
+tr Orta
+
+@ Center Message Position
+tr Orta Mesaj Konumu
+
+@ Center Message Time
+tr Orta Mesaj Süresi
+
+@ Center View
+tr Görüşü Ortala
+
+@ Change Color on Kill
+tr Öldürünce Renk Değiştir
+
+@ Change Color on Target
+tr Hedefte Renk Değiştir
+
+@ Chime
+tr Çan
+
+@ Click
+tr Tık
+
+@ Clink
+tr Çınlama
+
+@ Coin
+tr Jeton
+
+@ Color
+tr Renk
+
+@ Color Filter
+tr Renk Filtresi
+
+@ Color of the grenade arc
+tr Bomba yayının rengi
+
+@ Colored Lighting
+tr Renkli Aydınlatma
+
+@ Connect
+tr Bağlan
+
+@ Contrast
+tr Kontrast
+
+@ Controls
+tr Kontroller
+
+@ Cooldown (ms)
+tr Bekleme Süresi (ms)
+
+@ Crosshair Outline
+tr Nişangah Dış Çizgisi
+
+@ Crosshair Shape
+tr Nişangah Şekli
+
+@ Crosshair Size
+tr Nişangah Boyutu
+
+@ Current Ammo
+tr Mevcut Cephane
+
+@ Current Ammo Position
+tr Mevcut Cephane Konumu
+
+@ Customize This Game
+tr Bu Oyunu Özelleştir
+
+@ Damage
+tr Hasar
+
+@ Damage Taken
+tr Alınan Hasar
+
+@ Debris
+tr Enkaz
+
+@ Debris Quality
+tr Enkaz Kalitesi
+
+@ Debris Settings
+tr Enkaz Ayarları
+
+@ Directional Damage
+tr Hasar Yönü
+
+@ Dithering
+tr Titreklik (Dithering)
+
+@ Dodge / Dive (Add-ons)
+tr Kaçınma / Atılma (Eklentiler)
+
+@ Dragging up looks down instead of up
+tr Yukarı sürüklemek yukarı yerine aşağı baktırır
+
+@ Drive
+tr Doygunluk
+
+@ Dynamic Lights
+tr Dinamik Işıklar
+
+@ Echo
+tr Yankı
+
+@ Enemy Health
+tr Düşman Sağlığı
+
+@ Enemy Wounds
+tr Düşman Yaraları
+
+@ Enhanced Blood Splatter
+tr Gelişmiş Kan Sıçraması
+
+@ Enhanced FX
+tr Gelişmiş Efektler
+
+@ Enhanced Models
+tr Gelişmiş Modeller
+
+@ Enhanced Particles
+tr Gelişmiş Parçacıklar
+
+@ Enhanced Water
+tr Gelişmiş Su
+
+@ Enhancements
+tr Geliştirmeler
+
+@ Equipment Wheel (Add-ons)
+tr Ekipman Çarkı (Eklentiler)
+
+@ Exploding boxes throw metal shards
+tr Patlayan kutular metal parçaları saçar
+
+@ Explosion Damage
+tr Patlama Hasarı
+
+@ Explosion Scorch Marks
+tr Patlama Yanık İzleri
+
+@ Explosions scorch nearby solid surfaces
+tr Patlamalar yakındaki katı yüzeyleri karartır
+
+@ Explosives only
+tr Yalnızca patlayıcılar
+
+@ Extra Monsters
+tr Ek Canavarlar
+
+@ Extra Per 10 Damage (ms)
+tr 10 Hasar Başına Ek (ms)
+
+@ FX Settings
+tr Efekt Ayarları
+
+@ Field of View
+tr Görüş Alanı
+
+@ Firing never uses up ammo
+tr Ateş etmek asla cephane harcamaz
+
+@ First person
+tr Birinci şahıs
+
+@ Flick Time
+tr Fiske Süresi
+
+@ Flight Speed
+tr Uçuş Hızı
+
+@ Fog
+tr Sis
+
+@ Frag Limit
+tr Frag Limiti
+
+@ Freeze Duration (ms)
+tr Dondurma Süresi (ms)
+
+@ GLQuake
+tr GLQuake
+
+@ Game Speed
+tr Oyun Hızı
+
+@ Game Type
+tr Oyun Türü
+
+@ Gameplay
+tr Oynanış
+
+@ Gameplay Modifiers
+tr Oynanış Değiştiricileri
+
+@ Gel Quality
+tr Jel Kalitesi
+
+@ Gib Surface Painting
+tr Et Parçası Lekeleri
+
+@ Gibs
+tr Et Parçaları
+
+@ Gibs and heads tumble and bounce
+tr Et parçaları ve kafalar yuvarlanıp seker
+
+@ Goggle Glow Quality
+tr Gözlük Parıltı Kalitesi
+
+@ Goggle Intensity
+tr Gözlük Yoğunluğu
+
+@ Goggle Noise
+tr Gözlük Gürültüsü
+
+@ Goggles Settings
+tr Gözlük Ayarları
+
+@ Graphics
+tr Grafik
+
+@ Green
+tr Yeşil
+
+@ Grenade Arc
+tr Bomba Yayı
+
+@ Grenade Arc Settings
+tr Bomba Yayı Ayarları
+
+@ Gun Kick
+tr Silah Tepmesi
+
+@ Gyro
+tr Jiroskop
+
+@ Gyro & Flick Stick
+tr Jiroskop ve Fiske Çubuğu
+
+@ Gyro Active
+tr Jiroskop Etkin
+
+@ Gyro Aiming
+tr Jiroskopla Nişan
+
+@ HUD
+tr HUD
+
+@ HUD Style
+tr HUD Stili
+
+@ Health
+tr Sağlık
+
+@ Health Pickups
+tr Sağlık Toplama
+
+@ Health Position
+tr Sağlık Konumu
+
+@ Health Regeneration
+tr Sağlık Yenilenmesi
+
+@ Hit & Kill Sounds
+tr İsabet ve Öldürme Sesleri
+
+@ Hit Doors & Lifts
+tr Kapı ve Asansörlere İsabet
+
+@ Hit Markers
+tr İsabet İşaretleri
+
+@ Hit Sound
+tr İsabet Sesi
+
+@ Hitmarker Size
+tr İsabet İşareti Boyutu
+
+@ Hitmarker Type
+tr İsabet İşareti Türü
+
+@ Hitstop Advanced
+tr Gelişmiş Hitstop
+
+@ Hitstop Settings
+tr Hitstop Ayarları
+
+@ Hold
+tr Basılı Tut
+
+@ Hold lock-on
+tr Basılı tutarak kilitlen
+
+@ Hook Enemies
+tr Düşmanlara Kancala
+
+@ Hook Metal
+tr Metale Kancala
+
+@ Hook Stone
+tr Taşa Kancala
+
+@ Hook Wood
+tr Ahşaba Kancala
+
+@ Hooking an enemy pulls you to it
+tr Düşmana kancalanmak sizi ona çeker
+
+@ Hookshot Range
+tr Kanca Menzili
+
+@ Hookshot Settings
+tr Kanca Ayarları
+
+@ Host Game
+tr Oyun Kur
+
+@ How far the hook flies before it retracts
+tr Kancanın geri dönmeden önce ne kadar uçacağı
+
+@ How visible the on-screen controls are
+tr Ekran kontrollerinin ne kadar görünür olduğu
+
+@ Impact Lifetime
+tr İz Kalıcılığı
+
+@ Infinite Ammo
+tr Sınırsız Cephane
+
+@ Input
+tr Giriş
+
+@ Input Scale
+tr Giriş Ölçeği
+
+@ Interpolate Animation
+tr Animasyon Ara Değerleme
+
+@ Interpolate Movement
+tr Hareket Ara Değerleme
+
+@ Invert Look
+tr Bakışı Ters Çevir
+
+@ Invert Mouse
+tr Fareyi Ters Çevir
+
+@ Invert Stick
+tr Çubuğu Ters Çevir
+
+@ Jet Quality
+tr Fışkırma Kalitesi
+
+@ Join Game
+tr Oyuna Katıl
+
+@ Jump / Swim Up
+tr Zıpla / Yukarı Yüz
+
+@ Jump again in mid-air
+tr Havada tekrar zıpla
+
+@ Jumps
+tr Zıplamalar
+
+@ Keys & Powerups
+tr Anahtarlar ve Güçlendiriciler
+
+@ Keys & Powerups Position
+tr Anahtar ve Güçlendirici Konumu
+
+@ Kill Bonus (x)
+tr Öldürme Bonusu (x)
+
+@ Kill Sound
+tr Öldürme Sesi
+
+@ Knock
+tr Tak
+
+@ Left
+tr Sol
+
+@ Length of the motion blur streaks
+tr Hareket bulanıklığı izlerinin uzunluğu
+
+@ Lifetime (seconds)
+tr Kalıcılık (saniye)
+
+@ Live Portal Views
+tr Canlı Portal Görüntüleri
+
+@ Live View Distance
+tr Canlı Görüntü Mesafesi
+
+@ Local Players
+tr Yerel Oyuncular
+
+@ Local red wounds follow enemy animation
+tr Kırmızı yaralar düşman animasyonunu izler
+
+@ Lock Indicator
+tr Kilit Göstergesi
+
+@ Long falls don't hurt
+tr Yüksekten düşmek acıtmaz
+
+@ Longest Freeze (ms)
+tr En Uzun Donma (ms)
+
+@ Look Down
+tr Aşağı Bak
+
+@ Look Speed
+tr Bakış Hızı
+
+@ Look Up
+tr Yukarı Bak
+
+@ Main Menu Music
+tr Ana Menü Müziği
+
+@ Max FPS
+tr Maks. FPS
+
+@ Max Players
+tr Maks. Oyuncu
+
+@ Maximum Impacts
+tr Maks. İz Sayısı
+
+@ Maximum Marks
+tr Maks. Leke Sayısı
+
+@ Maximum Range
+tr Maks. Menzil
+
+@ Melee only
+tr Yalnızca yakın dövüş
+
+@ Message Background
+tr Mesaj Arka Planı
+
+@ Message Text Size
+tr Mesaj Yazı Boyutu
+
+@ Messages & Captions
+tr Mesajlar ve Altyazılar
+
+@ Meter Duration (real seconds)
+tr Gösterge Süresi (gerçek saniye)
+
+@ Minimum Damage
+tr Min. Hasar
+
+@ Mode
+tr Mod
+
+@ Modern Console
+tr Modern Konsol
+
+@ Modern HUD Layout
+tr Modern HUD Düzeni
+
+@ Most recent save
+tr En son kayıt
+
+@ Motion Blur
+tr Hareket Bulanıklığı
+
+@ Motion Blur Amount
+tr Hareket Bulanıklığı Miktarı
+
+@ Motion Blur Quality
+tr Hareket Bulanıklığı Kalitesi
+
+@ Mouse & Keyboard
+tr Fare ve Klavye
+
+@ Mouse Speed
+tr Fare Hızı
+
+@ Move Back
+tr Geri Git
+
+@ Move Forward
+tr İleri Git
+
+@ Music Volume
+tr Müzik Sesi
+
+@ Next Weapon
+tr Sonraki Silah
+
+@ No Drowning
+tr Boğulma Yok
+
+@ No Fall Damage
+tr Düşme Hasarı Yok
+
+@ No Manual Saves
+tr Elle Kayıt Yok
+
+@ No Self Damage
+tr Kendine Hasar Yok
+
+@ Noise Filter
+tr Gürültü Filtresi
+
+@ Normal Color
+tr Normal Renk
+
+@ Notify Message Position
+tr Bildirim Konumu
+
+@ Notify Message Time
+tr Bildirim Süresi
+
+@ Number of splatter rays per blood impact
+tr Her kan isabetindeki sıçrama ışını sayısı
+
+@ Off
+tr Kapalı
+
+@ On Death
+tr Ölünce
+
+@ On Kill Color
+tr Öldürme Rengi
+
+@ On Target Color
+tr Hedef Rengi
+
+@ Opacity
+tr Opaklık
+
+@ Opacity of the grenade arc
+tr Bomba yayının opaklığı
+
+@ Pants Color
+tr Pantolon Rengi
+
+@ Particle Quality
+tr Parçacık Kalitesi
+
+@ Particles
+tr Parçacıklar
+
+@ Physical Nail Impacts
+tr Fiziksel Çivi İzleri
+
+@ Pistol Start
+tr Sıfırdan Başlangıç
+
+@ Pitch
+tr Perde
+
+@ Pitch Sensitivity
+tr Dikey Hassasiyet
+
+@ Playback Speed
+tr Oynatma Hızı
+
+@ Player Setup
+tr Oyuncu Ayarları
+
+@ Pop
+tr Pop
+
+@ Portal Gun Settings
+tr Portal Silahı Ayarları
+
+@ Portal Recursion
+tr Portal Özyinelemesi
+
+@ Portal View Quality
+tr Portal Görüntü Kalitesi
+
+@ Preview Sound
+tr Sesi Dinle
+
+@ Previous Weapon
+tr Önceki Silah
+
+@ Projectile Shotguns Settings
+tr Mermili Pompalı Ayarları
+
+@ Projectile Speed (units/s)
+tr Mermi Hızı (birim/sn)
+
+@ Purple
+tr Mor
+
+@ Push
+tr İtme
+
+@ Push Strength
+tr İtme Gücü
+
+@ Quick Load
+tr Hızlı Yükle
+
+@ Quick Save
+tr Hızlı Kaydet
+
+@ Railgun Settings
+tr Railgun Ayarları
+
+@ Ranged only
+tr Yalnızca uzak menzil
+
+@ Reacquire While Held
+tr Basılıyken Yeniden Kilitlen
+
+@ Red
+tr Kırmızı
+
+@ Reduce Motion
+tr Hareketi Azalt
+
+@ Regen (seconds per second)
+tr Yenilenme (saniye başına sn)
+
+@ Render Scale
+tr Görüntü Ölçeği
+
+@ Reverb
+tr Yankılanma
+
+@ Right
+tr Sağ
+
+@ Ripple Intensity
+tr Dalga Yoğunluğu
+
+@ Ripples
+tr Dalgalar
+
+@ Roll Sensitivity
+tr Yuvarlanma Hassasiyeti
+
+@ Rumble
+tr Titreşim
+
+@ Run
+tr Koş
+
+@ Save on All Enemies Killed
+tr Tüm Düşmanlar Ölünce Kaydet
+
+@ Save on All Secrets Found
+tr Tüm Gizli Alanlar Bulununca Kaydet
+
+@ Save on Level Entry
+tr Bölüm Girişinde Kaydet
+
+@ Save on Secret Found
+tr Gizli Alan Bulununca Kaydet
+
+@ Scoreboard
+tr Skor Tablosu
+
+@ Screen Flashes
+tr Ekran Parlamaları
+
+@ Screen Shader
+tr Ekran Gölgelendiricisi
+
+@ Screen Shake
+tr Ekran Sarsıntısı
+
+@ Search LAN
+tr LAN'da Ara
+
+@ Seconds a center-screen message stays up
+tr Ekran ortasındaki mesajın kalma süresi (saniye)
+
+@ See Through Portals
+tr Portallardan Görme
+
+@ See-through Teleporters
+tr Saydam Işınlayıcılar
+
+@ Shirt Color
+tr Gömlek Rengi
+
+@ Shotgun Bullet Decals
+tr Saçma İzleri
+
+@ Shoulder left
+tr Omuz üstü sol
+
+@ Shoulder right
+tr Omuz üstü sağ
+
+@ Show FPS
+tr FPS Göster
+
+@ Show Face
+tr Yüzü Göster
+
+@ Shrapnel
+tr Şarapnel
+
+@ Size of on-screen messages and captions
+tr Ekran mesajları ve altyazıların boyutu
+
+@ Skill
+tr Zorluk
+
+@ Sky Fog
+tr Gökyüzü Sisi
+
+@ Smooths the stepped movement of monsters
+tr Canavarların kesik kesik hareketini yumuşatır
+
+@ Sound
+tr Ses
+
+@ Sound Captions
+tr Ses Altyazıları
+
+@ Sound Volume
+tr Efekt Sesi
+
+@ Speed Blur
+tr Hız Bulanıklığı
+
+@ Splashes
+tr Sıçramalar
+
+@ Splatter Amount
+tr Sıçrama Miktarı
+
+@ Splatter Size
+tr Sıçrama Boyutu
+
+@ Start Game
+tr Oyunu Başlat
+
+@ Staying underwater doesn't hurt
+tr Su altında kalmak acıtmaz
+
+@ Stick Look Pitch
+tr Çubukla Dikey Bakış
+
+@ Stick Look Yaw
+tr Çubukla Yatay Bakış
+
+@ Strafe Left
+tr Sola Kay
+
+@ Strafe Right
+tr Sağa Kay
+
+@ Strength of the surface swell and rings
+tr Yüzey kabarması ve halkaların gücü
+
+@ Stun Duration
+tr Sersemletme Süresi
+
+@ Style
+tr Stil
+
+@ Supersampling
+tr Süper Örnekleme
+
+@ Surface Hit Effects
+tr Yüzey İsabet Efektleri
+
+@ Swim Down
+tr Aşağı Yüz
+
+@ Targets
+tr Hedefler
+
+@ Teamplay
+tr Takım Oyunu
+
+@ Texture Filter
+tr Doku Filtresi
+
+@ Third person
+tr Üçüncü şahıs
+
+@ Thud
+tr Güm
+
+@ Tick
+tr Tik
+
+@ Time Limit
+tr Süre Limiti
+
+@ Time Stretch
+tr Zaman Esnetme
+
+@ Toggle Attack
+tr Saldırıyı Aç/Kapat
+
+@ Toggle Run
+tr Koşmayı Aç/Kapat
+
+@ Toggle auto-aim
+tr Otomatik nişanı aç/kapat
+
+@ Touch Controls
+tr Dokunmatik Kontroller
+
+@ Touchscreen
+tr Dokunmatik Ekran
+
+@ Tough Enemy Health
+tr Güçlü Düşman Sağlığı
+
+@ Tough enemies only
+tr Yalnızca güçlü düşmanlar
+
+@ Trail Colour
+tr İz Rengi
+
+@ Translate Console
+tr Konsolu Çevir
+
+@ Translucent Water
+tr Yarı Saydam Su
+
+@ Treble
+tr Tiz
+
+@ Turn Left
+tr Sola Dön
+
+@ Turn Right
+tr Sağa Dön
+
+@ Underwater FX
+tr Su Altı Efektleri
+
+@ Use Bullet Time Meter
+tr Bullet Time Göstergesi Kullan
+
+@ VSync
+tr Dikey Senkronizasyon
+
+@ View Bob
+tr Görüş Sallanması
+
+@ Viewmodels
+tr Silah Modelleri
+
+@ Volume
+tr Ses Düzeyi
+
+@ Water Opacity
+tr Su Opaklığı
+
+@ Water Quality
+tr Su Kalitesi
+
+@ Water Settings
+tr Su Ayarları
+
+@ Weapon Wheel
+tr Silah Çarkı
+
+@ Weapon Wheel Slowdown
+tr Silah Çarkı Yavaşlatması
+
+@ Weapons
+tr Silahlar
+
+@ Weapons Position
+tr Silah Konumu
+
+@ Where center-screen messages appear
+tr Ekran ortası mesajlarının konumu
+
+@ Where pickup and event messages appear
+tr Toplama ve olay mesajlarının konumu
+
+@ White
+tr Beyaz
+
+@ Yaw Sensitivity
+tr Yatay Hassasiyet
+
+@ Yellow
+tr Sarı
+
+# lowercase choice values
+@ T
+tr T
+
+@ always
+tr her zaman
+
+@ auto
+tr otomatik
+
+@ banded
+tr bantlı
+
+@ borderless
+tr kenarlıksız
+
+@ bottom center
+tr alt orta
+
+@ bottom left
+tr sol alt
+
+@ bottom right
+tr sağ alt
+
+@ box
+tr kutu
+
+@ broken square
+tr kesik kare
+
+@ classic
+tr klasik
+
+@ coarse
+tr kaba
+
+@ cooperative
+tr kooperatif
+
+@ cross
+tr artı
+
+@ cross + dot
+tr artı + nokta
+
+@ cyan
+tr camgöbeği
+
+@ dashed
+tr kesikli
+
+@ deathmatch
+tr deathmatch
+
+@ deuteranopia
+tr döteranopi
+
+@ diagonal streaks
+tr çapraz çizgiler
+
+@ diamond
+tr elmas
+
+@ dot
+tr nokta
+
+@ double
+tr çift
+
+@ double chevrons
+tr çift köşeli ok
+
+@ double diagonals
+tr çift çapraz
+
+@ easy
+tr kolay
+
+@ fine
+tr ince
+
+@ fit output
+tr çıkışa sığdır
+
+@ flick stick
+tr fiske çubuğu
+
+@ fullscreen
+tr tam ekran
+
+@ gap cross
+tr açık artı
+
+@ green
+tr yeşil
+
+@ grey
+tr gri
+
+@ half speed
+tr yarı hız
+
+@ hard
+tr zor
+
+@ high
+tr yüksek
+
+@ huge
+tr devasa
+
+@ immersive
+tr sürükleyici
+
+@ intense
+tr yoğun
+
+@ large
+tr büyük
+
+@ larger
+tr daha büyük
+
+@ largest
+tr en büyük
+
+@ linear
+tr doğrusal
+
+@ low
+tr düşük
+
+@ lower
+tr alt
+
+@ magenta
+tr eflatun
+
+@ medium
+tr orta
+
+@ middle
+tr orta
+
+@ middle left
+tr sol orta
+
+@ middle right
+tr sağ orta
+
+@ modern
+tr modern
+
+@ nearest
+tr en yakın
+
+@ nightmare
+tr kâbus
+
+@ nintendo
+tr nintendo
+
+@ no team damage
+tr takım hasarı yok
+
+@ none
+tr hiçbiri
+
+@ normal
+tr normal
+
+@ off
+tr kapalı
+
+@ off while held
+tr basılıyken kapalı
+
+@ on
+tr açık
+
+@ only while held
+tr yalnızca basılıyken
+
+@ playstation
+tr playstation
+
+@ protanopia
+tr protanopi
+
+@ quarter speed
+tr çeyrek hız
+
+@ red
+tr kırmızı
+
+@ short diagonals
+tr kısa çapraz
+
+@ single
+tr tek
+
+@ small
+tr küçük
+
+@ solid
+tr düz
+
+@ spectacle
+tr gösterişli
+
+@ subtle
+tr hafif
+
+@ team damage
+tr takım hasarı
+
+@ top center
+tr üst orta
+
+@ top left
+tr sol üst
+
+@ top right
+tr sağ üst
+
+@ triple
+tr üçlü
+
+@ tritanopia
+tr tritanopi
+
+@ upper
+tr üst
+
+@ white
+tr beyaz
+
+@ whole screen
+tr tüm ekran
+
+@ windowed
+tr pencereli
+
+@ xbox
+tr xbox
+
+@ yellow
+tr sarı
+
+# ==== tooltips.txt ====
+
+# Options help lines (tooltips) and reasons for disabled rows.
+@ 2D aiming turns the view continuously with the right stick; flick stick snaps the view to where you push the stick, then turning the stick rotates it
+tr 2D nişan görüşü sağ çubukla sürekli döndürür; fiske çubuğu görüşü çubuğu ittiğiniz yöne anında çevirir, ardından çubuğu döndürmek görüşü döndürür
+
+@ 3D resolution relative to the window; the UI stays sharp
+tr Pencereye göre 3D çözünürlük; arayüz net kalır
+
+@ 3D view keeps the HUD and menus sharp; whole screen runs them through the shader too
+tr 3D görünüm HUD ve menüleri net tutar; tüm ekran onları da gölgelendiriciden geçirir
+
+@ A Quake III style railgun: a slug that pierces every enemy on its line, using 2 cells a shot and refiring every 1.5 s; select it through its assigned weapon slot (Add-ons)
+tr Quake III tarzı bir railgun: hattındaki her düşmanı delen bir mermi; atış başına 2 hücre harcar ve 1,5 sn'de bir ateşler; atanmış silah yuvasından seçilir (Eklentiler)
+
+@ A Zelda-style hookshot: fire sends a chain hook out; it latches onto hookable surfaces or enemies and reels you in; fire again to let go
+tr Zelda tarzı bir kanca: ateş zincirli bir kanca fırlatır; kanca tutunabilir yüzeylere veya düşmanlara takılır ve sizi çeker; bırakmak için yeniden ateş edin
+
+@ Also translates the engine's console messages; off keeps them in English
+tr Motorun konsol mesajlarını da çevirir; kapalıyken İngilizce kalırlar
+
+@ Automatically acquire another enemy while holding Lock-on after losing a target
+tr Hedef kaybolduktan sonra Kilitlenme basılı tutulurken otomatik olarak başka bir düşmana kilitlenir
+
+@ Blends between animation frames of monsters and weapons
+tr Canavar ve silahların animasyon kareleri arasında geçiş yapar
+
+@ Blood stains surfaces and bodies; cosmetic, independent of particle packs
+tr Kan yüzeyleri ve bedenleri lekeler; yalnızca görseldir, parçacık paketlerinden bağımsızdır
+
+@ Bloom glow around bright lights and heat sources; medium uses 4 taps, high uses 8, low disables halo taps
+tr Parlak ışıkların ve ısı kaynaklarının çevresinde parıltı; orta 4 örnek, yüksek 8 örnek kullanır, düşük haleyi kapatır
+
+@ Blurs fast-moving monsters, projectiles and doors (not camera turns)
+tr Hızlı hareket eden canavarları, mermileri ve kapıları bulanıklaştırır (kamera dönüşlerini değil)
+
+@ Blurs the screen edges during fast falls and launches; keeps the centre clear. Reduce Motion disables it
+tr Hızlı düşüş ve fırlatılmalarda ekran kenarlarını bulanıklaştırır; ortayı net tutar. Hareketi Azalt bunu kapatır
+
+@ Brightness of the underwater light patterns
+tr Su altındaki ışık desenlerinin parlaklığı
+
+@ Caps mark count, lifetime, airborne droplets and wound/gib painting; low skips enemy wounds and gib trails
+tr Leke sayısını, kalıcılığı, havadaki damlaları ve yara/et parçası lekelerini sınırlar; düşük, düşman yaralarını ve et parçası izlerini atlar
+
+@ Caps shader input at output size so 200% render scale keeps 3D sharpness without 4x shader cost; low scales stay low-res
+tr Gölgelendirici girişini çıkış boyutuyla sınırlar; böylece %200 görüntü ölçeği 4 kat gölgelendirici maliyeti olmadan 3D netliğini korur; düşük ölçekler düşük çözünürlükte kalır
+
+@ Classic: the original status bar; modern: compact elements at the screen edges
+tr Klasik: orijinal durum çubuğu; modern: ekran kenarlarında kompakt öğeler
+
+@ Coat atlas resolution, rebuild rate and shader detail: low builds smaller coats less often with fast shading; high uses full detail
+tr Kaplama atlası çözünürlüğü, yenileme sıklığı ve gölgelendirici ayrıntısı: düşük, daha küçük kaplamaları daha seyrek ve hızlı gölgelendirmeyle oluşturur; yüksek tam ayrıntı kullanır
+
+@ Colour of the railgun's spiral trail; split-screen players each get the next colour along
+tr Railgun'ın sarmal izinin rengi; bölünmüş ekranda her oyuncu sıradaki rengi alır
+
+@ Damage the railgun deals to each enemy it passes through (Quake III: 100)
+tr Railgun'ın içinden geçtiği her düşmana verdiği hasar (Quake III: 100)
+
+@ Dark backdrop behind on-screen messages for readability
+tr Okunabilirlik için ekran mesajlarının arkasında koyu zemin
+
+@ Dark border keeps the crosshair visible on any background
+tr Koyu kenarlık nişangahı her arka planda görünür tutar
+
+@ Darkens corners and contact areas where geometry meets; higher quality is sharper
+tr Geometrinin birleştiği köşeleri ve temas yüzeylerini karartır; yüksek kalite daha keskindir
+
+@ Debris lands on and is carried or shoved by doors, lifts and platforms
+tr Enkaz kapıların, asansörlerin ve platformların üzerine düşer, onlarla taşınır veya itilir
+
+@ Detail for caustics, ripples and splashes: low uses smaller budgets and shorter view distance; high uses larger budgets and farther view distance
+tr Kostikler, dalgalar ve sıçramalar için ayrıntı: düşük daha küçük bütçe ve daha kısa görüş mesafesi, yüksek daha büyük bütçe ve daha uzun görüş mesafesi kullanır
+
+@ Disabled while Enhanced Particles is on: its particles replace the GLQuake and Classic styles
+tr Gelişmiş Parçacıklar açıkken devre dışı: onun parçacıkları GLQuake ve Klasik stillerin yerini alır
+
+@ Disabled while Enhanced Water is on: its own underwater effects replace the classic and GLQuake view warps
+tr Gelişmiş Su açıkken devre dışı: kendi su altı efektleri klasik ve GLQuake görüntü bozulmalarının yerini alır
+
+@ Draw the predicted grenade path as a solid or dashed line
+tr Tahmini bomba yolunu düz veya kesikli çizgiyle çizer
+
+@ Draw the view out of the linked portal inside each portal; off shows flat discs (fastest)
+tr Her portalın içinde bağlı portaldan görünen manzarayı çizer; kapalıyken düz diskler gösterir (en hızlısı)
+
+@ Droplets spray up when things enter or leave water, slime or lava
+tr Bir şey suya, balçığa veya lavlara girip çıktığında damlacıklar sıçrar
+
+@ Emulates the original 8-bit palette of software rendering
+tr Yazılımsal görüntülemenin orijinal 8-bit paletini taklit eder
+
+@ Every level starts with only the shotgun and axe, as if started fresh
+tr Her bölüm, yeni başlamış gibi yalnızca pompalı ve baltayla başlar
+
+@ Explosion damage for each remotely detonated sticky bomb
+tr Uzaktan patlatılan her yapışkan bombanın patlama hasarı
+
+@ Extra freeze milliseconds for every 10 damage dealt, so heavy hits stop longer
+tr Verilen her 10 hasar için ek donma milisaniyesi; böylece ağır vuruşlar daha uzun durdurur
+
+@ First person, a third-person camera centered behind the player, or one over the right or left shoulder; third person hides viewmodels
+tr Birinci şahıs, oyuncunun tam arkasında üçüncü şahıs kamerası veya sağ ya da sol omuz üstü kamera; üçüncü şahıs silah modellerini gizler
+
+@ Flash the selected marker on confirmed hits; colors are shared with the crosshair
+tr Onaylanan isabetlerde seçilen işareti yakıp söndürür; renkler nişangahla ortaktır
+
+@ Freeze for every enemy, or only for enemies that were tough before the hit
+tr Her düşmanda veya yalnızca vuruştan önce güçlü olan düşmanlarda dondur
+
+@ Freeze the game briefly when you damage an enemy; single player with add-ons only
+tr Bir düşmana hasar verdiğinizde oyunu kısaca dondurur; yalnızca eklentili tek oyunculu oyunda
+
+@ Gibs tumble and barrels throw shrapnel; shots and blasts push them (cosmetic only)
+tr Et parçaları yuvarlanır ve variller şarapnel saçar; atışlar ve patlamalar onları iter (yalnızca görsel)
+
+@ Health an enemy must have had before the hit to count as tough
+tr Bir düşmanın güçlü sayılması için vuruştan önce sahip olması gereken sağlık
+
+@ Hits dealing less damage than this do not freeze the game; the default 10 skips nails and shotgun pellets
+tr Bundan az hasar veren vuruşlar oyunu dondurmaz; varsayılan 10 değeri çivileri ve saçmaları atlar
+
+@ Hold fire and sweep the crosshair over monsters to queue them, release to throw: it stuns each in turn and flies back; alt-fire clears the queue
+tr Ateşi basılı tutup nişangahı canavarların üzerinden geçirerek sıraya alın, fırlatmak için bırakın: sırayla her birini sersemletir ve geri döner; alternatif ateş sırayı temizler
+
+@ Hold: keep Lock-on held. Toggle: press Auto-aim Toggle to enable automatic acquisition. Click look stick to switch targets
+tr Basılı Tut: Kilitlenme tuşunu basılı tutun. Aç/Kapat: otomatik kilitlenmeyi açmak için Otomatik Nişan Aç/Kapat tuşuna basın. Hedef değiştirmek için bakış çubuğuna tıklayın
+
+@ How close an enemy must be to the crosshair for automatic acquisition in toggle mode (degrees)
+tr Aç/kapat modunda otomatik kilitlenme için bir düşmanın nişangaha ne kadar yakın olması gerektiği (derece)
+
+@ How far the view tilts up and down when you tilt the controller (pitch axis)
+tr Kumandayı eğdiğinizde görüşün ne kadar yukarı ve aşağı eğileceği (dikey eksen)
+
+@ How far the view turns left and right when you turn the controller (yaw axis)
+tr Kumandayı döndürdüğünüzde görüşün ne kadar sola ve sağa döneceği (yatay eksen)
+
+@ How far the view turns when you drag on the right half of the screen
+tr Ekranın sağ yarısında sürüklediğinizde görüşün ne kadar döneceği
+
+@ How fast the boomerang flies (units per second)
+tr Bumerangın uçuş hızı (saniyede birim)
+
+@ How hard shots and explosions push debris around
+tr Atışların ve patlamaların enkazı ne kadar güçlü ittiği
+
+@ How hard the Powerwasher's water pushes enemies
+tr Basınçlı Yıkayıcı suyunun düşmanları ne kadar güçlü ittiği
+
+@ How long a hit freezes the game, in milliseconds
+tr Bir vuruşun oyunu ne kadar dondurduğu (milisaniye)
+
+@ How strongly fog covers the sky when fog is on
+tr Sis açıkken sisin gökyüzünü ne kadar örttüğü
+
+@ How the view distorts underwater: Classic ripples the whole screen like software Quake, GLQuake slowly stretches and squashes the view
+tr Su altında görüntünün nasıl bozulacağı: Klasik, yazılımsal Quake gibi tüm ekranı dalgalandırır; GLQuake görüntüyü yavaşça gerer ve sıkıştırır
+
+@ Ignores gyro rotation slower than this many degrees per second, to hide hand tremor
+tr El titremesini gizlemek için saniyede bu kadar dereceden yavaş jiroskop dönüşlerini yok sayar
+
+@ Immersive: appears for a few seconds only when its value changes
+tr Sürükleyici: yalnızca değeri değiştiğinde birkaç saniye görünür
+
+@ Keeps textures sharp on floors and walls seen at steep angles
+tr Dik açılardan görülen zemin ve duvarlardaki dokuları keskin tutar
+
+@ Lights from rockets, muzzle flashes and explosions brighten nearby walls
+tr Roketlerin, namlu alevlerinin ve patlamaların ışığı yakındaki duvarları aydınlatır
+
+@ Liquid surfaces swell and ring out where things move through them
+tr Sıvı yüzeyleri, içinden bir şey geçtiğinde kabarır ve halkalar oluşturur
+
+@ Lobs sticky bombs (rockets ammo) that cling to walls, doors and monsters; alt-fire detonates them all
+tr Duvarlara, kapılara ve canavarlara yapışan yapışkan bombalar atar (roket cephanesi); alternatif ateş hepsini patlatır
+
+@ Look of the classic particles: GLQuake draws soft round dots, Classic draws square pixels like software Quake
+tr Klasik parçacıkların görünümü: GLQuake yumuşak yuvarlak noktalar, Klasik yazılımsal Quake gibi kare pikseller çizer
+
+@ Low skips the background smear halo and uses fewer blur samples; high keeps the full halo and smoother streaks
+tr Düşük, arka plan bulaşma halesini atlar ve daha az bulanıklık örneği kullanır; yüksek tam haleyi ve daha yumuşak izleri korur
+
+@ Low: hard particle edges, half the scripted particles and fewer hit sparks. Medium: soft edges. High: soft edges checked per MSAA sample, most hit sparks
+tr Düşük: sert parçacık kenarları, betikli parçacıkların yarısı ve daha az isabet kıvılcımı. Orta: yumuşak kenarlar. Yüksek: MSAA örneği başına denetlenen yumuşak kenarlar, isabet kıvılcımlarının çoğu
+
+@ Marks fade out before expiring; oldest marks are recycled at the limit
+tr Lekeler kaybolmadan önce solar; sınıra ulaşıldığında en eski lekeler yeniden kullanılır
+
+@ Max nested portal reflections to draw; each level redraws the scene
+tr Çizilecek en fazla iç içe portal yansıması; her seviye sahneyi yeniden çizer
+
+@ Max portals per screen with a live view; each one redraws the scene
+tr Ekran başına canlı görüntülü en fazla portal; her biri sahneyi yeniden çizer
+
+@ Maximum distance for acquiring and keeping an enemy locked
+tr Bir düşmana kilitlenmek ve kilidi korumak için en uzun mesafe
+
+@ Minimum gap between freezes, so shotgun pellets and rapid fire count once; kills ignore it
+tr Donmalar arasındaki en kısa aralık; böylece saçmalar ve seri atış bir kez sayılır; öldürmeler bunu yok sayar
+
+@ Modern terminal console with autocomplete popup, history search, ANSI colors, bash shell and piping; off uses the classic Quake console
+tr Otomatik tamamlama penceresi, geçmiş arama, ANSI renkleri, bash kabuğu ve borulama içeren modern terminal konsolu; kapalıyken klasik Quake konsolu kullanılır
+
+@ Monsters take proportionally less damage at higher values; above 100% is harder
+tr Yüksek değerlerde canavarlar orantılı olarak daha az hasar alır; %100'ün üstü daha zordur
+
+@ Moving gibs leave blood on surfaces they touch
+tr Hareket eden et parçaları dokundukları yüzeylerde kan bırakır
+
+@ Multiplier on the freeze when the hit kills the enemy; 1 means no extra
+tr Vuruş düşmanı öldürdüğünde donma çarpanı; 1 ek yok demektir
+
+@ Multiplies ammo from pickups (up to the normal carry limit); below 100% is harder
+tr Toplanan cephaneyi çoğaltır (normal taşıma sınırına kadar); %100'ün altı daha zordur
+
+@ Multiplies health from pickups (up to 100, or the item's own limit); below 100% is harder
+tr Toplanan sağlığı çoğaltır (100'e veya eşyanın kendi sınırına kadar); %100'ün altı daha zordur
+
+@ Nails stick to wood and bodies; hard surfaces deflect them to the floor
+tr Çiviler ahşaba ve bedenlere saplanır; sert yüzeyler onları zemine sektirir
+
+@ Nearest keeps crisp classic pixels; linear smooths textures
+tr En yakın, keskin klasik pikselleri korur; doğrusal dokuları yumuşatır
+
+@ New Game: Add-ons
+tr Yeni Oyun: Eklentiler
+
+@ New Game: Customize
+tr Yeni Oyun: Özelleştir
+
+@ Night vision: how much dark areas are brightened; thermal: how strongly heat stands out
+tr Gece görüşü: karanlık alanların ne kadar aydınlatılacağı; termal: ısının ne kadar belirgin olacağı
+
+@ Night-vision and thermal goggles, cycle normal, night vision and thermal with Change Goggles (Add-ons), or use the Equipment Wheel
+tr Gece görüşü ve termal gözlük; Gözlük Değiştir (Eklentiler) ile normal, gece görüşü ve termal arasında geçin veya Ekipman Çarkı'nı kullanın
+
+@ No single freeze lasts longer than this, however much damage or kill bonus adds
+tr Ne kadar hasar veya öldürme bonusu eklenirse eklensin hiçbir donma bundan uzun sürmez
+
+@ Oldest marks and nails are recycled at this shared limit
+tr En eski lekeler ve çiviler bu ortak sınırda yeniden kullanılır
+
+@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
+tr Ekrandaki çubuk ve düğmeler: otomatik, dokunulduğunda gösterir ve başka bir cihaz kullanıldığında gizler
+
+@ Only autosaves: quicksaves and the Save menu are off
+tr Yalnızca otomatik kayıt: hızlı kayıt ve Kaydet menüsü kapalı
+
+@ Place every weapon at the center, right or left of the view, or hide all viewmodels
+tr Her silahı görüntünün ortasına, sağına veya soluna yerleştirin ya da tüm silah modellerini gizleyin
+
+@ Play your chosen hit or kill cue when you damage an enemy
+tr Bir düşmana hasar verdiğinizde seçtiğiniz isabet veya öldürme sesini çalar
+
+@ Playback speed: faster sounds shorter and higher
+tr Oynatma hızı: daha hızlı, daha kısa ve daha tiz duyulur
+
+@ Plays the Quake theme in the main menu when no game is running
+tr Oyun çalışmıyorken ana menüde Quake temasını çalar
+
+@ Portals farther away than this are drawn as flat discs
+tr Bundan uzaktaki portallar düz diskler olarak çizilir
+
+@ Press attack once to keep firing, again to stop
+tr Sürekli ateş için saldırıya bir kez, durmak için tekrar basın
+
+@ Press run once to switch between running and walking
+tr Koşma ile yürüme arasında geçmek için koşmaya bir kez basın
+
+@ Raise or lower the tone independently of sound length
+tr Ses uzunluğundan bağımsız olarak tonu yükseltir veya alçaltır
+
+@ Red screen edges show where damage came from: top is front, bottom is behind; Screen Flashes controls their strength
+tr Kırmızı ekran kenarları hasarın nereden geldiğini gösterir: üst ön, alt arka demektir; gücünü Ekran Parlamaları belirler
+
+@ Replaces the classic dot particles with glowing sparks, smoke and blood; mods with their own particle effects keep them
+tr Klasik nokta parçacıkların yerine parlayan kıvılcımlar, duman ve kan koyar; kendi parçacık efektleri olan modlar onları korur
+
+@ Resolution and detail inside portal and teleporter views; lower tiers trim nested effects
+tr Portal ve ışınlayıcı görüntülerinin çözünürlüğü ve ayrıntısı; düşük seviyeler iç içe efektleri kısar
+
+@ Rippling light patterns on surfaces under water and slime
+tr Su ve balçık altındaki yüzeylerde dalgalanan ışık desenleri
+
+@ Scales all damage you take; above 100% is harder
+tr Aldığınız tüm hasarı ölçekler; %100'ün üstü daha zordur
+
+@ Screen edge for this element; elements on the same spot stack
+tr Bu öğe için ekran kenarı; aynı yerdeki öğeler üst üste dizilir
+
+@ Seconds a monster hit by the boomerang stays stunned
+tr Bumerangın vurduğu canavarın sersem kaldığı saniye
+
+@ Seconds impact marks and stuck nails stay before fading out; independent of Particle Quality
+tr İsabet izlerinin ve saplanan çivilerin kaybolmadan önce kaldığı saniye; Parçacık Kalitesi'nden bağımsızdır
+
+@ Seconds messages at the top of the screen stay up
+tr Ekranın üstündeki mesajların kaldığı saniye
+
+@ Seconds the flick stick snap takes; lower is faster
+tr Fiske çubuğu dönüşünün süresi (saniye); düşük daha hızlıdır
+
+@ See through enhanced water; enables Water Opacity
+tr Gelişmiş suyun içini görün; Su Opaklığı'nı etkinleştirir
+
+@ Sensor grain, scanlines and flicker of the goggle image
+tr Gözlük görüntüsünün sensör grenleri, tarama çizgileri ve titremesi
+
+@ Shades every anti-aliasing sample; needs Anti-aliasing on
+tr Her kenar yumuşatma örneğini gölgelendirir; Kenar Yumuşatma'nın açık olmasını gerektirir
+
+@ Shifts colors so they stay distinct for the chosen color blindness
+tr Renkleri, seçilen renk körlüğü türünde ayırt edilebilir kalacak şekilde kaydırır
+
+@ Shotgun hits leave small surface marks (cosmetic only)
+tr Pompalı isabetleri yüzeylerde küçük izler bırakır (yalnızca görsel)
+
+@ Show corner ticks at screen centre while locked, even with Crosshair off
+tr Kilitliyken, Nişangah kapalı olsa bile ekran ortasında köşe işaretleri gösterir
+
+@ Show where grenades and other arcing shots will fly, bounce and land; local play only, not in deathmatch
+tr Bombaların ve diğer kavisli atışların nereye uçacağını, sekeceğini ve düşeceğini gösterir; yalnızca yerel oyunda, deathmatch'te değil
+
+@ Shows text for important sounds: doors, alerted enemies, secrets, pickups
+tr Önemli sesler için yazı gösterir: kapılar, uyanan düşmanlar, gizli alanlar, toplanan eşyalar
+
+@ Shows the distance fog that maps and mods set; off always gives clear view
+tr Haritaların ve modların belirlediği mesafe sisini gösterir; kapalıyken görüş hep açıktır
+
+@ Shows the player face next to the health number
+tr Oyuncunun yüzünü sağlık sayısının yanında gösterir
+
+@ Simulation detail, step rate, fade-out lifetimes and caps for gibs and shrapnel; low also skips mover collision
+tr Et parçaları ve şarapnel için simülasyon ayrıntısı, adım hızı, kaybolma süreleri ve sınırlar; düşük, hareketli nesnelerle çarpışmayı da atlar
+
+@ Size of the on-screen buttons and move stick
+tr Ekrandaki düğmelerin ve hareket çubuğunun boyutu
+
+@ Slowly heals up to 100 health after 5 seconds without being hit
+tr 5 saniye boyunca vurulmazsanız yavaşça 100 sağlığa kadar iyileştirir
+
+@ Slows stick look while the crosshair is over an enemy
+tr Nişangah bir düşmanın üzerindeyken çubukla bakışı yavaşlatır
+
+@ Slows the game down while the weapon wheel is open
+tr Silah çarkı açıkken oyunu yavaşlatır
+
+@ Slows the whole game down; single player only. Saves and demos stay compatible with other ports
+tr Tüm oyunu yavaşlatır; yalnızca tek oyunculu. Kayıtlar ve demolar diğer portlarla uyumlu kalır
+
+@ Small camera jolt on each freeze; off with Reduce Motion
+tr Her donmada küçük kamera sarsıntısı; Hareketi Azalt açıkken kapalı
+
+@ Snap and track enemies in local play, including split-screen; unavailable online
+tr Yerel oyunda, bölünmüş ekran dahil, düşmanlara kilitlenir ve onları izler; çevrim içi kullanılamaz
+
+@ Sparks, smoke, chips, splinters and splashes fly off whatever your shots hit
+tr Atışlarınızın vurduğu her yerden kıvılcım, duman, kırıntı, kıymık ve sıçramalar saçılır
+
+@ Spawns extra copies of every monster around the original when a level starts
+tr Bölüm başladığında her canavarın orijinalinin çevresinde ek kopyalarını oluşturur
+
+@ Strength of the full-screen flashes for damage, pickups and powerups
+tr Hasar, toplanan eşyalar ve güçlendiriciler için tam ekran parlamalarının gücü
+
+@ Stretch or shorten the sound while keeping its pitch
+tr Sesi, tonunu koruyarak uzatır veya kısaltır
+
+@ Surface opacity; requires Enhanced Water and Translucent Water
+tr Yüzey opaklığı; Gelişmiş Su ve Yarı Saydam Su gerektirir
+
+@ The hook latches onto metal surfaces (metal, tech, computer panels, copper)
+tr Kanca metal yüzeylere tutunur (metal, teknoloji, bilgisayar panelleri, bakır)
+
+@ The hook latches onto stone, brick, rock and any surface not recognised as wood or metal
+tr Kanca taşa, tuğlaya, kayaya ve ahşap ya da metal olarak tanınmayan her yüzeye tutunur
+
+@ The hook latches onto wooden surfaces (texture names like wood, crate, plank)
+tr Kanca ahşap yüzeylere tutunur (wood, crate, plank gibi doku adları)
+
+@ Turn the controller's motion sensor into a look input; needs a pad with a gyroscope
+tr Kumandanın hareket sensörünü bakış girişine dönüştürür; jiroskoplu bir kumanda gerekir
+
+@ Turns off view bob, strafe tilt and the camera kick when hit or firing
+tr Görüş sallanmasını, yana kayma eğimini ve vurulunca veya ateş edince kamera tepmesini kapatır
+
+@ Turns on the extra liquid effects; Water Settings controls each one
+tr Ek sıvı efektlerini açar; her birini Su Ayarları belirler
+
+@ Turns the view to follow a moving enemy you are aiming at
+tr Nişan aldığınız hareketli bir düşmanı takip etmek için görüşü döndürür
+
+@ Turns the view when you roll the controller sideways; 0 disables it, negative reverses it
+tr Kumandayı yana yatırdığınızda görüşü döndürür; 0 kapatır, negatif tersine çevirir
+
+@ Two-portal gun: fire and alt-fire place linked portals on flat walls; assign a weapon slot in Add-ons
+tr İki portallı silah: ateş ve alternatif ateş düz duvarlara bağlı portallar yerleştirir; Eklentiler'de bir silah yuvası atayın
+
+@ Unlocks the FX Settings page: enhanced particles, impact effects and blood splatter
+tr Efekt Ayarları sayfasını açar: gelişmiş parçacıklar, isabet efektleri ve kan sıçraması
+
+@ Uses the 2021 re-release's smoother MD5 models (and MD3 replacements from mods) instead of the classic ones. Applies on the next map load
+tr Klasik modeller yerine 2021 yeniden sürümünün daha pürüzsüz MD5 modellerini (ve modlardaki MD3 yedeklerini) kullanır. Sonraki harita yüklemesinde uygulanır
+
+@ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
+tr Haritanın renkli ışığını kullanır (.lit dosyası veya BSPX bloğu); kapalıyken orijinal beyaz ışık. Sonraki harita yüklemesinde uygulanır
+
+@ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
+tr Su fışkırması bölümleri, damla sayısı ve parlak sıvı gölgelendirme: düşük daha basit yarı saydam akışlar, yüksek pürüzsüz parlak fışkırmalar kullanır
+
+@ When gyro looking applies: always, off while +gyroaction is held, or only while it is held
+tr Jiroskopla bakışın ne zaman geçerli olduğu: her zaman, +gyroaction basılıyken kapalı veya yalnızca basılıyken
+
+@ Which weapons trigger the freeze; melee covers the axe and any mod weapon used at close range without ammo
+tr Hangi silahların donmayı tetiklediği; yakın dövüş baltayı ve cephanesiz yakın mesafede kullanılan her mod silahını kapsar
+
+@ Your own rockets and grenades don't hurt you; rocket jumps still work
+tr Kendi roketleriniz ve bombalarınız size zarar vermez; roket zıplamaları yine çalışır
+
+# ==== ui.txt ====
+
+# Menus and pop-ups outside the options pages: save cards, launch, presets,
+# add-on browser, map packs, hints and dialogs.
+@ Select
+tr Seç
+
+@ Back
+tr Geri
+
+@ Cancel
+tr İptal
+
+@ Confirm
+tr Onayla
+
+@ Scroll
+tr Kaydır
+
+@ Section
+tr Bölüm
+
+@ Bind
+tr Ata
+
+@ Cancel binding
+tr Atamayı iptal et
+
+@ Clear
+tr Temizle
+
+@ Clear pad
+tr Kumandayı temizle
+
+@ Remap
+tr Yeniden ata
+
+@ Type
+tr Yaz
+
+@ Shift
+tr Shift
+
+@ Done
+tr Bitti
+
+@ Del
+tr Del
+
+@ Space
+tr Boşluk
+
+@ Save
+tr Kaydet
+
+@ Load
+tr Yükle
+
+@ Delete
+tr Sil
+
+@ Play
+tr Oyna
+
+@ Yes
+tr Evet
+
+@ No
+tr Hayır
+
+@ OK
+tr Tamam
+
+@ System
+tr Sistem
+
+@ Language
+tr Dil
+
+@ Help
+tr Yardım
+
+@ Fixed for this game: it was started without Customize
+tr Bu oyun için sabit: oyun Özelleştir olmadan başlatıldı
+
+@ Press a button or key to bind (Start cancels)
+tr Atamak için bir düğmeye veya tuşa basın (Start iptal eder)
+
+@ Press button...
+tr Düğmeye basın...
+
+@ Press key...
+tr Tuşa basın...
+
+@ Replace this binding?
+tr Bu atama değiştirilsin mi?
+
+@ is already assigned
+tr zaten atanmış
+
+@ {} already assigned
+tr Zaten atanmış: {}
+
+@ Open Controls to remap Lock-on?
+tr Kilitlenme'yi yeniden atamak için Kontroller açılsın mı?
+
+@ Lock-on
+tr Kilitlenme
+
+@ Auto-aim Toggle
+tr Otomatik Nişan Aç/Kapat
+
+@ Keyboard
+tr Klavye
+
+@ Controller
+tr Kumanda
+
+# main menu, dialogs and screens
+@ Map Packs
+tr Harita Paketleri
+
+@ Customize
+tr Özelleştir
+
+@ Level Select
+tr Bölüm Seçimi
+
+@ Really quit?
+tr Gerçekten çıkılsın mı?
+
+@ You died
+tr Öldünüz
+
+@ Continue from most recent save
+tr En son kayıttan devam et
+
+@ Select save
+tr Kayıt seç
+
+@ Restart level
+tr Bölümü yeniden başlat
+
+@ Return to main menu
+tr Ana menüye dön
+
+@ (disabled)
+tr (devre dışı)
+
+@ (fixed for this game)
+tr (bu oyun için sabit)
+
+@ (off)
+tr (kapalı)
+
+@ Apply Display Changes
+tr Ekran Değişikliklerini Uygula
+
+@ Display Mode
+tr Ekran Modu
+
+@ Resolution
+tr Çözünürlük
+
+@ desktop
+tr masaüstü
+
+@ Preset
+tr Hazır Ayar
+
+@ Map
+tr Harita
+
+@ Reset Shader Settings
+tr Gölgelendirici Ayarlarını Sıfırla
+
+@ Reset to Defaults
+tr Varsayılanlara Sıfırla
+
+@ Searching...
+tr Aranıyor...
+
+@ This game only autosaves.
+tr Bu oyun yalnızca otomatik kayıt yapar.
+
+@ (No Manual Saves modifier)
+tr (Elle Kayıt Yok değiştiricisi)
+
+@ End the current game?
+tr Mevcut oyun bitirilsin mi?
+
+@ Unsaved progress will be lost.
+tr Kaydedilmemiş ilerleme kaybolacak.
+
+@ End game
+tr Oyunu bitir
+
+@ Overwrite
+tr Üzerine yaz
+
+@ Overwrite "{}"?
+tr "{}" üzerine yazılsın mı?
+
+@ Saved {}
+tr Kaydedildi: {}
+
+@ Start a new game?
+tr Yeni oyun başlatılsın mı?
+
+@ New game
+tr Yeni oyun
+
+@ New Game
+tr Yeni Oyun
+
+@ CUSTOM
+tr ÖZEL
+
+@ Customize Experience
+tr Deneyimi Özelleştir
+
+@ Disable All
+tr Tümünü Kapat
+
+@ Disable All Modifications
+tr Tüm Değişiklikleri Kapat
+
+@ Saves load in other source ports too.
+tr Kayıtlar diğer kaynak portlarında da yüklenir.
+
+@ Standard rules, no add-ons.
+tr Standart kurallar, eklenti yok.
+
+@ Choose skill
+tr Zorluk seçin
+
+@ The current game will end
+tr Mevcut oyun bitecek
+
+@ Easy
+tr Kolay
+
+@ Normal
+tr Normal
+
+@ Hard
+tr Zor
+
+@ Nightmare
+tr Kâbus
+
+# graphics preset pop-up
+@ Choose a Graphics Preset
+tr Grafik Hazır Ayarı Seçin
+
+@ Classic
+tr Klasik
+
+@ Like the re-release: enhanced models,
+tr Yeniden sürüm gibi: gelişmiş modeller,
+
+@ no added effects.
+tr ek efekt yok.
+
+@ Enhanced
+tr Gelişmiş
+
+@ Every enhancement at its highest quality.
+tr Tüm geliştirmeler en yüksek kalitede.
+
+@ Needs a capable GPU.
+tr Güçlü bir GPU gerektirir.
+
+@ Low-End
+tr Düşük Donanım
+
+@ Fastest. No anti-aliasing, original
+tr En hızlısı. Kenar yumuşatma yok, orijinal
+
+@ models, lowest effect quality.
+tr modeller, en düşük efekt kalitesi.
+
+@ Esc keeps the defaults
+tr Esc varsayılanları korur
+
+@ Everything can be changed later in Options.
+tr Her şey daha sonra Options'tan değiştirilebilir.
+
+@ Keep Defaults
+tr Varsayılanları Koru
+
+# save and load cards
+@ Save Game
+tr Oyunu Kaydet
+
+@ Load Game
+tr Oyun Yükle
+
+@ Autosaves
+tr Otomatik Kayıtlar
+
+@ newest first
+tr en yeni önce
+
+@ Saves: {}
+tr Kayıtlar: {}
+
+@ Browse Autosaves
+tr Otomatik Kayıtlara Göz At
+
+@ Every retained autosave, newest first
+tr Saklanan tüm otomatik kayıtlar, en yeni önce
+
+@ New save
+tr Yeni kayıt
+
+@ Select to save your game here
+tr Oyununuzu buraya kaydetmek için seçin
+
+@ No autosaves yet
+tr Henüz otomatik kayıt yok
+
+@ Autosaves are made on level entry, secrets and more (Options > Gameplay)
+tr Otomatik kayıtlar bölüm girişinde, gizli alanlarda ve başka durumlarda yapılır (Options > Oynanış)
+
+@ No saves yet
+tr Henüz kayıt yok
+
+@ Save from the Single Player menu, or press F6 to quicksave
+tr Single Player menüsünden kaydedin veya hızlı kayıt için F6'ya basın
+
+@ No picture
+tr Resim yok
+
+@ Del: delete save
+tr Del: kaydı sil
+
+@ Delete "{}"?
+tr "{}" silinsin mi?
+
+@ This cannot be undone.
+tr Bu işlem geri alınamaz.
+
+@ Quicksave
+tr Hızlı Kayıt
+
+@ Autosave: {}
+tr Otomatik Kayıt: {}
+
+@ unknown trigger
+tr bilinmeyen tetikleyici
+
+@ Latest - {}
+tr En son - {}
+
+@ Health {}
+tr Sağlık {}
+
+@ Armor {}
+tr Zırh {}
+
+@ Kills {}/{}
+tr Öldürme {}/{}
+
+@ Secrets {}/{}
+tr Gizli Alan {}/{}
+
+@ Split-screen, {} players
+tr Bölünmüş ekran, {} oyuncu
+
+@ Co-op
+tr Ortak Oyun
+
+@ Customized
+tr Özelleştirilmiş
+
+@ Customized, {}
+tr Özelleştirilmiş, {}
+
+@ Date unavailable
+tr Tarih yok
+
+@ Just now
+tr Az önce
+
+@ {} min ago
+tr {} dk önce
+
+@ {} h ago
+tr {} sa önce
+
+@ Level entry
+tr Bölüm girişi
+
+@ Secret found
+tr Gizli alan bulundu
+
+@ All enemies killed
+tr Tüm düşmanlar öldürüldü
+
+@ All secrets found
+tr Tüm gizli alanlar bulundu
+
+@ Timer
+tr Zamanlayıcı
+
+# customize pages
+@ Standard rules
+tr Standart kurallar
+
+@ Modifiers changed: {}
+tr Değişen değiştiriciler: {}
+
+@ no add-ons
+tr eklenti yok
+
+@ add-ons: {}
+tr eklentiler: {}
+
+@ Saves of this game are .qsa files: they need this source port.
+tr Bu oyunun kayıtları .qsa dosyalarıdır: bu kaynak portu gerektirir.
+
+@ Nothing changed: this plays as standard Quake.
+tr Hiçbir şey değişmedi: standart Quake olarak oynanır.
+
+@ Changes apply now and are saved with this game (.qsa).
+tr Değişiklikler hemen uygulanır ve bu oyunla kaydedilir (.qsa).
+
+@ This game started without Customize, so its rules are fixed.
+tr Bu oyun Özelleştir olmadan başlatıldı, kuralları sabittir.
+
+@ Start a new game and choose Customize Experience.
+tr Yeni bir oyun başlatın ve Deneyimi Özelleştir'i seçin.
+
+@ These rules apply to the next customized game.
+tr Bu kurallar sonraki özelleştirilmiş oyuna uygulanır.
+
+# add-on browser
+@ Fire
+tr Ateş
+
+@ Alt Fire
+tr Alternatif Ateş
+
+@ Configure Parameters >
+tr Parametreleri Yapılandır >
+
+@ Configure
+tr Yapılandır
+
+@ Settings
+tr Ayarlar
+
+@ Change slot
+tr Yuvayı değiştir
+
+@ Toggle
+tr Aç/Kapat
+
+@ Details
+tr Ayrıntılar
+
+@ Enter or click the box: toggle
+tr Enter veya kutuya tıkla: aç/kapat
+
+@ Right / Tab / click: details
+tr Sağ / Tab / tıkla: ayrıntılar
+
+@ Input Remapping
+tr Giriş Yeniden Atama
+
+@ Weapon Slot
+tr Silah Yuvası
+
+@ Customized games save as .qsa files, which need this source port.
+tr Özelleştirilmiş oyunlar .qsa dosyası olarak kaydedilir; bunlar bu kaynak portu gerektirir.
+
+@ This game started without Customize, so its add-ons are fixed. Customize a new game instead.
+tr Bu oyun Özelleştir olmadan başlatıldı, eklentileri sabittir. Bunun yerine yeni bir oyunu özelleştirin.
+
+@ Bullet Time
+tr Bullet Time
+
+@ Change Goggles
+tr Gözlük Değiştir
+
+@ Dodge / Dive
+tr Kaçınma / Atılma
+
+@ Goggles
+tr Gözlük
+
+@ Hitstop
+tr Hitstop
+
+@ Projectile Shotguns
+tr Mermili Pompalılar
+
+@ BULLET TIME: 20%
+tr BULLET TIME: %20
+
+@ NORMAL SPEED
+tr NORMAL HIZ
+
+@ SLOW MOTION: PHYSICAL PELLETS
+tr AĞIR ÇEKİM: FİZİKSEL SAÇMALAR
+
+@ DEMONSTRATION
+tr GÖSTERİM
+
+@ GAMEPLAY
+tr OYNANIŞ
+
+@ LOOP
+tr DÖNGÜ
+
+@ Preview unavailable
+tr Önizleme yok
+
+# shader and language help lines
+@ A setting of the chosen shader; arrows step it, Enter is not needed
+tr Seçilen gölgelendiricinin bir ayarı; ok tuşları değiştirir, Enter gerekmez
+
+@ Language of the menus, messages and the 2021 re-release's game text; System follows your computer's language
+tr Menülerin, mesajların ve 2021 yeniden sürümünün oyun metinlerinin dili; Sistem bilgisayarınızın dilini izler
+
+@ Puts every setting of the chosen shader back to the preset's defaults
+tr Seçilen gölgelendiricinin tüm ayarlarını hazır ayarın varsayılanlarına döndürür
+
+@ RetroArch slang shader on the final image: CRT, scanlines, NTSC, sharpening; add your own in <game>/shaders
+tr Son görüntüye RetroArch slang gölgelendiricisi: CRT, tarama çizgileri, NTSC, keskinleştirme; kendinizinkileri <oyun>/shaders içine ekleyin
+
+# modern console footer
+@ Shift+PgUp/Dn: height  ` : hide
+tr Shift+PgUp/Dn: yükseklik  ` : gizle
+
+@ Tab: complete  Ctrl+R: search  bash | pipe
+tr Tab: tamamla  Ctrl+R: ara  bash | boru
+
+@ ↑ +{} lines (End to jump) 
+tr ↑ +{} satır (atlamak için End) 
+
+# add-on descriptions
+@ Create two linked portals on flat walls. Fire places the first portal; Alt Fire places the second. Walk through either portal to emerge from the other. Your momentum carries through. Assign a weapon slot below: pressing that slot repeatedly cycles its ordinary weapon and every enabled add-on assigned there. Portal view quality is configurable below.
+tr Düz duvarlarda birbirine bağlı iki portal oluşturun. Ateş ilk portalı, Alternatif Ateş ikinciyi yerleştirir. Birinden girip diğerinden çıkın; hızınız korunur. Aşağıdan bir silah yuvası atayın: o yuvaya tekrar tekrar basmak normal silahı ve oraya atanmış her etkin eklenti arasında geçiş yapar. Portal görüntü kalitesi aşağıdan ayarlanabilir.
+
+@ Hold Fire and sweep the crosshair over monsters to queue targets. Release Fire to throw: the boomerang visits each target, stuns it and returns to you. Alt Fire clears the queue. The weapon slot selects a group, not a separate hotkey: press it again to cycle through the weapons in that slot. Configure stun duration and flight speed below.
+tr Ateşi basılı tutun ve hedefleri sıraya almak için nişangahı canavarların üzerinden geçirin. Fırlatmak için Ateşi bırakın: bumerang her hedefe gider, onu sersemletir ve size geri döner. Alternatif Ateş sırayı temizler. Silah yuvası ayrı bir kısayol değil, bir grup seçer: o yuvadaki silahlar arasında geçmek için tekrar basın. Sersemletme süresi ve uçuş hızı aşağıdan ayarlanabilir.
+
+@ Hold Fire to charge a sticky bomb using rocket ammunition; release to launch. A longer charge throws it faster. Bombs cling to walls, doors and monsters. Alt Fire detonates your planted bombs together. Place a trap, retreat, then detonate it when enemies approach. Assign any weapon slot below; repeated presses cycle through the ordinary weapon and add-ons in that slot.
+tr Roket cephanesiyle yapışkan bomba doldurmak için Ateşi basılı tutun; fırlatmak için bırakın. Daha uzun doldurmak onu daha hızlı fırlatır. Bombalar duvarlara, kapılara ve canavarlara yapışır. Alternatif Ateş yerleştirdiğiniz bombaları birlikte patlatır. Bir tuzak kurun, geri çekilin ve düşmanlar yaklaşınca patlatın. Aşağıdan herhangi bir silah yuvası atayın; tekrar basmak o yuvadaki normal silah ve eklentiler arasında geçiş yapar.
+
+@ Fire launches a chain hook. It latches onto a permitted surface or enemy and reels you toward the anchor. Fire again or use Alt Fire to let go. Choose which materials and enemies can be hooked in Configure Parameters. Assign it to any weapon slot; repeated presses of the slot's existing binding cycle through its weapons.
+tr Ateş zincirli bir kanca fırlatır. Kanca izin verilen bir yüzeye veya düşmana takılır ve sizi tutunma noktasına çeker. Bırakmak için tekrar ateş edin veya Alternatif Ateş'i kullanın. Hangi malzemelere ve düşmanlara kancalanabileceğini Parametreleri Yapılandır'dan seçin. Herhangi bir silah yuvasına atayın; yuvanın mevcut tuşuna tekrar basmak silahları arasında geçiş yapar.
+
+@ A piercing railgun inspired by Quake III. Fire sends a slug through every enemy along its line. Each shot consumes two cells, with a 1.5 second refire interval. Damage and the spiral trail colour are configurable below. Choose a weapon slot: the slot's current binding selects and cycles the weapons assigned to it.
+tr Quake III'ten esinlenen delici bir railgun. Ateş, hattı üzerindeki her düşmanın içinden geçen bir mermi gönderir. Her atış iki hücre harcar ve yeniden ateş aralığı 1,5 saniyedir. Hasar ve sarmal iz rengi aşağıdan ayarlanabilir. Bir silah yuvası seçin: yuvanın mevcut tuşu oraya atanan silahları seçer ve aralarında geçiş yapar.
+
+@ A Portal-style gel sprayer. Fire sprays blue Repulsion gel: land, jump or run into it to bounce, and landings on it never hurt. Alt Fire sprays orange Propulsion gel: run across it to go much faster. Gel coats floors and walls until washed off with the Powerwasher. Assign a weapon slot below; repeated presses cycle the weapons in that slot.
+tr Portal tarzı bir jel püskürtücü. Ateş mavi İtme jeli püskürtür: sekmek için üzerine düşün, zıplayın veya koşun; üzerine düşmek asla acıtmaz. Alternatif Ateş turuncu Hız jeli püskürtür: çok daha hızlı gitmek için üzerinden koşun. Jel, Basınçlı Yıkayıcı ile yıkanana kadar zemini ve duvarları kaplar. Aşağıdan bir silah yuvası atayın; tekrar basmak o yuvadaki silahlar arasında geçiş yapar.
+
+@ A water cannon. Fire shoots a straight jet with limited reach; Alt Fire a wide, shorter fan. The water pushes enemies back, turns projectiles aside and washes away gel and blood. Push strength is configurable below. Assign a weapon slot below; repeated presses cycle the weapons in that slot.
+tr Bir su topu. Ateş menzili sınırlı düz bir fışkırma, Alternatif Ateş geniş ve daha kısa bir yelpaze atar. Su düşmanları geri iter, mermileri saptırır, jeli ve kanı yıkar. İtme gücü aşağıdan ayarlanabilir. Aşağıdan bir silah yuvası atayın; tekrar basmak o yuvadaki silahlar arasında geçiş yapar.
+
+@ One equipment add-on includes both night vision and thermal vision. The Change Goggles action cycles Normal, Night Vision, Thermal, then Normal again. Night vision brightens dark rooms; thermal vision highlights living enemies. Goggles do not occupy a weapon slot. Configure intensity and sensor noise below. The binding affects only this add-on.
+tr Tek bir ekipman eklentisi hem gece görüşü hem termal görüş içerir. Gözlük Değiştir eylemi Normal, Gece Görüşü, Termal ve yeniden Normal arasında geçiş yapar. Gece görüşü karanlık odaları aydınlatır; termal görüş canlı düşmanları vurgular. Gözlük bir silah yuvası kaplamaz. Yoğunluk ve sensör gürültüsü aşağıdan ayarlanabilir. Tuş ataması yalnızca bu eklentiyi etkiler.
+
+@ Press Dodge with a movement direction on the ground or in midair: dive forward or leap backward and sideways. Diagonals are supported. Each press launches once, with a short recovery. The player body animates in third person. Assign the Dodge action below or in Controls.
+tr Yerdeyken veya havadayken bir hareket yönüyle birlikte Kaçınma'ya basın: ileri atılın ya da geriye ve yana sıçrayın. Çapraz yönler desteklenir. Her basış bir kez fırlatır, ardından kısa bir toparlanma gelir. Oyuncu bedeni üçüncü şahısta canlandırılır. Kaçınma eylemini aşağıdan veya Kontroller'den atayın.
+
+@ Use the dedicated Bullet Time action to slow the whole local game to 20% speed. Hold is the default; Toggle switches on each press. The optional meter limits use in real seconds and regenerates while inactive. Disable the meter for unlimited use. Remap the action and configure duration and regeneration below.
+tr Tüm yerel oyunu %20 hıza yavaşlatmak için özel Bullet Time eylemini kullanın. Varsayılan Basılı Tut'tur; Aç/Kapat her basışta değiştirir. İsteğe bağlı gösterge kullanımı gerçek saniyelerle sınırlar ve kullanılmadığında dolar. Sınırsız kullanım için göstergeyi kapatın. Eylemi yeniden atayın, süreyi ve dolumu aşağıdan ayarlayın.
+
+@ Both shotguns and enemy grunts fire physical pellets with their original spread and damage. Fast default projectiles feel immediate; lower their speed to dodge incoming fire during bullet time. Configure projectile speed below, or reset it to the default of 10000 units per second.
+tr Her iki pompalı ve asker düşmanlar orijinal yayılma ve hasarla fiziksel saçmalar atar. Hızlı varsayılan mermiler anında hissedilir; bullet time sırasında gelen ateşten kaçmak için hızlarını düşürün. Mermi hızını aşağıdan ayarlayın veya saniyede 10000 birimlik varsayılana sıfırlayın.
+
+@ Freezes the game for a split second when you damage an enemy, so hits feel heavier. Single player only. Choose which weapons trigger it (all, melee, ranged or explosives), how long it lasts and how much more a kill freezes. Advanced settings cover enemy toughness, damage scaling, cooldown and the longest freeze.
+tr Bir düşmana hasar verdiğinizde oyunu bir anlığına dondurur; böylece vuruşlar daha ağır hissettirir. Yalnızca tek oyunculu. Hangi silahların tetikleyeceğini (tümü, yakın dövüş, uzak menzil veya patlayıcılar), ne kadar süreceğini ve öldürmenin donmayı ne kadar uzatacağını seçin. Gelişmiş ayarlar düşman dayanıklılığını, hasar ölçeklemeyi, bekleme süresini ve en uzun donmayı kapsar.
+
+# map packs and the Quaddicted browser
+@ Get more maps (Quaddicted)...
+tr Daha fazla harita (Quaddicted)...
+
+@ Type to filter...
+tr Filtrelemek için yazın...
+
+@ Launch mod
+tr Modu başlat
+
+@ Start first map
+tr İlk haritayı başlat
+
+@ (running)
+tr (çalışıyor)
+
+@ running
+tr çalışıyor
+
+@ Recent
+tr Son
+
+@ Name
+tr Ad
+
+@ Dir
+tr Klasör
+
+@ Default
+tr Varsayılan
+
+@ Title
+tr Başlık
+
+@ Sort: {}
+tr Sıralama: {}
+
+@ {} installed
+tr Kurulu: {}
+
+@ {}/{} matching
+tr Eşleşen: {}/{}
+
+@ {} maps, {} completed
+tr {} harita, {} tamamlanmış
+
+@ {}/{} matching, {} completed
+tr Eşleşen: {}/{}, tamamlanmış: {}
+
+@ no maps of its own
+tr kendi haritası yok
+
+@ dir: {}
+tr klasör: {}
+
+@ base: {}
+tr temel: {}
+
+@ Browse the Quaddicted archive of
+tr Quaddicted arşivindeki tek oyunculu
+
+@ single-player maps and episodes,
+tr haritalara ve epizotlara göz atın,
+
+@ then download and install them
+tr ardından bunları buradan indirip
+
+@ here. Each release gets its own
+tr kurun. Her yayın bu listede kendi
+
+@ entry in this list.
+tr girişine sahip olur.
+
+@ Needs an internet connection.
+tr İnternet bağlantısı gerektirir.
+
+@ Quaddicted Map Archive
+tr Quaddicted Harita Arşivi
+
+@ Newest
+tr En Yeni
+
+@ Author
+tr Yapımcı
+
+@ Size
+tr Boyut
+
+@ Loading the map list...
+tr Harita listesi yükleniyor...
+
+@ Couldn't load the map list: {}
+tr Harita listesi yüklenemedi: {}
+
+@ {} single-player releases  -  F5 refreshes
+tr {} tek oyunculu yayın  -  F5 yeniler
+
+@ {} matching
+tr Eşleşen: {}
+
+@ by {}
+tr Yapımcı: {}
+
+@ requires: {}
+tr gerekenler: {}
+
+@ maps: {}
+tr haritalar: {}
+
+@ Failed: {}
+tr Başarısız: {}
+
+@ Downloading... {}%
+tr İndiriliyor... %{}
+
+@ Unpacking...
+tr Açılıyor...
+
+@ Installed in {}/  -  Enter: play
+tr Kuruldu: {}/  -  Enter: oyna
+
+@ Enter: download and install
+tr Enter: indir ve kur
+
+@ unpacking
+tr açılıyor
+
+@ failed
+tr başarısız
+
+@ installed
+tr kurulu
+
+@ Downloads are not available in the browser build
+tr İndirmeler tarayıcı sürümünde kullanılamaz
+
+@ the map list could not be read
+tr harita listesi okunamadı
+
+@ downloading needs the curl program
+tr indirme için curl programı gerekir
+
+@ download failed
+tr indirme başarısız
+
+@ the download is not a valid zip
+tr indirilen dosya geçerli bir zip değil
+
+@ nothing to install for this engine
+tr bu motor için kurulacak bir şey yok
+
+@ needs {} installed first
+tr önce şunun kurulması gerekir: {}
+
+@ couldn't unpack {}
+tr açılamadı: {}
+
+# help screen
+@ About
+tr Hakkında
+
+@ < Back
+tr < Geri
+
+# tr_ctx keys: English shows the short word, the key says which meaning
+@ Save (a manual save, as opposed to a quicksave or autosave)
+tr Kayıt
+
+# ==== hud.txt ====
+
+# HUD, weapon and equipment wheels, sound captions and other in-game text.
+# Weapon, monster and item names follow the 2021 re-release's own translations.
+@ Axe
+tr Balta
+
+@ Shotgun
+tr Pompalı Tüfek
+
+@ Double-Barrelled Shotgun
+tr Çift Namlulu Tüfek
+
+@ Nailgun
+tr Çivi Tabancası
+
+@ Super Nailgun
+tr Süper Çivi Tabancası
+
+@ Grenade Launcher
+tr Bomba Atar
+
+@ Rocket Launcher
+tr Roketatar
+
+@ Thunderbolt
+tr Yıldırım
+
+@ Portal Gun
+tr Portal Silahı
+
+@ Boomerang
+tr Bumerang
+
+@ Stickybomb Launcher
+tr Yapışkan Bomba Atar
+
+@ Railgun
+tr Railgun
+
+@ Hookshot
+tr Kanca
+
+@ Gel Sprayer
+tr Jel Püskürtücü
+
+@ Powerwasher
+tr Basınçlı Yıkayıcı
+
+@ Night Vision Goggles
+tr Gece Görüş Gözlüğü
+
+@ Thermal Goggles
+tr Termal Gözlük
+
+@ Normal vision
+tr Normal görüş
+
+@ ON
+tr AÇIK
+
+@ OFF
+tr KAPALI
+
+@ {} (turn on)
+tr {} (aç)
+
+@ {} (turn off)
+tr {} (kapat)
+
+@ Move mouse to select, release to toggle
+tr Fareyle seçin, açıp kapatmak için bırakın
+
+@ Move mouse to select, release to equip
+tr Fareyle seçin, kuşanmak için bırakın
+
+@ Release to toggle
+tr Açıp kapatmak için bırakın
+
+@ Release to equip
+tr Kuşanmak için bırakın
+
+@ shells
+tr fişek
+
+@ nails
+tr çivi
+
+@ rockets
+tr roket
+
+@ cells
+tr hücre
+
+@ Kills: {}/{}
+tr Öldürme: {}/{}
+
+@ Secrets: {}/{}
+tr Gizli Alan: {}/{}
+
+@ Time {}
+tr Süre {}
+
+@ Press any button to continue...
+tr Devam etmek için bir düğmeye basın...
+
+@ Press any key to continue...
+tr Devam etmek için bir tuşa basın...
+
+@ BULLET TIME
+tr BULLET TIME
+
+@ AUTO AIM
+tr OTOMATİK NİŞAN
+
+@ Crosshair
+tr Nişangah
+
+@ + Marker
+tr + İşaret
+
+@ Hit markers off
+tr İsabet işaretleri kapalı
+
+@ On target
+tr Hedefte
+
+@ On kill
+tr Öldürünce
+
+# sound captions
+@ [Secret found]
+tr [Gizli alan bulundu]
+
+@ [Message]
+tr [Mesaj]
+
+@ [Switch activated]
+tr [Şalter etkinleşti]
+
+@ [Key picked up]
+tr [Anahtar alındı]
+
+@ [Rune picked up]
+tr [Rün alındı]
+
+@ [Teleporter]
+tr [Işınlayıcı]
+
+@ [Teleport]
+tr [Işınlanma]
+
+@ [Splash]
+tr [Şıpırtı]
+
+@ [Leaving water]
+tr [Sudan çıkış]
+
+@ [Door]
+tr [Kapı]
+
+@ [Platform moving]
+tr [Platform hareket ediyor]
+
+@ [Button]
+tr [Düğme]
+
+@ [Health picked up]
+tr [Sağlık alındı]
+
+@ [Armor picked up]
+tr [Zırh alındı]
+
+@ [Quad Damage wearing off]
+tr [Quad Damage bitiyor]
+
+@ [Quad Damage]
+tr [Quad Damage]
+
+@ [Pentagram wearing off]
+tr [Pentagram bitiyor]
+
+@ [Pentagram of Protection]
+tr [Koruma Pentagramı]
+
+@ [Ring wearing off]
+tr [Yüzük bitiyor]
+
+@ [Ring of Shadows]
+tr [Gölgeler Yüzüğü]
+
+@ [Biosuit wearing off]
+tr [Biyogiysi bitiyor]
+
+@ [Biosuit]
+tr [Biyogiysi]
+
+@ [Item picked up]
+tr [Eşya alındı]
+
+@ [Weapon picked up]
+tr [Silah alındı]
+
+@ [Ammo picked up]
+tr [Cephane alındı]
+
+@ [Explosion]
+tr [Patlama]
+
+@ [Grenade launched]
+tr [Bomba atıldı]
+
+@ [Grenade bounce]
+tr [Bomba sekiyor]
+
+@ [Rocket fired]
+tr [Roket atıldı]
+
+@ [Nails fired]
+tr [Çivi atıldı]
+
+@ [Lightning]
+tr [Şimşek]
+
+@ [Thunder]
+tr [Gök gürültüsü]
+
+@ [Enforcer alerted]
+tr [Enforcer fark etti]
+
+@ [Grunt alerted]
+tr [Grunt fark etti]
+
+@ [Rottweiler alerted]
+tr [Rottweiler fark etti]
+
+@ [Knight alerted]
+tr [Knight fark etti]
+
+@ [Death Knight alerted]
+tr [Death Knight fark etti]
+
+@ [Scrag alerted]
+tr [Scrag fark etti]
+
+@ [Ogre alerted]
+tr [Ogre fark etti]
+
+@ [Fiend alerted]
+tr [Fiend fark etti]
+
+@ [Shambler alerted]
+tr [Shambler fark etti]
+
+@ [Zombie groaning]
+tr [Zombi inliyor]
+
+@ [Vore alerted]
+tr [Vore fark etti]
+
+@ [Vore attacking]
+tr [Vore saldırıyor]
+
+@ [Spawn alerted]
+tr [Spawn fark etti]
+
+@ [Rotfish]
+tr [Rotfish]
+
+@ [Spawn]
+tr [Spawn]
+
+@ [Chthon]
+tr [Chthon]
+
+@ [Hard landing]
+tr [Sert iniş]
+
+@ [Drowning]
+tr [Boğulma]
+
+@ [Gasping for air]
+tr [Nefes nefese]
+
+@ [Burning]
+tr [Yanma]
+
+@ [Telefrag]
+tr [Telefrag]
+
+@ [Gibbed]
+tr [Parçalandı]
+
+# ==== console.txt ====
+
+# Console messages, shown translated only with con_translate 1 (Translate Console).
+# Cvar and command names stay as they are.
+@ Autosaved.
+tr Otomatik kaydedildi.
+
+@ Game saved.
+tr Oyun kaydedildi.
+
+@ Can't save now.
+tr Şu anda kaydedilemez.
+
+@ This game only autosaves (No Manual Saves modifier).
+tr Bu oyun yalnızca otomatik kayıt yapar (Elle Kayıt Yok değiştiricisi).
+
+@ Loading {}...
+tr Yükleniyor: {}...
+
+@ load failed: {}
+tr yükleme başarısız: {}
+
+@ ERROR: autosave failed: {}
+tr HATA: otomatik kayıt başarısız: {}
+
+@ ERROR: couldn't open {}
+tr HATA: açılamadı: {}
+
+@ ERROR: couldn't open {}.
+tr HATA: açılamadı: {}.
+
+@ ERROR: couldn't write {}: {}
+tr HATA: yazılamadı: {}: {}
+
+@ ERROR: couldn't create {}: {}
+tr HATA: oluşturulamadı: {}: {}
+
+@ couldn't write {}: {}
+tr yazılamadı: {}: {}
+
+@ Wrote {}
+tr Yazıldı: {}
+
+@ screenshot failed: {}
+tr ekran görüntüsü başarısız: {}
+
+@ screenshot: {}
+tr ekran görüntüsü: {}
+
+@ No readable save available. Select save or restart the level.
+tr Okunabilir kayıt yok. Bir kayıt seçin veya bölümü yeniden başlatın.
+
+@ Unknown command "{}"
+tr Bilinmeyen komut "{}"
+
+@ couldn't exec {}
+tr çalıştırılamadı: {}
+
+@ execing {}
+tr çalıştırılıyor: {}
+
+@ execing config.cfg (inherited from {})
+tr config.cfg çalıştırılıyor (devralındığı yer: {})
+
+@ execing config.cfg (mod defaults)
+tr config.cfg çalıştırılıyor (mod varsayılanları)
+
+@ execing default.cfg (built-in)
+tr default.cfg çalıştırılıyor (yerleşik)
+
+@ {} cvars
+tr {} değişken
+
+@ {} commands
+tr {} komut
+
+@ Can't "cmd", not connected
+tr "cmd" kullanılamaz, bağlı değil
+
+@ Looking for Quake servers...
+tr Quake sunucuları aranıyor...
+
+@ Bad value, must be between 1 and 65534
+tr Geçersiz değer, 1 ile 65534 arasında olmalı
+
+@ Couldn't handle music file {}
+tr Müzik dosyası işlenemedi: {}
+
+@ Bug report written to {}
+tr Hata raporu yazıldı: {}
+
+@ bugreport: can't create {}: {}
+tr bugreport: oluşturulamadı: {}: {}
+
+@ graphics preset: {}
+tr grafik hazır ayarı: {}
+
+@ Presets (r_shader_preset <name>):
+tr Hazır ayarlar (r_shader_preset <ad>):
+
+@ Add your own .slangp presets under <game>/shaders/.
+tr Kendi .slangp hazır ayarlarınızı <oyun>/shaders/ altına ekleyin.
+
+@ no shader preset loaded (r_shader_preset)
+tr yüklü gölgelendirici hazır ayarı yok (r_shader_preset)
+
+@ r_shader_preset: "{}" not found
+tr r_shader_preset: "{}" bulunamadı
+
+@ no parameter "{}" in this preset
+tr bu hazır ayarda "{}" parametresi yok
+
+@ {} = {} (default {}, {}..{})
+tr {} = {} (varsayılan {}, {}..{})
+
+@ Switching to {}...
+tr Geçiliyor: {}...
+
+@ game: no game dir "{}" in {}
+tr game: "{}" oyun klasörü yok (konum: {})
+
+@ game: can't find the engine executable
+tr game: motorun çalıştırılabilir dosyası bulunamadı
+
+@ game: exec failed: {}
+tr game: çalıştırma başarısız: {}
+
+@ game: launch failed: {}
+tr game: başlatma başarısız: {}
+
+@ loaded {} in {}s
+tr yüklendi: {} ({} sn)
+
+@ No demos listed with startdemos
+tr startdemos ile listelenmiş demo yok
+
+@ Playing demo from {}.
+tr Demo oynatılıyor: {}.
+
+@ {} frames {} seconds {} fps
+tr {} kare {} saniye {} fps
+
+@ Recording to {}.
+tr Kaydediliyor: {}.
+
+@ Completed demo
+tr Demo tamamlandı
+
+@ Can't record during demo playback
+tr Demo oynatılırken kayıt yapılamaz
+
+@ Relative pathnames are not allowed.
+tr Göreli yol adlarına izin verilmez.
+
+@ Can't record - try again when connected
+tr Kayıt yapılamıyor - bağlandıktan sonra tekrar deneyin
+
+@ {} demo(s) in loop
+tr Döngüde {} demo
+
+@ Not recording a demo.
+tr Demo kaydedilmiyor.
+
+@ {} joined on a gamepad
+tr {} bir kumandayla katıldı
+
+@ goggles: needs a game started with Add-ons and Goggles enabled
+tr goggles: Eklentiler ve Gözlük etkin olarak başlatılmış bir oyun gerekir
+
+@ equip: needs a game started with Add-ons and Goggles enabled
+tr equip: Eklentiler ve Gözlük etkin olarak başlatılmış bir oyun gerekir
+
+@ UDP listening on port {}
+tr UDP dinleniyor, port {}
+
+@ UDP bind on port {} failed: {}
+tr UDP port {} bağlaması başarısız: {}
+
+@ Connection accepted by {}
+tr Bağlantı kabul edildi: {}
+
+@ Connection failed: {}
+tr Bağlantı başarısız: {}
+
+@ Couldn't resolve {}
+tr Çözümlenemedi: {}
+
+@ Connecting to {}...
+tr Bağlanılıyor: {}...
+
+@ Connecting to QuakeWorld server {}...
+tr QuakeWorld sunucusuna bağlanılıyor: {}...
+
+@ Disconnected: {}
+tr Bağlantı kesildi: {}
+
+@ Server disconnected
+tr Sunucu bağlantıyı kesti
+
+@ Client {} connected
+tr İstemci {} bağlandı
+
+@ Client {} timed out
+tr İstemci {} zaman aşımına uğradı
+
+@ Couldn't spawn server {}: {}
+tr Sunucu {} başlatılamadı: {}
+
+@ maxplayers can not be changed while a server is running.
+tr Sunucu çalışırken maxplayers değiştirilemez.
+
+@ You can't kick yourself!
+tr Kendinizi atamazsınız!
+
+@ Only the server may changelevel
+tr Yalnızca sunucu changelevel kullanabilir
+
+@ {} renamed to {}
+tr {} adını {} olarak değiştirdi

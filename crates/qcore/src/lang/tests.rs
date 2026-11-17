@@ -10,11 +10,47 @@ fn format_positional_and_sequential() {
 
 #[test]
 fn resolve_auto_and_names() {
-    let sys = vec!["pl".to_string(), "de-AT".to_string(), "fr".to_string()];
+    let sys = vec!["xx".to_string(), "de-AT".to_string(), "fr".to_string()];
     assert_eq!(resolve("auto", &sys), Lang::German);
+    assert_eq!(resolve("auto", &["pl_PL.UTF-8".to_string()]), Lang::Polish);
     assert_eq!(resolve("Russian", &sys), Lang::Russian);
     assert_eq!(resolve("auto", &[]), Lang::English);
     assert_eq!(Lang::from_code("es_ES.UTF-8"), Some(Lang::Spanish));
+}
+
+#[test]
+fn locale_codes_with_regions() {
+    for (s, l) in [
+        ("pt_BR.UTF-8", Lang::Brazilian),
+        ("pt-PT", Lang::Portuguese),
+        ("pt", Lang::Portuguese),
+        ("zh-Hant-TW", Lang::TChinese),
+        ("zh_HK", Lang::TChinese),
+        ("zh-Hans", Lang::SChinese),
+        ("zh_CN", Lang::SChinese),
+        ("nn-NO", Lang::Norwegian),
+        ("no", Lang::Norwegian),
+        ("nb", Lang::Norwegian),
+        ("tl-PH", Lang::Filipino),
+        ("fil", Lang::Filipino),
+        ("ja_JP", Lang::Japanese),
+    ] {
+        assert_eq!(Lang::from_code(s), Some(l), "{s}");
+    }
+    assert_eq!(Lang::from_code("th"), None);
+}
+
+#[test]
+fn every_language_round_trips() {
+    for (i, l) in Lang::ALL.into_iter().enumerate() {
+        assert_eq!(l as usize, i, "{l:?} out of order");
+        assert_eq!(Lang::from_name(l.name()), Some(l));
+        assert_eq!(Lang::from_code(l.code()), Some(l), "{}", l.code());
+    }
+    for (l, ..) in catalog::LANG_FILES {
+        assert!(!Lang::RERELEASE.contains(l));
+    }
+    assert_eq!(catalog::LANG_FILES.len() + Lang::RERELEASE.len(), Lang::ALL.len());
 }
 
 #[test]

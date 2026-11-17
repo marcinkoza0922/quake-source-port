@@ -1,0 +1,3024 @@
+# ro: the port's own text; English keys from crates/qcore/lang/*.txt.
+# Format in crates/qcore/src/lang/catalog.rs; check with tools/lang_check.py.
+
+# ==== menu.txt ====
+
+# Options pages: page names, row labels and choice values.
+@ 10% speed
+ro viteză 10%
+
+@ 2 split-screen
+ro 2 pe ecran împărțit
+
+@ 3 split-screen
+ro 3 pe ecran împărțit
+
+@ 4 split-screen
+ro 4 pe ecran împărțit
+
+@ 5 split-screen
+ro 5 pe ecran împărțit
+
+@ 6 split-screen
+ro 6 pe ecran împărțit
+
+@ 2D aiming
+ro țintire 2D
+
+@ 2x monsters
+ro monștri x2
+
+@ 3x monsters
+ro monștri x3
+
+@ 4x monsters
+ro monștri x4
+
+@ 3D resolution
+ro rezoluție 3D
+
+@ 3D view
+ro vedere 3D
+
+@ 8-bit Color
+ro Culori pe 8 biți
+
+@ Accessibility
+ro Accesibilitate
+
+@ Acquisition Cone
+ro Con de achiziție
+
+@ Activation
+ro Activare
+
+@ Add a ringing room tail after the cue
+ro Adaugă o reverberație de cameră după semnal
+
+@ Add delayed repeats after the cue
+ro Adaugă repetări întârziate după semnal
+
+@ Add saturation and distortion
+ro Adaugă saturație și distorsiune
+
+@ Add-ons
+ro Extensii
+
+@ Address
+ro Adresă
+
+@ Adds fine noise to hide color banding
+ro Adaugă un zgomot fin pentru a ascunde benzile de culoare
+
+@ Advanced Settings
+ro Setări avansate
+
+@ Aim Assist
+ro Asistență la țintire
+
+@ Aim Rotation
+ro Rotație țintire
+
+@ Aim Slowdown
+ro Încetinire țintire
+
+@ Aim Style
+ro Stil de țintire
+
+@ All
+ro Toate
+
+@ All enemies
+ro Toți inamicii
+
+@ Alt Fire (Add-ons)
+ro Foc secundar (extensii)
+
+@ Always Run
+ro Alergare permanentă
+
+@ Ambient Occlusion
+ro Ocluzie ambientală
+
+@ Ammo Counts
+ro Contoare muniție
+
+@ Ammo Counts Position
+ro Poziție contoare muniție
+
+@ Ammo Pickups
+ro Muniție colectată
+
+@ Anisotropic
+ro Anizotropic
+
+@ Anti-aliasing
+ro Anti-aliasing
+
+@ Apply To
+ro Aplică la
+
+@ Armor
+ro Armură
+
+@ Armor Position
+ro Poziție armură
+
+@ Ask
+ro Întreabă
+
+@ Attack
+ro Atac
+
+@ Audio
+ro Audio
+
+@ Auto-aim
+ro Țintire automată
+
+@ Auto-aim Settings
+ro Setări țintire automată
+
+@ Autosave
+ro Salvare automată
+
+@ Autosave Settings
+ro Setări salvare automată
+
+@ Autosave Timer
+ro Interval salvare automată
+
+@ Autosaves to Keep
+ro Salvări automate păstrate
+
+@ Bass
+ro Bași
+
+@ Blip
+ro Blip
+
+@ Blood Quality
+ro Calitate sânge
+
+@ Blood Splatter Settings
+ro Setări stropi de sânge
+
+@ Blue
+ro Albastru
+
+@ Boomerang Settings
+ro Setări bumerang
+
+@ Boost or cut high frequencies in decibels
+ro Amplifică sau atenuează frecvențele înalte, în decibeli
+
+@ Boost or cut low frequencies in decibels
+ro Amplifică sau atenuează frecvențele joase, în decibeli
+
+@ Brightness
+ro Luminozitate
+
+@ Bullet Time (Add-ons)
+ro Bullet time (extensii)
+
+@ Bullet Time Settings
+ro Setări bullet time
+
+@ Button Glyphs
+ro Simboluri butoane
+
+@ Button Size
+ro Mărime butoane
+
+@ Camera
+ro Cameră
+
+@ Caustic Intensity
+ro Intensitate caustice
+
+@ Caustics
+ro Caustice
+
+@ Center
+ro Centru
+
+@ Center Message Position
+ro Poziție mesaje centrale
+
+@ Center Message Time
+ro Durată mesaje centrale
+
+@ Center View
+ro Centrează privirea
+
+@ Change Color on Kill
+ro Altă culoare la eliminare
+
+@ Change Color on Target
+ro Altă culoare pe țintă
+
+@ Chime
+ro Clopoțel
+
+@ Click
+ro Clic
+
+@ Clink
+ro Clinchet
+
+@ Coin
+ro Monedă
+
+@ Color
+ro Culoare
+
+@ Color Filter
+ro Filtru de culoare
+
+@ Color of the grenade arc
+ro Culoarea traiectoriei grenadei
+
+@ Colored Lighting
+ro Iluminare colorată
+
+@ Connect
+ro Conectare
+
+@ Contrast
+ro Contrast
+
+@ Controls
+ro Controale
+
+@ Cooldown (ms)
+ro Reîncărcare (ms)
+
+@ Crosshair Outline
+ro Contur cătare
+
+@ Crosshair Shape
+ro Formă cătare
+
+@ Crosshair Size
+ro Mărime cătare
+
+@ Current Ammo
+ro Muniție curentă
+
+@ Current Ammo Position
+ro Poziție muniție curentă
+
+@ Customize This Game
+ro Personalizează acest joc
+
+@ Damage
+ro Daune
+
+@ Damage Taken
+ro Daune primite
+
+@ Debris
+ro Resturi
+
+@ Debris Quality
+ro Calitate resturi
+
+@ Debris Settings
+ro Setări resturi
+
+@ Directional Damage
+ro Daune direcționale
+
+@ Dithering
+ro Dithering
+
+@ Dodge / Dive (Add-ons)
+ro Eschivă / plonjon (extensii)
+
+@ Dragging up looks down instead of up
+ro Tragerea în sus privește în jos, nu în sus
+
+@ Drive
+ro Saturație
+
+@ Dynamic Lights
+ro Lumini dinamice
+
+@ Echo
+ro Ecou
+
+@ Enemy Health
+ro Viață inamici
+
+@ Enemy Wounds
+ro Răni inamici
+
+@ Enhanced Blood Splatter
+ro Stropi de sânge îmbunătățiți
+
+@ Enhanced FX
+ro Efecte îmbunătățite
+
+@ Enhanced Models
+ro Modele îmbunătățite
+
+@ Enhanced Particles
+ro Particule îmbunătățite
+
+@ Enhanced Water
+ro Apă îmbunătățită
+
+@ Enhancements
+ro Îmbunătățiri
+
+@ Equipment Wheel (Add-ons)
+ro Roată de echipament (extensii)
+
+@ Exploding boxes throw metal shards
+ro Lăzile care explodează aruncă schije de metal
+
+@ Explosion Damage
+ro Daune explozii
+
+@ Explosion Scorch Marks
+ro Urme de arsură
+
+@ Explosions scorch nearby solid surfaces
+ro Exploziile pârlesc suprafețele solide din apropiere
+
+@ Explosives only
+ro Doar explozibili
+
+@ Extra Monsters
+ro Monștri suplimentari
+
+@ Extra Per 10 Damage (ms)
+ro Extra la 10 daune (ms)
+
+@ FX Settings
+ro Setări efecte
+
+@ Field of View
+ro Câmp vizual
+
+@ Firing never uses up ammo
+ro Tragerea nu consumă niciodată muniție
+
+@ First person
+ro persoana întâi
+
+@ Flick Time
+ro Durată flick
+
+@ Flight Speed
+ro Viteză de zbor
+
+@ Fog
+ro Ceață
+
+@ Frag Limit
+ro Limită de fraguri
+
+@ Freeze Duration (ms)
+ro Durată înghețare (ms)
+
+@ GLQuake
+ro GLQuake
+
+@ Game Speed
+ro Viteza jocului
+
+@ Game Type
+ro Tip de joc
+
+@ Gameplay
+ro Joc
+
+@ Gameplay Modifiers
+ro Modificatori de joc
+
+@ Gel Quality
+ro Calitate gel
+
+@ Gib Surface Painting
+ro Pete de bucăți de carne
+
+@ Gibs
+ro Bucăți de carne
+
+@ Gibs and heads tumble and bounce
+ro Bucățile de carne și capetele se rostogolesc și sar
+
+@ Goggle Glow Quality
+ro Calitate strălucire ochelari
+
+@ Goggle Intensity
+ro Intensitate ochelari
+
+@ Goggle Noise
+ro Zgomot ochelari
+
+@ Goggles Settings
+ro Setări ochelari
+
+@ Graphics
+ro Grafică
+
+@ Green
+ro Verde
+
+@ Grenade Arc
+ro Traiectorie grenadă
+
+@ Grenade Arc Settings
+ro Setări traiectorie grenadă
+
+@ Gun Kick
+ro Recul armă
+
+@ Gyro
+ro Giroscop
+
+@ Gyro & Flick Stick
+ro Giroscop și flick stick
+
+@ Gyro Active
+ro Giroscop activ
+
+@ Gyro Aiming
+ro Țintire cu giroscop
+
+@ HUD
+ro HUD
+
+@ HUD Style
+ro Stil HUD
+
+@ Health
+ro Viață
+
+@ Health Pickups
+ro Viață colectată
+
+@ Health Position
+ro Poziție viață
+
+@ Health Regeneration
+ro Regenerare viață
+
+@ Hit & Kill Sounds
+ro Sunete de lovire și eliminare
+
+@ Hit Doors & Lifts
+ro Lovește uși și lifturi
+
+@ Hit Markers
+ro Marcaje de lovire
+
+@ Hit Sound
+ro Sunet de lovire
+
+@ Hitmarker Size
+ro Mărime marcaj
+
+@ Hitmarker Type
+ro Tip marcaj
+
+@ Hitstop Advanced
+ro Hitstop avansat
+
+@ Hitstop Settings
+ro Setări hitstop
+
+@ Hold
+ro Menținut
+
+@ Hold lock-on
+ro Fixare menținută
+
+@ Hook Enemies
+ro Agață inamicii
+
+@ Hook Metal
+ro Agață metalul
+
+@ Hook Stone
+ro Agață piatra
+
+@ Hook Wood
+ro Agață lemnul
+
+@ Hooking an enemy pulls you to it
+ro Agățarea unui inamic te trage spre el
+
+@ Hookshot Range
+ro Rază cârlig
+
+@ Hookshot Settings
+ro Setări cârlig
+
+@ Host Game
+ro Găzduiește joc
+
+@ How far the hook flies before it retracts
+ro Cât de departe zboară cârligul înainte să revină
+
+@ How visible the on-screen controls are
+ro Cât de vizibile sunt controalele de pe ecran
+
+@ Impact Lifetime
+ro Durată impacturi
+
+@ Infinite Ammo
+ro Muniție infinită
+
+@ Input
+ro Intrare
+
+@ Input Scale
+ro Scală intrare
+
+@ Interpolate Animation
+ro Interpolează animațiile
+
+@ Interpolate Movement
+ro Interpolează mișcarea
+
+@ Invert Look
+ro Inversează privirea
+
+@ Invert Mouse
+ro Inversează mouse-ul
+
+@ Invert Stick
+ro Inversează stick-ul
+
+@ Jet Quality
+ro Calitate jet
+
+@ Join Game
+ro Alătură-te unui joc
+
+@ Jump / Swim Up
+ro Salt / înot în sus
+
+@ Jump again in mid-air
+ro Sari din nou în aer
+
+@ Jumps
+ro Salturi
+
+@ Keys & Powerups
+ro Chei și bonusuri
+
+@ Keys & Powerups Position
+ro Poziție chei și bonusuri
+
+@ Kill Bonus (x)
+ro Bonus eliminare (x)
+
+@ Kill Sound
+ro Sunet de eliminare
+
+@ Knock
+ro Ciocănit
+
+@ Left
+ro Stânga
+
+@ Length of the motion blur streaks
+ro Lungimea dârelor de motion blur
+
+@ Lifetime (seconds)
+ro Durată (secunde)
+
+@ Live Portal Views
+ro Portaluri live
+
+@ Live View Distance
+ro Distanță vedere live
+
+@ Local Players
+ro Jucători locali
+
+@ Local red wounds follow enemy animation
+ro Răni roșii locale urmează animația inamicului
+
+@ Lock Indicator
+ro Indicator fixare
+
+@ Long falls don't hurt
+ro Căderile lungi nu rănesc
+
+@ Longest Freeze (ms)
+ro Înghețare maximă (ms)
+
+@ Look Down
+ro Privește în jos
+
+@ Look Speed
+ro Viteză privire
+
+@ Look Up
+ro Privește în sus
+
+@ Main Menu Music
+ro Muzică meniu principal
+
+@ Max FPS
+ro FPS maxim
+
+@ Max Players
+ro Jucători maxim
+
+@ Maximum Impacts
+ro Impacturi maxime
+
+@ Maximum Marks
+ro Urme maxime
+
+@ Maximum Range
+ro Rază maximă
+
+@ Melee only
+ro Doar corp la corp
+
+@ Message Background
+ro Fundal mesaje
+
+@ Message Text Size
+ro Mărime text mesaje
+
+@ Messages & Captions
+ro Mesaje și subtitrări
+
+@ Meter Duration (real seconds)
+ro Durată bară (secunde reale)
+
+@ Minimum Damage
+ro Daune minime
+
+@ Mode
+ro Mod
+
+@ Modern Console
+ro Consolă modernă
+
+@ Modern HUD Layout
+ro Aspect HUD modern
+
+@ Most recent save
+ro Cea mai recentă salvare
+
+@ Motion Blur
+ro Motion blur
+
+@ Motion Blur Amount
+ro Intensitate motion blur
+
+@ Motion Blur Quality
+ro Calitate motion blur
+
+@ Mouse & Keyboard
+ro Mouse și tastatură
+
+@ Mouse Speed
+ro Viteză mouse
+
+@ Move Back
+ro Înapoi
+
+@ Move Forward
+ro Înainte
+
+@ Music Volume
+ro Volum muzică
+
+@ Next Weapon
+ro Arma următoare
+
+@ No Drowning
+ro Fără înec
+
+@ No Fall Damage
+ro Fără daune la cădere
+
+@ No Manual Saves
+ro Fără salvări manuale
+
+@ No Self Damage
+ro Fără autovătămare
+
+@ Noise Filter
+ro Filtru de zgomot
+
+@ Normal Color
+ro Culoare normală
+
+@ Notify Message Position
+ro Poziție notificări
+
+@ Notify Message Time
+ro Durată notificări
+
+@ Number of splatter rays per blood impact
+ro Numărul de raze de stropire per impact de sânge
+
+@ Off
+ro Oprit
+
+@ On Death
+ro La moarte
+
+@ On Kill Color
+ro Culoare la eliminare
+
+@ On Target Color
+ro Culoare pe țintă
+
+@ Opacity
+ro Opacitate
+
+@ Opacity of the grenade arc
+ro Opacitatea traiectoriei grenadei
+
+@ Pants Color
+ro Culoare pantaloni
+
+@ Particle Quality
+ro Calitate particule
+
+@ Particles
+ro Particule
+
+@ Physical Nail Impacts
+ro Impacturi fizice ale cuielor
+
+@ Pistol Start
+ro Start de la zero
+
+@ Pitch
+ro Ton
+
+@ Pitch Sensitivity
+ro Sensibilitate verticală
+
+@ Playback Speed
+ro Viteză redare
+
+@ Player Setup
+ro Configurare jucător
+
+@ Pop
+ro Pop
+
+@ Portal Gun Settings
+ro Setări armă de portaluri
+
+@ Portal Recursion
+ro Recursivitate portaluri
+
+@ Portal View Quality
+ro Calitate vedere portaluri
+
+@ Preview Sound
+ro Ascultă sunetul
+
+@ Previous Weapon
+ro Arma anterioară
+
+@ Projectile Shotguns Settings
+ro Setări puști cu proiectile
+
+@ Projectile Speed (units/s)
+ro Viteză proiectile (unități/s)
+
+@ Purple
+ro Mov
+
+@ Push
+ro Împingere
+
+@ Push Strength
+ro Forță împingere
+
+@ Quick Load
+ro Încărcare rapidă
+
+@ Quick Save
+ro Salvare rapidă
+
+@ Railgun Settings
+ro Setări railgun
+
+@ Ranged only
+ro Doar la distanță
+
+@ Reacquire While Held
+ro Refixare la menținere
+
+@ Red
+ro Roșu
+
+@ Reduce Motion
+ro Reduce mișcarea
+
+@ Regen (seconds per second)
+ro Regenerare (secunde pe secundă)
+
+@ Render Scale
+ro Scală randare
+
+@ Reverb
+ro Reverberație
+
+@ Right
+ro Dreapta
+
+@ Ripple Intensity
+ro Intensitate unduiri
+
+@ Ripples
+ro Unduiri
+
+@ Roll Sensitivity
+ro Sensibilitate ruliu
+
+@ Rumble
+ro Vibrații
+
+@ Run
+ro Alergare
+
+@ Save on All Enemies Killed
+ro Salvare la toți inamicii eliminați
+
+@ Save on All Secrets Found
+ro Salvare la toate secretele găsite
+
+@ Save on Level Entry
+ro Salvare la intrarea în nivel
+
+@ Save on Secret Found
+ro Salvare la fiecare secret găsit
+
+@ Scoreboard
+ro Tabel de scor
+
+@ Screen Flashes
+ro Flash-uri ecran
+
+@ Screen Shader
+ro Shader de ecran
+
+@ Screen Shake
+ro Tremur ecran
+
+@ Search LAN
+ro Caută în LAN
+
+@ Seconds a center-screen message stays up
+ro Secunde cât rămâne afișat un mesaj din centrul ecranului
+
+@ See Through Portals
+ro Vezi prin portaluri
+
+@ See-through Teleporters
+ro Teleportoare transparente
+
+@ Shirt Color
+ro Culoare tricou
+
+@ Shotgun Bullet Decals
+ro Urme de alice
+
+@ Shoulder left
+ro umăr stânga
+
+@ Shoulder right
+ro umăr dreapta
+
+@ Show FPS
+ro Afișează FPS
+
+@ Show Face
+ro Afișează fața
+
+@ Shrapnel
+ro Schije
+
+@ Size of on-screen messages and captions
+ro Mărimea mesajelor și subtitrărilor de pe ecran
+
+@ Skill
+ro Dificultate
+
+@ Sky Fog
+ro Ceață cer
+
+@ Smooths the stepped movement of monsters
+ro Netezește mișcarea sacadată a monștrilor
+
+@ Sound
+ro Sunet
+
+@ Sound Captions
+ro Subtitrări sunete
+
+@ Sound Volume
+ro Volum sunet
+
+@ Speed Blur
+ro Blur de viteză
+
+@ Splashes
+ro Stropi
+
+@ Splatter Amount
+ro Cantitate stropi
+
+@ Splatter Size
+ro Mărime stropi
+
+@ Start Game
+ro Începe jocul
+
+@ Staying underwater doesn't hurt
+ro Statul sub apă nu rănește
+
+@ Stick Look Pitch
+ro Privire verticală stick
+
+@ Stick Look Yaw
+ro Privire orizontală stick
+
+@ Strafe Left
+ro Pas lateral stânga
+
+@ Strafe Right
+ro Pas lateral dreapta
+
+@ Strength of the surface swell and rings
+ro Intensitatea valurilor și cercurilor de la suprafață
+
+@ Stun Duration
+ro Durată amețire
+
+@ Style
+ro Stil
+
+@ Supersampling
+ro Supersampling
+
+@ Surface Hit Effects
+ro Efecte de impact pe suprafețe
+
+@ Swim Down
+ro Înot în jos
+
+@ Targets
+ro Ținte
+
+@ Teamplay
+ro Joc în echipă
+
+@ Texture Filter
+ro Filtrare texturi
+
+@ Third person
+ro persoana a treia
+
+@ Thud
+ro Bufnitură
+
+@ Tick
+ro Tic
+
+@ Time Limit
+ro Limită de timp
+
+@ Time Stretch
+ro Dilatare temporală
+
+@ Toggle Attack
+ro Atac comutat
+
+@ Toggle Run
+ro Alergare comutată
+
+@ Toggle auto-aim
+ro Țintire automată comutată
+
+@ Touch Controls
+ro Controale tactile
+
+@ Touchscreen
+ro Ecran tactil
+
+@ Tough Enemy Health
+ro Viață inamici rezistenți
+
+@ Tough enemies only
+ro Doar inamici rezistenți
+
+@ Trail Colour
+ro Culoare dâră
+
+@ Translate Console
+ro Tradu consola
+
+@ Translucent Water
+ro Apă translucidă
+
+@ Treble
+ro Înalte
+
+@ Turn Left
+ro Rotire stânga
+
+@ Turn Right
+ro Rotire dreapta
+
+@ Underwater FX
+ro Efecte subacvatice
+
+@ Use Bullet Time Meter
+ro Folosește bara bullet time
+
+@ VSync
+ro VSync
+
+@ View Bob
+ro Balans cameră
+
+@ Viewmodels
+ro Modele armă
+
+@ Volume
+ro Volum
+
+@ Water Opacity
+ro Opacitate apă
+
+@ Water Quality
+ro Calitate apă
+
+@ Water Settings
+ro Setări apă
+
+@ Weapon Wheel
+ro Roata armelor
+
+@ Weapon Wheel Slowdown
+ro Încetinire la roata armelor
+
+@ Weapons
+ro Arme
+
+@ Weapons Position
+ro Poziție arme
+
+@ Where center-screen messages appear
+ro Unde apar mesajele din centrul ecranului
+
+@ Where pickup and event messages appear
+ro Unde apar mesajele de colectare și evenimente
+
+@ White
+ro Alb
+
+@ Yaw Sensitivity
+ro Sensibilitate orizontală
+
+@ Yellow
+ro Galben
+
+# lowercase choice values
+@ T
+ro T
+
+@ always
+ro mereu
+
+@ auto
+ro auto
+
+@ banded
+ro în benzi
+
+@ borderless
+ro fără margini
+
+@ bottom center
+ro jos centru
+
+@ bottom left
+ro jos stânga
+
+@ bottom right
+ro jos dreapta
+
+@ box
+ro cutie
+
+@ broken square
+ro pătrat întrerupt
+
+@ classic
+ro clasic
+
+@ coarse
+ro grosier
+
+@ cooperative
+ro cooperativ
+
+@ cross
+ro cruce
+
+@ cross + dot
+ro cruce + punct
+
+@ cyan
+ro cyan
+
+@ dashed
+ro punctat
+
+@ deathmatch
+ro deathmatch
+
+@ deuteranopia
+ro deuteranopie
+
+@ diagonal streaks
+ro linii diagonale
+
+@ diamond
+ro romb
+
+@ dot
+ro punct
+
+@ double
+ro dublu
+
+@ double chevrons
+ro săgeți duble
+
+@ double diagonals
+ro diagonale duble
+
+@ easy
+ro ușor
+
+@ fine
+ro fin
+
+@ fit output
+ro potrivit ieșirii
+
+@ flick stick
+ro flick stick
+
+@ fullscreen
+ro ecran complet
+
+@ gap cross
+ro cruce deschisă
+
+@ green
+ro verde
+
+@ grey
+ro gri
+
+@ half speed
+ro jumătate de viteză
+
+@ hard
+ro greu
+
+@ high
+ro ridicată
+
+@ huge
+ro enormă
+
+@ immersive
+ro imersiv
+
+@ intense
+ro intens
+
+@ large
+ro mare
+
+@ larger
+ro mai mare
+
+@ largest
+ro cea mai mare
+
+@ linear
+ro liniar
+
+@ low
+ro scăzută
+
+@ lower
+ro jos
+
+@ magenta
+ro magenta
+
+@ medium
+ro medie
+
+@ middle
+ro mijloc
+
+@ middle left
+ro mijloc stânga
+
+@ middle right
+ro mijloc dreapta
+
+@ modern
+ro modern
+
+@ nearest
+ro cel mai apropiat
+
+@ nightmare
+ro coșmar
+
+@ nintendo
+ro Nintendo
+
+@ no team damage
+ro fără daune în echipă
+
+@ none
+ro niciunul
+
+@ normal
+ro normal
+
+@ off
+ro oprit
+
+@ off while held
+ro oprit la menținere
+
+@ on
+ro pornit
+
+@ only while held
+ro doar la menținere
+
+@ playstation
+ro PlayStation
+
+@ protanopia
+ro protanopie
+
+@ quarter speed
+ro sfert de viteză
+
+@ red
+ro roșu
+
+@ short diagonals
+ro diagonale scurte
+
+@ single
+ro simplu
+
+@ small
+ro mică
+
+@ solid
+ro continuu
+
+@ spectacle
+ro spectaculos
+
+@ subtle
+ro discret
+
+@ team damage
+ro daune în echipă
+
+@ top center
+ro sus centru
+
+@ top left
+ro sus stânga
+
+@ top right
+ro sus dreapta
+
+@ triple
+ro triplu
+
+@ tritanopia
+ro tritanopie
+
+@ upper
+ro sus
+
+@ white
+ro alb
+
+@ whole screen
+ro tot ecranul
+
+@ windowed
+ro în fereastră
+
+@ xbox
+ro Xbox
+
+@ yellow
+ro galben
+
+# ==== tooltips.txt ====
+
+# Options help lines (tooltips) and reasons for disabled rows.
+@ 2D aiming turns the view continuously with the right stick; flick stick snaps the view to where you push the stick, then turning the stick rotates it
+ro Țintirea 2D rotește privirea continuu cu stick-ul drept; flick stick îndreaptă imediat privirea în direcția în care împingi stick-ul, apoi rotirea stick-ului o rotește
+
+@ 3D resolution relative to the window; the UI stays sharp
+ro Rezoluția 3D față de fereastră; interfața rămâne clară
+
+@ 3D view keeps the HUD and menus sharp; whole screen runs them through the shader too
+ro Vederea 3D păstrează HUD-ul și meniurile clare; tot ecranul le trece și pe ele prin shader
+
+@ A Quake III style railgun: a slug that pierces every enemy on its line, using 2 cells a shot and refiring every 1.5 s; select it through its assigned weapon slot (Add-ons)
+ro Un railgun în stil Quake III: un proiectil care străpunge fiecare inamic de pe linia sa, 2 celule pe tragere și o tragere la fiecare 1,5 s; selectează-l din slotul de armă atribuit (extensii)
+
+@ A Zelda-style hookshot: fire sends a chain hook out; it latches onto hookable surfaces or enemies and reels you in; fire again to let go
+ro Un cârlig în stil Zelda: tragerea lansează un cârlig cu lanț; se prinde de suprafețele compatibile sau de inamici și te trage spre ele; trage din nou ca să-i dai drumul
+
+@ Also translates the engine's console messages; off keeps them in English
+ro Traduce și mesajele consolei motorului; oprit le păstrează în engleză
+
+@ Automatically acquire another enemy while holding Lock-on after losing a target
+ro Fixează automat alt inamic cât timp ții Fixare după ce ai pierdut o țintă
+
+@ Blends between animation frames of monsters and weapons
+ro Îmbină cadrele de animație ale monștrilor și armelor
+
+@ Blood stains surfaces and bodies; cosmetic, independent of particle packs
+ro Sângele pătează suprafețele și corpurile; doar vizual, independent de pachetele de particule
+
+@ Bloom glow around bright lights and heat sources; medium uses 4 taps, high uses 8, low disables halo taps
+ro Strălucire bloom în jurul luminilor puternice și surselor de căldură; medie folosește 4 eșantioane, ridicată 8, scăzută dezactivează haloul
+
+@ Blurs fast-moving monsters, projectiles and doors (not camera turns)
+ro Estompează monștrii, proiectilele și ușile rapide (nu și rotirile camerei)
+
+@ Blurs the screen edges during fast falls and launches; keeps the centre clear. Reduce Motion disables it
+ro Estompează marginile ecranului la căderi și lansări rapide; centrul rămâne clar. Reduce mișcarea îl dezactivează
+
+@ Brightness of the underwater light patterns
+ro Luminozitatea modelelor de lumină subacvatice
+
+@ Caps mark count, lifetime, airborne droplets and wound/gib painting; low skips enemy wounds and gib trails
+ro Limitează numărul și durata urmelor, picăturile din aer și petele de răni și bucăți de carne; scăzută omite rănile inamicilor și dârele de bucăți
+
+@ Caps shader input at output size so 200% render scale keeps 3D sharpness without 4x shader cost; low scales stay low-res
+ro Limitează intrarea shaderului la mărimea ieșirii, astfel că o scală de randare de 200% păstrează claritatea 3D fără a cvadrupla costul shaderului; scalele mici rămân la rezoluție mică
+
+@ Classic: the original status bar; modern: compact elements at the screen edges
+ro Clasic: bara de stare originală; modern: elemente compacte la marginile ecranului
+
+@ Coat atlas resolution, rebuild rate and shader detail: low builds smaller coats less often with fast shading; high uses full detail
+ro Rezoluția atlasului de straturi, frecvența de reconstruire și detaliul shaderului: scăzută creează straturi mai mici mai rar, cu umbrire rapidă; ridicată folosește detaliul complet
+
+@ Colour of the railgun's spiral trail; split-screen players each get the next colour along
+ro Culoarea dârei în spirală a railgunului; în ecran împărțit fiecare jucător primește culoarea următoare
+
+@ Damage the railgun deals to each enemy it passes through (Quake III: 100)
+ro Daunele provocate de railgun fiecărui inamic străpuns (Quake III: 100)
+
+@ Dark backdrop behind on-screen messages for readability
+ro Fundal întunecat în spatele mesajelor de pe ecran, pentru lizibilitate
+
+@ Dark border keeps the crosshair visible on any background
+ro Conturul întunecat păstrează cătarea vizibilă pe orice fundal
+
+@ Darkens corners and contact areas where geometry meets; higher quality is sharper
+ro Întunecă colțurile și zonele de contact dintre geometrii; o calitate mai mare e mai precisă
+
+@ Debris lands on and is carried or shoved by doors, lifts and platforms
+ro Resturile se așază pe uși, lifturi și platforme și sunt purtate sau împinse de ele
+
+@ Detail for caustics, ripples and splashes: low uses smaller budgets and shorter view distance; high uses larger budgets and farther view distance
+ro Detaliu pentru caustice, unduiri și stropi: scăzută folosește bugete mai mici și distanță de vedere mai scurtă; ridicată bugete mai mari și distanță mai mare
+
+@ Disabled while Enhanced Particles is on: its particles replace the GLQuake and Classic styles
+ro Dezactivat cât timp Particule îmbunătățite e pornit: particulele sale înlocuiesc stilurile GLQuake și clasic
+
+@ Disabled while Enhanced Water is on: its own underwater effects replace the classic and GLQuake view warps
+ro Dezactivat cât timp Apă îmbunătățită e pornit: efectele sale subacvatice înlocuiesc distorsiunile clasic și GLQuake
+
+@ Draw the predicted grenade path as a solid or dashed line
+ro Desenează traiectoria prevăzută a grenadei cu linie continuă sau punctată
+
+@ Draw the view out of the linked portal inside each portal; off shows flat discs (fastest)
+ro Afișează în fiecare portal vederea din portalul legat; oprit arată discuri plate (cel mai rapid)
+
+@ Droplets spray up when things enter or leave water, slime or lava
+ro Picăturile țâșnesc când ceva intră sau iese din apă, mâl toxic sau lavă
+
+@ Emulates the original 8-bit palette of software rendering
+ro Emulează paleta originală pe 8 biți a randării software
+
+@ Every level starts with only the shotgun and axe, as if started fresh
+ro Fiecare nivel începe doar cu pușca și toporul, ca un start de la zero
+
+@ Explosion damage for each remotely detonated sticky bomb
+ro Daunele exploziei fiecărei bombe lipicioase detonate de la distanță
+
+@ Extra freeze milliseconds for every 10 damage dealt, so heavy hits stop longer
+ro Milisecunde de înghețare în plus pentru fiecare 10 daune provocate, astfel că loviturile puternice opresc mai mult
+
+@ First person, a third-person camera centered behind the player, or one over the right or left shoulder; third person hides viewmodels
+ro Persoana întâi, o cameră la persoana a treia centrată în spatele jucătorului sau una peste umărul drept sau stâng; persoana a treia ascunde modelele armei
+
+@ Flash the selected marker on confirmed hits; colors are shared with the crosshair
+ro Afișează marcajul ales la loviturile confirmate; culorile sunt comune cu cătarea
+
+@ Freeze for every enemy, or only for enemies that were tough before the hit
+ro Înghețare pentru fiecare inamic sau doar pentru inamicii care erau rezistenți înainte de lovitură
+
+@ Freeze the game briefly when you damage an enemy; single player with add-ons only
+ro Îngheață jocul pentru scurt timp când rănești un inamic; doar single player cu extensii
+
+@ Gibs tumble and barrels throw shrapnel; shots and blasts push them (cosmetic only)
+ro Bucățile de carne se rostogolesc și butoaiele aruncă schije; tirurile și exploziile le împing (doar vizual)
+
+@ Health an enemy must have had before the hit to count as tough
+ro Viața pe care trebuie să o fi avut un inamic înainte de lovitură pentru a fi considerat rezistent
+
+@ Hits dealing less damage than this do not freeze the game; the default 10 skips nails and shotgun pellets
+ro Loviturile cu daune mai mici nu îngheață jocul; valoarea implicită 10 ignoră cuiele și alicele
+
+@ Hold fire and sweep the crosshair over monsters to queue them, release to throw: it stuns each in turn and flies back; alt-fire clears the queue
+ro Ține apăsat focul și trece cătarea peste monștri ca să-i pui în coadă, eliberează ca să arunci: îi amețește pe rând și revine; focul secundar golește coada
+
+@ Hold: keep Lock-on held. Toggle: press Auto-aim Toggle to enable automatic acquisition. Click look stick to switch targets
+ro Menținut: ține apăsat Fixare. Comutat: apasă Țintire automată comutată pentru fixare automată. Apasă stick-ul de privire ca să schimbi ținta
+
+@ How close an enemy must be to the crosshair for automatic acquisition in toggle mode (degrees)
+ro Cât de aproape de cătare trebuie să fie un inamic pentru fixarea automată în modul comutat (grade)
+
+@ How far the view tilts up and down when you tilt the controller (pitch axis)
+ro Cât de mult se înclină privirea în sus și în jos când înclini controlerul (axa de tangaj)
+
+@ How far the view turns left and right when you turn the controller (yaw axis)
+ro Cât de mult se rotește privirea la stânga și la dreapta când rotești controlerul (axa de girație)
+
+@ How far the view turns when you drag on the right half of the screen
+ro Cât de mult se rotește privirea când tragi cu degetul pe jumătatea dreaptă a ecranului
+
+@ How fast the boomerang flies (units per second)
+ro Cât de repede zboară bumerangul (unități pe secundă)
+
+@ How hard shots and explosions push debris around
+ro Cât de tare împing tirurile și exploziile resturile
+
+@ How hard the Powerwasher's water pushes enemies
+ro Cât de tare împinge inamicii apa spălătorului cu presiune
+
+@ How long a hit freezes the game, in milliseconds
+ro Cât timp îngheață jocul o lovitură, în milisecunde
+
+@ How strongly fog covers the sky when fog is on
+ro Cât de mult acoperă ceața cerul când ceața e pornită
+
+@ How the view distorts underwater: Classic ripples the whole screen like software Quake, GLQuake slowly stretches and squashes the view
+ro Cum se distorsionează privirea sub apă: Clasic unduiește tot ecranul ca Quake software, GLQuake întinde și turtește lent imaginea
+
+@ Ignores gyro rotation slower than this many degrees per second, to hide hand tremor
+ro Ignoră rotirile giroscopului mai lente decât acest număr de grade pe secundă, pentru a ascunde tremurul mâinii
+
+@ Immersive: appears for a few seconds only when its value changes
+ro Imersiv: apare câteva secunde doar când valoarea sa se schimbă
+
+@ Keeps textures sharp on floors and walls seen at steep angles
+ro Păstrează texturile clare pe podele și pereți văzuți din unghiuri ascuțite
+
+@ Lights from rockets, muzzle flashes and explosions brighten nearby walls
+ro Luminile rachetelor, flăcările de la gura țevii și exploziile luminează pereții din apropiere
+
+@ Liquid surfaces swell and ring out where things move through them
+ro Suprafețele lichide se unduiesc și fac cercuri acolo unde ceva trece prin ele
+
+@ Lobs sticky bombs (rockets ammo) that cling to walls, doors and monsters; alt-fire detonates them all
+ro Aruncă bombe lipicioase (muniție de rachete) care se lipesc de pereți, uși și monștri; focul secundar le detonează pe toate
+
+@ Look of the classic particles: GLQuake draws soft round dots, Classic draws square pixels like software Quake
+ro Aspectul particulelor clasice: GLQuake desenează puncte rotunde și fine, Clasic desenează pixeli pătrați ca Quake software
+
+@ Low skips the background smear halo and uses fewer blur samples; high keeps the full halo and smoother streaks
+ro Scăzută omite haloul de fundal și folosește mai puține eșantioane; ridicată păstrează tot haloul și dâre mai fine
+
+@ Low: hard particle edges, half the scripted particles and fewer hit sparks. Medium: soft edges. High: soft edges checked per MSAA sample, most hit sparks
+ro Scăzută: margini dure ale particulelor, jumătate din particulele scriptate și mai puține scântei. Medie: margini fine. Ridicată: margini fine verificate per eșantion MSAA, majoritatea scânteilor
+
+@ Marks fade out before expiring; oldest marks are recycled at the limit
+ro Urmele se estompează înainte să dispară; cele mai vechi sunt reciclate la limită
+
+@ Max nested portal reflections to draw; each level redraws the scene
+ro Numărul maxim de portaluri imbricate de desenat; fiecare nivel redesenează scena
+
+@ Max portals per screen with a live view; each one redraws the scene
+ro Numărul maxim de portaluri pe ecran cu vedere live; fiecare redesenează scena
+
+@ Maximum distance for acquiring and keeping an enemy locked
+ro Distanța maximă pentru fixarea și menținerea unui inamic
+
+@ Minimum gap between freezes, so shotgun pellets and rapid fire count once; kills ignore it
+ro Interval minim între înghețări, ca alicele și focul rapid să conteze o singură dată; eliminările îl ignoră
+
+@ Modern terminal console with autocomplete popup, history search, ANSI colors, bash shell and piping; off uses the classic Quake console
+ro Consolă modernă de tip terminal cu completare automată, căutare în istoric, culori ANSI, shell bash și redirecționări; oprit folosește consola Quake clasică
+
+@ Monsters take proportionally less damage at higher values; above 100% is harder
+ro Monștrii primesc proporțional mai puține daune la valori mai mari; peste 100% e mai greu
+
+@ Moving gibs leave blood on surfaces they touch
+ro Bucățile de carne în mișcare lasă sânge pe suprafețele atinse
+
+@ Multiplier on the freeze when the hit kills the enemy; 1 means no extra
+ro Multiplicator al înghețării când lovitura ucide inamicul; 1 înseamnă fără bonus
+
+@ Multiplies ammo from pickups (up to the normal carry limit); below 100% is harder
+ro Înmulțește muniția colectată (până la limita normală); sub 100% e mai greu
+
+@ Multiplies health from pickups (up to 100, or the item's own limit); below 100% is harder
+ro Înmulțește viața colectată (până la 100 sau limita proprie a obiectului); sub 100% e mai greu
+
+@ Nails stick to wood and bodies; hard surfaces deflect them to the floor
+ro Cuiele se înfig în lemn și corpuri; suprafețele dure le deviază spre podea
+
+@ Nearest keeps crisp classic pixels; linear smooths textures
+ro Cel mai apropiat păstrează pixelii clasici clari; liniar netezește texturile
+
+@ New Game: Add-ons
+ro Joc nou: extensii
+
+@ New Game: Customize
+ro Joc nou: personalizare
+
+@ Night vision: how much dark areas are brightened; thermal: how strongly heat stands out
+ro Vedere nocturnă: cât de mult sunt luminate zonele întunecate; termică: cât de puternic iese în evidență căldura
+
+@ Night-vision and thermal goggles, cycle normal, night vision and thermal with Change Goggles (Add-ons), or use the Equipment Wheel
+ro Ochelari de vedere nocturnă și termică: alternează normal, nocturnă și termică cu Schimbă ochelarii (extensii) sau folosește roata de echipament
+
+@ No single freeze lasts longer than this, however much damage or kill bonus adds
+ro Nicio înghețare nu durează mai mult de atât, indiferent de daune sau bonusul de eliminare
+
+@ Oldest marks and nails are recycled at this shared limit
+ro Cele mai vechi urme și cuie sunt reciclate la această limită comună
+
+@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
+ro Stick și butoane pe ecran: auto le afișează după o atingere și le ascunde când se folosește alt dispozitiv
+
+@ Only autosaves: quicksaves and the Save menu are off
+ro Doar salvări automate: salvarea rapidă și meniul Salvare sunt dezactivate
+
+@ Place every weapon at the center, right or left of the view, or hide all viewmodels
+ro Plasează fiecare armă în centrul, în dreapta sau în stânga imaginii sau ascunde toate modelele armei
+
+@ Play your chosen hit or kill cue when you damage an enemy
+ro Redă sunetul de lovire sau eliminare ales când rănești un inamic
+
+@ Playback speed: faster sounds shorter and higher
+ro Viteza de redare: mai rapid sună mai scurt și mai înalt
+
+@ Plays the Quake theme in the main menu when no game is running
+ro Redă tema Quake în meniul principal când niciun joc nu rulează
+
+@ Portals farther away than this are drawn as flat discs
+ro Portalurile mai îndepărtate de atât sunt desenate ca discuri plate
+
+@ Press attack once to keep firing, again to stop
+ro Apasă atac o dată ca să tragi continuu, din nou ca să te oprești
+
+@ Press run once to switch between running and walking
+ro Apasă alergare o dată ca să comuți între alergat și mers
+
+@ Raise or lower the tone independently of sound length
+ro Ridică sau coboară tonul independent de durata sunetului
+
+@ Red screen edges show where damage came from: top is front, bottom is behind; Screen Flashes controls their strength
+ro Marginile roșii ale ecranului arată de unde au venit daunele: sus e în față, jos e în spate; Flash-uri ecran le reglează intensitatea
+
+@ Replaces the classic dot particles with glowing sparks, smoke and blood; mods with their own particle effects keep them
+ro Înlocuiește particulele clasice tip punct cu scântei strălucitoare, fum și sânge; modurile cu efecte de particule proprii le păstrează
+
+@ Resolution and detail inside portal and teleporter views; lower tiers trim nested effects
+ro Rezoluția și detaliul din vederile portalurilor și teleportoarelor; nivelurile inferioare reduc efectele imbricate
+
+@ Rippling light patterns on surfaces under water and slime
+ro Modele de lumină unduitoare pe suprafețele de sub apă și mâl toxic
+
+@ Scales all damage you take; above 100% is harder
+ro Scalează toate daunele primite; peste 100% e mai greu
+
+@ Screen edge for this element; elements on the same spot stack
+ro Marginea ecranului pentru acest element; elementele din același loc se stivuiesc
+
+@ Seconds a monster hit by the boomerang stays stunned
+ro Secunde cât rămâne amețit un monstru lovit de bumerang
+
+@ Seconds impact marks and stuck nails stay before fading out; independent of Particle Quality
+ro Secunde cât rămân urmele de impact și cuiele înfipte înainte să se estompeze; independent de Calitate particule
+
+@ Seconds messages at the top of the screen stay up
+ro Secunde cât rămân afișate mesajele din partea de sus a ecranului
+
+@ Seconds the flick stick snap takes; lower is faster
+ro Durata întoarcerii flick stick, în secunde; mai mic e mai rapid
+
+@ See through enhanced water; enables Water Opacity
+ro Vezi prin apa îmbunătățită; activează Opacitate apă
+
+@ Sensor grain, scanlines and flicker of the goggle image
+ro Granulația senzorului, liniile de scanare și pâlpâirea imaginii ochelarilor
+
+@ Shades every anti-aliasing sample; needs Anti-aliasing on
+ro Umbrește fiecare eșantion de anti-aliasing; necesită Anti-aliasing pornit
+
+@ Shifts colors so they stay distinct for the chosen color blindness
+ro Decalează culorile ca să rămână distincte pentru tipul de daltonism ales
+
+@ Shotgun hits leave small surface marks (cosmetic only)
+ro Loviturile de pușcă lasă mici urme pe suprafețe (doar vizual)
+
+@ Show corner ticks at screen centre while locked, even with Crosshair off
+ro Afișează repere de colț în centrul ecranului cât timp e fixată ținta, chiar și cu cătarea oprită
+
+@ Show where grenades and other arcing shots will fly, bounce and land; local play only, not in deathmatch
+ro Arată unde vor zbura, ricoșa și ateriza grenadele și alte proiectile curbe; doar joc local, nu în deathmatch
+
+@ Shows text for important sounds: doors, alerted enemies, secrets, pickups
+ro Afișează text pentru sunetele importante: uși, inamici alertați, secrete, obiecte
+
+@ Shows the distance fog that maps and mods set; off always gives clear view
+ro Afișează ceața la distanță setată de hărți și moduri; oprit oferă mereu vedere clară
+
+@ Shows the player face next to the health number
+ro Afișează fața jucătorului lângă numărul vieții
+
+@ Simulation detail, step rate, fade-out lifetimes and caps for gibs and shrapnel; low also skips mover collision
+ro Detaliul simulării, frecvența pașilor, durata de estompare și limitele pentru bucăți de carne și schije; scăzută omite și coliziunea cu elementele mobile
+
+@ Size of the on-screen buttons and move stick
+ro Mărimea butoanelor și a stick-ului de mișcare de pe ecran
+
+@ Slowly heals up to 100 health after 5 seconds without being hit
+ro Vindecă lent până la 100 de viață după 5 secunde fără să fii lovit
+
+@ Slows stick look while the crosshair is over an enemy
+ro Încetinește privirea cu stick-ul cât timp cătarea e pe un inamic
+
+@ Slows the game down while the weapon wheel is open
+ro Încetinește jocul cât timp roata armelor e deschisă
+
+@ Slows the whole game down; single player only. Saves and demos stay compatible with other ports
+ro Încetinește tot jocul; doar single player. Salvările și demo-urile rămân compatibile cu alte porturi
+
+@ Small camera jolt on each freeze; off with Reduce Motion
+ro Mică zguduire a camerei la fiecare înghețare; oprită cu Reduce mișcarea
+
+@ Snap and track enemies in local play, including split-screen; unavailable online
+ro Fixează și urmărește inamicii în jocul local, inclusiv pe ecran împărțit; indisponibil online
+
+@ Sparks, smoke, chips, splinters and splashes fly off whatever your shots hit
+ro Scântei, fum, așchii, țăndări și stropi sar din orice lovesc tirurile tale
+
+@ Spawns extra copies of every monster around the original when a level starts
+ro Generează copii suplimentare ale fiecărui monstru în jurul originalului la începutul nivelului
+
+@ Strength of the full-screen flashes for damage, pickups and powerups
+ro Intensitatea flash-urilor pe tot ecranul pentru daune, obiecte și bonusuri
+
+@ Stretch or shorten the sound while keeping its pitch
+ro Întinde sau scurtează sunetul păstrându-i tonul
+
+@ Surface opacity; requires Enhanced Water and Translucent Water
+ro Opacitatea suprafeței; necesită Apă îmbunătățită și Apă translucidă
+
+@ The hook latches onto metal surfaces (metal, tech, computer panels, copper)
+ro Cârligul se prinde de suprafețele metalice (metal, tech, panouri de calculator, cupru)
+
+@ The hook latches onto stone, brick, rock and any surface not recognised as wood or metal
+ro Cârligul se prinde de piatră, cărămidă, rocă și orice suprafață nerecunoscută ca lemn sau metal
+
+@ The hook latches onto wooden surfaces (texture names like wood, crate, plank)
+ro Cârligul se prinde de suprafețele de lemn (texturi numite wood, crate, plank)
+
+@ Turn the controller's motion sensor into a look input; needs a pad with a gyroscope
+ro Transformă senzorul de mișcare al controlerului în comandă de privire; necesită un controler cu giroscop
+
+@ Turns off view bob, strafe tilt and the camera kick when hit or firing
+ro Dezactivează balansul camerei, înclinarea la pas lateral și zguduirea camerei la lovituri sau trageri
+
+@ Turns on the extra liquid effects; Water Settings controls each one
+ro Pornește efectele lichide suplimentare; Setări apă le controlează pe fiecare
+
+@ Turns the view to follow a moving enemy you are aiming at
+ro Rotește privirea ca să urmărească inamicul în mișcare la care țintești
+
+@ Turns the view when you roll the controller sideways; 0 disables it, negative reverses it
+ro Rotește privirea când înclini controlerul lateral; 0 o dezactivează, o valoare negativă o inversează
+
+@ Two-portal gun: fire and alt-fire place linked portals on flat walls; assign a weapon slot in Add-ons
+ro Armă cu două portaluri: focul și focul secundar plasează portaluri legate pe pereți plați; atribuie un slot de armă în Extensii
+
+@ Unlocks the FX Settings page: enhanced particles, impact effects and blood splatter
+ro Deblochează pagina Setări efecte: particule îmbunătățite, efecte de impact și stropi de sânge
+
+@ Uses the 2021 re-release's smoother MD5 models (and MD3 replacements from mods) instead of the classic ones. Applies on the next map load
+ro Folosește modelele MD5 mai fine din reeditarea din 2021 (și înlocuirile MD3 din moduri) în locul celor clasice. Se aplică la următoarea încărcare a hărții
+
+@ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
+ro Folosește lumina colorată a hărții (fișier .lit sau bloc BSPX); oprit oferă lumina albă originală. Se aplică la următoarea încărcare a hărții
+
+@ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
+ro Segmentele jetului de apă, numărul de picături și umbrirea lucioasă a lichidului: scăzută folosește jeturi translucide mai simple; ridicată jeturi fine și lucioase
+
+@ When gyro looking applies: always, off while +gyroaction is held, or only while it is held
+ro Când se aplică privirea cu giroscopul: mereu, oprit la menținerea +gyroaction sau doar la menținerea lui
+
+@ Which weapons trigger the freeze; melee covers the axe and any mod weapon used at close range without ammo
+ro Ce arme declanșează înghețarea; corp la corp include toporul și orice armă de mod folosită de aproape fără muniție
+
+@ Your own rockets and grenades don't hurt you; rocket jumps still work
+ro Propriile rachete și grenade nu te rănesc; săriturile cu racheta funcționează în continuare
+
+# ==== ui.txt ====
+
+# Menus and pop-ups outside the options pages: save cards, launch, presets,
+# add-on browser, map packs, hints and dialogs.
+@ Select
+ro Selectează
+
+@ Back
+ro Înapoi
+
+@ Cancel
+ro Anulează
+
+@ Confirm
+ro Confirmă
+
+@ Scroll
+ro Derulează
+
+@ Section
+ro Secțiune
+
+@ Bind
+ro Atribuie
+
+@ Cancel binding
+ro Anulează atribuirea
+
+@ Clear
+ro Șterge
+
+@ Clear pad
+ro Șterge controlerul
+
+@ Remap
+ro Reatribuie
+
+@ Type
+ro Scrie
+
+@ Shift
+ro Shift
+
+@ Done
+ro Gata
+
+@ Del
+ro Del
+
+@ Space
+ro Spațiu
+
+@ Save
+ro Salvează
+
+@ Load
+ro Încarcă
+
+@ Delete
+ro Șterge
+
+@ Play
+ro Joacă
+
+@ Yes
+ro Da
+
+@ No
+ro Nu
+
+@ OK
+ro OK
+
+@ System
+ro Sistem
+
+@ Language
+ro Limbă
+
+@ Help
+ro Ajutor
+
+@ Fixed for this game: it was started without Customize
+ro Fixat pentru acest joc: a fost pornit fără Personalizare
+
+@ Press a button or key to bind (Start cancels)
+ro Apasă un buton sau o tastă de atribuit (Start anulează)
+
+@ Press button...
+ro Apasă un buton...
+
+@ Press key...
+ro Apasă o tastă...
+
+@ Replace this binding?
+ro Înlocuiești această atribuire?
+
+@ is already assigned
+ro este deja atribuit
+
+@ {} already assigned
+ro {} deja atribuit
+
+@ Open Controls to remap Lock-on?
+ro Deschizi Controale pentru a reatribui Fixare?
+
+@ Lock-on
+ro Fixare
+
+@ Auto-aim Toggle
+ro Țintire automată comutată
+
+@ Keyboard
+ro Tastatură
+
+@ Controller
+ro Controler
+
+# main menu, dialogs and screens
+@ Map Packs
+ro Pachete de hărți
+
+@ Customize
+ro Personalizare
+
+@ Level Select
+ro Selectare nivel
+
+@ Really quit?
+ro Sigur ieși?
+
+@ You died
+ro Ai murit
+
+@ Continue from most recent save
+ro Continuă de la cea mai recentă salvare
+
+@ Select save
+ro Alege salvarea
+
+@ Restart level
+ro Reia nivelul
+
+@ Return to main menu
+ro Înapoi la meniul principal
+
+@ (disabled)
+ro (dezactivat)
+
+@ (fixed for this game)
+ro (fixat pentru acest joc)
+
+@ (off)
+ro (oprit)
+
+@ Apply Display Changes
+ro Aplică modificările de afișare
+
+@ Display Mode
+ro Mod de afișare
+
+@ Resolution
+ro Rezoluție
+
+@ desktop
+ro desktop
+
+@ Preset
+ro Presetare
+
+@ Map
+ro Hartă
+
+@ Reset Shader Settings
+ro Resetează setările shaderului
+
+@ Reset to Defaults
+ro Resetează la implicit
+
+@ Searching...
+ro Se caută...
+
+@ This game only autosaves.
+ro Acest joc are doar salvări automate.
+
+@ (No Manual Saves modifier)
+ro (modificatorul Fără salvări manuale)
+
+@ End the current game?
+ro Închei jocul curent?
+
+@ Unsaved progress will be lost.
+ro Progresul nesalvat se va pierde.
+
+@ End game
+ro Încheie jocul
+
+@ Overwrite
+ro Suprascrie
+
+@ Overwrite "{}"?
+ro Suprascrii „{}”?
+
+@ Saved {}
+ro Salvat {}
+
+@ Start a new game?
+ro Începi un joc nou?
+
+@ New game
+ro Joc nou
+
+@ New Game
+ro Joc nou
+
+@ CUSTOM
+ro PERSONALIZAT
+
+@ Customize Experience
+ro Personalizează experiența
+
+@ Disable All
+ro Dezactivează tot
+
+@ Disable All Modifications
+ro Dezactivează toate modificările
+
+@ Saves load in other source ports too.
+ro Salvările se încarcă și în alte porturi.
+
+@ Standard rules, no add-ons.
+ro Reguli standard, fără extensii.
+
+@ Choose skill
+ro Alege dificultatea
+
+@ The current game will end
+ro Jocul curent se va încheia
+
+@ Easy
+ro Ușor
+
+@ Normal
+ro Normal
+
+@ Hard
+ro Greu
+
+@ Nightmare
+ro Coșmar
+
+# graphics preset pop-up
+@ Choose a Graphics Preset
+ro Alege o presetare grafică
+
+@ Classic
+ro Clasic
+
+@ Like the re-release: enhanced models,
+ro Ca reeditarea: modele îmbunătățite,
+
+@ no added effects.
+ro fără efecte adăugate.
+
+@ Enhanced
+ro Îmbunătățit
+
+@ Every enhancement at its highest quality.
+ro Toate îmbunătățirile la calitate maximă.
+
+@ Needs a capable GPU.
+ro Necesită un GPU performant.
+
+@ Low-End
+ro Modest
+
+@ Fastest. No anti-aliasing, original
+ro Cel mai rapid. Fără anti-aliasing, modele
+
+@ models, lowest effect quality.
+ro originale, efecte la calitate minimă.
+
+@ Esc keeps the defaults
+ro Esc păstrează setările implicite
+
+@ Everything can be changed later in Options.
+ro Totul poate fi schimbat mai târziu în Options.
+
+@ Keep Defaults
+ro Păstrează implicit
+
+# save and load cards
+@ Save Game
+ro Salvează jocul
+
+@ Load Game
+ro Încarcă jocul
+
+@ Autosaves
+ro Salvări automate
+
+@ newest first
+ro cele mai noi primele
+
+@ Saves: {}
+ro Salvări: {}
+
+@ Browse Autosaves
+ro Răsfoiește salvările automate
+
+@ Every retained autosave, newest first
+ro Toate salvările automate păstrate, cele mai noi primele
+
+@ New save
+ro Salvare nouă
+
+@ Select to save your game here
+ro Selectează ca să salvezi jocul aici
+
+@ No autosaves yet
+ro Încă nicio salvare automată
+
+@ Autosaves are made on level entry, secrets and more (Options > Gameplay)
+ro Salvările automate se fac la intrarea în nivel, la secrete și altele (Options > Joc)
+
+@ No saves yet
+ro Încă nicio salvare
+
+@ Save from the Single Player menu, or press F6 to quicksave
+ro Salvează din meniul Single Player sau apasă F6 pentru salvare rapidă
+
+@ No picture
+ro Fără imagine
+
+@ Del: delete save
+ro Del: șterge salvarea
+
+@ Delete "{}"?
+ro Ștergi „{}”?
+
+@ This cannot be undone.
+ro Acțiunea nu poate fi anulată.
+
+@ Quicksave
+ro Salvare rapidă
+
+@ Autosave: {}
+ro Salvare automată: {}
+
+@ unknown trigger
+ro declanșator necunoscut
+
+@ Latest - {}
+ro Cea mai recentă - {}
+
+@ Health {}
+ro Viață {}
+
+@ Armor {}
+ro Armură {}
+
+@ Kills {}/{}
+ro Eliminări {}/{}
+
+@ Secrets {}/{}
+ro Secrete {}/{}
+
+@ Split-screen, {} players
+ro Ecran împărțit, {} jucători
+
+@ Co-op
+ro Cooperativ
+
+@ Customized
+ro Personalizat
+
+@ Customized, {}
+ro Personalizat, {}
+
+@ Date unavailable
+ro Dată indisponibilă
+
+@ Just now
+ro Chiar acum
+
+@ {} min ago
+ro acum {} min
+
+@ {} h ago
+ro acum {} h
+
+@ Level entry
+ro Intrare în nivel
+
+@ Secret found
+ro Secret găsit
+
+@ All enemies killed
+ro Toți inamicii eliminați
+
+@ All secrets found
+ro Toate secretele găsite
+
+@ Timer
+ro Temporizator
+
+# customize pages
+@ Standard rules
+ro Reguli standard
+
+@ Modifiers changed: {}
+ro Modificatori schimbați: {}
+
+@ no add-ons
+ro fără extensii
+
+@ add-ons: {}
+ro extensii: {}
+
+@ Saves of this game are .qsa files: they need this source port.
+ro Salvările acestui joc sunt fișiere .qsa: necesită acest port.
+
+@ Nothing changed: this plays as standard Quake.
+ro Nimic schimbat: se joacă precum Quake standard.
+
+@ Changes apply now and are saved with this game (.qsa).
+ro Modificările se aplică acum și sunt salvate cu acest joc (.qsa).
+
+@ This game started without Customize, so its rules are fixed.
+ro Acest joc a pornit fără Personalizare, deci regulile sale sunt fixe.
+
+@ Start a new game and choose Customize Experience.
+ro Începe un joc nou și alege Personalizează experiența.
+
+@ These rules apply to the next customized game.
+ro Aceste reguli se aplică următorului joc personalizat.
+
+# add-on browser
+@ Fire
+ro Foc
+
+@ Alt Fire
+ro Foc secundar
+
+@ Configure Parameters >
+ro Configurează parametrii >
+
+@ Configure
+ro Configurează
+
+@ Settings
+ro Setări
+
+@ Change slot
+ro Schimbă slotul
+
+@ Toggle
+ro Comută
+
+@ Details
+ro Detalii
+
+@ Enter or click the box: toggle
+ro Enter sau clic pe căsuță: comută
+
+@ Right / Tab / click: details
+ro Dreapta / Tab / clic: detalii
+
+@ Input Remapping
+ro Reatribuire comenzi
+
+@ Weapon Slot
+ro Slot de armă
+
+@ Customized games save as .qsa files, which need this source port.
+ro Jocurile personalizate se salvează ca fișiere .qsa, care necesită acest port.
+
+@ This game started without Customize, so its add-ons are fixed. Customize a new game instead.
+ro Acest joc a pornit fără Personalizare, deci extensiile sale sunt fixe. Personalizează mai bine un joc nou.
+
+@ Bullet Time
+ro Bullet time
+
+@ Change Goggles
+ro Schimbă ochelarii
+
+@ Dodge / Dive
+ro Eschivă / plonjon
+
+@ Goggles
+ro Ochelari
+
+@ Hitstop
+ro Hitstop
+
+@ Projectile Shotguns
+ro Puști cu proiectile
+
+@ BULLET TIME: 20%
+ro BULLET TIME: 20%
+
+@ NORMAL SPEED
+ro VITEZĂ NORMALĂ
+
+@ SLOW MOTION: PHYSICAL PELLETS
+ro ÎNCETINIRE: ALICE FIZICE
+
+@ DEMONSTRATION
+ro DEMONSTRAȚIE
+
+@ GAMEPLAY
+ro JOC
+
+@ LOOP
+ro BUCLĂ
+
+@ Preview unavailable
+ro Previzualizare indisponibilă
+
+# shader and language help lines
+@ A setting of the chosen shader; arrows step it, Enter is not needed
+ro O setare a shaderului ales; săgețile o modifică, Enter nu e necesar
+
+@ Language of the menus, messages and the 2021 re-release's game text; System follows your computer's language
+ro Limba meniurilor, mesajelor și textelor de joc din reeditarea din 2021; Sistem urmează limba calculatorului tău
+
+@ Puts every setting of the chosen shader back to the preset's defaults
+ro Readuce toate setările shaderului ales la valorile implicite ale presetării
+
+@ RetroArch slang shader on the final image: CRT, scanlines, NTSC, sharpening; add your own in <game>/shaders
+ro Shader slang RetroArch pe imaginea finală: CRT, linii de scanare, NTSC, accentuare; adaugă-le pe ale tale în <joc>/shaders
+
+# modern console footer
+@ Shift+PgUp/Dn: height  ` : hide
+ro Shift+PgUp/Dn: înălțime  ` : ascunde
+
+@ Tab: complete  Ctrl+R: search  bash | pipe
+ro Tab: completează  Ctrl+R: caută  bash | pipe
+
+@ ↑ +{} lines (End to jump) 
+ro ↑ +{} linii (End pentru salt) 
+
+# add-on descriptions
+@ Create two linked portals on flat walls. Fire places the first portal; Alt Fire places the second. Walk through either portal to emerge from the other. Your momentum carries through. Assign a weapon slot below: pressing that slot repeatedly cycles its ordinary weapon and every enabled add-on assigned there. Portal view quality is configurable below.
+ro Creează două portaluri legate pe pereți plați. Focul plasează primul portal; focul secundar îl plasează pe al doilea. Intră prin oricare portal ca să ieși prin celălalt. Impulsul se păstrează. Atribuie mai jos un slot de armă: apăsarea repetată a acelui slot alternează între arma sa obișnuită și fiecare extensie activată atribuită acolo. Calitatea vederii portalurilor se configurează mai jos.
+
+@ Hold Fire and sweep the crosshair over monsters to queue targets. Release Fire to throw: the boomerang visits each target, stuns it and returns to you. Alt Fire clears the queue. The weapon slot selects a group, not a separate hotkey: press it again to cycle through the weapons in that slot. Configure stun duration and flight speed below.
+ro Ține apăsat focul și trece cătarea peste monștri ca să pui ținte în coadă. Eliberează focul ca să arunci: bumerangul vizitează fiecare țintă, o amețește și se întoarce la tine. Focul secundar golește coada. Slotul de armă selectează un grup, nu o tastă separată: apasă-l din nou ca să alternezi între armele din acel slot. Configurează mai jos durata amețirii și viteza de zbor.
+
+@ Hold Fire to charge a sticky bomb using rocket ammunition; release to launch. A longer charge throws it faster. Bombs cling to walls, doors and monsters. Alt Fire detonates your planted bombs together. Place a trap, retreat, then detonate it when enemies approach. Assign any weapon slot below; repeated presses cycle through the ordinary weapon and add-ons in that slot.
+ro Ține apăsat focul ca să încarci o bombă lipicioasă folosind muniție de rachete; eliberează ca s-o lansezi. O încărcare mai lungă o aruncă mai repede. Bombele se lipesc de pereți, uși și monștri. Focul secundar detonează împreună bombele plasate. Pune o capcană, retrage-te, apoi detoneaz-o când se apropie inamicii. Atribuie mai jos orice slot de armă; apăsările repetate alternează între arma obișnuită și extensiile din acel slot.
+
+@ Fire launches a chain hook. It latches onto a permitted surface or enemy and reels you toward the anchor. Fire again or use Alt Fire to let go. Choose which materials and enemies can be hooked in Configure Parameters. Assign it to any weapon slot; repeated presses of the slot's existing binding cycle through its weapons.
+ro Focul lansează un cârlig cu lanț. Se prinde de o suprafață permisă sau de un inamic și te trage spre punctul de ancorare. Trage din nou sau folosește focul secundar ca să-i dai drumul. Alege în Configurează parametrii ce materiale și inamici pot fi agățați. Atribuie-l oricărui slot de armă; apăsările repetate ale tastei existente a slotului alternează între armele sale.
+
+@ A piercing railgun inspired by Quake III. Fire sends a slug through every enemy along its line. Each shot consumes two cells, with a 1.5 second refire interval. Damage and the spiral trail colour are configurable below. Choose a weapon slot: the slot's current binding selects and cycles the weapons assigned to it.
+ro Un railgun perforant inspirat de Quake III. Focul trimite un proiectil prin fiecare inamic de pe linia sa. Fiecare tragere consumă două celule, cu un interval de 1,5 secunde între trageri. Daunele și culoarea dârei în spirală se configurează mai jos. Alege un slot de armă: tasta curentă a slotului selectează și alternează armele atribuite lui.
+
+@ A Portal-style gel sprayer. Fire sprays blue Repulsion gel: land, jump or run into it to bounce, and landings on it never hurt. Alt Fire sprays orange Propulsion gel: run across it to go much faster. Gel coats floors and walls until washed off with the Powerwasher. Assign a weapon slot below; repeated presses cycle the weapons in that slot.
+ro Un pulverizator de gel în stil Portal. Focul pulverizează gel albastru de respingere: aterizează, sari sau aleargă în el ca să ricoșezi, iar aterizările pe el nu rănesc niciodată. Focul secundar pulverizează gel portocaliu de propulsie: aleargă peste el ca să mergi mult mai repede. Gelul acoperă podelele și pereții până e spălat cu spălătorul cu presiune. Atribuie mai jos un slot de armă; apăsările repetate alternează între armele din acel slot.
+
+@ A water cannon. Fire shoots a straight jet with limited reach; Alt Fire a wide, shorter fan. The water pushes enemies back, turns projectiles aside and washes away gel and blood. Push strength is configurable below. Assign a weapon slot below; repeated presses cycle the weapons in that slot.
+ro Un tun de apă. Focul trage un jet drept cu rază limitată; focul secundar un evantai larg și mai scurt. Apa împinge inamicii înapoi, deviază proiectilele și spală gelul și sângele. Forța de împingere se configurează mai jos. Atribuie mai jos un slot de armă; apăsările repetate alternează între armele din acel slot.
+
+@ One equipment add-on includes both night vision and thermal vision. The Change Goggles action cycles Normal, Night Vision, Thermal, then Normal again. Night vision brightens dark rooms; thermal vision highlights living enemies. Goggles do not occupy a weapon slot. Configure intensity and sensor noise below. The binding affects only this add-on.
+ro O singură extensie de echipament include atât vederea nocturnă, cât și pe cea termică. Acțiunea Schimbă ochelarii alternează Normal, Vedere nocturnă, Termic, apoi din nou Normal. Vederea nocturnă luminează camerele întunecate; vederea termică evidențiază inamicii vii. Ochelarii nu ocupă un slot de armă. Configurează mai jos intensitatea și zgomotul senzorului. Atribuirea afectează doar această extensie.
+
+@ Press Dodge with a movement direction on the ground or in midair: dive forward or leap backward and sideways. Diagonals are supported. Each press launches once, with a short recovery. The player body animates in third person. Assign the Dodge action below or in Controls.
+ro Apasă Eschivă cu o direcție de mișcare, pe sol sau în aer: plonjează înainte sau sari înapoi și lateral. Diagonalele sunt acceptate. Fiecare apăsare te lansează o dată, cu o scurtă revenire. Corpul jucătorului e animat la persoana a treia. Atribuie acțiunea Eschivă mai jos sau în Controale.
+
+@ Use the dedicated Bullet Time action to slow the whole local game to 20% speed. Hold is the default; Toggle switches on each press. The optional meter limits use in real seconds and regenerates while inactive. Disable the meter for unlimited use. Remap the action and configure duration and regeneration below.
+ro Folosește acțiunea dedicată Bullet time ca să încetinești tot jocul local la 20% din viteză. Menținut e modul implicit; Comutat schimbă la fiecare apăsare. Bara opțională limitează utilizarea în secunde reale și se reîncarcă în repaus. Dezactivează bara pentru utilizare nelimitată. Reatribuie acțiunea și configurează mai jos durata și regenerarea.
+
+@ Both shotguns and enemy grunts fire physical pellets with their original spread and damage. Fast default projectiles feel immediate; lower their speed to dodge incoming fire during bullet time. Configure projectile speed below, or reset it to the default of 10000 units per second.
+ro Ambele puști și soldații inamici trag alice fizice cu dispersia și daunele originale. Proiectilele rapide implicite par instantanee; reduce-le viteza ca să te eschivezi de focul inamic în bullet time. Configurează mai jos viteza proiectilelor sau resetează-o la valoarea implicită de 10000 de unități pe secundă.
+
+@ Freezes the game for a split second when you damage an enemy, so hits feel heavier. Single player only. Choose which weapons trigger it (all, melee, ranged or explosives), how long it lasts and how much more a kill freezes. Advanced settings cover enemy toughness, damage scaling, cooldown and the longest freeze.
+ro Îngheață jocul o fracțiune de secundă când rănești un inamic, ca loviturile să pară mai grele. Doar single player. Alege ce arme îl declanșează (toate, corp la corp, la distanță sau explozibili), cât durează și cu cât mai mult îngheață o eliminare. Setările avansate acoperă rezistența inamicilor, scalarea daunelor, reîncărcarea și cea mai lungă înghețare.
+
+# map packs and the Quaddicted browser
+@ Get more maps (Quaddicted)...
+ro Mai multe hărți (Quaddicted)...
+
+@ Type to filter...
+ro Scrie pentru a filtra...
+
+@ Launch mod
+ro Lansează modul
+
+@ Start first map
+ro Pornește prima hartă
+
+@ (running)
+ro (rulează)
+
+@ running
+ro rulează
+
+@ Recent
+ro Recente
+
+@ Name
+ro Nume
+
+@ Dir
+ro Dosar
+
+@ Default
+ro Implicit
+
+@ Title
+ro Titlu
+
+@ Sort: {}
+ro Sortare: {}
+
+@ {} installed
+ro {} instalate
+
+@ {}/{} matching
+ro {}/{} potrivite
+
+@ {} maps, {} completed
+ro {} hărți, {} terminate
+
+@ {}/{} matching, {} completed
+ro {}/{} potrivite, {} terminate
+
+@ no maps of its own
+ro nicio hartă proprie
+
+@ dir: {}
+ro dosar: {}
+
+@ base: {}
+ro bază: {}
+
+@ Browse the Quaddicted archive of
+ro Răsfoiește arhiva Quaddicted de
+
+@ single-player maps and episodes,
+ro hărți și episoade single player,
+
+@ then download and install them
+ro apoi descarcă-le și instalează-le
+
+@ here. Each release gets its own
+ro aici. Fiecare lansare are propria
+
+@ entry in this list.
+ro intrare în această listă.
+
+@ Needs an internet connection.
+ro Necesită conexiune la internet.
+
+@ Quaddicted Map Archive
+ro Arhiva de hărți Quaddicted
+
+@ Newest
+ro Cele mai noi
+
+@ Author
+ro Autor
+
+@ Size
+ro Mărime
+
+@ Loading the map list...
+ro Se încarcă lista hărților...
+
+@ Couldn't load the map list: {}
+ro Nu s-a putut încărca lista hărților: {}
+
+@ {} single-player releases  -  F5 refreshes
+ro {} lansări single player  -  F5 reîmprospătează
+
+@ {} matching
+ro {} potrivite
+
+@ by {}
+ro de {}
+
+@ requires: {}
+ro necesită: {}
+
+@ maps: {}
+ro hărți: {}
+
+@ Failed: {}
+ro Eșuat: {}
+
+@ Downloading... {}%
+ro Se descarcă... {}%
+
+@ Unpacking...
+ro Se dezarhivează...
+
+@ Installed in {}/  -  Enter: play
+ro Instalat în {}/  -  Enter: joacă
+
+@ Enter: download and install
+ro Enter: descarcă și instalează
+
+@ unpacking
+ro dezarhivare
+
+@ failed
+ro eșuat
+
+@ installed
+ro instalat
+
+@ Downloads are not available in the browser build
+ro Descărcările nu sunt disponibile în versiunea pentru browser
+
+@ the map list could not be read
+ro lista hărților nu a putut fi citită
+
+@ downloading needs the curl program
+ro descărcarea necesită programul curl
+
+@ download failed
+ro descărcarea a eșuat
+
+@ the download is not a valid zip
+ro fișierul descărcat nu e un zip valid
+
+@ nothing to install for this engine
+ro nimic de instalat pentru acest motor
+
+@ needs {} installed first
+ro necesită mai întâi instalarea {}
+
+@ couldn't unpack {}
+ro nu s-a putut dezarhiva {}
+
+# help screen
+@ About
+ro Despre
+
+@ < Back
+ro < Înapoi
+
+# tr_ctx keys: English shows the short word, the key says which meaning
+@ Save (a manual save, as opposed to a quicksave or autosave)
+ro Salvare
+
+# ==== hud.txt ====
+
+# HUD, weapon and equipment wheels, sound captions and other in-game text.
+# Weapon, monster and item names follow the 2021 re-release's own translations.
+@ Axe
+ro Topor
+
+@ Shotgun
+ro Pușcă
+
+@ Double-Barrelled Shotgun
+ro Super pușcă
+
+@ Nailgun
+ro Pistol cu cuie
+
+@ Super Nailgun
+ro Super pistol cu cuie
+
+@ Grenade Launcher
+ro Lansator de grenade
+
+@ Rocket Launcher
+ro Lansator de rachete
+
+@ Thunderbolt
+ro Trăsnet
+
+@ Portal Gun
+ro Armă de portaluri
+
+@ Boomerang
+ro Bumerang
+
+@ Stickybomb Launcher
+ro Lansator de bombe lipicioase
+
+@ Railgun
+ro Railgun
+
+@ Hookshot
+ro Cârlig
+
+@ Gel Sprayer
+ro Pulverizator de gel
+
+@ Powerwasher
+ro Spălător cu presiune
+
+@ Night Vision Goggles
+ro Ochelari de vedere nocturnă
+
+@ Thermal Goggles
+ro Ochelari termici
+
+@ Normal vision
+ro Vedere normală
+
+@ ON
+ro PORNIT
+
+@ OFF
+ro OPRIT
+
+@ {} (turn on)
+ro {} (pornește)
+
+@ {} (turn off)
+ro {} (oprește)
+
+@ Move mouse to select, release to toggle
+ro Mișcă mouse-ul ca să alegi, eliberează ca să comuți
+
+@ Move mouse to select, release to equip
+ro Mișcă mouse-ul ca să alegi, eliberează ca să echipezi
+
+@ Release to toggle
+ro Eliberează ca să comuți
+
+@ Release to equip
+ro Eliberează ca să echipezi
+
+@ shells
+ro cartușe
+
+@ nails
+ro cuie
+
+@ rockets
+ro rachete
+
+@ cells
+ro celule
+
+@ Kills: {}/{}
+ro Eliminări: {}/{}
+
+@ Secrets: {}/{}
+ro Secrete: {}/{}
+
+@ Time {}
+ro Timp {}
+
+@ Press any button to continue...
+ro Apasă orice buton pentru a continua...
+
+@ Press any key to continue...
+ro Apasă orice tastă pentru a continua...
+
+@ BULLET TIME
+ro BULLET TIME
+
+@ AUTO AIM
+ro ȚINTIRE AUTO
+
+@ Crosshair
+ro Cătare
+
+@ + Marker
+ro + marcaj
+
+@ Hit markers off
+ro Marcaje de lovire oprite
+
+@ On target
+ro Pe țintă
+
+@ On kill
+ro La eliminare
+
+# sound captions
+@ [Secret found]
+ro [Secret găsit]
+
+@ [Message]
+ro [Mesaj]
+
+@ [Switch activated]
+ro [Comutator activat]
+
+@ [Key picked up]
+ro [Cheie colectată]
+
+@ [Rune picked up]
+ro [Rună colectată]
+
+@ [Teleporter]
+ro [Teleportor]
+
+@ [Teleport]
+ro [Teleportare]
+
+@ [Splash]
+ro [Pleosc]
+
+@ [Leaving water]
+ro [Ieșire din apă]
+
+@ [Door]
+ro [Ușă]
+
+@ [Platform moving]
+ro [Platformă în mișcare]
+
+@ [Button]
+ro [Buton]
+
+@ [Health picked up]
+ro [Viață colectată]
+
+@ [Armor picked up]
+ro [Armură colectată]
+
+@ [Quad Damage wearing off]
+ro [Daunele cvadruple se termină]
+
+@ [Quad Damage]
+ro [Daune cvadruple]
+
+@ [Pentagram wearing off]
+ro [Pentagrama se termină]
+
+@ [Pentagram of Protection]
+ro [Pentagrama protecției]
+
+@ [Ring wearing off]
+ro [Inelul se termină]
+
+@ [Ring of Shadows]
+ro [Inelul umbrelor]
+
+@ [Biosuit wearing off]
+ro [Costumul bio se termină]
+
+@ [Biosuit]
+ro [Costum bio]
+
+@ [Item picked up]
+ro [Obiect colectat]
+
+@ [Weapon picked up]
+ro [Armă colectată]
+
+@ [Ammo picked up]
+ro [Muniție colectată]
+
+@ [Explosion]
+ro [Explozie]
+
+@ [Grenade launched]
+ro [Grenadă lansată]
+
+@ [Grenade bounce]
+ro [Grenada ricoșează]
+
+@ [Rocket fired]
+ro [Rachetă trasă]
+
+@ [Nails fired]
+ro [Cuie trase]
+
+@ [Lightning]
+ro [Fulger]
+
+@ [Thunder]
+ro [Tunet]
+
+@ [Enforcer alerted]
+ro [Executor alertat]
+
+@ [Grunt alerted]
+ro [Soldat alertat]
+
+@ [Rottweiler alerted]
+ro [Rottweiler alertat]
+
+@ [Knight alerted]
+ro [Cavaler alertat]
+
+@ [Death Knight alerted]
+ro [Cavaler al morții alertat]
+
+@ [Scrag alerted]
+ro [Scrag alertat]
+
+@ [Ogre alerted]
+ro [Căpcăun alertat]
+
+@ [Fiend alerted]
+ro [Demon alertat]
+
+@ [Shambler alerted]
+ro [Shambler alertat]
+
+@ [Zombie groaning]
+ro [Zombi gemând]
+
+@ [Vore alerted]
+ro [Vore alertat]
+
+@ [Vore attacking]
+ro [Vore atacă]
+
+@ [Spawn alerted]
+ro [Odraslă alertată]
+
+@ [Rotfish]
+ro [Pește putred]
+
+@ [Spawn]
+ro [Odraslă]
+
+@ [Chthon]
+ro [Chthon]
+
+@ [Hard landing]
+ro [Aterizare dură]
+
+@ [Drowning]
+ro [Înec]
+
+@ [Gasping for air]
+ro [Respirație grea]
+
+@ [Burning]
+ro [Arsură]
+
+@ [Telefrag]
+ro [Telefrag]
+
+@ [Gibbed]
+ro [Făcut bucăți]
+
+# ==== console.txt ====
+
+# Console messages, shown translated only with con_translate 1 (Translate Console).
+# Cvar and command names stay as they are.
+@ Autosaved.
+ro Salvare automată efectuată.
+
+@ Game saved.
+ro Joc salvat.
+
+@ Can't save now.
+ro Nu se poate salva acum.
+
+@ This game only autosaves (No Manual Saves modifier).
+ro Acest joc are doar salvări automate (modificatorul Fără salvări manuale).
+
+@ Loading {}...
+ro Se încarcă {}...
+
+@ load failed: {}
+ro încărcare eșuată: {}
+
+@ ERROR: autosave failed: {}
+ro EROARE: salvarea automată a eșuat: {}
+
+@ ERROR: couldn't open {}
+ro EROARE: nu s-a putut deschide {}
+
+@ ERROR: couldn't open {}.
+ro EROARE: nu s-a putut deschide {}.
+
+@ ERROR: couldn't write {}: {}
+ro EROARE: nu s-a putut scrie {}: {}
+
+@ ERROR: couldn't create {}: {}
+ro EROARE: nu s-a putut crea {}: {}
+
+@ couldn't write {}: {}
+ro nu s-a putut scrie {}: {}
+
+@ Wrote {}
+ro S-a scris {}
+
+@ screenshot failed: {}
+ro captura de ecran a eșuat: {}
+
+@ screenshot: {}
+ro captură de ecran: {}
+
+@ No readable save available. Select save or restart the level.
+ro Nicio salvare lizibilă disponibilă. Alege o salvare sau reia nivelul.
+
+@ Unknown command "{}"
+ro Comandă necunoscută „{}”
+
+@ couldn't exec {}
+ro nu s-a putut executa {}
+
+@ execing {}
+ro se execută {}
+
+@ execing config.cfg (inherited from {})
+ro se execută config.cfg (moștenit de la {})
+
+@ execing config.cfg (mod defaults)
+ro se execută config.cfg (setările modului)
+
+@ execing default.cfg (built-in)
+ro se execută default.cfg (integrat)
+
+@ {} cvars
+ro {} variabile
+
+@ {} commands
+ro {} comenzi
+
+@ Can't "cmd", not connected
+ro „cmd” imposibil, nu ești conectat
+
+@ Looking for Quake servers...
+ro Se caută servere Quake...
+
+@ Bad value, must be between 1 and 65534
+ro Valoare greșită, trebuie să fie între 1 și 65534
+
+@ Couldn't handle music file {}
+ro Nu s-a putut reda fișierul muzical {}
+
+@ Bug report written to {}
+ro Raport de eroare scris în {}
+
+@ bugreport: can't create {}: {}
+ro bugreport: nu s-a putut crea {}: {}
+
+@ graphics preset: {}
+ro presetare grafică: {}
+
+@ Presets (r_shader_preset <name>):
+ro Presetări (r_shader_preset <nume>):
+
+@ Add your own .slangp presets under <game>/shaders/.
+ro Adaugă propriile presetări .slangp în <joc>/shaders/.
+
+@ no shader preset loaded (r_shader_preset)
+ro nicio presetare de shader încărcată (r_shader_preset)
+
+@ r_shader_preset: "{}" not found
+ro r_shader_preset: „{}” nu a fost găsit
+
+@ no parameter "{}" in this preset
+ro niciun parametru „{}” în această presetare
+
+@ {} = {} (default {}, {}..{})
+ro {} = {} (implicit {}, {}..{})
+
+@ Switching to {}...
+ro Se trece la {}...
+
+@ game: no game dir "{}" in {}
+ro game: niciun dosar de joc „{}” în {}
+
+@ game: can't find the engine executable
+ro game: executabilul motorului nu a fost găsit
+
+@ game: exec failed: {}
+ro game: execuția a eșuat: {}
+
+@ game: launch failed: {}
+ro game: lansarea a eșuat: {}
+
+@ loaded {} in {}s
+ro {} încărcat în {} s
+
+@ No demos listed with startdemos
+ro Nicio demonstrație listată cu startdemos
+
+@ Playing demo from {}.
+ro Se redă demonstrația din {}.
+
+@ {} frames {} seconds {} fps
+ro {} cadre {} secunde {} fps
+
+@ Recording to {}.
+ro Se înregistrează în {}.
+
+@ Completed demo
+ro Demonstrație încheiată
+
+@ Can't record during demo playback
+ro Nu se poate înregistra în timpul redării unei demonstrații
+
+@ Relative pathnames are not allowed.
+ro Căile relative nu sunt permise.
+
+@ Can't record - try again when connected
+ro Nu se poate înregistra - încearcă din nou după conectare
+
+@ {} demo(s) in loop
+ro {} demonstrații în buclă
+
+@ Not recording a demo.
+ro Nu se înregistrează nicio demonstrație.
+
+@ {} joined on a gamepad
+ro {} s-a alăturat cu un controler
+
+@ goggles: needs a game started with Add-ons and Goggles enabled
+ro goggles: necesită un joc pornit cu Extensii și Ochelari activate
+
+@ equip: needs a game started with Add-ons and Goggles enabled
+ro equip: necesită un joc pornit cu Extensii și Ochelari activate
+
+@ UDP listening on port {}
+ro UDP ascultă pe portul {}
+
+@ UDP bind on port {} failed: {}
+ro Legarea UDP pe portul {} a eșuat: {}
+
+@ Connection accepted by {}
+ro Conexiune acceptată de {}
+
+@ Connection failed: {}
+ro Conexiunea a eșuat: {}
+
+@ Couldn't resolve {}
+ro Nu s-a putut rezolva {}
+
+@ Connecting to {}...
+ro Se conectează la {}...
+
+@ Connecting to QuakeWorld server {}...
+ro Se conectează la serverul QuakeWorld {}...
+
+@ Disconnected: {}
+ro Deconectat: {}
+
+@ Server disconnected
+ro Serverul s-a deconectat
+
+@ Client {} connected
+ro Clientul {} s-a conectat
+
+@ Client {} timed out
+ro Clientul {} a expirat
+
+@ Couldn't spawn server {}: {}
+ro Nu s-a putut porni serverul {}: {}
+
+@ maxplayers can not be changed while a server is running.
+ro maxplayers nu poate fi schimbat cât timp rulează un server.
+
+@ You can't kick yourself!
+ro Nu te poți da afară singur!
+
+@ Only the server may changelevel
+ro Doar serverul poate folosi changelevel
+
+@ {} renamed to {}
+ro {} a fost redenumit {}

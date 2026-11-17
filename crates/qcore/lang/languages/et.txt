@@ -1,0 +1,3024 @@
+# et: the port's own text; English keys from crates/qcore/lang/*.txt.
+# Format in crates/qcore/src/lang/catalog.rs; check with tools/lang_check.py.
+
+# ==== menu.txt ====
+
+# Options pages: page names, row labels and choice values.
+@ 10% speed
+et kiirus 10%
+
+@ 2 split-screen
+et 2 jagatud ekraanil
+
+@ 3 split-screen
+et 3 jagatud ekraanil
+
+@ 4 split-screen
+et 4 jagatud ekraanil
+
+@ 5 split-screen
+et 5 jagatud ekraanil
+
+@ 6 split-screen
+et 6 jagatud ekraanil
+
+@ 2D aiming
+et 2D-sihtimine
+
+@ 2x monsters
+et 2× koletised
+
+@ 3x monsters
+et 3× koletised
+
+@ 4x monsters
+et 4× koletised
+
+@ 3D resolution
+et 3D-eraldusvõime
+
+@ 3D view
+et 3D-vaade
+
+@ 8-bit Color
+et 8-bitised värvid
+
+@ Accessibility
+et Juurdepääsetavus
+
+@ Acquisition Cone
+et Haardekoonus
+
+@ Activation
+et Aktiveerimine
+
+@ Add a ringing room tail after the cue
+et Lisab signaali järele kõlava ruumikaja
+
+@ Add delayed repeats after the cue
+et Lisab signaali järele viivitusega kordused
+
+@ Add saturation and distortion
+et Lisab küllastust ja moonutust
+
+@ Add-ons
+et Lisad
+
+@ Address
+et Aadress
+
+@ Adds fine noise to hide color banding
+et Lisab peent müra, et peita värviastmeid
+
+@ Advanced Settings
+et Täpsemad seaded
+
+@ Aim Assist
+et Sihtimisabi
+
+@ Aim Rotation
+et Sihtimise pööre
+
+@ Aim Slowdown
+et Sihtimise aeglustus
+
+@ Aim Style
+et Sihtimise stiil
+
+@ All
+et Kõik
+
+@ All enemies
+et Kõik vaenlased
+
+@ Alt Fire (Add-ons)
+et Alt-tuli (lisad)
+
+@ Always Run
+et Alati jookse
+
+@ Ambient Occlusion
+et Ümbritsev varjestus
+
+@ Ammo Counts
+et Laskemoona loendurid
+
+@ Ammo Counts Position
+et Loendurite asukoht
+
+@ Ammo Pickups
+et Laskemoona korjamine
+
+@ Anisotropic
+et Anisotroopne
+
+@ Anti-aliasing
+et Servasilumine
+
+@ Apply To
+et Kehtib
+
+@ Armor
+et Soomus
+
+@ Armor Position
+et Soomuse asukoht
+
+@ Ask
+et Küsi
+
+@ Attack
+et Ründa
+
+@ Audio
+et Heli
+
+@ Auto-aim
+et Automaatsihtimine
+
+@ Auto-aim Settings
+et Automaatsihtimise seaded
+
+@ Autosave
+et Autosalvestus
+
+@ Autosave Settings
+et Autosalvestuse seaded
+
+@ Autosave Timer
+et Autosalvestuse taimer
+
+@ Autosaves to Keep
+et Säilitatavaid autosalvestusi
+
+@ Bass
+et Bass
+
+@ Blip
+et Piiks
+
+@ Blood Quality
+et Vere kvaliteet
+
+@ Blood Splatter Settings
+et Vereplekkide seaded
+
+@ Blue
+et Sinine
+
+@ Boomerang Settings
+et Bumerangi seaded
+
+@ Boost or cut high frequencies in decibels
+et Võimendab või summutab kõrgeid sagedusi detsibellides
+
+@ Boost or cut low frequencies in decibels
+et Võimendab või summutab madalaid sagedusi detsibellides
+
+@ Brightness
+et Heledus
+
+@ Bullet Time (Add-ons)
+et Bullet time (lisad)
+
+@ Bullet Time Settings
+et Bullet time'i seaded
+
+@ Button Glyphs
+et Nupusümbolid
+
+@ Button Size
+et Nupu suurus
+
+@ Camera
+et Kaamera
+
+@ Caustic Intensity
+et Kaustika tugevus
+
+@ Caustics
+et Kaustika
+
+@ Center
+et Keskel
+
+@ Center Message Position
+et Keskteadete asukoht
+
+@ Center Message Time
+et Keskteadete kestus
+
+@ Center View
+et Tsentreeri vaade
+
+@ Change Color on Kill
+et Värv tapmisel
+
+@ Change Color on Target
+et Värv sihtmärgil
+
+@ Chime
+et Kelluke
+
+@ Click
+et Klõps
+
+@ Clink
+et Kõlin
+
+@ Coin
+et Münt
+
+@ Color
+et Värv
+
+@ Color Filter
+et Värvifilter
+
+@ Color of the grenade arc
+et Granaadikaare värv
+
+@ Colored Lighting
+et Värviline valgus
+
+@ Connect
+et Ühenda
+
+@ Contrast
+et Kontrast
+
+@ Controls
+et Juhtimine
+
+@ Cooldown (ms)
+et Jahtumisaeg (ms)
+
+@ Crosshair Outline
+et Sihiku kontuur
+
+@ Crosshair Shape
+et Sihiku kuju
+
+@ Crosshair Size
+et Sihiku suurus
+
+@ Current Ammo
+et Praegune moon
+
+@ Current Ammo Position
+et Praeguse mooni asukoht
+
+@ Customize This Game
+et Kohanda seda mängu
+
+@ Damage
+et Kahju
+
+@ Damage Taken
+et Saadud kahju
+
+@ Debris
+et Rusud
+
+@ Debris Quality
+et Rusude kvaliteet
+
+@ Debris Settings
+et Rusude seaded
+
+@ Directional Damage
+et Kahju suund
+
+@ Dithering
+et Dithering
+
+@ Dodge / Dive (Add-ons)
+et Põiklemine / hüpe (lisad)
+
+@ Dragging up looks down instead of up
+et Üles lohistamine vaatab alla, mitte üles
+
+@ Drive
+et Küllastus
+
+@ Dynamic Lights
+et Dünaamilised tuled
+
+@ Echo
+et Kaja
+
+@ Enemy Health
+et Vaenlase tervis
+
+@ Enemy Wounds
+et Vaenlaste haavad
+
+@ Enhanced Blood Splatter
+et Täiustatud vereplekid
+
+@ Enhanced FX
+et Täiustatud efektid
+
+@ Enhanced Models
+et Täiustatud mudelid
+
+@ Enhanced Particles
+et Täiustatud osakesed
+
+@ Enhanced Water
+et Täiustatud vesi
+
+@ Enhancements
+et Täiustused
+
+@ Equipment Wheel (Add-ons)
+et Varustusratas (lisad)
+
+@ Exploding boxes throw metal shards
+et Plahvatavad kastid paiskavad metallikilde
+
+@ Explosion Damage
+et Plahvatuskahju
+
+@ Explosion Scorch Marks
+et Plahvatuste kõrbejäljed
+
+@ Explosions scorch nearby solid surfaces
+et Plahvatused kõrvetavad lähedalasuvaid pindu
+
+@ Explosives only
+et Ainult lõhkeained
+
+@ Extra Monsters
+et Lisakoletised
+
+@ Extra Per 10 Damage (ms)
+et Lisa 10 kahju kohta (ms)
+
+@ FX Settings
+et Efektide seaded
+
+@ Field of View
+et Vaateväli
+
+@ Firing never uses up ammo
+et Tulistamine ei kuluta kunagi laskemoona
+
+@ First person
+et Esimene isik
+
+@ Flick Time
+et Flick-aeg
+
+@ Flight Speed
+et Lennukiirus
+
+@ Fog
+et Udu
+
+@ Frag Limit
+et Fragide piir
+
+@ Freeze Duration (ms)
+et Külmutuse kestus (ms)
+
+@ GLQuake
+et GLQuake
+
+@ Game Speed
+et Mängu kiirus
+
+@ Game Type
+et Mängu tüüp
+
+@ Gameplay
+et Mängimine
+
+@ Gameplay Modifiers
+et Mängu modifikaatorid
+
+@ Gel Quality
+et Geeli kvaliteet
+
+@ Gib Surface Painting
+et Lihatükkide plekid
+
+@ Gibs
+et Lihatükid
+
+@ Gibs and heads tumble and bounce
+et Lihatükid ja pead veerevad ja põrkavad
+
+@ Goggle Glow Quality
+et Prillide kuma kvaliteet
+
+@ Goggle Intensity
+et Prillide tugevus
+
+@ Goggle Noise
+et Prillide müra
+
+@ Goggles Settings
+et Prillide seaded
+
+@ Graphics
+et Graafika
+
+@ Green
+et Roheline
+
+@ Grenade Arc
+et Granaadikaar
+
+@ Grenade Arc Settings
+et Granaadikaare seaded
+
+@ Gun Kick
+et Relva tagasilöök
+
+@ Gyro
+et Güro
+
+@ Gyro & Flick Stick
+et Güro ja flick stick
+
+@ Gyro Active
+et Güro aktiivne
+
+@ Gyro Aiming
+et Güro-sihtimine
+
+@ HUD
+et HUD
+
+@ HUD Style
+et HUD-i stiil
+
+@ Health
+et Tervis
+
+@ Health Pickups
+et Tervise korjamine
+
+@ Health Position
+et Tervise asukoht
+
+@ Health Regeneration
+et Tervise taastumine
+
+@ Hit & Kill Sounds
+et Tabamus- ja tapuhelid
+
+@ Hit Doors & Lifts
+et Taba uksi ja lifte
+
+@ Hit Markers
+et Tabamusmärgid
+
+@ Hit Sound
+et Tabamusheli
+
+@ Hitmarker Size
+et Tabamusmärgi suurus
+
+@ Hitmarker Type
+et Tabamusmärgi tüüp
+
+@ Hitstop Advanced
+et Hitstop täpsemalt
+
+@ Hitstop Settings
+et Hitstopi seaded
+
+@ Hold
+et Hoia
+
+@ Hold lock-on
+et Hoia lukustust
+
+@ Hook Enemies
+et Haagi vaenlasi
+
+@ Hook Metal
+et Haagi metalli
+
+@ Hook Stone
+et Haagi kivi
+
+@ Hook Wood
+et Haagi puitu
+
+@ Hooking an enemy pulls you to it
+et Vaenlase haakimine tõmbab sind tema juurde
+
+@ Hookshot Range
+et Haaratsi ulatus
+
+@ Hookshot Settings
+et Haaratsi seaded
+
+@ Host Game
+et Loo mäng
+
+@ How far the hook flies before it retracts
+et Kui kaugele konks lendab enne tagasitulekut
+
+@ How visible the on-screen controls are
+et Kui nähtavad on ekraaninupud
+
+@ Impact Lifetime
+et Tabamusjälgede kestus
+
+@ Infinite Ammo
+et Lõpmatu laskemoon
+
+@ Input
+et Sisend
+
+@ Input Scale
+et Sisendi skaala
+
+@ Interpolate Animation
+et Interpoleeri animatsiooni
+
+@ Interpolate Movement
+et Interpoleeri liikumist
+
+@ Invert Look
+et Pööratud vaade
+
+@ Invert Mouse
+et Pööratud hiir
+
+@ Invert Stick
+et Pööratud kang
+
+@ Jet Quality
+et Joa kvaliteet
+
+@ Join Game
+et Liitu mänguga
+
+@ Jump / Swim Up
+et Hüppa / uju üles
+
+@ Jump again in mid-air
+et Hüppa uuesti õhus
+
+@ Jumps
+et Hüpped
+
+@ Keys & Powerups
+et Võtmed ja võimendid
+
+@ Keys & Powerups Position
+et Võtmete ja võimendite asukoht
+
+@ Kill Bonus (x)
+et Tapuboonus (x)
+
+@ Kill Sound
+et Tapuheli
+
+@ Knock
+et Koputus
+
+@ Left
+et Vasak
+
+@ Length of the motion blur streaks
+et Liikumisähmastuse triipude pikkus
+
+@ Lifetime (seconds)
+et Eluiga (sekundit)
+
+@ Live Portal Views
+et Elavad portaalivaated
+
+@ Live View Distance
+et Elava vaate kaugus
+
+@ Local Players
+et Kohalikud mängijad
+
+@ Local red wounds follow enemy animation
+et Punased haavad järgivad vaenlase animatsiooni
+
+@ Lock Indicator
+et Lukustuse näidik
+
+@ Long falls don't hurt
+et Pikad kukkumised ei tee haiget
+
+@ Longest Freeze (ms)
+et Pikim külmutus (ms)
+
+@ Look Down
+et Vaata alla
+
+@ Look Speed
+et Vaate kiirus
+
+@ Look Up
+et Vaata üles
+
+@ Main Menu Music
+et Peamenüü muusika
+
+@ Max FPS
+et Max FPS
+
+@ Max Players
+et Max mängijaid
+
+@ Maximum Impacts
+et Max tabamusjälgi
+
+@ Maximum Marks
+et Max jälgi
+
+@ Maximum Range
+et Max ulatus
+
+@ Melee only
+et Ainult lähivõitlus
+
+@ Message Background
+et Teadete taust
+
+@ Message Text Size
+et Teadete teksti suurus
+
+@ Messages & Captions
+et Teated ja subtiitrid
+
+@ Meter Duration (real seconds)
+et Näidiku kestus (päris sekundit)
+
+@ Minimum Damage
+et Minimaalne kahju
+
+@ Mode
+et Režiim
+
+@ Modern Console
+et Moodne konsool
+
+@ Modern HUD Layout
+et Moodne HUD-i paigutus
+
+@ Most recent save
+et Viimane salvestus
+
+@ Motion Blur
+et Liikumisähmastus
+
+@ Motion Blur Amount
+et Liikumisähmastuse hulk
+
+@ Motion Blur Quality
+et Liikumisähmastuse kvaliteet
+
+@ Mouse & Keyboard
+et Hiir ja klaviatuur
+
+@ Mouse Speed
+et Hiire kiirus
+
+@ Move Back
+et Liigu tagasi
+
+@ Move Forward
+et Liigu edasi
+
+@ Music Volume
+et Muusika helitugevus
+
+@ Next Weapon
+et Järgmine relv
+
+@ No Drowning
+et Uppumiseta
+
+@ No Fall Damage
+et Kukkumiskahjuta
+
+@ No Manual Saves
+et Käsitsi salvestuseta
+
+@ No Self Damage
+et Omakahjuta
+
+@ Noise Filter
+et Mürafilter
+
+@ Normal Color
+et Tavaline värv
+
+@ Notify Message Position
+et Teavituste asukoht
+
+@ Notify Message Time
+et Teavituste kestus
+
+@ Number of splatter rays per blood impact
+et Pritsmekiirte arv vere tabamuse kohta
+
+@ Off
+et Väljas
+
+@ On Death
+et Surmal
+
+@ On Kill Color
+et Tapuvärv
+
+@ On Target Color
+et Sihtmärgi värv
+
+@ Opacity
+et Läbipaistmatus
+
+@ Opacity of the grenade arc
+et Granaadikaare läbipaistmatus
+
+@ Pants Color
+et Pükste värv
+
+@ Particle Quality
+et Osakeste kvaliteet
+
+@ Particles
+et Osakesed
+
+@ Physical Nail Impacts
+et Füüsilised naelatabamused
+
+@ Pistol Start
+et Püstolistart
+
+@ Pitch
+et Helikõrgus
+
+@ Pitch Sensitivity
+et Vertikaalne tundlikkus
+
+@ Playback Speed
+et Taasesituse kiirus
+
+@ Player Setup
+et Mängija seadistus
+
+@ Pop
+et Plõks
+
+@ Portal Gun Settings
+et Portaalipüssi seaded
+
+@ Portal Recursion
+et Portaalide rekursioon
+
+@ Portal View Quality
+et Portaalivaate kvaliteet
+
+@ Preview Sound
+et Kuula heli
+
+@ Previous Weapon
+et Eelmine relv
+
+@ Projectile Shotguns Settings
+et Mürsuhaavlipüsside seaded
+
+@ Projectile Speed (units/s)
+et Mürsu kiirus (ühikut/s)
+
+@ Purple
+et Lilla
+
+@ Push
+et Tõuge
+
+@ Push Strength
+et Tõuke tugevus
+
+@ Quick Load
+et Kiirlaadimine
+
+@ Quick Save
+et Kiirsalvestus
+
+@ Railgun Settings
+et Railguni seaded
+
+@ Ranged only
+et Ainult kaugrünnak
+
+@ Reacquire While Held
+et Hoides haara uuesti
+
+@ Red
+et Punane
+
+@ Reduce Motion
+et Vähenda liikumist
+
+@ Regen (seconds per second)
+et Taastumine (sekundit sekundis)
+
+@ Render Scale
+et Renderdusskaala
+
+@ Reverb
+et Järelkõla
+
+@ Right
+et Parem
+
+@ Ripple Intensity
+et Lainetuse tugevus
+
+@ Ripples
+et Lainetus
+
+@ Roll Sensitivity
+et Kaldetundlikkus
+
+@ Rumble
+et Vibratsioon
+
+@ Run
+et Jookse
+
+@ Save on All Enemies Killed
+et Salvesta, kui kõik vaenlased on tapetud
+
+@ Save on All Secrets Found
+et Salvesta, kui kõik saladused on leitud
+
+@ Save on Level Entry
+et Salvesta taseme alguses
+
+@ Save on Secret Found
+et Salvesta saladuse leidmisel
+
+@ Scoreboard
+et Tulemustabel
+
+@ Screen Flashes
+et Ekraanivälgud
+
+@ Screen Shader
+et Ekraanivarjutaja
+
+@ Screen Shake
+et Ekraani värin
+
+@ Search LAN
+et Otsi LAN-ist
+
+@ Seconds a center-screen message stays up
+et Mitu sekundit keskteade ekraanil püsib
+
+@ See Through Portals
+et Vaata läbi portaalide
+
+@ See-through Teleporters
+et Läbipaistvad teleportid
+
+@ Shirt Color
+et Särgi värv
+
+@ Shotgun Bullet Decals
+et Haavlijäljed
+
+@ Shoulder left
+et Õla tagant vasakult
+
+@ Shoulder right
+et Õla tagant paremalt
+
+@ Show FPS
+et Näita FPS-i
+
+@ Show Face
+et Näita nägu
+
+@ Shrapnel
+et Killud
+
+@ Size of on-screen messages and captions
+et Ekraaniteadete ja subtiitrite suurus
+
+@ Skill
+et Raskusaste
+
+@ Sky Fog
+et Taeva udu
+
+@ Smooths the stepped movement of monsters
+et Silub koletiste astmelist liikumist
+
+@ Sound
+et Heli
+
+@ Sound Captions
+et Helisubtiitrid
+
+@ Sound Volume
+et Helitugevus
+
+@ Speed Blur
+et Kiirusähmastus
+
+@ Splashes
+et Pritsmed
+
+@ Splatter Amount
+et Pritsmete hulk
+
+@ Splatter Size
+et Pritsmete suurus
+
+@ Start Game
+et Alusta mängu
+
+@ Staying underwater doesn't hurt
+et Vee all viibimine ei tee haiget
+
+@ Stick Look Pitch
+et Kangi vertikaalvaade
+
+@ Stick Look Yaw
+et Kangi horisontaalvaade
+
+@ Strafe Left
+et Külgsamm vasakule
+
+@ Strafe Right
+et Külgsamm paremale
+
+@ Strength of the surface swell and rings
+et Pinnalainetuse ja rõngaste tugevus
+
+@ Stun Duration
+et Uimastuse kestus
+
+@ Style
+et Stiil
+
+@ Supersampling
+et Ülediskreetimine
+
+@ Surface Hit Effects
+et Pinnatabamuse efektid
+
+@ Swim Down
+et Uju alla
+
+@ Targets
+et Sihtmärgid
+
+@ Teamplay
+et Meeskonnamäng
+
+@ Texture Filter
+et Tekstuurifilter
+
+@ Third person
+et Kolmas isik
+
+@ Thud
+et Mürts
+
+@ Tick
+et Tiks
+
+@ Time Limit
+et Ajapiir
+
+@ Time Stretch
+et Aja venitus
+
+@ Toggle Attack
+et Rünnaku lüliti
+
+@ Toggle Run
+et Jooksu lüliti
+
+@ Toggle auto-aim
+et Automaatsihtimise lüliti
+
+@ Touch Controls
+et Puutejuhtimine
+
+@ Touchscreen
+et Puuteekraan
+
+@ Tough Enemy Health
+et Tugevate vaenlaste tervis
+
+@ Tough enemies only
+et Ainult tugevad vaenlased
+
+@ Trail Colour
+et Jälje värv
+
+@ Translate Console
+et Tõlgi konsool
+
+@ Translucent Water
+et Poolläbipaistev vesi
+
+@ Treble
+et Kõrged
+
+@ Turn Left
+et Pööra vasakule
+
+@ Turn Right
+et Pööra paremale
+
+@ Underwater FX
+et Veealused efektid
+
+@ Use Bullet Time Meter
+et Bullet time'i näidik
+
+@ VSync
+et VSync
+
+@ View Bob
+et Vaate õõtsumine
+
+@ Viewmodels
+et Relvamudelid
+
+@ Volume
+et Helitugevus
+
+@ Water Opacity
+et Vee läbipaistmatus
+
+@ Water Quality
+et Vee kvaliteet
+
+@ Water Settings
+et Vee seaded
+
+@ Weapon Wheel
+et Relvaratas
+
+@ Weapon Wheel Slowdown
+et Relvaratta aeglustus
+
+@ Weapons
+et Relvad
+
+@ Weapons Position
+et Relvade asukoht
+
+@ Where center-screen messages appear
+et Kus keskteated ilmuvad
+
+@ Where pickup and event messages appear
+et Kus korjamis- ja sündmusteated ilmuvad
+
+@ White
+et Valge
+
+@ Yaw Sensitivity
+et Horisontaalne tundlikkus
+
+@ Yellow
+et Kollane
+
+# lowercase choice values
+@ T
+et T
+
+@ always
+et alati
+
+@ auto
+et auto
+
+@ banded
+et astmeline
+
+@ borderless
+et ääristeta
+
+@ bottom center
+et all keskel
+
+@ bottom left
+et all vasakul
+
+@ bottom right
+et all paremal
+
+@ box
+et kast
+
+@ broken square
+et katkine ruut
+
+@ classic
+et klassikaline
+
+@ coarse
+et jäme
+
+@ cooperative
+et koostöö
+
+@ cross
+et rist
+
+@ cross + dot
+et rist + punkt
+
+@ cyan
+et tsüaan
+
+@ dashed
+et kriipsjoon
+
+@ deathmatch
+et deathmatch
+
+@ deuteranopia
+et deuteranoopia
+
+@ diagonal streaks
+et diagonaaltriibud
+
+@ diamond
+et romb
+
+@ dot
+et punkt
+
+@ double
+et topelt
+
+@ double chevrons
+et topeltnurgad
+
+@ double diagonals
+et topeltdiagonaalid
+
+@ easy
+et lihtne
+
+@ fine
+et peen
+
+@ fit output
+et sobita väljundiga
+
+@ flick stick
+et flick stick
+
+@ fullscreen
+et täisekraan
+
+@ gap cross
+et avatud rist
+
+@ green
+et roheline
+
+@ grey
+et hall
+
+@ half speed
+et pool kiirust
+
+@ hard
+et raske
+
+@ high
+et kõrge
+
+@ huge
+et hiiglaslik
+
+@ immersive
+et kaasahaarav
+
+@ intense
+et intensiivne
+
+@ large
+et suur
+
+@ larger
+et suurem
+
+@ largest
+et suurim
+
+@ linear
+et lineaarne
+
+@ low
+et madal
+
+@ lower
+et all
+
+@ magenta
+et magenta
+
+@ medium
+et keskmine
+
+@ middle
+et keskel
+
+@ middle left
+et keskel vasakul
+
+@ middle right
+et keskel paremal
+
+@ modern
+et moodne
+
+@ nearest
+et lähim
+
+@ nightmare
+et luupainaja
+
+@ nintendo
+et Nintendo
+
+@ no team damage
+et meeskonnakahjuta
+
+@ none
+et puudub
+
+@ normal
+et tavaline
+
+@ off
+et väljas
+
+@ off while held
+et hoides väljas
+
+@ on
+et sees
+
+@ only while held
+et ainult hoides
+
+@ playstation
+et PlayStation
+
+@ protanopia
+et protanoopia
+
+@ quarter speed
+et veerand kiirust
+
+@ red
+et punane
+
+@ short diagonals
+et lühikesed diagonaalid
+
+@ single
+et ühekordne
+
+@ small
+et väike
+
+@ solid
+et pidevjoon
+
+@ spectacle
+et vaatemäng
+
+@ subtle
+et tagasihoidlik
+
+@ team damage
+et meeskonnakahju
+
+@ top center
+et üleval keskel
+
+@ top left
+et üleval vasakul
+
+@ top right
+et üleval paremal
+
+@ triple
+et kolmekordne
+
+@ tritanopia
+et tritanoopia
+
+@ upper
+et üleval
+
+@ white
+et valge
+
+@ whole screen
+et kogu ekraan
+
+@ windowed
+et aknas
+
+@ xbox
+et Xbox
+
+@ yellow
+et kollane
+
+# ==== tooltips.txt ====
+
+# Options help lines (tooltips) and reasons for disabled rows.
+@ 2D aiming turns the view continuously with the right stick; flick stick snaps the view to where you push the stick, then turning the stick rotates it
+et 2D-sihtimine pöörab vaadet parema kangiga sujuvalt; flick stick pöörab vaate kohe kangi suunda, seejärel pöörab kangi keeramine seda edasi
+
+@ 3D resolution relative to the window; the UI stays sharp
+et 3D-eraldusvõime akna suhtes; kasutajaliides jääb teravaks
+
+@ 3D view keeps the HUD and menus sharp; whole screen runs them through the shader too
+et 3D-vaade jätab HUD-i ja menüüd teravaks; kogu ekraan laseb ka need varjutajast läbi
+
+@ A Quake III style railgun: a slug that pierces every enemy on its line, using 2 cells a shot and refiring every 1.5 s; select it through its assigned weapon slot (Add-ons)
+et Quake III stiilis railgun: kuul läbistab iga vaenlase oma joonel, kulutab 2 elementi lasu kohta ja laeb 1,5 s; vali see määratud relvapesa kaudu (lisad)
+
+@ A Zelda-style hookshot: fire sends a chain hook out; it latches onto hookable surfaces or enemies and reels you in; fire again to let go
+et Zelda stiilis haarats: tulistamine heidab välja ketiga konksu, mis haakub sobivate pindade või vaenlaste külge ja tõmbab sind kohale; tulista uuesti, et lahti lasta
+
+@ Also translates the engine's console messages; off keeps them in English
+et Tõlgib ka mootori konsooliteated; väljas jätab need inglise keelde
+
+@ Automatically acquire another enemy while holding Lock-on after losing a target
+et Haarab automaatselt uue vaenlase, kui sihtmärk kaob ja nuppu „Lukustus“ hoitakse all
+
+@ Blends between animation frames of monsters and weapons
+et Sujutab üleminekuid koletiste ja relvade animatsioonikaadrite vahel
+
+@ Blood stains surfaces and bodies; cosmetic, independent of particle packs
+et Veri määrib pindu ja kehasid; puhtalt kosmeetiline, osakestepakettidest sõltumatu
+
+@ Bloom glow around bright lights and heat sources; medium uses 4 taps, high uses 8, low disables halo taps
+et Bloom-kuma eredate tulede ja soojusallikate ümber; keskmine kasutab 4 proovi, kõrge 8, madal lülitab halo välja
+
+@ Blurs fast-moving monsters, projectiles and doors (not camera turns)
+et Ähmastab kiireid koletisi, mürske ja uksi (mitte kaamera pööramist)
+
+@ Blurs the screen edges during fast falls and launches; keeps the centre clear. Reduce Motion disables it
+et Ähmastab ekraani servi kiirete kukkumiste ja hüpete ajal; keskkoht jääb selgeks. „Vähenda liikumist“ lülitab selle välja
+
+@ Brightness of the underwater light patterns
+et Veealuste valgusmustrite heledus
+
+@ Caps mark count, lifetime, airborne droplets and wound/gib painting; low skips enemy wounds and gib trails
+et Piirab jälgede arvu, eluiga, lendavaid piisku ning haavade ja lihatükkide plekke; madal jätab vaenlaste haavad ja lihatükkide jäljed vahele
+
+@ Caps shader input at output size so 200% render scale keeps 3D sharpness without 4x shader cost; low scales stay low-res
+et Piirab varjutaja sisendi väljundi suurusega, nii et 200% renderdusskaala säilitab 3D-teravuse ilma neljakordse varjutajakuluta; madalad skaalad jäävad madala eraldusvõimega
+
+@ Classic: the original status bar; modern: compact elements at the screen edges
+et Klassikaline: algne olekuriba; moodne: kompaktsed elemendid ekraani servades
+
+@ Coat atlas resolution, rebuild rate and shader detail: low builds smaller coats less often with fast shading; high uses full detail
+et Kattekihtide atlase eraldusvõime, uuendussagedus ja varjutaja detail: madal loob väiksemaid kihte harvemini ja kiire varjutusega; kõrge kasutab täit detaili
+
+@ Colour of the railgun's spiral trail; split-screen players each get the next colour along
+et Railguni spiraaljälje värv; jagatud ekraanil saab iga mängija järgmise värvi
+
+@ Damage the railgun deals to each enemy it passes through (Quake III: 100)
+et Kahju, mida railgun teeb igale läbistatud vaenlasele (Quake III: 100)
+
+@ Dark backdrop behind on-screen messages for readability
+et Tume taust ekraaniteadete taga parema loetavuse jaoks
+
+@ Dark border keeps the crosshair visible on any background
+et Tume ääris hoiab sihiku igal taustal nähtavana
+
+@ Darkens corners and contact areas where geometry meets; higher quality is sharper
+et Tumendab nurki ja kokkupuutealasid, kus geomeetria kohtub; kõrgem kvaliteet on teravam
+
+@ Debris lands on and is carried or shoved by doors, lifts and platforms
+et Rusud maanduvad ustele, liftidele ja platvormidele ning need kannavad või lükkavad neid
+
+@ Detail for caustics, ripples and splashes: low uses smaller budgets and shorter view distance; high uses larger budgets and farther view distance
+et Kaustika, lainetuse ja pritsmete detail: madal kasutab väiksemaid eelarveid ja lühemat vaatekaugust; kõrge suuremaid eelarveid ja pikemat vaatekaugust
+
+@ Disabled while Enhanced Particles is on: its particles replace the GLQuake and Classic styles
+et Keelatud, kui „Täiustatud osakesed“ on sees: selle osakesed asendavad GLQuake'i ja klassikalise stiili
+
+@ Disabled while Enhanced Water is on: its own underwater effects replace the classic and GLQuake view warps
+et Keelatud, kui „Täiustatud vesi“ on sees: selle veealused efektid asendavad klassikalise ja GLQuake'i vaatemoonutuse
+
+@ Draw the predicted grenade path as a solid or dashed line
+et Joonista granaadi ennustatud lennutee pidev- või kriipsjoonena
+
+@ Draw the view out of the linked portal inside each portal; off shows flat discs (fastest)
+et Näitab igas portaalis vaadet seotud portaalist; väljas näitab lamedaid kettaid (kiireim)
+
+@ Droplets spray up when things enter or leave water, slime or lava
+et Piisad pritsivad, kui midagi siseneb vette, limasse või laavasse või väljub sealt
+
+@ Emulates the original 8-bit palette of software rendering
+et Jäljendab tarkvararenderduse algset 8-bitist paletti
+
+@ Every level starts with only the shotgun and axe, as if started fresh
+et Iga tase algab ainult haavlipüssi ja kirvega, nagu värskelt alustades
+
+@ Explosion damage for each remotely detonated sticky bomb
+et Iga kaugelt lõhatud kleeppommi plahvatuskahju
+
+@ Extra freeze milliseconds for every 10 damage dealt, so heavy hits stop longer
+et Lisamillisekundid külmutusele iga 10 kahjupunkti kohta, et rasked tabamused peataksid kauem
+
+@ First person, a third-person camera centered behind the player, or one over the right or left shoulder; third person hides viewmodels
+et Esimene isik, mängija taga keskel asuv kolmanda isiku kaamera või kaamera parema või vasaku õla kohal; kolmas isik peidab relvamudelid
+
+@ Flash the selected marker on confirmed hits; colors are shared with the crosshair
+et Vilgutab valitud märki kinnitatud tabamustel; värvid on ühised sihikuga
+
+@ Freeze for every enemy, or only for enemies that were tough before the hit
+et Külmutus iga vaenlase puhul või ainult nende puhul, kes olid enne tabamust tugevad
+
+@ Freeze the game briefly when you damage an enemy; single player with add-ons only
+et Külmutab mängu hetkeks, kui vaenlast vigastad; ainult üksikmängus koos lisadega
+
+@ Gibs tumble and barrels throw shrapnel; shots and blasts push them (cosmetic only)
+et Lihatükid veerevad ja tünnid paiskavad kilde; lasud ja plahvatused lükkavad neid (puhtalt kosmeetiline)
+
+@ Health an enemy must have had before the hit to count as tough
+et Tervis, mis vaenlasel pidi enne tabamust olema, et teda tugevaks lugeda
+
+@ Hits dealing less damage than this do not freeze the game; the default 10 skips nails and shotgun pellets
+et Sellest väiksema kahjuga tabamused mängu ei külmuta; vaikimisi 10 jätab vahele naelad ja haavlid
+
+@ Hold fire and sweep the crosshair over monsters to queue them, release to throw: it stuns each in turn and flies back; alt-fire clears the queue
+et Hoia tuld all ja vii sihik üle koletiste, et need järjekorda panna, lase lahti, et visata: bumerang uimastab neid kordamööda ja lendab tagasi; alt-tuli tühjendab järjekorra
+
+@ Hold: keep Lock-on held. Toggle: press Auto-aim Toggle to enable automatic acquisition. Click look stick to switch targets
+et Hoia: hoia nuppu „Lukustus“ all. Lüliti: vajuta nuppu „Automaatsihtimise lüliti“, et lubada automaatne haaramine. Sihtmärgi vahetamiseks vajuta vaatekangi
+
+@ How close an enemy must be to the crosshair for automatic acquisition in toggle mode (degrees)
+et Kui lähedal sihikule peab vaenlane olema, et lülitirežiimis automaatselt haarata (kraadides)
+
+@ How far the view tilts up and down when you tilt the controller (pitch axis)
+et Kui palju vaade üles-alla kaldub, kui pult kallutad (kaldetelg)
+
+@ How far the view turns left and right when you turn the controller (yaw axis)
+et Kui palju vaade vasakule-paremale pöörab, kui pulti pöörad (pöördetelg)
+
+@ How far the view turns when you drag on the right half of the screen
+et Kui palju vaade pöörab, kui ekraani paremal poolel lohistad
+
+@ How fast the boomerang flies (units per second)
+et Kui kiiresti bumerang lendab (ühikut sekundis)
+
+@ How hard shots and explosions push debris around
+et Kui tugevalt lasud ja plahvatused rususid ringi lükkavad
+
+@ How hard the Powerwasher's water pushes enemies
+et Kui tugevalt survepesuri vesi vaenlasi lükkab
+
+@ How long a hit freezes the game, in milliseconds
+et Kui kaua tabamus mängu külmutab, millisekundites
+
+@ How strongly fog covers the sky when fog is on
+et Kui tugevalt udu taevast katab, kui udu on sees
+
+@ How the view distorts underwater: Classic ripples the whole screen like software Quake, GLQuake slowly stretches and squashes the view
+et Kuidas vaade vee all moondub: klassikaline laineb tervet ekraani nagu tarkvara-Quake, GLQuake venitab ja surub vaadet aeglaselt
+
+@ Ignores gyro rotation slower than this many degrees per second, to hide hand tremor
+et Eirab güro pööret, mis on aeglasem kui nii mitu kraadi sekundis, et peita käte värinat
+
+@ Immersive: appears for a few seconds only when its value changes
+et Kaasahaarav: ilmub vaid mõneks sekundiks, kui väärtus muutub
+
+@ Keeps textures sharp on floors and walls seen at steep angles
+et Hoiab tekstuurid teravana põrandatel ja seintel, mida nähakse terava nurga all
+
+@ Lights from rockets, muzzle flashes and explosions brighten nearby walls
+et Rakettide, suutulede ja plahvatuste valgus valgustab lähedal olevaid seinu
+
+@ Liquid surfaces swell and ring out where things move through them
+et Vedelike pinnad lainetavad ja moodustavad rõngaid, kus miski neist läbi liigub
+
+@ Lobs sticky bombs (rockets ammo) that cling to walls, doors and monsters; alt-fire detonates them all
+et Heidab kleeppomme (raketimoon), mis jäävad kinni seintele, ustele ja koletistele; alt-tuli lõhkab need kõik
+
+@ Look of the classic particles: GLQuake draws soft round dots, Classic draws square pixels like software Quake
+et Klassikaliste osakeste välimus: GLQuake joonistab pehmeid ümaraid täppe, klassikaline ruudukujulisi piksleid nagu tarkvara-Quake
+
+@ Low skips the background smear halo and uses fewer blur samples; high keeps the full halo and smoother streaks
+et Madal jätab tausta määrimishalo ära ja kasutab vähem ähmastusproove; kõrge säilitab täieliku halo ja sujuvamad triibud
+
+@ Low: hard particle edges, half the scripted particles and fewer hit sparks. Medium: soft edges. High: soft edges checked per MSAA sample, most hit sparks
+et Madal: teravad osakeste servad, poole vähem skriptitud osakesi ja vähem tabamussädemeid. Keskmine: pehmed servad. Kõrge: pehmed servad iga MSAA-proovi kohta, enamik sädemeid
+
+@ Marks fade out before expiring; oldest marks are recycled at the limit
+et Jäljed hääbuvad enne kadumist; piiri täitudes kasutatakse vanimad jäljed uuesti
+
+@ Max nested portal reflections to draw; each level redraws the scene
+et Maksimaalne joonistatavate pesastatud portaalide arv; iga tase joonistab stseeni uuesti
+
+@ Max portals per screen with a live view; each one redraws the scene
+et Maksimaalne elava vaatega portaalide arv ekraanil; igaüks joonistab stseeni uuesti
+
+@ Maximum distance for acquiring and keeping an enemy locked
+et Maksimaalne kaugus vaenlase haaramiseks ja lukus hoidmiseks
+
+@ Minimum gap between freezes, so shotgun pellets and rapid fire count once; kills ignore it
+et Minimaalne vahe külmutuste vahel, et haavlid ja kiirtuli loeksid üks kord; tapmised eiravad seda
+
+@ Modern terminal console with autocomplete popup, history search, ANSI colors, bash shell and piping; off uses the classic Quake console
+et Moodne terminalikonsool automaatlõpetuse hüpikakna, ajaloootsingu, ANSI-värvide, bash-kesta ja torudega; väljas kasutab klassikalist Quake'i konsooli
+
+@ Monsters take proportionally less damage at higher values; above 100% is harder
+et Kõrgemate väärtuste korral saavad koletised proportsionaalselt vähem kahju; üle 100% on raskem
+
+@ Moving gibs leave blood on surfaces they touch
+et Liikuvad lihatükid jätavad puudutatud pindadele verd
+
+@ Multiplier on the freeze when the hit kills the enemy; 1 means no extra
+et Külmutuse kordaja, kui tabamus vaenlase tapab; 1 tähendab lisata
+
+@ Multiplies ammo from pickups (up to the normal carry limit); below 100% is harder
+et Korrutab korjatud laskemoona (kuni tavalise kandmispiirini); alla 100% on raskem
+
+@ Multiplies health from pickups (up to 100, or the item's own limit); below 100% is harder
+et Korrutab korjatud tervist (kuni 100 või eseme enda piirini); alla 100% on raskem
+
+@ Nails stick to wood and bodies; hard surfaces deflect them to the floor
+et Naelad jäävad puitu ja kehadesse kinni; kõvad pinnad suunavad need põrandale
+
+@ Nearest keeps crisp classic pixels; linear smooths textures
+et Lähim säilitab teravad klassikalised pikslid; lineaarne silub tekstuure
+
+@ New Game: Add-ons
+et Uus mäng: lisad
+
+@ New Game: Customize
+et Uus mäng: kohandamine
+
+@ Night vision: how much dark areas are brightened; thermal: how strongly heat stands out
+et Öönägemine: kui palju tumedaid alasid heledamaks tehakse; termonägemine: kui selgelt soojus esile tõuseb
+
+@ Night-vision and thermal goggles, cycle normal, night vision and thermal with Change Goggles (Add-ons), or use the Equipment Wheel
+et Öö- ja termonägemisprillid: vaheta tavalise, öö- ja termonägemise vahel nupuga „Vaheta prille“ (lisad) või kasuta varustusratast
+
+@ No single freeze lasts longer than this, however much damage or kill bonus adds
+et Ükski külmutus ei kesta kauem, olenemata lisanduvast kahjust või tapuboonusest
+
+@ Oldest marks and nails are recycled at this shared limit
+et Selle ühise piiri täitudes kasutatakse vanimad jäljed ja naelad uuesti
+
+@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
+et Ekraanil olev kang ja nupud: auto näitab neid pärast puudutust ja peidab, kui kasutatakse muud seadet
+
+@ Only autosaves: quicksaves and the Save menu are off
+et Ainult autosalvestused: kiirsalvestus ja salvestusmenüü on välja lülitatud
+
+@ Place every weapon at the center, right or left of the view, or hide all viewmodels
+et Paigutab iga relva vaate keskele, paremale või vasakule või peidab kõik relvamudelid
+
+@ Play your chosen hit or kill cue when you damage an enemy
+et Mängib valitud tabamus- või tapuheli, kui vaenlast vigastad
+
+@ Playback speed: faster sounds shorter and higher
+et Taasesituse kiirus: kiirem kõlab lühemalt ja kõrgemalt
+
+@ Plays the Quake theme in the main menu when no game is running
+et Mängib peamenüüs Quake'i teemat, kui mäng ei käi
+
+@ Portals farther away than this are drawn as flat discs
+et Sellest kaugemal olevad portaalid joonistatakse lamedate ketastena
+
+@ Press attack once to keep firing, again to stop
+et Vajuta rünnakut korra, et pidevalt tulistada, ja uuesti, et lõpetada
+
+@ Press run once to switch between running and walking
+et Vajuta jooksmist korra, et vahetada jooksmise ja kõndimise vahel
+
+@ Raise or lower the tone independently of sound length
+et Tõstab või langetab helikõrgust heli pikkusest sõltumata
+
+@ Red screen edges show where damage came from: top is front, bottom is behind; Screen Flashes controls their strength
+et Punased ekraaniservad näitavad, kust kahju tuli: ülal on ees, all on taga; „Ekraanivälgud“ määrab nende tugevuse
+
+@ Replaces the classic dot particles with glowing sparks, smoke and blood; mods with their own particle effects keep them
+et Asendab klassikalised täppidest osakesed hõõguvate sädemete, suitsu ja verega; omaenda osakeste efektidega modid säilitavad need
+
+@ Resolution and detail inside portal and teleporter views; lower tiers trim nested effects
+et Eraldusvõime ja detail portaali- ja teleportivaadetes; madalamad tasemed kärbivad pesastatud efekte
+
+@ Rippling light patterns on surfaces under water and slime
+et Lainetavad valgusmustrid pindadel vee ja lima all
+
+@ Scales all damage you take; above 100% is harder
+et Skaleerib kogu saadud kahju; üle 100% on raskem
+
+@ Screen edge for this element; elements on the same spot stack
+et Selle elemendi ekraaniserv; samas kohas olevad elemendid lähevad virna
+
+@ Seconds a monster hit by the boomerang stays stunned
+et Mitu sekundit bumerangiga tabatud koletis uimas püsib
+
+@ Seconds impact marks and stuck nails stay before fading out; independent of Particle Quality
+et Mitu sekundit tabamusjäljed ja kinni jäänud naelad püsivad enne hääbumist; osakeste kvaliteedist sõltumatu
+
+@ Seconds messages at the top of the screen stay up
+et Mitu sekundit ekraani ülaosa teated püsivad
+
+@ Seconds the flick stick snap takes; lower is faster
+et Flick stick'i pöörde kestus sekundites; väiksem on kiirem
+
+@ See through enhanced water; enables Water Opacity
+et Vaata läbi täiustatud vee; lubab sätte „Vee läbipaistmatus“
+
+@ Sensor grain, scanlines and flicker of the goggle image
+et Prillipildi sensorimüra, skaneerimisjooned ja virvendus
+
+@ Shades every anti-aliasing sample; needs Anti-aliasing on
+et Varjutab iga servasilumise proovi; vajab sisselülitatud servasilumist
+
+@ Shifts colors so they stay distinct for the chosen color blindness
+et Nihutab värve, et need jääksid valitud värvipimeduse korral eristatavaks
+
+@ Shotgun hits leave small surface marks (cosmetic only)
+et Haavlitabamused jätavad pindadele väikesi jälgi (puhtalt kosmeetiline)
+
+@ Show corner ticks at screen centre while locked, even with Crosshair off
+et Näitab lukustuse ajal ekraani keskel nurgamärke, ka siis, kui sihik on väljas
+
+@ Show where grenades and other arcing shots will fly, bounce and land; local play only, not in deathmatch
+et Näitab, kuhu granaadid ja muud kaarega lasud lendavad, põrkavad ja maanduvad; ainult kohalikus mängus, mitte deathmatch'is
+
+@ Shows text for important sounds: doors, alerted enemies, secrets, pickups
+et Näitab teksti oluliste helide kohta: uksed, häiresse läinud vaenlased, saladused, esemed
+
+@ Shows the distance fog that maps and mods set; off always gives clear view
+et Näitab kaartide ja modide määratud kaugusudu; väljas annab alati selge vaate
+
+@ Shows the player face next to the health number
+et Näitab mängija nägu tervisenumbri kõrval
+
+@ Simulation detail, step rate, fade-out lifetimes and caps for gibs and shrapnel; low also skips mover collision
+et Simulatsiooni detail, sammusagedus, hääbumisajad ja piirangud lihatükkidele ja kildudele; madal jätab vahele ka liikuvate osadega põrked
+
+@ Size of the on-screen buttons and move stick
+et Ekraaninuppude ja liikumiskangi suurus
+
+@ Slowly heals up to 100 health after 5 seconds without being hit
+et Ravib aeglaselt kuni 100 tervisepunktini, kui sind pole 5 sekundit tabatud
+
+@ Slows stick look while the crosshair is over an enemy
+et Aeglustab kangiga vaatamist, kui sihik on vaenlase peal
+
+@ Slows the game down while the weapon wheel is open
+et Aeglustab mängu, kui relvaratas on avatud
+
+@ Slows the whole game down; single player only. Saves and demos stay compatible with other ports
+et Aeglustab kogu mängu; ainult üksikmängus. Salvestused ja demod jäävad teiste portidega ühilduvaks
+
+@ Small camera jolt on each freeze; off with Reduce Motion
+et Väike kaameranõks iga külmutuse ajal; „Vähenda liikumist“ lülitab välja
+
+@ Snap and track enemies in local play, including split-screen; unavailable online
+et Haarab ja jälgib vaenlasi kohalikus mängus, ka jagatud ekraanil; võrgus pole saadaval
+
+@ Sparks, smoke, chips, splinters and splashes fly off whatever your shots hit
+et Sädemed, suits, killud, pilbad ja pritsmed lendavad kõigelt, mida su lasud tabavad
+
+@ Spawns extra copies of every monster around the original when a level starts
+et Tekitab taseme alguses iga koletise ümber selle lisakoopiad
+
+@ Strength of the full-screen flashes for damage, pickups and powerups
+et Täisekraanivälgatuste tugevus kahju, esemete ja võimendite korral
+
+@ Stretch or shorten the sound while keeping its pitch
+et Venitab või lühendab heli, säilitades helikõrguse
+
+@ Surface opacity; requires Enhanced Water and Translucent Water
+et Pinna läbipaistmatus; vajab sätteid „Täiustatud vesi“ ja „Poolläbipaistev vesi“
+
+@ The hook latches onto metal surfaces (metal, tech, computer panels, copper)
+et Konks haakub metallpindade külge (metall, tehnika, arvutipaneelid, vask)
+
+@ The hook latches onto stone, brick, rock and any surface not recognised as wood or metal
+et Konks haakub kivi, telliste, kalju ja iga pinna külge, mida ei tunta ära puidu ega metallina
+
+@ The hook latches onto wooden surfaces (texture names like wood, crate, plank)
+et Konks haakub puitpindade külge (tekstuurinimed nagu wood, crate, plank)
+
+@ Turn the controller's motion sensor into a look input; needs a pad with a gyroscope
+et Muudab puldi liikumisanduri vaatamise sisendiks; vajab güroskoobiga mängupulti
+
+@ Turns off view bob, strafe tilt and the camera kick when hit or firing
+et Lülitab välja vaate õõtsumise, külgsammu kalde ja kaameranõksu tabamuse või tulistamise korral
+
+@ Turns on the extra liquid effects; Water Settings controls each one
+et Lülitab sisse vedelike lisaefektid; „Vee seaded“ juhib igaüht eraldi
+
+@ Turns the view to follow a moving enemy you are aiming at
+et Pöörab vaadet, et jälgida liikuvat vaenlast, keda sihid
+
+@ Turns the view when you roll the controller sideways; 0 disables it, negative reverses it
+et Pöörab vaadet, kui pulti külgsuunas kallutad; 0 lülitab välja, negatiivne pöörab ümber
+
+@ Two-portal gun: fire and alt-fire place linked portals on flat walls; assign a weapon slot in Add-ons
+et Kahe portaaliga püss: tuli ja alt-tuli paigutavad tasastele seintele seotud portaalid; määra relvapesa lisade all
+
+@ Unlocks the FX Settings page: enhanced particles, impact effects and blood splatter
+et Avab lehe „Efektide seaded“: täiustatud osakesed, tabamusefektid ja vereplekid
+
+@ Uses the 2021 re-release's smoother MD5 models (and MD3 replacements from mods) instead of the classic ones. Applies on the next map load
+et Kasutab klassikaliste asemel 2021. aasta uusväljaande sujuvamaid MD5-mudeleid (ja modide MD3-asendusi). Rakendub järgmise kaardi laadimisel
+
+@ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
+et Kasutab kaardi värvilist valgust (.lit-fail või BSPX-plokk); väljas annab algse valge valguse. Rakendub järgmise kaardi laadimisel
+
+@ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
+et Veejoa lõigud, piiskade arv ja läikiv vedelikuvarjutus: madal kasutab lihtsamaid poolläbipaistvaid jugasid; kõrge sujuvaid läikivaid jugasid
+
+@ When gyro looking applies: always, off while +gyroaction is held, or only while it is held
+et Millal güroga vaatamine kehtib: alati, väljas +gyroaction'i hoidmise ajal või ainult selle hoidmise ajal
+
+@ Which weapons trigger the freeze; melee covers the axe and any mod weapon used at close range without ammo
+et Millised relvad külmutuse käivitavad; lähivõitlus hõlmab kirvest ja iga modi relva, mida kasutatakse lähedalt ilma laskemoonata
+
+@ Your own rockets and grenades don't hurt you; rocket jumps still work
+et Sinu enda raketid ja granaadid ei tee sulle haiget; raketihüpped töötavad endiselt
+
+# ==== ui.txt ====
+
+# Menus and pop-ups outside the options pages: save cards, launch, presets,
+# add-on browser, map packs, hints and dialogs.
+@ Select
+et Vali
+
+@ Back
+et Tagasi
+
+@ Cancel
+et Tühista
+
+@ Confirm
+et Kinnita
+
+@ Scroll
+et Keri
+
+@ Section
+et Jaotis
+
+@ Bind
+et Määra
+
+@ Cancel binding
+et Tühista määramine
+
+@ Clear
+et Kustuta
+
+@ Clear pad
+et Kustuta pult
+
+@ Remap
+et Määra uuesti
+
+@ Type
+et Kirjuta
+
+@ Shift
+et Shift
+
+@ Done
+et Valmis
+
+@ Del
+et Del
+
+@ Space
+et Tühik
+
+@ Save
+et Salvesta
+
+@ Load
+et Laadi
+
+@ Delete
+et Kustuta
+
+@ Play
+et Mängi
+
+@ Yes
+et Jah
+
+@ No
+et Ei
+
+@ OK
+et OK
+
+@ System
+et Süsteem
+
+@ Language
+et Keel
+
+@ Help
+et Abi
+
+@ Fixed for this game: it was started without Customize
+et Selles mängus fikseeritud: see alustati ilma kohandamiseta
+
+@ Press a button or key to bind (Start cancels)
+et Vajuta määramiseks nuppu või klahvi (Start tühistab)
+
+@ Press button...
+et Vajuta nuppu...
+
+@ Press key...
+et Vajuta klahvi...
+
+@ Replace this binding?
+et Asendada see määrang?
+
+@ is already assigned
+et on juba määratud
+
+@ {} already assigned
+et {} on juba määratud
+
+@ Open Controls to remap Lock-on?
+et Avada juhtimine, et „Lukustus“ uuesti määrata?
+
+@ Lock-on
+et Lukustus
+
+@ Auto-aim Toggle
+et Automaatsihtimise lüliti
+
+@ Keyboard
+et Klaviatuur
+
+@ Controller
+et Mängupult
+
+# main menu, dialogs and screens
+@ Map Packs
+et Kaardipaketid
+
+@ Customize
+et Kohanda
+
+@ Level Select
+et Taseme valik
+
+@ Really quit?
+et Kas tõesti väljuda?
+
+@ You died
+et Sa said surma
+
+@ Continue from most recent save
+et Jätka viimasest salvestusest
+
+@ Select save
+et Vali salvestus
+
+@ Restart level
+et Alusta taset uuesti
+
+@ Return to main menu
+et Tagasi peamenüüsse
+
+@ (disabled)
+et (keelatud)
+
+@ (fixed for this game)
+et (selles mängus fikseeritud)
+
+@ (off)
+et (väljas)
+
+@ Apply Display Changes
+et Rakenda kuvamuudatused
+
+@ Display Mode
+et Kuvarežiim
+
+@ Resolution
+et Eraldusvõime
+
+@ desktop
+et töölaud
+
+@ Preset
+et Eelseadistus
+
+@ Map
+et Kaart
+
+@ Reset Shader Settings
+et Lähtesta varjutaja seaded
+
+@ Reset to Defaults
+et Taasta vaikesätted
+
+@ Searching...
+et Otsimine...
+
+@ This game only autosaves.
+et See mäng salvestab ainult automaatselt.
+
+@ (No Manual Saves modifier)
+et (modifikaator „Käsitsi salvestuseta“)
+
+@ End the current game?
+et Kas lõpetada praegune mäng?
+
+@ Unsaved progress will be lost.
+et Salvestamata edenemine läheb kaotsi.
+
+@ End game
+et Lõpeta mäng
+
+@ Overwrite
+et Kirjuta üle
+
+@ Overwrite "{}"?
+et Kas kirjutada „{}“ üle?
+
+@ Saved {}
+et Salvestatud {}
+
+@ Start a new game?
+et Kas alustada uut mängu?
+
+@ New game
+et Uus mäng
+
+@ New Game
+et Uus mäng
+
+@ CUSTOM
+et KOHANDATUD
+
+@ Customize Experience
+et Kohanda kogemust
+
+@ Disable All
+et Keela kõik
+
+@ Disable All Modifications
+et Keela kõik muudatused
+
+@ Saves load in other source ports too.
+et Salvestused laaditakse ka teistes portides.
+
+@ Standard rules, no add-ons.
+et Tavareeglid, lisadeta.
+
+@ Choose skill
+et Vali raskusaste
+
+@ The current game will end
+et Praegune mäng lõpeb
+
+@ Easy
+et Lihtne
+
+@ Normal
+et Tavaline
+
+@ Hard
+et Raske
+
+@ Nightmare
+et Luupainaja
+
+# graphics preset pop-up
+@ Choose a Graphics Preset
+et Vali graafika eelseadistus
+
+@ Classic
+et Klassikaline
+
+@ Like the re-release: enhanced models,
+et Nagu uusväljaanne: täiustatud mudelid,
+
+@ no added effects.
+et lisaefektideta.
+
+@ Enhanced
+et Täiustatud
+
+@ Every enhancement at its highest quality.
+et Kõik täiustused kõrgeimal kvaliteedil.
+
+@ Needs a capable GPU.
+et Vajab võimekat GPU-d.
+
+@ Low-End
+et Nõrk arvuti
+
+@ Fastest. No anti-aliasing, original
+et Kiireim. Servasilumiseta, algsed
+
+@ models, lowest effect quality.
+et mudelid, madalaim efektide kvaliteet.
+
+@ Esc keeps the defaults
+et Esc jätab vaikesätted
+
+@ Everything can be changed later in Options.
+et Kõike saab hiljem muuta menüüs Options.
+
+@ Keep Defaults
+et Jäta vaikesätted
+
+# save and load cards
+@ Save Game
+et Salvesta mäng
+
+@ Load Game
+et Laadi mäng
+
+@ Autosaves
+et Autosalvestused
+
+@ newest first
+et uusimad eespool
+
+@ Saves: {}
+et Salvestusi: {}
+
+@ Browse Autosaves
+et Sirvi autosalvestusi
+
+@ Every retained autosave, newest first
+et Kõik säilitatud autosalvestused, uusimad eespool
+
+@ New save
+et Uus salvestus
+
+@ Select to save your game here
+et Vali, et mäng siia salvestada
+
+@ No autosaves yet
+et Autosalvestusi veel pole
+
+@ Autosaves are made on level entry, secrets and more (Options > Gameplay)
+et Autosalvestus toimub taseme alguses, saladuste leidmisel ja muul ajal (Options > Mängimine)
+
+@ No saves yet
+et Salvestusi veel pole
+
+@ Save from the Single Player menu, or press F6 to quicksave
+et Salvesta menüüst Single Player või vajuta kiirsalvestuseks F6
+
+@ No picture
+et Pilt puudub
+
+@ Del: delete save
+et Del: kustuta salvestus
+
+@ Delete "{}"?
+et Kas kustutada „{}“?
+
+@ This cannot be undone.
+et Seda ei saa tagasi võtta.
+
+@ Quicksave
+et Kiirsalvestus
+
+@ Autosave: {}
+et Autosalvestus: {}
+
+@ unknown trigger
+et tundmatu päästik
+
+@ Latest - {}
+et Viimane - {}
+
+@ Health {}
+et Tervis {}
+
+@ Armor {}
+et Soomus {}
+
+@ Kills {}/{}
+et Tapetud {}/{}
+
+@ Secrets {}/{}
+et Saladused {}/{}
+
+@ Split-screen, {} players
+et Jagatud ekraan, mängijaid: {}
+
+@ Co-op
+et Koostöö
+
+@ Customized
+et Kohandatud
+
+@ Customized, {}
+et Kohandatud, {}
+
+@ Date unavailable
+et Kuupäev pole saadaval
+
+@ Just now
+et Just praegu
+
+@ {} min ago
+et {} min tagasi
+
+@ {} h ago
+et {} h tagasi
+
+@ Level entry
+et Taseme algus
+
+@ Secret found
+et Saladus leitud
+
+@ All enemies killed
+et Kõik vaenlased tapetud
+
+@ All secrets found
+et Kõik saladused leitud
+
+@ Timer
+et Taimer
+
+# customize pages
+@ Standard rules
+et Tavareeglid
+
+@ Modifiers changed: {}
+et Muudetud modifikaatorid: {}
+
+@ no add-ons
+et lisadeta
+
+@ add-ons: {}
+et lisad: {}
+
+@ Saves of this game are .qsa files: they need this source port.
+et Selle mängu salvestused on .qsa-failid: need vajavad seda porti.
+
+@ Nothing changed: this plays as standard Quake.
+et Midagi pole muudetud: see on tavaline Quake.
+
+@ Changes apply now and are saved with this game (.qsa).
+et Muudatused kehtivad kohe ja salvestatakse selle mänguga (.qsa).
+
+@ This game started without Customize, so its rules are fixed.
+et See mäng alustati ilma kohandamiseta, seega on selle reeglid fikseeritud.
+
+@ Start a new game and choose Customize Experience.
+et Alusta uut mängu ja vali „Kohanda kogemust“.
+
+@ These rules apply to the next customized game.
+et Need reeglid kehtivad järgmises kohandatud mängus.
+
+# add-on browser
+@ Fire
+et Tuli
+
+@ Alt Fire
+et Alt-tuli
+
+@ Configure Parameters >
+et Seadista parameetrid >
+
+@ Configure
+et Seadista
+
+@ Settings
+et Seaded
+
+@ Change slot
+et Vaheta pesa
+
+@ Toggle
+et Lülita
+
+@ Details
+et Üksikasjad
+
+@ Enter or click the box: toggle
+et Enter või klõps kastil: lülita
+
+@ Right / Tab / click: details
+et Paremale / Tab / klõps: üksikasjad
+
+@ Input Remapping
+et Sisendi ümbermääramine
+
+@ Weapon Slot
+et Relvapesa
+
+@ Customized games save as .qsa files, which need this source port.
+et Kohandatud mängud salvestatakse .qsa-failidena, mis vajavad seda porti.
+
+@ This game started without Customize, so its add-ons are fixed. Customize a new game instead.
+et See mäng alustati ilma kohandamiseta, seega on selle lisad fikseeritud. Kohanda selle asemel uut mängu.
+
+@ Bullet Time
+et Bullet time
+
+@ Change Goggles
+et Vaheta prille
+
+@ Dodge / Dive
+et Põiklemine / hüpe
+
+@ Goggles
+et Prillid
+
+@ Hitstop
+et Hitstop
+
+@ Projectile Shotguns
+et Mürsuhaavlipüssid
+
+@ BULLET TIME: 20%
+et BULLET TIME: 20%
+
+@ NORMAL SPEED
+et TAVAKIIRUS
+
+@ SLOW MOTION: PHYSICAL PELLETS
+et AEGLUUBIS: FÜÜSILISED HAAVLID
+
+@ DEMONSTRATION
+et DEMONSTRATSIOON
+
+@ GAMEPLAY
+et MÄNGIMINE
+
+@ LOOP
+et KORDUS
+
+@ Preview unavailable
+et Eelvaade pole saadaval
+
+# shader and language help lines
+@ A setting of the chosen shader; arrows step it, Enter is not needed
+et Valitud varjutaja säte; nooled muudavad seda, Enterit pole vaja
+
+@ Language of the menus, messages and the 2021 re-release's game text; System follows your computer's language
+et Menüüde, teadete ja 2021. aasta uusväljaande mängutekstide keel; System järgib arvuti keelt
+
+@ Puts every setting of the chosen shader back to the preset's defaults
+et Taastab valitud varjutaja kõigi sätete eelseadistuse vaikeväärtused
+
+@ RetroArch slang shader on the final image: CRT, scanlines, NTSC, sharpening; add your own in <game>/shaders
+et RetroArchi slang-varjutaja lõpp-pildil: CRT, skaneerimisjooned, NTSC, teravdamine; lisa omad kausta <mäng>/shaders
+
+# modern console footer
+@ Shift+PgUp/Dn: height  ` : hide
+et Shift+PgUp/Dn: kõrgus  ` : peida
+
+@ Tab: complete  Ctrl+R: search  bash | pipe
+et Tab: lõpeta  Ctrl+R: otsi  bash | toru
+
+@ ↑ +{} lines (End to jump) 
+et ↑ +{} rida (End hüppab lõppu) 
+
+# add-on descriptions
+@ Create two linked portals on flat walls. Fire places the first portal; Alt Fire places the second. Walk through either portal to emerge from the other. Your momentum carries through. Assign a weapon slot below: pressing that slot repeatedly cycles its ordinary weapon and every enabled add-on assigned there. Portal view quality is configurable below.
+et Loo tasastele seintele kaks seotud portaali. Tuli paigutab esimese portaali, alt-tuli teise. Astu läbi ühe portaali, et teisest välja tulla; hoog säilib. Määra allpool relvapesa: selle pesa korduv vajutamine vahetab tavalise relva ja kõigi sinna määratud lubatud lisade vahel. Portaalivaate kvaliteeti saab allpool seadistada.
+
+@ Hold Fire and sweep the crosshair over monsters to queue targets. Release Fire to throw: the boomerang visits each target, stuns it and returns to you. Alt Fire clears the queue. The weapon slot selects a group, not a separate hotkey: press it again to cycle through the weapons in that slot. Configure stun duration and flight speed below.
+et Hoia tuld all ja vii sihik üle koletiste, et sihtmärgid järjekorda panna. Vabasta tuli, et visata: bumerang külastab iga sihtmärki, uimastab selle ja naaseb sinu juurde. Alt-tuli tühjendab järjekorra. Relvapesa valib grupi, mitte eraldi kiirklahvi: vajuta seda uuesti, et pesa relvade vahel vahetada. Uimastuse kestust ja lennukiirust saab allpool seadistada.
+
+@ Hold Fire to charge a sticky bomb using rocket ammunition; release to launch. A longer charge throws it faster. Bombs cling to walls, doors and monsters. Alt Fire detonates your planted bombs together. Place a trap, retreat, then detonate it when enemies approach. Assign any weapon slot below; repeated presses cycle through the ordinary weapon and add-ons in that slot.
+et Hoia tuld all, et laadida raketimoonaga kleeppomm; vabasta, et tulistada. Pikem laadimine viskab selle kiiremini. Pommid jäävad kinni seintele, ustele ja koletistele. Alt-tuli lõhkab kõik paigaldatud pommid korraga. Sea lõks, tõmbu tagasi ja lõhka see, kui vaenlased lähenevad. Määra allpool mis tahes relvapesa; korduvad vajutused vahetavad selle pesa tavalise relva ja lisade vahel.
+
+@ Fire launches a chain hook. It latches onto a permitted surface or enemy and reels you toward the anchor. Fire again or use Alt Fire to let go. Choose which materials and enemies can be hooked in Configure Parameters. Assign it to any weapon slot; repeated presses of the slot's existing binding cycle through its weapons.
+et Tuli heidab välja ketiga konksu. See haakub lubatud pinna või vaenlase külge ja tõmbab sind ankrupunkti poole. Lahti laskmiseks tulista uuesti või kasuta alt-tuld. Millised materjalid ja vaenlased on haagitavad, vali jaotises „Seadista parameetrid“. Määra see mis tahes relvapessa; pesa olemasoleva klahvi korduv vajutamine vahetab selle relvade vahel.
+
+@ A piercing railgun inspired by Quake III. Fire sends a slug through every enemy along its line. Each shot consumes two cells, with a 1.5 second refire interval. Damage and the spiral trail colour are configurable below. Choose a weapon slot: the slot's current binding selects and cycles the weapons assigned to it.
+et Quake III-st inspireeritud läbistav railgun. Tuli saadab kuuli läbi iga vaenlase oma joonel. Iga lask kulutab kaks elementi ja järgmise lasuni kulub 1,5 sekundit. Kahju ja spiraaljälje värvi saab allpool seadistada. Vali relvapesa: pesa praegune klahv valib sellele määratud relvad ja vahetab nende vahel.
+
+@ A Portal-style gel sprayer. Fire sprays blue Repulsion gel: land, jump or run into it to bounce, and landings on it never hurt. Alt Fire sprays orange Propulsion gel: run across it to go much faster. Gel coats floors and walls until washed off with the Powerwasher. Assign a weapon slot below; repeated presses cycle the weapons in that slot.
+et Portal-stiilis geelipihusti. Tuli pihustab sinist tõukegeeli: maandu, hüppa või jookse sellesse, et põrgata, ja sellele maandumine ei tee kunagi haiget. Alt-tuli pihustab oranži kiirendusgeeli: jookse üle selle, et palju kiiremini liikuda. Geel katab põrandaid ja seinu, kuni see survepesuriga maha pestakse. Määra allpool relvapesa; korduvad vajutused vahetavad selle pesa relvade vahel.
+
+@ A water cannon. Fire shoots a straight jet with limited reach; Alt Fire a wide, shorter fan. The water pushes enemies back, turns projectiles aside and washes away gel and blood. Push strength is configurable below. Assign a weapon slot below; repeated presses cycle the weapons in that slot.
+et Veekahur. Tuli laseb piiratud ulatusega sirge joa, alt-tuli laia ja lühema lehviku. Vesi lükkab vaenlasi tagasi, kallutab mürske kõrvale ning peseb maha geeli ja vere. Tõuke tugevust saab allpool seadistada. Määra allpool relvapesa; korduvad vajutused vahetavad selle pesa relvade vahel.
+
+@ One equipment add-on includes both night vision and thermal vision. The Change Goggles action cycles Normal, Night Vision, Thermal, then Normal again. Night vision brightens dark rooms; thermal vision highlights living enemies. Goggles do not occupy a weapon slot. Configure intensity and sensor noise below. The binding affects only this add-on.
+et Üks varustuse lisa sisaldab nii öö- kui ka termonägemist. Toiming „Vaheta prille“ vahetab järjest tavalise, öönägemise, termonägemise ja jälle tavalise vaate. Öönägemine valgustab pimedaid ruume, termonägemine toob esile elusad vaenlased. Prillid ei võta relvapesa. Tugevust ja sensorimüra saab allpool seadistada. Klahvimäärang mõjutab ainult seda lisa.
+
+@ Press Dodge with a movement direction on the ground or in midair: dive forward or leap backward and sideways. Diagonals are supported. Each press launches once, with a short recovery. The player body animates in third person. Assign the Dodge action below or in Controls.
+et Vajuta põiklemist koos liikumissuunaga maas või õhus: sukeldu ette või hüppa taha ja külgedele. Diagonaalid on toetatud. Iga vajutus tõukab korra, lühikese taastumisajaga. Mängija keha on kolmandas isikus animeeritud. Määra toiming „Põiklemine“ allpool või juhtimise seadetes.
+
+@ Use the dedicated Bullet Time action to slow the whole local game to 20% speed. Hold is the default; Toggle switches on each press. The optional meter limits use in real seconds and regenerates while inactive. Disable the meter for unlimited use. Remap the action and configure duration and regeneration below.
+et Kasuta eraldi bullet time'i toimingut, et aeglustada kogu kohalik mäng 20% kiirusele. Vaikimisi tuleb nuppu hoida; lüliti režiimis lülitub iga vajutusega. Valikuline näidik piirab kasutust päris sekundites ja taastub, kui seda ei kasutata. Piiramatuks kasutuseks lülita näidik välja. Määra toiming uuesti ning seadista kestus ja taastumine allpool.
+
+@ Both shotguns and enemy grunts fire physical pellets with their original spread and damage. Fast default projectiles feel immediate; lower their speed to dodge incoming fire during bullet time. Configure projectile speed below, or reset it to the default of 10000 units per second.
+et Mõlemad haavlipüssid ja vaenlaste sõdurid lasevad füüsilisi haavleid algse hajumise ja kahjuga. Kiired vaikemürsud tunduvad hetkelised; alanda nende kiirust, et bullet time'i ajal tule eest põigelda. Seadista mürsu kiirus allpool või lähtesta see vaikeväärtusele 10000 ühikut sekundis.
+
+@ Freezes the game for a split second when you damage an enemy, so hits feel heavier. Single player only. Choose which weapons trigger it (all, melee, ranged or explosives), how long it lasts and how much more a kill freezes. Advanced settings cover enemy toughness, damage scaling, cooldown and the longest freeze.
+et Külmutab mängu hetkeks, kui vaenlast vigastad, et tabamused tunduksid raskemad. Ainult üksikmängus. Vali, millised relvad seda käivitavad (kõik, lähivõitlus, kaugrünnak või lõhkeained), kui kaua see kestab ja kui palju kauem tapmine külmutab. Täpsemad seaded hõlmavad vaenlaste vastupidavust, kahju skaleerimist, jahtumisaega ja pikimat külmutust.
+
+# map packs and the Quaddicted browser
+@ Get more maps (Quaddicted)...
+et Rohkem kaarte (Quaddicted)...
+
+@ Type to filter...
+et Kirjuta filtreerimiseks...
+
+@ Launch mod
+et Käivita mod
+
+@ Start first map
+et Alusta esimest kaarti
+
+@ (running)
+et (käib)
+
+@ running
+et käib
+
+@ Recent
+et Hiljutised
+
+@ Name
+et Nimi
+
+@ Dir
+et Kaust
+
+@ Default
+et Vaikimisi
+
+@ Title
+et Pealkiri
+
+@ Sort: {}
+et Sortimine: {}
+
+@ {} installed
+et Paigaldatud: {}
+
+@ {}/{} matching
+et Sobivaid: {}/{}
+
+@ {} maps, {} completed
+et Kaarte: {}, läbitud: {}
+
+@ {}/{} matching, {} completed
+et Sobivaid: {}/{}, läbitud: {}
+
+@ no maps of its own
+et omi kaarte pole
+
+@ dir: {}
+et kaust: {}
+
+@ base: {}
+et alus: {}
+
+@ Browse the Quaddicted archive of
+et Sirvi Quaddictedi arhiivi
+
+@ single-player maps and episodes,
+et üksikmängu kaartide ja episoodidega,
+
+@ then download and install them
+et seejärel laadi need alla ja paigalda
+
+@ here. Each release gets its own
+et siia. Iga väljalase saab selles
+
+@ entry in this list.
+et loendis oma kirje.
+
+@ Needs an internet connection.
+et Vajab internetiühendust.
+
+@ Quaddicted Map Archive
+et Quaddictedi kaardiarhiiv
+
+@ Newest
+et Uusimad
+
+@ Author
+et Autor
+
+@ Size
+et Suurus
+
+@ Loading the map list...
+et Kaardiloendi laadimine...
+
+@ Couldn't load the map list: {}
+et Kaardiloendit ei õnnestunud laadida: {}
+
+@ {} single-player releases  -  F5 refreshes
+et Üksikmängu väljalaskeid: {}  -  F5 värskendab
+
+@ {} matching
+et Sobivaid: {}
+
+@ by {}
+et autor: {}
+
+@ requires: {}
+et vajab: {}
+
+@ maps: {}
+et kaardid: {}
+
+@ Failed: {}
+et Ebaõnnestus: {}
+
+@ Downloading... {}%
+et Allalaadimine... {}%
+
+@ Unpacking...
+et Lahtipakkimine...
+
+@ Installed in {}/  -  Enter: play
+et Paigaldatud kausta {}/  -  Enter: mängi
+
+@ Enter: download and install
+et Enter: laadi alla ja paigalda
+
+@ unpacking
+et lahtipakkimine
+
+@ failed
+et ebaõnnestus
+
+@ installed
+et paigaldatud
+
+@ Downloads are not available in the browser build
+et Allalaadimised pole brauseriversioonis saadaval
+
+@ the map list could not be read
+et kaardiloendit ei saanud lugeda
+
+@ downloading needs the curl program
+et allalaadimiseks on vaja programmi curl
+
+@ download failed
+et allalaadimine ebaõnnestus
+
+@ the download is not a valid zip
+et allalaaditud fail pole korrektne zip
+
+@ nothing to install for this engine
+et selle mootori jaoks pole midagi paigaldada
+
+@ needs {} installed first
+et esmalt tuleb paigaldada: {}
+
+@ couldn't unpack {}
+et ei õnnestunud lahti pakkida: {}
+
+# help screen
+@ About
+et Teave
+
+@ < Back
+et < Tagasi
+
+# tr_ctx keys: English shows the short word, the key says which meaning
+@ Save (a manual save, as opposed to a quicksave or autosave)
+et Salvestus
+
+# ==== hud.txt ====
+
+# HUD, weapon and equipment wheels, sound captions and other in-game text.
+# Weapon, monster and item names follow the 2021 re-release's own translations.
+@ Axe
+et Kirves
+
+@ Shotgun
+et Haavlipüss
+
+@ Double-Barrelled Shotgun
+et Kaheraudne haavlipüss
+
+@ Nailgun
+et Naelapüss
+
+@ Super Nailgun
+et Supernaelapüss
+
+@ Grenade Launcher
+et Granaadiheitja
+
+@ Rocket Launcher
+et Raketiheitja
+
+@ Thunderbolt
+et Thunderbolt
+
+@ Portal Gun
+et Portaalipüss
+
+@ Boomerang
+et Bumerang
+
+@ Stickybomb Launcher
+et Kleeppommiheitja
+
+@ Railgun
+et Railgun
+
+@ Hookshot
+et Haarats
+
+@ Gel Sprayer
+et Geelipihusti
+
+@ Powerwasher
+et Survepesur
+
+@ Night Vision Goggles
+et Öönägemisprillid
+
+@ Thermal Goggles
+et Termonägemisprillid
+
+@ Normal vision
+et Tavaline nägemine
+
+@ ON
+et SEES
+
+@ OFF
+et VÄLJAS
+
+@ {} (turn on)
+et {} (lülita sisse)
+
+@ {} (turn off)
+et {} (lülita välja)
+
+@ Move mouse to select, release to toggle
+et Liiguta hiirt valimiseks, vabasta lülitamiseks
+
+@ Move mouse to select, release to equip
+et Liiguta hiirt valimiseks, vabasta varustamiseks
+
+@ Release to toggle
+et Vabasta lülitamiseks
+
+@ Release to equip
+et Vabasta varustamiseks
+
+@ shells
+et padrunid
+
+@ nails
+et naelad
+
+@ rockets
+et raketid
+
+@ cells
+et elemendid
+
+@ Kills: {}/{}
+et Tapetud: {}/{}
+
+@ Secrets: {}/{}
+et Saladused: {}/{}
+
+@ Time {}
+et Aeg {}
+
+@ Press any button to continue...
+et Jätkamiseks vajuta mis tahes nuppu...
+
+@ Press any key to continue...
+et Jätkamiseks vajuta mis tahes klahvi...
+
+@ BULLET TIME
+et BULLET TIME
+
+@ AUTO AIM
+et AUTOSIHTIMINE
+
+@ Crosshair
+et Sihik
+
+@ + Marker
+et + märk
+
+@ Hit markers off
+et Tabamusmärgid väljas
+
+@ On target
+et Sihtmärgil
+
+@ On kill
+et Tapmisel
+
+# sound captions
+@ [Secret found]
+et [Saladus leitud]
+
+@ [Message]
+et [Teade]
+
+@ [Switch activated]
+et [Lüliti aktiveeritud]
+
+@ [Key picked up]
+et [Võti korjatud]
+
+@ [Rune picked up]
+et [Ruun korjatud]
+
+@ [Teleporter]
+et [Teleport]
+
+@ [Teleport]
+et [Teleporteerumine]
+
+@ [Splash]
+et [Sulpsti]
+
+@ [Leaving water]
+et [Veest väljumine]
+
+@ [Door]
+et [Uks]
+
+@ [Platform moving]
+et [Platvorm liigub]
+
+@ [Button]
+et [Nupp]
+
+@ [Health picked up]
+et [Tervis korjatud]
+
+@ [Armor picked up]
+et [Soomus korjatud]
+
+@ [Quad Damage wearing off]
+et [Quad Damage hääbub]
+
+@ [Quad Damage]
+et [Quad Damage]
+
+@ [Pentagram wearing off]
+et [Pentagramm hääbub]
+
+@ [Pentagram of Protection]
+et [Kaitsepentagramm]
+
+@ [Ring wearing off]
+et [Sõrmus hääbub]
+
+@ [Ring of Shadows]
+et [Varjude sõrmus]
+
+@ [Biosuit wearing off]
+et [Biokostüüm hääbub]
+
+@ [Biosuit]
+et [Biokostüüm]
+
+@ [Item picked up]
+et [Ese korjatud]
+
+@ [Weapon picked up]
+et [Relv korjatud]
+
+@ [Ammo picked up]
+et [Laskemoon korjatud]
+
+@ [Explosion]
+et [Plahvatus]
+
+@ [Grenade launched]
+et [Granaat lastud]
+
+@ [Grenade bounce]
+et [Granaat põrkab]
+
+@ [Rocket fired]
+et [Rakett lastud]
+
+@ [Nails fired]
+et [Naelad lastud]
+
+@ [Lightning]
+et [Välk]
+
+@ [Thunder]
+et [Äike]
+
+@ [Enforcer alerted]
+et [Enforcer märkas sind]
+
+@ [Grunt alerted]
+et [Grunt märkas sind]
+
+@ [Rottweiler alerted]
+et [Rottweiler märkas sind]
+
+@ [Knight alerted]
+et [Rüütel märkas sind]
+
+@ [Death Knight alerted]
+et [Surmarüütel märkas sind]
+
+@ [Scrag alerted]
+et [Scrag märkas sind]
+
+@ [Ogre alerted]
+et [Ogre märkas sind]
+
+@ [Fiend alerted]
+et [Fiend märkas sind]
+
+@ [Shambler alerted]
+et [Shambler märkas sind]
+
+@ [Zombie groaning]
+et [Zombi oigab]
+
+@ [Vore alerted]
+et [Vore märkas sind]
+
+@ [Vore attacking]
+et [Vore ründab]
+
+@ [Spawn alerted]
+et [Spawn märkas sind]
+
+@ [Rotfish]
+et [Rotfish]
+
+@ [Spawn]
+et [Spawn]
+
+@ [Chthon]
+et [Chthon]
+
+@ [Hard landing]
+et [Kõva maandumine]
+
+@ [Drowning]
+et [Uppumine]
+
+@ [Gasping for air]
+et [Õhuahmimine]
+
+@ [Burning]
+et [Põlemine]
+
+@ [Telefrag]
+et [Telefrag]
+
+@ [Gibbed]
+et [Tükkideks rebitud]
+
+# ==== console.txt ====
+
+# Console messages, shown translated only with con_translate 1 (Translate Console).
+# Cvar and command names stay as they are.
+@ Autosaved.
+et Automaatselt salvestatud.
+
+@ Game saved.
+et Mäng salvestatud.
+
+@ Can't save now.
+et Praegu ei saa salvestada.
+
+@ This game only autosaves (No Manual Saves modifier).
+et See mäng salvestab ainult automaatselt (modifikaator „Käsitsi salvestuseta“).
+
+@ Loading {}...
+et Laadimine: {}...
+
+@ load failed: {}
+et laadimine ebaõnnestus: {}
+
+@ ERROR: autosave failed: {}
+et VIGA: autosalvestus ebaõnnestus: {}
+
+@ ERROR: couldn't open {}
+et VIGA: ei saanud avada: {}
+
+@ ERROR: couldn't open {}.
+et VIGA: ei saanud avada: {}.
+
+@ ERROR: couldn't write {}: {}
+et VIGA: ei saanud kirjutada {}: {}
+
+@ ERROR: couldn't create {}: {}
+et VIGA: ei saanud luua {}: {}
+
+@ couldn't write {}: {}
+et ei saanud kirjutada {}: {}
+
+@ Wrote {}
+et Kirjutatud: {}
+
+@ screenshot failed: {}
+et ekraanipilt ebaõnnestus: {}
+
+@ screenshot: {}
+et ekraanipilt: {}
+
+@ No readable save available. Select save or restart the level.
+et Loetavat salvestust pole. Vali salvestus või alusta taset uuesti.
+
+@ Unknown command "{}"
+et Tundmatu käsk „{}“
+
+@ couldn't exec {}
+et ei saanud käivitada: {}
+
+@ execing {}
+et käivitan: {}
+
+@ execing config.cfg (inherited from {})
+et käivitan config.cfg (päritud: {})
+
+@ execing config.cfg (mod defaults)
+et käivitan config.cfg (modi vaikesätted)
+
+@ execing default.cfg (built-in)
+et käivitan default.cfg (sisseehitatud)
+
+@ {} cvars
+et Muutujaid: {}
+
+@ {} commands
+et Käske: {}
+
+@ Can't "cmd", not connected
+et „cmd“ ei saa kasutada, ühendus puudub
+
+@ Looking for Quake servers...
+et Quake'i serverite otsimine...
+
+@ Bad value, must be between 1 and 65534
+et Vigane väärtus, peab olema vahemikus 1 kuni 65534
+
+@ Couldn't handle music file {}
+et Muusikafaili ei saanud töödelda: {}
+
+@ Bug report written to {}
+et Vearaport kirjutatud: {}
+
+@ bugreport: can't create {}: {}
+et bugreport: ei saa luua {}: {}
+
+@ graphics preset: {}
+et graafika eelseadistus: {}
+
+@ Presets (r_shader_preset <name>):
+et Eelseadistused (r_shader_preset <nimi>):
+
+@ Add your own .slangp presets under <game>/shaders/.
+et Lisa oma .slangp-eelseadistused kausta <mäng>/shaders/.
+
+@ no shader preset loaded (r_shader_preset)
+et varjutaja eelseadistust pole laaditud (r_shader_preset)
+
+@ r_shader_preset: "{}" not found
+et r_shader_preset: „{}“ ei leitud
+
+@ no parameter "{}" in this preset
+et selles eelseadistuses pole parameetrit „{}“
+
+@ {} = {} (default {}, {}..{})
+et {} = {} (vaikimisi {}, {}..{})
+
+@ Switching to {}...
+et Lülitumine: {}...
+
+@ game: no game dir "{}" in {}
+et game: mängukausta „{}“ pole asukohas {}
+
+@ game: can't find the engine executable
+et game: mootori käivitusfaili ei leitud
+
+@ game: exec failed: {}
+et game: käivitamine ebaõnnestus: {}
+
+@ game: launch failed: {}
+et game: avamine ebaõnnestus: {}
+
+@ loaded {} in {}s
+et laaditud {} ajaga {} s
+
+@ No demos listed with startdemos
+et startdemos ei loetle ühtegi demot
+
+@ Playing demo from {}.
+et Demo esitamine: {}.
+
+@ {} frames {} seconds {} fps
+et {} kaadrit {} sekundit {} fps
+
+@ Recording to {}.
+et Lindistamine: {}.
+
+@ Completed demo
+et Demo lõpetatud
+
+@ Can't record during demo playback
+et Demo esitamise ajal ei saa lindistada
+
+@ Relative pathnames are not allowed.
+et Suhtelised teed pole lubatud.
+
+@ Can't record - try again when connected
+et Ei saa lindistada - proovi uuesti, kui ühendus on loodud
+
+@ {} demo(s) in loop
+et Demosid tsüklis: {}
+
+@ Not recording a demo.
+et Demot ei lindistata.
+
+@ {} joined on a gamepad
+et {} liitus mängupuldiga
+
+@ goggles: needs a game started with Add-ons and Goggles enabled
+et goggles: vajab mängu, mis alustati lubatud lisade ja prillidega
+
+@ equip: needs a game started with Add-ons and Goggles enabled
+et equip: vajab mängu, mis alustati lubatud lisade ja prillidega
+
+@ UDP listening on port {}
+et UDP kuulab porti {}
+
+@ UDP bind on port {} failed: {}
+et UDP sidumine porti {} ebaõnnestus: {}
+
+@ Connection accepted by {}
+et Ühenduse võttis vastu {}
+
+@ Connection failed: {}
+et Ühendus ebaõnnestus: {}
+
+@ Couldn't resolve {}
+et Ei õnnestunud lahendada: {}
+
+@ Connecting to {}...
+et Ühendumine: {}...
+
+@ Connecting to QuakeWorld server {}...
+et Ühendumine QuakeWorldi serveriga {}...
+
+@ Disconnected: {}
+et Ühendus katkes: {}
+
+@ Server disconnected
+et Server katkestas ühenduse
+
+@ Client {} connected
+et Klient {} ühendus
+
+@ Client {} timed out
+et Kliendi {} ajalõpp
+
+@ Couldn't spawn server {}: {}
+et Serverit {} ei õnnestunud käivitada: {}
+
+@ maxplayers can not be changed while a server is running.
+et maxplayers'it ei saa serveri töötamise ajal muuta.
+
+@ You can't kick yourself!
+et Sa ei saa ennast välja visata!
+
+@ Only the server may changelevel
+et Ainult server võib kasutada changelevel'it
+
+@ {} renamed to {}
+et {} on nüüd {}

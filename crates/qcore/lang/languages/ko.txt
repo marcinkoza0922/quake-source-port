@@ -1,0 +1,3024 @@
+# ko: the port's own text; English keys from crates/qcore/lang/*.txt.
+# Format in crates/qcore/src/lang/catalog.rs; check with tools/lang_check.py.
+
+# ==== menu.txt ====
+
+# Options pages: page names, row labels and choice values.
+@ 10% speed
+ko 10% 속도
+
+@ 2 split-screen
+ko 2인 분할 화면
+
+@ 3 split-screen
+ko 3인 분할 화면
+
+@ 4 split-screen
+ko 4인 분할 화면
+
+@ 5 split-screen
+ko 5인 분할 화면
+
+@ 6 split-screen
+ko 6인 분할 화면
+
+@ 2D aiming
+ko 2D 조준
+
+@ 2x monsters
+ko 몬스터 2배
+
+@ 3x monsters
+ko 몬스터 3배
+
+@ 4x monsters
+ko 몬스터 4배
+
+@ 3D resolution
+ko 3D 해상도
+
+@ 3D view
+ko 3D 뷰
+
+@ 8-bit Color
+ko 8비트 색상
+
+@ Accessibility
+ko 접근성
+
+@ Acquisition Cone
+ko 포착 범위
+
+@ Activation
+ko 활성화 방식
+
+@ Add a ringing room tail after the cue
+ko 효과음 뒤에 울리는 잔향을 추가합니다
+
+@ Add delayed repeats after the cue
+ko 효과음 뒤에 지연된 반복음을 추가합니다
+
+@ Add saturation and distortion
+ko 포화와 왜곡을 추가합니다
+
+@ Add-ons
+ko 애드온
+
+@ Address
+ko 주소
+
+@ Adds fine noise to hide color banding
+ko 미세한 노이즈로 색상 계단 현상을 숨깁니다
+
+@ Advanced Settings
+ko 고급 설정
+
+@ Aim Assist
+ko 조준 보조
+
+@ Aim Rotation
+ko 조준 회전
+
+@ Aim Slowdown
+ko 조준 감속
+
+@ Aim Style
+ko 조준 방식
+
+@ All
+ko 전체
+
+@ All enemies
+ko 모든 적
+
+@ Alt Fire (Add-ons)
+ko 보조 사격 (애드온)
+
+@ Always Run
+ko 항상 달리기
+
+@ Ambient Occlusion
+ko 앰비언트 오클루전
+
+@ Ammo Counts
+ko 탄약 수
+
+@ Ammo Counts Position
+ko 탄약 수 위치
+
+@ Ammo Pickups
+ko 탄약 획득량
+
+@ Anisotropic
+ko 이방성 필터링
+
+@ Anti-aliasing
+ko 안티에일리어싱
+
+@ Apply To
+ko 적용 대상
+
+@ Armor
+ko 아머
+
+@ Armor Position
+ko 아머 위치
+
+@ Ask
+ko 묻기
+
+@ Attack
+ko 공격
+
+@ Audio
+ko 오디오
+
+@ Auto-aim
+ko 자동 조준
+
+@ Auto-aim Settings
+ko 자동 조준 설정
+
+@ Autosave
+ko 자동 저장
+
+@ Autosave Settings
+ko 자동 저장 설정
+
+@ Autosave Timer
+ko 자동 저장 간격
+
+@ Autosaves to Keep
+ko 자동 저장 보관 수
+
+@ Bass
+ko 저음
+
+@ Blip
+ko 삑
+
+@ Blood Quality
+ko 피 품질
+
+@ Blood Splatter Settings
+ko 피 튀김 설정
+
+@ Blue
+ko 파랑
+
+@ Boomerang Settings
+ko 부메랑 설정
+
+@ Boost or cut high frequencies in decibels
+ko 고음역을 데시벨 단위로 키우거나 줄입니다
+
+@ Boost or cut low frequencies in decibels
+ko 저음역을 데시벨 단위로 키우거나 줄입니다
+
+@ Brightness
+ko 밝기
+
+@ Bullet Time (Add-ons)
+ko 불릿 타임 (애드온)
+
+@ Bullet Time Settings
+ko 불릿 타임 설정
+
+@ Button Glyphs
+ko 버튼 아이콘
+
+@ Button Size
+ko 버튼 크기
+
+@ Camera
+ko 카메라
+
+@ Caustic Intensity
+ko 커스틱 강도
+
+@ Caustics
+ko 커스틱
+
+@ Center
+ko 중앙
+
+@ Center Message Position
+ko 중앙 메시지 위치
+
+@ Center Message Time
+ko 중앙 메시지 시간
+
+@ Center View
+ko 시점 중앙 정렬
+
+@ Change Color on Kill
+ko 처치 시 색상 변경
+
+@ Change Color on Target
+ko 조준 시 색상 변경
+
+@ Chime
+ko 차임
+
+@ Click
+ko 딸깍
+
+@ Clink
+ko 쨍그랑
+
+@ Coin
+ko 동전
+
+@ Color
+ko 색상
+
+@ Color Filter
+ko 색상 필터
+
+@ Color of the grenade arc
+ko 유탄 궤적의 색상
+
+@ Colored Lighting
+ko 컬러 조명
+
+@ Connect
+ko 접속
+
+@ Contrast
+ko 대비
+
+@ Controls
+ko 조작
+
+@ Cooldown (ms)
+ko 재사용 대기 (ms)
+
+@ Crosshair Outline
+ko 조준점 외곽선
+
+@ Crosshair Shape
+ko 조준점 모양
+
+@ Crosshair Size
+ko 조준점 크기
+
+@ Current Ammo
+ko 현재 탄약
+
+@ Current Ammo Position
+ko 현재 탄약 위치
+
+@ Customize This Game
+ko 이 게임 커스터마이즈
+
+@ Damage
+ko 피해
+
+@ Damage Taken
+ko 받는 피해
+
+@ Debris
+ko 파편
+
+@ Debris Quality
+ko 파편 품질
+
+@ Debris Settings
+ko 파편 설정
+
+@ Directional Damage
+ko 피격 방향 표시
+
+@ Dithering
+ko 디더링
+
+@ Dodge / Dive (Add-ons)
+ko 회피 / 다이브 (애드온)
+
+@ Dragging up looks down instead of up
+ko 위로 드래그하면 위 대신 아래를 봅니다
+
+@ Drive
+ko 드라이브
+
+@ Dynamic Lights
+ko 동적 조명
+
+@ Echo
+ko 에코
+
+@ Enemy Health
+ko 적 체력
+
+@ Enemy Wounds
+ko 적 상처
+
+@ Enhanced Blood Splatter
+ko 향상된 피 튀김
+
+@ Enhanced FX
+ko 향상된 효과
+
+@ Enhanced Models
+ko 향상된 모델
+
+@ Enhanced Particles
+ko 향상된 파티클
+
+@ Enhanced Water
+ko 향상된 물
+
+@ Enhancements
+ko 향상 기능
+
+@ Equipment Wheel (Add-ons)
+ko 장비 휠 (애드온)
+
+@ Exploding boxes throw metal shards
+ko 폭발하는 상자가 금속 파편을 흩뿌립니다
+
+@ Explosion Damage
+ko 폭발 피해
+
+@ Explosion Scorch Marks
+ko 폭발 그을음
+
+@ Explosions scorch nearby solid surfaces
+ko 폭발이 주변 표면을 그을립니다
+
+@ Explosives only
+ko 폭발물만
+
+@ Extra Monsters
+ko 추가 몬스터
+
+@ Extra Per 10 Damage (ms)
+ko 피해 10당 추가 (ms)
+
+@ FX Settings
+ko 효과 설정
+
+@ Field of View
+ko 시야각
+
+@ Firing never uses up ammo
+ko 사격해도 탄약이 줄지 않습니다
+
+@ First person
+ko 1인칭
+
+@ Flick Time
+ko 플릭 시간
+
+@ Flight Speed
+ko 비행 속도
+
+@ Fog
+ko 안개
+
+@ Frag Limit
+ko 킬 제한
+
+@ Freeze Duration (ms)
+ko 정지 시간 (ms)
+
+@ GLQuake
+ko GLQuake
+
+@ Game Speed
+ko 게임 속도
+
+@ Game Type
+ko 게임 유형
+
+@ Gameplay
+ko 게임플레이
+
+@ Gameplay Modifiers
+ko 게임 규칙 변경
+
+@ Gel Quality
+ko 젤 품질
+
+@ Gib Surface Painting
+ko 살점 얼룩
+
+@ Gibs
+ko 살점
+
+@ Gibs and heads tumble and bounce
+ko 살점과 머리가 구르고 튕깁니다
+
+@ Goggle Glow Quality
+ko 고글 발광 품질
+
+@ Goggle Intensity
+ko 고글 강도
+
+@ Goggle Noise
+ko 고글 노이즈
+
+@ Goggles Settings
+ko 고글 설정
+
+@ Graphics
+ko 그래픽
+
+@ Green
+ko 초록
+
+@ Grenade Arc
+ko 유탄 궤적
+
+@ Grenade Arc Settings
+ko 유탄 궤적 설정
+
+@ Gun Kick
+ko 무기 반동
+
+@ Gyro
+ko 자이로
+
+@ Gyro & Flick Stick
+ko 자이로 & 플릭 스틱
+
+@ Gyro Active
+ko 자이로 활성
+
+@ Gyro Aiming
+ko 자이로 조준
+
+@ HUD
+ko HUD
+
+@ HUD Style
+ko HUD 스타일
+
+@ Health
+ko 체력
+
+@ Health Pickups
+ko 체력 획득량
+
+@ Health Position
+ko 체력 위치
+
+@ Health Regeneration
+ko 체력 재생
+
+@ Hit & Kill Sounds
+ko 적중 & 처치 효과음
+
+@ Hit Doors & Lifts
+ko 문 & 승강기 타격
+
+@ Hit Markers
+ko 히트 마커
+
+@ Hit Sound
+ko 적중 효과음
+
+@ Hitmarker Size
+ko 히트 마커 크기
+
+@ Hitmarker Type
+ko 히트 마커 유형
+
+@ Hitstop Advanced
+ko 히트스톱 고급
+
+@ Hitstop Settings
+ko 히트스톱 설정
+
+@ Hold
+ko 누르고 있기
+
+@ Hold lock-on
+ko 누르는 동안 락온
+
+@ Hook Enemies
+ko 적에게 걸기
+
+@ Hook Metal
+ko 금속에 걸기
+
+@ Hook Stone
+ko 돌에 걸기
+
+@ Hook Wood
+ko 나무에 걸기
+
+@ Hooking an enemy pulls you to it
+ko 적에게 갈고리를 걸면 적에게 끌려갑니다
+
+@ Hookshot Range
+ko 훅샷 사거리
+
+@ Hookshot Settings
+ko 훅샷 설정
+
+@ Host Game
+ko 게임 호스트
+
+@ How far the hook flies before it retracts
+ko 갈고리가 되감기기 전까지 날아가는 거리
+
+@ How visible the on-screen controls are
+ko 화면 조작 버튼의 표시 정도
+
+@ Impact Lifetime
+ko 탄흔 지속 시간
+
+@ Infinite Ammo
+ko 무한 탄약
+
+@ Input
+ko 입력
+
+@ Input Scale
+ko 입력 배율
+
+@ Interpolate Animation
+ko 애니메이션 보간
+
+@ Interpolate Movement
+ko 이동 보간
+
+@ Invert Look
+ko 시점 반전
+
+@ Invert Mouse
+ko 마우스 반전
+
+@ Invert Stick
+ko 스틱 반전
+
+@ Jet Quality
+ko 분사 품질
+
+@ Join Game
+ko 게임 참가
+
+@ Jump / Swim Up
+ko 점프 / 위로 수영
+
+@ Jump again in mid-air
+ko 공중에서 한 번 더 점프합니다
+
+@ Jumps
+ko 점프 횟수
+
+@ Keys & Powerups
+ko 열쇠 & 파워업
+
+@ Keys & Powerups Position
+ko 열쇠 & 파워업 위치
+
+@ Kill Bonus (x)
+ko 처치 보너스 (x)
+
+@ Kill Sound
+ko 처치 효과음
+
+@ Knock
+ko 똑똑
+
+@ Left
+ko 왼쪽
+
+@ Length of the motion blur streaks
+ko 모션 블러 잔상의 길이
+
+@ Lifetime (seconds)
+ko 지속 시간 (초)
+
+@ Live Portal Views
+ko 실시간 포털 화면
+
+@ Live View Distance
+ko 실시간 화면 거리
+
+@ Local Players
+ko 로컬 플레이어
+
+@ Local red wounds follow enemy animation
+ko 붉은 상처가 적의 애니메이션을 따라갑니다
+
+@ Lock Indicator
+ko 락온 표시기
+
+@ Long falls don't hurt
+ko 높은 곳에서 떨어져도 다치지 않습니다
+
+@ Longest Freeze (ms)
+ko 최대 정지 시간 (ms)
+
+@ Look Down
+ko 아래 보기
+
+@ Look Speed
+ko 시점 속도
+
+@ Look Up
+ko 위 보기
+
+@ Main Menu Music
+ko 메인 메뉴 음악
+
+@ Max FPS
+ko 최대 FPS
+
+@ Max Players
+ko 최대 인원
+
+@ Maximum Impacts
+ko 최대 탄흔 수
+
+@ Maximum Marks
+ko 최대 자국 수
+
+@ Maximum Range
+ko 최대 사거리
+
+@ Melee only
+ko 근접만
+
+@ Message Background
+ko 메시지 배경
+
+@ Message Text Size
+ko 메시지 글자 크기
+
+@ Messages & Captions
+ko 메시지 & 자막
+
+@ Meter Duration (real seconds)
+ko 게이지 지속 시간 (실제 초)
+
+@ Minimum Damage
+ko 최소 피해
+
+@ Mode
+ko 모드
+
+@ Modern Console
+ko 현대식 콘솔
+
+@ Modern HUD Layout
+ko 현대식 HUD 배치
+
+@ Most recent save
+ko 가장 최근 저장
+
+@ Motion Blur
+ko 모션 블러
+
+@ Motion Blur Amount
+ko 모션 블러 강도
+
+@ Motion Blur Quality
+ko 모션 블러 품질
+
+@ Mouse & Keyboard
+ko 마우스 & 키보드
+
+@ Mouse Speed
+ko 마우스 속도
+
+@ Move Back
+ko 뒤로 이동
+
+@ Move Forward
+ko 앞으로 이동
+
+@ Music Volume
+ko 음악 음량
+
+@ Next Weapon
+ko 다음 무기
+
+@ No Drowning
+ko 익사 없음
+
+@ No Fall Damage
+ko 낙하 피해 없음
+
+@ No Manual Saves
+ko 수동 저장 금지
+
+@ No Self Damage
+ko 자기 피해 없음
+
+@ Noise Filter
+ko 노이즈 필터
+
+@ Normal Color
+ko 기본 색상
+
+@ Notify Message Position
+ko 알림 메시지 위치
+
+@ Notify Message Time
+ko 알림 메시지 시간
+
+@ Number of splatter rays per blood impact
+ko 피격당 피가 튀는 줄기 수
+
+@ Off
+ko 끔
+
+@ On Death
+ko 사망 시
+
+@ On Kill Color
+ko 처치 시 색상
+
+@ On Target Color
+ko 조준 시 색상
+
+@ Opacity
+ko 불투명도
+
+@ Opacity of the grenade arc
+ko 유탄 궤적의 불투명도
+
+@ Pants Color
+ko 바지 색상
+
+@ Particle Quality
+ko 파티클 품질
+
+@ Particles
+ko 파티클
+
+@ Physical Nail Impacts
+ko 물리 못 충돌
+
+@ Pistol Start
+ko 기본 장비로 시작
+
+@ Pitch
+ko 음높이
+
+@ Pitch Sensitivity
+ko 상하 감도
+
+@ Playback Speed
+ko 재생 속도
+
+@ Player Setup
+ko 플레이어 설정
+
+@ Pop
+ko 펑
+
+@ Portal Gun Settings
+ko 포털 건 설정
+
+@ Portal Recursion
+ko 포털 재귀
+
+@ Portal View Quality
+ko 포털 화면 품질
+
+@ Preview Sound
+ko 효과음 미리 듣기
+
+@ Previous Weapon
+ko 이전 무기
+
+@ Projectile Shotguns Settings
+ko 투사체 샷건 설정
+
+@ Projectile Speed (units/s)
+ko 투사체 속도 (유닛/초)
+
+@ Purple
+ko 보라
+
+@ Push
+ko 미는 힘
+
+@ Push Strength
+ko 밀어내는 힘
+
+@ Quick Load
+ko 빠른 불러오기
+
+@ Quick Save
+ko 빠른 저장
+
+@ Railgun Settings
+ko 레일건 설정
+
+@ Ranged only
+ko 원거리만
+
+@ Reacquire While Held
+ko 누르는 동안 재포착
+
+@ Red
+ko 빨강
+
+@ Reduce Motion
+ko 움직임 줄이기
+
+@ Regen (seconds per second)
+ko 재생 (초당 초)
+
+@ Render Scale
+ko 렌더링 배율
+
+@ Reverb
+ko 리버브
+
+@ Right
+ko 오른쪽
+
+@ Ripple Intensity
+ko 물결 강도
+
+@ Ripples
+ko 물결
+
+@ Roll Sensitivity
+ko 기울기 감도
+
+@ Rumble
+ko 진동
+
+@ Run
+ko 달리기
+
+@ Save on All Enemies Killed
+ko 적 전멸 시 저장
+
+@ Save on All Secrets Found
+ko 모든 비밀 발견 시 저장
+
+@ Save on Level Entry
+ko 레벨 진입 시 저장
+
+@ Save on Secret Found
+ko 비밀 발견 시 저장
+
+@ Scoreboard
+ko 점수판
+
+@ Screen Flashes
+ko 화면 번쩍임
+
+@ Screen Shader
+ko 화면 셰이더
+
+@ Screen Shake
+ko 화면 흔들림
+
+@ Search LAN
+ko LAN 검색
+
+@ Seconds a center-screen message stays up
+ko 화면 중앙 메시지가 표시되는 시간(초)
+
+@ See Through Portals
+ko 포털 너머 보기
+
+@ See-through Teleporters
+ko 텔레포터 너머 보기
+
+@ Shirt Color
+ko 셔츠 색상
+
+@ Shotgun Bullet Decals
+ko 샷건 탄흔
+
+@ Shoulder left
+ko 왼쪽 어깨
+
+@ Shoulder right
+ko 오른쪽 어깨
+
+@ Show FPS
+ko FPS 표시
+
+@ Show Face
+ko 얼굴 표시
+
+@ Shrapnel
+ko 파편탄
+
+@ Size of on-screen messages and captions
+ko 화면 메시지와 자막의 크기
+
+@ Skill
+ko 난이도
+
+@ Sky Fog
+ko 하늘 안개
+
+@ Smooths the stepped movement of monsters
+ko 몬스터의 끊기는 움직임을 부드럽게 합니다
+
+@ Sound
+ko 사운드
+
+@ Sound Captions
+ko 사운드 자막
+
+@ Sound Volume
+ko 효과음 음량
+
+@ Speed Blur
+ko 속도 블러
+
+@ Splashes
+ko 물보라
+
+@ Splatter Amount
+ko 튀김 양
+
+@ Splatter Size
+ko 튀김 크기
+
+@ Start Game
+ko 게임 시작
+
+@ Staying underwater doesn't hurt
+ko 물속에 계속 있어도 다치지 않습니다
+
+@ Stick Look Pitch
+ko 스틱 상하 시점
+
+@ Stick Look Yaw
+ko 스틱 좌우 시점
+
+@ Strafe Left
+ko 왼쪽 이동
+
+@ Strafe Right
+ko 오른쪽 이동
+
+@ Strength of the surface swell and rings
+ko 수면의 너울과 물결 강도
+
+@ Stun Duration
+ko 기절 시간
+
+@ Style
+ko 스타일
+
+@ Supersampling
+ko 슈퍼샘플링
+
+@ Surface Hit Effects
+ko 표면 타격 효과
+
+@ Swim Down
+ko 아래로 수영
+
+@ Targets
+ko 대상
+
+@ Teamplay
+ko 팀플레이
+
+@ Texture Filter
+ko 텍스처 필터
+
+@ Third person
+ko 3인칭
+
+@ Thud
+ko 쿵
+
+@ Tick
+ko 틱
+
+@ Time Limit
+ko 시간 제한
+
+@ Time Stretch
+ko 시간 늘이기
+
+@ Toggle Attack
+ko 공격 전환
+
+@ Toggle Run
+ko 달리기 전환
+
+@ Toggle auto-aim
+ko 자동 조준 전환
+
+@ Touch Controls
+ko 터치 조작
+
+@ Touchscreen
+ko 터치스크린
+
+@ Tough Enemy Health
+ko 강적 체력
+
+@ Tough enemies only
+ko 강적만
+
+@ Trail Colour
+ko 궤적 색상
+
+@ Translate Console
+ko 콘솔 번역
+
+@ Translucent Water
+ko 반투명 물
+
+@ Treble
+ko 고음
+
+@ Turn Left
+ko 왼쪽 회전
+
+@ Turn Right
+ko 오른쪽 회전
+
+@ Underwater FX
+ko 수중 효과
+
+@ Use Bullet Time Meter
+ko 불릿 타임 게이지 사용
+
+@ VSync
+ko 수직 동기화
+
+@ View Bob
+ko 걸음 시 화면 흔들림
+
+@ Viewmodels
+ko 무기 모델
+
+@ Volume
+ko 음량
+
+@ Water Opacity
+ko 물 불투명도
+
+@ Water Quality
+ko 물 품질
+
+@ Water Settings
+ko 물 설정
+
+@ Weapon Wheel
+ko 무기 휠
+
+@ Weapon Wheel Slowdown
+ko 무기 휠 감속
+
+@ Weapons
+ko 무기
+
+@ Weapons Position
+ko 무기 위치
+
+@ Where center-screen messages appear
+ko 화면 중앙 메시지가 나타나는 위치
+
+@ Where pickup and event messages appear
+ko 획득 및 이벤트 메시지가 나타나는 위치
+
+@ White
+ko 흰색
+
+@ Yaw Sensitivity
+ko 좌우 감도
+
+@ Yellow
+ko 노랑
+
+# lowercase choice values
+@ T
+ko T자
+
+@ always
+ko 항상
+
+@ auto
+ko 자동
+
+@ banded
+ko 띠 모양
+
+@ borderless
+ko 테두리 없음
+
+@ bottom center
+ko 하단 중앙
+
+@ bottom left
+ko 왼쪽 하단
+
+@ bottom right
+ko 오른쪽 하단
+
+@ box
+ko 상자
+
+@ broken square
+ko 끊긴 사각형
+
+@ classic
+ko 클래식
+
+@ coarse
+ko 거침
+
+@ cooperative
+ko 협동
+
+@ cross
+ko 십자
+
+@ cross + dot
+ko 십자 + 점
+
+@ cyan
+ko 청록
+
+@ dashed
+ko 점선
+
+@ deathmatch
+ko 데스매치
+
+@ deuteranopia
+ko 녹색맹
+
+@ diagonal streaks
+ko 대각선 줄
+
+@ diamond
+ko 마름모
+
+@ dot
+ko 점
+
+@ double
+ko 이중
+
+@ double chevrons
+ko 이중 꺾쇠
+
+@ double diagonals
+ko 이중 대각선
+
+@ easy
+ko 쉬움
+
+@ fine
+ko 미세
+
+@ fit output
+ko 출력에 맞춤
+
+@ flick stick
+ko 플릭 스틱
+
+@ fullscreen
+ko 전체 화면
+
+@ gap cross
+ko 빈 십자
+
+@ green
+ko 초록
+
+@ grey
+ko 회색
+
+@ half speed
+ko 1/2 속도
+
+@ hard
+ko 어려움
+
+@ high
+ko 높음
+
+@ huge
+ko 아주 큼
+
+@ immersive
+ko 몰입형
+
+@ intense
+ko 강렬
+
+@ large
+ko 큼
+
+@ larger
+ko 더 큼
+
+@ largest
+ko 가장 큼
+
+@ linear
+ko 선형
+
+@ low
+ko 낮음
+
+@ lower
+ko 아래
+
+@ magenta
+ko 자홍
+
+@ medium
+ko 중간
+
+@ middle
+ko 중앙
+
+@ middle left
+ko 왼쪽 중앙
+
+@ middle right
+ko 오른쪽 중앙
+
+@ modern
+ko 모던
+
+@ nearest
+ko 최근접
+
+@ nightmare
+ko 악몽
+
+@ nintendo
+ko 닌텐도
+
+@ no team damage
+ko 아군 피해 없음
+
+@ none
+ko 없음
+
+@ normal
+ko 보통
+
+@ off
+ko 끔
+
+@ off while held
+ko 누르는 동안 끔
+
+@ on
+ko 켬
+
+@ only while held
+ko 누르는 동안만
+
+@ playstation
+ko 플레이스테이션
+
+@ protanopia
+ko 적색맹
+
+@ quarter speed
+ko 1/4 속도
+
+@ red
+ko 빨강
+
+@ short diagonals
+ko 짧은 대각선
+
+@ single
+ko 단일
+
+@ small
+ko 작음
+
+@ solid
+ko 실선
+
+@ spectacle
+ko 화려함
+
+@ subtle
+ko 약함
+
+@ team damage
+ko 아군 피해
+
+@ top center
+ko 상단 중앙
+
+@ top left
+ko 왼쪽 상단
+
+@ top right
+ko 오른쪽 상단
+
+@ triple
+ko 삼중
+
+@ tritanopia
+ko 청색맹
+
+@ upper
+ko 위
+
+@ white
+ko 흰색
+
+@ whole screen
+ko 화면 전체
+
+@ windowed
+ko 창 모드
+
+@ xbox
+ko Xbox
+
+@ yellow
+ko 노랑
+
+# ==== tooltips.txt ====
+
+# Options help lines (tooltips) and reasons for disabled rows.
+@ 2D aiming turns the view continuously with the right stick; flick stick snaps the view to where you push the stick, then turning the stick rotates it
+ko 2D 조준은 오른쪽 스틱으로 시점을 계속 돌립니다. 플릭 스틱은 스틱을 민 방향으로 시점을 즉시 돌리고, 이후 스틱을 돌리면 시점이 회전합니다
+
+@ 3D resolution relative to the window; the UI stays sharp
+ko 창 크기 대비 3D 해상도입니다. UI는 선명하게 유지됩니다
+
+@ 3D view keeps the HUD and menus sharp; whole screen runs them through the shader too
+ko 3D 뷰는 HUD와 메뉴를 선명하게 유지하고, 화면 전체는 이들에도 셰이더를 적용합니다
+
+@ A Quake III style railgun: a slug that pierces every enemy on its line, using 2 cells a shot and refiring every 1.5 s; select it through its assigned weapon slot (Add-ons)
+ko Quake III 스타일 레일건: 탄환이 직선상의 모든 적을 관통합니다. 한 발에 셀 2개를 쓰며 1.5초마다 재사격합니다. 지정된 무기 슬롯으로 선택하세요 (애드온)
+
+@ A Zelda-style hookshot: fire sends a chain hook out; it latches onto hookable surfaces or enemies and reels you in; fire again to let go
+ko 젤다 스타일 훅샷: 사격하면 사슬 갈고리가 날아가 걸 수 있는 표면이나 적에 걸리고 플레이어를 끌어당깁니다. 다시 사격하면 놓습니다
+
+@ Also translates the engine's console messages; off keeps them in English
+ko 엔진의 콘솔 메시지도 번역합니다. 끄면 영어로 표시됩니다
+
+@ Automatically acquire another enemy while holding Lock-on after losing a target
+ko 락온을 누르고 있는 동안 대상을 잃으면 자동으로 다른 적을 포착합니다
+
+@ Blends between animation frames of monsters and weapons
+ko 몬스터와 무기의 애니메이션 프레임 사이를 부드럽게 연결합니다
+
+@ Blood stains surfaces and bodies; cosmetic, independent of particle packs
+ko 피가 표면과 시체를 물들입니다. 외형 효과이며 파티클 팩과 무관합니다
+
+@ Bloom glow around bright lights and heat sources; medium uses 4 taps, high uses 8, low disables halo taps
+ko 밝은 조명과 열원 주변의 블룸 광채입니다. 중간은 4탭, 높음은 8탭을 쓰고, 낮음은 후광 탭을 끕니다
+
+@ Blurs fast-moving monsters, projectiles and doors (not camera turns)
+ko 빠르게 움직이는 몬스터, 투사체, 문을 흐리게 합니다 (카메라 회전은 제외)
+
+@ Blurs the screen edges during fast falls and launches; keeps the centre clear. Reduce Motion disables it
+ko 빠르게 떨어지거나 날아오를 때 화면 가장자리를 흐리게 하고 중앙은 선명하게 둡니다. 움직임 줄이기를 켜면 꺼집니다
+
+@ Brightness of the underwater light patterns
+ko 수중 빛 무늬의 밝기
+
+@ Caps mark count, lifetime, airborne droplets and wound/gib painting; low skips enemy wounds and gib trails
+ko 자국 수, 지속 시간, 공중의 핏방울, 상처/살점 얼룩을 제한합니다. 낮음은 적 상처와 살점 흔적을 생략합니다
+
+@ Caps shader input at output size so 200% render scale keeps 3D sharpness without 4x shader cost; low scales stay low-res
+ko 셰이더 입력을 출력 크기로 제한해 200% 렌더링 배율에서도 4배의 셰이더 비용 없이 3D 선명도를 유지합니다. 낮은 배율은 저해상도로 남습니다
+
+@ Classic: the original status bar; modern: compact elements at the screen edges
+ko 클래식: 원작 상태 표시줄. 모던: 화면 가장자리에 작은 요소로 표시
+
+@ Coat atlas resolution, rebuild rate and shader detail: low builds smaller coats less often with fast shading; high uses full detail
+ko 코팅 아틀라스 해상도, 재생성 빈도, 셰이더 디테일입니다. 낮음은 더 작은 코팅을 덜 자주 만들고 빠른 셰이딩을 쓰며, 높음은 전체 디테일을 씁니다
+
+@ Colour of the railgun's spiral trail; split-screen players each get the next colour along
+ko 레일건 나선 궤적의 색상입니다. 분할 화면의 각 플레이어는 다음 색상을 차례로 받습니다
+
+@ Damage the railgun deals to each enemy it passes through (Quake III: 100)
+ko 레일건이 관통하는 각 적에게 주는 피해 (Quake III: 100)
+
+@ Dark backdrop behind on-screen messages for readability
+ko 가독성을 위해 화면 메시지 뒤에 어두운 배경을 깝니다
+
+@ Dark border keeps the crosshair visible on any background
+ko 어두운 테두리로 어떤 배경에서도 조준점이 잘 보이게 합니다
+
+@ Darkens corners and contact areas where geometry meets; higher quality is sharper
+ko 지형이 맞닿는 모서리와 접촉면을 어둡게 합니다. 품질이 높을수록 선명합니다
+
+@ Debris lands on and is carried or shoved by doors, lifts and platforms
+ko 파편이 문, 승강기, 발판 위에 떨어져 함께 움직이거나 밀려납니다
+
+@ Detail for caustics, ripples and splashes: low uses smaller budgets and shorter view distance; high uses larger budgets and farther view distance
+ko 커스틱, 물결, 물보라의 디테일입니다. 낮음은 적은 예산과 짧은 시야 거리를, 높음은 큰 예산과 먼 시야 거리를 씁니다
+
+@ Disabled while Enhanced Particles is on: its particles replace the GLQuake and Classic styles
+ko 향상된 파티클이 켜져 있으면 사용할 수 없습니다. 해당 파티클이 GLQuake와 클래식 스타일을 대체합니다
+
+@ Disabled while Enhanced Water is on: its own underwater effects replace the classic and GLQuake view warps
+ko 향상된 물이 켜져 있으면 사용할 수 없습니다. 자체 수중 효과가 클래식 및 GLQuake 화면 왜곡을 대체합니다
+
+@ Draw the predicted grenade path as a solid or dashed line
+ko 예상 유탄 경로를 실선 또는 점선으로 그립니다
+
+@ Draw the view out of the linked portal inside each portal; off shows flat discs (fastest)
+ko 각 포털 안에 연결된 포털 너머의 화면을 그립니다. 끄면 평평한 원판으로 표시됩니다 (가장 빠름)
+
+@ Droplets spray up when things enter or leave water, slime or lava
+ko 물체가 물, 슬라임, 용암에 들어가거나 나올 때 물방울이 튑니다
+
+@ Emulates the original 8-bit palette of software rendering
+ko 소프트웨어 렌더링의 원작 8비트 팔레트를 재현합니다
+
+@ Every level starts with only the shotgun and axe, as if started fresh
+ko 모든 레벨을 처음 시작하는 것처럼 샷건과 도끼만 가지고 시작합니다
+
+@ Explosion damage for each remotely detonated sticky bomb
+ko 원격 폭파되는 점착 폭탄 하나당 폭발 피해
+
+@ Extra freeze milliseconds for every 10 damage dealt, so heavy hits stop longer
+ko 피해 10당 추가되는 정지 시간(ms)입니다. 강한 공격일수록 더 오래 멈춥니다
+
+@ First person, a third-person camera centered behind the player, or one over the right or left shoulder; third person hides viewmodels
+ko 1인칭, 플레이어 바로 뒤의 3인칭 카메라, 또는 오른쪽이나 왼쪽 어깨 너머 카메라입니다. 3인칭에서는 무기 모델이 숨겨집니다
+
+@ Flash the selected marker on confirmed hits; colors are shared with the crosshair
+ko 적중이 확인되면 선택한 마커를 표시합니다. 색상은 조준점과 같습니다
+
+@ Freeze for every enemy, or only for enemies that were tough before the hit
+ko 모든 적에게 정지를 적용하거나, 공격 전 강적이었던 적에게만 적용합니다
+
+@ Freeze the game briefly when you damage an enemy; single player with add-ons only
+ko 적에게 피해를 주면 게임을 잠깐 멈춥니다. 애드온을 켠 싱글 플레이 전용입니다
+
+@ Gibs tumble and barrels throw shrapnel; shots and blasts push them (cosmetic only)
+ko 살점이 구르고 통이 파편을 흩뿌리며, 사격과 폭발에 밀려납니다 (외형 효과만)
+
+@ Health an enemy must have had before the hit to count as tough
+ko 강적으로 간주되려면 공격 전 적이 가지고 있어야 하는 체력
+
+@ Hits dealing less damage than this do not freeze the game; the default 10 skips nails and shotgun pellets
+ko 이보다 피해가 적은 공격은 게임을 멈추지 않습니다. 기본값 10은 못과 샷건 산탄을 제외합니다
+
+@ Hold fire and sweep the crosshair over monsters to queue them, release to throw: it stuns each in turn and flies back; alt-fire clears the queue
+ko 사격을 누른 채 조준점으로 몬스터를 훑어 대상을 지정하고, 놓으면 던집니다. 부메랑이 차례로 기절시키고 돌아옵니다. 보조 사격은 대상 목록을 비웁니다
+
+@ Hold: keep Lock-on held. Toggle: press Auto-aim Toggle to enable automatic acquisition. Click look stick to switch targets
+ko 누르고 있기: 락온을 계속 누릅니다. 전환: 자동 조준 전환을 눌러 자동 포착을 켭니다. 시점 스틱을 눌러 대상을 바꿉니다
+
+@ How close an enemy must be to the crosshair for automatic acquisition in toggle mode (degrees)
+ko 전환 모드에서 자동 포착되려면 적이 조준점에 얼마나 가까워야 하는지 (도)
+
+@ How far the view tilts up and down when you tilt the controller (pitch axis)
+ko 컨트롤러를 앞뒤로 기울일 때 시점이 위아래로 움직이는 정도 (피치 축)
+
+@ How far the view turns left and right when you turn the controller (yaw axis)
+ko 컨트롤러를 좌우로 돌릴 때 시점이 좌우로 도는 정도 (요 축)
+
+@ How far the view turns when you drag on the right half of the screen
+ko 화면 오른쪽 절반을 드래그할 때 시점이 도는 정도
+
+@ How fast the boomerang flies (units per second)
+ko 부메랑이 날아가는 속도 (초당 유닛)
+
+@ How hard shots and explosions push debris around
+ko 사격과 폭발이 파편을 밀어내는 세기
+
+@ How hard the Powerwasher's water pushes enemies
+ko 고압 세척기의 물줄기가 적을 밀어내는 세기
+
+@ How long a hit freezes the game, in milliseconds
+ko 공격 시 게임이 멈추는 시간 (밀리초)
+
+@ How strongly fog covers the sky when fog is on
+ko 안개가 켜져 있을 때 안개가 하늘을 덮는 정도
+
+@ How the view distorts underwater: Classic ripples the whole screen like software Quake, GLQuake slowly stretches and squashes the view
+ko 수중 화면 왜곡 방식입니다. 클래식은 소프트웨어 Quake처럼 화면 전체를 물결치게 하고, GLQuake는 화면을 천천히 늘였다 줄입니다
+
+@ Ignores gyro rotation slower than this many degrees per second, to hide hand tremor
+ko 손떨림을 숨기기 위해 초당 이 각도보다 느린 자이로 회전을 무시합니다
+
+@ Immersive: appears for a few seconds only when its value changes
+ko 몰입형: 값이 바뀔 때만 몇 초간 나타납니다
+
+@ Keeps textures sharp on floors and walls seen at steep angles
+ko 비스듬히 보이는 바닥과 벽의 텍스처를 선명하게 유지합니다
+
+@ Lights from rockets, muzzle flashes and explosions brighten nearby walls
+ko 로켓, 총구 화염, 폭발의 빛이 주변 벽을 밝힙니다
+
+@ Liquid surfaces swell and ring out where things move through them
+ko 물체가 지나가는 곳에서 액체 표면이 출렁이고 물결이 퍼집니다
+
+@ Lobs sticky bombs (rockets ammo) that cling to walls, doors and monsters; alt-fire detonates them all
+ko 벽, 문, 몬스터에 달라붙는 점착 폭탄(로켓 탄약)을 던집니다. 보조 사격으로 모두 폭파합니다
+
+@ Look of the classic particles: GLQuake draws soft round dots, Classic draws square pixels like software Quake
+ko 클래식 파티클의 모양입니다. GLQuake는 부드럽고 둥근 점을, 클래식은 소프트웨어 Quake처럼 사각형 픽셀을 그립니다
+
+@ Low skips the background smear halo and uses fewer blur samples; high keeps the full halo and smoother streaks
+ko 낮음은 배경 번짐 후광을 생략하고 블러 샘플을 적게 씁니다. 높음은 후광 전체와 더 부드러운 잔상을 유지합니다
+
+@ Low: hard particle edges, half the scripted particles and fewer hit sparks. Medium: soft edges. High: soft edges checked per MSAA sample, most hit sparks
+ko 낮음: 파티클 가장자리가 딱딱하고 스크립트 파티클은 절반, 타격 불꽃은 적게. 중간: 부드러운 가장자리. 높음: MSAA 샘플마다 검사하는 부드러운 가장자리, 가장 많은 타격 불꽃
+
+@ Marks fade out before expiring; oldest marks are recycled at the limit
+ko 자국은 사라지기 전에 서서히 흐려집니다. 한도에 이르면 가장 오래된 자국부터 재사용됩니다
+
+@ Max nested portal reflections to draw; each level redraws the scene
+ko 그릴 수 있는 중첩 포털의 최대 단계입니다. 단계마다 장면을 다시 그립니다
+
+@ Max portals per screen with a live view; each one redraws the scene
+ko 화면당 실시간 화면을 보여 주는 최대 포털 수입니다. 포털마다 장면을 다시 그립니다
+
+@ Maximum distance for acquiring and keeping an enemy locked
+ko 적을 포착하고 락온을 유지하는 최대 거리
+
+@ Minimum gap between freezes, so shotgun pellets and rapid fire count once; kills ignore it
+ko 정지 사이의 최소 간격입니다. 샷건 산탄과 연사는 한 번으로 셉니다. 처치에는 적용되지 않습니다
+
+@ Modern terminal console with autocomplete popup, history search, ANSI colors, bash shell and piping; off uses the classic Quake console
+ko 자동 완성 팝업, 기록 검색, ANSI 색상, bash 셸과 파이프를 갖춘 현대식 터미널 콘솔입니다. 끄면 클래식 Quake 콘솔을 씁니다
+
+@ Monsters take proportionally less damage at higher values; above 100% is harder
+ko 값이 높을수록 몬스터가 받는 피해가 비례해서 줄어듭니다. 100% 초과는 더 어렵습니다
+
+@ Moving gibs leave blood on surfaces they touch
+ko 움직이는 살점이 닿는 표면에 피를 남깁니다
+
+@ Multiplier on the freeze when the hit kills the enemy; 1 means no extra
+ko 공격으로 적을 처치했을 때 정지 시간 배율입니다. 1이면 추가 없음
+
+@ Multiplies ammo from pickups (up to the normal carry limit); below 100% is harder
+ko 획득하는 탄약을 배로 늘립니다 (기본 소지 한도까지). 100% 미만은 더 어렵습니다
+
+@ Multiplies health from pickups (up to 100, or the item's own limit); below 100% is harder
+ko 획득하는 체력을 배로 늘립니다 (최대 100 또는 아이템 자체 한도까지). 100% 미만은 더 어렵습니다
+
+@ Nails stick to wood and bodies; hard surfaces deflect them to the floor
+ko 못이 나무와 시체에 박히고, 단단한 표면에서는 튕겨 바닥에 떨어집니다
+
+@ Nearest keeps crisp classic pixels; linear smooths textures
+ko 최근접은 선명한 클래식 픽셀을 유지하고, 선형은 텍스처를 부드럽게 합니다
+
+@ New Game: Add-ons
+ko 새 게임: 애드온
+
+@ New Game: Customize
+ko 새 게임: 커스터마이즈
+
+@ Night vision: how much dark areas are brightened; thermal: how strongly heat stands out
+ko 야간 투시: 어두운 곳을 밝히는 정도. 열화상: 열이 두드러지는 정도
+
+@ Night-vision and thermal goggles, cycle normal, night vision and thermal with Change Goggles (Add-ons), or use the Equipment Wheel
+ko 야간 투시 및 열화상 고글입니다. 고글 전환(애드온)으로 일반, 야간 투시, 열화상을 순환하거나 장비 휠을 사용하세요
+
+@ No single freeze lasts longer than this, however much damage or kill bonus adds
+ko 피해나 처치 보너스가 아무리 더해져도 한 번의 정지는 이보다 길지 않습니다
+
+@ Oldest marks and nails are recycled at this shared limit
+ko 이 공용 한도에 이르면 가장 오래된 자국과 못부터 재사용됩니다
+
+@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
+ko 화면 스틱과 버튼입니다. 자동은 터치하면 표시하고 다른 장치를 쓰면 숨깁니다
+
+@ Only autosaves: quicksaves and the Save menu are off
+ko 자동 저장만 가능합니다. 빠른 저장과 저장 메뉴는 꺼집니다
+
+@ Place every weapon at the center, right or left of the view, or hide all viewmodels
+ko 모든 무기를 화면 중앙, 오른쪽, 왼쪽에 두거나 무기 모델을 모두 숨깁니다
+
+@ Play your chosen hit or kill cue when you damage an enemy
+ko 적에게 피해를 주면 선택한 적중 또는 처치 효과음을 재생합니다
+
+@ Playback speed: faster sounds shorter and higher
+ko 재생 속도: 빠를수록 소리가 짧고 높아집니다
+
+@ Plays the Quake theme in the main menu when no game is running
+ko 게임이 진행 중이 아닐 때 메인 메뉴에서 Quake 테마를 재생합니다
+
+@ Portals farther away than this are drawn as flat discs
+ko 이보다 멀리 있는 포털은 평평한 원판으로 그립니다
+
+@ Press attack once to keep firing, again to stop
+ko 공격을 한 번 누르면 계속 사격하고, 다시 누르면 멈춥니다
+
+@ Press run once to switch between running and walking
+ko 달리기를 한 번 눌러 달리기와 걷기를 전환합니다
+
+@ Raise or lower the tone independently of sound length
+ko 소리 길이와 상관없이 음높이를 올리거나 내립니다
+
+@ Red screen edges show where damage came from: top is front, bottom is behind; Screen Flashes controls their strength
+ko 붉은 화면 가장자리가 피해 방향을 보여 줍니다. 위는 앞, 아래는 뒤입니다. 강도는 화면 번쩍임으로 조절합니다
+
+@ Replaces the classic dot particles with glowing sparks, smoke and blood; mods with their own particle effects keep them
+ko 클래식 점 파티클을 빛나는 불꽃, 연기, 피로 바꿉니다. 자체 파티클 효과가 있는 모드는 그대로 유지합니다
+
+@ Resolution and detail inside portal and teleporter views; lower tiers trim nested effects
+ko 포털과 텔레포터 화면 안의 해상도와 디테일입니다. 낮은 단계는 중첩 효과를 줄입니다
+
+@ Rippling light patterns on surfaces under water and slime
+ko 물과 슬라임 아래 표면에 일렁이는 빛 무늬
+
+@ Scales all damage you take; above 100% is harder
+ko 받는 모든 피해의 배율입니다. 100% 초과는 더 어렵습니다
+
+@ Screen edge for this element; elements on the same spot stack
+ko 이 요소를 둘 화면 가장자리입니다. 같은 위치의 요소는 겹쳐 쌓입니다
+
+@ Seconds a monster hit by the boomerang stays stunned
+ko 부메랑에 맞은 몬스터가 기절해 있는 시간(초)
+
+@ Seconds impact marks and stuck nails stay before fading out; independent of Particle Quality
+ko 탄흔과 박힌 못이 사라지기 전까지 남는 시간(초)입니다. 파티클 품질과 무관합니다
+
+@ Seconds messages at the top of the screen stay up
+ko 화면 상단 메시지가 표시되는 시간(초)
+
+@ Seconds the flick stick snap takes; lower is faster
+ko 플릭 스틱 회전에 걸리는 시간(초)입니다. 낮을수록 빠릅니다
+
+@ See through enhanced water; enables Water Opacity
+ko 향상된 물을 투명하게 봅니다. 물 불투명도를 사용할 수 있게 됩니다
+
+@ Sensor grain, scanlines and flicker of the goggle image
+ko 고글 화면의 센서 입자, 주사선, 깜빡임
+
+@ Shades every anti-aliasing sample; needs Anti-aliasing on
+ko 모든 안티에일리어싱 샘플을 셰이딩합니다. 안티에일리어싱이 켜져 있어야 합니다
+
+@ Shifts colors so they stay distinct for the chosen color blindness
+ko 선택한 색각 이상 유형에서도 색이 구분되도록 색상을 조정합니다
+
+@ Shotgun hits leave small surface marks (cosmetic only)
+ko 샷건 명중 시 표면에 작은 자국이 남습니다 (외형 효과만)
+
+@ Show corner ticks at screen centre while locked, even with Crosshair off
+ko 락온 중에는 조준점이 꺼져 있어도 화면 중앙에 모서리 표시를 보여 줍니다
+
+@ Show where grenades and other arcing shots will fly, bounce and land; local play only, not in deathmatch
+ko 유탄 등 포물선을 그리는 탄이 날아가고 튕기고 떨어질 위치를 보여 줍니다. 로컬 플레이 전용이며 데스매치에서는 불가합니다
+
+@ Shows text for important sounds: doors, alerted enemies, secrets, pickups
+ko 문, 경계 상태의 적, 비밀, 아이템 획득 등 중요한 소리를 글자로 표시합니다
+
+@ Shows the distance fog that maps and mods set; off always gives clear view
+ko 맵과 모드가 설정한 원거리 안개를 표시합니다. 끄면 항상 시야가 맑습니다
+
+@ Shows the player face next to the health number
+ko 체력 숫자 옆에 플레이어 얼굴을 표시합니다
+
+@ Simulation detail, step rate, fade-out lifetimes and caps for gibs and shrapnel; low also skips mover collision
+ko 살점과 파편의 시뮬레이션 디테일, 갱신 빈도, 소멸 시간, 한도입니다. 낮음은 움직이는 구조물과의 충돌도 생략합니다
+
+@ Size of the on-screen buttons and move stick
+ko 화면 버튼과 이동 스틱의 크기
+
+@ Slowly heals up to 100 health after 5 seconds without being hit
+ko 5초간 피격되지 않으면 체력이 100까지 서서히 회복됩니다
+
+@ Slows stick look while the crosshair is over an enemy
+ko 조준점이 적 위에 있을 때 스틱 시점 이동을 늦춥니다
+
+@ Slows the game down while the weapon wheel is open
+ko 무기 휠이 열려 있는 동안 게임을 느리게 합니다
+
+@ Slows the whole game down; single player only. Saves and demos stay compatible with other ports
+ko 게임 전체를 느리게 합니다. 싱글 플레이 전용입니다. 저장 파일과 데모는 다른 포트와 계속 호환됩니다
+
+@ Small camera jolt on each freeze; off with Reduce Motion
+ko 정지할 때마다 카메라가 살짝 흔들립니다. 움직임 줄이기를 켜면 꺼집니다
+
+@ Snap and track enemies in local play, including split-screen; unavailable online
+ko 분할 화면을 포함한 로컬 플레이에서 적을 조준하고 추적합니다. 온라인에서는 사용할 수 없습니다
+
+@ Sparks, smoke, chips, splinters and splashes fly off whatever your shots hit
+ko 사격이 맞은 곳에서 불꽃, 연기, 부스러기, 나뭇조각, 물보라가 튑니다
+
+@ Spawns extra copies of every monster around the original when a level starts
+ko 레벨이 시작될 때 모든 몬스터 주변에 같은 몬스터를 추가로 생성합니다
+
+@ Strength of the full-screen flashes for damage, pickups and powerups
+ko 피해, 아이템 획득, 파워업 시 화면 전체 번쩍임의 강도
+
+@ Stretch or shorten the sound while keeping its pitch
+ko 음높이는 유지한 채 소리를 늘이거나 줄입니다
+
+@ Surface opacity; requires Enhanced Water and Translucent Water
+ko 수면 불투명도입니다. 향상된 물과 반투명 물이 필요합니다
+
+@ The hook latches onto metal surfaces (metal, tech, computer panels, copper)
+ko 갈고리가 금속 표면(금속, 기계, 컴퓨터 패널, 구리)에 걸립니다
+
+@ The hook latches onto stone, brick, rock and any surface not recognised as wood or metal
+ko 갈고리가 돌, 벽돌, 바위 등 나무나 금속이 아닌 모든 표면에 걸립니다
+
+@ The hook latches onto wooden surfaces (texture names like wood, crate, plank)
+ko 갈고리가 나무 표면(wood, crate, plank 같은 텍스처 이름)에 걸립니다
+
+@ Turn the controller's motion sensor into a look input; needs a pad with a gyroscope
+ko 컨트롤러의 모션 센서로 시점을 조작합니다. 자이로스코프가 있는 패드가 필요합니다
+
+@ Turns off view bob, strafe tilt and the camera kick when hit or firing
+ko 걸음 시 화면 흔들림, 옆걸음 기울기, 피격 및 사격 시 카메라 반동을 끕니다
+
+@ Turns on the extra liquid effects; Water Settings controls each one
+ko 추가 액체 효과를 켭니다. 각 효과는 물 설정에서 조절합니다
+
+@ Turns the view to follow a moving enemy you are aiming at
+ko 조준 중인 적이 움직이면 시점이 따라갑니다
+
+@ Turns the view when you roll the controller sideways; 0 disables it, negative reverses it
+ko 컨트롤러를 옆으로 기울이면 시점이 돕니다. 0은 끄기, 음수는 반대 방향입니다
+
+@ Two-portal gun: fire and alt-fire place linked portals on flat walls; assign a weapon slot in Add-ons
+ko 포털 두 개를 쏘는 총: 사격과 보조 사격으로 평평한 벽에 연결된 포털을 설치합니다. 애드온에서 무기 슬롯을 지정하세요
+
+@ Unlocks the FX Settings page: enhanced particles, impact effects and blood splatter
+ko 효과 설정 페이지를 엽니다: 향상된 파티클, 타격 효과, 피 튀김
+
+@ Uses the 2021 re-release's smoother MD5 models (and MD3 replacements from mods) instead of the classic ones. Applies on the next map load
+ko 클래식 모델 대신 2021 리마스터의 더 매끄러운 MD5 모델(및 모드의 MD3 대체 모델)을 씁니다. 다음 맵을 불러올 때 적용됩니다
+
+@ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
+ko 맵의 컬러 조명(.lit 파일 또는 BSPX 럼프)을 씁니다. 끄면 원작의 흰 조명이 됩니다. 다음 맵을 불러올 때 적용됩니다
+
+@ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
+ko 물줄기 분할 수, 물방울 수, 광택 액체 셰이딩입니다. 낮음은 단순한 반투명 물줄기를, 높음은 매끄럽고 광택 있는 물줄기를 씁니다
+
+@ When gyro looking applies: always, off while +gyroaction is held, or only while it is held
+ko 자이로 시점이 적용되는 때: 항상, +gyroaction을 누르는 동안 끔, 또는 누르는 동안만
+
+@ Which weapons trigger the freeze; melee covers the axe and any mod weapon used at close range without ammo
+ko 정지를 일으키는 무기입니다. 근접은 도끼와, 탄약 없이 근거리에서 쓰는 모드 무기를 포함합니다
+
+@ Your own rockets and grenades don't hurt you; rocket jumps still work
+ko 자신의 로켓과 유탄에 다치지 않습니다. 로켓 점프는 여전히 가능합니다
+
+# ==== ui.txt ====
+
+# Menus and pop-ups outside the options pages: save cards, launch, presets,
+# add-on browser, map packs, hints and dialogs.
+@ Select
+ko 선택
+
+@ Back
+ko 뒤로
+
+@ Cancel
+ko 취소
+
+@ Confirm
+ko 확인
+
+@ Scroll
+ko 스크롤
+
+@ Section
+ko 섹션
+
+@ Bind
+ko 지정
+
+@ Cancel binding
+ko 지정 취소
+
+@ Clear
+ko 해제
+
+@ Clear pad
+ko 패드 해제
+
+@ Remap
+ko 재지정
+
+@ Type
+ko 입력
+
+@ Shift
+ko Shift
+
+@ Done
+ko 완료
+
+@ Del
+ko Del
+
+@ Space
+ko 스페이스
+
+@ Save
+ko 저장
+
+@ Load
+ko 불러오기
+
+@ Delete
+ko 삭제
+
+@ Play
+ko 플레이
+
+@ Yes
+ko 예
+
+@ No
+ko 아니요
+
+@ OK
+ko 확인
+
+@ System
+ko 시스템
+
+@ Language
+ko 언어
+
+@ Help
+ko 도움말
+
+@ Fixed for this game: it was started without Customize
+ko 이 게임에서는 고정됨: 커스터마이즈 없이 시작한 게임입니다
+
+@ Press a button or key to bind (Start cancels)
+ko 지정할 버튼이나 키를 누르세요 (Start로 취소)
+
+@ Press button...
+ko 버튼을 누르세요...
+
+@ Press key...
+ko 키를 누르세요...
+
+@ Replace this binding?
+ko 이 키 지정을 바꿀까요?
+
+@ is already assigned
+ko 이(가) 이미 지정되어 있습니다
+
+@ {} already assigned
+ko {}이(가) 이미 지정되어 있습니다
+
+@ Open Controls to remap Lock-on?
+ko 조작 설정을 열어 락온을 재지정할까요?
+
+@ Lock-on
+ko 락온
+
+@ Auto-aim Toggle
+ko 자동 조준 전환
+
+@ Keyboard
+ko 키보드
+
+@ Controller
+ko 컨트롤러
+
+# main menu, dialogs and screens
+@ Map Packs
+ko 맵 팩
+
+@ Customize
+ko 커스터마이즈
+
+@ Level Select
+ko 레벨 선택
+
+@ Really quit?
+ko 정말 종료할까요?
+
+@ You died
+ko 사망했습니다
+
+@ Continue from most recent save
+ko 가장 최근 저장에서 계속
+
+@ Select save
+ko 저장 선택
+
+@ Restart level
+ko 레벨 재시작
+
+@ Return to main menu
+ko 메인 메뉴로 돌아가기
+
+@ (disabled)
+ko (사용 불가)
+
+@ (fixed for this game)
+ko (이 게임에서 고정)
+
+@ (off)
+ko (꺼짐)
+
+@ Apply Display Changes
+ko 디스플레이 변경 적용
+
+@ Display Mode
+ko 디스플레이 모드
+
+@ Resolution
+ko 해상도
+
+@ desktop
+ko 데스크톱
+
+@ Preset
+ko 프리셋
+
+@ Map
+ko 맵
+
+@ Reset Shader Settings
+ko 셰이더 설정 초기화
+
+@ Reset to Defaults
+ko 기본값으로 초기화
+
+@ Searching...
+ko 검색 중...
+
+@ This game only autosaves.
+ko 이 게임은 자동 저장만 합니다.
+
+@ (No Manual Saves modifier)
+ko (수동 저장 금지 규칙)
+
+@ End the current game?
+ko 현재 게임을 끝낼까요?
+
+@ Unsaved progress will be lost.
+ko 저장하지 않은 진행 상황은 사라집니다.
+
+@ End game
+ko 게임 종료
+
+@ Overwrite
+ko 덮어쓰기
+
+@ Overwrite "{}"?
+ko "{}"을(를) 덮어쓸까요?
+
+@ Saved {}
+ko {} 저장됨
+
+@ Start a new game?
+ko 새 게임을 시작할까요?
+
+@ New game
+ko 새 게임
+
+@ New Game
+ko 새 게임
+
+@ CUSTOM
+ko 커스텀
+
+@ Customize Experience
+ko 게임 커스터마이즈
+
+@ Disable All
+ko 모두 끄기
+
+@ Disable All Modifications
+ko 모든 변경 끄기
+
+@ Saves load in other source ports too.
+ko 저장 파일을 다른 소스 포트에서도 불러올 수 있습니다.
+
+@ Standard rules, no add-ons.
+ko 기본 규칙, 애드온 없음.
+
+@ Choose skill
+ko 난이도 선택
+
+@ The current game will end
+ko 현재 게임이 종료됩니다
+
+@ Easy
+ko 쉬움
+
+@ Normal
+ko 보통
+
+@ Hard
+ko 어려움
+
+@ Nightmare
+ko 악몽
+
+# graphics preset pop-up
+@ Choose a Graphics Preset
+ko 그래픽 프리셋 선택
+
+@ Classic
+ko 클래식
+
+@ Like the re-release: enhanced models,
+ko 리마스터와 같음: 향상된 모델,
+
+@ no added effects.
+ko 추가 효과 없음.
+
+@ Enhanced
+ko 향상
+
+@ Every enhancement at its highest quality.
+ko 모든 향상 기능을 최고 품질로.
+
+@ Needs a capable GPU.
+ko 고성능 GPU가 필요합니다.
+
+@ Low-End
+ko 저사양
+
+@ Fastest. No anti-aliasing, original
+ko 가장 빠름. 안티에일리어싱 없음, 원본
+
+@ models, lowest effect quality.
+ko 모델, 최저 효과 품질.
+
+@ Esc keeps the defaults
+ko Esc를 누르면 기본값을 유지합니다
+
+@ Everything can be changed later in Options.
+ko 모든 설정은 나중에 옵션에서 바꿀 수 있습니다.
+
+@ Keep Defaults
+ko 기본값 유지
+
+# save and load cards
+@ Save Game
+ko 게임 저장
+
+@ Load Game
+ko 게임 불러오기
+
+@ Autosaves
+ko 자동 저장
+
+@ newest first
+ko 최신순
+
+@ Saves: {}
+ko 저장: {}
+
+@ Browse Autosaves
+ko 자동 저장 둘러보기
+
+@ Every retained autosave, newest first
+ko 보관된 모든 자동 저장, 최신순
+
+@ New save
+ko 새 저장
+
+@ Select to save your game here
+ko 선택하면 여기에 게임을 저장합니다
+
+@ No autosaves yet
+ko 자동 저장이 아직 없습니다
+
+@ Autosaves are made on level entry, secrets and more (Options > Gameplay)
+ko 레벨 진입, 비밀 발견 등에서 자동 저장됩니다 (옵션 > 게임플레이)
+
+@ No saves yet
+ko 저장이 아직 없습니다
+
+@ Save from the Single Player menu, or press F6 to quicksave
+ko 싱글 플레이 메뉴에서 저장하거나 F6을 눌러 빠른 저장하세요
+
+@ No picture
+ko 이미지 없음
+
+@ Del: delete save
+ko Del: 저장 삭제
+
+@ Delete "{}"?
+ko "{}"을(를) 삭제할까요?
+
+@ This cannot be undone.
+ko 되돌릴 수 없습니다.
+
+@ Quicksave
+ko 빠른 저장
+
+@ Autosave: {}
+ko 자동 저장: {}
+
+@ unknown trigger
+ko 알 수 없는 계기
+
+@ Latest - {}
+ko 최신 - {}
+
+@ Health {}
+ko 체력 {}
+
+@ Armor {}
+ko 아머 {}
+
+@ Kills {}/{}
+ko 처치 {}/{}
+
+@ Secrets {}/{}
+ko 비밀 {}/{}
+
+@ Split-screen, {} players
+ko 분할 화면, {}인
+
+@ Co-op
+ko 협동
+
+@ Customized
+ko 커스터마이즈됨
+
+@ Customized, {}
+ko 커스터마이즈됨, {}
+
+@ Date unavailable
+ko 날짜 정보 없음
+
+@ Just now
+ko 방금 전
+
+@ {} min ago
+ko {}분 전
+
+@ {} h ago
+ko {}시간 전
+
+@ Level entry
+ko 레벨 진입
+
+@ Secret found
+ko 비밀 발견
+
+@ All enemies killed
+ko 적 전멸
+
+@ All secrets found
+ko 모든 비밀 발견
+
+@ Timer
+ko 타이머
+
+# customize pages
+@ Standard rules
+ko 기본 규칙
+
+@ Modifiers changed: {}
+ko 변경된 규칙: {}
+
+@ no add-ons
+ko 애드온 없음
+
+@ add-ons: {}
+ko 애드온: {}
+
+@ Saves of this game are .qsa files: they need this source port.
+ko 이 게임의 저장 파일은 .qsa 파일이며 이 소스 포트가 필요합니다.
+
+@ Nothing changed: this plays as standard Quake.
+ko 변경 사항 없음: 기본 Quake로 플레이합니다.
+
+@ Changes apply now and are saved with this game (.qsa).
+ko 변경 사항은 즉시 적용되며 이 게임과 함께 저장됩니다 (.qsa).
+
+@ This game started without Customize, so its rules are fixed.
+ko 이 게임은 커스터마이즈 없이 시작해 규칙이 고정되어 있습니다.
+
+@ Start a new game and choose Customize Experience.
+ko 새 게임을 시작하고 게임 커스터마이즈를 선택하세요.
+
+@ These rules apply to the next customized game.
+ko 이 규칙은 다음 커스터마이즈 게임에 적용됩니다.
+
+# add-on browser
+@ Fire
+ko 사격
+
+@ Alt Fire
+ko 보조 사격
+
+@ Configure Parameters >
+ko 세부 설정 >
+
+@ Configure
+ko 설정
+
+@ Settings
+ko 설정
+
+@ Change slot
+ko 슬롯 변경
+
+@ Toggle
+ko 전환
+
+@ Details
+ko 세부 정보
+
+@ Enter or click the box: toggle
+ko Enter 또는 상자 클릭: 켜기/끄기
+
+@ Right / Tab / click: details
+ko 오른쪽 / Tab / 클릭: 세부 정보
+
+@ Input Remapping
+ko 입력 재지정
+
+@ Weapon Slot
+ko 무기 슬롯
+
+@ Customized games save as .qsa files, which need this source port.
+ko 커스터마이즈 게임은 .qsa 파일로 저장되며 이 소스 포트가 필요합니다.
+
+@ This game started without Customize, so its add-ons are fixed. Customize a new game instead.
+ko 이 게임은 커스터마이즈 없이 시작해 애드온이 고정되어 있습니다. 새 게임을 커스터마이즈하세요.
+
+@ Bullet Time
+ko 불릿 타임
+
+@ Change Goggles
+ko 고글 전환
+
+@ Dodge / Dive
+ko 회피 / 다이브
+
+@ Goggles
+ko 고글
+
+@ Hitstop
+ko 히트스톱
+
+@ Projectile Shotguns
+ko 투사체 샷건
+
+@ BULLET TIME: 20%
+ko 불릿 타임: 20%
+
+@ NORMAL SPEED
+ko 일반 속도
+
+@ SLOW MOTION: PHYSICAL PELLETS
+ko 슬로 모션: 물리 산탄
+
+@ DEMONSTRATION
+ko 시연
+
+@ GAMEPLAY
+ko 게임플레이
+
+@ LOOP
+ko 반복
+
+@ Preview unavailable
+ko 미리 보기 없음
+
+# shader and language help lines
+@ A setting of the chosen shader; arrows step it, Enter is not needed
+ko 선택한 셰이더의 설정입니다. 화살표로 조절하며 Enter는 필요 없습니다
+
+@ Language of the menus, messages and the 2021 re-release's game text; System follows your computer's language
+ko 메뉴, 메시지, 2021 리마스터 게임 텍스트의 언어입니다. 시스템은 컴퓨터의 언어를 따릅니다
+
+@ Puts every setting of the chosen shader back to the preset's defaults
+ko 선택한 셰이더의 모든 설정을 프리셋 기본값으로 되돌립니다
+
+@ RetroArch slang shader on the final image: CRT, scanlines, NTSC, sharpening; add your own in <game>/shaders
+ko 최종 화면에 RetroArch slang 셰이더를 적용합니다: CRT, 주사선, NTSC, 선명화. 직접 추가하려면 <game>/shaders에 넣으세요
+
+# modern console footer
+@ Shift+PgUp/Dn: height  ` : hide
+ko Shift+PgUp/Dn: 높이  ` : 숨기기
+
+@ Tab: complete  Ctrl+R: search  bash | pipe
+ko Tab: 자동 완성  Ctrl+R: 검색  bash | 파이프
+
+@ ↑ +{} lines (End to jump) 
+ko ↑ +{}줄 (End로 이동) 
+
+# add-on descriptions
+@ Create two linked portals on flat walls. Fire places the first portal; Alt Fire places the second. Walk through either portal to emerge from the other. Your momentum carries through. Assign a weapon slot below: pressing that slot repeatedly cycles its ordinary weapon and every enabled add-on assigned there. Portal view quality is configurable below.
+ko 평평한 벽에 연결된 포털 두 개를 만듭니다. 사격은 첫 번째 포털을, 보조 사격은 두 번째 포털을 설치합니다. 한쪽 포털로 들어가면 다른 쪽으로 나오며, 운동량도 그대로 유지됩니다. 아래에서 무기 슬롯을 지정하세요. 해당 슬롯을 반복해서 누르면 기본 무기와 그 슬롯에 지정된 모든 애드온이 순환됩니다. 포털 화면 품질은 아래에서 설정할 수 있습니다.
+
+@ Hold Fire and sweep the crosshair over monsters to queue targets. Release Fire to throw: the boomerang visits each target, stuns it and returns to you. Alt Fire clears the queue. The weapon slot selects a group, not a separate hotkey: press it again to cycle through the weapons in that slot. Configure stun duration and flight speed below.
+ko 사격을 누른 채 조준점으로 몬스터를 훑어 대상을 지정합니다. 사격을 놓으면 던집니다. 부메랑이 각 대상을 찾아가 기절시킨 뒤 돌아옵니다. 보조 사격은 대상 목록을 비웁니다. 무기 슬롯은 별도 단축키가 아니라 그룹을 선택합니다. 다시 누르면 그 슬롯의 무기가 순환됩니다. 기절 시간과 비행 속도는 아래에서 설정하세요.
+
+@ Hold Fire to charge a sticky bomb using rocket ammunition; release to launch. A longer charge throws it faster. Bombs cling to walls, doors and monsters. Alt Fire detonates your planted bombs together. Place a trap, retreat, then detonate it when enemies approach. Assign any weapon slot below; repeated presses cycle through the ordinary weapon and add-ons in that slot.
+ko 사격을 누르고 있으면 로켓 탄약으로 점착 폭탄을 충전하고, 놓으면 발사합니다. 오래 충전할수록 더 빠르게 날아갑니다. 폭탄은 벽, 문, 몬스터에 달라붙습니다. 보조 사격으로 설치한 폭탄을 한꺼번에 폭파합니다. 함정을 설치하고 물러난 뒤 적이 다가오면 폭파하세요. 아래에서 무기 슬롯을 지정하세요. 반복해서 누르면 그 슬롯의 기본 무기와 애드온이 순환됩니다.
+
+@ Fire launches a chain hook. It latches onto a permitted surface or enemy and reels you toward the anchor. Fire again or use Alt Fire to let go. Choose which materials and enemies can be hooked in Configure Parameters. Assign it to any weapon slot; repeated presses of the slot's existing binding cycle through its weapons.
+ko 사격하면 사슬 갈고리를 발사합니다. 허용된 표면이나 적에 걸리면 고정점 쪽으로 끌려갑니다. 다시 사격하거나 보조 사격을 하면 놓습니다. 갈고리를 걸 수 있는 재질과 적은 세부 설정에서 고르세요. 아무 무기 슬롯에나 지정할 수 있으며, 그 슬롯의 기존 키를 반복해서 누르면 무기가 순환됩니다.
+
+@ A piercing railgun inspired by Quake III. Fire sends a slug through every enemy along its line. Each shot consumes two cells, with a 1.5 second refire interval. Damage and the spiral trail colour are configurable below. Choose a weapon slot: the slot's current binding selects and cycles the weapons assigned to it.
+ko Quake III에서 영감을 받은 관통 레일건입니다. 사격하면 탄환이 직선상의 모든 적을 관통합니다. 한 발에 셀 2개를 소모하며 재사격 간격은 1.5초입니다. 피해와 나선 궤적 색상은 아래에서 설정할 수 있습니다. 무기 슬롯을 고르세요. 그 슬롯의 현재 키로 지정된 무기를 선택하고 순환합니다.
+
+@ A Portal-style gel sprayer. Fire sprays blue Repulsion gel: land, jump or run into it to bounce, and landings on it never hurt. Alt Fire sprays orange Propulsion gel: run across it to go much faster. Gel coats floors and walls until washed off with the Powerwasher. Assign a weapon slot below; repeated presses cycle the weapons in that slot.
+ko Portal 스타일의 젤 분사기입니다. 사격은 파란 반발 젤을 뿌립니다. 그 위에 착지하거나 점프하거나 달려 들어가면 튕겨 오르며, 착지해도 다치지 않습니다. 보조 사격은 주황 추진 젤을 뿌립니다. 그 위를 달리면 훨씬 빨라집니다. 젤은 고압 세척기로 씻어 낼 때까지 바닥과 벽에 남습니다. 아래에서 무기 슬롯을 지정하세요. 반복해서 누르면 그 슬롯의 무기가 순환됩니다.
+
+@ A water cannon. Fire shoots a straight jet with limited reach; Alt Fire a wide, shorter fan. The water pushes enemies back, turns projectiles aside and washes away gel and blood. Push strength is configurable below. Assign a weapon slot below; repeated presses cycle the weapons in that slot.
+ko 물대포입니다. 사격은 사거리가 제한된 직선 물줄기를, 보조 사격은 넓고 짧은 부채꼴 물줄기를 쏩니다. 물은 적을 밀어내고 투사체의 방향을 돌리며 젤과 피를 씻어 냅니다. 미는 힘은 아래에서 설정할 수 있습니다. 아래에서 무기 슬롯을 지정하세요. 반복해서 누르면 그 슬롯의 무기가 순환됩니다.
+
+@ One equipment add-on includes both night vision and thermal vision. The Change Goggles action cycles Normal, Night Vision, Thermal, then Normal again. Night vision brightens dark rooms; thermal vision highlights living enemies. Goggles do not occupy a weapon slot. Configure intensity and sensor noise below. The binding affects only this add-on.
+ko 장비 애드온 하나에 야간 투시와 열화상이 모두 들어 있습니다. 고글 전환 동작은 일반, 야간 투시, 열화상, 다시 일반 순으로 순환합니다. 야간 투시는 어두운 방을 밝히고, 열화상은 살아 있는 적을 강조합니다. 고글은 무기 슬롯을 차지하지 않습니다. 강도와 센서 노이즈는 아래에서 설정하세요. 이 키 지정은 이 애드온에만 적용됩니다.
+
+@ Press Dodge with a movement direction on the ground or in midair: dive forward or leap backward and sideways. Diagonals are supported. Each press launches once, with a short recovery. The player body animates in third person. Assign the Dodge action below or in Controls.
+ko 지상이나 공중에서 이동 방향과 함께 회피를 누르세요. 앞으로 다이브하거나 뒤나 옆으로 도약합니다. 대각선도 지원합니다. 한 번 누를 때마다 한 번 도약하며 짧은 회복 시간이 있습니다. 3인칭에서는 플레이어 몸이 움직입니다. 회피 동작은 아래나 조작 설정에서 지정하세요.
+
+@ Use the dedicated Bullet Time action to slow the whole local game to 20% speed. Hold is the default; Toggle switches on each press. The optional meter limits use in real seconds and regenerates while inactive. Disable the meter for unlimited use. Remap the action and configure duration and regeneration below.
+ko 전용 불릿 타임 동작으로 로컬 게임 전체를 20% 속도로 늦춥니다. 기본은 누르고 있기이며, 전환은 누를 때마다 켜고 끕니다. 선택 사항인 게이지는 실제 시간(초)으로 사용을 제한하며 사용하지 않을 때 회복됩니다. 게이지를 끄면 무제한으로 쓸 수 있습니다. 동작 재지정과 지속 시간, 회복은 아래에서 설정하세요.
+
+@ Both shotguns and enemy grunts fire physical pellets with their original spread and damage. Fast default projectiles feel immediate; lower their speed to dodge incoming fire during bullet time. Configure projectile speed below, or reset it to the default of 10000 units per second.
+ko 두 샷건과 그런트가 원래의 탄 퍼짐과 피해를 지닌 물리 산탄을 쏩니다. 기본 투사체는 빨라서 즉시 맞는 느낌이며, 속도를 낮추면 불릿 타임 중에 날아오는 탄을 피할 수 있습니다. 투사체 속도는 아래에서 설정하거나 기본값인 초당 10000 유닛으로 되돌리세요.
+
+@ Freezes the game for a split second when you damage an enemy, so hits feel heavier. Single player only. Choose which weapons trigger it (all, melee, ranged or explosives), how long it lasts and how much more a kill freezes. Advanced settings cover enemy toughness, damage scaling, cooldown and the longest freeze.
+ko 적에게 피해를 주면 게임이 아주 잠깐 멈춰 타격감이 묵직해집니다. 싱글 플레이 전용입니다. 정지를 일으키는 무기(전체, 근접, 원거리, 폭발물), 지속 시간, 처치 시 추가 정지 정도를 고르세요. 고급 설정에서는 적의 강함, 피해 비례, 재사용 대기, 최대 정지 시간을 다룹니다.
+
+# map packs and the Quaddicted browser
+@ Get more maps (Quaddicted)...
+ko 맵 더 받기 (Quaddicted)...
+
+@ Type to filter...
+ko 입력해서 필터...
+
+@ Launch mod
+ko 모드 실행
+
+@ Start first map
+ko 첫 맵 시작
+
+@ (running)
+ko (실행 중)
+
+@ running
+ko 실행 중
+
+@ Recent
+ko 최근
+
+@ Name
+ko 이름
+
+@ Dir
+ko 폴더
+
+@ Default
+ko 기본
+
+@ Title
+ko 제목
+
+@ Sort: {}
+ko 정렬: {}
+
+@ {} installed
+ko {}개 설치됨
+
+@ {}/{} matching
+ko {}/{}개 일치
+
+@ {} maps, {} completed
+ko 맵 {}개, {}개 완료
+
+@ {}/{} matching, {} completed
+ko {}/{}개 일치, {}개 완료
+
+@ no maps of its own
+ko 자체 맵 없음
+
+@ dir: {}
+ko 폴더: {}
+
+@ base: {}
+ko 기반: {}
+
+@ Browse the Quaddicted archive of
+ko Quaddicted 아카이브에서
+
+@ single-player maps and episodes,
+ko 싱글 플레이 맵과 에피소드를
+
+@ then download and install them
+ko 둘러보고 내려받아
+
+@ here. Each release gets its own
+ko 여기에 설치하세요. 각 릴리스는
+
+@ entry in this list.
+ko 이 목록에 따로 표시됩니다.
+
+@ Needs an internet connection.
+ko 인터넷 연결이 필요합니다.
+
+@ Quaddicted Map Archive
+ko Quaddicted 맵 아카이브
+
+@ Newest
+ko 최신
+
+@ Author
+ko 제작자
+
+@ Size
+ko 크기
+
+@ Loading the map list...
+ko 맵 목록 불러오는 중...
+
+@ Couldn't load the map list: {}
+ko 맵 목록을 불러오지 못했습니다: {}
+
+@ {} single-player releases  -  F5 refreshes
+ko 싱글 플레이 릴리스 {}개  -  F5로 새로 고침
+
+@ {} matching
+ko {}개 일치
+
+@ by {}
+ko 제작: {}
+
+@ requires: {}
+ko 필요: {}
+
+@ maps: {}
+ko 맵: {}
+
+@ Failed: {}
+ko 실패: {}
+
+@ Downloading... {}%
+ko 내려받는 중... {}%
+
+@ Unpacking...
+ko 압축 푸는 중...
+
+@ Installed in {}/  -  Enter: play
+ko {}/에 설치됨  -  Enter: 플레이
+
+@ Enter: download and install
+ko Enter: 내려받아 설치
+
+@ unpacking
+ko 압축 푸는 중
+
+@ failed
+ko 실패
+
+@ installed
+ko 설치됨
+
+@ Downloads are not available in the browser build
+ko 브라우저 버전에서는 내려받기를 할 수 없습니다
+
+@ the map list could not be read
+ko 맵 목록을 읽을 수 없습니다
+
+@ downloading needs the curl program
+ko 내려받으려면 curl 프로그램이 필요합니다
+
+@ download failed
+ko 내려받기 실패
+
+@ the download is not a valid zip
+ko 내려받은 파일이 올바른 zip이 아닙니다
+
+@ nothing to install for this engine
+ko 이 엔진에 설치할 것이 없습니다
+
+@ needs {} installed first
+ko 먼저 {}을(를) 설치해야 합니다
+
+@ couldn't unpack {}
+ko {}의 압축을 풀 수 없습니다
+
+# help screen
+@ About
+ko 정보
+
+@ < Back
+ko < 뒤로
+
+# tr_ctx keys: English shows the short word, the key says which meaning
+@ Save (a manual save, as opposed to a quicksave or autosave)
+ko 수동 저장
+
+# ==== hud.txt ====
+
+# HUD, weapon and equipment wheels, sound captions and other in-game text.
+# Weapon, monster and item names follow the 2021 re-release's own translations.
+@ Axe
+ko 도끼
+
+@ Shotgun
+ko 샷건
+
+@ Double-Barrelled Shotgun
+ko 더블 배럴 샷건
+
+@ Nailgun
+ko 네일건
+
+@ Super Nailgun
+ko 슈퍼 네일건
+
+@ Grenade Launcher
+ko 유탄 발사기
+
+@ Rocket Launcher
+ko 로켓 발사기
+
+@ Thunderbolt
+ko 선더볼트
+
+@ Portal Gun
+ko 포털 건
+
+@ Boomerang
+ko 부메랑
+
+@ Stickybomb Launcher
+ko 점착 폭탄 발사기
+
+@ Railgun
+ko 레일건
+
+@ Hookshot
+ko 훅샷
+
+@ Gel Sprayer
+ko 젤 분사기
+
+@ Powerwasher
+ko 고압 세척기
+
+@ Night Vision Goggles
+ko 야간 투시 고글
+
+@ Thermal Goggles
+ko 열화상 고글
+
+@ Normal vision
+ko 일반 시야
+
+@ ON
+ko 켬
+
+@ OFF
+ko 끔
+
+@ {} (turn on)
+ko {} (켜기)
+
+@ {} (turn off)
+ko {} (끄기)
+
+@ Move mouse to select, release to toggle
+ko 마우스로 선택하고 놓으면 전환
+
+@ Move mouse to select, release to equip
+ko 마우스로 선택하고 놓으면 장착
+
+@ Release to toggle
+ko 놓으면 전환
+
+@ Release to equip
+ko 놓으면 장착
+
+@ shells
+ko 산탄
+
+@ nails
+ko 못
+
+@ rockets
+ko 로켓
+
+@ cells
+ko 셀
+
+@ Kills: {}/{}
+ko 처치: {}/{}
+
+@ Secrets: {}/{}
+ko 비밀: {}/{}
+
+@ Time {}
+ko 시간 {}
+
+@ Press any button to continue...
+ko 계속하려면 아무 버튼이나 누르세요...
+
+@ Press any key to continue...
+ko 계속하려면 아무 키나 누르세요...
+
+@ BULLET TIME
+ko 불릿 타임
+
+@ AUTO AIM
+ko 자동 조준
+
+@ Crosshair
+ko 조준점
+
+@ + Marker
+ko + 마커
+
+@ Hit markers off
+ko 히트 마커 끔
+
+@ On target
+ko 조준 시
+
+@ On kill
+ko 처치 시
+
+# sound captions
+@ [Secret found]
+ko [비밀 발견]
+
+@ [Message]
+ko [메시지]
+
+@ [Switch activated]
+ko [스위치 작동]
+
+@ [Key picked up]
+ko [열쇠 획득]
+
+@ [Rune picked up]
+ko [룬 획득]
+
+@ [Teleporter]
+ko [텔레포터]
+
+@ [Teleport]
+ko [순간 이동]
+
+@ [Splash]
+ko [첨벙]
+
+@ [Leaving water]
+ko [물에서 나옴]
+
+@ [Door]
+ko [문]
+
+@ [Platform moving]
+ko [발판 이동]
+
+@ [Button]
+ko [버튼]
+
+@ [Health picked up]
+ko [체력 획득]
+
+@ [Armor picked up]
+ko [아머 획득]
+
+@ [Quad Damage wearing off]
+ko [쿼드 대미지 종료 임박]
+
+@ [Quad Damage]
+ko [쿼드 대미지]
+
+@ [Pentagram wearing off]
+ko [펜타그램 종료 임박]
+
+@ [Pentagram of Protection]
+ko [보호의 펜타그램]
+
+@ [Ring wearing off]
+ko [반지 종료 임박]
+
+@ [Ring of Shadows]
+ko [그림자의 반지]
+
+@ [Biosuit wearing off]
+ko [바이오슈트 종료 임박]
+
+@ [Biosuit]
+ko [바이오슈트]
+
+@ [Item picked up]
+ko [아이템 획득]
+
+@ [Weapon picked up]
+ko [무기 획득]
+
+@ [Ammo picked up]
+ko [탄약 획득]
+
+@ [Explosion]
+ko [폭발]
+
+@ [Grenade launched]
+ko [유탄 발사]
+
+@ [Grenade bounce]
+ko [유탄 튕김]
+
+@ [Rocket fired]
+ko [로켓 발사]
+
+@ [Nails fired]
+ko [못 발사]
+
+@ [Lightning]
+ko [번개]
+
+@ [Thunder]
+ko [천둥]
+
+@ [Enforcer alerted]
+ko [인포서 경계]
+
+@ [Grunt alerted]
+ko [그런트 경계]
+
+@ [Rottweiler alerted]
+ko [로트와일러 경계]
+
+@ [Knight alerted]
+ko [나이트 경계]
+
+@ [Death Knight alerted]
+ko [데스 나이트 경계]
+
+@ [Scrag alerted]
+ko [스크래그 경계]
+
+@ [Ogre alerted]
+ko [오우거 경계]
+
+@ [Fiend alerted]
+ko [핀드 경계]
+
+@ [Shambler alerted]
+ko [섐블러 경계]
+
+@ [Zombie groaning]
+ko [좀비 신음]
+
+@ [Vore alerted]
+ko [보어 경계]
+
+@ [Vore attacking]
+ko [보어 공격]
+
+@ [Spawn alerted]
+ko [스폰 경계]
+
+@ [Rotfish]
+ko [로트피시]
+
+@ [Spawn]
+ko [스폰]
+
+@ [Chthon]
+ko [크톤]
+
+@ [Hard landing]
+ko [강하게 착지]
+
+@ [Drowning]
+ko [익사 중]
+
+@ [Gasping for air]
+ko [숨 헐떡임]
+
+@ [Burning]
+ko [불타는 중]
+
+@ [Telefrag]
+ko [텔레프래그]
+
+@ [Gibbed]
+ko [산산조각]
+
+# ==== console.txt ====
+
+# Console messages, shown translated only with con_translate 1 (Translate Console).
+# Cvar and command names stay as they are.
+@ Autosaved.
+ko 자동 저장되었습니다.
+
+@ Game saved.
+ko 게임이 저장되었습니다.
+
+@ Can't save now.
+ko 지금은 저장할 수 없습니다.
+
+@ This game only autosaves (No Manual Saves modifier).
+ko 이 게임은 자동 저장만 합니다 (수동 저장 금지 규칙).
+
+@ Loading {}...
+ko {} 불러오는 중...
+
+@ load failed: {}
+ko 불러오기 실패: {}
+
+@ ERROR: autosave failed: {}
+ko 오류: 자동 저장 실패: {}
+
+@ ERROR: couldn't open {}
+ko 오류: {}을(를) 열 수 없습니다
+
+@ ERROR: couldn't open {}.
+ko 오류: {}을(를) 열 수 없습니다.
+
+@ ERROR: couldn't write {}: {}
+ko 오류: {}에 쓸 수 없습니다: {}
+
+@ ERROR: couldn't create {}: {}
+ko 오류: {}을(를) 만들 수 없습니다: {}
+
+@ couldn't write {}: {}
+ko {}에 쓸 수 없습니다: {}
+
+@ Wrote {}
+ko {} 기록함
+
+@ screenshot failed: {}
+ko 스크린샷 실패: {}
+
+@ screenshot: {}
+ko 스크린샷: {}
+
+@ No readable save available. Select save or restart the level.
+ko 읽을 수 있는 저장 파일이 없습니다. 저장을 선택하거나 레벨을 재시작하세요.
+
+@ Unknown command "{}"
+ko 알 수 없는 명령 "{}"
+
+@ couldn't exec {}
+ko {}을(를) 실행할 수 없습니다
+
+@ execing {}
+ko {} 실행 중
+
+@ execing config.cfg (inherited from {})
+ko config.cfg 실행 중 ({}에서 상속)
+
+@ execing config.cfg (mod defaults)
+ko config.cfg 실행 중 (모드 기본값)
+
+@ execing default.cfg (built-in)
+ko default.cfg 실행 중 (내장)
+
+@ {} cvars
+ko cvar {}개
+
+@ {} commands
+ko 명령 {}개
+
+@ Can't "cmd", not connected
+ko "cmd"를 쓸 수 없습니다. 연결되어 있지 않습니다
+
+@ Looking for Quake servers...
+ko Quake 서버를 찾는 중...
+
+@ Bad value, must be between 1 and 65534
+ko 잘못된 값입니다. 1에서 65534 사이여야 합니다
+
+@ Couldn't handle music file {}
+ko 음악 파일 {}을(를) 처리할 수 없습니다
+
+@ Bug report written to {}
+ko 버그 리포트를 {}에 기록했습니다
+
+@ bugreport: can't create {}: {}
+ko bugreport: {}을(를) 만들 수 없습니다: {}
+
+@ graphics preset: {}
+ko 그래픽 프리셋: {}
+
+@ Presets (r_shader_preset <name>):
+ko 프리셋 (r_shader_preset <name>):
+
+@ Add your own .slangp presets under <game>/shaders/.
+ko 직접 만든 .slangp 프리셋은 <game>/shaders/에 추가하세요.
+
+@ no shader preset loaded (r_shader_preset)
+ko 불러온 셰이더 프리셋 없음 (r_shader_preset)
+
+@ r_shader_preset: "{}" not found
+ko r_shader_preset: "{}"을(를) 찾을 수 없습니다
+
+@ no parameter "{}" in this preset
+ko 이 프리셋에 "{}" 매개변수가 없습니다
+
+@ {} = {} (default {}, {}..{})
+ko {} = {} (기본값 {}, {}..{})
+
+@ Switching to {}...
+ko {}(으)로 전환 중...
+
+@ game: no game dir "{}" in {}
+ko game: 게임 폴더 "{}"이(가) {}에 없습니다
+
+@ game: can't find the engine executable
+ko game: 엔진 실행 파일을 찾을 수 없습니다
+
+@ game: exec failed: {}
+ko game: 실행 실패: {}
+
+@ game: launch failed: {}
+ko game: 시작 실패: {}
+
+@ loaded {} in {}s
+ko {}을(를) {}초 만에 불러옴
+
+@ No demos listed with startdemos
+ko startdemos에 등록된 데모가 없습니다
+
+@ Playing demo from {}.
+ko {}에서 데모 재생 중.
+
+@ {} frames {} seconds {} fps
+ko {}프레임 {}초 {} fps
+
+@ Recording to {}.
+ko {}에 녹화 중.
+
+@ Completed demo
+ko 데모 완료
+
+@ Can't record during demo playback
+ko 데모 재생 중에는 녹화할 수 없습니다
+
+@ Relative pathnames are not allowed.
+ko 상대 경로는 허용되지 않습니다.
+
+@ Can't record - try again when connected
+ko 녹화할 수 없습니다 - 연결된 후 다시 시도하세요
+
+@ {} demo(s) in loop
+ko 반복 재생 데모 {}개
+
+@ Not recording a demo.
+ko 데모를 녹화하고 있지 않습니다.
+
+@ {} joined on a gamepad
+ko {}이(가) 게임패드로 참가했습니다
+
+@ goggles: needs a game started with Add-ons and Goggles enabled
+ko goggles: 애드온과 고글을 켜고 시작한 게임이 필요합니다
+
+@ equip: needs a game started with Add-ons and Goggles enabled
+ko equip: 애드온과 고글을 켜고 시작한 게임이 필요합니다
+
+@ UDP listening on port {}
+ko UDP 포트 {}에서 대기 중
+
+@ UDP bind on port {} failed: {}
+ko UDP 포트 {} 바인드 실패: {}
+
+@ Connection accepted by {}
+ko {}이(가) 연결을 수락했습니다
+
+@ Connection failed: {}
+ko 연결 실패: {}
+
+@ Couldn't resolve {}
+ko {}의 주소를 확인할 수 없습니다
+
+@ Connecting to {}...
+ko {}에 연결 중...
+
+@ Connecting to QuakeWorld server {}...
+ko QuakeWorld 서버 {}에 연결 중...
+
+@ Disconnected: {}
+ko 연결 끊김: {}
+
+@ Server disconnected
+ko 서버 연결이 끊어졌습니다
+
+@ Client {} connected
+ko 클라이언트 {} 접속
+
+@ Client {} timed out
+ko 클라이언트 {} 시간 초과
+
+@ Couldn't spawn server {}: {}
+ko 서버 {}을(를) 생성할 수 없습니다: {}
+
+@ maxplayers can not be changed while a server is running.
+ko 서버가 실행 중일 때는 maxplayers를 바꿀 수 없습니다.
+
+@ You can't kick yourself!
+ko 자신을 강퇴할 수는 없습니다!
+
+@ Only the server may changelevel
+ko changelevel은 서버만 할 수 있습니다
+
+@ {} renamed to {}
+ko {}의 이름이 {}(으)로 바뀌었습니다

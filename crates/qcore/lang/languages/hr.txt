@@ -1,0 +1,3024 @@
+# hr: the port's own text; English keys from crates/qcore/lang/*.txt.
+# Format in crates/qcore/src/lang/catalog.rs; check with tools/lang_check.py.
+
+# ==== menu.txt ====
+
+# Options pages: page names, row labels and choice values.
+@ 10% speed
+hr brzina 10 %
+
+@ 2 split-screen
+hr 2 na podijeljenom zaslonu
+
+@ 3 split-screen
+hr 3 na podijeljenom zaslonu
+
+@ 4 split-screen
+hr 4 na podijeljenom zaslonu
+
+@ 5 split-screen
+hr 5 na podijeljenom zaslonu
+
+@ 6 split-screen
+hr 6 na podijeljenom zaslonu
+
+@ 2D aiming
+hr 2D ciljanje
+
+@ 2x monsters
+hr 2× čudovišta
+
+@ 3x monsters
+hr 3× čudovišta
+
+@ 4x monsters
+hr 4× čudovišta
+
+@ 3D resolution
+hr 3D razlučivost
+
+@ 3D view
+hr 3D prikaz
+
+@ 8-bit Color
+hr 8-bitne boje
+
+@ Accessibility
+hr Pristupačnost
+
+@ Acquisition Cone
+hr Stožac zahvata
+
+@ Activation
+hr Aktivacija
+
+@ Add a ringing room tail after the cue
+hr Dodaje zvonak odjek prostorije nakon signala
+
+@ Add delayed repeats after the cue
+hr Dodaje odgođena ponavljanja nakon signala
+
+@ Add saturation and distortion
+hr Dodaje zasićenje i izobličenje
+
+@ Add-ons
+hr Dodaci
+
+@ Address
+hr Adresa
+
+@ Adds fine noise to hide color banding
+hr Dodaje fini šum koji skriva stepenaste prijelaze boja
+
+@ Advanced Settings
+hr Napredne postavke
+
+@ Aim Assist
+hr Pomoć pri ciljanju
+
+@ Aim Rotation
+hr Rotacija ciljanja
+
+@ Aim Slowdown
+hr Usporavanje ciljanja
+
+@ Aim Style
+hr Stil ciljanja
+
+@ All
+hr Sve
+
+@ All enemies
+hr Svi neprijatelji
+
+@ Alt Fire (Add-ons)
+hr Alternativna paljba (dodaci)
+
+@ Always Run
+hr Uvijek trči
+
+@ Ambient Occlusion
+hr Ambijentalno zasjenjenje
+
+@ Ammo Counts
+hr Brojači streljiva
+
+@ Ammo Counts Position
+hr Položaj brojača streljiva
+
+@ Ammo Pickups
+hr Pokupljeno streljivo
+
+@ Anisotropic
+hr Anizotropno
+
+@ Anti-aliasing
+hr Zaglađivanje rubova
+
+@ Apply To
+hr Primijeni na
+
+@ Armor
+hr Oklop
+
+@ Armor Position
+hr Položaj oklopa
+
+@ Ask
+hr Pitaj
+
+@ Attack
+hr Napad
+
+@ Audio
+hr Zvuk
+
+@ Auto-aim
+hr Automatsko ciljanje
+
+@ Auto-aim Settings
+hr Postavke automatskog ciljanja
+
+@ Autosave
+hr Autospremanje
+
+@ Autosave Settings
+hr Postavke autospremanja
+
+@ Autosave Timer
+hr Interval autospremanja
+
+@ Autosaves to Keep
+hr Zadržana autospremanja
+
+@ Bass
+hr Bas
+
+@ Blip
+hr Blip
+
+@ Blood Quality
+hr Kvaliteta krvi
+
+@ Blood Splatter Settings
+hr Postavke prskanja krvi
+
+@ Blue
+hr Plava
+
+@ Boomerang Settings
+hr Postavke bumeranga
+
+@ Boost or cut high frequencies in decibels
+hr Pojačava ili prigušuje visoke frekvencije u decibelima
+
+@ Boost or cut low frequencies in decibels
+hr Pojačava ili prigušuje niske frekvencije u decibelima
+
+@ Brightness
+hr Svjetlina
+
+@ Bullet Time (Add-ons)
+hr Bullet time (dodaci)
+
+@ Bullet Time Settings
+hr Postavke za bullet time
+
+@ Button Glyphs
+hr Simboli tipki
+
+@ Button Size
+hr Veličina tipki
+
+@ Camera
+hr Kamera
+
+@ Caustic Intensity
+hr Jačina kaustike
+
+@ Caustics
+hr Kaustika
+
+@ Center
+hr Sredina
+
+@ Center Message Position
+hr Položaj središnjih poruka
+
+@ Center Message Time
+hr Trajanje središnjih poruka
+
+@ Center View
+hr Centriraj pogled
+
+@ Change Color on Kill
+hr Promjena boje pri ubojstvu
+
+@ Change Color on Target
+hr Promjena boje na meti
+
+@ Chime
+hr Zvončić
+
+@ Click
+hr Klik
+
+@ Clink
+hr Zveckanje
+
+@ Coin
+hr Novčić
+
+@ Color
+hr Boja
+
+@ Color Filter
+hr Filtar boja
+
+@ Color of the grenade arc
+hr Boja putanje granate
+
+@ Colored Lighting
+hr Obojeno osvjetljenje
+
+@ Connect
+hr Poveži se
+
+@ Contrast
+hr Kontrast
+
+@ Controls
+hr Kontrole
+
+@ Cooldown (ms)
+hr Vrijeme oporavka (ms)
+
+@ Crosshair Outline
+hr Obrub nišana
+
+@ Crosshair Shape
+hr Oblik nišana
+
+@ Crosshair Size
+hr Veličina nišana
+
+@ Current Ammo
+hr Trenutačno streljivo
+
+@ Current Ammo Position
+hr Položaj trenutačnog streljiva
+
+@ Customize This Game
+hr Prilagodi ovu igru
+
+@ Damage
+hr Šteta
+
+@ Damage Taken
+hr Primljena šteta
+
+@ Debris
+hr Krhotine
+
+@ Debris Quality
+hr Kvaliteta krhotina
+
+@ Debris Settings
+hr Postavke krhotina
+
+@ Directional Damage
+hr Smjer štete
+
+@ Dithering
+hr Dithering
+
+@ Dodge / Dive (Add-ons)
+hr Izmicanje / skok (dodaci)
+
+@ Dragging up looks down instead of up
+hr Povlačenje prema gore gleda dolje umjesto gore
+
+@ Drive
+hr Zasićenje
+
+@ Dynamic Lights
+hr Dinamička svjetla
+
+@ Echo
+hr Jeka
+
+@ Enemy Health
+hr Zdravlje neprijatelja
+
+@ Enemy Wounds
+hr Rane neprijatelja
+
+@ Enhanced Blood Splatter
+hr Poboljšano prskanje krvi
+
+@ Enhanced FX
+hr Poboljšani efekti
+
+@ Enhanced Models
+hr Poboljšani modeli
+
+@ Enhanced Particles
+hr Poboljšane čestice
+
+@ Enhanced Water
+hr Poboljšana voda
+
+@ Enhancements
+hr Poboljšanja
+
+@ Equipment Wheel (Add-ons)
+hr Kotač opreme (dodaci)
+
+@ Exploding boxes throw metal shards
+hr Eksplodirajuće kutije izbacuju metalne krhotine
+
+@ Explosion Damage
+hr Šteta od eksplozija
+
+@ Explosion Scorch Marks
+hr Garež od eksplozija
+
+@ Explosions scorch nearby solid surfaces
+hr Eksplozije ostavljaju garež na obližnjim čvrstim površinama
+
+@ Explosives only
+hr Samo eksplozivi
+
+@ Extra Monsters
+hr Dodatna čudovišta
+
+@ Extra Per 10 Damage (ms)
+hr Dodatno po 10 štete (ms)
+
+@ FX Settings
+hr Postavke efekata
+
+@ Field of View
+hr Vidno polje
+
+@ Firing never uses up ammo
+hr Pucanje nikad ne troši streljivo
+
+@ First person
+hr Prvo lice
+
+@ Flick Time
+hr Trajanje flicka
+
+@ Flight Speed
+hr Brzina leta
+
+@ Fog
+hr Magla
+
+@ Frag Limit
+hr Limit fragova
+
+@ Freeze Duration (ms)
+hr Trajanje zamrzavanja (ms)
+
+@ GLQuake
+hr GLQuake
+
+@ Game Speed
+hr Brzina igre
+
+@ Game Type
+hr Vrsta igre
+
+@ Gameplay
+hr Igrivost
+
+@ Gameplay Modifiers
+hr Modifikatori igre
+
+@ Gel Quality
+hr Kvaliteta gela
+
+@ Gib Surface Painting
+hr Mrlje od komada mesa
+
+@ Gibs
+hr Komadi mesa
+
+@ Gibs and heads tumble and bounce
+hr Komadi mesa i glave kotrljaju se i odskakuju
+
+@ Goggle Glow Quality
+hr Kvaliteta sjaja naočala
+
+@ Goggle Intensity
+hr Jačina naočala
+
+@ Goggle Noise
+hr Šum naočala
+
+@ Goggles Settings
+hr Postavke naočala
+
+@ Graphics
+hr Grafika
+
+@ Green
+hr Zelena
+
+@ Grenade Arc
+hr Putanja granate
+
+@ Grenade Arc Settings
+hr Postavke putanje granate
+
+@ Gun Kick
+hr Trzaj oružja
+
+@ Gyro
+hr Žiroskop
+
+@ Gyro & Flick Stick
+hr Žiroskop i flick stick
+
+@ Gyro Active
+hr Žiroskop aktivan
+
+@ Gyro Aiming
+hr Ciljanje žiroskopom
+
+@ HUD
+hr HUD
+
+@ HUD Style
+hr Stil HUD-a
+
+@ Health
+hr Zdravlje
+
+@ Health Pickups
+hr Pokupljeno zdravlje
+
+@ Health Position
+hr Položaj zdravlja
+
+@ Health Regeneration
+hr Obnova zdravlja
+
+@ Hit & Kill Sounds
+hr Zvukovi pogotka i ubojstva
+
+@ Hit Doors & Lifts
+hr Pogađanje vrata i dizala
+
+@ Hit Markers
+hr Oznake pogotka
+
+@ Hit Sound
+hr Zvuk pogotka
+
+@ Hitmarker Size
+hr Veličina oznake pogotka
+
+@ Hitmarker Type
+hr Vrsta oznake pogotka
+
+@ Hitstop Advanced
+hr Hitstop napredno
+
+@ Hitstop Settings
+hr Postavke hitstopa
+
+@ Hold
+hr Drži
+
+@ Hold lock-on
+hr Držanje zahvata
+
+@ Hook Enemies
+hr Kačenje za neprijatelje
+
+@ Hook Metal
+hr Kačenje za metal
+
+@ Hook Stone
+hr Kačenje za kamen
+
+@ Hook Wood
+hr Kačenje za drvo
+
+@ Hooking an enemy pulls you to it
+hr Zakačeni neprijatelj povlači vas k sebi
+
+@ Hookshot Range
+hr Domet kuke
+
+@ Hookshot Settings
+hr Postavke kuke
+
+@ Host Game
+hr Pokreni igru
+
+@ How far the hook flies before it retracts
+hr Koliko daleko kuka leti prije nego što se vrati
+
+@ How visible the on-screen controls are
+hr Koliko su vidljive kontrole na zaslonu
+
+@ Impact Lifetime
+hr Trajanje udaraca
+
+@ Infinite Ammo
+hr Beskonačno streljivo
+
+@ Input
+hr Ulaz
+
+@ Input Scale
+hr Skaliranje ulaza
+
+@ Interpolate Animation
+hr Interpolacija animacije
+
+@ Interpolate Movement
+hr Interpolacija kretanja
+
+@ Invert Look
+hr Obrnuti pogled
+
+@ Invert Mouse
+hr Obrnuti miš
+
+@ Invert Stick
+hr Obrnuta palica
+
+@ Jet Quality
+hr Kvaliteta mlaza
+
+@ Join Game
+hr Pridruži se igri
+
+@ Jump / Swim Up
+hr Skok / plivanje gore
+
+@ Jump again in mid-air
+hr Ponovni skok u zraku
+
+@ Jumps
+hr Skokovi
+
+@ Keys & Powerups
+hr Ključevi i pojačanja
+
+@ Keys & Powerups Position
+hr Položaj ključeva i pojačanja
+
+@ Kill Bonus (x)
+hr Bonus za ubojstvo (x)
+
+@ Kill Sound
+hr Zvuk ubojstva
+
+@ Knock
+hr Kucanje
+
+@ Left
+hr Lijevo
+
+@ Length of the motion blur streaks
+hr Duljina tragova zamućenja pokreta
+
+@ Lifetime (seconds)
+hr Trajanje (sekunde)
+
+@ Live Portal Views
+hr Živi prikazi portala
+
+@ Live View Distance
+hr Udaljenost živog prikaza
+
+@ Local Players
+hr Lokalni igrači
+
+@ Local red wounds follow enemy animation
+hr Lokalne crvene rane prate animaciju neprijatelja
+
+@ Lock Indicator
+hr Pokazivač zahvata
+
+@ Long falls don't hurt
+hr Dugi padovi ne ozljeđuju
+
+@ Longest Freeze (ms)
+hr Najdulje zamrzavanje (ms)
+
+@ Look Down
+hr Pogled dolje
+
+@ Look Speed
+hr Brzina pogleda
+
+@ Look Up
+hr Pogled gore
+
+@ Main Menu Music
+hr Glazba glavnog izbornika
+
+@ Max FPS
+hr Maks. FPS
+
+@ Max Players
+hr Maks. igrača
+
+@ Maximum Impacts
+hr Najviše udaraca
+
+@ Maximum Marks
+hr Najviše tragova
+
+@ Maximum Range
+hr Najveći domet
+
+@ Melee only
+hr Samo blizinska borba
+
+@ Message Background
+hr Pozadina poruka
+
+@ Message Text Size
+hr Veličina teksta poruka
+
+@ Messages & Captions
+hr Poruke i titlovi
+
+@ Meter Duration (real seconds)
+hr Trajanje mjerača (stvarne sekunde)
+
+@ Minimum Damage
+hr Najmanja šteta
+
+@ Mode
+hr Način
+
+@ Modern Console
+hr Moderna konzola
+
+@ Modern HUD Layout
+hr Moderni raspored HUD-a
+
+@ Most recent save
+hr Najnovije spremanje
+
+@ Motion Blur
+hr Zamućenje pokreta
+
+@ Motion Blur Amount
+hr Jačina zamućenja pokreta
+
+@ Motion Blur Quality
+hr Kvaliteta zamućenja pokreta
+
+@ Mouse & Keyboard
+hr Miš i tipkovnica
+
+@ Mouse Speed
+hr Brzina miša
+
+@ Move Back
+hr Natrag
+
+@ Move Forward
+hr Naprijed
+
+@ Music Volume
+hr Glasnoća glazbe
+
+@ Next Weapon
+hr Sljedeće oružje
+
+@ No Drowning
+hr Bez utapanja
+
+@ No Fall Damage
+hr Bez štete od pada
+
+@ No Manual Saves
+hr Bez ručnog spremanja
+
+@ No Self Damage
+hr Bez samoozljeđivanja
+
+@ Noise Filter
+hr Filtar šuma
+
+@ Normal Color
+hr Normalna boja
+
+@ Notify Message Position
+hr Položaj obavijesti
+
+@ Notify Message Time
+hr Trajanje obavijesti
+
+@ Number of splatter rays per blood impact
+hr Broj zraka prskanja po pogotku krvi
+
+@ Off
+hr Isključeno
+
+@ On Death
+hr Pri smrti
+
+@ On Kill Color
+hr Boja pri ubojstvu
+
+@ On Target Color
+hr Boja na meti
+
+@ Opacity
+hr Neprozirnost
+
+@ Opacity of the grenade arc
+hr Neprozirnost putanje granate
+
+@ Pants Color
+hr Boja hlača
+
+@ Particle Quality
+hr Kvaliteta čestica
+
+@ Particles
+hr Čestice
+
+@ Physical Nail Impacts
+hr Fizički udarci čavala
+
+@ Pistol Start
+hr Start od nule
+
+@ Pitch
+hr Visina tona
+
+@ Pitch Sensitivity
+hr Okomita osjetljivost
+
+@ Playback Speed
+hr Brzina reprodukcije
+
+@ Player Setup
+hr Postavke igrača
+
+@ Pop
+hr Pop
+
+@ Portal Gun Settings
+hr Postavke portalnog pištolja
+
+@ Portal Recursion
+hr Rekurzija portala
+
+@ Portal View Quality
+hr Kvaliteta prikaza portala
+
+@ Preview Sound
+hr Poslušaj zvuk
+
+@ Previous Weapon
+hr Prethodno oružje
+
+@ Projectile Shotguns Settings
+hr Postavke projektilnih sačmarica
+
+@ Projectile Speed (units/s)
+hr Brzina projektila (jedinica/s)
+
+@ Purple
+hr Ljubičasta
+
+@ Push
+hr Potisak
+
+@ Push Strength
+hr Jačina potiska
+
+@ Quick Load
+hr Brzo učitavanje
+
+@ Quick Save
+hr Brzo spremanje
+
+@ Railgun Settings
+hr Postavke railguna
+
+@ Ranged only
+hr Samo dalekometno
+
+@ Reacquire While Held
+hr Ponovni zahvat pri držanju
+
+@ Red
+hr Crvena
+
+@ Reduce Motion
+hr Smanji pokrete
+
+@ Regen (seconds per second)
+hr Obnova (sekundi po sekundi)
+
+@ Render Scale
+hr Skaliranje prikaza
+
+@ Reverb
+hr Odjek
+
+@ Right
+hr Desno
+
+@ Ripple Intensity
+hr Jačina valova
+
+@ Ripples
+hr Valovi
+
+@ Roll Sensitivity
+hr Osjetljivost nagiba
+
+@ Rumble
+hr Vibracija
+
+@ Run
+hr Trčanje
+
+@ Save on All Enemies Killed
+hr Spremi kad su svi neprijatelji ubijeni
+
+@ Save on All Secrets Found
+hr Spremi kad su sve tajne pronađene
+
+@ Save on Level Entry
+hr Spremi na ulasku u razinu
+
+@ Save on Secret Found
+hr Spremi pri pronalasku tajne
+
+@ Scoreboard
+hr Tablica rezultata
+
+@ Screen Flashes
+hr Bljeskovi zaslona
+
+@ Screen Shader
+hr Shader zaslona
+
+@ Screen Shake
+hr Podrhtavanje zaslona
+
+@ Search LAN
+hr Traži u LAN-u
+
+@ Seconds a center-screen message stays up
+hr Sekunde koliko poruka u sredini zaslona ostaje vidljiva
+
+@ See Through Portals
+hr Pogled kroz portale
+
+@ See-through Teleporters
+hr Prozirni teleporteri
+
+@ Shirt Color
+hr Boja majice
+
+@ Shotgun Bullet Decals
+hr Tragovi sačme
+
+@ Shoulder left
+hr Rame lijevo
+
+@ Shoulder right
+hr Rame desno
+
+@ Show FPS
+hr Prikaži FPS
+
+@ Show Face
+hr Prikaži lice
+
+@ Shrapnel
+hr Šrapneli
+
+@ Size of on-screen messages and captions
+hr Veličina poruka i titlova na zaslonu
+
+@ Skill
+hr Težina
+
+@ Sky Fog
+hr Magla neba
+
+@ Smooths the stepped movement of monsters
+hr Izglađuje isprekidano kretanje čudovišta
+
+@ Sound
+hr Zvuk
+
+@ Sound Captions
+hr Titlovi zvukova
+
+@ Sound Volume
+hr Glasnoća zvuka
+
+@ Speed Blur
+hr Zamućenje brzine
+
+@ Splashes
+hr Prskanje
+
+@ Splatter Amount
+hr Količina prskanja
+
+@ Splatter Size
+hr Veličina prskanja
+
+@ Start Game
+hr Pokreni igru
+
+@ Staying underwater doesn't hurt
+hr Boravak pod vodom ne ozljeđuje
+
+@ Stick Look Pitch
+hr Okomiti pogled palicom
+
+@ Stick Look Yaw
+hr Vodoravni pogled palicom
+
+@ Strafe Left
+hr Korak ulijevo
+
+@ Strafe Right
+hr Korak udesno
+
+@ Strength of the surface swell and rings
+hr Jačina valova i krugova na površini
+
+@ Stun Duration
+hr Trajanje omamljenosti
+
+@ Style
+hr Stil
+
+@ Supersampling
+hr Supersampling
+
+@ Surface Hit Effects
+hr Efekti pogotka u površinu
+
+@ Swim Down
+hr Ronjenje
+
+@ Targets
+hr Mete
+
+@ Teamplay
+hr Timska igra
+
+@ Texture Filter
+hr Filtriranje tekstura
+
+@ Third person
+hr Treće lice
+
+@ Thud
+hr Tup udarac
+
+@ Tick
+hr Tik
+
+@ Time Limit
+hr Vremensko ograničenje
+
+@ Time Stretch
+hr Rastezanje vremena
+
+@ Toggle Attack
+hr Napad prekidačem
+
+@ Toggle Run
+hr Trčanje prekidačem
+
+@ Toggle auto-aim
+hr Prekidač autom. ciljanja
+
+@ Touch Controls
+hr Dodirne kontrole
+
+@ Touchscreen
+hr Dodirni zaslon
+
+@ Tough Enemy Health
+hr Zdravlje jakih neprijatelja
+
+@ Tough enemies only
+hr Samo jaki neprijatelji
+
+@ Trail Colour
+hr Boja traga
+
+@ Translate Console
+hr Prevedi konzolu
+
+@ Translucent Water
+hr Prozirna voda
+
+@ Treble
+hr Visoki tonovi
+
+@ Turn Left
+hr Okret ulijevo
+
+@ Turn Right
+hr Okret udesno
+
+@ Underwater FX
+hr Podvodni efekti
+
+@ Use Bullet Time Meter
+hr Koristi mjerač bullet timea
+
+@ VSync
+hr VSync
+
+@ View Bob
+hr Ljuljanje pogleda
+
+@ Viewmodels
+hr Modeli oružja
+
+@ Volume
+hr Glasnoća
+
+@ Water Opacity
+hr Neprozirnost vode
+
+@ Water Quality
+hr Kvaliteta vode
+
+@ Water Settings
+hr Postavke vode
+
+@ Weapon Wheel
+hr Kotač oružja
+
+@ Weapon Wheel Slowdown
+hr Usporavanje kotača oružja
+
+@ Weapons
+hr Oružja
+
+@ Weapons Position
+hr Položaj oružja
+
+@ Where center-screen messages appear
+hr Gdje se pojavljuju poruke u sredini zaslona
+
+@ Where pickup and event messages appear
+hr Gdje se pojavljuju poruke o predmetima i događajima
+
+@ White
+hr Bijela
+
+@ Yaw Sensitivity
+hr Vodoravna osjetljivost
+
+@ Yellow
+hr Žuta
+
+# lowercase choice values
+@ T
+hr T
+
+@ always
+hr uvijek
+
+@ auto
+hr auto
+
+@ banded
+hr stepenasto
+
+@ borderless
+hr bez okvira
+
+@ bottom center
+hr dolje u sredini
+
+@ bottom left
+hr dolje lijevo
+
+@ bottom right
+hr dolje desno
+
+@ box
+hr okvir
+
+@ broken square
+hr isprekidani kvadrat
+
+@ classic
+hr klasično
+
+@ coarse
+hr grubo
+
+@ cooperative
+hr kooperativno
+
+@ cross
+hr križ
+
+@ cross + dot
+hr križ + točka
+
+@ cyan
+hr cijan
+
+@ dashed
+hr isprekidano
+
+@ deathmatch
+hr deathmatch
+
+@ deuteranopia
+hr deuteranopija
+
+@ diagonal streaks
+hr dijagonalne crte
+
+@ diamond
+hr romb
+
+@ dot
+hr točka
+
+@ double
+hr dvostruko
+
+@ double chevrons
+hr dvostruki ševroni
+
+@ double diagonals
+hr dvostruke dijagonale
+
+@ easy
+hr lako
+
+@ fine
+hr fino
+
+@ fit output
+hr prilagodi izlazu
+
+@ flick stick
+hr flick stick
+
+@ fullscreen
+hr puni zaslon
+
+@ gap cross
+hr otvoreni križ
+
+@ green
+hr zelena
+
+@ grey
+hr siva
+
+@ half speed
+hr pola brzine
+
+@ hard
+hr teško
+
+@ high
+hr visoko
+
+@ huge
+hr ogromno
+
+@ immersive
+hr imerzivno
+
+@ intense
+hr intenzivno
+
+@ large
+hr veliko
+
+@ larger
+hr veće
+
+@ largest
+hr najveće
+
+@ linear
+hr linearno
+
+@ low
+hr nisko
+
+@ lower
+hr dolje
+
+@ magenta
+hr magenta
+
+@ medium
+hr srednje
+
+@ middle
+hr sredina
+
+@ middle left
+hr u sredini lijevo
+
+@ middle right
+hr u sredini desno
+
+@ modern
+hr moderno
+
+@ nearest
+hr najbliži susjed
+
+@ nightmare
+hr noćna mora
+
+@ nintendo
+hr Nintendo
+
+@ no team damage
+hr bez prijateljske vatre
+
+@ none
+hr ništa
+
+@ normal
+hr normalno
+
+@ off
+hr isključeno
+
+@ off while held
+hr isključeno dok se drži
+
+@ on
+hr uključeno
+
+@ only while held
+hr samo dok se drži
+
+@ playstation
+hr PlayStation
+
+@ protanopia
+hr protanopija
+
+@ quarter speed
+hr četvrtina brzine
+
+@ red
+hr crvena
+
+@ short diagonals
+hr kratke dijagonale
+
+@ single
+hr jednostruko
+
+@ small
+hr malo
+
+@ solid
+hr puno
+
+@ spectacle
+hr spektakularno
+
+@ subtle
+hr suptilno
+
+@ team damage
+hr prijateljska vatra
+
+@ top center
+hr gore u sredini
+
+@ top left
+hr gore lijevo
+
+@ top right
+hr gore desno
+
+@ triple
+hr trostruko
+
+@ tritanopia
+hr tritanopija
+
+@ upper
+hr gore
+
+@ white
+hr bijela
+
+@ whole screen
+hr cijeli zaslon
+
+@ windowed
+hr u prozoru
+
+@ xbox
+hr Xbox
+
+@ yellow
+hr žuta
+
+# ==== tooltips.txt ====
+
+# Options help lines (tooltips) and reasons for disabled rows.
+@ 2D aiming turns the view continuously with the right stick; flick stick snaps the view to where you push the stick, then turning the stick rotates it
+hr 2D ciljanje kontinuirano okreće pogled desnom palicom; flick stick odmah usmjeri pogled kamo gurnete palicu, a okretanje palice ga zatim rotira
+
+@ 3D resolution relative to the window; the UI stays sharp
+hr 3D razlučivost u odnosu na prozor; sučelje ostaje oštro
+
+@ 3D view keeps the HUD and menus sharp; whole screen runs them through the shader too
+hr 3D prikaz ostavlja HUD i izbornike oštrima; cijeli zaslon i njih propušta kroz shader
+
+@ A Quake III style railgun: a slug that pierces every enemy on its line, using 2 cells a shot and refiring every 1.5 s; select it through its assigned weapon slot (Add-ons)
+hr Railgun u stilu Quakea III: projektil koji probija svakog neprijatelja na svojoj putanji, troši 2 ćelije po hicu i puca svakih 1,5 s; odaberite ga preko dodijeljenog utora za oružje (dodaci)
+
+@ A Zelda-style hookshot: fire sends a chain hook out; it latches onto hookable surfaces or enemies and reels you in; fire again to let go
+hr Kuka u stilu Zelde: paljba izbacuje kuku na lancu; ona se zakači za prikladne površine ili neprijatelje i privuče vas; ponovna paljba je otpušta
+
+@ Also translates the engine's console messages; off keeps them in English
+hr Prevodi i poruke konzole pogona; isključeno ih ostavlja na engleskom
+
+@ Automatically acquire another enemy while holding Lock-on after losing a target
+hr Automatski zahvaća drugog neprijatelja dok držite Zahvat mete nakon gubitka mete
+
+@ Blends between animation frames of monsters and weapons
+hr Pretapa sličice animacije čudovišta i oružja
+
+@ Blood stains surfaces and bodies; cosmetic, independent of particle packs
+hr Krv mrlja površine i tijela; samo kozmetički, neovisno o paketima čestica
+
+@ Bloom glow around bright lights and heat sources; medium uses 4 taps, high uses 8, low disables halo taps
+hr Bloom sjaj oko jakih svjetala i izvora topline; srednje koristi 4 uzorka, visoko 8, nisko isključuje halo
+
+@ Blurs fast-moving monsters, projectiles and doors (not camera turns)
+hr Zamućuje brza čudovišta, projektile i vrata (ne okrete kamere)
+
+@ Blurs the screen edges during fast falls and launches; keeps the centre clear. Reduce Motion disables it
+hr Zamućuje rubove zaslona pri brzim padovima i lansiranjima; sredina ostaje jasna. Smanji pokrete ga isključuje
+
+@ Brightness of the underwater light patterns
+hr Svjetlina svjetlosnih uzoraka pod vodom
+
+@ Caps mark count, lifetime, airborne droplets and wound/gib painting; low skips enemy wounds and gib trails
+hr Ograničava broj tragova, trajanje, kapljice u zraku i mrlje od rana/komada mesa; nisko izostavlja rane neprijatelja i tragove komada mesa
+
+@ Caps shader input at output size so 200% render scale keeps 3D sharpness without 4x shader cost; low scales stay low-res
+hr Ograničava ulaz shadera na izlaznu veličinu, pa skaliranje prikaza od 200 % zadržava 3D oštrinu bez četverostrukog troška shadera; niska skaliranja ostaju niske razlučivosti
+
+@ Classic: the original status bar; modern: compact elements at the screen edges
+hr Klasično: izvorna statusna traka; moderno: kompaktni elementi uz rubove zaslona
+
+@ Coat atlas resolution, rebuild rate and shader detail: low builds smaller coats less often with fast shading; high uses full detail
+hr Razlučivost atlasa premaza, učestalost obnove i detalji shadera: nisko gradi manje premaze rjeđe uz brzo sjenčanje; visoko koristi pune detalje
+
+@ Colour of the railgun's spiral trail; split-screen players each get the next colour along
+hr Boja spiralnog traga railguna; na podijeljenom zaslonu svaki igrač dobiva sljedeću boju
+
+@ Damage the railgun deals to each enemy it passes through (Quake III: 100)
+hr Šteta koju railgun nanosi svakom neprijatelju kroz kojeg prođe (Quake III: 100)
+
+@ Dark backdrop behind on-screen messages for readability
+hr Tamna pozadina iza poruka na zaslonu radi čitljivosti
+
+@ Dark border keeps the crosshair visible on any background
+hr Tamni obrub drži nišan vidljivim na svakoj pozadini
+
+@ Darkens corners and contact areas where geometry meets; higher quality is sharper
+hr Zatamnjuje kutove i dodirna mjesta gdje se geometrija spaja; viša kvaliteta je oštrija
+
+@ Debris lands on and is carried or shoved by doors, lifts and platforms
+hr Krhotine padaju na vrata, dizala i platforme te ih ona nose ili guraju
+
+@ Detail for caustics, ripples and splashes: low uses smaller budgets and shorter view distance; high uses larger budgets and farther view distance
+hr Detalji kaustike, valova i prskanja: nisko koristi manje proračune i kraću vidljivost; visoko veće proračune i dalju vidljivost
+
+@ Disabled while Enhanced Particles is on: its particles replace the GLQuake and Classic styles
+hr Onemogućeno dok su Poboljšane čestice uključene: njihove čestice zamjenjuju stilove GLQuake i klasično
+
+@ Disabled while Enhanced Water is on: its own underwater effects replace the classic and GLQuake view warps
+hr Onemogućeno dok je Poboljšana voda uključena: njezini podvodni efekti zamjenjuju klasično i GLQuake izobličenje pogleda
+
+@ Draw the predicted grenade path as a solid or dashed line
+hr Crta predviđenu putanju granate punom ili isprekidanom linijom
+
+@ Draw the view out of the linked portal inside each portal; off shows flat discs (fastest)
+hr U svakom portalu prikazuje pogled iz povezanog portala; isključeno prikazuje ravne diskove (najbrže)
+
+@ Droplets spray up when things enter or leave water, slime or lava
+hr Kapljice prskaju kad nešto uđe u vodu, sluz ili lavu ili iz njih izađe
+
+@ Emulates the original 8-bit palette of software rendering
+hr Oponaša izvornu 8-bitnu paletu softverskog iscrtavanja
+
+@ Every level starts with only the shotgun and axe, as if started fresh
+hr Svaka razina počinje samo sa sačmaricom i sjekirom, kao da je igra tek započeta
+
+@ Explosion damage for each remotely detonated sticky bomb
+hr Šteta od eksplozije svake daljinski aktivirane ljepljive bombe
+
+@ Extra freeze milliseconds for every 10 damage dealt, so heavy hits stop longer
+hr Dodatne milisekunde zamrzavanja za svakih 10 nanesene štete, pa jaki pogoci zaustavljaju dulje
+
+@ First person, a third-person camera centered behind the player, or one over the right or left shoulder; third person hides viewmodels
+hr Prvo lice, kamera iz trećeg lica centrirana iza igrača ili kamera iznad desnog ili lijevog ramena; treće lice skriva modele oružja
+
+@ Flash the selected marker on confirmed hits; colors are shared with the crosshair
+hr Bljesne odabranom oznakom pri potvrđenim pogocima; boje se dijele s nišanom
+
+@ Freeze for every enemy, or only for enemies that were tough before the hit
+hr Zamrzavanje za svakog neprijatelja ili samo za neprijatelje koji su prije pogotka bili jaki
+
+@ Freeze the game briefly when you damage an enemy; single player with add-ons only
+hr Nakratko zamrzne igru kad ozlijedite neprijatelja; samo igra za jednog igrača s dodacima
+
+@ Gibs tumble and barrels throw shrapnel; shots and blasts push them (cosmetic only)
+hr Komadi mesa se kotrljaju, a bačve izbacuju šrapnele; hici i eksplozije ih guraju (samo kozmetički)
+
+@ Health an enemy must have had before the hit to count as tough
+hr Zdravlje koje je neprijatelj morao imati prije pogotka da bi se smatrao jakim
+
+@ Hits dealing less damage than this do not freeze the game; the default 10 skips nails and shotgun pellets
+hr Pogoci s manje štete od ove ne zamrzavaju igru; zadanih 10 preskače čavle i sačmu
+
+@ Hold fire and sweep the crosshair over monsters to queue them, release to throw: it stuns each in turn and flies back; alt-fire clears the queue
+hr Držite paljbu i prijeđite nišanom preko čudovišta da ih dodate u red, otpustite za bacanje: omamljuje jedno po jedno i vraća se; alternativna paljba prazni red
+
+@ Hold: keep Lock-on held. Toggle: press Auto-aim Toggle to enable automatic acquisition. Click look stick to switch targets
+hr Drži: držite Zahvat mete. Prekidač: pritisnite Prekidač autom. ciljanja za automatski zahvat. Klik palicom za pogled mijenja metu
+
+@ How close an enemy must be to the crosshair for automatic acquisition in toggle mode (degrees)
+hr Koliko blizu nišana neprijatelj mora biti za automatski zahvat u načinu prekidača (stupnjevi)
+
+@ How far the view tilts up and down when you tilt the controller (pitch axis)
+hr Koliko se pogled naginje gore-dolje kad nagnete kontroler (os nagiba)
+
+@ How far the view turns left and right when you turn the controller (yaw axis)
+hr Koliko se pogled okreće lijevo-desno kad okrenete kontroler (os skretanja)
+
+@ How far the view turns when you drag on the right half of the screen
+hr Koliko se pogled okreće kad povlačite po desnoj polovici zaslona
+
+@ How fast the boomerang flies (units per second)
+hr Koliko brzo bumerang leti (jedinica u sekundi)
+
+@ How hard shots and explosions push debris around
+hr Koliko snažno hici i eksplozije razbacuju krhotine
+
+@ How hard the Powerwasher's water pushes enemies
+hr Koliko snažno voda visokotlačnog perača gura neprijatelje
+
+@ How long a hit freezes the game, in milliseconds
+hr Koliko dugo pogodak zamrzava igru, u milisekundama
+
+@ How strongly fog covers the sky when fog is on
+hr Koliko jako magla prekriva nebo kad je magla uključena
+
+@ How the view distorts underwater: Classic ripples the whole screen like software Quake, GLQuake slowly stretches and squashes the view
+hr Kako se pogled izobličuje pod vodom: klasično valovito mreška cijeli zaslon kao softverski Quake, GLQuake polako rasteže i sabija pogled
+
+@ Ignores gyro rotation slower than this many degrees per second, to hide hand tremor
+hr Zanemaruje okretanje žiroskopa sporije od ovoliko stupnjeva u sekundi, da sakrije drhtanje ruke
+
+@ Immersive: appears for a few seconds only when its value changes
+hr Imerzivno: pojavljuje se na nekoliko sekundi samo kad se vrijednost promijeni
+
+@ Keeps textures sharp on floors and walls seen at steep angles
+hr Drži teksture oštrima na podovima i zidovima gledanima pod oštrim kutom
+
+@ Lights from rockets, muzzle flashes and explosions brighten nearby walls
+hr Svjetlo raketa, bljeskova cijevi i eksplozija osvjetljava obližnje zidove
+
+@ Liquid surfaces swell and ring out where things move through them
+hr Površine tekućina se valjaju i stvaraju krugove gdje se nešto kroz njih kreće
+
+@ Lobs sticky bombs (rockets ammo) that cling to walls, doors and monsters; alt-fire detonates them all
+hr Baca ljepljive bombe (streljivo za rakete) koje se lijepe za zidove, vrata i čudovišta; alternativna paljba ih sve aktivira
+
+@ Look of the classic particles: GLQuake draws soft round dots, Classic draws square pixels like software Quake
+hr Izgled klasičnih čestica: GLQuake crta meke okrugle točke, klasično crta kvadratne piksele kao softverski Quake
+
+@ Low skips the background smear halo and uses fewer blur samples; high keeps the full halo and smoother streaks
+hr Nisko izostavlja razmazani halo pozadine i koristi manje uzoraka zamućenja; visoko zadržava puni halo i glađe tragove
+
+@ Low: hard particle edges, half the scripted particles and fewer hit sparks. Medium: soft edges. High: soft edges checked per MSAA sample, most hit sparks
+hr Nisko: oštri rubovi čestica, upola manje skriptiranih čestica i manje iskri pogotka. Srednje: meki rubovi. Visoko: meki rubovi provjereni po MSAA uzorku, većina iskri
+
+@ Marks fade out before expiring; oldest marks are recycled at the limit
+hr Tragovi izblijede prije nestanka; najstariji se ponovno koriste kad se dosegne ograničenje
+
+@ Max nested portal reflections to draw; each level redraws the scene
+hr Najveći broj ugniježđenih prikaza portala; svaka razina ponovno iscrtava scenu
+
+@ Max portals per screen with a live view; each one redraws the scene
+hr Najveći broj portala sa živim prikazom po zaslonu; svaki ponovno iscrtava scenu
+
+@ Maximum distance for acquiring and keeping an enemy locked
+hr Najveća udaljenost za zahvat neprijatelja i njegovo zadržavanje
+
+@ Minimum gap between freezes, so shotgun pellets and rapid fire count once; kills ignore it
+hr Najmanji razmak između zamrzavanja, da se sačma i brza paljba broje jednom; ubojstva ga zanemaruju
+
+@ Modern terminal console with autocomplete popup, history search, ANSI colors, bash shell and piping; off uses the classic Quake console
+hr Moderna terminalska konzola sa skočnim automatskim dovršavanjem, pretraživanjem povijesti, ANSI bojama, ljuskom bash i cijevima; isključeno koristi klasičnu konzolu Quakea
+
+@ Monsters take proportionally less damage at higher values; above 100% is harder
+hr Čudovišta primaju razmjerno manje štete pri višim vrijednostima; iznad 100 % je teže
+
+@ Moving gibs leave blood on surfaces they touch
+hr Komadi mesa u pokretu ostavljaju krv na površinama koje dodirnu
+
+@ Multiplier on the freeze when the hit kills the enemy; 1 means no extra
+hr Množitelj zamrzavanja kad pogodak ubije neprijatelja; 1 znači bez dodatka
+
+@ Multiplies ammo from pickups (up to the normal carry limit); below 100% is harder
+hr Množi streljivo iz pokupljenih predmeta (do uobičajenog ograničenja nošenja); ispod 100 % je teže
+
+@ Multiplies health from pickups (up to 100, or the item's own limit); below 100% is harder
+hr Množi zdravlje iz pokupljenih predmeta (do 100 ili do vlastitog ograničenja predmeta); ispod 100 % je teže
+
+@ Nails stick to wood and bodies; hard surfaces deflect them to the floor
+hr Čavli se zabijaju u drvo i tijela; tvrde površine ih odbijaju na pod
+
+@ Nearest keeps crisp classic pixels; linear smooths textures
+hr Najbliži susjed zadržava oštre klasične piksele; linearno izglađuje teksture
+
+@ New Game: Add-ons
+hr Nova igra: Dodaci
+
+@ New Game: Customize
+hr Nova igra: Prilagodba
+
+@ Night vision: how much dark areas are brightened; thermal: how strongly heat stands out
+hr Noćni vid: koliko se tamna područja posvjetljuju; termovizija: koliko se toplina ističe
+
+@ Night-vision and thermal goggles, cycle normal, night vision and thermal with Change Goggles (Add-ons), or use the Equipment Wheel
+hr Naočale za noćni vid i termoviziju; izmjenjujte normalno, noćni vid i termoviziju tipkom Promjena naočala (dodaci) ili koristite kotač opreme
+
+@ No single freeze lasts longer than this, however much damage or kill bonus adds
+hr Nijedno zamrzavanje ne traje dulje od ovoga, koliko god šteta ili bonus za ubojstvo dodali
+
+@ Oldest marks and nails are recycled at this shared limit
+hr Najstariji tragovi i čavli ponovno se koriste kad se dosegne ovo zajedničko ograničenje
+
+@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
+hr Palica i tipke na zaslonu: auto ih prikazuje nakon dodira i skriva kad se koristi drugi uređaj
+
+@ Only autosaves: quicksaves and the Save menu are off
+hr Samo autospremanja: brzo spremanje i izbornik Spremi su isključeni
+
+@ Place every weapon at the center, right or left of the view, or hide all viewmodels
+hr Postavlja svako oružje u sredinu, desno ili lijevo u prikazu ili skriva sve modele oružja
+
+@ Play your chosen hit or kill cue when you damage an enemy
+hr Pušta odabrani zvuk pogotka ili ubojstva kad ozlijedite neprijatelja
+
+@ Playback speed: faster sounds shorter and higher
+hr Brzina reprodukcije: brže zvuči kraće i više
+
+@ Plays the Quake theme in the main menu when no game is running
+hr Pušta temu Quakea u glavnom izborniku kad igra nije pokrenuta
+
+@ Portals farther away than this are drawn as flat discs
+hr Portali udaljeniji od ovoga crtaju se kao ravni diskovi
+
+@ Press attack once to keep firing, again to stop
+hr Pritisnite napad jednom za neprekidnu paljbu, ponovno za prestanak
+
+@ Press run once to switch between running and walking
+hr Pritisnite trčanje jednom za izmjenu između trčanja i hodanja
+
+@ Raise or lower the tone independently of sound length
+hr Podiže ili spušta ton neovisno o duljini zvuka
+
+@ Red screen edges show where damage came from: top is front, bottom is behind; Screen Flashes controls their strength
+hr Crveni rubovi zaslona pokazuju odakle je došla šteta: gore je ispred, dolje iza; Bljeskovi zaslona određuju njihovu jačinu
+
+@ Replaces the classic dot particles with glowing sparks, smoke and blood; mods with their own particle effects keep them
+hr Zamjenjuje klasične točkaste čestice svjetlucavim iskrama, dimom i krvlju; modovi s vlastitim efektima čestica zadržavaju svoje
+
+@ Resolution and detail inside portal and teleporter views; lower tiers trim nested effects
+hr Razlučivost i detalji u prikazima portala i teleportera; niže razine skraćuju ugniježđene efekte
+
+@ Rippling light patterns on surfaces under water and slime
+hr Valoviti svjetlosni uzorci na površinama pod vodom i sluzi
+
+@ Scales all damage you take; above 100% is harder
+hr Skalira svu štetu koju primate; iznad 100 % je teže
+
+@ Screen edge for this element; elements on the same spot stack
+hr Rub zaslona za ovaj element; elementi na istom mjestu slažu se jedan na drugi
+
+@ Seconds a monster hit by the boomerang stays stunned
+hr Sekunde koliko čudovište pogođeno bumerangom ostaje omamljeno
+
+@ Seconds impact marks and stuck nails stay before fading out; independent of Particle Quality
+hr Sekunde koliko tragovi udaraca i zabijeni čavli ostaju prije nego izblijede; neovisno o Kvaliteti čestica
+
+@ Seconds messages at the top of the screen stay up
+hr Sekunde koliko poruke na vrhu zaslona ostaju vidljive
+
+@ Seconds the flick stick snap takes; lower is faster
+hr Sekunde koliko traje skok flick sticka; manje je brže
+
+@ See through enhanced water; enables Water Opacity
+hr Pogled kroz poboljšanu vodu; omogućuje Neprozirnost vode
+
+@ Sensor grain, scanlines and flicker of the goggle image
+hr Zrnatost senzora, linije skeniranja i treperenje slike naočala
+
+@ Shades every anti-aliasing sample; needs Anti-aliasing on
+hr Sjenča svaki uzorak zaglađivanja rubova; zahtijeva uključeno Zaglađivanje rubova
+
+@ Shifts colors so they stay distinct for the chosen color blindness
+hr Pomiče boje tako da ostanu razlučive pri odabranoj sljepoći za boje
+
+@ Shotgun hits leave small surface marks (cosmetic only)
+hr Pogoci sačmaricom ostavljaju male tragove na površinama (samo kozmetički)
+
+@ Show corner ticks at screen centre while locked, even with Crosshair off
+hr Prikazuje kutne oznake u sredini zaslona tijekom zahvata, čak i kad je nišan isključen
+
+@ Show where grenades and other arcing shots will fly, bounce and land; local play only, not in deathmatch
+hr Prikazuje kamo će granate i drugi lučni hici letjeti, odskočiti i pasti; samo lokalna igra, ne u deathmatchu
+
+@ Shows text for important sounds: doors, alerted enemies, secrets, pickups
+hr Prikazuje tekst za važne zvukove: vrata, uzbunjene neprijatelje, tajne, predmete
+
+@ Shows the distance fog that maps and mods set; off always gives clear view
+hr Prikazuje maglu udaljenosti koju postavljaju mape i modovi; isključeno uvijek daje čist pogled
+
+@ Shows the player face next to the health number
+hr Prikazuje lice igrača pokraj broja zdravlja
+
+@ Simulation detail, step rate, fade-out lifetimes and caps for gibs and shrapnel; low also skips mover collision
+hr Detalji simulacije, učestalost koraka, trajanje nestajanja i ograničenja za komade mesa i šrapnele; nisko izostavlja i sudare s pokretnim dijelovima
+
+@ Size of the on-screen buttons and move stick
+hr Veličina tipki na zaslonu i palice za kretanje
+
+@ Slowly heals up to 100 health after 5 seconds without being hit
+hr Polako liječi do 100 zdravlja nakon 5 sekundi bez pogotka
+
+@ Slows stick look while the crosshair is over an enemy
+hr Usporava pogled palicom dok je nišan na neprijatelju
+
+@ Slows the game down while the weapon wheel is open
+hr Usporava igru dok je kotač oružja otvoren
+
+@ Slows the whole game down; single player only. Saves and demos stay compatible with other ports
+hr Usporava cijelu igru; samo za jednog igrača. Spremljene igre i demo snimke ostaju kompatibilne s drugim portovima
+
+@ Small camera jolt on each freeze; off with Reduce Motion
+hr Mali trzaj kamere pri svakom zamrzavanju; isključen uz Smanji pokrete
+
+@ Snap and track enemies in local play, including split-screen; unavailable online
+hr Zahvaća i prati neprijatelje u lokalnoj igri, uključujući podijeljeni zaslon; nedostupno na mreži
+
+@ Sparks, smoke, chips, splinters and splashes fly off whatever your shots hit
+hr Iskre, dim, krhotine, iverje i prskanje lete sa svega što vaši hici pogode
+
+@ Spawns extra copies of every monster around the original when a level starts
+hr Na početku razine stvara dodatne kopije svakog čudovišta oko izvornika
+
+@ Strength of the full-screen flashes for damage, pickups and powerups
+hr Jačina bljeskova cijelog zaslona pri šteti, pokupljenim predmetima i pojačanjima
+
+@ Stretch or shorten the sound while keeping its pitch
+hr Rasteže ili skraćuje zvuk uz zadržavanje visine tona
+
+@ Surface opacity; requires Enhanced Water and Translucent Water
+hr Neprozirnost površine; zahtijeva Poboljšanu vodu i Prozirnu vodu
+
+@ The hook latches onto metal surfaces (metal, tech, computer panels, copper)
+hr Kuka se kači za metalne površine (metal, tehnika, računalne ploče, bakar)
+
+@ The hook latches onto stone, brick, rock and any surface not recognised as wood or metal
+hr Kuka se kači za kamen, opeku, stijenu i svaku površinu koja nije prepoznata kao drvo ili metal
+
+@ The hook latches onto wooden surfaces (texture names like wood, crate, plank)
+hr Kuka se kači za drvene površine (nazivi tekstura poput wood, crate, plank)
+
+@ Turn the controller's motion sensor into a look input; needs a pad with a gyroscope
+hr Pretvara senzor pokreta kontrolera u upravljanje pogledom; zahtijeva kontroler sa žiroskopom
+
+@ Turns off view bob, strafe tilt and the camera kick when hit or firing
+hr Isključuje ljuljanje pogleda, naginjanje pri bočnom kretanju i trzaj kamere pri pogotku ili pucanju
+
+@ Turns on the extra liquid effects; Water Settings controls each one
+hr Uključuje dodatne efekte tekućina; Postavke vode upravljaju svakim od njih
+
+@ Turns the view to follow a moving enemy you are aiming at
+hr Okreće pogled da prati neprijatelja u pokretu na kojeg ciljate
+
+@ Turns the view when you roll the controller sideways; 0 disables it, negative reverses it
+hr Okreće pogled kad nagnete kontroler u stranu; 0 isključuje, negativno obrće
+
+@ Two-portal gun: fire and alt-fire place linked portals on flat walls; assign a weapon slot in Add-ons
+hr Pištolj s dva portala: paljba i alternativna paljba postavljaju povezane portale na ravne zidove; dodijelite utor za oružje u Dodacima
+
+@ Unlocks the FX Settings page: enhanced particles, impact effects and blood splatter
+hr Otključava stranicu Postavke efekata: poboljšane čestice, efekte udaraca i prskanje krvi
+
+@ Uses the 2021 re-release's smoother MD5 models (and MD3 replacements from mods) instead of the classic ones. Applies on the next map load
+hr Koristi glađe MD5 modele iz reizdanja iz 2021. (i MD3 zamjene iz modova) umjesto klasičnih. Primjenjuje se pri sljedećem učitavanju mape
+
+@ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
+hr Koristi obojeno svjetlo mape (.lit datoteka ili BSPX blok); isključeno daje izvorno bijelo svjetlo. Primjenjuje se pri sljedećem učitavanju mape
+
+@ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
+hr Segmenti mlaza, broj kapljica i sjajno sjenčanje tekućine: nisko koristi jednostavnije prozirne mlazove; visoko glatke sjajne mlazove
+
+@ When gyro looking applies: always, off while +gyroaction is held, or only while it is held
+hr Kada se primjenjuje pogled žiroskopom: uvijek, isključeno dok se drži +gyroaction ili samo dok se drži
+
+@ Which weapons trigger the freeze; melee covers the axe and any mod weapon used at close range without ammo
+hr Koja oružja pokreću zamrzavanje; blizinska borba obuhvaća sjekiru i svako oružje iz moda korišteno izbliza bez streljiva
+
+@ Your own rockets and grenades don't hurt you; rocket jumps still work
+hr Vlastite rakete i granate vas ne ozljeđuju; raketni skokovi i dalje rade
+
+# ==== ui.txt ====
+
+# Menus and pop-ups outside the options pages: save cards, launch, presets,
+# add-on browser, map packs, hints and dialogs.
+@ Select
+hr Odaberi
+
+@ Back
+hr Natrag
+
+@ Cancel
+hr Odustani
+
+@ Confirm
+hr Potvrdi
+
+@ Scroll
+hr Pomicanje
+
+@ Section
+hr Odjeljak
+
+@ Bind
+hr Dodijeli
+
+@ Cancel binding
+hr Prekini dodjelu
+
+@ Clear
+hr Očisti
+
+@ Clear pad
+hr Očisti kontroler
+
+@ Remap
+hr Promijeni
+
+@ Type
+hr Upiši
+
+@ Shift
+hr Shift
+
+@ Done
+hr Gotovo
+
+@ Del
+hr Del
+
+@ Space
+hr Razmak
+
+@ Save
+hr Spremi
+
+@ Load
+hr Učitaj
+
+@ Delete
+hr Izbriši
+
+@ Play
+hr Igraj
+
+@ Yes
+hr Da
+
+@ No
+hr Ne
+
+@ OK
+hr U redu
+
+@ System
+hr Sustav
+
+@ Language
+hr Jezik
+
+@ Help
+hr Pomoć
+
+@ Fixed for this game: it was started without Customize
+hr Fiksno za ovu igru: pokrenuta je bez Prilagodbe
+
+@ Press a button or key to bind (Start cancels)
+hr Pritisnite tipku za dodjelu (Start prekida)
+
+@ Press button...
+hr Pritisnite tipku...
+
+@ Press key...
+hr Pritisnite tipku...
+
+@ Replace this binding?
+hr Zamijeniti ovu dodjelu?
+
+@ is already assigned
+hr je već dodijeljeno
+
+@ {} already assigned
+hr {} je već dodijeljeno
+
+@ Open Controls to remap Lock-on?
+hr Otvoriti Kontrole za promjenu tipke Zahvat mete?
+
+@ Lock-on
+hr Zahvat mete
+
+@ Auto-aim Toggle
+hr Prekidač autom. ciljanja
+
+@ Keyboard
+hr Tipkovnica
+
+@ Controller
+hr Kontroler
+
+# main menu, dialogs and screens
+@ Map Packs
+hr Paketi mapa
+
+@ Customize
+hr Prilagodba
+
+@ Level Select
+hr Odabir razine
+
+@ Really quit?
+hr Stvarno izaći?
+
+@ You died
+hr Poginuli ste
+
+@ Continue from most recent save
+hr Nastavi od najnovijeg spremanja
+
+@ Select save
+hr Odaberi spremanje
+
+@ Restart level
+hr Ponovno pokreni razinu
+
+@ Return to main menu
+hr Povratak u glavni izbornik
+
+@ (disabled)
+hr (onemogućeno)
+
+@ (fixed for this game)
+hr (fiksno za ovu igru)
+
+@ (off)
+hr (isključeno)
+
+@ Apply Display Changes
+hr Primijeni promjene prikaza
+
+@ Display Mode
+hr Način prikaza
+
+@ Resolution
+hr Razlučivost
+
+@ desktop
+hr radna površina
+
+@ Preset
+hr Predložak
+
+@ Map
+hr Mapa
+
+@ Reset Shader Settings
+hr Vrati postavke shadera
+
+@ Reset to Defaults
+hr Vrati zadane postavke
+
+@ Searching...
+hr Traženje...
+
+@ This game only autosaves.
+hr Ova igra sprema samo automatski.
+
+@ (No Manual Saves modifier)
+hr (modifikator Bez ručnog spremanja)
+
+@ End the current game?
+hr Završiti trenutačnu igru?
+
+@ Unsaved progress will be lost.
+hr Nespremljeni napredak bit će izgubljen.
+
+@ End game
+hr Završi igru
+
+@ Overwrite
+hr Prepiši
+
+@ Overwrite "{}"?
+hr Prepisati „{}”?
+
+@ Saved {}
+hr Spremljeno {}
+
+@ Start a new game?
+hr Započeti novu igru?
+
+@ New game
+hr Nova igra
+
+@ New Game
+hr Nova igra
+
+@ CUSTOM
+hr PRILAGOĐENO
+
+@ Customize Experience
+hr Prilagodi iskustvo
+
+@ Disable All
+hr Onemogući sve
+
+@ Disable All Modifications
+hr Onemogući sve izmjene
+
+@ Saves load in other source ports too.
+hr Spremanja se učitavaju i u drugim portovima.
+
+@ Standard rules, no add-ons.
+hr Standardna pravila, bez dodataka.
+
+@ Choose skill
+hr Odaberite težinu
+
+@ The current game will end
+hr Trenutačna igra će završiti
+
+@ Easy
+hr Lako
+
+@ Normal
+hr Normalno
+
+@ Hard
+hr Teško
+
+@ Nightmare
+hr Noćna mora
+
+# graphics preset pop-up
+@ Choose a Graphics Preset
+hr Odaberite grafički predložak
+
+@ Classic
+hr Klasično
+
+@ Like the re-release: enhanced models,
+hr Kao reizdanje: poboljšani modeli,
+
+@ no added effects.
+hr bez dodanih efekata.
+
+@ Enhanced
+hr Poboljšano
+
+@ Every enhancement at its highest quality.
+hr Sva poboljšanja u najvišoj kvaliteti.
+
+@ Needs a capable GPU.
+hr Treba snažan GPU.
+
+@ Low-End
+hr Slabija računala
+
+@ Fastest. No anti-aliasing, original
+hr Najbrže. Bez zaglađivanja rubova, izvorni
+
+@ models, lowest effect quality.
+hr modeli, najniža kvaliteta efekata.
+
+@ Esc keeps the defaults
+hr Esc zadržava zadano
+
+@ Everything can be changed later in Options.
+hr Sve se kasnije može promijeniti u izborniku Options.
+
+@ Keep Defaults
+hr Zadrži zadano
+
+# save and load cards
+@ Save Game
+hr Spremi igru
+
+@ Load Game
+hr Učitaj igru
+
+@ Autosaves
+hr Autospremanja
+
+@ newest first
+hr najnovija prva
+
+@ Saves: {}
+hr Spremanja: {}
+
+@ Browse Autosaves
+hr Pregledaj autospremanja
+
+@ Every retained autosave, newest first
+hr Sva zadržana autospremanja, najnovija prva
+
+@ New save
+hr Novo spremanje
+
+@ Select to save your game here
+hr Odaberite za spremanje igre ovdje
+
+@ No autosaves yet
+hr Još nema autospremanja
+
+@ Autosaves are made on level entry, secrets and more (Options > Gameplay)
+hr Autospremanje se radi pri ulasku u razinu, pronalasku tajni i drugdje (Options > Igrivost)
+
+@ No saves yet
+hr Još nema spremanja
+
+@ Save from the Single Player menu, or press F6 to quicksave
+hr Spremite iz izbornika Single Player ili pritisnite F6 za brzo spremanje
+
+@ No picture
+hr Nema slike
+
+@ Del: delete save
+hr Del: izbriši spremanje
+
+@ Delete "{}"?
+hr Izbrisati „{}”?
+
+@ This cannot be undone.
+hr Ovo se ne može poništiti.
+
+@ Quicksave
+hr Brzo spremanje
+
+@ Autosave: {}
+hr Autospremanje: {}
+
+@ unknown trigger
+hr nepoznat okidač
+
+@ Latest - {}
+hr Najnovije - {}
+
+@ Health {}
+hr Zdravlje {}
+
+@ Armor {}
+hr Oklop {}
+
+@ Kills {}/{}
+hr Ubojstva {}/{}
+
+@ Secrets {}/{}
+hr Tajne {}/{}
+
+@ Split-screen, {} players
+hr Podijeljeni zaslon, igrača: {}
+
+@ Co-op
+hr Suradnja
+
+@ Customized
+hr Prilagođeno
+
+@ Customized, {}
+hr Prilagođeno, {}
+
+@ Date unavailable
+hr Datum nedostupan
+
+@ Just now
+hr Upravo sada
+
+@ {} min ago
+hr prije {} min
+
+@ {} h ago
+hr prije {} h
+
+@ Level entry
+hr Ulazak u razinu
+
+@ Secret found
+hr Pronađena tajna
+
+@ All enemies killed
+hr Svi neprijatelji ubijeni
+
+@ All secrets found
+hr Sve tajne pronađene
+
+@ Timer
+hr Interval
+
+# customize pages
+@ Standard rules
+hr Standardna pravila
+
+@ Modifiers changed: {}
+hr Promijenjeni modifikatori: {}
+
+@ no add-ons
+hr bez dodataka
+
+@ add-ons: {}
+hr dodaci: {}
+
+@ Saves of this game are .qsa files: they need this source port.
+hr Spremanja ove igre su .qsa datoteke: trebaju ovaj port.
+
+@ Nothing changed: this plays as standard Quake.
+hr Ništa nije promijenjeno: igra se kao standardni Quake.
+
+@ Changes apply now and are saved with this game (.qsa).
+hr Promjene vrijede odmah i spremaju se s ovom igrom (.qsa).
+
+@ This game started without Customize, so its rules are fixed.
+hr Ova igra pokrenuta je bez Prilagodbe, pa su joj pravila fiksna.
+
+@ Start a new game and choose Customize Experience.
+hr Započnite novu igru i odaberite Prilagodi iskustvo.
+
+@ These rules apply to the next customized game.
+hr Ova pravila vrijede za sljedeću prilagođenu igru.
+
+# add-on browser
+@ Fire
+hr Paljba
+
+@ Alt Fire
+hr Alternativna paljba
+
+@ Configure Parameters >
+hr Podesi parametre >
+
+@ Configure
+hr Podesi
+
+@ Settings
+hr Postavke
+
+@ Change slot
+hr Promijeni utor
+
+@ Toggle
+hr Prekidač
+
+@ Details
+hr Pojedinosti
+
+@ Enter or click the box: toggle
+hr Enter ili klik na kućicu: uključi/isključi
+
+@ Right / Tab / click: details
+hr Desno / Tab / klik: pojedinosti
+
+@ Input Remapping
+hr Dodjela tipki
+
+@ Weapon Slot
+hr Utor za oružje
+
+@ Customized games save as .qsa files, which need this source port.
+hr Prilagođene igre spremaju se kao .qsa datoteke, koje trebaju ovaj port.
+
+@ This game started without Customize, so its add-ons are fixed. Customize a new game instead.
+hr Ova igra pokrenuta je bez Prilagodbe, pa su joj dodaci fiksni. Umjesto toga prilagodite novu igru.
+
+@ Bullet Time
+hr Bullet time
+
+@ Change Goggles
+hr Promjena naočala
+
+@ Dodge / Dive
+hr Izmicanje / skok
+
+@ Goggles
+hr Naočale
+
+@ Hitstop
+hr Hitstop
+
+@ Projectile Shotguns
+hr Projektilne sačmarice
+
+@ BULLET TIME: 20%
+hr BULLET TIME: 20 %
+
+@ NORMAL SPEED
+hr NORMALNA BRZINA
+
+@ SLOW MOTION: PHYSICAL PELLETS
+hr USPORENO: FIZIČKA SAČMA
+
+@ DEMONSTRATION
+hr DEMONSTRACIJA
+
+@ GAMEPLAY
+hr IGRIVOST
+
+@ LOOP
+hr PETLJA
+
+@ Preview unavailable
+hr Pregled nedostupan
+
+# shader and language help lines
+@ A setting of the chosen shader; arrows step it, Enter is not needed
+hr Postavka odabranog shadera; strelice je mijenjaju, Enter nije potreban
+
+@ Language of the menus, messages and the 2021 re-release's game text; System follows your computer's language
+hr Jezik izbornika, poruka i teksta igre iz reizdanja iz 2021.; Sustav prati jezik vašeg računala
+
+@ Puts every setting of the chosen shader back to the preset's defaults
+hr Vraća sve postavke odabranog shadera na zadane vrijednosti predloška
+
+@ RetroArch slang shader on the final image: CRT, scanlines, NTSC, sharpening; add your own in <game>/shaders
+hr RetroArch slang shader na konačnoj slici: CRT, linije skeniranja, NTSC, izoštravanje; dodajte vlastite u <igra>/shaders
+
+# modern console footer
+@ Shift+PgUp/Dn: height  ` : hide
+hr Shift+PgUp/Dn: visina  ` : sakrij
+
+@ Tab: complete  Ctrl+R: search  bash | pipe
+hr Tab: dovrši  Ctrl+R: traži  bash | cijev
+
+@ ↑ +{} lines (End to jump) 
+hr ↑ +{} redaka (End za skok) 
+
+# add-on descriptions
+@ Create two linked portals on flat walls. Fire places the first portal; Alt Fire places the second. Walk through either portal to emerge from the other. Your momentum carries through. Assign a weapon slot below: pressing that slot repeatedly cycles its ordinary weapon and every enabled add-on assigned there. Portal view quality is configurable below.
+hr Stvorite dva povezana portala na ravnim zidovima. Paljba postavlja prvi portal; alternativna paljba drugi. Prođite kroz jedan portal da izađete iz drugoga. Vaš zamah se prenosi. Dodijelite utor za oružje ispod: ponovljeni pritisci tog utora izmjenjuju njegovo obično oružje i svaki uključeni dodatak dodijeljen tamo. Kvaliteta prikaza portala može se podesiti ispod.
+
+@ Hold Fire and sweep the crosshair over monsters to queue targets. Release Fire to throw: the boomerang visits each target, stuns it and returns to you. Alt Fire clears the queue. The weapon slot selects a group, not a separate hotkey: press it again to cycle through the weapons in that slot. Configure stun duration and flight speed below.
+hr Držite paljbu i prijeđite nišanom preko čudovišta da ih dodate u red meta. Otpustite paljbu za bacanje: bumerang posjećuje svaku metu, omamljuje je i vraća vam se. Alternativna paljba prazni red. Utor za oružje odabire skupinu, a ne zasebnu tipku: pritisnite ga ponovno za izmjenu oružja u tom utoru. Trajanje omamljenosti i brzina leta podešavaju se ispod.
+
+@ Hold Fire to charge a sticky bomb using rocket ammunition; release to launch. A longer charge throws it faster. Bombs cling to walls, doors and monsters. Alt Fire detonates your planted bombs together. Place a trap, retreat, then detonate it when enemies approach. Assign any weapon slot below; repeated presses cycle through the ordinary weapon and add-ons in that slot.
+hr Držite paljbu da napunite ljepljivu bombu koristeći streljivo za rakete; otpustite za ispaljivanje. Dulje punjenje baca je brže. Bombe se lijepe za zidove, vrata i čudovišta. Alternativna paljba aktivira sve postavljene bombe zajedno. Postavite zamku, povucite se pa je aktivirajte kad se neprijatelji približe. Dodijelite bilo koji utor za oružje ispod; ponovljeni pritisci izmjenjuju obično oružje i dodatke u tom utoru.
+
+@ Fire launches a chain hook. It latches onto a permitted surface or enemy and reels you toward the anchor. Fire again or use Alt Fire to let go. Choose which materials and enemies can be hooked in Configure Parameters. Assign it to any weapon slot; repeated presses of the slot's existing binding cycle through its weapons.
+hr Paljba izbacuje kuku na lancu. Ona se kači za dopuštenu površinu ili neprijatelja i privlači vas prema sidrištu. Ponovna paljba ili alternativna paljba je otpušta. Koji se materijali i neprijatelji mogu zakačiti birate u Podesi parametre. Dodijelite je bilo kojem utoru za oružje; ponovljeni pritisci postojeće tipke utora izmjenjuju njegova oružja.
+
+@ A piercing railgun inspired by Quake III. Fire sends a slug through every enemy along its line. Each shot consumes two cells, with a 1.5 second refire interval. Damage and the spiral trail colour are configurable below. Choose a weapon slot: the slot's current binding selects and cycles the weapons assigned to it.
+hr Probojni railgun nadahnut Quakeom III. Paljba šalje projektil kroz svakog neprijatelja na njegovoj putanji. Svaki hitac troši dvije ćelije, uz razmak od 1,5 sekunde do sljedećeg. Šteta i boja spiralnog traga podešavaju se ispod. Odaberite utor za oružje: trenutačna tipka utora odabire i izmjenjuje oružja dodijeljena njemu.
+
+@ A Portal-style gel sprayer. Fire sprays blue Repulsion gel: land, jump or run into it to bounce, and landings on it never hurt. Alt Fire sprays orange Propulsion gel: run across it to go much faster. Gel coats floors and walls until washed off with the Powerwasher. Assign a weapon slot below; repeated presses cycle the weapons in that slot.
+hr Prskalica gela u stilu Portala. Paljba prska plavi odbojni gel: doskočite, skočite ili utrčite u njega da odskočite, a doskoci na njega nikad ne ozljeđuju. Alternativna paljba prska narančasti pogonski gel: trčite preko njega za mnogo veću brzinu. Gel prekriva podove i zidove dok se ne ispere visokotlačnim peračem. Dodijelite utor za oružje ispod; ponovljeni pritisci izmjenjuju oružja u tom utoru.
+
+@ A water cannon. Fire shoots a straight jet with limited reach; Alt Fire a wide, shorter fan. The water pushes enemies back, turns projectiles aside and washes away gel and blood. Push strength is configurable below. Assign a weapon slot below; repeated presses cycle the weapons in that slot.
+hr Vodeni top. Paljba ispaljuje ravan mlaz ograničenog dometa; alternativna paljba širu, kraću lepezu. Voda odguruje neprijatelje, skreće projektile i ispire gel i krv. Jačina potiska podešava se ispod. Dodijelite utor za oružje ispod; ponovljeni pritisci izmjenjuju oružja u tom utoru.
+
+@ One equipment add-on includes both night vision and thermal vision. The Change Goggles action cycles Normal, Night Vision, Thermal, then Normal again. Night vision brightens dark rooms; thermal vision highlights living enemies. Goggles do not occupy a weapon slot. Configure intensity and sensor noise below. The binding affects only this add-on.
+hr Jedan dodatak opreme uključuje i noćni vid i termoviziju. Radnja Promjena naočala izmjenjuje normalno, noćni vid, termoviziju pa opet normalno. Noćni vid posvjetljuje tamne prostorije; termovizija ističe žive neprijatelje. Naočale ne zauzimaju utor za oružje. Jačina i šum senzora podešavaju se ispod. Tipka utječe samo na ovaj dodatak.
+
+@ Press Dodge with a movement direction on the ground or in midair: dive forward or leap backward and sideways. Diagonals are supported. Each press launches once, with a short recovery. The player body animates in third person. Assign the Dodge action below or in Controls.
+hr Pritisnite Izmicanje sa smjerom kretanja na tlu ili u zraku: skok naprijed ili odskok unatrag i u stranu. Dijagonale su podržane. Svaki pritisak lansira jednom, uz kratak oporavak. Tijelo igrača animira se u trećem licu. Dodijelite radnju Izmicanje ispod ili u Kontrolama.
+
+@ Use the dedicated Bullet Time action to slow the whole local game to 20% speed. Hold is the default; Toggle switches on each press. The optional meter limits use in real seconds and regenerates while inactive. Disable the meter for unlimited use. Remap the action and configure duration and regeneration below.
+hr Koristite zasebnu radnju Bullet time da usporite cijelu lokalnu igru na 20 % brzine. Držanje je zadano; Prekidač se mijenja pri svakom pritisku. Neobavezni mjerač ograničava korištenje u stvarnim sekundama i obnavlja se dok je neaktivan. Isključite mjerač za neograničeno korištenje. Promijenite tipku radnje te podesite trajanje i obnovu ispod.
+
+@ Both shotguns and enemy grunts fire physical pellets with their original spread and damage. Fast default projectiles feel immediate; lower their speed to dodge incoming fire during bullet time. Configure projectile speed below, or reset it to the default of 10000 units per second.
+hr Obje sačmarice i neprijateljski vojnici ispaljuju fizičku sačmu s izvornim rasipanjem i štetom. Brzi zadani projektili djeluju trenutačno; smanjite im brzinu da izbjegnete paljbu tijekom bullet timea. Brzinu projektila podesite ispod ili je vratite na zadanih 10000 jedinica u sekundi.
+
+@ Freezes the game for a split second when you damage an enemy, so hits feel heavier. Single player only. Choose which weapons trigger it (all, melee, ranged or explosives), how long it lasts and how much more a kill freezes. Advanced settings cover enemy toughness, damage scaling, cooldown and the longest freeze.
+hr Zamrzava igru na djelić sekunde kad ozlijedite neprijatelja, pa se pogoci čine težima. Samo za jednog igrača. Odaberite koja oružja ga pokreću (sva, blizinska, dalekometna ili eksplozivi), koliko traje i koliko dulje zamrzava ubojstvo. Napredne postavke obuhvaćaju izdržljivost neprijatelja, skaliranje štete, vrijeme oporavka i najdulje zamrzavanje.
+
+# map packs and the Quaddicted browser
+@ Get more maps (Quaddicted)...
+hr Još mapa (Quaddicted)...
+
+@ Type to filter...
+hr Upišite za filtriranje...
+
+@ Launch mod
+hr Pokreni mod
+
+@ Start first map
+hr Pokreni prvu mapu
+
+@ (running)
+hr (pokrenuto)
+
+@ running
+hr pokrenuto
+
+@ Recent
+hr Nedavno
+
+@ Name
+hr Naziv
+
+@ Dir
+hr Direktorij
+
+@ Default
+hr Zadano
+
+@ Title
+hr Naslov
+
+@ Sort: {}
+hr Poredak: {}
+
+@ {} installed
+hr Instalirano: {}
+
+@ {}/{} matching
+hr {}/{} odgovara
+
+@ {} maps, {} completed
+hr Mapa: {}, dovršeno: {}
+
+@ {}/{} matching, {} completed
+hr {}/{} odgovara, dovršeno: {}
+
+@ no maps of its own
+hr nema vlastitih mapa
+
+@ dir: {}
+hr direktorij: {}
+
+@ base: {}
+hr osnova: {}
+
+@ Browse the Quaddicted archive of
+hr Pregledajte arhiv Quaddicted sa
+
+@ single-player maps and episodes,
+hr mapama i epizodama za jednog igrača,
+
+@ then download and install them
+hr zatim ih preuzmite i instalirajte
+
+@ here. Each release gets its own
+hr ovdje. Svako izdanje dobiva vlastiti
+
+@ entry in this list.
+hr unos na ovom popisu.
+
+@ Needs an internet connection.
+hr Treba internetska veza.
+
+@ Quaddicted Map Archive
+hr Arhiv mapa Quaddicted
+
+@ Newest
+hr Najnovije
+
+@ Author
+hr Autor
+
+@ Size
+hr Veličina
+
+@ Loading the map list...
+hr Učitavanje popisa mapa...
+
+@ Couldn't load the map list: {}
+hr Učitavanje popisa mapa nije uspjelo: {}
+
+@ {} single-player releases  -  F5 refreshes
+hr Izdanja za jednog igrača: {}  -  F5 osvježava
+
+@ {} matching
+hr Odgovara: {}
+
+@ by {}
+hr autor: {}
+
+@ requires: {}
+hr zahtijeva: {}
+
+@ maps: {}
+hr mape: {}
+
+@ Failed: {}
+hr Neuspjelo: {}
+
+@ Downloading... {}%
+hr Preuzimanje... {} %
+
+@ Unpacking...
+hr Raspakiravanje...
+
+@ Installed in {}/  -  Enter: play
+hr Instalirano u {}/  -  Enter: igraj
+
+@ Enter: download and install
+hr Enter: preuzmi i instaliraj
+
+@ unpacking
+hr raspakiravanje
+
+@ failed
+hr neuspjelo
+
+@ installed
+hr instalirano
+
+@ Downloads are not available in the browser build
+hr Preuzimanja nisu dostupna u inačici za preglednik
+
+@ the map list could not be read
+hr popis mapa nije moguće pročitati
+
+@ downloading needs the curl program
+hr za preuzimanje treba program curl
+
+@ download failed
+hr preuzimanje nije uspjelo
+
+@ the download is not a valid zip
+hr preuzeta datoteka nije valjani zip
+
+@ nothing to install for this engine
+hr ništa za instalirati za ovaj pogon
+
+@ needs {} installed first
+hr najprije treba instalirati {}
+
+@ couldn't unpack {}
+hr nije moguće raspakirati {}
+
+# help screen
+@ About
+hr O programu
+
+@ < Back
+hr < Natrag
+
+# tr_ctx keys: English shows the short word, the key says which meaning
+@ Save (a manual save, as opposed to a quicksave or autosave)
+hr Spremanje
+
+# ==== hud.txt ====
+
+# HUD, weapon and equipment wheels, sound captions and other in-game text.
+# Weapon, monster and item names follow the 2021 re-release's own translations.
+@ Axe
+hr Sjekira
+
+@ Shotgun
+hr Sačmarica
+
+@ Double-Barrelled Shotgun
+hr Dvocijevka
+
+@ Nailgun
+hr Čavlomet
+
+@ Super Nailgun
+hr Super čavlomet
+
+@ Grenade Launcher
+hr Bacač granata
+
+@ Rocket Launcher
+hr Bacač raketa
+
+@ Thunderbolt
+hr Munja
+
+@ Portal Gun
+hr Portalni pištolj
+
+@ Boomerang
+hr Bumerang
+
+@ Stickybomb Launcher
+hr Bacač ljepljivih bombi
+
+@ Railgun
+hr Railgun
+
+@ Hookshot
+hr Kuka
+
+@ Gel Sprayer
+hr Prskalica gela
+
+@ Powerwasher
+hr Visokotlačni perač
+
+@ Night Vision Goggles
+hr Naočale za noćni vid
+
+@ Thermal Goggles
+hr Termovizijske naočale
+
+@ Normal vision
+hr Normalan vid
+
+@ ON
+hr UKLJ.
+
+@ OFF
+hr ISKLJ.
+
+@ {} (turn on)
+hr {} (uključi)
+
+@ {} (turn off)
+hr {} (isključi)
+
+@ Move mouse to select, release to toggle
+hr Pomaknite miš za odabir, otpustite za uključivanje/isključivanje
+
+@ Move mouse to select, release to equip
+hr Pomaknite miš za odabir, otpustite za opremanje
+
+@ Release to toggle
+hr Otpustite za uključivanje/isključivanje
+
+@ Release to equip
+hr Otpustite za opremanje
+
+@ shells
+hr patrone
+
+@ nails
+hr čavli
+
+@ rockets
+hr rakete
+
+@ cells
+hr ćelije
+
+@ Kills: {}/{}
+hr Ubojstva: {}/{}
+
+@ Secrets: {}/{}
+hr Tajne: {}/{}
+
+@ Time {}
+hr Vrijeme {}
+
+@ Press any button to continue...
+hr Pritisnite bilo koju tipku za nastavak...
+
+@ Press any key to continue...
+hr Pritisnite bilo koju tipku za nastavak...
+
+@ BULLET TIME
+hr BULLET TIME
+
+@ AUTO AIM
+hr AUTOM. CILJANJE
+
+@ Crosshair
+hr Nišan
+
+@ + Marker
+hr + Oznaka
+
+@ Hit markers off
+hr Oznake pogotka isklj.
+
+@ On target
+hr Na meti
+
+@ On kill
+hr Pri ubojstvu
+
+# sound captions
+@ [Secret found]
+hr [Pronađena tajna]
+
+@ [Message]
+hr [Poruka]
+
+@ [Switch activated]
+hr [Prekidač aktiviran]
+
+@ [Key picked up]
+hr [Pokupljen ključ]
+
+@ [Rune picked up]
+hr [Pokupljena runa]
+
+@ [Teleporter]
+hr [Teleporter]
+
+@ [Teleport]
+hr [Teleportacija]
+
+@ [Splash]
+hr [Pljusak]
+
+@ [Leaving water]
+hr [Izlazak iz vode]
+
+@ [Door]
+hr [Vrata]
+
+@ [Platform moving]
+hr [Platforma se kreće]
+
+@ [Button]
+hr [Gumb]
+
+@ [Health picked up]
+hr [Pokupljeno zdravlje]
+
+@ [Armor picked up]
+hr [Pokupljen oklop]
+
+@ [Quad Damage wearing off]
+hr [Quad Damage slabi]
+
+@ [Quad Damage]
+hr [Quad Damage]
+
+@ [Pentagram wearing off]
+hr [Pentagram slabi]
+
+@ [Pentagram of Protection]
+hr [Pentagram zaštite]
+
+@ [Ring wearing off]
+hr [Prsten slabi]
+
+@ [Ring of Shadows]
+hr [Prsten sjena]
+
+@ [Biosuit wearing off]
+hr [Bioodijelo slabi]
+
+@ [Biosuit]
+hr [Bioodijelo]
+
+@ [Item picked up]
+hr [Pokupljen predmet]
+
+@ [Weapon picked up]
+hr [Pokupljeno oružje]
+
+@ [Ammo picked up]
+hr [Pokupljeno streljivo]
+
+@ [Explosion]
+hr [Eksplozija]
+
+@ [Grenade launched]
+hr [Granata ispaljena]
+
+@ [Grenade bounce]
+hr [Granata odskače]
+
+@ [Rocket fired]
+hr [Raketa ispaljena]
+
+@ [Nails fired]
+hr [Ispaljeni čavli]
+
+@ [Lightning]
+hr [Munja]
+
+@ [Thunder]
+hr [Grmljavina]
+
+@ [Enforcer alerted]
+hr [Enforcer uzbunjen]
+
+@ [Grunt alerted]
+hr [Grunt uzbunjen]
+
+@ [Rottweiler alerted]
+hr [Rottweiler uzbunjen]
+
+@ [Knight alerted]
+hr [Knight uzbunjen]
+
+@ [Death Knight alerted]
+hr [Death Knight uzbunjen]
+
+@ [Scrag alerted]
+hr [Scrag uzbunjen]
+
+@ [Ogre alerted]
+hr [Ogre uzbunjen]
+
+@ [Fiend alerted]
+hr [Fiend uzbunjen]
+
+@ [Shambler alerted]
+hr [Shambler uzbunjen]
+
+@ [Zombie groaning]
+hr [Zombi stenje]
+
+@ [Vore alerted]
+hr [Vore uzbunjen]
+
+@ [Vore attacking]
+hr [Vore napada]
+
+@ [Spawn alerted]
+hr [Spawn uzbunjen]
+
+@ [Rotfish]
+hr [Rotfish]
+
+@ [Spawn]
+hr [Spawn]
+
+@ [Chthon]
+hr [Chthon]
+
+@ [Hard landing]
+hr [Tvrdo prizemljenje]
+
+@ [Drowning]
+hr [Utapanje]
+
+@ [Gasping for air]
+hr [Hvatanje zraka]
+
+@ [Burning]
+hr [Gorenje]
+
+@ [Telefrag]
+hr [Telefrag]
+
+@ [Gibbed]
+hr [Raskomadan]
+
+# ==== console.txt ====
+
+# Console messages, shown translated only with con_translate 1 (Translate Console).
+# Cvar and command names stay as they are.
+@ Autosaved.
+hr Automatski spremljeno.
+
+@ Game saved.
+hr Igra spremljena.
+
+@ Can't save now.
+hr Spremanje trenutačno nije moguće.
+
+@ This game only autosaves (No Manual Saves modifier).
+hr Ova igra sprema samo automatski (modifikator Bez ručnog spremanja).
+
+@ Loading {}...
+hr Učitavanje {}...
+
+@ load failed: {}
+hr učitavanje nije uspjelo: {}
+
+@ ERROR: autosave failed: {}
+hr POGREŠKA: autospremanje nije uspjelo: {}
+
+@ ERROR: couldn't open {}
+hr POGREŠKA: nije moguće otvoriti {}
+
+@ ERROR: couldn't open {}.
+hr POGREŠKA: nije moguće otvoriti {}.
+
+@ ERROR: couldn't write {}: {}
+hr POGREŠKA: nije moguće zapisati {}: {}
+
+@ ERROR: couldn't create {}: {}
+hr POGREŠKA: nije moguće stvoriti {}: {}
+
+@ couldn't write {}: {}
+hr nije moguće zapisati {}: {}
+
+@ Wrote {}
+hr Zapisano {}
+
+@ screenshot failed: {}
+hr snimka zaslona nije uspjela: {}
+
+@ screenshot: {}
+hr snimka zaslona: {}
+
+@ No readable save available. Select save or restart the level.
+hr Nema čitljivog spremanja. Odaberite spremanje ili ponovno pokrenite razinu.
+
+@ Unknown command "{}"
+hr Nepoznata naredba „{}”
+
+@ couldn't exec {}
+hr nije moguće izvršiti {}
+
+@ execing {}
+hr izvršavanje {}
+
+@ execing config.cfg (inherited from {})
+hr izvršavanje config.cfg (naslijeđeno od {})
+
+@ execing config.cfg (mod defaults)
+hr izvršavanje config.cfg (zadano za mod)
+
+@ execing default.cfg (built-in)
+hr izvršavanje default.cfg (ugrađeno)
+
+@ {} cvars
+hr varijabli: {}
+
+@ {} commands
+hr naredbi: {}
+
+@ Can't "cmd", not connected
+hr „cmd” nije moguć, nema veze
+
+@ Looking for Quake servers...
+hr Traženje Quake poslužitelja...
+
+@ Bad value, must be between 1 and 65534
+hr Neispravna vrijednost, mora biti između 1 i 65534
+
+@ Couldn't handle music file {}
+hr Nije moguće obraditi glazbenu datoteku {}
+
+@ Bug report written to {}
+hr Izvješće o pogrešci zapisano u {}
+
+@ bugreport: can't create {}: {}
+hr bugreport: nije moguće stvoriti {}: {}
+
+@ graphics preset: {}
+hr grafički predložak: {}
+
+@ Presets (r_shader_preset <name>):
+hr Predlošci (r_shader_preset <naziv>):
+
+@ Add your own .slangp presets under <game>/shaders/.
+hr Dodajte vlastite .slangp predloške u <igra>/shaders/.
+
+@ no shader preset loaded (r_shader_preset)
+hr nije učitan predložak shadera (r_shader_preset)
+
+@ r_shader_preset: "{}" not found
+hr r_shader_preset: „{}” nije pronađen
+
+@ no parameter "{}" in this preset
+hr u ovom predlošku nema parametra „{}”
+
+@ {} = {} (default {}, {}..{})
+hr {} = {} (zadano {}, {}..{})
+
+@ Switching to {}...
+hr Prebacivanje na {}...
+
+@ game: no game dir "{}" in {}
+hr game: nema direktorija igre „{}” u {}
+
+@ game: can't find the engine executable
+hr game: nije pronađena izvršna datoteka pogona
+
+@ game: exec failed: {}
+hr game: izvršavanje nije uspjelo: {}
+
+@ game: launch failed: {}
+hr game: pokretanje nije uspjelo: {}
+
+@ loaded {} in {}s
+hr {} učitano za {} s
+
+@ No demos listed with startdemos
+hr Nema demo snimki navedenih sa startdemos
+
+@ Playing demo from {}.
+hr Reprodukcija demo snimke iz {}.
+
+@ {} frames {} seconds {} fps
+hr {} sličica {} sekundi {} FPS
+
+@ Recording to {}.
+hr Snimanje u {}.
+
+@ Completed demo
+hr Demo snimka završena
+
+@ Can't record during demo playback
+hr Nije moguće snimati tijekom reprodukcije demo snimke
+
+@ Relative pathnames are not allowed.
+hr Relativne putanje nisu dopuštene.
+
+@ Can't record - try again when connected
+hr Nije moguće snimati - pokušajte ponovno nakon povezivanja
+
+@ {} demo(s) in loop
+hr Demo snimki u petlji: {}
+
+@ Not recording a demo.
+hr Demo snimka se ne snima.
+
+@ {} joined on a gamepad
+hr {} se pridružio na kontroleru
+
+@ goggles: needs a game started with Add-ons and Goggles enabled
+hr goggles: treba igra pokrenuta s uključenim dodacima i Naočalama
+
+@ equip: needs a game started with Add-ons and Goggles enabled
+hr equip: treba igra pokrenuta s uključenim dodacima i Naočalama
+
+@ UDP listening on port {}
+hr UDP sluša na priključku {}
+
+@ UDP bind on port {} failed: {}
+hr UDP vezanje na priključak {} nije uspjelo: {}
+
+@ Connection accepted by {}
+hr Vezu prihvatio {}
+
+@ Connection failed: {}
+hr Povezivanje nije uspjelo: {}
+
+@ Couldn't resolve {}
+hr Nije moguće razriješiti {}
+
+@ Connecting to {}...
+hr Povezivanje s {}...
+
+@ Connecting to QuakeWorld server {}...
+hr Povezivanje s QuakeWorld poslužiteljem {}...
+
+@ Disconnected: {}
+hr Veza prekinuta: {}
+
+@ Server disconnected
+hr Poslužitelj je prekinuo vezu
+
+@ Client {} connected
+hr Klijent {} povezan
+
+@ Client {} timed out
+hr Klijentu {} isteklo je vrijeme
+
+@ Couldn't spawn server {}: {}
+hr Nije moguće pokrenuti poslužitelj {}: {}
+
+@ maxplayers can not be changed while a server is running.
+hr maxplayers se ne može mijenjati dok poslužitelj radi.
+
+@ You can't kick yourself!
+hr Ne možete izbaciti sami sebe!
+
+@ Only the server may changelevel
+hr Samo poslužitelj smije koristiti changelevel
+
+@ {} renamed to {}
+hr {} se preimenovao u {}

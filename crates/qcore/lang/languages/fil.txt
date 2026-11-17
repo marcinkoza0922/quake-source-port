@@ -1,0 +1,3024 @@
+# fil: the port's own text; English keys from crates/qcore/lang/*.txt.
+# Format in crates/qcore/src/lang/catalog.rs; check with tools/lang_check.py.
+
+# ==== menu.txt ====
+
+# Options pages: page names, row labels and choice values.
+@ 10% speed
+fil 10% bilis
+
+@ 2 split-screen
+fil 2 sa split-screen
+
+@ 3 split-screen
+fil 3 sa split-screen
+
+@ 4 split-screen
+fil 4 sa split-screen
+
+@ 5 split-screen
+fil 5 sa split-screen
+
+@ 6 split-screen
+fil 6 sa split-screen
+
+@ 2D aiming
+fil 2D na puntirya
+
+@ 2x monsters
+fil 2x halimaw
+
+@ 3x monsters
+fil 3x halimaw
+
+@ 4x monsters
+fil 4x halimaw
+
+@ 3D resolution
+fil Resolusyong 3D
+
+@ 3D view
+fil 3D na tanaw
+
+@ 8-bit Color
+fil 8-bit na Kulay
+
+@ Accessibility
+fil Accessibility
+
+@ Acquisition Cone
+fil Cone ng Pag-target
+
+@ Activation
+fil Pag-activate
+
+@ Add a ringing room tail after the cue
+fil Nagdadagdag ng alingawngaw ng kuwarto pagkatapos ng tunog
+
+@ Add delayed repeats after the cue
+fil Nagdadagdag ng naantalang ulit pagkatapos ng tunog
+
+@ Add saturation and distortion
+fil Nagdadagdag ng saturation at distortion
+
+@ Add-ons
+fil Mga Add-on
+
+@ Address
+fil Address
+
+@ Adds fine noise to hide color banding
+fil Nagdadagdag ng pinong noise para itago ang color banding
+
+@ Advanced Settings
+fil Mga Advanced na Setting
+
+@ Aim Assist
+fil Tulong sa Puntirya
+
+@ Aim Rotation
+fil Pag-ikot ng Puntirya
+
+@ Aim Slowdown
+fil Pagbagal ng Puntirya
+
+@ Aim Style
+fil Istilo ng Puntirya
+
+@ All
+fil Lahat
+
+@ All enemies
+fil Lahat ng kalaban
+
+@ Alt Fire (Add-ons)
+fil Alt Fire (Mga Add-on)
+
+@ Always Run
+fil Laging Tumakbo
+
+@ Ambient Occlusion
+fil Ambient Occlusion
+
+@ Ammo Counts
+fil Bilang ng Bala
+
+@ Ammo Counts Position
+fil Posisyon ng Bilang ng Bala
+
+@ Ammo Pickups
+fil Napulot na Bala
+
+@ Anisotropic
+fil Anisotropic
+
+@ Anti-aliasing
+fil Anti-aliasing
+
+@ Apply To
+fil Ilapat Sa
+
+@ Armor
+fil Armor
+
+@ Armor Position
+fil Posisyon ng Armor
+
+@ Ask
+fil Itanong
+
+@ Attack
+fil Umatake
+
+@ Audio
+fil Audio
+
+@ Auto-aim
+fil Auto-aim
+
+@ Auto-aim Settings
+fil Mga Setting ng Auto-aim
+
+@ Autosave
+fil Autosave
+
+@ Autosave Settings
+fil Mga Setting ng Autosave
+
+@ Autosave Timer
+fil Timer ng Autosave
+
+@ Autosaves to Keep
+fil Autosave na Itatabi
+
+@ Bass
+fil Bass
+
+@ Blip
+fil Blip
+
+@ Blood Quality
+fil Kalidad ng Dugo
+
+@ Blood Splatter Settings
+fil Mga Setting ng Talsik ng Dugo
+
+@ Blue
+fil Asul
+
+@ Boomerang Settings
+fil Mga Setting ng Boomerang
+
+@ Boost or cut high frequencies in decibels
+fil Palakasin o bawasan ang matataas na frequency, sa decibel
+
+@ Boost or cut low frequencies in decibels
+fil Palakasin o bawasan ang mabababang frequency, sa decibel
+
+@ Brightness
+fil Liwanag
+
+@ Bullet Time (Add-ons)
+fil Bullet Time (Mga Add-on)
+
+@ Bullet Time Settings
+fil Mga Setting ng Bullet Time
+
+@ Button Glyphs
+fil Simbolo ng Button
+
+@ Button Size
+fil Laki ng Button
+
+@ Camera
+fil Camera
+
+@ Caustic Intensity
+fil Tindi ng Caustics
+
+@ Caustics
+fil Caustics
+
+@ Center
+fil Gitna
+
+@ Center Message Position
+fil Posisyon ng Gitnang Mensahe
+
+@ Center Message Time
+fil Tagal ng Gitnang Mensahe
+
+@ Center View
+fil Igitna ang Tanaw
+
+@ Change Color on Kill
+fil Ibang Kulay sa Pagpatay
+
+@ Change Color on Target
+fil Ibang Kulay sa Target
+
+@ Chime
+fil Kalembang
+
+@ Click
+fil Click
+
+@ Clink
+fil Kalansing
+
+@ Coin
+fil Barya
+
+@ Color
+fil Kulay
+
+@ Color Filter
+fil Filter ng Kulay
+
+@ Color of the grenade arc
+fil Kulay ng arko ng granada
+
+@ Colored Lighting
+fil Makulay na Ilaw
+
+@ Connect
+fil Kumonekta
+
+@ Contrast
+fil Contrast
+
+@ Controls
+fil Mga Kontrol
+
+@ Cooldown (ms)
+fil Cooldown (ms)
+
+@ Crosshair Outline
+fil Balangkas ng Crosshair
+
+@ Crosshair Shape
+fil Hugis ng Crosshair
+
+@ Crosshair Size
+fil Laki ng Crosshair
+
+@ Current Ammo
+fil Kasalukuyang Bala
+
+@ Current Ammo Position
+fil Posisyon ng Kasalukuyang Bala
+
+@ Customize This Game
+fil I-customize ang Larong Ito
+
+@ Damage
+fil Pinsala
+
+@ Damage Taken
+fil Natamong Pinsala
+
+@ Debris
+fil Debris
+
+@ Debris Quality
+fil Kalidad ng Debris
+
+@ Debris Settings
+fil Mga Setting ng Debris
+
+@ Directional Damage
+fil Direksyon ng Pinsala
+
+@ Dithering
+fil Dithering
+
+@ Dodge / Dive (Add-ons)
+fil Ilag / Dive (Mga Add-on)
+
+@ Dragging up looks down instead of up
+fil Ang pag-drag pataas ay titingin pababa
+
+@ Drive
+fil Drive
+
+@ Dynamic Lights
+fil Dynamic na Ilaw
+
+@ Echo
+fil Echo
+
+@ Enemy Health
+fil Health ng Kalaban
+
+@ Enemy Wounds
+fil Sugat ng Kalaban
+
+@ Enhanced Blood Splatter
+fil Pinahusay na Talsik ng Dugo
+
+@ Enhanced FX
+fil Pinahusay na FX
+
+@ Enhanced Models
+fil Pinahusay na Model
+
+@ Enhanced Particles
+fil Pinahusay na Particle
+
+@ Enhanced Water
+fil Pinahusay na Tubig
+
+@ Enhancements
+fil Mga Pagpapahusay
+
+@ Equipment Wheel (Add-ons)
+fil Gulong ng Gamit (Mga Add-on)
+
+@ Exploding boxes throw metal shards
+fil Nagtatalsik ng piraso ng metal ang sumasabog na kahon
+
+@ Explosion Damage
+fil Pinsala ng Pagsabog
+
+@ Explosion Scorch Marks
+fil Marka ng Sunog sa Pagsabog
+
+@ Explosions scorch nearby solid surfaces
+fil Sinusunog ng pagsabog ang kalapit na solidong ibabaw
+
+@ Explosives only
+fil Pampasabog lang
+
+@ Extra Monsters
+fil Dagdag na Halimaw
+
+@ Extra Per 10 Damage (ms)
+fil Dagdag kada 10 Pinsala (ms)
+
+@ FX Settings
+fil Mga Setting ng FX
+
+@ Field of View
+fil Field of View
+
+@ Firing never uses up ammo
+fil Hindi nauubos ang bala sa pagputok
+
+@ First person
+fil first person
+
+@ Flick Time
+fil Tagal ng Flick
+
+@ Flight Speed
+fil Bilis ng Lipad
+
+@ Fog
+fil Hamog
+
+@ Frag Limit
+fil Limit ng Frag
+
+@ Freeze Duration (ms)
+fil Tagal ng Hinto (ms)
+
+@ GLQuake
+fil GLQuake
+
+@ Game Speed
+fil Bilis ng Laro
+
+@ Game Type
+fil Uri ng Laro
+
+@ Gameplay
+fil Gameplay
+
+@ Gameplay Modifiers
+fil Mga Modifier ng Gameplay
+
+@ Gel Quality
+fil Kalidad ng Gel
+
+@ Gib Surface Painting
+fil Mantsa ng Gibs
+
+@ Gibs
+fil Gibs
+
+@ Gibs and heads tumble and bounce
+fil Gumugulong at tumatalbog ang gibs at ulo
+
+@ Goggle Glow Quality
+fil Kalidad ng Liwanag ng Goggles
+
+@ Goggle Intensity
+fil Tindi ng Goggles
+
+@ Goggle Noise
+fil Noise ng Goggles
+
+@ Goggles Settings
+fil Mga Setting ng Goggles
+
+@ Graphics
+fil Graphics
+
+@ Green
+fil Berde
+
+@ Grenade Arc
+fil Arko ng Granada
+
+@ Grenade Arc Settings
+fil Mga Setting ng Arko ng Granada
+
+@ Gun Kick
+fil Sipa ng Baril
+
+@ Gyro
+fil Gyro
+
+@ Gyro & Flick Stick
+fil Gyro at Flick Stick
+
+@ Gyro Active
+fil Aktibo ang Gyro
+
+@ Gyro Aiming
+fil Gyro na Puntirya
+
+@ HUD
+fil HUD
+
+@ HUD Style
+fil Istilo ng HUD
+
+@ Health
+fil Health
+
+@ Health Pickups
+fil Napulot na Health
+
+@ Health Position
+fil Posisyon ng Health
+
+@ Health Regeneration
+fil Pagbawi ng Health
+
+@ Hit & Kill Sounds
+fil Tunog ng Tama at Pagpatay
+
+@ Hit Doors & Lifts
+fil Tamaan ang Pinto at Lift
+
+@ Hit Markers
+fil Hit Marker
+
+@ Hit Sound
+fil Tunog ng Tama
+
+@ Hitmarker Size
+fil Laki ng Hit Marker
+
+@ Hitmarker Type
+fil Uri ng Hit Marker
+
+@ Hitstop Advanced
+fil Advanced na Hitstop
+
+@ Hitstop Settings
+fil Mga Setting ng Hitstop
+
+@ Hold
+fil Hold
+
+@ Hold lock-on
+fil Hold na lock-on
+
+@ Hook Enemies
+fil I-hook ang Kalaban
+
+@ Hook Metal
+fil I-hook ang Metal
+
+@ Hook Stone
+fil I-hook ang Bato
+
+@ Hook Wood
+fil I-hook ang Kahoy
+
+@ Hooking an enemy pulls you to it
+fil Hihilahin ka papunta sa kalabang na-hook
+
+@ Hookshot Range
+fil Abot ng Hookshot
+
+@ Hookshot Settings
+fil Mga Setting ng Hookshot
+
+@ Host Game
+fil Mag-host ng Laro
+
+@ How far the hook flies before it retracts
+fil Gaano kalayo lilipad ang hook bago bumalik
+
+@ How visible the on-screen controls are
+fil Gaano kakita ang mga kontrol sa screen
+
+@ Impact Lifetime
+fil Tagal ng Impact
+
+@ Infinite Ammo
+fil Walang-hanggang Bala
+
+@ Input
+fil Input
+
+@ Input Scale
+fil Scale ng Input
+
+@ Interpolate Animation
+fil I-interpolate ang Animation
+
+@ Interpolate Movement
+fil I-interpolate ang Galaw
+
+@ Invert Look
+fil Baligtarin ang Tingin
+
+@ Invert Mouse
+fil Baligtarin ang Mouse
+
+@ Invert Stick
+fil Baligtarin ang Stick
+
+@ Jet Quality
+fil Kalidad ng Jet
+
+@ Join Game
+fil Sumali sa Laro
+
+@ Jump / Swim Up
+fil Tumalon / Lumangoy Pataas
+
+@ Jump again in mid-air
+fil Tumalon ulit sa ere
+
+@ Jumps
+fil Talon
+
+@ Keys & Powerups
+fil Susi at Powerup
+
+@ Keys & Powerups Position
+fil Posisyon ng Susi at Powerup
+
+@ Kill Bonus (x)
+fil Bonus sa Pagpatay (x)
+
+@ Kill Sound
+fil Tunog sa Pagpatay
+
+@ Knock
+fil Katok
+
+@ Left
+fil Kaliwa
+
+@ Length of the motion blur streaks
+fil Haba ng bakas ng motion blur
+
+@ Lifetime (seconds)
+fil Tagal (segundo)
+
+@ Live Portal Views
+fil Live na Tanaw ng Portal
+
+@ Live View Distance
+fil Layo ng Live na Tanaw
+
+@ Local Players
+fil Lokal na Manlalaro
+
+@ Local red wounds follow enemy animation
+fil Sumusunod ang pulang sugat sa animation ng kalaban
+
+@ Lock Indicator
+fil Indicator ng Lock
+
+@ Long falls don't hurt
+fil Walang pinsala sa mahabang pagbagsak
+
+@ Longest Freeze (ms)
+fil Pinakamahabang Hinto (ms)
+
+@ Look Down
+fil Tumingin sa Ibaba
+
+@ Look Speed
+fil Bilis ng Tingin
+
+@ Look Up
+fil Tumingin sa Itaas
+
+@ Main Menu Music
+fil Musika ng Main Menu
+
+@ Max FPS
+fil Max FPS
+
+@ Max Players
+fil Max na Manlalaro
+
+@ Maximum Impacts
+fil Max na Impact
+
+@ Maximum Marks
+fil Max na Marka
+
+@ Maximum Range
+fil Max na Abot
+
+@ Melee only
+fil Melee lang
+
+@ Message Background
+fil Background ng Mensahe
+
+@ Message Text Size
+fil Laki ng Teksto ng Mensahe
+
+@ Messages & Captions
+fil Mensahe at Caption
+
+@ Meter Duration (real seconds)
+fil Tagal ng Meter (totoong segundo)
+
+@ Minimum Damage
+fil Minimum na Pinsala
+
+@ Mode
+fil Mode
+
+@ Modern Console
+fil Modernong Console
+
+@ Modern HUD Layout
+fil Modernong Layout ng HUD
+
+@ Most recent save
+fil Pinakabagong save
+
+@ Motion Blur
+fil Motion Blur
+
+@ Motion Blur Amount
+fil Tindi ng Motion Blur
+
+@ Motion Blur Quality
+fil Kalidad ng Motion Blur
+
+@ Mouse & Keyboard
+fil Mouse at Keyboard
+
+@ Mouse Speed
+fil Bilis ng Mouse
+
+@ Move Back
+fil Umatras
+
+@ Move Forward
+fil Sumulong
+
+@ Music Volume
+fil Volume ng Musika
+
+@ Next Weapon
+fil Susunod na Armas
+
+@ No Drowning
+fil Walang Pagkalunod
+
+@ No Fall Damage
+fil Walang Fall Damage
+
+@ No Manual Saves
+fil Walang Manual na Save
+
+@ No Self Damage
+fil Walang Self Damage
+
+@ Noise Filter
+fil Filter ng Noise
+
+@ Normal Color
+fil Normal na Kulay
+
+@ Notify Message Position
+fil Posisyon ng Notification
+
+@ Notify Message Time
+fil Tagal ng Notification
+
+@ Number of splatter rays per blood impact
+fil Bilang ng talsik sa bawat tama ng dugo
+
+@ Off
+fil Naka-off
+
+@ On Death
+fil Sa Pagkamatay
+
+@ On Kill Color
+fil Kulay sa Pagpatay
+
+@ On Target Color
+fil Kulay sa Target
+
+@ Opacity
+fil Opacity
+
+@ Opacity of the grenade arc
+fil Opacity ng arko ng granada
+
+@ Pants Color
+fil Kulay ng Pantalon
+
+@ Particle Quality
+fil Kalidad ng Particle
+
+@ Particles
+fil Mga Particle
+
+@ Physical Nail Impacts
+fil Pisikal na Tama ng Pako
+
+@ Pistol Start
+fil Pistol Start
+
+@ Pitch
+fil Pitch
+
+@ Pitch Sensitivity
+fil Sensitivity ng Pitch
+
+@ Playback Speed
+fil Bilis ng Playback
+
+@ Player Setup
+fil Setup ng Manlalaro
+
+@ Pop
+fil Pop
+
+@ Portal Gun Settings
+fil Mga Setting ng Portal Gun
+
+@ Portal Recursion
+fil Recursion ng Portal
+
+@ Portal View Quality
+fil Kalidad ng Tanaw ng Portal
+
+@ Preview Sound
+fil Pakinggan ang Tunog
+
+@ Previous Weapon
+fil Nakaraang Armas
+
+@ Projectile Shotguns Settings
+fil Mga Setting ng Projectile Shotgun
+
+@ Projectile Speed (units/s)
+fil Bilis ng Projectile (units/s)
+
+@ Purple
+fil Lila
+
+@ Push
+fil Tulak
+
+@ Push Strength
+fil Lakas ng Tulak
+
+@ Quick Load
+fil Quick Load
+
+@ Quick Save
+fil Quick Save
+
+@ Railgun Settings
+fil Mga Setting ng Railgun
+
+@ Ranged only
+fil Malayuan lang
+
+@ Reacquire While Held
+fil Muling Mag-target Habang Hawak
+
+@ Red
+fil Pula
+
+@ Reduce Motion
+fil Bawasan ang Galaw
+
+@ Regen (seconds per second)
+fil Regen (segundo kada segundo)
+
+@ Render Scale
+fil Render Scale
+
+@ Reverb
+fil Reverb
+
+@ Right
+fil Kanan
+
+@ Ripple Intensity
+fil Tindi ng Alon
+
+@ Ripples
+fil Alon
+
+@ Roll Sensitivity
+fil Sensitivity ng Roll
+
+@ Rumble
+fil Vibration
+
+@ Run
+fil Tumakbo
+
+@ Save on All Enemies Killed
+fil I-save Kapag Patay Lahat ng Kalaban
+
+@ Save on All Secrets Found
+fil I-save Kapag Nakita Lahat ng Lihim
+
+@ Save on Level Entry
+fil I-save sa Pagpasok sa Level
+
+@ Save on Secret Found
+fil I-save Kapag May Nakitang Lihim
+
+@ Scoreboard
+fil Scoreboard
+
+@ Screen Flashes
+fil Kislap ng Screen
+
+@ Screen Shader
+fil Shader ng Screen
+
+@ Screen Shake
+fil Yanig ng Screen
+
+@ Search LAN
+fil Maghanap sa LAN
+
+@ Seconds a center-screen message stays up
+fil Ilang segundo nakikita ang mensahe sa gitna ng screen
+
+@ See Through Portals
+fil Tumingin sa Loob ng Portal
+
+@ See-through Teleporters
+fil Nakikitang Teleporter
+
+@ Shirt Color
+fil Kulay ng Damit
+
+@ Shotgun Bullet Decals
+fil Marka ng Bala ng Shotgun
+
+@ Shoulder left
+fil kaliwang balikat
+
+@ Shoulder right
+fil kanang balikat
+
+@ Show FPS
+fil Ipakita ang FPS
+
+@ Show Face
+fil Ipakita ang Mukha
+
+@ Shrapnel
+fil Shrapnel
+
+@ Size of on-screen messages and captions
+fil Laki ng mensahe at caption sa screen
+
+@ Skill
+fil Hirap
+
+@ Sky Fog
+fil Hamog ng Langit
+
+@ Smooths the stepped movement of monsters
+fil Pinapakinis ang paputol-putol na galaw ng halimaw
+
+@ Sound
+fil Tunog
+
+@ Sound Captions
+fil Caption ng Tunog
+
+@ Sound Volume
+fil Volume ng Tunog
+
+@ Speed Blur
+fil Speed Blur
+
+@ Splashes
+fil Talsik ng Tubig
+
+@ Splatter Amount
+fil Dami ng Talsik
+
+@ Splatter Size
+fil Laki ng Talsik
+
+@ Start Game
+fil Simulan ang Laro
+
+@ Staying underwater doesn't hurt
+fil Walang pinsala sa pananatili sa ilalim ng tubig
+
+@ Stick Look Pitch
+fil Stick Look Pitch
+
+@ Stick Look Yaw
+fil Stick Look Yaw
+
+@ Strafe Left
+fil Strafe Pakaliwa
+
+@ Strafe Right
+fil Strafe Pakanan
+
+@ Strength of the surface swell and rings
+fil Lakas ng alon at bilog sa ibabaw
+
+@ Stun Duration
+fil Tagal ng Stun
+
+@ Style
+fil Istilo
+
+@ Supersampling
+fil Supersampling
+
+@ Surface Hit Effects
+fil Epekto ng Tama sa Ibabaw
+
+@ Swim Down
+fil Lumangoy Pababa
+
+@ Targets
+fil Mga Target
+
+@ Teamplay
+fil Teamplay
+
+@ Texture Filter
+fil Filter ng Texture
+
+@ Third person
+fil third person
+
+@ Thud
+fil Kalabog
+
+@ Tick
+fil Tik
+
+@ Time Limit
+fil Limit ng Oras
+
+@ Time Stretch
+fil Time Stretch
+
+@ Toggle Attack
+fil Toggle na Atake
+
+@ Toggle Run
+fil Toggle na Takbo
+
+@ Toggle auto-aim
+fil Toggle na auto-aim
+
+@ Touch Controls
+fil Touch na Kontrol
+
+@ Touchscreen
+fil Touchscreen
+
+@ Tough Enemy Health
+fil Health ng Matitinding Kalaban
+
+@ Tough enemies only
+fil Matitinding kalaban lang
+
+@ Trail Colour
+fil Kulay ng Bakas
+
+@ Translate Console
+fil Isalin ang Console
+
+@ Translucent Water
+fil Malinaw na Tubig
+
+@ Treble
+fil Treble
+
+@ Turn Left
+fil Lumiko Pakaliwa
+
+@ Turn Right
+fil Lumiko Pakanan
+
+@ Underwater FX
+fil FX sa Ilalim ng Tubig
+
+@ Use Bullet Time Meter
+fil Gamitin ang Bullet Time Meter
+
+@ VSync
+fil VSync
+
+@ View Bob
+fil Pag-alog ng Tanaw
+
+@ Viewmodels
+fil Viewmodel
+
+@ Volume
+fil Volume
+
+@ Water Opacity
+fil Opacity ng Tubig
+
+@ Water Quality
+fil Kalidad ng Tubig
+
+@ Water Settings
+fil Mga Setting ng Tubig
+
+@ Weapon Wheel
+fil Weapon Wheel
+
+@ Weapon Wheel Slowdown
+fil Pagbagal sa Weapon Wheel
+
+@ Weapons
+fil Mga Armas
+
+@ Weapons Position
+fil Posisyon ng Armas
+
+@ Where center-screen messages appear
+fil Kung saan lumalabas ang mensahe sa gitna ng screen
+
+@ Where pickup and event messages appear
+fil Kung saan lumalabas ang mensahe ng pulot at pangyayari
+
+@ White
+fil Puti
+
+@ Yaw Sensitivity
+fil Sensitivity ng Yaw
+
+@ Yellow
+fil Dilaw
+
+# lowercase choice values
+@ T
+fil T
+
+@ always
+fil palagi
+
+@ auto
+fil auto
+
+@ banded
+fil may banding
+
+@ borderless
+fil borderless
+
+@ bottom center
+fil ibaba gitna
+
+@ bottom left
+fil ibaba kaliwa
+
+@ bottom right
+fil ibaba kanan
+
+@ box
+fil kahon
+
+@ broken square
+fil sirang parisukat
+
+@ classic
+fil klasiko
+
+@ coarse
+fil magaspang
+
+@ cooperative
+fil cooperative
+
+@ cross
+fil krus
+
+@ cross + dot
+fil krus + tuldok
+
+@ cyan
+fil cyan
+
+@ dashed
+fil putol-putol
+
+@ deathmatch
+fil deathmatch
+
+@ deuteranopia
+fil deuteranopia
+
+@ diagonal streaks
+fil pahilis na guhit
+
+@ diamond
+fil diyamante
+
+@ dot
+fil tuldok
+
+@ double
+fil doble
+
+@ double chevrons
+fil dobleng chevron
+
+@ double diagonals
+fil dobleng pahilis
+
+@ easy
+fil madali
+
+@ fine
+fil pino
+
+@ fit output
+fil ayon sa output
+
+@ flick stick
+fil flick stick
+
+@ fullscreen
+fil fullscreen
+
+@ gap cross
+fil krus na may puwang
+
+@ green
+fil berde
+
+@ grey
+fil abo
+
+@ half speed
+fil kalahating bilis
+
+@ hard
+fil mahirap
+
+@ high
+fil mataas
+
+@ huge
+fil napakalaki
+
+@ immersive
+fil immersive
+
+@ intense
+fil matindi
+
+@ large
+fil malaki
+
+@ larger
+fil mas malaki
+
+@ largest
+fil pinakamalaki
+
+@ linear
+fil linear
+
+@ low
+fil mababa
+
+@ lower
+fil ibaba
+
+@ magenta
+fil magenta
+
+@ medium
+fil katamtaman
+
+@ middle
+fil gitna
+
+@ middle left
+fil gitna kaliwa
+
+@ middle right
+fil gitna kanan
+
+@ modern
+fil moderno
+
+@ nearest
+fil nearest
+
+@ nightmare
+fil bangungot
+
+@ nintendo
+fil Nintendo
+
+@ no team damage
+fil walang team damage
+
+@ none
+fil wala
+
+@ normal
+fil normal
+
+@ off
+fil naka-off
+
+@ off while held
+fil off habang hawak
+
+@ on
+fil naka-on
+
+@ only while held
+fil habang hawak lang
+
+@ playstation
+fil PlayStation
+
+@ protanopia
+fil protanopia
+
+@ quarter speed
+fil sangkapat na bilis
+
+@ red
+fil pula
+
+@ short diagonals
+fil maikling pahilis
+
+@ single
+fil isahan
+
+@ small
+fil maliit
+
+@ solid
+fil buo
+
+@ spectacle
+fil engrande
+
+@ subtle
+fil banayad
+
+@ team damage
+fil team damage
+
+@ top center
+fil itaas gitna
+
+@ top left
+fil itaas kaliwa
+
+@ top right
+fil itaas kanan
+
+@ triple
+fil triple
+
+@ tritanopia
+fil tritanopia
+
+@ upper
+fil itaas
+
+@ white
+fil puti
+
+@ whole screen
+fil buong screen
+
+@ windowed
+fil windowed
+
+@ xbox
+fil Xbox
+
+@ yellow
+fil dilaw
+
+# ==== tooltips.txt ====
+
+# Options help lines (tooltips) and reasons for disabled rows.
+@ 2D aiming turns the view continuously with the right stick; flick stick snaps the view to where you push the stick, then turning the stick rotates it
+fil Tuloy-tuloy na pinipihit ng 2D na puntirya ang tanaw gamit ang kanang stick; agad itinuturo ng flick stick ang tanaw kung saan mo itinulak ang stick, at ang pag-ikot ng stick ang nagpapaikot dito
+
+@ 3D resolution relative to the window; the UI stays sharp
+fil Resolusyong 3D kumpara sa window; nananatiling malinaw ang UI
+
+@ 3D view keeps the HUD and menus sharp; whole screen runs them through the shader too
+fil Pinananatiling malinaw ng 3D na tanaw ang HUD at menu; idinadaan din sila ng buong screen sa shader
+
+@ A Quake III style railgun: a slug that pierces every enemy on its line, using 2 cells a shot and refiring every 1.5 s; select it through its assigned weapon slot (Add-ons)
+fil Railgun na istilong Quake III: bala na tumatagos sa bawat kalaban sa linya nito, 2 cell kada tira at tumitira tuwing 1.5 s; piliin sa nakatakdang weapon slot nito (Mga Add-on)
+
+@ A Zelda-style hookshot: fire sends a chain hook out; it latches onto hookable surfaces or enemies and reels you in; fire again to let go
+fil Hookshot na istilong Zelda: naghahagis ng kadenang hook ang pagputok; kumakapit ito sa puwedeng kapitang ibabaw o kalaban at hinihila ka; pumutok ulit para bumitaw
+
+@ Also translates the engine's console messages; off keeps them in English
+fil Isinasalin din ang mga mensahe ng console ng engine; kapag naka-off, mananatili sa Ingles
+
+@ Automatically acquire another enemy while holding Lock-on after losing a target
+fil Awtomatikong mag-target ng ibang kalaban habang hawak ang Lock-on matapos mawala ang target
+
+@ Blends between animation frames of monsters and weapons
+fil Pinaghahalo ang mga frame ng animation ng halimaw at armas
+
+@ Blood stains surfaces and bodies; cosmetic, independent of particle packs
+fil Nag-iiwan ng mantsa ang dugo sa ibabaw at katawan; pang-itsura lang, hiwalay sa particle pack
+
+@ Bloom glow around bright lights and heat sources; medium uses 4 taps, high uses 8, low disables halo taps
+fil Bloom na liwanag sa paligid ng maliliwanag na ilaw at pinagmumulan ng init; 4 tap sa katamtaman, 8 sa mataas, walang halo sa mababa
+
+@ Blurs fast-moving monsters, projectiles and doors (not camera turns)
+fil Pinalalabo ang mabibilis na halimaw, projectile at pinto (hindi ang pag-ikot ng camera)
+
+@ Blurs the screen edges during fast falls and launches; keeps the centre clear. Reduce Motion disables it
+fil Pinalalabo ang gilid ng screen sa mabibilis na bagsak at talsik; malinaw ang gitna. Pinapatay ito ng Bawasan ang Galaw
+
+@ Brightness of the underwater light patterns
+fil Liwanag ng mga pattern ng ilaw sa ilalim ng tubig
+
+@ Caps mark count, lifetime, airborne droplets and wound/gib painting; low skips enemy wounds and gib trails
+fil Nililimitahan ang bilang at tagal ng marka, patak sa ere at mantsa ng sugat/gibs; sa mababa, walang sugat ng kalaban at bakas ng gibs
+
+@ Caps shader input at output size so 200% render scale keeps 3D sharpness without 4x shader cost; low scales stay low-res
+fil Nililimitahan ang input ng shader sa laki ng output para malinaw ang 3D sa 200% na render scale nang walang 4x na gastos sa shader; mababa pa rin ang resolusyon sa mababang scale
+
+@ Classic: the original status bar; modern: compact elements at the screen edges
+fil Klasiko: ang orihinal na status bar; moderno: maliliit na elemento sa gilid ng screen
+
+@ Coat atlas resolution, rebuild rate and shader detail: low builds smaller coats less often with fast shading; high uses full detail
+fil Resolusyon ng coat atlas, dalas ng rebuild at detalye ng shader: mas maliit at mas madalang na coat na may mabilis na shading sa mababa; buong detalye sa mataas
+
+@ Colour of the railgun's spiral trail; split-screen players each get the next colour along
+fil Kulay ng paikot na bakas ng railgun; sa split-screen, kukunin ng bawat manlalaro ang kasunod na kulay
+
+@ Damage the railgun deals to each enemy it passes through (Quake III: 100)
+fil Pinsala ng railgun sa bawat kalabang tinatagusan nito (Quake III: 100)
+
+@ Dark backdrop behind on-screen messages for readability
+fil Madilim na background sa likod ng mga mensahe sa screen para madaling mabasa
+
+@ Dark border keeps the crosshair visible on any background
+fil Pinananatiling kita ng madilim na balangkas ang crosshair sa anumang background
+
+@ Darkens corners and contact areas where geometry meets; higher quality is sharper
+fil Pinadidilim ang mga sulok at dugtungan ng geometry; mas matalas sa mas mataas na kalidad
+
+@ Debris lands on and is carried or shoved by doors, lifts and platforms
+fil Lumalapag ang debris sa pinto, lift at platform, at dinadala o itinutulak nila ito
+
+@ Detail for caustics, ripples and splashes: low uses smaller budgets and shorter view distance; high uses larger budgets and farther view distance
+fil Detalye ng caustics, alon at talsik: mas maliit na budget at mas maikling abot ng tanaw sa mababa; mas malaking budget at mas malayong tanaw sa mataas
+
+@ Disabled while Enhanced Particles is on: its particles replace the GLQuake and Classic styles
+fil Hindi magagamit habang naka-on ang Pinahusay na Particle: pinapalitan ng mga particle nito ang istilong GLQuake at Klasiko
+
+@ Disabled while Enhanced Water is on: its own underwater effects replace the classic and GLQuake view warps
+fil Hindi magagamit habang naka-on ang Pinahusay na Tubig: pinapalitan ng sarili nitong epekto sa ilalim ng tubig ang klasiko at GLQuake na pagbaluktot ng tanaw
+
+@ Draw the predicted grenade path as a solid or dashed line
+fil Iguhit ang inaasahang daan ng granada bilang buo o putol-putol na linya
+
+@ Draw the view out of the linked portal inside each portal; off shows flat discs (fastest)
+fil Ipakita sa loob ng bawat portal ang tanaw mula sa kaugnay na portal; kapag naka-off, patag na disc (pinakamabilis)
+
+@ Droplets spray up when things enter or leave water, slime or lava
+fil Tumitilamsik ang patak kapag may pumapasok o lumalabas sa tubig, slime o lava
+
+@ Emulates the original 8-bit palette of software rendering
+fil Ginagaya ang orihinal na 8-bit na palette ng software rendering
+
+@ Every level starts with only the shotgun and axe, as if started fresh
+fil Nagsisimula ang bawat level na shotgun at palakol lang ang dala, parang bagong simula
+
+@ Explosion damage for each remotely detonated sticky bomb
+fil Pinsala ng pagsabog ng bawat sticky bomb na pinasabog mula sa malayo
+
+@ Extra freeze milliseconds for every 10 damage dealt, so heavy hits stop longer
+fil Dagdag na millisecond ng hinto sa bawat 10 pinsala, kaya mas matagal ang hinto sa malalakas na tama
+
+@ First person, a third-person camera centered behind the player, or one over the right or left shoulder; third person hides viewmodels
+fil First person, third-person na camera sa likod ng manlalaro, o sa ibabaw ng kanan o kaliwang balikat; tinatago ng third person ang viewmodel
+
+@ Flash the selected marker on confirmed hits; colors are shared with the crosshair
+fil Ikislap ang napiling marker sa kumpirmadong tama; kapareho ng crosshair ang mga kulay
+
+@ Freeze for every enemy, or only for enemies that were tough before the hit
+fil Huminto para sa bawat kalaban, o para lang sa mga matinding kalaban bago ang tama
+
+@ Freeze the game briefly when you damage an enemy; single player with add-ons only
+fil Saglit na ihinto ang laro kapag napinsala mo ang kalaban; single player na may add-on lang
+
+@ Gibs tumble and barrels throw shrapnel; shots and blasts push them (cosmetic only)
+fil Gumugulong ang gibs at nagtatalsik ng shrapnel ang bariles; itinutulak sila ng tira at pagsabog (pang-itsura lang)
+
+@ Health an enemy must have had before the hit to count as tough
+fil Health na dapat taglay ng kalaban bago ang tama para ituring na matindi
+
+@ Hits dealing less damage than this do not freeze the game; the default 10 skips nails and shotgun pellets
+fil Hindi humihinto ang laro sa mga tamang mas mababa ang pinsala rito; nilalaktawan ng default na 10 ang pako at pellet ng shotgun
+
+@ Hold fire and sweep the crosshair over monsters to queue them, release to throw: it stuns each in turn and flies back; alt-fire clears the queue
+fil Pindutin nang matagal ang putok at idaan ang crosshair sa mga halimaw para ipila sila, bitawan para ihagis: isa-isa nitong ini-stun ang bawat isa at bumabalik; nililinis ng alt-fire ang pila
+
+@ Hold: keep Lock-on held. Toggle: press Auto-aim Toggle to enable automatic acquisition. Click look stick to switch targets
+fil Hold: panatilihing hawak ang Lock-on. Toggle: pindutin ang Toggle na auto-aim para i-on ang awtomatikong pag-target. I-click ang look stick para magpalit ng target
+
+@ How close an enemy must be to the crosshair for automatic acquisition in toggle mode (degrees)
+fil Gaano kalapit sa crosshair ang kalaban para awtomatikong ma-target sa toggle mode (degree)
+
+@ How far the view tilts up and down when you tilt the controller (pitch axis)
+fil Gaano kalaki tumatagilid pataas at pababa ang tanaw kapag ikiniling mo ang controller (pitch axis)
+
+@ How far the view turns left and right when you turn the controller (yaw axis)
+fil Gaano kalaki lumiliko pakaliwa at pakanan ang tanaw kapag pinihit mo ang controller (yaw axis)
+
+@ How far the view turns when you drag on the right half of the screen
+fil Gaano kalaki lumiliko ang tanaw kapag nag-drag ka sa kanang kalahati ng screen
+
+@ How fast the boomerang flies (units per second)
+fil Gaano kabilis lumipad ang boomerang (unit kada segundo)
+
+@ How hard shots and explosions push debris around
+fil Gaano kalakas itinutulak ng tira at pagsabog ang debris
+
+@ How hard the Powerwasher's water pushes enemies
+fil Gaano kalakas itinutulak ng tubig ng Powerwasher ang mga kalaban
+
+@ How long a hit freezes the game, in milliseconds
+fil Gaano katagal humihinto ang laro sa isang tama, sa millisecond
+
+@ How strongly fog covers the sky when fog is on
+fil Gaano kakapal tinatakpan ng hamog ang langit kapag naka-on ang hamog
+
+@ How the view distorts underwater: Classic ripples the whole screen like software Quake, GLQuake slowly stretches and squashes the view
+fil Paano bumabaluktot ang tanaw sa ilalim ng tubig: kumakaway ang buong screen sa Klasiko gaya ng software Quake, dahan-dahang bumabanat at umiipit ang tanaw sa GLQuake
+
+@ Ignores gyro rotation slower than this many degrees per second, to hide hand tremor
+fil Binabalewala ang pag-ikot ng gyro na mas mabagal sa ganitong degree kada segundo, para itago ang panginginig ng kamay
+
+@ Immersive: appears for a few seconds only when its value changes
+fil Immersive: lumalabas lang nang ilang segundo kapag nagbago ang halaga nito
+
+@ Keeps textures sharp on floors and walls seen at steep angles
+fil Pinananatiling malinaw ang texture sa sahig at pader na nakikita nang pahilis
+
+@ Lights from rockets, muzzle flashes and explosions brighten nearby walls
+fil Pinaliliwanag ng ilaw ng rocket, putok ng baril at pagsabog ang kalapit na pader
+
+@ Liquid surfaces swell and ring out where things move through them
+fil Umaalon at bumibilog ang ibabaw ng likido kung saan may dumaraan
+
+@ Lobs sticky bombs (rockets ammo) that cling to walls, doors and monsters; alt-fire detonates them all
+fil Naghahagis ng sticky bomb (bala ng rocket) na dumidikit sa pader, pinto at halimaw; pinasasabog lahat ng alt-fire
+
+@ Look of the classic particles: GLQuake draws soft round dots, Classic draws square pixels like software Quake
+fil Itsura ng klasikong particle: malambot na bilog na tuldok sa GLQuake, parisukat na pixel sa Klasiko gaya ng software Quake
+
+@ Low skips the background smear halo and uses fewer blur samples; high keeps the full halo and smoother streaks
+fil Sa mababa, walang background na halo at mas kaunting blur sample; sa mataas, buong halo at mas makinis na bakas
+
+@ Low: hard particle edges, half the scripted particles and fewer hit sparks. Medium: soft edges. High: soft edges checked per MSAA sample, most hit sparks
+fil Mababa: matigas na gilid, kalahati ng scripted na particle at mas kaunting kislap sa tama. Katamtaman: malambot na gilid. Mataas: malambot na gilid kada MSAA sample, halos lahat ng kislap
+
+@ Marks fade out before expiring; oldest marks are recycled at the limit
+fil Unti-unting nawawala ang mga marka bago mag-expire; nire-recycle ang pinakaluma sa limit
+
+@ Max nested portal reflections to draw; each level redraws the scene
+fil Max na nested na repleksyon ng portal na iguguhit; muling iginuguhit ng bawat level ang eksena
+
+@ Max portals per screen with a live view; each one redraws the scene
+fil Max na portal kada screen na may live na tanaw; muling iginuguhit ng bawat isa ang eksena
+
+@ Maximum distance for acquiring and keeping an enemy locked
+fil Max na layo para mag-target at manatiling naka-lock sa kalaban
+
+@ Minimum gap between freezes, so shotgun pellets and rapid fire count once; kills ignore it
+fil Minimum na pagitan ng mga hinto, para isang beses lang bilangin ang pellet ng shotgun at mabilis na putok; hindi ito saklaw ang pagpatay
+
+@ Modern terminal console with autocomplete popup, history search, ANSI colors, bash shell and piping; off uses the classic Quake console
+fil Modernong terminal console na may autocomplete popup, paghahanap sa history, ANSI na kulay, bash shell at piping; kapag naka-off, klasikong console ng Quake
+
+@ Monsters take proportionally less damage at higher values; above 100% is harder
+fil Proporsyonal na mas kaunting pinsala ang natatanggap ng halimaw sa mas mataas na halaga; mas mahirap kapag lampas 100%
+
+@ Moving gibs leave blood on surfaces they touch
+fil Nag-iiwan ng dugo ang gumagalaw na gibs sa ibabaw na nadadaanan nito
+
+@ Multiplier on the freeze when the hit kills the enemy; 1 means no extra
+fil Multiplier ng hinto kapag napatay ng tama ang kalaban; 1 ay walang dagdag
+
+@ Multiplies ammo from pickups (up to the normal carry limit); below 100% is harder
+fil Pinararami ang bala mula sa pulot (hanggang sa normal na limit); mas mahirap kapag mababa sa 100%
+
+@ Multiplies health from pickups (up to 100, or the item's own limit); below 100% is harder
+fil Pinararami ang health mula sa pulot (hanggang 100, o sa sariling limit ng item); mas mahirap kapag mababa sa 100%
+
+@ Nails stick to wood and bodies; hard surfaces deflect them to the floor
+fil Dumidikit ang pako sa kahoy at katawan; tumatalbog ito sa sahig mula sa matigas na ibabaw
+
+@ Nearest keeps crisp classic pixels; linear smooths textures
+fil Malinaw na klasikong pixel sa nearest; pinakikinis ng linear ang texture
+
+@ New Game: Add-ons
+fil Bagong Laro: Mga Add-on
+
+@ New Game: Customize
+fil Bagong Laro: I-customize
+
+@ Night vision: how much dark areas are brightened; thermal: how strongly heat stands out
+fil Night vision: gaano pinaliliwanag ang madidilim na lugar; thermal: gaano kalinaw ang init
+
+@ Night-vision and thermal goggles, cycle normal, night vision and thermal with Change Goggles (Add-ons), or use the Equipment Wheel
+fil Night vision at thermal na goggles; magpalit sa normal, night vision at thermal gamit ang Palitan ang Goggles (Mga Add-on), o gamitin ang Gulong ng Gamit
+
+@ No single freeze lasts longer than this, however much damage or kill bonus adds
+fil Walang hintong lalampas dito, gaano man kalaki ang idagdag ng pinsala o bonus sa pagpatay
+
+@ Oldest marks and nails are recycled at this shared limit
+fil Nire-recycle ang pinakalumang marka at pako sa pinagsasaluhang limit na ito
+
+@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
+fil Stick at button sa screen: ipinapakita ng auto pagkatapos ng touch at itinatago kapag gumamit ng ibang device
+
+@ Only autosaves: quicksaves and the Save menu are off
+fil Autosave lang: naka-off ang quicksave at ang Save menu
+
+@ Place every weapon at the center, right or left of the view, or hide all viewmodels
+fil Ilagay ang bawat armas sa gitna, kanan o kaliwa ng tanaw, o itago lahat ng viewmodel
+
+@ Play your chosen hit or kill cue when you damage an enemy
+fil I-play ang napiling tunog ng tama o patay kapag napinsala mo ang kalaban
+
+@ Playback speed: faster sounds shorter and higher
+fil Bilis ng playback: mas maikli at mas matinis kapag mas mabilis
+
+@ Plays the Quake theme in the main menu when no game is running
+fil Pinapatugtog ang tema ng Quake sa main menu kapag walang larong tumatakbo
+
+@ Portals farther away than this are drawn as flat discs
+fil Iginuguhit bilang patag na disc ang mga portal na mas malayo rito
+
+@ Press attack once to keep firing, again to stop
+fil Pindutin nang isang beses ang atake para tuloy-tuloy na pumutok, ulit para tumigil
+
+@ Press run once to switch between running and walking
+fil Pindutin nang isang beses ang takbo para magpalit sa pagtakbo at paglakad
+
+@ Raise or lower the tone independently of sound length
+fil Itaas o ibaba ang tono nang hindi binabago ang haba ng tunog
+
+@ Red screen edges show where damage came from: top is front, bottom is behind; Screen Flashes controls their strength
+fil Ipinapakita ng pulang gilid ng screen kung saan galing ang pinsala: harap ang itaas, likod ang ibaba; Kislap ng Screen ang nagtatakda ng tindi
+
+@ Replaces the classic dot particles with glowing sparks, smoke and blood; mods with their own particle effects keep them
+fil Pinapalitan ang klasikong tuldok na particle ng kumikinang na kislap, usok at dugo; pinananatili ng mga mod ang sarili nilang particle effect
+
+@ Resolution and detail inside portal and teleporter views; lower tiers trim nested effects
+fil Resolusyon at detalye sa loob ng tanaw ng portal at teleporter; binabawasan ng mas mababang antas ang nested na epekto
+
+@ Rippling light patterns on surfaces under water and slime
+fil Kumakaway na pattern ng ilaw sa ibabaw sa ilalim ng tubig at slime
+
+@ Scales all damage you take; above 100% is harder
+fil Ina-adjust ang lahat ng pinsalang natatanggap mo; mas mahirap kapag lampas 100%
+
+@ Screen edge for this element; elements on the same spot stack
+fil Gilid ng screen para sa elementong ito; nagpapatong ang mga elemento sa iisang puwesto
+
+@ Seconds a monster hit by the boomerang stays stunned
+fil Ilang segundong naka-stun ang halimaw na tinamaan ng boomerang
+
+@ Seconds impact marks and stuck nails stay before fading out; independent of Particle Quality
+fil Ilang segundong nananatili ang marka ng tama at nakabaong pako bago maglaho; hiwalay sa Kalidad ng Particle
+
+@ Seconds messages at the top of the screen stay up
+fil Ilang segundong nakikita ang mga mensahe sa itaas ng screen
+
+@ Seconds the flick stick snap takes; lower is faster
+fil Ilang segundo ang snap ng flick stick; mas mabilis kapag mas mababa
+
+@ See through enhanced water; enables Water Opacity
+fil Makita ang loob ng pinahusay na tubig; pinapagana ang Opacity ng Tubig
+
+@ Sensor grain, scanlines and flicker of the goggle image
+fil Grain ng sensor, scanline at pagkutitap ng larawan ng goggles
+
+@ Shades every anti-aliasing sample; needs Anti-aliasing on
+fil Sina-shade ang bawat anti-aliasing sample; kailangang naka-on ang Anti-aliasing
+
+@ Shifts colors so they stay distinct for the chosen color blindness
+fil Inililipat ang mga kulay para manatiling magkaiba sa napiling color blindness
+
+@ Shotgun hits leave small surface marks (cosmetic only)
+fil Nag-iiwan ng maliliit na marka ang tama ng shotgun (pang-itsura lang)
+
+@ Show corner ticks at screen centre while locked, even with Crosshair off
+fil Magpakita ng marka sa sulok sa gitna ng screen habang naka-lock, kahit naka-off ang Crosshair
+
+@ Show where grenades and other arcing shots will fly, bounce and land; local play only, not in deathmatch
+fil Ipakita kung saan lilipad, tatalbog at lalapag ang granada at iba pang paarkong tira; lokal na laro lang, hindi sa deathmatch
+
+@ Shows text for important sounds: doors, alerted enemies, secrets, pickups
+fil Nagpapakita ng teksto para sa mahahalagang tunog: pinto, alertong kalaban, lihim, pulot
+
+@ Shows the distance fog that maps and mods set; off always gives clear view
+fil Ipinapakita ang hamog sa malayo na itinakda ng mapa at mod; kapag naka-off, laging malinaw ang tanaw
+
+@ Shows the player face next to the health number
+fil Ipinapakita ang mukha ng manlalaro sa tabi ng numero ng health
+
+@ Simulation detail, step rate, fade-out lifetimes and caps for gibs and shrapnel; low also skips mover collision
+fil Detalye ng simulation, step rate, tagal bago maglaho at limit ng gibs at shrapnel; sa mababa, walang banggaan sa gumagalaw na bagay
+
+@ Size of the on-screen buttons and move stick
+fil Laki ng button at move stick sa screen
+
+@ Slowly heals up to 100 health after 5 seconds without being hit
+fil Dahan-dahang ibinabalik ang health hanggang 100 matapos ang 5 segundong walang tama
+
+@ Slows stick look while the crosshair is over an enemy
+fil Pinababagal ang stick look habang nasa kalaban ang crosshair
+
+@ Slows the game down while the weapon wheel is open
+fil Pinababagal ang laro habang bukas ang weapon wheel
+
+@ Slows the whole game down; single player only. Saves and demos stay compatible with other ports
+fil Pinababagal ang buong laro; single player lang. Compatible pa rin ang save at demo sa ibang port
+
+@ Small camera jolt on each freeze; off with Reduce Motion
+fil Maliit na alog ng camera sa bawat hinto; naka-off kapag Bawasan ang Galaw
+
+@ Snap and track enemies in local play, including split-screen; unavailable online
+fil Mag-snap at sundan ang kalaban sa lokal na laro, kasama ang split-screen; hindi available online
+
+@ Sparks, smoke, chips, splinters and splashes fly off whatever your shots hit
+fil Tumatalsik ang kislap, usok, piraso, tilad at tilamsik mula sa anumang tinamaan ng tira mo
+
+@ Spawns extra copies of every monster around the original when a level starts
+fil Naglalabas ng dagdag na kopya ng bawat halimaw sa paligid ng orihinal sa simula ng level
+
+@ Strength of the full-screen flashes for damage, pickups and powerups
+fil Tindi ng kislap sa buong screen para sa pinsala, pulot at powerup
+
+@ Stretch or shorten the sound while keeping its pitch
+fil Habaan o paikliin ang tunog nang hindi binabago ang tono
+
+@ Surface opacity; requires Enhanced Water and Translucent Water
+fil Opacity ng ibabaw; kailangan ang Pinahusay na Tubig at Malinaw na Tubig
+
+@ The hook latches onto metal surfaces (metal, tech, computer panels, copper)
+fil Kumakapit ang hook sa metal na ibabaw (metal, tech, computer panel, tanso)
+
+@ The hook latches onto stone, brick, rock and any surface not recognised as wood or metal
+fil Kumakapit ang hook sa bato, ladrilyo, malaking bato at anumang ibabaw na hindi kilala bilang kahoy o metal
+
+@ The hook latches onto wooden surfaces (texture names like wood, crate, plank)
+fil Kumakapit ang hook sa kahoy na ibabaw (texture na may pangalang wood, crate, plank)
+
+@ Turn the controller's motion sensor into a look input; needs a pad with a gyroscope
+fil Gawing look input ang motion sensor ng controller; kailangan ng pad na may gyroscope
+
+@ Turns off view bob, strafe tilt and the camera kick when hit or firing
+fil Pinapatay ang pag-alog ng tanaw, pagtagilid sa strafe at sipa ng camera kapag tinamaan o pumuputok
+
+@ Turns on the extra liquid effects; Water Settings controls each one
+fil Pinapagana ang dagdag na epekto ng likido; ang Mga Setting ng Tubig ang kumokontrol sa bawat isa
+
+@ Turns the view to follow a moving enemy you are aiming at
+fil Pinipihit ang tanaw para sundan ang gumagalaw na kalabang pinupuntirya mo
+
+@ Turns the view when you roll the controller sideways; 0 disables it, negative reverses it
+fil Pinipihit ang tanaw kapag ikiniling mo ang controller patagilid; 0 para i-off, negatibo para baligtarin
+
+@ Two-portal gun: fire and alt-fire place linked portals on flat walls; assign a weapon slot in Add-ons
+fil Baril na may dalawang portal: naglalagay ang putok at alt-fire ng magkaugnay na portal sa patag na pader; magtakda ng weapon slot sa Mga Add-on
+
+@ Unlocks the FX Settings page: enhanced particles, impact effects and blood splatter
+fil Binubuksan ang pahinang Mga Setting ng FX: pinahusay na particle, epekto ng tama at talsik ng dugo
+
+@ Uses the 2021 re-release's smoother MD5 models (and MD3 replacements from mods) instead of the classic ones. Applies on the next map load
+fil Ginagamit ang mas makinis na MD5 model ng 2021 re-release (at MD3 na kapalit mula sa mod) sa halip na klasiko. Ilalapat sa susunod na pag-load ng mapa
+
+@ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
+fil Ginagamit ang may kulay na ilaw ng mapa (.lit file o BSPX lump); kapag naka-off, puting ilaw gaya ng orihinal. Ilalapat sa susunod na pag-load ng mapa
+
+@ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
+fil Mga segment ng water jet, bilang ng patak at makintab na shading ng likido: mas simpleng translucent na agos sa mababa; makinis at makintab na jet sa mataas
+
+@ When gyro looking applies: always, off while +gyroaction is held, or only while it is held
+fil Kailan gumagana ang gyro look: palagi, off habang hawak ang +gyroaction, o habang hawak lang ito
+
+@ Which weapons trigger the freeze; melee covers the axe and any mod weapon used at close range without ammo
+fil Aling armas ang nagpapahinto; saklaw ng melee ang palakol at anumang armas ng mod na ginagamit nang malapitan nang walang bala
+
+@ Your own rockets and grenades don't hurt you; rocket jumps still work
+fil Hindi ka napipinsala ng sarili mong rocket at granada; gumagana pa rin ang rocket jump
+
+# ==== ui.txt ====
+
+# Menus and pop-ups outside the options pages: save cards, launch, presets,
+# add-on browser, map packs, hints and dialogs.
+@ Select
+fil Piliin
+
+@ Back
+fil Bumalik
+
+@ Cancel
+fil Kanselahin
+
+@ Confirm
+fil Kumpirmahin
+
+@ Scroll
+fil Mag-scroll
+
+@ Section
+fil Seksyon
+
+@ Bind
+fil I-bind
+
+@ Cancel binding
+fil Kanselahin ang bind
+
+@ Clear
+fil Burahin
+
+@ Clear pad
+fil Burahin sa pad
+
+@ Remap
+fil I-remap
+
+@ Type
+fil Mag-type
+
+@ Shift
+fil Shift
+
+@ Done
+fil Tapos
+
+@ Del
+fil Del
+
+@ Space
+fil Space
+
+@ Save
+fil I-save
+
+@ Load
+fil I-load
+
+@ Delete
+fil Burahin
+
+@ Play
+fil Laruin
+
+@ Yes
+fil Oo
+
+@ No
+fil Hindi
+
+@ OK
+fil OK
+
+@ System
+fil System
+
+@ Language
+fil Wika
+
+@ Help
+fil Tulong
+
+@ Fixed for this game: it was started without Customize
+fil Nakapirmi sa larong ito: sinimulan ito nang walang I-customize
+
+@ Press a button or key to bind (Start cancels)
+fil Pumindot ng button o key para i-bind (kinakansela ng Start)
+
+@ Press button...
+fil Pumindot ng button...
+
+@ Press key...
+fil Pumindot ng key...
+
+@ Replace this binding?
+fil Palitan ang bind na ito?
+
+@ is already assigned
+fil ay naka-assign na
+
+@ {} already assigned
+fil Naka-assign na ang {}
+
+@ Open Controls to remap Lock-on?
+fil Buksan ang Mga Kontrol para i-remap ang Lock-on?
+
+@ Lock-on
+fil Lock-on
+
+@ Auto-aim Toggle
+fil Toggle ng Auto-aim
+
+@ Keyboard
+fil Keyboard
+
+@ Controller
+fil Controller
+
+# main menu, dialogs and screens
+@ Map Packs
+fil Mga Map Pack
+
+@ Customize
+fil I-customize
+
+@ Level Select
+fil Pumili ng Level
+
+@ Really quit?
+fil Talagang aalis?
+
+@ You died
+fil Namatay ka
+
+@ Continue from most recent save
+fil Ituloy mula sa pinakabagong save
+
+@ Select save
+fil Pumili ng save
+
+@ Restart level
+fil Ulitin ang level
+
+@ Return to main menu
+fil Bumalik sa main menu
+
+@ (disabled)
+fil (naka-disable)
+
+@ (fixed for this game)
+fil (nakapirmi sa larong ito)
+
+@ (off)
+fil (naka-off)
+
+@ Apply Display Changes
+fil Ilapat ang Pagbabago sa Display
+
+@ Display Mode
+fil Display Mode
+
+@ Resolution
+fil Resolusyon
+
+@ desktop
+fil desktop
+
+@ Preset
+fil Preset
+
+@ Map
+fil Mapa
+
+@ Reset Shader Settings
+fil I-reset ang Setting ng Shader
+
+@ Reset to Defaults
+fil I-reset sa Default
+
+@ Searching...
+fil Naghahanap...
+
+@ This game only autosaves.
+fil Autosave lang ang larong ito.
+
+@ (No Manual Saves modifier)
+fil (modifier na Walang Manual na Save)
+
+@ End the current game?
+fil Tapusin ang kasalukuyang laro?
+
+@ Unsaved progress will be lost.
+fil Mawawala ang progresong hindi naka-save.
+
+@ End game
+fil Tapusin ang laro
+
+@ Overwrite
+fil I-overwrite
+
+@ Overwrite "{}"?
+fil I-overwrite ang "{}"?
+
+@ Saved {}
+fil Na-save {}
+
+@ Start a new game?
+fil Magsimula ng bagong laro?
+
+@ New game
+fil Bagong laro
+
+@ New Game
+fil Bagong Laro
+
+@ CUSTOM
+fil CUSTOM
+
+@ Customize Experience
+fil I-customize ang Karanasan
+
+@ Disable All
+fil I-disable Lahat
+
+@ Disable All Modifications
+fil I-disable ang Lahat ng Pagbabago
+
+@ Saves load in other source ports too.
+fil Naglo-load din ang save sa ibang source port.
+
+@ Standard rules, no add-ons.
+fil Karaniwang patakaran, walang add-on.
+
+@ Choose skill
+fil Pumili ng hirap
+
+@ The current game will end
+fil Matatapos ang kasalukuyang laro
+
+@ Easy
+fil Madali
+
+@ Normal
+fil Normal
+
+@ Hard
+fil Mahirap
+
+@ Nightmare
+fil Bangungot
+
+# graphics preset pop-up
+@ Choose a Graphics Preset
+fil Pumili ng Graphics Preset
+
+@ Classic
+fil Klasiko
+
+@ Like the re-release: enhanced models,
+fil Gaya ng re-release: pinahusay na model,
+
+@ no added effects.
+fil walang dagdag na epekto.
+
+@ Enhanced
+fil Pinahusay
+
+@ Every enhancement at its highest quality.
+fil Bawat pagpapahusay sa pinakamataas na kalidad.
+
+@ Needs a capable GPU.
+fil Kailangan ng malakas na GPU.
+
+@ Low-End
+fil Low-End
+
+@ Fastest. No anti-aliasing, original
+fil Pinakamabilis. Walang anti-aliasing, orihinal
+
+@ models, lowest effect quality.
+fil na model, pinakamababang kalidad ng epekto.
+
+@ Esc keeps the defaults
+fil Pinananatili ng Esc ang default
+
+@ Everything can be changed later in Options.
+fil Mababago ang lahat mamaya sa Options.
+
+@ Keep Defaults
+fil Panatilihin ang Default
+
+# save and load cards
+@ Save Game
+fil I-save ang Laro
+
+@ Load Game
+fil I-load ang Laro
+
+@ Autosaves
+fil Mga Autosave
+
+@ newest first
+fil pinakabago muna
+
+@ Saves: {}
+fil Mga save: {}
+
+@ Browse Autosaves
+fil Tingnan ang Mga Autosave
+
+@ Every retained autosave, newest first
+fil Bawat nakatabing autosave, pinakabago muna
+
+@ New save
+fil Bagong save
+
+@ Select to save your game here
+fil Piliin para i-save dito ang laro mo
+
+@ No autosaves yet
+fil Wala pang autosave
+
+@ Autosaves are made on level entry, secrets and more (Options > Gameplay)
+fil Gumagawa ng autosave sa pagpasok sa level, lihim at iba pa (Options > Gameplay)
+
+@ No saves yet
+fil Wala pang save
+
+@ Save from the Single Player menu, or press F6 to quicksave
+fil Mag-save mula sa Single Player menu, o pindutin ang F6 para mag-quicksave
+
+@ No picture
+fil Walang larawan
+
+@ Del: delete save
+fil Del: burahin ang save
+
+@ Delete "{}"?
+fil Burahin ang "{}"?
+
+@ This cannot be undone.
+fil Hindi na ito maibabalik.
+
+@ Quicksave
+fil Quicksave
+
+@ Autosave: {}
+fil Autosave: {}
+
+@ unknown trigger
+fil hindi kilalang trigger
+
+@ Latest - {}
+fil Pinakabago - {}
+
+@ Health {}
+fil Health {}
+
+@ Armor {}
+fil Armor {}
+
+@ Kills {}/{}
+fil Patay {}/{}
+
+@ Secrets {}/{}
+fil Lihim {}/{}
+
+@ Split-screen, {} players
+fil Split-screen, {} manlalaro
+
+@ Co-op
+fil Co-op
+
+@ Customized
+fil Naka-customize
+
+@ Customized, {}
+fil Naka-customize, {}
+
+@ Date unavailable
+fil Walang petsa
+
+@ Just now
+fil Ngayon lang
+
+@ {} min ago
+fil {} min ang nakalipas
+
+@ {} h ago
+fil {} oras ang nakalipas
+
+@ Level entry
+fil Pagpasok sa level
+
+@ Secret found
+fil May nakitang lihim
+
+@ All enemies killed
+fil Patay lahat ng kalaban
+
+@ All secrets found
+fil Nakita lahat ng lihim
+
+@ Timer
+fil Timer
+
+# customize pages
+@ Standard rules
+fil Karaniwang patakaran
+
+@ Modifiers changed: {}
+fil Binagong modifier: {}
+
+@ no add-ons
+fil walang add-on
+
+@ add-ons: {}
+fil mga add-on: {}
+
+@ Saves of this game are .qsa files: they need this source port.
+fil Mga .qsa file ang save ng larong ito: kailangan nila ang source port na ito.
+
+@ Nothing changed: this plays as standard Quake.
+fil Walang binago: nilalaro ito bilang karaniwang Quake.
+
+@ Changes apply now and are saved with this game (.qsa).
+fil Ilalapat agad ang pagbabago at ise-save kasama ng larong ito (.qsa).
+
+@ This game started without Customize, so its rules are fixed.
+fil Sinimulan ang larong ito nang walang I-customize, kaya nakapirmi ang patakaran nito.
+
+@ Start a new game and choose Customize Experience.
+fil Magsimula ng bagong laro at piliin ang I-customize ang Karanasan.
+
+@ These rules apply to the next customized game.
+fil Ilalapat ang mga patakarang ito sa susunod na naka-customize na laro.
+
+# add-on browser
+@ Fire
+fil Putok
+
+@ Alt Fire
+fil Alt Fire
+
+@ Configure Parameters >
+fil I-configure ang Parameter >
+
+@ Configure
+fil I-configure
+
+@ Settings
+fil Mga Setting
+
+@ Change slot
+fil Palitan ang slot
+
+@ Toggle
+fil Toggle
+
+@ Details
+fil Detalye
+
+@ Enter or click the box: toggle
+fil Enter o i-click ang kahon: toggle
+
+@ Right / Tab / click: details
+fil Kanan / Tab / click: detalye
+
+@ Input Remapping
+fil Pag-remap ng Input
+
+@ Weapon Slot
+fil Weapon Slot
+
+@ Customized games save as .qsa files, which need this source port.
+fil Ise-save ang naka-customize na laro bilang .qsa file, na kailangan ang source port na ito.
+
+@ This game started without Customize, so its add-ons are fixed. Customize a new game instead.
+fil Sinimulan ang larong ito nang walang I-customize, kaya nakapirmi ang mga add-on nito. Mag-customize na lang ng bagong laro.
+
+@ Bullet Time
+fil Bullet Time
+
+@ Change Goggles
+fil Palitan ang Goggles
+
+@ Dodge / Dive
+fil Ilag / Dive
+
+@ Goggles
+fil Goggles
+
+@ Hitstop
+fil Hitstop
+
+@ Projectile Shotguns
+fil Projectile Shotgun
+
+@ BULLET TIME: 20%
+fil BULLET TIME: 20%
+
+@ NORMAL SPEED
+fil NORMAL NA BILIS
+
+@ SLOW MOTION: PHYSICAL PELLETS
+fil SLOW MOTION: PISIKAL NA PELLET
+
+@ DEMONSTRATION
+fil DEMONSTRASYON
+
+@ GAMEPLAY
+fil GAMEPLAY
+
+@ LOOP
+fil LOOP
+
+@ Preview unavailable
+fil Walang preview
+
+# shader and language help lines
+@ A setting of the chosen shader; arrows step it, Enter is not needed
+fil Setting ng napiling shader; binabago ito ng arrow, hindi kailangan ang Enter
+
+@ Language of the menus, messages and the 2021 re-release's game text; System follows your computer's language
+fil Wika ng menu, mensahe at teksto ng laro ng 2021 re-release; sinusunod ng System ang wika ng computer mo
+
+@ Puts every setting of the chosen shader back to the preset's defaults
+fil Ibinabalik ang bawat setting ng napiling shader sa default ng preset
+
+@ RetroArch slang shader on the final image: CRT, scanlines, NTSC, sharpening; add your own in <game>/shaders
+fil RetroArch slang shader sa huling larawan: CRT, scanline, NTSC, sharpening; idagdag ang sarili mo sa <game>/shaders
+
+# modern console footer
+@ Shift+PgUp/Dn: height  ` : hide
+fil Shift+PgUp/Dn: taas  ` : itago
+
+@ Tab: complete  Ctrl+R: search  bash | pipe
+fil Tab: kumpletuhin  Ctrl+R: hanapin  bash | pipe
+
+@ ↑ +{} lines (End to jump) 
+fil ↑ +{} linya (End para tumalon) 
+
+# add-on descriptions
+@ Create two linked portals on flat walls. Fire places the first portal; Alt Fire places the second. Walk through either portal to emerge from the other. Your momentum carries through. Assign a weapon slot below: pressing that slot repeatedly cycles its ordinary weapon and every enabled add-on assigned there. Portal view quality is configurable below.
+fil Gumawa ng dalawang magkaugnay na portal sa patag na pader. Inilalagay ng Putok ang unang portal; ng Alt Fire ang pangalawa. Pumasok sa alinmang portal para lumabas sa isa pa. Dala mo pa rin ang bilis mo. Magtakda ng weapon slot sa ibaba: ang paulit-ulit na pagpindot sa slot na iyon ay nagpapalit sa karaniwang armas nito at sa bawat naka-enable na add-on na nakatakda roon. Mako-configure sa ibaba ang kalidad ng tanaw ng portal.
+
+@ Hold Fire and sweep the crosshair over monsters to queue targets. Release Fire to throw: the boomerang visits each target, stuns it and returns to you. Alt Fire clears the queue. The weapon slot selects a group, not a separate hotkey: press it again to cycle through the weapons in that slot. Configure stun duration and flight speed below.
+fil Pindutin nang matagal ang Putok at idaan ang crosshair sa mga halimaw para ipila ang mga target. Bitawan ang Putok para ihagis: pupuntahan ng boomerang ang bawat target, ii-stun ito at babalik sa iyo. Nililinis ng Alt Fire ang pila. Pumipili ang weapon slot ng grupo, hindi hiwalay na hotkey: pindutin ulit para magpalit sa mga armas sa slot na iyon. I-configure sa ibaba ang tagal ng stun at bilis ng lipad.
+
+@ Hold Fire to charge a sticky bomb using rocket ammunition; release to launch. A longer charge throws it faster. Bombs cling to walls, doors and monsters. Alt Fire detonates your planted bombs together. Place a trap, retreat, then detonate it when enemies approach. Assign any weapon slot below; repeated presses cycle through the ordinary weapon and add-ons in that slot.
+fil Pindutin nang matagal ang Putok para mag-charge ng sticky bomb gamit ang bala ng rocket; bitawan para ihagis. Mas mabilis ang hagis kapag mas matagal ang charge. Dumidikit ang bomba sa pader, pinto at halimaw. Pinasasabog ng Alt Fire nang sabay-sabay ang mga nailagay mong bomba. Maglagay ng bitag, umatras, at pasabugin ito kapag lumapit ang kalaban. Magtakda ng anumang weapon slot sa ibaba; ang paulit-ulit na pagpindot ay nagpapalit sa karaniwang armas at mga add-on sa slot na iyon.
+
+@ Fire launches a chain hook. It latches onto a permitted surface or enemy and reels you toward the anchor. Fire again or use Alt Fire to let go. Choose which materials and enemies can be hooked in Configure Parameters. Assign it to any weapon slot; repeated presses of the slot's existing binding cycle through its weapons.
+fil Naghahagis ang Putok ng kadenang hook. Kumakapit ito sa pinapayagang ibabaw o kalaban at hinihila ka papunta sa kinakapitan. Pumutok ulit o gamitin ang Alt Fire para bumitaw. Piliin kung aling materyal at kalaban ang puwedeng i-hook sa I-configure ang Parameter. Itakda ito sa anumang weapon slot; ang paulit-ulit na pagpindot sa kasalukuyang bind ng slot ay nagpapalit sa mga armas nito.
+
+@ A piercing railgun inspired by Quake III. Fire sends a slug through every enemy along its line. Each shot consumes two cells, with a 1.5 second refire interval. Damage and the spiral trail colour are configurable below. Choose a weapon slot: the slot's current binding selects and cycles the weapons assigned to it.
+fil Tumatagos na railgun na hango sa Quake III. Nagpapadala ang Putok ng bala na tumatagos sa bawat kalaban sa linya nito. Dalawang cell ang nauubos sa bawat tira, na may 1.5 segundong pagitan bago muling tumira. Mako-configure sa ibaba ang pinsala at kulay ng paikot na bakas. Pumili ng weapon slot: pinipili at pinagpapalit ng kasalukuyang bind ng slot ang mga armas na nakatakda rito.
+
+@ A Portal-style gel sprayer. Fire sprays blue Repulsion gel: land, jump or run into it to bounce, and landings on it never hurt. Alt Fire sprays orange Propulsion gel: run across it to go much faster. Gel coats floors and walls until washed off with the Powerwasher. Assign a weapon slot below; repeated presses cycle the weapons in that slot.
+fil Gel sprayer na istilong Portal. Nag-i-spray ang Putok ng asul na Repulsion gel: lumapag, tumalon o tumakbo rito para tumalbog, at hindi kailanman masakit ang paglapag dito. Nag-i-spray ang Alt Fire ng orange na Propulsion gel: tumakbo rito para lalong bumilis. Nababalot ng gel ang sahig at pader hanggang hugasan ng Powerwasher. Magtakda ng weapon slot sa ibaba; ang paulit-ulit na pagpindot ay nagpapalit sa mga armas sa slot na iyon.
+
+@ A water cannon. Fire shoots a straight jet with limited reach; Alt Fire a wide, shorter fan. The water pushes enemies back, turns projectiles aside and washes away gel and blood. Push strength is configurable below. Assign a weapon slot below; repeated presses cycle the weapons in that slot.
+fil Kanyon ng tubig. Tumitira ang Putok ng tuwid na jet na may limitadong abot; ang Alt Fire ng malapad at mas maikling pamaypay. Itinutulak pabalik ng tubig ang mga kalaban, inililihis ang mga projectile at hinuhugasan ang gel at dugo. Mako-configure sa ibaba ang lakas ng tulak. Magtakda ng weapon slot sa ibaba; ang paulit-ulit na pagpindot ay nagpapalit sa mga armas sa slot na iyon.
+
+@ One equipment add-on includes both night vision and thermal vision. The Change Goggles action cycles Normal, Night Vision, Thermal, then Normal again. Night vision brightens dark rooms; thermal vision highlights living enemies. Goggles do not occupy a weapon slot. Configure intensity and sensor noise below. The binding affects only this add-on.
+fil Iisang equipment add-on ang may night vision at thermal vision. Nagpapalit ang Palitan ang Goggles sa Normal, Night Vision, Thermal, at Normal ulit. Pinaliliwanag ng night vision ang madidilim na kuwarto; pinatitingkad ng thermal vision ang mga buhay na kalaban. Hindi gumagamit ng weapon slot ang goggles. I-configure sa ibaba ang tindi at noise ng sensor. Sa add-on na ito lang may epekto ang bind.
+
+@ Press Dodge with a movement direction on the ground or in midair: dive forward or leap backward and sideways. Diagonals are supported. Each press launches once, with a short recovery. The player body animates in third person. Assign the Dodge action below or in Controls.
+fil Pindutin ang Ilag kasabay ng direksyon ng galaw sa lupa o sa ere: sumisid pasulong o lumundag paatras at patagilid. Suportado ang pahilis. Isang lundag sa bawat pindot, na may maikling pagbawi. Gumagalaw ang katawan ng manlalaro sa third person. Itakda ang Ilag sa ibaba o sa Mga Kontrol.
+
+@ Use the dedicated Bullet Time action to slow the whole local game to 20% speed. Hold is the default; Toggle switches on each press. The optional meter limits use in real seconds and regenerates while inactive. Disable the meter for unlimited use. Remap the action and configure duration and regeneration below.
+fil Gamitin ang sariling Bullet Time action para pabagalin ang buong lokal na laro sa 20% na bilis. Hold ang default; nagpapalit ang Toggle sa bawat pindot. Nililimitahan ng opsyonal na meter ang paggamit sa totoong segundo at napupuno ito habang hindi ginagamit. I-disable ang meter para sa walang limitasyong paggamit. I-remap ang action at i-configure ang tagal at pagpuno sa ibaba.
+
+@ Both shotguns and enemy grunts fire physical pellets with their original spread and damage. Fast default projectiles feel immediate; lower their speed to dodge incoming fire during bullet time. Configure projectile speed below, or reset it to the default of 10000 units per second.
+fil Pisikal na pellet ang tinitira ng dalawang shotgun at ng mga grunt na kalaban, na may orihinal na kalat at pinsala. Parang agaran ang mabibilis na default na projectile; babaan ang bilis nila para makailag sa paparating na putok habang bullet time. I-configure sa ibaba ang bilis ng projectile, o i-reset sa default na 10000 unit kada segundo.
+
+@ Freezes the game for a split second when you damage an enemy, so hits feel heavier. Single player only. Choose which weapons trigger it (all, melee, ranged or explosives), how long it lasts and how much more a kill freezes. Advanced settings cover enemy toughness, damage scaling, cooldown and the longest freeze.
+fil Saglit na hinihinto ang laro kapag napinsala mo ang kalaban, para mas mabigat ang dating ng tama. Single player lang. Piliin kung aling armas ang nagti-trigger nito (lahat, melee, malayuan o pampasabog), gaano ito katagal at gaano pa katagal ang hinto sa pagpatay. Saklaw ng advanced na setting ang tibay ng kalaban, scaling ng pinsala, cooldown at ang pinakamahabang hinto.
+
+# map packs and the Quaddicted browser
+@ Get more maps (Quaddicted)...
+fil Kumuha ng iba pang mapa (Quaddicted)...
+
+@ Type to filter...
+fil Mag-type para mag-filter...
+
+@ Launch mod
+fil Ilunsad ang mod
+
+@ Start first map
+fil Simulan ang unang mapa
+
+@ (running)
+fil (tumatakbo)
+
+@ running
+fil tumatakbo
+
+@ Recent
+fil Kamakailan
+
+@ Name
+fil Pangalan
+
+@ Dir
+fil Folder
+
+@ Default
+fil Default
+
+@ Title
+fil Pamagat
+
+@ Sort: {}
+fil Ayos: {}
+
+@ {} installed
+fil {} naka-install
+
+@ {}/{} matching
+fil {}/{} tugma
+
+@ {} maps, {} completed
+fil {} mapa, {} tapos
+
+@ {}/{} matching, {} completed
+fil {}/{} tugma, {} tapos
+
+@ no maps of its own
+fil walang sariling mapa
+
+@ dir: {}
+fil folder: {}
+
+@ base: {}
+fil base: {}
+
+@ Browse the Quaddicted archive of
+fil Tingnan ang Quaddicted archive ng
+
+@ single-player maps and episodes,
+fil mga single-player na mapa at episode,
+
+@ then download and install them
+fil saka i-download at i-install ang mga ito
+
+@ here. Each release gets its own
+fil dito. May sariling entry ang bawat
+
+@ entry in this list.
+fil release sa listahang ito.
+
+@ Needs an internet connection.
+fil Kailangan ng koneksyon sa internet.
+
+@ Quaddicted Map Archive
+fil Quaddicted Map Archive
+
+@ Newest
+fil Pinakabago
+
+@ Author
+fil May-akda
+
+@ Size
+fil Laki
+
+@ Loading the map list...
+fil Nilo-load ang listahan ng mapa...
+
+@ Couldn't load the map list: {}
+fil Hindi ma-load ang listahan ng mapa: {}
+
+@ {} single-player releases  -  F5 refreshes
+fil {} single-player na release  -  F5 para i-refresh
+
+@ {} matching
+fil {} tugma
+
+@ by {}
+fil ni {}
+
+@ requires: {}
+fil kailangan: {}
+
+@ maps: {}
+fil mga mapa: {}
+
+@ Failed: {}
+fil Nabigo: {}
+
+@ Downloading... {}%
+fil Nagda-download... {}%
+
+@ Unpacking...
+fil Ina-unpack...
+
+@ Installed in {}/  -  Enter: play
+fil Naka-install sa {}/  -  Enter: laruin
+
+@ Enter: download and install
+fil Enter: i-download at i-install
+
+@ unpacking
+fil ina-unpack
+
+@ failed
+fil nabigo
+
+@ installed
+fil naka-install
+
+@ Downloads are not available in the browser build
+fil Hindi available ang download sa browser build
+
+@ the map list could not be read
+fil hindi mabasa ang listahan ng mapa
+
+@ downloading needs the curl program
+fil kailangan ng program na curl para mag-download
+
+@ download failed
+fil nabigo ang download
+
+@ the download is not a valid zip
+fil hindi valid na zip ang na-download
+
+@ nothing to install for this engine
+fil walang mai-install para sa engine na ito
+
+@ needs {} installed first
+fil kailangan munang i-install ang {}
+
+@ couldn't unpack {}
+fil hindi ma-unpack ang {}
+
+# help screen
+@ About
+fil Tungkol Dito
+
+@ < Back
+fil < Bumalik
+
+# tr_ctx keys: English shows the short word, the key says which meaning
+@ Save (a manual save, as opposed to a quicksave or autosave)
+fil Save
+
+# ==== hud.txt ====
+
+# HUD, weapon and equipment wheels, sound captions and other in-game text.
+# Weapon, monster and item names follow the 2021 re-release's own translations.
+@ Axe
+fil Axe
+
+@ Shotgun
+fil Shotgun
+
+@ Double-Barrelled Shotgun
+fil Double-Barrelled Shotgun
+
+@ Nailgun
+fil Nailgun
+
+@ Super Nailgun
+fil Super Nailgun
+
+@ Grenade Launcher
+fil Grenade Launcher
+
+@ Rocket Launcher
+fil Rocket Launcher
+
+@ Thunderbolt
+fil Thunderbolt
+
+@ Portal Gun
+fil Portal Gun
+
+@ Boomerang
+fil Boomerang
+
+@ Stickybomb Launcher
+fil Stickybomb Launcher
+
+@ Railgun
+fil Railgun
+
+@ Hookshot
+fil Hookshot
+
+@ Gel Sprayer
+fil Gel Sprayer
+
+@ Powerwasher
+fil Powerwasher
+
+@ Night Vision Goggles
+fil Night Vision Goggles
+
+@ Thermal Goggles
+fil Thermal Goggles
+
+@ Normal vision
+fil Normal na paningin
+
+@ ON
+fil ON
+
+@ OFF
+fil OFF
+
+@ {} (turn on)
+fil {} (i-on)
+
+@ {} (turn off)
+fil {} (i-off)
+
+@ Move mouse to select, release to toggle
+fil Igalaw ang mouse para pumili, bitawan para i-toggle
+
+@ Move mouse to select, release to equip
+fil Igalaw ang mouse para pumili, bitawan para gamitin
+
+@ Release to toggle
+fil Bitawan para i-toggle
+
+@ Release to equip
+fil Bitawan para gamitin
+
+@ shells
+fil shells
+
+@ nails
+fil nails
+
+@ rockets
+fil rockets
+
+@ cells
+fil cells
+
+@ Kills: {}/{}
+fil Patay: {}/{}
+
+@ Secrets: {}/{}
+fil Lihim: {}/{}
+
+@ Time {}
+fil Oras {}
+
+@ Press any button to continue...
+fil Pumindot ng kahit anong button para magpatuloy...
+
+@ Press any key to continue...
+fil Pumindot ng kahit anong key para magpatuloy...
+
+@ BULLET TIME
+fil BULLET TIME
+
+@ AUTO AIM
+fil AUTO AIM
+
+@ Crosshair
+fil Crosshair
+
+@ + Marker
+fil + Marker
+
+@ Hit markers off
+fil Naka-off ang hit marker
+
+@ On target
+fil Sa target
+
+@ On kill
+fil Sa pagpatay
+
+# sound captions
+@ [Secret found]
+fil [May nakitang lihim]
+
+@ [Message]
+fil [Mensahe]
+
+@ [Switch activated]
+fil [Na-activate ang switch]
+
+@ [Key picked up]
+fil [Napulot ang susi]
+
+@ [Rune picked up]
+fil [Napulot ang rune]
+
+@ [Teleporter]
+fil [Teleporter]
+
+@ [Teleport]
+fil [Teleport]
+
+@ [Splash]
+fil [Splash]
+
+@ [Leaving water]
+fil [Umahon sa tubig]
+
+@ [Door]
+fil [Pinto]
+
+@ [Platform moving]
+fil [Gumagalaw na platform]
+
+@ [Button]
+fil [Button]
+
+@ [Health picked up]
+fil [Napulot ang health]
+
+@ [Armor picked up]
+fil [Napulot ang armor]
+
+@ [Quad Damage wearing off]
+fil [Nauubos na ang Quad Damage]
+
+@ [Quad Damage]
+fil [Quad Damage]
+
+@ [Pentagram wearing off]
+fil [Nauubos na ang Pentagram]
+
+@ [Pentagram of Protection]
+fil [Pentagram of Protection]
+
+@ [Ring wearing off]
+fil [Nauubos na ang Ring]
+
+@ [Ring of Shadows]
+fil [Ring of Shadows]
+
+@ [Biosuit wearing off]
+fil [Nauubos na ang Biosuit]
+
+@ [Biosuit]
+fil [Biosuit]
+
+@ [Item picked up]
+fil [Napulot ang item]
+
+@ [Weapon picked up]
+fil [Napulot ang armas]
+
+@ [Ammo picked up]
+fil [Napulot ang bala]
+
+@ [Explosion]
+fil [Pagsabog]
+
+@ [Grenade launched]
+fil [Inihagis ang granada]
+
+@ [Grenade bounce]
+fil [Tumalbog ang granada]
+
+@ [Rocket fired]
+fil [Pinaputok ang rocket]
+
+@ [Nails fired]
+fil [Pinaputok ang pako]
+
+@ [Lightning]
+fil [Kidlat]
+
+@ [Thunder]
+fil [Kulog]
+
+@ [Enforcer alerted]
+fil [Alerto ang Enforcer]
+
+@ [Grunt alerted]
+fil [Alerto ang Grunt]
+
+@ [Rottweiler alerted]
+fil [Alerto ang Rottweiler]
+
+@ [Knight alerted]
+fil [Alerto ang Knight]
+
+@ [Death Knight alerted]
+fil [Alerto ang Death Knight]
+
+@ [Scrag alerted]
+fil [Alerto ang Scrag]
+
+@ [Ogre alerted]
+fil [Alerto ang Ogre]
+
+@ [Fiend alerted]
+fil [Alerto ang Fiend]
+
+@ [Shambler alerted]
+fil [Alerto ang Shambler]
+
+@ [Zombie groaning]
+fil [Umuungol ang Zombie]
+
+@ [Vore alerted]
+fil [Alerto ang Vore]
+
+@ [Vore attacking]
+fil [Umaatake ang Vore]
+
+@ [Spawn alerted]
+fil [Alerto ang Spawn]
+
+@ [Rotfish]
+fil [Rotfish]
+
+@ [Spawn]
+fil [Spawn]
+
+@ [Chthon]
+fil [Chthon]
+
+@ [Hard landing]
+fil [Malakas na bagsak]
+
+@ [Drowning]
+fil [Nalulunod]
+
+@ [Gasping for air]
+fil [Hinihingal]
+
+@ [Burning]
+fil [Nasusunog]
+
+@ [Telefrag]
+fil [Telefrag]
+
+@ [Gibbed]
+fil [Nagkadurog-durog]
+
+# ==== console.txt ====
+
+# Console messages, shown translated only with con_translate 1 (Translate Console).
+# Cvar and command names stay as they are.
+@ Autosaved.
+fil Na-autosave.
+
+@ Game saved.
+fil Na-save ang laro.
+
+@ Can't save now.
+fil Hindi makapag-save ngayon.
+
+@ This game only autosaves (No Manual Saves modifier).
+fil Autosave lang ang larong ito (modifier na Walang Manual na Save).
+
+@ Loading {}...
+fil Nilo-load ang {}...
+
+@ load failed: {}
+fil nabigo ang pag-load: {}
+
+@ ERROR: autosave failed: {}
+fil ERROR: nabigo ang autosave: {}
+
+@ ERROR: couldn't open {}
+fil ERROR: hindi mabuksan ang {}
+
+@ ERROR: couldn't open {}.
+fil ERROR: hindi mabuksan ang {}.
+
+@ ERROR: couldn't write {}: {}
+fil ERROR: hindi maisulat ang {}: {}
+
+@ ERROR: couldn't create {}: {}
+fil ERROR: hindi magawa ang {}: {}
+
+@ couldn't write {}: {}
+fil hindi maisulat ang {}: {}
+
+@ Wrote {}
+fil Naisulat ang {}
+
+@ screenshot failed: {}
+fil nabigo ang screenshot: {}
+
+@ screenshot: {}
+fil screenshot: {}
+
+@ No readable save available. Select save or restart the level.
+fil Walang mababasang save. Pumili ng save o ulitin ang level.
+
+@ Unknown command "{}"
+fil Hindi kilalang command "{}"
+
+@ couldn't exec {}
+fil hindi ma-exec ang {}
+
+@ execing {}
+fil ine-exec ang {}
+
+@ execing config.cfg (inherited from {})
+fil ine-exec ang config.cfg (minana mula sa {})
+
+@ execing config.cfg (mod defaults)
+fil ine-exec ang config.cfg (default ng mod)
+
+@ execing default.cfg (built-in)
+fil ine-exec ang default.cfg (built-in)
+
+@ {} cvars
+fil {} cvar
+
+@ {} commands
+fil {} command
+
+@ Can't "cmd", not connected
+fil Hindi ma-"cmd", hindi nakakonekta
+
+@ Looking for Quake servers...
+fil Naghahanap ng Quake server...
+
+@ Bad value, must be between 1 and 65534
+fil Maling halaga, dapat nasa pagitan ng 1 at 65534
+
+@ Couldn't handle music file {}
+fil Hindi mapangasiwaan ang music file na {}
+
+@ Bug report written to {}
+fil Naisulat ang bug report sa {}
+
+@ bugreport: can't create {}: {}
+fil bugreport: hindi magawa ang {}: {}
+
+@ graphics preset: {}
+fil graphics preset: {}
+
+@ Presets (r_shader_preset <name>):
+fil Mga preset (r_shader_preset <name>):
+
+@ Add your own .slangp presets under <game>/shaders/.
+fil Idagdag ang sarili mong .slangp preset sa <game>/shaders/.
+
+@ no shader preset loaded (r_shader_preset)
+fil walang naka-load na shader preset (r_shader_preset)
+
+@ r_shader_preset: "{}" not found
+fil r_shader_preset: hindi nakita ang "{}"
+
+@ no parameter "{}" in this preset
+fil walang parameter na "{}" sa preset na ito
+
+@ {} = {} (default {}, {}..{})
+fil {} = {} (default {}, {}..{})
+
+@ Switching to {}...
+fil Lumilipat sa {}...
+
+@ game: no game dir "{}" in {}
+fil game: walang game dir na "{}" sa {}
+
+@ game: can't find the engine executable
+fil game: hindi makita ang executable ng engine
+
+@ game: exec failed: {}
+fil game: nabigo ang exec: {}
+
+@ game: launch failed: {}
+fil game: nabigo ang launch: {}
+
+@ loaded {} in {}s
+fil na-load ang {} sa loob ng {}s
+
+@ No demos listed with startdemos
+fil Walang demo na nakalista sa startdemos
+
+@ Playing demo from {}.
+fil Pinapalabas ang demo mula sa {}.
+
+@ {} frames {} seconds {} fps
+fil {} frame {} segundo {} fps
+
+@ Recording to {}.
+fil Nire-record sa {}.
+
+@ Completed demo
+fil Tapos na ang demo
+
+@ Can't record during demo playback
+fil Hindi maka-record habang nagpe-playback ng demo
+
+@ Relative pathnames are not allowed.
+fil Hindi pinapayagan ang relative na pathname.
+
+@ Can't record - try again when connected
+fil Hindi maka-record - subukan ulit kapag nakakonekta na
+
+@ {} demo(s) in loop
+fil {} demo sa loop
+
+@ Not recording a demo.
+fil Walang nire-record na demo.
+
+@ {} joined on a gamepad
+fil Sumali si {} gamit ang gamepad
+
+@ goggles: needs a game started with Add-ons and Goggles enabled
+fil goggles: kailangan ng larong sinimulan nang naka-enable ang Mga Add-on at Goggles
+
+@ equip: needs a game started with Add-ons and Goggles enabled
+fil equip: kailangan ng larong sinimulan nang naka-enable ang Mga Add-on at Goggles
+
+@ UDP listening on port {}
+fil Nakikinig ang UDP sa port {}
+
+@ UDP bind on port {} failed: {}
+fil Nabigo ang UDP bind sa port {}: {}
+
+@ Connection accepted by {}
+fil Tinanggap ng {} ang koneksyon
+
+@ Connection failed: {}
+fil Nabigo ang koneksyon: {}
+
+@ Couldn't resolve {}
+fil Hindi ma-resolve ang {}
+
+@ Connecting to {}...
+fil Kumokonekta sa {}...
+
+@ Connecting to QuakeWorld server {}...
+fil Kumokonekta sa QuakeWorld server {}...
+
+@ Disconnected: {}
+fil Nadiskonekta: {}
+
+@ Server disconnected
+fil Nadiskonekta ang server
+
+@ Client {} connected
+fil Nakakonekta ang client {}
+
+@ Client {} timed out
+fil Nag-time out ang client {}
+
+@ Couldn't spawn server {}: {}
+fil Hindi ma-spawn ang server {}: {}
+
+@ maxplayers can not be changed while a server is running.
+fil Hindi mababago ang maxplayers habang tumatakbo ang server.
+
+@ You can't kick yourself!
+fil Hindi mo puwedeng i-kick ang sarili mo!
+
+@ Only the server may changelevel
+fil Ang server lang ang puwedeng mag-changelevel
+
+@ {} renamed to {}
+fil Pinalitan ni {} ang pangalan niya bilang {}
