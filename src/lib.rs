@@ -20,6 +20,8 @@ mod tracers;
 mod bboxes;
 mod demo;
 mod draw;
+#[cfg(test)]
+mod lang_tests;
 mod font;
 mod fte;
 mod glyphs;

@@ -50,14 +50,15 @@ impl Menu {
         }
         let item = self.page_item(page, self.opt_cursor);
         let reason = if self.game_locked(item, cv) {
-            Some("Fixed for this game: it was started without Customize")
+            Some(qcore::t!("Fixed for this game: it was started without Customize"))
         } else if self.item_disabled(item, cv) {
             disabled_reason(item)
         } else {
             None
         };
         let Some(s) = reason.or_else(|| tooltip(item)) else { return };
-        let lines = wrap_tooltip_lines(c, s, 588.0, TXT);
+        let s = qcore::lang::tr(s);
+        let lines = wrap_tooltip_lines(c, &s, 588.0, TXT);
         let w = lines.iter().map(|l| c.text_w(l, TXT)).fold(0.0, f32::max);
         let h = lines.len() as f32 * 10.0 + 4.0;
         let y = PAGE_ROW0 + self.page_vis(page) as f32 * ROW_H + 10.0;
@@ -72,7 +73,7 @@ impl Menu {
         let hover = self.mouse.is_some_and(|(mx, my)| (x..x + w).contains(&mx) && (y..y + h).contains(&my));
         let bg = if hover { HILITE } else { [0.0, 0.0, 0.0, 0.7] };
         c.round_box(x, y, w, h, 4.0, bg, Some(BORDER));
-        let s = "< Back";
+        let s = qcore::t!("< Back");
         c.text(x + ((w - c.text_w(s, TXT)) / 2.0).floor(), y + 4.0, s, TXT, if hover { GOLD_FG } else { FG });
     }
 
@@ -89,7 +90,7 @@ impl Menu {
         let (sel, back) = (K_ABUTTON, K_BBUTTON);
         let y = 344.0;
         if self.capturing() {
-            let s = "Press a button or key to bind (Start cancels)";
+            let s = qcore::t!("Press a button or key to bind (Start cancels)");
             let w = c.text_w(s, TXT);
             c.round_box(320.0 - w / 2.0 - 8.0, y - 3.0, w + 16.0, 18.0, 4.0, [0.0, 0.0, 0.0, 0.8], Some(BORDER));
             c.text(320.0 - w / 2.0, y + 2.0, s, TXT, GOLD_FG);
@@ -101,23 +102,23 @@ impl Menu {
             return;
         }
         let action = match self.screen {
-            Screen::Save => "Save",
-            Screen::Load => "Load",
-            Screen::OptionsPage(Page::Controls) => "Bind",
-            _ => "Select",
+            Screen::Save => qcore::t!("Save"),
+            Screen::Load => qcore::t!("Load"),
+            Screen::OptionsPage(Page::Controls) => qcore::t!("Bind"),
+            _ => qcore::t!("Select"),
         };
-        let mut items = vec![(sel, action), (back, "Back")];
+        let mut items = vec![(sel, action), (back, qcore::t!("Back"))];
         if matches!(self.screen, Screen::Load | Screen::Save) && self.save_at(self.load_cursor).is_some() {
             items.insert(1, (K_XBUTTON, "Delete"));
         }
         if self.prompt.is_some() {
-            items = vec![(sel, "Select"), (back, "Cancel")];
+            items = vec![(sel, qcore::t!("Select")), (back, qcore::t!("Cancel"))];
         }
         if self.screen == Screen::OptionsPage(Page::Controls) && self.drop.is_none() {
             items.insert(1, (K_XBUTTON, "Clear"));
         }
         if matches!(self.screen, Screen::Quit) {
-            items = vec![(sel, "Confirm"), (back, "Cancel")];
+            items = vec![(sel, qcore::t!("Confirm")), (back, qcore::t!("Cancel"))];
         }
         self.boxed_hints(c, y, &items);
     }

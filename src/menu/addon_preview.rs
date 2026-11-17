@@ -37,7 +37,7 @@ fn draw_simulation(c: &mut Canvas, id: &str, time: f64, [x, y, w, h]: [f32; 4]) 
             let py = cy + pellet as f32 * (1.0 + t * 3.0);
             c.fill(px - pellet.abs() as f32 * 2.0, py, 5.0, 1.5, [0.9, 0.75, 0.35, 1.0]);
         }
-        let label = if row == 0 { "NORMAL SPEED" } else if bullet_time { "BULLET TIME: 20%" } else { "SLOW MOTION: PHYSICAL PELLETS" };
+        let label = if row == 0 { qcore::t!("NORMAL SPEED") } else if bullet_time { qcore::t!("BULLET TIME: 20%") } else { qcore::t!("SLOW MOTION: PHYSICAL PELLETS") };
         c.text(x + 50.0, cy - 19.0, label, 7.0, MUTED);
     }
 }

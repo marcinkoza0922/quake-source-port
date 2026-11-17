@@ -221,18 +221,18 @@ pub fn missing_mods(planned: &[(String, String)], basedir: &Path, own: &str) -> 
 /// Unpacks `zip` into `basedir`; returns the game dir to show the release
 /// under. A `modinfo.txt` names the own dir (and its base).
 pub fn install(r: &Release, zip: &Path, basedir: &Path) -> Result<String, String> {
-    let pack = qcore::fs::Pack::load_pk3(zip).ok_or("the download is not a valid zip")?;
+    let pack = qcore::fs::Pack::load_pk3(zip).ok_or(qcore::t!("the download is not a valid zip"))?;
     let own = r.stem.clone();
     let (planned, base) = plan(&r.install, pack.names(), &own);
     if planned.is_empty() {
-        return Err("nothing to install for this engine".into());
+        return Err(qcore::t!("nothing to install for this engine").into());
     }
     let missing = missing_mods(&planned, basedir, &own);
     if !missing.is_empty() {
-        return Err(format!("needs {} installed first", missing.join(", ")));
+        return Err(qcore::tr!("needs {} installed first", missing.join(", ")));
     }
     for (dest, name) in &planned {
-        let data = pack.read(name).ok_or_else(|| format!("couldn't unpack {name}"))?;
+        let data = pack.read(name).ok_or_else(|| qcore::tr!("couldn't unpack {}", name))?;
         let path: PathBuf = basedir.join(dest);
         if let Some(p) = path.parent() {
             std::fs::create_dir_all(p).map_err(|e| format!("{}: {e}", p.display()))?;

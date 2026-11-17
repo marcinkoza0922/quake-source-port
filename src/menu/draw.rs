@@ -35,12 +35,12 @@ impl Menu {
                 let p = pic("gfx/mainmenu.lmp");
                 c.pic(72.0, 32.0, p);
                 // extra entries under the classic graphic
-                let extra: &[&str] = if self.custom_running { &["Map Packs", "Customize"] } else { &["Map Packs"] };
+                let extra: &[&str] = if self.custom_running { &[qcore::t!("Map Packs"), qcore::t!("Customize")] } else { &[qcore::t!("Map Packs")] };
                 for (k, &label) in extra.iter().enumerate() {
                     let (y, w) = (32.0 + (5 + k) as f32 * 20.0 + 2.0, 112.0);
                     c.fill(72.0, y, w, 16.0, [0.0, 0.0, 0.0, 0.55]);
                     c.frame(72.0, y, w, 16.0, BORDER);
-                    gold(c, 72.0 + (w - 8.0 * label.len() as f32) / 2.0, y + 4.0, label);
+                    gold(c, 72.0 + (w - c.ptext_w(label)) / 2.0, y + 4.0, label);
                 }
                 let d = dot(pic);
                 c.pic(54.0, 32.0 + self.main_cursor as f32 * 20.0, d);
@@ -63,7 +63,7 @@ impl Menu {
                 let (y, w) = (32.0 + 3.0 * 20.0 + 2.0, 112.0);
                 c.fill(72.0, y, w, 16.0, [0.0, 0.0, 0.0, 0.55]);
                 c.frame(72.0, y, w, 16.0, BORDER);
-                gold(c, 72.0 + (w - 8.0 * 12.0) / 2.0, y + 4.0, "Level Select");
+                gold(c, 72.0 + (w - c.ptext_w("Level Select")) / 2.0, y + 4.0, "Level Select");
             }
             Screen::Multiplayer => {
                 let p = pic("gfx/qplaque.lmp");
@@ -148,30 +148,36 @@ impl Menu {
                 let (bx, by, bw, bh) = QUIT_BOX;
                 c.fill(bx, by, bw, bh, [0.05, 0.04, 0.03, 0.92]);
                 c.frame(bx, by, bw, bh, BORDER);
-                let msg = "Really quit?";
+                let msg = qcore::t!("Really quit?");
                 c.text_center(320.0, by + 12.0, msg, TXT * 1.2, FG);
-                for (i, (&x, label)) in QUIT_BUTTONS.iter().zip(["(Y)es", "(N)o"]).enumerate() {
+                for (i, (&x, (key, word))) in QUIT_BUTTONS.iter().zip([("Y", qcore::t!("Yes")), ("N", qcore::t!("No"))]).enumerate() {
                     let (w, h) = QUIT_BTN;
                     if i == self.quit_cursor {
                         c.fill(x, QUIT_BTN_Y, w, h, HILITE);
                     }
                     c.frame(x, QUIT_BTN_Y, w, h, BORDER);
-                    let tx = x + ((w - c.text_w(label, TXT)) / 2.0).floor();
+                    // "(Y)es" in English; other languages keep the Y/N keys: "(Y) Oui"
+                    let tail = if qcore::lang::current() == qcore::lang::Lang::English {
+                        format!("){}", &word[1..])
+                    } else {
+                        format!(") {}", qcore::lang::tr(word))
+                    };
+                    let tx = x + ((w - c.text_w_raw(&format!("({key}{tail}"), TXT)) / 2.0).floor();
                     // gold hotkey letter
                     let ty = QUIT_BTN_Y + 3.0;
                     let mut cx = tx + txt(c, tx, ty, "(");
-                    cx += txt_gold(c, cx, ty, &label[1..2]);
-                    txt(c, cx, ty, &label[2..]);
+                    cx += txt_gold(c, cx, ty, key);
+                    txt(c, cx, ty, &tail);
                 }
             }
             Screen::Death => {
                 c.fill(148.0, 96.0, 344.0, 152.0, [0.05, 0.04, 0.03, 0.95]);
                 c.frame(148.0, 96.0, 344.0, 152.0, BORDER);
                 c.text_center(320.0, 112.0, "You died", TXT * 1.2, GOLD_FG);
-                for (i, label) in ["1. Continue from most recent save", "2. Select save", "3. Restart level", "4. Return to main menu"].iter().enumerate() {
+                for (i, label) in [qcore::t!("Continue from most recent save"), qcore::t!("Select save"), qcore::t!("Restart level"), qcore::t!("Return to main menu")].iter().enumerate() {
                     let y = 140.0 + i as f32 * 24.0;
                     if i == self.death_cursor { c.fill(160.0, y, 320.0, 20.0, HILITE); }
-                    txt(c, 168.0, y + 4.0, label);
+                    txt(c, 168.0, y + 4.0, &format!("{}. {}", i + 1, qcore::lang::tr(label)));
                 }
             }
             Screen::None => {}
@@ -268,7 +274,7 @@ impl Menu {
             Item::Resolution => {
                 label(c, "Resolution");
                 let s = if self.pending_mode == 2 {
-                    "desktop".to_string()
+                    qcore::tr!("desktop")
                 } else {
                     format!("{}x{}", self.pending_res.0, self.pending_res.1)
                 };
@@ -295,6 +301,10 @@ impl Menu {
                 c.frame(VALUE_X, y - 1.0, 40.0, BOX_H - 1.0, BORDER);
                 { txt(c, VALUE_X + 48.0, y, &k.to_string()); }
             }
+            Item::Language => {
+                label(c, "Language");
+                txt(c, VALUE_X, y, &super::options::language_options()[super::options::language_index(cv)]);
+            }
             Item::ShaderPreset => {
                 label(c, "Preset");
                 let s: String = self.preset_options()[self.preset_index(cv)].chars().take(13).collect();
@@ -309,7 +319,7 @@ impl Menu {
                 { txt(c, VALUE_X, y, &s); }
             }
             Item::Run { label: l, run } => {
-                let l = if run == Run::Search && self.searching { "Searching..." } else { l };
+                let l = if run == Run::Search && self.searching { qcore::t!("Searching...") } else { l };
                 c.text_center(320.0, y, l, TXT, GOLD_FG);
             }
             Item::Server(k) => {

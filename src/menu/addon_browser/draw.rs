@@ -73,12 +73,12 @@ impl Menu {
         if a.weapons.is_empty() {
             if let Some((label, cmd)) = a.equipment_action() { rows.push((label, Some(cmd), None)); }
         } else {
-            rows.push(("Fire", Some("+attack"), None));
+            rows.push((qcore::t!("Fire"), Some("+attack"), None));
             if a.alt {
-                rows.push(("Alt Fire", Some("+attack2"), None));
+                rows.push((qcore::t!("Alt Fire"), Some("+attack2"), None));
             }
         }
-        rows.push(("Configure Parameters >", None, None));
+        rows.push((qcore::t!("Configure Parameters >"), None, None));
         for (i, (label, cmd, slot)) in rows.iter().enumerate() {
             let y = self.browser_row_y(i);
             if y < 236.0 || y + 16.0 > 322.0 { continue; }
@@ -107,11 +107,11 @@ impl Menu {
         };
         c.round_frame(rect, radius, 2.0, GOLD_FG);
         let note = if self.toys_locked(cv) {
-            "This game started without Customize, so its add-ons are fixed. Customize a new game instead."
+            qcore::t!("This game started without Customize, so its add-ons are fixed. Customize a new game instead.")
         } else if page == Page::Addons && self.game_running {
-            "Changes apply now and are saved with this game (.qsa)."
+            qcore::t!("Changes apply now and are saved with this game (.qsa).")
         } else {
-            "Customized games save as .qsa files, which need this source port."
+            qcore::t!("Customized games save as .qsa files, which need this source port.")
         };
         c.text_center(320.0, 327.0, note, 8.0, MUTED);
         if self.pad_ui {

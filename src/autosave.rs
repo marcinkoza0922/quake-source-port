@@ -49,18 +49,18 @@ impl Tracker {
         let previous = self.previous.replace((time, stats));
         let Some((_, old)) = previous.filter(|(t, _)| *t <= time) else {
             self.last_save = time;
-            return (!loaded && flags[0]).then_some("Level entry");
+            return (!loaded && flags[0]).then_some(qcore::t!("Level entry"));
         };
         let reason = if flags[1] && stats.found_secrets > old.found_secrets {
-            Some("Secret found")
+            Some(qcore::t!("Secret found"))
         } else if flags[2] && stats.total_monsters > 0 && stats.killed_monsters >= stats.total_monsters
             && old.killed_monsters < stats.total_monsters {
-            Some("All enemies killed")
+            Some(qcore::t!("All enemies killed"))
         } else if flags[3] && stats.total_secrets > 0 && stats.found_secrets >= stats.total_secrets
             && old.found_secrets < stats.total_secrets {
-            Some("All secrets found")
+            Some(qcore::t!("All secrets found"))
         } else if interval > 0.0 && time - self.last_save >= interval {
-            Some("Timer")
+            Some(qcore::t!("Timer"))
         } else { None };
         if reason.is_some() { self.last_save = time; }
         reason
@@ -140,9 +140,9 @@ mod tests {
         // Enabling a completion trigger after the event must not save repeatedly.
         assert!(tracker.update(3.0, complete, false, [false, false, true, true], 0.0).is_none());
         tracker.reset();
-        assert_eq!(tracker.update(1.0, empty, false, [true; 4], 0.0), Some("Level entry"));
+        assert_eq!(tracker.update(1.0, empty, false, [true; 4], 0.0), Some(qcore::t!("Level entry")));
         assert!(tracker.update(2.0, empty, false, [true; 4], 0.0).is_none());
-        assert_eq!(tracker.update(3.0, complete, false, [false, false, true, false], 0.0), Some("All enemies killed"));
+        assert_eq!(tracker.update(3.0, complete, false, [false, false, true, false], 0.0), Some(qcore::t!("All enemies killed")));
     }
 
     #[test]

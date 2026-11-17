@@ -115,7 +115,7 @@ impl NetServer {
             let active = sv.core.clients.get(slot).is_some_and(|c| c.active);
             let r = &mut self.remotes[i];
             if r.closing.is_none() && now - r.conn.last_receive_time.max(r.connect_time) > MESSAGE_TIMEOUT {
-                sv.core.print(&format!("Client {} timed out\n", r.addr));
+                sv.core.print(&qcore::ctr!("Client {} timed out\n", r.addr));
                 sv.drop_client(slot, true);
                 self.remotes.remove(i);
                 continue;

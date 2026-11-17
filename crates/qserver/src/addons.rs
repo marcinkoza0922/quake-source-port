@@ -137,13 +137,13 @@ impl Toy {
     }
     pub fn name(self) -> &'static str {
         match self {
-            Toy::PortalGun => "Portal Gun",
-            Toy::Boomerang => "Boomerang",
-            Toy::Sticky => "Stickybomb Launcher",
-            Toy::Railgun => "Railgun",
-            Toy::Hookshot => "Hookshot",
-            Toy::GelSprayer => "Gel Sprayer",
-            Toy::Washer => "Powerwasher",
+            Toy::PortalGun => qcore::t!("Portal Gun"),
+            Toy::Boomerang => qcore::t!("Boomerang"),
+            Toy::Sticky => qcore::t!("Stickybomb Launcher"),
+            Toy::Railgun => qcore::t!("Railgun"),
+            Toy::Hookshot => qcore::t!("Hookshot"),
+            Toy::GelSprayer => qcore::t!("Gel Sprayer"),
+            Toy::Washer => qcore::t!("Powerwasher"),
         }
     }
     /// Name in savegame headers.

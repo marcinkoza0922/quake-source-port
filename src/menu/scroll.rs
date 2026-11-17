@@ -98,7 +98,7 @@ impl Menu {
         // Keep the contextual action beside Attack, before the weapon and movement binds.
         let i = if p == Page::Controls && self.autoaim_mapping.get() != 0 {
             if i == 1 {
-                return bind(if self.autoaim_mapping.get() == 2 { "Auto-aim Toggle" } else { "Lock-on" }, "+lockon");
+                return bind(if self.autoaim_mapping.get() == 2 { qcore::t!("Auto-aim Toggle") } else { qcore::t!("Lock-on") }, "+lockon");
             }
             if i > 1 { i - 1 } else { i }
         } else { i };

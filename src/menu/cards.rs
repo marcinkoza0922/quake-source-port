@@ -19,11 +19,11 @@ pub(super) fn clean_title(t: &str, max: usize) -> String {
 /// Short label for what kind of save a card holds.
 fn kind_label(sv: &SaveSlot) -> String {
     if sv.is_autosave() {
-        format!("Autosave: {}", sv.info.reason.as_deref().unwrap_or("unknown trigger"))
+        qcore::tr!("Autosave: {}", qcore::lang::tr(sv.info.reason.as_deref().unwrap_or(qcore::t!("unknown trigger"))))
     } else if sv.name.eq_ignore_ascii_case("quick") {
-        "Quicksave".into()
+        qcore::tr!("Quicksave")
     } else if sv.name.len() > 1 && sv.name.starts_with('s') && sv.name[1..].bytes().all(|b| b.is_ascii_digit()) {
-        "Save".into()
+        qcore::lang::tr_ctx("Save (a manual save, as opposed to a quicksave or autosave)", "Save").into_owned()
     } else {
         sv.name.clone()
     }
@@ -31,9 +31,9 @@ fn kind_label(sv: &SaveSlot) -> String {
 
 impl Menu {
     pub(super) fn ask_delete(&mut self, sv: SaveSlot) {
-        let title = format!("Delete \"{}\"?", clean_title(&sv.info.level, 40));
+        let title = qcore::tr!("Delete \"{}\"?", clean_title(&sv.info.level, 40));
         let what = format!("{} - {}", kind_label(&sv), sv.info.when(qcore::time::SystemTime::now()));
-        self.confirm(vec![title, what, "This cannot be undone.".into()], "Delete", format!("_deletesave \"{}\"\n", sv.name), false);
+        self.confirm(vec![title, what, qcore::tr!("This cannot be undone.")], qcore::t!("Delete"), format!("_deletesave \"{}\"\n", sv.name), false);
     }
 
     /// Delete button of the selected card: (x, y, w, h), if it shows.
@@ -53,12 +53,12 @@ impl Menu {
     /// Save/load cards: one column, scrolled so the cursor is in view, with
     /// the next card cut off at the bottom to show the list goes on.
     pub(super) fn draw_cards(&self, c: &mut Canvas, pic: &mut PicFn) {
-        let heading = if self.screen == Screen::Save { "Save Game" } else if self.autosaves { "Autosaves" } else { "Load Game" };
+        let heading = if self.screen == Screen::Save { qcore::t!("Save Game") } else if self.autosaves { qcore::t!("Autosaves") } else { qcore::t!("Load Game") };
         c.text(CARD_X, 20.0, heading, 13.0, GOLD_FG);
         c.text(CARD_X + c.text_w(heading, 13.0) + 10.0, 23.0, "newest first", TXT, MUTED);
         let n = self.save_rows();
         let real = if self.screen == Screen::Save || self.autosaves { self.saves.len() } else { self.saves.len() + usize::from(self.latest.is_some()) };
-        c.text_right(CARD_X + CARD_W, 23.0, &format!("{real} save{}", if real == 1 { "" } else { "s" }), TXT, MUTED);
+        c.text_right(CARD_X + CARD_W, 23.0, &qcore::tr!("Saves: {}", real), TXT, MUTED);
         let small = 8.5;
         let sticky = self.card_sticky();
         if sticky > 0 {
@@ -89,9 +89,9 @@ impl Menu {
                 continue;
             }
             let Some(slot) = self.save_at(i) else {
-                let (label, sub) = if self.screen == Screen::Save { ("New save", "Select to save your game here") }
-                    else if self.autosaves { ("No autosaves yet", "Autosaves are made on level entry, secrets and more (Options > Gameplay)") }
-                    else { ("No saves yet", "Save from the Single Player menu, or press F6 to quicksave") };
+                let (label, sub) = if self.screen == Screen::Save { (qcore::t!("New save"), qcore::t!("Select to save your game here")) }
+                    else if self.autosaves { (qcore::t!("No autosaves yet"), qcore::t!("Autosaves are made on level entry, secrets and more (Options > Gameplay)")) }
+                    else { (qcore::t!("No saves yet"), qcore::t!("Save from the Single Player menu, or press F6 to quicksave")) };
                 c.text(lx, y + 9.0, label, 11.0, if self.screen == Screen::Save { FG } else { MUTED });
                 c.text(lx, y + 27.0, sub, small, MUTED);
                 if self.screen == Screen::Save {
@@ -113,7 +113,7 @@ impl Menu {
             let right = tx - 8.0;
             let mut kind = kind_label(slot);
             if i < sticky {
-                kind = format!("Latest - {kind}");
+                kind = qcore::tr!("Latest - {}", kind);
             }
             let kind = clean_title(&kind, 40);
             c.text_right(right, y + 7.0, &kind, small, GOLD_FG);
@@ -130,23 +130,23 @@ impl Menu {
             if !sv.map.eq_ignore_ascii_case(&sv.level) {
                 c.text(lx + tw, y + 7.0, &map, small, MUTED);
             }
-            let line = format!("{}   {}   Time {}", sv.when(now), sv.skill_name(), sv.level_time());
+            let line = format!("{}   {}   {}", sv.when(now), qcore::lang::tr(sv.skill_name()), qcore::tr!("Time {}", sv.level_time()));
             c.text(lx, y + 20.0, &line, small, MUTED);
-            let hw = c.text(lx, y + 32.0, &format!("Health {}   Armor {}", sv.health, sv.armor), small, FG);
+            let hw = c.text(lx, y + 32.0, &format!("{}   {}", qcore::tr!("Health {}", sv.health), qcore::tr!("Armor {}", sv.armor)), small, FG);
             // .qsa saves (customized or split-screen games) that other
             // ports cannot load
             let mp = match sv.players {
-                (local, _) if local > 1 => format!("Split-screen, {local} players"),
-                (_, slots) if slots > 1 => "Co-op".to_string(),
+                (local, _) if local > 1 => qcore::tr!("Split-screen, {} players", local),
+                (_, slots) if slots > 1 => qcore::tr!("Co-op"),
                 _ => String::new(),
             };
             let tag = match (sv.addons.is_some(), mp.is_empty()) {
-                (true, false) => format!("Customized, {mp}"),
-                (true, true) => "Customized".to_string(),
+                (true, false) => qcore::tr!("Customized, {}", mp),
+                (true, true) => qcore::tr!("Customized"),
                 (false, _) => mp,
             };
             c.text(lx + hw + 12.0, y + 32.0, &tag, small, GOLD_FG);
-            let stats = format!("Kills {}/{}   Secrets {}/{}", sv.kills.0, sv.kills.1, sv.secrets.0, sv.secrets.1);
+            let stats = format!("{}   {}", qcore::tr!("Kills {}/{}", sv.kills.0, sv.kills.1), qcore::tr!("Secrets {}/{}", sv.secrets.0, sv.secrets.1));
             let sw = c.text(lx, y + 44.0, &stats, small, FG);
             // keys after the stats line, weapons between the text and the thumbnail
             let mut kx = lx + sw + 10.0;

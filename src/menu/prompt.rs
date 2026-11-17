@@ -4,7 +4,7 @@
 //! Level Select or Map Packs.
 use super::*;
 
-pub(super) const SKILLS: [&str; 4] = ["Easy", "Normal", "Hard", "Nightmare"];
+pub(super) const SKILLS: [&str; 4] = [qcore::t!("Easy"), qcore::t!("Normal"), qcore::t!("Hard"), qcore::t!("Nightmare")];
 
 #[derive(Clone, Debug)]
 pub(super) enum Prompt {

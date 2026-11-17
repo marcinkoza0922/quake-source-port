@@ -321,6 +321,34 @@ pub fn error_box(title: &str, message: &str) -> bool {
     unsafe { sys::SDL_ShowSimpleMessageBox(sys::SDL_MESSAGEBOX_ERROR, t.as_ptr(), m.as_ptr(), ptr::null_mut()) }
 }
 
+/// The user's preferred UI languages, most preferred first, as ISO codes
+/// ("de", "pt-BR"). Works before SDL init.
+pub fn preferred_languages() -> Vec<String> {
+    let mut n: c_int = 0;
+    // SAFETY: n is a valid out pointer; the result is freed below.
+    let list = unsafe { sys::SDL_GetPreferredLocales(&mut n) };
+    if list.is_null() {
+        return Vec::new();
+    }
+    let mut out = Vec::new();
+    for i in 0..n.max(0) as usize {
+        // SAFETY: SDL returns an array of `n` locale pointers.
+        let loc = unsafe { *list.add(i) };
+        if loc.is_null() {
+            break;
+        }
+        // SAFETY: `loc` is a valid SDL_Locale from that array.
+        let lang = unsafe { (*loc).language };
+        if !lang.is_null() {
+            // SAFETY: `language` is a NUL-terminated C string owned by the list.
+            out.push(unsafe { CStr::from_ptr(lang) }.to_string_lossy().into_owned());
+        }
+    }
+    // SAFETY: one SDL allocation holds the whole list.
+    unsafe { sys::SDL_free(list.cast()) };
+    out
+}
+
 /// High-resolution counter and its frequency (ticks/second).
 pub fn performance_counter() -> (u64, u64) {
     // SAFETY: no preconditions.

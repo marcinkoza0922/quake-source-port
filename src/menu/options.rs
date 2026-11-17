@@ -62,6 +62,11 @@ impl Menu {
                 let i = (cur as i32 + dir).rem_euclid(n) as usize;
                 cv.set("_mp_map", &self.net_maps[i].name.clone());
             }
+            Item::Language => {
+                let n = qcore::lang::Lang::ALL.len() as i32 + 1;
+                let i = (language_index(cv) as i32 + dir).rem_euclid(n) as usize;
+                set_language(cv, i);
+            }
             Item::Text { .. } | Item::Run { .. } | Item::Server(_) | Item::Bind { .. } | Item::ResetBinds | Item::ResetShaderParams | Item::Sub { .. } => return false,
             Item::Apply => {
                 if !enter || !self.display_dirty(cv) {
@@ -96,6 +101,7 @@ impl Menu {
                 })
                 .collect(),
             Item::ShaderPreset => self.preset_options(),
+            Item::Language => language_options(),
             _ => Vec::new(),
         }
     }
@@ -109,6 +115,7 @@ impl Menu {
             Item::Resolution => self.resolutions.iter().position(|&r| r == self.pending_res).unwrap_or(0),
             Item::Map => self.host_map(cv).and_then(|m| self.net_maps.iter().position(|x| x.name == m)).unwrap_or(0),
             Item::ShaderPreset => self.preset_index(cv),
+            Item::Language => language_index(cv),
             _ => 0,
         }
     }
@@ -127,6 +134,7 @@ impl Menu {
                 }
             }
             Item::ShaderPreset => self.set_preset(i, cv),
+            Item::Language => set_language(cv, i),
             _ => {}
         }
     }
@@ -207,4 +215,20 @@ impl Menu {
         self.pending_mode != cv.value_of("vid_fullscreen") as usize
             || self.pending_mode != 2 && self.pending_res != (cv.value_of("vid_width") as u32, cv.value_of("vid_height") as u32)
     }
+}
+
+/// Language row values: System (auto), then each language by its own name.
+pub(super) fn language_options() -> Vec<String> {
+    std::iter::once(qcore::t!("System").to_string()).chain(qcore::lang::Lang::ALL.iter().map(|l| l.native().to_string())).collect()
+}
+
+/// Index into [`language_options`] of the `language` cvar (0 = auto).
+pub(super) fn language_index(cv: &Cvars) -> usize {
+    let s = cv.by_name("language").map_or("", |c| c.string.as_str());
+    qcore::lang::Lang::from_name(s).and_then(|l| qcore::lang::Lang::ALL.iter().position(|&x| x == l)).map_or(0, |i| i + 1)
+}
+
+fn set_language(cv: &mut Cvars, i: usize) {
+    let v = i.checked_sub(1).and_then(|k| qcore::lang::Lang::ALL.get(k)).map_or("auto", |l| l.name());
+    cv.set("language", v);
 }

@@ -12,6 +12,8 @@ use qformats::Wad;
 use qformats::image::{Pic, parse_pic};
 use qrender::{Draw2D, PicId, Renderer};
 pub(crate) mod addon_video;
+mod qtext;
+pub use qtext::{glyph_count, glyph_prefix};
 
 /// Loaded pictures by name ("sbar", "gfx/qplaque.lmp", ...).
 #[derive(Default)]
@@ -201,11 +203,14 @@ impl Canvas {
         let (px, py) = self.px(x, y);
         self.push(Draw2D::Char { x: px, y: py, size: 8.0 * self.scale, ch: c, color });
     }
-    /// Plain string.
+    /// Quake text `s` (one char per byte, [`qcore::text`]) as 8×8 text
+    /// ([`Self::qtext`]).
     pub fn string(&mut self, x: f32, y: f32, s: &str) {
-        for (i, b) in s.bytes().enumerate() {
-            self.ch(x + i as f32 * 8.0, y, b);
-        }
+        self.qtext(x, y, &qcore::text::encode(s), WHITE);
+    }
+    /// Width of [`Self::string`].
+    pub fn string_w(&self, s: &str) -> f32 {
+        self.qtext_w(&qcore::text::encode(s))
     }
     pub fn fill(&mut self, x: f32, y: f32, w: f32, h: f32, color: [f32; 4]) {
         let (px, py) = self.px(x, y);
@@ -252,14 +257,26 @@ impl Canvas {
         (size * self.scale).round().max(4.0)
     }
 
-    /// Width in virtual units of modern text `s` at em size `size`.
+    /// Width in virtual units of modern text `s` at em size `size`
+    /// (translated, as [`Self::text`] draws it).
     pub fn text_w(&self, s: &str, size: f32) -> f32 {
-        self.ui.as_ref().map_or(s.len() as f32 * size * 0.6, |u| u.borrow().measure(s, self.em_px(size)) / self.scale)
+        self.text_w_raw(&qcore::lang::tr(s), size)
+    }
+
+    /// [`Self::text_w`] without translation.
+    pub fn text_w_raw(&self, s: &str, size: f32) -> f32 {
+        self.ui.as_ref().map_or(s.chars().count() as f32 * size * 0.6, |u| u.borrow().measure(s, self.em_px(size)) / self.scale)
     }
 
     /// Modern text with its em box top at (x, y), drawn at native pixel
-    /// size. Returns the width in virtual units.
+    /// size. Returns the width in virtual units. `s` is translated
+    /// ([`qcore::lang::tr`]); text without a catalog entry is drawn as is.
     pub fn text(&mut self, x: f32, y: f32, s: &str, size: f32, color: [f32; 4]) -> f32 {
+        self.text_raw(x, y, &qcore::lang::tr(s), size, color)
+    }
+
+    /// [`Self::text`] without translation.
+    pub fn text_raw(&mut self, x: f32, y: f32, s: &str, size: f32, color: [f32; 4]) -> f32 {
         let Some(ui) = self.ui.clone() else { return 0.0 };
         let mut ui = ui.borrow_mut();
         let px = self.em_px(size);
@@ -284,14 +301,16 @@ impl Canvas {
 
     /// Text right-aligned to `x`.
     pub fn text_right(&mut self, x: f32, y: f32, s: &str, size: f32, color: [f32; 4]) {
-        let w = self.text_w(s, size);
-        self.text(x - w, y, s, size, color);
+        let s = qcore::lang::tr(s);
+        let w = self.text_w_raw(&s, size);
+        self.text_raw(x - w, y, &s, size, color);
     }
 
     /// Text centred on `cx`.
     pub fn text_center(&mut self, cx: f32, y: f32, s: &str, size: f32, color: [f32; 4]) {
-        let w = self.text_w(s, size);
-        self.text(cx - w / 2.0, y, s, size, color);
+        let s = qcore::lang::tr(s);
+        let w = self.text_w_raw(&s, size);
+        self.text_raw(cx - w / 2.0, y, &s, size, color);
     }
 
     /// Width of one monospace cell in virtual units at `size`, snapped to whole screen pixels.

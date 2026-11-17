@@ -259,8 +259,8 @@ impl Menu {
                         }
                         3 => out.push(Action::Command("menu_levels\n".into())),
                         _ if server_active && cv.value_of("custom_active") != 0.0 && cv.value_of("modifier_nosaves") != 0.0 => {
-                            let lines = vec!["This game only autosaves.".into(), "(No Manual Saves modifier)".into()];
-                            self.confirm(lines, "OK", String::new(), false);
+                            let lines = vec![qcore::tr!("This game only autosaves."), qcore::tr!("(No Manual Saves modifier)")];
+                            self.confirm(lines, qcore::t!("OK"), String::new(), false);
                         }
                         _ => {
                             if server_active {
@@ -330,9 +330,9 @@ impl Menu {
                             out.push(Action::Command(format!("load \"{name}\"\n")));
                         }
                     } else if let Some(sv) = self.save_at(i) {
-                        let title = format!("Overwrite \"{}\"?", clean_title(&sv.info.level, 40));
-                        let when = format!("Saved {}", sv.info.when(qcore::time::SystemTime::now()));
-                        self.confirm(vec![title, when], "Overwrite", format!("save \"{}\"\n", sv.name), true);
+                        let title = qcore::tr!("Overwrite \"{}\"?", clean_title(&sv.info.level, 40));
+                        let when = qcore::tr!("Saved {}", sv.info.when(qcore::time::SystemTime::now()));
+                        self.confirm(vec![title, when], qcore::t!("Overwrite"), format!("save \"{}\"\n", sv.name), true);
                     } else {
                         self.screen = Screen::None;
                         out.push(Action::Close);
@@ -488,7 +488,7 @@ impl Menu {
                         let title = launch::map_of(&cmd).and_then(|m| self.mods.map_title(m));
                         self.open_launch(cmd, true, title);
                     } else {
-                        self.confirm(vec!["End the current game?".into(), "Unsaved progress will be lost.".into()], "End game", cmd, true);
+                        self.confirm(vec![qcore::tr!("End the current game?"), qcore::tr!("Unsaved progress will be lost.")], qcore::t!("End game"), cmd, true);
                     }
                     return out;
                 }

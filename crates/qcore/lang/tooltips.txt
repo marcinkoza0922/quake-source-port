@@ -1,0 +1,975 @@
+# Translations of the port's own text; format in crates/qcore/src/lang/catalog.rs.
+# Options help lines (tooltips) and reasons for disabled rows.
+
+@ 2D aiming turns the view continuously with the right stick; flick stick snaps the view to where you push the stick, then turning the stick rotates it
+fr La visée 2D tourne la vue en continu avec le stick droit ; le flick stick oriente aussitôt la vue vers la direction poussée, puis tourner le stick la fait pivoter
+de 2D-Zielen dreht die Sicht stufenlos mit dem rechten Stick; Flick-Stick richtet die Sicht sofort in die gedrückte Richtung aus, Drehen des Sticks dreht sie dann weiter
+it La mira 2D ruota la visuale in modo continuo con la levetta destra; il flick stick punta subito la visuale dove spingi la levetta, poi ruotarla fa girare la visuale
+es El apuntado 2D gira la vista de forma continua con la palanca derecha; el flick stick orienta la vista al instante hacia donde empujas la palanca y luego girarla la rota
+ru 2D-прицеливание плавно поворачивает обзор правым стиком; флик-стик сразу разворачивает обзор в сторону наклона стика, а вращение стика поворачивает его дальше
+
+@ 3D resolution relative to the window; the UI stays sharp
+fr Résolution 3D par rapport à la fenêtre ; l'interface reste nette
+de 3D-Auflösung relativ zum Fenster; die Oberfläche bleibt scharf
+it Risoluzione 3D rispetto alla finestra; l'interfaccia resta nitida
+es Resolución 3D respecto a la ventana; la interfaz se mantiene nítida
+ru 3D-разрешение относительно окна; интерфейс остаётся чётким
+
+@ 3D view keeps the HUD and menus sharp; whole screen runs them through the shader too
+fr Vue 3D garde l'ATH et les menus nets ; écran entier leur applique aussi le shader
+de 3D-Ansicht lässt HUD und Menüs scharf; ganzer Bildschirm schickt sie ebenfalls durch den Shader
+it Vista 3D mantiene nitidi interfaccia e menu; schermo intero applica lo shader anche a loro
+es Vista 3D mantiene nítidos la interfaz y los menús; pantalla completa también les aplica el sombreador
+ru 3D-вид оставляет интерфейс и меню чёткими; весь экран пропускает через шейдер и их
+
+@ A Quake III style railgun: a slug that pierces every enemy on its line, using 2 cells a shot and refiring every 1.5 s; select it through its assigned weapon slot (Add-ons)
+fr Un railgun façon Quake III : un projectile qui transperce tous les ennemis sur sa ligne, 2 cellules par tir et un tir toutes les 1,5 s ; sélectionnez-le via son emplacement d'arme (extensions)
+de Eine Railgun wie in Quake III: ein Geschoss, das jeden Gegner auf seiner Linie durchschlägt, 2 Zellen pro Schuss, alle 1,5 s schussbereit; über den zugewiesenen Waffenplatz wählen (Add-ons)
+it Un railgun in stile Quake III: un proiettile che trapassa ogni nemico sulla sua linea, 2 celle a colpo e un colpo ogni 1,5 s; selezionalo dal suo slot arma assegnato (add-on)
+es Un railgun al estilo de Quake III: un proyectil que atraviesa a todos los enemigos de su trayectoria, 2 celdas por disparo y un disparo cada 1,5 s; selecciónalo con su ranura de arma asignada (complementos)
+ru Рейлган в стиле Quake III: снаряд пробивает всех врагов на своей линии, тратит 2 ячейки за выстрел и перезаряжается 1,5 с; выбирается через назначенный слот оружия (дополнения)
+
+@ A Zelda-style hookshot: fire sends a chain hook out; it latches onto hookable surfaces or enemies and reels you in; fire again to let go
+fr Un grappin façon Zelda : le tir lance un crochet à chaîne qui s'accroche aux surfaces compatibles ou aux ennemis et vous y tire ; tirez à nouveau pour lâcher
+de Ein Enterhaken wie in Zelda: Feuer schleudert einen Kettenhaken, der sich an geeigneten Oberflächen oder Gegnern festhakt und dich heranzieht; erneut feuern lässt los
+it Un rampino in stile Zelda: il fuoco lancia un gancio a catena che si aggancia a superfici adatte o ai nemici e ti tira verso di essi; spara di nuovo per sganciarti
+es Un gancho al estilo de Zelda: disparar lanza un garfio con cadena que se engancha a superficies aptas o a enemigos y te atrae; vuelve a disparar para soltarte
+ru Крюк-кошка в стиле Zelda: выстрел бросает крюк на цепи, он цепляется за подходящие поверхности или врагов и подтягивает вас; повторный выстрел отпускает
+
+@ Also translates the engine's console messages; off keeps them in English
+fr Traduit aussi les messages de la console du moteur ; désactivé, ils restent en anglais
+de Übersetzt auch die Konsolenmeldungen der Engine; aus lässt sie auf Englisch
+it Traduce anche i messaggi della console del motore; se disattivato restano in inglese
+es Traduce también los mensajes de consola del motor; desactivado los deja en inglés
+ru Переводит и сообщения консоли движка; если выключено, они остаются на английском
+
+@ Automatically acquire another enemy while holding Lock-on after losing a target
+fr Acquiert automatiquement un autre ennemi en maintenant Verrouillage après la perte d'une cible
+de Erfasst automatisch einen anderen Gegner, solange Zielerfassung gehalten wird, nachdem ein Ziel verloren ging
+it Aggancia automaticamente un altro nemico tenendo premuto Aggancio dopo aver perso un bersaglio
+es Fija automáticamente otro enemigo al mantener Fijar objetivo tras perder un objetivo
+ru Автоматически захватывает другого врага, пока удерживается «Захват цели», после потери цели
+
+@ Blends between animation frames of monsters and weapons
+fr Fond les images d'animation des monstres et des armes
+de Überblendet die Animationsbilder von Monstern und Waffen
+it Fonde i fotogrammi d'animazione di mostri e armi
+es Mezcla los fotogramas de animación de monstruos y armas
+ru Сглаживает переходы между кадрами анимации монстров и оружия
+
+@ Blood stains surfaces and bodies; cosmetic, independent of particle packs
+fr Le sang tache les surfaces et les corps ; purement visuel, indépendant des packs de particules
+de Blut färbt Oberflächen und Körper; rein kosmetisch, unabhängig von Partikelpaketen
+it Il sangue macchia superfici e corpi; solo estetico, indipendente dai pacchetti di particelle
+es La sangre mancha superficies y cuerpos; solo estético, independiente de los paquetes de partículas
+ru Кровь пачкает поверхности и тела; только визуально, не зависит от пакетов частиц
+
+@ Bloom glow around bright lights and heat sources; medium uses 4 taps, high uses 8, low disables halo taps
+fr Halo lumineux autour des lumières vives et des sources de chaleur ; moyenne utilise 4 échantillons, élevée 8, faible désactive le halo
+de Bloom-Leuchten um helle Lichter und Wärmequellen; mittel nutzt 4 Abtastungen, hoch 8, niedrig schaltet den Halo ab
+it Bagliore bloom attorno a luci intense e fonti di calore; media usa 4 campioni, alta 8, bassa disattiva l'alone
+es Resplandor bloom alrededor de luces intensas y fuentes de calor; media usa 4 muestras, alta 8 y baja desactiva el halo
+ru Свечение вокруг ярких огней и источников тепла; среднее — 4 выборки, высокое — 8, низкое отключает ореол
+
+@ Blurs fast-moving monsters, projectiles and doors (not camera turns)
+fr Rend flous les monstres, projectiles et portes rapides (pas les rotations de caméra)
+de Verwischt schnelle Monster, Geschosse und Türen (nicht Kameradrehungen)
+it Sfoca mostri, proiettili e porte in rapido movimento (non le rotazioni della visuale)
+es Desenfoca monstruos, proyectiles y puertas rápidos (no los giros de cámara)
+ru Размывает быстро движущихся монстров, снаряды и двери (не повороты камеры)
+
+@ Blurs the screen edges during fast falls and launches; keeps the centre clear. Reduce Motion disables it
+fr Floute les bords de l'écran lors des chutes et propulsions rapides ; le centre reste net. Réduire les animations le désactive
+de Verwischt die Bildränder bei schnellen Stürzen und Starts; die Mitte bleibt klar. Bewegung reduzieren schaltet es ab
+it Sfoca i bordi dello schermo durante cadute e lanci rapidi; il centro resta nitido. Riduci il movimento lo disattiva
+es Desenfoca los bordes de la pantalla en caídas e impulsos rápidos; el centro queda nítido. Reducir movimiento lo desactiva
+ru Размывает края экрана при быстрых падениях и взлётах; центр остаётся чётким. «Уменьшить движение» отключает эффект
+
+@ Brightness of the underwater light patterns
+fr Luminosité des motifs lumineux sous l'eau
+de Helligkeit der Lichtmuster unter Wasser
+it Luminosità dei riflessi di luce sott'acqua
+es Brillo de los reflejos de luz bajo el agua
+ru Яркость световых узоров под водой
+
+@ Caps mark count, lifetime, airborne droplets and wound/gib painting; low skips enemy wounds and gib trails
+fr Limite le nombre et la durée des traces, les gouttes en vol et les taches de blessures et morceaux ; faible ignore les blessures ennemies et les traînées de morceaux
+de Begrenzt Spurenzahl, Lebensdauer, Tropfen in der Luft und Wund-/Fetzenflecken; niedrig lässt Gegnerwunden und Fetzenspuren weg
+it Limita numero e durata delle macchie, gocce in volo e macchie di ferite e brandelli; bassa salta ferite nemiche e scie dei brandelli
+es Limita el número y la duración de las marcas, las gotas en el aire y las manchas de heridas y despojos; baja omite heridas enemigas y rastros de despojos
+ru Ограничивает число и время жизни следов, капли в воздухе и пятна от ран и ошмётков; низкое отключает раны врагов и следы ошмётков
+
+@ Caps shader input at output size so 200% render scale keeps 3D sharpness without 4x shader cost; low scales stay low-res
+fr Limite l'entrée du shader à la taille de sortie : une échelle de rendu de 200 % garde la netteté 3D sans quadrupler le coût du shader ; les petites échelles restent en basse résolution
+de Begrenzt die Shader-Eingabe auf die Ausgabegröße, sodass 200 % Renderskalierung die 3D-Schärfe ohne vierfache Shader-Kosten behält; kleine Skalierungen bleiben niedrig aufgelöst
+it Limita l'ingresso dello shader alla dimensione di uscita, così una scala di rendering del 200% mantiene la nitidezza 3D senza quadruplicare il costo; le scale basse restano a bassa risoluzione
+es Limita la entrada del sombreador al tamaño de salida, así una escala de renderizado del 200 % mantiene la nitidez 3D sin cuadruplicar su coste; las escalas bajas siguen en baja resolución
+ru Ограничивает вход шейдера размером вывода: масштаб рендеринга 200% сохраняет чёткость 3D без четырёхкратной нагрузки; малые масштабы остаются в низком разрешении
+
+@ Classic: the original status bar; modern: compact elements at the screen edges
+fr Classique : la barre d'état d'origine ; moderne : éléments compacts sur les bords de l'écran
+de Klassisch: die originale Statusleiste; modern: kompakte Elemente an den Bildrändern
+it Classico: la barra di stato originale; moderno: elementi compatti ai bordi dello schermo
+es Clásico: la barra de estado original; moderno: elementos compactos en los bordes de la pantalla
+ru Классический: исходная строка состояния; современный: компактные элементы по краям экрана
+
+@ Coat atlas resolution, rebuild rate and shader detail: low builds smaller coats less often with fast shading; high uses full detail
+fr Résolution de l'atlas des couches, fréquence de reconstruction et détail du shader : faible crée des couches plus petites moins souvent avec un ombrage rapide ; élevée utilise tout le détail
+de Auflösung des Beschichtungsatlas, Neuaufbaurate und Shader-Detail: niedrig baut kleinere Schichten seltener mit schneller Schattierung; hoch nutzt volle Details
+it Risoluzione dell'atlante degli strati, frequenza di ricostruzione e dettaglio dello shader: bassa crea strati più piccoli meno spesso con ombreggiatura veloce; alta usa il dettaglio completo
+es Resolución del atlas de capas, frecuencia de reconstrucción y detalle del sombreador: baja crea capas más pequeñas con menos frecuencia y sombreado rápido; alta usa todo el detalle
+ru Разрешение атласа покрытия, частота перестроения и детализация шейдера: низкое строит меньшие покрытия реже и с быстрым затенением; высокое — полная детализация
+
+@ Colour of the railgun's spiral trail; split-screen players each get the next colour along
+fr Couleur de la traînée en spirale du railgun ; en écran partagé, chaque joueur prend la couleur suivante
+de Farbe der Spiralspur der Railgun; im Splitscreen erhält jeder Spieler die nächste Farbe
+it Colore della scia a spirale del railgun; a schermo diviso ogni giocatore riceve il colore successivo
+es Color de la estela en espiral del railgun; en pantalla dividida cada jugador recibe el color siguiente
+ru Цвет спирального следа рейлгана; на разделённом экране каждый игрок получает следующий цвет
+
+@ Damage the railgun deals to each enemy it passes through (Quake III: 100)
+fr Dégâts infligés par le railgun à chaque ennemi traversé (Quake III : 100)
+de Schaden der Railgun an jedem durchschlagenen Gegner (Quake III: 100)
+it Danni del railgun a ogni nemico trapassato (Quake III: 100)
+es Daño que inflige el railgun a cada enemigo que atraviesa (Quake III: 100)
+ru Урон рейлгана каждому пробитому врагу (Quake III: 100)
+
+@ Dark backdrop behind on-screen messages for readability
+fr Fond sombre derrière les messages à l'écran pour la lisibilité
+de Dunkler Hintergrund hinter Bildschirmnachrichten für bessere Lesbarkeit
+it Sfondo scuro dietro i messaggi su schermo per la leggibilità
+es Fondo oscuro tras los mensajes en pantalla para leerlos mejor
+ru Тёмная подложка под экранными сообщениями для читаемости
+
+@ Dark border keeps the crosshair visible on any background
+fr Un contour sombre garde le réticule visible sur tout fond
+de Ein dunkler Rand hält das Fadenkreuz auf jedem Hintergrund sichtbar
+it Un bordo scuro mantiene il mirino visibile su qualsiasi sfondo
+es Un borde oscuro mantiene visible el punto de mira sobre cualquier fondo
+ru Тёмная обводка делает прицел видимым на любом фоне
+
+@ Darkens corners and contact areas where geometry meets; higher quality is sharper
+fr Assombrit les coins et les zones de contact entre les géométries ; une qualité supérieure est plus nette
+de Verdunkelt Ecken und Kontaktstellen, wo Geometrie aufeinandertrifft; höhere Qualität ist schärfer
+it Scurisce angoli e zone di contatto tra le geometrie; una qualità più alta è più nitida
+es Oscurece esquinas y zonas de contacto entre geometrías; una calidad mayor es más nítida
+ru Затемняет углы и места соприкосновения геометрии; более высокое качество — чётче
+
+@ Debris lands on and is carried or shoved by doors, lifts and platforms
+fr Les débris se posent sur les portes, ascenseurs et plateformes, qui les portent ou les poussent
+de Trümmer landen auf Türen, Aufzügen und Plattformen und werden von ihnen getragen oder geschoben
+it I detriti si posano su porte, ascensori e piattaforme, che li trasportano o li spingono
+es Los escombros caen sobre puertas, ascensores y plataformas, que los transportan o empujan
+ru Обломки падают на двери, лифты и платформы, а те их везут или сталкивают
+
+@ Detail for caustics, ripples and splashes: low uses smaller budgets and shorter view distance; high uses larger budgets and farther view distance
+fr Détail des caustiques, ondulations et éclaboussures : faible utilise des budgets réduits et une distance de vue courte ; élevée des budgets plus larges et une distance plus grande
+de Detail für Kaustiken, Wellen und Spritzer: niedrig nutzt kleinere Budgets und kürzere Sichtweite; hoch größere Budgets und weitere Sichtweite
+it Dettaglio di caustiche, increspature e spruzzi: bassa usa budget ridotti e distanza visiva minore; alta budget maggiori e distanza visiva superiore
+es Detalle de cáusticas, ondas y salpicaduras: baja usa presupuestos menores y menor distancia de visión; alta, presupuestos mayores y más distancia de visión
+ru Детализация каустики, ряби и брызг: низкое — меньшие бюджеты и дальность видимости; высокое — большие бюджеты и дальность
+
+@ Disabled while Enhanced Particles is on: its particles replace the GLQuake and Classic styles
+fr Désactivé quand Particules améliorées est actif : ses particules remplacent les styles GLQuake et classique
+de Deaktiviert, solange Verbesserte Partikel an ist: deren Partikel ersetzen die Stile GLQuake und klassisch
+it Disattivato con Particelle migliorate attivo: le sue particelle sostituiscono gli stili GLQuake e classico
+es Desactivado mientras Partículas mejoradas está activo: sus partículas sustituyen los estilos GLQuake y clásico
+ru Недоступно при включённых «Улучшенных частицах»: их частицы заменяют стили GLQuake и классический
+
+@ Disabled while Enhanced Water is on: its own underwater effects replace the classic and GLQuake view warps
+fr Désactivé quand Eau améliorée est actif : ses propres effets sous-marins remplacent les déformations classique et GLQuake
+de Deaktiviert, solange Verbessertes Wasser an ist: dessen Unterwassereffekte ersetzen die klassische und die GLQuake-Verzerrung
+it Disattivato con Acqua migliorata attiva: i suoi effetti subacquei sostituiscono le distorsioni classica e GLQuake
+es Desactivado mientras Agua mejorada está activa: sus efectos bajo el agua sustituyen las distorsiones clásica y GLQuake
+ru Недоступно при включённой «Улучшенной воде»: её подводные эффекты заменяют классическое искажение и искажение GLQuake
+
+@ Draw the predicted grenade path as a solid or dashed line
+fr Dessine la trajectoire prévue de la grenade en trait plein ou en pointillés
+de Zeichnet die vorhergesagte Granatenflugbahn als durchgezogene oder gestrichelte Linie
+it Disegna il percorso previsto della granata con una linea continua o tratteggiata
+es Dibuja la trayectoria prevista de la granada con línea continua o discontinua
+ru Рисует предсказанную траекторию гранаты сплошной или пунктирной линией
+
+@ Draw the view out of the linked portal inside each portal; off shows flat discs (fastest)
+fr Affiche dans chaque portail la vue du portail lié ; désactivé montre des disques plats (le plus rapide)
+de Zeigt in jedem Portal die Sicht aus dem verbundenen Portal; aus zeigt flache Scheiben (am schnellsten)
+it Mostra in ogni portale la vista dal portale collegato; disattivato mostra dischi piatti (più veloce)
+es Muestra en cada portal la vista desde el portal enlazado; desactivado muestra discos planos (lo más rápido)
+ru Показывает в каждом портале вид из связанного портала; выкл. — плоские диски (быстрее всего)
+
+@ Droplets spray up when things enter or leave water, slime or lava
+fr Des gouttes jaillissent quand quelque chose entre dans l'eau, la boue toxique ou la lave, ou en sort
+de Tropfen spritzen, wenn etwas in Wasser, Schleim oder Lava eintaucht oder es verlässt
+it Gocce schizzano quando qualcosa entra o esce da acqua, melma o lava
+es Saltan gotas cuando algo entra o sale del agua, el limo o la lava
+ru Брызги взлетают, когда что-то входит в воду, слизь или лаву либо выходит из них
+
+@ Emulates the original 8-bit palette of software rendering
+fr Émule la palette 8 bits d'origine du rendu logiciel
+de Emuliert die originale 8-Bit-Palette des Software-Renderings
+it Emula la tavolozza a 8 bit originale del rendering software
+es Emula la paleta de 8 bits original del renderizado por software
+ru Имитирует исходную 8-битную палитру программного рендеринга
+
+@ Every level starts with only the shotgun and axe, as if started fresh
+fr Chaque niveau commence avec seulement le fusil et la hache, comme un nouveau départ
+de Jedes Level beginnt nur mit Schrotflinte und Axt, wie bei einem Neustart
+it Ogni livello inizia solo con fucile e ascia, come se partissi da zero
+es Cada nivel empieza solo con la escopeta y el hacha, como si empezaras de cero
+ru Каждый уровень начинается только с дробовиком и топором, как с нуля
+
+@ Explosion damage for each remotely detonated sticky bomb
+fr Dégâts d'explosion de chaque bombe collante déclenchée à distance
+de Explosionsschaden jeder ferngezündeten Haftbombe
+it Danni da esplosione di ogni bomba adesiva fatta detonare a distanza
+es Daño de explosión de cada bomba adhesiva detonada a distancia
+ru Урон от взрыва каждой липкой бомбы, подорванной дистанционно
+
+@ Extra freeze milliseconds for every 10 damage dealt, so heavy hits stop longer
+fr Millisecondes de gel en plus pour chaque tranche de 10 dégâts : les gros coups figent plus longtemps
+de Zusätzliche Einfrier-Millisekunden je 10 Schaden, damit schwere Treffer länger anhalten
+it Millisecondi di blocco in più ogni 10 danni inflitti, così i colpi pesanti fermano più a lungo
+es Milisegundos extra de congelación por cada 10 de daño, para que los golpes fuertes paren más
+ru Дополнительные миллисекунды стоп-кадра за каждые 10 урона: сильные удары останавливают дольше
+
+@ First person, a third-person camera centered behind the player, or one over the right or left shoulder; third person hides viewmodels
+fr Première personne, caméra à la troisième personne centrée derrière le joueur, ou au-dessus de l'épaule droite ou gauche ; la troisième personne masque l'arme en main
+de Egoperspektive, eine Verfolgerkamera mittig hinter dem Spieler oder eine über der rechten oder linken Schulter; die Verfolgerperspektive blendet Waffenmodelle aus
+it Prima persona, telecamera in terza persona centrata dietro il giocatore o sopra la spalla destra o sinistra; la terza persona nasconde i modelli dell'arma
+es Primera persona, cámara en tercera persona centrada tras el jugador, o sobre el hombro derecho o izquierdo; la tercera persona oculta los modelos del arma
+ru От первого лица, камера от третьего лица за спиной игрока или из-за правого или левого плеча; от третьего лица модель оружия скрыта
+
+@ Flash the selected marker on confirmed hits; colors are shared with the crosshair
+fr Fait clignoter le marqueur choisi lors des touches confirmées ; les couleurs sont partagées avec le réticule
+de Lässt die gewählte Anzeige bei bestätigten Treffern aufblitzen; Farben werden mit dem Fadenkreuz geteilt
+it Fa lampeggiare l'indicatore scelto sui colpi confermati; i colori sono condivisi con il mirino
+es Hace destellar el marcador elegido en impactos confirmados; los colores se comparten con el punto de mira
+ru Мигает выбранным маркером при подтверждённых попаданиях; цвета общие с прицелом
+
+@ Freeze for every enemy, or only for enemies that were tough before the hit
+fr Gel pour tous les ennemis, ou seulement pour ceux qui étaient coriaces avant le coup
+de Einfrieren bei jedem Gegner oder nur bei Gegnern, die vor dem Treffer zäh waren
+it Blocco per ogni nemico, o solo per quelli che erano resistenti prima del colpo
+es Congelar con todos los enemigos o solo con los que eran duros antes del golpe
+ru Стоп-кадр для всех врагов или только для тех, кто был крепким до удара
+
+@ Freeze the game briefly when you damage an enemy; single player with add-ons only
+fr Fige brièvement le jeu quand vous blessez un ennemi ; solo avec extensions uniquement
+de Friert das Spiel kurz ein, wenn du einen Gegner verletzt; nur Einzelspieler mit Add-ons
+it Blocca brevemente il gioco quando ferisci un nemico; solo giocatore singolo con add-on
+es Congela brevemente el juego al dañar a un enemigo; solo un jugador con complementos
+ru Ненадолго замораживает игру при ранении врага; только одиночная игра с дополнениями
+
+@ Gibs tumble and barrels throw shrapnel; shots and blasts push them (cosmetic only)
+fr Les morceaux roulent et les barils projettent des éclats ; tirs et explosions les poussent (purement visuel)
+de Fleischfetzen rollen und Fässer schleudern Splitter; Schüsse und Explosionen stoßen sie an (rein kosmetisch)
+it I brandelli rotolano e i barili scagliano schegge; colpi ed esplosioni li spingono (solo estetico)
+es Los despojos ruedan y los barriles lanzan metralla; disparos y explosiones los empujan (solo estético)
+ru Ошмётки кувыркаются, бочки разбрасывают шрапнель; выстрелы и взрывы толкают их (только визуально)
+
+@ Health an enemy must have had before the hit to count as tough
+fr Santé qu'un ennemi doit avoir avant le coup pour être considéré comme coriace
+de Gesundheit, die ein Gegner vor dem Treffer haben muss, um als zäh zu gelten
+it Salute che un nemico deve avere prima del colpo per essere considerato resistente
+es Salud que debe tener un enemigo antes del golpe para contar como duro
+ru Здоровье, которое должно быть у врага до удара, чтобы он считался крепким
+
+@ Hits dealing less damage than this do not freeze the game; the default 10 skips nails and shotgun pellets
+fr Les coups infligeant moins de dégâts ne figent pas le jeu ; la valeur par défaut de 10 ignore les clous et les plombs
+de Treffer mit weniger Schaden frieren das Spiel nicht ein; der Standardwert 10 überspringt Nägel und Schrotkugeln
+it I colpi con danni inferiori non bloccano il gioco; il valore predefinito 10 ignora chiodi e pallini
+es Los golpes con menos daño no congelan el juego; el valor predeterminado de 10 omite clavos y perdigones
+ru Удары слабее этого не замораживают игру; значение по умолчанию 10 пропускает гвозди и дробь
+
+@ Hold fire and sweep the crosshair over monsters to queue them, release to throw: it stuns each in turn and flies back; alt-fire clears the queue
+fr Maintenez le tir et balayez les monstres avec le réticule pour les mettre en file, relâchez pour lancer : il étourdit chacun tour à tour et revient ; le tir secondaire vide la file
+de Feuer halten und das Fadenkreuz über Monster ziehen, um sie vorzumerken, loslassen zum Werfen: er betäubt jeden nacheinander und fliegt zurück; Alternativfeuer leert die Liste
+it Tieni premuto il fuoco e passa il mirino sui mostri per metterli in coda, rilascia per lanciare: li stordisce uno dopo l'altro e torna indietro; il fuoco secondario svuota la coda
+es Mantén el disparo y pasa el punto de mira por los monstruos para ponerlos en cola, suelta para lanzar: aturde a cada uno por turnos y vuelve; el disparo secundario vacía la cola
+ru Удерживайте огонь и проведите прицелом по монстрам, чтобы поставить их в очередь, отпустите для броска: бумеранг оглушит каждого по очереди и вернётся; альт. огонь очищает очередь
+
+@ Hold: keep Lock-on held. Toggle: press Auto-aim Toggle to enable automatic acquisition. Click look stick to switch targets
+fr Maintenir : gardez Verrouillage enfoncé. Bascule : appuyez sur Visée auto (bascule) pour activer l'acquisition automatique. Cliquez le stick de vue pour changer de cible
+de Halten: Zielerfassung gedrückt halten. Umschalten: Auto-Zielen umschalten drücken, um automatische Erfassung zu aktivieren. Blick-Stick klicken, um Ziele zu wechseln
+it Tieni premuto: tieni premuto Aggancio. Commutazione: premi Mira automatica (commutazione) per attivare l'aggancio automatico. Premi la levetta della visuale per cambiare bersaglio
+es Mantener: mantén pulsado Fijar objetivo. Alterno: pulsa Apuntado automático (alterno) para activar la fijación automática. Pulsa la palanca de vista para cambiar de objetivo
+ru Удержание: держите «Захват цели». Переключение: нажмите «Автоприцел (переключение)» для автоматического захвата. Нажатие стика обзора меняет цель
+
+@ How close an enemy must be to the crosshair for automatic acquisition in toggle mode (degrees)
+fr Distance au réticule à laquelle un ennemi est acquis automatiquement en mode bascule (degrés)
+de Wie nah ein Gegner am Fadenkreuz sein muss, um im Umschaltmodus automatisch erfasst zu werden (Grad)
+it Quanto un nemico deve essere vicino al mirino per l'aggancio automatico in modalità commutazione (gradi)
+es Lo cerca que debe estar un enemigo del punto de mira para fijarlo automáticamente en modo alterno (grados)
+ru Насколько близко к прицелу должен быть враг для автозахвата в режиме переключения (градусы)
+
+@ How far the view tilts up and down when you tilt the controller (pitch axis)
+fr Amplitude de l'inclinaison verticale de la vue quand vous inclinez la manette (axe de tangage)
+de Wie weit sich die Sicht nach oben und unten neigt, wenn du den Controller kippst (Nickachse)
+it Quanto la visuale si inclina in alto e in basso quando inclini il controller (asse di beccheggio)
+es Cuánto se inclina la vista arriba y abajo al inclinar el mando (eje de cabeceo)
+ru Насколько обзор наклоняется вверх и вниз при наклоне геймпада (ось тангажа)
+
+@ How far the view turns left and right when you turn the controller (yaw axis)
+fr Amplitude de la rotation horizontale de la vue quand vous tournez la manette (axe de lacet)
+de Wie weit sich die Sicht nach links und rechts dreht, wenn du den Controller drehst (Gierachse)
+it Quanto la visuale ruota a sinistra e a destra quando ruoti il controller (asse di imbardata)
+es Cuánto gira la vista a izquierda y derecha al girar el mando (eje de guiñada)
+ru Насколько обзор поворачивается влево и вправо при повороте геймпада (ось рыскания)
+
+@ How far the view turns when you drag on the right half of the screen
+fr Amplitude de rotation de la vue quand vous glissez sur la moitié droite de l'écran
+de Wie weit sich die Sicht dreht, wenn du auf der rechten Bildschirmhälfte ziehst
+it Quanto ruota la visuale quando trascini sulla metà destra dello schermo
+es Cuánto gira la vista al arrastrar en la mitad derecha de la pantalla
+ru Насколько поворачивается обзор при движении пальцем по правой половине экрана
+
+@ How fast the boomerang flies (units per second)
+fr Vitesse de vol du boomerang (unités par seconde)
+de Wie schnell der Bumerang fliegt (Einheiten pro Sekunde)
+it Velocità di volo del boomerang (unità al secondo)
+es Velocidad de vuelo del bumerán (unidades por segundo)
+ru Скорость полёта бумеранга (единиц в секунду)
+
+@ How hard shots and explosions push debris around
+fr Force avec laquelle tirs et explosions poussent les débris
+de Wie stark Schüsse und Explosionen Trümmer herumschleudern
+it Quanto forte colpi ed esplosioni spingono i detriti
+es Con qué fuerza los disparos y explosiones empujan los escombros
+ru Насколько сильно выстрелы и взрывы раскидывают обломки
+
+@ How hard the Powerwasher's water pushes enemies
+fr Force avec laquelle l'eau du nettoyeur haute pression pousse les ennemis
+de Wie stark das Wasser des Hochdruckreinigers Gegner wegdrückt
+it Quanto forte l'acqua dell'idropulitrice spinge i nemici
+es Con qué fuerza el agua de la hidrolimpiadora empuja a los enemigos
+ru Насколько сильно вода мойки высокого давления отталкивает врагов
+
+@ How long a hit freezes the game, in milliseconds
+fr Durée pendant laquelle un coup fige le jeu, en millisecondes
+de Wie lange ein Treffer das Spiel einfriert, in Millisekunden
+it Quanto a lungo un colpo blocca il gioco, in millisecondi
+es Cuánto tiempo congela el juego un golpe, en milisegundos
+ru Сколько миллисекунд длится стоп-кадр от удара
+
+@ How strongly fog covers the sky when fog is on
+fr Intensité du brouillard sur le ciel quand le brouillard est actif
+de Wie stark der Nebel den Himmel verdeckt, wenn Nebel an ist
+it Quanto la nebbia copre il cielo quando è attiva
+es Cuánto cubre la niebla el cielo cuando está activada
+ru Насколько туман закрывает небо, когда туман включён
+
+@ How the view distorts underwater: Classic ripples the whole screen like software Quake, GLQuake slowly stretches and squashes the view
+fr Déformation de la vue sous l'eau : classique fait onduler tout l'écran comme Quake en rendu logiciel, GLQuake étire et écrase lentement la vue
+de Wie sich die Sicht unter Wasser verzerrt: klassisch lässt den ganzen Bildschirm wellen wie Software-Quake, GLQuake dehnt und staucht die Sicht langsam
+it Come si distorce la visuale sott'acqua: classico increspa tutto lo schermo come Quake software, GLQuake allunga e schiaccia lentamente la visuale
+es Cómo se distorsiona la vista bajo el agua: clásico ondula toda la pantalla como Quake por software, GLQuake estira y aplasta la vista lentamente
+ru Как искажается обзор под водой: классический колышет весь экран, как программный Quake, GLQuake медленно растягивает и сжимает картинку
+
+@ Ignores gyro rotation slower than this many degrees per second, to hide hand tremor
+fr Ignore les rotations du gyroscope plus lentes que ce nombre de degrés par seconde, pour masquer les tremblements
+de Ignoriert Gyro-Drehungen langsamer als so viele Grad pro Sekunde, um Handzittern auszublenden
+it Ignora le rotazioni del giroscopio più lente di questi gradi al secondo, per nascondere il tremolio della mano
+es Ignora las rotaciones del giroscopio más lentas que estos grados por segundo, para ocultar el temblor de la mano
+ru Игнорирует вращение гироскопа медленнее этого числа градусов в секунду, чтобы скрыть дрожание рук
+
+@ Immersive: appears for a few seconds only when its value changes
+fr Immersif : n'apparaît que quelques secondes quand sa valeur change
+de Immersiv: erscheint nur für ein paar Sekunden, wenn sich der Wert ändert
+it Immersivo: appare per pochi secondi solo quando il suo valore cambia
+es Inmersivo: aparece unos segundos solo cuando cambia su valor
+ru Погружение: появляется на несколько секунд только при изменении значения
+
+@ Keeps textures sharp on floors and walls seen at steep angles
+fr Garde les textures nettes sur les sols et murs vus en angle rasant
+de Hält Texturen auf Böden und Wänden in steilem Blickwinkel scharf
+it Mantiene nitide le texture di pavimenti e pareti viste di sbieco
+es Mantiene nítidas las texturas de suelos y paredes vistas en ángulos muy inclinados
+ru Сохраняет чёткость текстур полов и стен, видимых под острым углом
+
+@ Lights from rockets, muzzle flashes and explosions brighten nearby walls
+fr Les lumières des roquettes, des tirs et des explosions éclairent les murs proches
+de Licht von Raketen, Mündungsfeuer und Explosionen erhellt nahe Wände
+it Le luci di razzi, vampate e esplosioni illuminano le pareti vicine
+es Las luces de cohetes, fogonazos y explosiones iluminan las paredes cercanas
+ru Свет ракет, вспышек выстрелов и взрывов освещает ближайшие стены
+
+@ Liquid surfaces swell and ring out where things move through them
+fr Les surfaces liquides ondulent et forment des cercles là où quelque chose les traverse
+de Flüssigkeitsoberflächen wogen und bilden Ringe, wo sich etwas hindurchbewegt
+it Le superfici liquide si gonfiano e formano cerchi dove qualcosa le attraversa
+es Las superficies líquidas se agitan y forman anillos donde algo las atraviesa
+ru Поверхность жидкости вздымается и расходится кругами там, где сквозь неё что-то движется
+
+@ Lobs sticky bombs (rockets ammo) that cling to walls, doors and monsters; alt-fire detonates them all
+fr Lance des bombes collantes (munitions de roquettes) qui adhèrent aux murs, portes et monstres ; le tir secondaire les fait toutes exploser
+de Wirft Haftbomben (Raketenmunition), die an Wänden, Türen und Monstern kleben; Alternativfeuer zündet sie alle
+it Lancia bombe adesive (munizioni dei razzi) che si attaccano a pareti, porte e mostri; il fuoco secondario le fa esplodere tutte
+es Lanza bombas adhesivas (munición de cohetes) que se pegan a paredes, puertas y monstruos; el disparo secundario las detona todas
+ru Бросает липкие бомбы (ракетный боезапас), которые прилипают к стенам, дверям и монстрам; альт. огонь подрывает их все
+
+@ Look of the classic particles: GLQuake draws soft round dots, Classic draws square pixels like software Quake
+fr Aspect des particules classiques : GLQuake dessine des points ronds et doux, classique des pixels carrés comme Quake en rendu logiciel
+de Aussehen der klassischen Partikel: GLQuake zeichnet weiche runde Punkte, klassisch quadratische Pixel wie Software-Quake
+it Aspetto delle particelle classiche: GLQuake disegna punti tondi e morbidi, classico pixel quadrati come Quake software
+es Aspecto de las partículas clásicas: GLQuake dibuja puntos redondos y suaves; clásico, píxeles cuadrados como Quake por software
+ru Вид классических частиц: GLQuake рисует мягкие круглые точки, классический — квадратные пиксели, как программный Quake
+
+@ Low skips the background smear halo and uses fewer blur samples; high keeps the full halo and smoother streaks
+fr Faible supprime le halo de traînée d'arrière-plan et utilise moins d'échantillons ; élevée garde tout le halo et des traînées plus douces
+de Niedrig lässt den Hintergrund-Schmierhalo weg und nutzt weniger Unschärfe-Abtastungen; hoch behält den vollen Halo und weichere Schlieren
+it Bassa elimina l'alone di sbavatura dello sfondo e usa meno campioni; alta mantiene l'alone completo e scie più morbide
+es Baja omite el halo de arrastre del fondo y usa menos muestras; alta mantiene el halo completo y estelas más suaves
+ru Низкое убирает фоновый ореол смаза и использует меньше выборок; высокое сохраняет полный ореол и более плавные следы
+
+@ Low: hard particle edges, half the scripted particles and fewer hit sparks. Medium: soft edges. High: soft edges checked per MSAA sample, most hit sparks
+fr Faible : bords nets, moitié moins de particules scriptées et moins d'étincelles. Moyenne : bords doux. Élevée : bords doux vérifiés par échantillon MSAA, presque toutes les étincelles
+de Niedrig: harte Partikelkanten, halb so viele skriptgesteuerte Partikel und weniger Treffer-Funken. Mittel: weiche Kanten. Hoch: weiche Kanten pro MSAA-Abtastung, fast alle Funken
+it Bassa: bordi netti, metà delle particelle scriptate e meno scintille d'impatto. Media: bordi morbidi. Alta: bordi morbidi verificati per campione MSAA, quasi tutte le scintille
+es Baja: bordes duros, la mitad de las partículas programadas y menos chispas. Media: bordes suaves. Alta: bordes suaves comprobados por muestra MSAA, casi todas las chispas
+ru Низкое: жёсткие края частиц, вдвое меньше скриптовых частиц и меньше искр. Среднее: мягкие края. Высокое: мягкие края по каждой выборке MSAA, почти все искры
+
+@ Marks fade out before expiring; oldest marks are recycled at the limit
+fr Les traces s'estompent avant de disparaître ; les plus anciennes sont recyclées à la limite
+de Spuren verblassen, bevor sie verschwinden; die ältesten werden am Limit wiederverwendet
+it I segni sfumano prima di sparire; i più vecchi vengono riciclati al limite
+es Las marcas se desvanecen antes de desaparecer; las más antiguas se reutilizan al llegar al límite
+ru Следы тускнеют перед исчезновением; при достижении лимита старые заменяются
+
+@ Max nested portal reflections to draw; each level redraws the scene
+fr Nombre maximal de portails imbriqués à afficher ; chaque niveau redessine la scène
+de Maximal gezeichnete verschachtelte Portalansichten; jede Ebene zeichnet die Szene neu
+it Massimo di portali annidati da disegnare; ogni livello ridisegna la scena
+es Máximo de portales anidados que dibujar; cada nivel vuelve a dibujar la escena
+ru Максимум вложенных отражений порталов; каждый уровень перерисовывает сцену
+
+@ Max portals per screen with a live view; each one redraws the scene
+fr Nombre maximal de portails par écran avec vue en direct ; chacun redessine la scène
+de Maximale Portale pro Bildschirm mit Live-Ansicht; jedes zeichnet die Szene neu
+it Massimo di portali per schermo con vista in tempo reale; ognuno ridisegna la scena
+es Máximo de portales por pantalla con vista en directo; cada uno vuelve a dibujar la escena
+ru Максимум порталов с живым видом на экране; каждый перерисовывает сцену
+
+@ Maximum distance for acquiring and keeping an enemy locked
+fr Distance maximale pour acquérir et garder un ennemi verrouillé
+de Maximale Entfernung, um einen Gegner zu erfassen und zu halten
+it Distanza massima per agganciare e mantenere un nemico
+es Distancia máxima para fijar y mantener fijado a un enemigo
+ru Максимальная дистанция захвата и удержания врага
+
+@ Minimum gap between freezes, so shotgun pellets and rapid fire count once; kills ignore it
+fr Intervalle minimal entre deux gels, pour que les plombs et le tir rapide ne comptent qu'une fois ; les éliminations l'ignorent
+de Mindestabstand zwischen Einfrierungen, damit Schrot und Dauerfeuer nur einmal zählen; Abschüsse ignorieren ihn
+it Intervallo minimo tra i blocchi, così pallini e fuoco rapido contano una volta; le uccisioni lo ignorano
+es Intervalo mínimo entre congelaciones, para que los perdigones y el fuego rápido cuenten una vez; las bajas lo ignoran
+ru Минимальный интервал между стоп-кадрами, чтобы дробь и быстрая стрельба считались один раз; убийства его игнорируют
+
+@ Modern terminal console with autocomplete popup, history search, ANSI colors, bash shell and piping; off uses the classic Quake console
+fr Console moderne de type terminal avec autocomplétion, recherche dans l'historique, couleurs ANSI, shell bash et redirections ; désactivé utilise la console Quake classique
+de Moderne Terminal-Konsole mit Autovervollständigung, Verlaufssuche, ANSI-Farben, Bash-Shell und Pipes; aus nutzt die klassische Quake-Konsole
+it Console moderna in stile terminale con completamento automatico, ricerca nella cronologia, colori ANSI, shell bash e pipe; disattivato usa la console classica di Quake
+es Consola moderna tipo terminal con autocompletado, búsqueda en el historial, colores ANSI, shell bash y tuberías; desactivado usa la consola clásica de Quake
+ru Современная консоль-терминал с автодополнением, поиском по истории, цветами ANSI, оболочкой bash и конвейерами; выкл. — классическая консоль Quake
+
+@ Monsters take proportionally less damage at higher values; above 100% is harder
+fr Les monstres subissent proportionnellement moins de dégâts aux valeurs élevées ; au-delà de 100 %, c'est plus difficile
+de Monster erleiden bei höheren Werten anteilig weniger Schaden; über 100 % ist schwerer
+it I mostri subiscono proporzionalmente meno danni a valori alti; oltre il 100% è più difficile
+es Los monstruos reciben proporcionalmente menos daño con valores altos; por encima del 100 % es más difícil
+ru При больших значениях монстры получают пропорционально меньше урона; выше 100% — сложнее
+
+@ Moving gibs leave blood on surfaces they touch
+fr Les morceaux en mouvement laissent du sang sur les surfaces touchées
+de Bewegte Fleischfetzen hinterlassen Blut auf berührten Oberflächen
+it I brandelli in movimento lasciano sangue sulle superfici che toccano
+es Los despojos en movimiento dejan sangre en las superficies que tocan
+ru Летящие ошмётки оставляют кровь на поверхностях, которых касаются
+
+@ Multiplier on the freeze when the hit kills the enemy; 1 means no extra
+fr Multiplicateur du gel quand le coup tue l'ennemi ; 1 signifie aucun bonus
+de Multiplikator für das Einfrieren, wenn der Treffer den Gegner tötet; 1 bedeutet kein Zusatz
+it Moltiplicatore del blocco quando il colpo uccide il nemico; 1 significa nessun extra
+es Multiplicador de la congelación cuando el golpe mata al enemigo; 1 significa sin extra
+ru Множитель стоп-кадра, если удар убивает врага; 1 — без добавки
+
+@ Multiplies ammo from pickups (up to the normal carry limit); below 100% is harder
+fr Multiplie les munitions ramassées (jusqu'à la limite normale) ; en dessous de 100 %, c'est plus difficile
+de Vervielfacht Munition aus Funden (bis zum normalen Tragelimit); unter 100 % ist schwerer
+it Moltiplica le munizioni raccolte (fino al limite normale); sotto il 100% è più difficile
+es Multiplica la munición recogida (hasta el límite normal); por debajo del 100 % es más difícil
+ru Умножает подбираемые боеприпасы (до обычного предела); ниже 100% — сложнее
+
+@ Multiplies health from pickups (up to 100, or the item's own limit); below 100% is harder
+fr Multiplie la santé ramassée (jusqu'à 100, ou la limite propre de l'objet) ; en dessous de 100 %, c'est plus difficile
+de Vervielfacht Gesundheit aus Funden (bis 100 oder zum Limit des Gegenstands); unter 100 % ist schwerer
+it Moltiplica la salute raccolta (fino a 100, o al limite dell'oggetto); sotto il 100% è più difficile
+es Multiplica la salud recogida (hasta 100 o el límite propio del objeto); por debajo del 100 % es más difícil
+ru Умножает подбираемое здоровье (до 100 или до предела предмета); ниже 100% — сложнее
+
+@ Nails stick to wood and bodies; hard surfaces deflect them to the floor
+fr Les clous se plantent dans le bois et les corps ; les surfaces dures les dévient vers le sol
+de Nägel bleiben in Holz und Körpern stecken; harte Oberflächen lenken sie zu Boden ab
+it I chiodi si conficcano nel legno e nei corpi; le superfici dure li deviano a terra
+es Los clavos se clavan en la madera y los cuerpos; las superficies duras los desvían al suelo
+ru Гвозди застревают в дереве и телах; твёрдые поверхности отклоняют их на пол
+
+@ Nearest keeps crisp classic pixels; linear smooths textures
+fr Au plus proche garde des pixels classiques nets ; linéaire lisse les textures
+de Nächster Nachbar behält klare klassische Pixel; linear glättet Texturen
+it Più vicino mantiene pixel classici nitidi; lineare ammorbidisce le texture
+es Más cercano mantiene píxeles clásicos nítidos; lineal suaviza las texturas
+ru Ближайший сохраняет чёткие классические пиксели; линейная сглаживает текстуры
+
+@ New Game: Add-ons
+fr Nouvelle partie : extensions
+de Neues Spiel: Add-ons
+it Nuova partita: add-on
+es Nueva partida: complementos
+ru Новая игра: дополнения
+
+@ New Game: Customize
+fr Nouvelle partie : personnaliser
+de Neues Spiel: Anpassen
+it Nuova partita: personalizza
+es Nueva partida: personalizar
+ru Новая игра: настройка
+
+@ Night vision: how much dark areas are brightened; thermal: how strongly heat stands out
+fr Vision nocturne : éclaircissement des zones sombres ; thermique : intensité du contraste de chaleur
+de Nachtsicht: wie stark dunkle Bereiche aufgehellt werden; Wärmebild: wie deutlich Wärme hervortritt
+it Visione notturna: quanto vengono schiarite le zone buie; termica: quanto risalta il calore
+es Visión nocturna: cuánto se aclaran las zonas oscuras; térmica: cuánto destaca el calor
+ru Ночное видение: насколько осветляются тёмные участки; тепловое: насколько выделяется тепло
+
+@ Night-vision and thermal goggles, cycle normal, night vision and thermal with Change Goggles (Add-ons), or use the Equipment Wheel
+fr Lunettes de vision nocturne et thermique : alternez normal, nocturne et thermique avec Changer de lunettes (extensions), ou utilisez la roue d'équipement
+de Nachtsicht- und Wärmebildbrille: mit Brille wechseln (Add-ons) zwischen normal, Nachtsicht und Wärmebild wechseln oder das Ausrüstungsrad nutzen
+it Visori notturni e termici: alterna normale, notturno e termico con Cambia visore (add-on), oppure usa la ruota dell'equipaggiamento
+es Gafas de visión nocturna y térmica: alterna normal, nocturna y térmica con Cambiar gafas (complementos) o usa el selector de equipo
+ru Очки ночного и теплового видения: переключайте обычный, ночной и тепловой режимы «Сменой очков» (дополнения) или колесом снаряжения
+
+@ No single freeze lasts longer than this, however much damage or kill bonus adds
+fr Aucun gel ne dure plus longtemps, quels que soient les dégâts ou le bonus d'élimination
+de Kein Einfrieren dauert länger, egal wie viel Schaden oder Abschussbonus hinzukommt
+it Nessun blocco dura più di questo, per quanti danni o bonus uccisione si aggiungano
+es Ninguna congelación dura más que esto, por mucho daño o bonificación por baja que se sume
+ru Ни один стоп-кадр не длится дольше, сколько бы ни добавили урон и бонус за убийство
+
+@ Oldest marks and nails are recycled at this shared limit
+fr Les traces et clous les plus anciens sont recyclés à cette limite commune
+de Die ältesten Spuren und Nägel werden an diesem gemeinsamen Limit wiederverwendet
+it I segni e i chiodi più vecchi vengono riciclati a questo limite comune
+es Las marcas y clavos más antiguos se reutilizan al alcanzar este límite común
+ru Самые старые следы и гвозди заменяются при достижении этого общего лимита
+
+@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
+fr Stick et boutons à l'écran : auto les affiche après un toucher et les masque quand un autre périphérique est utilisé
+de Bildschirm-Stick und -Tasten: auto zeigt sie nach einer Berührung und blendet sie aus, wenn ein anderes Gerät genutzt wird
+it Levetta e pulsanti su schermo: auto li mostra dopo un tocco e li nasconde quando si usa un altro dispositivo
+es Palanca y botones en pantalla: auto los muestra tras un toque y los oculta al usar otro dispositivo
+ru Экранный стик и кнопки: авто показывает их после касания и скрывает при использовании другого устройства
+
+@ Only autosaves: quicksaves and the Save menu are off
+fr Sauvegardes auto uniquement : la sauvegarde rapide et le menu Sauvegarder sont désactivés
+de Nur automatisches Speichern: Schnellspeichern und das Speichermenü sind aus
+it Solo salvataggi automatici: salvataggio rapido e menu Salva sono disattivati
+es Solo autoguardado: el guardado rápido y el menú Guardar están desactivados
+ru Только автосохранения: быстрое сохранение и меню сохранения отключены
+
+@ Place every weapon at the center, right or left of the view, or hide all viewmodels
+fr Place chaque arme au centre, à droite ou à gauche de la vue, ou masque tous les modèles d'arme
+de Zeigt jede Waffe mittig, rechts oder links im Bild oder blendet alle Waffenmodelle aus
+it Mostra ogni arma al centro, a destra o a sinistra della visuale, oppure nasconde tutti i modelli
+es Coloca cada arma en el centro, a la derecha o a la izquierda de la vista, u oculta todos los modelos
+ru Располагает оружие по центру, справа или слева, либо скрывает все модели оружия
+
+@ Play your chosen hit or kill cue when you damage an enemy
+fr Joue le signal de touche ou d'élimination choisi quand vous blessez un ennemi
+de Spielt dein gewähltes Treffer- oder Abschusssignal, wenn du einen Gegner verletzt
+it Riproduce il segnale di colpo o uccisione scelto quando ferisci un nemico
+es Reproduce la señal de impacto o baja elegida al dañar a un enemigo
+ru Воспроизводит выбранный сигнал попадания или убийства при ранении врага
+
+@ Playback speed: faster sounds shorter and higher
+fr Vitesse de lecture : plus rapide donne un son plus court et plus aigu
+de Wiedergabetempo: schneller klingt kürzer und höher
+it Velocità di riproduzione: più veloce suona più corto e più acuto
+es Velocidad de reproducción: más rápido suena más corto y más agudo
+ru Скорость воспроизведения: быстрее — короче и выше
+
+@ Plays the Quake theme in the main menu when no game is running
+fr Joue le thème de Quake dans le menu principal quand aucune partie n'est en cours
+de Spielt das Quake-Thema im Hauptmenü, wenn kein Spiel läuft
+it Riproduce il tema di Quake nel menu principale quando nessuna partita è in corso
+es Reproduce el tema de Quake en el menú principal cuando no hay partida en curso
+ru Играет тему Quake в главном меню, когда игра не запущена
+
+@ Portals farther away than this are drawn as flat discs
+fr Les portails plus éloignés sont affichés comme des disques plats
+de Weiter entfernte Portale werden als flache Scheiben gezeichnet
+it I portali più lontani di così vengono disegnati come dischi piatti
+es Los portales más lejanos se dibujan como discos planos
+ru Порталы дальше этого расстояния рисуются плоскими дисками
+
+@ Press attack once to keep firing, again to stop
+fr Appuyez une fois sur attaquer pour tirer en continu, encore pour arrêter
+de Einmal Angriff drücken für Dauerfeuer, erneut zum Aufhören
+it Premi attacco una volta per continuare a sparare, di nuovo per smettere
+es Pulsa atacar una vez para seguir disparando y otra para parar
+ru Нажмите атаку один раз, чтобы стрелять непрерывно, ещё раз — чтобы остановиться
+
+@ Press run once to switch between running and walking
+fr Appuyez une fois sur courir pour alterner entre course et marche
+de Einmal Rennen drücken, um zwischen Rennen und Gehen zu wechseln
+it Premi corri una volta per alternare tra corsa e camminata
+es Pulsa correr una vez para alternar entre correr y caminar
+ru Нажмите бег один раз, чтобы переключаться между бегом и шагом
+
+@ Raise or lower the tone independently of sound length
+fr Monte ou baisse la hauteur indépendamment de la durée du son
+de Hebt oder senkt die Tonhöhe unabhängig von der Tonlänge
+it Alza o abbassa il tono indipendentemente dalla durata del suono
+es Sube o baja el tono sin cambiar la duración del sonido
+ru Повышает или понижает тон независимо от длины звука
+
+@ Red screen edges show where damage came from: top is front, bottom is behind; Screen Flashes controls their strength
+fr Des bords d'écran rouges indiquent d'où viennent les dégâts : en haut devant, en bas derrière ; Flashs de l'écran règle leur intensité
+de Rote Bildschirmränder zeigen, woher der Schaden kam: oben ist vorn, unten ist hinten; Bildschirmblitze steuert ihre Stärke
+it I bordi rossi dello schermo mostrano da dove arrivano i danni: in alto davanti, in basso dietro; Lampi dello schermo ne regola l'intensità
+es Los bordes rojos de la pantalla muestran de dónde viene el daño: arriba es delante, abajo es detrás; Destellos de pantalla regula su intensidad
+ru Красные края экрана показывают, откуда пришёл урон: верх — спереди, низ — сзади; их силу задают «Вспышки экрана»
+
+@ Replaces the classic dot particles with glowing sparks, smoke and blood; mods with their own particle effects keep them
+fr Remplace les particules classiques en points par des étincelles lumineuses, de la fumée et du sang ; les mods avec leurs propres effets les conservent
+de Ersetzt die klassischen Punktpartikel durch leuchtende Funken, Rauch und Blut; Mods mit eigenen Partikeleffekten behalten diese
+it Sostituisce le particelle classiche a punti con scintille luminose, fumo e sangue; le mod con effetti propri li mantengono
+es Sustituye las partículas clásicas de puntos por chispas brillantes, humo y sangre; los mods con efectos propios los conservan
+ru Заменяет классические точечные частицы светящимися искрами, дымом и кровью; моды со своими эффектами частиц сохраняют их
+
+@ Resolution and detail inside portal and teleporter views; lower tiers trim nested effects
+fr Résolution et détail dans les vues des portails et téléporteurs ; les niveaux inférieurs réduisent les effets imbriqués
+de Auflösung und Detail in Portal- und Teleporteransichten; niedrigere Stufen kürzen verschachtelte Effekte
+it Risoluzione e dettaglio nelle viste di portali e teletrasporti; i livelli più bassi riducono gli effetti annidati
+es Resolución y detalle en las vistas de portales y teletransportadores; los niveles bajos recortan los efectos anidados
+ru Разрешение и детализация внутри видов порталов и телепортов; низкие уровни урезают вложенные эффекты
+
+@ Rippling light patterns on surfaces under water and slime
+fr Motifs lumineux ondulants sur les surfaces sous l'eau et la boue toxique
+de Wellende Lichtmuster auf Oberflächen unter Wasser und Schleim
+it Riflessi di luce ondeggianti sulle superfici sotto acqua e melma
+es Reflejos de luz ondulantes en superficies bajo el agua y el limo
+ru Колышущиеся световые узоры на поверхностях под водой и слизью
+
+@ Scales all damage you take; above 100% is harder
+fr Ajuste tous les dégâts subis ; au-delà de 100 %, c'est plus difficile
+de Skaliert jeden erlittenen Schaden; über 100 % ist schwerer
+it Scala tutti i danni subiti; oltre il 100% è più difficile
+es Escala todo el daño que recibes; por encima del 100 % es más difícil
+ru Масштабирует весь получаемый урон; выше 100% — сложнее
+
+@ Screen edge for this element; elements on the same spot stack
+fr Bord de l'écran pour cet élément ; les éléments au même endroit s'empilent
+de Bildschirmrand für dieses Element; Elemente an derselben Stelle stapeln sich
+it Bordo dello schermo per questo elemento; gli elementi nello stesso punto si impilano
+es Borde de la pantalla para este elemento; los elementos en el mismo sitio se apilan
+ru Край экрана для этого элемента; элементы в одном месте складываются стопкой
+
+@ Seconds a monster hit by the boomerang stays stunned
+fr Secondes d'étourdissement d'un monstre touché par le boomerang
+de Sekunden, die ein vom Bumerang getroffenes Monster betäubt bleibt
+it Secondi di stordimento di un mostro colpito dal boomerang
+es Segundos que queda aturdido un monstruo golpeado por el bumerán
+ru Сколько секунд оглушён монстр, задетый бумерангом
+
+@ Seconds impact marks and stuck nails stay before fading out; independent of Particle Quality
+fr Secondes pendant lesquelles les impacts et clous plantés restent avant de s'estomper ; indépendant de Qualité des particules
+de Sekunden, die Einschläge und steckende Nägel bleiben, bevor sie verblassen; unabhängig von Partikelqualität
+it Secondi di permanenza di impatti e chiodi conficcati prima di sfumare; indipendente da Qualità delle particelle
+es Segundos que permanecen los impactos y clavos clavados antes de desvanecerse; independiente de Calidad de las partículas
+ru Сколько секунд держатся следы попаданий и застрявшие гвозди; не зависит от качества частиц
+
+@ Seconds messages at the top of the screen stay up
+fr Secondes d'affichage des messages en haut de l'écran
+de Sekunden, die Nachrichten oben am Bildschirm bleiben
+it Secondi di permanenza dei messaggi in cima allo schermo
+es Segundos que permanecen los mensajes en la parte superior de la pantalla
+ru Сколько секунд держатся сообщения вверху экрана
+
+@ Seconds the flick stick snap takes; lower is faster
+fr Durée du pivot du flick stick, en secondes ; plus bas est plus rapide
+de Sekunden für den Flick-Stick-Sprung; niedriger ist schneller
+it Secondi per lo scatto del flick stick; più basso è più veloce
+es Segundos que tarda el giro del flick stick; menos es más rápido
+ru Длительность разворота флик-стика в секундах; меньше — быстрее
+
+@ See through enhanced water; enables Water Opacity
+fr Voir à travers l'eau améliorée ; active Opacité de l'eau
+de Durch verbessertes Wasser sehen; aktiviert Wasserdeckkraft
+it Vedi attraverso l'acqua migliorata; abilita Opacità dell'acqua
+es Ver a través del agua mejorada; activa Opacidad del agua
+ru Прозрачность улучшенной воды; включает «Непрозрачность воды»
+
+@ Sensor grain, scanlines and flicker of the goggle image
+fr Grain du capteur, lignes de balayage et scintillement de l'image des lunettes
+de Sensorkörnung, Bildzeilen und Flimmern des Brillenbilds
+it Grana del sensore, linee di scansione e sfarfallio dell'immagine dei visori
+es Grano del sensor, líneas de exploración y parpadeo de la imagen de las gafas
+ru Зерно сенсора, строки развёртки и мерцание изображения очков
+
+@ Shades every anti-aliasing sample; needs Anti-aliasing on
+fr Calcule l'ombrage de chaque échantillon d'anticrénelage ; nécessite l'anticrénelage
+de Schattiert jede Kantenglättungs-Abtastung; erfordert aktive Kantenglättung
+it Ombreggia ogni campione dell'antialiasing; richiede l'antialiasing attivo
+es Sombrea cada muestra del antialiasing; requiere el antialiasing activado
+ru Затеняет каждую выборку сглаживания; требует включённого сглаживания
+
+@ Shifts colors so they stay distinct for the chosen color blindness
+fr Décale les couleurs pour qu'elles restent distinctes selon le daltonisme choisi
+de Verschiebt Farben, damit sie bei der gewählten Farbenblindheit unterscheidbar bleiben
+it Sposta i colori perché restino distinguibili per il daltonismo scelto
+es Desplaza los colores para que sigan siendo distinguibles con el daltonismo elegido
+ru Смещает цвета, чтобы они оставались различимыми при выбранном типе дальтонизма
+
+@ Shotgun hits leave small surface marks (cosmetic only)
+fr Les tirs de fusil laissent de petites traces (purement visuel)
+de Schrottreffer hinterlassen kleine Spuren auf Oberflächen (rein kosmetisch)
+it I colpi di fucile lasciano piccoli segni sulle superfici (solo estetico)
+es Los disparos de escopeta dejan pequeñas marcas (solo estético)
+ru Попадания дроби оставляют небольшие следы (только визуально)
+
+@ Show corner ticks at screen centre while locked, even with Crosshair off
+fr Affiche des repères d'angle au centre de l'écran pendant le verrouillage, même sans réticule
+de Zeigt Eckmarken in der Bildschirmmitte während der Erfassung, auch ohne Fadenkreuz
+it Mostra tacche d'angolo al centro dello schermo durante l'aggancio, anche col mirino disattivato
+es Muestra marcas de esquina en el centro de la pantalla al fijar, incluso sin punto de mira
+ru Показывает угловые метки в центре экрана при захвате, даже с выключенным прицелом
+
+@ Show where grenades and other arcing shots will fly, bounce and land; local play only, not in deathmatch
+fr Montre où les grenades et autres tirs en cloche vont voler, rebondir et atterrir ; jeu local uniquement, pas en match à mort
+de Zeigt, wohin Granaten und andere Bogenschüsse fliegen, springen und landen; nur lokal, nicht im Deathmatch
+it Mostra dove granate e altri tiri parabolici voleranno, rimbalzeranno e atterreranno; solo in locale, non in deathmatch
+es Muestra adónde volarán, rebotarán y caerán las granadas y otros tiros parabólicos; solo en local, no en partida a muerte
+ru Показывает, куда полетят, отскочат и упадут гранаты и другие навесные снаряды; только локальная игра, не в смертельном бою
+
+@ Shows text for important sounds: doors, alerted enemies, secrets, pickups
+fr Affiche un texte pour les sons importants : portes, ennemis alertés, secrets, objets
+de Zeigt Text für wichtige Geräusche: Türen, alarmierte Gegner, Geheimnisse, Funde
+it Mostra testo per i suoni importanti: porte, nemici in allerta, segreti, oggetti raccolti
+es Muestra texto para sonidos importantes: puertas, enemigos alertados, secretos, objetos
+ru Показывает текст для важных звуков: двери, встревоженные враги, тайники, подбор предметов
+
+@ Shows the distance fog that maps and mods set; off always gives clear view
+fr Affiche le brouillard défini par les cartes et les mods ; désactivé donne toujours une vue dégagée
+de Zeigt den Entfernungsnebel, den Karten und Mods festlegen; aus ergibt immer klare Sicht
+it Mostra la nebbia impostata da mappe e mod; disattivato dà sempre una visuale limpida
+es Muestra la niebla de distancia que fijan mapas y mods; desactivado da siempre una vista despejada
+ru Показывает туман, заданный картами и модами; выкл. — всегда ясный обзор
+
+@ Shows the player face next to the health number
+fr Affiche le visage du joueur à côté de la santé
+de Zeigt das Spielergesicht neben der Gesundheitszahl
+it Mostra il volto del giocatore accanto alla salute
+es Muestra la cara del jugador junto a la salud
+ru Показывает лицо игрока рядом с числом здоровья
+
+@ Simulation detail, step rate, fade-out lifetimes and caps for gibs and shrapnel; low also skips mover collision
+fr Détail de simulation, fréquence, durées de disparition et limites des morceaux et éclats ; faible ignore aussi les collisions avec les éléments mobiles
+de Simulationsdetail, Schrittrate, Ausblendzeiten und Grenzen für Fleischfetzen und Splitter; niedrig lässt auch Kollisionen mit beweglichen Teilen weg
+it Dettaglio della simulazione, frequenza, durate di dissolvenza e limiti per brandelli e schegge; bassa salta anche le collisioni con gli elementi mobili
+es Detalle de simulación, frecuencia, duración del desvanecido y límites de despojos y metralla; baja también omite colisiones con elementos móviles
+ru Детализация симуляции, частота шагов, время исчезновения и лимиты для ошмётков и шрапнели; низкое также отключает столкновения с подвижными объектами
+
+@ Size of the on-screen buttons and move stick
+fr Taille des boutons et du stick de déplacement à l'écran
+de Größe der Bildschirmtasten und des Bewegungssticks
+it Dimensione dei pulsanti e della levetta di movimento su schermo
+es Tamaño de los botones y la palanca de movimiento en pantalla
+ru Размер экранных кнопок и стика движения
+
+@ Slowly heals up to 100 health after 5 seconds without being hit
+fr Soigne lentement jusqu'à 100 de santé après 5 secondes sans être touché
+de Heilt langsam bis 100 Gesundheit nach 5 Sekunden ohne Treffer
+it Cura lentamente fino a 100 di salute dopo 5 secondi senza essere colpiti
+es Cura lentamente hasta 100 de salud tras 5 segundos sin recibir golpes
+ru Медленно восстанавливает здоровье до 100 после 5 секунд без попаданий
+
+@ Slows stick look while the crosshair is over an enemy
+fr Ralentit la vue au stick quand le réticule est sur un ennemi
+de Verlangsamt den Stick-Blick, solange das Fadenkreuz auf einem Gegner liegt
+it Rallenta la visuale con levetta quando il mirino è su un nemico
+es Ralentiza la vista con palanca mientras el punto de mira está sobre un enemigo
+ru Замедляет обзор стиком, пока прицел наведён на врага
+
+@ Slows the game down while the weapon wheel is open
+fr Ralentit le jeu pendant que la roue des armes est ouverte
+de Verlangsamt das Spiel, während das Waffenrad offen ist
+it Rallenta il gioco mentre la ruota delle armi è aperta
+es Ralentiza el juego mientras el selector de armas está abierto
+ru Замедляет игру, пока открыто колесо оружия
+
+@ Slows the whole game down; single player only. Saves and demos stay compatible with other ports
+fr Ralentit tout le jeu ; solo uniquement. Les sauvegardes et démos restent compatibles avec les autres ports
+de Verlangsamt das ganze Spiel; nur Einzelspieler. Spielstände und Demos bleiben mit anderen Ports kompatibel
+it Rallenta tutto il gioco; solo giocatore singolo. Salvataggi e demo restano compatibili con altri port
+es Ralentiza todo el juego; solo un jugador. Las partidas guardadas y demos siguen siendo compatibles con otros ports
+ru Замедляет всю игру; только одиночная игра. Сохранения и демо остаются совместимыми с другими портами
+
+@ Small camera jolt on each freeze; off with Reduce Motion
+fr Léger à-coup de caméra à chaque gel ; désactivé par Réduire les animations
+de Kleiner Kamerastoß bei jedem Einfrieren; aus mit Bewegung reduzieren
+it Piccolo scossone della visuale a ogni blocco; disattivato da Riduci il movimento
+es Pequeña sacudida de cámara en cada congelación; desactivada con Reducir movimiento
+ru Небольшой толчок камеры при каждом стоп-кадре; отключается «Уменьшить движение»
+
+@ Snap and track enemies in local play, including split-screen; unavailable online
+fr Cible et suit les ennemis en jeu local, y compris en écran partagé ; indisponible en ligne
+de Erfasst und verfolgt Gegner im lokalen Spiel, auch im Splitscreen; online nicht verfügbar
+it Aggancia e segue i nemici in locale, anche a schermo diviso; non disponibile online
+es Fija y sigue a los enemigos en partida local, incluida la pantalla dividida; no disponible en línea
+ru Наводится на врагов и следит за ними в локальной игре, включая разделённый экран; недоступно онлайн
+
+@ Sparks, smoke, chips, splinters and splashes fly off whatever your shots hit
+fr Étincelles, fumée, éclats, échardes et éclaboussures jaillissent de tout ce que vos tirs touchent
+de Funken, Rauch, Splitter, Späne und Spritzer fliegen von allem, was deine Schüsse treffen
+it Scintille, fumo, schegge, trucioli e spruzzi volano da tutto ciò che colpisci
+es Chispas, humo, esquirlas, astillas y salpicaduras saltan de todo lo que alcanzan tus disparos
+ru Искры, дым, крошка, щепки и брызги летят от всего, во что попадают ваши выстрелы
+
+@ Spawns extra copies of every monster around the original when a level starts
+fr Fait apparaître des copies supplémentaires de chaque monstre autour de l'original au début du niveau
+de Erzeugt beim Levelstart zusätzliche Kopien jedes Monsters um das Original
+it Genera copie aggiuntive di ogni mostro attorno all'originale all'inizio del livello
+es Genera copias adicionales de cada monstruo alrededor del original al empezar el nivel
+ru В начале уровня создаёт дополнительные копии каждого монстра рядом с оригиналом
+
+@ Strength of the full-screen flashes for damage, pickups and powerups
+fr Intensité des flashs plein écran pour les dégâts, objets et bonus
+de Stärke der Vollbildblitze bei Schaden, Funden und Power-ups
+it Intensità dei lampi a schermo intero per danni, oggetti e potenziamenti
+es Intensidad de los destellos a pantalla completa por daño, objetos y potenciadores
+ru Сила полноэкранных вспышек от урона, подбора предметов и усилителей
+
+@ Stretch or shorten the sound while keeping its pitch
+fr Allonge ou raccourcit le son en gardant sa hauteur
+de Dehnt oder kürzt den Ton bei gleicher Tonhöhe
+it Allunga o accorcia il suono mantenendone il tono
+es Alarga o acorta el sonido manteniendo su tono
+ru Растягивает или укорачивает звук, сохраняя высоту тона
+
+@ Surface opacity; requires Enhanced Water and Translucent Water
+fr Opacité de la surface ; nécessite Eau améliorée et Eau translucide
+de Oberflächendeckkraft; erfordert Verbessertes Wasser und Durchscheinendes Wasser
+it Opacità della superficie; richiede Acqua migliorata e Acqua traslucida
+es Opacidad de la superficie; requiere Agua mejorada y Agua translúcida
+ru Непрозрачность поверхности; требует «Улучшенной воды» и «Полупрозрачной воды»
+
+@ The hook latches onto metal surfaces (metal, tech, computer panels, copper)
+fr Le grappin s'accroche aux surfaces métalliques (métal, technique, panneaux d'ordinateur, cuivre)
+de Der Haken greift an Metalloberflächen (Metall, Technik, Computerpaneele, Kupfer)
+it Il rampino si aggancia alle superfici metalliche (metallo, tecnologia, pannelli di computer, rame)
+es El gancho se engancha a superficies metálicas (metal, tecnología, paneles de ordenador, cobre)
+ru Крюк цепляется за металлические поверхности (металл, техника, компьютерные панели, медь)
+
+@ The hook latches onto stone, brick, rock and any surface not recognised as wood or metal
+fr Le grappin s'accroche à la pierre, la brique, la roche et toute surface non reconnue comme bois ou métal
+de Der Haken greift an Stein, Ziegel, Fels und jeder Oberfläche, die nicht als Holz oder Metall erkannt wird
+it Il rampino si aggancia a pietra, mattoni, roccia e qualsiasi superficie non riconosciuta come legno o metallo
+es El gancho se engancha a piedra, ladrillo, roca y cualquier superficie no reconocida como madera o metal
+ru Крюк цепляется за камень, кирпич, скалу и любую поверхность, не распознанную как дерево или металл
+
+@ The hook latches onto wooden surfaces (texture names like wood, crate, plank)
+fr Le grappin s'accroche aux surfaces en bois (textures nommées wood, crate, plank…)
+de Der Haken greift an Holzoberflächen (Texturnamen wie wood, crate, plank)
+it Il rampino si aggancia alle superfici di legno (texture con nomi come wood, crate, plank)
+es El gancho se engancha a superficies de madera (texturas con nombres como wood, crate, plank)
+ru Крюк цепляется за деревянные поверхности (текстуры с именами вроде wood, crate, plank)
+
+@ Turn the controller's motion sensor into a look input; needs a pad with a gyroscope
+fr Utilise le capteur de mouvement de la manette pour regarder ; nécessite une manette avec gyroscope
+de Macht den Bewegungssensor des Controllers zur Blicksteuerung; erfordert ein Gamepad mit Gyroskop
+it Usa il sensore di movimento del controller per la visuale; richiede un controller con giroscopio
+es Usa el sensor de movimiento del mando para mirar; requiere un mando con giroscopio
+ru Использует датчик движения геймпада для обзора; нужен геймпад с гироскопом
+
+@ Turns off view bob, strafe tilt and the camera kick when hit or firing
+fr Désactive le balancement de la vue, l'inclinaison en pas latéral et les secousses de caméra lors des tirs ou impacts
+de Schaltet Kamerawippen, Seitneigung und den Kamerastoß bei Treffern oder Schüssen ab
+it Disattiva l'ondeggiamento della visuale, l'inclinazione laterale e il sobbalzo della visuale quando colpito o sparando
+es Desactiva el balanceo de la cámara, la inclinación lateral y la sacudida de cámara al recibir golpes o disparar
+ru Отключает покачивание камеры, наклон при стрейфе и толчок камеры при попаданиях и стрельбе
+
+@ Turns on the extra liquid effects; Water Settings controls each one
+fr Active les effets de liquide supplémentaires ; Réglages de l'eau les contrôle un par un
+de Schaltet die zusätzlichen Flüssigkeitseffekte ein; Wasser-Einstellungen steuert jeden einzeln
+it Attiva gli effetti aggiuntivi dei liquidi; Impostazioni acqua li regola uno per uno
+es Activa los efectos de líquidos adicionales; Ajustes del agua controla cada uno
+ru Включает дополнительные эффекты жидкостей; каждый настраивается в «Настройках воды»
+
+@ Turns the view to follow a moving enemy you are aiming at
+fr Fait tourner la vue pour suivre l'ennemi en mouvement que vous visez
+de Dreht die Sicht mit einem sich bewegenden Gegner, auf den du zielst
+it Ruota la visuale per seguire il nemico in movimento che stai mirando
+es Gira la vista para seguir al enemigo en movimiento al que apuntas
+ru Поворачивает обзор вслед за движущимся врагом, в которого вы целитесь
+
+@ Turns the view when you roll the controller sideways; 0 disables it, negative reverses it
+fr Tourne la vue quand vous inclinez la manette sur le côté ; 0 désactive, une valeur négative inverse
+de Dreht die Sicht, wenn du den Controller seitlich kippst; 0 schaltet es ab, negativ kehrt es um
+it Ruota la visuale quando inclini lateralmente il controller; 0 lo disattiva, un valore negativo lo inverte
+es Gira la vista al inclinar el mando de lado; 0 lo desactiva y un valor negativo lo invierte
+ru Поворачивает обзор при наклоне геймпада вбок; 0 отключает, отрицательное значение инвертирует
+
+@ Two-portal gun: fire and alt-fire place linked portals on flat walls; assign a weapon slot in Add-ons
+fr Pistolet à deux portails : le tir et le tir secondaire placent des portails liés sur les murs plats ; attribuez un emplacement d'arme dans Extensions
+de Zwei-Portal-Kanone: Feuer und Alternativfeuer setzen verbundene Portale auf flache Wände; Waffenplatz unter Add-ons zuweisen
+it Pistola a due portali: fuoco e fuoco secondario piazzano portali collegati su pareti piatte; assegna uno slot arma in Add-on
+es Pistola de dos portales: el disparo y el secundario colocan portales enlazados en paredes planas; asigna una ranura de arma en Complementos
+ru Пушка двух порталов: огонь и альт. огонь ставят связанные порталы на ровные стены; назначьте слот оружия в «Дополнениях»
+
+@ Unlocks the FX Settings page: enhanced particles, impact effects and blood splatter
+fr Déverrouille la page Réglages des effets : particules améliorées, effets d'impact et éclaboussures de sang
+de Schaltet die Seite Effekt-Einstellungen frei: verbesserte Partikel, Einschlageffekte und Blutspritzer
+it Sblocca la pagina Impostazioni effetti: particelle migliorate, effetti d'impatto e schizzi di sangue
+es Desbloquea la página Ajustes de efectos: partículas mejoradas, efectos de impacto y salpicaduras de sangre
+ru Открывает страницу «Настройки эффектов»: улучшенные частицы, эффекты попаданий и брызги крови
+
+@ Uses the 2021 re-release's smoother MD5 models (and MD3 replacements from mods) instead of the classic ones. Applies on the next map load
+fr Utilise les modèles MD5 plus lisses de la réédition 2021 (et les remplacements MD3 des mods) à la place des modèles classiques. S'applique au prochain chargement de carte
+de Nutzt die glatteren MD5-Modelle der Neuauflage von 2021 (und MD3-Ersatz aus Mods) statt der klassischen. Gilt ab dem nächsten Kartenladen
+it Usa i modelli MD5 più morbidi della riedizione 2021 (e i sostituti MD3 delle mod) al posto di quelli classici. Si applica al prossimo caricamento della mappa
+es Usa los modelos MD5 más suaves de la reedición de 2021 (y los reemplazos MD3 de los mods) en lugar de los clásicos. Se aplica al cargar el siguiente mapa
+ru Использует более гладкие модели MD5 из переиздания 2021 года (и замены MD3 из модов) вместо классических. Применяется при следующей загрузке карты
+
+@ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
+fr Utilise l'éclairage coloré de la carte (fichier .lit ou bloc BSPX) ; désactivé donne la lumière blanche d'origine. S'applique au prochain chargement de carte
+de Nutzt das farbige Licht der Karte (.lit-Datei oder BSPX-Block); aus ergibt das originale weiße Licht. Gilt ab dem nächsten Kartenladen
+it Usa la luce colorata della mappa (file .lit o blocco BSPX); disattivato dà la luce bianca originale. Si applica al prossimo caricamento della mappa
+es Usa la luz de color del mapa (archivo .lit o bloque BSPX); desactivado da la luz blanca original. Se aplica al cargar el siguiente mapa
+ru Использует цветное освещение карты (файл .lit или блок BSPX); выкл. — исходный белый свет. Применяется при следующей загрузке карты
+
+@ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
+fr Segments du jet, nombre de gouttes et rendu brillant du liquide : faible utilise des jets translucides plus simples ; élevée des jets lisses et brillants
+de Strahlsegmente, Tropfenzahl und glänzende Flüssigkeitsdarstellung: niedrig nutzt einfachere durchscheinende Strahlen; hoch glatte, glänzende Strahlen
+it Segmenti del getto, numero di gocce e resa lucida del liquido: bassa usa getti traslucidi più semplici; alta getti lisci e lucidi
+es Segmentos del chorro, número de gotas y sombreado brillante del líquido: baja usa chorros translúcidos más simples; alta, chorros suaves y brillantes
+ru Сегменты струи, число капель и глянцевое затенение жидкости: низкое — простые полупрозрачные струи; высокое — гладкие глянцевые
+
+@ When gyro looking applies: always, off while +gyroaction is held, or only while it is held
+fr Quand le gyroscope s'applique : toujours, désactivé en maintenant +gyroaction, ou seulement en le maintenant
+de Wann der Gyro-Blick gilt: immer, aus solange +gyroaction gehalten wird, oder nur solange es gehalten wird
+it Quando si applica la visuale col giroscopio: sempre, disattivata tenendo premuto +gyroaction, o solo tenendolo premuto
+es Cuándo se aplica la vista con giroscopio: siempre, desactivada al mantener +gyroaction o solo al mantenerla
+ru Когда работает гироскоп: всегда, выкл. при удержании +gyroaction или только при его удержании
+
+@ Which weapons trigger the freeze; melee covers the axe and any mod weapon used at close range without ammo
+fr Armes qui déclenchent le gel ; le corps à corps couvre la hache et toute arme de mod utilisée de près sans munitions
+de Welche Waffen das Einfrieren auslösen; Nahkampf umfasst die Axt und jede Mod-Waffe, die ohne Munition aus nächster Nähe genutzt wird
+it Quali armi attivano il blocco; corpo a corpo comprende l'ascia e ogni arma di mod usata da vicino senza munizioni
+es Qué armas activan la congelación; cuerpo a cuerpo incluye el hacha y cualquier arma de mod usada de cerca sin munición
+ru Какое оружие вызывает стоп-кадр; ближний бой — топор и любое оружие модов без боеприпасов вблизи
+
+@ Your own rockets and grenades don't hurt you; rocket jumps still work
+fr Vos propres roquettes et grenades ne vous blessent pas ; les sauts à la roquette fonctionnent toujours
+de Eigene Raketen und Granaten verletzen dich nicht; Raketensprünge funktionieren weiterhin
+it I tuoi razzi e le tue granate non ti feriscono; i rocket jump funzionano comunque
+es Tus propios cohetes y granadas no te hieren; los saltos con cohete siguen funcionando
+ru Ваши ракеты и гранаты вас не ранят; рокет-джампы по-прежнему работают

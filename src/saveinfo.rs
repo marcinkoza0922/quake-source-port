@@ -76,11 +76,11 @@ impl SaveInfo {
 
     /// When the save was written: relative while recent, else the local date.
     pub fn when(&self, now: SystemTime) -> String {
-        let Some(t) = self.modified else { return "Date unavailable".into() };
+        let Some(t) = self.modified else { return qcore::tr!("Date unavailable") };
         match now.duration_since(t).map(|d| d.as_secs()) {
-            Ok(s) if s < 60 => "Just now".into(),
-            Ok(s) if s < 3600 => format!("{} min ago", s / 60),
-            Ok(s) if s < 86400 => format!("{} h ago", s / 3600),
+            Ok(s) if s < 60 => qcore::tr!("Just now"),
+            Ok(s) if s < 3600 => qcore::tr!("{} min ago", s / 60),
+            Ok(s) if s < 86400 => qcore::tr!("{} h ago", s / 3600),
             _ => {
                 let secs = t.duration_since(UNIX_EPOCH).map_or(0, |d| d.as_secs()) as i64;
                 match qplatform::local_time(secs) {
@@ -92,7 +92,7 @@ impl SaveInfo {
     }
 
     pub fn skill_name(&self) -> &'static str {
-        ["Easy", "Normal", "Hard", "Nightmare"][self.skill.clamp(0, 3) as usize]
+        [qcore::t!("Easy"), qcore::t!("Normal"), qcore::t!("Hard"), qcore::t!("Nightmare")][self.skill.clamp(0, 3) as usize]
     }
 
     /// Time in the level as m:ss (h:mm:ss past an hour).

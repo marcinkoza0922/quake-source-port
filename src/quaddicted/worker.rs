@@ -57,7 +57,7 @@ impl Online {
         self.cache = cache.to_path_buf();
         // the browser has no threads or curl
         if cfg!(target_arch = "wasm32") {
-            self.lock().status = Status::Failed("Downloads are not available in the browser build".into());
+            self.lock().status = Status::Failed(qcore::t!("Downloads are not available in the browser build").into());
             return;
         }
         {
@@ -105,7 +105,7 @@ impl Online {
     /// Downloads and installs a release in the background.
     pub fn download(&mut self, r: &Release) {
         if cfg!(target_arch = "wasm32") {
-            self.lock().jobs.insert(r.sha.clone(), Job::Failed("Downloads are not available in the browser build".into()));
+            self.lock().jobs.insert(r.sha.clone(), Job::Failed(qcore::t!("Downloads are not available in the browser build").into()));
             return;
         }
         {
@@ -151,7 +151,7 @@ fn load(cache: &Path, force: bool) -> Result<Vec<Release>, String> {
     // offline: an old index still lists what can be installed later
     match super::load_index(&zip) {
         Some(v) => Ok(v),
-        None => Err(fetched.err().unwrap_or_else(|| "the map list could not be read".into())),
+        None => Err(fetched.err().unwrap_or_else(|| qcore::t!("the map list could not be read").into())),
     }
 }
 
@@ -169,7 +169,7 @@ fn fetch(url: &str, dest: &Path, size: u64, progress: &dyn Fn(f32)) -> Result<()
         .stdout(Stdio::null())
         .stderr(Stdio::piped())
         .spawn()
-        .map_err(|_| "downloading needs the curl program".to_string())?;
+        .map_err(|_| qcore::t!("downloading needs the curl program").to_string())?;
     let status = loop {
         if let Some(st) = child.try_wait().map_err(|e| e.to_string())? {
             break st;
@@ -187,7 +187,7 @@ fn fetch(url: &str, dest: &Path, size: u64, progress: &dyn Fn(f32)) -> Result<()
             let _ = std::io::Read::read_to_string(&mut e, &mut err);
         }
         let err = err.trim().trim_start_matches("curl: ").to_string();
-        return Err(if err.is_empty() { "download failed".into() } else { err });
+        return Err(if err.is_empty() { qcore::t!("download failed").into() } else { err });
     }
     std::fs::rename(&part, dest).map_err(|e| e.to_string())
 }

@@ -98,24 +98,24 @@ impl Menu {
         let lines: Vec<(String, [f32; 4])> = match page {
             Page::NewGameCustomize if super::launch::customized(cv) => vec![
                 (summary, FG),
-                ("Saves of this game are .qsa files: they need this source port.".into(), GOLD_FG),
+                (qcore::tr!("Saves of this game are .qsa files: they need this source port."), GOLD_FG),
             ],
             Page::NewGameCustomize => vec![
                 (summary, FG),
-                ("Nothing changed: this plays as standard Quake.".into(), MUTED),
+                (qcore::tr!("Nothing changed: this plays as standard Quake."), MUTED),
             ],
             Page::Customize => vec![
                 (summary, FG),
-                ("Changes apply now and are saved with this game (.qsa).".into(), MUTED),
+                (qcore::tr!("Changes apply now and are saved with this game (.qsa)."), MUTED),
             ],
             Page::Modifiers if self.toys_locked(cv) => vec![
-                ("This game started without Customize, so its rules are fixed.".into(), GOLD_FG),
-                ("Start a new game and choose Customize Experience.".into(), GOLD_FG),
+                (qcore::tr!("This game started without Customize, so its rules are fixed."), GOLD_FG),
+                (qcore::tr!("Start a new game and choose Customize Experience."), GOLD_FG),
             ],
             Page::Modifiers if self.new_game_setup || !self.game_running => {
-                vec![("These rules apply to the next customized game.".into(), MUTED)]
+                vec![(qcore::tr!("These rules apply to the next customized game."), MUTED)]
             }
-            Page::Modifiers => vec![("Changes apply now and are saved with this game (.qsa).".into(), MUTED)],
+            Page::Modifiers => vec![(qcore::tr!("Changes apply now and are saved with this game (.qsa)."), MUTED)],
             _ => return,
         };
         for (i, (s, col)) in lines.iter().enumerate() {
@@ -128,15 +128,14 @@ impl Menu {
 pub(super) fn custom_summary(cv: &Cvars) -> String {
     let n = qserver::modifiers::changed(cv).count();
     let mods = match n {
-        0 => "Standard rules".to_string(),
-        1 => "1 modifier changed".to_string(),
-        n => format!("{n} modifiers changed"),
+        0 => qcore::tr!("Standard rules"),
+        n => qcore::tr!("Modifiers changed: {}", n),
     };
     let on = super::launch::addons_on(cv);
     let addons = match on.len() {
-        0 => "no add-ons".to_string(),
-        1..=2 => format!("add-ons: {}", on.join(", ")),
-        k => format!("{k} add-ons"),
+        0 => qcore::tr!("no add-ons"),
+        1..=2 => qcore::tr!("add-ons: {}", on.iter().map(|a| qcore::lang::tr(a)).collect::<Vec<_>>().join(", ")),
+        k => qcore::tr!("add-ons: {}", k),
     };
     format!("{mods}; {addons}")
 }

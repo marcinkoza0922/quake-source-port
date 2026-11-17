@@ -102,7 +102,7 @@ impl Host {
                 match self.resolve_preset(&want.0) {
                     Some(p) => Some(p),
                     None => {
-                        self.con.print(&format!("r_shader_preset: \"{}\" not found\n", want.0));
+                        self.con.print(&qcore::ctr!("r_shader_preset: \"{}\" not found\n", want.0));
                         let _ = self.r.set_shader_preset(None);
                         self.menu.shader_params.clear();
                         return;
@@ -147,16 +147,16 @@ impl Host {
 
 pub(super) fn register_shader_commands(c: &mut Commands<Host>) {
     c.add("r_shader_list", |h, _| {
-        h.print("Presets (r_shader_preset <name>):\n");
+        h.print(&qcore::ctr!("Presets (r_shader_preset <name>):\n"));
         for p in h.shader_presets() {
             h.print(&format!("  {p}\n"));
         }
-        h.print("Add your own .slangp presets under <game>/shaders/.\n");
+        h.print(&qcore::ctr!("Add your own .slangp presets under <game>/shaders/.\n"));
     });
     c.add("r_shader_reload", |h, _| h.shader.reload = h.shader.reload.wrapping_add(1));
     c.add("r_shader_param", |h, a| {
         let Some((_, params)) = h.r.shader_preset() else {
-            h.print("no shader preset loaded (r_shader_preset)\n");
+            h.print(&qcore::ctr!("no shader preset loaded (r_shader_preset)\n"));
             return;
         };
         if a.argc() < 2 {
@@ -174,12 +174,12 @@ pub(super) fn register_shader_commands(c: &mut Commands<Host>) {
         }
         let id = a.argv(1).to_string();
         let Some(p) = params.iter().find(|p| p.id == id).cloned() else {
-            h.print(&format!("no parameter \"{id}\" in this preset\n"));
+            h.print(&qcore::ctr!("no parameter \"{}\" in this preset\n", id));
             return;
         };
         if a.argc() < 3 {
             let v = h.shader_param_value(&id).unwrap_or(p.initial);
-            h.print(&format!("{id} = {v} (default {}, {}..{})\n", p.initial, p.min, p.max));
+            h.print(&qcore::ctr!("{} = {} (default {}, {}..{})\n", id, v, p.initial, p.min, p.max));
         } else if a.argv(2).eq_ignore_ascii_case("default") {
             h.set_shader_param_override(&id, None);
         } else if let Ok(v) = a.argv(2).parse::<f32>() {

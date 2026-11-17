@@ -311,9 +311,7 @@ impl Console {
             }
             while row > -8.0 && n > 0 {
                 n -= 1;
-                for (i, &b) in self.lines[n].iter().enumerate() {
-                    c.ch(8.0 + i as f32 * 8.0, row, b);
-                }
+                c.qtext_grid(8.0, row, &self.lines[n], crate::draw::WHITE);
                 row -= 8.0;
             }
         } else if show_notify {
@@ -325,13 +323,12 @@ impl Console {
             // bottom-left sits above the modern HUD's health/armor stack
             let mut y = if self.notify_pos == 2 { (svh * 0.7).floor() - live.len() as f32 * 8.0 } else { 0.0 };
             for l in live {
-                let x = if self.notify_pos == 1 { ((svw - l.len() as f32 * 8.0) / 2.0).floor() } else { 8.0 };
+                let w = c.qtext_w(l);
+                let x = if self.notify_pos == 1 { ((svw - w) / 2.0).floor() } else { 8.0 };
                 if self.text_bg && !l.is_empty() {
-                    c.fill(x - 2.0, y - 1.0, l.len() as f32 * 8.0 + 4.0, 10.0, TEXT_BG);
+                    c.fill(x - 2.0, y - 1.0, w + 4.0, 10.0, TEXT_BG);
                 }
-                for (i, &b) in l.iter().enumerate() {
-                    c.ch(x + i as f32 * 8.0, y, b);
-                }
+                c.qtext(x, y, l, crate::draw::WHITE);
                 y += 8.0;
             }
             c.scale = base;
@@ -358,19 +355,19 @@ impl Console {
             2 => (vh * 0.68).floor() - n as f32 * 8.0,
             _ => (vh * 0.35).floor(),
         };
+        let lines: Vec<Vec<u8>> = self.centerprint.iter().map(|l| qcore::text::encode(l)).collect();
         if self.text_bg && n > 0 {
-            let w = self.centerprint.iter().map(|l| l.chars().count()).max().unwrap_or(0) as f32 * 8.0;
+            let w = lines.iter().map(|l| c.qtext_w(l)).fold(0.0, f32::max);
             c.fill(((vw - w) / 2.0).floor() - 4.0, y - 3.0, w + 8.0, n as f32 * 8.0 + 6.0, TEXT_BG);
         }
         let mut left = max_chars;
-        for l in &self.centerprint {
-            let x = ((vw - l.chars().count() as f32 * 8.0) / 2.0).floor();
-            for (i, b) in qcore::text::glyphs(l).enumerate() {
-                if left == 0 {
-                    return;
-                }
-                left -= 1;
-                c.ch(x + i as f32 * 8.0, y, b);
+        for l in &lines {
+            let x = ((vw - c.qtext_w(l)) / 2.0).floor();
+            let shown = crate::draw::glyph_prefix(l, left);
+            c.qtext(x, y, shown, crate::draw::WHITE);
+            left -= crate::draw::glyph_count(shown);
+            if left == 0 {
+                return;
             }
             y += 8.0;
         }

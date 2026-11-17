@@ -37,7 +37,7 @@ impl Host {
                     self.menu.open(Screen::None);
                     self.cbuf.add_text(&format!("load \"{name}\"\n"));
                 } else {
-                    self.print("No readable save available. Select save or restart the level.\n");
+                    self.print(&qcore::ctr!("No readable save available. Select save or restart the level.\n"));
                 }
             }
             2 => {

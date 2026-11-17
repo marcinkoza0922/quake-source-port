@@ -53,9 +53,9 @@ impl ModSort {
 
     fn label(self) -> &'static str {
         match self {
-            Self::Default => "Recent",
-            Self::Name => "Name",
-            Self::Dir => "Dir",
+            Self::Default => qcore::t!("Recent"),
+            Self::Name => qcore::t!("Name"),
+            Self::Dir => qcore::t!("Dir"),
         }
     }
 }
@@ -81,10 +81,10 @@ impl MapSort {
 
     fn label(self) -> &'static str {
         match self {
-            Self::Default => "Default",
-            Self::Name => "Name",
-            Self::Title => "Title",
-            Self::Completed => "Done",
+            Self::Default => qcore::t!("Default"),
+            Self::Name => qcore::t!("Name"),
+            Self::Title => qcore::t!("Title"),
+            Self::Completed => qcore::t!("Done"),
         }
     }
 }
@@ -501,9 +501,9 @@ impl ModMenu {
     fn draw_list(&self, c: &mut Canvas) {
         center_gold(c, 24.0, "Map Packs");
         let count = if self.mod_filter.is_empty() {
-            format!("{} installed", self.mods.len())
+            qcore::tr!("{} installed", self.mods.len())
         } else {
-            format!("{}/{} matching", self.mod_view.len(), self.mods.len())
+            qcore::tr!("{}/{} matching", self.mod_view.len(), self.mods.len())
         };
         center(c, 36.0, &count);
         let (x, w) = LIST;
@@ -535,7 +535,7 @@ impl ModMenu {
         let Some((_, m)) = self.mod_at_row(self.cursor) else {
             box_(c, ix, iw, ROWS);
             let mut y = TOP + 1.0;
-            for l in ["Browse the Quaddicted archive of", "single-player maps and episodes,", "then download and install them", "here. Each release gets its own", "entry in this list.", "", "Needs an internet connection."] {
+            for l in [qcore::t!("Browse the Quaddicted archive of"), qcore::t!("single-player maps and episodes,"), qcore::t!("then download and install them"), qcore::t!("here. Each release gets its own"), qcore::t!("entry in this list."), "", qcore::t!("Needs an internet connection.")] {
                 txt(c, ix + 8.0, y, l);
                 y += ROW_H;
             }
@@ -549,10 +549,10 @@ impl ModMenu {
             y += ROW_H;
         }
         y += 4.0;
-        txt(c, ix + 8.0, y, &clip(&format!("dir: {}", m.dir), cols));
+        txt(c, ix + 8.0, y, &clip(&qcore::tr!("dir: {}", m.dir), cols));
         y += ROW_H;
         if let Some(b) = m.base.dir() {
-            txt(c, ix + 8.0, y, &format!("base: {b}"));
+            txt(c, ix + 8.0, y, &qcore::tr!("base: {}", b));
             y += ROW_H;
         }
         if m.dir.eq_ignore_ascii_case(&self.current) {
@@ -577,9 +577,9 @@ impl ModMenu {
         center_gold(c, 24.0, &clip(&m.title, 70));
         let done = self.maps.iter().filter(|x| self.stats.get(&x.name).is_some_and(|s| s.completions > 0)).count();
         let subtitle = if self.map_filter.is_empty() {
-            format!("{} maps, {done} completed", self.maps.len())
+            qcore::tr!("{} maps, {} completed", self.maps.len(), done)
         } else {
-            format!("{}/{} matching, {done} completed", self.map_view.len(), self.maps.len())
+            qcore::tr!("{}/{} matching, {} completed", self.map_view.len(), self.maps.len(), done)
         };
         center(c, 36.0, &subtitle);
         let (x, w) = MAPS;
@@ -640,7 +640,7 @@ fn draw_filter_bar(c: &mut Canvas, x: f32, w: f32, sort_w: f32, filter: &str, so
     let sx = x + w - sort_w;
     c.fill(sx, BAR_Y, sort_w, BAR_H, [0.08, 0.08, 0.08, 0.9]);
     c.frame(sx, BAR_Y, sort_w, BAR_H, BORDER);
-    c.text_center(sx + sort_w * 0.5, BAR_Y + 2.0, &format!("Sort: {sort_label}"), TXT, GOLD_FG);
+    c.text_center(sx + sort_w * 0.5, BAR_Y + 2.0, &qcore::tr!("Sort: {}", qcore::lang::tr(sort_label)), TXT, GOLD_FG);
 }
 
 const OFFICIAL_EXPANSIONS: &[&str] = &["hipnotic", "rogue", "dopa", "mg1", "mg3"];

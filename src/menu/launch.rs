@@ -103,7 +103,7 @@ impl Menu {
             self.ask_skill(l.cmd, cv);
         } else if self.game_running {
             // vanilla asks before dropping the running game
-            self.confirm(vec!["Start a new game?".into(), "Unsaved progress will be lost.".into()], "New game", l.cmd, true);
+            self.confirm(vec![qcore::tr!("Start a new game?"), qcore::tr!("Unsaved progress will be lost.")], qcore::t!("New game"), l.cmd, true);
         } else {
             self.screen = Screen::None;
             out.push(Action::Close);
@@ -204,7 +204,7 @@ impl Menu {
             let (top, _) = BTNS[2];
             button(c, 2, false);
             let key = if self.pad_ui { K_XBUTTON } else { K_DEL };
-            self.glyphs.hints_centered(c, 320.0, top + 1.5, &[(key, "Disable All Modifications")]);
+            self.glyphs.hints_centered(c, 320.0, top + 1.5, &[(key, qcore::t!("Disable All Modifications"))]);
             c.text_center(320.0, BOX.1 + 128.0, &customize::custom_summary(cv), 8.0, MUTED);
         } else {
             c.text_center(320.0, BOX.1 + 106.0, "Standard rules, no add-ons.", 8.0, MUTED);

@@ -170,7 +170,7 @@ impl Host {
         } else if let Some(i) = self.local.filter(|_| self.server.active()) {
             self.server.client_command(i, line);
         } else {
-            self.con.print(&format!("Unknown command \"{}\"\n", args.argv(0)));
+            self.con.print(&qcore::ctr!("Unknown command \"{}\"\n", args.argv(0)));
         }
         self.drain_server_log();
     }
@@ -188,6 +188,8 @@ impl Host {
             }
             let Some(line) = self.cbuf.next_line() else { break };
             self.exec_line(&line);
+            // `language`/`con_translate` apply to the very next message
+            self.sync_language();
             if self.quit {
                 break;
             }

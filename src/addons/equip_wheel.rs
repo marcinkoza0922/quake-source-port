@@ -75,21 +75,18 @@ impl EquipWheel {
             };
             g.disc(c, x - d / 2.0, y - d / 2.0, d, bg);
             let s = e.short();
-            for (k, b) in s.bytes().enumerate() {
-                c.ch(x - s.len() as f32 * 4.0 + k as f32 * 8.0, y - 9.0, b);
-            }
-            let state = if on { "ON" } else { "OFF" };
+            c.ptext(x - c.ptext_w(s) / 2.0, y - 9.0, s, crate::draw::WHITE);
+            let state = if on { qcore::t!("ON") } else { qcore::t!("OFF") };
             let tint = if on { [0.5, 1.0, 0.4, 1.0] } else { [0.6, 0.6, 0.6, 1.0] };
-            for (k, b) in state.bytes().enumerate() {
-                c.ch_color(x - state.len() as f32 * 4.0 + k as f32 * 8.0, y + 2.0, b, tint);
-            }
+            c.ptext(x - c.ptext_w(state) / 2.0, y + 2.0, state, tint);
         }
         if let Some(i) = self.sel {
             let e = Equip::ALL[i];
-            let s = format!("{} ({})", e.name(), if eq.is_on(e) { "turn off" } else { "turn on" });
+            let s = if eq.is_on(e) { qcore::tr!("{} (turn off)", qcore::lang::tr(e.name())) } else { qcore::tr!("{} (turn on)", qcore::lang::tr(e.name())) };
             let y = cy - r - d / 2.0 - 16.0;
-            c.fill(cx - s.len() as f32 * 4.0 - 4.0, y - 2.0, s.len() as f32 * 8.0 + 8.0, 12.0, [0.0, 0.0, 0.0, 0.6]);
-            crate::menu::gold(c, cx - s.len() as f32 * 4.0, y, &s);
+            let w = c.ptext_w(&s);
+            c.fill(cx - w / 2.0 - 4.0, y - 2.0, w + 8.0, 12.0, [0.0, 0.0, 0.0, 0.6]);
+            crate::menu::gold(c, cx - w / 2.0, y, &s);
         }
         let hint_y = cy + r + d / 2.0 + 8.0;
         let back = |c: &mut Canvas, w: f32| c.fill(cx - w / 2.0 - 6.0, hint_y - 3.0, w + 12.0, 16.0, [0.0, 0.0, 0.0, 0.7]);
@@ -99,9 +96,10 @@ impl EquipWheel {
             back(c, w);
             g.hints_centered(c, cx, hint_y, &items);
         } else {
-            let s = "Move mouse to select, release to toggle";
-            back(c, s.len() as f32 * 8.0);
-            c.string(cx - s.len() as f32 * 4.0, hint_y + 1.0, s);
+            let s = qcore::t!("Move mouse to select, release to toggle");
+            let w = c.ptext_w(s);
+            back(c, w);
+            c.ptext(cx - w / 2.0, hint_y + 1.0, s, crate::draw::WHITE);
         }
     }
 }

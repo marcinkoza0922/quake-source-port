@@ -6,7 +6,7 @@ impl Server {
     pub fn spawn_server(&mut self, mapname: &str) -> Result<(), String> {
         let r = self.spawn_inner(mapname);
         if let Err(e) = &r {
-            self.core.print(&format!("Couldn't spawn server {mapname}: {e}\n"));
+            self.core.print(&qcore::ctr!("Couldn't spawn server {}: {}\n", mapname, e));
             self.core.sv.active = false;
             if self.core.sv.error.is_none() {
                 self.core.sv.error = Some(VmError::new(e.clone()));

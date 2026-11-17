@@ -1,0 +1,1722 @@
+# Translations of the port's own text; format in crates/qcore/src/lang/catalog.rs.
+# Menus and pop-ups outside the options pages: save cards, launch, presets,
+# add-on browser, map packs, hints and dialogs.
+
+@ Select
+fr Choisir
+de Auswählen
+it Seleziona
+es Seleccionar
+ru Выбрать
+
+@ Back
+fr Retour
+de Zurück
+it Indietro
+es Volver
+ru Назад
+
+@ Cancel
+fr Annuler
+de Abbrechen
+it Annulla
+es Cancelar
+ru Отмена
+
+@ Confirm
+fr Confirmer
+de Bestätigen
+it Conferma
+es Confirmar
+ru Подтвердить
+
+@ Scroll
+fr Défiler
+de Scrollen
+it Scorri
+es Desplazar
+ru Листать
+
+@ Section
+fr Section
+de Abschnitt
+it Sezione
+es Sección
+ru Раздел
+
+@ Bind
+fr Assigner
+de Belegen
+it Assegna
+es Asignar
+ru Назначить
+
+@ Cancel binding
+fr Annuler l'assignation
+de Belegung abbrechen
+it Annulla assegnazione
+es Cancelar asignación
+ru Отменить назначение
+
+@ Clear
+fr Effacer
+de Löschen
+it Cancella
+es Borrar
+ru Очистить
+
+@ Clear pad
+fr Effacer la manette
+de Gamepad löschen
+it Cancella controller
+es Borrar mando
+ru Очистить геймпад
+
+@ Remap
+fr Réassigner
+de Neu belegen
+it Riassegna
+es Reasignar
+ru Переназначить
+
+@ Type
+fr Saisir
+de Tippen
+it Digita
+es Escribir
+ru Ввод
+
+@ Shift
+fr Maj
+de Umschalt
+it Maiusc
+es Mayús
+ru Shift
+
+@ Done
+fr Terminé
+de Fertig
+it Fatto
+es Hecho
+ru Готово
+
+@ Del
+fr Suppr
+de Entf
+it Canc
+es Supr
+ru Del
+
+@ Space
+fr Espace
+de Leertaste
+it Spazio
+es Espacio
+ru Пробел
+
+@ Save
+fr Sauvegarder
+de Speichern
+it Salva
+es Guardar
+ru Сохранить
+
+@ Load
+fr Charger
+de Laden
+it Carica
+es Cargar
+ru Загрузить
+
+@ Delete
+fr Effacer
+de Löschen
+it Elimina
+es Borrar
+ru Удалить
+
+@ Play
+fr Jouer
+de Spielen
+it Gioca
+es Jugar
+ru Играть
+
+@ Yes
+fr Oui
+de Ja
+it Sì
+es Sí
+ru Да
+
+@ No
+fr Non
+de Nein
+it No
+es No
+ru Нет
+
+@ OK
+fr OK
+de OK
+it OK
+es Aceptar
+ru ОК
+
+@ System
+fr Système
+de System
+it Sistema
+es Sistema
+ru Системный
+
+@ Language
+fr Langue
+de Sprache
+it Lingua
+es Idioma
+ru Язык
+
+@ Help
+fr Aide
+de Hilfe
+it Aiuto
+es Ayuda
+ru Справка
+
+@ Fixed for this game: it was started without Customize
+fr Fixé pour cette partie : elle a été lancée sans Personnaliser
+de Für dieses Spiel festgelegt: es wurde ohne Anpassen gestartet
+it Fisso per questa partita: è stata avviata senza Personalizza
+es Fijo en esta partida: se inició sin Personalizar
+ru Зафиксировано для этой игры: она начата без настройки
+
+@ Press a button or key to bind (Start cancels)
+fr Appuyez sur un bouton ou une touche à assigner (Start pour annuler)
+de Taste oder Knopf zum Belegen drücken (Start bricht ab)
+it Premi un pulsante o un tasto da assegnare (Start annulla)
+es Pulsa un botón o una tecla para asignar (Start cancela)
+ru Нажмите кнопку или клавишу для назначения (Start — отмена)
+
+@ Press button...
+fr Appuyez sur un bouton...
+de Knopf drücken...
+it Premi un pulsante...
+es Pulsa un botón...
+ru Нажмите кнопку...
+
+@ Press key...
+fr Appuyez sur une touche...
+de Taste drücken...
+it Premi un tasto...
+es Pulsa una tecla...
+ru Нажмите клавишу...
+
+@ Replace this binding?
+fr Remplacer cette assignation ?
+de Diese Belegung ersetzen?
+it Sostituire questa assegnazione?
+es ¿Reemplazar esta asignación?
+ru Заменить это назначение?
+
+@ is already assigned
+fr est déjà assigné
+de ist bereits belegt
+it è già assegnato
+es ya está asignado
+ru уже назначено
+
+@ {} already assigned
+fr {} déjà assigné
+de {} bereits belegt
+it {} già assegnato
+es {} ya asignado
+ru {} уже назначено
+
+@ Open Controls to remap Lock-on?
+fr Ouvrir Commandes pour réassigner Verrouillage ?
+de Steuerung öffnen, um Zielerfassung neu zu belegen?
+it Aprire Comandi per riassegnare Aggancio?
+es ¿Abrir Controles para reasignar Fijar objetivo?
+ru Открыть «Управление», чтобы переназначить «Захват цели»?
+
+@ Lock-on
+fr Verrouillage
+de Zielerfassung
+it Aggancio
+es Fijar objetivo
+ru Захват цели
+
+@ Auto-aim Toggle
+fr Visée auto (bascule)
+de Auto-Zielen umschalten
+it Mira automatica (commutazione)
+es Apuntado automático (alterno)
+ru Автоприцел (переключение)
+
+@ Keyboard
+fr Clavier
+de Tastatur
+it Tastiera
+es Teclado
+ru Клавиатура
+
+@ Controller
+fr Manette
+de Controller
+it Controller
+es Mando
+ru Геймпад
+
+# main menu, dialogs and screens
+@ Map Packs
+fr Packs de cartes
+de Kartenpakete
+it Pacchetti mappe
+es Paquetes de mapas
+ru Наборы карт
+
+@ Customize
+fr Personnaliser
+de Anpassen
+it Personalizza
+es Personalizar
+ru Настроить
+
+@ Level Select
+fr Choix de niveau
+de Levelauswahl
+it Selezione livello
+es Elegir nivel
+ru Выбор уровня
+
+@ Really quit?
+fr Vraiment quitter ?
+de Wirklich beenden?
+it Uscire davvero?
+es ¿Seguro que quieres salir?
+ru Действительно выйти?
+
+@ You died
+fr Vous êtes mort
+de Du bist gestorben
+it Sei morto
+es Has muerto
+ru Вы погибли
+
+@ Continue from most recent save
+fr Reprendre depuis la sauvegarde la plus récente
+de Vom neuesten Spielstand fortfahren
+it Continua dal salvataggio più recente
+es Continuar desde la partida más reciente
+ru Продолжить с последнего сохранения
+
+@ Select save
+fr Choisir une sauvegarde
+de Spielstand wählen
+it Scegli un salvataggio
+es Elegir partida guardada
+ru Выбрать сохранение
+
+@ Restart level
+fr Recommencer le niveau
+de Level neu starten
+it Ricomincia il livello
+es Reiniciar el nivel
+ru Начать уровень заново
+
+@ Return to main menu
+fr Retour au menu principal
+de Zurück zum Hauptmenü
+it Torna al menu principale
+es Volver al menú principal
+ru Вернуться в главное меню
+
+@ (disabled)
+fr (désactivé)
+de (deaktiviert)
+it (disattivato)
+es (desactivado)
+ru (недоступно)
+
+@ (fixed for this game)
+fr (fixé pour cette partie)
+de (für dieses Spiel festgelegt)
+it (fisso per questa partita)
+es (fijo en esta partida)
+ru (зафиксировано для этой игры)
+
+@ (off)
+fr (désactivé)
+de (aus)
+it (disattivato)
+es (desactivado)
+ru (выкл.)
+
+@ Apply Display Changes
+fr Appliquer les changements d'affichage
+de Anzeigeänderungen übernehmen
+it Applica le modifiche allo schermo
+es Aplicar cambios de pantalla
+ru Применить настройки экрана
+
+@ Display Mode
+fr Mode d'affichage
+de Anzeigemodus
+it Modalità schermo
+es Modo de pantalla
+ru Режим экрана
+
+@ Resolution
+fr Résolution
+de Auflösung
+it Risoluzione
+es Resolución
+ru Разрешение
+
+@ desktop
+fr bureau
+de Desktop
+it desktop
+es escritorio
+ru как у рабочего стола
+
+@ Preset
+fr Préréglage
+de Voreinstellung
+it Preimpostazione
+es Preajuste
+ru Пресет
+
+@ Map
+fr Carte
+de Karte
+it Mappa
+es Mapa
+ru Карта
+
+@ Reset Shader Settings
+fr Réinitialiser les réglages du shader
+de Shader-Einstellungen zurücksetzen
+it Ripristina impostazioni shader
+es Restablecer ajustes del sombreador
+ru Сбросить настройки шейдера
+
+@ Reset to Defaults
+fr Réinitialiser par défaut
+de Auf Standard zurücksetzen
+it Ripristina predefiniti
+es Restablecer valores predeterminados
+ru Сбросить по умолчанию
+
+@ Searching...
+fr Recherche...
+de Suche...
+it Ricerca...
+es Buscando...
+ru Поиск...
+
+@ This game only autosaves.
+fr Cette partie n'utilise que la sauvegarde auto.
+de Dieses Spiel speichert nur automatisch.
+it Questa partita usa solo il salvataggio automatico.
+es Esta partida solo usa el autoguardado.
+ru В этой игре только автосохранения.
+
+@ (No Manual Saves modifier)
+fr (modificateur Pas de sauvegarde manuelle)
+de (Modifikator Kein manuelles Speichern)
+it (modificatore Niente salvataggi manuali)
+es (modificador Sin guardado manual)
+ru (модификатор «Без ручных сохранений»)
+
+@ End the current game?
+fr Quitter la partie en cours ?
+de Das laufende Spiel beenden?
+it Terminare la partita in corso?
+es ¿Terminar la partida actual?
+ru Завершить текущую игру?
+
+@ Unsaved progress will be lost.
+fr Toute progression non sauvegardée sera perdue.
+de Ungespeicherter Fortschritt geht verloren.
+it I progressi non salvati andranno persi.
+es Se perderá el progreso no guardado.
+ru Несохранённый прогресс будет потерян.
+
+@ End game
+fr Quitter la partie
+de Spiel beenden
+it Termina partita
+es Terminar partida
+ru Завершить игру
+
+@ Overwrite
+fr Écraser
+de Überschreiben
+it Sovrascrivi
+es Sobrescribir
+ru Перезаписать
+
+@ Overwrite "{}"?
+fr Écraser « {} » ?
+de „{}“ überschreiben?
+it Sovrascrivere "{}"?
+es ¿Sobrescribir «{}»?
+ru Перезаписать «{}»?
+
+@ Saved {}
+fr Sauvegardé {}
+de Gespeichert {}
+it Salvato {}
+es Guardado {}
+ru Сохранено {}
+
+@ Start a new game?
+fr Commencer une nouvelle partie ?
+de Ein neues Spiel beginnen?
+it Iniziare una nuova partita?
+es ¿Empezar una partida nueva?
+ru Начать новую игру?
+
+@ New game
+fr Nouvelle partie
+de Neues Spiel
+it Nuova partita
+es Nueva partida
+ru Новая игра
+
+@ New Game
+fr Nouvelle partie
+de Neues Spiel
+it Nuova partita
+es Nueva partida
+ru Новая игра
+
+@ CUSTOM
+fr PERSO
+de ANGEPASST
+it PERSONALIZZATA
+es PERSONALIZADA
+ru СВОЯ
+
+@ Customize Experience
+fr Personnaliser l'expérience
+de Spielerlebnis anpassen
+it Personalizza l'esperienza
+es Personalizar la experiencia
+ru Настроить игру
+
+@ Disable All
+fr Tout désactiver
+de Alles deaktivieren
+it Disattiva tutto
+es Desactivar todo
+ru Отключить всё
+
+@ Disable All Modifications
+fr Désactiver toutes les modifications
+de Alle Änderungen deaktivieren
+it Disattiva tutte le modifiche
+es Desactivar todas las modificaciones
+ru Отключить все изменения
+
+@ Saves load in other source ports too.
+fr Les sauvegardes se chargent aussi dans les autres ports.
+de Spielstände laden auch in anderen Source-Ports.
+it I salvataggi si caricano anche in altri source port.
+es Las partidas se cargan también en otros ports.
+ru Сохранения загружаются и в других портах.
+
+@ Standard rules, no add-ons.
+fr Règles standard, sans extensions.
+de Standardregeln, keine Add-ons.
+it Regole standard, nessun add-on.
+es Reglas estándar, sin complementos.
+ru Стандартные правила, без дополнений.
+
+@ Choose skill
+fr Choisir la difficulté
+de Schwierigkeit wählen
+it Scegli la difficoltà
+es Elige la dificultad
+ru Выберите сложность
+
+@ The current game will end
+fr La partie en cours prendra fin
+de Das laufende Spiel wird beendet
+it La partita in corso terminerà
+es La partida actual terminará
+ru Текущая игра будет завершена
+
+@ Easy
+fr Facile
+de Einfach
+it Facile
+es Fácil
+ru Легко
+
+@ Normal
+fr Normal
+de Normal
+it Normale
+es Normal
+ru Нормально
+
+@ Hard
+fr Difficile
+de Schwer
+it Difficile
+es Difícil
+ru Тяжело
+
+@ Nightmare
+fr Cauchemar
+de Albtraum
+it Incubo
+es Pesadilla
+ru Кошмар
+
+# graphics preset pop-up
+@ Choose a Graphics Preset
+fr Choisissez un préréglage graphique
+de Grafikvoreinstellung wählen
+it Scegli una preimpostazione grafica
+es Elige un preajuste gráfico
+ru Выберите графический пресет
+
+@ Classic
+fr Classique
+de Klassisch
+it Classico
+es Clásico
+ru Классика
+
+@ Like the re-release: enhanced models,
+fr Comme la réédition : modèles améliorés,
+de Wie die Neuauflage: verbesserte Modelle,
+it Come la riedizione: modelli migliorati,
+es Como la reedición: modelos mejorados,
+ru Как в переиздании: улучшенные модели,
+
+@ no added effects.
+fr sans effets ajoutés.
+de keine zusätzlichen Effekte.
+it nessun effetto aggiunto.
+es sin efectos añadidos.
+ru без добавленных эффектов.
+
+@ Enhanced
+fr Amélioré
+de Verbessert
+it Migliorato
+es Mejorado
+ru Улучшенный
+
+@ Every enhancement at its highest quality.
+fr Toutes les améliorations au maximum.
+de Alle Verbesserungen in höchster Qualität.
+it Ogni miglioramento alla massima qualità.
+es Todas las mejoras a la máxima calidad.
+ru Все улучшения на максимальном качестве.
+
+@ Needs a capable GPU.
+fr Nécessite un bon GPU.
+de Erfordert eine leistungsfähige GPU.
+it Richiede una GPU potente.
+es Requiere una GPU potente.
+ru Нужна мощная видеокарта.
+
+@ Low-End
+fr Modeste
+de Leistungsschwach
+it Prestazioni
+es Equipos modestos
+ru Слабый ПК
+
+@ Fastest. No anti-aliasing, original
+fr Le plus rapide. Sans anticrénelage, modèles
+de Am schnellsten. Keine Kantenglättung, originale
+it Il più veloce. Niente antialiasing, modelli
+es Lo más rápido. Sin antialiasing, modelos
+ru Быстрее всего. Без сглаживания, исходные
+
+@ models, lowest effect quality.
+fr d'origine, effets au minimum.
+de Modelle, niedrigste Effektqualität.
+it originali, effetti al minimo.
+es originales, efectos al mínimo.
+ru модели, эффекты на минимуме.
+
+@ Esc keeps the defaults
+fr Échap conserve les réglages par défaut
+de Esc behält die Standardwerte
+it Esc mantiene i valori predefiniti
+es Esc mantiene los valores predeterminados
+ru Esc оставляет настройки по умолчанию
+
+@ Everything can be changed later in Options.
+fr Tout peut être modifié plus tard dans Options.
+de Alles lässt sich später in den Optionen ändern.
+it Tutto si può cambiare più tardi in Opzioni.
+es Todo se puede cambiar más tarde en Opciones.
+ru Всё можно изменить позже в «Настройках».
+
+@ Keep Defaults
+fr Garder par défaut
+de Standard behalten
+it Mantieni predefiniti
+es Mantener predeterminados
+ru Оставить по умолчанию
+
+# save and load cards
+@ Save Game
+fr Sauvegarder
+de Spiel speichern
+it Salva partita
+es Guardar partida
+ru Сохранить игру
+
+@ Load Game
+fr Charger une partie
+de Spiel laden
+it Carica partita
+es Cargar partida
+ru Загрузить игру
+
+@ Autosaves
+fr Sauvegardes auto
+de Autospeicherstände
+it Salvataggi automatici
+es Autoguardados
+ru Автосохранения
+
+@ newest first
+fr les plus récentes d'abord
+de neueste zuerst
+it prima i più recenti
+es las más recientes primero
+ru сначала новые
+
+@ Saves: {}
+fr Sauvegardes : {}
+de Spielstände: {}
+it Salvataggi: {}
+es Partidas: {}
+ru Сохранений: {}
+
+@ Browse Autosaves
+fr Parcourir les sauvegardes auto
+de Autospeicherstände durchsuchen
+it Sfoglia i salvataggi automatici
+es Ver autoguardados
+ru Просмотреть автосохранения
+
+@ Every retained autosave, newest first
+fr Toutes les sauvegardes auto conservées, les plus récentes d'abord
+de Alle behaltenen Autospeicherstände, neueste zuerst
+it Tutti i salvataggi automatici conservati, prima i più recenti
+es Todos los autoguardados conservados, los más recientes primero
+ru Все сохранённые автосохранения, сначала новые
+
+@ New save
+fr Nouvelle sauvegarde
+de Neuer Spielstand
+it Nuovo salvataggio
+es Nueva partida guardada
+ru Новое сохранение
+
+@ Select to save your game here
+fr Choisissez pour sauvegarder votre partie ici
+de Auswählen, um hier zu speichern
+it Seleziona per salvare qui la partita
+es Selecciona para guardar aquí tu partida
+ru Выберите, чтобы сохранить игру здесь
+
+@ No autosaves yet
+fr Aucune sauvegarde auto pour l'instant
+de Noch keine Autospeicherstände
+it Ancora nessun salvataggio automatico
+es Aún no hay autoguardados
+ru Автосохранений пока нет
+
+@ Autosaves are made on level entry, secrets and more (Options > Gameplay)
+fr Les sauvegardes auto se font en début de niveau, aux secrets et plus (Options > Jouabilité)
+de Automatisch gespeichert wird bei Levelbeginn, Geheimnissen und mehr (Optionen > Gameplay)
+it I salvataggi automatici avvengono a inizio livello, ai segreti e altro (Opzioni > Gioco)
+es Se autoguarda al entrar en un nivel, al encontrar secretos y más (Opciones > Juego)
+ru Автосохранения создаются при входе на уровень, нахождении тайников и т. д. (Настройки > Игра)
+
+@ No saves yet
+fr Aucune sauvegarde pour l'instant
+de Noch keine Spielstände
+it Ancora nessun salvataggio
+es Aún no hay partidas guardadas
+ru Сохранений пока нет
+
+@ Save from the Single Player menu, or press F6 to quicksave
+fr Sauvegardez depuis le menu Solo, ou appuyez sur F6 pour une sauvegarde rapide
+de Im Einzelspieler-Menü speichern oder F6 zum Schnellspeichern drücken
+it Salva dal menu Giocatore singolo o premi F6 per il salvataggio rapido
+es Guarda desde el menú Un jugador o pulsa F6 para guardar rápido
+ru Сохраняйтесь в меню одиночной игры или нажмите F6 для быстрого сохранения
+
+@ No picture
+fr Pas d'image
+de Kein Bild
+it Nessuna immagine
+es Sin imagen
+ru Нет изображения
+
+@ Del: delete save
+fr Suppr : effacer la sauvegarde
+de Entf: Spielstand löschen
+it Canc: elimina salvataggio
+es Supr: borrar partida
+ru Del: удалить сохранение
+
+@ Delete "{}"?
+fr Effacer « {} » ?
+de „{}“ löschen?
+it Eliminare "{}"?
+es ¿Borrar «{}»?
+ru Удалить «{}»?
+
+@ This cannot be undone.
+fr Cette action est irréversible.
+de Das kann nicht rückgängig gemacht werden.
+it L'operazione non si può annullare.
+es Esto no se puede deshacer.
+ru Это действие нельзя отменить.
+
+@ Quicksave
+fr Sauvegarde rapide
+de Schnellspeicherstand
+it Salvataggio rapido
+es Guardado rápido
+ru Быстрое сохранение
+
+@ Autosave: {}
+fr Sauvegarde auto : {}
+de Autospeichern: {}
+it Salvataggio automatico: {}
+es Autoguardado: {}
+ru Автосохранение: {}
+
+@ unknown trigger
+fr déclencheur inconnu
+de unbekannter Auslöser
+it causa sconosciuta
+es motivo desconocido
+ru неизвестная причина
+
+@ Latest - {}
+fr Plus récente - {}
+de Neuester - {}
+it Più recente - {}
+es Más reciente - {}
+ru Последнее - {}
+
+@ Health {}
+fr Santé {}
+de Gesundheit {}
+it Salute {}
+es Salud {}
+ru Здоровье {}
+
+@ Armor {}
+fr Armure {}
+de Rüstung {}
+it Armatura {}
+es Armadura {}
+ru Броня {}
+
+@ Kills {}/{}
+fr Victimes {}/{}
+de Abschüsse {}/{}
+it Uccisioni {}/{}
+es Bajas {}/{}
+ru Убито {}/{}
+
+@ Secrets {}/{}
+fr Secrets {}/{}
+de Geheimnisse {}/{}
+it Segreti {}/{}
+es Secretos {}/{}
+ru Тайники {}/{}
+
+@ Split-screen, {} players
+fr Écran partagé, {} joueurs
+de Splitscreen, {} Spieler
+it Schermo diviso, {} giocatori
+es Pantalla dividida, {} jugadores
+ru Разделённый экран, игроков: {}
+
+@ Co-op
+fr Coopération
+de Koop
+it Cooperativa
+es Cooperativo
+ru Кооператив
+
+@ Customized
+fr Personnalisée
+de Angepasst
+it Personalizzata
+es Personalizada
+ru Настроенная
+
+@ Customized, {}
+fr Personnalisée, {}
+de Angepasst, {}
+it Personalizzata, {}
+es Personalizada, {}
+ru Настроенная, {}
+
+@ Date unavailable
+fr Date indisponible
+de Datum nicht verfügbar
+it Data non disponibile
+es Fecha no disponible
+ru Дата недоступна
+
+@ Just now
+fr À l'instant
+de Gerade eben
+it Proprio ora
+es Justo ahora
+ru Только что
+
+@ {} min ago
+fr il y a {} min
+de vor {} Min.
+it {} min fa
+es hace {} min
+ru {} мин назад
+
+@ {} h ago
+fr il y a {} h
+de vor {} Std.
+it {} h fa
+es hace {} h
+ru {} ч назад
+
+@ Level entry
+fr Début de niveau
+de Levelbeginn
+it Inizio livello
+es Entrada al nivel
+ru Вход на уровень
+
+@ Secret found
+fr Secret trouvé
+de Geheimnis gefunden
+it Segreto trovato
+es Secreto encontrado
+ru Найден тайник
+
+@ All enemies killed
+fr Tous les ennemis tués
+de Alle Gegner besiegt
+it Tutti i nemici uccisi
+es Todos los enemigos muertos
+ru Все враги убиты
+
+@ All secrets found
+fr Tous les secrets trouvés
+de Alle Geheimnisse gefunden
+it Tutti i segreti trovati
+es Todos los secretos encontrados
+ru Все тайники найдены
+
+@ Timer
+fr Minuterie
+de Zeitintervall
+it Timer
+es Temporizador
+ru По таймеру
+
+# customize pages
+@ Standard rules
+fr Règles standard
+de Standardregeln
+it Regole standard
+es Reglas estándar
+ru Стандартные правила
+
+@ Modifiers changed: {}
+fr Modificateurs changés : {}
+de Geänderte Modifikatoren: {}
+it Modificatori cambiati: {}
+es Modificadores cambiados: {}
+ru Изменено модификаторов: {}
+
+@ no add-ons
+fr aucune extension
+de keine Add-ons
+it nessun add-on
+es sin complementos
+ru без дополнений
+
+@ add-ons: {}
+fr extensions : {}
+de Add-ons: {}
+it add-on: {}
+es complementos: {}
+ru дополнения: {}
+
+@ Saves of this game are .qsa files: they need this source port.
+fr Les sauvegardes de cette partie sont des fichiers .qsa : elles nécessitent ce port.
+de Spielstände dieses Spiels sind .qsa-Dateien: sie brauchen diesen Source-Port.
+it I salvataggi di questa partita sono file .qsa: richiedono questo source port.
+es Las partidas guardadas de esta partida son archivos .qsa: necesitan este port.
+ru Сохранения этой игры — файлы .qsa: для них нужен этот порт.
+
+@ Nothing changed: this plays as standard Quake.
+fr Rien n'a changé : la partie se joue comme Quake standard.
+de Nichts geändert: das spielt sich wie normales Quake.
+it Nessuna modifica: si gioca come il Quake standard.
+es Nada cambiado: se juega como el Quake estándar.
+ru Ничего не изменено: это обычный Quake.
+
+@ Changes apply now and are saved with this game (.qsa).
+fr Les changements s'appliquent tout de suite et sont sauvegardés avec cette partie (.qsa).
+de Änderungen gelten sofort und werden mit diesem Spiel gespeichert (.qsa).
+it Le modifiche valgono subito e vengono salvate con questa partita (.qsa).
+es Los cambios se aplican ya y se guardan con esta partida (.qsa).
+ru Изменения применяются сразу и сохраняются с этой игрой (.qsa).
+
+@ This game started without Customize, so its rules are fixed.
+fr Cette partie a été lancée sans Personnaliser : ses règles sont fixées.
+de Dieses Spiel wurde ohne Anpassen gestartet, seine Regeln sind festgelegt.
+it Questa partita è iniziata senza Personalizza, quindi le regole sono fisse.
+es Esta partida empezó sin Personalizar, así que sus reglas son fijas.
+ru Эта игра начата без настройки, поэтому её правила зафиксированы.
+
+@ Start a new game and choose Customize Experience.
+fr Commencez une nouvelle partie et choisissez Personnaliser l'expérience.
+de Starte ein neues Spiel und wähle Spielerlebnis anpassen.
+it Inizia una nuova partita e scegli Personalizza l'esperienza.
+es Empieza una partida nueva y elige Personalizar la experiencia.
+ru Начните новую игру и выберите «Настроить игру».
+
+@ These rules apply to the next customized game.
+fr Ces règles s'appliquent à la prochaine partie personnalisée.
+de Diese Regeln gelten für das nächste angepasste Spiel.
+it Queste regole valgono per la prossima partita personalizzata.
+es Estas reglas se aplican a la próxima partida personalizada.
+ru Эти правила применятся к следующей настроенной игре.
+
+# add-on browser
+@ Fire
+fr Tir
+de Feuer
+it Fuoco
+es Disparo
+ru Огонь
+
+@ Alt Fire
+fr Tir secondaire
+de Alternativfeuer
+it Fuoco secondario
+es Disparo secundario
+ru Альт. огонь
+
+@ Configure Parameters >
+fr Configurer les paramètres >
+de Parameter einstellen >
+it Configura i parametri >
+es Configurar parámetros >
+ru Настроить параметры >
+
+@ Configure
+fr Configurer
+de Einstellen
+it Configura
+es Configurar
+ru Настроить
+
+@ Settings
+fr Réglages
+de Einstellungen
+it Impostazioni
+es Ajustes
+ru Настройки
+
+@ Change slot
+fr Changer d'emplacement
+de Platz ändern
+it Cambia slot
+es Cambiar ranura
+ru Сменить слот
+
+@ Toggle
+fr Basculer
+de Umschalten
+it Attiva/disattiva
+es Alternar
+ru Переключить
+
+@ Details
+fr Détails
+de Details
+it Dettagli
+es Detalles
+ru Подробности
+
+@ Enter or click the box: toggle
+fr Entrée ou clic sur la case : basculer
+de Eingabe oder Klick auf das Kästchen: umschalten
+it Invio o clic sulla casella: attiva/disattiva
+es Intro o clic en la casilla: alternar
+ru Enter или щелчок по флажку: переключить
+
+@ Right / Tab / click: details
+fr Droite / Tab / clic : détails
+de Rechts / Tab / Klick: Details
+it Destra / Tab / clic: dettagli
+es Derecha / Tab / clic: detalles
+ru Вправо / Tab / щелчок: подробности
+
+@ Input Remapping
+fr Réassignation des commandes
+de Eingabe neu belegen
+it Riassegnazione comandi
+es Reasignación de controles
+ru Переназначение управления
+
+@ Weapon Slot
+fr Emplacement d'arme
+de Waffenplatz
+it Slot arma
+es Ranura de arma
+ru Слот оружия
+
+@ Customized games save as .qsa files, which need this source port.
+fr Les parties personnalisées se sauvegardent en fichiers .qsa, qui nécessitent ce port.
+de Angepasste Spiele speichern als .qsa-Dateien, die diesen Source-Port brauchen.
+it Le partite personalizzate si salvano in file .qsa, che richiedono questo source port.
+es Las partidas personalizadas se guardan como archivos .qsa, que necesitan este port.
+ru Настроенные игры сохраняются в файлы .qsa, для которых нужен этот порт.
+
+@ This game started without Customize, so its add-ons are fixed. Customize a new game instead.
+fr Cette partie a été lancée sans Personnaliser : ses extensions sont fixées. Personnalisez plutôt une nouvelle partie.
+de Dieses Spiel wurde ohne Anpassen gestartet, seine Add-ons sind festgelegt. Passe stattdessen ein neues Spiel an.
+it Questa partita è iniziata senza Personalizza, quindi gli add-on sono fissi. Personalizza invece una nuova partita.
+es Esta partida empezó sin Personalizar, así que sus complementos son fijos. Personaliza una partida nueva.
+ru Эта игра начата без настройки, поэтому её дополнения зафиксированы. Настройте новую игру.
+
+@ Bullet Time
+fr Bullet time
+de Bullet-Time
+it Bullet time
+es Tiempo bala
+ru Замедление времени
+
+@ Change Goggles
+fr Changer de lunettes
+de Brille wechseln
+it Cambia visore
+es Cambiar gafas
+ru Сменить очки
+
+@ Dodge / Dive
+fr Esquive / plongeon
+de Ausweichen / Hechten
+it Schivata / tuffo
+es Esquivar / lanzarse
+ru Уклон / прыжок
+
+@ Goggles
+fr Lunettes
+de Brille
+it Visori
+es Gafas
+ru Очки
+
+@ Hitstop
+fr Hitstop
+de Hitstop
+it Hitstop
+es Hitstop
+ru Хитстоп
+
+@ Projectile Shotguns
+fr Fusils à projectiles
+de Projektil-Schrotflinten
+it Fucili a proiettili
+es Escopetas de proyectiles
+ru Дробовики со снарядами
+
+@ BULLET TIME: 20%
+fr BULLET TIME : 20 %
+de BULLET-TIME: 20 %
+it BULLET TIME: 20%
+es TIEMPO BALA: 20 %
+ru ЗАМЕДЛЕНИЕ: 20%
+
+@ NORMAL SPEED
+fr VITESSE NORMALE
+de NORMALES TEMPO
+it VELOCITÀ NORMALE
+es VELOCIDAD NORMAL
+ru ОБЫЧНАЯ СКОРОСТЬ
+
+@ SLOW MOTION: PHYSICAL PELLETS
+fr RALENTI : PLOMBS PHYSIQUES
+de ZEITLUPE: PHYSIKALISCHE SCHROTKUGELN
+it RALLENTATORE: PALLINI FISICI
+es CÁMARA LENTA: PERDIGONES FÍSICOS
+ru ЗАМЕДЛЕНИЕ: ФИЗИЧЕСКАЯ ДРОБЬ
+
+@ DEMONSTRATION
+fr DÉMONSTRATION
+de DEMONSTRATION
+it DIMOSTRAZIONE
+es DEMOSTRACIÓN
+ru ДЕМОНСТРАЦИЯ
+
+@ GAMEPLAY
+fr JOUABILITÉ
+de GAMEPLAY
+it GIOCO
+es JUEGO
+ru ИГРА
+
+@ LOOP
+fr BOUCLE
+de SCHLEIFE
+it CICLO
+es BUCLE
+ru ПОВТОР
+
+@ Preview unavailable
+fr Aperçu indisponible
+de Vorschau nicht verfügbar
+it Anteprima non disponibile
+es Vista previa no disponible
+ru Предпросмотр недоступен
+
+# shader and language help lines
+@ A setting of the chosen shader; arrows step it, Enter is not needed
+fr Un réglage du shader choisi ; les flèches le modifient, inutile d'appuyer sur Entrée
+de Eine Einstellung des gewählten Shaders; Pfeiltasten ändern sie, Eingabe ist nicht nötig
+it Un'impostazione dello shader scelto; le frecce la regolano, non serve Invio
+es Un ajuste del sombreador elegido; las flechas lo cambian, no hace falta Intro
+ru Параметр выбранного шейдера; меняется стрелками, Enter не нужен
+
+@ Language of the menus, messages and the 2021 re-release's game text; System follows your computer's language
+fr Langue des menus, des messages et des textes de jeu de la réédition 2021 ; Système suit la langue de votre ordinateur
+de Sprache der Menüs, Nachrichten und Spieltexte der Neuauflage von 2021; System folgt der Sprache deines Computers
+it Lingua di menu, messaggi e testi di gioco della riedizione 2021; Sistema segue la lingua del computer
+es Idioma de los menús, los mensajes y los textos de juego de la reedición de 2021; Sistema sigue el idioma de tu ordenador
+ru Язык меню, сообщений и игровых текстов переиздания 2021 года; «Системный» следует языку вашего компьютера
+
+@ Puts every setting of the chosen shader back to the preset's defaults
+fr Remet tous les réglages du shader choisi aux valeurs du préréglage
+de Setzt alle Einstellungen des gewählten Shaders auf die Standardwerte der Voreinstellung zurück
+it Riporta ogni impostazione dello shader scelto ai valori della preimpostazione
+es Devuelve todos los ajustes del sombreador elegido a los valores del preajuste
+ru Возвращает все параметры выбранного шейдера к значениям пресета
+
+@ RetroArch slang shader on the final image: CRT, scanlines, NTSC, sharpening; add your own in <game>/shaders
+fr Shader slang RetroArch sur l'image finale : CRT, lignes de balayage, NTSC, netteté ; ajoutez les vôtres dans <jeu>/shaders
+de RetroArch-Slang-Shader auf dem fertigen Bild: CRT, Bildzeilen, NTSC, Schärfen; eigene in <Spiel>/shaders ablegen
+it Shader slang di RetroArch sull'immagine finale: CRT, linee di scansione, NTSC, nitidezza; aggiungi i tuoi in <gioco>/shaders
+es Sombreador slang de RetroArch sobre la imagen final: CRT, líneas de exploración, NTSC, enfoque; añade los tuyos en <juego>/shaders
+ru Шейдер RetroArch slang поверх итогового изображения: CRT, строки развёртки, NTSC, резкость; свои кладите в <игра>/shaders
+
+# modern console footer
+@ Shift+PgUp/Dn: height  ` : hide
+fr Maj+PgPréc/Suiv : hauteur  ` : masquer
+de Umschalt+Bild↑/↓: Höhe  ` : ausblenden
+it Maiusc+PagSu/Giù: altezza  ` : nascondi
+es Mayús+RePág/AvPág: altura  ` : ocultar
+ru Shift+PgUp/Dn: высота  ` : скрыть
+
+@ Tab: complete  Ctrl+R: search  bash | pipe
+fr Tab : compléter  Ctrl+R : rechercher  bash | redirection
+de Tab: ergänzen  Strg+R: suchen  bash | Pipe
+it Tab: completa  Ctrl+R: cerca  bash | pipe
+es Tab: completar  Ctrl+R: buscar  bash | tubería
+ru Tab: дополнить  Ctrl+R: поиск  bash | конвейер
+
+@ ↑ +{} lines (End to jump) 
+fr ↑ +{} lignes (Fin pour revenir) 
+de ↑ +{} Zeilen (Ende zum Springen) 
+it ↑ +{} righe (Fine per tornare) 
+es ↑ +{} líneas (Fin para saltar) 
+ru ↑ +{} строк (End — вниз) 
+
+# add-on descriptions
+@ Create two linked portals on flat walls. Fire places the first portal; Alt Fire places the second. Walk through either portal to emerge from the other. Your momentum carries through. Assign a weapon slot below: pressing that slot repeatedly cycles its ordinary weapon and every enabled add-on assigned there. Portal view quality is configurable below.
+fr Créez deux portails liés sur des murs plats. Le tir place le premier portail, le tir secondaire le second. Traversez l'un pour ressortir par l'autre, en gardant votre élan. Attribuez un emplacement d'arme ci-dessous : appuyer plusieurs fois sur cet emplacement alterne entre son arme ordinaire et chaque extension activée qui y est attribuée. La qualité de vue des portails se règle ci-dessous.
+de Erzeuge zwei verbundene Portale auf flachen Wänden. Feuer setzt das erste Portal, Alternativfeuer das zweite. Geh durch eines, um aus dem anderen zu kommen; dein Schwung bleibt erhalten. Weise unten einen Waffenplatz zu: wiederholtes Drücken dieses Platzes wechselt zwischen seiner normalen Waffe und jedem dort zugewiesenen aktiven Add-on. Die Qualität der Portalansicht lässt sich unten einstellen.
+it Crea due portali collegati su pareti piatte. Il fuoco piazza il primo portale, il fuoco secondario il secondo. Attraversane uno per uscire dall'altro, mantenendo lo slancio. Assegna uno slot arma qui sotto: premendo più volte quello slot passi tra la sua arma normale e ogni add-on attivo assegnato lì. La qualità della vista dei portali si regola qui sotto.
+es Crea dos portales enlazados en paredes planas. El disparo coloca el primero y el secundario el segundo. Atraviesa uno para salir por el otro conservando tu impulso. Asigna una ranura de arma abajo: pulsar esa ranura varias veces alterna entre su arma normal y cada complemento activo asignado a ella. La calidad de la vista de los portales se ajusta abajo.
+ru Создавайте два связанных портала на ровных стенах. Огонь ставит первый портал, альт. огонь — второй. Войдите в один, чтобы выйти из другого; инерция сохраняется. Назначьте слот оружия ниже: повторные нажатия этого слота переключают его обычное оружие и все включённые дополнения в нём. Качество вида порталов настраивается ниже.
+
+@ Hold Fire and sweep the crosshair over monsters to queue targets. Release Fire to throw: the boomerang visits each target, stuns it and returns to you. Alt Fire clears the queue. The weapon slot selects a group, not a separate hotkey: press it again to cycle through the weapons in that slot. Configure stun duration and flight speed below.
+fr Maintenez le tir et balayez les monstres avec le réticule pour les mettre en file. Relâchez pour lancer : le boomerang passe par chaque cible, l'étourdit et revient vers vous. Le tir secondaire vide la file. L'emplacement d'arme sélectionne un groupe, pas un raccourci séparé : appuyez à nouveau pour alterner entre les armes de cet emplacement. Réglez la durée d'étourdissement et la vitesse de vol ci-dessous.
+de Halte Feuer und zieh das Fadenkreuz über Monster, um Ziele vorzumerken. Lass Feuer los zum Werfen: der Bumerang fliegt jedes Ziel an, betäubt es und kehrt zu dir zurück. Alternativfeuer leert die Liste. Der Waffenplatz wählt eine Gruppe, keine eigene Taste: erneut drücken wechselt durch die Waffen dieses Platzes. Betäubungsdauer und Fluggeschwindigkeit lassen sich unten einstellen.
+it Tieni premuto il fuoco e passa il mirino sui mostri per metterli in coda. Rilascia per lanciare: il boomerang raggiunge ogni bersaglio, lo stordisce e torna da te. Il fuoco secondario svuota la coda. Lo slot arma seleziona un gruppo, non un tasto a parte: premilo di nuovo per passare tra le armi di quello slot. Durata dello stordimento e velocità di volo si regolano qui sotto.
+es Mantén el disparo y pasa el punto de mira por los monstruos para ponerlos en cola. Suelta para lanzar: el bumerán visita cada objetivo, lo aturde y vuelve a ti. El disparo secundario vacía la cola. La ranura de arma selecciona un grupo, no un atajo aparte: vuelve a pulsarla para alternar entre las armas de esa ranura. Ajusta abajo la duración del aturdimiento y la velocidad de vuelo.
+ru Удерживайте огонь и проведите прицелом по монстрам, чтобы поставить их в очередь. Отпустите для броска: бумеранг облетит каждую цель, оглушит её и вернётся. Альт. огонь очищает очередь. Слот оружия выбирает группу, а не отдельную клавишу: нажмите его снова, чтобы переключать оружие в этом слоте. Длительность оглушения и скорость полёта настраиваются ниже.
+
+@ Hold Fire to charge a sticky bomb using rocket ammunition; release to launch. A longer charge throws it faster. Bombs cling to walls, doors and monsters. Alt Fire detonates your planted bombs together. Place a trap, retreat, then detonate it when enemies approach. Assign any weapon slot below; repeated presses cycle through the ordinary weapon and add-ons in that slot.
+fr Maintenez le tir pour charger une bombe collante avec des munitions de roquettes ; relâchez pour la lancer. Plus la charge est longue, plus le lancer est rapide. Les bombes adhèrent aux murs, portes et monstres. Le tir secondaire fait exploser toutes vos bombes posées. Posez un piège, reculez, puis déclenchez-le quand les ennemis approchent. Attribuez un emplacement d'arme ci-dessous ; des appuis répétés alternent entre l'arme ordinaire et les extensions de cet emplacement.
+de Halte Feuer, um eine Haftbombe mit Raketenmunition aufzuladen; loslassen zum Abschießen. Längeres Laden wirft sie schneller. Bomben kleben an Wänden, Türen und Monstern. Alternativfeuer zündet alle gelegten Bomben gemeinsam. Leg eine Falle, zieh dich zurück und zünde sie, wenn Gegner kommen. Weise unten einen Waffenplatz zu; wiederholtes Drücken wechselt zwischen der normalen Waffe und den Add-ons dieses Platzes.
+it Tieni premuto il fuoco per caricare una bomba adesiva con munizioni dei razzi; rilascia per lanciarla. Una carica più lunga la lancia più veloce. Le bombe si attaccano a pareti, porte e mostri. Il fuoco secondario fa esplodere insieme tutte le bombe piazzate. Piazza una trappola, ritirati e falla esplodere quando arrivano i nemici. Assegna uno slot arma qui sotto; pressioni ripetute passano tra l'arma normale e gli add-on di quello slot.
+es Mantén el disparo para cargar una bomba adhesiva con munición de cohetes; suelta para lanzarla. Cuanto más cargues, más rápido sale. Las bombas se pegan a paredes, puertas y monstruos. El disparo secundario detona juntas todas tus bombas colocadas. Pon una trampa, retírate y detónala cuando se acerquen los enemigos. Asigna una ranura de arma abajo; pulsarla varias veces alterna entre el arma normal y los complementos de esa ranura.
+ru Удерживайте огонь, чтобы зарядить липкую бомбу ракетным боезапасом; отпустите для запуска. Чем дольше заряд, тем быстрее бросок. Бомбы прилипают к стенам, дверям и монстрам. Альт. огонь подрывает все установленные бомбы разом. Поставьте ловушку, отступите и подорвите её, когда подойдут враги. Назначьте слот оружия ниже; повторные нажатия переключают обычное оружие и дополнения в этом слоте.
+
+@ Fire launches a chain hook. It latches onto a permitted surface or enemy and reels you toward the anchor. Fire again or use Alt Fire to let go. Choose which materials and enemies can be hooked in Configure Parameters. Assign it to any weapon slot; repeated presses of the slot's existing binding cycle through its weapons.
+fr Le tir lance un crochet à chaîne. Il s'accroche à une surface autorisée ou à un ennemi et vous tire vers le point d'ancrage. Tirez à nouveau ou utilisez le tir secondaire pour lâcher. Choisissez les matériaux et ennemis accrochables dans Configurer les paramètres. Attribuez-le à n'importe quel emplacement d'arme ; des appuis répétés sur la touche de cet emplacement alternent entre ses armes.
+de Feuer schleudert einen Kettenhaken. Er greift an einer erlaubten Oberfläche oder einem Gegner und zieht dich zum Ankerpunkt. Erneut feuern oder Alternativfeuer lässt los. Welche Materialien und Gegner eingehakt werden können, legst du unter Parameter einstellen fest. Weise ihn einem beliebigen Waffenplatz zu; wiederholtes Drücken der Taste dieses Platzes wechselt durch seine Waffen.
+it Il fuoco lancia un gancio a catena. Si aggancia a una superficie consentita o a un nemico e ti tira verso il punto d'ancoraggio. Spara di nuovo o usa il fuoco secondario per sganciarti. Scegli quali materiali e nemici si possono agganciare in Configura i parametri. Assegnalo a qualsiasi slot arma; pressioni ripetute del tasto di quello slot passano tra le sue armi.
+es El disparo lanza un garfio con cadena. Se engancha a una superficie permitida o a un enemigo y te atrae hacia el anclaje. Vuelve a disparar o usa el secundario para soltarte. Elige qué materiales y enemigos se pueden enganchar en Configurar parámetros. Asígnalo a cualquier ranura de arma; pulsar varias veces la tecla de esa ranura alterna entre sus armas.
+ru Огонь бросает крюк на цепи. Он цепляется за разрешённую поверхность или врага и подтягивает вас к точке крепления. Повторный огонь или альт. огонь отпускает. Какие материалы и враги подходят для крюка, выбирается в «Настроить параметры». Назначьте его в любой слот оружия; повторные нажатия клавиши слота переключают его оружие.
+
+@ A piercing railgun inspired by Quake III. Fire sends a slug through every enemy along its line. Each shot consumes two cells, with a 1.5 second refire interval. Damage and the spiral trail colour are configurable below. Choose a weapon slot: the slot's current binding selects and cycles the weapons assigned to it.
+fr Un railgun perforant inspiré de Quake III. Le tir envoie un projectile à travers tous les ennemis sur sa ligne. Chaque tir consomme deux cellules, avec 1,5 seconde entre deux tirs. Les dégâts et la couleur de la traînée en spirale se règlent ci-dessous. Choisissez un emplacement d'arme : sa touche actuelle sélectionne et alterne les armes qui y sont attribuées.
+de Eine durchschlagende Railgun nach dem Vorbild von Quake III. Feuer schickt ein Geschoss durch jeden Gegner auf seiner Linie. Jeder Schuss kostet zwei Zellen, mit 1,5 Sekunden bis zum nächsten. Schaden und Farbe der Spiralspur lassen sich unten einstellen. Wähle einen Waffenplatz: seine aktuelle Belegung wählt die zugewiesenen Waffen aus und wechselt zwischen ihnen.
+it Un railgun perforante ispirato a Quake III. Il fuoco spara un proiettile attraverso ogni nemico sulla sua linea. Ogni colpo consuma due celle, con 1,5 secondi tra un colpo e l'altro. Danni e colore della scia a spirale si regolano qui sotto. Scegli uno slot arma: il suo tasto attuale seleziona e alterna le armi assegnate.
+es Un railgun perforante inspirado en Quake III. El disparo envía un proyectil a través de todos los enemigos de su trayectoria. Cada disparo gasta dos celdas, con 1,5 segundos entre disparos. El daño y el color de la estela en espiral se ajustan abajo. Elige una ranura de arma: su tecla actual selecciona y alterna las armas asignadas.
+ru Пробивающий рейлган по мотивам Quake III. Огонь отправляет снаряд сквозь всех врагов на линии. Каждый выстрел тратит две ячейки, перезарядка — 1,5 секунды. Урон и цвет спирального следа настраиваются ниже. Выберите слот оружия: его текущая клавиша выбирает и переключает назначенное оружие.
+
+@ A Portal-style gel sprayer. Fire sprays blue Repulsion gel: land, jump or run into it to bounce, and landings on it never hurt. Alt Fire sprays orange Propulsion gel: run across it to go much faster. Gel coats floors and walls until washed off with the Powerwasher. Assign a weapon slot below; repeated presses cycle the weapons in that slot.
+fr Un pulvérisateur de gel façon Portal. Le tir projette du gel bleu de répulsion : atterrissez, sautez ou foncez dessus pour rebondir, et les atterrissages dessus ne blessent jamais. Le tir secondaire projette du gel orange de propulsion : courez dessus pour aller bien plus vite. Le gel recouvre sols et murs jusqu'à être lavé au nettoyeur haute pression. Attribuez un emplacement d'arme ci-dessous ; des appuis répétés alternent entre les armes de cet emplacement.
+de Ein Gelsprüher wie in Portal. Feuer sprüht blaues Abstoßungsgel: lande, spring oder lauf hinein, um abzuprallen, und Landungen darauf schaden nie. Alternativfeuer sprüht oranges Antriebsgel: lauf darüber, um viel schneller zu werden. Gel bedeckt Böden und Wände, bis es mit dem Hochdruckreiniger abgewaschen wird. Weise unten einen Waffenplatz zu; wiederholtes Drücken wechselt durch die Waffen dieses Platzes.
+it Uno spruzzagel in stile Portal. Il fuoco spruzza gel blu repulsivo: atterraci, saltaci o corrici contro per rimbalzare, e gli atterraggi sopra non fanno mai male. Il fuoco secondario spruzza gel arancione propulsivo: corrici sopra per andare molto più veloce. Il gel ricopre pavimenti e pareti finché non lo lavi via con l'idropulitrice. Assegna uno slot arma qui sotto; pressioni ripetute passano tra le armi di quello slot.
+es Un pulverizador de gel al estilo de Portal. El disparo rocía gel azul de repulsión: aterriza, salta o corre hacia él para rebotar, y aterrizar sobre él nunca hace daño. El secundario rocía gel naranja de propulsión: corre sobre él para ir mucho más rápido. El gel cubre suelos y paredes hasta que lo lavas con la hidrolimpiadora. Asigna una ranura de arma abajo; pulsarla varias veces alterna entre sus armas.
+ru Гелемёт в стиле Portal. Огонь распыляет синий отталкивающий гель: приземлитесь, прыгните или вбегите в него, чтобы отскочить, а приземления на него никогда не ранят. Альт. огонь распыляет оранжевый ускоряющий гель: бегите по нему, чтобы двигаться намного быстрее. Гель покрывает полы и стены, пока его не смоет мойка высокого давления. Назначьте слот оружия ниже; повторные нажатия переключают оружие в этом слоте.
+
+@ A water cannon. Fire shoots a straight jet with limited reach; Alt Fire a wide, shorter fan. The water pushes enemies back, turns projectiles aside and washes away gel and blood. Push strength is configurable below. Assign a weapon slot below; repeated presses cycle the weapons in that slot.
+fr Un canon à eau. Le tir projette un jet droit à portée limitée ; le tir secondaire un éventail large et plus court. L'eau repousse les ennemis, dévie les projectiles et lave le gel et le sang. La force de poussée se règle ci-dessous. Attribuez un emplacement d'arme ci-dessous ; des appuis répétés alternent entre les armes de cet emplacement.
+de Eine Wasserkanone. Feuer schießt einen geraden Strahl mit begrenzter Reichweite, Alternativfeuer einen breiten, kürzeren Fächer. Das Wasser drängt Gegner zurück, lenkt Geschosse ab und wäscht Gel und Blut weg. Die Schubstärke lässt sich unten einstellen. Weise unten einen Waffenplatz zu; wiederholtes Drücken wechselt durch die Waffen dieses Platzes.
+it Un cannone ad acqua. Il fuoco spara un getto dritto a portata limitata, il fuoco secondario un ventaglio ampio e più corto. L'acqua respinge i nemici, devia i proiettili e lava via gel e sangue. La forza della spinta si regola qui sotto. Assegna uno slot arma qui sotto; pressioni ripetute passano tra le armi di quello slot.
+es Un cañón de agua. El disparo lanza un chorro recto de alcance limitado; el secundario, un abanico ancho y más corto. El agua empuja a los enemigos, desvía los proyectiles y limpia el gel y la sangre. La fuerza del empuje se ajusta abajo. Asigna una ranura de arma abajo; pulsarla varias veces alterna entre sus armas.
+ru Водомёт. Огонь бьёт прямой струёй ограниченной дальности, альт. огонь — широким коротким веером. Вода отталкивает врагов, отклоняет снаряды и смывает гель и кровь. Сила толчка настраивается ниже. Назначьте слот оружия ниже; повторные нажатия переключают оружие в этом слоте.
+
+@ One equipment add-on includes both night vision and thermal vision. The Change Goggles action cycles Normal, Night Vision, Thermal, then Normal again. Night vision brightens dark rooms; thermal vision highlights living enemies. Goggles do not occupy a weapon slot. Configure intensity and sensor noise below. The binding affects only this add-on.
+fr Une seule extension d'équipement comprend la vision nocturne et la vision thermique. L'action Changer de lunettes alterne entre normal, nocturne, thermique, puis normal. La vision nocturne éclaire les pièces sombres ; la vision thermique fait ressortir les ennemis vivants. Les lunettes n'occupent pas d'emplacement d'arme. Réglez l'intensité et le bruit du capteur ci-dessous. L'assignation ne concerne que cette extension.
+de Ein Ausrüstungs-Add-on enthält Nachtsicht und Wärmebild. Die Aktion Brille wechseln schaltet zwischen normal, Nachtsicht, Wärmebild und wieder normal. Nachtsicht hellt dunkle Räume auf, Wärmebild hebt lebende Gegner hervor. Die Brille belegt keinen Waffenplatz. Intensität und Sensorrauschen lassen sich unten einstellen. Die Belegung betrifft nur dieses Add-on.
+it Un unico add-on di equipaggiamento include visione notturna e termica. L'azione Cambia visore passa tra normale, notturno, termico e di nuovo normale. La visione notturna schiarisce le stanze buie; quella termica evidenzia i nemici vivi. I visori non occupano uno slot arma. Intensità e rumore del sensore si regolano qui sotto. L'assegnazione vale solo per questo add-on.
+es Un solo complemento de equipo incluye visión nocturna y térmica. La acción Cambiar gafas alterna entre normal, nocturna, térmica y de nuevo normal. La visión nocturna aclara las salas oscuras; la térmica resalta a los enemigos vivos. Las gafas no ocupan ranura de arma. Ajusta abajo la intensidad y el ruido del sensor. La asignación solo afecta a este complemento.
+ru Одно дополнение-снаряжение включает ночное и тепловое видение. Действие «Сменить очки» переключает обычный, ночной, тепловой режимы и снова обычный. Ночное видение осветляет тёмные комнаты; тепловое выделяет живых врагов. Очки не занимают слот оружия. Интенсивность и шум сенсора настраиваются ниже. Назначение влияет только на это дополнение.
+
+@ Press Dodge with a movement direction on the ground or in midair: dive forward or leap backward and sideways. Diagonals are supported. Each press launches once, with a short recovery. The player body animates in third person. Assign the Dodge action below or in Controls.
+fr Appuyez sur Esquive avec une direction de mouvement, au sol ou en l'air : plongez en avant ou bondissez en arrière et sur les côtés. Les diagonales sont prises en charge. Chaque appui propulse une fois, avec une courte récupération. Le corps du joueur est animé à la troisième personne. Attribuez l'action Esquive ci-dessous ou dans Commandes.
+de Drück Ausweichen mit einer Bewegungsrichtung am Boden oder in der Luft: hechte nach vorn oder spring nach hinten und zur Seite. Diagonalen werden unterstützt. Jeder Druck löst einmal aus, mit kurzer Erholung. Der Spielerkörper wird in der Verfolgerperspektive animiert. Weise die Aktion Ausweichen unten oder unter Steuerung zu.
+it Premi Schivata con una direzione di movimento, a terra o in aria: tuffati in avanti o balza indietro e di lato. Le diagonali sono supportate. Ogni pressione dà una spinta, con un breve recupero. Il corpo del giocatore è animato in terza persona. Assegna l'azione Schivata qui sotto o in Comandi.
+es Pulsa Esquivar con una dirección de movimiento, en el suelo o en el aire: lánzate hacia delante o salta hacia atrás y a los lados. Las diagonales funcionan. Cada pulsación impulsa una vez, con una breve recuperación. El cuerpo del jugador se anima en tercera persona. Asigna la acción Esquivar abajo o en Controles.
+ru Нажмите «Уклон» с направлением движения на земле или в воздухе: нырок вперёд или прыжок назад и вбок. Диагонали поддерживаются. Каждое нажатие даёт один рывок с короткой передышкой. Тело игрока анимируется от третьего лица. Назначьте действие «Уклон» ниже или в «Управлении».
+
+@ Use the dedicated Bullet Time action to slow the whole local game to 20% speed. Hold is the default; Toggle switches on each press. The optional meter limits use in real seconds and regenerates while inactive. Disable the meter for unlimited use. Remap the action and configure duration and regeneration below.
+fr Utilisez l'action Bullet time dédiée pour ralentir toute la partie locale à 20 % de sa vitesse. Maintenir est le mode par défaut ; Basculer change à chaque appui. La jauge facultative limite l'usage en secondes réelles et se recharge au repos. Désactivez-la pour un usage illimité. Réassignez l'action et réglez la durée et la recharge ci-dessous.
+de Nutze die eigene Bullet-Time-Aktion, um das ganze lokale Spiel auf 20 % Tempo zu verlangsamen. Halten ist Standard; Umschalten wechselt bei jedem Druck. Die optionale Leiste begrenzt die Nutzung in echten Sekunden und lädt sich in Ruhe wieder auf. Deaktiviere sie für unbegrenzte Nutzung. Belege die Aktion neu und stelle Dauer und Aufladung unten ein.
+it Usa l'azione dedicata Bullet time per rallentare tutta la partita locale al 20% della velocità. Tieni premuto è il valore predefinito; Commutazione cambia a ogni pressione. La barra opzionale limita l'uso in secondi reali e si ricarica quando è inattiva. Disattivala per un uso illimitato. Riassegna l'azione e regola durata e ricarica qui sotto.
+es Usa la acción Tiempo bala para ralentizar toda la partida local al 20 % de velocidad. Mantener es el modo predeterminado; Alterno cambia con cada pulsación. El medidor opcional limita el uso en segundos reales y se recarga mientras está inactivo. Desactívalo para un uso ilimitado. Reasigna la acción y ajusta la duración y la recarga abajo.
+ru Отдельное действие «Замедление времени» замедляет всю локальную игру до 20% скорости. По умолчанию — удержание; режим переключения меняет состояние каждым нажатием. Необязательная шкала ограничивает использование в реальных секундах и восстанавливается в покое. Отключите шкалу для неограниченного использования. Переназначьте действие и настройте длительность и восстановление ниже.
+
+@ Both shotguns and enemy grunts fire physical pellets with their original spread and damage. Fast default projectiles feel immediate; lower their speed to dodge incoming fire during bullet time. Configure projectile speed below, or reset it to the default of 10000 units per second.
+fr Les deux fusils et les grunts ennemis tirent des plombs physiques avec leur dispersion et leurs dégâts d'origine. Les projectiles rapides par défaut semblent instantanés ; réduisez leur vitesse pour esquiver les tirs pendant le bullet time. Réglez la vitesse des projectiles ci-dessous, ou remettez la valeur par défaut de 10000 unités par seconde.
+de Beide Schrotflinten und gegnerische Grunts verschießen physikalische Schrotkugeln mit originaler Streuung und originalem Schaden. Schnelle Standardgeschosse wirken sofort; verringere ihr Tempo, um in der Bullet-Time Beschuss auszuweichen. Stelle das Projektiltempo unten ein oder setze es auf den Standardwert von 10000 Einheiten pro Sekunde zurück.
+it Entrambi i fucili e i grunt nemici sparano pallini fisici con dispersione e danni originali. I proiettili veloci predefiniti sembrano istantanei; riducine la velocità per schivare i colpi durante il bullet time. Regola la velocità dei proiettili qui sotto o ripristina il valore predefinito di 10000 unità al secondo.
+es Las dos escopetas y los grunts enemigos disparan perdigones físicos con su dispersión y daño originales. Los proyectiles rápidos predeterminados parecen instantáneos; reduce su velocidad para esquivar los disparos durante el tiempo bala. Ajusta abajo la velocidad de los proyectiles o restablece el valor predeterminado de 10000 unidades por segundo.
+ru Оба дробовика и солдаты-враги стреляют физической дробью с исходным разбросом и уроном. Быстрые снаряды по умолчанию кажутся мгновенными; уменьшите их скорость, чтобы уклоняться от огня при замедлении времени. Настройте скорость снарядов ниже или верните значение по умолчанию — 10000 единиц в секунду.
+
+@ Freezes the game for a split second when you damage an enemy, so hits feel heavier. Single player only. Choose which weapons trigger it (all, melee, ranged or explosives), how long it lasts and how much more a kill freezes. Advanced settings cover enemy toughness, damage scaling, cooldown and the longest freeze.
+fr Fige le jeu une fraction de seconde quand vous blessez un ennemi, pour des coups plus percutants. Solo uniquement. Choisissez les armes qui le déclenchent (toutes, corps à corps, distance ou explosifs), sa durée et le surplus de gel à l'élimination. Les réglages avancés couvrent la robustesse des ennemis, l'échelle des dégâts, le temps de recharge et le gel le plus long.
+de Friert das Spiel für einen Sekundenbruchteil ein, wenn du einen Gegner verletzt, damit Treffer wuchtiger wirken. Nur Einzelspieler. Wähle, welche Waffen es auslösen (alle, Nahkampf, Fernkampf oder Sprengwaffen), wie lange es dauert und wie viel länger ein Abschuss einfriert. Erweiterte Einstellungen betreffen Gegnerzähigkeit, Schadensskalierung, Abklingzeit und längstes Einfrieren.
+it Blocca il gioco per una frazione di secondo quando ferisci un nemico, per colpi più pesanti. Solo giocatore singolo. Scegli quali armi lo attivano (tutte, corpo a corpo, a distanza o esplosivi), quanto dura e quanto in più blocca un'uccisione. Le impostazioni avanzate riguardano resistenza dei nemici, scala dei danni, tempo di ricarica e blocco più lungo.
+es Congela el juego una fracción de segundo al dañar a un enemigo, para que los golpes se sientan más contundentes. Solo un jugador. Elige qué armas lo activan (todas, cuerpo a cuerpo, a distancia o explosivos), cuánto dura y cuánto más congela una baja. Los ajustes avanzados cubren la dureza de los enemigos, la escala de daño, el enfriamiento y la congelación más larga.
+ru Замораживает игру на долю секунды при ранении врага, чтобы удары ощущались весомее. Только одиночная игра. Выберите, какое оружие это вызывает (всё, ближний бой, дальний бой или взрывчатка), сколько длится стоп-кадр и насколько дольше при убийстве. Дополнительно настраиваются крепость врагов, масштаб урона, перезарядка и самый долгий стоп-кадр.
+
+# map packs and the Quaddicted browser
+@ Get more maps (Quaddicted)...
+fr Plus de cartes (Quaddicted)...
+de Weitere Karten (Quaddicted)...
+it Altre mappe (Quaddicted)...
+es Más mapas (Quaddicted)...
+ru Больше карт (Quaddicted)...
+
+@ Type to filter...
+fr Tapez pour filtrer...
+de Tippen zum Filtern...
+it Digita per filtrare...
+es Escribe para filtrar...
+ru Введите для фильтра...
+
+@ Launch mod
+fr Lancer le mod
+de Mod starten
+it Avvia la mod
+es Iniciar el mod
+ru Запустить мод
+
+@ Start first map
+fr Lancer la première carte
+de Erste Karte starten
+it Avvia la prima mappa
+es Iniciar el primer mapa
+ru Начать первую карту
+
+@ (running)
+fr (en cours)
+de (läuft)
+it (in esecuzione)
+es (en ejecución)
+ru (запущен)
+
+@ running
+fr en cours
+de läuft
+it in esecuzione
+es en ejecución
+ru запущен
+
+@ Recent
+fr Récents
+de Zuletzt
+it Recenti
+es Recientes
+ru Недавние
+
+@ Name
+fr Nom
+de Name
+it Nome
+es Nombre
+ru Имя
+
+@ Dir
+fr Dossier
+de Ordner
+it Cartella
+es Carpeta
+ru Папка
+
+@ Default
+fr Par défaut
+de Standard
+it Predefinito
+es Predeterminado
+ru По умолчанию
+
+@ Title
+fr Titre
+de Titel
+it Titolo
+es Título
+ru Название
+
+@ Sort: {}
+fr Tri : {}
+de Sortierung: {}
+it Ordina: {}
+es Orden: {}
+ru Сортировка: {}
+
+@ {} installed
+fr {} installés
+de {} installiert
+it {} installati
+es {} instalados
+ru Установлено: {}
+
+@ {}/{} matching
+fr {}/{} correspondants
+de {}/{} passend
+it {}/{} corrispondenti
+es {}/{} coincidentes
+ru Совпадений: {}/{}
+
+@ {} maps, {} completed
+fr {} cartes, {} terminées
+de {} Karten, {} abgeschlossen
+it {} mappe, {} completate
+es {} mapas, {} completados
+ru Карт: {}, пройдено: {}
+
+@ {}/{} matching, {} completed
+fr {}/{} correspondantes, {} terminées
+de {}/{} passend, {} abgeschlossen
+it {}/{} corrispondenti, {} completate
+es {}/{} coincidentes, {} completados
+ru Совпадений: {}/{}, пройдено: {}
+
+@ no maps of its own
+fr aucune carte propre
+de keine eigenen Karten
+it nessuna mappa propria
+es sin mapas propios
+ru нет собственных карт
+
+@ dir: {}
+fr dossier : {}
+de Ordner: {}
+it cartella: {}
+es carpeta: {}
+ru папка: {}
+
+@ base: {}
+fr base : {}
+de Basis: {}
+it base: {}
+es base: {}
+ru основа: {}
+
+@ Browse the Quaddicted archive of
+fr Parcourez les archives Quaddicted
+de Durchsuche das Quaddicted-Archiv
+it Sfoglia l'archivio Quaddicted
+es Explora el archivo de Quaddicted
+ru Просматривайте архив Quaddicted
+
+@ single-player maps and episodes,
+fr de cartes et d'épisodes solo,
+de mit Einzelspieler-Karten und -Episoden,
+it di mappe ed episodi per giocatore singolo,
+es de mapas y episodios para un jugador,
+ru одиночных карт и эпизодов,
+
+@ then download and install them
+fr puis téléchargez-les et installez-les
+de lade sie herunter und installiere sie
+it poi scaricali e installali
+es y luego descárgalos e instálalos
+ru затем скачивайте и устанавливайте их
+
+@ here. Each release gets its own
+fr ici. Chaque sortie a sa propre
+de hier. Jede Veröffentlichung erhält einen
+it qui. Ogni uscita ha una propria
+es aquí. Cada publicación tiene su propia
+ru здесь. Каждый релиз получает свою
+
+@ entry in this list.
+fr entrée dans cette liste.
+de eigenen Eintrag in dieser Liste.
+it voce in questo elenco.
+es entrada en esta lista.
+ru строку в этом списке.
+
+@ Needs an internet connection.
+fr Nécessite une connexion Internet.
+de Benötigt eine Internetverbindung.
+it Richiede una connessione a Internet.
+es Requiere conexión a Internet.
+ru Нужно подключение к интернету.
+
+@ Quaddicted Map Archive
+fr Archives de cartes Quaddicted
+de Quaddicted-Kartenarchiv
+it Archivio mappe Quaddicted
+es Archivo de mapas de Quaddicted
+ru Архив карт Quaddicted
+
+@ Newest
+fr Plus récentes
+de Neueste
+it Più recenti
+es Más recientes
+ru Новые
+
+@ Author
+fr Auteur
+de Autor
+it Autore
+es Autor
+ru Автор
+
+@ Size
+fr Taille
+de Größe
+it Dimensione
+es Tamaño
+ru Размер
+
+@ Loading the map list...
+fr Chargement de la liste des cartes...
+de Kartenliste wird geladen...
+it Caricamento dell'elenco mappe...
+es Cargando la lista de mapas...
+ru Загрузка списка карт...
+
+@ Couldn't load the map list: {}
+fr Impossible de charger la liste des cartes : {}
+de Kartenliste konnte nicht geladen werden: {}
+it Impossibile caricare l'elenco mappe: {}
+es No se pudo cargar la lista de mapas: {}
+ru Не удалось загрузить список карт: {}
+
+@ {} single-player releases  -  F5 refreshes
+fr {} sorties solo  -  F5 pour actualiser
+de {} Einzelspieler-Veröffentlichungen  -  F5 aktualisiert
+it {} uscite per giocatore singolo  -  F5 aggiorna
+es {} publicaciones para un jugador  -  F5 actualiza
+ru Одиночных релизов: {}  -  F5 обновляет
+
+@ {} matching
+fr {} correspondantes
+de {} passend
+it {} corrispondenti
+es {} coincidentes
+ru Совпадений: {}
+
+@ by {}
+fr par {}
+de von {}
+it di {}
+es de {}
+ru автор: {}
+
+@ requires: {}
+fr nécessite : {}
+de benötigt: {}
+it richiede: {}
+es requiere: {}
+ru требует: {}
+
+@ maps: {}
+fr cartes : {}
+de Karten: {}
+it mappe: {}
+es mapas: {}
+ru карты: {}
+
+@ Failed: {}
+fr Échec : {}
+de Fehlgeschlagen: {}
+it Non riuscito: {}
+es Error: {}
+ru Ошибка: {}
+
+@ Downloading... {}%
+fr Téléchargement... {} %
+de Wird heruntergeladen... {} %
+it Download in corso... {}%
+es Descargando... {} %
+ru Загрузка... {}%
+
+@ Unpacking...
+fr Décompression...
+de Wird entpackt...
+it Estrazione...
+es Descomprimiendo...
+ru Распаковка...
+
+@ Installed in {}/  -  Enter: play
+fr Installé dans {}/  -  Entrée : jouer
+de Installiert in {}/  -  Eingabe: spielen
+it Installato in {}/  -  Invio: gioca
+es Instalado en {}/  -  Intro: jugar
+ru Установлено в {}/  -  Enter: играть
+
+@ Enter: download and install
+fr Entrée : télécharger et installer
+de Eingabe: herunterladen und installieren
+it Invio: scarica e installa
+es Intro: descargar e instalar
+ru Enter: скачать и установить
+
+@ unpacking
+fr décompression
+de entpacken
+it estrazione
+es descomprimiendo
+ru распаковка
+
+@ failed
+fr échec
+de fehlgeschlagen
+it non riuscito
+es error
+ru ошибка
+
+@ installed
+fr installé
+de installiert
+it installato
+es instalado
+ru установлено
+
+@ Downloads are not available in the browser build
+fr Les téléchargements ne sont pas disponibles dans la version navigateur
+de Downloads sind in der Browserversion nicht verfügbar
+it I download non sono disponibili nella versione per browser
+es Las descargas no están disponibles en la versión para navegador
+ru Загрузки недоступны в браузерной версии
+
+@ the map list could not be read
+fr la liste des cartes est illisible
+de die Kartenliste konnte nicht gelesen werden
+it impossibile leggere l'elenco mappe
+es no se pudo leer la lista de mapas
+ru не удалось прочитать список карт
+
+@ downloading needs the curl program
+fr le téléchargement nécessite le programme curl
+de zum Herunterladen wird das Programm curl benötigt
+it per scaricare serve il programma curl
+es para descargar hace falta el programa curl
+ru для загрузки нужна программа curl
+
+@ download failed
+fr échec du téléchargement
+de Download fehlgeschlagen
+it download non riuscito
+es la descarga falló
+ru загрузка не удалась
+
+@ the download is not a valid zip
+fr le fichier téléchargé n'est pas un zip valide
+de der Download ist kein gültiges ZIP
+it il file scaricato non è uno zip valido
+es la descarga no es un zip válido
+ru загруженный файл — не корректный zip
+
+@ nothing to install for this engine
+fr rien à installer pour ce moteur
+de nichts für diese Engine zu installieren
+it niente da installare per questo motore
+es nada que instalar para este motor
+ru для этого движка нечего устанавливать
+
+@ needs {} installed first
+fr nécessite d'abord {}
+de benötigt zuerst {}
+it richiede prima {}
+es primero necesita {}
+ru сначала нужно установить {}
+
+@ couldn't unpack {}
+fr impossible de décompresser {}
+de {} konnte nicht entpackt werden
+it impossibile estrarre {}
+es no se pudo descomprimir {}
+ru не удалось распаковать {}
+
+# help screen
+@ About
+fr À propos
+de Über
+it Informazioni
+es Acerca de
+ru О руководстве
+
+@ < Back
+fr < Retour
+de < Zurück
+it < Indietro
+es < Volver
+ru < Назад
+
+# tr_ctx keys: English shows the short word, the key says which meaning
+@ Save (a manual save, as opposed to a quicksave or autosave)
+fr Sauvegarde
+de Spielstand
+it Salvataggio
+es Partida guardada
+ru Сохранение

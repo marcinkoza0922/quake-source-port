@@ -32,10 +32,10 @@ impl Sort {
     }
     fn label(self) -> &'static str {
         match self {
-            Self::Newest => "Newest",
-            Self::Title => "Title",
-            Self::Author => "Author",
-            Self::Size => "Size",
+            Self::Newest => qcore::t!("Newest"),
+            Self::Title => qcore::t!("Title"),
+            Self::Author => qcore::t!("Author"),
+            Self::Size => qcore::t!("Size"),
         }
     }
 }
@@ -177,20 +177,20 @@ impl OnlinePage {
     fn state(&self, r: &Release) -> Option<(String, [f32; 4])> {
         match self.data.job(&r.sha) {
             Some(Job::Downloading(f)) => return Some((format!("{:>3}%", (f * 100.0) as u32), GOLD_FG)),
-            Some(Job::Installing) => return Some(("unpacking".into(), GOLD_FG)),
-            Some(Job::Failed(_)) => return Some(("failed".into(), WARN_FG)),
+            Some(Job::Installing) => return Some((qcore::tr!("unpacking"), GOLD_FG)),
+            Some(Job::Failed(_)) => return Some((qcore::tr!("failed"), WARN_FG)),
             None => {}
         }
-        self.data.installed(&r.sha).map(|_| ("installed".to_string(), GOLD_FG))
+        self.data.installed(&r.sha).map(|_| (qcore::tr!("installed"), GOLD_FG))
     }
 
     pub fn draw(&self, c: &mut Canvas) {
         center_gold(c, 24.0, "Quaddicted Map Archive");
         let sub = match self.data.status() {
-            Status::Idle | Status::Loading => "Loading the map list...".to_string(),
-            Status::Failed(e) => format!("Couldn't load the map list: {}", clip(&e, 50)),
-            Status::Ready if self.filter.is_empty() => format!("{} single-player releases  -  F5 refreshes", self.view.len()),
-            Status::Ready => format!("{} matching", self.view.len()),
+            Status::Idle | Status::Loading => qcore::tr!("Loading the map list..."),
+            Status::Failed(e) => qcore::tr!("Couldn't load the map list: {}", clip(&qcore::lang::tr(&e), 50)),
+            Status::Ready if self.filter.is_empty() => qcore::tr!("{} single-player releases  -  F5 refreshes", self.view.len()),
+            Status::Ready => qcore::tr!("{} matching", self.view.len()),
         };
         center(c, 36.0, &sub);
         let (x, w) = LIST;
@@ -229,20 +229,20 @@ impl OnlinePage {
             y += ROW_H;
         }
         y += 4.0;
-        line(c, &format!("by {}", r.author), FG, &mut y);
+        line(c, &qcore::tr!("by {}", r.author), FG, &mut y);
         line(c, &format!("{}  {:.1} MB  {}", r.date, r.bytes as f64 / 1e6, r.kinds.join(", ")), MUTED, &mut y);
         if !r.deps.is_empty() {
-            line(c, &format!("requires: {}", r.deps.join(", ")), WARN_FG, &mut y);
+            line(c, &qcore::tr!("requires: {}", r.deps.join(", ")), WARN_FG, &mut y);
         }
         if !r.startmaps.is_empty() {
-            line(c, &format!("maps: {}", r.startmaps.join(" ")), MUTED, &mut y);
+            line(c, &qcore::tr!("maps: {}", r.startmaps.join(" ")), MUTED, &mut y);
         }
         let action = match (self.data.job(&r.sha), self.data.installed(&r.sha)) {
-            (Some(Job::Failed(e)), _) => (format!("Failed: {e}"), WARN_FG),
-            (Some(Job::Downloading(f)), _) => (format!("Downloading... {:.0}%", f * 100.0), GOLD_FG),
-            (Some(Job::Installing), _) => ("Unpacking...".into(), GOLD_FG),
-            (None, Some(dir)) => (format!("Installed in {dir}/  -  Enter: play"), GOLD_FG),
-            (None, None) => ("Enter: download and install".into(), GOLD_FG),
+            (Some(Job::Failed(e)), _) => (qcore::tr!("Failed: {}", qcore::lang::tr(&e)), WARN_FG),
+            (Some(Job::Downloading(f)), _) => (qcore::tr!("Downloading... {}%", format!("{:.0}", f * 100.0)), GOLD_FG),
+            (Some(Job::Installing), _) => (qcore::tr!("Unpacking..."), GOLD_FG),
+            (None, Some(dir)) => (qcore::tr!("Installed in {}/  -  Enter: play", dir), GOLD_FG),
+            (None, None) => (qcore::tr!("Enter: download and install"), GOLD_FG),
         };
         y += 4.0;
         for l in wrap(&action.0, cols).iter().take(3) {

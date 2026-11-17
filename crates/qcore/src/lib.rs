@@ -3,6 +3,7 @@ pub mod anorms;
 pub mod cmd;
 pub mod cvar;
 pub mod fs;
+pub mod lang;
 pub mod math;
 pub mod reader;
 pub mod vertex;

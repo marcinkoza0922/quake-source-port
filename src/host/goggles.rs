@@ -34,14 +34,14 @@ pub(super) fn register_goggle_commands(c: &mut Commands<Host>) {
     c.add("goggles", |h, a| {
         let arg = a.argv(1);
         if !h.goggles_allowed() {
-            h.print("goggles: needs a game started with Add-ons and Goggles enabled\n");
+            h.print(&qcore::ctr!("goggles: needs a game started with Add-ons and Goggles enabled\n"));
             return;
         }
         match arg {
             "" | "cycle" => {
                 let mode = h.goggles.equip.cycle_goggles();
                 h.goggle_cue(mode != 0);
-                let name = ["Normal vision", "Night Vision Goggles", "Thermal Goggles"][mode as usize];
+                let name = [qcore::t!("Normal vision"), qcore::t!("Night Vision Goggles"), qcore::t!("Thermal Goggles")][mode as usize];
                 let (s, t, cols) = h.center_args(name);
                 h.con.center_print(&s, t, cols);
             }
@@ -60,7 +60,7 @@ pub(super) fn register_goggle_commands(c: &mut Commands<Host>) {
     });
     c.add("equip", |h, a| match Equip::from_key(a.argv(1)) {
         Some(e) if h.goggles_allowed() => h.toggle_equip(e),
-        Some(_) => h.print("equip: needs a game started with Add-ons and Goggles enabled\n"),
+        Some(_) => h.print(&qcore::ctr!("equip: needs a game started with Add-ons and Goggles enabled\n")),
         None => h.print("equip <nv|thermal> : toggle a piece of equipment\n"),
     });
 }

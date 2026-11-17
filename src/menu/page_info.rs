@@ -4,12 +4,14 @@ use super::*;
 pub(super) fn tooltip(item: Item) -> Option<&'static str> {
     let cvar = match item {
         Item::Slider { cvar, .. } | Item::Toggle { cvar, .. } | Item::Choice { cvar, .. } => cvar,
-        Item::ShaderPreset => "RetroArch slang shader on the final image: CRT, scanlines, NTSC, sharpening; add your own in <game>/shaders",
-        Item::ResetShaderParams => "Puts every setting of the chosen shader back to the preset's defaults",
-        Item::ShaderParam(_) => "A setting of the chosen shader; arrows step it, Enter is not needed",
+        Item::ShaderPreset => return Some(qcore::t!("RetroArch slang shader on the final image: CRT, scanlines, NTSC, sharpening; add your own in <game>/shaders")),
+        Item::ResetShaderParams => return Some(qcore::t!("Puts every setting of the chosen shader back to the preset's defaults")),
+        Item::ShaderParam(_) => return Some(qcore::t!("A setting of the chosen shader; arrows step it, Enter is not needed")),
+        Item::Language => return Some(qcore::t!("Language of the menus, messages and the 2021 re-release's game text; System follows your computer's language")),
         _ => return None,
     };
     Some(match cvar {
+        "con_translate" => "Also translates the engine's console messages; off keeps them in English",
         "gyro_enable" => "Turn the controller's motion sensor into a look input; needs a pad with a gyroscope",
         "joy_flick" => "2D aiming turns the view continuously with the right stick; flick stick snaps the view to where you push the stick, then turning the stick rotates it",
         "gyro_mode" => "When gyro looking applies: always, off while +gyroaction is held, or only while it is held",

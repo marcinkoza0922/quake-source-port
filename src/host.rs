@@ -38,6 +38,7 @@ mod shader;
 mod saves;
 mod death;
 mod console;
+mod language;
 mod input;
 mod frame;
 mod prof;
@@ -412,7 +413,7 @@ impl Host {
         let mut stats = qui::stats::Stats::load(&dir);
         stats.record(&self.level.mapname, run);
         if let Err(e) = stats.save(&dir) {
-            self.con.print(&format!("couldn't write {}: {e}\n", qui::stats::FILE_NAME));
+            self.con.print(&qcore::ctr!("couldn't write {}: {}\n", qui::stats::FILE_NAME, e));
         }
     }
 
