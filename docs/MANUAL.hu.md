@@ -33,7 +33,8 @@ holland, görög, magyar, román, portugál (Portugália vagy Brazília), japán
 koreai, kínai (egyszerűsített vagy hagyományos), török, indonéz, maláj,
 filippínó, vietnámi, szerb, litván, lett, észt, máltai, albán, örmény, grúz,
 izlandi, ír, walesi, baszk, katalán, galiciai, latin, eszperantó, belarusz,
-macedón, szlovén vagy szuahéli.
+macedón, szlovén, szuahéli, arab, héber, perzsa, urdu, hindi, maráthi,
+bengáli, pandzsábi, gudzsaráti, tamil, telugu, thai, khmer, amhara vagy kantoni.
 A **Rendszer** a számítógéped nyelvét követi. A 2021-es újrakiadás saját
 játékszövegei csak franciául, németül, olaszul, spanyolul és oroszul érhetők
 el; a többi nyelv angolul mutatja őket. Az angoltól eltérő nyelveken a kis

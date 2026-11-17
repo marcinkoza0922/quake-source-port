@@ -34,7 +34,9 @@ portugisiska (Portugal eller Brasilien), japanska, koreanska, kinesiska
 (förenklad eller traditionell), turkiska, indonesiska, malajiska, filippinska,
 vietnamesiska, serbiska, litauiska, lettiska, estniska, maltesiska, albanska,
 armeniska, georgiska, isländska, iriska, walesiska, baskiska, katalanska,
-galiciska, latin, esperanto, belarusiska, makedonska, slovenska eller swahili.
+galiciska, latin, esperanto, belarusiska, makedonska, slovenska, swahili,
+arabiska, hebreiska, persiska, urdu, hindi, marathi, bengali, punjabi,
+gujarati, tamil, telugu, thailändska, khmer, amhariska eller kantonesiska.
 **System** följer datorns språk. Spelets egen text från 2021 års nyutgåva
 finns bara översatt till franska, tyska, italienska, spanska och ryska;
 andra språk visar den på engelska. På andra språk än engelska använder den

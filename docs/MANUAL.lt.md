@@ -34,8 +34,9 @@ nyderlandų, graikų, vengrų, rumunų, portugalų (Portugalijos arba
 Brazilijos), japonų, korėjiečių, kinų (supaprastinta arba tradicinė),
 turkų, indoneziečių, malajų, filipiniečių, vietnamiečių, serbų, lietuvių,
 latvių, estų, maltiečių, albanų, armėnų, gruzinų, islandų, airių, valų,
-baskų, katalonų, galisų, lotynų, esperanto, baltarusių, makedonų, slovėnų
-arba suahilių.
+baskų, katalonų, galisų, lotynų, esperanto, baltarusių, makedonų, slovėnų,
+suahilių, arabų, hebrajų, persų, urdu, hindi, maratų, bengalų, pandžabų,
+gudžaratų, tamilų, telugų, tajų, khmerų, amharų arba kantoniečių.
 **Sistemos** naudoja jūsų kompiuterio kalbą. Paties 2021 m. pakartotinio
 leidimo žaidimo tekstai išversti tik į prancūzų, vokiečių, italų, ispanų ir
 rusų kalbas; kitomis kalbomis jie rodomi angliškai. Ne anglų kalba smulkus

@@ -35,7 +35,9 @@ Kiromania, Kireno (Ureno au Brazili), Kijapani, Kikorea, Kichina
 Kifilipino, Kivietinamu, Kiserbia, Kilithuania, Kilatvia, Kiestonia,
 Kimalta, Kialbania, Kiarmenia, Kijojia, Kiaislandi, Kiayalandi, Kiwelisi,
 Kibaski, Kikatalani, Kigalisia, Kilatini, Kiesperanto, Kibelarusi,
-Kimasedonia, Kislovenia au Kiswahili.
+Kimasedonia, Kislovenia, Kiswahili, Kiarabu, Kiebrania, Kiajemi, Kiurdu,
+Kihindi, Kimarathi, Kibengali, Kipunjabi, Kigujarati, Kitamil, Kitelugu,
+Kithai, Kikhmer, Kiamhari au Kikantoni.
 **Mfumo** hufuata lugha ya kompyuta yako. Maandishi ya mchezo ya toleo jipya
 la 2021 yametafsiriwa kwa Kifaransa, Kijerumani, Kiitaliano, Kihispania na
 Kirusi pekee; lugha nyingine huyaonyesha kwa Kiingereza. Katika lugha

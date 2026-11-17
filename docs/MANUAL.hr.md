@@ -33,7 +33,9 @@ ili Brazil), japanski, korejski, kineski (pojednostavljeni ili tradicionalni),
 turski, indonezijski, malajski, filipinski, vijetnamski, srpski, litavski,
 latvijski, estonski, malteški, albanski, armenski, gruzijski, islandski, irski,
 velški, baskijski, katalonski, galicijski, latinski, esperanto, bjeloruski,
-makedonski, slovenski ili svahili.
+makedonski, slovenski, svahili, arapski, hebrejski, perzijski, urdu, hindski,
+marathski, bengalski, pandžapski, gudžaratski, tamilski, teluški, tajlandski,
+kmerski, amharski ili kantonski.
 **Sustav** prati jezik vašeg računala. Vlastiti tekst igre iz reizdanja iz
 2021. preveden je samo na francuski, njemački, talijanski, španjolski i
 ruski; ostali jezici prikazuju ga na engleskom. U jezicima osim engleskog

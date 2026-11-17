@@ -1,0 +1,3024 @@
+# ta: the port's own text; English keys from crates/qcore/lang/*.txt.
+# Format in crates/qcore/src/lang/catalog.rs; check with tools/lang_check.py.
+
+# ==== menu.txt ====
+
+# Options pages: page names, row labels and choice values.
+@ 10% speed
+ta 10% வேகம்
+
+@ 2 split-screen
+ta 2 பிளவுத் திரை
+
+@ 3 split-screen
+ta 3 பிளவுத் திரை
+
+@ 4 split-screen
+ta 4 பிளவுத் திரை
+
+@ 5 split-screen
+ta 5 பிளவுத் திரை
+
+@ 6 split-screen
+ta 6 பிளவுத் திரை
+
+@ 2D aiming
+ta 2D குறிவைப்பு
+
+@ 2x monsters
+ta 2x அரக்கர்கள்
+
+@ 3x monsters
+ta 3x அரக்கர்கள்
+
+@ 4x monsters
+ta 4x அரக்கர்கள்
+
+@ 3D resolution
+ta 3D தெளிவுத்திறன்
+
+@ 3D view
+ta 3D காட்சி
+
+@ 8-bit Color
+ta 8-பிட் நிறம்
+
+@ Accessibility
+ta அணுகல்தன்மை
+
+@ Acquisition Cone
+ta இலக்குப் பிடிப்புக் கூம்பு
+
+@ Activation
+ta செயல்படுத்தல்
+
+@ Add a ringing room tail after the cue
+ta ஒலிக்குப் பின் அறை எதிரொலி வால் சேர்க்கும்
+
+@ Add delayed repeats after the cue
+ta ஒலிக்குப் பின் தாமதமான மறுஒலிகளைச் சேர்க்கும்
+
+@ Add saturation and distortion
+ta செறிவூட்டல் மற்றும் சிதைவைச் சேர்க்கும்
+
+@ Add-ons
+ta ஆட்-ஆன்கள்
+
+@ Address
+ta முகவரி
+
+@ Adds fine noise to hide color banding
+ta நிறப் பட்டைகளை மறைக்க நுண்ணிய இரைச்சல் சேர்க்கும்
+
+@ Advanced Settings
+ta மேம்பட்ட அமைப்புகள்
+
+@ Aim Assist
+ta குறிவைப்பு உதவி
+
+@ Aim Rotation
+ta குறிவைப்புச் சுழற்சி
+
+@ Aim Slowdown
+ta குறிவைப்பு மந்தம்
+
+@ Aim Style
+ta குறிவைப்பு பாணி
+
+@ All
+ta அனைத்தும்
+
+@ All enemies
+ta எல்லா எதிரிகளும்
+
+@ Alt Fire (Add-ons)
+ta மாற்றுச் சுடுதல் (ஆட்-ஆன்கள்)
+
+@ Always Run
+ta எப்போதும் ஓடு
+
+@ Ambient Occlusion
+ta சூழல் மறைப்பு
+
+@ Ammo Counts
+ta வெடிமருந்து எண்ணிக்கை
+
+@ Ammo Counts Position
+ta வெடிமருந்து எண்ணிக்கை நிலை
+
+@ Ammo Pickups
+ta எடுத்த வெடிமருந்து
+
+@ Anisotropic
+ta அனிசோட்ரோபிக்
+
+@ Anti-aliasing
+ta ஆன்டி-ஏலியாசிங்
+
+@ Apply To
+ta இதற்குப் பொருத்து
+
+@ Armor
+ta கவசம்
+
+@ Armor Position
+ta கவச நிலை
+
+@ Ask
+ta கேள்
+
+@ Attack
+ta தாக்கு
+
+@ Audio
+ta ஒலி
+
+@ Auto-aim
+ta தானியங்கு குறி
+
+@ Auto-aim Settings
+ta தானியங்கு குறி அமைப்புகள்
+
+@ Autosave
+ta தானியங்கு சேமிப்பு
+
+@ Autosave Settings
+ta தானியங்கு சேமிப்பு அமைப்புகள்
+
+@ Autosave Timer
+ta தானியங்கு சேமிப்பு நேரம்
+
+@ Autosaves to Keep
+ta வைத்திருக்கும் தானியங்கு சேமிப்புகள்
+
+@ Bass
+ta பேஸ்
+
+@ Blip
+ta பிளிப்
+
+@ Blood Quality
+ta இரத்தத் தரம்
+
+@ Blood Splatter Settings
+ta இரத்தத் தெறிப்பு அமைப்புகள்
+
+@ Blue
+ta நீலம்
+
+@ Boomerang Settings
+ta பூமராங் அமைப்புகள்
+
+@ Boost or cut high frequencies in decibels
+ta உயர் அதிர்வெண்களை டெசிபலில் கூட்டு அல்லது குறை
+
+@ Boost or cut low frequencies in decibels
+ta தாழ் அதிர்வெண்களை டெசிபலில் கூட்டு அல்லது குறை
+
+@ Brightness
+ta ஒளிர்வு
+
+@ Bullet Time (Add-ons)
+ta புல்லட் டைம் (ஆட்-ஆன்கள்)
+
+@ Bullet Time Settings
+ta புல்லட் டைம் அமைப்புகள்
+
+@ Button Glyphs
+ta பொத்தான் குறியீடுகள்
+
+@ Button Size
+ta பொத்தான் அளவு
+
+@ Camera
+ta கேமரா
+
+@ Caustic Intensity
+ta காஸ்டிக் தீவிரம்
+
+@ Caustics
+ta காஸ்டிக்ஸ்
+
+@ Center
+ta மையம்
+
+@ Center Message Position
+ta மையச் செய்தி நிலை
+
+@ Center Message Time
+ta மையச் செய்தி நேரம்
+
+@ Center View
+ta பார்வையை மையப்படுத்து
+
+@ Change Color on Kill
+ta கொன்றால் நிறம் மாற்று
+
+@ Change Color on Target
+ta இலக்கில் நிறம் மாற்று
+
+@ Chime
+ta மணியோசை
+
+@ Click
+ta கிளிக்
+
+@ Clink
+ta கிணுகிணுப்பு
+
+@ Coin
+ta நாணயம்
+
+@ Color
+ta நிறம்
+
+@ Color Filter
+ta நிற வடிகட்டி
+
+@ Color of the grenade arc
+ta கையெறிகுண்டு வளைவின் நிறம்
+
+@ Colored Lighting
+ta வண்ண ஒளியமைப்பு
+
+@ Connect
+ta இணை
+
+@ Contrast
+ta மாறுபாடு
+
+@ Controls
+ta கட்டுப்பாடுகள்
+
+@ Cooldown (ms)
+ta ஓய்வு நேரம் (ms)
+
+@ Crosshair Outline
+ta கிராஸ்ஹேர் வெளிக்கோடு
+
+@ Crosshair Shape
+ta கிராஸ்ஹேர் வடிவம்
+
+@ Crosshair Size
+ta கிராஸ்ஹேர் அளவு
+
+@ Current Ammo
+ta தற்போதைய வெடிமருந்து
+
+@ Current Ammo Position
+ta தற்போதைய வெடிமருந்து நிலை
+
+@ Customize This Game
+ta இந்த ஆட்டத்தைத் தனிப்பயனாக்கு
+
+@ Damage
+ta சேதம்
+
+@ Damage Taken
+ta பெற்ற சேதம்
+
+@ Debris
+ta சிதைவுகள்
+
+@ Debris Quality
+ta சிதைவுத் தரம்
+
+@ Debris Settings
+ta சிதைவு அமைப்புகள்
+
+@ Directional Damage
+ta திசைச் சேதம்
+
+@ Dithering
+ta டிதரிங்
+
+@ Dodge / Dive (Add-ons)
+ta தவிர் / பாய் (ஆட்-ஆன்கள்)
+
+@ Dragging up looks down instead of up
+ta மேலே இழுத்தால் கீழே பார்க்கும்
+
+@ Drive
+ta டிரைவ்
+
+@ Dynamic Lights
+ta இயங்கு ஒளிகள்
+
+@ Echo
+ta எதிரொலி
+
+@ Enemy Health
+ta எதிரி உயிர்
+
+@ Enemy Wounds
+ta எதிரி காயங்கள்
+
+@ Enhanced Blood Splatter
+ta மேம்பட்ட இரத்தத் தெறிப்பு
+
+@ Enhanced FX
+ta மேம்பட்ட FX
+
+@ Enhanced Models
+ta மேம்பட்ட மாடல்கள்
+
+@ Enhanced Particles
+ta மேம்பட்ட துகள்கள்
+
+@ Enhanced Water
+ta மேம்பட்ட நீர்
+
+@ Enhancements
+ta மேம்பாடுகள்
+
+@ Equipment Wheel (Add-ons)
+ta உபகரணச் சக்கரம் (ஆட்-ஆன்கள்)
+
+@ Exploding boxes throw metal shards
+ta வெடிக்கும் பெட்டிகள் உலோகத் துண்டுகளை வீசும்
+
+@ Explosion Damage
+ta வெடிப்புச் சேதம்
+
+@ Explosion Scorch Marks
+ta வெடிப்புக் கருகல் தடங்கள்
+
+@ Explosions scorch nearby solid surfaces
+ta வெடிப்புகள் அருகிலுள்ள திடப் பரப்புகளைக் கருக்கும்
+
+@ Explosives only
+ta வெடிபொருட்கள் மட்டும்
+
+@ Extra Monsters
+ta கூடுதல் அரக்கர்கள்
+
+@ Extra Per 10 Damage (ms)
+ta 10 சேதத்துக்குக் கூடுதல் (ms)
+
+@ FX Settings
+ta FX அமைப்புகள்
+
+@ Field of View
+ta பார்வைப் புலம்
+
+@ Firing never uses up ammo
+ta சுடுவதால் வெடிமருந்து குறையாது
+
+@ First person
+ta முதல் நபர்
+
+@ Flick Time
+ta ஃபிளிக் நேரம்
+
+@ Flight Speed
+ta பறக்கும் வேகம்
+
+@ Fog
+ta மூடுபனி
+
+@ Frag Limit
+ta ஃபிராக் வரம்பு
+
+@ Freeze Duration (ms)
+ta உறைவு நேரம் (ms)
+
+@ GLQuake
+ta GLQuake
+
+@ Game Speed
+ta ஆட்ட வேகம்
+
+@ Game Type
+ta ஆட்ட வகை
+
+@ Gameplay
+ta விளையாட்டு முறை
+
+@ Gameplay Modifiers
+ta ஆட்ட மாற்றிகள்
+
+@ Gel Quality
+ta ஜெல் தரம்
+
+@ Gib Surface Painting
+ta உடல் துண்டுக் கறைகள்
+
+@ Gibs
+ta உடல் துண்டுகள்
+
+@ Gibs and heads tumble and bounce
+ta உடல் துண்டுகளும் தலைகளும் உருண்டு துள்ளும்
+
+@ Goggle Glow Quality
+ta கண்ணாடி ஒளிர்வுத் தரம்
+
+@ Goggle Intensity
+ta கண்ணாடித் தீவிரம்
+
+@ Goggle Noise
+ta கண்ணாடி இரைச்சல்
+
+@ Goggles Settings
+ta கண்ணாடி அமைப்புகள்
+
+@ Graphics
+ta கிராஃபிக்ஸ்
+
+@ Green
+ta பச்சை
+
+@ Grenade Arc
+ta கையெறிகுண்டு வளைவு
+
+@ Grenade Arc Settings
+ta கையெறிகுண்டு வளைவு அமைப்புகள்
+
+@ Gun Kick
+ta துப்பாக்கி உதைப்பு
+
+@ Gyro
+ta கைரோ
+
+@ Gyro & Flick Stick
+ta கைரோ & ஃபிளிக் ஸ்டிக்
+
+@ Gyro Active
+ta கைரோ செயலில்
+
+@ Gyro Aiming
+ta கைரோ குறிவைப்பு
+
+@ HUD
+ta HUD
+
+@ HUD Style
+ta HUD பாணி
+
+@ Health
+ta உயிர்
+
+@ Health Pickups
+ta எடுத்த உயிர்ப் பொருட்கள்
+
+@ Health Position
+ta உயிர் நிலை
+
+@ Health Regeneration
+ta உயிர் மீளுருவாக்கம்
+
+@ Hit & Kill Sounds
+ta தாக்கு & கொலை ஒலிகள்
+
+@ Hit Doors & Lifts
+ta கதவு & லிஃப்ட்டைத் தாக்கு
+
+@ Hit Markers
+ta ஹிட் குறிகள்
+
+@ Hit Sound
+ta தாக்கு ஒலி
+
+@ Hitmarker Size
+ta ஹிட் குறி அளவு
+
+@ Hitmarker Type
+ta ஹிட் குறி வகை
+
+@ Hitstop Advanced
+ta ஹிட்ஸ்டாப் மேம்பட்டது
+
+@ Hitstop Settings
+ta ஹிட்ஸ்டாப் அமைப்புகள்
+
+@ Hold
+ta பிடித்திரு
+
+@ Hold lock-on
+ta பிடிக்கும்போது பூட்டு
+
+@ Hook Enemies
+ta எதிரிகளைக் கொக்கியிடு
+
+@ Hook Metal
+ta உலோகத்தைக் கொக்கியிடு
+
+@ Hook Stone
+ta கல்லைக் கொக்கியிடு
+
+@ Hook Wood
+ta மரத்தைக் கொக்கியிடு
+
+@ Hooking an enemy pulls you to it
+ta எதிரியைக் கொக்கியிட்டால் அதனிடம் இழுக்கப்படுவீர்
+
+@ Hookshot Range
+ta கொக்கி வீச்சு
+
+@ Hookshot Settings
+ta கொக்கி அமைப்புகள்
+
+@ Host Game
+ta ஆட்டத்தை நடத்து
+
+@ How far the hook flies before it retracts
+ta கொக்கி திரும்புவதற்கு முன் எவ்வளவு தூரம் பறக்கும்
+
+@ How visible the on-screen controls are
+ta திரைக் கட்டுப்பாடுகள் எவ்வளவு தெரியும்
+
+@ Impact Lifetime
+ta தாக்கத் தடங்களின் ஆயுள்
+
+@ Infinite Ammo
+ta முடிவற்ற வெடிமருந்து
+
+@ Input
+ta உள்ளீடு
+
+@ Input Scale
+ta உள்ளீட்டு அளவீடு
+
+@ Interpolate Animation
+ta அசைவூட்டத்தை இடைக்கணி
+
+@ Interpolate Movement
+ta இயக்கத்தை இடைக்கணி
+
+@ Invert Look
+ta பார்வையைத் தலைகீழாக்கு
+
+@ Invert Mouse
+ta சுட்டியைத் தலைகீழாக்கு
+
+@ Invert Stick
+ta ஸ்டிக்கைத் தலைகீழாக்கு
+
+@ Jet Quality
+ta ஜெட் தரம்
+
+@ Join Game
+ta ஆட்டத்தில் சேர்
+
+@ Jump / Swim Up
+ta குதி / மேலே நீந்து
+
+@ Jump again in mid-air
+ta நடுவானில் மீண்டும் குதி
+
+@ Jumps
+ta குதிப்புகள்
+
+@ Keys & Powerups
+ta சாவிகள் & சக்திகள்
+
+@ Keys & Powerups Position
+ta சாவிகள் & சக்திகள் நிலை
+
+@ Kill Bonus (x)
+ta கொலை போனஸ் (x)
+
+@ Kill Sound
+ta கொலை ஒலி
+
+@ Knock
+ta தட்டு
+
+@ Left
+ta இடது
+
+@ Length of the motion blur streaks
+ta இயக்க மங்கல் கோடுகளின் நீளம்
+
+@ Lifetime (seconds)
+ta ஆயுள் (விநாடிகள்)
+
+@ Live Portal Views
+ta நேரலை போர்டல் காட்சிகள்
+
+@ Live View Distance
+ta நேரலைக் காட்சி தூரம்
+
+@ Local Players
+ta உள்ளூர் வீரர்கள்
+
+@ Local red wounds follow enemy animation
+ta எதிரி அசைவைப் பின்தொடரும் சிவப்புக் காயங்கள்
+
+@ Lock Indicator
+ta பூட்டுக் காட்டி
+
+@ Long falls don't hurt
+ta நீண்ட வீழ்ச்சிகள் காயப்படுத்தாது
+
+@ Longest Freeze (ms)
+ta நீண்ட உறைவு (ms)
+
+@ Look Down
+ta கீழே பார்
+
+@ Look Speed
+ta பார்வை வேகம்
+
+@ Look Up
+ta மேலே பார்
+
+@ Main Menu Music
+ta முதன்மை மெனு இசை
+
+@ Max FPS
+ta அதிகபட்ச FPS
+
+@ Max Players
+ta அதிகபட்ச வீரர்கள்
+
+@ Maximum Impacts
+ta அதிகபட்ச தாக்கங்கள்
+
+@ Maximum Marks
+ta அதிகபட்ச தடங்கள்
+
+@ Maximum Range
+ta அதிகபட்ச வீச்சு
+
+@ Melee only
+ta கைகலப்பு மட்டும்
+
+@ Message Background
+ta செய்திப் பின்னணி
+
+@ Message Text Size
+ta செய்தி உரை அளவு
+
+@ Messages & Captions
+ta செய்திகள் & வசனங்கள்
+
+@ Meter Duration (real seconds)
+ta அளவி நேரம் (உண்மை விநாடிகள்)
+
+@ Minimum Damage
+ta குறைந்தபட்ச சேதம்
+
+@ Mode
+ta பயன்முறை
+
+@ Modern Console
+ta நவீன கன்சோல்
+
+@ Modern HUD Layout
+ta நவீன HUD அமைப்பு
+
+@ Most recent save
+ta சமீபத்திய சேமிப்பு
+
+@ Motion Blur
+ta இயக்க மங்கல்
+
+@ Motion Blur Amount
+ta இயக்க மங்கல் அளவு
+
+@ Motion Blur Quality
+ta இயக்க மங்கல் தரம்
+
+@ Mouse & Keyboard
+ta சுட்டி & விசைப்பலகை
+
+@ Mouse Speed
+ta சுட்டி வேகம்
+
+@ Move Back
+ta பின்னே நகர்
+
+@ Move Forward
+ta முன்னே நகர்
+
+@ Music Volume
+ta இசை ஒலியளவு
+
+@ Next Weapon
+ta அடுத்த ஆயுதம்
+
+@ No Drowning
+ta நீரில் மூழ்குதல் இல்லை
+
+@ No Fall Damage
+ta விழுதல் சேதம் இல்லை
+
+@ No Manual Saves
+ta கைமுறைச் சேமிப்பு இல்லை
+
+@ No Self Damage
+ta தன் சேதம் இல்லை
+
+@ Noise Filter
+ta இரைச்சல் வடிகட்டி
+
+@ Normal Color
+ta இயல்பு நிறம்
+
+@ Notify Message Position
+ta அறிவிப்புச் செய்தி நிலை
+
+@ Notify Message Time
+ta அறிவிப்புச் செய்தி நேரம்
+
+@ Number of splatter rays per blood impact
+ta ஒவ்வொரு இரத்தத் தாக்கத்துக்கும் தெறிப்புக் கதிர்கள்
+
+@ Off
+ta ஆஃப்
+
+@ On Death
+ta இறக்கும்போது
+
+@ On Kill Color
+ta கொன்றபின் நிறம்
+
+@ On Target Color
+ta இலக்கின் மீது நிறம்
+
+@ Opacity
+ta ஒளிபுகாமை
+
+@ Opacity of the grenade arc
+ta கையெறிகுண்டு வளைவின் ஒளிபுகாமை
+
+@ Pants Color
+ta கால்சட்டை நிறம்
+
+@ Particle Quality
+ta துகள் தரம்
+
+@ Particles
+ta துகள்கள்
+
+@ Physical Nail Impacts
+ta இயற்பியல் ஆணித் தாக்கங்கள்
+
+@ Pistol Start
+ta பிஸ்டல் தொடக்கம்
+
+@ Pitch
+ta சுருதி
+
+@ Pitch Sensitivity
+ta செங்குத்து உணர்திறன்
+
+@ Playback Speed
+ta இயக்க வேகம்
+
+@ Player Setup
+ta வீரர் அமைப்பு
+
+@ Pop
+ta பாப்
+
+@ Portal Gun Settings
+ta போர்டல் துப்பாக்கி அமைப்புகள்
+
+@ Portal Recursion
+ta போர்டல் மீள்சுழற்சி
+
+@ Portal View Quality
+ta போர்டல் காட்சித் தரம்
+
+@ Preview Sound
+ta ஒலியைக் கேள்
+
+@ Previous Weapon
+ta முந்தைய ஆயுதம்
+
+@ Projectile Shotguns Settings
+ta எறிபொருள் துப்பாக்கி அமைப்புகள்
+
+@ Projectile Speed (units/s)
+ta எறிபொருள் வேகம் (அலகு/வி)
+
+@ Purple
+ta ஊதா
+
+@ Push
+ta தள்ளு
+
+@ Push Strength
+ta தள்ளும் வலிமை
+
+@ Quick Load
+ta விரைவு ஏற்றம்
+
+@ Quick Save
+ta விரைவுச் சேமிப்பு
+
+@ Railgun Settings
+ta ரெயில்கன் அமைப்புகள்
+
+@ Ranged only
+ta தொலைவுத் தாக்கு மட்டும்
+
+@ Reacquire While Held
+ta பிடிக்கும்போது மீண்டும் பிடி
+
+@ Red
+ta சிவப்பு
+
+@ Reduce Motion
+ta அசைவைக் குறை
+
+@ Regen (seconds per second)
+ta மீளுருவாக்கம் (வினாடிக்கு வினாடிகள்)
+
+@ Render Scale
+ta ரெண்டர் அளவு
+
+@ Reverb
+ta எதிரொலிப்பு
+
+@ Right
+ta வலது
+
+@ Ripple Intensity
+ta அலை தீவிரம்
+
+@ Ripples
+ta அலைகள்
+
+@ Roll Sensitivity
+ta உருள் உணர்திறன்
+
+@ Rumble
+ta அதிர்வு
+
+@ Run
+ta ஓடு
+
+@ Save on All Enemies Killed
+ta எல்லா எதிரிகளும் கொல்லப்பட்டால் சேமி
+
+@ Save on All Secrets Found
+ta எல்லா ரகசியங்களும் கிடைத்தால் சேமி
+
+@ Save on Level Entry
+ta நிலை தொடங்கும்போது சேமி
+
+@ Save on Secret Found
+ta ரகசியம் கிடைத்தால் சேமி
+
+@ Scoreboard
+ta மதிப்பெண் பலகை
+
+@ Screen Flashes
+ta திரை மின்னல்கள்
+
+@ Screen Shader
+ta திரை ஷேடர்
+
+@ Screen Shake
+ta திரை அதிர்வு
+
+@ Search LAN
+ta LAN-இல் தேடு
+
+@ Seconds a center-screen message stays up
+ta மையச் செய்தி திரையில் இருக்கும் வினாடிகள்
+
+@ See Through Portals
+ta போர்டல்கள் வழியே பார்
+
+@ See-through Teleporters
+ta ஊடுருவிப் பார்க்கும் டெலிபோர்ட்டர்கள்
+
+@ Shirt Color
+ta சட்டை நிறம்
+
+@ Shotgun Bullet Decals
+ta ஷாட்கன் குண்டுத் தடங்கள்
+
+@ Shoulder left
+ta இடது தோள்
+
+@ Shoulder right
+ta வலது தோள்
+
+@ Show FPS
+ta FPS காட்டு
+
+@ Show Face
+ta முகம் காட்டு
+
+@ Shrapnel
+ta சிதறல்கள்
+
+@ Size of on-screen messages and captions
+ta திரைச் செய்திகள், வசனங்களின் அளவு
+
+@ Skill
+ta சிரமம்
+
+@ Sky Fog
+ta வான் மூடுபனி
+
+@ Smooths the stepped movement of monsters
+ta அரக்கர்களின் படிப்படியான அசைவை மென்மையாக்கும்
+
+@ Sound
+ta ஒலி
+
+@ Sound Captions
+ta ஒலி வசனங்கள்
+
+@ Sound Volume
+ta ஒலி அளவு
+
+@ Speed Blur
+ta வேக மங்கல்
+
+@ Splashes
+ta தெறிப்புகள்
+
+@ Splatter Amount
+ta தெறிப்பு அளவு
+
+@ Splatter Size
+ta தெறிப்பு பருமன்
+
+@ Start Game
+ta ஆட்டத்தைத் தொடங்கு
+
+@ Staying underwater doesn't hurt
+ta நீருக்கடியில் இருப்பது காயப்படுத்தாது
+
+@ Stick Look Pitch
+ta ஸ்டிக் பார்வை செங்குத்து
+
+@ Stick Look Yaw
+ta ஸ்டிக் பார்வை கிடைமட்டம்
+
+@ Strafe Left
+ta இடப்புறம் நகர்
+
+@ Strafe Right
+ta வலப்புறம் நகர்
+
+@ Strength of the surface swell and rings
+ta மேற்பரப்பு அலை, வளையங்களின் வலிமை
+
+@ Stun Duration
+ta திகைப்பு நேரம்
+
+@ Style
+ta பாணி
+
+@ Supersampling
+ta சூப்பர்சாம்ப்ளிங்
+
+@ Surface Hit Effects
+ta மேற்பரப்புத் தாக்க விளைவுகள்
+
+@ Swim Down
+ta கீழே நீந்து
+
+@ Targets
+ta இலக்குகள்
+
+@ Teamplay
+ta அணி ஆட்டம்
+
+@ Texture Filter
+ta டெக்ஸ்சர் வடிகட்டி
+
+@ Third person
+ta மூன்றாம் நபர்
+
+@ Thud
+ta தொப்
+
+@ Tick
+ta டிக்
+
+@ Time Limit
+ta நேர வரம்பு
+
+@ Time Stretch
+ta நேர நீட்டிப்பு
+
+@ Toggle Attack
+ta தாக்குதல் மாற்று
+
+@ Toggle Run
+ta ஓட்டம் மாற்று
+
+@ Toggle auto-aim
+ta தானியங்கு குறி மாற்று
+
+@ Touch Controls
+ta தொடு கட்டுப்பாடுகள்
+
+@ Touchscreen
+ta தொடுதிரை
+
+@ Tough Enemy Health
+ta வலிய எதிரியின் உயிர்
+
+@ Tough enemies only
+ta வலிய எதிரிகள் மட்டும்
+
+@ Trail Colour
+ta தடத்தின் நிறம்
+
+@ Translate Console
+ta கன்சோலை மொழிபெயர்
+
+@ Translucent Water
+ta ஒளி ஊடுருவும் நீர்
+
+@ Treble
+ta ட்ரெபிள்
+
+@ Turn Left
+ta இடப்புறம் திரும்பு
+
+@ Turn Right
+ta வலப்புறம் திரும்பு
+
+@ Underwater FX
+ta நீருக்கடி FX
+
+@ Use Bullet Time Meter
+ta புல்லட் டைம் அளவியைப் பயன்படுத்து
+
+@ VSync
+ta VSync
+
+@ View Bob
+ta பார்வை ஆட்டம்
+
+@ Viewmodels
+ta கை ஆயுத மாடல்கள்
+
+@ Volume
+ta ஒலியளவு
+
+@ Water Opacity
+ta நீர் ஒளிபுகாமை
+
+@ Water Quality
+ta நீர்த் தரம்
+
+@ Water Settings
+ta நீர் அமைப்புகள்
+
+@ Weapon Wheel
+ta ஆயுதச் சக்கரம்
+
+@ Weapon Wheel Slowdown
+ta ஆயுதச் சக்கர மந்தம்
+
+@ Weapons
+ta ஆயுதங்கள்
+
+@ Weapons Position
+ta ஆயுதங்கள் நிலை
+
+@ Where center-screen messages appear
+ta மையச் செய்திகள் தோன்றும் இடம்
+
+@ Where pickup and event messages appear
+ta எடுப்பு, நிகழ்வுச் செய்திகள் தோன்றும் இடம்
+
+@ White
+ta வெள்ளை
+
+@ Yaw Sensitivity
+ta கிடைமட்ட உணர்திறன்
+
+@ Yellow
+ta மஞ்சள்
+
+# lowercase choice values
+@ T
+ta T
+
+@ always
+ta எப்போதும்
+
+@ auto
+ta தானியங்கு
+
+@ banded
+ta பட்டைகளாக
+
+@ borderless
+ta எல்லையற்ற சாளரம்
+
+@ bottom center
+ta கீழ் மையம்
+
+@ bottom left
+ta கீழ் இடது
+
+@ bottom right
+ta கீழ் வலது
+
+@ box
+ta சதுரம்
+
+@ broken square
+ta உடைந்த சதுரம்
+
+@ classic
+ta பழைய பாணி
+
+@ coarse
+ta கரடு
+
+@ cooperative
+ta கூட்டுறவு
+
+@ cross
+ta குறுக்கு
+
+@ cross + dot
+ta குறுக்கு + புள்ளி
+
+@ cyan
+ta சியான்
+
+@ dashed
+ta கோடிட்ட
+
+@ deathmatch
+ta டெத்மேட்ச்
+
+@ deuteranopia
+ta டியூட்டரனோப்பியா
+
+@ diagonal streaks
+ta சாய்ந்த கோடுகள்
+
+@ diamond
+ta வைரம்
+
+@ dot
+ta புள்ளி
+
+@ double
+ta இரட்டை
+
+@ double chevrons
+ta இரட்டை செவ்ரான்
+
+@ double diagonals
+ta இரட்டை மூலைவிட்டம்
+
+@ easy
+ta எளிது
+
+@ fine
+ta நுண்மை
+
+@ fit output
+ta வெளியீட்டுக்குப் பொருத்து
+
+@ flick stick
+ta ஃபிளிக் ஸ்டிக்
+
+@ fullscreen
+ta முழுத்திரை
+
+@ gap cross
+ta இடைவெளிக் குறுக்கு
+
+@ green
+ta பச்சை
+
+@ grey
+ta சாம்பல்
+
+@ half speed
+ta அரை வேகம்
+
+@ hard
+ta கடினம்
+
+@ high
+ta உயர்
+
+@ huge
+ta மிகப் பெரிது
+
+@ immersive
+ta மூழ்கடிக்கும்
+
+@ intense
+ta தீவிரம்
+
+@ large
+ta பெரிது
+
+@ larger
+ta மேலும் பெரிது
+
+@ largest
+ta மிகப் பெரியது
+
+@ linear
+ta நேரியல்
+
+@ low
+ta குறைவு
+
+@ lower
+ta கீழ்
+
+@ magenta
+ta மெஜந்தா
+
+@ medium
+ta நடுத்தரம்
+
+@ middle
+ta நடு
+
+@ middle left
+ta நடு இடது
+
+@ middle right
+ta நடு வலது
+
+@ modern
+ta நவீனம்
+
+@ nearest
+ta அருகாமை
+
+@ nightmare
+ta கொடுங்கனவு
+
+@ nintendo
+ta Nintendo
+
+@ no team damage
+ta அணிச் சேதம் இல்லை
+
+@ none
+ta ஏதுமில்லை
+
+@ normal
+ta இயல்பு
+
+@ off
+ta ஆஃப்
+
+@ off while held
+ta பிடிக்கும்போது ஆஃப்
+
+@ on
+ta ஆன்
+
+@ only while held
+ta பிடிக்கும்போது மட்டும்
+
+@ playstation
+ta PlayStation
+
+@ protanopia
+ta புரோட்டனோப்பியா
+
+@ quarter speed
+ta கால் வேகம்
+
+@ red
+ta சிவப்பு
+
+@ short diagonals
+ta குறுகிய மூலைவிட்டங்கள்
+
+@ single
+ta ஒற்றை
+
+@ small
+ta சிறிது
+
+@ solid
+ta திடம்
+
+@ spectacle
+ta கண்கவர்
+
+@ subtle
+ta மிதமான
+
+@ team damage
+ta அணிச் சேதம்
+
+@ top center
+ta மேல் மையம்
+
+@ top left
+ta மேல் இடது
+
+@ top right
+ta மேல் வலது
+
+@ triple
+ta மும்மடங்கு
+
+@ tritanopia
+ta டிரைட்டனோப்பியா
+
+@ upper
+ta மேல்
+
+@ white
+ta வெள்ளை
+
+@ whole screen
+ta முழுத் திரை
+
+@ windowed
+ta சாளரம்
+
+@ xbox
+ta Xbox
+
+@ yellow
+ta மஞ்சள்
+
+# ==== tooltips.txt ====
+
+# Options help lines (tooltips) and reasons for disabled rows.
+@ 2D aiming turns the view continuously with the right stick; flick stick snaps the view to where you push the stick, then turning the stick rotates it
+ta 2D குறிவைப்பு வலது ஸ்டிக்கால் பார்வையைத் தொடர்ந்து திருப்பும்; ஃபிளிக் ஸ்டிக் நீங்கள் ஸ்டிக்கைத் தள்ளும் திசைக்குப் பார்வையை உடனே திருப்பும், பின் ஸ்டிக்கைச் சுழற்றினால் சுழலும்
+
+@ 3D resolution relative to the window; the UI stays sharp
+ta சாளரத்தைப் பொறுத்த 3D தெளிவுத்திறன்; UI கூர்மையாகவே இருக்கும்
+
+@ 3D view keeps the HUD and menus sharp; whole screen runs them through the shader too
+ta 3D காட்சி HUD, மெனுக்களைக் கூர்மையாக வைக்கும்; முழுத் திரை அவற்றையும் ஷேடர் வழியே செலுத்தும்
+
+@ A Quake III style railgun: a slug that pierces every enemy on its line, using 2 cells a shot and refiring every 1.5 s; select it through its assigned weapon slot (Add-ons)
+ta Quake III பாணி ரெயில்கன்: அதன் கோட்டிலுள்ள எல்லா எதிரிகளையும் துளைக்கும் குண்டு, ஒரு சுடுதலுக்கு 2 செல்கள், 1.5 வி-க்கு ஒருமுறை சுடும்; அதற்கு ஒதுக்கிய ஆயுத இடம் மூலம் தேர்ந்தெடு (ஆட்-ஆன்கள்)
+
+@ A Zelda-style hookshot: fire sends a chain hook out; it latches onto hookable surfaces or enemies and reels you in; fire again to let go
+ta Zelda பாணி கொக்கி: சுடுதல் சங்கிலிக் கொக்கியை வீசும்; அது கொக்கியிடக்கூடிய பரப்புகள் அல்லது எதிரிகளைப் பற்றி உங்களை இழுக்கும்; விடுவிக்க மீண்டும் சுடு
+
+@ Also translates the engine's console messages; off keeps them in English
+ta இன்ஜினின் கன்சோல் செய்திகளையும் மொழிபெயர்க்கும்; ஆஃப் எனில் ஆங்கிலத்திலேயே இருக்கும்
+
+@ Automatically acquire another enemy while holding Lock-on after losing a target
+ta இலக்கை இழந்த பின் பூட்டுப் பொத்தானைப் பிடித்திருக்கும்போது வேறு எதிரியைத் தானாகப் பிடிக்கும்
+
+@ Blends between animation frames of monsters and weapons
+ta அரக்கர்கள், ஆயுதங்களின் அசைவூட்டச் சட்டகங்களை இணைத்துக் கலக்கும்
+
+@ Blood stains surfaces and bodies; cosmetic, independent of particle packs
+ta இரத்தம் பரப்புகளிலும் உடல்களிலும் கறையாகும்; தோற்றத்துக்கு மட்டும், துகள் தொகுப்புகளைச் சாராதது
+
+@ Bloom glow around bright lights and heat sources; medium uses 4 taps, high uses 8, low disables halo taps
+ta பிரகாசமான ஒளிகள், வெப்ப மூலங்களைச் சுற்றி ஒளிவட்டம்; நடுத்தரம் 4 மாதிரிகள், உயர் 8, குறைவு ஒளிவட்டத்தை முடக்கும்
+
+@ Blurs fast-moving monsters, projectiles and doors (not camera turns)
+ta வேகமாக நகரும் அரக்கர்கள், எறிபொருட்கள், கதவுகளை மங்கலாக்கும் (கேமரா திருப்பங்களை அல்ல)
+
+@ Blurs the screen edges during fast falls and launches; keeps the centre clear. Reduce Motion disables it
+ta வேகமான வீழ்ச்சி, ஏவுதலின்போது திரை ஓரங்களை மங்கலாக்கும்; மையம் தெளிவாக இருக்கும். அசைவைக் குறை இதை முடக்கும்
+
+@ Brightness of the underwater light patterns
+ta நீருக்கடி ஒளி வடிவங்களின் பிரகாசம்
+
+@ Caps mark count, lifetime, airborne droplets and wound/gib painting; low skips enemy wounds and gib trails
+ta தடங்களின் எண்ணிக்கை, ஆயுள், காற்றில் துளிகள், காயம்/துண்டுக் கறைகளுக்கு வரம்பு; குறைவு எதிரி காயங்களையும் துண்டுத் தடங்களையும் தவிர்க்கும்
+
+@ Caps shader input at output size so 200% render scale keeps 3D sharpness without 4x shader cost; low scales stay low-res
+ta ஷேடர் உள்ளீட்டை வெளியீட்டு அளவுக்குக் கட்டுப்படுத்தும், எனவே 200% ரெண்டர் அளவு 4 மடங்கு ஷேடர் செலவின்றி 3D கூர்மையைத் தக்கவைக்கும்; குறைந்த அளவுகள் குறைந்த தெளிவிலேயே இருக்கும்
+
+@ Classic: the original status bar; modern: compact elements at the screen edges
+ta பழைய பாணி: அசல் நிலைப் பட்டை; நவீனம்: திரை ஓரங்களில் சுருக்கமான கூறுகள்
+
+@ Coat atlas resolution, rebuild rate and shader detail: low builds smaller coats less often with fast shading; high uses full detail
+ta பூச்சு அட்லஸ் தெளிவு, மீள்கட்டமைப்பு வீதம், ஷேடர் விவரம்: குறைவு சிறிய பூச்சுகளைக் குறைவாக, வேகமான நிழலிடலுடன் உருவாக்கும்; உயர் முழு விவரம் பயன்படுத்தும்
+
+@ Colour of the railgun's spiral trail; split-screen players each get the next colour along
+ta ரெயில்கன் சுருள் தடத்தின் நிறம்; பிளவுத் திரையில் ஒவ்வொரு வீரருக்கும் அடுத்த நிறம் கிடைக்கும்
+
+@ Damage the railgun deals to each enemy it passes through (Quake III: 100)
+ta ரெயில்கன் தான் கடந்து செல்லும் ஒவ்வொரு எதிரிக்கும் செய்யும் சேதம் (Quake III: 100)
+
+@ Dark backdrop behind on-screen messages for readability
+ta படிக்க எளிதாகத் திரைச் செய்திகளுக்குப் பின் இருண்ட பின்னணி
+
+@ Dark border keeps the crosshair visible on any background
+ta இருண்ட எல்லை எந்தப் பின்னணியிலும் கிராஸ்ஹேரைத் தெரியவைக்கும்
+
+@ Darkens corners and contact areas where geometry meets; higher quality is sharper
+ta வடிவங்கள் சந்திக்கும் மூலைகள், தொடு இடங்களை இருட்டாக்கும்; உயர் தரம் கூர்மையானது
+
+@ Debris lands on and is carried or shoved by doors, lifts and platforms
+ta சிதைவுகள் கதவுகள், லிஃப்ட்கள், மேடைகள் மீது விழுந்து சுமக்கப்படும் அல்லது தள்ளப்படும்
+
+@ Detail for caustics, ripples and splashes: low uses smaller budgets and shorter view distance; high uses larger budgets and farther view distance
+ta காஸ்டிக்ஸ், அலைகள், தெறிப்புகளின் விவரம்: குறைவு சிறிய வரவுசெலவு, குறைந்த பார்வைத் தூரம்; உயர் பெரிய வரவுசெலவு, அதிகப் பார்வைத் தூரம்
+
+@ Disabled while Enhanced Particles is on: its particles replace the GLQuake and Classic styles
+ta மேம்பட்ட துகள்கள் ஆன் ஆக இருக்கும்போது முடக்கம்: அதன் துகள்கள் GLQuake, பழைய பாணிகளுக்குப் பதிலாக வரும்
+
+@ Disabled while Enhanced Water is on: its own underwater effects replace the classic and GLQuake view warps
+ta மேம்பட்ட நீர் ஆன் ஆக இருக்கும்போது முடக்கம்: அதன் சொந்த நீருக்கடி விளைவுகள் பழைய பாணி, GLQuake பார்வைச் சிதைவுகளுக்குப் பதிலாக வரும்
+
+@ Draw the predicted grenade path as a solid or dashed line
+ta கணிக்கப்பட்ட கையெறிகுண்டுப் பாதையைத் திடமான அல்லது கோடிட்ட கோடாக வரை
+
+@ Draw the view out of the linked portal inside each portal; off shows flat discs (fastest)
+ta ஒவ்வொரு போர்டலுக்குள்ளும் இணைந்த போர்டலின் காட்சியை வரை; ஆஃப் எனில் தட்டையான வட்டுகள் (மிக வேகம்)
+
+@ Droplets spray up when things enter or leave water, slime or lava
+ta பொருட்கள் நீர், நச்சுச் சேறு அல்லது எரிமலைக் குழம்பில் நுழையும்போதோ வெளியேறும்போதோ துளிகள் தெறிக்கும்
+
+@ Emulates the original 8-bit palette of software rendering
+ta மென்பொருள் ரெண்டரிங்கின் அசல் 8-பிட் வண்ணத் தட்டைப் பின்பற்றும்
+
+@ Every level starts with only the shotgun and axe, as if started fresh
+ta ஒவ்வொரு நிலையும் புதிதாகத் தொடங்கியது போல ஷாட்கன், கோடரியுடன் மட்டும் தொடங்கும்
+
+@ Explosion damage for each remotely detonated sticky bomb
+ta தொலைவிலிருந்து வெடிக்கவைக்கப்படும் ஒவ்வொரு ஒட்டும் குண்டின் வெடிப்புச் சேதம்
+
+@ Extra freeze milliseconds for every 10 damage dealt, so heavy hits stop longer
+ta ஒவ்வொரு 10 சேதத்துக்கும் கூடுதல் உறைவு மில்லிவினாடிகள், அதனால் பலத்த அடிகள் அதிக நேரம் நிறுத்தும்
+
+@ First person, a third-person camera centered behind the player, or one over the right or left shoulder; third person hides viewmodels
+ta முதல் நபர், வீரருக்குப் பின்னால் மையத்தில் மூன்றாம் நபர் கேமரா, அல்லது வலது/இடது தோளுக்கு மேல்; மூன்றாம் நபர் கை ஆயுதத்தை மறைக்கும்
+
+@ Flash the selected marker on confirmed hits; colors are shared with the crosshair
+ta உறுதியான தாக்குதல்களில் தேர்ந்தெடுத்த குறியை மின்னச் செய்; நிறங்கள் கிராஸ்ஹேருடன் பகிரப்படும்
+
+@ Freeze for every enemy, or only for enemies that were tough before the hit
+ta எல்லா எதிரிகளுக்கும், அல்லது தாக்குதலுக்கு முன் வலியவர்களாக இருந்த எதிரிகளுக்கு மட்டும் உறைவு
+
+@ Freeze the game briefly when you damage an enemy; single player with add-ons only
+ta எதிரியைக் காயப்படுத்தும்போது ஆட்டத்தைச் சிறிது நேரம் உறையவை; ஆட்-ஆன்களுடன் தனி ஆட்டத்தில் மட்டும்
+
+@ Gibs tumble and barrels throw shrapnel; shots and blasts push them (cosmetic only)
+ta உடல் துண்டுகள் உருளும், பீப்பாய்கள் சிதறல்களை வீசும்; சுடுதல்களும் வெடிப்புகளும் அவற்றைத் தள்ளும் (தோற்றத்துக்கு மட்டும்)
+
+@ Health an enemy must have had before the hit to count as tough
+ta வலிய எதிரியாகக் கணக்கிடப்பட, தாக்குதலுக்கு முன் எதிரிக்கு இருந்திருக்க வேண்டிய உயிர்
+
+@ Hits dealing less damage than this do not freeze the game; the default 10 skips nails and shotgun pellets
+ta இதைவிடக் குறைந்த சேதம் செய்யும் அடிகள் ஆட்டத்தை உறையவைக்காது; இயல்பு மதிப்பு 10 ஆணிகளையும் ஷாட்கன் குண்டுகளையும் தவிர்க்கும்
+
+@ Hold fire and sweep the crosshair over monsters to queue them, release to throw: it stuns each in turn and flies back; alt-fire clears the queue
+ta சுடுதலைப் பிடித்து கிராஸ்ஹேரை அரக்கர்கள் மீது தேய்த்து வரிசைப்படுத்து, விட்டால் வீசும்: ஒவ்வொன்றையும் வரிசையாகத் திகைக்கவைத்துத் திரும்பும்; மாற்றுச் சுடுதல் வரிசையை அழிக்கும்
+
+@ Hold: keep Lock-on held. Toggle: press Auto-aim Toggle to enable automatic acquisition. Click look stick to switch targets
+ta பிடித்திரு: பூட்டைப் பிடித்தே இரு. மாற்று: தானியங்கு பிடிப்பை இயக்க தானியங்கு குறி மாற்றை அழுத்து. இலக்கை மாற்ற பார்வை ஸ்டிக்கை அழுத்து
+
+@ How close an enemy must be to the crosshair for automatic acquisition in toggle mode (degrees)
+ta மாற்றுப் பயன்முறையில் தானியங்கு பிடிப்புக்கு எதிரி கிராஸ்ஹேருக்கு எவ்வளவு அருகில் இருக்க வேண்டும் (பாகைகள்)
+
+@ How far the view tilts up and down when you tilt the controller (pitch axis)
+ta கன்ட்ரோலரைச் சாய்க்கும்போது பார்வை மேலும் கீழும் எவ்வளவு சாயும் (pitch அச்சு)
+
+@ How far the view turns left and right when you turn the controller (yaw axis)
+ta கன்ட்ரோலரைத் திருப்பும்போது பார்வை இடமும் வலமும் எவ்வளவு திரும்பும் (yaw அச்சு)
+
+@ How far the view turns when you drag on the right half of the screen
+ta திரையின் வலது பாதியில் இழுக்கும்போது பார்வை எவ்வளவு திரும்பும்
+
+@ How fast the boomerang flies (units per second)
+ta பூமராங் எவ்வளவு வேகமாகப் பறக்கும் (வினாடிக்கு அலகுகள்)
+
+@ How hard shots and explosions push debris around
+ta சுடுதல்களும் வெடிப்புகளும் சிதைவுகளை எவ்வளவு பலமாகத் தள்ளும்
+
+@ How hard the Powerwasher's water pushes enemies
+ta பவர்வாஷரின் நீர் எதிரிகளை எவ்வளவு பலமாகத் தள்ளும்
+
+@ How long a hit freezes the game, in milliseconds
+ta ஒரு தாக்குதல் ஆட்டத்தை எவ்வளவு நேரம் உறையவைக்கும், மில்லிவினாடிகளில்
+
+@ How strongly fog covers the sky when fog is on
+ta மூடுபனி ஆன் ஆக இருக்கும்போது அது வானை எவ்வளவு மூடும்
+
+@ How the view distorts underwater: Classic ripples the whole screen like software Quake, GLQuake slowly stretches and squashes the view
+ta நீருக்கடியில் பார்வை எப்படிச் சிதையும்: பழைய பாணி மென்பொருள் Quake போல முழுத் திரையையும் அலையவைக்கும், GLQuake பார்வையை மெதுவாக நீட்டி அமுக்கும்
+
+@ Ignores gyro rotation slower than this many degrees per second, to hide hand tremor
+ta கை நடுக்கத்தை மறைக்க, வினாடிக்கு இத்தனை பாகைக்கும் மெதுவான கைரோ சுழற்சியைப் புறக்கணிக்கும்
+
+@ Immersive: appears for a few seconds only when its value changes
+ta மூழ்கடிக்கும்: அதன் மதிப்பு மாறும்போது மட்டும் சில வினாடிகள் தோன்றும்
+
+@ Keeps textures sharp on floors and walls seen at steep angles
+ta கூர்மையான கோணத்தில் காணும் தரை, சுவர்களில் டெக்ஸ்சர்களைக் கூர்மையாக வைக்கும்
+
+@ Lights from rockets, muzzle flashes and explosions brighten nearby walls
+ta ராக்கெட்டுகள், துப்பாக்கி மின்னல்கள், வெடிப்புகளின் ஒளி அருகிலுள்ள சுவர்களை ஒளிரச்செய்யும்
+
+@ Liquid surfaces swell and ring out where things move through them
+ta பொருட்கள் கடக்கும் இடங்களில் திரவப் பரப்புகள் உப்பி வளையங்களாக அலையும்
+
+@ Lobs sticky bombs (rockets ammo) that cling to walls, doors and monsters; alt-fire detonates them all
+ta சுவர்கள், கதவுகள், அரக்கர்களில் ஒட்டும் ஒட்டும் குண்டுகளை (ராக்கெட் வெடிமருந்து) வீசும்; மாற்றுச் சுடுதல் அனைத்தையும் வெடிக்கவைக்கும்
+
+@ Look of the classic particles: GLQuake draws soft round dots, Classic draws square pixels like software Quake
+ta பழைய துகள்களின் தோற்றம்: GLQuake மென்மையான வட்டப் புள்ளிகளை வரையும், பழைய பாணி மென்பொருள் Quake போலச் சதுரப் பிக்சல்களை வரையும்
+
+@ Low skips the background smear halo and uses fewer blur samples; high keeps the full halo and smoother streaks
+ta குறைவு பின்னணி மங்கல் ஒளிவட்டத்தைத் தவிர்த்து குறைந்த மாதிரிகளைப் பயன்படுத்தும்; உயர் முழு ஒளிவட்டத்தையும் மென்மையான கோடுகளையும் வைக்கும்
+
+@ Low: hard particle edges, half the scripted particles and fewer hit sparks. Medium: soft edges. High: soft edges checked per MSAA sample, most hit sparks
+ta குறைவு: கூர்மையான துகள் ஓரங்கள், பாதி ஸ்கிரிப்ட் துகள்கள், குறைந்த தீப்பொறிகள். நடுத்தரம்: மென்மையான ஓரங்கள். உயர்: ஒவ்வொரு MSAA மாதிரிக்கும் சரிபார்த்த மென்மையான ஓரங்கள், பெரும்பாலான தீப்பொறிகள்
+
+@ Marks fade out before expiring; oldest marks are recycled at the limit
+ta தடங்கள் காலாவதியாகும் முன் மங்கும்; வரம்பை எட்டினால் பழைய தடங்கள் மீண்டும் பயன்படும்
+
+@ Max nested portal reflections to draw; each level redraws the scene
+ta வரைய வேண்டிய அதிகபட்ச உள்ளமை போர்டல் பிரதிபலிப்புகள்; ஒவ்வொரு நிலையும் காட்சியை மீண்டும் வரையும்
+
+@ Max portals per screen with a live view; each one redraws the scene
+ta நேரலைக் காட்சியுடன் ஒரு திரைக்கு அதிகபட்ச போர்டல்கள்; ஒவ்வொன்றும் காட்சியை மீண்டும் வரையும்
+
+@ Maximum distance for acquiring and keeping an enemy locked
+ta எதிரியைப் பிடிக்கவும் பூட்டி வைக்கவும் அதிகபட்ச தூரம்
+
+@ Minimum gap between freezes, so shotgun pellets and rapid fire count once; kills ignore it
+ta உறைவுகளுக்கு இடையே குறைந்தபட்ச இடைவெளி, அதனால் ஷாட்கன் குண்டுகளும் விரைவுச் சுடுதலும் ஒருமுறை மட்டும் கணக்கிடப்படும்; கொலைகள் இதைப் புறக்கணிக்கும்
+
+@ Modern terminal console with autocomplete popup, history search, ANSI colors, bash shell and piping; off uses the classic Quake console
+ta தானியங்கு நிரப்பல், வரலாற்றுத் தேடல், ANSI நிறங்கள், bash ஷெல், பைப்பிங் கொண்ட நவீன டெர்மினல் கன்சோல்; ஆஃப் எனில் பழைய Quake கன்சோல்
+
+@ Monsters take proportionally less damage at higher values; above 100% is harder
+ta அதிக மதிப்புகளில் அரக்கர்கள் விகிதப்படி குறைவான சேதம் பெறும்; 100%-க்கு மேல் கடினம்
+
+@ Moving gibs leave blood on surfaces they touch
+ta நகரும் உடல் துண்டுகள் தொடும் பரப்புகளில் இரத்தம் விட்டுச்செல்லும்
+
+@ Multiplier on the freeze when the hit kills the enemy; 1 means no extra
+ta தாக்குதல் எதிரியைக் கொன்றால் உறைவுக்கான பெருக்கி; 1 என்றால் கூடுதல் இல்லை
+
+@ Multiplies ammo from pickups (up to the normal carry limit); below 100% is harder
+ta எடுக்கும் வெடிமருந்தைப் பெருக்கும் (இயல்பு சுமை வரம்பு வரை); 100%-க்குக் கீழ் கடினம்
+
+@ Multiplies health from pickups (up to 100, or the item's own limit); below 100% is harder
+ta எடுக்கும் உயிரைப் பெருக்கும் (100 வரை, அல்லது பொருளின் சொந்த வரம்பு); 100%-க்குக் கீழ் கடினம்
+
+@ Nails stick to wood and bodies; hard surfaces deflect them to the floor
+ta ஆணிகள் மரத்திலும் உடல்களிலும் ஒட்டும்; கடினப் பரப்புகள் அவற்றைத் தரைக்குத் திருப்பும்
+
+@ Nearest keeps crisp classic pixels; linear smooths textures
+ta அருகாமை பழைய கூர்மையான பிக்சல்களை வைக்கும்; நேரியல் டெக்ஸ்சர்களை மென்மையாக்கும்
+
+@ New Game: Add-ons
+ta புதிய ஆட்டம்: ஆட்-ஆன்கள்
+
+@ New Game: Customize
+ta புதிய ஆட்டம்: தனிப்பயன்
+
+@ Night vision: how much dark areas are brightened; thermal: how strongly heat stands out
+ta இரவுப் பார்வை: இருண்ட பகுதிகள் எவ்வளவு ஒளிரும்; வெப்பம்: வெப்பம் எவ்வளவு தனித்துத் தெரியும்
+
+@ Night-vision and thermal goggles, cycle normal, night vision and thermal with Change Goggles (Add-ons), or use the Equipment Wheel
+ta இரவுப் பார்வை, வெப்பக் கண்ணாடிகள்; கண்ணாடி மாற்று (ஆட்-ஆன்கள்) மூலம் இயல்பு, இரவுப் பார்வை, வெப்பம் இடையே சுழற்று, அல்லது உபகரணச் சக்கரத்தைப் பயன்படுத்து
+
+@ No single freeze lasts longer than this, however much damage or kill bonus adds
+ta எவ்வளவு சேதம் அல்லது கொலை போனஸ் சேர்ந்தாலும் எந்த உறைவும் இதைவிட நீளாது
+
+@ Oldest marks and nails are recycled at this shared limit
+ta இந்தப் பொது வரம்பில் பழைய தடங்களும் ஆணிகளும் மீண்டும் பயன்படும்
+
+@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
+ta திரை ஸ்டிக், பொத்தான்கள்: தானியங்கு எனில் தொட்ட பின் காட்டி, வேறு சாதனம் பயன்படும்போது மறைக்கும்
+
+@ Only autosaves: quicksaves and the Save menu are off
+ta தானியங்கு சேமிப்பு மட்டும்: விரைவுச் சேமிப்பும் சேமிப்பு மெனுவும் ஆஃப்
+
+@ Place every weapon at the center, right or left of the view, or hide all viewmodels
+ta ஒவ்வொரு ஆயுதத்தையும் பார்வையின் மையம், வலது அல்லது இடதில் வை, அல்லது எல்லா கை ஆயுதங்களையும் மறை
+
+@ Play your chosen hit or kill cue when you damage an enemy
+ta எதிரியைக் காயப்படுத்தும்போது தேர்ந்தெடுத்த தாக்கு அல்லது கொலை ஒலியை இயக்கு
+
+@ Playback speed: faster sounds shorter and higher
+ta இயக்க வேகம்: வேகமானது குறுகியதாகவும் உயர்வாகவும் ஒலிக்கும்
+
+@ Plays the Quake theme in the main menu when no game is running
+ta எந்த ஆட்டமும் இயங்காதபோது முதன்மை மெனுவில் Quake கருப்பொருள் இசையை இசைக்கும்
+
+@ Portals farther away than this are drawn as flat discs
+ta இதைவிடத் தொலைவிலுள்ள போர்டல்கள் தட்டையான வட்டுகளாக வரையப்படும்
+
+@ Press attack once to keep firing, again to stop
+ta தொடர்ந்து சுட தாக்குதலை ஒருமுறை அழுத்து, நிறுத்த மீண்டும் அழுத்து
+
+@ Press run once to switch between running and walking
+ta ஓடுதல், நடத்தல் இடையே மாற ஓட்டத்தை ஒருமுறை அழுத்து
+
+@ Raise or lower the tone independently of sound length
+ta ஒலியின் நீளத்தைச் சாராமல் சுருதியை உயர்த்து அல்லது தாழ்த்து
+
+@ Red screen edges show where damage came from: top is front, bottom is behind; Screen Flashes controls their strength
+ta சிவப்புத் திரை ஓரங்கள் சேதம் எங்கிருந்து வந்தது எனக் காட்டும்: மேல் முன்புறம், கீழ் பின்புறம்; திரை மின்னல்கள் அவற்றின் வலிமையைக் கட்டுப்படுத்தும்
+
+@ Replaces the classic dot particles with glowing sparks, smoke and blood; mods with their own particle effects keep them
+ta பழைய புள்ளித் துகள்களுக்குப் பதிலாக ஒளிரும் தீப்பொறிகள், புகை, இரத்தம்; சொந்தத் துகள் விளைவுகள் கொண்ட மாட்களில் அவை அப்படியே இருக்கும்
+
+@ Resolution and detail inside portal and teleporter views; lower tiers trim nested effects
+ta போர்டல், டெலிபோர்ட்டர் காட்சிகளுக்குள் தெளிவும் விவரமும்; கீழ் நிலைகள் உள்ளமை விளைவுகளைக் குறைக்கும்
+
+@ Rippling light patterns on surfaces under water and slime
+ta நீர், நச்சுச் சேற்றுக்கடியிலுள்ள பரப்புகளில் அலையும் ஒளி வடிவங்கள்
+
+@ Scales all damage you take; above 100% is harder
+ta நீங்கள் பெறும் எல்லாச் சேதத்தையும் அளவிடும்; 100%-க்கு மேல் கடினம்
+
+@ Screen edge for this element; elements on the same spot stack
+ta இந்தக் கூறுக்கான திரை ஓரம்; ஒரே இடத்திலுள்ள கூறுகள் அடுக்கப்படும்
+
+@ Seconds a monster hit by the boomerang stays stunned
+ta பூமராங்கால் தாக்கப்பட்ட அரக்கன் திகைத்து நிற்கும் வினாடிகள்
+
+@ Seconds impact marks and stuck nails stay before fading out; independent of Particle Quality
+ta தாக்கத் தடங்களும் ஒட்டிய ஆணிகளும் மங்கும் முன் இருக்கும் வினாடிகள்; துகள் தரத்தைச் சாராதது
+
+@ Seconds messages at the top of the screen stay up
+ta திரையின் மேலே செய்திகள் இருக்கும் வினாடிகள்
+
+@ Seconds the flick stick snap takes; lower is faster
+ta ஃபிளிக் ஸ்டிக் திருப்பத்துக்கான வினாடிகள்; குறைவானது வேகமானது
+
+@ See through enhanced water; enables Water Opacity
+ta மேம்பட்ட நீர் வழியே பார்; நீர் ஒளிபுகாமையை இயக்கும்
+
+@ Sensor grain, scanlines and flicker of the goggle image
+ta கண்ணாடிப் படத்தின் சென்சார் துகள், ஸ்கேன் கோடுகள், மினுமினுப்பு
+
+@ Shades every anti-aliasing sample; needs Anti-aliasing on
+ta ஒவ்வொரு ஆன்டி-ஏலியாசிங் மாதிரியையும் நிழலிடும்; ஆன்டி-ஏலியாசிங் ஆன் ஆக வேண்டும்
+
+@ Shifts colors so they stay distinct for the chosen color blindness
+ta தேர்ந்தெடுத்த நிறக்குருடுக்கு நிறங்கள் தனித்துத் தெரியும்படி மாற்றும்
+
+@ Shotgun hits leave small surface marks (cosmetic only)
+ta ஷாட்கன் தாக்குதல்கள் சிறிய தடங்களை விடும் (தோற்றத்துக்கு மட்டும்)
+
+@ Show corner ticks at screen centre while locked, even with Crosshair off
+ta பூட்டியிருக்கும்போது, கிராஸ்ஹேர் ஆஃப் ஆனாலும், திரை மையத்தில் மூலைக் குறிகளைக் காட்டு
+
+@ Show where grenades and other arcing shots will fly, bounce and land; local play only, not in deathmatch
+ta கையெறிகுண்டுகளும் பிற வளைந்த சுடுதல்களும் எங்கு பறந்து, துள்ளி, விழும் எனக் காட்டு; உள்ளூர் ஆட்டத்தில் மட்டும், டெத்மேட்சில் இல்லை
+
+@ Shows text for important sounds: doors, alerted enemies, secrets, pickups
+ta முக்கிய ஒலிகளுக்கு உரை காட்டும்: கதவுகள், எச்சரிக்கையான எதிரிகள், ரகசியங்கள், பொருட்கள்
+
+@ Shows the distance fog that maps and mods set; off always gives clear view
+ta மேப்புகளும் மாட்களும் அமைக்கும் தொலை மூடுபனியைக் காட்டும்; ஆஃப் எனில் எப்போதும் தெளிவான பார்வை
+
+@ Shows the player face next to the health number
+ta உயிர் எண்ணுக்கு அருகில் வீரரின் முகத்தைக் காட்டும்
+
+@ Simulation detail, step rate, fade-out lifetimes and caps for gibs and shrapnel; low also skips mover collision
+ta உடல் துண்டுகள், சிதறல்களுக்கான உருவகப்படுத்தல் விவரம், படி வீதம், மங்கும் ஆயுள், வரம்புகள்; குறைவு நகரும் பொருட்களுடனான மோதலையும் தவிர்க்கும்
+
+@ Size of the on-screen buttons and move stick
+ta திரைப் பொத்தான்கள், நகர்வு ஸ்டிக்கின் அளவு
+
+@ Slowly heals up to 100 health after 5 seconds without being hit
+ta 5 வினாடிகள் தாக்கப்படாவிட்டால் 100 உயிர் வரை மெதுவாகக் குணமாக்கும்
+
+@ Slows stick look while the crosshair is over an enemy
+ta கிராஸ்ஹேர் எதிரி மீது இருக்கும்போது ஸ்டிக் பார்வையை மெதுவாக்கும்
+
+@ Slows the game down while the weapon wheel is open
+ta ஆயுதச் சக்கரம் திறந்திருக்கும்போது ஆட்டத்தை மெதுவாக்கும்
+
+@ Slows the whole game down; single player only. Saves and demos stay compatible with other ports
+ta முழு ஆட்டத்தையும் மெதுவாக்கும்; தனி ஆட்டத்தில் மட்டும். சேமிப்புகளும் டெமோக்களும் பிற போர்ட்களுடன் இணக்கமாக இருக்கும்
+
+@ Small camera jolt on each freeze; off with Reduce Motion
+ta ஒவ்வொரு உறைவிலும் சிறு கேமரா அதிர்வு; அசைவைக் குறை இருந்தால் ஆஃப்
+
+@ Snap and track enemies in local play, including split-screen; unavailable online
+ta உள்ளூர் ஆட்டத்தில், பிளவுத் திரை உட்பட, எதிரிகளைப் பிடித்துப் பின்தொடர்; ஆன்லைனில் கிடையாது
+
+@ Sparks, smoke, chips, splinters and splashes fly off whatever your shots hit
+ta உங்கள் சுடுதல்கள் தாக்கும் எதிலிருந்தும் தீப்பொறிகள், புகை, சில்லுகள், சிராய்ப்புகள், தெறிப்புகள் பறக்கும்
+
+@ Spawns extra copies of every monster around the original when a level starts
+ta நிலை தொடங்கும்போது ஒவ்வொரு அரக்கனின் கூடுதல் நகல்களை அசலைச் சுற்றி உருவாக்கும்
+
+@ Strength of the full-screen flashes for damage, pickups and powerups
+ta சேதம், பொருட்கள், சக்திகளுக்கான முழுத்திரை மின்னல்களின் வலிமை
+
+@ Stretch or shorten the sound while keeping its pitch
+ta சுருதியை மாற்றாமல் ஒலியை நீட்டு அல்லது சுருக்கு
+
+@ Surface opacity; requires Enhanced Water and Translucent Water
+ta பரப்பின் ஒளிபுகாமை; மேம்பட்ட நீர், ஒளி ஊடுருவும் நீர் தேவை
+
+@ The hook latches onto metal surfaces (metal, tech, computer panels, copper)
+ta கொக்கி உலோகப் பரப்புகளைப் பற்றும் (உலோகம், டெக், கணினிப் பலகைகள், செம்பு)
+
+@ The hook latches onto stone, brick, rock and any surface not recognised as wood or metal
+ta கொக்கி கல், செங்கல், பாறை, மரம் அல்லது உலோகம் என அறியப்படாத எந்தப் பரப்பையும் பற்றும்
+
+@ The hook latches onto wooden surfaces (texture names like wood, crate, plank)
+ta கொக்கி மரப் பரப்புகளைப் பற்றும் (wood, crate, plank போன்ற டெக்ஸ்சர் பெயர்கள்)
+
+@ Turn the controller's motion sensor into a look input; needs a pad with a gyroscope
+ta கன்ட்ரோலரின் இயக்க சென்சாரைப் பார்வை உள்ளீடாக்கும்; கைரோஸ்கோப் உள்ள பேட் தேவை
+
+@ Turns off view bob, strafe tilt and the camera kick when hit or firing
+ta பார்வை ஆட்டம், பக்க நகர்வுச் சாய்வு, தாக்கப்படும்போதும் சுடும்போதும் கேமரா உதைப்பை முடக்கும்
+
+@ Turns on the extra liquid effects; Water Settings controls each one
+ta கூடுதல் திரவ விளைவுகளை இயக்கும்; நீர் அமைப்புகள் ஒவ்வொன்றையும் கட்டுப்படுத்தும்
+
+@ Turns the view to follow a moving enemy you are aiming at
+ta நீங்கள் குறிவைக்கும் நகரும் எதிரியைப் பின்தொடரப் பார்வையைத் திருப்பும்
+
+@ Turns the view when you roll the controller sideways; 0 disables it, negative reverses it
+ta கன்ட்ரோலரைப் பக்கவாட்டில் உருட்டும்போது பார்வையைத் திருப்பும்; 0 முடக்கும், எதிர்மறை தலைகீழாக்கும்
+
+@ Two-portal gun: fire and alt-fire place linked portals on flat walls; assign a weapon slot in Add-ons
+ta இரு-போர்டல் துப்பாக்கி: சுடுதலும் மாற்றுச் சுடுதலும் தட்டையான சுவர்களில் இணைந்த போர்டல்களை வைக்கும்; ஆட்-ஆன்களில் ஆயுத இடத்தை ஒதுக்கு
+
+@ Unlocks the FX Settings page: enhanced particles, impact effects and blood splatter
+ta FX அமைப்புகள் பக்கத்தைத் திறக்கும்: மேம்பட்ட துகள்கள், தாக்க விளைவுகள், இரத்தத் தெறிப்பு
+
+@ Uses the 2021 re-release's smoother MD5 models (and MD3 replacements from mods) instead of the classic ones. Applies on the next map load
+ta பழைய மாடல்களுக்குப் பதிலாக 2021 மறுவெளியீட்டின் மென்மையான MD5 மாடல்களை (மாட்களின் MD3 மாற்றுகளையும்) பயன்படுத்தும். அடுத்த மேப் ஏற்றத்தில் பொருந்தும்
+
+@ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
+ta மேப்பின் வண்ண ஒளியைப் (.lit கோப்பு அல்லது BSPX lump) பயன்படுத்தும்; ஆஃப் எனில் அசல் வெள்ளை ஒளி. அடுத்த மேப் ஏற்றத்தில் பொருந்தும்
+
+@ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
+ta நீர்த்தாரைப் பகுதிகள், துளி எண்ணிக்கை, பளபளப்பான திரவ நிழலிடல்: குறைவு எளிய ஒளி ஊடுருவும் தாரைகள்; உயர் மென்மையான பளபளப்பான தாரைகள்
+
+@ When gyro looking applies: always, off while +gyroaction is held, or only while it is held
+ta கைரோ பார்வை எப்போது பொருந்தும்: எப்போதும், +gyroaction பிடிக்கும்போது ஆஃப், அல்லது பிடிக்கும்போது மட்டும்
+
+@ Which weapons trigger the freeze; melee covers the axe and any mod weapon used at close range without ammo
+ta எந்த ஆயுதங்கள் உறைவைத் தூண்டும்; கைகலப்பில் கோடரியும், வெடிமருந்தின்றி அருகில் பயன்படும் எந்த மாட் ஆயுதமும் அடங்கும்
+
+@ Your own rockets and grenades don't hurt you; rocket jumps still work
+ta உங்கள் சொந்த ராக்கெட்டுகளும் கையெறிகுண்டுகளும் உங்களைக் காயப்படுத்தாது; ராக்கெட் ஜம்ப் இன்னும் வேலை செய்யும்
+
+# ==== ui.txt ====
+
+# Menus and pop-ups outside the options pages: save cards, launch, presets,
+# add-on browser, map packs, hints and dialogs.
+@ Select
+ta தேர்ந்தெடு
+
+@ Back
+ta பின்செல்
+
+@ Cancel
+ta ரத்துசெய்
+
+@ Confirm
+ta உறுதிசெய்
+
+@ Scroll
+ta உருட்டு
+
+@ Section
+ta பிரிவு
+
+@ Bind
+ta ஒதுக்கு
+
+@ Cancel binding
+ta ஒதுக்கலை ரத்துசெய்
+
+@ Clear
+ta அழி
+
+@ Clear pad
+ta பேடை அழி
+
+@ Remap
+ta மாற்றியமை
+
+@ Type
+ta தட்டச்சு
+
+@ Shift
+ta Shift
+
+@ Done
+ta முடிந்தது
+
+@ Del
+ta Del
+
+@ Space
+ta இடைவெளி
+
+@ Save
+ta சேமி
+
+@ Load
+ta ஏற்று
+
+@ Delete
+ta நீக்கு
+
+@ Play
+ta விளையாடு
+
+@ Yes
+ta ஆம்
+
+@ No
+ta இல்லை
+
+@ OK
+ta சரி
+
+@ System
+ta அமைப்பு
+
+@ Language
+ta மொழி
+
+@ Help
+ta உதவி
+
+@ Fixed for this game: it was started without Customize
+ta இந்த ஆட்டத்துக்கு நிலையானது: இது தனிப்பயன் இன்றித் தொடங்கப்பட்டது
+
+@ Press a button or key to bind (Start cancels)
+ta ஒதுக்க ஒரு பொத்தான் அல்லது விசையை அழுத்து (Start ரத்துசெய்யும்)
+
+@ Press button...
+ta பொத்தானை அழுத்து...
+
+@ Press key...
+ta விசையை அழுத்து...
+
+@ Replace this binding?
+ta இந்த ஒதுக்கலை மாற்றவா?
+
+@ is already assigned
+ta ஏற்கனவே ஒதுக்கப்பட்டுள்ளது
+
+@ {} already assigned
+ta {} ஏற்கனவே ஒதுக்கப்பட்டுள்ளது
+
+@ Open Controls to remap Lock-on?
+ta பூட்டை மாற்றியமைக்கக் கட்டுப்பாடுகளைத் திறக்கவா?
+
+@ Lock-on
+ta பூட்டு
+
+@ Auto-aim Toggle
+ta தானியங்கு குறி மாற்று
+
+@ Keyboard
+ta விசைப்பலகை
+
+@ Controller
+ta கன்ட்ரோலர்
+
+# main menu, dialogs and screens
+@ Map Packs
+ta மேப் தொகுப்புகள்
+
+@ Customize
+ta தனிப்பயன்
+
+@ Level Select
+ta நிலைத் தேர்வு
+
+@ Really quit?
+ta உண்மையில் வெளியேறவா?
+
+@ You died
+ta நீங்கள் இறந்தீர்கள்
+
+@ Continue from most recent save
+ta சமீபத்திய சேமிப்பிலிருந்து தொடர்
+
+@ Select save
+ta சேமிப்பைத் தேர்ந்தெடு
+
+@ Restart level
+ta நிலையை மீண்டும் தொடங்கு
+
+@ Return to main menu
+ta முதன்மை மெனுவுக்குத் திரும்பு
+
+@ (disabled)
+ta (முடக்கம்)
+
+@ (fixed for this game)
+ta (இந்த ஆட்டத்துக்கு நிலையானது)
+
+@ (off)
+ta (ஆஃப்)
+
+@ Apply Display Changes
+ta காட்சி மாற்றங்களைப் பொருத்து
+
+@ Display Mode
+ta காட்சிப் பயன்முறை
+
+@ Resolution
+ta தெளிவுத்திறன்
+
+@ desktop
+ta டெஸ்க்டாப்
+
+@ Preset
+ta முன்னமைவு
+
+@ Map
+ta மேப்
+
+@ Reset Shader Settings
+ta ஷேடர் அமைப்புகளை மீட்டமை
+
+@ Reset to Defaults
+ta இயல்புநிலைக்கு மீட்டமை
+
+@ Searching...
+ta தேடுகிறது...
+
+@ This game only autosaves.
+ta இந்த ஆட்டம் தானியங்கு சேமிப்பு மட்டுமே செய்யும்.
+
+@ (No Manual Saves modifier)
+ta (கைமுறைச் சேமிப்பு இல்லை மாற்றி)
+
+@ End the current game?
+ta தற்போதைய ஆட்டத்தை முடிக்கவா?
+
+@ Unsaved progress will be lost.
+ta சேமிக்காத முன்னேற்றம் இழக்கப்படும்.
+
+@ End game
+ta ஆட்டத்தை முடி
+
+@ Overwrite
+ta மேலெழுது
+
+@ Overwrite "{}"?
+ta "{}" மேலெழுதவா?
+
+@ Saved {}
+ta சேமிக்கப்பட்டது {}
+
+@ Start a new game?
+ta புதிய ஆட்டம் தொடங்கவா?
+
+@ New game
+ta புதிய ஆட்டம்
+
+@ New Game
+ta புதிய ஆட்டம்
+
+@ CUSTOM
+ta தனிப்பயன்
+
+@ Customize Experience
+ta அனுபவத்தைத் தனிப்பயனாக்கு
+
+@ Disable All
+ta அனைத்தையும் முடக்கு
+
+@ Disable All Modifications
+ta எல்லா மாற்றங்களையும் முடக்கு
+
+@ Saves load in other source ports too.
+ta சேமிப்புகள் பிற சோர்ஸ் போர்ட்களிலும் ஏறும்.
+
+@ Standard rules, no add-ons.
+ta நிலையான விதிகள், ஆட்-ஆன்கள் இல்லை.
+
+@ Choose skill
+ta சிரமத்தைத் தேர்ந்தெடு
+
+@ The current game will end
+ta தற்போதைய ஆட்டம் முடியும்
+
+@ Easy
+ta எளிது
+
+@ Normal
+ta இயல்பு
+
+@ Hard
+ta கடினம்
+
+@ Nightmare
+ta கொடுங்கனவு
+
+# graphics preset pop-up
+@ Choose a Graphics Preset
+ta கிராஃபிக்ஸ் முன்னமைவைத் தேர்ந்தெடு
+
+@ Classic
+ta பழைய பாணி
+
+@ Like the re-release: enhanced models,
+ta மறுவெளியீடு போல: மேம்பட்ட மாடல்கள்,
+
+@ no added effects.
+ta கூடுதல் விளைவுகள் இல்லை.
+
+@ Enhanced
+ta மேம்பட்டது
+
+@ Every enhancement at its highest quality.
+ta எல்லா மேம்பாடுகளும் அதிகபட்ச தரத்தில்.
+
+@ Needs a capable GPU.
+ta திறன்மிக்க GPU தேவை.
+
+@ Low-End
+ta குறைந்த திறன்
+
+@ Fastest. No anti-aliasing, original
+ta மிக வேகம். ஆன்டி-ஏலியாசிங் இல்லை, அசல்
+
+@ models, lowest effect quality.
+ta மாடல்கள், மிகக் குறைந்த விளைவுத் தரம்.
+
+@ Esc keeps the defaults
+ta Esc இயல்புநிலைகளை வைக்கும்
+
+@ Everything can be changed later in Options.
+ta எல்லாவற்றையும் பின்னர் விருப்பங்களில் மாற்றலாம்.
+
+@ Keep Defaults
+ta இயல்புநிலைகளை வை
+
+# save and load cards
+@ Save Game
+ta ஆட்டத்தைச் சேமி
+
+@ Load Game
+ta ஆட்டத்தை ஏற்று
+
+@ Autosaves
+ta தானியங்கு சேமிப்புகள்
+
+@ newest first
+ta புதியது முதலில்
+
+@ Saves: {}
+ta சேமிப்புகள்: {}
+
+@ Browse Autosaves
+ta தானியங்கு சேமிப்புகளை உலாவு
+
+@ Every retained autosave, newest first
+ta வைக்கப்பட்ட எல்லா தானியங்கு சேமிப்புகளும், புதியது முதலில்
+
+@ New save
+ta புதிய சேமிப்பு
+
+@ Select to save your game here
+ta உங்கள் ஆட்டத்தை இங்கே சேமிக்கத் தேர்ந்தெடு
+
+@ No autosaves yet
+ta இன்னும் தானியங்கு சேமிப்புகள் இல்லை
+
+@ Autosaves are made on level entry, secrets and more (Options > Gameplay)
+ta நிலை தொடக்கம், ரகசியங்கள் மற்றும் பலவற்றில் தானியங்கு சேமிப்பு நடக்கும் (விருப்பங்கள் > விளையாட்டு முறை)
+
+@ No saves yet
+ta இன்னும் சேமிப்புகள் இல்லை
+
+@ Save from the Single Player menu, or press F6 to quicksave
+ta தனி ஆட்ட மெனுவிலிருந்து சேமி, அல்லது விரைவுச் சேமிப்புக்கு F6 அழுத்து
+
+@ No picture
+ta படம் இல்லை
+
+@ Del: delete save
+ta Del: சேமிப்பை நீக்கு
+
+@ Delete "{}"?
+ta "{}" நீக்கவா?
+
+@ This cannot be undone.
+ta இதைத் திரும்பப்பெற முடியாது.
+
+@ Quicksave
+ta விரைவுச் சேமிப்பு
+
+@ Autosave: {}
+ta தானியங்கு சேமிப்பு: {}
+
+@ unknown trigger
+ta அறியாத தூண்டல்
+
+@ Latest - {}
+ta சமீபத்தியது - {}
+
+@ Health {}
+ta உயிர் {}
+
+@ Armor {}
+ta கவசம் {}
+
+@ Kills {}/{}
+ta கொலைகள் {}/{}
+
+@ Secrets {}/{}
+ta ரகசியங்கள் {}/{}
+
+@ Split-screen, {} players
+ta பிளவுத் திரை, {} வீரர்கள்
+
+@ Co-op
+ta கூட்டுறவு
+
+@ Customized
+ta தனிப்பயனாக்கியது
+
+@ Customized, {}
+ta தனிப்பயனாக்கியது, {}
+
+@ Date unavailable
+ta தேதி கிடைக்கவில்லை
+
+@ Just now
+ta இப்போதுதான்
+
+@ {} min ago
+ta {} நிமி முன்
+
+@ {} h ago
+ta {} மணி முன்
+
+@ Level entry
+ta நிலை தொடக்கம்
+
+@ Secret found
+ta ரகசியம் கிடைத்தது
+
+@ All enemies killed
+ta எல்லா எதிரிகளும் கொல்லப்பட்டனர்
+
+@ All secrets found
+ta எல்லா ரகசியங்களும் கிடைத்தன
+
+@ Timer
+ta நேரங்காட்டி
+
+# customize pages
+@ Standard rules
+ta நிலையான விதிகள்
+
+@ Modifiers changed: {}
+ta மாற்றிய மாற்றிகள்: {}
+
+@ no add-ons
+ta ஆட்-ஆன்கள் இல்லை
+
+@ add-ons: {}
+ta ஆட்-ஆன்கள்: {}
+
+@ Saves of this game are .qsa files: they need this source port.
+ta இந்த ஆட்டத்தின் சேமிப்புகள் .qsa கோப்புகள்: இவற்றுக்கு இந்த சோர்ஸ் போர்ட் தேவை.
+
+@ Nothing changed: this plays as standard Quake.
+ta எதுவும் மாறவில்லை: இது நிலையான Quake ஆக விளையாடும்.
+
+@ Changes apply now and are saved with this game (.qsa).
+ta மாற்றங்கள் இப்போதே பொருந்தி இந்த ஆட்டத்துடன் (.qsa) சேமிக்கப்படும்.
+
+@ This game started without Customize, so its rules are fixed.
+ta இந்த ஆட்டம் தனிப்பயன் இன்றித் தொடங்கியது, எனவே அதன் விதிகள் நிலையானவை.
+
+@ Start a new game and choose Customize Experience.
+ta புதிய ஆட்டம் தொடங்கி அனுபவத்தைத் தனிப்பயனாக்கு என்பதைத் தேர்ந்தெடு.
+
+@ These rules apply to the next customized game.
+ta இந்த விதிகள் அடுத்த தனிப்பயன் ஆட்டத்துக்குப் பொருந்தும்.
+
+# add-on browser
+@ Fire
+ta சுடு
+
+@ Alt Fire
+ta மாற்றுச் சுடுதல்
+
+@ Configure Parameters >
+ta அளவுருக்களை உள்ளமை >
+
+@ Configure
+ta உள்ளமை
+
+@ Settings
+ta அமைப்புகள்
+
+@ Change slot
+ta இடத்தை மாற்று
+
+@ Toggle
+ta மாற்று
+
+@ Details
+ta விவரங்கள்
+
+@ Enter or click the box: toggle
+ta Enter அல்லது பெட்டியைக் கிளிக்: மாற்று
+
+@ Right / Tab / click: details
+ta வலது / Tab / கிளிக்: விவரங்கள்
+
+@ Input Remapping
+ta உள்ளீட்டு மறுஒதுக்கல்
+
+@ Weapon Slot
+ta ஆயுத இடம்
+
+@ Customized games save as .qsa files, which need this source port.
+ta தனிப்பயன் ஆட்டங்கள் .qsa கோப்புகளாகச் சேமிக்கப்படும், இவற்றுக்கு இந்த சோர்ஸ் போர்ட் தேவை.
+
+@ This game started without Customize, so its add-ons are fixed. Customize a new game instead.
+ta இந்த ஆட்டம் தனிப்பயன் இன்றித் தொடங்கியது, எனவே அதன் ஆட்-ஆன்கள் நிலையானவை. பதிலாகப் புதிய ஆட்டத்தைத் தனிப்பயனாக்கு.
+
+@ Bullet Time
+ta புல்லட் டைம்
+
+@ Change Goggles
+ta கண்ணாடி மாற்று
+
+@ Dodge / Dive
+ta தவிர் / பாய்
+
+@ Goggles
+ta கண்ணாடிகள்
+
+@ Hitstop
+ta ஹிட்ஸ்டாப்
+
+@ Projectile Shotguns
+ta எறிபொருள் ஷாட்கன்கள்
+
+@ BULLET TIME: 20%
+ta புல்லட் டைம்: 20%
+
+@ NORMAL SPEED
+ta இயல்பு வேகம்
+
+@ SLOW MOTION: PHYSICAL PELLETS
+ta மெது இயக்கம்: இயற்பியல் குண்டுகள்
+
+@ DEMONSTRATION
+ta செயல்விளக்கம்
+
+@ GAMEPLAY
+ta விளையாட்டு முறை
+
+@ LOOP
+ta சுழற்சி
+
+@ Preview unavailable
+ta முன்னோட்டம் கிடைக்கவில்லை
+
+# shader and language help lines
+@ A setting of the chosen shader; arrows step it, Enter is not needed
+ta தேர்ந்தெடுத்த ஷேடரின் ஓர் அமைப்பு; அம்புகள் மாற்றும், Enter தேவையில்லை
+
+@ Language of the menus, messages and the 2021 re-release's game text; System follows your computer's language
+ta மெனுக்கள், செய்திகள், 2021 மறுவெளியீட்டின் ஆட்ட உரையின் மொழி; அமைப்பு உங்கள் கணினியின் மொழியைப் பின்பற்றும்
+
+@ Puts every setting of the chosen shader back to the preset's defaults
+ta தேர்ந்தெடுத்த ஷேடரின் எல்லா அமைப்புகளையும் முன்னமைவின் இயல்புநிலைக்குத் திருப்பும்
+
+@ RetroArch slang shader on the final image: CRT, scanlines, NTSC, sharpening; add your own in <game>/shaders
+ta இறுதிப் படத்தில் RetroArch slang ஷேடர்: CRT, ஸ்கேன் கோடுகள், NTSC, கூர்மையாக்கல்; உங்களுடையதை <game>/shaders-இல் சேர்
+
+# modern console footer
+@ Shift+PgUp/Dn: height  ` : hide
+ta Shift+PgUp/Dn: உயரம்  ` : மறை
+
+@ Tab: complete  Ctrl+R: search  bash | pipe
+ta Tab: நிரப்பு  Ctrl+R: தேடு  bash | pipe
+
+@ ↑ +{} lines (End to jump) 
+ta ↑ +{} வரிகள் (End அழுத்தித் தாவு) 
+
+# add-on descriptions
+@ Create two linked portals on flat walls. Fire places the first portal; Alt Fire places the second. Walk through either portal to emerge from the other. Your momentum carries through. Assign a weapon slot below: pressing that slot repeatedly cycles its ordinary weapon and every enabled add-on assigned there. Portal view quality is configurable below.
+ta தட்டையான சுவர்களில் இணைந்த இரண்டு போர்டல்களை உருவாக்கு. சுடுதல் முதல் போர்டலை வைக்கும்; மாற்றுச் சுடுதல் இரண்டாவதை வைக்கும். ஏதேனும் ஒரு போர்டல் வழியே நடந்தால் மற்றொன்றிலிருந்து வெளிவருவீர். உங்கள் உந்தம் தொடரும். கீழே ஓர் ஆயுத இடத்தை ஒதுக்கு: அந்த இடத்தை மீண்டும் மீண்டும் அழுத்தினால் அதன் வழக்கமான ஆயுதமும் அங்கு ஒதுக்கிய இயக்கப்பட்ட ஒவ்வொரு ஆட்-ஆனும் சுழலும். போர்டல் காட்சித் தரத்தைக் கீழே அமைக்கலாம்.
+
+@ Hold Fire and sweep the crosshair over monsters to queue targets. Release Fire to throw: the boomerang visits each target, stuns it and returns to you. Alt Fire clears the queue. The weapon slot selects a group, not a separate hotkey: press it again to cycle through the weapons in that slot. Configure stun duration and flight speed below.
+ta சுடுதலைப் பிடித்து கிராஸ்ஹேரை அரக்கர்கள் மீது தேய்த்து இலக்குகளை வரிசைப்படுத்து. வீச சுடுதலை விடு: பூமராங் ஒவ்வொரு இலக்கிடமும் சென்று, திகைக்கவைத்து, உங்களிடம் திரும்பும். மாற்றுச் சுடுதல் வரிசையை அழிக்கும். ஆயுத இடம் ஒரு குழுவைத் தேர்ந்தெடுக்கும், தனி விசையை அல்ல: அந்த இடத்திலுள்ள ஆயுதங்களிடையே சுழல மீண்டும் அழுத்து. திகைப்பு நேரத்தையும் பறக்கும் வேகத்தையும் கீழே அமை.
+
+@ Hold Fire to charge a sticky bomb using rocket ammunition; release to launch. A longer charge throws it faster. Bombs cling to walls, doors and monsters. Alt Fire detonates your planted bombs together. Place a trap, retreat, then detonate it when enemies approach. Assign any weapon slot below; repeated presses cycle through the ordinary weapon and add-ons in that slot.
+ta ராக்கெட் வெடிமருந்தைப் பயன்படுத்தி ஒட்டும் குண்டை ஏற்ற சுடுதலைப் பிடி; ஏவ விடு. நீண்ட ஏற்றம் அதை வேகமாக வீசும். குண்டுகள் சுவர்கள், கதவுகள், அரக்கர்களில் ஒட்டும். மாற்றுச் சுடுதல் நீங்கள் வைத்த குண்டுகளை ஒன்றாக வெடிக்கவைக்கும். பொறி வை, பின்வாங்கு, எதிரிகள் நெருங்கும்போது வெடிக்கவை. கீழே எந்த ஆயுத இடத்தையும் ஒதுக்கு; மீண்டும் அழுத்தினால் அந்த இடத்தின் வழக்கமான ஆயுதமும் ஆட்-ஆன்களும் சுழலும்.
+
+@ Fire launches a chain hook. It latches onto a permitted surface or enemy and reels you toward the anchor. Fire again or use Alt Fire to let go. Choose which materials and enemies can be hooked in Configure Parameters. Assign it to any weapon slot; repeated presses of the slot's existing binding cycle through its weapons.
+ta சுடுதல் சங்கிலிக் கொக்கியை ஏவும். அது அனுமதிக்கப்பட்ட பரப்பு அல்லது எதிரியைப் பற்றி உங்களை நங்கூரத்தை நோக்கி இழுக்கும். விடுவிக்க மீண்டும் சுடு அல்லது மாற்றுச் சுடுதலைப் பயன்படுத்து. எந்தப் பொருட்களையும் எதிரிகளையும் கொக்கியிடலாம் என்பதை அளவுருக்களை உள்ளமை என்பதில் தேர்ந்தெடு. எந்த ஆயுத இடத்துக்கும் ஒதுக்கு; அந்த இடத்தின் தற்போதைய விசையை மீண்டும் அழுத்தினால் அதன் ஆயுதங்கள் சுழலும்.
+
+@ A piercing railgun inspired by Quake III. Fire sends a slug through every enemy along its line. Each shot consumes two cells, with a 1.5 second refire interval. Damage and the spiral trail colour are configurable below. Choose a weapon slot: the slot's current binding selects and cycles the weapons assigned to it.
+ta Quake III-இலிருந்து உத்வேகம் பெற்ற துளைக்கும் ரெயில்கன். சுடுதல் அதன் கோட்டிலுள்ள ஒவ்வொரு எதிரி வழியாகவும் குண்டை அனுப்பும். ஒவ்வொரு சுடுதலும் இரண்டு செல்களைச் செலவழிக்கும், மீண்டும் சுட 1.5 வினாடி இடைவெளி. சேதத்தையும் சுருள் தட நிறத்தையும் கீழே அமைக்கலாம். ஓர் ஆயுத இடத்தைத் தேர்ந்தெடு: அந்த இடத்தின் தற்போதைய விசை அதற்கு ஒதுக்கிய ஆயுதங்களைத் தேர்ந்தெடுத்துச் சுழற்றும்.
+
+@ A Portal-style gel sprayer. Fire sprays blue Repulsion gel: land, jump or run into it to bounce, and landings on it never hurt. Alt Fire sprays orange Propulsion gel: run across it to go much faster. Gel coats floors and walls until washed off with the Powerwasher. Assign a weapon slot below; repeated presses cycle the weapons in that slot.
+ta Portal பாணி ஜெல் தெளிப்பான். சுடுதல் நீல விலக்கு ஜெல்லைத் தெளிக்கும்: அதில் இறங்கு, குதி அல்லது ஓடி மோது, துள்ளுவீர், அதில் இறங்குவது ஒருபோதும் காயப்படுத்தாது. மாற்றுச் சுடுதல் ஆரஞ்சு உந்து ஜெல்லைத் தெளிக்கும்: அதன் மேல் ஓடினால் மிக வேகமாகச் செல்வீர். பவர்வாஷரால் கழுவும் வரை ஜெல் தரைகளிலும் சுவர்களிலும் பூசியிருக்கும். கீழே ஓர் ஆயுத இடத்தை ஒதுக்கு; மீண்டும் அழுத்தினால் அந்த இடத்தின் ஆயுதங்கள் சுழலும்.
+
+@ A water cannon. Fire shoots a straight jet with limited reach; Alt Fire a wide, shorter fan. The water pushes enemies back, turns projectiles aside and washes away gel and blood. Push strength is configurable below. Assign a weapon slot below; repeated presses cycle the weapons in that slot.
+ta ஒரு நீர் பீரங்கி. சுடுதல் குறைந்த வீச்சுள்ள நேரான தாரையைச் சுடும்; மாற்றுச் சுடுதல் அகலமான, குறுகிய விசிறியை. நீர் எதிரிகளைப் பின்னே தள்ளி, எறிபொருட்களைத் திசைதிருப்பி, ஜெல்லையும் இரத்தத்தையும் கழுவும். தள்ளும் வலிமையைக் கீழே அமைக்கலாம். கீழே ஓர் ஆயுத இடத்தை ஒதுக்கு; மீண்டும் அழுத்தினால் அந்த இடத்தின் ஆயுதங்கள் சுழலும்.
+
+@ One equipment add-on includes both night vision and thermal vision. The Change Goggles action cycles Normal, Night Vision, Thermal, then Normal again. Night vision brightens dark rooms; thermal vision highlights living enemies. Goggles do not occupy a weapon slot. Configure intensity and sensor noise below. The binding affects only this add-on.
+ta ஒரே உபகரண ஆட்-ஆனில் இரவுப் பார்வையும் வெப்பப் பார்வையும் உள்ளன. கண்ணாடி மாற்று செயல் இயல்பு, இரவுப் பார்வை, வெப்பம், மீண்டும் இயல்பு எனச் சுழலும். இரவுப் பார்வை இருண்ட அறைகளை ஒளிரச்செய்யும்; வெப்பப் பார்வை உயிருள்ள எதிரிகளை முன்னிலைப்படுத்தும். கண்ணாடிகள் ஆயுத இடத்தை எடுக்காது. தீவிரத்தையும் சென்சார் இரைச்சலையும் கீழே அமை. இந்த ஒதுக்கல் இந்த ஆட்-ஆனை மட்டும் பாதிக்கும்.
+
+@ Press Dodge with a movement direction on the ground or in midair: dive forward or leap backward and sideways. Diagonals are supported. Each press launches once, with a short recovery. The player body animates in third person. Assign the Dodge action below or in Controls.
+ta தரையிலோ நடுவானிலோ ஒரு நகர்வுத் திசையுடன் தவிர் அழுத்து: முன்னே பாய் அல்லது பின்னும் பக்கவாட்டிலும் தாவு. மூலைவிட்டங்களும் ஆதரிக்கப்படும். ஒவ்வொரு அழுத்தமும் ஒருமுறை ஏவும், சிறு மீட்பு நேரத்துடன். மூன்றாம் நபரில் வீரரின் உடல் அசையும். தவிர் செயலைக் கீழே அல்லது கட்டுப்பாடுகளில் ஒதுக்கு.
+
+@ Use the dedicated Bullet Time action to slow the whole local game to 20% speed. Hold is the default; Toggle switches on each press. The optional meter limits use in real seconds and regenerates while inactive. Disable the meter for unlimited use. Remap the action and configure duration and regeneration below.
+ta முழு உள்ளூர் ஆட்டத்தையும் 20% வேகத்துக்குக் குறைக்க தனி புல்லட் டைம் செயலைப் பயன்படுத்து. பிடித்திரு இயல்புநிலை; மாற்று ஒவ்வொரு அழுத்தத்திலும் மாறும். விருப்ப அளவி பயன்பாட்டை உண்மை வினாடிகளில் கட்டுப்படுத்தி, செயலற்றிருக்கும்போது மீண்டும் நிரம்பும். வரம்பற்ற பயன்பாட்டுக்கு அளவியை முடக்கு. செயலை மாற்றியமைத்து நேரத்தையும் மீளுருவாக்கத்தையும் கீழே அமை.
+
+@ Both shotguns and enemy grunts fire physical pellets with their original spread and damage. Fast default projectiles feel immediate; lower their speed to dodge incoming fire during bullet time. Configure projectile speed below, or reset it to the default of 10000 units per second.
+ta இரு ஷாட்கன்களும் எதிரி கிரன்ட்களும் அசல் சிதறலும் சேதமும் கொண்ட இயற்பியல் குண்டுகளைச் சுடும். வேகமான இயல்பு எறிபொருட்கள் உடனடியாக உணரப்படும்; புல்லட் டைமில் வரும் சுடுதலைத் தவிர்க்க அவற்றின் வேகத்தைக் குறை. எறிபொருள் வேகத்தைக் கீழே அமை, அல்லது இயல்பு மதிப்பான வினாடிக்கு 10000 அலகுகளுக்கு மீட்டமை.
+
+@ Freezes the game for a split second when you damage an enemy, so hits feel heavier. Single player only. Choose which weapons trigger it (all, melee, ranged or explosives), how long it lasts and how much more a kill freezes. Advanced settings cover enemy toughness, damage scaling, cooldown and the longest freeze.
+ta எதிரியைக் காயப்படுத்தும்போது ஆட்டத்தை ஒரு கணம் உறையவைக்கும், அதனால் அடிகள் கனமாக உணரப்படும். தனி ஆட்டத்தில் மட்டும். எந்த ஆயுதங்கள் தூண்டும் (அனைத்தும், கைகலப்பு, தொலைவு அல்லது வெடிபொருட்கள்), எவ்வளவு நேரம், கொலை எவ்வளவு கூடுதலாக உறையவைக்கும் என்பதைத் தேர்ந்தெடு. மேம்பட்ட அமைப்புகளில் எதிரி வலிமை, சேத அளவீடு, ஓய்வு நேரம், நீண்ட உறைவு உள்ளன.
+
+# map packs and the Quaddicted browser
+@ Get more maps (Quaddicted)...
+ta மேலும் மேப்புகள் (Quaddicted)...
+
+@ Type to filter...
+ta வடிகட்டத் தட்டச்சு செய்...
+
+@ Launch mod
+ta மாட்டைத் தொடங்கு
+
+@ Start first map
+ta முதல் மேப்பைத் தொடங்கு
+
+@ (running)
+ta (இயங்குகிறது)
+
+@ running
+ta இயங்குகிறது
+
+@ Recent
+ta சமீபத்தியவை
+
+@ Name
+ta பெயர்
+
+@ Dir
+ta அடைவு
+
+@ Default
+ta இயல்புநிலை
+
+@ Title
+ta தலைப்பு
+
+@ Sort: {}
+ta வரிசை: {}
+
+@ {} installed
+ta {} நிறுவப்பட்டன
+
+@ {}/{} matching
+ta {}/{} பொருந்துகின்றன
+
+@ {} maps, {} completed
+ta {} மேப்புகள், {} முடிந்தன
+
+@ {}/{} matching, {} completed
+ta {}/{} பொருந்துகின்றன, {} முடிந்தன
+
+@ no maps of its own
+ta சொந்த மேப்புகள் இல்லை
+
+@ dir: {}
+ta அடைவு: {}
+
+@ base: {}
+ta அடிப்படை: {}
+
+@ Browse the Quaddicted archive of
+ta Quaddicted காப்பகத்திலுள்ள
+
+@ single-player maps and episodes,
+ta தனி ஆட்ட மேப்புகள், தொடர்களை
+
+@ then download and install them
+ta உலாவி, இங்கேயே பதிவிறக்கி
+
+@ here. Each release gets its own
+ta நிறுவு. ஒவ்வொரு வெளியீட்டுக்கும்
+
+@ entry in this list.
+ta இந்தப் பட்டியலில் தனி இடம் உண்டு.
+
+@ Needs an internet connection.
+ta இணைய இணைப்பு தேவை.
+
+@ Quaddicted Map Archive
+ta Quaddicted மேப் காப்பகம்
+
+@ Newest
+ta புதியவை
+
+@ Author
+ta ஆசிரியர்
+
+@ Size
+ta அளவு
+
+@ Loading the map list...
+ta மேப் பட்டியல் ஏறுகிறது...
+
+@ Couldn't load the map list: {}
+ta மேப் பட்டியலை ஏற்ற முடியவில்லை: {}
+
+@ {} single-player releases  -  F5 refreshes
+ta {} தனி ஆட்ட வெளியீடுகள்  -  F5 புதுப்பிக்கும்
+
+@ {} matching
+ta {} பொருந்துகின்றன
+
+@ by {}
+ta {} உருவாக்கியது
+
+@ requires: {}
+ta தேவை: {}
+
+@ maps: {}
+ta மேப்புகள்: {}
+
+@ Failed: {}
+ta தோல்வி: {}
+
+@ Downloading... {}%
+ta பதிவிறக்குகிறது... {}%
+
+@ Unpacking...
+ta பிரிக்கிறது...
+
+@ Installed in {}/  -  Enter: play
+ta {}/ இல் நிறுவப்பட்டது  -  Enter: விளையாடு
+
+@ Enter: download and install
+ta Enter: பதிவிறக்கி நிறுவு
+
+@ unpacking
+ta பிரிக்கிறது
+
+@ failed
+ta தோல்வி
+
+@ installed
+ta நிறுவப்பட்டது
+
+@ Downloads are not available in the browser build
+ta உலாவிப் பதிப்பில் பதிவிறக்கங்கள் கிடைக்காது
+
+@ the map list could not be read
+ta மேப் பட்டியலைப் படிக்க முடியவில்லை
+
+@ downloading needs the curl program
+ta பதிவிறக்க curl நிரல் தேவை
+
+@ download failed
+ta பதிவிறக்கம் தோல்வி
+
+@ the download is not a valid zip
+ta பதிவிறக்கியது சரியான zip அல்ல
+
+@ nothing to install for this engine
+ta இந்த இன்ஜினுக்கு நிறுவ எதுவும் இல்லை
+
+@ needs {} installed first
+ta முதலில் {} நிறுவப்பட வேண்டும்
+
+@ couldn't unpack {}
+ta {} பிரிக்க முடியவில்லை
+
+# help screen
+@ About
+ta பற்றி
+
+@ < Back
+ta < பின்செல்
+
+# tr_ctx keys: English shows the short word, the key says which meaning
+@ Save (a manual save, as opposed to a quicksave or autosave)
+ta சேமிப்பு
+
+# ==== hud.txt ====
+
+# HUD, weapon and equipment wheels, sound captions and other in-game text.
+# Weapon, monster and item names follow the 2021 re-release's own translations.
+@ Axe
+ta கோடரி
+
+@ Shotgun
+ta ஷாட்கன்
+
+@ Double-Barrelled Shotgun
+ta இரட்டைக் குழல் ஷாட்கன்
+
+@ Nailgun
+ta ஆணித் துப்பாக்கி
+
+@ Super Nailgun
+ta சூப்பர் ஆணித் துப்பாக்கி
+
+@ Grenade Launcher
+ta கையெறிகுண்டு ஏவி
+
+@ Rocket Launcher
+ta ராக்கெட் ஏவி
+
+@ Thunderbolt
+ta இடிமின்னல்
+
+@ Portal Gun
+ta போர்டல் துப்பாக்கி
+
+@ Boomerang
+ta பூமராங்
+
+@ Stickybomb Launcher
+ta ஒட்டும் குண்டு ஏவி
+
+@ Railgun
+ta ரெயில்கன்
+
+@ Hookshot
+ta கொக்கி
+
+@ Gel Sprayer
+ta ஜெல் தெளிப்பான்
+
+@ Powerwasher
+ta பவர்வாஷர்
+
+@ Night Vision Goggles
+ta இரவுப் பார்வைக் கண்ணாடி
+
+@ Thermal Goggles
+ta வெப்பக் கண்ணாடி
+
+@ Normal vision
+ta இயல்புப் பார்வை
+
+@ ON
+ta ஆன்
+
+@ OFF
+ta ஆஃப்
+
+@ {} (turn on)
+ta {} (ஆன் செய்)
+
+@ {} (turn off)
+ta {} (ஆஃப் செய்)
+
+@ Move mouse to select, release to toggle
+ta தேர்ந்தெடுக்கச் சுட்டியை நகர்த்து, மாற்ற விடு
+
+@ Move mouse to select, release to equip
+ta தேர்ந்தெடுக்கச் சுட்டியை நகர்த்து, அணிய விடு
+
+@ Release to toggle
+ta மாற்ற விடு
+
+@ Release to equip
+ta அணிய விடு
+
+@ shells
+ta தோட்டாக்கள்
+
+@ nails
+ta ஆணிகள்
+
+@ rockets
+ta ராக்கெட்டுகள்
+
+@ cells
+ta செல்கள்
+
+@ Kills: {}/{}
+ta கொலைகள்: {}/{}
+
+@ Secrets: {}/{}
+ta ரகசியங்கள்: {}/{}
+
+@ Time {}
+ta நேரம் {}
+
+@ Press any button to continue...
+ta தொடர ஏதேனும் பொத்தானை அழுத்து...
+
+@ Press any key to continue...
+ta தொடர ஏதேனும் விசையை அழுத்து...
+
+@ BULLET TIME
+ta புல்லட் டைம்
+
+@ AUTO AIM
+ta தானியங்கு குறி
+
+@ Crosshair
+ta கிராஸ்ஹேர்
+
+@ + Marker
+ta + குறி
+
+@ Hit markers off
+ta ஹிட் குறிகள் ஆஃப்
+
+@ On target
+ta இலக்கின் மீது
+
+@ On kill
+ta கொன்றபின்
+
+# sound captions
+@ [Secret found]
+ta [ரகசியம் கிடைத்தது]
+
+@ [Message]
+ta [செய்தி]
+
+@ [Switch activated]
+ta [சுவிட்ச் இயக்கப்பட்டது]
+
+@ [Key picked up]
+ta [சாவி எடுக்கப்பட்டது]
+
+@ [Rune picked up]
+ta [ரூன் எடுக்கப்பட்டது]
+
+@ [Teleporter]
+ta [டெலிபோர்ட்டர்]
+
+@ [Teleport]
+ta [டெலிபோர்ட்]
+
+@ [Splash]
+ta [தொப்பென]
+
+@ [Leaving water]
+ta [நீரிலிருந்து வெளியேறுதல்]
+
+@ [Door]
+ta [கதவு]
+
+@ [Platform moving]
+ta [மேடை நகர்கிறது]
+
+@ [Button]
+ta [பொத்தான்]
+
+@ [Health picked up]
+ta [உயிர் எடுக்கப்பட்டது]
+
+@ [Armor picked up]
+ta [கவசம் எடுக்கப்பட்டது]
+
+@ [Quad Damage wearing off]
+ta [குவாட் டேமேஜ் தீர்கிறது]
+
+@ [Quad Damage]
+ta [குவாட் டேமேஜ்]
+
+@ [Pentagram wearing off]
+ta [பென்டாகிராம் தீர்கிறது]
+
+@ [Pentagram of Protection]
+ta [பாதுகாப்புப் பென்டாகிராம்]
+
+@ [Ring wearing off]
+ta [மோதிரம் தீர்கிறது]
+
+@ [Ring of Shadows]
+ta [நிழல்களின் மோதிரம்]
+
+@ [Biosuit wearing off]
+ta [பயோசூட் தீர்கிறது]
+
+@ [Biosuit]
+ta [பயோசூட்]
+
+@ [Item picked up]
+ta [பொருள் எடுக்கப்பட்டது]
+
+@ [Weapon picked up]
+ta [ஆயுதம் எடுக்கப்பட்டது]
+
+@ [Ammo picked up]
+ta [வெடிமருந்து எடுக்கப்பட்டது]
+
+@ [Explosion]
+ta [வெடிப்பு]
+
+@ [Grenade launched]
+ta [கையெறிகுண்டு ஏவப்பட்டது]
+
+@ [Grenade bounce]
+ta [கையெறிகுண்டு துள்ளல்]
+
+@ [Rocket fired]
+ta [ராக்கெட் சுடப்பட்டது]
+
+@ [Nails fired]
+ta [ஆணிகள் சுடப்பட்டன]
+
+@ [Lightning]
+ta [மின்னல்]
+
+@ [Thunder]
+ta [இடி]
+
+@ [Enforcer alerted]
+ta [என்ஃபோர்சர் எச்சரிக்கையானது]
+
+@ [Grunt alerted]
+ta [கிரன்ட் எச்சரிக்கையானது]
+
+@ [Rottweiler alerted]
+ta [ராட்வீலர் எச்சரிக்கையானது]
+
+@ [Knight alerted]
+ta [நைட் எச்சரிக்கையானது]
+
+@ [Death Knight alerted]
+ta [டெத் நைட் எச்சரிக்கையானது]
+
+@ [Scrag alerted]
+ta [ஸ்க்ராக் எச்சரிக்கையானது]
+
+@ [Ogre alerted]
+ta [ஓகர் எச்சரிக்கையானது]
+
+@ [Fiend alerted]
+ta [ஃபீண்ட் எச்சரிக்கையானது]
+
+@ [Shambler alerted]
+ta [ஷாம்ப்ளர் எச்சரிக்கையானது]
+
+@ [Zombie groaning]
+ta [ஜோம்பி முனகுகிறது]
+
+@ [Vore alerted]
+ta [வோர் எச்சரிக்கையானது]
+
+@ [Vore attacking]
+ta [வோர் தாக்குகிறது]
+
+@ [Spawn alerted]
+ta [ஸ்பான் எச்சரிக்கையானது]
+
+@ [Rotfish]
+ta [ராட்ஃபிஷ்]
+
+@ [Spawn]
+ta [ஸ்பான்]
+
+@ [Chthon]
+ta [க்தோன்]
+
+@ [Hard landing]
+ta [கடின இறக்கம்]
+
+@ [Drowning]
+ta [மூழ்குதல்]
+
+@ [Gasping for air]
+ta [மூச்சுத் திணறல்]
+
+@ [Burning]
+ta [எரிதல்]
+
+@ [Telefrag]
+ta [டெலிஃபிராக்]
+
+@ [Gibbed]
+ta [துண்டுகளாகச் சிதறியது]
+
+# ==== console.txt ====
+
+# Console messages, shown translated only with con_translate 1 (Translate Console).
+# Cvar and command names stay as they are.
+@ Autosaved.
+ta தானாகச் சேமிக்கப்பட்டது.
+
+@ Game saved.
+ta ஆட்டம் சேமிக்கப்பட்டது.
+
+@ Can't save now.
+ta இப்போது சேமிக்க முடியாது.
+
+@ This game only autosaves (No Manual Saves modifier).
+ta இந்த ஆட்டம் தானியங்கு சேமிப்பு மட்டுமே செய்யும் (கைமுறைச் சேமிப்பு இல்லை மாற்றி).
+
+@ Loading {}...
+ta {} ஏறுகிறது...
+
+@ load failed: {}
+ta ஏற்றம் தோல்வி: {}
+
+@ ERROR: autosave failed: {}
+ta பிழை: தானியங்கு சேமிப்பு தோல்வி: {}
+
+@ ERROR: couldn't open {}
+ta பிழை: {} திறக்க முடியவில்லை
+
+@ ERROR: couldn't open {}.
+ta பிழை: {} திறக்க முடியவில்லை.
+
+@ ERROR: couldn't write {}: {}
+ta பிழை: {} எழுத முடியவில்லை: {}
+
+@ ERROR: couldn't create {}: {}
+ta பிழை: {} உருவாக்க முடியவில்லை: {}
+
+@ couldn't write {}: {}
+ta {} எழுத முடியவில்லை: {}
+
+@ Wrote {}
+ta {} எழுதப்பட்டது
+
+@ screenshot failed: {}
+ta திரைப்பிடிப்பு தோல்வி: {}
+
+@ screenshot: {}
+ta திரைப்பிடிப்பு: {}
+
+@ No readable save available. Select save or restart the level.
+ta படிக்கக்கூடிய சேமிப்பு இல்லை. சேமிப்பைத் தேர்ந்தெடு அல்லது நிலையை மீண்டும் தொடங்கு.
+
+@ Unknown command "{}"
+ta அறியாத கட்டளை "{}"
+
+@ couldn't exec {}
+ta {} இயக்க முடியவில்லை
+
+@ execing {}
+ta {} இயக்குகிறது
+
+@ execing config.cfg (inherited from {})
+ta config.cfg இயக்குகிறது ({} இலிருந்து பெறப்பட்டது)
+
+@ execing config.cfg (mod defaults)
+ta config.cfg இயக்குகிறது (மாட் இயல்புநிலைகள்)
+
+@ execing default.cfg (built-in)
+ta default.cfg இயக்குகிறது (உள்ளமைந்தது)
+
+@ {} cvars
+ta {} cvar-கள்
+
+@ {} commands
+ta {} கட்டளைகள்
+
+@ Can't "cmd", not connected
+ta "cmd" முடியாது, இணைக்கப்படவில்லை
+
+@ Looking for Quake servers...
+ta Quake சர்வர்களைத் தேடுகிறது...
+
+@ Bad value, must be between 1 and 65534
+ta தவறான மதிப்பு, 1 முதல் 65534 வரை இருக்க வேண்டும்
+
+@ Couldn't handle music file {}
+ta இசைக் கோப்பு {} கையாள முடியவில்லை
+
+@ Bug report written to {}
+ta பிழை அறிக்கை {} இல் எழுதப்பட்டது
+
+@ bugreport: can't create {}: {}
+ta bugreport: {} உருவாக்க முடியவில்லை: {}
+
+@ graphics preset: {}
+ta கிராஃபிக்ஸ் முன்னமைவு: {}
+
+@ Presets (r_shader_preset <name>):
+ta முன்னமைவுகள் (r_shader_preset <name>):
+
+@ Add your own .slangp presets under <game>/shaders/.
+ta உங்கள் சொந்த .slangp முன்னமைவுகளை <game>/shaders/ இல் சேர்.
+
+@ no shader preset loaded (r_shader_preset)
+ta ஷேடர் முன்னமைவு ஏற்றப்படவில்லை (r_shader_preset)
+
+@ r_shader_preset: "{}" not found
+ta r_shader_preset: "{}" கிடைக்கவில்லை
+
+@ no parameter "{}" in this preset
+ta இந்த முன்னமைவில் "{}" அளவுரு இல்லை
+
+@ {} = {} (default {}, {}..{})
+ta {} = {} (இயல்பு {}, {}..{})
+
+@ Switching to {}...
+ta {} க்கு மாறுகிறது...
+
+@ game: no game dir "{}" in {}
+ta game: "{}" ஆட்ட அடைவு {} இல் இல்லை
+
+@ game: can't find the engine executable
+ta game: இன்ஜின் இயக்கக்கோப்பைக் காணவில்லை
+
+@ game: exec failed: {}
+ta game: இயக்கம் தோல்வி: {}
+
+@ game: launch failed: {}
+ta game: தொடக்கம் தோல்வி: {}
+
+@ loaded {} in {}s
+ta {} ஏற்றப்பட்டது, {}வி
+
+@ No demos listed with startdemos
+ta startdemos உடன் டெமோக்கள் பட்டியலிடப்படவில்லை
+
+@ Playing demo from {}.
+ta {} இலிருந்து டெமோ இயங்குகிறது.
+
+@ {} frames {} seconds {} fps
+ta {} சட்டகங்கள் {} வினாடிகள் {} fps
+
+@ Recording to {}.
+ta {} இல் பதிவுசெய்கிறது.
+
+@ Completed demo
+ta டெமோ முடிந்தது
+
+@ Can't record during demo playback
+ta டெமோ இயங்கும்போது பதிவுசெய்ய முடியாது
+
+@ Relative pathnames are not allowed.
+ta சார்பு பாதைப்பெயர்கள் அனுமதிக்கப்படாது.
+
+@ Can't record - try again when connected
+ta பதிவுசெய்ய முடியாது - இணைந்த பின் மீண்டும் முயல்
+
+@ {} demo(s) in loop
+ta சுழற்சியில் {} டெமோ(க்கள்)
+
+@ Not recording a demo.
+ta டெமோ பதிவுசெய்யப்படவில்லை.
+
+@ {} joined on a gamepad
+ta {} கேம்பேடில் சேர்ந்தார்
+
+@ goggles: needs a game started with Add-ons and Goggles enabled
+ta goggles: ஆட்-ஆன்களும் கண்ணாடிகளும் இயக்கப்பட்டுத் தொடங்கிய ஆட்டம் தேவை
+
+@ equip: needs a game started with Add-ons and Goggles enabled
+ta equip: ஆட்-ஆன்களும் கண்ணாடிகளும் இயக்கப்பட்டுத் தொடங்கிய ஆட்டம் தேவை
+
+@ UDP listening on port {}
+ta UDP போர்ட் {} இல் கேட்கிறது
+
+@ UDP bind on port {} failed: {}
+ta போர்ட் {} இல் UDP bind தோல்வி: {}
+
+@ Connection accepted by {}
+ta {} இணைப்பை ஏற்றது
+
+@ Connection failed: {}
+ta இணைப்பு தோல்வி: {}
+
+@ Couldn't resolve {}
+ta {} தீர்க்க முடியவில்லை
+
+@ Connecting to {}...
+ta {} உடன் இணைகிறது...
+
+@ Connecting to QuakeWorld server {}...
+ta QuakeWorld சர்வர் {} உடன் இணைகிறது...
+
+@ Disconnected: {}
+ta துண்டிக்கப்பட்டது: {}
+
+@ Server disconnected
+ta சர்வர் துண்டிக்கப்பட்டது
+
+@ Client {} connected
+ta கிளையன்ட் {} இணைந்தது
+
+@ Client {} timed out
+ta கிளையன்ட் {} நேரம் கடந்தது
+
+@ Couldn't spawn server {}: {}
+ta சர்வர் {} தொடங்க முடியவில்லை: {}
+
+@ maxplayers can not be changed while a server is running.
+ta சர்வர் இயங்கும்போது maxplayers மாற்ற முடியாது.
+
+@ You can't kick yourself!
+ta உங்களை நீங்களே வெளியேற்ற முடியாது!
+
+@ Only the server may changelevel
+ta சர்வர் மட்டுமே changelevel செய்யலாம்
+
+@ {} renamed to {}
+ta {} இப்போது {} என மறுபெயரிடப்பட்டது

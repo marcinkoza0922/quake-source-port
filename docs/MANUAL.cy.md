@@ -35,7 +35,9 @@ Ffinneg, Daneg, Norwyeg, Iseldireg, Groeg, Hwngareg, Rwmaneg, Portiwgaleg
 Draddodiadol), Twrceg, Indoneseg, Maleieg, Ffilipineg, Fietnameg, Serbeg,
 Lithwaneg, Latfieg, Estoneg, Malteg, Albaneg, Armeneg, Georgeg, Islandeg,
 Gwyddeleg, Cymraeg, Basgeg, Catalaneg, Galiseg, Lladin, Esperanto,
-Belarwseg, Macedoneg, Slofeneg neu Swahili.
+Belarwseg, Macedoneg, Slofeneg, Swahili, Arabeg, Hebraeg, Perseg, Wrdw,
+Hindi, Marathi, Bengaleg, Pwnjabeg, Gwjarati, Tamileg, Telugu, Thai, Chmereg,
+Amhareg neu Gantoneg.
 Mae **System** yn dilyn iaith eich cyfrifiadur. Dim ond i'r Ffrangeg,
 Almaeneg, Eidaleg, Sbaeneg a Rwseg y mae testun gêm ail-ryddhad 2021 wedi'i
 gyfieithu; mae ieithoedd eraill yn ei ddangos yn Saesneg. Mewn ieithoedd

@@ -51,6 +51,9 @@ lang_files!(
     Icelandic "is", Irish "ga", Welsh "cy", Basque "eu",
     Catalan "ca", Galician "gl", Latin "la", Esperanto "eo",
     Belarusian "be", Macedonian "mk", Slovenian "sl", Swahili "sw",
+    Arabic "ar", Hebrew "he", Persian "fa", Urdu "ur", Hindi "hi", Marathi "mr", Bengali "bn",
+    Punjabi "pa", Gujarati "gu", Tamil "ta", Telugu "te", Thai "th", Khmer "km", Amharic "am",
+    Cantonese "yue",
 );
 
 /// One parsed entry: English key and (language, text) pairs.

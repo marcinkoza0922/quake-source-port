@@ -34,7 +34,9 @@ Portekizce (Portekiz veya Brezilya), Japonca, Korece, Çince (Basitleştirilmiş
 veya Geleneksel), Türkçe, Endonezce, Malayca, Filipince, Vietnamca,
 Sırpça, Litvanca, Letonca, Estonca, Maltaca, Arnavutça, Ermenice, Gürcüce,
 İzlandaca, İrlandaca, Galce, Baskça, Katalanca, Galiçyaca, Latince,
-Esperanto, Belarusça, Makedonca, Slovence veya Svahilice.
+Esperanto, Belarusça, Makedonca, Slovence, Svahilice, Arapça, İbranice,
+Farsça, Urduca, Hintçe, Marathi, Bengalce, Pencapça, Güceratça, Tamilce,
+Teluguca, Tayca, Kmerce, Amharca veya Kantonca.
 **Sistem** bilgisayarınızın dilini izler. 2021 yeniden sürümünün kendi oyun
 metinleri yalnızca Fransızca, Almanca, İtalyanca, İspanyolca ve Rusçaya
 çevrilmiştir; diğer dillerde bu metinler İngilizce görünür. İngilizce

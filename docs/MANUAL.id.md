@@ -33,8 +33,9 @@ Norwegia, Belanda, Yunani, Hungaria, Rumania, Portugis (Portugal atau
 Brasil), Jepang, Korea, Tionghoa (Sederhana atau Tradisional), Turki,
 Indonesia, Melayu, Filipino, Vietnam, Serbia, Lituania, Latvia, Estonia,
 Malta, Albania, Armenia, Georgia, Islandia, Irlandia, Wales, Basque,
-Katalan, Galisia, Latin, Esperanto, Belarus, Makedonia, Slovenia, atau
-Swahili.
+Katalan, Galisia, Latin, Esperanto, Belarus, Makedonia, Slovenia, Swahili,
+Arab, Ibrani, Persia, Urdu, Hindi, Marathi, Bengali, Punjabi, Gujarat,
+Tamil, Telugu, Thai, Khmer, Amhara, atau Kanton.
 **Sistem** mengikuti bahasa komputer Anda. Teks game bawaan rilis ulang 2021
 hanya diterjemahkan ke bahasa Prancis, Jerman, Italia, Spanyol, dan Rusia;
 bahasa lain menampilkannya dalam bahasa Inggris. Dalam bahasa selain

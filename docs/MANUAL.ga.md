@@ -36,7 +36,9 @@ Danmhairgis, Ioruais, Ollainnis, Gréigis, Ungáiris, Rómáinis, Portaingéilis
 Traidisiúnta), Tuircis, Indinéisis, Malaeis, Filipínis, Vítneaimis,
 Seirbis, Liotuáinis, Laitvis, Eastóinis, Máltais, Albáinis, Airméinis,
 Seoirsis, Íoslainnis, Gaeilge, Breatnais, Bascais, Catalóinis, Gailísis,
-Laidin, Esperanto, Bealarúisis, Macadóinis, Slóivéinis nó Svahaílis.
+Laidin, Esperanto, Bealarúisis, Macadóinis, Slóivéinis, Svahaílis, Araibis,
+Eabhrais, Peirsis, Urdúis, Hiondúis, Maraitis, Beangáilis, Puinseáibis,
+Gúisearáitis, Tamailis, Teileagúis, Téalainnis, Ciméiris, Amáiris nó Cantainis.
 Leanann **Córas** teanga do ríomhaire. Níl téacs cluiche an atheisiúna
 2021 aistrithe ach go Fraincis, Gearmáinis, Iodáilis, Spáinnis agus Rúisis;
 taispeánann teangacha eile i mBéarla é. I dteangacha seachas Béarla,

@@ -34,8 +34,9 @@ Deens, Noors, Nederlands, Grieks, Hongaars, Roemeens, Portugees (Portugal of
 Brazilië), Japans, Koreaans, Chinees (vereenvoudigd of traditioneel), Turks,
 Indonesisch, Maleis, Filipijns, Vietnamees, Servisch, Litouws, Lets, Estisch,
 Maltees, Albanees, Armeens, Georgisch, IJslands, Iers, Welsh, Baskisch,
-Catalaans, Galicisch, Latijn, Esperanto, Belarussisch, Macedonisch, Sloveens of
-Swahili.
+Catalaans, Galicisch, Latijn, Esperanto, Belarussisch, Macedonisch, Sloveens,
+Swahili, Arabisch, Hebreeuws, Perzisch, Urdu, Hindi, Marathi, Bengaals,
+Punjabi, Gujarati, Tamil, Telugu, Thai, Khmer, Amhaars of Kantonees.
 **Systeem** volgt de taal van je computer. De eigen speltekst van de
 heruitgave uit 2021 is alleen vertaald in het Frans, Duits, Italiaans,
 Spaans en Russisch; andere talen tonen die in het Engels. In andere talen

@@ -1,0 +1,3024 @@
+# ar: the port's own text; English keys from crates/qcore/lang/*.txt.
+# Format in crates/qcore/src/lang/catalog.rs; check with tools/lang_check.py.
+
+# ==== menu.txt ====
+
+# Options pages: page names, row labels and choice values.
+@ 10% speed
+ar سرعة 10%
+
+@ 2 split-screen
+ar 2 (شاشة مقسومة)
+
+@ 3 split-screen
+ar 3 (شاشة مقسومة)
+
+@ 4 split-screen
+ar 4 (شاشة مقسومة)
+
+@ 5 split-screen
+ar 5 (شاشة مقسومة)
+
+@ 6 split-screen
+ar 6 (شاشة مقسومة)
+
+@ 2D aiming
+ar تصويب ثنائي الأبعاد
+
+@ 2x monsters
+ar وحوش ×2
+
+@ 3x monsters
+ar وحوش ×3
+
+@ 4x monsters
+ar وحوش ×4
+
+@ 3D resolution
+ar دقة المشهد ثلاثي الأبعاد
+
+@ 3D view
+ar المشهد ثلاثي الأبعاد
+
+@ 8-bit Color
+ar ألوان 8 بت
+
+@ Accessibility
+ar إمكانية الوصول
+
+@ Acquisition Cone
+ar مخروط الالتقاط
+
+@ Activation
+ar التفعيل
+
+@ Add a ringing room tail after the cue
+ar إضافة صدى غرفة رنان بعد الصوت
+
+@ Add delayed repeats after the cue
+ar إضافة تكرارات متأخرة بعد الصوت
+
+@ Add saturation and distortion
+ar إضافة تشبّع وتشويه
+
+@ Add-ons
+ar الإضافات
+
+@ Address
+ar العنوان
+
+@ Adds fine noise to hide color banding
+ar يضيف تشويشًا ناعمًا لإخفاء تدرّج الألوان المتقطع
+
+@ Advanced Settings
+ar إعدادات متقدمة
+
+@ Aim Assist
+ar مساعدة التصويب
+
+@ Aim Rotation
+ar تدوير التصويب
+
+@ Aim Slowdown
+ar إبطاء التصويب
+
+@ Aim Style
+ar نمط التصويب
+
+@ All
+ar الكل
+
+@ All enemies
+ar كل الأعداء
+
+@ Alt Fire (Add-ons)
+ar إطلاق بديل (الإضافات)
+
+@ Always Run
+ar الركض الدائم
+
+@ Ambient Occlusion
+ar الإطباق المحيطي
+
+@ Ammo Counts
+ar عدد الذخيرة
+
+@ Ammo Counts Position
+ar موضع عدد الذخيرة
+
+@ Ammo Pickups
+ar التقاط الذخيرة
+
+@ Anisotropic
+ar متباين الخواص
+
+@ Anti-aliasing
+ar تنعيم الحواف
+
+@ Apply To
+ar تطبيق على
+
+@ Armor
+ar الدرع
+
+@ Armor Position
+ar موضع الدرع
+
+@ Ask
+ar اسأل
+
+@ Attack
+ar هجوم
+
+@ Audio
+ar الصوت
+
+@ Auto-aim
+ar التصويب التلقائي
+
+@ Auto-aim Settings
+ar إعدادات التصويب التلقائي
+
+@ Autosave
+ar الحفظ التلقائي
+
+@ Autosave Settings
+ar إعدادات الحفظ التلقائي
+
+@ Autosave Timer
+ar مؤقت الحفظ التلقائي
+
+@ Autosaves to Keep
+ar عدد الحفظ التلقائي المحتفظ به
+
+@ Bass
+ar الجهير
+
+@ Blip
+ar نقرة إلكترونية
+
+@ Blood Quality
+ar جودة الدماء
+
+@ Blood Splatter Settings
+ar إعدادات تناثر الدماء
+
+@ Blue
+ar أزرق
+
+@ Boomerang Settings
+ar إعدادات البوميرانغ
+
+@ Boost or cut high frequencies in decibels
+ar رفع الترددات العالية أو خفضها بالديسيبل
+
+@ Boost or cut low frequencies in decibels
+ar رفع الترددات المنخفضة أو خفضها بالديسيبل
+
+@ Brightness
+ar السطوع
+
+@ Bullet Time (Add-ons)
+ar الزمن البطيء (الإضافات)
+
+@ Bullet Time Settings
+ar إعدادات الزمن البطيء
+
+@ Button Glyphs
+ar رموز الأزرار
+
+@ Button Size
+ar حجم الأزرار
+
+@ Camera
+ar الكاميرا
+
+@ Caustic Intensity
+ar شدة انكسارات الضوء
+
+@ Caustics
+ar انكسارات الضوء
+
+@ Center
+ar الوسط
+
+@ Center Message Position
+ar موضع رسائل الوسط
+
+@ Center Message Time
+ar مدة رسائل الوسط
+
+@ Center View
+ar توسيط الرؤية
+
+@ Change Color on Kill
+ar تغيير اللون عند القتل
+
+@ Change Color on Target
+ar تغيير اللون عند التصويب على هدف
+
+@ Chime
+ar رنين
+
+@ Click
+ar نقرة
+
+@ Clink
+ar طنين معدني
+
+@ Coin
+ar عملة
+
+@ Color
+ar اللون
+
+@ Color Filter
+ar مرشّح الألوان
+
+@ Color of the grenade arc
+ar لون مسار القنبلة
+
+@ Colored Lighting
+ar إضاءة ملوّنة
+
+@ Connect
+ar اتصال
+
+@ Contrast
+ar التباين
+
+@ Controls
+ar التحكم
+
+@ Cooldown (ms)
+ar فترة التهدئة (مللي ثانية)
+
+@ Crosshair Outline
+ar حدّ علامة التصويب
+
+@ Crosshair Shape
+ar شكل علامة التصويب
+
+@ Crosshair Size
+ar حجم علامة التصويب
+
+@ Current Ammo
+ar الذخيرة الحالية
+
+@ Current Ammo Position
+ar موضع الذخيرة الحالية
+
+@ Customize This Game
+ar تخصيص هذه اللعبة
+
+@ Damage
+ar الضرر
+
+@ Damage Taken
+ar الضرر المتلقّى
+
+@ Debris
+ar الحطام
+
+@ Debris Quality
+ar جودة الحطام
+
+@ Debris Settings
+ar إعدادات الحطام
+
+@ Directional Damage
+ar اتجاه الضرر
+
+@ Dithering
+ar التنقيط اللوني
+
+@ Dodge / Dive (Add-ons)
+ar مراوغة / انقضاض (الإضافات)
+
+@ Dragging up looks down instead of up
+ar السحب للأعلى ينظر للأسفل بدلًا من الأعلى
+
+@ Drive
+ar التشبّع
+
+@ Dynamic Lights
+ar الأضواء الديناميكية
+
+@ Echo
+ar الصدى
+
+@ Enemy Health
+ar صحة الأعداء
+
+@ Enemy Wounds
+ar جروح الأعداء
+
+@ Enhanced Blood Splatter
+ar تناثر دماء محسّن
+
+@ Enhanced FX
+ar مؤثرات محسّنة
+
+@ Enhanced Models
+ar نماذج محسّنة
+
+@ Enhanced Particles
+ar جسيمات محسّنة
+
+@ Enhanced Water
+ar مياه محسّنة
+
+@ Enhancements
+ar التحسينات
+
+@ Equipment Wheel (Add-ons)
+ar عجلة المعدات (الإضافات)
+
+@ Exploding boxes throw metal shards
+ar الصناديق المتفجرة تقذف شظايا معدنية
+
+@ Explosion Damage
+ar ضرر الانفجارات
+
+@ Explosion Scorch Marks
+ar آثار حروق الانفجارات
+
+@ Explosions scorch nearby solid surfaces
+ar الانفجارات تحرق الأسطح الصلبة القريبة
+
+@ Explosives only
+ar المتفجرات فقط
+
+@ Extra Monsters
+ar وحوش إضافية
+
+@ Extra Per 10 Damage (ms)
+ar إضافي لكل 10 ضرر (مللي ثانية)
+
+@ FX Settings
+ar إعدادات المؤثرات
+
+@ Field of View
+ar مجال الرؤية
+
+@ Firing never uses up ammo
+ar الإطلاق لا يستهلك الذخيرة أبدًا
+
+@ First person
+ar منظور الشخص الأول
+
+@ Flick Time
+ar زمن الالتفاف السريع
+
+@ Flight Speed
+ar سرعة الطيران
+
+@ Fog
+ar الضباب
+
+@ Frag Limit
+ar حد القتلات
+
+@ Freeze Duration (ms)
+ar مدة التجميد (مللي ثانية)
+
+@ GLQuake
+ar GLQuake
+
+@ Game Speed
+ar سرعة اللعبة
+
+@ Game Type
+ar نوع اللعبة
+
+@ Gameplay
+ar اللعب
+
+@ Gameplay Modifiers
+ar معدِّلات اللعب
+
+@ Gel Quality
+ar جودة الهلام
+
+@ Gib Surface Painting
+ar تلطيخ الأسطح بالأشلاء
+
+@ Gibs
+ar الأشلاء
+
+@ Gibs and heads tumble and bounce
+ar الأشلاء والرؤوس تتدحرج وترتد
+
+@ Goggle Glow Quality
+ar جودة توهج النظارة
+
+@ Goggle Intensity
+ar شدة النظارة
+
+@ Goggle Noise
+ar تشويش النظارة
+
+@ Goggles Settings
+ar إعدادات النظارة
+
+@ Graphics
+ar الرسوميات
+
+@ Green
+ar أخضر
+
+@ Grenade Arc
+ar مسار القنبلة
+
+@ Grenade Arc Settings
+ar إعدادات مسار القنبلة
+
+@ Gun Kick
+ar ارتداد السلاح
+
+@ Gyro
+ar الجيروسكوب
+
+@ Gyro & Flick Stick
+ar الجيروسكوب والالتفاف السريع
+
+@ Gyro Active
+ar تفعيل الجيروسكوب
+
+@ Gyro Aiming
+ar التصويب بالجيروسكوب
+
+@ HUD
+ar HUD
+
+@ HUD Style
+ar نمط HUD
+
+@ Health
+ar الصحة
+
+@ Health Pickups
+ar التقاط الصحة
+
+@ Health Position
+ar موضع الصحة
+
+@ Health Regeneration
+ar تجدد الصحة
+
+@ Hit & Kill Sounds
+ar أصوات الإصابة والقتل
+
+@ Hit Doors & Lifts
+ar إصابة الأبواب والمصاعد
+
+@ Hit Markers
+ar علامات الإصابة
+
+@ Hit Sound
+ar صوت الإصابة
+
+@ Hitmarker Size
+ar حجم علامة الإصابة
+
+@ Hitmarker Type
+ar نوع علامة الإصابة
+
+@ Hitstop Advanced
+ar توقف الضربة المتقدم
+
+@ Hitstop Settings
+ar إعدادات توقف الضربة
+
+@ Hold
+ar ضغط مستمر
+
+@ Hold lock-on
+ar الضغط للتثبيت على الهدف
+
+@ Hook Enemies
+ar خطف الأعداء
+
+@ Hook Metal
+ar التعلق بالمعدن
+
+@ Hook Stone
+ar التعلق بالحجر
+
+@ Hook Wood
+ar التعلق بالخشب
+
+@ Hooking an enemy pulls you to it
+ar خطف عدو يسحبك إليه
+
+@ Hookshot Range
+ar مدى الخطّاف
+
+@ Hookshot Settings
+ar إعدادات الخطّاف
+
+@ Host Game
+ar استضافة لعبة
+
+@ How far the hook flies before it retracts
+ar المسافة التي يطيرها الخطّاف قبل أن يرتد
+
+@ How visible the on-screen controls are
+ar مدى وضوح أزرار التحكم على الشاشة
+
+@ Impact Lifetime
+ar مدة بقاء أثر الإصابة
+
+@ Infinite Ammo
+ar ذخيرة لا نهائية
+
+@ Input
+ar الإدخال
+
+@ Input Scale
+ar مقياس الإدخال
+
+@ Interpolate Animation
+ar استيفاء الحركات
+
+@ Interpolate Movement
+ar استيفاء التنقل
+
+@ Invert Look
+ar عكس النظر
+
+@ Invert Mouse
+ar عكس الفأرة
+
+@ Invert Stick
+ar عكس العصا
+
+@ Jet Quality
+ar جودة النفث
+
+@ Join Game
+ar الانضمام إلى لعبة
+
+@ Jump / Swim Up
+ar قفز / سباحة للأعلى
+
+@ Jump again in mid-air
+ar القفز مجددًا في الهواء
+
+@ Jumps
+ar القفزات
+
+@ Keys & Powerups
+ar المفاتيح والمعززات
+
+@ Keys & Powerups Position
+ar موضع المفاتيح والمعززات
+
+@ Kill Bonus (x)
+ar مكافأة القتل (×)
+
+@ Kill Sound
+ar صوت القتل
+
+@ Knock
+ar طرقة
+
+@ Left
+ar يسار
+
+@ Length of the motion blur streaks
+ar طول خطوط ضبابية الحركة
+
+@ Lifetime (seconds)
+ar المدة (ثوانٍ)
+
+@ Live Portal Views
+ar عرض حي للبوابات
+
+@ Live View Distance
+ar مسافة العرض الحي
+
+@ Local Players
+ar اللاعبون المحليون
+
+@ Local red wounds follow enemy animation
+ar الجروح الحمراء تتبع حركة العدو
+
+@ Lock Indicator
+ar مؤشر التثبيت
+
+@ Long falls don't hurt
+ar السقوط الطويل لا يؤذي
+
+@ Longest Freeze (ms)
+ar أطول تجميد (مللي ثانية)
+
+@ Look Down
+ar النظر للأسفل
+
+@ Look Speed
+ar سرعة النظر
+
+@ Look Up
+ar النظر للأعلى
+
+@ Main Menu Music
+ar موسيقى القائمة الرئيسية
+
+@ Max FPS
+ar أقصى FPS
+
+@ Max Players
+ar أقصى عدد للاعبين
+
+@ Maximum Impacts
+ar أقصى عدد للإصابات
+
+@ Maximum Marks
+ar أقصى عدد للآثار
+
+@ Maximum Range
+ar أقصى مدى
+
+@ Melee only
+ar القتال القريب فقط
+
+@ Message Background
+ar خلفية الرسائل
+
+@ Message Text Size
+ar حجم نص الرسائل
+
+@ Messages & Captions
+ar الرسائل والتعليقات
+
+@ Meter Duration (real seconds)
+ar مدة العداد (ثوانٍ حقيقية)
+
+@ Minimum Damage
+ar أدنى ضرر
+
+@ Mode
+ar الوضع
+
+@ Modern Console
+ar وحدة تحكم حديثة
+
+@ Modern HUD Layout
+ar تخطيط HUD حديث
+
+@ Most recent save
+ar أحدث حفظ
+
+@ Motion Blur
+ar ضبابية الحركة
+
+@ Motion Blur Amount
+ar مقدار ضبابية الحركة
+
+@ Motion Blur Quality
+ar جودة ضبابية الحركة
+
+@ Mouse & Keyboard
+ar الفأرة ولوحة المفاتيح
+
+@ Mouse Speed
+ar سرعة الفأرة
+
+@ Move Back
+ar تحرك للخلف
+
+@ Move Forward
+ar تحرك للأمام
+
+@ Music Volume
+ar مستوى الموسيقى
+
+@ Next Weapon
+ar السلاح التالي
+
+@ No Drowning
+ar بلا غرق
+
+@ No Fall Damage
+ar بلا ضرر سقوط
+
+@ No Manual Saves
+ar بلا حفظ يدوي
+
+@ No Self Damage
+ar بلا ضرر ذاتي
+
+@ Noise Filter
+ar مرشّح التشويش
+
+@ Normal Color
+ar اللون العادي
+
+@ Notify Message Position
+ar موضع رسائل الإشعارات
+
+@ Notify Message Time
+ar مدة رسائل الإشعارات
+
+@ Number of splatter rays per blood impact
+ar عدد أشعة التناثر لكل إصابة دم
+
+@ Off
+ar إيقاف
+
+@ On Death
+ar عند الموت
+
+@ On Kill Color
+ar لون القتل
+
+@ On Target Color
+ar لون التصويب على هدف
+
+@ Opacity
+ar العتامة
+
+@ Opacity of the grenade arc
+ar عتامة مسار القنبلة
+
+@ Pants Color
+ar لون السروال
+
+@ Particle Quality
+ar جودة الجسيمات
+
+@ Particles
+ar الجسيمات
+
+@ Physical Nail Impacts
+ar ارتطام فيزيائي للمسامير
+
+@ Pistol Start
+ar بداية بالمسدس
+
+@ Pitch
+ar طبقة الصوت
+
+@ Pitch Sensitivity
+ar حساسية الانحدار
+
+@ Playback Speed
+ar سرعة التشغيل
+
+@ Player Setup
+ar إعداد اللاعب
+
+@ Pop
+ar فرقعة
+
+@ Portal Gun Settings
+ar إعدادات مسدس البوابات
+
+@ Portal Recursion
+ar تكرار البوابات
+
+@ Portal View Quality
+ar جودة عرض البوابات
+
+@ Preview Sound
+ar معاينة الصوت
+
+@ Previous Weapon
+ar السلاح السابق
+
+@ Projectile Shotguns Settings
+ar إعدادات بنادق المقذوفات
+
+@ Projectile Speed (units/s)
+ar سرعة المقذوف (وحدة/ث)
+
+@ Purple
+ar بنفسجي
+
+@ Push
+ar الدفع
+
+@ Push Strength
+ar قوة الدفع
+
+@ Quick Load
+ar تحميل سريع
+
+@ Quick Save
+ar حفظ سريع
+
+@ Railgun Settings
+ar إعدادات الريلغن
+
+@ Ranged only
+ar الهجوم البعيد فقط
+
+@ Reacquire While Held
+ar إعادة الالتقاط أثناء الضغط
+
+@ Red
+ar أحمر
+
+@ Reduce Motion
+ar تقليل الحركة
+
+@ Regen (seconds per second)
+ar التجدد (ثوانٍ لكل ثانية)
+
+@ Render Scale
+ar مقياس العرض
+
+@ Reverb
+ar الصدى المحيطي
+
+@ Right
+ar يمين
+
+@ Ripple Intensity
+ar شدة التموجات
+
+@ Ripples
+ar التموجات
+
+@ Roll Sensitivity
+ar حساسية الدوران
+
+@ Rumble
+ar الاهتزاز
+
+@ Run
+ar ركض
+
+@ Save on All Enemies Killed
+ar حفظ عند قتل كل الأعداء
+
+@ Save on All Secrets Found
+ar حفظ عند إيجاد كل الأسرار
+
+@ Save on Level Entry
+ar حفظ عند دخول المستوى
+
+@ Save on Secret Found
+ar حفظ عند إيجاد سر
+
+@ Scoreboard
+ar لوحة النتائج
+
+@ Screen Flashes
+ar ومضات الشاشة
+
+@ Screen Shader
+ar مرشّح الشاشة
+
+@ Screen Shake
+ar اهتزاز الشاشة
+
+@ Search LAN
+ar البحث في الشبكة المحلية
+
+@ Seconds a center-screen message stays up
+ar عدد ثواني بقاء رسالة وسط الشاشة
+
+@ See Through Portals
+ar الرؤية عبر البوابات
+
+@ See-through Teleporters
+ar ناقلات شفافة
+
+@ Shirt Color
+ar لون القميص
+
+@ Shotgun Bullet Decals
+ar آثار رصاص البندقية
+
+@ Shoulder left
+ar كتف يسار
+
+@ Shoulder right
+ar كتف يمين
+
+@ Show FPS
+ar عرض FPS
+
+@ Show Face
+ar عرض الوجه
+
+@ Shrapnel
+ar الشظايا
+
+@ Size of on-screen messages and captions
+ar حجم الرسائل والتعليقات على الشاشة
+
+@ Skill
+ar الصعوبة
+
+@ Sky Fog
+ar ضباب السماء
+
+@ Smooths the stepped movement of monsters
+ar ينعّم حركة الوحوش المتقطعة
+
+@ Sound
+ar الصوت
+
+@ Sound Captions
+ar التعليقات الصوتية
+
+@ Sound Volume
+ar مستوى الأصوات
+
+@ Speed Blur
+ar ضبابية السرعة
+
+@ Splashes
+ar الرذاذ
+
+@ Splatter Amount
+ar كمية التناثر
+
+@ Splatter Size
+ar حجم التناثر
+
+@ Start Game
+ar بدء اللعبة
+
+@ Staying underwater doesn't hurt
+ar البقاء تحت الماء لا يؤذي
+
+@ Stick Look Pitch
+ar انحدار النظر بالعصا
+
+@ Stick Look Yaw
+ar انعطاف النظر بالعصا
+
+@ Strafe Left
+ar تحرك جانبي لليسار
+
+@ Strafe Right
+ar تحرك جانبي لليمين
+
+@ Strength of the surface swell and rings
+ar قوة تموج السطح والحلقات
+
+@ Stun Duration
+ar مدة الصعق
+
+@ Style
+ar النمط
+
+@ Supersampling
+ar المعاينة الفائقة
+
+@ Surface Hit Effects
+ar تأثيرات ارتطام الأسطح
+
+@ Swim Down
+ar سباحة للأسفل
+
+@ Targets
+ar الأهداف
+
+@ Teamplay
+ar اللعب الجماعي
+
+@ Texture Filter
+ar ترشيح الخامات
+
+@ Third person
+ar منظور الشخص الثالث
+
+@ Thud
+ar ارتطام
+
+@ Tick
+ar تكّة
+
+@ Time Limit
+ar حد الوقت
+
+@ Time Stretch
+ar تمديد الزمن
+
+@ Toggle Attack
+ar تبديل الهجوم
+
+@ Toggle Run
+ar تبديل الركض
+
+@ Toggle auto-aim
+ar تبديل التصويب التلقائي
+
+@ Touch Controls
+ar أزرار اللمس
+
+@ Touchscreen
+ar شاشة اللمس
+
+@ Tough Enemy Health
+ar صحة الأعداء الأقوياء
+
+@ Tough enemies only
+ar الأعداء الأقوياء فقط
+
+@ Trail Colour
+ar لون الأثر
+
+@ Translate Console
+ar ترجمة وحدة التحكم
+
+@ Translucent Water
+ar ماء شفاف
+
+@ Treble
+ar الحدة
+
+@ Turn Left
+ar انعطاف لليسار
+
+@ Turn Right
+ar انعطاف لليمين
+
+@ Underwater FX
+ar مؤثرات تحت الماء
+
+@ Use Bullet Time Meter
+ar استخدام عداد الزمن البطيء
+
+@ VSync
+ar VSync
+
+@ View Bob
+ar تمايل الرؤية
+
+@ Viewmodels
+ar نماذج الأسلحة
+
+@ Volume
+ar مستوى الصوت
+
+@ Water Opacity
+ar عتامة الماء
+
+@ Water Quality
+ar جودة الماء
+
+@ Water Settings
+ar إعدادات الماء
+
+@ Weapon Wheel
+ar عجلة الأسلحة
+
+@ Weapon Wheel Slowdown
+ar إبطاء عجلة الأسلحة
+
+@ Weapons
+ar الأسلحة
+
+@ Weapons Position
+ar موضع الأسلحة
+
+@ Where center-screen messages appear
+ar مكان ظهور رسائل وسط الشاشة
+
+@ Where pickup and event messages appear
+ar مكان ظهور رسائل الالتقاط والأحداث
+
+@ White
+ar أبيض
+
+@ Yaw Sensitivity
+ar حساسية الانعطاف
+
+@ Yellow
+ar أصفر
+
+# lowercase choice values
+@ T
+ar T
+
+@ always
+ar دائمًا
+
+@ auto
+ar تلقائي
+
+@ banded
+ar متدرّج
+
+@ borderless
+ar بلا حدود
+
+@ bottom center
+ar أسفل الوسط
+
+@ bottom left
+ar أسفل اليسار
+
+@ bottom right
+ar أسفل اليمين
+
+@ box
+ar مربع
+
+@ broken square
+ar مربع مكسور
+
+@ classic
+ar كلاسيكي
+
+@ coarse
+ar خشن
+
+@ cooperative
+ar تعاوني
+
+@ cross
+ar صليب
+
+@ cross + dot
+ar صليب + نقطة
+
+@ cyan
+ar سماوي
+
+@ dashed
+ar متقطع
+
+@ deathmatch
+ar قتال حر
+
+@ deuteranopia
+ar عمى الأخضر
+
+@ diagonal streaks
+ar خطوط مائلة
+
+@ diamond
+ar معيّن
+
+@ dot
+ar نقطة
+
+@ double
+ar مزدوج
+
+@ double chevrons
+ar شيفرونات مزدوجة
+
+@ double diagonals
+ar مائلات مزدوجة
+
+@ easy
+ar سهل
+
+@ fine
+ar ناعم
+
+@ fit output
+ar ملاءمة المخرج
+
+@ flick stick
+ar التفاف سريع
+
+@ fullscreen
+ar ملء الشاشة
+
+@ gap cross
+ar صليب بفجوة
+
+@ green
+ar أخضر
+
+@ grey
+ar رمادي
+
+@ half speed
+ar نصف السرعة
+
+@ hard
+ar صعب
+
+@ high
+ar عالٍ
+
+@ huge
+ar ضخم
+
+@ immersive
+ar غامر
+
+@ intense
+ar مكثّف
+
+@ large
+ar كبير
+
+@ larger
+ar أكبر
+
+@ largest
+ar الأكبر
+
+@ linear
+ar خطي
+
+@ low
+ar منخفض
+
+@ lower
+ar أسفل
+
+@ magenta
+ar أرجواني
+
+@ medium
+ar متوسط
+
+@ middle
+ar الوسط
+
+@ middle left
+ar وسط اليسار
+
+@ middle right
+ar وسط اليمين
+
+@ modern
+ar حديث
+
+@ nearest
+ar الأقرب
+
+@ nightmare
+ar كابوس
+
+@ nintendo
+ar Nintendo
+
+@ no team damage
+ar بلا ضرر للفريق
+
+@ none
+ar لا شيء
+
+@ normal
+ar عادي
+
+@ off
+ar إيقاف
+
+@ off while held
+ar إيقاف أثناء الضغط
+
+@ on
+ar تشغيل
+
+@ only while held
+ar أثناء الضغط فقط
+
+@ playstation
+ar PlayStation
+
+@ protanopia
+ar عمى الأحمر
+
+@ quarter speed
+ar ربع السرعة
+
+@ red
+ar أحمر
+
+@ short diagonals
+ar مائلات قصيرة
+
+@ single
+ar مفرد
+
+@ small
+ar صغير
+
+@ solid
+ar مصمت
+
+@ spectacle
+ar استعراضي
+
+@ subtle
+ar خفيف
+
+@ team damage
+ar ضرر للفريق
+
+@ top center
+ar أعلى الوسط
+
+@ top left
+ar أعلى اليسار
+
+@ top right
+ar أعلى اليمين
+
+@ triple
+ar ثلاثي
+
+@ tritanopia
+ar عمى الأزرق
+
+@ upper
+ar أعلى
+
+@ white
+ar أبيض
+
+@ whole screen
+ar الشاشة كاملة
+
+@ windowed
+ar نافذة
+
+@ xbox
+ar Xbox
+
+@ yellow
+ar أصفر
+
+# ==== tooltips.txt ====
+
+# Options help lines (tooltips) and reasons for disabled rows.
+@ 2D aiming turns the view continuously with the right stick; flick stick snaps the view to where you push the stick, then turning the stick rotates it
+ar التصويب ثنائي الأبعاد يدير الرؤية باستمرار بالعصا اليمنى؛ الالتفاف السريع يوجّه الرؤية فورًا إلى حيث تدفع العصا، ثم يديرها تدوير العصا
+
+@ 3D resolution relative to the window; the UI stays sharp
+ar دقة المشهد ثلاثي الأبعاد نسبةً إلى النافذة؛ تبقى الواجهة حادة
+
+@ 3D view keeps the HUD and menus sharp; whole screen runs them through the shader too
+ar المشهد ثلاثي الأبعاد يُبقي HUD والقوائم حادة؛ الشاشة كاملة تمررها عبر المرشّح أيضًا
+
+@ A Quake III style railgun: a slug that pierces every enemy on its line, using 2 cells a shot and refiring every 1.5 s; select it through its assigned weapon slot (Add-ons)
+ar ريلغن على طراز Quake III: قذيفة تخترق كل عدو على خطها، تستهلك خليتين في الطلقة وتعيد الإطلاق كل 1.5 ث؛ اخترها من خانة السلاح المخصصة لها (الإضافات)
+
+@ A Zelda-style hookshot: fire sends a chain hook out; it latches onto hookable surfaces or enemies and reels you in; fire again to let go
+ar خطّاف على طراز Zelda: الإطلاق يقذف خطافًا بسلسلة؛ يتعلق بالأسطح القابلة للتعلق أو بالأعداء ويسحبك إليها؛ أطلق مجددًا لتفلت
+
+@ Also translates the engine's console messages; off keeps them in English
+ar يترجم أيضًا رسائل وحدة التحكم في المحرك؛ عند الإيقاف تبقى بالإنجليزية
+
+@ Automatically acquire another enemy while holding Lock-on after losing a target
+ar التقاط عدو آخر تلقائيًا أثناء الضغط على التثبيت بعد فقدان الهدف
+
+@ Blends between animation frames of monsters and weapons
+ar يمزج بين إطارات حركة الوحوش والأسلحة
+
+@ Blood stains surfaces and bodies; cosmetic, independent of particle packs
+ar الدماء تلطخ الأسطح والأجسام؛ تجميلي فقط، مستقل عن حزم الجسيمات
+
+@ Bloom glow around bright lights and heat sources; medium uses 4 taps, high uses 8, low disables halo taps
+ar توهج حول الأضواء الساطعة ومصادر الحرارة؛ المتوسط يستخدم 4 عينات، والعالي 8، والمنخفض يعطّل الهالة
+
+@ Blurs fast-moving monsters, projectiles and doors (not camera turns)
+ar يضبّب الوحوش والمقذوفات والأبواب السريعة (لا التفاف الكاميرا)
+
+@ Blurs the screen edges during fast falls and launches; keeps the centre clear. Reduce Motion disables it
+ar يضبّب أطراف الشاشة أثناء السقوط والانطلاق السريع؛ ويُبقي المركز واضحًا. خيار تقليل الحركة يعطّله
+
+@ Brightness of the underwater light patterns
+ar سطوع أنماط الضوء تحت الماء
+
+@ Caps mark count, lifetime, airborne droplets and wound/gib painting; low skips enemy wounds and gib trails
+ar يحدّ عدد الآثار ومدتها والقطرات المتطايرة وتلطيخ الجروح والأشلاء؛ المنخفض يتخطى جروح الأعداء ومسارات الأشلاء
+
+@ Caps shader input at output size so 200% render scale keeps 3D sharpness without 4x shader cost; low scales stay low-res
+ar يحدّ دخل المرشّح بحجم المخرج كي يحافظ مقياس 200% على حدة المشهد دون تكلفة مضاعفة 4 مرات؛ المقاييس المنخفضة تبقى منخفضة الدقة
+
+@ Classic: the original status bar; modern: compact elements at the screen edges
+ar كلاسيكي: شريط الحالة الأصلي؛ حديث: عناصر مدمجة على أطراف الشاشة
+
+@ Coat atlas resolution, rebuild rate and shader detail: low builds smaller coats less often with fast shading; high uses full detail
+ar دقة أطلس الطبقات ومعدل إعادة بنائها وتفاصيل التظليل: المنخفض يبني طبقات أصغر بوتيرة أقل بتظليل سريع؛ العالي يستخدم التفاصيل الكاملة
+
+@ Colour of the railgun's spiral trail; split-screen players each get the next colour along
+ar لون الأثر الحلزوني للريلغن؛ يحصل كل لاعب في الشاشة المقسومة على اللون التالي
+
+@ Damage the railgun deals to each enemy it passes through (Quake III: 100)
+ar الضرر الذي يُلحقه الريلغن بكل عدو يخترقه (Quake III: 100)
+
+@ Dark backdrop behind on-screen messages for readability
+ar خلفية داكنة خلف الرسائل على الشاشة لتسهيل القراءة
+
+@ Dark border keeps the crosshair visible on any background
+ar حدّ داكن يُبقي علامة التصويب مرئية على أي خلفية
+
+@ Darkens corners and contact areas where geometry meets; higher quality is sharper
+ar يعتّم الزوايا ومناطق تلاقي الأشكال؛ الجودة الأعلى أكثر حدة
+
+@ Debris lands on and is carried or shoved by doors, lifts and platforms
+ar الحطام يستقر على الأبواب والمصاعد والمنصات وتحمله أو تدفعه
+
+@ Detail for caustics, ripples and splashes: low uses smaller budgets and shorter view distance; high uses larger budgets and farther view distance
+ar تفاصيل انكسارات الضوء والتموجات والرذاذ: المنخفض يستخدم ميزانيات أصغر ومسافة رؤية أقصر؛ العالي ميزانيات أكبر ومسافة أبعد
+
+@ Disabled while Enhanced Particles is on: its particles replace the GLQuake and Classic styles
+ar معطّل ما دامت الجسيمات المحسّنة مفعّلة: جسيماتها تحل محل نمطي GLQuake والكلاسيكي
+
+@ Disabled while Enhanced Water is on: its own underwater effects replace the classic and GLQuake view warps
+ar معطّل ما دامت المياه المحسّنة مفعّلة: مؤثراتها تحت الماء تحل محل تشويه الرؤية الكلاسيكي وGLQuake
+
+@ Draw the predicted grenade path as a solid or dashed line
+ar ارسم مسار القنبلة المتوقع خطًا مصمتًا أو متقطعًا
+
+@ Draw the view out of the linked portal inside each portal; off shows flat discs (fastest)
+ar ارسم داخل كل بوابة المشهد من البوابة المرتبطة بها؛ عند الإيقاف تظهر أقراص مسطحة (الأسرع)
+
+@ Droplets spray up when things enter or leave water, slime or lava
+ar تتطاير القطرات عند دخول الأشياء الماء أو الوحل السام أو الحمم أو خروجها منها
+
+@ Emulates the original 8-bit palette of software rendering
+ar يحاكي لوحة ألوان 8 بت الأصلية للعرض البرمجي
+
+@ Every level starts with only the shotgun and axe, as if started fresh
+ar يبدأ كل مستوى بالبندقية والفأس فقط، كأنك بدأت من جديد
+
+@ Explosion damage for each remotely detonated sticky bomb
+ar ضرر انفجار كل قنبلة لاصقة تُفجَّر عن بعد
+
+@ Extra freeze milliseconds for every 10 damage dealt, so heavy hits stop longer
+ar مللي ثوانٍ إضافية من التجميد لكل 10 ضرر، كي تتوقف الضربات القوية مدة أطول
+
+@ First person, a third-person camera centered behind the player, or one over the right or left shoulder; third person hides viewmodels
+ar منظور الشخص الأول، أو كاميرا شخص ثالث خلف اللاعب في الوسط، أو فوق الكتف الأيمن أو الأيسر؛ الشخص الثالث يخفي نماذج الأسلحة
+
+@ Flash the selected marker on confirmed hits; colors are shared with the crosshair
+ar وميض العلامة المختارة عند الإصابات المؤكدة؛ ألوانها مشتركة مع علامة التصويب
+
+@ Freeze for every enemy, or only for enemies that were tough before the hit
+ar التجميد مع كل عدو، أو فقط مع الأعداء الذين كانوا أقوياء قبل الضربة
+
+@ Freeze the game briefly when you damage an enemy; single player with add-ons only
+ar تجميد اللعبة لحظة عند إصابة عدو؛ في اللعب الفردي مع الإضافات فقط
+
+@ Gibs tumble and barrels throw shrapnel; shots and blasts push them (cosmetic only)
+ar الأشلاء تتدحرج والبراميل تقذف شظايا؛ الطلقات والانفجارات تدفعها (تجميلي فقط)
+
+@ Health an enemy must have had before the hit to count as tough
+ar الصحة التي يجب أن يملكها العدو قبل الضربة ليُعدّ قويًا
+
+@ Hits dealing less damage than this do not freeze the game; the default 10 skips nails and shotgun pellets
+ar الضربات التي يقل ضررها عن هذا لا تجمّد اللعبة؛ القيمة الافتراضية 10 تتجاهل المسامير وكريات البندقية
+
+@ Hold fire and sweep the crosshair over monsters to queue them, release to throw: it stuns each in turn and flies back; alt-fire clears the queue
+ar اضغط مطولًا على الإطلاق ومرّر علامة التصويب على الوحوش لإضافتها إلى الطابور، ثم أفلت للرمي: يصعق كلًّا منها بالدور ويعود؛ الإطلاق البديل يمسح الطابور
+
+@ Hold: keep Lock-on held. Toggle: press Auto-aim Toggle to enable automatic acquisition. Click look stick to switch targets
+ar ضغط مستمر: أبقِ زر التثبيت مضغوطًا. تبديل: اضغط تبديل التصويب التلقائي لتفعيل الالتقاط التلقائي. انقر عصا النظر لتبديل الأهداف
+
+@ How close an enemy must be to the crosshair for automatic acquisition in toggle mode (degrees)
+ar مدى قرب العدو من علامة التصويب لالتقاطه تلقائيًا في وضع التبديل (بالدرجات)
+
+@ How far the view tilts up and down when you tilt the controller (pitch axis)
+ar مقدار ميل الرؤية للأعلى والأسفل عند إمالة وحدة التحكم (محور الانحدار)
+
+@ How far the view turns left and right when you turn the controller (yaw axis)
+ar مقدار انعطاف الرؤية يمينًا ويسارًا عند تدوير وحدة التحكم (محور الانعطاف)
+
+@ How far the view turns when you drag on the right half of the screen
+ar مقدار انعطاف الرؤية عند السحب على النصف الأيمن من الشاشة
+
+@ How fast the boomerang flies (units per second)
+ar سرعة طيران البوميرانغ (وحدة في الثانية)
+
+@ How hard shots and explosions push debris around
+ar قوة دفع الطلقات والانفجارات للحطام
+
+@ How hard the Powerwasher's water pushes enemies
+ar قوة دفع ماء غسالة الضغط للأعداء
+
+@ How long a hit freezes the game, in milliseconds
+ar مدة تجميد اللعبة عند الضربة، بالمللي ثانية
+
+@ How strongly fog covers the sky when fog is on
+ar مدى تغطية الضباب للسماء عند تفعيل الضباب
+
+@ How the view distorts underwater: Classic ripples the whole screen like software Quake, GLQuake slowly stretches and squashes the view
+ar كيف تتشوه الرؤية تحت الماء: الكلاسيكي يموّج الشاشة كلها مثل Quake البرمجي، وGLQuake يمطّ الرؤية ويضغطها ببطء
+
+@ Ignores gyro rotation slower than this many degrees per second, to hide hand tremor
+ar يتجاهل دوران الجيروسكوب الأبطأ من هذا العدد من الدرجات في الثانية، لإخفاء ارتعاش اليد
+
+@ Immersive: appears for a few seconds only when its value changes
+ar غامر: يظهر بضع ثوانٍ فقط عند تغيّر قيمته
+
+@ Keeps textures sharp on floors and walls seen at steep angles
+ar يُبقي الخامات حادة على الأرضيات والجدران المرئية بزوايا حادة
+
+@ Lights from rockets, muzzle flashes and explosions brighten nearby walls
+ar أضواء الصواريخ ووميض الفوهات والانفجارات تضيء الجدران القريبة
+
+@ Liquid surfaces swell and ring out where things move through them
+ar أسطح السوائل تنتفخ وتتموج حيث تمر الأشياء عبرها
+
+@ Lobs sticky bombs (rockets ammo) that cling to walls, doors and monsters; alt-fire detonates them all
+ar يقذف قنابل لاصقة (ذخيرة الصواريخ) تلتصق بالجدران والأبواب والوحوش؛ الإطلاق البديل يفجّرها كلها
+
+@ Look of the classic particles: GLQuake draws soft round dots, Classic draws square pixels like software Quake
+ar مظهر الجسيمات الكلاسيكية: GLQuake يرسم نقاطًا مستديرة ناعمة، والكلاسيكي يرسم بكسلات مربعة مثل Quake البرمجي
+
+@ Low skips the background smear halo and uses fewer blur samples; high keeps the full halo and smoother streaks
+ar المنخفض يتخطى هالة التلطخ الخلفية ويستخدم عينات ضبابية أقل؛ العالي يُبقي الهالة كاملة وخطوطًا أنعم
+
+@ Low: hard particle edges, half the scripted particles and fewer hit sparks. Medium: soft edges. High: soft edges checked per MSAA sample, most hit sparks
+ar منخفض: حواف جسيمات حادة، ونصف الجسيمات المبرمجة، وشرر إصابة أقل. متوسط: حواف ناعمة. عالٍ: حواف ناعمة تُفحص لكل عينة MSAA، ومعظم شرر الإصابة
+
+@ Marks fade out before expiring; oldest marks are recycled at the limit
+ar تتلاشى الآثار قبل انتهائها؛ وتُعاد الآثار الأقدم للاستخدام عند بلوغ الحد
+
+@ Max nested portal reflections to draw; each level redraws the scene
+ar أقصى عدد من انعكاسات البوابات المتداخلة؛ كل مستوى يعيد رسم المشهد
+
+@ Max portals per screen with a live view; each one redraws the scene
+ar أقصى عدد من البوابات ذات العرض الحي في الشاشة؛ كل واحدة تعيد رسم المشهد
+
+@ Maximum distance for acquiring and keeping an enemy locked
+ar أقصى مسافة لالتقاط عدو وإبقائه مثبتًا
+
+@ Minimum gap between freezes, so shotgun pellets and rapid fire count once; kills ignore it
+ar أدنى فاصل بين التجميدات، كي تُحسب كريات البندقية والإطلاق السريع مرة واحدة؛ القتل يتجاهله
+
+@ Modern terminal console with autocomplete popup, history search, ANSI colors, bash shell and piping; off uses the classic Quake console
+ar وحدة تحكم طرفية حديثة مع إكمال تلقائي وبحث في السجل وألوان ANSI وصدفة bash وتمرير الأوامر؛ عند الإيقاف تُستخدم وحدة تحكم Quake الكلاسيكية
+
+@ Monsters take proportionally less damage at higher values; above 100% is harder
+ar تتلقى الوحوش ضررًا أقل بالتناسب مع القيم الأعلى؛ فوق 100% أصعب
+
+@ Moving gibs leave blood on surfaces they touch
+ar الأشلاء المتحركة تترك دماء على الأسطح التي تلمسها
+
+@ Multiplier on the freeze when the hit kills the enemy; 1 means no extra
+ar مضاعف التجميد عندما تقتل الضربة العدو؛ 1 يعني بلا زيادة
+
+@ Multiplies ammo from pickups (up to the normal carry limit); below 100% is harder
+ar يضاعف الذخيرة من الالتقاطات (حتى حد الحمل العادي)؛ أقل من 100% أصعب
+
+@ Multiplies health from pickups (up to 100, or the item's own limit); below 100% is harder
+ar يضاعف الصحة من الالتقاطات (حتى 100، أو حد العنصر نفسه)؛ أقل من 100% أصعب
+
+@ Nails stick to wood and bodies; hard surfaces deflect them to the floor
+ar المسامير تنغرس في الخشب والأجسام؛ والأسطح الصلبة تحرفها إلى الأرض
+
+@ Nearest keeps crisp classic pixels; linear smooths textures
+ar الأقرب يحافظ على البكسلات الكلاسيكية الحادة؛ الخطي ينعّم الخامات
+
+@ New Game: Add-ons
+ar لعبة جديدة: الإضافات
+
+@ New Game: Customize
+ar لعبة جديدة: تخصيص
+
+@ Night vision: how much dark areas are brightened; thermal: how strongly heat stands out
+ar الرؤية الليلية: مقدار إضاءة المناطق المظلمة؛ الحرارية: مدى بروز الحرارة
+
+@ Night-vision and thermal goggles, cycle normal, night vision and thermal with Change Goggles (Add-ons), or use the Equipment Wheel
+ar نظارة رؤية ليلية وحرارية، بدّل بين العادي والليلي والحراري بأمر تغيير النظارة (الإضافات)، أو استخدم عجلة المعدات
+
+@ No single freeze lasts longer than this, however much damage or kill bonus adds
+ar لا يدوم أي تجميد أطول من هذا، مهما أضاف الضرر أو مكافأة القتل
+
+@ Oldest marks and nails are recycled at this shared limit
+ar تُعاد الآثار والمسامير الأقدم للاستخدام عند هذا الحد المشترك
+
+@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
+ar عصا وأزرار على الشاشة: التلقائي يُظهرها بعد اللمس ويخفيها عند استخدام جهاز آخر
+
+@ Only autosaves: quicksaves and the Save menu are off
+ar الحفظ التلقائي فقط: الحفظ السريع وقائمة الحفظ معطّلان
+
+@ Place every weapon at the center, right or left of the view, or hide all viewmodels
+ar ضع كل الأسلحة في وسط الرؤية أو يمينها أو يسارها، أو أخفِ كل نماذج الأسلحة
+
+@ Play your chosen hit or kill cue when you damage an enemy
+ar شغّل صوت الإصابة أو القتل الذي اخترته عند إصابة عدو
+
+@ Playback speed: faster sounds shorter and higher
+ar سرعة التشغيل: الأسرع يبدو أقصر وأحدّ
+
+@ Plays the Quake theme in the main menu when no game is running
+ar يشغّل لحن Quake في القائمة الرئيسية عندما لا تكون هناك لعبة جارية
+
+@ Portals farther away than this are drawn as flat discs
+ar البوابات الأبعد من هذا تُرسم أقراصًا مسطحة
+
+@ Press attack once to keep firing, again to stop
+ar اضغط الهجوم مرة لمواصلة الإطلاق، ومرة أخرى للتوقف
+
+@ Press run once to switch between running and walking
+ar اضغط الركض مرة للتبديل بين الركض والمشي
+
+@ Raise or lower the tone independently of sound length
+ar ارفع طبقة الصوت أو اخفضها دون تغيير طوله
+
+@ Red screen edges show where damage came from: top is front, bottom is behind; Screen Flashes controls their strength
+ar حواف الشاشة الحمراء تُظهر مصدر الضرر: الأعلى أمامك والأسفل خلفك؛ ومضات الشاشة تتحكم في شدتها
+
+@ Replaces the classic dot particles with glowing sparks, smoke and blood; mods with their own particle effects keep them
+ar يستبدل جسيمات النقاط الكلاسيكية بشرر متوهج ودخان ودماء؛ التعديلات ذات مؤثرات الجسيمات الخاصة تحتفظ بها
+
+@ Resolution and detail inside portal and teleporter views; lower tiers trim nested effects
+ar الدقة والتفاصيل داخل مشاهد البوابات والناقلات؛ المستويات الأدنى تقلّص المؤثرات المتداخلة
+
+@ Rippling light patterns on surfaces under water and slime
+ar أنماط ضوء متموجة على الأسطح تحت الماء والوحل السام
+
+@ Scales all damage you take; above 100% is harder
+ar يغيّر مقياس كل الضرر الذي تتلقاه؛ فوق 100% أصعب
+
+@ Screen edge for this element; elements on the same spot stack
+ar طرف الشاشة لهذا العنصر؛ العناصر في المكان نفسه تتراكم
+
+@ Seconds a monster hit by the boomerang stays stunned
+ar عدد ثواني بقاء الوحش المصاب بالبوميرانغ مصعوقًا
+
+@ Seconds impact marks and stuck nails stay before fading out; independent of Particle Quality
+ar عدد ثواني بقاء آثار الإصابة والمسامير المنغرسة قبل تلاشيها؛ مستقل عن جودة الجسيمات
+
+@ Seconds messages at the top of the screen stay up
+ar عدد ثواني بقاء الرسائل في أعلى الشاشة
+
+@ Seconds the flick stick snap takes; lower is faster
+ar عدد الثواني التي يستغرقها الالتفاف السريع؛ الأقل أسرع
+
+@ See through enhanced water; enables Water Opacity
+ar الرؤية عبر المياه المحسّنة؛ يفعّل عتامة الماء
+
+@ Sensor grain, scanlines and flicker of the goggle image
+ar حبيبات المستشعر وخطوط المسح والوميض في صورة النظارة
+
+@ Shades every anti-aliasing sample; needs Anti-aliasing on
+ar يظلّل كل عينة من تنعيم الحواف؛ يتطلب تفعيل تنعيم الحواف
+
+@ Shifts colors so they stay distinct for the chosen color blindness
+ar يغيّر الألوان كي تبقى مميزة لنوع عمى الألوان المختار
+
+@ Shotgun hits leave small surface marks (cosmetic only)
+ar إصابات البندقية تترك آثارًا صغيرة على الأسطح (تجميلي فقط)
+
+@ Show corner ticks at screen centre while locked, even with Crosshair off
+ar إظهار علامات زوايا في مركز الشاشة أثناء التثبيت، حتى مع إيقاف علامة التصويب
+
+@ Show where grenades and other arcing shots will fly, bounce and land; local play only, not in deathmatch
+ar إظهار أين ستطير القنابل وغيرها من المقذوفات المنحنية وترتد وتسقط؛ في اللعب المحلي فقط، لا في القتال الحر
+
+@ Shows text for important sounds: doors, alerted enemies, secrets, pickups
+ar يعرض نصًا للأصوات المهمة: الأبواب، والأعداء المتنبهون، والأسرار، والالتقاطات
+
+@ Shows the distance fog that maps and mods set; off always gives clear view
+ar يعرض ضباب المسافة الذي تضبطه الخرائط والتعديلات؛ عند الإيقاف تكون الرؤية صافية دائمًا
+
+@ Shows the player face next to the health number
+ar يعرض وجه اللاعب بجوار رقم الصحة
+
+@ Simulation detail, step rate, fade-out lifetimes and caps for gibs and shrapnel; low also skips mover collision
+ar تفاصيل المحاكاة ومعدل الخطوات ومدد التلاشي وحدود الأشلاء والشظايا؛ المنخفض يتخطى أيضًا التصادم مع الأجسام المتحركة
+
+@ Size of the on-screen buttons and move stick
+ar حجم الأزرار وعصا الحركة على الشاشة
+
+@ Slowly heals up to 100 health after 5 seconds without being hit
+ar يعالج ببطء حتى 100 صحة بعد 5 ثوانٍ دون إصابة
+
+@ Slows stick look while the crosshair is over an enemy
+ar يبطّئ النظر بالعصا عندما تكون علامة التصويب فوق عدو
+
+@ Slows the game down while the weapon wheel is open
+ar يبطّئ اللعبة أثناء فتح عجلة الأسلحة
+
+@ Slows the whole game down; single player only. Saves and demos stay compatible with other ports
+ar يبطّئ اللعبة كلها؛ في اللعب الفردي فقط. تبقى ملفات الحفظ والعروض متوافقة مع المنافذ الأخرى
+
+@ Small camera jolt on each freeze; off with Reduce Motion
+ar هزة كاميرا صغيرة مع كل تجميد؛ تتوقف مع تقليل الحركة
+
+@ Snap and track enemies in local play, including split-screen; unavailable online
+ar تثبيت على الأعداء وتتبعهم في اللعب المحلي، بما فيه الشاشة المقسومة؛ غير متاح عبر الإنترنت
+
+@ Sparks, smoke, chips, splinters and splashes fly off whatever your shots hit
+ar شرر ودخان وشظايا ونُثار ورذاذ يتطاير مما تصيبه طلقاتك
+
+@ Spawns extra copies of every monster around the original when a level starts
+ar يُنشئ نسخًا إضافية من كل وحش حول الأصل عند بدء المستوى
+
+@ Strength of the full-screen flashes for damage, pickups and powerups
+ar شدة ومضات الشاشة الكاملة للضرر والالتقاطات والمعززات
+
+@ Stretch or shorten the sound while keeping its pitch
+ar مطّ الصوت أو تقصيره مع الحفاظ على طبقته
+
+@ Surface opacity; requires Enhanced Water and Translucent Water
+ar عتامة السطح؛ يتطلب المياه المحسّنة والماء الشفاف
+
+@ The hook latches onto metal surfaces (metal, tech, computer panels, copper)
+ar يتعلق الخطّاف بالأسطح المعدنية (المعدن، والتقنية، ولوحات الحاسوب، والنحاس)
+
+@ The hook latches onto stone, brick, rock and any surface not recognised as wood or metal
+ar يتعلق الخطّاف بالحجر والطوب والصخر وأي سطح لا يُعرف أنه خشب أو معدن
+
+@ The hook latches onto wooden surfaces (texture names like wood, crate, plank)
+ar يتعلق الخطّاف بالأسطح الخشبية (خامات بأسماء مثل wood وcrate وplank)
+
+@ Turn the controller's motion sensor into a look input; needs a pad with a gyroscope
+ar حوّل مستشعر الحركة في وحدة التحكم إلى أداة نظر؛ يتطلب يد تحكم بجيروسكوب
+
+@ Turns off view bob, strafe tilt and the camera kick when hit or firing
+ar يوقف تمايل الرؤية وميلان التحرك الجانبي وارتداد الكاميرا عند الإصابة أو الإطلاق
+
+@ Turns on the extra liquid effects; Water Settings controls each one
+ar يفعّل مؤثرات السوائل الإضافية؛ إعدادات الماء تتحكم في كل منها
+
+@ Turns the view to follow a moving enemy you are aiming at
+ar يدير الرؤية لتتبع عدوًا متحركًا تصوّب عليه
+
+@ Turns the view when you roll the controller sideways; 0 disables it, negative reverses it
+ar يدير الرؤية عند إمالة وحدة التحكم جانبيًا؛ 0 يعطّله، والقيمة السالبة تعكسه
+
+@ Two-portal gun: fire and alt-fire place linked portals on flat walls; assign a weapon slot in Add-ons
+ar مسدس ببوابتين: الإطلاق والإطلاق البديل يضعان بوابتين مرتبطتين على الجدران المسطحة؛ خصّص له خانة سلاح في الإضافات
+
+@ Unlocks the FX Settings page: enhanced particles, impact effects and blood splatter
+ar يفتح صفحة إعدادات المؤثرات: جسيمات محسّنة، وتأثيرات الارتطام، وتناثر الدماء
+
+@ Uses the 2021 re-release's smoother MD5 models (and MD3 replacements from mods) instead of the classic ones. Applies on the next map load
+ar يستخدم نماذج MD5 الأنعم من إصدار 2021 المحدّث (وبدائل MD3 من التعديلات) بدل النماذج الكلاسيكية. يُطبَّق عند تحميل الخريطة التالية
+
+@ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
+ar يستخدم الإضاءة الملونة للخريطة (ملف .lit أو كتلة BSPX)؛ عند الإيقاف يكون الضوء أبيض كالأصل. يُطبَّق عند تحميل الخريطة التالية
+
+@ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
+ar أجزاء نفث الماء وعدد القطرات وتظليل السائل اللامع: المنخفض يستخدم تيارات شفافة أبسط؛ العالي نفثات لامعة ناعمة
+
+@ When gyro looking applies: always, off while +gyroaction is held, or only while it is held
+ar متى يُطبَّق النظر بالجيروسكوب: دائمًا، أو يتوقف أثناء الضغط على +gyroaction، أو فقط أثناء الضغط عليه
+
+@ Which weapons trigger the freeze; melee covers the axe and any mod weapon used at close range without ammo
+ar الأسلحة التي تسبب التجميد؛ القتال القريب يشمل الفأس وأي سلاح تعديل يُستخدم عن قرب دون ذخيرة
+
+@ Your own rockets and grenades don't hurt you; rocket jumps still work
+ar صواريخك وقنابلك لا تؤذيك؛ والقفز بالصاروخ ما زال يعمل
+
+# ==== ui.txt ====
+
+# Menus and pop-ups outside the options pages: save cards, launch, presets,
+# add-on browser, map packs, hints and dialogs.
+@ Select
+ar اختيار
+
+@ Back
+ar رجوع
+
+@ Cancel
+ar إلغاء
+
+@ Confirm
+ar تأكيد
+
+@ Scroll
+ar تمرير
+
+@ Section
+ar القسم
+
+@ Bind
+ar ربط
+
+@ Cancel binding
+ar إلغاء الربط
+
+@ Clear
+ar مسح
+
+@ Clear pad
+ar مسح يد التحكم
+
+@ Remap
+ar إعادة التعيين
+
+@ Type
+ar كتابة
+
+@ Shift
+ar Shift
+
+@ Done
+ar تم
+
+@ Del
+ar Del
+
+@ Space
+ar مسافة
+
+@ Save
+ar حفظ
+
+@ Load
+ar تحميل
+
+@ Delete
+ar حذف
+
+@ Play
+ar لعب
+
+@ Yes
+ar نعم
+
+@ No
+ar لا
+
+@ OK
+ar موافق
+
+@ System
+ar النظام
+
+@ Language
+ar اللغة
+
+@ Help
+ar مساعدة
+
+@ Fixed for this game: it was started without Customize
+ar ثابت في هذه اللعبة: بدأت دون تخصيص
+
+@ Press a button or key to bind (Start cancels)
+ar اضغط زرًا أو مفتاحًا للربط (Start يلغي)
+
+@ Press button...
+ar اضغط زرًا...
+
+@ Press key...
+ar اضغط مفتاحًا...
+
+@ Replace this binding?
+ar استبدال هذا الربط؟
+
+@ is already assigned
+ar مُعيَّن مسبقًا
+
+@ {} already assigned
+ar {} مُعيَّن مسبقًا
+
+@ Open Controls to remap Lock-on?
+ar فتح التحكم لإعادة تعيين التثبيت؟
+
+@ Lock-on
+ar التثبيت على الهدف
+
+@ Auto-aim Toggle
+ar تبديل التصويب التلقائي
+
+@ Keyboard
+ar لوحة المفاتيح
+
+@ Controller
+ar يد التحكم
+
+# main menu, dialogs and screens
+@ Map Packs
+ar حزم الخرائط
+
+@ Customize
+ar تخصيص
+
+@ Level Select
+ar اختيار المستوى
+
+@ Really quit?
+ar هل تريد الخروج فعلًا؟
+
+@ You died
+ar لقد متّ
+
+@ Continue from most recent save
+ar المتابعة من أحدث حفظ
+
+@ Select save
+ar اختيار حفظ
+
+@ Restart level
+ar إعادة المستوى
+
+@ Return to main menu
+ar العودة إلى القائمة الرئيسية
+
+@ (disabled)
+ar (معطّل)
+
+@ (fixed for this game)
+ar (ثابت في هذه اللعبة)
+
+@ (off)
+ar (متوقف)
+
+@ Apply Display Changes
+ar تطبيق تغييرات العرض
+
+@ Display Mode
+ar وضع العرض
+
+@ Resolution
+ar الدقة
+
+@ desktop
+ar سطح المكتب
+
+@ Preset
+ar الإعداد المسبق
+
+@ Map
+ar الخريطة
+
+@ Reset Shader Settings
+ar إعادة ضبط إعدادات المرشّح
+
+@ Reset to Defaults
+ar استعادة الافتراضيات
+
+@ Searching...
+ar جارٍ البحث...
+
+@ This game only autosaves.
+ar هذه اللعبة تحفظ تلقائيًا فقط.
+
+@ (No Manual Saves modifier)
+ar (معدِّل بلا حفظ يدوي)
+
+@ End the current game?
+ar إنهاء اللعبة الحالية؟
+
+@ Unsaved progress will be lost.
+ar سيضيع التقدم غير المحفوظ.
+
+@ End game
+ar إنهاء اللعبة
+
+@ Overwrite
+ar استبدال
+
+@ Overwrite "{}"?
+ar استبدال "{}"؟
+
+@ Saved {}
+ar تم حفظ {}
+
+@ Start a new game?
+ar بدء لعبة جديدة؟
+
+@ New game
+ar لعبة جديدة
+
+@ New Game
+ar لعبة جديدة
+
+@ CUSTOM
+ar مخصّص
+
+@ Customize Experience
+ar تخصيص التجربة
+
+@ Disable All
+ar تعطيل الكل
+
+@ Disable All Modifications
+ar تعطيل كل التعديلات
+
+@ Saves load in other source ports too.
+ar ملفات الحفظ تعمل في المنافذ الأخرى أيضًا.
+
+@ Standard rules, no add-ons.
+ar قواعد قياسية، بلا إضافات.
+
+@ Choose skill
+ar اختر الصعوبة
+
+@ The current game will end
+ar ستنتهي اللعبة الحالية
+
+@ Easy
+ar سهل
+
+@ Normal
+ar عادي
+
+@ Hard
+ar صعب
+
+@ Nightmare
+ar كابوس
+
+# graphics preset pop-up
+@ Choose a Graphics Preset
+ar اختر إعدادًا مسبقًا للرسوميات
+
+@ Classic
+ar كلاسيكي
+
+@ Like the re-release: enhanced models,
+ar مثل الإصدار المحدّث: نماذج محسّنة،
+
+@ no added effects.
+ar بلا مؤثرات مضافة.
+
+@ Enhanced
+ar محسّن
+
+@ Every enhancement at its highest quality.
+ar كل التحسينات بأعلى جودة.
+
+@ Needs a capable GPU.
+ar يتطلب معالج رسوميات قويًا.
+
+@ Low-End
+ar للأجهزة الضعيفة
+
+@ Fastest. No anti-aliasing, original
+ar الأسرع. بلا تنعيم حواف، نماذج
+
+@ models, lowest effect quality.
+ar أصلية، أدنى جودة للمؤثرات.
+
+@ Esc keeps the defaults
+ar Esc يُبقي الافتراضيات
+
+@ Everything can be changed later in Options.
+ar يمكن تغيير كل شيء لاحقًا من الخيارات.
+
+@ Keep Defaults
+ar إبقاء الافتراضيات
+
+# save and load cards
+@ Save Game
+ar حفظ اللعبة
+
+@ Load Game
+ar تحميل لعبة
+
+@ Autosaves
+ar الحفظ التلقائي
+
+@ newest first
+ar الأحدث أولًا
+
+@ Saves: {}
+ar ملفات الحفظ: {}
+
+@ Browse Autosaves
+ar تصفح الحفظ التلقائي
+
+@ Every retained autosave, newest first
+ar كل ملفات الحفظ التلقائي المحتفظ بها، الأحدث أولًا
+
+@ New save
+ar حفظ جديد
+
+@ Select to save your game here
+ar اختر للحفظ هنا
+
+@ No autosaves yet
+ar لا يوجد حفظ تلقائي بعد
+
+@ Autosaves are made on level entry, secrets and more (Options > Gameplay)
+ar يُنشأ الحفظ التلقائي عند دخول المستوى وإيجاد الأسرار وغير ذلك (الخيارات > اللعب)
+
+@ No saves yet
+ar لا يوجد حفظ بعد
+
+@ Save from the Single Player menu, or press F6 to quicksave
+ar احفظ من قائمة اللاعب الفردي، أو اضغط F6 للحفظ السريع
+
+@ No picture
+ar لا توجد صورة
+
+@ Del: delete save
+ar Del: حذف الحفظ
+
+@ Delete "{}"?
+ar حذف "{}"؟
+
+@ This cannot be undone.
+ar لا يمكن التراجع عن هذا.
+
+@ Quicksave
+ar حفظ سريع
+
+@ Autosave: {}
+ar حفظ تلقائي: {}
+
+@ unknown trigger
+ar سبب غير معروف
+
+@ Latest - {}
+ar الأحدث - {}
+
+@ Health {}
+ar الصحة {}
+
+@ Armor {}
+ar الدرع {}
+
+@ Kills {}/{}
+ar القتلى {}/{}
+
+@ Secrets {}/{}
+ar الأسرار {}/{}
+
+@ Split-screen, {} players
+ar شاشة مقسومة، {} لاعبين
+
+@ Co-op
+ar تعاوني
+
+@ Customized
+ar مخصّص
+
+@ Customized, {}
+ar مخصّص، {}
+
+@ Date unavailable
+ar التاريخ غير متاح
+
+@ Just now
+ar الآن
+
+@ {} min ago
+ar قبل {} د
+
+@ {} h ago
+ar قبل {} س
+
+@ Level entry
+ar دخول المستوى
+
+@ Secret found
+ar إيجاد سر
+
+@ All enemies killed
+ar قتل كل الأعداء
+
+@ All secrets found
+ar إيجاد كل الأسرار
+
+@ Timer
+ar المؤقت
+
+# customize pages
+@ Standard rules
+ar القواعد القياسية
+
+@ Modifiers changed: {}
+ar المعدِّلات المغيّرة: {}
+
+@ no add-ons
+ar بلا إضافات
+
+@ add-ons: {}
+ar الإضافات: {}
+
+@ Saves of this game are .qsa files: they need this source port.
+ar ملفات حفظ هذه اللعبة بصيغة .qsa: تتطلب هذا المنفذ.
+
+@ Nothing changed: this plays as standard Quake.
+ar لم يتغير شيء: تُلعب كـ Quake القياسية.
+
+@ Changes apply now and are saved with this game (.qsa).
+ar تُطبَّق التغييرات الآن وتُحفظ مع هذه اللعبة (.qsa).
+
+@ This game started without Customize, so its rules are fixed.
+ar بدأت هذه اللعبة دون تخصيص، لذا قواعدها ثابتة.
+
+@ Start a new game and choose Customize Experience.
+ar ابدأ لعبة جديدة واختر تخصيص التجربة.
+
+@ These rules apply to the next customized game.
+ar تُطبَّق هذه القواعد على اللعبة المخصّصة التالية.
+
+# add-on browser
+@ Fire
+ar إطلاق
+
+@ Alt Fire
+ar إطلاق بديل
+
+@ Configure Parameters >
+ar ضبط المعاملات >
+
+@ Configure
+ar ضبط
+
+@ Settings
+ar الإعدادات
+
+@ Change slot
+ar تغيير الخانة
+
+@ Toggle
+ar تبديل
+
+@ Details
+ar التفاصيل
+
+@ Enter or click the box: toggle
+ar Enter أو انقر المربع: تبديل
+
+@ Right / Tab / click: details
+ar يمين / Tab / نقر: التفاصيل
+
+@ Input Remapping
+ar إعادة تعيين الإدخال
+
+@ Weapon Slot
+ar خانة السلاح
+
+@ Customized games save as .qsa files, which need this source port.
+ar الألعاب المخصّصة تُحفظ بملفات .qsa، وتتطلب هذا المنفذ.
+
+@ This game started without Customize, so its add-ons are fixed. Customize a new game instead.
+ar بدأت هذه اللعبة دون تخصيص، لذا إضافاتها ثابتة. خصّص لعبة جديدة بدلًا من ذلك.
+
+@ Bullet Time
+ar الزمن البطيء
+
+@ Change Goggles
+ar تغيير النظارة
+
+@ Dodge / Dive
+ar مراوغة / انقضاض
+
+@ Goggles
+ar النظارة
+
+@ Hitstop
+ar توقف الضربة
+
+@ Projectile Shotguns
+ar بنادق المقذوفات
+
+@ BULLET TIME: 20%
+ar الزمن البطيء: 20%
+
+@ NORMAL SPEED
+ar السرعة العادية
+
+@ SLOW MOTION: PHYSICAL PELLETS
+ar حركة بطيئة: كريات فيزيائية
+
+@ DEMONSTRATION
+ar عرض توضيحي
+
+@ GAMEPLAY
+ar اللعب
+
+@ LOOP
+ar تكرار
+
+@ Preview unavailable
+ar المعاينة غير متاحة
+
+# shader and language help lines
+@ A setting of the chosen shader; arrows step it, Enter is not needed
+ar إعداد للمرشّح المختار؛ الأسهم تغيّره، ولا حاجة إلى Enter
+
+@ Language of the menus, messages and the 2021 re-release's game text; System follows your computer's language
+ar لغة القوائم والرسائل ونصوص لعبة إصدار 2021 المحدّث؛ النظام يتبع لغة حاسوبك
+
+@ Puts every setting of the chosen shader back to the preset's defaults
+ar يعيد كل إعدادات المرشّح المختار إلى افتراضيات الإعداد المسبق
+
+@ RetroArch slang shader on the final image: CRT, scanlines, NTSC, sharpening; add your own in <game>/shaders
+ar مرشّح RetroArch slang على الصورة النهائية: CRT وخطوط المسح وNTSC والتحديد؛ أضف مرشّحاتك في <game>/shaders
+
+# modern console footer
+@ Shift+PgUp/Dn: height  ` : hide
+ar Shift+PgUp/Dn: الارتفاع  ` : إخفاء
+
+@ Tab: complete  Ctrl+R: search  bash | pipe
+ar Tab: إكمال  Ctrl+R: بحث  bash | تمرير
+
+@ ↑ +{} lines (End to jump) 
+ar ↑ +{} سطر (End للقفز)
+
+# add-on descriptions
+@ Create two linked portals on flat walls. Fire places the first portal; Alt Fire places the second. Walk through either portal to emerge from the other. Your momentum carries through. Assign a weapon slot below: pressing that slot repeatedly cycles its ordinary weapon and every enabled add-on assigned there. Portal view quality is configurable below.
+ar أنشئ بوابتين مرتبطتين على الجدران المسطحة. الإطلاق يضع البوابة الأولى؛ والإطلاق البديل يضع الثانية. ادخل أيًّا منهما لتخرج من الأخرى. يستمر زخمك عبرها. خصّص خانة سلاح أدناه: الضغط المتكرر على تلك الخانة يبدّل بين سلاحها العادي وكل إضافة مفعّلة مخصّصة لها. يمكن ضبط جودة عرض البوابات أدناه.
+
+@ Hold Fire and sweep the crosshair over monsters to queue targets. Release Fire to throw: the boomerang visits each target, stuns it and returns to you. Alt Fire clears the queue. The weapon slot selects a group, not a separate hotkey: press it again to cycle through the weapons in that slot. Configure stun duration and flight speed below.
+ar اضغط مطولًا على الإطلاق ومرّر علامة التصويب على الوحوش لإضافة أهداف إلى الطابور. أفلت الإطلاق للرمي: يزور البوميرانغ كل هدف ويصعقه ثم يعود إليك. الإطلاق البديل يمسح الطابور. خانة السلاح تختار مجموعة، لا اختصارًا منفصلًا: اضغطها مجددًا للتنقل بين أسلحة تلك الخانة. اضبط مدة الصعق وسرعة الطيران أدناه.
+
+@ Hold Fire to charge a sticky bomb using rocket ammunition; release to launch. A longer charge throws it faster. Bombs cling to walls, doors and monsters. Alt Fire detonates your planted bombs together. Place a trap, retreat, then detonate it when enemies approach. Assign any weapon slot below; repeated presses cycle through the ordinary weapon and add-ons in that slot.
+ar اضغط مطولًا على الإطلاق لشحن قنبلة لاصقة باستخدام ذخيرة الصواريخ؛ وأفلت لقذفها. الشحن الأطول يرميها أسرع. تلتصق القنابل بالجدران والأبواب والوحوش. الإطلاق البديل يفجّر قنابلك المزروعة معًا. ضع فخًّا، وتراجع، ثم فجّره عند اقتراب الأعداء. خصّص أي خانة سلاح أدناه؛ الضغط المتكرر يتنقل بين السلاح العادي والإضافات في تلك الخانة.
+
+@ Fire launches a chain hook. It latches onto a permitted surface or enemy and reels you toward the anchor. Fire again or use Alt Fire to let go. Choose which materials and enemies can be hooked in Configure Parameters. Assign it to any weapon slot; repeated presses of the slot's existing binding cycle through its weapons.
+ar الإطلاق يقذف خطافًا بسلسلة. يتعلق بسطح أو عدو مسموح ويسحبك نحو نقطة التثبيت. أطلق مجددًا أو استخدم الإطلاق البديل لتفلت. اختر المواد والأعداء القابلة للتعلق في ضبط المعاملات. خصّصه لأي خانة سلاح؛ الضغط المتكرر على ربط الخانة الحالي يتنقل بين أسلحتها.
+
+@ A piercing railgun inspired by Quake III. Fire sends a slug through every enemy along its line. Each shot consumes two cells, with a 1.5 second refire interval. Damage and the spiral trail colour are configurable below. Choose a weapon slot: the slot's current binding selects and cycles the weapons assigned to it.
+ar ريلغن خارق مستوحى من Quake III. الإطلاق يرسل قذيفة عبر كل عدو على خطها. تستهلك كل طلقة خليتين، مع فاصل إعادة إطلاق 1.5 ثانية. يمكن ضبط الضرر ولون الأثر الحلزوني أدناه. اختر خانة سلاح: ربط الخانة الحالي يختار الأسلحة المخصّصة لها ويتنقل بينها.
+
+@ A Portal-style gel sprayer. Fire sprays blue Repulsion gel: land, jump or run into it to bounce, and landings on it never hurt. Alt Fire sprays orange Propulsion gel: run across it to go much faster. Gel coats floors and walls until washed off with the Powerwasher. Assign a weapon slot below; repeated presses cycle the weapons in that slot.
+ar رشاش هلام على طراز Portal. الإطلاق يرش هلام الارتداد الأزرق: اهبط عليه أو اقفز أو اركض نحوه لترتد، والهبوط عليه لا يؤذي أبدًا. الإطلاق البديل يرش هلام الدفع البرتقالي: اركض فوقه لتصبح أسرع بكثير. يغطي الهلام الأرضيات والجدران حتى يُغسل بغسالة الضغط. خصّص خانة سلاح أدناه؛ الضغط المتكرر يتنقل بين أسلحة تلك الخانة.
+
+@ A water cannon. Fire shoots a straight jet with limited reach; Alt Fire a wide, shorter fan. The water pushes enemies back, turns projectiles aside and washes away gel and blood. Push strength is configurable below. Assign a weapon slot below; repeated presses cycle the weapons in that slot.
+ar مدفع ماء. الإطلاق يطلق نفثًا مستقيمًا محدود المدى؛ والإطلاق البديل مروحة عريضة أقصر. الماء يدفع الأعداء للخلف ويحرف المقذوفات ويغسل الهلام والدماء. يمكن ضبط قوة الدفع أدناه. خصّص خانة سلاح أدناه؛ الضغط المتكرر يتنقل بين أسلحة تلك الخانة.
+
+@ One equipment add-on includes both night vision and thermal vision. The Change Goggles action cycles Normal, Night Vision, Thermal, then Normal again. Night vision brightens dark rooms; thermal vision highlights living enemies. Goggles do not occupy a weapon slot. Configure intensity and sensor noise below. The binding affects only this add-on.
+ar إضافة معدات واحدة تشمل الرؤية الليلية والرؤية الحرارية. أمر تغيير النظارة يتنقل بين العادي والرؤية الليلية والحرارية ثم العادي مجددًا. الرؤية الليلية تضيء الغرف المظلمة؛ والحرارية تُبرز الأعداء الأحياء. لا تشغل النظارة خانة سلاح. اضبط الشدة وتشويش المستشعر أدناه. الربط يؤثر في هذه الإضافة فقط.
+
+@ Press Dodge with a movement direction on the ground or in midair: dive forward or leap backward and sideways. Diagonals are supported. Each press launches once, with a short recovery. The player body animates in third person. Assign the Dodge action below or in Controls.
+ar اضغط المراوغة مع اتجاه حركة على الأرض أو في الهواء: انقضّ للأمام أو اقفز للخلف وللجانبين. الاتجاهات القطرية مدعومة. كل ضغطة تطلقك مرة واحدة، مع تعافٍ قصير. يتحرك جسم اللاعب في منظور الشخص الثالث. خصّص أمر المراوغة أدناه أو في التحكم.
+
+@ Use the dedicated Bullet Time action to slow the whole local game to 20% speed. Hold is the default; Toggle switches on each press. The optional meter limits use in real seconds and regenerates while inactive. Disable the meter for unlimited use. Remap the action and configure duration and regeneration below.
+ar استخدم أمر الزمن البطيء المخصص لإبطاء اللعبة المحلية كلها إلى سرعة 20%. الضغط المستمر هو الافتراضي؛ والتبديل يفعّله ويوقفه مع كل ضغطة. العداد الاختياري يحدّ الاستخدام بثوانٍ حقيقية ويتجدد أثناء عدم الاستخدام. عطّل العداد لاستخدام غير محدود. أعد تعيين الأمر واضبط المدة والتجدد أدناه.
+
+@ Both shotguns and enemy grunts fire physical pellets with their original spread and damage. Fast default projectiles feel immediate; lower their speed to dodge incoming fire during bullet time. Configure projectile speed below, or reset it to the default of 10000 units per second.
+ar البندقيتان وجنود الأعداء يطلقون كريات فيزيائية بانتشارها وضررها الأصليين. المقذوفات السريعة الافتراضية تبدو فورية؛ اخفض سرعتها لتراوغ النيران القادمة أثناء الزمن البطيء. اضبط سرعة المقذوفات أدناه، أو أعدها إلى الافتراضي 10000 وحدة في الثانية.
+
+@ Freezes the game for a split second when you damage an enemy, so hits feel heavier. Single player only. Choose which weapons trigger it (all, melee, ranged or explosives), how long it lasts and how much more a kill freezes. Advanced settings cover enemy toughness, damage scaling, cooldown and the longest freeze.
+ar يجمّد اللعبة جزءًا من الثانية عند إصابة عدو، فتبدو الضربات أثقل. في اللعب الفردي فقط. اختر الأسلحة التي تسببه (الكل، أو القتال القريب، أو البعيد، أو المتفجرات)، ومدته، وكم يزيد التجميد عند القتل. الإعدادات المتقدمة تشمل قوة الأعداء وتدرّج الضرر وفترة التهدئة وأطول تجميد.
+
+# map packs and the Quaddicted browser
+@ Get more maps (Quaddicted)...
+ar المزيد من الخرائط (Quaddicted)...
+
+@ Type to filter...
+ar اكتب للتصفية...
+
+@ Launch mod
+ar تشغيل التعديل
+
+@ Start first map
+ar بدء الخريطة الأولى
+
+@ (running)
+ar (قيد التشغيل)
+
+@ running
+ar قيد التشغيل
+
+@ Recent
+ar الأحدث
+
+@ Name
+ar الاسم
+
+@ Dir
+ar المجلد
+
+@ Default
+ar الافتراضي
+
+@ Title
+ar العنوان
+
+@ Sort: {}
+ar الترتيب: {}
+
+@ {} installed
+ar {} مثبّت
+
+@ {}/{} matching
+ar {}/{} مطابق
+
+@ {} maps, {} completed
+ar {} خرائط، {} مكتملة
+
+@ {}/{} matching, {} completed
+ar {}/{} مطابق، {} مكتملة
+
+@ no maps of its own
+ar بلا خرائط خاصة به
+
+@ dir: {}
+ar المجلد: {}
+
+@ base: {}
+ar الأساس: {}
+
+@ Browse the Quaddicted archive of
+ar تصفّح أرشيف Quaddicted لخرائط
+
+@ single-player maps and episodes,
+ar اللاعب الفردي وحلقاتها،
+
+@ then download and install them
+ar ثم نزّلها وثبّتها
+
+@ here. Each release gets its own
+ar هنا. يحصل كل إصدار على مدخل
+
+@ entry in this list.
+ar خاص به في هذه القائمة.
+
+@ Needs an internet connection.
+ar يتطلب اتصالًا بالإنترنت.
+
+@ Quaddicted Map Archive
+ar أرشيف خرائط Quaddicted
+
+@ Newest
+ar الأحدث
+
+@ Author
+ar المؤلف
+
+@ Size
+ar الحجم
+
+@ Loading the map list...
+ar جارٍ تحميل قائمة الخرائط...
+
+@ Couldn't load the map list: {}
+ar تعذّر تحميل قائمة الخرائط: {}
+
+@ {} single-player releases  -  F5 refreshes
+ar {} إصدار للاعب الفردي  -  F5 للتحديث
+
+@ {} matching
+ar {} مطابق
+
+@ by {}
+ar بواسطة {}
+
+@ requires: {}
+ar يتطلب: {}
+
+@ maps: {}
+ar الخرائط: {}
+
+@ Failed: {}
+ar فشل: {}
+
+@ Downloading... {}%
+ar جارٍ التنزيل... {}%
+
+@ Unpacking...
+ar جارٍ فك الضغط...
+
+@ Installed in {}/  -  Enter: play
+ar ثُبّت في {}/  -  Enter: لعب
+
+@ Enter: download and install
+ar Enter: تنزيل وتثبيت
+
+@ unpacking
+ar فك الضغط
+
+@ failed
+ar فشل
+
+@ installed
+ar مثبّت
+
+@ Downloads are not available in the browser build
+ar التنزيل غير متاح في إصدار المتصفح
+
+@ the map list could not be read
+ar تعذّرت قراءة قائمة الخرائط
+
+@ downloading needs the curl program
+ar التنزيل يتطلب برنامج curl
+
+@ download failed
+ar فشل التنزيل
+
+@ the download is not a valid zip
+ar الملف المنزّل ليس zip صالحًا
+
+@ nothing to install for this engine
+ar لا شيء للتثبيت لهذا المحرك
+
+@ needs {} installed first
+ar يتطلب تثبيت {} أولًا
+
+@ couldn't unpack {}
+ar تعذّر فك ضغط {}
+
+# help screen
+@ About
+ar حول
+
+@ < Back
+ar < رجوع
+
+# tr_ctx keys: English shows the short word, the key says which meaning
+@ Save (a manual save, as opposed to a quicksave or autosave)
+ar حفظ
+
+# ==== hud.txt ====
+
+# HUD, weapon and equipment wheels, sound captions and other in-game text.
+# Weapon, monster and item names follow the 2021 re-release's own translations.
+@ Axe
+ar الفأس
+
+@ Shotgun
+ar البندقية
+
+@ Double-Barrelled Shotgun
+ar البندقية مزدوجة الماسورة
+
+@ Nailgun
+ar مدفع المسامير
+
+@ Super Nailgun
+ar مدفع المسامير الخارق
+
+@ Grenade Launcher
+ar قاذف القنابل
+
+@ Rocket Launcher
+ar قاذف الصواريخ
+
+@ Thunderbolt
+ar الصاعقة
+
+@ Portal Gun
+ar مسدس البوابات
+
+@ Boomerang
+ar البوميرانغ
+
+@ Stickybomb Launcher
+ar قاذف القنابل اللاصقة
+
+@ Railgun
+ar الريلغن
+
+@ Hookshot
+ar الخطّاف
+
+@ Gel Sprayer
+ar رشاش الهلام
+
+@ Powerwasher
+ar غسالة الضغط
+
+@ Night Vision Goggles
+ar نظارة الرؤية الليلية
+
+@ Thermal Goggles
+ar النظارة الحرارية
+
+@ Normal vision
+ar رؤية عادية
+
+@ ON
+ar تشغيل
+
+@ OFF
+ar إيقاف
+
+@ {} (turn on)
+ar {} (تشغيل)
+
+@ {} (turn off)
+ar {} (إيقاف)
+
+@ Move mouse to select, release to toggle
+ar حرّك الفأرة للاختيار، وأفلت للتبديل
+
+@ Move mouse to select, release to equip
+ar حرّك الفأرة للاختيار، وأفلت للتجهيز
+
+@ Release to toggle
+ar أفلت للتبديل
+
+@ Release to equip
+ar أفلت للتجهيز
+
+@ shells
+ar خرطوش
+
+@ nails
+ar مسامير
+
+@ rockets
+ar صواريخ
+
+@ cells
+ar خلايا
+
+@ Kills: {}/{}
+ar القتلى: {}/{}
+
+@ Secrets: {}/{}
+ar الأسرار: {}/{}
+
+@ Time {}
+ar الوقت {}
+
+@ Press any button to continue...
+ar اضغط أي زر للمتابعة...
+
+@ Press any key to continue...
+ar اضغط أي مفتاح للمتابعة...
+
+@ BULLET TIME
+ar الزمن البطيء
+
+@ AUTO AIM
+ar تصويب تلقائي
+
+@ Crosshair
+ar علامة التصويب
+
+@ + Marker
+ar + علامة
+
+@ Hit markers off
+ar علامات الإصابة متوقفة
+
+@ On target
+ar على الهدف
+
+@ On kill
+ar عند القتل
+
+# sound captions
+@ [Secret found]
+ar [عُثر على سر]
+
+@ [Message]
+ar [رسالة]
+
+@ [Switch activated]
+ar [تفعيل مفتاح]
+
+@ [Key picked up]
+ar [التقاط مفتاح]
+
+@ [Rune picked up]
+ar [التقاط رونية]
+
+@ [Teleporter]
+ar [ناقل]
+
+@ [Teleport]
+ar [انتقال آني]
+
+@ [Splash]
+ar [رذاذ]
+
+@ [Leaving water]
+ar [خروج من الماء]
+
+@ [Door]
+ar [باب]
+
+@ [Platform moving]
+ar [منصة تتحرك]
+
+@ [Button]
+ar [زر]
+
+@ [Health picked up]
+ar [التقاط صحة]
+
+@ [Armor picked up]
+ar [التقاط درع]
+
+@ [Quad Damage wearing off]
+ar [الضرر الرباعي ينتهي]
+
+@ [Quad Damage]
+ar [الضرر الرباعي]
+
+@ [Pentagram wearing off]
+ar [النجمة الخماسية تنتهي]
+
+@ [Pentagram of Protection]
+ar [النجمة الخماسية للحماية]
+
+@ [Ring wearing off]
+ar [الخاتم ينتهي]
+
+@ [Ring of Shadows]
+ar [خاتم الظلال]
+
+@ [Biosuit wearing off]
+ar [البذلة الحيوية تنتهي]
+
+@ [Biosuit]
+ar [البذلة الحيوية]
+
+@ [Item picked up]
+ar [التقاط غرض]
+
+@ [Weapon picked up]
+ar [التقاط سلاح]
+
+@ [Ammo picked up]
+ar [التقاط ذخيرة]
+
+@ [Explosion]
+ar [انفجار]
+
+@ [Grenade launched]
+ar [إطلاق قنبلة]
+
+@ [Grenade bounce]
+ar [ارتداد قنبلة]
+
+@ [Rocket fired]
+ar [إطلاق صاروخ]
+
+@ [Nails fired]
+ar [إطلاق مسامير]
+
+@ [Lightning]
+ar [برق]
+
+@ [Thunder]
+ar [رعد]
+
+@ [Enforcer alerted]
+ar [المنفّذ متنبّه]
+
+@ [Grunt alerted]
+ar [الجندي متنبّه]
+
+@ [Rottweiler alerted]
+ar [الروتوايلر متنبّه]
+
+@ [Knight alerted]
+ar [الفارس متنبّه]
+
+@ [Death Knight alerted]
+ar [فارس الموت متنبّه]
+
+@ [Scrag alerted]
+ar [السكراغ متنبّه]
+
+@ [Ogre alerted]
+ar [الغول متنبّه]
+
+@ [Fiend alerted]
+ar [الشيطان متنبّه]
+
+@ [Shambler alerted]
+ar [الشامبلر متنبّه]
+
+@ [Zombie groaning]
+ar [زومبي يئن]
+
+@ [Vore alerted]
+ar [الفور متنبّه]
+
+@ [Vore attacking]
+ar [الفور يهاجم]
+
+@ [Spawn alerted]
+ar [السبون متنبّه]
+
+@ [Rotfish]
+ar [سمكة متعفنة]
+
+@ [Spawn]
+ar [سبون]
+
+@ [Chthon]
+ar [كثون]
+
+@ [Hard landing]
+ar [هبوط عنيف]
+
+@ [Drowning]
+ar [غرق]
+
+@ [Gasping for air]
+ar [لهاث طلبًا للهواء]
+
+@ [Burning]
+ar [احتراق]
+
+@ [Telefrag]
+ar [قتل بالانتقال]
+
+@ [Gibbed]
+ar [تمزّق إلى أشلاء]
+
+# ==== console.txt ====
+
+# Console messages, shown translated only with con_translate 1 (Translate Console).
+# Cvar and command names stay as they are.
+@ Autosaved.
+ar تم الحفظ التلقائي.
+
+@ Game saved.
+ar تم حفظ اللعبة.
+
+@ Can't save now.
+ar لا يمكن الحفظ الآن.
+
+@ This game only autosaves (No Manual Saves modifier).
+ar هذه اللعبة تحفظ تلقائيًا فقط (معدِّل بلا حفظ يدوي).
+
+@ Loading {}...
+ar جارٍ تحميل {}...
+
+@ load failed: {}
+ar فشل التحميل: {}
+
+@ ERROR: autosave failed: {}
+ar خطأ: فشل الحفظ التلقائي: {}
+
+@ ERROR: couldn't open {}
+ar خطأ: تعذّر فتح {}
+
+@ ERROR: couldn't open {}.
+ar خطأ: تعذّر فتح {}.
+
+@ ERROR: couldn't write {}: {}
+ar خطأ: تعذّرت كتابة {}: {}
+
+@ ERROR: couldn't create {}: {}
+ar خطأ: تعذّر إنشاء {}: {}
+
+@ couldn't write {}: {}
+ar تعذّرت كتابة {}: {}
+
+@ Wrote {}
+ar كُتب {}
+
+@ screenshot failed: {}
+ar فشلت لقطة الشاشة: {}
+
+@ screenshot: {}
+ar لقطة الشاشة: {}
+
+@ No readable save available. Select save or restart the level.
+ar لا يوجد حفظ قابل للقراءة. اختر حفظًا أو أعد المستوى.
+
+@ Unknown command "{}"
+ar أمر غير معروف "{}"
+
+@ couldn't exec {}
+ar تعذّر تنفيذ {}
+
+@ execing {}
+ar جارٍ تنفيذ {}
+
+@ execing config.cfg (inherited from {})
+ar جارٍ تنفيذ config.cfg (موروث من {})
+
+@ execing config.cfg (mod defaults)
+ar جارٍ تنفيذ config.cfg (افتراضيات التعديل)
+
+@ execing default.cfg (built-in)
+ar جارٍ تنفيذ default.cfg (مدمج)
+
+@ {} cvars
+ar {} متغيرات cvar
+
+@ {} commands
+ar {} أوامر
+
+@ Can't "cmd", not connected
+ar لا يمكن تنفيذ "cmd"، غير متصل
+
+@ Looking for Quake servers...
+ar جارٍ البحث عن خوادم Quake...
+
+@ Bad value, must be between 1 and 65534
+ar قيمة خاطئة، يجب أن تكون بين 1 و65534
+
+@ Couldn't handle music file {}
+ar تعذّر التعامل مع ملف الموسيقى {}
+
+@ Bug report written to {}
+ar كُتب تقرير الخطأ في {}
+
+@ bugreport: can't create {}: {}
+ar bugreport: تعذّر إنشاء {}: {}
+
+@ graphics preset: {}
+ar إعداد الرسوميات المسبق: {}
+
+@ Presets (r_shader_preset <name>):
+ar الإعدادات المسبقة (r_shader_preset <name>):
+
+@ Add your own .slangp presets under <game>/shaders/.
+ar أضف إعداداتك المسبقة .slangp في <game>/shaders/.
+
+@ no shader preset loaded (r_shader_preset)
+ar لم يُحمَّل أي إعداد مسبق للمرشّح (r_shader_preset)
+
+@ r_shader_preset: "{}" not found
+ar r_shader_preset: لم يُعثر على "{}"
+
+@ no parameter "{}" in this preset
+ar لا يوجد معامل "{}" في هذا الإعداد المسبق
+
+@ {} = {} (default {}, {}..{})
+ar {} = {} (الافتراضي {}، {}..{})
+
+@ Switching to {}...
+ar جارٍ التبديل إلى {}...
+
+@ game: no game dir "{}" in {}
+ar game: لا يوجد مجلد لعبة "{}" في {}
+
+@ game: can't find the engine executable
+ar game: تعذّر إيجاد ملف المحرك التنفيذي
+
+@ game: exec failed: {}
+ar game: فشل التنفيذ: {}
+
+@ game: launch failed: {}
+ar game: فشل التشغيل: {}
+
+@ loaded {} in {}s
+ar حُمّل {} في {} ث
+
+@ No demos listed with startdemos
+ar لا توجد عروض مدرجة في startdemos
+
+@ Playing demo from {}.
+ar تشغيل العرض من {}.
+
+@ {} frames {} seconds {} fps
+ar {} إطار {} ثانية {} fps
+
+@ Recording to {}.
+ar التسجيل إلى {}.
+
+@ Completed demo
+ar اكتمل العرض
+
+@ Can't record during demo playback
+ar لا يمكن التسجيل أثناء تشغيل عرض
+
+@ Relative pathnames are not allowed.
+ar المسارات النسبية غير مسموح بها.
+
+@ Can't record - try again when connected
+ar لا يمكن التسجيل - حاول مجددًا بعد الاتصال
+
+@ {} demo(s) in loop
+ar {} عرض في الحلقة
+
+@ Not recording a demo.
+ar لا يجري تسجيل عرض.
+
+@ {} joined on a gamepad
+ar انضم {} بيد تحكم
+
+@ goggles: needs a game started with Add-ons and Goggles enabled
+ar goggles: يتطلب لعبة بدأت مع تفعيل الإضافات والنظارة
+
+@ equip: needs a game started with Add-ons and Goggles enabled
+ar equip: يتطلب لعبة بدأت مع تفعيل الإضافات والنظارة
+
+@ UDP listening on port {}
+ar UDP يستمع على المنفذ {}
+
+@ UDP bind on port {} failed: {}
+ar فشل ربط UDP على المنفذ {}: {}
+
+@ Connection accepted by {}
+ar قبل {} الاتصال
+
+@ Connection failed: {}
+ar فشل الاتصال: {}
+
+@ Couldn't resolve {}
+ar تعذّر تحليل العنوان {}
+
+@ Connecting to {}...
+ar جارٍ الاتصال بـ {}...
+
+@ Connecting to QuakeWorld server {}...
+ar جارٍ الاتصال بخادم QuakeWorld {}...
+
+@ Disconnected: {}
+ar انقطع الاتصال: {}
+
+@ Server disconnected
+ar قطع الخادم الاتصال
+
+@ Client {} connected
+ar اتصل العميل {}
+
+@ Client {} timed out
+ar انتهت مهلة العميل {}
+
+@ Couldn't spawn server {}: {}
+ar تعذّر تشغيل الخادم {}: {}
+
+@ maxplayers can not be changed while a server is running.
+ar لا يمكن تغيير maxplayers أثناء تشغيل خادم.
+
+@ You can't kick yourself!
+ar لا يمكنك طرد نفسك!
+
+@ Only the server may changelevel
+ar الخادم وحده يمكنه تنفيذ changelevel
+
+@ {} renamed to {}
+ar غيّر {} اسمه إلى {}

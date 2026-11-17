@@ -25,7 +25,7 @@ from fontTools import subset
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 URL = "https://github.com/notofonts/noto-cjk/raw/main/Sans/SubsetOTF/{r}/NotoSans{r}-Regular.otf"
 # region -> catalog/manual codes whose text it draws first
-REGIONS = {"JP": ["ja"], "KR": ["ko"], "SC": ["zh-CN"], "TC": ["zh-TW"]}
+REGIONS = {"JP": ["ja"], "KR": ["ko"], "SC": ["zh-CN"], "TC": ["zh-TW", "yue"]}
 
 BASE = set(range(0x20, 0x7F)) | set(range(0x3000, 0x3040)) | set(range(0xFF00, 0xFFF0)) | {0x2026, 0x2014, 0x2013, 0x00B7, 0x2018, 0x2019, 0x201C, 0x201D, 0x2192, 0x2190}
 EXTRA = {

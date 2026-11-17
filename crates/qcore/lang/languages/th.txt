@@ -1,0 +1,3024 @@
+# th: the port's own text; English keys from crates/qcore/lang/*.txt.
+# Format in crates/qcore/src/lang/catalog.rs; check with tools/lang_check.py.
+
+# ==== menu.txt ====
+
+# Options pages: page names, row labels and choice values.
+@ 10% speed
+th ความเร็ว 10%
+
+@ 2 split-screen
+th แบ่ง​จอ 2 คน
+
+@ 3 split-screen
+th แบ่ง​จอ 3 คน
+
+@ 4 split-screen
+th แบ่ง​จอ 4 คน
+
+@ 5 split-screen
+th แบ่ง​จอ 5 คน
+
+@ 6 split-screen
+th แบ่ง​จอ 6 คน
+
+@ 2D aiming
+th เล็ง​แบบ 2D
+
+@ 2x monsters
+th มอนสเตอร์ 2 เท่า
+
+@ 3x monsters
+th มอนสเตอร์ 3 เท่า
+
+@ 4x monsters
+th มอนสเตอร์ 4 เท่า
+
+@ 3D resolution
+th ความ​ละเอียด 3D
+
+@ 3D view
+th ภาพ 3D
+
+@ 8-bit Color
+th สี 8 บิต
+
+@ Accessibility
+th การ​เข้าถึง
+
+@ Acquisition Cone
+th กรวย​จับ​เป้า
+
+@ Activation
+th การ​เปิด​ใช้
+
+@ Add a ringing room tail after the cue
+th เพิ่ม​เสียง​ก้อง​ห้อง​ต่อ​ท้าย​เสียง
+
+@ Add delayed repeats after the cue
+th เพิ่ม​เสียง​สะท้อน​ซ้ำ​หลัง​เสียง
+
+@ Add saturation and distortion
+th เพิ่ม​ความ​อิ่มตัว​และ​ความ​เพี้ยน
+
+@ Add-ons
+th ส่วน​เสริม
+
+@ Address
+th ที่อยู่
+
+@ Adds fine noise to hide color banding
+th เพิ่ม​นอยส์​ละเอียด​เพื่อ​ซ่อน​แถบ​สี
+
+@ Advanced Settings
+th ตั้งค่า​ขั้นสูง
+
+@ Aim Assist
+th ช่วย​เล็ง
+
+@ Aim Rotation
+th หมุน​เล็ง
+
+@ Aim Slowdown
+th ชะลอ​การ​เล็ง
+
+@ Aim Style
+th รูปแบบ​การ​เล็ง
+
+@ All
+th ทั้งหมด
+
+@ All enemies
+th ศัตรู​ทั้งหมด
+
+@ Alt Fire (Add-ons)
+th ยิง​รอง (ส่วน​เสริม)
+
+@ Always Run
+th วิ่ง​ตลอด
+
+@ Ambient Occlusion
+th Ambient Occlusion
+
+@ Ammo Counts
+th จำนวน​กระสุน
+
+@ Ammo Counts Position
+th ตำแหน่ง​จำนวน​กระสุน
+
+@ Ammo Pickups
+th กระสุน​ที่​เก็บ​ได้
+
+@ Anisotropic
+th Anisotropic
+
+@ Anti-aliasing
+th ลด​รอย​หยัก
+
+@ Apply To
+th ใช้​กับ
+
+@ Armor
+th เกราะ
+
+@ Armor Position
+th ตำแหน่ง​เกราะ
+
+@ Ask
+th ถาม
+
+@ Attack
+th โจมตี
+
+@ Audio
+th เสียง
+
+@ Auto-aim
+th เล็ง​อัตโนมัติ
+
+@ Auto-aim Settings
+th ตั้งค่า​เล็ง​อัตโนมัติ
+
+@ Autosave
+th บันทึก​อัตโนมัติ
+
+@ Autosave Settings
+th ตั้งค่า​บันทึก​อัตโนมัติ
+
+@ Autosave Timer
+th ตัว​จับ​เวลา​บันทึก​อัตโนมัติ
+
+@ Autosaves to Keep
+th จำนวน​บันทึก​อัตโนมัติ​ที่​เก็บ
+
+@ Bass
+th เสียง​ทุ้ม
+
+@ Blip
+th บี๊บ
+
+@ Blood Quality
+th คุณภาพ​เลือด
+
+@ Blood Splatter Settings
+th ตั้งค่า​เลือด​กระเซ็น
+
+@ Blue
+th น้ำเงิน
+
+@ Boomerang Settings
+th ตั้งค่า​บูมเมอแรง
+
+@ Boost or cut high frequencies in decibels
+th เพิ่ม​หรือ​ลด​ความถี่​สูง​เป็น​เดซิเบล
+
+@ Boost or cut low frequencies in decibels
+th เพิ่ม​หรือ​ลด​ความถี่​ต่ำ​เป็น​เดซิเบล
+
+@ Brightness
+th ความ​สว่าง
+
+@ Bullet Time (Add-ons)
+th Bullet Time (ส่วน​เสริม)
+
+@ Bullet Time Settings
+th ตั้งค่า Bullet Time
+
+@ Button Glyphs
+th สัญลักษณ์​ปุ่ม
+
+@ Button Size
+th ขนาด​ปุ่ม
+
+@ Camera
+th กล้อง
+
+@ Caustic Intensity
+th ความ​เข้ม​ลาย​แสง​น้ำ
+
+@ Caustics
+th ลาย​แสง​น้ำ
+
+@ Center
+th กลาง
+
+@ Center Message Position
+th ตำแหน่ง​ข้อความ​กลาง​จอ
+
+@ Center Message Time
+th เวลา​ข้อความ​กลาง​จอ
+
+@ Center View
+th มุมมอง​ตรง​กลาง
+
+@ Change Color on Kill
+th เปลี่ยน​สี​เมื่อ​ฆ่า
+
+@ Change Color on Target
+th เปลี่ยน​สี​เมื่อ​เล็ง​โดน​เป้า
+
+@ Chime
+th กริ๊ง
+
+@ Click
+th คลิก
+
+@ Clink
+th เคร้ง
+
+@ Coin
+th เหรียญ
+
+@ Color
+th สี
+
+@ Color Filter
+th ฟิลเตอร์​สี
+
+@ Color of the grenade arc
+th สี​ของ​วิถี​ระเบิด
+
+@ Colored Lighting
+th แสง​สี
+
+@ Connect
+th เชื่อมต่อ
+
+@ Contrast
+th คอนทราสต์
+
+@ Controls
+th การ​ควบคุม
+
+@ Cooldown (ms)
+th คูลดาวน์ (ms)
+
+@ Crosshair Outline
+th ขอบ​เป้า​เล็ง
+
+@ Crosshair Shape
+th รูปร่าง​เป้า​เล็ง
+
+@ Crosshair Size
+th ขนาด​เป้า​เล็ง
+
+@ Current Ammo
+th กระสุน​ปัจจุบัน
+
+@ Current Ammo Position
+th ตำแหน่ง​กระสุน​ปัจจุบัน
+
+@ Customize This Game
+th ปรับแต่ง​เกม​นี้
+
+@ Damage
+th ความ​เสียหาย
+
+@ Damage Taken
+th ความ​เสียหาย​ที่​ได้รับ
+
+@ Debris
+th เศษ​ซาก
+
+@ Debris Quality
+th คุณภาพ​เศษ​ซาก
+
+@ Debris Settings
+th ตั้งค่า​เศษ​ซาก
+
+@ Directional Damage
+th ทิศทาง​ความ​เสียหาย
+
+@ Dithering
+th Dithering
+
+@ Dodge / Dive (Add-ons)
+th หลบ / พุ่ง (ส่วน​เสริม)
+
+@ Dragging up looks down instead of up
+th ลาก​ขึ้น​จะ​มอง​ลง​แทน​มอง​ขึ้น
+
+@ Drive
+th ความ​อิ่มตัว
+
+@ Dynamic Lights
+th แสง​ไดนามิก
+
+@ Echo
+th เสียง​สะท้อน
+
+@ Enemy Health
+th พลัง​ชีวิต​ศัตรู
+
+@ Enemy Wounds
+th บาดแผล​ศัตรู
+
+@ Enhanced Blood Splatter
+th เลือด​กระเซ็น​ขั้นสูง
+
+@ Enhanced FX
+th FX ขั้นสูง
+
+@ Enhanced Models
+th โมเดล​ขั้นสูง
+
+@ Enhanced Particles
+th อนุภาค​ขั้นสูง
+
+@ Enhanced Water
+th น้ำ​ขั้นสูง
+
+@ Enhancements
+th การ​ปรับปรุง
+
+@ Equipment Wheel (Add-ons)
+th วงล้อ​อุปกรณ์ (ส่วน​เสริม)
+
+@ Exploding boxes throw metal shards
+th กล่อง​ระเบิด​ได้​จะ​ดีด​เศษ​โลหะ
+
+@ Explosion Damage
+th ความ​เสียหาย​จาก​ระเบิด
+
+@ Explosion Scorch Marks
+th รอย​ไหม้​จาก​ระเบิด
+
+@ Explosions scorch nearby solid surfaces
+th ระเบิด​ทิ้ง​รอย​ไหม้​บน​พื้นผิว​ใกล้​เคียง
+
+@ Explosives only
+th เฉพาะ​ระเบิด
+
+@ Extra Monsters
+th มอนสเตอร์​เพิ่ม
+
+@ Extra Per 10 Damage (ms)
+th เพิ่ม​ต่อ​ความ​เสียหาย 10 (ms)
+
+@ FX Settings
+th ตั้งค่า FX
+
+@ Field of View
+th มุม​มอง​ภาพ
+
+@ Firing never uses up ammo
+th การ​ยิง​ไม่​เสีย​กระสุน
+
+@ First person
+th บุคคล​ที่​หนึ่ง
+
+@ Flick Time
+th เวลา Flick
+
+@ Flight Speed
+th ความ​เร็ว​การ​บิน
+
+@ Fog
+th หมอก
+
+@ Frag Limit
+th จำกัด​การ​ฆ่า
+
+@ Freeze Duration (ms)
+th ระยะ​เวลา​หยุด​นิ่ง (ms)
+
+@ GLQuake
+th GLQuake
+
+@ Game Speed
+th ความ​เร็ว​เกม
+
+@ Game Type
+th ประเภท​เกม
+
+@ Gameplay
+th การ​เล่น
+
+@ Gameplay Modifiers
+th ตัว​ปรับ​การ​เล่น
+
+@ Gel Quality
+th คุณภาพ​เจล
+
+@ Gib Surface Painting
+th ชิ้น​เนื้อ​ทา​รอย​บน​พื้นผิว
+
+@ Gibs
+th ชิ้น​เนื้อ
+
+@ Gibs and heads tumble and bounce
+th ชิ้น​เนื้อ​และ​หัว​กลิ้ง​และ​เด้ง
+
+@ Goggle Glow Quality
+th คุณภาพ​แสง​แว่น
+
+@ Goggle Intensity
+th ความ​เข้ม​แว่น
+
+@ Goggle Noise
+th นอยส์​แว่น
+
+@ Goggles Settings
+th ตั้งค่า​แว่น
+
+@ Graphics
+th กราฟิก
+
+@ Green
+th เขียว
+
+@ Grenade Arc
+th วิถี​ระเบิด
+
+@ Grenade Arc Settings
+th ตั้งค่า​วิถี​ระเบิด
+
+@ Gun Kick
+th แรง​ดีด​ปืน
+
+@ Gyro
+th ไจโร
+
+@ Gyro & Flick Stick
+th ไจโร​และ Flick Stick
+
+@ Gyro Active
+th ไจโร​ทำงาน
+
+@ Gyro Aiming
+th เล็ง​ด้วย​ไจโร
+
+@ HUD
+th HUD
+
+@ HUD Style
+th รูปแบบ HUD
+
+@ Health
+th พลัง​ชีวิต
+
+@ Health Pickups
+th พลัง​ชีวิต​ที่​เก็บ​ได้
+
+@ Health Position
+th ตำแหน่ง​พลัง​ชีวิต
+
+@ Health Regeneration
+th ฟื้น​พลัง​ชีวิต
+
+@ Hit & Kill Sounds
+th เสียง​โดน​และ​ฆ่า
+
+@ Hit Doors & Lifts
+th ตี​ประตู​และ​ลิฟต์
+
+@ Hit Markers
+th ตัว​บอก​การ​โดน
+
+@ Hit Sound
+th เสียง​โดน
+
+@ Hitmarker Size
+th ขนาด​ตัว​บอก​การ​โดน
+
+@ Hitmarker Type
+th ชนิด​ตัว​บอก​การ​โดน
+
+@ Hitstop Advanced
+th Hitstop ขั้นสูง
+
+@ Hitstop Settings
+th ตั้งค่า Hitstop
+
+@ Hold
+th กด​ค้าง
+
+@ Hold lock-on
+th กด​ค้าง​เพื่อ​ล็อก​เป้า
+
+@ Hook Enemies
+th เกี่ยว​ศัตรู
+
+@ Hook Metal
+th เกี่ยว​โลหะ
+
+@ Hook Stone
+th เกี่ยว​หิน
+
+@ Hook Wood
+th เกี่ยว​ไม้
+
+@ Hooking an enemy pulls you to it
+th เกี่ยว​ศัตรู​จะ​ดึง​คุณ​ไป​หา
+
+@ Hookshot Range
+th ระยะ​ฮุคช็อต
+
+@ Hookshot Settings
+th ตั้งค่า​ฮุคช็อต
+
+@ Host Game
+th สร้าง​เกม
+
+@ How far the hook flies before it retracts
+th ระยะ​ที่​ตะขอ​บิน​ก่อน​ดึง​กลับ
+
+@ How visible the on-screen controls are
+th ความ​ชัด​ของ​ปุ่ม​บน​จอ
+
+@ Impact Lifetime
+th อายุ​รอย​กระทบ
+
+@ Infinite Ammo
+th กระสุน​ไม่​จำกัด
+
+@ Input
+th อินพุต
+
+@ Input Scale
+th สเกล​อินพุต
+
+@ Interpolate Animation
+th แอนิเมชัน​ลื่น​ไหล
+
+@ Interpolate Movement
+th การ​เคลื่อนที่​ลื่น​ไหล
+
+@ Invert Look
+th กลับ​ทิศ​การ​มอง
+
+@ Invert Mouse
+th กลับ​ทิศ​เมาส์
+
+@ Invert Stick
+th กลับ​ทิศ​สติ๊ก
+
+@ Jet Quality
+th คุณภาพ​ลำ​พ่น
+
+@ Join Game
+th เข้า​ร่วม​เกม
+
+@ Jump / Swim Up
+th กระโดด / ว่าย​ขึ้น
+
+@ Jump again in mid-air
+th กระโดด​อีก​ครั้ง​กลาง​อากาศ
+
+@ Jumps
+th จำนวน​กระโดด
+
+@ Keys & Powerups
+th กุญแจ​และ​พาวเวอร์อัป
+
+@ Keys & Powerups Position
+th ตำแหน่ง​กุญแจ​และ​พาวเวอร์อัป
+
+@ Kill Bonus (x)
+th โบนัส​การ​ฆ่า (x)
+
+@ Kill Sound
+th เสียง​ฆ่า
+
+@ Knock
+th เคาะ
+
+@ Left
+th ซ้าย
+
+@ Length of the motion blur streaks
+th ความ​ยาว​ของ​เส้น​ภาพ​เบลอ
+
+@ Lifetime (seconds)
+th อายุ (วินาที)
+
+@ Live Portal Views
+th มุมมอง​พอร์ทัล​สด
+
+@ Live View Distance
+th ระยะ​มุมมอง​สด
+
+@ Local Players
+th ผู้เล่น​ใน​เครื่อง
+
+@ Local red wounds follow enemy animation
+th แผล​สี​แดง​ขยับ​ตาม​แอนิเมชัน​ศัตรู
+
+@ Lock Indicator
+th ตัว​บอก​การ​ล็อก
+
+@ Long falls don't hurt
+th ตก​จาก​ที่​สูง​ไม่​เจ็บ
+
+@ Longest Freeze (ms)
+th หยุด​นิ่ง​นาน​สุด (ms)
+
+@ Look Down
+th มอง​ลง
+
+@ Look Speed
+th ความ​เร็ว​การ​มอง
+
+@ Look Up
+th มอง​ขึ้น
+
+@ Main Menu Music
+th เพลง​เมนู​หลัก
+
+@ Max FPS
+th FPS สูงสุด
+
+@ Max Players
+th ผู้เล่น​สูงสุด
+
+@ Maximum Impacts
+th รอย​กระทบ​สูงสุด
+
+@ Maximum Marks
+th รอย​สูงสุด
+
+@ Maximum Range
+th ระยะ​สูงสุด
+
+@ Melee only
+th ระยะ​ประชิด​เท่านั้น
+
+@ Message Background
+th พื้น​หลัง​ข้อความ
+
+@ Message Text Size
+th ขนาด​ข้อความ
+
+@ Messages & Captions
+th ข้อความ​และ​คำ​บรรยาย
+
+@ Meter Duration (real seconds)
+th ระยะ​เวลา​มาตร​วัด (วินาที​จริง)
+
+@ Minimum Damage
+th ความ​เสียหาย​ขั้น​ต่ำ
+
+@ Mode
+th โหมด
+
+@ Modern Console
+th คอนโซล​แบบ​ใหม่
+
+@ Modern HUD Layout
+th เค้าโครง HUD แบบ​ใหม่
+
+@ Most recent save
+th บันทึก​ล่าสุด
+
+@ Motion Blur
+th ภาพ​เบลอ​เคลื่อนไหว
+
+@ Motion Blur Amount
+th ปริมาณ​ภาพ​เบลอ
+
+@ Motion Blur Quality
+th คุณภาพ​ภาพ​เบลอ
+
+@ Mouse & Keyboard
+th เมาส์​และ​คีย์บอร์ด
+
+@ Mouse Speed
+th ความ​เร็ว​เมาส์
+
+@ Move Back
+th ถอย​หลัง
+
+@ Move Forward
+th เดิน​หน้า
+
+@ Music Volume
+th ระดับ​เสียง​เพลง
+
+@ Next Weapon
+th อาวุธ​ถัด​ไป
+
+@ No Drowning
+th ไม่​จม​น้ำ
+
+@ No Fall Damage
+th ไม่​เจ็บ​จาก​การ​ตก
+
+@ No Manual Saves
+th ห้าม​บันทึก​เอง
+
+@ No Self Damage
+th ไม่​ทำ​ร้าย​ตัว​เอง
+
+@ Noise Filter
+th ฟิลเตอร์​นอยส์
+
+@ Normal Color
+th สี​ปกติ
+
+@ Notify Message Position
+th ตำแหน่ง​ข้อความ​แจ้ง​เตือน
+
+@ Notify Message Time
+th เวลา​ข้อความ​แจ้ง​เตือน
+
+@ Number of splatter rays per blood impact
+th จำนวน​รังสี​กระเซ็น​ต่อ​การ​กระทบ​ของ​เลือด
+
+@ Off
+th ปิด
+
+@ On Death
+th เมื่อ​ตาย
+
+@ On Kill Color
+th สี​เมื่อ​ฆ่า
+
+@ On Target Color
+th สี​เมื่อ​เล็ง​โดน
+
+@ Opacity
+th ความ​ทึบ
+
+@ Opacity of the grenade arc
+th ความ​ทึบ​ของ​วิถี​ระเบิด
+
+@ Pants Color
+th สี​กางเกง
+
+@ Particle Quality
+th คุณภาพ​อนุภาค
+
+@ Particles
+th อนุภาค
+
+@ Physical Nail Impacts
+th รอย​ตะปู​ทาง​กายภาพ
+
+@ Pistol Start
+th เริ่ม​ด้วย​ปืน​พก
+
+@ Pitch
+th ระดับ​เสียง​สูง​ต่ำ
+
+@ Pitch Sensitivity
+th ความ​ไว​แนว​ตั้ง
+
+@ Playback Speed
+th ความ​เร็ว​การ​เล่น
+
+@ Player Setup
+th ตั้งค่า​ผู้เล่น
+
+@ Pop
+th ป๊อป
+
+@ Portal Gun Settings
+th ตั้งค่า​ปืน​พอร์ทัล
+
+@ Portal Recursion
+th พอร์ทัล​ซ้อน​กัน
+
+@ Portal View Quality
+th คุณภาพ​มุมมอง​พอร์ทัล
+
+@ Preview Sound
+th ฟัง​ตัวอย่าง​เสียง
+
+@ Previous Weapon
+th อาวุธ​ก่อน​หน้า
+
+@ Projectile Shotguns Settings
+th ตั้งค่า​ลูก​ซอง​แบบ​กระสุน​วิ่ง
+
+@ Projectile Speed (units/s)
+th ความ​เร็ว​กระสุน (หน่วย/วิ)
+
+@ Purple
+th ม่วง
+
+@ Push
+th แรง​ผลัก
+
+@ Push Strength
+th ความ​แรง​ผลัก
+
+@ Quick Load
+th โหลด​ด่วน
+
+@ Quick Save
+th บันทึก​ด่วน
+
+@ Railgun Settings
+th ตั้งค่า​เรลกัน
+
+@ Ranged only
+th ระยะ​ไกล​เท่านั้น
+
+@ Reacquire While Held
+th หา​เป้า​ใหม่​ขณะ​กด​ค้าง
+
+@ Red
+th แดง
+
+@ Reduce Motion
+th ลด​การ​เคลื่อนไหว
+
+@ Regen (seconds per second)
+th ฟื้นฟู (วินาที​ต่อ​วินาที)
+
+@ Render Scale
+th สเกล​การ​เรนเดอร์
+
+@ Reverb
+th เสียง​ก้อง
+
+@ Right
+th ขวา
+
+@ Ripple Intensity
+th ความ​แรง​ระลอก​คลื่น
+
+@ Ripples
+th ระลอก​คลื่น
+
+@ Roll Sensitivity
+th ความ​ไว​การ​เอียง
+
+@ Rumble
+th การ​สั่น
+
+@ Run
+th วิ่ง
+
+@ Save on All Enemies Killed
+th บันทึก​เมื่อ​ฆ่า​ศัตรู​หมด
+
+@ Save on All Secrets Found
+th บันทึก​เมื่อ​พบ​ความลับ​ครบ
+
+@ Save on Level Entry
+th บันทึก​เมื่อ​เข้า​ด่าน
+
+@ Save on Secret Found
+th บันทึก​เมื่อ​พบ​ความลับ
+
+@ Scoreboard
+th ตาราง​คะแนน
+
+@ Screen Flashes
+th แสง​วาบ​บน​จอ
+
+@ Screen Shader
+th เชดเดอร์​หน้า​จอ
+
+@ Screen Shake
+th จอ​สั่น
+
+@ Search LAN
+th ค้นหา LAN
+
+@ Seconds a center-screen message stays up
+th จำนวน​วินาที​ที่​ข้อความ​กลาง​จอ​แสดง​อยู่
+
+@ See Through Portals
+th มอง​ทะลุ​พอร์ทัล
+
+@ See-through Teleporters
+th ประตู​วาร์ป​มอง​ทะลุ​ได้
+
+@ Shirt Color
+th สี​เสื้อ
+
+@ Shotgun Bullet Decals
+th รอย​กระสุน​ลูก​ซอง
+
+@ Shoulder left
+th ไหล่​ซ้าย
+
+@ Shoulder right
+th ไหล่​ขวา
+
+@ Show FPS
+th แสดง FPS
+
+@ Show Face
+th แสดง​ใบหน้า
+
+@ Shrapnel
+th สะเก็ด​ระเบิด
+
+@ Size of on-screen messages and captions
+th ขนาด​ข้อความ​และ​คำ​บรรยาย​บน​จอ
+
+@ Skill
+th ระดับ​ความ​ยาก
+
+@ Sky Fog
+th หมอก​ท้องฟ้า
+
+@ Smooths the stepped movement of monsters
+th ทำให้​การ​เคลื่อนที่​เป็น​จังหวะ​ของ​มอนสเตอร์​ลื่น​ขึ้น
+
+@ Sound
+th เสียง
+
+@ Sound Captions
+th คำ​บรรยาย​เสียง
+
+@ Sound Volume
+th ระดับ​เสียง​เอฟเฟกต์
+
+@ Speed Blur
+th เบลอ​ความ​เร็ว
+
+@ Splashes
+th น้ำ​กระเซ็น
+
+@ Splatter Amount
+th ปริมาณ​การ​กระเซ็น
+
+@ Splatter Size
+th ขนาด​การ​กระเซ็น
+
+@ Start Game
+th เริ่ม​เกม
+
+@ Staying underwater doesn't hurt
+th อยู่​ใต้​น้ำ​นาน​ไม่​เจ็บ
+
+@ Stick Look Pitch
+th ความ​ไว​สติ๊ก​แนว​ตั้ง
+
+@ Stick Look Yaw
+th ความ​ไว​สติ๊ก​แนว​นอน
+
+@ Strafe Left
+th เดิน​ข้าง​ซ้าย
+
+@ Strafe Right
+th เดิน​ข้าง​ขวา
+
+@ Strength of the surface swell and rings
+th ความ​แรง​ของ​คลื่น​และ​วง​บน​ผิว​น้ำ
+
+@ Stun Duration
+th ระยะ​เวลา​มึน​งง
+
+@ Style
+th รูปแบบ
+
+@ Supersampling
+th Supersampling
+
+@ Surface Hit Effects
+th เอฟเฟกต์​กระทบ​พื้นผิว
+
+@ Swim Down
+th ว่าย​ลง
+
+@ Targets
+th เป้า​หมาย
+
+@ Teamplay
+th เล่น​เป็น​ทีม
+
+@ Texture Filter
+th ฟิลเตอร์​เท็กซ์เจอร์
+
+@ Third person
+th บุคคล​ที่​สาม
+
+@ Thud
+th ตุบ
+
+@ Tick
+th ติ๊ก
+
+@ Time Limit
+th จำกัด​เวลา
+
+@ Time Stretch
+th ยืด​เวลา
+
+@ Toggle Attack
+th สลับ​โจมตี
+
+@ Toggle Run
+th สลับ​วิ่ง
+
+@ Toggle auto-aim
+th สลับ​เล็ง​อัตโนมัติ
+
+@ Touch Controls
+th ปุ่ม​สัมผัส
+
+@ Touchscreen
+th หน้า​จอ​สัมผัส
+
+@ Tough Enemy Health
+th พลัง​ชีวิต​ศัตรู​แกร่ง
+
+@ Tough enemies only
+th เฉพาะ​ศัตรู​แกร่ง
+
+@ Trail Colour
+th สี​เส้น​ทาง
+
+@ Translate Console
+th แปล​คอนโซล
+
+@ Translucent Water
+th น้ำ​โปร่ง​แสง
+
+@ Treble
+th เสียง​แหลม
+
+@ Turn Left
+th หัน​ซ้าย
+
+@ Turn Right
+th หัน​ขวา
+
+@ Underwater FX
+th เอฟเฟกต์​ใต้​น้ำ
+
+@ Use Bullet Time Meter
+th ใช้​มาตร Bullet Time
+
+@ VSync
+th VSync
+
+@ View Bob
+th การ​โยก​ของ​มุม​มอง
+
+@ Viewmodels
+th โมเดล​อาวุธ​ใน​มือ
+
+@ Volume
+th ระดับ​เสียง
+
+@ Water Opacity
+th ความ​ทึบ​ของ​น้ำ
+
+@ Water Quality
+th คุณภาพ​น้ำ
+
+@ Water Settings
+th ตั้งค่า​น้ำ
+
+@ Weapon Wheel
+th วงล้อ​อาวุธ
+
+@ Weapon Wheel Slowdown
+th ชะลอ​เวลา​วงล้อ​อาวุธ
+
+@ Weapons
+th อาวุธ
+
+@ Weapons Position
+th ตำแหน่ง​อาวุธ
+
+@ Where center-screen messages appear
+th ตำแหน่ง​ที่​ข้อความ​กลาง​จอ​ปรากฏ
+
+@ Where pickup and event messages appear
+th ตำแหน่ง​ที่​ข้อความ​เก็บ​ของ​และ​เหตุการณ์​ปรากฏ
+
+@ White
+th ขาว
+
+@ Yaw Sensitivity
+th ความ​ไว​แนว​นอน
+
+@ Yellow
+th เหลือง
+
+# lowercase choice values
+@ T
+th T
+
+@ always
+th ตลอด​เวลา
+
+@ auto
+th อัตโนมัติ
+
+@ banded
+th เป็น​แถบ
+
+@ borderless
+th ไร้​ขอบ
+
+@ bottom center
+th ล่าง​กลาง
+
+@ bottom left
+th ล่าง​ซ้าย
+
+@ bottom right
+th ล่าง​ขวา
+
+@ box
+th กล่อง
+
+@ broken square
+th สี่เหลี่ยม​เว้า​มุม
+
+@ classic
+th คลาสสิก
+
+@ coarse
+th หยาบ
+
+@ cooperative
+th ร่วม​มือ
+
+@ cross
+th กากบาท
+
+@ cross + dot
+th กากบาท + จุด
+
+@ cyan
+th ฟ้า​อม​เขียว
+
+@ dashed
+th เส้น​ประ
+
+@ deathmatch
+th เดธแมตช์
+
+@ deuteranopia
+th ตา​บอด​สี​เขียว
+
+@ diagonal streaks
+th เส้น​ทแยง
+
+@ diamond
+th เพชร
+
+@ dot
+th จุด
+
+@ double
+th สอง​ชั้น
+
+@ double chevrons
+th ลูกศร​คู่
+
+@ double diagonals
+th ทแยง​คู่
+
+@ easy
+th ง่าย
+
+@ fine
+th ละเอียด
+
+@ fit output
+th พอดี​ภาพ​ออก
+
+@ flick stick
+th Flick Stick
+
+@ fullscreen
+th เต็ม​จอ
+
+@ gap cross
+th กากบาท​เว้น​กลาง
+
+@ green
+th เขียว
+
+@ grey
+th เทา
+
+@ half speed
+th ครึ่ง​ความ​เร็ว
+
+@ hard
+th ยาก
+
+@ high
+th สูง
+
+@ huge
+th ใหญ่​มาก
+
+@ immersive
+th สมจริง
+
+@ intense
+th เข้มข้น
+
+@ large
+th ใหญ่
+
+@ larger
+th ใหญ่​ขึ้น
+
+@ largest
+th ใหญ่​ที่สุด
+
+@ linear
+th เชิง​เส้น
+
+@ low
+th ต่ำ
+
+@ lower
+th ต่ำ​ลง
+
+@ magenta
+th ม่วง​แดง
+
+@ medium
+th ปาน​กลาง
+
+@ middle
+th ตรง​กลาง
+
+@ middle left
+th กลาง​ซ้าย
+
+@ middle right
+th กลาง​ขวา
+
+@ modern
+th ทันสมัย
+
+@ nearest
+th ใกล้​ที่สุด
+
+@ nightmare
+th ฝัน​ร้าย
+
+@ nintendo
+th nintendo
+
+@ no team damage
+th ไม่​ทำ​ร้าย​ทีม
+
+@ none
+th ไม่มี
+
+@ normal
+th ปกติ
+
+@ off
+th ปิด
+
+@ off while held
+th ปิด​ขณะ​กด​ค้าง
+
+@ on
+th เปิด
+
+@ only while held
+th เฉพาะ​ขณะ​กด​ค้าง
+
+@ playstation
+th playstation
+
+@ protanopia
+th ตา​บอด​สี​แดง
+
+@ quarter speed
+th ความ​เร็ว 1/4
+
+@ red
+th แดง
+
+@ short diagonals
+th ทแยง​สั้น
+
+@ single
+th เดี่ยว
+
+@ small
+th เล็ก
+
+@ solid
+th ทึบ
+
+@ spectacle
+th อลังการ
+
+@ subtle
+th นุ่มนวล
+
+@ team damage
+th ทำ​ร้าย​ทีม​ได้
+
+@ top center
+th บน​กลาง
+
+@ top left
+th บน​ซ้าย
+
+@ top right
+th บน​ขวา
+
+@ triple
+th สาม​ชั้น
+
+@ tritanopia
+th ตา​บอด​สี​น้ำเงิน
+
+@ upper
+th บน
+
+@ white
+th ขาว
+
+@ whole screen
+th ทั้ง​หน้า​จอ
+
+@ windowed
+th หน้า​ต่าง
+
+@ xbox
+th xbox
+
+@ yellow
+th เหลือง
+
+# ==== tooltips.txt ====
+
+# Options help lines (tooltips) and reasons for disabled rows.
+@ 2D aiming turns the view continuously with the right stick; flick stick snaps the view to where you push the stick, then turning the stick rotates it
+th เล็ง​แบบ 2D หมุน​มุม​มอง​ต่อ​เนื่อง​ด้วย​สติ๊ก​ขวา; Flick Stick หัน​มุม​มอง​ไป​ทาง​ที่​ดัน​สติ๊ก​ทันที แล้ว​หมุน​สติ๊ก​เพื่อ​หัน​ต่อ
+
+@ 3D resolution relative to the window; the UI stays sharp
+th ความ​ละเอียด 3D เทียบ​กับ​หน้า​ต่าง; UI ยัง​คม​ชัด
+
+@ 3D view keeps the HUD and menus sharp; whole screen runs them through the shader too
+th ภาพ 3D ทำให้ HUD และ​เมนู​คม​ชัด; ทั้ง​หน้า​จอ​จะ​ใช้​เชดเดอร์​กับ​ส่วน​นั้น​ด้วย
+
+@ A Quake III style railgun: a slug that pierces every enemy on its line, using 2 cells a shot and refiring every 1.5 s; select it through its assigned weapon slot (Add-ons)
+th เรลกัน​แบบ Quake III: กระสุน​ที่​ทะลุ​ศัตรู​ทุก​ตัว​ใน​แนว​ยิง ใช้ 2 เซลล์​ต่อ​นัด และ​ยิง​ซ้ำ​ได้​ทุก 1.5 วินาที; เลือก​ผ่าน​ช่อง​อาวุธ​ที่​กำหนด (ส่วน​เสริม)
+
+@ A Zelda-style hookshot: fire sends a chain hook out; it latches onto hookable surfaces or enemies and reels you in; fire again to let go
+th ฮุคช็อต​แบบ Zelda: ยิง​เพื่อ​ส่ง​ตะขอ​โซ่​ออก​ไป; มัน​จะ​เกาะ​พื้นผิว​หรือ​ศัตรู​ที่​เกี่ยว​ได้​แล้ว​ดึง​คุณ​เข้า​ไป; ยิง​อีก​ครั้ง​เพื่อ​ปล่อย
+
+@ Also translates the engine's console messages; off keeps them in English
+th แปล​ข้อความ​คอนโซล​ของ​เอนจิน​ด้วย; ปิด​ไว้​จะ​เป็น​ภาษา​อังกฤษ
+
+@ Automatically acquire another enemy while holding Lock-on after losing a target
+th หา​ศัตรู​ตัว​อื่น​อัตโนมัติ​ขณะ​กด​ล็อก​เป้า​ค้าง​ไว้​หลัง​เป้า​หาย​ไป
+
+@ Blends between animation frames of monsters and weapons
+th ผสาน​เฟรม​แอนิเมชัน​ของ​มอนสเตอร์​และ​อาวุธ
+
+@ Blood stains surfaces and bodies; cosmetic, independent of particle packs
+th เลือด​เปื้อน​พื้นผิว​และ​ร่าง​กาย; เพื่อ​ความ​สวยงาม ไม่​ขึ้น​กับ​แพ็ก​อนุภาค
+
+@ Bloom glow around bright lights and heat sources; medium uses 4 taps, high uses 8, low disables halo taps
+th แสง Bloom รอบ​แสง​จ้า​และ​แหล่ง​ความ​ร้อน; ปาน​กลาง​ใช้ 4 จุด สูง​ใช้ 8 ต่ำ​ปิด​รัศมี
+
+@ Blurs fast-moving monsters, projectiles and doors (not camera turns)
+th เบลอ​มอนสเตอร์ กระสุน​และ​ประตู​ที่​เคลื่อน​ที่​เร็ว (ไม่​รวม​การ​หัน​กล้อง)
+
+@ Blurs the screen edges during fast falls and launches; keeps the centre clear. Reduce Motion disables it
+th เบลอ​ขอบ​จอ​ขณะ​ตก​หรือ​พุ่ง​เร็ว; ตรง​กลาง​ยัง​ชัด ลด​การ​เคลื่อนไหว​จะ​ปิด​ส่วน​นี้
+
+@ Brightness of the underwater light patterns
+th ความ​สว่าง​ของ​ลาย​แสง​ใต้​น้ำ
+
+@ Caps mark count, lifetime, airborne droplets and wound/gib painting; low skips enemy wounds and gib trails
+th จำกัด​จำนวน​รอย อายุ หยด​ใน​อากาศ​และ​การ​ทา​แผล/ชิ้น​เนื้อ; ต่ำ​จะ​ข้าม​แผล​ศัตรู​และ​รอย​ชิ้น​เนื้อ
+
+@ Caps shader input at output size so 200% render scale keeps 3D sharpness without 4x shader cost; low scales stay low-res
+th จำกัด​อินพุต​เชดเดอร์​ที่​ขนาด​ภาพ​ออก ให้​สเกล 200% คม​ชัด​โดย​ไม่​ต้อง​เสีย​แรง​เชดเดอร์ 4 เท่า; สเกล​ต่ำ​ยัง​คง​ความ​ละเอียด​ต่ำ
+
+@ Classic: the original status bar; modern: compact elements at the screen edges
+th คลาสสิก: แถบ​สถานะ​ดั้งเดิม; ทันสมัย: องค์ประกอบ​กะทัดรัด​ที่​ขอบ​จอ
+
+@ Coat atlas resolution, rebuild rate and shader detail: low builds smaller coats less often with fast shading; high uses full detail
+th ความ​ละเอียด​แผนที่​การ​เคลือบ อัตรา​สร้าง​ใหม่​และ​รายละเอียด​เชดเดอร์: ต่ำ​สร้าง​น้อย​และ​เล็ก​กว่า​ด้วย​การ​แรเงา​เร็ว; สูง​ใช้​รายละเอียด​เต็ม
+
+@ Colour of the railgun's spiral trail; split-screen players each get the next colour along
+th สี​ของ​เส้น​เกลียว​เรลกัน; ผู้เล่น​แบ่ง​จอ​แต่ละ​คน​ได้​สี​ถัด​ไป
+
+@ Damage the railgun deals to each enemy it passes through (Quake III: 100)
+th ความ​เสียหาย​ที่​เรลกัน​ทำ​ต่อ​ศัตรู​แต่ละ​ตัว​ที่​ทะลุ (Quake III: 100)
+
+@ Dark backdrop behind on-screen messages for readability
+th พื้น​หลัง​มืด​หลัง​ข้อความ​บน​จอ​เพื่อ​อ่าน​ง่าย
+
+@ Dark border keeps the crosshair visible on any background
+th ขอบ​สี​เข้ม​ทำให้​เห็น​เป้า​เล็ง​บน​พื้น​หลัง​ทุก​แบบ
+
+@ Darkens corners and contact areas where geometry meets; higher quality is sharper
+th ทำ​มุม​และ​จุด​สัมผัส​ของ​รูป​ทรง​ให้​มืด​ลง; คุณภาพ​สูง​คม​กว่า
+
+@ Debris lands on and is carried or shoved by doors, lifts and platforms
+th เศษ​ซาก​ตก​ลง​และ​ถูก​พา​ไป​หรือ​ผลัก​โดย​ประตู ลิฟต์​และ​แท่น
+
+@ Detail for caustics, ripples and splashes: low uses smaller budgets and shorter view distance; high uses larger budgets and farther view distance
+th รายละเอียด​ลาย​แสง​น้ำ ระลอก​คลื่น​และ​น้ำ​กระเซ็น: ต่ำ​ใช้​งบ​น้อย​และ​ระยะ​มอง​สั้น; สูง​ใช้​งบ​มาก​และ​ระยะ​มอง​ไกล
+
+@ Disabled while Enhanced Particles is on: its particles replace the GLQuake and Classic styles
+th ปิด​ใช้​ขณะ​เปิด​อนุภาค​ขั้นสูง: อนุภาค​ของ​มัน​แทน​ที่​รูปแบบ GLQuake และ​คลาสสิก
+
+@ Disabled while Enhanced Water is on: its own underwater effects replace the classic and GLQuake view warps
+th ปิด​ใช้​ขณะ​เปิด​น้ำ​ขั้นสูง: เอฟเฟกต์​ใต้​น้ำ​ของ​มัน​แทน​ที่​ภาพ​บิด​เบี้ยว​แบบ​คลาสสิก​และ GLQuake
+
+@ Draw the predicted grenade path as a solid or dashed line
+th วาด​วิถี​ระเบิด​ที่​คาด​การณ์​เป็น​เส้น​ทึบ​หรือ​เส้น​ประ
+
+@ Draw the view out of the linked portal inside each portal; off shows flat discs (fastest)
+th แสดง​ภาพ​จาก​พอร์ทัล​ที่​เชื่อม​กัน​ภายใน​แต่ละ​พอร์ทัล; ปิด​จะ​แสดง​เป็น​แผ่น​กลม​เรียบ (เร็ว​ที่สุด)
+
+@ Droplets spray up when things enter or leave water, slime or lava
+th หยด​น้ำ​กระเซ็น​ขึ้น​เมื่อ​มี​สิ่ง​ใด​เข้า​หรือ​ออก​จาก​น้ำ เมือก​หรือ​ลาวา
+
+@ Emulates the original 8-bit palette of software rendering
+th จำลอง​จาน​สี 8 บิต​ดั้งเดิม​ของ​การ​เรนเดอร์​แบบ​ซอฟต์แวร์
+
+@ Every level starts with only the shotgun and axe, as if started fresh
+th ทุก​ด่าน​เริ่ม​ด้วย​ลูก​ซอง​และ​ขวาน​เท่านั้น เหมือน​เริ่ม​ใหม่
+
+@ Explosion damage for each remotely detonated sticky bomb
+th ความ​เสียหาย​จาก​ระเบิด​ของ​ระเบิด​เหนียว​แต่ละ​ลูก​ที่​จุด​ระเบิด​จาก​ระยะ​ไกล
+
+@ Extra freeze milliseconds for every 10 damage dealt, so heavy hits stop longer
+th มิลลิวินาที​หยุด​นิ่ง​เพิ่ม​ต่อ​ทุก 10 ความ​เสียหาย การ​โจมตี​หนัก​จึง​หยุด​นาน​กว่า
+
+@ First person, a third-person camera centered behind the player, or one over the right or left shoulder; third person hides viewmodels
+th บุคคล​ที่​หนึ่ง กล้อง​บุคคล​ที่​สาม​อยู่​ตรง​กลาง​ด้าน​หลัง​ผู้เล่น หรือ​เหนือ​ไหล่​ขวา​หรือ​ซ้าย; บุคคล​ที่​สาม​จะ​ซ่อน​โมเดล​อาวุธ​ใน​มือ
+
+@ Flash the selected marker on confirmed hits; colors are shared with the crosshair
+th กะพริบ​ตัว​บอก​ที่​เลือก​เมื่อ​ยืนยัน​ว่า​โดน; ใช้​สี​ร่วม​กับ​เป้า​เล็ง
+
+@ Freeze for every enemy, or only for enemies that were tough before the hit
+th หยุด​นิ่ง​กับ​ศัตรู​ทุก​ตัว หรือ​เฉพาะ​ศัตรู​ที่​แกร่ง​ก่อน​ถูก​โจมตี
+
+@ Freeze the game briefly when you damage an enemy; single player with add-ons only
+th หยุด​เกม​ชั่ว​ขณะ​เมื่อ​คุณ​ทำ​ความ​เสียหาย​ศัตรู; เล่น​คน​เดียว​พร้อม​ส่วน​เสริม​เท่านั้น
+
+@ Gibs tumble and barrels throw shrapnel; shots and blasts push them (cosmetic only)
+th ชิ้น​เนื้อ​กลิ้ง​และ​ถัง​ดีด​สะเก็ด; การ​ยิง​และ​แรง​ระเบิด​ผลัก​มัน (เพื่อ​ความ​สวยงาม​เท่านั้น)
+
+@ Health an enemy must have had before the hit to count as tough
+th พลัง​ชีวิต​ที่​ศัตรู​ต้อง​มี​ก่อน​ถูก​โจมตี​จึง​นับ​ว่า​แกร่ง
+
+@ Hits dealing less damage than this do not freeze the game; the default 10 skips nails and shotgun pellets
+th การ​โจมตี​ที่​เสียหาย​น้อย​กว่า​ค่า​นี้​ไม่​ทำให้​เกม​หยุด; ค่า​เริ่มต้น 10 ข้าม​ตะปู​และ​ลูก​ปราย​ลูก​ซอง
+
+@ Hold fire and sweep the crosshair over monsters to queue them, release to throw: it stuns each in turn and flies back; alt-fire clears the queue
+th กด​ยิง​ค้าง​แล้ว​กวาด​เป้า​เล็ง​ผ่าน​มอนสเตอร์​เพื่อ​เข้า​คิว ปล่อย​เพื่อ​ขว้าง: มัน​ทำให้​แต่ละ​ตัว​มึน​ตาม​ลำดับ​แล้ว​บิน​กลับ; ยิง​รอง​ล้าง​คิว
+
+@ Hold: keep Lock-on held. Toggle: press Auto-aim Toggle to enable automatic acquisition. Click look stick to switch targets
+th กด​ค้าง: กด​ล็อก​เป้า​ค้าง​ไว้ สลับ: กด​สลับ​เล็ง​อัตโนมัติ​เพื่อ​เปิด​การ​จับ​เป้า​อัตโนมัติ คลิก​สติ๊ก​มอง​เพื่อ​สลับ​เป้า
+
+@ How close an enemy must be to the crosshair for automatic acquisition in toggle mode (degrees)
+th ศัตรู​ต้อง​อยู่​ใกล้​เป้า​เล็ง​แค่​ไหน​จึง​จะ​จับ​เป้า​อัตโนมัติ​ใน​โหมด​สลับ (องศา)
+
+@ How far the view tilts up and down when you tilt the controller (pitch axis)
+th มุม​มอง​เงย​และ​ก้ม​มาก​แค่​ไหน​เมื่อ​เอียง​จอย (แกน pitch)
+
+@ How far the view turns left and right when you turn the controller (yaw axis)
+th มุม​มอง​หัน​ซ้าย​ขวา​มาก​แค่​ไหน​เมื่อ​หมุน​จอย (แกน yaw)
+
+@ How far the view turns when you drag on the right half of the screen
+th มุม​มอง​หัน​มาก​แค่​ไหน​เมื่อ​ลาก​บน​ครึ่ง​ขวา​ของ​จอ
+
+@ How fast the boomerang flies (units per second)
+th ความ​เร็ว​ที่​บูมเมอแรง​บิน (หน่วย​ต่อ​วินาที)
+
+@ How hard shots and explosions push debris around
+th แรง​ที่​การ​ยิง​และ​ระเบิด​ผลัก​เศษ​ซาก
+
+@ How hard the Powerwasher's water pushes enemies
+th แรง​ที่​น้ำ​จาก Powerwasher ผลัก​ศัตรู
+
+@ How long a hit freezes the game, in milliseconds
+th ระยะ​เวลา​ที่​การ​โจมตี​ทำให้​เกม​หยุด เป็น​มิลลิวินาที
+
+@ How strongly fog covers the sky when fog is on
+th หมอก​ปก​คลุม​ท้องฟ้า​มาก​แค่​ไหน​เมื่อ​เปิด​หมอก
+
+@ How the view distorts underwater: Classic ripples the whole screen like software Quake, GLQuake slowly stretches and squashes the view
+th ภาพ​บิด​เบี้ยว​ใต้​น้ำ​อย่างไร: คลาสสิก​ทำ​ระลอก​ทั้ง​จอ​แบบ Quake ซอฟต์แวร์ GLQuake ยืด​และ​บีบ​ภาพ​ช้า​ๆ
+
+@ Ignores gyro rotation slower than this many degrees per second, to hide hand tremor
+th ไม่​สนใจ​การ​หมุน​ไจโร​ที่​ช้า​กว่า​องศา​ต่อ​วินาที​นี้ เพื่อ​ซ่อน​อาการ​มือ​สั่น
+
+@ Immersive: appears for a few seconds only when its value changes
+th สมจริง: ปรากฏ​ไม่​กี่​วินาที​เฉพาะ​เมื่อ​ค่า​เปลี่ยน
+
+@ Keeps textures sharp on floors and walls seen at steep angles
+th ทำให้​เท็กซ์เจอร์​บน​พื้น​และ​ผนัง​ที่​มอง​จาก​มุม​ชัน​คม​ชัด
+
+@ Lights from rockets, muzzle flashes and explosions brighten nearby walls
+th แสง​จาก​จรวด แสง​ปาก​กระบอก​ปืน​และ​ระเบิด​ทำให้​ผนัง​ใกล้​เคียง​สว่าง
+
+@ Liquid surfaces swell and ring out where things move through them
+th ผิว​ของ​เหลว​กระเพื่อม​และ​เป็น​วง​ตรง​ที่​มี​สิ่ง​เคลื่อน​ผ่าน
+
+@ Lobs sticky bombs (rockets ammo) that cling to walls, doors and monsters; alt-fire detonates them all
+th ยิง​ระเบิด​เหนียว (ใช้​กระสุน​จรวด) ที่​เกาะ​ผนัง ประตู​และ​มอนสเตอร์; ยิง​รอง​จุด​ระเบิด​ทั้งหมด
+
+@ Look of the classic particles: GLQuake draws soft round dots, Classic draws square pixels like software Quake
+th ลักษณะ​อนุภาค​คลาสสิก: GLQuake วาด​จุด​กลม​นุ่ม คลาสสิก​วาด​พิกเซล​สี่เหลี่ยม​แบบ Quake ซอฟต์แวร์
+
+@ Low skips the background smear halo and uses fewer blur samples; high keeps the full halo and smoother streaks
+th ต่ำ​ข้าม​รัศมี​เบลอ​พื้น​หลัง​และ​ใช้​ตัวอย่าง​เบลอ​น้อย​ลง; สูง​คง​รัศมี​เต็ม​และ​เส้น​ที่​ลื่น​กว่า
+
+@ Low: hard particle edges, half the scripted particles and fewer hit sparks. Medium: soft edges. High: soft edges checked per MSAA sample, most hit sparks
+th ต่ำ: ขอบ​อนุภาค​แข็ง อนุภาค​สคริปต์​ครึ่ง​หนึ่ง​และ​ประกาย​น้อย​ลง ปาน​กลาง: ขอบ​นุ่ม สูง: ขอบ​นุ่ม​ตรวจ​ต่อ​ตัวอย่าง MSAA ประกาย​มาก​ที่สุด
+
+@ Marks fade out before expiring; oldest marks are recycled at the limit
+th รอย​ค่อย​ๆ​จาง​ก่อน​หมด​อายุ; รอย​เก่า​สุด​ถูก​นำ​มา​ใช้​ใหม่​เมื่อ​ถึง​ขีด​จำกัด
+
+@ Max nested portal reflections to draw; each level redraws the scene
+th จำนวน​ภาพ​สะท้อน​พอร์ทัล​ซ้อน​สูงสุด; แต่ละ​ชั้น​วาด​ฉาก​ใหม่
+
+@ Max portals per screen with a live view; each one redraws the scene
+th จำนวน​พอร์ทัล​ที่​มี​มุม​มอง​สด​สูงสุด​ต่อ​จอ; แต่ละ​อัน​วาด​ฉาก​ใหม่
+
+@ Maximum distance for acquiring and keeping an enemy locked
+th ระยะ​สูงสุด​ใน​การ​จับ​และ​ล็อก​ศัตรู
+
+@ Minimum gap between freezes, so shotgun pellets and rapid fire count once; kills ignore it
+th ระยะ​ห่าง​ขั้น​ต่ำ​ระหว่าง​การ​หยุด เพื่อ​ให้​ลูก​ปราย​และ​การ​ยิง​รัว​นับ​ครั้ง​เดียว; การ​ฆ่า​ไม่​สนใจ​ค่า​นี้
+
+@ Modern terminal console with autocomplete popup, history search, ANSI colors, bash shell and piping; off uses the classic Quake console
+th คอนโซล​เทอร์มินัล​ทันสมัย​พร้อม​ป็อปอัป​เติม​คำ ค้นหา​ประวัติ สี ANSI เชลล์ bash และ​ไปป์; ปิด​จะ​ใช้​คอนโซล Quake คลาสสิก
+
+@ Monsters take proportionally less damage at higher values; above 100% is harder
+th ค่า​สูง​ขึ้น​มอนสเตอร์​รับ​ความ​เสียหาย​น้อย​ลง​ตาม​สัดส่วน; เกิน 100% ยาก​ขึ้น
+
+@ Moving gibs leave blood on surfaces they touch
+th ชิ้น​เนื้อ​ที่​เคลื่อน​ที่​ทิ้ง​เลือด​บน​พื้นผิว​ที่​สัมผัส
+
+@ Multiplier on the freeze when the hit kills the enemy; 1 means no extra
+th ตัว​คูณ​การ​หยุด​เมื่อ​การ​โจมตี​ฆ่า​ศัตรู; 1 หมาย​ถึง​ไม่​เพิ่ม
+
+@ Multiplies ammo from pickups (up to the normal carry limit); below 100% is harder
+th คูณ​กระสุน​จาก​ของ​ที่​เก็บ (ไม่​เกิน​ขีด​จำกัด​ปกติ); ต่ำ​กว่า 100% ยาก​ขึ้น
+
+@ Multiplies health from pickups (up to 100, or the item's own limit); below 100% is harder
+th คูณ​พลัง​ชีวิต​จาก​ของ​ที่​เก็บ (ไม่​เกิน 100 หรือ​ขีด​จำกัด​ของ​ไอเท็ม); ต่ำ​กว่า 100% ยาก​ขึ้น
+
+@ Nails stick to wood and bodies; hard surfaces deflect them to the floor
+th ตะปู​ปัก​ไม้​และ​ร่าง​กาย; พื้นผิว​แข็ง​ทำให้​มัน​เด้ง​ลง​พื้น
+
+@ Nearest keeps crisp classic pixels; linear smooths textures
+th ใกล้​ที่สุด​คง​พิกเซล​คม​แบบ​คลาสสิก; เชิง​เส้น​ทำให้​เท็กซ์เจอร์​เรียบ
+
+@ New Game: Add-ons
+th เกม​ใหม่: ส่วน​เสริม
+
+@ New Game: Customize
+th เกม​ใหม่: ปรับแต่ง
+
+@ Night vision: how much dark areas are brightened; thermal: how strongly heat stands out
+th มอง​กลางคืน: ทำให้​ที่​มืด​สว่าง​ขึ้น​แค่​ไหน; ความ​ร้อน: ความ​ร้อน​เด่น​ชัด​แค่​ไหน
+
+@ Night-vision and thermal goggles, cycle normal, night vision and thermal with Change Goggles (Add-ons), or use the Equipment Wheel
+th แว่น​มอง​กลางคืน​และ​แว่น​ความ​ร้อน วน​ระหว่าง​ปกติ มอง​กลางคืน​และ​ความ​ร้อน​ด้วย​เปลี่ยน​แว่น (ส่วน​เสริม) หรือ​ใช้​วงล้อ​อุปกรณ์
+
+@ No single freeze lasts longer than this, however much damage or kill bonus adds
+th การ​หยุด​แต่ละ​ครั้ง​ไม่​นาน​เกิน​ค่า​นี้ ไม่​ว่า​ความ​เสียหาย​หรือ​โบนัส​การ​ฆ่า​จะ​เพิ่ม​เท่าไร
+
+@ Oldest marks and nails are recycled at this shared limit
+th รอย​และ​ตะปู​ที่​เก่า​สุด​ถูก​นำ​มา​ใช้​ใหม่​ที่​ขีด​จำกัด​ร่วม​นี้
+
+@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
+th สติ๊ก​และ​ปุ่ม​บน​จอ: อัตโนมัติ​แสดง​หลัง​การ​สัมผัส​และ​ซ่อน​เมื่อ​ใช้​อุปกรณ์​อื่น
+
+@ Only autosaves: quicksaves and the Save menu are off
+th บันทึก​อัตโนมัติ​เท่านั้น: ปิด​บันทึก​ด่วน​และ​เมนู​บันทึก
+
+@ Place every weapon at the center, right or left of the view, or hide all viewmodels
+th วาง​อาวุธ​ทุก​ชิ้น​ไว้​ตรง​กลาง ขวา​หรือ​ซ้าย​ของ​มุม​มอง หรือ​ซ่อน​โมเดล​อาวุธ​ทั้งหมด
+
+@ Play your chosen hit or kill cue when you damage an enemy
+th เล่น​เสียง​โดน​หรือ​ฆ่า​ที่​เลือก​เมื่อ​คุณ​ทำ​ความ​เสียหาย​ศัตรู
+
+@ Playback speed: faster sounds shorter and higher
+th ความ​เร็ว​การ​เล่น: เร็ว​ขึ้น​เสียง​สั้น​และ​สูง​ขึ้น
+
+@ Plays the Quake theme in the main menu when no game is running
+th เล่น​เพลง​ธีม Quake ใน​เมนู​หลัก​เมื่อ​ไม่มี​เกม​ที่​กำลัง​เล่น
+
+@ Portals farther away than this are drawn as flat discs
+th พอร์ทัล​ที่​ไกล​กว่า​นี้​จะ​วาด​เป็น​แผ่น​กลม​เรียบ
+
+@ Press attack once to keep firing, again to stop
+th กด​โจมตี​ครั้ง​เดียว​เพื่อ​ยิง​ต่อ​เนื่อง กด​อีก​ครั้ง​เพื่อ​หยุด
+
+@ Press run once to switch between running and walking
+th กด​วิ่ง​ครั้ง​เดียว​เพื่อ​สลับ​ระหว่าง​วิ่ง​และ​เดิน
+
+@ Raise or lower the tone independently of sound length
+th ปรับ​ระดับ​เสียง​สูง​ต่ำ​โดย​ไม่​เปลี่ยน​ความ​ยาว​เสียง
+
+@ Red screen edges show where damage came from: top is front, bottom is behind; Screen Flashes controls their strength
+th ขอบ​จอ​สี​แดง​บอก​ทิศ​ที่​ถูก​โจมตี: ด้าน​บน​คือ​ด้าน​หน้า ด้าน​ล่าง​คือ​ด้าน​หลัง; แสง​วาบ​บน​จอ​ควบคุม​ความ​แรง
+
+@ Replaces the classic dot particles with glowing sparks, smoke and blood; mods with their own particle effects keep them
+th แทน​อนุภาค​จุด​คลาสสิก​ด้วย​ประกาย​เรือง​แสง ควัน​และ​เลือด; ม็อด​ที่​มี​เอฟเฟกต์​อนุภาค​ของ​ตัว​เอง​ยัง​ใช้​ของ​มัน
+
+@ Resolution and detail inside portal and teleporter views; lower tiers trim nested effects
+th ความ​ละเอียด​และ​รายละเอียด​ใน​มุม​มอง​พอร์ทัล​และ​ประตู​วาร์ป; ระดับ​ต่ำ​ตัด​เอฟเฟกต์​ซ้อน
+
+@ Rippling light patterns on surfaces under water and slime
+th ลาย​แสง​ระยิบ​บน​พื้นผิว​ใต้​น้ำ​และ​เมือก
+
+@ Scales all damage you take; above 100% is harder
+th ปรับ​สเกล​ความ​เสียหาย​ทั้งหมด​ที่​คุณ​ได้รับ; เกิน 100% ยาก​ขึ้น
+
+@ Screen edge for this element; elements on the same spot stack
+th ขอบ​จอ​สำหรับ​องค์ประกอบ​นี้; องค์ประกอบ​ที่​อยู่​จุด​เดียว​กัน​จะ​ซ้อน​กัน
+
+@ Seconds a monster hit by the boomerang stays stunned
+th จำนวน​วินาที​ที่​มอนสเตอร์​ถูก​บูมเมอแรง​แล้ว​มึน​งง
+
+@ Seconds impact marks and stuck nails stay before fading out; independent of Particle Quality
+th จำนวน​วินาที​ที่​รอย​กระทบ​และ​ตะปู​ที่​ปัก​อยู่​ก่อน​จาง​หาย; ไม่​ขึ้น​กับ​คุณภาพ​อนุภาค
+
+@ Seconds messages at the top of the screen stay up
+th จำนวน​วินาที​ที่​ข้อความ​ด้าน​บน​จอ​แสดง​อยู่
+
+@ Seconds the flick stick snap takes; lower is faster
+th จำนวน​วินาที​ที่ Flick Stick ใช้​หัน; ค่า​ต่ำ​เร็ว​กว่า
+
+@ See through enhanced water; enables Water Opacity
+th มอง​ทะลุ​น้ำ​ขั้นสูง; เปิด​ใช้​ความ​ทึบ​ของ​น้ำ
+
+@ Sensor grain, scanlines and flicker of the goggle image
+th เกรน​เซ็นเซอร์ เส้น​สแกน​และ​การ​กะพริบ​ของ​ภาพ​แว่น
+
+@ Shades every anti-aliasing sample; needs Anti-aliasing on
+th แรเงา​ทุก​ตัวอย่าง​ลด​รอย​หยัก; ต้อง​เปิด​ลด​รอย​หยัก
+
+@ Shifts colors so they stay distinct for the chosen color blindness
+th เลื่อน​สี​ให้​ยัง​แยก​ออก​จาก​กัน​สำหรับ​ภาวะ​ตา​บอด​สี​ที่​เลือก
+
+@ Shotgun hits leave small surface marks (cosmetic only)
+th การ​ยิง​ลูก​ซอง​ทิ้ง​รอย​เล็ก​บน​พื้นผิว (เพื่อ​ความ​สวยงาม​เท่านั้น)
+
+@ Show corner ticks at screen centre while locked, even with Crosshair off
+th แสดง​ขีด​มุม​ที่​กลาง​จอ​ขณะ​ล็อก แม้​ปิด​เป้า​เล็ง
+
+@ Show where grenades and other arcing shots will fly, bounce and land; local play only, not in deathmatch
+th แสดง​ว่า​ระเบิด​และ​กระสุน​วิถี​โค้ง​จะ​บิน เด้ง​และ​ตก​ที่​ไหน; เล่น​ใน​เครื่อง​เท่านั้น ไม่​ใช่​เดธแมตช์
+
+@ Shows text for important sounds: doors, alerted enemies, secrets, pickups
+th แสดง​ข้อความ​สำหรับ​เสียง​สำคัญ: ประตู ศัตรู​ที่​ตื่น​ตัว ความลับ ของ​ที่​เก็บ
+
+@ Shows the distance fog that maps and mods set; off always gives clear view
+th แสดง​หมอก​ระยะ​ไกล​ที่​แผนที่​และ​ม็อด​กำหนด; ปิด​จะ​มอง​เห็น​ชัด​เสมอ
+
+@ Shows the player face next to the health number
+th แสดง​ใบหน้า​ผู้เล่น​ข้าง​ตัวเลข​พลัง​ชีวิต
+
+@ Simulation detail, step rate, fade-out lifetimes and caps for gibs and shrapnel; low also skips mover collision
+th รายละเอียด​การ​จำลอง อัตรา​ขั้น อายุ​การ​จาง​และ​ขีด​จำกัด​ของ​ชิ้น​เนื้อ​และ​สะเก็ด; ต่ำ​ข้าม​การ​ชน​กับ​สิ่ง​เคลื่อน​ที่​ด้วย
+
+@ Size of the on-screen buttons and move stick
+th ขนาด​ของ​ปุ่ม​และ​สติ๊ก​เดิน​บน​จอ
+
+@ Slowly heals up to 100 health after 5 seconds without being hit
+th ค่อย​ๆ​ฟื้น​พลัง​ชีวิต​ถึง 100 หลัง​ไม่​ถูก​โจมตี 5 วินาที
+
+@ Slows stick look while the crosshair is over an enemy
+th ชะลอ​การ​มอง​ด้วย​สติ๊ก​ขณะ​เป้า​เล็ง​อยู่​บน​ศัตรู
+
+@ Slows the game down while the weapon wheel is open
+th ทำให้​เกม​ช้า​ลง​ขณะ​เปิด​วงล้อ​อาวุธ
+
+@ Slows the whole game down; single player only. Saves and demos stay compatible with other ports
+th ทำให้​ทั้ง​เกม​ช้า​ลง; เล่น​คน​เดียว​เท่านั้น เซฟ​และ​เดโม​ยัง​ใช้​ร่วม​กับ​พอร์ต​อื่น​ได้
+
+@ Small camera jolt on each freeze; off with Reduce Motion
+th กล้อง​สะดุ้ง​เล็ก​น้อย​ทุก​ครั้ง​ที่​หยุด; ปิด​ด้วย​ลด​การ​เคลื่อนไหว
+
+@ Snap and track enemies in local play, including split-screen; unavailable online
+th จับ​และ​ติดตาม​ศัตรู​ใน​การ​เล่น​ใน​เครื่อง รวม​ถึง​แบ่ง​จอ; ใช้​ออนไลน์​ไม่​ได้
+
+@ Sparks, smoke, chips, splinters and splashes fly off whatever your shots hit
+th ประกาย ควัน เศษ เสี้ยน​และ​น้ำ​กระเซ็น​จาก​ทุก​สิ่ง​ที่​คุณ​ยิง​โดน
+
+@ Spawns extra copies of every monster around the original when a level starts
+th เพิ่ม​มอนสเตอร์​ทุก​ตัว​รอบ​ตัว​เดิม​เมื่อ​เริ่ม​ด่าน
+
+@ Strength of the full-screen flashes for damage, pickups and powerups
+th ความ​แรง​แสง​วาบ​เต็ม​จอ​เมื่อ​ถูก​โจมตี เก็บ​ของ​และ​พาวเวอร์อัป
+
+@ Stretch or shorten the sound while keeping its pitch
+th ยืด​หรือ​หด​เสียง​โดย​คง​ระดับ​เสียง​สูง​ต่ำ
+
+@ Surface opacity; requires Enhanced Water and Translucent Water
+th ความ​ทึบ​ผิว​น้ำ; ต้อง​เปิด​น้ำ​ขั้นสูง​และ​น้ำ​โปร่ง​แสง
+
+@ The hook latches onto metal surfaces (metal, tech, computer panels, copper)
+th ตะขอ​เกาะ​พื้นผิว​โลหะ (โลหะ เทค แผง​คอมพิวเตอร์ ทองแดง)
+
+@ The hook latches onto stone, brick, rock and any surface not recognised as wood or metal
+th ตะขอ​เกาะ​หิน อิฐ ศิลา​และ​พื้นผิว​ใด​ๆ​ที่​ไม่​ใช่​ไม้​หรือ​โลหะ
+
+@ The hook latches onto wooden surfaces (texture names like wood, crate, plank)
+th ตะขอ​เกาะ​พื้นผิว​ไม้ (ชื่อ​เท็กซ์เจอร์​เช่น wood, crate, plank)
+
+@ Turn the controller's motion sensor into a look input; needs a pad with a gyroscope
+th ใช้​เซ็นเซอร์​การ​เคลื่อนไหว​ของ​จอย​ใน​การ​มอง; ต้อง​ใช้​จอย​ที่​มี​ไจโรสโคป
+
+@ Turns off view bob, strafe tilt and the camera kick when hit or firing
+th ปิด​การ​โยก​มุม​มอง การ​เอียง​ขณะ​เดิน​ข้าง​และ​กล้อง​กระตุก​เมื่อ​ถูก​โจมตี​หรือ​ยิง
+
+@ Turns on the extra liquid effects; Water Settings controls each one
+th เปิด​เอฟเฟกต์​ของ​เหลว​เพิ่ม​เติม; ตั้งค่า​น้ำ​ควบคุม​แต่ละ​อย่าง
+
+@ Turns the view to follow a moving enemy you are aiming at
+th หัน​มุม​มอง​ตาม​ศัตรู​ที่​เคลื่อน​ที่​ซึ่ง​คุณ​เล็ง​อยู่
+
+@ Turns the view when you roll the controller sideways; 0 disables it, negative reverses it
+th หัน​มุม​มอง​เมื่อ​เอียง​จอย​ไป​ด้าน​ข้าง; 0 ปิด ค่า​ลบ​กลับ​ทิศ
+
+@ Two-portal gun: fire and alt-fire place linked portals on flat walls; assign a weapon slot in Add-ons
+th ปืน​สอง​พอร์ทัล: ยิง​และ​ยิง​รอง​วาง​พอร์ทัล​ที่​เชื่อม​กัน​บน​ผนัง​เรียบ; กำหนด​ช่อง​อาวุธ​ใน​ส่วน​เสริม
+
+@ Unlocks the FX Settings page: enhanced particles, impact effects and blood splatter
+th ปลด​ล็อก​หน้า​ตั้งค่า FX: อนุภาค​ขั้นสูง เอฟเฟกต์​กระทบ​และ​เลือด​กระเซ็น
+
+@ Uses the 2021 re-release's smoother MD5 models (and MD3 replacements from mods) instead of the classic ones. Applies on the next map load
+th ใช้​โมเดล MD5 ที่​ลื่น​กว่า​จาก​ฉบับ​รีรีลีส 2021 (และ​โมเดล MD3 แทน​จาก​ม็อด) แทน​โมเดล​คลาสสิก มี​ผล​เมื่อ​โหลด​แผนที่​ครั้ง​ถัด​ไป
+
+@ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
+th ใช้​แสง​สี​ของ​แผนที่ (ไฟล์ .lit หรือ BSPX lump); ปิด​จะ​ได้​แสง​ขาว​ดั้งเดิม มี​ผล​เมื่อ​โหลด​แผนที่​ครั้ง​ถัด​ไป
+
+@ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
+th ส่วน​ลำ​น้ำ จำนวน​หยด​และ​การ​แรเงา​ของ​เหลว​มัน​วาว: ต่ำ​ใช้​สาย​น้ำ​โปร่ง​แสง​ที่​ง่าย​กว่า; สูง​ใช้​ลำ​น้ำ​เรียบ​มัน​วาว
+
+@ When gyro looking applies: always, off while +gyroaction is held, or only while it is held
+th เมื่อ​ใด​ที่​ใช้​ไจโร​มอง: ตลอด​เวลา ปิด​ขณะ​กด +gyroaction ค้าง หรือ​เฉพาะ​ขณะ​กด​ค้าง
+
+@ Which weapons trigger the freeze; melee covers the axe and any mod weapon used at close range without ammo
+th อาวุธ​ใด​ทำให้​หยุด; ระยะ​ประชิด​รวม​ขวาน​และ​อาวุธ​ม็อด​ที่​ใช้​ระยะ​ใกล้​โดย​ไม่​ใช้​กระสุน
+
+@ Your own rockets and grenades don't hurt you; rocket jumps still work
+th จรวด​และ​ระเบิด​ของ​คุณ​เอง​ไม่​ทำ​ร้าย​คุณ; ยัง​กระโดด​ด้วย​จรวด​ได้
+
+# ==== ui.txt ====
+
+# Menus and pop-ups outside the options pages: save cards, launch, presets,
+# add-on browser, map packs, hints and dialogs.
+@ Select
+th เลือก
+
+@ Back
+th กลับ
+
+@ Cancel
+th ยกเลิก
+
+@ Confirm
+th ยืนยัน
+
+@ Scroll
+th เลื่อน
+
+@ Section
+th หมวด
+
+@ Bind
+th กำหนด​ปุ่ม
+
+@ Cancel binding
+th ยกเลิก​การ​กำหนด
+
+@ Clear
+th ล้าง
+
+@ Clear pad
+th ล้าง​จอย
+
+@ Remap
+th ตั้ง​ปุ่ม​ใหม่
+
+@ Type
+th พิมพ์
+
+@ Shift
+th Shift
+
+@ Done
+th เสร็จ
+
+@ Del
+th Del
+
+@ Space
+th เว้น​วรรค
+
+@ Save
+th บันทึก
+
+@ Load
+th โหลด
+
+@ Delete
+th ลบ
+
+@ Play
+th เล่น
+
+@ Yes
+th ใช่
+
+@ No
+th ไม่
+
+@ OK
+th ตกลง
+
+@ System
+th ระบบ
+
+@ Language
+th ภาษา
+
+@ Help
+th ช่วยเหลือ
+
+@ Fixed for this game: it was started without Customize
+th คง​ที่​สำหรับ​เกม​นี้: เริ่ม​โดย​ไม่​ได้​ปรับแต่ง
+
+@ Press a button or key to bind (Start cancels)
+th กด​ปุ่ม​หรือ​คีย์​เพื่อ​กำหนด (Start ยกเลิก)
+
+@ Press button...
+th กด​ปุ่ม...
+
+@ Press key...
+th กด​คีย์...
+
+@ Replace this binding?
+th แทนที่​การ​กำหนด​นี้?
+
+@ is already assigned
+th ถูก​กำหนด​ไว้​แล้ว
+
+@ {} already assigned
+th {} ถูก​กำหนด​ไว้​แล้ว
+
+@ Open Controls to remap Lock-on?
+th เปิด​การ​ควบคุม​เพื่อ​ตั้ง​ปุ่ม​ล็อก​เป้า?
+
+@ Lock-on
+th ล็อก​เป้า
+
+@ Auto-aim Toggle
+th สลับ​เล็ง​อัตโนมัติ
+
+@ Keyboard
+th คีย์บอร์ด
+
+@ Controller
+th จอย
+
+# main menu, dialogs and screens
+@ Map Packs
+th แพ็ก​แผนที่
+
+@ Customize
+th ปรับแต่ง
+
+@ Level Select
+th เลือก​ด่าน
+
+@ Really quit?
+th ออก​จริง​หรือ?
+
+@ You died
+th คุณ​ตาย​แล้ว
+
+@ Continue from most recent save
+th เล่น​ต่อ​จาก​บันทึก​ล่าสุด
+
+@ Select save
+th เลือก​บันทึก
+
+@ Restart level
+th เริ่ม​ด่าน​ใหม่
+
+@ Return to main menu
+th กลับ​เมนู​หลัก
+
+@ (disabled)
+th (ปิด​ใช้)
+
+@ (fixed for this game)
+th (คง​ที่​สำหรับ​เกม​นี้)
+
+@ (off)
+th (ปิด)
+
+@ Apply Display Changes
+th ใช้​การ​เปลี่ยน​แปลง​การ​แสดง​ผล
+
+@ Display Mode
+th โหมด​การ​แสดง​ผล
+
+@ Resolution
+th ความ​ละเอียด
+
+@ desktop
+th เดสก์ท็อป
+
+@ Preset
+th พรีเซ็ต
+
+@ Map
+th แผนที่
+
+@ Reset Shader Settings
+th รีเซ็ต​ค่า​เชดเดอร์
+
+@ Reset to Defaults
+th คืน​ค่า​เริ่มต้น
+
+@ Searching...
+th กำลัง​ค้นหา...
+
+@ This game only autosaves.
+th เกม​นี้​บันทึก​อัตโนมัติ​เท่านั้น
+
+@ (No Manual Saves modifier)
+th (ตัว​ปรับ​ห้าม​บันทึก​เอง)
+
+@ End the current game?
+th จบ​เกม​ปัจจุบัน?
+
+@ Unsaved progress will be lost.
+th ความ​คืบหน้า​ที่​ไม่​ได้​บันทึก​จะ​หาย​ไป
+
+@ End game
+th จบ​เกม
+
+@ Overwrite
+th เขียน​ทับ
+
+@ Overwrite "{}"?
+th เขียน​ทับ "{}"?
+
+@ Saved {}
+th บันทึก {} แล้ว
+
+@ Start a new game?
+th เริ่ม​เกม​ใหม่?
+
+@ New game
+th เกม​ใหม่
+
+@ New Game
+th เกม​ใหม่
+
+@ CUSTOM
+th กำหนด​เอง
+
+@ Customize Experience
+th ปรับแต่ง​ประสบการณ์
+
+@ Disable All
+th ปิด​ทั้งหมด
+
+@ Disable All Modifications
+th ปิด​การ​ปรับแต่ง​ทั้งหมด
+
+@ Saves load in other source ports too.
+th เซฟ​โหลด​ใน​พอร์ต​อื่น​ได้​ด้วย
+
+@ Standard rules, no add-ons.
+th กฎ​มาตรฐาน ไม่มี​ส่วน​เสริม
+
+@ Choose skill
+th เลือก​ระดับ​ความ​ยาก
+
+@ The current game will end
+th เกม​ปัจจุบัน​จะ​จบ​ลง
+
+@ Easy
+th ง่าย
+
+@ Normal
+th ปกติ
+
+@ Hard
+th ยาก
+
+@ Nightmare
+th ฝัน​ร้าย
+
+# graphics preset pop-up
+@ Choose a Graphics Preset
+th เลือก​พรีเซ็ต​กราฟิก
+
+@ Classic
+th คลาสสิก
+
+@ Like the re-release: enhanced models,
+th เหมือน​ฉบับ​รีรีลีส: โมเดล​ขั้นสูง
+
+@ no added effects.
+th ไม่มี​เอฟเฟกต์​เพิ่ม
+
+@ Enhanced
+th ขั้นสูง
+
+@ Every enhancement at its highest quality.
+th การ​ปรับปรุง​ทุก​อย่าง​ที่​คุณภาพ​สูง​สุด
+
+@ Needs a capable GPU.
+th ต้อง​ใช้ GPU ที่​แรง​พอ
+
+@ Low-End
+th สเปก​ต่ำ
+
+@ Fastest. No anti-aliasing, original
+th เร็ว​ที่สุด ไม่​ลด​รอย​หยัก โมเดล
+
+@ models, lowest effect quality.
+th ดั้งเดิม เอฟเฟกต์​คุณภาพ​ต่ำ​สุด
+
+@ Esc keeps the defaults
+th Esc ใช้​ค่า​เริ่มต้น
+
+@ Everything can be changed later in Options.
+th เปลี่ยน​ทุก​อย่าง​ได้​ภาย​หลัง​ใน​ตัวเลือก
+
+@ Keep Defaults
+th ใช้​ค่า​เริ่มต้น
+
+# save and load cards
+@ Save Game
+th บันทึก​เกม
+
+@ Load Game
+th โหลด​เกม
+
+@ Autosaves
+th บันทึก​อัตโนมัติ
+
+@ newest first
+th ใหม่​สุด​ก่อน
+
+@ Saves: {}
+th บันทึก: {}
+
+@ Browse Autosaves
+th ดู​บันทึก​อัตโนมัติ
+
+@ Every retained autosave, newest first
+th บันทึก​อัตโนมัติ​ทั้งหมด​ที่​เก็บ​ไว้ ใหม่​สุด​ก่อน
+
+@ New save
+th บันทึก​ใหม่
+
+@ Select to save your game here
+th เลือก​เพื่อ​บันทึก​เกม​ที่​นี่
+
+@ No autosaves yet
+th ยัง​ไม่มี​บันทึก​อัตโนมัติ
+
+@ Autosaves are made on level entry, secrets and more (Options > Gameplay)
+th บันทึก​อัตโนมัติ​เมื่อ​เข้า​ด่าน พบ​ความลับ​และ​อื่น​ๆ (ตัวเลือก > การ​เล่น)
+
+@ No saves yet
+th ยัง​ไม่มี​บันทึก
+
+@ Save from the Single Player menu, or press F6 to quicksave
+th บันทึก​จาก​เมนู​เล่น​คน​เดียว หรือ​กด F6 เพื่อ​บันทึก​ด่วน
+
+@ No picture
+th ไม่มี​ภาพ
+
+@ Del: delete save
+th Del: ลบ​บันทึก
+
+@ Delete "{}"?
+th ลบ "{}"?
+
+@ This cannot be undone.
+th ไม่​สามารถ​ย้อน​กลับ​ได้
+
+@ Quicksave
+th บันทึก​ด่วน
+
+@ Autosave: {}
+th บันทึก​อัตโนมัติ: {}
+
+@ unknown trigger
+th ไม่​ทราบ​สาเหตุ
+
+@ Latest - {}
+th ล่าสุด - {}
+
+@ Health {}
+th พลัง​ชีวิต {}
+
+@ Armor {}
+th เกราะ {}
+
+@ Kills {}/{}
+th ฆ่า {}/{}
+
+@ Secrets {}/{}
+th ความลับ {}/{}
+
+@ Split-screen, {} players
+th แบ่ง​จอ {} คน
+
+@ Co-op
+th เล่น​ร่วม​มือ
+
+@ Customized
+th ปรับแต่ง​แล้ว
+
+@ Customized, {}
+th ปรับแต่ง​แล้ว, {}
+
+@ Date unavailable
+th ไม่มี​วันที่
+
+@ Just now
+th เมื่อ​สักครู่
+
+@ {} min ago
+th {} นาที​ที่แล้ว
+
+@ {} h ago
+th {} ชม. ที่แล้ว
+
+@ Level entry
+th เข้า​ด่าน
+
+@ Secret found
+th พบ​ความลับ
+
+@ All enemies killed
+th ฆ่า​ศัตรู​หมด
+
+@ All secrets found
+th พบ​ความลับ​ครบ
+
+@ Timer
+th ตัว​จับ​เวลา
+
+# customize pages
+@ Standard rules
+th กฎ​มาตรฐาน
+
+@ Modifiers changed: {}
+th ตัว​ปรับ​ที่​เปลี่ยน: {}
+
+@ no add-ons
+th ไม่มี​ส่วน​เสริม
+
+@ add-ons: {}
+th ส่วน​เสริม: {}
+
+@ Saves of this game are .qsa files: they need this source port.
+th เซฟ​ของ​เกม​นี้​เป็น​ไฟล์ .qsa: ต้อง​ใช้​พอร์ต​นี้
+
+@ Nothing changed: this plays as standard Quake.
+th ไม่มี​อะไร​เปลี่ยน: เล่น​เป็น Quake มาตรฐาน
+
+@ Changes apply now and are saved with this game (.qsa).
+th การ​เปลี่ยน​แปลง​มี​ผล​ทันที​และ​บันทึก​กับ​เกม​นี้ (.qsa)
+
+@ This game started without Customize, so its rules are fixed.
+th เกม​นี้​เริ่ม​โดย​ไม่​ได้​ปรับแต่ง กฎ​จึง​คง​ที่
+
+@ Start a new game and choose Customize Experience.
+th เริ่ม​เกม​ใหม่​และ​เลือก​ปรับแต่ง​ประสบการณ์
+
+@ These rules apply to the next customized game.
+th กฎ​เหล่า​นี้​ใช้​กับ​เกม​ปรับแต่ง​ครั้ง​ถัด​ไป
+
+# add-on browser
+@ Fire
+th ยิง
+
+@ Alt Fire
+th ยิง​รอง
+
+@ Configure Parameters >
+th กำหนด​พารามิเตอร์ >
+
+@ Configure
+th กำหนด​ค่า
+
+@ Settings
+th ตั้งค่า
+
+@ Change slot
+th เปลี่ยน​ช่อง
+
+@ Toggle
+th สลับ
+
+@ Details
+th รายละเอียด
+
+@ Enter or click the box: toggle
+th Enter หรือ​คลิก​กล่อง: สลับ
+
+@ Right / Tab / click: details
+th ขวา / Tab / คลิก: รายละเอียด
+
+@ Input Remapping
+th ตั้ง​ปุ่ม​ใหม่
+
+@ Weapon Slot
+th ช่อง​อาวุธ
+
+@ Customized games save as .qsa files, which need this source port.
+th เกม​ที่​ปรับแต่ง​บันทึก​เป็น​ไฟล์ .qsa ซึ่ง​ต้อง​ใช้​พอร์ต​นี้
+
+@ This game started without Customize, so its add-ons are fixed. Customize a new game instead.
+th เกม​นี้​เริ่ม​โดย​ไม่​ได้​ปรับแต่ง ส่วน​เสริม​จึง​คง​ที่ ให้​ปรับแต่ง​เกม​ใหม่​แทน
+
+@ Bullet Time
+th Bullet Time
+
+@ Change Goggles
+th เปลี่ยน​แว่น
+
+@ Dodge / Dive
+th หลบ / พุ่ง
+
+@ Goggles
+th แว่น
+
+@ Hitstop
+th Hitstop
+
+@ Projectile Shotguns
+th ลูก​ซอง​แบบ​กระสุน​วิ่ง
+
+@ BULLET TIME: 20%
+th BULLET TIME: 20%
+
+@ NORMAL SPEED
+th ความ​เร็ว​ปกติ
+
+@ SLOW MOTION: PHYSICAL PELLETS
+th สโลว์​โมชัน: ลูก​ปราย​ทาง​กายภาพ
+
+@ DEMONSTRATION
+th การ​สาธิต
+
+@ GAMEPLAY
+th การ​เล่น
+
+@ LOOP
+th วน​ซ้ำ
+
+@ Preview unavailable
+th ไม่มี​ตัวอย่าง
+
+# shader and language help lines
+@ A setting of the chosen shader; arrows step it, Enter is not needed
+th ค่า​หนึ่ง​ของ​เชดเดอร์​ที่​เลือก; ปรับ​ด้วย​ลูกศร ไม่​ต้อง​กด Enter
+
+@ Language of the menus, messages and the 2021 re-release's game text; System follows your computer's language
+th ภาษา​ของ​เมนู ข้อความ​และ​ข้อความ​ใน​เกม​ของ​ฉบับ​รีรีลีส 2021; ระบบ​จะ​ใช้​ภาษา​ของ​คอมพิวเตอร์
+
+@ Puts every setting of the chosen shader back to the preset's defaults
+th คืน​ทุก​ค่า​ของ​เชดเดอร์​ที่​เลือก​เป็น​ค่า​เริ่มต้น​ของ​พรีเซ็ต
+
+@ RetroArch slang shader on the final image: CRT, scanlines, NTSC, sharpening; add your own in <game>/shaders
+th เชดเดอร์ slang ของ RetroArch บน​ภาพ​สุดท้าย: CRT เส้น​สแกน NTSC ความ​คม; เพิ่ม​ของ​คุณ​เอง​ใน <game>/shaders
+
+# modern console footer
+@ Shift+PgUp/Dn: height  ` : hide
+th Shift+PgUp/Dn: ความ​สูง  ` : ซ่อน
+
+@ Tab: complete  Ctrl+R: search  bash | pipe
+th Tab: เติม​คำ  Ctrl+R: ค้นหา  bash | ไปป์
+
+@ ↑ +{} lines (End to jump) 
+th ↑ +{} บรรทัด (End เพื่อ​ไป​ท้าย) 
+
+# add-on descriptions
+@ Create two linked portals on flat walls. Fire places the first portal; Alt Fire places the second. Walk through either portal to emerge from the other. Your momentum carries through. Assign a weapon slot below: pressing that slot repeatedly cycles its ordinary weapon and every enabled add-on assigned there. Portal view quality is configurable below.
+th สร้าง​พอร์ทัล​สอง​อัน​ที่​เชื่อม​กัน​บน​ผนัง​เรียบ ยิง​วาง​พอร์ทัล​แรก ยิง​รอง​วาง​อัน​ที่​สอง เดิน​ผ่าน​พอร์ทัล​ใด​ก็ได้​เพื่อ​ออก​อีก​ฝั่ง แรง​ส่ง​ของ​คุณ​ยัง​คง​อยู่ กำหนด​ช่อง​อาวุธ​ด้าน​ล่าง: กด​ช่อง​นั้น​ซ้ำ​เพื่อ​วน​ระหว่าง​อาวุธ​ปกติ​และ​ส่วน​เสริม​ที่​เปิด​ทั้งหมด​ใน​ช่อง​นั้น ปรับ​คุณภาพ​มุม​มอง​พอร์ทัล​ได้​ด้าน​ล่าง
+
+@ Hold Fire and sweep the crosshair over monsters to queue targets. Release Fire to throw: the boomerang visits each target, stuns it and returns to you. Alt Fire clears the queue. The weapon slot selects a group, not a separate hotkey: press it again to cycle through the weapons in that slot. Configure stun duration and flight speed below.
+th กด​ยิง​ค้าง​แล้ว​กวาด​เป้า​เล็ง​ผ่าน​มอนสเตอร์​เพื่อ​เข้า​คิว ปล่อย​ยิง​เพื่อ​ขว้าง: บูมเมอแรง​ไป​หา​แต่ละ​เป้า ทำให้​มึน​แล้ว​กลับ​มา​หา​คุณ ยิง​รอง​ล้าง​คิว ช่อง​อาวุธ​เลือก​กลุ่ม ไม่​ใช่​ปุ่ม​ลัด​แยก: กด​อีก​ครั้ง​เพื่อ​วน​อาวุธ​ใน​ช่อง​นั้น ปรับ​ระยะ​เวลา​มึน​และ​ความ​เร็ว​การ​บิน​ได้​ด้าน​ล่าง
+
+@ Hold Fire to charge a sticky bomb using rocket ammunition; release to launch. A longer charge throws it faster. Bombs cling to walls, doors and monsters. Alt Fire detonates your planted bombs together. Place a trap, retreat, then detonate it when enemies approach. Assign any weapon slot below; repeated presses cycle through the ordinary weapon and add-ons in that slot.
+th กด​ยิง​ค้าง​เพื่อ​ชาร์จ​ระเบิด​เหนียว​โดย​ใช้​กระสุน​จรวด; ปล่อย​เพื่อ​ยิง ชาร์จ​นาน​ขึ้น​ขว้าง​เร็ว​ขึ้น ระเบิด​เกาะ​ผนัง ประตู​และ​มอนสเตอร์ ยิง​รอง​จุด​ระเบิด​ที่​วาง​ไว้​พร้อม​กัน วาง​กับ​ดัก ถอย​ออก​มา แล้ว​จุด​ระเบิด​เมื่อ​ศัตรู​เข้า​ใกล้ กำหนด​ช่อง​อาวุธ​ใด​ก็ได้​ด้าน​ล่าง; กด​ซ้ำ​เพื่อ​วน​อาวุธ​ปกติ​และ​ส่วน​เสริม​ใน​ช่อง​นั้น
+
+@ Fire launches a chain hook. It latches onto a permitted surface or enemy and reels you toward the anchor. Fire again or use Alt Fire to let go. Choose which materials and enemies can be hooked in Configure Parameters. Assign it to any weapon slot; repeated presses of the slot's existing binding cycle through its weapons.
+th ยิง​เพื่อ​ส่ง​ตะขอ​โซ่ มัน​เกาะ​พื้นผิว​หรือ​ศัตรู​ที่​อนุญาต​แล้ว​ดึง​คุณ​เข้า​หา​จุด​ยึด ยิง​อีก​ครั้ง​หรือ​ยิง​รอง​เพื่อ​ปล่อย เลือก​วัสดุ​และ​ศัตรู​ที่​เกี่ยว​ได้​ใน​กำหนด​พารามิเตอร์ กำหนด​ช่อง​อาวุธ​ใด​ก็ได้; กด​ปุ่ม​เดิม​ของ​ช่อง​ซ้ำ​เพื่อ​วน​อาวุธ
+
+@ A piercing railgun inspired by Quake III. Fire sends a slug through every enemy along its line. Each shot consumes two cells, with a 1.5 second refire interval. Damage and the spiral trail colour are configurable below. Choose a weapon slot: the slot's current binding selects and cycles the weapons assigned to it.
+th เรลกัน​ทะลุ​ทะลวง​ที่​ได้​แรง​บันดาล​ใจ​จาก Quake III ยิง​กระสุน​ทะลุ​ศัตรู​ทุก​ตัว​ใน​แนว แต่ละ​นัด​ใช้​สอง​เซลล์ ยิง​ซ้ำ​ได้​ทุก 1.5 วินาที ปรับ​ความ​เสียหาย​และ​สี​เส้น​เกลียว​ได้​ด้าน​ล่าง เลือก​ช่อง​อาวุธ: ปุ่ม​ปัจจุบัน​ของ​ช่อง​จะ​เลือก​และ​วน​อาวุธ​ที่​กำหนด​ไว้
+
+@ A Portal-style gel sprayer. Fire sprays blue Repulsion gel: land, jump or run into it to bounce, and landings on it never hurt. Alt Fire sprays orange Propulsion gel: run across it to go much faster. Gel coats floors and walls until washed off with the Powerwasher. Assign a weapon slot below; repeated presses cycle the weapons in that slot.
+th เครื่อง​พ่น​เจล​แบบ Portal ยิง​พ่น​เจล​สะท้อน​สี​ฟ้า: ตก กระโดด​หรือ​วิ่ง​ใส่​เพื่อ​เด้ง และ​ตก​ลง​บน​มัน​ไม่​เจ็บ ยิง​รอง​พ่น​เจล​เร่ง​สี​ส้ม: วิ่ง​ผ่าน​เพื่อ​ไป​ได้​เร็ว​ขึ้น​มาก เจล​เคลือบ​พื้น​และ​ผนัง​จน​กว่า​จะ​ถูก​ล้าง​ด้วย Powerwasher กำหนด​ช่อง​อาวุธ​ด้าน​ล่าง; กด​ซ้ำ​เพื่อ​วน​อาวุธ​ใน​ช่อง​นั้น
+
+@ A water cannon. Fire shoots a straight jet with limited reach; Alt Fire a wide, shorter fan. The water pushes enemies back, turns projectiles aside and washes away gel and blood. Push strength is configurable below. Assign a weapon slot below; repeated presses cycle the weapons in that slot.
+th ปืน​ฉีด​น้ำ ยิง​พ่น​ลำ​น้ำ​ตรง​ระยะ​จำกัด; ยิง​รอง​พ่น​เป็น​พัด​กว้าง​ระยะ​สั้น​กว่า น้ำ​ผลัก​ศัตรู​ถอย เบน​กระสุน​ออก​และ​ล้าง​เจล​และ​เลือด ปรับ​แรง​ผลัก​ได้​ด้าน​ล่าง กำหนด​ช่อง​อาวุธ​ด้าน​ล่าง; กด​ซ้ำ​เพื่อ​วน​อาวุธ​ใน​ช่อง​นั้น
+
+@ One equipment add-on includes both night vision and thermal vision. The Change Goggles action cycles Normal, Night Vision, Thermal, then Normal again. Night vision brightens dark rooms; thermal vision highlights living enemies. Goggles do not occupy a weapon slot. Configure intensity and sensor noise below. The binding affects only this add-on.
+th ส่วน​เสริม​อุปกรณ์​เดียว​มี​ทั้ง​แว่น​มอง​กลางคืน​และ​แว่น​ความ​ร้อน การ​กระทำ​เปลี่ยน​แว่น​วน​ปกติ มอง​กลางคืน ความ​ร้อน แล้ว​กลับ​เป็น​ปกติ มอง​กลางคืน​ทำให้​ห้อง​มืด​สว่าง​ขึ้น; แว่น​ความ​ร้อน​เน้น​ศัตรู​ที่​มี​ชีวิต แว่น​ไม่​ใช้​ช่อง​อาวุธ ปรับ​ความ​เข้ม​และ​นอยส์​เซ็นเซอร์​ได้​ด้าน​ล่าง ปุ่ม​ที่​กำหนด​มี​ผล​กับ​ส่วน​เสริม​นี้​เท่านั้น
+
+@ Press Dodge with a movement direction on the ground or in midair: dive forward or leap backward and sideways. Diagonals are supported. Each press launches once, with a short recovery. The player body animates in third person. Assign the Dodge action below or in Controls.
+th กด​หลบ​พร้อม​ทิศ​การ​เคลื่อนที่​บน​พื้น​หรือ​กลาง​อากาศ: พุ่ง​ไป​ข้าง​หน้า​หรือ​กระโดด​ถอย​หลัง​และ​ไป​ด้าน​ข้าง ใช้​แนว​ทแยง​ได้ กด​แต่ละ​ครั้ง​พุ่ง​หนึ่ง​ครั้ง​และ​ต้อง​พัก​สั้น​ๆ ร่าง​ผู้เล่น​เคลื่อนไหว​ใน​มุม​มอง​บุคคล​ที่​สาม กำหนด​ปุ่ม​หลบ​ด้าน​ล่าง​หรือ​ใน​การ​ควบคุม
+
+@ Use the dedicated Bullet Time action to slow the whole local game to 20% speed. Hold is the default; Toggle switches on each press. The optional meter limits use in real seconds and regenerates while inactive. Disable the meter for unlimited use. Remap the action and configure duration and regeneration below.
+th ใช้​การ​กระทำ Bullet Time เพื่อ​ทำให้​เกม​ใน​เครื่อง​ทั้งหมด​ช้า​ลง​เหลือ​ความ​เร็ว 20% ค่า​เริ่มต้น​คือ​กด​ค้าง; สลับ​จะ​เปิด​ปิด​ทุก​ครั้ง​ที่​กด มาตร​ที่​เลือก​ได้​จำกัด​การ​ใช้​เป็น​วินาที​จริง​และ​ฟื้นฟู​ขณะ​ไม่​ใช้ ปิด​มาตร​เพื่อ​ใช้​ได้​ไม่​จำกัด ตั้ง​ปุ่ม​ใหม่​และ​ปรับ​ระยะ​เวลา​และ​การ​ฟื้นฟู​ได้​ด้าน​ล่าง
+
+@ Both shotguns and enemy grunts fire physical pellets with their original spread and damage. Fast default projectiles feel immediate; lower their speed to dodge incoming fire during bullet time. Configure projectile speed below, or reset it to the default of 10000 units per second.
+th ลูก​ซอง​ทั้ง​สอง​แบบ​และ​ทหาร​ศัตรู​ยิง​ลูก​ปราย​ทาง​กายภาพ​ด้วย​การ​กระจาย​และ​ความ​เสียหาย​ดั้งเดิม กระสุน​เร็ว​ตาม​ค่า​เริ่มต้น​ให้​ความ​รู้สึก​ทันที; ลด​ความ​เร็ว​เพื่อ​หลบ​กระสุน​ระหว่าง Bullet Time ปรับ​ความ​เร็ว​กระสุน​ได้​ด้าน​ล่าง หรือ​คืน​เป็น​ค่า​เริ่มต้น 10000 หน่วย​ต่อ​วินาที
+
+@ Freezes the game for a split second when you damage an enemy, so hits feel heavier. Single player only. Choose which weapons trigger it (all, melee, ranged or explosives), how long it lasts and how much more a kill freezes. Advanced settings cover enemy toughness, damage scaling, cooldown and the longest freeze.
+th หยุด​เกม​เสี้ยว​วินาที​เมื่อ​คุณ​ทำ​ความ​เสียหาย​ศัตรู ให้​การ​โจมตี​รู้สึก​หนัก​ขึ้น เล่น​คน​เดียว​เท่านั้น เลือก​อาวุธ​ที่​ทำให้​หยุด (ทั้งหมด ระยะ​ประชิด ระยะ​ไกล​หรือ​ระเบิด) ระยะ​เวลา​และ​การ​ฆ่า​หยุด​นาน​ขึ้น​เท่าไร ตั้งค่า​ขั้นสูง​ครอบคลุม​ความ​แกร่ง​ของ​ศัตรู การ​ปรับ​ตาม​ความ​เสียหาย คูลดาวน์​และ​การ​หยุด​นาน​สุด
+
+# map packs and the Quaddicted browser
+@ Get more maps (Quaddicted)...
+th หา​แผนที่​เพิ่ม (Quaddicted)...
+
+@ Type to filter...
+th พิมพ์​เพื่อ​กรอง...
+
+@ Launch mod
+th เปิด​ม็อด
+
+@ Start first map
+th เริ่ม​แผนที่​แรก
+
+@ (running)
+th (กำลัง​ทำงาน)
+
+@ running
+th กำลัง​ทำงาน
+
+@ Recent
+th ล่าสุด
+
+@ Name
+th ชื่อ
+
+@ Dir
+th โฟลเดอร์
+
+@ Default
+th ค่า​เริ่มต้น
+
+@ Title
+th ชื่อ​เรื่อง
+
+@ Sort: {}
+th เรียง: {}
+
+@ {} installed
+th ติดตั้ง​แล้ว {}
+
+@ {}/{} matching
+th ตรง​กัน {}/{}
+
+@ {} maps, {} completed
+th {} แผนที่ เล่น​จบ {}
+
+@ {}/{} matching, {} completed
+th ตรง​กัน {}/{} เล่น​จบ {}
+
+@ no maps of its own
+th ไม่มี​แผนที่​ของ​ตัว​เอง
+
+@ dir: {}
+th โฟลเดอร์: {}
+
+@ base: {}
+th ฐาน: {}
+
+@ Browse the Quaddicted archive of
+th เรียก​ดู​คลัง Quaddicted ของ
+
+@ single-player maps and episodes,
+th แผนที่​และ​ตอน​เล่น​คน​เดียว
+
+@ then download and install them
+th แล้ว​ดาวน์โหลด​และ​ติดตั้ง
+
+@ here. Each release gets its own
+th ที่​นี่ แต่ละ​ผลงาน​จะ​มี
+
+@ entry in this list.
+th รายการ​ของ​ตัว​เอง​ใน​นี้
+
+@ Needs an internet connection.
+th ต้อง​เชื่อมต่อ​อินเทอร์เน็ต
+
+@ Quaddicted Map Archive
+th คลัง​แผนที่ Quaddicted
+
+@ Newest
+th ใหม่​สุด
+
+@ Author
+th ผู้​สร้าง
+
+@ Size
+th ขนาด
+
+@ Loading the map list...
+th กำลัง​โหลด​รายการ​แผนที่...
+
+@ Couldn't load the map list: {}
+th โหลด​รายการ​แผนที่​ไม่​ได้: {}
+
+@ {} single-player releases  -  F5 refreshes
+th ผลงาน​เล่น​คน​เดียว {} รายการ  -  F5 รีเฟรช
+
+@ {} matching
+th ตรง​กัน {}
+
+@ by {}
+th โดย {}
+
+@ requires: {}
+th ต้อง​มี: {}
+
+@ maps: {}
+th แผนที่: {}
+
+@ Failed: {}
+th ล้มเหลว: {}
+
+@ Downloading... {}%
+th กำลัง​ดาวน์โหลด... {}%
+
+@ Unpacking...
+th กำลัง​แตก​ไฟล์...
+
+@ Installed in {}/  -  Enter: play
+th ติดตั้ง​ใน {}/ แล้ว  -  Enter: เล่น
+
+@ Enter: download and install
+th Enter: ดาวน์โหลด​และ​ติดตั้ง
+
+@ unpacking
+th กำลัง​แตก​ไฟล์
+
+@ failed
+th ล้มเหลว
+
+@ installed
+th ติดตั้ง​แล้ว
+
+@ Downloads are not available in the browser build
+th ดาวน์โหลด​ไม่​ได้​ใน​เวอร์ชัน​เบราว์เซอร์
+
+@ the map list could not be read
+th อ่าน​รายการ​แผนที่​ไม่​ได้
+
+@ downloading needs the curl program
+th การ​ดาวน์โหลด​ต้อง​ใช้​โปรแกรม curl
+
+@ download failed
+th ดาวน์โหลด​ล้มเหลว
+
+@ the download is not a valid zip
+th ไฟล์​ที่​ดาวน์โหลด​ไม่​ใช่ zip ที่​ถูก​ต้อง
+
+@ nothing to install for this engine
+th ไม่มี​อะไร​ให้​ติดตั้ง​สำหรับ​เอนจิน​นี้
+
+@ needs {} installed first
+th ต้อง​ติดตั้ง {} ก่อน
+
+@ couldn't unpack {}
+th แตก​ไฟล์ {} ไม่​ได้
+
+# help screen
+@ About
+th เกี่ยว​กับ
+
+@ < Back
+th < กลับ
+
+# tr_ctx keys: English shows the short word, the key says which meaning
+@ Save (a manual save, as opposed to a quicksave or autosave)
+th บันทึก
+
+# ==== hud.txt ====
+
+# HUD, weapon and equipment wheels, sound captions and other in-game text.
+# Weapon, monster and item names follow the 2021 re-release's own translations.
+@ Axe
+th ขวาน
+
+@ Shotgun
+th ปืน​ลูก​ซอง
+
+@ Double-Barrelled Shotgun
+th ปืน​ลูก​ซอง​สอง​ลำ​กล้อง
+
+@ Nailgun
+th ปืน​ยิง​ตะปู
+
+@ Super Nailgun
+th ซูเปอร์​ปืน​ยิง​ตะปู
+
+@ Grenade Launcher
+th เครื่อง​ยิง​ลูก​ระเบิด
+
+@ Rocket Launcher
+th เครื่อง​ยิง​จรวด
+
+@ Thunderbolt
+th ธันเดอร์โบลต์
+
+@ Portal Gun
+th ปืน​พอร์ทัล
+
+@ Boomerang
+th บูมเมอแรง
+
+@ Stickybomb Launcher
+th เครื่อง​ยิง​ระเบิด​เหนียว
+
+@ Railgun
+th เรลกัน
+
+@ Hookshot
+th ฮุคช็อต
+
+@ Gel Sprayer
+th เครื่อง​พ่น​เจล
+
+@ Powerwasher
+th Powerwasher
+
+@ Night Vision Goggles
+th แว่น​มอง​กลางคืน
+
+@ Thermal Goggles
+th แว่น​ความ​ร้อน
+
+@ Normal vision
+th การ​มอง​ปกติ
+
+@ ON
+th เปิด
+
+@ OFF
+th ปิด
+
+@ {} (turn on)
+th {} (เปิด)
+
+@ {} (turn off)
+th {} (ปิด)
+
+@ Move mouse to select, release to toggle
+th ขยับ​เมาส์​เพื่อ​เลือก ปล่อย​เพื่อ​สลับ
+
+@ Move mouse to select, release to equip
+th ขยับ​เมาส์​เพื่อ​เลือก ปล่อย​เพื่อ​ถือ
+
+@ Release to toggle
+th ปล่อย​เพื่อ​สลับ
+
+@ Release to equip
+th ปล่อย​เพื่อ​ถือ
+
+@ shells
+th ลูก​ซอง
+
+@ nails
+th ตะปู
+
+@ rockets
+th จรวด
+
+@ cells
+th เซลล์
+
+@ Kills: {}/{}
+th ฆ่า: {}/{}
+
+@ Secrets: {}/{}
+th ความลับ: {}/{}
+
+@ Time {}
+th เวลา {}
+
+@ Press any button to continue...
+th กด​ปุ่ม​ใด​ก็ได้​เพื่อ​ไป​ต่อ...
+
+@ Press any key to continue...
+th กด​คีย์​ใด​ก็ได้​เพื่อ​ไป​ต่อ...
+
+@ BULLET TIME
+th BULLET TIME
+
+@ AUTO AIM
+th เล็ง​อัตโนมัติ
+
+@ Crosshair
+th เป้า​เล็ง
+
+@ + Marker
+th + ตัว​บอก
+
+@ Hit markers off
+th ปิด​ตัว​บอก​การ​โดน
+
+@ On target
+th เมื่อ​เล็ง​โดน
+
+@ On kill
+th เมื่อ​ฆ่า
+
+# sound captions
+@ [Secret found]
+th [พบ​ความลับ]
+
+@ [Message]
+th [ข้อความ]
+
+@ [Switch activated]
+th [สวิตช์​ทำงาน]
+
+@ [Key picked up]
+th [เก็บ​กุญแจ]
+
+@ [Rune picked up]
+th [เก็บ​รูน]
+
+@ [Teleporter]
+th [ประตู​วาร์ป]
+
+@ [Teleport]
+th [วาร์ป]
+
+@ [Splash]
+th [น้ำ​กระเซ็น]
+
+@ [Leaving water]
+th [ขึ้น​จาก​น้ำ]
+
+@ [Door]
+th [ประตู]
+
+@ [Platform moving]
+th [แท่น​เคลื่อน​ที่]
+
+@ [Button]
+th [ปุ่ม]
+
+@ [Health picked up]
+th [เก็บ​พลัง​ชีวิต]
+
+@ [Armor picked up]
+th [เก็บ​เกราะ]
+
+@ [Quad Damage wearing off]
+th [Quad Damage ใกล้​หมด]
+
+@ [Quad Damage]
+th [Quad Damage]
+
+@ [Pentagram wearing off]
+th [เพนตะแกรม​ใกล้​หมด]
+
+@ [Pentagram of Protection]
+th [เพนตะแกรม​คุ้มครอง]
+
+@ [Ring wearing off]
+th [แหวน​ใกล้​หมด]
+
+@ [Ring of Shadows]
+th [แหวน​เงา]
+
+@ [Biosuit wearing off]
+th [ชุด​ชีวภาพ​ใกล้​หมด]
+
+@ [Biosuit]
+th [ชุด​ชีวภาพ]
+
+@ [Item picked up]
+th [เก็บ​ไอเท็ม]
+
+@ [Weapon picked up]
+th [เก็บ​อาวุธ]
+
+@ [Ammo picked up]
+th [เก็บ​กระสุน]
+
+@ [Explosion]
+th [ระเบิด]
+
+@ [Grenade launched]
+th [ยิง​ลูก​ระเบิด]
+
+@ [Grenade bounce]
+th [ลูก​ระเบิด​เด้ง]
+
+@ [Rocket fired]
+th [ยิง​จรวด]
+
+@ [Nails fired]
+th [ยิง​ตะปู]
+
+@ [Lightning]
+th [สายฟ้า]
+
+@ [Thunder]
+th [ฟ้า​ร้อง]
+
+@ [Enforcer alerted]
+th [เอนฟอร์เซอร์​ตื่น​ตัว]
+
+@ [Grunt alerted]
+th [ทหาร​ตื่น​ตัว]
+
+@ [Rottweiler alerted]
+th [ร็อตไวเลอร์​ตื่น​ตัว]
+
+@ [Knight alerted]
+th [อัศวิน​ตื่น​ตัว]
+
+@ [Death Knight alerted]
+th [อัศวิน​มรณะ​ตื่น​ตัว]
+
+@ [Scrag alerted]
+th [สแครก​ตื่น​ตัว]
+
+@ [Ogre alerted]
+th [โอเกอร์​ตื่น​ตัว]
+
+@ [Fiend alerted]
+th [ปีศาจ​ตื่น​ตัว]
+
+@ [Shambler alerted]
+th [แชมเบลอร์​ตื่น​ตัว]
+
+@ [Zombie groaning]
+th [ซอมบี้​คราง]
+
+@ [Vore alerted]
+th [วอร์​ตื่น​ตัว]
+
+@ [Vore attacking]
+th [วอร์​โจมตี]
+
+@ [Spawn alerted]
+th [สปอว์น​ตื่น​ตัว]
+
+@ [Rotfish]
+th [ปลา​เน่า]
+
+@ [Spawn]
+th [สปอว์น]
+
+@ [Chthon]
+th [ช็อธอน]
+
+@ [Hard landing]
+th [ตก​กระแทก]
+
+@ [Drowning]
+th [จม​น้ำ]
+
+@ [Gasping for air]
+th [หอบ​หายใจ]
+
+@ [Burning]
+th [ไฟ​ไหม้]
+
+@ [Telefrag]
+th [เทเลแฟรก]
+
+@ [Gibbed]
+th [ร่าง​แหลก]
+
+# ==== console.txt ====
+
+# Console messages, shown translated only with con_translate 1 (Translate Console).
+# Cvar and command names stay as they are.
+@ Autosaved.
+th บันทึก​อัตโนมัติ​แล้ว
+
+@ Game saved.
+th บันทึก​เกม​แล้ว
+
+@ Can't save now.
+th บันทึก​ตอน​นี้​ไม่​ได้
+
+@ This game only autosaves (No Manual Saves modifier).
+th เกม​นี้​บันทึก​อัตโนมัติ​เท่านั้น (ตัว​ปรับ​ห้าม​บันทึก​เอง)
+
+@ Loading {}...
+th กำลัง​โหลด {}...
+
+@ load failed: {}
+th โหลด​ล้มเหลว: {}
+
+@ ERROR: autosave failed: {}
+th ข้อผิดพลาด: บันทึก​อัตโนมัติ​ล้มเหลว: {}
+
+@ ERROR: couldn't open {}
+th ข้อผิดพลาด: เปิด {} ไม่​ได้
+
+@ ERROR: couldn't open {}.
+th ข้อผิดพลาด: เปิด {} ไม่​ได้
+
+@ ERROR: couldn't write {}: {}
+th ข้อผิดพลาด: เขียน {} ไม่​ได้: {}
+
+@ ERROR: couldn't create {}: {}
+th ข้อผิดพลาด: สร้าง {} ไม่​ได้: {}
+
+@ couldn't write {}: {}
+th เขียน {} ไม่​ได้: {}
+
+@ Wrote {}
+th เขียน {} แล้ว
+
+@ screenshot failed: {}
+th จับ​ภาพ​หน้า​จอ​ล้มเหลว: {}
+
+@ screenshot: {}
+th จับ​ภาพ​หน้า​จอ: {}
+
+@ No readable save available. Select save or restart the level.
+th ไม่มี​บันทึก​ที่​อ่าน​ได้ เลือก​บันทึก​หรือ​เริ่ม​ด่าน​ใหม่
+
+@ Unknown command "{}"
+th ไม่​รู้จัก​คำสั่ง "{}"
+
+@ couldn't exec {}
+th exec {} ไม่​ได้
+
+@ execing {}
+th กำลัง exec {}
+
+@ execing config.cfg (inherited from {})
+th กำลัง exec config.cfg (สืบ​ทอด​จาก {})
+
+@ execing config.cfg (mod defaults)
+th กำลัง exec config.cfg (ค่า​เริ่มต้น​ของ​ม็อด)
+
+@ execing default.cfg (built-in)
+th กำลัง exec default.cfg (ใน​ตัว)
+
+@ {} cvars
+th {} cvar
+
+@ {} commands
+th {} คำสั่ง
+
+@ Can't "cmd", not connected
+th ใช้ "cmd" ไม่​ได้ ยัง​ไม่​ได้​เชื่อมต่อ
+
+@ Looking for Quake servers...
+th กำลัง​ค้นหา​เซิร์ฟเวอร์ Quake...
+
+@ Bad value, must be between 1 and 65534
+th ค่า​ไม่​ถูก​ต้อง ต้อง​อยู่​ระหว่าง 1 ถึง 65534
+
+@ Couldn't handle music file {}
+th จัดการ​ไฟล์​เพลง {} ไม่​ได้
+
+@ Bug report written to {}
+th เขียน​รายงาน​บั๊ก​ไป​ที่ {} แล้ว
+
+@ bugreport: can't create {}: {}
+th bugreport: สร้าง {} ไม่​ได้: {}
+
+@ graphics preset: {}
+th พรีเซ็ต​กราฟิก: {}
+
+@ Presets (r_shader_preset <name>):
+th พรีเซ็ต (r_shader_preset <name>):
+
+@ Add your own .slangp presets under <game>/shaders/.
+th เพิ่ม​พรีเซ็ต .slangp ของ​คุณ​เอง​ใน <game>/shaders/
+
+@ no shader preset loaded (r_shader_preset)
+th ไม่​ได้​โหลด​พรีเซ็ต​เชดเดอร์ (r_shader_preset)
+
+@ r_shader_preset: "{}" not found
+th r_shader_preset: ไม่​พบ "{}"
+
+@ no parameter "{}" in this preset
+th ไม่มี​พารามิเตอร์ "{}" ใน​พรีเซ็ต​นี้
+
+@ {} = {} (default {}, {}..{})
+th {} = {} (ค่า​เริ่มต้น {}, {}..{})
+
+@ Switching to {}...
+th กำลัง​สลับ​ไป {}...
+
+@ game: no game dir "{}" in {}
+th game: ไม่มี​โฟลเดอร์​เกม "{}" ใน {}
+
+@ game: can't find the engine executable
+th game: หา​ไฟล์​โปรแกรม​เอนจิน​ไม่​พบ
+
+@ game: exec failed: {}
+th game: exec ล้มเหลว: {}
+
+@ game: launch failed: {}
+th game: เปิด​ล้มเหลว: {}
+
+@ loaded {} in {}s
+th โหลด {} ใน {} วินาที
+
+@ No demos listed with startdemos
+th ไม่มี​เดโม​ใน startdemos
+
+@ Playing demo from {}.
+th กำลัง​เล่น​เดโม​จาก {}
+
+@ {} frames {} seconds {} fps
+th {} เฟรม {} วินาที {} fps
+
+@ Recording to {}.
+th กำลัง​บันทึก​ไป​ที่ {}
+
+@ Completed demo
+th เดโม​จบ​แล้ว
+
+@ Can't record during demo playback
+th บันทึก​ขณะ​เล่น​เดโม​ไม่​ได้
+
+@ Relative pathnames are not allowed.
+th ไม่​อนุญาต​ให้​ใช้​พาธ​แบบ​สัมพัทธ์
+
+@ Can't record - try again when connected
+th บันทึก​ไม่​ได้ - ลอง​ใหม่​เมื่อ​เชื่อมต่อ​แล้ว
+
+@ {} demo(s) in loop
+th {} เดโม​ใน​รอบ​วน
+
+@ Not recording a demo.
+th ไม่​ได้​บันทึก​เดโม​อยู่
+
+@ {} joined on a gamepad
+th {} เข้า​ร่วม​ด้วย​เกมแพด
+
+@ goggles: needs a game started with Add-ons and Goggles enabled
+th goggles: ต้อง​เริ่ม​เกม​ที่​เปิด​ส่วน​เสริม​และ​แว่น
+
+@ equip: needs a game started with Add-ons and Goggles enabled
+th equip: ต้อง​เริ่ม​เกม​ที่​เปิด​ส่วน​เสริม​และ​แว่น
+
+@ UDP listening on port {}
+th UDP รอ​ฟัง​ที่​พอร์ต {}
+
+@ UDP bind on port {} failed: {}
+th UDP ผูก​พอร์ต {} ล้มเหลว: {}
+
+@ Connection accepted by {}
+th {} ยอมรับ​การ​เชื่อมต่อ
+
+@ Connection failed: {}
+th เชื่อมต่อ​ล้มเหลว: {}
+
+@ Couldn't resolve {}
+th แปลง​ที่อยู่ {} ไม่​ได้
+
+@ Connecting to {}...
+th กำลัง​เชื่อมต่อ {}...
+
+@ Connecting to QuakeWorld server {}...
+th กำลัง​เชื่อมต่อ​เซิร์ฟเวอร์ QuakeWorld {}...
+
+@ Disconnected: {}
+th ตัด​การ​เชื่อมต่อ: {}
+
+@ Server disconnected
+th เซิร์ฟเวอร์​ตัด​การ​เชื่อมต่อ
+
+@ Client {} connected
+th ไคลเอนต์ {} เชื่อมต่อ​แล้ว
+
+@ Client {} timed out
+th ไคลเอนต์ {} หมด​เวลา
+
+@ Couldn't spawn server {}: {}
+th สร้าง​เซิร์ฟเวอร์ {} ไม่​ได้: {}
+
+@ maxplayers can not be changed while a server is running.
+th เปลี่ยน maxplayers ขณะ​เซิร์ฟเวอร์​ทำงาน​ไม่​ได้
+
+@ You can't kick yourself!
+th คุณ​เตะ​ตัว​เอง​ไม่​ได้!
+
+@ Only the server may changelevel
+th เฉพาะ​เซิร์ฟเวอร์​เท่านั้น​ที่ changelevel ได้
+
+@ {} renamed to {}
+th {} เปลี่ยน​ชื่อ​เป็น {}

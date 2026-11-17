@@ -1,0 +1,3024 @@
+# am: the port's own text; English keys from crates/qcore/lang/*.txt.
+# Format in crates/qcore/src/lang/catalog.rs; check with tools/lang_check.py.
+
+# ==== menu.txt ====
+
+# Options pages: page names, row labels and choice values.
+@ 10% speed
+am 10% ፍጥነት
+
+@ 2 split-screen
+am 2 የተከፈለ ስክሪን
+
+@ 3 split-screen
+am 3 የተከፈለ ስክሪን
+
+@ 4 split-screen
+am 4 የተከፈለ ስክሪን
+
+@ 5 split-screen
+am 5 የተከፈለ ስክሪን
+
+@ 6 split-screen
+am 6 የተከፈለ ስክሪን
+
+@ 2D aiming
+am 2D ማነጣጠር
+
+@ 2x monsters
+am 2x ጭራቆች
+
+@ 3x monsters
+am 3x ጭራቆች
+
+@ 4x monsters
+am 4x ጭራቆች
+
+@ 3D resolution
+am 3D ጥራት
+
+@ 3D view
+am 3D እይታ
+
+@ 8-bit Color
+am 8-ቢት ቀለም
+
+@ Accessibility
+am ተደራሽነት
+
+@ Acquisition Cone
+am የመያዣ ሾጣጣ
+
+@ Activation
+am ማግበሪያ
+
+@ Add a ringing room tail after the cue
+am ከድምፁ በኋላ የክፍል ማስተጋባት ጨምር
+
+@ Add delayed repeats after the cue
+am ከድምፁ በኋላ የዘገዩ ድግግሞሾችን ጨምር
+
+@ Add saturation and distortion
+am ሙሌትና መዛባት ጨምር
+
+@ Add-ons
+am ተጨማሪዎች
+
+@ Address
+am አድራሻ
+
+@ Adds fine noise to hide color banding
+am የቀለም ደረጃዎችን ለመደበቅ ጥቃቅን ጫጫታ ይጨምራል
+
+@ Advanced Settings
+am የላቁ ቅንብሮች
+
+@ Aim Assist
+am የማነጣጠር እገዛ
+
+@ Aim Rotation
+am የማነጣጠር ማሽከርከር
+
+@ Aim Slowdown
+am የማነጣጠር ማዘግየት
+
+@ Aim Style
+am የማነጣጠር ዘይቤ
+
+@ All
+am ሁሉም
+
+@ All enemies
+am ሁሉም ጠላቶች
+
+@ Alt Fire (Add-ons)
+am ተለዋጭ ተኩስ (ተጨማሪዎች)
+
+@ Always Run
+am ሁልጊዜ ሩጥ
+
+@ Ambient Occlusion
+am የአካባቢ ጥላ (AO)
+
+@ Ammo Counts
+am የጥይት ብዛት
+
+@ Ammo Counts Position
+am የጥይት ብዛት ቦታ
+
+@ Ammo Pickups
+am የጥይት ማንሻዎች
+
+@ Anisotropic
+am አኒሶትሮፒክ
+
+@ Anti-aliasing
+am ጸረ-ጥርስ (AA)
+
+@ Apply To
+am የሚተገበርበት
+
+@ Armor
+am ጋሻ
+
+@ Armor Position
+am የጋሻ ቦታ
+
+@ Ask
+am ጠይቅ
+
+@ Attack
+am ማጥቃት
+
+@ Audio
+am ድምፅ
+
+@ Auto-aim
+am ራስ-ማነጣጠር
+
+@ Auto-aim Settings
+am የራስ-ማነጣጠር ቅንብሮች
+
+@ Autosave
+am ራስ-ማስቀመጥ
+
+@ Autosave Settings
+am የራስ-ማስቀመጥ ቅንብሮች
+
+@ Autosave Timer
+am የራስ-ማስቀመጥ ሰዓት
+
+@ Autosaves to Keep
+am የሚቀመጡ ራስ-ማስቀመጫዎች
+
+@ Bass
+am ባስ
+
+@ Blip
+am ብሊፕ
+
+@ Blood Quality
+am የደም ጥራት
+
+@ Blood Splatter Settings
+am የደም ፍንጣቂ ቅንብሮች
+
+@ Blue
+am ሰማያዊ
+
+@ Boomerang Settings
+am የቡሜራንግ ቅንብሮች
+
+@ Boost or cut high frequencies in decibels
+am ከፍተኛ ድግግሞሾችን በዴሲቤል ጨምር ወይም ቀንስ
+
+@ Boost or cut low frequencies in decibels
+am ዝቅተኛ ድግግሞሾችን በዴሲቤል ጨምር ወይም ቀንስ
+
+@ Brightness
+am ብሩህነት
+
+@ Bullet Time (Add-ons)
+am የጥይት ጊዜ (ተጨማሪዎች)
+
+@ Bullet Time Settings
+am የጥይት ጊዜ ቅንብሮች
+
+@ Button Glyphs
+am የአዝራር ምልክቶች
+
+@ Button Size
+am የአዝራር መጠን
+
+@ Camera
+am ካሜራ
+
+@ Caustic Intensity
+am የብርሃን ነጸብራቅ ጥንካሬ
+
+@ Caustics
+am የውሃ ብርሃን ነጸብራቅ
+
+@ Center
+am መሃል
+
+@ Center Message Position
+am የመሃል መልዕክት ቦታ
+
+@ Center Message Time
+am የመሃል መልዕክት ጊዜ
+
+@ Center View
+am እይታን አመሃኝ
+
+@ Change Color on Kill
+am ሲገደል ቀለም ቀይር
+
+@ Change Color on Target
+am ዒላማ ላይ ቀለም ቀይር
+
+@ Chime
+am ደወል
+
+@ Click
+am ጠቅታ
+
+@ Clink
+am ቅጭል
+
+@ Coin
+am ሳንቲም
+
+@ Color
+am ቀለም
+
+@ Color Filter
+am የቀለም ማጣሪያ
+
+@ Color of the grenade arc
+am የቦምብ ቅስት ቀለም
+
+@ Colored Lighting
+am ባለቀለም ብርሃን
+
+@ Connect
+am ተገናኝ
+
+@ Contrast
+am ንፅፅር
+
+@ Controls
+am መቆጣጠሪያዎች
+
+@ Cooldown (ms)
+am የእረፍት ጊዜ (ms)
+
+@ Crosshair Outline
+am የማነጣጠሪያ ጠርዝ
+
+@ Crosshair Shape
+am የማነጣጠሪያ ቅርጽ
+
+@ Crosshair Size
+am የማነጣጠሪያ መጠን
+
+@ Current Ammo
+am የአሁኑ ጥይት
+
+@ Current Ammo Position
+am የአሁኑ ጥይት ቦታ
+
+@ Customize This Game
+am ይህን ጨዋታ አብጅ
+
+@ Damage
+am ጉዳት
+
+@ Damage Taken
+am የደረሰ ጉዳት
+
+@ Debris
+am ፍርስራሽ
+
+@ Debris Quality
+am የፍርስራሽ ጥራት
+
+@ Debris Settings
+am የፍርስራሽ ቅንብሮች
+
+@ Directional Damage
+am የአቅጣጫ ጉዳት
+
+@ Dithering
+am ዲተሪንግ
+
+@ Dodge / Dive (Add-ons)
+am መሸሽ / መጥለቅ (ተጨማሪዎች)
+
+@ Dragging up looks down instead of up
+am ወደ ላይ መጎተት ወደ ታች ያሳያል
+
+@ Drive
+am ሙሌት
+
+@ Dynamic Lights
+am ተለዋዋጭ መብራቶች
+
+@ Echo
+am ማሚቶ
+
+@ Enemy Health
+am የጠላት ጤና
+
+@ Enemy Wounds
+am የጠላት ቁስሎች
+
+@ Enhanced Blood Splatter
+am የተሻሻለ የደም ፍንጣቂ
+
+@ Enhanced FX
+am የተሻሻሉ FX
+
+@ Enhanced Models
+am የተሻሻሉ ሞዴሎች
+
+@ Enhanced Particles
+am የተሻሻሉ ቅንጣቶች
+
+@ Enhanced Water
+am የተሻሻለ ውሃ
+
+@ Enhancements
+am ማሻሻያዎች
+
+@ Equipment Wheel (Add-ons)
+am የቁሳቁስ ጎማ (ተጨማሪዎች)
+
+@ Exploding boxes throw metal shards
+am የሚፈነዱ ሳጥኖች የብረት ስብርባሪዎችን ይወረውራሉ
+
+@ Explosion Damage
+am የፍንዳታ ጉዳት
+
+@ Explosion Scorch Marks
+am የፍንዳታ የቃጠሎ ምልክቶች
+
+@ Explosions scorch nearby solid surfaces
+am ፍንዳታዎች በአቅራቢያ ያሉ ጠንካራ ገጽታዎችን ያቃጥላሉ
+
+@ Explosives only
+am ፈንጂዎች ብቻ
+
+@ Extra Monsters
+am ተጨማሪ ጭራቆች
+
+@ Extra Per 10 Damage (ms)
+am ለእያንዳንዱ 10 ጉዳት ተጨማሪ (ms)
+
+@ FX Settings
+am የFX ቅንብሮች
+
+@ Field of View
+am የእይታ መስክ
+
+@ Firing never uses up ammo
+am መተኮስ ጥይትን አይጨርስም
+
+@ First person
+am የመጀመሪያ ሰው
+
+@ Flick Time
+am የፍሊክ ጊዜ
+
+@ Flight Speed
+am የበረራ ፍጥነት
+
+@ Fog
+am ጭጋግ
+
+@ Frag Limit
+am የግድያ ገደብ
+
+@ Freeze Duration (ms)
+am የመቀዝቀዝ ቆይታ (ms)
+
+@ GLQuake
+am GLQuake
+
+@ Game Speed
+am የጨዋታ ፍጥነት
+
+@ Game Type
+am የጨዋታ አይነት
+
+@ Gameplay
+am ጨዋታ
+
+@ Gameplay Modifiers
+am የጨዋታ ለዋጮች
+
+@ Gel Quality
+am የጄል ጥራት
+
+@ Gib Surface Painting
+am የአካል ቁርጥራጭ ገጽ ቀለም
+
+@ Gibs
+am የአካል ቁርጥራጮች
+
+@ Gibs and heads tumble and bounce
+am ቁርጥራጮችና ራሶች ይንከባለላሉ ይነጥራሉም
+
+@ Goggle Glow Quality
+am የመነጽር ብርሃን ጥራት
+
+@ Goggle Intensity
+am የመነጽር ጥንካሬ
+
+@ Goggle Noise
+am የመነጽር ጫጫታ
+
+@ Goggles Settings
+am የመነጽር ቅንብሮች
+
+@ Graphics
+am ግራፊክስ
+
+@ Green
+am አረንጓዴ
+
+@ Grenade Arc
+am የቦምብ ቅስት
+
+@ Grenade Arc Settings
+am የቦምብ ቅስት ቅንብሮች
+
+@ Gun Kick
+am የመሳሪያ ወደኋላ ምት
+
+@ Gyro
+am ጋይሮ
+
+@ Gyro & Flick Stick
+am ጋይሮ እና ፍሊክ ስቲክ
+
+@ Gyro Active
+am ጋይሮ ንቁ
+
+@ Gyro Aiming
+am በጋይሮ ማነጣጠር
+
+@ HUD
+am HUD
+
+@ HUD Style
+am የHUD ዘይቤ
+
+@ Health
+am ጤና
+
+@ Health Pickups
+am የጤና ማንሻዎች
+
+@ Health Position
+am የጤና ቦታ
+
+@ Health Regeneration
+am የጤና መታደስ
+
+@ Hit & Kill Sounds
+am የመምታትና የመግደል ድምፆች
+
+@ Hit Doors & Lifts
+am በሮችንና ሊፍቶችን ምታ
+
+@ Hit Markers
+am የመምታት ምልክቶች
+
+@ Hit Sound
+am የመምታት ድምፅ
+
+@ Hitmarker Size
+am የመምታት ምልክት መጠን
+
+@ Hitmarker Type
+am የመምታት ምልክት አይነት
+
+@ Hitstop Advanced
+am የላቀ ሂትስቶፕ
+
+@ Hitstop Settings
+am የሂትስቶፕ ቅንብሮች
+
+@ Hold
+am ያዝ
+
+@ Hold lock-on
+am ለመቆለፍ ያዝ
+
+@ Hook Enemies
+am ጠላቶችን አንጠልጥል
+
+@ Hook Metal
+am ብረት አንጠልጥል
+
+@ Hook Stone
+am ድንጋይ አንጠልጥል
+
+@ Hook Wood
+am እንጨት አንጠልጥል
+
+@ Hooking an enemy pulls you to it
+am ጠላትን ማንጠልጠል ወደ እሱ ይጎትትሃል
+
+@ Hookshot Range
+am የመንጠቆ ርቀት
+
+@ Hookshot Settings
+am የመንጠቆ ቅንብሮች
+
+@ Host Game
+am ጨዋታ አስተናግድ
+
+@ How far the hook flies before it retracts
+am መንጠቆው ከመመለሱ በፊት ምን ያህል ይበራል
+
+@ How visible the on-screen controls are
+am በስክሪን ላይ ያሉ መቆጣጠሪያዎች ምን ያህል ይታያሉ
+
+@ Impact Lifetime
+am የተጽዕኖ ዕድሜ
+
+@ Infinite Ammo
+am ማያልቅ ጥይት
+
+@ Input
+am ግቤት
+
+@ Input Scale
+am የግቤት መጠን
+
+@ Interpolate Animation
+am አኒሜሽንን አለስልስ
+
+@ Interpolate Movement
+am እንቅስቃሴን አለስልስ
+
+@ Invert Look
+am እይታን ገልብጥ
+
+@ Invert Mouse
+am አይጥን ገልብጥ
+
+@ Invert Stick
+am ስቲክን ገልብጥ
+
+@ Jet Quality
+am የጄት ጥራት
+
+@ Join Game
+am ጨዋታ ተቀላቀል
+
+@ Jump / Swim Up
+am ዝለል / ወደ ላይ ዋኝ
+
+@ Jump again in mid-air
+am በአየር ላይ እንደገና ዝለል
+
+@ Jumps
+am ዝላዮች
+
+@ Keys & Powerups
+am ቁልፎችና ኃይሎች
+
+@ Keys & Powerups Position
+am የቁልፎችና ኃይሎች ቦታ
+
+@ Kill Bonus (x)
+am የግድያ ጉርሻ (x)
+
+@ Kill Sound
+am የመግደል ድምፅ
+
+@ Knock
+am ማንኳኳት
+
+@ Left
+am ግራ
+
+@ Length of the motion blur streaks
+am የእንቅስቃሴ ብዥታ መስመሮች ርዝመት
+
+@ Lifetime (seconds)
+am ዕድሜ (ሰከንዶች)
+
+@ Live Portal Views
+am የቀጥታ ፖርታል እይታዎች
+
+@ Live View Distance
+am የቀጥታ እይታ ርቀት
+
+@ Local Players
+am የአካባቢ ተጫዋቾች
+
+@ Local red wounds follow enemy animation
+am ቀይ ቁስሎች የጠላትን አኒሜሽን ይከተላሉ
+
+@ Lock Indicator
+am የመቆለፊያ ጠቋሚ
+
+@ Long falls don't hurt
+am ረጅም ውድቀቶች አይጎዱም
+
+@ Longest Freeze (ms)
+am ረጅሙ መቀዝቀዝ (ms)
+
+@ Look Down
+am ወደ ታች ተመልከት
+
+@ Look Speed
+am የእይታ ፍጥነት
+
+@ Look Up
+am ወደ ላይ ተመልከት
+
+@ Main Menu Music
+am የዋና ምናሌ ሙዚቃ
+
+@ Max FPS
+am ከፍተኛ FPS
+
+@ Max Players
+am ከፍተኛ ተጫዋቾች
+
+@ Maximum Impacts
+am ከፍተኛ ተጽዕኖዎች
+
+@ Maximum Marks
+am ከፍተኛ ምልክቶች
+
+@ Maximum Range
+am ከፍተኛ ርቀት
+
+@ Melee only
+am የቅርብ ውጊያ ብቻ
+
+@ Message Background
+am የመልዕክት ዳራ
+
+@ Message Text Size
+am የመልዕክት ጽሑፍ መጠን
+
+@ Messages & Captions
+am መልዕክቶችና መግለጫ ጽሑፎች
+
+@ Meter Duration (real seconds)
+am የመለኪያ ቆይታ (እውነተኛ ሰከንዶች)
+
+@ Minimum Damage
+am ዝቅተኛ ጉዳት
+
+@ Mode
+am ሁነታ
+
+@ Modern Console
+am ዘመናዊ ኮንሶል
+
+@ Modern HUD Layout
+am ዘመናዊ የHUD አቀማመጥ
+
+@ Most recent save
+am የቅርብ ጊዜ ማስቀመጫ
+
+@ Motion Blur
+am የእንቅስቃሴ ብዥታ
+
+@ Motion Blur Amount
+am የእንቅስቃሴ ብዥታ መጠን
+
+@ Motion Blur Quality
+am የእንቅስቃሴ ብዥታ ጥራት
+
+@ Mouse & Keyboard
+am አይጥና ቁልፍ ሰሌዳ
+
+@ Mouse Speed
+am የአይጥ ፍጥነት
+
+@ Move Back
+am ወደ ኋላ ሂድ
+
+@ Move Forward
+am ወደ ፊት ሂድ
+
+@ Music Volume
+am የሙዚቃ ድምፅ መጠን
+
+@ Next Weapon
+am ቀጣይ መሳሪያ
+
+@ No Drowning
+am መስጠም የለም
+
+@ No Fall Damage
+am የውድቀት ጉዳት የለም
+
+@ No Manual Saves
+am በእጅ ማስቀመጥ የለም
+
+@ No Self Damage
+am ራስን መጉዳት የለም
+
+@ Noise Filter
+am የጫጫታ ማጣሪያ
+
+@ Normal Color
+am መደበኛ ቀለም
+
+@ Notify Message Position
+am የማሳወቂያ መልዕክት ቦታ
+
+@ Notify Message Time
+am የማሳወቂያ መልዕክት ጊዜ
+
+@ Number of splatter rays per blood impact
+am በእያንዳንዱ የደም ምት የፍንጣቂ ጨረሮች ብዛት
+
+@ Off
+am ጠፍቷል
+
+@ On Death
+am ሲሞት
+
+@ On Kill Color
+am የግድያ ቀለም
+
+@ On Target Color
+am የዒላማ ቀለም
+
+@ Opacity
+am ግልጽነት
+
+@ Opacity of the grenade arc
+am የቦምብ ቅስት ግልጽነት
+
+@ Pants Color
+am የሱሪ ቀለም
+
+@ Particle Quality
+am የቅንጣት ጥራት
+
+@ Particles
+am ቅንጣቶች
+
+@ Physical Nail Impacts
+am አካላዊ የሚስማር ተጽዕኖዎች
+
+@ Pistol Start
+am በሽጉጥ ጀምር
+
+@ Pitch
+am የድምፅ ቅላፄ
+
+@ Pitch Sensitivity
+am የላይ-ታች ትብነት
+
+@ Playback Speed
+am የመልሶ ማጫወት ፍጥነት
+
+@ Player Setup
+am የተጫዋች ዝግጅት
+
+@ Pop
+am ፖፕ
+
+@ Portal Gun Settings
+am የፖርታል ሽጉጥ ቅንብሮች
+
+@ Portal Recursion
+am የፖርታል ድግግሞሽ
+
+@ Portal View Quality
+am የፖርታል እይታ ጥራት
+
+@ Preview Sound
+am ድምፅ ቅድመ እይታ
+
+@ Previous Weapon
+am ቀዳሚ መሳሪያ
+
+@ Projectile Shotguns Settings
+am የተወንጫፊ ሾትገን ቅንብሮች
+
+@ Projectile Speed (units/s)
+am የተወንጫፊ ፍጥነት (units/s)
+
+@ Purple
+am ወይን ጠጅ
+
+@ Push
+am ግፋ
+
+@ Push Strength
+am የመግፋት ጥንካሬ
+
+@ Quick Load
+am ፈጣን ጫን
+
+@ Quick Save
+am ፈጣን አስቀምጥ
+
+@ Railgun Settings
+am የሬልገን ቅንብሮች
+
+@ Ranged only
+am የርቀት ጥቃት ብቻ
+
+@ Reacquire While Held
+am ተይዞ ሳለ እንደገና ያዝ
+
+@ Red
+am ቀይ
+
+@ Reduce Motion
+am እንቅስቃሴን ቀንስ
+
+@ Regen (seconds per second)
+am መታደስ (ሰከንድ በሰከንድ)
+
+@ Render Scale
+am የማሳያ መጠን
+
+@ Reverb
+am ማስተጋባት
+
+@ Right
+am ቀኝ
+
+@ Ripple Intensity
+am የሞገድ ጥንካሬ
+
+@ Ripples
+am ሞገዶች
+
+@ Roll Sensitivity
+am የማዘንበል ትብነት
+
+@ Rumble
+am ንዝረት
+
+@ Run
+am ሩጥ
+
+@ Save on All Enemies Killed
+am ሁሉም ጠላቶች ሲገደሉ አስቀምጥ
+
+@ Save on All Secrets Found
+am ሁሉም ሚስጥሮች ሲገኙ አስቀምጥ
+
+@ Save on Level Entry
+am ወደ ደረጃ ሲገባ አስቀምጥ
+
+@ Save on Secret Found
+am ሚስጥር ሲገኝ አስቀምጥ
+
+@ Scoreboard
+am የውጤት ሰሌዳ
+
+@ Screen Flashes
+am የስክሪን ብልጭታዎች
+
+@ Screen Shader
+am የስክሪን ሼደር
+
+@ Screen Shake
+am የስክሪን መንቀጥቀጥ
+
+@ Search LAN
+am LAN ፈልግ
+
+@ Seconds a center-screen message stays up
+am የመሃል መልዕክት የሚቆይበት ሰከንዶች
+
+@ See Through Portals
+am በፖርታሎች ውስጥ እይ
+
+@ See-through Teleporters
+am አሳላፊ ቴሌፖርተሮች
+
+@ Shirt Color
+am የሸሚዝ ቀለም
+
+@ Shotgun Bullet Decals
+am የሾትገን ጥይት ምልክቶች
+
+@ Shoulder left
+am ትከሻ ግራ
+
+@ Shoulder right
+am ትከሻ ቀኝ
+
+@ Show FPS
+am FPS አሳይ
+
+@ Show Face
+am ፊት አሳይ
+
+@ Shrapnel
+am ስብርባሪ
+
+@ Size of on-screen messages and captions
+am በስክሪን ላይ ያሉ መልዕክቶችና መግለጫ ጽሑፎች መጠን
+
+@ Skill
+am ክህሎት
+
+@ Sky Fog
+am የሰማይ ጭጋግ
+
+@ Smooths the stepped movement of monsters
+am የጭራቆችን የሚቆራረጥ እንቅስቃሴ ያለሰልሳል
+
+@ Sound
+am ድምፅ
+
+@ Sound Captions
+am የድምፅ መግለጫ ጽሑፎች
+
+@ Sound Volume
+am የድምፅ መጠን
+
+@ Speed Blur
+am የፍጥነት ብዥታ
+
+@ Splashes
+am ፍንጣቂዎች
+
+@ Splatter Amount
+am የፍንጣቂ መጠን
+
+@ Splatter Size
+am የፍንጣቂ ስፋት
+
+@ Start Game
+am ጨዋታ ጀምር
+
+@ Staying underwater doesn't hurt
+am ከውሃ በታች መቆየት አይጎዳም
+
+@ Stick Look Pitch
+am የስቲክ እይታ ላይ-ታች
+
+@ Stick Look Yaw
+am የስቲክ እይታ ግራ-ቀኝ
+
+@ Strafe Left
+am ወደ ግራ ተንሸራተት
+
+@ Strafe Right
+am ወደ ቀኝ ተንሸራተት
+
+@ Strength of the surface swell and rings
+am የገጽ እብጠትና ቀለበቶች ጥንካሬ
+
+@ Stun Duration
+am የድንዛዜ ቆይታ
+
+@ Style
+am ዘይቤ
+
+@ Supersampling
+am ሱፐርሳምፕሊንግ
+
+@ Surface Hit Effects
+am የገጽ ምት ተጽዕኖዎች
+
+@ Swim Down
+am ወደ ታች ዋኝ
+
+@ Targets
+am ዒላማዎች
+
+@ Teamplay
+am የቡድን ጨዋታ
+
+@ Texture Filter
+am የቴክስቸር ማጣሪያ
+
+@ Third person
+am ሶስተኛ ሰው
+
+@ Thud
+am ድብ
+
+@ Tick
+am ቲክ
+
+@ Time Limit
+am የጊዜ ገደብ
+
+@ Time Stretch
+am የጊዜ መለጠጥ
+
+@ Toggle Attack
+am ማጥቃት ቀያይር
+
+@ Toggle Run
+am መሮጥ ቀያይር
+
+@ Toggle auto-aim
+am ራስ-ማነጣጠር ቀያይር
+
+@ Touch Controls
+am የንክኪ መቆጣጠሪያዎች
+
+@ Touchscreen
+am ንክኪ ስክሪን
+
+@ Tough Enemy Health
+am የጠንካራ ጠላት ጤና
+
+@ Tough enemies only
+am ጠንካራ ጠላቶች ብቻ
+
+@ Trail Colour
+am የዱካ ቀለም
+
+@ Translate Console
+am ኮንሶሉን ተርጉም
+
+@ Translucent Water
+am አሳላፊ ውሃ
+
+@ Treble
+am ትሬብል
+
+@ Turn Left
+am ወደ ግራ ታጠፍ
+
+@ Turn Right
+am ወደ ቀኝ ታጠፍ
+
+@ Underwater FX
+am የውሃ ውስጥ FX
+
+@ Use Bullet Time Meter
+am የጥይት ጊዜ መለኪያ ተጠቀም
+
+@ VSync
+am VSync
+
+@ View Bob
+am የእይታ መወዛወዝ
+
+@ Viewmodels
+am የእጅ መሳሪያ ሞዴሎች
+
+@ Volume
+am የድምፅ መጠን
+
+@ Water Opacity
+am የውሃ ግልጽነት
+
+@ Water Quality
+am የውሃ ጥራት
+
+@ Water Settings
+am የውሃ ቅንብሮች
+
+@ Weapon Wheel
+am የመሳሪያ ጎማ
+
+@ Weapon Wheel Slowdown
+am የመሳሪያ ጎማ ማዘግየት
+
+@ Weapons
+am መሳሪያዎች
+
+@ Weapons Position
+am የመሳሪያዎች ቦታ
+
+@ Where center-screen messages appear
+am የመሃል መልዕክቶች የሚታዩበት ቦታ
+
+@ Where pickup and event messages appear
+am የማንሻና የክስተት መልዕክቶች የሚታዩበት ቦታ
+
+@ White
+am ነጭ
+
+@ Yaw Sensitivity
+am የግራ-ቀኝ ትብነት
+
+@ Yellow
+am ቢጫ
+
+# lowercase choice values
+@ T
+am T
+
+@ always
+am ሁልጊዜ
+
+@ auto
+am ራስ-ሰር
+
+@ banded
+am ባለ መስመር
+
+@ borderless
+am ያለ ጠርዝ
+
+@ bottom center
+am ታች መሃል
+
+@ bottom left
+am ታች ግራ
+
+@ bottom right
+am ታች ቀኝ
+
+@ box
+am ሳጥን
+
+@ broken square
+am የተሰበረ ካሬ
+
+@ classic
+am ክላሲክ
+
+@ coarse
+am ሻካራ
+
+@ cooperative
+am ትብብር
+
+@ cross
+am መስቀል
+
+@ cross + dot
+am መስቀል + ነጥብ
+
+@ cyan
+am ሳያን
+
+@ dashed
+am ሰረዝ
+
+@ deathmatch
+am deathmatch
+
+@ deuteranopia
+am ዲውቴራኖፒያ
+
+@ diagonal streaks
+am ሰያፍ መስመሮች
+
+@ diamond
+am አልማዝ
+
+@ dot
+am ነጥብ
+
+@ double
+am ድርብ
+
+@ double chevrons
+am ድርብ ቀስቶች
+
+@ double diagonals
+am ድርብ ሰያፎች
+
+@ easy
+am ቀላል
+
+@ fine
+am ጥሩ
+
+@ fit output
+am ከውጤቱ ጋር አስማማ
+
+@ flick stick
+am ፍሊክ ስቲክ
+
+@ fullscreen
+am ሙሉ ስክሪን
+
+@ gap cross
+am ክፍተት ያለው መስቀል
+
+@ green
+am አረንጓዴ
+
+@ grey
+am ግራጫ
+
+@ half speed
+am ግማሽ ፍጥነት
+
+@ hard
+am ከባድ
+
+@ high
+am ከፍተኛ
+
+@ huge
+am ግዙፍ
+
+@ immersive
+am አስጠላቂ
+
+@ intense
+am ኃይለኛ
+
+@ large
+am ትልቅ
+
+@ larger
+am በጣም ትልቅ
+
+@ largest
+am ትልቁ
+
+@ linear
+am ቀጥተኛ
+
+@ low
+am ዝቅተኛ
+
+@ lower
+am ዝቅ ያለ
+
+@ magenta
+am ማጀንታ
+
+@ medium
+am መካከለኛ
+
+@ middle
+am መሃል
+
+@ middle left
+am መሃል ግራ
+
+@ middle right
+am መሃል ቀኝ
+
+@ modern
+am ዘመናዊ
+
+@ nearest
+am ቅርቡ
+
+@ nightmare
+am ቅዠት
+
+@ nintendo
+am nintendo
+
+@ no team damage
+am የቡድን ጉዳት የለም
+
+@ none
+am ምንም
+
+@ normal
+am መደበኛ
+
+@ off
+am ጠፍቷል
+
+@ off while held
+am ሲያዝ ጠፍቷል
+
+@ on
+am በርቷል
+
+@ only while held
+am ሲያዝ ብቻ
+
+@ playstation
+am playstation
+
+@ protanopia
+am ፕሮታኖፒያ
+
+@ quarter speed
+am ሩብ ፍጥነት
+
+@ red
+am ቀይ
+
+@ short diagonals
+am አጭር ሰያፎች
+
+@ single
+am ነጠላ
+
+@ small
+am ትንሽ
+
+@ solid
+am ሙሉ
+
+@ spectacle
+am ትዕይንታዊ
+
+@ subtle
+am ለስላሳ
+
+@ team damage
+am የቡድን ጉዳት
+
+@ top center
+am ላይ መሃል
+
+@ top left
+am ላይ ግራ
+
+@ top right
+am ላይ ቀኝ
+
+@ triple
+am ሶስቴ
+
+@ tritanopia
+am ትሪታኖፒያ
+
+@ upper
+am ከፍ ያለ
+
+@ white
+am ነጭ
+
+@ whole screen
+am ሙሉ ስክሪን
+
+@ windowed
+am በመስኮት
+
+@ xbox
+am xbox
+
+@ yellow
+am ቢጫ
+
+# ==== tooltips.txt ====
+
+# Options help lines (tooltips) and reasons for disabled rows.
+@ 2D aiming turns the view continuously with the right stick; flick stick snaps the view to where you push the stick, then turning the stick rotates it
+am 2D ማነጣጠር እይታውን በቀኝ ስቲክ ያለማቋረጥ ያዞራል፤ ፍሊክ ስቲክ እይታውን ስቲኩን ወደገፉበት ወዲያው ያዞራል፣ ከዚያ ስቲኩን ማዞር እይታውን ያሽከረክራል
+
+@ 3D resolution relative to the window; the UI stays sharp
+am ከመስኮቱ አንጻር የ3D ጥራት፤ UI ጥርት ብሎ ይቆያል
+
+@ 3D view keeps the HUD and menus sharp; whole screen runs them through the shader too
+am 3D እይታ HUD እና ምናሌዎችን ጥርት አድርጎ ይይዛል፤ ሙሉ ስክሪን እነሱንም በሼደሩ ያሳልፋል
+
+@ A Quake III style railgun: a slug that pierces every enemy on its line, using 2 cells a shot and refiring every 1.5 s; select it through its assigned weapon slot (Add-ons)
+am የQuake III አይነት ሬልገን፦ በመስመሩ ላይ ያለን ጠላት ሁሉ የሚወጋ ጥይት፣ በአንድ ተኩስ 2 ሴሎችን ይጠቀማል፣ በየ1.5 ሰ እንደገና ይተኩሳል፤ በተመደበለት የመሳሪያ ቦታ ይምረጡት (ተጨማሪዎች)
+
+@ A Zelda-style hookshot: fire sends a chain hook out; it latches onto hookable surfaces or enemies and reels you in; fire again to let go
+am የZelda አይነት መንጠቆ፦ መተኮስ የሰንሰለት መንጠቆ ይልካል፤ በሚያዙ ገጽታዎች ወይም ጠላቶች ላይ ተጣብቆ ይጎትትዎታል፤ ለመልቀቅ እንደገና ይተኩሱ
+
+@ Also translates the engine's console messages; off keeps them in English
+am የሞተሩን የኮንሶል መልዕክቶችም ይተረጉማል፤ ጠፍቶ ሲሆን በእንግሊዝኛ ይቆያሉ
+
+@ Automatically acquire another enemy while holding Lock-on after losing a target
+am ዒላማ ከጠፋ በኋላ Lock-on ተይዞ ሳለ ሌላ ጠላትን በራስ-ሰር ይያዙ
+
+@ Blends between animation frames of monsters and weapons
+am በጭራቆችና በመሳሪያዎች የአኒሜሽን ፍሬሞች መካከል ያዋህዳል
+
+@ Blood stains surfaces and bodies; cosmetic, independent of particle packs
+am ደም ገጽታዎችንና አካላትን ያቆሽሻል፤ ለመልክ ብቻ፣ ከቅንጣት ጥቅሎች ነጻ ነው
+
+@ Bloom glow around bright lights and heat sources; medium uses 4 taps, high uses 8, low disables halo taps
+am በደማቅ መብራቶችና በሙቀት ምንጮች ዙሪያ የብሉም ብርሃን፤ መካከለኛ 4 ናሙናዎችን፣ ከፍተኛ 8ን ይጠቀማል፣ ዝቅተኛ ሃሎን ያጠፋል
+
+@ Blurs fast-moving monsters, projectiles and doors (not camera turns)
+am በፍጥነት የሚንቀሳቀሱ ጭራቆችን፣ ተወንጫፊዎችንና በሮችን ያደበዝዛል (የካሜራ መዞርን አይደለም)
+
+@ Blurs the screen edges during fast falls and launches; keeps the centre clear. Reduce Motion disables it
+am በፈጣን ውድቀቶችና ውርወራዎች ጊዜ የስክሪኑን ጠርዞች ያደበዝዛል፤ መሃሉን ጥርት አድርጎ ይይዛል። እንቅስቃሴን ቀንስ ያጠፋዋል
+
+@ Brightness of the underwater light patterns
+am የውሃ ውስጥ የብርሃን ቅርጾች ብሩህነት
+
+@ Caps mark count, lifetime, airborne droplets and wound/gib painting; low skips enemy wounds and gib trails
+am የምልክቶችን ብዛት፣ ዕድሜ፣ በአየር ያሉ ጠብታዎችንና የቁስል/ቁርጥራጭ ቀለምን ይገድባል፤ ዝቅተኛ የጠላት ቁስሎችንና የቁርጥራጭ ዱካዎችን ይዘላል
+
+@ Caps shader input at output size so 200% render scale keeps 3D sharpness without 4x shader cost; low scales stay low-res
+am የሼደር ግቤትን በውጤቱ መጠን ይገድባል፣ ስለዚህ 200% የማሳያ መጠን 3D ጥራትን ያለ 4x የሼደር ወጪ ይጠብቃል፤ ዝቅተኛ መጠኖች ዝቅተኛ ጥራት ይቆያሉ
+
+@ Classic: the original status bar; modern: compact elements at the screen edges
+am ክላሲክ፦ የመጀመሪያው የሁኔታ አሞሌ፤ ዘመናዊ፦ በስክሪኑ ጠርዞች ላይ የታመቁ ክፍሎች
+
+@ Coat atlas resolution, rebuild rate and shader detail: low builds smaller coats less often with fast shading; high uses full detail
+am የሽፋን አትላስ ጥራት፣ የማደሻ ፍጥነትና የሼደር ዝርዝር፦ ዝቅተኛ ትናንሽ ሽፋኖችን አልፎ አልፎ በፈጣን ጥላ ይገነባል፤ ከፍተኛ ሙሉ ዝርዝር ይጠቀማል
+
+@ Colour of the railgun's spiral trail; split-screen players each get the next colour along
+am የሬልገኑ ጠመዝማዛ ዱካ ቀለም፤ በተከፈለ ስክሪን እያንዳንዱ ተጫዋች ቀጣዩን ቀለም ያገኛል
+
+@ Damage the railgun deals to each enemy it passes through (Quake III: 100)
+am ሬልገኑ በሚያልፍበት በእያንዳንዱ ጠላት ላይ የሚያደርሰው ጉዳት (Quake III: 100)
+
+@ Dark backdrop behind on-screen messages for readability
+am ለንባብ ቀላልነት ከመልዕክቶች ጀርባ ጨለማ ዳራ
+
+@ Dark border keeps the crosshair visible on any background
+am ጨለማ ጠርዝ ማነጣጠሪያውን በማንኛውም ዳራ ላይ እንዲታይ ያደርጋል
+
+@ Darkens corners and contact areas where geometry meets; higher quality is sharper
+am ጂኦሜትሪ የሚገናኝባቸውን ማዕዘኖችና ቦታዎች ያጨልማል፤ ከፍተኛ ጥራት ይበልጥ ጥርት ያለ ነው
+
+@ Debris lands on and is carried or shoved by doors, lifts and platforms
+am ፍርስራሽ በበሮች፣ በሊፍቶችና በመድረኮች ላይ ያርፋል፣ ይወሰዳል ወይም ይገፋል
+
+@ Detail for caustics, ripples and splashes: low uses smaller budgets and shorter view distance; high uses larger budgets and farther view distance
+am የብርሃን ነጸብራቅ፣ ሞገዶችና ፍንጣቂዎች ዝርዝር፦ ዝቅተኛ አነስተኛ በጀትና አጭር የእይታ ርቀት ይጠቀማል፤ ከፍተኛ ትልቅ በጀትና ሩቅ የእይታ ርቀት ይጠቀማል
+
+@ Disabled while Enhanced Particles is on: its particles replace the GLQuake and Classic styles
+am የተሻሻሉ ቅንጣቶች በርቶ ሳለ አይሰራም፦ ቅንጣቶቹ የGLQuake እና የክላሲክ ዘይቤዎችን ይተካሉ
+
+@ Disabled while Enhanced Water is on: its own underwater effects replace the classic and GLQuake view warps
+am የተሻሻለ ውሃ በርቶ ሳለ አይሰራም፦ የራሱ የውሃ ውስጥ ተጽዕኖዎች የክላሲክ እና የGLQuake የእይታ መዛባቶችን ይተካሉ
+
+@ Draw the predicted grenade path as a solid or dashed line
+am የተገመተውን የቦምብ መንገድ እንደ ሙሉ ወይም ሰረዝ መስመር ሳል
+
+@ Draw the view out of the linked portal inside each portal; off shows flat discs (fastest)
+am በእያንዳንዱ ፖርታል ውስጥ ከተገናኘው ፖርታል የሚታየውን እይታ ሳል፤ ጠፍቶ ሲሆን ጠፍጣፋ ክቦችን ያሳያል (በጣም ፈጣን)
+
+@ Droplets spray up when things enter or leave water, slime or lava
+am ነገሮች ወደ ውሃ፣ ዝቃጭ ወይም ላቫ ሲገቡ ወይም ሲወጡ ጠብታዎች ይረጫሉ
+
+@ Emulates the original 8-bit palette of software rendering
+am የሶፍትዌር አሳሳል የመጀመሪያውን 8-ቢት የቀለም ሰሌዳ ይመስላል
+
+@ Every level starts with only the shotgun and axe, as if started fresh
+am እያንዳንዱ ደረጃ እንደ አዲስ ጅማሬ በሾትገንና በመጥረቢያ ብቻ ይጀምራል
+
+@ Explosion damage for each remotely detonated sticky bomb
+am በርቀት ለሚፈነዳ እያንዳንዱ የሚጣበቅ ቦምብ የፍንዳታ ጉዳት
+
+@ Extra freeze milliseconds for every 10 damage dealt, so heavy hits stop longer
+am ለእያንዳንዱ 10 የደረሰ ጉዳት ተጨማሪ የመቀዝቀዝ ሚሊሰከንዶች፣ ስለዚህ ከባድ ምቶች ረዘም ብለው ያቆማሉ
+
+@ First person, a third-person camera centered behind the player, or one over the right or left shoulder; third person hides viewmodels
+am የመጀመሪያ ሰው፣ ከተጫዋቹ ጀርባ መሃል ላይ ያለ የሶስተኛ ሰው ካሜራ፣ ወይም በቀኝ ወይም በግራ ትከሻ ላይ ያለ፤ ሶስተኛ ሰው የእጅ መሳሪያ ሞዴሎችን ይደብቃል
+
+@ Flash the selected marker on confirmed hits; colors are shared with the crosshair
+am በተረጋገጡ ምቶች ላይ የተመረጠውን ምልክት አብልጭ፤ ቀለሞቹ ከማነጣጠሪያው ጋር የጋራ ናቸው
+
+@ Freeze for every enemy, or only for enemies that were tough before the hit
+am ለእያንዳንዱ ጠላት፣ ወይም ከምቱ በፊት ጠንካራ ለነበሩ ጠላቶች ብቻ አቀዝቅዝ
+
+@ Freeze the game briefly when you damage an enemy; single player with add-ons only
+am ጠላትን ሲጎዱ ጨዋታውን ለአጭር ጊዜ አቀዝቅዝ፤ ተጨማሪዎች ባሉት የአንድ ተጫዋች ጨዋታ ብቻ
+
+@ Gibs tumble and barrels throw shrapnel; shots and blasts push them (cosmetic only)
+am ቁርጥራጮች ይንከባለላሉ፣ በርሜሎች ስብርባሪ ይወረውራሉ፤ ተኩሶችና ፍንዳታዎች ይገፏቸዋል (ለመልክ ብቻ)
+
+@ Health an enemy must have had before the hit to count as tough
+am ጠንካራ ለመባል ጠላት ከምቱ በፊት ሊኖረው የሚገባ ጤና
+
+@ Hits dealing less damage than this do not freeze the game; the default 10 skips nails and shotgun pellets
+am ከዚህ ያነሰ ጉዳት የሚያደርሱ ምቶች ጨዋታውን አያቀዘቅዙም፤ ነባሪው 10 ሚስማሮችንና የሾትገን ቅንጣቶችን ይዘላል
+
+@ Hold fire and sweep the crosshair over monsters to queue them, release to throw: it stuns each in turn and flies back; alt-fire clears the queue
+am መተኮሻውን ይዘው ማነጣጠሪያውን በጭራቆች ላይ በማሳለፍ ወረፋ ያስይዙ፣ ለመወርወር ይልቀቁ፦ እያንዳንዱን በተራ ያደነዝዛል ከዚያም ይመለሳል፤ ተለዋጭ ተኩስ ወረፋውን ያጸዳል
+
+@ Hold: keep Lock-on held. Toggle: press Auto-aim Toggle to enable automatic acquisition. Click look stick to switch targets
+am ያዝ፦ Lock-onን ተጭነው ይያዙ። ቀያይር፦ ራስ-ሰር ዒላማ ለማግኘት Auto-aim Toggleን ይጫኑ። ዒላማ ለመቀየር የእይታ ስቲኩን ይጫኑ
+
+@ How close an enemy must be to the crosshair for automatic acquisition in toggle mode (degrees)
+am በቀያይር ሁነታ ለራስ-ሰር ዒላማ ጠላት ከማነጣጠሪያው ምን ያህል መቅረብ አለበት (ዲግሪ)
+
+@ How far the view tilts up and down when you tilt the controller (pitch axis)
+am መቆጣጠሪያውን ሲያዘነብሉ እይታው ወደ ላይና ወደ ታች ምን ያህል ያዘነብላል (የላይ-ታች ዘንግ)
+
+@ How far the view turns left and right when you turn the controller (yaw axis)
+am መቆጣጠሪያውን ሲያዞሩ እይታው ወደ ግራና ወደ ቀኝ ምን ያህል ይዞራል (የግራ-ቀኝ ዘንግ)
+
+@ How far the view turns when you drag on the right half of the screen
+am በስክሪኑ ቀኝ ግማሽ ላይ ሲጎትቱ እይታው ምን ያህል ይዞራል
+
+@ How fast the boomerang flies (units per second)
+am ቡሜራንጉ ምን ያህል በፍጥነት ይበራል (units በሰከንድ)
+
+@ How hard shots and explosions push debris around
+am ተኩሶችና ፍንዳታዎች ፍርስራሽን ምን ያህል በኃይል ይገፋሉ
+
+@ How hard the Powerwasher's water pushes enemies
+am የPowerwasher ውሃ ጠላቶችን ምን ያህል በኃይል ይገፋል
+
+@ How long a hit freezes the game, in milliseconds
+am ምት ጨዋታውን ለምን ያህል ጊዜ ያቀዘቅዛል፣ በሚሊሰከንዶች
+
+@ How strongly fog covers the sky when fog is on
+am ጭጋግ በርቶ ሳለ ጭጋግ ሰማዩን ምን ያህል ይሸፍናል
+
+@ How the view distorts underwater: Classic ripples the whole screen like software Quake, GLQuake slowly stretches and squashes the view
+am ከውሃ በታች እይታው እንዴት እንደሚዛባ፦ ክላሲክ እንደ ሶፍትዌር Quake ሙሉ ስክሪኑን ያሞግዳል፣ GLQuake እይታውን ቀስ ብሎ ይለጥጣል ይጨመቃልም
+
+@ Ignores gyro rotation slower than this many degrees per second, to hide hand tremor
+am የእጅ መንቀጥቀጥን ለመደበቅ በሰከንድ ከዚህ ያነሱ ዲግሪዎችን የጋይሮ ሽክርክሪት ችላ ይላል
+
+@ Immersive: appears for a few seconds only when its value changes
+am አስጠላቂ፦ እሴቱ ሲቀየር ብቻ ለጥቂት ሰከንዶች ይታያል
+
+@ Keeps textures sharp on floors and walls seen at steep angles
+am በሾጣጣ ማዕዘን በሚታዩ ወለሎችና ግድግዳዎች ላይ ቴክስቸሮችን ጥርት አድርጎ ይይዛል
+
+@ Lights from rockets, muzzle flashes and explosions brighten nearby walls
+am ከሮኬቶች፣ ከአፈሙዝ ብልጭታዎችና ከፍንዳታዎች የሚመጡ መብራቶች በአቅራቢያ ያሉ ግድግዳዎችን ያበራሉ
+
+@ Liquid surfaces swell and ring out where things move through them
+am ፈሳሽ ገጽታዎች ነገሮች በሚያልፉባቸው ቦታዎች ያብጣሉ ቀለበትም ይሰራሉ
+
+@ Lobs sticky bombs (rockets ammo) that cling to walls, doors and monsters; alt-fire detonates them all
+am ከግድግዳዎች፣ ከበሮችና ከጭራቆች ጋር የሚጣበቁ ቦምቦችን ይወረውራል (የሮኬት ጥይት)፤ ተለዋጭ ተኩስ ሁሉንም ያፈነዳል
+
+@ Look of the classic particles: GLQuake draws soft round dots, Classic draws square pixels like software Quake
+am የክላሲክ ቅንጣቶች መልክ፦ GLQuake ለስላሳ ክብ ነጥቦችን ይስላል፣ ክላሲክ እንደ ሶፍትዌር Quake ካሬ ፒክሰሎችን ይስላል
+
+@ Low skips the background smear halo and uses fewer blur samples; high keeps the full halo and smoother streaks
+am ዝቅተኛ የዳራ ብዥታ ሃሎን ይዘላል ጥቂት የብዥታ ናሙናዎችን ይጠቀማል፤ ከፍተኛ ሙሉ ሃሎንና ለስላሳ መስመሮችን ይይዛል
+
+@ Low: hard particle edges, half the scripted particles and fewer hit sparks. Medium: soft edges. High: soft edges checked per MSAA sample, most hit sparks
+am ዝቅተኛ፦ ሹል የቅንጣት ጠርዞች፣ የስክሪፕት ቅንጣቶች ግማሽ እና ጥቂት የምት ብልጭታዎች። መካከለኛ፦ ለስላሳ ጠርዞች። ከፍተኛ፦ በእያንዳንዱ MSAA ናሙና የሚፈተሹ ለስላሳ ጠርዞች፣ አብዛኛው የምት ብልጭታዎች
+
+@ Marks fade out before expiring; oldest marks are recycled at the limit
+am ምልክቶች ከማብቃታቸው በፊት ይደበዝዛሉ፤ ገደቡ ላይ ሲደርስ የቆዩት እንደገና ጥቅም ላይ ይውላሉ
+
+@ Max nested portal reflections to draw; each level redraws the scene
+am የሚሳሉ ከፍተኛ የተደራረቡ የፖርታል ነጸብራቆች፤ እያንዳንዱ ደረጃ ትዕይንቱን እንደገና ይስላል
+
+@ Max portals per screen with a live view; each one redraws the scene
+am በአንድ ስክሪን ቀጥታ እይታ ያላቸው ከፍተኛ ፖርታሎች፤ እያንዳንዱ ትዕይንቱን እንደገና ይስላል
+
+@ Maximum distance for acquiring and keeping an enemy locked
+am ጠላትን ለመያዝና ተቆልፎ ለማቆየት ከፍተኛ ርቀት
+
+@ Minimum gap between freezes, so shotgun pellets and rapid fire count once; kills ignore it
+am በመቀዝቀዞች መካከል ዝቅተኛ ክፍተት፣ ስለዚህ የሾትገን ቅንጣቶችና ፈጣን ተኩስ አንድ ጊዜ ይቆጠራሉ፤ ግድያዎች ችላ ይሉታል
+
+@ Modern terminal console with autocomplete popup, history search, ANSI colors, bash shell and piping; off uses the classic Quake console
+am ራስ-ማጠናቀቂያ፣ የታሪክ ፍለጋ፣ ANSI ቀለሞች፣ bash shell እና piping ያለው ዘመናዊ ተርሚናል ኮንሶል፤ ጠፍቶ ሲሆን የክላሲክ Quake ኮንሶልን ይጠቀማል
+
+@ Monsters take proportionally less damage at higher values; above 100% is harder
+am ከፍ ባሉ እሴቶች ጭራቆች በተመጣጣኝ ያነሰ ጉዳት ይደርስባቸዋል፤ ከ100% በላይ ከባድ ነው
+
+@ Moving gibs leave blood on surfaces they touch
+am የሚንቀሳቀሱ ቁርጥራጮች በሚነኩት ገጽ ላይ ደም ይተዋሉ
+
+@ Multiplier on the freeze when the hit kills the enemy; 1 means no extra
+am ምቱ ጠላቱን ሲገድል የመቀዝቀዝ ማባዣ፤ 1 ማለት ተጨማሪ የለም ማለት ነው
+
+@ Multiplies ammo from pickups (up to the normal carry limit); below 100% is harder
+am ከማንሻዎች የሚገኘውን ጥይት ያባዛል (እስከ መደበኛው የመሸከም ገደብ)፤ ከ100% በታች ከባድ ነው
+
+@ Multiplies health from pickups (up to 100, or the item's own limit); below 100% is harder
+am ከማንሻዎች የሚገኘውን ጤና ያባዛል (እስከ 100 ወይም እስከ ዕቃው ገደብ)፤ ከ100% በታች ከባድ ነው
+
+@ Nails stick to wood and bodies; hard surfaces deflect them to the floor
+am ሚስማሮች በእንጨትና በአካላት ላይ ይጣበቃሉ፤ ጠንካራ ገጽታዎች ወደ ወለሉ ያስወነጭፏቸዋል
+
+@ Nearest keeps crisp classic pixels; linear smooths textures
+am ቅርቡ ጥርት ያሉ የክላሲክ ፒክሰሎችን ይይዛል፤ ቀጥተኛ ቴክስቸሮችን ያለሰልሳል
+
+@ New Game: Add-ons
+am አዲስ ጨዋታ፦ ተጨማሪዎች
+
+@ New Game: Customize
+am አዲስ ጨዋታ፦ አብጅ
+
+@ Night vision: how much dark areas are brightened; thermal: how strongly heat stands out
+am የሌሊት እይታ፦ ጨለማ ቦታዎች ምን ያህል እንደሚበሩ፤ ሙቀት፦ ሙቀት ምን ያህል ጎልቶ እንደሚታይ
+
+@ Night-vision and thermal goggles, cycle normal, night vision and thermal with Change Goggles (Add-ons), or use the Equipment Wheel
+am የሌሊት እይታና የሙቀት መነጽሮች፤ መደበኛ፣ የሌሊት እይታና ሙቀትን በ"መነጽር ቀይር" (ተጨማሪዎች) ይቀያይሩ፣ ወይም የቁሳቁስ ጎማውን ይጠቀሙ
+
+@ No single freeze lasts longer than this, however much damage or kill bonus adds
+am ጉዳት ወይም የግድያ ጉርሻ ምንም ያህል ቢጨምር ማንኛውም መቀዝቀዝ ከዚህ በላይ አይቆይም
+
+@ Oldest marks and nails are recycled at this shared limit
+am የቆዩ ምልክቶችና ሚስማሮች በዚህ የጋራ ገደብ እንደገና ጥቅም ላይ ይውላሉ
+
+@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
+am በስክሪን ላይ ያሉ ስቲክና አዝራሮች፦ ራስ-ሰር ከንክኪ በኋላ ያሳያቸዋል ሌላ መሳሪያ ሲጠቀሙ ይደብቃቸዋል
+
+@ Only autosaves: quicksaves and the Save menu are off
+am ራስ-ማስቀመጫዎች ብቻ፦ ፈጣን ማስቀመጫዎችና የማስቀመጫ ምናሌ ጠፍተዋል
+
+@ Place every weapon at the center, right or left of the view, or hide all viewmodels
+am እያንዳንዱን መሳሪያ በእይታው መሃል፣ ቀኝ ወይም ግራ አድርግ፣ ወይም ሁሉንም የእጅ መሳሪያ ሞዴሎች ደብቅ
+
+@ Play your chosen hit or kill cue when you damage an enemy
+am ጠላትን ሲጎዱ የመረጡትን የመምታት ወይም የመግደል ድምፅ ያጫውቱ
+
+@ Playback speed: faster sounds shorter and higher
+am የመልሶ ማጫወት ፍጥነት፦ ፈጣን አጭርና ከፍ ያለ ይሰማል
+
+@ Plays the Quake theme in the main menu when no game is running
+am ምንም ጨዋታ በማይሄድበት ጊዜ በዋናው ምናሌ የQuake ዜማን ያጫውታል
+
+@ Portals farther away than this are drawn as flat discs
+am ከዚህ በላይ የራቁ ፖርታሎች እንደ ጠፍጣፋ ክቦች ይሳላሉ
+
+@ Press attack once to keep firing, again to stop
+am መተኮስ ለመቀጠል ማጥቃትን አንድ ጊዜ ይጫኑ፣ ለማቆም እንደገና
+
+@ Press run once to switch between running and walking
+am በመሮጥና በመራመድ መካከል ለመቀያየር ሩጥን አንድ ጊዜ ይጫኑ
+
+@ Raise or lower the tone independently of sound length
+am ከድምፁ ርዝመት ነጻ ሆኖ ቅላፄውን ከፍ ወይም ዝቅ አድርግ
+
+@ Red screen edges show where damage came from: top is front, bottom is behind; Screen Flashes controls their strength
+am ቀይ የስክሪን ጠርዞች ጉዳቱ ከየት እንደመጣ ያሳያሉ፦ ላይ ፊት ነው፣ ታች ከኋላ ነው፤ የስክሪን ብልጭታዎች ጥንካሬያቸውን ይቆጣጠራል
+
+@ Replaces the classic dot particles with glowing sparks, smoke and blood; mods with their own particle effects keep them
+am የክላሲክ ነጥብ ቅንጣቶችን በሚያበሩ ብልጭታዎች፣ ጭስና ደም ይተካል፤ የራሳቸው የቅንጣት ተጽዕኖ ያላቸው ሞዶች ያቆዩዋቸዋል
+
+@ Resolution and detail inside portal and teleporter views; lower tiers trim nested effects
+am በፖርታልና በቴሌፖርተር እይታዎች ውስጥ ጥራትና ዝርዝር፤ ዝቅተኛ ደረጃዎች የተደራረቡ ተጽዕኖዎችን ይቀንሳሉ
+
+@ Rippling light patterns on surfaces under water and slime
+am ከውሃና ከዝቃጭ በታች ባሉ ገጽታዎች ላይ የሚሞገዱ የብርሃን ቅርጾች
+
+@ Scales all damage you take; above 100% is harder
+am የሚደርስብዎትን ጉዳት ሁሉ ያባዛል፤ ከ100% በላይ ከባድ ነው
+
+@ Screen edge for this element; elements on the same spot stack
+am ለዚህ ክፍል የስክሪን ጠርዝ፤ በአንድ ቦታ ያሉ ክፍሎች ይደራረባሉ
+
+@ Seconds a monster hit by the boomerang stays stunned
+am በቡሜራንግ የተመታ ጭራቅ ደንዝዞ የሚቆይበት ሰከንዶች
+
+@ Seconds impact marks and stuck nails stay before fading out; independent of Particle Quality
+am የምት ምልክቶችና የተጣበቁ ሚስማሮች ከመደብዘዛቸው በፊት የሚቆዩበት ሰከንዶች፤ ከቅንጣት ጥራት ነጻ ነው
+
+@ Seconds messages at the top of the screen stay up
+am በስክሪኑ ላይኛው ክፍል ያሉ መልዕክቶች የሚቆዩበት ሰከንዶች
+
+@ Seconds the flick stick snap takes; lower is faster
+am የፍሊክ ስቲክ መዞር የሚወስደው ሰከንዶች፤ ዝቅ ያለ ፈጣን ነው
+
+@ See through enhanced water; enables Water Opacity
+am በተሻሻለው ውሃ ውስጥ እይ፤ የውሃ ግልጽነትን ያስችላል
+
+@ Sensor grain, scanlines and flicker of the goggle image
+am የመነጽሩ ምስል ጥራጥሬ፣ የቅኝት መስመሮችና ብልጭልጭታ
+
+@ Shades every anti-aliasing sample; needs Anti-aliasing on
+am እያንዳንዱን የፀረ-ጥርስ ናሙና ይሰራል፤ ፀረ-ጥርስ መብራት አለበት
+
+@ Shifts colors so they stay distinct for the chosen color blindness
+am ለተመረጠው የቀለም እውርነት ተለይተው እንዲታዩ ቀለሞችን ይቀይራል
+
+@ Shotgun hits leave small surface marks (cosmetic only)
+am የሾትገን ምቶች በገጽ ላይ ትናንሽ ምልክቶችን ይተዋሉ (ለመልክ ብቻ)
+
+@ Show corner ticks at screen centre while locked, even with Crosshair off
+am ተቆልፎ ሳለ በስክሪኑ መሃል የማዕዘን ምልክቶችን አሳይ፣ ማነጣጠሪያው ቢጠፋም
+
+@ Show where grenades and other arcing shots will fly, bounce and land; local play only, not in deathmatch
+am ቦምቦችና ሌሎች ቀስት መሰል ተኩሶች የት እንደሚበሩ፣ እንደሚነጥሩና እንደሚያርፉ አሳይ፤ ለአካባቢ ጨዋታ ብቻ፣ በdeathmatch አይደለም
+
+@ Shows text for important sounds: doors, alerted enemies, secrets, pickups
+am ለአስፈላጊ ድምፆች ጽሑፍ ያሳያል፦ በሮች፣ የነቁ ጠላቶች፣ ሚስጥሮች፣ ማንሻዎች
+
+@ Shows the distance fog that maps and mods set; off always gives clear view
+am ካርታዎችና ሞዶች የሚያዘጋጁትን የርቀት ጭጋግ ያሳያል፤ ጠፍቶ ሲሆን ሁልጊዜ ግልጽ እይታ ይሰጣል
+
+@ Shows the player face next to the health number
+am የተጫዋቹን ፊት ከጤና ቁጥሩ አጠገብ ያሳያል
+
+@ Simulation detail, step rate, fade-out lifetimes and caps for gibs and shrapnel; low also skips mover collision
+am ለቁርጥራጮችና ለስብርባሪ የማስመሰል ዝርዝር፣ የእርምጃ ፍጥነት፣ የመደብዘዝ ዕድሜና ገደቦች፤ ዝቅተኛ የተንቀሳቃሾች ግጭትንም ይዘላል
+
+@ Size of the on-screen buttons and move stick
+am በስክሪን ላይ ያሉ አዝራሮችና የእንቅስቃሴ ስቲክ መጠን
+
+@ Slowly heals up to 100 health after 5 seconds without being hit
+am ሳይመቱ ከ5 ሰከንዶች በኋላ ቀስ ብሎ እስከ 100 ጤና ይፈውሳል
+
+@ Slows stick look while the crosshair is over an enemy
+am ማነጣጠሪያው በጠላት ላይ ሳለ የስቲክ እይታን ያዘገያል
+
+@ Slows the game down while the weapon wheel is open
+am የመሳሪያ ጎማው ክፍት ሳለ ጨዋታውን ያዘገያል
+
+@ Slows the whole game down; single player only. Saves and demos stay compatible with other ports
+am ሙሉ ጨዋታውን ያዘገያል፤ ለአንድ ተጫዋች ብቻ። ማስቀመጫዎችና ማሳያዎች ከሌሎች ፖርቶች ጋር ተኳሃኝ ሆነው ይቆያሉ
+
+@ Small camera jolt on each freeze; off with Reduce Motion
+am በእያንዳንዱ መቀዝቀዝ ትንሽ የካሜራ መንቀጥቀጥ፤ በእንቅስቃሴን ቀንስ ይጠፋል
+
+@ Snap and track enemies in local play, including split-screen; unavailable online
+am በአካባቢ ጨዋታ፣ የተከፈለ ስክሪንን ጨምሮ፣ ጠላቶችን ያዝና ተከተል፤ በመስመር ላይ አይገኝም
+
+@ Sparks, smoke, chips, splinters and splashes fly off whatever your shots hit
+am ጥይቶችዎ ከሚመቱት ሁሉ ብልጭታዎች፣ ጭስ፣ ስብርባሪዎች፣ ፍልጣጮችና ፍንጣቂዎች ይበራሉ
+
+@ Spawns extra copies of every monster around the original when a level starts
+am ደረጃ ሲጀምር በእያንዳንዱ ጭራቅ ዙሪያ ተጨማሪ ቅጂዎችን ይፈጥራል
+
+@ Strength of the full-screen flashes for damage, pickups and powerups
+am ለጉዳት፣ ለማንሻዎችና ለኃይሎች የሙሉ ስክሪን ብልጭታዎች ጥንካሬ
+
+@ Stretch or shorten the sound while keeping its pitch
+am ቅላፄውን ጠብቆ ድምፁን ይለጥጡ ወይም ያሳጥሩ
+
+@ Surface opacity; requires Enhanced Water and Translucent Water
+am የገጽ ግልጽነት፤ የተሻሻለ ውሃና አሳላፊ ውሃ ያስፈልጋሉ
+
+@ The hook latches onto metal surfaces (metal, tech, computer panels, copper)
+am መንጠቆው በብረት ገጽታዎች ላይ ይያዛል (ብረት፣ ቴክ፣ የኮምፒውተር ፓነሎች፣ መዳብ)
+
+@ The hook latches onto stone, brick, rock and any surface not recognised as wood or metal
+am መንጠቆው በድንጋይ፣ በጡብ፣ በአለት እና እንደ እንጨት ወይም ብረት ባልታወቀ በማንኛውም ገጽ ላይ ይያዛል
+
+@ The hook latches onto wooden surfaces (texture names like wood, crate, plank)
+am መንጠቆው በእንጨት ገጽታዎች ላይ ይያዛል (እንደ wood፣ crate፣ plank ያሉ የቴክስቸር ስሞች)
+
+@ Turn the controller's motion sensor into a look input; needs a pad with a gyroscope
+am የመቆጣጠሪያውን የእንቅስቃሴ ዳሳሽ ወደ እይታ ግቤት ይቀይሩ፤ ጋይሮስኮፕ ያለው መቆጣጠሪያ ያስፈልጋል
+
+@ Turns off view bob, strafe tilt and the camera kick when hit or firing
+am የእይታ መወዛወዝን፣ የጎን ማዘንበልን እና ሲመቱ ወይም ሲተኩሱ የካሜራ ምትን ያጠፋል
+
+@ Turns on the extra liquid effects; Water Settings controls each one
+am ተጨማሪ የፈሳሽ ተጽዕኖዎችን ያበራል፤ የውሃ ቅንብሮች እያንዳንዱን ይቆጣጠራል
+
+@ Turns the view to follow a moving enemy you are aiming at
+am እያነጣጠሩበት ያለን የሚንቀሳቀስ ጠላት ለመከተል እይታውን ያዞራል
+
+@ Turns the view when you roll the controller sideways; 0 disables it, negative reverses it
+am መቆጣጠሪያውን ወደ ጎን ሲያንከባልሉ እይታውን ያዞራል፤ 0 ያጠፋዋል፣ አሉታዊ ይገለብጠዋል
+
+@ Two-portal gun: fire and alt-fire place linked portals on flat walls; assign a weapon slot in Add-ons
+am ባለ ሁለት ፖርታል ሽጉጥ፦ ተኩስና ተለዋጭ ተኩስ በጠፍጣፋ ግድግዳዎች ላይ የተገናኙ ፖርታሎችን ያስቀምጣሉ፤ በተጨማሪዎች ውስጥ የመሳሪያ ቦታ ይመድቡ
+
+@ Unlocks the FX Settings page: enhanced particles, impact effects and blood splatter
+am የFX ቅንብሮች ገጽን ይከፍታል፦ የተሻሻሉ ቅንጣቶች፣ የምት ተጽዕኖዎችና የደም ፍንጣቂ
+
+@ Uses the 2021 re-release's smoother MD5 models (and MD3 replacements from mods) instead of the classic ones. Applies on the next map load
+am ከክላሲኮቹ ይልቅ የ2021 ዳግም እትም ለስላሳ MD5 ሞዴሎችን (እና ከሞዶች የሚመጡ MD3 ተተኪዎችን) ይጠቀማል። በቀጣዩ ካርታ ሲጫን ይተገበራል
+
+@ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
+am የካርታውን ባለቀለም ብርሃን (.lit ፋይል ወይም BSPX lump) ይጠቀማል፤ ጠፍቶ ሲሆን መደበኛ ነጭ ብርሃን ይሰጣል። በቀጣዩ ካርታ ሲጫን ይተገበራል
+
+@ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
+am የውሃ ጄት ክፍሎች፣ የጠብታ ብዛትና አንጸባራቂ የፈሳሽ ጥላ፦ ዝቅተኛ ቀላል አሳላፊ ፍሰቶችን ይጠቀማል፤ ከፍተኛ ለስላሳ አንጸባራቂ ጄቶችን ይጠቀማል
+
+@ When gyro looking applies: always, off while +gyroaction is held, or only while it is held
+am የጋይሮ እይታ መቼ እንደሚሰራ፦ ሁልጊዜ፣ +gyroaction ሲያዝ ጠፍቶ፣ ወይም ሲያዝ ብቻ
+
+@ Which weapons trigger the freeze; melee covers the axe and any mod weapon used at close range without ammo
+am መቀዝቀዙን የሚያስነሱ መሳሪያዎች፤ የቅርብ ውጊያ መጥረቢያውንና ያለ ጥይት በቅርብ ርቀት የሚጠቀሙ የሞድ መሳሪያዎችን ያካትታል
+
+@ Your own rockets and grenades don't hurt you; rocket jumps still work
+am የራስዎ ሮኬቶችና ቦምቦች አይጎዱዎትም፤ የሮኬት ዝላይ አሁንም ይሰራል
+
+# ==== ui.txt ====
+
+# Menus and pop-ups outside the options pages: save cards, launch, presets,
+# add-on browser, map packs, hints and dialogs.
+@ Select
+am ምረጥ
+
+@ Back
+am ተመለስ
+
+@ Cancel
+am ሰርዝ
+
+@ Confirm
+am አረጋግጥ
+
+@ Scroll
+am አሸብልል
+
+@ Section
+am ክፍል
+
+@ Bind
+am መድብ
+
+@ Cancel binding
+am መመደብን ሰርዝ
+
+@ Clear
+am አጽዳ
+
+@ Clear pad
+am መቆጣጠሪያን አጽዳ
+
+@ Remap
+am እንደገና መድብ
+
+@ Type
+am ጻፍ
+
+@ Shift
+am Shift
+
+@ Done
+am ተጠናቀቀ
+
+@ Del
+am Del
+
+@ Space
+am ክፍተት
+
+@ Save
+am አስቀምጥ
+
+@ Load
+am ጫን
+
+@ Delete
+am አጥፋ
+
+@ Play
+am ተጫወት
+
+@ Yes
+am አዎ
+
+@ No
+am አይ
+
+@ OK
+am እሺ
+
+@ System
+am ሲስተም
+
+@ Language
+am ቋንቋ
+
+@ Help
+am እገዛ
+
+@ Fixed for this game: it was started without Customize
+am ለዚህ ጨዋታ ቋሚ ነው፦ ያለ አብጅ ተጀምሯል
+
+@ Press a button or key to bind (Start cancels)
+am ለመመደብ አዝራር ወይም ቁልፍ ይጫኑ (Start ይሰርዛል)
+
+@ Press button...
+am አዝራር ይጫኑ...
+
+@ Press key...
+am ቁልፍ ይጫኑ...
+
+@ Replace this binding?
+am ይህን ምደባ ይተኩ?
+
+@ is already assigned
+am አስቀድሞ ተመድቧል
+
+@ {} already assigned
+am {} አስቀድሞ ተመድቧል
+
+@ Open Controls to remap Lock-on?
+am Lock-onን እንደገና ለመመደብ መቆጣጠሪያዎችን ይክፈቱ?
+
+@ Lock-on
+am Lock-on
+
+@ Auto-aim Toggle
+am Auto-aim Toggle
+
+@ Keyboard
+am ቁልፍ ሰሌዳ
+
+@ Controller
+am መቆጣጠሪያ
+
+# main menu, dialogs and screens
+@ Map Packs
+am የካርታ ጥቅሎች
+
+@ Customize
+am አብጅ
+
+@ Level Select
+am ደረጃ ምረጥ
+
+@ Really quit?
+am በእርግጥ ይውጡ?
+
+@ You died
+am ሞተዋል
+
+@ Continue from most recent save
+am ከቅርብ ጊዜው ማስቀመጫ ቀጥል
+
+@ Select save
+am ማስቀመጫ ምረጥ
+
+@ Restart level
+am ደረጃውን እንደገና ጀምር
+
+@ Return to main menu
+am ወደ ዋናው ምናሌ ተመለስ
+
+@ (disabled)
+am (ተሰናክሏል)
+
+@ (fixed for this game)
+am (ለዚህ ጨዋታ ቋሚ)
+
+@ (off)
+am (ጠፍቷል)
+
+@ Apply Display Changes
+am የማሳያ ለውጦችን ተግብር
+
+@ Display Mode
+am የማሳያ ሁነታ
+
+@ Resolution
+am ጥራት
+
+@ desktop
+am ዴስክቶፕ
+
+@ Preset
+am ቅድመ-ቅንብር
+
+@ Map
+am ካርታ
+
+@ Reset Shader Settings
+am የሼደር ቅንብሮችን ዳግም አስጀምር
+
+@ Reset to Defaults
+am ወደ ነባሪዎች መልስ
+
+@ Searching...
+am በመፈለግ ላይ...
+
+@ This game only autosaves.
+am ይህ ጨዋታ በራስ-ሰር ብቻ ያስቀምጣል።
+
+@ (No Manual Saves modifier)
+am (በእጅ ማስቀመጥ የለም ለዋጭ)
+
+@ End the current game?
+am የአሁኑን ጨዋታ ይጨርሱ?
+
+@ Unsaved progress will be lost.
+am ያልተቀመጠ ሂደት ይጠፋል።
+
+@ End game
+am ጨዋታ ጨርስ
+
+@ Overwrite
+am ተካ
+
+@ Overwrite "{}"?
+am "{}"ን ይተኩ?
+
+@ Saved {}
+am {} ተቀምጧል
+
+@ Start a new game?
+am አዲስ ጨዋታ ይጀምሩ?
+
+@ New game
+am አዲስ ጨዋታ
+
+@ New Game
+am አዲስ ጨዋታ
+
+@ CUSTOM
+am ብጁ
+
+@ Customize Experience
+am ተሞክሮውን አብጅ
+
+@ Disable All
+am ሁሉንም አሰናክል
+
+@ Disable All Modifications
+am ሁሉንም ለውጦች አሰናክል
+
+@ Saves load in other source ports too.
+am ማስቀመጫዎች በሌሎች ፖርቶችም ይጫናሉ።
+
+@ Standard rules, no add-ons.
+am መደበኛ ሕጎች፣ ተጨማሪዎች የሉም።
+
+@ Choose skill
+am ክህሎት ምረጥ
+
+@ The current game will end
+am የአሁኑ ጨዋታ ያበቃል
+
+@ Easy
+am ቀላል
+
+@ Normal
+am መደበኛ
+
+@ Hard
+am ከባድ
+
+@ Nightmare
+am ቅዠት
+
+# graphics preset pop-up
+@ Choose a Graphics Preset
+am የግራፊክስ ቅድመ-ቅንብር ይምረጡ
+
+@ Classic
+am ክላሲክ
+
+@ Like the re-release: enhanced models,
+am እንደ ዳግም እትሙ፦ የተሻሻሉ ሞዴሎች፣
+
+@ no added effects.
+am ምንም ተጨማሪ ተጽዕኖ የለም።
+
+@ Enhanced
+am የተሻሻለ
+
+@ Every enhancement at its highest quality.
+am እያንዳንዱ ማሻሻያ በከፍተኛ ጥራቱ።
+
+@ Needs a capable GPU.
+am ብቁ GPU ያስፈልጋል።
+
+@ Low-End
+am ዝቅተኛ-ደረጃ
+
+@ Fastest. No anti-aliasing, original
+am በጣም ፈጣን። ፀረ-ጥርስ የለም፣ የመጀመሪያ
+
+@ models, lowest effect quality.
+am ሞዴሎች፣ ዝቅተኛው የተጽዕኖ ጥራት።
+
+@ Esc keeps the defaults
+am Esc ነባሪዎችን ይይዛል
+
+@ Everything can be changed later in Options.
+am ሁሉም ነገር በኋላ በአማራጮች ውስጥ ሊቀየር ይችላል።
+
+@ Keep Defaults
+am ነባሪዎችን አቆይ
+
+# save and load cards
+@ Save Game
+am ጨዋታ አስቀምጥ
+
+@ Load Game
+am ጨዋታ ጫን
+
+@ Autosaves
+am ራስ-ማስቀመጫዎች
+
+@ newest first
+am አዲሱ መጀመሪያ
+
+@ Saves: {}
+am ማስቀመጫዎች፦ {}
+
+@ Browse Autosaves
+am ራስ-ማስቀመጫዎችን አስስ
+
+@ Every retained autosave, newest first
+am የተያዙ ራስ-ማስቀመጫዎች ሁሉ፣ አዲሱ መጀመሪያ
+
+@ New save
+am አዲስ ማስቀመጫ
+
+@ Select to save your game here
+am ጨዋታዎን እዚህ ለማስቀመጥ ይምረጡ
+
+@ No autosaves yet
+am እስካሁን ራስ-ማስቀመጫ የለም
+
+@ Autosaves are made on level entry, secrets and more (Options > Gameplay)
+am ራስ-ማስቀመጫዎች ወደ ደረጃ ሲገቡ፣ ሚስጥሮች ሲገኙ እና በሌሎችም ጊዜ ይሰራሉ (አማራጮች > ጨዋታ)
+
+@ No saves yet
+am እስካሁን ማስቀመጫ የለም
+
+@ Save from the Single Player menu, or press F6 to quicksave
+am ከአንድ ተጫዋች ምናሌ ያስቀምጡ፣ ወይም ለፈጣን ማስቀመጥ F6 ይጫኑ
+
+@ No picture
+am ምስል የለም
+
+@ Del: delete save
+am Del፦ ማስቀመጫ አጥፋ
+
+@ Delete "{}"?
+am "{}"ን ያጥፉ?
+
+@ This cannot be undone.
+am ይህ ሊቀለበስ አይችልም።
+
+@ Quicksave
+am ፈጣን ማስቀመጫ
+
+@ Autosave: {}
+am ራስ-ማስቀመጫ፦ {}
+
+@ unknown trigger
+am ያልታወቀ ቀስቃሽ
+
+@ Latest - {}
+am የቅርብ ጊዜ - {}
+
+@ Health {}
+am ጤና {}
+
+@ Armor {}
+am ጋሻ {}
+
+@ Kills {}/{}
+am ግድያዎች {}/{}
+
+@ Secrets {}/{}
+am ሚስጥሮች {}/{}
+
+@ Split-screen, {} players
+am የተከፈለ ስክሪን፣ {} ተጫዋቾች
+
+@ Co-op
+am ትብብር
+
+@ Customized
+am ብጁ
+
+@ Customized, {}
+am ብጁ፣ {}
+
+@ Date unavailable
+am ቀን አይገኝም
+
+@ Just now
+am አሁን
+
+@ {} min ago
+am ከ{} ደቂቃ በፊት
+
+@ {} h ago
+am ከ{} ሰዓት በፊት
+
+@ Level entry
+am ወደ ደረጃ መግቢያ
+
+@ Secret found
+am ሚስጥር ተገኘ
+
+@ All enemies killed
+am ሁሉም ጠላቶች ተገደሉ
+
+@ All secrets found
+am ሁሉም ሚስጥሮች ተገኙ
+
+@ Timer
+am ሰዓት ቆጣሪ
+
+# customize pages
+@ Standard rules
+am መደበኛ ሕጎች
+
+@ Modifiers changed: {}
+am የተቀየሩ ለዋጮች፦ {}
+
+@ no add-ons
+am ተጨማሪዎች የሉም
+
+@ add-ons: {}
+am ተጨማሪዎች፦ {}
+
+@ Saves of this game are .qsa files: they need this source port.
+am የዚህ ጨዋታ ማስቀመጫዎች .qsa ፋይሎች ናቸው፦ ይህን ፖርት ይፈልጋሉ።
+
+@ Nothing changed: this plays as standard Quake.
+am ምንም አልተቀየረም፦ ይህ እንደ መደበኛ Quake ይጫወታል።
+
+@ Changes apply now and are saved with this game (.qsa).
+am ለውጦች አሁን ይተገበራሉ ከዚህ ጨዋታ ጋርም ይቀመጣሉ (.qsa)።
+
+@ This game started without Customize, so its rules are fixed.
+am ይህ ጨዋታ ያለ አብጅ ስለተጀመረ ሕጎቹ ቋሚ ናቸው።
+
+@ Start a new game and choose Customize Experience.
+am አዲስ ጨዋታ ጀምረው ተሞክሮውን አብጅን ይምረጡ።
+
+@ These rules apply to the next customized game.
+am እነዚህ ሕጎች በቀጣዩ ብጁ ጨዋታ ላይ ይተገበራሉ።
+
+# add-on browser
+@ Fire
+am ተኩስ
+
+@ Alt Fire
+am ተለዋጭ ተኩስ
+
+@ Configure Parameters >
+am መለኪያዎችን አዋቅር >
+
+@ Configure
+am አዋቅር
+
+@ Settings
+am ቅንብሮች
+
+@ Change slot
+am ቦታ ቀይር
+
+@ Toggle
+am ቀያይር
+
+@ Details
+am ዝርዝሮች
+
+@ Enter or click the box: toggle
+am Enter ወይም ሳጥኑን ጠቅ ያድርጉ፦ ቀያይር
+
+@ Right / Tab / click: details
+am Right / Tab / ጠቅታ፦ ዝርዝሮች
+
+@ Input Remapping
+am የግቤት ዳግም ምደባ
+
+@ Weapon Slot
+am የመሳሪያ ቦታ
+
+@ Customized games save as .qsa files, which need this source port.
+am ብጁ ጨዋታዎች እንደ .qsa ፋይሎች ይቀመጣሉ፣ ይህን ፖርት ይፈልጋሉ።
+
+@ This game started without Customize, so its add-ons are fixed. Customize a new game instead.
+am ይህ ጨዋታ ያለ አብጅ ስለተጀመረ ተጨማሪዎቹ ቋሚ ናቸው። በምትኩ አዲስ ጨዋታ ያብጁ።
+
+@ Bullet Time
+am የጥይት ጊዜ
+
+@ Change Goggles
+am መነጽር ቀይር
+
+@ Dodge / Dive
+am መሸሽ / መጥለቅ
+
+@ Goggles
+am መነጽሮች
+
+@ Hitstop
+am ሂትስቶፕ
+
+@ Projectile Shotguns
+am የተወንጫፊ ሾትገኖች
+
+@ BULLET TIME: 20%
+am የጥይት ጊዜ፦ 20%
+
+@ NORMAL SPEED
+am መደበኛ ፍጥነት
+
+@ SLOW MOTION: PHYSICAL PELLETS
+am ዝግ እንቅስቃሴ፦ አካላዊ ቅንጣቶች
+
+@ DEMONSTRATION
+am ማሳያ
+
+@ GAMEPLAY
+am አጨዋወት
+
+@ LOOP
+am ድግግሞሽ
+
+@ Preview unavailable
+am ቅድመ እይታ አይገኝም
+
+# shader and language help lines
+@ A setting of the chosen shader; arrows step it, Enter is not needed
+am የተመረጠው ሼደር ቅንብር፤ ቀስቶች ይቀይሩታል፣ Enter አያስፈልግም
+
+@ Language of the menus, messages and the 2021 re-release's game text; System follows your computer's language
+am የምናሌዎች፣ የመልዕክቶችና የ2021 ዳግም እትም የጨዋታ ጽሑፍ ቋንቋ፤ ሲስተም የኮምፒውተርዎን ቋንቋ ይከተላል
+
+@ Puts every setting of the chosen shader back to the preset's defaults
+am የተመረጠውን ሼደር ቅንብሮች ሁሉ ወደ ቅድመ-ቅንብሩ ነባሪዎች ይመልሳል
+
+@ RetroArch slang shader on the final image: CRT, scanlines, NTSC, sharpening; add your own in <game>/shaders
+am በመጨረሻው ምስል ላይ የRetroArch slang ሼደር፦ CRT፣ የቅኝት መስመሮች፣ NTSC፣ ማሳመር፤ የራስዎን በ<game>/shaders ውስጥ ያክሉ
+
+# modern console footer
+@ Shift+PgUp/Dn: height  ` : hide
+am Shift+PgUp/Dn፦ ቁመት  ` ፦ ደብቅ
+
+@ Tab: complete  Ctrl+R: search  bash | pipe
+am Tab፦ አጠናቅቅ  Ctrl+R፦ ፈልግ  bash | pipe
+
+@ ↑ +{} lines (End to jump) 
+am ↑ +{} መስመሮች (ለመዝለል End) 
+
+# add-on descriptions
+@ Create two linked portals on flat walls. Fire places the first portal; Alt Fire places the second. Walk through either portal to emerge from the other. Your momentum carries through. Assign a weapon slot below: pressing that slot repeatedly cycles its ordinary weapon and every enabled add-on assigned there. Portal view quality is configurable below.
+am በጠፍጣፋ ግድግዳዎች ላይ ሁለት የተገናኙ ፖርታሎችን ይፍጠሩ። ተኩስ የመጀመሪያውን ፖርታል ያስቀምጣል፤ ተለዋጭ ተኩስ ሁለተኛውን ያስቀምጣል። በአንዱ ፖርታል ገብተው ከሌላው ይወጣሉ። ፍጥነትዎ አብሮ ይሻገራል። ከታች የመሳሪያ ቦታ ይመድቡ፦ ያንን ቦታ ደጋግሞ መጫን መደበኛ መሳሪያውንና በዚያ የተመደቡትን የነቁ ተጨማሪዎች ሁሉ ይቀያይራል። የፖርታል እይታ ጥራት ከታች ሊዋቀር ይችላል።
+
+@ Hold Fire and sweep the crosshair over monsters to queue targets. Release Fire to throw: the boomerang visits each target, stuns it and returns to you. Alt Fire clears the queue. The weapon slot selects a group, not a separate hotkey: press it again to cycle through the weapons in that slot. Configure stun duration and flight speed below.
+am ተኩስን ይዘው ማነጣጠሪያውን በጭራቆች ላይ በማሳለፍ ዒላማዎችን ወረፋ ያስይዙ። ለመወርወር ተኩስን ይልቀቁ፦ ቡሜራንጉ እያንዳንዱን ዒላማ ይጎበኛል፣ ያደነዝዘዋል ወደ እርስዎም ይመለሳል። ተለዋጭ ተኩስ ወረፋውን ያጸዳል። የመሳሪያው ቦታ ቡድንን ይመርጣል እንጂ የተለየ አቋራጭ ቁልፍ አይደለም፦ በዚያ ቦታ ያሉትን መሳሪያዎች ለመቀያየር እንደገና ይጫኑት። የድንዛዜ ቆይታንና የበረራ ፍጥነትን ከታች ያዋቅሩ።
+
+@ Hold Fire to charge a sticky bomb using rocket ammunition; release to launch. A longer charge throws it faster. Bombs cling to walls, doors and monsters. Alt Fire detonates your planted bombs together. Place a trap, retreat, then detonate it when enemies approach. Assign any weapon slot below; repeated presses cycle through the ordinary weapon and add-ons in that slot.
+am የሮኬት ጥይት በመጠቀም የሚጣበቅ ቦምብ ለመሙላት ተኩስን ይያዙ፤ ለመወርወር ይልቀቁ። ረዘም ያለ መሙላት በፍጥነት ይወረውረዋል። ቦምቦች ከግድግዳዎች፣ ከበሮችና ከጭራቆች ጋር ይጣበቃሉ። ተለዋጭ ተኩስ የተከሉትን ቦምቦች አንድ ላይ ያፈነዳል። ወጥመድ ያስቀምጡ፣ ያፈግፍጉ፣ ከዚያም ጠላቶች ሲቀርቡ ያፈንዱት። ከታች ማንኛውንም የመሳሪያ ቦታ ይመድቡ፤ ደጋግሞ መጫን በዚያ ቦታ ያሉትን መደበኛ መሳሪያና ተጨማሪዎች ይቀያይራል።
+
+@ Fire launches a chain hook. It latches onto a permitted surface or enemy and reels you toward the anchor. Fire again or use Alt Fire to let go. Choose which materials and enemies can be hooked in Configure Parameters. Assign it to any weapon slot; repeated presses of the slot's existing binding cycle through its weapons.
+am ተኩስ የሰንሰለት መንጠቆ ይወነጭፋል። በተፈቀደ ገጽ ወይም ጠላት ላይ ተይዞ ወደ መያዣው ይጎትትዎታል። ለመልቀቅ እንደገና ይተኩሱ ወይም ተለዋጭ ተኩስን ይጠቀሙ። የትኞቹ ቁሳቁሶችና ጠላቶች ሊያዙ እንደሚችሉ በመለኪያዎችን አዋቅር ውስጥ ይምረጡ። ለማንኛውም የመሳሪያ ቦታ ይመድቡት፤ የቦታውን ነባር ምደባ ደጋግሞ መጫን መሳሪያዎቹን ይቀያይራል።
+
+@ A piercing railgun inspired by Quake III. Fire sends a slug through every enemy along its line. Each shot consumes two cells, with a 1.5 second refire interval. Damage and the spiral trail colour are configurable below. Choose a weapon slot: the slot's current binding selects and cycles the weapons assigned to it.
+am በQuake III የተነሳሳ ሁሉን የሚወጋ ሬልገን። ተኩስ በመስመሩ ላይ ባለ እያንዳንዱ ጠላት ውስጥ ጥይት ያሳልፋል። እያንዳንዱ ተኩስ ሁለት ሴሎችን ይጠቀማል፣ በ1.5 ሰከንድ የመተኮሻ ክፍተት። ጉዳትና የጠመዝማዛ ዱካ ቀለም ከታች ሊዋቀሩ ይችላሉ። የመሳሪያ ቦታ ይምረጡ፦ የቦታው የአሁኑ ምደባ የተመደቡለትን መሳሪያዎች ይመርጣል ይቀያይራልም።
+
+@ A Portal-style gel sprayer. Fire sprays blue Repulsion gel: land, jump or run into it to bounce, and landings on it never hurt. Alt Fire sprays orange Propulsion gel: run across it to go much faster. Gel coats floors and walls until washed off with the Powerwasher. Assign a weapon slot below; repeated presses cycle the weapons in that slot.
+am የPortal አይነት የጄል መርጫ። ተኩስ ሰማያዊ የመግፊያ ጄል ይረጫል፦ ለመንጠር በላዩ ላይ ያርፉ፣ ይዝለሉ ወይም ይሩጡ፣ በላዩ ላይ ማረፍም ፈጽሞ አይጎዳም። ተለዋጭ ተኩስ ብርቱካናማ የማፍጠኛ ጄል ይረጫል፦ በጣም በፍጥነት ለመሄድ በላዩ ላይ ይሩጡ። ጄል በPowerwasher እስኪታጠብ ድረስ ወለሎችንና ግድግዳዎችን ይሸፍናል። ከታች የመሳሪያ ቦታ ይመድቡ፤ ደጋግሞ መጫን በዚያ ቦታ ያሉትን መሳሪያዎች ይቀያይራል።
+
+@ A water cannon. Fire shoots a straight jet with limited reach; Alt Fire a wide, shorter fan. The water pushes enemies back, turns projectiles aside and washes away gel and blood. Push strength is configurable below. Assign a weapon slot below; repeated presses cycle the weapons in that slot.
+am የውሃ መድፍ። ተኩስ የተወሰነ ርቀት ያለው ቀጥ ያለ ጄት ይተኩሳል፤ ተለዋጭ ተኩስ ሰፊና አጭር ማራገቢያ። ውሃው ጠላቶችን ወደ ኋላ ይገፋል፣ ተወንጫፊዎችን ያስቀይሳል፣ ጄልና ደምንም ያጥባል። የመግፋት ጥንካሬ ከታች ሊዋቀር ይችላል። ከታች የመሳሪያ ቦታ ይመድቡ፤ ደጋግሞ መጫን በዚያ ቦታ ያሉትን መሳሪያዎች ይቀያይራል።
+
+@ One equipment add-on includes both night vision and thermal vision. The Change Goggles action cycles Normal, Night Vision, Thermal, then Normal again. Night vision brightens dark rooms; thermal vision highlights living enemies. Goggles do not occupy a weapon slot. Configure intensity and sensor noise below. The binding affects only this add-on.
+am አንድ የቁሳቁስ ተጨማሪ የሌሊት እይታንና የሙቀት እይታን ያካትታል። "መነጽር ቀይር" ተግባር መደበኛ፣ የሌሊት እይታ፣ ሙቀት፣ ከዚያም እንደገና መደበኛን ይቀያይራል። የሌሊት እይታ ጨለማ ክፍሎችን ያበራል፤ የሙቀት እይታ ሕያው ጠላቶችን ያጎላል። መነጽሮች የመሳሪያ ቦታ አይይዙም። ጥንካሬንና የዳሳሽ ጫጫታን ከታች ያዋቅሩ። ምደባው ይህን ተጨማሪ ብቻ ይነካል።
+
+@ Press Dodge with a movement direction on the ground or in midair: dive forward or leap backward and sideways. Diagonals are supported. Each press launches once, with a short recovery. The player body animates in third person. Assign the Dodge action below or in Controls.
+am መሬት ላይ ወይም በአየር ላይ ሆነው "መሸሽ"ን ከእንቅስቃሴ አቅጣጫ ጋር ይጫኑ፦ ወደ ፊት ይጥለቁ ወይም ወደ ኋላና ወደ ጎን ይዝለሉ። ሰያፍ አቅጣጫዎች ይደገፋሉ። እያንዳንዱ መጫን አንድ ጊዜ ያስወነጭፋል፣ ከአጭር ማገገሚያ ጋር። የተጫዋቹ አካል በሶስተኛ ሰው እይታ ይንቀሳቀሳል። የ"መሸሽ" ተግባርን ከታች ወይም በመቆጣጠሪያዎች ውስጥ ይመድቡ።
+
+@ Use the dedicated Bullet Time action to slow the whole local game to 20% speed. Hold is the default; Toggle switches on each press. The optional meter limits use in real seconds and regenerates while inactive. Disable the meter for unlimited use. Remap the action and configure duration and regeneration below.
+am ሙሉውን የአካባቢ ጨዋታ ወደ 20% ፍጥነት ለማዘግየት የተለየውን የጥይት ጊዜ ተግባር ይጠቀሙ። ያዝ ነባሪ ነው፤ ቀያይር በእያንዳንዱ መጫን ይቀያይራል። አማራጩ መለኪያ አጠቃቀምን በእውነተኛ ሰከንዶች ይገድባል፣ ሳይሰራም ይሞላል። ላልተገደበ አጠቃቀም መለኪያውን ያሰናክሉ። ተግባሩን እንደገና ይመድቡ፣ ቆይታንና መሙላትን ከታች ያዋቅሩ።
+
+@ Both shotguns and enemy grunts fire physical pellets with their original spread and damage. Fast default projectiles feel immediate; lower their speed to dodge incoming fire during bullet time. Configure projectile speed below, or reset it to the default of 10000 units per second.
+am ሁለቱም ሾትገኖችና የጠላት ወታደሮች በመጀመሪያው ስርጭታቸውና ጉዳታቸው አካላዊ ቅንጣቶችን ይተኩሳሉ። ፈጣን ነባሪ ተወንጫፊዎች ወዲያውኑ ይሰማሉ፤ በጥይት ጊዜ የሚመጣን ተኩስ ለመሸሽ ፍጥነታቸውን ይቀንሱ። የተወንጫፊ ፍጥነትን ከታች ያዋቅሩ፣ ወይም ወደ ነባሪው 10000 units በሰከንድ ይመልሱት።
+
+@ Freezes the game for a split second when you damage an enemy, so hits feel heavier. Single player only. Choose which weapons trigger it (all, melee, ranged or explosives), how long it lasts and how much more a kill freezes. Advanced settings cover enemy toughness, damage scaling, cooldown and the longest freeze.
+am ጠላትን ሲጎዱ ጨዋታውን ለቅጽበት ያቀዘቅዛል፣ ስለዚህ ምቶች ከበድ ብለው ይሰማሉ። ለአንድ ተጫዋች ብቻ። የትኞቹ መሳሪያዎች እንደሚያስነሱት (ሁሉም፣ የቅርብ ውጊያ፣ የርቀት ወይም ፈንጂዎች)፣ ለምን ያህል እንደሚቆይ እና ግድያ ምን ያህል ተጨማሪ እንደሚያቀዘቅዝ ይምረጡ። የላቁ ቅንብሮች የጠላት ጥንካሬን፣ የጉዳት መጠንን፣ የእረፍት ጊዜን እና ረጅሙን መቀዝቀዝ ይሸፍናሉ።
+
+# map packs and the Quaddicted browser
+@ Get more maps (Quaddicted)...
+am ተጨማሪ ካርታዎችን አግኝ (Quaddicted)...
+
+@ Type to filter...
+am ለማጣራት ይጻፉ...
+
+@ Launch mod
+am ሞድ አስጀምር
+
+@ Start first map
+am የመጀመሪያውን ካርታ ጀምር
+
+@ (running)
+am (እየሰራ ነው)
+
+@ running
+am እየሰራ ነው
+
+@ Recent
+am የቅርብ ጊዜ
+
+@ Name
+am ስም
+
+@ Dir
+am ማውጫ
+
+@ Default
+am ነባሪ
+
+@ Title
+am ርዕስ
+
+@ Sort: {}
+am ደርድር፦ {}
+
+@ {} installed
+am {} ተጭነዋል
+
+@ {}/{} matching
+am {}/{} ይዛመዳሉ
+
+@ {} maps, {} completed
+am {} ካርታዎች፣ {} ተጠናቀዋል
+
+@ {}/{} matching, {} completed
+am {}/{} ይዛመዳሉ፣ {} ተጠናቀዋል
+
+@ no maps of its own
+am የራሱ ካርታዎች የሉትም
+
+@ dir: {}
+am ማውጫ፦ {}
+
+@ base: {}
+am መሠረት፦ {}
+
+@ Browse the Quaddicted archive of
+am የQuaddicted ማህደርን
+
+@ single-player maps and episodes,
+am የአንድ ተጫዋች ካርታዎችና ክፍሎች ያስሱ፣
+
+@ then download and install them
+am ከዚያም እዚህ ያውርዱና
+
+@ here. Each release gets its own
+am ይጫኑ። እያንዳንዱ ልቀት በዚህ
+
+@ entry in this list.
+am ዝርዝር ውስጥ የራሱ ግቤት ያገኛል።
+
+@ Needs an internet connection.
+am የኢንተርኔት ግንኙነት ያስፈልጋል።
+
+@ Quaddicted Map Archive
+am የQuaddicted ካርታ ማህደር
+
+@ Newest
+am አዲሱ
+
+@ Author
+am ደራሲ
+
+@ Size
+am መጠን
+
+@ Loading the map list...
+am የካርታ ዝርዝሩን በመጫን ላይ...
+
+@ Couldn't load the map list: {}
+am የካርታ ዝርዝሩን መጫን አልተቻለም፦ {}
+
+@ {} single-player releases  -  F5 refreshes
+am {} የአንድ ተጫዋች ልቀቶች  -  F5 ያድሳል
+
+@ {} matching
+am {} ይዛመዳሉ
+
+@ by {}
+am በ{}
+
+@ requires: {}
+am ያስፈልጋል፦ {}
+
+@ maps: {}
+am ካርታዎች፦ {}
+
+@ Failed: {}
+am አልተሳካም፦ {}
+
+@ Downloading... {}%
+am በማውረድ ላይ... {}%
+
+@ Unpacking...
+am በመፍታት ላይ...
+
+@ Installed in {}/  -  Enter: play
+am በ{}/ ተጭኗል  -  Enter፦ ተጫወት
+
+@ Enter: download and install
+am Enter፦ አውርድና ጫን
+
+@ unpacking
+am በመፍታት ላይ
+
+@ failed
+am አልተሳካም
+
+@ installed
+am ተጭኗል
+
+@ Downloads are not available in the browser build
+am በአሳሹ ስሪት ውስጥ ማውረድ አይገኝም
+
+@ the map list could not be read
+am የካርታ ዝርዝሩ ሊነበብ አልቻለም
+
+@ downloading needs the curl program
+am ማውረድ የcurl ፕሮግራምን ይፈልጋል
+
+@ download failed
+am ማውረዱ አልተሳካም
+
+@ the download is not a valid zip
+am የወረደው ትክክለኛ zip አይደለም
+
+@ nothing to install for this engine
+am ለዚህ ሞተር የሚጫን ምንም የለም
+
+@ needs {} installed first
+am በመጀመሪያ {} መጫን አለበት
+
+@ couldn't unpack {}
+am {}ን መፍታት አልተቻለም
+
+# help screen
+@ About
+am ስለ
+
+@ < Back
+am < ተመለስ
+
+# tr_ctx keys: English shows the short word, the key says which meaning
+@ Save (a manual save, as opposed to a quicksave or autosave)
+am ማስቀመጫ
+
+# ==== hud.txt ====
+
+# HUD, weapon and equipment wheels, sound captions and other in-game text.
+# Weapon, monster and item names follow the 2021 re-release's own translations.
+@ Axe
+am መጥረቢያ
+
+@ Shotgun
+am ሾትገን
+
+@ Double-Barrelled Shotgun
+am ባለሁለት አፈሙዝ ሾትገን
+
+@ Nailgun
+am የሚስማር ጠመንጃ
+
+@ Super Nailgun
+am ሱፐር የሚስማር ጠመንጃ
+
+@ Grenade Launcher
+am የቦምብ ማስወንጨፊያ
+
+@ Rocket Launcher
+am የሮኬት ማስወንጨፊያ
+
+@ Thunderbolt
+am ነጎድጓድ
+
+@ Portal Gun
+am የፖርታል ሽጉጥ
+
+@ Boomerang
+am ቡሜራንግ
+
+@ Stickybomb Launcher
+am የሚጣበቅ ቦምብ ማስወንጨፊያ
+
+@ Railgun
+am ሬልገን
+
+@ Hookshot
+am መንጠቆ
+
+@ Gel Sprayer
+am የጄል መርጫ
+
+@ Powerwasher
+am የውሃ መድፍ
+
+@ Night Vision Goggles
+am የሌሊት እይታ መነጽር
+
+@ Thermal Goggles
+am የሙቀት መነጽር
+
+@ Normal vision
+am መደበኛ እይታ
+
+@ ON
+am በርቷል
+
+@ OFF
+am ጠፍቷል
+
+@ {} (turn on)
+am {} (አብራ)
+
+@ {} (turn off)
+am {} (አጥፋ)
+
+@ Move mouse to select, release to toggle
+am ለመምረጥ አይጡን ያንቀሳቅሱ፣ ለመቀያየር ይልቀቁ
+
+@ Move mouse to select, release to equip
+am ለመምረጥ አይጡን ያንቀሳቅሱ፣ ለመያዝ ይልቀቁ
+
+@ Release to toggle
+am ለመቀያየር ይልቀቁ
+
+@ Release to equip
+am ለመያዝ ይልቀቁ
+
+@ shells
+am ቀለሃዎች
+
+@ nails
+am ሚስማሮች
+
+@ rockets
+am ሮኬቶች
+
+@ cells
+am ሴሎች
+
+@ Kills: {}/{}
+am ግድያዎች፦ {}/{}
+
+@ Secrets: {}/{}
+am ሚስጥሮች፦ {}/{}
+
+@ Time {}
+am ጊዜ {}
+
+@ Press any button to continue...
+am ለመቀጠል ማንኛውንም አዝራር ይጫኑ...
+
+@ Press any key to continue...
+am ለመቀጠል ማንኛውንም ቁልፍ ይጫኑ...
+
+@ BULLET TIME
+am የጥይት ጊዜ
+
+@ AUTO AIM
+am ራስ-ማነጣጠር
+
+@ Crosshair
+am ማነጣጠሪያ
+
+@ + Marker
+am + ምልክት
+
+@ Hit markers off
+am የመምታት ምልክቶች ጠፍተዋል
+
+@ On target
+am ዒላማ ላይ
+
+@ On kill
+am ሲገደል
+
+# sound captions
+@ [Secret found]
+am [ሚስጥር ተገኘ]
+
+@ [Message]
+am [መልዕክት]
+
+@ [Switch activated]
+am [ማብሪያ ነቃ]
+
+@ [Key picked up]
+am [ቁልፍ ተወሰደ]
+
+@ [Rune picked up]
+am [ሩን ተወሰደ]
+
+@ [Teleporter]
+am [ቴሌፖርተር]
+
+@ [Teleport]
+am [ቴሌፖርት]
+
+@ [Splash]
+am [ፍንጣቂ]
+
+@ [Leaving water]
+am [ከውሃ መውጣት]
+
+@ [Door]
+am [በር]
+
+@ [Platform moving]
+am [መድረክ እየተንቀሳቀሰ]
+
+@ [Button]
+am [አዝራር]
+
+@ [Health picked up]
+am [ጤና ተወሰደ]
+
+@ [Armor picked up]
+am [ጋሻ ተወሰደ]
+
+@ [Quad Damage wearing off]
+am [Quad Damage እያለቀ ነው]
+
+@ [Quad Damage]
+am [Quad Damage]
+
+@ [Pentagram wearing off]
+am [ፔንታግራም እያለቀ ነው]
+
+@ [Pentagram of Protection]
+am [የመከላከያ ፔንታግራም]
+
+@ [Ring wearing off]
+am [ቀለበት እያለቀ ነው]
+
+@ [Ring of Shadows]
+am [የጥላዎች ቀለበት]
+
+@ [Biosuit wearing off]
+am [ባዮሱት እያለቀ ነው]
+
+@ [Biosuit]
+am [ባዮሱት]
+
+@ [Item picked up]
+am [ዕቃ ተወሰደ]
+
+@ [Weapon picked up]
+am [መሳሪያ ተወሰደ]
+
+@ [Ammo picked up]
+am [ጥይት ተወሰደ]
+
+@ [Explosion]
+am [ፍንዳታ]
+
+@ [Grenade launched]
+am [ቦምብ ተወነጨፈ]
+
+@ [Grenade bounce]
+am [ቦምብ ነጠረ]
+
+@ [Rocket fired]
+am [ሮኬት ተተኮሰ]
+
+@ [Nails fired]
+am [ሚስማሮች ተተኮሱ]
+
+@ [Lightning]
+am [መብረቅ]
+
+@ [Thunder]
+am [ነጎድጓድ]
+
+@ [Enforcer alerted]
+am [ኢንፎርሰር ነቃ]
+
+@ [Grunt alerted]
+am [ወታደር ነቃ]
+
+@ [Rottweiler alerted]
+am [ሮትዋይለር ነቃ]
+
+@ [Knight alerted]
+am [ፈረሰኛ ነቃ]
+
+@ [Death Knight alerted]
+am [የሞት ፈረሰኛ ነቃ]
+
+@ [Scrag alerted]
+am [ስክራግ ነቃ]
+
+@ [Ogre alerted]
+am [ኦግር ነቃ]
+
+@ [Fiend alerted]
+am [ፊንድ ነቃ]
+
+@ [Shambler alerted]
+am [ሻምብለር ነቃ]
+
+@ [Zombie groaning]
+am [ዞምቢ እያቃሰተ]
+
+@ [Vore alerted]
+am [ቮር ነቃ]
+
+@ [Vore attacking]
+am [ቮር እያጠቃ]
+
+@ [Spawn alerted]
+am [ስፓውን ነቃ]
+
+@ [Rotfish]
+am [ሮትፊሽ]
+
+@ [Spawn]
+am [ስፓውን]
+
+@ [Chthon]
+am [ክቶን]
+
+@ [Hard landing]
+am [ኃይለኛ ማረፊያ]
+
+@ [Drowning]
+am [መስጠም]
+
+@ [Gasping for air]
+am [ለአየር ማለክለክ]
+
+@ [Burning]
+am [መቃጠል]
+
+@ [Telefrag]
+am [ቴሌፍራግ]
+
+@ [Gibbed]
+am [ተበጣጠሰ]
+
+# ==== console.txt ====
+
+# Console messages, shown translated only with con_translate 1 (Translate Console).
+# Cvar and command names stay as they are.
+@ Autosaved.
+am በራስ-ሰር ተቀምጧል።
+
+@ Game saved.
+am ጨዋታው ተቀምጧል።
+
+@ Can't save now.
+am አሁን ማስቀመጥ አይቻልም።
+
+@ This game only autosaves (No Manual Saves modifier).
+am ይህ ጨዋታ በራስ-ሰር ብቻ ያስቀምጣል (በእጅ ማስቀመጥ የለም ለዋጭ)።
+
+@ Loading {}...
+am {}ን በመጫን ላይ...
+
+@ load failed: {}
+am መጫን አልተሳካም፦ {}
+
+@ ERROR: autosave failed: {}
+am ስህተት፦ ራስ-ማስቀመጥ አልተሳካም፦ {}
+
+@ ERROR: couldn't open {}
+am ስህተት፦ {}ን መክፈት አልተቻለም
+
+@ ERROR: couldn't open {}.
+am ስህተት፦ {}ን መክፈት አልተቻለም።
+
+@ ERROR: couldn't write {}: {}
+am ስህተት፦ {}ን መጻፍ አልተቻለም፦ {}
+
+@ ERROR: couldn't create {}: {}
+am ስህተት፦ {}ን መፍጠር አልተቻለም፦ {}
+
+@ couldn't write {}: {}
+am {}ን መጻፍ አልተቻለም፦ {}
+
+@ Wrote {}
+am {} ተጽፏል
+
+@ screenshot failed: {}
+am ቅጽበታዊ ገጽ እይታ አልተሳካም፦ {}
+
+@ screenshot: {}
+am ቅጽበታዊ ገጽ እይታ፦ {}
+
+@ No readable save available. Select save or restart the level.
+am የሚነበብ ማስቀመጫ የለም። ማስቀመጫ ይምረጡ ወይም ደረጃውን እንደገና ይጀምሩ።
+
+@ Unknown command "{}"
+am ያልታወቀ ትዕዛዝ "{}"
+
+@ couldn't exec {}
+am {}ን ማስፈጸም አልተቻለም
+
+@ execing {}
+am {}ን በማስፈጸም ላይ
+
+@ execing config.cfg (inherited from {})
+am config.cfgን በማስፈጸም ላይ (ከ{} የተወረሰ)
+
+@ execing config.cfg (mod defaults)
+am config.cfgን በማስፈጸም ላይ (የሞድ ነባሪዎች)
+
+@ execing default.cfg (built-in)
+am default.cfgን በማስፈጸም ላይ (አብሮ የተሰራ)
+
+@ {} cvars
+am {} cvars
+
+@ {} commands
+am {} ትዕዛዞች
+
+@ Can't "cmd", not connected
+am "cmd" አይቻልም፣ አልተገናኘም
+
+@ Looking for Quake servers...
+am የQuake አገልጋዮችን በመፈለግ ላይ...
+
+@ Bad value, must be between 1 and 65534
+am የተሳሳተ እሴት፣ በ1 እና በ65534 መካከል መሆን አለበት
+
+@ Couldn't handle music file {}
+am የሙዚቃ ፋይል {}ን ማስተናገድ አልተቻለም
+
+@ Bug report written to {}
+am የስህተት ሪፖርት ወደ {} ተጽፏል
+
+@ bugreport: can't create {}: {}
+am bugreport፦ {}ን መፍጠር አልተቻለም፦ {}
+
+@ graphics preset: {}
+am የግራፊክስ ቅድመ-ቅንብር፦ {}
+
+@ Presets (r_shader_preset <name>):
+am ቅድመ-ቅንብሮች (r_shader_preset <name>)፦
+
+@ Add your own .slangp presets under <game>/shaders/.
+am የራስዎን .slangp ቅድመ-ቅንብሮች በ<game>/shaders/ ስር ያክሉ።
+
+@ no shader preset loaded (r_shader_preset)
+am ምንም የሼደር ቅድመ-ቅንብር አልተጫነም (r_shader_preset)
+
+@ r_shader_preset: "{}" not found
+am r_shader_preset፦ "{}" አልተገኘም
+
+@ no parameter "{}" in this preset
+am በዚህ ቅድመ-ቅንብር ውስጥ "{}" የሚባል መለኪያ የለም
+
+@ {} = {} (default {}, {}..{})
+am {} = {} (ነባሪ {}፣ {}..{})
+
+@ Switching to {}...
+am ወደ {} በመቀየር ላይ...
+
+@ game: no game dir "{}" in {}
+am game፦ "{}" የሚባል የጨዋታ ማውጫ የለም (በ{})
+
+@ game: can't find the engine executable
+am game፦ የሞተሩን ፕሮግራም ማግኘት አልተቻለም
+
+@ game: exec failed: {}
+am game፦ ማስፈጸም አልተሳካም፦ {}
+
+@ game: launch failed: {}
+am game፦ ማስጀመር አልተሳካም፦ {}
+
+@ loaded {} in {}s
+am {}ን በ{}ሰ ውስጥ ጫነ
+
+@ No demos listed with startdemos
+am በstartdemos የተዘረዘሩ ማሳያዎች የሉም
+
+@ Playing demo from {}.
+am ማሳያ ከ{} በማጫወት ላይ።
+
+@ {} frames {} seconds {} fps
+am {} ፍሬሞች {} ሰከንዶች {} fps
+
+@ Recording to {}.
+am ወደ {} በመቅዳት ላይ።
+
+@ Completed demo
+am ማሳያው ተጠናቋል
+
+@ Can't record during demo playback
+am ማሳያ እየተጫወተ ሳለ መቅዳት አይቻልም
+
+@ Relative pathnames are not allowed.
+am አንጻራዊ የመንገድ ስሞች አይፈቀዱም።
+
+@ Can't record - try again when connected
+am መቅዳት አይቻልም - ሲገናኙ እንደገና ይሞክሩ
+
+@ {} demo(s) in loop
+am በድግግሞሽ ውስጥ {} ማሳያ(ዎች)
+
+@ Not recording a demo.
+am ማሳያ እየተቀዳ አይደለም።
+
+@ {} joined on a gamepad
+am {} በጌምፓድ ተቀላቀለ
+
+@ goggles: needs a game started with Add-ons and Goggles enabled
+am goggles፦ ተጨማሪዎችና መነጽሮች የነቁበት የተጀመረ ጨዋታ ያስፈልጋል
+
+@ equip: needs a game started with Add-ons and Goggles enabled
+am equip፦ ተጨማሪዎችና መነጽሮች የነቁበት የተጀመረ ጨዋታ ያስፈልጋል
+
+@ UDP listening on port {}
+am UDP በፖርት {} ላይ እያዳመጠ ነው
+
+@ UDP bind on port {} failed: {}
+am UDP በፖርት {} ላይ ማሰር አልተሳካም፦ {}
+
+@ Connection accepted by {}
+am ግንኙነት በ{} ተቀባይነት አግኝቷል
+
+@ Connection failed: {}
+am ግንኙነት አልተሳካም፦ {}
+
+@ Couldn't resolve {}
+am {}ን መፍታት አልተቻለም
+
+@ Connecting to {}...
+am ከ{} ጋር በመገናኘት ላይ...
+
+@ Connecting to QuakeWorld server {}...
+am ከQuakeWorld አገልጋይ {} ጋር በመገናኘት ላይ...
+
+@ Disconnected: {}
+am ግንኙነቱ ተቋርጧል፦ {}
+
+@ Server disconnected
+am አገልጋዩ ግንኙነቱን አቋርጧል
+
+@ Client {} connected
+am ደንበኛ {} ተገናኝቷል
+
+@ Client {} timed out
+am የደንበኛ {} ጊዜ አልፏል
+
+@ Couldn't spawn server {}: {}
+am አገልጋይ {}ን መፍጠር አልተቻለም፦ {}
+
+@ maxplayers can not be changed while a server is running.
+am አገልጋይ እየሰራ ሳለ maxplayers ሊቀየር አይችልም።
+
+@ You can't kick yourself!
+am ራስዎን ማስወጣት አይችሉም!
+
+@ Only the server may changelevel
+am ደረጃ መቀየር የሚችለው አገልጋዩ ብቻ ነው
+
+@ {} renamed to {}
+am {} ስሙን ወደ {} ቀይሯል

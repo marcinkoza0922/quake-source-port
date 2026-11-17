@@ -34,7 +34,9 @@ hollanti, kreikka, unkari, romania, portugali (Portugali tai Brasilia), japani,
 korea, kiina (yksinkertaistettu tai perinteinen), turkki, indonesia, malaiji,
 filipino, vietnam, serbia, liettua, latvia, viro, malta, albania, armenia,
 georgia, islanti, iiri, kymri, baski, katalaani, galicia, latina, esperanto,
-valkovenäjä, makedonia, sloveeni tai swahili.
+valkovenäjä, makedonia, sloveeni, swahili, arabia, heprea, persia, urdu,
+hindi, marathi, bengali, pandžabi, gudžarati, tamili, telugu, thai, khmer,
+amhara tai kantoni.
 **Järjestelmä** seuraa tietokoneesi kieltä. Vuoden 2021 uusintajulkaisun
 omat pelitekstit on käännetty vain ranskaksi, saksaksi, italiaksi,
 espanjaksi ja venäjäksi; muilla kielillä ne näkyvät englanniksi. Muilla

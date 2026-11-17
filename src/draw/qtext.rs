@@ -114,8 +114,15 @@ impl Canvas {
 
     /// Quake text on the 8-unit grid (classic console): conchars for each
     /// byte, decoded UTF-8 characters from the monospace font in the cell.
+    /// A line with letters that need shaping or bidi (Arabic, Hebrew,
+    /// Indic, Thai, Khmer) can't be drawn a cell at a time, so it is drawn
+    /// as proportional [`Self::qtext`] instead.
     pub fn qtext_grid(&mut self, x: f32, y: f32, bytes: &[u8], color: [f32; 4]) {
         let ttf = self.ttf_quake_text();
+        if ttf && glyphs_utf8(bytes, true).any(|g| matches!(g, Glyph::Char(c) if crate::font::complex(c))) {
+            self.qtext(x, y, bytes, color);
+            return;
+        }
         for (i, g) in glyphs_utf8(bytes, ttf).enumerate() {
             let cx = x + i as f32 * 8.0;
             match g {

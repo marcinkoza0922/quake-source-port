@@ -34,7 +34,9 @@ duński, norweski, niderlandzki, grecki, węgierski, rumuński, portugalski
 tradycyjny), turecki, indonezyjski, malajski, filipiński, wietnamski, serbski,
 litewski, łotewski, estoński, maltański, albański, ormiański, gruziński,
 islandzki, irlandzki, walijski, baskijski, kataloński, galicyjski, łaciński,
-esperanto, białoruski, macedoński, słoweński lub suahili.
+esperanto, białoruski, macedoński, słoweński, suahili, arabski, hebrajski,
+perski, urdu, hindi, marathi, bengalski, pendżabski, gudżarati, tamilski,
+telugu, tajski, khmerski, amharski lub kantoński.
 **System** używa języka twojego komputera. Własne teksty gry z reedycji
 z 2021 roku są przetłumaczone tylko na francuski, niemiecki, włoski,
 hiszpański i rosyjski; w pozostałych językach są wyświetlane po angielsku.

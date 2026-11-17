@@ -1,0 +1,3024 @@
+# te: the port's own text; English keys from crates/qcore/lang/*.txt.
+# Format in crates/qcore/src/lang/catalog.rs; check with tools/lang_check.py.
+
+# ==== menu.txt ====
+
+# Options pages: page names, row labels and choice values.
+@ 10% speed
+te 10% వేగం
+
+@ 2 split-screen
+te 2 స్ప్లిట్-స్క్రీన్
+
+@ 3 split-screen
+te 3 స్ప్లిట్-స్క్రీన్
+
+@ 4 split-screen
+te 4 స్ప్లిట్-స్క్రీన్
+
+@ 5 split-screen
+te 5 స్ప్లిట్-స్క్రీన్
+
+@ 6 split-screen
+te 6 స్ప్లిట్-స్క్రీన్
+
+@ 2D aiming
+te 2D గురి
+
+@ 2x monsters
+te 2x రాక్షసులు
+
+@ 3x monsters
+te 3x రాక్షసులు
+
+@ 4x monsters
+te 4x రాక్షసులు
+
+@ 3D resolution
+te 3D రిజల్యూషన్
+
+@ 3D view
+te 3D వీక్షణ
+
+@ 8-bit Color
+te 8-బిట్ రంగు
+
+@ Accessibility
+te యాక్సెసిబిలిటీ
+
+@ Acquisition Cone
+te గురి కోన్
+
+@ Activation
+te యాక్టివేషన్
+
+@ Add a ringing room tail after the cue
+te సంకేతం తర్వాత మోగే గది ప్రతిధ్వనిని జోడిస్తుంది
+
+@ Add delayed repeats after the cue
+te సంకేతం తర్వాత ఆలస్యమైన పునరావృతాలను జోడిస్తుంది
+
+@ Add saturation and distortion
+te సాచురేషన్, డిస్టార్షన్ జోడిస్తుంది
+
+@ Add-ons
+te యాడ్-ఆన్‌లు
+
+@ Address
+te చిరునామా
+
+@ Adds fine noise to hide color banding
+te రంగు బ్యాండింగ్‌ను దాచడానికి సన్నని నాయిస్ జోడిస్తుంది
+
+@ Advanced Settings
+te అధునాతన సెట్టింగ్‌లు
+
+@ Aim Assist
+te గురి సహాయం
+
+@ Aim Rotation
+te గురి భ్రమణం
+
+@ Aim Slowdown
+te గురి మందగింపు
+
+@ Aim Style
+te గురి శైలి
+
+@ All
+te అన్నీ
+
+@ All enemies
+te అందరు శత్రువులు
+
+@ Alt Fire (Add-ons)
+te ప్రత్యామ్నాయ ఫైర్ (యాడ్-ఆన్‌లు)
+
+@ Always Run
+te ఎల్లప్పుడూ పరుగు
+
+@ Ambient Occlusion
+te యాంబియెంట్ అక్లూజన్
+
+@ Ammo Counts
+te మందుగుండు లెక్కలు
+
+@ Ammo Counts Position
+te మందుగుండు లెక్కల స్థానం
+
+@ Ammo Pickups
+te మందుగుండు పికప్‌లు
+
+@ Anisotropic
+te అనిసోట్రోపిక్
+
+@ Anti-aliasing
+te యాంటీ-అలియాసింగ్
+
+@ Apply To
+te వర్తింపజేయి
+
+@ Armor
+te కవచం
+
+@ Armor Position
+te కవచం స్థానం
+
+@ Ask
+te అడుగు
+
+@ Attack
+te దాడి
+
+@ Audio
+te ఆడియో
+
+@ Auto-aim
+te ఆటో-గురి
+
+@ Auto-aim Settings
+te ఆటో-గురి సెట్టింగ్‌లు
+
+@ Autosave
+te ఆటోసేవ్
+
+@ Autosave Settings
+te ఆటోసేవ్ సెట్టింగ్‌లు
+
+@ Autosave Timer
+te ఆటోసేవ్ టైమర్
+
+@ Autosaves to Keep
+te ఉంచాల్సిన ఆటోసేవ్‌లు
+
+@ Bass
+te బాస్
+
+@ Blip
+te బ్లిప్
+
+@ Blood Quality
+te రక్తం నాణ్యత
+
+@ Blood Splatter Settings
+te రక్తపు చిందుల సెట్టింగ్‌లు
+
+@ Blue
+te నీలం
+
+@ Boomerang Settings
+te బూమరాంగ్ సెట్టింగ్‌లు
+
+@ Boost or cut high frequencies in decibels
+te అధిక ఫ్రీక్వెన్సీలను డెసిబెల్‌లలో పెంచు లేదా తగ్గించు
+
+@ Boost or cut low frequencies in decibels
+te తక్కువ ఫ్రీక్వెన్సీలను డెసిబెల్‌లలో పెంచు లేదా తగ్గించు
+
+@ Brightness
+te ప్రకాశం
+
+@ Bullet Time (Add-ons)
+te బుల్లెట్ టైమ్ (యాడ్-ఆన్‌లు)
+
+@ Bullet Time Settings
+te బుల్లెట్ టైమ్ సెట్టింగ్‌లు
+
+@ Button Glyphs
+te బటన్ గుర్తులు
+
+@ Button Size
+te బటన్ పరిమాణం
+
+@ Camera
+te కెమెరా
+
+@ Caustic Intensity
+te కాస్టిక్ తీవ్రత
+
+@ Caustics
+te కాస్టిక్స్
+
+@ Center
+te మధ్య
+
+@ Center Message Position
+te మధ్య సందేశం స్థానం
+
+@ Center Message Time
+te మధ్య సందేశం సమయం
+
+@ Center View
+te వీక్షణను మధ్యకు
+
+@ Change Color on Kill
+te చంపినప్పుడు రంగు మార్చు
+
+@ Change Color on Target
+te లక్ష్యంపై రంగు మార్చు
+
+@ Chime
+te చైమ్
+
+@ Click
+te క్లిక్
+
+@ Clink
+te క్లింక్
+
+@ Coin
+te నాణెం
+
+@ Color
+te రంగు
+
+@ Color Filter
+te రంగు ఫిల్టర్
+
+@ Color of the grenade arc
+te గ్రెనేడ్ వంపు రంగు
+
+@ Colored Lighting
+te రంగుల లైటింగ్
+
+@ Connect
+te కనెక్ట్
+
+@ Contrast
+te కాంట్రాస్ట్
+
+@ Controls
+te నియంత్రణలు
+
+@ Cooldown (ms)
+te కూల్‌డౌన్ (ms)
+
+@ Crosshair Outline
+te క్రాస్‌హెయిర్ అంచు
+
+@ Crosshair Shape
+te క్రాస్‌హెయిర్ ఆకారం
+
+@ Crosshair Size
+te క్రాస్‌హెయిర్ పరిమాణం
+
+@ Current Ammo
+te ప్రస్తుత మందుగుండు
+
+@ Current Ammo Position
+te ప్రస్తుత మందుగుండు స్థానం
+
+@ Customize This Game
+te ఈ గేమ్‌ను అనుకూలీకరించు
+
+@ Damage
+te నష్టం
+
+@ Damage Taken
+te పొందిన నష్టం
+
+@ Debris
+te శిథిలాలు
+
+@ Debris Quality
+te శిథిలాల నాణ్యత
+
+@ Debris Settings
+te శిథిలాల సెట్టింగ్‌లు
+
+@ Directional Damage
+te దిశాత్మక నష్టం
+
+@ Dithering
+te డిథరింగ్
+
+@ Dodge / Dive (Add-ons)
+te తప్పుకో / దూకు (యాడ్-ఆన్‌లు)
+
+@ Dragging up looks down instead of up
+te పైకి లాగితే పైకి కాకుండా కిందికి చూస్తుంది
+
+@ Drive
+te డ్రైవ్
+
+@ Dynamic Lights
+te డైనమిక్ లైట్లు
+
+@ Echo
+te ప్రతిధ్వని
+
+@ Enemy Health
+te శత్రువు ఆరోగ్యం
+
+@ Enemy Wounds
+te శత్రువు గాయాలు
+
+@ Enhanced Blood Splatter
+te మెరుగైన రక్తపు చిందులు
+
+@ Enhanced FX
+te మెరుగైన FX
+
+@ Enhanced Models
+te మెరుగైన మోడల్‌లు
+
+@ Enhanced Particles
+te మెరుగైన పార్టికల్‌లు
+
+@ Enhanced Water
+te మెరుగైన నీరు
+
+@ Enhancements
+te మెరుగుదలలు
+
+@ Equipment Wheel (Add-ons)
+te పరికరాల చక్రం (యాడ్-ఆన్‌లు)
+
+@ Exploding boxes throw metal shards
+te పేలే పెట్టెలు లోహపు ముక్కలను విసురుతాయి
+
+@ Explosion Damage
+te పేలుడు నష్టం
+
+@ Explosion Scorch Marks
+te పేలుడు కాలిన గుర్తులు
+
+@ Explosions scorch nearby solid surfaces
+te పేలుళ్లు సమీప ఘన ఉపరితలాలను కాలుస్తాయి
+
+@ Explosives only
+te పేలుడు పదార్థాలు మాత్రమే
+
+@ Extra Monsters
+te అదనపు రాక్షసులు
+
+@ Extra Per 10 Damage (ms)
+te ప్రతి 10 నష్టానికి అదనం (ms)
+
+@ FX Settings
+te FX సెట్టింగ్‌లు
+
+@ Field of View
+te వీక్షణ క్షేత్రం
+
+@ Firing never uses up ammo
+te కాల్చినా మందుగుండు అయిపోదు
+
+@ First person
+te ఫస్ట్ పర్సన్
+
+@ Flick Time
+te ఫ్లిక్ సమయం
+
+@ Flight Speed
+te ఎగిరే వేగం
+
+@ Fog
+te పొగమంచు
+
+@ Frag Limit
+te ఫ్రాగ్ పరిమితి
+
+@ Freeze Duration (ms)
+te ఫ్రీజ్ వ్యవధి (ms)
+
+@ GLQuake
+te GLQuake
+
+@ Game Speed
+te గేమ్ వేగం
+
+@ Game Type
+te గేమ్ రకం
+
+@ Gameplay
+te గేమ్‌ప్లే
+
+@ Gameplay Modifiers
+te గేమ్‌ప్లే మార్పులు
+
+@ Gel Quality
+te జెల్ నాణ్యత
+
+@ Gib Surface Painting
+te గిబ్ ఉపరితల మరకలు
+
+@ Gibs
+te గిబ్‌లు
+
+@ Gibs and heads tumble and bounce
+te గిబ్‌లు, తలలు దొర్లుతూ ఎగిరిపడతాయి
+
+@ Goggle Glow Quality
+te గాగుల్ కాంతి నాణ్యత
+
+@ Goggle Intensity
+te గాగుల్ తీవ్రత
+
+@ Goggle Noise
+te గాగుల్ నాయిస్
+
+@ Goggles Settings
+te గాగుల్స్ సెట్టింగ్‌లు
+
+@ Graphics
+te గ్రాఫిక్స్
+
+@ Green
+te ఆకుపచ్చ
+
+@ Grenade Arc
+te గ్రెనేడ్ వంపు
+
+@ Grenade Arc Settings
+te గ్రెనేడ్ వంపు సెట్టింగ్‌లు
+
+@ Gun Kick
+te తుపాకీ కుదుపు
+
+@ Gyro
+te గైరో
+
+@ Gyro & Flick Stick
+te గైరో & ఫ్లిక్ స్టిక్
+
+@ Gyro Active
+te గైరో సక్రియం
+
+@ Gyro Aiming
+te గైరో గురి
+
+@ HUD
+te HUD
+
+@ HUD Style
+te HUD శైలి
+
+@ Health
+te ఆరోగ్యం
+
+@ Health Pickups
+te ఆరోగ్య పికప్‌లు
+
+@ Health Position
+te ఆరోగ్యం స్థానం
+
+@ Health Regeneration
+te ఆరోగ్య పునరుత్పత్తి
+
+@ Hit & Kill Sounds
+te హిట్ & కిల్ శబ్దాలు
+
+@ Hit Doors & Lifts
+te తలుపులు & లిఫ్ట్‌లకు తగులు
+
+@ Hit Markers
+te హిట్ మార్కర్‌లు
+
+@ Hit Sound
+te హిట్ శబ్దం
+
+@ Hitmarker Size
+te హిట్‌మార్కర్ పరిమాణం
+
+@ Hitmarker Type
+te హిట్‌మార్కర్ రకం
+
+@ Hitstop Advanced
+te హిట్‌స్టాప్ అధునాతనం
+
+@ Hitstop Settings
+te హిట్‌స్టాప్ సెట్టింగ్‌లు
+
+@ Hold
+te పట్టుకో
+
+@ Hold lock-on
+te లాక్-ఆన్ పట్టుకో
+
+@ Hook Enemies
+te శత్రువులను హుక్ చేయి
+
+@ Hook Metal
+te లోహాన్ని హుక్ చేయి
+
+@ Hook Stone
+te రాయిని హుక్ చేయి
+
+@ Hook Wood
+te చెక్కను హుక్ చేయి
+
+@ Hooking an enemy pulls you to it
+te శత్రువును హుక్ చేస్తే అది మిమ్మల్ని దాని వైపు లాగుతుంది
+
+@ Hookshot Range
+te హుక్‌షాట్ పరిధి
+
+@ Hookshot Settings
+te హుక్‌షాట్ సెట్టింగ్‌లు
+
+@ Host Game
+te గేమ్ హోస్ట్ చేయి
+
+@ How far the hook flies before it retracts
+te హుక్ వెనక్కి రాకముందు ఎంత దూరం ఎగురుతుంది
+
+@ How visible the on-screen controls are
+te స్క్రీన్‌పై నియంత్రణలు ఎంత కనిపిస్తాయి
+
+@ Impact Lifetime
+te తాకిడి జీవితకాలం
+
+@ Infinite Ammo
+te అపరిమిత మందుగుండు
+
+@ Input
+te ఇన్‌పుట్
+
+@ Input Scale
+te ఇన్‌పుట్ స్కేల్
+
+@ Interpolate Animation
+te యానిమేషన్ ఇంటర్‌పోలేషన్
+
+@ Interpolate Movement
+te కదలిక ఇంటర్‌పోలేషన్
+
+@ Invert Look
+te చూపు తలకిందులు
+
+@ Invert Mouse
+te మౌస్ తలకిందులు
+
+@ Invert Stick
+te స్టిక్ తలకిందులు
+
+@ Jet Quality
+te జెట్ నాణ్యత
+
+@ Join Game
+te గేమ్‌లో చేరు
+
+@ Jump / Swim Up
+te దూకు / పైకి ఈదు
+
+@ Jump again in mid-air
+te గాలిలో మళ్లీ దూకండి
+
+@ Jumps
+te దూకులు
+
+@ Keys & Powerups
+te తాళాలు & పవర్‌అప్‌లు
+
+@ Keys & Powerups Position
+te తాళాలు & పవర్‌అప్‌ల స్థానం
+
+@ Kill Bonus (x)
+te కిల్ బోనస్ (x)
+
+@ Kill Sound
+te కిల్ శబ్దం
+
+@ Knock
+te నాక్
+
+@ Left
+te ఎడమ
+
+@ Length of the motion blur streaks
+te మోషన్ బ్లర్ గీతల పొడవు
+
+@ Lifetime (seconds)
+te జీవితకాలం (సెకన్లు)
+
+@ Live Portal Views
+te లైవ్ పోర్టల్ వీక్షణలు
+
+@ Live View Distance
+te లైవ్ వీక్షణ దూరం
+
+@ Local Players
+te స్థానిక ఆటగాళ్లు
+
+@ Local red wounds follow enemy animation
+te ఎర్రటి గాయాలు శత్రువు యానిమేషన్‌ను అనుసరిస్తాయి
+
+@ Lock Indicator
+te లాక్ సూచిక
+
+@ Long falls don't hurt
+te ఎత్తు నుండి పడినా దెబ్బ తగలదు
+
+@ Longest Freeze (ms)
+te గరిష్ట ఫ్రీజ్ (ms)
+
+@ Look Down
+te కిందికి చూడు
+
+@ Look Speed
+te చూపు వేగం
+
+@ Look Up
+te పైకి చూడు
+
+@ Main Menu Music
+te ప్రధాన మెనూ సంగీతం
+
+@ Max FPS
+te గరిష్ట FPS
+
+@ Max Players
+te గరిష్ట ఆటగాళ్లు
+
+@ Maximum Impacts
+te గరిష్ట తాకిడులు
+
+@ Maximum Marks
+te గరిష్ట గుర్తులు
+
+@ Maximum Range
+te గరిష్ట పరిధి
+
+@ Melee only
+te దగ్గరి పోరాటం మాత్రమే
+
+@ Message Background
+te సందేశ నేపథ్యం
+
+@ Message Text Size
+te సందేశ అక్షరాల పరిమాణం
+
+@ Messages & Captions
+te సందేశాలు & క్యాప్షన్‌లు
+
+@ Meter Duration (real seconds)
+te మీటర్ వ్యవధి (నిజ సెకన్లు)
+
+@ Minimum Damage
+te కనిష్ట నష్టం
+
+@ Mode
+te మోడ్
+
+@ Modern Console
+te ఆధునిక కన్సోల్
+
+@ Modern HUD Layout
+te ఆధునిక HUD లేఅవుట్
+
+@ Most recent save
+te తాజా సేవ్
+
+@ Motion Blur
+te మోషన్ బ్లర్
+
+@ Motion Blur Amount
+te మోషన్ బ్లర్ మోతాదు
+
+@ Motion Blur Quality
+te మోషన్ బ్లర్ నాణ్యత
+
+@ Mouse & Keyboard
+te మౌస్ & కీబోర్డ్
+
+@ Mouse Speed
+te మౌస్ వేగం
+
+@ Move Back
+te వెనక్కి కదులు
+
+@ Move Forward
+te ముందుకు కదులు
+
+@ Music Volume
+te సంగీతం వాల్యూమ్
+
+@ Next Weapon
+te తదుపరి ఆయుధం
+
+@ No Drowning
+te మునిగిపోవడం లేదు
+
+@ No Fall Damage
+te పడిపోయే నష్టం లేదు
+
+@ No Manual Saves
+te మాన్యువల్ సేవ్‌లు లేవు
+
+@ No Self Damage
+te స్వీయ నష్టం లేదు
+
+@ Noise Filter
+te నాయిస్ ఫిల్టర్
+
+@ Normal Color
+te సాధారణ రంగు
+
+@ Notify Message Position
+te నోటిఫై సందేశం స్థానం
+
+@ Notify Message Time
+te నోటిఫై సందేశం సమయం
+
+@ Number of splatter rays per blood impact
+te ప్రతి రక్త తాకిడికి చిందు కిరణాల సంఖ్య
+
+@ Off
+te ఆఫ్
+
+@ On Death
+te మరణించినప్పుడు
+
+@ On Kill Color
+te చంపినప్పుడు రంగు
+
+@ On Target Color
+te లక్ష్యంపై రంగు
+
+@ Opacity
+te అపారదర్శకత
+
+@ Opacity of the grenade arc
+te గ్రెనేడ్ వంపు అపారదర్శకత
+
+@ Pants Color
+te ప్యాంట్ రంగు
+
+@ Particle Quality
+te పార్టికల్ నాణ్యత
+
+@ Particles
+te పార్టికల్‌లు
+
+@ Physical Nail Impacts
+te భౌతిక మేకు తాకిడులు
+
+@ Pistol Start
+te పిస్టల్ స్టార్ట్
+
+@ Pitch
+te పిచ్
+
+@ Pitch Sensitivity
+te పిచ్ సున్నితత్వం
+
+@ Playback Speed
+te ప్లేబ్యాక్ వేగం
+
+@ Player Setup
+te ఆటగాడి సెటప్
+
+@ Pop
+te పాప్
+
+@ Portal Gun Settings
+te పోర్టల్ గన్ సెట్టింగ్‌లు
+
+@ Portal Recursion
+te పోర్టల్ పునరావృతం
+
+@ Portal View Quality
+te పోర్టల్ వీక్షణ నాణ్యత
+
+@ Preview Sound
+te శబ్దం ప్రివ్యూ
+
+@ Previous Weapon
+te మునుపటి ఆయుధం
+
+@ Projectile Shotguns Settings
+te ప్రొజెక్టైల్ షాట్‌గన్‌ల సెట్టింగ్‌లు
+
+@ Projectile Speed (units/s)
+te ప్రొజెక్టైల్ వేగం (యూనిట్లు/సె)
+
+@ Purple
+te ఊదా
+
+@ Push
+te నెట్టు
+
+@ Push Strength
+te నెట్టే బలం
+
+@ Quick Load
+te త్వరిత లోడ్
+
+@ Quick Save
+te త్వరిత సేవ్
+
+@ Railgun Settings
+te రెయిల్‌గన్ సెట్టింగ్‌లు
+
+@ Ranged only
+te దూర దాడులు మాత్రమే
+
+@ Reacquire While Held
+te పట్టుకున్నప్పుడు మళ్లీ లక్ష్యం
+
+@ Red
+te ఎరుపు
+
+@ Reduce Motion
+te కదలిక తగ్గించు
+
+@ Regen (seconds per second)
+te పునరుత్పత్తి (సెకనుకు సెకన్లు)
+
+@ Render Scale
+te రెండర్ స్కేల్
+
+@ Reverb
+te రివర్బ్
+
+@ Right
+te కుడి
+
+@ Ripple Intensity
+te అలల తీవ్రత
+
+@ Ripples
+te అలలు
+
+@ Roll Sensitivity
+te రోల్ సున్నితత్వం
+
+@ Rumble
+te వైబ్రేషన్
+
+@ Run
+te పరుగు
+
+@ Save on All Enemies Killed
+te శత్రువులందరూ చనిపోతే సేవ్
+
+@ Save on All Secrets Found
+te రహస్యాలన్నీ దొరికితే సేవ్
+
+@ Save on Level Entry
+te లెవెల్ ప్రవేశంలో సేవ్
+
+@ Save on Secret Found
+te రహస్యం దొరికితే సేవ్
+
+@ Scoreboard
+te స్కోర్‌బోర్డ్
+
+@ Screen Flashes
+te స్క్రీన్ మెరుపులు
+
+@ Screen Shader
+te స్క్రీన్ షేడర్
+
+@ Screen Shake
+te స్క్రీన్ కంపనం
+
+@ Search LAN
+te LAN లో వెతుకు
+
+@ Seconds a center-screen message stays up
+te మధ్య సందేశం ఎన్ని సెకన్లు కనిపిస్తుంది
+
+@ See Through Portals
+te పోర్టల్‌ల గుండా చూడు
+
+@ See-through Teleporters
+te పారదర్శక టెలిపోర్టర్‌లు
+
+@ Shirt Color
+te చొక్కా రంగు
+
+@ Shotgun Bullet Decals
+te షాట్‌గన్ బుల్లెట్ గుర్తులు
+
+@ Shoulder left
+te ఎడమ భుజం
+
+@ Shoulder right
+te కుడి భుజం
+
+@ Show FPS
+te FPS చూపించు
+
+@ Show Face
+te ముఖం చూపించు
+
+@ Shrapnel
+te ముక్కలు
+
+@ Size of on-screen messages and captions
+te స్క్రీన్ సందేశాలు, క్యాప్షన్‌ల పరిమాణం
+
+@ Skill
+te కష్టతరం
+
+@ Sky Fog
+te ఆకాశ పొగమంచు
+
+@ Smooths the stepped movement of monsters
+te రాక్షసుల మెట్ల వంటి కదలికను మృదువుగా చేస్తుంది
+
+@ Sound
+te శబ్దం
+
+@ Sound Captions
+te శబ్ద క్యాప్షన్‌లు
+
+@ Sound Volume
+te శబ్దం వాల్యూమ్
+
+@ Speed Blur
+te వేగ బ్లర్
+
+@ Splashes
+te చిమ్మే నీరు
+
+@ Splatter Amount
+te చిందుల మోతాదు
+
+@ Splatter Size
+te చిందుల పరిమాణం
+
+@ Start Game
+te గేమ్ ప్రారంభించు
+
+@ Staying underwater doesn't hurt
+te నీటిలో ఉంటే దెబ్బ తగలదు
+
+@ Stick Look Pitch
+te స్టిక్ చూపు పిచ్
+
+@ Stick Look Yaw
+te స్టిక్ చూపు యా
+
+@ Strafe Left
+te ఎడమకు జరుగు
+
+@ Strafe Right
+te కుడికి జరుగు
+
+@ Strength of the surface swell and rings
+te ఉపరితల ఉబ్బు, వలయాల బలం
+
+@ Stun Duration
+te స్టన్ వ్యవధి
+
+@ Style
+te శైలి
+
+@ Supersampling
+te సూపర్‌శాంప్లింగ్
+
+@ Surface Hit Effects
+te ఉపరితల తాకిడి ఎఫెక్ట్‌లు
+
+@ Swim Down
+te కిందికి ఈదు
+
+@ Targets
+te లక్ష్యాలు
+
+@ Teamplay
+te టీమ్‌ప్లే
+
+@ Texture Filter
+te టెక్స్చర్ ఫిల్టర్
+
+@ Third person
+te థర్డ్ పర్సన్
+
+@ Thud
+te ధబ్
+
+@ Tick
+te టిక్
+
+@ Time Limit
+te సమయ పరిమితి
+
+@ Time Stretch
+te సమయ సాగదీత
+
+@ Toggle Attack
+te దాడి టోగుల్
+
+@ Toggle Run
+te పరుగు టోగుల్
+
+@ Toggle auto-aim
+te ఆటో-గురి టోగుల్
+
+@ Touch Controls
+te టచ్ నియంత్రణలు
+
+@ Touchscreen
+te టచ్‌స్క్రీన్
+
+@ Tough Enemy Health
+te బలమైన శత్రువు ఆరోగ్యం
+
+@ Tough enemies only
+te బలమైన శత్రువులు మాత్రమే
+
+@ Trail Colour
+te గీత రంగు
+
+@ Translate Console
+te కన్సోల్ అనువాదం
+
+@ Translucent Water
+te పారదర్శక నీరు
+
+@ Treble
+te ట్రెబుల్
+
+@ Turn Left
+te ఎడమకు తిరుగు
+
+@ Turn Right
+te కుడికి తిరుగు
+
+@ Underwater FX
+te నీటి అడుగు FX
+
+@ Use Bullet Time Meter
+te బుల్లెట్ టైమ్ మీటర్ వాడు
+
+@ VSync
+te VSync
+
+@ View Bob
+te వీక్షణ ఊగు
+
+@ Viewmodels
+te వ్యూమోడల్‌లు
+
+@ Volume
+te వాల్యూమ్
+
+@ Water Opacity
+te నీటి అపారదర్శకత
+
+@ Water Quality
+te నీటి నాణ్యత
+
+@ Water Settings
+te నీటి సెట్టింగ్‌లు
+
+@ Weapon Wheel
+te ఆయుధ చక్రం
+
+@ Weapon Wheel Slowdown
+te ఆయుధ చక్రం మందగింపు
+
+@ Weapons
+te ఆయుధాలు
+
+@ Weapons Position
+te ఆయుధాల స్థానం
+
+@ Where center-screen messages appear
+te మధ్య సందేశాలు ఎక్కడ కనిపిస్తాయి
+
+@ Where pickup and event messages appear
+te పికప్, ఈవెంట్ సందేశాలు ఎక్కడ కనిపిస్తాయి
+
+@ White
+te తెలుపు
+
+@ Yaw Sensitivity
+te యా సున్నితత్వం
+
+@ Yellow
+te పసుపు
+
+# lowercase choice values
+@ T
+te T
+
+@ always
+te ఎల్లప్పుడూ
+
+@ auto
+te ఆటో
+
+@ banded
+te పట్టీలుగా
+
+@ borderless
+te బార్డర్‌లెస్
+
+@ bottom center
+te కింద మధ్య
+
+@ bottom left
+te కింద ఎడమ
+
+@ bottom right
+te కింద కుడి
+
+@ box
+te పెట్టె
+
+@ broken square
+te విరిగిన చతురస్రం
+
+@ classic
+te క్లాసిక్
+
+@ coarse
+te ముతక
+
+@ cooperative
+te సహకార
+
+@ cross
+te క్రాస్
+
+@ cross + dot
+te క్రాస్ + చుక్క
+
+@ cyan
+te సియాన్
+
+@ dashed
+te గీతల
+
+@ deathmatch
+te డెత్‌మ్యాచ్
+
+@ deuteranopia
+te డ్యూటెరానోపియా
+
+@ diagonal streaks
+te ఏటవాలు గీతలు
+
+@ diamond
+te వజ్రం
+
+@ dot
+te చుక్క
+
+@ double
+te రెట్టింపు
+
+@ double chevrons
+te రెండు చెవ్రాన్‌లు
+
+@ double diagonals
+te రెండు ఏటవాలు
+
+@ easy
+te సులభం
+
+@ fine
+te సన్నని
+
+@ fit output
+te అవుట్‌పుట్‌కు సరిపడ
+
+@ flick stick
+te ఫ్లిక్ స్టిక్
+
+@ fullscreen
+te పూర్తి స్క్రీన్
+
+@ gap cross
+te ఖాళీ క్రాస్
+
+@ green
+te ఆకుపచ్చ
+
+@ grey
+te బూడిద
+
+@ half speed
+te సగం వేగం
+
+@ hard
+te కష్టం
+
+@ high
+te అధికం
+
+@ huge
+te భారీ
+
+@ immersive
+te లీనమయ్యే
+
+@ intense
+te తీవ్రం
+
+@ large
+te పెద్ద
+
+@ larger
+te ఇంకా పెద్ద
+
+@ largest
+te అతిపెద్ద
+
+@ linear
+te లీనియర్
+
+@ low
+te తక్కువ
+
+@ lower
+te కింది
+
+@ magenta
+te మెజెంటా
+
+@ medium
+te మధ్యస్థం
+
+@ middle
+te మధ్య
+
+@ middle left
+te మధ్య ఎడమ
+
+@ middle right
+te మధ్య కుడి
+
+@ modern
+te ఆధునిక
+
+@ nearest
+te సమీప
+
+@ nightmare
+te పీడకల
+
+@ nintendo
+te Nintendo
+
+@ no team damage
+te జట్టు నష్టం లేదు
+
+@ none
+te ఏదీ లేదు
+
+@ normal
+te సాధారణం
+
+@ off
+te ఆఫ్
+
+@ off while held
+te పట్టుకున్నప్పుడు ఆఫ్
+
+@ on
+te ఆన్
+
+@ only while held
+te పట్టుకున్నప్పుడు మాత్రమే
+
+@ playstation
+te PlayStation
+
+@ protanopia
+te ప్రోటానోపియా
+
+@ quarter speed
+te పావు వేగం
+
+@ red
+te ఎరుపు
+
+@ short diagonals
+te చిన్న ఏటవాలు
+
+@ single
+te ఒకే
+
+@ small
+te చిన్న
+
+@ solid
+te ఘన
+
+@ spectacle
+te అద్భుతం
+
+@ subtle
+te సూక్ష్మ
+
+@ team damage
+te జట్టు నష్టం
+
+@ top center
+te పైన మధ్య
+
+@ top left
+te పైన ఎడమ
+
+@ top right
+te పైన కుడి
+
+@ triple
+te మూడు
+
+@ tritanopia
+te ట్రైటానోపియా
+
+@ upper
+te పై
+
+@ white
+te తెలుపు
+
+@ whole screen
+te మొత్తం స్క్రీన్
+
+@ windowed
+te విండోలో
+
+@ xbox
+te Xbox
+
+@ yellow
+te పసుపు
+
+# ==== tooltips.txt ====
+
+# Options help lines (tooltips) and reasons for disabled rows.
+@ 2D aiming turns the view continuously with the right stick; flick stick snaps the view to where you push the stick, then turning the stick rotates it
+te 2D గురి కుడి స్టిక్‌తో వీక్షణను నిరంతరం తిప్పుతుంది; ఫ్లిక్ స్టిక్ మీరు స్టిక్ నెట్టిన దిశకు వీక్షణను వెంటనే తిప్పుతుంది, ఆపై స్టిక్ తిప్పితే వీక్షణ తిరుగుతుంది
+
+@ 3D resolution relative to the window; the UI stays sharp
+te విండోతో పోలిస్తే 3D రిజల్యూషన్; UI స్పష్టంగానే ఉంటుంది
+
+@ 3D view keeps the HUD and menus sharp; whole screen runs them through the shader too
+te 3D వీక్షణ HUD, మెనూలను స్పష్టంగా ఉంచుతుంది; మొత్తం స్క్రీన్ వాటిని కూడా షేడర్ గుండా పంపుతుంది
+
+@ A Quake III style railgun: a slug that pierces every enemy on its line, using 2 cells a shot and refiring every 1.5 s; select it through its assigned weapon slot (Add-ons)
+te Quake III శైలి రెయిల్‌గన్: తన దారిలోని ప్రతి శత్రువును చీల్చే గుండు, ఒక్కో షాట్‌కు 2 సెల్‌లు, ప్రతి 1.5 సె.కు మళ్లీ కాలుస్తుంది; దానికి కేటాయించిన ఆయుధ స్లాట్ ద్వారా ఎంచుకోండి (యాడ్-ఆన్‌లు)
+
+@ A Zelda-style hookshot: fire sends a chain hook out; it latches onto hookable surfaces or enemies and reels you in; fire again to let go
+te Zelda శైలి హుక్‌షాట్: ఫైర్ చేస్తే గొలుసు హుక్ బయటకు వెళ్తుంది; అది హుక్ చేయదగిన ఉపరితలాలకు లేదా శత్రువులకు తగులుకుని మిమ్మల్ని లాగుతుంది; వదలడానికి మళ్లీ ఫైర్ చేయండి
+
+@ Also translates the engine's console messages; off keeps them in English
+te ఇంజిన్ కన్సోల్ సందేశాలను కూడా అనువదిస్తుంది; ఆఫ్ అయితే అవి ఇంగ్లీషులోనే ఉంటాయి
+
+@ Automatically acquire another enemy while holding Lock-on after losing a target
+te లక్ష్యం కోల్పోయిన తర్వాత లాక్-ఆన్ పట్టుకుని ఉన్నప్పుడు మరో శత్రువును ఆటోమేటిక్‌గా లక్ష్యం చేస్తుంది
+
+@ Blends between animation frames of monsters and weapons
+te రాక్షసులు, ఆయుధాల యానిమేషన్ ఫ్రేమ్‌ల మధ్య మృదువుగా కలుపుతుంది
+
+@ Blood stains surfaces and bodies; cosmetic, independent of particle packs
+te రక్తం ఉపరితలాలు, శరీరాలపై మరకలు వేస్తుంది; అలంకారం మాత్రమే, పార్టికల్ ప్యాక్‌లతో సంబంధం లేదు
+
+@ Bloom glow around bright lights and heat sources; medium uses 4 taps, high uses 8, low disables halo taps
+te ప్రకాశవంతమైన లైట్లు, వేడి మూలాల చుట్టూ బ్లూమ్ కాంతి; మధ్యస్థం 4 ట్యాప్‌లు, అధికం 8 వాడుతుంది, తక్కువ హాలో ట్యాప్‌లను ఆపుతుంది
+
+@ Blurs fast-moving monsters, projectiles and doors (not camera turns)
+te వేగంగా కదిలే రాక్షసులు, ప్రొజెక్టైల్‌లు, తలుపులను బ్లర్ చేస్తుంది (కెమెరా తిరగడాన్ని కాదు)
+
+@ Blurs the screen edges during fast falls and launches; keeps the centre clear. Reduce Motion disables it
+te వేగంగా పడేటప్పుడు, ఎగిరేటప్పుడు స్క్రీన్ అంచులను బ్లర్ చేస్తుంది; మధ్య భాగం స్పష్టంగా ఉంటుంది. కదలిక తగ్గించు దీన్ని ఆపుతుంది
+
+@ Brightness of the underwater light patterns
+te నీటి అడుగున కాంతి నమూనాల ప్రకాశం
+
+@ Caps mark count, lifetime, airborne droplets and wound/gib painting; low skips enemy wounds and gib trails
+te గుర్తుల సంఖ్య, జీవితకాలం, గాలిలోని బిందువులు, గాయాలు/గిబ్ మరకలను పరిమితం చేస్తుంది; తక్కువ శత్రువు గాయాలు, గిబ్ జాడలను దాటవేస్తుంది
+
+@ Caps shader input at output size so 200% render scale keeps 3D sharpness without 4x shader cost; low scales stay low-res
+te షేడర్ ఇన్‌పుట్‌ను అవుట్‌పుట్ పరిమాణానికి పరిమితం చేస్తుంది, కాబట్టి 200% రెండర్ స్కేల్ 4x షేడర్ ఖర్చు లేకుండా 3D స్పష్టతను ఉంచుతుంది; తక్కువ స్కేల్‌లు తక్కువ రిజల్యూషన్‌లోనే ఉంటాయి
+
+@ Classic: the original status bar; modern: compact elements at the screen edges
+te క్లాసిక్: అసలైన స్టేటస్ బార్; ఆధునిక: స్క్రీన్ అంచుల వద్ద చిన్న అంశాలు
+
+@ Coat atlas resolution, rebuild rate and shader detail: low builds smaller coats less often with fast shading; high uses full detail
+te పూత అట్లాస్ రిజల్యూషన్, పునర్నిర్మాణ రేటు, షేడర్ వివరాలు: తక్కువ చిన్న పూతలను తక్కువసార్లు వేగవంతమైన షేడింగ్‌తో నిర్మిస్తుంది; అధికం పూర్తి వివరాలు వాడుతుంది
+
+@ Colour of the railgun's spiral trail; split-screen players each get the next colour along
+te రెయిల్‌గన్ సర్పిలాకార గీత రంగు; స్ప్లిట్-స్క్రీన్‌లో ప్రతి ఆటగాడికి తదుపరి రంగు వస్తుంది
+
+@ Damage the railgun deals to each enemy it passes through (Quake III: 100)
+te రెయిల్‌గన్ తాను దాటే ప్రతి శత్రువుకు చేసే నష్టం (Quake III: 100)
+
+@ Dark backdrop behind on-screen messages for readability
+te చదవడం సులభం కావడానికి స్క్రీన్ సందేశాల వెనుక ముదురు నేపథ్యం
+
+@ Dark border keeps the crosshair visible on any background
+te ముదురు అంచు ఏ నేపథ్యంపైనైనా క్రాస్‌హెయిర్‌ను కనిపించేలా ఉంచుతుంది
+
+@ Darkens corners and contact areas where geometry meets; higher quality is sharper
+te జ్యామితి కలిసే మూలలు, స్పర్శ ప్రాంతాలను ముదురుగా చేస్తుంది; అధిక నాణ్యత మరింత స్పష్టంగా ఉంటుంది
+
+@ Debris lands on and is carried or shoved by doors, lifts and platforms
+te శిథిలాలు తలుపులు, లిఫ్ట్‌లు, ప్లాట్‌ఫారమ్‌లపై పడి వాటితో కదులుతాయి లేదా నెట్టబడతాయి
+
+@ Detail for caustics, ripples and splashes: low uses smaller budgets and shorter view distance; high uses larger budgets and farther view distance
+te కాస్టిక్స్, అలలు, చిమ్మే నీటి వివరాలు: తక్కువ చిన్న బడ్జెట్‌లు, తక్కువ వీక్షణ దూరం వాడుతుంది; అధికం పెద్ద బడ్జెట్‌లు, ఎక్కువ వీక్షణ దూరం వాడుతుంది
+
+@ Disabled while Enhanced Particles is on: its particles replace the GLQuake and Classic styles
+te మెరుగైన పార్టికల్‌లు ఆన్‌లో ఉన్నప్పుడు నిలిపివేయబడింది: దాని పార్టికల్‌లు GLQuake, క్లాసిక్ శైలులను భర్తీ చేస్తాయి
+
+@ Disabled while Enhanced Water is on: its own underwater effects replace the classic and GLQuake view warps
+te మెరుగైన నీరు ఆన్‌లో ఉన్నప్పుడు నిలిపివేయబడింది: దాని సొంత నీటి అడుగు ఎఫెక్ట్‌లు క్లాసిక్, GLQuake వీక్షణ వక్రీకరణలను భర్తీ చేస్తాయి
+
+@ Draw the predicted grenade path as a solid or dashed line
+te అంచనా వేసిన గ్రెనేడ్ దారిని ఘన లేదా గీతల రేఖగా గీస్తుంది
+
+@ Draw the view out of the linked portal inside each portal; off shows flat discs (fastest)
+te ప్రతి పోర్టల్ లోపల అనుసంధానించిన పోర్టల్ నుండి వీక్షణను గీస్తుంది; ఆఫ్ అయితే చదునైన డిస్క్‌లు చూపిస్తుంది (అత్యంత వేగం)
+
+@ Droplets spray up when things enter or leave water, slime or lava
+te వస్తువులు నీరు, బురద లేదా లావాలోకి ప్రవేశించినప్పుడు లేదా బయటకు వచ్చినప్పుడు బిందువులు పైకి చిమ్ముతాయి
+
+@ Emulates the original 8-bit palette of software rendering
+te సాఫ్ట్‌వేర్ రెండరింగ్ యొక్క అసలైన 8-బిట్ పాలెట్‌ను అనుకరిస్తుంది
+
+@ Every level starts with only the shotgun and axe, as if started fresh
+te ప్రతి లెవెల్ కొత్తగా ప్రారంభించినట్లు షాట్‌గన్, గొడ్డలితో మాత్రమే మొదలవుతుంది
+
+@ Explosion damage for each remotely detonated sticky bomb
+te రిమోట్‌గా పేల్చిన ప్రతి స్టిక్కీ బాంబు పేలుడు నష్టం
+
+@ Extra freeze milliseconds for every 10 damage dealt, so heavy hits stop longer
+te చేసిన ప్రతి 10 నష్టానికి అదనపు ఫ్రీజ్ మిల్లీసెకన్లు, కాబట్టి బలమైన దెబ్బలు ఎక్కువసేపు ఆపుతాయి
+
+@ First person, a third-person camera centered behind the player, or one over the right or left shoulder; third person hides viewmodels
+te ఫస్ట్ పర్సన్, ఆటగాడి వెనుక మధ్యలో థర్డ్-పర్సన్ కెమెరా, లేదా కుడి లేదా ఎడమ భుజం మీదుగా; థర్డ్ పర్సన్ వ్యూమోడల్‌లను దాచిపెడుతుంది
+
+@ Flash the selected marker on confirmed hits; colors are shared with the crosshair
+te నిర్ధారిత హిట్‌లపై ఎంచుకున్న మార్కర్‌ను మెరిపిస్తుంది; రంగులు క్రాస్‌హెయిర్‌తో పంచుకోబడతాయి
+
+@ Freeze for every enemy, or only for enemies that were tough before the hit
+te ప్రతి శత్రువుకు, లేదా హిట్‌కు ముందు బలంగా ఉన్న శత్రువులకు మాత్రమే ఫ్రీజ్
+
+@ Freeze the game briefly when you damage an enemy; single player with add-ons only
+te మీరు శత్రువును దెబ్బతీసినప్పుడు గేమ్‌ను కొద్దిసేపు ఆపుతుంది; యాడ్-ఆన్‌లతో సింగిల్ ప్లేయర్‌లో మాత్రమే
+
+@ Gibs tumble and barrels throw shrapnel; shots and blasts push them (cosmetic only)
+te గిబ్‌లు దొర్లుతాయి, బ్యారెల్‌లు ముక్కలను విసురుతాయి; షాట్‌లు, పేలుళ్లు వాటిని నెడతాయి (అలంకారం మాత్రమే)
+
+@ Health an enemy must have had before the hit to count as tough
+te బలమైనదిగా లెక్కించడానికి హిట్‌కు ముందు శత్రువుకు ఉండాల్సిన ఆరోగ్యం
+
+@ Hits dealing less damage than this do not freeze the game; the default 10 skips nails and shotgun pellets
+te దీని కంటే తక్కువ నష్టం చేసే హిట్‌లు గేమ్‌ను ఆపవు; డిఫాల్ట్ 10 మేకులు, షాట్‌గన్ గుళికలను దాటవేస్తుంది
+
+@ Hold fire and sweep the crosshair over monsters to queue them, release to throw: it stuns each in turn and flies back; alt-fire clears the queue
+te ఫైర్ పట్టుకుని క్రాస్‌హెయిర్‌ను రాక్షసులపై తిప్పి వరుసలో చేర్చండి, విసరడానికి వదలండి: అది ఒక్కొక్కరిని స్టన్ చేసి వెనక్కి వస్తుంది; ప్రత్యామ్నాయ ఫైర్ వరుసను ఖాళీ చేస్తుంది
+
+@ Hold: keep Lock-on held. Toggle: press Auto-aim Toggle to enable automatic acquisition. Click look stick to switch targets
+te పట్టుకో: లాక్-ఆన్ పట్టుకుని ఉంచండి. టోగుల్: ఆటోమేటిక్ లక్ష్యం కోసం ఆటో-గురి టోగుల్ నొక్కండి. లక్ష్యాలు మార్చడానికి చూపు స్టిక్ క్లిక్ చేయండి
+
+@ How close an enemy must be to the crosshair for automatic acquisition in toggle mode (degrees)
+te టోగుల్ మోడ్‌లో ఆటోమేటిక్ లక్ష్యం కోసం శత్రువు క్రాస్‌హెయిర్‌కు ఎంత దగ్గరగా ఉండాలి (డిగ్రీలు)
+
+@ How far the view tilts up and down when you tilt the controller (pitch axis)
+te కంట్రోలర్‌ను వంచినప్పుడు వీక్షణ పైకి కిందికి ఎంత వంగుతుంది (పిచ్ అక్షం)
+
+@ How far the view turns left and right when you turn the controller (yaw axis)
+te కంట్రోలర్‌ను తిప్పినప్పుడు వీక్షణ ఎడమ కుడికి ఎంత తిరుగుతుంది (యా అక్షం)
+
+@ How far the view turns when you drag on the right half of the screen
+te స్క్రీన్ కుడి సగంపై లాగినప్పుడు వీక్షణ ఎంత తిరుగుతుంది
+
+@ How fast the boomerang flies (units per second)
+te బూమరాంగ్ ఎంత వేగంగా ఎగురుతుంది (సెకనుకు యూనిట్లు)
+
+@ How hard shots and explosions push debris around
+te షాట్‌లు, పేలుళ్లు శిథిలాలను ఎంత బలంగా నెడతాయి
+
+@ How hard the Powerwasher's water pushes enemies
+te పవర్‌వాషర్ నీరు శత్రువులను ఎంత బలంగా నెడుతుంది
+
+@ How long a hit freezes the game, in milliseconds
+te ఒక హిట్ గేమ్‌ను ఎంతసేపు ఆపుతుంది, మిల్లీసెకన్లలో
+
+@ How strongly fog covers the sky when fog is on
+te పొగమంచు ఆన్‌లో ఉన్నప్పుడు అది ఆకాశాన్ని ఎంత బలంగా కప్పుతుంది
+
+@ How the view distorts underwater: Classic ripples the whole screen like software Quake, GLQuake slowly stretches and squashes the view
+te నీటి అడుగున వీక్షణ ఎలా వక్రీకరిస్తుంది: క్లాసిక్ సాఫ్ట్‌వేర్ Quake లాగా మొత్తం స్క్రీన్‌ను అలలా కదిలిస్తుంది, GLQuake వీక్షణను నెమ్మదిగా సాగదీసి నొక్కుతుంది
+
+@ Ignores gyro rotation slower than this many degrees per second, to hide hand tremor
+te చేతి వణుకును దాచడానికి, సెకనుకు ఇన్ని డిగ్రీల కంటే నెమ్మదైన గైరో భ్రమణాన్ని పట్టించుకోదు
+
+@ Immersive: appears for a few seconds only when its value changes
+te లీనమయ్యే: విలువ మారినప్పుడు మాత్రమే కొన్ని సెకన్లు కనిపిస్తుంది
+
+@ Keeps textures sharp on floors and walls seen at steep angles
+te ఏటవాలు కోణాల్లో కనిపించే నేలలు, గోడలపై టెక్స్చర్‌లను స్పష్టంగా ఉంచుతుంది
+
+@ Lights from rockets, muzzle flashes and explosions brighten nearby walls
+te రాకెట్‌లు, తుపాకీ మెరుపులు, పేలుళ్ల కాంతి సమీప గోడలను ప్రకాశింపజేస్తుంది
+
+@ Liquid surfaces swell and ring out where things move through them
+te వస్తువులు కదిలే చోట ద్రవ ఉపరితలాలు ఉబ్బి వలయాలు ఏర్పడతాయి
+
+@ Lobs sticky bombs (rockets ammo) that cling to walls, doors and monsters; alt-fire detonates them all
+te గోడలు, తలుపులు, రాక్షసులకు అతుక్కునే స్టిక్కీ బాంబులను (రాకెట్ మందుగుండు) విసురుతుంది; ప్రత్యామ్నాయ ఫైర్ అన్నింటినీ పేలుస్తుంది
+
+@ Look of the classic particles: GLQuake draws soft round dots, Classic draws square pixels like software Quake
+te క్లాసిక్ పార్టికల్‌ల రూపం: GLQuake మృదువైన గుండ్రని చుక్కలు, క్లాసిక్ సాఫ్ట్‌వేర్ Quake లాగా చతురస్ర పిక్సెల్‌లు గీస్తుంది
+
+@ Low skips the background smear halo and uses fewer blur samples; high keeps the full halo and smoother streaks
+te తక్కువ నేపథ్య మసక హాలోను దాటవేసి తక్కువ బ్లర్ శాంపిల్‌లు వాడుతుంది; అధికం పూర్తి హాలో, మృదువైన గీతలను ఉంచుతుంది
+
+@ Low: hard particle edges, half the scripted particles and fewer hit sparks. Medium: soft edges. High: soft edges checked per MSAA sample, most hit sparks
+te తక్కువ: గట్టి పార్టికల్ అంచులు, సగం స్క్రిప్టెడ్ పార్టికల్‌లు, తక్కువ హిట్ నిప్పురవ్వలు. మధ్యస్థం: మృదువైన అంచులు. అధికం: ప్రతి MSAA శాంపిల్‌కు తనిఖీ చేసిన మృదువైన అంచులు, చాలా హిట్ నిప్పురవ్వలు
+
+@ Marks fade out before expiring; oldest marks are recycled at the limit
+te గుర్తులు గడువు ముగిసే ముందు మసకబారుతాయి; పరిమితి వద్ద పాత గుర్తులు తిరిగి వాడబడతాయి
+
+@ Max nested portal reflections to draw; each level redraws the scene
+te గీయాల్సిన గరిష్ట అంతర్గత పోర్టల్ ప్రతిబింబాలు; ప్రతి స్థాయి దృశ్యాన్ని మళ్లీ గీస్తుంది
+
+@ Max portals per screen with a live view; each one redraws the scene
+te లైవ్ వీక్షణతో ఒక్కో స్క్రీన్‌కు గరిష్ట పోర్టల్‌లు; ప్రతిదీ దృశ్యాన్ని మళ్లీ గీస్తుంది
+
+@ Maximum distance for acquiring and keeping an enemy locked
+te శత్రువును లక్ష్యం చేయడానికి, లాక్ చేసి ఉంచడానికి గరిష్ట దూరం
+
+@ Minimum gap between freezes, so shotgun pellets and rapid fire count once; kills ignore it
+te ఫ్రీజ్‌ల మధ్య కనిష్ట విరామం, కాబట్టి షాట్‌గన్ గుళికలు, వేగవంతమైన ఫైర్ ఒక్కసారే లెక్కించబడతాయి; కిల్‌లకు ఇది వర్తించదు
+
+@ Modern terminal console with autocomplete popup, history search, ANSI colors, bash shell and piping; off uses the classic Quake console
+te ఆటోకంప్లీట్ పాపప్, చరిత్ర శోధన, ANSI రంగులు, bash షెల్, పైపింగ్‌తో ఆధునిక టెర్మినల్ కన్సోల్; ఆఫ్ అయితే క్లాసిక్ Quake కన్సోల్
+
+@ Monsters take proportionally less damage at higher values; above 100% is harder
+te అధిక విలువల వద్ద రాక్షసులకు దామాషా ప్రకారం తక్కువ నష్టం; 100% పైన కష్టం
+
+@ Moving gibs leave blood on surfaces they touch
+te కదిలే గిబ్‌లు తాకిన ఉపరితలాలపై రక్తం వదులుతాయి
+
+@ Multiplier on the freeze when the hit kills the enemy; 1 means no extra
+te హిట్ శత్రువును చంపినప్పుడు ఫ్రీజ్ గుణకం; 1 అంటే అదనం లేదు
+
+@ Multiplies ammo from pickups (up to the normal carry limit); below 100% is harder
+te పికప్‌ల నుండి వచ్చే మందుగుండును గుణిస్తుంది (సాధారణ మోసే పరిమితి వరకు); 100% కంటే తక్కువ కష్టం
+
+@ Multiplies health from pickups (up to 100, or the item's own limit); below 100% is harder
+te పికప్‌ల నుండి వచ్చే ఆరోగ్యాన్ని గుణిస్తుంది (100 వరకు, లేదా వస్తువు సొంత పరిమితి వరకు); 100% కంటే తక్కువ కష్టం
+
+@ Nails stick to wood and bodies; hard surfaces deflect them to the floor
+te మేకులు చెక్క, శరీరాలకు గుచ్చుకుంటాయి; గట్టి ఉపరితలాలు వాటిని నేలకు మళ్లిస్తాయి
+
+@ Nearest keeps crisp classic pixels; linear smooths textures
+te సమీప స్పష్టమైన క్లాసిక్ పిక్సెల్‌లను ఉంచుతుంది; లీనియర్ టెక్స్చర్‌లను మృదువుగా చేస్తుంది
+
+@ New Game: Add-ons
+te కొత్త గేమ్: యాడ్-ఆన్‌లు
+
+@ New Game: Customize
+te కొత్త గేమ్: అనుకూలీకరించు
+
+@ Night vision: how much dark areas are brightened; thermal: how strongly heat stands out
+te నైట్ విజన్: చీకటి ప్రాంతాలు ఎంత ప్రకాశిస్తాయి; థర్మల్: వేడి ఎంత బలంగా కనిపిస్తుంది
+
+@ Night-vision and thermal goggles, cycle normal, night vision and thermal with Change Goggles (Add-ons), or use the Equipment Wheel
+te నైట్-విజన్, థర్మల్ గాగుల్స్; గాగుల్స్ మార్చు (యాడ్-ఆన్‌లు)తో సాధారణం, నైట్ విజన్, థర్మల్ మధ్య మార్చండి, లేదా పరికరాల చక్రం వాడండి
+
+@ No single freeze lasts longer than this, however much damage or kill bonus adds
+te నష్టం లేదా కిల్ బోనస్ ఎంత జోడించినా, ఏ ఒక్క ఫ్రీజ్ దీనికంటే ఎక్కువసేపు ఉండదు
+
+@ Oldest marks and nails are recycled at this shared limit
+te ఈ ఉమ్మడి పరిమితి వద్ద పాత గుర్తులు, మేకులు తిరిగి వాడబడతాయి
+
+@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
+te స్క్రీన్‌పై స్టిక్, బటన్‌లు: ఆటో వాటిని తాకిన తర్వాత చూపించి, మరో పరికరం వాడినప్పుడు దాచిపెడుతుంది
+
+@ Only autosaves: quicksaves and the Save menu are off
+te ఆటోసేవ్‌లు మాత్రమే: క్విక్‌సేవ్‌లు, సేవ్ మెనూ ఆఫ్
+
+@ Place every weapon at the center, right or left of the view, or hide all viewmodels
+te ప్రతి ఆయుధాన్ని వీక్షణ మధ్యలో, కుడి లేదా ఎడమ వైపు ఉంచండి, లేదా అన్ని వ్యూమోడల్‌లను దాచండి
+
+@ Play your chosen hit or kill cue when you damage an enemy
+te మీరు శత్రువును దెబ్బతీసినప్పుడు ఎంచుకున్న హిట్ లేదా కిల్ శబ్దం వినిపిస్తుంది
+
+@ Playback speed: faster sounds shorter and higher
+te ప్లేబ్యాక్ వేగం: వేగంగా ఉంటే చిన్నగా, ఎత్తుగా వినిపిస్తుంది
+
+@ Plays the Quake theme in the main menu when no game is running
+te ఏ గేమ్ నడవనప్పుడు ప్రధాన మెనూలో Quake థీమ్ వినిపిస్తుంది
+
+@ Portals farther away than this are drawn as flat discs
+te దీనికంటే దూరంగా ఉన్న పోర్టల్‌లు చదునైన డిస్క్‌లుగా గీయబడతాయి
+
+@ Press attack once to keep firing, again to stop
+te కాల్చుతూ ఉండడానికి దాడిని ఒకసారి నొక్కండి, ఆపడానికి మళ్లీ నొక్కండి
+
+@ Press run once to switch between running and walking
+te పరుగు, నడక మధ్య మారడానికి పరుగును ఒకసారి నొక్కండి
+
+@ Raise or lower the tone independently of sound length
+te శబ్దం నిడివితో సంబంధం లేకుండా స్వరాన్ని పెంచండి లేదా తగ్గించండి
+
+@ Red screen edges show where damage came from: top is front, bottom is behind; Screen Flashes controls their strength
+te ఎరుపు స్క్రీన్ అంచులు నష్టం ఎక్కడి నుండి వచ్చిందో చూపిస్తాయి: పైన ముందు, కింద వెనుక; స్క్రీన్ మెరుపులు వాటి బలాన్ని నియంత్రిస్తుంది
+
+@ Replaces the classic dot particles with glowing sparks, smoke and blood; mods with their own particle effects keep them
+te క్లాసిక్ చుక్క పార్టికల్‌లను మెరిసే నిప్పురవ్వలు, పొగ, రక్తంతో భర్తీ చేస్తుంది; సొంత పార్టికల్ ఎఫెక్ట్‌లు ఉన్న మోడ్‌లు వాటినే ఉంచుకుంటాయి
+
+@ Resolution and detail inside portal and teleporter views; lower tiers trim nested effects
+te పోర్టల్, టెలిపోర్టర్ వీక్షణల లోపల రిజల్యూషన్, వివరాలు; తక్కువ స్థాయిలు అంతర్గత ఎఫెక్ట్‌లను తగ్గిస్తాయి
+
+@ Rippling light patterns on surfaces under water and slime
+te నీరు, బురద కింద ఉపరితలాలపై అలల వంటి కాంతి నమూనాలు
+
+@ Scales all damage you take; above 100% is harder
+te మీరు పొందే నష్టం మొత్తాన్ని స్కేల్ చేస్తుంది; 100% పైన కష్టం
+
+@ Screen edge for this element; elements on the same spot stack
+te ఈ అంశం కోసం స్క్రీన్ అంచు; ఒకే చోట ఉన్న అంశాలు ఒకదానిపై ఒకటి పేర్చబడతాయి
+
+@ Seconds a monster hit by the boomerang stays stunned
+te బూమరాంగ్ తగిలిన రాక్షసుడు ఎన్ని సెకన్లు స్టన్‌లో ఉంటాడు
+
+@ Seconds impact marks and stuck nails stay before fading out; independent of Particle Quality
+te తాకిడి గుర్తులు, గుచ్చుకున్న మేకులు మసకబారే ముందు ఉండే సెకన్లు; పార్టికల్ నాణ్యతతో సంబంధం లేదు
+
+@ Seconds messages at the top of the screen stay up
+te స్క్రీన్ పైభాగంలోని సందేశాలు ఎన్ని సెకన్లు ఉంటాయి
+
+@ Seconds the flick stick snap takes; lower is faster
+te ఫ్లిక్ స్టిక్ తిరగడానికి పట్టే సెకన్లు; తక్కువ అంటే వేగం
+
+@ See through enhanced water; enables Water Opacity
+te మెరుగైన నీటి గుండా చూడండి; నీటి అపారదర్శకతను ప్రారంభిస్తుంది
+
+@ Sensor grain, scanlines and flicker of the goggle image
+te గాగుల్ చిత్రంలో సెన్సర్ గ్రెయిన్, స్కాన్‌లైన్‌లు, మినుకుమినుకు
+
+@ Shades every anti-aliasing sample; needs Anti-aliasing on
+te ప్రతి యాంటీ-అలియాసింగ్ శాంపిల్‌ను షేడ్ చేస్తుంది; యాంటీ-అలియాసింగ్ ఆన్‌లో ఉండాలి
+
+@ Shifts colors so they stay distinct for the chosen color blindness
+te ఎంచుకున్న వర్ణాంధత్వానికి రంగులు వేరుగా కనిపించేలా మారుస్తుంది
+
+@ Shotgun hits leave small surface marks (cosmetic only)
+te షాట్‌గన్ హిట్‌లు ఉపరితలంపై చిన్న గుర్తులు వదులుతాయి (అలంకారం మాత్రమే)
+
+@ Show corner ticks at screen centre while locked, even with Crosshair off
+te లాక్ అయినప్పుడు, క్రాస్‌హెయిర్ ఆఫ్‌లో ఉన్నా, స్క్రీన్ మధ్యలో మూల గుర్తులు చూపిస్తుంది
+
+@ Show where grenades and other arcing shots will fly, bounce and land; local play only, not in deathmatch
+te గ్రెనేడ్‌లు, ఇతర వంపు షాట్‌లు ఎక్కడ ఎగురుతాయి, ఎగిరిపడతాయి, పడతాయో చూపిస్తుంది; స్థానిక ఆటలో మాత్రమే, డెత్‌మ్యాచ్‌లో కాదు
+
+@ Shows text for important sounds: doors, alerted enemies, secrets, pickups
+te ముఖ్యమైన శబ్దాలకు వచనం చూపిస్తుంది: తలుపులు, అప్రమత్తమైన శత్రువులు, రహస్యాలు, పికప్‌లు
+
+@ Shows the distance fog that maps and mods set; off always gives clear view
+te మ్యాప్‌లు, మోడ్‌లు సెట్ చేసే దూర పొగమంచును చూపిస్తుంది; ఆఫ్ అయితే ఎప్పుడూ స్పష్టమైన వీక్షణ
+
+@ Shows the player face next to the health number
+te ఆరోగ్య సంఖ్య పక్కన ఆటగాడి ముఖాన్ని చూపిస్తుంది
+
+@ Simulation detail, step rate, fade-out lifetimes and caps for gibs and shrapnel; low also skips mover collision
+te గిబ్‌లు, ముక్కల కోసం సిమ్యులేషన్ వివరం, స్టెప్ రేటు, మసకబారే జీవితకాలాలు, పరిమితులు; తక్కువ కదిలే వస్తువులతో ఢీకొనడాన్ని కూడా దాటవేస్తుంది
+
+@ Size of the on-screen buttons and move stick
+te స్క్రీన్‌పై బటన్‌లు, కదలిక స్టిక్ పరిమాణం
+
+@ Slowly heals up to 100 health after 5 seconds without being hit
+te 5 సెకన్లు దెబ్బ తగలకపోతే నెమ్మదిగా 100 ఆరోగ్యం వరకు నయమవుతుంది
+
+@ Slows stick look while the crosshair is over an enemy
+te క్రాస్‌హెయిర్ శత్రువుపై ఉన్నప్పుడు స్టిక్ చూపును నెమ్మదిస్తుంది
+
+@ Slows the game down while the weapon wheel is open
+te ఆయుధ చక్రం తెరిచి ఉన్నప్పుడు గేమ్‌ను నెమ్మదిస్తుంది
+
+@ Slows the whole game down; single player only. Saves and demos stay compatible with other ports
+te మొత్తం గేమ్‌ను నెమ్మదిస్తుంది; సింగిల్ ప్లేయర్ మాత్రమే. సేవ్‌లు, డెమోలు ఇతర పోర్ట్‌లతో అనుకూలంగా ఉంటాయి
+
+@ Small camera jolt on each freeze; off with Reduce Motion
+te ప్రతి ఫ్రీజ్‌పై చిన్న కెమెరా కుదుపు; కదలిక తగ్గించుతో ఆఫ్
+
+@ Snap and track enemies in local play, including split-screen; unavailable online
+te స్ప్లిట్-స్క్రీన్‌తో సహా స్థానిక ఆటలో శత్రువులపై గురి పెట్టి అనుసరిస్తుంది; ఆన్‌లైన్‌లో అందుబాటులో లేదు
+
+@ Sparks, smoke, chips, splinters and splashes fly off whatever your shots hit
+te మీ షాట్‌లు తగిలిన దేని నుండైనా నిప్పురవ్వలు, పొగ, పెచ్చులు, చీలికలు, చిమ్మే నీరు ఎగురుతాయి
+
+@ Spawns extra copies of every monster around the original when a level starts
+te లెవెల్ ప్రారంభమైనప్పుడు ప్రతి రాక్షసుడి చుట్టూ అదనపు కాపీలను సృష్టిస్తుంది
+
+@ Strength of the full-screen flashes for damage, pickups and powerups
+te నష్టం, పికప్‌లు, పవర్‌అప్‌ల కోసం పూర్తి స్క్రీన్ మెరుపుల బలం
+
+@ Stretch or shorten the sound while keeping its pitch
+te స్వరం మారకుండా శబ్దాన్ని సాగదీయండి లేదా కుదించండి
+
+@ Surface opacity; requires Enhanced Water and Translucent Water
+te ఉపరితల అపారదర్శకత; మెరుగైన నీరు, పారదర్శక నీరు అవసరం
+
+@ The hook latches onto metal surfaces (metal, tech, computer panels, copper)
+te హుక్ లోహపు ఉపరితలాలకు తగులుకుంటుంది (లోహం, టెక్, కంప్యూటర్ ప్యానెల్‌లు, రాగి)
+
+@ The hook latches onto stone, brick, rock and any surface not recognised as wood or metal
+te హుక్ రాయి, ఇటుక, బండ, చెక్క లేదా లోహంగా గుర్తించని ఏ ఉపరితలానికైనా తగులుకుంటుంది
+
+@ The hook latches onto wooden surfaces (texture names like wood, crate, plank)
+te హుక్ చెక్క ఉపరితలాలకు తగులుకుంటుంది (wood, crate, plank వంటి టెక్స్చర్ పేర్లు)
+
+@ Turn the controller's motion sensor into a look input; needs a pad with a gyroscope
+te కంట్రోలర్ మోషన్ సెన్సర్‌ను చూపు ఇన్‌పుట్‌గా మారుస్తుంది; గైరోస్కోప్ ఉన్న ప్యాడ్ అవసరం
+
+@ Turns off view bob, strafe tilt and the camera kick when hit or firing
+te వీక్షణ ఊగడం, పక్కకు జరిగేటప్పుడు వంగడం, దెబ్బ తగిలినప్పుడు లేదా కాల్చినప్పుడు కెమెరా కుదుపును ఆపుతుంది
+
+@ Turns on the extra liquid effects; Water Settings controls each one
+te అదనపు ద్రవ ఎఫెక్ట్‌లను ఆన్ చేస్తుంది; నీటి సెట్టింగ్‌లు ప్రతిదాన్ని నియంత్రిస్తాయి
+
+@ Turns the view to follow a moving enemy you are aiming at
+te మీరు గురిపెట్టిన కదిలే శత్రువును అనుసరించేలా వీక్షణను తిప్పుతుంది
+
+@ Turns the view when you roll the controller sideways; 0 disables it, negative reverses it
+te కంట్రోలర్‌ను పక్కకు దొర్లించినప్పుడు వీక్షణను తిప్పుతుంది; 0 ఆపుతుంది, రుణాత్మకం దిశను తిప్పుతుంది
+
+@ Two-portal gun: fire and alt-fire place linked portals on flat walls; assign a weapon slot in Add-ons
+te రెండు-పోర్టల్ గన్: ఫైర్, ప్రత్యామ్నాయ ఫైర్ చదునైన గోడలపై అనుసంధానిత పోర్టల్‌లు ఉంచుతాయి; యాడ్-ఆన్‌లలో ఆయుధ స్లాట్ కేటాయించండి
+
+@ Unlocks the FX Settings page: enhanced particles, impact effects and blood splatter
+te FX సెట్టింగ్‌ల పేజీని తెరుస్తుంది: మెరుగైన పార్టికల్‌లు, తాకిడి ఎఫెక్ట్‌లు, రక్తపు చిందులు
+
+@ Uses the 2021 re-release's smoother MD5 models (and MD3 replacements from mods) instead of the classic ones. Applies on the next map load
+te క్లాసిక్ మోడల్‌లకు బదులు 2021 రీ-రిలీజ్ యొక్క మృదువైన MD5 మోడల్‌లను (మోడ్‌ల నుండి MD3 ప్రత్యామ్నాయాలను కూడా) వాడుతుంది. తదుపరి మ్యాప్ లోడ్‌లో వర్తిస్తుంది
+
+@ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
+te మ్యాప్ రంగుల కాంతిని వాడుతుంది (.lit ఫైల్ లేదా BSPX lump); ఆఫ్ అయితే సాధారణ తెల్లని కాంతి. తదుపరి మ్యాప్ లోడ్‌లో వర్తిస్తుంది
+
+@ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
+te నీటి జెట్ భాగాలు, బిందువుల సంఖ్య, మెరిసే ద్రవ షేడింగ్: తక్కువ సరళమైన పారదర్శక ధారలు వాడుతుంది; అధికం మృదువైన మెరిసే జెట్‌లు వాడుతుంది
+
+@ When gyro looking applies: always, off while +gyroaction is held, or only while it is held
+te గైరో చూపు ఎప్పుడు వర్తిస్తుంది: ఎల్లప్పుడూ, +gyroaction పట్టుకున్నప్పుడు ఆఫ్, లేదా పట్టుకున్నప్పుడు మాత్రమే
+
+@ Which weapons trigger the freeze; melee covers the axe and any mod weapon used at close range without ammo
+te ఏ ఆయుధాలు ఫ్రీజ్‌ను ప్రేరేపిస్తాయి; దగ్గరి పోరాటం గొడ్డలిని, మందుగుండు లేకుండా దగ్గరగా వాడే ఏ మోడ్ ఆయుధాన్నైనా కలుపుతుంది
+
+@ Your own rockets and grenades don't hurt you; rocket jumps still work
+te మీ సొంత రాకెట్‌లు, గ్రెనేడ్‌లు మీకు హాని చేయవు; రాకెట్ జంప్‌లు ఇంకా పనిచేస్తాయి
+
+# ==== ui.txt ====
+
+# Menus and pop-ups outside the options pages: save cards, launch, presets,
+# add-on browser, map packs, hints and dialogs.
+@ Select
+te ఎంచుకో
+
+@ Back
+te వెనక్కి
+
+@ Cancel
+te రద్దు
+
+@ Confirm
+te నిర్ధారించు
+
+@ Scroll
+te స్క్రోల్
+
+@ Section
+te విభాగం
+
+@ Bind
+te కేటాయించు
+
+@ Cancel binding
+te కేటాయింపు రద్దు
+
+@ Clear
+te తొలగించు
+
+@ Clear pad
+te ప్యాడ్ తొలగించు
+
+@ Remap
+te మళ్లీ కేటాయించు
+
+@ Type
+te టైప్
+
+@ Shift
+te Shift
+
+@ Done
+te పూర్తి
+
+@ Del
+te Del
+
+@ Space
+te Space
+
+@ Save
+te సేవ్
+
+@ Load
+te లోడ్
+
+@ Delete
+te తొలగించు
+
+@ Play
+te ఆడు
+
+@ Yes
+te అవును
+
+@ No
+te కాదు
+
+@ OK
+te సరే
+
+@ System
+te సిస్టమ్
+
+@ Language
+te భాష
+
+@ Help
+te సహాయం
+
+@ Fixed for this game: it was started without Customize
+te ఈ గేమ్‌కు స్థిరం: ఇది అనుకూలీకరించు లేకుండా ప్రారంభించబడింది
+
+@ Press a button or key to bind (Start cancels)
+te కేటాయించడానికి బటన్ లేదా కీ నొక్కండి (Start రద్దు చేస్తుంది)
+
+@ Press button...
+te బటన్ నొక్కండి...
+
+@ Press key...
+te కీ నొక్కండి...
+
+@ Replace this binding?
+te ఈ కేటాయింపును మార్చాలా?
+
+@ is already assigned
+te ఇప్పటికే కేటాయించబడింది
+
+@ {} already assigned
+te {} ఇప్పటికే కేటాయించబడింది
+
+@ Open Controls to remap Lock-on?
+te లాక్-ఆన్ మార్చడానికి నియంత్రణలు తెరవాలా?
+
+@ Lock-on
+te లాక్-ఆన్
+
+@ Auto-aim Toggle
+te ఆటో-గురి టోగుల్
+
+@ Keyboard
+te కీబోర్డ్
+
+@ Controller
+te కంట్రోలర్
+
+# main menu, dialogs and screens
+@ Map Packs
+te మ్యాప్ ప్యాక్‌లు
+
+@ Customize
+te అనుకూలీకరించు
+
+@ Level Select
+te లెవెల్ ఎంపిక
+
+@ Really quit?
+te నిజంగా నిష్క్రమించాలా?
+
+@ You died
+te మీరు చనిపోయారు
+
+@ Continue from most recent save
+te తాజా సేవ్ నుండి కొనసాగించు
+
+@ Select save
+te సేవ్ ఎంచుకో
+
+@ Restart level
+te లెవెల్ మళ్లీ ప్రారంభించు
+
+@ Return to main menu
+te ప్రధాన మెనూకు తిరిగి వెళ్లు
+
+@ (disabled)
+te (నిలిపివేయబడింది)
+
+@ (fixed for this game)
+te (ఈ గేమ్‌కు స్థిరం)
+
+@ (off)
+te (ఆఫ్)
+
+@ Apply Display Changes
+te డిస్‌ప్లే మార్పులు వర్తింపజేయి
+
+@ Display Mode
+te డిస్‌ప్లే మోడ్
+
+@ Resolution
+te రిజల్యూషన్
+
+@ desktop
+te డెస్క్‌టాప్
+
+@ Preset
+te ప్రీసెట్
+
+@ Map
+te మ్యాప్
+
+@ Reset Shader Settings
+te షేడర్ సెట్టింగ్‌లు రీసెట్ చేయి
+
+@ Reset to Defaults
+te డిఫాల్ట్‌లకు రీసెట్ చేయి
+
+@ Searching...
+te వెతుకుతోంది...
+
+@ This game only autosaves.
+te ఈ గేమ్ ఆటోసేవ్ మాత్రమే చేస్తుంది.
+
+@ (No Manual Saves modifier)
+te (మాన్యువల్ సేవ్‌లు లేవు మార్పు)
+
+@ End the current game?
+te ప్రస్తుత గేమ్ ముగించాలా?
+
+@ Unsaved progress will be lost.
+te సేవ్ చేయని పురోగతి పోతుంది.
+
+@ End game
+te గేమ్ ముగించు
+
+@ Overwrite
+te ఓవర్‌రైట్
+
+@ Overwrite "{}"?
+te "{}" ఓవర్‌రైట్ చేయాలా?
+
+@ Saved {}
+te {} సేవ్ చేయబడింది
+
+@ Start a new game?
+te కొత్త గేమ్ ప్రారంభించాలా?
+
+@ New game
+te కొత్త గేమ్
+
+@ New Game
+te కొత్త గేమ్
+
+@ CUSTOM
+te కస్టమ్
+
+@ Customize Experience
+te అనుభవాన్ని అనుకూలీకరించు
+
+@ Disable All
+te అన్నీ ఆపు
+
+@ Disable All Modifications
+te అన్ని మార్పులు ఆపు
+
+@ Saves load in other source ports too.
+te సేవ్‌లు ఇతర సోర్స్ పోర్ట్‌లలో కూడా లోడ్ అవుతాయి.
+
+@ Standard rules, no add-ons.
+te ప్రామాణిక నియమాలు, యాడ్-ఆన్‌లు లేవు.
+
+@ Choose skill
+te కష్టతరం ఎంచుకో
+
+@ The current game will end
+te ప్రస్తుత గేమ్ ముగుస్తుంది
+
+@ Easy
+te సులభం
+
+@ Normal
+te సాధారణం
+
+@ Hard
+te కష్టం
+
+@ Nightmare
+te పీడకల
+
+# graphics preset pop-up
+@ Choose a Graphics Preset
+te గ్రాఫిక్స్ ప్రీసెట్ ఎంచుకోండి
+
+@ Classic
+te క్లాసిక్
+
+@ Like the re-release: enhanced models,
+te రీ-రిలీజ్ లాగా: మెరుగైన మోడల్‌లు,
+
+@ no added effects.
+te అదనపు ఎఫెక్ట్‌లు లేవు.
+
+@ Enhanced
+te మెరుగైన
+
+@ Every enhancement at its highest quality.
+te ప్రతి మెరుగుదల అత్యధిక నాణ్యతతో.
+
+@ Needs a capable GPU.
+te శక్తివంతమైన GPU అవసరం.
+
+@ Low-End
+te తక్కువ స్థాయి
+
+@ Fastest. No anti-aliasing, original
+te అత్యంత వేగం. యాంటీ-అలియాసింగ్ లేదు, అసలైన
+
+@ models, lowest effect quality.
+te మోడల్‌లు, అత్యల్ప ఎఫెక్ట్ నాణ్యత.
+
+@ Esc keeps the defaults
+te Esc డిఫాల్ట్‌లను ఉంచుతుంది
+
+@ Everything can be changed later in Options.
+te ఆప్షన్‌లలో అన్నీ తర్వాత మార్చవచ్చు.
+
+@ Keep Defaults
+te డిఫాల్ట్‌లు ఉంచు
+
+# save and load cards
+@ Save Game
+te గేమ్ సేవ్
+
+@ Load Game
+te గేమ్ లోడ్
+
+@ Autosaves
+te ఆటోసేవ్‌లు
+
+@ newest first
+te కొత్తవి ముందు
+
+@ Saves: {}
+te సేవ్‌లు: {}
+
+@ Browse Autosaves
+te ఆటోసేవ్‌లు చూడు
+
+@ Every retained autosave, newest first
+te ఉంచిన ప్రతి ఆటోసేవ్, కొత్తవి ముందు
+
+@ New save
+te కొత్త సేవ్
+
+@ Select to save your game here
+te మీ గేమ్‌ను ఇక్కడ సేవ్ చేయడానికి ఎంచుకోండి
+
+@ No autosaves yet
+te ఇంకా ఆటోసేవ్‌లు లేవు
+
+@ Autosaves are made on level entry, secrets and more (Options > Gameplay)
+te లెవెల్ ప్రవేశం, రహస్యాలు మొదలైన వాటిపై ఆటోసేవ్‌లు చేయబడతాయి (ఆప్షన్‌లు > గేమ్‌ప్లే)
+
+@ No saves yet
+te ఇంకా సేవ్‌లు లేవు
+
+@ Save from the Single Player menu, or press F6 to quicksave
+te సింగిల్ ప్లేయర్ మెనూ నుండి సేవ్ చేయండి, లేదా క్విక్‌సేవ్ కోసం F6 నొక్కండి
+
+@ No picture
+te చిత్రం లేదు
+
+@ Del: delete save
+te Del: సేవ్ తొలగించు
+
+@ Delete "{}"?
+te "{}" తొలగించాలా?
+
+@ This cannot be undone.
+te దీన్ని రద్దు చేయలేరు.
+
+@ Quicksave
+te క్విక్‌సేవ్
+
+@ Autosave: {}
+te ఆటోసేవ్: {}
+
+@ unknown trigger
+te తెలియని ట్రిగ్గర్
+
+@ Latest - {}
+te తాజా - {}
+
+@ Health {}
+te ఆరోగ్యం {}
+
+@ Armor {}
+te కవచం {}
+
+@ Kills {}/{}
+te కిల్‌లు {}/{}
+
+@ Secrets {}/{}
+te రహస్యాలు {}/{}
+
+@ Split-screen, {} players
+te స్ప్లిట్-స్క్రీన్, {} ఆటగాళ్లు
+
+@ Co-op
+te కో-ఆప్
+
+@ Customized
+te అనుకూలీకరించబడింది
+
+@ Customized, {}
+te అనుకూలీకరించబడింది, {}
+
+@ Date unavailable
+te తేదీ అందుబాటులో లేదు
+
+@ Just now
+te ఇప్పుడే
+
+@ {} min ago
+te {} ని. క్రితం
+
+@ {} h ago
+te {} గం. క్రితం
+
+@ Level entry
+te లెవెల్ ప్రవేశం
+
+@ Secret found
+te రహస్యం దొరికింది
+
+@ All enemies killed
+te శత్రువులందరూ చంపబడ్డారు
+
+@ All secrets found
+te రహస్యాలన్నీ దొరికాయి
+
+@ Timer
+te టైమర్
+
+# customize pages
+@ Standard rules
+te ప్రామాణిక నియమాలు
+
+@ Modifiers changed: {}
+te మార్చిన మార్పులు: {}
+
+@ no add-ons
+te యాడ్-ఆన్‌లు లేవు
+
+@ add-ons: {}
+te యాడ్-ఆన్‌లు: {}
+
+@ Saves of this game are .qsa files: they need this source port.
+te ఈ గేమ్ సేవ్‌లు .qsa ఫైల్‌లు: వాటికి ఈ సోర్స్ పోర్ట్ అవసరం.
+
+@ Nothing changed: this plays as standard Quake.
+te ఏమీ మారలేదు: ఇది ప్రామాణిక Quake లాగా ఆడుతుంది.
+
+@ Changes apply now and are saved with this game (.qsa).
+te మార్పులు ఇప్పుడే వర్తిస్తాయి, ఈ గేమ్‌తో సేవ్ అవుతాయి (.qsa).
+
+@ This game started without Customize, so its rules are fixed.
+te ఈ గేమ్ అనుకూలీకరించు లేకుండా ప్రారంభమైంది, కాబట్టి దాని నియమాలు స్థిరం.
+
+@ Start a new game and choose Customize Experience.
+te కొత్త గేమ్ ప్రారంభించి అనుభవాన్ని అనుకూలీకరించు ఎంచుకోండి.
+
+@ These rules apply to the next customized game.
+te ఈ నియమాలు తదుపరి అనుకూలీకరించిన గేమ్‌కు వర్తిస్తాయి.
+
+# add-on browser
+@ Fire
+te ఫైర్
+
+@ Alt Fire
+te ప్రత్యామ్నాయ ఫైర్
+
+@ Configure Parameters >
+te పారామితులు కాన్ఫిగర్ చేయి >
+
+@ Configure
+te కాన్ఫిగర్
+
+@ Settings
+te సెట్టింగ్‌లు
+
+@ Change slot
+te స్లాట్ మార్చు
+
+@ Toggle
+te టోగుల్
+
+@ Details
+te వివరాలు
+
+@ Enter or click the box: toggle
+te Enter లేదా పెట్టెను క్లిక్ చేయండి: టోగుల్
+
+@ Right / Tab / click: details
+te కుడి / Tab / క్లిక్: వివరాలు
+
+@ Input Remapping
+te ఇన్‌పుట్ రీమ్యాపింగ్
+
+@ Weapon Slot
+te ఆయుధ స్లాట్
+
+@ Customized games save as .qsa files, which need this source port.
+te అనుకూలీకరించిన గేమ్‌లు .qsa ఫైల్‌లుగా సేవ్ అవుతాయి, వాటికి ఈ సోర్స్ పోర్ట్ అవసరం.
+
+@ This game started without Customize, so its add-ons are fixed. Customize a new game instead.
+te ఈ గేమ్ అనుకూలీకరించు లేకుండా ప్రారంభమైంది, కాబట్టి దాని యాడ్-ఆన్‌లు స్థిరం. బదులుగా కొత్త గేమ్‌ను అనుకూలీకరించండి.
+
+@ Bullet Time
+te బుల్లెట్ టైమ్
+
+@ Change Goggles
+te గాగుల్స్ మార్చు
+
+@ Dodge / Dive
+te తప్పుకో / దూకు
+
+@ Goggles
+te గాగుల్స్
+
+@ Hitstop
+te హిట్‌స్టాప్
+
+@ Projectile Shotguns
+te ప్రొజెక్టైల్ షాట్‌గన్‌లు
+
+@ BULLET TIME: 20%
+te బుల్లెట్ టైమ్: 20%
+
+@ NORMAL SPEED
+te సాధారణ వేగం
+
+@ SLOW MOTION: PHYSICAL PELLETS
+te స్లో మోషన్: భౌతిక గుళికలు
+
+@ DEMONSTRATION
+te ప్రదర్శన
+
+@ GAMEPLAY
+te గేమ్‌ప్లే
+
+@ LOOP
+te లూప్
+
+@ Preview unavailable
+te ప్రివ్యూ అందుబాటులో లేదు
+
+# shader and language help lines
+@ A setting of the chosen shader; arrows step it, Enter is not needed
+te ఎంచుకున్న షేడర్ సెట్టింగ్; బాణాలతో మార్చండి, Enter అవసరం లేదు
+
+@ Language of the menus, messages and the 2021 re-release's game text; System follows your computer's language
+te మెనూలు, సందేశాలు, 2021 రీ-రిలీజ్ గేమ్ వచనం భాష; సిస్టమ్ మీ కంప్యూటర్ భాషను అనుసరిస్తుంది
+
+@ Puts every setting of the chosen shader back to the preset's defaults
+te ఎంచుకున్న షేడర్ యొక్క ప్రతి సెట్టింగ్‌ను ప్రీసెట్ డిఫాల్ట్‌లకు తిరిగి తెస్తుంది
+
+@ RetroArch slang shader on the final image: CRT, scanlines, NTSC, sharpening; add your own in <game>/shaders
+te చివరి చిత్రంపై RetroArch slang షేడర్: CRT, స్కాన్‌లైన్‌లు, NTSC, షార్పెనింగ్; మీ సొంతవాటిని <game>/shaders లో జోడించండి
+
+# modern console footer
+@ Shift+PgUp/Dn: height  ` : hide
+te Shift+PgUp/Dn: ఎత్తు  ` : దాచు
+
+@ Tab: complete  Ctrl+R: search  bash | pipe
+te Tab: పూర్తి చేయి  Ctrl+R: వెతుకు  bash | pipe
+
+@ ↑ +{} lines (End to jump) 
+te ↑ +{} లైన్‌లు (చివరికి వెళ్లడానికి End) 
+
+# add-on descriptions
+@ Create two linked portals on flat walls. Fire places the first portal; Alt Fire places the second. Walk through either portal to emerge from the other. Your momentum carries through. Assign a weapon slot below: pressing that slot repeatedly cycles its ordinary weapon and every enabled add-on assigned there. Portal view quality is configurable below.
+te చదునైన గోడలపై రెండు అనుసంధానిత పోర్టల్‌లను సృష్టించండి. ఫైర్ మొదటి పోర్టల్‌ను ఉంచుతుంది; ప్రత్యామ్నాయ ఫైర్ రెండవదాన్ని ఉంచుతుంది. ఏ పోర్టల్ గుండా నడిచినా మరొకదాని నుండి బయటకు వస్తారు. మీ వేగం అలాగే కొనసాగుతుంది. కింద ఆయుధ స్లాట్ కేటాయించండి: ఆ స్లాట్‌ను పదేపదే నొక్కితే దాని సాధారణ ఆయుధం, అక్కడ కేటాయించిన ప్రతి ప్రారంభించిన యాడ్-ఆన్ మధ్య మారుతుంది. పోర్టల్ వీక్షణ నాణ్యతను కింద కాన్ఫిగర్ చేయవచ్చు.
+
+@ Hold Fire and sweep the crosshair over monsters to queue targets. Release Fire to throw: the boomerang visits each target, stuns it and returns to you. Alt Fire clears the queue. The weapon slot selects a group, not a separate hotkey: press it again to cycle through the weapons in that slot. Configure stun duration and flight speed below.
+te ఫైర్ పట్టుకుని క్రాస్‌హెయిర్‌ను రాక్షసులపై తిప్పి లక్ష్యాలను వరుసలో చేర్చండి. విసరడానికి ఫైర్ వదలండి: బూమరాంగ్ ప్రతి లక్ష్యం వద్దకు వెళ్లి, దాన్ని స్టన్ చేసి, మీ వద్దకు తిరిగి వస్తుంది. ప్రత్యామ్నాయ ఫైర్ వరుసను ఖాళీ చేస్తుంది. ఆయుధ స్లాట్ ఒక సమూహాన్ని ఎంచుకుంటుంది, ప్రత్యేక హాట్‌కీ కాదు: ఆ స్లాట్‌లోని ఆయుధాల మధ్య మారడానికి మళ్లీ నొక్కండి. స్టన్ వ్యవధి, ఎగిరే వేగాన్ని కింద కాన్ఫిగర్ చేయండి.
+
+@ Hold Fire to charge a sticky bomb using rocket ammunition; release to launch. A longer charge throws it faster. Bombs cling to walls, doors and monsters. Alt Fire detonates your planted bombs together. Place a trap, retreat, then detonate it when enemies approach. Assign any weapon slot below; repeated presses cycle through the ordinary weapon and add-ons in that slot.
+te రాకెట్ మందుగుండుతో స్టిక్కీ బాంబును ఛార్జ్ చేయడానికి ఫైర్ పట్టుకోండి; విసరడానికి వదలండి. ఎక్కువ ఛార్జ్ దాన్ని వేగంగా విసురుతుంది. బాంబులు గోడలు, తలుపులు, రాక్షసులకు అతుక్కుంటాయి. ప్రత్యామ్నాయ ఫైర్ మీరు ఉంచిన బాంబులను ఒకేసారి పేలుస్తుంది. ఉచ్చు పెట్టి, వెనక్కి వెళ్లి, శత్రువులు దగ్గరికి వచ్చినప్పుడు పేల్చండి. కింద ఏదైనా ఆయుధ స్లాట్ కేటాయించండి; పదేపదే నొక్కితే ఆ స్లాట్‌లోని సాధారణ ఆయుధం, యాడ్-ఆన్‌ల మధ్య మారుతుంది.
+
+@ Fire launches a chain hook. It latches onto a permitted surface or enemy and reels you toward the anchor. Fire again or use Alt Fire to let go. Choose which materials and enemies can be hooked in Configure Parameters. Assign it to any weapon slot; repeated presses of the slot's existing binding cycle through its weapons.
+te ఫైర్ గొలుసు హుక్‌ను ప్రయోగిస్తుంది. అది అనుమతించిన ఉపరితలానికి లేదా శత్రువుకు తగులుకుని మిమ్మల్ని లంగరు వైపు లాగుతుంది. వదలడానికి మళ్లీ ఫైర్ చేయండి లేదా ప్రత్యామ్నాయ ఫైర్ వాడండి. ఏ పదార్థాలు, శత్రువులను హుక్ చేయవచ్చో పారామితులు కాన్ఫిగర్ చేయిలో ఎంచుకోండి. దీన్ని ఏదైనా ఆయుధ స్లాట్‌కు కేటాయించండి; ఆ స్లాట్ ప్రస్తుత కీని పదేపదే నొక్కితే దాని ఆయుధాల మధ్య మారుతుంది.
+
+@ A piercing railgun inspired by Quake III. Fire sends a slug through every enemy along its line. Each shot consumes two cells, with a 1.5 second refire interval. Damage and the spiral trail colour are configurable below. Choose a weapon slot: the slot's current binding selects and cycles the weapons assigned to it.
+te Quake III స్ఫూర్తితో చీల్చే రెయిల్‌గన్. ఫైర్ తన దారిలోని ప్రతి శత్రువు గుండా గుండును పంపుతుంది. ప్రతి షాట్ రెండు సెల్‌లు ఖర్చు చేస్తుంది, 1.5 సెకన్ల మళ్లీ కాల్చే విరామంతో. నష్టం, సర్పిలాకార గీత రంగును కింద కాన్ఫిగర్ చేయవచ్చు. ఆయుధ స్లాట్ ఎంచుకోండి: ఆ స్లాట్ ప్రస్తుత కీ దానికి కేటాయించిన ఆయుధాలను ఎంచుకుని వాటి మధ్య మారుతుంది.
+
+@ A Portal-style gel sprayer. Fire sprays blue Repulsion gel: land, jump or run into it to bounce, and landings on it never hurt. Alt Fire sprays orange Propulsion gel: run across it to go much faster. Gel coats floors and walls until washed off with the Powerwasher. Assign a weapon slot below; repeated presses cycle the weapons in that slot.
+te Portal శైలి జెల్ స్ప్రేయర్. ఫైర్ నీలి వికర్షణ జెల్‌ను చల్లుతుంది: దానిపై దిగితే, దూకితే లేదా పరిగెత్తితే ఎగిరిపడతారు, దానిపై దిగినప్పుడు ఎప్పుడూ దెబ్బ తగలదు. ప్రత్యామ్నాయ ఫైర్ నారింజ చోదక జెల్‌ను చల్లుతుంది: దానిపై పరిగెత్తితే చాలా వేగంగా వెళ్తారు. పవర్‌వాషర్‌తో కడిగే వరకు జెల్ నేలలు, గోడలపై ఉంటుంది. కింద ఆయుధ స్లాట్ కేటాయించండి; పదేపదే నొక్కితే ఆ స్లాట్‌లోని ఆయుధాల మధ్య మారుతుంది.
+
+@ A water cannon. Fire shoots a straight jet with limited reach; Alt Fire a wide, shorter fan. The water pushes enemies back, turns projectiles aside and washes away gel and blood. Push strength is configurable below. Assign a weapon slot below; repeated presses cycle the weapons in that slot.
+te నీటి ఫిరంగి. ఫైర్ పరిమిత దూరం వెళ్లే నేరుగా జెట్‌ను కాలుస్తుంది; ప్రత్యామ్నాయ ఫైర్ వెడల్పైన, తక్కువ దూరపు విసనకర్రను. నీరు శత్రువులను వెనక్కి నెడుతుంది, ప్రొజెక్టైల్‌లను పక్కకు మళ్లిస్తుంది, జెల్, రక్తాన్ని కడిగేస్తుంది. నెట్టే బలాన్ని కింద కాన్ఫిగర్ చేయవచ్చు. కింద ఆయుధ స్లాట్ కేటాయించండి; పదేపదే నొక్కితే ఆ స్లాట్‌లోని ఆయుధాల మధ్య మారుతుంది.
+
+@ One equipment add-on includes both night vision and thermal vision. The Change Goggles action cycles Normal, Night Vision, Thermal, then Normal again. Night vision brightens dark rooms; thermal vision highlights living enemies. Goggles do not occupy a weapon slot. Configure intensity and sensor noise below. The binding affects only this add-on.
+te ఒకే పరికర యాడ్-ఆన్‌లో నైట్ విజన్, థర్మల్ విజన్ రెండూ ఉన్నాయి. గాగుల్స్ మార్చు చర్య సాధారణం, నైట్ విజన్, థర్మల్, మళ్లీ సాధారణం మధ్య మారుతుంది. నైట్ విజన్ చీకటి గదులను ప్రకాశింపజేస్తుంది; థర్మల్ విజన్ జీవించి ఉన్న శత్రువులను హైలైట్ చేస్తుంది. గాగుల్స్ ఆయుధ స్లాట్‌ను ఆక్రమించవు. తీవ్రత, సెన్సర్ నాయిస్‌ను కింద కాన్ఫిగర్ చేయండి. ఈ కేటాయింపు ఈ యాడ్-ఆన్‌కు మాత్రమే వర్తిస్తుంది.
+
+@ Press Dodge with a movement direction on the ground or in midair: dive forward or leap backward and sideways. Diagonals are supported. Each press launches once, with a short recovery. The player body animates in third person. Assign the Dodge action below or in Controls.
+te నేలపై లేదా గాలిలో కదలిక దిశతో తప్పుకో నొక్కండి: ముందుకు దూకండి లేదా వెనక్కి, పక్కకు ఎగరండి. ఏటవాలు దిశలకు మద్దతు ఉంది. ప్రతి నొక్కుకు ఒకసారి ఎగురుతారు, కొద్దిపాటి కోలుకునే సమయంతో. థర్డ్ పర్సన్‌లో ఆటగాడి శరీరం యానిమేట్ అవుతుంది. తప్పుకో చర్యను కింద లేదా నియంత్రణలలో కేటాయించండి.
+
+@ Use the dedicated Bullet Time action to slow the whole local game to 20% speed. Hold is the default; Toggle switches on each press. The optional meter limits use in real seconds and regenerates while inactive. Disable the meter for unlimited use. Remap the action and configure duration and regeneration below.
+te మొత్తం స్థానిక గేమ్‌ను 20% వేగానికి నెమ్మదించడానికి ప్రత్యేక బుల్లెట్ టైమ్ చర్యను వాడండి. పట్టుకో డిఫాల్ట్; టోగుల్ ప్రతి నొక్కుకు మారుతుంది. ఐచ్ఛిక మీటర్ వాడకాన్ని నిజ సెకన్లలో పరిమితం చేస్తుంది, నిష్క్రియంగా ఉన్నప్పుడు తిరిగి నిండుతుంది. అపరిమిత వాడకం కోసం మీటర్‌ను ఆపండి. చర్యను మళ్లీ కేటాయించి, వ్యవధి, పునరుత్పత్తిని కింద కాన్ఫిగర్ చేయండి.
+
+@ Both shotguns and enemy grunts fire physical pellets with their original spread and damage. Fast default projectiles feel immediate; lower their speed to dodge incoming fire during bullet time. Configure projectile speed below, or reset it to the default of 10000 units per second.
+te రెండు షాట్‌గన్‌లు, శత్రు సైనికులు తమ అసలైన వ్యాప్తి, నష్టంతో భౌతిక గుళికలను కాలుస్తారు. వేగవంతమైన డిఫాల్ట్ ప్రొజెక్టైల్‌లు తక్షణంగా అనిపిస్తాయి; బుల్లెట్ టైమ్‌లో వచ్చే కాల్పులను తప్పించుకోవడానికి వాటి వేగాన్ని తగ్గించండి. ప్రొజెక్టైల్ వేగాన్ని కింద కాన్ఫిగర్ చేయండి, లేదా సెకనుకు 10000 యూనిట్ల డిఫాల్ట్‌కు రీసెట్ చేయండి.
+
+@ Freezes the game for a split second when you damage an enemy, so hits feel heavier. Single player only. Choose which weapons trigger it (all, melee, ranged or explosives), how long it lasts and how much more a kill freezes. Advanced settings cover enemy toughness, damage scaling, cooldown and the longest freeze.
+te మీరు శత్రువును దెబ్బతీసినప్పుడు గేమ్‌ను క్షణకాలం ఆపుతుంది, దాంతో దెబ్బలు బరువుగా అనిపిస్తాయి. సింగిల్ ప్లేయర్ మాత్రమే. ఏ ఆయుధాలు దీన్ని ప్రేరేపిస్తాయో (అన్నీ, దగ్గరి, దూర లేదా పేలుడు), ఎంతసేపు ఉంటుందో, కిల్ ఎంత ఎక్కువ ఆపుతుందో ఎంచుకోండి. అధునాతన సెట్టింగ్‌లలో శత్రువు బలం, నష్టం స్కేలింగ్, కూల్‌డౌన్, గరిష్ట ఫ్రీజ్ ఉన్నాయి.
+
+# map packs and the Quaddicted browser
+@ Get more maps (Quaddicted)...
+te మరిన్ని మ్యాప్‌లు పొందండి (Quaddicted)...
+
+@ Type to filter...
+te ఫిల్టర్ చేయడానికి టైప్ చేయండి...
+
+@ Launch mod
+te మోడ్ ప్రారంభించు
+
+@ Start first map
+te మొదటి మ్యాప్ ప్రారంభించు
+
+@ (running)
+te (నడుస్తోంది)
+
+@ running
+te నడుస్తోంది
+
+@ Recent
+te ఇటీవలివి
+
+@ Name
+te పేరు
+
+@ Dir
+te ఫోల్డర్
+
+@ Default
+te డిఫాల్ట్
+
+@ Title
+te శీర్షిక
+
+@ Sort: {}
+te క్రమం: {}
+
+@ {} installed
+te {} ఇన్‌స్టాల్ అయ్యాయి
+
+@ {}/{} matching
+te {}/{} సరిపోలాయి
+
+@ {} maps, {} completed
+te {} మ్యాప్‌లు, {} పూర్తయ్యాయి
+
+@ {}/{} matching, {} completed
+te {}/{} సరిపోలాయి, {} పూర్తయ్యాయి
+
+@ no maps of its own
+te సొంత మ్యాప్‌లు లేవు
+
+@ dir: {}
+te ఫోల్డర్: {}
+
+@ base: {}
+te బేస్: {}
+
+@ Browse the Quaddicted archive of
+te Quaddicted ఆర్కైవ్‌లోని
+
+@ single-player maps and episodes,
+te సింగిల్-ప్లేయర్ మ్యాప్‌లు, ఎపిసోడ్‌లను చూసి,
+
+@ then download and install them
+te వాటిని ఇక్కడే డౌన్‌లోడ్ చేసి
+
+@ here. Each release gets its own
+te ఇన్‌స్టాల్ చేయండి. ప్రతి విడుదలకు
+
+@ entry in this list.
+te ఈ జాబితాలో సొంత ఎంట్రీ ఉంటుంది.
+
+@ Needs an internet connection.
+te ఇంటర్నెట్ కనెక్షన్ అవసరం.
+
+@ Quaddicted Map Archive
+te Quaddicted మ్యాప్ ఆర్కైవ్
+
+@ Newest
+te కొత్తవి
+
+@ Author
+te రచయిత
+
+@ Size
+te పరిమాణం
+
+@ Loading the map list...
+te మ్యాప్ జాబితా లోడ్ అవుతోంది...
+
+@ Couldn't load the map list: {}
+te మ్యాప్ జాబితాను లోడ్ చేయలేకపోయింది: {}
+
+@ {} single-player releases  -  F5 refreshes
+te {} సింగిల్-ప్లేయర్ విడుదలలు  -  F5 రిఫ్రెష్ చేస్తుంది
+
+@ {} matching
+te {} సరిపోలాయి
+
+@ by {}
+te {} ద్వారా
+
+@ requires: {}
+te అవసరం: {}
+
+@ maps: {}
+te మ్యాప్‌లు: {}
+
+@ Failed: {}
+te విఫలమైంది: {}
+
+@ Downloading... {}%
+te డౌన్‌లోడ్ అవుతోంది... {}%
+
+@ Unpacking...
+te అన్‌ప్యాక్ అవుతోంది...
+
+@ Installed in {}/  -  Enter: play
+te {}/ లో ఇన్‌స్టాల్ అయింది  -  Enter: ఆడు
+
+@ Enter: download and install
+te Enter: డౌన్‌లోడ్ చేసి ఇన్‌స్టాల్ చేయి
+
+@ unpacking
+te అన్‌ప్యాక్ అవుతోంది
+
+@ failed
+te విఫలమైంది
+
+@ installed
+te ఇన్‌స్టాల్ అయింది
+
+@ Downloads are not available in the browser build
+te బ్రౌజర్ బిల్డ్‌లో డౌన్‌లోడ్‌లు అందుబాటులో లేవు
+
+@ the map list could not be read
+te మ్యాప్ జాబితాను చదవలేకపోయింది
+
+@ downloading needs the curl program
+te డౌన్‌లోడ్ చేయడానికి curl ప్రోగ్రామ్ అవసరం
+
+@ download failed
+te డౌన్‌లోడ్ విఫలమైంది
+
+@ the download is not a valid zip
+te డౌన్‌లోడ్ సరైన zip కాదు
+
+@ nothing to install for this engine
+te ఈ ఇంజిన్ కోసం ఇన్‌స్టాల్ చేయాల్సింది ఏమీ లేదు
+
+@ needs {} installed first
+te ముందుగా {} ఇన్‌స్టాల్ చేయాలి
+
+@ couldn't unpack {}
+te {} ను అన్‌ప్యాక్ చేయలేకపోయింది
+
+# help screen
+@ About
+te గురించి
+
+@ < Back
+te < వెనక్కి
+
+# tr_ctx keys: English shows the short word, the key says which meaning
+@ Save (a manual save, as opposed to a quicksave or autosave)
+te సేవ్
+
+# ==== hud.txt ====
+
+# HUD, weapon and equipment wheels, sound captions and other in-game text.
+# Weapon, monster and item names follow the 2021 re-release's own translations.
+@ Axe
+te గొడ్డలి
+
+@ Shotgun
+te షాట్‌గన్
+
+@ Double-Barrelled Shotgun
+te డబుల్-బ్యారెల్ షాట్‌గన్
+
+@ Nailgun
+te నెయిల్‌గన్
+
+@ Super Nailgun
+te సూపర్ నెయిల్‌గన్
+
+@ Grenade Launcher
+te గ్రెనేడ్ లాంచర్
+
+@ Rocket Launcher
+te రాకెట్ లాంచర్
+
+@ Thunderbolt
+te థండర్‌బోల్ట్
+
+@ Portal Gun
+te పోర్టల్ గన్
+
+@ Boomerang
+te బూమరాంగ్
+
+@ Stickybomb Launcher
+te స్టిక్కీబాంబ్ లాంచర్
+
+@ Railgun
+te రెయిల్‌గన్
+
+@ Hookshot
+te హుక్‌షాట్
+
+@ Gel Sprayer
+te జెల్ స్ప్రేయర్
+
+@ Powerwasher
+te పవర్‌వాషర్
+
+@ Night Vision Goggles
+te నైట్ విజన్ గాగుల్స్
+
+@ Thermal Goggles
+te థర్మల్ గాగుల్స్
+
+@ Normal vision
+te సాధారణ దృష్టి
+
+@ ON
+te ఆన్
+
+@ OFF
+te ఆఫ్
+
+@ {} (turn on)
+te {} (ఆన్ చేయి)
+
+@ {} (turn off)
+te {} (ఆఫ్ చేయి)
+
+@ Move mouse to select, release to toggle
+te ఎంచుకోవడానికి మౌస్ కదపండి, టోగుల్ చేయడానికి వదలండి
+
+@ Move mouse to select, release to equip
+te ఎంచుకోవడానికి మౌస్ కదపండి, ధరించడానికి వదలండి
+
+@ Release to toggle
+te టోగుల్ చేయడానికి వదలండి
+
+@ Release to equip
+te ధరించడానికి వదలండి
+
+@ shells
+te షెల్స్
+
+@ nails
+te మేకులు
+
+@ rockets
+te రాకెట్‌లు
+
+@ cells
+te సెల్‌లు
+
+@ Kills: {}/{}
+te కిల్‌లు: {}/{}
+
+@ Secrets: {}/{}
+te రహస్యాలు: {}/{}
+
+@ Time {}
+te సమయం {}
+
+@ Press any button to continue...
+te కొనసాగడానికి ఏదైనా బటన్ నొక్కండి...
+
+@ Press any key to continue...
+te కొనసాగడానికి ఏదైనా కీ నొక్కండి...
+
+@ BULLET TIME
+te బుల్లెట్ టైమ్
+
+@ AUTO AIM
+te ఆటో గురి
+
+@ Crosshair
+te క్రాస్‌హెయిర్
+
+@ + Marker
+te + మార్కర్
+
+@ Hit markers off
+te హిట్ మార్కర్‌లు ఆఫ్
+
+@ On target
+te లక్ష్యంపై
+
+@ On kill
+te చంపినప్పుడు
+
+# sound captions
+@ [Secret found]
+te [రహస్యం దొరికింది]
+
+@ [Message]
+te [సందేశం]
+
+@ [Switch activated]
+te [స్విచ్ నొక్కబడింది]
+
+@ [Key picked up]
+te [తాళం తీసుకున్నారు]
+
+@ [Rune picked up]
+te [రూన్ తీసుకున్నారు]
+
+@ [Teleporter]
+te [టెలిపోర్టర్]
+
+@ [Teleport]
+te [టెలిపోర్ట్]
+
+@ [Splash]
+te [నీటి చప్పుడు]
+
+@ [Leaving water]
+te [నీటి నుండి బయటకు]
+
+@ [Door]
+te [తలుపు]
+
+@ [Platform moving]
+te [ప్లాట్‌ఫారమ్ కదులుతోంది]
+
+@ [Button]
+te [బటన్]
+
+@ [Health picked up]
+te [ఆరోగ్యం తీసుకున్నారు]
+
+@ [Armor picked up]
+te [కవచం తీసుకున్నారు]
+
+@ [Quad Damage wearing off]
+te [క్వాడ్ డ్యామేజ్ తగ్గుతోంది]
+
+@ [Quad Damage]
+te [క్వాడ్ డ్యామేజ్]
+
+@ [Pentagram wearing off]
+te [పెంటాగ్రామ్ తగ్గుతోంది]
+
+@ [Pentagram of Protection]
+te [రక్షణ పెంటాగ్రామ్]
+
+@ [Ring wearing off]
+te [ఉంగరం తగ్గుతోంది]
+
+@ [Ring of Shadows]
+te [నీడల ఉంగరం]
+
+@ [Biosuit wearing off]
+te [బయోసూట్ తగ్గుతోంది]
+
+@ [Biosuit]
+te [బయోసూట్]
+
+@ [Item picked up]
+te [వస్తువు తీసుకున్నారు]
+
+@ [Weapon picked up]
+te [ఆయుధం తీసుకున్నారు]
+
+@ [Ammo picked up]
+te [మందుగుండు తీసుకున్నారు]
+
+@ [Explosion]
+te [పేలుడు]
+
+@ [Grenade launched]
+te [గ్రెనేడ్ ప్రయోగించబడింది]
+
+@ [Grenade bounce]
+te [గ్రెనేడ్ ఎగిరిపడింది]
+
+@ [Rocket fired]
+te [రాకెట్ కాల్చబడింది]
+
+@ [Nails fired]
+te [మేకులు కాల్చబడ్డాయి]
+
+@ [Lightning]
+te [మెరుపు]
+
+@ [Thunder]
+te [ఉరుము]
+
+@ [Enforcer alerted]
+te [ఎన్‌ఫోర్సర్ అప్రమత్తమైంది]
+
+@ [Grunt alerted]
+te [గ్రంట్ అప్రమత్తమైంది]
+
+@ [Rottweiler alerted]
+te [రాట్‌వీలర్ అప్రమత్తమైంది]
+
+@ [Knight alerted]
+te [నైట్ అప్రమత్తమైంది]
+
+@ [Death Knight alerted]
+te [డెత్ నైట్ అప్రమత్తమైంది]
+
+@ [Scrag alerted]
+te [స్క్రాగ్ అప్రమత్తమైంది]
+
+@ [Ogre alerted]
+te [ఓగర్ అప్రమత్తమైంది]
+
+@ [Fiend alerted]
+te [ఫీండ్ అప్రమత్తమైంది]
+
+@ [Shambler alerted]
+te [షాంబ్లర్ అప్రమత్తమైంది]
+
+@ [Zombie groaning]
+te [జాంబీ మూలుగుతోంది]
+
+@ [Vore alerted]
+te [వోర్ అప్రమత్తమైంది]
+
+@ [Vore attacking]
+te [వోర్ దాడి చేస్తోంది]
+
+@ [Spawn alerted]
+te [స్పాన్ అప్రమత్తమైంది]
+
+@ [Rotfish]
+te [రాట్‌ఫిష్]
+
+@ [Spawn]
+te [స్పాన్]
+
+@ [Chthon]
+te [క్థోన్]
+
+@ [Hard landing]
+te [గట్టిగా దిగడం]
+
+@ [Drowning]
+te [మునిగిపోతున్నారు]
+
+@ [Gasping for air]
+te [గాలి కోసం ఆయాసం]
+
+@ [Burning]
+te [కాలిపోతున్నారు]
+
+@ [Telefrag]
+te [టెలిఫ్రాగ్]
+
+@ [Gibbed]
+te [ముక్కలయ్యారు]
+
+# ==== console.txt ====
+
+# Console messages, shown translated only with con_translate 1 (Translate Console).
+# Cvar and command names stay as they are.
+@ Autosaved.
+te ఆటోసేవ్ చేయబడింది.
+
+@ Game saved.
+te గేమ్ సేవ్ చేయబడింది.
+
+@ Can't save now.
+te ఇప్పుడు సేవ్ చేయలేరు.
+
+@ This game only autosaves (No Manual Saves modifier).
+te ఈ గేమ్ ఆటోసేవ్ మాత్రమే చేస్తుంది (మాన్యువల్ సేవ్‌లు లేవు మార్పు).
+
+@ Loading {}...
+te {} లోడ్ అవుతోంది...
+
+@ load failed: {}
+te లోడ్ విఫలమైంది: {}
+
+@ ERROR: autosave failed: {}
+te లోపం: ఆటోసేవ్ విఫలమైంది: {}
+
+@ ERROR: couldn't open {}
+te లోపం: {} తెరవలేకపోయింది
+
+@ ERROR: couldn't open {}.
+te లోపం: {} తెరవలేకపోయింది.
+
+@ ERROR: couldn't write {}: {}
+te లోపం: {} రాయలేకపోయింది: {}
+
+@ ERROR: couldn't create {}: {}
+te లోపం: {} సృష్టించలేకపోయింది: {}
+
+@ couldn't write {}: {}
+te {} రాయలేకపోయింది: {}
+
+@ Wrote {}
+te {} రాయబడింది
+
+@ screenshot failed: {}
+te స్క్రీన్‌షాట్ విఫలమైంది: {}
+
+@ screenshot: {}
+te స్క్రీన్‌షాట్: {}
+
+@ No readable save available. Select save or restart the level.
+te చదవగలిగే సేవ్ లేదు. సేవ్ ఎంచుకోండి లేదా లెవెల్ మళ్లీ ప్రారంభించండి.
+
+@ Unknown command "{}"
+te తెలియని కమాండ్ "{}"
+
+@ couldn't exec {}
+te {} అమలు చేయలేకపోయింది
+
+@ execing {}
+te {} అమలు చేస్తోంది
+
+@ execing config.cfg (inherited from {})
+te config.cfg అమలు చేస్తోంది ({} నుండి వారసత్వం)
+
+@ execing config.cfg (mod defaults)
+te config.cfg అమలు చేస్తోంది (మోడ్ డిఫాల్ట్‌లు)
+
+@ execing default.cfg (built-in)
+te default.cfg అమలు చేస్తోంది (అంతర్నిర్మిత)
+
+@ {} cvars
+te {} cvarలు
+
+@ {} commands
+te {} కమాండ్‌లు
+
+@ Can't "cmd", not connected
+te "cmd" సాధ్యం కాదు, కనెక్ట్ కాలేదు
+
+@ Looking for Quake servers...
+te Quake సర్వర్‌ల కోసం వెతుకుతోంది...
+
+@ Bad value, must be between 1 and 65534
+te తప్పు విలువ, 1 మరియు 65534 మధ్య ఉండాలి
+
+@ Couldn't handle music file {}
+te సంగీత ఫైల్ {} ను నిర్వహించలేకపోయింది
+
+@ Bug report written to {}
+te బగ్ నివేదిక {} లో రాయబడింది
+
+@ bugreport: can't create {}: {}
+te bugreport: {} సృష్టించలేకపోయింది: {}
+
+@ graphics preset: {}
+te గ్రాఫిక్స్ ప్రీసెట్: {}
+
+@ Presets (r_shader_preset <name>):
+te ప్రీసెట్‌లు (r_shader_preset <name>):
+
+@ Add your own .slangp presets under <game>/shaders/.
+te మీ సొంత .slangp ప్రీసెట్‌లను <game>/shaders/ కింద జోడించండి.
+
+@ no shader preset loaded (r_shader_preset)
+te షేడర్ ప్రీసెట్ ఏదీ లోడ్ కాలేదు (r_shader_preset)
+
+@ r_shader_preset: "{}" not found
+te r_shader_preset: "{}" కనబడలేదు
+
+@ no parameter "{}" in this preset
+te ఈ ప్రీసెట్‌లో "{}" పారామితి లేదు
+
+@ {} = {} (default {}, {}..{})
+te {} = {} (డిఫాల్ట్ {}, {}..{})
+
+@ Switching to {}...
+te {} కు మారుతోంది...
+
+@ game: no game dir "{}" in {}
+te game: "{}" గేమ్ ఫోల్డర్ {} లో లేదు
+
+@ game: can't find the engine executable
+te game: ఇంజిన్ ఎగ్జిక్యూటబుల్ కనబడలేదు
+
+@ game: exec failed: {}
+te game: అమలు విఫలమైంది: {}
+
+@ game: launch failed: {}
+te game: ప్రారంభం విఫలమైంది: {}
+
+@ loaded {} in {}s
+te {} ను {}సె లో లోడ్ చేసింది
+
+@ No demos listed with startdemos
+te startdemos తో డెమోలు ఏవీ జాబితా చేయలేదు
+
+@ Playing demo from {}.
+te {} నుండి డెమో ప్లే అవుతోంది.
+
+@ {} frames {} seconds {} fps
+te {} ఫ్రేమ్‌లు {} సెకన్లు {} fps
+
+@ Recording to {}.
+te {} లో రికార్డ్ అవుతోంది.
+
+@ Completed demo
+te డెమో పూర్తయింది
+
+@ Can't record during demo playback
+te డెమో ప్లేబ్యాక్ సమయంలో రికార్డ్ చేయలేరు
+
+@ Relative pathnames are not allowed.
+te సాపేక్ష పాత్‌నేమ్‌లు అనుమతించబడవు.
+
+@ Can't record - try again when connected
+te రికార్డ్ చేయలేరు - కనెక్ట్ అయినప్పుడు మళ్లీ ప్రయత్నించండి
+
+@ {} demo(s) in loop
+te లూప్‌లో {} డెమో(లు)
+
+@ Not recording a demo.
+te డెమో రికార్డ్ కావడం లేదు.
+
+@ {} joined on a gamepad
+te {} గేమ్‌ప్యాడ్‌తో చేరారు
+
+@ goggles: needs a game started with Add-ons and Goggles enabled
+te goggles: యాడ్-ఆన్‌లు, గాగుల్స్ ప్రారంభించి మొదలైన గేమ్ అవసరం
+
+@ equip: needs a game started with Add-ons and Goggles enabled
+te equip: యాడ్-ఆన్‌లు, గాగుల్స్ ప్రారంభించి మొదలైన గేమ్ అవసరం
+
+@ UDP listening on port {}
+te UDP పోర్ట్ {} లో వింటోంది
+
+@ UDP bind on port {} failed: {}
+te UDP పోర్ట్ {} లో బైండ్ విఫలమైంది: {}
+
+@ Connection accepted by {}
+te {} కనెక్షన్‌ను అంగీకరించింది
+
+@ Connection failed: {}
+te కనెక్షన్ విఫలమైంది: {}
+
+@ Couldn't resolve {}
+te {} ను పరిష్కరించలేకపోయింది
+
+@ Connecting to {}...
+te {} కు కనెక్ట్ అవుతోంది...
+
+@ Connecting to QuakeWorld server {}...
+te QuakeWorld సర్వర్ {} కు కనెక్ట్ అవుతోంది...
+
+@ Disconnected: {}
+te డిస్‌కనెక్ట్ అయింది: {}
+
+@ Server disconnected
+te సర్వర్ డిస్‌కనెక్ట్ అయింది
+
+@ Client {} connected
+te క్లయింట్ {} కనెక్ట్ అయింది
+
+@ Client {} timed out
+te క్లయింట్ {} టైమ్ అవుట్ అయింది
+
+@ Couldn't spawn server {}: {}
+te సర్వర్ {} ను ప్రారంభించలేకపోయింది: {}
+
+@ maxplayers can not be changed while a server is running.
+te సర్వర్ నడుస్తున్నప్పుడు maxplayers మార్చలేరు.
+
+@ You can't kick yourself!
+te మిమ్మల్ని మీరే కిక్ చేయలేరు!
+
+@ Only the server may changelevel
+te సర్వర్ మాత్రమే changelevel చేయగలదు
+
+@ {} renamed to {}
+te {} పేరు {} గా మార్చబడింది

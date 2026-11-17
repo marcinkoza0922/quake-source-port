@@ -34,7 +34,9 @@ rumunština, portugalština (Portugalsko nebo Brazílie), japonština, korejšti
 filipínština, vietnamština, srbština, litevština, lotyština, estonština,
 maltština, albánština, arménština, gruzínština, islandština, irština, velština,
 baskičtina, katalánština, galicijština, latina, esperanto, běloruština,
-makedonština, slovinština nebo svahilština.
+makedonština, slovinština, svahilština, arabština, hebrejština, perština,
+urdština, hindština, maráthština, bengálština, paňdžábština, gudžarátština,
+tamilština, telugština, thajština, khmerština, amharština nebo kantonština.
 **Systém** se řídí jazykem vašeho počítače. Vlastní herní texty remasteru
 z roku 2021 jsou přeloženy jen do francouzštiny, němčiny, italštiny,
 španělštiny a ruštiny; ostatní jazyky je zobrazují anglicky. V jiných

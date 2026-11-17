@@ -12,6 +12,10 @@ lines and one `<code> text` line after each (format: qcore::lang::catalog).
 
 `check` needs no Rust build: keys, one line per key, `{}` arguments,
 trailing `\\n`, and the manual's `##`/`###` structure against MANUAL.md.
+
+Thai and Khmer have no spaces between words: their text marks every word
+boundary with U+200B ZERO WIDTH SPACE, where lines may break (qcore::lang::wrap).
+`check` flags runs of more than NOSPACE_RUN letters without one.
 """
 import os
 import re
@@ -35,6 +39,20 @@ def main_catalog():
                 elif line.startswith("#") and not line.startswith("# Translations of the port's own text"):
                     comments.append(line)
     return out
+
+
+# Languages written without spaces between words, and their letter ranges.
+NOSPACE = {"th": (0x0E00, 0x0E7F), "km": (0x1780, 0x17FF)}
+NOSPACE_RUN = 18
+
+
+def long_runs(code, text):
+    """Runs of NOSPACE letters longer than NOSPACE_RUN without a break."""
+    if code not in NOSPACE:
+        return []
+    lo, hi = NOSPACE[code]
+    pat = re.compile(f"[\\u{lo:04x}-\\u{hi:04x}]{{{NOSPACE_RUN + 1},}}")
+    return pat.findall(text)
 
 
 def args(s):
@@ -112,6 +130,8 @@ def check_catalog(code):
                 problems.append(f"trailing \\n differs: {k!r} -> {t!r}")
             if t != t.strip(" ") and k == k.strip(" "):
                 problems.append(f"leading/trailing spaces: {t!r}")
+            for run in long_runs(code, t):
+                problems.append(f"no U+200B word breaks in {run!r}")
     for k in got:
         if k not in want:
             problems.append(f"stale key {k!r}")
@@ -150,6 +170,8 @@ def check_manual(code):
     for i, b in enumerate(blocks[1:], 1):
         if not b.strip():
             out.append(f"section {i} is empty")
+    for run in long_runs(code, text):
+        out.append(f"no U+200B word breaks in {run!r}")
     return [f"{os.path.relpath(p, ROOT)}: {x}" for x in out]
 
 

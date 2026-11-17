@@ -34,7 +34,9 @@ dinamarqués, noruegués, neerlandés, grego, húngaro, romanés, portugués
 tradicional), turco, indonesio, malaio, filipino, vietnamita, serbio,
 lituano, letón, estonio, maltés, albanés, armenio, xeorxiano, islandés,
 irlandés, galés, éuscaro, catalán, galego, latín, esperanto, bielorruso,
-macedonio, esloveno ou suahili.
+macedonio, esloveno, suahili, árabe, hebreo, persa, urdú, hindi, marathi,
+bengalí, punjabi, guxarati, támil, telugu, tailandés, khmer,
+amhárico ou cantonés.
 **Sistema** segue o idioma do teu ordenador. Os textos de xogo da
 reedición de 2021 só están traducidos ao francés, alemán, italiano,
 español e ruso; os demais idiomas móstranos en inglés. Nos idiomas

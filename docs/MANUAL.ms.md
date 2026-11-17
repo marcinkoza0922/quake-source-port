@@ -33,7 +33,9 @@ Norway, Belanda, Greek, Hungary, Romania, Portugis (Portugal atau Brazil),
 Jepun, Korea, Cina (Ringkas atau Tradisional), Turki, Indonesia, Melayu,
 Filipino, Vietnam, Serbia, Lithuania, Latvia, Estonia, Malta, Albania,
 Armenia, Georgia, Iceland, Ireland, Wales, Basque, Catalan, Galicia, Latin,
-Esperanto, Belarus, Macedonia, Slovenia atau Swahili.
+Esperanto, Belarus, Macedonia, Slovenia, Swahili, Arab, Ibrani, Parsi, Urdu,
+Hindi, Marathi, Benggali, Punjabi, Gujerat, Tamil, Telugu, Thai, Khmer, Amharik atau
+Kantonis.
 **Sistem** mengikut bahasa komputer anda. Teks permainan keluaran semula
 2021 sendiri hanya diterjemahkan ke bahasa Perancis, Jerman, Itali, Sepanyol
 dan Rusia; bahasa lain memaparkannya dalam bahasa Inggeris. Dalam bahasa

@@ -12,6 +12,9 @@ use std::collections::HashMap;
 use ab_glyph::{Font, FontArc, PxScale, ScaleFont};
 
 mod fallback;
+mod shape;
+
+pub use shape::{G, Line, Placed, complex};
 
 /// Bundled fonts: (menu name, bytes).
 pub const FONTS: [(&str, &[u8]); 4] = [
@@ -49,6 +52,9 @@ enum Key {
     /// `cjk`: the CJK font order ([`fallback::cjk_order`]) it was drawn with.
     /// `inter`: drawn with Inter in place of a menu font that lacks the language.
     Glyph { ch: char, px: u16, mono: bool, cjk: [u8; 4], inter: bool },
+    /// Glyph `gid` of shaping font `font` (fallback script index), drawn at
+    /// a pen `sub`/4 px right of a whole pixel.
+    Shaped { font: u8, gid: u16, px: u16, sub: u8, inter: bool },
     Shape { s: Shape, w: u16, h: u16 },
 }
 
@@ -80,6 +86,8 @@ pub struct UiText {
     full: bool,
     /// Cached [`fallback::covers`] answer: `lang << 1 | covered`, or `u16::MAX`.
     covers: std::sync::atomic::AtomicU16,
+    /// Laid-out lines of shaped text ([`Self::layout`]).
+    shaped: std::cell::RefCell<HashMap<shape::CacheKey, Line>>,
 }
 
 impl Default for UiText {
@@ -104,6 +112,7 @@ impl UiText {
             dirty: true,
             full: false,
             covers: std::sync::atomic::AtomicU16::new(u16::MAX),
+            shaped: Default::default(),
         }
     }
 
@@ -135,6 +144,7 @@ impl UiText {
         self.shelf = (1, 1, 0);
         self.dirty = true;
         self.full = false;
+        self.shaped.borrow_mut().clear();
     }
 
     /// Called after uploading: starts over when the atlas ran out of room
@@ -173,37 +183,9 @@ impl UiText {
         Some((ax, ay))
     }
 
-    /// Pixel width of `s` at `px`, with kerning (pen positions rounded as
-    /// [`Self::layout`] does).
+    /// Pixel width of `s` at `px` (as [`Self::layout`] lays it out).
     pub fn measure(&self, s: &str, px: f32) -> f32 {
-        self.layout(s, px).last().map_or(0.0, |&(_, x, adv)| x + adv)
-    }
-
-    /// (char, pen x, advance) for each char, pen rounded to whole px.
-    pub fn layout(&self, s: &str, px: f32) -> Vec<(char, f32, f32)> {
-        let scale = PxScale::from(px);
-        let mut pen = 0f32;
-        let mut prev = None;
-        let mut out = Vec::with_capacity(s.len());
-        for ch in s.chars() {
-            let (font, own) = self.font_for(ch);
-            let sf = font.as_scaled(scale);
-            let id = font.glyph_id(ch);
-            if let Some(p) = prev.filter(|_| own) {
-                pen += sf.kern(p, id);
-            }
-            let adv = sf.h_advance(id);
-            out.push((ch, pen.round(), adv));
-            pen += adv;
-            prev = own.then_some(id);
-        }
-        out
-    }
-
-    /// The menu font, or the first fallback with a glyph for `ch` (second
-    /// value: whether it is the menu font).
-    fn font_for(&self, ch: char) -> (&FontArc, bool) {
-        self.font_in(self.menu_font(), ch, fallback::cjk_order(qcore::lang::current()))
+        self.layout(s, px).width
     }
 
     /// The menu font, or Inter when the menu font has only some of the
@@ -221,13 +203,6 @@ impl UiText {
             ok
         };
         if ok { &self.font } else { &self.fallback.scripts[0] }
-    }
-
-    fn font_in<'a>(&'a self, first: &'a FontArc, ch: char, cjk: [u8; 4]) -> (&'a FontArc, bool) {
-        if first.glyph_id(ch).0 != 0 {
-            return (first, true);
-        }
-        self.fallback.find(ch, cjk).map_or((first, true), |f| (f, false))
     }
 
     /// Atlas slot of `ch` at `px` (rasterised on first use).
@@ -253,9 +228,44 @@ impl UiText {
         if let Some(s) = self.map.get(&key) {
             return *s;
         }
-        let font = self.font_in(if mono { &self.mono } else { self.menu_font() }, ch, cjk).0;
-        let id = font.glyph_id(ch);
-        let g = id.with_scale_and_position(PxScale::from(px as f32), ab_glyph::point(0.0, 0.0));
+        let first = if mono { &self.mono } else { self.menu_font() };
+        let src = self.pick(first, ch, cjk);
+        let font = self.fallback.font(first, src).clone();
+        let scale = px as f32 * self.fallback.em_scale(first, src);
+        let g = font.glyph_id(ch).with_scale_and_position(PxScale::from(scale), ab_glyph::point(0.0, 0.0));
+        self.raster(key, &font, g)
+    }
+
+    /// Atlas slot and whole-pixel pen x of a [`Placed`] glyph laid out at
+    /// em `px` (None: nothing to draw).
+    pub fn placed(&mut self, p: &Placed, px: u16) -> Option<(Slot, f32)> {
+        match p.g {
+            G::Char(' ') => None,
+            G::Char(ch) => self.glyph(ch, px).map(|s| (s, p.x)),
+            G::Shaped { font, gid } => {
+                let q = (p.x * 4.0).round() / 4.0;
+                let sub = ((q - q.floor()) * 4.0) as u8;
+                self.shaped_glyph(font, gid, px, sub).map(|s| (s, q.floor()))
+            }
+        }
+    }
+
+    fn shaped_glyph(&mut self, font: u8, gid: u16, px: u16, sub: u8) -> Option<Slot> {
+        let inter = !std::ptr::eq(self.menu_font(), &self.font);
+        let key = Key::Shaped { font, gid, px, sub, inter };
+        if let Some(s) = self.map.get(&key) {
+            return *s;
+        }
+        let first = self.menu_font();
+        let src = fallback::Src::Script(font);
+        let f = self.fallback.font(first, src).clone();
+        let scale = px as f32 * self.fallback.em_scale(first, src);
+        let g = ab_glyph::GlyphId(gid).with_scale_and_position(PxScale::from(scale), ab_glyph::point(sub as f32 / 4.0, 0.0));
+        self.raster(key, &f, g)
+    }
+
+    /// Rasterises `g` into the atlas under `key`.
+    fn raster(&mut self, key: Key, font: &FontArc, g: ab_glyph::Glyph) -> Option<Slot> {
         let slot = match font.outline_glyph(g) {
             None => None,
             Some(o) => {

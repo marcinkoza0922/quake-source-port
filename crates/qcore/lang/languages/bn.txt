@@ -1,0 +1,3024 @@
+# bn: the port's own text; English keys from crates/qcore/lang/*.txt.
+# Format in crates/qcore/src/lang/catalog.rs; check with tools/lang_check.py.
+
+# ==== menu.txt ====
+
+# Options pages: page names, row labels and choice values.
+@ 10% speed
+bn 10% গতি
+
+@ 2 split-screen
+bn 2 স্প্লিট-স্ক্রিন
+
+@ 3 split-screen
+bn 3 স্প্লিট-স্ক্রিন
+
+@ 4 split-screen
+bn 4 স্প্লিট-স্ক্রিন
+
+@ 5 split-screen
+bn 5 স্প্লিট-স্ক্রিন
+
+@ 6 split-screen
+bn 6 স্প্লিট-স্ক্রিন
+
+@ 2D aiming
+bn 2D লক্ষ্য
+
+@ 2x monsters
+bn 2x দানব
+
+@ 3x monsters
+bn 3x দানব
+
+@ 4x monsters
+bn 4x দানব
+
+@ 3D resolution
+bn 3D রেজোলিউশন
+
+@ 3D view
+bn 3D দৃশ্য
+
+@ 8-bit Color
+bn 8-বিট রং
+
+@ Accessibility
+bn অ্যাক্সেসিবিলিটি
+
+@ Acquisition Cone
+bn লক্ষ্য শঙ্কু
+
+@ Activation
+bn সক্রিয়করণ
+
+@ Add a ringing room tail after the cue
+bn শব্দের পরে ঘরের প্রতিধ্বনি যোগ করে
+
+@ Add delayed repeats after the cue
+bn শব্দের পরে বিলম্বিত পুনরাবৃত্তি যোগ করে
+
+@ Add saturation and distortion
+bn স্যাচুরেশন ও ডিস্টরশন যোগ করে
+
+@ Add-ons
+bn অ্যাড-অন
+
+@ Address
+bn ঠিকানা
+
+@ Adds fine noise to hide color banding
+bn রঙের ব্যান্ডিং লুকাতে সূক্ষ্ম নয়েজ যোগ করে
+
+@ Advanced Settings
+bn উন্নত সেটিংস
+
+@ Aim Assist
+bn লক্ষ্য সহায়তা
+
+@ Aim Rotation
+bn লক্ষ্য ঘূর্ণন
+
+@ Aim Slowdown
+bn লক্ষ্যে ধীরগতি
+
+@ Aim Style
+bn লক্ষ্যের ধরন
+
+@ All
+bn সব
+
+@ All enemies
+bn সব শত্রু
+
+@ Alt Fire (Add-ons)
+bn বিকল্প ফায়ার (অ্যাড-অন)
+
+@ Always Run
+bn সবসময় দৌড়
+
+@ Ambient Occlusion
+bn অ্যাম্বিয়েন্ট অক্লুশন
+
+@ Ammo Counts
+bn গুলির সংখ্যা
+
+@ Ammo Counts Position
+bn গুলির সংখ্যার অবস্থান
+
+@ Ammo Pickups
+bn গুলি সংগ্রহ
+
+@ Anisotropic
+bn অ্যানিসোট্রপিক
+
+@ Anti-aliasing
+bn অ্যান্টি-অ্যালিয়াসিং
+
+@ Apply To
+bn প্রয়োগ করুন
+
+@ Armor
+bn বর্ম
+
+@ Armor Position
+bn বর্মের অবস্থান
+
+@ Ask
+bn জিজ্ঞাসা করুন
+
+@ Attack
+bn আক্রমণ
+
+@ Audio
+bn অডিও
+
+@ Auto-aim
+bn অটো-এইম
+
+@ Auto-aim Settings
+bn অটো-এইম সেটিংস
+
+@ Autosave
+bn অটোসেভ
+
+@ Autosave Settings
+bn অটোসেভ সেটিংস
+
+@ Autosave Timer
+bn অটোসেভ টাইমার
+
+@ Autosaves to Keep
+bn কয়টি অটোসেভ রাখবেন
+
+@ Bass
+bn বেস
+
+@ Blip
+bn ব্লিপ
+
+@ Blood Quality
+bn রক্তের মান
+
+@ Blood Splatter Settings
+bn রক্ত ছিটানোর সেটিংস
+
+@ Blue
+bn নীল
+
+@ Boomerang Settings
+bn বুমেরাং সেটিংস
+
+@ Boost or cut high frequencies in decibels
+bn উচ্চ ফ্রিকোয়েন্সি ডেসিবেলে বাড়ান বা কমান
+
+@ Boost or cut low frequencies in decibels
+bn নিম্ন ফ্রিকোয়েন্সি ডেসিবেলে বাড়ান বা কমান
+
+@ Brightness
+bn উজ্জ্বলতা
+
+@ Bullet Time (Add-ons)
+bn বুলেট টাইম (অ্যাড-অন)
+
+@ Bullet Time Settings
+bn বুলেট টাইম সেটিংস
+
+@ Button Glyphs
+bn বোতামের চিহ্ন
+
+@ Button Size
+bn বোতামের আকার
+
+@ Camera
+bn ক্যামেরা
+
+@ Caustic Intensity
+bn কস্টিকের তীব্রতা
+
+@ Caustics
+bn কস্টিক
+
+@ Center
+bn কেন্দ্র
+
+@ Center Message Position
+bn কেন্দ্র বার্তার অবস্থান
+
+@ Center Message Time
+bn কেন্দ্র বার্তার সময়
+
+@ Center View
+bn দৃশ্য কেন্দ্রে আনুন
+
+@ Change Color on Kill
+bn হত্যায় রং বদলান
+
+@ Change Color on Target
+bn লক্ষ্যে রং বদলান
+
+@ Chime
+bn ঘণ্টাধ্বনি
+
+@ Click
+bn ক্লিক
+
+@ Clink
+bn টুং
+
+@ Coin
+bn কয়েন
+
+@ Color
+bn রং
+
+@ Color Filter
+bn রঙের ফিল্টার
+
+@ Color of the grenade arc
+bn গ্রেনেড আর্কের রং
+
+@ Colored Lighting
+bn রঙিন আলো
+
+@ Connect
+bn সংযোগ করুন
+
+@ Contrast
+bn কনট্রাস্ট
+
+@ Controls
+bn নিয়ন্ত্রণ
+
+@ Cooldown (ms)
+bn কুলডাউন (ms)
+
+@ Crosshair Outline
+bn ক্রসহেয়ার আউটলাইন
+
+@ Crosshair Shape
+bn ক্রসহেয়ারের আকৃতি
+
+@ Crosshair Size
+bn ক্রসহেয়ারের আকার
+
+@ Current Ammo
+bn বর্তমান গুলি
+
+@ Current Ammo Position
+bn বর্তমান গুলির অবস্থান
+
+@ Customize This Game
+bn এই গেম কাস্টমাইজ করুন
+
+@ Damage
+bn ক্ষতি
+
+@ Damage Taken
+bn প্রাপ্ত ক্ষতি
+
+@ Debris
+bn ধ্বংসাবশেষ
+
+@ Debris Quality
+bn ধ্বংসাবশেষের মান
+
+@ Debris Settings
+bn ধ্বংসাবশেষ সেটিংস
+
+@ Directional Damage
+bn দিকনির্দেশক ক্ষতি
+
+@ Dithering
+bn ডিদারিং
+
+@ Dodge / Dive (Add-ons)
+bn এড়ানো / ঝাঁপ (অ্যাড-অন)
+
+@ Dragging up looks down instead of up
+bn উপরে টানলে উপরের বদলে নিচে তাকায়
+
+@ Drive
+bn ড্রাইভ
+
+@ Dynamic Lights
+bn ডায়নামিক আলো
+
+@ Echo
+bn প্রতিধ্বনি
+
+@ Enemy Health
+bn শত্রুর স্বাস্থ্য
+
+@ Enemy Wounds
+bn শত্রুর ক্ষত
+
+@ Enhanced Blood Splatter
+bn উন্নত রক্ত ছিটানো
+
+@ Enhanced FX
+bn উন্নত FX
+
+@ Enhanced Models
+bn উন্নত মডেল
+
+@ Enhanced Particles
+bn উন্নত কণা
+
+@ Enhanced Water
+bn উন্নত জল
+
+@ Enhancements
+bn উন্নতি
+
+@ Equipment Wheel (Add-ons)
+bn সরঞ্জাম চাকা (অ্যাড-অন)
+
+@ Exploding boxes throw metal shards
+bn বিস্ফোরিত বাক্স ধাতব টুকরো ছিটায়
+
+@ Explosion Damage
+bn বিস্ফোরণের ক্ষতি
+
+@ Explosion Scorch Marks
+bn বিস্ফোরণের পোড়া দাগ
+
+@ Explosions scorch nearby solid surfaces
+bn বিস্ফোরণ কাছের কঠিন পৃষ্ঠ পুড়িয়ে দেয়
+
+@ Explosives only
+bn শুধু বিস্ফোরক
+
+@ Extra Monsters
+bn অতিরিক্ত দানব
+
+@ Extra Per 10 Damage (ms)
+bn প্রতি 10 ক্ষতিতে অতিরিক্ত (ms)
+
+@ FX Settings
+bn FX সেটিংস
+
+@ Field of View
+bn দৃষ্টিক্ষেত্র
+
+@ Firing never uses up ammo
+bn গুলি ছুড়লে গোলাবারুদ কখনো ফুরায় না
+
+@ First person
+bn প্রথম ব্যক্তি
+
+@ Flick Time
+bn ফ্লিক সময়
+
+@ Flight Speed
+bn উড়ার গতি
+
+@ Fog
+bn কুয়াশা
+
+@ Frag Limit
+bn ফ্র্যাগ সীমা
+
+@ Freeze Duration (ms)
+bn স্থিরতার সময়কাল (ms)
+
+@ GLQuake
+bn GLQuake
+
+@ Game Speed
+bn গেমের গতি
+
+@ Game Type
+bn গেমের ধরন
+
+@ Gameplay
+bn গেমপ্লে
+
+@ Gameplay Modifiers
+bn গেমপ্লে মডিফায়ার
+
+@ Gel Quality
+bn জেলের মান
+
+@ Gib Surface Painting
+bn গিব দিয়ে পৃষ্ঠ রাঙানো
+
+@ Gibs
+bn গিব
+
+@ Gibs and heads tumble and bounce
+bn গিব ও মাথা গড়ায় ও লাফায়
+
+@ Goggle Glow Quality
+bn গগলসের আভার মান
+
+@ Goggle Intensity
+bn গগলসের তীব্রতা
+
+@ Goggle Noise
+bn গগলসের নয়েজ
+
+@ Goggles Settings
+bn গগলস সেটিংস
+
+@ Graphics
+bn গ্রাফিক্স
+
+@ Green
+bn সবুজ
+
+@ Grenade Arc
+bn গ্রেনেড আর্ক
+
+@ Grenade Arc Settings
+bn গ্রেনেড আর্ক সেটিংস
+
+@ Gun Kick
+bn বন্দুকের ধাক্কা
+
+@ Gyro
+bn জাইরো
+
+@ Gyro & Flick Stick
+bn জাইরো ও ফ্লিক স্টিক
+
+@ Gyro Active
+bn জাইরো সক্রিয়
+
+@ Gyro Aiming
+bn জাইরো লক্ষ্য
+
+@ HUD
+bn HUD
+
+@ HUD Style
+bn HUD শৈলী
+
+@ Health
+bn স্বাস্থ্য
+
+@ Health Pickups
+bn স্বাস্থ্য সংগ্রহ
+
+@ Health Position
+bn স্বাস্থ্যের অবস্থান
+
+@ Health Regeneration
+bn স্বাস্থ্য পুনরুদ্ধার
+
+@ Hit & Kill Sounds
+bn হিট ও কিল শব্দ
+
+@ Hit Doors & Lifts
+bn দরজা ও লিফটে আঘাত
+
+@ Hit Markers
+bn হিট মার্কার
+
+@ Hit Sound
+bn হিট শব্দ
+
+@ Hitmarker Size
+bn হিটমার্কারের আকার
+
+@ Hitmarker Type
+bn হিটমার্কারের ধরন
+
+@ Hitstop Advanced
+bn হিটস্টপ উন্নত
+
+@ Hitstop Settings
+bn হিটস্টপ সেটিংস
+
+@ Hold
+bn ধরে রাখুন
+
+@ Hold lock-on
+bn লক-অন ধরে রাখুন
+
+@ Hook Enemies
+bn শত্রুতে হুক
+
+@ Hook Metal
+bn ধাতুতে হুক
+
+@ Hook Stone
+bn পাথরে হুক
+
+@ Hook Wood
+bn কাঠে হুক
+
+@ Hooking an enemy pulls you to it
+bn শত্রুকে হুক করলে আপনি তার দিকে টানা হন
+
+@ Hookshot Range
+bn হুকশটের পাল্লা
+
+@ Hookshot Settings
+bn হুকশট সেটিংস
+
+@ Host Game
+bn গেম হোস্ট করুন
+
+@ How far the hook flies before it retracts
+bn ফিরে আসার আগে হুক কত দূর যায়
+
+@ How visible the on-screen controls are
+bn অন-স্ক্রিন নিয়ন্ত্রণ কতটা দৃশ্যমান
+
+@ Impact Lifetime
+bn আঘাতচিহ্নের স্থায়িত্ব
+
+@ Infinite Ammo
+bn অসীম গোলাবারুদ
+
+@ Input
+bn ইনপুট
+
+@ Input Scale
+bn ইনপুট স্কেল
+
+@ Interpolate Animation
+bn অ্যানিমেশন ইন্টারপোলেশন
+
+@ Interpolate Movement
+bn চলন ইন্টারপোলেশন
+
+@ Invert Look
+bn দৃষ্টি উল্টান
+
+@ Invert Mouse
+bn মাউস উল্টান
+
+@ Invert Stick
+bn স্টিক উল্টান
+
+@ Jet Quality
+bn জেটের মান
+
+@ Join Game
+bn গেমে যোগ দিন
+
+@ Jump / Swim Up
+bn লাফ / উপরে সাঁতার
+
+@ Jump again in mid-air
+bn শূন্যে আবার লাফান
+
+@ Jumps
+bn লাফ
+
+@ Keys & Powerups
+bn চাবি ও পাওয়ারআপ
+
+@ Keys & Powerups Position
+bn চাবি ও পাওয়ারআপের অবস্থান
+
+@ Kill Bonus (x)
+bn হত্যা বোনাস (x)
+
+@ Kill Sound
+bn কিল শব্দ
+
+@ Knock
+bn টোকা
+
+@ Left
+bn বাম
+
+@ Length of the motion blur streaks
+bn মোশন ব্লার রেখার দৈর্ঘ্য
+
+@ Lifetime (seconds)
+bn স্থায়িত্ব (সেকেন্ড)
+
+@ Live Portal Views
+bn লাইভ পোর্টাল দৃশ্য
+
+@ Live View Distance
+bn লাইভ দৃশ্যের দূরত্ব
+
+@ Local Players
+bn স্থানীয় খেলোয়াড়
+
+@ Local red wounds follow enemy animation
+bn লাল ক্ষত শত্রুর অ্যানিমেশন অনুসরণ করে
+
+@ Lock Indicator
+bn লক নির্দেশক
+
+@ Long falls don't hurt
+bn উঁচু থেকে পড়লে আঘাত লাগে না
+
+@ Longest Freeze (ms)
+bn সর্বোচ্চ স্থিরতা (ms)
+
+@ Look Down
+bn নিচে তাকান
+
+@ Look Speed
+bn দৃষ্টির গতি
+
+@ Look Up
+bn উপরে তাকান
+
+@ Main Menu Music
+bn প্রধান মেনুর সংগীত
+
+@ Max FPS
+bn সর্বোচ্চ FPS
+
+@ Max Players
+bn সর্বোচ্চ খেলোয়াড়
+
+@ Maximum Impacts
+bn সর্বোচ্চ আঘাতচিহ্ন
+
+@ Maximum Marks
+bn সর্বোচ্চ দাগ
+
+@ Maximum Range
+bn সর্বোচ্চ পাল্লা
+
+@ Melee only
+bn শুধু হাতাহাতি
+
+@ Message Background
+bn বার্তার পটভূমি
+
+@ Message Text Size
+bn বার্তার লেখার আকার
+
+@ Messages & Captions
+bn বার্তা ও ক্যাপশন
+
+@ Meter Duration (real seconds)
+bn মিটারের সময়কাল (প্রকৃত সেকেন্ড)
+
+@ Minimum Damage
+bn সর্বনিম্ন ক্ষতি
+
+@ Mode
+bn মোড
+
+@ Modern Console
+bn আধুনিক কনসোল
+
+@ Modern HUD Layout
+bn আধুনিক HUD বিন্যাস
+
+@ Most recent save
+bn সর্বশেষ সেভ
+
+@ Motion Blur
+bn মোশন ব্লার
+
+@ Motion Blur Amount
+bn মোশন ব্লারের পরিমাণ
+
+@ Motion Blur Quality
+bn মোশন ব্লারের মান
+
+@ Mouse & Keyboard
+bn মাউস ও কীবোর্ড
+
+@ Mouse Speed
+bn মাউসের গতি
+
+@ Move Back
+bn পিছনে যান
+
+@ Move Forward
+bn সামনে যান
+
+@ Music Volume
+bn সংগীতের ভলিউম
+
+@ Next Weapon
+bn পরের অস্ত্র
+
+@ No Drowning
+bn ডুবে মৃত্যু নেই
+
+@ No Fall Damage
+bn পতনে ক্ষতি নেই
+
+@ No Manual Saves
+bn ম্যানুয়াল সেভ নেই
+
+@ No Self Damage
+bn নিজের ক্ষতি নেই
+
+@ Noise Filter
+bn নয়েজ ফিল্টার
+
+@ Normal Color
+bn সাধারণ রং
+
+@ Notify Message Position
+bn বিজ্ঞপ্তি বার্তার অবস্থান
+
+@ Notify Message Time
+bn বিজ্ঞপ্তি বার্তার সময়
+
+@ Number of splatter rays per blood impact
+bn প্রতি রক্ত-আঘাতে ছিটানোর রশ্মির সংখ্যা
+
+@ Off
+bn বন্ধ
+
+@ On Death
+bn মৃত্যুতে
+
+@ On Kill Color
+bn হত্যার রং
+
+@ On Target Color
+bn লক্ষ্যে থাকলে রং
+
+@ Opacity
+bn অস্বচ্ছতা
+
+@ Opacity of the grenade arc
+bn গ্রেনেড আর্কের অস্বচ্ছতা
+
+@ Pants Color
+bn প্যান্টের রং
+
+@ Particle Quality
+bn কণার মান
+
+@ Particles
+bn কণা
+
+@ Physical Nail Impacts
+bn ভৌত পেরেক আঘাত
+
+@ Pistol Start
+bn পিস্তল স্টার্ট
+
+@ Pitch
+bn পিচ
+
+@ Pitch Sensitivity
+bn উল্লম্ব সংবেদনশীলতা
+
+@ Playback Speed
+bn প্লেব্যাকের গতি
+
+@ Player Setup
+bn খেলোয়াড় সেটআপ
+
+@ Pop
+bn পপ
+
+@ Portal Gun Settings
+bn পোর্টাল গান সেটিংস
+
+@ Portal Recursion
+bn পোর্টাল রিকার্শন
+
+@ Portal View Quality
+bn পোর্টাল দৃশ্যের মান
+
+@ Preview Sound
+bn শব্দ শুনুন
+
+@ Previous Weapon
+bn আগের অস্ত্র
+
+@ Projectile Shotguns Settings
+bn প্রজেক্টাইল শটগান সেটিংস
+
+@ Projectile Speed (units/s)
+bn প্রজেক্টাইলের গতি (একক/সে)
+
+@ Purple
+bn বেগুনি
+
+@ Push
+bn ধাক্কা
+
+@ Push Strength
+bn ধাক্কার শক্তি
+
+@ Quick Load
+bn দ্রুত লোড
+
+@ Quick Save
+bn দ্রুত সেভ
+
+@ Railgun Settings
+bn রেলগান সেটিংস
+
+@ Ranged only
+bn শুধু দূরপাল্লার
+
+@ Reacquire While Held
+bn ধরে থাকলে আবার লক্ষ্য নিন
+
+@ Red
+bn লাল
+
+@ Reduce Motion
+bn গতিময়তা কমান
+
+@ Regen (seconds per second)
+bn পুনরুদ্ধার (সেকেন্ড প্রতি সেকেন্ড)
+
+@ Render Scale
+bn রেন্ডার স্কেল
+
+@ Reverb
+bn রিভার্ব
+
+@ Right
+bn ডান
+
+@ Ripple Intensity
+bn তরঙ্গের তীব্রতা
+
+@ Ripples
+bn তরঙ্গ
+
+@ Roll Sensitivity
+bn রোল সংবেদনশীলতা
+
+@ Rumble
+bn কম্পন
+
+@ Run
+bn দৌড়ান
+
+@ Save on All Enemies Killed
+bn সব শত্রু মারা গেলে সেভ
+
+@ Save on All Secrets Found
+bn সব গোপন স্থান পেলে সেভ
+
+@ Save on Level Entry
+bn লেভেলে প্রবেশে সেভ
+
+@ Save on Secret Found
+bn গোপন স্থান পেলে সেভ
+
+@ Scoreboard
+bn স্কোরবোর্ড
+
+@ Screen Flashes
+bn পর্দার ঝলক
+
+@ Screen Shader
+bn স্ক্রিন শেডার
+
+@ Screen Shake
+bn পর্দা কাঁপানো
+
+@ Search LAN
+bn LAN-এ খুঁজুন
+
+@ Seconds a center-screen message stays up
+bn পর্দার মাঝের বার্তা কত সেকেন্ড থাকে
+
+@ See Through Portals
+bn পোর্টালের ভিতর দিয়ে দেখা
+
+@ See-through Teleporters
+bn স্বচ্ছ টেলিপোর্টার
+
+@ Shirt Color
+bn শার্টের রং
+
+@ Shotgun Bullet Decals
+bn শটগানের গুলির দাগ
+
+@ Shoulder left
+bn বাম কাঁধ
+
+@ Shoulder right
+bn ডান কাঁধ
+
+@ Show FPS
+bn FPS দেখান
+
+@ Show Face
+bn মুখ দেখান
+
+@ Shrapnel
+bn শ্র্যাপনেল
+
+@ Size of on-screen messages and captions
+bn পর্দার বার্তা ও ক্যাপশনের আকার
+
+@ Skill
+bn কঠিনতা
+
+@ Sky Fog
+bn আকাশের কুয়াশা
+
+@ Smooths the stepped movement of monsters
+bn দানবদের ধাপে ধাপে চলন মসৃণ করে
+
+@ Sound
+bn শব্দ
+
+@ Sound Captions
+bn শব্দের ক্যাপশন
+
+@ Sound Volume
+bn শব্দের ভলিউম
+
+@ Speed Blur
+bn গতির ব্লার
+
+@ Splashes
+bn ছিটা
+
+@ Splatter Amount
+bn ছিটার পরিমাণ
+
+@ Splatter Size
+bn ছিটার আকার
+
+@ Start Game
+bn গেম শুরু করুন
+
+@ Staying underwater doesn't hurt
+bn জলের নিচে থাকলে আঘাত লাগে না
+
+@ Stick Look Pitch
+bn স্টিকে উল্লম্ব দৃষ্টি
+
+@ Stick Look Yaw
+bn স্টিকে অনুভূমিক দৃষ্টি
+
+@ Strafe Left
+bn বামে সরুন
+
+@ Strafe Right
+bn ডানে সরুন
+
+@ Strength of the surface swell and rings
+bn পৃষ্ঠের ঢেউ ও বৃত্তের শক্তি
+
+@ Stun Duration
+bn অচেতনতার সময়কাল
+
+@ Style
+bn শৈলী
+
+@ Supersampling
+bn সুপারস্যাম্পলিং
+
+@ Surface Hit Effects
+bn পৃষ্ঠে আঘাতের প্রভাব
+
+@ Swim Down
+bn নিচে সাঁতার
+
+@ Targets
+bn লক্ষ্য
+
+@ Teamplay
+bn দলগত খেলা
+
+@ Texture Filter
+bn টেক্সচার ফিল্টার
+
+@ Third person
+bn তৃতীয় ব্যক্তি
+
+@ Thud
+bn ধপ
+
+@ Tick
+bn টিক
+
+@ Time Limit
+bn সময়সীমা
+
+@ Time Stretch
+bn সময় প্রসারণ
+
+@ Toggle Attack
+bn টগল আক্রমণ
+
+@ Toggle Run
+bn টগল দৌড়
+
+@ Toggle auto-aim
+bn অটো-এইম টগল
+
+@ Touch Controls
+bn টাচ নিয়ন্ত্রণ
+
+@ Touchscreen
+bn টাচস্ক্রিন
+
+@ Tough Enemy Health
+bn শক্ত শত্রুর স্বাস্থ্য
+
+@ Tough enemies only
+bn শুধু শক্ত শত্রু
+
+@ Trail Colour
+bn ধারার রং
+
+@ Translate Console
+bn কনসোল অনুবাদ করুন
+
+@ Translucent Water
+bn স্বচ্ছ জল
+
+@ Treble
+bn ট্রেবল
+
+@ Turn Left
+bn বামে ঘুরুন
+
+@ Turn Right
+bn ডানে ঘুরুন
+
+@ Underwater FX
+bn জলের নিচের FX
+
+@ Use Bullet Time Meter
+bn বুলেট টাইম মিটার ব্যবহার
+
+@ VSync
+bn VSync
+
+@ View Bob
+bn দৃশ্যের দোলা
+
+@ Viewmodels
+bn অস্ত্রের মডেল
+
+@ Volume
+bn ভলিউম
+
+@ Water Opacity
+bn জলের অস্বচ্ছতা
+
+@ Water Quality
+bn জলের মান
+
+@ Water Settings
+bn জলের সেটিংস
+
+@ Weapon Wheel
+bn অস্ত্রের চাকা
+
+@ Weapon Wheel Slowdown
+bn অস্ত্র চাকায় ধীরগতি
+
+@ Weapons
+bn অস্ত্র
+
+@ Weapons Position
+bn অস্ত্রের অবস্থান
+
+@ Where center-screen messages appear
+bn পর্দার মাঝের বার্তা কোথায় দেখায়
+
+@ Where pickup and event messages appear
+bn সংগ্রহ ও ঘটনার বার্তা কোথায় দেখায়
+
+@ White
+bn সাদা
+
+@ Yaw Sensitivity
+bn অনুভূমিক সংবেদনশীলতা
+
+@ Yellow
+bn হলুদ
+
+# lowercase choice values
+@ T
+bn T
+
+@ always
+bn সবসময়
+
+@ auto
+bn অটো
+
+@ banded
+bn ব্যান্ডেড
+
+@ borderless
+bn সীমানাহীন
+
+@ bottom center
+bn নিচে মাঝে
+
+@ bottom left
+bn নিচে বামে
+
+@ bottom right
+bn নিচে ডানে
+
+@ box
+bn বাক্স
+
+@ broken square
+bn ভাঙা বর্গ
+
+@ classic
+bn ক্লাসিক
+
+@ coarse
+bn মোটা
+
+@ cooperative
+bn কো-অপারেটিভ
+
+@ cross
+bn ক্রস
+
+@ cross + dot
+bn ক্রস + বিন্দু
+
+@ cyan
+bn সায়ান
+
+@ dashed
+bn ড্যাশড
+
+@ deathmatch
+bn ডেথম্যাচ
+
+@ deuteranopia
+bn ডিউটেরানোপিয়া
+
+@ diagonal streaks
+bn তির্যক রেখা
+
+@ diamond
+bn হীরক
+
+@ dot
+bn বিন্দু
+
+@ double
+bn দ্বিগুণ
+
+@ double chevrons
+bn দ্বৈত শেভরন
+
+@ double diagonals
+bn দ্বৈত তির্যক
+
+@ easy
+bn সহজ
+
+@ fine
+bn সূক্ষ্ম
+
+@ fit output
+bn আউটপুটে মানান
+
+@ flick stick
+bn ফ্লিক স্টিক
+
+@ fullscreen
+bn পূর্ণ পর্দা
+
+@ gap cross
+bn ফাঁকা ক্রস
+
+@ green
+bn সবুজ
+
+@ grey
+bn ধূসর
+
+@ half speed
+bn অর্ধেক গতি
+
+@ hard
+bn কঠিন
+
+@ high
+bn উচ্চ
+
+@ huge
+bn বিশাল
+
+@ immersive
+bn নিমগ্ন
+
+@ intense
+bn তীব্র
+
+@ large
+bn বড়
+
+@ larger
+bn আরও বড়
+
+@ largest
+bn সবচেয়ে বড়
+
+@ linear
+bn লিনিয়ার
+
+@ low
+bn নিম্ন
+
+@ lower
+bn নিচে
+
+@ magenta
+bn ম্যাজেন্টা
+
+@ medium
+bn মাঝারি
+
+@ middle
+bn মাঝে
+
+@ middle left
+bn মাঝে বামে
+
+@ middle right
+bn মাঝে ডানে
+
+@ modern
+bn আধুনিক
+
+@ nearest
+bn নিকটতম
+
+@ nightmare
+bn দুঃস্বপ্ন
+
+@ nintendo
+bn Nintendo
+
+@ no team damage
+bn দলীয় ক্ষতি নেই
+
+@ none
+bn কোনোটি না
+
+@ normal
+bn সাধারণ
+
+@ off
+bn বন্ধ
+
+@ off while held
+bn ধরে থাকলে বন্ধ
+
+@ on
+bn চালু
+
+@ only while held
+bn শুধু ধরে থাকলে
+
+@ playstation
+bn PlayStation
+
+@ protanopia
+bn প্রোটানোপিয়া
+
+@ quarter speed
+bn এক-চতুর্থাংশ গতি
+
+@ red
+bn লাল
+
+@ short diagonals
+bn ছোট তির্যক
+
+@ single
+bn একক
+
+@ small
+bn ছোট
+
+@ solid
+bn নিরেট
+
+@ spectacle
+bn জমকালো
+
+@ subtle
+bn মৃদু
+
+@ team damage
+bn দলীয় ক্ষতি
+
+@ top center
+bn উপরে মাঝে
+
+@ top left
+bn উপরে বামে
+
+@ top right
+bn উপরে ডানে
+
+@ triple
+bn তিনগুণ
+
+@ tritanopia
+bn ট্রাইটানোপিয়া
+
+@ upper
+bn উপরে
+
+@ white
+bn সাদা
+
+@ whole screen
+bn পুরো পর্দা
+
+@ windowed
+bn উইন্ডো
+
+@ xbox
+bn Xbox
+
+@ yellow
+bn হলুদ
+
+# ==== tooltips.txt ====
+
+# Options help lines (tooltips) and reasons for disabled rows.
+@ 2D aiming turns the view continuously with the right stick; flick stick snaps the view to where you push the stick, then turning the stick rotates it
+bn 2D লক্ষ্য ডান স্টিক দিয়ে দৃশ্য অবিরাম ঘোরায়; ফ্লিক স্টিক যেদিকে স্টিক ঠেলবেন দৃশ্যকে তৎক্ষণাৎ সেদিকে ঘোরায়, তারপর স্টিক ঘোরালে দৃশ্য ঘোরে
+
+@ 3D resolution relative to the window; the UI stays sharp
+bn উইন্ডোর তুলনায় 3D রেজোলিউশন; ইন্টারফেস স্পষ্ট থাকে
+
+@ 3D view keeps the HUD and menus sharp; whole screen runs them through the shader too
+bn 3D দৃশ্য HUD ও মেনু স্পষ্ট রাখে; পুরো পর্দা সেগুলোকেও শেডারের মধ্য দিয়ে চালায়
+
+@ A Quake III style railgun: a slug that pierces every enemy on its line, using 2 cells a shot and refiring every 1.5 s; select it through its assigned weapon slot (Add-ons)
+bn Quake III ধাঁচের রেলগান: একটি স্লাগ যা তার রেখার প্রতিটি শত্রুকে ভেদ করে, প্রতি শটে 2 সেল খরচ করে এবং প্রতি 1.5 সেকেন্ডে আবার ছোড়ে; নির্ধারিত অস্ত্র স্লট দিয়ে বেছে নিন (অ্যাড-অন)
+
+@ A Zelda-style hookshot: fire sends a chain hook out; it latches onto hookable surfaces or enemies and reels you in; fire again to let go
+bn Zelda ধাঁচের হুকশট: ফায়ার করলে শিকলওয়ালা হুক ছোটে; এটি হুকযোগ্য পৃষ্ঠ বা শত্রুকে আঁকড়ে ধরে আপনাকে টেনে নেয়; ছাড়তে আবার ফায়ার করুন
+
+@ Also translates the engine's console messages; off keeps them in English
+bn ইঞ্জিনের কনসোল বার্তাও অনুবাদ করে; বন্ধ থাকলে সেগুলো ইংরেজিতে থাকে
+
+@ Automatically acquire another enemy while holding Lock-on after losing a target
+bn লক্ষ্য হারানোর পরে লক-অন ধরে থাকলে স্বয়ংক্রিয়ভাবে অন্য শত্রুকে লক্ষ্য করে
+
+@ Blends between animation frames of monsters and weapons
+bn দানব ও অস্ত্রের অ্যানিমেশন ফ্রেমের মধ্যে মসৃণ মিশ্রণ করে
+
+@ Blood stains surfaces and bodies; cosmetic, independent of particle packs
+bn রক্ত পৃষ্ঠ ও দেহে দাগ ফেলে; শুধু দৃশ্যগত, পার্টিকেল প্যাক থেকে স্বাধীন
+
+@ Bloom glow around bright lights and heat sources; medium uses 4 taps, high uses 8, low disables halo taps
+bn উজ্জ্বল আলো ও তাপের উৎসের চারপাশে ব্লুম আভা; মাঝারি 4টি ট্যাপ, উচ্চ 8টি ব্যবহার করে, নিম্ন হ্যালো ট্যাপ বন্ধ করে
+
+@ Blurs fast-moving monsters, projectiles and doors (not camera turns)
+bn দ্রুতগামী দানব, প্রজেক্টাইল ও দরজা ঝাপসা করে (ক্যামেরা ঘোরানো নয়)
+
+@ Blurs the screen edges during fast falls and launches; keeps the centre clear. Reduce Motion disables it
+bn দ্রুত পতন ও উৎক্ষেপণের সময় পর্দার কিনারা ঝাপসা করে; মাঝখান পরিষ্কার থাকে। গতিময়তা কমান এটি বন্ধ করে
+
+@ Brightness of the underwater light patterns
+bn জলের নিচের আলোর নকশার উজ্জ্বলতা
+
+@ Caps mark count, lifetime, airborne droplets and wound/gib painting; low skips enemy wounds and gib trails
+bn দাগের সংখ্যা, স্থায়িত্ব, বাতাসে ভাসা ফোঁটা এবং ক্ষত/গিবের রং সীমিত করে; নিম্ন শত্রুর ক্ষত ও গিবের রেখা বাদ দেয়
+
+@ Caps shader input at output size so 200% render scale keeps 3D sharpness without 4x shader cost; low scales stay low-res
+bn শেডারের ইনপুট আউটপুট আকারে সীমিত রাখে, তাই 200% রেন্ডার স্কেল 4x শেডার খরচ ছাড়াই 3D স্পষ্টতা রাখে; কম স্কেল কম রেজোলিউশনেই থাকে
+
+@ Classic: the original status bar; modern: compact elements at the screen edges
+bn ক্লাসিক: মূল স্ট্যাটাস বার; আধুনিক: পর্দার কিনারায় ছোট উপাদান
+
+@ Coat atlas resolution, rebuild rate and shader detail: low builds smaller coats less often with fast shading; high uses full detail
+bn আবরণ অ্যাটলাসের রেজোলিউশন, পুনর্গঠনের হার ও শেডারের বিস্তারিত: নিম্ন দ্রুত শেডিং দিয়ে ছোট আবরণ কম ঘনঘন তৈরি করে; উচ্চ পূর্ণ বিস্তারিত ব্যবহার করে
+
+@ Colour of the railgun's spiral trail; split-screen players each get the next colour along
+bn রেলগানের সর্পিল রেখার রং; স্প্লিট-স্ক্রিনে প্রতিটি খেলোয়াড় পরের রংটি পায়
+
+@ Damage the railgun deals to each enemy it passes through (Quake III: 100)
+bn রেলগান যে প্রতিটি শত্রুকে ভেদ করে তাকে যত ক্ষতি করে (Quake III: 100)
+
+@ Dark backdrop behind on-screen messages for readability
+bn পড়তে সুবিধার জন্য পর্দার বার্তার পিছনে গাঢ় পটভূমি
+
+@ Dark border keeps the crosshair visible on any background
+bn গাঢ় সীমানা যেকোনো পটভূমিতে ক্রসহেয়ার দৃশ্যমান রাখে
+
+@ Darkens corners and contact areas where geometry meets; higher quality is sharper
+bn জ্যামিতি যেখানে মেলে সেই কোণ ও স্পর্শস্থল অন্ধকার করে; উচ্চ মান বেশি স্পষ্ট
+
+@ Debris lands on and is carried or shoved by doors, lifts and platforms
+bn ধ্বংসাবশেষ দরজা, লিফট ও প্ল্যাটফর্মের উপর পড়ে এবং সেগুলো তা বহন করে বা ঠেলে দেয়
+
+@ Detail for caustics, ripples and splashes: low uses smaller budgets and shorter view distance; high uses larger budgets and farther view distance
+bn কস্টিক, তরঙ্গ ও ছিটার বিস্তারিত: নিম্ন ছোট বাজেট ও কম দৃষ্টিদূরত্ব ব্যবহার করে; উচ্চ বড় বাজেট ও বেশি দৃষ্টিদূরত্ব ব্যবহার করে
+
+@ Disabled while Enhanced Particles is on: its particles replace the GLQuake and Classic styles
+bn উন্নত কণা চালু থাকলে নিষ্ক্রিয়: এর কণা GLQuake ও ক্লাসিক শৈলীর জায়গা নেয়
+
+@ Disabled while Enhanced Water is on: its own underwater effects replace the classic and GLQuake view warps
+bn উন্নত জল চালু থাকলে নিষ্ক্রিয়: এর নিজস্ব জলের নিচের প্রভাব ক্লাসিক ও GLQuake দৃশ্য বিকৃতির জায়গা নেয়
+
+@ Draw the predicted grenade path as a solid or dashed line
+bn গ্রেনেডের সম্ভাব্য পথ নিরেট বা ড্যাশড রেখায় আঁকে
+
+@ Draw the view out of the linked portal inside each portal; off shows flat discs (fastest)
+bn প্রতিটি পোর্টালের ভিতরে সংযুক্ত পোর্টাল থেকে দেখা দৃশ্য আঁকে; বন্ধ থাকলে সমতল চাকতি দেখায় (সবচেয়ে দ্রুত)
+
+@ Droplets spray up when things enter or leave water, slime or lava
+bn কিছু জল, স্লাইম বা লাভায় ঢুকলে বা বের হলে ফোঁটা ছিটকে ওঠে
+
+@ Emulates the original 8-bit palette of software rendering
+bn সফটওয়্যার রেন্ডারিংয়ের মূল 8-বিট প্যালেট অনুকরণ করে
+
+@ Every level starts with only the shotgun and axe, as if started fresh
+bn প্রতিটি লেভেল শুধু শটগান ও কুড়াল দিয়ে শুরু হয়, যেন নতুন করে শুরু
+
+@ Explosion damage for each remotely detonated sticky bomb
+bn দূর থেকে বিস্ফোরিত প্রতিটি আঠালো বোমার বিস্ফোরণ ক্ষতি
+
+@ Extra freeze milliseconds for every 10 damage dealt, so heavy hits stop longer
+bn প্রতি 10 ক্ষতির জন্য অতিরিক্ত স্থিরতার মিলিসেকেন্ড, তাই ভারী আঘাত বেশিক্ষণ থামায়
+
+@ First person, a third-person camera centered behind the player, or one over the right or left shoulder; third person hides viewmodels
+bn প্রথম ব্যক্তি, খেলোয়াড়ের ঠিক পিছনে তৃতীয় ব্যক্তির ক্যামেরা, অথবা ডান বা বাম কাঁধের উপর দিয়ে; তৃতীয় ব্যক্তি অস্ত্রের মডেল লুকায়
+
+@ Flash the selected marker on confirmed hits; colors are shared with the crosshair
+bn নিশ্চিত আঘাতে নির্বাচিত মার্কার ঝলকায়; রং ক্রসহেয়ারের সাথে ভাগ করা
+
+@ Freeze for every enemy, or only for enemies that were tough before the hit
+bn প্রতিটি শত্রুর জন্য থামান, অথবা শুধু সেই শত্রুদের জন্য যারা আঘাতের আগে শক্ত ছিল
+
+@ Freeze the game briefly when you damage an enemy; single player with add-ons only
+bn শত্রুকে আঘাত করলে গেম ক্ষণিকের জন্য থামায়; শুধু অ্যাড-অনসহ একক খেলায়
+
+@ Gibs tumble and barrels throw shrapnel; shots and blasts push them (cosmetic only)
+bn গিব গড়ায় এবং ব্যারেল শ্র্যাপনেল ছোড়ে; গুলি ও বিস্ফোরণ সেগুলো ঠেলে দেয় (শুধু দৃশ্যগত)
+
+@ Health an enemy must have had before the hit to count as tough
+bn শক্ত হিসেবে গণ্য হতে আঘাতের আগে শত্রুর যত স্বাস্থ্য থাকা দরকার
+
+@ Hits dealing less damage than this do not freeze the game; the default 10 skips nails and shotgun pellets
+bn এর চেয়ে কম ক্ষতির আঘাত গেম থামায় না; ডিফল্ট 10 পেরেক ও শটগানের ছররা বাদ দেয়
+
+@ Hold fire and sweep the crosshair over monsters to queue them, release to throw: it stuns each in turn and flies back; alt-fire clears the queue
+bn ফায়ার ধরে রেখে দানবদের উপর ক্রসহেয়ার বুলিয়ে সারিতে রাখুন, ছাড়লে ছোড়া হয়: এটি একে একে প্রত্যেককে অচেতন করে ফিরে আসে; বিকল্প ফায়ার সারি খালি করে
+
+@ Hold: keep Lock-on held. Toggle: press Auto-aim Toggle to enable automatic acquisition. Click look stick to switch targets
+bn ধরে রাখুন: লক-অন চেপে রাখুন। টগল: স্বয়ংক্রিয় লক্ষ্য চালু করতে অটো-এইম টগল চাপুন। লক্ষ্য বদলাতে দৃষ্টির স্টিক ক্লিক করুন
+
+@ How close an enemy must be to the crosshair for automatic acquisition in toggle mode (degrees)
+bn টগল মোডে স্বয়ংক্রিয় লক্ষ্যের জন্য শত্রুকে ক্রসহেয়ারের কত কাছে থাকতে হবে (ডিগ্রি)
+
+@ How far the view tilts up and down when you tilt the controller (pitch axis)
+bn কন্ট্রোলার কাত করলে দৃশ্য কতটা উপরে-নিচে হেলে (পিচ অক্ষ)
+
+@ How far the view turns left and right when you turn the controller (yaw axis)
+bn কন্ট্রোলার ঘোরালে দৃশ্য কতটা ডানে-বামে ঘোরে (ইয় অক্ষ)
+
+@ How far the view turns when you drag on the right half of the screen
+bn পর্দার ডান অর্ধেকে টানলে দৃশ্য কতটা ঘোরে
+
+@ How fast the boomerang flies (units per second)
+bn বুমেরাং কত দ্রুত ওড়ে (একক প্রতি সেকেন্ড)
+
+@ How hard shots and explosions push debris around
+bn গুলি ও বিস্ফোরণ ধ্বংসাবশেষকে কত জোরে ঠেলে
+
+@ How hard the Powerwasher's water pushes enemies
+bn পাওয়ারওয়াশারের জল শত্রুকে কত জোরে ঠেলে
+
+@ How long a hit freezes the game, in milliseconds
+bn একটি আঘাত গেম কতক্ষণ থামায়, মিলিসেকেন্ডে
+
+@ How strongly fog covers the sky when fog is on
+bn কুয়াশা চালু থাকলে আকাশ কতটা কুয়াশায় ঢাকে
+
+@ How the view distorts underwater: Classic ripples the whole screen like software Quake, GLQuake slowly stretches and squashes the view
+bn জলের নিচে দৃশ্য কীভাবে বিকৃত হয়: ক্লাসিক সফটওয়্যার Quake-এর মতো পুরো পর্দায় ঢেউ তোলে, GLQuake ধীরে ধীরে দৃশ্য টানে ও চাপে
+
+@ Ignores gyro rotation slower than this many degrees per second, to hide hand tremor
+bn হাতের কাঁপুনি লুকাতে প্রতি সেকেন্ডে এত ডিগ্রির চেয়ে ধীর জাইরো ঘূর্ণন উপেক্ষা করে
+
+@ Immersive: appears for a few seconds only when its value changes
+bn নিমগ্ন: মান বদলালে শুধু কয়েক সেকেন্ডের জন্য দেখা যায়
+
+@ Keeps textures sharp on floors and walls seen at steep angles
+bn তির্যক কোণে দেখা মেঝে ও দেয়ালে টেক্সচার স্পষ্ট রাখে
+
+@ Lights from rockets, muzzle flashes and explosions brighten nearby walls
+bn রকেট, নলের ঝলক ও বিস্ফোরণের আলো কাছের দেয়াল আলোকিত করে
+
+@ Liquid surfaces swell and ring out where things move through them
+bn তরলের মধ্য দিয়ে কিছু চললে পৃষ্ঠ ফুলে ওঠে ও বৃত্ত ছড়ায়
+
+@ Lobs sticky bombs (rockets ammo) that cling to walls, doors and monsters; alt-fire detonates them all
+bn আঠালো বোমা ছোড়ে (রকেটের গোলাবারুদ) যা দেয়াল, দরজা ও দানবে লেগে থাকে; বিকল্প ফায়ার সবগুলো ফাটায়
+
+@ Look of the classic particles: GLQuake draws soft round dots, Classic draws square pixels like software Quake
+bn ক্লাসিক কণার চেহারা: GLQuake নরম গোল বিন্দু আঁকে, ক্লাসিক সফটওয়্যার Quake-এর মতো চৌকো পিক্সেল আঁকে
+
+@ Low skips the background smear halo and uses fewer blur samples; high keeps the full halo and smoother streaks
+bn নিম্ন পটভূমির ঝাপসা হ্যালো বাদ দেয় ও কম ব্লার নমুনা ব্যবহার করে; উচ্চ পূর্ণ হ্যালো ও মসৃণ রেখা রাখে
+
+@ Low: hard particle edges, half the scripted particles and fewer hit sparks. Medium: soft edges. High: soft edges checked per MSAA sample, most hit sparks
+bn নিম্ন: কণার ধার শক্ত, স্ক্রিপ্টেড কণা অর্ধেক ও আঘাতের স্ফুলিঙ্গ কম। মাঝারি: নরম ধার। উচ্চ: প্রতি MSAA নমুনায় পরীক্ষিত নরম ধার, প্রায় সব স্ফুলিঙ্গ
+
+@ Marks fade out before expiring; oldest marks are recycled at the limit
+bn দাগ মেয়াদ শেষের আগে মিলিয়ে যায়; সীমায় পৌঁছালে সবচেয়ে পুরোনো দাগ পুনর্ব্যবহৃত হয়
+
+@ Max nested portal reflections to draw; each level redraws the scene
+bn সর্বোচ্চ কতটি নেস্টেড পোর্টাল প্রতিফলন আঁকা হবে; প্রতিটি স্তর দৃশ্য আবার আঁকে
+
+@ Max portals per screen with a live view; each one redraws the scene
+bn প্রতি পর্দায় লাইভ দৃশ্যসহ সর্বোচ্চ পোর্টাল; প্রতিটি দৃশ্য আবার আঁকে
+
+@ Maximum distance for acquiring and keeping an enemy locked
+bn শত্রুকে লক্ষ্য করা ও লক রাখার সর্বোচ্চ দূরত্ব
+
+@ Minimum gap between freezes, so shotgun pellets and rapid fire count once; kills ignore it
+bn দুটি থামার মধ্যে ন্যূনতম ব্যবধান, যাতে শটগানের ছররা ও দ্রুত ফায়ার একবার গণ্য হয়; হত্যা এটি উপেক্ষা করে
+
+@ Modern terminal console with autocomplete popup, history search, ANSI colors, bash shell and piping; off uses the classic Quake console
+bn অটোকমপ্লিট পপআপ, ইতিহাস অনুসন্ধান, ANSI রং, bash শেল ও পাইপিংসহ আধুনিক টার্মিনাল কনসোল; বন্ধ থাকলে ক্লাসিক Quake কনসোল ব্যবহার হয়
+
+@ Monsters take proportionally less damage at higher values; above 100% is harder
+bn বেশি মানে দানব আনুপাতিক হারে কম ক্ষতি পায়; 100% এর বেশি কঠিনতর
+
+@ Moving gibs leave blood on surfaces they touch
+bn চলমান গিব যে পৃষ্ঠ ছোঁয় তাতে রক্ত লাগায়
+
+@ Multiplier on the freeze when the hit kills the enemy; 1 means no extra
+bn আঘাতে শত্রু মারা গেলে থামার গুণক; 1 মানে অতিরিক্ত কিছু নয়
+
+@ Multiplies ammo from pickups (up to the normal carry limit); below 100% is harder
+bn সংগৃহীত গোলাবারুদ গুণ করে (স্বাভাবিক বহনসীমা পর্যন্ত); 100% এর কম কঠিনতর
+
+@ Multiplies health from pickups (up to 100, or the item's own limit); below 100% is harder
+bn সংগৃহীত স্বাস্থ্য গুণ করে (100 পর্যন্ত, বা জিনিসটির নিজস্ব সীমা পর্যন্ত); 100% এর কম কঠিনতর
+
+@ Nails stick to wood and bodies; hard surfaces deflect them to the floor
+bn পেরেক কাঠ ও দেহে গেঁথে যায়; শক্ত পৃষ্ঠ সেগুলোকে মেঝেতে ফিরিয়ে দেয়
+
+@ Nearest keeps crisp classic pixels; linear smooths textures
+bn নিকটতম ক্লাসিক পিক্সেল ঝকঝকে রাখে; লিনিয়ার টেক্সচার মসৃণ করে
+
+@ New Game: Add-ons
+bn নতুন গেম: অ্যাড-অন
+
+@ New Game: Customize
+bn নতুন গেম: কাস্টমাইজ
+
+@ Night vision: how much dark areas are brightened; thermal: how strongly heat stands out
+bn নাইট ভিশন: অন্ধকার জায়গা কতটা উজ্জ্বল হয়; থার্মাল: তাপ কতটা স্পষ্ট দেখায়
+
+@ Night-vision and thermal goggles, cycle normal, night vision and thermal with Change Goggles (Add-ons), or use the Equipment Wheel
+bn নাইট ভিশন ও থার্মাল গগলস; গগলস বদলান (অ্যাড-অন) দিয়ে সাধারণ, নাইট ভিশন ও থার্মালের মধ্যে ঘুরুন, অথবা সরঞ্জাম চাকা ব্যবহার করুন
+
+@ No single freeze lasts longer than this, however much damage or kill bonus adds
+bn ক্ষতি বা হত্যা বোনাস যতই যোগ হোক, কোনো একক থামা এর চেয়ে বেশি স্থায়ী হয় না
+
+@ Oldest marks and nails are recycled at this shared limit
+bn এই যৌথ সীমায় সবচেয়ে পুরোনো দাগ ও পেরেক পুনর্ব্যবহৃত হয়
+
+@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
+bn পর্দার স্টিক ও বোতাম: অটো ছোঁয়ার পরে সেগুলো দেখায় এবং অন্য ডিভাইস ব্যবহার হলে লুকায়
+
+@ Only autosaves: quicksaves and the Save menu are off
+bn শুধু অটোসেভ: দ্রুত সেভ ও সেভ মেনু বন্ধ
+
+@ Place every weapon at the center, right or left of the view, or hide all viewmodels
+bn সব অস্ত্র দৃশ্যের মাঝে, ডানে বা বামে রাখুন, অথবা সব অস্ত্রের মডেল লুকান
+
+@ Play your chosen hit or kill cue when you damage an enemy
+bn শত্রুকে আঘাত করলে আপনার বেছে নেওয়া হিট বা কিল শব্দ বাজায়
+
+@ Playback speed: faster sounds shorter and higher
+bn প্লেব্যাকের গতি: দ্রুত হলে শব্দ ছোট ও তীক্ষ্ণ হয়
+
+@ Plays the Quake theme in the main menu when no game is running
+bn কোনো গেম না চললে প্রধান মেনুতে Quake-এর থিম বাজায়
+
+@ Portals farther away than this are drawn as flat discs
+bn এর চেয়ে দূরের পোর্টাল সমতল চাকতি হিসেবে আঁকা হয়
+
+@ Press attack once to keep firing, again to stop
+bn অবিরাম ফায়ার করতে একবার আক্রমণ চাপুন, থামাতে আবার চাপুন
+
+@ Press run once to switch between running and walking
+bn দৌড় ও হাঁটার মধ্যে বদলাতে একবার দৌড় চাপুন
+
+@ Raise or lower the tone independently of sound length
+bn শব্দের দৈর্ঘ্য না বদলে সুর উঁচু বা নিচু করুন
+
+@ Red screen edges show where damage came from: top is front, bottom is behind; Screen Flashes controls their strength
+bn পর্দার লাল কিনারা দেখায় ক্ষতি কোথা থেকে এসেছে: উপরে মানে সামনে, নিচে মানে পিছনে; পর্দার ঝলক এর তীব্রতা নিয়ন্ত্রণ করে
+
+@ Replaces the classic dot particles with glowing sparks, smoke and blood; mods with their own particle effects keep them
+bn ক্লাসিক বিন্দু কণার বদলে জ্বলন্ত স্ফুলিঙ্গ, ধোঁয়া ও রক্ত দেখায়; নিজস্ব কণা প্রভাবওয়ালা মড সেগুলো রাখে
+
+@ Resolution and detail inside portal and teleporter views; lower tiers trim nested effects
+bn পোর্টাল ও টেলিপোর্টার দৃশ্যের ভিতরের রেজোলিউশন ও বিস্তারিত; নিচের স্তর নেস্টেড প্রভাব ছাঁটে
+
+@ Rippling light patterns on surfaces under water and slime
+bn জল ও স্লাইমের নিচের পৃষ্ঠে তরঙ্গায়িত আলোর নকশা
+
+@ Scales all damage you take; above 100% is harder
+bn আপনার পাওয়া সব ক্ষতির মাত্রা বদলায়; 100% এর বেশি কঠিনতর
+
+@ Screen edge for this element; elements on the same spot stack
+bn এই উপাদানের জন্য পর্দার কিনারা; একই জায়গার উপাদান একটির উপর আরেকটি সাজানো হয়
+
+@ Seconds a monster hit by the boomerang stays stunned
+bn বুমেরাংয়ে আঘাত পাওয়া দানব কত সেকেন্ড অচেতন থাকে
+
+@ Seconds impact marks and stuck nails stay before fading out; independent of Particle Quality
+bn আঘাতের দাগ ও গাঁথা পেরেক মিলিয়ে যাওয়ার আগে কত সেকেন্ড থাকে; কণার মান থেকে স্বাধীন
+
+@ Seconds messages at the top of the screen stay up
+bn পর্দার উপরের বার্তা কত সেকেন্ড থাকে
+
+@ Seconds the flick stick snap takes; lower is faster
+bn ফ্লিক স্টিক ঘোরাতে কত সেকেন্ড লাগে; কম মানে দ্রুত
+
+@ See through enhanced water; enables Water Opacity
+bn উন্নত জলের ভিতর দিয়ে দেখুন; জলের অস্বচ্ছতা সক্রিয় করে
+
+@ Sensor grain, scanlines and flicker of the goggle image
+bn গগলসের ছবির সেন্সর দানা, স্ক্যানলাইন ও ঝিকিমিকি
+
+@ Shades every anti-aliasing sample; needs Anti-aliasing on
+bn প্রতিটি অ্যান্টি-অ্যালিয়াসিং নমুনা শেড করে; অ্যান্টি-অ্যালিয়াসিং চালু থাকা দরকার
+
+@ Shifts colors so they stay distinct for the chosen color blindness
+bn বেছে নেওয়া বর্ণান্ধতার জন্য রং সরিয়ে আলাদা রাখে
+
+@ Shotgun hits leave small surface marks (cosmetic only)
+bn শটগানের গুলি পৃষ্ঠে ছোট দাগ রাখে (শুধু দৃশ্যগত)
+
+@ Show corner ticks at screen centre while locked, even with Crosshair off
+bn লক থাকাকালে পর্দার মাঝে কোণের চিহ্ন দেখায়, ক্রসহেয়ার বন্ধ থাকলেও
+
+@ Show where grenades and other arcing shots will fly, bounce and land; local play only, not in deathmatch
+bn গ্রেনেড ও অন্যান্য বাঁকা পথের গোলা কোথায় উড়বে, লাফাবে ও পড়বে তা দেখায়; শুধু স্থানীয় খেলায়, ডেথম্যাচে নয়
+
+@ Shows text for important sounds: doors, alerted enemies, secrets, pickups
+bn গুরুত্বপূর্ণ শব্দের লেখা দেখায়: দরজা, সতর্ক শত্রু, গোপন স্থান, সংগ্রহ
+
+@ Shows the distance fog that maps and mods set; off always gives clear view
+bn ম্যাপ ও মড যে দূরত্ব-কুয়াশা দেয় তা দেখায়; বন্ধ থাকলে সবসময় পরিষ্কার দৃশ্য
+
+@ Shows the player face next to the health number
+bn স্বাস্থ্যের সংখ্যার পাশে খেলোয়াড়ের মুখ দেখায়
+
+@ Simulation detail, step rate, fade-out lifetimes and caps for gibs and shrapnel; low also skips mover collision
+bn গিব ও শ্র্যাপনেলের সিমুলেশনের বিস্তারিত, ধাপের হার, মিলিয়ে যাওয়ার সময় ও সীমা; নিম্ন চলমান বস্তুর সংঘর্ষও বাদ দেয়
+
+@ Size of the on-screen buttons and move stick
+bn পর্দার বোতাম ও চলার স্টিকের আকার
+
+@ Slowly heals up to 100 health after 5 seconds without being hit
+bn 5 সেকেন্ড আঘাত না পেলে ধীরে ধীরে 100 স্বাস্থ্য পর্যন্ত সেরে ওঠে
+
+@ Slows stick look while the crosshair is over an enemy
+bn ক্রসহেয়ার শত্রুর উপর থাকলে স্টিকের দৃষ্টি ধীর করে
+
+@ Slows the game down while the weapon wheel is open
+bn অস্ত্রের চাকা খোলা থাকলে গেম ধীর করে
+
+@ Slows the whole game down; single player only. Saves and demos stay compatible with other ports
+bn পুরো গেম ধীর করে; শুধু একক খেলায়। সেভ ও ডেমো অন্য পোর্টের সাথে সামঞ্জস্যপূর্ণ থাকে
+
+@ Small camera jolt on each freeze; off with Reduce Motion
+bn প্রতিটি থামায় ক্যামেরায় ছোট ঝাঁকুনি; গতিময়তা কমান চালু থাকলে বন্ধ
+
+@ Snap and track enemies in local play, including split-screen; unavailable online
+bn স্থানীয় খেলায়, স্প্লিট-স্ক্রিনসহ, শত্রুর দিকে লক্ষ্য স্থির করে অনুসরণ করে; অনলাইনে নেই
+
+@ Sparks, smoke, chips, splinters and splashes fly off whatever your shots hit
+bn আপনার গুলি যা-ই ছোঁয় তা থেকে স্ফুলিঙ্গ, ধোঁয়া, টুকরো, কাঠের চিলতে ও ছিটা ছিটকে পড়ে
+
+@ Spawns extra copies of every monster around the original when a level starts
+bn লেভেল শুরু হলে প্রতিটি দানবের চারপাশে তার অতিরিক্ত কপি তৈরি করে
+
+@ Strength of the full-screen flashes for damage, pickups and powerups
+bn ক্ষতি, সংগ্রহ ও পাওয়ারআপের জন্য পূর্ণ-পর্দা ঝলকের তীব্রতা
+
+@ Stretch or shorten the sound while keeping its pitch
+bn সুর না বদলে শব্দ লম্বা বা ছোট করুন
+
+@ Surface opacity; requires Enhanced Water and Translucent Water
+bn পৃষ্ঠের অস্বচ্ছতা; উন্নত জল ও স্বচ্ছ জল দরকার
+
+@ The hook latches onto metal surfaces (metal, tech, computer panels, copper)
+bn হুক ধাতব পৃষ্ঠে আটকায় (ধাতু, টেক, কম্পিউটার প্যানেল, তামা)
+
+@ The hook latches onto stone, brick, rock and any surface not recognised as wood or metal
+bn হুক পাথর, ইট, শিলা এবং কাঠ বা ধাতু হিসেবে চেনা যায় না এমন যেকোনো পৃষ্ঠে আটকায়
+
+@ The hook latches onto wooden surfaces (texture names like wood, crate, plank)
+bn হুক কাঠের পৃষ্ঠে আটকায় (wood, crate, plank এর মতো টেক্সচার নাম)
+
+@ Turn the controller's motion sensor into a look input; needs a pad with a gyroscope
+bn কন্ট্রোলারের গতি সেন্সরকে দৃষ্টি ইনপুট বানায়; জাইরোস্কোপওয়ালা প্যাড দরকার
+
+@ Turns off view bob, strafe tilt and the camera kick when hit or firing
+bn দৃশ্যের দোলা, পাশে সরার সময় হেলে পড়া এবং আঘাত বা ফায়ারে ক্যামেরার ঝাঁকুনি বন্ধ করে
+
+@ Turns on the extra liquid effects; Water Settings controls each one
+bn অতিরিক্ত তরল প্রভাব চালু করে; জলের সেটিংস প্রতিটি নিয়ন্ত্রণ করে
+
+@ Turns the view to follow a moving enemy you are aiming at
+bn আপনি যে চলমান শত্রুকে লক্ষ্য করছেন তাকে অনুসরণ করতে দৃশ্য ঘোরায়
+
+@ Turns the view when you roll the controller sideways; 0 disables it, negative reverses it
+bn কন্ট্রোলার পাশে হেলালে দৃশ্য ঘোরায়; 0 বন্ধ করে, ঋণাত্মক উল্টো করে
+
+@ Two-portal gun: fire and alt-fire place linked portals on flat walls; assign a weapon slot in Add-ons
+bn দুই-পোর্টাল বন্দুক: ফায়ার ও বিকল্প ফায়ার সমতল দেয়ালে সংযুক্ত পোর্টাল বসায়; অ্যাড-অনে একটি অস্ত্র স্লট নির্ধারণ করুন
+
+@ Unlocks the FX Settings page: enhanced particles, impact effects and blood splatter
+bn FX সেটিংস পৃষ্ঠা খোলে: উন্নত কণা, আঘাতের প্রভাব ও রক্ত ছিটানো
+
+@ Uses the 2021 re-release's smoother MD5 models (and MD3 replacements from mods) instead of the classic ones. Applies on the next map load
+bn ক্লাসিকের বদলে 2021 রি-রিলিজের মসৃণ MD5 মডেল (এবং মডের MD3 বিকল্প) ব্যবহার করে। পরের ম্যাপ লোডে প্রযোজ্য
+
+@ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
+bn ম্যাপের রঙিন আলো (.lit ফাইল বা BSPX লাম্প) ব্যবহার করে; বন্ধ থাকলে মূল সাদা আলো। পরের ম্যাপ লোডে প্রযোজ্য
+
+@ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
+bn জলধারার অংশ, ফোঁটার সংখ্যা ও চকচকে তরল শেডিং: নিম্ন সরল স্বচ্ছ ধারা ব্যবহার করে; উচ্চ মসৃণ চকচকে ধারা ব্যবহার করে
+
+@ When gyro looking applies: always, off while +gyroaction is held, or only while it is held
+bn জাইরো দৃষ্টি কখন কাজ করে: সবসময়, +gyroaction ধরে থাকলে বন্ধ, অথবা শুধু ধরে থাকলে
+
+@ Which weapons trigger the freeze; melee covers the axe and any mod weapon used at close range without ammo
+bn কোন অস্ত্র থামা ঘটায়; হাতাহাতির মধ্যে কুড়াল এবং গোলাবারুদ ছাড়া কাছ থেকে ব্যবহৃত যেকোনো মড অস্ত্র পড়ে
+
+@ Your own rockets and grenades don't hurt you; rocket jumps still work
+bn আপনার নিজের রকেট ও গ্রেনেড আপনাকে আঘাত করে না; রকেট জাম্প তবুও কাজ করে
+
+# ==== ui.txt ====
+
+# Menus and pop-ups outside the options pages: save cards, launch, presets,
+# add-on browser, map packs, hints and dialogs.
+@ Select
+bn নির্বাচন
+
+@ Back
+bn পিছনে
+
+@ Cancel
+bn বাতিল
+
+@ Confirm
+bn নিশ্চিত
+
+@ Scroll
+bn স্ক্রল
+
+@ Section
+bn বিভাগ
+
+@ Bind
+bn বাইন্ড
+
+@ Cancel binding
+bn বাইন্ড বাতিল
+
+@ Clear
+bn মুছুন
+
+@ Clear pad
+bn প্যাড মুছুন
+
+@ Remap
+bn রিম্যাপ
+
+@ Type
+bn লিখুন
+
+@ Shift
+bn Shift
+
+@ Done
+bn সম্পন্ন
+
+@ Del
+bn Del
+
+@ Space
+bn স্পেস
+
+@ Save
+bn সেভ
+
+@ Load
+bn লোড
+
+@ Delete
+bn মুছুন
+
+@ Play
+bn খেলুন
+
+@ Yes
+bn হ্যাঁ
+
+@ No
+bn না
+
+@ OK
+bn ঠিক আছে
+
+@ System
+bn সিস্টেম
+
+@ Language
+bn ভাষা
+
+@ Help
+bn সাহায্য
+
+@ Fixed for this game: it was started without Customize
+bn এই গেমের জন্য স্থির: এটি কাস্টমাইজ ছাড়া শুরু হয়েছিল
+
+@ Press a button or key to bind (Start cancels)
+bn বাইন্ড করতে একটি বোতাম বা কী চাপুন (Start বাতিল করে)
+
+@ Press button...
+bn বোতাম চাপুন...
+
+@ Press key...
+bn কী চাপুন...
+
+@ Replace this binding?
+bn এই বাইন্ডিং বদলাবেন?
+
+@ is already assigned
+bn ইতিমধ্যে নির্ধারিত
+
+@ {} already assigned
+bn {} ইতিমধ্যে নির্ধারিত
+
+@ Open Controls to remap Lock-on?
+bn লক-অন রিম্যাপ করতে নিয়ন্ত্রণ খুলবেন?
+
+@ Lock-on
+bn লক-অন
+
+@ Auto-aim Toggle
+bn অটো-এইম টগল
+
+@ Keyboard
+bn কীবোর্ড
+
+@ Controller
+bn কন্ট্রোলার
+
+# main menu, dialogs and screens
+@ Map Packs
+bn ম্যাপ প্যাক
+
+@ Customize
+bn কাস্টমাইজ
+
+@ Level Select
+bn লেভেল নির্বাচন
+
+@ Really quit?
+bn সত্যিই বের হবেন?
+
+@ You died
+bn আপনি মারা গেছেন
+
+@ Continue from most recent save
+bn সর্বশেষ সেভ থেকে চালিয়ে যান
+
+@ Select save
+bn সেভ নির্বাচন করুন
+
+@ Restart level
+bn লেভেল আবার শুরু করুন
+
+@ Return to main menu
+bn প্রধান মেনুতে ফিরুন
+
+@ (disabled)
+bn (নিষ্ক্রিয়)
+
+@ (fixed for this game)
+bn (এই গেমের জন্য স্থির)
+
+@ (off)
+bn (বন্ধ)
+
+@ Apply Display Changes
+bn ডিসপ্লে পরিবর্তন প্রয়োগ করুন
+
+@ Display Mode
+bn ডিসপ্লে মোড
+
+@ Resolution
+bn রেজোলিউশন
+
+@ desktop
+bn ডেস্কটপ
+
+@ Preset
+bn প্রিসেট
+
+@ Map
+bn ম্যাপ
+
+@ Reset Shader Settings
+bn শেডার সেটিংস রিসেট
+
+@ Reset to Defaults
+bn ডিফল্টে রিসেট
+
+@ Searching...
+bn খোঁজা হচ্ছে...
+
+@ This game only autosaves.
+bn এই গেম শুধু অটোসেভ করে।
+
+@ (No Manual Saves modifier)
+bn (ম্যানুয়াল সেভ নেই মডিফায়ার)
+
+@ End the current game?
+bn বর্তমান গেম শেষ করবেন?
+
+@ Unsaved progress will be lost.
+bn সেভ না করা অগ্রগতি হারিয়ে যাবে।
+
+@ End game
+bn গেম শেষ করুন
+
+@ Overwrite
+bn ওভাররাইট
+
+@ Overwrite "{}"?
+bn "{}" ওভাররাইট করবেন?
+
+@ Saved {}
+bn সেভ হয়েছে {}
+
+@ Start a new game?
+bn নতুন গেম শুরু করবেন?
+
+@ New game
+bn নতুন গেম
+
+@ New Game
+bn নতুন গেম
+
+@ CUSTOM
+bn কাস্টম
+
+@ Customize Experience
+bn অভিজ্ঞতা কাস্টমাইজ করুন
+
+@ Disable All
+bn সব বন্ধ
+
+@ Disable All Modifications
+bn সব পরিবর্তন বন্ধ করুন
+
+@ Saves load in other source ports too.
+bn সেভ অন্য সোর্স পোর্টেও লোড হয়।
+
+@ Standard rules, no add-ons.
+bn সাধারণ নিয়ম, কোনো অ্যাড-অন নেই।
+
+@ Choose skill
+bn কঠিনতা বেছে নিন
+
+@ The current game will end
+bn বর্তমান গেম শেষ হবে
+
+@ Easy
+bn সহজ
+
+@ Normal
+bn সাধারণ
+
+@ Hard
+bn কঠিন
+
+@ Nightmare
+bn দুঃস্বপ্ন
+
+# graphics preset pop-up
+@ Choose a Graphics Preset
+bn একটি গ্রাফিক্স প্রিসেট বেছে নিন
+
+@ Classic
+bn ক্লাসিক
+
+@ Like the re-release: enhanced models,
+bn রি-রিলিজের মতো: উন্নত মডেল,
+
+@ no added effects.
+bn কোনো বাড়তি প্রভাব নেই।
+
+@ Enhanced
+bn উন্নত
+
+@ Every enhancement at its highest quality.
+bn প্রতিটি উন্নতি সর্বোচ্চ মানে।
+
+@ Needs a capable GPU.
+bn শক্তিশালী GPU দরকার।
+
+@ Low-End
+bn দুর্বল হার্ডওয়্যার
+
+@ Fastest. No anti-aliasing, original
+bn সবচেয়ে দ্রুত। অ্যান্টি-অ্যালিয়াসিং নেই, মূল
+
+@ models, lowest effect quality.
+bn মডেল, সর্বনিম্ন প্রভাবের মান।
+
+@ Esc keeps the defaults
+bn Esc ডিফল্ট রাখে
+
+@ Everything can be changed later in Options.
+bn সবকিছু পরে Options-এ বদলানো যায়।
+
+@ Keep Defaults
+bn ডিফল্ট রাখুন
+
+# save and load cards
+@ Save Game
+bn গেম সেভ করুন
+
+@ Load Game
+bn গেম লোড করুন
+
+@ Autosaves
+bn অটোসেভ
+
+@ newest first
+bn নতুনগুলো আগে
+
+@ Saves: {}
+bn সেভ: {}
+
+@ Browse Autosaves
+bn অটোসেভ দেখুন
+
+@ Every retained autosave, newest first
+bn রাখা সব অটোসেভ, নতুনগুলো আগে
+
+@ New save
+bn নতুন সেভ
+
+@ Select to save your game here
+bn এখানে গেম সেভ করতে নির্বাচন করুন
+
+@ No autosaves yet
+bn এখনও কোনো অটোসেভ নেই
+
+@ Autosaves are made on level entry, secrets and more (Options > Gameplay)
+bn লেভেলে প্রবেশ, গোপন স্থান ইত্যাদিতে অটোসেভ হয় (Options > গেমপ্লে)
+
+@ No saves yet
+bn এখনও কোনো সেভ নেই
+
+@ Save from the Single Player menu, or press F6 to quicksave
+bn Single Player মেনু থেকে সেভ করুন, অথবা দ্রুত সেভ করতে F6 চাপুন
+
+@ No picture
+bn ছবি নেই
+
+@ Del: delete save
+bn Del: সেভ মুছুন
+
+@ Delete "{}"?
+bn "{}" মুছবেন?
+
+@ This cannot be undone.
+bn এটি আর ফেরানো যাবে না।
+
+@ Quicksave
+bn দ্রুত সেভ
+
+@ Autosave: {}
+bn অটোসেভ: {}
+
+@ unknown trigger
+bn অজানা কারণ
+
+@ Latest - {}
+bn সর্বশেষ - {}
+
+@ Health {}
+bn স্বাস্থ্য {}
+
+@ Armor {}
+bn বর্ম {}
+
+@ Kills {}/{}
+bn হত্যা {}/{}
+
+@ Secrets {}/{}
+bn গোপন স্থান {}/{}
+
+@ Split-screen, {} players
+bn স্প্লিট-স্ক্রিন, {} জন খেলোয়াড়
+
+@ Co-op
+bn কো-অপ
+
+@ Customized
+bn কাস্টমাইজড
+
+@ Customized, {}
+bn কাস্টমাইজড, {}
+
+@ Date unavailable
+bn তারিখ পাওয়া যায়নি
+
+@ Just now
+bn এইমাত্র
+
+@ {} min ago
+bn {} মিনিট আগে
+
+@ {} h ago
+bn {} ঘণ্টা আগে
+
+@ Level entry
+bn লেভেলে প্রবেশ
+
+@ Secret found
+bn গোপন স্থান পাওয়া গেছে
+
+@ All enemies killed
+bn সব শত্রু নিহত
+
+@ All secrets found
+bn সব গোপন স্থান পাওয়া গেছে
+
+@ Timer
+bn টাইমার
+
+# customize pages
+@ Standard rules
+bn সাধারণ নিয়ম
+
+@ Modifiers changed: {}
+bn পরিবর্তিত মডিফায়ার: {}
+
+@ no add-ons
+bn কোনো অ্যাড-অন নেই
+
+@ add-ons: {}
+bn অ্যাড-অন: {}
+
+@ Saves of this game are .qsa files: they need this source port.
+bn এই গেমের সেভ .qsa ফাইল: সেগুলোর জন্য এই সোর্স পোর্ট দরকার।
+
+@ Nothing changed: this plays as standard Quake.
+bn কিছুই বদলায়নি: এটি সাধারণ Quake হিসেবে চলে।
+
+@ Changes apply now and are saved with this game (.qsa).
+bn পরিবর্তন এখনই প্রযোজ্য এবং এই গেমের সাথে সেভ হয় (.qsa)।
+
+@ This game started without Customize, so its rules are fixed.
+bn এই গেম কাস্টমাইজ ছাড়া শুরু হয়েছিল, তাই এর নিয়ম স্থির।
+
+@ Start a new game and choose Customize Experience.
+bn নতুন গেম শুরু করে অভিজ্ঞতা কাস্টমাইজ করুন বেছে নিন।
+
+@ These rules apply to the next customized game.
+bn এই নিয়ম পরের কাস্টমাইজড গেমে প্রযোজ্য।
+
+# add-on browser
+@ Fire
+bn ফায়ার
+
+@ Alt Fire
+bn বিকল্প ফায়ার
+
+@ Configure Parameters >
+bn প্যারামিটার কনফিগার করুন >
+
+@ Configure
+bn কনফিগার
+
+@ Settings
+bn সেটিংস
+
+@ Change slot
+bn স্লট বদলান
+
+@ Toggle
+bn টগল
+
+@ Details
+bn বিস্তারিত
+
+@ Enter or click the box: toggle
+bn Enter বা বাক্সে ক্লিক: টগল
+
+@ Right / Tab / click: details
+bn ডান / Tab / ক্লিক: বিস্তারিত
+
+@ Input Remapping
+bn ইনপুট রিম্যাপিং
+
+@ Weapon Slot
+bn অস্ত্র স্লট
+
+@ Customized games save as .qsa files, which need this source port.
+bn কাস্টমাইজড গেম .qsa ফাইল হিসেবে সেভ হয়, যার জন্য এই সোর্স পোর্ট দরকার।
+
+@ This game started without Customize, so its add-ons are fixed. Customize a new game instead.
+bn এই গেম কাস্টমাইজ ছাড়া শুরু হয়েছিল, তাই এর অ্যাড-অন স্থির। বরং একটি নতুন গেম কাস্টমাইজ করুন।
+
+@ Bullet Time
+bn বুলেট টাইম
+
+@ Change Goggles
+bn গগলস বদলান
+
+@ Dodge / Dive
+bn এড়ানো / ঝাঁপ
+
+@ Goggles
+bn গগলস
+
+@ Hitstop
+bn হিটস্টপ
+
+@ Projectile Shotguns
+bn প্রজেক্টাইল শটগান
+
+@ BULLET TIME: 20%
+bn বুলেট টাইম: 20%
+
+@ NORMAL SPEED
+bn স্বাভাবিক গতি
+
+@ SLOW MOTION: PHYSICAL PELLETS
+bn স্লো মোশন: ভৌত ছররা
+
+@ DEMONSTRATION
+bn প্রদর্শনী
+
+@ GAMEPLAY
+bn গেমপ্লে
+
+@ LOOP
+bn লুপ
+
+@ Preview unavailable
+bn প্রিভিউ পাওয়া যায়নি
+
+# shader and language help lines
+@ A setting of the chosen shader; arrows step it, Enter is not needed
+bn নির্বাচিত শেডারের একটি সেটিং; তীর চিহ্ন দিয়ে বদলান, Enter লাগে না
+
+@ Language of the menus, messages and the 2021 re-release's game text; System follows your computer's language
+bn মেনু, বার্তা ও 2021 রি-রিলিজের গেম লেখার ভাষা; সিস্টেম আপনার কম্পিউটারের ভাষা অনুসরণ করে
+
+@ Puts every setting of the chosen shader back to the preset's defaults
+bn নির্বাচিত শেডারের সব সেটিং প্রিসেটের ডিফল্টে ফেরায়
+
+@ RetroArch slang shader on the final image: CRT, scanlines, NTSC, sharpening; add your own in <game>/shaders
+bn চূড়ান্ত ছবিতে RetroArch slang শেডার: CRT, স্ক্যানলাইন, NTSC, শার্পেনিং; নিজেরগুলো <game>/shaders এ যোগ করুন
+
+# modern console footer
+@ Shift+PgUp/Dn: height  ` : hide
+bn Shift+PgUp/Dn: উচ্চতা  ` : লুকান
+
+@ Tab: complete  Ctrl+R: search  bash | pipe
+bn Tab: সম্পূর্ণ  Ctrl+R: খুঁজুন  bash | পাইপ
+
+@ ↑ +{} lines (End to jump) 
+bn ↑ +{} লাইন (ফিরতে End) 
+
+# add-on descriptions
+@ Create two linked portals on flat walls. Fire places the first portal; Alt Fire places the second. Walk through either portal to emerge from the other. Your momentum carries through. Assign a weapon slot below: pressing that slot repeatedly cycles its ordinary weapon and every enabled add-on assigned there. Portal view quality is configurable below.
+bn সমতল দেয়ালে দুটি সংযুক্ত পোর্টাল তৈরি করুন। ফায়ার প্রথম পোর্টাল বসায়; বিকল্প ফায়ার দ্বিতীয়টি বসায়। যেকোনো পোর্টাল দিয়ে হেঁটে অন্যটি থেকে বের হন। আপনার গতিবেগ বজায় থাকে। নিচে একটি অস্ত্র স্লট নির্ধারণ করুন: সেই স্লট বারবার চাপলে এর সাধারণ অস্ত্র এবং সেখানে নির্ধারিত প্রতিটি সক্রিয় অ্যাড-অনের মধ্যে ঘোরে। পোর্টাল দৃশ্যের মান নিচে কনফিগার করা যায়।
+
+@ Hold Fire and sweep the crosshair over monsters to queue targets. Release Fire to throw: the boomerang visits each target, stuns it and returns to you. Alt Fire clears the queue. The weapon slot selects a group, not a separate hotkey: press it again to cycle through the weapons in that slot. Configure stun duration and flight speed below.
+bn ফায়ার ধরে রেখে দানবদের উপর ক্রসহেয়ার বুলিয়ে লক্ষ্য সারিতে রাখুন। ছুড়তে ফায়ার ছাড়ুন: বুমেরাং প্রতিটি লক্ষ্যে যায়, তাকে অচেতন করে আপনার কাছে ফিরে আসে। বিকল্প ফায়ার সারি খালি করে। অস্ত্র স্লট একটি দল বেছে নেয়, আলাদা হটকি নয়: সেই স্লটের অস্ত্রগুলোর মধ্যে ঘুরতে আবার চাপুন। অচেতনতার সময়কাল ও উড়ার গতি নিচে কনফিগার করুন।
+
+@ Hold Fire to charge a sticky bomb using rocket ammunition; release to launch. A longer charge throws it faster. Bombs cling to walls, doors and monsters. Alt Fire detonates your planted bombs together. Place a trap, retreat, then detonate it when enemies approach. Assign any weapon slot below; repeated presses cycle through the ordinary weapon and add-ons in that slot.
+bn রকেটের গোলাবারুদ দিয়ে আঠালো বোমা চার্জ করতে ফায়ার ধরে রাখুন; ছুড়তে ছাড়ুন। বেশি চার্জ করলে বেশি জোরে ছোড়ে। বোমা দেয়াল, দরজা ও দানবে লেগে থাকে। বিকল্প ফায়ার আপনার বসানো সব বোমা একসাথে ফাটায়। ফাঁদ পাতুন, পিছিয়ে যান, তারপর শত্রু কাছে এলে ফাটান। নিচে যেকোনো অস্ত্র স্লট নির্ধারণ করুন; বারবার চাপলে সেই স্লটের সাধারণ অস্ত্র ও অ্যাড-অনের মধ্যে ঘোরে।
+
+@ Fire launches a chain hook. It latches onto a permitted surface or enemy and reels you toward the anchor. Fire again or use Alt Fire to let go. Choose which materials and enemies can be hooked in Configure Parameters. Assign it to any weapon slot; repeated presses of the slot's existing binding cycle through its weapons.
+bn ফায়ার একটি শিকলওয়ালা হুক ছোড়ে। এটি অনুমোদিত পৃষ্ঠ বা শত্রুকে আঁকড়ে ধরে আপনাকে নোঙরের দিকে টেনে নেয়। ছাড়তে আবার ফায়ার করুন বা বিকল্প ফায়ার ব্যবহার করুন। কোন উপাদান ও শত্রুকে হুক করা যাবে তা প্যারামিটার কনফিগার করুন-এ বেছে নিন। এটি যেকোনো অস্ত্র স্লটে নির্ধারণ করুন; স্লটের বর্তমান বাইন্ডিং বারবার চাপলে এর অস্ত্রগুলোর মধ্যে ঘোরে।
+
+@ A piercing railgun inspired by Quake III. Fire sends a slug through every enemy along its line. Each shot consumes two cells, with a 1.5 second refire interval. Damage and the spiral trail colour are configurable below. Choose a weapon slot: the slot's current binding selects and cycles the weapons assigned to it.
+bn Quake III থেকে অনুপ্রাণিত একটি ভেদকারী রেলগান। ফায়ার তার রেখার প্রতিটি শত্রুর মধ্য দিয়ে একটি স্লাগ পাঠায়। প্রতি শটে দুটি সেল খরচ হয়, আবার ছোড়ার ব্যবধান 1.5 সেকেন্ড। ক্ষতি ও সর্পিল রেখার রং নিচে কনফিগার করা যায়। একটি অস্ত্র স্লট বেছে নিন: স্লটের বর্তমান বাইন্ডিং সেখানে নির্ধারিত অস্ত্রগুলো বাছে ও ঘোরায়।
+
+@ A Portal-style gel sprayer. Fire sprays blue Repulsion gel: land, jump or run into it to bounce, and landings on it never hurt. Alt Fire sprays orange Propulsion gel: run across it to go much faster. Gel coats floors and walls until washed off with the Powerwasher. Assign a weapon slot below; repeated presses cycle the weapons in that slot.
+bn Portal ধাঁচের জেল স্প্রেয়ার। ফায়ার নীল রিপালশন জেল ছিটায়: লাফিয়ে উঠতে এর উপর নামুন, লাফান বা দৌড়ে যান, আর এর উপর নামলে কখনো আঘাত লাগে না। বিকল্প ফায়ার কমলা প্রপালশন জেল ছিটায়: অনেক দ্রুত যেতে এর উপর দিয়ে দৌড়ান। পাওয়ারওয়াশার দিয়ে ধুয়ে না ফেলা পর্যন্ত জেল মেঝে ও দেয়াল ঢেকে রাখে। নিচে একটি অস্ত্র স্লট নির্ধারণ করুন; বারবার চাপলে সেই স্লটের অস্ত্রগুলোর মধ্যে ঘোরে।
+
+@ A water cannon. Fire shoots a straight jet with limited reach; Alt Fire a wide, shorter fan. The water pushes enemies back, turns projectiles aside and washes away gel and blood. Push strength is configurable below. Assign a weapon slot below; repeated presses cycle the weapons in that slot.
+bn একটি জলকামান। ফায়ার সীমিত পাল্লার একটি সোজা ধারা ছোড়ে; বিকল্প ফায়ার একটি চওড়া, ছোট পাখা। জল শত্রুকে পিছনে ঠেলে, প্রজেক্টাইলের দিক ঘুরিয়ে দেয় এবং জেল ও রক্ত ধুয়ে ফেলে। ধাক্কার শক্তি নিচে কনফিগার করা যায়। নিচে একটি অস্ত্র স্লট নির্ধারণ করুন; বারবার চাপলে সেই স্লটের অস্ত্রগুলোর মধ্যে ঘোরে।
+
+@ One equipment add-on includes both night vision and thermal vision. The Change Goggles action cycles Normal, Night Vision, Thermal, then Normal again. Night vision brightens dark rooms; thermal vision highlights living enemies. Goggles do not occupy a weapon slot. Configure intensity and sensor noise below. The binding affects only this add-on.
+bn একটি সরঞ্জাম অ্যাড-অনে নাইট ভিশন ও থার্মাল ভিশন দুটোই আছে। গগলস বদলান অ্যাকশন সাধারণ, নাইট ভিশন, থার্মাল, তারপর আবার সাধারণের মধ্যে ঘোরে। নাইট ভিশন অন্ধকার ঘর উজ্জ্বল করে; থার্মাল ভিশন জীবিত শত্রুদের আলাদা করে দেখায়। গগলস কোনো অস্ত্র স্লট নেয় না। তীব্রতা ও সেন্সরের নয়েজ নিচে কনফিগার করুন। বাইন্ডিং শুধু এই অ্যাড-অনকে প্রভাবিত করে।
+
+@ Press Dodge with a movement direction on the ground or in midair: dive forward or leap backward and sideways. Diagonals are supported. Each press launches once, with a short recovery. The player body animates in third person. Assign the Dodge action below or in Controls.
+bn মাটিতে বা শূন্যে চলার দিকসহ এড়ানো চাপুন: সামনে ঝাঁপ দিন বা পিছনে ও পাশে লাফ দিন। তির্যক দিকও সমর্থিত। প্রতি চাপে একবার ছোড়ে, অল্প বিরতি সহ। তৃতীয় ব্যক্তিতে খেলোয়াড়ের দেহ অ্যানিমেটেড হয়। এড়ানো অ্যাকশন নিচে বা নিয়ন্ত্রণে নির্ধারণ করুন।
+
+@ Use the dedicated Bullet Time action to slow the whole local game to 20% speed. Hold is the default; Toggle switches on each press. The optional meter limits use in real seconds and regenerates while inactive. Disable the meter for unlimited use. Remap the action and configure duration and regeneration below.
+bn পুরো স্থানীয় গেম 20% গতিতে ধীর করতে নির্দিষ্ট বুলেট টাইম অ্যাকশন ব্যবহার করুন। ধরে রাখুন ডিফল্ট; টগল প্রতি চাপে চালু-বন্ধ করে। ঐচ্ছিক মিটার প্রকৃত সেকেন্ডে ব্যবহার সীমিত করে এবং নিষ্ক্রিয় অবস্থায় আবার ভরে ওঠে। সীমাহীন ব্যবহারের জন্য মিটার বন্ধ করুন। অ্যাকশন রিম্যাপ করুন এবং সময়কাল ও পুনরুদ্ধার নিচে কনফিগার করুন।
+
+@ Both shotguns and enemy grunts fire physical pellets with their original spread and damage. Fast default projectiles feel immediate; lower their speed to dodge incoming fire during bullet time. Configure projectile speed below, or reset it to the default of 10000 units per second.
+bn দুটি শটগান ও শত্রু গ্রান্ট তাদের মূল বিস্তার ও ক্ষতিসহ ভৌত ছররা ছোড়ে। দ্রুত ডিফল্ট প্রজেক্টাইল তাৎক্ষণিক মনে হয়; বুলেট টাইমে আসা গুলি এড়াতে এদের গতি কমান। প্রজেক্টাইলের গতি নিচে কনফিগার করুন, বা ডিফল্ট প্রতি সেকেন্ডে 10000 এককে রিসেট করুন।
+
+@ Freezes the game for a split second when you damage an enemy, so hits feel heavier. Single player only. Choose which weapons trigger it (all, melee, ranged or explosives), how long it lasts and how much more a kill freezes. Advanced settings cover enemy toughness, damage scaling, cooldown and the longest freeze.
+bn শত্রুকে আঘাত করলে গেম এক মুহূর্তের জন্য থামায়, যাতে আঘাত ভারী মনে হয়। শুধু একক খেলায়। কোন অস্ত্র এটি ঘটাবে (সব, হাতাহাতি, দূরপাল্লার বা বিস্ফোরক), কতক্ষণ চলবে এবং হত্যায় কতটা বেশি থামবে তা বেছে নিন। উন্নত সেটিংসে শত্রুর শক্তি, ক্ষতির মাপ, কুলডাউন ও সর্বোচ্চ থামা আছে।
+
+# map packs and the Quaddicted browser
+@ Get more maps (Quaddicted)...
+bn আরও ম্যাপ নিন (Quaddicted)...
+
+@ Type to filter...
+bn ফিল্টার করতে লিখুন...
+
+@ Launch mod
+bn মড চালু করুন
+
+@ Start first map
+bn প্রথম ম্যাপ শুরু করুন
+
+@ (running)
+bn (চলছে)
+
+@ running
+bn চলছে
+
+@ Recent
+bn সাম্প্রতিক
+
+@ Name
+bn নাম
+
+@ Dir
+bn ফোল্ডার
+
+@ Default
+bn ডিফল্ট
+
+@ Title
+bn শিরোনাম
+
+@ Sort: {}
+bn সাজানো: {}
+
+@ {} installed
+bn {}টি ইনস্টল করা
+
+@ {}/{} matching
+bn {}/{} মিলেছে
+
+@ {} maps, {} completed
+bn {}টি ম্যাপ, {}টি সম্পন্ন
+
+@ {}/{} matching, {} completed
+bn {}/{} মিলেছে, {}টি সম্পন্ন
+
+@ no maps of its own
+bn নিজস্ব কোনো ম্যাপ নেই
+
+@ dir: {}
+bn ফোল্ডার: {}
+
+@ base: {}
+bn ভিত্তি: {}
+
+@ Browse the Quaddicted archive of
+bn Quaddicted আর্কাইভের একক খেলার
+
+@ single-player maps and episodes,
+bn ম্যাপ ও এপিসোড ব্রাউজ করুন,
+
+@ then download and install them
+bn তারপর এখানেই ডাউনলোড ও ইনস্টল
+
+@ here. Each release gets its own
+bn করুন। প্রতিটি রিলিজ এই তালিকায়
+
+@ entry in this list.
+bn নিজস্ব একটি এন্ট্রি পায়।
+
+@ Needs an internet connection.
+bn ইন্টারনেট সংযোগ দরকার।
+
+@ Quaddicted Map Archive
+bn Quaddicted ম্যাপ আর্কাইভ
+
+@ Newest
+bn নতুনতম
+
+@ Author
+bn লেখক
+
+@ Size
+bn আকার
+
+@ Loading the map list...
+bn ম্যাপের তালিকা লোড হচ্ছে...
+
+@ Couldn't load the map list: {}
+bn ম্যাপের তালিকা লোড করা যায়নি: {}
+
+@ {} single-player releases  -  F5 refreshes
+bn {}টি একক খেলার রিলিজ  -  F5 রিফ্রেশ করে
+
+@ {} matching
+bn {}টি মিলেছে
+
+@ by {}
+bn {} দ্বারা
+
+@ requires: {}
+bn প্রয়োজন: {}
+
+@ maps: {}
+bn ম্যাপ: {}
+
+@ Failed: {}
+bn ব্যর্থ: {}
+
+@ Downloading... {}%
+bn ডাউনলোড হচ্ছে... {}%
+
+@ Unpacking...
+bn আনপ্যাক হচ্ছে...
+
+@ Installed in {}/  -  Enter: play
+bn {}/ এ ইনস্টল করা  -  Enter: খেলুন
+
+@ Enter: download and install
+bn Enter: ডাউনলোড ও ইনস্টল
+
+@ unpacking
+bn আনপ্যাক হচ্ছে
+
+@ failed
+bn ব্যর্থ
+
+@ installed
+bn ইনস্টল করা
+
+@ Downloads are not available in the browser build
+bn ব্রাউজার সংস্করণে ডাউনলোড পাওয়া যায় না
+
+@ the map list could not be read
+bn ম্যাপের তালিকা পড়া যায়নি
+
+@ downloading needs the curl program
+bn ডাউনলোডের জন্য curl প্রোগ্রাম দরকার
+
+@ download failed
+bn ডাউনলোড ব্যর্থ
+
+@ the download is not a valid zip
+bn ডাউনলোড করা ফাইলটি বৈধ zip নয়
+
+@ nothing to install for this engine
+bn এই ইঞ্জিনের জন্য ইনস্টল করার কিছু নেই
+
+@ needs {} installed first
+bn আগে {} ইনস্টল করা দরকার
+
+@ couldn't unpack {}
+bn {} আনপ্যাক করা যায়নি
+
+# help screen
+@ About
+bn সম্পর্কে
+
+@ < Back
+bn < পিছনে
+
+# tr_ctx keys: English shows the short word, the key says which meaning
+@ Save (a manual save, as opposed to a quicksave or autosave)
+bn সেভ
+
+# ==== hud.txt ====
+
+# HUD, weapon and equipment wheels, sound captions and other in-game text.
+# Weapon, monster and item names follow the 2021 re-release's own translations.
+@ Axe
+bn কুড়াল
+
+@ Shotgun
+bn শটগান
+
+@ Double-Barrelled Shotgun
+bn দোনলা শটগান
+
+@ Nailgun
+bn নেইলগান
+
+@ Super Nailgun
+bn সুপার নেইলগান
+
+@ Grenade Launcher
+bn গ্রেনেড লঞ্চার
+
+@ Rocket Launcher
+bn রকেট লঞ্চার
+
+@ Thunderbolt
+bn থান্ডারবোল্ট
+
+@ Portal Gun
+bn পোর্টাল গান
+
+@ Boomerang
+bn বুমেরাং
+
+@ Stickybomb Launcher
+bn স্টিকিবোম লঞ্চার
+
+@ Railgun
+bn রেলগান
+
+@ Hookshot
+bn হুকশট
+
+@ Gel Sprayer
+bn জেল স্প্রেয়ার
+
+@ Powerwasher
+bn পাওয়ারওয়াশার
+
+@ Night Vision Goggles
+bn নাইট ভিশন গগলস
+
+@ Thermal Goggles
+bn থার্মাল গগলস
+
+@ Normal vision
+bn সাধারণ দৃষ্টি
+
+@ ON
+bn চালু
+
+@ OFF
+bn বন্ধ
+
+@ {} (turn on)
+bn {} (চালু করুন)
+
+@ {} (turn off)
+bn {} (বন্ধ করুন)
+
+@ Move mouse to select, release to toggle
+bn বাছতে মাউস সরান, টগল করতে ছাড়ুন
+
+@ Move mouse to select, release to equip
+bn বাছতে মাউস সরান, সজ্জিত করতে ছাড়ুন
+
+@ Release to toggle
+bn টগল করতে ছাড়ুন
+
+@ Release to equip
+bn সজ্জিত করতে ছাড়ুন
+
+@ shells
+bn শেল
+
+@ nails
+bn নেইল
+
+@ rockets
+bn রকেট
+
+@ cells
+bn সেল
+
+@ Kills: {}/{}
+bn হত্যা: {}/{}
+
+@ Secrets: {}/{}
+bn গোপন স্থান: {}/{}
+
+@ Time {}
+bn সময় {}
+
+@ Press any button to continue...
+bn চালিয়ে যেতে যেকোনো বোতাম চাপুন...
+
+@ Press any key to continue...
+bn চালিয়ে যেতে যেকোনো কী চাপুন...
+
+@ BULLET TIME
+bn বুলেট টাইম
+
+@ AUTO AIM
+bn অটো এইম
+
+@ Crosshair
+bn ক্রসহেয়ার
+
+@ + Marker
+bn + মার্কার
+
+@ Hit markers off
+bn হিট মার্কার বন্ধ
+
+@ On target
+bn লক্ষ্যে
+
+@ On kill
+bn হত্যায়
+
+# sound captions
+@ [Secret found]
+bn [গোপন স্থান পাওয়া গেছে]
+
+@ [Message]
+bn [বার্তা]
+
+@ [Switch activated]
+bn [সুইচ চালু হয়েছে]
+
+@ [Key picked up]
+bn [চাবি তোলা হয়েছে]
+
+@ [Rune picked up]
+bn [রুন তোলা হয়েছে]
+
+@ [Teleporter]
+bn [টেলিপোর্টার]
+
+@ [Teleport]
+bn [টেলিপোর্ট]
+
+@ [Splash]
+bn [ছপাৎ]
+
+@ [Leaving water]
+bn [জল থেকে উঠছে]
+
+@ [Door]
+bn [দরজা]
+
+@ [Platform moving]
+bn [প্ল্যাটফর্ম চলছে]
+
+@ [Button]
+bn [বোতাম]
+
+@ [Health picked up]
+bn [স্বাস্থ্য তোলা হয়েছে]
+
+@ [Armor picked up]
+bn [বর্ম তোলা হয়েছে]
+
+@ [Quad Damage wearing off]
+bn [কোয়াড ড্যামেজ ফুরিয়ে আসছে]
+
+@ [Quad Damage]
+bn [কোয়াড ড্যামেজ]
+
+@ [Pentagram wearing off]
+bn [পেন্টাগ্রাম ফুরিয়ে আসছে]
+
+@ [Pentagram of Protection]
+bn [সুরক্ষার পেন্টাগ্রাম]
+
+@ [Ring wearing off]
+bn [আংটি ফুরিয়ে আসছে]
+
+@ [Ring of Shadows]
+bn [ছায়ার আংটি]
+
+@ [Biosuit wearing off]
+bn [বায়োস্যুট ফুরিয়ে আসছে]
+
+@ [Biosuit]
+bn [বায়োস্যুট]
+
+@ [Item picked up]
+bn [জিনিস তোলা হয়েছে]
+
+@ [Weapon picked up]
+bn [অস্ত্র তোলা হয়েছে]
+
+@ [Ammo picked up]
+bn [গোলাবারুদ তোলা হয়েছে]
+
+@ [Explosion]
+bn [বিস্ফোরণ]
+
+@ [Grenade launched]
+bn [গ্রেনেড ছোড়া হয়েছে]
+
+@ [Grenade bounce]
+bn [গ্রেনেডের লাফ]
+
+@ [Rocket fired]
+bn [রকেট ছোড়া হয়েছে]
+
+@ [Nails fired]
+bn [নেইল ছোড়া হয়েছে]
+
+@ [Lightning]
+bn [বিদ্যুৎ]
+
+@ [Thunder]
+bn [বজ্রপাত]
+
+@ [Enforcer alerted]
+bn [এনফোর্সার সতর্ক]
+
+@ [Grunt alerted]
+bn [গ্রান্ট সতর্ক]
+
+@ [Rottweiler alerted]
+bn [রটওয়াইলার সতর্ক]
+
+@ [Knight alerted]
+bn [নাইট সতর্ক]
+
+@ [Death Knight alerted]
+bn [ডেথ নাইট সতর্ক]
+
+@ [Scrag alerted]
+bn [স্ক্র্যাগ সতর্ক]
+
+@ [Ogre alerted]
+bn [ওগার সতর্ক]
+
+@ [Fiend alerted]
+bn [ফিন্ড সতর্ক]
+
+@ [Shambler alerted]
+bn [শ্যাম্বলার সতর্ক]
+
+@ [Zombie groaning]
+bn [জম্বির গোঙানি]
+
+@ [Vore alerted]
+bn [ভোর সতর্ক]
+
+@ [Vore attacking]
+bn [ভোর আক্রমণ করছে]
+
+@ [Spawn alerted]
+bn [স্পন সতর্ক]
+
+@ [Rotfish]
+bn [রটফিশ]
+
+@ [Spawn]
+bn [স্পন]
+
+@ [Chthon]
+bn [চথন]
+
+@ [Hard landing]
+bn [শক্ত অবতরণ]
+
+@ [Drowning]
+bn [ডুবে যাচ্ছে]
+
+@ [Gasping for air]
+bn [হাঁপাচ্ছে]
+
+@ [Burning]
+bn [পুড়ছে]
+
+@ [Telefrag]
+bn [টেলিফ্র্যাগ]
+
+@ [Gibbed]
+bn [ছিন্নভিন্ন]
+
+# ==== console.txt ====
+
+# Console messages, shown translated only with con_translate 1 (Translate Console).
+# Cvar and command names stay as they are.
+@ Autosaved.
+bn অটোসেভ হয়েছে।
+
+@ Game saved.
+bn গেম সেভ হয়েছে।
+
+@ Can't save now.
+bn এখন সেভ করা যাবে না।
+
+@ This game only autosaves (No Manual Saves modifier).
+bn এই গেম শুধু অটোসেভ করে (ম্যানুয়াল সেভ নেই মডিফায়ার)।
+
+@ Loading {}...
+bn {} লোড হচ্ছে...
+
+@ load failed: {}
+bn লোড ব্যর্থ: {}
+
+@ ERROR: autosave failed: {}
+bn ত্রুটি: অটোসেভ ব্যর্থ: {}
+
+@ ERROR: couldn't open {}
+bn ত্রুটি: {} খোলা যায়নি
+
+@ ERROR: couldn't open {}.
+bn ত্রুটি: {} খোলা যায়নি।
+
+@ ERROR: couldn't write {}: {}
+bn ত্রুটি: {} লেখা যায়নি: {}
+
+@ ERROR: couldn't create {}: {}
+bn ত্রুটি: {} তৈরি করা যায়নি: {}
+
+@ couldn't write {}: {}
+bn {} লেখা যায়নি: {}
+
+@ Wrote {}
+bn {} লেখা হয়েছে
+
+@ screenshot failed: {}
+bn স্ক্রিনশট ব্যর্থ: {}
+
+@ screenshot: {}
+bn স্ক্রিনশট: {}
+
+@ No readable save available. Select save or restart the level.
+bn পড়ার মতো কোনো সেভ নেই। সেভ নির্বাচন করুন বা লেভেল আবার শুরু করুন।
+
+@ Unknown command "{}"
+bn অজানা কমান্ড "{}"
+
+@ couldn't exec {}
+bn {} চালানো যায়নি
+
+@ execing {}
+bn {} চালানো হচ্ছে
+
+@ execing config.cfg (inherited from {})
+bn config.cfg চালানো হচ্ছে ({} থেকে প্রাপ্ত)
+
+@ execing config.cfg (mod defaults)
+bn config.cfg চালানো হচ্ছে (মডের ডিফল্ট)
+
+@ execing default.cfg (built-in)
+bn default.cfg চালানো হচ্ছে (বিল্ট-ইন)
+
+@ {} cvars
+bn {}টি cvar
+
+@ {} commands
+bn {}টি কমান্ড
+
+@ Can't "cmd", not connected
+bn "cmd" করা যাবে না, সংযুক্ত নেই
+
+@ Looking for Quake servers...
+bn Quake সার্ভার খোঁজা হচ্ছে...
+
+@ Bad value, must be between 1 and 65534
+bn ভুল মান, 1 থেকে 65534 এর মধ্যে হতে হবে
+
+@ Couldn't handle music file {}
+bn সংগীত ফাইল {} চালানো যায়নি
+
+@ Bug report written to {}
+bn বাগ রিপোর্ট {} এ লেখা হয়েছে
+
+@ bugreport: can't create {}: {}
+bn bugreport: {} তৈরি করা যায়নি: {}
+
+@ graphics preset: {}
+bn গ্রাফিক্স প্রিসেট: {}
+
+@ Presets (r_shader_preset <name>):
+bn প্রিসেট (r_shader_preset <name>):
+
+@ Add your own .slangp presets under <game>/shaders/.
+bn নিজের .slangp প্রিসেট <game>/shaders/ এ যোগ করুন।
+
+@ no shader preset loaded (r_shader_preset)
+bn কোনো শেডার প্রিসেট লোড করা নেই (r_shader_preset)
+
+@ r_shader_preset: "{}" not found
+bn r_shader_preset: "{}" পাওয়া যায়নি
+
+@ no parameter "{}" in this preset
+bn এই প্রিসেটে "{}" প্যারামিটার নেই
+
+@ {} = {} (default {}, {}..{})
+bn {} = {} (ডিফল্ট {}, {}..{})
+
+@ Switching to {}...
+bn {} এ যাওয়া হচ্ছে...
+
+@ game: no game dir "{}" in {}
+bn game: গেম ফোল্ডার "{}" নেই, খোঁজা হয়েছে {} এ
+
+@ game: can't find the engine executable
+bn game: ইঞ্জিনের এক্সিকিউটেবল পাওয়া যায়নি
+
+@ game: exec failed: {}
+bn game: exec ব্যর্থ: {}
+
+@ game: launch failed: {}
+bn game: চালু করা ব্যর্থ: {}
+
+@ loaded {} in {}s
+bn {} লোড হয়েছে {} সেকেন্ডে
+
+@ No demos listed with startdemos
+bn startdemos দিয়ে কোনো ডেমো তালিকাভুক্ত নেই
+
+@ Playing demo from {}.
+bn {} থেকে ডেমো চলছে।
+
+@ {} frames {} seconds {} fps
+bn {} ফ্রেম {} সেকেন্ড {} fps
+
+@ Recording to {}.
+bn {} এ রেকর্ড হচ্ছে।
+
+@ Completed demo
+bn ডেমো সম্পন্ন
+
+@ Can't record during demo playback
+bn ডেমো চলার সময় রেকর্ড করা যাবে না
+
+@ Relative pathnames are not allowed.
+bn আপেক্ষিক পাথ অনুমোদিত নয়।
+
+@ Can't record - try again when connected
+bn রেকর্ড করা যাবে না - সংযুক্ত হলে আবার চেষ্টা করুন
+
+@ {} demo(s) in loop
+bn লুপে {}টি ডেমো
+
+@ Not recording a demo.
+bn কোনো ডেমো রেকর্ড হচ্ছে না।
+
+@ {} joined on a gamepad
+bn {} গেমপ্যাডে যোগ দিয়েছে
+
+@ goggles: needs a game started with Add-ons and Goggles enabled
+bn goggles: অ্যাড-অন ও গগলস চালু করে শুরু করা গেম দরকার
+
+@ equip: needs a game started with Add-ons and Goggles enabled
+bn equip: অ্যাড-অন ও গগলস চালু করে শুরু করা গেম দরকার
+
+@ UDP listening on port {}
+bn UDP পোর্ট {} এ শুনছে
+
+@ UDP bind on port {} failed: {}
+bn পোর্ট {} এ UDP বাইন্ড ব্যর্থ: {}
+
+@ Connection accepted by {}
+bn {} সংযোগ গ্রহণ করেছে
+
+@ Connection failed: {}
+bn সংযোগ ব্যর্থ: {}
+
+@ Couldn't resolve {}
+bn {} রিজলভ করা যায়নি
+
+@ Connecting to {}...
+bn {} এর সাথে সংযোগ হচ্ছে...
+
+@ Connecting to QuakeWorld server {}...
+bn QuakeWorld সার্ভার {} এর সাথে সংযোগ হচ্ছে...
+
+@ Disconnected: {}
+bn সংযোগ বিচ্ছিন্ন: {}
+
+@ Server disconnected
+bn সার্ভার সংযোগ বিচ্ছিন্ন করেছে
+
+@ Client {} connected
+bn ক্লায়েন্ট {} সংযুক্ত হয়েছে
+
+@ Client {} timed out
+bn ক্লায়েন্ট {} এর সময় শেষ
+
+@ Couldn't spawn server {}: {}
+bn সার্ভার {} চালু করা যায়নি: {}
+
+@ maxplayers can not be changed while a server is running.
+bn সার্ভার চলার সময় maxplayers বদলানো যায় না।
+
+@ You can't kick yourself!
+bn আপনি নিজেকে কিক করতে পারবেন না!
+
+@ Only the server may changelevel
+bn শুধু সার্ভার changelevel করতে পারে
+
+@ {} renamed to {}
+bn {} এর নতুন নাম {}

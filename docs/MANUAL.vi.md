@@ -32,7 +32,9 @@ Mạch, Na Uy, Hà Lan, Hy Lạp, Hungary, Romania, Bồ Đào Nha (Bồ Đào N
 Brazil), Nhật, Hàn, Trung (Giản thể hoặc Phồn thể), Thổ Nhĩ Kỳ, Indonesia,
 Mã Lai, Filipino, Việt, Serbia, Litva, Latvia, Estonia, Malta, Albania,
 Armenia, Gruzia, Iceland, Ireland, Wales, Basque, Catalan, Galicia, Latinh,
-Esperanto, Belarus, Macedonia, Slovenia hoặc Swahili.
+Esperanto, Belarus, Macedonia, Slovenia, Swahili, Ả Rập, Do Thái, Ba Tư,
+Urdu, Hindi, Marathi, Bengal, Punjab, Gujarat, Tamil, Telugu, Thái, Khmer,
+Amhara hoặc Quảng Đông.
 **Hệ thống** theo ngôn ngữ máy tính của bạn. Văn bản trò chơi riêng của
 bản phát hành lại 2021 chỉ được dịch sang tiếng Pháp, Đức, Ý, Tây Ban Nha
 và Nga; các ngôn ngữ khác hiển thị nó bằng tiếng Anh. Với các ngôn ngữ khác

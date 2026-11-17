@@ -33,8 +33,10 @@ portugalčina (Portugalsko alebo Brazília), japončina, kórejčina, čínštin
 (zjednodušená alebo tradičná), turečtina, indonézština, malajčina, filipínčina,
 vietnamčina, srbčina, litovčina, lotyština, estónčina, maltčina, albánčina,
 arménčina, gruzínčina, islandčina, írčina, waleština, baskičtina, katalánčina,
-galícijčina, latinčina, esperanto, bieloruština, macedónčina, slovinčina alebo
-swahilčina.
+galícijčina, latinčina, esperanto, bieloruština, macedónčina, slovinčina,
+swahilčina, arabčina, hebrejčina, perzština, urdčina, hindčina, maráthčina,
+bengálčina, pandžábčina, gudžarátčina, tamilčina, telugčina, thajčina,
+khmérčina, amharčina alebo kantončina.
 **Systém** sa riadi jazykom vášho počítača. Vlastné herné texty reedície
 2021 sú preložené iba do francúzštiny, nemčiny, taliančiny, španielčiny a
 ruštiny; ostatné jazyky ich zobrazujú v angličtine. V iných jazykoch ako v
