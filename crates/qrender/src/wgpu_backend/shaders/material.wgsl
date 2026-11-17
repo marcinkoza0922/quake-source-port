@@ -126,7 +126,8 @@ fn caustic_tex(q: vec2<f32>, t: f32) -> f32 {
 }
 // du.params: x alpha test, y has fullbright, z unlit (fullbright material); du.color.x alpha
 @fragment fn fs_world(i: WorldOut) -> @location(0) vec4<f32> {
-    let size = vec2<f32>(textureDimensions(t0));
+    // du.extra.xy: miptex size (texel coords' unit); external replacements may differ
+    let size = select(vec2<f32>(textureDimensions(t0)), du.extra.xy, du.extra.x > 0.0);
     let uv = i.st / size;
     // ironwail world shader DITHER levels: 1 = softemu coarse, 2 = banded lightmap
     let dither = fr.softf.x;

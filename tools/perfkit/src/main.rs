@@ -9,6 +9,7 @@
 //!        perfkit settings [ultra|ultra-fte]
 //!        perfkit record [-only a,b] [-verify] ... (see `src/record_cmd.rs`)
 //!        perfkit stills [-only view,view] ... (see `src/stills_cmd.rs`)
+//!        perfkit partinfo [-samples N] ... (see `src/partinfo_cmd.rs`)
 //!
 //! `settings` prints Part 1's settings table (`perfkit::settings`) as
 //! Markdown. `-profile` pins those settings in calibration runs; without it
@@ -21,6 +22,7 @@
 //! once per round) so drift such as heat spreads evenly; one discarded
 //! warm-up run per engine fills shader caches first.
 
+mod partinfo_cmd;
 mod record_cmd;
 mod stills_cmd;
 mod stills_html;
@@ -282,10 +284,11 @@ fn main() {
         Some("calibrate") => calibrate(&parse_args(&args[1..])),
         Some("record") => record_cmd::run(&args[1..]),
         Some("stills") => stills_cmd::run(&args[1..]),
+        Some("partinfo") => partinfo_cmd::run(&args[1..]),
         Some("settings") => {
             let p = args.get(1).map_or(Some(Profile::Ultra), |s| Profile::parse(s));
             print!("{}", settings::markdown(p.unwrap_or_else(|| die("profile is ultra or ultra-fte"))));
         }
-        _ => die("usage: perfkit calibrate|settings|record|stills [options] (see tools/perfkit/src/main.rs)"),
+        _ => die("usage: perfkit calibrate|settings|record|stills|partinfo [options] (see tools/perfkit/src/main.rs)"),
     }
 }

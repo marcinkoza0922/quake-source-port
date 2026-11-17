@@ -7,9 +7,10 @@ use std::sync::Arc;
 use qclient::ClientState;
 use qcore::fs::Fs;
 use qformats::{Bsp, Mdl, Spr, parse_entities};
-use qrender::{Fog, ModelId, Renderer};
+use qrender::{Fog, LevelBsp, ModelId, Renderer};
 use qsound::{Sfx, SoundSystem};
 
+mod external_textures;
 mod md3;
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
@@ -110,8 +111,9 @@ impl Level {
             match Bsp::parse(&d) {
                 Ok(b) => {
                     let lit = load_lit(fs, name, &b, colored);
+                    let ext = external_textures::load(fs, name, &b, false);
                     brush_names.push(name.clone());
-                    brushes.push((b, lit));
+                    brushes.push((b, lit, ext));
                 }
                 Err(e) => print(&format!("{name}: {e}\n")),
             }
@@ -119,8 +121,11 @@ impl Level {
         let mut brush_models = HashMap::new();
         if let Some(b) = &bsp {
             let lit = load_lit(fs, &world, b, colored);
-            let refs: Vec<_> = brushes.iter().map(|(b, l)| (b, l.as_deref())).collect();
-            match r.load_level(b, lit.as_deref(), &refs) {
+            let ext = external_textures::load(fs, &world, b, true);
+            let level = LevelBsp { bsp: b, lit: lit.as_deref(), external: &ext };
+            let refs: Vec<_> =
+                brushes.iter().map(|(b, l, e)| LevelBsp { bsp: b, lit: l.as_deref(), external: e }).collect();
+            match r.load_level(level, &refs) {
                 Ok((s, ext)) => {
                     subs = s;
                     brush_models = brush_names.into_iter().zip(ext).collect();

@@ -10,7 +10,8 @@ layout(location = 0) out vec4 o_color;
 void main() {
     if (dot(fr.portal_clip.xyz, i_wpos) + fr.portal_clip.w < 0.0) discard;
     uvec4 m = materials[i_mat];
-    vec2 size = vec2(textureSize(textures[nonuniformEXT(m.x)], 0));
+    // texel coords are in miptex units; an external replacement may differ in size
+    vec2 size = m.w != 0u ? vec2(m.w & 0xffffu, m.w >> 16) : vec2(textureSize(textures[nonuniformEXT(m.x)], 0));
     vec2 uv = i_st / size;
     // ironwail world shader DITHER levels: 1 = softemu coarse, 2 = banded lightmap
     uint dither = fr.softf.x;

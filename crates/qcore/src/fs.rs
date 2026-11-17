@@ -196,6 +196,12 @@ impl Fs {
         if c >= m { self.open(companion) } else { None }
     }
 
+    /// Game dir index `path` would be read from (higher = higher priority,
+    /// like vkQuake's `path_id`), or None when it doesn't exist.
+    pub fn priority(&self, path: &str) -> Option<usize> {
+        self.find_path(&path.replace('\\', "/")).map(|sp| sp.game)
+    }
+
     /// COM_LoadFile: first match from the highest-priority search path.
     pub fn open(&self, path: &str) -> Option<Vec<u8>> {
         let path = path.replace('\\', "/");

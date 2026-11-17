@@ -51,6 +51,9 @@ pub const SCENES: &[Scene] = &[
     spin("spin-sepulcher-fte", "ad", "ad_sepulcher", true),
     spin("spin-tears", "ad", "ad_tears", false),
     Scene { name: "combat-e1m3", game: "id1", map: "e1m3", script: Script::Combat, secs: 120, fte: false },
+    // The FTE suite's combat (V6): AD's effectinfo explosions, blood and
+    // trails; the most monsters near a spawn of any AD map, no sky rain.
+    Scene { name: "combat-grendel-fte", game: "ad", map: "ad_grendel", script: Script::Combat, secs: 120, fte: true },
 ];
 
 pub fn find(name: &str) -> Option<&'static Scene> {
@@ -59,11 +62,16 @@ pub fn find(name: &str) -> Option<&'static Scene> {
 
 /// The scene's console commands after `+record`, as `+cmd` arguments.
 pub fn script_args(s: &Scene) -> Vec<String> {
-    let mut v: Vec<String> = vec!["+god".into()];
+    // Commands right after `+record` run before the player spawns: a bare
+    // `+god` was ignored (AD's combat recording died to its own rockets).
+    let mut v: Vec<String> = vec!["+delay 0.5 god".into()];
     match s.script {
         Script::Spin => v.extend(["+cl_yawspeed 30".into(), "+\"+right\"".into()]),
         Script::Combat => {
-            v.extend(["+impulse 9", "+cl_yawspeed 40", "+\"+right\"", "+impulse 7", "+\"+attack\""].map(String::from));
+            // `impulse 9` before the spawn is lost too, and QuakeC sees one
+            // impulse per frame, so the rocket launcher waited until the
+            // 20 s refill and the 40 s switch: 40 s of shotgun.
+            v.extend(["+delay 0.5 impulse 9", "+cl_yawspeed 40", "+\"+right\"", "+delay 1 impulse 7", "+\"+attack\""].map(String::from));
             let third = s.secs / 3;
             v.push(format!("+delay {third} impulse 5"));
             v.push(format!("+delay {} impulse 3", 2 * third));
@@ -153,9 +161,12 @@ mod tests {
         let s = find("combat-e1m3").unwrap();
         let a = record_args(s, Path::new("/sb/base")).join(" ");
         assert!(a.contains("-headless") && a.contains("+sv_autosave 0") && a.contains("-fixedstep 250"), "{a}");
-        assert!(a.contains("+skill 3 +record perfkit_combat-e1m3 e1m3 +god"), "{a}");
+        assert!(a.contains("+skill 3 +record perfkit_combat-e1m3 e1m3 +delay 0.5 god"), "{a}");
         assert!(a.ends_with("+delay 120 stop"), "{a}");
         assert!(a.contains("+delay 40 impulse 5") && a.contains("+delay 80 impulse 3"));
+        assert!(a.contains("+delay 0.5 impulse 9") && a.contains("+delay 1 impulse 7"), "{a}");
+        let g = record_args(find("combat-grendel-fte").unwrap(), Path::new("/sb")).join(" ");
+        assert!(g.contains("+sv_fteparticles 1") && g.contains("+skill 3 +record perfkit_combat-grendel-fte ad_grendel"), "{g}");
         let fte = record_args(find("spin-sepulcher-fte").unwrap(), Path::new("/sb")).join(" ");
         assert!(fte.contains("+sv_fteparticles 1 +r_fteparticles 1") && !fte.contains("+skill"));
         assert!(a.contains("+sv_fteparticles 0"));

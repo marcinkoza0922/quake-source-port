@@ -33,25 +33,29 @@ Done:
 - R5: `perfkit stills`, with all nine parity views within the band.
 - Engine fixes R5 found:
   - water alpha follows the map and `r_wateralpha` (default now 1);
-  - no startup menu over a command-line demo.
+  - no startup menu over a command-line demo;
+  - external world textures (`textures/[<map>/]<name>`) load like the
+    references' (V5, ad_tears' waterfall).
+- V3: `perfkit partinfo`. The FTE sepulcher scene is like for like
+  (+0.1% particles); id1's combat had no FTE particles, so V6 replaced
+  it in the FTE suite with `combat-grendel-fte` (like for like, −0.1%).
+- Demo set re-recorded (`56238f2-dirty`, all eight scenes verified in all
+  three engines), with the combat script fixed: `god` and the first
+  weapons used to be sent before the player spawned.
 - Tooling fixes R5 found: the sandbox's `quake.rc` without `menu_main`,
   and a run's own `+cvar` replacing the base one.
 
 Next, in order:
 
-1. **Rerun qbench** (`target/release/qbench`, about 70 min) on the fixed
-   engine. Re-record the demo set first if engine changes since `e53154d`
-   matter (`perfkit record -verify`). Replace VANILLA.md's Results table
-   and re-check V1/V2 against the new numbers.
-2. **V3**: compare `r_partinfo` particle counts between ours and vkQuake
-   on the FTE scenes before treating the FTE numbers as like-for-like.
-3. **V5**: why ad_tears' waterfall looks whiter in ours than in the
-   references.
-4. **V1/V2** (if they hold after the rerun): classic-particle CPU cost on
+1. **Rerun qbench** (`target/release/qbench`, about 70 min) on the new
+   demo set. Replace VANILLA.md's Results table and re-check V1/V2
+   against the new numbers.
+2. **V7**: why ours keeps more decals than vkQuake in the FTE combat.
+3. **V1/V2** (if they hold after the rerun): classic-particle CPU cost on
    ad_sepulcher at 540p; the FTE cold-start hitch.
-5. **R6**: qprof → Part 2 (ADDITIONS.md, steps A0–A5), including pinning
+4. **R6**: qprof → Part 2 (ADDITIONS.md, steps A0–A5), including pinning
    `r_enhancedfx` in its baseline.
-6. **R7**, if A0 shows portal and gel state replays from demos; then
+5. **R7**, if A0 shows portal and gel state replays from demos; then
    **R8**, the docs pass.
 
 ## Resolutions
@@ -181,7 +185,7 @@ scene list, runner, baselines, report schema) goes in a small library crate
   hitches; `compare_qbench` (qmcp) reads both report formats, keys Part 1
   cells by scene/profile/engine/resolution, and reports p99 change and
   machine differences. The r_partinfo particle-count check between ours
-  and vkQuake (FTE suite) is still manual. The first full run took about
+  and vkQuake (FTE suite) is `perfkit partinfo` (V3). The first full run took about
   70 minutes and covered 46 cells with no errors. We lead the fastest
   reference in every main-suite cell (+17% to +47%) except
   `spin-sepulcher` at 540p (−2%, within noise), and our p99 is the lowest

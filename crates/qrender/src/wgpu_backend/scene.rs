@@ -157,7 +157,7 @@ pub(super) fn world_cmds(
         }
         wr.buckets[t].clear();
         let count = lists.world_idx.len() as u32 - first;
-        let [base, fb, flags] = wr.materials[t];
+        let [base, fb, flags, size] = wr.materials[t];
         let (pipe, alpha) = match wr.kinds[t] {
             TextureKind::Sky => (Pipe::Sky, 1.0),
             TextureKind::Liquid => {
@@ -176,6 +176,9 @@ pub(super) fn world_cmds(
                 // liquid kind (1 water, 2 lava, 3 slime, 4 tele) for fs_water
                 if pipe == Pipe::Water || pipe == Pipe::WaterAlpha { (flags & 0xf) as f32 } else { 0.0 },
             ],
+            // fs_world: miptex size, which texel coords are in (an external
+            // replacement texture may be larger)
+            extra: [(size & 0xffff) as f32, (size >> 16) as f32, 0.0, 0.0],
             ..Default::default()
         });
         let cmd = Cmd { pipe, src: Src::World, mat: [base, fb, NO_TEX], first, count, base_vertex: 0, du, viewmodel: false };

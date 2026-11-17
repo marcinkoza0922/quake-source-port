@@ -4,6 +4,9 @@ use qformats::bsp::{MipTex, TextureKind};
 use qformats::md3::Md3Surface;
 use qformats::mdl::Mdl;
 
+mod external;
+pub use external::{ExternalTexture, LevelBsp, packed_size, world_texture_images};
+
 pub type Palette = [[u8; 3]; 256];
 
 pub fn is_fullbright(i: u8) -> bool {

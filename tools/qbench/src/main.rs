@@ -8,9 +8,9 @@
 //! Plays the demo set recorded by `perfkit record` (target/perf/demos/latest)
 //! through the perfkit runner:
 //! - `main`: six scenes, profile `ultra` (classic particles), all engines;
-//! - `fte`: `spin-sepulcher-fte` (ours and vkQuake play the `.qsd` with
-//!   AD's FTE particles, ironwail the plain `.dem`) and `combat-e1m3`
-//!   (ours and vkQuake), profile `ultra-fte`.
+//! - `fte`: `spin-sepulcher-fte` and `combat-grendel-fte` (ours and vkQuake
+//!   play the `.qsd` with AD's FTE particles, ironwail the plain `.dem`),
+//!   profile `ultra-fte`.
 //!
 //! Resolutions: 960×540 in a plain window (CPU-bound) and 3840×2160 inside
 //! gamescope scaled to `-output` (GPU-bound). Per scene and engine: a
@@ -144,8 +144,9 @@ fn cases(o: &Opts) -> Vec<Case> {
     }
     if o.suites.contains(&"fte") {
         v.push(Case { suite: "fte", scene: scene("spin-sepulcher-fte"), profile: Profile::UltraFte, engines: Engine::ALL.to_vec() });
-        // ironwail would repeat its main-suite run: it has no FTE particles.
-        v.push(Case { suite: "fte", scene: scene("combat-e1m3"), profile: Profile::UltraFte, engines: vec![Engine::Ours, Engine::VkQuake] });
+        // Not combat-e1m3: `r_particledesc classic` gives id1 no FTE
+        // effects, so it only repeated the main-suite cell (V3/V6).
+        v.push(Case { suite: "fte", scene: scene("combat-grendel-fte"), profile: Profile::UltraFte, engines: Engine::ALL.to_vec() });
     }
     v.retain(|c| o.only.is_empty() || o.only.iter().any(|n| n == c.scene.name));
     for c in &mut v {

@@ -80,15 +80,20 @@ records the catalogue in `tools/perfkit/src/scenes.rs` into
 | `spin-sepulcher-fte` | ad ad_sepulcher | 240 | huge | the same with FTE: 1703 decorations, point particles (FTE suite) |
 | `spin-tears` | ad ad_tears | 240 | huge | 217k BSP nodes, PVS/culling |
 | `combat-e1m3` | id1 e1m3 | 120 | small | skill 3; rockets, explosions, gibs, dynamic lights, many md5 models on screen |
+| `combat-grendel-fte` | ad ad_grendel | 120 | medium | the same fight with FTE: AD's `effectinfo` rocket trails, explosions, blood and item effects (FTE suite) |
 
 How they're recorded: our engine headless in the sandbox (`XDG_DATA_HOME`
 there, `+sv_autosave 0`, 320×240, `-fixedstep 250`), so nothing outside
-`target/` is touched; all seven take about 4 minutes. The server ticks at
+`target/` is touched; all eight take about 5 minutes. The server ticks at
 72 Hz, which gives ~62.5 demo frames per game second whatever the step:
 ~15000 frames per spin, ~7500 for combat. Spins are qbench's script (god,
 30°/s spin at the spawn point); combat is qprof's (god, `impulse 9`
 refilled every 20 s, 40°/s spin firing rockets → super nailgun → super
-shotgun). `sv_fteparticles` and `r_fteparticles` are pinned while
+shotgun). `god` and the first `impulse 9` wait half a second and the
+rocket launcher one second: sent with `+record` they ran before the
+player spawned, so until the 2026-11-17 set `god` never took (AD's combat
+player killed itself) and combat started with the shotgun ("No weapon")
+until the 40 s switch. `sv_fteparticles` and `r_fteparticles` are pinned while
 recording: the *server* cvar decides whether AD sees FTE support. Our
 engine writes a plain `.dem` every engine plays and, when that conversion
 drops FTE/DP particle messages, keeps the original as `.qsd`; in the FTE
@@ -113,12 +118,14 @@ particles. So there are two comparisons:
   (recorded without FTE, as ironwail would see AD), the FTE suite
   `spin-sepulcher-fte`, and every engine plays back the same entities.
 - **FTE, ours and vkQuake:** `spin-sepulcher-fte` (AD's sky rain from
-  `_texpart_*` emitters) and `combat-e1m3`, both with `r_fteparticles 1`,
-  `r_particledesc classic`. Before comparing, check with `r_partinfo` (both
+  `_texpart_*` emitters) and `combat-grendel-fte` (AD's `effectinfo`
+  combat effects), both from their `.qsd`, with `r_fteparticles 1`,
+  `r_particledesc classic`. id1 maps get no FTE effects under
+  `r_particledesc classic` (V3), so `combat-e1m3` stays classic only. Before comparing, check with `r_partinfo` (both
   engines have it) that live particle, beam and decal counts are within a
   few percent of each other. Otherwise the workloads differ and the fps
-  comparison is meaningless. ironwail is listed as "classic fallback, not
-  comparable".
+  comparison is meaningless. `perfkit partinfo` does this (V3). ironwail
+  is listed as "classic fallback, not comparable".
 
 If the combat demo turns out too light to stress particles, record a
 denser one (more monsters, more explosions) in a vanilla map rather than
@@ -198,17 +205,42 @@ From the first baseline (Results, 2026-11-17):
   pipelines or textures created on first use; find out and create them at
   load. `combat-e1m3`'s worst cold frame (6.5 ms) is also twice the
   references'.
-- **V3**: the r_partinfo particle-count check (Particle suite) is still to
-  do before the FTE numbers count as a like-for-like comparison.
+- **V3 — done 2026-11-17.** `perfkit partinfo` (DESIGN.md, Tooling)
+  stuffs `r_partinfo` into 12 blocks of each FTE-suite demo and timedemos
+  it in ours and vkQuake. `spin-sepulcher-fte` is like for like: summed
+  live particles ours 428978, vkQuake 428354 (+0.1%), every sample within
+  0.6%; every AD `effectinfo` type matches exactly, only the rain splashes
+  (+3.0%) and lit sky rain (+2.2%) differ; decals agree within sampling
+  noise (265–528 per sample in both). `combat-e1m3` has **no** FTE
+  particles in either engine: `r_particledesc classic` loads no scripts,
+  so id1's effects stay classic, and its `ultra-fte` cell measures the
+  same thing as the main-suite combat cell (vkQuake 861 fps in both; ours
+  4763 vs 4796). See V6.
+- **V6 — done 2026-11-17.** The FTE suite's combat scene is now
+  `combat-grendel-fte`: ad_grendel (most monsters near the spawn of any
+  AD map, no sky rain) recorded with `sv_fteparticles 1`. `perfkit
+  partinfo`: like for like, summed particles ours 82990, vkQuake 83063
+  (−0.1%), every sample within 0.2%; rocket trails −2%, every other type
+  exact. `-verify` (one run, 540p): ours 2240 fps, vkQuake 714 (ironwail
+  3204 on the plain `.dem`), against 4847 / 857 on `combat-e1m3`. The
+  re-record also fixed the combat script (Scenes).
+- **V7**: decals on `combat-grendel-fte`: from about 40 s in, ours holds
+  ~110 live against vkQuake's ~70 (summed over the samples 2134 vs 1912,
+  +12%; the first three samples agree). Small next to ~7000 particles, but
+  find out whether lifetime, fade or the decal cap differs.
 - **V4**: the first results below are void. R5 found that ours drew its
   main menu over every `+timedemo` (the startup menu opened because a demo
   isn't a running server), and that AD's `quake.rc` runs `menu_main` after
   `stuffcmds`, which put AD's menu over every AD timedemo in all three
   engines. Both are fixed (`src/host/frame.rs`; the sandbox's `quake.rc`
   copy). Rerun qbench before acting on V1/V2.
-- **V5**: ad_tears' waterfall looks whiter and more streaky in ours than
-  the references' blue glow (`tears-waterfall`, DSSIM 0.019 against a
-  0.0135 band, within the limit). Find out which texture or alpha differs.
+- **V5 — done 2026-11-17.** ad_tears' waterfall looked whiter and more
+  streaky in ours than the references' blue glow (DSSIM 0.019 against
+  0.0135). AD ships 32-bit `textures/+Nbmk_wfall01*.tga` replacements,
+  which both references load for every world texture (Mod_LoadTextures);
+  ours drew the 8-bit miptex and its fullbright streaks. Ours now loads
+  external world textures the same way (DESIGN.md, Renderer: Loading),
+  which also moved `sepulcher-start` closer to both references.
 
 ## Results
 
@@ -256,20 +288,24 @@ They are not comparable with these.
 
 ### Parity stills
 
-**2026-11-17**, after the water fix (`r_wateralpha`, see DESIGN.md).
-DSSIM, 1920×1080, `ultra` (`ultra-fte` for the FTE view), vsync on:
+**2026-11-17**, after the water fix (`r_wateralpha`, see DESIGN.md) and
+external world textures (V5). DSSIM, 1920×1080, `ultra` (`ultra-fte` for
+the FTE view), vsync on:
 
 | view | ours↔ironwail | ours↔vkQuake | ironwail↔vkQuake | verdict |
 |---|--:|--:|--:|---|
 | e1m1-start | 0.0024 | 0.0012 | 0.0023 | ok |
 | e1m1-back | 0.0016 | 0.0006 | 0.0016 | ok |
-| e1m1-grunts | 0.0036 | 0.0045 | 0.0030 | ok |
-| e2m2-start | 0.0031 | 0.0023 | 0.0023 | ok |
+| e1m1-grunts | 0.0036 | 0.0044 | 0.0030 | ok |
+| e2m2-start | 0.0030 | 0.0024 | 0.0023 | ok |
 | mg1-start | 0.0079 | 0.0053 | 0.0070 | ok |
 | mg1-back | 0.0101 | 0.0123 | 0.0093 | ok |
-| sepulcher-start | 0.0092 | 0.0131 | 0.0079 | ok |
-| tears-waterfall | 0.0186 | 0.0185 | 0.0135 | ok (V5) |
-| sepulcher-fte-start | 0.0115 | 0.0162 | 0.0117 | FTE, no verdict |
+| sepulcher-start | 0.0075 | 0.0114 | 0.0079 | ok |
+| tears-waterfall | 0.0137 | 0.0136 | 0.0136 | ok |
+| sepulcher-fte-start | 0.0119 | 0.0167 | 0.0117 | FTE, no verdict |
+
+Before external textures, `sepulcher-start` was 0.0092 / 0.0131 and
+`tears-waterfall` 0.0186 / 0.0185.
 
 Before the fix, ours drew vanilla water opaque. ironwail and vkQuake
 take the alpha from the map's `wateralpha` key, otherwise `r_wateralpha`
