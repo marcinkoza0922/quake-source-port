@@ -80,8 +80,19 @@ pub struct RunResult {
 static RUN_ID: std::sync::atomic::AtomicU32 = std::sync::atomic::AtomicU32::new(0);
 
 impl RunSpec<'_> {
-    /// The full argv (program first); `cfg` names the pin cfg to `exec`.
-    pub fn argv(&self, cfg: Option<&str>) -> Vec<String> {
+    /// The run's cfg: base lines, pins, then the timedemo itself. The
+    /// references keep only 256 characters of their command line
+    /// (`CMDLINE_LENGTH`), which cut the demo name off the end, so only
+    /// `vid_*` settings and the `+exec` stay there.
+    pub fn cfg_lines(&self) -> Vec<String> {
+        let mut v = self.engine.base_cfg();
+        v.extend(self.cfg.iter().cloned());
+        v.push(format!("timedemo {}", self.timedemo));
+        v
+    }
+
+    /// The full argv (program first); `cfg` names the run's cfg to `exec`.
+    pub fn argv(&self, cfg: &str) -> Vec<String> {
         let (w, h) = (self.width.to_string(), self.height.to_string());
         let mut v: Vec<String> = Vec::new();
         if let Display::Gamescope { out_w, out_h } = self.display {
@@ -94,10 +105,7 @@ impl RunSpec<'_> {
         v.extend(["-basedir", ".", "-game", self.game, "-window", "-width", &w, "-height", &h].map(String::from));
         v.extend(self.engine.base_args());
         v.extend(self.args.iter().cloned());
-        if let Some(c) = cfg {
-            v.extend(["+exec".into(), c.into()]);
-        }
-        v.extend(["+timedemo".into(), self.timedemo.into()]);
+        v.extend(["+exec".into(), cfg.into()]);
         v
     }
 }
@@ -107,14 +115,13 @@ pub fn run(spec: &RunSpec) -> Result<RunResult, String> {
     std::fs::create_dir_all(spec.out).map_err(|e| format!("{}: {e}", spec.out.display()))?;
     let id = RUN_ID.fetch_add(1, std::sync::atomic::Ordering::Relaxed);
     let control = format!("perfkit-{}-{id}", std::process::id());
-    let cfg_name = format!("perfkit/run-{}-{id}.cfg", std::process::id());
+    // Short: the references count every command-line character (256 max).
+    let cfg_name = format!("perfkit/r{id}.cfg");
     let cfg_path = spec.base.join(spec.game).join(&cfg_name);
-    if !spec.cfg.is_empty() {
-        let text = spec.cfg.join("\n") + "\n";
-        std::fs::write(&cfg_path, &text).map_err(|e| format!("{}: {e}", cfg_path.display()))?;
-        let _ = std::fs::write(spec.out.join("pins.cfg"), text);
-    }
-    let argv = spec.argv((!spec.cfg.is_empty()).then_some(cfg_name.as_str()));
+    let text = spec.cfg_lines().join("\n") + "\n";
+    std::fs::write(&cfg_path, &text).map_err(|e| format!("{}: {e}", cfg_path.display()))?;
+    let _ = std::fs::write(spec.out.join("run.cfg"), text);
+    let argv = spec.argv(&cfg_name);
     let res = run_argv(spec, &argv, &control);
     let _ = std::fs::remove_file(&cfg_path);
     res
@@ -161,7 +168,12 @@ fn run_argv(spec: &RunSpec, argv: &[String], control: &str) -> Result<RunResult,
             Ok(line) => {
                 let result = crate::engine::parse_fps(&line);
                 let playing = line.contains("Playing demo from");
+                let fatal = is_fatal(&line);
                 console.push(line);
+                if fatal {
+                    // The engines drop to the menu and never quit: fail now.
+                    break Err(format!("engine error: {}", console.last().map_or("", |l| l.trim())));
+                }
                 if playing && spec.mangohud && ctl.is_none() {
                     match mangohud::Control::connect(control, Duration::from_secs(5)).and_then(|mut c| c.start_logging().map(|_| c)) {
                         Ok(c) => ctl = Some(c),
@@ -202,6 +214,14 @@ fn run_argv(spec: &RunSpec, argv: &[String], control: &str) -> Result<RunResult,
     Ok(RunResult { frames, secs, fps, frame_ms })
 }
 
+/// Console lines meaning the demo won't play: a missing file, a host error
+/// or a protocol the engine can't parse.
+fn is_fatal(line: &str) -> bool {
+    const PATTERNS: [&str; 6] =
+        ["couldn't open", "Host_Error", "ERROR:", "Illegible server message", "Bad server message", "CL_ParseServerMessage"];
+    PATTERNS.iter().any(|p| line.contains(p))
+}
+
 /// Pinned cvars the engine answered with `Unknown command "<name>"`: the
 /// binary differs from the source the settings table was checked against.
 fn rejected_pins(spec: &RunSpec, console: &[String]) -> Vec<String> {
@@ -239,6 +259,27 @@ fn frame_log(dir: &Path, frames: u32, secs: f64) -> Result<Vec<f32>, String> {
 mod tests {
     use super::*;
 
+    /// The references keep 256 characters of their command line; the
+    /// longest one perfkit builds (vkQuake, `ultra-fte`, 4K, its real path)
+    /// must fit with room to spare.
+    #[test]
+    fn command_line_fits_the_references() {
+        let out = std::env::temp_dir();
+        for e in Engine::ALL {
+            let (args, cfg) = crate::settings::split(crate::settings::Profile::UltraFte, e);
+            let spec = RunSpec {
+                engine: e, bin: Path::new("/home/someone/Games/vkQuake/vkquake.AppImage"), base: Path::new("."),
+                user_data: None, game: "func_mapjam5", width: 3840, height: 2160,
+                display: Display::Gamescope { out_w: 2560, out_h: 1440 }, mangohud: true, args, cfg,
+                timedemo: "perfkit/spin-sepulcher-fte-full", timeout: Duration::from_secs(1), out: &out,
+            };
+            let argv = spec.argv(&format!("perfkit/r{}.cfg", u32::MAX));
+            let engine_part = argv.iter().skip_while(|a| *a != "-basedir").cloned().collect::<Vec<_>>().join(" ");
+            let len = spec.bin.display().to_string().len() + 1 + engine_part.len();
+            assert!(len < 240, "{} command line is {len} characters: {engine_part}", e.name());
+        }
+    }
+
     #[test]
     fn argv_nests_gamescope_then_mangohud() {
         let out = std::env::temp_dir();
@@ -258,18 +299,22 @@ mod tests {
             timeout: Duration::from_secs(1),
             out: &out,
         };
-        let a = spec.argv(Some("perfkit/run.cfg")).join(" ");
+        let a = spec.argv("perfkit/r1-0.cfg").join(" ");
         assert_eq!(
             a,
             "gamescope -w 960 -h 540 -W 2560 -H 1440 -- mangohud stdbuf -oL /x/ironwail -basedir . -game ad \
-             -window -width 960 -height 540 +vid_vsync 0 +vid_fsaa 8 +exec perfkit/run.cfg +timedemo perfkit/x"
+             -window -width 960 -height 540 +vid_vsync 0 +vid_fsaa 8 +exec perfkit/r1-0.cfg"
         );
+        assert_eq!(spec.cfg_lines(), ["r_dynamic \"1\"", "timedemo perfkit/x"]);
         let plain = RunSpec { display: Display::Window, mangohud: false, engine: Engine::Ours, ..spec };
-        assert!(plain.argv(None).join(" ").starts_with("stdbuf -oL /x/ironwail"));
-        assert!(plain.argv(None).contains(&"+sv_autosave".to_string()));
-        assert!(!plain.argv(None).contains(&"+exec".to_string()));
+        assert!(plain.argv("c").join(" ").starts_with("stdbuf -oL /x/ironwail"));
+        assert_eq!(plain.cfg_lines()[0], "sv_autosave \"0\"");
         let console = ["Unknown command \"r_dynamic\"".to_string(), "Unknown command \"v_cshift\"".to_string()];
         assert_eq!(rejected_pins(&plain, &console), ["r_dynamic"]);
         assert!(rejected_pins(&plain, &console[1..]).is_empty());
+        assert!(is_fatal("ERROR: couldn't open perfkit/x.dem"));
+        assert!(is_fatal("Host_Error: CL_ParseServerMessage: Illegible server message"));
+        assert!(!is_fatal("Playing demo from perfkit/x.dem."));
+        assert!(!is_fatal("couldn't exec autoexec.cfg"));
     }
 }

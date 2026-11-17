@@ -110,9 +110,34 @@ scene list, runner, baselines, report schema) goes in a small library crate
   its old pins (MSAA off, 8× aniso; its vkQuake `r_scale` was a no-op)
   until R4 moves it onto the perfkit runner, so its numbers stay
   comparable with the history until then.
-- **R3. Demo set.** Record the Part 1 demos (VANILLA.md, Scenes) with our
-  engine into `target/perf/demos`, keyed by commit; verify each plays to
-  the end in ironwail and vkQuake before it is used.
+- **R3. Demo set — done 2026-11-17.** `perfkit record [-only a,b]
+  [-verify]` records the seven demos (VANILLA.md, Scenes) into
+  `target/perf/demos/<commit>/` in about 4 minutes, headless and fully in
+  the sandbox. `-verify` played each in all three engines (960×540, the
+  scene's profile, one run, so the fps below only show the demos are
+  sane, not a result); frame counts agree within one frame everywhere:
+
+  | demo | frames | ours | ironwail | vkQuake |
+  |---|--:|--:|--:|--:|
+  | spin-e1m1 | 14999 | 5262 | 3809 | 885 |
+  | spin-e2m2 | 14999 | 5257 | 3804 | 888 |
+  | spin-mg1 | 15000 | 3429 | 2938 | 853 |
+  | spin-sepulcher | 15001 | 3035 | 2859 | 780 |
+  | spin-sepulcher-fte | 15001 | 798 (`.qsd`) | 2942 (`.dem`) | 382 (`.qsd`) |
+  | spin-tears | 15061 | 3343 | 2509 | 798 |
+  | combat-e1m3 | 7501 | 4805 | 3574 | 861 |
+
+  Found on the way: the references keep only 256 characters of their
+  command line (`CMDLINE_LENGTH`), which cut off the demo name for
+  vkQuake, so the runner now puts everything but `vid_*` and `+exec`
+  into the run's cfg, `timedemo` included, and a test keeps the longest
+  command line under 240 characters. An engine that can't play a demo
+  drops to its menu and never quits, so console errors ("couldn't
+  open", `Host_Error`, `ERROR:`, illegible/bad server message) now fail
+  the run at once instead of after the timeout. The recording server's
+  `sv_fteparticles` (not the client's `r_fteparticles`) decides what AD
+  shows; without FTE, AD sends classic particle messages every frame
+  (`spin-sepulcher.dem` is 134 MB against 12.5 MB with FTE).
 - **R4. qbench → Part 1.** All demos × both resolutions × three engines,
   medians and percentiles, plus the particle suite and the cold-start pass.
   `report.json` gains machine info, resolution and percentiles; update the

@@ -7,6 +7,7 @@
 //!                          [-profile ultra|ultra-fte] [-timeout SECS]
 //!                          [-out DIR]
 //!        perfkit settings [ultra|ultra-fte]
+//!        perfkit record [-only a,b] [-verify] ... (see `src/record_cmd.rs`)
 //!
 //! `settings` prints Part 1's settings table (`perfkit::settings`) as
 //! Markdown. `-profile` pins those settings in calibration runs; without it
@@ -18,6 +19,8 @@
 //! Part 1/Part 2 number carries. Runs are interleaved (each configuration
 //! once per round) so drift such as heat spreads evenly; one discarded
 //! warm-up run per engine fills shader caches first.
+
+mod record_cmd;
 
 use perfkit::engine::{abs, Engine};
 use perfkit::guard::ConfigGuard;
@@ -274,10 +277,11 @@ fn main() {
     let args: Vec<String> = std::env::args().skip(1).collect();
     match args.first().map(String::as_str) {
         Some("calibrate") => calibrate(&parse_args(&args[1..])),
+        Some("record") => record_cmd::run(&args[1..]),
         Some("settings") => {
             let p = args.get(1).map_or(Some(Profile::Ultra), |s| Profile::parse(s));
             print!("{}", settings::markdown(p.unwrap_or_else(|| die("profile is ultra or ultra-fte"))));
         }
-        _ => die("usage: perfkit calibrate [options] (see tools/perfkit/src/main.rs)"),
+        _ => die("usage: perfkit calibrate|settings|record [options] (see tools/perfkit/src/main.rs)"),
     }
 }

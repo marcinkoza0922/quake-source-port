@@ -66,21 +66,34 @@ their own suite below (`ultra-fte`).
 ## Scenes
 
 Demos recorded by our engine in a vanilla (not customized) game, so the
-references can play them (step R3).
+references can play them. `perfkit record [-only a,b] [-verify]` (step R3)
+records the catalogue in `tools/perfkit/src/scenes.rs` into
+`target/perf/demos/<commit>/` with a `manifest.json`, and points
+`target/perf/demos/latest` at it.
 
-| Demo | Map | Size | What it stresses |
-|---|---|---|---|
-| `spin-e1m1` | id1 e1m1 | small | baseline, md5 grunts/dogs |
-| `spin-e2m2` | id1 e2m2 | medium | more monsters, water |
-| `spin-mg1` | mg1 start hub | medium | fog, KEX-era content |
-| `spin-sepulcher` | ad ad_sepulcher | huge | world size, 1703 decorations if FTE is on |
-| `spin-tears` | ad ad_tears | huge | 217k BSP nodes, PVS/culling |
-| `combat-e1m3` | id1 e1m3 | small | rockets, explosions, gibs, dynamic lights, many md5 models on screen |
+| Demo | Map | Game s | Size | What it stresses |
+|---|---|--:|---|---|
+| `spin-e1m1` | id1 e1m1 | 240 | small | baseline, md5 grunts/dogs |
+| `spin-e2m2` | id1 e2m2 | 240 | medium | more monsters, water |
+| `spin-mg1` | mg1 start hub | 240 | medium | fog, KEX-era content |
+| `spin-sepulcher` | ad ad_sepulcher | 240 | huge | world size; AD without FTE: no decorations, classic particle messages every frame (134 MB) |
+| `spin-sepulcher-fte` | ad ad_sepulcher | 240 | huge | the same with FTE: 1703 decorations, point particles (FTE suite) |
+| `spin-tears` | ad ad_tears | 240 | huge | 217k BSP nodes, PVS/culling |
+| `combat-e1m3` | id1 e1m3 | 120 | small | skill 3; rockets, explosions, gibs, dynamic lights, many md5 models on screen |
 
-The spin demos are qbench's existing recording (god, 30°/s spin at the
-spawn point). The combat demo comes from qprof's combat script (god,
-`impulse 9`, rockets → super nailgun → super shotgun) with `record`
-running.
+How they're recorded: our engine headless in the sandbox (`XDG_DATA_HOME`
+there, `+sv_autosave 0`, 320×240, `-fixedstep 250`), so nothing outside
+`target/` is touched; all seven take about 4 minutes. The server ticks at
+72 Hz, which gives ~62.5 demo frames per game second whatever the step:
+~15000 frames per spin, ~7500 for combat. Spins are qbench's script (god,
+30°/s spin at the spawn point); combat is qprof's (god, `impulse 9`
+refilled every 20 s, 40°/s spin firing rockets → super nailgun → super
+shotgun). `sv_fteparticles` and `r_fteparticles` are pinned while
+recording: the *server* cvar decides whether AD sees FTE support. Our
+engine writes a plain `.dem` every engine plays and, when that conversion
+drops FTE/DP particle messages, keeps the original as `.qsd`; in the FTE
+suite ours and vkQuake play the `.qsd`, ironwail the `.dem` (installed in
+the sandbox as `<scene>-full.dem` / `<scene>-plain.dem`).
 
 Timedemo playback runs no server or QuakeC. Server cost (HISTORY items 8
 and 10) is measured separately, in our engine only, with a live
@@ -96,11 +109,10 @@ particles. So there are two comparisons:
   engine that *records* decides what AD shows: AD's progs drops its 1703
   `misc_gtkmodel` decorations on ad_sepulcher when the server doesn't
   advertise FTE particles, and ours advertises them only while
-  `r_fteparticles` is on. R3 therefore records AD demos with a stated
-  `r_fteparticles` (with decorations for the FTE suite; decide for the
-  main suite) and writes it into the demo's name, and every engine then
-  plays back the same entities.
-- **FTE, ours and vkQuake:** `spin-sepulcher` (AD's sky rain from
+  `sv_fteparticles` is on. So the main suite plays `spin-sepulcher`
+  (recorded without FTE, as ironwail would see AD), the FTE suite
+  `spin-sepulcher-fte`, and every engine plays back the same entities.
+- **FTE, ours and vkQuake:** `spin-sepulcher-fte` (AD's sky rain from
   `_texpart_*` emitters) and `combat-e1m3`, both with `r_fteparticles 1`,
   `r_particledesc classic`. Before comparing, check with `r_partinfo` (both
   engines have it) that live particle, beam and decal counts are within a

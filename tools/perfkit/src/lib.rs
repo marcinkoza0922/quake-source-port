@@ -8,6 +8,7 @@
 //! - [`runner`]: one windowed timedemo, directly or inside gamescope,
 //!   optionally with a MangoHud per-frame log of exactly the demo's frames.
 //! - [`mangohud`]: the MangoHud control socket and log parsing.
+//! - [`scenes`]: Part 1's demo set and how each demo is recorded.
 //! - [`settings`]: Part 1's "vanilla ultra" pins in each engine's cvars.
 //! - [`stats`]: medians, spreads and percentiles.
 //! - [`machine`]: the test machine's description for report headers.
@@ -18,6 +19,7 @@ pub mod machine;
 pub mod mangohud;
 pub mod runner;
 pub mod sandbox;
+pub mod scenes;
 pub mod settings;
 pub mod stats;
 

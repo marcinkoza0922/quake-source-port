@@ -41,14 +41,15 @@ impl Engine {
         }
     }
 
-    /// Settings every run of this engine gets: no vsync, and for ours no
-    /// autosaves (they would rotate the user's saves).
+    /// Command-line settings every run of this engine gets: no vsync.
     pub fn base_args(self) -> Vec<String> {
-        let mut v: Vec<String> = ["+vid_vsync", "0"].map(String::from).to_vec();
-        if self == Engine::Ours {
-            v.extend(["+sv_autosave", "0"].map(String::from));
-        }
-        v
+        ["+vid_vsync", "0"].map(String::from).to_vec()
+    }
+
+    /// Console lines every run of this engine gets: for ours no autosaves
+    /// (belt and braces; its user dir is in the sandbox anyway).
+    pub fn base_cfg(self) -> Vec<String> {
+        if self == Engine::Ours { vec!["sv_autosave \"0\"".into()] } else { Vec::new() }
     }
 }
 
