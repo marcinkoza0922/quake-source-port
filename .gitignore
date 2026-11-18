@@ -7,3 +7,5 @@
 *.pk3
 /refs/
 bug-reports/
+# Project website: its own repo (marcinkoza0922/quake-source-port-website)
+/website/
