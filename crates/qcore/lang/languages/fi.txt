@@ -3046,3 +3046,12 @@ fi Vain palvelin voi käyttää changelevel-komentoa
 
 @ {} renamed to {}
 fi {} vaihtoi nimekseen {}
+
+@ From the game folder
+fi Pelikansiosta
+
+@ From ironwail
+fi ironwailista
+
+@ From the 2021 re-release
+fi Vuoden 2021 uusintajulkaisusta

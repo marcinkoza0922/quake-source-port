@@ -26,6 +26,7 @@ use page_info::*;
 mod scroll;
 mod prompt;
 mod cards;
+pub use cards::{SaveSlot, SaveSource};
 use cards::clean_title;
 use prompt::Prompt;
 mod navigation;
@@ -132,22 +133,6 @@ pub enum Action {
     Command(String),
     Sound(&'static str),
     Close,
-}
-
-/// A save shown on the Load/Save screens: file stem, preview and thumbnail.
-#[derive(Clone, Debug)]
-pub struct SaveSlot {
-    pub name: String,
-    pub info: crate::saveinfo::SaveInfo,
-    pub thumb: Option<(qrender::PicId, u32, u32)>,
-}
-
-impl SaveSlot {
-    pub fn is_autosave(&self) -> bool { is_autosave_name(&self.name) }
-}
-
-pub fn is_autosave_name(name: &str) -> bool {
-    name.strip_prefix("autosave").is_some_and(|n| !n.is_empty() && n.bytes().all(|b| b.is_ascii_digit()))
 }
 
 pub struct Menu {

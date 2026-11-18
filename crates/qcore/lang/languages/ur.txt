@@ -3046,3 +3046,12 @@ ur صرف سرور changelevel کر سکتا ہے
 
 @ {} renamed to {}
 ur {} کا نام بدل کر {} ہو گیا
+
+@ From the game folder
+ur گیم فولڈر سے
+
+@ From ironwail
+ur ironwail سے
+
+@ From the 2021 re-release
+ur 2021 کی دوبارہ ریلیز سے

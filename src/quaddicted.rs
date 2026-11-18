@@ -175,11 +175,43 @@ pub fn map_entry(install: &Install, name: &str) -> Option<String> {
 const DATA_DIRS: &[&str] = &["maps", "progs", "gfx", "sound", "music", "textures", "env", "sprites", "models", "locs", "lits", "demos"];
 const BASES: &[&str] = &["hipnotic", "rogue", "quoth"];
 
+/// The game dir a release's dependencies name: a mission pack by prefix
+/// (`quoth2pt2full_2`), else an installed dir followed by a version or `_`
+/// (`ad_v1_80p1final` -> `ad`).
+pub fn dep_base(deps: &[String], installed: &[String], own: &str) -> Option<String> {
+    let deps: Vec<String> = deps.iter().map(|d| d.to_ascii_lowercase()).collect();
+    if let Some(b) = BASES.iter().find(|b| deps.iter().any(|d| d.starts_with(*b))) {
+        return Some((*b).to_string());
+    }
+    let mut dirs: Vec<&String> = installed.iter().filter(|d| !d.eq_ignore_ascii_case("id1") && !d.eq_ignore_ascii_case(own)).collect();
+    // the longest name wins (`ad_xmas` over `ad`)
+    dirs.sort_by_key(|d| std::cmp::Reverse(d.len()));
+    dirs.into_iter()
+        .find(|dir| {
+            deps.iter().any(|d| {
+                d.strip_prefix(&dir.to_ascii_lowercase())
+                    .is_some_and(|rest| rest.is_empty() || rest.starts_with(['_', '-', 'v']) || rest.starts_with(|c: char| c.is_ascii_digit()))
+            })
+        })
+        .cloned()
+}
+
 /// Final layout: destination paths with id1/base content moved into `own`.
 /// Returns (path, zip entry) pairs and the base the own dir needs.
 pub fn plan(install: &Install, names: &[String], own: &str) -> (Vec<(String, String)>, Option<&'static str>) {
     let mut base = None;
     let mut out = Vec::new();
+    // A release that ships a base pack's own paks or progs.dat is that pack
+    // (Quoth itself): its files stay in `quoth/` for everything built on it.
+    let is_pack = |b: &str| {
+        names.iter().filter_map(|n| map_entry(install, n)).any(|d| {
+            d.strip_prefix(b).and_then(|r| r.strip_prefix('/')).is_some_and(|r| {
+                let r = r.to_ascii_lowercase();
+                r == "progs.dat" || (r.starts_with("pak") && r.ends_with(".pak") && !r.contains('/'))
+            })
+        })
+    };
+    let packs: Vec<&str> = BASES.iter().copied().filter(|b| is_pack(b)).collect();
     for n in names {
         let Some(dest) = map_entry(install, n) else { continue };
         let (first, rest) = dest.split_once('/').unwrap_or(("", dest.as_str()));
@@ -189,6 +221,8 @@ pub fn plan(install: &Install, names: &[String], own: &str) -> (Vec<(String, Str
             format!("{own}/{dest}")
         } else if first == "id1" {
             format!("{own}/{rest}")
+        } else if packs.contains(&first) {
+            dest
         } else if let Some(b) = BASES.iter().find(|b| **b == first) {
             base = Some(*b);
             format!("{own}/{rest}")
@@ -231,6 +265,17 @@ pub fn install(r: &Release, zip: &Path, basedir: &Path) -> Result<String, String
     if !missing.is_empty() {
         return Err(qcore::tr!("needs {} installed first", missing.join(", ")));
     }
+    let existed: Vec<String> = planned
+        .iter()
+        .filter_map(|(d, _)| d.split('/').next())
+        .filter(|d| basedir.join(d).is_dir())
+        .map(str::to_string)
+        .collect();
+    // a mod built on a mission pack or another mod (deps like
+    // quoth2pt2full_2, ad_v1_80p1final) needs it mounted
+    let installed: Vec<String> = qui::mods::scan(basedir).into_iter().map(|m| m.dir).collect();
+    let dep_base = dep_base(&r.deps, &installed, &own);
+    let base = base.map(str::to_string).or_else(|| dep_base.clone());
     for (dest, name) in &planned {
         let data = pack.read(name).ok_or_else(|| qcore::tr!("couldn't unpack {}", name))?;
         let path: PathBuf = basedir.join(dest);
@@ -257,7 +302,20 @@ pub fn install(r: &Release, zip: &Path, basedir: &Path) -> Result<String, String
         return Ok(own);
     }
     counts.remove(own.as_str());
-    Ok(counts.into_iter().max_by_key(|&(_, n)| n).map(|(d, _)| d.to_string()).unwrap_or(own))
+    let shown = counts.into_iter().max_by_key(|&(_, n)| n).map(|(d, _)| d.to_string()).unwrap_or(own);
+    // a game dir this release created itself (e.g. `bluemonday/`) gets its
+    // title and base too; dirs that were already there (`ad/`) are left alone
+    if let Some(b) = dep_base
+        && !existed.contains(&shown)
+        && !BASES.contains(&shown.as_str())
+        && !shown.eq_ignore_ascii_case(&b)
+        && qui::mods::is_game_dir(&basedir.join(&shown))
+        && !basedir.join(&shown).join("modinfo.txt").exists()
+    {
+        let info = format!("title \"{}\"\nbase {b}\n", r.title.replace('"', "'"));
+        std::fs::write(basedir.join(&shown).join("modinfo.txt"), info).map_err(|e| e.to_string())?;
+    }
+    Ok(shown)
 }
 
 /// `installed.txt`: one `sha256 dir` line per installed release.

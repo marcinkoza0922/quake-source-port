@@ -3046,3 +3046,12 @@ id Hanya server yang boleh changelevel
 
 @ {} renamed to {}
 id {} berganti nama menjadi {}
+
+@ From the game folder
+id Dari folder game
+
+@ From ironwail
+id Dari ironwail
+
+@ From the 2021 re-release
+id Dari rilis ulang 2021

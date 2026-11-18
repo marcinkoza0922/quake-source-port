@@ -4,13 +4,14 @@ use super::lightmap::Lightmaps;
 use super::models::Model;
 use super::textures::Sampling;
 use super::{NO_TEX, Renderer};
-use crate::{Bsp, ModelId, Result, TextureKind, convert, world};
+use crate::{Bsp, LevelBsp, ModelId, Result, TextureKind, convert, world};
 
 pub(super) struct WorldRes {
     pub(super) cpu: world::World,
     pub(super) vbuf: wgpu::Buffer,
-    /// Per BSP texture: base slot, fullbright slot, material flags.
-    pub(super) materials: Vec<[u32; 3]>,
+    /// Per BSP texture: base slot, fullbright slot, material flags, packed
+    /// miptex size (`convert::packed_size`).
+    pub(super) materials: Vec<[u32; 4]>,
     pub(super) kinds: Vec<TextureKind>,
     pub(super) submodel_ids: Vec<ModelId>,
     /// Per-texture surface buckets reused while building draws.
@@ -38,9 +39,10 @@ impl Renderer {
         self.hidden_entities.clear();
     }
 
-    fn upload_bsp_textures(&mut self, bsp: &Bsp, materials: &mut Vec<[u32; 3]>, kinds: &mut Vec<TextureKind>) -> Result<()> {
+    fn upload_bsp_textures(&mut self, lb: LevelBsp, materials: &mut Vec<[u32; 4]>, kinds: &mut Vec<TextureKind>) -> Result<()> {
         let pal = self.palette;
-        for t in &bsp.textures {
+        let bsp = lb.bsp;
+        for (ti, t) in bsp.textures.iter().enumerate() {
             let checker: Vec<u8> = (0..16 * 16).map(|i| if ((i % 16) / 8 + (i / 128)) % 2 == 0 { 0 } else { 15 }).collect();
             let fallback = qformats::bsp::MipTex {
                 name: "notexture".into(),
@@ -64,21 +66,17 @@ impl Renderer {
                 let a = self.add_texture(w, h, &[&alpha], true, Sampling::World)?;
                 self.sky_layers = [s, a];
             }
-            let (base, fb) = convert::world_texture(&pal, &t);
-            let bm: Vec<&[u8]> = base.iter().map(|m| m.as_slice()).collect();
-            let b = self.add_texture(t.width, t.height, &bm, true, Sampling::World)?;
+            let (base, fb) = convert::world_texture_images(&pal, &t, lb.external(ti));
+            let b = self.add_texture(base.width, base.height, &base.mip_refs(), true, Sampling::World)?;
             let f = match &fb {
-                Some(fb) => {
-                    let fm: Vec<&[u8]> = fb.iter().map(|m| m.as_slice()).collect();
-                    self.add_texture(t.width, t.height, &fm, true, Sampling::World)?
-                }
+                Some(fb) => self.add_texture(fb.width, fb.height, &fb.mip_refs(), true, Sampling::World)?,
                 None => NO_TEX,
             };
-            materials.push([b, f, flags]);
+            materials.push([b, f, flags, convert::packed_size(&t)]);
             kinds.push(t.kind);
         }
         if bsp.textures.is_empty() {
-            materials.push([NO_TEX, NO_TEX, 0]);
+            materials.push([NO_TEX, NO_TEX, 0, 0]);
             kinds.push(TextureKind::Normal);
         }
         Ok(())
@@ -87,27 +85,23 @@ impl Renderer {
     /// Loads a new map (frees all previous level models/textures). `lit` is a
     /// parsed `.lit` (RGB per mono sample). Returns ids for submodels `*1..`.
     pub fn load_world(&mut self, bsp: &Bsp, lit: Option<&[u8]>) -> Result<Vec<ModelId>> {
-        Ok(self.load_level(bsp, lit, &[])?.0)
+        Ok(self.load_level(LevelBsp::new(bsp, lit), &[])?.0)
     }
 
-    /// `load_world` plus external brush models (`maps/b_*.bsp`). Returns
-    /// (world submodel ids `*1..`, one id per entry of `brushes`).
-    pub fn load_level(
-        &mut self,
-        bsp: &Bsp,
-        lit: Option<&[u8]>,
-        brushes: &[(&Bsp, Option<&[u8]>)],
-    ) -> Result<(Vec<ModelId>, Vec<ModelId>)> {
+    /// `load_world` plus external brush models (`maps/b_*.bsp`) and external
+    /// replacement textures. Returns (world submodel ids `*1..`, one id per
+    /// entry of `brushes`).
+    pub fn load_level(&mut self, level: LevelBsp, brushes: &[LevelBsp]) -> Result<(Vec<ModelId>, Vec<ModelId>)> {
         self.free_level();
-        let mut cpu = world::World::build(bsp, lit);
+        let mut cpu = world::World::build(level.bsp, level.lit);
         let world_subs = cpu.submodels.len();
         let mut materials = Vec::new();
         let mut kinds = Vec::new();
-        self.upload_bsp_textures(bsp, &mut materials, &mut kinds)?;
+        self.upload_bsp_textures(level, &mut materials, &mut kinds)?;
         let mut brush_ids = Vec::new();
-        for (b, blit) in brushes {
-            let first = cpu.add_brush(b, *blit, materials.len() as u32);
-            self.upload_bsp_textures(b, &mut materials, &mut kinds)?;
+        for b in brushes {
+            let first = cpu.add_brush(b.bsp, b.lit, materials.len() as u32);
+            self.upload_bsp_textures(*b, &mut materials, &mut kinds)?;
             self.models.push(Model::Brush(first));
             brush_ids.push(ModelId(self.models.len() as u32 - 1));
         }

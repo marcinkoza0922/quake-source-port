@@ -129,6 +129,7 @@ fn register_cvars(cv: &mut Cvars) {
         ("fraglimit", "0", CVAR_NOTIFY | CVAR_SERVERINFO),
         ("timelimit", "0", CVAR_NOTIFY | CVAR_SERVERINFO),
         ("samelevel", "0", 0),
+        ("pausable", "1", 0),
         ("noexit", "0", CVAR_NOTIFY | CVAR_SERVERINFO),
         ("nomonsters", "0", 0),
         // tools/qprof stress: extra copies of every monster (horde.rs)
@@ -190,6 +191,7 @@ impl Server {
                 clients: (0..maxclients.max(1)).map(|_| Client::default()).collect(),
                 serverflags: 0.0,
                 changelevel_issued: false,
+                spawns: 0,
                 custom: false,
                 skip_entity_updates: false,
                 standard_quake,
@@ -235,6 +237,15 @@ impl Server {
 
     pub fn active(&self) -> bool {
         self.level.is_some() && self.core.sv.active
+    }
+
+    /// Host_Savegame_f's dead-player check: an active client whose edict
+    /// has no health. Unlike the client's own health stat, this lets a
+    /// dedicated server or a client still in signon save, as ironwail does.
+    pub fn any_client_dead(&self) -> bool {
+        let Some(l) = &self.level else { return false };
+        let health = self.core.sv.fields.health;
+        self.core.clients.iter().enumerate().any(|(i, c)| c.active && l.vm.ent_f(i as u32 + 1, health) <= 0.0)
     }
 
     /// Server time (`qcvm->time`).

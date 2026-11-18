@@ -3046,3 +3046,12 @@ hi केवल सर्वर ही changelevel कर सकता है
 
 @ {} renamed to {}
 hi {} का नाम बदलकर {} हुआ
+
+@ From the game folder
+hi गेम फ़ोल्डर से
+
+@ From ironwail
+hi ironwail से
+
+@ From the 2021 re-release
+hi 2021 री-रिलीज़ से

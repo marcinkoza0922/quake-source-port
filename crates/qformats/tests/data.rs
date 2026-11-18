@@ -42,7 +42,8 @@ fn game_files(game: &str) -> Vec<(String, Vec<u8>)> {
         }
     }
     if let Ok(rd) = std::fs::read_dir(dir.join("maps")) {
-        for e in rd.flatten() {
+        // map packs can add subdirectories (sources, prefabs) under maps/
+        for e in rd.flatten().filter(|e| e.path().is_file()) {
             let n = e.file_name().to_string_lossy().to_ascii_lowercase();
             out.push((format!("maps/{n}"), std::fs::read(e.path()).unwrap()));
         }
@@ -184,20 +185,24 @@ fn bsp2_present() {
 /// within the .mdl's size (so the skeleton/units were read right).
 #[test]
 fn rerelease_md5_models() {
-    let files = game_files("id1");
-    let get = |n: &str| files.iter().find(|f| f.0 == n).map(|f| f.1.as_slice());
     let mut n = 0;
-    for (name, mesh) in files.iter().filter(|f| f.0.ends_with(".md5mesh")) {
-        let stem = name.trim_end_matches(".md5mesh");
-        let m = qformats::md5::Md5::parse(mesh, get(&format!("{stem}.md5anim")))
-            .unwrap_or_else(|e| panic!("{name}: {e}"));
-        if let Some(mdl) = get(&format!("{stem}.mdl")).and_then(|d| Mdl::parse(d).ok()) {
-            // ...at least: some md5anims carry a spare frame (armor has 2 for 1)
-            assert!(m.md3.frames.len() >= mdl.frames.len(), "{name}: fewer frames than the .mdl");
-            let r = m.md3.frames.iter().map(|f| f.radius).fold(0.0, f32::max);
-            assert!(r < mdl.bounding_radius * 2.0 + 16.0, "{name}: radius {r} vs mdl {}", mdl.bounding_radius);
+    // MG3's ogre_rocket parents its root to a joint listed after it
+    for game in ["id1", "hipnotic", "rogue", "mg1", "mg3", "dopa"] {
+        let files = game_files(game);
+        let get = |n: &str| files.iter().find(|f| f.0 == n).map(|f| f.1.as_slice());
+        for (name, mesh) in files.iter().filter(|f| f.0.ends_with(".md5mesh")) {
+            let stem = name.trim_end_matches(".md5mesh");
+            let m = qformats::md5::Md5::parse(mesh, get(&format!("{stem}.md5anim")))
+                .unwrap_or_else(|e| panic!("{name}: {e}"));
+            if let Some(mdl) = get(&format!("{stem}.mdl")).and_then(|d| Mdl::parse(d).ok()) {
+                // ...at least: some md5anims carry a spare frame (armor has 2
+                // for 1), and MG3's shambler_blood.md5anim ships 2 short (94/96)
+                assert!(m.md3.frames.len() + 2 >= mdl.frames.len(), "{game}/{name}: fewer frames than the .mdl");
+                let r = m.md3.frames.iter().map(|f| f.radius).fold(0.0, f32::max);
+                assert!(r < mdl.bounding_radius * 2.0 + 16.0, "{name}: radius {r} vs mdl {}", mdl.bounding_radius);
+            }
+            n += 1;
         }
-        n += 1;
     }
     eprintln!("{n} md5 models");
 }

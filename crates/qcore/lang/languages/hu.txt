@@ -3046,3 +3046,12 @@ hu Csak a szerver válthat pályát
 
 @ {} renamed to {}
 hu {} új neve: {}
+
+@ From the game folder
+hu A játék mappájából
+
+@ From ironwail
+hu Az ironwailből
+
+@ From the 2021 re-release
+hu A 2021-es újrakiadásból

@@ -3046,3 +3046,12 @@ ga Níl ach an freastalaí in ann changelevel a úsáid
 
 @ {} renamed to {}
 ga {} athainmnithe mar {}
+
+@ From the game folder
+ga Ó fhillteán an chluiche
+
+@ From ironwail
+ga Ó ironwail
+
+@ From the 2021 re-release
+ga Ón atheisiúint 2021

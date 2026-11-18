@@ -31,7 +31,7 @@ pub fn tools() -> Vec<Value> {
         ),
         (
             "compare_qbench",
-            "Compare qbench FPS by game/map/engine/resolution. Positive frame-time change means slower. Reports missing/added cases and failed runs; threshold defaults to 5 percent.",
+            "Compare qbench FPS by scene/profile/engine/resolution (Part 1 reports; old flat reports by game/map/engine/resolution). Positive frame-time change means slower; also p99 frame-time change and which machine fields differ. Reports missing/added cases and failed runs; threshold defaults to 5 percent.",
             json!({"before":text,"after":text,"threshold_percent":{"type":"number","minimum":0}}),
             vec!["before", "after"],
         ),

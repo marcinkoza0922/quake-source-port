@@ -21,6 +21,7 @@ layout(set = 0, binding = 0, std140) uniform Frame {
     vec4 water;     // x ripple strength, y caustics strength, z ripple count, w quality (0 low, 1 high)
     vec4 portal_uv; // xy gl_FragCoord -> portal UV scale, zw valid UV clamp max
     vec4 vel_uv;    // xy scene px per vel px, zw scene max texel coords
+    vec4 wind;      // skybox wind: xyz direction (world), w loop phase
     vec4 ripples[32];   // xy centre, z liquid surface height, w start time
     vec4 ripple_amp[8]; // amplitudes, 4 per vec4
 } fr;

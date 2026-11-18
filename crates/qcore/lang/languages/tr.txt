@@ -3046,3 +3046,12 @@ tr Yalnızca sunucu changelevel kullanabilir
 
 @ {} renamed to {}
 tr {} adını {} olarak değiştirdi
+
+@ From the game folder
+tr Oyun klasöründen
+
+@ From ironwail
+tr ironwail'den
+
+@ From the 2021 re-release
+tr 2021 yeniden sürümünden

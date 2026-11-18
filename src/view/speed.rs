@@ -47,6 +47,8 @@ mod tests {
             lerp_models: false,
             lerp_move: false,
             flash: 1.0,
+            idle: crate::view::Idle::VANILLA,
+            cshift: [1.0; 4],
         };
         let lv = crate::assets::Level::default();
         let mut state = ViewState::default();

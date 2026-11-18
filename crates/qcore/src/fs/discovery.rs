@@ -8,6 +8,16 @@ pub(super) fn has_pak(dir: &Path) -> bool {
     resolve_loose(dir, "pak0.pak").is_some_and(|p| crate::vfs::is_file(&p))
 }
 
+/// A flat directory of PAKs counts as the base game only when its pak0
+/// holds the game's palette: a mod or a mapping kit unpacked next to the
+/// game data (e.g. Alkaline's dev kit, a flat `pak0.pak` with maps and
+/// models) must not win the search over the real `id1` beside it.
+fn has_base_pak(dir: &Path) -> bool {
+    resolve_loose(dir, "pak0.pak")
+        .and_then(|p| super::Pack::load_pak(&p))
+        .is_some_and(|p| p.contains("gfx/palette.lmp"))
+}
+
 /// Search directories breadth first, including at most `depth` child levels.
 /// Canonical identities prevent symlink cycles; unreadable directories are skipped.
 fn search(root: &Path, depth: usize) -> Option<PathBuf> {
@@ -22,7 +32,7 @@ fn search(root: &Path, depth: usize) -> Option<PathBuf> {
         if has_pak(&rerelease.join("id1")) {
             return Some(rerelease);
         }
-        if has_pak(&dir) || (level < depth && has_pak(&dir.join("id1"))) {
+        if has_base_pak(&dir) || (level < depth && has_pak(&dir.join("id1"))) {
             return Some(dir);
         }
         if level == depth { continue; }
@@ -50,6 +60,32 @@ fn steam_installs(steam: &Path, candidates: &mut Vec<PathBuf>) {
         candidates.push(library.join("steamapps/common/Quake/rerelease"));
         candidates.push(library.join("steamapps/common/Quake"));
     }
+}
+
+/// Folders where the 2021 re-release (KEX) keeps its saves: Windows
+/// `Saved Games\\Nightdive Studios\\Quake`, or the same inside Steam's Proton
+/// prefix (app 2310) on Linux. ironwail loads saves from there as well.
+pub fn kex_save_dirs() -> Vec<PathBuf> {
+    let mut out = Vec::new();
+    if let Some(p) = std::env::var_os("USERPROFILE") {
+        out.push(PathBuf::from(p).join("Saved Games/Nightdive Studios/Quake"));
+    }
+    if let Some(home) = std::env::var_os("HOME").map(PathBuf::from) {
+        let mut libs = Vec::new();
+        for name in [".steam/steam", ".local/share/Steam", ".var/app/com.valvesoftware.Steam/.local/share/Steam"] {
+            let mut c = Vec::new();
+            steam_installs(&home.join(name), &mut c);
+            // candidates end in steamapps/common/Quake[/rerelease]; the library is three up
+            libs.extend(c.iter().filter_map(|p| p.ancestors().nth(if p.ends_with("rerelease") { 4 } else { 3 }).map(Path::to_path_buf)));
+        }
+        libs.sort();
+        libs.dedup();
+        for lib in libs {
+            out.push(lib.join("steamapps/compatdata/2310/pfx/drive_c/users/steamuser/Saved Games/Nightdive Studios/Quake"));
+        }
+    }
+    out.retain(|d| d.is_dir());
+    out
 }
 
 pub(super) fn discover() -> PathBuf {
@@ -94,9 +130,27 @@ mod tests {
         std::fs::create_dir_all(&local).unwrap();
         std::fs::write(local.join("PAK0.PAK"), []).unwrap();
         assert_eq!(search(&root, 2), Some(root.join("one")));
-        std::fs::write(root.join("pak0.pak"), []).unwrap();
+        // a flat pak0 without the base game's palette (a mod, a dev kit)
+        // doesn't win over the id1 below it; one with the palette does
+        std::fs::write(root.join("pak0.pak"), pak_with("maps/test.bsp")).unwrap();
+        assert_eq!(search(&root, 2), Some(root.join("one")));
+        std::fs::write(root.join("pak0.pak"), pak_with("gfx/palette.lmp")).unwrap();
         assert_eq!(search(&root, 2), Some(root.clone()));
         let _ = std::fs::remove_dir_all(root);
+    }
+
+    /// A PAK holding one 4-byte file called `name`.
+    fn pak_with(name: &str) -> Vec<u8> {
+        let mut v = b"PACK".to_vec();
+        v.extend_from_slice(&16i32.to_le_bytes());
+        v.extend_from_slice(&64i32.to_le_bytes());
+        v.extend_from_slice(&[0; 4]);
+        let mut entry = [0u8; 64];
+        entry[..name.len()].copy_from_slice(name.as_bytes());
+        entry[56..60].copy_from_slice(&12i32.to_le_bytes());
+        entry[60..64].copy_from_slice(&4i32.to_le_bytes());
+        v.extend_from_slice(&entry);
+        v
     }
 
     #[test]

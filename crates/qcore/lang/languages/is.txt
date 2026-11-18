@@ -3046,3 +3046,12 @@ is Aðeins þjónninn má nota changelevel
 
 @ {} renamed to {}
 is {} heitir nú {}
+
+@ From the game folder
+is Úr leikjamöppunni
+
+@ From ironwail
+is Úr ironwail
+
+@ From the 2021 re-release
+is Úr endurútgáfunni frá 2021

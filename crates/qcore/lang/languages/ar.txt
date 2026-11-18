@@ -3046,3 +3046,12 @@ ar الخادم وحده يمكنه تنفيذ changelevel
 
 @ {} renamed to {}
 ar غيّر {} اسمه إلى {}
+
+@ From the game folder
+ar من مجلد اللعبة
+
+@ From ironwail
+ar من ironwail
+
+@ From the 2021 re-release
+ar من إصدار 2021 المحدّث

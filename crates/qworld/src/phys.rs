@@ -105,6 +105,7 @@ pub fn run_think<D: Edicts + ?Sized>(w: &mut World, ents: &mut D, p: &PhysParams
 
 /// SV_Impact.
 pub fn impact<D: Edicts + ?Sized>(w: &mut World, ents: &mut D, e1: Ent, e2: Ent) {
+    ents.set_time_global();
     if ents.has_touch(e1) && ents.fi(e1, F::Solid) != SOLID_NOT {
         ents.touch(w, e1, e2);
     }

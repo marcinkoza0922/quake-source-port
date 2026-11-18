@@ -175,7 +175,8 @@ impl Host {
         self.drain_server_log();
     }
 
-    pub(super) fn exec_cbuf(&mut self) {
+    /// Cbuf_Execute; true when a `wait` stopped it for this frame.
+    pub(super) fn exec_cbuf(&mut self) -> bool {
         loop {
             // One shared Cbuf as in Quake: QC localcmd text runs here, so it
             // reaches host commands too.
@@ -184,7 +185,7 @@ impl Host {
                 self.cbuf.add_text(&t);
             }
             if self.cbuf.take_wait() {
-                break;
+                return true;
             }
             let Some(line) = self.cbuf.next_line() else { break };
             self.exec_line(&line);
@@ -194,6 +195,7 @@ impl Host {
                 break;
             }
         }
+        false
     }
 
     pub(super) fn drain_server_log(&mut self) {
@@ -250,6 +252,19 @@ impl Host {
                 let _ = w.set_relative_mouse(d == KeyDest::Game);
                 let _ = w.set_text_input(d == KeyDest::Console);
             }
+        }
+    }
+
+    /// `play`/`playvol`: S_StartSound at the listener with a fresh entity
+    /// number each time (C's `hash++`), so sounds never cut each other off.
+    pub(super) fn play_console_sound(&mut self, name: &str, volume: f32) {
+        let name = if name.rsplit('/').next().is_some_and(|f| f.contains('.')) { name.to_string() } else { format!("{name}.wav") };
+        self.console_sound_id = self.console_sound_id.wrapping_add(1);
+        let entity = 345 + self.console_sound_id as i32;
+        if let Some(s) = &mut self.snd
+            && let Some(sfx) = s.precache(&name)
+        {
+            s.event(SoundEvent::Start { entity, channel: 0, sfx, origin: Default::default(), volume: volume.clamp(0.0, 1.0), attenuation: 0.0 });
         }
     }
 

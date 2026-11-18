@@ -3046,3 +3046,12 @@ sw Seva pekee inaweza kubadilisha ngazi
 
 @ {} renamed to {}
 sw {} amebadilisha jina kuwa {}
+
+@ From the game folder
+sw Kutoka kwenye folda ya mchezo
+
+@ From ironwail
+sw Kutoka ironwail
+
+@ From the 2021 re-release
+sw Kutoka toleo jipya la 2021

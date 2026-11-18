@@ -22,6 +22,8 @@ use crate::menu::{Action, Menu, Screen};
 use crate::platform::HostEvent;
 use crate::view::{ViewCvars, ViewState};
 mod commands;
+mod compat_cmds;
+mod quaddicted_cli;
 mod bugreport;
 mod global_cfg;
 use commands::*;
@@ -218,6 +220,10 @@ pub struct Host {
     death_handled: bool,
     /// FTE scripted particles.
     fte: crate::fte::Fte,
+    /// `play`/`playvol` sound counter (S_Play's `hash`).
+    console_sound_id: u32,
+    /// `quaddicted_list` / `quaddicted_install` in progress.
+    qd_cli: Option<quaddicted_cli::QdCli>,
 }
 
 impl Host {
@@ -316,6 +322,8 @@ impl Host {
             stuffed: false,
             stats_recorded: false,
             menu_music: false,
+            console_sound_id: 0,
+            qd_cli: None,
             demo: None,
             demos: Vec::new(),
             demonum: 0,
@@ -353,6 +361,16 @@ impl Host {
         h.menu.preset_pending = h.inherited_config().is_none() && !qcore::vfs::is_file(&h.user_dir().join("config.cfg"));
         h.cbuf.add_text("exec quake.rc\n");
         h
+    }
+
+    /// `-dedicated`: no local client. Like QuakeSpasm/ironwail/vkQuake
+    /// Host_Init, a dedicated server runs only autoexec.cfg and the command
+    /// line, never the game's quake.rc (which may set cvars, e.g. AD's
+    /// `temp1 1024`).
+    pub fn make_dedicated(&mut self) {
+        self.dedicated = true;
+        let _ = self.cbuf.take_text();
+        self.cbuf.add_text("exec autoexec.cfg\nstuffcmds\n");
     }
 
     pub fn fs(&self) -> &qcore::fs::Fs {

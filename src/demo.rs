@@ -5,6 +5,8 @@
 pub struct Demo {
     data: Vec<u8>,
     pos: usize,
+    /// `pause` during playback (cls.demopaused): no messages, client clock stopped.
+    pub paused: bool,
 }
 
 /// One recorded server message with the view angles at the time.
@@ -21,7 +23,7 @@ impl Demo {
         // The header (cls.forcetrack, unused: svc_cdtrack follows) is an
         // optional '-' and digits ending in '\n'.
         let pos = data.iter().take(16).position(|&b| b == b'\n').map_or(0, |e| e + 1);
-        Demo { data, pos }
+        Demo { data, pos, paused: false }
     }
 
     /// The next message, or `None` at the end of the file or on a damaged block.

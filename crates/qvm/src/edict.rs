@@ -48,13 +48,14 @@ impl Vm {
         }
     }
 
-    /// ED_Alloc: reuse a free index `>= maxclients+1` freed over 0.5s ago (or
-    /// within the first 2s of the level), otherwise grow.
+    /// ED_Alloc (ironwail/vkQuake free list): reuse the oldest freed edict
+    /// if it was freed over 0.5s ago or within the first 2s of the level,
+    /// otherwise grow. World and client edicts are never on the list.
     pub fn ed_alloc(&mut self) -> Result<u32> {
-        let (now, min, max) = (self.time as f32, self.reserved as u32, self.max_edicts);
-        let ok = move |i: u32, t: f32| i >= min && (t < 2.0 || now - t > 0.5);
-        let len = self.alloc.len();
-        if len >= max && !(min..len as u32).any(|i| self.alloc.free_time(i).is_some_and(|t| ok(i, t))) {
+        // C: `e->freetime` is a float, `qcvm->time - e->freetime` a double
+        let (now, max) = (self.time, self.max_edicts);
+        let ok = move |_: u32, t: f32| t < 2.0 || now - t as f64 > 0.5;
+        if self.alloc.len() >= max && !self.alloc.can_reuse(ok) {
             return Err(VmError::new(format!("ED_Alloc: no free edicts (max_edicts is {max})")));
         }
         let e = self.alloc.alloc_with(ok);
@@ -90,7 +91,11 @@ impl Vm {
         }
         let o = self.sys.f_nextthink;
         self.set_ent_f(e, o, -1.0);
-        self.alloc.free(h, self.time as f32);
+        if (e as usize) < self.reserved {
+            self.alloc.free_unlisted(h, self.time as f32);
+        } else {
+            self.alloc.free(h, self.time as f32);
+        }
     }
 
     /// All field slots of an edict.
@@ -164,7 +169,8 @@ impl Vm {
         }
         let mut out = format!("\nEDICT {e}:\n");
         let ed = self.edict(e);
-        for d in &self.progs.fielddefs {
+        // field def 0 is the null field (ED_Print starts at 1)
+        for d in self.progs.fielddefs.iter().skip(1) {
             let name = self.progs.string(d.name);
             if name.len() > 1 && name[name.len() - 2] == b'_' {
                 continue; // skip _x, _y, _z vars

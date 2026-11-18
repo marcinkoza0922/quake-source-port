@@ -3046,3 +3046,12 @@ hy Միայն սերվերը կարող է changelevel անել
 
 @ {} renamed to {}
 hy {} վերանվանվեց՝ {}
+
+@ From the game folder
+hy Խաղի թղթապանակից
+
+@ From ironwail
+hy ironwail-ից
+
+@ From the 2021 re-release
+hy 2021 թ. վերաթողարկումից

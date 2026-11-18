@@ -201,6 +201,7 @@ impl Progs {
             func_map: HashMap::new(),
         };
         p.validate()?;
+        p.merge_engine_fields();
         for (i, d) in p.fielddefs.iter().enumerate() {
             p.field_map.entry(cstr(&p.strings, d.name).to_vec()).or_insert(i);
         }
@@ -266,6 +267,45 @@ impl Progs {
             }
         }
         Ok(())
+    }
+
+    /// PR_MergeEngineFieldDefs (QSS, in ironwail and vkQuake): fields the
+    /// engine understands are added when the progs doesn't define them, so
+    /// mappers can set `alpha`, `scale`, `colormod`, ... with any mod, and
+    /// savegames carry them. Same names, order and layout as C: appended after
+    /// the progs' own fields, a vector followed by its `_x`/`_y`/`_z` floats.
+    fn merge_engine_fields(&mut self) {
+        const FLOAT: u16 = 2;
+        const VECTOR: u16 = 3;
+        const EXTRA: [(&str, u16); 8] = [
+            ("alpha", FLOAT),
+            ("scale", FLOAT),
+            ("emiteffectnum", FLOAT),
+            ("traileffectnum", FLOAT),
+            ("tag_entity", FLOAT),
+            ("tag_index", FLOAT),
+            ("modelflags", FLOAT),
+            ("colormod", VECTOR),
+        ];
+        for (name, ty) in EXTRA {
+            if self.fielddefs.iter().any(|d| cstr(&self.strings, d.name) == name.as_bytes()) {
+                continue;
+            }
+            let ofs = self.entityfields;
+            let add = |strings: &mut Vec<u8>, defs: &mut Vec<Def>, n: &str, ty: u16, ofs: usize| {
+                let at = strings.len() as i32;
+                strings.extend_from_slice(n.as_bytes());
+                strings.push(0);
+                defs.push(Def { ty, ofs: ofs as u16, name: at });
+            };
+            add(&mut self.strings, &mut self.fielddefs, name, ty, ofs);
+            if ty == VECTOR {
+                for (a, c) in ['x', 'y', 'z'].into_iter().enumerate() {
+                    add(&mut self.strings, &mut self.fielddefs, &format!("{name}_{c}"), FLOAT, ofs + a);
+                }
+            }
+            self.entityfields += if ty == VECTOR { 3 } else { 1 };
+        }
     }
 
     /// NUL-terminated progs string at `ofs` (empty if out of range).

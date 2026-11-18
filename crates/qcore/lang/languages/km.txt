@@ -3046,3 +3046,12 @@ km មាន​តែ​ម៉ាស៊ីន​មេ​ទេ​ដែល​�
 
 @ {} renamed to {}
 km {} បាន​ប្ដូរ​ឈ្មោះ​ទៅ {}
+
+@ From the game folder
+km ពី​ថត​ហ្គេម
+
+@ From ironwail
+km ពី ironwail
+
+@ From the 2021 re-release
+km ពី​កំណែ​ចេញ​ឡើង​វិញ​ឆ្នាំ 2021

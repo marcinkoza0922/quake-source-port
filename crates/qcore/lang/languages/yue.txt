@@ -3046,3 +3046,12 @@ yue 淨係伺服器可以用changelevel
 
 @ {} renamed to {}
 yue {}改咗名做{}
+
+@ From the game folder
+yue 嚟自遊戲資料夾
+
+@ From ironwail
+yue 嚟自 ironwail
+
+@ From the 2021 re-release
+yue 嚟自2021年重製版

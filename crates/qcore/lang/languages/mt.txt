@@ -3046,3 +3046,12 @@ mt Is-server biss jista' jagħmel changelevel
 
 @ {} renamed to {}
 mt {} biddel ismu għal {}
+
+@ From the game folder
+mt Mill-folder tal-logħba
+
+@ From ironwail
+mt Minn ironwail
+
+@ From the 2021 re-release
+mt Mill-edizzjoni l-ġdida tal-2021

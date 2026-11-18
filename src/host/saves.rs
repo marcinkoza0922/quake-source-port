@@ -76,12 +76,81 @@ impl Host {
     }
 
     /// The existing save called `name`, in either format.
+    /// Falls back to the 2021 re-release's save folder (like ironwail),
+    /// taking only a KEX save made for the running game.
     pub(super) fn find_save(&self, name: &str) -> Option<PathBuf> {
         let dir = self.user_dir();
-        match name.rsplit_once('.') {
+        let own = match name.rsplit_once('.') {
             Some((_, e)) if e == crate::autosave::SAVE_EXT || e == crate::autosave::ADDON_EXT => qcore::vfs::is_file(&dir.join(name)).then(|| dir.join(name)),
             _ => crate::autosave::find(&dir, name),
+        };
+        own.or_else(|| self.find_other_engine_save(name))
+    }
+
+    /// A plain save another engine left for the running game, in
+    /// [`Self::external_saves`] order.
+    fn find_other_engine_save(&self, name: &str) -> Option<PathBuf> {
+        if !valid_save_name(name) {
+            return None;
         }
+        let file = format!("{}.sav", save_stem(name));
+        self.external_save_dirs().into_iter().map(|(d, _)| d.join(&file)).find(|p| self.external_save_ok(p))
+    }
+
+    /// Folders where other engines leave saves for the running game:
+    /// vkQuake and QuakeSpasm write `<basedir>/<game>/`, ironwail
+    /// `~/.ironwail/<game>/`, the 2021 re-release its own save folder (for
+    /// every game, so its saves are checked for this game's dir).
+    fn external_save_dirs(&self) -> Vec<(PathBuf, crate::menu::SaveSource)> {
+        use crate::menu::SaveSource;
+        let fs = &self.server.core.fs;
+        let game = fs.game_dir().unwrap_or("id1");
+        let mut dirs = vec![(fs.basedir().join(game), SaveSource::GameDir)];
+        if let Some(home) = std::env::var_os("HOME") {
+            dirs.push((PathBuf::from(home).join(".ironwail").join(game), SaveSource::Ironwail));
+        }
+        dirs.extend(qcore::fs::kex_save_dirs().into_iter().map(|d| (d, SaveSource::Kex)));
+        dirs
+    }
+
+    /// A file in [`Self::external_save_dirs`] that is a save of the running
+    /// game: a KEX save names its game dir on line 2 (version 6).
+    fn external_save_ok(&self, p: &std::path::Path) -> bool {
+        let Ok(b) = qcore::vfs::read(p) else { return false };
+        let mut lines = b.split(|&c| c == b'\n').map(|l| String::from_utf8_lossy(l).trim().to_ascii_lowercase());
+        match lines.next().as_deref() {
+            Some("5") => true,
+            Some("6") => {
+                let game = self.server.core.fs.game_dir().unwrap_or("id1").to_ascii_lowercase();
+                lines.next().as_deref() == Some(game.as_str())
+            }
+            _ => false,
+        }
+    }
+
+    /// Saves other engines left for this game, first folder winning a name.
+    fn external_saves(&self) -> Vec<crate::menu::SaveSlot> {
+        let mut seen = std::collections::HashSet::new();
+        let mut out = Vec::new();
+        for (dir, source) in self.external_save_dirs() {
+            let Ok(entries) = qcore::vfs::read_dir(&dir) else { continue };
+            let mut files: Vec<_> = entries.into_iter().filter(|e| !e.is_dir).map(|e| e.path).collect();
+            files.sort();
+            for path in files {
+                let Some(name) = path.file_stem().and_then(|n| n.to_str()).map(str::to_owned) else { continue };
+                if !path.extension().is_some_and(|e| e.eq_ignore_ascii_case("sav")) || !valid_save_name(&name) {
+                    continue;
+                }
+                let Ok(bytes) = qcore::vfs::read(&path) else { continue };
+                let text = qcore::text::decode(&bytes);
+                if !self.external_save_ok(&path) || !seen.insert(name.to_ascii_lowercase()) {
+                    continue;
+                }
+                let Some(info) = crate::saveinfo::SaveInfo::parse(&text, qcore::vfs::modified(&path).ok()) else { continue };
+                out.push(crate::menu::SaveSlot { name, info, thumb: None, source });
+            }
+        }
+        out
     }
 
     pub(super) fn update_autosave(&mut self) {
@@ -123,12 +192,13 @@ impl Host {
             if !valid_save_name(&name) { return None; }
             let modified = qcore::vfs::modified(&path).ok();
             let info = crate::saveinfo::SaveInfo::parse(&qcore::text::decode(&qcore::vfs::read(&path).ok()?), modified)?;
-            Some(crate::menu::SaveSlot { name, info, thumb: None })
+            Some(crate::menu::SaveSlot { name, info, thumb: None, source: crate::menu::SaveSource::Own })
         }).collect();
         all.sort_by(|a, b| b.info.modified.cmp(&a.info.modified).then_with(|| a.name.cmp(&b.name)));
         // a name in both formats is one save: the newer file wins
         let mut seen = std::collections::HashSet::new();
         all.retain(|s| seen.insert(s.name.to_ascii_lowercase()));
+        // every name of ours, autosaves too: `load` would find ours first
         for s in &mut all {
             s.thumb = self.save_thumb(&dir, &s.name);
         }
@@ -139,6 +209,13 @@ impl Host {
             && let Some(l) = &latest
         {
             all.retain(|s| s.name != l.name);
+        }
+        // Load also lists what other engines saved for this game (`load`
+        // finds them by name, so ours win a shared name)
+        if self.menu.screen == Screen::Load && !autos {
+            let ours = all.len();
+            all.extend(self.external_saves().into_iter().filter(|s| !seen.contains(&s.name.to_ascii_lowercase())));
+            all[ours..].sort_by(|a, b| b.info.modified.cmp(&a.info.modified).then_with(|| a.name.cmp(&b.name)));
         }
         self.menu.saves = all;
         self.menu.latest = latest;
@@ -256,7 +333,7 @@ pub(super) fn register(c: &mut Commands<Host>) {
             h.print("save <savename> : save a game\n");
             return;
         }
-        if !h.server.active() || h.cl.intermission != 0 || h.cl.stats[STAT_HEALTH] <= 0 {
+        if !h.server.active() || h.cl.intermission != 0 || h.server.any_client_dead() {
             h.print(&qcore::ctr!("Can't save now.\n"));
             return;
         }

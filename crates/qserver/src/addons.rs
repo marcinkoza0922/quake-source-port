@@ -359,7 +359,7 @@ fn gel_frame(l: &mut Level, c: &mut Core) {
             l.gel.clear(&mut c.clients);
         }
     } else {
-        let (time, dt) = (l.vm.time, l.vm.g_f(c.sv.globals.frametime));
+        let (time, dt) = (l.vm.time, c.sv.phys.frametime as f32);
         let gravity = c.cvars.value_of("sv_gravity");
         let clients = std::mem::take(&mut c.clients);
         let linked = std::mem::take(&mut c.linked_portals);
@@ -370,7 +370,7 @@ fn gel_frame(l: &mut Level, c: &mut Core) {
         c.clients = clients;
     }
     if c.cvars.value_of(Toy::Washer.cvar()) != 0.0 {
-        let dt = l.vm.g_f(c.sv.globals.frametime);
+        let dt = c.sv.phys.frametime as f32;
         let scale = c.cvars.value_of("addon_washer_push").clamp(0.0, 4.0);
         let mut clients = std::mem::take(&mut c.clients);
         let mut ents = Ents { vm: &mut l.vm, c: &mut *c };
@@ -389,7 +389,7 @@ fn boomerang_frame(l: &mut Level, c: &mut Core) {
         stun: c.cvars.value_of("addon_boomerang_stun").clamp(0.5, 30.0),
         speed: c.cvars.value_of("addon_boomerang_speed").clamp(200.0, 2000.0),
     };
-    let (time, dt) = (l.vm.time, l.vm.g_f(c.sv.globals.frametime));
+    let (time, dt) = (l.vm.time, c.sv.phys.frametime as f32);
     let clients = std::mem::take(&mut c.clients);
     let mut ents = Ents { vm: &mut l.vm, c: &mut *c };
     l.boomerangs.frame(&l.world, &mut ents, &clients, time, dt, tune, on);

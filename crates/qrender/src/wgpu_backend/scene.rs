@@ -157,7 +157,7 @@ pub(super) fn world_cmds(
         }
         wr.buckets[t].clear();
         let count = lists.world_idx.len() as u32 - first;
-        let [base, fb, flags] = wr.materials[t];
+        let [base, fb, flags, size] = wr.materials[t];
         let (pipe, alpha) = match wr.kinds[t] {
             TextureKind::Sky => (Pipe::Sky, 1.0),
             TextureKind::Liquid => {
@@ -176,6 +176,9 @@ pub(super) fn world_cmds(
                 // liquid kind (1 water, 2 lava, 3 slime, 4 tele) for fs_water
                 if pipe == Pipe::Water || pipe == Pipe::WaterAlpha { (flags & 0xf) as f32 } else { 0.0 },
             ],
+            // fs_world: miptex size, which texel coords are in (an external
+            // replacement texture may be larger)
+            extra: [(size & 0xffff) as f32, (size >> 16) as f32, 0.0, 0.0],
             ..Default::default()
         });
         let cmd = Cmd { pipe, src: Src::World, mat: [base, fb, NO_TEX], first, count, base_vertex: 0, du, viewmodel: false };
@@ -209,7 +212,10 @@ impl Renderer {
         ];
         let vs = setup_view(view, sw, sh);
         let st = &fr.settings;
-        let alphas = liquid_alphas(st);
+        let mut alphas = liquid_alphas(st);
+        if st.wateralpha_vised_only && self.world.as_ref().is_some_and(|w| !w.cpu.liquid_seethrough(0)) {
+            alphas[0] = 1.0;
+        }
         let fog = fr.fog;
         let soft = crate::softemu::scene_params(st);
         lists.frame_u.push(FrameU {
@@ -223,8 +229,9 @@ impl Renderer {
             alphas,
             vel: self.vel_frame_params(),
             soft: [soft.0, soft.1, 0.0, 0.0],
-            softf: [soft.2, soft.3, st.goggles.mode.min(2), 0],
-            pad: [0.0; 8],
+            softf: [soft.2 | (u32::from(st.fullbright) << 4), soft.3, st.goggles.mode.min(2), 0],
+            wind: if self.skybox.is_some() { st.sky_wind } else { [0.0; 4] },
+            pad: [0.0; 4],
         });
         let fu = lists.frame_u.len() as u32 - 1;
         let mut b = Buckets::default();

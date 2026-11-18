@@ -8,13 +8,17 @@ use crate::ents::Ents;
 use crate::server::Server;
 
 const SAVEGAME_VERSION: i32 = 5;
+/// 2021 re-release (KEX) saves: version 5 plus a game-dir line.
+const SAVEGAME_VERSION_KEX: i32 = 6;
 const NUM_SPAWN_PARMS: usize = 16;
 const MAX_LIGHTSTYLES: usize = 64;
 
 /// PR_UglyValueString for savegames.
 fn ugly_value(vm: &Vm, ty: EType, v: &[u32]) -> String {
     match ty {
-        EType::String => qcore::text::decode(vm.strings.get(v[0] as i32).unwrap_or(b"")).replace('\n', "\\n").replace('"', "'"),
+        // Raw like PR_UglyValueString ("%s"); loaders read newlines inside
+        // quotes. A '"' would end the token early, so (unlike C) it becomes '\''.
+        EType::String => qcore::text::decode(vm.strings.get(v[0] as i32).unwrap_or(b"")).replace('"', "'"),
         EType::Entity => format!("{}", v[0] as i32),
         EType::Function => vm.progs.function_name(v[0] as usize),
         EType::Field => {
@@ -126,7 +130,15 @@ impl Server {
         let mut lines = text.split_inclusive('\n');
         let mut next = || lines.next().map(|l| l.trim_end_matches(['\n', '\r']).to_string()).ok_or("unexpected end of savegame");
         let version: i32 = next()?.trim().parse().map_err(|_| "bad version")?;
-        if version != SAVEGAME_VERSION {
+        if version == SAVEGAME_VERSION_KEX {
+            // 2021 re-release: the game dir follows the version, then the
+            // version 5 layout (ironwail loads these too).
+            let game = next()?.trim().to_string();
+            let current = self.core.fs.game_dir().unwrap_or("id1");
+            if !game.eq_ignore_ascii_case(current) {
+                return Err(format!("savegame is for \"{game}\"; switch with `game {game}` first"));
+            }
+        } else if version != SAVEGAME_VERSION {
             return Err(format!("savegame is version {version}, not {SAVEGAME_VERSION}"));
         }
         let _comment = next()?;
@@ -141,7 +153,8 @@ impl Server {
         for _ in 0..MAX_LIGHTSTYLES {
             styles.push(next()?.trim().as_bytes().to_vec());
         }
-        let consumed: usize = text.split_inclusive('\n').take(5 + NUM_SPAWN_PARMS + MAX_LIGHTSTYLES).map(str::len).sum();
+        let header = 5 + NUM_SPAWN_PARMS + MAX_LIGHTSTYLES + usize::from(version == SAVEGAME_VERSION_KEX);
+        let consumed: usize = text.split_inclusive('\n').take(header).map(str::len).sum();
         let blocks = parse_blocks(&text[consumed..])?;
 
         for i in 0..self.core.maxclients() {

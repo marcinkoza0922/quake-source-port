@@ -3046,3 +3046,12 @@ eu Zerbitzariak soilik erabil dezake changelevel
 
 @ {} renamed to {}
 eu Izen-aldaketa: {} → {}
+
+@ From the game folder
+eu Jokoaren karpetatik
+
+@ From ironwail
+eu ironwailetik
+
+@ From the 2021 re-release
+eu 2021eko berrargitalpenetik

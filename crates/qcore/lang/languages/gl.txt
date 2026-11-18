@@ -3046,3 +3046,12 @@ gl Só o servidor pode usar changelevel
 
 @ {} renamed to {}
 gl {} renomeado como {}
+
+@ From the game folder
+gl Do cartafol do xogo
+
+@ From ironwail
+gl De ironwail
+
+@ From the 2021 re-release
+gl Da reedición de 2021

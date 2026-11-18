@@ -9,3 +9,4 @@ workspace = true
 
 [dependencies]
 qcore = { path = "../../crates/qcore" }
+qui = { path = "../../crates/qui" }

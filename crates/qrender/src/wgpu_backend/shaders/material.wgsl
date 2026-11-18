@@ -126,10 +126,11 @@ fn caustic_tex(q: vec2<f32>, t: f32) -> f32 {
 }
 // du.params: x alpha test, y has fullbright, z unlit (fullbright material); du.color.x alpha
 @fragment fn fs_world(i: WorldOut) -> @location(0) vec4<f32> {
-    let size = vec2<f32>(textureDimensions(t0));
+    // du.extra.xy: miptex size (texel coords' unit); external replacements may differ
+    let size = select(vec2<f32>(textureDimensions(t0)), du.extra.xy, du.extra.x > 0.0);
     let uv = i.st / size;
     // ironwail world shader DITHER levels: 1 = softemu coarse, 2 = banded lightmap
-    let dither = fr.softf.x;
+    let dither = fr.softf.x & 15u;
     let bias = select(select(0.0, -0.5, dither == 1u), -1.0, dither >= 2u);
     let c = textureSampleBias(t0, s0, uv, bias);
     let fb = textureSampleBias(t1, s0, uv, bias);
@@ -143,7 +144,7 @@ fn caustic_tex(q: vec2<f32>, t: f32) -> f32 {
     let lmc = textureSampleLevel(lightmap, lm_samp, lm, i32(i.lm.z + 0.5), 0.0).rgb * 2.0;
     if (du.params.x > 0.5 && c.a < 0.666) { discard; }
     var light = lmc;
-    if (du.params.z > 0.5) { light = vec3<f32>(1.0); }
+    if (du.params.z > 0.5 || (fr.softf.x & 16u) != 0u) { light = vec3<f32>(1.0); }
     if (dither >= 2u) { // 64 light levels, like the colormap
         light = floor(light * (63.0 / 2.0) + 0.5) * (2.0 / 63.0);
     }

@@ -90,7 +90,7 @@ impl Renderer {
             cap: self.frames[fi].dynbuf.size,
         };
         let st = &fr.settings;
-        let alphas = [
+        let mut alphas = [
             st.wateralpha,
             st.lavaalpha.unwrap_or(st.wateralpha),
             st.slimealpha.unwrap_or(st.wateralpha),
@@ -98,6 +98,9 @@ impl Renderer {
         ]
         .map(|a| a.clamp(0.0, 1.0));
         if let Some(wg) = &mut self.world {
+            if st.wateralpha_vised_only && !wg.cpu.liquid_seethrough(0) {
+                alphas[0] = 1.0;
+            }
             let need_novis = wg.cpu.needs_transparent_novis(alphas);
             wg.cpu.set_transparent_liquids(need_novis);
         }
@@ -397,7 +400,10 @@ impl Renderer {
                                 })
                             })
                             .unwrap_or([128.0; 3]);
-                        if st.dynamic {
+                        if st.fullbright {
+                            lc = [100.0; 3]; // ironwail: lightcolor 0.5 (x200)
+                        }
+                        if st.dynamic && !st.fullbright {
                             for dl in fr.dlights {
                                 let d = sub(e.origin, dl.origin);
                                 let add = dl.radius - dot(d, d).sqrt();
@@ -828,7 +834,7 @@ impl Renderer {
                 ],
                 alphas,
                 soft: [soft.0, soft.1, st.goggles.intensity.clamp(0.25, 3.0), st.goggles.noise.clamp(0.0, 2.0)],
-                softf: [soft.2, soft.3, st.goggles.mode.min(2), self.caustic_tex],
+                softf: [soft.2 | (u32::from(st.fullbright) << 4), soft.3, st.goggles.mode.min(2), self.caustic_tex],
                 water: [
                     st.water_ripples.clamp(0.0, 4.0),
                     st.water_caustics.clamp(0.0, 4.0),
@@ -858,6 +864,7 @@ impl Renderer {
                 } else {
                     [0.0; 4]
                 },
+                wind: if sky.is_some() { st.sky_wind } else { [0.0; 4] },
                 ripples: {
                     let mut r = [[0.0; 4]; crate::water::MAX_RIPPLES];
                     for (d, w) in r.iter_mut().zip(&self.water_fx.ripples) {

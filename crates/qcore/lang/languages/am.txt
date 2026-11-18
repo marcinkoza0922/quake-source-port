@@ -3046,3 +3046,12 @@ am ደረጃ መቀየር የሚችለው አገልጋዩ ብቻ ነው
 
 @ {} renamed to {}
 am {} ስሙን ወደ {} ቀይሯል
+
+@ From the game folder
+am ከጨዋታው አቃፊ
+
+@ From ironwail
+am ከ ironwail
+
+@ From the 2021 re-release
+am ከ2021 ዳግም እትም

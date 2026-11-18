@@ -219,6 +219,8 @@ pub struct ClientState {
     pub oldtime: f64,
     /// Skip interpolation (local server without netinterval, timedemo, cl_nolerp).
     pub nolerp: bool,
+    /// The `cl_nolerp` cvar: snap entities to their latest positions.
+    pub cl_nolerp: bool,
     pub paused: bool,
 
     pub stats: [i32; MAX_CL_STATS],
@@ -331,6 +333,7 @@ impl ClientState {
             time: 0.0,
             oldtime: 0.0,
             nolerp: false,
+            cl_nolerp: false,
             paused: false,
             stats: [0; MAX_CL_STATS],
             items: 0,

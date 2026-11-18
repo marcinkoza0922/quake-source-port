@@ -3046,3 +3046,12 @@ vi Chỉ máy chủ mới được dùng changelevel
 
 @ {} renamed to {}
 vi {} đã đổi tên thành {}
+
+@ From the game folder
+vi Từ thư mục trò chơi
+
+@ From ironwail
+vi Từ ironwail
+
+@ From the 2021 re-release
+vi Từ bản phát hành lại 2021

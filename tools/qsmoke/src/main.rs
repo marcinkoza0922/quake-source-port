@@ -42,12 +42,16 @@ const RULES: &[(&str, Level, &str)] = &[
     ("panicked at", Level::Error, "panic"),
     ("host_error", Level::Error, "host_error"),
     ("server error", Level::Error, "qc_error"),
-    ("object error", Level::Error, "qc_error"),
+    // objerror is non-fatal by design (QuakeSpasm/ironwail): a content bug.
+    ("object error", Level::Warn, "qc_objerror"),
     ("couldn't spawn server", Level::Error, "spawn"),
     ("cannot find map", Level::Error, "spawn"),
     ("render error", Level::Error, "render"),
     ("bad server message", Level::Error, "protocol"),
+    ("unimplemented builtin", Level::Error, "qc_error"),
     ("unknown command", Level::Warn, "unknown_cmd"),
+    ("no spawn function", Level::Warn, "spawn_func"),
+    ("overflow", Level::Warn, "overflow"),
     ("couldn't load model", Level::Warn, "missing_asset"),
     ("not found", Level::Warn, "missing_asset"),
     ("couldn't", Level::Warn, "misc"),
@@ -101,23 +105,19 @@ fn parse_args() -> Opts {
     o
 }
 
-/// Extra engine flags for mods that build on a mission pack.
-fn base_flags(game: &str) -> &'static [&'static str] {
-    match game {
-        "hipnotic" => &["-hipnotic"],
-        "rogue" => &["-rogue"],
-        _ => &[],
-    }
+/// The mod as the mod menu would launch it (`qui::mods`: the dir name or
+/// `modinfo.txt` `base`).
+fn mod_info(basedir: &Path, game: &str) -> qui::mods::ModInfo {
+    qui::mods::scan(basedir).into_iter().find(|m| m.dir.eq_ignore_ascii_case(game)).unwrap_or_else(|| {
+        qui::mods::ModInfo { dir: game.to_string(), title: game.to_string(), base: qui::mods::Base::Id, blurb: Vec::new() }
+    })
 }
 
 fn mount(basedir: &Path, game: &str) -> Fs {
     let mut fs = Fs::new(basedir);
     fs.add_game_dir("id1");
-    for f in base_flags(game) {
-        fs.add_game_dir(&f[1..]);
-    }
-    if game != "id1" {
-        fs.add_game_dir(game);
+    for d in mod_info(basedir, game).game_dirs() {
+        fs.add_game_dir(&d);
     }
     fs
 }
@@ -156,13 +156,11 @@ fn games(basedir: &Path) -> Vec<String> {
 fn run_map(o: &Opts, game: &str, map: &str) -> MapResult {
     let start = Instant::now();
     let mut cmd = Command::new(&o.bin);
-    cmd.arg("-basedir").arg(&o.basedir).args(base_flags(game));
-    if game != "id1" {
-        cmd.args(["-game", game]);
-    }
+    cmd.arg("-basedir").arg(&o.basedir).args(mod_info(&o.basedir, game).launch_args());
     cmd.args(["-headless", "-nosound", "-width", "320", "-height", "240", "-autoquit"])
         .arg(o.time.to_string())
-        .args(["+skill", "3", "+map", map])
+        // Never rotate the user's real autosaves out.
+        .args(["+sv_autosave", "0", "+skill", "3", "+map", map])
         .env("RUST_BACKTRACE", "0")
         .stdin(Stdio::null())
         .stdout(Stdio::piped())
@@ -207,7 +205,7 @@ fn run_map(o: &Opts, game: &str, map: &str) -> MapResult {
         let Some((level, kind)) = classify(line) else { continue };
         let mut msg = line.trim().to_string();
         // QC errors: the message is on the following line.
-        if kind == "qc_error"
+        if (kind == "qc_error" || kind == "qc_objerror")
             && let Some(next) = lines.next()
         {
             msg = format!("{msg} {}", next.trim());

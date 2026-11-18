@@ -3046,3 +3046,12 @@ zh-TW 只有伺服器可以使用changelevel
 
 @ {} renamed to {}
 zh-TW {}已改名為{}
+
+@ From the game folder
+zh-TW 來自遊戲資料夾
+
+@ From ironwail
+zh-TW 來自 ironwail
+
+@ From the 2021 re-release
+zh-TW 來自2021年重製版

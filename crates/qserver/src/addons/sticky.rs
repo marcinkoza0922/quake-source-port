@@ -243,7 +243,7 @@ pub(crate) fn frame(st: &mut Stickies, vm: &mut Vm, c: &mut Core, w: &mut World)
             explode(vm, c, w, b);
         }
     }
-    let dt = vm.g_f(c.sv.globals.frametime);
+    let dt = c.sv.phys.frametime as f32;
     let gravity = c.cvars.value_of("sv_gravity");
     let mut k = 0;
     while k < st.bombs.len() {

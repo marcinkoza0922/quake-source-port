@@ -95,8 +95,14 @@ pub fn qbot(before: &Value, after: &Value) -> Result<Value> {
     )
 }
 
+/// Rows of a qbench report: the old flat array (keyed by game/map/engine/
+/// resolution) or the Part 1 report object's `cells` (keyed by scene/
+/// profile/engine/resolution, since one map appears in several scenes).
 fn bench_rows(v: &Value) -> Result<BTreeMap<String, &Value>> {
-    let rows = v.as_array().ok_or("expected a qbench report array")?;
+    let rows = match v {
+        Value::Array(a) => a,
+        _ => v["cells"].as_array().ok_or("expected a qbench report (array or object with cells)")?,
+    };
     let mut out = BTreeMap::new();
     for r in rows {
         for k in ["game", "map", "engine"] {
@@ -109,7 +115,11 @@ fn bench_rows(v: &Value) -> Result<BTreeMap<String, &Value>> {
                 return Err(format!("missing {k}"));
             }
         }
-        let key = json!([r["game"], r["map"], r["engine"], r["width"], r["height"]]).to_string();
+        let key = if r["scene"].is_string() {
+            json!([r["scene"], r["profile"], r["engine"], r["width"], r["height"]]).to_string()
+        } else {
+            json!([r["game"], r["map"], r["engine"], r["width"], r["height"]]).to_string()
+        };
         if out.insert(key, r).is_some() {
             return Err("duplicate qbench case".into());
         }
@@ -128,6 +138,13 @@ pub fn qbench(before: &Value, after: &Value, threshold: f64) -> Result<Value> {
             continue;
         };
         let mut row = json!({"case":serde_json::from_str::<Value>(key).unwrap(),"before_fps":b["fps_median"],"after_fps":a["fps_median"],"before_runs":b["runs"],"after_runs":a["runs"]});
+        if let (Some(bp), Some(ap)) = (b["p99_ms"].as_f64(), a["p99_ms"].as_f64()) {
+            row["before_p99_ms"] = json!(bp);
+            row["after_p99_ms"] = json!(ap);
+            if bp > 0.0 {
+                row["p99_change_percent"] = json!((ap / bp - 1.0) * 100.0);
+            }
+        }
         match (b["fps_median"].as_f64(), a["fps_median"].as_f64()) {
             (Some(bf), Some(af)) if bf > 0.0 && af > 0.0 => {
                 let change = (bf / af - 1.0) * 100.0;
@@ -142,9 +159,19 @@ pub fn qbench(before: &Value, after: &Value, threshold: f64) -> Result<Value> {
         }
         rows.push(row);
     }
-    Ok(
-        json!({"regressions":rows.iter().filter(|r|r["regression"] == true).count(),"threshold_percent":threshold,"missing_cases":missing,"added_cases":new.keys().filter(|k|!old.contains_key(*k)).collect::<Vec<_>>(),"cases":rows,"comparable":missing.is_empty(),"has_regressions":!missing.is_empty() || rows.iter().any(|r|r["regression"]==true),"settings_note":"Only game/map/engine/resolution are recorded by qbench. Verify GPU, engine settings and workload match before attributing a change."}),
-    )
+    let mut out = json!({"regressions":rows.iter().filter(|r|r["regression"] == true).count(),"threshold_percent":threshold,"missing_cases":missing,"added_cases":new.keys().filter(|k|!old.contains_key(*k)).collect::<Vec<_>>(),"cases":rows,"comparable":missing.is_empty(),"has_regressions":!missing.is_empty() || rows.iter().any(|r|r["regression"]==true)});
+    let (bm, am) = (&before["machine"], &after["machine"]);
+    if bm.is_object() && am.is_object() {
+        let differs: Vec<&str> = ["gpu", "driver", "cpu", "kernel", "epp", "gamescope", "mangohud"].into_iter().filter(|k| bm[*k] != am[*k]).collect();
+        out["machine_differs"] = json!(differs);
+        out["before_commit"] = bm["commit"].clone();
+        out["after_commit"] = am["commit"].clone();
+        out["demo_sets"] = json!([before["demo_set"], after["demo_set"]]);
+        out["settings_note"] = json!("Part 1 reports pin vanilla-ultra settings per profile; check machine_differs and that both used the same demo set.");
+    } else {
+        out["settings_note"] = json!("Only game/map/engine/resolution are recorded by old qbench reports. Verify GPU, engine settings and workload match before attributing a change.");
+    }
+    Ok(out)
 }
 
 #[cfg(test)]
@@ -188,5 +215,22 @@ mod tests {
         a[0]["fps_median"] = Value::Null;
         assert_eq!(qbench(&b, &a, 5.0).unwrap()["regressions"], 1);
         assert!(qbench(&json!([b[0], b[0]]), &a, 5.0).is_err());
+    }
+    #[test]
+    fn bench_part1_reports_key_by_scene_and_profile() {
+        let cell = |scene: &str, profile: &str, fps: f64, p99: f64| {
+            json!({"scene":scene,"profile":profile,"game":"ad","map":"ad_sepulcher","engine":"ours","width":960,"height":540,"fps_median":fps,"p99_ms":p99})
+        };
+        let machine = json!({"gpu":"RTX","driver":"1","cpu":"i7","commit":"a"});
+        let b = json!({"machine":machine,"demo_set":"x","cells":[cell("spin-sepulcher","ultra",100.0,2.0),cell("spin-sepulcher-fte","ultra-fte",50.0,4.0)]});
+        let mut a = b.clone();
+        a["cells"][1]["fps_median"] = json!(40.0);
+        a["cells"][1]["p99_ms"] = json!(5.0);
+        a["machine"]["driver"] = json!("2");
+        let r = qbench(&b, &a, 5.0).unwrap();
+        assert_eq!(r["regressions"], 1);
+        assert_eq!(r["cases"].as_array().unwrap().len(), 2, "same map, two scenes");
+        assert_eq!(r["cases"][1]["p99_change_percent"], 25.0);
+        assert_eq!(r["machine_differs"], json!(["driver"]));
     }
 }

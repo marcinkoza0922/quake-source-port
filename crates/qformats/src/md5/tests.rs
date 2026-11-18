@@ -83,3 +83,21 @@ fn normal_round_trip() {
         assert!((0..3).all(|i| (d[i] - n[i]).abs() < 0.05), "{n:?} -> {d:?}");
     }
 }
+
+/// MG3's ogre_rocket: the root's mesh parent is an armature joint listed
+/// last that the animation doesn't drive; the animation's own hierarchy
+/// (root at -1) decides how poses chain, as in vkQuake.
+#[test]
+fn forward_parent_to_undriven_joint() {
+    let mesh = MESH.replace(
+        "numJoints 2\nnumMeshes 1\njoints {\n  \"Root\" -1 ( 0 0 0 ) ( 0 0 0 )\n  \"Arm\" 0 ( 10 0 0 ) ( 0 0 0 )\n}",
+        "numJoints 3\nnumMeshes 1\njoints {\n  \"Root\" 2 ( 0 0 0 ) ( 0 0 0 )\n  \"Arm\" 0 ( 10 0 0 ) ( 0 0 0 )\n  \"Armature\" -1 ( 0 0 0 ) ( 0 0 0 )\n}",
+    );
+    assert!(mesh.contains("Armature"));
+    let m = Md5::parse(mesh.as_bytes(), Some(ANIM.as_bytes())).unwrap();
+    assert_eq!(pos(&m, 1, 1), [20.0, 0.0, 0.0]);
+    assert_eq!(pos(&m, 1, 2), [5.0, 8.0, 0.0]);
+    // a joint that is its own parent is still rejected
+    let bad = mesh.replace("\"Armature\" -1", "\"Armature\" 2");
+    assert!(Md5::parse(bad.as_bytes(), Some(ANIM.as_bytes())).is_err());
+}

@@ -3046,3 +3046,12 @@ mk Само серверот може да прави changelevel
 
 @ {} renamed to {}
 mk {} се преименува во {}
+
+@ From the game folder
+mk Од папката на играта
+
+@ From ironwail
+mk Од ironwail
+
+@ From the 2021 re-release
+mk Од реизданието од 2021

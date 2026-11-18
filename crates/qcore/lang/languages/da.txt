@@ -3046,3 +3046,12 @@ da Kun serveren må bruge changelevel
 
 @ {} renamed to {}
 da {} har skiftet navn til {}
+
+@ From the game folder
+da Fra spilmappen
+
+@ From ironwail
+da Fra ironwail
+
+@ From the 2021 re-release
+da Fra genudgivelsen fra 2021

@@ -4,6 +4,9 @@ impl Host {
     /// CL_GetMessage for demos: feed recorded messages until the client
     /// clock catches up with the newest one (everything before signon).
     pub(super) fn read_demo(&mut self, dt: f64) {
+        if self.demo.as_ref().is_some_and(|d| d.paused) {
+            return;
+        }
         let mut ended = false;
         let mut n = 0;
         while self.demo.is_some() {

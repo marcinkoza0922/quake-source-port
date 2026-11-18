@@ -52,6 +52,7 @@ impl Host {
             self.finish_timedemo();
         }
         self.stop_recording();
+        self.view.reset_effects();
         self.autosave.reset();
         self.bullet_time = Default::default();
         self.hitstop = Default::default();

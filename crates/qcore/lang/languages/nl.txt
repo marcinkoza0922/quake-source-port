@@ -3046,3 +3046,12 @@ nl Alleen de server mag changelevel uitvoeren
 
 @ {} renamed to {}
 nl {} heet nu {}
+
+@ From the game folder
+nl Uit de spelmap
+
+@ From ironwail
+nl Uit ironwail
+
+@ From the 2021 re-release
+nl Uit de heruitgave uit 2021

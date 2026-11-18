@@ -3046,3 +3046,12 @@ ca Només el servidor pot fer changelevel
 
 @ {} renamed to {}
 ca {} ara es diu {}
+
+@ From the game folder
+ca De la carpeta del joc
+
+@ From ironwail
+ca D'ironwail
+
+@ From the 2021 re-release
+ca De la reedició del 2021

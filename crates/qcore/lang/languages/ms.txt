@@ -3046,3 +3046,12 @@ ms Hanya pelayan boleh changelevel
 
 @ {} renamed to {}
 ms {} menukar nama kepada {}
+
+@ From the game folder
+ms Dari folder permainan
+
+@ From ironwail
+ms Dari ironwail
+
+@ From the 2021 re-release
+ms Dari keluaran semula 2021

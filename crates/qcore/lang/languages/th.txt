@@ -3046,3 +3046,12 @@ th เฉพาะ​เซิร์ฟเวอร์​เท่านั้�
 
 @ {} renamed to {}
 th {} เปลี่ยน​ชื่อ​เป็น {}
+
+@ From the game folder
+th จาก​โฟลเดอร์​เกม
+
+@ From ironwail
+th จาก ironwail
+
+@ From the 2021 re-release
+th จาก​ฉบับ​รีรีลีส 2021

@@ -60,6 +60,9 @@ pub struct Console {
     pub notify_pos: u8,
     /// `con_modern`: use modern terminal console (default true).
     pub modern: bool,
+    /// scr_conalpha: classic console background opacity (forced-up
+    /// consoles stay opaque).
+    pub alpha: f32,
     /// Target screen height fraction in modern mode (0.30..0.92).
     pub height_frac: f32,
     /// Styled lines for the modern console.
@@ -90,6 +93,7 @@ impl Console {
             notify_time: 3.0,
             text_scale: 1.0,
             modern: true,
+            alpha: 1.0,
             height_frac: 0.58,
             grid_cols: 80,
             grid_rows: 24,
@@ -282,9 +286,12 @@ impl Console {
                 return;
             }
             self.width = ((vw / 8.0) as usize).saturating_sub(2).max(10);
+            let alpha = if self.forced { 1.0 } else { self.alpha.clamp(0.0, 1.0) };
             if let Some((pic, _, _)) = conback {
                 let s = c.scale;
-                c.pic_stretch_px([0.0, (lines_h - vh) * s, vw * s, vh * s], pic);
+                if alpha > 0.0 {
+                    c.pic_stretch_px_color([0.0, (lines_h - vh) * s, vw * s, vh * s], pic, [1.0, 1.0, 1.0, alpha]);
+                }
             } else {
                 c.fill(0.0, 0.0, vw, lines_h, [0.0, 0.0, 0.0, 0.8]);
             }

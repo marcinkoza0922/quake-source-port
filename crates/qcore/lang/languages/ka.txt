@@ -3046,3 +3046,12 @@ ka changelevel მხოლოდ სერვერს შეუძლია
 
 @ {} renamed to {}
 ka {} ახლა არის {}
+
+@ From the game folder
+ka თამაშის საქაღალდიდან
+
+@ From ironwail
+ka ironwail-იდან
+
+@ From the 2021 re-release
+ka 2021 წლის ხელახალი გამოშვებიდან

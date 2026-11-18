@@ -140,10 +140,17 @@ impl From<[f32; 3]> for Vec3 {
 
 /// AngleVectors: returns (forward, right, up).
 pub fn angle_vectors(angles: Vec3) -> (Vec3, Vec3, Vec3) {
-    let d2r = std::f32::consts::PI / 180.0;
-    let (sy, cy) = (angles[YAW] * d2r).sin_cos();
-    let (sp, cp) = (angles[PITCH] * d2r).sin_cos();
-    let (sr, cr) = (angles[ROLL] * d2r).sin_cos();
+    // Bit-exact with C AngleVectors: `angle = angles[i] * (M_PI*2 / 360)` is
+    // a double product stored in a float, then `sin(angle)` runs in double
+    // and is stored in a float. f32 math differs in the last bit, enough to
+    // flip a later `(int)` in vectoangles (AD misc_model on start).
+    let sc = |deg: f32| {
+        let a = ((deg as f64) * (std::f64::consts::PI * 2.0 / 360.0)) as f32 as f64;
+        (a.sin() as f32, a.cos() as f32)
+    };
+    let (sy, cy) = sc(angles[YAW]);
+    let (sp, cp) = sc(angles[PITCH]);
+    let (sr, cr) = sc(angles[ROLL]);
     let forward = Vec3::new(cp * cy, cp * sy, -sp);
     let right = Vec3::new(
         -sr * sp * cy + cr * sy,
@@ -159,12 +166,14 @@ pub fn vec_to_angles(v: Vec3) -> Vec3 {
     if v.y == 0.0 && v.x == 0.0 {
         return Vec3::new(if v.z > 0.0 { 90.0 } else { 270.0 }, 0.0, 0.0);
     }
-    let mut yaw = v.y.atan2(v.x).to_degrees().trunc();
+    // C: `(int) (atan2(y, x) * 180 / M_PI)` in double.
+    let deg = |y: f32, x: f32| ((y as f64).atan2(x as f64) * 180.0 / std::f64::consts::PI) as i32 as f32;
+    let mut yaw = deg(v.y, v.x);
     if yaw < 0.0 {
         yaw += 360.0;
     }
     let fwd = (v.x * v.x + v.y * v.y).sqrt();
-    let mut pitch = v.z.atan2(fwd).to_degrees().trunc();
+    let mut pitch = deg(v.z, fwd);
     if pitch < 0.0 {
         pitch += 360.0;
     }

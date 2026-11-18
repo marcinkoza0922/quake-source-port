@@ -88,6 +88,9 @@ pub struct Core {
     pub clients: Vec<Client>,
     pub serverflags: f32,
     pub changelevel_issued: bool,
+    /// Servers spawned so far (map, changelevel, restart, load): the host
+    /// runs a server frame in the frame that spawned one, as C does.
+    pub spawns: u64,
     /// A customized game: gameplay modifiers and add-ons apply, saves are
     /// `.qsa` (fixed until the next new game or load).
     pub custom: bool,

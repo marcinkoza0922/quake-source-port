@@ -3046,3 +3046,12 @@ bg Само сървърът може да изпълни changelevel
 
 @ {} renamed to {}
 bg {} вече се казва {}
+
+@ From the game folder
+bg От папката на играта
+
+@ From ironwail
+bg От ironwail
+
+@ From the 2021 re-release
+bg От преиздаването от 2021 г.

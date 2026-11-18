@@ -3046,3 +3046,12 @@ nb Bare serveren kan bruke changelevel
 
 @ {} renamed to {}
 nb {} har byttet navn til {}
+
+@ From the game folder
+nb Fra spillmappen
+
+@ From ironwail
+nb Fra ironwail
+
+@ From the 2021 re-release
+nb Fra 2021-utgaven

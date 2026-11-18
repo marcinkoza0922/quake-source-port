@@ -7,9 +7,10 @@ use std::sync::Arc;
 use qclient::ClientState;
 use qcore::fs::Fs;
 use qformats::{Bsp, Mdl, Spr, parse_entities};
-use qrender::{Fog, ModelId, Renderer};
+use qrender::{Fog, LevelBsp, ModelId, Renderer};
 use qsound::{Sfx, SoundSystem};
 
+mod external_textures;
 mod md3;
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
@@ -42,6 +43,10 @@ pub struct Level {
     pub cm: std::sync::OnceLock<qworld::CollisionModel>,
     pub world_fog: Fog,
     pub world_sky: String,
+    /// Skybox in use (worldspawn, svc_skybox or the `sky` command).
+    pub sky: String,
+    /// The skybox's wind (`gfx/env/<sky>wind.cfg`, `skywind` commands).
+    pub sky_wind: crate::skywind::SkyWind,
     /// Worldspawn `[_]wateralpha`/`lavaalpha`/`slimealpha`/`telealpha`
     /// (R_ParseWorldspawn), in that order.
     pub liquid_alpha: [Option<f32>; 4],
@@ -110,8 +115,9 @@ impl Level {
             match Bsp::parse(&d) {
                 Ok(b) => {
                     let lit = load_lit(fs, name, &b, colored);
+                    let ext = external_textures::load(fs, name, &b, false);
                     brush_names.push(name.clone());
-                    brushes.push((b, lit));
+                    brushes.push((b, lit, ext));
                 }
                 Err(e) => print(&format!("{name}: {e}\n")),
             }
@@ -119,8 +125,11 @@ impl Level {
         let mut brush_models = HashMap::new();
         if let Some(b) = &bsp {
             let lit = load_lit(fs, &world, b, colored);
-            let refs: Vec<_> = brushes.iter().map(|(b, l)| (b, l.as_deref())).collect();
-            match r.load_level(b, lit.as_deref(), &refs) {
+            let ext = external_textures::load(fs, &world, b, true);
+            let level = LevelBsp { bsp: b, lit: lit.as_deref(), external: &ext };
+            let refs: Vec<_> =
+                brushes.iter().map(|(b, l, e)| LevelBsp { bsp: b, lit: l.as_deref(), external: e }).collect();
+            match r.load_level(level, &refs) {
                 Ok((s, ext)) => {
                     subs = s;
                     brush_models = brush_names.into_iter().zip(ext).collect();
@@ -179,6 +188,22 @@ impl Level {
     pub fn set_sky(&mut self, fs: &Fs, r: &mut Renderer, name: &str) {
         let faces = if name.is_empty() { None } else { qrender::load_skybox(fs, name) };
         let _ = r.set_skybox(faces.as_ref());
+        let sky = if faces.is_some() { name.to_string() } else { String::new() };
+        // Sky_LoadSkyBox keeps a loaded box's (possibly tuned) wind
+        if sky != self.sky || sky.is_empty() {
+            self.sky_wind = self.load_sky_wind(fs, &sky);
+        }
+        self.sky = sky;
+    }
+
+    /// Skywind_Load_f: the skybox's wind config, or still air.
+    pub fn load_sky_wind(&self, fs: &Fs, sky: &str) -> crate::skywind::SkyWind {
+        if sky.is_empty() {
+            return Default::default();
+        }
+        fs.open(&crate::skywind::cfg_path(sky))
+            .and_then(|d| crate::skywind::SkyWind::parse(&String::from_utf8_lossy(&d)))
+            .unwrap_or_default()
     }
 
     /// Model by name, loading on first use (temp entity models).

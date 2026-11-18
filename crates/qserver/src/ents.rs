@@ -115,6 +115,10 @@ impl Edicts for Ents<'_> {
         }
         exec(self.vm, self.c, w, f);
     }
+    fn set_time_global(&mut self) {
+        let t = self.vm.time as f32;
+        self.vm.set_g_f(self.c.sv.globals.time, t);
+    }
     fn set_leafs(&mut self, e: Ent, leafs: &[u32]) {
         let x = self.c.ext(e);
         x.leafs.clear();

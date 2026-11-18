@@ -10,6 +10,7 @@ use std::collections::{BTreeSet, HashMap};
 use std::io::{Read, Seek, SeekFrom};
 use std::path::{Path, PathBuf};
 mod discovery;
+pub use discovery::kex_save_dirs;
 mod pack;
 pub use pack::*;
 
@@ -194,6 +195,12 @@ impl Fs {
         let m = self.find_path(main)?.game;
         let c = self.find_path(companion)?.game;
         if c >= m { self.open(companion) } else { None }
+    }
+
+    /// Game dir index `path` would be read from (higher = higher priority,
+    /// like vkQuake's `path_id`), or None when it doesn't exist.
+    pub fn priority(&self, path: &str) -> Option<usize> {
+        self.find_path(&path.replace('\\', "/")).map(|sp| sp.game)
     }
 
     /// COM_LoadFile: first match from the highest-priority search path.

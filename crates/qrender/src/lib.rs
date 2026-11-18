@@ -9,6 +9,7 @@
 #![cfg_attr(not(qvk), allow(dead_code, unused_imports))]
 
 mod convert;
+pub use convert::{ExternalTexture, LevelBsp};
 mod projection;
 pub use projection::{ViewFrustum, view_fov_tangents};
 mod shared;

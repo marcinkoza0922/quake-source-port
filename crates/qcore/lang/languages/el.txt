@@ -3046,3 +3046,12 @@ el Μόνο ο διακομιστής μπορεί να κάνει changelevel
 
 @ {} renamed to {}
 el Ο {} μετονομάστηκε σε {}
+
+@ From the game folder
+el Από τον φάκελο του παιχνιδιού
+
+@ From ironwail
+el Από το ironwail
+
+@ From the 2021 re-release
+el Από την επανέκδοση του 2021

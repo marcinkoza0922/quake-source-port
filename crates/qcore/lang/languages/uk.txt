@@ -3046,3 +3046,12 @@ uk Лише сервер може виконати changelevel
 
 @ {} renamed to {}
 uk {} тепер зветься {}
+
+@ From the game folder
+uk З теки гри
+
+@ From ironwail
+uk З ironwail
+
+@ From the 2021 re-release
+uk З перевидання 2021 року

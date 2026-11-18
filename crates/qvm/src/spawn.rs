@@ -89,6 +89,10 @@ impl Vm {
         }
         let mut out = ParsedEdict::default();
         for (k, v) in pairs {
+            // COM_Parse keeps 1023 bytes of a token (com_token[1024]) and
+            // drops the rest; strings carry one byte per char here.
+            let cap = |s: &str| -> String { s.char_indices().nth(1023).map_or(s, |(i, _)| &s[..i]).to_string() };
+            let (k, v) = (&cap(k), &cap(v));
             let anglehack = k == "angle";
             let key = match k.as_str() {
                 "angle" => "angles",

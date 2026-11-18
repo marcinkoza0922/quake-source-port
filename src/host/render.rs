@@ -11,6 +11,7 @@ impl Host {
         self.con.center_pos = self.cv("scr_centerpos").clamp(0.0, 2.0) as u8;
         self.con.notify_pos = self.cv("con_notifypos").clamp(0.0, 2.0) as u8;
         self.con.modern = self.cv("con_modern") != 0.0;
+        self.con.alpha = self.cv("scr_conalpha");
         self.sync_shell_env();
         self.sync_ui_text();
         c.ui = Some(self.ui_text.clone());
@@ -139,13 +140,14 @@ impl Host {
                 let fwd = qcore::math::angle_vectors(Vec3::from(v.angles)).0;
                 self.bboxes.frame(&bb, &boxes, eye, fwd, &mut self.r, &mut fte);
             }
+            self.bboxes.pointfile_frame(Vec3::from(v.origin), &mut self.r, &mut fte);
             self.impacts.frame(
                 &self.server.core.cvars, &self.cl, &self.level, &mut brushes, &self.server.core.fs,
                 &mut self.r, &mut ents, &dyn_verts, v.origin.into(), &self.debris, fte_frustum.as_ref(), &mut fte,
             );
             crate::view::dlights(&self.cl, &mut dls);
             let contents = self.contents(v.origin);
-            blend = self.view.blend(&self.cl, contents, ft, cv.flash);
+            blend = self.view.blend(&self.cl, contents, ft, cv.flash, cv.cshift);
             if !self.guests.is_empty() {
                 splits = self.split_views(*v, blend, ft, &mut ents);
             }
@@ -331,14 +333,20 @@ impl Host {
         let fog_on = self.cv("r_fog") != 0.0;
         let fog = qrender::Fog { density: if fog_on { self.cl.fog.density } else { 0.0 }, color: self.cl.fog.color };
         let v = |n: &str| self.cv(n);
+        let enhanced_alpha = v("r_enhancedwater") != 0.0 && v("r_watertranslucency") != 0.0;
         let settings = Settings {
             gamma: v("gamma").clamp(0.3, 3.0),
             contrast: v("contrast").clamp(0.5, 3.0),
-            // Enhanced water explicitly controls opacity; other liquid types
-            // retain map overrides and zero-to-water fallback.
-            wateralpha: if v("r_enhancedwater") != 0.0 && v("r_watertranslucency") != 0.0 {
-                v("r_wateralpha").clamp(0.0, 1.0)
-            } else { 1.0 },
+            // As ironwail/vkQuake: the map's worldspawn `wateralpha`, else
+            // `r_wateralpha` (default 1; mods set it too: AD's progs stuffs
+            // its maps' `water_alpha`). Translucent Enhanced Water lets
+            // `r_wateralpha` override the map (and VIS: translucent liquids
+            // then skip leaf PVS). Other liquid types retain map overrides
+            // and zero-to-water fallback.
+            wateralpha: if enhanced_alpha { v("r_wateralpha") } else { self.level.liquid_alpha[0].unwrap_or(v("r_wateralpha")) }.clamp(0.0, 1.0),
+            // ironwail sets r_wateralpha's map alpha to 1 at load where VIS
+            // can't see through water; the map's own key applies anyway.
+            wateralpha_vised_only: !enhanced_alpha && self.level.liquid_alpha[0].is_none(),
             lavaalpha: self.level.liquid_alpha[1].or(Some(v("r_lavaalpha"))).filter(|&a| a > 0.0).map(|a| a.min(1.0)),
             slimealpha: self.level.liquid_alpha[2].or(Some(v("r_slimealpha"))).filter(|&a| a > 0.0).map(|a| a.min(1.0)),
             telealpha: self.level.liquid_alpha[3].or(Some(v("r_telealpha"))).filter(|&a| a > 0.0).map(|a| a.min(1.0)),
@@ -349,6 +357,9 @@ impl Host {
             gun_portal_depth: v("addon_portal_depth").clamp(0.0, 6.0) as u32,
             skyfog: v("r_skyfog"),
             dynamic: v("r_dynamic") != 0.0,
+            // cheat-protected as in ironwail: single player only
+            fullbright: v("r_fullbright") != 0.0 && self.cl.maxclients <= 1,
+            sky_wind: self.level.sky_wind.uniform(self.cl.time, v("r_skywind")),
             vsync: v("vid_vsync") != 0.0,
             msaa: v("r_msaa").max(1.0) as u32,
             render_scale: v("r_renderscale").clamp(0.25, 2.0),

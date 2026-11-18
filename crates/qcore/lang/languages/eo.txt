@@ -3046,3 +3046,12 @@ eo Nur la servilo rajtas uzi changelevel
 
 @ {} renamed to {}
 eo {} ŝanĝis sian nomon al {}
+
+@ From the game folder
+eo El la luda dosierujo
+
+@ From ironwail
+eo El ironwail
+
+@ From the 2021 re-release
+eo El la reeldono de 2021

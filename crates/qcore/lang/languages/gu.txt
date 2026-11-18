@@ -3046,3 +3046,12 @@ gu ફક્ત સર્વર changelevel કરી શકે છે
 
 @ {} renamed to {}
 gu {} નું નામ બદલીને {} થયું
+
+@ From the game folder
+gu ગેમ ફોલ્ડરમાંથી
+
+@ From ironwail
+gu ironwail માંથી
+
+@ From the 2021 re-release
+gu 2021 રી-રિલીઝમાંથી

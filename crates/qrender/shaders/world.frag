@@ -10,10 +10,12 @@ layout(location = 0) out vec4 o_color;
 void main() {
     if (dot(fr.portal_clip.xyz, i_wpos) + fr.portal_clip.w < 0.0) discard;
     uvec4 m = materials[i_mat];
-    vec2 size = vec2(textureSize(textures[nonuniformEXT(m.x)], 0));
+    // texel coords are in miptex units; an external replacement may differ in size
+    vec2 size = m.w != 0u ? vec2(m.w & 0xffffu, m.w >> 16) : vec2(textureSize(textures[nonuniformEXT(m.x)], 0));
     vec2 uv = i_st / size;
     // ironwail world shader DITHER levels: 1 = softemu coarse, 2 = banded lightmap
-    uint dither = fr.softf.x;
+    uint dither = fr.softf.x & 15u;
+    bool fullbright = (fr.softf.x & 16u) != 0u; // r_fullbright
     float bias = dither >= 2u ? -1.0 : dither == 1u ? -0.5 : 0.0;
     vec4 c = texture(textures[nonuniformEXT(m.x)], uv, bias);
     if ((m.z & 0x10u) != 0u && c.a < 0.666) discard;
@@ -21,7 +23,7 @@ void main() {
     vec2 lmsize = vec2(textureSize(lightmap, 0).xy) * 16.0;
     if (dither != 0u) // snap to the software renderer's surface-cache texels
         lm.xy = (floor(lm.xy * lmsize) + 0.5) / lmsize;
-    vec3 light = (m.z & 0x20u) != 0u ? vec3(1.0) : texture(lightmap, lm).rgb;
+    vec3 light = (m.z & 0x20u) != 0u || fullbright ? vec3(1.0) : texture(lightmap, lm).rgb;
     if (dither >= 2u) // 64 light levels, like the colormap
         light = floor(light * (63.0 / 2.0) + 0.5) * (2.0 / 63.0);
     vec3 rgb = c.rgb * light;

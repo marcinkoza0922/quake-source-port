@@ -8,6 +8,10 @@ pub struct Settings {
     pub gamma: f32,
     pub contrast: f32,
     pub wateralpha: f32,
+    /// `wateralpha` is the vanilla `r_wateralpha`: it applies only where the
+    /// map's VIS sees through water (or there is no VIS); elsewhere water
+    /// stays opaque, as in ironwail/vkQuake (`map_wateralpha` at load).
+    pub wateralpha_vised_only: bool,
     /// Per-type alphas; `None` uses `wateralpha`.
     pub lavaalpha: Option<f32>,
     pub slimealpha: Option<f32>,
@@ -26,6 +30,12 @@ pub struct Settings {
     /// Alpha of the front sky layer (r_skyalpha).
     pub skyalpha: f32,
     pub dynamic: bool,
+    /// r_fullbright: world lightmaps read as neutral light and alias models
+    /// get ironwail's 0.5 light colour (single-player cheat).
+    pub fullbright: bool,
+    /// Sky_SetupFrame: skybox wind vector (world space, xyz) and loop phase
+    /// (w); zero = still.
+    pub sky_wind: [f32; 4],
     pub vsync: bool,
     /// Scene MSAA samples (1 = off); clamped to the device maximum.
     pub msaa: u32,
@@ -125,6 +135,7 @@ impl Default for Settings {
             gamma: 1.0,
             contrast: 1.0,
             wateralpha: 1.0,
+            wateralpha_vised_only: false,
             lavaalpha: None,
             slimealpha: None,
             telealpha: None,
@@ -135,6 +146,8 @@ impl Default for Settings {
             skyfog: 0.5,
             skyalpha: 1.0,
             dynamic: true,
+            fullbright: false,
+            sky_wind: [0.0; 4],
             vsync: true,
             msaa: 1,
             render_scale: 1.0,

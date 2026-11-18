@@ -180,7 +180,7 @@ pub(crate) fn frame(l: &mut Level, c: &mut Core) {
     let regen = cv("modifier_regen") != 0.0;
     let jumps = cv("modifier_jumps").clamp(1.0, 3.0) as u32;
     let time = vm.time;
-    let ft = vm.g_f(c.sv.globals.frametime);
+    let ft = c.sv.phys.frametime as f32;
     for i in 0..n {
         let e = i as u32 + 1;
         let st = &mut l.modifiers[i];

@@ -3046,3 +3046,12 @@ pt-BR Só o servidor pode usar changelevel
 
 @ {} renamed to {}
 pt-BR {} mudou o nome para {}
+
+@ From the game folder
+pt-BR Da pasta do jogo
+
+@ From ironwail
+pt-BR Do ironwail
+
+@ From the 2021 re-release
+pt-BR Do relançamento de 2021

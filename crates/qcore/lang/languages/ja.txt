@@ -3046,3 +3046,12 @@ ja changelevelはサーバーのみ使用できます
 
 @ {} renamed to {}
 ja {}が{}に改名しました
+
+@ From the game folder
+ja ゲームフォルダーから
+
+@ From ironwail
+ja ironwailから
+
+@ From the 2021 re-release
+ja 2021年リマスター版から

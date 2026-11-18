@@ -38,6 +38,17 @@ impl Host {
             lerp_models: v("r_lerpmodels") != 0.0,
             lerp_move: v("r_lerpmove") != 0.0,
             flash: v("v_flashscale").clamp(0.0, 1.0),
+            idle: crate::view::Idle {
+                scale: v("v_idlescale"),
+                cycle: [v("v_ipitch_cycle"), v("v_iyaw_cycle"), v("v_iroll_cycle")],
+                level: [v("v_ipitch_level"), v("v_iyaw_level"), v("v_iroll_level")],
+            },
+            cshift: {
+                // V_CalcBlend: gl_cshiftpercent and QuakeSpasm's per-shift
+                // percentages; gl_polyblend 0 draws no blend at all
+                let all = if v("gl_polyblend") != 0.0 { v("gl_cshiftpercent") / 100.0 } else { 0.0 };
+                ["contents", "damage", "bonus", "powerup"].map(|k| all * v(&format!("gl_cshiftpercent_{k}")) / 100.0)
+            },
         }
         .reduce_motion(v("a11y_reducemotion") != 0.0)
         .third_person(self.camera().third_person())
@@ -45,6 +56,9 @@ impl Host {
 
     /// cl_camera: the camera perspective for every local player.
     pub(super) fn camera(&self) -> crate::view::camera::Camera {
+        if self.cv("chase_active") != 0.0 {
+            return crate::view::camera::Camera::Chase { back: self.cv("chase_back"), right: self.cv("chase_right"), up: self.cv("chase_up") };
+        }
         crate::view::camera::Camera::from_cvar(self.cv("cl_camera"))
     }
 
@@ -145,6 +159,7 @@ impl Host {
         for e in events {
             self.handle_event(e);
         }
+        let spawns = self.server.core.spawns;
         let now = self.realtime;
         let (due, rest): (Vec<_>, Vec<_>) = std::mem::take(&mut self.delayed).into_iter().partition(|(t, _)| *t <= now);
         self.delayed = rest;
@@ -152,15 +167,27 @@ impl Host {
             self.cbuf.add_text(&c);
             self.cbuf.add_text("\n");
         }
-        self.exec_cbuf();
+        let waited = self.exec_cbuf();
+        self.qd_cli_frame();
         if self.startup < 2 {
             self.startup += 1;
             if self.startup == 1 {
                 self.startup_video();
                 self.stuff_cmds();
-                self.exec_cbuf();
+                // one Cbuf_Execute per frame: a `wait` holds the rest
+                if !waited {
+                    self.exec_cbuf();
+                }
             }
-            if self.startup == 2 && !self.server.active() && self.cbuf.is_empty() && self.delayed.is_empty() && self.con.pty.is_none() {
+            // Not over a demo the command line started (`+timedemo`): the
+            // references draw it bare, and benchmarks would time the menu.
+            if self.startup == 2
+                && !self.server.active()
+                && self.demo.is_none()
+                && self.cbuf.is_empty()
+                && self.delayed.is_empty()
+                && self.con.pty.is_none()
+            {
                 self.menu.open(Screen::Main);
             }
         }
@@ -225,8 +252,22 @@ impl Host {
         self.accum += dt;
         let maxfps = self.cv("host_maxfps");
         let tic = if maxfps > 0.0 && maxfps <= 72.0 { 0.0 } else { SERVER_TIC };
+        // Host_Frame runs Host_ServerFrame in the same frame whose commands
+        // ran `map` (wait-counting scripts and the parity sweeps rely on it)
+        let spawned = self.server.core.spawns != spawns && self.server.active();
+        if spawned {
+            self.accum = self.accum.max(tic);
+        }
         if self.accum >= tic {
-            let sdt = self.accum.min(0.1) * timescale;
+            let mut sdt = self.accum.min(0.1) * timescale;
+            // Host_AdvanceTime: host_timescale scales the frame, else
+            // host_framerate fixes it (slow motion, deterministic tests).
+            let (hts, hfr) = (self.cv("host_timescale") as f64, self.cv("host_framerate") as f64);
+            if hts > 0.0 {
+                sdt *= hts;
+            } else if hfr > 0.0 {
+                sdt = hfr;
+            }
             self.accum = 0.0;
             if let Some(i) = self.local {
                 let mut cmd = self.last_cmd;
@@ -329,8 +370,14 @@ impl Host {
         self.read_demo(dt);
         self.check_local_client();
         self.sync_fte();
+        let nolerp = self.cv("cl_nolerp") != 0.0;
+        self.cl.cl_nolerp = nolerp;
+        for g in &mut self.guests {
+            g.cl.cl_nolerp = nolerp;
+        }
         if self.cl.signon > 0 {
-            self.cl.frame(dt * timescale);
+            let demo_paused = self.demo.as_ref().is_some_and(|d| d.paused);
+            self.cl.frame(if demo_paused { 0.0 } else { dt * timescale });
             self.apply_qw_prediction();
         }
         for g in &mut self.guests {

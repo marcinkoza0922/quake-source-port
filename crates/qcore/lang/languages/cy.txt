@@ -3046,3 +3046,12 @@ cy Dim ond y gweinydd all wneud changelevel
 
 @ {} renamed to {}
 cy {} wedi newid enw: {}
+
+@ From the game folder
+cy O ffolder y gêm
+
+@ From ironwail
+cy O ironwail
+
+@ From the 2021 re-release
+cy O ail-ryddhad 2021

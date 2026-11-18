@@ -35,6 +35,8 @@ const BASE: &[(&str, &str)] = &[
     ("r_enhancedwater", "0"),
     ("r_water_quality", "1"),
     ("r_watertranslucency", "0"),
+    // Vanilla opacity (ironwail/vkQuake default); translucent presets lower it.
+    ("r_wateralpha", "1"),
     ("r_waterripples", "0"),
     ("r_watersplash", "0"),
     ("r_watercaustics", "0"),
@@ -64,6 +66,7 @@ const ENHANCED: &[(&str, &str)] = &[
     ("r_blood_quality", "2"),
     ("r_enhancedwater", "1"),
     ("r_watertranslucency", "1"),
+    ("r_wateralpha", "0.5"),
     ("r_waterripples", "1"),
     ("r_watersplash", "1"),
     ("r_watercaustics", "1"),
