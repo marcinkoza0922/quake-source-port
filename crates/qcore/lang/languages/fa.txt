@@ -1054,6 +1054,9 @@ fa تکان دید
 @ Viewmodels
 fa مدل‌های سلاح
 
+@ Visible Weapons
+fa سلاح‌های قابل مشاهده
+
 @ Volume
 fa بلندی صدا
 
@@ -1621,6 +1624,9 @@ fa هنگام آسیب زدن به دشمن، صدای اصابت یا کشتن 
 
 @ Playback speed: faster sounds shorter and higher
 fa سرعت پخش: سریع‌تر کوتاه‌تر و زیرتر به نظر می‌رسد
+
+@ Player bodies hold the weapon in use instead of the generic gun
+fa بدن بازیکنان به‌جای تفنگ عمومی، سلاح در حال استفاده را در دست دارد
 
 @ Plays the Quake theme in the main menu when no game is running
 fa وقتی بازی‌ای در جریان نیست، آهنگ Quake را در منوی اصلی پخش می‌کند

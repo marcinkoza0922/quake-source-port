@@ -40,6 +40,7 @@ mod saveinfo;
 mod splitscreen;
 mod save_inventory;
 mod view;
+mod vwep;
 #[cfg(target_arch = "wasm32")]
 mod web;
 mod wheel;

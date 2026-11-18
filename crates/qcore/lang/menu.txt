@@ -2451,6 +2451,13 @@ it Modelli dell'arma
 es Modelos del arma
 ru Модель оружия
 
+@ Visible Weapons
+fr Armes visibles
+de Sichtbare Waffen
+it Armi visibili
+es Armas visibles
+ru Видимое оружие
+
 @ Volume
 fr Volume
 de Lautstärke

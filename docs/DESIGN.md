@@ -322,6 +322,30 @@ Gameplay → Camera archives `cl_camera` (0 first person, 1 centered third perso
 shoulder); `view::camera` traces the offset against the world hull, draws the own body and
 hides viewmodels (row disabled) in third person. The camera turns toward where the eye's aim ray
 lands (≥128u away, distance eased over ~0.12s, no bob) so the crosshair is true; the body is `follows_camera` (no object blur).
+Gameplay → Visible Weapons archives `cl_vwep` (default 0): player bodies (own body in third
+person or portals, split-screen partners, other players) hold the weapon in use instead of
+player.mdl's generic gun (`src/vwep*`, client-side only, so vanilla saves and demos are unaffected).
+`vwep::rig::Rig` fits, for every player frame, the rigid transform of the model's gun piece
+against `shotatt1` (where it points along +x); a weapon model centred on that gun, scaled and
+offset per `vwep::table`, is moved by those transforms into a model with the player's own
+frames, so it lerps with the body as one entity (`RenderEntity::key | qrender::ATTACHED_KEY`:
+own motion-blur identity, not a water mover, masked from its owner's first-person split view).
+`vwep::classic` finds the gun and axe as id's player.mdl mesh pieces (component signature
+149/38/16/9 vertices, id1/rogue/Alkaline; the slung gun is also shrunk ~0.83 in axe frames) and
+bakes weapons as MDLs; `vwep::enhanced` does the same for the re-release's `player.md5mesh`
+(vertices bound to its `Gun`/`Axe` joints, `Md5::vert_joints`) and bakes MD3s from the enhanced
+`g_*`/`v_*` MD5s, falling back to MDL pickups. Bodies are the model without gun and axe, or
+without the gun (the axe is the model's own). Weapons: stock and rogue's map to the `g_*`
+pickups (rogue's lava/multi weapons share the base ones), the shotgun and rogue's plasma gun to
+their view model minus the pieces behind the eye, hipnotic's laser cannon and proximity gun to
+theirs, unknown `v_X` to `g_X` when present; Mjolnir (hipnotic swaps in `playham.mdl`), the
+grapple and add-on toys keep the stock look, as do other player models (Arcane Dimensions').
+Who holds what: each slot's `weaponmodel` on a local server (`Server::weapon_models`); without
+one, the weapon stat for the own player and, for others, the last fire sound (`table::from_sound`)
+when it agrees with the animation (axe or gun frames), else the stock model. Death frames keep
+the last weapon (QC clears `weaponmodel`) and forget a guess. Rigs and baked models are cached
+per level (`assets::Level::vwep`), built on first sight. Tests: `vwep::tests` (rig fit, both
+formats, baking, weapon choice), `vwep::table` tests.
 The portal gun uses negated alias pitch and a camera-relative origin with no yaw
 cant. Its Meshy FBX is converted by `tools/import_portal_gun.py` to embedded native MDL
 and a 512×512 atlas; `addons::portal_model`/`portal_skin` apply owner colors and

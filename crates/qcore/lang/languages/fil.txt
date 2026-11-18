@@ -1054,6 +1054,9 @@ fil Pag-alog ng Tanaw
 @ Viewmodels
 fil Viewmodel
 
+@ Visible Weapons
+fil Nakikitang armas
+
 @ Volume
 fil Volume
 
@@ -1621,6 +1624,9 @@ fil I-play ang napiling tunog ng tama o patay kapag napinsala mo ang kalaban
 
 @ Playback speed: faster sounds shorter and higher
 fil Bilis ng playback: mas maikli at mas matinis kapag mas mabilis
+
+@ Player bodies hold the weapon in use instead of the generic gun
+fil Hawak ng katawan ng mga manlalaro ang armas na gamit sa halip na ang karaniwang baril
 
 @ Plays the Quake theme in the main menu when no game is running
 fil Pinapatugtog ang tema ng Quake sa main menu kapag walang larong tumatakbo

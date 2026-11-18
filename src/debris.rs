@@ -26,7 +26,7 @@ mod fire;
 mod fragment;
 mod gibs;
 mod info;
-mod math;
+pub(crate) mod math;
 mod ragdoll;
 mod rig;
 mod scene;

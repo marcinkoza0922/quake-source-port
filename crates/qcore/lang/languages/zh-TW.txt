@@ -1054,6 +1054,9 @@ zh-TW 視角晃動
 @ Viewmodels
 zh-TW 武器模型
 
+@ Visible Weapons
+zh-TW 顯示武器
+
 @ Volume
 zh-TW 音量
 
@@ -1621,6 +1624,9 @@ zh-TW 傷害敵人時播放所選的命中或擊殺提示音
 
 @ Playback speed: faster sounds shorter and higher
 zh-TW 播放速度：越快聲音越短、越高
+
+@ Player bodies hold the weapon in use instead of the generic gun
+zh-TW 玩家身體手持正在使用的武器，而非通用槍械
 
 @ Plays the Quake theme in the main menu when no game is running
 zh-TW 未進行遊戲時，在主選單播放Quake主題曲

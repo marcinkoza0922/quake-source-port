@@ -1054,6 +1054,9 @@ mt Tbandil tal-veduta
 @ Viewmodels
 mt Mudelli tal-armi
 
+@ Visible Weapons
+mt Armi viżibbli
+
 @ Volume
 mt Volum
 
@@ -1621,6 +1624,9 @@ mt Idoqq is-sinjal tal-laqta jew tal-qtil li għażilt meta tagħmel ħsara lil 
 
 @ Playback speed: faster sounds shorter and higher
 mt Veloċità tar-riproduzzjoni: aktar malajr tinstema' iqsar u ogħla
+
+@ Player bodies hold the weapon in use instead of the generic gun
+mt Il-ġisem tal-plejers iżomm l-arma li qed tintuża minflok il-pistola ġenerika
 
 @ Plays the Quake theme in the main menu when no game is running
 mt Idoqq it-tema ta' Quake fil-menu prinċipali meta ma tkun għaddejja l-ebda logħba

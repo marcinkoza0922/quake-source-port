@@ -1054,6 +1054,9 @@ sv Gungande vy
 @ Viewmodels
 sv Vapenmodeller
 
+@ Visible Weapons
+sv Synliga vapen
+
 @ Volume
 sv Volym
 
@@ -1621,6 +1624,9 @@ sv Spela ditt valda träff- eller dödsljud när du skadar en fiende
 
 @ Playback speed: faster sounds shorter and higher
 sv Uppspelningshastighet: snabbare låter kortare och ljusare
+
+@ Player bodies hold the weapon in use instead of the generic gun
+sv Spelarkroppar håller vapnet som används i stället för det generiska geväret
 
 @ Plays the Quake theme in the main menu when no game is running
 sv Spelar Quake-temat i huvudmenyn när inget spel pågår

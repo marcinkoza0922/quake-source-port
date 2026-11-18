@@ -1054,6 +1054,9 @@ th การ​โยก​ของ​มุม​มอง
 @ Viewmodels
 th โมเดล​อาวุธ​ใน​มือ
 
+@ Visible Weapons
+th แสดง​อาวุธ
+
 @ Volume
 th ระดับ​เสียง
 
@@ -1621,6 +1624,9 @@ th เล่น​เสียง​โดน​หรือ​ฆ่า​ท�
 
 @ Playback speed: faster sounds shorter and higher
 th ความ​เร็ว​การ​เล่น: เร็ว​ขึ้น​เสียง​สั้น​และ​สูง​ขึ้น
+
+@ Player bodies hold the weapon in use instead of the generic gun
+th ร่าง​ผู้เล่น​ถือ​อาวุธ​ที่​ใช้​อยู่​แทน​ปืน​ทั่วไป
 
 @ Plays the Quake theme in the main menu when no game is running
 th เล่น​เพลง​ธีม Quake ใน​เมนู​หลัก​เมื่อ​ไม่มี​เกม​ที่​กำลัง​เล่น

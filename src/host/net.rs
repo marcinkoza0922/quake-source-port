@@ -404,6 +404,7 @@ impl Host {
                 }
                 ClientEvent::StuffText(s) => self.cbuf.add_text(&s),
                 ClientEvent::Sound { ent, channel, sound, origin, volume, attenuation } => {
+                    self.view.vwep.sound(&self.cl, ent, sound);
                     if self.cv("cl_captions") != 0.0
                         && let Some(n) = self.cl.sound_precache.get(sound)
                     {

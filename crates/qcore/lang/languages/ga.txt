@@ -1054,6 +1054,9 @@ ga Luascadh Amhairc
 @ Viewmodels
 ga Samhlacha Airm
 
+@ Visible Weapons
+ga Airm infheicthe
+
 @ Volume
 ga Airde Fuaime
 
@@ -1621,6 +1624,9 @@ ga Seinn an leid bhuailte nó mharaithe a roghnaigh tú nuair a dhéanann tú da
 
 @ Playback speed: faster sounds shorter and higher
 ga Luas athsheinnte: bíonn luas níos tapúla níos giorra agus níos airde
+
+@ Player bodies hold the weapon in use instead of the generic gun
+ga Coinníonn coirp na n-imreoirí an t-arm atá in úsáid in ionad an ghunna ghinearálta
 
 @ Plays the Quake theme in the main menu when no game is running
 ga Seinneann sé téama Quake sa phríomhroghchlár nuair nach bhfuil aon chluiche ar siúl

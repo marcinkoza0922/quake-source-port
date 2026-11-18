@@ -1054,6 +1054,9 @@ bg Поклащане на камерата
 @ Viewmodels
 bg Модели на оръжията
 
+@ Visible Weapons
+bg Видими оръжия
+
 @ Volume
 bg Сила на звука
 
@@ -1621,6 +1624,9 @@ bg Пуска избрания сигнал за попадение или уб�
 
 @ Playback speed: faster sounds shorter and higher
 bg Скорост на възпроизвеждане: по-бързо звучи по-кратко и по-високо
+
+@ Player bodies hold the weapon in use instead of the generic gun
+bg Телата на играчите държат използваното оръжие вместо общото
 
 @ Plays the Quake theme in the main menu when no game is running
 bg Пуска темата на Quake в главното меню, когато няма активна игра

@@ -71,6 +71,11 @@ pub enum WaterWarp {
     Fov(f32),
 }
 
+/// Key bit of an entity attached to the entity `key & !ATTACHED_KEY` (a
+/// player's visible weapon): its own motion-blur identity, but not a separate
+/// mover for water effects.
+pub const ATTACHED_KEY: u32 = 1 << 24;
+
 /// One entity to draw.
 #[derive(Clone, Copy, Debug)]
 pub struct RenderEntity {

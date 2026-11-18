@@ -1,4 +1,5 @@
 use super::*;
+use qclient::{ClientEntity, LERP_RESETANIM, LERP_RESETANIM2, LERP_RESETMOVE};
 
 #[test]
 fn appearing_monster_snaps_then_smooths_normal_steps() {

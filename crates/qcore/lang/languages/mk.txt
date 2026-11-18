@@ -1054,6 +1054,9 @@ mk Нишање на погледот
 @ Viewmodels
 mk Модели на оружје
 
+@ Visible Weapons
+mk Видливо оружје
+
 @ Volume
 mk Јачина
 
@@ -1621,6 +1624,9 @@ mk Го пушта избраниот звук за погодок или уби
 
 @ Playback speed: faster sounds shorter and higher
 mk Брзина на репродукција: побрзо звучи пократко и повисоко
+
+@ Player bodies hold the weapon in use instead of the generic gun
+mk Телата на играчите го држат оружјето во употреба наместо општата пушка
 
 @ Plays the Quake theme in the main menu when no game is running
 mk Ја пушта темата на Quake во главното мени кога не тече игра

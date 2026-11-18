@@ -1054,6 +1054,9 @@ cy Siglo'r olwg
 @ Viewmodels
 cy Modelau arfau
 
+@ Visible Weapons
+cy Arfau gweladwy
+
 @ Volume
 cy Lefel sain
 
@@ -1621,6 +1624,9 @@ cy Chwarae'r ciw taro neu ladd a ddewiswyd pan fyddwch yn niweidio gelyn
 
 @ Playback speed: faster sounds shorter and higher
 cy Cyflymder chwarae: mae cyflymach yn swnio'n fyrrach ac yn uwch
+
+@ Player bodies hold the weapon in use instead of the generic gun
+cy Mae cyrff chwaraewyr yn dal yr arf sy'n cael ei ddefnyddio yn lle'r gwn cyffredinol
 
 @ Plays the Quake theme in the main menu when no game is running
 cy Chwarae thema Quake yn y brif ddewislen pan nad oes gêm yn rhedeg

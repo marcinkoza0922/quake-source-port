@@ -1054,6 +1054,9 @@ et Vaate õõtsumine
 @ Viewmodels
 et Relvamudelid
 
+@ Visible Weapons
+et Nähtavad relvad
+
 @ Volume
 et Helitugevus
 
@@ -1621,6 +1624,9 @@ et Mängib valitud tabamus- või tapuheli, kui vaenlast vigastad
 
 @ Playback speed: faster sounds shorter and higher
 et Taasesituse kiirus: kiirem kõlab lühemalt ja kõrgemalt
+
+@ Player bodies hold the weapon in use instead of the generic gun
+et Mängijate kehad hoiavad kasutusel olevat relva üldise püssi asemel
 
 @ Plays the Quake theme in the main menu when no game is running
 et Mängib peamenüüs Quake'i teemat, kui mäng ei käi

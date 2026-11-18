@@ -135,6 +135,7 @@ pub(super) fn tooltip(item: Item) -> Option<&'static str> {
         "a11y_reducemotion" => "Turns off view bob, strafe tilt and the camera kick when hit or firing",
         "cl_camera" => "First person, a third-person camera centered behind the player, or one over the right or left shoulder; third person hides viewmodels",
         "r_drawviewmodel" => "Place every weapon at the center, right or left of the view, or hide all viewmodels",
+        "cl_vwep" => "Player bodies hold the weapon in use instead of the generic gun",
         "v_flashscale" => "Strength of the full-screen flashes for damage, pickups and powerups",
         "hud_damageindicator" => "Red screen edges show where damage came from: top is front, bottom is behind; Screen Flashes controls their strength",
         "r_shader_scope" => "3D view keeps the HUD and menus sharp; whole screen runs them through the shader too",

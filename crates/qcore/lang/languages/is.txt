@@ -1054,6 +1054,9 @@ is Sjónvagg
 @ Viewmodels
 is Vopnalíkön
 
+@ Visible Weapons
+is Sýnileg vopn
+
 @ Volume
 is Hljóðstyrkur
 
@@ -1621,6 +1624,9 @@ is Spilar valið hitt- eða dráphljóð þegar þú særir óvin
 
 @ Playback speed: faster sounds shorter and higher
 is Spilunarhraði: hraðari hljómar styttra og hærra
+
+@ Player bodies hold the weapon in use instead of the generic gun
+is Líkamar leikmanna halda á vopninu sem er í notkun í stað almennu byssunnar
 
 @ Plays the Quake theme in the main menu when no game is running
 is Spilar Quake-stefið í aðalvalmyndinni þegar enginn leikur er í gangi

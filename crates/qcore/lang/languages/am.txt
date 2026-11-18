@@ -1054,6 +1054,9 @@ am የእይታ መወዛወዝ
 @ Viewmodels
 am የእጅ መሳሪያ ሞዴሎች
 
+@ Visible Weapons
+am የሚታዩ መሣሪያዎች
+
 @ Volume
 am የድምፅ መጠን
 
@@ -1621,6 +1624,9 @@ am ጠላትን ሲጎዱ የመረጡትን የመምታት ወይም የመግ
 
 @ Playback speed: faster sounds shorter and higher
 am የመልሶ ማጫወት ፍጥነት፦ ፈጣን አጭርና ከፍ ያለ ይሰማል
+
+@ Player bodies hold the weapon in use instead of the generic gun
+am የተጫዋቾች አካላት ከአጠቃላዩ ጠመንጃ ይልቅ በጥቅም ላይ ያለውን መሣሪያ ይይዛሉ
 
 @ Plays the Quake theme in the main menu when no game is running
 am ምንም ጨዋታ በማይሄድበት ጊዜ በዋናው ምናሌ የQuake ዜማን ያጫውታል

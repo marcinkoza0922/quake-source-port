@@ -1054,6 +1054,9 @@ ka ხედის რხევა
 @ Viewmodels
 ka იარაღის მოდელები
 
+@ Visible Weapons
+ka ხილული იარაღი
+
 @ Volume
 ka ხმა
 
@@ -1621,6 +1624,9 @@ ka მტრის დაზიანებისას უკრავს ა�
 
 @ Playback speed: faster sounds shorter and higher
 ka დაკვრის სიჩქარე: სწრაფი ხმა უფრო მოკლე და მაღალია
+
+@ Player bodies hold the weapon in use instead of the generic gun
+ka მოთამაშეთა სხეულები ზოგადი თოფის ნაცვლად გამოყენებულ იარაღს იჭერენ
 
 @ Plays the Quake theme in the main menu when no game is running
 ka მთავარ მენიუში, როცა თამაში არ მიდის, Quake-ის თემას უკრავს

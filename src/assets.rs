@@ -11,7 +11,7 @@ use qrender::{Fog, LevelBsp, ModelId, Renderer};
 use qsound::{Sfx, SoundSystem};
 
 mod external_textures;
-mod md3;
+pub(crate) mod md3;
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum Kind {
@@ -50,6 +50,8 @@ pub struct Level {
     /// Worldspawn `[_]wateralpha`/`lavaalpha`/`slimealpha`/`telealpha`
     /// (R_ParseWorldspawn), in that order.
     pub liquid_alpha: [Option<f32>; 4],
+    /// Visible-weapon rig and models.
+    pub vwep: crate::vwep::Cache,
 }
 
 fn load_model(fs: &Fs, r: &mut Renderer, name: &str, enhanced_models: bool) -> Option<Model> {

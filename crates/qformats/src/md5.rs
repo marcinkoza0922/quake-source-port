@@ -186,6 +186,11 @@ pub struct Md5 {
     /// names skins `<dir>/<shader>_SS_FF`).
     pub shaders: Vec<String>,
     pub md3: Md3,
+    /// Joint names, in file order.
+    pub joints: Vec<String>,
+    /// Per surface and vertex: the joint carrying the vertex's largest
+    /// weight (finds pieces bound to one joint, like the player's gun).
+    pub vert_joints: Vec<Vec<u16>>,
 }
 
 fn parse_mesh(text: &[u8]) -> Result<(Vec<Joint>, Vec<Mesh>)> {
@@ -326,9 +331,22 @@ impl Md5 {
                 name: format!("frame{i}"),
             })
             .collect();
+        let vert_joints = meshes
+            .iter()
+            .map(|m| {
+                m.verts
+                    .iter()
+                    .map(|&(_, first, count)| {
+                        m.weights[first..first + count].iter().max_by(|a, b| a.1.total_cmp(&b.1)).map_or(0, |w| w.0 as u16)
+                    })
+                    .collect()
+            })
+            .collect();
         Ok(Md5 {
             shaders: meshes.iter().map(|m| m.shader.clone()).collect(),
             md3: Md3 { name: String::new(), flags: 0, frames, surfaces },
+            joints: joints.iter().map(|j| j.name.clone()).collect(),
+            vert_joints,
         })
     }
 }
