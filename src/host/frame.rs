@@ -56,6 +56,9 @@ impl Host {
 
     /// cl_camera: the camera perspective for every local player.
     pub(super) fn camera(&self) -> crate::view::camera::Camera {
+        if let Some((origin, angles)) = self.freecam.cam {
+            return crate::view::camera::Camera::Free { origin, angles };
+        }
         if self.cv("chase_active") != 0.0 {
             return crate::view::camera::Camera::Chase { back: self.cv("chase_back"), right: self.cv("chase_right"), up: self.cv("chase_up") };
         }
@@ -75,10 +78,13 @@ impl Host {
             }
             None => (&self.cl, &mut self.view),
         };
-        if cl.intermission != 0 {
+        if cl.intermission != 0 && !matches!(cam, crate::view::camera::Camera::Free { .. }) {
             return;
         }
         cam.place(v, cm.as_deref(), &mut view.aim, ft);
+        if guest.is_none() {
+            self.freecam.last_view = (v.origin, v.angles);
+        }
     }
 
     pub(super) fn move_speeds(&self) -> MoveSpeeds {
@@ -202,7 +208,7 @@ impl Host {
         // input (every frame, for smooth view angles)
         let ft = dt as f32;
         let in_game = self.cl.signon == 4 && self.cl.intermission == 0;
-        self.input.autoaim_allowed = self.local_autoaim_allowed() && self.demo.is_none() && in_game && self.cl.stats[STAT_HEALTH] > 0;
+        self.input.autoaim_allowed = self.local_autoaim_allowed() && self.demo.is_none() && self.freecam.cam.is_none() && in_game && self.cl.stats[STAT_HEALTH] > 0;
         let needs_targets = self.input.gamepad_connected || (self.input.autoaim_allowed && self.cv("assist_autoaim") != 0.0);
         let targets = if in_game && self.cl.stats[STAT_HEALTH] > 0 && needs_targets { self.aim_targets(&self.cl) } else { Vec::new() };
         self.input.autoaim_fov = self.autoaim_fov();
@@ -222,16 +228,18 @@ impl Host {
         if self.cv("cl_alwaysrun") != 0.0 {
             inp.speed = !inp.speed;
         }
+        self.freecam_frame(&mut inp, ft);
+        let flying = self.freecam.cam.is_some();
         self.pend_attack |= inp.attack;
         self.pend_attack2 |= inp.attack2;
         self.pend_jump |= inp.jump;
-        self.pend_dodge |= self.input.dodge_pressed();
+        self.pend_dodge |= self.input.dodge_pressed() && !flying;
         let mut impulse = inp.impulse;
         let alive = self.cl.stats[STAT_HEALTH] > 0;
         let (held, aim) = (self.input.wheel_held(), self.input.wheel_aim);
         let toys = if self.local.is_some() { self.allowed_toys() } else { Vec::new() };
         let entries = crate::wheel::inventory(&self.server.core.cvars, &toys);
-        let choice = self.wheel.update(dt as f32, held, in_game && alive && self.demo.is_none(), aim, &self.cl, &entries, self.toy.held);
+        let choice = self.wheel.update(dt as f32, held, in_game && alive && self.demo.is_none() && !flying, aim, &self.cl, &entries, self.toy.held);
         self.input.wheel_open = self.wheel.open;
         self.goggles_frame(in_game, alive);
         self.toy.update_slots(&self.server.core.cvars, &toys, (inp.weapon_slot, &mut impulse), &self.cl);

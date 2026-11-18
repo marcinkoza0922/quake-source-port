@@ -6,6 +6,9 @@ pub(super) fn visible_entities(vm: &Vm, c: &mut Core, clent: u32, pvs: &mut Vec<
     let f = c.sv.fields.clone();
     let org = Vec3::from_array(vm.ent_v(clent, f.origin)) + Vec3::from_array(vm.ent_v(clent, f.view_ofs));
     c.sv.vis.fat_pvs(org, pvs);
+    if let Some(o) = c.clients.get(clent as usize - 1).and_then(|cl| cl.extra_view) {
+        c.sv.vis.add_fat_pvs(Vec3::from_array(o), pvs);
+    }
     let protocol = c.sv.protocol;
     let mut list = vec![clent];
     for e in 1..vm.num_edicts() as u32 {
@@ -278,5 +281,43 @@ pub(super) fn write_entities(vm: &mut Vm, c: &mut Core, clent: u32, msg: &mut Si
         if bits & U_LERPFINISH != 0 {
             msg.byte(q_rint(((nextthink as f64 - time) * 255.0) as f32) as u8 as i32);
         }
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use std::path::{Path, PathBuf};
+
+    use qcore::cvar::Cvars;
+    use qcore::fs::Fs;
+
+    use crate::Server;
+
+    fn basedir() -> Option<PathBuf> {
+        let d = std::env::var_os("QUAKE_BASEDIR")
+            .map(PathBuf::from)
+            .unwrap_or_else(|| Path::new(env!("CARGO_MANIFEST_DIR")).join("../../vkQuake directory with maps"));
+        d.join("id1").is_dir().then_some(d)
+    }
+
+    #[test]
+    fn extra_view_sends_entities_near_the_free_camera() {
+        let Some(base) = basedir() else { return };
+        let mut fs = Fs::new(base);
+        fs.add_game_dir("id1");
+        let mut sv = Server::new(fs, Cvars::new(), 1);
+        sv.spawn_server("e1m1").unwrap();
+        let c = sv.connect_local().unwrap();
+        sv.frame(1.0 / 72.0);
+        // e1m1's grunt by the nailgun, far from the start
+        let grunt = 79;
+        let mut pvs = Vec::new();
+        let mut visible = |sv: &mut Server| {
+            let l = sv.level.as_mut().unwrap();
+            super::visible_entities(&l.vm, &mut sv.core, c as u32 + 1, &mut pvs).contains(&grunt)
+        };
+        assert!(!visible(&mut sv));
+        sv.core.clients[c].extra_view = Some([248.0, 2392.0, 80.0]);
+        assert!(visible(&mut sv));
     }
 }
