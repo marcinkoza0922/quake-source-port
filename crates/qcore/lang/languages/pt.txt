@@ -1054,6 +1054,9 @@ pt Balanço da vista
 @ Viewmodels
 pt Modelos da arma
 
+@ Visible Weapons
+pt Armas visíveis
+
 @ Volume
 pt Volume
 
@@ -1621,6 +1624,9 @@ pt Reproduz o sinal de impacto ou abate escolhido quando danificas um inimigo
 
 @ Playback speed: faster sounds shorter and higher
 pt Velocidade de reprodução: mais rápido soa mais curto e mais agudo
+
+@ Player bodies hold the weapon in use instead of the generic gun
+pt Os corpos dos jogadores seguram a arma em uso em vez da genérica
 
 @ Plays the Quake theme in the main menu when no game is running
 pt Toca o tema do Quake no menu principal quando não há nenhum jogo a decorrer

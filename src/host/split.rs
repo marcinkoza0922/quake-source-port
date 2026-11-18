@@ -91,7 +91,7 @@ impl Host {
             v.waterwarp = self.waterwarp(v.origin, self.guests[k].cl.time);
             let g = &mut self.guests[k];
             let me = g.cl.viewentity as u32;
-            for e in ents.iter_mut().filter(|e| !third && e.key != 0 && e.key == me) {
+            for e in ents.iter_mut().filter(|e| !third && e.key != 0 && e.key & !qrender::ATTACHED_KEY == me) {
                 e.views = if e.views == 0 { all } else { e.views } & !bit;
             }
             if draw_ents {
@@ -100,6 +100,8 @@ impl Host {
                 g.view.dodge_pose = self.server.level.as_ref()
                     .and_then(|l| l.dodges.get(g.cl.viewentity.saturating_sub(1)).map(|d| d.pose(l.vm.time)))
                     .unwrap_or_default();
+                g.view.vwep.enabled = self.view.vwep.enabled;
+                g.view.vwep.server = self.view.vwep.server.clone();
                 g.view.entities(&mut g.cl, &cv, &mut self.level, &self.server.core.fs, &mut self.r, &mut gents);
                 // this guest's own body, for its portal views only
                 ents.extend(gents.iter().filter(|e| e.portal_only).map(|e| RenderEntity { views: bit, ..*e }));

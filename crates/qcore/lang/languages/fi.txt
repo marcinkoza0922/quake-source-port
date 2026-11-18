@@ -1054,6 +1054,9 @@ fi Näkymän keinunta
 @ Viewmodels
 fi Asemallit
 
+@ Visible Weapons
+fi Näkyvät aseet
+
 @ Volume
 fi Äänenvoimakkuus
 
@@ -1621,6 +1624,9 @@ fi Toista valitsemasi osuma- tai tappoääni, kun vahingoitat vihollista
 
 @ Playback speed: faster sounds shorter and higher
 fi Toistonopeus: nopeampi kuulostaa lyhyemmältä ja korkeammalta
+
+@ Player bodies hold the weapon in use instead of the generic gun
+fi Pelaajahahmot pitelevät käytössä olevaa asetta yleisen aseen sijaan
 
 @ Plays the Quake theme in the main menu when no game is running
 fi Soittaa Quaken tunnusmusiikkia päävalikossa, kun peliä ei ole käynnissä

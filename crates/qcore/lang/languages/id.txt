@@ -1054,6 +1054,9 @@ id Goyangan Pandangan
 @ Viewmodels
 id Model Senjata
 
+@ Visible Weapons
+id Senjata terlihat
+
 @ Volume
 id Volume
 
@@ -1621,6 +1624,9 @@ id Putar isyarat kena atau bunuh pilihan Anda saat melukai musuh
 
 @ Playback speed: faster sounds shorter and higher
 id Kecepatan putar: lebih cepat terdengar lebih pendek dan tinggi
+
+@ Player bodies hold the weapon in use instead of the generic gun
+id Tubuh pemain memegang senjata yang dipakai, bukan senapan umum
 
 @ Plays the Quake theme in the main menu when no game is running
 id Memutar tema Quake di menu utama saat tidak ada game berjalan

@@ -1054,6 +1054,9 @@ sk Pohupovanie pohľadu
 @ Viewmodels
 sk Modely zbraní
 
+@ Visible Weapons
+sk Viditeľné zbrane
+
 @ Volume
 sk Hlasitosť
 
@@ -1621,6 +1624,9 @@ sk Pri zranení nepriateľa prehrá zvolený zvuk zásahu alebo zabitia
 
 @ Playback speed: faster sounds shorter and higher
 sk Rýchlosť prehrávania: rýchlejší zvuk je kratší a vyšší
+
+@ Player bodies hold the weapon in use instead of the generic gun
+sk Postavy hráčov držia používanú zbraň namiesto všeobecnej pušky
 
 @ Plays the Quake theme in the main menu when no game is running
 sk Prehráva tému Quake v hlavnom menu, keď nebeží žiadna hra

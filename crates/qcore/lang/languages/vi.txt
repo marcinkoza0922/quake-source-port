@@ -1054,6 +1054,9 @@ vi Nhún góc nhìn
 @ Viewmodels
 vi Mô hình vũ khí
 
+@ Visible Weapons
+vi Hiện vũ khí
+
 @ Volume
 vi Âm lượng
 
@@ -1621,6 +1624,9 @@ vi Phát âm báo trúng hoặc hạ gục đã chọn khi bạn gây sát thư�
 
 @ Playback speed: faster sounds shorter and higher
 vi Tốc độ phát: nhanh hơn thì âm ngắn và cao hơn
+
+@ Player bodies hold the weapon in use instead of the generic gun
+vi Cơ thể người chơi cầm vũ khí đang dùng thay vì khẩu súng chung
 
 @ Plays the Quake theme in the main menu when no game is running
 vi Phát nhạc chủ đề Quake ở menu chính khi không có trận nào đang chạy

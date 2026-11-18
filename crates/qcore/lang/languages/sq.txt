@@ -1054,6 +1054,9 @@ sq Lëkundja e pamjes
 @ Viewmodels
 sq Modelet e armëve
 
+@ Visible Weapons
+sq Armë të dukshme
+
 @ Volume
 sq Volumi
 
@@ -1621,6 +1624,9 @@ sq Luan sinjalin e zgjedhur të goditjes ose vrasjes kur dëmton një armik
 
 @ Playback speed: faster sounds shorter and higher
 sq Shpejtësia e luajtjes: më shpejt tingëllon më shkurt dhe më lart
+
+@ Player bodies hold the weapon in use instead of the generic gun
+sq Trupat e lojtarëve mbajnë armën në përdorim në vend të armës së përgjithshme
 
 @ Plays the Quake theme in the main menu when no game is running
 sq Luan temën e Quake në menynë kryesore kur nuk ka lojë në zhvillim

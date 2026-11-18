@@ -1054,6 +1054,9 @@ te వీక్షణ ఊగు
 @ Viewmodels
 te వ్యూమోడల్‌లు
 
+@ Visible Weapons
+te కనిపించే ఆయుధాలు
+
 @ Volume
 te వాల్యూమ్
 
@@ -1621,6 +1624,9 @@ te మీరు శత్రువును దెబ్బతీసినప్
 
 @ Playback speed: faster sounds shorter and higher
 te ప్లేబ్యాక్ వేగం: వేగంగా ఉంటే చిన్నగా, ఎత్తుగా వినిపిస్తుంది
+
+@ Player bodies hold the weapon in use instead of the generic gun
+te ఆటగాళ్ల శరీరాలు సాధారణ తుపాకీకి బదులుగా వాడుతున్న ఆయుధాన్ని పట్టుకుంటాయి
 
 @ Plays the Quake theme in the main menu when no game is running
 te ఏ గేమ్ నడవనప్పుడు ప్రధాన మెనూలో Quake థీమ్ వినిపిస్తుంది

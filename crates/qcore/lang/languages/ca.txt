@@ -1054,6 +1054,9 @@ ca Balanceig de la càmera
 @ Viewmodels
 ca Models de l'arma
 
+@ Visible Weapons
+ca Armes visibles
+
 @ Volume
 ca Volum
 
@@ -1621,6 +1624,9 @@ ca Reprodueix el senyal d'impacte o d'eliminació triat en ferir un enemic
 
 @ Playback speed: faster sounds shorter and higher
 ca Velocitat de reproducció: més ràpid sona més curt i més agut
+
+@ Player bodies hold the weapon in use instead of the generic gun
+ca Els cossos dels jugadors sostenen l'arma en ús en lloc de la genèrica
 
 @ Plays the Quake theme in the main menu when no game is running
 ca Reprodueix el tema de Quake al menú principal quan no hi ha cap partida en curs

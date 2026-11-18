@@ -36,6 +36,8 @@ impl Host {
                 .and_then(|l| l.dodges.get(self.cl.viewentity.saturating_sub(1)).map(|d| d.pose(l.vm.time)))
                 .unwrap_or_default();
             self.view.third_person = self.camera().third_person();
+            self.view.vwep.enabled = self.cv("cl_vwep") != 0.0;
+            self.view.vwep.server = if self.view.vwep.enabled { self.server.weapon_models() } else { None };
             self.view.entities(&mut self.cl, &cv, &mut self.level, fs, &mut self.r, &mut ents);
             // player 1's own body belongs to player 1's portal views only
             for e in ents.iter_mut().filter(|e| e.portal_only) {

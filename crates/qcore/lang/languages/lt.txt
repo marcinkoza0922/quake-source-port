@@ -1054,6 +1054,9 @@ lt Vaizdo siūbavimas
 @ Viewmodels
 lt Ginklų modeliai
 
+@ Visible Weapons
+lt Matomi ginklai
+
 @ Volume
 lt Garsumas
 
@@ -1621,6 +1624,9 @@ lt Groti pasirinktą pataikymo ar nužudymo signalą, kai sužeidžiate priešą
 
 @ Playback speed: faster sounds shorter and higher
 lt Atkūrimo greitis: greitesnis skamba trumpiau ir aukščiau
+
+@ Player bodies hold the weapon in use instead of the generic gun
+lt Žaidėjų kūnai laiko naudojamą ginklą vietoj bendrinio šautuvo
 
 @ Plays the Quake theme in the main menu when no game is running
 lt Pagrindiniame meniu groja Quake temą, kai žaidimas nevyksta

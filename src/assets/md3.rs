@@ -305,23 +305,32 @@ pub fn load_replacement(
 }
 
 /// Attempts to load the 2021 re-release's `.md5mesh`/`.md5anim` companion of
-/// `mdl_name`, baked into an MD3 (see `qformats::md5`). Skins follow the
-/// re-release naming, `<dir>/<shader>_SS_FF` (skin, animated skin frame).
+/// `mdl_name`, baked into an MD3 (see `qformats::md5`).
 pub fn load_md5_replacement(fs: &Fs, r: &mut Renderer, mdl_name: &str, mdl: &Mdl) -> Option<ModelId> {
+    let md5 = parse_md5(fs, mdl_name)?;
+    let skins = md5_skins(fs, r, mdl_name, &md5, (mdl.flags & MF_HOLEY) != 0);
+    r.load_md3(&md5.md3, &skins).ok()
+}
+
+/// The `.md5mesh`/`.md5anim` companion of `mdl_name`, when one is found.
+pub fn parse_md5(fs: &Fs, mdl_name: &str) -> Option<qformats::md5::Md5> {
     let stem = strip_ext(mdl_name);
     let mesh = fs.open_companion(mdl_name, &format!("{stem}.md5mesh"))?;
     let anim = fs.open(&format!("{stem}.md5anim"));
-    let md5 = match qformats::md5::Md5::parse(&mesh, anim.as_deref()) {
-        Ok(m) => m,
+    match qformats::md5::Md5::parse(&mesh, anim.as_deref()) {
+        Ok(m) => Some(m),
         Err(e) => {
             eprintln!("{stem}.md5mesh: {e}; using the .mdl");
-            return None;
+            None
         }
-    };
-    let holey = (mdl.flags & MF_HOLEY) != 0;
+    }
+}
+
+/// Surface skins of `mdl_name`'s MD5 companion. They follow the re-release
+/// naming, `<dir>/<shader>_SS_FF` (skin, animated skin frame).
+pub fn md5_skins(fs: &Fs, r: &mut Renderer, mdl_name: &str, md5: &qformats::md5::Md5, holey: bool) -> Vec<Md3SurfaceSkins> {
     let dir = mdl_name.rfind('/').map_or("", |i| &mdl_name[..=i]);
-    let surface_skins = md5
-        .shaders
+    md5.shaders
         .iter()
         .map(|shader| {
             let mut skins = Vec::new();
@@ -341,6 +350,5 @@ pub fn load_md5_replacement(fs: &Fs, r: &mut Renderer, mdl_name: &str, mdl: &Mdl
             }
             Md3SurfaceSkins { skins, holey }
         })
-        .collect::<Vec<_>>();
-    r.load_md3(&md5.md3, &surface_skins).ok()
+        .collect()
 }

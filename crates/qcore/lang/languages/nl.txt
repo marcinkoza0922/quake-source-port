@@ -1054,6 +1054,9 @@ nl Hoofdbeweging
 @ Viewmodels
 nl Wapenmodellen
 
+@ Visible Weapons
+nl Zichtbare wapens
+
 @ Volume
 nl Volume
 
@@ -1621,6 +1624,9 @@ nl Speel je gekozen hit- of killgeluid af wanneer je een vijand schade toebrengt
 
 @ Playback speed: faster sounds shorter and higher
 nl Afspeelsnelheid: sneller klinkt korter en hoger
+
+@ Player bodies hold the weapon in use instead of the generic gun
+nl Spelerslichamen houden het gebruikte wapen vast in plaats van het algemene geweer
 
 @ Plays the Quake theme in the main menu when no game is running
 nl Speelt het Quake-thema in het hoofdmenu als er geen spel loopt

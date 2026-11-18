@@ -1054,6 +1054,9 @@ ro Balans cameră
 @ Viewmodels
 ro Modele armă
 
+@ Visible Weapons
+ro Arme vizibile
+
 @ Volume
 ro Volum
 
@@ -1621,6 +1624,9 @@ ro Redă sunetul de lovire sau eliminare ales când rănești un inamic
 
 @ Playback speed: faster sounds shorter and higher
 ro Viteza de redare: mai rapid sună mai scurt și mai înalt
+
+@ Player bodies hold the weapon in use instead of the generic gun
+ro Corpurile jucătorilor țin arma folosită în locul armei generice
 
 @ Plays the Quake theme in the main menu when no game is running
 ro Redă tema Quake în meniul principal când niciun joc nu rulează

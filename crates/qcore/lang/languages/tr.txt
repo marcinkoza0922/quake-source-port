@@ -1054,6 +1054,9 @@ tr Görüş Sallanması
 @ Viewmodels
 tr Silah Modelleri
 
+@ Visible Weapons
+tr Görünür silahlar
+
 @ Volume
 tr Ses Düzeyi
 
@@ -1621,6 +1624,9 @@ tr Bir düşmana hasar verdiğinizde seçtiğiniz isabet veya öldürme sesini �
 
 @ Playback speed: faster sounds shorter and higher
 tr Oynatma hızı: daha hızlı, daha kısa ve daha tiz duyulur
+
+@ Player bodies hold the weapon in use instead of the generic gun
+tr Oyuncu bedenleri genel silah yerine kullanılan silahı tutar
 
 @ Plays the Quake theme in the main menu when no game is running
 tr Oyun çalışmıyorken ana menüde Quake temasını çalar

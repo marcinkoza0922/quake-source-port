@@ -1054,6 +1054,9 @@ ur منظر کا ہلنا
 @ Viewmodels
 ur ہتھیار کے ماڈل
 
+@ Visible Weapons
+ur نظر آنے والے ہتھیار
+
 @ Volume
 ur والیوم
 
@@ -1621,6 +1624,9 @@ ur دشمن کو نقصان پہنچانے پر اپنی منتخب ضرب یا 
 
 @ Playback speed: faster sounds shorter and higher
 ur چلنے کی رفتار: تیز آواز چھوٹی اور اونچی ہوتی ہے
+
+@ Player bodies hold the weapon in use instead of the generic gun
+ur کھلاڑیوں کے جسم عام بندوق کے بجائے زیرِ استعمال ہتھیار پکڑتے ہیں
 
 @ Plays the Quake theme in the main menu when no game is running
 ur کوئی گیم نہ چل رہا ہو تو مرکزی مینو میں Quake کی دھن بجاتا ہے

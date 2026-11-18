@@ -1054,6 +1054,9 @@ cs Pohupování pohledu
 @ Viewmodels
 cs Modely zbraní
 
+@ Visible Weapons
+cs Viditelné zbraně
+
 @ Volume
 cs Hlasitost
 
@@ -1621,6 +1624,9 @@ cs Při zranění nepřítele přehraje zvolený zvuk zásahu nebo zabití
 
 @ Playback speed: faster sounds shorter and higher
 cs Rychlost přehrávání: rychlejší zní kratší a výš
+
+@ Player bodies hold the weapon in use instead of the generic gun
+cs Postavy hráčů drží používanou zbraň místo obecné pušky
 
 @ Plays the Quake theme in the main menu when no game is running
 cs Když neběží žádná hra, hraje v hlavní nabídce motiv Quake

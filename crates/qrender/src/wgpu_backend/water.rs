@@ -77,7 +77,7 @@ impl Renderer {
             let models = &self.models;
             let movers = fr.entities.iter().filter_map(|e| {
                 let alias = matches!(models.get(e.model.0 as usize), Some(Model::Alias(_)));
-                (alias && e.key != 0 && !e.viewmodel).then_some((e.key, e.origin))
+                (alias && e.key != 0 && e.key & crate::ATTACHED_KEY == 0 && !e.viewmodel).then_some((e.key, e.origin))
             });
             w.parts = w.fx.update(
                 &wr.cpu,

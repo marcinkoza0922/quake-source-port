@@ -596,6 +596,13 @@ it Velocità di riproduzione: più veloce suona più corto e più acuto
 es Velocidad de reproducción: más rápido suena más corto y más agudo
 ru Скорость воспроизведения: быстрее — короче и выше
 
+@ Player bodies hold the weapon in use instead of the generic gun
+fr Les corps des joueurs tiennent l'arme utilisée au lieu de l'arme générique
+de Spielerkörper halten die benutzte Waffe statt des allgemeinen Gewehrs
+it I corpi dei giocatori impugnano l'arma in uso invece di quella generica
+es Los cuerpos de los jugadores sostienen el arma en uso en lugar de la genérica
+ru Модели игроков держат текущее оружие вместо стандартного
+
 @ Plays the Quake theme in the main menu when no game is running
 fr Joue le thème de Quake dans le menu principal quand aucune partie n'est en cours
 de Spielt das Quake-Thema im Hauptmenü, wenn kein Spiel läuft

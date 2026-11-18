@@ -1054,6 +1054,9 @@ ta பார்வை ஆட்டம்
 @ Viewmodels
 ta கை ஆயுத மாடல்கள்
 
+@ Visible Weapons
+ta தெரியும் ஆயுதங்கள்
+
 @ Volume
 ta ஒலியளவு
 
@@ -1621,6 +1624,9 @@ ta எதிரியைக் காயப்படுத்தும்போ�
 
 @ Playback speed: faster sounds shorter and higher
 ta இயக்க வேகம்: வேகமானது குறுகியதாகவும் உயர்வாகவும் ஒலிக்கும்
+
+@ Player bodies hold the weapon in use instead of the generic gun
+ta வீரர்களின் உடல்கள் பொதுவான துப்பாக்கிக்குப் பதிலாகப் பயன்பாட்டில் உள்ள ஆயுதத்தைப் பிடிக்கின்றன
 
 @ Plays the Quake theme in the main menu when no game is running
 ta எந்த ஆட்டமும் இயங்காதபோது முதன்மை மெனுவில் Quake கருப்பொருள் இசையை இசைக்கும்

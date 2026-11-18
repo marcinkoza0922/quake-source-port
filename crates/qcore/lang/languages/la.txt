@@ -1054,6 +1054,9 @@ la Nutatio aspectus
 @ Viewmodels
 la Exemplaria telorum
 
+@ Visible Weapons
+la Arma visibilia
+
 @ Volume
 la Volumen
 
@@ -1621,6 +1624,9 @@ la Signum ictus vel caedis electum sonat cum hostem laedis
 
 @ Playback speed: faster sounds shorter and higher
 la Celeritas reproductionis: celerior brevior et acutior sonat
+
+@ Player bodies hold the weapon in use instead of the generic gun
+la Corpora lusorum arma in usu tenent pro sclopeto communi
 
 @ Plays the Quake theme in the main menu when no game is running
 la Thema Quake in indice principali canit cum nullus lusus agitur

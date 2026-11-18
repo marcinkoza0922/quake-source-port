@@ -1054,6 +1054,9 @@ gu દૃશ્ય હલન
 @ Viewmodels
 gu વ્યૂમૉડેલ્સ
 
+@ Visible Weapons
+gu દેખાતાં હથિયાર
+
 @ Volume
 gu વોલ્યુમ
 
@@ -1621,6 +1624,9 @@ gu તમે દુશ્મનને નુકસાન કરો ત્યા�
 
 @ Playback speed: faster sounds shorter and higher
 gu પ્લેબૅક ઝડપ: ઝડપી અવાજ ટૂંકો અને ઊંચો લાગે છે
+
+@ Player bodies hold the weapon in use instead of the generic gun
+gu ખેલાડીઓનાં શરીર સામાન્ય બંદૂકને બદલે વપરાતું હથિયાર પકડે છે
 
 @ Plays the Quake theme in the main menu when no game is running
 gu કોઈ ગેમ ચાલતી ન હોય ત્યારે મુખ્ય મેનૂમાં Quake થીમ વગાડે છે

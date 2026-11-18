@@ -1054,6 +1054,9 @@ ko 걸음 시 화면 흔들림
 @ Viewmodels
 ko 무기 모델
 
+@ Visible Weapons
+ko 무기 표시
+
 @ Volume
 ko 음량
 
@@ -1621,6 +1624,9 @@ ko 적에게 피해를 주면 선택한 적중 또는 처치 효과음을 재생
 
 @ Playback speed: faster sounds shorter and higher
 ko 재생 속도: 빠를수록 소리가 짧고 높아집니다
+
+@ Player bodies hold the weapon in use instead of the generic gun
+ko 플레이어 몸이 기본 총 대신 사용 중인 무기를 듭니다
 
 @ Plays the Quake theme in the main menu when no game is running
 ko 게임이 진행 중이 아닐 때 메인 메뉴에서 Quake 테마를 재생합니다

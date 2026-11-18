@@ -1054,6 +1054,9 @@ pl Kołysanie widoku
 @ Viewmodels
 pl Modele broni
 
+@ Visible Weapons
+pl Widoczna broń
+
 @ Volume
 pl Głośność
 
@@ -1621,6 +1624,9 @@ pl Odtwarza wybrany sygnał trafienia lub zabicia, gdy ranisz wroga
 
 @ Playback speed: faster sounds shorter and higher
 pl Szybkość odtwarzania: szybciej brzmi krócej i wyżej
+
+@ Player bodies hold the weapon in use instead of the generic gun
+pl Postacie graczy trzymają używaną broń zamiast ogólnego karabinu
 
 @ Plays the Quake theme in the main menu when no game is running
 pl Odtwarza motyw Quake w menu głównym, gdy gra nie jest uruchomiona

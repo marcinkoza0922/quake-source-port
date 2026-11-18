@@ -248,6 +248,18 @@ impl Server {
         self.core.clients.iter().enumerate().any(|(i, c)| c.active && l.vm.ent_f(i as u32 + 1, health) <= 0.0)
     }
 
+    /// Every client edict's `weaponmodel` (visible weapons on a local
+    /// server); None without an active level.
+    pub fn weapon_models(&self) -> Option<Vec<String>> {
+        let l = self.level.as_ref().filter(|_| self.active())?;
+        let f = self.core.sv.fields.weaponmodel;
+        Some(
+            (0..self.core.clients.len())
+                .map(|i| String::from_utf8_lossy(l.vm.ent_str(i as u32 + 1, f).unwrap_or(b"")).into_owned())
+                .collect(),
+        )
+    }
+
     /// Server time (`qcvm->time`).
     pub fn time(&self) -> f64 {
         self.level.as_ref().map_or(0.0, |l| l.vm.time)

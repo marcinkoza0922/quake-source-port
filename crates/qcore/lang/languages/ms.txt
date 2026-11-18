@@ -1054,6 +1054,9 @@ ms Ayunan Pandangan
 @ Viewmodels
 ms Model Senjata
 
+@ Visible Weapons
+ms Senjata kelihatan
+
 @ Volume
 ms Kelantangan
 
@@ -1621,6 +1624,9 @@ ms Mainkan isyarat kena atau bunuh pilihan anda apabila anda mencederakan musuh
 
 @ Playback speed: faster sounds shorter and higher
 ms Kelajuan main semula: lebih laju berbunyi lebih pendek dan lebih tinggi
+
+@ Player bodies hold the weapon in use instead of the generic gun
+ms Badan pemain memegang senjata yang digunakan, bukan senapang umum
 
 @ Plays the Quake theme in the main menu when no game is running
 ms Mainkan tema Quake di menu utama apabila tiada permainan berjalan

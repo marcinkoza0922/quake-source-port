@@ -1054,6 +1054,9 @@ zh-CN 视角晃动
 @ Viewmodels
 zh-CN 武器模型
 
+@ Visible Weapons
+zh-CN 显示武器
+
 @ Volume
 zh-CN 音量
 
@@ -1621,6 +1624,9 @@ zh-CN 对敌人造成伤害时播放所选的命中或击杀提示音
 
 @ Playback speed: faster sounds shorter and higher
 zh-CN 播放速度：越快声音越短越高
+
+@ Player bodies hold the weapon in use instead of the generic gun
+zh-CN 玩家身体手持正在使用的武器，而非通用枪械
 
 @ Plays the Quake theme in the main menu when no game is running
 zh-CN 未运行游戏时在主菜单播放 Quake 主题曲

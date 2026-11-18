@@ -1054,6 +1054,9 @@ eo Balanciĝo de vido
 @ Viewmodels
 eo Armilmodeloj
 
+@ Visible Weapons
+eo Videblaj armiloj
+
 @ Volume
 eo Laŭteco
 
@@ -1621,6 +1624,9 @@ eo Ludi vian elektitan sonon de trafo aŭ mortigo kiam vi damaĝas malamikon
 
 @ Playback speed: faster sounds shorter and higher
 eo Reludrapido: pli rapida sonas pli mallonge kaj pli alte
+
+@ Player bodies hold the weapon in use instead of the generic gun
+eo Korpoj de ludantoj tenas la uzatan armilon anstataŭ la ĝenerala pafilo
 
 @ Plays the Quake theme in the main menu when no game is running
 eo Ludas la Quake-temon en la ĉefmenuo kiam neniu ludo funkcias

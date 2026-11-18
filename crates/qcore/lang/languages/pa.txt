@@ -1054,6 +1054,9 @@ pa ਦ੍ਰਿਸ਼ ਹਿੱਲਣਾ
 @ Viewmodels
 pa ਹਥਿਆਰ ਮਾਡਲ
 
+@ Visible Weapons
+pa ਦਿਖਣ ਵਾਲੇ ਹਥਿਆਰ
+
 @ Volume
 pa ਵੌਲਿਊਮ
 
@@ -1621,6 +1624,9 @@ pa ਦੁਸ਼ਮਣ ਨੂੰ ਨੁਕਸਾਨ ਪਹੁੰਚਾਉਣ 'ਤ
 
 @ Playback speed: faster sounds shorter and higher
 pa ਪਲੇਬੈਕ ਸਪੀਡ: ਤੇਜ਼ ਆਵਾਜ਼ ਛੋਟੀ ਅਤੇ ਉੱਚੀ ਸੁਣਦੀ ਹੈ
+
+@ Player bodies hold the weapon in use instead of the generic gun
+pa ਖਿਡਾਰੀਆਂ ਦੇ ਸਰੀਰ ਆਮ ਬੰਦੂਕ ਦੀ ਥਾਂ ਵਰਤੋਂ ਵਿੱਚ ਹਥਿਆਰ ਫੜਦੇ ਹਨ
 
 @ Plays the Quake theme in the main menu when no game is running
 pa ਜਦੋਂ ਕੋਈ ਗੇਮ ਨਾ ਚੱਲ ਰਹੀ ਹੋਵੇ ਤਾਂ ਮੁੱਖ ਮੀਨੂ ਵਿੱਚ Quake ਦੀ ਧੁਨ ਵਜਾਉਂਦਾ ਹੈ

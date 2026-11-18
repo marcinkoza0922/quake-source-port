@@ -1054,6 +1054,9 @@ ja 視点の揺れ
 @ Viewmodels
 ja 武器モデル
 
+@ Visible Weapons
+ja 武器の表示
+
 @ Volume
 ja 音量
 
@@ -1621,6 +1624,9 @@ ja 敵にダメージを与えたときに選んだヒット音またはキル�
 
 @ Playback speed: faster sounds shorter and higher
 ja 再生速度。速くすると短く高い音になります
+
+@ Player bodies hold the weapon in use instead of the generic gun
+ja プレイヤーの体が汎用の銃ではなく使用中の武器を持つ
 
 @ Plays the Quake theme in the main menu when no game is running
 ja ゲームを実行していないとき、メインメニューでQuakeのテーマを流します

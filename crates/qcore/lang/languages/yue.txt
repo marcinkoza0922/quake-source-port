@@ -1054,6 +1054,9 @@ yue 視角晃動
 @ Viewmodels
 yue 武器模型
 
+@ Visible Weapons
+yue 顯示武器
+
 @ Volume
 yue 音量
 
@@ -1621,6 +1624,9 @@ yue 傷到敵人時播放所揀嘅命中或者殺敵提示音
 
 @ Playback speed: faster sounds shorter and higher
 yue 播放速度：越快聲音越短、越高
+
+@ Player bodies hold the weapon in use instead of the generic gun
+yue 玩家身體會拎住正在用嘅武器，而唔係通用槍
 
 @ Plays the Quake theme in the main menu when no game is running
 yue 冇玩緊遊戲時，喺主選單播Quake主題曲

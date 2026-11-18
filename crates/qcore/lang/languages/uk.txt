@@ -1054,6 +1054,9 @@ uk Похитування камери
 @ Viewmodels
 uk Модель зброї
 
+@ Visible Weapons
+uk Видима зброя
+
 @ Volume
 uk Гучність
 
@@ -1621,6 +1624,9 @@ uk Відтворює вибраний сигнал влучання чи вби
 
 @ Playback speed: faster sounds shorter and higher
 uk Швидкість відтворення: швидше — коротше й вище
+
+@ Player bodies hold the weapon in use instead of the generic gun
+uk Моделі гравців тримають поточну зброю замість стандартної
 
 @ Plays the Quake theme in the main menu when no game is running
 uk Грає тему Quake у головному меню, коли гра не запущена
