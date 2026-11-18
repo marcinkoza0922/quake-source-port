@@ -89,6 +89,28 @@ This needs `kernel.perf_event_paranoid <= 1`. If perf refuses, ask the user to
 run `! sudo sysctl kernel.perf_event_paranoid=1`. Don't change system settings
 yourself.
 
+### Other tools
+
+Also installed: samply (per-thread timeline, for hitches and spikes),
+heaptrack (allocations per frame), valgrind callgrind/cachegrind
+(noise-free instruction counts for CPU-only code, not whole-engine
+runs), hyperfine (load/startup wall time), `cargo asm` (codegen of a hot
+function), turbostat/cpupower, bcc `offcputime` (root). Which to use for
+what, and their limits on this machine: `docs/perf/README.md`, Tools.
+heaptrack works as is (its cost is small: 773 vs 758 fps):
+
+```sh
+# --record-only: otherwise heaptrack opens its GUI on the user's screen and waits
+heaptrack --record-only -o target/perf/ht target/release/quake-source-port -headless ... -autoquit 211 "+timedemo ..."
+heaptrack_print target/perf/ht.zst -F ht.folded --flamegraph-cost-type allocations
+c++filt < ht.folded > ht.dm.folded     # binutils demangles Rust v0 names
+```
+
+Headless time is simulated: each timedemo frame advances 1/72 s, so
+`-autoquit` = frames / 72 + a second or two ends the run right after the
+demo (15000 frames → 211). A larger value leaves thousands of idle
+console frames in the profile.
+
 ## Safety
 
 - Windowed runs that exit normally (`-autoquit`, `quit`, SIGTERM) save
