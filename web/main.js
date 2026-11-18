@@ -1,5 +1,7 @@
 // Browser front-end: collects the user's Quake data, keeps it (and saves,
 // configs) in IndexedDB, mounts it into the engine's VFS and starts the game.
+// A page may also offer the shareware episode: a `#shareware` button with a
+// `data-url` pointing at the shareware id1/pak0.pak (off when absent).
 import init, { start, vfs_mount, vfs_take_dirty, vfs_read } from './quake_source_port.js';
 
 const GAME_ROOT = '/quake/';
@@ -68,6 +70,32 @@ async function storeFiles(db, list) {
   return n;
 }
 
+// ---- optional shareware download ----
+async function fetchShareware(url) {
+  const r = await fetch(url);
+  if (!r.ok) throw new Error(`download failed (${r.status})`);
+  // Content-Length is the compressed size when the server gzips; only trust it uncompressed.
+  const total = r.headers.get('content-encoding') ? 0 : Number(r.headers.get('content-length')) || 0;
+  const bar = $('progress');
+  if (bar) { bar.hidden = false; bar.removeAttribute('value'); }
+  const reader = r.body.getReader();
+  const chunks = [];
+  let got = 0;
+  for (;;) {
+    const { done: end, value } = await reader.read();
+    if (end) break;
+    chunks.push(value);
+    got += value.length;
+    if (total && bar) bar.value = got / total;
+    status(`Downloading shareware data… ${(got / 1048576).toFixed(1)} MB`);
+  }
+  if (bar) bar.hidden = true;
+  const data = new Uint8Array(got);
+  let at = 0;
+  for (const c of chunks) { data.set(c, at); at += c.length; }
+  return data;
+}
+
 // ---- persistence of files the engine writes ----
 async function persistDirty(db) {
   const paths = vfs_take_dirty();
@@ -105,7 +133,10 @@ async function launch(db) {
 }
 
 async function main() {
-  if (!navigator.gpu) status('This browser has no WebGPU; the game cannot start.');
+  if (!navigator.gpu) {
+    if ($('nogpu')) $('nogpu').hidden = false; // the page explains it itself
+    else status('This browser has no WebGPU; the game cannot start.');
+  }
   const db = await openDb();
   const refresh = async () => {
     const have = (await getAll(db, 'game')).length > 0;
@@ -129,6 +160,23 @@ async function main() {
     if (await storeFiles(db, list)) await launch(db); else status('No usable files dropped.');
   });
   $('play').addEventListener('click', () => launch(db));
+  const sw = $('shareware');
+  if (sw && sw.dataset.url) {
+    sw.hidden = false;
+    sw.addEventListener('click', async () => {
+      sw.disabled = true;
+      try {
+        const have = (await getAll(db, 'game')).some(([k]) => /\/id1\/pak0\.pak$/i.test(k));
+        if (!have) await putAll(db, 'game', [[`${GAME_ROOT}id1/pak0.pak`, await fetchShareware(sw.dataset.url)]]);
+        await launch(db);
+      } catch (e) {
+        status(`Could not get the shareware data: ${e.message || e}`);
+        console.error(e);
+      } finally {
+        sw.disabled = false;
+      }
+    });
+  }
   $('forget').addEventListener('click', async () => {
     await clearStore(db, 'game');
     status('Stored game data removed (saves kept).');

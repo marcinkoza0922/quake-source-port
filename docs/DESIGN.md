@@ -854,6 +854,14 @@ space separated) and saves `vfs_take_dirty()` paths back to IndexedDB every
 WebGPU enabled): e1m1, the demo loop with the main menu, and a save persisted
 to IndexedDB.
 
+A page may offer the shareware episode: when it has a `#shareware` button with
+a `data-url`, main.js shows it, downloads that file (with an optional
+`#progress` bar), stores it as `/quake/id1/pak0.pak` unless a pak0 is already
+stored, and launches. `web/index.html` has no such button. The project website
+(separate repo `quake-source-port-website`, checked out in the gitignored
+`website/`) uses it: its `scripts/build-play.sh` runs `tools/webbuild/build.sh`
+and copies the bundle plus main.js next to its own `play/index.html`.
+
 ## Disabled features (hidden, code retained)
 
 Ragdolls (`r_debris_ragdolls`, `_ragdollstart`, `_maxragdolls`, `r_debris_killlift`)
