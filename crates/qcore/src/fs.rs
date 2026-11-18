@@ -10,6 +10,7 @@ use std::collections::{BTreeSet, HashMap};
 use std::io::{Read, Seek, SeekFrom};
 use std::path::{Path, PathBuf};
 mod discovery;
+pub use discovery::kex_save_dirs;
 mod pack;
 pub use pack::*;
 

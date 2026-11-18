@@ -41,6 +41,30 @@ pub(crate) fn register(s: &mut Server) {
     s.add_cmd("status", cmd_status);
     s.add_cmd("kick", cmd_kick);
     s.add_cmd("ping", cmd_ping);
+    s.add_cmd("pause", cmd_pause);
+}
+
+/// Host_Pause_f (server side): `pausable 0` refuses; otherwise toggles,
+/// tells everyone who did it and sends svc_setpause (demos record it).
+fn cmd_pause(s: &mut Server, _: &Args) {
+    let Some((i, e)) = s.cmd_player() else { return };
+    if s.core.cvars.value_of("pausable") == 0.0 {
+        s.client_print(i, "Pause not allowed.\n");
+        return;
+    }
+    let paused = !s.core.sv.paused;
+    s.core.sv.paused = paused;
+    let name = s.level.as_ref().and_then(|l| l.vm.ent_str(e, s.core.sv.fields.netname).ok()).map(|n| n.to_vec()).unwrap_or_default();
+    let mut msg = name;
+    msg.extend_from_slice(if paused { b" paused the game\n" } else { b" unpaused the game\n" });
+    s.core.print(&qcore::text::decode(&msg));
+    for c in s.core.clients.iter_mut().filter(|c| c.active && c.spawned) {
+        c.message.byte(crate::msg::SVC_PRINT);
+        c.message.string(&msg);
+    }
+    let rd = &mut s.core.sv.reliable_datagram;
+    rd.byte(crate::msg::SVC_SETPAUSE);
+    rd.byte(i32::from(paused));
 }
 
 /// Host_MaxPlayers_f: slot count for the next server (1..=16); more than

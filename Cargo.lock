@@ -1481,6 +1481,7 @@ name = "qsmoke"
 version = "0.1.0"
 dependencies = [
  "qcore",
+ "qui",
 ]
 
 [[package]]

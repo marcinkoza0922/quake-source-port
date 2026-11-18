@@ -82,7 +82,7 @@ impl Host {
     }
 
     /// Starts loading the Quaddicted index for Map Packs > Get more maps.
-    fn open_quaddicted(&mut self, force: bool) {
+    pub(super) fn open_quaddicted(&mut self, force: bool) {
         let basedir = self.fs_snapshot.0.clone();
         let cache = crate::user_dir("id1").parent().map_or_else(|| basedir.join("quaddicted"), |p| p.join("quaddicted"));
         self.menu.mods.online.data.open(&basedir, &cache, force);

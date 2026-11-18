@@ -1,7 +1,12 @@
 //! qbot: automated level-breaking test.
 //!
-//! Usage: qbot [-basedir <dir>] [-game <dir>] [-skill N] [-time <sim s>] [-j N]
+//! Usage: qbot [-basedir <dir>] [-game <dir>|a,b,..|all] [-skill N] [-time <sim s>] [-j N]
 //!             [-out <dir>] [-baseline <file>] [-save-baseline] [-v] [map ...]
+//!
+//! `-game all` runs every installed game dir (each with the mission-pack
+//! base the mod menu would mount), all maps sharing the worker threads;
+//! results go to `<out>/<game>/report.json` plus `<out>/summary.txt`, which
+//! lists engine and QC errors first. Baselines stay per game.
 //!
 //! Each map runs on an in-process headless server at skill 3. The bot has god
 //! mode, noclip and full knowledge of the edicts: it kills every monster,
@@ -32,7 +37,7 @@ struct Opts {
     maps: Vec<String>,
 }
 
-const USAGE: &str = "qbot [-basedir D] [-game G] [-skill N] [-time S] [-j N] [-out DIR] [-baseline F] [-save-baseline] [-v] [map ...]";
+const USAGE: &str = "qbot [-basedir D] [-game G|a,b|all] [-skill N] [-time S] [-j N] [-out DIR] [-baseline F] [-save-baseline] [-v] [map ...]";
 
 fn parse_args() -> Opts {
     let basedir = std::env::var_os("QUAKE_BASEDIR").map_or_else(|| PathBuf::from("vkQuake directory with maps"), PathBuf::from);
@@ -69,17 +74,34 @@ fn parse_args() -> Opts {
             m => o.maps.push(m.to_string()),
         }
     }
-    o.baseline = baseline.unwrap_or_else(|| PathBuf::from(format!("tools/qbot/baseline-{}.json", o.game)));
+    o.baseline = baseline.unwrap_or_default();
     o
+}
+
+/// The mission pack `game` builds on (hipnotic, rogue, quoth), as the mod
+/// menu would mount it (`qui::mods`: the dir name or modinfo.txt `base`).
+fn base_of(basedir: &Path, game: &str) -> Option<&'static str> {
+    qui::mods::scan(basedir).into_iter().find(|m| m.dir.eq_ignore_ascii_case(game)).and_then(|m| m.base.dir())
 }
 
 fn mount(basedir: &Path, game: &str) -> Fs {
     let mut fs = Fs::new(basedir);
     fs.add_game_dir("id1");
+    if let Some(b) = base_of(basedir, game).filter(|b| !b.eq_ignore_ascii_case(game)) {
+        fs.add_game_dir(b);
+    }
     if game != "id1" {
         fs.add_game_dir(game);
     }
     fs
+}
+
+/// Game dirs for `-game`: one, a comma list, or `all` installed.
+fn games_of(basedir: &Path, arg: &str) -> Vec<String> {
+    if arg.eq_ignore_ascii_case("all") {
+        return qui::mods::scan(basedir).into_iter().map(|m| m.dir).collect();
+    }
+    arg.split(',').filter(|g| !g.is_empty()).map(str::to_string).collect()
 }
 
 /// Playable maps owned by `game` (those with a spawn point).
@@ -137,9 +159,9 @@ fn report_json(r: &bot::Report) -> String {
     )
 }
 
-fn run_one(o: &Opts, map: &str) -> bot::Report {
+fn run_one(o: &Opts, game: &str, map: &str) -> bot::Report {
     let opt = bot::Options { skill: o.skill, max_time: o.time, verbose: o.verbose };
-    let fs = mount(&o.basedir, &o.game);
+    let fs = mount(&o.basedir, game);
     match catch_unwind(AssertUnwindSafe(|| bot::run(fs, map, &opt))) {
         Ok(r) => r,
         Err(p) => {
@@ -153,8 +175,8 @@ fn log_texts(r: &bot::Report) -> Vec<String> {
     r.unusual.iter().map(|l| bot::devlog::text(l).to_string()).collect()
 }
 
-/// Run every map on `o.jobs` threads, printing a line per map.
-fn run_jobs(o: &Opts, maps: &[String]) -> Vec<(String, bot::Report)> {
+/// Run every (game, map) on `o.jobs` threads, printing a line per map.
+fn run_jobs(o: &Opts, maps: &[(String, String)]) -> Vec<(String, String, bot::Report)> {
     let next = Mutex::new(0usize);
     let results = Mutex::new(Vec::new());
     std::thread::scope(|s| {
@@ -166,10 +188,11 @@ fn run_jobs(o: &Opts, maps: &[String]) -> Vec<(String, bot::Report)> {
                         *n += 1;
                         *n - 1
                     };
-                    let Some(map) = maps.get(i) else { break };
-                    let r = run_one(o, map);
+                    let Some((game, map)) = maps.get(i) else { break };
+                    let r = run_one(o, game, map);
+                    let label = if game == &o.game { map.clone() } else { format!("{game}/{map}") };
                     eprintln!(
-                        "{map:<16} kills {:>3}/{:<3} secrets {:>2}/{:<2} triggers {:>3}/{:<3} buttons {:>2}/{:<2} keys {}/{} failed {:>2}{}{} ({:.0}s sim, {:.1}s wall)",
+                        "{label:<16} kills {:>3}/{:<3} secrets {:>2}/{:<2} triggers {:>3}/{:<3} buttons {:>2}/{:<2} keys {}/{} failed {:>2}{}{} ({:.0}s sim, {:.1}s wall)",
                         r.kills,
                         r.total_monsters,
                         r.secrets,
@@ -186,13 +209,13 @@ fn run_jobs(o: &Opts, maps: &[String]) -> Vec<(String, bot::Report)> {
                         r.sim_time,
                         r.wall_time
                     );
-                    results.lock().unwrap().push((map.clone(), r));
+                    results.lock().unwrap().push((game.clone(), map.clone(), r));
                 }
             });
         }
     });
     let mut v = results.into_inner().unwrap();
-    v.sort_by(|a, b| a.0.cmp(&b.0));
+    v.sort_by(|a, b| (&a.0, &a.1).cmp(&(&b.0, &b.1)));
     v
 }
 
@@ -215,22 +238,96 @@ fn main() {
         eprintln!("qbot: no id1 in {}", o.basedir.display());
         std::process::exit(2);
     }
-    let maps = if o.maps.is_empty() { maps_of(&o.basedir, &o.game) } else { o.maps.clone() };
-    let results = run_jobs(&o, &maps);
+    let games = games_of(&o.basedir, &o.game);
+    let multi = games.len() > 1;
+    if multi && !o.maps.is_empty() {
+        eprintln!("qbot: map names need a single -game");
+        std::process::exit(2);
+    }
+    let mut work = Vec::new();
+    for g in &games {
+        let maps = if o.maps.is_empty() { maps_of(&o.basedir, g) } else { o.maps.clone() };
+        work.extend(maps.into_iter().map(|m| (g.clone(), m)));
+    }
+    eprintln!("qbot: {} maps in {} game dir(s)", work.len(), games.len());
+    let all = run_jobs(&o, &work);
+    let mut any_regression = false;
+    for g in &games {
+        let results: Vec<(String, &bot::Report)> = all.iter().filter(|(gg, _, _)| gg == g).map(|(_, m, r)| (m.clone(), r)).collect();
+        let out_dir = if multi { o.out.join(g) } else { o.out.clone() };
+        let baseline = if o.baseline.as_os_str().is_empty() || multi { PathBuf::from(format!("tools/qbot/baseline-{g}.json")) } else { o.baseline.clone() };
+        any_regression |= report_game(&o, g, multi, &out_dir, &baseline, &results);
+    }
+    if multi {
+        write_summary(&o.out, &all);
+    }
+    if any_regression {
+        std::process::exit(1);
+    }
+}
 
+/// `<out>/summary.txt`: per game totals, then every engine/QC error and
+/// unusual developer-log line, which is what a sweep over all packs is for.
+fn write_summary(out: &Path, all: &[(String, String, bot::Report)]) {
+    let mut s = String::new();
+    let mut games: Vec<&str> = all.iter().map(|(g, _, _)| g.as_str()).collect();
+    games.dedup();
+    let errors: Vec<_> = all.iter().filter(|(_, _, r)| !r.errors.is_empty()).collect();
+    let _ = writeln!(s, "{} maps in {} game dirs; {} maps with engine/QC errors\n", all.len(), games.len(), errors.len());
+    let _ = writeln!(s, "{:<24} {:>5} {:>11} {:>9} {:>7} {:>6}", "game", "maps", "kills", "secrets", "exits", "errors");
+    for g in &games {
+        let rs: Vec<&bot::Report> = all.iter().filter(|(gg, _, _)| gg == g).map(|(_, _, r)| r).collect();
+        let sum = |f: fn(&bot::Report) -> i32| rs.iter().map(|r| i64::from(f(r))).sum::<i64>();
+        let _ = writeln!(
+            s,
+            "{g:<24} {:>5} {:>5}/{:<5} {:>4}/{:<4} {:>3}/{:<3} {:>6}",
+            rs.len(),
+            sum(|r| r.kills),
+            sum(|r| r.total_monsters),
+            sum(|r| r.secrets),
+            sum(|r| r.total_secrets),
+            rs.iter().filter(|r| r.exited).count(),
+            rs.iter().filter(|r| r.has_exit).count(),
+            rs.iter().filter(|r| !r.errors.is_empty()).count()
+        );
+    }
+    let _ = writeln!(s, "\n## Engine / QC errors");
+    for (g, m, r) in &errors {
+        for e in &r.errors {
+            let _ = writeln!(s, "{g}/{m}: {e}");
+        }
+    }
+    let _ = writeln!(s, "\n## Unusual developer-log lines");
+    for (g, m, r) in all {
+        for l in &r.unusual {
+            let _ = writeln!(s, "{g}/{m}: {l}");
+        }
+    }
+    let _ = std::fs::create_dir_all(out);
+    let p = out.join("summary.txt");
+    if let Err(e) = std::fs::write(&p, s) {
+        eprintln!("qbot: writing {}: {e}", p.display());
+    } else {
+        eprintln!("qbot: summary {}", p.display());
+    }
+}
+
+/// Writes `<out_dir>/report.json` and traces, compares with (or saves) the
+/// baseline; true when something regressed.
+fn report_game(o: &Opts, game: &str, multi: bool, out_dir: &Path, baseline: &Path, results: &[(String, &bot::Report)]) -> bool {
     let mut j = String::from("{\n");
     for (i, (m, r)) in results.iter().enumerate() {
         let _ = writeln!(j, "  {}: {}{}", json_str(m), report_json(r), if i + 1 < results.len() { "," } else { "" });
     }
     j.push_str("}\n");
-    let _ = std::fs::create_dir_all(&o.out);
-    let out = o.out.join("report.json");
+    let _ = std::fs::create_dir_all(out_dir);
+    let out = out_dir.join("report.json");
     if let Err(e) = std::fs::write(&out, &j) {
         eprintln!("qbot: writing {}: {e}", out.display());
     }
-    let traces = o.out.join("trace");
+    let traces = out_dir.join("trace");
     let _ = std::fs::create_dir_all(&traces);
-    for (m, r) in &results {
+    for (m, r) in results {
         let mut body = r.trace.join("\n");
         body.push('\n');
         if let Err(e) = std::fs::write(traces.join(format!("{m}.log")), body) {
@@ -239,7 +336,7 @@ fn main() {
     }
 
     let mut regressions: Vec<String> = results.iter().filter(|(_, r)| !r.errors.is_empty()).map(|(m, _)| format!("{m}: errors")).collect();
-    let old = std::fs::read_to_string(&o.baseline).ok().and_then(|t| qui::json::parse(&t));
+    let old = std::fs::read_to_string(baseline).ok().and_then(|t| qui::json::parse(&t));
     if o.save_baseline {
         // Merge, so partial runs keep the other maps.
         let mut entries: Vec<(String, String)> = Vec::new();
@@ -250,15 +347,15 @@ fn main() {
                 entries.push((k.clone(), baseline_entry(n("kills"), n("secrets"), n("events"), exited, &baseline_log(e))));
             }
         }
-        for (m, r) in &results {
+        for (m, r) in results {
             entries.push((m.clone(), baseline_entry(r.kills as f64, r.secrets as f64, r.events() as f64, r.exited, &log_texts(r))));
         }
         entries.sort();
         let body: Vec<String> = entries.iter().map(|(k, v)| format!("  {}: {v}", json_str(k))).collect();
-        let _ = std::fs::write(&o.baseline, format!("{{\n{}\n}}\n", body.join(",\n")));
-        eprintln!("qbot: baseline written to {}", o.baseline.display());
+        let _ = std::fs::write(baseline, format!("{{\n{}\n}}\n", body.join(",\n")));
+        eprintln!("qbot: baseline written to {}", baseline.display());
     } else if let Some(b) = old {
-        for (m, r) in &results {
+        for (m, r) in results {
             let Some(e) = b.get(m) else { continue };
             let n = |f: &str| e.get(f).and_then(|x| x.num()).unwrap_or(0.0) as i64;
             let (kills, secrets, events) = (n("kills"), n("secrets"), n("events"));
@@ -282,12 +379,10 @@ fn main() {
     }
     let failed: usize = results.iter().map(|(_, r)| r.failed.len()).sum();
     eprintln!("qbot: {} maps, {failed} goals failed, report {}", results.len(), out.display());
-    if !regressions.is_empty() {
-        for r in &regressions {
-            eprintln!("REGRESSION {r}");
-        }
-        std::process::exit(1);
+    for r in &regressions {
+        eprintln!("REGRESSION {}{r}", if multi { format!("{game}/") } else { String::new() });
     }
+    !regressions.is_empty()
 }
 
 #[cfg(test)]

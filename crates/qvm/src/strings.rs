@@ -120,9 +120,10 @@ impl Strings {
 
     /// PR_SetEngineString for engine-owned constants: interned, stable handle.
     pub fn engine(&mut self, s: &[u8]) -> i32 {
-        if s.is_empty() {
-            return 0;
-        }
+        // PR_SetEngineString returns 0 only for a NULL pointer: an empty
+        // engine string (precache slot 0 for `setmodel(e, "")`, substring
+        // past the end, an empty player name) is a non-null "", which
+        // `OP_IF` treats as true and savegames write as "".
         if let Some(&h) = self.interned.get(s) {
             return h;
         }

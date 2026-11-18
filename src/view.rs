@@ -19,9 +19,12 @@ mod speed;
 pub mod camera;
 pub use settings::ViewCvars;
 
+pub const CONTENTS_EMPTY: i32 = -1;
+pub const CONTENTS_SOLID: i32 = -2;
 pub const CONTENTS_WATER: i32 = -3;
 pub const CONTENTS_SLIME: i32 = -4;
 pub const CONTENTS_LAVA: i32 = -5;
+pub const CONTENTS_SKY: i32 = -6;
 
 #[derive(Clone, Copy, Default)]
 struct CShift {
@@ -55,6 +58,9 @@ pub struct ViewState {
     damage: CShift,
     edges: [f32; 4],
     bonus: CShift,
+    /// `cshift_empty`: the contents shift outside liquids, set by `v_cshift`
+    /// (QC stuffs it: AD, Alkaline, ...). Survives level changes like C's.
+    empty: CShift,
     oldz: f32,
     anims: Vec<Anim>,
     static_anims: Vec<Anim>,
@@ -75,7 +81,19 @@ fn dot(a: Vec3, b: Vec3) -> f32 {
 
 impl ViewState {
     pub fn reset(&mut self) {
+        let empty = self.empty;
         *self = ViewState::default();
+        self.empty = empty;
+    }
+
+    /// V_cshift_f: `v_cshift r g b percent` (atoi like C).
+    pub fn set_empty_shift(&mut self, r: i32, g: i32, b: i32, percent: i32) {
+        self.empty = CShift { color: [r as f32, g as f32, b as f32], percent: percent as f32 };
+    }
+
+    /// V_ResetEffects (CL_Disconnect).
+    pub fn reset_effects(&mut self) {
+        self.empty.percent = 0.0;
     }
 
     /// V_ParseDamage.
@@ -117,11 +135,13 @@ impl ViewState {
     /// V_UpdateBlend: decays shifts and returns the polyblend.
     /// `flash` scales the damage/bonus/powerup shifts (accessibility).
     pub fn blend(&mut self, cl: &ClientState, contents: i32, ft: f32, flash: f32) -> [f32; 4] {
+        // V_SetContentsColor: empty, solid and sky use cshift_empty;
+        // everything else that isn't lava or slime is water.
         let content = match contents {
+            CONTENTS_EMPTY | CONTENTS_SOLID | CONTENTS_SKY => self.empty,
             CONTENTS_LAVA => CShift { color: [255.0, 80.0, 0.0], percent: 150.0 },
             CONTENTS_SLIME => CShift { color: [0.0, 25.0, 5.0], percent: 150.0 },
-            c if c <= CONTENTS_WATER => CShift { color: [130.0, 80.0, 50.0], percent: 128.0 },
-            _ => CShift::default(),
+            _ => CShift { color: [130.0, 80.0, 50.0], percent: 128.0 },
         };
         let it = cl.items;
         let power = if it & IT_QUAD != 0 {

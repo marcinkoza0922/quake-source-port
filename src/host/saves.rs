@@ -76,12 +76,46 @@ impl Host {
     }
 
     /// The existing save called `name`, in either format.
+    /// Falls back to the 2021 re-release's save folder (like ironwail),
+    /// taking only a KEX save made for the running game.
     pub(super) fn find_save(&self, name: &str) -> Option<PathBuf> {
         let dir = self.user_dir();
-        match name.rsplit_once('.') {
+        let own = match name.rsplit_once('.') {
             Some((_, e)) if e == crate::autosave::SAVE_EXT || e == crate::autosave::ADDON_EXT => qcore::vfs::is_file(&dir.join(name)).then(|| dir.join(name)),
             _ => crate::autosave::find(&dir, name),
+        };
+        own.or_else(|| self.find_other_engine_save(name)).or_else(|| self.find_kex_save(name))
+    }
+
+    /// A plain save another engine left for the running game: vkQuake and
+    /// QuakeSpasm write `<basedir>/<game>/`, ironwail `~/.ironwail/<game>/`.
+    fn find_other_engine_save(&self, name: &str) -> Option<PathBuf> {
+        if !valid_save_name(name) {
+            return None;
         }
+        let fs = &self.server.core.fs;
+        let game = fs.game_dir().unwrap_or("id1");
+        let file = format!("{}.sav", save_stem(name));
+        let mut dirs = vec![fs.basedir().join(game)];
+        if let Some(home) = std::env::var_os("HOME") {
+            dirs.push(PathBuf::from(home).join(".ironwail").join(game));
+        }
+        dirs.into_iter().map(|d| d.join(&file)).find(|p| qcore::vfs::is_file(p))
+    }
+
+    fn find_kex_save(&self, name: &str) -> Option<PathBuf> {
+        if !valid_save_name(name) {
+            return None;
+        }
+        let game = self.server.core.fs.game_dir().unwrap_or("id1").to_ascii_lowercase();
+        let file = format!("{}.sav", save_stem(name));
+        qcore::fs::kex_save_dirs().into_iter().map(|d| d.join(&file)).find(|p| {
+            // version line "6", then the game dir
+            qcore::vfs::read(p).ok().is_some_and(|b| {
+                let mut lines = b.split(|&c| c == b'\n').map(|l| String::from_utf8_lossy(l).trim().to_ascii_lowercase());
+                lines.next().as_deref() == Some("6") && lines.next().as_deref() == Some(game.as_str())
+            })
+        })
     }
 
     pub(super) fn update_autosave(&mut self) {
@@ -256,7 +290,7 @@ pub(super) fn register(c: &mut Commands<Host>) {
             h.print("save <savename> : save a game\n");
             return;
         }
-        if !h.server.active() || h.cl.intermission != 0 || h.cl.stats[STAT_HEALTH] <= 0 {
+        if !h.server.active() || h.cl.intermission != 0 || h.server.any_client_dead() {
             h.print(&qcore::ctr!("Can't save now.\n"));
             return;
         }

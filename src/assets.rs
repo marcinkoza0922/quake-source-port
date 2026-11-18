@@ -43,6 +43,8 @@ pub struct Level {
     pub cm: std::sync::OnceLock<qworld::CollisionModel>,
     pub world_fog: Fog,
     pub world_sky: String,
+    /// Skybox in use (worldspawn, svc_skybox or the `sky` command).
+    pub sky: String,
     /// Worldspawn `[_]wateralpha`/`lavaalpha`/`slimealpha`/`telealpha`
     /// (R_ParseWorldspawn), in that order.
     pub liquid_alpha: [Option<f32>; 4],
@@ -184,6 +186,7 @@ impl Level {
     pub fn set_sky(&mut self, fs: &Fs, r: &mut Renderer, name: &str) {
         let faces = if name.is_empty() { None } else { qrender::load_skybox(fs, name) };
         let _ = r.set_skybox(faces.as_ref());
+        self.sky = if faces.is_some() { name.to_string() } else { String::new() };
     }
 
     /// Model by name, loading on first use (temp entity models).

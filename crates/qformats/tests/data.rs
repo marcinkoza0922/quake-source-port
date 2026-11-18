@@ -42,7 +42,8 @@ fn game_files(game: &str) -> Vec<(String, Vec<u8>)> {
         }
     }
     if let Ok(rd) = std::fs::read_dir(dir.join("maps")) {
-        for e in rd.flatten() {
+        // map packs can add subdirectories (sources, prefabs) under maps/
+        for e in rd.flatten().filter(|e| e.path().is_file()) {
             let n = e.file_name().to_string_lossy().to_ascii_lowercase();
             out.push((format!("maps/{n}"), std::fs::read(e.path()).unwrap()));
         }

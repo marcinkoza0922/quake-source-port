@@ -5,13 +5,17 @@ use qcore::math::{Vec3, angle_vectors};
 use qrender::View;
 use qworld::hull::CollisionModel;
 
-#[derive(Clone, Copy, Debug, PartialEq, Eq, Default)]
+#[derive(Clone, Copy, Debug, PartialEq, Default)]
 pub enum Camera {
     #[default]
     First,
     Center,
     ShoulderRight,
     ShoulderLeft,
+    /// `chase_active` (chase.c): `chase_back` behind, `chase_up` above and
+    /// `chase_right` to the left (C subtracts it). Mods turn it on from QC
+    /// (Mjolnir's rally car).
+    Chase { back: f32, right: f32, up: f32 },
 }
 
 /// Distance kept between the camera and a wall it was pulled in by.
@@ -38,6 +42,7 @@ impl Camera {
             Camera::Center => (80.0, 0.0, 12.0),
             Camera::ShoulderRight => (56.0, 26.0, 8.0),
             Camera::ShoulderLeft => (56.0, -26.0, 8.0),
+            Camera::Chase { back, right, up } => (back, -right, up),
         }
     }
 

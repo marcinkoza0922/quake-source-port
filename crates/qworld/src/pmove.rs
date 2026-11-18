@@ -104,15 +104,9 @@ struct Pm<'a, 'b> {
     watertype: i32,
 }
 
+/// AngleVectors with C's float/double rounding (see `qcore::math`).
 fn angle_vectors(a: [f32; 3]) -> (Vec3, Vec3, Vec3) {
-    let r = |d: f32| (d * std::f32::consts::PI * 2.0 / 360.0).sin_cos();
-    let (sy, cy) = r(a[1]);
-    let (sp, cp) = r(a[0]);
-    let (sr, cr) = r(a[2]);
-    let f = Vec3::new(cp * cy, cp * sy, -sp);
-    let rt = Vec3::new(-sr * sp * cy + -cr * -sy, -sr * sp * sy + -cr * cy, -sr * cp);
-    let u = Vec3::new(cr * sp * cy + -sr * -sy, cr * sp * sy + -sr * cy, cr * cp);
-    (f, rt, u)
+    qcore::math::angle_vectors(Vec3::from(a))
 }
 
 fn normalize(v: &mut Vec3) -> f32 {

@@ -253,6 +253,19 @@ impl Host {
         }
     }
 
+    /// `play`/`playvol`: S_StartSound at the listener with a fresh entity
+    /// number each time (C's `hash++`), so sounds never cut each other off.
+    pub(super) fn play_console_sound(&mut self, name: &str, volume: f32) {
+        let name = if name.rsplit('/').next().is_some_and(|f| f.contains('.')) { name.to_string() } else { format!("{name}.wav") };
+        self.console_sound_id = self.console_sound_id.wrapping_add(1);
+        let entity = 345 + self.console_sound_id as i32;
+        if let Some(s) = &mut self.snd
+            && let Some(sfx) = s.precache(&name)
+        {
+            s.event(SoundEvent::Start { entity, channel: 0, sfx, origin: Default::default(), volume: volume.clamp(0.0, 1.0), attenuation: 0.0 });
+        }
+    }
+
     pub(super) fn local_sound(&mut self, name: &str) {
         if let Some(s) = &mut self.snd
             && let Some(sfx) = s.precache(name)

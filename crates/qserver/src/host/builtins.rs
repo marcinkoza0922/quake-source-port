@@ -132,7 +132,9 @@ impl Host for Ctx<'_> {
                     return Ok(());
                 }
                 let yaw = (yaw as f64 * std::f64::consts::PI * 2.0 / 360.0) as f32;
-                let mv = Vec3::new(yaw.cos() * dist, yaw.sin() * dist, 0.0);
+                // C: cos(yaw) * dist in double, stored as float
+                let (y, d) = (yaw as f64, dist as f64);
+                let mv = Vec3::new((y.cos() * d) as f32, (y.sin() * d) as f32, 0.0);
                 let r = {
                     let (mut ents, w) = self.ents(vm);
                     qworld::monster::movestep(w, &mut ents, me, mv, true)

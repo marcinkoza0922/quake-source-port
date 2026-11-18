@@ -45,6 +45,9 @@ impl Host {
 
     /// cl_camera: the camera perspective for every local player.
     pub(super) fn camera(&self) -> crate::view::camera::Camera {
+        if self.cv("chase_active") != 0.0 {
+            return crate::view::camera::Camera::Chase { back: self.cv("chase_back"), right: self.cv("chase_right"), up: self.cv("chase_up") };
+        }
         crate::view::camera::Camera::from_cvar(self.cv("cl_camera"))
     }
 
@@ -153,6 +156,7 @@ impl Host {
             self.cbuf.add_text("\n");
         }
         self.exec_cbuf();
+        self.qd_cli_frame();
         if self.startup < 2 {
             self.startup += 1;
             if self.startup == 1 {
@@ -234,7 +238,15 @@ impl Host {
         let maxfps = self.cv("host_maxfps");
         let tic = if maxfps > 0.0 && maxfps <= 72.0 { 0.0 } else { SERVER_TIC };
         if self.accum >= tic {
-            let sdt = self.accum.min(0.1) * timescale;
+            let mut sdt = self.accum.min(0.1) * timescale;
+            // Host_AdvanceTime: host_timescale scales the frame, else
+            // host_framerate fixes it (slow motion, deterministic tests).
+            let (hts, hfr) = (self.cv("host_timescale") as f64, self.cv("host_framerate") as f64);
+            if hts > 0.0 {
+                sdt *= hts;
+            } else if hfr > 0.0 {
+                sdt = hfr;
+            }
             self.accum = 0.0;
             if let Some(i) = self.local {
                 let mut cmd = self.last_cmd;
@@ -338,7 +350,8 @@ impl Host {
         self.check_local_client();
         self.sync_fte();
         if self.cl.signon > 0 {
-            self.cl.frame(dt * timescale);
+            let demo_paused = self.demo.as_ref().is_some_and(|d| d.paused);
+            self.cl.frame(if demo_paused { 0.0 } else { dt * timescale });
             self.apply_qw_prediction();
         }
         for g in &mut self.guests {

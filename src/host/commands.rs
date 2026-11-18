@@ -216,6 +216,7 @@ pub(super) fn register_commands(c: &mut Commands<Host>) {
         });
     }
     c.add("bf", |h, _| h.view.bonus_flash());
+    super::compat_cmds::register(c);
     c.add("+showscores", |h, _| h.show_scores = true);
     c.add("-showscores", |h, _| h.show_scores = false);
     super::demo::register(c);
@@ -366,12 +367,15 @@ pub(super) fn register_commands(c: &mut Commands<Host>) {
     c.add("force_centerview", |h, _| h.cl.viewangles[0] = 0.0);
     c.add("centerview", |h, _| h.cl.viewangles[0] = 0.0);
     super::saves::register(c);
+    // Host_Pause_f: a playing demo pauses itself (ericw); otherwise the
+    // server decides (`pausable`) and answers with svc_setpause.
     c.add("pause", |h, _| {
-        if h.server.active() {
-            let p = !h.server.core.sv.paused;
-            h.server.core.sv.paused = p;
-            h.cl.paused = p;
-            h.print(if p { "paused\n" } else { "unpaused\n" });
+        if let Some(d) = &mut h.demo {
+            d.paused = !d.paused;
+        } else if h.remote() {
+            h.cl.send_string_cmd("pause");
+        } else if let Some(i) = h.local.filter(|_| h.server.active()) {
+            h.server.client_command(i, "pause");
         }
     });
     c.add("disconnect", |h, _| h.stop_game());

@@ -32,7 +32,39 @@ impl Ctx<'_> {
         if if bsp_ext { data.is_none() } else { !self.c.fs.exists(name) } {
             return Err(vm.run_error(format!("Mod_LoadModel: {name} not found")));
         }
-        Ok(Some(ModelInfo { name: name.into(), brush: false, mins: Vec3::splat(-16.0), maxs: Vec3::splat(16.0) }))
+        let (mins, maxs) = self.alias_bounds(name);
+        Ok(Some(ModelInfo { name: name.into(), brush: false, mins, maxs }))
+    }
+
+    /// `mod->mins`/`maxs` of a non-brush model, which PF_setmodel gives
+    /// entities. Like ironwail and vkQuake (`sv_gameplayfix_setmodelrealbox`
+    /// 1), not vanilla's fixed ±16 box: an MDL's bounds over every pose
+    /// (Mod_CalcAliasBounds), an MD3's over every frame, a sprite's
+    /// ±width/2, ±height/2 (Mod_LoadSpriteModel, integer halves). An MDL
+    /// with an `.md3`/`.md5mesh` replacement keeps the MDL's bounds, as in
+    /// vkQuake, which loads the MDL last; ironwail takes the replacement's
+    /// bind pose when `r_enhancedmodels` loads one.
+    fn alias_bounds(&self, name: &str) -> (Vec3, Vec3) {
+        let fallback = (Vec3::splat(-16.0), Vec3::splat(16.0));
+        let Some(data) = self.c.fs.open(name) else { return fallback };
+        match data.get(..4) {
+            Some(b"IDPO") => {
+                let Ok(mdl) = qformats::mdl::Mdl::parse(&data) else { return fallback };
+                union(mdl.frames.iter().flat_map(|f| f.poses.iter()).flat_map(|p| p.verts.iter()).map(|&v| Vec3::from(mdl.decode(v)))).unwrap_or(fallback)
+            }
+            Some(b"IDP3") => qformats::md3::Md3::parse(&data)
+                .ok()
+                .and_then(|m| union(m.surfaces.iter().flat_map(|s| s.verts.iter()).map(|v| Vec3::from(v.xyz.map(|x| x as f32 * qformats::md3::XYZ_SCALE)))))
+                .unwrap_or(fallback),
+            Some(b"IDSP") => match qformats::spr::Spr::parse(&data) {
+                Ok(s) => {
+                    let (w, h) = ((s.width / 2) as f32, (s.height / 2) as f32);
+                    (Vec3::new(-w, -w, -h), Vec3::new(w, w, h))
+                }
+                Err(_) => fallback,
+            },
+            _ => fallback,
+        }
     }
 
     pub(super) fn precache_model(&mut self, vm: &mut Vm) -> Result<()> {
@@ -97,4 +129,9 @@ impl Ctx<'_> {
         };
         self.set_min_max_size(vm, e, mn, mx)
     }
+}
+
+/// Bounding box of `pts`, or None when empty.
+fn union(pts: impl Iterator<Item = Vec3>) -> Option<(Vec3, Vec3)> {
+    pts.fold(None, |acc, v| Some(acc.map_or((v, v), |(lo, hi): (Vec3, Vec3)| (lo.min(v), hi.max(v)))))
 }

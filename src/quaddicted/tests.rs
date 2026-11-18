@@ -115,3 +115,80 @@ fn live_install() {
     assert!(m.iter().any(|m| m.dir == "002blue" && m.title == "Blue Is The Darkest Shade"), "{m:?}");
     let _ = std::fs::remove_dir_all(&base);
 }
+
+#[test]
+fn a_base_pack_installs_into_its_own_dir() {
+    // Quoth itself (pak files under quoth/) is the base others mount, not a map pack
+    let r = release(r#"{"sha256":"x","urls":["u/quoth2pt2full_2.zip"],"tags":[],"install":{"extract":"{base}/quoth/"}}"#);
+    let (p, base) = plan(&r.install, &names(&["pak0.pak", "pak1.pak", "quoth.cfg"]), "quoth2pt2full_2");
+    let dests: Vec<&str> = p.iter().map(|(d, _)| d.as_str()).collect();
+    assert_eq!(dests, ["quoth/pak0.pak", "quoth/pak1.pak", "quoth/quoth.cfg"]);
+    assert_eq!(base, None);
+}
+
+#[test]
+fn a_mod_that_needs_quoth_gets_it_as_base() {
+    let dir = std::env::temp_dir().join(format!("qsp-quaddicted-base-{}", std::process::id()));
+    let _ = std::fs::remove_dir_all(&dir);
+    std::fs::create_dir_all(&dir).unwrap();
+    // a zip with a mod dir of its own (bluemonday/progs.dat)
+    let zip = dir.join("bm.zip");
+    std::fs::write(&zip, stored_zip("bluemonday/progs.dat", b"progs")).unwrap();
+    let r = release(r#"{"sha256":"x","urls":["u/bluemonday_v2.zip"],"tags":["title=Blue Monday Jam","dependency=quoth2pt2full_2"],"install":{"extract":"{base}/"}}"#);
+    let base = dir.join("base");
+    std::fs::create_dir_all(base.join("quoth")).unwrap();
+    assert_eq!(install(&r, &zip, &base).unwrap(), "bluemonday");
+    let info = std::fs::read_to_string(base.join("bluemonday/modinfo.txt")).unwrap();
+    assert!(info.contains("base quoth"), "{info}");
+    let _ = std::fs::remove_dir_all(&dir);
+}
+
+/// A one-entry zip, stored (no compression).
+fn stored_zip(name: &str, data: &[u8]) -> Vec<u8> {
+    let mut crc = 0xffff_ffffu32;
+    for &b in data {
+        crc ^= u32::from(b);
+        for _ in 0..8 {
+            crc = if crc & 1 != 0 { (crc >> 1) ^ 0xedb8_8320 } else { crc >> 1 };
+        }
+    }
+    let crc = !crc;
+    let (n, len) = (name.len() as u16, data.len() as u32);
+    let mut v = Vec::new();
+    let le16 = |v: &mut Vec<u8>, x: u16| v.extend_from_slice(&x.to_le_bytes());
+    let le32 = |v: &mut Vec<u8>, x: u32| v.extend_from_slice(&x.to_le_bytes());
+    le32(&mut v, 0x0403_4b50);
+    for x in [20u16, 0, 0, 0, 0] {
+        le16(&mut v, x);
+    }
+    le32(&mut v, crc);
+    le32(&mut v, len);
+    le32(&mut v, len);
+    le16(&mut v, n);
+    le16(&mut v, 0);
+    v.extend_from_slice(name.as_bytes());
+    v.extend_from_slice(data);
+    let cd = v.len() as u32;
+    le32(&mut v, 0x0201_4b50);
+    for x in [20u16, 20, 0, 0, 0, 0] {
+        le16(&mut v, x);
+    }
+    le32(&mut v, crc);
+    le32(&mut v, len);
+    le32(&mut v, len);
+    for x in [n, 0, 0, 0, 0] {
+        le16(&mut v, x);
+    }
+    le32(&mut v, 0);
+    le32(&mut v, 0);
+    v.extend_from_slice(name.as_bytes());
+    let cd_len = v.len() as u32 - cd;
+    le32(&mut v, 0x0605_4b50);
+    for x in [0u16, 0, 1, 1] {
+        le16(&mut v, x);
+    }
+    le32(&mut v, cd_len);
+    le32(&mut v, cd);
+    le16(&mut v, 0);
+    v
+}

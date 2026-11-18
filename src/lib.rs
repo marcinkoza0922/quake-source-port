@@ -209,7 +209,9 @@ pub fn run() {
 
     let mut host = host::Host::new(fs, renderer, snd, o.args.clone());
     host.headless = headless;
-    host.dedicated = dedicated;
+    if dedicated {
+        host.make_dedicated();
+    }
     if let Some(p) = o.val("-port").and_then(|s| s.parse().ok()) {
         host.net_port = p;
     }

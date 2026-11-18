@@ -194,6 +194,7 @@ pub const SVC_PARTICLE: i32 = 18;
 pub const SVC_DAMAGE: i32 = 19;
 pub const SVC_SPAWNSTATIC: i32 = 20;
 pub const SVC_SPAWNBASELINE: i32 = 22;
+pub const SVC_SETPAUSE: i32 = 24;
 pub const SVC_SIGNONNUM: i32 = 25;
 pub const SVC_CENTERPRINT: i32 = 26;
 pub const SVC_SPAWNSTATICSOUND: i32 = 29;

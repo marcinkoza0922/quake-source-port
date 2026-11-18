@@ -43,6 +43,15 @@ pub const VIEWS: &[View] = &[
     v("e2m2-start", "id1", "e2m2", [-256.0, -1952.0, 280.0, 0.0, 90.0, 0.0], "world, lightmaps"),
     v("mg1-start", "mg1", "start", [0.0, -640.0, 24.0, 0.0, 90.0, 0.0], "fog, fence textures"),
     v("mg1-back", "mg1", "start", [0.0, -640.0, 24.0, 0.0, 270.0, 0.0], "fog"),
+    // Compatibility audit (2026-11-17): each priority game at its start.
+    v("hip1m1-start", "hipnotic", "hip1m1", [16.0, 304.0, -40.0, 0.0, 90.0, 0.0], "hipnotic world, status bar art"),
+    v("r1m1-start", "rogue", "r1m1", [408.0, 3360.0, 232.0, 0.0, 90.0, 0.0], "rogue world"),
+    v("mg3-start", "mg3", "start", [0.0, -2136.0, -224.0, 0.0, 90.0, 0.0], "mg3 hub, fog"),
+    v("dopa-start", "dopa", "start", [32.0, -184.0, 160.0, 0.0, 0.0, 0.0], "dopa hub"),
+    v("qbj3-start", "qbj3", "start", [0.0, -1648.0, -968.0, 0.0, 90.0, 0.0], "qbj3 hub, external textures, skybox"),
+    v("alk-start", "alk1.2", "start", [832.0, 0.0, 536.0, 0.0, 180.0, 0.0], "Alkaline hub, csqc-free HUD"),
+    v("sewerjam2-start", "sewerjam2", "start", [240.0, -336.0, 88.0, 0.0, 237.0, 0.0], "sewerjam2 hub, liquids"),
+    v("q64-start", "q64", "start", [480.0, -352.0, 88.0, 0.0, 90.0, 0.0], "Quake64 RGB lighting, 16-bit lightmaps"),
     v("sepulcher-start", "ad", "ad_sepulcher", [-2560.0, 2464.0, -8.0, 0.0, 270.0, 0.0], "coloured light, fog, sky"),
     View { lead: 12.0, ..v("tears-waterfall", "ad", "ad_tears", [847.0, -256.0, -449.0, 0.0, 180.0, 0.0], "coloured light, water, waterfall") },
     View {

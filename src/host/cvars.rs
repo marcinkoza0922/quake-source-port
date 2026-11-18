@@ -196,6 +196,9 @@ pub(super) const HOST_CVARS: &[(&str, &str, u32)] = &[
 /// quiet; `gamecfg`/`savedgamecfg` are read and written by QC (pr_edict.c).
 pub(super) const COMPAT_CVARS: &[(&str, &str, u32)] = &[
     ("gamecfg", "0", 0),
+    // Host_AdvanceTime (frame.rs): fixed or scaled server frame time.
+    ("host_framerate", "0", 0),
+    ("host_timescale", "0", 0),
     ("savedgamecfg", "0", CVAR_ARCHIVE),
     ("scr_usekfont", "0", 0),
     ("cl_beams_polygons", "1", 0),
@@ -208,7 +211,11 @@ pub(super) const COMPAT_CVARS: &[(&str, &str, u32)] = &[
     ("r_nolerp_list", "", 0),
     ("_snd_mixahead", "0.1", 0),
     ("bgm_extmusic", "1", 0),
+    // chase.c: the chase camera (Camera::Chase); QC can switch it on.
     ("chase_active", "0", 0),
+    ("chase_back", "100", 0),
+    ("chase_up", "16", 0),
+    ("chase_right", "0", 0),
     ("fov_adapt", "1", 0),
     ("gl_clear", "0", 0),
     ("gl_farclip", "16384", 0),
@@ -298,5 +305,7 @@ pub(super) const COMPAT_CVARS: &[(&str, &str, u32)] = &[
     ("scr_menuscale", "1", 0),
     ("scr_sbarscale", "1", 0),
     ("sys_throttle", "0.02", 0),
+    // dedicated-server tick in the references; Alkaline/sewerjam2 quake.rc set it
+    ("sys_ticrate", "0.05", 0),
     ("vid_minsize", "0", 0),
 ];

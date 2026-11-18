@@ -76,15 +76,31 @@ impl Pack {
             r.skip(6).ok()?;
             let method = r.u16().ok()?;
             r.skip(8).ok()?;
-            let csize = r.u32().ok()?;
-            let size = r.u32().ok()?;
+            let mut csize = r.u32().ok()? as u64;
+            let mut size = r.u32().ok()? as u64;
             let nlen = r.u16().ok()? as usize;
             let elen = r.u16().ok()? as usize;
             let clen = r.u16().ok()? as usize;
             r.skip(8).ok()?;
-            let local = r.u32().ok()? as u64;
+            let mut local = r.u32().ok()? as u64;
             let name = String::from_utf8_lossy(r.bytes(nlen).ok()?).into_owned();
-            r.skip(elen + clen).ok()?;
+            // Zip64 (some archivers write it even for small files): sizes and
+            // offset of 0xFFFFFFFF are in the 0x0001 extra field, in this order.
+            let mut extra = Reader::new(r.bytes(elen).ok()?);
+            while let (Ok(id), Ok(len)) = (extra.u16(), extra.u16()) {
+                let Ok(body) = extra.bytes(len as usize) else { break };
+                if id == 1 {
+                    let mut z = Reader::new(body);
+                    for v in [&mut size, &mut csize, &mut local] {
+                        if *v == 0xFFFF_FFFF {
+                            let (Ok(lo), Ok(hi)) = (z.u32(), z.u32()) else { break };
+                            *v = u64::from(lo) | (u64::from(hi) << 32);
+                        }
+                    }
+                }
+            }
+            r.skip(clen).ok()?;
+            let (Ok(size), Ok(csize)) = (u32::try_from(size), u32::try_from(csize)) else { continue };
             if name.ends_with('/') || (method != 0 && method != 8) {
                 continue;
             }
@@ -144,4 +160,73 @@ impl Pack {
 pub(super) enum Source {
     Dir(PathBuf),
     Pack(Pack),
+}
+
+#[cfg(test)]
+mod tests {
+    use super::Pack;
+
+    /// One stored entry whose central record keeps its sizes in a Zip64
+    /// extra field (0xFFFFFFFF in the 32-bit fields), as dtintin_fixed.zip does.
+    fn zip64_entry(name: &str, data: &[u8]) -> Vec<u8> {
+        let mut crc = 0xffff_ffffu32;
+        for &b in data {
+            crc ^= u32::from(b);
+            for _ in 0..8 {
+                crc = if crc & 1 != 0 { (crc >> 1) ^ 0xedb8_8320 } else { crc >> 1 };
+            }
+        }
+        let crc = !crc;
+        let (n, len) = (name.len() as u16, data.len() as u64);
+        let mut v = Vec::new();
+        let w16 = |v: &mut Vec<u8>, x: u16| v.extend_from_slice(&x.to_le_bytes());
+        let w32 = |v: &mut Vec<u8>, x: u32| v.extend_from_slice(&x.to_le_bytes());
+        w32(&mut v, 0x0403_4b50);
+        for x in [45u16, 0, 0, 0, 0] {
+            w16(&mut v, x);
+        }
+        w32(&mut v, crc);
+        w32(&mut v, len as u32);
+        w32(&mut v, len as u32);
+        w16(&mut v, n);
+        w16(&mut v, 0);
+        v.extend_from_slice(name.as_bytes());
+        v.extend_from_slice(data);
+        let cd = v.len() as u32;
+        w32(&mut v, 0x0201_4b50);
+        for x in [45u16, 45, 0, 0, 0, 0] {
+            w16(&mut v, x);
+        }
+        w32(&mut v, crc);
+        w32(&mut v, 0xFFFF_FFFF);
+        w32(&mut v, 0xFFFF_FFFF);
+        for x in [n, 20, 0, 0, 0] {
+            w16(&mut v, x);
+        }
+        w32(&mut v, 0);
+        w32(&mut v, 0);
+        v.extend_from_slice(name.as_bytes());
+        w16(&mut v, 1);
+        w16(&mut v, 16);
+        v.extend_from_slice(&len.to_le_bytes());
+        v.extend_from_slice(&len.to_le_bytes());
+        let cd_len = v.len() as u32 - cd;
+        w32(&mut v, 0x0605_4b50);
+        for x in [0u16, 0, 1, 1] {
+            w16(&mut v, x);
+        }
+        w32(&mut v, cd_len);
+        w32(&mut v, cd);
+        w16(&mut v, 0);
+        v
+    }
+
+    #[test]
+    fn reads_zip64_sizes() {
+        let p = std::env::temp_dir().join(format!("qcore-zip64-{}.zip", std::process::id()));
+        std::fs::write(&p, zip64_entry("gfx/poster.png", b"hello zip64")).unwrap();
+        let pack = Pack::load_pk3(&p).expect("zip64 central directory");
+        assert_eq!(pack.read("gfx/poster.png").as_deref(), Some(&b"hello zip64"[..]));
+        let _ = std::fs::remove_file(p);
+    }
 }

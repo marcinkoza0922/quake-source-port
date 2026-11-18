@@ -402,17 +402,10 @@ pub fn atof(s: &[u8]) -> f32 {
     s[..i].parse::<f64>().unwrap_or(0.0) as f32
 }
 
-/// AngleVectors (mathlib.c).
+/// AngleVectors (mathlib.c), bit-exact with C's float/double rounding.
 pub fn angle_vectors(a: [f32; 3]) -> ([f32; 3], [f32; 3], [f32; 3]) {
-    let r = std::f32::consts::PI * 2.0 / 360.0;
-    let (sy, cy) = (a[1] * r).sin_cos();
-    let (sp, cp) = (a[0] * r).sin_cos();
-    let (sr, cr) = (a[2] * r).sin_cos();
-    (
-        [cp * cy, cp * sy, -sp],
-        [-sr * sp * cy + cr * sy, -sr * sp * sy - cr * cy, -sr * cp],
-        [cr * sp * cy + sr * sy, cr * sp * sy - sr * cy, cr * cp],
-    )
+    let (f, r, u) = qcore::math::angle_vectors(qcore::math::Vec3::from(a));
+    (f.to_array(), r.to_array(), u.to_array())
 }
 
 

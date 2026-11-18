@@ -129,7 +129,9 @@ impl Server {
         let f = c.sv.fields.clone();
         let vm = &mut l.vm;
         let w = &mut l.world;
-        vm.set_g_f(g.frametime, ft as f32);
+        // Like C SV_Physics, leave `frametime` alone: Host_ServerFrame
+        // (`frame_held`) sets it, so SV_SpawnServer's two settle frames run
+        // with the value the progs loaded with (0), as in ironwail/vkQuake.
         vm.set_g_i(g.self_, 0);
         vm.set_g_i(g.other, 0);
         vm.set_g_f(g.time, vm.time as f32);
@@ -139,9 +141,12 @@ impl Server {
             crate::addons::portal_move::snapshot(&mut l.portals, &Ents { vm: &mut *vm, c: &mut *c });
             crate::addons::gel_phys::snapshot(&mut l.gel, &Ents { vm: &mut *vm, c: &mut *c });
         }
+        // QuakeSpasm/ironwail/vkQuake `entity_cap`: entities spawned during
+        // this frame (projectiles fired from a think, sparks) get their first
+        // physics next frame. WinQuake re-read num_edicts and ran them now.
+        let cap = if freeze { maxclients + 1 } else { vm.num_edicts() as u32 };
         let mut i = 0u32;
         loop {
-            let cap = if freeze { maxclients + 1 } else { vm.num_edicts() as u32 };
             if i >= cap || c.sv.error.is_some() {
                 break;
             }

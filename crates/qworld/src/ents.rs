@@ -74,6 +74,9 @@ pub trait Edicts {
     /// Run `ent.think` with self=ent, other=world, time=`time`.
     fn think(&mut self, w: &mut World, ent: Ent, time: f64);
     /// Leafs touched by a linked entity (SV_FindTouchedLeafs), for PVS checks.
+    /// SV_Impact's `pr_global_struct->time = qcvm->time`, done even when
+    /// neither entity has a touch function.
+    fn set_time_global(&mut self) {}
     fn set_leafs(&mut self, _e: Ent, _leafs: &[u32]) {}
     fn start_sound(&mut self, _e: Ent, _sample: &str) {}
     /// C `rand()`.
