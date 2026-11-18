@@ -39,13 +39,20 @@ The reported number is the cost over the baseline: µs per frame at 540p
 | Enhanced water | `r_enhancedwater 1` + translucency, ripples, splashes, caustics | `r_water_quality` 0 / 1 / 2 | e2m2 demo + ad_sepulcher surface/underwater stills (HISTORY item 15) |
 | Teleporter windows | `r_teleportwindows 1` | `r_portal_quality` 0 / 1 / 2 | `start` (episode teleporters), ad_sepulcher |
 | Blood | `r_enhancedfx 1`, `r_blood 1` | `r_blood_quality` 0 / 1 / 2 | combat demo |
-| Impacts | `r_enhancedfx 1`, `r_impact_fx` + bullets, nails, scorches | `r_impact_quality` 0 / 1 / 2 | combat demo |
+| Impacts | `r_enhancedfx 1`, `r_impact_fx` + bullets, nails, scorches | `r_particle_quality` 0 / 1 / 2 (caps the hit-effect tier; `r_impact_quality` is a no-op since 2026-11-16), plus `r_impact_limit` / `r_impact_lifetime` | combat demo |
 | Enhanced particles | `r_enhancedfx 1`, `r_enhancedparticles 1` | `r_particle_quality` 0 / 1 / 2 | combat demo, ad_sepulcher (rain) |
-| Soft particles | `r_softparticles` | 0 / 1 / 2 (matters because the baseline has 8× MSAA) | ad_sepulcher, combat demo |
+| Soft particles | `r_particle_quality` (0 off, 1 low, 2 high; `r_softparticles` is a no-op since 2026-11-16) | 0 / 1 / 2 with `r_part_density` compensating quality 0's halved density, so only the soft level changes (matters because the baseline has 8× MSAA) | ad_sepulcher, combat demo |
 | Ragdolls & debris | `r_debris 1` + ragdolls, gibs, shrapnel | `r_debris_quality` 0 / 1 / 2 | combat demo |
 | Portal gun | customized game, `addon_portalgun 1` | `r_portal_quality` 0 / 1 / 2 × `addon_portal_depth` 0 / 2 / 6 × 2 or 4 portals | e1m1 fixed portals (`portal_set`), plus live placement |
 | Gel sprayer | customized game, `addon_gel 1` | `addon_gel_quality` 0 / 1 | e1m1 spraying both gels; report p99 and max, the coat rebuild shows as spikes |
 | Split-screen co-op | `coop 1`, `maxplayers N`, `cl_splitscreen N` | 2 and 4 players, vanilla ultra only | live, fixed step; per-view GPU table |
+| Visible weapons (new 2026-11-18) | `cl_vwep 1` | off / on | the split-screen and portal scenes, where player bodies are on screen; expected tiny, checked once |
+
+`r_particle_quality` is one preset for three knobs (soft particles,
+impact tier, scripted particle density), so the Impacts, Enhanced
+particles and Soft particles rows sweep the same cvar. Each row varies it
+with only its own addition on and the density held constant, and the
+report says which knob moved.
 
 Blood, impacts, debris, water ripples and motion blur are all client-side,
 so they should work on Part 1's demos. Using the same demos makes the
@@ -89,6 +96,9 @@ hard to attribute.
   both resolutions).
 - **A3. Portal and gel scenes.** Fixed portal setups via `portal_set` (see
   the portal-gun skill) so the depth/count matrix is repeatable.
+  `freecam x y z pitch yaw` (2026-11-17) can hold the camera on a fixed
+  view while the game or a demo runs, which removes the player's movement
+  from the measurement.
 - **A4. Split-screen.** 2- and 4-player vanilla-ultra scenarios, sharing
   the co-op driving in `tools/qprof/src/ultimate.rs`.
 - **A5. All-together scenarios** and the excess column in `report.md`.
@@ -102,6 +112,12 @@ Carried over from [HISTORY.md](HISTORY.md), to re-baseline here:
 - **H5 (old item 5)**: split-screen GPU cost per view, now with correct
   per-view attribution.
 - **H11 (old item 11)**: aim-assist target search per player in co-op.
+
+Tools for these (README, Tools): spikes such as the gel coat rebuild
+show best on samply's per-thread timeline, and the per-view CPU work in
+split-screen (H5, H11) in a perf or callgrind profile of the 4-player
+scenario. Additions that allocate per frame (HISTORY items 2, 19 and 20
+removed some) get the same heaptrack census as V9.
 
 New items go here once the first baseline exists, with a budget for each
 addition proposed from it (for example, the default tier costs at most X%

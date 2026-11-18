@@ -18,13 +18,45 @@ excluded too: they replace the look instead of adding work. The one known
 cost there (slang CRT presets, HISTORY item 22) gets a single regression
 check at 4K, not a tier sweep.
 
-## Status (2026-11-17)
+## Status (2026-11-18)
 
-Branch `improve/perf-plan`. Details for each step are under Retooling
-steps below; items are in [VANILLA.md](VANILLA.md#items) and
-[ADDITIONS.md](ADDITIONS.md#items).
+Details for each step are under Retooling steps below; items are in
+[VANILLA.md](VANILLA.md#items) and [ADDITIONS.md](ADDITIONS.md#items).
+The profiling tools are under [Tools](#tools).
 
-Done:
+Since the 2026-11-17 status (merged as #112, then #113–#115), the qbench
+rerun is still pending; the only new measurement is V9's first allocation
+census (~114 heap allocations per frame on `spin-e1m1`). What changed
+under the plan:
+
+- **Engine changes that touch the workload** (3dca905, 554c3bb,
+  79284be):
+  - Sky wind (`r_skywind`, default 1): two extra sky samples per pixel
+    on skyboxes with a `<sky>wind.cfg`. None of the suite's maps has one,
+    but the sky shader changed for every map, so it falls under the
+    pixel-identical rule (V10).
+  - Per-frame host work grew: `view_cvars` reads 7 more cvars
+    (`v_idlescale`, `v_i*`) and builds 4 `format!` names per frame for
+    `gl_cshiftpercent_*` (H1, V9).
+  - Cbuf runs once per frame and a frame that spawns a server runs a
+    server frame. This changes only *recording* (a script's first
+    `wait` now costs a frame), not playback. The 56238f2 demo set stays
+    valid; re-record only when the scenes change.
+  - MD5 parents (MG3's `ogre_rocket`), the render entity list split out
+    of `view.rs`, `cl_vwep` (default 0) and `freecam`: no effect on Part
+    1's demos. `freecam x y z [pitch yaw]` works in demos, so a timedemo
+    can now hold a fixed view (useful for V1/V2 and Part 2's A3).
+  - Headless timedemo is uncapped; the ~90 fps the compat sweep saw was a
+    GPU that needed a reset (COMPAT_AUDIT, item 8).
+- **Found while updating the plan:** `r_softparticles` is a compat cvar
+  that does nothing, and `r_particle_quality 1` turns soft particles on.
+  The `ultra-fte` pins therefore run ours *with* soft particles against
+  vkQuake 1.34.1, which has none (V8). Fix before the rerun.
+- **New tools installed** (2026-11-18): samply, cargo-show-asm (cargo);
+  heaptrack, valgrind + kcachegrind, hyperfine (dnf). See [Tools](#tools)
+  and R9.
+
+Done before 2026-11-18:
 
 - R1–R3: the perfkit runner, the vanilla ultra settings table and the
   recorded demo set.
@@ -47,16 +79,25 @@ Done:
 
 Next, in order:
 
-1. **Rerun qbench** (`target/release/qbench`, about 70 min) on the new
-   demo set. Replace VANILLA.md's Results table and re-check V1/V2
-   against the new numbers.
-2. **V7**: why ours keeps more decals than vkQuake in the FTE combat.
-3. **V1/V2** (if they hold after the rerun): classic-particle CPU cost on
-   ad_sepulcher at 540p; the FTE cold-start hitch.
-4. **R6**: qprof → Part 2 (ADDITIONS.md, steps A0–A5), including pinning
+1. **V8**: pin soft particles off in `ultra-fte` without halving particle
+   density, and check with `perfkit partinfo` that counts still match
+   vkQuake.
+2. **Session setup** (ask the user; we don't change system settings):
+   `kernel.perf_event_paranoid=1` (samply refuses at 2, today's value)
+   and the `performance` governor (today `powersave`).
+3. **Rerun qbench** (`target/release/qbench`, about 70 min) on current
+   master and the 56238f2 demo set. Replace VANILLA.md's Results table
+   and re-check V1/V2 against the new numbers.
+4. **R9**: profiling baselines for every main-suite scene at 540p: a
+   perf/samply CPU profile and a heaptrack allocation census, kept next
+   to the qbench report so later changes are compared with them.
+5. **V9** (allocations and cvar lookups per frame), then **V1/V2** if they
+   hold after the rerun, then **V7** (decals in the FTE combat). V10 rides
+   along with the first pixel check.
+6. **R6**: qprof → Part 2 (ADDITIONS.md, steps A0–A5), including pinning
    `r_enhancedfx` in its baseline.
-5. **R7**, if A0 shows portal and gel state replays from demos; then
-   **R8**, the docs pass.
+7. **R7**, if A0 shows portal and gel state replays from demos; then
+   **R8**, the docs pass (now including the Tools section and R9).
 
 ## Resolutions
 
@@ -105,6 +146,36 @@ report records GPU, driver, CPU, kernel, commit and the gamescope version.
   engine's own pipeline cache file), reported as worst frame and count of
   frames over 33 ms. Warm medians hide compile hitches, and md5 models and
   new effects add pipelines.
+
+## Tools
+
+What is installed on the test machine (2026-11-18) and the question each
+one answers. Fps comparisons come only from qbench and the headless A/B;
+everything below is for attribution, never for the numbers in a results
+table.
+
+| Tool | Answers | How we use it | Limits here |
+|---|---|---|---|
+| qbench / perfkit | parity with the references, p99, cold start | Part 1 numbers | windows for the whole run |
+| headless `timedemo` | did my change make ours faster? | quick A/B, ≥3 runs per build, medians | several times slower than windowed (`spin-e1m1`, 540p, `ultra`: 758 fps headless on 2026-11-18 against 5277 windowed in qbench); compare only with itself |
+| `QSP_GPUTIMES=1` | which GPU stage costs what | µs per stage on exit | ours only |
+| `perf` 7.1 (`record --call-graph dwarf`, `stat`) | where CPU time goes; IPC, cache and branch misses | text reports the agent can read; `qprof -perf` | user space only at `perf_event_paranoid` 2 |
+| **samply** 0.13 | the same samples on a per-thread timeline: which frame stalled and what each thread did then | V2's cold-start hitch, H8 server spikes, H12 waits; `samply record --save-only -o prof.json.gz`, then `samply load` (local server, Firefox Profiler UI); `samply import perf.data` reuses a perf recording | refuses at `perf_event_paranoid` 2 (needs 1) |
+| cargo-flamegraph | one SVG per profile, for PRs | `flamegraph --perfdata target/perf.data` | for differential graphs add `inferno` (`cargo install inferno`: `inferno-diff-folded`) |
+| **heaptrack** 1.5 (+ GUI) | heap allocations per frame, where, and how many are temporary | V9's allocation census: `heaptrack --record-only` (otherwise it opens its GUI and waits), `heaptrack_print -F` + `c++filt` for text | sees the NVIDIA driver's allocations too; count only steady-state frames |
+| **valgrind**: callgrind + kcachegrind, cachegrind | exact instruction counts: CPU A/B without run-to-run noise | CPU-only paths (server frames, PVS/culling, particle simulation, light cache) in a harness that doesn't touch Vulkan; `--toggle-collect` on the function under test | ~50× slower; the NVIDIA driver under valgrind is impractical, so not for whole-engine runs |
+| **hyperfine** 1.20 | wall time of whole runs with warm-up, outliers and JSON export | map load and startup time (not measured so far); A/B of two binaries on the same headless command | measures the process, not frames; not for fps |
+| **cargo-show-asm** (`cargo asm`) | what a hot function compiled to | after perf names a function: bounds checks, missed vectorisation, inlining (frustum tests, light cache, particle update) | – |
+| `turbostat`, `cpupower` | CPU frequency, C-states, governor during a run | check that a slow run wasn't a clock drop; record the governor in reports | turbostat needs root (ask the user) |
+| bcc-tools (`offcputime`, `profile`) | off-CPU time: where the main thread waits (fences, present, locks) | H12 | root (ask the user) |
+| Vulkan validation layers 1.4.341 | best-practices and synchronisation warnings, including NVIDIA-specific ones | one-off audit for H12 (`VK_LAYER_KHRONOS_validation` with `VK_VALIDATION_VALIDATE_BEST_PRACTICES_NVIDIA`) | slows every frame; never with numbers |
+| MangoHud, gamescope | frame-time logs; 4K on a 1440p monitor | inside qbench | see R1 for their costs |
+
+Not installed, would help: a GPU frame debugger (RenderDoc, or NVIDIA
+Nsight Graphics/Systems, which also show GPU/CPU overlap) for the 4K
+items, and `hotspot` (dnf) as a perf GUI. Tracy would need
+instrumentation in the engine; `prof_start`/`prof_stop` and
+`QSP_GPUTIMES` cover that for now.
 
 ## Retooling steps
 
@@ -218,7 +289,29 @@ scene list, runner, baselines, report schema) goes in a small library crate
   from demos (ADDITIONS.md, step A0), qprof plays demos instead of live
   scripts for those scenarios, which removes most run-to-run noise.
 - **R8. Docs.** DESIGN.md Tooling, the perf-profiling skill (it still
-  describes the old qbench defaults) and AGENTS.md if commands change.
+  describes the old qbench defaults, and none of the tools new on
+  2026-11-18) and AGENTS.md if commands change.
+- **R9. Attribution runs (new 2026-11-18).** One command per kind of
+  profile, on perfkit's sandbox and demos, so profiles of different
+  commits are comparable and nobody hand-types pins (the ad-hoc runs on
+  2026-11-18 needed 21 `+cvar`s on the command line):
+  - `perfkit profile [-only a,b] [-tool perf|samply|heaptrack] [-res
+    540|2160]`: ours only, headless, `ultra` pins from the settings table;
+    writes `target/perf/profiles/<commit>/<scene>.<tool>.*` plus a text
+    summary (perf: top self/children functions; heaptrack: allocations
+    per steady-state frame and the top call sites). Headless is fine
+    here: the question is the shape of the profile, not the fps.
+  - `-windowed` for perf/samply (the headless readback adds memmove and
+    waits that windowed runs don't have, HISTORY item 12), SIGKILLed like
+    qbench.
+  - A callgrind harness for the CPU-only paths (server frames on the
+    combat script, `mark_leaves`/PVS, particle simulation, light cache)
+    with `--toggle-collect`, so CPU micro-optimisations get a noise-free
+    instruction-count A/B instead of a ±3% fps band. Start with H8/H10
+    (server, contents checks), which have no GPU part at all.
+  - `perfkit loadtime` with hyperfine: startup and map load per scene map
+    (median of 10, warm cache), the one cost no suite measures yet.
+  - qprof's `-perf` moves onto the same code in R6.
 
 ## Baselines
 
