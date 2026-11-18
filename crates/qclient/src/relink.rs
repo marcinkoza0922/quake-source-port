@@ -43,6 +43,10 @@ impl ClientState {
             }
             frac = 1.0;
         }
+        // cl_nolerp (johnfitz): time stays clamped, positions snap
+        if self.cl_nolerp {
+            return 1.0;
+        }
         frac as f32
     }
 

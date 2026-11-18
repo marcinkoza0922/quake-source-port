@@ -175,7 +175,8 @@ impl Host {
         self.drain_server_log();
     }
 
-    pub(super) fn exec_cbuf(&mut self) {
+    /// Cbuf_Execute; true when a `wait` stopped it for this frame.
+    pub(super) fn exec_cbuf(&mut self) -> bool {
         loop {
             // One shared Cbuf as in Quake: QC localcmd text runs here, so it
             // reaches host commands too.
@@ -184,7 +185,7 @@ impl Host {
                 self.cbuf.add_text(&t);
             }
             if self.cbuf.take_wait() {
-                break;
+                return true;
             }
             let Some(line) = self.cbuf.next_line() else { break };
             self.exec_line(&line);
@@ -194,6 +195,7 @@ impl Host {
                 break;
             }
         }
+        false
     }
 
     pub(super) fn drain_server_log(&mut self) {

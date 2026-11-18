@@ -3046,3 +3046,12 @@ be Толькі сервер можа выканаць changelevel
 
 @ {} renamed to {}
 be {} цяпер завецца {}
+
+@ From the game folder
+be З папкі гульні
+
+@ From ironwail
+be З ironwail
+
+@ From the 2021 re-release
+be З перавыдання 2021 года

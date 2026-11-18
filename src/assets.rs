@@ -45,6 +45,8 @@ pub struct Level {
     pub world_sky: String,
     /// Skybox in use (worldspawn, svc_skybox or the `sky` command).
     pub sky: String,
+    /// The skybox's wind (`gfx/env/<sky>wind.cfg`, `skywind` commands).
+    pub sky_wind: crate::skywind::SkyWind,
     /// Worldspawn `[_]wateralpha`/`lavaalpha`/`slimealpha`/`telealpha`
     /// (R_ParseWorldspawn), in that order.
     pub liquid_alpha: [Option<f32>; 4],
@@ -186,7 +188,22 @@ impl Level {
     pub fn set_sky(&mut self, fs: &Fs, r: &mut Renderer, name: &str) {
         let faces = if name.is_empty() { None } else { qrender::load_skybox(fs, name) };
         let _ = r.set_skybox(faces.as_ref());
-        self.sky = if faces.is_some() { name.to_string() } else { String::new() };
+        let sky = if faces.is_some() { name.to_string() } else { String::new() };
+        // Sky_LoadSkyBox keeps a loaded box's (possibly tuned) wind
+        if sky != self.sky || sky.is_empty() {
+            self.sky_wind = self.load_sky_wind(fs, &sky);
+        }
+        self.sky = sky;
+    }
+
+    /// Skywind_Load_f: the skybox's wind config, or still air.
+    pub fn load_sky_wind(&self, fs: &Fs, sky: &str) -> crate::skywind::SkyWind {
+        if sky.is_empty() {
+            return Default::default();
+        }
+        fs.open(&crate::skywind::cfg_path(sky))
+            .and_then(|d| crate::skywind::SkyWind::parse(&String::from_utf8_lossy(&d)))
+            .unwrap_or_default()
     }
 
     /// Model by name, loading on first use (temp entity models).

@@ -3046,3 +3046,12 @@ lv Tikai serveris drīkst izmantot changelevel
 
 @ {} renamed to {}
 lv {} — jaunais vārds: {}
+
+@ From the game folder
+lv No spēles mapes
+
+@ From ironwail
+lv No ironwail
+
+@ From the 2021 re-release
+lv No 2021. gada atkārtotā izdevuma

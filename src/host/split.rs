@@ -177,7 +177,7 @@ impl Host {
             }
             let contents = self.contents(v.origin);
             let g = &mut self.guests[k];
-            let blend = g.view.blend(&g.cl, contents, ft, cv.flash);
+            let blend = g.view.blend(&g.cl, contents, ft, cv.flash, cv.cshift);
             out.push(SplitView { view: v, rect: rects[vi + 1], blend });
         }
         out

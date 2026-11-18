@@ -3046,3 +3046,12 @@ hr Samo poslužitelj smije koristiti changelevel
 
 @ {} renamed to {}
 hr {} se preimenovao u {}
+
+@ From the game folder
+hr Iz mape igre
+
+@ From ironwail
+hr Iz ironwaila
+
+@ From the 2021 re-release
+hr Iz reizdanja iz 2021.

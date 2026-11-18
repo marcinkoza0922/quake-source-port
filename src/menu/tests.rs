@@ -208,7 +208,7 @@ mod save_menu_tests {
 
     fn slot(name: &str) -> SaveSlot {
         let text = format!("5\nc\n{}2\ne1m3\n75\n{}{{\n}}\n{{\n}}\n{{\n\"health\" \"50\"\n}}\n", "0\n".repeat(16), "m\n".repeat(64));
-        SaveSlot { name: name.into(), info: crate::saveinfo::SaveInfo::parse(&text, None).unwrap(), thumb: None }
+        SaveSlot { name: name.into(), info: crate::saveinfo::SaveInfo::parse(&text, None).unwrap(), thumb: None, source: SaveSource::Own }
     }
 
     fn commands(actions: &[Action]) -> Vec<String> {
@@ -281,6 +281,27 @@ mod save_menu_tests {
         let actions = m.key(K_ENTER, &mut cv, true);
         assert_eq!(commands(&actions), ["_deletesave \"s1\"\n"]);
         assert_eq!(m.screen, Screen::Save);
+    }
+
+    /// Saves other engines left load by name but can't be deleted here, and
+    /// KEX (version 6) saves preview like v5 ones.
+    #[test]
+    fn external_saves_load_but_never_delete() {
+        let mut m = Menu::new();
+        let mut cv = Cvars::new();
+        m.open(Screen::Load);
+        let kex = format!("6\nid1\nc\n{}2\ne1m3\n75\n{}{{\n}}\n{{\n}}\n{{\n\"health\" \"42\"\n}}\n", "0\n".repeat(16), "m\n".repeat(64));
+        let info = crate::saveinfo::SaveInfo::parse(&kex, None).unwrap();
+        assert_eq!((info.map.as_str(), info.health, info.skill), ("e1m3", 42, 2));
+        m.saves = vec![SaveSlot { name: "autosave0".into(), info, thumb: None, source: SaveSource::Kex }];
+        assert!(!m.saves[0].is_autosave(), "another engine's autosave0 is a plain save here");
+        // rows: pinned latest (none), Browse Autosaves, then the list
+        m.load_cursor = 2;
+        assert_eq!(m.save_at(2).unwrap().source, SaveSource::Kex);
+        assert!(m.delete_button().is_none());
+        m.key(K_DEL, &mut cv, true);
+        assert!(m.prompt.is_none());
+        assert_eq!(commands(&m.key(K_ENTER, &mut cv, true)), ["load \"autosave0\"\n"]);
     }
 
     #[test]

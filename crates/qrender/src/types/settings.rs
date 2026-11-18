@@ -30,6 +30,12 @@ pub struct Settings {
     /// Alpha of the front sky layer (r_skyalpha).
     pub skyalpha: f32,
     pub dynamic: bool,
+    /// r_fullbright: world lightmaps read as neutral light and alias models
+    /// get ironwail's 0.5 light colour (single-player cheat).
+    pub fullbright: bool,
+    /// Sky_SetupFrame: skybox wind vector (world space, xyz) and loop phase
+    /// (w); zero = still.
+    pub sky_wind: [f32; 4],
     pub vsync: bool,
     /// Scene MSAA samples (1 = off); clamped to the device maximum.
     pub msaa: u32,
@@ -140,6 +146,8 @@ impl Default for Settings {
             skyfog: 0.5,
             skyalpha: 1.0,
             dynamic: true,
+            fullbright: false,
+            sky_wind: [0.0; 4],
             vsync: true,
             msaa: 1,
             render_scale: 1.0,

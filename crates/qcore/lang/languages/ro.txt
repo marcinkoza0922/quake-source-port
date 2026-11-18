@@ -3046,3 +3046,12 @@ ro Doar serverul poate folosi changelevel
 
 @ {} renamed to {}
 ro {} a fost redenumit {}
+
+@ From the game folder
+ro Din dosarul jocului
+
+@ From ironwail
+ro Din ironwail
+
+@ From the 2021 re-release
+ro Din reeditarea din 2021

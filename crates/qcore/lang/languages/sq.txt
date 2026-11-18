@@ -3046,3 +3046,12 @@ sq Vetëm serveri mund të bëjë changelevel
 
 @ {} renamed to {}
 sq {} u riemërua në {}
+
+@ From the game folder
+sq Nga dosja e lojës
+
+@ From ironwail
+sq Nga ironwail
+
+@ From the 2021 re-release
+sq Nga ribotimi i 2021

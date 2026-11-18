@@ -3046,3 +3046,12 @@ cs Příkaz changelevel smí použít jen server
 
 @ {} renamed to {}
 cs {} se přejmenoval na {}
+
+@ From the game folder
+cs Ze složky hry
+
+@ From ironwail
+cs Z ironwail
+
+@ From the 2021 re-release
+cs Z remasteru z roku 2021

@@ -3046,3 +3046,12 @@ et Ainult server võib kasutada changelevel'it
 
 @ {} renamed to {}
 et {} on nüüd {}
+
+@ From the game folder
+et Mängu kaustast
+
+@ From ironwail
+et ironwailist
+
+@ From the 2021 re-release
+et 2021. aasta uusväljaandest

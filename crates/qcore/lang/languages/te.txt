@@ -3046,3 +3046,12 @@ te సర్వర్ మాత్రమే changelevel చేయగలదు
 
 @ {} renamed to {}
 te {} పేరు {} గా మార్చబడింది
+
+@ From the game folder
+te గేమ్ ఫోల్డర్ నుండి
+
+@ From ironwail
+te ironwail నుండి
+
+@ From the 2021 re-release
+te 2021 రీ-రిలీజ్ నుండి

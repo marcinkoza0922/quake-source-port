@@ -3046,3 +3046,12 @@ bn শুধু সার্ভার changelevel করতে পারে
 
 @ {} renamed to {}
 bn {} এর নতুন নাম {}
+
+@ From the game folder
+bn গেম ফোল্ডার থেকে
+
+@ From ironwail
+bn ironwail থেকে
+
+@ From the 2021 re-release
+bn 2021 রি-রিলিজ থেকে

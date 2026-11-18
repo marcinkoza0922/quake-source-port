@@ -3046,3 +3046,12 @@ sr Само сервер сме да користи changelevel
 
 @ {} renamed to {}
 sr {} се преименовао у {}
+
+@ From the game folder
+sr Из фасцикле игре
+
+@ From ironwail
+sr Из ironwail-а
+
+@ From the 2021 re-release
+sr Из реиздања из 2021.

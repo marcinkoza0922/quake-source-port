@@ -105,27 +105,19 @@ fn parse_args() -> Opts {
     o
 }
 
-/// Mission-pack flags (`-hipnotic`, `-rogue`, `-quoth`) the mod menu would
-/// launch `game` with (`qui::mods`: the dir name or `modinfo.txt` `base`).
-fn base_flags(basedir: &Path, game: &str) -> Vec<String> {
-    qui::mods::scan(basedir)
-        .into_iter()
-        .find(|m| m.dir.eq_ignore_ascii_case(game))
-        .and_then(|m| m.base.dir())
-        .map(|b| vec![format!("-{b}")])
-        .unwrap_or_default()
+/// The mod as the mod menu would launch it (`qui::mods`: the dir name or
+/// `modinfo.txt` `base`).
+fn mod_info(basedir: &Path, game: &str) -> qui::mods::ModInfo {
+    qui::mods::scan(basedir).into_iter().find(|m| m.dir.eq_ignore_ascii_case(game)).unwrap_or_else(|| {
+        qui::mods::ModInfo { dir: game.to_string(), title: game.to_string(), base: qui::mods::Base::Id, blurb: Vec::new() }
+    })
 }
 
 fn mount(basedir: &Path, game: &str) -> Fs {
     let mut fs = Fs::new(basedir);
     fs.add_game_dir("id1");
-    for f in base_flags(basedir, game) {
-        if !f[1..].eq_ignore_ascii_case(game) {
-            fs.add_game_dir(&f[1..]);
-        }
-    }
-    if game != "id1" {
-        fs.add_game_dir(game);
+    for d in mod_info(basedir, game).game_dirs() {
+        fs.add_game_dir(&d);
     }
     fs
 }
@@ -164,10 +156,7 @@ fn games(basedir: &Path) -> Vec<String> {
 fn run_map(o: &Opts, game: &str, map: &str) -> MapResult {
     let start = Instant::now();
     let mut cmd = Command::new(&o.bin);
-    cmd.arg("-basedir").arg(&o.basedir).args(base_flags(&o.basedir, game));
-    if game != "id1" {
-        cmd.args(["-game", game]);
-    }
+    cmd.arg("-basedir").arg(&o.basedir).args(mod_info(&o.basedir, game).launch_args());
     cmd.args(["-headless", "-nosound", "-width", "320", "-height", "240", "-autoquit"])
         .arg(o.time.to_string())
         // Never rotate the user's real autosaves out.

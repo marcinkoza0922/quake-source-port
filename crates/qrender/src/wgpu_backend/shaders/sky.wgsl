@@ -24,7 +24,7 @@ struct SkyOut {
     o.wpos = w.xyz;
     return o;
 }
-fn skybox(d: vec3<f32>) -> vec3<f32> {
+fn skybox(d: vec3<f32>) -> vec4<f32> {
     let a = abs(d);
     var face = 0u;
     var s = 0.0;
@@ -43,20 +43,35 @@ fn skybox(d: vec3<f32>) -> vec3<f32> {
     var uv = vec2<f32>(s, t) / ma * 0.5 + 0.5;
     uv.y = 1.0 - uv.y;
     uv = clamp(uv, vec2<f32>(1.0 / 512.0), vec2<f32>(1.0 - 1.0 / 512.0));
-    let c0 = textureSampleLevel(t0, s0, uv, 0.0).rgb;
-    let c1 = textureSampleLevel(t1, s0, uv, 0.0).rgb;
-    let c2 = textureSampleLevel(t2, s0, uv, 0.0).rgb;
-    let c3 = textureSampleLevel(t3, s0, uv, 0.0).rgb;
-    let c4 = textureSampleLevel(t4, s0, uv, 0.0).rgb;
-    let c5 = textureSampleLevel(t5, s0, uv, 0.0).rgb;
-    var r = array<vec3<f32>, 6>(c0, c1, c2, c3, c4, c5);
+    let c0 = textureSampleLevel(t0, s0, uv, 0.0);
+    let c1 = textureSampleLevel(t1, s0, uv, 0.0);
+    let c2 = textureSampleLevel(t2, s0, uv, 0.0);
+    let c3 = textureSampleLevel(t3, s0, uv, 0.0);
+    let c4 = textureSampleLevel(t4, s0, uv, 0.0);
+    let c5 = textureSampleLevel(t5, s0, uv, 0.0);
+    var r = array<vec4<f32>, 6>(c0, c1, c2, c3, c4, c5);
     return r[face];
+}
+// Sky wind (ironwail's sky_cubemap ANIM): two drifting copies of the box,
+// cross-faded over the loop, over the still box by their alpha.
+fn skybox_wind(d: vec3<f32>) -> vec3<f32> {
+    let base = skybox(d);
+    if (all(fr.wind.xyz == vec3<f32>(0.0))) { return base.rgb; }
+    let p1 = fr.wind.w;
+    let p2 = fract(p1) - 0.5;
+    let blend = abs(p1 * 2.0);
+    let l1 = skybox(d + p1 * fr.wind.xyz);
+    let l2 = skybox(d + p2 * fr.wind.xyz);
+    let a1 = l1.a * (1.0 - blend);
+    let a2 = l2.a * blend;
+    let rgb = l1.rgb * a1 + l2.rgb * a2;
+    return base.rgb * (1.0 - (a1 + a2)) + rgb;
 }
 @fragment fn fs_sky(i: SkyOut) -> @location(0) vec4<f32> {
     var d = i.wpos - fr.eye.xyz;
     var rgb: vec3<f32>;
     if (fr.sky.y > 0.5) {
-        rgb = skybox(normalize(d));
+        rgb = skybox_wind(normalize(d));
     } else {
         d.z *= 3.0;
         let uv = normalize(d).xy * (189.0 / 64.0);

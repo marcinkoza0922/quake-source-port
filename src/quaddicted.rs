@@ -175,6 +175,27 @@ pub fn map_entry(install: &Install, name: &str) -> Option<String> {
 const DATA_DIRS: &[&str] = &["maps", "progs", "gfx", "sound", "music", "textures", "env", "sprites", "models", "locs", "lits", "demos"];
 const BASES: &[&str] = &["hipnotic", "rogue", "quoth"];
 
+/// The game dir a release's dependencies name: a mission pack by prefix
+/// (`quoth2pt2full_2`), else an installed dir followed by a version or `_`
+/// (`ad_v1_80p1final` -> `ad`).
+pub fn dep_base(deps: &[String], installed: &[String], own: &str) -> Option<String> {
+    let deps: Vec<String> = deps.iter().map(|d| d.to_ascii_lowercase()).collect();
+    if let Some(b) = BASES.iter().find(|b| deps.iter().any(|d| d.starts_with(*b))) {
+        return Some((*b).to_string());
+    }
+    let mut dirs: Vec<&String> = installed.iter().filter(|d| !d.eq_ignore_ascii_case("id1") && !d.eq_ignore_ascii_case(own)).collect();
+    // the longest name wins (`ad_xmas` over `ad`)
+    dirs.sort_by_key(|d| std::cmp::Reverse(d.len()));
+    dirs.into_iter()
+        .find(|dir| {
+            deps.iter().any(|d| {
+                d.strip_prefix(&dir.to_ascii_lowercase())
+                    .is_some_and(|rest| rest.is_empty() || rest.starts_with(['_', '-', 'v']) || rest.starts_with(|c: char| c.is_ascii_digit()))
+            })
+        })
+        .cloned()
+}
+
 /// Final layout: destination paths with id1/base content moved into `own`.
 /// Returns (path, zip entry) pairs and the base the own dir needs.
 pub fn plan(install: &Install, names: &[String], own: &str) -> (Vec<(String, String)>, Option<&'static str>) {
@@ -250,9 +271,11 @@ pub fn install(r: &Release, zip: &Path, basedir: &Path) -> Result<String, String
         .filter(|d| basedir.join(d).is_dir())
         .map(str::to_string)
         .collect();
-    // a mod built on a mission pack (deps like quoth2pt2full_2) needs it mounted
-    let dep_base = BASES.iter().copied().find(|b| r.deps.iter().any(|d| d.to_ascii_lowercase().starts_with(b)));
-    let base = base.or(dep_base);
+    // a mod built on a mission pack or another mod (deps like
+    // quoth2pt2full_2, ad_v1_80p1final) needs it mounted
+    let installed: Vec<String> = qui::mods::scan(basedir).into_iter().map(|m| m.dir).collect();
+    let dep_base = dep_base(&r.deps, &installed, &own);
+    let base = base.map(str::to_string).or_else(|| dep_base.clone());
     for (dest, name) in &planned {
         let data = pack.read(name).ok_or_else(|| qcore::tr!("couldn't unpack {}", name))?;
         let path: PathBuf = basedir.join(dest);
@@ -285,6 +308,7 @@ pub fn install(r: &Release, zip: &Path, basedir: &Path) -> Result<String, String
     if let Some(b) = dep_base
         && !existed.contains(&shown)
         && !BASES.contains(&shown.as_str())
+        && !shown.eq_ignore_ascii_case(&b)
         && qui::mods::is_game_dir(&basedir.join(&shown))
         && !basedir.join(&shown).join("modinfo.txt").exists()
     {

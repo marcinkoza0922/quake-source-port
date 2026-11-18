@@ -2,6 +2,50 @@
 //! thumbnail, stats and inventory; plus deleting a save from the list.
 use super::*;
 
+/// A save shown on the Load/Save screens: file stem, preview and thumbnail.
+#[derive(Clone, Debug)]
+pub struct SaveSlot {
+    pub name: String,
+    pub info: crate::saveinfo::SaveInfo,
+    pub thumb: Option<(qrender::PicId, u32, u32)>,
+    /// Where the file is: ours, or a save another engine left (Load only;
+    /// `load` finds those by name, they can't be deleted from here).
+    pub source: SaveSource,
+}
+
+impl SaveSlot {
+    pub fn is_autosave(&self) -> bool { self.source == SaveSource::Own && is_autosave_name(&self.name) }
+}
+
+/// Which engine's folder a listed save comes from.
+#[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
+pub enum SaveSource {
+    #[default]
+    Own,
+    /// `<basedir>/<game>`: vkQuake, QuakeSpasm (and ironwail without user dirs).
+    GameDir,
+    /// `~/.ironwail/<game>`.
+    Ironwail,
+    /// The 2021 re-release's save folder (version 6, this game only).
+    Kex,
+}
+
+impl SaveSource {
+    /// Card label for a save from another engine.
+    pub fn label(self) -> Option<String> {
+        match self {
+            SaveSource::Own => None,
+            SaveSource::GameDir => Some(qcore::tr!("From the game folder")),
+            SaveSource::Ironwail => Some(qcore::tr!("From ironwail")),
+            SaveSource::Kex => Some(qcore::tr!("From the 2021 re-release")),
+        }
+    }
+}
+
+fn is_autosave_name(name: &str) -> bool {
+    name.strip_prefix("autosave").is_some_and(|n| !n.is_empty() && n.bytes().all(|b| b.is_ascii_digit()))
+}
+
 /// Thumbnail size on a card (16:9), right-aligned.
 const THUMB: (f32, f32) = (96.0, 54.0);
 /// Delete button on the selected card: size, offset from the card's top right.
@@ -18,7 +62,9 @@ pub(super) fn clean_title(t: &str, max: usize) -> String {
 
 /// Short label for what kind of save a card holds.
 fn kind_label(sv: &SaveSlot) -> String {
-    if sv.is_autosave() {
+    if let Some(from) = sv.source.label() {
+        from
+    } else if sv.is_autosave() {
         qcore::tr!("Autosave: {}", qcore::lang::tr(sv.info.reason.as_deref().unwrap_or(qcore::t!("unknown trigger"))))
     } else if sv.name.eq_ignore_ascii_case("quick") {
         qcore::tr!("Quicksave")
@@ -37,9 +83,10 @@ impl Menu {
     }
 
     /// Delete button of the selected card: (x, y, w, h), if it shows.
-    fn delete_button(&self) -> Option<(f32, f32, f32, f32)> {
+    pub(super) fn delete_button(&self) -> Option<(f32, f32, f32, f32)> {
         let i = self.load_cursor;
-        self.save_at(i)?;
+        // saves other engines left are only listed, never deleted from here
+        self.save_at(i).filter(|s| s.source == SaveSource::Own)?;
         let y = self.card_y(i) + CARD_H - DEL.1 - 5.0;
         let (top, bottom) = if i < self.card_sticky() { (CARD_Y0, CARD_Y0 + CARD_H) } else { (self.card_top(), CARD_BOTTOM) };
         (self.card_visible(i) && y >= top && y + DEL.1 <= bottom)
@@ -183,7 +230,7 @@ impl Menu {
             c.round_box(bx, by, bw, bh, 3.0, if hover { [0.55, 0.12, 0.08, 0.95] } else { [0.0, 0.0, 0.0, 0.6] }, Some(BORDER));
             c.text_center(bx + bw / 2.0, by + 2.0, "Delete", small, if hover { GOLD_FG } else { MUTED });
         }
-        if !self.pad_ui && self.save_at(self.load_cursor).is_some() {
+        if !self.pad_ui && self.save_at(self.load_cursor).is_some_and(|s| s.source == SaveSource::Own) {
             c.text_right(CARD_X + CARD_W, CARD_BOTTOM + 8.0, "Del: delete save", TXT, MUTED);
         }
         if let Some((x, top, h, ty, th)) = self.card_scrollbar() {

@@ -3046,3 +3046,12 @@ mr फक्त सर्व्हरच changelevel करू शकतो
 
 @ {} renamed to {}
 mr {} चे नाव बदलून {} झाले
+
+@ From the game folder
+mr गेम फोल्डरमधून
+
+@ From ironwail
+mr ironwail मधून
+
+@ From the 2021 re-release
+mr 2021 री-रिलीझमधून

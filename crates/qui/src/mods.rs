@@ -3,33 +3,56 @@
 //!
 //! Metadata comes from an optional `modinfo.txt` in the mod dir (lines of
 //! `key value`, value optionally quoted: `title`, `base` = hipnotic / rogue /
-//! quoth, `description`), then a built-in table for the official games, then
-//! the dir name. The first lines of the mod's readme are shown as a blurb.
+//! quoth or any other installed game dir, `description`), then a built-in
+//! table for the official games, then the dir name. The first lines of the
+//! mod's readme are shown as a blurb. A map pack without progs or modinfo
+//! `base` whose readme names an installed mod ("Mod Needed : Arcane
+//! Dimension 1.7") is mounted on that mod.
 
 use std::path::Path;
 
 use qcore::fs::Fs;
 
-/// Mission pack a mod builds on (mounted below it, like `-hipnotic`).
-#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+/// Game a mod builds on, mounted below it: a mission pack (`-hipnotic`) or
+/// any other game dir (`-game ad -game mymap`, as ironwail and vkQuake stack
+/// several `-game`).
+#[derive(Clone, Debug, PartialEq, Eq)]
 pub enum Base {
     Id,
     Hipnotic,
     Rogue,
     Quoth,
+    Mod(String),
 }
 
 impl Base {
-    pub fn dir(self) -> Option<&'static str> {
+    pub fn dir(&self) -> Option<&str> {
         match self {
             Base::Id => None,
             Base::Hipnotic => Some("hipnotic"),
             Base::Rogue => Some("rogue"),
             Base::Quoth => Some("quoth"),
+            Base::Mod(d) => Some(d),
+        }
+    }
+    /// Engine arguments that mount the base itself.
+    pub fn args(&self) -> Vec<String> {
+        match self {
+            Base::Id => Vec::new(),
+            Base::Mod(d) => vec!["-game".into(), d.clone()],
+            b => vec![format!("-{}", b.dir().unwrap_or_default())],
         }
     }
     fn from_name(s: &str) -> Option<Base> {
         [Base::Hipnotic, Base::Rogue, Base::Quoth].into_iter().find(|b| b.dir().is_some_and(|d| d.eq_ignore_ascii_case(s)))
+    }
+    /// A modinfo `base` value: a mission pack, else another game dir.
+    fn parse(s: &str) -> Base {
+        let s = s.trim();
+        if s.is_empty() || s.eq_ignore_ascii_case("id1") || s.contains(['/', '\\']) || s.contains("..") {
+            return Base::Id;
+        }
+        Base::from_name(s).unwrap_or_else(|| Base::Mod(s.to_string()))
     }
 }
 
@@ -44,19 +67,29 @@ pub struct ModInfo {
 }
 
 impl ModInfo {
-    /// Engine arguments that mount this mod (`-hipnotic -game foo`).
+    /// Engine arguments that mount this mod (`-hipnotic -game foo`,
+    /// `-game ad -game foo`).
     pub fn launch_args(&self) -> Vec<String> {
         let mut a = Vec::new();
-        if let Some(b) = self.base.dir()
-            && !b.eq_ignore_ascii_case(&self.dir)
-        {
-            a.push(format!("-{b}"));
+        if self.base.dir().is_some_and(|b| !b.eq_ignore_ascii_case(&self.dir)) {
+            a.extend(self.base.args());
         }
         if !self.dir.eq_ignore_ascii_case("id1") {
             a.push("-game".into());
             a.push(self.dir.clone());
         }
         a
+    }
+    /// Game dirs below id1 in mount order: the base (if any), then the mod.
+    pub fn game_dirs(&self) -> Vec<String> {
+        let mut v = Vec::new();
+        if let Some(b) = self.base.dir().filter(|b| !b.eq_ignore_ascii_case(&self.dir)) {
+            v.push(b.to_string());
+        }
+        if !self.dir.eq_ignore_ascii_case("id1") {
+            v.push(self.dir.clone());
+        }
+        v
     }
 }
 
@@ -104,8 +137,89 @@ pub fn scan(basedir: &Path) -> Vec<ModInfo> {
         .filter(|e| e.is_dir && is_game_dir(&e.path))
         .filter_map(|e| e.path.file_name()?.to_str().map(|d| info(&e.path, d)))
         .collect();
+    // a modinfo base that isn't installed would fail to mount: run on id1
+    let dirs: Vec<String> = out.iter().map(|m| m.dir.to_ascii_lowercase()).collect();
+    for m in &mut out {
+        if let Base::Mod(d) = &m.base
+            && !dirs.contains(&d.to_ascii_lowercase())
+        {
+            m.base = Base::Id;
+        }
+    }
+    // map packs for another mod (no progs, no modinfo base)
+    let found: Vec<Option<Base>> = out
+        .iter()
+        .map(|m| {
+            if m.base != Base::Id || has_progs(&basedir.join(&m.dir)) {
+                return None;
+            }
+            let need = text_files(&basedir.join(&m.dir)).iter().find_map(|t| needed_mod(t))?;
+            needed_dir(&need, &out, &m.dir).map(|d| Base::from_name(&d).unwrap_or(Base::Mod(d)))
+        })
+        .collect();
+    for (m, b) in out.iter_mut().zip(found) {
+        if let Some(b) = b {
+            m.base = b;
+        }
+    }
     out.sort_by_key(|m| (!m.dir.eq_ignore_ascii_case("id1"), m.title.to_ascii_lowercase()));
     out
+}
+
+/// True when the dir has its own game code: a progs.dat, or a pak that
+/// holds one.
+fn has_progs(path: &Path) -> bool {
+    let mut fs = Fs::new(path.parent().unwrap_or(path));
+    let Some(dir) = path.file_name().and_then(|d| d.to_str()) else { return false };
+    fs.add_game_dir(dir) && ["progs.dat", "qwprogs.dat", "csprogs.dat"].iter().any(|f| fs.exists(f))
+}
+
+/// Every top-level `.txt` in the dir (map packs name their readme after
+/// the map: `ad_heresp1.txt`), readmes first.
+fn text_files(path: &Path) -> Vec<String> {
+    let Ok(rd) = qcore::vfs::read_dir(path) else { return Vec::new() };
+    let mut files: Vec<(bool, std::path::PathBuf)> = rd
+        .into_iter()
+        .filter(|e| !e.is_dir)
+        .filter_map(|e| {
+            let n = e.path.file_name()?.to_string_lossy().to_ascii_lowercase();
+            n.ends_with(".txt").then(|| (!n.contains("readme"), e.path))
+        })
+        .collect();
+    files.sort();
+    files.iter().filter_map(|(_, p)| qcore::vfs::read(p).ok()).map(|d| String::from_utf8_lossy(&d).into_owned()).collect()
+}
+
+/// The value of a readme's "Mod Needed :" / "Requires :" line, if any.
+fn needed_mod(readme: &str) -> Option<String> {
+    readme.lines().find_map(|l| {
+        let (k, v) = l.split_once(':')?;
+        let k = k.trim().to_ascii_lowercase();
+        let v = v.trim();
+        let key = matches!(k.as_str(), "mod needed" | "mod required" | "requires" | "required mod" | "needs" | "base mod");
+        (key && v.chars().any(|c| c.is_ascii_alphabetic()) && !v.eq_ignore_ascii_case("none")).then(|| v.to_string())
+    })
+}
+
+/// The installed game dir a readme's needed mod names: by dir name or by
+/// title, ignoring a version ("Arcane Dimension 1.7" -> `ad`, titled
+/// "Arcane Dimensions").
+fn needed_dir(need: &str, mods: &[ModInfo], own: &str) -> Option<String> {
+    let norm = |s: &str| s.chars().filter(char::is_ascii_alphanumeric).collect::<String>().to_ascii_lowercase();
+    let first = need.split(|c: char| c.is_ascii_digit() || c == '(' || c == ',').next().unwrap_or("");
+    let want = norm(first);
+    let word = norm(need.split_whitespace().next().unwrap_or(""));
+    if want.len() < 2 {
+        return None;
+    }
+    mods.iter()
+        .filter(|m| !m.dir.eq_ignore_ascii_case(own) && !m.dir.eq_ignore_ascii_case("id1"))
+        .find(|m| {
+            let t = norm(&m.title);
+            let d = norm(&m.dir);
+            d == word || d == want || (want.len() >= 6 && t.len() >= 6 && (t.starts_with(&want) || want.starts_with(&t)))
+        })
+        .map(|m| m.dir.clone())
 }
 
 fn info(path: &Path, dir: &str) -> ModInfo {
@@ -122,7 +236,7 @@ fn info(path: &Path, dir: &str) -> ModInfo {
             let v = v.trim().trim_matches('"').trim();
             match k.to_ascii_lowercase().as_str() {
                 "title" if !v.is_empty() => m.title = v.to_string(),
-                "base" => m.base = Base::from_name(v).unwrap_or(Base::Id),
+                "base" => m.base = Base::parse(v),
                 "description" if !v.is_empty() => m.blurb.push(v.to_string()),
                 _ => {}
             }
@@ -249,9 +363,28 @@ mod tests {
         assert!(m("id1", Base::Id).launch_args().is_empty());
         assert_eq!(m("hipnotic", Base::Hipnotic).launch_args(), ["-game", "hipnotic"]);
         assert_eq!(m("foo", Base::Rogue).launch_args(), ["-rogue", "-game", "foo"]);
+        assert_eq!(m("oxy", Base::Mod("ad".into())).launch_args(), ["-game", "ad", "-game", "oxy"]);
+        assert_eq!(m("oxy", Base::Mod("ad".into())).game_dirs(), ["ad", "oxy"]);
+        assert_eq!(Base::parse("AD"), Base::Mod("AD".into()));
+        assert_eq!(Base::parse("quoth"), Base::Quoth);
+        assert_eq!(Base::parse("../x"), Base::Id);
         assert_eq!(clean_message("The\\nSlipgate  Complex\n"), "The Slipgate Complex");
         assert_eq!(blurb("=====\n\n  Title: Foo  \n--\nby someone\n", 1), ["Title: Foo"]);
         assert!(entity_lump(&[0; 6]).is_none());
+    }
+
+    #[test]
+    fn needed_mod_from_readme() {
+        let r = "Title : X\nMod Needed\t\t: Arcane Dimension 1.7\nBase : -\n";
+        assert_eq!(needed_mod(r).as_deref(), Some("Arcane Dimension 1.7"));
+        assert_eq!(needed_mod("Base : -\nRequires : none\n"), None);
+        let m = |d: &str, t: &str| ModInfo { dir: d.into(), title: t.into(), base: Base::Id, blurb: vec![] };
+        let mods = [m("id1", "Quake"), m("ad", "Arcane Dimensions"), m("quoth", "quoth"), m("oxy", "oxy")];
+        assert_eq!(needed_dir("Arcane Dimension 1.7", &mods, "oxy").as_deref(), Some("ad"));
+        assert_eq!(needed_dir("Quoth 2.2", &mods, "oxy").as_deref(), Some("quoth"));
+        assert_eq!(needed_dir("AD 1.80", &mods, "oxy").as_deref(), Some("ad"));
+        assert_eq!(needed_dir("Quake", &mods, "oxy"), None);
+        assert_eq!(needed_dir("Something else", &mods, "oxy"), None);
     }
 
     #[test]
@@ -262,6 +395,16 @@ mod tests {
         assert_eq!(mods[0].title, "Quake");
         let hip = mods.iter().find(|m| m.dir == "hipnotic").unwrap();
         assert_eq!(hip.base, Base::Hipnotic);
+        // an AD map pack without progs, found by its readme's "Mod Needed"
+        if let Some(oxy) = mods.iter().find(|m| m.dir == "Oxyblack_Fortress_by_Heresy")
+            && b.join("ad").is_dir()
+        {
+            assert_eq!(oxy.base, Base::Mod("ad".into()));
+        }
+        // mods with their own progs keep running on id1
+        if let Some(ad) = mods.iter().find(|m| m.dir == "ad") {
+            assert_eq!(ad.base, Base::Id);
+        }
         let maps = maps(&b, "id1");
         assert_eq!(maps[0].name, "start");
         let e1m1 = maps.iter().find(|m| m.name == "e1m1").unwrap();

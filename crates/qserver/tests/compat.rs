@@ -131,3 +131,25 @@ fn new_entities_get_physics_from_the_next_frame() {
     }
     panic!("no rocket fired");
 }
+
+#[test]
+fn fly_and_edict_dumps() {
+    // Host_Fly_f toggles MOVETYPE_FLY like noclip; ED_Count/ED_PrintEdict_f
+    // read the live edicts.
+    let Some(mut sv) = spawn("e1m1") else { return };
+    sv.connect_local().expect("local client");
+    for _ in 0..3 {
+        sv.frame(1.0 / 72.0);
+    }
+    let mo = sv.core.sv.fields.movetype;
+    let movetype = |sv: &Server| sv.level.as_ref().unwrap().vm.ent_f(1, mo) as i32;
+    sv.command("fly");
+    assert_eq!(movetype(&sv), qworld::MOVETYPE_FLY);
+    sv.command("fly 0");
+    assert_eq!(movetype(&sv), qworld::MOVETYPE_WALK);
+    let count = sv.edictcount_text().unwrap();
+    assert!(count.starts_with("num_edicts:"), "{count}");
+    assert!(sv.edict_text(0).unwrap().contains("worldspawn"));
+    assert_eq!(sv.edict_text(100_000).unwrap(), "Bad edict number\n");
+    assert!(sv.edicts_text().unwrap().contains("info_player_start"));
+}

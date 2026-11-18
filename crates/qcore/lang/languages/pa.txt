@@ -3046,3 +3046,12 @@ pa ਸਿਰਫ਼ ਸਰਵਰ changelevel ਕਰ ਸਕਦਾ ਹੈ
 
 @ {} renamed to {}
 pa {} ਦਾ ਨਾਂ ਬਦਲ ਕੇ {} ਹੋਇਆ
+
+@ From the game folder
+pa ਗੇਮ ਫੋਲਡਰ ਤੋਂ
+
+@ From ironwail
+pa ironwail ਤੋਂ
+
+@ From the 2021 re-release
+pa 2021 ਰੀ-ਰਿਲੀਜ਼ ਤੋਂ

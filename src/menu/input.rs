@@ -310,7 +310,7 @@ impl Menu {
                 self.fix_card_scroll();
                 if up || down || left || right { out.push(Action::Sound("misc/menu1.wav")); }
                 let delete = matches!(key, K_DEL | K_BACKSPACE | K_XBUTTON);
-                if delete && let Some(sv) = self.save_at(self.load_cursor) {
+                if delete && let Some(sv) = self.save_at(self.load_cursor).filter(|s| s.source == SaveSource::Own) {
                     self.ask_delete(sv.clone());
                     return out;
                 }

@@ -201,7 +201,10 @@ fn parse_mesh(text: &[u8]) -> Result<(Vec<Joint>, Vec<Mesh>)> {
     for j in 0..num_joints {
         let name = t.word()?.to_string();
         let parent = t.int()?;
-        if parent < -1 || parent >= j as i64 {
+        // Parents may come later in the list (MG3's ogre_rocket parents
+        // its root to an armature joint at the end); vkQuake only checks
+        // the range here and resolves the order against the animation.
+        if parent < -1 || parent >= num_joints as i64 || parent == j as i64 {
             return Err(err(format!("joint \"{name}\" has bad parent {parent}")));
         }
         let p = t.vec3()?;
@@ -252,105 +255,6 @@ fn parse_mesh(text: &[u8]) -> Result<(Vec<Joint>, Vec<Mesh>)> {
     Ok((joints, meshes))
 }
 
-/// Absolute joint transforms for every frame of `anim` (just the bind pose
-/// without an animation).
-fn parse_anim(text: Option<&[u8]>, joints: &[Joint]) -> Result<Vec<Vec<Mat>>> {
-    let bind: Vec<Mat> = joints.iter().map(|j| j.bind).collect();
-    let Some(text) = text else { return Ok(vec![bind]) };
-    // Joint transforms relative to their parent in the bind pose: the
-    // fallback for mesh joints the animation does not drive.
-    let rel_bind: Vec<Mat> = joints
-        .iter()
-        .map(|j| if j.parent < 0 { j.bind } else { concat(&invert(&joints[j.parent as usize].bind), &j.bind) })
-        .collect();
-    let mut t = Tokens::new(text);
-    t.header()?;
-    t.expect("numFrames")?;
-    let num_frames = t.count(1 << 16)?;
-    t.expect("numJoints")?;
-    let anim_joints = t.count(4096)?;
-    t.expect("frameRate")?;
-    t.word()?;
-    t.expect("numAnimatedComponents")?;
-    let raw_count = t.count(1 << 20)?;
-    if num_frames == 0 {
-        return Err(err("animation has no frames"));
-    }
-    t.expect("hierarchy")?;
-    t.expect("{")?;
-    // (mesh joint, flags, offset)
-    let mut hier = Vec::with_capacity(anim_joints);
-    for j in 0..anim_joints {
-        let name = t.word()?;
-        let parent = t.int()?;
-        let flags = t.count(63)? as u32;
-        let offset = t.count(raw_count)?;
-        if parent < -1 || parent >= j as i64 || offset + flags.count_ones() as usize > raw_count {
-            return Err(err(format!("bad hierarchy entry \"{name}\"")));
-        }
-        let mesh = joints.iter().position(|m| m.name == name);
-        if let Some(m) = mesh {
-            // the animated parent must be the mesh parent
-            let anim_parent = if parent < 0 { None } else { hier.get(parent as usize).and_then(|h: &(Option<usize>, u32, usize)| h.0) };
-            let mesh_parent = (joints[m].parent >= 0).then(|| joints[m].parent as usize);
-            if anim_parent != mesh_parent {
-                return Err(err(format!("joint \"{name}\" has a different parent in the animation")));
-            }
-        }
-        hier.push((mesh, flags, offset));
-    }
-    t.expect("}")?;
-    t.expect("bounds")?;
-    t.expect("{")?;
-    while t.peek() == Some("(") {
-        t.vec3()?;
-        t.vec3()?;
-    }
-    t.expect("}")?;
-    t.expect("baseframe")?;
-    t.expect("{")?;
-    let mut base = Vec::with_capacity(anim_joints);
-    for _ in 0..anim_joints {
-        base.push((t.vec3()?, t.vec3()?));
-    }
-    t.expect("}")?;
-    let mut relative = vec![rel_bind; num_frames];
-    let mut raw = vec![0.0f32; raw_count];
-    while t.peek() == Some("frame") {
-        t.next();
-        let f = t.count(num_frames - 1)?;
-        t.expect("{")?;
-        for r in raw.iter_mut() {
-            *r = t.float()?;
-        }
-        t.expect("}")?;
-        for (j, &(mesh, flags, offset)) in hier.iter().enumerate() {
-            let Some(m) = mesh else { continue };
-            let (p, q) = base[j];
-            let mut c = [p[0], p[1], p[2], q[0], q[1], q[2]];
-            let mut k = offset;
-            for (bit, slot) in c.iter_mut().enumerate() {
-                if flags & (1 << bit) != 0 {
-                    *slot = raw[k];
-                    k += 1;
-                }
-            }
-            relative[f][m] = pos_quat([c[0], c[1], c[2]], quat([c[3], c[4], c[5]]));
-        }
-    }
-    Ok(relative
-        .into_iter()
-        .map(|rel| {
-            let mut abs: Vec<Mat> = Vec::with_capacity(rel.len());
-            for (j, r) in rel.iter().enumerate() {
-                let p = joints[j].parent;
-                abs.push(if p < 0 { *r } else { concat(&abs[p as usize], r) });
-            }
-            abs
-        })
-        .collect())
-}
-
 /// MD3 spherical normal encoding (inverse of alias.vert's decode).
 fn encode_normal(n: [f32; 3]) -> [u8; 2] {
     const K: f32 = 255.0 / std::f32::consts::TAU;
@@ -366,7 +270,7 @@ impl Md5 {
         if meshes.is_empty() {
             return Err(err("model has no meshes"));
         }
-        let poses = parse_anim(anim, &joints)?;
+        let poses = anim::parse_anim(anim, &joints)?;
         let mut bounds = vec![[Vec3::splat(f32::MAX), Vec3::splat(f32::MIN)]; poses.len()];
         let mut surfaces = Vec::with_capacity(meshes.len());
         for m in &meshes {
@@ -429,5 +333,6 @@ impl Md5 {
     }
 }
 
+mod anim;
 #[cfg(test)]
 mod tests;

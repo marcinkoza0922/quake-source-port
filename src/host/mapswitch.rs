@@ -115,6 +115,7 @@ impl Host {
         self.view.reset();
         self.feedback = Default::default();
         self.debris.new_map(&mut self.cl);
+        self.bboxes.pointfile.clear();
         self.blood.clear();
         self.impacts.clear();
         self.hitfx.clear();

@@ -46,7 +46,9 @@ pub(super) struct FrameU {
     pub(super) soft: [f32; 4],
     /// World dither level, alias mode, goggles mode.
     pub(super) softf: [u32; 4],
-    pub(super) pad: [f32; 8],
+    /// Skybox wind: xyz direction (world), w loop phase.
+    pub(super) wind: [f32; 4],
+    pub(super) pad: [f32; 4],
 }
 
 /// Vertex of CPU-posed alias models (world space).

@@ -13,6 +13,7 @@ struct FrameU {
     // x world dither level (0 off, 1 coarse, 2 banded lightmap), y alias mode
     // (0 std, 1 dither, 2 affine), z goggles (1 night vision, 2 thermal)
     softf: vec4<u32>,
+    wind: vec4<f32>,   // skybox wind: xyz direction (world), w loop phase
 };
 // Per-draw record (dynamic uniform offset).
 struct DrawU {

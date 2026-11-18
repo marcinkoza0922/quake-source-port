@@ -122,16 +122,15 @@ def one(a, sandbox, userdata, game, mapname, slot=0):
     common = base + ["+map", mapname, "+save", tag, "+quit"]
     common_ours = common
     if a.frames:
-        # N server frames of 1/72 s, then save. Both engines run the script
-        # from a cfg (ironwail keeps only 256 chars of command line); ours
-        # needs one more `wait`, since ironwail also runs a server frame in
-        # the frame that executes `map`.
+        # N server frames of 1/72 s, then save. Both engines run the same
+        # script from a cfg (ironwail keeps only 256 chars of command line);
+        # both run a server frame in the frame that executes `map`.
         def script(engine, waits):
             name = f"qsprun_{mapname}_{engine}.cfg"
             with open(os.path.join(sandbox, game, name), "w") as f:
                 f.write(f"host_framerate {1 / 72}\nmap {mapname}\n" + "wait\n" * waits + f"save {tag}\nquit\n")
             return base + ["+exec", name]
-        common_ours = script("ours", a.frames + 1)
+        common_ours = script("ours", a.frames)
         common = script("iw", a.frames)
     env = dict(os.environ, XDG_DATA_HOME=userdata)
     ours_sav = os.path.join(userdata, "quake-source-port", game.lower(), tag + ".sav")  # our user dirs are lowercase

@@ -1727,3 +1727,24 @@ de Alternativfeuer auf ein leuchtendes Elektronikpaneel in Reichweite steckt ein
 it Il fuoco secondario su un pannello elettronico luminoso a portata inserisce un'estremità; l'altra spara fulmini con munizioni illimitate. Il cavo ti lega alla presa e si impiglia negli angoli. Il fuoco secondario o il cambio d'arma lo strappa via.
 es El disparo secundario sobre un panel electrónico iluminado a tu alcance enchufa un extremo; el otro dispara rayos con munición ilimitada. El cable te ata a la toma y se engancha en las esquinas. El secundario o cambiar de arma lo arranca.
 ru Альт. огонь по светящейся электронной панели рядом втыкает один конец; другой конец стреляет молниями с бесконечными боеприпасами. Кабель привязывает вас к гнезду и цепляется за углы. Альт. огонь или смена оружия выдёргивает его.
+
+@ From the game folder
+fr Du dossier du jeu
+de Aus dem Spielordner
+it Dalla cartella del gioco
+es De la carpeta del juego
+ru Из папки игры
+
+@ From ironwail
+fr D'ironwail
+de Aus ironwail
+it Da ironwail
+es De ironwail
+ru Из ironwail
+
+@ From the 2021 re-release
+fr De la réédition 2021
+de Aus der Neuauflage von 2021
+it Dalla riedizione 2021
+es De la reedición de 2021
+ru Из переиздания 2021 года

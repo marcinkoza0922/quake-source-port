@@ -3046,3 +3046,12 @@ he רק השרת רשאי להריץ changelevel
 
 @ {} renamed to {}
 he {} שינה את שמו ל-{}
+
+@ From the game folder
+he מתיקיית המשחק
+
+@ From ironwail
+he מ-ironwail
+
+@ From the 2021 re-release
+he מהמהדורה המחודשת מ-2021

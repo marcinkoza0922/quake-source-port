@@ -3046,3 +3046,12 @@ sl Samo strežnik lahko uporabi changelevel
 
 @ {} renamed to {}
 sl {} se zdaj imenuje {}
+
+@ From the game folder
+sl Iz mape igre
+
+@ From ironwail
+sl Iz ironwaila
+
+@ From the 2021 re-release
+sl Iz izdaje 2021

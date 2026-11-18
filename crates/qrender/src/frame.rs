@@ -400,7 +400,10 @@ impl Renderer {
                                 })
                             })
                             .unwrap_or([128.0; 3]);
-                        if st.dynamic {
+                        if st.fullbright {
+                            lc = [100.0; 3]; // ironwail: lightcolor 0.5 (x200)
+                        }
+                        if st.dynamic && !st.fullbright {
                             for dl in fr.dlights {
                                 let d = sub(e.origin, dl.origin);
                                 let add = dl.radius - dot(d, d).sqrt();
@@ -831,7 +834,7 @@ impl Renderer {
                 ],
                 alphas,
                 soft: [soft.0, soft.1, st.goggles.intensity.clamp(0.25, 3.0), st.goggles.noise.clamp(0.0, 2.0)],
-                softf: [soft.2, soft.3, st.goggles.mode.min(2), self.caustic_tex],
+                softf: [soft.2 | (u32::from(st.fullbright) << 4), soft.3, st.goggles.mode.min(2), self.caustic_tex],
                 water: [
                     st.water_ripples.clamp(0.0, 4.0),
                     st.water_caustics.clamp(0.0, 4.0),
@@ -861,6 +864,7 @@ impl Renderer {
                 } else {
                     [0.0; 4]
                 },
+                wind: if sky.is_some() { st.sky_wind } else { [0.0; 4] },
                 ripples: {
                     let mut r = [[0.0; 4]; crate::water::MAX_RIPPLES];
                     for (d, w) in r.iter_mut().zip(&self.water_fx.ripples) {

@@ -3046,3 +3046,12 @@ lt Tik serveris gali vykdyti changelevel
 
 @ {} renamed to {}
 lt {} dabar vadinasi {}
+
+@ From the game folder
+lt Iš žaidimo aplanko
+
+@ From ironwail
+lt Iš ironwail
+
+@ From the 2021 re-release
+lt Iš 2021 m. pakartotinio leidimo

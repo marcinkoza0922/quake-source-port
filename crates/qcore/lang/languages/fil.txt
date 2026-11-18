@@ -3046,3 +3046,12 @@ fil Ang server lang ang puwedeng mag-changelevel
 
 @ {} renamed to {}
 fil Pinalitan ni {} ang pangalan niya bilang {}
+
+@ From the game folder
+fil Mula sa folder ng laro
+
+@ From ironwail
+fil Mula sa ironwail
+
+@ From the 2021 re-release
+fil Mula sa 2021 re-release

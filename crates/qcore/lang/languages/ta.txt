@@ -3046,3 +3046,12 @@ ta சர்வர் மட்டுமே changelevel செய்யலாம
 
 @ {} renamed to {}
 ta {} இப்போது {} என மறுபெயரிடப்பட்டது
+
+@ From the game folder
+ta கேம் கோப்புறையிலிருந்து
+
+@ From ironwail
+ta ironwail இலிருந்து
+
+@ From the 2021 re-release
+ta 2021 மறுவெளியீட்டிலிருந்து

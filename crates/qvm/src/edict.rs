@@ -169,7 +169,8 @@ impl Vm {
         }
         let mut out = format!("\nEDICT {e}:\n");
         let ed = self.edict(e);
-        for d in &self.progs.fielddefs {
+        // field def 0 is the null field (ED_Print starts at 1)
+        for d in self.progs.fielddefs.iter().skip(1) {
             let name = self.progs.string(d.name);
             if name.len() > 1 && name[name.len() - 2] == b'_' {
                 continue; // skip _x, _y, _z vars

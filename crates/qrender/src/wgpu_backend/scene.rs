@@ -229,8 +229,9 @@ impl Renderer {
             alphas,
             vel: self.vel_frame_params(),
             soft: [soft.0, soft.1, 0.0, 0.0],
-            softf: [soft.2, soft.3, st.goggles.mode.min(2), 0],
-            pad: [0.0; 8],
+            softf: [soft.2 | (u32::from(st.fullbright) << 4), soft.3, st.goggles.mode.min(2), 0],
+            wind: if self.skybox.is_some() { st.sky_wind } else { [0.0; 4] },
+            pad: [0.0; 4],
         });
         let fu = lists.frame_u.len() as u32 - 1;
         let mut b = Buckets::default();

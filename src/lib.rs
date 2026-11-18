@@ -1,6 +1,6 @@
 //! quake-source-port: host library wiring the crates together (see docs/DESIGN.md).
 //!
-//! Options: -basedir <dir>, -game <dir>, -hipnotic / -rogue / -quoth,
+//! Options: -basedir <dir>, -game <dir> (repeatable), -hipnotic / -rogue / -quoth,
 //! -width <w>, -height <h>, -fullscreen, -window, -headless (offscreen
 //! renderer, simulated time, no audio), -autoquit <seconds>, and `+cmd args`
 //! console commands.
@@ -35,6 +35,7 @@ mod png;
 mod quaddicted;
 mod qw;
 mod sbar;
+mod skywind;
 mod saveinfo;
 mod splitscreen;
 mod save_inventory;
@@ -72,6 +73,10 @@ impl Opts {
         let i = self.args.iter().position(|a| a.eq_ignore_ascii_case(f))?;
         self.args.get(i + 1).map(String::as_str)
     }
+    /// Every value of a repeatable flag, in order.
+    fn vals<'a>(&'a self, f: &'a str) -> impl Iterator<Item = &'a str> + 'a {
+        self.args.windows(2).filter(move |w| w[0].eq_ignore_ascii_case(f)).map(|w| w[1].as_str())
+    }
 }
 
 /// `$XDG_DATA_HOME/quake-source-port/<game>` (default `~/.local/share/...`);
@@ -106,11 +111,12 @@ fn open_game(o: &Opts) -> Result<(Fs, PathBuf, [[u8; 3]; 256]), String> {
             fs.add_game_dir(dir);
         }
     }
-    if let Some(g) = o.val("-game")
-        && !g.eq_ignore_ascii_case("id1")
-        && !fs.add_game_dir(g)
-    {
-        eprintln!("game dir {g} not found");
+    // Several -game stack in order and the last is the active game, as in
+    // ironwail and vkQuake (`-game ad -game mymap` for an AD map pack).
+    for g in o.vals("-game") {
+        if !g.eq_ignore_ascii_case("id1") && !fs.game_dirs().iter().any(|d| d.eq_ignore_ascii_case(g)) && !fs.add_game_dir(g) {
+            eprintln!("game dir {g} not found");
+        }
     }
     // User config/saves live outside the game data and override it.
     fs.add_user_dir(user_dir(fs.game_dir().unwrap_or("id1")));

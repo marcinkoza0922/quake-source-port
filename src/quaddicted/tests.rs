@@ -192,3 +192,14 @@ fn stored_zip(name: &str, data: &[u8]) -> Vec<u8> {
     le16(&mut v, 0);
     v
 }
+
+#[test]
+fn dependency_names_installed_base() {
+    let inst: Vec<String> = ["id1", "ad", "ad_xmas", "quoth", "mymap"].iter().map(|s| s.to_string()).collect();
+    let d = |v: &[&str]| v.iter().map(|s| s.to_string()).collect::<Vec<_>>();
+    assert_eq!(dep_base(&d(&["quoth2pt2full_2"]), &inst, "mymap").as_deref(), Some("quoth"));
+    assert_eq!(dep_base(&d(&["ad_v1_80p1final"]), &inst, "mymap").as_deref(), Some("ad"));
+    assert_eq!(dep_base(&d(&["ad_xmas_v2"]), &inst, "mymap").as_deref(), Some("ad_xmas"));
+    assert_eq!(dep_base(&d(&["adamantine"]), &inst, "mymap"), None);
+    assert_eq!(dep_base(&d(&["mymap_v2"]), &inst, "mymap"), None);
+}

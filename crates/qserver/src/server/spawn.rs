@@ -5,6 +5,7 @@ impl Server {
     /// also recorded as the level error.
     pub fn spawn_server(&mut self, mapname: &str) -> Result<(), String> {
         let r = self.spawn_inner(mapname);
+        self.core.spawns += 1;
         if let Err(e) = &r {
             self.core.print(&qcore::ctr!("Couldn't spawn server {}: {}\n", mapname, e));
             self.core.sv.active = false;

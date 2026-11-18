@@ -27,6 +27,8 @@ pub(super) struct FrameUbo {
     pub(super) portal_uv: [f32; 4],
     /// xy scene px per vel px, zw scene max texel coords.
     pub(super) vel_uv: [f32; 4],
+    /// Skybox wind: xyz direction (world), w loop phase.
+    pub(super) wind: [f32; 4],
     /// xy centre, z liquid surface height, w start time.
     pub(super) ripples: [[f32; 4]; crate::water::MAX_RIPPLES],
     pub(super) ripple_amp: [[f32; 4]; crate::water::MAX_RIPPLES / 4],

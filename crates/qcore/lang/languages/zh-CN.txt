@@ -3046,3 +3046,12 @@ zh-CN 只有服务器可以更换关卡
 
 @ {} renamed to {}
 zh-CN {} 已改名为 {}
+
+@ From the game folder
+zh-CN 来自游戏文件夹
+
+@ From ironwail
+zh-CN 来自 ironwail
+
+@ From the 2021 re-release
+zh-CN 来自 2021 重制版

@@ -94,6 +94,8 @@ mod tests {
             lerp_models: false,
             lerp_move: false,
             flash: 1.0,
+            idle: crate::view::Idle::VANILLA,
+            cshift: [1.0; 4],
         };
         for model in [1, 2] {
             cl.stats[STAT_WEAPON] = model;

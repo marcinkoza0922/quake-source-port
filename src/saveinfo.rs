@@ -44,14 +44,16 @@ impl SaveInfo {
     pub fn parse(text: &str, modified: Option<SystemTime>) -> Option<Self> {
         let (addons, text) = qserver::addons::save::split(text).ok()?;
         let mut lines = text.lines();
-        if lines.next()?.trim() != "5" { return None; }
+        // the 2021 re-release (version 6) adds a game-dir line
+        let kex = match lines.next()?.trim() { "5" => false, "6" => true, _ => return None };
+        if kex { lines.next()?; }
         let comment = lines.next()?;
         for _ in 0..16 { lines.next()?; } // spawn parms
         let skill = lines.next()?.trim().parse::<f32>().unwrap_or(1.0) as i32;
         let map = lines.next()?;
         let time = lines.next()?.trim().parse::<f64>().unwrap_or(0.0);
         for _ in 0..64 { lines.next()?; }
-        let offset: usize = text.split_inclusive('\n').take(85).map(str::len).sum();
+        let offset: usize = text.split_inclusive('\n').take(85 + usize::from(kex)).map(str::len).sum();
         let mut data = text.get(offset..)?;
         let globals = block(&mut data)?;
         let world = block(&mut data)?;

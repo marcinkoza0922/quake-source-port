@@ -103,31 +103,67 @@ Tools and hygiene:
   own, and gives mods that depend on one a `modinfo.txt` with `base`.
 - `qbot -game all|a,b`: every installed pack, with summary.
 
-## Open (not fixed)
+## Fixed after the audit (2026-11-17)
 
-Ordered by impact.
+The audit's open list, in its order:
 
-1. **Sky wind** (`skywind`, `gfx/env/<sky>_wind.cfg`, in both references;
-   dmd, qbj2, qbj3 ship wind configs). A renderer feature.
-2. **AD's vkQuake-only paths** (FTE particles, misc_gtkmodel) are by design.
-   AD calls `getsurfacetexture`/`getsurfacenearpoint`, `strncasecmp`,
-   `strstrofs`, `fopen`/`fputs` and `te_explosion2` only behind extension
-   checks we and ironwail answer "no".
-3. **Remaining reference commands** that mods or players use: `fly`,
-   `maps`/`path`/`mapname`/`find`, `v_idlescale` and the `v_i*` family,
-   `cl_nolerp`, `gl_polyblend`, `gl_cshiftpercent` (qbj3 reads it),
-   `scr_conalpha`, `r_fullbright`, `edicts`/`edict`/`entities`, `pointfile`.
-4. **Saves are found but not listed.** The load menu doesn't list KEX,
-   vkQuake or ironwail saves yet (only `load <name>` finds them).
-5. **One-frame start offset.** The references run a server frame in the same
-   host frame as `map`; ours runs it a frame later. This only matters for
-   `wait`-counting scripts.
-6. **Oxyblack Fortress** is an AD map without progs. `modinfo.txt` `base`
-   only knows hipnotic/rogue/quoth, so the mod menu can't launch it on AD.
-7. MG3's `progs/ogre_rocket.md5mesh` is rejected by our md5 parser ("bad
-   parent 54"), so the MDL is used.
-8. **Headless timedemo** runs at about 90 fps, not uncapped (long demos take
-   minutes in sweeps).
+1. **Sky wind.** `gfx/env/<sky>wind.cfg`, `r_skywind` and the `skywind`,
+   `skywind_lookdir`, `skywind_rotate`, `skywind_load`, `skywind_save`
+   commands, with ironwail's two-layer drift in both renderers
+   (`src/skywind.rs`). dmd, qbj2 and qbj3 skies now drift.
+2. **AD's vkQuake-only paths.** Only the parity runs (`sv_fteparticles 0`)
+   look like ironwail. In normal single-player play we answer AD's particle
+   checks like vkQuake, and ad_sepulcher matches it: both report "Advanced
+   Engine", both keep 312 of the map's 1703 `misc_gtkmodel`s (AD removes the
+   1391 with spawnflags 32 in both), 4439 edicts here against 4434 there
+   after the same 300 + 250 server frames (two `DelayedUse` timers differ),
+   and the FTE still (rain, embers, decorations) matches vkQuake within the
+   ironwail-vkQuake band. Still vkQuake-only: `DP_QC_GETSURFACE` and
+   `FTE_STRINGS`/`FRIK_FILE`/`DP_QC_SPRINTF` (`FTE_ENT_SKIN_CONTENTS` is
+   commented out of vkQuake's extension list, so it answers no too),
+   which our VM implements but doesn't advertise (as ironwail). Every AD
+   map, dev-kit test maps included (104, `tools/vkparity.py`, 720 server
+   frames at skill 1), spawns the same content in both engines: "Advanced
+   Engine" everywhere, no errors, no class present in only one engine. The
+   only count differences are randomly timed temporary entities (bubbles,
+   rubble, gibs, sparks); spark counts on ad_crucial/ad_tfuma swing either
+   way between 600, 700 and 800 frames. Not covered: what those extensions
+   do later in play (e.g. surface queries at run time). Scripting
+   vkQuake with `map` + `wait`s doesn't work: its server stuffs `cmd pext`
+   during signon and waits for the reply, which lands behind the `wait`s.
+3. **Reference commands**: `fly`, `maps`, `path`, `mapname`, `find`/`apropos`,
+   `v_idlescale` and the `v_i*` cycles/levels (plus the always-on
+   intermission sway, also missing before), `cl_nolerp`, `gl_polyblend`,
+   `gl_cshiftpercent` (and QuakeSpasm's per-shift `_contents/_damage/_bonus/
+   _powerup`, with intermissions showing only the contents shift),
+   `scr_conalpha` (default 1: our console stays opaque), `r_fullbright`
+   (single player), `edict`/`edicts`/`edictcount`, `entities`, `pointfile`.
+   `edict` no longer prints the null field first.
+4. **Saves from other engines are listed.** Load shows vkQuake/QuakeSpasm
+   (`<basedir>/<game>`), ironwail (`~/.ironwail/<game>`) and KEX saves of
+   the running game after ours, labelled by source, with no Delete. A name
+   we also have stays ours, as `load` resolves it.
+5. **One-frame start offset.** The real cause was in our startup: the second
+   command-buffer pass after `stuffcmds` ran past a `wait` the first pass had
+   stopped at, so a script's first `wait` cost no server frame. The command
+   buffer now runs once per frame, and a frame that spawns a server also runs
+   one, as Host_Frame does. `map; save a; wait; save b` now gives 1.2 /
+   1.2139 like C, and `spawnparity.py --frames 216` matches ironwail with the
+   same script for both engines (the `+1 wait` workaround is gone).
+6. **Mods built on other mods.** `modinfo.txt` `base` takes any installed
+   game dir (mounted `-game ad -game <mod>`; the engine now stacks several
+   `-game` like both references). A map pack without progs whose readme says
+   "Mod Needed : Arcane Dimension 1.7" is mounted on AD, so Oxyblack Fortress
+   launches from the mod menu. The installer maps dependencies such as
+   `ad_v1_80p1final` to the installed dir.
+7. **MG3 `ogre_rocket.md5mesh`.** Its root's parent is an armature joint
+   listed last that the animation doesn't drive. Mesh parents may now point
+   forward, and pose parents follow the `.md5anim` hierarchy as in vkQuake.
+   All 64 MD5 models in id1/hipnotic/rogue/mg1/mg3/dopa load.
+8. **Headless timedemo speed.** Not reproducible on a working GPU: headless
+   timedemo is uncapped (demo1: 2245 fps at 320x240, 485 at 1280x720,
+   232 at 1080p). The ~90 fps came from the sweep's runs while the GPU
+   needed a reset (most of them failed to create a Vulkan device).
 
 ## Map packs added
 
@@ -159,6 +195,14 @@ got no `modinfo.txt`, so the mod menu would have launched it without
   (func_mapjam3, qbj_Mr_M).
 
 ## Demos
+
+Our half, rerun after the GPU reset (`demosweep.py --engines ours`, 53
+demos): every demo plays at its expected frame count, at 480-750 fps
+headless. dm4jam and smej2 report 0 frames because their `quake.rc` ends
+in `startdemos ...` followed by `demos`, and Host_Demos_f cuts the timedemo
+there in ironwail too. Demos also stuff cvars that neither reference has
+(`sv_gameplayfix_*` in Quoth's, `r_maxedges`/`r_maxsurfs`, `gl_flashblend`);
+`gl_zfix`, which both references register, is now accepted quietly.
 
 The cross-engine demo sweep is inconclusive. Ours played every shipped demo
 it reached: id1, hipnotic, func_mapjam5 (protocol 666) and bbelief, at the

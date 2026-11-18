@@ -3046,3 +3046,12 @@ sk Iba server môže použiť changelevel
 
 @ {} renamed to {}
 sk {} sa premenoval na {}
+
+@ From the game folder
+sk Z priečinka hry
+
+@ From ironwail
+sk Z ironwail
+
+@ From the 2021 re-release
+sk Z reedície 2021

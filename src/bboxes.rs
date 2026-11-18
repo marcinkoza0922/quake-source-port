@@ -10,6 +10,9 @@
 //! - `r_showbboxes_health` 1 healthy only, -1 non-healthy only.
 //! - `r_showbboxes_filter` space-separated: `#42` edict number, `=name`
 //!   exact classname, anything else a classname substring.
+//!
+//! `pointfile` (R_ReadPointFile_f) draws a map's leak path from
+//! `maps/<map>.pts` with the same line geometry, depth-tested.
 use crate::blood::Geometry;
 use qcore::cvar::Cvars;
 use qcore::math::Vec3;
@@ -91,9 +94,49 @@ fn center(b: &EdictBox) -> Vec3 {
 #[derive(Default)]
 pub struct BBoxes {
     pic: Option<PicId>,
+    /// `pointfile`: the leak path from `maps/<map>.pts`, collinear points
+    /// merged; cleared on map load.
+    pub pointfile: Vec<Vec3>,
+}
+
+/// R_ReadPointFile_f's parse: `x y z` lines until one doesn't parse, with
+/// runs of collinear points merged. Returns (points read, path).
+pub fn parse_pointfile(text: &str) -> (usize, Vec<Vec3>) {
+    let collinear = |a: Vec3, b: Vec3, c: Vec3| (b - a).length() + (c - b).length() < (c - a).length() * 1.00001;
+    let mut path: Vec<Vec3> = Vec::new();
+    let mut read = 0;
+    for l in text.lines() {
+        let v: Vec<f32> = l.split_whitespace().map_while(|w| w.parse().ok()).take(3).collect();
+        if v.len() < 3 {
+            break;
+        }
+        read += 1;
+        path.push(Vec3::new(v[0], v[1], v[2]));
+        let n = path.len();
+        if n >= 3 && collinear(path[n - 3], path[n - 2], path[n - 1]) {
+            path[n - 2] = path[n - 1];
+            path.pop();
+        }
+    }
+    (read, path)
 }
 
 impl BBoxes {
+    /// R_ShowPointFile: the leak path as depth-tested arrows.
+    pub fn pointfile_frame(&mut self, eye: Vec3, r: &mut Renderer, out: &mut Geometry) {
+        if self.pointfile.len() < 2 {
+            return;
+        }
+        let Some(pic) = self.pic.or_else(|| r.register_pic_rgba_linear(1, 1, &[255; 4]).ok()) else { return };
+        self.pic = Some(pic);
+        let first = out.1.len() as u32;
+        for w in self.pointfile.windows(2) {
+            arrow(out, w[0], w[1], eye, rgba(0xff3f3f7f));
+        }
+        let n = out.1.len() as u32 - first;
+        out.2.push(FteBatch { pic, blend: FteBlend::Blend, lines: true, first_index: first, num_indices: n, soft: false, gel: false });
+    }
+
     /// Append the wireframes for `boxes` seen from `eye` looking along `fwd`.
     pub fn frame(&mut self, s: &Settings, boxes: &[EdictBox], eye: Vec3, fwd: Vec3, r: &mut Renderer, out: &mut Geometry) {
         if s.mode == 0 || boxes.is_empty() {
@@ -277,6 +320,13 @@ mod tests {
         assert!(!filter_matches("=trigger", &b));
         assert!(filter_matches("artifact secret", &b));
         assert!(!filter_matches("monster_", &b));
+    }
+
+    #[test]
+    fn pointfile_merges_collinear_points() {
+        let (n, path) = parse_pointfile("0 0 0\n1 0 0\n2 0 0\n2 5 0\n2 6 0\njunk\n9 9 9\n");
+        assert_eq!(n, 5);
+        assert_eq!(path, [Vec3::ZERO, Vec3::new(2.0, 0.0, 0.0), Vec3::new(2.0, 6.0, 0.0)]);
     }
 
     #[test]

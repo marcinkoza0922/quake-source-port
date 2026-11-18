@@ -11,6 +11,7 @@ impl Host {
         self.con.center_pos = self.cv("scr_centerpos").clamp(0.0, 2.0) as u8;
         self.con.notify_pos = self.cv("con_notifypos").clamp(0.0, 2.0) as u8;
         self.con.modern = self.cv("con_modern") != 0.0;
+        self.con.alpha = self.cv("scr_conalpha");
         self.sync_shell_env();
         self.sync_ui_text();
         c.ui = Some(self.ui_text.clone());
@@ -139,13 +140,14 @@ impl Host {
                 let fwd = qcore::math::angle_vectors(Vec3::from(v.angles)).0;
                 self.bboxes.frame(&bb, &boxes, eye, fwd, &mut self.r, &mut fte);
             }
+            self.bboxes.pointfile_frame(Vec3::from(v.origin), &mut self.r, &mut fte);
             self.impacts.frame(
                 &self.server.core.cvars, &self.cl, &self.level, &mut brushes, &self.server.core.fs,
                 &mut self.r, &mut ents, &dyn_verts, v.origin.into(), &self.debris, fte_frustum.as_ref(), &mut fte,
             );
             crate::view::dlights(&self.cl, &mut dls);
             let contents = self.contents(v.origin);
-            blend = self.view.blend(&self.cl, contents, ft, cv.flash);
+            blend = self.view.blend(&self.cl, contents, ft, cv.flash, cv.cshift);
             if !self.guests.is_empty() {
                 splits = self.split_views(*v, blend, ft, &mut ents);
             }
@@ -355,6 +357,9 @@ impl Host {
             gun_portal_depth: v("addon_portal_depth").clamp(0.0, 6.0) as u32,
             skyfog: v("r_skyfog"),
             dynamic: v("r_dynamic") != 0.0,
+            // cheat-protected as in ironwail: single player only
+            fullbright: v("r_fullbright") != 0.0 && self.cl.maxclients <= 1,
+            sky_wind: self.level.sky_wind.uniform(self.cl.time, v("r_skywind")),
             vsync: v("vid_vsync") != 0.0,
             msaa: v("r_msaa").max(1.0) as u32,
             render_scale: v("r_renderscale").clamp(0.25, 2.0),

@@ -191,6 +191,7 @@ impl Server {
                 clients: (0..maxclients.max(1)).map(|_| Client::default()).collect(),
                 serverflags: 0.0,
                 changelevel_issued: false,
+                spawns: 0,
                 custom: false,
                 skip_entity_updates: false,
                 standard_quake,

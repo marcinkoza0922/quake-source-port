@@ -211,6 +211,32 @@ pub(super) const COMPAT_CVARS: &[(&str, &str, u32)] = &[
     ("r_nolerp_list", "", 0),
     ("_snd_mixahead", "0.1", 0),
     ("bgm_extmusic", "1", 0),
+    // view.c V_AddIdle: idle sway (mods stuff v_idlescale for drunk or
+    // underwater effects); intermissions always sway at scale 1.
+    ("v_idlescale", "0", 0),
+    ("v_iyaw_cycle", "2", 0),
+    ("v_iroll_cycle", "0.5", 0),
+    ("v_ipitch_cycle", "1", 0),
+    ("v_iyaw_level", "0.3", 0),
+    ("v_iroll_level", "0.1", 0),
+    ("v_ipitch_level", "0.3", 0),
+    // V_CalcBlend: screen tint strength (qbj3 reads gl_cshiftpercent);
+    // gl_polyblend 0 turns tints off.
+    ("gl_polyblend", "1", 0),
+    ("gl_cshiftpercent", "100", CVAR_ARCHIVE),
+    ("gl_cshiftpercent_contents", "100", CVAR_ARCHIVE),
+    ("gl_cshiftpercent_damage", "100", CVAR_ARCHIVE),
+    ("gl_cshiftpercent_bonus", "100", CVAR_ARCHIVE),
+    ("gl_cshiftpercent_powerup", "100", CVAR_ARCHIVE),
+    // CL_LerpPoint: snap entities instead of interpolating.
+    ("cl_nolerp", "0", 0),
+    // Classic console background opacity (ironwail defaults to 0.5; ours
+    // keeps the opaque vanilla look).
+    ("scr_conalpha", "1", CVAR_ARCHIVE),
+    // Sky wind speed (skywind.rs): 0 still, 2 twice as fast.
+    ("r_skywind", "1", CVAR_ARCHIVE),
+    // Single-player cheat: no lightmaps (Settings::fullbright).
+    ("r_fullbright", "0", 0),
     // chase.c: the chase camera (Camera::Chase); QC can switch it on.
     ("chase_active", "0", 0),
     ("chase_back", "100", 0),
@@ -226,6 +252,8 @@ pub(super) const COMPAT_CVARS: &[(&str, &str, u32)] = &[
     ("gl_texture_anisotropy", "1", 0),
     ("gl_texturemode", "", CVAR_ARCHIVE),
     ("gl_triplebuffer", "1", 0),
+    // QuakeSpasm's brush-entity z-fighting nudge; demos stuff it.
+    ("gl_zfix", "0", 0),
     ("joy_deadzone", "0.175", 0),
     ("lookspring", "0", 0),
     ("r_clearcolor", "2", 0),

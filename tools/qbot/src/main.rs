@@ -85,20 +85,21 @@ fn parse_args() -> Opts {
     o
 }
 
-/// The mission pack `game` builds on (hipnotic, rogue, quoth), as the mod
-/// menu would mount it (`qui::mods`: the dir name or modinfo.txt `base`).
-fn base_of(basedir: &Path, game: &str) -> Option<&'static str> {
-    qui::mods::scan(basedir).into_iter().find(|m| m.dir.eq_ignore_ascii_case(game)).and_then(|m| m.base.dir())
+/// Game dirs below id1 that `game` mounts, as the mod menu would (`qui::mods`:
+/// the dir name or modinfo.txt `base`, which may be any game dir).
+pub(crate) fn mod_dirs(basedir: &Path, game: &str) -> Vec<String> {
+    match qui::mods::scan(basedir).into_iter().find(|m| m.dir.eq_ignore_ascii_case(game)) {
+        Some(m) => m.game_dirs(),
+        None if game.eq_ignore_ascii_case("id1") => Vec::new(),
+        None => vec![game.to_string()],
+    }
 }
 
 fn mount(basedir: &Path, game: &str) -> Fs {
     let mut fs = Fs::new(basedir);
     fs.add_game_dir("id1");
-    if let Some(b) = base_of(basedir, game).filter(|b| !b.eq_ignore_ascii_case(game)) {
-        fs.add_game_dir(b);
-    }
-    if game != "id1" {
-        fs.add_game_dir(game);
+    for d in mod_dirs(basedir, game) {
+        fs.add_game_dir(&d);
     }
     fs
 }

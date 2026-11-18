@@ -3046,3 +3046,12 @@ fa فقط سرور می‌تواند changelevel کند
 
 @ {} renamed to {}
 fa {} به {} تغییر نام داد
+
+@ From the game folder
+fa از پوشه‌ی بازی
+
+@ From ironwail
+fa از ironwail
+
+@ From the 2021 re-release
+fa از بازانتشار 2021

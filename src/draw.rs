@@ -190,8 +190,11 @@ impl Canvas {
     }
     /// Picture stretched over a pixel rectangle (ignores scale/origin).
     pub fn pic_stretch_px(&mut self, rect: [f32; 4], pic: PicId) {
+        self.pic_stretch_px_color(rect, pic, WHITE);
+    }
+    pub fn pic_stretch_px_color(&mut self, rect: [f32; 4], pic: PicId, color: [f32; 4]) {
         let [x, y, w, h] = rect;
-        self.list.push(Draw2D::Pic { x, y, w, h, pic, uv: [0.0, 0.0, 1.0, 1.0], color: WHITE });
+        self.list.push(Draw2D::Pic { x, y, w, h, pic, uv: [0.0, 0.0, 1.0, 1.0], color });
     }
     pub fn ch(&mut self, x: f32, y: f32, c: u8) {
         self.ch_color(x, y, c, WHITE);

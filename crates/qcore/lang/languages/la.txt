@@ -3046,3 +3046,12 @@ la Solum ministratrum changelevel adhibere potest
 
 @ {} renamed to {}
 la {} nunc appellatur {}
+
+@ From the game folder
+la Ex folliculo ludi
+
+@ From ironwail
+la Ex ironwail
+
+@ From the 2021 re-release
+la Ex editione anni 2021
