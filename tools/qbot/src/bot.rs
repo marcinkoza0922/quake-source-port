@@ -35,6 +35,9 @@ pub struct Options {
     pub skill: i32,
     /// Sim time limit; `None` scales with the number of goals.
     pub max_time: Option<f64>,
+    /// Wall-clock limit in seconds (`-maxwall`): a huge map stops with its
+    /// remaining goals "out of time" instead of holding up a sweep.
+    pub max_wall: Option<f64>,
     pub verbose: bool,
 }
 
@@ -61,6 +64,8 @@ pub struct Report {
     pub exited: bool,
     pub sim_time: f64,
     pub wall_time: f64,
+    /// Stopped by `-maxwall`, not by finishing or the sim time limit.
+    pub wall_capped: bool,
     pub errors: Vec<String>,
     /// Developer-log lines a level doesn't normally print (see devlog.rs).
     pub unusual: Vec<String>,
@@ -274,9 +279,10 @@ pub fn run(fs: Fs, map: &str, opt: &Options) -> Report {
     bot.rep.has_exit = bot.goals.iter().any(|g| g.kind == Kind::Exit);
     bot.note(&format!("{map}: {} goals", bot.goals.len()));
     let max_time = opt.max_time.unwrap_or_else(|| (bot.goals.len() as f64 * 10.0).max(600.0));
-    bot.main_loop(map, max_time);
+    bot.main_loop(map, max_time, opt.max_wall);
+    let out_of_time = if bot.rep.wall_capped { "out of wall-clock time" } else { "out of time" };
     for (i, g) in bot.goals.iter().enumerate().filter(|(_, g)| !g.done && !g.again && g.kind != Kind::Exit) {
-        let why = g.failed.as_deref().unwrap_or(if bot.dormant(g) { "never activated" } else { "out of time" });
+        let why = g.failed.as_deref().unwrap_or(if bot.dormant(g) { "never activated" } else { out_of_time });
         let line = format!("{}: {why}", bot.describe(i));
         bot.rep.failed.push(line);
     }
@@ -345,13 +351,18 @@ impl Bot<'_> {
         self.sv.level.as_mut().unwrap().vm.set_ent_f(me, ofs, mt as f32);
     }
 
-    fn main_loop(&mut self, map: &str, max_time: f64) {
+    fn main_loop(&mut self, map: &str, max_time: f64, max_wall: Option<f64>) {
+        let started = std::time::Instant::now();
         let mut last_refill = -100.0;
         let mut last_scan = 0.0;
         let mut intermission_since: Option<f64> = None;
         loop {
             let t = self.sv.time();
             if t > max_time {
+                break;
+            }
+            if max_wall.is_some_and(|w| started.elapsed().as_secs_f64() > w) {
+                self.rep.wall_capped = true;
                 break;
             }
             if self.sv.core.changelevel_issued || !self.sv.core.sv.name.eq_ignore_ascii_case(map) {

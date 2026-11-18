@@ -1,12 +1,15 @@
 //! qbot: automated level-breaking test.
 //!
-//! Usage: qbot [-basedir <dir>] [-game <dir>|a,b,..|all] [-skill N] [-time <sim s>] [-j N]
-//!             [-out <dir>] [-baseline <file>] [-save-baseline] [-v] [map ...]
+//! Usage: qbot [-basedir <dir>] [-game <dir>|a,b,..|all] [-skill N] [-time <sim s>]
+//!             [-maxwall <wall s>] [-j N] [-out <dir>] [-baseline <file>]
+//!             [-save-baseline] [-v] [map ...]
 //!
 //! `-game all` runs every installed game dir (each with the mission-pack
 //! base the mod menu would mount), all maps sharing the worker threads;
 //! results go to `<out>/<game>/report.json` plus `<out>/summary.txt`, which
-//! lists engine and QC errors first. Baselines stay per game.
+//! lists engine and QC errors first. Baselines stay per game. While it runs,
+//! `<out>/progress.jsonl` gets a line per finished map and `<out>/running.txt`
+//! lists the maps in progress; `-maxwall` stops a map after that many seconds.
 //!
 //! Each map runs on an in-process headless server at skill 3. The bot has god
 //! mode, noclip and full knowledge of the edicts: it kills every monster,
@@ -20,6 +23,7 @@ mod bot;
 
 use qcore::fs::Fs;
 use std::fmt::Write as _;
+use std::io::Write as _;
 use std::panic::{AssertUnwindSafe, catch_unwind};
 use std::path::{Path, PathBuf};
 use std::sync::Mutex;
@@ -29,6 +33,7 @@ struct Opts {
     game: String,
     skill: i32,
     time: Option<f64>,
+    max_wall: Option<f64>,
     jobs: usize,
     out: PathBuf,
     baseline: PathBuf,
@@ -37,7 +42,7 @@ struct Opts {
     maps: Vec<String>,
 }
 
-const USAGE: &str = "qbot [-basedir D] [-game G|a,b|all] [-skill N] [-time S] [-j N] [-out DIR] [-baseline F] [-save-baseline] [-v] [map ...]";
+const USAGE: &str = "qbot [-basedir D] [-game G|a,b|all] [-skill N] [-time S] [-maxwall S] [-j N] [-out DIR] [-baseline F] [-save-baseline] [-v] [map ...]";
 
 fn parse_args() -> Opts {
     let basedir = std::env::var_os("QUAKE_BASEDIR").map_or_else(|| PathBuf::from("vkQuake directory with maps"), PathBuf::from);
@@ -46,6 +51,7 @@ fn parse_args() -> Opts {
         game: "id1".into(),
         skill: 3,
         time: None,
+        max_wall: None,
         jobs: std::thread::available_parallelism().map_or(4, |n| n.get()),
         out: PathBuf::from("target/qbot"),
         baseline: PathBuf::new(),
@@ -62,6 +68,7 @@ fn parse_args() -> Opts {
             "-game" => o.game = val(),
             "-skill" => o.skill = val().parse().expect("-skill N"),
             "-time" => o.time = Some(val().parse().expect("-time S")),
+            "-maxwall" => o.max_wall = Some(val().parse().expect("-maxwall S")),
             "-j" => o.jobs = val().parse::<usize>().expect("-j N").max(1),
             "-out" => o.out = val().into(),
             "-baseline" => baseline = Some(PathBuf::from(val())),
@@ -138,7 +145,8 @@ fn json_str(s: &str) -> String {
 fn report_json(r: &bot::Report) -> String {
     let list = |v: &[String]| v.iter().map(|s| json_str(s)).collect::<Vec<_>>().join(", ");
     format!(
-        "{{\"kills\": {}, \"total_monsters\": {}, \"secrets\": {}, \"total_secrets\": {}, \"triggers\": {}, \"total_triggers\": {}, \"buttons\": {}, \"total_buttons\": {}, \"pickups\": {}, \"total_pickups\": {}, \"has_exit\": {}, \"exited\": {}, \"sim_time\": {:.1}, \"wall_time\": {:.1}, \"failed\": [{}], \"errors\": [{}], \"unusual\": [{}]}}",
+        "{{\"wall_capped\": {}, \"kills\": {}, \"total_monsters\": {}, \"secrets\": {}, \"total_secrets\": {}, \"triggers\": {}, \"total_triggers\": {}, \"buttons\": {}, \"total_buttons\": {}, \"pickups\": {}, \"total_pickups\": {}, \"has_exit\": {}, \"exited\": {}, \"sim_time\": {:.1}, \"wall_time\": {:.1}, \"failed\": [{}], \"errors\": [{}], \"unusual\": [{}]}}",
+        r.wall_capped,
         r.kills,
         r.total_monsters,
         r.secrets,
@@ -160,7 +168,7 @@ fn report_json(r: &bot::Report) -> String {
 }
 
 fn run_one(o: &Opts, game: &str, map: &str) -> bot::Report {
-    let opt = bot::Options { skill: o.skill, max_time: o.time, verbose: o.verbose };
+    let opt = bot::Options { skill: o.skill, max_time: o.time, max_wall: o.max_wall, verbose: o.verbose };
     let fs = mount(&o.basedir, game);
     match catch_unwind(AssertUnwindSafe(|| bot::run(fs, map, &opt))) {
         Ok(r) => r,
@@ -179,6 +187,17 @@ fn log_texts(r: &bot::Report) -> Vec<String> {
 fn run_jobs(o: &Opts, maps: &[(String, String)]) -> Vec<(String, String, bot::Report)> {
     let next = Mutex::new(0usize);
     let results = Mutex::new(Vec::new());
+    // Written as the sweep goes, so a long run can be watched (and a killed
+    // one keeps what it finished): one JSON line per finished map, and the
+    // maps in progress.
+    let _ = std::fs::create_dir_all(&o.out);
+    let progress = o.out.join("progress.jsonl");
+    let _ = std::fs::write(&progress, "");
+    let running: Mutex<Vec<(String, std::time::Instant)>> = Mutex::new(Vec::new());
+    let show_running = |r: &[(String, std::time::Instant)]| {
+        let body: String = r.iter().map(|(m, t)| format!("{m}  {:.0}s\n", t.elapsed().as_secs_f64())).collect();
+        let _ = std::fs::write(o.out.join("running.txt"), body);
+    };
     std::thread::scope(|s| {
         for _ in 0..o.jobs.min(maps.len()) {
             s.spawn(|| {
@@ -189,10 +208,23 @@ fn run_jobs(o: &Opts, maps: &[(String, String)]) -> Vec<(String, String, bot::Re
                         *n - 1
                     };
                     let Some((game, map)) = maps.get(i) else { break };
-                    let r = run_one(o, game, map);
                     let label = if game == &o.game { map.clone() } else { format!("{game}/{map}") };
+                    {
+                        let mut r = running.lock().unwrap();
+                        r.push((label.clone(), std::time::Instant::now()));
+                        show_running(&r);
+                    }
+                    let r = run_one(o, game, map);
+                    {
+                        let mut run = running.lock().unwrap();
+                        run.retain(|(m, _)| m != &label);
+                        show_running(&run);
+                    }
+                    if let Ok(mut f) = std::fs::OpenOptions::new().append(true).open(&progress) {
+                        let _ = writeln!(f, "{{\"game\": {}, \"map\": {}, \"report\": {}}}", json_str(game), json_str(map), report_json(&r));
+                    }
                     eprintln!(
-                        "{label:<16} kills {:>3}/{:<3} secrets {:>2}/{:<2} triggers {:>3}/{:<3} buttons {:>2}/{:<2} keys {}/{} failed {:>2}{}{} ({:.0}s sim, {:.1}s wall)",
+                        "{label:<16} kills {:>3}/{:<3} secrets {:>2}/{:<2} triggers {:>3}/{:<3} buttons {:>2}/{:<2} keys {}/{} failed {:>2}{}{}{} ({:.0}s sim, {:.1}s wall)",
                         r.kills,
                         r.total_monsters,
                         r.secrets,
@@ -205,6 +237,7 @@ fn run_jobs(o: &Opts, maps: &[(String, String)]) -> Vec<(String, String, bot::Re
                         r.total_pickups,
                         r.failed.len(),
                         if r.exited { " exit" } else if r.has_exit { " NO-EXIT" } else { "" },
+                        if r.wall_capped { " WALL-CAP" } else { "" },
                         if r.errors.is_empty() { String::new() } else { format!(" ERRORS: {}", r.errors.join("; ")) },
                         r.sim_time,
                         r.wall_time
@@ -296,6 +329,10 @@ fn write_summary(out: &Path, all: &[(String, String, bot::Report)]) {
         for e in &r.errors {
             let _ = writeln!(s, "{g}/{m}: {e}");
         }
+    }
+    let _ = writeln!(s, "\n## Stopped by -maxwall (results partial)");
+    for (g, m, r) in all.iter().filter(|(_, _, r)| r.wall_capped) {
+        let _ = writeln!(s, "{g}/{m}: {:.0}s wall, {:.0}s sim, kills {}/{}", r.wall_time, r.sim_time, r.kills, r.total_monsters);
     }
     let _ = writeln!(s, "\n## Unusual developer-log lines");
     for (g, m, r) in all {
@@ -412,7 +449,7 @@ mod tests {
             eprintln!("no game data; skipping");
             return;
         }
-        let opt = bot::Options { skill: 3, max_time: None, verbose: false };
+        let opt = bot::Options { skill: 3, max_time: None, max_wall: None, verbose: false };
         for map in ["e1m1", "e1m3"] {
             let r = bot::run(mount(&base, "id1"), map, &opt);
             assert!(r.errors.is_empty(), "{map}: {:?}", r.errors);
