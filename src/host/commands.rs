@@ -217,6 +217,7 @@ pub(super) fn register_commands(c: &mut Commands<Host>) {
     }
     c.add("bf", |h, _| h.view.bonus_flash());
     super::compat_cmds::register(c);
+    super::freecam::register(c);
     c.add("+showscores", |h, _| h.show_scores = true);
     c.add("-showscores", |h, _| h.show_scores = false);
     super::demo::register(c);

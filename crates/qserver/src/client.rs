@@ -64,6 +64,9 @@ pub struct Client {
     pub pext2: u32,
     /// Replacement-delta state while PEXT2_REPLACEMENTDELTAS is active.
     pub delta: Option<Box<crate::delta::DeltaState>>,
+    /// A second point whose PVS is added to this client's (the local free
+    /// camera), so entities near it are sent too.
+    pub extra_view: Option<[f32; 3]>,
 }
 
 pub const NUM_PING_TIMES: usize = 16;
@@ -101,6 +104,7 @@ impl Default for Client {
             pext_known: false,
             pext2: 0,
             delta: None,
+            extra_view: None,
         }
     }
 }

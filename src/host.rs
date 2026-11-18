@@ -47,6 +47,7 @@ mod prof;
 mod goggles;
 mod presets;
 mod bullet_time;
+mod freecam;
 mod hitstop;
 mod toy_fx;
 mod ctx;
@@ -136,6 +137,7 @@ pub struct Host {
     goggles: goggles::Goggles,
     pend_dodge: bool,
     bullet_time: bullet_time::BulletTime,
+    freecam: freecam::FreeCam,
     hitstop: hitstop::HitStop,
     /// Split-screen players 2..6 (`cl_splitscreen`); player 1 is `cl`.
     pub guests: Vec<crate::splitscreen::Guest>,
@@ -292,6 +294,7 @@ impl Host {
             goggles: Default::default(),
             pend_dodge: false,
             bullet_time: Default::default(),
+            freecam: Default::default(),
             hitstop: Default::default(),
             guests: Vec::new(),
             p1_pad: None,

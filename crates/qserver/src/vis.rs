@@ -67,6 +67,13 @@ impl Vis {
         }
     }
 
+    /// Adds the fat PVS of `org` to `out` (a [`Self::fat_pvs`] buffer).
+    pub fn add_fat_pvs(&self, org: Vec3, out: &mut [u8]) {
+        if !self.cm.node_children.is_empty() {
+            self.add_fat(org, 0, out, 0);
+        }
+    }
+
     fn add_fat(&self, org: Vec3, mut n: i32, out: &mut [u8], depth: u32) {
         if depth > 512 {
             return;

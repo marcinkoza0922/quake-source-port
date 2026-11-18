@@ -16,6 +16,9 @@ pub enum Camera {
     /// `chase_right` to the left (C subtracts it). Mods turn it on from QC
     /// (Mjolnir's rally car).
     Chase { back: f32, right: f32, up: f32 },
+    /// `freecam`: a detached camera at this origin and angles; the player
+    /// stays where it is (see host/freecam.rs).
+    Free { origin: [f32; 3], angles: [f32; 3] },
 }
 
 /// Distance kept between the camera and a wall it was pulled in by.
@@ -43,6 +46,7 @@ impl Camera {
             Camera::ShoulderRight => (56.0, 26.0, 8.0),
             Camera::ShoulderLeft => (56.0, -26.0, 8.0),
             Camera::Chase { back, right, up } => (back, -right, up),
+            Camera::Free { .. } => (0.0, 0.0, 0.0),
         }
     }
 
@@ -51,6 +55,11 @@ impl Camera {
     /// camera on the other side of it.
     pub fn place(self, view: &mut View, cm: Option<&CollisionModel>, aim: &mut Aim, ft: f32) {
         if !self.third_person() {
+            return;
+        }
+        if let Camera::Free { origin, angles } = self {
+            view.origin = origin;
+            view.angles = angles;
             return;
         }
         view.angles[2] = 0.0;

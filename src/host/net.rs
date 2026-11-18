@@ -55,6 +55,7 @@ impl Host {
         self.view.reset_effects();
         self.autosave.reset();
         self.bullet_time = Default::default();
+        self.freecam.cam = None;
         self.hitstop = Default::default();
         self.pend_dodge = false;
         self.death_handled = false;
