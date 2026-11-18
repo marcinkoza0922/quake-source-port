@@ -49,9 +49,10 @@ under the plan:
   - Headless timedemo is uncapped; the ~90 fps the compat sweep saw was a
     GPU that needed a reset (COMPAT_AUDIT, item 8).
 - **Found while updating the plan:** `r_softparticles` is a compat cvar
-  that does nothing, and `r_particle_quality 1` turns soft particles on.
-  The `ultra-fte` pins therefore run ours *with* soft particles against
-  vkQuake 1.34.1, which has none (V8). Fix before the rerun.
+  that does nothing, and `r_particle_quality 1` turns soft particles on,
+  so the `ultra-fte` pins ran ours *with* soft particles against vkQuake
+  1.34.1, which has none. Fixed (V8): `r_particle_quality 0` +
+  `r_part_density 2`, particle counts still within 0.1% of vkQuake's.
 - **New tools installed** (2026-11-18): samply, cargo-show-asm (cargo);
   heaptrack, valgrind + kcachegrind, hyperfine (dnf). See [Tools](#tools)
   and R9.
@@ -79,9 +80,7 @@ Done before 2026-11-18:
 
 Next, in order:
 
-1. **V8**: pin soft particles off in `ultra-fte` without halving particle
-   density, and check with `perfkit partinfo` that counts still match
-   vkQuake.
+1. ~~**V8**~~: done 2026-11-18 (VANILLA.md).
 2. **Session setup** (ask the user; we don't change system settings):
    `kernel.perf_event_paranoid=1` (samply refuses at 2, today's value)
    and the `performance` governor (today `powersave`).

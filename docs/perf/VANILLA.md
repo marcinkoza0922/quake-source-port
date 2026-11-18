@@ -34,9 +34,9 @@ newer).
 | gamma / contrast | `gamma 1`, `contrast 1` | same | same (defaults are 0.9 / 1.4) |
 | no vsync | `vid_vsync 0` | same | same |
 | vkQuake extras off | – | – | `r_rtshadows 0`, `vid_palettize 0` |
-| our enhancements and add-ons off | `r_ssao 0`, `r_motionblur 0`, `r_speedblur 0`, `r_enhancedwater 0`, `r_teleportwindows 0`, `r_enhancedfx 0`, `r_enhancedparticles 0`, `r_particle_quality 1`, `r_impact_fx 0` (+ bullets, nails, scorches, tracers), `r_blood 0`, `r_debris 0`, `r_softemu 0`, `r_dither 0`, `r_colorblind 0`, `custom_enable 0`, `addon_hitstop 0` | – | – |
-| particles, `ultra` | `r_fteparticles 0`, `r_particles 2` | `r_particles 2` | `r_fteparticles 0`, `r_particles 2` |
-| particles, `ultra-fte` | `r_fteparticles 1`, `r_particledesc classic`, `r_softparticles 0` (a no-op since 2026-11-16: ours runs soft particles low, V8), `r_quadparticles 1`, `r_particles 2` | `r_particles 2` | same without `r_softparticles` (1.34.1 has none) |
+| our enhancements and add-ons off | `r_ssao 0`, `r_motionblur 0`, `r_speedblur 0`, `r_enhancedwater 0`, `r_teleportwindows 0`, `r_enhancedfx 0`, `r_enhancedparticles 0`, `r_impact_fx 0` (+ bullets, nails, scorches, tracers), `r_blood 0`, `r_debris 0`, `r_softemu 0`, `r_dither 0`, `r_colorblind 0`, `custom_enable 0`, `addon_hitstop 0` | – | – |
+| particles, `ultra` | `r_fteparticles 0`, `r_particle_quality 1`, `r_particles 2` | `r_particles 2` | `r_fteparticles 0`, `r_particles 2` |
+| particles, `ultra-fte` | `r_fteparticles 1`, `r_particledesc classic`, `r_particle_quality 0` (soft particles off), `r_part_density 2` (undoes quality 0's half density), `r_quadparticles 1`, `r_particles 2` | `r_particles 2` | `r_fteparticles 1`, `r_particledesc classic`, `r_quadparticles 1`, `r_particles 2` (1.34.1 has no soft particles) |
 
 How the pins reach each engine (perfkit runner):
 
@@ -228,21 +228,25 @@ From the first baseline (Results, 2026-11-17):
   ~110 live against vkQuake's ~70 (summed over the samples 2134 vs 1912,
   +12%; the first three samples agree). Small next to ~7000 particles, but
   find out whether lifetime, fade or the decal cap differs.
-- **V8 (new 2026-11-18)**: the `ultra-fte` pins don't turn our soft
+- **V8 — done 2026-11-18.** The `ultra-fte` pins didn't turn our soft
   particles off. Since Particle Quality (0ead02c, 2026-11-16),
-  `r_softparticles` is a compat cvar that does nothing, and the soft
-  particle level follows `r_particle_quality` (`soft_particles()` in
-  `src/host/render.rs`). Both profiles pin `r_particle_quality 1`, which
-  is soft particles **low**: in the FTE suite ours splits the scene pass
-  for AD's soft effects and reads depth, against vkQuake 1.34.1, which
-  has no soft particles. Quality 0 would turn them off but also halves
-  scripted particle density (`particle_density()`), so the pin is
-  `r_particle_quality 0` with `r_part_density 2` (impacts and enhanced
-  particles are off anyway), or an explicit override cvar if that reads
-  better in the table. Check with `perfkit partinfo` that counts still
-  match vkQuake, update the settings table and its pin test, and expect
-  the FTE cells' numbers to move. The main suite draws classic particles,
-  which aren't soft, so its cells are unaffected.
+  `r_softparticles` is a compat cvar that does nothing and the soft level
+  follows `r_particle_quality` (`soft_particles()` in
+  `src/host/render.rs`), so `r_particle_quality 1` ran ours with soft
+  particles **low**: in the FTE suite ours split the scene pass for AD's
+  soft effects and read depth, against vkQuake 1.34.1, which has none.
+  Quality 0 turns them off but halves scripted particle density
+  (`particle_density()`), so `ultra-fte` now pins `r_particle_quality 0`
+  with `r_part_density 2` (density 0.5 × 2 = 1; impacts and enhanced
+  particles are off anyway). `r_particle_quality` moved from the shared
+  row into the particle rows (`ultra` keeps 1: classic particles aren't
+  soft, so the main suite's cells are unchanged). New perfkit tests: no
+  pin is a cvar ours only registers for old configs, and every cvar is
+  pinned once per profile. `perfkit partinfo` afterwards: still like for
+  like, `spin-sepulcher-fte` ours 429322 vs vkQuake 429082 (+0.1%),
+  `combat-grendel-fte` 82990 vs 83063 (−0.1%), the same as V3/V6. The
+  2026-11-17 FTE cells (void anyway, V4) ran with soft particles on; the
+  rerun is the first with them off.
 - **V9 (new 2026-11-18)**: steady-state heap allocations and cvar name
   lookups per frame (H1 grew in 3dca905). The first census (Results,
   2026-11-18) counts ~114 allocations per steady-state frame on

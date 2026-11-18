@@ -83,7 +83,7 @@ pub const ULTRA: &[Row] = &[
         &[
             ("r_ssao", "0"), ("r_motionblur", "0"), ("r_speedblur", "0"), ("r_enhancedwater", "0"),
             ("r_teleportwindows", "0"), ("r_enhancedfx", "0"), ("r_enhancedparticles", "0"),
-            ("r_particle_quality", "1"), ("r_impact_fx", "0"), ("r_impact_bullets", "0"), ("r_impact_nails", "0"),
+            ("r_impact_fx", "0"), ("r_impact_bullets", "0"), ("r_impact_nails", "0"),
             ("r_impact_scorches", "0"), ("r_shotgun_tracers", "0"), ("r_blood", "0"), ("r_debris", "0"),
             ("r_softemu", "0"), ("r_dither", "0"), ("r_colorblind", "0"), ("custom_enable", "0"), ("addon_hitstop", "0"),
         ],
@@ -93,10 +93,11 @@ pub const ULTRA: &[Row] = &[
 ];
 
 /// Classic particles in every engine (round dots off: square, the
-/// references' default).
+/// references' default). Particle Quality stays at our default; classic
+/// particles aren't soft, so it changes nothing here.
 pub const CLASSIC_PARTICLES: &[Row] = &[row(
     "classic particles",
-    &[("r_fteparticles", "0"), ("r_particles", "2")],
+    &[("r_fteparticles", "0"), ("r_particle_quality", "1"), ("r_particles", "2")],
     &[("r_particles", "2")],
     &[("r_fteparticles", "0"), ("r_particles", "2")],
 )];
@@ -104,10 +105,16 @@ pub const CLASSIC_PARTICLES: &[Row] = &[row(
 /// FTE scripted particles in ours and vkQuake with the classic effect set,
 /// soft particles off (not part of the base game; the benchmarked vkQuake
 /// 1.34.1 AppImage has none, only newer vkQuake source does); ironwail
-/// classic.
+/// classic. Ours turns soft particles off only with Particle Quality 0
+/// (`r_softparticles` is a no-op since 2026-11-16), which also halves
+/// scripted particle density, so `r_part_density 2` restores it (V8;
+/// `perfkit partinfo` checks the counts against vkQuake).
 pub const FTE_PARTICLES: &[Row] = &[row(
     "FTE particles (ironwail: classic)",
-    &[("r_fteparticles", "1"), ("r_particledesc", "classic"), ("r_softparticles", "0"), ("r_quadparticles", "1"), ("r_particles", "2")],
+    &[
+        ("r_fteparticles", "1"), ("r_particledesc", "classic"), ("r_particle_quality", "0"), ("r_part_density", "2"),
+        ("r_quadparticles", "1"), ("r_particles", "2"),
+    ],
     &[("r_particles", "2")],
     &[("r_fteparticles", "1"), ("r_particledesc", "classic"), ("r_quadparticles", "1"), ("r_particles", "2")],
 )];
@@ -204,6 +211,47 @@ mod tests {
                 continue;
             }
             assert_eq!(missing(e, &sources(&[d], "c")), Vec::<&str>::new(), "{}", e.name());
+        }
+    }
+
+    /// Cvars ours registers only so old and other engines' configs load,
+    /// read nowhere (the `COMPAT_CVARS` run that starts at "Folded into
+    /// r_particle_quality" in `src/host/cvars.rs`): a pin on one of them
+    /// is silently ignored, as `r_softparticles` was (V8).
+    #[test]
+    fn our_pins_are_not_retired_cvars() {
+        let src = std::fs::read_to_string(repo().join("src/host/cvars.rs")).expect("src/host/cvars.rs");
+        let at = src.find("// Folded into r_particle_quality").expect("retired-cvar comment in cvars.rs");
+        let retired: Vec<&str> = src[at..]
+            .lines()
+            .skip(1)
+            .take_while(|l| !l.trim_start().starts_with("//"))
+            .filter_map(|l| l.trim().strip_prefix("(\"")?.split('"').next())
+            .collect();
+        assert!(retired.contains(&"r_softparticles"), "{retired:?}");
+        let pinned: Vec<&str> = Profile::ALL
+            .into_iter()
+            .flat_map(rows)
+            .flat_map(|r| r.ours)
+            .map(|&(k, _)| k)
+            .filter(|k| retired.contains(k))
+            .collect();
+        assert_eq!(pinned, Vec::<&str>::new());
+    }
+
+    #[test]
+    fn fte_profile_turns_soft_particles_off_at_full_density() {
+        let (_, cfg) = split(Profile::UltraFte, Engine::Ours);
+        for l in ["r_particle_quality \"0\"", "r_part_density \"2\""] {
+            assert!(cfg.contains(&l.to_string()), "{cfg:?}");
+        }
+        // one pin per cvar, so the cfg order can't decide a value
+        for p in Profile::ALL {
+            let mut keys: Vec<&str> = rows(p).flat_map(|r| r.ours).map(|&(k, _)| k).collect();
+            let n = keys.len();
+            keys.sort_unstable();
+            keys.dedup();
+            assert_eq!(keys.len(), n, "{}", p.name());
         }
     }
 
