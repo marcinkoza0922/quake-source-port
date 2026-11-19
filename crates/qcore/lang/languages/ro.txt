@@ -163,6 +163,21 @@ ro Calitate sânge
 @ Blood Splatter Settings
 ro Setări stropi de sânge
 
+@ Bloom
+ro Strălucire
+
+@ Bloom Intensity
+ro Intensitate strălucire
+
+@ Bloom Quality
+ro Calitate strălucire
+
+@ Bloom Settings
+ro Setări strălucire
+
+@ Bloom Size
+ro Mărime strălucire
+
 @ Blue
 ro Albastru
 
@@ -174,6 +189,9 @@ ro Amplifică sau atenuează frecvențele înalte, în decibeli
 
 @ Boost or cut low frequencies in decibels
 ro Amplifică sau atenuează frecvențele joase, în decibeli
+
+@ Bright Surfaces
+ro Suprafețe luminoase
 
 @ Brightness
 ro Luminozitate
@@ -1385,6 +1403,9 @@ ro Un railgun în stil Quake III: un proiectil care străpunge fiecare inamic de
 @ A Zelda-style hookshot: fire sends a chain hook out; it latches onto hookable surfaces or enemies and reels you in; fire again to let go
 ro Un cârlig în stil Zelda: tragerea lansează un cârlig cu lanț; se prinde de suprafețele compatibile sau de inamici și te trage spre ele; trage din nou ca să-i dai drumul
 
+@ Also make bright walls and sky glow, like DarkPlaces; 0 keeps the glow to light sources
+ro Fac să strălucească și pereții luminoși și cerul, ca în DarkPlaces; 0 păstrează strălucirea la sursele de lumină
+
 @ Also translates the engine's console messages; off keeps them in English
 ro Traduce și mesajele consolei motorului; oprit le păstrează în engleză
 
@@ -1496,8 +1517,14 @@ ro Ține apăsat focul și trece cătarea peste monștri ca să-i pui în coadă
 @ Hold: keep Lock-on held. Toggle: press Auto-aim Toggle to enable automatic acquisition. Click look stick to switch targets
 ro Menținut: ține apăsat Fixare. Comutat: apasă Țintire automată comutată pentru fixare automată. Apasă stick-ul de privire ca să schimbi ținta
 
+@ How bright the glow is
+ro Cât de puternică e strălucirea
+
 @ How close an enemy must be to the crosshair for automatic acquisition in toggle mode (degrees)
 ro Cât de aproape de cătare trebuie să fie un inamic pentru fixarea automată în modul comutat (grade)
+
+@ How far the glow spreads around a light
+ro Cât de departe se întinde strălucirea în jurul unei lumini
 
 @ How far the view tilts up and down when you tilt the controller (pitch axis)
 ro Cât de mult se înclină privirea în sus și în jos când înclini controlerul (axa de tangaj)
@@ -1534,6 +1561,9 @@ ro Imersiv: apare câteva secunde doar când valoarea sa se schimbă
 
 @ Keeps textures sharp on floors and walls seen at steep angles
 ro Păstrează texturile clare pe podele și pereți văzuți din unghiuri ascuțite
+
+@ Light sources glow: lamps, lava, teleporters, sparks and explosions; Bloom Settings tunes it
+ro Sursele de lumină strălucesc: lămpi, lavă, teleportoare, scântei și explozii; Setări strălucire o reglează
 
 @ Lights from rockets, muzzle flashes and explosions brighten nearby walls
 ro Luminile rachetelor, flăcările de la gura țevii și exploziile luminează pereții din apropiere
@@ -1651,6 +1681,9 @@ ro Înlocuiește particulele clasice tip punct cu scântei strălucitoare, fum �
 
 @ Resolution and detail inside portal and teleporter views; lower tiers trim nested effects
 ro Rezoluția și detaliul din vederile portalurilor și teleportoarelor; nivelurile inferioare reduc efectele imbricate
+
+@ Resolution of the glow: low is cheaper and softer
+ro Rezoluția strălucirii: scăzută e mai ieftină și mai blândă
 
 @ Rippling light patterns on surfaces under water and slime
 ro Modele de lumină unduitoare pe suprafețele de sub apă și mâl toxic

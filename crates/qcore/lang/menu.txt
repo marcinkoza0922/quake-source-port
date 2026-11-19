@@ -372,6 +372,41 @@ it Impostazioni schizzi di sangue
 es Ajustes de salpicaduras de sangre
 ru Настройки брызг крови
 
+@ Bloom
+fr Halo lumineux
+de Bloom
+it Bloom
+es Resplandor
+ru Свечение
+
+@ Bloom Intensity
+fr Intensité du halo
+de Bloom-Intensität
+it Intensità bloom
+es Intensidad del resplandor
+ru Интенсивность свечения
+
+@ Bloom Quality
+fr Qualité du halo
+de Bloom-Qualität
+it Qualità bloom
+es Calidad del resplandor
+ru Качество свечения
+
+@ Bloom Settings
+fr Réglages du halo
+de Bloom-Einstellungen
+it Impostazioni bloom
+es Ajustes del resplandor
+ru Настройки свечения
+
+@ Bloom Size
+fr Taille du halo
+de Bloom-Größe
+it Dimensione bloom
+es Tamaño del resplandor
+ru Размер свечения
+
 @ Blue
 fr Bleu
 de Blau
@@ -399,6 +434,13 @@ de Hebt oder senkt die Tiefen in Dezibel
 it Aumenta o riduce le frequenze basse, in decibel
 es Realza o recorta los graves, en decibelios
 ru Усиливает или ослабляет низкие частоты, в децибелах
+
+@ Bright Surfaces
+fr Surfaces claires
+de Helle Flächen
+it Superfici luminose
+es Superficies brillantes
+ru Яркие поверхности
 
 @ Brightness
 fr Luminosité

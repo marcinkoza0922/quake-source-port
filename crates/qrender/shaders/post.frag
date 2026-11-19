@@ -24,6 +24,9 @@ layout(push_constant) uniform P {
     float mb_h;       // output height in pixels
     uint g_quality;   // goggles glow: 0 low (no ring taps), 1 medium (4 diag taps), 2 high (8 ring taps)
     float warp;       // underwater screen ripple clock (s); < 0 off
+    uint bloom_tex;   // r_bloom chain level 0
+    float bloom;      // bloom strength; 0 off
+    vec2 bloom_uv;    // view UV -> this view's region of level 0
 } pc;
 layout(location = 0) out vec4 o_color;
 
@@ -177,6 +180,9 @@ void main() {
         c = motion_blur(c, uv);
     if (pc.speed_blur > 0.0)
         c = speed_blur(c, uv);
+    // r_bloom: added like DarkPlaces' bloom, before palettizing and gamma
+    if (pc.bloom > 0.0)
+        c += texture(textures[nonuniformEXT(pc.bloom_tex)], (pc.warp >= 0.0 ? water_warp(i_uv) : i_uv) * pc.bloom_uv).rgb * pc.bloom;
     if (pc.mode != 0u) {
         if (pc.mode == 1u) {
             vec2 noiseuv = floor(gl_FragCoord.xy * pc.scale) + 0.5;

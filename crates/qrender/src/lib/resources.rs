@@ -58,8 +58,22 @@ pub(super) struct Targets {
     pub(super) vel_w: u32,
     pub(super) vel_h: u32,
     pub(super) vel_slot: u32,
+    /// Bloom glow attachment and chain (only while bloom is on).
+    pub(super) bloom: Option<BloomTargets>,
     /// Headless output image + readback buffer.
     pub(super) out: Option<(Image, Buffer)>,
+}
+
+/// r_bloom targets: the scene's second colour attachment and the blur chain.
+pub(super) struct BloomTargets {
+    /// Single-sampled glow (MSAA resolve target), scene size.
+    pub(super) glow: Image,
+    pub(super) glow_ms: Option<Image>,
+    pub(super) glow_slot: u32,
+    /// The scene colour again, linearly filtered (r_bloom_bright).
+    pub(super) scene_slot: u32,
+    /// Chain levels: image, texture slot, width, height (halving).
+    pub(super) levels: Vec<(Image, u32, u32, u32)>,
 }
 
 pub(super) struct Tex {

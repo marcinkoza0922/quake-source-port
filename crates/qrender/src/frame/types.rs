@@ -131,6 +131,10 @@ pub(super) struct PostPush {
     pub(super) g_quality: u32,
     /// Software-style underwater ripple clock in seconds; negative = off.
     pub(super) warp: f32,
+    /// r_bloom: chain level 0 slot, strength (0 = off) and view UV scale.
+    pub(super) bloom_tex: u32,
+    pub(super) bloom: f32,
+    pub(super) bloom_uv: [f32; 2],
 }
 
 #[repr(C)]

@@ -4,6 +4,7 @@
 //! lightmaps built on the CPU) and WGSL shaders in `shaders/`. See-through
 //! portals and slang presets of the Vulkan backend are not drawn.
 
+mod bloom;
 mod capture;
 mod encode;
 mod ents;
@@ -17,6 +18,7 @@ mod motion;
 mod pipes;
 mod post;
 mod scene;
+mod scene_pipes;
 mod ssao;
 mod textures;
 mod timing;
@@ -30,6 +32,8 @@ use std::path::Path;
 pub(super) const NO_TEX: u32 = u32::MAX;
 const SCENE_FORMAT: wgpu::TextureFormat = wgpu::TextureFormat::Rgba8Unorm;
 const DEPTH_FORMAT: wgpu::TextureFormat = wgpu::TextureFormat::Depth32Float;
+/// Scene colour attachment 1 while bloom is on: what glows.
+const GLOW_FORMAT: wgpu::TextureFormat = wgpu::TextureFormat::Rgba8Unorm;
 /// MSAA sample count: WebGPU (and wgpu without adapter-specific format
 /// features) only guarantees 1 and 4 for the scene formats.
 const MSAA_SAMPLES: u32 = 4;
@@ -52,6 +56,8 @@ struct Targets {
     soft_group: wgpu::BindGroup,
     /// Motion velocity target (r_motionblur on).
     vel: Option<motion::VelTarget>,
+    /// Glow attachment and chain (r_bloom on).
+    bloom: Option<bloom::BloomTargets>,
     /// Headless: (output texture, readback buffer, padded bytes per row).
     out: Option<(wgpu::Texture, wgpu::Buffer, u32)>,
 }
@@ -102,6 +108,9 @@ pub struct Renderer {
     ssao: Option<u32>,
     /// Motion blur quality while r_motionblur is on.
     mblur: Option<u32>,
+    /// Bloom quality while r_bloom is on, and its pipelines once first used.
+    bloom: Option<u32>,
+    bloom_pipes: Option<bloom::BloomPipes>,
     /// Ripples, caustics and splashes (r_enhancedwater).
     water: water::Water,
     /// Entity transforms of the last frame (motion blur).
@@ -261,6 +270,8 @@ impl Renderer {
             msaa: 1,
             ssao: None,
             mblur: None,
+            bloom: None,
+            bloom_pipes: None,
             motion: Default::default(),
             capture_req: false,
             capture: None,

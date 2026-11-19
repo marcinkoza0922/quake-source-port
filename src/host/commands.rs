@@ -167,6 +167,7 @@ pub(super) fn register_commands(c: &mut Commands<Host>) {
             "graphics" => Some(Page::Graphics),
             "enhancements" => Some(Page::Enhancements),
             "water" => Some(Page::Water),
+            "bloom" => Some(Page::Bloom),
             "impacts" => Some(Page::Impacts),
             "blood" => Some(Page::Blood),
             "debris" => Some(Page::Debris),

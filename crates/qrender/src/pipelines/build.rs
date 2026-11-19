@@ -3,7 +3,7 @@ use super::*;
 impl Pipelines {
     /// Pipelines to use for single-sampled portal/teleporter views.
     pub fn portal_pipes(&self) -> ScenePipes {
-        if self.samples > 1 {
+        if self.samples > 1 || self.glow {
             self.portal
         } else {
             ScenePipes {
@@ -39,6 +39,8 @@ impl Pipelines {
             self.ao_apply,
             self.vel_alias,
             self.vel_world,
+            self.bloom_down,
+            self.bloom_up,
         ];
         v.extend(self.fte);
         v.extend(self.portal.all().filter(|&p| p != vk::Pipeline::null()));
@@ -78,6 +80,8 @@ impl Pipelines {
             vel_alias_vs,
             vel_world_vs,
             vel_fs,
+            bloom_fs,
+            glow: glow_fs,
         } = self.sh;
         let layout = self.layout;
         let f32x3 = vk::Format::R32G32B32_SFLOAT;
@@ -120,6 +124,7 @@ impl Pipelines {
             sample_shading: supersample,
             topology: vk::PrimitiveTopology::TRIANGLE_LIST,
             behind: false,
+            glow: false,
         };
         let g = |d: Desc| graphics(gpu, layout, &d);
         let fb = [bind(0, 24, false)];
@@ -129,10 +134,17 @@ impl Pipelines {
             attr(2, 0, vk::Format::R8G8B8A8_UNORM, 20),
         ];
         let fte_supersample = self.fte_supersample;
-        let build_scene = |pipe_samples, pipe_ss| -> Result<ScenePipes> {
+        let glow = self.glow;
+        let build_scene = |pipe_samples, pipe_ss, pipe_glow: bool| -> Result<ScenePipes> {
+            let (world_fs, water_fs, sky_fs, alias_fs, part_fs, fte_fs) = if pipe_glow {
+                (glow_fs.world, glow_fs.water, glow_fs.sky, glow_fs.alias, glow_fs.part, glow_fs.fte)
+            } else {
+                (world_fs, water_fs, sky_fs, alias_fs, part_fs, fte_fs)
+            };
             let sd = |vs, fs, bindings, attrs, blend, dt, dw| Desc {
                 samples: pipe_samples,
                 sample_shading: pipe_ss,
+                glow: pipe_glow,
                 ..d(vs, fs, bindings, attrs, blend, dt, dw)
             };
             let sg = |desc: Desc| graphics(gpu, layout, &desc);
@@ -159,12 +171,14 @@ impl Pipelines {
                 fte,
             })
         };
-        let scene = build_scene(samples, supersample)?;
-        self.portal = if samples > 1 { build_scene(1, false)? } else { ScenePipes::null() };
+        let scene = build_scene(samples, supersample, glow)?;
+        // portal views are single-sampled and have no glow attachment
+        self.portal = if samples > 1 || glow { build_scene(1, false, false)? } else { ScenePipes::null() };
         // thermal goggles: hot bodies behind walls, added on top
         let one = vk::BlendFactor::ONE;
-        self.alias_xray = g(Desc { cull: true, behind: true, ..d(alias_vs, alias_fs, &ab, &aa, Blend::Factors(one, one), true, false) })?;
-        let poly = g(d(poly_vs, poly_fs, &pb, &pa, Blend::Alpha, true, true))?;
+        let (alias_main_fs, poly_main_fs) = if glow { (glow_fs.alias, glow_fs.poly) } else { (alias_fs, poly_fs) };
+        self.alias_xray = g(Desc { cull: true, behind: true, glow, ..d(alias_vs, alias_main_fs, &ab, &aa, Blend::Factors(one, one), true, false) })?;
+        let poly = g(Desc { glow, ..d(poly_vs, poly_main_fs, &pb, &pa, Blend::Alpha, true, true) })?;
         // UI is drawn in the output pass, after post-processing
         let ui = graphics(
             gpu,
@@ -194,6 +208,7 @@ impl Pipelines {
                 sample_shading: false,
                 topology: vk::PrimitiveTopology::TRIANGLE_LIST,
                 behind: false,
+                glow: false,
             },
         )?;
         // post-effect passes: single-sampled, no depth attachment
@@ -218,6 +233,8 @@ impl Pipelines {
         )?;
         self.vel_alias = graphics(gpu, layout, &fx(vel_alias_vs, vel_fs, &ab, &aa, VEL_FORMAT, true))?;
         self.vel_world = graphics(gpu, layout, &fx(vel_world_vs, vel_fs, &wb, &wa, VEL_FORMAT, false))?;
+        self.bloom_down = graphics(gpu, layout, &fx(post_vs, bloom_fs, &[], &[], BLOOM_FORMAT, false))?;
+        self.bloom_up = graphics(gpu, layout, &Desc { blend: Blend::Factors(one, one), ..fx(post_vs, bloom_fs, &[], &[], BLOOM_FORMAT, false) })?;
         (
             self.world,
             self.world_alpha,

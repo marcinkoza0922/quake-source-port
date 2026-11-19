@@ -36,6 +36,13 @@ it Un rampino in stile Zelda: il fuoco lancia un gancio a catena che si aggancia
 es Un gancho al estilo de Zelda: disparar lanza un garfio con cadena que se engancha a superficies aptas o a enemigos y te atrae; vuelve a disparar para soltarte
 ru Крюк-кошка в стиле Zelda: выстрел бросает крюк на цепи, он цепляется за подходящие поверхности или врагов и подтягивает вас; повторный выстрел отпускает
 
+@ Also make bright walls and sky glow, like DarkPlaces; 0 keeps the glow to light sources
+fr Fait aussi rayonner les murs clairs et le ciel, comme DarkPlaces ; 0 limite le halo aux sources de lumière
+de Lässt auch helle Wände und den Himmel leuchten, wie DarkPlaces; 0 beschränkt das Leuchten auf Lichtquellen
+it Fa risplendere anche pareti chiare e cielo, come DarkPlaces; 0 limita il bagliore alle fonti di luce
+es También hace resplandecer paredes claras y cielo, como DarkPlaces; 0 limita el resplandor a las fuentes de luz
+ru Светятся также яркие стены и небо, как в DarkPlaces; 0 оставляет свечение только у источников света
+
 @ Also translates the engine's console messages; off keeps them in English
 fr Traduit aussi les messages de la console du moteur ; désactivé, ils restent en anglais
 de Übersetzt auch die Konsolenmeldungen der Engine; aus lässt sie auf Englisch
@@ -295,12 +302,26 @@ it Tieni premuto: tieni premuto Aggancio. Commutazione: premi Mira automatica (c
 es Mantener: mantén pulsado Fijar objetivo. Alterno: pulsa Apuntado automático (alterno) para activar la fijación automática. Pulsa la palanca de vista para cambiar de objetivo
 ru Удержание: держите «Захват цели». Переключение: нажмите «Автоприцел (переключение)» для автоматического захвата. Нажатие стика обзора меняет цель
 
+@ How bright the glow is
+fr Luminosité du halo
+de Wie hell das Leuchten ist
+it Quanto è intenso il bagliore
+es Brillo del resplandor
+ru Насколько ярко свечение
+
 @ How close an enemy must be to the crosshair for automatic acquisition in toggle mode (degrees)
 fr Distance au réticule à laquelle un ennemi est acquis automatiquement en mode bascule (degrés)
 de Wie nah ein Gegner am Fadenkreuz sein muss, um im Umschaltmodus automatisch erfasst zu werden (Grad)
 it Quanto un nemico deve essere vicino al mirino per l'aggancio automatico in modalità commutazione (gradi)
 es Lo cerca que debe estar un enemigo del punto de mira para fijarlo automáticamente en modo alterno (grados)
 ru Насколько близко к прицелу должен быть враг для автозахвата в режиме переключения (градусы)
+
+@ How far the glow spreads around a light
+fr Distance à laquelle le halo s'étend autour d'une lumière
+de Wie weit das Leuchten um ein Licht strahlt
+it Quanto si espande il bagliore attorno a una luce
+es Cuánto se extiende el resplandor alrededor de una luz
+ru Как далеко свечение расходится вокруг света
 
 @ How far the view tilts up and down when you tilt the controller (pitch axis)
 fr Amplitude de l'inclinaison verticale de la vue quand vous inclinez la manette (axe de tangage)
@@ -385,6 +406,13 @@ de Hält Texturen auf Böden und Wänden in steilem Blickwinkel scharf
 it Mantiene nitide le texture di pavimenti e pareti viste di sbieco
 es Mantiene nítidas las texturas de suelos y paredes vistas en ángulos muy inclinados
 ru Сохраняет чёткость текстур полов и стен, видимых под острым углом
+
+@ Light sources glow: lamps, lava, teleporters, sparks and explosions; Bloom Settings tunes it
+fr Les sources de lumière rayonnent : lampes, lave, téléporteurs, étincelles et explosions ; Réglages du halo l'ajuste
+de Lichtquellen leuchten: Lampen, Lava, Teleporter, Funken und Explosionen; Bloom-Einstellungen passt es an
+it Le fonti di luce risplendono: lampade, lava, teletrasporti, scintille ed esplosioni; Impostazioni bloom lo regola
+es Las fuentes de luz resplandecen: lámparas, lava, teletransportadores, chispas y explosiones; Ajustes del resplandor lo regula
+ru Источники света светятся: лампы, лава, телепорты, искры и взрывы; Настройки свечения регулируют его
 
 @ Lights from rockets, muzzle flashes and explosions brighten nearby walls
 fr Les lumières des roquettes, des tirs et des explosions éclairent les murs proches
@@ -658,6 +686,13 @@ de Auflösung und Detail in Portal- und Teleporteransichten; niedrigere Stufen k
 it Risoluzione e dettaglio nelle viste di portali e teletrasporti; i livelli più bassi riducono gli effetti annidati
 es Resolución y detalle en las vistas de portales y teletransportadores; los niveles bajos recortan los efectos anidados
 ru Разрешение и детализация внутри видов порталов и телепортов; низкие уровни урезают вложенные эффекты
+
+@ Resolution of the glow: low is cheaper and softer
+fr Résolution du halo : bas est moins coûteux et plus doux
+de Auflösung des Leuchtens: niedrig ist günstiger und weicher
+it Risoluzione del bagliore: basso costa meno ed è più morbido
+es Resolución del resplandor: bajo es más barato y suave
+ru Разрешение свечения: низкое дешевле и мягче
 
 @ Rippling light patterns on surfaces under water and slime
 fr Motifs lumineux ondulants sur les surfaces sous l'eau et la boue toxique

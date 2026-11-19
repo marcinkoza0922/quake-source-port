@@ -163,6 +163,21 @@ eo Kvalito de sango
 @ Blood Splatter Settings
 eo Agordoj de sangoŝprucoj
 
+@ Bloom
+eo Brilo
+
+@ Bloom Intensity
+eo Intenso de brilo
+
+@ Bloom Quality
+eo Kvalito de brilo
+
+@ Bloom Settings
+eo Agordoj de brilo
+
+@ Bloom Size
+eo Grando de brilo
+
 @ Blue
 eo Blua
 
@@ -174,6 +189,9 @@ eo Plifortigi aŭ malfortigi altajn frekvencojn en decibeloj
 
 @ Boost or cut low frequencies in decibels
 eo Plifortigi aŭ malfortigi malaltajn frekvencojn en decibeloj
+
+@ Bright Surfaces
+eo Helaj surfacoj
 
 @ Brightness
 eo Heleco
@@ -1385,6 +1403,9 @@ eo Relpafilo laŭ Quake III: kuglo trapikas ĉiun malamikon sur sia linio, uzas 
 @ A Zelda-style hookshot: fire sends a chain hook out; it latches onto hookable surfaces or enemies and reels you in; fire again to let go
 eo Hokpafilo laŭ Zelda: pafo elĵetas ĉenan hokon; ĝi kroĉiĝas al hokeblaj surfacoj aŭ malamikoj kaj tiras vin; pafu denove por malkroĉiĝi
 
+@ Also make bright walls and sky glow, like DarkPlaces; 0 keeps the glow to light sources
+eo Ankaŭ helaj muroj kaj la ĉielo brilas, kiel en DarkPlaces; 0 tenas la brilon ĉe lumfontoj
+
 @ Also translates the engine's console messages; off keeps them in English
 eo Ankaŭ tradukas la konzolajn mesaĝojn de la motoro; malŝaltite ili restas en la angla
 
@@ -1496,8 +1517,14 @@ eo Tenu pafon kaj svingu la celilon super monstroj por vicigi ilin, malpremu por
 @ Hold: keep Lock-on held. Toggle: press Auto-aim Toggle to enable automatic acquisition. Click look stick to switch targets
 eo Teni: tenu premita Celkapto. Baskuli: premu Baskuli aŭtomatan celadon por ŝalti aŭtomatan kapton. Klaku la rigardan stangon por ŝanĝi celon
 
+@ How bright the glow is
+eo Kiom hela estas la brilo
+
 @ How close an enemy must be to the crosshair for automatic acquisition in toggle mode (degrees)
 eo Kiom proksime al la celilo malamiko devas esti por aŭtomata kapto en baskula reĝimo (gradoj)
+
+@ How far the glow spreads around a light
+eo Kiom malproksimen la brilo etendiĝas ĉirkaŭ lumo
 
 @ How far the view tilts up and down when you tilt the controller (pitch axis)
 eo Kiom la vido kliniĝas supren kaj malsupren kiam vi klinas la regilon (vertikala akso)
@@ -1534,6 +1561,9 @@ eo Enmergiĝa: aperas dum kelkaj sekundoj nur kiam ĝia valoro ŝanĝiĝas
 
 @ Keeps textures sharp on floors and walls seen at steep angles
 eo Tenas teksturojn akraj sur plankoj kaj muroj viditaj je krutaj anguloj
+
+@ Light sources glow: lamps, lava, teleporters, sparks and explosions; Bloom Settings tunes it
+eo Lumfontoj brilas: lampoj, lafo, teleportiloj, fajreroj kaj eksplodoj; Agordoj de brilo alĝustigas ĝin
 
 @ Lights from rockets, muzzle flashes and explosions brighten nearby walls
 eo Lumoj de raketoj, pafbriloj kaj eksplodoj heligas proksimajn murojn
@@ -1651,6 +1681,9 @@ eo Anstataŭas la klasikajn punktajn partiklojn per brilantaj sparkoj, fumo kaj 
 
 @ Resolution and detail inside portal and teleporter views; lower tiers trim nested effects
 eo Distingivo kaj detaleco en vidoj tra portaloj kaj teleportiloj; pli malaltaj niveloj reduktas nestitajn efektojn
+
+@ Resolution of the glow: low is cheaper and softer
+eo Distingivo de la brilo: malalta estas pli malmultekosta kaj pli mola
 
 @ Rippling light patterns on surfaces under water and slime
 eo Ondantaj lumdesegnoj sur surfacoj sub akvo kaj ŝlimo

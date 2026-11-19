@@ -4,6 +4,7 @@
 
 use super::pipes::UNIFORM_STRIDE;
 use super::scene::{Lists, Pipe, Src};
+use super::bloom::BloomPass;
 use super::ssao::AoView;
 use super::timing::{self, writes};
 use super::{NO_TEX, Renderer, Targets};
@@ -20,7 +21,7 @@ pub(super) enum Part {
 }
 
 impl Renderer {
-    pub(super) fn encode(&mut self, l: &Lists, post_du: &[u32], ao_views: &[AoView], ui_du: u32, ui_batches: &[(u32, u32, u32)]) -> Result<()> {
+    pub(super) fn encode(&mut self, l: &Lists, post_du: &[u32], ao_views: &[AoView], bloom: &[BloomPass], ui_du: u32, ui_batches: &[(u32, u32, u32)]) -> Result<()> {
         let frame_tex = match &self.surface {
             Some((s, cfg)) => match s.get_current_texture() {
                 wgpu::CurrentSurfaceTexture::Success(t) | wgpu::CurrentSurfaceTexture::Suboptimal(t) => Some(t),
@@ -56,6 +57,7 @@ impl Renderer {
                 self.scene_pass(&mut enc, t, l, Part::Soft, true);
             }
             self.encode_velocity(&mut enc, t, l);
+            self.encode_bloom(&mut enc, t, bloom);
         }
         {
             let ts = self.pass_times(timing::POST);
@@ -132,19 +134,27 @@ impl Renderer {
             Part::Rest => timing::TRANSLUCENT,
             Part::Soft => timing::SOFT,
         });
+        fn scene_att<'a>(ms: Option<&'a wgpu::TextureView>, single: &'a wgpu::TextureView, first: bool, last: bool) -> wgpu::RenderPassColorAttachment<'a> {
+            wgpu::RenderPassColorAttachment {
+                view: ms.unwrap_or(single),
+                depth_slice: None,
+                resolve_target: ms.filter(|_| last).map(|_| single),
+                ops: wgpu::Operations {
+                    load: if first { wgpu::LoadOp::Clear(wgpu::Color::BLACK) } else { wgpu::LoadOp::Load },
+                    store: if ms.is_some() && last { wgpu::StoreOp::Discard } else { wgpu::StoreOp::Store },
+                },
+            }
+        }
+        let att = |ms, single| scene_att(ms, single, first, last);
         let mut pass = enc.begin_render_pass(&wgpu::RenderPassDescriptor {
             label: Some("scene"),
             timestamp_writes: writes(&ts),
-            // MSAA draws into ms_view and resolves into color_view at the end
-            color_attachments: &[Some(wgpu::RenderPassColorAttachment {
-                view: t.ms_view.as_ref().unwrap_or(&t.color_view),
-                depth_slice: None,
-                resolve_target: t.ms_view.as_ref().filter(|_| last).map(|_| &t.color_view),
-                ops: wgpu::Operations {
-                    load: if first { wgpu::LoadOp::Clear(wgpu::Color::BLACK) } else { wgpu::LoadOp::Load },
-                    store: if t.ms_view.is_some() && last { wgpu::StoreOp::Discard } else { wgpu::StoreOp::Store },
-                },
-            })],
+            // MSAA draws into ms_view and resolves into color_view at the end;
+            // the r_bloom glow attachment follows the colour
+            color_attachments: &[
+                Some(att(t.ms_view.as_ref(), &t.color_view)),
+                t.bloom.as_ref().map(|b| att(b.glow_ms_view.as_ref(), &b.glow_view)),
+            ][..if t.bloom.is_some() { 2 } else { 1 }],
             depth_stencil_attachment: Some(wgpu::RenderPassDepthStencilAttachment {
                 view: &t.depth_view,
                 // read-only while soft particles sample it

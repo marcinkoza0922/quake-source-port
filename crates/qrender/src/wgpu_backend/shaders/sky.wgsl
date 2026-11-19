@@ -67,7 +67,9 @@ fn skybox_wind(d: vec3<f32>) -> vec3<f32> {
     let rgb = l1.rgb * a1 + l2.rgb * a2;
     return base.rgb * (1.0 - (a1 + a2)) + rgb;
 }
-@fragment fn fs_sky(i: SkyOut) -> @location(0) vec4<f32> {
+@fragment fn fs_sky(i: SkyOut) -> @location(0) vec4<f32> { return sky_frag(i); }
+@fragment fn fs_sky_glow(i: SkyOut) -> Frag { return Frag(sky_frag(i), vec4<f32>(0.0)); }
+fn sky_frag(i: SkyOut) -> vec4<f32> {
     var d = i.wpos - fr.eye.xyz;
     var rgb: vec3<f32>;
     if (fr.sky.y > 0.5) {

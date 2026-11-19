@@ -41,6 +41,8 @@ pub struct Renderer {
     ssao_quality: u32,
     portal_quality: u32,
     motion_blur_quality: u32,
+    /// Bloom quality in effect (`None` = bloom off: no glow attachment or chain).
+    bloom: Option<u32>,
     /// Last frame's entity transforms by `RenderEntity::key` (motion blur), plus reused scratch map.
     prev_xforms: std::collections::HashMap<u32, ([f32; 3], [f32; 3])>,
     cur_xforms: std::collections::HashMap<u32, ([f32; 3], [f32; 3])>,

@@ -163,6 +163,21 @@ eu Odolaren kalitatea
 @ Blood Splatter Settings
 eu Odol-zipriztinen ezarpenak
 
+@ Bloom
+eu Distira
+
+@ Bloom Intensity
+eu Distiraren intentsitatea
+
+@ Bloom Quality
+eu Distiraren kalitatea
+
+@ Bloom Settings
+eu Distiraren ezarpenak
+
+@ Bloom Size
+eu Distiraren tamaina
+
 @ Blue
 eu Urdina
 
@@ -174,6 +189,9 @@ eu Igo edo jaitsi maiztasun altuak dezibeletan
 
 @ Boost or cut low frequencies in decibels
 eu Igo edo jaitsi maiztasun baxuak dezibeletan
+
+@ Bright Surfaces
+eu Gainazal distiratsuak
 
 @ Brightness
 eu Distira
@@ -1385,6 +1403,9 @@ eu Quake III estiloko railgun bat: bere lerroko etsai guztiak zeharkatzen dituen
 @ A Zelda-style hookshot: fire sends a chain hook out; it latches onto hookable surfaces or enemies and reels you in; fire again to let go
 eu Zelda estiloko kakoa: tiro eginez kate-kako bat jaurtitzen da; gainazal egokietan edo etsaietan heltzen da eta zu erakartzen zaitu; egin tiro berriro askatzeko
 
+@ Also make bright walls and sky glow, like DarkPlaces; 0 keeps the glow to light sources
+eu Horma argiek eta zeruak ere distira egiten dute, DarkPlaces bezala; 0k distira argi-iturrietara mugatzen du
+
 @ Also translates the engine's console messages; off keeps them in English
 eu Motorraren kontsola-mezuak ere itzultzen ditu; desaktibatuta ingelesez uzten ditu
 
@@ -1496,8 +1517,14 @@ eu Eutsi tiroari eta pasa mira munstroen gainetik ilaran jartzeko, askatu jaurti
 @ Hold: keep Lock-on held. Toggle: press Auto-aim Toggle to enable automatic acquisition. Click look stick to switch targets
 eu Eutsi: eutsi Finkatu xedea sakatuta. Txandakatu: sakatu Xede automatikoa (txandakatu) finkatze automatikoa gaitzeko. Sakatu begirada-palanka xedea aldatzeko
 
+@ How bright the glow is
+eu Zenbateko distira duen
+
 @ How close an enemy must be to the crosshair for automatic acquisition in toggle mode (degrees)
 eu Etsai batek miratik zein gertu egon behar duen txandakatze moduan automatikoki finkatzeko (graduak)
+
+@ How far the glow spreads around a light
+eu Argi baten inguruan distira zenbat zabaltzen den
 
 @ How far the view tilts up and down when you tilt the controller (pitch axis)
 eu Kontrolagailua okertzean ikuspegia gora eta behera zenbat okertzen den (pitch ardatza)
@@ -1534,6 +1561,9 @@ eu Murgilgarria: balioa aldatzen denean soilik agertzen da segundo batzuetan
 
 @ Keeps textures sharp on floors and walls seen at steep angles
 eu Testurak garbi mantentzen ditu angelu zorrotzetik ikusitako zoru eta hormetan
+
+@ Light sources glow: lamps, lava, teleporters, sparks and explosions; Bloom Settings tunes it
+eu Argi-iturriek distira egiten dute: lanparak, laba, teleportagailuak, txinpartak eta leherketak; Distiraren ezarpenek doitzen dute
 
 @ Lights from rockets, muzzle flashes and explosions brighten nearby walls
 eu Suzirien, tiro-distiren eta leherketen argiek inguruko hormak argitzen dituzte
@@ -1651,6 +1681,9 @@ eu Puntu-partikula klasikoak txinparta distiratsuekin, keaz eta odolez ordezkatz
 
 @ Resolution and detail inside portal and teleporter views; lower tiers trim nested effects
 eu Atari- eta teleportagailu-ikuspegien barruko bereizmena eta xehetasuna; maila baxuagoek efektu habiaratuak murrizten dituzte
+
+@ Resolution of the glow: low is cheaper and softer
+eu Distiraren bereizmena: baxua merkeagoa eta leunagoa da
 
 @ Rippling light patterns on surfaces under water and slime
 eu Argi-eredu uhinduak ur eta lohi azpiko gainazaletan

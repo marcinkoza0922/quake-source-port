@@ -163,6 +163,21 @@ he איכות הדם
 @ Blood Splatter Settings
 he הגדרות התזות דם
 
+@ Bloom
+he זוהר
+
+@ Bloom Intensity
+he עוצמת זוהר
+
+@ Bloom Quality
+he איכות זוהר
+
+@ Bloom Settings
+he הגדרות זוהר
+
+@ Bloom Size
+he גודל זוהר
+
 @ Blue
 he כחול
 
@@ -174,6 +189,9 @@ he הגברה או הנחתה של תדרים גבוהים בדציבלים
 
 @ Boost or cut low frequencies in decibels
 he הגברה או הנחתה של תדרים נמוכים בדציבלים
+
+@ Bright Surfaces
+he משטחים בהירים
 
 @ Brightness
 he בהירות
@@ -1385,6 +1403,9 @@ he רובה מסילה בסגנון Quake III: קליע שחודר כל אויב
 @ A Zelda-style hookshot: fire sends a chain hook out; it latches onto hookable surfaces or enemies and reels you in; fire again to let go
 he קרס בסגנון Zelda: ירי שולח קרס בשרשרת; הוא נתפס במשטחים מתאימים או באויבים ומושך אתכם אליהם; ירי נוסף משחרר
 
+@ Also make bright walls and sky glow, like DarkPlaces; 0 keeps the glow to light sources
+he גורם גם לקירות בהירים ולשמיים לזהור, כמו DarkPlaces; 0 שומר את הזוהר למקורות אור
+
 @ Also translates the engine's console messages; off keeps them in English
 he מתרגם גם את הודעות הקונסולה של המנוע; כבוי משאיר אותן באנגלית
 
@@ -1496,8 +1517,14 @@ he החזיקו ירי והעבירו את הכוונת על מפלצות כדי
 @ Hold: keep Lock-on held. Toggle: press Auto-aim Toggle to enable automatic acquisition. Click look stick to switch targets
 he החזקה: להחזיק את נעילה. מיתוג: ללחוץ על כיוון אוטומטי במיתוג כדי להפעיל נעילה אוטומטית. לחיצה על סטיק המבט מחליפה מטרה
 
+@ How bright the glow is
+he כמה בהיר הזוהר
+
 @ How close an enemy must be to the crosshair for automatic acquisition in toggle mode (degrees)
 he כמה קרוב לכוונת צריך אויב להיות לנעילה אוטומטית במצב מיתוג (מעלות)
+
+@ How far the glow spreads around a light
+he כמה רחוק הזוהר מתפשט סביב אור
 
 @ How far the view tilts up and down when you tilt the controller (pitch axis)
 he כמה המבט נוטה למעלה ולמטה כשמטים את הבקר (ציר עלרוד)
@@ -1534,6 +1561,9 @@ he סוחף: מופיע לכמה שניות רק כשהערך שלו משתנה
 
 @ Keeps textures sharp on floors and walls seen at steep angles
 he שומר על טקסטורות חדות ברצפות וקירות שנראים בזווית חדה
+
+@ Light sources glow: lamps, lava, teleporters, sparks and explosions; Bloom Settings tunes it
+he מקורות אור זוהרים: מנורות, לבה, טלפורטים, ניצוצות ופיצוצים; הגדרות זוהר מכוונות אותו
 
 @ Lights from rockets, muzzle flashes and explosions brighten nearby walls
 he אורות של טילים, הבזקי ירי ופיצוצים מאירים קירות סמוכים
@@ -1651,6 +1681,9 @@ he מחליף את חלקיקי הנקודות הקלאסיים בניצוצות
 
 @ Resolution and detail inside portal and teleporter views; lower tiers trim nested effects
 he רזולוציה ופירוט בתוך תצוגות פורטלים וטלפורטרים; רמות נמוכות מקצצות אפקטים מקוננים
+
+@ Resolution of the glow: low is cheaper and softer
+he רזולוציית הזוהר: נמוכה זולה ורכה יותר
 
 @ Rippling light patterns on surfaces under water and slime
 he דפוסי אור גליים על משטחים מתחת למים ולרפש

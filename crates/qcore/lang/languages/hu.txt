@@ -163,6 +163,21 @@ hu Vér minősége
 @ Blood Splatter Settings
 hu Vérfröccs beállításai
 
+@ Bloom
+hu Ragyogás
+
+@ Bloom Intensity
+hu Ragyogás erőssége
+
+@ Bloom Quality
+hu Ragyogás minősége
+
+@ Bloom Settings
+hu Ragyogás beállításai
+
+@ Bloom Size
+hu Ragyogás mérete
+
 @ Blue
 hu Kék
 
@@ -174,6 +189,9 @@ hu A magas hangok erősítése vagy vágása decibelben
 
 @ Boost or cut low frequencies in decibels
 hu A mély hangok erősítése vagy vágása decibelben
+
+@ Bright Surfaces
+hu Világos felületek
 
 @ Brightness
 hu Fényerő
@@ -1385,6 +1403,9 @@ hu Quake III-stílusú railgun: a lövedék a vonalában minden ellenségen áth
 @ A Zelda-style hookshot: fire sends a chain hook out; it latches onto hookable surfaces or enemies and reels you in; fire again to let go
 hu Zelda-stílusú csáklya: a tüzelés kilő egy láncos kampót, amely beakad az arra alkalmas felületekbe vagy ellenségekbe és odahúz; újabb tüzelés elenged
 
+@ Also make bright walls and sky glow, like DarkPlaces; 0 keeps the glow to light sources
+hu A világos falak és az ég is ragyog, mint a DarkPlacesben; 0 a fényforrásokra korlátozza a ragyogást
+
 @ Also translates the engine's console messages; off keeps them in English
 hu A motor konzolüzeneteit is lefordítja; kikapcsolva angolul maradnak
 
@@ -1496,8 +1517,14 @@ hu Tartsd lenyomva a tüzelést és húzd végig a célkeresztet a szörnyeken, 
 @ Hold: keep Lock-on held. Toggle: press Auto-aim Toggle to enable automatic acquisition. Click look stick to switch targets
 hu Nyomva tartás: tartsd lenyomva a Célbefogást. Kapcsolás: az Automatikus célzás kapcsolása bekapcsolja az automatikus befogást. A nézőkar lenyomása célpontot vált
 
+@ How bright the glow is
+hu Milyen erős a ragyogás
+
 @ How close an enemy must be to the crosshair for automatic acquisition in toggle mode (degrees)
 hu Kapcsolás módban milyen közel kell lennie egy ellenségnek a célkereszthez az automatikus befogáshoz (fok)
+
+@ How far the glow spreads around a light
+hu Milyen messzire terjed a ragyogás egy fény körül
 
 @ How far the view tilts up and down when you tilt the controller (pitch axis)
 hu Mennyire dől fel és le a nézet, amikor a kontrollert billented (függőleges tengely)
@@ -1534,6 +1561,9 @@ hu Immerzív: csak néhány másodpercre jelenik meg, amikor az értéke változ
 
 @ Keeps textures sharp on floors and walls seen at steep angles
 hu Élesen tartja a textúrákat a meredek szögből látott padlókon és falakon
+
+@ Light sources glow: lamps, lava, teleporters, sparks and explosions; Bloom Settings tunes it
+hu A fényforrások ragyognak: lámpák, láva, teleportok, szikrák és robbanások; a Ragyogás beállításai hangolják
 
 @ Lights from rockets, muzzle flashes and explosions brighten nearby walls
 hu A rakéták, torkolattüzek és robbanások fényei megvilágítják a közeli falakat
@@ -1651,6 +1681,9 @@ hu A klasszikus pontrészecskéket izzó szikrákra, füstre és vérre cseréli
 
 @ Resolution and detail inside portal and teleporter views; lower tiers trim nested effects
 hu Felbontás és részletesség a portál- és teleporternézetekben; az alacsonyabb szintek csökkentik az egymásba ágyazott effekteket
+
+@ Resolution of the glow: low is cheaper and softer
+hu A ragyogás felbontása: az alacsony olcsóbb és lágyabb
 
 @ Rippling light patterns on surfaces under water and slime
 hu Hullámzó fényminták a víz és a nyálka alatti felületeken

@@ -39,11 +39,37 @@ struct WaterU {
 @group(0) @binding(6) var caustic_s: sampler;
 @group(2) @binding(0) var<uniform> du: DrawU;
 
+// Fraction of a surface's own colour left after fog (1 = no fog).
+fn fog_factor(wpos: vec3<f32>) -> f32 {
+    if (fr.fog.w <= 0.0) { return 1.0; }
+    let z = length(wpos - fr.eye.xyz) * fr.fog.w;
+    return clamp(exp(-z * z), 0.0, 1.0);
+}
 fn apply_fog(c: vec3<f32>, wpos: vec3<f32>) -> vec3<f32> {
     if (fr.fog.w <= 0.0) { return c; }
-    let z = length(wpos - fr.eye.xyz) * fr.fog.w;
-    let f = clamp(exp(-z * z), 0.0, 1.0);
-    return mix(fr.fog.rgb, c, f);
+    return mix(fr.fog.rgb, c, fog_factor(wpos));
+}
+
+// r_bloom (common.glsl): scene shaders return the colour and what glows; the
+// `*_glow` entry points (pipelines built while bloom is on) also write the
+// glow to colour attachment 1.
+struct Frag {
+    @location(0) c: vec4<f32>,
+    @location(1) g: vec4<f32>,
+};
+// Unlit effects glow by brightness, favouring saturated colours.
+fn effect_glow(c: vec3<f32>) -> vec3<f32> {
+    let hi = max(c.r, max(c.g, c.b));
+    let lo = min(c.r, min(c.g, c.b));
+    let sat = select(0.0, (hi - lo) / hi, hi > 0.0);
+    return c * (smoothstep(0.55, 0.95, hi) * mix(0.35, 1.0, sat));
+}
+// Glow of an FTE blend mode (fte.frag order): additive modes are light,
+// alpha and premultiplied blends glow by brightness, the rest add none.
+fn poly_glow(c: vec3<f32>, bm: u32) -> vec3<f32> {
+    if (bm == 2u || bm == 3u) { return c; }
+    if (bm == 0u || bm == 7u) { return effect_glow(c); }
+    return vec3<f32>(0.0);
 }
 
 // Add-on goggles: in thermal mode scene shaders write a grey "heat" level

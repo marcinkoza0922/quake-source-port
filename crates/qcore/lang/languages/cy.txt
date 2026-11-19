@@ -163,6 +163,21 @@ cy Ansawdd gwaed
 @ Blood Splatter Settings
 cy Gosodiadau tasgu gwaed
 
+@ Bloom
+cy Llewyrch
+
+@ Bloom Intensity
+cy Dwysedd llewyrch
+
+@ Bloom Quality
+cy Ansawdd llewyrch
+
+@ Bloom Settings
+cy Gosodiadau llewyrch
+
+@ Bloom Size
+cy Maint llewyrch
+
 @ Blue
 cy Glas
 
@@ -174,6 +189,9 @@ cy Cynyddu neu dorri amleddau uchel mewn desibelau
 
 @ Boost or cut low frequencies in decibels
 cy Cynyddu neu dorri amleddau isel mewn desibelau
+
+@ Bright Surfaces
+cy Arwynebau llachar
 
 @ Brightness
 cy Disgleirdeb
@@ -1385,6 +1403,9 @@ cy Railgun yn null Quake III: bwled sy'n trywanu pob gelyn ar ei llinell, gan dd
 @ A Zelda-style hookshot: fire sends a chain hook out; it latches onto hookable surfaces or enemies and reels you in; fire again to let go
 cy Bachyn yn null Zelda: mae tanio'n anfon bachyn ar gadwyn; mae'n cydio mewn arwynebau addas neu elynion ac yn eich tynnu ato; taniwch eto i ollwng
 
+@ Also make bright walls and sky glow, like DarkPlaces; 0 keeps the glow to light sources
+cy Mae waliau llachar a'r awyr yn tywynnu hefyd, fel DarkPlaces; mae 0 yn cadw'r llewyrch i ffynonellau golau
+
 @ Also translates the engine's console messages; off keeps them in English
 cy Mae hefyd yn cyfieithu negeseuon consol yr injan; mae i ffwrdd yn eu cadw yn Saesneg
 
@@ -1496,8 +1517,14 @@ cy Daliwch i danio a sgubo'r croesflew dros angenfilod i'w ciwio, gollyngwch i d
 @ Hold: keep Lock-on held. Toggle: press Auto-aim Toggle to enable automatic acquisition. Click look stick to switch targets
 cy Dal: daliwch Cloi i lawr. Togl: pwyswch Anelu awtomatig (togl) i alluogi caffael awtomatig. Cliciwch y ffon edrych i newid targed
 
+@ How bright the glow is
+cy Pa mor llachar yw'r llewyrch
+
 @ How close an enemy must be to the crosshair for automatic acquisition in toggle mode (degrees)
 cy Pa mor agos mae'n rhaid i elyn fod at y croesflew i'w gaffael yn awtomatig yn y modd togl (graddau)
+
+@ How far the glow spreads around a light
+cy Pa mor bell mae'r llewyrch yn lledu o gwmpas golau
 
 @ How far the view tilts up and down when you tilt the controller (pitch axis)
 cy Pa mor bell mae'r olwg yn gogwyddo i fyny ac i lawr pan fyddwch yn gogwyddo'r rheolydd (echelin traw)
@@ -1534,6 +1561,9 @@ cy Trochol: yn ymddangos am ychydig eiliadau dim ond pan fydd ei werth yn newid
 
 @ Keeps textures sharp on floors and walls seen at steep angles
 cy Cadw gweadau'n finiog ar loriau a waliau a welir ar onglau serth
+
+@ Light sources glow: lamps, lava, teleporters, sparks and explosions; Bloom Settings tunes it
+cy Mae ffynonellau golau'n tywynnu: lampau, lafa, teleportwyr, gwreichion a ffrwydradau; mae Gosodiadau llewyrch yn ei addasu
 
 @ Lights from rockets, muzzle flashes and explosions brighten nearby walls
 cy Mae golau rocedi, fflachiadau tanio a ffrwydradau'n goleuo waliau cyfagos
@@ -1651,6 +1681,9 @@ cy Disodli'r gronynnau dot clasurol â gwreichion disglair, mwg a gwaed; mae mod
 
 @ Resolution and detail inside portal and teleporter views; lower tiers trim nested effects
 cy Cydraniad a manylder y tu mewn i olygfeydd pyrth a theleportwyr; mae lefelau is yn tocio effeithiau nythog
+
+@ Resolution of the glow: low is cheaper and softer
+cy Cydraniad y llewyrch: mae isel yn rhatach ac yn feddalach
 
 @ Rippling light patterns on surfaces under water and slime
 cy Patrymau golau crychlyd ar arwynebau o dan ddŵr a llysnafedd

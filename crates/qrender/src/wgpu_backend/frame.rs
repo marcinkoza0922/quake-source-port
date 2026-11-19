@@ -145,12 +145,13 @@ impl Renderer {
         let depth_view = depth.create_view(&Default::default());
         let ao = self.ssao.map(|q| self.create_ao_targets(q, scene, ms_view.as_ref().unwrap_or(&color_view), &depth_view));
         let vel = self.mblur.map(|q| self.create_vel_target(q, scene, &depth_view));
+        let bloom = self.bloom.and_then(|q| self.create_bloom_targets(q, scene, &color_view));
         let soft_group = self.dev.create_bind_group(&wgpu::BindGroupDescriptor {
             label: None,
             layout: &self.pipes.scene.fx.soft_bgl,
             entries: &[wgpu::BindGroupEntry { binding: 0, resource: wgpu::BindingResource::TextureView(&depth_view) }],
         });
-        self.targets = Some(Targets { scene, color, color_view, ms_view, depth_view, ao, soft_group, vel, out });
+        self.targets = Some(Targets { scene, color, color_view, ms_view, depth_view, ao, soft_group, vel, bloom, out });
         self.frame_ready = false;
     }
 
@@ -181,9 +182,14 @@ impl Renderer {
             self.needs_resize = true;
         }
         let msaa = if fr.settings.msaa > 1 { MSAA_SAMPLES } else { 1 };
-        if msaa != self.msaa {
+        let bloom = (fr.settings.bloom > 0.0).then(|| fr.settings.bloom_quality.min(1));
+        if msaa != self.msaa || bloom != self.bloom {
             self.msaa = msaa;
-            self.pipes.set_samples(&self.dev, msaa);
+            self.bloom = bloom;
+            self.pipes.set_scene(&self.dev, msaa, bloom.is_some());
+            if bloom.is_some() && self.bloom_pipes.is_none() {
+                self.bloom_pipes = Some(super::bloom::BloomPipes::new(&self.dev, &self.pipes.draw_bgl));
+            }
             self.needs_resize = true;
         }
         let ssao = (fr.settings.ssao > 0.0).then(|| fr.settings.ssao_quality.min(2));
@@ -243,10 +249,12 @@ impl Renderer {
         let (tw, th) = self.targets.as_ref().map_or((w, h), |t| t.scene);
         // blur length in target uv: velocity is in view uv units
         let mb = if lists.views.iter().any(|v| !v.vel.is_empty()) { self.motion.scale } else { 0.0 };
+        let (bloom_passes, bloom_post) = self.bloom_views(&mut lists, st);
         let post: Vec<DrawU> = lists
             .views
             .iter()
-            .map(|v| {
+            .enumerate()
+            .map(|(k, v)| {
                 let ([x, y], [sw, sh]) = (v.ofs, v.scene);
                 let pv = PostView {
                     blend: v.blend,
@@ -254,6 +262,7 @@ impl Renderer {
                     uv: [x as f32 / tw as f32, y as f32 / th as f32, (x + sw) as f32 / tw as f32, (y + sh) as f32 / th as f32],
                     mb: [mb * sw as f32 / tw as f32, mb * sh as f32 / th as f32],
                     speed_blur: v.speed_blur,
+                    bloom: bloom_post.get(k).map_or(([0.0; 4], 0.0), |b| (b.uv, b.amount)),
                 };
                 post_draw(st, &pv, [w, h], self.render_scale, fr.time)
             })
@@ -279,7 +288,7 @@ impl Renderer {
             self.ensure_sky();
         }
         self.upload(&lists, &ui_v);
-        let result = self.encode(&lists, &post_du, &ao_views, ui_du, &ui_batches);
+        let result = self.encode(&lists, &post_du, &ao_views, &bloom_passes, ui_du, &ui_batches);
         self.bufs.lists = lists;
         result
     }

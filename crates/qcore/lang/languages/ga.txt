@@ -163,6 +163,21 @@ ga Cáilíocht na Fola
 @ Blood Splatter Settings
 ga Socruithe Steallta Fola
 
+@ Bloom
+ga Lonradh
+
+@ Bloom Intensity
+ga Déine lonraidh
+
+@ Bloom Quality
+ga Cáilíocht lonraidh
+
+@ Bloom Settings
+ga Socruithe lonraidh
+
+@ Bloom Size
+ga Méid lonraidh
+
 @ Blue
 ga Gorm
 
@@ -174,6 +189,9 @@ ga Treisigh nó gearr ardmhinicíochtaí i ndeicibeilí
 
 @ Boost or cut low frequencies in decibels
 ga Treisigh nó gearr ísealmhinicíochtaí i ndeicibeilí
+
+@ Bright Surfaces
+ga Dromchlaí geala
 
 @ Brightness
 ga Gile
@@ -1385,6 +1403,9 @@ ga Railgun i stíl Quake III: urchar a théann trí gach namhaid ar a líne, 2 c
 @ A Zelda-style hookshot: fire sends a chain hook out; it latches onto hookable surfaces or enemies and reels you in; fire again to let go
 ga Crúca i stíl Zelda: seolann lámhach crúca slabhra amach; greamaíonn sé de dhromchlaí oiriúnacha nó de naimhde agus tarraingíonn sé isteach thú; lámhach arís chun scaoileadh
 
+@ Also make bright walls and sky glow, like DarkPlaces; 0 keeps the glow to light sources
+ga Lonraíonn ballaí geala agus an spéir freisin, cosúil le DarkPlaces; coinníonn 0 an lonradh ag foinsí solais
+
 @ Also translates the engine's console messages; off keeps them in English
 ga Aistríonn sé teachtaireachtaí consóil an innill freisin; má tá sé as, fanann siad i mBéarla
 
@@ -1496,8 +1517,14 @@ ga Coinnigh lámhach agus scuab an crosribe thar arrachtaí chun iad a chur sa s
 @ Hold: keep Lock-on held. Toggle: press Auto-aim Toggle to enable automatic acquisition. Click look stick to switch targets
 ga Coinnigh: coinnigh Glasáil brúite. Scoránaigh: brúigh Scoránaigh uathaimsiú chun aimsiú uathoibríoch a chumasú. Cliceáil an maide amhairc chun sprioc a athrú
 
+@ How bright the glow is
+ga Cé chomh geal is atá an lonradh
+
 @ How close an enemy must be to the crosshair for automatic acquisition in toggle mode (degrees)
 ga Cé chomh gar don chrosribe a chaithfidh namhaid a bheith le haimsiú uathoibríoch sa mhód scoránaithe (céimeanna)
+
+@ How far the glow spreads around a light
+ga Cé chomh fada a scaipeann an lonradh timpeall solais
 
 @ How far the view tilts up and down when you tilt the controller (pitch axis)
 ga An méid a chlaonann an radharc suas agus síos nuair a chlaonann tú an rialtán (ais tuinairde)
@@ -1534,6 +1561,9 @@ ga Tumtha: ní thaispeántar é ach ar feadh cúpla soicind nuair a athraíonn a
 
 @ Keeps textures sharp on floors and walls seen at steep angles
 ga Coinníonn sé uigeachtaí géar ar urláir agus ballaí a fheictear ó uillinneacha géara
+
+@ Light sources glow: lamps, lava, teleporters, sparks and explosions; Bloom Settings tunes it
+ga Lonraíonn foinsí solais: lampaí, laibhe, teileapórtálaithe, spréacha agus pléascanna; coigeartaíonn Socruithe lonraidh é
 
 @ Lights from rockets, muzzle flashes and explosions brighten nearby walls
 ga Soilsíonn solas ó roicéid, ó splancanna béil agus ó phléascanna na ballaí in aice láimhe
@@ -1651,6 +1681,9 @@ ga Cuireann sé drithlí lonracha, deatach agus fuil in ionad na gcáithníní p
 
 @ Resolution and detail inside portal and teleporter views; lower tiers trim nested effects
 ga Taifeach agus mionsonraí laistigh de radharcanna tairseach agus teileapórtálaithe; baineann leibhéil níos ísle maisíochtaí neadaithe
+
+@ Resolution of the glow: low is cheaper and softer
+ga Taifeach an lonraidh: tá íseal níos saoire agus níos boige
 
 @ Rippling light patterns on surfaces under water and slime
 ga Patrúin solais chuilitheacha ar dhromchlaí faoi uisce agus faoi shláim

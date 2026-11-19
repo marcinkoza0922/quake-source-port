@@ -337,6 +337,8 @@ pub(super) const ENHANCEMENTS: &[Item] = &[
     Item::Choice { label: "Motion Blur Quality", cvar: "r_motionblur_quality", choices: MOTIONBLUR_QUALITY },
     slider("Motion Blur Amount", "r_motionblur_amount", 0.1, 2.0, 0.1),
     toggle("Speed Blur", "r_speedblur"),
+    toggle("Bloom", "r_bloom"),
+    Item::Sub { label: "Bloom Settings", page: Page::Bloom },
     Item::Sub { label: "Screen Shader", page: Page::ScreenShader },
     toggle("Enhanced FX", "r_enhancedfx"),
     Item::Sub { label: "FX Settings", page: Page::Impacts },
@@ -374,6 +376,16 @@ pub(super) const WATER: &[Item] = &[
     toggle("Splashes", "r_watersplash"),
     toggle("Caustics", "r_watercaustics"),
     slider("Caustic Intensity", "r_watercaustics_amount", 0.1, 2.0, 0.1),
+];
+
+pub(super) const BLOOM_QUALITY: &[(&str, f32)] = &[("low", 0.0), ("high", 1.0)];
+
+/// Reached from Enhancements; unavailable while `r_bloom` is off.
+pub(super) const BLOOM: &[Item] = &[
+    Item::Choice { label: "Bloom Quality", cvar: "r_bloom_quality", choices: BLOOM_QUALITY },
+    slider("Bloom Intensity", "r_bloom_intensity", 0.25, 3.0, 0.25),
+    slider("Bloom Size", "r_bloom_size", 0.5, 2.0, 0.1),
+    slider("Bright Surfaces", "r_bloom_bright", 0.0, 1.0, 0.1),
 ];
 
 pub(super) const DEBRIS_QUALITY: &[(&str, f32)] = &[("low", 0.0), ("medium", 1.0), ("high", 2.0)];
