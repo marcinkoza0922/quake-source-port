@@ -11,6 +11,8 @@ pub mod draw;
 mod draw_more;
 pub mod editor;
 mod editor_draw;
+mod editor_mouse;
+mod editor_pad;
 mod editor_popup;
 mod editor_rows;
 pub mod kind;

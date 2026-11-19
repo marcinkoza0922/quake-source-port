@@ -59,19 +59,27 @@ e.g. `health@bl,a0 clock@tr,a3,fm`. Unknown kinds and fields are skipped (`layou
   screen edges or another element's edges). The result is cached per layout, sizes and
   screen. A full-width status bar touching the bottom makes the 3D view end above it
   (`reserve_bottom` → `View::reserve_bottom`).
-- **Editor** (`editor.rs`, `editor_rows.rs`, `editor_popup.rs`, `editor_draw.rs`): a
-  dialog that can be dragged by its title bar but not closed. It lists every element with
-  scale and offset, buttons (Add, Delete, Reset to Defaults with a confirm, Done), and the
-  selected element's settings: font, size, scale, opacity, visibility, background, text
-colour (values and numbers, tinting the big digit pictures; alerts stay red, owned ammo
-types gold; the personal best keeps `hud_pb_color`), label colour ("FPS", "K", ...), the
-  position button (a 3×3 grid that snaps to an anchor with no offset), X and Y (typed or
-  stepped) and the kind's options, with help under the dialog. Elements on screen can be
-  clicked and dragged. While editing, the HUD is a preview with a sample player
-  (`sample_client`), the selected element gives way when elements would overlap, and the
-  settled offsets are written back (`Hud::settled`), so the dialog shows where things
-  really are. Keyboard and pad: arrows move and step, Enter/A acts, Esc/B leaves,
-  Del/X deletes, Ins/Y adds.
+- **Editor** (`editor.rs`, `editor_mouse.rs`, `editor_pad.rs`, `editor_rows.rs`, `editor_popup.rs`, `editor_draw.rs`): a
+  dialog that can be dragged by its title bar and collapsed to a single title bar via the
+  hamburger button in the top-right corner (or RB on a controller). The element list and
+  selected element's config options panels use distinct background tints. It lists every
+  element with scale and offset, buttons (Add, Delete, Reset to Defaults with a confirm,
+  Done), and the selected element's settings: font, size, scale, opacity, visibility,
+  background, text colour (values and numbers, tinting the big digit pictures; alerts stay
+  red, owned ammo types gold; the personal best keeps `hud_pb_color`), label colour
+  ("FPS", "K", ...), the position button (a 3×3 grid that snaps to an anchor with no
+  offset), X and Y (typed or stepped) and the kind's options, with help under the dialog.
+  Elements on screen can be clicked and dragged. While editing, the HUD is a preview with
+  a sample player (`sample_client`), the selected element gives way when elements would
+  overlap, and the settled offsets are written back (`Hud::settled`), so the dialog shows
+  where things really are. Keyboard: arrows move and step, Enter acts, Esc leaves, Del
+  deletes, Ins adds. Controller: left stick / D-pad navigates the element list (or config
+  options); A selects an element to move it on screen with the left stick or D-pad (A
+  confirms, B cancels); X toggles into/out of the element's config options; right stick
+  moves the editor panel; Y adds, LB deletes, RB collapses/expands, LT/RT scales,
+  View/Back resets (with confirm), Menu/Start finishes, and B backs out/exits; when using a
+  controller, button glyphs draw directly on the dialog buttons, title-bar collapse toggle,
+  and options header, with a single-row gamepad hint bar along the bottom.
 - **Presets**: HUD → HUD Preset (`hud_preset`, archived: 0 modern, default; 1 classic;
   2 custom), above Edit HUD. Picking modern or classic sets `hud_layout` to `default` or
   `classic`, which the host turns into that layout (`Layout::default_layout`, the old

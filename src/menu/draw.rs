@@ -9,7 +9,7 @@ impl Menu {
         sync_addon_binds(cv, self.game_running);
         // the HUD editor shows the HUD as it is, under its dialog
         if self.screen == Screen::HudEditor {
-            return self.hud_edit.draw(c, cv);
+            return self.hud_edit.draw(c, cv, self.pad_ui, &self.glyphs);
         }
         c.fade_screen();
         let base_scale = c.scale;

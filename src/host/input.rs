@@ -313,6 +313,7 @@ impl Host {
         self.menu.custom_running = self.server.active() && self.server.core.custom;
         self.menu.pad_ui = self.pad_ui();
         self.menu.glyphs = self.glyphs();
+        self.menu.hud_edit.pad_ui = self.menu.pad_ui;
         // headless runs are tools and tests: never block them on the pop-up
         if !self.headless {
             self.menu.show_pending_preset();
@@ -320,7 +321,7 @@ impl Host {
         if self.menu.active() {
             self.menu.bindings.clone_from(&self.input.bindings);
         }
-        self.input.capture = self.menu.capturing();
+        self.input.capture = self.menu.capturing() || (self.menu.screen == Screen::HudEditor && self.menu.hud_edit.moving());
     }
 
     /// Gamepad auto-repeat for held menu directions (keyboards repeat themselves).
@@ -330,9 +331,13 @@ impl Host {
             self.nav_hold = None;
             return;
         }
-        let held = [K_DPAD_UP, K_DPAD_DOWN, K_DPAD_LEFT, K_DPAD_RIGHT, K_UPARROW, K_DOWNARROW, K_LEFTARROW, K_RIGHTARROW]
-            .into_iter()
-            .find(|&k| self.input.key_down(k));
+        let hud_moving = self.menu.screen == Screen::HudEditor && self.menu.hud_edit.moving();
+        let keys: &[i32] = if hud_moving {
+            &[K_DPAD_UP, K_DPAD_DOWN, K_DPAD_LEFT, K_DPAD_RIGHT]
+        } else {
+            &[K_DPAD_UP, K_DPAD_DOWN, K_DPAD_LEFT, K_DPAD_RIGHT, K_UPARROW, K_DOWNARROW, K_LEFTARROW, K_RIGHTARROW]
+        };
+        let held = keys.iter().copied().find(|&k| self.input.key_down(k));
         match (held, self.nav_hold) {
             (None, _) => self.nav_hold = None,
             (Some(k), Some((h, t))) if h == k => {

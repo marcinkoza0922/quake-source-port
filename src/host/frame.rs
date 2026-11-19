@@ -201,6 +201,10 @@ impl Host {
         self.sync_menu_ui();
         self.sync_menu_music();
         self.menu_nav_repeat();
+        if self.menu.screen == Screen::HudEditor && self.input.gamepad_connected && self.cv("joy_enable") != 0.0 {
+            let (ls, rs) = self.input.sticks();
+            self.menu.hud_edit.pad_stick(ls, rs, dt as f32, &mut self.server.core.cvars);
+        }
 
         self.prof_mark(0);
         // input (every frame, for smooth view angles)

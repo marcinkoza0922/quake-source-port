@@ -79,3 +79,39 @@ fn addon_controller_events_navigate_edit_and_switch_prompts() {
     press(&mut h, GamepadButton::South);
     assert_eq!(h.menu.screen, Screen::None);
 }
+
+#[test]
+fn hud_editor_controller_events_and_button_glyphs() {
+    let mut fs = qcore::fs::Fs::new(qcore::fs::Fs::default_basedir());
+    if !fs.add_game_dir("id1") { return; }
+    let Some(pal) = fs.open("gfx/palette.lmp").and_then(|d| qformats::image::parse_palette(&d).ok()) else { return };
+    let Ok(renderer) = Renderer::headless(1280, 720, &pal) else { return };
+    let mut h = Host::new(fs, renderer, None, Vec::new());
+    h.headless = true;
+    h.exec_line("menu_hudedit");
+    h.sync_key_dest();
+    h.handle_event(HostEvent::Input(InputEvent::GamepadConnected(true)));
+    press(&mut h, GamepadButton::DpadDown);
+    assert!(h.menu.pad_ui);
+    assert_eq!(h.menu.hud_edit.sel, 1);
+    capture(&mut h, "hudedit-pad-xbox");
+    // PlayStation glyphs fit on the buttons too
+    h.exec_line("joy_glyphs 2");
+    h.sync_menu_ui();
+    capture(&mut h, "hudedit-pad-ps");
+    h.exec_line("joy_glyphs 1");
+    h.sync_menu_ui();
+    // A enters Move mode; capture; B cancels
+    press(&mut h, GamepadButton::South);
+    assert!(h.menu.hud_edit.moving());
+    capture(&mut h, "hudedit-pad-moving");
+    press(&mut h, GamepadButton::East);
+    assert!(!h.menu.hud_edit.moving());
+    // RB collapses; capture; RB expands
+    press(&mut h, GamepadButton::RightShoulder);
+    capture(&mut h, "hudedit-pad-collapsed");
+    press(&mut h, GamepadButton::RightShoulder);
+    // Start exits
+    press(&mut h, GamepadButton::Start);
+    assert_eq!(h.menu.screen, Screen::OptionsPage(crate::menu::Page::Hud));
+}
