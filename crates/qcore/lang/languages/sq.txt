@@ -1367,6 +1367,84 @@ sq Çdo sipërfaqe metalike e pranon spinën, jo vetëm elektronika
 @ Lightning damage every tenth of a second (the stock lightning gun does 30)
 sq Dëmi i rrufesë çdo të dhjetën e sekondës (arma e zakonshme e rrufeve bën 30)
 
+# Demos and video recording.
+@ AV1 (MP4)
+sq AV1 (MP4)
+
+@ Auto-Demo Slots
+sq Vende për demo automatike
+
+@ Auto-Record Demos
+sq Regjistro demot automatikisht
+
+@ Frame Rate
+sq Shpejtësia e kuadrove
+
+@ H.264 (MP4)
+sq H.264 (MP4)
+
+@ H.265 (MP4)
+sq H.265 (MP4)
+
+@ Pause at End
+sq Pauzë në fund
+
+@ Playback Bar
+sq Shiriti i luajtjes
+
+@ Quality
+sq Cilësia
+
+@ Record Audio
+sq Regjistro zërin
+
+@ VP9 (WebM)
+sq VP9 (WebM)
+
+@ Video Format
+sq Formati i videos
+
+@ Video Recording
+sq Regjistrimi i videos
+
+@ ffmpeg Program
+sq Programi ffmpeg
+
+@ small file
+sq skedar i vogël
+
+@ unlimited
+sq pa kufi
+
+# Demos and video recording.
+@ 1080p
+sq 1080p
+
+@ 1440p
+sq 1440p
+
+@ 4K
+sq 4K
+
+@ 720p
+sq 720p
+
+@ Destination
+sq Destinacioni
+
+@ Export Highlighted Clip
+sq Eksporto klipin e theksuar
+
+@ Export Whole Demo
+sq Eksporto tërë demon
+
+@ Same as window
+sq Si dritarja
+
+# Demos and video recording.
+@ GPU Encoding
+sq Kodim me GPU
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1789,6 +1867,42 @@ sq Cilat armë shkaktojnë ngrirjen; trupazi përfshin sëpatën dhe çdo armë 
 
 @ Your own rockets and grenades don't hurt you; rocket jumps still work
 sq Raketat dhe granatat e tua nuk të dëmtojnë; kërcimet me raketë funksionojnë ende
+
+# Demos and video recording.
+@ A demo you play stops on its last frame instead of returning to the menu, so you can rewind
+sq Një demo që luan ndalon në kuadrin e fundit në vend që të kthehet te menyja, që ta kthesh mbrapsht
+
+@ Frames per second of recorded video; the game runs at exactly this rate while recording
+sq Kuadro në sekondë të videos; gjatë regjistrimit loja ecën saktësisht me këtë shpejtësi
+
+@ High keeps the most detail; small file saves disk space
+sq E larta ruan më shumë detaje; skedari i vogël kursen hapësirë në disk
+
+@ How many automatic demos are kept before the oldest is deleted; kept demos never count
+sq Sa demo automatike mbahen para se të fshihet më e vjetra; demot e mbajtura nuk llogariten
+
+@ Records every level you play to the Automatic list in Main Menu > Demos; keep the ones you want, the oldest are replaced
+sq Regjistron çdo nivel që luan në listën Automatike te Menyja kryesore > Demot; mbaj ato që do, më të vjetrat zëvendësohen
+
+@ Records game sound and music into the video
+sq Regjistron tingujt dhe muzikën e lojës në video
+
+@ Shows the playback bar (time, speed, timeline) after a control key, always, or never
+sq Shfaq shiritin e luajtjes (kohë, shpejtësi, vijë kohore) pas një tasti kontrolli, gjithmonë ose kurrë
+
+@ Video format; needs ffmpeg with that encoder, else frames are saved as PNG images
+sq Formati i videos; kërkon ffmpeg me atë kodues, përndryshe kuadrot ruhen si imazhe PNG
+
+# Demos and video recording.
+@ No clip highlighted: while the demo plays, drag across the timeline or press I and O
+sq Asnjë klip i theksuar: gjatë demos tërhiq mbi vijën kohore ose shtyp I dhe O
+
+@ Video size; frames are scaled from the window size (bars keep the shape), so a larger size adds no detail
+sq Madhësia e videos; kuadrot shkallëzohen nga madhësia e dritares (me shirita për të ruajtur formën), ndaj madhësia më e madhe nuk shton detaje
+
+# Demos and video recording.
+@ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
+sq Kodon në kartën grafike (NVIDIA NVENC, AMD ose Intel përmes VA-API, AMF ose Quick Sync, Apple VideoToolbox) kur ffmpeg mund ta përdorë, duke e lënë procesorin të lirë; përndryshe kodon procesori
 
 # ==== ui.txt ====
 
@@ -2540,6 +2654,142 @@ sq Ruajtje
 @ Alt Fire on a glowing electronics panel within reach plugs one end in; the other end then shoots lightning with unlimited ammunition. The cable tethers you to the socket and catches on corners. Alt Fire or switching weapons yanks it out.
 sq Zjarri dytësor mbi një panel elektronik që shkëlqen brenda mundësisë fut njërin skaj; tjetri pastaj qëllon rrufe me municion të pakufizuar. Kabllo të lidh pas prizës dhe ngec në qoshe. Zjarri dytësor ose ndërrimi i armës e shkul.
 
+@ From the game folder
+sq Nga dosja e lojës
+
+@ From ironwail
+sq Nga ironwail
+
+@ From the 2021 re-release
+sq Nga ribotimi i 2021
+
+# Demos and video recording.
+@ Automatic demos are off. Turn on Auto-Record Demos in Options > Demos to record every level you play.
+sq Demot automatike janë të fikura. Ndiz Regjistro demot automatikisht te Opsionet > Demot për të regjistruar çdo nivel që luan.
+
+@ Automatic: replaced when the slots are full
+sq Automatike: zëvendësohet kur vendet janë plot
+
+@ Delete {}?
+sq Të fshihet {}?
+
+@ Demos
+sq Demot
+
+@ End of demo
+sq Fundi i demos
+
+@ Export Video
+sq Eksporto video
+
+@ Fast forward
+sq Përpara shpejt
+
+@ Fast forward {}x
+sq Përpara {}x
+
+@ Indexing...
+sq Po indeksohet...
+
+@ K keep
+sq K mbaj
+
+@ Keep
+sq Mbaj
+
+@ Length: {}
+sq Kohëzgjatja: {}
+
+@ Map: {}
+sq Harta: {}
+
+@ No automatic demos yet. Each level you play is recorded here.
+sq Ende nuk ka demo automatike. Çdo nivel që luan regjistrohet këtu.
+
+@ No saved demos yet. Record one with the console command 'record <name>', or keep an automatic demo.
+sq Ende nuk ka demo të ruajtura. Regjistro një me komandën e konsolës 'record <name>', ose mbaj një demo automatike.
+
+@ Pause
+sq Pauzë
+
+@ Paused
+sq Në pauzë
+
+@ Play {}x
+sq Luhet {}x
+
+@ Quake - exporting video {}%
+sq Quake - po eksportohet video {}%
+
+@ Recorded: {}
+sq Regjistruar: {}
+
+@ Rewind
+sq Kthe mbrapsht
+
+@ Rewind {}x
+sq Mbrapsht {}x
+
+@ Size: {} KB
+sq Madhësia: {} KB
+
+@ Skip 10 s
+sq Kapërce 10 s
+
+@ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
+sq Hapësirë pauzë | Majtas/Djathtas lëviz | Lart/Poshtë shpejtësi | PgUp/PgDn 10 s | I/O shenjë | E eksporto
+
+@ Speed
+sq Shpejtësia
+
+@ Switch List
+sq Ndrysho listën
+
+@ This can't be undone.
+sq Kjo nuk mund të zhbëhet.
+
+@ While a demo plays: Space pauses, the arrows scrub and change speed, I and O mark a clip and E exports it.
+sq Gjatë një demoje: Hapësira bën pauzë, shigjetat lëvizin dhe ndryshojnë shpejtësinë, I dhe O shënojnë një klip dhe E e eksporton.
+
+@ Saved
+sq Të ruajtura
+
+@ Automatic
+sq Automatike
+
+# Demos and video recording.
+@ Export
+sq Eksporto
+
+@ H hide
+sq H fshih
+
+@ Hide
+sq Fshih
+
+@ Show
+sq Shfaq
+
+# Demos and video recording.
+@ Demo: {}
+sq Demo: {}
+
+@ Highlighted clip: {} to {} ({})
+sq Klipi i theksuar: {} deri {} ({})
+
+@ Show controls
+sq Shfaq kontrollet
+
+# Demos and video recording.
+@ About {} left
+sq Mbeten rreth {}
+
+@ Exporting video
+sq Po eksportohet videoja
+
+@ Preparing...
+sq Po përgatitet...
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3053,11 +3303,41 @@ sq Vetëm serveri mund të bëjë changelevel
 @ {} renamed to {}
 sq {} u riemërua në {}
 
-@ From the game folder
-sq Nga dosja e lojës
+@ Already recording video.
+sq Videoja po regjistrohet tashmë.
 
-@ From ironwail
-sq Nga ironwail
+@ Export cancelled.
+sq Eksportimi u anulua.
 
-@ From the 2021 re-release
-sq Nga ribotimi i 2021
+@ Exporting {} to video
+sq Po eksportohet {} si video
+
+@ Kept demo {}
+sq Demoja u mbajt: {}
+
+@ No auto-demo to keep.
+sq Nuk ka demo automatike për t'u mbajtur.
+
+@ Not playing a demo.
+sq Nuk po luhet asnjë demo.
+
+@ Not recording video.
+sq Nuk po regjistrohet video.
+
+@ Recording video to {}
+sq Po regjistrohet video në {}
+
+@ This demo is already saved.
+sq Kjo demo është ruajtur tashmë.
+
+@ This level's demo will be kept when it ends.
+sq Demoja e këtij niveli do të mbahet kur të përfundojë.
+
+@ Video capture is not available in this build.
+sq Regjistrimi i videos nuk ofrohet në këtë version.
+
+@ Wrote {} ({}s)
+sq U shkrua {} ({} s)
+
+@ ffmpeg not found: wrote {} PNG frames and a WAV to {}
+sq ffmpeg nuk u gjet: u shkruan {} kuadro PNG dhe një WAV në {}

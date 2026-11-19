@@ -156,6 +156,27 @@ efek partikel yang tidak bisa ditampilkan port lain, versi lengkapnya
 disimpan sebagai `<nama>.qsd` (`playdemo <nama>.qsd`). `demo_convert <nama>`
 mengonversi demo lama.
 
+Menu utama → Demo menampilkan demo tersimpan Anda dan, jika Opsi → Demo →
+Rekam demo otomatis menyala, demo otomatis dari setiap level yang Anda
+mainkan; yang tertua diganti saat slot penuh. K menyimpan satu, E
+mengekspornya ke video, dan Del menghapusnya. Laporan bug menyertakan demo
+otomatis level saat ini.
+
+Saat demo diputar, Spasi menjeda, menahan Kiri atau Kanan memutar mundur
+atau maju cepat, Atas dan Bawah mengubah kecepatan, PgUp dan PgDn melompat
+10 detik, serta Home dan End menuju awal dan peta berikutnya. I dan O
+menandai klip; E mengekspornya, atau seluruh demo, ke folder `videos`.
+Kontrol tetap di layar; H atau Sembunyikan menyembunyikannya, dan menunjuk
+tepi bawah memunculkan strip yang mengembalikannya. Klik tombolnya, klik
+linimasa untuk melompat ke sana, atau seret di atasnya untuk menandai klip;
+Ekspor menanyakan laju bingkai, ukuran, format, dan file, serta apakah
+mengekspor klip yang ditandai atau seluruh demo.
+
+`capture` memulai dan menghentikan perekaman video saat bermain. Laju
+bingkai, format, dan kualitas ada di Opsi → Demo → Perekaman video. Video
+memerlukan ffmpeg; tanpanya bingkai disimpan sebagai gambar PNG dengan file
+WAV.
+
 ## Aksesibilitas
 
 Options → Aksesibilitas:

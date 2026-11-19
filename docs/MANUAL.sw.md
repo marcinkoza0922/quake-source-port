@@ -164,6 +164,27 @@ athari za chembechembe ambazo ports nyingine haziwezi kuonyesha, toleo
 kamili huhifadhiwa kama `<name>.qsd` (`playdemo <name>.qsd`).
 `demo_convert <name>` hubadilisha demo ya zamani.
 
+Menyu kuu → Demo huonyesha demo ulizohifadhi na, Chaguo → Demo → Rekodi demo
+kiotomatiki ikiwa imewashwa, demo ya kiotomatiki ya kila kiwango
+unachocheza; za zamani zaidi hubadilishwa nafasi zikijaa. K hubakiza moja, E
+huihamisha kuwa video na Del huifuta. Ripoti za hitilafu hujumuisha demo ya
+kiotomatiki ya kiwango cha sasa.
+
+Demo inapocheza, Nafasi husitisha, kushikilia Kushoto au Kulia hurudisha
+nyuma au kusonga mbele haraka, Juu na Chini hubadili kasi, PgUp na PgDn
+huruka sekunde 10, na Home na End huenda mwanzo na kwenye ramani inayofuata.
+I na O huweka alama ya kipande; E hukihamisha, au demo nzima, kwenye folda
+ya `videos`. Vidhibiti hubaki kwenye skrini; H au Ficha huvificha, na
+kuelekeza ukingo wa chini huonyesha ukanda unaovirudisha. Bofya vitufe,
+bofya ratiba ili kuruka hapo, au buruta juu yake ili kuweka alama ya
+kipande; Hamisha huuliza kasi ya fremu, ukubwa, muundo na faili, na kama
+kuhamisha kipande kilichowekwa alama au demo nzima.
+
+`capture` huanzisha na kusimamisha kurekodi video unapocheza. Kasi ya fremu,
+muundo na ubora vipo katika Chaguo → Demo → Kurekodi video. Video zinahitaji
+ffmpeg; bila hiyo fremu huhifadhiwa kama picha za PNG pamoja na faili ya
+WAV.
+
 ## Ufikivu
 
 Options → Ufikivu:

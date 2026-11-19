@@ -1367,6 +1367,84 @@ pt-BR Qualquer superfície metálica aceita o plugue, não só a eletrônica
 @ Lightning damage every tenth of a second (the stock lightning gun does 30)
 pt-BR Dano do raio a cada décimo de segundo (o canhão de raios normal causa 30)
 
+# Demos and video recording.
+@ AV1 (MP4)
+pt-BR AV1 (MP4)
+
+@ Auto-Demo Slots
+pt-BR Espaços para demos automáticas
+
+@ Auto-Record Demos
+pt-BR Gravar demos automaticamente
+
+@ Frame Rate
+pt-BR Quadros por segundo
+
+@ H.264 (MP4)
+pt-BR H.264 (MP4)
+
+@ H.265 (MP4)
+pt-BR H.265 (MP4)
+
+@ Pause at End
+pt-BR Pausar no fim
+
+@ Playback Bar
+pt-BR Barra de reprodução
+
+@ Quality
+pt-BR Qualidade
+
+@ Record Audio
+pt-BR Gravar áudio
+
+@ VP9 (WebM)
+pt-BR VP9 (WebM)
+
+@ Video Format
+pt-BR Formato de vídeo
+
+@ Video Recording
+pt-BR Gravação de vídeo
+
+@ ffmpeg Program
+pt-BR Programa ffmpeg
+
+@ small file
+pt-BR arquivo pequeno
+
+@ unlimited
+pt-BR ilimitado
+
+# Demos and video recording.
+@ 1080p
+pt-BR 1080p
+
+@ 1440p
+pt-BR 1440p
+
+@ 4K
+pt-BR 4K
+
+@ 720p
+pt-BR 720p
+
+@ Destination
+pt-BR Destino
+
+@ Export Highlighted Clip
+pt-BR Exportar trecho destacado
+
+@ Export Whole Demo
+pt-BR Exportar a demo inteira
+
+@ Same as window
+pt-BR Como a janela
+
+# Demos and video recording.
+@ GPU Encoding
+pt-BR Codificação na GPU
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1789,6 +1867,42 @@ pt-BR Quais armas acionam o congelamento; corpo a corpo inclui o machado e qualq
 
 @ Your own rockets and grenades don't hurt you; rocket jumps still work
 pt-BR Seus próprios foguetes e granadas não ferem você; rocket jumps continuam funcionando
+
+# Demos and video recording.
+@ A demo you play stops on its last frame instead of returning to the menu, so you can rewind
+pt-BR Uma demo que você reproduz para no último quadro em vez de voltar ao menu, para você poder retroceder
+
+@ Frames per second of recorded video; the game runs at exactly this rate while recording
+pt-BR Quadros por segundo do vídeo; durante a gravação o jogo roda exatamente nessa taxa
+
+@ High keeps the most detail; small file saves disk space
+pt-BR Alta mantém mais detalhes; arquivo pequeno economiza espaço em disco
+
+@ How many automatic demos are kept before the oldest is deleted; kept demos never count
+pt-BR Quantas demos automáticas são mantidas antes de excluir a mais antiga; demos guardadas não contam
+
+@ Records every level you play to the Automatic list in Main Menu > Demos; keep the ones you want, the oldest are replaced
+pt-BR Grava cada fase que você jogar na lista Automáticas em Menu principal > Demos; guarde as que quiser, as mais antigas são substituídas
+
+@ Records game sound and music into the video
+pt-BR Grava os sons e a música do jogo no vídeo
+
+@ Shows the playback bar (time, speed, timeline) after a control key, always, or never
+pt-BR Mostra a barra de reprodução (tempo, velocidade, linha do tempo) após uma tecla de controle, sempre ou nunca
+
+@ Video format; needs ffmpeg with that encoder, else frames are saved as PNG images
+pt-BR Formato de vídeo; requer ffmpeg com esse codificador, senão os quadros são salvos como imagens PNG
+
+# Demos and video recording.
+@ No clip highlighted: while the demo plays, drag across the timeline or press I and O
+pt-BR Nenhum trecho destacado: durante a demo, arraste sobre a linha do tempo ou aperte I e O
+
+@ Video size; frames are scaled from the window size (bars keep the shape), so a larger size adds no detail
+pt-BR Tamanho do vídeo; os quadros são redimensionados a partir do tamanho da janela (com barras para manter a forma), então um tamanho maior não acrescenta detalhes
+
+# Demos and video recording.
+@ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
+pt-BR Codifica na placa de vídeo (NVIDIA NVENC, AMD ou Intel via VA-API, AMF ou Quick Sync, Apple VideoToolbox) quando o ffmpeg consegue usá-la, deixando o processador livre; senão, o processador codifica
 
 # ==== ui.txt ====
 
@@ -2540,6 +2654,142 @@ pt-BR Jogo salvo
 @ Alt Fire on a glowing electronics panel within reach plugs one end in; the other end then shoots lightning with unlimited ammunition. The cable tethers you to the socket and catches on corners. Alt Fire or switching weapons yanks it out.
 pt-BR O tiro secundário em um painel eletrônico iluminado ao alcance conecta uma ponta; a outra dispara raios com munição ilimitada. O cabo prende você à tomada e enrosca nos cantos. O tiro secundário ou trocar de arma o arranca.
 
+@ From the game folder
+pt-BR Da pasta do jogo
+
+@ From ironwail
+pt-BR Do ironwail
+
+@ From the 2021 re-release
+pt-BR Do relançamento de 2021
+
+# Demos and video recording.
+@ Automatic demos are off. Turn on Auto-Record Demos in Options > Demos to record every level you play.
+pt-BR As demos automáticas estão desligadas. Ative Gravar demos automaticamente em Opções > Demos para gravar cada fase que você jogar.
+
+@ Automatic: replaced when the slots are full
+pt-BR Automática: substituída quando os espaços estão cheios
+
+@ Delete {}?
+pt-BR Excluir {}?
+
+@ Demos
+pt-BR Demos
+
+@ End of demo
+pt-BR Fim da demo
+
+@ Export Video
+pt-BR Exportar vídeo
+
+@ Fast forward
+pt-BR Avançar
+
+@ Fast forward {}x
+pt-BR Avançar {}x
+
+@ Indexing...
+pt-BR Indexando...
+
+@ K keep
+pt-BR K guardar
+
+@ Keep
+pt-BR Guardar
+
+@ Length: {}
+pt-BR Duração: {}
+
+@ Map: {}
+pt-BR Mapa: {}
+
+@ No automatic demos yet. Each level you play is recorded here.
+pt-BR Ainda não há demos automáticas. Cada fase que você jogar é gravada aqui.
+
+@ No saved demos yet. Record one with the console command 'record <name>', or keep an automatic demo.
+pt-BR Ainda não há demos salvas. Grave uma com o comando de console 'record <name>' ou guarde uma demo automática.
+
+@ Pause
+pt-BR Pausa
+
+@ Paused
+pt-BR Pausado
+
+@ Play {}x
+pt-BR Reproduzindo {}x
+
+@ Quake - exporting video {}%
+pt-BR Quake - exportando vídeo {}%
+
+@ Recorded: {}
+pt-BR Gravada: {}
+
+@ Rewind
+pt-BR Retroceder
+
+@ Rewind {}x
+pt-BR Voltar {}x
+
+@ Size: {} KB
+pt-BR Tamanho: {} KB
+
+@ Skip 10 s
+pt-BR Pular 10 s
+
+@ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
+pt-BR Espaço pausa | Esq./Dir. percorrer | Cima/Baixo velocidade | PgUp/PgDn 10 s | I/O marcar | E exportar
+
+@ Speed
+pt-BR Velocidade
+
+@ Switch List
+pt-BR Trocar lista
+
+@ This can't be undone.
+pt-BR Isso não pode ser desfeito.
+
+@ While a demo plays: Space pauses, the arrows scrub and change speed, I and O mark a clip and E exports it.
+pt-BR Durante uma demo: Espaço pausa, as setas percorrem e mudam a velocidade, I e O marcam um trecho e E o exporta.
+
+@ Saved
+pt-BR Salvas
+
+@ Automatic
+pt-BR Automáticas
+
+# Demos and video recording.
+@ Export
+pt-BR Exportar
+
+@ H hide
+pt-BR H ocultar
+
+@ Hide
+pt-BR Ocultar
+
+@ Show
+pt-BR Mostrar
+
+# Demos and video recording.
+@ Demo: {}
+pt-BR Demo: {}
+
+@ Highlighted clip: {} to {} ({})
+pt-BR Trecho destacado: {} a {} ({})
+
+@ Show controls
+pt-BR Mostrar controles
+
+# Demos and video recording.
+@ About {} left
+pt-BR Faltam cerca de {}
+
+@ Exporting video
+pt-BR Exportando vídeo
+
+@ Preparing...
+pt-BR Preparando...
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3053,11 +3303,41 @@ pt-BR Só o servidor pode usar changelevel
 @ {} renamed to {}
 pt-BR {} mudou o nome para {}
 
-@ From the game folder
-pt-BR Da pasta do jogo
+@ Already recording video.
+pt-BR Já está gravando vídeo.
 
-@ From ironwail
-pt-BR Do ironwail
+@ Export cancelled.
+pt-BR Exportação cancelada.
 
-@ From the 2021 re-release
-pt-BR Do relançamento de 2021
+@ Exporting {} to video
+pt-BR Exportando {} para vídeo
+
+@ Kept demo {}
+pt-BR Demo guardada: {}
+
+@ No auto-demo to keep.
+pt-BR Nenhuma demo automática para guardar.
+
+@ Not playing a demo.
+pt-BR Nenhuma demo em reprodução.
+
+@ Not recording video.
+pt-BR Não está gravando vídeo.
+
+@ Recording video to {}
+pt-BR Gravando vídeo em {}
+
+@ This demo is already saved.
+pt-BR Esta demo já está salva.
+
+@ This level's demo will be kept when it ends.
+pt-BR A demo desta fase será guardada quando ela terminar.
+
+@ Video capture is not available in this build.
+pt-BR A captura de vídeo não está disponível nesta versão.
+
+@ Wrote {} ({}s)
+pt-BR Gravado {} ({} s)
+
+@ ffmpeg not found: wrote {} PNG frames and a WAV to {}
+pt-BR ffmpeg não encontrado: {} quadros PNG e um WAV gravados em {}

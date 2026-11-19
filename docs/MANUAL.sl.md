@@ -154,6 +154,27 @@ učinke delcev, ki jih drugi porti ne znajo prikazati, se celotna različica
 ohrani kot `<ime>.qsd` (`playdemo <ime>.qsd`). `demo_convert <ime>`
 pretvori starejši posnetek.
 
+Glavni meni → Posnetki prikaže shranjene posnetke in, ko je vklopljeno
+Možnosti → Posnetki → Samodejno snemaj posnetke, samodejni posnetek vsake
+odigrane ravni; najstarejši se zamenjajo, ko so mesta polna. K obdrži
+posnetek, E ga izvozi v video, Del ga izbriše. Poročila o napakah vsebujejo
+samodejni posnetek trenutne ravni.
+
+Med posnetkom preslednica ustavi, držanje leve ali desne puščice previja
+nazaj ali naprej, gor in dol spreminjata hitrost, PgUp in PgDn skočita 10
+sekund, Home in End pa gresta na začetek in na naslednji zemljevid. I in O
+označita izsek; E izvozi njega ali cel posnetek v mapo `videos`. Kontrolniki
+ostanejo na zaslonu; H ali Skrij jih skrije, kazanje na spodnji rob pa
+prikaže trak, ki jih vrne. Kliknite gumbe, kliknite časovnico, da skočite
+tja, ali povlecite čeznjo, da označite izsek; Izvozi vpraša za hitrost
+sličic, velikost, obliko in datoteko ter ali naj izvozi označeni izsek ali
+cel posnetek.
+
+`capture` med igranjem začne in ustavi snemanje videa. Hitrost sličic,
+oblika in kakovost so v Možnosti → Posnetki → Snemanje videa. Video
+potrebuje ffmpeg; brez njega se sličice shranijo kot slike PNG z datoteko
+WAV.
+
 ## Dostopnost
 
 Options → Dostopnost:

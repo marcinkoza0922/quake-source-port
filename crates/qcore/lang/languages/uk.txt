@@ -1367,6 +1367,84 @@ uk Штекер підходить до будь-якої металевої п�
 @ Lightning damage every tenth of a second (the stock lightning gun does 30)
 uk Шкода блискавки щодесяту частку секунди (звичайна блискавкова гармата завдає 30)
 
+# Demos and video recording.
+@ AV1 (MP4)
+uk AV1 (MP4)
+
+@ Auto-Demo Slots
+uk Слоти автодемо
+
+@ Auto-Record Demos
+uk Автозапис демо
+
+@ Frame Rate
+uk Частота кадрів
+
+@ H.264 (MP4)
+uk H.264 (MP4)
+
+@ H.265 (MP4)
+uk H.265 (MP4)
+
+@ Pause at End
+uk Пауза в кінці
+
+@ Playback Bar
+uk Панель відтворення
+
+@ Quality
+uk Якість
+
+@ Record Audio
+uk Записувати звук
+
+@ VP9 (WebM)
+uk VP9 (WebM)
+
+@ Video Format
+uk Формат відео
+
+@ Video Recording
+uk Запис відео
+
+@ ffmpeg Program
+uk Програма ffmpeg
+
+@ small file
+uk малий файл
+
+@ unlimited
+uk без обмежень
+
+# Demos and video recording.
+@ 1080p
+uk 1080p
+
+@ 1440p
+uk 1440p
+
+@ 4K
+uk 4K
+
+@ 720p
+uk 720p
+
+@ Destination
+uk Шлях збереження
+
+@ Export Highlighted Clip
+uk Експорт виділеного фрагмента
+
+@ Export Whole Demo
+uk Експорт усього демо
+
+@ Same as window
+uk Як вікно
+
+# Demos and video recording.
+@ GPU Encoding
+uk Кодування на GPU
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1789,6 +1867,42 @@ uk Яка зброя викликає стоп-кадр; ближній бій �
 
 @ Your own rockets and grenades don't hurt you; rocket jumps still work
 uk Ваші ракети й гранати вас не ранять; рокет-джампи досі працюють
+
+# Demos and video recording.
+@ A demo you play stops on its last frame instead of returning to the menu, so you can rewind
+uk Запущене вами демо зупиняється на останньому кадрі замість повернення до меню, щоб його можна було перемотати назад
+
+@ Frames per second of recorded video; the game runs at exactly this rate while recording
+uk Кадрів на секунду у відео; під час запису гра йде рівно з цією частотою
+
+@ High keeps the most detail; small file saves disk space
+uk Висока зберігає найбільше деталей; малий файл заощаджує місце на диску
+
+@ How many automatic demos are kept before the oldest is deleted; kept demos never count
+uk Скільки автоматичних демо зберігається, перш ніж видаляється найстаріше; збережені демо не враховуються
+
+@ Records every level you play to the Automatic list in Main Menu > Demos; keep the ones you want, the oldest are replaced
+uk Записує кожен пройдений рівень до списку «Автоматичні» в Головне меню > Демо; зберігайте потрібні, найстаріші замінюються
+
+@ Records game sound and music into the video
+uk Записує звуки й музику гри у відео
+
+@ Shows the playback bar (time, speed, timeline) after a control key, always, or never
+uk Показує панель відтворення (час, швидкість, шкала) після клавіші керування, завжди або ніколи
+
+@ Video format; needs ffmpeg with that encoder, else frames are saved as PNG images
+uk Формат відео; потрібен ffmpeg із цим кодувальником, інакше кадри зберігаються як зображення PNG
+
+# Demos and video recording.
+@ No clip highlighted: while the demo plays, drag across the timeline or press I and O
+uk Фрагмент не виділено: під час демо протягніть по шкалі або натисніть I та O
+
+@ Video size; frames are scaled from the window size (bars keep the shape), so a larger size adds no detail
+uk Розмір відео; кадри масштабуються з розміру вікна (зі смугами для збереження пропорцій), тож більший розмір не додає деталей
+
+# Demos and video recording.
+@ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
+uk Кодує на відеокарті (NVIDIA NVENC, AMD чи Intel через VA-API, AMF або Quick Sync, Apple VideoToolbox), якщо ffmpeg може її використати, звільняючи процесор; інакше кодує процесор
 
 # ==== ui.txt ====
 
@@ -2540,6 +2654,142 @@ uk Збереження
 @ Alt Fire on a glowing electronics panel within reach plugs one end in; the other end then shoots lightning with unlimited ammunition. The cable tethers you to the socket and catches on corners. Alt Fire or switching weapons yanks it out.
 uk Альт. вогонь по світній електронній панелі поруч вставляє один кінець; інший кінець стріляє блискавками з необмеженими набоями. Кабель прив'язує вас до гнізда й чіпляється за кути. Альт. вогонь або зміна зброї висмикує його.
 
+@ From the game folder
+uk З теки гри
+
+@ From ironwail
+uk З ironwail
+
+@ From the 2021 re-release
+uk З перевидання 2021 року
+
+# Demos and video recording.
+@ Automatic demos are off. Turn on Auto-Record Demos in Options > Demos to record every level you play.
+uk Автоматичні демо вимкнено. Увімкніть «Автозапис демо» в Налаштування > Демо, щоб записувати кожен пройдений рівень.
+
+@ Automatic: replaced when the slots are full
+uk Автоматичне: замінюється, коли слоти заповнені
+
+@ Delete {}?
+uk Видалити {}?
+
+@ Demos
+uk Демо
+
+@ End of demo
+uk Кінець демо
+
+@ Export Video
+uk Експорт відео
+
+@ Fast forward
+uk Перемотування вперед
+
+@ Fast forward {}x
+uk Вперед {}x
+
+@ Indexing...
+uk Індексування...
+
+@ K keep
+uk K зберегти
+
+@ Keep
+uk Зберегти
+
+@ Length: {}
+uk Тривалість: {}
+
+@ Map: {}
+uk Мапа: {}
+
+@ No automatic demos yet. Each level you play is recorded here.
+uk Автоматичних демо ще немає. Тут записується кожен пройдений рівень.
+
+@ No saved demos yet. Record one with the console command 'record <name>', or keep an automatic demo.
+uk Збережених демо ще немає. Запишіть демо консольною командою 'record <name>' або збережіть автоматичне.
+
+@ Pause
+uk Пауза
+
+@ Paused
+uk Пауза
+
+@ Play {}x
+uk Відтворення {}x
+
+@ Quake - exporting video {}%
+uk Quake - експорт відео {}%
+
+@ Recorded: {}
+uk Записано: {}
+
+@ Rewind
+uk Перемотування назад
+
+@ Rewind {}x
+uk Назад {}x
+
+@ Size: {} KB
+uk Розмір: {} КБ
+
+@ Skip 10 s
+uk Пропустити 10 с
+
+@ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
+uk Пробіл пауза | Ліворуч/Праворуч перемотування | Вгору/Вниз швидкість | PgUp/PgDn 10 с | I/O мітка | E експорт
+
+@ Speed
+uk Швидкість
+
+@ Switch List
+uk Змінити список
+
+@ This can't be undone.
+uk Це не можна скасувати.
+
+@ While a demo plays: Space pauses, the arrows scrub and change speed, I and O mark a clip and E exports it.
+uk Під час демо: Пробіл ставить паузу, стрілки перемотують і змінюють швидкість, I та O позначають фрагмент, а E експортує його.
+
+@ Saved
+uk Збережені
+
+@ Automatic
+uk Автоматичні
+
+# Demos and video recording.
+@ Export
+uk Експорт
+
+@ H hide
+uk H сховати
+
+@ Hide
+uk Сховати
+
+@ Show
+uk Показати
+
+# Demos and video recording.
+@ Demo: {}
+uk Демо: {}
+
+@ Highlighted clip: {} to {} ({})
+uk Виділений фрагмент: {} – {} ({})
+
+@ Show controls
+uk Показати панель
+
+# Demos and video recording.
+@ About {} left
+uk Лишилося близько {}
+
+@ Exporting video
+uk Експорт відео
+
+@ Preparing...
+uk Підготовка...
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3053,11 +3303,41 @@ uk Лише сервер може виконати changelevel
 @ {} renamed to {}
 uk {} тепер зветься {}
 
-@ From the game folder
-uk З теки гри
+@ Already recording video.
+uk Відео вже записується.
 
-@ From ironwail
-uk З ironwail
+@ Export cancelled.
+uk Експорт скасовано.
 
-@ From the 2021 re-release
-uk З перевидання 2021 року
+@ Exporting {} to video
+uk Експорт {} у відео
+
+@ Kept demo {}
+uk Демо збережено: {}
+
+@ No auto-demo to keep.
+uk Немає автодемо для збереження.
+
+@ Not playing a demo.
+uk Демо не відтворюється.
+
+@ Not recording video.
+uk Відео не записується.
+
+@ Recording video to {}
+uk Запис відео до {}
+
+@ This demo is already saved.
+uk Це демо вже збережено.
+
+@ This level's demo will be kept when it ends.
+uk Демо цього рівня буде збережено, коли він закінчиться.
+
+@ Video capture is not available in this build.
+uk Запис відео недоступний у цій збірці.
+
+@ Wrote {} ({}s)
+uk Записано {} ({} с)
+
+@ ffmpeg not found: wrote {} PNG frames and a WAV to {}
+uk ffmpeg не знайдено: {} кадрів PNG і WAV записано до {}

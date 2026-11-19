@@ -52,6 +52,7 @@ impl Host {
             self.finish_timedemo();
         }
         self.stop_recording();
+        self.autodemo_finish();
         self.view.reset_effects();
         self.autosave.reset();
         self.bullet_time = Default::default();
@@ -97,7 +98,10 @@ impl Host {
                 self.recording = None;
             }
             let before = self.cl.signon;
+            let events_before = self.cl.events.len();
             let r = self.cl.parse_server_message(&m);
+            let new_map = self.cl.events[events_before.min(self.cl.events.len())..].iter().any(|e| matches!(e, ClientEvent::NewMap));
+            self.autodemo_message(&m, new_map);
             // demo_head: what a client needs to reach signon 2. A new
             // serverinfo (changelevel) starts it over.
             let after = self.cl.signon;
@@ -380,6 +384,9 @@ impl Host {
         let evs = self.cl.take_events();
         let mut feedback = None;
         for e in evs {
+            if self.demo_seeking && Self::seek_skips(&e) {
+                continue;
+            }
             match e {
                 ClientEvent::PortalEffect(_) | ClientEvent::RailEffect(_) | ClientEvent::Hook(_) | ClientEvent::Cable(_) | ClientEvent::Boomerang(_)
                 | ClientEvent::Gel(_) | ClientEvent::Water(_) => {
@@ -476,7 +483,8 @@ impl Host {
                     self.feedback = Default::default();
                     self.stats_recorded = false;
                     self.autosave.reset();
-                    self.new_map()
+                    self.new_map();
+                    self.demo_new_map();
                 }
                 ClientEvent::Signon(4) => {
                     self.con.forced = false;
@@ -489,7 +497,10 @@ impl Host {
                     self.sync_key_dest();
                 }
                 // Host_EndGame during playback moves on to the next demo.
-                ClientEvent::Disconnect if self.demo.is_some() => self.end_demo(),
+                ClientEvent::Disconnect if self.demo.is_some() => {
+                    self.demo_reached_end();
+                    return;
+                }
                 ClientEvent::Disconnect => {
                     self.con.print(&qcore::ctr!("Server disconnected\n"));
                     if self.remote() {

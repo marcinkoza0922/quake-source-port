@@ -20,6 +20,9 @@ pub use music::{MusicStream, cd_track_paths};
 mod paint;
 #[path = "lib/mixer_events.rs"]
 mod mixer_events;
+#[path = "lib/shared.rs"]
+mod shared;
+pub use shared::SharedMixer;
 
 pub const MAX_DYNAMIC_CHANNELS: usize = 128;
 pub const NUM_AMBIENTS: usize = 4;
@@ -128,6 +131,8 @@ pub enum SoundEvent {
     /// Local (unspatialized) sound, e.g. menu sounds.
     Local(Arc<Sfx>),
     StopAll,
+    /// Entity and local sounds only; ambients and static sounds keep playing.
+    StopDynamic,
     ClearStatic,
 }
 

@@ -2,11 +2,39 @@
 //! line holding a CD track number, then blocks of
 //! `i32 length, 3 × f32 view angles, length bytes of server message`.
 
+pub mod index;
+pub mod keyframes;
+pub mod library;
+pub mod playback;
+
 pub struct Demo {
-    data: Vec<u8>,
+    data: std::sync::Arc<[u8]>,
     pos: usize,
+    /// First block, after the CD track header.
+    start: usize,
     /// `pause` during playback (cls.demopaused): no messages, client clock stopped.
     pub paused: bool,
+    /// Speed, seeking, marks and the timeline (`playback`).
+    pub play: playback::Playback,
+}
+
+/// `YYYYMMDD-HHMMSS` (UTC) for auto-demo and video file names.
+pub fn stamp(seconds: u64) -> String {
+    let days = (seconds / 86400) as i64 + 719468;
+    let era = days / 146097;
+    let doe = days - era * 146097;
+    let yoe = (doe - doe / 1460 + doe / 36524 - doe / 146096) / 365;
+    let doy = doe - (365 * yoe + yoe / 4 - yoe / 100);
+    let mp = (5 * doy + 2) / 153;
+    let day = doy - (153 * mp + 2) / 5 + 1;
+    let month = mp + if mp < 10 { 3 } else { -9 };
+    let year = yoe + era * 400 + i64::from(month <= 2);
+    format!("{year:04}{month:02}{day:02}-{:02}{:02}{:02}", seconds / 3600 % 24, seconds / 60 % 60, seconds % 60)
+}
+
+pub fn stamp_now() -> String {
+    let secs = qcore::time::SystemTime::now().duration_since(qcore::time::UNIX_EPOCH).map_or(0, |d| d.as_secs());
+    stamp(secs)
 }
 
 /// One recorded server message with the view angles at the time.
@@ -23,7 +51,30 @@ impl Demo {
         // The header (cls.forcetrack, unused: svc_cdtrack follows) is an
         // optional '-' and digits ending in '\n'.
         let pos = data.iter().take(16).position(|&b| b == b'\n').map_or(0, |e| e + 1);
-        Demo { data, pos, paused: false }
+        Demo { data: data.into(), pos, start: pos, paused: false, play: playback::Playback::default() }
+    }
+
+    /// The whole file, shared with the background indexer.
+    pub fn data(&self) -> std::sync::Arc<[u8]> {
+        self.data.clone()
+    }
+
+    /// Offset of the next block.
+    pub fn pos(&self) -> usize {
+        self.pos
+    }
+
+    /// Continue reading at block offset `pos` (a keyframe or the start).
+    pub fn seek(&mut self, pos: usize) {
+        self.pos = pos.clamp(self.start, self.data.len());
+    }
+
+    pub fn rewind(&mut self) {
+        self.pos = self.start;
+    }
+
+    pub fn at_end(&self) -> bool {
+        self.data.len() - self.pos < 16
     }
 
     /// The next message, or `None` at the end of the file or on a damaged block.
@@ -70,11 +121,24 @@ impl DemoWriter {
         if self.buf.len() >= DEMO_FLUSH { self.flush() } else { Ok(()) }
     }
 
-    fn flush(&mut self) -> std::io::Result<()> {
+    pub fn flush(&mut self) -> std::io::Result<()> {
         if self.buf.is_empty() { return Ok(()); }
         let r = qcore::vfs::append(&self.path, &self.buf);
         self.buf.clear();
         r
+    }
+
+    /// Writes what was recorded so far to `dest`, ended with svc_disconnect
+    /// so it plays on its own; recording continues.
+    pub fn copy_to(&mut self, dest: &std::path::Path, angles: [f32; 3]) -> std::io::Result<()> {
+        self.flush()?;
+        let mut data = qcore::vfs::read(&self.path)?;
+        data.extend(1i32.to_le_bytes());
+        for a in angles {
+            data.extend(a.to_le_bytes());
+        }
+        data.push(qnet::protocol::SVC_DISCONNECT);
+        qcore::vfs::write(dest, &data)
     }
 
     pub fn path(&self) -> &std::path::Path {
@@ -131,6 +195,12 @@ mod tests {
         let mut d = Demo::new(data);
         let m = d.next_message().unwrap();
         assert_eq!((m.angles, m.data), ([4.0, 5.0, 6.0], &[1u8, 2, 3][..]));
+    }
+
+    #[test]
+    fn stamps() {
+        assert_eq!(stamp(0), "19700101-000000");
+        assert_eq!(stamp(1_700_000_000), "20231114-221320");
     }
 
     #[test]

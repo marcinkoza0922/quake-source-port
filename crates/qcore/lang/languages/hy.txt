@@ -1367,6 +1367,84 @@ hy Խրոցը միանում է ցանկացած մետաղական մակերե
 @ Lightning damage every tenth of a second (the stock lightning gun does 30)
 hy Կայծակի վնաս վայրկյանի յուրաքանչյուր տասներորդում (սովորական կայծակնային զենքը տալիս է 30)
 
+# Demos and video recording.
+@ AV1 (MP4)
+hy AV1 (MP4)
+
+@ Auto-Demo Slots
+hy Ավտոդեմոյի տեղեր
+
+@ Auto-Record Demos
+hy Ավտոմատ ձայնագրել դեմոները
+
+@ Frame Rate
+hy Կադրային հաճախություն
+
+@ H.264 (MP4)
+hy H.264 (MP4)
+
+@ H.265 (MP4)
+hy H.265 (MP4)
+
+@ Pause at End
+hy Դադար վերջում
+
+@ Playback Bar
+hy Նվագարկման վահանակ
+
+@ Quality
+hy Որակ
+
+@ Record Audio
+hy Ձայնագրել ձայնը
+
+@ VP9 (WebM)
+hy VP9 (WebM)
+
+@ Video Format
+hy Տեսաձևաչափ
+
+@ Video Recording
+hy Տեսագրություն
+
+@ ffmpeg Program
+hy ffmpeg ծրագիր
+
+@ small file
+hy փոքր ֆայլ
+
+@ unlimited
+hy անսահմանափակ
+
+# Demos and video recording.
+@ 1080p
+hy 1080p
+
+@ 1440p
+hy 1440p
+
+@ 4K
+hy 4K
+
+@ 720p
+hy 720p
+
+@ Destination
+hy Պահման վայր
+
+@ Export Highlighted Clip
+hy Արտահանել նշված հատվածը
+
+@ Export Whole Demo
+hy Արտահանել ամբողջ դեմոն
+
+@ Same as window
+hy Ինչպես պատուհանը
+
+# Demos and video recording.
+@ GPU Encoding
+hy GPU կոդավորում
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1789,6 +1867,42 @@ hy Որ զենքերն են առաջացնում սառեցումը, մերձա�
 
 @ Your own rockets and grenades don't hurt you; rocket jumps still work
 hy Ձեր սեփական հրթիռներն ու նռնակները ձեզ չեն վնասում, հրթիռային ցատկերը դեռ աշխատում են
+
+# Demos and video recording.
+@ A demo you play stops on its last frame instead of returning to the menu, so you can rewind
+hy Ձեր միացրած դեմոն կանգ է առնում վերջին կադրում՝ մենյու վերադառնալու փոխարեն, որպեսզի կարողանաք հետ փաթաթել
+
+@ Frames per second of recorded video; the game runs at exactly this rate while recording
+hy Տեսանյութի կադրերը վայրկյանում․ գրանցման ընթացքում խաղն աշխատում է հենց այս արագությամբ
+
+@ High keeps the most detail; small file saves disk space
+hy Բարձրը պահում է ամենաշատ մանրամասները, փոքր ֆայլը խնայում է սկավառակի տեղը
+
+@ How many automatic demos are kept before the oldest is deleted; kept demos never count
+hy Քանի ավտոմատ դեմո է պահվում, մինչև ամենահինը ջնջվի․ պահված դեմոները չեն հաշվվում
+
+@ Records every level you play to the Automatic list in Main Menu > Demos; keep the ones you want, the oldest are replaced
+hy Ձեր խաղացած յուրաքանչյուր մակարդակ գրանցում է Ավտոմատ ցանկում՝ Գլխավոր մենյու > Դեմոներ․ պահեք ցանկալիները, ամենահները փոխարինվում են
+
+@ Records game sound and music into the video
+hy Խաղի ձայներն ու երաժշտությունը գրանցում է տեսանյութում
+
+@ Shows the playback bar (time, speed, timeline) after a control key, always, or never
+hy Ցույց է տալիս նվագարկման վահանակը (ժամանակ, արագություն, ժամանակագիծ) կառավարման ստեղնից հետո, միշտ կամ երբեք
+
+@ Video format; needs ffmpeg with that encoder, else frames are saved as PNG images
+hy Տեսաձևաչափ․ անհրաժեշտ է ffmpeg այդ կոդավորիչով, հակառակ դեպքում կադրերը պահվում են որպես PNG պատկերներ
+
+# Demos and video recording.
+@ No clip highlighted: while the demo plays, drag across the timeline or press I and O
+hy Նշված հատված չկա․ դեմոյի ընթացքում քաշեք ժամանակագծի վրայով կամ սեղմեք I և O
+
+@ Video size; frames are scaled from the window size (bars keep the shape), so a larger size adds no detail
+hy Տեսանյութի չափ․ կադրերը մասշտաբավորվում են պատուհանի չափից (ձևը պահելու համար շերտերով), ուստի ավելի մեծ չափը մանրամասներ չի ավելացնում
+
+# Demos and video recording.
+@ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
+hy Կոդավորում է վիդեոքարտով (NVIDIA NVENC, AMD կամ Intel՝ VA-API-ով, AMF կամ Quick Sync, Apple VideoToolbox), երբ ffmpeg-ը կարող է այն օգտագործել, պրոցեսորն ազատ թողնելով, այլապես կոդավորում է պրոցեսորը
 
 # ==== ui.txt ====
 
@@ -2540,6 +2654,142 @@ hy Պահպանում
 @ Alt Fire on a glowing electronics panel within reach plugs one end in; the other end then shoots lightning with unlimited ammunition. The cable tethers you to the socket and catches on corners. Alt Fire or switching weapons yanks it out.
 hy Երկրորդական կրակը ձեռքի տակ գտնվող լուսավորվող էլեկտրոնային վահանակի վրա միացնում է մի ծայրը. մյուս ծայրն այդ ժամանակ կայծակ է արձակում անսահմանափակ զինամթերքով: Մալուխը ձեզ կապում է վարդակին և կառչում անկյուններից: Երկրորդական կրակը կամ զենքի փոխելը այն պոկում է:
 
+@ From the game folder
+hy Խաղի թղթապանակից
+
+@ From ironwail
+hy ironwail-ից
+
+@ From the 2021 re-release
+hy 2021 թ. վերաթողարկումից
+
+# Demos and video recording.
+@ Automatic demos are off. Turn on Auto-Record Demos in Options > Demos to record every level you play.
+hy Ավտոմատ դեմոներն անջատված են։ Միացրեք «Ավտոմատ ձայնագրել դեմոները» Կարգավորումներ > Դեմոներ բաժնում՝ ձեր խաղացած յուրաքանչյուր մակարդակը գրանցելու համար։
+
+@ Automatic: replaced when the slots are full
+hy Ավտոմատ՝ փոխարինվում է, երբ տեղերը լցված են
+
+@ Delete {}?
+hy Ջնջե՞լ {}-ը
+
+@ Demos
+hy Դեմոներ
+
+@ End of demo
+hy Դեմոյի ավարտ
+
+@ Export Video
+hy Արտահանել տեսանյութ
+
+@ Fast forward
+hy Արագ առաջ
+
+@ Fast forward {}x
+hy Առաջ {}x
+
+@ Indexing...
+hy Ինդեքսավորում...
+
+@ K keep
+hy K պահել
+
+@ Keep
+hy Պահել
+
+@ Length: {}
+hy Տևողություն՝ {}
+
+@ Map: {}
+hy Քարտեզ՝ {}
+
+@ No automatic demos yet. Each level you play is recorded here.
+hy Ավտոմատ դեմոներ դեռ չկան։ Ձեր խաղացած յուրաքանչյուր մակարդակ գրանցվում է այստեղ։
+
+@ No saved demos yet. Record one with the console command 'record <name>', or keep an automatic demo.
+hy Պահված դեմոներ դեռ չկան։ Գրանցեք մեկը վահանակի 'record <name>' հրամանով կամ պահեք ավտոմատ դեմո։
+
+@ Pause
+hy Դադար
+
+@ Paused
+hy Դադարեցված
+
+@ Play {}x
+hy Նվագարկում {}x
+
+@ Quake - exporting video {}%
+hy Quake - տեսանյութի արտահանում {}%
+
+@ Recorded: {}
+hy Գրանցված՝ {}
+
+@ Rewind
+hy Հետ փաթաթել
+
+@ Rewind {}x
+hy Հետ {}x
+
+@ Size: {} KB
+hy Չափ՝ {} ԿԲ
+
+@ Skip 10 s
+hy Բաց թողնել 10 վ
+
+@ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
+hy Space դադար | Ձախ/Աջ փաթաթել | Վերև/Ներքև արագություն | PgUp/PgDn 10 վ | I/O նշիչ | E արտահանել
+
+@ Speed
+hy Արագություն
+
+@ Switch List
+hy Փոխել ցանկը
+
+@ This can't be undone.
+hy Սա հնարավոր չէ հետարկել։
+
+@ While a demo plays: Space pauses, the arrows scrub and change speed, I and O mark a clip and E exports it.
+hy Դեմոյի ժամանակ՝ Space-ը դադար է տալիս, սլաքները փաթաթում և փոխում են արագությունը, I-ն ու O-ն նշում են հատվածը, իսկ E-ն արտահանում է այն։
+
+@ Saved
+hy Պահված
+
+@ Automatic
+hy Ավտոմատ
+
+# Demos and video recording.
+@ Export
+hy Արտահանել
+
+@ H hide
+hy H թաքցնել
+
+@ Hide
+hy Թաքցնել
+
+@ Show
+hy Ցույց տալ
+
+# Demos and video recording.
+@ Demo: {}
+hy Դեմո՝ {}
+
+@ Highlighted clip: {} to {} ({})
+hy Նշված հատված՝ {}–{} ({})
+
+@ Show controls
+hy Ցույց տալ կառավարումը
+
+# Demos and video recording.
+@ About {} left
+hy Մնաց մոտ {}
+
+@ Exporting video
+hy Տեսանյութի արտահանում
+
+@ Preparing...
+hy Պատրաստում...
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3053,11 +3303,41 @@ hy Միայն սերվերը կարող է changelevel անել
 @ {} renamed to {}
 hy {} վերանվանվեց՝ {}
 
-@ From the game folder
-hy Խաղի թղթապանակից
+@ Already recording video.
+hy Տեսագրությունն արդեն ընթանում է։
 
-@ From ironwail
-hy ironwail-ից
+@ Export cancelled.
+hy Արտահանումը չեղարկվեց։
 
-@ From the 2021 re-release
-hy 2021 թ. վերաթողարկումից
+@ Exporting {} to video
+hy {}-ն արտահանվում է տեսանյութի
+
+@ Kept demo {}
+hy Դեմոն պահված է՝ {}
+
+@ No auto-demo to keep.
+hy Պահելու ավտոդեմո չկա։
+
+@ Not playing a demo.
+hy Դեմո չի նվագարկվում։
+
+@ Not recording video.
+hy Տեսագրություն չի ընթանում։
+
+@ Recording video to {}
+hy Տեսագրություն դեպի {}
+
+@ This demo is already saved.
+hy Այս դեմոն արդեն պահված է։
+
+@ This level's demo will be kept when it ends.
+hy Այս մակարդակի դեմոն կպահվի, երբ այն ավարտվի։
+
+@ Video capture is not available in this build.
+hy Տեսագրությունը հասանելի չէ այս տարբերակում։
+
+@ Wrote {} ({}s)
+hy Գրվեց {} ({} վ)
+
+@ ffmpeg not found: wrote {} PNG frames and a WAV to {}
+hy ffmpeg-ը չգտնվեց․ {} PNG կադր և WAV գրվեցին {}-ում

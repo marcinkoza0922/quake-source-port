@@ -1367,6 +1367,84 @@ eu Edozein gainazal metalikok onartzen du entxufea, ez elektronikak bakarrik
 @ Lightning damage every tenth of a second (the stock lightning gun does 30)
 eu Tximistaren kaltea segundo-hamarren bakoitzean (tximista-kanoi arruntak 30 egiten ditu)
 
+# Demos and video recording.
+@ AV1 (MP4)
+eu AV1 (MP4)
+
+@ Auto-Demo Slots
+eu Demo automatikoen tokiak
+
+@ Auto-Record Demos
+eu Grabatu demoak automatikoki
+
+@ Frame Rate
+eu Fotograma-abiadura
+
+@ H.264 (MP4)
+eu H.264 (MP4)
+
+@ H.265 (MP4)
+eu H.265 (MP4)
+
+@ Pause at End
+eu Pausa amaieran
+
+@ Playback Bar
+eu Erreprodukzio-barra
+
+@ Quality
+eu Kalitatea
+
+@ Record Audio
+eu Grabatu soinua
+
+@ VP9 (WebM)
+eu VP9 (WebM)
+
+@ Video Format
+eu Bideo-formatua
+
+@ Video Recording
+eu Bideo-grabazioa
+
+@ ffmpeg Program
+eu ffmpeg programa
+
+@ small file
+eu fitxategi txikia
+
+@ unlimited
+eu mugarik gabe
+
+# Demos and video recording.
+@ 1080p
+eu 1080p
+
+@ 1440p
+eu 1440p
+
+@ 4K
+eu 4K
+
+@ 720p
+eu 720p
+
+@ Destination
+eu Helmuga
+
+@ Export Highlighted Clip
+eu Esportatu nabarmendutako klipa
+
+@ Export Whole Demo
+eu Esportatu demo osoa
+
+@ Same as window
+eu Leihoaren berdina
+
+# Demos and video recording.
+@ GPU Encoding
+eu GPU bidezko kodeketa
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1789,6 +1867,42 @@ eu Zein armek eragiten duten izoztea; gertuko erasoak aizkora eta gertutik muniz
 
 @ Your own rockets and grenades don't hurt you; rocket jumps still work
 eu Zure suziriek eta granadek ez dizute minik egiten; suziri-jauziek funtzionatzen jarraitzen dute
+
+# Demos and video recording.
+@ A demo you play stops on its last frame instead of returning to the menu, so you can rewind
+eu Erreproduzitzen duzun demoa azken fotogramean gelditzen da menura itzuli beharrean, atzera eraman ahal izateko
+
+@ Frames per second of recorded video; the game runs at exactly this rate while recording
+eu Bideoaren segundoko fotogramak; grabatzen ari den bitartean jokoa abiadura horretan zehazki dabil
+
+@ High keeps the most detail; small file saves disk space
+eu Altuak xehetasun gehien gordetzen ditu; fitxategi txikiak diskoko lekua aurrezten du
+
+@ How many automatic demos are kept before the oldest is deleted; kept demos never count
+eu Zenbat demo automatiko gordetzen diren zaharrena ezabatu aurretik; gordetako demoak ez dira kontatzen
+
+@ Records every level you play to the Automatic list in Main Menu > Demos; keep the ones you want, the oldest are replaced
+eu Jokatzen duzun maila bakoitza Automatikoak zerrendan grabatzen du, Menu nagusia > Demoak atalean; gorde nahi dituzunak, zaharrenak ordezten dira
+
+@ Records game sound and music into the video
+eu Jokoaren soinuak eta musika bideoan grabatzen ditu
+
+@ Shows the playback bar (time, speed, timeline) after a control key, always, or never
+eu Erreprodukzio-barra (denbora, abiadura, denbora-lerroa) kontrol-tekla baten ondoren, beti edo inoiz ez erakusten du
+
+@ Video format; needs ffmpeg with that encoder, else frames are saved as PNG images
+eu Bideo-formatua; kodetzaile hori duen ffmpeg behar da, bestela fotogramak PNG irudi gisa gordetzen dira
+
+# Demos and video recording.
+@ No clip highlighted: while the demo plays, drag across the timeline or press I and O
+eu Ez dago klip nabarmendurik: demoan zehar, arrastatu denbora-lerroaren gainean edo sakatu I eta O
+
+@ Video size; frames are scaled from the window size (bars keep the shape), so a larger size adds no detail
+eu Bideoaren tamaina; fotogramak leihoaren tamainatik eskalatzen dira (forma gordetzeko bandekin), beraz tamaina handiagoak ez du xehetasunik gehitzen
+
+# Demos and video recording.
+@ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
+eu Txartel grafikoan kodetzen du (NVIDIA NVENC, AMD edo Intel VA-API bidez, AMF edo Quick Sync, Apple VideoToolbox) ffmpeg-ek erabil dezakeenean, prozesadorea libre utziz; bestela prozesadoreak kodetzen du
 
 # ==== ui.txt ====
 
@@ -2540,6 +2654,142 @@ eu Gordetakoa
 @ Alt Fire on a glowing electronics panel within reach plugs one end in; the other end then shoots lightning with unlimited ammunition. The cable tethers you to the socket and catches on corners. Alt Fire or switching weapons yanks it out.
 eu Su sekundarioak irismenean dagoen panel elektroniko distiratsu batean mutur bat konektatzen du; beste muturrak orduan tximistak jaurtitzen ditu munizio mugagabearekin. Kableak entxufeari lotzen zaitu eta izkinetan trabatzen da. Su sekundarioak edo arma aldatzeak ateratzen du.
 
+@ From the game folder
+eu Jokoaren karpetatik
+
+@ From ironwail
+eu ironwailetik
+
+@ From the 2021 re-release
+eu 2021eko berrargitalpenetik
+
+# Demos and video recording.
+@ Automatic demos are off. Turn on Auto-Record Demos in Options > Demos to record every level you play.
+eu Demo automatikoak desaktibatuta daude. Aktibatu Grabatu demoak automatikoki Aukerak > Demoak atalean, jokatzen duzun maila bakoitza grabatzeko.
+
+@ Automatic: replaced when the slots are full
+eu Automatikoa: tokiak beteta daudenean ordezten da
+
+@ Delete {}?
+eu {} ezabatu?
+
+@ Demos
+eu Demoak
+
+@ End of demo
+eu Demoaren amaiera
+
+@ Export Video
+eu Esportatu bideoa
+
+@ Fast forward
+eu Aurrera azkar
+
+@ Fast forward {}x
+eu Aurrera {}x
+
+@ Indexing...
+eu Indexatzen...
+
+@ K keep
+eu K gorde
+
+@ Keep
+eu Gorde
+
+@ Length: {}
+eu Iraupena: {}
+
+@ Map: {}
+eu Mapa: {}
+
+@ No automatic demos yet. Each level you play is recorded here.
+eu Oraindik ez dago demo automatikorik. Jokatzen duzun maila bakoitza hemen grabatzen da.
+
+@ No saved demos yet. Record one with the console command 'record <name>', or keep an automatic demo.
+eu Oraindik ez dago gordetako demorik. Grabatu bat 'record <name>' kontsola-komandoarekin, edo gorde demo automatiko bat.
+
+@ Pause
+eu Pausa
+
+@ Paused
+eu Pausatuta
+
+@ Play {}x
+eu Erreproduzitzen {}x
+
+@ Quake - exporting video {}%
+eu Quake - bideoa esportatzen %{}
+
+@ Recorded: {}
+eu Grabatua: {}
+
+@ Rewind
+eu Atzera eraman
+
+@ Rewind {}x
+eu Atzera {}x
+
+@ Size: {} KB
+eu Tamaina: {} KB
+
+@ Skip 10 s
+eu Saltatu 10 s
+
+@ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
+eu Zuriunea pausa | Ezker/Eskuin mugitu | Gora/Behera abiadura | PgUp/PgDn 10 s | I/O marka | E esportatu
+
+@ Speed
+eu Abiadura
+
+@ Switch List
+eu Aldatu zerrenda
+
+@ This can't be undone.
+eu Ezin da desegin.
+
+@ While a demo plays: Space pauses, the arrows scrub and change speed, I and O mark a clip and E exports it.
+eu Demo bat erreproduzitzen den bitartean: Zuriuneak pausatzen du, geziek mugitu eta abiadura aldatzen dute, I eta O-k klip bat markatzen dute eta E-k esportatzen du.
+
+@ Saved
+eu Gordetakoak
+
+@ Automatic
+eu Automatikoak
+
+# Demos and video recording.
+@ Export
+eu Esportatu
+
+@ H hide
+eu H ezkutatu
+
+@ Hide
+eu Ezkutatu
+
+@ Show
+eu Erakutsi
+
+# Demos and video recording.
+@ Demo: {}
+eu Demoa: {}
+
+@ Highlighted clip: {} to {} ({})
+eu Nabarmendutako klipa: {} - {} ({})
+
+@ Show controls
+eu Erakutsi kontrolak
+
+# Demos and video recording.
+@ About {} left
+eu {} inguru falta da
+
+@ Exporting video
+eu Bideoa esportatzen
+
+@ Preparing...
+eu Prestatzen...
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3053,11 +3303,41 @@ eu Zerbitzariak soilik erabil dezake changelevel
 @ {} renamed to {}
 eu Izen-aldaketa: {} → {}
 
-@ From the game folder
-eu Jokoaren karpetatik
+@ Already recording video.
+eu Bideoa grabatzen ari da dagoeneko.
 
-@ From ironwail
-eu ironwailetik
+@ Export cancelled.
+eu Esportazioa bertan behera utzi da.
 
-@ From the 2021 re-release
-eu 2021eko berrargitalpenetik
+@ Exporting {} to video
+eu {} bideora esportatzen
+
+@ Kept demo {}
+eu Demoa gordeta: {}
+
+@ No auto-demo to keep.
+eu Ez dago gordetzeko demo automatikorik.
+
+@ Not playing a demo.
+eu Ez da demorik erreproduzitzen ari.
+
+@ Not recording video.
+eu Ez da bideorik grabatzen ari.
+
+@ Recording video to {}
+eu Bideoa grabatzen hona: {}
+
+@ This demo is already saved.
+eu Demo hau gordeta dago dagoeneko.
+
+@ This level's demo will be kept when it ends.
+eu Maila honen demoa gorde egingo da amaitzen denean.
+
+@ Video capture is not available in this build.
+eu Bideo-grabazioa ez dago erabilgarri bertsio honetan.
+
+@ Wrote {} ({}s)
+eu Idatzita {} ({} s)
+
+@ ffmpeg not found: wrote {} PNG frames and a WAV to {}
+eu Ez da ffmpeg aurkitu: {} PNG fotograma eta WAV bat idatzi dira hemen: {}

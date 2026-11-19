@@ -163,6 +163,30 @@ kayang ipakita ng ibang port, itinatabi ang buong bersyon bilang
 `<name>.qsd` (`playdemo <name>.qsd`). Kino-convert ng `demo_convert <name>`
 ang mas lumang demo.
 
+Ipinapakita ng Main Menu → Mga Demo ang mga naka-save mong demo at, kapag
+naka-on ang Options → Mga Demo → Awtomatikong i-record ang mga demo, isang
+awtomatikong demo ng bawat level na nilalaro mo; papalitan ang pinakaluma
+kapag puno na ang mga slot. Pindutin ang K para magtabi ng isa, E para
+i-export ito bilang video at Del para burahin ito. Kasama sa mga bug report
+ang awtomatikong demo ng kasalukuyang level.
+
+Habang may demo, nagpa-pause ang Space, nagre-rewind o nagfa-fast forward
+ang pagpindot nang matagal sa Kaliwa o Kanan, binabago ng Taas at Baba ang
+bilis, tumatalon ng 10 segundo ang PgUp at PgDn, at pumupunta sa simula at
+sa susunod na mapa ang Home at End. Minamarkahan ng I at O ang isang clip;
+ine-export ito ng E, o ang buong demo, sa folder na `videos`. Nananatili sa
+screen ang mga kontrol; itinatago ito ng H o Itago, at kapag itinuro mo ang
+ibabang gilid, may lilitaw na strip na magbabalik dito. I-click ang mga
+button, i-click ang timeline para tumalon doon, o i-drag dito para
+i-highlight ang isang clip; itinatanong ng I-export ang frame rate, laki,
+format at file, at kung ang naka-highlight na clip o ang buong demo ang
+i-e-export.
+
+Sinisimulan at hinihinto ng `capture` ang pag-record ng video habang
+naglalaro ka. Nasa Options → Mga Demo → Pag-record ng video ang frame rate,
+format at kalidad. Kailangan ng ffmpeg para sa video; kung wala, sine-save
+ang mga frame bilang mga PNG na larawan kasama ng isang WAV file.
+
 ## Accessibility
 
 Options → Accessibility:

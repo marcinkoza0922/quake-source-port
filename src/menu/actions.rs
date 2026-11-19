@@ -66,6 +66,14 @@ impl Menu {
                 }
             }
             Run::NewGame => self.launch_play(cv, out),
+            Run::ExportClip | Run::ExportWhole => {
+                if run == Run::ExportClip && cv.value_of("_export_hasclip") == 0.0 {
+                    return;
+                }
+                self.screen = Screen::None;
+                out.push(Action::Close);
+                out.push(Action::Command(format!("_export_go {}\n", if run == Run::ExportClip { "clip" } else { "whole" })));
+            }
             Run::Start => {
                 let Some(map) = self.host_map(cv) else { return };
                 let n = |c: &str| cv.value_of(c) as i32;

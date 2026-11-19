@@ -1367,6 +1367,84 @@ nl Elk metalen oppervlak neemt de stekker aan, niet alleen elektronica
 @ Lightning damage every tenth of a second (the stock lightning gun does 30)
 nl Bliksemschade elke tiende seconde (het gewone bliksemkanon doet 30)
 
+# Demos and video recording.
+@ AV1 (MP4)
+nl AV1 (MP4)
+
+@ Auto-Demo Slots
+nl Plaatsen voor autodemo's
+
+@ Auto-Record Demos
+nl Demo's automatisch opnemen
+
+@ Frame Rate
+nl Beeldsnelheid
+
+@ H.264 (MP4)
+nl H.264 (MP4)
+
+@ H.265 (MP4)
+nl H.265 (MP4)
+
+@ Pause at End
+nl Pauze aan het einde
+
+@ Playback Bar
+nl Afspeelbalk
+
+@ Quality
+nl Kwaliteit
+
+@ Record Audio
+nl Geluid opnemen
+
+@ VP9 (WebM)
+nl VP9 (WebM)
+
+@ Video Format
+nl Videoformaat
+
+@ Video Recording
+nl Video-opname
+
+@ ffmpeg Program
+nl ffmpeg-programma
+
+@ small file
+nl klein bestand
+
+@ unlimited
+nl onbeperkt
+
+# Demos and video recording.
+@ 1080p
+nl 1080p
+
+@ 1440p
+nl 1440p
+
+@ 4K
+nl 4K
+
+@ 720p
+nl 720p
+
+@ Destination
+nl Bestemming
+
+@ Export Highlighted Clip
+nl Gemarkeerd fragment exporteren
+
+@ Export Whole Demo
+nl Hele demo exporteren
+
+@ Same as window
+nl Zoals het venster
+
+# Demos and video recording.
+@ GPU Encoding
+nl GPU-codering
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1789,6 +1867,42 @@ nl Welke wapens de bevriezing activeren; melee omvat de bijl en elk modwapen dat
 
 @ Your own rockets and grenades don't hurt you; rocket jumps still work
 nl Je eigen raketten en granaten doen je geen pijn; raketsprongen werken nog steeds
+
+# Demos and video recording.
+@ A demo you play stops on its last frame instead of returning to the menu, so you can rewind
+nl Een demo die je afspeelt, stopt op het laatste beeld in plaats van terug te gaan naar het menu, zodat je kunt terugspoelen
+
+@ Frames per second of recorded video; the game runs at exactly this rate while recording
+nl Beelden per seconde van de video; tijdens het opnemen draait het spel precies op dit tempo
+
+@ High keeps the most detail; small file saves disk space
+nl Hoog bewaart de meeste details; klein bestand bespaart schijfruimte
+
+@ How many automatic demos are kept before the oldest is deleted; kept demos never count
+nl Hoeveel automatische demo's bewaard blijven voordat de oudste wordt verwijderd; bewaarde demo's tellen niet mee
+
+@ Records every level you play to the Automatic list in Main Menu > Demos; keep the ones you want, the oldest are replaced
+nl Neemt elk gespeeld level op in de lijst Automatisch onder Hoofdmenu > Demo's; bewaar de demo's die je wilt, de oudste worden vervangen
+
+@ Records game sound and music into the video
+nl Neemt het geluid en de muziek van het spel op in de video
+
+@ Shows the playback bar (time, speed, timeline) after a control key, always, or never
+nl Toont de afspeelbalk (tijd, snelheid, tijdlijn) na een bedieningstoets, altijd of nooit
+
+@ Video format; needs ffmpeg with that encoder, else frames are saved as PNG images
+nl Videoformaat; vereist ffmpeg met die encoder, anders worden de beelden als PNG-afbeeldingen opgeslagen
+
+# Demos and video recording.
+@ No clip highlighted: while the demo plays, drag across the timeline or press I and O
+nl Geen fragment gemarkeerd: sleep tijdens de demo over de tijdlijn of druk op I en O
+
+@ Video size; frames are scaled from the window size (bars keep the shape), so a larger size adds no detail
+nl Videogrootte; beelden worden geschaald vanaf de venstergrootte (met balken om de vorm te houden), dus een grotere grootte voegt geen detail toe
+
+# Demos and video recording.
+@ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
+nl Codeert op de videokaart (NVIDIA NVENC, AMD of Intel via VA-API, AMF of Quick Sync, Apple VideoToolbox) als ffmpeg die kan gebruiken, zodat de processor vrij blijft; anders codeert de processor
 
 # ==== ui.txt ====
 
@@ -2540,6 +2654,142 @@ nl Save
 @ Alt Fire on a glowing electronics panel within reach plugs one end in; the other end then shoots lightning with unlimited ammunition. The cable tethers you to the socket and catches on corners. Alt Fire or switching weapons yanks it out.
 nl Alternatief vuur op een oplichtend elektronicapaneel binnen bereik steekt één uiteinde in; het andere schiet dan bliksems met onbeperkte munitie. De kabel bindt je aan de aansluiting en blijft haken aan hoeken. Alternatief vuur of van wapen wisselen trekt hem eruit.
 
+@ From the game folder
+nl Uit de spelmap
+
+@ From ironwail
+nl Uit ironwail
+
+@ From the 2021 re-release
+nl Uit de heruitgave uit 2021
+
+# Demos and video recording.
+@ Automatic demos are off. Turn on Auto-Record Demos in Options > Demos to record every level you play.
+nl Automatische demo's staan uit. Zet Demo's automatisch opnemen aan in Opties > Demo's om elk gespeeld level op te nemen.
+
+@ Automatic: replaced when the slots are full
+nl Automatisch: wordt vervangen als de plaatsen vol zijn
+
+@ Delete {}?
+nl {} verwijderen?
+
+@ Demos
+nl Demo's
+
+@ End of demo
+nl Einde van de demo
+
+@ Export Video
+nl Exporteren als video
+
+@ Fast forward
+nl Vooruitspoelen
+
+@ Fast forward {}x
+nl Vooruit {}x
+
+@ Indexing...
+nl Indexeren...
+
+@ K keep
+nl K bewaren
+
+@ Keep
+nl Bewaren
+
+@ Length: {}
+nl Duur: {}
+
+@ Map: {}
+nl Map: {}
+
+@ No automatic demos yet. Each level you play is recorded here.
+nl Nog geen automatische demo's. Elk level dat je speelt, wordt hier opgenomen.
+
+@ No saved demos yet. Record one with the console command 'record <name>', or keep an automatic demo.
+nl Nog geen opgeslagen demo's. Neem er een op met het consolecommando 'record <name>' of bewaar een automatische demo.
+
+@ Pause
+nl Pauze
+
+@ Paused
+nl Gepauzeerd
+
+@ Play {}x
+nl Afspelen {}x
+
+@ Quake - exporting video {}%
+nl Quake - video exporteren {}%
+
+@ Recorded: {}
+nl Opgenomen: {}
+
+@ Rewind
+nl Terugspoelen
+
+@ Rewind {}x
+nl Terug {}x
+
+@ Size: {} KB
+nl Grootte: {} kB
+
+@ Skip 10 s
+nl 10 s overslaan
+
+@ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
+nl Spatie pauze | Links/Rechts spoelen | Omhoog/Omlaag snelheid | PgUp/PgDn 10 s | I/O markeren | E exporteren
+
+@ Speed
+nl Snelheid
+
+@ Switch List
+nl Andere lijst
+
+@ This can't be undone.
+nl Dit kan niet ongedaan worden gemaakt.
+
+@ While a demo plays: Space pauses, the arrows scrub and change speed, I and O mark a clip and E exports it.
+nl Tijdens een demo: Spatie pauzeert, de pijltjestoetsen spoelen en wijzigen de snelheid, I en O markeren een fragment en E exporteert het.
+
+@ Saved
+nl Opgeslagen
+
+@ Automatic
+nl Automatisch
+
+# Demos and video recording.
+@ Export
+nl Exporteren
+
+@ H hide
+nl H verbergen
+
+@ Hide
+nl Verbergen
+
+@ Show
+nl Tonen
+
+# Demos and video recording.
+@ Demo: {}
+nl Demo: {}
+
+@ Highlighted clip: {} to {} ({})
+nl Gemarkeerd fragment: {} tot {} ({})
+
+@ Show controls
+nl Bediening tonen
+
+# Demos and video recording.
+@ About {} left
+nl Nog ongeveer {}
+
+@ Exporting video
+nl Video exporteren
+
+@ Preparing...
+nl Voorbereiden...
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3053,11 +3303,41 @@ nl Alleen de server mag changelevel uitvoeren
 @ {} renamed to {}
 nl {} heet nu {}
 
-@ From the game folder
-nl Uit de spelmap
+@ Already recording video.
+nl Er wordt al video opgenomen.
 
-@ From ironwail
-nl Uit ironwail
+@ Export cancelled.
+nl Export geannuleerd.
 
-@ From the 2021 re-release
-nl Uit de heruitgave uit 2021
+@ Exporting {} to video
+nl {} wordt als video geëxporteerd
+
+@ Kept demo {}
+nl Demo bewaard: {}
+
+@ No auto-demo to keep.
+nl Geen autodemo om te bewaren.
+
+@ Not playing a demo.
+nl Er wordt geen demo afgespeeld.
+
+@ Not recording video.
+nl Er wordt geen video opgenomen.
+
+@ Recording video to {}
+nl Video opnemen naar {}
+
+@ This demo is already saved.
+nl Deze demo is al opgeslagen.
+
+@ This level's demo will be kept when it ends.
+nl De demo van dit level wordt bewaard als het afloopt.
+
+@ Video capture is not available in this build.
+nl Video-opname is niet beschikbaar in deze versie.
+
+@ Wrote {} ({}s)
+nl {} geschreven ({} s)
+
+@ ffmpeg not found: wrote {} PNG frames and a WAV to {}
+nl ffmpeg niet gevonden: {} PNG-beelden en een WAV geschreven naar {}

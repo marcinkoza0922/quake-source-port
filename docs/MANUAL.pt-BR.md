@@ -162,6 +162,27 @@ reproduzi-la. Se um mod usa efeitos de partículas que outros ports não
 conseguem mostrar, a versão completa é mantida como `<nome>.qsd`
 (`playdemo <nome>.qsd`). `demo_convert <nome>` converte uma demo antiga.
 
+Menu principal → Demos mostra suas demos salvas e, com Opções → Demos →
+Gravar demos automaticamente ligado, uma demo automática de cada fase que
+você jogar; as mais antigas são substituídas quando os espaços estão cheios.
+K guarda uma, E a exporta para vídeo e Del a exclui. Os relatórios de bug
+incluem a demo automática da fase atual.
+
+Durante uma demo, Espaço pausa, segurar Esquerda ou Direita retrocede ou
+avança, Cima e Baixo mudam a velocidade, PgUp e PgDn pulam 10 segundos, e
+Home e End vão para o início e para o próximo mapa. I e O marcam um trecho;
+E o exporta, ou a demo inteira, para a pasta `videos`. Os controles ficam na
+tela; H ou Ocultar os escondem, e apontar para a borda inferior mostra uma
+faixa que os traz de volta. Clique nos botões, clique na linha do tempo para
+pular para lá ou arraste sobre ela para destacar um trecho; Exportar pede a
+taxa de quadros, o tamanho, o formato e o arquivo, e se deve exportar o
+trecho destacado ou a demo inteira.
+
+`capture` inicia e para a gravação de um vídeo enquanto você joga. Taxa de
+quadros, formato e qualidade ficam em Opções → Demos → Gravação de vídeo. Os
+vídeos precisam de ffmpeg; sem ele, os quadros são salvos como imagens PNG
+com um arquivo WAV.
+
 ## Acessibilidade
 
 Options → Acessibilidade:

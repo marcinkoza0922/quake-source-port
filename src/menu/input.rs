@@ -35,6 +35,9 @@ impl Menu {
                 "misc/menu1.wav"
             });
         }
+        if self.screen == Screen::Demos {
+            return self.demos.point(pos, false).then_some("misc/menu1.wav");
+        }
         let i = self.item_at(pos)?;
         let c = self.cursor_mut()?;
         (*c != i).then(|| {
@@ -116,6 +119,9 @@ impl Menu {
                 self.opt_cursor = i;
             }
             return out;
+        }
+        if key == K_MOUSE1 && self.screen == Screen::Demos {
+            return self.demos_click(cv, server_active);
         }
         if key == K_MOUSE1 {
             let Some(pos) = self.mouse else { return out };
@@ -236,7 +242,8 @@ impl Menu {
                             out.push(Action::Command("_mods\n".into()));
                             self.screen = Screen::Mods;
                         }
-                        6 => self.open_customize(false),
+                        6 => out.push(Action::Command("menu_demos\n".into())),
+                        7 => self.open_customize(false),
                         _ => {}
                     }
                 }
@@ -366,7 +373,13 @@ impl Menu {
                     if p == Page::Setup {
                         out.push(Action::Command(Self::setup_commands(cv)));
                     }
-                    self.screen = if is_net_page(p) {
+                    self.screen = if p == Page::Export {
+                        if self.export_back == Screen::None {
+                            out.push(Action::Close);
+                            out.push(Action::Command("_export_cancel\n".into()));
+                        }
+                        self.export_back
+                    } else if is_net_page(p) {
                         Screen::Multiplayer
                     } else if p == Page::NewGameCustomize {
                         self.back_to_launch();
@@ -500,6 +513,7 @@ impl Menu {
                     None => Screen::Main,
                 };
             }
+            Screen::Demos => self.demos_key(key, &mut out),
             Screen::Quit => {
                 if left || right {
                     self.quit_cursor ^= 1;

@@ -1367,6 +1367,84 @@ sl Vtič sprejme vsaka kovinska površina, ne le elektronika
 @ Lightning damage every tenth of a second (the stock lightning gun does 30)
 sl Škoda strele vsako desetinko sekunde (običajni strelomet naredi 30)
 
+# Demos and video recording.
+@ AV1 (MP4)
+sl AV1 (MP4)
+
+@ Auto-Demo Slots
+sl Mesta za samodejne posnetke
+
+@ Auto-Record Demos
+sl Samodejno snemaj posnetke
+
+@ Frame Rate
+sl Hitrost sličic
+
+@ H.264 (MP4)
+sl H.264 (MP4)
+
+@ H.265 (MP4)
+sl H.265 (MP4)
+
+@ Pause at End
+sl Premor na koncu
+
+@ Playback Bar
+sl Vrstica predvajanja
+
+@ Quality
+sl Kakovost
+
+@ Record Audio
+sl Snemaj zvok
+
+@ VP9 (WebM)
+sl VP9 (WebM)
+
+@ Video Format
+sl Oblika videa
+
+@ Video Recording
+sl Snemanje videa
+
+@ ffmpeg Program
+sl Program ffmpeg
+
+@ small file
+sl majhna datoteka
+
+@ unlimited
+sl neomejeno
+
+# Demos and video recording.
+@ 1080p
+sl 1080p
+
+@ 1440p
+sl 1440p
+
+@ 4K
+sl 4K
+
+@ 720p
+sl 720p
+
+@ Destination
+sl Cilj
+
+@ Export Highlighted Clip
+sl Izvozi označeni izsek
+
+@ Export Whole Demo
+sl Izvozi cel posnetek
+
+@ Same as window
+sl Kot okno
+
+# Demos and video recording.
+@ GPU Encoding
+sl Kodiranje z GPU
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1789,6 +1867,42 @@ sl Katera orožja sprožijo zamrznitev; boj od blizu zajema sekiro in vsako oro�
 
 @ Your own rockets and grenades don't hurt you; rocket jumps still work
 sl Lastne rakete in granate vas ne poškodujejo; raketni skoki še vedno delujejo
+
+# Demos and video recording.
+@ A demo you play stops on its last frame instead of returning to the menu, so you can rewind
+sl Demo, ki ga predvajate, se ustavi na zadnji sličici, namesto da se vrne v meni, da ga lahko previjete nazaj
+
+@ Frames per second of recorded video; the game runs at exactly this rate while recording
+sl Sličice na sekundo videa; med snemanjem igra teče natanko s to hitrostjo
+
+@ High keeps the most detail; small file saves disk space
+sl Visoka ohrani največ podrobnosti; majhna datoteka prihrani prostor na disku
+
+@ How many automatic demos are kept before the oldest is deleted; kept demos never count
+sl Koliko samodejnih posnetkov se hrani, preden se izbriše najstarejši; obdržani posnetki se ne štejejo
+
+@ Records every level you play to the Automatic list in Main Menu > Demos; keep the ones you want, the oldest are replaced
+sl Posname vsako odigrano raven na seznam Samodejni v Glavni meni > Posnetki; obdržite tiste, ki jih želite, najstarejši se zamenjajo
+
+@ Records game sound and music into the video
+sl Posname zvoke in glasbo igre v video
+
+@ Shows the playback bar (time, speed, timeline) after a control key, always, or never
+sl Prikaže vrstico predvajanja (čas, hitrost, časovnica) po kontrolni tipki, vedno ali nikoli
+
+@ Video format; needs ffmpeg with that encoder, else frames are saved as PNG images
+sl Oblika videa; potreben je ffmpeg s tem kodirnikom, sicer se sličice shranijo kot slike PNG
+
+# Demos and video recording.
+@ No clip highlighted: while the demo plays, drag across the timeline or press I and O
+sl Noben izsek ni označen: med posnetkom povlecite čez časovnico ali pritisnite I in O
+
+@ Video size; frames are scaled from the window size (bars keep the shape), so a larger size adds no detail
+sl Velikost videa; sličice se razširijo iz velikosti okna (s pasovi, da obdržijo obliko), zato večja velikost ne doda podrobnosti
+
+# Demos and video recording.
+@ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
+sl Kodira na grafični kartici (NVIDIA NVENC, AMD ali Intel prek VA-API, AMF ali Quick Sync, Apple VideoToolbox), ko jo ffmpeg lahko uporabi, in pusti procesor prost; sicer kodira procesor
 
 # ==== ui.txt ====
 
@@ -2540,6 +2654,142 @@ sl Shranjena igra
 @ Alt Fire on a glowing electronics panel within reach plugs one end in; the other end then shoots lightning with unlimited ammunition. The cable tethers you to the socket and catches on corners. Alt Fire or switching weapons yanks it out.
 sl Alternativni strel na svetleč elektronski panel na dosegu priklopi en konec; drugi nato strelja strele z neomejenim strelivom. Kabel vas priveže na vtičnico in se zatika ob vogale. Alternativni strel ali menjava orožja ga iztrga.
 
+@ From the game folder
+sl Iz mape igre
+
+@ From ironwail
+sl Iz ironwaila
+
+@ From the 2021 re-release
+sl Iz izdaje 2021
+
+# Demos and video recording.
+@ Automatic demos are off. Turn on Auto-Record Demos in Options > Demos to record every level you play.
+sl Samodejni posnetki so izklopljeni. Vklopite Samodejno snemaj posnetke v Možnosti > Posnetki, da posnamete vsako odigrano raven.
+
+@ Automatic: replaced when the slots are full
+sl Samodejni: zamenjan, ko so mesta polna
+
+@ Delete {}?
+sl Izbrišem {}?
+
+@ Demos
+sl Posnetki
+
+@ End of demo
+sl Konec posnetka
+
+@ Export Video
+sl Izvozi video
+
+@ Fast forward
+sl Hitro naprej
+
+@ Fast forward {}x
+sl Naprej {}x
+
+@ Indexing...
+sl Indeksiranje...
+
+@ K keep
+sl K obdrži
+
+@ Keep
+sl Obdrži
+
+@ Length: {}
+sl Dolžina: {}
+
+@ Map: {}
+sl Zemljevid: {}
+
+@ No automatic demos yet. Each level you play is recorded here.
+sl Samodejnih posnetkov še ni. Tukaj se posname vsaka odigrana raven.
+
+@ No saved demos yet. Record one with the console command 'record <name>', or keep an automatic demo.
+sl Shranjenih posnetkov še ni. Posnemite enega z ukazom konzole 'record <name>' ali obdržite samodejni posnetek.
+
+@ Pause
+sl Premor
+
+@ Paused
+sl V premoru
+
+@ Play {}x
+sl Predvajanje {}x
+
+@ Quake - exporting video {}%
+sl Quake - izvažanje videa {} %
+
+@ Recorded: {}
+sl Posneto: {}
+
+@ Rewind
+sl Previj nazaj
+
+@ Rewind {}x
+sl Nazaj {}x
+
+@ Size: {} KB
+sl Velikost: {} KB
+
+@ Skip 10 s
+sl Preskoči 10 s
+
+@ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
+sl Preslednica premor | Levo/Desno previjanje | Gor/Dol hitrost | PgUp/PgDn 10 s | I/O oznaka | E izvoz
+
+@ Speed
+sl Hitrost
+
+@ Switch List
+sl Zamenjaj seznam
+
+@ This can't be undone.
+sl Tega ni mogoče razveljaviti.
+
+@ While a demo plays: Space pauses, the arrows scrub and change speed, I and O mark a clip and E exports it.
+sl Med posnetkom: preslednica ustavi, puščice previjajo in spreminjajo hitrost, I in O označita izsek, E pa ga izvozi.
+
+@ Saved
+sl Shranjeni
+
+@ Automatic
+sl Samodejni
+
+# Demos and video recording.
+@ Export
+sl Izvozi
+
+@ H hide
+sl H skrij
+
+@ Hide
+sl Skrij
+
+@ Show
+sl Prikaži
+
+# Demos and video recording.
+@ Demo: {}
+sl Posnetek: {}
+
+@ Highlighted clip: {} to {} ({})
+sl Označeni izsek: {} do {} ({})
+
+@ Show controls
+sl Prikaži kontrolnike
+
+# Demos and video recording.
+@ About {} left
+sl Še približno {}
+
+@ Exporting video
+sl Izvažanje videa
+
+@ Preparing...
+sl Pripravljanje...
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3053,11 +3303,41 @@ sl Samo strežnik lahko uporabi changelevel
 @ {} renamed to {}
 sl {} se zdaj imenuje {}
 
-@ From the game folder
-sl Iz mape igre
+@ Already recording video.
+sl Video se že snema.
 
-@ From ironwail
-sl Iz ironwaila
+@ Export cancelled.
+sl Izvoz preklican.
 
-@ From the 2021 re-release
-sl Iz izdaje 2021
+@ Exporting {} to video
+sl Izvažanje {} v video
+
+@ Kept demo {}
+sl Posnetek obdržan: {}
+
+@ No auto-demo to keep.
+sl Ni samodejnega posnetka za obdržati.
+
+@ Not playing a demo.
+sl Noben posnetek se ne predvaja.
+
+@ Not recording video.
+sl Video se ne snema.
+
+@ Recording video to {}
+sl Snemanje videa v {}
+
+@ This demo is already saved.
+sl Ta posnetek je že shranjen.
+
+@ This level's demo will be kept when it ends.
+sl Posnetek te ravni bo obdržan, ko se konča.
+
+@ Video capture is not available in this build.
+sl Snemanje videa v tej različici ni na voljo.
+
+@ Wrote {} ({}s)
+sl Zapisano {} ({} s)
+
+@ ffmpeg not found: wrote {} PNG frames and a WAV to {}
+sl ffmpeg ni najden: zapisanih {} sličic PNG in WAV v {}

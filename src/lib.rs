@@ -18,6 +18,7 @@ mod hitfx;
 mod impacts;
 mod tracers;
 mod bboxes;
+mod capture;
 mod demo;
 mod draw;
 #[cfg(test)]
@@ -128,22 +129,27 @@ fn open_game(o: &Opts) -> Result<(Fs, PathBuf, [[u8; 3]; 256]), String> {
     Ok((fs, basedir, pal))
 }
 
-/// Opens the audio device with a mixer reading sounds through its own `Fs`.
-fn open_sound(p: &qplatform::Platform, basedir: &std::path::Path, fs: &Fs) -> (Option<qplatform::AudioStream>, Option<SoundSystem>) {
+type Sound = (Option<qplatform::AudioStream>, Option<SoundSystem>, Option<std::sync::Arc<qsound::SharedMixer>>);
+
+/// Opens the audio device with a mixer reading sounds through its own `Fs`;
+/// the mixer is shared so video capture can paint it (`SharedMixer`).
+fn open_sound(p: &qplatform::Platform, basedir: &std::path::Path, fs: &Fs) -> Sound {
     let mut sfs = Fs::new(basedir);
     for g in fs.game_dirs() {
         sfs.add_game_dir(g);
     }
     let rate = 48000;
-    let (sys, mut mixer) = SoundSystem::new(rate, move |n| sfs.open(n));
-    match p.open_audio(rate, move |buf| mixer.paint(buf)) {
+    let (sys, mixer) = SoundSystem::new(rate, move |n| sfs.open(n));
+    let shared = std::sync::Arc::new(qsound::SharedMixer::new(mixer));
+    let dev = shared.clone();
+    match p.open_audio(rate, move |buf| dev.paint_device(buf)) {
         Ok(a) => {
             let _ = a.resume();
-            (Some(a), Some(sys))
+            (Some(a), Some(sys), Some(shared))
         }
         Err(e) => {
             eprintln!("audio: {e:?}");
-            (None, None)
+            (None, None, None)
         }
     }
 }
@@ -209,12 +215,13 @@ pub fn run() {
     });
     eprintln!("renderer: {}", renderer.device_name());
 
-    let (audio, snd) = match &platform {
+    let (audio, snd, mixer) = match &platform {
         Some(p) if !o.has("-nosound") => open_sound(p, &basedir, &fs),
-        _ => (None, None),
+        _ => (None, None, None),
     };
 
     let mut host = host::Host::new(fs, renderer, snd, o.args.clone());
+    host.mixer = mixer;
     host.headless = headless;
     if dedicated {
         host.make_dedicated();
@@ -238,8 +245,20 @@ pub fn run() {
     loop {
         // Host_FilterTime: timedemo runs uncapped.
         let maxfps = if dedicated { 72.0 } else if host.timedemo_active() { 0.0 } else { host.server.core.cvars.value_of("host_maxfps") };
+        let capture = host.capture_step();
         let dt = if let Some(dt) = fixed_step {
             dt
+        } else if let Some((step, paced)) = capture {
+            // Video capture: exactly one frame per step; live captures keep
+            // real-time pace, exports run as fast as they render.
+            if paced && !headless {
+                while last.elapsed().as_secs_f64() < step {
+                    let rem = step - last.elapsed().as_secs_f64();
+                    if rem > 0.002 { std::thread::sleep(Duration::from_secs_f64(rem - 0.001)); } else { std::hint::spin_loop(); }
+                }
+            }
+            last = Instant::now();
+            step
         } else if headless && !realtime {
             1.0 / if maxfps > 0.0 { maxfps.min(1000.0) as f64 } else { 72.0 }
         } else {
@@ -274,6 +293,7 @@ pub fn run() {
         }
     }
     host.write_config();
+    host.shutdown_recordings();
     drop(audio);
 }
 

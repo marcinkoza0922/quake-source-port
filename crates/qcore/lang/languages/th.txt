@@ -1367,6 +1367,84 @@ th พื้นผิว​โลหะ​ใดๆ​ก็​เสียบ�
 @ Lightning damage every tenth of a second (the stock lightning gun does 30)
 th ความ​เสียหาย​จาก​สายฟ้า​ทุก​หนึ่ง​ใน​สิบ​วินาที (ปืน​สายฟ้า​ปกติ​ทำ 30)
 
+# Demos and video recording.
+@ AV1 (MP4)
+th AV1 (MP4)
+
+@ Auto-Demo Slots
+th ช่อง​เดโม​อัตโนมัติ
+
+@ Auto-Record Demos
+th บันทึก​เดโม​อัตโนมัติ
+
+@ Frame Rate
+th อัตรา​เฟรม
+
+@ H.264 (MP4)
+th H.264 (MP4)
+
+@ H.265 (MP4)
+th H.265 (MP4)
+
+@ Pause at End
+th หยุด​ชั่วคราว​ตอน​จบ
+
+@ Playback Bar
+th แถบ​เล่น
+
+@ Quality
+th คุณภาพ
+
+@ Record Audio
+th บันทึก​เสียง
+
+@ VP9 (WebM)
+th VP9 (WebM)
+
+@ Video Format
+th รูปแบบ​วิดีโอ
+
+@ Video Recording
+th การ​บันทึก​วิดีโอ
+
+@ ffmpeg Program
+th โปรแกรม ffmpeg
+
+@ small file
+th ไฟล์​เล็ก
+
+@ unlimited
+th ไม่​จำกัด
+
+# Demos and video recording.
+@ 1080p
+th 1080p
+
+@ 1440p
+th 1440p
+
+@ 4K
+th 4K
+
+@ 720p
+th 720p
+
+@ Destination
+th ปลายทาง
+
+@ Export Highlighted Clip
+th ส่งออก​คลิป​ที่​ไฮไลต์
+
+@ Export Whole Demo
+th ส่งออก​เดโม​ทั้งหมด
+
+@ Same as window
+th เหมือน​หน้าต่าง
+
+# Demos and video recording.
+@ GPU Encoding
+th เข้ารหัส​ด้วย GPU
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1789,6 +1867,42 @@ th อาวุธ​ใด​ทำให้​หยุด; ระยะ​ป
 
 @ Your own rockets and grenades don't hurt you; rocket jumps still work
 th จรวด​และ​ระเบิด​ของ​คุณ​เอง​ไม่​ทำ​ร้าย​คุณ; ยัง​กระโดด​ด้วย​จรวด​ได้
+
+# Demos and video recording.
+@ A demo you play stops on its last frame instead of returning to the menu, so you can rewind
+th เดโม​ที่​คุณ​เล่น​จะ​หยุด​ที่​เฟรม​สุดท้าย​แทน​การ​กลับ​ไป​ที่​เมนู เพื่อ​ให้​คุณ​กรอ​กลับ​ได้
+
+@ Frames per second of recorded video; the game runs at exactly this rate while recording
+th จำนวน​เฟรม​ต่อ​วินาที​ของ​วิดีโอ ระหว่าง​บันทึก​เกม​จะ​ทำงาน​ที่​อัตรา​นี้​พอดี
+
+@ High keeps the most detail; small file saves disk space
+th สูง​เก็บ​รายละเอียด​มาก​ที่สุด ไฟล์​เล็ก​ช่วย​ประหยัด​พื้นที่​ดิสก์
+
+@ How many automatic demos are kept before the oldest is deleted; kept demos never count
+th จำนวน​เดโม​อัตโนมัติ​ที่​เก็บ​ไว้​ก่อน​ลบ​อัน​เก่า​ที่สุด เดโม​ที่​เก็บ​ไว้​จะ​ไม่​นับ
+
+@ Records every level you play to the Automatic list in Main Menu > Demos; keep the ones you want, the oldest are replaced
+th บันทึก​ทุก​ด่าน​ที่​คุณ​เล่น​ลง​ใน​รายการ​อัตโนมัติ ใน เมนู​หลัก > เดโม เก็บ​อัน​ที่​ต้องการ​ไว้ อัน​ที่​เก่า​ที่สุด​จะ​ถูก​แทนที่
+
+@ Records game sound and music into the video
+th บันทึก​เสียง​และ​ดนตรี​ของ​เกม​ลง​ใน​วิดีโอ
+
+@ Shows the playback bar (time, speed, timeline) after a control key, always, or never
+th แสดง​แถบ​เล่น (เวลา ความเร็ว ไทม์ไลน์) หลัง​กด​ปุ่ม​ควบคุม ตลอด​เวลา หรือ​ไม่​แสดง​เลย
+
+@ Video format; needs ffmpeg with that encoder, else frames are saved as PNG images
+th รูปแบบ​วิดีโอ ต้อง​มี ffmpeg ที่​มี​ตัว​เข้ารหัส​นั้น ไม่​เช่นนั้น​เฟรม​จะ​ถูก​บันทึก​เป็น​ภาพ PNG
+
+# Demos and video recording.
+@ No clip highlighted: while the demo plays, drag across the timeline or press I and O
+th ยัง​ไม่ได้​ไฮไลต์​คลิป ระหว่าง​เล่น​เดโม​ให้​ลาก​บน​ไทม์ไลน์​หรือ​กด I และ O
+
+@ Video size; frames are scaled from the window size (bars keep the shape), so a larger size adds no detail
+th ขนาด​วิดีโอ เฟรม​ถูก​ปรับ​ขนาด​จาก​ขนาด​หน้าต่าง (มี​แถบ​ขอบ​เพื่อ​คง​สัดส่วน) ขนาด​ที่​ใหญ่​กว่า​จึง​ไม่​เพิ่ม​รายละเอียด
+
+# Demos and video recording.
+@ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
+th เข้ารหัส​ด้วย​การ์ด​จอ (NVIDIA NVENC, AMD หรือ Intel ผ่าน VA-API, AMF หรือ Quick Sync, Apple VideoToolbox) เมื่อ ffmpeg ใช้​ได้ ทำให้​หน่วย​ประมวลผล​ว่าง ไม่​เช่นนั้น​หน่วย​ประมวลผล​จะ​เข้ารหัส​เอง
 
 # ==== ui.txt ====
 
@@ -2540,6 +2654,142 @@ th บันทึก
 @ Alt Fire on a glowing electronics panel within reach plugs one end in; the other end then shoots lightning with unlimited ammunition. The cable tethers you to the socket and catches on corners. Alt Fire or switching weapons yanks it out.
 th ยิง​รอง​ใส่​แผง​อิเล็กทรอนิกส์​ที่​เรือง​แสง​ใน​ระยะ​เอื้อม​จะ​เสียบ​ปลาย​หนึ่ง จาก​นั้น​อีก​ปลาย​จะ​ยิง​สายฟ้า​ด้วย​กระสุน​ไม่​จำกัด สาย​จะ​ผูก​คุณ​ไว้​กับ​เต้า​เสียบ​และ​เกี่ยว​มุม ยิง​รอง​หรือ​เปลี่ยน​อาวุธ​จะ​กระชาก​มัน​ออก
 
+@ From the game folder
+th จาก​โฟลเดอร์​เกม
+
+@ From ironwail
+th จาก ironwail
+
+@ From the 2021 re-release
+th จาก​ฉบับ​รีรีลีส 2021
+
+# Demos and video recording.
+@ Automatic demos are off. Turn on Auto-Record Demos in Options > Demos to record every level you play.
+th เดโม​อัตโนมัติ​ปิด​อยู่ เปิด บันทึก​เดโม​อัตโนมัติ ใน ตัวเลือก > เดโม เพื่อ​บันทึก​ทุก​ด่าน​ที่​คุณ​เล่น
+
+@ Automatic: replaced when the slots are full
+th อัตโนมัติ: ถูก​แทนที่​เมื่อ​ช่อง​เต็ม
+
+@ Delete {}?
+th ลบ {} ไหม?
+
+@ Demos
+th เดโม
+
+@ End of demo
+th จบ​เดโม
+
+@ Export Video
+th ส่งออก​เป็น​วิดีโอ
+
+@ Fast forward
+th กรอ​ไป​ข้างหน้า
+
+@ Fast forward {}x
+th ไป​ข้างหน้า {}x
+
+@ Indexing...
+th กำลัง​สร้าง​ดัชนี...
+
+@ K keep
+th K เก็บ
+
+@ Keep
+th เก็บ
+
+@ Length: {}
+th ความ​ยาว: {}
+
+@ Map: {}
+th แผนที่: {}
+
+@ No automatic demos yet. Each level you play is recorded here.
+th ยัง​ไม่มี​เดโม​อัตโนมัติ ทุก​ด่าน​ที่​คุณ​เล่น​จะ​ถูก​บันทึก​ที่นี่
+
+@ No saved demos yet. Record one with the console command 'record <name>', or keep an automatic demo.
+th ยัง​ไม่มี​เดโม​ที่​บันทึก​ไว้ บันทึก​ด้วย​คำสั่ง​คอนโซล 'record <name>' หรือ​เก็บ​เดโม​อัตโนมัติ
+
+@ Pause
+th หยุด​ชั่วคราว
+
+@ Paused
+th หยุด​ชั่วคราว​อยู่
+
+@ Play {}x
+th เล่น {}x
+
+@ Quake - exporting video {}%
+th Quake - กำลัง​ส่งออก​วิดีโอ {}%
+
+@ Recorded: {}
+th บันทึก​เมื่อ: {}
+
+@ Rewind
+th กรอ​กลับ
+
+@ Rewind {}x
+th ถอย​กลับ {}x
+
+@ Size: {} KB
+th ขนาด: {} KB
+
+@ Skip 10 s
+th ข้าม 10 วินาที
+
+@ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
+th Space หยุด | ซ้าย/ขวา กรอ | ขึ้น/ลง ความเร็ว | PgUp/PgDn 10 วินาที | I/O มาร์ก | E ส่งออก
+
+@ Speed
+th ความเร็ว
+
+@ Switch List
+th สลับ​รายการ
+
+@ This can't be undone.
+th ย้อน​กลับ​ไม่ได้
+
+@ While a demo plays: Space pauses, the arrows scrub and change speed, I and O mark a clip and E exports it.
+th ระหว่าง​เล่น​เดโม: Space หยุด​ชั่วคราว ลูกศร​ใช้​กรอ​และ​เปลี่ยน​ความเร็ว I และ O มาร์ก​คลิป และ E ส่งออก​คลิป
+
+@ Saved
+th ที่​บันทึก​ไว้
+
+@ Automatic
+th อัตโนมัติ
+
+# Demos and video recording.
+@ Export
+th ส่งออก
+
+@ H hide
+th H ซ่อน
+
+@ Hide
+th ซ่อน
+
+@ Show
+th แสดง
+
+# Demos and video recording.
+@ Demo: {}
+th เดโม: {}
+
+@ Highlighted clip: {} to {} ({})
+th คลิป​ที่​ไฮไลต์: {} ถึง {} ({})
+
+@ Show controls
+th แสดง​แถบ​ควบคุม
+
+# Demos and video recording.
+@ About {} left
+th เหลือ​ประมาณ {}
+
+@ Exporting video
+th กำลัง​ส่งออก​วิดีโอ
+
+@ Preparing...
+th กำลัง​เตรียม...
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3053,11 +3303,41 @@ th เฉพาะ​เซิร์ฟเวอร์​เท่านั้�
 @ {} renamed to {}
 th {} เปลี่ยน​ชื่อ​เป็น {}
 
-@ From the game folder
-th จาก​โฟลเดอร์​เกม
+@ Already recording video.
+th กำลัง​บันทึก​วิดีโอ​อยู่​แล้ว
 
-@ From ironwail
-th จาก ironwail
+@ Export cancelled.
+th ยกเลิก​การ​ส่งออก​แล้ว
 
-@ From the 2021 re-release
-th จาก​ฉบับ​รีรีลีส 2021
+@ Exporting {} to video
+th กำลัง​ส่งออก {} เป็น​วิดีโอ
+
+@ Kept demo {}
+th เก็บ​เดโม​แล้ว: {}
+
+@ No auto-demo to keep.
+th ไม่มี​เดโม​อัตโนมัติ​ให้​เก็บ
+
+@ Not playing a demo.
+th ไม่มี​เดโม​ที่​กำลัง​เล่น
+
+@ Not recording video.
+th ไม่ได้​บันทึก​วิดีโอ
+
+@ Recording video to {}
+th กำลัง​บันทึก​วิดีโอ​ไป​ที่ {}
+
+@ This demo is already saved.
+th เดโม​นี้​บันทึก​ไว้​แล้ว
+
+@ This level's demo will be kept when it ends.
+th เดโม​ของ​ด่าน​นี้​จะ​ถูก​เก็บ​ไว้​เมื่อ​ด่าน​จบ
+
+@ Video capture is not available in this build.
+th บิลด์​นี้​ไม่มี​การ​บันทึก​วิดีโอ
+
+@ Wrote {} ({}s)
+th เขียน {} แล้ว ({} วินาที)
+
+@ ffmpeg not found: wrote {} PNG frames and a WAV to {}
+th ไม่พบ ffmpeg: เขียน​เฟรม PNG {} เฟรม​และ WAV หนึ่ง​ไฟล์​ไป​ที่ {}

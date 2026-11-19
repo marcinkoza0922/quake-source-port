@@ -159,6 +159,27 @@ le pot afișa, versiunea completă se păstrează ca `<nume>.qsd`
 (`playdemo <nume>.qsd`). `demo_convert <nume>` convertește o demonstrație
 mai veche.
 
+Meniu principal → Demo-uri arată demo-urile salvate și, cu Opțiuni →
+Demo-uri → Înregistrare automată demo activat, un demo automat al fiecărui
+nivel jucat; cele mai vechi sunt înlocuite când locurile sunt pline. K
+păstrează unul, E îl exportă ca video, iar Del îl șterge. Rapoartele de
+erori includ demo-ul automat al nivelului curent.
+
+În timpul unui demo, Spațiu pune pauză, ținând Stânga sau Dreapta derulezi
+înapoi sau înainte, Sus și Jos schimbă viteza, PgUp și PgDn sar 10 secunde,
+iar Home și End merg la început și la harta următoare. I și O marchează un
+clip; E îl exportă, sau tot demo-ul, în folderul `videos`. Comenzile rămân
+pe ecran; H sau Ascunde le ascunde, iar indicând marginea de jos apare o
+bandă care le aduce înapoi. Apasă butoanele, dă clic pe cronologie ca să
+sari acolo sau trage peste ea ca să evidențiezi un clip; Exportă întreabă
+cadrele pe secundă, dimensiunea, formatul și fișierul și dacă exporți clipul
+evidențiat sau tot demo-ul.
+
+`capture` pornește și oprește înregistrarea unui video în timp ce joci.
+Cadrele pe secundă, formatul și calitatea sunt în Opțiuni → Demo-uri →
+Înregistrare video. Videoclipurile necesită ffmpeg; fără el, cadrele se
+salvează ca imagini PNG cu un fișier WAV.
+
 ## Accesibilitate
 
 Options → Accesibilitate:

@@ -1,6 +1,7 @@
 //! Small host unit tests.
 
 mod menu_controller;
+mod demo_seek;
 
 mod relaunch_tests {
     #[test]

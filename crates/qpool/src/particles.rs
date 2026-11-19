@@ -70,6 +70,15 @@ impl ParticlePool {
         Some(i)
     }
 
+    /// Kill every particle, keeping the capacity.
+    pub fn clear(&mut self) {
+        for v in [&mut self.x, &mut self.y, &mut self.z, &mut self.vx, &mut self.vy, &mut self.vz, &mut self.die, &mut self.ramp] {
+            v.clear();
+        }
+        self.color.clear();
+        self.kind.clear();
+    }
+
     /// Swap-remove particle `i`; the last particle moves into `i`.
     #[inline]
     pub fn kill(&mut self, i: usize) {

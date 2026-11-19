@@ -711,7 +711,7 @@ fn center_gold(c: &mut Canvas, y: f32, s: &str) {
 
 /// At most `n` columns (wide CJK characters count two), with a trailing
 /// `~` when cut; control characters are dropped.
-fn clip(s: &str, n: usize) -> String {
+pub(crate) fn clip(s: &str, n: usize) -> String {
     let s: String = s.chars().filter(|c| !c.is_control()).collect();
     if n == 0 || qcore::lang::wrap::cols(&s) <= n {
         return s;

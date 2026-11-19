@@ -1367,6 +1367,84 @@ ur صرف الیکٹرانکس نہیں، کوئی بھی دھاتی سطح پل
 @ Lightning damage every tenth of a second (the stock lightning gun does 30)
 ur ہر سیکنڈ کے دسویں حصے میں بجلی کا نقصان (عام لائٹننگ گن 30 دیتی ہے)
 
+# Demos and video recording.
+@ AV1 (MP4)
+ur AV1 (MP4)
+
+@ Auto-Demo Slots
+ur خودکار ڈیمو کی جگہیں
+
+@ Auto-Record Demos
+ur ڈیمو خودکار ریکارڈ کریں
+
+@ Frame Rate
+ur فریم ریٹ
+
+@ H.264 (MP4)
+ur H.264 (MP4)
+
+@ H.265 (MP4)
+ur H.265 (MP4)
+
+@ Pause at End
+ur آخر میں روکیں
+
+@ Playback Bar
+ur پلے بیک بار
+
+@ Quality
+ur معیار
+
+@ Record Audio
+ur آواز ریکارڈ کریں
+
+@ VP9 (WebM)
+ur VP9 (WebM)
+
+@ Video Format
+ur ویڈیو فارمیٹ
+
+@ Video Recording
+ur ویڈیو ریکارڈنگ
+
+@ ffmpeg Program
+ur ffmpeg پروگرام
+
+@ small file
+ur چھوٹی فائل
+
+@ unlimited
+ur لامحدود
+
+# Demos and video recording.
+@ 1080p
+ur 1080p
+
+@ 1440p
+ur 1440p
+
+@ 4K
+ur 4K
+
+@ 720p
+ur 720p
+
+@ Destination
+ur منزل
+
+@ Export Highlighted Clip
+ur نشان زد کلپ برآمد کریں
+
+@ Export Whole Demo
+ur پورا ڈیمو برآمد کریں
+
+@ Same as window
+ur ونڈو جیسا
+
+# Demos and video recording.
+@ GPU Encoding
+ur GPU انکوڈنگ
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1789,6 +1867,42 @@ ur کون سے ہتھیار جمود پیدا کریں؛ دست بدست میں 
 
 @ Your own rockets and grenades don't hurt you; rocket jumps still work
 ur آپ کے اپنے راکٹ اور گرینیڈ آپ کو نقصان نہیں دیتے؛ راکٹ جمپ پھر بھی کام کرتے ہیں
+
+# Demos and video recording.
+@ A demo you play stops on its last frame instead of returning to the menu, so you can rewind
+ur آپ کا چلایا ہوا ڈیمو مینو پر واپس جانے کے بجائے آخری فریم پر رک جاتا ہے، تاکہ آپ اسے پیچھے لے جا سکیں
+
+@ Frames per second of recorded video; the game runs at exactly this rate while recording
+ur ویڈیو کے فی سیکنڈ فریم؛ ریکارڈنگ کے دوران گیم بالکل اسی رفتار سے چلتی ہے
+
+@ High keeps the most detail; small file saves disk space
+ur اعلیٰ سب سے زیادہ تفصیل رکھتا ہے؛ چھوٹی فائل ڈسک کی جگہ بچاتی ہے
+
+@ How many automatic demos are kept before the oldest is deleted; kept demos never count
+ur سب سے پرانا حذف ہونے سے پہلے کتنے خودکار ڈیمو رکھے جائیں؛ رکھے گئے ڈیمو شمار نہیں ہوتے
+
+@ Records every level you play to the Automatic list in Main Menu > Demos; keep the ones you want, the oldest are replaced
+ur آپ کا کھیلا ہر لیول مرکزی مینو > ڈیمو میں خودکار فہرست میں ریکارڈ کرتا ہے؛ جو چاہیں رکھیں، سب سے پرانے بدل دیے جاتے ہیں
+
+@ Records game sound and music into the video
+ur گیم کی آوازیں اور موسیقی ویڈیو میں ریکارڈ کرتا ہے
+
+@ Shows the playback bar (time, speed, timeline) after a control key, always, or never
+ur کنٹرول کلید کے بعد، ہمیشہ، یا کبھی نہیں پلے بیک بار (وقت، رفتار، ٹائم لائن) دکھاتا ہے
+
+@ Video format; needs ffmpeg with that encoder, else frames are saved as PNG images
+ur ویڈیو فارمیٹ؛ اس انکوڈر والا ffmpeg درکار ہے، ورنہ فریم PNG تصاویر کے طور پر محفوظ ہوتے ہیں
+
+# Demos and video recording.
+@ No clip highlighted: while the demo plays, drag across the timeline or press I and O
+ur کوئی کلپ نشان زد نہیں: ڈیمو چلتے وقت ٹائم لائن پر گھسیٹیں یا I اور O دبائیں
+
+@ Video size; frames are scaled from the window size (bars keep the shape), so a larger size adds no detail
+ur ویڈیو کا سائز؛ فریم ونڈو کے سائز سے بڑے کیے جاتے ہیں (شکل برقرار رکھنے کے لیے پٹیوں کے ساتھ)، اس لیے بڑا سائز تفصیل نہیں بڑھاتا
+
+# Demos and video recording.
+@ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
+ur جب ffmpeg استعمال کر سکے تو گرافکس کارڈ پر انکوڈ کرتا ہے (NVIDIA NVENC، VA-API کے ذریعے AMD یا Intel، AMF یا Quick Sync، Apple VideoToolbox) اور پروسیسر کو آزاد رکھتا ہے؛ ورنہ پروسیسر انکوڈ کرتا ہے
 
 # ==== ui.txt ====
 
@@ -2540,6 +2654,142 @@ ur سیو
 @ Alt Fire on a glowing electronics panel within reach plugs one end in; the other end then shoots lightning with unlimited ammunition. The cable tethers you to the socket and catches on corners. Alt Fire or switching weapons yanks it out.
 ur پہنچ میں موجود چمکتے الیکٹرانک پینل پر متبادل فائر ایک سرا لگا دیتا ہے؛ دوسرا سرا پھر لامحدود گولہ بارود کے ساتھ بجلی چلاتا ہے۔ کیبل آپ کو ساکٹ سے باندھ دیتی ہے اور کونوں میں پھنس جاتی ہے۔ متبادل فائر یا ہتھیار بدلنا اسے کھینچ نکالتا ہے۔
 
+@ From the game folder
+ur گیم فولڈر سے
+
+@ From ironwail
+ur ironwail سے
+
+@ From the 2021 re-release
+ur 2021 کی دوبارہ ریلیز سے
+
+# Demos and video recording.
+@ Automatic demos are off. Turn on Auto-Record Demos in Options > Demos to record every level you play.
+ur خودکار ڈیمو بند ہیں۔ ہر کھیلا گیا لیول ریکارڈ کرنے کے لیے اختیارات > ڈیمو میں ڈیمو خودکار ریکارڈ کریں کو آن کریں۔
+
+@ Automatic: replaced when the slots are full
+ur خودکار: جگہیں بھر جانے پر بدل دیا جاتا ہے
+
+@ Delete {}?
+ur {} حذف کریں؟
+
+@ Demos
+ur ڈیمو
+
+@ End of demo
+ur ڈیمو کا اختتام
+
+@ Export Video
+ur ویڈیو برآمد کریں
+
+@ Fast forward
+ur تیزی سے آگے
+
+@ Fast forward {}x
+ur آگے {}x
+
+@ Indexing...
+ur انڈیکس بن رہا ہے...
+
+@ K keep
+ur K رکھیں
+
+@ Keep
+ur رکھیں
+
+@ Length: {}
+ur دورانیہ: {}
+
+@ Map: {}
+ur نقشہ: {}
+
+@ No automatic demos yet. Each level you play is recorded here.
+ur ابھی کوئی خودکار ڈیمو نہیں۔ آپ کا کھیلا ہر لیول یہاں ریکارڈ ہوتا ہے۔
+
+@ No saved demos yet. Record one with the console command 'record <name>', or keep an automatic demo.
+ur ابھی کوئی محفوظ ڈیمو نہیں۔ کنسول کمانڈ 'record <name>' سے ایک ریکارڈ کریں، یا کوئی خودکار ڈیمو رکھ لیں۔
+
+@ Pause
+ur روکیں
+
+@ Paused
+ur رکا ہوا
+
+@ Play {}x
+ur چل رہا ہے {}x
+
+@ Quake - exporting video {}%
+ur Quake - ویڈیو برآمد ہو رہی ہے {}%
+
+@ Recorded: {}
+ur ریکارڈ شدہ: {}
+
+@ Rewind
+ur پیچھے لے جائیں
+
+@ Rewind {}x
+ur پیچھے {}x
+
+@ Size: {} KB
+ur سائز: {} KB
+
+@ Skip 10 s
+ur 10 سیکنڈ چھوڑیں
+
+@ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
+ur Space روکیں | بائیں/دائیں کھسکائیں | اوپر/نیچے رفتار | PgUp/PgDn 10 سیکنڈ | I/O نشان | E برآمد
+
+@ Speed
+ur رفتار
+
+@ Switch List
+ur فہرست بدلیں
+
+@ This can't be undone.
+ur اسے واپس نہیں کیا جا سکتا۔
+
+@ While a demo plays: Space pauses, the arrows scrub and change speed, I and O mark a clip and E exports it.
+ur ڈیمو چلتے وقت: Space روکتا ہے، تیر کھسکاتے اور رفتار بدلتے ہیں، I اور O کلپ نشان زد کرتے ہیں اور E اسے برآمد کرتا ہے۔
+
+@ Saved
+ur محفوظ
+
+@ Automatic
+ur خودکار
+
+# Demos and video recording.
+@ Export
+ur برآمد
+
+@ H hide
+ur H چھپائیں
+
+@ Hide
+ur چھپائیں
+
+@ Show
+ur دکھائیں
+
+# Demos and video recording.
+@ Demo: {}
+ur ڈیمو: {}
+
+@ Highlighted clip: {} to {} ({})
+ur نشان زد کلپ: {} سے {} ({})
+
+@ Show controls
+ur کنٹرول دکھائیں
+
+# Demos and video recording.
+@ About {} left
+ur تقریباً {} باقی
+
+@ Exporting video
+ur ویڈیو برآمد ہو رہی ہے
+
+@ Preparing...
+ur تیاری ہو رہی ہے...
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3053,11 +3303,41 @@ ur صرف سرور changelevel کر سکتا ہے
 @ {} renamed to {}
 ur {} کا نام بدل کر {} ہو گیا
 
-@ From the game folder
-ur گیم فولڈر سے
+@ Already recording video.
+ur ویڈیو پہلے ہی ریکارڈ ہو رہی ہے۔
 
-@ From ironwail
-ur ironwail سے
+@ Export cancelled.
+ur برآمد منسوخ ہو گئی۔
 
-@ From the 2021 re-release
-ur 2021 کی دوبارہ ریلیز سے
+@ Exporting {} to video
+ur {} کو ویڈیو میں برآمد کیا جا رہا ہے
+
+@ Kept demo {}
+ur ڈیمو رکھ لیا گیا: {}
+
+@ No auto-demo to keep.
+ur رکھنے کے لیے کوئی خودکار ڈیمو نہیں۔
+
+@ Not playing a demo.
+ur کوئی ڈیمو نہیں چل رہا۔
+
+@ Not recording video.
+ur کوئی ویڈیو ریکارڈ نہیں ہو رہی۔
+
+@ Recording video to {}
+ur ویڈیو {} میں ریکارڈ ہو رہی ہے
+
+@ This demo is already saved.
+ur یہ ڈیمو پہلے ہی محفوظ ہے۔
+
+@ This level's demo will be kept when it ends.
+ur اس لیول کا ڈیمو ختم ہونے پر رکھ لیا جائے گا۔
+
+@ Video capture is not available in this build.
+ur اس ورژن میں ویڈیو ریکارڈنگ دستیاب نہیں۔
+
+@ Wrote {} ({}s)
+ur {} لکھا گیا ({} سیکنڈ)
+
+@ ffmpeg not found: wrote {} PNG frames and a WAV to {}
+ur ffmpeg نہیں ملا: {} PNG فریم اور ایک WAV {} میں لکھے گئے

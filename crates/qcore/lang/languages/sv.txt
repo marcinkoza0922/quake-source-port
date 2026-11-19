@@ -1367,6 +1367,84 @@ sv Alla metallytor tar emot kontakten, inte bara elektronik
 @ Lightning damage every tenth of a second (the stock lightning gun does 30)
 sv Blixtskada varje tiondels sekund (vanliga blixtkanonen gör 30)
 
+# Demos and video recording.
+@ AV1 (MP4)
+sv AV1 (MP4)
+
+@ Auto-Demo Slots
+sv Platser för autodemor
+
+@ Auto-Record Demos
+sv Spela in demor automatiskt
+
+@ Frame Rate
+sv Bildfrekvens
+
+@ H.264 (MP4)
+sv H.264 (MP4)
+
+@ H.265 (MP4)
+sv H.265 (MP4)
+
+@ Pause at End
+sv Paus i slutet
+
+@ Playback Bar
+sv Uppspelningsfält
+
+@ Quality
+sv Kvalitet
+
+@ Record Audio
+sv Spela in ljud
+
+@ VP9 (WebM)
+sv VP9 (WebM)
+
+@ Video Format
+sv Videoformat
+
+@ Video Recording
+sv Videoinspelning
+
+@ ffmpeg Program
+sv ffmpeg-program
+
+@ small file
+sv liten fil
+
+@ unlimited
+sv obegränsat
+
+# Demos and video recording.
+@ 1080p
+sv 1080p
+
+@ 1440p
+sv 1440p
+
+@ 4K
+sv 4K
+
+@ 720p
+sv 720p
+
+@ Destination
+sv Mål
+
+@ Export Highlighted Clip
+sv Exportera markerat klipp
+
+@ Export Whole Demo
+sv Exportera hela demon
+
+@ Same as window
+sv Som fönstret
+
+# Demos and video recording.
+@ GPU Encoding
+sv GPU-kodning
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1789,6 +1867,42 @@ sv Vilka vapen som utlöser frysningen; närstrid omfattar yxan och alla modvape
 
 @ Your own rockets and grenades don't hurt you; rocket jumps still work
 sv Dina egna raketer och granater skadar inte dig; raketsprång fungerar fortfarande
+
+# Demos and video recording.
+@ A demo you play stops on its last frame instead of returning to the menu, so you can rewind
+sv En demo du spelar stannar på sista bilden i stället för att gå tillbaka till menyn, så att du kan spola tillbaka
+
+@ Frames per second of recorded video; the game runs at exactly this rate while recording
+sv Bilder per sekund i videon; spelet körs exakt i den takten under inspelning
+
+@ High keeps the most detail; small file saves disk space
+sv Hög behåller flest detaljer; liten fil sparar diskutrymme
+
+@ How many automatic demos are kept before the oldest is deleted; kept demos never count
+sv Hur många automatiska demor som sparas innan den äldsta tas bort; behållna demor räknas inte
+
+@ Records every level you play to the Automatic list in Main Menu > Demos; keep the ones you want, the oldest are replaced
+sv Spelar in varje bana du spelar i listan Automatiska under Huvudmeny > Demor; behåll dem du vill ha, de äldsta ersätts
+
+@ Records game sound and music into the video
+sv Spelar in spelets ljud och musik i videon
+
+@ Shows the playback bar (time, speed, timeline) after a control key, always, or never
+sv Visar uppspelningsfältet (tid, hastighet, tidslinje) efter en kontrolltangent, alltid eller aldrig
+
+@ Video format; needs ffmpeg with that encoder, else frames are saved as PNG images
+sv Videoformat; kräver ffmpeg med den kodaren, annars sparas bilderna som PNG-bilder
+
+# Demos and video recording.
+@ No clip highlighted: while the demo plays, drag across the timeline or press I and O
+sv Inget klipp markerat: dra över tidslinjen eller tryck på I och O medan demon spelas
+
+@ Video size; frames are scaled from the window size (bars keep the shape), so a larger size adds no detail
+sv Videostorlek; bilderna skalas från fönstrets storlek (med svarta kanter som behåller formen), så en större storlek ger inga fler detaljer
+
+# Demos and video recording.
+@ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
+sv Kodar på grafikkortet (NVIDIA NVENC, AMD eller Intel via VA-API, AMF eller Quick Sync, Apple VideoToolbox) när ffmpeg kan använda det, så att processorn blir ledig; annars kodar processorn
 
 # ==== ui.txt ====
 
@@ -2540,6 +2654,142 @@ sv Sparning
 @ Alt Fire on a glowing electronics panel within reach plugs one end in; the other end then shoots lightning with unlimited ammunition. The cable tethers you to the socket and catches on corners. Alt Fire or switching weapons yanks it out.
 sv Alternativ eld mot en lysande elektronikpanel inom räckhåll kopplar in ena änden; den andra skjuter då blixtar med obegränsad ammunition. Kabeln binder dig vid uttaget och fastnar i hörn. Alternativ eld eller vapenbyte sliter loss den.
 
+@ From the game folder
+sv Från spelmappen
+
+@ From ironwail
+sv Från ironwail
+
+@ From the 2021 re-release
+sv Från 2021 års nyutgåva
+
+# Demos and video recording.
+@ Automatic demos are off. Turn on Auto-Record Demos in Options > Demos to record every level you play.
+sv Automatiska demor är avstängda. Slå på Spela in demor automatiskt i Alternativ > Demor för att spela in varje bana du spelar.
+
+@ Automatic: replaced when the slots are full
+sv Automatisk: ersätts när platserna är fulla
+
+@ Delete {}?
+sv Ta bort {}?
+
+@ Demos
+sv Demor
+
+@ End of demo
+sv Slut på demon
+
+@ Export Video
+sv Exportera video
+
+@ Fast forward
+sv Snabbspola framåt
+
+@ Fast forward {}x
+sv Framåt {}x
+
+@ Indexing...
+sv Indexerar...
+
+@ K keep
+sv K behåll
+
+@ Keep
+sv Behåll
+
+@ Length: {}
+sv Längd: {}
+
+@ Map: {}
+sv Bana: {}
+
+@ No automatic demos yet. Each level you play is recorded here.
+sv Inga automatiska demor än. Varje bana du spelar spelas in här.
+
+@ No saved demos yet. Record one with the console command 'record <name>', or keep an automatic demo.
+sv Inga sparade demor än. Spela in en med konsolkommandot 'record <name>' eller behåll en automatisk demo.
+
+@ Pause
+sv Paus
+
+@ Paused
+sv Pausad
+
+@ Play {}x
+sv Spelar {}x
+
+@ Quake - exporting video {}%
+sv Quake - exporterar video {} %
+
+@ Recorded: {}
+sv Inspelad: {}
+
+@ Rewind
+sv Spola tillbaka
+
+@ Rewind {}x
+sv Bakåt {}x
+
+@ Size: {} KB
+sv Storlek: {} kB
+
+@ Skip 10 s
+sv Hoppa 10 s
+
+@ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
+sv Mellanslag paus | Vänster/Höger spola | Upp/Ned hastighet | PgUp/PgDn 10 s | I/O markera | E exportera
+
+@ Speed
+sv Hastighet
+
+@ Switch List
+sv Byt lista
+
+@ This can't be undone.
+sv Det går inte att ångra.
+
+@ While a demo plays: Space pauses, the arrows scrub and change speed, I and O mark a clip and E exports it.
+sv Under en demo: Mellanslag pausar, piltangenterna spolar och ändrar hastighet, I och O markerar ett klipp och E exporterar det.
+
+@ Saved
+sv Sparade
+
+@ Automatic
+sv Automatiska
+
+# Demos and video recording.
+@ Export
+sv Exportera
+
+@ H hide
+sv H dölj
+
+@ Hide
+sv Dölj
+
+@ Show
+sv Visa
+
+# Demos and video recording.
+@ Demo: {}
+sv Demo: {}
+
+@ Highlighted clip: {} to {} ({})
+sv Markerat klipp: {} till {} ({})
+
+@ Show controls
+sv Visa kontroller
+
+# Demos and video recording.
+@ About {} left
+sv Ungefär {} kvar
+
+@ Exporting video
+sv Exporterar video
+
+@ Preparing...
+sv Förbereder...
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3053,11 +3303,41 @@ sv Endast servern får använda changelevel
 @ {} renamed to {}
 sv {} bytte namn till {}
 
-@ From the game folder
-sv Från spelmappen
+@ Already recording video.
+sv Video spelas redan in.
 
-@ From ironwail
-sv Från ironwail
+@ Export cancelled.
+sv Exporten avbröts.
 
-@ From the 2021 re-release
-sv Från 2021 års nyutgåva
+@ Exporting {} to video
+sv Exporterar {} till video
+
+@ Kept demo {}
+sv Demo behållen: {}
+
+@ No auto-demo to keep.
+sv Ingen autodemo att behålla.
+
+@ Not playing a demo.
+sv Ingen demo spelas.
+
+@ Not recording video.
+sv Ingen video spelas in.
+
+@ Recording video to {}
+sv Spelar in video till {}
+
+@ This demo is already saved.
+sv Den här demon är redan sparad.
+
+@ This level's demo will be kept when it ends.
+sv Banans demo behålls när den tar slut.
+
+@ Video capture is not available in this build.
+sv Videoinspelning finns inte i den här versionen.
+
+@ Wrote {} ({}s)
+sv Skrev {} ({} s)
+
+@ ffmpeg not found: wrote {} PNG frames and a WAV to {}
+sv ffmpeg hittades inte: skrev {} PNG-bilder och en WAV till {}

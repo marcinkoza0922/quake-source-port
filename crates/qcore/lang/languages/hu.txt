@@ -1367,6 +1367,84 @@ hu Bármely fémfelület fogadja a dugót, nem csak az elektronika
 @ Lightning damage every tenth of a second (the stock lightning gun does 30)
 hu Villámsebzés tizedmásodpercenként (az eredeti villámfegyver 30-at sebez)
 
+# Demos and video recording.
+@ AV1 (MP4)
+hu AV1 (MP4)
+
+@ Auto-Demo Slots
+hu Automatikus demóhelyek
+
+@ Auto-Record Demos
+hu Demók automatikus felvétele
+
+@ Frame Rate
+hu Képkockasebesség
+
+@ H.264 (MP4)
+hu H.264 (MP4)
+
+@ H.265 (MP4)
+hu H.265 (MP4)
+
+@ Pause at End
+hu Szünet a végén
+
+@ Playback Bar
+hu Lejátszósáv
+
+@ Quality
+hu Minőség
+
+@ Record Audio
+hu Hang felvétele
+
+@ VP9 (WebM)
+hu VP9 (WebM)
+
+@ Video Format
+hu Videoformátum
+
+@ Video Recording
+hu Videofelvétel
+
+@ ffmpeg Program
+hu ffmpeg program
+
+@ small file
+hu kis fájl
+
+@ unlimited
+hu korlátlan
+
+# Demos and video recording.
+@ 1080p
+hu 1080p
+
+@ 1440p
+hu 1440p
+
+@ 4K
+hu 4K
+
+@ 720p
+hu 720p
+
+@ Destination
+hu Cél
+
+@ Export Highlighted Clip
+hu Kijelölt klip exportálása
+
+@ Export Whole Demo
+hu Az egész demó exportálása
+
+@ Same as window
+hu Mint az ablak
+
+# Demos and video recording.
+@ GPU Encoding
+hu GPU-kódolás
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1789,6 +1867,42 @@ hu Mely fegyverek váltják ki a fagyasztást; a közelharc a baltát és minden
 
 @ Your own rockets and grenades don't hurt you; rocket jumps still work
 hu A saját rakétáid és gránátjaid nem sebeznek meg; a rakétaugrás továbbra is működik
+
+# Demos and video recording.
+@ A demo you play stops on its last frame instead of returning to the menu, so you can rewind
+hu Az általad indított demó az utolsó képkockán megáll ahelyett, hogy visszatérne a menübe, így visszatekerheted
+
+@ Frames per second of recorded video; the game runs at exactly this rate while recording
+hu A videó képkocka/másodperce; felvétel közben a játék pontosan ezzel a sebességgel fut
+
+@ High keeps the most detail; small file saves disk space
+hu A magas őrzi meg a legtöbb részletet; a kis fájl lemezhelyet takarít meg
+
+@ How many automatic demos are kept before the oldest is deleted; kept demos never count
+hu Hány automatikus demó marad meg, mielőtt a legrégebbi törlődik; a megtartott demók nem számítanak
+
+@ Records every level you play to the Automatic list in Main Menu > Demos; keep the ones you want, the oldest are replaced
+hu Minden játszott pályát felvesz az Automatikus listába a Főmenü > Demók alatt; tartsd meg, amelyeket akarod, a legrégebbiek lecserélődnek
+
+@ Records game sound and music into the video
+hu Felveszi a játék hangjait és zenéjét a videóba
+
+@ Shows the playback bar (time, speed, timeline) after a control key, always, or never
+hu Megjeleníti a lejátszósávot (idő, sebesség, idővonal) egy vezérlőbillentyű után, mindig vagy soha
+
+@ Video format; needs ffmpeg with that encoder, else frames are saved as PNG images
+hu Videoformátum; ffmpeg kell az adott kódolóval, különben a képkockák PNG-képként mentődnek
+
+# Demos and video recording.
+@ No clip highlighted: while the demo plays, drag across the timeline or press I and O
+hu Nincs kijelölt klip: demó közben húzd végig az egeret az idővonalon, vagy nyomd meg az I és O billentyűt
+
+@ Video size; frames are scaled from the window size (bars keep the shape), so a larger size adds no detail
+hu Videóméret; a képkockák az ablak méretéből skálázódnak (sávokkal, hogy az arány megmaradjon), így a nagyobb méret nem ad részletet
+
+# Demos and video recording.
+@ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
+hu A videokártyán kódol (NVIDIA NVENC, AMD vagy Intel VA-API-n át, AMF vagy Quick Sync, Apple VideoToolbox), ha az ffmpeg használni tudja, így a processzor szabad marad; különben a processzor kódol
 
 # ==== ui.txt ====
 
@@ -2540,6 +2654,142 @@ hu Mentés
 @ Alt Fire on a glowing electronics panel within reach plugs one end in; the other end then shoots lightning with unlimited ammunition. The cable tethers you to the socket and catches on corners. Alt Fire or switching weapons yanks it out.
 hu A másodlagos tűz egy elérhető, világító elektronikus panelre bedugja az egyik végét; a másik ezután korlátlan lőszerrel villámokat lő. A kábel az aljzathoz köt, és beakad a sarkokba. A másodlagos tűz vagy fegyverváltás kirántja.
 
+@ From the game folder
+hu A játék mappájából
+
+@ From ironwail
+hu Az ironwailből
+
+@ From the 2021 re-release
+hu A 2021-es újrakiadásból
+
+# Demos and video recording.
+@ Automatic demos are off. Turn on Auto-Record Demos in Options > Demos to record every level you play.
+hu Az automatikus demók ki vannak kapcsolva. Kapcsold be a Demók automatikus felvétele beállítást a Beállítások > Demók menüben, hogy minden játszott pálya felvételre kerüljön.
+
+@ Automatic: replaced when the slots are full
+hu Automatikus: lecserélődik, ha a helyek beteltek
+
+@ Delete {}?
+hu Törlöd: {}?
+
+@ Demos
+hu Demók
+
+@ End of demo
+hu A demó vége
+
+@ Export Video
+hu Exportálás videóba
+
+@ Fast forward
+hu Előretekerés
+
+@ Fast forward {}x
+hu Előre {}x
+
+@ Indexing...
+hu Indexelés...
+
+@ K keep
+hu K megtartás
+
+@ Keep
+hu Megtartás
+
+@ Length: {}
+hu Hossz: {}
+
+@ Map: {}
+hu Pálya: {}
+
+@ No automatic demos yet. Each level you play is recorded here.
+hu Még nincsenek automatikus demók. Minden játszott pálya ide kerül felvételre.
+
+@ No saved demos yet. Record one with the console command 'record <name>', or keep an automatic demo.
+hu Még nincsenek mentett demók. Vegyél fel egyet a 'record <name>' konzolparanccsal, vagy tarts meg egy automatikus demót.
+
+@ Pause
+hu Szünet
+
+@ Paused
+hu Szüneteltetve
+
+@ Play {}x
+hu Lejátszás {}x
+
+@ Quake - exporting video {}%
+hu Quake - videó exportálása {}%
+
+@ Recorded: {}
+hu Felvéve: {}
+
+@ Rewind
+hu Visszatekerés
+
+@ Rewind {}x
+hu Vissza {}x
+
+@ Size: {} KB
+hu Méret: {} KB
+
+@ Skip 10 s
+hu 10 mp ugrás
+
+@ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
+hu Szóköz szünet | Bal/Jobb tekerés | Fel/Le sebesség | PgUp/PgDn 10 mp | I/O jelölés | E export
+
+@ Speed
+hu Sebesség
+
+@ Switch List
+hu Lista váltása
+
+@ This can't be undone.
+hu Ez nem vonható vissza.
+
+@ While a demo plays: Space pauses, the arrows scrub and change speed, I and O mark a clip and E exports it.
+hu Demó közben: a Szóköz szüneteltet, a nyilak tekernek és sebességet váltanak, az I és O kijelöl egy klipet, az E pedig exportálja.
+
+@ Saved
+hu Mentett
+
+@ Automatic
+hu Automatikus
+
+# Demos and video recording.
+@ Export
+hu Exportálás
+
+@ H hide
+hu H elrejtés
+
+@ Hide
+hu Elrejtés
+
+@ Show
+hu Mutatás
+
+# Demos and video recording.
+@ Demo: {}
+hu Demó: {}
+
+@ Highlighted clip: {} to {} ({})
+hu Kijelölt klip: {} – {} ({})
+
+@ Show controls
+hu Vezérlők mutatása
+
+# Demos and video recording.
+@ About {} left
+hu Még kb. {}
+
+@ Exporting video
+hu Videó exportálása
+
+@ Preparing...
+hu Előkészítés...
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3053,11 +3303,41 @@ hu Csak a szerver válthat pályát
 @ {} renamed to {}
 hu {} új neve: {}
 
-@ From the game folder
-hu A játék mappájából
+@ Already recording video.
+hu A videofelvétel már fut.
 
-@ From ironwail
-hu Az ironwailből
+@ Export cancelled.
+hu Exportálás megszakítva.
 
-@ From the 2021 re-release
-hu A 2021-es újrakiadásból
+@ Exporting {} to video
+hu {} exportálása videóba
+
+@ Kept demo {}
+hu Demó megtartva: {}
+
+@ No auto-demo to keep.
+hu Nincs megtartható automatikus demó.
+
+@ Not playing a demo.
+hu Nem fut demó.
+
+@ Not recording video.
+hu Nincs videofelvétel.
+
+@ Recording video to {}
+hu Videofelvétel ide: {}
+
+@ This demo is already saved.
+hu Ez a demó már el van mentve.
+
+@ This level's demo will be kept when it ends.
+hu A pálya demója a pálya végén megmarad.
+
+@ Video capture is not available in this build.
+hu A videofelvétel ebben a változatban nem érhető el.
+
+@ Wrote {} ({}s)
+hu Kiírva: {} ({} mp)
+
+@ ffmpeg not found: wrote {} PNG frames and a WAV to {}
+hu Az ffmpeg nem található: {} PNG-képkocka és egy WAV kiírva ide: {}

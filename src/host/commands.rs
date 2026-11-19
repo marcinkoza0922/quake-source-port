@@ -172,6 +172,8 @@ pub(super) fn register_commands(c: &mut Commands<Host>) {
             "debris" => Some(Page::Debris),
             "shader" | "screenshader" => Some(Page::ScreenShader),
             "audio" => Some(Page::Audio),
+            "demos" => Some(Page::Demos),
+            "video" => Some(Page::Video),
             "addons" => Some(Page::Addons),
             "newgame" => Some(Page::NewGameAddons),
             "portalgun" => Some(Page::PortalGun),
@@ -221,6 +223,9 @@ pub(super) fn register_commands(c: &mut Commands<Host>) {
     c.add("+showscores", |h, _| h.show_scores = true);
     c.add("-showscores", |h, _| h.show_scores = false);
     super::demo::register(c);
+    super::demo_play::register(c);
+    super::autodemo::register(c);
+    super::capture::register(c);
     for n in ["sizeup", "sizedown", "cd", "help", "scr_autoscale", "togglezoom", "messagemode", "messagemode2", "menu_multiplayer"] {
         c.add(n, |_, _| {});
     }

@@ -505,3 +505,94 @@ de {} heißt jetzt {}
 it {} ha cambiato nome in {}
 es {} ahora se llama {}
 ru {} теперь зовётся {}
+
+@ Already recording video.
+fr Enregistrement vidéo déjà en cours.
+de Videoaufnahme läuft bereits.
+it Registrazione video già in corso.
+es Ya se está grabando vídeo.
+ru Видео уже записывается.
+
+@ Export cancelled.
+fr Export annulé.
+de Export abgebrochen.
+it Esportazione annullata.
+es Exportación cancelada.
+ru Экспорт отменён.
+
+@ Exporting {} to video
+fr Export de {} en vidéo
+de Exportiere {} als Video
+it Esportazione di {} in video
+es Exportando {} a vídeo
+ru Экспорт {} в видео
+
+@ Kept demo {}
+fr Démo gardée : {}
+de Demo behalten: {}
+it Demo conservata: {}
+es Demo conservada: {}
+ru Демо сохранено: {}
+
+@ No auto-demo to keep.
+fr Aucune démo auto à garder.
+de Keine Auto-Demo zum Behalten.
+it Nessuna demo automatica da conservare.
+es No hay ninguna demo automática que conservar.
+ru Нет автодемо для сохранения.
+
+@ Not playing a demo.
+fr Aucune démo en lecture.
+de Es läuft keine Demo.
+it Nessuna demo in riproduzione.
+es No se está reproduciendo ninguna demo.
+ru Демо не воспроизводится.
+
+@ Not recording video.
+fr Aucun enregistrement vidéo.
+de Keine Videoaufnahme aktiv.
+it Nessuna registrazione video.
+es No se está grabando vídeo.
+ru Видео не записывается.
+
+@ Recording video to {}
+fr Enregistrement vidéo vers {}
+de Videoaufnahme nach {}
+it Registrazione video in {}
+es Grabando vídeo en {}
+ru Запись видео в {}
+
+@ This demo is already saved.
+fr Cette démo est déjà enregistrée.
+de Diese Demo ist bereits gespeichert.
+it Questa demo è già salvata.
+es Esta demo ya está guardada.
+ru Это демо уже сохранено.
+
+@ This level's demo will be kept when it ends.
+fr La démo de ce niveau sera gardée à sa fin.
+de Die Demo dieses Levels wird an seinem Ende behalten.
+it La demo di questo livello verrà conservata alla sua fine.
+es La demo de este nivel se conservará cuando termine.
+ru Демо этого уровня будет сохранено, когда он закончится.
+
+@ Video capture is not available in this build.
+fr La capture vidéo n'est pas disponible dans cette version.
+de Videoaufnahme ist in diesem Build nicht verfügbar.
+it La cattura video non è disponibile in questa versione.
+es La captura de vídeo no está disponible en esta versión.
+ru Запись видео недоступна в этой сборке.
+
+@ Wrote {} ({}s)
+fr Écrit {} ({} s)
+de {} geschrieben ({} s)
+it Scritto {} ({} s)
+es Escrito {} ({} s)
+ru Записано {} ({} с)
+
+@ ffmpeg not found: wrote {} PNG frames and a WAV to {}
+fr ffmpeg introuvable : {} images PNG et un WAV écrits dans {}
+de ffmpeg nicht gefunden: {} PNG-Bilder und eine WAV nach {} geschrieben
+it ffmpeg non trovato: scritti {} fotogrammi PNG e un WAV in {}
+es No se encontró ffmpeg: se escribieron {} fotogramas PNG y un WAV en {}
+ru ffmpeg не найден: {} кадров PNG и WAV записаны в {}

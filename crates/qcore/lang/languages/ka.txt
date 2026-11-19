@@ -1367,6 +1367,84 @@ ka შტეფსელს იღებს ნებისმიერი ლ�
 @ Lightning damage every tenth of a second (the stock lightning gun does 30)
 ka ელვის ზიანი წამის ყოველ მეათედში (ჩვეულებრივი ელვის იარაღი 30-ს აყენებს)
 
+# Demos and video recording.
+@ AV1 (MP4)
+ka AV1 (MP4)
+
+@ Auto-Demo Slots
+ka ავტოდემოს ადგილები
+
+@ Auto-Record Demos
+ka დემოების ავტომატური ჩაწერა
+
+@ Frame Rate
+ka კადრების სიხშირე
+
+@ H.264 (MP4)
+ka H.264 (MP4)
+
+@ H.265 (MP4)
+ka H.265 (MP4)
+
+@ Pause at End
+ka პაუზა ბოლოს
+
+@ Playback Bar
+ka დაკვრის ზოლი
+
+@ Quality
+ka ხარისხი
+
+@ Record Audio
+ka ხმის ჩაწერა
+
+@ VP9 (WebM)
+ka VP9 (WebM)
+
+@ Video Format
+ka ვიდეოს ფორმატი
+
+@ Video Recording
+ka ვიდეოს ჩაწერა
+
+@ ffmpeg Program
+ka ffmpeg პროგრამა
+
+@ small file
+ka პატარა ფაილი
+
+@ unlimited
+ka შეუზღუდავი
+
+# Demos and video recording.
+@ 1080p
+ka 1080p
+
+@ 1440p
+ka 1440p
+
+@ 4K
+ka 4K
+
+@ 720p
+ka 720p
+
+@ Destination
+ka დანიშნულება
+
+@ Export Highlighted Clip
+ka მონიშნული კლიპის ექსპორტი
+
+@ Export Whole Demo
+ka მთელი დემოს ექსპორტი
+
+@ Same as window
+ka როგორც ფანჯარა
+
+# Demos and video recording.
+@ GPU Encoding
+ka GPU კოდირება
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1789,6 +1867,42 @@ ka რომელი იარაღი იწვევს გაყინვ�
 
 @ Your own rockets and grenades don't hurt you; rocket jumps still work
 ka თქვენი რაკეტები და ყუმბარები თქვენ არ გაზიანებთ; რაკეტით ხტომა კვლავ მუშაობს
+
+# Demos and video recording.
+@ A demo you play stops on its last frame instead of returning to the menu, so you can rewind
+ka თქვენ მიერ ჩართული დემო ჩერდება ბოლო კადრზე, მენიუში დაბრუნების ნაცვლად, რომ შეძლოთ უკან გადახვევა
+
+@ Frames per second of recorded video; the game runs at exactly this rate while recording
+ka ჩაწერილი ვიდეოს კადრები წამში; ჩაწერისას თამაში ზუსტად ამ სიხშირით მუშაობს
+
+@ High keeps the most detail; small file saves disk space
+ka მაღალი ინახავს ყველაზე მეტ დეტალს; პატარა ფაილი ზოგავს დისკის ადგილს
+
+@ How many automatic demos are kept before the oldest is deleted; kept demos never count
+ka რამდენი ავტომატური დემო ინახება, სანამ უძველესი წაიშლება; შენახული დემოები არ ითვლება
+
+@ Records every level you play to the Automatic list in Main Menu > Demos; keep the ones you want, the oldest are replaced
+ka ჩაწერს ყველა ნათამაშებ დონეს სიაში „ავტომატური“ მთავარი მენიუ > დემოებში; შეინახეთ სასურველი, უძველესები იცვლება
+
+@ Records game sound and music into the video
+ka თამაშის ხმებსა და მუსიკას ვიდეოში ჩაწერს
+
+@ Shows the playback bar (time, speed, timeline) after a control key, always, or never
+ka აჩვენებს დაკვრის ზოლს (დრო, სიჩქარე, დროის ხაზი) მართვის ღილაკის შემდეგ, ყოველთვის ან არასდროს
+
+@ Video format; needs ffmpeg with that encoder, else frames are saved as PNG images
+ka ვიდეოს ფორმატი; საჭიროა ffmpeg ამ ენკოდერით, თორემ კადრები PNG სურათებად ინახება
+
+# Demos and video recording.
+@ No clip highlighted: while the demo plays, drag across the timeline or press I and O
+ka კლიპი არ არის მონიშნული: დემოს დროს გადაატარეთ დროის ხაზზე ან დააჭირეთ I-ს და O-ს
+
+@ Video size; frames are scaled from the window size (bars keep the shape), so a larger size adds no detail
+ka ვიდეოს ზომა; კადრები ფანჯრის ზომიდან მასშტაბირდება (ფორმის შესანარჩუნებლად ზოლებით), ამიტომ დიდი ზომა დეტალს არ მატებს
+
+# Demos and video recording.
+@ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
+ka კოდირებს ვიდეობარათზე (NVIDIA NVENC, AMD ან Intel VA-API-ით, AMF ან Quick Sync, Apple VideoToolbox), როცა ffmpeg-ს შეუძლია მისი გამოყენება, და პროცესორს თავისუფალს ტოვებს; სხვა შემთხვევაში კოდირებს პროცესორი
 
 # ==== ui.txt ====
 
@@ -2540,6 +2654,142 @@ ka შენახვა
 @ Alt Fire on a glowing electronics panel within reach plugs one end in; the other end then shoots lightning with unlimited ammunition. The cable tethers you to the socket and catches on corners. Alt Fire or switching weapons yanks it out.
 ka მეორეული სროლა ხელმისაწვდომ მანათობელ ელექტრონულ პანელზე ერთ ბოლოს აერთებს; მეორე ბოლო ამის შემდეგ ელვას ისვრის შეუზღუდავი ტყვია-წამლით. კაბელი როზეტს გაბამთ და კუთხეებს ედება. მეორეული სროლა ან იარაღის შეცვლა მას ამოგლეჯს.
 
+@ From the game folder
+ka თამაშის საქაღალდიდან
+
+@ From ironwail
+ka ironwail-იდან
+
+@ From the 2021 re-release
+ka 2021 წლის ხელახალი გამოშვებიდან
+
+# Demos and video recording.
+@ Automatic demos are off. Turn on Auto-Record Demos in Options > Demos to record every level you play.
+ka ავტომატური დემოები გამორთულია. ჩართეთ „დემოების ავტომატური ჩაწერა“ პარამეტრები > დემოებში, რომ ჩაიწეროს ყველა თქვენ მიერ ნათამაშები დონე.
+
+@ Automatic: replaced when the slots are full
+ka ავტომატური: იცვლება, როცა ადგილები სავსეა
+
+@ Delete {}?
+ka წაიშალოს {}?
+
+@ Demos
+ka დემოები
+
+@ End of demo
+ka დემოს დასასრული
+
+@ Export Video
+ka ვიდეოდ ექსპორტი
+
+@ Fast forward
+ka წინ გადახვევა
+
+@ Fast forward {}x
+ka წინ {}x
+
+@ Indexing...
+ka ინდექსირება...
+
+@ K keep
+ka K შენახვა
+
+@ Keep
+ka შენახვა
+
+@ Length: {}
+ka ხანგრძლივობა: {}
+
+@ Map: {}
+ka რუკა: {}
+
+@ No automatic demos yet. Each level you play is recorded here.
+ka ავტომატური დემოები ჯერ არ არის. აქ იწერება ყველა თქვენ მიერ ნათამაშები დონე.
+
+@ No saved demos yet. Record one with the console command 'record <name>', or keep an automatic demo.
+ka შენახული დემოები ჯერ არ არის. ჩაწერეთ კონსოლის ბრძანებით 'record <name>' ან შეინახეთ ავტომატური დემო.
+
+@ Pause
+ka პაუზა
+
+@ Paused
+ka დაპაუზებულია
+
+@ Play {}x
+ka დაკვრა {}x
+
+@ Quake - exporting video {}%
+ka Quake - ვიდეოს ექსპორტი {}%
+
+@ Recorded: {}
+ka ჩაწერილია: {}
+
+@ Rewind
+ka უკან გადახვევა
+
+@ Rewind {}x
+ka უკან {}x
+
+@ Size: {} KB
+ka ზომა: {} KB
+
+@ Skip 10 s
+ka 10 წმ-ის გამოტოვება
+
+@ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
+ka Space პაუზა | მარცხ./მარჯვ. გადახვევა | ზემოთ/ქვემოთ სიჩქარე | PgUp/PgDn 10 წმ | I/O ნიშნული | E ექსპორტი
+
+@ Speed
+ka სიჩქარე
+
+@ Switch List
+ka სიის შეცვლა
+
+@ This can't be undone.
+ka ამის გაუქმება შეუძლებელია.
+
+@ While a demo plays: Space pauses, the arrows scrub and change speed, I and O mark a clip and E exports it.
+ka დემოს დროს: Space აპაუზებს, ისრები გადაახვევს და სიჩქარეს ცვლის, I და O ნიშნავს კლიპს, E კი მას ექსპორტს უკეთებს.
+
+@ Saved
+ka შენახული
+
+@ Automatic
+ka ავტომატური
+
+# Demos and video recording.
+@ Export
+ka ექსპორტი
+
+@ H hide
+ka H დამალვა
+
+@ Hide
+ka დამალვა
+
+@ Show
+ka ჩვენება
+
+# Demos and video recording.
+@ Demo: {}
+ka დემო: {}
+
+@ Highlighted clip: {} to {} ({})
+ka მონიშნული კლიპი: {}–{} ({})
+
+@ Show controls
+ka მართვის ჩვენება
+
+# Demos and video recording.
+@ About {} left
+ka დარჩა დაახლოებით {}
+
+@ Exporting video
+ka ვიდეოს ექსპორტი
+
+@ Preparing...
+ka მომზადება...
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3053,11 +3303,41 @@ ka changelevel მხოლოდ სერვერს შეუძლია
 @ {} renamed to {}
 ka {} ახლა არის {}
 
-@ From the game folder
-ka თამაშის საქაღალდიდან
+@ Already recording video.
+ka ვიდეო უკვე იწერება.
 
-@ From ironwail
-ka ironwail-იდან
+@ Export cancelled.
+ka ექსპორტი გაუქმდა.
 
-@ From the 2021 re-release
-ka 2021 წლის ხელახალი გამოშვებიდან
+@ Exporting {} to video
+ka {} ექსპორტირდება ვიდეოდ
+
+@ Kept demo {}
+ka დემო შენახულია: {}
+
+@ No auto-demo to keep.
+ka შესანახი ავტოდემო არ არის.
+
+@ Not playing a demo.
+ka დემო არ უკრავს.
+
+@ Not recording video.
+ka ვიდეო არ იწერება.
+
+@ Recording video to {}
+ka ვიდეო იწერება {}-ში
+
+@ This demo is already saved.
+ka ეს დემო უკვე შენახულია.
+
+@ This level's demo will be kept when it ends.
+ka ამ დონის დემო შეინახება, როცა დასრულდება.
+
+@ Video capture is not available in this build.
+ka ვიდეოს ჩაწერა ამ ვერსიაში მიუწვდომელია.
+
+@ Wrote {} ({}s)
+ka ჩაიწერა {} ({} წმ)
+
+@ ffmpeg not found: wrote {} PNG frames and a WAV to {}
+ka ffmpeg ვერ მოიძებნა: {} PNG კადრი და WAV ჩაიწერა {}-ში

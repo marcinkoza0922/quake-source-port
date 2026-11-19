@@ -1367,6 +1367,84 @@ vi Mọi bề mặt kim loại đều cắm được phích, không chỉ đồ 
 @ Lightning damage every tenth of a second (the stock lightning gun does 30)
 vi Sát thương sét mỗi một phần mười giây (súng sét gốc gây 30)
 
+# Demos and video recording.
+@ AV1 (MP4)
+vi AV1 (MP4)
+
+@ Auto-Demo Slots
+vi Số ô demo tự động
+
+@ Auto-Record Demos
+vi Tự động ghi demo
+
+@ Frame Rate
+vi Tốc độ khung hình
+
+@ H.264 (MP4)
+vi H.264 (MP4)
+
+@ H.265 (MP4)
+vi H.265 (MP4)
+
+@ Pause at End
+vi Tạm dừng ở cuối
+
+@ Playback Bar
+vi Thanh phát
+
+@ Quality
+vi Chất lượng
+
+@ Record Audio
+vi Ghi âm thanh
+
+@ VP9 (WebM)
+vi VP9 (WebM)
+
+@ Video Format
+vi Định dạng video
+
+@ Video Recording
+vi Ghi video
+
+@ ffmpeg Program
+vi Chương trình ffmpeg
+
+@ small file
+vi tệp nhỏ
+
+@ unlimited
+vi không giới hạn
+
+# Demos and video recording.
+@ 1080p
+vi 1080p
+
+@ 1440p
+vi 1440p
+
+@ 4K
+vi 4K
+
+@ 720p
+vi 720p
+
+@ Destination
+vi Nơi lưu
+
+@ Export Highlighted Clip
+vi Xuất đoạn đã đánh dấu
+
+@ Export Whole Demo
+vi Xuất toàn bộ demo
+
+@ Same as window
+vi Giống cửa sổ
+
+# Demos and video recording.
+@ GPU Encoding
+vi Mã hóa bằng GPU
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1789,6 +1867,42 @@ vi Vũ khí nào kích hoạt đóng băng; cận chiến gồm rìu và mọi v
 
 @ Your own rockets and grenades don't hurt you; rocket jumps still work
 vi Tên lửa và lựu đạn của chính bạn không làm bạn bị thương; nhảy tên lửa vẫn hoạt động
+
+# Demos and video recording.
+@ A demo you play stops on its last frame instead of returning to the menu, so you can rewind
+vi Bản demo bạn phát sẽ dừng ở khung hình cuối thay vì quay về menu, để bạn có thể tua lại
+
+@ Frames per second of recorded video; the game runs at exactly this rate while recording
+vi Số khung hình mỗi giây của video; khi ghi, trò chơi chạy đúng tốc độ này
+
+@ High keeps the most detail; small file saves disk space
+vi Cao giữ nhiều chi tiết nhất; tệp nhỏ tiết kiệm dung lượng đĩa
+
+@ How many automatic demos are kept before the oldest is deleted; kept demos never count
+vi Số demo tự động được giữ trước khi xóa bản cũ nhất; demo đã giữ không tính
+
+@ Records every level you play to the Automatic list in Main Menu > Demos; keep the ones you want, the oldest are replaced
+vi Ghi lại mọi màn bạn chơi vào danh sách Tự động trong Menu chính > Demo; giữ những bản bạn muốn, bản cũ nhất sẽ bị thay
+
+@ Records game sound and music into the video
+vi Ghi âm thanh và nhạc của trò chơi vào video
+
+@ Shows the playback bar (time, speed, timeline) after a control key, always, or never
+vi Hiện thanh phát (thời gian, tốc độ, dòng thời gian) sau một phím điều khiển, luôn luôn, hoặc không bao giờ
+
+@ Video format; needs ffmpeg with that encoder, else frames are saved as PNG images
+vi Định dạng video; cần ffmpeg có bộ mã hóa đó, nếu không khung hình được lưu thành ảnh PNG
+
+# Demos and video recording.
+@ No clip highlighted: while the demo plays, drag across the timeline or press I and O
+vi Chưa đánh dấu đoạn nào: khi demo đang phát, kéo trên dòng thời gian hoặc nhấn I và O
+
+@ Video size; frames are scaled from the window size (bars keep the shape), so a larger size adds no detail
+vi Kích thước video; khung hình được co giãn từ kích thước cửa sổ (có viền để giữ tỉ lệ), nên kích thước lớn hơn không thêm chi tiết
+
+# Demos and video recording.
+@ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
+vi Mã hóa bằng card đồ họa (NVIDIA NVENC, AMD hoặc Intel qua VA-API, AMF hoặc Quick Sync, Apple VideoToolbox) khi ffmpeg dùng được, để bộ xử lý rảnh; nếu không thì bộ xử lý mã hóa
 
 # ==== ui.txt ====
 
@@ -2540,6 +2654,142 @@ vi Bản lưu
 @ Alt Fire on a glowing electronics panel within reach plugs one end in; the other end then shoots lightning with unlimited ammunition. The cable tethers you to the socket and catches on corners. Alt Fire or switching weapons yanks it out.
 vi Bắn phụ vào một bảng điện tử phát sáng trong tầm tay sẽ cắm một đầu vào; đầu kia khi đó bắn sét với đạn không giới hạn. Cáp buộc bạn vào ổ cắm và vướng vào các góc. Bắn phụ hoặc đổi vũ khí sẽ giật nó ra.
 
+@ From the game folder
+vi Từ thư mục trò chơi
+
+@ From ironwail
+vi Từ ironwail
+
+@ From the 2021 re-release
+vi Từ bản phát hành lại 2021
+
+# Demos and video recording.
+@ Automatic demos are off. Turn on Auto-Record Demos in Options > Demos to record every level you play.
+vi Demo tự động đang tắt. Bật Tự động ghi demo trong Tùy chọn > Demo để ghi lại mọi màn bạn chơi.
+
+@ Automatic: replaced when the slots are full
+vi Tự động: bị thay khi các ô đã đầy
+
+@ Delete {}?
+vi Xóa {}?
+
+@ Demos
+vi Demo
+
+@ End of demo
+vi Hết demo
+
+@ Export Video
+vi Xuất video
+
+@ Fast forward
+vi Tua nhanh
+
+@ Fast forward {}x
+vi Tua nhanh {}x
+
+@ Indexing...
+vi Đang lập chỉ mục...
+
+@ K keep
+vi K giữ
+
+@ Keep
+vi Giữ
+
+@ Length: {}
+vi Độ dài: {}
+
+@ Map: {}
+vi Bản đồ: {}
+
+@ No automatic demos yet. Each level you play is recorded here.
+vi Chưa có demo tự động. Mọi màn bạn chơi sẽ được ghi ở đây.
+
+@ No saved demos yet. Record one with the console command 'record <name>', or keep an automatic demo.
+vi Chưa có demo đã lưu. Hãy ghi bằng lệnh console 'record <name>', hoặc giữ một demo tự động.
+
+@ Pause
+vi Tạm dừng
+
+@ Paused
+vi Đã tạm dừng
+
+@ Play {}x
+vi Phát {}x
+
+@ Quake - exporting video {}%
+vi Quake - đang xuất video {}%
+
+@ Recorded: {}
+vi Ghi lúc: {}
+
+@ Rewind
+vi Tua lại
+
+@ Rewind {}x
+vi Tua lại {}x
+
+@ Size: {} KB
+vi Kích thước: {} KB
+
+@ Skip 10 s
+vi Bỏ qua 10 giây
+
+@ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
+vi Space tạm dừng | Trái/Phải tua | Lên/Xuống tốc độ | PgUp/PgDn 10 giây | I/O đánh dấu | E xuất
+
+@ Speed
+vi Tốc độ
+
+@ Switch List
+vi Đổi danh sách
+
+@ This can't be undone.
+vi Không thể hoàn tác.
+
+@ While a demo plays: Space pauses, the arrows scrub and change speed, I and O mark a clip and E exports it.
+vi Khi đang phát demo: Space tạm dừng, các phím mũi tên tua và đổi tốc độ, I và O đánh dấu đoạn cắt và E xuất nó.
+
+@ Saved
+vi Đã lưu
+
+@ Automatic
+vi Tự động
+
+# Demos and video recording.
+@ Export
+vi Xuất
+
+@ H hide
+vi H ẩn
+
+@ Hide
+vi Ẩn
+
+@ Show
+vi Hiện
+
+# Demos and video recording.
+@ Demo: {}
+vi Demo: {}
+
+@ Highlighted clip: {} to {} ({})
+vi Đoạn đã đánh dấu: {} đến {} ({})
+
+@ Show controls
+vi Hiện điều khiển
+
+# Demos and video recording.
+@ About {} left
+vi Còn khoảng {}
+
+@ Exporting video
+vi Đang xuất video
+
+@ Preparing...
+vi Đang chuẩn bị...
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3053,11 +3303,41 @@ vi Chỉ máy chủ mới được dùng changelevel
 @ {} renamed to {}
 vi {} đã đổi tên thành {}
 
-@ From the game folder
-vi Từ thư mục trò chơi
+@ Already recording video.
+vi Đang ghi video rồi.
 
-@ From ironwail
-vi Từ ironwail
+@ Export cancelled.
+vi Đã hủy xuất.
 
-@ From the 2021 re-release
-vi Từ bản phát hành lại 2021
+@ Exporting {} to video
+vi Đang xuất {} thành video
+
+@ Kept demo {}
+vi Đã giữ demo: {}
+
+@ No auto-demo to keep.
+vi Không có demo tự động nào để giữ.
+
+@ Not playing a demo.
+vi Không có demo nào đang phát.
+
+@ Not recording video.
+vi Không ghi video.
+
+@ Recording video to {}
+vi Đang ghi video vào {}
+
+@ This demo is already saved.
+vi Demo này đã được lưu.
+
+@ This level's demo will be kept when it ends.
+vi Demo của màn này sẽ được giữ khi màn kết thúc.
+
+@ Video capture is not available in this build.
+vi Ghi video không có trong bản dựng này.
+
+@ Wrote {} ({}s)
+vi Đã ghi {} ({} giây)
+
+@ ffmpeg not found: wrote {} PNG frames and a WAV to {}
+vi Không tìm thấy ffmpeg: đã ghi {} khung hình PNG và một tệp WAV vào {}

@@ -182,6 +182,7 @@ pub enum ClientEvent {
     Disconnect,
 }
 
+#[derive(Clone)]
 pub struct ClientState {
     pub protocol: u32,
     pub protocolflags: u32,

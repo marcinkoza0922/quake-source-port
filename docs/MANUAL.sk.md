@@ -153,6 +153,25 @@ efekty častíc, ktoré iné porty nedokážu zobraziť, úplná verzia sa ponec
 ako `<názov>.qsd` (`playdemo <názov>.qsd`). `demo_convert <názov>`
 prevedie staršie demo.
 
+Hlavné menu → Demá ukazuje uložené demá a so zapnutým Možnosti → Demá →
+Automaticky nahrávať demá aj automatické demo každého odohraného levelu;
+najstaršie sa nahrádzajú, keď sú sloty plné. K demo ponechá, E ho exportuje
+do videa, Del ho zmaže. Hlásenia chýb obsahujú automatické demo aktuálneho
+levelu.
+
+Počas dema Medzerník pozastaví, držanie Vľavo alebo Vpravo pretáča späť
+alebo vpred, Hore a Dole menia rýchlosť, PgUp a PgDn skáču o 10 sekúnd a
+Home a End idú na začiatok a na ďalšiu mapu. I a O označia klip; E ho, alebo
+celé demo, exportuje do priečinka `videos`. Ovládanie zostáva na obrazovke;
+H alebo Skryť ho skryje a ukázaním na spodný okraj sa objaví pás, ktorý ho
+vráti. Klikajte na tlačidlá, kliknutím na časovú os na ňu skočíte a ťahaním
+po nej označíte klip; Exportovať sa spýta na snímkovú frekvenciu, veľkosť,
+formát a súbor a na to, či exportovať označený klip, alebo celé demo.
+
+`capture` spúšťa a zastavuje nahrávanie videa počas hrania. Snímková
+frekvencia, formát a kvalita sú v Možnosti → Demá → Nahrávanie videa. Videá
+vyžadujú ffmpeg; bez neho sa snímky uložia ako obrázky PNG so súborom WAV.
+
 ## Prístupnosť
 
 Options → Prístupnosť:

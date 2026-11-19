@@ -157,6 +157,28 @@ mod deeltjeseffecten die andere ports niet kunnen tonen, dan blijft de
 volledige versie bewaard als `<name>.qsd` (`playdemo <name>.qsd`).
 `demo_convert <name>` zet een oudere demo om.
 
+Hoofdmenu → Demo's toont je opgeslagen demo's en, met Opties → Demo's →
+Demo's automatisch opnemen aan, een automatische demo van elk gespeeld
+level; de oudste worden vervangen als de plaatsen vol zijn. K bewaart er
+een, E exporteert hem als video en Del verwijdert hem. Foutrapporten
+bevatten de automatische demo van het huidige level.
+
+Tijdens een demo pauzeert Spatie, Links of Rechts ingedrukt houden spoelt
+terug of vooruit, Omhoog en Omlaag wijzigen de snelheid, PgUp en PgDn
+springen 10 seconden, en Home en End gaan naar het begin en naar de volgende
+map. I en O markeren een fragment; E exporteert het, of de hele demo, naar
+de map `videos`. De bediening blijft in beeld; H of Verbergen verbergt hem,
+en wijzen naar de onderrand toont een strook die hem terugbrengt. Klik op de
+knoppen, klik op de tijdlijn om daarheen te springen, of sleep eroverheen om
+een fragment te markeren; Exporteren vraagt naar beeldsnelheid, grootte,
+formaat en bestand, en of het gemarkeerde fragment of de hele demo wordt
+geëxporteerd.
+
+`capture` start en stopt een video-opname terwijl je speelt. Beeldsnelheid,
+formaat en kwaliteit staan onder Opties → Demo's → Video-opname. Video's
+hebben ffmpeg nodig; zonder worden de beelden als PNG-afbeeldingen met een
+WAV-bestand opgeslagen.
+
 ## Toegankelijkheid
 
 Options → Toegankelijkheid:

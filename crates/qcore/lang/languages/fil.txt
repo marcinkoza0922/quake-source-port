@@ -1367,6 +1367,84 @@ fil Anumang metal na ibabaw ay tumatanggap ng plug, hindi lang elektroniko
 @ Lightning damage every tenth of a second (the stock lightning gun does 30)
 fil Pinsala ng kidlat bawat ikasampu ng segundo (30 ang karaniwang lightning gun)
 
+# Demos and video recording.
+@ AV1 (MP4)
+fil AV1 (MP4)
+
+@ Auto-Demo Slots
+fil Mga slot ng auto-demo
+
+@ Auto-Record Demos
+fil Awtomatikong i-record ang mga demo
+
+@ Frame Rate
+fil Frame rate
+
+@ H.264 (MP4)
+fil H.264 (MP4)
+
+@ H.265 (MP4)
+fil H.265 (MP4)
+
+@ Pause at End
+fil I-pause sa dulo
+
+@ Playback Bar
+fil Playback bar
+
+@ Quality
+fil Kalidad
+
+@ Record Audio
+fil I-record ang tunog
+
+@ VP9 (WebM)
+fil VP9 (WebM)
+
+@ Video Format
+fil Format ng video
+
+@ Video Recording
+fil Pag-record ng video
+
+@ ffmpeg Program
+fil Programang ffmpeg
+
+@ small file
+fil maliit na file
+
+@ unlimited
+fil walang limitasyon
+
+# Demos and video recording.
+@ 1080p
+fil 1080p
+
+@ 1440p
+fil 1440p
+
+@ 4K
+fil 4K
+
+@ 720p
+fil 720p
+
+@ Destination
+fil Destinasyon
+
+@ Export Highlighted Clip
+fil I-export ang naka-highlight na clip
+
+@ Export Whole Demo
+fil I-export ang buong demo
+
+@ Same as window
+fil Kapareho ng window
+
+# Demos and video recording.
+@ GPU Encoding
+fil GPU encoding
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1789,6 +1867,42 @@ fil Aling armas ang nagpapahinto; saklaw ng melee ang palakol at anumang armas n
 
 @ Your own rockets and grenades don't hurt you; rocket jumps still work
 fil Hindi ka napipinsala ng sarili mong rocket at granada; gumagana pa rin ang rocket jump
+
+# Demos and video recording.
+@ A demo you play stops on its last frame instead of returning to the menu, so you can rewind
+fil Ang demong pinapanood mo ay hihinto sa huling frame sa halip na bumalik sa menu, para ma-rewind mo ito
+
+@ Frames per second of recorded video; the game runs at exactly this rate while recording
+fil Mga frame bawat segundo ng video; habang nagre-record, tumatakbo ang laro nang eksakto sa bilis na ito
+
+@ High keeps the most detail; small file saves disk space
+fil Pinakamaraming detalye ang mataas; nakakatipid ng disk space ang maliit na file
+
+@ How many automatic demos are kept before the oldest is deleted; kept demos never count
+fil Ilang awtomatikong demo ang itatabi bago burahin ang pinakaluma; hindi kasama ang mga itinabing demo
+
+@ Records every level you play to the Automatic list in Main Menu > Demos; keep the ones you want, the oldest are replaced
+fil Nire-record ang bawat level na nilalaro mo sa listahang Awtomatiko sa Main Menu > Demos; itabi ang gusto mo, papalitan ang pinakaluma
+
+@ Records game sound and music into the video
+fil Nire-record ang mga tunog at musika ng laro sa video
+
+@ Shows the playback bar (time, speed, timeline) after a control key, always, or never
+fil Ipinapakita ang playback bar (oras, bilis, timeline) pagkatapos ng control key, palagi, o hindi kailanman
+
+@ Video format; needs ffmpeg with that encoder, else frames are saved as PNG images
+fil Format ng video; kailangan ng ffmpeg na may encoder na iyon, kung wala ay sine-save ang mga frame bilang mga PNG na larawan
+
+# Demos and video recording.
+@ No clip highlighted: while the demo plays, drag across the timeline or press I and O
+fil Walang naka-highlight na clip: habang may demo, i-drag sa timeline o pindutin ang I at O
+
+@ Video size; frames are scaled from the window size (bars keep the shape), so a larger size adds no detail
+fil Laki ng video; ini-scale ang mga frame mula sa laki ng window (may mga bar para manatili ang hugis), kaya hindi nadaragdagan ang detalye sa mas malaking laki
+
+# Demos and video recording.
+@ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
+fil Nag-e-encode sa graphics card (NVIDIA NVENC, AMD o Intel sa VA-API, AMF o Quick Sync, Apple VideoToolbox) kapag magagamit ito ng ffmpeg, para malaya ang processor; kung hindi, ang processor ang mag-e-encode
 
 # ==== ui.txt ====
 
@@ -2540,6 +2654,142 @@ fil Save
 @ Alt Fire on a glowing electronics panel within reach plugs one end in; the other end then shoots lightning with unlimited ammunition. The cable tethers you to the socket and catches on corners. Alt Fire or switching weapons yanks it out.
 fil Ang alt fire sa kumikinang na elektronikong panel na abot-kamay ay isinasaksak ang isang dulo; ang kabilang dulo ay nagpapaputok ng kidlat na walang hanggang bala. Itinatali ka ng kable sa saksakan at sumasabit ito sa mga sulok. Hinuhugot ito ng alt fire o pagpapalit ng armas.
 
+@ From the game folder
+fil Mula sa folder ng laro
+
+@ From ironwail
+fil Mula sa ironwail
+
+@ From the 2021 re-release
+fil Mula sa 2021 re-release
+
+# Demos and video recording.
+@ Automatic demos are off. Turn on Auto-Record Demos in Options > Demos to record every level you play.
+fil Naka-off ang mga awtomatikong demo. I-on ang Awtomatikong i-record ang mga demo sa Options > Demos para ma-record ang bawat level na nilalaro mo.
+
+@ Automatic: replaced when the slots are full
+fil Awtomatiko: papalitan kapag puno na ang mga slot
+
+@ Delete {}?
+fil Burahin ang {}?
+
+@ Demos
+fil Mga Demo
+
+@ End of demo
+fil Katapusan ng demo
+
+@ Export Video
+fil I-export bilang video
+
+@ Fast forward
+fil Fast forward
+
+@ Fast forward {}x
+fil Fast forward {}x
+
+@ Indexing...
+fil Ini-index...
+
+@ K keep
+fil K itabi
+
+@ Keep
+fil Itabi
+
+@ Length: {}
+fil Haba: {}
+
+@ Map: {}
+fil Mapa: {}
+
+@ No automatic demos yet. Each level you play is recorded here.
+fil Wala pang awtomatikong demo. Dito nire-record ang bawat level na nilalaro mo.
+
+@ No saved demos yet. Record one with the console command 'record <name>', or keep an automatic demo.
+fil Wala pang naka-save na demo. Mag-record gamit ang console command na 'record <name>', o magtabi ng awtomatikong demo.
+
+@ Pause
+fil I-pause
+
+@ Paused
+fil Naka-pause
+
+@ Play {}x
+fil Pinapanood {}x
+
+@ Quake - exporting video {}%
+fil Quake - ine-export ang video {}%
+
+@ Recorded: {}
+fil Na-record: {}
+
+@ Rewind
+fil I-rewind
+
+@ Rewind {}x
+fil Pabalik {}x
+
+@ Size: {} KB
+fil Laki: {} KB
+
+@ Skip 10 s
+fil Laktawan ang 10 s
+
+@ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
+fil Space pause | Kaliwa/Kanan scrub | Taas/Baba bilis | PgUp/PgDn 10 s | I/O marka | E export
+
+@ Speed
+fil Bilis
+
+@ Switch List
+fil Palitan ang listahan
+
+@ This can't be undone.
+fil Hindi na ito maibabalik.
+
+@ While a demo plays: Space pauses, the arrows scrub and change speed, I and O mark a clip and E exports it.
+fil Habang may demo: Space para i-pause, ang mga arrow para mag-scrub at magbago ng bilis, I at O para markahan ang clip at E para i-export ito.
+
+@ Saved
+fil Naka-save
+
+@ Automatic
+fil Awtomatiko
+
+# Demos and video recording.
+@ Export
+fil I-export
+
+@ H hide
+fil H itago
+
+@ Hide
+fil Itago
+
+@ Show
+fil Ipakita
+
+# Demos and video recording.
+@ Demo: {}
+fil Demo: {}
+
+@ Highlighted clip: {} to {} ({})
+fil Naka-highlight na clip: {} hanggang {} ({})
+
+@ Show controls
+fil Ipakita ang mga kontrol
+
+# Demos and video recording.
+@ About {} left
+fil Mga {} pa
+
+@ Exporting video
+fil Ine-export ang video
+
+@ Preparing...
+fil Inihahanda...
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3053,11 +3303,41 @@ fil Ang server lang ang puwedeng mag-changelevel
 @ {} renamed to {}
 fil Pinalitan ni {} ang pangalan niya bilang {}
 
-@ From the game folder
-fil Mula sa folder ng laro
+@ Already recording video.
+fil May nire-record nang video.
 
-@ From ironwail
-fil Mula sa ironwail
+@ Export cancelled.
+fil Kinansela ang pag-export.
 
-@ From the 2021 re-release
-fil Mula sa 2021 re-release
+@ Exporting {} to video
+fil Ine-export ang {} bilang video
+
+@ Kept demo {}
+fil Itinabi ang demo: {}
+
+@ No auto-demo to keep.
+fil Walang auto-demo na maitatabi.
+
+@ Not playing a demo.
+fil Walang demong pinapanood.
+
+@ Not recording video.
+fil Walang nire-record na video.
+
+@ Recording video to {}
+fil Nire-record ang video sa {}
+
+@ This demo is already saved.
+fil Naka-save na ang demong ito.
+
+@ This level's demo will be kept when it ends.
+fil Itatabi ang demo ng level na ito kapag natapos ito.
+
+@ Video capture is not available in this build.
+fil Hindi available ang pag-record ng video sa build na ito.
+
+@ Wrote {} ({}s)
+fil Naisulat ang {} ({} s)
+
+@ ffmpeg not found: wrote {} PNG frames and a WAV to {}
+fil Hindi nakita ang ffmpeg: naisulat ang {} PNG frame at isang WAV sa {}

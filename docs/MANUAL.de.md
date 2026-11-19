@@ -165,6 +165,28 @@ können. Nutzt ein Mod Partikeleffekte, die andere Ports nicht darstellen
 können, bleibt die vollständige Fassung als `<Name>.qsd` erhalten
 (`playdemo <Name>.qsd`). `demo_convert <Name>` wandelt eine ältere Demo um.
 
+Hauptmenü → Demos listet deine gespeicherten Demos und, wenn Optionen →
+Demos → Demos automatisch aufnehmen an ist, eine automatische Demo jedes
+gespielten Levels; die ältesten werden ersetzt, wenn alle Plätze belegt
+sind. K behält eine, E exportiert sie als Video und Entf löscht sie.
+Fehlerberichte enthalten die automatische Demo des aktuellen Levels.
+
+Während eine Demo läuft, pausiert die Leertaste, Halten von Links oder
+Rechts spult zurück oder vor, Hoch und Runter ändern das Tempo, Bild↑ und
+Bild↓ springen 10 Sekunden, Pos1 und Ende gehen zum Anfang und zur nächsten
+Karte. I und O markieren einen Clip; E exportiert ihn, oder die ganze Demo,
+in den Ordner `videos`. Die Steuerung bleibt sichtbar; H oder Ausblenden
+blendet sie aus, und der Mauszeiger am unteren Rand zeigt eine Leiste, die
+sie zurückholt. Klicke auf die Schaltflächen, klicke auf die Zeitleiste, um
+dorthin zu springen, oder ziehe darüber, um einen Clip zu markieren;
+Exportieren fragt nach Bildrate, Größe, Format und Datei und ob der
+markierte Clip oder die ganze Demo exportiert wird.
+
+`capture` startet und stoppt eine Videoaufnahme beim Spielen. Bildrate,
+Format und Qualität findest du unter Optionen → Demos → Videoaufnahme.
+Videos brauchen ffmpeg; ohne werden die Bilder als PNG mit einer WAV-Datei
+gespeichert.
+
 ## Barrierefreiheit
 
 Options → Barrierefreiheit:

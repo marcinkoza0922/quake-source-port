@@ -1367,6 +1367,84 @@ da Enhver metalflade tager stikket, ikke kun elektronik
 @ Lightning damage every tenth of a second (the stock lightning gun does 30)
 da Lynskade hvert tiendedel sekund (den almindelige lynkanon giver 30)
 
+# Demos and video recording.
+@ AV1 (MP4)
+da AV1 (MP4)
+
+@ Auto-Demo Slots
+da Pladser til autodemoer
+
+@ Auto-Record Demos
+da Optag demoer automatisk
+
+@ Frame Rate
+da Billedfrekvens
+
+@ H.264 (MP4)
+da H.264 (MP4)
+
+@ H.265 (MP4)
+da H.265 (MP4)
+
+@ Pause at End
+da Pause til sidst
+
+@ Playback Bar
+da Afspilningslinje
+
+@ Quality
+da Kvalitet
+
+@ Record Audio
+da Optag lyd
+
+@ VP9 (WebM)
+da VP9 (WebM)
+
+@ Video Format
+da Videoformat
+
+@ Video Recording
+da Videooptagelse
+
+@ ffmpeg Program
+da ffmpeg-program
+
+@ small file
+da lille fil
+
+@ unlimited
+da ubegrænset
+
+# Demos and video recording.
+@ 1080p
+da 1080p
+
+@ 1440p
+da 1440p
+
+@ 4K
+da 4K
+
+@ 720p
+da 720p
+
+@ Destination
+da Destination
+
+@ Export Highlighted Clip
+da Eksportér markeret klip
+
+@ Export Whole Demo
+da Eksportér hele demoen
+
+@ Same as window
+da Som vinduet
+
+# Demos and video recording.
+@ GPU Encoding
+da GPU-kodning
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1789,6 +1867,42 @@ da Hvilke våben udløser frysningen; nærkamp dækker øksen og ethvert mod-vå
 
 @ Your own rockets and grenades don't hurt you; rocket jumps still work
 da Dine egne raketter og granater skader dig ikke; raketspring virker stadig
+
+# Demos and video recording.
+@ A demo you play stops on its last frame instead of returning to the menu, so you can rewind
+da En demo, du afspiller, stopper på det sidste billede i stedet for at vende tilbage til menuen, så du kan spole tilbage
+
+@ Frames per second of recorded video; the game runs at exactly this rate while recording
+da Billeder pr. sekund i videoen; spillet kører præcis med denne hastighed under optagelse
+
+@ High keeps the most detail; small file saves disk space
+da Høj bevarer flest detaljer; lille fil sparer diskplads
+
+@ How many automatic demos are kept before the oldest is deleted; kept demos never count
+da Hvor mange automatiske demoer der gemmes, før den ældste slettes; beholdte demoer tæller ikke
+
+@ Records every level you play to the Automatic list in Main Menu > Demos; keep the ones you want, the oldest are replaced
+da Optager hver bane, du spiller, i listen Automatiske under Hovedmenu > Demoer; behold dem, du vil have, de ældste erstattes
+
+@ Records game sound and music into the video
+da Optager spillets lyd og musik i videoen
+
+@ Shows the playback bar (time, speed, timeline) after a control key, always, or never
+da Viser afspilningslinjen (tid, hastighed, tidslinje) efter en styretast, altid eller aldrig
+
+@ Video format; needs ffmpeg with that encoder, else frames are saved as PNG images
+da Videoformat; kræver ffmpeg med den encoder, ellers gemmes billederne som PNG-billeder
+
+# Demos and video recording.
+@ No clip highlighted: while the demo plays, drag across the timeline or press I and O
+da Intet klip markeret: træk hen over tidslinjen eller tryk på I og O, mens demoen spiller
+
+@ Video size; frames are scaled from the window size (bars keep the shape), so a larger size adds no detail
+da Videostørrelse; billederne skaleres fra vinduets størrelse (med bjælker, så formen bevares), så en større størrelse giver ikke flere detaljer
+
+# Demos and video recording.
+@ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
+da Koder på grafikkortet (NVIDIA NVENC, AMD eller Intel via VA-API, AMF eller Quick Sync, Apple VideoToolbox), når ffmpeg kan bruge det, så processoren er fri; ellers koder processoren
 
 # ==== ui.txt ====
 
@@ -2540,6 +2654,142 @@ da Gemt spil
 @ Alt Fire on a glowing electronics panel within reach plugs one end in; the other end then shoots lightning with unlimited ammunition. The cable tethers you to the socket and catches on corners. Alt Fire or switching weapons yanks it out.
 da Sekundær ild på et lysende elektronikpanel inden for rækkevidde sætter den ene ende i; den anden skyder så lyn med ubegrænset ammunition. Kablet binder dig til stikket og hænger fast i hjørner. Sekundær ild eller våbenskift river det ud.
 
+@ From the game folder
+da Fra spilmappen
+
+@ From ironwail
+da Fra ironwail
+
+@ From the 2021 re-release
+da Fra genudgivelsen fra 2021
+
+# Demos and video recording.
+@ Automatic demos are off. Turn on Auto-Record Demos in Options > Demos to record every level you play.
+da Automatiske demoer er slået fra. Slå Optag demoer automatisk til under Indstillinger > Demoer for at optage hver bane, du spiller.
+
+@ Automatic: replaced when the slots are full
+da Automatisk: erstattes, når pladserne er fulde
+
+@ Delete {}?
+da Slet {}?
+
+@ Demos
+da Demoer
+
+@ End of demo
+da Slut på demoen
+
+@ Export Video
+da Eksportér video
+
+@ Fast forward
+da Spol frem
+
+@ Fast forward {}x
+da Frem {}x
+
+@ Indexing...
+da Indekserer...
+
+@ K keep
+da K behold
+
+@ Keep
+da Behold
+
+@ Length: {}
+da Længde: {}
+
+@ Map: {}
+da Bane: {}
+
+@ No automatic demos yet. Each level you play is recorded here.
+da Ingen automatiske demoer endnu. Hver bane, du spiller, optages her.
+
+@ No saved demos yet. Record one with the console command 'record <name>', or keep an automatic demo.
+da Ingen gemte demoer endnu. Optag en med konsolkommandoen 'record <name>', eller behold en automatisk demo.
+
+@ Pause
+da Pause
+
+@ Paused
+da På pause
+
+@ Play {}x
+da Afspiller {}x
+
+@ Quake - exporting video {}%
+da Quake - eksporterer video {} %
+
+@ Recorded: {}
+da Optaget: {}
+
+@ Rewind
+da Spol tilbage
+
+@ Rewind {}x
+da Tilbage {}x
+
+@ Size: {} KB
+da Størrelse: {} KB
+
+@ Skip 10 s
+da Spring 10 s
+
+@ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
+da Mellemrum pause | Venstre/Højre spol | Op/Ned hastighed | PgUp/PgDn 10 s | I/O markér | E eksportér
+
+@ Speed
+da Hastighed
+
+@ Switch List
+da Skift liste
+
+@ This can't be undone.
+da Det kan ikke fortrydes.
+
+@ While a demo plays: Space pauses, the arrows scrub and change speed, I and O mark a clip and E exports it.
+da Under en demo: Mellemrum sætter på pause, piletasterne spoler og ændrer hastighed, I og O markerer et klip, og E eksporterer det.
+
+@ Saved
+da Gemte
+
+@ Automatic
+da Automatiske
+
+# Demos and video recording.
+@ Export
+da Eksportér
+
+@ H hide
+da H skjul
+
+@ Hide
+da Skjul
+
+@ Show
+da Vis
+
+# Demos and video recording.
+@ Demo: {}
+da Demo: {}
+
+@ Highlighted clip: {} to {} ({})
+da Markeret klip: {} til {} ({})
+
+@ Show controls
+da Vis kontroller
+
+# Demos and video recording.
+@ About {} left
+da Cirka {} tilbage
+
+@ Exporting video
+da Eksporterer video
+
+@ Preparing...
+da Forbereder...
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3053,11 +3303,41 @@ da Kun serveren må bruge changelevel
 @ {} renamed to {}
 da {} har skiftet navn til {}
 
-@ From the game folder
-da Fra spilmappen
+@ Already recording video.
+da Der optages allerede video.
 
-@ From ironwail
-da Fra ironwail
+@ Export cancelled.
+da Eksport annulleret.
 
-@ From the 2021 re-release
-da Fra genudgivelsen fra 2021
+@ Exporting {} to video
+da Eksporterer {} til video
+
+@ Kept demo {}
+da Demo beholdt: {}
+
+@ No auto-demo to keep.
+da Ingen autodemo at beholde.
+
+@ Not playing a demo.
+da Der afspilles ingen demo.
+
+@ Not recording video.
+da Der optages ingen video.
+
+@ Recording video to {}
+da Optager video til {}
+
+@ This demo is already saved.
+da Denne demo er allerede gemt.
+
+@ This level's demo will be kept when it ends.
+da Banens demo beholdes, når den slutter.
+
+@ Video capture is not available in this build.
+da Videooptagelse er ikke tilgængelig i denne version.
+
+@ Wrote {} ({}s)
+da Skrev {} ({} s)
+
+@ ffmpeg not found: wrote {} PNG frames and a WAV to {}
+da ffmpeg ikke fundet: skrev {} PNG-billeder og en WAV til {}

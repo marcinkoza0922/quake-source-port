@@ -1367,6 +1367,84 @@ fa هر سطح فلزی دوشاخه را می‌پذیرد، نه فقط الک
 @ Lightning damage every tenth of a second (the stock lightning gun does 30)
 fa آسیب صاعقه در هر یک‌دهم ثانیه (تفنگ صاعقه معمولی ۳۰ وارد می‌کند)
 
+# Demos and video recording.
+@ AV1 (MP4)
+fa AV1 (MP4)
+
+@ Auto-Demo Slots
+fa جای دموهای خودکار
+
+@ Auto-Record Demos
+fa ضبط خودکار دموها
+
+@ Frame Rate
+fa نرخ فریم
+
+@ H.264 (MP4)
+fa H.264 (MP4)
+
+@ H.265 (MP4)
+fa H.265 (MP4)
+
+@ Pause at End
+fa مکث در پایان
+
+@ Playback Bar
+fa نوار پخش
+
+@ Quality
+fa کیفیت
+
+@ Record Audio
+fa ضبط صدا
+
+@ VP9 (WebM)
+fa VP9 (WebM)
+
+@ Video Format
+fa قالب ویدیو
+
+@ Video Recording
+fa ضبط ویدیو
+
+@ ffmpeg Program
+fa برنامهٔ ffmpeg
+
+@ small file
+fa فایل کوچک
+
+@ unlimited
+fa نامحدود
+
+# Demos and video recording.
+@ 1080p
+fa 1080p
+
+@ 1440p
+fa 1440p
+
+@ 4K
+fa 4K
+
+@ 720p
+fa 720p
+
+@ Destination
+fa مقصد
+
+@ Export Highlighted Clip
+fa خروجی از قطعهٔ علامت‌خورده
+
+@ Export Whole Demo
+fa خروجی از کل دمو
+
+@ Same as window
+fa مثل پنجره
+
+# Demos and video recording.
+@ GPU Encoding
+fa رمزگذاری با GPU
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1789,6 +1867,42 @@ fa کدام سلاح‌ها انجماد را فعال می‌کنند؛ نبر�
 
 @ Your own rockets and grenades don't hurt you; rocket jumps still work
 fa موشک‌ها و نارنجک‌های خودتان به شما آسیب نمی‌زنند؛ پرش با موشک همچنان کار می‌کند
+
+# Demos and video recording.
+@ A demo you play stops on its last frame instead of returning to the menu, so you can rewind
+fa دمویی که پخش می‌کنید به‌جای بازگشت به منو روی آخرین فریم می‌ایستد تا بتوانید آن را به عقب برگردانید
+
+@ Frames per second of recorded video; the game runs at exactly this rate while recording
+fa تعداد فریم در ثانیهٔ ویدیو؛ هنگام ضبط، بازی دقیقاً با همین نرخ اجرا می‌شود
+
+@ High keeps the most detail; small file saves disk space
+fa بالا بیشترین جزئیات را نگه می‌دارد؛ فایل کوچک فضای دیسک را صرفه‌جویی می‌کند
+
+@ How many automatic demos are kept before the oldest is deleted; kept demos never count
+fa چند دموی خودکار پیش از حذف قدیمی‌ترین نگه داشته می‌شود؛ دموهای نگه‌داشته‌شده شمرده نمی‌شوند
+
+@ Records every level you play to the Automatic list in Main Menu > Demos; keep the ones you want, the oldest are replaced
+fa هر مرحله‌ای که بازی می‌کنید در فهرست خودکار در منوی اصلی > دموها ضبط می‌کند؛ هرکدام را می‌خواهید نگه دارید، قدیمی‌ترین‌ها جایگزین می‌شوند
+
+@ Records game sound and music into the video
+fa صداها و موسیقی بازی را در ویدیو ضبط می‌کند
+
+@ Shows the playback bar (time, speed, timeline) after a control key, always, or never
+fa نوار پخش (زمان، سرعت، خط زمانی) را پس از یک کلید کنترل، همیشه یا هرگز نشان می‌دهد
+
+@ Video format; needs ffmpeg with that encoder, else frames are saved as PNG images
+fa قالب ویدیو؛ به ffmpeg با آن رمزگذار نیاز دارد، وگرنه فریم‌ها به‌صورت تصاویر PNG ذخیره می‌شوند
+
+# Demos and video recording.
+@ No clip highlighted: while the demo plays, drag across the timeline or press I and O
+fa قطعه‌ای علامت نخورده: هنگام پخش دمو روی خط زمانی بکشید یا I و O را بزنید
+
+@ Video size; frames are scaled from the window size (bars keep the shape), so a larger size adds no detail
+fa اندازهٔ ویدیو؛ فریم‌ها از اندازهٔ پنجره مقیاس می‌شوند (با نوار برای حفظ شکل)، پس اندازهٔ بزرگ‌تر جزئیاتی اضافه نمی‌کند
+
+# Demos and video recording.
+@ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
+fa وقتی ffmpeg بتواند، روی کارت گرافیک رمزگذاری می‌کند (NVIDIA NVENC، AMD یا Intel از طریق VA-API، AMF یا Quick Sync، Apple VideoToolbox) و پردازنده را آزاد می‌گذارد؛ وگرنه پردازنده رمزگذاری می‌کند
 
 # ==== ui.txt ====
 
@@ -2540,6 +2654,142 @@ fa ذخیره
 @ Alt Fire on a glowing electronics panel within reach plugs one end in; the other end then shoots lightning with unlimited ammunition. The cable tethers you to the socket and catches on corners. Alt Fire or switching weapons yanks it out.
 fa شلیک ثانویه روی یک پنل الکترونیکی درخشان در دسترس، یک سر را وصل می‌کند؛ سر دیگر سپس با مهمات نامحدود صاعقه شلیک می‌کند. کابل شما را به پریز می‌بندد و به گوشه‌ها گیر می‌کند. شلیک ثانویه یا تعویض سلاح آن را بیرون می‌کشد.
 
+@ From the game folder
+fa از پوشه‌ی بازی
+
+@ From ironwail
+fa از ironwail
+
+@ From the 2021 re-release
+fa از بازانتشار 2021
+
+# Demos and video recording.
+@ Automatic demos are off. Turn on Auto-Record Demos in Options > Demos to record every level you play.
+fa دموهای خودکار خاموش است. ضبط خودکار دموها را در گزینه‌ها > دموها روشن کنید تا هر مرحله‌ای که بازی می‌کنید ضبط شود.
+
+@ Automatic: replaced when the slots are full
+fa خودکار: وقتی جاها پر شود جایگزین می‌شود
+
+@ Delete {}?
+fa {} حذف شود؟
+
+@ Demos
+fa دموها
+
+@ End of demo
+fa پایان دمو
+
+@ Export Video
+fa خروجی ویدیو
+
+@ Fast forward
+fa جلو بردن سریع
+
+@ Fast forward {}x
+fa جلو {}x
+
+@ Indexing...
+fa در حال نمایه‌سازی...
+
+@ K keep
+fa K نگه‌داشتن
+
+@ Keep
+fa نگه‌داشتن
+
+@ Length: {}
+fa مدت: {}
+
+@ Map: {}
+fa نقشه: {}
+
+@ No automatic demos yet. Each level you play is recorded here.
+fa هنوز دموی خودکاری نیست. هر مرحله‌ای که بازی می‌کنید اینجا ضبط می‌شود.
+
+@ No saved demos yet. Record one with the console command 'record <name>', or keep an automatic demo.
+fa هنوز دموی ذخیره‌شده‌ای نیست. با فرمان کنسول 'record <name>' یکی ضبط کنید، یا یک دموی خودکار را نگه دارید.
+
+@ Pause
+fa مکث
+
+@ Paused
+fa متوقف
+
+@ Play {}x
+fa پخش {}x
+
+@ Quake - exporting video {}%
+fa Quake - در حال خروجی گرفتن ویدیو {}٪
+
+@ Recorded: {}
+fa ضبط‌شده: {}
+
+@ Rewind
+fa برگرداندن
+
+@ Rewind {}x
+fa عقب {}x
+
+@ Size: {} KB
+fa اندازه: {} KB
+
+@ Skip 10 s
+fa پرش ۱۰ ثانیه
+
+@ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
+fa Space مکث | چپ/راست جابه‌جایی | بالا/پایین سرعت | PgUp/PgDn ۱۰ ث | I/O نشانه | E خروجی
+
+@ Speed
+fa سرعت
+
+@ Switch List
+fa تعویض فهرست
+
+@ This can't be undone.
+fa این کار برگشت‌پذیر نیست.
+
+@ While a demo plays: Space pauses, the arrows scrub and change speed, I and O mark a clip and E exports it.
+fa هنگام پخش دمو: Space مکث می‌کند، پیکان‌ها جابه‌جا می‌کنند و سرعت را تغییر می‌دهند، I و O یک قطعه را علامت می‌زنند و E از آن خروجی می‌گیرد.
+
+@ Saved
+fa ذخیره‌شده
+
+@ Automatic
+fa خودکار
+
+# Demos and video recording.
+@ Export
+fa خروجی
+
+@ H hide
+fa H پنهان
+
+@ Hide
+fa پنهان
+
+@ Show
+fa نمایش
+
+# Demos and video recording.
+@ Demo: {}
+fa دمو: {}
+
+@ Highlighted clip: {} to {} ({})
+fa قطعهٔ علامت‌خورده: {} تا {} ({})
+
+@ Show controls
+fa نمایش کنترل‌ها
+
+# Demos and video recording.
+@ About {} left
+fa حدود {} مانده
+
+@ Exporting video
+fa در حال خروجی گرفتن ویدیو
+
+@ Preparing...
+fa در حال آماده‌سازی...
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3053,11 +3303,41 @@ fa فقط سرور می‌تواند changelevel کند
 @ {} renamed to {}
 fa {} به {} تغییر نام داد
 
-@ From the game folder
-fa از پوشه‌ی بازی
+@ Already recording video.
+fa ویدیو از قبل در حال ضبط است.
 
-@ From ironwail
-fa از ironwail
+@ Export cancelled.
+fa خروجی گرفتن لغو شد.
 
-@ From the 2021 re-release
-fa از بازانتشار 2021
+@ Exporting {} to video
+fa در حال خروجی گرفتن از {} به ویدیو
+
+@ Kept demo {}
+fa دمو نگه داشته شد: {}
+
+@ No auto-demo to keep.
+fa دموی خودکاری برای نگه‌داشتن نیست.
+
+@ Not playing a demo.
+fa هیچ دمویی پخش نمی‌شود.
+
+@ Not recording video.
+fa ویدیویی ضبط نمی‌شود.
+
+@ Recording video to {}
+fa در حال ضبط ویدیو در {}
+
+@ This demo is already saved.
+fa این دمو از قبل ذخیره شده است.
+
+@ This level's demo will be kept when it ends.
+fa دموی این مرحله پس از پایانش نگه داشته می‌شود.
+
+@ Video capture is not available in this build.
+fa ضبط ویدیو در این نسخه در دسترس نیست.
+
+@ Wrote {} ({}s)
+fa {} نوشته شد ({} ث)
+
+@ ffmpeg not found: wrote {} PNG frames and a WAV to {}
+fa ffmpeg پیدا نشد: {} فریم PNG و یک WAV در {} نوشته شد

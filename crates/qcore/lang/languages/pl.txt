@@ -1367,6 +1367,84 @@ pl Wtyczka pasuje do każdej metalowej powierzchni, nie tylko do elektroniki
 @ Lightning damage every tenth of a second (the stock lightning gun does 30)
 pl Obrażenia błyskawicy co dziesiątą część sekundy (zwykłe działo błyskawic zadaje 30)
 
+# Demos and video recording.
+@ AV1 (MP4)
+pl AV1 (MP4)
+
+@ Auto-Demo Slots
+pl Miejsca na autodema
+
+@ Auto-Record Demos
+pl Automatyczne nagrywanie dem
+
+@ Frame Rate
+pl Klatki na sekundę
+
+@ H.264 (MP4)
+pl H.264 (MP4)
+
+@ H.265 (MP4)
+pl H.265 (MP4)
+
+@ Pause at End
+pl Pauza na końcu
+
+@ Playback Bar
+pl Pasek odtwarzania
+
+@ Quality
+pl Jakość
+
+@ Record Audio
+pl Nagrywaj dźwięk
+
+@ VP9 (WebM)
+pl VP9 (WebM)
+
+@ Video Format
+pl Format wideo
+
+@ Video Recording
+pl Nagrywanie wideo
+
+@ ffmpeg Program
+pl Program ffmpeg
+
+@ small file
+pl mały plik
+
+@ unlimited
+pl bez limitu
+
+# Demos and video recording.
+@ 1080p
+pl 1080p
+
+@ 1440p
+pl 1440p
+
+@ 4K
+pl 4K
+
+@ 720p
+pl 720p
+
+@ Destination
+pl Miejsce zapisu
+
+@ Export Highlighted Clip
+pl Eksportuj zaznaczony fragment
+
+@ Export Whole Demo
+pl Eksportuj całe demo
+
+@ Same as window
+pl Jak okno
+
+# Demos and video recording.
+@ GPU Encoding
+pl Kodowanie na GPU
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1789,6 +1867,42 @@ pl Które bronie wywołują zamrożenie; walka wręcz obejmuje topór i każdą 
 
 @ Your own rockets and grenades don't hurt you; rocket jumps still work
 pl Twoje własne rakiety i granaty cię nie ranią; skoki rakietowe nadal działają
+
+# Demos and video recording.
+@ A demo you play stops on its last frame instead of returning to the menu, so you can rewind
+pl Uruchomione przez ciebie demo zatrzymuje się na ostatniej klatce zamiast wracać do menu, więc możesz je przewinąć
+
+@ Frames per second of recorded video; the game runs at exactly this rate while recording
+pl Klatki na sekundę nagrania; podczas nagrywania gra działa dokładnie z tą częstotliwością
+
+@ High keeps the most detail; small file saves disk space
+pl Wysoka zachowuje najwięcej szczegółów; mały plik oszczędza miejsce na dysku
+
+@ How many automatic demos are kept before the oldest is deleted; kept demos never count
+pl Ile automatycznych dem jest przechowywanych, zanim najstarsze zostanie usunięte; zachowane dema się nie liczą
+
+@ Records every level you play to the Automatic list in Main Menu > Demos; keep the ones you want, the oldest are replaced
+pl Nagrywa każdy rozegrany poziom na listę Automatyczne w Menu główne > Dema; zachowaj te, które chcesz, najstarsze są zastępowane
+
+@ Records game sound and music into the video
+pl Nagrywa dźwięki i muzykę gry do wideo
+
+@ Shows the playback bar (time, speed, timeline) after a control key, always, or never
+pl Pokazuje pasek odtwarzania (czas, prędkość, oś czasu) po klawiszu sterowania, zawsze lub nigdy
+
+@ Video format; needs ffmpeg with that encoder, else frames are saved as PNG images
+pl Format wideo; wymaga ffmpeg z tym koderem, w przeciwnym razie klatki są zapisywane jako obrazy PNG
+
+# Demos and video recording.
+@ No clip highlighted: while the demo plays, drag across the timeline or press I and O
+pl Brak zaznaczonego fragmentu: podczas dema przeciągnij po osi czasu lub naciśnij I i O
+
+@ Video size; frames are scaled from the window size (bars keep the shape), so a larger size adds no detail
+pl Rozmiar wideo; klatki są skalowane z rozmiaru okna (z pasami zachowującymi proporcje), więc większy rozmiar nie dodaje szczegółów
+
+# Demos and video recording.
+@ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
+pl Koduje na karcie graficznej (NVIDIA NVENC, AMD lub Intel przez VA-API, AMF albo Quick Sync, Apple VideoToolbox), gdy ffmpeg może jej użyć, odciążając procesor; w przeciwnym razie koduje procesor
 
 # ==== ui.txt ====
 
@@ -2540,6 +2654,142 @@ pl Zapis
 @ Alt Fire on a glowing electronics panel within reach plugs one end in; the other end then shoots lightning with unlimited ammunition. The cable tethers you to the socket and catches on corners. Alt Fire or switching weapons yanks it out.
 pl Ogień alternatywny na świecącym panelu elektronicznym w zasięgu wpina jeden koniec; drugi strzela błyskawicami bez limitu amunicji. Kabel wiąże cię z gniazdem i zaczepia o narożniki. Ogień alternatywny lub zmiana broni go wyrywa.
 
+@ From the game folder
+pl Z folderu gry
+
+@ From ironwail
+pl Z ironwail
+
+@ From the 2021 re-release
+pl Z reedycji z 2021 roku
+
+# Demos and video recording.
+@ Automatic demos are off. Turn on Auto-Record Demos in Options > Demos to record every level you play.
+pl Automatyczne dema są wyłączone. Włącz Automatyczne nagrywanie dem w Opcje > Dema, aby nagrywać każdy rozegrany poziom.
+
+@ Automatic: replaced when the slots are full
+pl Automatyczne: zastępowane, gdy miejsca się zapełnią
+
+@ Delete {}?
+pl Usunąć {}?
+
+@ Demos
+pl Dema
+
+@ End of demo
+pl Koniec dema
+
+@ Export Video
+pl Eksportuj wideo
+
+@ Fast forward
+pl Przewijanie do przodu
+
+@ Fast forward {}x
+pl Do przodu {}x
+
+@ Indexing...
+pl Indeksowanie...
+
+@ K keep
+pl K zachowaj
+
+@ Keep
+pl Zachowaj
+
+@ Length: {}
+pl Długość: {}
+
+@ Map: {}
+pl Mapa: {}
+
+@ No automatic demos yet. Each level you play is recorded here.
+pl Nie ma jeszcze automatycznych dem. Każdy rozegrany poziom jest nagrywany tutaj.
+
+@ No saved demos yet. Record one with the console command 'record <name>', or keep an automatic demo.
+pl Nie ma jeszcze zapisanych dem. Nagraj jedno poleceniem konsoli 'record <name>' albo zachowaj demo automatyczne.
+
+@ Pause
+pl Pauza
+
+@ Paused
+pl Wstrzymano
+
+@ Play {}x
+pl Odtwarzanie {}x
+
+@ Quake - exporting video {}%
+pl Quake - eksport wideo {}%
+
+@ Recorded: {}
+pl Nagrano: {}
+
+@ Rewind
+pl Przewijanie do tyłu
+
+@ Rewind {}x
+pl Do tyłu {}x
+
+@ Size: {} KB
+pl Rozmiar: {} KB
+
+@ Skip 10 s
+pl Pomiń 10 s
+
+@ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
+pl Spacja pauza | Lewo/Prawo przewijanie | Góra/Dół prędkość | PgUp/PgDn 10 s | I/O znacznik | E eksport
+
+@ Speed
+pl Prędkość
+
+@ Switch List
+pl Zmień listę
+
+@ This can't be undone.
+pl Tego nie można cofnąć.
+
+@ While a demo plays: Space pauses, the arrows scrub and change speed, I and O mark a clip and E exports it.
+pl Podczas dema: Spacja wstrzymuje, strzałki przewijają i zmieniają prędkość, I i O zaznaczają fragment, a E go eksportuje.
+
+@ Saved
+pl Zapisane
+
+@ Automatic
+pl Automatyczne
+
+# Demos and video recording.
+@ Export
+pl Eksportuj
+
+@ H hide
+pl H ukryj
+
+@ Hide
+pl Ukryj
+
+@ Show
+pl Pokaż
+
+# Demos and video recording.
+@ Demo: {}
+pl Demo: {}
+
+@ Highlighted clip: {} to {} ({})
+pl Zaznaczony fragment: {} do {} ({})
+
+@ Show controls
+pl Pokaż sterowanie
+
+# Demos and video recording.
+@ About {} left
+pl Zostało około {}
+
+@ Exporting video
+pl Eksportowanie wideo
+
+@ Preparing...
+pl Przygotowywanie...
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3053,11 +3303,41 @@ pl Tylko serwer może użyć changelevel
 @ {} renamed to {}
 pl {} zmienia nazwę na {}
 
-@ From the game folder
-pl Z folderu gry
+@ Already recording video.
+pl Wideo jest już nagrywane.
 
-@ From ironwail
-pl Z ironwail
+@ Export cancelled.
+pl Eksport anulowany.
 
-@ From the 2021 re-release
-pl Z reedycji z 2021 roku
+@ Exporting {} to video
+pl Eksport {} do wideo
+
+@ Kept demo {}
+pl Zachowano demo {}
+
+@ No auto-demo to keep.
+pl Brak autodema do zachowania.
+
+@ Not playing a demo.
+pl Nie odtwarzasz dema.
+
+@ Not recording video.
+pl Wideo nie jest nagrywane.
+
+@ Recording video to {}
+pl Nagrywanie wideo do {}
+
+@ This demo is already saved.
+pl To demo jest już zapisane.
+
+@ This level's demo will be kept when it ends.
+pl Demo tego poziomu zostanie zachowane, gdy się skończy.
+
+@ Video capture is not available in this build.
+pl Nagrywanie wideo nie jest dostępne w tej wersji.
+
+@ Wrote {} ({}s)
+pl Zapisano {} ({} s)
+
+@ ffmpeg not found: wrote {} PNG frames and a WAV to {}
+pl Nie znaleziono ffmpeg: zapisano {} klatek PNG i plik WAV w {}

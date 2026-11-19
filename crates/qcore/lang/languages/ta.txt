@@ -1367,6 +1367,84 @@ ta மின்னணு மட்டுமல்ல, எந்த உலோக 
 @ Lightning damage every tenth of a second (the stock lightning gun does 30)
 ta ஒவ்வொரு பத்தில் ஒரு வினாடிக்கும் மின்னல் சேதம் (சாதாரண மின்னல் துப்பாக்கி 30)
 
+# Demos and video recording.
+@ AV1 (MP4)
+ta AV1 (MP4)
+
+@ Auto-Demo Slots
+ta தானியங்கி டெமோ இடங்கள்
+
+@ Auto-Record Demos
+ta டெமோக்களைத் தானாகப் பதிவுசெய்
+
+@ Frame Rate
+ta சட்டக வீதம்
+
+@ H.264 (MP4)
+ta H.264 (MP4)
+
+@ H.265 (MP4)
+ta H.265 (MP4)
+
+@ Pause at End
+ta இறுதியில் இடைநிறுத்து
+
+@ Playback Bar
+ta இயக்கப் பட்டை
+
+@ Quality
+ta தரம்
+
+@ Record Audio
+ta ஒலியைப் பதிவுசெய்
+
+@ VP9 (WebM)
+ta VP9 (WebM)
+
+@ Video Format
+ta வீடியோ வடிவம்
+
+@ Video Recording
+ta வீடியோ பதிவு
+
+@ ffmpeg Program
+ta ffmpeg நிரல்
+
+@ small file
+ta சிறிய கோப்பு
+
+@ unlimited
+ta வரம்பற்றது
+
+# Demos and video recording.
+@ 1080p
+ta 1080p
+
+@ 1440p
+ta 1440p
+
+@ 4K
+ta 4K
+
+@ 720p
+ta 720p
+
+@ Destination
+ta சேருமிடம்
+
+@ Export Highlighted Clip
+ta குறித்த கிளிப்பை ஏற்றுமதி செய்
+
+@ Export Whole Demo
+ta முழு டெமோவை ஏற்றுமதி செய்
+
+@ Same as window
+ta சாளரம் போல
+
+# Demos and video recording.
+@ GPU Encoding
+ta GPU குறியாக்கம்
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1789,6 +1867,42 @@ ta எந்த ஆயுதங்கள் உறைவைத் தூண்�
 
 @ Your own rockets and grenades don't hurt you; rocket jumps still work
 ta உங்கள் சொந்த ராக்கெட்டுகளும் கையெறிகுண்டுகளும் உங்களைக் காயப்படுத்தாது; ராக்கெட் ஜம்ப் இன்னும் வேலை செய்யும்
+
+# Demos and video recording.
+@ A demo you play stops on its last frame instead of returning to the menu, so you can rewind
+ta நீங்கள் இயக்கும் டெமோ மெனுவுக்குத் திரும்பாமல் கடைசி சட்டகத்தில் நிற்கும், அதனால் பின்னோக்கிச் செல்லலாம்
+
+@ Frames per second of recorded video; the game runs at exactly this rate while recording
+ta வீடியோவின் வினாடிக்கு சட்டகங்கள்; பதிவின்போது விளையாட்டு சரியாக இந்த வீதத்தில் இயங்கும்
+
+@ High keeps the most detail; small file saves disk space
+ta உயர் அதிக விவரத்தைக் காக்கும்; சிறிய கோப்பு வட்டு இடத்தைச் சேமிக்கும்
+
+@ How many automatic demos are kept before the oldest is deleted; kept demos never count
+ta பழமையானதை நீக்கும் முன் எத்தனை தானியங்கி டெமோக்கள் வைக்கப்படும்; வைத்த டெமோக்கள் கணக்கில் வராது
+
+@ Records every level you play to the Automatic list in Main Menu > Demos; keep the ones you want, the oldest are replaced
+ta நீங்கள் விளையாடும் ஒவ்வொரு நிலையையும் முதன்மை மெனு > டெமோக்களின் தானியங்கி பட்டியலில் பதிவுசெய்யும்; வேண்டியவற்றை வைக்கவும், பழமையானவை மாற்றப்படும்
+
+@ Records game sound and music into the video
+ta விளையாட்டின் ஒலிகளையும் இசையையும் வீடியோவில் பதிவுசெய்யும்
+
+@ Shows the playback bar (time, speed, timeline) after a control key, always, or never
+ta இயக்கப் பட்டையை (நேரம், வேகம், காலவரிசை) கட்டுப்பாட்டு விசைக்குப் பின், எப்போதும், அல்லது ஒருபோதும் காட்டாது
+
+@ Video format; needs ffmpeg with that encoder, else frames are saved as PNG images
+ta வீடியோ வடிவம்; அந்த குறியாக்கியுடன் ffmpeg தேவை, இல்லையெனில் சட்டகங்கள் PNG படங்களாகச் சேமிக்கப்படும்
+
+# Demos and video recording.
+@ No clip highlighted: while the demo plays, drag across the timeline or press I and O
+ta கிளிப் எதுவும் குறிக்கப்படவில்லை: டெமோ இயங்கும்போது காலவரிசையின் மேல் இழுக்கவும் அல்லது I, O அழுத்தவும்
+
+@ Video size; frames are scaled from the window size (bars keep the shape), so a larger size adds no detail
+ta வீடியோ அளவு; சட்டகங்கள் சாளர அளவிலிருந்து அளவிடப்படும் (வடிவம் காக்க பட்டைகளுடன்), எனவே பெரிய அளவு விவரத்தைச் சேர்க்காது
+
+# Demos and video recording.
+@ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
+ta ffmpeg பயன்படுத்த முடிந்தால் கிராபிக்ஸ் அட்டையில் குறியாக்கம் செய்யும் (NVIDIA NVENC, VA-API வழியாக AMD அல்லது Intel, AMF அல்லது Quick Sync, Apple VideoToolbox), செயலியை விடுவிக்கும்; இல்லையெனில் செயலி குறியாக்கம் செய்யும்
 
 # ==== ui.txt ====
 
@@ -2540,6 +2654,142 @@ ta சேமிப்பு
 @ Alt Fire on a glowing electronics panel within reach plugs one end in; the other end then shoots lightning with unlimited ammunition. The cable tethers you to the socket and catches on corners. Alt Fire or switching weapons yanks it out.
 ta எட்டும் தூரத்தில் ஒளிரும் மின்னணு பலகையில் மாற்றுச் சுடுதல் ஒரு முனையைச் செருகும்; மறுமுனை பின்னர் வரம்பற்ற வெடிமருந்துடன் மின்னலைச் சுடும். கேபிள் உங்களைச் சாக்கெட்டுடன் கட்டி மூலைகளில் சிக்கும். மாற்றுச் சுடுதல் அல்லது ஆயுத மாற்றம் அதைப் பிடுங்கும்.
 
+@ From the game folder
+ta கேம் கோப்புறையிலிருந்து
+
+@ From ironwail
+ta ironwail இலிருந்து
+
+@ From the 2021 re-release
+ta 2021 மறுவெளியீட்டிலிருந்து
+
+# Demos and video recording.
+@ Automatic demos are off. Turn on Auto-Record Demos in Options > Demos to record every level you play.
+ta தானியங்கி டெமோக்கள் அணைக்கப்பட்டுள்ளன. நீங்கள் விளையாடும் ஒவ்வொரு நிலையையும் பதிவுசெய்ய விருப்பங்கள் > டெமோக்களில் டெமோக்களைத் தானாகப் பதிவுசெய் என்பதை இயக்கவும்.
+
+@ Automatic: replaced when the slots are full
+ta தானியங்கி: இடங்கள் நிரம்பியதும் மாற்றப்படும்
+
+@ Delete {}?
+ta {} நீக்கவா?
+
+@ Demos
+ta டெமோக்கள்
+
+@ End of demo
+ta டெமோ முடிவு
+
+@ Export Video
+ta வீடியோவாக ஏற்றுமதி
+
+@ Fast forward
+ta வேகமாக முன்னே
+
+@ Fast forward {}x
+ta முன்னே {}x
+
+@ Indexing...
+ta அட்டவணையிடுகிறது...
+
+@ K keep
+ta K வை
+
+@ Keep
+ta வை
+
+@ Length: {}
+ta நீளம்: {}
+
+@ Map: {}
+ta வரைபடம்: {}
+
+@ No automatic demos yet. Each level you play is recorded here.
+ta இன்னும் தானியங்கி டெமோக்கள் இல்லை. நீங்கள் விளையாடும் ஒவ்வொரு நிலையும் இங்கே பதிவாகும்.
+
+@ No saved demos yet. Record one with the console command 'record <name>', or keep an automatic demo.
+ta இன்னும் சேமித்த டெமோக்கள் இல்லை. 'record <name>' கன்சோல் கட்டளையால் ஒன்றைப் பதிவுசெய்யவும், அல்லது ஒரு தானியங்கி டெமோவை வைக்கவும்.
+
+@ Pause
+ta இடைநிறுத்து
+
+@ Paused
+ta இடைநிறுத்தப்பட்டது
+
+@ Play {}x
+ta இயக்கம் {}x
+
+@ Quake - exporting video {}%
+ta Quake - வீடியோ ஏற்றுமதியாகிறது {}%
+
+@ Recorded: {}
+ta பதிவானது: {}
+
+@ Rewind
+ta பின்னோக்கு
+
+@ Rewind {}x
+ta பின்னே {}x
+
+@ Size: {} KB
+ta அளவு: {} KB
+
+@ Skip 10 s
+ta 10 வி. தவிர்
+
+@ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
+ta Space இடைநிறுத்து | இடது/வலது நகர்த்து | மேல்/கீழ் வேகம் | PgUp/PgDn 10 வி. | I/O குறி | E ஏற்றுமதி
+
+@ Speed
+ta வேகம்
+
+@ Switch List
+ta பட்டியலை மாற்று
+
+@ This can't be undone.
+ta இதைச் செயல்தவிர்க்க முடியாது.
+
+@ While a demo plays: Space pauses, the arrows scrub and change speed, I and O mark a clip and E exports it.
+ta டெமோ இயங்கும்போது: Space இடைநிறுத்தும், அம்புகள் நகர்த்தி வேகத்தை மாற்றும், I மற்றும் O ஒரு கிளிப்பைக் குறிக்கும், E அதை ஏற்றுமதி செய்யும்.
+
+@ Saved
+ta சேமித்தவை
+
+@ Automatic
+ta தானியங்கி
+
+# Demos and video recording.
+@ Export
+ta ஏற்றுமதி
+
+@ H hide
+ta H மறை
+
+@ Hide
+ta மறை
+
+@ Show
+ta காட்டு
+
+# Demos and video recording.
+@ Demo: {}
+ta டெமோ: {}
+
+@ Highlighted clip: {} to {} ({})
+ta குறித்த கிளிப்: {} முதல் {} வரை ({})
+
+@ Show controls
+ta கட்டுப்பாடுகளைக் காட்டு
+
+# Demos and video recording.
+@ About {} left
+ta சுமார் {} மீதம்
+
+@ Exporting video
+ta வீடியோ ஏற்றுமதியாகிறது
+
+@ Preparing...
+ta தயாராகிறது...
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3053,11 +3303,41 @@ ta சர்வர் மட்டுமே changelevel செய்யலாம
 @ {} renamed to {}
 ta {} இப்போது {} என மறுபெயரிடப்பட்டது
 
-@ From the game folder
-ta கேம் கோப்புறையிலிருந்து
+@ Already recording video.
+ta வீடியோ ஏற்கனவே பதிவாகிறது.
 
-@ From ironwail
-ta ironwail இலிருந்து
+@ Export cancelled.
+ta ஏற்றுமதி ரத்தானது.
 
-@ From the 2021 re-release
-ta 2021 மறுவெளியீட்டிலிருந்து
+@ Exporting {} to video
+ta {} வீடியோவாக ஏற்றுமதியாகிறது
+
+@ Kept demo {}
+ta டெமோ வைக்கப்பட்டது: {}
+
+@ No auto-demo to keep.
+ta வைக்க தானியங்கி டெமோ இல்லை.
+
+@ Not playing a demo.
+ta எந்த டெமோவும் இயங்கவில்லை.
+
+@ Not recording video.
+ta எந்த வீடியோவும் பதிவாகவில்லை.
+
+@ Recording video to {}
+ta வீடியோ {} இல் பதிவாகிறது
+
+@ This demo is already saved.
+ta இந்த டெமோ ஏற்கனவே சேமிக்கப்பட்டது.
+
+@ This level's demo will be kept when it ends.
+ta இந்த நிலையின் டெமோ அது முடிந்ததும் வைக்கப்படும்.
+
+@ Video capture is not available in this build.
+ta இந்தப் பதிப்பில் வீடியோ பதிவு கிடைக்காது.
+
+@ Wrote {} ({}s)
+ta {} எழுதப்பட்டது ({} வி.)
+
+@ ffmpeg not found: wrote {} PNG frames and a WAV to {}
+ta ffmpeg கிடைக்கவில்லை: {} PNG சட்டகங்களும் ஒரு WAV உம் {} இல் எழுதப்பட்டன

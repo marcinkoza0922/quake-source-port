@@ -211,6 +211,12 @@ impl Fte {
         self.geometry = geometry;
     }
 
+    /// Demo seeking: drop live particles, trails and decals.
+    pub fn clear_effects(&mut self, cl_time: f64) {
+        self.sys.clear(cl_time);
+        self.trails.clear();
+    }
+
     /// Reloads effects when `r_particledesc`, the map or `enhanced` changed,
     /// then republishes the scripted effect names to the client. The
     /// built-in set loads last, so mod and map effects of the same name win.

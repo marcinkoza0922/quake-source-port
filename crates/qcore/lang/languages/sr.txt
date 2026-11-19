@@ -1367,6 +1367,84 @@ sr Утикач прихвата свака метална површина, н�
 @ Lightning damage every tenth of a second (the stock lightning gun does 30)
 sr Штета муње сваке десетинке секунде (обични мињомет наноси 30)
 
+# Demos and video recording.
+@ AV1 (MP4)
+sr AV1 (MP4)
+
+@ Auto-Demo Slots
+sr Места за ауто-демо
+
+@ Auto-Record Demos
+sr Аутоматски снимај демо
+
+@ Frame Rate
+sr Број кадрова у секунди
+
+@ H.264 (MP4)
+sr H.264 (MP4)
+
+@ H.265 (MP4)
+sr H.265 (MP4)
+
+@ Pause at End
+sr Пауза на крају
+
+@ Playback Bar
+sr Трака пуштања
+
+@ Quality
+sr Квалитет
+
+@ Record Audio
+sr Снимај звук
+
+@ VP9 (WebM)
+sr VP9 (WebM)
+
+@ Video Format
+sr Формат видеа
+
+@ Video Recording
+sr Снимање видеа
+
+@ ffmpeg Program
+sr Програм ffmpeg
+
+@ small file
+sr мала датотека
+
+@ unlimited
+sr неограничено
+
+# Demos and video recording.
+@ 1080p
+sr 1080p
+
+@ 1440p
+sr 1440p
+
+@ 4K
+sr 4K
+
+@ 720p
+sr 720p
+
+@ Destination
+sr Одредиште
+
+@ Export Highlighted Clip
+sr Извези означени исечак
+
+@ Export Whole Demo
+sr Извези цео демо
+
+@ Same as window
+sr Као прозор
+
+# Demos and video recording.
+@ GPU Encoding
+sr GPU кодирање
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1789,6 +1867,42 @@ sr Која оружја покрећу замрзавање; борба изб�
 
 @ Your own rockets and grenades don't hurt you; rocket jumps still work
 sr Сопствене ракете и гранате вас не повређују; ракетни скокови и даље раде
+
+# Demos and video recording.
+@ A demo you play stops on its last frame instead of returning to the menu, so you can rewind
+sr Демо које пустите зауставља се на последњем кадру уместо да се врати у мени, па можете да га премотате уназад
+
+@ Frames per second of recorded video; the game runs at exactly this rate while recording
+sr Кадрови у секунди снимљеног видеа; током снимања игра ради тачно овом брзином
+
+@ High keeps the most detail; small file saves disk space
+sr Висок чува највише детаља; мала датотека штеди простор на диску
+
+@ How many automatic demos are kept before the oldest is deleted; kept demos never count
+sr Колико аутоматских демоа се чува пре брисања најстаријег; задржани демои се не броје
+
+@ Records every level you play to the Automatic list in Main Menu > Demos; keep the ones you want, the oldest are replaced
+sr Снима сваки одигран ниво у списак Аутоматски у Главни мени > Демо; задржите оне које желите, најстарији се замењују
+
+@ Records game sound and music into the video
+sr Снима звукове и музику игре у видео
+
+@ Shows the playback bar (time, speed, timeline) after a control key, always, or never
+sr Приказује траку пуштања (време, брзина, временска линија) после контролног тастера, увек или никад
+
+@ Video format; needs ffmpeg with that encoder, else frames are saved as PNG images
+sr Формат видеа; потребан је ffmpeg са тим кодером, иначе се кадрови чувају као PNG слике
+
+# Demos and video recording.
+@ No clip highlighted: while the demo plays, drag across the timeline or press I and O
+sr Нема означеног исечка: током демоа превуците по временској линији или притисните I и O
+
+@ Video size; frames are scaled from the window size (bars keep the shape), so a larger size adds no detail
+sr Величина видеа; кадрови се скалирају из величине прозора (са тракама да се задржи облик), па већа величина не додаје детаље
+
+# Demos and video recording.
+@ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
+sr Кодира на графичкој картици (NVIDIA NVENC, AMD или Intel преко VA-API, AMF или Quick Sync, Apple VideoToolbox) када ffmpeg може да је користи, па процесор остаје слободан; иначе кодира процесор
 
 # ==== ui.txt ====
 
@@ -2540,6 +2654,142 @@ sr Чување
 @ Alt Fire on a glowing electronics panel within reach plugs one end in; the other end then shoots lightning with unlimited ammunition. The cable tethers you to the socket and catches on corners. Alt Fire or switching weapons yanks it out.
 sr Алтернативна паљба на светлећу електронску плочу надохват укључује један крај; други тада испаљује муње са неограниченом муницијом. Кабл вас везује за утичницу и запиње о углове. Алтернативна паљба или промена оружја га ишчупа.
 
+@ From the game folder
+sr Из фасцикле игре
+
+@ From ironwail
+sr Из ironwail-а
+
+@ From the 2021 re-release
+sr Из реиздања из 2021.
+
+# Demos and video recording.
+@ Automatic demos are off. Turn on Auto-Record Demos in Options > Demos to record every level you play.
+sr Аутоматски демо снимци су искључени. Укључите Аутоматски снимај демо у Опције > Демо да бисте снимали сваки одигран ниво.
+
+@ Automatic: replaced when the slots are full
+sr Аутоматски: замењује се кад су места пуна
+
+@ Delete {}?
+sr Обрисати {}?
+
+@ Demos
+sr Демо
+
+@ End of demo
+sr Крај демоа
+
+@ Export Video
+sr Извези видео
+
+@ Fast forward
+sr Брзо напред
+
+@ Fast forward {}x
+sr Напред {}x
+
+@ Indexing...
+sr Индексирање...
+
+@ K keep
+sr K задржи
+
+@ Keep
+sr Задржи
+
+@ Length: {}
+sr Трајање: {}
+
+@ Map: {}
+sr Мапа: {}
+
+@ No automatic demos yet. Each level you play is recorded here.
+sr Још нема аутоматских демоа. Овде се снима сваки одигран ниво.
+
+@ No saved demos yet. Record one with the console command 'record <name>', or keep an automatic demo.
+sr Још нема сачуваних демоа. Снимите један командом конзоле 'record <name>' или задржите аутоматски демо.
+
+@ Pause
+sr Пауза
+
+@ Paused
+sr Паузирано
+
+@ Play {}x
+sr Пуштање {}x
+
+@ Quake - exporting video {}%
+sr Quake - извоз видеа {}%
+
+@ Recorded: {}
+sr Снимљено: {}
+
+@ Rewind
+sr Премотај уназад
+
+@ Rewind {}x
+sr Назад {}x
+
+@ Size: {} KB
+sr Величина: {} KB
+
+@ Skip 10 s
+sr Прескочи 10 с
+
+@ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
+sr Размак пауза | Лево/Десно премотавање | Горе/Доле брзина | PgUp/PgDn 10 с | I/O ознака | E извоз
+
+@ Speed
+sr Брзина
+
+@ Switch List
+sr Промени списак
+
+@ This can't be undone.
+sr Ово се не може поништити.
+
+@ While a demo plays: Space pauses, the arrows scrub and change speed, I and O mark a clip and E exports it.
+sr Током демоа: Размак паузира, стрелице премотавају и мењају брзину, I и O означавају исечак, а E га извози.
+
+@ Saved
+sr Сачувани
+
+@ Automatic
+sr Аутоматски
+
+# Demos and video recording.
+@ Export
+sr Извези
+
+@ H hide
+sr H сакриј
+
+@ Hide
+sr Сакриј
+
+@ Show
+sr Прикажи
+
+# Demos and video recording.
+@ Demo: {}
+sr Демо: {}
+
+@ Highlighted clip: {} to {} ({})
+sr Означени исечак: {} до {} ({})
+
+@ Show controls
+sr Прикажи контроле
+
+# Demos and video recording.
+@ About {} left
+sr Још око {}
+
+@ Exporting video
+sr Извоз видеа
+
+@ Preparing...
+sr Припрема...
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3053,11 +3303,41 @@ sr Само сервер сме да користи changelevel
 @ {} renamed to {}
 sr {} се преименовао у {}
 
-@ From the game folder
-sr Из фасцикле игре
+@ Already recording video.
+sr Видео се већ снима.
 
-@ From ironwail
-sr Из ironwail-а
+@ Export cancelled.
+sr Извоз отказан.
 
-@ From the 2021 re-release
-sr Из реиздања из 2021.
+@ Exporting {} to video
+sr Извоз {} у видео
+
+@ Kept demo {}
+sr Демо задржан: {}
+
+@ No auto-demo to keep.
+sr Нема ауто-демоа за задржавање.
+
+@ Not playing a demo.
+sr Не пушта се ниједан демо.
+
+@ Not recording video.
+sr Видео се не снима.
+
+@ Recording video to {}
+sr Снимање видеа у {}
+
+@ This demo is already saved.
+sr Овај демо је већ сачуван.
+
+@ This level's demo will be kept when it ends.
+sr Демо овог нивоа биће задржан кад се заврши.
+
+@ Video capture is not available in this build.
+sr Снимање видеа није доступно у овој верзији.
+
+@ Wrote {} ({}s)
+sr Уписано {} ({} с)
+
+@ ffmpeg not found: wrote {} PNG frames and a WAV to {}
+sr ffmpeg није пронађен: уписано {} PNG кадрова и WAV у {}

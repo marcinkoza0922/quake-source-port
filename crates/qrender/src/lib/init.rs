@@ -179,6 +179,8 @@ impl Renderer {
             frame_count: 0,
             capture_requested: false,
             capture: None,
+            keep_out: false,
+            skip_present: false,
             slang: None,
         };
         r.write_static_descriptors();

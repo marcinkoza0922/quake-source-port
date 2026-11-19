@@ -1367,6 +1367,84 @@ ms Mana-mana permukaan logam boleh dipalam, bukan elektronik sahaja
 @ Lightning damage every tenth of a second (the stock lightning gun does 30)
 ms Kerosakan kilat setiap sepersepuluh saat (senapang kilat biasa memberi 30)
 
+# Demos and video recording.
+@ AV1 (MP4)
+ms AV1 (MP4)
+
+@ Auto-Demo Slots
+ms Slot demo automatik
+
+@ Auto-Record Demos
+ms Rakam demo secara automatik
+
+@ Frame Rate
+ms Kadar bingkai
+
+@ H.264 (MP4)
+ms H.264 (MP4)
+
+@ H.265 (MP4)
+ms H.265 (MP4)
+
+@ Pause at End
+ms Jeda di akhir
+
+@ Playback Bar
+ms Bar main semula
+
+@ Quality
+ms Kualiti
+
+@ Record Audio
+ms Rakam bunyi
+
+@ VP9 (WebM)
+ms VP9 (WebM)
+
+@ Video Format
+ms Format video
+
+@ Video Recording
+ms Rakaman video
+
+@ ffmpeg Program
+ms Program ffmpeg
+
+@ small file
+ms fail kecil
+
+@ unlimited
+ms tanpa had
+
+# Demos and video recording.
+@ 1080p
+ms 1080p
+
+@ 1440p
+ms 1440p
+
+@ 4K
+ms 4K
+
+@ 720p
+ms 720p
+
+@ Destination
+ms Destinasi
+
+@ Export Highlighted Clip
+ms Eksport klip yang ditanda
+
+@ Export Whole Demo
+ms Eksport seluruh demo
+
+@ Same as window
+ms Sama seperti tetingkap
+
+# Demos and video recording.
+@ GPU Encoding
+ms Pengekodan GPU
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1789,6 +1867,42 @@ ms Senjata yang mencetuskan beku; jarak dekat merangkumi kapak dan sebarang senj
 
 @ Your own rockets and grenades don't hurt you; rocket jumps still work
 ms Roket dan bom tangan anda sendiri tidak mencederakan anda; lompatan roket masih berfungsi
+
+# Demos and video recording.
+@ A demo you play stops on its last frame instead of returning to the menu, so you can rewind
+ms Demo yang anda mainkan berhenti pada bingkai terakhir dan tidak kembali ke menu, supaya anda boleh mengundurnya
+
+@ Frames per second of recorded video; the game runs at exactly this rate while recording
+ms Bingkai sesaat video yang dirakam; semasa merakam, permainan berjalan tepat pada kadar ini
+
+@ High keeps the most detail; small file saves disk space
+ms Tinggi mengekalkan butiran paling banyak; fail kecil menjimatkan ruang cakera
+
+@ How many automatic demos are kept before the oldest is deleted; kept demos never count
+ms Berapa banyak demo automatik disimpan sebelum yang tertua dipadam; demo yang disimpan tidak dikira
+
+@ Records every level you play to the Automatic list in Main Menu > Demos; keep the ones you want, the oldest are replaced
+ms Merakam setiap peringkat yang anda main ke senarai Automatik dalam Menu utama > Demo; simpan yang anda mahu, yang tertua diganti
+
+@ Records game sound and music into the video
+ms Merakam bunyi dan muzik permainan ke dalam video
+
+@ Shows the playback bar (time, speed, timeline) after a control key, always, or never
+ms Menunjukkan bar main semula (masa, kelajuan, garis masa) selepas kekunci kawalan, sentiasa, atau tidak sekali-kali
+
+@ Video format; needs ffmpeg with that encoder, else frames are saved as PNG images
+ms Format video; memerlukan ffmpeg dengan pengekod itu, jika tidak bingkai disimpan sebagai imej PNG
+
+# Demos and video recording.
+@ No clip highlighted: while the demo plays, drag across the timeline or press I and O
+ms Tiada klip ditanda: semasa demo dimainkan, seret pada garis masa atau tekan I dan O
+
+@ Video size; frames are scaled from the window size (bars keep the shape), so a larger size adds no detail
+ms Saiz video; bingkai diskalakan daripada saiz tetingkap (dengan jalur untuk mengekalkan bentuk), jadi saiz lebih besar tidak menambah butiran
+
+# Demos and video recording.
+@ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
+ms Mengekod pada kad grafik (NVIDIA NVENC, AMD atau Intel melalui VA-API, AMF atau Quick Sync, Apple VideoToolbox) apabila ffmpeg boleh menggunakannya, supaya pemproses lapang; jika tidak, pemproses yang mengekod
 
 # ==== ui.txt ====
 
@@ -2540,6 +2654,142 @@ ms Simpanan
 @ Alt Fire on a glowing electronics panel within reach plugs one end in; the other end then shoots lightning with unlimited ammunition. The cable tethers you to the socket and catches on corners. Alt Fire or switching weapons yanks it out.
 ms Tembakan alternatif pada panel elektronik yang bercahaya dalam jangkauan memalamkan satu hujung; hujung satu lagi kemudian menembak kilat dengan peluru tanpa had. Kabel menambat anda pada soket dan tersangkut di penjuru. Tembakan alternatif atau tukar senjata mencabutnya.
 
+@ From the game folder
+ms Dari folder permainan
+
+@ From ironwail
+ms Dari ironwail
+
+@ From the 2021 re-release
+ms Dari keluaran semula 2021
+
+# Demos and video recording.
+@ Automatic demos are off. Turn on Auto-Record Demos in Options > Demos to record every level you play.
+ms Demo automatik dimatikan. Hidupkan Rakam demo secara automatik dalam Pilihan > Demo untuk merakam setiap peringkat yang anda main.
+
+@ Automatic: replaced when the slots are full
+ms Automatik: diganti apabila slot penuh
+
+@ Delete {}?
+ms Padam {}?
+
+@ Demos
+ms Demo
+
+@ End of demo
+ms Tamat demo
+
+@ Export Video
+ms Eksport video
+
+@ Fast forward
+ms Mara laju
+
+@ Fast forward {}x
+ms Mara {}x
+
+@ Indexing...
+ms Mengindeks...
+
+@ K keep
+ms K simpan
+
+@ Keep
+ms Simpan
+
+@ Length: {}
+ms Tempoh: {}
+
+@ Map: {}
+ms Peta: {}
+
+@ No automatic demos yet. Each level you play is recorded here.
+ms Belum ada demo automatik. Setiap peringkat yang anda main dirakam di sini.
+
+@ No saved demos yet. Record one with the console command 'record <name>', or keep an automatic demo.
+ms Belum ada demo tersimpan. Rakam satu dengan arahan konsol 'record <name>', atau simpan demo automatik.
+
+@ Pause
+ms Jeda
+
+@ Paused
+ms Dijeda
+
+@ Play {}x
+ms Main {}x
+
+@ Quake - exporting video {}%
+ms Quake - mengeksport video {}%
+
+@ Recorded: {}
+ms Dirakam: {}
+
+@ Rewind
+ms Undur
+
+@ Rewind {}x
+ms Undur {}x
+
+@ Size: {} KB
+ms Saiz: {} KB
+
+@ Skip 10 s
+ms Langkau 10 s
+
+@ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
+ms Ruang jeda | Kiri/Kanan anjak | Atas/Bawah kelajuan | PgUp/PgDn 10 s | I/O tanda | E eksport
+
+@ Speed
+ms Kelajuan
+
+@ Switch List
+ms Tukar senarai
+
+@ This can't be undone.
+ms Ini tidak boleh dibatalkan.
+
+@ While a demo plays: Space pauses, the arrows scrub and change speed, I and O mark a clip and E exports it.
+ms Semasa demo dimainkan: Ruang menjeda, anak panah menganjak dan menukar kelajuan, I dan O menanda klip dan E mengeksportnya.
+
+@ Saved
+ms Disimpan
+
+@ Automatic
+ms Automatik
+
+# Demos and video recording.
+@ Export
+ms Eksport
+
+@ H hide
+ms H sembunyi
+
+@ Hide
+ms Sembunyi
+
+@ Show
+ms Tunjuk
+
+# Demos and video recording.
+@ Demo: {}
+ms Demo: {}
+
+@ Highlighted clip: {} to {} ({})
+ms Klip yang ditanda: {} hingga {} ({})
+
+@ Show controls
+ms Tunjuk kawalan
+
+# Demos and video recording.
+@ About {} left
+ms Kira-kira {} lagi
+
+@ Exporting video
+ms Mengeksport video
+
+@ Preparing...
+ms Menyediakan...
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3053,11 +3303,41 @@ ms Hanya pelayan boleh changelevel
 @ {} renamed to {}
 ms {} menukar nama kepada {}
 
-@ From the game folder
-ms Dari folder permainan
+@ Already recording video.
+ms Video sudah sedang dirakam.
 
-@ From ironwail
-ms Dari ironwail
+@ Export cancelled.
+ms Eksport dibatalkan.
 
-@ From the 2021 re-release
-ms Dari keluaran semula 2021
+@ Exporting {} to video
+ms Mengeksport {} ke video
+
+@ Kept demo {}
+ms Demo disimpan: {}
+
+@ No auto-demo to keep.
+ms Tiada demo automatik untuk disimpan.
+
+@ Not playing a demo.
+ms Tiada demo dimainkan.
+
+@ Not recording video.
+ms Tiada video dirakam.
+
+@ Recording video to {}
+ms Merakam video ke {}
+
+@ This demo is already saved.
+ms Demo ini sudah disimpan.
+
+@ This level's demo will be kept when it ends.
+ms Demo peringkat ini akan disimpan apabila ia tamat.
+
+@ Video capture is not available in this build.
+ms Rakaman video tidak tersedia dalam binaan ini.
+
+@ Wrote {} ({}s)
+ms Menulis {} ({} s)
+
+@ ffmpeg not found: wrote {} PNG frames and a WAV to {}
+ms ffmpeg tidak dijumpai: menulis {} bingkai PNG dan satu WAV ke {}

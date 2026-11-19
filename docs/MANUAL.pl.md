@@ -159,6 +159,26 @@ mod używa efektów cząsteczkowych, których inne porty nie potrafią pokazać,
 pełna wersja jest zachowywana jako `<nazwa>.qsd` (`playdemo <nazwa>.qsd`).
 `demo_convert <nazwa>` konwertuje starsze demo.
 
+Menu główne → Dema pokazuje zapisane dema, a gdy włączone jest Opcje → Dema
+→ Automatyczne nagrywanie dem, także automatyczne demo każdego rozegranego
+poziomu; najstarsze są zastępowane, gdy miejsca się zapełnią. K zachowuje
+demo, E eksportuje je do wideo, Del je usuwa. Raporty błędów zawierają
+automatyczne demo bieżącego poziomu.
+
+Podczas dema Spacja wstrzymuje, przytrzymanie Lewo lub Prawo przewija do
+tyłu lub do przodu, Góra i Dół zmieniają prędkość, PgUp i PgDn skaczą o 10
+sekund, a Home i End przechodzą na początek i do następnej mapy. I i O
+zaznaczają fragment; E eksportuje go albo całe demo do folderu `videos`.
+Sterowanie zostaje na ekranie; H lub Ukryj je chowa, a wskazanie dolnej
+krawędzi pokazuje pasek, który je przywraca. Klikaj przyciski, kliknij oś
+czasu, aby tam przeskoczyć, albo przeciągnij po niej, aby zaznaczyć
+fragment; Eksportuj pyta o liczbę klatek, rozmiar, format i plik oraz o to,
+czy wyeksportować zaznaczony fragment, czy całe demo.
+
+`capture` zaczyna i kończy nagrywanie wideo podczas gry. Liczba klatek,
+format i jakość są w Opcje → Dema → Nagrywanie wideo. Wideo wymaga ffmpeg;
+bez niego klatki są zapisywane jako obrazy PNG z plikiem WAV.
+
 ## Dostępność
 
 Options → Dostępność:

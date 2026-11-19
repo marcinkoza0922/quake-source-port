@@ -1367,6 +1367,84 @@ ar يقبل أي سطح معدني القابس، وليس الإلكتروني�
 @ Lightning damage every tenth of a second (the stock lightning gun does 30)
 ar ضرر البرق كل عُشر ثانية (مدفع البرق الأصلي يُحدث 30)
 
+# Demos and video recording.
+@ AV1 (MP4)
+ar AV1 (MP4)
+
+@ Auto-Demo Slots
+ar خانات العروض التلقائية
+
+@ Auto-Record Demos
+ar تسجيل العروض تلقائيًا
+
+@ Frame Rate
+ar معدل الإطارات
+
+@ H.264 (MP4)
+ar H.264 (MP4)
+
+@ H.265 (MP4)
+ar H.265 (MP4)
+
+@ Pause at End
+ar إيقاف مؤقت في النهاية
+
+@ Playback Bar
+ar شريط التشغيل
+
+@ Quality
+ar الجودة
+
+@ Record Audio
+ar تسجيل الصوت
+
+@ VP9 (WebM)
+ar VP9 (WebM)
+
+@ Video Format
+ar صيغة الفيديو
+
+@ Video Recording
+ar تسجيل الفيديو
+
+@ ffmpeg Program
+ar برنامج ffmpeg
+
+@ small file
+ar ملف صغير
+
+@ unlimited
+ar غير محدود
+
+# Demos and video recording.
+@ 1080p
+ar 1080p
+
+@ 1440p
+ar 1440p
+
+@ 4K
+ar 4K
+
+@ 720p
+ar 720p
+
+@ Destination
+ar الوجهة
+
+@ Export Highlighted Clip
+ar تصدير المقطع المحدد
+
+@ Export Whole Demo
+ar تصدير العرض كاملًا
+
+@ Same as window
+ar مثل النافذة
+
+# Demos and video recording.
+@ GPU Encoding
+ar ترميز GPU
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1789,6 +1867,42 @@ ar الأسلحة التي تسبب التجميد؛ القتال القريب �
 
 @ Your own rockets and grenades don't hurt you; rocket jumps still work
 ar صواريخك وقنابلك لا تؤذيك؛ والقفز بالصاروخ ما زال يعمل
+
+# Demos and video recording.
+@ A demo you play stops on its last frame instead of returning to the menu, so you can rewind
+ar العرض الذي تشغّله يتوقف عند آخر إطار بدلًا من العودة إلى القائمة، لتتمكن من إرجاعه
+
+@ Frames per second of recorded video; the game runs at exactly this rate while recording
+ar عدد إطارات الفيديو في الثانية؛ أثناء التسجيل تعمل اللعبة بهذا المعدل تمامًا
+
+@ High keeps the most detail; small file saves disk space
+ar العالية تحفظ أكثر التفاصيل؛ الملف الصغير يوفّر مساحة القرص
+
+@ How many automatic demos are kept before the oldest is deleted; kept demos never count
+ar عدد العروض التلقائية المحفوظة قبل حذف أقدمها؛ العروض المحتفَظ بها لا تُحسب
+
+@ Records every level you play to the Automatic list in Main Menu > Demos; keep the ones you want, the oldest are replaced
+ar يسجّل كل مستوى تلعبه في قائمة التلقائية في القائمة الرئيسية > العروض؛ احتفظ بما تريد، ويُستبدل الأقدم
+
+@ Records game sound and music into the video
+ar يسجّل أصوات اللعبة وموسيقاها في الفيديو
+
+@ Shows the playback bar (time, speed, timeline) after a control key, always, or never
+ar يعرض شريط التشغيل (الوقت والسرعة والخط الزمني) بعد مفتاح تحكم، أو دائمًا، أو أبدًا
+
+@ Video format; needs ffmpeg with that encoder, else frames are saved as PNG images
+ar صيغة الفيديو؛ تحتاج ffmpeg مع ذلك المرمّز، وإلا تُحفظ الإطارات كصور PNG
+
+# Demos and video recording.
+@ No clip highlighted: while the demo plays, drag across the timeline or press I and O
+ar لا يوجد مقطع محدد: أثناء العرض اسحب على الخط الزمني أو اضغط I وO
+
+@ Video size; frames are scaled from the window size (bars keep the shape), so a larger size adds no detail
+ar حجم الفيديو؛ تُحجَّم الإطارات من حجم النافذة (مع أشرطة للحفاظ على الشكل)، لذا لا يضيف الحجم الأكبر تفاصيل
+
+# Demos and video recording.
+@ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
+ar يرمّز على بطاقة الرسوميات (NVIDIA NVENC، أو AMD أو Intel عبر VA-API، أو AMF أو Quick Sync، أو Apple VideoToolbox) عندما يستطيع ffmpeg استخدامها، فيبقى المعالج حرًّا؛ وإلا فالمعالج يرمّز
 
 # ==== ui.txt ====
 
@@ -2540,6 +2654,142 @@ ar حفظ
 @ Alt Fire on a glowing electronics panel within reach plugs one end in; the other end then shoots lightning with unlimited ammunition. The cable tethers you to the socket and catches on corners. Alt Fire or switching weapons yanks it out.
 ar الإطلاق الثانوي على لوحة إلكترونية متوهجة في متناول اليد يوصل أحد الطرفين؛ ثم يطلق الطرف الآخر البرق بذخيرة غير محدودة. يربطك الكابل بالمقبس ويعلق بالزوايا. الإطلاق الثانوي أو تبديل السلاح ينتزعه.
 
+@ From the game folder
+ar من مجلد اللعبة
+
+@ From ironwail
+ar من ironwail
+
+@ From the 2021 re-release
+ar من إصدار 2021 المحدّث
+
+# Demos and video recording.
+@ Automatic demos are off. Turn on Auto-Record Demos in Options > Demos to record every level you play.
+ar العروض التلقائية متوقفة. فعّل تسجيل العروض تلقائيًا من الخيارات > العروض لتسجيل كل مستوى تلعبه.
+
+@ Automatic: replaced when the slots are full
+ar تلقائي: يُستبدل عند امتلاء الخانات
+
+@ Delete {}?
+ar حذف {}؟
+
+@ Demos
+ar العروض
+
+@ End of demo
+ar نهاية العرض
+
+@ Export Video
+ar تصدير فيديو
+
+@ Fast forward
+ar تقديم سريع
+
+@ Fast forward {}x
+ar تقديم {}x
+
+@ Indexing...
+ar جارٍ الفهرسة...
+
+@ K keep
+ar K احتفاظ
+
+@ Keep
+ar احتفاظ
+
+@ Length: {}
+ar المدة: {}
+
+@ Map: {}
+ar الخريطة: {}
+
+@ No automatic demos yet. Each level you play is recorded here.
+ar لا توجد عروض تلقائية بعد. يُسجَّل هنا كل مستوى تلعبه.
+
+@ No saved demos yet. Record one with the console command 'record <name>', or keep an automatic demo.
+ar لا توجد عروض محفوظة بعد. سجّل واحدًا بأمر وحدة التحكم 'record <name>'، أو احتفظ بعرض تلقائي.
+
+@ Pause
+ar إيقاف مؤقت
+
+@ Paused
+ar متوقف مؤقتًا
+
+@ Play {}x
+ar تشغيل {}x
+
+@ Quake - exporting video {}%
+ar Quake - جارٍ تصدير الفيديو {}%
+
+@ Recorded: {}
+ar سُجّل: {}
+
+@ Rewind
+ar إرجاع
+
+@ Rewind {}x
+ar إرجاع {}x
+
+@ Size: {} KB
+ar الحجم: {} ك.ب
+
+@ Skip 10 s
+ar تخطّي 10 ث
+
+@ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
+ar Space إيقاف | يسار/يمين تمرير | أعلى/أسفل السرعة | PgUp/PgDn 10 ث | I/O علامة | E تصدير
+
+@ Speed
+ar السرعة
+
+@ Switch List
+ar تبديل القائمة
+
+@ This can't be undone.
+ar لا يمكن التراجع عن هذا.
+
+@ While a demo plays: Space pauses, the arrows scrub and change speed, I and O mark a clip and E exports it.
+ar أثناء تشغيل عرض: Space يوقف مؤقتًا، والأسهم تمرّر وتغيّر السرعة، وI وO يحددان مقطعًا، وE يصدّره.
+
+@ Saved
+ar المحفوظة
+
+@ Automatic
+ar التلقائية
+
+# Demos and video recording.
+@ Export
+ar تصدير
+
+@ H hide
+ar H إخفاء
+
+@ Hide
+ar إخفاء
+
+@ Show
+ar إظهار
+
+# Demos and video recording.
+@ Demo: {}
+ar العرض: {}
+
+@ Highlighted clip: {} to {} ({})
+ar المقطع المحدد: {} إلى {} ({})
+
+@ Show controls
+ar إظهار أدوات التحكم
+
+# Demos and video recording.
+@ About {} left
+ar يتبقى نحو {}
+
+@ Exporting video
+ar جارٍ تصدير الفيديو
+
+@ Preparing...
+ar جارٍ التحضير...
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3053,11 +3303,41 @@ ar الخادم وحده يمكنه تنفيذ changelevel
 @ {} renamed to {}
 ar غيّر {} اسمه إلى {}
 
-@ From the game folder
-ar من مجلد اللعبة
+@ Already recording video.
+ar يجري تسجيل الفيديو بالفعل.
 
-@ From ironwail
-ar من ironwail
+@ Export cancelled.
+ar أُلغي التصدير.
 
-@ From the 2021 re-release
-ar من إصدار 2021 المحدّث
+@ Exporting {} to video
+ar جارٍ تصدير {} إلى فيديو
+
+@ Kept demo {}
+ar تم الاحتفاظ بالعرض: {}
+
+@ No auto-demo to keep.
+ar لا يوجد عرض تلقائي للاحتفاظ به.
+
+@ Not playing a demo.
+ar لا يوجد عرض قيد التشغيل.
+
+@ Not recording video.
+ar لا يجري تسجيل فيديو.
+
+@ Recording video to {}
+ar جارٍ تسجيل الفيديو إلى {}
+
+@ This demo is already saved.
+ar هذا العرض محفوظ بالفعل.
+
+@ This level's demo will be kept when it ends.
+ar سيُحتفظ بعرض هذا المستوى عند انتهائه.
+
+@ Video capture is not available in this build.
+ar تسجيل الفيديو غير متاح في هذا الإصدار.
+
+@ Wrote {} ({}s)
+ar كُتب {} ({} ث)
+
+@ ffmpeg not found: wrote {} PNG frames and a WAV to {}
+ar لم يُعثر على ffmpeg: كُتب {} إطار PNG وملف WAV في {}

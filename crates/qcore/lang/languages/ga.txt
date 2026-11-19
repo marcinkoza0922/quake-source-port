@@ -1367,6 +1367,84 @@ ga Glacann aon dromchla miotail leis an bplocóid, ní leictreonaic amháin
 @ Lightning damage every tenth of a second (the stock lightning gun does 30)
 ga Damáiste tintrí gach deichiú cuid de shoicind (déanann an gnáth-ghunna tintrí 30)
 
+# Demos and video recording.
+@ AV1 (MP4)
+ga AV1 (MP4)
+
+@ Auto-Demo Slots
+ga Sliotáin uath-thaispeántas
+
+@ Auto-Record Demos
+ga Taifead taispeántais go huathoibríoch
+
+@ Frame Rate
+ga Ráta frámaí
+
+@ H.264 (MP4)
+ga H.264 (MP4)
+
+@ H.265 (MP4)
+ga H.265 (MP4)
+
+@ Pause at End
+ga Sos ag an deireadh
+
+@ Playback Bar
+ga Barra seinnte
+
+@ Quality
+ga Cáilíocht
+
+@ Record Audio
+ga Taifead fuaim
+
+@ VP9 (WebM)
+ga VP9 (WebM)
+
+@ Video Format
+ga Formáid físe
+
+@ Video Recording
+ga Taifeadadh físe
+
+@ ffmpeg Program
+ga Ríomhchlár ffmpeg
+
+@ small file
+ga comhad beag
+
+@ unlimited
+ga gan teorainn
+
+# Demos and video recording.
+@ 1080p
+ga 1080p
+
+@ 1440p
+ga 1440p
+
+@ 4K
+ga 4K
+
+@ 720p
+ga 720p
+
+@ Destination
+ga Ceann scríbe
+
+@ Export Highlighted Clip
+ga Easpórtáil an ghearrthóg aibhsithe
+
+@ Export Whole Demo
+ga Easpórtáil an taispeántas ar fad
+
+@ Same as window
+ga Mar an fhuinneog
+
+# Demos and video recording.
+@ GPU Encoding
+ga Ionchódú GPU
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1789,6 +1867,42 @@ ga Na hairm a spreagann an reo; clúdaíonn cóngarach an tua agus aon arm moid 
 
 @ Your own rockets and grenades don't hurt you; rocket jumps still work
 ga Ní ghortaíonn do roicéid ná do ghránáidí féin thú; oibríonn léimeanna roicéid fós
+
+# Demos and video recording.
+@ A demo you play stops on its last frame instead of returning to the menu, so you can rewind
+ga Stopann taispeántas a sheinneann tú ar an bhfráma deireanach in ionad filleadh ar an roghchlár, ionas gur féidir leat é a athchasadh
+
+@ Frames per second of recorded video; the game runs at exactly this rate while recording
+ga Frámaí sa soicind den fhíseán; le linn taifeadta ritheann an cluiche go díreach ag an ráta seo
+
+@ High keeps the most detail; small file saves disk space
+ga Coinníonn ard an mhionsonraí is mó; sábhálann comhad beag spás diosca
+
+@ How many automatic demos are kept before the oldest is deleted; kept demos never count
+ga Cé mhéad taispeántas uathoibríoch a choinnítear sula scriostar an ceann is sine; ní áirítear taispeántais choinnithe
+
+@ Records every level you play to the Automatic list in Main Menu > Demos; keep the ones you want, the oldest are replaced
+ga Taifeadann sé gach leibhéal a imríonn tú sa liosta Uathoibríoch i bPríomh-roghchlár > Taispeántais; coinnigh na cinn is mian leat, cuirtear na cinn is sine as
+
+@ Records game sound and music into the video
+ga Taifeadann sé fuaimeanna agus ceol an chluiche san fhíseán
+
+@ Shows the playback bar (time, speed, timeline) after a control key, always, or never
+ga Taispeánann sé an barra seinnte (am, luas, amlíne) tar éis eochair rialaithe, i gcónaí, nó riamh
+
+@ Video format; needs ffmpeg with that encoder, else frames are saved as PNG images
+ga Formáid físe; teastaíonn ffmpeg leis an ionchódóir sin, nó sábháiltear na frámaí mar íomhánna PNG
+
+# Demos and video recording.
+@ No clip highlighted: while the demo plays, drag across the timeline or press I and O
+ga Níl gearrthóg aibhsithe: le linn an taispeántais, tarraing trasna na hamlíne nó brúigh I agus O
+
+@ Video size; frames are scaled from the window size (bars keep the shape), so a larger size adds no detail
+ga Méid an fhíseáin; scálaítear na frámaí ó mhéid na fuinneoige (le barraí chun an cruth a choinneáil), mar sin ní chuireann méid níos mó mionsonraí leis
+
+# Demos and video recording.
+@ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
+ga Ionchódaíonn sé ar an gcárta grafaicí (NVIDIA NVENC, AMD nó Intel trí VA-API, AMF nó Quick Sync, Apple VideoToolbox) nuair is féidir le ffmpeg é a úsáid, rud a fhágann an próiseálaí saor; murach sin, ionchódaíonn an próiseálaí
 
 # ==== ui.txt ====
 
@@ -2540,6 +2654,142 @@ ga Sábháil
 @ Alt Fire on a glowing electronics panel within reach plugs one end in; the other end then shoots lightning with unlimited ammunition. The cable tethers you to the socket and catches on corners. Alt Fire or switching weapons yanks it out.
 ga Plugálann an tine thánaisteach ar phainéal leictreonach lonrach laistigh d'achar foirceann amháin; scaoileann an foirceann eile tintreach ansin le hurchair gan teorainn. Ceanglaíonn an cábla thú leis an soicéad agus téann sé i bhfostú ar choirnéil. Stoitheann tine thánaisteach nó athrú airm amach é.
 
+@ From the game folder
+ga Ó fhillteán an chluiche
+
+@ From ironwail
+ga Ó ironwail
+
+@ From the 2021 re-release
+ga Ón atheisiúint 2021
+
+# Demos and video recording.
+@ Automatic demos are off. Turn on Auto-Record Demos in Options > Demos to record every level you play.
+ga Tá na taispeántais uathoibríocha múchta. Cas air Taifead taispeántais go huathoibríoch i Roghanna > Taispeántais chun gach leibhéal a imríonn tú a thaifeadadh.
+
+@ Automatic: replaced when the slots are full
+ga Uathoibríoch: cuirtear ceann eile ina áit nuair a bhíonn na sliotáin lán
+
+@ Delete {}?
+ga Scrios {}?
+
+@ Demos
+ga Taispeántais
+
+@ End of demo
+ga Deireadh an taispeántais
+
+@ Export Video
+ga Easpórtáil físeán
+
+@ Fast forward
+ga Mear ar aghaidh
+
+@ Fast forward {}x
+ga Ar aghaidh {}x
+
+@ Indexing...
+ga Innéacsú...
+
+@ K keep
+ga K coinnigh
+
+@ Keep
+ga Coinnigh
+
+@ Length: {}
+ga Fad: {}
+
+@ Map: {}
+ga Léarscáil: {}
+
+@ No automatic demos yet. Each level you play is recorded here.
+ga Níl aon taispeántas uathoibríoch fós. Taifeadtar gach leibhéal a imríonn tú anseo.
+
+@ No saved demos yet. Record one with the console command 'record <name>', or keep an automatic demo.
+ga Níl aon taispeántas sábháilte fós. Taifead ceann leis an ordú consóil 'record <name>', nó coinnigh taispeántas uathoibríoch.
+
+@ Pause
+ga Sos
+
+@ Paused
+ga Ar sos
+
+@ Play {}x
+ga Ag seinm {}x
+
+@ Quake - exporting video {}%
+ga Quake - físeán á easpórtáil {}%
+
+@ Recorded: {}
+ga Taifeadta: {}
+
+@ Rewind
+ga Athchas
+
+@ Rewind {}x
+ga Siar {}x
+
+@ Size: {} KB
+ga Méid: {} KB
+
+@ Skip 10 s
+ga Scipeáil 10 s
+
+@ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
+ga Spás sos | Clé/Deas scrollaigh | Suas/Síos luas | PgUp/PgDn 10 s | I/O marc | E easpórtáil
+
+@ Speed
+ga Luas
+
+@ Switch List
+ga Athraigh liosta
+
+@ This can't be undone.
+ga Ní féidir é seo a chealú.
+
+@ While a demo plays: Space pauses, the arrows scrub and change speed, I and O mark a clip and E exports it.
+ga Le linn taispeántais: cuireann Spás ar sos é, scrollaíonn na saighde agus athraíonn siad an luas, marcálann I agus O gearrthóg agus easpórtálann E í.
+
+@ Saved
+ga Sábháilte
+
+@ Automatic
+ga Uathoibríoch
+
+# Demos and video recording.
+@ Export
+ga Easpórtáil
+
+@ H hide
+ga H folaigh
+
+@ Hide
+ga Folaigh
+
+@ Show
+ga Taispeáin
+
+# Demos and video recording.
+@ Demo: {}
+ga Taispeántas: {}
+
+@ Highlighted clip: {} to {} ({})
+ga Gearrthóg aibhsithe: {} go {} ({})
+
+@ Show controls
+ga Taispeáin rialtáin
+
+# Demos and video recording.
+@ About {} left
+ga Thart ar {} fágtha
+
+@ Exporting video
+ga Físeán á easpórtáil
+
+@ Preparing...
+ga Á ullmhú...
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3053,11 +3303,41 @@ ga Níl ach an freastalaí in ann changelevel a úsáid
 @ {} renamed to {}
 ga {} athainmnithe mar {}
 
-@ From the game folder
-ga Ó fhillteán an chluiche
+@ Already recording video.
+ga Tá físeán á thaifeadadh cheana.
 
-@ From ironwail
-ga Ó ironwail
+@ Export cancelled.
+ga Cealaíodh an t-easpórtáil.
 
-@ From the 2021 re-release
-ga Ón atheisiúint 2021
+@ Exporting {} to video
+ga {} á easpórtáil mar fhíseán
+
+@ Kept demo {}
+ga Coinníodh an taispeántas: {}
+
+@ No auto-demo to keep.
+ga Níl aon uath-thaispeántas le coinneáil.
+
+@ Not playing a demo.
+ga Níl taispeántas á sheinm.
+
+@ Not recording video.
+ga Níl físeán á thaifeadadh.
+
+@ Recording video to {}
+ga Físeán á thaifeadadh go {}
+
+@ This demo is already saved.
+ga Tá an taispeántas seo sábháilte cheana.
+
+@ This level's demo will be kept when it ends.
+ga Coinneofar taispeántas an leibhéil seo nuair a chríochnóidh sé.
+
+@ Video capture is not available in this build.
+ga Níl taifeadadh físe ar fáil sa leagan seo.
+
+@ Wrote {} ({}s)
+ga Scríobhadh {} ({} s)
+
+@ ffmpeg not found: wrote {} PNG frames and a WAV to {}
+ga Níor aimsíodh ffmpeg: scríobhadh {} fráma PNG agus WAV go {}

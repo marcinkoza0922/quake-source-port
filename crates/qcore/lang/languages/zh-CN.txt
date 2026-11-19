@@ -1367,6 +1367,84 @@ zh-CN 不只电子设备，任何金属表面都能插入插头
 @ Lightning damage every tenth of a second (the stock lightning gun does 30)
 zh-CN 每 0.1 秒的闪电伤害（原版雷电枪为 30）
 
+# Demos and video recording.
+@ AV1 (MP4)
+zh-CN AV1 (MP4)
+
+@ Auto-Demo Slots
+zh-CN 自动演示槽位
+
+@ Auto-Record Demos
+zh-CN 自动录制演示
+
+@ Frame Rate
+zh-CN 帧率
+
+@ H.264 (MP4)
+zh-CN H.264 (MP4)
+
+@ H.265 (MP4)
+zh-CN H.265 (MP4)
+
+@ Pause at End
+zh-CN 结尾暂停
+
+@ Playback Bar
+zh-CN 播放栏
+
+@ Quality
+zh-CN 质量
+
+@ Record Audio
+zh-CN 录制声音
+
+@ VP9 (WebM)
+zh-CN VP9 (WebM)
+
+@ Video Format
+zh-CN 视频格式
+
+@ Video Recording
+zh-CN 视频录制
+
+@ ffmpeg Program
+zh-CN ffmpeg 程序
+
+@ small file
+zh-CN 小文件
+
+@ unlimited
+zh-CN 无限制
+
+# Demos and video recording.
+@ 1080p
+zh-CN 1080p
+
+@ 1440p
+zh-CN 1440p
+
+@ 4K
+zh-CN 4K
+
+@ 720p
+zh-CN 720p
+
+@ Destination
+zh-CN 保存位置
+
+@ Export Highlighted Clip
+zh-CN 导出高亮片段
+
+@ Export Whole Demo
+zh-CN 导出整个演示
+
+@ Same as window
+zh-CN 与窗口相同
+
+# Demos and video recording.
+@ GPU Encoding
+zh-CN GPU 编码
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1789,6 +1867,42 @@ zh-CN 触发冻结的武器；近战包括斧头以及任何不耗弹药的近�
 
 @ Your own rockets and grenades don't hurt you; rocket jumps still work
 zh-CN 你自己的火箭和手榴弹不会伤害你；火箭跳仍然有效
+
+# Demos and video recording.
+@ A demo you play stops on its last frame instead of returning to the menu, so you can rewind
+zh-CN 你播放的演示会停在最后一帧而不是返回菜单，方便你倒回去
+
+@ Frames per second of recorded video; the game runs at exactly this rate while recording
+zh-CN 录制视频的每秒帧数；录制时游戏会严格以此帧率运行
+
+@ High keeps the most detail; small file saves disk space
+zh-CN 高保留最多细节；小文件节省磁盘空间
+
+@ How many automatic demos are kept before the oldest is deleted; kept demos never count
+zh-CN 删除最旧的自动演示之前保留的数量；已保留的演示不计入
+
+@ Records every level you play to the Automatic list in Main Menu > Demos; keep the ones you want, the oldest are replaced
+zh-CN 将你玩的每一关录制到 主菜单 > 演示 的自动列表；保留你想要的，最旧的会被替换
+
+@ Records game sound and music into the video
+zh-CN 将游戏音效和音乐录进视频
+
+@ Shows the playback bar (time, speed, timeline) after a control key, always, or never
+zh-CN 在按下控制键后、始终或从不显示播放栏（时间、速度、时间轴）
+
+@ Video format; needs ffmpeg with that encoder, else frames are saved as PNG images
+zh-CN 视频格式；需要带该编码器的 ffmpeg，否则帧会保存为 PNG 图片
+
+# Demos and video recording.
+@ No clip highlighted: while the demo plays, drag across the timeline or press I and O
+zh-CN 没有高亮片段：播放演示时在时间轴上拖动，或按 I 和 O
+
+@ Video size; frames are scaled from the window size (bars keep the shape), so a larger size adds no detail
+zh-CN 视频尺寸；帧由窗口尺寸缩放而来（加黑边保持比例），所以更大的尺寸不会增加细节
+
+# Demos and video recording.
+@ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
+zh-CN ffmpeg 能用时在显卡上编码（NVIDIA NVENC、通过 VA-API 的 AMD 或 Intel、AMF 或 Quick Sync、Apple VideoToolbox），让处理器空闲；否则由处理器编码
 
 # ==== ui.txt ====
 
@@ -2540,6 +2654,142 @@ zh-CN 存档
 @ Alt Fire on a glowing electronics panel within reach plugs one end in; the other end then shoots lightning with unlimited ammunition. The cable tethers you to the socket and catches on corners. Alt Fire or switching weapons yanks it out.
 zh-CN 对触手可及的发光电子面板使用副开火可插入一端；另一端随即以无限弹药发射闪电。线缆会把你拴在插座上，并会挂住拐角。副开火或切换武器会将其拔出。
 
+@ From the game folder
+zh-CN 来自游戏文件夹
+
+@ From ironwail
+zh-CN 来自 ironwail
+
+@ From the 2021 re-release
+zh-CN 来自 2021 重制版
+
+# Demos and video recording.
+@ Automatic demos are off. Turn on Auto-Record Demos in Options > Demos to record every level you play.
+zh-CN 自动演示已关闭。在 选项 > 演示 中开启“自动录制演示”，即可录制你玩的每一关。
+
+@ Automatic: replaced when the slots are full
+zh-CN 自动：槽位满时会被替换
+
+@ Delete {}?
+zh-CN 删除 {}？
+
+@ Demos
+zh-CN 演示
+
+@ End of demo
+zh-CN 演示结束
+
+@ Export Video
+zh-CN 导出视频
+
+@ Fast forward
+zh-CN 快进
+
+@ Fast forward {}x
+zh-CN 快进 {}x
+
+@ Indexing...
+zh-CN 正在索引...
+
+@ K keep
+zh-CN K 保留
+
+@ Keep
+zh-CN 保留
+
+@ Length: {}
+zh-CN 时长：{}
+
+@ Map: {}
+zh-CN 地图：{}
+
+@ No automatic demos yet. Each level you play is recorded here.
+zh-CN 还没有自动演示。你玩的每一关都会录制在这里。
+
+@ No saved demos yet. Record one with the console command 'record <name>', or keep an automatic demo.
+zh-CN 还没有保存的演示。用控制台命令 'record <name>' 录制一个，或保留一个自动演示。
+
+@ Pause
+zh-CN 暂停
+
+@ Paused
+zh-CN 已暂停
+
+@ Play {}x
+zh-CN 播放 {}x
+
+@ Quake - exporting video {}%
+zh-CN Quake - 正在导出视频 {}%
+
+@ Recorded: {}
+zh-CN 录制于：{}
+
+@ Rewind
+zh-CN 倒带
+
+@ Rewind {}x
+zh-CN 倒带 {}x
+
+@ Size: {} KB
+zh-CN 大小：{} KB
+
+@ Skip 10 s
+zh-CN 跳过 10 秒
+
+@ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
+zh-CN Space 暂停 | ←/→ 拖动 | ↑/↓ 速度 | PgUp/PgDn 10 秒 | I/O 标记 | E 导出
+
+@ Speed
+zh-CN 速度
+
+@ Switch List
+zh-CN 切换列表
+
+@ This can't be undone.
+zh-CN 此操作无法撤销。
+
+@ While a demo plays: Space pauses, the arrows scrub and change speed, I and O mark a clip and E exports it.
+zh-CN 播放演示时：Space 暂停，方向键拖动和改变速度，I 和 O 标记片段，E 导出该片段。
+
+@ Saved
+zh-CN 已保存
+
+@ Automatic
+zh-CN 自动
+
+# Demos and video recording.
+@ Export
+zh-CN 导出
+
+@ H hide
+zh-CN H 隐藏
+
+@ Hide
+zh-CN 隐藏
+
+@ Show
+zh-CN 显示
+
+# Demos and video recording.
+@ Demo: {}
+zh-CN 演示：{}
+
+@ Highlighted clip: {} to {} ({})
+zh-CN 高亮片段：{} 至 {}（{}）
+
+@ Show controls
+zh-CN 显示控制栏
+
+# Demos and video recording.
+@ About {} left
+zh-CN 剩余约 {}
+
+@ Exporting video
+zh-CN 正在导出视频
+
+@ Preparing...
+zh-CN 正在准备...
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3053,11 +3303,41 @@ zh-CN 只有服务器可以更换关卡
 @ {} renamed to {}
 zh-CN {} 已改名为 {}
 
-@ From the game folder
-zh-CN 来自游戏文件夹
+@ Already recording video.
+zh-CN 已经在录制视频。
 
-@ From ironwail
-zh-CN 来自 ironwail
+@ Export cancelled.
+zh-CN 已取消导出。
 
-@ From the 2021 re-release
-zh-CN 来自 2021 重制版
+@ Exporting {} to video
+zh-CN 正在将 {} 导出为视频
+
+@ Kept demo {}
+zh-CN 已保留演示：{}
+
+@ No auto-demo to keep.
+zh-CN 没有可保留的自动演示。
+
+@ Not playing a demo.
+zh-CN 没有正在播放的演示。
+
+@ Not recording video.
+zh-CN 没有在录制视频。
+
+@ Recording video to {}
+zh-CN 正在录制视频到 {}
+
+@ This demo is already saved.
+zh-CN 这个演示已经保存。
+
+@ This level's demo will be kept when it ends.
+zh-CN 本关的演示会在本关结束时保留。
+
+@ Video capture is not available in this build.
+zh-CN 此版本不支持视频录制。
+
+@ Wrote {} ({}s)
+zh-CN 已写入 {}（{} 秒）
+
+@ ffmpeg not found: wrote {} PNG frames and a WAV to {}
+zh-CN 未找到 ffmpeg：已将 {} 帧 PNG 和一个 WAV 写入 {}

@@ -1,0 +1,184 @@
+//! Automatic demos (`cl_autodemo`): every level visit is recorded to
+//! `autodemos/<stamp>_<map>.dem`, from its serverinfo to the next map or
+//! disconnect. Only the newest `cl_autodemo_slots` are kept (0: all); a
+//! level shorter than [`MIN_SECS`] is discarded. `demo_keep` moves one into
+//! the saved demos, where rotation never touches it.
+
+use std::path::Path;
+
+use super::*;
+use crate::demo::library::{self, AUTO_DIR};
+
+/// Levels shorter than this (server time) are not worth a slot.
+const MIN_SECS: f64 = 2.0;
+
+pub(super) struct AutoDemo {
+    writer: crate::demo::DemoWriter,
+    /// First and last server time recorded in game (signon 4).
+    span: Option<(f64, f64)>,
+    /// `demo_keep` during the level: the saved name to use when it ends.
+    keep: Option<String>,
+}
+
+impl Host {
+    fn autodemo_allowed(&self) -> bool {
+        self.cv("cl_autodemo") != 0.0 && self.demo.is_none() && self.timedemo.is_none() && !self.dedicated && self.capture.as_ref().is_none_or(|c| c.export.is_none())
+    }
+
+    /// Called with every server message after it is parsed: a serverinfo
+    /// ends the level's demo and starts the next one, then the message is
+    /// recorded.
+    pub(super) fn autodemo_message(&mut self, msg: &[u8], new_map: bool) {
+        if new_map {
+            self.autodemo_finish();
+            if self.autodemo_allowed() {
+                self.autodemo_start();
+            }
+        }
+        let (signon, t) = (self.cl.signon, self.cl.mtime[0]);
+        let Some(a) = &mut self.autodemo else { return };
+        if signon == 4 {
+            a.span = Some(a.span.map_or((t, t), |(t0, t1)| (t0, t1.max(t))));
+        }
+        if let Err(e) = a.writer.write(self.cl.viewangles, msg) {
+            self.con.print(&format!("auto-demo write failed: {e}\n"));
+            self.autodemo = None;
+        }
+    }
+
+    fn autodemo_start(&mut self) {
+        let dir = self.user_dir().join(AUTO_DIR);
+        let slots = self.cv("cl_autodemo_slots").max(0.0) as usize;
+        // room for the new one
+        if slots > 0 {
+            library::prune(&dir, slots - 1);
+        }
+        let map: String = self.cl.mapname.chars().map(|c| if c.is_alphanumeric() || "-_".contains(c) { c } else { '_' }).collect();
+        let path = dir.join(format!("{}_{}.dem", crate::demo::stamp_now(), if map.is_empty() { "map" } else { &map }));
+        match crate::demo::DemoWriter::create(&path, -1) {
+            Ok(writer) => self.autodemo = Some(AutoDemo { writer, span: None, keep: None }),
+            Err(e) => self.con.print(&qcore::ctr!("ERROR: couldn't create {}: {}\n", path.display(), e)),
+        }
+    }
+
+    /// Ends the current auto-demo: dropped when too short, kept when asked.
+    pub(super) fn autodemo_finish(&mut self) {
+        let Some(mut a) = self.autodemo.take() else { return };
+        let path = a.writer.path().to_path_buf();
+        let ok = a.writer.write(self.cl.viewangles, &[qnet::protocol::SVC_DISCONNECT]).and_then(|_| a.writer.finish()).is_ok();
+        let long = a.span.is_some_and(|(t0, t1)| t1 - t0 >= MIN_SECS);
+        if !ok || !long {
+            let _ = qcore::vfs::remove_file(&path);
+            return;
+        }
+        self.last_autodemo = Some(path.clone());
+        if let Some(name) = a.keep {
+            self.keep_autodemo(&path, &name);
+        }
+    }
+
+    fn keep_autodemo(&mut self, path: &Path, name: &str) {
+        match library::keep(path, &self.user_dir(), name) {
+            Ok(dest) => {
+                let shown = dest.file_name().map_or_else(String::new, |n| n.to_string_lossy().into_owned());
+                self.con.print(&qcore::ctr!("Kept demo {}\n", shown));
+                if self.last_autodemo.as_deref() == Some(path) {
+                    self.last_autodemo = None;
+                }
+                self.convert_demo(dest);
+            }
+            Err(e) => self.con.print(&format!("demo_keep: {e}\n")),
+        }
+    }
+
+    /// Bug reports with `cl_autodemo` on: the level being recorded (or the
+    /// last finished auto-demo) copied to `dest`.
+    pub(super) fn autodemo_copy(&mut self, dest: &Path) -> bool {
+        if self.cv("cl_autodemo") == 0.0 {
+            return false;
+        }
+        let angles = self.cl.viewangles;
+        if let Some(a) = &mut self.autodemo {
+            return a.writer.copy_to(dest, angles).is_ok();
+        }
+        self.last_autodemo.as_ref().and_then(|p| qcore::vfs::read(p).ok()).is_some_and(|d| qcore::vfs::write(dest, &d).is_ok())
+    }
+
+    /// `demo_keep [name]`: the auto-demo being watched, else the level being
+    /// recorded (kept when it ends), else the last finished one.
+    fn demo_keep(&mut self, name: &str) {
+        let stem = |p: &Path| p.file_stem().map_or_else(String::new, |s| s.to_string_lossy().into_owned());
+        let named = |p: &Path| if name.is_empty() { library::kept_name(&stem(p)) } else { name.to_string() };
+        let user_dir = self.user_dir();
+        if let Some(d) = &mut self.demo {
+            if !d.play.auto {
+                return self.con.print(&qcore::ctr!("This demo is already saved.\n"));
+            }
+            let path = user_dir.join(&d.play.name);
+            d.play.auto = false;
+            let n = named(&path);
+            d.play.name = format!("{}.dem", n.strip_suffix(".dem").unwrap_or(&n));
+            return self.keep_autodemo(&path, &n);
+        }
+        if let Some(a) = &mut self.autodemo {
+            let n = named(a.writer.path());
+            a.keep = Some(n);
+            return self.con.print(&qcore::ctr!("This level's demo will be kept when it ends.\n"));
+        }
+        match self.last_autodemo.clone() {
+            Some(p) if qcore::vfs::exists(&p) => {
+                let n = named(&p);
+                self.keep_autodemo(&p, &n);
+            }
+            _ => self.con.print(&qcore::ctr!("No auto-demo to keep.\n")),
+        }
+    }
+}
+
+impl Host {
+    /// Re-reads the demo folders into the Demos menu.
+    pub(super) fn scan_demos(&mut self) {
+        let (saved, auto) = library::list(&self.user_dir());
+        let on = self.cv("cl_autodemo") != 0.0;
+        self.menu.demos.set(saved, auto, on);
+    }
+
+    /// A user-dir relative demo name from the menu, or None if it escapes.
+    fn menu_demo_path(&self, name: &str) -> Option<std::path::PathBuf> {
+        (!name.is_empty() && !name.contains("..")).then(|| self.user_dir().join(name))
+    }
+}
+
+pub(super) fn register(c: &mut Commands<Host>) {
+    c.add("menu_demos", |h, _| {
+        h.scan_demos();
+        h.menu.demos.open();
+        h.menu.open(Screen::Demos);
+        h.sync_key_dest();
+    });
+    c.add("_scandemos", |h, _| h.scan_demos());
+    c.add("_demo_keep_file", |h, a| {
+        if let Some(p) = h.menu_demo_path(a.argv(1)) {
+            let stem = p.file_stem().map_or_else(String::new, |s| s.to_string_lossy().into_owned());
+            h.keep_autodemo(&p, &library::kept_name(&stem));
+            h.scan_demos();
+        }
+    });
+    c.add("_demo_delete", |h, a| {
+        let Some(p) = h.menu_demo_path(a.argv(1)) else { return };
+        // a converted demo and its full version go together
+        for ext in ["dem", crate::demo::convert::QSD_EXT] {
+            let _ = qcore::vfs::remove_file(&p.with_extension(ext));
+        }
+        if h.last_autodemo.as_deref().is_some_and(|l| l.with_extension("") == p.with_extension("")) {
+            h.last_autodemo = None;
+        }
+        h.scan_demos();
+    });
+    c.add("demo_keep", |h, a| {
+        if a.argv(1).contains("..") || a.argv(1).contains('/') {
+            return h.print(&qcore::ctr!("Relative pathnames are not allowed.\n"));
+        }
+        h.demo_keep(a.argv(1));
+    });
+}

@@ -108,13 +108,14 @@ impl Renderer {
             self.sampler_linear
         };
         self.write_texture_descriptor(slot, color.view, post_sampler);
-        let out = if self.swap.is_none() {
+        let out = if self.swap.is_none() || self.keep_out {
             let img = self.gpu.image(
                 w,
                 h,
                 1,
                 1,
-                COLOR_FORMAT,
+                // the post pipelines' format (the swapchain's when windowed)
+                if self.swap.is_some() { self.pipes.post_format } else { COLOR_FORMAT },
                 vk::ImageUsageFlags::COLOR_ATTACHMENT | vk::ImageUsageFlags::TRANSFER_SRC,
                 vk::ImageAspectFlags::COLOR,
             )?;

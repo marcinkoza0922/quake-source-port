@@ -165,6 +165,30 @@ calafoirt eile a thaispeáint, coinnítear an leagan iomlán mar `<name>.qsd`
 (`playdemo <name>.qsd`). Tiontaíonn `demo_convert <name>` taispeántas níos
 sine.
 
+Taispeánann Príomh-roghchlár → Taispeántais na taispeántais atá sábháilte
+agat agus, nuair atá Roghanna → Taispeántais → Taifead taispeántais go
+huathoibríoch ar siúl, taispeántas uathoibríoch de gach leibhéal a imríonn
+tú; cuirtear na cinn is sine as nuair a bhíonn na sliotáin lán. Coinníonn K
+ceann, easpórtálann E é mar fhíseán agus scriosann Del é. Bíonn taispeántas
+uathoibríoch an leibhéil reatha i dtuairiscí fabhtanna.
+
+Le linn taispeántais, cuireann Spás ar sos é, athchasann nó brostaíonn Clé
+nó Deas á choinneáil síos, athraíonn Suas agus Síos an luas, léimeann PgUp
+agus PgDn 10 soicind, agus téann Home agus End go dtí an tús agus go dtí an
+chéad léarscáil eile. Marcálann I agus O gearrthóg; easpórtálann E í, nó an
+taispeántas ar fad, chuig an bhfillteán `videos`. Fanann na rialtáin ar an
+scáileán; folaíonn H nó Folaigh iad, agus nuair a dhíríonn tú ar an imeall
+íochtair taispeántar stiall a thugann ar ais iad. Cliceáil na cnaipí,
+cliceáil an amlíne chun léim ann, nó tarraing trasna uirthi chun gearrthóg a
+aibhsiú; fiafraíonn Easpórtáil an ráta frámaí, an mhéid, an fhormáid agus an
+comhad, agus cé acu an ghearrthóg aibhsithe nó an taispeántas ar fad atá le
+heaspórtáil.
+
+Tosaíonn agus stopann `capture` taifeadadh físe agus tú ag imirt. Tá ráta
+frámaí, formáid agus cáilíocht faoi Roghanna → Taispeántais → Taifeadadh
+físe. Teastaíonn ffmpeg ó fhíseáin; gan é sábháiltear na frámaí mar íomhánna
+PNG le comhad WAV.
+
 ## Inrochtaineacht
 
 Options → Inrochtaineacht:

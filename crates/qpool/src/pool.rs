@@ -24,6 +24,10 @@ impl<T> Pool<T> {
         self.data.len() >= self.max
     }
 
+    pub fn clear(&mut self) {
+        self.data.clear();
+    }
+
     /// Append; returns false (and drops `value`) when at capacity.
     pub fn insert(&mut self, value: T) -> bool {
         if self.is_full() {

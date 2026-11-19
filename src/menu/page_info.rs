@@ -11,6 +11,16 @@ pub(super) fn tooltip(item: Item) -> Option<&'static str> {
         _ => return None,
     };
     Some(match cvar {
+        "cl_autodemo" => "Records every level you play to the Automatic list in Main Menu > Demos; keep the ones you want, the oldest are replaced",
+        "cl_autodemo_slots" => "How many automatic demos are kept before the oldest is deleted; kept demos never count",
+        "cl_demobar" => "Shows the playback bar (time, speed, timeline) after a control key, always, or never",
+        "cl_demo_endpause" => "A demo you play stops on its last frame instead of returning to the menu, so you can rewind",
+        "capture_fps" => "Frames per second of recorded video; the game runs at exactly this rate while recording",
+        "capture_codec" => "Video format; needs ffmpeg with that encoder, else frames are saved as PNG images",
+        "capture_quality" => "High keeps the most detail; small file saves disk space",
+        "capture_size" => "Video size; frames are scaled from the window size (bars keep the shape), so a larger size adds no detail",
+        "capture_gpu" => "Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes",
+        "capture_audio" => "Records game sound and music into the video",
         "con_translate" => "Also translates the engine's console messages; off keeps them in English",
         "gyro_enable" => "Turn the controller's motion sensor into a look input; needs a pad with a gyroscope",
         "joy_flick" => "2D aiming turns the view continuously with the right stick; flick stick snaps the view to where you push the stick, then turning the stick rotates it",
@@ -227,6 +237,9 @@ pub(super) fn page_items(p: Page) -> &'static [Item] {
         Page::Enhancements => ENHANCEMENTS,
         Page::Impacts => IMPACTS,
         Page::Audio => AUDIO,
+        Page::Demos => super::demos::DEMOS,
+        Page::Video => super::demos::VIDEO,
+        Page::Export => super::demos::EXPORT,
         Page::HitSound => HIT_SOUND,
         Page::KillSound => KILL_SOUND,
         Page::Accessibility => ACCESSIBILITY,
@@ -264,6 +277,8 @@ pub(super) fn page_name(p: Page) -> &'static str {
         Page::Gyro => "Gyro & Flick Stick",
         Page::Touch => "Touchscreen",
         Page::Autosave => "Autosave",
+        Page::Video => "Video Recording",
+        Page::Export => "Export Video",
         Page::Customize => "Customize This Game",
         Page::NewGameCustomize => "New Game: Customize",
         Page::Modifiers => "Gameplay Modifiers",
@@ -297,7 +312,7 @@ pub(super) fn page_name(p: Page) -> &'static str {
 
 /// The page an `Item::Sub` page returns to, with that row's index.
 pub(super) fn parent_page(p: Page) -> Option<(Page, usize)> {
-    [Page::Customize, Page::NewGameCustomize, Page::Gameplay, Page::Input, Page::Controller, Page::Hud, Page::Crosshair, Page::Accessibility, Page::Enhancements, Page::Impacts, Page::Addons, Page::NewGameAddons, Page::Audio].into_iter().find_map(|parent| {
+    [Page::Customize, Page::NewGameCustomize, Page::Gameplay, Page::Input, Page::Controller, Page::Hud, Page::Crosshair, Page::Accessibility, Page::Enhancements, Page::Impacts, Page::Addons, Page::NewGameAddons, Page::Audio, Page::Demos].into_iter().find_map(|parent| {
         page_items(parent).iter().position(|i| matches!(i, Item::Sub { page, .. } if *page == p)).map(|i| (parent, i))
     })
 }
@@ -308,6 +323,7 @@ pub(super) fn disabled_reason(item: Item) -> Option<&'static str> {
         Item::Choice { cvar: "r_waterwarp", .. } => {
             Some("Disabled while Enhanced Water is on: its own underwater effects replace the classic and GLQuake view warps")
         }
+        Item::Run { run: Run::ExportClip, .. } => Some("No clip highlighted: while the demo plays, drag across the timeline or press I and O"),
         Item::Choice { cvar: "r_particles", .. } => {
             Some("Disabled while Enhanced Particles is on: its particles replace the GLQuake and Classic styles")
         }
@@ -337,6 +353,7 @@ impl Menu {
     /// Shared by keyboard adjustment, pointer dragging and drawing.
     pub(super) fn item_disabled(&self, item: Item, cv: &Cvars) -> bool {
         self.game_locked(item, cv)
+            || (matches!(item, Item::Run { run: Run::ExportClip, .. }) && cv.value_of("_export_hasclip") == 0.0)
             || (matches!(item, Item::Slider { cvar: "r_motionblur_amount", .. } | Item::Choice { cvar: "r_motionblur_quality", .. })
             && cv.value_of("r_motionblur") == 0.0)
             || (matches!(item, Item::Slider { cvar: "r_waterripples_amount", .. }) && cv.value_of("r_waterripples") == 0.0)

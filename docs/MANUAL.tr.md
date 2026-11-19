@@ -159,6 +159,26 @@ portların gösteremediği parçacık efektleri kullanıyorsa tam sürüm
 `<ad>.qsd` olarak saklanır (`playdemo <ad>.qsd`). `demo_convert <ad>`
 eski bir demoyu dönüştürür.
 
+Ana menü → Demolar kayıtlı demolarınızı ve Seçenekler → Demolar → Demoları
+otomatik kaydet açıksa oynadığınız her bölümün otomatik demosunu listeler;
+yuvalar dolunca en eskiler değiştirilir. K bir demoyu saklar, E onu videoya
+aktarır, Del siler. Hata raporları geçerli bölümün otomatik demosunu içerir.
+
+Demo oynarken Boşluk duraklatır, Sol veya Sağ'ı basılı tutmak geri ya da
+ileri sarar, Yukarı ve Aşağı hızı değiştirir, PgUp ve PgDn 10 saniye atlar,
+Home ve End başa ve sonraki haritaya gider. I ve O bir klibi işaretler; E
+onu ya da tüm demoyu `videos` klasörüne aktarır. Kontroller ekranda kalır; H
+veya Gizle onları gizler, alt kenarı işaret etmek ise onları geri getiren
+bir şerit gösterir. Düğmelere tıklayın, oraya atlamak için zaman çizelgesine
+tıklayın ya da bir klibi işaretlemek için üzerinde sürükleyin; Dışa aktar,
+kare hızını, boyutu, biçimi ve dosyayı, ayrıca işaretli klibin mi tüm
+demonun mu aktarılacağını sorar.
+
+`capture` oynarken video kaydını başlatır ve durdurur. Kare hızı, biçim ve
+kalite Seçenekler → Demolar → Video kaydı altındadır. Videolar için ffmpeg
+gerekir; yoksa kareler bir WAV dosyasıyla birlikte PNG resimleri olarak
+kaydedilir.
+
 ## Erişilebilirlik
 
 Options → Erişilebilirlik:

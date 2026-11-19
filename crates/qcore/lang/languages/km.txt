@@ -1367,6 +1367,84 @@ km ផ្ទៃ​លោហៈ​ណា​ក៏​ទទួល​ដោត​�
 @ Lightning damage every tenth of a second (the stock lightning gun does 30)
 km ការ​ខូចខាត​ពី​រន្ទះ​រៀងរាល់​មួយ​ភាគ​ដប់​វិនាទី (កាំភ្លើង​រន្ទះ​ធម្មតា​ធ្វើ 30)
 
+# Demos and video recording.
+@ AV1 (MP4)
+km AV1 (MP4)
+
+@ Auto-Demo Slots
+km រន្ធ​ដេមូ​ស្វ័យប្រវត្តិ
+
+@ Auto-Record Demos
+km ថត​ដេមូ​ដោយ​ស្វ័យប្រវត្តិ
+
+@ Frame Rate
+km អត្រា​ស៊ុម
+
+@ H.264 (MP4)
+km H.264 (MP4)
+
+@ H.265 (MP4)
+km H.265 (MP4)
+
+@ Pause at End
+km ផ្អាក​នៅ​ចុង
+
+@ Playback Bar
+km របារ​ចាក់
+
+@ Quality
+km គុណភាព
+
+@ Record Audio
+km ថត​សំឡេង
+
+@ VP9 (WebM)
+km VP9 (WebM)
+
+@ Video Format
+km ទម្រង់​វីដេអូ
+
+@ Video Recording
+km ការ​ថត​វីដេអូ
+
+@ ffmpeg Program
+km កម្មវិធី ffmpeg
+
+@ small file
+km ឯកសារ​តូច
+
+@ unlimited
+km គ្មាន​ដែន​កំណត់
+
+# Demos and video recording.
+@ 1080p
+km 1080p
+
+@ 1440p
+km 1440p
+
+@ 4K
+km 4K
+
+@ 720p
+km 720p
+
+@ Destination
+km ទីតាំង​រក្សាទុក
+
+@ Export Highlighted Clip
+km នាំចេញ​ឃ្លីប​ដែល​បាន​សម្គាល់
+
+@ Export Whole Demo
+km នាំចេញ​ដេមូ​ទាំងមូល
+
+@ Same as window
+km ដូច​បង្អួច
+
+# Demos and video recording.
+@ GPU Encoding
+km អ៊ិនកូដ​ដោយ GPU
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1789,6 +1867,42 @@ km អាវុធ​ណា​ដែល​បង្ក​ការ​កក; ប
 
 @ Your own rockets and grenades don't hurt you; rocket jumps still work
 km រ៉ុក្កែត​និង​គ្រាប់​បែក​របស់​អ្នក​មិន​ធ្វើ​ឱ្យ​អ្នក​ឈឺ​ទេ; ការ​លោត​ដោយ​រ៉ុក្កែត​នៅ​តែ​ដំណើរ​ការ
+
+# Demos and video recording.
+@ A demo you play stops on its last frame instead of returning to the menu, so you can rewind
+km ដេមូ​ដែល​អ្នក​ចាក់​នឹង​ឈប់​នៅ​ស៊ុម​ចុងក្រោយ​ជំនួស​ឲ្យ​ត្រឡប់​ទៅ​ម៉ឺនុយ ដើម្បី​ឲ្យ​អ្នក​អាច​ខា​ថយក្រោយ​បាន
+
+@ Frames per second of recorded video; the game runs at exactly this rate while recording
+km ចំនួន​ស៊ុម​ក្នុង​មួយ​វិនាទី​នៃ​វីដេអូ ពេល​ថត ហ្គេម​ដំណើរការ​តាម​អត្រា​នេះ​យ៉ាង​ពិតប្រាកដ
+
+@ High keeps the most detail; small file saves disk space
+km ខ្ពស់​រក្សា​ព័ត៌មាន​លម្អិត​ច្រើន​បំផុត ឯកសារ​តូច​សន្សំ​ទំហំ​ថាស
+
+@ How many automatic demos are kept before the oldest is deleted; kept demos never count
+km ចំនួន​ដេមូ​ស្វ័យប្រវត្តិ​ដែល​រក្សា​ទុក​មុន​លុប​អា​ចាស់​បំផុត ដេមូ​ដែល​បាន​រក្សា​មិន​រាប់​ទេ
+
+@ Records every level you play to the Automatic list in Main Menu > Demos; keep the ones you want, the oldest are replaced
+km ថត​រាល់​កម្រិត​ដែល​អ្នក​លេង​ទៅ​ក្នុង​បញ្ជី​ស្វ័យប្រវត្តិ ក្នុង ម៉ឺនុយ​មេ > ដេមូ រក្សា​អា​ដែល​អ្នក​ចង់​បាន អា​ចាស់​បំផុត​ត្រូវ​បាន​ជំនួស
+
+@ Records game sound and music into the video
+km ថត​សំឡេង​និង​តន្ត្រី​របស់​ហ្គេម​ចូល​ក្នុង​វីដេអូ
+
+@ Shows the playback bar (time, speed, timeline) after a control key, always, or never
+km បង្ហាញ​របារ​ចាក់ (ពេលវេលា ល្បឿន បន្ទាត់​ពេល) បន្ទាប់​ពី​ចុច​គ្រាប់ចុច​បញ្ជា ជានិច្ច ឬ​មិន​ដែល
+
+@ Video format; needs ffmpeg with that encoder, else frames are saved as PNG images
+km ទម្រង់​វីដេអូ ត្រូវ​ការ ffmpeg ដែល​មាន​កម្មវិធី​អ៊ិនកូដ​នោះ បើ​មិន​ដូច្នេះ​ទេ ស៊ុម​ត្រូវ​រក្សាទុក​ជា​រូបភាព PNG
+
+# Demos and video recording.
+@ No clip highlighted: while the demo plays, drag across the timeline or press I and O
+km មិន​មាន​ឃ្លីប​ដែល​បាន​សម្គាល់​ទេ៖ ពេល​ចាក់​ដេមូ អូស​លើ​បន្ទាត់​ពេល ឬ​ចុច I និង O
+
+@ Video size; frames are scaled from the window size (bars keep the shape), so a larger size adds no detail
+km ទំហំ​វីដេអូ ស៊ុម​ត្រូវ​បាន​ពង្រីក​ពី​ទំហំ​បង្អួច (មាន​របារ​ដើម្បី​រក្សា​រាង) ដូច្នេះ​ទំហំ​ធំ​ជាង​មិន​បន្ថែម​ព័ត៌មាន​លម្អិត​ទេ
+
+# Demos and video recording.
+@ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
+km អ៊ិនកូដ​នៅ​លើ​កាត​ក្រាហ្វិក (NVIDIA NVENC, AMD ឬ Intel តាម VA-API, AMF ឬ Quick Sync, Apple VideoToolbox) ពេល ffmpeg អាច​ប្រើ​វា​បាន ដោយ​ទុក​ឲ្យ​ប្រព័ន្ធ​ដំណើរការ​ទំនេរ បើ​មិន​ដូច្នេះ​ទេ ប្រព័ន្ធ​ដំណើរការ​អ៊ិនកូដ
 
 # ==== ui.txt ====
 
@@ -2540,6 +2654,142 @@ km រក្សា​ទុក
 @ Alt Fire on a glowing electronics panel within reach plugs one end in; the other end then shoots lightning with unlimited ammunition. The cable tethers you to the socket and catches on corners. Alt Fire or switching weapons yanks it out.
 km បាញ់​ជំនួស​ទៅ​លើ​ផ្ទាំង​អេឡិចត្រូនិក​ដែល​ភ្លឺ​ក្នុង​ចម្ងាយ​ដៃ​ដល់ ដោត​ចុង​មួយ។ បន្ទាប់​មក​ចុង​ម្ខាង​ទៀត​បាញ់​រន្ទះ​ដោយ​គ្រាប់​គ្មាន​កំណត់។ ខ្សែ​ចង​អ្នក​ជាប់​នឹង​រន្ធ​ដោត​ហើយ​ជាប់​នឹង​ជ្រុង។ បាញ់​ជំនួស​ឬ​ប្ដូរ​អាវុធ​ទាញ​វា​ចេញ។
 
+@ From the game folder
+km ពី​ថត​ហ្គេម
+
+@ From ironwail
+km ពី ironwail
+
+@ From the 2021 re-release
+km ពី​កំណែ​ចេញ​ឡើង​វិញ​ឆ្នាំ 2021
+
+# Demos and video recording.
+@ Automatic demos are off. Turn on Auto-Record Demos in Options > Demos to record every level you play.
+km ដេមូ​ស្វ័យប្រវត្តិ​ត្រូវ​បាន​បិទ។ បើក ថត​ដេមូ​ដោយ​ស្វ័យប្រវត្តិ ក្នុង ជម្រើស > ដេមូ ដើម្បី​ថត​រាល់​កម្រិត​ដែល​អ្នក​លេង។
+
+@ Automatic: replaced when the slots are full
+km ស្វ័យប្រវត្តិ៖ ត្រូវ​បាន​ជំនួស​ពេល​រន្ធ​ពេញ
+
+@ Delete {}?
+km លុប {} ឬ?
+
+@ Demos
+km ដេមូ
+
+@ End of demo
+km ចប់​ដេមូ
+
+@ Export Video
+km នាំចេញ​ជា​វីដេអូ
+
+@ Fast forward
+km ខា​ទៅ​មុខ
+
+@ Fast forward {}x
+km ទៅ​មុខ {}x
+
+@ Indexing...
+km កំពុង​បង្កើត​លិបិក្រម...
+
+@ K keep
+km K រក្សា
+
+@ Keep
+km រក្សា
+
+@ Length: {}
+km រយៈពេល៖ {}
+
+@ Map: {}
+km ផែនទី៖ {}
+
+@ No automatic demos yet. Each level you play is recorded here.
+km មិន​ទាន់​មាន​ដេមូ​ស្វ័យប្រវត្តិ​ទេ។ រាល់​កម្រិត​ដែល​អ្នក​លេង​ត្រូវ​បាន​ថត​នៅ​ទីនេះ។
+
+@ No saved demos yet. Record one with the console command 'record <name>', or keep an automatic demo.
+km មិន​ទាន់​មាន​ដេមូ​ដែល​បាន​រក្សាទុក​ទេ។ ថត​មួយ​ដោយ​ពាក្យបញ្ជា​កុងសូល 'record <name>' ឬ​រក្សា​ដេមូ​ស្វ័យប្រវត្តិ​មួយ។
+
+@ Pause
+km ផ្អាក
+
+@ Paused
+km បាន​ផ្អាក
+
+@ Play {}x
+km ចាក់ {}x
+
+@ Quake - exporting video {}%
+km Quake - កំពុង​នាំចេញ​វីដេអូ {}%
+
+@ Recorded: {}
+km បាន​ថត៖ {}
+
+@ Rewind
+km ខា​ថយក្រោយ
+
+@ Rewind {}x
+km ថយក្រោយ {}x
+
+@ Size: {} KB
+km ទំហំ៖ {} KB
+
+@ Skip 10 s
+km រំលង 10 វិ
+
+@ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
+km Space ផ្អាក | ឆ្វេង/ស្តាំ ខា | ឡើង/ចុះ ល្បឿន | PgUp/PgDn 10 វិ | I/O សញ្ញា | E នាំចេញ
+
+@ Speed
+km ល្បឿន
+
+@ Switch List
+km ប្តូរ​បញ្ជី
+
+@ This can't be undone.
+km មិន​អាច​មិន​ធ្វើ​វិញ​បាន​ទេ។
+
+@ While a demo plays: Space pauses, the arrows scrub and change speed, I and O mark a clip and E exports it.
+km ពេល​ចាក់​ដេមូ៖ Space ផ្អាក ព្រួញ​ខា​និង​ប្តូរ​ល្បឿន I និង O សម្គាល់​ឃ្លីប ហើយ E នាំចេញ​វា។
+
+@ Saved
+km បាន​រក្សាទុក
+
+@ Automatic
+km ស្វ័យប្រវត្តិ
+
+# Demos and video recording.
+@ Export
+km នាំចេញ
+
+@ H hide
+km H លាក់
+
+@ Hide
+km លាក់
+
+@ Show
+km បង្ហាញ
+
+# Demos and video recording.
+@ Demo: {}
+km ដេមូ៖ {}
+
+@ Highlighted clip: {} to {} ({})
+km ឃ្លីប​ដែល​បាន​សម្គាល់៖ {} ដល់ {} ({})
+
+@ Show controls
+km បង្ហាញ​ការ​គ្រប់គ្រង
+
+# Demos and video recording.
+@ About {} left
+km នៅ​សល់​ប្រហែល {}
+
+@ Exporting video
+km កំពុង​នាំចេញ​វីដេអូ
+
+@ Preparing...
+km កំពុង​រៀបចំ...
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3053,11 +3303,41 @@ km មាន​តែ​ម៉ាស៊ីន​មេ​ទេ​ដែល​�
 @ {} renamed to {}
 km {} បាន​ប្ដូរ​ឈ្មោះ​ទៅ {}
 
-@ From the game folder
-km ពី​ថត​ហ្គេម
+@ Already recording video.
+km វីដេអូ​កំពុង​ថត​រួច​ហើយ។
 
-@ From ironwail
-km ពី ironwail
+@ Export cancelled.
+km បាន​បោះបង់​ការ​នាំចេញ។
 
-@ From the 2021 re-release
-km ពី​កំណែ​ចេញ​ឡើង​វិញ​ឆ្នាំ 2021
+@ Exporting {} to video
+km កំពុង​នាំចេញ {} ជា​វីដេអូ
+
+@ Kept demo {}
+km បាន​រក្សា​ដេមូ៖ {}
+
+@ No auto-demo to keep.
+km គ្មាន​ដេមូ​ស្វ័យប្រវត្តិ​ដើម្បី​រក្សា​ទេ។
+
+@ Not playing a demo.
+km គ្មាន​ដេមូ​កំពុង​ចាក់​ទេ។
+
+@ Not recording video.
+km គ្មាន​វីដេអូ​កំពុង​ថត​ទេ។
+
+@ Recording video to {}
+km កំពុង​ថត​វីដេអូ​ទៅ {}
+
+@ This demo is already saved.
+km ដេមូ​នេះ​ត្រូវ​បាន​រក្សាទុក​រួច​ហើយ។
+
+@ This level's demo will be kept when it ends.
+km ដេមូ​នៃ​កម្រិត​នេះ​នឹង​ត្រូវ​រក្សា​ពេល​វា​ចប់។
+
+@ Video capture is not available in this build.
+km ការ​ថត​វីដេអូ​មិន​មាន​ក្នុង​កំណែ​នេះ​ទេ។
+
+@ Wrote {} ({}s)
+km បាន​សរសេរ {} ({} វិ)
+
+@ ffmpeg not found: wrote {} PNG frames and a WAV to {}
+km រក​មិន​ឃើញ ffmpeg៖ បាន​សរសេរ​ស៊ុម PNG {} និង WAV មួយ​ទៅ {}

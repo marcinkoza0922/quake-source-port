@@ -42,6 +42,7 @@ mod addon_preview;
 mod addon_bindings;
 pub(crate) mod shader;
 mod help;
+pub mod demos;
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum Screen {
@@ -61,6 +62,8 @@ pub enum Screen {
     Multiplayer,
     /// The user manual (main menu → Help).
     Help,
+    /// Main menu → Demos: saved and automatic demos.
+    Demos,
 }
 
 /// Options sub-pages.
@@ -115,6 +118,11 @@ pub enum Page {
     BulletTime,
     Hitstop,
     HitstopAdvanced,
+    /// Options → Demos and its Video Recording page.
+    Demos,
+    Video,
+    /// The demo export dialog.
+    Export,
     /// Multiplayer pages (reached from Screen::Multiplayer).
     Join,
     Host,
@@ -123,7 +131,7 @@ pub enum Page {
 
 /// Every cvar the options pages edit (the host marks them archived).
 pub fn option_cvars() -> impl Iterator<Item = &'static str> {
-    [addon_settings::SHOTGUNS, addon_settings::BULLET_TIME, addon_settings::HITSTOP, addon_settings::HITSTOP_ADVANCED, ADDONS, NEW_GAME_ADDONS, PORTAL_GUN, BOOMERANG, GEL, WASHER, HOOKSHOT, CABLE, RAILGUN, STICKY, GOGGLES, GAMEPLAY, HUD, CROSSHAIR, HUD_LAYOUT, MESSAGES, ENHANCEMENTS, WATER, BLOOD, DEBRIS, IMPACTS, AUTOSAVE, MODIFIERS, AUTOAIM, INPUT, MOUSE, CONTROLLER, GYRO, GRAPHICS, AUDIO, HIT_SOUND, KILL_SOUND, ACCESSIBILITY].into_iter().flatten().filter_map(|i| match *i {
+    [addon_settings::SHOTGUNS, addon_settings::BULLET_TIME, addon_settings::HITSTOP, addon_settings::HITSTOP_ADVANCED, ADDONS, NEW_GAME_ADDONS, PORTAL_GUN, BOOMERANG, GEL, WASHER, HOOKSHOT, CABLE, RAILGUN, STICKY, GOGGLES, GAMEPLAY, HUD, CROSSHAIR, HUD_LAYOUT, MESSAGES, ENHANCEMENTS, WATER, BLOOD, DEBRIS, IMPACTS, AUTOSAVE, MODIFIERS, AUTOAIM, INPUT, MOUSE, CONTROLLER, GYRO, GRAPHICS, AUDIO, HIT_SOUND, KILL_SOUND, ACCESSIBILITY, demos::DEMOS, demos::VIDEO].into_iter().flatten().filter_map(|i| match *i {
         Item::Slider { cvar, .. } | Item::Toggle { cvar, .. } | Item::Choice { cvar, .. } => Some(cvar),
         _ => None,
     })
@@ -177,6 +185,10 @@ pub struct Menu {
     /// from several pages return there; otherwise `parent_page`).
     sub_return: Option<(Page, Page, usize)>,
     pub mods: ModMenu,
+    pub demos: demos::DemoBrowser,
+    /// Export dialog: where Back goes, and its info lines.
+    export_back: Screen,
+    export_info: Vec<String>,
     mp_cursor: usize,
     /// Maps offered on the Host Game page (filled by the host).
     pub net_maps: Vec<qui::mods::MapInfo>,
@@ -299,6 +311,9 @@ impl Menu {
             drop: None,
             sub_return: None,
             mods: ModMenu::default(),
+            demos: Default::default(),
+            export_back: Screen::None,
+            export_info: Vec::new(),
             mp_cursor: 0,
             net_maps: Vec::new(),
             shader_presets: Vec::new(),
@@ -454,7 +469,7 @@ impl Menu {
                 .position(|&bx| x >= bx && x < bx + QUIT_BTN.0 && y >= QUIT_BTN_Y && y < QUIT_BTN_Y + QUIT_BTN.1),
             Screen::Mods | Screen::ModMaps | Screen::ModOnline => self.mods.item_at(self.mods_page(), (x, y)),
             Screen::Help => self.help.item_at((x, y)),
-            Screen::None => None,
+            Screen::Demos | Screen::None => None,
         }
     }
 
@@ -482,7 +497,7 @@ impl Menu {
             }
             // hovering doesn't switch sections; a click does
             Screen::Help => None,
-            Screen::None => None,
+            Screen::Demos | Screen::None => None,
         }
     }
 

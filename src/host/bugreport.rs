@@ -89,7 +89,8 @@ impl Host {
             None
         };
         let shot = !self.dedicated;
-        let json = self.bugreport_json(text, &iso, save.as_deref(), shot);
+        let demo = self.autodemo_copy(&dir.join("demo.dem"));
+        let json = self.bugreport_json(text, &iso, save.as_deref(), shot, demo);
         let _ = qcore::vfs::write(&dir.join("report.json"), json.as_bytes());
         // Screenshot of the next rendered frame, with no console on top.
         self.screenshot = Some(dir.join("screenshot.png").to_string_lossy().into_owned());
@@ -97,7 +98,7 @@ impl Host {
         self.print(&qcore::ctr!("Bug report written to {}\n", dir.display()));
     }
 
-    fn bugreport_json(&self, text: &str, iso: &str, save: Option<&str>, shot: bool) -> String {
+    fn bugreport_json(&self, text: &str, iso: &str, save: Option<&str>, shot: bool, demo: bool) -> String {
         let cl = &self.cl;
         let pe = cl.entities.get(cl.viewentity);
         let origin = pe.map_or([0.0; 3], |e| e.origin);
@@ -148,7 +149,7 @@ impl Host {
         let changed: Vec<String> = ["fov", "r_enhancedwater", "r_debris", "scr_hudstyle"].iter()
             .filter_map(|n| cv.by_name(n).map(|c| format!("{}: {}", js(n), js(&c.string)))).collect();
         f("key_cvars", format!("{{{}}}", changed.join(", ")));
-        f("files", format!("{{\"save\": {}, \"config\": \"config.cfg\", \"screenshot\": {}}}", save.map_or("null".into(), js), if shot { "\"screenshot.png\"" } else { "null" }));
+        f("files", format!("{{\"save\": {}, \"config\": \"config.cfg\", \"screenshot\": {}, \"demo\": {}}}", save.map_or("null".into(), js), if shot { "\"screenshot.png\"" } else { "null" }, if demo { "\"demo.dem\"" } else { "null" }));
         o.truncate(o.trim_end_matches([',', '\n']).len());
         o.push_str("\n}\n");
         o

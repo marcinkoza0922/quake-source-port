@@ -1367,6 +1367,84 @@ ca Qualsevol superfície metàl·lica admet l'endoll, no només l'electrònica
 @ Lightning damage every tenth of a second (the stock lightning gun does 30)
 ca Dany del llamp cada dècima de segon (el canó de llamps original en fa 30)
 
+# Demos and video recording.
+@ AV1 (MP4)
+ca AV1 (MP4)
+
+@ Auto-Demo Slots
+ca Espais de demos automàtiques
+
+@ Auto-Record Demos
+ca Grava demos automàticament
+
+@ Frame Rate
+ca Fotogrames per segon
+
+@ H.264 (MP4)
+ca H.264 (MP4)
+
+@ H.265 (MP4)
+ca H.265 (MP4)
+
+@ Pause at End
+ca Pausa al final
+
+@ Playback Bar
+ca Barra de reproducció
+
+@ Quality
+ca Qualitat
+
+@ Record Audio
+ca Grava el so
+
+@ VP9 (WebM)
+ca VP9 (WebM)
+
+@ Video Format
+ca Format de vídeo
+
+@ Video Recording
+ca Gravació de vídeo
+
+@ ffmpeg Program
+ca Programa ffmpeg
+
+@ small file
+ca fitxer petit
+
+@ unlimited
+ca il·limitades
+
+# Demos and video recording.
+@ 1080p
+ca 1080p
+
+@ 1440p
+ca 1440p
+
+@ 4K
+ca 4K
+
+@ 720p
+ca 720p
+
+@ Destination
+ca Destinació
+
+@ Export Highlighted Clip
+ca Exporta el clip ressaltat
+
+@ Export Whole Demo
+ca Exporta tota la demo
+
+@ Same as window
+ca Com la finestra
+
+# Demos and video recording.
+@ GPU Encoding
+ca Codificació per GPU
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1789,6 +1867,42 @@ ca Quines armes activen la congelació; cos a cos inclou la destral i qualsevol 
 
 @ Your own rockets and grenades don't hurt you; rocket jumps still work
 ca Els teus propis coets i granades no et fereixen; els salts amb coet continuen funcionant
+
+# Demos and video recording.
+@ A demo you play stops on its last frame instead of returning to the menu, so you can rewind
+ca Una demo que reprodueixes s'atura a l'últim fotograma en lloc de tornar al menú, perquè la puguis rebobinar
+
+@ Frames per second of recorded video; the game runs at exactly this rate while recording
+ca Fotogrames per segon del vídeo; mentre grava, el joc funciona exactament a aquest ritme
+
+@ High keeps the most detail; small file saves disk space
+ca Alta conserva més detall; fitxer petit estalvia espai de disc
+
+@ How many automatic demos are kept before the oldest is deleted; kept demos never count
+ca Quantes demos automàtiques es conserven abans de suprimir la més antiga; les demos guardades no compten
+
+@ Records every level you play to the Automatic list in Main Menu > Demos; keep the ones you want, the oldest are replaced
+ca Grava cada nivell que jugues a la llista Automàtiques de Menú principal > Demos; guarda les que vulguis, les més antigues es reemplacen
+
+@ Records game sound and music into the video
+ca Grava els sons i la música del joc al vídeo
+
+@ Shows the playback bar (time, speed, timeline) after a control key, always, or never
+ca Mostra la barra de reproducció (temps, velocitat, línia de temps) després d'una tecla de control, sempre o mai
+
+@ Video format; needs ffmpeg with that encoder, else frames are saved as PNG images
+ca Format de vídeo; cal ffmpeg amb aquest codificador, si no els fotogrames es desen com a imatges PNG
+
+# Demos and video recording.
+@ No clip highlighted: while the demo plays, drag across the timeline or press I and O
+ca Cap clip ressaltat: durant la demo, arrossega sobre la línia de temps o prem I i O
+
+@ Video size; frames are scaled from the window size (bars keep the shape), so a larger size adds no detail
+ca Mida del vídeo; els fotogrames s'escalen des de la mida de la finestra (amb bandes per mantenir la forma), així que una mida més gran no afegeix detall
+
+# Demos and video recording.
+@ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
+ca Codifica a la targeta gràfica (NVIDIA NVENC, AMD o Intel mitjançant VA-API, AMF o Quick Sync, Apple VideoToolbox) quan ffmpeg la pot fer servir, deixant lliure el processador; si no, codifica el processador
 
 # ==== ui.txt ====
 
@@ -2540,6 +2654,142 @@ ca Partida desada
 @ Alt Fire on a glowing electronics panel within reach plugs one end in; the other end then shoots lightning with unlimited ammunition. The cable tethers you to the socket and catches on corners. Alt Fire or switching weapons yanks it out.
 ca El tret secundari sobre un panell electrònic il·luminat a l'abast hi endolla un extrem; l'altre dispara llamps amb munició il·limitada. El cable et lliga a la presa i s'enganxa a les cantonades. El tret secundari o canviar d'arma l'arrenca.
 
+@ From the game folder
+ca De la carpeta del joc
+
+@ From ironwail
+ca D'ironwail
+
+@ From the 2021 re-release
+ca De la reedició del 2021
+
+# Demos and video recording.
+@ Automatic demos are off. Turn on Auto-Record Demos in Options > Demos to record every level you play.
+ca Les demos automàtiques estan desactivades. Activa Grava demos automàticament a Opcions > Demos per gravar cada nivell que jugues.
+
+@ Automatic: replaced when the slots are full
+ca Automàtica: es reemplaça quan els espais són plens
+
+@ Delete {}?
+ca Vols suprimir {}?
+
+@ Demos
+ca Demos
+
+@ End of demo
+ca Final de la demo
+
+@ Export Video
+ca Exporta en vídeo
+
+@ Fast forward
+ca Avançament ràpid
+
+@ Fast forward {}x
+ca Endavant {}x
+
+@ Indexing...
+ca S'està indexant...
+
+@ K keep
+ca K guarda
+
+@ Keep
+ca Guarda
+
+@ Length: {}
+ca Durada: {}
+
+@ Map: {}
+ca Mapa: {}
+
+@ No automatic demos yet. Each level you play is recorded here.
+ca Encara no hi ha demos automàtiques. Cada nivell que jugues es grava aquí.
+
+@ No saved demos yet. Record one with the console command 'record <name>', or keep an automatic demo.
+ca Encara no hi ha demos desades. Grava'n una amb l'ordre de consola 'record <name>' o guarda una demo automàtica.
+
+@ Pause
+ca Pausa
+
+@ Paused
+ca En pausa
+
+@ Play {}x
+ca Reproducció {}x
+
+@ Quake - exporting video {}%
+ca Quake - s'està exportant el vídeo {} %
+
+@ Recorded: {}
+ca Gravada: {}
+
+@ Rewind
+ca Rebobina
+
+@ Rewind {}x
+ca Enrere {}x
+
+@ Size: {} KB
+ca Mida: {} KB
+
+@ Skip 10 s
+ca Salta 10 s
+
+@ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
+ca Espai pausa | Esq./Dreta desplaça | Amunt/Avall velocitat | RePàg/AvPàg 10 s | I/O marca | E exporta
+
+@ Speed
+ca Velocitat
+
+@ Switch List
+ca Canvia de llista
+
+@ This can't be undone.
+ca No es pot desfer.
+
+@ While a demo plays: Space pauses, the arrows scrub and change speed, I and O mark a clip and E exports it.
+ca Durant una demo: Espai fa pausa, les fletxes es desplacen i canvien la velocitat, I i O marquen un clip i E l'exporta.
+
+@ Saved
+ca Desades
+
+@ Automatic
+ca Automàtiques
+
+# Demos and video recording.
+@ Export
+ca Exporta
+
+@ H hide
+ca H amaga
+
+@ Hide
+ca Amaga
+
+@ Show
+ca Mostra
+
+# Demos and video recording.
+@ Demo: {}
+ca Demo: {}
+
+@ Highlighted clip: {} to {} ({})
+ca Clip ressaltat: {} a {} ({})
+
+@ Show controls
+ca Mostra els controls
+
+# Demos and video recording.
+@ About {} left
+ca Queden uns {}
+
+@ Exporting video
+ca S'està exportant el vídeo
+
+@ Preparing...
+ca S'està preparant...
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3053,11 +3303,41 @@ ca Només el servidor pot fer changelevel
 @ {} renamed to {}
 ca {} ara es diu {}
 
-@ From the game folder
-ca De la carpeta del joc
+@ Already recording video.
+ca Ja s'està gravant vídeo.
 
-@ From ironwail
-ca D'ironwail
+@ Export cancelled.
+ca Exportació cancel·lada.
 
-@ From the 2021 re-release
-ca De la reedició del 2021
+@ Exporting {} to video
+ca S'està exportant {} a vídeo
+
+@ Kept demo {}
+ca Demo guardada: {}
+
+@ No auto-demo to keep.
+ca No hi ha cap demo automàtica per guardar.
+
+@ Not playing a demo.
+ca No s'està reproduint cap demo.
+
+@ Not recording video.
+ca No s'està gravant vídeo.
+
+@ Recording video to {}
+ca S'està gravant vídeo a {}
+
+@ This demo is already saved.
+ca Aquesta demo ja està desada.
+
+@ This level's demo will be kept when it ends.
+ca La demo d'aquest nivell es guardarà quan s'acabi.
+
+@ Video capture is not available in this build.
+ca La captura de vídeo no està disponible en aquesta versió.
+
+@ Wrote {} ({}s)
+ca S'ha escrit {} ({} s)
+
+@ ffmpeg not found: wrote {} PNG frames and a WAV to {}
+ca No s'ha trobat ffmpeg: s'han escrit {} fotogrames PNG i un WAV a {}

@@ -146,6 +146,26 @@ background so ironwail and vkQuake can play it too. If a mod uses particle
 effects other ports can't show, the full version is kept as `<name>.qsd`
 (`playdemo <name>.qsd`). `demo_convert <name>` converts an older demo.
 
+Main menu → Demos lists your saved demos and, with Options → Demos →
+Auto-Record Demos on, an automatic demo of every level you play; the oldest
+are replaced when the slots are full. Press K to keep one, E to export it as
+a video and Del to delete it. Bug reports include the current level's
+automatic demo.
+
+While a demo plays, Space pauses, holding Left or Right rewinds or
+fast-forwards, Up and Down change the speed, PgUp and PgDn jump 10 seconds,
+and Home and End go to the start and to the next map. I and O mark a clip; E
+exports it, or the whole demo, to the `videos` folder. The controls stay on
+screen; H or Hide hides them, and pointing at the bottom edge shows a strip
+that brings them back. Click the buttons, click the timeline to jump there,
+or drag across it to highlight a clip; Export asks for the frame rate, size,
+format and file, and whether to export the highlighted clip or the whole
+demo.
+
+`capture` starts and stops recording a video while you play. Frame rate,
+format and quality are under Options → Demos → Video Recording. Videos need
+ffmpeg; without it the frames are saved as PNG images with a WAV file.
+
 ## Accessibility
 
 Options → Accessibility:

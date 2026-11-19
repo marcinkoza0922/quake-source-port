@@ -153,6 +153,27 @@ osakeste efekte, mida teised pordid näidata ei suuda, säilitatakse täisversio
 failina `<nimi>.qsd` (`playdemo <nimi>.qsd`). `demo_convert <nimi>` teisendab
 vanema demo.
 
+Peamenüü → Demod näitab su salvestatud demosid ja, kui Valikud → Demod →
+Salvesta demod automaatselt on sees, iga mängitud taseme automaatset demot;
+vanimad asendatakse, kui kohad on täis. K jätab demo alles, E ekspordib
+selle videoks ja Del kustutab selle. Veateated sisaldavad praeguse taseme
+automaatset demot.
+
+Demo ajal peatab Tühik, Vasaku või Parema all hoidmine kerib tagasi või
+edasi, Üles ja Alla muudavad kiirust, PgUp ja PgDn hüppavad 10 sekundit ning
+Home ja End viivad algusse ja järgmisele kaardile. I ja O märgivad klipi; E
+ekspordib selle või kogu demo kausta `videos`. Juhtnupud jäävad ekraanile; H
+või Peida peidab need ning alaserva osutamine näitab riba, mis toob need
+tagasi. Klõpsa nuppe, klõpsa ajateljel, et sinna hüpata, või lohista üle
+selle, et klipp esile tõsta; Ekspordi küsib kaadrisagedust, suurust,
+vormingut ja faili ning seda, kas eksportida esiletõstetud klipp või kogu
+demo.
+
+`capture` alustab ja lõpetab video salvestamise mängu ajal. Kaadrisagedus,
+vorming ja kvaliteet on menüüs Valikud → Demod → Video salvestamine. Videod
+vajavad ffmpegi; ilma selleta salvestatakse kaadrid PNG-piltidena koos
+WAV-failiga.
+
 ## Juurdepääsetavus
 
 Options → Juurdepääsetavus:

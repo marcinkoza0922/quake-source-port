@@ -1,6 +1,6 @@
 use super::*;
 
-pub(super) const PAGES: [(&str, Page); 8] = [
+pub(super) const PAGES: [(&str, Page); 9] = [
     ("Gameplay", Page::Gameplay),
     ("HUD", Page::Hud),
     ("Controls", Page::Controls),
@@ -9,6 +9,7 @@ pub(super) const PAGES: [(&str, Page); 8] = [
     ("Enhancements", Page::Enhancements),
     ("Audio", Page::Audio),
     ("Accessibility", Page::Accessibility),
+    ("Demos", Page::Demos),
 ];
 
 /// One options row.
@@ -62,6 +63,9 @@ pub(super) enum Run {
     ResetHitstop,
     /// Every gameplay modifier back to its default (standard rules).
     ResetModifiers,
+    /// Export dialog: the highlighted clip (dimmed without one), or all.
+    ExportClip,
+    ExportWhole,
 }
 
 /// A server answering the LAN search.

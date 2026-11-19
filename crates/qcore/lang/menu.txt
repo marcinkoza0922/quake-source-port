@@ -3179,3 +3179,184 @@ de Blitzschaden pro Zehntelsekunde (die normale Blitzkanone macht 30)
 it Danno del fulmine ogni decimo di secondo (il fulminatore originale ne fa 30)
 es Daño del rayo cada décima de segundo (el cañón de rayos original hace 30)
 ru Урон молнии каждую десятую секунды (обычная молниевая пушка наносит 30)
+
+# Demos and video recording.
+
+@ AV1 (MP4)
+fr AV1 (MP4)
+de AV1 (MP4)
+it AV1 (MP4)
+es AV1 (MP4)
+ru AV1 (MP4)
+
+@ Auto-Demo Slots
+fr Emplacements de démos auto
+de Plätze für Auto-Demos
+it Slot demo automatiche
+es Huecos de demos automáticas
+ru Слоты автодемо
+
+@ Auto-Record Demos
+fr Enregistrer les démos auto
+de Demos automatisch aufnehmen
+it Registra demo automatiche
+es Grabar demos automáticas
+ru Автозапись демо
+
+@ Frame Rate
+fr Images par seconde
+de Bildrate
+it Fotogrammi al secondo
+es Fotogramas por segundo
+ru Частота кадров
+
+@ H.264 (MP4)
+fr H.264 (MP4)
+de H.264 (MP4)
+it H.264 (MP4)
+es H.264 (MP4)
+ru H.264 (MP4)
+
+@ H.265 (MP4)
+fr H.265 (MP4)
+de H.265 (MP4)
+it H.265 (MP4)
+es H.265 (MP4)
+ru H.265 (MP4)
+
+@ Pause at End
+fr Pause à la fin
+de Am Ende pausieren
+it Pausa alla fine
+es Pausa al final
+ru Пауза в конце
+
+@ Playback Bar
+fr Barre de lecture
+de Wiedergabeleiste
+it Barra di riproduzione
+es Barra de reproducción
+ru Панель воспроизведения
+
+@ Quality
+fr Qualité
+de Qualität
+it Qualità
+es Calidad
+ru Качество
+
+@ Record Audio
+fr Enregistrer le son
+de Ton aufnehmen
+it Registra audio
+es Grabar sonido
+ru Записывать звук
+
+@ VP9 (WebM)
+fr VP9 (WebM)
+de VP9 (WebM)
+it VP9 (WebM)
+es VP9 (WebM)
+ru VP9 (WebM)
+
+@ Video Format
+fr Format vidéo
+de Videoformat
+it Formato video
+es Formato de vídeo
+ru Формат видео
+
+@ Video Recording
+fr Enregistrement vidéo
+de Videoaufnahme
+it Registrazione video
+es Grabación de vídeo
+ru Запись видео
+
+@ ffmpeg Program
+fr Programme ffmpeg
+de ffmpeg-Programm
+it Programma ffmpeg
+es Programa ffmpeg
+ru Программа ffmpeg
+
+@ small file
+fr petit fichier
+de kleine Datei
+it file piccolo
+es archivo pequeño
+ru маленький файл
+
+@ unlimited
+fr illimité
+de unbegrenzt
+it illimitate
+es ilimitadas
+ru без ограничений
+
+# Demos and video recording.
+
+@ 1080p
+fr 1080p
+de 1080p
+it 1080p
+es 1080p
+ru 1080p
+
+@ 1440p
+fr 1440p
+de 1440p
+it 1440p
+es 1440p
+ru 1440p
+
+@ 4K
+fr 4K
+de 4K
+it 4K
+es 4K
+ru 4K
+
+@ 720p
+fr 720p
+de 720p
+it 720p
+es 720p
+ru 720p
+
+@ Destination
+fr Destination
+de Ziel
+it Destinazione
+es Destino
+ru Путь сохранения
+
+@ Export Highlighted Clip
+fr Exporter l'extrait surligné
+de Markierten Clip exportieren
+it Esporta clip evidenziata
+es Exportar clip resaltado
+ru Экспорт выделенного фрагмента
+
+@ Export Whole Demo
+fr Exporter toute la démo
+de Ganze Demo exportieren
+it Esporta tutta la demo
+es Exportar demo completa
+ru Экспорт всего демо
+
+@ Same as window
+fr Comme la fenêtre
+de Wie das Fenster
+it Come la finestra
+es Como la ventana
+ru Как окно
+
+# Demos and video recording.
+
+@ GPU Encoding
+fr Encodage GPU
+de GPU-Kodierung
+it Codifica GPU
+es Codificación por GPU
+ru Кодирование на GPU

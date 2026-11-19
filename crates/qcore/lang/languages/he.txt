@@ -1367,6 +1367,84 @@ he כל משטח מתכת מקבל את התקע, לא רק אלקטרוניקה
 @ Lightning damage every tenth of a second (the stock lightning gun does 30)
 he נזק ברק בכל עשירית שנייה (רובה הברקים הרגיל גורם 30)
 
+# Demos and video recording.
+@ AV1 (MP4)
+he AV1 (MP4)
+
+@ Auto-Demo Slots
+he משבצות להדגמות אוטומטיות
+
+@ Auto-Record Demos
+he הקלטת הדגמות אוטומטית
+
+@ Frame Rate
+he קצב פריימים
+
+@ H.264 (MP4)
+he H.264 (MP4)
+
+@ H.265 (MP4)
+he H.265 (MP4)
+
+@ Pause at End
+he השהיה בסוף
+
+@ Playback Bar
+he סרגל ניגון
+
+@ Quality
+he איכות
+
+@ Record Audio
+he הקלטת שמע
+
+@ VP9 (WebM)
+he VP9 (WebM)
+
+@ Video Format
+he פורמט וידאו
+
+@ Video Recording
+he הקלטת וידאו
+
+@ ffmpeg Program
+he תוכנת ffmpeg
+
+@ small file
+he קובץ קטן
+
+@ unlimited
+he ללא הגבלה
+
+# Demos and video recording.
+@ 1080p
+he 1080p
+
+@ 1440p
+he 1440p
+
+@ 4K
+he 4K
+
+@ 720p
+he 720p
+
+@ Destination
+he יעד
+
+@ Export Highlighted Clip
+he ייצוא הקטע המסומן
+
+@ Export Whole Demo
+he ייצוא כל ההדגמה
+
+@ Same as window
+he כמו החלון
+
+# Demos and video recording.
+@ GPU Encoding
+he קידוד GPU
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1789,6 +1867,42 @@ he אילו נשקים מפעילים את ההקפאה; קרב מגע כולל 
 
 @ Your own rockets and grenades don't hurt you; rocket jumps still work
 he הטילים והרימונים שלכם לא פוגעים בכם; קפיצות טיל עדיין עובדות
+
+# Demos and video recording.
+@ A demo you play stops on its last frame instead of returning to the menu, so you can rewind
+he הדגמה שאתם מנגנים נעצרת בפריים האחרון במקום לחזור לתפריט, כדי שתוכלו להריץ אותה אחורה
+
+@ Frames per second of recorded video; the game runs at exactly this rate while recording
+he פריימים לשנייה בווידאו; בזמן ההקלטה המשחק רץ בדיוק בקצב הזה
+
+@ High keeps the most detail; small file saves disk space
+he גבוהה שומרת הכי הרבה פרטים; קובץ קטן חוסך מקום בדיסק
+
+@ How many automatic demos are kept before the oldest is deleted; kept demos never count
+he כמה הדגמות אוטומטיות נשמרות לפני שהישנה ביותר נמחקת; הדגמות שנשמרו לא נספרות
+
+@ Records every level you play to the Automatic list in Main Menu > Demos; keep the ones you want, the oldest are replaced
+he מקליט כל שלב שאתם משחקים לרשימה אוטומטיות בתפריט הראשי > הדגמות; שמרו את אלה שאתם רוצים, הישנות ביותר מוחלפות
+
+@ Records game sound and music into the video
+he מקליט את צלילי המשחק והמוזיקה לווידאו
+
+@ Shows the playback bar (time, speed, timeline) after a control key, always, or never
+he מציג את סרגל הניגון (זמן, מהירות, ציר זמן) אחרי מקש בקרה, תמיד או אף פעם
+
+@ Video format; needs ffmpeg with that encoder, else frames are saved as PNG images
+he פורמט וידאו; נדרש ffmpeg עם המקודד הזה, אחרת הפריימים נשמרים כתמונות PNG
+
+# Demos and video recording.
+@ No clip highlighted: while the demo plays, drag across the timeline or press I and O
+he לא סומן קטע: בזמן ההדגמה גררו על ציר הזמן או לחצו I ו-O
+
+@ Video size; frames are scaled from the window size (bars keep the shape), so a larger size adds no detail
+he גודל הווידאו; הפריימים מוגדלים מגודל החלון (עם פסים לשמירת הצורה), כך שגודל גדול יותר לא מוסיף פרטים
+
+# Demos and video recording.
+@ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
+he מקודד בכרטיס המסך (NVIDIA NVENC, ‏AMD או Intel דרך VA-API, ‏AMF או Quick Sync, ‏Apple VideoToolbox) כש-ffmpeg יכול להשתמש בו, וכך המעבד נשאר פנוי; אחרת המעבד מקודד
 
 # ==== ui.txt ====
 
@@ -2540,6 +2654,142 @@ he שמירה
 @ Alt Fire on a glowing electronics panel within reach plugs one end in; the other end then shoots lightning with unlimited ammunition. The cable tethers you to the socket and catches on corners. Alt Fire or switching weapons yanks it out.
 he ירי משני על לוח אלקטרוני זוהר בהישג יד מחבר קצה אחד; הקצה השני יורה אז ברקים עם תחמושת בלתי מוגבלת. הכבל קושר אותך לשקע ונתפס בפינות. ירי משני או החלפת נשק תולשים אותו.
 
+@ From the game folder
+he מתיקיית המשחק
+
+@ From ironwail
+he מ-ironwail
+
+@ From the 2021 re-release
+he מהמהדורה המחודשת מ-2021
+
+# Demos and video recording.
+@ Automatic demos are off. Turn on Auto-Record Demos in Options > Demos to record every level you play.
+he הדגמות אוטומטיות כבויות. הפעילו הקלטת הדגמות אוטומטית באפשרויות > הדגמות כדי להקליט כל שלב שאתם משחקים.
+
+@ Automatic: replaced when the slots are full
+he אוטומטית: מוחלפת כשהמשבצות מלאות
+
+@ Delete {}?
+he למחוק את {}?
+
+@ Demos
+he הדגמות
+
+@ End of demo
+he סוף ההדגמה
+
+@ Export Video
+he ייצוא לווידאו
+
+@ Fast forward
+he הרצה קדימה
+
+@ Fast forward {}x
+he קדימה {}x
+
+@ Indexing...
+he יוצר אינדקס...
+
+@ K keep
+he K שמירה
+
+@ Keep
+he שמירה
+
+@ Length: {}
+he משך: {}
+
+@ Map: {}
+he מפה: {}
+
+@ No automatic demos yet. Each level you play is recorded here.
+he עדיין אין הדגמות אוטומטיות. כל שלב שאתם משחקים מוקלט כאן.
+
+@ No saved demos yet. Record one with the console command 'record <name>', or keep an automatic demo.
+he עדיין אין הדגמות שמורות. הקליטו אחת בפקודת המסוף 'record <name>', או שמרו הדגמה אוטומטית.
+
+@ Pause
+he השהיה
+
+@ Paused
+he מושהה
+
+@ Play {}x
+he ניגון {}x
+
+@ Quake - exporting video {}%
+he Quake - מייצא וידאו {}%
+
+@ Recorded: {}
+he הוקלטה: {}
+
+@ Rewind
+he הרצה אחורה
+
+@ Rewind {}x
+he אחורה {}x
+
+@ Size: {} KB
+he גודל: {} KB
+
+@ Skip 10 s
+he דילוג 10 ש׳
+
+@ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
+he Space השהיה | שמאל/ימין גלילה | למעלה/למטה מהירות | PgUp/PgDn 10 ש׳ | I/O סימון | E ייצוא
+
+@ Speed
+he מהירות
+
+@ Switch List
+he החלפת רשימה
+
+@ This can't be undone.
+he אי אפשר לבטל את זה.
+
+@ While a demo plays: Space pauses, the arrows scrub and change speed, I and O mark a clip and E exports it.
+he בזמן הדגמה: Space משהה, החצים גוללים ומשנים מהירות, I ו-O מסמנים קטע ו-E מייצא אותו.
+
+@ Saved
+he שמורות
+
+@ Automatic
+he אוטומטיות
+
+# Demos and video recording.
+@ Export
+he ייצוא
+
+@ H hide
+he H הסתרה
+
+@ Hide
+he הסתרה
+
+@ Show
+he הצגה
+
+# Demos and video recording.
+@ Demo: {}
+he הדגמה: {}
+
+@ Highlighted clip: {} to {} ({})
+he קטע מסומן: {} עד {} ({})
+
+@ Show controls
+he הצגת הפקדים
+
+# Demos and video recording.
+@ About {} left
+he נותרו כ-{}
+
+@ Exporting video
+he מייצא וידאו
+
+@ Preparing...
+he מתכונן...
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3053,11 +3303,41 @@ he רק השרת רשאי להריץ changelevel
 @ {} renamed to {}
 he {} שינה את שמו ל-{}
 
-@ From the game folder
-he מתיקיית המשחק
+@ Already recording video.
+he כבר מתבצעת הקלטת וידאו.
 
-@ From ironwail
-he מ-ironwail
+@ Export cancelled.
+he הייצוא בוטל.
 
-@ From the 2021 re-release
-he מהמהדורה המחודשת מ-2021
+@ Exporting {} to video
+he מייצא את {} לווידאו
+
+@ Kept demo {}
+he ההדגמה נשמרה: {}
+
+@ No auto-demo to keep.
+he אין הדגמה אוטומטית לשמירה.
+
+@ Not playing a demo.
+he לא מתנגנת הדגמה.
+
+@ Not recording video.
+he לא מתבצעת הקלטת וידאו.
+
+@ Recording video to {}
+he מקליט וידאו אל {}
+
+@ This demo is already saved.
+he ההדגמה הזאת כבר שמורה.
+
+@ This level's demo will be kept when it ends.
+he ההדגמה של השלב הזה תישמר כשהוא יסתיים.
+
+@ Video capture is not available in this build.
+he הקלטת וידאו אינה זמינה בגרסה זו.
+
+@ Wrote {} ({}s)
+he נכתב {} ({} ש׳)
+
+@ ffmpeg not found: wrote {} PNG frames and a WAV to {}
+he ffmpeg לא נמצא: נכתבו {} פריימים של PNG וקובץ WAV אל {}

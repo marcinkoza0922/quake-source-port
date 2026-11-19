@@ -124,6 +124,22 @@ pub(super) const HOST_CVARS: &[(&str, &str, u32)] = &[
     ("scr_showfps", "0", CVAR_ARCHIVE),
     // Horizontal speed under the crosshair; _ofs moves it down (ironwail).
     ("scr_showspeed", "0", CVAR_ARCHIVE),
+    // Demos (Options > Demos): auto-recording, playback bar, video capture
+    ("cl_autodemo", "1", CVAR_ARCHIVE),
+    ("cl_autodemo_slots", "10", CVAR_ARCHIVE),
+    ("cl_demobar", "2", CVAR_ARCHIVE),
+    ("cl_demo_endpause", "1", CVAR_ARCHIVE),
+    ("capture_fps", "60", CVAR_ARCHIVE),
+    ("capture_codec", "0", CVAR_ARCHIVE),
+    ("capture_size", "0", CVAR_ARCHIVE),
+    ("capture_gpu", "1", CVAR_ARCHIVE),
+    // export dialog state (menu_export)
+    ("_export_dest", "", 0),
+    ("_export_hasclip", "0", 0),
+    ("capture_quality", "0", CVAR_ARCHIVE),
+    ("capture_audio", "1", CVAR_ARCHIVE),
+    ("capture_ffmpeg", "ffmpeg", CVAR_ARCHIVE),
+    ("capture_encoder", "", CVAR_ARCHIVE),
     ("scr_showspeed_ofs", "0", CVAR_ARCHIVE),
     // Mapper aid: server bounding boxes (see src/bboxes.rs).
     ("r_showbboxes", "0", 0),

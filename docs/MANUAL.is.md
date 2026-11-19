@@ -153,6 +153,26 @@ agnabrellur sem önnur port geta ekki sýnt er heila útgáfan geymd sem
 `<nafn>.qsd` (`playdemo <nafn>.qsd`). `demo_convert <nafn>` umbreytir eldri
 upptöku.
 
+Aðalvalmynd → Kynningar sýnir vistaðar kynningar og, þegar Stillingar →
+Kynningar → Taka kynningar upp sjálfkrafa er virkt, sjálfvirka kynningu af
+hverju borði sem þú spilar; þær elstu víkja þegar plássin eru full. K geymir
+eina, E flytur hana út sem myndband og Del eyðir henni. Villuskýrslur
+innihalda sjálfvirka kynningu núverandi borðs.
+
+Meðan kynning spilast gerir Bil hlé, að halda Vinstri eða Hægri spólar til
+baka eða áfram, Upp og Niður breyta hraðanum, PgUp og PgDn hoppa 10
+sekúndur, og Home og End fara á byrjunina og á næsta kort. I og O merkja
+bút; E flytur hann, eða alla kynninguna, í möppuna `videos`. Stjórnstikan
+helst á skjánum; H eða Fela felur hana og þegar bent er á neðri brúnina
+birtist rönd sem kallar hana fram aftur. Smelltu á hnappana, smelltu á
+tímalínuna til að stökkva þangað eða dragðu yfir hana til að merkja bút;
+Flytja út spyr um rammatíðni, stærð, snið og skrá og hvort flytja eigi út
+merkta bútinn eða alla kynninguna.
+
+`capture` byrjar og stöðvar myndbandsupptöku meðan þú spilar. Rammatíðni,
+snið og gæði eru undir Stillingar → Kynningar → Myndbandsupptaka. Myndbönd
+þurfa ffmpeg; án þess eru rammarnir vistaðir sem PNG-myndir með WAV-skrá.
+
 ## Aðgengi
 
 Options → Aðgengi:

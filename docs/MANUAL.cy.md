@@ -159,6 +159,28 @@ hefyd. Os yw mod yn defnyddio effeithiau gronynnau na all injans eraill eu
 dangos, mae'r fersiwn llawn yn cael ei gadw fel `<enw>.qsd` (`playdemo
 <enw>.qsd`). Mae `demo_convert <enw>` yn trosi demo hŷn.
 
+Mae Prif ddewislen → Demos yn rhestru eich demos wedi'u cadw ac, os yw
+Opsiynau → Demos → Recordio demos yn awtomatig ymlaen, demo awtomatig o bob
+lefel rydych yn ei chwarae; mae'r hynaf yn cael eu disodli pan fydd y
+slotiau'n llawn. Mae K yn cadw un, E yn ei allforio fel fideo a Del yn ei
+ddileu. Mae adroddiadau nam yn cynnwys demo awtomatig y lefel bresennol.
+
+Wrth i demo chwarae, mae Bwlch yn oedi, mae dal Chwith neu De yn weindio'n
+ôl neu ymlaen, mae I fyny ac I lawr yn newid y cyflymder, mae PgUp a PgDn yn
+neidio 10 eiliad, ac mae Home ac End yn mynd i'r dechrau ac i'r map nesaf.
+Mae I ac O yn marcio clip; mae E yn ei allforio, neu'r demo cyfan, i'r
+ffolder `videos`. Mae'r rheolyddion yn aros ar y sgrin; mae H neu Cuddio'n
+eu cuddio, ac wrth bwyntio at yr ymyl isaf daw stribed i'r golwg sy'n dod â
+nhw'n ôl. Cliciwch y botymau, cliciwch y llinell amser i neidio yno, neu
+llusgwch ar ei thraws i amlygu clip; mae Allforio'n gofyn am gyfradd
+fframiau, maint, fformat a ffeil, ac a ddylid allforio'r clip wedi'i amlygu
+neu'r demo cyfan.
+
+Mae `capture` yn dechrau ac yn stopio recordio fideo wrth i chi chwarae. Mae
+cyfradd fframiau, fformat ac ansawdd o dan Opsiynau → Demos → Recordio
+fideo. Mae fideos angen ffmpeg; hebddo caiff y fframiau eu cadw fel
+delweddau PNG gyda ffeil WAV.
+
 ## Hygyrchedd
 
 Options → Hygyrchedd:

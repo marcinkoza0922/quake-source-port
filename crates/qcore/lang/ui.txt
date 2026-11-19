@@ -1748,3 +1748,298 @@ de Aus der Neuauflage von 2021
 it Dalla riedizione 2021
 es De la reedición de 2021
 ru Из переиздания 2021 года
+
+# Demos and video recording.
+
+@ Automatic demos are off. Turn on Auto-Record Demos in Options > Demos to record every level you play.
+fr Les démos automatiques sont désactivées. Activez Enregistrer les démos auto dans Options > Démos pour enregistrer chaque niveau joué.
+de Automatische Demos sind aus. Schalte Demos automatisch aufnehmen unter Optionen > Demos ein, um jedes gespielte Level aufzunehmen.
+it Le demo automatiche sono disattivate. Attiva Registra demo automatiche in Opzioni > Demo per registrare ogni livello giocato.
+es Las demos automáticas están desactivadas. Activa Grabar demos automáticas en Opciones > Demos para grabar cada nivel que juegues.
+ru Автоматические демо выключены. Включите «Автозапись демо» в Настройки > Демо, чтобы записывать каждый пройденный уровень.
+
+@ Automatic: replaced when the slots are full
+fr Automatique : remplacée quand les emplacements sont pleins
+de Automatisch: wird ersetzt, wenn alle Plätze belegt sind
+it Automatica: sostituita quando gli slot sono pieni
+es Automática: se reemplaza cuando los huecos están llenos
+ru Автоматическое: заменяется, когда слоты заполнены
+
+@ Delete {}?
+fr Supprimer {} ?
+de {} löschen?
+it Eliminare {}?
+es ¿Borrar {}?
+ru Удалить {}?
+
+@ Demos
+fr Démos
+de Demos
+it Demo
+es Demos
+ru Демо
+
+@ End of demo
+fr Fin de la démo
+de Ende der Demo
+it Fine della demo
+es Fin de la demo
+ru Конец демо
+
+@ Export Video
+fr Exporter en vidéo
+de Als Video exportieren
+it Esporta video
+es Exportar vídeo
+ru Экспорт видео
+
+@ Fast forward
+fr Avance rapide
+de Vorspulen
+it Avanti veloce
+es Avance rápido
+ru Перемотка вперёд
+
+@ Fast forward {}x
+fr Avance rapide {}x
+de Vorspulen {}x
+it Avanti veloce {}x
+es Avance rápido {}x
+ru Вперёд {}x
+
+@ Indexing...
+fr Indexation...
+de Indiziere...
+it Indicizzazione...
+es Indexando...
+ru Индексация...
+
+@ K keep
+fr K garder
+de K behalten
+it K conserva
+es K conservar
+ru K сохранить
+
+@ Keep
+fr Garder
+de Behalten
+it Conserva
+es Conservar
+ru Сохранить
+
+@ Length: {}
+fr Durée : {}
+de Länge: {}
+it Durata: {}
+es Duración: {}
+ru Длина: {}
+
+@ Map: {}
+fr Carte : {}
+de Karte: {}
+it Mappa: {}
+es Mapa: {}
+ru Карта: {}
+
+@ No automatic demos yet. Each level you play is recorded here.
+fr Pas encore de démo automatique. Chaque niveau joué est enregistré ici.
+de Noch keine automatischen Demos. Jedes gespielte Level wird hier aufgenommen.
+it Ancora nessuna demo automatica. Ogni livello giocato viene registrato qui.
+es Aún no hay demos automáticas. Cada nivel que juegues se graba aquí.
+ru Автоматических демо пока нет. Здесь записывается каждый пройденный уровень.
+
+@ No saved demos yet. Record one with the console command 'record <name>', or keep an automatic demo.
+fr Pas encore de démo enregistrée. Enregistrez-en une avec la commande console 'record <name>', ou gardez une démo automatique.
+de Noch keine gespeicherten Demos. Nimm eine mit dem Konsolenbefehl 'record <name>' auf oder behalte eine automatische Demo.
+it Ancora nessuna demo salvata. Registrane una con il comando di console 'record <name>', o conserva una demo automatica.
+es Aún no hay demos guardadas. Graba una con el comando de consola 'record <name>' o conserva una demo automática.
+ru Сохранённых демо пока нет. Запишите демо консольной командой 'record <name>' или сохраните автоматическое.
+
+@ Pause
+fr Pause
+de Pause
+it Pausa
+es Pausa
+ru Пауза
+
+@ Paused
+fr En pause
+de Pausiert
+it In pausa
+es En pausa
+ru Пауза
+
+@ Play {}x
+fr Lecture {}x
+de Wiedergabe {}x
+it Riproduzione {}x
+es Reproducción {}x
+ru Воспроизведение {}x
+
+@ Quake - exporting video {}%
+fr Quake - export vidéo {} %
+de Quake - Video wird exportiert {} %
+it Quake - esportazione video {}%
+es Quake - exportando vídeo {} %
+ru Quake - экспорт видео {}%
+
+@ Recorded: {}
+fr Enregistrée : {}
+de Aufgenommen: {}
+it Registrata: {}
+es Grabada: {}
+ru Записано: {}
+
+@ Rewind
+fr Rembobiner
+de Zurückspulen
+it Riavvolgi
+es Rebobinar
+ru Перемотка назад
+
+@ Rewind {}x
+fr Retour {}x
+de Zurück {}x
+it Indietro {}x
+es Rebobinar {}x
+ru Назад {}x
+
+@ Size: {} KB
+fr Taille : {} Ko
+de Größe: {} KB
+it Dimensione: {} KB
+es Tamaño: {} KB
+ru Размер: {} КБ
+
+@ Skip 10 s
+fr Sauter 10 s
+de 10 s springen
+it Salta 10 s
+es Saltar 10 s
+ru Пропустить 10 с
+
+@ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
+fr Espace pause | Gauche/Droite parcourir | Haut/Bas vitesse | PgUp/PgDn 10 s | I/O marquer | E exporter
+de Leertaste Pause | Links/Rechts spulen | Hoch/Runter Tempo | Bild↑/Bild↓ 10 s | I/O markieren | E exportieren
+it Spazio pausa | Sinistra/Destra scorri | Su/Giù velocità | PagSu/PagGiù 10 s | I/O segna | E esporta
+es Espacio pausa | Izq./Der. desplazar | Arriba/Abajo velocidad | RePág/AvPág 10 s | I/O marcar | E exportar
+ru Пробел пауза | Влево/Вправо перемотка | Вверх/Вниз скорость | PgUp/PgDn 10 с | I/O метка | E экспорт
+
+@ Speed
+fr Vitesse
+de Tempo
+it Velocità
+es Velocidad
+ru Скорость
+
+@ Switch List
+fr Changer de liste
+de Liste wechseln
+it Cambia elenco
+es Cambiar de lista
+ru Сменить список
+
+@ This can't be undone.
+fr Action irréversible.
+de Das kann nicht rückgängig gemacht werden.
+it L'operazione non può essere annullata.
+es No se puede deshacer.
+ru Это нельзя отменить.
+
+@ While a demo plays: Space pauses, the arrows scrub and change speed, I and O mark a clip and E exports it.
+fr Pendant une démo : Espace met en pause, les flèches parcourent et changent la vitesse, I et O marquent un extrait et E l'exporte.
+de Während eine Demo läuft: Leertaste pausiert, die Pfeiltasten spulen und ändern das Tempo, I und O markieren einen Clip und E exportiert ihn.
+it Durante una demo: Spazio mette in pausa, le frecce scorrono e cambiano velocità, I e O segnano una clip ed E la esporta.
+es Durante una demo: Espacio pausa, las flechas desplazan y cambian la velocidad, I y O marcan un clip y E lo exporta.
+ru Во время демо: Пробел ставит паузу, стрелки перематывают и меняют скорость, I и O отмечают фрагмент, а E экспортирует его.
+
+@ Saved
+fr Enregistrées
+de Gespeichert
+it Salvate
+es Guardadas
+ru Сохранённые
+
+@ Automatic
+fr Automatiques
+de Automatisch
+it Automatiche
+es Automáticas
+ru Автоматические
+
+# Demos and video recording.
+
+@ Export
+fr Exporter
+de Exportieren
+it Esporta
+es Exportar
+ru Экспорт
+
+@ H hide
+fr H masquer
+de H ausblenden
+it H nascondi
+es H ocultar
+ru H скрыть
+
+@ Hide
+fr Masquer
+de Ausblenden
+it Nascondi
+es Ocultar
+ru Скрыть
+
+@ Show
+fr Afficher
+de Einblenden
+it Mostra
+es Mostrar
+ru Показать
+
+# Demos and video recording.
+
+@ Demo: {}
+fr Démo : {}
+de Demo: {}
+it Demo: {}
+es Demo: {}
+ru Демо: {}
+
+@ Highlighted clip: {} to {} ({})
+fr Extrait surligné : {} à {} ({})
+de Markierter Clip: {} bis {} ({})
+it Clip evidenziata: da {} a {} ({})
+es Clip resaltado: {} a {} ({})
+ru Выделенный фрагмент: {} – {} ({})
+
+@ Show controls
+fr Afficher les commandes
+de Steuerung zeigen
+it Mostra controlli
+es Mostrar controles
+ru Показать панель
+
+# Demos and video recording.
+
+@ About {} left
+fr Environ {} restant
+de Noch etwa {}
+it Circa {} rimanenti
+es Quedan unos {}
+ru Осталось около {}
+
+@ Exporting video
+fr Export de la vidéo
+de Video wird exportiert
+it Esportazione video
+es Exportando vídeo
+ru Экспорт видео
+
+@ Preparing...
+fr Préparation...
+de Vorbereitung...
+it Preparazione...
+es Preparando...
+ru Подготовка...

@@ -156,6 +156,26 @@ izmanto daļiņu efektus, ko citi porti nevar parādīt, pilnā versija tiek
 saglabāta kā `<nosaukums>.qsd` (`playdemo <nosaukums>.qsd`).
 `demo_convert <nosaukums>` pārveido vecāku demo.
 
+Galvenā izvēlne → Demo rāda jūsu saglabātos demo un, ja ieslēgts Opcijas →
+Demo → Automātiski ierakstīt demo, arī katra spēlētā līmeņa automātisko
+demo; vecākie tiek aizstāti, kad vietas ir pilnas. K patur demo, E eksportē
+to video, Del to izdzēš. Kļūdu ziņojumos ir pašreizējā līmeņa automātiskais
+demo.
+
+Demo laikā Atstarpe pauzē, turot Pa kreisi vai Pa labi, tiek tīts atpakaļ
+vai uz priekšu, Augšup un Lejup maina ātrumu, PgUp un PgDn pārlec 10
+sekundes, bet Home un End iet uz sākumu un uz nākamo karti. I un O atzīmē
+klipu; E to vai visu demo eksportē mapē `videos`. Vadīklas paliek ekrānā; H
+vai Paslēpt tās paslēpj, un, norādot uz apakšējo malu, parādās josla, kas
+tās atgriež. Klikšķiniet pogas, noklikšķiniet uz laika joslas, lai pārlēktu
+turp, vai velciet pa to, lai iezīmētu klipu; Eksportēt jautā kadru ātrumu,
+izmēru, formātu un failu, kā arī to, vai eksportēt iezīmēto klipu vai visu
+demo.
+
+`capture` sāk un aptur video ierakstīšanu spēles laikā. Kadru ātrums,
+formāts un kvalitāte ir sadaļā Opcijas → Demo → Video ierakstīšana. Video
+vajag ffmpeg; bez tā kadri tiek saglabāti kā PNG attēli ar WAV failu.
+
 ## Pieejamība
 
 Options → Pieejamība:

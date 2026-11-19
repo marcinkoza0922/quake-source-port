@@ -1367,6 +1367,84 @@ id Semua permukaan logam bisa dicolok, bukan hanya elektronik
 @ Lightning damage every tenth of a second (the stock lightning gun does 30)
 id Kerusakan petir tiap sepersepuluh detik (senapan petir biasa memberi 30)
 
+# Demos and video recording.
+@ AV1 (MP4)
+id AV1 (MP4)
+
+@ Auto-Demo Slots
+id Slot demo otomatis
+
+@ Auto-Record Demos
+id Rekam demo otomatis
+
+@ Frame Rate
+id Laju bingkai
+
+@ H.264 (MP4)
+id H.264 (MP4)
+
+@ H.265 (MP4)
+id H.265 (MP4)
+
+@ Pause at End
+id Jeda di akhir
+
+@ Playback Bar
+id Bilah pemutaran
+
+@ Quality
+id Kualitas
+
+@ Record Audio
+id Rekam suara
+
+@ VP9 (WebM)
+id VP9 (WebM)
+
+@ Video Format
+id Format video
+
+@ Video Recording
+id Perekaman video
+
+@ ffmpeg Program
+id Program ffmpeg
+
+@ small file
+id file kecil
+
+@ unlimited
+id tanpa batas
+
+# Demos and video recording.
+@ 1080p
+id 1080p
+
+@ 1440p
+id 1440p
+
+@ 4K
+id 4K
+
+@ 720p
+id 720p
+
+@ Destination
+id Tujuan
+
+@ Export Highlighted Clip
+id Ekspor klip yang ditandai
+
+@ Export Whole Demo
+id Ekspor seluruh demo
+
+@ Same as window
+id Sama dengan jendela
+
+# Demos and video recording.
+@ GPU Encoding
+id Enkode GPU
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1789,6 +1867,42 @@ id Senjata yang memicu beku; jarak dekat mencakup kapak dan senjata mod apa pun 
 
 @ Your own rockets and grenades don't hurt you; rocket jumps still work
 id Roket dan granat Anda sendiri tidak melukai Anda; rocket jump tetap berfungsi
+
+# Demos and video recording.
+@ A demo you play stops on its last frame instead of returning to the menu, so you can rewind
+id Demo yang Anda putar berhenti di bingkai terakhir alih-alih kembali ke menu, sehingga bisa diputar mundur
+
+@ Frames per second of recorded video; the game runs at exactly this rate while recording
+id Bingkai per detik video rekaman; selama merekam, game berjalan tepat pada laju ini
+
+@ High keeps the most detail; small file saves disk space
+id Tinggi menyimpan detail terbanyak; file kecil menghemat ruang disk
+
+@ How many automatic demos are kept before the oldest is deleted; kept demos never count
+id Berapa banyak demo otomatis yang disimpan sebelum yang tertua dihapus; demo yang disimpan tidak dihitung
+
+@ Records every level you play to the Automatic list in Main Menu > Demos; keep the ones you want, the oldest are replaced
+id Merekam setiap level yang Anda mainkan ke daftar Otomatis di Menu utama > Demo; simpan yang Anda mau, yang tertua diganti
+
+@ Records game sound and music into the video
+id Merekam suara dan musik game ke dalam video
+
+@ Shows the playback bar (time, speed, timeline) after a control key, always, or never
+id Menampilkan bilah pemutaran (waktu, kecepatan, linimasa) setelah tombol kontrol, selalu, atau tidak pernah
+
+@ Video format; needs ffmpeg with that encoder, else frames are saved as PNG images
+id Format video; perlu ffmpeg dengan encoder itu, jika tidak bingkai disimpan sebagai gambar PNG
+
+# Demos and video recording.
+@ No clip highlighted: while the demo plays, drag across the timeline or press I and O
+id Tidak ada klip yang ditandai: saat demo diputar, seret di linimasa atau tekan I dan O
+
+@ Video size; frames are scaled from the window size (bars keep the shape), so a larger size adds no detail
+id Ukuran video; bingkai diskalakan dari ukuran jendela (dengan bilah agar bentuk tetap), jadi ukuran lebih besar tidak menambah detail
+
+# Demos and video recording.
+@ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
+id Mengenkode di kartu grafis (NVIDIA NVENC, AMD atau Intel lewat VA-API, AMF atau Quick Sync, Apple VideoToolbox) bila ffmpeg dapat memakainya, sehingga prosesor tetap lega; jika tidak, prosesor yang mengenkode
 
 # ==== ui.txt ====
 
@@ -2540,6 +2654,142 @@ id Simpan
 @ Alt Fire on a glowing electronics panel within reach plugs one end in; the other end then shoots lightning with unlimited ammunition. The cable tethers you to the socket and catches on corners. Alt Fire or switching weapons yanks it out.
 id Tembakan alternatif ke panel elektronik yang menyala dalam jangkauan mencolokkan satu ujung; ujung lainnya lalu menembakkan petir dengan amunisi tak terbatas. Kabel mengikatmu ke soket dan tersangkut di sudut. Tembakan alternatif atau ganti senjata mencabutnya.
 
+@ From the game folder
+id Dari folder game
+
+@ From ironwail
+id Dari ironwail
+
+@ From the 2021 re-release
+id Dari rilis ulang 2021
+
+# Demos and video recording.
+@ Automatic demos are off. Turn on Auto-Record Demos in Options > Demos to record every level you play.
+id Demo otomatis mati. Nyalakan Rekam demo otomatis di Opsi > Demo untuk merekam setiap level yang Anda mainkan.
+
+@ Automatic: replaced when the slots are full
+id Otomatis: diganti saat slot penuh
+
+@ Delete {}?
+id Hapus {}?
+
+@ Demos
+id Demo
+
+@ End of demo
+id Akhir demo
+
+@ Export Video
+id Ekspor video
+
+@ Fast forward
+id Maju cepat
+
+@ Fast forward {}x
+id Maju {}x
+
+@ Indexing...
+id Mengindeks...
+
+@ K keep
+id K simpan
+
+@ Keep
+id Simpan
+
+@ Length: {}
+id Durasi: {}
+
+@ Map: {}
+id Peta: {}
+
+@ No automatic demos yet. Each level you play is recorded here.
+id Belum ada demo otomatis. Setiap level yang Anda mainkan direkam di sini.
+
+@ No saved demos yet. Record one with the console command 'record <name>', or keep an automatic demo.
+id Belum ada demo tersimpan. Rekam satu dengan perintah konsol 'record <name>', atau simpan demo otomatis.
+
+@ Pause
+id Jeda
+
+@ Paused
+id Dijeda
+
+@ Play {}x
+id Putar {}x
+
+@ Quake - exporting video {}%
+id Quake - mengekspor video {}%
+
+@ Recorded: {}
+id Direkam: {}
+
+@ Rewind
+id Putar mundur
+
+@ Rewind {}x
+id Mundur {}x
+
+@ Size: {} KB
+id Ukuran: {} KB
+
+@ Skip 10 s
+id Lewati 10 d
+
+@ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
+id Spasi jeda | Kiri/Kanan geser | Atas/Bawah kecepatan | PgUp/PgDn 10 d | I/O tanda | E ekspor
+
+@ Speed
+id Kecepatan
+
+@ Switch List
+id Ganti daftar
+
+@ This can't be undone.
+id Ini tidak bisa dibatalkan.
+
+@ While a demo plays: Space pauses, the arrows scrub and change speed, I and O mark a clip and E exports it.
+id Saat demo diputar: Spasi menjeda, panah menggeser dan mengubah kecepatan, I dan O menandai klip dan E mengekspornya.
+
+@ Saved
+id Tersimpan
+
+@ Automatic
+id Otomatis
+
+# Demos and video recording.
+@ Export
+id Ekspor
+
+@ H hide
+id H sembunyikan
+
+@ Hide
+id Sembunyikan
+
+@ Show
+id Tampilkan
+
+# Demos and video recording.
+@ Demo: {}
+id Demo: {}
+
+@ Highlighted clip: {} to {} ({})
+id Klip yang ditandai: {} sampai {} ({})
+
+@ Show controls
+id Tampilkan kontrol
+
+# Demos and video recording.
+@ About {} left
+id Sekitar {} lagi
+
+@ Exporting video
+id Mengekspor video
+
+@ Preparing...
+id Menyiapkan...
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3053,11 +3303,41 @@ id Hanya server yang boleh changelevel
 @ {} renamed to {}
 id {} berganti nama menjadi {}
 
-@ From the game folder
-id Dari folder game
+@ Already recording video.
+id Video sudah sedang direkam.
 
-@ From ironwail
-id Dari ironwail
+@ Export cancelled.
+id Ekspor dibatalkan.
 
-@ From the 2021 re-release
-id Dari rilis ulang 2021
+@ Exporting {} to video
+id Mengekspor {} ke video
+
+@ Kept demo {}
+id Demo disimpan: {}
+
+@ No auto-demo to keep.
+id Tidak ada demo otomatis untuk disimpan.
+
+@ Not playing a demo.
+id Tidak ada demo yang diputar.
+
+@ Not recording video.
+id Tidak ada video yang direkam.
+
+@ Recording video to {}
+id Merekam video ke {}
+
+@ This demo is already saved.
+id Demo ini sudah tersimpan.
+
+@ This level's demo will be kept when it ends.
+id Demo level ini akan disimpan saat level berakhir.
+
+@ Video capture is not available in this build.
+id Perekaman video tidak tersedia di build ini.
+
+@ Wrote {} ({}s)
+id Menulis {} ({} d)
+
+@ ffmpeg not found: wrote {} PNG frames and a WAV to {}
+id ffmpeg tidak ditemukan: menulis {} bingkai PNG dan satu WAV ke {}

@@ -1367,6 +1367,84 @@ gu માત્ર ઇલેક્ટ્રોનિક્સ નહીં, ક�
 @ Lightning damage every tenth of a second (the stock lightning gun does 30)
 gu દર સેકન્ડના દસમા ભાગે વીજળીનું નુકસાન (સામાન્ય લાઇટનિંગ ગન 30 આપે છે)
 
+# Demos and video recording.
+@ AV1 (MP4)
+gu AV1 (MP4)
+
+@ Auto-Demo Slots
+gu ઓટો-ડેમો સ્લોટ
+
+@ Auto-Record Demos
+gu ડેમો આપમેળે રેકોર્ડ કરો
+
+@ Frame Rate
+gu ફ્રેમ દર
+
+@ H.264 (MP4)
+gu H.264 (MP4)
+
+@ H.265 (MP4)
+gu H.265 (MP4)
+
+@ Pause at End
+gu અંતે થોભો
+
+@ Playback Bar
+gu પ્લેબેક પટ્ટી
+
+@ Quality
+gu ગુણવત્તા
+
+@ Record Audio
+gu અવાજ રેકોર્ડ કરો
+
+@ VP9 (WebM)
+gu VP9 (WebM)
+
+@ Video Format
+gu વીડિયો ફોર્મેટ
+
+@ Video Recording
+gu વીડિયો રેકોર્ડિંગ
+
+@ ffmpeg Program
+gu ffmpeg પ્રોગ્રામ
+
+@ small file
+gu નાની ફાઇલ
+
+@ unlimited
+gu અમર્યાદિત
+
+# Demos and video recording.
+@ 1080p
+gu 1080p
+
+@ 1440p
+gu 1440p
+
+@ 4K
+gu 4K
+
+@ 720p
+gu 720p
+
+@ Destination
+gu ગંતવ્ય
+
+@ Export Highlighted Clip
+gu ચિહ્નિત ક્લિપ નિકાસ કરો
+
+@ Export Whole Demo
+gu આખો ડેમો નિકાસ કરો
+
+@ Same as window
+gu વિન્ડો જેવું
+
+# Demos and video recording.
+@ GPU Encoding
+gu GPU એન્કોડિંગ
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1789,6 +1867,42 @@ gu કયાં હથિયારો ફ્રીઝ શરૂ કરે છે
 
 @ Your own rockets and grenades don't hurt you; rocket jumps still work
 gu તમારાં પોતાનાં રૉકેટ અને ગ્રેનેડ તમને નુકસાન કરતાં નથી; રૉકેટ જમ્પ હજી કામ કરે છે
+
+# Demos and video recording.
+@ A demo you play stops on its last frame instead of returning to the menu, so you can rewind
+gu તમે ચલાવેલો ડેમો મેનૂ પર પાછો જવાને બદલે છેલ્લી ફ્રેમ પર અટકે છે, જેથી તમે તેને પાછળ લઈ જઈ શકો
+
+@ Frames per second of recorded video; the game runs at exactly this rate while recording
+gu વીડિયોની પ્રતિ સેકન્ડ ફ્રેમ; રેકોર્ડિંગ દરમિયાન ગેમ બરાબર આ દરે ચાલે છે
+
+@ High keeps the most detail; small file saves disk space
+gu ઊંચી સૌથી વધુ વિગત રાખે છે; નાની ફાઇલ ડિસ્કની જગ્યા બચાવે છે
+
+@ How many automatic demos are kept before the oldest is deleted; kept demos never count
+gu સૌથી જૂનો કાઢી નાખતાં પહેલાં કેટલા આપમેળે ડેમો રાખવામાં આવે છે; રાખેલા ડેમો ગણાતા નથી
+
+@ Records every level you play to the Automatic list in Main Menu > Demos; keep the ones you want, the oldest are replaced
+gu તમે રમેલું દરેક લેવલ મુખ્ય મેનૂ > ડેમોની આપમેળે યાદીમાં રેકોર્ડ કરે છે; જોઈએ તે રાખો, સૌથી જૂના બદલાય છે
+
+@ Records game sound and music into the video
+gu ગેમના અવાજો અને સંગીત વીડિયોમાં રેકોર્ડ કરે છે
+
+@ Shows the playback bar (time, speed, timeline) after a control key, always, or never
+gu પ્લેબેક પટ્ટી (સમય, ઝડપ, ટાઇમલાઇન) નિયંત્રણ કી પછી, હંમેશાં, અથવા ક્યારેય નહીં બતાવે છે
+
+@ Video format; needs ffmpeg with that encoder, else frames are saved as PNG images
+gu વીડિયો ફોર્મેટ; તે એન્કોડર સાથેનું ffmpeg જોઈએ, નહીં તો ફ્રેમ PNG છબીઓ તરીકે સચવાય છે
+
+# Demos and video recording.
+@ No clip highlighted: while the demo plays, drag across the timeline or press I and O
+gu કોઈ ક્લિપ ચિહ્નિત નથી: ડેમો ચાલતો હોય ત્યારે ટાઇમલાઇન પર ખેંચો અથવા I અને O દબાવો
+
+@ Video size; frames are scaled from the window size (bars keep the shape), so a larger size adds no detail
+gu વીડિયોનું કદ; ફ્રેમ વિન્ડોના કદ પરથી મોટી કરાય છે (આકાર જાળવવા પટ્ટીઓ સાથે), તેથી મોટું કદ વિગત ઉમેરતું નથી
+
+# Demos and video recording.
+@ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
+gu ffmpeg વાપરી શકે ત્યારે ગ્રાફિક્સ કાર્ડ પર એન્કોડ કરે છે (NVIDIA NVENC, VA-API દ્વારા AMD કે Intel, AMF કે Quick Sync, Apple VideoToolbox) અને પ્રોસેસરને મુક્ત રાખે છે; નહીં તો પ્રોસેસર એન્કોડ કરે છે
 
 # ==== ui.txt ====
 
@@ -2540,6 +2654,142 @@ gu સેવ
 @ Alt Fire on a glowing electronics panel within reach plugs one end in; the other end then shoots lightning with unlimited ammunition. The cable tethers you to the socket and catches on corners. Alt Fire or switching weapons yanks it out.
 gu પહોંચમાં ચમકતી ઇલેક્ટ્રોનિક પેનલ પર વૈકલ્પિક ફાયર એક છેડો લગાવે છે; પછી બીજો છેડો અમર્યાદિત દારૂગોળા સાથે વીજળી છોડે છે. કેબલ તમને સોકેટ સાથે બાંધે છે અને ખૂણામાં અટકે છે. વૈકલ્પિક ફાયર અથવા હથિયાર બદલવાથી તે ખેંચાઈ જાય છે.
 
+@ From the game folder
+gu ગેમ ફોલ્ડરમાંથી
+
+@ From ironwail
+gu ironwail માંથી
+
+@ From the 2021 re-release
+gu 2021 રી-રિલીઝમાંથી
+
+# Demos and video recording.
+@ Automatic demos are off. Turn on Auto-Record Demos in Options > Demos to record every level you play.
+gu આપમેળે ડેમો બંધ છે. દરેક રમેલું લેવલ રેકોર્ડ કરવા વિકલ્પો > ડેમોમાં ડેમો આપમેળે રેકોર્ડ કરો ચાલુ કરો.
+
+@ Automatic: replaced when the slots are full
+gu આપમેળે: સ્લોટ ભરાય ત્યારે બદલાય છે
+
+@ Delete {}?
+gu {} કાઢી નાખવું છે?
+
+@ Demos
+gu ડેમો
+
+@ End of demo
+gu ડેમોનો અંત
+
+@ Export Video
+gu વીડિયો નિકાસ કરો
+
+@ Fast forward
+gu ઝડપથી આગળ
+
+@ Fast forward {}x
+gu આગળ {}x
+
+@ Indexing...
+gu અનુક્રમણિકા બને છે...
+
+@ K keep
+gu K રાખો
+
+@ Keep
+gu રાખો
+
+@ Length: {}
+gu લંબાઈ: {}
+
+@ Map: {}
+gu નકશો: {}
+
+@ No automatic demos yet. Each level you play is recorded here.
+gu હજી કોઈ આપમેળે ડેમો નથી. તમે રમેલું દરેક લેવલ અહીં રેકોર્ડ થાય છે.
+
+@ No saved demos yet. Record one with the console command 'record <name>', or keep an automatic demo.
+gu હજી કોઈ સાચવેલો ડેમો નથી. કન્સોલ આદેશ 'record <name>' થી એક રેકોર્ડ કરો, અથવા કોઈ આપમેળે ડેમો રાખો.
+
+@ Pause
+gu થોભો
+
+@ Paused
+gu થોભાવેલું
+
+@ Play {}x
+gu ચાલે છે {}x
+
+@ Quake - exporting video {}%
+gu Quake - વીડિયો નિકાસ થઈ રહ્યો છે {}%
+
+@ Recorded: {}
+gu રેકોર્ડ થયો: {}
+
+@ Rewind
+gu પાછળ લઈ જાઓ
+
+@ Rewind {}x
+gu પાછળ {}x
+
+@ Size: {} KB
+gu કદ: {} KB
+
+@ Skip 10 s
+gu 10 સે. છોડો
+
+@ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
+gu Space થોભો | ડાબે/જમણે ખસેડો | ઉપર/નીચે ઝડપ | PgUp/PgDn 10 સે. | I/O નિશાન | E નિકાસ
+
+@ Speed
+gu ઝડપ
+
+@ Switch List
+gu યાદી બદલો
+
+@ This can't be undone.
+gu આ પૂર્વવત્ કરી શકાતું નથી.
+
+@ While a demo plays: Space pauses, the arrows scrub and change speed, I and O mark a clip and E exports it.
+gu ડેમો ચાલતો હોય ત્યારે: Space થોભાવે છે, તીર ખસેડે અને ઝડપ બદલે છે, I અને O ક્લિપ ચિહ્નિત કરે છે અને E તેની નિકાસ કરે છે.
+
+@ Saved
+gu સાચવેલા
+
+@ Automatic
+gu આપમેળે
+
+# Demos and video recording.
+@ Export
+gu નિકાસ
+
+@ H hide
+gu H છુપાવો
+
+@ Hide
+gu છુપાવો
+
+@ Show
+gu બતાવો
+
+# Demos and video recording.
+@ Demo: {}
+gu ડેમો: {}
+
+@ Highlighted clip: {} to {} ({})
+gu ચિહ્નિત ક્લિપ: {} થી {} ({})
+
+@ Show controls
+gu નિયંત્રણો બતાવો
+
+# Demos and video recording.
+@ About {} left
+gu આશરે {} બાકી
+
+@ Exporting video
+gu વીડિયો નિકાસ થઈ રહ્યો છે
+
+@ Preparing...
+gu તૈયારી થઈ રહી છે...
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3053,11 +3303,41 @@ gu ફક્ત સર્વર changelevel કરી શકે છે
 @ {} renamed to {}
 gu {} નું નામ બદલીને {} થયું
 
-@ From the game folder
-gu ગેમ ફોલ્ડરમાંથી
+@ Already recording video.
+gu વીડિયો પહેલેથી રેકોર્ડ થઈ રહ્યો છે.
 
-@ From ironwail
-gu ironwail માંથી
+@ Export cancelled.
+gu નિકાસ રદ થઈ.
 
-@ From the 2021 re-release
-gu 2021 રી-રિલીઝમાંથી
+@ Exporting {} to video
+gu {} વીડિયોમાં નિકાસ થઈ રહ્યો છે
+
+@ Kept demo {}
+gu ડેમો રાખ્યો: {}
+
+@ No auto-demo to keep.
+gu રાખવા માટે કોઈ ઓટો-ડેમો નથી.
+
+@ Not playing a demo.
+gu કોઈ ડેમો ચાલી રહ્યો નથી.
+
+@ Not recording video.
+gu કોઈ વીડિયો રેકોર્ડ થઈ રહ્યો નથી.
+
+@ Recording video to {}
+gu વીડિયો {} માં રેકોર્ડ થઈ રહ્યો છે
+
+@ This demo is already saved.
+gu આ ડેમો પહેલેથી સાચવેલો છે.
+
+@ This level's demo will be kept when it ends.
+gu આ લેવલનો ડેમો તે પૂરું થાય ત્યારે રાખવામાં આવશે.
+
+@ Video capture is not available in this build.
+gu આ બિલ્ડમાં વીડિયો રેકોર્ડિંગ ઉપલબ્ધ નથી.
+
+@ Wrote {} ({}s)
+gu {} લખાયું ({} સે.)
+
+@ ffmpeg not found: wrote {} PNG frames and a WAV to {}
+gu ffmpeg મળ્યું નહીં: {} PNG ફ્રેમ અને એક WAV {} માં લખાયા

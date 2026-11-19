@@ -249,10 +249,10 @@ impl Host {
         if self.input.dest != d {
             qinput::set_key_dest(self, d);
             if let Some(w) = &self.window {
-                let _ = w.set_relative_mouse(d == KeyDest::Game);
                 let _ = w.set_text_input(d == KeyDest::Console);
             }
         }
+        self.sync_mouse_grab();
     }
 
     /// `play`/`playvol`: S_StartSound at the listener with a fresh entity
