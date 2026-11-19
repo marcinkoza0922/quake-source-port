@@ -163,6 +163,21 @@ da Blodkvalitet
 @ Blood Splatter Settings
 da Indstillinger for blodstænk
 
+@ Bloom
+da Bloom
+
+@ Bloom Intensity
+da Bloom-intensitet
+
+@ Bloom Quality
+da Bloom-kvalitet
+
+@ Bloom Settings
+da Bloom-indstillinger
+
+@ Bloom Size
+da Bloom-størrelse
+
 @ Blue
 da Blå
 
@@ -174,6 +189,9 @@ da Hæver eller sænker diskanten i decibel
 
 @ Boost or cut low frequencies in decibels
 da Hæver eller sænker bassen i decibel
+
+@ Bright Surfaces
+da Lyse flader
 
 @ Brightness
 da Lysstyrke
@@ -817,6 +835,12 @@ da Kun afstandsvåben
 @ Reacquire While Held
 da Fang igen mens holdt
 
+@ Real-time Dynamic Lights
+da Dynamiske lys i realtid
+
+@ Real-time Light Settings
+da Indstillinger for lys i realtid
+
 @ Red
 da Rød
 
@@ -885,6 +909,12 @@ da Se gennem portaler
 
 @ See-through Teleporters
 da Gennemsigtige teleportere
+
+@ Shadow Quality
+da Skyggekvalitet
+
+@ Shadows
+da Skygger
 
 @ Shirt Color
 da Trøjefarve
@@ -1472,6 +1502,9 @@ da En railgun som i Quake III: et projektil, der gennemborer alle fjender på si
 @ A Zelda-style hookshot: fire sends a chain hook out; it latches onto hookable surfaces or enemies and reels you in; fire again to let go
 da En entrehage som i Zelda: skyd for at sende en kædekrog ud; den hager sig fast i egnede overflader eller fjender og trækker dig ind; skyd igen for at give slip
 
+@ Also make bright walls and sky glow, like DarkPlaces; 0 keeps the glow to light sources
+da Får også lyse vægge og himlen til at gløde, som DarkPlaces; 0 holder skæret til lyskilder
+
 @ Also translates the engine's console messages; off keeps them in English
 da Oversætter også motorens konsolbeskeder; fra beholder dem på engelsk
 
@@ -1583,8 +1616,14 @@ da Hold skyd nede og før sigtekornet over monstre for at sætte dem i kø, slip
 @ Hold: keep Lock-on held. Toggle: press Auto-aim Toggle to enable automatic acquisition. Click look stick to switch targets
 da Hold: hold Mållåsning nede. Skift: tryk Skift auto-sigte for at slå automatisk fangning til. Klik på kig-sticken for at skifte mål
 
+@ How bright the glow is
+da Hvor kraftigt skæret er
+
 @ How close an enemy must be to the crosshair for automatic acquisition in toggle mode (degrees)
 da Hvor tæt en fjende skal være på sigtekornet for automatisk fangning i skiftetilstand (grader)
+
+@ How far the glow spreads around a light
+da Hvor langt skæret breder sig omkring et lys
 
 @ How far the view tilts up and down when you tilt the controller (pitch axis)
 da Hvor langt visningen vipper op og ned, når du vipper controlleren (pitch-akse)
@@ -1607,6 +1646,9 @@ da Hvor hårdt højtryksrenserens vand skubber fjender
 @ How long a hit freezes the game, in milliseconds
 da Hvor længe et træf fryser spillet, i millisekunder
 
+@ How many lights cast shadows at once, and how smooth their edges are
+da Hvor mange lys der kaster skygger på én gang, og hvor bløde deres kanter er
+
 @ How strongly fog covers the sky when fog is on
 da Hvor kraftigt tågen dækker himlen, når tåge er slået til
 
@@ -1622,8 +1664,14 @@ da Indlevende: vises kun i nogle få sekunder, når værdien ændrer sig
 @ Keeps textures sharp on floors and walls seen at steep angles
 da Holder teksturer skarpe på gulve og vægge set fra skrå vinkler
 
+@ Light sources glow: lamps, lava, teleporters, sparks and explosions; Bloom Settings tunes it
+da Lyskilder gløder: lamper, lava, teleportere, gnister og eksplosioner; Bloom-indstillinger justerer det
+
 @ Lights from rockets, muzzle flashes and explosions brighten nearby walls
 da Lys fra raketter, mundingsglimt og eksplosioner oplyser nære vægge
+
+@ Lights from rockets, muzzle flashes and explosions shade walls and models per pixel and cast shadows; needs Dynamic Lights
+da Lys fra raketter, mundingsglimt og eksplosioner oplyser vægge og modeller per pixel og kaster skygger; kræver Dynamiske lys
 
 @ Liquid surfaces swell and ring out where things move through them
 da Væskeoverflader bølger og danner ringe, hvor noget bevæger sig igennem dem
@@ -1738,6 +1786,9 @@ da Erstatter de klassiske prikpartikler med glødende gnister, røg og blod; mod
 
 @ Resolution and detail inside portal and teleporter views; lower tiers trim nested effects
 da Opløsning og detaljer i portal- og teleportervisninger; lavere trin skærer ned på indlejrede effekter
+
+@ Resolution of the glow: low is cheaper and softer
+da Opløsning af skæret: lav er billigere og blødere
 
 @ Rippling light patterns on surfaces under water and slime
 da Bølgende lysmønstre på overflader under vand og slim
@@ -1864,6 +1915,9 @@ da Bruger genudgivelsen fra 2021's blødere MD5-modeller (og MD3-erstatninger fr
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 da Bruger banens farvede lys (.lit-fil eller BSPX-blok); fra giver det originale hvide lys. Træder i kraft ved næste baneindlæsning
+
+@ Walls, doors and monsters block the light and cast shadows
+da Vægge, døre og monstre blokerer lyset og kaster skygger
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 da Vandstrålesegmenter, antal dråber og blank væskeskygning: lav bruger enklere gennemsigtige stråler; høj bruger glatte, blanke stråler

@@ -131,6 +131,10 @@ pub(super) struct PostPush {
     pub(super) g_quality: u32,
     /// Software-style underwater ripple clock in seconds; negative = off.
     pub(super) warp: f32,
+    /// r_bloom: chain level 0 slot, strength (0 = off) and view UV scale.
+    pub(super) bloom_tex: u32,
+    pub(super) bloom: f32,
+    pub(super) bloom_uv: [f32; 2],
 }
 
 #[repr(C)]
@@ -207,6 +211,9 @@ pub(super) struct WorldDraw {
     pub(super) ibuf: Option<vk::Buffer>,
     /// Buffer holding the indirect commands (dynbuf when None).
     pub(super) cbuf: Option<vk::Buffer>,
+    /// Brush entity bounding sphere (centre, radius) for shadow casting;
+    /// radius 0 for the world.
+    pub(super) bounds: [f32; 4],
 }
 
 /// Per-frame inputs of cull.comp, filled while building the scene.
@@ -247,6 +254,8 @@ pub(super) struct AliasDraw {
     pub(super) viewmodel: bool,
     /// Drawn only into portal views.
     pub(super) portal_only: bool,
+    /// `RenderEntity::key`: no shadow from the dynamic light it emits.
+    pub(super) key: u32,
 }
 
 pub(super) struct SpriteDraw {

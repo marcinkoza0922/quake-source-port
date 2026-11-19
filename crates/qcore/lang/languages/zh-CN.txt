@@ -163,6 +163,21 @@ zh-CN 血液质量
 @ Blood Splatter Settings
 zh-CN 血液飞溅设置
 
+@ Bloom
+zh-CN 泛光
+
+@ Bloom Intensity
+zh-CN 泛光强度
+
+@ Bloom Quality
+zh-CN 泛光质量
+
+@ Bloom Settings
+zh-CN 泛光设置
+
+@ Bloom Size
+zh-CN 泛光大小
+
 @ Blue
 zh-CN 蓝色
 
@@ -174,6 +189,9 @@ zh-CN 以分贝为单位增强或削减高频
 
 @ Boost or cut low frequencies in decibels
 zh-CN 以分贝为单位增强或削减低频
+
+@ Bright Surfaces
+zh-CN 明亮表面
 
 @ Brightness
 zh-CN 亮度
@@ -817,6 +835,12 @@ zh-CN 仅限远程
 @ Reacquire While Held
 zh-CN 按住时重新锁定
 
+@ Real-time Dynamic Lights
+zh-CN 实时动态光源
+
+@ Real-time Light Settings
+zh-CN 实时光源设置
+
 @ Red
 zh-CN 红色
 
@@ -885,6 +909,12 @@ zh-CN 透过传送门观看
 
 @ See-through Teleporters
 zh-CN 透视传送点
+
+@ Shadow Quality
+zh-CN 阴影质量
+
+@ Shadows
+zh-CN 阴影
 
 @ Shirt Color
 zh-CN 上衣颜色
@@ -1472,6 +1502,9 @@ zh-CN Quake III 风格的轨道炮：弹体可贯穿直线上的所有敌人，�
 @ A Zelda-style hookshot: fire sends a chain hook out; it latches onto hookable surfaces or enemies and reels you in; fire again to let go
 zh-CN 塞尔达风格的钩爪：开火射出链钩，钩住可钩取的表面或敌人后将你拉过去；再次开火可松开
 
+@ Also make bright walls and sky glow, like DarkPlaces; 0 keeps the glow to light sources
+zh-CN 明亮的墙壁和天空也会发光，类似 DarkPlaces；0 只让光源发光
+
 @ Also translates the engine's console messages; off keeps them in English
 zh-CN 同时翻译引擎的控制台消息；关闭则保持英文
 
@@ -1583,8 +1616,14 @@ zh-CN 按住开火并用准星扫过怪物将其加入队列，松开即投掷�
 @ Hold: keep Lock-on held. Toggle: press Auto-aim Toggle to enable automatic acquisition. Click look stick to switch targets
 zh-CN 按住：保持按住锁定。切换：按下“切换自动瞄准”以启用自动锁定。按下视角摇杆可切换目标
 
+@ How bright the glow is
+zh-CN 光晕有多亮
+
 @ How close an enemy must be to the crosshair for automatic acquisition in toggle mode (degrees)
 zh-CN 切换模式下自动锁定时，敌人与准星的最大夹角（度）
+
+@ How far the glow spreads around a light
+zh-CN 光晕在光源周围扩散多远
 
 @ How far the view tilts up and down when you tilt the controller (pitch axis)
 zh-CN 前后倾斜手柄时视角上下转动的幅度（俯仰轴）
@@ -1607,6 +1646,9 @@ zh-CN 高压水枪的水流推动敌人的力度
 @ How long a hit freezes the game, in milliseconds
 zh-CN 命中时冻结游戏的时长（毫秒）
 
+@ How many lights cast shadows at once, and how smooth their edges are
+zh-CN 同时投下阴影的光源数量，以及阴影边缘的柔和程度
+
 @ How strongly fog covers the sky when fog is on
 zh-CN 开启雾时，雾对天空的覆盖程度
 
@@ -1622,8 +1664,14 @@ zh-CN 沉浸：仅在数值变化时显示几秒
 @ Keeps textures sharp on floors and walls seen at steep angles
 zh-CN 让以陡峭角度看到的地面和墙面纹理保持清晰
 
+@ Light sources glow: lamps, lava, teleporters, sparks and explosions; Bloom Settings tunes it
+zh-CN 光源会发光：灯、熔岩、传送门、火花和爆炸；在泛光设置中调整
+
 @ Lights from rockets, muzzle flashes and explosions brighten nearby walls
 zh-CN 火箭、枪口火光和爆炸的光线会照亮附近的墙壁
+
+@ Lights from rockets, muzzle flashes and explosions shade walls and models per pixel and cast shadows; needs Dynamic Lights
+zh-CN 火箭、枪口火光和爆炸的光逐像素照亮墙壁和模型并投下阴影；需要开启动态光源
 
 @ Liquid surfaces swell and ring out where things move through them
 zh-CN 物体穿过液体表面时会产生涌动和涟漪
@@ -1738,6 +1786,9 @@ zh-CN 用发光火花、烟雾和血液取代经典的点状粒子；自带粒�
 
 @ Resolution and detail inside portal and teleporter views; lower tiers trim nested effects
 zh-CN 传送门和传送点画面内的分辨率和细节；较低档位会削减嵌套效果
+
+@ Resolution of the glow: low is cheaper and softer
+zh-CN 光晕分辨率：低更省资源也更柔和
 
 @ Rippling light patterns on surfaces under water and slime
 zh-CN 水和毒液下表面的波动光纹
@@ -1864,6 +1915,9 @@ zh-CN 使用 2021 重制版更平滑的 MD5 模型（以及模组提供的 MD3 �
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 zh-CN 使用地图的彩色光照（.lit 文件或 BSPX 数据块）；关闭则为原版白光。下次载入地图时生效
+
+@ Walls, doors and monsters block the light and cast shadows
+zh-CN 墙壁、门和怪物会挡住光线并投下阴影
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 zh-CN 水柱分段、水滴数量和液体光泽着色：低使用简单的半透明水流；高使用平滑有光泽的水柱

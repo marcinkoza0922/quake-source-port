@@ -163,6 +163,21 @@ fa کیفیت خون
 @ Blood Splatter Settings
 fa تنظیمات پاشش خون
 
+@ Bloom
+fa درخشش
+
+@ Bloom Intensity
+fa شدت درخشش
+
+@ Bloom Quality
+fa کیفیت درخشش
+
+@ Bloom Settings
+fa تنظیمات درخشش
+
+@ Bloom Size
+fa اندازه درخشش
+
 @ Blue
 fa آبی
 
@@ -174,6 +189,9 @@ fa تقویت یا کاهش بسامدهای بالا به دسی‌بل
 
 @ Boost or cut low frequencies in decibels
 fa تقویت یا کاهش بسامدهای پایین به دسی‌بل
+
+@ Bright Surfaces
+fa سطوح روشن
 
 @ Brightness
 fa روشنایی
@@ -817,6 +835,12 @@ fa فقط دوربرد
 @ Reacquire While Held
 fa هدف‌گیری دوباره هنگام نگه‌داشتن
 
+@ Real-time Dynamic Lights
+fa نورهای پویای بی‌درنگ
+
+@ Real-time Light Settings
+fa تنظیمات نور بی‌درنگ
+
 @ Red
 fa قرمز
 
@@ -885,6 +909,12 @@ fa دیدن از میان پورتال‌ها
 
 @ See-through Teleporters
 fa تله‌پورت‌های شفاف
+
+@ Shadow Quality
+fa کیفیت سایه‌ها
+
+@ Shadows
+fa سایه‌ها
 
 @ Shirt Color
 fa رنگ پیراهن
@@ -1472,6 +1502,9 @@ fa ریل‌گانی به سبک Quake III: گلوله‌ای که از همه�
 @ A Zelda-style hookshot: fire sends a chain hook out; it latches onto hookable surfaces or enemies and reels you in; fire again to let go
 fa قلابی به سبک Zelda: شلیک یک قلاب زنجیری می‌فرستد؛ به سطوح قابل‌قلاب یا دشمنان می‌چسبد و شما را به سمت خود می‌کشد؛ برای رها کردن دوباره شلیک کنید
 
+@ Also make bright walls and sky glow, like DarkPlaces; 0 keeps the glow to light sources
+fa دیوارهای روشن و آسمان را هم درخشان می‌کند، مانند DarkPlaces؛ 0 درخشش را به منابع نور محدود می‌کند
+
 @ Also translates the engine's console messages; off keeps them in English
 fa پیام‌های کنسول موتور را هم ترجمه می‌کند؛ خاموش آن‌ها را انگلیسی نگه می‌دارد
 
@@ -1583,8 +1616,14 @@ fa شلیک را نگه دارید و نشانگر را روی هیولاها ب
 @ Hold: keep Lock-on held. Toggle: press Auto-aim Toggle to enable automatic acquisition. Click look stick to switch targets
 fa نگه‌داشتن: قفل هدف را نگه دارید. تغییری: برای هدف‌گیری خودکار، تغییر هدف‌گیری خودکار را بزنید. برای عوض کردن هدف، استیک نگاه را فشار دهید
 
+@ How bright the glow is
+fa درخشش چقدر روشن است
+
 @ How close an enemy must be to the crosshair for automatic acquisition in toggle mode (degrees)
 fa فاصله‌ی دشمن تا نشانگر برای هدف‌گیری خودکار در حالت تغییری (درجه)
+
+@ How far the glow spreads around a light
+fa درخشش تا چه اندازه دور یک نور پخش می‌شود
 
 @ How far the view tilts up and down when you tilt the controller (pitch axis)
 fa میزان کج‌شدن دید به بالا و پایین با کج کردن دسته (محور عمودی)
@@ -1607,6 +1646,9 @@ fa میزان هل‌دادن دشمنان با آب کارواش
 @ How long a hit freezes the game, in milliseconds
 fa مدت انجماد بازی با هر ضربه، به میلی‌ثانیه
 
+@ How many lights cast shadows at once, and how smooth their edges are
+fa چند نور هم‌زمان سایه می‌اندازند و لبه‌هایشان چقدر نرم است
+
 @ How strongly fog covers the sky when fog is on
 fa میزان پوشش آسمان با مه وقتی مه روشن است
 
@@ -1622,8 +1664,14 @@ fa غوطه‌ور: فقط هنگام تغییر مقدارش چند ثانیه 
 @ Keeps textures sharp on floors and walls seen at steep angles
 fa بافت‌های کف و دیوارهایی را که با زاویه‌ی تند دیده می‌شوند تیز نگه می‌دارد
 
+@ Light sources glow: lamps, lava, teleporters, sparks and explosions; Bloom Settings tunes it
+fa منابع نور می‌درخشند: چراغ‌ها، گدازه، تله‌پورترها، جرقه‌ها و انفجارها؛ تنظیمات درخشش آن را تنظیم می‌کند
+
 @ Lights from rockets, muzzle flashes and explosions brighten nearby walls
 fa نور موشک‌ها، شعله‌ی دهانه‌ی سلاح و انفجارها دیوارهای نزدیک را روشن می‌کند
+
+@ Lights from rockets, muzzle flashes and explosions shade walls and models per pixel and cast shadows; needs Dynamic Lights
+fa نور موشک‌ها، شعلهٔ شلیک و انفجارها دیوارها و مدل‌ها را پیکسل‌به‌پیکسل روشن می‌کند و سایه می‌اندازد؛ به نورهای پویا نیاز دارد
 
 @ Liquid surfaces swell and ring out where things move through them
 fa سطح مایعات جایی که چیزی از آن می‌گذرد برآمده می‌شود و حلقه می‌زند
@@ -1738,6 +1786,9 @@ fa ذرات نقطه‌ای کلاسیک را با جرقه‌های درخشا�
 
 @ Resolution and detail inside portal and teleporter views; lower tiers trim nested effects
 fa وضوح و جزئیات درون نمای پورتال‌ها و تله‌پورت‌ها؛ سطوح پایین‌تر جلوه‌های تودرتو را کم می‌کنند
+
+@ Resolution of the glow: low is cheaper and softer
+fa وضوح درخشش: پایین ارزان‌تر و نرم‌تر است
 
 @ Rippling light patterns on surfaces under water and slime
 fa نقش‌های نوری موج‌دار روی سطوح زیر آب و لجن
@@ -1864,6 +1915,9 @@ fa به جای مدل‌های کلاسیک، مدل‌های MD5 نرم‌تر 
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 fa نور رنگی نقشه را به کار می‌برد (فایل .lit یا بخش BSPX)؛ خاموش نور سفید اصلی می‌دهد. در بارگذاری نقشه‌ی بعدی اعمال می‌شود
+
+@ Walls, doors and monsters block the light and cast shadows
+fa دیوارها، درها و هیولاها جلوی نور را می‌گیرند و سایه می‌اندازند
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 fa بخش‌های فواره‌ی آب، تعداد قطره‌ها و سایه‌زنی براق مایع: کم جریان‌های نیمه‌شفاف ساده‌تر؛ زیاد فواره‌های نرم و براق

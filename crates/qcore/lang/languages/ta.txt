@@ -163,6 +163,21 @@ ta இரத்தத் தரம்
 @ Blood Splatter Settings
 ta இரத்தத் தெறிப்பு அமைப்புகள்
 
+@ Bloom
+ta ப்ளூம்
+
+@ Bloom Intensity
+ta ப்ளூம் தீவிரம்
+
+@ Bloom Quality
+ta ப்ளூம் தரம்
+
+@ Bloom Settings
+ta ப்ளூம் அமைப்புகள்
+
+@ Bloom Size
+ta ப்ளூம் அளவு
+
 @ Blue
 ta நீலம்
 
@@ -174,6 +189,9 @@ ta உயர் அதிர்வெண்களை டெசிபலில்
 
 @ Boost or cut low frequencies in decibels
 ta தாழ் அதிர்வெண்களை டெசிபலில் கூட்டு அல்லது குறை
+
+@ Bright Surfaces
+ta பிரகாசமான பரப்புகள்
 
 @ Brightness
 ta ஒளிர்வு
@@ -817,6 +835,12 @@ ta தொலைவுத் தாக்கு மட்டும்
 @ Reacquire While Held
 ta பிடிக்கும்போது மீண்டும் பிடி
 
+@ Real-time Dynamic Lights
+ta நிகழ்நேர இயங்கு விளக்குகள்
+
+@ Real-time Light Settings
+ta நிகழ்நேர ஒளி அமைப்புகள்
+
 @ Red
 ta சிவப்பு
 
@@ -885,6 +909,12 @@ ta போர்டல்கள் வழியே பார்
 
 @ See-through Teleporters
 ta ஊடுருவிப் பார்க்கும் டெலிபோர்ட்டர்கள்
+
+@ Shadow Quality
+ta நிழல் தரம்
+
+@ Shadows
+ta நிழல்கள்
 
 @ Shirt Color
 ta சட்டை நிறம்
@@ -1472,6 +1502,9 @@ ta Quake III பாணி ரெயில்கன்: அதன் கோட்
 @ A Zelda-style hookshot: fire sends a chain hook out; it latches onto hookable surfaces or enemies and reels you in; fire again to let go
 ta Zelda பாணி கொக்கி: சுடுதல் சங்கிலிக் கொக்கியை வீசும்; அது கொக்கியிடக்கூடிய பரப்புகள் அல்லது எதிரிகளைப் பற்றி உங்களை இழுக்கும்; விடுவிக்க மீண்டும் சுடு
 
+@ Also make bright walls and sky glow, like DarkPlaces; 0 keeps the glow to light sources
+ta பிரகாசமான சுவர்களையும் வானத்தையும் ஒளிரச் செய்கிறது, DarkPlaces போல; 0 ஒளிர்வை ஒளி மூலங்களுக்கு மட்டும் வைக்கிறது
+
 @ Also translates the engine's console messages; off keeps them in English
 ta இன்ஜினின் கன்சோல் செய்திகளையும் மொழிபெயர்க்கும்; ஆஃப் எனில் ஆங்கிலத்திலேயே இருக்கும்
 
@@ -1583,8 +1616,14 @@ ta சுடுதலைப் பிடித்து கிராஸ்ஹே
 @ Hold: keep Lock-on held. Toggle: press Auto-aim Toggle to enable automatic acquisition. Click look stick to switch targets
 ta பிடித்திரு: பூட்டைப் பிடித்தே இரு. மாற்று: தானியங்கு பிடிப்பை இயக்க தானியங்கு குறி மாற்றை அழுத்து. இலக்கை மாற்ற பார்வை ஸ்டிக்கை அழுத்து
 
+@ How bright the glow is
+ta ஒளிர்வு எவ்வளவு பிரகாசமானது
+
 @ How close an enemy must be to the crosshair for automatic acquisition in toggle mode (degrees)
 ta மாற்றுப் பயன்முறையில் தானியங்கு பிடிப்புக்கு எதிரி கிராஸ்ஹேருக்கு எவ்வளவு அருகில் இருக்க வேண்டும் (பாகைகள்)
+
+@ How far the glow spreads around a light
+ta ஒளியைச் சுற்றி ஒளிர்வு எவ்வளவு தூரம் பரவுகிறது
 
 @ How far the view tilts up and down when you tilt the controller (pitch axis)
 ta கன்ட்ரோலரைச் சாய்க்கும்போது பார்வை மேலும் கீழும் எவ்வளவு சாயும் (pitch அச்சு)
@@ -1607,6 +1646,9 @@ ta பவர்வாஷரின் நீர் எதிரிகளை எ�
 @ How long a hit freezes the game, in milliseconds
 ta ஒரு தாக்குதல் ஆட்டத்தை எவ்வளவு நேரம் உறையவைக்கும், மில்லிவினாடிகளில்
 
+@ How many lights cast shadows at once, and how smooth their edges are
+ta ஒரே நேரத்தில் எத்தனை விளக்குகள் நிழல் விழச் செய்கின்றன, அவற்றின் விளிம்புகள் எவ்வளவு மென்மையானவை
+
 @ How strongly fog covers the sky when fog is on
 ta மூடுபனி ஆன் ஆக இருக்கும்போது அது வானை எவ்வளவு மூடும்
 
@@ -1622,8 +1664,14 @@ ta மூழ்கடிக்கும்: அதன் மதிப்பு �
 @ Keeps textures sharp on floors and walls seen at steep angles
 ta கூர்மையான கோணத்தில் காணும் தரை, சுவர்களில் டெக்ஸ்சர்களைக் கூர்மையாக வைக்கும்
 
+@ Light sources glow: lamps, lava, teleporters, sparks and explosions; Bloom Settings tunes it
+ta ஒளி மூலங்கள் ஒளிர்கின்றன: விளக்குகள், எரிமலைக்குழம்பு, டெலிபோர்ட்டர்கள், தீப்பொறிகள், வெடிப்புகள்; ப்ளூம் அமைப்புகள் இதைச் சரிசெய்கின்றன
+
 @ Lights from rockets, muzzle flashes and explosions brighten nearby walls
 ta ராக்கெட்டுகள், துப்பாக்கி மின்னல்கள், வெடிப்புகளின் ஒளி அருகிலுள்ள சுவர்களை ஒளிரச்செய்யும்
+
+@ Lights from rockets, muzzle flashes and explosions shade walls and models per pixel and cast shadows; needs Dynamic Lights
+ta ராக்கெட்டுகள், சுடும் ஒளி, வெடிப்புகளின் ஒளி சுவர்களையும் மாதிரிகளையும் ஒவ்வொரு பிக்சலிலும் ஒளிர்வித்து நிழல் விழச் செய்கிறது; இயங்கு விளக்குகள் தேவை
 
 @ Liquid surfaces swell and ring out where things move through them
 ta பொருட்கள் கடக்கும் இடங்களில் திரவப் பரப்புகள் உப்பி வளையங்களாக அலையும்
@@ -1738,6 +1786,9 @@ ta பழைய புள்ளித் துகள்களுக்குப
 
 @ Resolution and detail inside portal and teleporter views; lower tiers trim nested effects
 ta போர்டல், டெலிபோர்ட்டர் காட்சிகளுக்குள் தெளிவும் விவரமும்; கீழ் நிலைகள் உள்ளமை விளைவுகளைக் குறைக்கும்
+
+@ Resolution of the glow: low is cheaper and softer
+ta ஒளிர்வின் தெளிவுத்திறன்: குறைவு மலிவானது, மென்மையானது
 
 @ Rippling light patterns on surfaces under water and slime
 ta நீர், நச்சுச் சேற்றுக்கடியிலுள்ள பரப்புகளில் அலையும் ஒளி வடிவங்கள்
@@ -1864,6 +1915,9 @@ ta பழைய மாடல்களுக்குப் பதிலாக 20
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 ta மேப்பின் வண்ண ஒளியைப் (.lit கோப்பு அல்லது BSPX lump) பயன்படுத்தும்; ஆஃப் எனில் அசல் வெள்ளை ஒளி. அடுத்த மேப் ஏற்றத்தில் பொருந்தும்
+
+@ Walls, doors and monsters block the light and cast shadows
+ta சுவர்கள், கதவுகள், அரக்கர்கள் ஒளியைத் தடுத்து நிழல் விழச் செய்கின்றன
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 ta நீர்த்தாரைப் பகுதிகள், துளி எண்ணிக்கை, பளபளப்பான திரவ நிழலிடல்: குறைவு எளிய ஒளி ஊடுருவும் தாரைகள்; உயர் மென்மையான பளபளப்பான தாரைகள்

@@ -47,6 +47,21 @@ impl Renderer {
             self.idle();
             self.destroy_targets();
         }
+        let bloom = (st.bloom > 0.0).then_some(st.bloom_quality.min(1));
+        if bloom != self.bloom {
+            self.idle();
+            if bloom.is_some() != self.pipes.glow {
+                self.pipes.glow = bloom.is_some();
+                let fmt = self.pipes.post_format;
+                self.pipes.build(&self.gpu, fmt, self.msaa)?;
+            }
+            self.bloom = bloom;
+            self.destroy_targets();
+        }
+        let (lights, size) = crate::rtlight::shadow_budget(st);
+        if self.shadow_maps.as_ref().is_none_or(|s| (s.lights, s.size) != (lights, size)) {
+            self.create_shadow_maps(lights, size)?;
+        }
         let motion_blur_quality = st.motion_blur_quality.min(1);
         if motion_blur_quality != self.motion_blur_quality {
             self.motion_blur_quality = motion_blur_quality;

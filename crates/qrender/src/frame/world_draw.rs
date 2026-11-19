@@ -95,6 +95,7 @@ pub(super) fn build_world_draw(
         water_alpha: [put(&cats[3]), Range::default(), Range::default(), Range::default()],
         ibuf: None,
         cbuf: None,
+        bounds: [0.0; 4],
     }
 }
 
@@ -158,6 +159,7 @@ pub(super) fn gpu_world_draw(
         water_alpha,
         ibuf: Some(c.out[fi].buf),
         cbuf: Some(c.cmdbuf[fi].buf),
+        bounds: [0.0; 4],
     };
     let push = CullPush {
         frustum: vs.frustum,
@@ -198,7 +200,7 @@ mod tests {
                 model: ident(), zfix: false, alpha: 1.0,
                 opaque: Range { ofs: requests.len() as u64 * 16, count: 1 },
                 sky: Range::default(), water: [Range::default(); 4],
-                water_alpha: [Range::default(); 4], ibuf: None, cbuf: None,
+                water_alpha: [Range::default(); 4], ibuf: None, cbuf: None, bounds: [0.0; 4],
             }
         };
         let mut frame = PortalWorldCache::default();

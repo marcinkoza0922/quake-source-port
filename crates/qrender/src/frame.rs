@@ -16,6 +16,8 @@ pub use math::*;
 mod world_draw;
 use world_draw::*;
 mod lightmaps;
+mod bloom;
+mod dlights;
 pub(super) use lightmaps::LightmapRequests;
 
 type Mat4 = [f32; 16];
@@ -334,6 +336,12 @@ impl Renderer {
                             &mut lm_vis,
                         );
                         wd.zfix = true;
+                        {
+                            let mid = [0, 1, 2].map(|i| 0.5 * (sub_.mins[i] + sub_.maxs[i]));
+                            let half = [0, 1, 2].map(|i| 0.5 * (sub_.maxs[i] - sub_.mins[i]));
+                            let c = add(e.origin, rotate3(&rot, mid));
+                            wd.bounds = [c[0], c[1], c[2], dot(half, half).sqrt()];
+                        }
                         if alpha < 1.0 {
                             trans.push((dist, Trans::World(world_draws.len())));
                         } else if !e.portal_only {
@@ -404,7 +412,8 @@ impl Renderer {
                         if st.fullbright {
                             lc = [100.0; 3]; // ironwail: lightcolor 0.5 (x200)
                         }
-                        if st.dynamic && !st.fullbright {
+                        // real-time dynamic lights shade models per pixel instead
+                        if st.dynamic && !st.fullbright && !st.rt_dlights {
                             for dl in fr.dlights {
                                 let d = sub(e.origin, dl.origin);
                                 let add = dl.radius - dot(d, d).sqrt();
@@ -496,6 +505,7 @@ impl Renderer {
                                 main_visible,
                                 viewmodel: e.viewmodel,
                                 portal_only: e.portal_only,
+                                key: e.key,
                             });
                         }
                     }
@@ -799,6 +809,13 @@ impl Renderer {
             dynw.push(&ui, 16)
         };
 
+        // r_shadow_realtime_dlight: per-pixel lights and their shadow casters
+        let rt_sel = {
+            let shadows = if st.dlight_shadows { self.shadow_maps.as_ref().map_or(0, |s| s.lights) } else { 0 };
+            dlights::select(fr.dlights, &passes, st, shadows)
+        };
+        let mut shadow_lights = self.build_shadow_lights(&rt_sel, &mut dynw, time, alphas);
+
         // UBO per view (view 0 at offset 0) + lightmap dynamic data
         for (vi, pass) in passes.iter_mut().enumerate() {
             let Some(vs) = &pass.view else { continue };
@@ -916,11 +933,21 @@ impl Renderer {
                 dynw.write_at(portal.ubo as u64, &[pu]);
             }
             if vi == 0 {
+                // shadow map faces: the first view's uniforms with the face's matrix
+                for sl in shadow_lights.iter_mut() {
+                    for (f, ofs) in sl.ubo.iter_mut().enumerate() {
+                        let mut fu = ubo;
+                        fu.viewproj = sl.vp[f];
+                        *ofs = dynw.push(&[fu], 256).unwrap_or(0) as u32;
+                    }
+                }
                 dynw.write_at(0, &[ubo]);
             } else {
                 pass.ubo = dynw.push(&[ubo], 256).unwrap_or(0) as u32;
             }
         }
+        let shadow_size = self.shadow_maps.as_ref().map_or(16, |s| s.size);
+        dynw.write_at(OFS_LIGHTS, &[crate::rtlight::lights_gpu(&rt_sel, st.shadow_quality, shadow_size)]);
         let mut lm_cpu_range = None;
         if passes.iter().any(|p| p.view.is_some()) {
             let mut lmd = LmDyn {
@@ -929,7 +956,8 @@ impl Renderer {
                 pad: [0; 3],
                 dl: [[0.0; 8]; 64],
             };
-            if st.dynamic {
+            // real-time dynamic lights are lit per pixel, not in the lightmaps
+            if st.dynamic && !st.rt_dlights {
                 for (i, d) in fr.dlights.iter().take(64).enumerate() {
                     lmd.dl[i] = [
                         d.origin[0],
@@ -1160,6 +1188,9 @@ impl Renderer {
                     vk::ImageLayout::GENERAL,
                 );
             }
+            if pi == 0 {
+                self.record_shadows(cmd, set[0], dynbuf, &shadow_lights, world_draws, alias_draws);
+            }
             ts(2);
             let crng = gpu::range(vk::ImageAspectFlags::COLOR, 1, 1);
             let drng = gpu::range(vk::ImageAspectFlags::DEPTH, 1, 1);
@@ -1188,6 +1219,11 @@ impl Renderer {
                     vk::ImageLayout::UNDEFINED,
                     vk::ImageLayout::COLOR_ATTACHMENT_OPTIMAL,
                 );
+            }
+            if let Some(b) = &t.bloom {
+                for img in std::iter::once(&b.glow).chain(&b.glow_ms) {
+                    gpu::barrier(&dev, cmd, img.image, crng, vk::ImageLayout::UNDEFINED, vk::ImageLayout::COLOR_ATTACHMENT_OPTIMAL);
+                }
             }
             let area = vk::Rect2D {
                 offset: vk::Offset2D::default(),
@@ -1220,12 +1256,12 @@ impl Renderer {
             // resolves only there); ro: depth attachment read-only.
             let begin = |load: bool, last: bool, ro: bool| {
                 let lop = if load { vk::AttachmentLoadOp::LOAD } else { vk::AttachmentLoadOp::CLEAR };
-                let catt = [match &t.color_ms {
+                let att = |ms: Option<&Image>, single: &Image| match ms {
                     Some(ms) if last => vk::RenderingAttachmentInfo::default()
                         .image_view(ms.view)
                         .image_layout(vk::ImageLayout::COLOR_ATTACHMENT_OPTIMAL)
                         .resolve_mode(vk::ResolveModeFlags::AVERAGE)
-                        .resolve_image_view(t.color.view)
+                        .resolve_image_view(single.view)
                         .resolve_image_layout(vk::ImageLayout::COLOR_ATTACHMENT_OPTIMAL)
                         .load_op(lop)
                         .store_op(vk::AttachmentStoreOp::DONT_CARE)
@@ -1237,12 +1273,18 @@ impl Renderer {
                         .store_op(vk::AttachmentStoreOp::STORE)
                         .clear_value(clear),
                     None => vk::RenderingAttachmentInfo::default()
-                        .image_view(t.color.view)
+                        .image_view(single.view)
                         .image_layout(vk::ImageLayout::COLOR_ATTACHMENT_OPTIMAL)
                         .load_op(lop)
                         .store_op(vk::AttachmentStoreOp::STORE)
                         .clear_value(clear),
-                }];
+                };
+                // r_bloom: the glow attachment follows the colour's MSAA/resolve
+                let catt = [
+                    att(t.color_ms.as_ref(), &t.color),
+                    t.bloom.as_ref().map_or(vk::RenderingAttachmentInfo::default(), |b| att(b.glow_ms.as_ref(), &b.glow)),
+                ];
+                let catt = &catt[..if t.bloom.is_some() { 2 } else { 1 }];
                 let datt = vk::RenderingAttachmentInfo::default()
                     .image_view(t.depth.view)
                     .image_layout(if ro {
@@ -1261,7 +1303,7 @@ impl Renderer {
                 let ri = vk::RenderingInfo::default()
                     .render_area(area_target)
                     .layer_count(1)
-                    .color_attachments(&catt)
+                    .color_attachments(catt)
                     .depth_attachment(&datt);
                 dev.cmd_begin_rendering(cmd, &ri);
             };
@@ -1673,6 +1715,15 @@ impl Renderer {
                 vk::ImageLayout::SHADER_READ_ONLY_OPTIMAL,
             );
 
+            let bloom = match (&t.bloom, view.is_some()) {
+                (Some(b), true) => {
+                    gpu::barrier(&dev, cmd, b.glow.image, crng, vk::ImageLayout::COLOR_ATTACHMENT_OPTIMAL, vk::ImageLayout::SHADER_READ_ONLY_OPTIMAL);
+                    let r = bloom::record(&dev, cmd, p, set[0], b, [scene_w, scene_h], [sw, sh], st);
+                    dev.cmd_bind_descriptor_sets(cmd, gfx, p.layout, 0, &set, &[0]);
+                    Some(r)
+                }
+                _ => None,
+            };
             let (fx, fy) = (pw as f32 / w.max(1) as f32, ph as f32 / h.max(1) as f32);
             let vp_cell = vk::Viewport {
                 x: rect[0] as f32 * fx,
@@ -1743,6 +1794,9 @@ impl Renderer {
                 mb_h: h.max(1) as f32,
                 g_quality: st.goggles.quality.min(2),
                 warp: pass.warp,
+                bloom_tex: bloom.as_ref().map_or(0, |b| b.slot),
+                bloom: bloom.as_ref().map_or(0.0, |b| b.amount),
+                bloom_uv: bloom.as_ref().map_or([0.0; 2], |b| b.uv),
             }]));
             dev.cmd_draw(cmd, 3, 1, 0, 0);
             if pi + 1 < npasses {

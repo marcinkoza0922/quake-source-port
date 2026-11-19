@@ -20,6 +20,10 @@ pub(super) struct Desc<'a> {
     /// Draw only where the fragment is behind the scene depth (thermal
     /// goggles' through-wall silhouettes) instead of LESS_OR_EQUAL.
     pub(super) behind: bool,
+    /// Second colour attachment ([`GLOW_FORMAT`]) blended like the first.
+    pub(super) glow: bool,
+    /// Depth only into a [`SHADOW_FORMAT`] shadow map face (no colour).
+    pub(super) shadow: bool,
 }
 
 pub(super) fn attr(
@@ -99,16 +103,17 @@ pub(super) fn graphics(gpu: &Gpu, layout: vk::PipelineLayout, d: &Desc) -> Resul
         dst_alpha_blend_factor: dst_a,
         alpha_blend_op: vk::BlendOp::ADD,
         color_write_mask: vk::ColorComponentFlags::RGBA,
-    }];
-    let cb = vk::PipelineColorBlendStateCreateInfo::default().attachments(&att);
+    }; 2];
+    let natt = if d.shadow { 0 } else if d.glow { 2 } else { 1 };
+    let cb = vk::PipelineColorBlendStateCreateInfo::default().attachments(&att[..natt]);
     // scene pipelines take a dynamic depth bias (gl_zfix for brush entities)
     let dyn_states = [vk::DynamicState::VIEWPORT, vk::DynamicState::SCISSOR, vk::DynamicState::DEPTH_BIAS];
     let n = if d.depth { 3 } else { 2 };
     let dy = vk::PipelineDynamicStateCreateInfo::default().dynamic_states(&dyn_states[..n]);
-    let formats = [d.color];
-    let mut ri = vk::PipelineRenderingCreateInfo::default().color_attachment_formats(&formats);
+    let formats = [d.color, GLOW_FORMAT];
+    let mut ri = vk::PipelineRenderingCreateInfo::default().color_attachment_formats(&formats[..natt]);
     if d.depth {
-        ri = ri.depth_attachment_format(DEPTH_FORMAT);
+        ri = ri.depth_attachment_format(if d.shadow { SHADOW_FORMAT } else { DEPTH_FORMAT });
     }
     let ci = [vk::GraphicsPipelineCreateInfo::default()
         .stages(&stages)

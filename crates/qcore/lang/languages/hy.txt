@@ -163,6 +163,21 @@ hy Արյան որակ
 @ Blood Splatter Settings
 hy Արյան շաղերի կարգավորումներ
 
+@ Bloom
+hy Փայլ
+
+@ Bloom Intensity
+hy Փայլի ինտենսիվություն
+
+@ Bloom Quality
+hy Փայլի որակ
+
+@ Bloom Settings
+hy Փայլի կարգավորումներ
+
+@ Bloom Size
+hy Փայլի չափ
+
 @ Blue
 hy Կապույտ
 
@@ -174,6 +189,9 @@ hy Ուժեղացնում կամ թուլացնում է բարձր հաճախա
 
 @ Boost or cut low frequencies in decibels
 hy Ուժեղացնում կամ թուլացնում է ցածր հաճախականությունները դեցիբելներով
+
+@ Bright Surfaces
+hy Պայծառ մակերեսներ
 
 @ Brightness
 hy Պայծառություն
@@ -817,6 +835,12 @@ hy Միայն հեռահար
 @ Reacquire While Held
 hy Վերագրավել պահելիս
 
+@ Real-time Dynamic Lights
+hy Իրական ժամանակի դինամիկ լույսեր
+
+@ Real-time Light Settings
+hy Իրական ժամանակի լույսի կարգավորումներ
+
 @ Red
 hy Կարմիր
 
@@ -885,6 +909,12 @@ hy Տեսնել պորտալների միջով
 
 @ See-through Teleporters
 hy Թափանցիկ տելեպորտներ
+
+@ Shadow Quality
+hy Ստվերների որակ
+
+@ Shadows
+hy Ստվերներ
 
 @ Shirt Color
 hy Վերնաշապիկի գույն
@@ -1472,6 +1502,9 @@ hy Quake III-ի ոճով ռեյլգան: արկը խոցում է իր գծի բ
 @ A Zelda-style hookshot: fire sends a chain hook out; it latches onto hookable surfaces or enemies and reels you in; fire again to let go
 hy Zelda-ի ոճով կեռիկ: կրակոցը նետում է շղթայով կեռիկը, այն կառչում է հարմար մակերևույթներից կամ թշնամիներից և քաշում ձեզ, կրկին կրակեք՝ բաց թողնելու համար
 
+@ Also make bright walls and sky glow, like DarkPlaces; 0 keeps the glow to light sources
+hy Փայլեցնում է նաև պայծառ պատերն ու երկինքը, ինչպես DarkPlaces-ում. 0-ն փայլը թողնում է միայն լույսի աղբյուրներին
+
 @ Also translates the engine's console messages; off keeps them in English
 hy Թարգմանում է նաև շարժիչի կոնսոլի հաղորդագրությունները, անջատված լինելիս դրանք մնում են անգլերեն
 
@@ -1583,8 +1616,14 @@ hy Պահեք կրակը և նշանոցով անցեք հրեշների վրա�
 @ Hold: keep Lock-on held. Toggle: press Auto-aim Toggle to enable automatic acquisition. Click look stick to switch targets
 hy Պահել: պահեք «Թիրախի գրավում»-ը։ Փոխարկում: սեղմեք «Ավտոնշանառման փոխարկում»՝ ավտոմատ գրավումը միացնելու համար։ Սեղմեք նայելու լծակը՝ թիրախը փոխելու համար
 
+@ How bright the glow is
+hy Որքան պայծառ է փայլը
+
 @ How close an enemy must be to the crosshair for automatic acquisition in toggle mode (degrees)
 hy Որքան մոտ պետք է լինի թշնամին նշանոցին փոխարկման ռեժիմում ավտոմատ գրավման համար (աստիճաններ)
+
+@ How far the glow spreads around a light
+hy Որքան հեռու է փայլը տարածվում լույսի շուրջ
 
 @ How far the view tilts up and down when you tilt the controller (pitch axis)
 hy Որքան է տեսքը թեքվում վեր ու վար, երբ թեքում եք կարգավարը (ուղղաձիգ առանցք)
@@ -1607,6 +1646,9 @@ hy Որքան ուժեղ է Հիդրոլվացիչի ջուրը հրում թշ�
 @ How long a hit freezes the game, in milliseconds
 hy Որքան է հարվածը սառեցնում խաղը, միլիվայրկյաններով
 
+@ How many lights cast shadows at once, and how smooth their edges are
+hy Քանի լույս է միաժամանակ ստվեր գցում, և որքան փափուկ են դրանց եզրերը
+
 @ How strongly fog covers the sky when fog is on
 hy Որքան ուժեղ է մառախուղը ծածկում երկինքը, երբ մառախուղը միացված է
 
@@ -1622,8 +1664,14 @@ hy Ընկղմող: հայտնվում է մի քանի վայրկյանով մի
 @ Keeps textures sharp on floors and walls seen at steep angles
 hy Հստակ է պահում սուր անկյան տակ երևացող հատակների և պատերի տեքստուրաները
 
+@ Light sources glow: lamps, lava, teleporters, sparks and explosions; Bloom Settings tunes it
+hy Լույսի աղբյուրները փայլում են՝ լամպեր, լավա, տելեպորտներ, կայծեր և պայթյուններ. Փայլի կարգավորումները կարգավորում են այն
+
 @ Lights from rockets, muzzle flashes and explosions brighten nearby walls
 hy Հրթիռների, փողաբռնկումների և պայթյունների լույսերը լուսավորում են մոտակա պատերը
+
+@ Lights from rockets, muzzle flashes and explosions shade walls and models per pixel and cast shadows; needs Dynamic Lights
+hy Հրթիռների, կրակոցների բռնկումների և պայթյունների լույսը պիքսել առ պիքսել լուսավորում է պատերն ու մոդելները և ստվեր գցում. պահանջում է Դինամիկ լույսեր
 
 @ Liquid surfaces swell and ring out where things move through them
 hy Հեղուկի մակերևույթներն ալեկոծվում են և շրջանակներ տալիս այնտեղ, որտեղով ինչ-որ բան է անցնում
@@ -1738,6 +1786,9 @@ hy Փոխարինում է դասական կետային մասնիկները փ
 
 @ Resolution and detail inside portal and teleporter views; lower tiers trim nested effects
 hy Լուծաչափ և մանրամասնություն պորտալների և տելեպորտների տեսքերում, ցածր մակարդակները կրճատում են ներդրված էֆեկտները
+
+@ Resolution of the glow: low is cheaper and softer
+hy Փայլի լուծաչափը՝ ցածրն ավելի էժան է և փափուկ
 
 @ Rippling light patterns on surfaces under water and slime
 hy Ալեկոծվող լուսային նախշեր ջրի և տիղմի տակ գտնվող մակերևույթների վրա
@@ -1864,6 +1915,9 @@ hy Դասական մոդելների փոխարեն օգտագործում է 20
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 hy Օգտագործում է քարտեզի գունավոր լույսը (.lit ֆայլ կամ BSPX բլոկ), անջատվածը տալիս է սովորական սպիտակ լույս։ Կիրառվում է հաջորդ քարտեզը բեռնելիս
+
+@ Walls, doors and monsters block the light and cast shadows
+hy Պատերը, դռներն ու հրեշները փակում են լույսը և ստվեր գցում
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 hy Ջրաշիթի հատվածները, կաթիլների քանակը և հեղուկի փայլուն ստվերավորումը: ցածրն օգտագործում է ավելի պարզ կիսաթափանցիկ հոսքեր, բարձրը՝ հարթ փայլուն շիթեր

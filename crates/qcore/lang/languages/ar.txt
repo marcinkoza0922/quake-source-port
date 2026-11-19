@@ -163,6 +163,21 @@ ar جودة الدماء
 @ Blood Splatter Settings
 ar إعدادات تناثر الدماء
 
+@ Bloom
+ar التوهج
+
+@ Bloom Intensity
+ar شدة التوهج
+
+@ Bloom Quality
+ar جودة التوهج
+
+@ Bloom Settings
+ar إعدادات التوهج
+
+@ Bloom Size
+ar حجم التوهج
+
 @ Blue
 ar أزرق
 
@@ -174,6 +189,9 @@ ar رفع الترددات العالية أو خفضها بالديسيبل
 
 @ Boost or cut low frequencies in decibels
 ar رفع الترددات المنخفضة أو خفضها بالديسيبل
+
+@ Bright Surfaces
+ar الأسطح الساطعة
 
 @ Brightness
 ar السطوع
@@ -817,6 +835,12 @@ ar الهجوم البعيد فقط
 @ Reacquire While Held
 ar إعادة الالتقاط أثناء الضغط
 
+@ Real-time Dynamic Lights
+ar أضواء ديناميكية في الوقت الفعلي
+
+@ Real-time Light Settings
+ar إعدادات الإضاءة في الوقت الفعلي
+
 @ Red
 ar أحمر
 
@@ -885,6 +909,12 @@ ar الرؤية عبر البوابات
 
 @ See-through Teleporters
 ar ناقلات شفافة
+
+@ Shadow Quality
+ar جودة الظلال
+
+@ Shadows
+ar الظلال
 
 @ Shirt Color
 ar لون القميص
@@ -1472,6 +1502,9 @@ ar ريلغن على طراز Quake III: قذيفة تخترق كل عدو عل�
 @ A Zelda-style hookshot: fire sends a chain hook out; it latches onto hookable surfaces or enemies and reels you in; fire again to let go
 ar خطّاف على طراز Zelda: الإطلاق يقذف خطافًا بسلسلة؛ يتعلق بالأسطح القابلة للتعلق أو بالأعداء ويسحبك إليها؛ أطلق مجددًا لتفلت
 
+@ Also make bright walls and sky glow, like DarkPlaces; 0 keeps the glow to light sources
+ar يجعل الجدران الساطعة والسماء تتوهج أيضًا، مثل DarkPlaces؛ 0 يقصر التوهج على مصادر الضوء
+
 @ Also translates the engine's console messages; off keeps them in English
 ar يترجم أيضًا رسائل وحدة التحكم في المحرك؛ عند الإيقاف تبقى بالإنجليزية
 
@@ -1583,8 +1616,14 @@ ar اضغط مطولًا على الإطلاق ومرّر علامة التصو�
 @ Hold: keep Lock-on held. Toggle: press Auto-aim Toggle to enable automatic acquisition. Click look stick to switch targets
 ar ضغط مستمر: أبقِ زر التثبيت مضغوطًا. تبديل: اضغط تبديل التصويب التلقائي لتفعيل الالتقاط التلقائي. انقر عصا النظر لتبديل الأهداف
 
+@ How bright the glow is
+ar مدى سطوع التوهج
+
 @ How close an enemy must be to the crosshair for automatic acquisition in toggle mode (degrees)
 ar مدى قرب العدو من علامة التصويب لالتقاطه تلقائيًا في وضع التبديل (بالدرجات)
+
+@ How far the glow spreads around a light
+ar مدى انتشار التوهج حول الضوء
 
 @ How far the view tilts up and down when you tilt the controller (pitch axis)
 ar مقدار ميل الرؤية للأعلى والأسفل عند إمالة وحدة التحكم (محور الانحدار)
@@ -1607,6 +1646,9 @@ ar قوة دفع ماء غسالة الضغط للأعداء
 @ How long a hit freezes the game, in milliseconds
 ar مدة تجميد اللعبة عند الضربة، بالمللي ثانية
 
+@ How many lights cast shadows at once, and how smooth their edges are
+ar عدد الأضواء التي تُلقي ظلالًا في آن واحد ومدى نعومة حوافها
+
 @ How strongly fog covers the sky when fog is on
 ar مدى تغطية الضباب للسماء عند تفعيل الضباب
 
@@ -1622,8 +1664,14 @@ ar غامر: يظهر بضع ثوانٍ فقط عند تغيّر قيمته
 @ Keeps textures sharp on floors and walls seen at steep angles
 ar يُبقي الخامات حادة على الأرضيات والجدران المرئية بزوايا حادة
 
+@ Light sources glow: lamps, lava, teleporters, sparks and explosions; Bloom Settings tunes it
+ar تتوهج مصادر الضوء: المصابيح والحمم والناقلات والشرر والانفجارات؛ تضبطه إعدادات التوهج
+
 @ Lights from rockets, muzzle flashes and explosions brighten nearby walls
 ar أضواء الصواريخ ووميض الفوهات والانفجارات تضيء الجدران القريبة
+
+@ Lights from rockets, muzzle flashes and explosions shade walls and models per pixel and cast shadows; needs Dynamic Lights
+ar تضيء أنوار الصواريخ ووميض الإطلاق والانفجارات الجدران والنماذج لكل بكسل وتُلقي ظلالًا؛ يتطلب الأضواء الديناميكية
 
 @ Liquid surfaces swell and ring out where things move through them
 ar أسطح السوائل تنتفخ وتتموج حيث تمر الأشياء عبرها
@@ -1738,6 +1786,9 @@ ar يستبدل جسيمات النقاط الكلاسيكية بشرر متوه
 
 @ Resolution and detail inside portal and teleporter views; lower tiers trim nested effects
 ar الدقة والتفاصيل داخل مشاهد البوابات والناقلات؛ المستويات الأدنى تقلّص المؤثرات المتداخلة
+
+@ Resolution of the glow: low is cheaper and softer
+ar دقة التوهج: المنخفضة أرخص وأنعم
 
 @ Rippling light patterns on surfaces under water and slime
 ar أنماط ضوء متموجة على الأسطح تحت الماء والوحل السام
@@ -1864,6 +1915,9 @@ ar يستخدم نماذج MD5 الأنعم من إصدار 2021 المحدّث 
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 ar يستخدم الإضاءة الملونة للخريطة (ملف .lit أو كتلة BSPX)؛ عند الإيقاف يكون الضوء أبيض كالأصل. يُطبَّق عند تحميل الخريطة التالية
+
+@ Walls, doors and monsters block the light and cast shadows
+ar تحجب الجدران والأبواب والوحوش الضوء وتُلقي ظلالًا
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 ar أجزاء نفث الماء وعدد القطرات وتظليل السائل اللامع: المنخفض يستخدم تيارات شفافة أبسط؛ العالي نفثات لامعة ناعمة

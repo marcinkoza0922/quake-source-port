@@ -163,6 +163,21 @@ hi खून की गुणवत्ता
 @ Blood Splatter Settings
 hi खून के छींटों की सेटिंग्स
 
+@ Bloom
+hi ब्लूम
+
+@ Bloom Intensity
+hi ब्लूम तीव्रता
+
+@ Bloom Quality
+hi ब्लूम गुणवत्ता
+
+@ Bloom Settings
+hi ब्लूम सेटिंग्स
+
+@ Bloom Size
+hi ब्लूम आकार
+
 @ Blue
 hi नीला
 
@@ -174,6 +189,9 @@ hi ऊँची आवृत्तियों को डेसिबल मे�
 
 @ Boost or cut low frequencies in decibels
 hi निचली आवृत्तियों को डेसिबल में बढ़ाएँ या घटाएँ
+
+@ Bright Surfaces
+hi चमकीली सतहें
 
 @ Brightness
 hi चमक
@@ -817,6 +835,12 @@ hi केवल दूरी वाले
 @ Reacquire While Held
 hi दबाए रखते हुए फिर से लॉक करें
 
+@ Real-time Dynamic Lights
+hi रीयल-टाइम डायनेमिक लाइटें
+
+@ Real-time Light Settings
+hi रीयल-टाइम प्रकाश सेटिंग्स
+
 @ Red
 hi लाल
 
@@ -885,6 +909,12 @@ hi पोर्टल के पार देखें
 
 @ See-through Teleporters
 hi पारदर्शी टेलीपोर्टर
+
+@ Shadow Quality
+hi छाया गुणवत्ता
+
+@ Shadows
+hi छायाएँ
 
 @ Shirt Color
 hi शर्ट का रंग
@@ -1472,6 +1502,9 @@ hi Quake III जैसी रेलगन: एक गोली जो अपन�
 @ A Zelda-style hookshot: fire sends a chain hook out; it latches onto hookable surfaces or enemies and reels you in; fire again to let go
 hi Zelda जैसा हुकशॉट: फ़ायर करने पर ज़ंजीर वाला हुक निकलता है; यह हुक लगने लायक सतहों या दुश्मनों से चिपककर आपको खींच लेता है; छोड़ने के लिए दोबारा फ़ायर करें
 
+@ Also make bright walls and sky glow, like DarkPlaces; 0 keeps the glow to light sources
+hi चमकीली दीवारों और आकाश को भी चमकाता है, DarkPlaces की तरह; 0 चमक को प्रकाश स्रोतों तक रखता है
+
 @ Also translates the engine's console messages; off keeps them in English
 hi इंजन के कंसोल संदेशों का भी अनुवाद करता है; बंद होने पर वे अंग्रेज़ी में रहते हैं
 
@@ -1583,8 +1616,14 @@ hi फ़ायर दबाए रखें और मॉन्स्टरो�
 @ Hold: keep Lock-on held. Toggle: press Auto-aim Toggle to enable automatic acquisition. Click look stick to switch targets
 hi दबाए रखें: लॉक-ऑन दबाए रखें। टॉगल: अपने-आप लक्ष्य पकड़ने के लिए ऑटो-एम टॉगल दबाएँ। लक्ष्य बदलने के लिए लुक स्टिक क्लिक करें
 
+@ How bright the glow is
+hi चमक कितनी तेज़ है
+
 @ How close an enemy must be to the crosshair for automatic acquisition in toggle mode (degrees)
 hi टॉगल मोड में अपने-आप पकड़ने के लिए दुश्मन क्रॉसहेयर से कितना पास होना चाहिए (डिग्री)
+
+@ How far the glow spreads around a light
+hi प्रकाश के चारों ओर चमक कितनी दूर फैलती है
 
 @ How far the view tilts up and down when you tilt the controller (pitch axis)
 hi कंट्रोलर झुकाने पर दृश्य ऊपर-नीचे कितना झुकता है (पिच अक्ष)
@@ -1607,6 +1646,9 @@ hi पावरवॉशर का पानी दुश्मनों को 
 @ How long a hit freezes the game, in milliseconds
 hi एक प्रहार गेम को कितनी देर फ़्रीज़ करता है, मिलीसेकंड में
 
+@ How many lights cast shadows at once, and how smooth their edges are
+hi एक साथ कितनी रोशनियाँ छाया डालती हैं और उनके किनारे कितने चिकने हैं
+
 @ How strongly fog covers the sky when fog is on
 hi कोहरा चालू होने पर वह आसमान को कितना ढकता है
 
@@ -1622,8 +1664,14 @@ hi इमर्सिव: केवल मान बदलने पर कु�
 @ Keeps textures sharp on floors and walls seen at steep angles
 hi तिरछे कोण से दिखने वाले फ़र्श और दीवारों पर टेक्सचर तीखे रखता है
 
+@ Light sources glow: lamps, lava, teleporters, sparks and explosions; Bloom Settings tunes it
+hi प्रकाश स्रोत चमकते हैं: दीये, लावा, टेलीपोर्टर, चिंगारियाँ और विस्फोट; ब्लूम सेटिंग्स इसे समायोजित करती हैं
+
 @ Lights from rockets, muzzle flashes and explosions brighten nearby walls
 hi रॉकेट, नाल की चमक और विस्फोटों की रोशनी पास की दीवारों को रोशन करती है
+
+@ Lights from rockets, muzzle flashes and explosions shade walls and models per pixel and cast shadows; needs Dynamic Lights
+hi रॉकेट, गोली की चमक और विस्फोटों की रोशनी दीवारों और मॉडलों को प्रति पिक्सेल रोशन करती है और छाया डालती है; डायनेमिक लाइटें आवश्यक
 
 @ Liquid surfaces swell and ring out where things move through them
 hi जहाँ चीज़ें तरल से गुज़रती हैं वहाँ सतह उभरती है और लहरें फैलती हैं
@@ -1738,6 +1786,9 @@ hi क्लासिक बिंदु पार्टिकल्स की �
 
 @ Resolution and detail inside portal and teleporter views; lower tiers trim nested effects
 hi पोर्टल और टेलीपोर्टर दृश्यों के अंदर रिज़ॉल्यूशन और विवरण; निचले स्तर नेस्टेड इफ़ेक्ट घटाते हैं
+
+@ Resolution of the glow: low is cheaper and softer
+hi चमक का रिज़ॉल्यूशन: निम्न सस्ता और नरम है
 
 @ Rippling light patterns on surfaces under water and slime
 hi पानी और स्लाइम के नीचे सतहों पर लहराते रोशनी के पैटर्न
@@ -1864,6 +1915,9 @@ hi क्लासिक मॉडलों की जगह 2021 री-रि�
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 hi मैप की रंगीन रोशनी (.lit फ़ाइल या BSPX लंप) इस्तेमाल करता है; बंद पर मूल सफ़ेद रोशनी। अगला मैप लोड होने पर लागू
+
+@ Walls, doors and monsters block the light and cast shadows
+hi दीवारें, दरवाज़े और राक्षस रोशनी रोकते हैं और छाया डालते हैं
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 hi पानी की धार के खंड, बूँदों की संख्या और चमकदार तरल शेडिंग: निम्न सरल पारभासी धाराएँ इस्तेमाल करता है; उच्च स्मूद चमकदार धारें

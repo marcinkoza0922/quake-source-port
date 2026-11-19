@@ -163,6 +163,21 @@ pt-BR Qualidade do sangue
 @ Blood Splatter Settings
 pt-BR Configurações de respingos de sangue
 
+@ Bloom
+pt-BR Brilho difuso
+
+@ Bloom Intensity
+pt-BR Intensidade do brilho difuso
+
+@ Bloom Quality
+pt-BR Qualidade do brilho difuso
+
+@ Bloom Settings
+pt-BR Configurações do brilho difuso
+
+@ Bloom Size
+pt-BR Tamanho do brilho difuso
+
 @ Blue
 pt-BR Azul
 
@@ -174,6 +189,9 @@ pt-BR Realça ou corta os agudos, em decibéis
 
 @ Boost or cut low frequencies in decibels
 pt-BR Realça ou corta os graves, em decibéis
+
+@ Bright Surfaces
+pt-BR Superfícies claras
 
 @ Brightness
 pt-BR Brilho
@@ -817,6 +835,12 @@ pt-BR Só à distância
 @ Reacquire While Held
 pt-BR Retravar ao segurar
 
+@ Real-time Dynamic Lights
+pt-BR Luzes dinâmicas em tempo real
+
+@ Real-time Light Settings
+pt-BR Configurações de luz em tempo real
+
 @ Red
 pt-BR Vermelho
 
@@ -885,6 +909,12 @@ pt-BR Ver através dos portais
 
 @ See-through Teleporters
 pt-BR Teletransportes transparentes
+
+@ Shadow Quality
+pt-BR Qualidade das sombras
+
+@ Shadows
+pt-BR Sombras
 
 @ Shirt Color
 pt-BR Cor da camisa
@@ -1472,6 +1502,9 @@ pt-BR Um railgun no estilo de Quake III: um projétil que atravessa todos os ini
 @ A Zelda-style hookshot: fire sends a chain hook out; it latches onto hookable surfaces or enemies and reels you in; fire again to let go
 pt-BR Um gancho no estilo de Zelda: atirar lança um gancho com corrente que se prende a superfícies engancháveis ou inimigos e puxa você; atire de novo para soltar
 
+@ Also make bright walls and sky glow, like DarkPlaces; 0 keeps the glow to light sources
+pt-BR Também faz paredes claras e o céu brilharem, como no DarkPlaces; 0 mantém o brilho nas fontes de luz
+
 @ Also translates the engine's console messages; off keeps them in English
 pt-BR Também traduz as mensagens de console do motor; desativado as mantém em inglês
 
@@ -1583,8 +1616,14 @@ pt-BR Segure o disparo e passe a mira sobre os monstros para enfileirá-los, sol
 @ Hold: keep Lock-on held. Toggle: press Auto-aim Toggle to enable automatic acquisition. Click look stick to switch targets
 pt-BR Segurar: mantenha Travar alvo pressionado. Alternar: pressione Alternar mira automática para ativar a trava automática. Clique o analógico de visão para trocar de alvo
 
+@ How bright the glow is
+pt-BR Quão forte é o brilho
+
 @ How close an enemy must be to the crosshair for automatic acquisition in toggle mode (degrees)
 pt-BR Quão perto da mira um inimigo deve estar para a trava automática no modo alternar (graus)
+
+@ How far the glow spreads around a light
+pt-BR Até onde o brilho se espalha ao redor de uma luz
 
 @ How far the view tilts up and down when you tilt the controller (pitch axis)
 pt-BR Quanto a visão inclina para cima e para baixo ao inclinar o controle (eixo de arfagem)
@@ -1607,6 +1646,9 @@ pt-BR Com que força a água do Lava-jato empurra os inimigos
 @ How long a hit freezes the game, in milliseconds
 pt-BR Quanto tempo um golpe congela o jogo, em milissegundos
 
+@ How many lights cast shadows at once, and how smooth their edges are
+pt-BR Quantas luzes projetam sombras ao mesmo tempo e quão suaves são as bordas
+
 @ How strongly fog covers the sky when fog is on
 pt-BR Quanto a neblina cobre o céu quando está ativada
 
@@ -1622,8 +1664,14 @@ pt-BR Imersivo: aparece por alguns segundos só quando o valor muda
 @ Keeps textures sharp on floors and walls seen at steep angles
 pt-BR Mantém nítidas as texturas de pisos e paredes vistos em ângulos inclinados
 
+@ Light sources glow: lamps, lava, teleporters, sparks and explosions; Bloom Settings tunes it
+pt-BR Fontes de luz brilham: lâmpadas, lava, teletransportadores, faíscas e explosões; Configurações do brilho difuso ajustam isso
+
 @ Lights from rockets, muzzle flashes and explosions brighten nearby walls
 pt-BR Luzes de foguetes, clarões de disparo e explosões iluminam paredes próximas
+
+@ Lights from rockets, muzzle flashes and explosions shade walls and models per pixel and cast shadows; needs Dynamic Lights
+pt-BR A luz de foguetes, disparos e explosões ilumina paredes e modelos por pixel e projeta sombras; requer Luzes dinâmicas
 
 @ Liquid surfaces swell and ring out where things move through them
 pt-BR Superfícies líquidas se agitam e formam anéis onde algo as atravessa
@@ -1738,6 +1786,9 @@ pt-BR Substitui as partículas clássicas de pontos por faíscas brilhantes, fum
 
 @ Resolution and detail inside portal and teleporter views; lower tiers trim nested effects
 pt-BR Resolução e detalhe dentro das visões de portais e teletransportes; níveis mais baixos cortam efeitos aninhados
+
+@ Resolution of the glow: low is cheaper and softer
+pt-BR Resolução do brilho: baixa é mais leve e suave
 
 @ Rippling light patterns on surfaces under water and slime
 pt-BR Padrões de luz ondulantes em superfícies debaixo d'água e de limo
@@ -1864,6 +1915,9 @@ pt-BR Usa os modelos MD5 mais suaves do relançamento de 2021 (e substitutos MD3
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 pt-BR Usa a luz colorida do mapa (arquivo .lit ou lump BSPX); desativado dá a luz branca original. Aplica-se ao carregar o próximo mapa
+
+@ Walls, doors and monsters block the light and cast shadows
+pt-BR Paredes, portas e monstros bloqueiam a luz e projetam sombras
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 pt-BR Segmentos do jato de água, quantidade de gotas e sombreamento brilhante do líquido: baixa usa jatos translúcidos mais simples; alta usa jatos suaves e brilhantes

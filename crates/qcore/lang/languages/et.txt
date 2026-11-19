@@ -163,6 +163,21 @@ et Vere kvaliteet
 @ Blood Splatter Settings
 et Vereplekkide seaded
 
+@ Bloom
+et Kuma
+
+@ Bloom Intensity
+et Kuma intensiivsus
+
+@ Bloom Quality
+et Kuma kvaliteet
+
+@ Bloom Settings
+et Kuma seaded
+
+@ Bloom Size
+et Kuma suurus
+
 @ Blue
 et Sinine
 
@@ -174,6 +189,9 @@ et Võimendab või summutab kõrgeid sagedusi detsibellides
 
 @ Boost or cut low frequencies in decibels
 et Võimendab või summutab madalaid sagedusi detsibellides
+
+@ Bright Surfaces
+et Heledad pinnad
 
 @ Brightness
 et Heledus
@@ -817,6 +835,12 @@ et Ainult kaugrünnak
 @ Reacquire While Held
 et Hoides haara uuesti
 
+@ Real-time Dynamic Lights
+et Reaalajas dünaamilised tuled
+
+@ Real-time Light Settings
+et Reaalajas valguse seaded
+
 @ Red
 et Punane
 
@@ -885,6 +909,12 @@ et Vaata läbi portaalide
 
 @ See-through Teleporters
 et Läbipaistvad teleportid
+
+@ Shadow Quality
+et Varjude kvaliteet
+
+@ Shadows
+et Varjud
 
 @ Shirt Color
 et Särgi värv
@@ -1472,6 +1502,9 @@ et Quake III stiilis railgun: kuul läbistab iga vaenlase oma joonel, kulutab 2 
 @ A Zelda-style hookshot: fire sends a chain hook out; it latches onto hookable surfaces or enemies and reels you in; fire again to let go
 et Zelda stiilis haarats: tulistamine heidab välja ketiga konksu, mis haakub sobivate pindade või vaenlaste külge ja tõmbab sind kohale; tulista uuesti, et lahti lasta
 
+@ Also make bright walls and sky glow, like DarkPlaces; 0 keeps the glow to light sources
+et Paneb ka heledad seinad ja taeva helendama, nagu DarkPlaces; 0 jätab kuma ainult valgusallikatele
+
 @ Also translates the engine's console messages; off keeps them in English
 et Tõlgib ka mootori konsooliteated; väljas jätab need inglise keelde
 
@@ -1583,8 +1616,14 @@ et Hoia tuld all ja vii sihik üle koletiste, et need järjekorda panna, lase la
 @ Hold: keep Lock-on held. Toggle: press Auto-aim Toggle to enable automatic acquisition. Click look stick to switch targets
 et Hoia: hoia nuppu „Lukustus“ all. Lüliti: vajuta nuppu „Automaatsihtimise lüliti“, et lubada automaatne haaramine. Sihtmärgi vahetamiseks vajuta vaatekangi
 
+@ How bright the glow is
+et Kui ere kuma on
+
 @ How close an enemy must be to the crosshair for automatic acquisition in toggle mode (degrees)
 et Kui lähedal sihikule peab vaenlane olema, et lülitirežiimis automaatselt haarata (kraadides)
+
+@ How far the glow spreads around a light
+et Kui kaugele kuma valguse ümber levib
 
 @ How far the view tilts up and down when you tilt the controller (pitch axis)
 et Kui palju vaade üles-alla kaldub, kui pult kallutad (kaldetelg)
@@ -1607,6 +1646,9 @@ et Kui tugevalt survepesuri vesi vaenlasi lükkab
 @ How long a hit freezes the game, in milliseconds
 et Kui kaua tabamus mängu külmutab, millisekundites
 
+@ How many lights cast shadows at once, and how smooth their edges are
+et Mitu tuld korraga varje heidab ja kui pehmed on nende servad
+
 @ How strongly fog covers the sky when fog is on
 et Kui tugevalt udu taevast katab, kui udu on sees
 
@@ -1622,8 +1664,14 @@ et Kaasahaarav: ilmub vaid mõneks sekundiks, kui väärtus muutub
 @ Keeps textures sharp on floors and walls seen at steep angles
 et Hoiab tekstuurid teravana põrandatel ja seintel, mida nähakse terava nurga all
 
+@ Light sources glow: lamps, lava, teleporters, sparks and explosions; Bloom Settings tunes it
+et Valgusallikad helendavad: lambid, laava, teleportid, sädemed ja plahvatused; Kuma seaded reguleerivad seda
+
 @ Lights from rockets, muzzle flashes and explosions brighten nearby walls
 et Rakettide, suutulede ja plahvatuste valgus valgustab lähedal olevaid seinu
+
+@ Lights from rockets, muzzle flashes and explosions shade walls and models per pixel and cast shadows; needs Dynamic Lights
+et Rakettide, lasuvälkude ja plahvatuste valgus valgustab seinu ja mudeleid pikslipõhiselt ning heidab varje; vajab Dünaamilisi tulesid
 
 @ Liquid surfaces swell and ring out where things move through them
 et Vedelike pinnad lainetavad ja moodustavad rõngaid, kus miski neist läbi liigub
@@ -1738,6 +1786,9 @@ et Asendab klassikalised täppidest osakesed hõõguvate sädemete, suitsu ja ve
 
 @ Resolution and detail inside portal and teleporter views; lower tiers trim nested effects
 et Eraldusvõime ja detail portaali- ja teleportivaadetes; madalamad tasemed kärbivad pesastatud efekte
+
+@ Resolution of the glow: low is cheaper and softer
+et Kuma eraldusvõime: madal on odavam ja pehmem
 
 @ Rippling light patterns on surfaces under water and slime
 et Lainetavad valgusmustrid pindadel vee ja lima all
@@ -1864,6 +1915,9 @@ et Kasutab klassikaliste asemel 2021. aasta uusväljaande sujuvamaid MD5-mudelei
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 et Kasutab kaardi värvilist valgust (.lit-fail või BSPX-plokk); väljas annab algse valge valguse. Rakendub järgmise kaardi laadimisel
+
+@ Walls, doors and monsters block the light and cast shadows
+et Seinad, uksed ja koletised varjavad valgust ja heidavad varje
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 et Veejoa lõigud, piiskade arv ja läikiv vedelikuvarjutus: madal kasutab lihtsamaid poolläbipaistvaid jugasid; kõrge sujuvaid läikivaid jugasid

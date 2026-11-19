@@ -11,7 +11,7 @@ impl Renderer {
             },
             vk::DescriptorPoolSize {
                 ty: vk::DescriptorType::COMBINED_IMAGE_SAMPLER,
-                descriptor_count: (MAX_TEXTURES + 4) * FRAMES as u32,
+                descriptor_count: (MAX_TEXTURES + 5) * FRAMES as u32,
             },
             vk::DescriptorPoolSize {
                 ty: vk::DescriptorType::STORAGE_BUFFER,
@@ -108,6 +108,19 @@ impl Renderer {
             vk::SamplerAddressMode::REPEAT,
             vk::SamplerMipmapMode::NEAREST,
         )?;
+        // shadow map depth compare (sampler2DArrayShadow), bilinear PCF
+        let sci = vk::SamplerCreateInfo::default()
+            .mag_filter(vk::Filter::LINEAR)
+            .min_filter(vk::Filter::LINEAR)
+            .mipmap_mode(vk::SamplerMipmapMode::NEAREST)
+            .address_mode_u(vk::SamplerAddressMode::CLAMP_TO_EDGE)
+            .address_mode_v(vk::SamplerAddressMode::CLAMP_TO_EDGE)
+            .address_mode_w(vk::SamplerAddressMode::CLAMP_TO_EDGE)
+            .compare_enable(true)
+            .compare_op(vk::CompareOp::LESS_OR_EQUAL)
+            .max_lod(0.0);
+        // SAFETY: valid device.
+        let sampler_shadow = unsafe { dev.create_sampler(&sci, None)? };
         let storage = vk::BufferUsageFlags::STORAGE_BUFFER | vk::BufferUsageFlags::TRANSFER_DST;
         let mut palette_buf = gpu.buffer(1024 + convert::LUT_BYTES as u64, vk::BufferUsageFlags::STORAGE_BUFFER, true)?;
         let pal: Vec<u32> = palette
@@ -145,6 +158,9 @@ impl Renderer {
             ssao_quality: 1,
             portal_quality: 1,
             motion_blur_quality: 1,
+            bloom: None,
+            shadow_maps: None,
+            sampler_shadow,
             prev_xforms: Default::default(),
             cur_xforms: Default::default(),
             prev_xform_time: 0.0,
@@ -184,6 +200,7 @@ impl Renderer {
             slang: None,
         };
         r.write_static_descriptors();
+        r.create_shadow_maps(1, 16)?;
         r.splash_pic = r.register_pic_rgba_linear(32, 32, &water::spray_blob(32)).ok();
         let caustic_rgba = water::caustic_texture(128);
         let mut up = r.gpu.begin_upload()?;

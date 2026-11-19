@@ -1,7 +1,8 @@
 //! Bind group layouts and render pipelines.
 
-use super::{DEPTH_FORMAT, SCENE_FORMAT};
+use super::{DEPTH_FORMAT, GLOW_FORMAT, SCENE_FORMAT};
 use crate::FteBlend;
+pub(super) use super::scene_pipes::ScenePipes;
 
 pub(super) const SCENE_SRC: &str = concat!(include_str!("shaders/common.wgsl"), include_str!("shaders/material.wgsl"));
 const SKY_SRC: &str = concat!(include_str!("shaders/common.wgsl"), include_str!("shaders/sky.wgsl"));
@@ -58,6 +59,8 @@ pub(super) struct AliasV {
     pub(super) pos: [f32; 3],
     pub(super) st: [f32; 2],
     pub(super) shade: [f32; 3],
+    /// World-space normal (per-pixel dynamic lights).
+    pub(super) nrm: [f32; 3],
 }
 
 /// 2D vertex in output pixels.
@@ -76,9 +79,9 @@ pub(super) struct Pipes {
     pub(super) draw_bgl: wgpu::BindGroupLayout,
     /// Post pass inputs: scene, motion velocity, sampler, palette, softemu LUT.
     pub(super) post_bgl: wgpu::BindGroupLayout,
-    scene_layout: wgpu::PipelineLayout,
+    pub(super) scene_layout: wgpu::PipelineLayout,
     sky_layout: wgpu::PipelineLayout,
-    scene_module: wgpu::ShaderModule,
+    pub(super) scene_module: wgpu::ShaderModule,
     sky_module: wgpu::ShaderModule,
     /// Scene pipelines for the current MSAA sample count.
     pub(super) scene: ScenePipes,
@@ -86,23 +89,6 @@ pub(super) struct Pipes {
     pub(super) post: wgpu::RenderPipeline,
 }
 
-/// Pipelines drawing into the (possibly multisampled) scene target.
-pub(super) struct ScenePipes {
-    pub(super) samples: u32,
-    pub(super) world: wgpu::RenderPipeline,
-    pub(super) world_alpha: wgpu::RenderPipeline,
-    pub(super) water: wgpu::RenderPipeline,
-    pub(super) water_alpha: wgpu::RenderPipeline,
-    pub(super) sky: wgpu::RenderPipeline,
-    pub(super) alias: wgpu::RenderPipeline,
-    pub(super) alias_alpha: wgpu::RenderPipeline,
-    /// Thermal goggles: alias models behind the scene depth, additive.
-    pub(super) alias_xray: wgpu::RenderPipeline,
-    /// FTE blend modes × (triangles, lines).
-    pub(super) poly: Vec<wgpu::RenderPipeline>,
-    /// SSAO and motion-velocity pipelines (read the scene targets).
-    pub(super) fx: super::fx_pipes::FxPipes,
-}
 
 pub(super) fn poly_index(b: FteBlend, lines: bool) -> usize {
     b as usize * 2 + usize::from(lines)
@@ -182,6 +168,8 @@ pub(super) struct Desc<'a> {
     pub(super) depth: Option<(bool, bool)>,
     pub(super) format: wgpu::TextureFormat,
     pub(super) samples: u32,
+    /// Also write the bloom glow ([`GLOW_FORMAT`], blended like the colour).
+    pub(super) glow: bool,
 }
 
 pub(super) fn pipeline(dev: &wgpu::Device, d: Desc) -> wgpu::RenderPipeline {
@@ -212,11 +200,10 @@ pub(super) fn pipeline_with(dev: &wgpu::Device, d: Desc, compare: wgpu::CompareF
             module: d.module,
             entry_point: Some(d.fs),
             compilation_options: Default::default(),
-            targets: &[Some(wgpu::ColorTargetState {
-                format: d.format,
-                blend: d.blend,
-                write_mask: wgpu::ColorWrites::ALL,
-            })],
+            targets: &[
+                Some(wgpu::ColorTargetState { format: d.format, blend: d.blend, write_mask: wgpu::ColorWrites::ALL }),
+                Some(wgpu::ColorTargetState { format: GLOW_FORMAT, blend: d.blend, write_mask: wgpu::ColorWrites::ALL }),
+            ][..if d.glow { 2 } else { 1 }],
         }),
         multiview_mask: None,
         cache: None,
@@ -225,8 +212,8 @@ pub(super) fn pipeline_with(dev: &wgpu::Device, d: Desc, compare: wgpu::CompareF
 
 pub(super) const WORLD_ATTRS: [wgpu::VertexAttribute; 4] =
     wgpu::vertex_attr_array![0 => Float32x3, 1 => Float32x2, 2 => Float32x3, 3 => Float32x2];
-pub(super) const ALIAS_ATTRS: [wgpu::VertexAttribute; 3] =
-    wgpu::vertex_attr_array![0 => Float32x3, 1 => Float32x2, 2 => Float32x3];
+pub(super) const ALIAS_ATTRS: [wgpu::VertexAttribute; 4] =
+    wgpu::vertex_attr_array![0 => Float32x3, 1 => Float32x2, 2 => Float32x3, 3 => Float32x3];
 pub(super) const POLY_ATTRS: [wgpu::VertexAttribute; 3] =
     wgpu::vertex_attr_array![0 => Float32x3, 1 => Float32x2, 2 => Unorm8x4];
 const UI_ATTRS: [wgpu::VertexAttribute; 3] =
@@ -264,6 +251,33 @@ impl Pipes {
             },
             tex_entry(5, D::D2),
             sampler_entry(6),
+            // r_shadow_realtime_dlight: light list, shadow maps, compare sampler
+            wgpu::BindGroupLayoutEntry {
+                binding: 7,
+                visibility: wgpu::ShaderStages::FRAGMENT,
+                ty: wgpu::BindingType::Buffer {
+                    ty: wgpu::BufferBindingType::Uniform,
+                    has_dynamic_offset: false,
+                    min_binding_size: wgpu::BufferSize::new(std::mem::size_of::<crate::rtlight::LightsGpu>() as u64),
+                },
+                count: None,
+            },
+            wgpu::BindGroupLayoutEntry {
+                binding: 8,
+                visibility: wgpu::ShaderStages::FRAGMENT,
+                ty: wgpu::BindingType::Texture {
+                    sample_type: wgpu::TextureSampleType::Depth,
+                    view_dimension: D::D2Array,
+                    multisampled: false,
+                },
+                count: None,
+            },
+            wgpu::BindGroupLayoutEntry {
+                binding: 9,
+                visibility: wgpu::ShaderStages::FRAGMENT,
+                ty: wgpu::BindingType::Sampler(wgpu::SamplerBindingType::Comparison),
+                count: None,
+            },
         ]);
         let mat_bgl = bgl(&[tex_entry(0, D::D2), tex_entry(1, D::D2), tex_entry(2, D::D2), sampler_entry(3)]);
         let sky_bgl = bgl(&[
@@ -291,6 +305,8 @@ impl Pipes {
                 },
                 count: None,
             },
+            tex_entry(6, D::D2),
+            sampler_entry(7),
         ]);
         let layout = |groups: &[&wgpu::BindGroupLayout]| {
             let g: Vec<Option<&wgpu::BindGroupLayout>> = groups.iter().map(|g| Some(*g)).collect();
@@ -316,7 +332,7 @@ impl Pipes {
         let alpha = Some(wgpu::BlendState::ALPHA_BLENDING);
         let tri = wgpu::PrimitiveTopology::TriangleList;
         let ui_vb = [vb::<UiV>(&UI_ATTRS)];
-        let scene = ScenePipes::new(dev, &frame_bgl, &mat_bgl, &draw_bgl, &scene_layout, &sky_layout, &scene_module, &sky_module, 1);
+        let scene = ScenePipes::new(dev, &frame_bgl, &mat_bgl, &draw_bgl, &scene_layout, &sky_layout, &scene_module, &sky_module, 1, false);
         let ui = pipeline(dev, Desc {
             layout: &screen_layout,
             module: &screen,
@@ -328,6 +344,7 @@ impl Pipes {
             depth: None,
             format: out_format,
             samples: 1,
+            glow: false,
         });
         let post = pipeline(dev, Desc {
             layout: &post_layout,
@@ -340,6 +357,7 @@ impl Pipes {
             depth: None,
             format: out_format,
             samples: 1,
+            glow: false,
         });
         Pipes {
             frame_bgl,
@@ -357,9 +375,10 @@ impl Pipes {
         }
     }
 
-    /// Rebuilds the scene pipelines for `samples` (MSAA) if it changed.
-    pub(super) fn set_samples(&mut self, dev: &wgpu::Device, samples: u32) {
-        if samples != self.scene.samples {
+    /// Rebuilds the scene pipelines for `samples` (MSAA) and the bloom glow
+    /// attachment if either changed.
+    pub(super) fn set_scene(&mut self, dev: &wgpu::Device, samples: u32, glow: bool) {
+        if samples != self.scene.samples || glow != self.scene.glow {
             self.scene = ScenePipes::new(
                 dev,
                 &self.frame_bgl,
@@ -370,112 +389,9 @@ impl Pipes {
                 &self.scene_module,
                 &self.sky_module,
                 samples,
+                glow,
             );
         }
     }
 }
 
-impl ScenePipes {
-    #[allow(clippy::too_many_arguments)]
-    fn new(
-        dev: &wgpu::Device,
-        frame_bgl: &wgpu::BindGroupLayout,
-        mat_bgl: &wgpu::BindGroupLayout,
-        draw_bgl: &wgpu::BindGroupLayout,
-        scene_layout: &wgpu::PipelineLayout,
-        sky_layout: &wgpu::PipelineLayout,
-        scene: &wgpu::ShaderModule,
-        sky_m: &wgpu::ShaderModule,
-        samples: u32,
-    ) -> ScenePipes {
-        let alpha = Some(wgpu::BlendState::ALPHA_BLENDING);
-        let tri = wgpu::PrimitiveTopology::TriangleList;
-        let world_vb = [vb::<crate::world::WorldVertex>(&WORLD_ATTRS)];
-        let alias_vb = [vb::<AliasV>(&ALIAS_ATTRS)];
-        let poly_vb = [vb::<crate::FteVertex>(&POLY_ATTRS)];
-        let scene_pipe = |vs, fs, buffers, blend, write| {
-            pipeline(dev, Desc {
-                layout: scene_layout,
-                module: scene,
-                vs,
-                fs,
-                buffers,
-                topology: tri,
-                blend,
-                depth: Some((write, true)),
-                format: SCENE_FORMAT,
-                samples,
-            })
-        };
-        let world = scene_pipe("vs_world", "fs_world", &world_vb, None, true);
-        let world_alpha = scene_pipe("vs_world", "fs_world", &world_vb, alpha, false);
-        let water = scene_pipe("vs_world", "fs_water", &world_vb, None, true);
-        let water_alpha = scene_pipe("vs_world", "fs_water", &world_vb, alpha, false);
-        let alias = scene_pipe("vs_alias", "fs_alias", &alias_vb, None, true);
-        let alias_alpha = scene_pipe("vs_alias", "fs_alias", &alias_vb, alpha, false);
-        let add = wgpu::BlendComponent { src_factor: wgpu::BlendFactor::One, dst_factor: wgpu::BlendFactor::One, operation: wgpu::BlendOperation::Add };
-        let alias_xray = pipeline_with(
-            dev,
-            Desc {
-                layout: scene_layout,
-                module: scene,
-                vs: "vs_alias",
-                fs: "fs_alias",
-                buffers: &alias_vb,
-                topology: tri,
-                blend: Some(wgpu::BlendState { color: add, alpha: add }),
-                depth: Some((false, true)),
-                format: SCENE_FORMAT,
-                samples,
-            },
-            wgpu::CompareFunction::Greater,
-            // alias triangles wind clockwise here (Vulkan flips y): keep front faces
-            Some(wgpu::Face::Front),
-        );
-        let sky = pipeline(dev, Desc {
-            layout: sky_layout,
-            module: sky_m,
-            vs: "vs_sky",
-            fs: "fs_sky",
-            buffers: &world_vb,
-            topology: tri,
-            blend: None,
-            depth: Some((true, true)),
-            format: SCENE_FORMAT,
-            samples,
-        });
-        let mut poly = Vec::new();
-        // Overlay (debug lines) last: drawn without depth testing, as in Vulkan
-        for b in FteBlend::ALL.into_iter().chain([FteBlend::Overlay]) {
-            for lines in [false, true] {
-                debug_assert_eq!(poly.len(), poly_index(b, lines));
-                poly.push(pipeline(dev, Desc {
-                    layout: scene_layout,
-                    module: scene,
-                    vs: "vs_poly",
-                    fs: "fs_poly",
-                    buffers: &poly_vb,
-                    topology: if lines { wgpu::PrimitiveTopology::LineList } else { tri },
-                    blend: Some(blend_of(b)),
-                    depth: Some((false, b != FteBlend::Overlay)),
-                    format: SCENE_FORMAT,
-                    samples,
-                }));
-            }
-        }
-        let fx = super::fx_pipes::FxPipes::new(dev, [frame_bgl, mat_bgl, draw_bgl], samples);
-        ScenePipes {
-            samples,
-            world,
-            world_alpha,
-            water,
-            water_alpha,
-            sky,
-            alias,
-            alias_alpha,
-            alias_xray,
-            poly,
-            fx,
-        }
-    }
-}

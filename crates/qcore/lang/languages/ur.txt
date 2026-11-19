@@ -163,6 +163,21 @@ ur خون کا معیار
 @ Blood Splatter Settings
 ur خون کے چھینٹوں کی ترتیبات
 
+@ Bloom
+ur بلوم
+
+@ Bloom Intensity
+ur بلوم کی شدت
+
+@ Bloom Quality
+ur بلوم کا معیار
+
+@ Bloom Settings
+ur بلوم کی ترتیبات
+
+@ Bloom Size
+ur بلوم کا سائز
+
 @ Blue
 ur نیلا
 
@@ -174,6 +189,9 @@ ur اونچی فریکوئنسیاں ڈیسیبل میں بڑھائیں یا گ�
 
 @ Boost or cut low frequencies in decibels
 ur نیچی فریکوئنسیاں ڈیسیبل میں بڑھائیں یا گھٹائیں
+
+@ Bright Surfaces
+ur روشن سطحیں
 
 @ Brightness
 ur چمک
@@ -817,6 +835,12 @@ ur صرف دور مار
 @ Reacquire While Held
 ur دبائے رکھنے پر دوبارہ ہدف
 
+@ Real-time Dynamic Lights
+ur ریئل ٹائم متحرک روشنیاں
+
+@ Real-time Light Settings
+ur ریئل ٹائم روشنی کی ترتیبات
+
 @ Red
 ur سرخ
 
@@ -885,6 +909,12 @@ ur پورٹلز کے پار دیکھیں
 
 @ See-through Teleporters
 ur آر پار دکھنے والے ٹیلی پورٹر
+
+@ Shadow Quality
+ur سایوں کا معیار
+
+@ Shadows
+ur سائے
 
 @ Shirt Color
 ur قمیص کا رنگ
@@ -1472,6 +1502,9 @@ ur Quake III طرز کی ریل گن: ایک گولی جو اپنی لکیر ک�
 @ A Zelda-style hookshot: fire sends a chain hook out; it latches onto hookable surfaces or enemies and reels you in; fire again to let go
 ur Zelda طرز کا ہک شاٹ: فائر زنجیر والا کانٹا پھینکتا ہے؛ یہ قابلِ گرفت سطحوں یا دشمنوں سے جڑ کر آپ کو کھینچ لیتا ہے؛ چھوڑنے کے لیے دوبارہ فائر کریں
 
+@ Also make bright walls and sky glow, like DarkPlaces; 0 keeps the glow to light sources
+ur روشن دیواروں اور آسمان کو بھی چمکاتا ہے، DarkPlaces کی طرح؛ 0 چمک کو روشنی کے ذرائع تک رکھتا ہے
+
 @ Also translates the engine's console messages; off keeps them in English
 ur انجن کے کنسول پیغامات کا بھی ترجمہ کرتا ہے؛ بند ہو تو وہ انگریزی میں رہتے ہیں
 
@@ -1583,8 +1616,14 @@ ur فائر دبائے رکھیں اور کراس ہیئر راکشسوں پر �
 @ Hold: keep Lock-on held. Toggle: press Auto-aim Toggle to enable automatic acquisition. Click look stick to switch targets
 ur دبائے رکھیں: لاک آن دبائے رکھیں۔ ٹوگل: خودکار ہدف کے لیے خودکار نشانہ ٹوگل دبائیں۔ ہدف بدلنے کے لیے دیکھنے والی اسٹک پر کلک کریں
 
+@ How bright the glow is
+ur چمک کتنی تیز ہے
+
 @ How close an enemy must be to the crosshair for automatic acquisition in toggle mode (degrees)
 ur ٹوگل موڈ میں خودکار ہدف کے لیے دشمن کراس ہیئر کے کتنا قریب ہو (ڈگری)
+
+@ How far the glow spreads around a light
+ur روشنی کے گرد چمک کتنی دور پھیلتی ہے
 
 @ How far the view tilts up and down when you tilt the controller (pitch axis)
 ur کنٹرولر جھکانے پر منظر اوپر نیچے کتنا جھکے (پچ محور)
@@ -1607,6 +1646,9 @@ ur پاور واشر کا پانی دشمنوں کو کتنے زور سے دھک
 @ How long a hit freezes the game, in milliseconds
 ur ضرب گیم کو کتنی دیر روکتی ہے، ملی سیکنڈ میں
 
+@ How many lights cast shadows at once, and how smooth their edges are
+ur ایک ساتھ کتنی روشنیاں سائے ڈالتی ہیں اور ان کے کنارے کتنے نرم ہیں
+
 @ How strongly fog covers the sky when fog is on
 ur دھند چالو ہونے پر آسمان کو کتنی گہری دھند ڈھانپے
 
@@ -1622,8 +1664,14 @@ ur عمیق: صرف قدر بدلنے پر چند سیکنڈ کے لیے ظاہ�
 @ Keeps textures sharp on floors and walls seen at steep angles
 ur ترچھے زاویوں سے نظر آنے والے فرش اور دیواروں پر ٹیکسچر صاف رکھتا ہے
 
+@ Light sources glow: lamps, lava, teleporters, sparks and explosions; Bloom Settings tunes it
+ur روشنی کے ذرائع چمکتے ہیں: چراغ، لاوا، ٹیلی پورٹر، چنگاریاں اور دھماکے؛ بلوم کی ترتیبات اسے ایڈجسٹ کرتی ہیں
+
 @ Lights from rockets, muzzle flashes and explosions brighten nearby walls
 ur راکٹوں، فائر کی چمک اور دھماکوں کی روشنی قریبی دیواروں کو روشن کرتی ہے
+
+@ Lights from rockets, muzzle flashes and explosions shade walls and models per pixel and cast shadows; needs Dynamic Lights
+ur راکٹوں، گولی کی چمک اور دھماکوں کی روشنی دیواروں اور ماڈلز کو ہر پکسل پر روشن کرتی ہے اور سائے ڈالتی ہے؛ متحرک روشنیاں ضروری ہیں
 
 @ Liquid surfaces swell and ring out where things move through them
 ur جہاں چیزیں گزریں وہاں مائع سطحیں ابھرتی اور دائرے بناتی ہیں
@@ -1738,6 +1786,9 @@ ur کلاسک نقطہ ذرات کی جگہ چمکتی چنگاریاں، دھو
 
 @ Resolution and detail inside portal and teleporter views; lower tiers trim nested effects
 ur پورٹل اور ٹیلی پورٹر مناظر کے اندر ریزولوشن اور تفصیل؛ نچلے درجے اندرونی اثرات کم کرتے ہیں
+
+@ Resolution of the glow: low is cheaper and softer
+ur چمک کا ریزولوشن: کم سستا اور نرم ہے
 
 @ Rippling light patterns on surfaces under water and slime
 ur پانی اور کیچڑ کے نیچے سطحوں پر لہراتے روشنی کے نقوش
@@ -1864,6 +1915,9 @@ ur کلاسک ماڈلز کی جگہ 2021 کی دوبارہ ریلیز کے ہم
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 ur نقشے کی رنگین روشنی (.lit فائل یا BSPX lump) استعمال کرتا ہے؛ بند ہو تو اصل سفید روشنی۔ اگلے نقشہ لوڈ پر لاگو ہوتا ہے
+
+@ Walls, doors and monsters block the light and cast shadows
+ur دیواریں، دروازے اور عفریت روشنی روکتے ہیں اور سائے ڈالتے ہیں
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 ur پانی کی دھار کے حصے، قطروں کی تعداد اور چمکدار مائع شیڈنگ: کم سادہ نیم شفاف دھاریں؛ زیادہ ہموار چمکدار دھاریں

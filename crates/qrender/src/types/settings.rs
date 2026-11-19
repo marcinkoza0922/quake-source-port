@@ -87,6 +87,23 @@ pub struct Settings {
     pub motion_blur: f32,
     /// r_motionblur_quality: per-object motion blur quality (0 = low, 1 = high).
     pub motion_blur_quality: u32,
+    /// r_bloom ? r_bloom_intensity : 0. Light sources (fullbright texels,
+    /// lava, teleporters, bright effects) glow; 0 disables.
+    pub bloom: f32,
+    /// r_bloom_size: weight of the wider blur levels (0.5..=2, 1 = default).
+    pub bloom_size: f32,
+    /// r_bloom_bright: bright scene colours also glow, as in DarkPlaces (0..=1).
+    pub bloom_bright: f32,
+    /// r_bloom_quality: 0 = low (chain from quarter resolution), 1 = high (half).
+    pub bloom_quality: u32,
+    /// r_shadow_realtime_dlight: dynamic lights are lit per pixel on the
+    /// world and models instead of being added to the lightmaps.
+    pub rt_dlights: bool,
+    /// r_shadow_realtime_dlight_shadows: the most important ones cast shadows.
+    pub dlight_shadows: bool,
+    /// r_shadow_quality: 0 low (2 shadowed lights, 256² faces), 1 medium
+    /// (4, 512²), 2 high (8, 512², softer filtering).
+    pub shadow_quality: u32,
     /// Peripheral radial blur independent of camera velocity.
     pub edge_blur: f32,
     /// r_waterripples: ripple rings and gentle swell on liquid surfaces
@@ -173,6 +190,13 @@ impl Default for Settings {
             ssao_radius: 32.0,
             motion_blur: 0.0,
             motion_blur_quality: 1,
+            bloom: 0.0,
+            bloom_size: 1.0,
+            bloom_bright: 0.0,
+            bloom_quality: 1,
+            rt_dlights: false,
+            dlight_shadows: true,
+            shadow_quality: 1,
             edge_blur: 0.0,
             water_ripples: 0.0,
             water_splashes: false,

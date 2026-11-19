@@ -34,9 +34,9 @@ newer).
 | gamma / contrast | `gamma 1`, `contrast 1` | same | same (defaults are 0.9 / 1.4) |
 | no vsync | `vid_vsync 0` | same | same |
 | vkQuake extras off | – | – | `r_rtshadows 0`, `vid_palettize 0` |
-| our enhancements and add-ons off | `r_ssao 0`, `r_motionblur 0`, `r_speedblur 0`, `r_enhancedwater 0`, `r_teleportwindows 0`, `r_enhancedfx 0`, `r_enhancedparticles 0`, `r_particle_quality 1`, `r_impact_fx 0` (+ bullets, nails, scorches, tracers), `r_blood 0`, `r_debris 0`, `r_softemu 0`, `r_dither 0`, `r_colorblind 0`, `custom_enable 0`, `addon_hitstop 0` | – | – |
-| particles, `ultra` | `r_fteparticles 0`, `r_particles 2` | `r_particles 2` | `r_fteparticles 0`, `r_particles 2` |
-| particles, `ultra-fte` | `r_fteparticles 1`, `r_particledesc classic`, `r_softparticles 0`, `r_quadparticles 1`, `r_particles 2` | `r_particles 2` | same without `r_softparticles` (1.34.1 has none) |
+| our enhancements and add-ons off | `r_ssao 0`, `r_motionblur 0`, `r_speedblur 0`, `r_enhancedwater 0`, `r_teleportwindows 0`, `r_enhancedfx 0`, `r_enhancedparticles 0`, `r_impact_fx 0` (+ bullets, nails, scorches, tracers), `r_blood 0`, `r_debris 0`, `r_softemu 0`, `r_dither 0`, `r_colorblind 0`, `custom_enable 0`, `addon_hitstop 0` | – | – |
+| particles, `ultra` | `r_fteparticles 0`, `r_particle_quality 1`, `r_particles 2` | `r_particles 2` | `r_fteparticles 0`, `r_particles 2` |
+| particles, `ultra-fte` | `r_fteparticles 1`, `r_particledesc classic`, `r_particle_quality 0` (soft particles off), `r_part_density 2` (undoes quality 0's half density), `r_quadparticles 1`, `r_particles 2` | `r_particles 2` | `r_fteparticles 1`, `r_particledesc classic`, `r_quadparticles 1`, `r_particles 2` (1.34.1 has no soft particles) |
 
 How the pins reach each engine (perfkit runner):
 
@@ -228,6 +228,38 @@ From the first baseline (Results, 2026-11-17):
   ~110 live against vkQuake's ~70 (summed over the samples 2134 vs 1912,
   +12%; the first three samples agree). Small next to ~7000 particles, but
   find out whether lifetime, fade or the decal cap differs.
+- **V8 — done 2026-11-18.** The `ultra-fte` pins didn't turn our soft
+  particles off. Since Particle Quality (0ead02c, 2026-11-16),
+  `r_softparticles` is a compat cvar that does nothing and the soft level
+  follows `r_particle_quality` (`soft_particles()` in
+  `src/host/render.rs`), so `r_particle_quality 1` ran ours with soft
+  particles **low**: in the FTE suite ours split the scene pass for AD's
+  soft effects and read depth, against vkQuake 1.34.1, which has none.
+  Quality 0 turns them off but halves scripted particle density
+  (`particle_density()`), so `ultra-fte` now pins `r_particle_quality 0`
+  with `r_part_density 2` (density 0.5 × 2 = 1; impacts and enhanced
+  particles are off anyway). `r_particle_quality` moved from the shared
+  row into the particle rows (`ultra` keeps 1: classic particles aren't
+  soft, so the main suite's cells are unchanged). New perfkit tests: no
+  pin is a cvar ours only registers for old configs, and every cvar is
+  pinned once per profile. `perfkit partinfo` afterwards: still like for
+  like, `spin-sepulcher-fte` ours 429322 vs vkQuake 429082 (+0.1%),
+  `combat-grendel-fte` 82990 vs 83063 (−0.1%), the same as V3/V6. The
+  2026-11-17 FTE cells (void anyway, V4) ran with soft particles on; the
+  rerun is the first with them off.
+- **V9 (new 2026-11-18)**: steady-state heap allocations and cvar name
+  lookups per frame (H1 grew in 3dca905). The first census (Results,
+  2026-11-18) counts ~114 allocations per steady-state frame on
+  `spin-e1m1`, about a fifth of them in the status bar and HUD text.
+  The target is zero allocations per frame in a timedemo, and `CvarId`s
+  for everything `view_cvars` and the render settings read each frame.
+  Pixel-identical by construction; A/B with the headless timedemo (or
+  callgrind, R9).
+- **V10 (new 2026-11-18)**: sky wind changed `sky.frag` for every map.
+  On the suite's maps (no `<sky>wind.cfg`) the output must be
+  pixel-identical to 56238f2's, and the sky stage in `QSP_GPUTIMES` no
+  slower at 4K. Then measure one map whose sky drifts (dmd, qbj2 or qbj3)
+  against ironwail, since both draw the same two layers.
 - **V4**: the first results below are void. R5 found that ours drew its
   main menu over every `+timedemo` (the startup menu opened because a demo
   isn't a running server), and that AD's `quake.rc` runs `menu_main` after
@@ -285,6 +317,36 @@ comparable. Run spread is under 1% except where shown (and for vkQuake at
 The last parity numbers recorded before this suite (1280×720, MSAA off, 8×
 anisotropy, no md5, 2026-11-11) are in HISTORY.md and DESIGN.md (M7).
 They are not comparable with these.
+
+### Allocation census (V9)
+
+**2026-11-18, commit ee5742f**, heaptrack 1.5 `--record-only`, headless
+960×540, `ultra` pins, `spin-e1m1` (14999 frames, `-autoquit 211` so the
+run ends a second after the demo; heaptrack cost: 773 fps against 758
+without). 1.80 M allocations inside `Host::frame`, **120 per frame**;
+about 6 of those are the map load (`process_client_events` → texture and
+model loading, where the `read_dir`/`resolve_loose` calls are), which
+leaves **~114 per frame in steady state**:
+
+| allocs/frame | where |
+|--:|---|
+| 28.5 | `qrender::Renderer::render` (incl. its closures) |
+| 21.0 | `Host::render` itself |
+| ~25 | status bar and HUD text: `Sbar::draw_modern` 8, `draw_num` 7, `Canvas::push` 5.4, `ammo_pic` 2, `ptext_gold` 2, `face_name` 1 |
+| 12.2 | `view_cvars` 8 and its 4 `format!` names for `gl_cshiftpercent_*` (3dca905) |
+| 8.2 | `Host::frame` itself |
+| 6.3 | `sync_shell_env` → `user_dir` (path joins every frame) |
+| 3.1 | `wheel::inventory` |
+| 2.1 each | `sync_language` (`Lang::from_code`), `autoaim_fov`, `ViewState::entities` |
+| 1.6 | `build_world_draw` |
+| 1.0 each | `draw_crosshair`, `osk::keys_for` |
+
+None of these is large alone; together they are ~114 `malloc`/`free`
+pairs per frame at 5000+ fps windowed. Most are per-frame `String`/`Vec`
+builds that a reused buffer or a cached value removes (the status bar's
+numbers and pic names, `user_dir`, the language code, the cshift cvar
+names). Fix them in that order, re-run the census, and A/B with the
+headless timedemo; the change must be pixel-identical.
 
 ### Parity stills
 

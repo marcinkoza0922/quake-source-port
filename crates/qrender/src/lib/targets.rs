@@ -1,5 +1,8 @@
 use super::*;
 
+/// Most bloom chain levels (half resolution down to 1/128).
+const BLOOM_LEVELS: usize = 7;
+
 impl Renderer {
     pub(super) fn destroy_targets(&mut self) {
         if let Some(t) = self.targets.take() {
@@ -23,6 +26,19 @@ impl Renderer {
             self.gpu.free_image(t.depth);
             if let Some(m) = t.color_ms {
                 self.gpu.free_image(m);
+            }
+            if let Some(b) = t.bloom {
+                for slot in [b.glow_slot, b.scene_slot] {
+                    self.textures[slot as usize] = None;
+                }
+                self.gpu.free_image(b.glow);
+                if let Some(m) = b.glow_ms {
+                    self.gpu.free_image(m);
+                }
+                for (img, slot, _, _) in b.levels {
+                    self.textures[slot as usize] = None;
+                    self.gpu.free_image(img);
+                }
             }
             if let Some((i, b)) = t.out {
                 self.gpu.free_image(i);
@@ -185,6 +201,10 @@ impl Renderer {
                 vk::ImageAspectFlags::DEPTH,
             )?);
         }
+        let bloom = match self.bloom {
+            Some(quality) => Some(self.create_bloom_targets(sw, shh, (base_w, base_h), quality, color.view)?),
+            None => None,
+        };
         self.targets = Some(Targets {
             portals,
             portal_depth,
@@ -205,9 +225,47 @@ impl Renderer {
             vel_w,
             vel_h,
             vel_slot,
+            bloom,
             out,
         });
         Ok(())
+    }
+
+    /// Glow attachment at scene size (`sw`×`sh`) and the bloom chain, from
+    /// half (`quality` 1) or a quarter (0) of the output-capped `base` down
+    /// to about 8 pixels.
+    fn create_bloom_targets(&mut self, sw: u32, sh: u32, base: (u32, u32), quality: u32, color_view: vk::ImageView) -> Result<BloomTargets> {
+        let usage = vk::ImageUsageFlags::COLOR_ATTACHMENT | vk::ImageUsageFlags::SAMPLED;
+        let glow = self.gpu.image(sw, sh, 1, 1, pipelines::GLOW_FORMAT, usage, vk::ImageAspectFlags::COLOR)?;
+        let glow_ms = if self.msaa > 1 {
+            Some(self.gpu.image_ms(
+                sw, sh, 1, 1, pipelines::GLOW_FORMAT,
+                vk::ImageUsageFlags::COLOR_ATTACHMENT, vk::ImageAspectFlags::COLOR, self.msaa,
+            )?)
+        } else {
+            None
+        };
+        let slot = |r: &mut Self, view, sampler| -> Result<u32> {
+            let s = r.alloc_slot()?;
+            r.write_texture_descriptor(s, view, sampler);
+            r.textures[s as usize] = Some(Tex { image: None, level: false, sampling: Sampling::Clamp });
+            Ok(s)
+        };
+        let glow_slot = slot(self, glow.view, self.sampler_linear)?;
+        let scene_slot = slot(self, color_view, self.sampler_linear)?;
+        let div = if quality == 0 { 4 } else { 2 };
+        let (mut lw, mut lh) = ((base.0 / div).max(1), (base.1 / div).max(1));
+        let mut levels = Vec::new();
+        loop {
+            let img = self.gpu.image(lw, lh, 1, 1, pipelines::BLOOM_FORMAT, usage, vk::ImageAspectFlags::COLOR)?;
+            let s = slot(self, img.view, self.sampler_linear)?;
+            levels.push((img, s, lw, lh));
+            if levels.len() >= BLOOM_LEVELS || lw.min(lh) < 16 {
+                break;
+            }
+            (lw, lh) = ((lw / 2).max(1), (lh / 2).max(1));
+        }
+        Ok(BloomTargets { glow, glow_ms, glow_slot, scene_slot, levels })
     }
 
     /// Allocate on the first MSAA AO frame, after scene targets exist. Keep

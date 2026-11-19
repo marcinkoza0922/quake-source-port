@@ -163,6 +163,21 @@ te రక్తం నాణ్యత
 @ Blood Splatter Settings
 te రక్తపు చిందుల సెట్టింగ్‌లు
 
+@ Bloom
+te బ్లూమ్
+
+@ Bloom Intensity
+te బ్లూమ్ తీవ్రత
+
+@ Bloom Quality
+te బ్లూమ్ నాణ్యత
+
+@ Bloom Settings
+te బ్లూమ్ సెట్టింగ్‌లు
+
+@ Bloom Size
+te బ్లూమ్ పరిమాణం
+
 @ Blue
 te నీలం
 
@@ -174,6 +189,9 @@ te అధిక ఫ్రీక్వెన్సీలను డెసిబె
 
 @ Boost or cut low frequencies in decibels
 te తక్కువ ఫ్రీక్వెన్సీలను డెసిబెల్‌లలో పెంచు లేదా తగ్గించు
+
+@ Bright Surfaces
+te ప్రకాశవంతమైన ఉపరితలాలు
 
 @ Brightness
 te ప్రకాశం
@@ -817,6 +835,12 @@ te దూర దాడులు మాత్రమే
 @ Reacquire While Held
 te పట్టుకున్నప్పుడు మళ్లీ లక్ష్యం
 
+@ Real-time Dynamic Lights
+te రియల్-టైమ్ డైనమిక్ లైట్లు
+
+@ Real-time Light Settings
+te రియల్-టైమ్ కాంతి సెట్టింగ్‌లు
+
 @ Red
 te ఎరుపు
 
@@ -885,6 +909,12 @@ te పోర్టల్‌ల గుండా చూడు
 
 @ See-through Teleporters
 te పారదర్శక టెలిపోర్టర్‌లు
+
+@ Shadow Quality
+te నీడల నాణ్యత
+
+@ Shadows
+te నీడలు
 
 @ Shirt Color
 te చొక్కా రంగు
@@ -1472,6 +1502,9 @@ te Quake III శైలి రెయిల్‌గన్: తన దారిల
 @ A Zelda-style hookshot: fire sends a chain hook out; it latches onto hookable surfaces or enemies and reels you in; fire again to let go
 te Zelda శైలి హుక్‌షాట్: ఫైర్ చేస్తే గొలుసు హుక్ బయటకు వెళ్తుంది; అది హుక్ చేయదగిన ఉపరితలాలకు లేదా శత్రువులకు తగులుకుని మిమ్మల్ని లాగుతుంది; వదలడానికి మళ్లీ ఫైర్ చేయండి
 
+@ Also make bright walls and sky glow, like DarkPlaces; 0 keeps the glow to light sources
+te ప్రకాశవంతమైన గోడలు, ఆకాశాన్ని కూడా మెరిపిస్తుంది, DarkPlaces లాగా; 0 మెరుపును కాంతి మూలాలకే పరిమితం చేస్తుంది
+
 @ Also translates the engine's console messages; off keeps them in English
 te ఇంజిన్ కన్సోల్ సందేశాలను కూడా అనువదిస్తుంది; ఆఫ్ అయితే అవి ఇంగ్లీషులోనే ఉంటాయి
 
@@ -1583,8 +1616,14 @@ te ఫైర్ పట్టుకుని క్రాస్‌హెయిర
 @ Hold: keep Lock-on held. Toggle: press Auto-aim Toggle to enable automatic acquisition. Click look stick to switch targets
 te పట్టుకో: లాక్-ఆన్ పట్టుకుని ఉంచండి. టోగుల్: ఆటోమేటిక్ లక్ష్యం కోసం ఆటో-గురి టోగుల్ నొక్కండి. లక్ష్యాలు మార్చడానికి చూపు స్టిక్ క్లిక్ చేయండి
 
+@ How bright the glow is
+te మెరుపు ఎంత ప్రకాశవంతంగా ఉంటుంది
+
 @ How close an enemy must be to the crosshair for automatic acquisition in toggle mode (degrees)
 te టోగుల్ మోడ్‌లో ఆటోమేటిక్ లక్ష్యం కోసం శత్రువు క్రాస్‌హెయిర్‌కు ఎంత దగ్గరగా ఉండాలి (డిగ్రీలు)
+
+@ How far the glow spreads around a light
+te కాంతి చుట్టూ మెరుపు ఎంత దూరం వ్యాపిస్తుంది
 
 @ How far the view tilts up and down when you tilt the controller (pitch axis)
 te కంట్రోలర్‌ను వంచినప్పుడు వీక్షణ పైకి కిందికి ఎంత వంగుతుంది (పిచ్ అక్షం)
@@ -1607,6 +1646,9 @@ te పవర్‌వాషర్ నీరు శత్రువులను �
 @ How long a hit freezes the game, in milliseconds
 te ఒక హిట్ గేమ్‌ను ఎంతసేపు ఆపుతుంది, మిల్లీసెకన్లలో
 
+@ How many lights cast shadows at once, and how smooth their edges are
+te ఒకేసారి ఎన్ని కాంతులు నీడలు వేస్తాయి, వాటి అంచులు ఎంత మృదువుగా ఉంటాయి
+
 @ How strongly fog covers the sky when fog is on
 te పొగమంచు ఆన్‌లో ఉన్నప్పుడు అది ఆకాశాన్ని ఎంత బలంగా కప్పుతుంది
 
@@ -1622,8 +1664,14 @@ te లీనమయ్యే: విలువ మారినప్పుడు �
 @ Keeps textures sharp on floors and walls seen at steep angles
 te ఏటవాలు కోణాల్లో కనిపించే నేలలు, గోడలపై టెక్స్చర్‌లను స్పష్టంగా ఉంచుతుంది
 
+@ Light sources glow: lamps, lava, teleporters, sparks and explosions; Bloom Settings tunes it
+te కాంతి మూలాలు మెరుస్తాయి: దీపాలు, లావా, టెలిపోర్టర్‌లు, నిప్పురవ్వలు, పేలుళ్లు; బ్లూమ్ సెట్టింగ్‌లు దీన్ని సర్దుబాటు చేస్తాయి
+
 @ Lights from rockets, muzzle flashes and explosions brighten nearby walls
 te రాకెట్‌లు, తుపాకీ మెరుపులు, పేలుళ్ల కాంతి సమీప గోడలను ప్రకాశింపజేస్తుంది
+
+@ Lights from rockets, muzzle flashes and explosions shade walls and models per pixel and cast shadows; needs Dynamic Lights
+te రాకెట్లు, కాల్పుల మెరుపులు, పేలుళ్ల కాంతి గోడలను, మోడళ్లను ప్రతి పిక్సెల్‌లో వెలిగించి నీడలు వేస్తుంది; డైనమిక్ లైట్లు అవసరం
 
 @ Liquid surfaces swell and ring out where things move through them
 te వస్తువులు కదిలే చోట ద్రవ ఉపరితలాలు ఉబ్బి వలయాలు ఏర్పడతాయి
@@ -1738,6 +1786,9 @@ te క్లాసిక్ చుక్క పార్టికల్‌లన
 
 @ Resolution and detail inside portal and teleporter views; lower tiers trim nested effects
 te పోర్టల్, టెలిపోర్టర్ వీక్షణల లోపల రిజల్యూషన్, వివరాలు; తక్కువ స్థాయిలు అంతర్గత ఎఫెక్ట్‌లను తగ్గిస్తాయి
+
+@ Resolution of the glow: low is cheaper and softer
+te మెరుపు రిజల్యూషన్: తక్కువ చౌకైనది, మృదువైనది
 
 @ Rippling light patterns on surfaces under water and slime
 te నీరు, బురద కింద ఉపరితలాలపై అలల వంటి కాంతి నమూనాలు
@@ -1864,6 +1915,9 @@ te క్లాసిక్ మోడల్‌లకు బదులు 2021 ర
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 te మ్యాప్ రంగుల కాంతిని వాడుతుంది (.lit ఫైల్ లేదా BSPX lump); ఆఫ్ అయితే సాధారణ తెల్లని కాంతి. తదుపరి మ్యాప్ లోడ్‌లో వర్తిస్తుంది
+
+@ Walls, doors and monsters block the light and cast shadows
+te గోడలు, తలుపులు, రాక్షసులు కాంతిని అడ్డుకుని నీడలు వేస్తాయి
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 te నీటి జెట్ భాగాలు, బిందువుల సంఖ్య, మెరిసే ద్రవ షేడింగ్: తక్కువ సరళమైన పారదర్శక ధారలు వాడుతుంది; అధికం మృదువైన మెరిసే జెట్‌లు వాడుతుంది

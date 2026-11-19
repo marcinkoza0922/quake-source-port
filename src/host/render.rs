@@ -148,6 +148,7 @@ impl Host {
                 &mut self.r, &mut ents, &dyn_verts, v.origin.into(), &self.debris, fte_frustum.as_ref(), &mut fte,
             );
             crate::view::dlights(&self.cl, &mut dls);
+            dls.extend_from_slice(&self.test_lights);
             let contents = self.contents(v.origin);
             blend = self.view.blend(&self.cl, contents, ft, cv.flash, cv.cshift);
             if !self.guests.is_empty() {
@@ -411,6 +412,13 @@ impl Host {
                 v("r_motionblur_amount").clamp(0.0, 4.0)
             },
             motion_blur_quality: (v("r_motionblur_quality").round() as i32).clamp(0, 1) as u32,
+            bloom: if v("r_bloom") != 0.0 { v("r_bloom_intensity").clamp(0.0, 4.0) } else { 0.0 },
+            bloom_size: v("r_bloom_size").clamp(0.5, 2.0),
+            bloom_bright: v("r_bloom_bright").clamp(0.0, 1.0),
+            bloom_quality: (v("r_bloom_quality").round() as i32).clamp(0, 1) as u32,
+            rt_dlights: v("r_shadow_realtime_dlight") != 0.0,
+            dlight_shadows: v("r_shadow_realtime_dlight_shadows") != 0.0,
+            shadow_quality: (v("r_shadow_quality").round() as i32).clamp(0, 2) as u32,
             water_ripples: if v("r_enhancedwater") != 0.0 && v("r_waterripples") != 0.0 { v("r_waterripples_amount").clamp(0.0, 4.0) } else { 0.0 },
             water_splashes: v("r_enhancedwater") != 0.0 && v("r_watersplash") != 0.0,
             water_caustics: if v("r_enhancedwater") != 0.0 && v("r_watercaustics") != 0.0 { v("r_watercaustics_amount").clamp(0.0, 4.0) } else { 0.0 },

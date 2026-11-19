@@ -52,6 +52,9 @@ pub(super) struct Buffers {
     pub(super) frame_u: GrowBuf,
     /// Group 0 of scene pipelines (frame uniforms, lightmap, palette).
     pub(super) frame_group: Option<wgpu::BindGroup>,
+    /// The same for the shadow map passes, with a placeholder in place of
+    /// the shadow maps they write.
+    pub(super) shadow_frame_group: Option<wgpu::BindGroup>,
     pub(super) draw_group: Option<wgpu::BindGroup>,
     /// Scene colour as a material (post pass input).
     pub(super) post_group: Option<wgpu::BindGroup>,
@@ -145,12 +148,13 @@ impl Renderer {
         let depth_view = depth.create_view(&Default::default());
         let ao = self.ssao.map(|q| self.create_ao_targets(q, scene, ms_view.as_ref().unwrap_or(&color_view), &depth_view));
         let vel = self.mblur.map(|q| self.create_vel_target(q, scene, &depth_view));
+        let bloom = self.bloom.and_then(|q| self.create_bloom_targets(q, scene, &color_view));
         let soft_group = self.dev.create_bind_group(&wgpu::BindGroupDescriptor {
             label: None,
             layout: &self.pipes.scene.fx.soft_bgl,
             entries: &[wgpu::BindGroupEntry { binding: 0, resource: wgpu::BindingResource::TextureView(&depth_view) }],
         });
-        self.targets = Some(Targets { scene, color, color_view, ms_view, depth_view, ao, soft_group, vel, out });
+        self.targets = Some(Targets { scene, color, color_view, ms_view, depth_view, ao, soft_group, vel, bloom, out });
         self.frame_ready = false;
     }
 
@@ -181,9 +185,14 @@ impl Renderer {
             self.needs_resize = true;
         }
         let msaa = if fr.settings.msaa > 1 { MSAA_SAMPLES } else { 1 };
-        if msaa != self.msaa {
+        let bloom = (fr.settings.bloom > 0.0).then(|| fr.settings.bloom_quality.min(1));
+        if msaa != self.msaa || bloom != self.bloom {
             self.msaa = msaa;
-            self.pipes.set_samples(&self.dev, msaa);
+            self.bloom = bloom;
+            self.pipes.set_scene(&self.dev, msaa, bloom.is_some());
+            if bloom.is_some() && self.bloom_pipes.is_none() {
+                self.bloom_pipes = Some(super::bloom::BloomPipes::new(&self.dev, &self.pipes.draw_bgl));
+            }
             self.needs_resize = true;
         }
         let ssao = (fr.settings.ssao > 0.0).then(|| fr.settings.ssao_quality.min(2));
@@ -211,13 +220,15 @@ impl Renderer {
         if self.targets.is_none() {
             self.create_targets();
         }
+        self.ensure_shadows(&fr.settings);
         self.ensure_post_group();
         if let Some(wr) = &self.world {
             let mut styles = [256.0f32; 256];
             for (i, v) in fr.lightstyles.iter().take(256).enumerate() {
                 styles[i] = *v as f32;
             }
-            let dl = if fr.settings.dynamic { fr.dlights } else { &[] };
+            // real-time dynamic lights are lit per pixel, not in the lightmaps
+            let dl = if fr.settings.dynamic && !fr.settings.rt_dlights { fr.dlights } else { &[] };
             self.lightmap.update(&self.queue, &wr.cpu, &styles, dl);
         }
         let mut lists = std::mem::take(&mut self.bufs.lists);
@@ -228,6 +239,7 @@ impl Renderer {
         lists.draw_u.clear();
         lists.frame_u.clear();
         lists.views.clear();
+        lists.casters.clear();
         let (w, h) = (self.width, self.height);
         self.motion.begin(fr);
         self.update_water(fr);
@@ -239,14 +251,17 @@ impl Renderer {
             self.build_view(fr, v, [0, 0, w, h], fr.blend, 1, &mut lists);
         }
         self.motion.end(fr.time);
+        let shadow_passes = self.build_shadows(fr, &mut lists);
         let st = &fr.settings;
         let (tw, th) = self.targets.as_ref().map_or((w, h), |t| t.scene);
         // blur length in target uv: velocity is in view uv units
         let mb = if lists.views.iter().any(|v| !v.vel.is_empty()) { self.motion.scale } else { 0.0 };
+        let (bloom_passes, bloom_post) = self.bloom_views(&mut lists, st);
         let post: Vec<DrawU> = lists
             .views
             .iter()
-            .map(|v| {
+            .enumerate()
+            .map(|(k, v)| {
                 let ([x, y], [sw, sh]) = (v.ofs, v.scene);
                 let pv = PostView {
                     blend: v.blend,
@@ -254,6 +269,7 @@ impl Renderer {
                     uv: [x as f32 / tw as f32, y as f32 / th as f32, (x + sw) as f32 / tw as f32, (y + sh) as f32 / th as f32],
                     mb: [mb * sw as f32 / tw as f32, mb * sh as f32 / th as f32],
                     speed_blur: v.speed_blur,
+                    bloom: bloom_post.get(k).map_or(([0.0; 4], 0.0), |b| (b.uv, b.amount)),
                 };
                 post_draw(st, &pv, [w, h], self.render_scale, fr.time)
             })
@@ -279,7 +295,7 @@ impl Renderer {
             self.ensure_sky();
         }
         self.upload(&lists, &ui_v);
-        let result = self.encode(&lists, &post_du, &ao_views, ui_du, &ui_batches);
+        let result = self.encode(&lists, &post_du, &ao_views, &bloom_passes, &shadow_passes, ui_du, &ui_batches);
         self.bufs.lists = lists;
         result
     }
@@ -317,8 +333,10 @@ impl Renderer {
             let g = self.uniform_group(&self.pipes.draw_bgl, self.bufs.draw_u.get(), std::mem::size_of::<DrawU>());
             self.bufs.draw_group = Some(g);
         }
-        if self.bufs.frame_group.is_none() {
-            let g = self.dev.create_bind_group(&wgpu::BindGroupDescriptor {
+        if self.bufs.frame_group.is_none()
+            && let Some(sh) = &self.shadows
+        {
+            let group = |maps: &wgpu::TextureView| self.dev.create_bind_group(&wgpu::BindGroupDescriptor {
                 label: None,
                 layout: &self.pipes.frame_bgl,
                 entries: &[
@@ -336,9 +354,14 @@ impl Renderer {
                     wgpu::BindGroupEntry { binding: 4, resource: self.water.buf.as_entire_binding() },
                     wgpu::BindGroupEntry { binding: 5, resource: wgpu::BindingResource::TextureView(&self.water.caustic) },
                     wgpu::BindGroupEntry { binding: 6, resource: wgpu::BindingResource::Sampler(&self.water.repeat) },
+                    wgpu::BindGroupEntry { binding: 7, resource: sh.buf.as_entire_binding() },
+                    wgpu::BindGroupEntry { binding: 8, resource: wgpu::BindingResource::TextureView(maps) },
+                    wgpu::BindGroupEntry { binding: 9, resource: wgpu::BindingResource::Sampler(&sh.sampler) },
                 ],
             });
+            let (g, sg) = (group(&sh.array_view), group(&sh.placeholder));
             self.bufs.frame_group = Some(g);
+            self.bufs.shadow_frame_group = Some(sg);
         }
     }
 }

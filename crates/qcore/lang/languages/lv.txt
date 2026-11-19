@@ -163,6 +163,21 @@ lv Asiņu kvalitāte
 @ Blood Splatter Settings
 lv Asins šļakatu iestatījumi
 
+@ Bloom
+lv Mirdzums
+
+@ Bloom Intensity
+lv Mirdzuma intensitāte
+
+@ Bloom Quality
+lv Mirdzuma kvalitāte
+
+@ Bloom Settings
+lv Mirdzuma iestatījumi
+
+@ Bloom Size
+lv Mirdzuma izmērs
+
 @ Blue
 lv Zila
 
@@ -174,6 +189,9 @@ lv Pastiprina vai vājina augstās frekvences decibelos
 
 @ Boost or cut low frequencies in decibels
 lv Pastiprina vai vājina zemās frekvences decibelos
+
+@ Bright Surfaces
+lv Gaišas virsmas
 
 @ Brightness
 lv Spilgtums
@@ -817,6 +835,12 @@ lv Tikai tālcīņa
 @ Reacquire While Held
 lv Atkārtoti uztvert, turot
 
+@ Real-time Dynamic Lights
+lv Reāllaika dinamiskās gaismas
+
+@ Real-time Light Settings
+lv Reāllaika gaismas iestatījumi
+
 @ Red
 lv Sarkana
 
@@ -885,6 +909,12 @@ lv Redzēt cauri portāliem
 
 @ See-through Teleporters
 lv Caurredzami teleporti
+
+@ Shadow Quality
+lv Ēnu kvalitāte
+
+@ Shadows
+lv Ēnas
 
 @ Shirt Color
 lv Krekla krāsa
@@ -1472,6 +1502,9 @@ lv Quake III stila railgun: lode caurdur katru ienaidnieku uz savas līnijas, t�
 @ A Zelda-style hookshot: fire sends a chain hook out; it latches onto hookable surfaces or enemies and reels you in; fire again to let go
 lv Zelda stila kāsis: šāviens izsviež ķēdes āķi; tas aizķeras aiz piemērotām virsmām vai ienaidniekiem un pievelk tevi; šauj vēlreiz, lai atlaistu
 
+@ Also make bright walls and sky glow, like DarkPlaces; 0 keeps the glow to light sources
+lv Liek mirdzēt arī gaišām sienām un debesīm, kā DarkPlaces; 0 atstāj mirdzumu tikai gaismas avotiem
+
 @ Also translates the engine's console messages; off keeps them in English
 lv Tulko arī dzinēja konsoles ziņas; izslēgts atstāj tās angliski
 
@@ -1583,8 +1616,14 @@ lv Turi šāvienu un velc tēmekli pāri monstriem, lai tos atzīmētu, atlaid, 
 @ Hold: keep Lock-on held. Toggle: press Auto-aim Toggle to enable automatic acquisition. Click look stick to switch targets
 lv Turēt: turi mērķa fiksāciju nospiestu. Pārslēgt: nospied Autotēmēšanas pārslēgšanu, lai ieslēgtu automātisku uztveršanu. Noklikšķini skata sviru, lai mainītu mērķi
 
+@ How bright the glow is
+lv Cik spilgts ir mirdzums
+
 @ How close an enemy must be to the crosshair for automatic acquisition in toggle mode (degrees)
 lv Cik tuvu tēmeklim jābūt ienaidniekam, lai pārslēgšanas režīmā to automātiski uztvertu (grādi)
+
+@ How far the glow spreads around a light
+lv Cik tālu mirdzums izplatās ap gaismu
 
 @ How far the view tilts up and down when you tilt the controller (pitch axis)
 lv Cik tālu skats noliecas augšup un lejup, kad noliec kontrolieri (vertikālā ass)
@@ -1607,6 +1646,9 @@ lv Cik stipri augstspiediena mazgātāja ūdens atgrūž ienaidniekus
 @ How long a hit freezes the game, in milliseconds
 lv Cik ilgi trāpījums sasaldē spēli, milisekundēs
 
+@ How many lights cast shadows at once, and how smooth their edges are
+lv Cik gaismas vienlaikus met ēnas un cik maigas ir to malas
+
 @ How strongly fog covers the sky when fog is on
 lv Cik stipri migla pārklāj debesis, kad migla ir ieslēgta
 
@@ -1622,8 +1664,14 @@ lv Iekļaujošs: parādās uz dažām sekundēm tikai tad, kad mainās tā vērt
 @ Keeps textures sharp on floors and walls seen at steep angles
 lv Saglabā tekstūras asas uz grīdām un sienām, kas redzamas slīpā leņķī
 
+@ Light sources glow: lamps, lava, teleporters, sparks and explosions; Bloom Settings tunes it
+lv Gaismas avoti mirdz: lampas, lava, teleporti, dzirksteles un sprādzieni; Mirdzuma iestatījumi to regulē
+
 @ Lights from rockets, muzzle flashes and explosions brighten nearby walls
 lv Raķešu, šāvienu uzliesmojumu un sprādzienu gaisma izgaismo tuvējās sienas
+
+@ Lights from rockets, muzzle flashes and explosions shade walls and models per pixel and cast shadows; needs Dynamic Lights
+lv Raķešu, šāvienu uzliesmojumu un sprādzienu gaisma izgaismo sienas un modeļus katrā pikselī un met ēnas; nepieciešamas Dinamiskās gaismas
 
 @ Liquid surfaces swell and ring out where things move through them
 lv Šķidrumu virsmas viļņojas un veido apļus, kur kaut kas tām iet cauri
@@ -1738,6 +1786,9 @@ lv Aizstāj klasiskās punktu daļiņas ar spīdošām dzirkstelēm, dūmiem un 
 
 @ Resolution and detail inside portal and teleporter views; lower tiers trim nested effects
 lv Izšķirtspēja un detaļas portālu un teleportu skatos; zemāki līmeņi samazina ligzdotos efektus
+
+@ Resolution of the glow: low is cheaper and softer
+lv Mirdzuma izšķirtspēja: zema ir lētāka un maigāka
 
 @ Rippling light patterns on surfaces under water and slime
 lv Viļņojoši gaismas raksti uz virsmām zem ūdens un gļotām
@@ -1864,6 +1915,9 @@ lv Izmanto 2021. gada atkārtotā izdevuma gludākos MD5 modeļus (un MD3 aizst�
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 lv Izmanto kartes krāsaino gaismu (.lit fails vai BSPX bloks); izslēgts dod oriģinālo balto gaismu. Stājas spēkā nākamajā kartes ielādē
+
+@ Walls, doors and monsters block the light and cast shadows
+lv Sienas, durvis un briesmoņi aizsedz gaismu un met ēnas
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 lv Strūklas segmenti, pilienu skaits un spīdīga šķidruma ēnošana: zems izmanto vienkāršākas caurspīdīgas strūklas; augsts gludas, spīdīgas strūklas

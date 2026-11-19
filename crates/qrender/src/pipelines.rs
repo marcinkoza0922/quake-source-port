@@ -22,6 +22,12 @@ pub const AO_FORMAT: vk::Format = vk::Format::R16G16_SFLOAT;
 /// Exact scene sample-0 depth and alpha for MSAA SSAO input.
 pub const AO_SOURCE_FORMAT: vk::Format = vk::Format::R32G32_SFLOAT;
 pub const VEL_FORMAT: vk::Format = vk::Format::R16G16_SFLOAT;
+/// Scene colour attachment 1 while bloom is on: what glows (fullbrights, effects).
+pub const GLOW_FORMAT: vk::Format = vk::Format::R8G8B8A8_UNORM;
+/// Bloom downsample/upsample chain levels.
+pub const BLOOM_FORMAT: vk::Format = vk::Format::R16G16B16A16_SFLOAT;
+/// Cube shadow map faces of real-time dynamic lights (depth only).
+pub const SHADOW_FORMAT: vk::Format = vk::Format::D16_UNORM;
 
 /// Graphics pipelines needed to render a 3D scene pass (main or portal view).
 #[derive(Clone, Copy)]
@@ -106,6 +112,12 @@ pub struct Pipelines {
     /// Velocity pass for moving alias models / brush entities.
     pub vel_alias: vk::Pipeline,
     pub vel_world: vk::Pipeline,
+    /// Bloom chain: prefilter/downsample into a level, and additive upsample.
+    pub bloom_down: vk::Pipeline,
+    pub bloom_up: vk::Pipeline,
+    /// Depth-only cube shadow map faces: world/brush entities, alias models.
+    pub shadow_world: vk::Pipeline,
+    pub shadow_alias: vk::Pipeline,
     pub post_format: vk::Format,
     /// MSAA sample count of the scene pipelines.
     pub samples: u32,
@@ -113,6 +125,8 @@ pub struct Pipelines {
     pub supersample: bool,
     /// FTE particle pipelines also shade per sample (high soft-particle quality).
     pub fte_supersample: bool,
+    /// Scene pipelines also write the bloom glow attachment (set before `build`).
+    pub glow: bool,
     sh: Shaders,
     modules: Vec<vk::ShaderModule>,
 }
@@ -141,6 +155,22 @@ struct Shaders {
     vel_alias_vs: vk::ShaderModule,
     vel_world_vs: vk::ShaderModule,
     vel_fs: vk::ShaderModule,
+    bloom_fs: vk::ShaderModule,
+    shadow_world_fs: vk::ShaderModule,
+    shadow_alias_fs: vk::ShaderModule,
+    /// `*_glow.frag` variants writing the bloom glow attachment.
+    glow: GlowShaders,
+}
+
+#[derive(Clone, Copy)]
+struct GlowShaders {
+    world: vk::ShaderModule,
+    water: vk::ShaderModule,
+    sky: vk::ShaderModule,
+    alias: vk::ShaderModule,
+    poly: vk::ShaderModule,
+    part: vk::ShaderModule,
+    fte: vk::ShaderModule,
 }
 
 #[derive(Clone, Copy, PartialEq)]
@@ -201,6 +231,9 @@ impl Pipelines {
             b(8, vk::DescriptorType::COMBINED_IMAGE_SAMPLER, 1),
             // the per-frame dynamic buffer, for CPU-built alias poses
             b(9, vk::DescriptorType::STORAGE_BUFFER, 1),
+            // r_shadow_realtime_dlight: light list (dynbuf) and shadow maps
+            b(10, vk::DescriptorType::STORAGE_BUFFER, 1),
+            b(11, vk::DescriptorType::COMBINED_IMAGE_SAMPLER, 1),
         ];
         let flags = [
             vk::DescriptorBindingFlags::empty(),
@@ -212,6 +245,8 @@ impl Pipelines {
             vk::DescriptorBindingFlags::PARTIALLY_BOUND,
             vk::DescriptorBindingFlags::PARTIALLY_BOUND,
             vk::DescriptorBindingFlags::PARTIALLY_BOUND,
+            vk::DescriptorBindingFlags::empty(),
+            vk::DescriptorBindingFlags::empty(),
             vk::DescriptorBindingFlags::empty(),
         ];
         let mut fi = vk::DescriptorSetLayoutBindingFlagsCreateInfo::default().binding_flags(&flags);
@@ -298,6 +333,18 @@ impl Pipelines {
         let vel_alias_vs = m(spv!("velalias.vert"))?;
         let vel_world_vs = m(spv!("velworld.vert"))?;
         let vel_fs = m(spv!("vel.frag"))?;
+        let bloom_fs = m(spv!("bloom.frag"))?;
+        let shadow_world_fs = m(spv!("shadow_world.frag"))?;
+        let shadow_alias_fs = m(spv!("shadow_alias.frag"))?;
+        let glow = GlowShaders {
+            world: m(spv!("world_glow.frag"))?,
+            water: m(spv!("water_glow.frag"))?,
+            sky: m(spv!("sky_glow.frag"))?,
+            alias: m(spv!("alias_glow.frag"))?,
+            poly: m(spv!("poly_glow.frag"))?,
+            part: m(spv!("particle_glow.frag"))?,
+            fte: m(spv!("fte_glow.frag"))?,
+        };
 
         let stage = vk::PipelineShaderStageCreateInfo::default()
             .stage(vk::ShaderStageFlags::COMPUTE)
@@ -343,6 +390,10 @@ impl Pipelines {
             vel_alias_vs,
             vel_world_vs,
             vel_fs,
+            bloom_fs,
+            shadow_world_fs,
+            shadow_alias_fs,
+            glow,
         };
         let null = vk::Pipeline::null();
         let mut p = Pipelines {
@@ -373,10 +424,15 @@ impl Pipelines {
             ao_apply: null,
             vel_alias: null,
             vel_world: null,
+            bloom_down: null,
+            bloom_up: null,
+            shadow_world: null,
+            shadow_alias: null,
             post_format,
             samples,
             supersample: false,
             fte_supersample: false,
+            glow: false,
             sh,
             modules,
         };

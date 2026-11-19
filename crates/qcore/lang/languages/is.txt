@@ -163,6 +163,21 @@ is Blóðgæði
 @ Blood Splatter Settings
 is Stillingar blóðslettna
 
+@ Bloom
+is Ljómi
+
+@ Bloom Intensity
+is Styrkur ljóma
+
+@ Bloom Quality
+is Gæði ljóma
+
+@ Bloom Settings
+is Ljómastillingar
+
+@ Bloom Size
+is Stærð ljóma
+
 @ Blue
 is Blár
 
@@ -174,6 +189,9 @@ is Hækkar eða lækkar háa tíðni í desíbelum
 
 @ Boost or cut low frequencies in decibels
 is Hækkar eða lækkar lága tíðni í desíbelum
+
+@ Bright Surfaces
+is Bjartir fletir
 
 @ Brightness
 is Birta
@@ -817,6 +835,12 @@ is Aðeins af færi
 @ Reacquire While Held
 is Endurmiða meðan haldið
 
+@ Real-time Dynamic Lights
+is Kvik ljós í rauntíma
+
+@ Real-time Light Settings
+is Stillingar rauntímaljóss
+
 @ Red
 is Rauður
 
@@ -885,6 +909,12 @@ is Sjá í gegnum gáttir
 
 @ See-through Teleporters
 is Gegnsæir fjarflytjarar
+
+@ Shadow Quality
+is Gæði skugga
+
+@ Shadows
+is Skuggar
 
 @ Shirt Color
 is Skyrtulitur
@@ -1472,6 +1502,9 @@ is Railgun í anda Quake III: kúla sem fer í gegnum alla óvini á línunni, n
 @ A Zelda-style hookshot: fire sends a chain hook out; it latches onto hookable surfaces or enemies and reels you in; fire again to let go
 is Krókbyssa í anda Zelda: skot sendir keðjukrók út; hann festist við fleti eða óvini sem hægt er að krækja í og dregur þig að; skjóttu aftur til að sleppa
 
+@ Also make bright walls and sky glow, like DarkPlaces; 0 keeps the glow to light sources
+is Lætur líka bjarta veggi og himininn ljóma, eins og DarkPlaces; 0 heldur ljómanum við ljósgjafa
+
 @ Also translates the engine's console messages; off keeps them in English
 is Þýðir líka stjórnborðsskilaboð vélarinnar; af heldur þeim á ensku
 
@@ -1583,8 +1616,14 @@ is Haltu skotinu inni og færðu miðkrossinn yfir skrímsli til að setja þau 
 @ Hold: keep Lock-on held. Toggle: press Auto-aim Toggle to enable automatic acquisition. Click look stick to switch targets
 is Halda: haltu Miðlæsingu inni. Af/á: ýttu á Sjálfvirk miðun af/á til að virkja sjálfvirka miðun. Smelltu á sjónpinnann til að skipta um skotmark
 
+@ How bright the glow is
+is Hversu bjartur ljóminn er
+
 @ How close an enemy must be to the crosshair for automatic acquisition in toggle mode (degrees)
 is Hversu nálægt miðkrossinum óvinur þarf að vera fyrir sjálfvirka miðun í af/á-ham (gráður)
+
+@ How far the glow spreads around a light
+is Hversu langt ljóminn dreifist kringum ljós
 
 @ How far the view tilts up and down when you tilt the controller (pitch axis)
 is Hversu mikið sjónarhornið hallast upp og niður þegar þú hallar fjarstýringunni (lóðréttur ás)
@@ -1607,6 +1646,9 @@ is Hversu fast vatnið úr háþrýstidælunni ýtir óvinum
 @ How long a hit freezes the game, in milliseconds
 is Hversu lengi högg frystir leikinn, í millisekúndum
 
+@ How many lights cast shadows at once, and how smooth their edges are
+is Hve mörg ljós varpa skuggum í einu og hve mjúkar brúnir þeirra eru
+
 @ How strongly fog covers the sky when fog is on
 is Hversu mikið þokan hylur himininn þegar þoka er á
 
@@ -1622,8 +1664,14 @@ is Innlifun: birtist aðeins í nokkrar sekúndur þegar gildið breytist
 @ Keeps textures sharp on floors and walls seen at steep angles
 is Heldur áferðum skörpum á gólfum og veggjum sem sjást frá bröttu horni
 
+@ Light sources glow: lamps, lava, teleporters, sparks and explosions; Bloom Settings tunes it
+is Ljósgjafar ljóma: lampar, hraun, fjarflutningshlið, neistar og sprengingar; Ljómastillingar stilla það
+
 @ Lights from rockets, muzzle flashes and explosions brighten nearby walls
 is Ljós frá eldflaugum, hlaupblossum og sprengingum lýsa upp nálæga veggi
+
+@ Lights from rockets, muzzle flashes and explosions shade walls and models per pixel and cast shadows; needs Dynamic Lights
+is Ljós frá eldflaugum, skotblossum og sprengingum lýsir veggi og líkön á hvern díl og varpar skuggum; þarf Kvik ljós
 
 @ Liquid surfaces swell and ring out where things move through them
 is Vökvayfirborð bylgjast og mynda hringi þar sem eitthvað fer í gegnum þau
@@ -1738,6 +1786,9 @@ is Skiptir klassísku punktögnunum út fyrir glóandi neista, reyk og blóð; m
 
 @ Resolution and detail inside portal and teleporter views; lower tiers trim nested effects
 is Upplausn og smáatriði í gátta- og fjarflutningssýn; lægri stig skera niður hreiðraðar brellur
+
+@ Resolution of the glow: low is cheaper and softer
+is Upplausn ljómans: lág er ódýrari og mýkri
 
 @ Rippling light patterns on surfaces under water and slime
 is Gárandi ljósmynstur á flötum undir vatni og slími
@@ -1864,6 +1915,9 @@ is Notar mýkri MD5-líkön endurútgáfunnar frá 2021 (og MD3-staðgengla úr 
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 is Notar litaða lýsingu borðsins (.lit-skrá eða BSPX-hluta); af gefur upprunalegt hvítt ljós. Tekur gildi við næstu hleðslu borðs
+
+@ Walls, doors and monsters block the light and cast shadows
+is Veggir, dyr og skrímsli skyggja á ljósið og varpa skuggum
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 is Bunuhlutar, fjöldi dropa og gljáandi vökvaskygging: lágt notar einfaldari hálfgegnsæjar bunur; hátt notar mjúkar, gljáandi bunur

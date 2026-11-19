@@ -163,6 +163,21 @@ sl Kakovost krvi
 @ Blood Splatter Settings
 sl Nastavitve brizganja krvi
 
+@ Bloom
+sl Sij
+
+@ Bloom Intensity
+sl Jakost sija
+
+@ Bloom Quality
+sl Kakovost sija
+
+@ Bloom Settings
+sl Nastavitve sija
+
+@ Bloom Size
+sl Velikost sija
+
 @ Blue
 sl Modra
 
@@ -174,6 +189,9 @@ sl Ojača ali oslabi visoke frekvence v decibelih
 
 @ Boost or cut low frequencies in decibels
 sl Ojača ali oslabi nizke frekvence v decibelih
+
+@ Bright Surfaces
+sl Svetle površine
 
 @ Brightness
 sl Svetlost
@@ -817,6 +835,12 @@ sl Samo boj na daljavo
 @ Reacquire While Held
 sl Ponovni zajem med držanjem
 
+@ Real-time Dynamic Lights
+sl Dinamične luči v realnem času
+
+@ Real-time Light Settings
+sl Nastavitve svetlobe v realnem času
+
 @ Red
 sl Rdeča
 
@@ -885,6 +909,12 @@ sl Pogled skozi portale
 
 @ See-through Teleporters
 sl Prozorni teleporterji
+
+@ Shadow Quality
+sl Kakovost senc
+
+@ Shadows
+sl Sence
 
 @ Shirt Color
 sl Barva majice
@@ -1472,6 +1502,9 @@ sl Railgun v slogu Quake III: izstrelek, ki prebije vsakega sovražnika na svoji
 @ A Zelda-style hookshot: fire sends a chain hook out; it latches onto hookable surfaces or enemies and reels you in; fire again to let go
 sl Kavelj v slogu Zelde: strel izvrže kavelj na verigi, ki se zatakne za primerne površine ali sovražnike in vas privleče; ponoven strel ga sprosti
 
+@ Also make bright walls and sky glow, like DarkPlaces; 0 keeps the glow to light sources
+sl Sijejo tudi svetle stene in nebo, kot v DarkPlaces; 0 ohrani sij pri virih svetlobe
+
 @ Also translates the engine's console messages; off keeps them in English
 sl Prevede tudi sporočila konzole pogona; izklopljeno jih pusti v angleščini
 
@@ -1583,8 +1616,14 @@ sl Držite strel in z merkom preletite pošasti, da jih uvrstite v vrsto, spusti
 @ Hold: keep Lock-on held. Toggle: press Auto-aim Toggle to enable automatic acquisition. Click look stick to switch targets
 sl Drži: držite Zajem tarče. Preklop: pritisnite Preklop samodejnega merjenja za samodejni zajem. Klik palice za pogled zamenja tarčo
 
+@ How bright the glow is
+sl Kako močan je sij
+
 @ How close an enemy must be to the crosshair for automatic acquisition in toggle mode (degrees)
 sl Kako blizu merka mora biti sovražnik za samodejni zajem v preklopnem načinu (stopinje)
+
+@ How far the glow spreads around a light
+sl Kako daleč se sij razširi okoli svetlobe
 
 @ How far the view tilts up and down when you tilt the controller (pitch axis)
 sl Koliko se pogled nagne gor in dol, ko nagnete krmilnik (os naklona)
@@ -1607,6 +1646,9 @@ sl Kako močno voda visokotlačnega čistilnika potiska sovražnike
 @ How long a hit freezes the game, in milliseconds
 sl Kako dolgo zadetek zamrzne igro, v milisekundah
 
+@ How many lights cast shadows at once, and how smooth their edges are
+sl Koliko luči hkrati meče sence in kako mehki so njihovi robovi
+
 @ How strongly fog covers the sky when fog is on
 sl Kako močno megla prekrije nebo, ko je megla vklopljena
 
@@ -1622,8 +1664,14 @@ sl Potopitveno: prikaže se le za nekaj sekund, ko se vrednost spremeni
 @ Keeps textures sharp on floors and walls seen at steep angles
 sl Ohrani teksture ostre na tleh in stenah, gledanih pod ostrim kotom
 
+@ Light sources glow: lamps, lava, teleporters, sparks and explosions; Bloom Settings tunes it
+sl Viri svetlobe sijejo: svetilke, lava, teleporterji, iskre in eksplozije; Nastavitve sija ga prilagodijo
+
 @ Lights from rockets, muzzle flashes and explosions brighten nearby walls
 sl Luči raket, bliskov ustja cevi in eksplozij osvetlijo bližnje stene
+
+@ Lights from rockets, muzzle flashes and explosions shade walls and models per pixel and cast shadows; needs Dynamic Lights
+sl Svetloba raket, bliskov strelov in eksplozij osvetli stene in modele po slikovnih pikah in meče sence; zahteva Dinamične luči
 
 @ Liquid surfaces swell and ring out where things move through them
 sl Površine tekočin valovijo in tvorijo kroge, kjer se kaj giblje skozi njih
@@ -1738,6 +1786,9 @@ sl Klasične pikčaste delce nadomesti z žarečimi iskrami, dimom in krvjo; mod
 
 @ Resolution and detail inside portal and teleporter views; lower tiers trim nested effects
 sl Ločljivost in podrobnost v pogledih skozi portale in teleporterje; nižje stopnje okrnijo ugnezdene učinke
+
+@ Resolution of the glow: low is cheaper and softer
+sl Ločljivost sija: nizka je cenejša in mehkejša
 
 @ Rippling light patterns on surfaces under water and slime
 sl Valoviti svetlobni vzorci na površinah pod vodo in sluzjo
@@ -1864,6 +1915,9 @@ sl Namesto klasičnih uporablja bolj gladke modele MD5 iz izdaje 2021 (in nadome
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 sl Uporablja barvno svetlobo zemljevida (datoteka .lit ali blok BSPX); izklopljeno da izvirno belo svetlobo. Velja ob naslednjem nalaganju zemljevida
+
+@ Walls, doors and monsters block the light and cast shadows
+sl Stene, vrata in pošasti zastirajo svetlobo in mečejo sence
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 sl Segmenti curka, število kapljic in sijoče senčenje tekočine: nizko uporablja preprostejše prosojne curke; visoko gladke sijoče curke

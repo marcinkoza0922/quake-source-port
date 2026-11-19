@@ -163,6 +163,21 @@ be Якасць крыві
 @ Blood Splatter Settings
 be Налады пырскаў крыві
 
+@ Bloom
+be Свячэнне
+
+@ Bloom Intensity
+be Інтэнсіўнасць свячэння
+
+@ Bloom Quality
+be Якасць свячэння
+
+@ Bloom Settings
+be Налады свячэння
+
+@ Bloom Size
+be Памер свячэння
+
 @ Blue
 be Сіні
 
@@ -174,6 +189,9 @@ be Узмацняе або аслабляе высокія частоты, у д
 
 @ Boost or cut low frequencies in decibels
 be Узмацняе або аслабляе нізкія частоты, у дэцыбелах
+
+@ Bright Surfaces
+be Яркія паверхні
 
 @ Brightness
 be Яркасць
@@ -817,6 +835,12 @@ be Толькі далёкі бой
 @ Reacquire While Held
 be Перазахоп пры ўтрыманні
 
+@ Real-time Dynamic Lights
+be Дынамічнае святло ў рэальным часе
+
+@ Real-time Light Settings
+be Налады святла ў рэальным часе
+
 @ Red
 be Чырвоны
 
@@ -885,6 +909,12 @@ be Бачыць праз парталы
 
 @ See-through Teleporters
 be Празрыстыя тэлепорты
+
+@ Shadow Quality
+be Якасць ценяў
+
+@ Shadows
+be Цені
 
 @ Shirt Color
 be Колер кашулі
@@ -1472,6 +1502,9 @@ be Рэйлган у стылі Quake III: снарад прабівае ўсі�
 @ A Zelda-style hookshot: fire sends a chain hook out; it latches onto hookable surfaces or enemies and reels you in; fire again to let go
 be Крук-кошка ў стылі Zelda: стрэл кідае крук на ланцугу, ён чапляецца за прыдатныя паверхні або ворагаў і падцягвае вас; паўторны стрэл адпускае
 
+@ Also make bright walls and sky glow, like DarkPlaces; 0 keeps the glow to light sources
+be Свецяцца таксама яркія сцены і неба, як у DarkPlaces; 0 пакідае свячэнне толькі ў крыніц святла
+
 @ Also translates the engine's console messages; off keeps them in English
 be Перакладае і паведамленні кансолі рухавіка; калі выключана, яны застаюцца па-англійску
 
@@ -1583,8 +1616,14 @@ be Утрымлівайце агонь і правядзіце прыцэлам 
 @ Hold: keep Lock-on held. Toggle: press Auto-aim Toggle to enable automatic acquisition. Click look stick to switch targets
 be Утрыманне: трымайце «Захоп мэты». Пераключэнне: націсніце «Аўтапрыцэл (пераключэнне)» для аўтаматычнага захопу. Націсканне стыка агляду мяняе мэту
 
+@ How bright the glow is
+be Наколькі яркае свячэнне
+
 @ How close an enemy must be to the crosshair for automatic acquisition in toggle mode (degrees)
 be Наколькі блізка да прыцэла павінен быць вораг для аўтазахопу ў рэжыме пераключэння (градусы)
+
+@ How far the glow spreads around a light
+be Як далёка свячэнне расходзіцца вакол святла
 
 @ How far the view tilts up and down when you tilt the controller (pitch axis)
 be Наколькі агляд нахіляецца ўверх і ўніз, калі вы нахіляеце геймпад (вось тангажу)
@@ -1607,6 +1646,9 @@ be Наколькі моцна вада мыйкі высокага ціску �
 @ How long a hit freezes the game, in milliseconds
 be Колькі мілісекунд доўжыцца стоп-кадр ад удару
 
+@ How many lights cast shadows at once, and how smooth their edges are
+be Колькі крыніц святла адкідаюць цені адначасова і наколькі мяккія іх краі
+
 @ How strongly fog covers the sky when fog is on
 be Наколькі туман закрывае неба, калі туман уключаны
 
@@ -1622,8 +1664,14 @@ be Апусканне: з’яўляецца на некалькі секунд 
 @ Keeps textures sharp on floors and walls seen at steep angles
 be Захоўвае выразнасць тэкстур падлогі і сцен, бачных пад вострым вуглом
 
+@ Light sources glow: lamps, lava, teleporters, sparks and explosions; Bloom Settings tunes it
+be Крыніцы святла свецяцца: лямпы, лава, тэлепорты, іскры і выбухі; Налады свячэння рэгулююць яго
+
 @ Lights from rockets, muzzle flashes and explosions brighten nearby walls
 be Святло ракет, успышак стрэлаў і выбухаў асвятляе бліжэйшыя сцены
+
+@ Lights from rockets, muzzle flashes and explosions shade walls and models per pixel and cast shadows; needs Dynamic Lights
+be Святло ракет, стрэлаў і выбухаў папіксельна асвятляе сцены і мадэлі і адкідае цені; патрэбна Дынамічнае святло
 
 @ Liquid surfaces swell and ring out where things move through them
 be Паверхня вадкасці ўздымаецца і разыходзіцца кругамі там, дзе праз яе нешта рухаецца
@@ -1738,6 +1786,9 @@ be Замяняе класічныя кропкавыя часціцы на іс
 
 @ Resolution and detail inside portal and teleporter views; lower tiers trim nested effects
 be Раздзяляльнасць і дэталізацыя ў выглядах парталаў і тэлепортаў; ніжэйшыя ўзроўні скарачаюць укладзеныя эфекты
+
+@ Resolution of the glow: low is cheaper and softer
+be Раздзяляльнасць свячэння: нізкая танней і мякчэй
 
 @ Rippling light patterns on surfaces under water and slime
 be Мігатлівыя светлавыя ўзоры на паверхнях пад вадой і слізню
@@ -1864,6 +1915,9 @@ be Выкарыстоўвае больш плаўныя мадэлі MD5 з пе
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 be Выкарыстоўвае каляровае асвятленне карты (файл .lit або блок BSPX); выкл. — арыгінальнае белае святло. Ужываецца пры наступнай загрузцы карты
+
+@ Walls, doors and monsters block the light and cast shadows
+be Сцены, дзверы і монстры засланяюць святло і адкідаюць цені
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 be Сегменты струменя, колькасць кропель і глянцавае зацяненне вадкасці: нізкая — простыя паўпразрыстыя струмені; высокая — гладкія глянцавыя

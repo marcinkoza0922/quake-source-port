@@ -163,6 +163,21 @@ pl Jakość krwi
 @ Blood Splatter Settings
 pl Ustawienia rozbryzgów krwi
 
+@ Bloom
+pl Poświata
+
+@ Bloom Intensity
+pl Intensywność poświaty
+
+@ Bloom Quality
+pl Jakość poświaty
+
+@ Bloom Settings
+pl Ustawienia poświaty
+
+@ Bloom Size
+pl Rozmiar poświaty
+
 @ Blue
 pl Niebieski
 
@@ -174,6 +189,9 @@ pl Podbija lub tłumi wysokie tony w decybelach
 
 @ Boost or cut low frequencies in decibels
 pl Podbija lub tłumi niskie tony w decybelach
+
+@ Bright Surfaces
+pl Jasne powierzchnie
 
 @ Brightness
 pl Jasność
@@ -817,6 +835,12 @@ pl Tylko walka dystansowa
 @ Reacquire While Held
 pl Ponowne namierzanie przy trzymaniu
 
+@ Real-time Dynamic Lights
+pl Dynamiczne światła w czasie rzeczywistym
+
+@ Real-time Light Settings
+pl Ustawienia światła w czasie rzeczywistym
+
 @ Red
 pl Czerwony
 
@@ -885,6 +909,12 @@ pl Widok przez portale
 
 @ See-through Teleporters
 pl Przezroczyste teleportery
+
+@ Shadow Quality
+pl Jakość cieni
+
+@ Shadows
+pl Cienie
 
 @ Shirt Color
 pl Kolor koszuli
@@ -1472,6 +1502,9 @@ pl Railgun w stylu Quake III: pocisk przebijający każdego wroga na swojej lini
 @ A Zelda-style hookshot: fire sends a chain hook out; it latches onto hookable surfaces or enemies and reels you in; fire again to let go
 pl Hak w stylu Zeldy: strzał wyrzuca hak na łańcuchu, który zaczepia się o odpowiednie powierzchnie lub wrogów i przyciąga cię; strzel ponownie, by puścić
 
+@ Also make bright walls and sky glow, like DarkPlaces; 0 keeps the glow to light sources
+pl Świecą też jasne ściany i niebo, jak w DarkPlaces; 0 ogranicza poświatę do źródeł światła
+
 @ Also translates the engine's console messages; off keeps them in English
 pl Tłumaczy też komunikaty konsoli silnika; wyłączone zostawia je po angielsku
 
@@ -1583,8 +1616,14 @@ pl Przytrzymaj strzał i przesuń celownik po potworach, by je zakolejkować, pu
 @ Hold: keep Lock-on held. Toggle: press Auto-aim Toggle to enable automatic acquisition. Click look stick to switch targets
 pl Przytrzymaj: trzymaj namierzanie. Przełącz: naciśnij Przełącz autocelowanie, by włączyć automatyczne namierzanie. Wciśnij gałkę patrzenia, by zmienić cel
 
+@ How bright the glow is
+pl Jak jasna jest poświata
+
 @ How close an enemy must be to the crosshair for automatic acquisition in toggle mode (degrees)
 pl Jak blisko celownika musi być wróg, by w trybie przełączania został automatycznie namierzony (stopnie)
+
+@ How far the glow spreads around a light
+pl Jak daleko poświata rozchodzi się wokół światła
 
 @ How far the view tilts up and down when you tilt the controller (pitch axis)
 pl Jak bardzo widok przechyla się w górę i w dół, gdy pochylasz kontroler (oś pionowa)
@@ -1607,6 +1646,9 @@ pl Jak mocno woda z myjki ciśnieniowej odpycha wrogów
 @ How long a hit freezes the game, in milliseconds
 pl Jak długo trafienie zamraża grę, w milisekundach
 
+@ How many lights cast shadows at once, and how smooth their edges are
+pl Ile świateł jednocześnie rzuca cienie i jak miękkie są ich krawędzie
+
 @ How strongly fog covers the sky when fog is on
 pl Jak mocno mgła zakrywa niebo, gdy mgła jest włączona
 
@@ -1622,8 +1664,14 @@ pl Immersyjny: pojawia się na kilka sekund tylko wtedy, gdy zmienia się warto�
 @ Keeps textures sharp on floors and walls seen at steep angles
 pl Utrzymuje ostrość tekstur na podłogach i ścianach widzianych pod ostrym kątem
 
+@ Light sources glow: lamps, lava, teleporters, sparks and explosions; Bloom Settings tunes it
+pl Źródła światła świecą: lampy, lawa, teleporty, iskry i eksplozje; Ustawienia poświaty ją regulują
+
 @ Lights from rockets, muzzle flashes and explosions brighten nearby walls
 pl Światło rakiet, błysków z lufy i wybuchów rozjaśnia pobliskie ściany
+
+@ Lights from rockets, muzzle flashes and explosions shade walls and models per pixel and cast shadows; needs Dynamic Lights
+pl Światło rakiet, błysków wystrzałów i eksplozji oświetla ściany i modele z dokładnością do piksela i rzuca cienie; wymaga Dynamicznych świateł
 
 @ Liquid surfaces swell and ring out where things move through them
 pl Powierzchnie cieczy falują i tworzą kręgi tam, gdzie coś przez nie przechodzi
@@ -1738,6 +1786,9 @@ pl Zastępuje klasyczne kropki świecącymi iskrami, dymem i krwią; mody z wła
 
 @ Resolution and detail inside portal and teleporter views; lower tiers trim nested effects
 pl Rozdzielczość i szczegółowość widoków w portalach i teleporterach; niższe poziomy ograniczają zagnieżdżone efekty
+
+@ Resolution of the glow: low is cheaper and softer
+pl Rozdzielczość poświaty: niska jest tańsza i łagodniejsza
 
 @ Rippling light patterns on surfaces under water and slime
 pl Falujące wzory świetlne na powierzchniach pod wodą i szlamem
@@ -1864,6 +1915,9 @@ pl Używa gładszych modeli MD5 z wydania z 2021 roku (i zamienników MD3 z mod�
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 pl Używa kolorowego światła mapy (plik .lit lub blok BSPX); wyłączone daje oryginalne białe światło. Działa od następnego wczytania mapy
+
+@ Walls, doors and monsters block the light and cast shadows
+pl Ściany, drzwi i potwory zasłaniają światło i rzucają cienie
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 pl Segmenty strumienia, liczba kropli i połysk cieczy: niska używa prostszych przezroczystych strumieni; wysoka gładkich, lśniących strumieni

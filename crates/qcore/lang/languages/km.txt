@@ -163,6 +163,21 @@ km គុណភាព​ឈាម
 @ Blood Splatter Settings
 km ការ​កំណត់​ស្នាម​ឈាម​ខ្ទាត
 
+@ Bloom
+km ពន្លឺ​ភ្លឺ​ចាំង
+
+@ Bloom Intensity
+km កម្រិត​ពន្លឺ​ចាំង
+
+@ Bloom Quality
+km គុណភាព​ពន្លឺ​ចាំង
+
+@ Bloom Settings
+km ការ​កំណត់​ពន្លឺ​ចាំង
+
+@ Bloom Size
+km ទំហំ​ពន្លឺ​ចាំង
+
 @ Blue
 km ខៀវ
 
@@ -174,6 +189,9 @@ km បង្កើន​ឬ​កាត់​ប្រេកង់​ខ្ព�
 
 @ Boost or cut low frequencies in decibels
 km បង្កើន​ឬ​កាត់​ប្រេកង់​ទាប​គិត​ជា​ដេស៊ីបែល
+
+@ Bright Surfaces
+km ផ្ទៃ​ភ្លឺ
 
 @ Brightness
 km ពន្លឺ
@@ -817,6 +835,12 @@ km តែ​វាយ​ពី​ចម្ងាយ
 @ Reacquire While Held
 km ចាប់​គោលដៅ​ថ្មី​ពេល​សង្កត់
 
+@ Real-time Dynamic Lights
+km ពន្លឺ​ឌីណាមិក​ពេល​ជាក់ស្ដែង
+
+@ Real-time Light Settings
+km ការ​កំណត់​ពន្លឺ​ពេល​ជាក់ស្ដែង
+
 @ Red
 km ក្រហម
 
@@ -885,6 +909,12 @@ km មើល​ឆ្លង​ផតថល
 
 @ See-through Teleporters
 km ច្រក​ផ្លាស់​ទី​មើល​ឆ្លង​បាន
+
+@ Shadow Quality
+km គុណភាព​ស្រមោល
+
+@ Shadows
+km ស្រមោល
 
 @ Shirt Color
 km ពណ៌​អាវ
@@ -1472,6 +1502,9 @@ km រ៉េលហ្គាន​បែប Quake III: គ្រាប់​ដ�
 @ A Zelda-style hookshot: fire sends a chain hook out; it latches onto hookable surfaces or enemies and reels you in; fire again to let go
 km ខ្សែ​ទំពក់​បែប Zelda: ការ​បាញ់​បញ្ជូន​ទំពក់​ច្រវាក់​ចេញ; វា​ជាប់​នឹង​ផ្ទៃ​ឬ​សត្រូវ​ដែល​អាច​ទំពក់​បាន ហើយ​ទាញ​អ្នក​ចូល; បាញ់​ម្ដង​ទៀត​ដើម្បី​លែង
 
+@ Also make bright walls and sky glow, like DarkPlaces; 0 keeps the glow to light sources
+km ធ្វើ​ឲ្យ​ជញ្ជាំង​ភ្លឺ និង​មេឃ​ភ្លឺ​ចាំង​ដែរ ដូច DarkPlaces 0 ទុក​ពន្លឺ​ចាំង​តែ​ប្រភព​ពន្លឺ
+
 @ Also translates the engine's console messages; off keeps them in English
 km បក​ប្រែ​សារ​កុងសូល​របស់​ម៉ាស៊ីន​ហ្គេម​ផង​ដែរ; បិទ​រក្សា​វា​ជា​ភាសា​អង់គ្លេស
 
@@ -1583,8 +1616,14 @@ km សង្កត់​បាញ់​ហើយ​អូស​សញ្ញា�
 @ Hold: keep Lock-on held. Toggle: press Auto-aim Toggle to enable automatic acquisition. Click look stick to switch targets
 km សង្កត់​ជាប់: សង្កត់ ចាក់​សោ​គោលដៅ​ជាប់។ បិទ/បើក: ចុច បិទ/បើក​តម្រង់​ស្វ័យ​ប្រវត្តិ ដើម្បី​បើក​ការ​ចាប់​គោលដៅ​ស្វ័យ​ប្រវត្តិ។ ចុច​ដង​បញ្ជា​មើល​ដើម្បី​ប្ដូរ​គោលដៅ
 
+@ How bright the glow is
+km ពន្លឺ​ចាំង​ភ្លឺ​ប៉ុណ្ណា
+
 @ How close an enemy must be to the crosshair for automatic acquisition in toggle mode (degrees)
 km ភាព​ជិត​ដែល​សត្រូវ​ត្រូវ​នៅ​ពី​សញ្ញា​តម្រង់​ដើម្បី​ចាប់​ស្វ័យ​ប្រវត្តិ​ក្នុង​របៀប​បិទ/បើក (ដឺក្រេ)
+
+@ How far the glow spreads around a light
+km ពន្លឺ​ចាំង​រីក​ទៅ​ឆ្ងាយ​ប៉ុណ្ណា​ជុំវិញ​ពន្លឺ
 
 @ How far the view tilts up and down when you tilt the controller (pitch axis)
 km កម្រិត​ដែល​ទិដ្ឋភាព​ផ្ងារ​ឡើង​ចុះ​ពេល​អ្នក​ផ្អៀង​ឧបករណ៍​បញ្ជា (អ័ក្ស pitch)
@@ -1607,6 +1646,9 @@ km កម្លាំង​ដែល​ទឹក​របស់​ម៉ាស�
 @ How long a hit freezes the game, in milliseconds
 km រយៈ​ពេល​ដែល​ការ​វាយ​ធ្វើ​ឱ្យ​ហ្គេម​កក គិត​ជា​មិល្លី​វិនាទី
 
+@ How many lights cast shadows at once, and how smooth their edges are
+km ចំនួន​ពន្លឺ​ដែល​បង្កើត​ស្រមោល​ក្នុង​ពេល​តែ​មួយ និង​ភាព​រលោង​នៃ​គែម​របស់​វា
+
 @ How strongly fog covers the sky when fog is on
 km កម្រិត​ដែល​អ័ព្ទ​គ្រប​មេឃ​ពេល​អ័ព្ទ​បើក
 
@@ -1622,8 +1664,14 @@ km ស៊ីជម្រៅ: បង្ហាញ​តែ​ពីរ​បី​
 @ Keeps textures sharp on floors and walls seen at steep angles
 km រក្សា​វាយនភាព​ឱ្យ​ច្បាស់​លើ​កម្រាល​និង​ជញ្ជាំង​ដែល​មើល​ពី​មុំ​ចោត
 
+@ Light sources glow: lamps, lava, teleporters, sparks and explosions; Bloom Settings tunes it
+km ប្រភព​ពន្លឺ​ភ្លឺ​ចាំង៖ ចង្កៀង កម្អែល​ភ្នំ​ភ្លើង ឧបករណ៍​បញ្ជូន ផ្កា​ភ្លើង និង​ការ​ផ្ទុះ ការ​កំណត់​ពន្លឺ​ចាំង​កែ​សម្រួល​វា
+
 @ Lights from rockets, muzzle flashes and explosions brighten nearby walls
 km ពន្លឺ​ពី​រ៉ុក្កែត ពន្លឺ​មាត់​កាំភ្លើង និង​ការ​ផ្ទុះ​ធ្វើ​ឱ្យ​ជញ្ជាំង​ក្បែរ​នោះ​ភ្លឺ
+
+@ Lights from rockets, muzzle flashes and explosions shade walls and models per pixel and cast shadows; needs Dynamic Lights
+km ពន្លឺ​គ្រាប់​រ៉ុក្កែត ពន្លឺ​បាញ់ និង​ការ​ផ្ទុះ​បំភ្លឺ​ជញ្ជាំង និង​ម៉ូដែល​តាម​ភីកសែល ហើយ​បង្កើត​ស្រមោល ត្រូវ​ការ​ពន្លឺ​ឌីណាមិក
 
 @ Liquid surfaces swell and ring out where things move through them
 km ផ្ទៃ​វត្ថុ​រាវ​ហើម​និង​រលក​ជា​រង្វង់​កន្លែង​ដែល​វត្ថុ​ផ្លាស់​ទី​កាត់
@@ -1738,6 +1786,9 @@ km ជំនួស​ភាគ​ល្អិត​ចំណុច​បុរ�
 
 @ Resolution and detail inside portal and teleporter views; lower tiers trim nested effects
 km គុណភាព​បង្ហាញ​និង​លម្អិត​ក្នុង​ទិដ្ឋភាព​ផតថល​និង​ច្រក​ផ្លាស់​ទី; កម្រិត​ទាប​កាត់​ឥទ្ធិពល​ជាន់​គ្នា
+
+@ Resolution of the glow: low is cheaper and softer
+km គុណភាព​បង្ហាញ​ពន្លឺ​ចាំង៖ ទាប​ថោក​ជាង និង​ទន់​ជាង
 
 @ Rippling light patterns on surfaces under water and slime
 km លំនាំ​ពន្លឺ​រលក​លើ​ផ្ទៃ​ក្រោម​ទឹក​និង​ស្លាយ
@@ -1864,6 +1915,9 @@ km ប្រើ​ម៉ូដែល MD5 រលូន​ជាង​របស់
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 km ប្រើ​ពន្លឺ​ពណ៌​របស់​ផែនទី (ឯកសារ .lit ឬ BSPX lump); បិទ​ផ្ដល់​ពន្លឺ​ស​ដើម។ មាន​ប្រសិទ្ធភាព​នៅ​ពេល​ផ្ទុក​ផែនទី​បន្ទាប់
+
+@ Walls, doors and monsters block the light and cast shadows
+km ជញ្ជាំង ទ្វារ និង​បិសាច​បាំង​ពន្លឺ ហើយ​បង្កើត​ស្រមោល
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 km ផ្នែក​ទឹក​បាញ់ ចំនួន​ដំណក់ និង​ការ​ដាក់​ស្រមោល​វត្ថុ​រាវ​ភ្លឺ​រលោង: ទាប​ប្រើ​ខ្សែ​ទឹក​ថ្លា​សាមញ្ញ​ជាង; ខ្ពស់​ប្រើ​ទឹក​បាញ់​រលូន​ភ្លឺ​រលោង

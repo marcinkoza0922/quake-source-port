@@ -163,6 +163,21 @@ cs Kvalita krve
 @ Blood Splatter Settings
 cs Nastavení cákanců krve
 
+@ Bloom
+cs Záře
+
+@ Bloom Intensity
+cs Intenzita záře
+
+@ Bloom Quality
+cs Kvalita záře
+
+@ Bloom Settings
+cs Nastavení záře
+
+@ Bloom Size
+cs Velikost záře
+
 @ Blue
 cs Modrá
 
@@ -174,6 +189,9 @@ cs Zesílí nebo zeslabí výšky v decibelech
 
 @ Boost or cut low frequencies in decibels
 cs Zesílí nebo zeslabí basy v decibelech
+
+@ Bright Surfaces
+cs Světlé povrchy
 
 @ Brightness
 cs Jas
@@ -817,6 +835,12 @@ cs Jen na dálku
 @ Reacquire While Held
 cs Znovu zaměřit při držení
 
+@ Real-time Dynamic Lights
+cs Dynamická světla v reálném čase
+
+@ Real-time Light Settings
+cs Nastavení světel v reálném čase
+
 @ Red
 cs Červená
 
@@ -885,6 +909,12 @@ cs Vidět skrz portály
 
 @ See-through Teleporters
 cs Průhledné teleporty
+
+@ Shadow Quality
+cs Kvalita stínů
+
+@ Shadows
+cs Stíny
 
 @ Shirt Color
 cs Barva trička
@@ -1472,6 +1502,9 @@ cs Railgun ve stylu Quake III: střela, která prorazí každého nepřítele na
 @ A Zelda-style hookshot: fire sends a chain hook out; it latches onto hookable surfaces or enemies and reels you in; fire again to let go
 cs Hák ve stylu Zeldy: střelba vymrští hák na řetězu, který se zachytí na vhodných površích nebo nepřátelích a přitáhne vás; dalším výstřelem ho pustíte
 
+@ Also make bright walls and sky glow, like DarkPlaces; 0 keeps the glow to light sources
+cs Září také světlé stěny a obloha, jako v DarkPlaces; 0 ponechá záři jen zdrojům světla
+
 @ Also translates the engine's console messages; off keeps them in English
 cs Překládá i zprávy konzole enginu; vypnuto je ponechá v angličtině
 
@@ -1583,8 +1616,14 @@ cs Držte střelbu a přejeďte zaměřovačem přes monstra, čímž je zařad�
 @ Hold: keep Lock-on held. Toggle: press Auto-aim Toggle to enable automatic acquisition. Click look stick to switch targets
 cs Držet: držte Zaměření cíle. Přepínat: stiskněte Přepínat automatické míření pro automatické zaměřování. Kliknutím páčky pohledu přepnete cíl
 
+@ How bright the glow is
+cs Jak jasná je záře
+
 @ How close an enemy must be to the crosshair for automatic acquisition in toggle mode (degrees)
 cs Jak blízko musí být nepřítel u zaměřovače, aby byl v režimu přepínání automaticky zaměřen (stupně)
+
+@ How far the glow spreads around a light
+cs Jak daleko se záře šíří kolem světla
 
 @ How far the view tilts up and down when you tilt the controller (pitch axis)
 cs Jak moc se pohled naklání nahoru a dolů, když nakloníte ovladač (osa sklonu)
@@ -1607,6 +1646,9 @@ cs Jak silně voda z tlakového čističe odtlačuje nepřátele
 @ How long a hit freezes the game, in milliseconds
 cs Jak dlouho zásah zmrazí hru, v milisekundách
 
+@ How many lights cast shadows at once, and how smooth their edges are
+cs Kolik světel vrhá stíny současně a jak měkké jsou jejich okraje
+
 @ How strongly fog covers the sky when fog is on
 cs Jak silně mlha zakrývá oblohu, když je mlha zapnutá
 
@@ -1622,8 +1664,14 @@ cs Pohlcující: zobrazí se jen na pár sekund, když se hodnota změní
 @ Keeps textures sharp on floors and walls seen at steep angles
 cs Udrží textury ostré na podlahách a stěnách viděných pod ostrým úhlem
 
+@ Light sources glow: lamps, lava, teleporters, sparks and explosions; Bloom Settings tunes it
+cs Zdroje světla září: lampy, láva, teleporty, jiskry a exploze; Nastavení záře ji upravuje
+
 @ Lights from rockets, muzzle flashes and explosions brighten nearby walls
 cs Světla raket, záblesků výstřelů a výbuchů osvětlí blízké stěny
+
+@ Lights from rockets, muzzle flashes and explosions shade walls and models per pixel and cast shadows; needs Dynamic Lights
+cs Světla raket, výstřelů a explozí osvětlují stěny a modely po pixelech a vrhají stíny; vyžaduje Dynamická světla
 
 @ Liquid surfaces swell and ring out where things move through them
 cs Hladiny kapalin se vzdouvají a vytvářejí kruhy tam, kudy něco prochází
@@ -1738,6 +1786,9 @@ cs Nahradí klasické tečkové částice zářícími jiskrami, kouřem a krví
 
 @ Resolution and detail inside portal and teleporter views; lower tiers trim nested effects
 cs Rozlišení a detail v pohledech portálů a teleportů; nižší stupně omezí vnořené efekty
+
+@ Resolution of the glow: low is cheaper and softer
+cs Rozlišení záře: nízké je levnější a měkčí
 
 @ Rippling light patterns on surfaces under water and slime
 cs Vlnící se světelné vzory na površích pod vodou a slizem
@@ -1864,6 +1915,9 @@ cs Použije hladší modely MD5 z remasteru z roku 2021 (a náhrady MD3 z modů)
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 cs Použije barevné světlo mapy (soubor .lit nebo blok BSPX); vypnuto dává původní bílé světlo. Projeví se při příštím načtení mapy
+
+@ Walls, doors and monsters block the light and cast shadows
+cs Stěny, dveře a monstra zastiňují světlo a vrhají stíny
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 cs Segmenty proudu, počet kapek a lesklé stínování kapaliny: nízká používá jednodušší průsvitné proudy; vysoká hladké lesklé proudy

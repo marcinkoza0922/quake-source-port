@@ -163,6 +163,21 @@ yue 血液質素
 @ Blood Splatter Settings
 yue 血跡飛濺設定
 
+@ Bloom
+yue 光暈
+
+@ Bloom Intensity
+yue 光暈強度
+
+@ Bloom Quality
+yue 光暈質素
+
+@ Bloom Settings
+yue 光暈設定
+
+@ Bloom Size
+yue 光暈大細
+
 @ Blue
 yue 藍
 
@@ -174,6 +189,9 @@ yue 以分貝調高或者調低高頻
 
 @ Boost or cut low frequencies in decibels
 yue 以分貝調高或者調低低頻
+
+@ Bright Surfaces
+yue 光亮表面
 
 @ Brightness
 yue 光暗
@@ -817,6 +835,12 @@ yue 只限遠程
 @ Reacquire While Held
 yue 撳住時重新鎖定
 
+@ Real-time Dynamic Lights
+yue 實時動態燈光
+
+@ Real-time Light Settings
+yue 實時燈光設定
+
 @ Red
 yue 紅
 
@@ -885,6 +909,12 @@ yue 睇穿傳送門
 
 @ See-through Teleporters
 yue 睇得穿嘅傳送點
+
+@ Shadow Quality
+yue 陰影質素
+
+@ Shadows
+yue 陰影
 
 @ Shirt Color
 yue 衫顏色
@@ -1472,6 +1502,9 @@ yue Quake III風格嘅磁軌炮：彈頭會貫穿直線上所有敵人，每發�
 @ A Zelda-style hookshot: fire sends a chain hook out; it latches onto hookable surfaces or enemies and reels you in; fire again to let go
 yue 薩爾達風格嘅鉤爪：射擊會射出鎖鏈鉤，勾住可以勾嘅表面或者敵人之後將你扯過去；再射一次就放手
 
+@ Also make bright walls and sky glow, like DarkPlaces; 0 keeps the glow to light sources
+yue 連光亮嘅牆同天空都會發光，好似 DarkPlaces；0 只係畀光源發光
+
 @ Also translates the engine's console messages; off keeps them in English
 yue 連引擎嘅控制台訊息都一齊翻譯；關閉就保留英文
 
@@ -1583,8 +1616,14 @@ yue 撳住射擊再將準星掃過怪物嚟排隊，放手就擲：迴力鏢會�
 @ Hold: keep Lock-on held. Toggle: press Auto-aim Toggle to enable automatic acquisition. Click look stick to switch targets
 yue 撳住：一直撳住鎖定。切換：撳自動瞄準切換鍵啟用自動鎖定。撳落視角搖桿可以轉目標
 
+@ How bright the glow is
+yue 光暈有幾光
+
 @ How close an enemy must be to the crosshair for automatic acquisition in toggle mode (degrees)
 yue 切換模式下，敵人要離準星幾近先會自動鎖定（度）
+
+@ How far the glow spreads around a light
+yue 光暈喺光源周圍散得幾遠
 
 @ How far the view tilts up and down when you tilt the controller (pitch axis)
 yue 傾側手掣時視角上下傾斜嘅幅度（俯仰軸）
@@ -1607,6 +1646,9 @@ yue 高壓清洗機水柱推動敵人嘅力度
 @ How long a hit freezes the game, in milliseconds
 yue 命中時遊戲凍結嘅時間（毫秒）
 
+@ How many lights cast shadows at once, and how smooth their edges are
+yue 同一時間有幾多盞燈投下陰影，同埋陰影邊緣有幾柔和
+
 @ How strongly fog covers the sky when fog is on
 yue 開咗霧時霧氣遮住天空嘅程度
 
@@ -1622,8 +1664,14 @@ yue 沉浸：淨係喺數值變化時顯示幾秒
 @ Keeps textures sharp on floors and walls seen at steep angles
 yue 令斜角睇到嘅地板同牆身材質保持清晰
 
+@ Light sources glow: lamps, lava, teleporters, sparks and explosions; Bloom Settings tunes it
+yue 光源會發光：燈、熔岩、傳送門、火花同爆炸；用光暈設定調校
+
 @ Lights from rockets, muzzle flashes and explosions brighten nearby walls
 yue 火箭、槍口火光同爆炸嘅光會照亮附近牆身
+
+@ Lights from rockets, muzzle flashes and explosions shade walls and models per pixel and cast shadows; needs Dynamic Lights
+yue 火箭、槍口火光同爆炸嘅光會逐個像素照亮牆同模型，仲會投下陰影；要開動態燈光
 
 @ Liquid surfaces swell and ring out where things move through them
 yue 物件穿過液體表面時會產生起伏同漣漪
@@ -1738,6 +1786,9 @@ yue 用發光火花、煙同血取代經典點狀粒子；有自己粒子效果�
 
 @ Resolution and detail inside portal and teleporter views; lower tiers trim nested effects
 yue 傳送門同傳送點畫面入面嘅解像度同細節；較低等級會削減巢狀效果
+
+@ Resolution of the glow: low is cheaper and softer
+yue 光暈解像度：低啲慳啲又柔和啲
 
 @ Rippling light patterns on surfaces under water and slime
 yue 水同黏液下面表面嘅波動光紋
@@ -1864,6 +1915,9 @@ yue 用2021年重製版較順滑嘅MD5模型（同埋模組嘅MD3替換模型）
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 yue 用地圖嘅彩色光照（.lit檔案或者BSPX區塊）；關閉就係原版白光。下次載入地圖時生效
+
+@ Walls, doors and monsters block the light and cast shadows
+yue 牆、門同怪物會擋住光，投下陰影
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 yue 水柱分段、水滴數量同光澤液體著色：低用較簡單嘅半透明水流；高用順滑有光澤嘅水柱

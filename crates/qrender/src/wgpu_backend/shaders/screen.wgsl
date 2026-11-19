@@ -13,6 +13,9 @@ struct DrawU {
 // post pass only: the palette and the r_softemu lookup table (post.rs)
 @group(1) @binding(4) var palette: texture_2d<f32>;
 @group(1) @binding(5) var<storage, read> lut: array<u32>;
+// post pass only: r_bloom chain level 0 and a linear sampler for it
+@group(1) @binding(6) var bloom_t: texture_2d<f32>;
+@group(1) @binding(7) var bloom_s: sampler;
 
 struct UiIn {
     @location(0) pos: vec2<f32>,
@@ -219,6 +222,7 @@ fn goggles(c: vec3<f32>, uv: vec2<f32>, q: vec2<f32>, frag: vec2<f32>) -> vec3<f
 // du.color: polyblend; du.params: x gamma, y contrast, z warp clock (< 0 off), w aspect
 // du.model[0]: motion blur scale x, y (0 = off), speed blur, motion blur quality
 // du.model[1]: output size, dither strength, scene pixels per output pixel
+// du.model[2]: goggles gain, noise, time, r_bloom strength; du.model[3]: bloom uv rectangle
 // du.ix: softemu mode (0 truecolour, 1 palettize + dither, 2 palettize),
 // colour-blind filter, goggles mode, goggles quality
 @fragment fn fs_post(i: PostOut) -> @location(0) vec4<f32> {
@@ -233,6 +237,11 @@ fn goggles(c: vec3<f32>, uv: vec2<f32>, q: vec2<f32>, frag: vec2<f32>) -> vec3<f
     }
     if (du.model[0].z > 0.0) {
         c = speed_blur(c, uv, i.q, du.model[0].z);
+    }
+    // r_bloom (du.model[2].w strength, du.model[3] level 0 uv rectangle):
+    // added before palettizing and gamma, like the Vulkan post pass
+    if (du.model[2].w > 0.0) {
+        c += textureSampleLevel(bloom_t, bloom_s, mix(du.model[3].xy, du.model[3].zw, q), 0.0).rgb * du.model[2].w;
     }
     let mode = du.ix.x;
     if (mode != 0u) {

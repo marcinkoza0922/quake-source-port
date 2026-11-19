@@ -163,6 +163,21 @@ sw Ubora wa Damu
 @ Blood Splatter Settings
 sw Mipangilio ya Matone ya Damu
 
+@ Bloom
+sw Mng'ao
+
+@ Bloom Intensity
+sw Ukali wa mng'ao
+
+@ Bloom Quality
+sw Ubora wa mng'ao
+
+@ Bloom Settings
+sw Mipangilio ya mng'ao
+
+@ Bloom Size
+sw Ukubwa wa mng'ao
+
 @ Blue
 sw Bluu
 
@@ -174,6 +189,9 @@ sw Ongeza au punguza masafa ya juu kwa desibeli
 
 @ Boost or cut low frequencies in decibels
 sw Ongeza au punguza masafa ya chini kwa desibeli
+
+@ Bright Surfaces
+sw Nyuso angavu
 
 @ Brightness
 sw Mwangaza
@@ -817,6 +835,12 @@ sw Mbali pekee
 @ Reacquire While Held
 sw Lenga Upya Ukishikilia
 
+@ Real-time Dynamic Lights
+sw Taa zinazobadilika za wakati halisi
+
+@ Real-time Light Settings
+sw Mipangilio ya mwanga wa wakati halisi
+
 @ Red
 sw Nyekundu
 
@@ -885,6 +909,12 @@ sw Ona Kupitia Malango
 
 @ See-through Teleporters
 sw Teleporta za Kuona Kupitia
+
+@ Shadow Quality
+sw Ubora wa vivuli
+
+@ Shadows
+sw Vivuli
 
 @ Shirt Color
 sw Rangi ya Shati
@@ -1472,6 +1502,9 @@ sw Railgun ya mtindo wa Quake III: risasi inayopenya kila adui kwenye mstari wak
 @ A Zelda-style hookshot: fire sends a chain hook out; it latches onto hookable surfaces or enemies and reels you in; fire again to let go
 sw Ndoano ya mtindo wa Zelda: kufyatua kunarusha ndoano ya mnyororo; inanasa nyuso zinazonasika au maadui na kukuvuta; fyatua tena kuachilia
 
+@ Also make bright walls and sky glow, like DarkPlaces; 0 keeps the glow to light sources
+sw Hufanya pia kuta angavu na anga ving'ae, kama DarkPlaces; 0 huweka mng'ao kwenye vyanzo vya mwanga
+
 @ Also translates the engine's console messages; off keeps them in English
 sw Pia hutafsiri ujumbe wa konsoli wa injini; ukizima, unabaki kwa Kiingereza
 
@@ -1583,8 +1616,14 @@ sw Shikilia kufyatua na pitisha kilenga juu ya mazimwi kuyapanga, achilia kurush
 @ Hold: keep Lock-on held. Toggle: press Auto-aim Toggle to enable automatic acquisition. Click look stick to switch targets
 sw Shikilia: endelea kushikilia Kufunga Lengo. Badili: bonyeza Badili Kulenga Kiotomatiki kuwasha unasaji wa kiotomatiki. Bofya stick ya kuangalia kubadili lengo
 
+@ How bright the glow is
+sw Mng'ao una ukali kiasi gani
+
 @ How close an enemy must be to the crosshair for automatic acquisition in toggle mode (degrees)
 sw Ukaribu wa adui kwa kilenga ili anaswe kiotomatiki katika hali ya kubadili (nyuzi)
+
+@ How far the glow spreads around a light
+sw Mng'ao unaenea umbali gani kuzunguka mwanga
 
 @ How far the view tilts up and down when you tilt the controller (pitch axis)
 sw Kiasi mwonekano unainama juu na chini unapoinamisha kidhibiti (mhimili wa pitch)
@@ -1607,6 +1646,9 @@ sw Nguvu ya maji ya Powerwasher kusukuma maadui
 @ How long a hit freezes the game, in milliseconds
 sw Muda ambao pigo hugandisha mchezo, kwa milisekunde
 
+@ How many lights cast shadows at once, and how smooth their edges are
+sw Taa ngapi hutupa vivuli kwa wakati mmoja, na kingo zake ni laini kiasi gani
+
 @ How strongly fog covers the sky when fog is on
 sw Kiasi ukungu unafunika anga ukungu ukiwa umewashwa
 
@@ -1622,8 +1664,14 @@ sw Ya kuzama ndani: huonekana kwa sekunde chache tu thamani yake inapobadilika
 @ Keeps textures sharp on floors and walls seen at steep angles
 sw Huweka tekstua kali kwenye sakafu na kuta zinazoonekana kwa pembe kali
 
+@ Light sources glow: lamps, lava, teleporters, sparks and explosions; Bloom Settings tunes it
+sw Vyanzo vya mwanga vinang'aa: taa, lava, visafirishaji, cheche na milipuko; Mipangilio ya mng'ao inaurekebisha
+
 @ Lights from rockets, muzzle flashes and explosions brighten nearby walls
 sw Mwanga wa roketi, mimweko ya mdomo wa bunduki na milipuko hung'arisha kuta zilizo karibu
+
+@ Lights from rockets, muzzle flashes and explosions shade walls and models per pixel and cast shadows; needs Dynamic Lights
+sw Mwanga wa roketi, mwako wa risasi na milipuko huangaza kuta na miundo kwa kila pikseli na hutupa vivuli; inahitaji Taa zinazobadilika
 
 @ Liquid surfaces swell and ring out where things move through them
 sw Nyuso za vimiminika hufura na kutoa pete vitu vinapopita ndani yake
@@ -1738,6 +1786,9 @@ sw Hubadilisha chembechembe za nukta za asili kwa cheche zinazong'aa, moshi na d
 
 @ Resolution and detail inside portal and teleporter views; lower tiers trim nested effects
 sw Ubora na undani ndani ya mionekano ya malango na teleporta; viwango vya chini hupunguza athari za ndani
+
+@ Resolution of the glow: low is cheaper and softer
+sw Ubora wa mng'ao: wa chini ni nafuu na laini zaidi
 
 @ Rippling light patterns on surfaces under water and slime
 sw Mifumo ya mwanga inayotikisika kwenye nyuso chini ya maji na ute
@@ -1864,6 +1915,9 @@ sw Hutumia modeli laini za MD5 za toleo jipya la 2021 (na mbadala za MD3 kutoka 
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 sw Hutumia mwanga wa rangi wa ramani (faili .lit au BSPX lump); ukizima, mwanga ni mweupe wa asili. Hutumika ramani inayofuata ikipakiwa
+
+@ Walls, doors and monsters block the light and cast shadows
+sw Kuta, milango na majitu huzuia mwanga na kutupa vivuli
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 sw Vipande vya mkondo wa maji, idadi ya matone na kivuli cha kung'aa cha vimiminika: chini hutumia mikondo rahisi angavu; juu hutumia mikondo laini inayong'aa

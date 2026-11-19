@@ -163,6 +163,21 @@ am የደም ጥራት
 @ Blood Splatter Settings
 am የደም ፍንጣቂ ቅንብሮች
 
+@ Bloom
+am የብርሃን ፍካት
+
+@ Bloom Intensity
+am የፍካት ጥንካሬ
+
+@ Bloom Quality
+am የፍካት ጥራት
+
+@ Bloom Settings
+am የፍካት ቅንብሮች
+
+@ Bloom Size
+am የፍካት መጠን
+
 @ Blue
 am ሰማያዊ
 
@@ -174,6 +189,9 @@ am ከፍተኛ ድግግሞሾችን በዴሲቤል ጨምር ወይም ቀን
 
 @ Boost or cut low frequencies in decibels
 am ዝቅተኛ ድግግሞሾችን በዴሲቤል ጨምር ወይም ቀንስ
+
+@ Bright Surfaces
+am ደማቅ ገጽታዎች
 
 @ Brightness
 am ብሩህነት
@@ -817,6 +835,12 @@ am የርቀት ጥቃት ብቻ
 @ Reacquire While Held
 am ተይዞ ሳለ እንደገና ያዝ
 
+@ Real-time Dynamic Lights
+am የእውነተኛ ጊዜ ተለዋዋጭ ብርሃኖች
+
+@ Real-time Light Settings
+am የእውነተኛ ጊዜ ብርሃን ቅንብሮች
+
 @ Red
 am ቀይ
 
@@ -885,6 +909,12 @@ am በፖርታሎች ውስጥ እይ
 
 @ See-through Teleporters
 am አሳላፊ ቴሌፖርተሮች
+
+@ Shadow Quality
+am የጥላ ጥራት
+
+@ Shadows
+am ጥላዎች
 
 @ Shirt Color
 am የሸሚዝ ቀለም
@@ -1472,6 +1502,9 @@ am የQuake III አይነት ሬልገን፦ በመስመሩ ላይ ያለን �
 @ A Zelda-style hookshot: fire sends a chain hook out; it latches onto hookable surfaces or enemies and reels you in; fire again to let go
 am የZelda አይነት መንጠቆ፦ መተኮስ የሰንሰለት መንጠቆ ይልካል፤ በሚያዙ ገጽታዎች ወይም ጠላቶች ላይ ተጣብቆ ይጎትትዎታል፤ ለመልቀቅ እንደገና ይተኩሱ
 
+@ Also make bright walls and sky glow, like DarkPlaces; 0 keeps the glow to light sources
+am ደማቅ ግድግዳዎችንና ሰማይንም ያበራል፣ እንደ DarkPlaces፤ 0 ፍካቱን ለብርሃን ምንጮች ብቻ ያደርጋል
+
 @ Also translates the engine's console messages; off keeps them in English
 am የሞተሩን የኮንሶል መልዕክቶችም ይተረጉማል፤ ጠፍቶ ሲሆን በእንግሊዝኛ ይቆያሉ
 
@@ -1583,8 +1616,14 @@ am መተኮሻውን ይዘው ማነጣጠሪያውን በጭራቆች ላይ 
 @ Hold: keep Lock-on held. Toggle: press Auto-aim Toggle to enable automatic acquisition. Click look stick to switch targets
 am ያዝ፦ Lock-onን ተጭነው ይያዙ። ቀያይር፦ ራስ-ሰር ዒላማ ለማግኘት Auto-aim Toggleን ይጫኑ። ዒላማ ለመቀየር የእይታ ስቲኩን ይጫኑ
 
+@ How bright the glow is
+am ፍካቱ ምን ያህል ደማቅ እንደሆነ
+
 @ How close an enemy must be to the crosshair for automatic acquisition in toggle mode (degrees)
 am በቀያይር ሁነታ ለራስ-ሰር ዒላማ ጠላት ከማነጣጠሪያው ምን ያህል መቅረብ አለበት (ዲግሪ)
+
+@ How far the glow spreads around a light
+am ፍካቱ በብርሃን ዙሪያ ምን ያህል እንደሚሰፋ
 
 @ How far the view tilts up and down when you tilt the controller (pitch axis)
 am መቆጣጠሪያውን ሲያዘነብሉ እይታው ወደ ላይና ወደ ታች ምን ያህል ያዘነብላል (የላይ-ታች ዘንግ)
@@ -1607,6 +1646,9 @@ am የPowerwasher ውሃ ጠላቶችን ምን ያህል በኃይል ይገፋ
 @ How long a hit freezes the game, in milliseconds
 am ምት ጨዋታውን ለምን ያህል ጊዜ ያቀዘቅዛል፣ በሚሊሰከንዶች
 
+@ How many lights cast shadows at once, and how smooth their edges are
+am ስንት ብርሃኖች በአንድ ጊዜ ጥላ እንደሚጥሉ እና ጠርዞቻቸው ምን ያህል ለስላሳ እንደሆኑ
+
 @ How strongly fog covers the sky when fog is on
 am ጭጋግ በርቶ ሳለ ጭጋግ ሰማዩን ምን ያህል ይሸፍናል
 
@@ -1622,8 +1664,14 @@ am አስጠላቂ፦ እሴቱ ሲቀየር ብቻ ለጥቂት ሰከንዶች
 @ Keeps textures sharp on floors and walls seen at steep angles
 am በሾጣጣ ማዕዘን በሚታዩ ወለሎችና ግድግዳዎች ላይ ቴክስቸሮችን ጥርት አድርጎ ይይዛል
 
+@ Light sources glow: lamps, lava, teleporters, sparks and explosions; Bloom Settings tunes it
+am የብርሃን ምንጮች ያበራሉ፦ መብራቶች፣ ላቫ፣ ቴሌፖርተሮች፣ ብልጭታዎች እና ፍንዳታዎች፤ የፍካት ቅንብሮች ያስተካክሉታል
+
 @ Lights from rockets, muzzle flashes and explosions brighten nearby walls
 am ከሮኬቶች፣ ከአፈሙዝ ብልጭታዎችና ከፍንዳታዎች የሚመጡ መብራቶች በአቅራቢያ ያሉ ግድግዳዎችን ያበራሉ
+
+@ Lights from rockets, muzzle flashes and explosions shade walls and models per pixel and cast shadows; needs Dynamic Lights
+am የሮኬቶች፣ የተኩስ ብልጭታዎች እና የፍንዳታዎች ብርሃን ግድግዳዎችንና ሞዴሎችን በፒክሰል ያበራል እና ጥላ ይጥላል፤ ተለዋዋጭ ብርሃኖችን ይፈልጋል
 
 @ Liquid surfaces swell and ring out where things move through them
 am ፈሳሽ ገጽታዎች ነገሮች በሚያልፉባቸው ቦታዎች ያብጣሉ ቀለበትም ይሰራሉ
@@ -1738,6 +1786,9 @@ am የክላሲክ ነጥብ ቅንጣቶችን በሚያበሩ ብልጭታዎ�
 
 @ Resolution and detail inside portal and teleporter views; lower tiers trim nested effects
 am በፖርታልና በቴሌፖርተር እይታዎች ውስጥ ጥራትና ዝርዝር፤ ዝቅተኛ ደረጃዎች የተደራረቡ ተጽዕኖዎችን ይቀንሳሉ
+
+@ Resolution of the glow: low is cheaper and softer
+am የፍካቱ ጥራት፦ ዝቅተኛ ርካሽ እና ለስላሳ ነው
 
 @ Rippling light patterns on surfaces under water and slime
 am ከውሃና ከዝቃጭ በታች ባሉ ገጽታዎች ላይ የሚሞገዱ የብርሃን ቅርጾች
@@ -1864,6 +1915,9 @@ am ከክላሲኮቹ ይልቅ የ2021 ዳግም እትም ለስላሳ MD5 ሞ
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 am የካርታውን ባለቀለም ብርሃን (.lit ፋይል ወይም BSPX lump) ይጠቀማል፤ ጠፍቶ ሲሆን መደበኛ ነጭ ብርሃን ይሰጣል። በቀጣዩ ካርታ ሲጫን ይተገበራል
+
+@ Walls, doors and monsters block the light and cast shadows
+am ግድግዳዎች፣ በሮች እና ጭራቆች ብርሃኑን ያግዳሉ እና ጥላ ይጥላሉ
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 am የውሃ ጄት ክፍሎች፣ የጠብታ ብዛትና አንጸባራቂ የፈሳሽ ጥላ፦ ዝቅተኛ ቀላል አሳላፊ ፍሰቶችን ይጠቀማል፤ ከፍተኛ ለስላሳ አንጸባራቂ ጄቶችን ይጠቀማል

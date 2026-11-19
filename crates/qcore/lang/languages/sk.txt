@@ -163,6 +163,21 @@ sk Kvalita krvi
 @ Blood Splatter Settings
 sk Nastavenia striekania krvi
 
+@ Bloom
+sk Žiara
+
+@ Bloom Intensity
+sk Intenzita žiary
+
+@ Bloom Quality
+sk Kvalita žiary
+
+@ Bloom Settings
+sk Nastavenia žiary
+
+@ Bloom Size
+sk Veľkosť žiary
+
 @ Blue
 sk Modrá
 
@@ -174,6 +189,9 @@ sk Zosilní alebo zoslabí výšky v decibeloch
 
 @ Boost or cut low frequencies in decibels
 sk Zosilní alebo zoslabí basy v decibeloch
+
+@ Bright Surfaces
+sk Svetlé povrchy
 
 @ Brightness
 sk Jas
@@ -817,6 +835,12 @@ sk Iba na diaľku
 @ Reacquire While Held
 sk Znova zamerať pri držaní
 
+@ Real-time Dynamic Lights
+sk Dynamické svetlá v reálnom čase
+
+@ Real-time Light Settings
+sk Nastavenia svetla v reálnom čase
+
 @ Red
 sk Červená
 
@@ -885,6 +909,12 @@ sk Vidieť cez portály
 
 @ See-through Teleporters
 sk Priehľadné teleporty
+
+@ Shadow Quality
+sk Kvalita tieňov
+
+@ Shadows
+sk Tiene
 
 @ Shirt Color
 sk Farba trička
@@ -1472,6 +1502,9 @@ sk Railgun v štýle Quake III: projektil, ktorý prestrelí každého nepriate�
 @ A Zelda-style hookshot: fire sends a chain hook out; it latches onto hookable surfaces or enemies and reels you in; fire again to let go
 sk Hák v štýle Zeldy: streľba vystrelí hák na reťazi, ktorý sa zachytí na vhodných povrchoch alebo nepriateľoch a pritiahne vás; ďalšia streľba ho uvoľní
 
+@ Also make bright walls and sky glow, like DarkPlaces; 0 keeps the glow to light sources
+sk Žiaria aj svetlé steny a obloha, ako v DarkPlaces; 0 ponechá žiaru len zdrojom svetla
+
 @ Also translates the engine's console messages; off keeps them in English
 sk Prekladá aj správy konzoly enginu; vypnuté ich ponechá v angličtine
 
@@ -1583,8 +1616,14 @@ sk Držte streľbu a prechádzajte zameriavačom cez monštrá, aby ste ich zara
 @ Hold: keep Lock-on held. Toggle: press Auto-aim Toggle to enable automatic acquisition. Click look stick to switch targets
 sk Držať: držte Zameranie. Prepínať: stlačte Prepínať automatické mierenie pre automatické zameriavanie. Kliknutím páčky pohľadu prepnete cieľ
 
+@ How bright the glow is
+sk Aká jasná je žiara
+
 @ How close an enemy must be to the crosshair for automatic acquisition in toggle mode (degrees)
 sk Ako blízko k zameriavaču musí byť nepriateľ, aby sa v režime prepínania automaticky zameral (stupne)
+
+@ How far the glow spreads around a light
+sk Ako ďaleko sa žiara šíri okolo svetla
 
 @ How far the view tilts up and down when you tilt the controller (pitch axis)
 sk Ako veľmi sa pohľad nakloní nahor a nadol pri naklonení ovládača (os sklonu)
@@ -1607,6 +1646,9 @@ sk Ako silno voda z tlakového čističa odtláča nepriateľov
 @ How long a hit freezes the game, in milliseconds
 sk Ako dlho zásah zmrazí hru, v milisekundách
 
+@ How many lights cast shadows at once, and how smooth their edges are
+sk Koľko svetiel vrhá tiene naraz a aké mäkké sú ich okraje
+
 @ How strongly fog covers the sky when fog is on
 sk Ako silno hmla zakryje oblohu, keď je hmla zapnutá
 
@@ -1622,8 +1664,14 @@ sk Pohlcujúci: zobrazí sa na pár sekúnd iba pri zmene hodnoty
 @ Keeps textures sharp on floors and walls seen at steep angles
 sk Udrží textúry na podlahách a stenách ostré aj pod strmým uhlom
 
+@ Light sources glow: lamps, lava, teleporters, sparks and explosions; Bloom Settings tunes it
+sk Zdroje svetla žiaria: lampy, láva, teleporty, iskry a výbuchy; Nastavenia žiary ju upravujú
+
 @ Lights from rockets, muzzle flashes and explosions brighten nearby walls
 sk Svetlo rakiet, záblesky výstrelov a výbuchy rozjasnia blízke steny
+
+@ Lights from rockets, muzzle flashes and explosions shade walls and models per pixel and cast shadows; needs Dynamic Lights
+sk Svetlo rakiet, výstrelov a výbuchov osvetľuje steny a modely po pixeloch a vrhá tiene; vyžaduje Dynamické svetlá
 
 @ Liquid surfaces swell and ring out where things move through them
 sk Hladiny kvapalín sa vlnia a tvoria kruhy, kde nimi niečo prechádza
@@ -1738,6 +1786,9 @@ sk Nahradí klasické bodové častice žiariacimi iskrami, dymom a krvou; mody 
 
 @ Resolution and detail inside portal and teleporter views; lower tiers trim nested effects
 sk Rozlíšenie a detail v pohľadoch portálov a teleportov; nižšie stupne obmedzia vnorené efekty
+
+@ Resolution of the glow: low is cheaper and softer
+sk Rozlíšenie žiary: nízke je lacnejšie a mäkšie
 
 @ Rippling light patterns on surfaces under water and slime
 sk Vlniace sa svetelné vzory na povrchoch pod vodou a slizom
@@ -1864,6 +1915,9 @@ sk Použije hladšie modely MD5 z reedície 2021 (a náhrady MD3 z modov) namies
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 sk Použije farebné svetlo mapy (súbor .lit alebo blok BSPX); vypnuté dá pôvodné biele svetlo. Prejaví sa pri ďalšom načítaní mapy
+
+@ Walls, doors and monsters block the light and cast shadows
+sk Steny, dvere a príšery zakrývajú svetlo a vrhajú tiene
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 sk Segmenty prúdu, počet kvapiek a lesklé tieňovanie kvapaliny: nízka používa jednoduchšie priesvitné prúdy; vysoká hladké lesklé prúdy

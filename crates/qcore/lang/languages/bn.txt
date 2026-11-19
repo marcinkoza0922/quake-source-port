@@ -163,6 +163,21 @@ bn রক্তের মান
 @ Blood Splatter Settings
 bn রক্ত ছিটানোর সেটিংস
 
+@ Bloom
+bn ব্লুম
+
+@ Bloom Intensity
+bn ব্লুমের তীব্রতা
+
+@ Bloom Quality
+bn ব্লুমের মান
+
+@ Bloom Settings
+bn ব্লুম সেটিংস
+
+@ Bloom Size
+bn ব্লুমের আকার
+
 @ Blue
 bn নীল
 
@@ -174,6 +189,9 @@ bn উচ্চ ফ্রিকোয়েন্সি ডেসিবেলে
 
 @ Boost or cut low frequencies in decibels
 bn নিম্ন ফ্রিকোয়েন্সি ডেসিবেলে বাড়ান বা কমান
+
+@ Bright Surfaces
+bn উজ্জ্বল পৃষ্ঠ
 
 @ Brightness
 bn উজ্জ্বলতা
@@ -817,6 +835,12 @@ bn শুধু দূরপাল্লার
 @ Reacquire While Held
 bn ধরে থাকলে আবার লক্ষ্য নিন
 
+@ Real-time Dynamic Lights
+bn রিয়েল-টাইম ডাইনামিক আলো
+
+@ Real-time Light Settings
+bn রিয়েল-টাইম আলোর সেটিংস
+
 @ Red
 bn লাল
 
@@ -885,6 +909,12 @@ bn পোর্টালের ভিতর দিয়ে দেখা
 
 @ See-through Teleporters
 bn স্বচ্ছ টেলিপোর্টার
+
+@ Shadow Quality
+bn ছায়ার মান
+
+@ Shadows
+bn ছায়া
 
 @ Shirt Color
 bn শার্টের রং
@@ -1472,6 +1502,9 @@ bn Quake III ধাঁচের রেলগান: একটি স্লাগ
 @ A Zelda-style hookshot: fire sends a chain hook out; it latches onto hookable surfaces or enemies and reels you in; fire again to let go
 bn Zelda ধাঁচের হুকশট: ফায়ার করলে শিকলওয়ালা হুক ছোটে; এটি হুকযোগ্য পৃষ্ঠ বা শত্রুকে আঁকড়ে ধরে আপনাকে টেনে নেয়; ছাড়তে আবার ফায়ার করুন
 
+@ Also make bright walls and sky glow, like DarkPlaces; 0 keeps the glow to light sources
+bn উজ্জ্বল দেয়াল ও আকাশকেও জ্বলজ্বলে করে, DarkPlaces-এর মতো; 0 আভাকে আলোর উৎসে সীমিত রাখে
+
 @ Also translates the engine's console messages; off keeps them in English
 bn ইঞ্জিনের কনসোল বার্তাও অনুবাদ করে; বন্ধ থাকলে সেগুলো ইংরেজিতে থাকে
 
@@ -1583,8 +1616,14 @@ bn ফায়ার ধরে রেখে দানবদের উপর ক
 @ Hold: keep Lock-on held. Toggle: press Auto-aim Toggle to enable automatic acquisition. Click look stick to switch targets
 bn ধরে রাখুন: লক-অন চেপে রাখুন। টগল: স্বয়ংক্রিয় লক্ষ্য চালু করতে অটো-এইম টগল চাপুন। লক্ষ্য বদলাতে দৃষ্টির স্টিক ক্লিক করুন
 
+@ How bright the glow is
+bn আভা কতটা উজ্জ্বল
+
 @ How close an enemy must be to the crosshair for automatic acquisition in toggle mode (degrees)
 bn টগল মোডে স্বয়ংক্রিয় লক্ষ্যের জন্য শত্রুকে ক্রসহেয়ারের কত কাছে থাকতে হবে (ডিগ্রি)
+
+@ How far the glow spreads around a light
+bn আলোর চারপাশে আভা কতদূর ছড়ায়
 
 @ How far the view tilts up and down when you tilt the controller (pitch axis)
 bn কন্ট্রোলার কাত করলে দৃশ্য কতটা উপরে-নিচে হেলে (পিচ অক্ষ)
@@ -1607,6 +1646,9 @@ bn পাওয়ারওয়াশারের জল শত্রুকে
 @ How long a hit freezes the game, in milliseconds
 bn একটি আঘাত গেম কতক্ষণ থামায়, মিলিসেকেন্ডে
 
+@ How many lights cast shadows at once, and how smooth their edges are
+bn একসাথে কতগুলো আলো ছায়া ফেলে এবং তাদের প্রান্ত কতটা মসৃণ
+
 @ How strongly fog covers the sky when fog is on
 bn কুয়াশা চালু থাকলে আকাশ কতটা কুয়াশায় ঢাকে
 
@@ -1622,8 +1664,14 @@ bn নিমগ্ন: মান বদলালে শুধু কয়েক
 @ Keeps textures sharp on floors and walls seen at steep angles
 bn তির্যক কোণে দেখা মেঝে ও দেয়ালে টেক্সচার স্পষ্ট রাখে
 
+@ Light sources glow: lamps, lava, teleporters, sparks and explosions; Bloom Settings tunes it
+bn আলোর উৎস জ্বলজ্বল করে: বাতি, লাভা, টেলিপোর্টার, স্ফুলিঙ্গ ও বিস্ফোরণ; ব্লুম সেটিংস এটি ঠিক করে
+
 @ Lights from rockets, muzzle flashes and explosions brighten nearby walls
 bn রকেট, নলের ঝলক ও বিস্ফোরণের আলো কাছের দেয়াল আলোকিত করে
+
+@ Lights from rockets, muzzle flashes and explosions shade walls and models per pixel and cast shadows; needs Dynamic Lights
+bn রকেট, গুলির ঝলক ও বিস্ফোরণের আলো দেয়াল ও মডেলকে প্রতি পিক্সেলে আলোকিত করে এবং ছায়া ফেলে; ডাইনামিক আলো প্রয়োজন
 
 @ Liquid surfaces swell and ring out where things move through them
 bn তরলের মধ্য দিয়ে কিছু চললে পৃষ্ঠ ফুলে ওঠে ও বৃত্ত ছড়ায়
@@ -1738,6 +1786,9 @@ bn ক্লাসিক বিন্দু কণার বদলে জ্ব�
 
 @ Resolution and detail inside portal and teleporter views; lower tiers trim nested effects
 bn পোর্টাল ও টেলিপোর্টার দৃশ্যের ভিতরের রেজোলিউশন ও বিস্তারিত; নিচের স্তর নেস্টেড প্রভাব ছাঁটে
+
+@ Resolution of the glow: low is cheaper and softer
+bn আভার রেজোলিউশন: নিম্ন কম খরচের ও নরম
 
 @ Rippling light patterns on surfaces under water and slime
 bn জল ও স্লাইমের নিচের পৃষ্ঠে তরঙ্গায়িত আলোর নকশা
@@ -1864,6 +1915,9 @@ bn ক্লাসিকের বদলে 2021 রি-রিলিজের �
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 bn ম্যাপের রঙিন আলো (.lit ফাইল বা BSPX লাম্প) ব্যবহার করে; বন্ধ থাকলে মূল সাদা আলো। পরের ম্যাপ লোডে প্রযোজ্য
+
+@ Walls, doors and monsters block the light and cast shadows
+bn দেয়াল, দরজা ও দানব আলো আটকায় এবং ছায়া ফেলে
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 bn জলধারার অংশ, ফোঁটার সংখ্যা ও চকচকে তরল শেডিং: নিম্ন সরল স্বচ্ছ ধারা ব্যবহার করে; উচ্চ মসৃণ চকচকে ধারা ব্যবহার করে

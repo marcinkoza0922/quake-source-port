@@ -14,6 +14,7 @@ layout(location = 0) out vec2 o_st;
 layout(location = 1) out vec3 o_shade;
 layout(location = 2) out vec3 o_wpos;
 layout(location = 3) noperspective out vec2 o_st_affine; // r_softemu_mdl_warp
+layout(location = 4) out vec3 o_nrm; // world-space normal (per-pixel dynamic lights)
 
 float shadedot(vec3 n) {
     float d = dot(n, pc.shadevec.xyz);
@@ -54,5 +55,6 @@ void main() {
     o_st_affine = in_st;
     o_shade = (pc.texs.w & 2u) != 0u ? vec3(1.0) : pc.light.rgb * sh;
     o_wpos = w.xyz;
+    o_nrm = transpose(inverse(mat3(pc.model))) * mix(na, nb, blend);
     gl_Position = fr.viewproj * w;
 }
