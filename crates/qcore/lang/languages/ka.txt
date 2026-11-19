@@ -163,6 +163,21 @@ ka სისხლის ხარისხი
 @ Blood Splatter Settings
 ka სისხლის შხეფების პარამეტრები
 
+@ Bloom
+ka ნათება
+
+@ Bloom Intensity
+ka ნათების ინტენსივობა
+
+@ Bloom Quality
+ka ნათების ხარისხი
+
+@ Bloom Settings
+ka ნათების პარამეტრები
+
+@ Bloom Size
+ka ნათების ზომა
+
 @ Blue
 ka ლურჯი
 
@@ -174,6 +189,9 @@ ka მაღალი სიხშირეების გაძლიერე
 
 @ Boost or cut low frequencies in decibels
 ka დაბალი სიხშირეების გაძლიერება ან შესუსტება დეციბელებში
+
+@ Bright Surfaces
+ka ნათელი ზედაპირები
 
 @ Brightness
 ka სიკაშკაშე
@@ -1385,6 +1403,9 @@ ka Quake III-ის სტილის რეილგანი: ჭურვი
 @ A Zelda-style hookshot: fire sends a chain hook out; it latches onto hookable surfaces or enemies and reels you in; fire again to let go
 ka Zelda-ს სტილის კაუჭი: სროლა ჯაჭვიან კაუჭს ისვრის; ის ედება შესაფერის ზედაპირებს ან მტრებს და თქვენ მიგათრევთ; ხელახლა სროლა მას უშვებს
 
+@ Also make bright walls and sky glow, like DarkPlaces; 0 keeps the glow to light sources
+ka ანათებს ნათელ კედლებსა და ცასაც, როგორც DarkPlaces-ში; 0 ნათებას მხოლოდ სინათლის წყაროებზე ტოვებს
+
 @ Also translates the engine's console messages; off keeps them in English
 ka თარგმნის ძრავის კონსოლის შეტყობინებებსაც; გამორთვისას ისინი ინგლისურად რჩება
 
@@ -1496,8 +1517,14 @@ ka დაიჭირეთ სროლა და სამიზნე მო�
 @ Hold: keep Lock-on held. Toggle: press Auto-aim Toggle to enable automatic acquisition. Click look stick to switch targets
 ka დაჭერა: ჩამიზნება დაჭერილი გეჭიროთ. გადართვა: დააჭირეთ ავტოდამიზნების გადართვას ავტომატური ჩამიზნებისთვის. სამიზნის შესაცვლელად დააწკაპუნეთ ხედის სტიკს
 
+@ How bright the glow is
+ka რამდენად კაშკაშაა ნათება
+
 @ How close an enemy must be to the crosshair for automatic acquisition in toggle mode (degrees)
 ka რამდენად ახლოს უნდა იყოს მტერი სამიზნესთან ავტომატური ჩამიზნებისთვის გადართვის რეჟიმში (გრადუსი)
+
+@ How far the glow spreads around a light
+ka რამდენად შორს ვრცელდება ნათება სინათლის გარშემო
 
 @ How far the view tilts up and down when you tilt the controller (pitch axis)
 ka რამდენად იხრება ხედი ზემოთ და ქვემოთ კონტროლერის დახრისას (ვერტიკალური ღერძი)
@@ -1534,6 +1561,9 @@ ka იმერსიული: ჩნდება რამდენიმე �
 
 @ Keeps textures sharp on floors and walls seen at steep angles
 ka ტექსტურებს მკვეთრად ტოვებს ციცაბო კუთხით დანახულ იატაკსა და კედლებზე
+
+@ Light sources glow: lamps, lava, teleporters, sparks and explosions; Bloom Settings tunes it
+ka სინათლის წყაროები ანათებენ: ნათურები, ლავა, ტელეპორტერები, ნაპერწკლები და აფეთქებები; ნათების პარამეტრები არეგულირებს მას
 
 @ Lights from rockets, muzzle flashes and explosions brighten nearby walls
 ka რაკეტების, გასროლის ალისა და აფეთქებების სინათლე ახლომდებარე კედლებს ანათებს
@@ -1651,6 +1681,9 @@ ka კლასიკურ წერტილოვან ნაწილაკ
 
 @ Resolution and detail inside portal and teleporter views; lower tiers trim nested effects
 ka გარჩევადობა და დეტალიზაცია პორტალებისა და ტელეპორტების ხედებში; დაბალი დონეები ჩადგმულ ეფექტებს ამცირებს
+
+@ Resolution of the glow: low is cheaper and softer
+ka ნათების გარჩევადობა: დაბალი იაფია და რბილი
 
 @ Rippling light patterns on surfaces under water and slime
 ka სინათლის ტალღოვანი ნახატები წყლისა და ლორწოს ქვეშ მყოფ ზედაპირებზე

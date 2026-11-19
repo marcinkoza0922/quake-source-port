@@ -163,6 +163,21 @@ bn রক্তের মান
 @ Blood Splatter Settings
 bn রক্ত ছিটানোর সেটিংস
 
+@ Bloom
+bn ব্লুম
+
+@ Bloom Intensity
+bn ব্লুমের তীব্রতা
+
+@ Bloom Quality
+bn ব্লুমের মান
+
+@ Bloom Settings
+bn ব্লুম সেটিংস
+
+@ Bloom Size
+bn ব্লুমের আকার
+
 @ Blue
 bn নীল
 
@@ -174,6 +189,9 @@ bn উচ্চ ফ্রিকোয়েন্সি ডেসিবেলে
 
 @ Boost or cut low frequencies in decibels
 bn নিম্ন ফ্রিকোয়েন্সি ডেসিবেলে বাড়ান বা কমান
+
+@ Bright Surfaces
+bn উজ্জ্বল পৃষ্ঠ
 
 @ Brightness
 bn উজ্জ্বলতা
@@ -1385,6 +1403,9 @@ bn Quake III ধাঁচের রেলগান: একটি স্লাগ
 @ A Zelda-style hookshot: fire sends a chain hook out; it latches onto hookable surfaces or enemies and reels you in; fire again to let go
 bn Zelda ধাঁচের হুকশট: ফায়ার করলে শিকলওয়ালা হুক ছোটে; এটি হুকযোগ্য পৃষ্ঠ বা শত্রুকে আঁকড়ে ধরে আপনাকে টেনে নেয়; ছাড়তে আবার ফায়ার করুন
 
+@ Also make bright walls and sky glow, like DarkPlaces; 0 keeps the glow to light sources
+bn উজ্জ্বল দেয়াল ও আকাশকেও জ্বলজ্বলে করে, DarkPlaces-এর মতো; 0 আভাকে আলোর উৎসে সীমিত রাখে
+
 @ Also translates the engine's console messages; off keeps them in English
 bn ইঞ্জিনের কনসোল বার্তাও অনুবাদ করে; বন্ধ থাকলে সেগুলো ইংরেজিতে থাকে
 
@@ -1496,8 +1517,14 @@ bn ফায়ার ধরে রেখে দানবদের উপর ক
 @ Hold: keep Lock-on held. Toggle: press Auto-aim Toggle to enable automatic acquisition. Click look stick to switch targets
 bn ধরে রাখুন: লক-অন চেপে রাখুন। টগল: স্বয়ংক্রিয় লক্ষ্য চালু করতে অটো-এইম টগল চাপুন। লক্ষ্য বদলাতে দৃষ্টির স্টিক ক্লিক করুন
 
+@ How bright the glow is
+bn আভা কতটা উজ্জ্বল
+
 @ How close an enemy must be to the crosshair for automatic acquisition in toggle mode (degrees)
 bn টগল মোডে স্বয়ংক্রিয় লক্ষ্যের জন্য শত্রুকে ক্রসহেয়ারের কত কাছে থাকতে হবে (ডিগ্রি)
+
+@ How far the glow spreads around a light
+bn আলোর চারপাশে আভা কতদূর ছড়ায়
 
 @ How far the view tilts up and down when you tilt the controller (pitch axis)
 bn কন্ট্রোলার কাত করলে দৃশ্য কতটা উপরে-নিচে হেলে (পিচ অক্ষ)
@@ -1534,6 +1561,9 @@ bn নিমগ্ন: মান বদলালে শুধু কয়েক
 
 @ Keeps textures sharp on floors and walls seen at steep angles
 bn তির্যক কোণে দেখা মেঝে ও দেয়ালে টেক্সচার স্পষ্ট রাখে
+
+@ Light sources glow: lamps, lava, teleporters, sparks and explosions; Bloom Settings tunes it
+bn আলোর উৎস জ্বলজ্বল করে: বাতি, লাভা, টেলিপোর্টার, স্ফুলিঙ্গ ও বিস্ফোরণ; ব্লুম সেটিংস এটি ঠিক করে
 
 @ Lights from rockets, muzzle flashes and explosions brighten nearby walls
 bn রকেট, নলের ঝলক ও বিস্ফোরণের আলো কাছের দেয়াল আলোকিত করে
@@ -1651,6 +1681,9 @@ bn ক্লাসিক বিন্দু কণার বদলে জ্ব�
 
 @ Resolution and detail inside portal and teleporter views; lower tiers trim nested effects
 bn পোর্টাল ও টেলিপোর্টার দৃশ্যের ভিতরের রেজোলিউশন ও বিস্তারিত; নিচের স্তর নেস্টেড প্রভাব ছাঁটে
+
+@ Resolution of the glow: low is cheaper and softer
+bn আভার রেজোলিউশন: নিম্ন কম খরচের ও নরম
 
 @ Rippling light patterns on surfaces under water and slime
 bn জল ও স্লাইমের নিচের পৃষ্ঠে তরঙ্গায়িত আলোর নকশা

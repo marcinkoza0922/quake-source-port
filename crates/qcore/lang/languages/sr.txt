@@ -163,6 +163,21 @@ sr Квалитет крви
 @ Blood Splatter Settings
 sr Подешавања прскања крви
 
+@ Bloom
+sr Сјај
+
+@ Bloom Intensity
+sr Интензитет сјаја
+
+@ Bloom Quality
+sr Квалитет сјаја
+
+@ Bloom Settings
+sr Подешавања сјаја
+
+@ Bloom Size
+sr Величина сјаја
+
 @ Blue
 sr Плава
 
@@ -174,6 +189,9 @@ sr Појачава или утишава високе фреквенције у
 
 @ Boost or cut low frequencies in decibels
 sr Појачава или утишава ниске фреквенције у децибелима
+
+@ Bright Surfaces
+sr Светле површине
 
 @ Brightness
 sr Осветљеност
@@ -1385,6 +1403,9 @@ sr Рејлган у стилу Quake III: пројектил који проб�
 @ A Zelda-style hookshot: fire sends a chain hook out; it latches onto hookable surfaces or enemies and reels you in; fire again to let go
 sr Кука у стилу игре Zelda: паљба избацује куку на ланцу; она се закачи за погодне површине или непријатеље и привуче вас; поновна паљба је отпушта
 
+@ Also make bright walls and sky glow, like DarkPlaces; 0 keeps the glow to light sources
+sr Сијају и светли зидови и небо, као у DarkPlaces-у; 0 задржава сјај на изворима светлости
+
 @ Also translates the engine's console messages; off keeps them in English
 sr Преводи и поруке конзоле енџина; искључено их оставља на енглеском
 
@@ -1496,8 +1517,14 @@ sr Држите паљбу и пређите нишаном преко чудо�
 @ Hold: keep Lock-on held. Toggle: press Auto-aim Toggle to enable automatic acquisition. Click look stick to switch targets
 sr Држи: држите Захват мете. Прекидач: притисните Прекидач ауто-нишањења за аутоматски захват. Клик палицом за поглед мења мету
 
+@ How bright the glow is
+sr Колико је сјај јак
+
 @ How close an enemy must be to the crosshair for automatic acquisition in toggle mode (degrees)
 sr Колико близу нишана непријатељ мора бити за аутоматски захват у режиму прекидача (степени)
+
+@ How far the glow spreads around a light
+sr Колико се далеко сјај шири око светлости
 
 @ How far the view tilts up and down when you tilt the controller (pitch axis)
 sr Колико се поглед нагиње горе-доле кад нагнете контролер (оса нагиба)
@@ -1534,6 +1561,9 @@ sr Имерзивно: појављује се на неколико секун�
 
 @ Keeps textures sharp on floors and walls seen at steep angles
 sr Одржава текстуре оштрим на подовима и зидовима гледаним под оштрим углом
+
+@ Light sources glow: lamps, lava, teleporters, sparks and explosions; Bloom Settings tunes it
+sr Извори светлости сијају: лампе, лава, телепорти, искре и експлозије; Подешавања сјаја га подешавају
 
 @ Lights from rockets, muzzle flashes and explosions brighten nearby walls
 sr Светло ракета, бљескова цеви и експлозија осветљава оближње зидове
@@ -1651,6 +1681,9 @@ sr Замењује класичне тачкасте честице светл�
 
 @ Resolution and detail inside portal and teleporter views; lower tiers trim nested effects
 sr Резолуција и детаљи у приказима портала и телепортера; нижи нивои скраћују угнежђене ефекте
+
+@ Resolution of the glow: low is cheaper and softer
+sr Резолуција сјаја: ниска је јефтинија и мекша
 
 @ Rippling light patterns on surfaces under water and slime
 sr Таласасте светлосне шаре на површинама под водом и слузи

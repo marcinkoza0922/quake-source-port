@@ -163,6 +163,21 @@ mt Kwalità tad-demm
 @ Blood Splatter Settings
 mt Issettjar tat-tixrid tad-demm
 
+@ Bloom
+mt Dija
+
+@ Bloom Intensity
+mt Intensità tad-dija
+
+@ Bloom Quality
+mt Kwalità tad-dija
+
+@ Bloom Settings
+mt Settings tad-dija
+
+@ Bloom Size
+mt Daqs tad-dija
+
 @ Blue
 mt Blu
 
@@ -174,6 +189,9 @@ mt Jgħolli jew inaqqas il-frekwenzi għoljin, f'deċibel
 
 @ Boost or cut low frequencies in decibels
 mt Jgħolli jew inaqqas il-frekwenzi baxxi, f'deċibel
+
+@ Bright Surfaces
+mt Uċuħ jleqqu
 
 @ Brightness
 mt Luminożità
@@ -1385,6 +1403,9 @@ mt Railgun bħal f'Quake III: balla li tinfed kull għadu fuq il-linja tagħha, 
 @ A Zelda-style hookshot: fire sends a chain hook out; it latches onto hookable surfaces or enemies and reels you in; fire again to let go
 mt Ganċ bħal f'Zelda: is-sparar jitfa' ganċ bil-katina; jaqbad ma' uċuħ adattati jew ma' għedewwa u jiġbdek lejhom; erġa' spara biex titlaq
 
+@ Also make bright walls and sky glow, like DarkPlaces; 0 keeps the glow to light sources
+mt Iġġiegħel ukoll il-ħitan jleqqu u s-sema jiddu, bħal DarkPlaces; 0 iżomm id-dija mas-sorsi tad-dawl
+
 @ Also translates the engine's console messages; off keeps them in English
 mt Jittraduċi wkoll il-messaġġi tal-konsol tal-engine; mitfi jħallihom bl-Ingliż
 
@@ -1496,8 +1517,14 @@ mt Żomm is-sparar u għaddi l-crosshair fuq il-mostri biex tpoġġihom f'kju, e
 @ Hold: keep Lock-on held. Toggle: press Auto-aim Toggle to enable automatic acquisition. Click look stick to switch targets
 mt Żomm: żomm il-Qbid tal-mira magħfus. Qlib: agħfas Qlib tal-immirar awtomatiku biex tixgħel il-qbid awtomatiku. Agħfas l-istick tal-ħarsa biex tibdel il-mira
 
+@ How bright the glow is
+mt Kemm hi qawwija d-dija
+
 @ How close an enemy must be to the crosshair for automatic acquisition in toggle mode (degrees)
 mt Kemm irid ikun qrib il-crosshair għadu biex jinqabad awtomatikament fil-modalità tal-qlib (gradi)
+
+@ How far the glow spreads around a light
+mt Kemm tinfirex id-dija madwar dawl
 
 @ How far the view tilts up and down when you tilt the controller (pitch axis)
 mt Kemm titmejjel il-veduta 'l fuq u 'l isfel meta tmejjel il-kontrollur (assi vertikali)
@@ -1534,6 +1561,9 @@ mt Immersiv: jidher għal ftit sekondi biss meta jinbidel il-valur tiegħu
 
 @ Keeps textures sharp on floors and walls seen at steep angles
 mt Iżomm it-tessituri ċari fuq l-art u l-ħitan li jidhru minn angoli wieqfa
+
+@ Light sources glow: lamps, lava, teleporters, sparks and explosions; Bloom Settings tunes it
+mt Is-sorsi tad-dawl jiddu: lampi, lava, teleporters, xrar u splużjonijiet; Settings tad-dija jaġġustawha
 
 @ Lights from rockets, muzzle flashes and explosions brighten nearby walls
 mt Id-dwal tar-rokits, tal-isparar u tal-isplużjonijiet jixegħlu l-ħitan fil-qrib
@@ -1651,6 +1681,9 @@ mt Jibdel il-partiċelli klassiċi tat-tikek b'xrar jiddi, duħħan u demm; mods
 
 @ Resolution and detail inside portal and teleporter views; lower tiers trim nested effects
 mt Riżoluzzjoni u dettall ġol-veduti tal-portali u t-teleporters; livelli aktar baxxi jnaqqsu l-effetti ġo xulxin
+
+@ Resolution of the glow: low is cheaper and softer
+mt Ir-riżoluzzjoni tad-dija: baxxa hija orħos u rotob
 
 @ Rippling light patterns on surfaces under water and slime
 mt Disinji tad-dawl imewġin fuq uċuħ taħt l-ilma u s-slime

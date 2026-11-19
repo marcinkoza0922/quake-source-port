@@ -163,6 +163,21 @@ tr Kan Kalitesi
 @ Blood Splatter Settings
 tr Kan Sıçraması Ayarları
 
+@ Bloom
+tr Parlama
+
+@ Bloom Intensity
+tr Parlama yoğunluğu
+
+@ Bloom Quality
+tr Parlama kalitesi
+
+@ Bloom Settings
+tr Parlama ayarları
+
+@ Bloom Size
+tr Parlama boyutu
+
 @ Blue
 tr Mavi
 
@@ -174,6 +189,9 @@ tr Tizleri desibel cinsinden yükseltir veya azaltır
 
 @ Boost or cut low frequencies in decibels
 tr Basları desibel cinsinden yükseltir veya azaltır
+
+@ Bright Surfaces
+tr Parlak yüzeyler
 
 @ Brightness
 tr Parlaklık
@@ -1385,6 +1403,9 @@ tr Quake III tarzı bir railgun: hattındaki her düşmanı delen bir mermi; at�
 @ A Zelda-style hookshot: fire sends a chain hook out; it latches onto hookable surfaces or enemies and reels you in; fire again to let go
 tr Zelda tarzı bir kanca: ateş zincirli bir kanca fırlatır; kanca tutunabilir yüzeylere veya düşmanlara takılır ve sizi çeker; bırakmak için yeniden ateş edin
 
+@ Also make bright walls and sky glow, like DarkPlaces; 0 keeps the glow to light sources
+tr Parlak duvarları ve gökyüzünü de parlatır, DarkPlaces gibi; 0 parlamayı ışık kaynaklarıyla sınırlar
+
 @ Also translates the engine's console messages; off keeps them in English
 tr Motorun konsol mesajlarını da çevirir; kapalıyken İngilizce kalırlar
 
@@ -1496,8 +1517,14 @@ tr Ateşi basılı tutup nişangahı canavarların üzerinden geçirerek sıraya
 @ Hold: keep Lock-on held. Toggle: press Auto-aim Toggle to enable automatic acquisition. Click look stick to switch targets
 tr Basılı Tut: Kilitlenme tuşunu basılı tutun. Aç/Kapat: otomatik kilitlenmeyi açmak için Otomatik Nişan Aç/Kapat tuşuna basın. Hedef değiştirmek için bakış çubuğuna tıklayın
 
+@ How bright the glow is
+tr Parlamanın ne kadar güçlü olduğu
+
 @ How close an enemy must be to the crosshair for automatic acquisition in toggle mode (degrees)
 tr Aç/kapat modunda otomatik kilitlenme için bir düşmanın nişangaha ne kadar yakın olması gerektiği (derece)
+
+@ How far the glow spreads around a light
+tr Parlamanın bir ışığın çevresine ne kadar yayıldığı
 
 @ How far the view tilts up and down when you tilt the controller (pitch axis)
 tr Kumandayı eğdiğinizde görüşün ne kadar yukarı ve aşağı eğileceği (dikey eksen)
@@ -1534,6 +1561,9 @@ tr Sürükleyici: yalnızca değeri değiştiğinde birkaç saniye görünür
 
 @ Keeps textures sharp on floors and walls seen at steep angles
 tr Dik açılardan görülen zemin ve duvarlardaki dokuları keskin tutar
+
+@ Light sources glow: lamps, lava, teleporters, sparks and explosions; Bloom Settings tunes it
+tr Işık kaynakları parlar: lambalar, lav, ışınlayıcılar, kıvılcımlar ve patlamalar; Parlama ayarları bunu düzenler
 
 @ Lights from rockets, muzzle flashes and explosions brighten nearby walls
 tr Roketlerin, namlu alevlerinin ve patlamaların ışığı yakındaki duvarları aydınlatır
@@ -1651,6 +1681,9 @@ tr Klasik nokta parçacıkların yerine parlayan kıvılcımlar, duman ve kan ko
 
 @ Resolution and detail inside portal and teleporter views; lower tiers trim nested effects
 tr Portal ve ışınlayıcı görüntülerinin çözünürlüğü ve ayrıntısı; düşük seviyeler iç içe efektleri kısar
+
+@ Resolution of the glow: low is cheaper and softer
+tr Parlamanın çözünürlüğü: düşük daha ucuz ve daha yumuşaktır
 
 @ Rippling light patterns on surfaces under water and slime
 tr Su ve balçık altındaki yüzeylerde dalgalanan ışık desenleri

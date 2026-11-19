@@ -163,6 +163,21 @@ sq Cilësia e gjakut
 @ Blood Splatter Settings
 sq Cilësimet e spërkatjes së gjakut
 
+@ Bloom
+sq Shkëlqim
+
+@ Bloom Intensity
+sq Intensiteti i shkëlqimit
+
+@ Bloom Quality
+sq Cilësia e shkëlqimit
+
+@ Bloom Settings
+sq Cilësimet e shkëlqimit
+
+@ Bloom Size
+sq Madhësia e shkëlqimit
+
 @ Blue
 sq Blu
 
@@ -174,6 +189,9 @@ sq Rrit ose ul frekuencat e larta në decibelë
 
 @ Boost or cut low frequencies in decibels
 sq Rrit ose ul frekuencat e ulëta në decibelë
+
+@ Bright Surfaces
+sq Sipërfaqe të ndritshme
 
 @ Brightness
 sq Ndriçimi
@@ -1385,6 +1403,9 @@ sq Një railgun si në Quake III: një predhë që shpon çdo armik në vijën e
 @ A Zelda-style hookshot: fire sends a chain hook out; it latches onto hookable surfaces or enemies and reels you in; fire again to let go
 sq Një grremç si në Zelda: qitja hedh një grep me zinxhir që kapet në sipërfaqe të përshtatshme ose armiq dhe të tërheq; qit sërish për ta lëshuar
 
+@ Also make bright walls and sky glow, like DarkPlaces; 0 keeps the glow to light sources
+sq Bën të shkëlqejnë edhe muret e ndritshme dhe qielli, si DarkPlaces; 0 e mban shkëlqimin te burimet e dritës
+
 @ Also translates the engine's console messages; off keeps them in English
 sq Përkthen edhe mesazhet e konsolës së motorit; joaktiv i lë në anglisht
 
@@ -1496,8 +1517,14 @@ sq Mbaj qitjen dhe kalo shënjestrën mbi përbindëshat për t'i radhitur, lës
 @ Hold: keep Lock-on held. Toggle: press Auto-aim Toggle to enable automatic acquisition. Click look stick to switch targets
 sq Mbaj: mbaj shtypur Kapjen e shenjës. Ndërro: shtyp Ndërro shënjimin automatik për kapje automatike. Kliko levën e shikimit për të ndërruar shenjën
 
+@ How bright the glow is
+sq Sa i fortë është shkëlqimi
+
 @ How close an enemy must be to the crosshair for automatic acquisition in toggle mode (degrees)
 sq Sa afër shënjestrës duhet të jetë një armik për kapje automatike në modalitetin me ndërrim (gradë)
+
+@ How far the glow spreads around a light
+sq Sa larg përhapet shkëlqimi rreth një drite
 
 @ How far the view tilts up and down when you tilt the controller (pitch axis)
 sq Sa anon pamja lart e poshtë kur anon kontrolluesin (boshti vertikal)
@@ -1534,6 +1561,9 @@ sq Zhytës: shfaqet për pak sekonda vetëm kur ndryshon vlera
 
 @ Keeps textures sharp on floors and walls seen at steep angles
 sq I mban teksturat të mprehta në dysheme dhe mure të para në kënde të pjerrëta
+
+@ Light sources glow: lamps, lava, teleporters, sparks and explosions; Bloom Settings tunes it
+sq Burimet e dritës shkëlqejnë: llamba, lavë, teleportues, shkëndija dhe shpërthime; Cilësimet e shkëlqimit e rregullojnë
 
 @ Lights from rockets, muzzle flashes and explosions brighten nearby walls
 sq Dritat e raketave, flakëve të grykës dhe shpërthimeve ndriçojnë muret pranë
@@ -1651,6 +1681,9 @@ sq Zëvendëson grimcat klasike me shkëndija që ndriçojnë, tym dhe gjak; mod
 
 @ Resolution and detail inside portal and teleporter views; lower tiers trim nested effects
 sq Rezolucioni dhe detajet brenda pamjeve të portaleve dhe teleportuesve; nivelet më të ulëta shkurtojnë efektet e ndërthurura
+
+@ Resolution of the glow: low is cheaper and softer
+sq Rezolucioni i shkëlqimit: i ulëti është më i lirë dhe më i butë
 
 @ Rippling light patterns on surfaces under water and slime
 sq Motive drite që valëzohen në sipërfaqe nën ujë dhe llum

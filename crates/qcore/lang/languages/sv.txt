@@ -163,6 +163,21 @@ sv Blodkvalitet
 @ Blood Splatter Settings
 sv Blodstänksinställningar
 
+@ Bloom
+sv Bloom
+
+@ Bloom Intensity
+sv Bloomintensitet
+
+@ Bloom Quality
+sv Bloomkvalitet
+
+@ Bloom Settings
+sv Bloominställningar
+
+@ Bloom Size
+sv Bloomstorlek
+
 @ Blue
 sv Blå
 
@@ -174,6 +189,9 @@ sv Höj eller sänk diskanten i decibel
 
 @ Boost or cut low frequencies in decibels
 sv Höj eller sänk basen i decibel
+
+@ Bright Surfaces
+sv Ljusa ytor
 
 @ Brightness
 sv Ljusstyrka
@@ -1385,6 +1403,9 @@ sv En railgun i Quake III-stil: en projektil som går igenom varje fiende i sin 
 @ A Zelda-style hookshot: fire sends a chain hook out; it latches onto hookable surfaces or enemies and reels you in; fire again to let go
 sv En änterhake i Zelda-stil: eld skickar ut en kedjekrok som fastnar i lämpliga ytor eller fiender och drar in dig; skjut igen för att släppa
 
+@ Also make bright walls and sky glow, like DarkPlaces; 0 keeps the glow to light sources
+sv Får även ljusa väggar och himlen att glöda, som DarkPlaces; 0 håller skenet till ljuskällor
+
 @ Also translates the engine's console messages; off keeps them in English
 sv Översätter även motorns konsolmeddelanden; av behåller dem på engelska
 
@@ -1496,8 +1517,14 @@ sv Håll eld och svep hårkorset över monster för att köa dem, släpp för at
 @ Hold: keep Lock-on held. Toggle: press Auto-aim Toggle to enable automatic acquisition. Click look stick to switch targets
 sv Håll: håll Mållåsning nedtryckt. Växla: tryck Växla autosikte för att slå på automatisk låsning. Klicka på tittspaken för att byta mål
 
+@ How bright the glow is
+sv Hur starkt skenet är
+
 @ How close an enemy must be to the crosshair for automatic acquisition in toggle mode (degrees)
 sv Hur nära hårkorset en fiende måste vara för automatisk låsning i växelläge (grader)
+
+@ How far the glow spreads around a light
+sv Hur långt skenet sprider sig runt ett ljus
 
 @ How far the view tilts up and down when you tilt the controller (pitch axis)
 sv Hur långt vyn lutar upp och ner när du lutar handkontrollen (nickaxel)
@@ -1534,6 +1561,9 @@ sv Inlevelse: visas några sekunder bara när värdet ändras
 
 @ Keeps textures sharp on floors and walls seen at steep angles
 sv Håller texturer skarpa på golv och väggar som ses i branta vinklar
+
+@ Light sources glow: lamps, lava, teleporters, sparks and explosions; Bloom Settings tunes it
+sv Ljuskällor glöder: lampor, lava, teleportrar, gnistor och explosioner; Bloominställningar justerar det
 
 @ Lights from rockets, muzzle flashes and explosions brighten nearby walls
 sv Ljus från raketer, mynningsflammor och explosioner lyser upp närliggande väggar
@@ -1651,6 +1681,9 @@ sv Ersätter de klassiska prickpartiklarna med glödande gnistor, rök och blod;
 
 @ Resolution and detail inside portal and teleporter views; lower tiers trim nested effects
 sv Upplösning och detalj i portal- och teleportervyer; lägre nivåer skalar ner nästlade effekter
+
+@ Resolution of the glow: low is cheaper and softer
+sv Upplösning för skenet: låg är billigare och mjukare
 
 @ Rippling light patterns on surfaces under water and slime
 sv Krusande ljusmönster på ytor under vatten och slem

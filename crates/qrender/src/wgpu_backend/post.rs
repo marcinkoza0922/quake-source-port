@@ -105,6 +105,7 @@ impl Renderer {
         // a scaled scene is filtered up/down to the output (vkQuake r_scale)
         let sampler = if t.scene == (self.width, self.height) { &self.samplers.clamp } else { &self.samplers.linear };
         let vel = t.vel.as_ref().map_or(&self.black, |v| v.view());
+        let bloom = t.bloom.as_ref().map_or(&self.black, |b| b.view());
         self.bufs.post_group = Some(self.dev.create_bind_group(&wgpu::BindGroupDescriptor {
             label: None,
             layout: &self.pipes.post_bgl,
@@ -115,6 +116,9 @@ impl Renderer {
                 wgpu::BindGroupEntry { binding: 3, resource: wgpu::BindingResource::Sampler(sampler) },
                 wgpu::BindGroupEntry { binding: 4, resource: wgpu::BindingResource::TextureView(&self.palette_view) },
                 wgpu::BindGroupEntry { binding: 5, resource: lut.as_entire_binding() },
+                // r_bloom chain level 0 (black = none), linearly filtered
+                wgpu::BindGroupEntry { binding: 6, resource: wgpu::BindingResource::TextureView(bloom) },
+                wgpu::BindGroupEntry { binding: 7, resource: wgpu::BindingResource::Sampler(&self.samplers.linear) },
             ],
         }));
     }
@@ -129,6 +133,8 @@ pub(super) struct PostView {
     /// Motion blur scale in target uv (x, y); 0 = off.
     pub(super) mb: [f32; 2],
     pub(super) speed_blur: f32,
+    /// r_bloom: level 0 uv rectangle of the view and strength (0 = off).
+    pub(super) bloom: ([f32; 4], f32),
 }
 
 pub(super) fn post_draw(st: &Settings, v: &PostView, out: [u32; 2], render_scale: f32, time: f64) -> DrawU {
@@ -137,7 +143,8 @@ pub(super) fn post_draw(st: &Settings, v: &PostView, out: [u32; 2], render_scale
     let mut model = [0.0; 16];
     model[..4].copy_from_slice(&[v.mb[0], v.mb[1], v.speed_blur, st.motion_blur_quality.min(1) as f32]);
     model[4..8].copy_from_slice(&[w as f32, h as f32, crate::softemu::post_dither(st), render_scale]);
-    model[8..12].copy_from_slice(&[g.intensity.clamp(0.25, 3.0), g.noise.clamp(0.0, 2.0), (time % 1000.0) as f32, 0.0]);
+    model[8..12].copy_from_slice(&[g.intensity.clamp(0.25, 3.0), g.noise.clamp(0.0, 2.0), (time % 1000.0) as f32, v.bloom.1]);
+    model[12..16].copy_from_slice(&v.bloom.0);
     DrawU {
         model,
         color: v.blend.map(|c| c.clamp(0.0, 1.0)),

@@ -163,6 +163,21 @@ ca Qualitat de la sang
 @ Blood Splatter Settings
 ca Configuració de les esquitxades de sang
 
+@ Bloom
+ca Resplendor
+
+@ Bloom Intensity
+ca Intensitat del resplendor
+
+@ Bloom Quality
+ca Qualitat del resplendor
+
+@ Bloom Settings
+ca Configuració del resplendor
+
+@ Bloom Size
+ca Mida del resplendor
+
 @ Blue
 ca Blau
 
@@ -174,6 +189,9 @@ ca Realça o retalla els aguts, en decibels
 
 @ Boost or cut low frequencies in decibels
 ca Realça o retalla els greus, en decibels
+
+@ Bright Surfaces
+ca Superfícies brillants
 
 @ Brightness
 ca Brillantor
@@ -1385,6 +1403,9 @@ ca Un railgun a l'estil de Quake III: un projectil que travessa tots els enemics
 @ A Zelda-style hookshot: fire sends a chain hook out; it latches onto hookable surfaces or enemies and reels you in; fire again to let go
 ca Un ganxo a l'estil de Zelda: disparar llança un ganxo amb cadena que s'enganxa a superfícies aptes o a enemics i t'hi estira; torna a disparar per deixar-te anar
 
+@ Also make bright walls and sky glow, like DarkPlaces; 0 keeps the glow to light sources
+ca També fa resplendir parets clares i el cel, com DarkPlaces; 0 limita el resplendor a les fonts de llum
+
 @ Also translates the engine's console messages; off keeps them in English
 ca Tradueix també els missatges de consola del motor; desactivat els deixa en anglès
 
@@ -1496,8 +1517,14 @@ ca Mantén el tret i passa el punt de mira pels monstres per posar-los a la cua,
 @ Hold: keep Lock-on held. Toggle: press Auto-aim Toggle to enable automatic acquisition. Click look stick to switch targets
 ca Mantén: mantén premut Fixa l'objectiu. Alternat: prem Punteria automàtica (alternada) per activar la fixació automàtica. Prem la palanca de vista per canviar d'objectiu
 
+@ How bright the glow is
+ca Com de brillant és el resplendor
+
 @ How close an enemy must be to the crosshair for automatic acquisition in toggle mode (degrees)
 ca Com de prop del punt de mira ha de ser un enemic per fixar-lo automàticament en mode alternat (graus)
+
+@ How far the glow spreads around a light
+ca Fins on s'estén el resplendor al voltant d'una llum
 
 @ How far the view tilts up and down when you tilt the controller (pitch axis)
 ca Quant s'inclina la vista amunt i avall en inclinar el comandament (eix de capcineig)
@@ -1534,6 +1561,9 @@ ca Immersiu: apareix uns segons només quan canvia el seu valor
 
 @ Keeps textures sharp on floors and walls seen at steep angles
 ca Manté nítides les textures de terres i parets vistes en angles molt inclinats
+
+@ Light sources glow: lamps, lava, teleporters, sparks and explosions; Bloom Settings tunes it
+ca Les fonts de llum resplendeixen: llums, lava, teletransportadors, espurnes i explosions; Configuració del resplendor l'ajusta
 
 @ Lights from rockets, muzzle flashes and explosions brighten nearby walls
 ca Les llums de coets, flamarades de canó i explosions il·luminen les parets properes
@@ -1651,6 +1681,9 @@ ca Substitueix les partícules clàssiques de punts per espurnes brillants, fum 
 
 @ Resolution and detail inside portal and teleporter views; lower tiers trim nested effects
 ca Resolució i detall a les vistes de portals i teletransportadors; els nivells baixos retallen els efectes imbricats
+
+@ Resolution of the glow: low is cheaper and softer
+ca Resolució del resplendor: baixa és més barata i suau
 
 @ Rippling light patterns on surfaces under water and slime
 ca Reflexos de llum ondulants a les superfícies sota l'aigua i el llot

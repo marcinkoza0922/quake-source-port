@@ -16,6 +16,7 @@ pub use math::*;
 mod world_draw;
 use world_draw::*;
 mod lightmaps;
+mod bloom;
 pub(super) use lightmaps::LightmapRequests;
 
 type Mat4 = [f32; 16];
@@ -1188,6 +1189,11 @@ impl Renderer {
                     vk::ImageLayout::COLOR_ATTACHMENT_OPTIMAL,
                 );
             }
+            if let Some(b) = &t.bloom {
+                for img in std::iter::once(&b.glow).chain(&b.glow_ms) {
+                    gpu::barrier(&dev, cmd, img.image, crng, vk::ImageLayout::UNDEFINED, vk::ImageLayout::COLOR_ATTACHMENT_OPTIMAL);
+                }
+            }
             let area = vk::Rect2D {
                 offset: vk::Offset2D::default(),
                 extent: vk::Extent2D {
@@ -1219,12 +1225,12 @@ impl Renderer {
             // resolves only there); ro: depth attachment read-only.
             let begin = |load: bool, last: bool, ro: bool| {
                 let lop = if load { vk::AttachmentLoadOp::LOAD } else { vk::AttachmentLoadOp::CLEAR };
-                let catt = [match &t.color_ms {
+                let att = |ms: Option<&Image>, single: &Image| match ms {
                     Some(ms) if last => vk::RenderingAttachmentInfo::default()
                         .image_view(ms.view)
                         .image_layout(vk::ImageLayout::COLOR_ATTACHMENT_OPTIMAL)
                         .resolve_mode(vk::ResolveModeFlags::AVERAGE)
-                        .resolve_image_view(t.color.view)
+                        .resolve_image_view(single.view)
                         .resolve_image_layout(vk::ImageLayout::COLOR_ATTACHMENT_OPTIMAL)
                         .load_op(lop)
                         .store_op(vk::AttachmentStoreOp::DONT_CARE)
@@ -1236,12 +1242,18 @@ impl Renderer {
                         .store_op(vk::AttachmentStoreOp::STORE)
                         .clear_value(clear),
                     None => vk::RenderingAttachmentInfo::default()
-                        .image_view(t.color.view)
+                        .image_view(single.view)
                         .image_layout(vk::ImageLayout::COLOR_ATTACHMENT_OPTIMAL)
                         .load_op(lop)
                         .store_op(vk::AttachmentStoreOp::STORE)
                         .clear_value(clear),
-                }];
+                };
+                // r_bloom: the glow attachment follows the colour's MSAA/resolve
+                let catt = [
+                    att(t.color_ms.as_ref(), &t.color),
+                    t.bloom.as_ref().map_or(vk::RenderingAttachmentInfo::default(), |b| att(b.glow_ms.as_ref(), &b.glow)),
+                ];
+                let catt = &catt[..if t.bloom.is_some() { 2 } else { 1 }];
                 let datt = vk::RenderingAttachmentInfo::default()
                     .image_view(t.depth.view)
                     .image_layout(if ro {
@@ -1260,7 +1272,7 @@ impl Renderer {
                 let ri = vk::RenderingInfo::default()
                     .render_area(area_target)
                     .layer_count(1)
-                    .color_attachments(&catt)
+                    .color_attachments(catt)
                     .depth_attachment(&datt);
                 dev.cmd_begin_rendering(cmd, &ri);
             };
@@ -1672,6 +1684,15 @@ impl Renderer {
                 vk::ImageLayout::SHADER_READ_ONLY_OPTIMAL,
             );
 
+            let bloom = match (&t.bloom, view.is_some()) {
+                (Some(b), true) => {
+                    gpu::barrier(&dev, cmd, b.glow.image, crng, vk::ImageLayout::COLOR_ATTACHMENT_OPTIMAL, vk::ImageLayout::SHADER_READ_ONLY_OPTIMAL);
+                    let r = bloom::record(&dev, cmd, p, set[0], b, [scene_w, scene_h], [sw, sh], st);
+                    dev.cmd_bind_descriptor_sets(cmd, gfx, p.layout, 0, &set, &[0]);
+                    Some(r)
+                }
+                _ => None,
+            };
             let (fx, fy) = (pw as f32 / w.max(1) as f32, ph as f32 / h.max(1) as f32);
             let vp_cell = vk::Viewport {
                 x: rect[0] as f32 * fx,
@@ -1742,6 +1763,9 @@ impl Renderer {
                 mb_h: h.max(1) as f32,
                 g_quality: st.goggles.quality.min(2),
                 warp: pass.warp,
+                bloom_tex: bloom.as_ref().map_or(0, |b| b.slot),
+                bloom: bloom.as_ref().map_or(0.0, |b| b.amount),
+                bloom_uv: bloom.as_ref().map_or([0.0; 2], |b| b.uv),
             }]));
             dev.cmd_draw(cmd, 3, 1, 0, 0);
             if pi + 1 < npasses {

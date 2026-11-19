@@ -163,6 +163,21 @@ el Ποιότητα αίματος
 @ Blood Splatter Settings
 el Ρυθμίσεις πιτσιλιών αίματος
 
+@ Bloom
+el Λάμψη
+
+@ Bloom Intensity
+el Ένταση λάμψης
+
+@ Bloom Quality
+el Ποιότητα λάμψης
+
+@ Bloom Settings
+el Ρυθμίσεις λάμψης
+
+@ Bloom Size
+el Μέγεθος λάμψης
+
 @ Blue
 el Μπλε
 
@@ -174,6 +189,9 @@ el Ενισχύει ή μειώνει τις υψηλές συχνότητες �
 
 @ Boost or cut low frequencies in decibels
 el Ενισχύει ή μειώνει τις χαμηλές συχνότητες σε ντεσιμπέλ
+
+@ Bright Surfaces
+el Φωτεινές επιφάνειες
 
 @ Brightness
 el Φωτεινότητα
@@ -1385,6 +1403,9 @@ el Railgun τύπου Quake III: βλήμα που διαπερνά κάθε ε�
 @ A Zelda-style hookshot: fire sends a chain hook out; it latches onto hookable surfaces or enemies and reels you in; fire again to let go
 el Γάντζος τύπου Zelda: η βολή εκτοξεύει γάντζο με αλυσίδα που πιάνεται σε κατάλληλες επιφάνειες ή εχθρούς και σε τραβά προς τα εκεί· νέα βολή για να αφήσεις
 
+@ Also make bright walls and sky glow, like DarkPlaces; 0 keeps the glow to light sources
+el Κάνει και τους φωτεινούς τοίχους και τον ουρανό να λάμπουν, όπως το DarkPlaces· το 0 κρατά τη λάμψη στις πηγές φωτός
+
 @ Also translates the engine's console messages; off keeps them in English
 el Μεταφράζει και τα μηνύματα κονσόλας της μηχανής· όταν είναι ανενεργό μένουν στα αγγλικά
 
@@ -1496,8 +1517,14 @@ el Κράτα τη βολή και πέρνα το στόχαστρο πάνω �
 @ Hold: keep Lock-on held. Toggle: press Auto-aim Toggle to enable automatic acquisition. Click look stick to switch targets
 el Κράτημα: κράτα πατημένο το Κλείδωμα στόχου. Εναλλαγή: πάτα Εναλλαγή αυτόματης στόχευσης για αυτόματο εντοπισμό. Πάτα το αναλογικό θέας για αλλαγή στόχου
 
+@ How bright the glow is
+el Πόσο φωτεινή είναι η λάμψη
+
 @ How close an enemy must be to the crosshair for automatic acquisition in toggle mode (degrees)
 el Πόσο κοντά στο στόχαστρο πρέπει να είναι ένας εχθρός για αυτόματο εντοπισμό σε λειτουργία εναλλαγής (μοίρες)
+
+@ How far the glow spreads around a light
+el Πόσο μακριά απλώνεται η λάμψη γύρω από ένα φως
 
 @ How far the view tilts up and down when you tilt the controller (pitch axis)
 el Πόσο γέρνει η θέα πάνω-κάτω όταν γέρνεις το χειριστήριο (άξονας pitch)
@@ -1534,6 +1561,9 @@ el Καθηλωτικό: εμφανίζεται για λίγα δευτερόλ
 
 @ Keeps textures sharp on floors and walls seen at steep angles
 el Κρατά τις υφές ευκρινείς σε πατώματα και τοίχους που φαίνονται υπό απότομη γωνία
+
+@ Light sources glow: lamps, lava, teleporters, sparks and explosions; Bloom Settings tunes it
+el Οι πηγές φωτός λάμπουν: λάμπες, λάβα, τηλεμεταφορείς, σπίθες και εκρήξεις· οι Ρυθμίσεις λάμψης τη ρυθμίζουν
 
 @ Lights from rockets, muzzle flashes and explosions brighten nearby walls
 el Τα φώτα από ρουκέτες, λάμψεις κάννης και εκρήξεις φωτίζουν τους κοντινούς τοίχους
@@ -1651,6 +1681,9 @@ el Αντικαθιστά τα κλασικά σωματίδια κουκκίδ�
 
 @ Resolution and detail inside portal and teleporter views; lower tiers trim nested effects
 el Ανάλυση και λεπτομέρεια μέσα στη θέα πυλών και τηλεμεταφορέων· οι χαμηλότερες βαθμίδες περιορίζουν τα εμφωλευμένα εφέ
+
+@ Resolution of the glow: low is cheaper and softer
+el Ανάλυση της λάμψης: η χαμηλή είναι φθηνότερη και πιο απαλή
 
 @ Rippling light patterns on surfaces under water and slime
 el Κυματιστά φωτεινά μοτίβα σε επιφάνειες κάτω από νερό και γλίτσα

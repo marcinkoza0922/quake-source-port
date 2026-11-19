@@ -472,7 +472,7 @@ fn death_shortcuts_and_controller_select_recovery() {
 #[test]
 fn enhancements_hub_and_subpages_navigate_back_to_their_parent() {
     let mut cv = Cvars::default();
-    for name in ["r_enhancedwater", "r_enhancedfx", "r_blood", "r_debris"] {
+    for name in ["r_enhancedwater", "r_enhancedfx", "r_blood", "r_debris", "r_bloom"] {
         cv.register(name, "1", 0);
     }
     let mut menu = Menu::new();
@@ -480,7 +480,7 @@ fn enhancements_hub_and_subpages_navigate_back_to_their_parent() {
     menu.page_cursor = PAGES.iter().position(|(_, page)| *page == Page::Enhancements).unwrap();
     menu.key(K_ENTER, &mut cv, false);
     assert_eq!(menu.screen, Screen::OptionsPage(Page::Enhancements));
-    for page in [Page::Water, Page::Debris, Page::Impacts] {
+    for page in [Page::Water, Page::Bloom, Page::Debris, Page::Impacts] {
         let row = ENHANCEMENTS.iter().position(|item| matches!(item, Item::Sub {page:p,..} if *p==page)).unwrap();
         menu.opt_cursor = row;
         menu.key(K_ENTER, &mut cv, false);
@@ -491,7 +491,7 @@ fn enhancements_hub_and_subpages_navigate_back_to_their_parent() {
     }
     menu.key(K_ESCAPE, &mut cv, false);
     assert_eq!(menu.screen, Screen::Options);
-    for cvar in ["r_impact_nails", "r_blood_amount", "r_debris_quality", "r_debris_gibs", "r_wateralpha"] {
+    for cvar in ["r_impact_nails", "r_blood_amount", "r_debris_quality", "r_debris_gibs", "r_wateralpha", "r_bloom_intensity", "r_bloom_bright"] {
         assert!(option_cvars().any(|name| name==cvar));
     }
 }

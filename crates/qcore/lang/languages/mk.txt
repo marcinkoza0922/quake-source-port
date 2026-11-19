@@ -163,6 +163,21 @@ mk Квалитет на крвта
 @ Blood Splatter Settings
 mk Поставки за прскање крв
 
+@ Bloom
+mk Сјај
+
+@ Bloom Intensity
+mk Интензитет на сјај
+
+@ Bloom Quality
+mk Квалитет на сјај
+
+@ Bloom Settings
+mk Поставки за сјај
+
+@ Bloom Size
+mk Големина на сјај
+
 @ Blue
 mk Сина
 
@@ -174,6 +189,9 @@ mk Засилува или ослабува високи фреквенции в
 
 @ Boost or cut low frequencies in decibels
 mk Засилува или ослабува ниски фреквенции во dB
+
+@ Bright Surfaces
+mk Светли површини
 
 @ Brightness
 mk Осветленост
@@ -1385,6 +1403,9 @@ mk Рејлган во стилот на Quake III: проектил што го
 @ A Zelda-style hookshot: fire sends a chain hook out; it latches onto hookable surfaces or enemies and reels you in; fire again to let go
 mk Кука во стилот на Zelda: пукањето исфрла кука на синџир; таа се закачува за погодни површини или непријатели и те привлекува; пукни пак за да ја пуштиш
 
+@ Also make bright walls and sky glow, like DarkPlaces; 0 keeps the glow to light sources
+mk Сјаат и светлите ѕидови и небото, како во DarkPlaces; 0 го задржува сјајот кај изворите на светлина
+
 @ Also translates the engine's console messages; off keeps them in English
 mk Ги преведува и пораките на конзолата од моторот; искл. ги остава на англиски
 
@@ -1496,8 +1517,14 @@ mk Држи пукање и помини со нишанот преку чудо
 @ Hold: keep Lock-on held. Toggle: press Auto-aim Toggle to enable automatic acquisition. Click look stick to switch targets
 mk Држење: држи Зафат. Префрлање: притисни Автонишан со префрлање за автоматски зафат. Притисни го стикот за поглед за да ја смениш целта
 
+@ How bright the glow is
+mk Колку е силен сјајот
+
 @ How close an enemy must be to the crosshair for automatic acquisition in toggle mode (degrees)
 mk Колку близу до нишанот мора да е непријателот за автоматски зафат во режим префрлање (степени)
+
+@ How far the glow spreads around a light
+mk Колку далеку се шири сјајот околу светлина
 
 @ How far the view tilts up and down when you tilt the controller (pitch axis)
 mk Колку погледот се навалува горе-долу кога го навалуваш контролерот (оска pitch)
@@ -1534,6 +1561,9 @@ mk Потопувачки: се појавува неколку секунди �
 
 @ Keeps textures sharp on floors and walls seen at steep angles
 mk Ги држи текстурите остри на подови и ѕидови гледани под остар агол
+
+@ Light sources glow: lamps, lava, teleporters, sparks and explosions; Bloom Settings tunes it
+mk Изворите на светлина сјаат: ламби, лава, телепорти, искри и експлозии; Поставки за сјај го прилагодуваат
 
 @ Lights from rockets, muzzle flashes and explosions brighten nearby walls
 mk Светлата од ракети, блесоци од цевки и експлозии ги осветлуваат блиските ѕидови
@@ -1651,6 +1681,9 @@ mk Ги заменува класичните точкести честички 
 
 @ Resolution and detail inside portal and teleporter views; lower tiers trim nested effects
 mk Резолуција и детали во погледите низ портали и телепорти; пониските нивоа ги кратат вгнездените ефекти
+
+@ Resolution of the glow: low is cheaper and softer
+mk Резолуција на сјајот: ниската е поевтина и помека
 
 @ Rippling light patterns on surfaces under water and slime
 mk Брановидни светлосни шари на површините под вода и слуз

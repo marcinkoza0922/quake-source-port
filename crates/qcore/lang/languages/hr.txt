@@ -163,6 +163,21 @@ hr Kvaliteta krvi
 @ Blood Splatter Settings
 hr Postavke prskanja krvi
 
+@ Bloom
+hr Sjaj
+
+@ Bloom Intensity
+hr Intenzitet sjaja
+
+@ Bloom Quality
+hr Kvaliteta sjaja
+
+@ Bloom Settings
+hr Postavke sjaja
+
+@ Bloom Size
+hr Veličina sjaja
+
 @ Blue
 hr Plava
 
@@ -174,6 +189,9 @@ hr Pojačava ili prigušuje visoke frekvencije u decibelima
 
 @ Boost or cut low frequencies in decibels
 hr Pojačava ili prigušuje niske frekvencije u decibelima
+
+@ Bright Surfaces
+hr Svijetle površine
 
 @ Brightness
 hr Svjetlina
@@ -1385,6 +1403,9 @@ hr Railgun u stilu Quakea III: projektil koji probija svakog neprijatelja na svo
 @ A Zelda-style hookshot: fire sends a chain hook out; it latches onto hookable surfaces or enemies and reels you in; fire again to let go
 hr Kuka u stilu Zelde: paljba izbacuje kuku na lancu; ona se zakači za prikladne površine ili neprijatelje i privuče vas; ponovna paljba je otpušta
 
+@ Also make bright walls and sky glow, like DarkPlaces; 0 keeps the glow to light sources
+hr Sjaje i svijetli zidovi i nebo, kao u DarkPlacesu; 0 zadržava sjaj na izvorima svjetla
+
 @ Also translates the engine's console messages; off keeps them in English
 hr Prevodi i poruke konzole pogona; isključeno ih ostavlja na engleskom
 
@@ -1496,8 +1517,14 @@ hr Držite paljbu i prijeđite nišanom preko čudovišta da ih dodate u red, ot
 @ Hold: keep Lock-on held. Toggle: press Auto-aim Toggle to enable automatic acquisition. Click look stick to switch targets
 hr Drži: držite Zahvat mete. Prekidač: pritisnite Prekidač autom. ciljanja za automatski zahvat. Klik palicom za pogled mijenja metu
 
+@ How bright the glow is
+hr Koliko je sjaj jak
+
 @ How close an enemy must be to the crosshair for automatic acquisition in toggle mode (degrees)
 hr Koliko blizu nišana neprijatelj mora biti za automatski zahvat u načinu prekidača (stupnjevi)
+
+@ How far the glow spreads around a light
+hr Koliko se daleko sjaj širi oko svjetla
 
 @ How far the view tilts up and down when you tilt the controller (pitch axis)
 hr Koliko se pogled naginje gore-dolje kad nagnete kontroler (os nagiba)
@@ -1534,6 +1561,9 @@ hr Imerzivno: pojavljuje se na nekoliko sekundi samo kad se vrijednost promijeni
 
 @ Keeps textures sharp on floors and walls seen at steep angles
 hr Drži teksture oštrima na podovima i zidovima gledanima pod oštrim kutom
+
+@ Light sources glow: lamps, lava, teleporters, sparks and explosions; Bloom Settings tunes it
+hr Izvori svjetla sjaje: svjetiljke, lava, teleporteri, iskre i eksplozije; Postavke sjaja ga podešavaju
 
 @ Lights from rockets, muzzle flashes and explosions brighten nearby walls
 hr Svjetlo raketa, bljeskova cijevi i eksplozija osvjetljava obližnje zidove
@@ -1651,6 +1681,9 @@ hr Zamjenjuje klasične točkaste čestice svjetlucavim iskrama, dimom i krvlju;
 
 @ Resolution and detail inside portal and teleporter views; lower tiers trim nested effects
 hr Razlučivost i detalji u prikazima portala i teleportera; niže razine skraćuju ugniježđene efekte
+
+@ Resolution of the glow: low is cheaper and softer
+hr Rezolucija sjaja: niska je jeftinija i mekša
 
 @ Rippling light patterns on surfaces under water and slime
 hr Valoviti svjetlosni uzorci na površinama pod vodom i sluzi

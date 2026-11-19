@@ -163,6 +163,21 @@ ja 血の品質
 @ Blood Splatter Settings
 ja 血しぶき設定
 
+@ Bloom
+ja ブルーム
+
+@ Bloom Intensity
+ja ブルーム強度
+
+@ Bloom Quality
+ja ブルーム品質
+
+@ Bloom Settings
+ja ブルーム設定
+
+@ Bloom Size
+ja ブルームサイズ
+
 @ Blue
 ja 青
 
@@ -174,6 +189,9 @@ ja 高音域をデシベル単位で増減します
 
 @ Boost or cut low frequencies in decibels
 ja 低音域をデシベル単位で増減します
+
+@ Bright Surfaces
+ja 明るい面
 
 @ Brightness
 ja 明るさ
@@ -1385,6 +1403,9 @@ ja Quake III風のレールガン。直線上のすべての敵を貫通する�
 @ A Zelda-style hookshot: fire sends a chain hook out; it latches onto hookable surfaces or enemies and reels you in; fire again to let go
 ja ゼルダ風のフックショット。発射するとチェーン付きのフックが飛び、引っ掛けられる面や敵に刺さってプレイヤーを引き寄せます。もう一度撃つと離します
 
+@ Also make bright walls and sky glow, like DarkPlaces; 0 keeps the glow to light sources
+ja 明るい壁や空も輝かせる（DarkPlaces風）。0 で光源だけが輝く
+
 @ Also translates the engine's console messages; off keeps them in English
 ja エンジンのコンソールメッセージも翻訳します。オフにすると英語のままです
 
@@ -1496,8 +1517,14 @@ ja 射撃ボタンを長押ししてクロスヘアでモンスターをなぞ�
 @ Hold: keep Lock-on held. Toggle: press Auto-aim Toggle to enable automatic acquisition. Click look stick to switch targets
 ja 長押し：ロックオンを押し続けます。切り替え：「オートエイム切り替え」を押すと自動捕捉が有効になります。視点スティックを押し込むと対象を切り替えます
 
+@ How bright the glow is
+ja グローの明るさ
+
 @ How close an enemy must be to the crosshair for automatic acquisition in toggle mode (degrees)
 ja 切り替えモードで自動捕捉するために敵がクロスヘアにどれだけ近い必要があるか（度）
+
+@ How far the glow spreads around a light
+ja 光の周りにグローが広がる距離
 
 @ How far the view tilts up and down when you tilt the controller (pitch axis)
 ja コントローラーを傾けたときに視点が上下に傾く量（ピッチ軸）
@@ -1534,6 +1561,9 @@ ja 没入型：値が変化したときだけ数秒間表示されます
 
 @ Keeps textures sharp on floors and walls seen at steep angles
 ja 急な角度で見た床や壁のテクスチャを鮮明に保ちます
+
+@ Light sources glow: lamps, lava, teleporters, sparks and explosions; Bloom Settings tunes it
+ja 光源が輝く：ランプ、溶岩、テレポーター、火花、爆発。ブルーム設定で調整
 
 @ Lights from rockets, muzzle flashes and explosions brighten nearby walls
 ja ロケット、マズルフラッシュ、爆発の光が近くの壁を照らします
@@ -1651,6 +1681,9 @@ ja クラシックな点のパーティクルを光る火花、煙、血に置�
 
 @ Resolution and detail inside portal and teleporter views; lower tiers trim nested effects
 ja ポータルとテレポーター内の映像の解像度と詳細度。低い段階では入れ子のエフェクトを省略します
+
+@ Resolution of the glow: low is cheaper and softer
+ja グローの解像度：低は軽くて柔らかい
 
 @ Rippling light patterns on surfaces under water and slime
 ja 水中やスライム中の面に揺らめく光の模様

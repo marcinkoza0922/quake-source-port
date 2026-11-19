@@ -111,6 +111,11 @@ pub(super) fn tooltip(item: Item) -> Option<&'static str> {
         "r_blood_gibs" => "Moving gibs leave blood on surfaces they touch",
         "r_debris_movers" => "Debris lands on and is carried or shoved by doors, lifts and platforms",
         "r_debris_force" => "How hard shots and explosions push debris around",
+        "r_bloom" => "Light sources glow: lamps, lava, teleporters, sparks and explosions; Bloom Settings tunes it",
+        "r_bloom_quality" => "Resolution of the glow: low is cheaper and softer",
+        "r_bloom_intensity" => "How bright the glow is",
+        "r_bloom_size" => "How far the glow spreads around a light",
+        "r_bloom_bright" => "Also make bright walls and sky glow, like DarkPlaces; 0 keeps the glow to light sources",
         "r_enhancedwater" => "Turns on the extra liquid effects; Water Settings controls each one",
         "r_watertranslucency" => "See through enhanced water; enables Water Opacity",
         "r_wateralpha" => "Surface opacity; requires Enhanced Water and Translucent Water",
@@ -235,6 +240,7 @@ pub(super) fn page_items(p: Page) -> &'static [Item] {
         Page::HudLayout => HUD_LAYOUT,
         Page::Messages => MESSAGES,
         Page::Water => WATER,
+        Page::Bloom => BLOOM,
         Page::Debris => DEBRIS,
         Page::Blood => BLOOD,
         Page::ScreenShader => SCREEN_SHADER,
@@ -272,6 +278,7 @@ pub(super) fn page_name(p: Page) -> &'static str {
         Page::HudLayout => "Modern HUD Layout",
         Page::Messages => "Messages & Captions",
         Page::Water => "Water Settings",
+        Page::Bloom => "Bloom Settings",
         Page::Impacts => "FX Settings",
         Page::Debris => "Debris Settings",
         Page::Blood => "Blood Splatter Settings",
@@ -322,6 +329,7 @@ pub(super) fn sub_disabled(page: Page, cv: &Cvars) -> bool {
         || (page == Page::Autosave && cv.value_of("sv_autosave") == 0.0)
         || (page == Page::HudLayout && cv.value_of("scr_hudstyle") == 0.0)
         || (page == Page::Water && cv.value_of("r_enhancedwater") == 0.0)
+        || (page == Page::Bloom && cv.value_of("r_bloom") == 0.0)
         || (page == Page::Impacts && cv.value_of("r_enhancedfx") == 0.0)
         || (page == Page::Blood && cv.value_of("r_blood") == 0.0)
         || (page == Page::Debris && cv.value_of("r_debris") == 0.0)

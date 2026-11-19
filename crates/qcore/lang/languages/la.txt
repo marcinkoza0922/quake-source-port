@@ -163,6 +163,21 @@ la Qualitas sanguinis
 @ Blood Splatter Settings
 la Optiones aspersionis sanguinis
 
+@ Bloom
+la Fulgor
+
+@ Bloom Intensity
+la Vis fulgoris
+
+@ Bloom Quality
+la Qualitas fulgoris
+
+@ Bloom Settings
+la Optiones fulgoris
+
+@ Bloom Size
+la Magnitudo fulgoris
+
 @ Blue
 la Caeruleus
 
@@ -174,6 +189,9 @@ la Frequentias altas in decibelis auget vel minuit
 
 @ Boost or cut low frequencies in decibels
 la Frequentias graves in decibelis auget vel minuit
+
+@ Bright Surfaces
+la Superficies clarae
 
 @ Brightness
 la Claritas
@@ -1385,6 +1403,9 @@ la Railgun more Quake III: glans quae omnem hostem in linea sua transfigit, 2 ce
 @ A Zelda-style hookshot: fire sends a chain hook out; it latches onto hookable surfaces or enemies and reels you in; fire again to let go
 la Uncus more Zelda: ictus uncum catenatum emittit, qui superficiebus aptis vel hostibus haeret teque attrahit; iterum feri ut dimittas
 
+@ Also make bright walls and sky glow, like DarkPlaces; 0 keeps the glow to light sources
+la Etiam parietes clari et caelum fulgent, ut in DarkPlaces; 0 fulgorem fontibus lucis servat
+
 @ Also translates the engine's console messages; off keeps them in English
 la Nuntios consolatorii machinae quoque vertit; inactivum eos Anglice servat
 
@@ -1496,8 +1517,14 @@ la Ictum tene et reticulum super monstra duc ut in ordinem redigantur, dimitte u
 @ Hold: keep Lock-on held. Toggle: press Auto-aim Toggle to enable automatic acquisition. Click look stick to switch targets
 la Tenere: Capturam tene. Alternans: preme Collimationem automaticam alternantem ut captura automatica activetur. Vectem aspectus preme ut scopos mutes
 
+@ How bright the glow is
+la Quam clarus fulgor sit
+
 @ How close an enemy must be to the crosshair for automatic acquisition in toggle mode (degrees)
 la Quam prope reticulum hostis esse debeat ut modo alternanti sponte capiatur (gradus)
+
+@ How far the glow spreads around a light
+la Quam longe fulgor circa lucem diffundatur
 
 @ How far the view tilts up and down when you tilt the controller (pitch axis)
 la Quantum aspectus sursum deorsumque inclinetur cum moderatrum inclinas (axis verticalis)
@@ -1534,6 +1561,9 @@ la Immersivus: paucas secundas tantum apparet cum valor mutatur
 
 @ Keeps textures sharp on floors and walls seen at steep angles
 la Texturas in pavimentis et parietibus sub angulis acutis visis acutas servat
+
+@ Light sources glow: lamps, lava, teleporters, sparks and explosions; Bloom Settings tunes it
+la Fontes lucis fulgent: lucernae, lava, teleportatores, scintillae, displosiones; Optiones fulgoris eum temperant
 
 @ Lights from rockets, muzzle flashes and explosions brighten nearby walls
 la Lumina rochetarum, fulgurum ictuum et explosionum parietes propinquos illustrant
@@ -1651,6 +1681,9 @@ la Particulas classicas punctorum scintillis lucentibus, fumo et sanguine substi
 
 @ Resolution and detail inside portal and teleporter views; lower tiers trim nested effects
 la Resolutio et subtilitas in aspectibus portarum et teleportatorum; gradus inferiores effectus insitos minuunt
+
+@ Resolution of the glow: low is cheaper and softer
+la Resolutio fulgoris: humilis vilior et mollior est
 
 @ Rippling light patterns on surfaces under water and slime
 la Figurae lucis undulantes in superficiebus sub aqua et limo

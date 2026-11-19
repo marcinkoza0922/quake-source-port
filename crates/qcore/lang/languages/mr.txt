@@ -163,6 +163,21 @@ mr रक्ताची गुणवत्ता
 @ Blood Splatter Settings
 mr रक्त शिंतोडे सेटिंग्ज
 
+@ Bloom
+mr ब्लूम
+
+@ Bloom Intensity
+mr ब्लूम तीव्रता
+
+@ Bloom Quality
+mr ब्लूम गुणवत्ता
+
+@ Bloom Settings
+mr ब्लूम सेटिंग्ज
+
+@ Bloom Size
+mr ब्लूम आकार
+
 @ Blue
 mr निळा
 
@@ -174,6 +189,9 @@ mr उच्च फ्रिक्वेन्सी डेसिबलमध्
 
 @ Boost or cut low frequencies in decibels
 mr कमी फ्रिक्वेन्सी डेसिबलमध्ये वाढवा किंवा कमी करा
+
+@ Bright Surfaces
+mr तेजस्वी पृष्ठभाग
 
 @ Brightness
 mr उजळपणा
@@ -1385,6 +1403,9 @@ mr Quake III शैलीची रेलगन: एक गोळी जी त�
 @ A Zelda-style hookshot: fire sends a chain hook out; it latches onto hookable surfaces or enemies and reels you in; fire again to let go
 mr Zelda शैलीचा हुकशॉट: फायर केल्यावर साखळी हुक बाहेर जातो; तो हुक होणाऱ्या पृष्ठभागांना किंवा शत्रूंना अडकतो आणि तुम्हाला ओढून घेतो; सोडण्यासाठी पुन्हा फायर करा
 
+@ Also make bright walls and sky glow, like DarkPlaces; 0 keeps the glow to light sources
+mr तेजस्वी भिंती आणि आकाशही चमकवते, DarkPlaces प्रमाणे; 0 चमक प्रकाश स्रोतांपुरती ठेवते
+
 @ Also translates the engine's console messages; off keeps them in English
 mr इंजिनचे कन्सोल संदेशही भाषांतरित करते; बंद केल्यास ते इंग्रजीतच राहतात
 
@@ -1496,8 +1517,14 @@ mr फायर धरा आणि राक्षसांवरून क्�
 @ Hold: keep Lock-on held. Toggle: press Auto-aim Toggle to enable automatic acquisition. Click look stick to switch targets
 mr धरून ठेवा: लॉक-ऑन धरून ठेवा. टॉगल: आपोआप लक्ष्य करण्यासाठी स्वयं-नेम टॉगल दाबा. लक्ष्य बदलण्यासाठी लुक स्टिक क्लिक करा
 
+@ How bright the glow is
+mr चमक किती तेजस्वी आहे
+
 @ How close an enemy must be to the crosshair for automatic acquisition in toggle mode (degrees)
 mr टॉगल मोडमध्ये आपोआप लक्ष्य होण्यासाठी शत्रू क्रॉसहेअरच्या किती जवळ असावा (अंश)
+
+@ How far the glow spreads around a light
+mr प्रकाशाभोवती चमक किती दूर पसरते
 
 @ How far the view tilts up and down when you tilt the controller (pitch axis)
 mr कंट्रोलर झुकवल्यावर दृश्य वर-खाली किती झुकते (पिच अक्ष)
@@ -1534,6 +1561,9 @@ mr इमर्सिव्ह: मूल्य बदलल्यावरच �
 
 @ Keeps textures sharp on floors and walls seen at steep angles
 mr तीव्र कोनात दिसणाऱ्या जमिनी आणि भिंतींवर टेक्सचर्स स्पष्ट ठेवते
+
+@ Light sources glow: lamps, lava, teleporters, sparks and explosions; Bloom Settings tunes it
+mr प्रकाश स्रोत चमकतात: दिवे, लाव्हा, टेलिपोर्टर, ठिणग्या आणि स्फोट; ब्लूम सेटिंग्ज ते समायोजित करतात
 
 @ Lights from rockets, muzzle flashes and explosions brighten nearby walls
 mr रॉकेट्स, नळीतील चमक आणि स्फोटांचा प्रकाश जवळच्या भिंती उजळवतो
@@ -1651,6 +1681,9 @@ mr क्लासिक बिंदू कणांच्या जागी �
 
 @ Resolution and detail inside portal and teleporter views; lower tiers trim nested effects
 mr पोर्टल आणि टेलिपोर्टर दृश्यांमधील रिझोल्यूशन आणि तपशील; खालचे स्तर नेस्टेड इफेक्ट्स कमी करतात
+
+@ Resolution of the glow: low is cheaper and softer
+mr चमकेचे रिझोल्यूशन: कमी स्वस्त आणि मऊ आहे
 
 @ Rippling light patterns on surfaces under water and slime
 mr पाणी आणि स्लाइमखालील पृष्ठभागांवर लहरणारे प्रकाश नमुने

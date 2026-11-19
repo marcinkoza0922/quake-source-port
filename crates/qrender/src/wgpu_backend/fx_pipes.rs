@@ -37,6 +37,7 @@ impl FxPipes {
         dev: &wgpu::Device,
         [frame_bgl, mat_bgl, draw_bgl]: [&wgpu::BindGroupLayout; 3],
         samples: u32,
+        glow: bool,
     ) -> FxPipes {
         let ms = samples > 1;
         let tri = wgpu::PrimitiveTopology::TriangleList;
@@ -58,7 +59,7 @@ impl FxPipes {
             dev.create_shader_module(wgpu::ShaderModuleDescriptor { label: Some(label), source: wgpu::ShaderSource::Wgsl(src.into()) })
         };
         let fx_pipe = |layout: &wgpu::PipelineLayout, module, vs, fs, buffers, blend, format, samples| {
-            pipeline(dev, Desc { layout, module, vs, fs, buffers, topology: tri, blend, depth: None, format, samples })
+            pipeline(dev, Desc { layout, module, vs, fs, buffers, topology: tri, blend, depth: None, format, samples, glow: false })
         };
 
         let ao_gen_bgl = bgl(&[load_entry(0, depth, ms), load_entry(1, unfilt, ms)]);
@@ -96,13 +97,14 @@ impl FxPipes {
                     layout: &soft_layout,
                     module: &soft_module,
                     vs: "vs_poly",
-                    fs: "fs_poly_soft",
+                    fs: if glow { "fs_poly_soft_glow" } else { "fs_poly_soft" },
                     buffers: &poly_vb,
                     topology: tri,
                     blend: Some(super::pipes::blend_of(b)),
                     depth: Some((false, true)),
                     format: SCENE_FORMAT,
                     samples,
+                    glow,
                 })
             })
             .collect();

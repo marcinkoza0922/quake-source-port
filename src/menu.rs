@@ -88,6 +88,7 @@ pub enum Page {
     HudLayout,
     Messages,
     Water,
+    Bloom,
     Debris,
     Blood,
     Impacts,
@@ -123,7 +124,7 @@ pub enum Page {
 
 /// Every cvar the options pages edit (the host marks them archived).
 pub fn option_cvars() -> impl Iterator<Item = &'static str> {
-    [addon_settings::SHOTGUNS, addon_settings::BULLET_TIME, addon_settings::HITSTOP, addon_settings::HITSTOP_ADVANCED, ADDONS, NEW_GAME_ADDONS, PORTAL_GUN, BOOMERANG, GEL, WASHER, HOOKSHOT, CABLE, RAILGUN, STICKY, GOGGLES, GAMEPLAY, HUD, CROSSHAIR, HUD_LAYOUT, MESSAGES, ENHANCEMENTS, WATER, BLOOD, DEBRIS, IMPACTS, AUTOSAVE, MODIFIERS, AUTOAIM, INPUT, MOUSE, CONTROLLER, GYRO, GRAPHICS, AUDIO, HIT_SOUND, KILL_SOUND, ACCESSIBILITY].into_iter().flatten().filter_map(|i| match *i {
+    [addon_settings::SHOTGUNS, addon_settings::BULLET_TIME, addon_settings::HITSTOP, addon_settings::HITSTOP_ADVANCED, ADDONS, NEW_GAME_ADDONS, PORTAL_GUN, BOOMERANG, GEL, WASHER, HOOKSHOT, CABLE, RAILGUN, STICKY, GOGGLES, GAMEPLAY, HUD, CROSSHAIR, HUD_LAYOUT, MESSAGES, ENHANCEMENTS, WATER, BLOOM, BLOOD, DEBRIS, IMPACTS, AUTOSAVE, MODIFIERS, AUTOAIM, INPUT, MOUSE, CONTROLLER, GYRO, GRAPHICS, AUDIO, HIT_SOUND, KILL_SOUND, ACCESSIBILITY].into_iter().flatten().filter_map(|i| match *i {
         Item::Slider { cvar, .. } | Item::Toggle { cvar, .. } | Item::Choice { cvar, .. } => Some(cvar),
         _ => None,
     })

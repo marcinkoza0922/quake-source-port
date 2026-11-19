@@ -163,6 +163,21 @@ pl Jakość krwi
 @ Blood Splatter Settings
 pl Ustawienia rozbryzgów krwi
 
+@ Bloom
+pl Poświata
+
+@ Bloom Intensity
+pl Intensywność poświaty
+
+@ Bloom Quality
+pl Jakość poświaty
+
+@ Bloom Settings
+pl Ustawienia poświaty
+
+@ Bloom Size
+pl Rozmiar poświaty
+
 @ Blue
 pl Niebieski
 
@@ -174,6 +189,9 @@ pl Podbija lub tłumi wysokie tony w decybelach
 
 @ Boost or cut low frequencies in decibels
 pl Podbija lub tłumi niskie tony w decybelach
+
+@ Bright Surfaces
+pl Jasne powierzchnie
 
 @ Brightness
 pl Jasność
@@ -1385,6 +1403,9 @@ pl Railgun w stylu Quake III: pocisk przebijający każdego wroga na swojej lini
 @ A Zelda-style hookshot: fire sends a chain hook out; it latches onto hookable surfaces or enemies and reels you in; fire again to let go
 pl Hak w stylu Zeldy: strzał wyrzuca hak na łańcuchu, który zaczepia się o odpowiednie powierzchnie lub wrogów i przyciąga cię; strzel ponownie, by puścić
 
+@ Also make bright walls and sky glow, like DarkPlaces; 0 keeps the glow to light sources
+pl Świecą też jasne ściany i niebo, jak w DarkPlaces; 0 ogranicza poświatę do źródeł światła
+
 @ Also translates the engine's console messages; off keeps them in English
 pl Tłumaczy też komunikaty konsoli silnika; wyłączone zostawia je po angielsku
 
@@ -1496,8 +1517,14 @@ pl Przytrzymaj strzał i przesuń celownik po potworach, by je zakolejkować, pu
 @ Hold: keep Lock-on held. Toggle: press Auto-aim Toggle to enable automatic acquisition. Click look stick to switch targets
 pl Przytrzymaj: trzymaj namierzanie. Przełącz: naciśnij Przełącz autocelowanie, by włączyć automatyczne namierzanie. Wciśnij gałkę patrzenia, by zmienić cel
 
+@ How bright the glow is
+pl Jak jasna jest poświata
+
 @ How close an enemy must be to the crosshair for automatic acquisition in toggle mode (degrees)
 pl Jak blisko celownika musi być wróg, by w trybie przełączania został automatycznie namierzony (stopnie)
+
+@ How far the glow spreads around a light
+pl Jak daleko poświata rozchodzi się wokół światła
 
 @ How far the view tilts up and down when you tilt the controller (pitch axis)
 pl Jak bardzo widok przechyla się w górę i w dół, gdy pochylasz kontroler (oś pionowa)
@@ -1534,6 +1561,9 @@ pl Immersyjny: pojawia się na kilka sekund tylko wtedy, gdy zmienia się warto�
 
 @ Keeps textures sharp on floors and walls seen at steep angles
 pl Utrzymuje ostrość tekstur na podłogach i ścianach widzianych pod ostrym kątem
+
+@ Light sources glow: lamps, lava, teleporters, sparks and explosions; Bloom Settings tunes it
+pl Źródła światła świecą: lampy, lawa, teleporty, iskry i eksplozje; Ustawienia poświaty ją regulują
 
 @ Lights from rockets, muzzle flashes and explosions brighten nearby walls
 pl Światło rakiet, błysków z lufy i wybuchów rozjaśnia pobliskie ściany
@@ -1651,6 +1681,9 @@ pl Zastępuje klasyczne kropki świecącymi iskrami, dymem i krwią; mody z wła
 
 @ Resolution and detail inside portal and teleporter views; lower tiers trim nested effects
 pl Rozdzielczość i szczegółowość widoków w portalach i teleporterach; niższe poziomy ograniczają zagnieżdżone efekty
+
+@ Resolution of the glow: low is cheaper and softer
+pl Rozdzielczość poświaty: niska jest tańsza i łagodniejsza
 
 @ Rippling light patterns on surfaces under water and slime
 pl Falujące wzory świetlne na powierzchniach pod wodą i szlamem

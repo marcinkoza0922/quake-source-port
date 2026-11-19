@@ -163,6 +163,21 @@ lt Kraujo kokybė
 @ Blood Splatter Settings
 lt Kraujo purslų nustatymai
 
+@ Bloom
+lt Švytėjimas
+
+@ Bloom Intensity
+lt Švytėjimo intensyvumas
+
+@ Bloom Quality
+lt Švytėjimo kokybė
+
+@ Bloom Settings
+lt Švytėjimo nustatymai
+
+@ Bloom Size
+lt Švytėjimo dydis
+
 @ Blue
 lt Mėlyna
 
@@ -174,6 +189,9 @@ lt Sustiprina ar susilpnina aukštus dažnius decibelais
 
 @ Boost or cut low frequencies in decibels
 lt Sustiprina ar susilpnina žemus dažnius decibelais
+
+@ Bright Surfaces
+lt Šviesūs paviršiai
 
 @ Brightness
 lt Ryškumas
@@ -1385,6 +1403,9 @@ lt Quake III stiliaus railgun: šovinys pramuša kiekvieną priešą savo linijo
 @ A Zelda-style hookshot: fire sends a chain hook out; it latches onto hookable surfaces or enemies and reels you in; fire again to let go
 lt Zeldos stiliaus kablys: šūvis išmeta kablį ant grandinės; jis užsikabina už tinkamų paviršių ar priešų ir pritraukia jus; šaukite dar kartą, kad paleistumėte
 
+@ Also make bright walls and sky glow, like DarkPlaces; 0 keeps the glow to light sources
+lt Švyti ir šviesios sienos bei dangus, kaip DarkPlaces; 0 palieka švytėjimą tik šviesos šaltiniams
+
 @ Also translates the engine's console messages; off keeps them in English
 lt Verčia ir variklio konsolės pranešimus; išjungus jie lieka angliški
 
@@ -1496,8 +1517,14 @@ lt Laikykite šūvį ir veskite taikiklį per monstrus, kad juos pažymėtumėte
 @ Hold: keep Lock-on held. Toggle: press Auto-aim Toggle to enable automatic acquisition. Click look stick to switch targets
 lt Laikyti: laikykite fiksavimą. Perjungti: paspauskite automatinio taikymo perjungimą, kad įjungtumėte automatinį fiksavimą. Spustelėkite žvilgsnio svirtelę taikiniui pakeisti
 
+@ How bright the glow is
+lt Koks ryškus švytėjimas
+
 @ How close an enemy must be to the crosshair for automatic acquisition in toggle mode (degrees)
 lt Kaip arti taikiklio turi būti priešas, kad perjungimo režime būtų automatiškai užfiksuotas (laipsniais)
+
+@ How far the glow spreads around a light
+lt Kaip toli švytėjimas sklinda aplink šviesą
 
 @ How far the view tilts up and down when you tilt the controller (pitch axis)
 lt Kiek vaizdas pakrypsta aukštyn ir žemyn, kai pakreipiate valdiklį (vertikali ašis)
@@ -1534,6 +1561,9 @@ lt Įtraukiantis: rodomas kelias sekundes tik pasikeitus vertei
 
 @ Keeps textures sharp on floors and walls seen at steep angles
 lt Išlaiko tekstūras ryškias ant grindų ir sienų, matomų smailiu kampu
+
+@ Light sources glow: lamps, lava, teleporters, sparks and explosions; Bloom Settings tunes it
+lt Šviesos šaltiniai švyti: lempos, lava, teleportai, kibirkštys ir sprogimai; Švytėjimo nustatymai jį reguliuoja
 
 @ Lights from rockets, muzzle flashes and explosions brighten nearby walls
 lt Raketų, šūvių blyksnių ir sprogimų šviesa apšviečia netoliese esančias sienas
@@ -1651,6 +1681,9 @@ lt Pakeičia klasikines taškines daleles švytinčiomis kibirkštimis, dūmais 
 
 @ Resolution and detail inside portal and teleporter views; lower tiers trim nested effects
 lt Raiška ir detalumas portalų ir teleportų vaizduose; žemesni lygiai apkarpo įdėtinius efektus
+
+@ Resolution of the glow: low is cheaper and softer
+lt Švytėjimo raiška: žema pigesnė ir švelnesnė
 
 @ Rippling light patterns on surfaces under water and slime
 lt Raibuliuojantys šviesos raštai ant paviršių po vandeniu ir gleivėmis

@@ -163,6 +163,21 @@ zh-TW 血液品質
 @ Blood Splatter Settings
 zh-TW 血跡飛濺設定
 
+@ Bloom
+zh-TW 泛光
+
+@ Bloom Intensity
+zh-TW 泛光強度
+
+@ Bloom Quality
+zh-TW 泛光品質
+
+@ Bloom Settings
+zh-TW 泛光設定
+
+@ Bloom Size
+zh-TW 泛光大小
+
 @ Blue
 zh-TW 藍
 
@@ -174,6 +189,9 @@ zh-TW 以分貝提高或降低高頻
 
 @ Boost or cut low frequencies in decibels
 zh-TW 以分貝提高或降低低頻
+
+@ Bright Surfaces
+zh-TW 明亮表面
 
 @ Brightness
 zh-TW 亮度
@@ -1385,6 +1403,9 @@ zh-TW Quake III風格的磁軌砲：彈頭會貫穿直線上的所有敵人，�
 @ A Zelda-style hookshot: fire sends a chain hook out; it latches onto hookable surfaces or enemies and reels you in; fire again to let go
 zh-TW 薩爾達風格的鉤爪：射擊會射出鎖鏈鉤，勾住可勾的表面或敵人後把你拉過去；再次射擊即可放開
 
+@ Also make bright walls and sky glow, like DarkPlaces; 0 keeps the glow to light sources
+zh-TW 明亮的牆壁與天空也會發光，類似 DarkPlaces；0 只讓光源發光
+
 @ Also translates the engine's console messages; off keeps them in English
 zh-TW 同時翻譯引擎的主控台訊息；關閉則保留英文
 
@@ -1496,8 +1517,14 @@ zh-TW 按住射擊並將準星掃過怪物以排入佇列，放開即投擲：�
 @ Hold: keep Lock-on held. Toggle: press Auto-aim Toggle to enable automatic acquisition. Click look stick to switch targets
 zh-TW 按住：持續按住鎖定。切換：按下自動瞄準切換鍵以啟用自動鎖定。按下視角搖桿可切換目標
 
+@ How bright the glow is
+zh-TW 光暈有多亮
+
 @ How close an enemy must be to the crosshair for automatic acquisition in toggle mode (degrees)
 zh-TW 切換模式下，敵人需離準星多近才會自動鎖定（度）
+
+@ How far the glow spreads around a light
+zh-TW 光暈在光源周圍擴散多遠
 
 @ How far the view tilts up and down when you tilt the controller (pitch axis)
 zh-TW 傾斜手把時視角上下傾斜的幅度（俯仰軸）
@@ -1534,6 +1561,9 @@ zh-TW 沉浸：只在數值變化時顯示幾秒
 
 @ Keeps textures sharp on floors and walls seen at steep angles
 zh-TW 讓以斜角觀看的地板與牆面材質保持清晰
+
+@ Light sources glow: lamps, lava, teleporters, sparks and explosions; Bloom Settings tunes it
+zh-TW 光源會發光：燈、熔岩、傳送門、火花與爆炸；在泛光設定中調整
 
 @ Lights from rockets, muzzle flashes and explosions brighten nearby walls
 zh-TW 火箭彈、槍口火光與爆炸的光線會照亮附近牆面
@@ -1651,6 +1681,9 @@ zh-TW 以發光火花、煙霧與血液取代經典點狀粒子；自帶粒子�
 
 @ Resolution and detail inside portal and teleporter views; lower tiers trim nested effects
 zh-TW 傳送門與傳送點畫面內的解析度與細節；較低等級會削減巢狀效果
+
+@ Resolution of the glow: low is cheaper and softer
+zh-TW 光暈解析度：低更省資源也更柔和
 
 @ Rippling light patterns on surfaces under water and slime
 zh-TW 水與黏液下方表面的波動光紋

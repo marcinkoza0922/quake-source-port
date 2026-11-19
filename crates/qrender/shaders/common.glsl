@@ -40,11 +40,34 @@ const uint NO_TEX = 0xffffffffu;
 
 vec4 tex(uint i, vec2 uv) { return texture(textures[nonuniformEXT(i)], uv); }
 
+// Fraction of a surface's own colour left after fog (1 = no fog).
+float fog_factor(vec3 wpos) {
+    if (fr.fog.w <= 0.0) return 1.0;
+    float z = length(wpos - fr.eye.xyz) * fr.fog.w;
+    return clamp(exp(-z * z), 0.0, 1.0);
+}
+
 vec3 apply_fog(vec3 c, vec3 wpos) {
     if (fr.fog.w <= 0.0) return c;
-    float z = length(wpos - fr.eye.xyz) * fr.fog.w;
-    float f = clamp(exp(-z * z), 0.0, 1.0);
-    return mix(fr.fog.rgb, c, f);
+    return mix(fr.fog.rgb, c, fog_factor(wpos));
+}
+
+// r_bloom: the scene pipelines' *_glow.frag variants (built while bloom is
+// on) also write what glows to colour attachment 1.
+#ifdef GLOW
+layout(location = 1) out vec4 o_glow;
+#define GLOW_OUT(v) o_glow = (v)
+#else
+#define GLOW_OUT(v)
+#endif
+// Unlit effects (particles, sprites) glow by
+// brightness, favouring saturated colours: fire and sparks glow, grey smoke,
+// bubbles and dark blood barely do.
+vec3 effect_glow(vec3 c) {
+    float hi = max(c.r, max(c.g, c.b));
+    float lo = min(c.r, min(c.g, c.b));
+    float sat = hi > 0.0 ? (hi - lo) / hi : 0.0;
+    return c * (smoothstep(0.55, 0.95, hi) * mix(0.35, 1.0, sat));
 }
 
 vec4 unpack_rgba(uint c) { return unpackUnorm4x8(c); }

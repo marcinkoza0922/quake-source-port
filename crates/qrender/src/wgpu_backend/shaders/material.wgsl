@@ -125,7 +125,9 @@ fn caustic_tex(q: vec2<f32>, t: f32) -> f32 {
     return clamp(0.55 * (a + b) + 0.9 * a * b, 0.0, 1.5);
 }
 // du.params: x alpha test, y has fullbright, z unlit (fullbright material); du.color.x alpha
-@fragment fn fs_world(i: WorldOut) -> @location(0) vec4<f32> {
+@fragment fn fs_world(i: WorldOut) -> @location(0) vec4<f32> { return world_frag(i).c; }
+@fragment fn fs_world_glow(i: WorldOut) -> Frag { return world_frag(i); }
+fn world_frag(i: WorldOut) -> Frag {
     // du.extra.xy: miptex size (texel coords' unit); external replacements may differ
     let size = select(vec2<f32>(textureDimensions(t0)), du.extra.xy, du.extra.x > 0.0);
     let uv = i.st / size;
@@ -179,15 +181,20 @@ fn caustic_tex(q: vec2<f32>, t: f32) -> f32 {
     } else if (dither == 0u) {
         rgb += suppress_banding(i.clip.xy) * fr.soft.x;
     }
+    // fullbright texels (lamps, runes, lava rock) are the light sources
+    var glow = fb.rgb * (du.params.y * fog_factor(i.wpos));
     if (thermal()) {
         // fullbright texels (torches, lights, lava rock) are hot
         let h = cold_heat(c.rgb * light) + 1.6 * luma(fb.rgb) * du.params.y;
         rgb = vec3<f32>(min(h, 1.0));
+        glow = vec3<f32>(0.0);
     }
-    return vec4<f32>(rgb, du.color.x);
+    return Frag(vec4<f32>(rgb, du.color.x), vec4<f32>(glow, du.color.x));
 }
 // du.params.w: liquid kind (1 water, 2 lava, 3 slime, 4 tele)
-@fragment fn fs_water(i: WorldOut) -> @location(0) vec4<f32> {
+@fragment fn fs_water(i: WorldOut) -> @location(0) vec4<f32> { return water_frag(i).c; }
+@fragment fn fs_water_glow(i: WorldOut) -> Frag { return water_frag(i); }
+fn water_frag(i: WorldOut) -> Frag {
     let t = fr.eye.w;
     let kind = u32(du.params.w + 0.5);
     let nf = cross(dpdx(i.wpos), dpdy(i.wpos));
@@ -225,9 +232,11 @@ fn caustic_tex(q: vec2<f32>, t: f32) -> f32 {
     }
     if (thermal()) {
         let h = select(cold_heat(c) * 0.7, 0.88 + 0.12 * luma(c), kind == 2u);
-        return vec4<f32>(vec3<f32>(h), du.color.x);
+        return Frag(vec4<f32>(vec3<f32>(h), du.color.x), vec4<f32>(0.0, 0.0, 0.0, du.color.x));
     }
-    return vec4<f32>(apply_fog(c * shade, i.wpos), du.color.x);
+    // lava and teleporters are drawn fullbright and glow; hot crust more
+    let g = select(select(0.0, 0.5, kind == 4u), 0.55 * (1.0 + heat), kind == 2u);
+    return Frag(vec4<f32>(apply_fog(c * shade, i.wpos), du.color.x), vec4<f32>(c * shade * (g * fog_factor(i.wpos)), du.color.x));
 }
 
 // ---- alias models (CPU-posed, world space) ----
@@ -268,7 +277,9 @@ fn alias_tex(t: texture_2d<f32>, st: vec2<f32>, affine: bool) -> vec4<f32> {
 // du.params: x alpha test, y has fullbright, z colormapped, w thermal heat
 // (HEAT_COLD..HEAT_FIRE, +4 = silhouette seen through a wall); du.ix: shirt
 // row, pants row; du.color.w alpha
-@fragment fn fs_alias(i: AliasOut) -> @location(0) vec4<f32> {
+@fragment fn fs_alias(i: AliasOut) -> @location(0) vec4<f32> { return alias_frag(i).c; }
+@fragment fn fs_alias_glow(i: AliasOut) -> Frag { return alias_frag(i); }
+fn alias_frag(i: AliasOut) -> Frag {
     let mode = fr.softf.y;
     let affine = mode == 2u;
     let st = select(i.st, i.st_affine, affine);
@@ -300,7 +311,7 @@ fn alias_tex(t: texture_2d<f32>, st: vec2<f32>, affine: bool) -> vec4<f32> {
         let heat = u32(du.params.w + 0.5);
         if (heat >= 4u) {
             // seen through a wall: a flat warm silhouette, added to the scene
-            return vec4<f32>(vec3<f32>(0.42), 1.0);
+            return Frag(vec4<f32>(vec3<f32>(0.42), 1.0), vec4<f32>(0.0, 0.0, 0.0, 1.0));
         }
         let lit = luma(clamp(i.shade, vec3<f32>(0.0), vec3<f32>(1.0)));
         var h = 0.85 + 0.15 * luma(c.rgb);
@@ -308,8 +319,9 @@ fn alias_tex(t: texture_2d<f32>, st: vec2<f32>, affine: bool) -> vec4<f32> {
         else if (heat == 1u) { h = 0.42 + 0.15 * luma(c.rgb); }
         else if (heat == 2u) { h = 0.6 + 0.25 * lit + 0.1 * luma(c.rgb); }
         rgb = vec3<f32>(min(h + luma(fb.rgb) * du.params.y, 1.0));
+        return Frag(vec4<f32>(rgb, du.color.w), vec4<f32>(0.0, 0.0, 0.0, du.color.w));
     }
-    return vec4<f32>(rgb, du.color.w);
+    return Frag(vec4<f32>(rgb, du.color.w), vec4<f32>(fb.rgb * (du.params.y * fog_factor(i.wpos)), du.color.w));
 }
 
 // ---- textured polygons: sprites, particles, FTE particle geometry ----
@@ -342,13 +354,18 @@ fn poly_fog(c: vec4<f32>, wpos: vec3<f32>) -> vec4<f32> {
 }
 // du.params.x: alpha test threshold; y: fog toward black; du.ix.y thermal
 // kind (0 unchanged, 1 sprite, 2 classic particle)
-@fragment fn fs_poly(i: PolyOut) -> @location(0) vec4<f32> {
+@fragment fn fs_poly(i: PolyOut) -> @location(0) vec4<f32> { return poly_frag(i).c; }
+@fragment fn fs_poly_glow(i: PolyOut) -> Frag { return poly_frag(i); }
+fn poly_frag(i: PolyOut) -> Frag {
     let c = textureSample(t0, s0, i.uv) * i.color;
     if (c.a <= du.params.x) { discard; }
-    if (thermal() && du.ix.y != 0u) {
-        // sprites: explosions, flames, bubbles; particles: sparks and blood
-        let h = select(0.55 + 0.45 * luma(c.rgb), 0.65 + 0.35 * luma(c.rgb), du.ix.y == 1u);
-        return vec4<f32>(vec3<f32>(h), c.a);
+    if (thermal()) {
+        if (du.ix.y != 0u) {
+            // sprites: explosions, flames, bubbles; particles: sparks and blood
+            let h = select(0.55 + 0.45 * luma(c.rgb), 0.65 + 0.35 * luma(c.rgb), du.ix.y == 1u);
+            return Frag(vec4<f32>(vec3<f32>(h), c.a), vec4<f32>(0.0, 0.0, 0.0, c.a));
+        }
+        return Frag(poly_fog(c, i.wpos), vec4<f32>(0.0, 0.0, 0.0, c.a));
     }
-    return poly_fog(c, i.wpos);
+    return Frag(poly_fog(c, i.wpos), vec4<f32>(poly_glow(c.rgb, du.ix.x) * fog_factor(i.wpos), c.a));
 }

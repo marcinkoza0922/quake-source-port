@@ -145,6 +145,7 @@ impl Renderer {
             ssao_quality: 1,
             portal_quality: 1,
             motion_blur_quality: 1,
+            bloom: None,
             prev_xforms: Default::default(),
             cur_xforms: Default::default(),
             prev_xform_time: 0.0,

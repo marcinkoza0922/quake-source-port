@@ -34,7 +34,10 @@ Set 0 (`common.glsl`): 0 Frame UBO, 1 bindless `sampler2D textures[]` (4096),
 
 `build.rs` compiles every `.vert`/`.frag`/`.comp` in `shaders/` with
 `glslc --target-env=vulkan1.3 -O -Werror` (override the binary with `GLSLC`).
-`#include "common.glsl"` works. **Warnings fail the build.** To add a shader,
+`#include "common.glsl"` works. **Warnings fail the build.** The scene fragment
+shaders (world, water, sky, alias, particle, poly, fte) live in `X.glsl`;
+`X.frag` includes it and `X_glow.frag` includes it with `#define GLOW` (the
+r_bloom glow attachment, `GLOW_OUT(...)`). Edit the `.glsl`. To add a shader,
 drop the file in `shaders/` and load it with `spv!("x.frag")` in
 `pipelines.rs`. A Set 0 change has to be made in `common.glsl`,
 `pipelines.rs`'s layout and the descriptor writes in `lib/descriptors.rs`
