@@ -2574,6 +2574,21 @@ sq E ngrin lojën për një çast kur dëmton një armik, që goditjet të ndihe
 @ Get more maps (Quaddicted)...
 sq Më shumë harta (Quaddicted)...
 
+@ Type to search settings...
+sq Shkruani për të kërkuar cilësime...
+
+@ No matching settings
+sq Asnjë cilësim që përputhet
+
+@ Search
+sq Kërko
+
+@ Options
+sq Opsione
+
+@ Multiplayer
+sq Shumë lojtarë
+
 @ Type to filter...
 sq Shkruaj për të filtruar...
 

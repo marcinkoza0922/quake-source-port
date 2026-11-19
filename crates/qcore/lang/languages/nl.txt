@@ -2574,6 +2574,21 @@ nl Bevriest het spel een fractie van een seconde wanneer je een vijand schade to
 @ Get more maps (Quaddicted)...
 nl Meer maps downloaden (Quaddicted)...
 
+@ Type to search settings...
+nl Typ om instellingen te zoeken...
+
+@ No matching settings
+nl Geen overeenkomende instellingen
+
+@ Search
+nl Zoeken
+
+@ Options
+nl Opties
+
+@ Multiplayer
+nl Multiplayer
+
 @ Type to filter...
 nl Typ om te filteren...
 

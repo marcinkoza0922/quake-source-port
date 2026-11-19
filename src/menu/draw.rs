@@ -80,11 +80,19 @@ impl Menu {
                 let p = pic("gfx/qplaque.lmp");
                 c.pic(PANEL_X - 40.0, 16.0, p);
                 title_c(c, pic, "gfx/p_option.lmp");
-                panel(c, ROW0, PAGES.len());
-                highlight(c, ROW0 + self.page_cursor as f32 * ROW_H);
-                for (i, (label, _)) in PAGES.iter().enumerate() {
-                    let y = ROW0 + i as f32 * ROW_H + 2.0;
-                    c.text_center(320.0, y, label, TXT, FG);
+                self.draw_search_bar(c, realtime);
+                if self.searching() {
+                    self.draw_search_results(c, cv);
+                } else {
+                    panel(c, ROW0, PAGES.len());
+                    highlight(c, ROW0 + self.page_cursor as f32 * ROW_H);
+                    for (i, (label, _)) in PAGES.iter().enumerate() {
+                        let y = ROW0 + i as f32 * ROW_H + 2.0;
+                        c.text_center(320.0, y, label, TXT, FG);
+                    }
+                }
+                if let Some(o) = self.osk {
+                    self.draw_osk(c, o);
                 }
             }
             Screen::OptionsPage(page) if matches!(page, Page::Addons | Page::NewGameAddons) => {
@@ -94,12 +102,7 @@ impl Menu {
                 let p = pic("gfx/qplaque.lmp");
                 c.pic(PANEL_X - 40.0, 16.0, p);
                 title_c(c, pic, if is_net_page(page) { "gfx/p_multi.lmp" } else { "gfx/p_option.lmp" });
-                let name = page_name(page);
-                if page == Page::Controls {
-                    c.text_right(LABEL_R, PAGE_ROW0 - 16.0, name, TXT, GOLD_FG);
-                } else {
-                    c.text_center(320.0, PAGE_ROW0 - 16.0, name, TXT, GOLD_FG);
-                }
+                self.draw_page_title(c, page);
                 let total = self.page_len(page);
                 let n = self.page_vis(page);
                 let sc = self.page_scroll(page);

@@ -2574,6 +2574,21 @@ sk Pri zranení nepriateľa na zlomok sekundy zmrazí hru, aby zásahy pôsobili
 @ Get more maps (Quaddicted)...
 sk Ďalšie mapy (Quaddicted)...
 
+@ Type to search settings...
+sk Píšte na vyhľadanie nastavení...
+
+@ No matching settings
+sk Žiadne zodpovedajúce nastavenia
+
+@ Search
+sk Hľadať
+
+@ Options
+sk Možnosti
+
+@ Multiplayer
+sk Hra pre viac hráčov
+
 @ Type to filter...
 sk Píšte na filtrovanie...
 

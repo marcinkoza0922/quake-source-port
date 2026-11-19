@@ -2574,6 +2574,21 @@ mt Jiffriża l-logħba għal frazzjoni ta' sekonda meta tagħmel ħsara lil għa
 @ Get more maps (Quaddicted)...
 mt Ikseb aktar mappep (Quaddicted)...
 
+@ Type to search settings...
+mt Ikteb biex tfittex l-issettjar...
+
+@ No matching settings
+mt L-ebda issettjar ma jaqbel
+
+@ Search
+mt Fittex
+
+@ Options
+mt Għażliet
+
+@ Multiplayer
+mt Multiplayer
+
 @ Type to filter...
 mt Ikteb biex tiffiltra...
 

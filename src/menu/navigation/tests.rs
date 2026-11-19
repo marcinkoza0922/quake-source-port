@@ -87,3 +87,24 @@ fn all_tooltips_fit_within_screen_width_and_portal_tooltips_stay_single_line() {
         }
     }
 }
+
+#[test]
+fn text_input_only_on_text_rows() {
+    let mut cv = Cvars::default();
+    cv.register("_cl_name", "", 0);
+    let mut m = Menu::new();
+    m.open(Screen::Options);
+    assert!(!m.wants_text(), "the hub search types from key presses");
+    m.open(Screen::OptionsPage(Page::Setup));
+    m.opt_cursor = 0;
+    assert!(m.wants_text(), "Player Setup > Name");
+    m.key(K_DOWNARROW, &mut cv, false);
+    assert!(!m.wants_text(), "colour row");
+    m.key(K_UPARROW, &mut cv, false);
+    m.text('Q', &mut cv);
+    m.text(':', &mut cv);
+    assert_eq!(cv.by_name("_cl_name").map(|c| c.string.as_str()), Some("Q:"));
+    // the on-screen keyboard types for itself
+    m.key(K_ABUTTON, &mut cv, false);
+    assert!(!m.wants_text());
+}

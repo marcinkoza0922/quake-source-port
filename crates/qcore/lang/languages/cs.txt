@@ -2574,6 +2574,21 @@ cs Při zranění nepřítele hru na zlomek sekundy zmrazí, takže zásahy půs
 @ Get more maps (Quaddicted)...
 cs Další mapy (Quaddicted)...
 
+@ Type to search settings...
+cs Pište pro hledání nastavení...
+
+@ No matching settings
+cs Žádná odpovídající nastavení
+
+@ Search
+cs Hledat
+
+@ Options
+cs Možnosti
+
+@ Multiplayer
+cs Hra více hráčů
+
 @ Type to filter...
 cs Pište pro filtrování...
 

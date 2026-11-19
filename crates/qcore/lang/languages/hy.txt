@@ -2574,6 +2574,21 @@ hy Սառեցնում է խաղը վայրկյանի մի մասով, երբ վ�
 @ Get more maps (Quaddicted)...
 hy Ավելի շատ քարտեզներ (Quaddicted)...
 
+@ Type to search settings...
+hy Գրեք՝ կարգավորումներ որոնելու համար...
+
+@ No matching settings
+hy Համապատասխան կարգավորումներ չկան
+
+@ Search
+hy Որոնել
+
+@ Options
+hy Ընտրանքներ
+
+@ Multiplayer
+hy Բազմախաղացող
+
 @ Type to filter...
 hy Մուտքագրեք՝ զտելու համար...
 

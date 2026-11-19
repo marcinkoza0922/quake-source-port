@@ -2574,6 +2574,21 @@ gl Conxela o xogo unha fracción de segundo ao danar un inimigo, para que os gol
 @ Get more maps (Quaddicted)...
 gl Máis mapas (Quaddicted)...
 
+@ Type to search settings...
+gl Escribe para buscar axustes...
+
+@ No matching settings
+gl Ningún axuste coincide
+
+@ Search
+gl Buscar
+
+@ Options
+gl Opcións
+
+@ Multiplayer
+gl Multixogador
+
 @ Type to filter...
 gl Escribe para filtrar...
 

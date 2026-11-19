@@ -2574,6 +2574,21 @@ fi Pysäyttää pelin sekunnin murto-osaksi, kun vahingoitat vihollista, joten o
 @ Get more maps (Quaddicted)...
 fi Lisää karttoja (Quaddicted)...
 
+@ Type to search settings...
+fi Kirjoita hakeaksesi asetuksia...
+
+@ No matching settings
+fi Ei vastaavia asetuksia
+
+@ Search
+fi Hae
+
+@ Options
+fi Asetukset
+
+@ Multiplayer
+fi Moninpeli
+
 @ Type to filter...
 fi Kirjoita suodattaaksesi...
 

@@ -2574,6 +2574,21 @@ ko 적에게 피해를 주면 게임이 아주 잠깐 멈춰 타격감이 묵직
 @ Get more maps (Quaddicted)...
 ko 맵 더 받기 (Quaddicted)...
 
+@ Type to search settings...
+ko 입력하여 설정 검색...
+
+@ No matching settings
+ko 일치하는 설정 없음
+
+@ Search
+ko 검색
+
+@ Options
+ko 옵션
+
+@ Multiplayer
+ko 멀티플레이어
+
 @ Type to filter...
 ko 입력해서 필터...
 

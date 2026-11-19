@@ -2574,6 +2574,21 @@ am ጠላትን ሲጎዱ ጨዋታውን ለቅጽበት ያቀዘቅዛል፣ 
 @ Get more maps (Quaddicted)...
 am ተጨማሪ ካርታዎችን አግኝ (Quaddicted)...
 
+@ Type to search settings...
+am ቅንብሮችን ለመፈለግ ይተይቡ...
+
+@ No matching settings
+am የሚዛመድ ቅንብር የለም
+
+@ Search
+am ፈልግ
+
+@ Options
+am አማራጮች
+
+@ Multiplayer
+am ባለብዙ ተጫዋች
+
 @ Type to filter...
 am ለማጣራት ይጻፉ...
 

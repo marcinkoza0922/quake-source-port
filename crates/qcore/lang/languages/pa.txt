@@ -2574,6 +2574,21 @@ pa ਦੁਸ਼ਮਣ ਨੂੰ ਨੁਕਸਾਨ ਪਹੁੰਚਾਉਣ 'ਤ
 @ Get more maps (Quaddicted)...
 pa ਹੋਰ ਮੈਪ ਲਓ (Quaddicted)...
 
+@ Type to search settings...
+pa ਸੈਟਿੰਗਾਂ ਖੋਜਣ ਲਈ ਟਾਈਪ ਕਰੋ...
+
+@ No matching settings
+pa ਕੋਈ ਮੇਲ ਖਾਂਦੀ ਸੈਟਿੰਗ ਨਹੀਂ
+
+@ Search
+pa ਖੋਜੋ
+
+@ Options
+pa ਵਿਕਲਪ
+
+@ Multiplayer
+pa ਮਲਟੀਪਲੇਅਰ
+
 @ Type to filter...
 pa ਛਾਂਟਣ ਲਈ ਲਿਖੋ...
 

@@ -2574,6 +2574,21 @@ he מקפיא את המשחק לשבריר שנייה כשאתם פוגעים ב
 @ Get more maps (Quaddicted)...
 he עוד מפות (Quaddicted)...
 
+@ Type to search settings...
+he הקלידו כדי לחפש הגדרות...
+
+@ No matching settings
+he אין הגדרות תואמות
+
+@ Search
+he חיפוש
+
+@ Options
+he אפשרויות
+
+@ Multiplayer
+he רב־משתתפים
+
 @ Type to filter...
 he הקלידו לסינון...
 

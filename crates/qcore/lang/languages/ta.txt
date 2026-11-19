@@ -2574,6 +2574,21 @@ ta எதிரியைக் காயப்படுத்தும்போ�
 @ Get more maps (Quaddicted)...
 ta மேலும் மேப்புகள் (Quaddicted)...
 
+@ Type to search settings...
+ta அமைப்புகளைத் தேட தட்டச்சு செய்யவும்...
+
+@ No matching settings
+ta பொருந்தும் அமைப்புகள் இல்லை
+
+@ Search
+ta தேடு
+
+@ Options
+ta விருப்பங்கள்
+
+@ Multiplayer
+ta பல்வீரர்
+
 @ Type to filter...
 ta வடிகட்டத் தட்டச்சு செய்...
 

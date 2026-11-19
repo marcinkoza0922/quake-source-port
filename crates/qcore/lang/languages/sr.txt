@@ -2574,6 +2574,21 @@ sr Замрзава игру на делић секунде кад раните 
 @ Get more maps (Quaddicted)...
 sr Још мапа (Quaddicted)...
 
+@ Type to search settings...
+sr Укуцајте за претрагу подешавања...
+
+@ No matching settings
+sr Нема одговарајућих подешавања
+
+@ Search
+sr Претрага
+
+@ Options
+sr Опције
+
+@ Multiplayer
+sr Више играча
+
 @ Type to filter...
 sr Укуцајте за филтрирање...
 

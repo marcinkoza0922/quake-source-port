@@ -2574,6 +2574,21 @@ pl Zamraża grę na ułamek sekundy, gdy ranisz wroga, by trafienia były mocnie
 @ Get more maps (Quaddicted)...
 pl Więcej map (Quaddicted)...
 
+@ Type to search settings...
+pl Pisz, by szukać ustawień...
+
+@ No matching settings
+pl Brak pasujących ustawień
+
+@ Search
+pl Szukaj
+
+@ Options
+pl Opcje
+
+@ Multiplayer
+pl Gra wieloosobowa
+
 @ Type to filter...
 pl Pisz, by filtrować...
 

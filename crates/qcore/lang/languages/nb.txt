@@ -2574,6 +2574,21 @@ nb Fryser spillet et brøkdels sekund når du skader en fiende, så treffene fø
 @ Get more maps (Quaddicted)...
 nb Hent flere baner (Quaddicted)...
 
+@ Type to search settings...
+nb Skriv for å søke i innstillinger...
+
+@ No matching settings
+nb Ingen samsvarende innstillinger
+
+@ Search
+nb Søk
+
+@ Options
+nb Innstillinger
+
+@ Multiplayer
+nb Flerspiller
+
 @ Type to filter...
 nb Skriv for å filtrere...
 

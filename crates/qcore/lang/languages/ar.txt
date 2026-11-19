@@ -2574,6 +2574,21 @@ ar يجمّد اللعبة جزءًا من الثانية عند إصابة عد
 @ Get more maps (Quaddicted)...
 ar المزيد من الخرائط (Quaddicted)...
 
+@ Type to search settings...
+ar اكتب للبحث في الإعدادات...
+
+@ No matching settings
+ar لا توجد إعدادات مطابقة
+
+@ Search
+ar بحث
+
+@ Options
+ar خيارات
+
+@ Multiplayer
+ar اللعب الجماعي
+
 @ Type to filter...
 ar اكتب للتصفية...
 

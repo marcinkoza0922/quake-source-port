@@ -2574,6 +2574,21 @@ id Membekukan game sepersekian detik saat Anda melukai musuh, agar serangan tera
 @ Get more maps (Quaddicted)...
 id Dapatkan peta lain (Quaddicted)...
 
+@ Type to search settings...
+id Ketik untuk mencari pengaturan...
+
+@ No matching settings
+id Tidak ada pengaturan yang cocok
+
+@ Search
+id Cari
+
+@ Options
+id Opsi
+
+@ Multiplayer
+id Multipemain
+
 @ Type to filter...
 id Ketik untuk menyaring...
 

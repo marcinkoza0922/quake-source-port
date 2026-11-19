@@ -2574,6 +2574,21 @@ lt Kai sužeidžiate priešą, sekundės daliai sustingdo žaidimą, kad smūgia
 @ Get more maps (Quaddicted)...
 lt Daugiau žemėlapių (Quaddicted)...
 
+@ Type to search settings...
+lt Rašykite, kad ieškotumėte nustatymų...
+
+@ No matching settings
+lt Nėra atitinkančių nustatymų
+
+@ Search
+lt Ieškoti
+
+@ Options
+lt Parinktys
+
+@ Multiplayer
+lt Kelių žaidėjų
+
 @ Type to filter...
 lt Rašykite filtrui...
 

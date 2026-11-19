@@ -2574,6 +2574,21 @@ fa وقتی به دشمن آسیب می‌زنید بازی را برای کسر
 @ Get more maps (Quaddicted)...
 fa نقشه‌های بیشتر (Quaddicted)...
 
+@ Type to search settings...
+fa برای جستجوی تنظیمات تایپ کنید...
+
+@ No matching settings
+fa تنظیمی مطابق نیست
+
+@ Search
+fa جستجو
+
+@ Options
+fa گزینه‌ها
+
+@ Multiplayer
+fa چندنفره
+
 @ Type to filter...
 fa برای فیلتر تایپ کنید...
 

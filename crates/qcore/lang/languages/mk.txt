@@ -2574,6 +2574,21 @@ mk Ја замрзнува играта за делче од секунда ко
 @ Get more maps (Quaddicted)...
 mk Повеќе мапи (Quaddicted)...
 
+@ Type to search settings...
+mk Пишувајте за да барате поставки...
+
+@ No matching settings
+mk Нема соодветни поставки
+
+@ Search
+mk Барај
+
+@ Options
+mk Опции
+
+@ Multiplayer
+mk Повеќе играчи
+
 @ Type to filter...
 mk Пишувај за филтрирање...
 

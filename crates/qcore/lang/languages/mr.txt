@@ -2574,6 +2574,21 @@ mr तुम्ही शत्रूला नुकसान केल्य�
 @ Get more maps (Quaddicted)...
 mr आणखी मॅप्स मिळवा (Quaddicted)...
 
+@ Type to search settings...
+mr सेटिंग्ज शोधण्यासाठी टाइप करा...
+
+@ No matching settings
+mr जुळणारी सेटिंग नाही
+
+@ Search
+mr शोधा
+
+@ Options
+mr पर्याय
+
+@ Multiplayer
+mr मल्टिप्लेअर
+
 @ Type to filter...
 mr फिल्टर करण्यासाठी टाइप करा...
 

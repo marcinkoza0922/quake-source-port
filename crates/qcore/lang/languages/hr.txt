@@ -2574,6 +2574,21 @@ hr Zamrzava igru na djelić sekunde kad ozlijedite neprijatelja, pa se pogoci č
 @ Get more maps (Quaddicted)...
 hr Još mapa (Quaddicted)...
 
+@ Type to search settings...
+hr Upišite za pretragu postavki...
+
+@ No matching settings
+hr Nema odgovarajućih postavki
+
+@ Search
+hr Traži
+
+@ Options
+hr Opcije
+
+@ Multiplayer
+hr Više igrača
+
 @ Type to filter...
 hr Upišite za filtriranje...
 

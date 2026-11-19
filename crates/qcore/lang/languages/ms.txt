@@ -2574,6 +2574,21 @@ ms Membekukan permainan sepersekian saat apabila anda mencederakan musuh, supaya
 @ Get more maps (Quaddicted)...
 ms Dapatkan lebih banyak peta (Quaddicted)...
 
+@ Type to search settings...
+ms Taip untuk mencari tetapan...
+
+@ No matching settings
+ms Tiada tetapan yang sepadan
+
+@ Search
+ms Cari
+
+@ Options
+ms Pilihan
+
+@ Multiplayer
+ms Berbilang pemain
+
 @ Type to filter...
 ms Taip untuk menapis...
 

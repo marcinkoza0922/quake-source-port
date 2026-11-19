@@ -35,7 +35,14 @@ impl Host {
         }
         let down = phase == TouchPhase::Down;
         match self.key_dest() {
-            KeyDest::Menu => self.menu_finger(id, phase, (x * pw as f32, y * ph as f32), (pw, ph)),
+            KeyDest::Menu => {
+                self.menu_finger(id, phase, (x * pw as f32, y * ph as f32), (pw, ph));
+                // a tap on a text row brings up the keyboard, again after it was dismissed
+                if down && self.menu.wants_text() {
+                    self.text_input = None;
+                }
+                self.sync_key_dest();
+            }
             KeyDest::Console | KeyDest::Message => {
                 // a tap brings the on-screen keyboard back after it was dismissed
                 if down && let Some(w) = &self.window {
