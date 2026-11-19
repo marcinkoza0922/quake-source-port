@@ -164,9 +164,11 @@ antigua.
 
 Menú principal → Demos muestra tus demos guardadas y, con Opciones → Demos →
 Grabar demos automáticas activado, una demo automática de cada nivel que
-juegas; las más antiguas se reemplazan cuando los huecos están llenos. Pulsa
-K para conservar una, E para exportarla a vídeo y Supr para borrarla. Los
-informes de errores incluyen la demo automática del nivel actual.
+juegas; las más antiguas se reemplazan cuando los huecos están llenos.
+Escribe para filtrar las listas y pulsa Tab para cambiar el orden; los
+botones junto a la lista reproducen, exportan, renombran, conservan o borran
+la demo elegida, y renombrar una demo automática la conserva. Los informes
+de errores incluyen la demo automática del nivel actual.
 
 Durante una demo, Espacio pausa, mantener Izquierda o Derecha rebobina o
 avanza rápido, Arriba y Abajo cambian la velocidad, RePág y AvPág saltan 10
@@ -177,6 +179,11 @@ inferior aparece una franja que los trae de vuelta. Haz clic en los botones,
 haz clic en la línea de tiempo para saltar allí o arrastra sobre ella para
 resaltar un clip; Exportar pide los fotogramas por segundo, el tamaño, el
 formato y el archivo, y si exportar el clip resaltado o la demo completa.
+
+Con el mando, A pausa, la cruceta rebobina, avanza rápido y cambia la
+velocidad, LB y RB saltan 10 segundos y los botones de los sticks van al
+inicio y al siguiente mapa. LT y RT marcan un clip, B lo borra, X exporta, Y
+conserva una demo automática y View oculta los controles.
 
 `capture` inicia y detiene la grabación de un vídeo mientras juegas. Los
 fotogramas por segundo, el formato y la calidad están en Opciones → Demos →

@@ -1432,6 +1432,15 @@ fa 720p
 @ Destination
 fa مقصد
 
+@ File Name
+fa نام فایل
+
+@ Rename
+fa تغییر نام
+
+@ Rename Demo
+fa تغییر نام دمو
+
 @ Export Highlighted Clip
 fa خروجی از قطعهٔ علامت‌خورده
 
@@ -1894,8 +1903,14 @@ fa نوار پخش (زمان، سرعت، خط زمانی) را پس از یک �
 fa قالب ویدیو؛ به ffmpeg با آن رمزگذار نیاز دارد، وگرنه فریم‌ها به‌صورت تصاویر PNG ذخیره می‌شوند
 
 # Demos and video recording.
-@ No clip highlighted: while the demo plays, drag across the timeline or press I and O
-fa قطعه‌ای علامت نخورده: هنگام پخش دمو روی خط زمانی بکشید یا I و O را بزنید
+@ No clip highlighted: while the demo plays, drag across the timeline, or press I and O (LT and RT on a controller)
+fa قطعه‌ای علامت نخورده: هنگام پخش دمو روی خط زمانی بکشید یا I و O را بزنید (LT و RT روی دسته)
+
+@ Name of the video file; the extension follows the video format, and a file of the same name is replaced
+fa نام فایل ویدیو؛ پسوند از قالب ویدیو پیروی می‌کند و فایل هم‌نام جایگزین می‌شود
+
+@ New name of the demo; if another demo has it, a number is added
+fa نام تازهٔ دمو؛ اگر دموی دیگری این نام را داشته باشد، یک شماره افزوده می‌شود
 
 @ Video size; frames are scaled from the window size (bars keep the shape), so a larger size adds no detail
 fa اندازهٔ ویدیو؛ فریم‌ها از اندازهٔ پنجره مقیاس می‌شوند (با نوار برای حفظ شکل)، پس اندازهٔ بزرگ‌تر جزئیاتی اضافه نمی‌کند
@@ -2736,6 +2751,36 @@ fa اندازه: {} KB
 @ Skip 10 s
 fa پرش ۱۰ ثانیه
 
+@ Back 10 s
+fa عقب ۱۰ ثانیه
+
+@ Length
+fa مدت
+
+@ Mark in
+fa علامت شروع
+
+@ Mark out
+fa علامت پایان
+
+@ Next level
+fa مرحلهٔ بعد
+
+@ No demos match the filter. Backspace or Esc clears it.
+fa هیچ دمویی با فیلتر جور نیست. Backspace یا Esc آن را پاک می‌کند.
+
+@ Renaming an automatic demo moves it to the saved demos.
+fa تغییر نام دموی خودکار آن را به دموهای ذخیره‌شده منتقل می‌کند.
+
+@ Restart
+fa از اول
+
+@ Sort
+fa مرتب‌سازی
+
+@ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
+fa هنگام پخش دمو: A مکث می‌کند، دکمه‌های جهت جابه‌جا می‌کنند و سرعت را تغییر می‌دهند، LT و RT یک قطعه را علامت می‌زنند و X از آن خروجی می‌گیرد.
+
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 fa Space مکث | چپ/راست جابه‌جایی | بالا/پایین سرعت | PgUp/PgDn ۱۰ ث | I/O نشانه | E خروجی
 
@@ -2766,9 +2811,6 @@ fa H پنهان
 
 @ Hide
 fa پنهان
-
-@ Show
-fa نمایش
 
 # Demos and video recording.
 @ Demo: {}
@@ -3314,6 +3356,12 @@ fa در حال خروجی گرفتن از {} به ویدیو
 
 @ Kept demo {}
 fa دمو نگه داشته شد: {}
+
+@ Not a valid demo name.
+fa نام دمو نامعتبر است.
+
+@ Renamed demo to {}
+fa نام دمو به {} تغییر کرد
 
 @ No auto-demo to keep.
 fa دموی خودکاری برای نگه‌داشتن نیست.

@@ -1432,6 +1432,15 @@ zh-TW 720p
 @ Destination
 zh-TW 儲存位置
 
+@ File Name
+zh-TW 檔案名稱
+
+@ Rename
+zh-TW 重新命名
+
+@ Rename Demo
+zh-TW 重新命名示範
+
 @ Export Highlighted Clip
 zh-TW 匯出標示的片段
 
@@ -1894,8 +1903,14 @@ zh-TW 在按下控制鍵後、永遠或從不顯示播放列（時間、速度�
 zh-TW 影片格式；需要帶有該編碼器的 ffmpeg，否則影格會儲存為 PNG 圖片
 
 # Demos and video recording.
-@ No clip highlighted: while the demo plays, drag across the timeline or press I and O
-zh-TW 沒有標示的片段：播放示範時在時間軸上拖曳，或按 I 和 O
+@ No clip highlighted: while the demo plays, drag across the timeline, or press I and O (LT and RT on a controller)
+zh-TW 沒有標示的片段：播放示範時在時間軸上拖曳，或按 I 和 O（控制器上為 LT 和 RT）
+
+@ Name of the video file; the extension follows the video format, and a file of the same name is replaced
+zh-TW 影片檔案名稱；副檔名依影片格式而定，同名檔案會被取代
+
+@ New name of the demo; if another demo has it, a number is added
+zh-TW 示範的新名稱；若已有其他示範使用此名稱，會加上編號
 
 @ Video size; frames are scaled from the window size (bars keep the shape), so a larger size adds no detail
 zh-TW 影片尺寸；影格由視窗尺寸縮放而來（加黑邊保持比例），所以較大的尺寸不會增加細節
@@ -2736,6 +2751,36 @@ zh-TW 大小：{} KB
 @ Skip 10 s
 zh-TW 跳過 10 秒
 
+@ Back 10 s
+zh-TW 倒退 10 秒
+
+@ Length
+zh-TW 長度
+
+@ Mark in
+zh-TW 標記起點
+
+@ Mark out
+zh-TW 標記終點
+
+@ Next level
+zh-TW 下一關
+
+@ No demos match the filter. Backspace or Esc clears it.
+zh-TW 沒有符合篩選的示範。Backspace 或 Esc 清除篩選。
+
+@ Renaming an automatic demo moves it to the saved demos.
+zh-TW 重新命名自動示範會將其移到已儲存的示範中。
+
+@ Restart
+zh-TW 從頭開始
+
+@ Sort
+zh-TW 排序
+
+@ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
+zh-TW 播放示範時：A 暫停，方向鍵拖曳和改變速度，LT 和 RT 標記片段，X 匯出該片段。
+
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 zh-TW Space 暫停 | ←/→ 拖曳 | ↑/↓ 速度 | PgUp/PgDn 10 秒 | I/O 標記 | E 匯出
 
@@ -2766,9 +2811,6 @@ zh-TW H 隱藏
 
 @ Hide
 zh-TW 隱藏
-
-@ Show
-zh-TW 顯示
 
 # Demos and video recording.
 @ Demo: {}
@@ -3314,6 +3356,12 @@ zh-TW 正在將 {} 匯出為影片
 
 @ Kept demo {}
 zh-TW 已保留示範：{}
+
+@ Not a valid demo name.
+zh-TW 示範名稱無效。
+
+@ Renamed demo to {}
+zh-TW 示範已重新命名為 {}
 
 @ No auto-demo to keep.
 zh-TW 沒有可保留的自動示範。

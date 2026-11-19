@@ -1432,6 +1432,15 @@ pt 720p
 @ Destination
 pt Destino
 
+@ File Name
+pt Nome do ficheiro
+
+@ Rename
+pt Mudar nome
+
+@ Rename Demo
+pt Mudar nome da demo
+
 @ Export Highlighted Clip
 pt Exportar excerto realçado
 
@@ -1894,8 +1903,14 @@ pt Mostra a barra de reprodução (tempo, velocidade, linha temporal) após uma 
 pt Formato de vídeo; requer ffmpeg com esse codificador, caso contrário os fotogramas são guardados como imagens PNG
 
 # Demos and video recording.
-@ No clip highlighted: while the demo plays, drag across the timeline or press I and O
-pt Nenhum excerto realçado: durante a demo, arraste sobre a linha temporal ou prima I e O
+@ No clip highlighted: while the demo plays, drag across the timeline, or press I and O (LT and RT on a controller)
+pt Nenhum excerto realçado: durante a demo, arraste sobre a linha temporal ou prima I e O (LT e RT no comando)
+
+@ Name of the video file; the extension follows the video format, and a file of the same name is replaced
+pt Nome do ficheiro de vídeo; a extensão segue o formato de vídeo e um ficheiro com o mesmo nome é substituído
+
+@ New name of the demo; if another demo has it, a number is added
+pt Novo nome da demo; se outra demo já o tiver, é acrescentado um número
 
 @ Video size; frames are scaled from the window size (bars keep the shape), so a larger size adds no detail
 pt Tamanho do vídeo; os fotogramas são redimensionados a partir do tamanho da janela (com barras para manter a forma), por isso um tamanho maior não acrescenta detalhe
@@ -2736,6 +2751,36 @@ pt Tamanho: {} KB
 @ Skip 10 s
 pt Saltar 10 s
 
+@ Back 10 s
+pt Recuar 10 s
+
+@ Length
+pt Duração
+
+@ Mark in
+pt Marcar início
+
+@ Mark out
+pt Marcar fim
+
+@ Next level
+pt Nível seguinte
+
+@ No demos match the filter. Backspace or Esc clears it.
+pt Nenhuma demo corresponde ao filtro. Retrocesso ou Esc limpa-o.
+
+@ Renaming an automatic demo moves it to the saved demos.
+pt Mudar o nome de uma demo automática move-a para as demos guardadas.
+
+@ Restart
+pt Recomeçar
+
+@ Sort
+pt Ordenar
+
+@ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
+pt Durante uma demo: A pausa, o d-pad percorre e muda a velocidade, LT e RT marcam um excerto e X exporta-o.
+
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 pt Espaço pausa | Esq./Dir. percorrer | Cima/Baixo velocidade | PgUp/PgDn 10 s | I/O marcar | E exportar
 
@@ -2766,9 +2811,6 @@ pt H ocultar
 
 @ Hide
 pt Ocultar
-
-@ Show
-pt Mostrar
 
 # Demos and video recording.
 @ Demo: {}
@@ -3314,6 +3356,12 @@ pt A exportar {} para vídeo
 
 @ Kept demo {}
 pt Demo guardada: {}
+
+@ Not a valid demo name.
+pt Nome de demo inválido.
+
+@ Renamed demo to {}
+pt Demo renomeada para {}
 
 @ No auto-demo to keep.
 pt Nenhuma demo automática para guardar.

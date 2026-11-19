@@ -1432,6 +1432,15 @@ bg 720p
 @ Destination
 bg Място за запис
 
+@ File Name
+bg Име на файла
+
+@ Rename
+bg Преименувай
+
+@ Rename Demo
+bg Преименуване на демо
+
 @ Export Highlighted Clip
 bg Експорт на маркирания клип
 
@@ -1894,8 +1903,14 @@ bg Показва лентата за възпроизвеждане (време
 bg Видео формат; нужен е ffmpeg с този енкодер, иначе кадрите се записват като PNG изображения
 
 # Demos and video recording.
-@ No clip highlighted: while the demo plays, drag across the timeline or press I and O
-bg Няма маркиран клип: по време на демото плъзнете по времевата линия или натиснете I и O
+@ No clip highlighted: while the demo plays, drag across the timeline, or press I and O (LT and RT on a controller)
+bg Няма маркиран клип: по време на демото плъзнете по времевата линия или натиснете I и O (LT и RT на контролера)
+
+@ Name of the video file; the extension follows the video format, and a file of the same name is replaced
+bg Име на видеофайла; разширението следва видеоформата, а файл със същото име се заменя
+
+@ New name of the demo; if another demo has it, a number is added
+bg Ново име на демото; ако друго демо вече го има, се добавя номер
 
 @ Video size; frames are scaled from the window size (bars keep the shape), so a larger size adds no detail
 bg Размер на видеото; кадрите се мащабират от размера на прозореца (с ленти за запазване на формата), така че по-голям размер не добавя детайли
@@ -2736,6 +2751,36 @@ bg Размер: {} KB
 @ Skip 10 s
 bg Пропусни 10 с
 
+@ Back 10 s
+bg Назад 10 с
+
+@ Length
+bg Продължителност
+
+@ Mark in
+bg Начало на клипа
+
+@ Mark out
+bg Край на клипа
+
+@ Next level
+bg Следващо ниво
+
+@ No demos match the filter. Backspace or Esc clears it.
+bg Няма демо, отговарящо на филтъра. Backspace или Esc го изчиства.
+
+@ Renaming an automatic demo moves it to the saved demos.
+bg Преименуването на автоматично демо го премества при запазените.
+
+@ Restart
+bg Отначало
+
+@ Sort
+bg Подреди
+
+@ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
+bg По време на демо: A поставя пауза, кръстачката превърта и сменя скоростта, LT и RT маркират клип, а X го експортира.
+
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 bg Интервал пауза | Ляво/Дясно превъртане | Горе/Долу скорост | PgUp/PgDn 10 с | I/O маркер | E експорт
 
@@ -2766,9 +2811,6 @@ bg H скрий
 
 @ Hide
 bg Скрий
-
-@ Show
-bg Покажи
 
 # Demos and video recording.
 @ Demo: {}
@@ -3314,6 +3356,12 @@ bg Експорт на {} във видео
 
 @ Kept demo {}
 bg Демото е запазено: {}
+
+@ Not a valid demo name.
+bg Невалидно име на демо.
+
+@ Renamed demo to {}
+bg Демото е преименувано на {}
 
 @ No auto-demo to keep.
 bg Няма автодемо за запазване.

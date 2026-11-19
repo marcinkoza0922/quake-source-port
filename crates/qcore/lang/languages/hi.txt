@@ -1432,6 +1432,15 @@ hi 720p
 @ Destination
 hi गंतव्य
 
+@ File Name
+hi फ़ाइल नाम
+
+@ Rename
+hi नाम बदलें
+
+@ Rename Demo
+hi डेमो का नाम बदलें
+
 @ Export Highlighted Clip
 hi चिह्नित क्लिप निर्यात करें
 
@@ -1894,8 +1903,14 @@ hi प्लेबैक बार (समय, गति, टाइमलाइ�
 hi वीडियो प्रारूप; उस एनकोडर वाला ffmpeg चाहिए, नहीं तो फ़्रेम PNG चित्रों के रूप में सहेजे जाते हैं
 
 # Demos and video recording.
-@ No clip highlighted: while the demo plays, drag across the timeline or press I and O
-hi कोई क्लिप चिह्नित नहीं: डेमो चलते समय टाइमलाइन पर खींचें या I और O दबाएँ
+@ No clip highlighted: while the demo plays, drag across the timeline, or press I and O (LT and RT on a controller)
+hi कोई क्लिप चिह्नित नहीं: डेमो चलते समय टाइमलाइन पर खींचें या I और O दबाएँ (कंट्रोलर पर LT और RT)
+
+@ Name of the video file; the extension follows the video format, and a file of the same name is replaced
+hi वीडियो फ़ाइल का नाम; एक्सटेंशन वीडियो फ़ॉर्मेट के अनुसार होता है, और उसी नाम की फ़ाइल बदल दी जाती है
+
+@ New name of the demo; if another demo has it, a number is added
+hi डेमो का नया नाम; अगर किसी और डेमो का यही नाम है, तो एक संख्या जोड़ी जाती है
 
 @ Video size; frames are scaled from the window size (bars keep the shape), so a larger size adds no detail
 hi वीडियो का आकार; फ़्रेम विंडो के आकार से बड़े किए जाते हैं (आकृति बनाए रखने के लिए पट्टियों के साथ), इसलिए बड़ा आकार बारीकी नहीं बढ़ाता
@@ -2736,6 +2751,36 @@ hi आकार: {} KB
 @ Skip 10 s
 hi 10 से. छोड़ें
 
+@ Back 10 s
+hi 10 से. पीछे
+
+@ Length
+hi अवधि
+
+@ Mark in
+hi शुरुआत चिह्नित करें
+
+@ Mark out
+hi अंत चिह्नित करें
+
+@ Next level
+hi अगला लेवल
+
+@ No demos match the filter. Backspace or Esc clears it.
+hi फ़िल्टर से कोई डेमो मेल नहीं खाता। Backspace या Esc उसे साफ़ करता है।
+
+@ Renaming an automatic demo moves it to the saved demos.
+hi स्वचालित डेमो का नाम बदलने से वह सहेजे गए डेमो में चला जाता है।
+
+@ Restart
+hi शुरू से
+
+@ Sort
+hi क्रम
+
+@ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
+hi डेमो चलते समय: A रोकता है, डी-पैड खिसकाता और गति बदलता है, LT और RT क्लिप चिह्नित करते हैं और X उसे निर्यात करता है।
+
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 hi Space रोकें | बाएँ/दाएँ खिसकाएँ | ऊपर/नीचे गति | PgUp/PgDn 10 से. | I/O निशान | E निर्यात
 
@@ -2766,9 +2811,6 @@ hi H छिपाएँ
 
 @ Hide
 hi छिपाएँ
-
-@ Show
-hi दिखाएँ
 
 # Demos and video recording.
 @ Demo: {}
@@ -3314,6 +3356,12 @@ hi {} को वीडियो में निर्यात किया ज
 
 @ Kept demo {}
 hi डेमो रखा गया: {}
+
+@ Not a valid demo name.
+hi डेमो का नाम मान्य नहीं है।
+
+@ Renamed demo to {}
+hi डेमो का नाम बदलकर {} किया गया
 
 @ No auto-demo to keep.
 hi रखने के लिए कोई ऑटो-डेमो नहीं।

@@ -1432,6 +1432,15 @@ mk 720p
 @ Destination
 mk Одредиште
 
+@ File Name
+mk Име на датотеката
+
+@ Rename
+mk Преименувај
+
+@ Rename Demo
+mk Преименувај демо
+
 @ Export Highlighted Clip
 mk Извези го означениот клип
 
@@ -1894,8 +1903,14 @@ mk Ја прикажува лентата за пуштање (време, бр�
 mk Формат на видео; потребен е ffmpeg со тој кодер, инаку сликите се зачувуваат како PNG слики
 
 # Demos and video recording.
-@ No clip highlighted: while the demo plays, drag across the timeline or press I and O
-mk Нема означен клип: за време на демото повлечете по временската линија или притиснете I и O
+@ No clip highlighted: while the demo plays, drag across the timeline, or press I and O (LT and RT on a controller)
+mk Нема означен клип: за време на демото повлечете по временската линија или притиснете I и O (LT и RT на контролерот)
+
+@ Name of the video file; the extension follows the video format, and a file of the same name is replaced
+mk Име на видеодатотеката; наставката го следи видеоформатот, а датотека со исто име се заменува
+
+@ New name of the demo; if another demo has it, a number is added
+mk Ново име на демото; ако друго демо веќе го има, се додава број
 
 @ Video size; frames are scaled from the window size (bars keep the shape), so a larger size adds no detail
 mk Големина на видеото; сликите се скалираат од големината на прозорецот (со ленти за да се задржи обликот), па поголема големина не додава детали
@@ -2736,6 +2751,36 @@ mk Големина: {} KB
 @ Skip 10 s
 mk Прескокни 10 с
 
+@ Back 10 s
+mk Назад 10 с
+
+@ Length
+mk Траење
+
+@ Mark in
+mk Означи почеток
+
+@ Mark out
+mk Означи крај
+
+@ Next level
+mk Следно ниво
+
+@ No demos match the filter. Backspace or Esc clears it.
+mk Ниедно демо не одговара на филтерот. Backspace или Esc го брише.
+
+@ Renaming an automatic demo moves it to the saved demos.
+mk Преименувањето автоматско демо го преместува меѓу зачуваните.
+
+@ Restart
+mk Одначало
+
+@ Sort
+mk Подреди
+
+@ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
+mk За време на демо: A паузира, крстот за насоки премотува и ја менува брзината, LT и RT означуваат клип, а X го извезува.
+
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 mk Празно место пауза | Лево/Десно премотување | Горе/Долу брзина | PgUp/PgDn 10 с | I/O ознака | E извоз
 
@@ -2766,9 +2811,6 @@ mk H скриј
 
 @ Hide
 mk Скриј
-
-@ Show
-mk Прикажи
 
 # Demos and video recording.
 @ Demo: {}
@@ -3314,6 +3356,12 @@ mk Се извезува {} во видео
 
 @ Kept demo {}
 mk Демото е задржано: {}
+
+@ Not a valid demo name.
+mk Неважечко име на демо.
+
+@ Renamed demo to {}
+mk Демото е преименувано во {}
 
 @ No auto-demo to keep.
 mk Нема авто-демо за задржување.

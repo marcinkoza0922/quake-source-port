@@ -166,8 +166,10 @@ vetustiorem convertit.
 Index principalis → Demonstrationes servatas tuas ostendit et, si Optiones →
 Demonstrationes → Demonstrationes sponte inscribere accensum est,
 demonstrationem automaticam omnis gradus quem ludis; vetustissimae
-substituuntur cum loci pleni sunt. K unam servat, E eam in pelliculam
-exportat, Del delet. Relationes errorum demonstrationem automaticam gradus
+substituuntur cum loci pleni sunt. Scribe ut indices coles, et Tab preme ut
+ordinem mutes; bullae iuxta indicem demonstrationem electam ludunt,
+exportant, renominant, servant aut delent, et demonstratio automatica
+renominata servatur. Relationes errorum demonstrationem automaticam gradus
 praesentis continent.
 
 Dum demonstratio luditur, Spatium pausam facit, Sinistram vel Dextram
@@ -180,6 +182,12 @@ reducit. Premes bullas, temporis lineam preme ut eo salias, aut trahe per
 eam ut fragmentum notes; Exporta rogat imagines per secundum, magnitudinem,
 formam et documentum, et utrum fragmentum notatum an totam demonstrationem
 exportes.
+
+In moderatore A pausam facit, crux directionis retro et prorsus volvit et
+celeritatem mutat, LB et RB decem secundas saliunt, et bullae vectium ad
+initium et ad tabulam proximam ducunt. LT et RT fragmentum notant, B id
+purgat, X exportat, Y demonstrationem automaticam servat et View imperia
+celat.
 
 `capture` dum ludis inscriptionem pelliculae incipit et sistit. Imagines per
 secundum, forma et qualitas sunt in Optiones → Demonstrationes → Inscriptio

@@ -158,8 +158,10 @@ saglabāta kā `<nosaukums>.qsd` (`playdemo <nosaukums>.qsd`).
 
 Galvenā izvēlne → Demo rāda jūsu saglabātos demo un, ja ieslēgts Opcijas →
 Demo → Automātiski ierakstīt demo, arī katra spēlētā līmeņa automātisko
-demo; vecākie tiek aizstāti, kad vietas ir pilnas. K patur demo, E eksportē
-to video, Del to izdzēš. Kļūdu ziņojumos ir pašreizējā līmeņa automātiskais
+demo; vecākie tiek aizstāti, kad vietas ir pilnas. Rakstiet, lai filtrētu
+sarakstus, un Tab maina kārtošanu; pogas blakus sarakstam atskaņo,
+eksportē, pārdēvē, patur vai dzēš izvēlēto demo, un pārdēvēts automātiskais
+demo tiek paturēts. Kļūdu ziņojumos ir pašreizējā līmeņa automātiskais
 demo.
 
 Demo laikā Atstarpe pauzē, turot Pa kreisi vai Pa labi, tiek tīts atpakaļ
@@ -171,6 +173,11 @@ tās atgriež. Klikšķiniet pogas, noklikšķiniet uz laika joslas, lai pārlē
 turp, vai velciet pa to, lai iezīmētu klipu; Eksportēt jautā kadru ātrumu,
 izmēru, formātu un failu, kā arī to, vai eksportēt iezīmēto klipu vai visu
 demo.
+
+Kontrolierī A pauzē, krustveida pogas tin atpakaļ un uz priekšu un maina
+ātrumu, LB un RB pārlec 10 sekundes, un sviru nospiedieni ved uz sākumu un
+uz nākamo karti. LT un RT atzīmē klipu, B to notīra, X eksportē, Y patur
+automātisko demo, un View paslēpj vadīklas.
 
 `capture` sāk un aptur video ierakstīšanu spēles laikā. Kadru ātrums,
 formāts un kvalitāte ir sadaļā Opcijas → Demo → Video ierakstīšana. Video

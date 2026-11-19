@@ -106,7 +106,8 @@ fn seeking_back_matches_straight_playback() {
     };
     let (_, r) = *l.buttons.iter().find(|(b, _)| *b == super::super::demo_bar::Btn::Hide).unwrap();
     click(&mut h, (r.0 + 2.0, r.1 + 2.0));
-    assert_eq!(h.cv("cl_demobar"), 1.0);
+    // a session choice: the Playback Bar setting is left alone
+    assert_eq!(h.cv("cl_demobar"), 2.0);
     assert!(!h.demo_bar_visible());
     h.demo_pointer_move((size.0 / 2.0, size.1 / 2.0), size);
     assert!(!h.demo_bar_visible() && h.demo_peek().is_none());
@@ -118,7 +119,6 @@ fn seeking_back_matches_straight_playback() {
         run(&mut h, 0.1);
     }
     click(&mut h, (size.0 / 2.0, size.1 - 4.0));
-    assert_eq!(h.cv("cl_demobar"), 2.0);
     assert!(h.demo_bar_visible());
 
     // playing to the end pauses on the last frame (cl_demo_endpause)
@@ -145,7 +145,10 @@ fn cancelled_export_leaves_no_files() {
     h.exec_line(&format!("playdemo {}", path.display()));
     run(&mut h, 0.3);
     h.exec_line("menu_export");
-    h.exec_line(&format!("_export_dest {}", out.join("x").display()));
+    h.exec_line(&format!("_export_dest \"{}\"", out.display()));
+    // the name field shows the demo's name; the extension isn't part of it
+    assert_eq!(h.cvs("_export_name"), "c");
+    h.exec_line("_export_name x");
     h.exec_line("_export_go whole");
     run(&mut h, 0.5);
     assert!(h.exporting());
@@ -157,4 +160,42 @@ fn cancelled_export_leaves_no_files() {
     assert!(left.is_empty(), "{left:?}");
     // back on the demo, paused
     assert!(h.demo.as_ref().is_some_and(|d| d.paused));
+}
+
+#[test]
+fn hidden_bar_stays_hidden_until_shown() {
+    let Some(mut h) = host() else { return };
+    let dir = std::env::temp_dir().join(format!("qsp-demobar-{}", std::process::id()));
+    let path = dir.join("bar.dem");
+    h.pending_record = Some((path.clone(), -1));
+    h.exec_line("map e1m1");
+    run(&mut h, 2.0);
+    let mut w = h.recording.take().expect("recording");
+    w.write(h.cl.viewangles, &[qnet::protocol::SVC_DISCONNECT]).unwrap();
+    w.finish().unwrap();
+    h.disconnect_client();
+    h.exec_line("cl_demobar 2");
+    h.exec_line(&format!("playdemo {}", path.display()));
+    run(&mut h, 0.3);
+    assert!(h.demo_bar_visible());
+    // View hides; A (pause) used to bring it back for a few seconds, and the
+    // next View then pinned it instead of hiding it
+    let pad = |h: &mut Host, k| assert!(h.demo_key(k, true));
+    pad(&mut h, qinput::keys::K_BACK);
+    assert!(!h.demo_bar_visible());
+    pad(&mut h, qinput::keys::K_ABUTTON);
+    pad(&mut h, qinput::keys::K_RSHOULDER);
+    run(&mut h, 0.1);
+    assert!(!h.demo_bar_visible(), "control keys keep a hidden bar hidden");
+    pad(&mut h, qinput::keys::K_BACK);
+    assert!(h.demo_bar_visible());
+    pad(&mut h, qinput::keys::K_BACK);
+    assert!(!h.demo_bar_visible());
+    // picking a Playback Bar setting takes over again
+    h.exec_line("cl_demobar 1");
+    pad(&mut h, qinput::keys::K_ABUTTON);
+    assert!(h.demo_bar_visible(), "auto mode shows the bar after a control");
+    pad(&mut h, qinput::keys::K_BACK);
+    assert!(!h.demo_bar_visible(), "hiding the auto-shown bar hides it");
+    let _ = std::fs::remove_dir_all(&dir);
 }

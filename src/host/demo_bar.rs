@@ -1,10 +1,12 @@
 //! The demo playback bar along the bottom of the screen: state and speed,
 //! level, time / length, a timeline (map boundaries, clip marks, play head)
 //! and a row of buttons. `cl_demobar` 2 (default) keeps it up; 1 is hidden:
-//! a control key brings it back for a few seconds, the end of the demo
-//! shows it, and the pointer at the bottom edge shows a strip that brings it
-//! back (`Peek`); 0 never. H or the Hide button switches 2 and 1. Never
-//! while exporting. The HUD is lifted above it (`lift`). Mouse: `demo_mouse.rs`.
+//! a control key brings it back for a few seconds and the end of the demo
+//! shows it; 0 never. H, View or the Hide button hides a showing bar and
+//! shows a hidden one (`toggle_demo_bar`); that choice holds for the session
+//! over both modes, so a hidden bar stays hidden, until the player shows it
+//! or changes `cl_demobar`. While hidden, the pointer at the bottom edge
+//! shows a strip that brings it back (`Peek`). Never while exporting. The HUD is lifted above it (`lift`). Mouse: `demo_mouse.rs`.
 
 use super::*;
 use crate::demo::playback::format_time;
@@ -139,7 +141,13 @@ impl Host {
 
     pub(super) fn demo_bar_visible(&self) -> bool {
         let Some(d) = &self.demo else { return false };
-        self.demo_bar_allowed() && (self.cv("cl_demobar") >= 2.0 || self.realtime < d.play.shown_until || self.demo_ui.drag.is_some())
+        let mode = self.cv("cl_demobar");
+        // the player's Hide/Show, while the setting is what it was then
+        let shown = match self.demo_ui.choice {
+            Some((show, under)) if under == mode => show,
+            _ => mode >= 2.0 || self.realtime < d.play.shown_until,
+        };
+        self.demo_bar_allowed() && (shown || self.demo_ui.drag.is_some())
     }
 
     /// The hidden bar's hint strip: the pointer is at the bottom edge.
@@ -192,7 +200,6 @@ impl Host {
             map,
             timeline,
             auto: d.play.auto,
-            pinned: self.cv("cl_demobar") >= 2.0,
             playing: speed > 0.0 && !d.paused,
             speed: trim(d.play.base_speed),
             pointer: self.demo_ui.pos,
@@ -214,7 +221,6 @@ pub(super) struct Bar {
     map: String,
     timeline: Option<Timeline>,
     auto: bool,
-    pinned: bool,
     playing: bool,
     speed: String,
     pointer: Option<(f32, f32)>,
@@ -254,8 +260,41 @@ pub(super) fn draw(c: &mut Canvas, bar: &Bar, glyphs: &crate::glyphs::Glyphs) {
     // pointer is over the bar
     let hy = y - 12.0;
     if bar.pad {
-        let items = [(K_YBUTTON, qcore::t!("Pause")), (K_DPAD_LEFT, qcore::t!("Rewind")), (K_DPAD_RIGHT, qcore::t!("Fast forward")), (K_DPAD_UP, qcore::t!("Speed")), (K_RSHOULDER, qcore::t!("Skip 10 s"))];
-        glyphs.hints_centered(c, vw / 2.0, hy - 4.0, &items);
+        // every control on a pad button, in as many rows as the width needs
+        let mut items = vec![
+            (K_ABUTTON, if bar.playing { qcore::t!("Pause") } else { qcore::t!("Play") }),
+            (K_DPAD_LEFT, qcore::t!("Rewind")),
+            (K_DPAD_RIGHT, qcore::t!("Fast forward")),
+            (K_DPAD_UP, qcore::t!("Speed")),
+            (K_LSHOULDER, qcore::t!("Back 10 s")),
+            (K_RSHOULDER, qcore::t!("Skip 10 s")),
+            (K_LTHUMB, qcore::t!("Restart")),
+            (K_RTHUMB, qcore::t!("Next level")),
+            (K_LTRIGGER, qcore::t!("Mark in")),
+            (K_RTRIGGER, qcore::t!("Mark out")),
+            (K_BBUTTON, qcore::t!("Clear")),
+            (K_XBUTTON, qcore::t!("Export Video")),
+        ];
+        if bar.auto {
+            items.push((K_YBUTTON, qcore::t!("Keep")));
+        }
+        items.push((K_BACK, qcore::t!("Hide")));
+        let mut rows: Vec<Vec<(i32, &str)>> = vec![Vec::new()];
+        for it in items {
+            let row = rows.last_mut().unwrap();
+            row.push(it);
+            if row.len() > 1 && glyphs.hints(c, 0.0, 0.0, row, false) > w - 16.0 {
+                row.pop();
+                rows.push(vec![it]);
+            }
+        }
+        let pitch = crate::glyphs::HINT_H + 4.0;
+        for (i, row) in rows.iter().enumerate() {
+            let ry = hy - 4.0 - (rows.len() - 1 - i) as f32 * pitch;
+            let rw = glyphs.hints(c, 0.0, ry, row, false);
+            c.fill(vw / 2.0 - rw / 2.0 - 4.0, ry - 2.0, rw + 8.0, pitch, [0.0, 0.0, 0.0, 0.6]);
+            glyphs.hints_centered(c, vw / 2.0, ry, row);
+        }
     } else if bar.pointer.is_some_and(|p| inside(l.panel, p)) {
         let mut keys = qcore::lang::tr(qcore::t!("Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export")).into_owned();
         keys = format!("{keys} | {}", qcore::lang::tr(qcore::t!("H hide")));
@@ -368,8 +407,7 @@ fn draw_button(c: &mut Canvas, b: Btn, r: Rect, bar: &Bar) {
         Btn::ClearMarks => label(c, qcore::t!("Clear")),
         Btn::Export => label(c, qcore::t!("Export")),
         Btn::Keep => label(c, qcore::t!("Keep")),
-        Btn::Hide if bar.pinned => label(c, qcore::t!("Hide")),
-        Btn::Hide => label(c, qcore::t!("Show")),
+        Btn::Hide => label(c, qcore::t!("Hide")),
     }
 }
 

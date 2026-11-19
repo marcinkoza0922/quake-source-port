@@ -1432,6 +1432,15 @@ ca 720p
 @ Destination
 ca Destinació
 
+@ File Name
+ca Nom del fitxer
+
+@ Rename
+ca Canvia el nom
+
+@ Rename Demo
+ca Canvia el nom de la demo
+
 @ Export Highlighted Clip
 ca Exporta el clip ressaltat
 
@@ -1894,8 +1903,14 @@ ca Mostra la barra de reproducció (temps, velocitat, línia de temps) després 
 ca Format de vídeo; cal ffmpeg amb aquest codificador, si no els fotogrames es desen com a imatges PNG
 
 # Demos and video recording.
-@ No clip highlighted: while the demo plays, drag across the timeline or press I and O
-ca Cap clip ressaltat: durant la demo, arrossega sobre la línia de temps o prem I i O
+@ No clip highlighted: while the demo plays, drag across the timeline, or press I and O (LT and RT on a controller)
+ca Cap clip ressaltat: durant la demo, arrossega sobre la línia de temps o prem I i O (LT i RT al comandament)
+
+@ Name of the video file; the extension follows the video format, and a file of the same name is replaced
+ca Nom del fitxer de vídeo; l'extensió segueix el format de vídeo i un fitxer amb el mateix nom se substitueix
+
+@ New name of the demo; if another demo has it, a number is added
+ca Nou nom de la demo; si una altra demo ja el té, s'hi afegeix un número
 
 @ Video size; frames are scaled from the window size (bars keep the shape), so a larger size adds no detail
 ca Mida del vídeo; els fotogrames s'escalen des de la mida de la finestra (amb bandes per mantenir la forma), així que una mida més gran no afegeix detall
@@ -2736,6 +2751,36 @@ ca Mida: {} KB
 @ Skip 10 s
 ca Salta 10 s
 
+@ Back 10 s
+ca Enrere 10 s
+
+@ Length
+ca Durada
+
+@ Mark in
+ca Marca l'inici
+
+@ Mark out
+ca Marca el final
+
+@ Next level
+ca Nivell següent
+
+@ No demos match the filter. Backspace or Esc clears it.
+ca Cap demo coincideix amb el filtre. Retrocés o Esc l'esborra.
+
+@ Renaming an automatic demo moves it to the saved demos.
+ca Canviar el nom d'una demo automàtica la mou a les demos desades.
+
+@ Restart
+ca Des del principi
+
+@ Sort
+ca Ordena
+
+@ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
+ca Durant una demo: A fa pausa, la creueta es desplaça i canvia la velocitat, LT i RT marquen un clip i X l'exporta.
+
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 ca Espai pausa | Esq./Dreta desplaça | Amunt/Avall velocitat | RePàg/AvPàg 10 s | I/O marca | E exporta
 
@@ -2766,9 +2811,6 @@ ca H amaga
 
 @ Hide
 ca Amaga
-
-@ Show
-ca Mostra
 
 # Demos and video recording.
 @ Demo: {}
@@ -3314,6 +3356,12 @@ ca S'està exportant {} a vídeo
 
 @ Kept demo {}
 ca Demo guardada: {}
+
+@ Not a valid demo name.
+ca Nom de demo no vàlid.
+
+@ Renamed demo to {}
+ca Demo reanomenada a {}
 
 @ No auto-demo to keep.
 ca No hi ha cap demo automàtica per guardar.

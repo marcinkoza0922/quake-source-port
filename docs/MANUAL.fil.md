@@ -166,9 +166,12 @@ ang mas lumang demo.
 Ipinapakita ng Main Menu → Mga Demo ang mga naka-save mong demo at, kapag
 naka-on ang Options → Mga Demo → Awtomatikong i-record ang mga demo, isang
 awtomatikong demo ng bawat level na nilalaro mo; papalitan ang pinakaluma
-kapag puno na ang mga slot. Pindutin ang K para magtabi ng isa, E para
-i-export ito bilang video at Del para burahin ito. Kasama sa mga bug report
-ang awtomatikong demo ng kasalukuyang level.
+kapag puno na ang mga slot. Mag-type para salain ang mga listahan at
+pindutin ang Tab para palitan ang ayos; ang mga button sa tabi ng listahan
+ay nagpe-play, nag-e-export, nagpapalit ng pangalan, nagtatabi o nagbubura
+ng napiling demo, at naitatabi ang awtomatikong demo kapag pinalitan ang
+pangalan nito. Kasama sa mga bug report ang awtomatikong demo ng
+kasalukuyang level.
 
 Habang may demo, nagpa-pause ang Space, nagre-rewind o nagfa-fast forward
 ang pagpindot nang matagal sa Kaliwa o Kanan, binabago ng Taas at Baba ang
@@ -181,6 +184,12 @@ button, i-click ang timeline para tumalon doon, o i-drag dito para
 i-highlight ang isang clip; itinatanong ng I-export ang frame rate, laki,
 format at file, at kung ang naka-highlight na clip o ang buong demo ang
 i-e-export.
+
+Sa controller, A para i-pause, ang d-pad para mag-rewind, mag-fast-forward
+at magbago ng bilis, LB at RB para tumalon nang 10 segundo, at ang mga
+stick button para pumunta sa simula at sa susunod na mapa. LT at RT para
+markahan ang clip, B para burahin ito, X para i-export, Y para itabi ang
+awtomatikong demo at View para itago ang mga kontrol.
 
 Sinisimulan at hinihinto ng `capture` ang pag-record ng video habang
 naglalaro ka. Nasa Options → Mga Demo → Pag-record ng video ang frame rate,

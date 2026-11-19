@@ -1432,6 +1432,15 @@ yue 720p
 @ Destination
 yue 儲存位置
 
+@ File Name
+yue 檔案名
+
+@ Rename
+yue 改名
+
+@ Rename Demo
+yue 示範改名
+
 @ Export Highlighted Clip
 yue 匯出標示咗嘅片段
 
@@ -1894,8 +1903,14 @@ yue 撳完控制鍵之後、一直或者永遠唔顯示播放列（時間、速�
 yue 影片格式；要有嗰個編碼器嘅 ffmpeg，否則影格會儲存做 PNG 圖片
 
 # Demos and video recording.
-@ No clip highlighted: while the demo plays, drag across the timeline or press I and O
-yue 冇標示片段：播示範嗰陣喺時間軸上面拖，或者撳 I 同 O
+@ No clip highlighted: while the demo plays, drag across the timeline, or press I and O (LT and RT on a controller)
+yue 冇標示片段：播示範嗰陣喺時間軸上面拖，或者撳 I 同 O（手掣上面係 LT 同 RT）
+
+@ Name of the video file; the extension follows the video format, and a file of the same name is replaced
+yue 影片檔案名；副檔名跟影片格式，同名檔案會被取代
+
+@ New name of the demo; if another demo has it, a number is added
+yue 示範嘅新名；如果有其他示範用緊，會加個編號
 
 @ Video size; frames are scaled from the window size (bars keep the shape), so a larger size adds no detail
 yue 影片尺寸；影格係由視窗尺寸縮放出嚟（加黑邊保持比例），所以大啲都唔會多咗細節
@@ -2736,6 +2751,36 @@ yue 大小：{} KB
 @ Skip 10 s
 yue 跳過 10 秒
 
+@ Back 10 s
+yue 倒退 10 秒
+
+@ Length
+yue 長度
+
+@ Mark in
+yue 標記起點
+
+@ Mark out
+yue 標記終點
+
+@ Next level
+yue 下一關
+
+@ No demos match the filter. Backspace or Esc clears it.
+yue 冇示範符合篩選。Backspace 或者 Esc 清除篩選。
+
+@ Renaming an automatic demo moves it to the saved demos.
+yue 自動示範改名之後會搬去已儲存嘅示範。
+
+@ Restart
+yue 由頭開始
+
+@ Sort
+yue 排序
+
+@ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
+yue 播示範嗰陣：A 暫停，十字掣拉同轉速度，LT 同 RT 標記片段，X 匯出佢。
+
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 yue Space 暫停 | ←/→ 拉 | ↑/↓ 速度 | PgUp/PgDn 10 秒 | I/O 標記 | E 匯出
 
@@ -2766,9 +2811,6 @@ yue H 收埋
 
 @ Hide
 yue 收埋
-
-@ Show
-yue 顯示
 
 # Demos and video recording.
 @ Demo: {}
@@ -3314,6 +3356,12 @@ yue 將 {} 匯出做影片中
 
 @ Kept demo {}
 yue 已保留示範：{}
+
+@ Not a valid demo name.
+yue 示範名唔啱。
+
+@ Renamed demo to {}
+yue 示範已改名做 {}
 
 @ No auto-demo to keep.
 yue 冇自動示範可以保留。

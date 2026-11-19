@@ -1432,6 +1432,15 @@ nb 720p
 @ Destination
 nb Mål
 
+@ File Name
+nb Filnavn
+
+@ Rename
+nb Gi nytt navn
+
+@ Rename Demo
+nb Gi demoen nytt navn
+
 @ Export Highlighted Clip
 nb Eksporter markert klipp
 
@@ -1894,8 +1903,14 @@ nb Viser avspillingslinjen (tid, hastighet, tidslinje) etter en kontrolltast, al
 nb Videoformat; krever ffmpeg med den koderen, ellers lagres bildene som PNG-bilder
 
 # Demos and video recording.
-@ No clip highlighted: while the demo plays, drag across the timeline or press I and O
-nb Ingen klipp markert: dra over tidslinjen eller trykk I og O mens demoen spilles
+@ No clip highlighted: while the demo plays, drag across the timeline, or press I and O (LT and RT on a controller)
+nb Ingen klipp markert: dra over tidslinjen eller trykk I og O mens demoen spilles (LT og RT på kontrolleren)
+
+@ Name of the video file; the extension follows the video format, and a file of the same name is replaced
+nb Navnet på videofilen; filendelsen følger videoformatet, og en fil med samme navn erstattes
+
+@ New name of the demo; if another demo has it, a number is added
+nb Demoens nye navn; hvis en annen demo har det, legges det til et nummer
 
 @ Video size; frames are scaled from the window size (bars keep the shape), so a larger size adds no detail
 nb Videostørrelse; bildene skaleres fra vindusstørrelsen (med svarte felt som beholder formen), så en større størrelse gir ikke flere detaljer
@@ -2736,6 +2751,36 @@ nb Størrelse: {} KB
 @ Skip 10 s
 nb Hopp 10 s
 
+@ Back 10 s
+nb Tilbake 10 s
+
+@ Length
+nb Lengde
+
+@ Mark in
+nb Merk start
+
+@ Mark out
+nb Merk slutt
+
+@ Next level
+nb Neste brett
+
+@ No demos match the filter. Backspace or Esc clears it.
+nb Ingen demoer passer filteret. Tilbake eller Esc tømmer det.
+
+@ Renaming an automatic demo moves it to the saved demos.
+nb En automatisk demo som får nytt navn, flyttes til de lagrede demoene.
+
+@ Restart
+nb Start på nytt
+
+@ Sort
+nb Sorter
+
+@ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
+nb Under en demo: A pauser, styrekorset spoler og endrer hastighet, LT og RT merker et klipp, og X eksporterer det.
+
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 nb Mellomrom pause | Venstre/Høyre spol | Opp/Ned hastighet | PgUp/PgDn 10 s | I/O merk | E eksporter
 
@@ -2766,9 +2811,6 @@ nb H skjul
 
 @ Hide
 nb Skjul
-
-@ Show
-nb Vis
 
 # Demos and video recording.
 @ Demo: {}
@@ -3314,6 +3356,12 @@ nb Eksporterer {} til video
 
 @ Kept demo {}
 nb Demo beholdt: {}
+
+@ Not a valid demo name.
+nb Ugyldig demonavn.
+
+@ Renamed demo to {}
+nb Demoen har fått nytt navn: {}
 
 @ No auto-demo to keep.
 nb Ingen autodemo å beholde.

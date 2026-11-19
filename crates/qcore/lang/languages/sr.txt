@@ -1432,6 +1432,15 @@ sr 720p
 @ Destination
 sr Одредиште
 
+@ File Name
+sr Име датотеке
+
+@ Rename
+sr Преименуј
+
+@ Rename Demo
+sr Преименуј демо
+
 @ Export Highlighted Clip
 sr Извези означени исечак
 
@@ -1894,8 +1903,14 @@ sr Приказује траку пуштања (време, брзина, вр�
 sr Формат видеа; потребан је ffmpeg са тим кодером, иначе се кадрови чувају као PNG слике
 
 # Demos and video recording.
-@ No clip highlighted: while the demo plays, drag across the timeline or press I and O
-sr Нема означеног исечка: током демоа превуците по временској линији или притисните I и O
+@ No clip highlighted: while the demo plays, drag across the timeline, or press I and O (LT and RT on a controller)
+sr Нема означеног исечка: током демоа превуците по временској линији или притисните I и O (LT и RT на контролеру)
+
+@ Name of the video file; the extension follows the video format, and a file of the same name is replaced
+sr Име видео датотеке; екстензија прати видео формат, а датотека истог имена биће замењена
+
+@ New name of the demo; if another demo has it, a number is added
+sr Ново име демоа; ако га већ има други демо, додаје се број
 
 @ Video size; frames are scaled from the window size (bars keep the shape), so a larger size adds no detail
 sr Величина видеа; кадрови се скалирају из величине прозора (са тракама да се задржи облик), па већа величина не додаје детаље
@@ -2736,6 +2751,36 @@ sr Величина: {} KB
 @ Skip 10 s
 sr Прескочи 10 с
 
+@ Back 10 s
+sr Назад 10 с
+
+@ Length
+sr Трајање
+
+@ Mark in
+sr Почетак исечка
+
+@ Mark out
+sr Крај исечка
+
+@ Next level
+sr Следећи ниво
+
+@ No demos match the filter. Backspace or Esc clears it.
+sr Ниједан демо не одговара филтеру. Backspace или Esc га брише.
+
+@ Renaming an automatic demo moves it to the saved demos.
+sr Преименовање аутоматског демоа премешта га међу сачуване.
+
+@ Restart
+sr Испочетка
+
+@ Sort
+sr Поређај
+
+@ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
+sr Током демоа: A паузира, D-pad премотава и мења брзину, LT и RT означавају исечак, а X га извози.
+
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 sr Размак пауза | Лево/Десно премотавање | Горе/Доле брзина | PgUp/PgDn 10 с | I/O ознака | E извоз
 
@@ -2766,9 +2811,6 @@ sr H сакриј
 
 @ Hide
 sr Сакриј
-
-@ Show
-sr Прикажи
 
 # Demos and video recording.
 @ Demo: {}
@@ -3314,6 +3356,12 @@ sr Извоз {} у видео
 
 @ Kept demo {}
 sr Демо задржан: {}
+
+@ Not a valid demo name.
+sr Неисправно име демоа.
+
+@ Renamed demo to {}
+sr Демо преименован у {}
 
 @ No auto-demo to keep.
 sr Нема ауто-демоа за задржавање.

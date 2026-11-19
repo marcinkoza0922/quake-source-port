@@ -1432,6 +1432,15 @@ fi 720p
 @ Destination
 fi Kohde
 
+@ File Name
+fi Tiedostonimi
+
+@ Rename
+fi Nimeä uudelleen
+
+@ Rename Demo
+fi Nimeä demo uudelleen
+
 @ Export Highlighted Clip
 fi Vie korostettu leike
 
@@ -1894,8 +1903,14 @@ fi Näyttää toistopalkin (aika, nopeus, aikajana) ohjausnäppäimen jälkeen, 
 fi Videomuoto; vaatii ffmpegin ja sen kooderin, muuten kuvat tallennetaan PNG-kuvina
 
 # Demos and video recording.
-@ No clip highlighted: while the demo plays, drag across the timeline or press I and O
-fi Leikettä ei ole korostettu: vedä demon aikana aikajanan yli tai paina I ja O
+@ No clip highlighted: while the demo plays, drag across the timeline, or press I and O (LT and RT on a controller)
+fi Leikettä ei ole korostettu: vedä demon aikana aikajanan yli tai paina I ja O (LT ja RT ohjaimessa)
+
+@ Name of the video file; the extension follows the video format, and a file of the same name is replaced
+fi Videotiedoston nimi; pääte määräytyy videomuodon mukaan, ja samanniminen tiedosto korvataan
+
+@ New name of the demo; if another demo has it, a number is added
+fi Demon uusi nimi; jos toisella demolla on jo sama nimi, siihen lisätään numero
 
 @ Video size; frames are scaled from the window size (bars keep the shape), so a larger size adds no detail
 fi Videon koko; kuvat skaalataan ikkunan koosta (reunoilla, jotta muoto säilyy), joten suurempi koko ei tuo lisää yksityiskohtia
@@ -2736,6 +2751,36 @@ fi Koko: {} kt
 @ Skip 10 s
 fi Ohita 10 s
 
+@ Back 10 s
+fi Taaksepäin 10 s
+
+@ Length
+fi Kesto
+
+@ Mark in
+fi Merkitse alku
+
+@ Mark out
+fi Merkitse loppu
+
+@ Next level
+fi Seuraava taso
+
+@ No demos match the filter. Backspace or Esc clears it.
+fi Mikään demo ei vastaa suodatinta. Askelpalautin tai Esc tyhjentää sen.
+
+@ Renaming an automatic demo moves it to the saved demos.
+fi Automaattisen demon uudelleennimeäminen siirtää sen tallennettuihin demoihin.
+
+@ Restart
+fi Alusta
+
+@ Sort
+fi Lajittele
+
+@ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
+fi Demon aikana: A pysäyttää, ristiohjain kelaa ja muuttaa nopeutta, LT ja RT merkitsevät leikkeen ja X vie sen.
+
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 fi Välilyönti tauko | Vasen/Oikea kelaus | Ylös/Alas nopeus | PgUp/PgDn 10 s | I/O merkki | E vie
 
@@ -2766,9 +2811,6 @@ fi H piilota
 
 @ Hide
 fi Piilota
-
-@ Show
-fi Näytä
 
 # Demos and video recording.
 @ Demo: {}
@@ -3314,6 +3356,12 @@ fi Viedään {} videoksi
 
 @ Kept demo {}
 fi Demo säilytetty: {}
+
+@ Not a valid demo name.
+fi Virheellinen demon nimi.
+
+@ Renamed demo to {}
+fi Demo nimettiin uudelleen: {}
 
 @ No auto-demo to keep.
 fi Ei säilytettävää autodemoa.

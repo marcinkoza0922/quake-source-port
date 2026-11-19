@@ -3331,6 +3331,27 @@ it Destinazione
 es Destino
 ru Путь сохранения
 
+@ File Name
+fr Nom du fichier
+de Dateiname
+it Nome file
+es Nombre de archivo
+ru Имя файла
+
+@ Rename
+fr Renommer
+de Umbenennen
+it Rinomina
+es Renombrar
+ru Переименовать
+
+@ Rename Demo
+fr Renommer la démo
+de Demo umbenennen
+it Rinomina demo
+es Renombrar demo
+ru Переименовать демо
+
 @ Export Highlighted Clip
 fr Exporter l'extrait surligné
 de Markierten Clip exportieren

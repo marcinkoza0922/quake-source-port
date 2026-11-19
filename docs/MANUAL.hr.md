@@ -152,8 +152,10 @@ inačica čuva se kao `<naziv>.qsd` (`playdemo <naziv>.qsd`).
 
 Glavni izbornik → Dema prikazuje spremljena dema i, uz uključeno Opcije →
 Dema → Automatski snimaj dema, automatski demo svake odigrane razine;
-najstarija se zamjenjuju kad su mjesta puna. K zadržava demo, E ga izvozi u
-video, Del ga briše. Prijave grešaka sadrže automatski demo trenutne razine.
+najstarija se zamjenjuju kad su mjesta puna. Tipkajte za filtriranje popisa,
+a Tab mijenja poredak; gumbi pokraj popisa reproduciraju, izvoze,
+preimenuju, zadržavaju ili brišu odabrani demo, a preimenovani automatski
+demo se zadržava. Prijave grešaka sadrže automatski demo trenutne razine.
 
 Tijekom dema Razmaknica pauzira, držanje Lijevo ili Desno premotava unatrag
 ili naprijed, Gore i Dolje mijenjaju brzinu, PgUp i PgDn skaču 10 sekundi, a
@@ -163,6 +165,11 @@ ili Sakrij ih skrivaju, a pokazivanje na donji rub prikazuje traku koja ih
 vraća. Kliknite gumbe, kliknite vremensku crtu da skočite onamo ili povucite
 preko nje da označite isječak; Izvezi pita za broj sličica, veličinu, format
 i datoteku te izvozi li se označeni isječak ili cijeli demo.
+
+Na kontroleru A pauzira, križni gumb premotava natrag i naprijed i mijenja
+brzinu, LB i RB skaču 10 sekundi, a pritisci palica idu na početak i na
+sljedeću mapu. LT i RT označavaju isječak, B ga briše, X izvozi, Y zadržava
+automatski demo, a View skriva kontrole.
 
 `capture` pokreće i zaustavlja snimanje videa tijekom igre. Broj sličica,
 format i kvaliteta su u Opcije → Dema → Snimanje videa. Videi trebaju

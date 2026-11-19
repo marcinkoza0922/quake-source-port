@@ -1432,6 +1432,15 @@ pl 720p
 @ Destination
 pl Miejsce zapisu
 
+@ File Name
+pl Nazwa pliku
+
+@ Rename
+pl Zmień nazwę
+
+@ Rename Demo
+pl Zmień nazwę dema
+
 @ Export Highlighted Clip
 pl Eksportuj zaznaczony fragment
 
@@ -1894,8 +1903,14 @@ pl Pokazuje pasek odtwarzania (czas, prędkość, oś czasu) po klawiszu sterowa
 pl Format wideo; wymaga ffmpeg z tym koderem, w przeciwnym razie klatki są zapisywane jako obrazy PNG
 
 # Demos and video recording.
-@ No clip highlighted: while the demo plays, drag across the timeline or press I and O
-pl Brak zaznaczonego fragmentu: podczas dema przeciągnij po osi czasu lub naciśnij I i O
+@ No clip highlighted: while the demo plays, drag across the timeline, or press I and O (LT and RT on a controller)
+pl Brak zaznaczonego fragmentu: podczas dema przeciągnij po osi czasu lub naciśnij I i O (LT i RT na kontrolerze)
+
+@ Name of the video file; the extension follows the video format, and a file of the same name is replaced
+pl Nazwa pliku wideo; rozszerzenie zależy od formatu wideo, a plik o tej samej nazwie zostanie zastąpiony
+
+@ New name of the demo; if another demo has it, a number is added
+pl Nowa nazwa dema; jeśli ma ją już inne demo, zostanie dodany numer
 
 @ Video size; frames are scaled from the window size (bars keep the shape), so a larger size adds no detail
 pl Rozmiar wideo; klatki są skalowane z rozmiaru okna (z pasami zachowującymi proporcje), więc większy rozmiar nie dodaje szczegółów
@@ -2736,6 +2751,36 @@ pl Rozmiar: {} KB
 @ Skip 10 s
 pl Pomiń 10 s
 
+@ Back 10 s
+pl Cofnij 10 s
+
+@ Length
+pl Długość
+
+@ Mark in
+pl Początek fragmentu
+
+@ Mark out
+pl Koniec fragmentu
+
+@ Next level
+pl Następny poziom
+
+@ No demos match the filter. Backspace or Esc clears it.
+pl Żadne demo nie pasuje do filtra. Backspace lub Esc go czyści.
+
+@ Renaming an automatic demo moves it to the saved demos.
+pl Zmiana nazwy automatycznego dema przenosi je do zapisanych dem.
+
+@ Restart
+pl Od początku
+
+@ Sort
+pl Sortuj
+
+@ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
+pl Podczas dema: A wstrzymuje, krzyżak przewija i zmienia prędkość, LT i RT zaznaczają fragment, a X go eksportuje.
+
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 pl Spacja pauza | Lewo/Prawo przewijanie | Góra/Dół prędkość | PgUp/PgDn 10 s | I/O znacznik | E eksport
 
@@ -2766,9 +2811,6 @@ pl H ukryj
 
 @ Hide
 pl Ukryj
-
-@ Show
-pl Pokaż
 
 # Demos and video recording.
 @ Demo: {}
@@ -3314,6 +3356,12 @@ pl Eksport {} do wideo
 
 @ Kept demo {}
 pl Zachowano demo {}
+
+@ Not a valid demo name.
+pl Nieprawidłowa nazwa dema.
+
+@ Renamed demo to {}
+pl Zmieniono nazwę dema na {}
 
 @ No auto-demo to keep.
 pl Brak autodema do zachowania.

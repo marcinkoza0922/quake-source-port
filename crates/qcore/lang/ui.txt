@@ -1919,6 +1919,76 @@ it Salta 10 s
 es Saltar 10 s
 ru Пропустить 10 с
 
+@ Back 10 s
+fr Reculer de 10 s
+de 10 s zurück
+it Indietro 10 s
+es Atrás 10 s
+ru Назад 10 с
+
+@ Length
+fr Durée
+de Länge
+it Durata
+es Duración
+ru Длительность
+
+@ Mark in
+fr Marquer le début
+de Anfang markieren
+it Segna inizio
+es Marcar inicio
+ru Начало фрагмента
+
+@ Mark out
+fr Marquer la fin
+de Ende markieren
+it Segna fine
+es Marcar fin
+ru Конец фрагмента
+
+@ Next level
+fr Niveau suivant
+de Nächstes Level
+it Livello successivo
+es Siguiente nivel
+ru Следующий уровень
+
+@ No demos match the filter. Backspace or Esc clears it.
+fr Aucune démo ne correspond au filtre. Retour arrière ou Échap l'efface.
+de Keine Demo passt zum Filter. Rücktaste oder Esc leert ihn.
+it Nessuna demo corrisponde al filtro. Backspace o Esc lo cancella.
+es Ninguna demo coincide con el filtro. Retroceso o Esc lo borra.
+ru Нет демо, подходящих под фильтр. Backspace или Esc очищает его.
+
+@ Renaming an automatic demo moves it to the saved demos.
+fr Renommer une démo automatique la déplace dans les démos enregistrées.
+de Eine automatische Demo umzubenennen verschiebt sie zu den gespeicherten Demos.
+it Rinominare una demo automatica la sposta tra le demo salvate.
+es Renombrar una demo automática la mueve a las demos guardadas.
+ru Переименованное автоматическое демо переносится в сохранённые.
+
+@ Restart
+fr Recommencer
+de Neustart
+it Ricomincia
+es Reiniciar
+ru Сначала
+
+@ Sort
+fr Trier
+de Sortieren
+it Ordina
+es Ordenar
+ru Сортировка
+
+@ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
+fr Pendant une démo : A met en pause, la croix directionnelle fait défiler et change la vitesse, LT et RT marquent un extrait et X l'exporte.
+de Während einer Demo: A pausiert, das Steuerkreuz spult und ändert die Geschwindigkeit, LT und RT markieren einen Clip und X exportiert ihn.
+it Durante una demo: A mette in pausa, il d-pad scorre e cambia la velocità, LT e RT segnano una clip e X la esporta.
+es Durante una demo: A pausa, la cruceta avanza y cambia la velocidad, LT y RT marcan un clip y X lo exporta.
+ru Во время демо: A ставит паузу, крестовина перематывает и меняет скорость, LT и RT отмечают фрагмент, а X экспортирует его.
+
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 fr Espace pause | Gauche/Droite parcourir | Haut/Bas vitesse | PgUp/PgDn 10 s | I/O marquer | E exporter
 de Leertaste Pause | Links/Rechts spulen | Hoch/Runter Tempo | Bild↑/Bild↓ 10 s | I/O markieren | E exportieren
@@ -1990,13 +2060,6 @@ de Ausblenden
 it Nascondi
 es Ocultar
 ru Скрыть
-
-@ Show
-fr Afficher
-de Einblenden
-it Mostra
-es Mostrar
-ru Показать
 
 # Demos and video recording.
 

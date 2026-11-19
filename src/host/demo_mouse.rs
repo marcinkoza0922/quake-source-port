@@ -21,6 +21,13 @@ pub(super) struct Pointer {
     pub drag: Option<f64>,
     pub drag_to: Option<f64>,
     drag_x: f32,
+    /// Pad triggers past their dead zone (they mark a clip).
+    pub triggers: [bool; 2],
+    /// The player's Hide/Show (H, View, the Hide button, the strip) and the
+    /// `cl_demobar` it was made under: it wins over `cl_demobar` for the
+    /// session, so a hidden bar stays hidden when control keys are used,
+    /// until the player shows it or picks another Playback Bar setting.
+    pub choice: Option<(bool, f32)>,
 }
 
 impl Host {
@@ -137,8 +144,8 @@ impl Host {
 
     /// H / Hide / the strip: shown (2) or hidden (1), at once.
     pub(super) fn toggle_demo_bar(&mut self) {
-        let hide = self.cv("cl_demobar") >= 2.0;
-        self.server.core.cvars.set("cl_demobar", if hide { "1" } else { "2" });
+        let show = !self.demo_bar_visible();
+        self.demo_ui.choice = Some((show, self.cv("cl_demobar")));
         if let Some(d) = &mut self.demo {
             d.play.shown_until = 0.0;
         }

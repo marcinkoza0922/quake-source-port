@@ -161,8 +161,10 @@ pełna wersja jest zachowywana jako `<nazwa>.qsd` (`playdemo <nazwa>.qsd`).
 
 Menu główne → Dema pokazuje zapisane dema, a gdy włączone jest Opcje → Dema
 → Automatyczne nagrywanie dem, także automatyczne demo każdego rozegranego
-poziomu; najstarsze są zastępowane, gdy miejsca się zapełnią. K zachowuje
-demo, E eksportuje je do wideo, Del je usuwa. Raporty błędów zawierają
+poziomu; najstarsze są zastępowane, gdy miejsca się zapełnią. Pisz, aby
+filtrować listy, a Tab zmienia sortowanie; przyciski obok listy odtwarzają,
+eksportują, zmieniają nazwę, zachowują lub usuwają wybrane demo, a zmiana
+nazwy automatycznego dema je zachowuje. Raporty błędów zawierają
 automatyczne demo bieżącego poziomu.
 
 Podczas dema Spacja wstrzymuje, przytrzymanie Lewo lub Prawo przewija do
@@ -174,6 +176,12 @@ krawędzi pokazuje pasek, który je przywraca. Klikaj przyciski, kliknij oś
 czasu, aby tam przeskoczyć, albo przeciągnij po niej, aby zaznaczyć
 fragment; Eksportuj pyta o liczbę klatek, rozmiar, format i plik oraz o to,
 czy wyeksportować zaznaczony fragment, czy całe demo.
+
+Na kontrolerze A wstrzymuje, krzyżak przewija do tyłu i do przodu oraz
+zmienia prędkość, LB i RB przeskakują o 10 sekund, a wciśnięcia gałek
+przechodzą na początek i do następnej mapy. LT i RT zaznaczają fragment, B
+go czyści, X eksportuje, Y zachowuje automatyczne demo, a View ukrywa
+sterowanie.
 
 `capture` zaczyna i kończy nagrywanie wideo podczas gry. Liczba klatek,
 format i jakość są w Opcje → Dema → Nagrywanie wideo. Wideo wymaga ffmpeg;

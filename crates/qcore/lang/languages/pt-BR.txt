@@ -1432,6 +1432,15 @@ pt-BR 720p
 @ Destination
 pt-BR Destino
 
+@ File Name
+pt-BR Nome do arquivo
+
+@ Rename
+pt-BR Renomear
+
+@ Rename Demo
+pt-BR Renomear demo
+
 @ Export Highlighted Clip
 pt-BR Exportar trecho destacado
 
@@ -1894,8 +1903,14 @@ pt-BR Mostra a barra de reprodução (tempo, velocidade, linha do tempo) após u
 pt-BR Formato de vídeo; requer ffmpeg com esse codificador, senão os quadros são salvos como imagens PNG
 
 # Demos and video recording.
-@ No clip highlighted: while the demo plays, drag across the timeline or press I and O
-pt-BR Nenhum trecho destacado: durante a demo, arraste sobre a linha do tempo ou aperte I e O
+@ No clip highlighted: while the demo plays, drag across the timeline, or press I and O (LT and RT on a controller)
+pt-BR Nenhum trecho destacado: durante a demo, arraste sobre a linha do tempo ou aperte I e O (LT e RT no controle)
+
+@ Name of the video file; the extension follows the video format, and a file of the same name is replaced
+pt-BR Nome do arquivo de vídeo; a extensão segue o formato de vídeo e um arquivo com o mesmo nome é substituído
+
+@ New name of the demo; if another demo has it, a number is added
+pt-BR Novo nome da demo; se outra demo já tiver esse nome, um número é acrescentado
 
 @ Video size; frames are scaled from the window size (bars keep the shape), so a larger size adds no detail
 pt-BR Tamanho do vídeo; os quadros são redimensionados a partir do tamanho da janela (com barras para manter a forma), então um tamanho maior não acrescenta detalhes
@@ -2736,6 +2751,36 @@ pt-BR Tamanho: {} KB
 @ Skip 10 s
 pt-BR Pular 10 s
 
+@ Back 10 s
+pt-BR Voltar 10 s
+
+@ Length
+pt-BR Duração
+
+@ Mark in
+pt-BR Marcar início
+
+@ Mark out
+pt-BR Marcar fim
+
+@ Next level
+pt-BR Próxima fase
+
+@ No demos match the filter. Backspace or Esc clears it.
+pt-BR Nenhuma demo corresponde ao filtro. Backspace ou Esc o limpa.
+
+@ Renaming an automatic demo moves it to the saved demos.
+pt-BR Renomear uma demo automática a move para as demos guardadas.
+
+@ Restart
+pt-BR Recomeçar
+
+@ Sort
+pt-BR Ordenar
+
+@ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
+pt-BR Durante uma demo: A pausa, o direcional percorre e muda a velocidade, LT e RT marcam um trecho e X o exporta.
+
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 pt-BR Espaço pausa | Esq./Dir. percorrer | Cima/Baixo velocidade | PgUp/PgDn 10 s | I/O marcar | E exportar
 
@@ -2766,9 +2811,6 @@ pt-BR H ocultar
 
 @ Hide
 pt-BR Ocultar
-
-@ Show
-pt-BR Mostrar
 
 # Demos and video recording.
 @ Demo: {}
@@ -3314,6 +3356,12 @@ pt-BR Exportando {} para vídeo
 
 @ Kept demo {}
 pt-BR Demo guardada: {}
+
+@ Not a valid demo name.
+pt-BR Nome de demo inválido.
+
+@ Renamed demo to {}
+pt-BR Demo renomeada para {}
 
 @ No auto-demo to keep.
 pt-BR Nenhuma demo automática para guardar.

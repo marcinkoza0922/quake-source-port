@@ -162,9 +162,11 @@ versión completa gárdase como `<nome>.qsd` (`playdemo <nome>.qsd`).
 
 Menú principal → Demos mostra as túas demos gardadas e, con Opcións → Demos
 → Gravar demos automaticamente activado, unha demo automática de cada nivel
-que xogues; as máis antigas substitúense cando os espazos están cheos. K
-garda unha, E expórtaa a vídeo e Supr elimínaa. Os informes de erros inclúen
-a demo automática do nivel actual.
+que xogues; as máis antigas substitúense cando os espazos están cheos.
+Escribe para filtrar as listas e preme Tab para cambiar a orde; os botóns
+xunto á lista reproducen, exportan, renomean, gardan ou borran a demo
+escollida, e renomear unha demo automática gárdaa. Os informes de erros
+inclúen a demo automática do nivel actual.
 
 Durante unha demo, Espazo pausa, manter Esquerda ou Dereita rebobina ou
 avanza rápido, Arriba e Abaixo cambian a velocidade, RePáx e AvPáx saltan 10
@@ -175,6 +177,11 @@ unha franxa que os trae de volta. Preme os botóns, preme na liña de tempo
 para saltar alí ou arrastra sobre ela para resaltar un clip; Exportar pide
 os fotogramas por segundo, o tamaño, o formato e o ficheiro, e se exportar o
 clip resaltado ou a demo enteira.
+
+No mando, A pausa, a cruceta rebobina, avanza e cambia a velocidade, LB e RB
+saltan 10 segundos e os botóns dos sticks van ao inicio e ao seguinte mapa.
+LT e RT marcan un clip, B bórrao, X exporta, Y garda unha demo automática e
+View oculta os controis.
 
 `capture` inicia e detén a gravación dun vídeo mentres xogas. Os fotogramas
 por segundo, o formato e a calidade están en Opcións → Demos → Gravación de

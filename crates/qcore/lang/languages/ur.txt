@@ -1432,6 +1432,15 @@ ur 720p
 @ Destination
 ur منزل
 
+@ File Name
+ur فائل کا نام
+
+@ Rename
+ur نام بدلیں
+
+@ Rename Demo
+ur ڈیمو کا نام بدلیں
+
 @ Export Highlighted Clip
 ur نشان زد کلپ برآمد کریں
 
@@ -1894,8 +1903,14 @@ ur کنٹرول کلید کے بعد، ہمیشہ، یا کبھی نہیں پل�
 ur ویڈیو فارمیٹ؛ اس انکوڈر والا ffmpeg درکار ہے، ورنہ فریم PNG تصاویر کے طور پر محفوظ ہوتے ہیں
 
 # Demos and video recording.
-@ No clip highlighted: while the demo plays, drag across the timeline or press I and O
-ur کوئی کلپ نشان زد نہیں: ڈیمو چلتے وقت ٹائم لائن پر گھسیٹیں یا I اور O دبائیں
+@ No clip highlighted: while the demo plays, drag across the timeline, or press I and O (LT and RT on a controller)
+ur کوئی کلپ نشان زد نہیں: ڈیمو چلتے وقت ٹائم لائن پر گھسیٹیں یا I اور O دبائیں (کنٹرولر پر LT اور RT)
+
+@ Name of the video file; the extension follows the video format, and a file of the same name is replaced
+ur ویڈیو فائل کا نام؛ ایکسٹینشن ویڈیو فارمیٹ کے مطابق ہوتی ہے، اور اسی نام کی فائل بدل دی جاتی ہے
+
+@ New name of the demo; if another demo has it, a number is added
+ur ڈیمو کا نیا نام؛ اگر کسی اور ڈیمو کا یہی نام ہو تو ایک نمبر جوڑ دیا جاتا ہے
 
 @ Video size; frames are scaled from the window size (bars keep the shape), so a larger size adds no detail
 ur ویڈیو کا سائز؛ فریم ونڈو کے سائز سے بڑے کیے جاتے ہیں (شکل برقرار رکھنے کے لیے پٹیوں کے ساتھ)، اس لیے بڑا سائز تفصیل نہیں بڑھاتا
@@ -2736,6 +2751,36 @@ ur سائز: {} KB
 @ Skip 10 s
 ur 10 سیکنڈ چھوڑیں
 
+@ Back 10 s
+ur 10 سیکنڈ پیچھے
+
+@ Length
+ur دورانیہ
+
+@ Mark in
+ur آغاز نشان زد کریں
+
+@ Mark out
+ur اختتام نشان زد کریں
+
+@ Next level
+ur اگلا لیول
+
+@ No demos match the filter. Backspace or Esc clears it.
+ur کوئی ڈیمو فلٹر سے میل نہیں کھاتا۔ Backspace یا Esc اسے صاف کرتا ہے۔
+
+@ Renaming an automatic demo moves it to the saved demos.
+ur خودکار ڈیمو کا نام بدلنے سے وہ محفوظ ڈیمو میں چلا جاتا ہے۔
+
+@ Restart
+ur شروع سے
+
+@ Sort
+ur ترتیب
+
+@ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
+ur ڈیمو چلتے وقت: A روکتا ہے، ڈی پیڈ کھسکاتا اور رفتار بدلتا ہے، LT اور RT کلپ نشان زد کرتے ہیں اور X اسے برآمد کرتا ہے۔
+
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 ur Space روکیں | بائیں/دائیں کھسکائیں | اوپر/نیچے رفتار | PgUp/PgDn 10 سیکنڈ | I/O نشان | E برآمد
 
@@ -2766,9 +2811,6 @@ ur H چھپائیں
 
 @ Hide
 ur چھپائیں
-
-@ Show
-ur دکھائیں
 
 # Demos and video recording.
 @ Demo: {}
@@ -3314,6 +3356,12 @@ ur {} کو ویڈیو میں برآمد کیا جا رہا ہے
 
 @ Kept demo {}
 ur ڈیمو رکھ لیا گیا: {}
+
+@ Not a valid demo name.
+ur ڈیمو کا نام درست نہیں۔
+
+@ Renamed demo to {}
+ur ڈیمو کا نام بدل کر {} کر دیا گیا
 
 @ No auto-demo to keep.
 ur رکھنے کے لیے کوئی خودکار ڈیمو نہیں۔

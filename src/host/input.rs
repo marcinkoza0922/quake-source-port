@@ -105,6 +105,15 @@ impl Host {
                 {
                     return;
                 }
+                // triggers are axes: their presses mark a demo clip (the
+                // event still reaches the binds, which a demo ignores)
+                if let InputEvent::GamepadAxis { axis: a @ (qinput::GamepadAxis::LeftTrigger | qinput::GamepadAxis::RightTrigger), value } = ie {
+                    let i = usize::from(a == qinput::GamepadAxis::RightTrigger);
+                    let on = value > self.cv("joy_deadzone_trigger");
+                    if std::mem::replace(&mut self.demo_ui.triggers[i], on) != on && on {
+                        self.demo_key([qinput::keys::K_LTRIGGER, qinput::keys::K_RTRIGGER][i], true);
+                    }
+                }
                 // Key_Event: in a demo, a key in game mode brings up the menu.
                 if let InputEvent::Key { key, down: true } = ie
                     && self.demo.is_some()

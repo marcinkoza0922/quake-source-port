@@ -1432,6 +1432,15 @@ nl 720p
 @ Destination
 nl Bestemming
 
+@ File Name
+nl Bestandsnaam
+
+@ Rename
+nl Hernoemen
+
+@ Rename Demo
+nl Demo hernoemen
+
 @ Export Highlighted Clip
 nl Gemarkeerd fragment exporteren
 
@@ -1894,8 +1903,14 @@ nl Toont de afspeelbalk (tijd, snelheid, tijdlijn) na een bedieningstoets, altij
 nl Videoformaat; vereist ffmpeg met die encoder, anders worden de beelden als PNG-afbeeldingen opgeslagen
 
 # Demos and video recording.
-@ No clip highlighted: while the demo plays, drag across the timeline or press I and O
-nl Geen fragment gemarkeerd: sleep tijdens de demo over de tijdlijn of druk op I en O
+@ No clip highlighted: while the demo plays, drag across the timeline, or press I and O (LT and RT on a controller)
+nl Geen fragment gemarkeerd: sleep tijdens de demo over de tijdlijn of druk op I en O (LT en RT op de controller)
+
+@ Name of the video file; the extension follows the video format, and a file of the same name is replaced
+nl Naam van het videobestand; de extensie volgt het videoformaat en een bestand met dezelfde naam wordt vervangen
+
+@ New name of the demo; if another demo has it, a number is added
+nl Nieuwe naam van de demo; heeft een andere demo die al, dan komt er een nummer bij
 
 @ Video size; frames are scaled from the window size (bars keep the shape), so a larger size adds no detail
 nl Videogrootte; beelden worden geschaald vanaf de venstergrootte (met balken om de vorm te houden), dus een grotere grootte voegt geen detail toe
@@ -2736,6 +2751,36 @@ nl Grootte: {} kB
 @ Skip 10 s
 nl 10 s overslaan
 
+@ Back 10 s
+nl 10 s terug
+
+@ Length
+nl Duur
+
+@ Mark in
+nl Begin markeren
+
+@ Mark out
+nl Einde markeren
+
+@ Next level
+nl Volgend level
+
+@ No demos match the filter. Backspace or Esc clears it.
+nl Geen demo's passen bij het filter. Backspace of Esc wist het.
+
+@ Renaming an automatic demo moves it to the saved demos.
+nl Een automatische demo hernoemen verplaatst hem naar de opgeslagen demo's.
+
+@ Restart
+nl Opnieuw
+
+@ Sort
+nl Sorteren
+
+@ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
+nl Tijdens een demo: A pauzeert, de d-pad spoelt en wijzigt de snelheid, LT en RT markeren een fragment en X exporteert het.
+
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 nl Spatie pauze | Links/Rechts spoelen | Omhoog/Omlaag snelheid | PgUp/PgDn 10 s | I/O markeren | E exporteren
 
@@ -2766,9 +2811,6 @@ nl H verbergen
 
 @ Hide
 nl Verbergen
-
-@ Show
-nl Tonen
 
 # Demos and video recording.
 @ Demo: {}
@@ -3314,6 +3356,12 @@ nl {} wordt als video geëxporteerd
 
 @ Kept demo {}
 nl Demo bewaard: {}
+
+@ Not a valid demo name.
+nl Ongeldige demonaam.
+
+@ Renamed demo to {}
+nl Demo hernoemd naar {}
 
 @ No auto-demo to keep.
 nl Geen autodemo om te bewaren.

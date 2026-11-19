@@ -161,9 +161,11 @@ lain, versi penuh disimpan sebagai `<name>.qsd` (`playdemo <name>.qsd`).
 
 Menu utama → Demo menyenaraikan demo tersimpan anda dan, jika Pilihan → Demo
 → Rakam demo secara automatik dihidupkan, demo automatik bagi setiap
-peringkat yang anda main; yang tertua diganti apabila slot penuh. K
-menyimpan satu, E mengeksportnya ke video dan Del memadamnya. Laporan
-pepijat mengandungi demo automatik peringkat semasa.
+peringkat yang anda main; yang tertua diganti apabila slot penuh. Taip untuk
+menapis senarai dan tekan Tab untuk menukar susunan; butang di sebelah
+senarai memainkan, mengeksport, menamakan semula, menyimpan atau memadam
+demo yang dipilih, dan menamakan semula demo automatik akan menyimpannya.
+Laporan pepijat mengandungi demo automatik peringkat semasa.
 
 Semasa demo dimainkan, Ruang menjeda, menahan Kiri atau Kanan mengundur atau
 memara laju, Atas dan Bawah menukar kelajuan, PgUp dan PgDn melompat 10
@@ -174,6 +176,11 @@ bawah menunjukkan jalur yang mengembalikannya. Klik butang, klik garis masa
 untuk melompat ke situ, atau seret padanya untuk menanda klip; Eksport
 bertanya kadar bingkai, saiz, format dan fail, serta sama ada mengeksport
 klip yang ditanda atau seluruh demo.
+
+Pada pengawal, A menjeda, d-pad mengundur, mempercepat dan menukar kelajuan,
+LB dan RB melompat 10 saat, dan butang batang kawalan pergi ke permulaan dan
+ke peta seterusnya. LT dan RT menanda klip, B mengosongkannya, X
+mengeksport, Y menyimpan demo automatik dan View menyembunyikan kawalan.
 
 `capture` memulakan dan menghentikan rakaman video semasa bermain. Kadar
 bingkai, format dan kualiti terdapat dalam Pilihan → Demo → Rakaman video.

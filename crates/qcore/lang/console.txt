@@ -534,6 +534,20 @@ it Demo conservata: {}
 es Demo conservada: {}
 ru Демо сохранено: {}
 
+@ Not a valid demo name.
+fr Nom de démo invalide.
+de Kein gültiger Demo-Name.
+it Nome della demo non valido.
+es Nombre de demo no válido.
+ru Недопустимое имя демо.
+
+@ Renamed demo to {}
+fr Démo renommée en {}
+de Demo umbenannt in {}
+it Demo rinominata in {}
+es Demo renombrada a {}
+ru Демо переименовано: {}
+
 @ No auto-demo to keep.
 fr Aucune démo auto à garder.
 de Keine Auto-Demo zum Behalten.

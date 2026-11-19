@@ -1432,6 +1432,15 @@ ro 720p
 @ Destination
 ro Destinație
 
+@ File Name
+ro Nume fișier
+
+@ Rename
+ro Redenumește
+
+@ Rename Demo
+ro Redenumește demo
+
 @ Export Highlighted Clip
 ro Exportă clipul evidențiat
 
@@ -1894,8 +1903,14 @@ ro Arată bara de redare (timp, viteză, cronologie) după o tastă de control, 
 ro Format video; necesită ffmpeg cu acel encoder, altfel cadrele se salvează ca imagini PNG
 
 # Demos and video recording.
-@ No clip highlighted: while the demo plays, drag across the timeline or press I and O
-ro Niciun clip evidențiat: în timpul demo-ului trage peste cronologie sau apasă I și O
+@ No clip highlighted: while the demo plays, drag across the timeline, or press I and O (LT and RT on a controller)
+ro Niciun clip evidențiat: în timpul demo-ului trage peste cronologie sau apasă I și O (LT și RT pe controler)
+
+@ Name of the video file; the extension follows the video format, and a file of the same name is replaced
+ro Numele fișierului video; extensia urmează formatul video, iar un fișier cu același nume este înlocuit
+
+@ New name of the demo; if another demo has it, a number is added
+ro Noul nume al demo-ului; dacă îl are deja alt demo, se adaugă un număr
 
 @ Video size; frames are scaled from the window size (bars keep the shape), so a larger size adds no detail
 ro Dimensiunea videoclipului; cadrele sunt scalate din dimensiunea ferestrei (cu benzi ca să păstreze forma), deci o dimensiune mai mare nu adaugă detalii
@@ -2736,6 +2751,36 @@ ro Dimensiune: {} KB
 @ Skip 10 s
 ro Sari 10 s
 
+@ Back 10 s
+ro Înapoi 10 s
+
+@ Length
+ro Durată
+
+@ Mark in
+ro Marchează început
+
+@ Mark out
+ro Marchează sfârșit
+
+@ Next level
+ro Nivelul următor
+
+@ No demos match the filter. Backspace or Esc clears it.
+ro Niciun demo nu se potrivește filtrului. Backspace sau Esc îl șterge.
+
+@ Renaming an automatic demo moves it to the saved demos.
+ro Redenumirea unui demo automat îl mută la demo-urile salvate.
+
+@ Restart
+ro De la început
+
+@ Sort
+ro Sortează
+
+@ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
+ro În timpul unui demo: A pune pauză, d-pad-ul derulează și schimbă viteza, LT și RT marchează un clip, iar X îl exportă.
+
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 ro Spațiu pauză | Stânga/Dreapta derulare | Sus/Jos viteză | PgUp/PgDn 10 s | I/O marcaj | E export
 
@@ -2766,9 +2811,6 @@ ro H ascunde
 
 @ Hide
 ro Ascunde
-
-@ Show
-ro Arată
 
 # Demos and video recording.
 @ Demo: {}
@@ -3314,6 +3356,12 @@ ro Se exportă {} ca video
 
 @ Kept demo {}
 ro Demo păstrat: {}
+
+@ Not a valid demo name.
+ro Nume de demo invalid.
+
+@ Renamed demo to {}
+ro Demo redenumit în {}
 
 @ No auto-demo to keep.
 ro Niciun demo automat de păstrat.

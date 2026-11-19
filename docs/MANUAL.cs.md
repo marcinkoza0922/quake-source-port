@@ -154,9 +154,10 @@ demo.
 
 Hlavní menu → Dema ukazuje uložená dema a se zapnutým Možnosti → Dema →
 Automaticky nahrávat dema i automatické demo každého odehraného levelu;
-nejstarší se nahrazují, když jsou sloty plné. K demo ponechá, E ho exportuje
-do videa, Del ho smaže. Hlášení chyb obsahují automatické demo aktuálního
-levelu.
+nejstarší se nahrazují, když jsou sloty plné. Psaním filtrujete seznamy a
+Tab mění řazení; tlačítka vedle seznamu přehrají, exportují, přejmenují,
+ponechají nebo smažou vybrané demo a přejmenováním se automatické demo
+ponechá. Hlášení chyb obsahují automatické demo aktuálního levelu.
 
 Během dema Mezerník pozastaví, držení Vlevo nebo Vpravo přetáčí zpět nebo
 vpřed, Nahoru a Dolů mění rychlost, PgUp a PgDn skáčou o 10 sekund a Home a
@@ -166,6 +167,11 @@ Skrýt ho skryje a ukázáním na spodní okraj se objeví pruh, který ho vrát
 Klikejte na tlačítka, kliknutím na časovou osu na ni skočíte a tažením po ní
 označíte klip; Exportovat se zeptá na snímkovou frekvenci, velikost, formát
 a soubor a na to, zda exportovat označený klip, nebo celé demo.
+
+Na ovladači A pozastaví, křížový ovladač převíjí zpět i vpřed a mění
+rychlost, LB a RB skáčou o 10 sekund a stisky páček jdou na začátek a na
+další mapu. LT a RT označí klip, B ho zruší, X exportuje, Y ponechá
+automatické demo a View skryje ovládání.
 
 `capture` spouští a zastavuje nahrávání videa během hraní. Snímková
 frekvence, formát a kvalita jsou v Možnosti → Dema → Nahrávání videa. Videa

@@ -1432,6 +1432,15 @@ ms 720p
 @ Destination
 ms Destinasi
 
+@ File Name
+ms Nama fail
+
+@ Rename
+ms Namakan semula
+
+@ Rename Demo
+ms Namakan semula demo
+
 @ Export Highlighted Clip
 ms Eksport klip yang ditanda
 
@@ -1894,8 +1903,14 @@ ms Menunjukkan bar main semula (masa, kelajuan, garis masa) selepas kekunci kawa
 ms Format video; memerlukan ffmpeg dengan pengekod itu, jika tidak bingkai disimpan sebagai imej PNG
 
 # Demos and video recording.
-@ No clip highlighted: while the demo plays, drag across the timeline or press I and O
-ms Tiada klip ditanda: semasa demo dimainkan, seret pada garis masa atau tekan I dan O
+@ No clip highlighted: while the demo plays, drag across the timeline, or press I and O (LT and RT on a controller)
+ms Tiada klip ditanda: semasa demo dimainkan, seret pada garis masa atau tekan I dan O (LT dan RT pada pengawal)
+
+@ Name of the video file; the extension follows the video format, and a file of the same name is replaced
+ms Nama fail video; sambungannya mengikut format video, dan fail dengan nama yang sama akan diganti
+
+@ New name of the demo; if another demo has it, a number is added
+ms Nama baharu demo; jika demo lain sudah memakainya, satu nombor ditambah
 
 @ Video size; frames are scaled from the window size (bars keep the shape), so a larger size adds no detail
 ms Saiz video; bingkai diskalakan daripada saiz tetingkap (dengan jalur untuk mengekalkan bentuk), jadi saiz lebih besar tidak menambah butiran
@@ -2736,6 +2751,36 @@ ms Saiz: {} KB
 @ Skip 10 s
 ms Langkau 10 s
 
+@ Back 10 s
+ms Undur 10 s
+
+@ Length
+ms Tempoh
+
+@ Mark in
+ms Tanda mula
+
+@ Mark out
+ms Tanda akhir
+
+@ Next level
+ms Tahap seterusnya
+
+@ No demos match the filter. Backspace or Esc clears it.
+ms Tiada demo sepadan dengan penapis. Backspace atau Esc mengosongkannya.
+
+@ Renaming an automatic demo moves it to the saved demos.
+ms Menamakan semula demo automatik memindahkannya ke demo yang disimpan.
+
+@ Restart
+ms Mula semula
+
+@ Sort
+ms Isih
+
+@ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
+ms Semasa demo dimainkan: A menjeda, d-pad menganjak dan menukar kelajuan, LT dan RT menanda klip dan X mengeksportnya.
+
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 ms Ruang jeda | Kiri/Kanan anjak | Atas/Bawah kelajuan | PgUp/PgDn 10 s | I/O tanda | E eksport
 
@@ -2766,9 +2811,6 @@ ms H sembunyi
 
 @ Hide
 ms Sembunyi
-
-@ Show
-ms Tunjuk
 
 # Demos and video recording.
 @ Demo: {}
@@ -3314,6 +3356,12 @@ ms Mengeksport {} ke video
 
 @ Kept demo {}
 ms Demo disimpan: {}
+
+@ Not a valid demo name.
+ms Nama demo tidak sah.
+
+@ Renamed demo to {}
+ms Demo dinamakan semula kepada {}
 
 @ No auto-demo to keep.
 ms Tiada demo automatik untuk disimpan.

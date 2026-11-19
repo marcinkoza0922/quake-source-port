@@ -165,7 +165,9 @@ conseguem mostrar, a versão completa é mantida como `<nome>.qsd`
 Menu principal → Demos mostra suas demos salvas e, com Opções → Demos →
 Gravar demos automaticamente ligado, uma demo automática de cada fase que
 você jogar; as mais antigas são substituídas quando os espaços estão cheios.
-K guarda uma, E a exporta para vídeo e Del a exclui. Os relatórios de bug
+Digite para filtrar as listas e pressione Tab para mudar a ordem; os botões
+ao lado da lista reproduzem, exportam, renomeiam, guardam ou apagam a demo
+escolhida, e renomear uma demo automática a guarda. Os relatórios de bug
 incluem a demo automática da fase atual.
 
 Durante uma demo, Espaço pausa, segurar Esquerda ou Direita retrocede ou
@@ -177,6 +179,11 @@ faixa que os traz de volta. Clique nos botões, clique na linha do tempo para
 pular para lá ou arraste sobre ela para destacar um trecho; Exportar pede a
 taxa de quadros, o tamanho, o formato e o arquivo, e se deve exportar o
 trecho destacado ou a demo inteira.
+
+No controle, A pausa, o direcional volta, avança e muda a velocidade, LB e
+RB pulam 10 segundos, e os botões dos analógicos vão para o início e para o
+próximo mapa. LT e RT marcam um trecho, B o limpa, X exporta, Y guarda uma
+demo automática e View oculta os controles.
 
 `capture` inicia e para a gravação de um vídeo enquanto você joga. Taxa de
 quadros, formato e qualidade ficam em Opções → Demos → Gravação de vídeo. Os

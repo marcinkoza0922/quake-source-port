@@ -1432,6 +1432,15 @@ uk 720p
 @ Destination
 uk Шлях збереження
 
+@ File Name
+uk Ім'я файлу
+
+@ Rename
+uk Перейменувати
+
+@ Rename Demo
+uk Перейменувати демо
+
 @ Export Highlighted Clip
 uk Експорт виділеного фрагмента
 
@@ -1894,8 +1903,14 @@ uk Показує панель відтворення (час, швидкіст�
 uk Формат відео; потрібен ffmpeg із цим кодувальником, інакше кадри зберігаються як зображення PNG
 
 # Demos and video recording.
-@ No clip highlighted: while the demo plays, drag across the timeline or press I and O
-uk Фрагмент не виділено: під час демо протягніть по шкалі або натисніть I та O
+@ No clip highlighted: while the demo plays, drag across the timeline, or press I and O (LT and RT on a controller)
+uk Фрагмент не виділено: під час демо протягніть по шкалі або натисніть I та O (LT і RT на геймпаді)
+
+@ Name of the video file; the extension follows the video format, and a file of the same name is replaced
+uk Ім'я відеофайлу; розширення залежить від формату відео, файл із таким самим ім'ям буде замінено
+
+@ New name of the demo; if another demo has it, a number is added
+uk Нова назва демо; якщо її вже має інше демо, додається номер
 
 @ Video size; frames are scaled from the window size (bars keep the shape), so a larger size adds no detail
 uk Розмір відео; кадри масштабуються з розміру вікна (зі смугами для збереження пропорцій), тож більший розмір не додає деталей
@@ -2736,6 +2751,36 @@ uk Розмір: {} КБ
 @ Skip 10 s
 uk Пропустити 10 с
 
+@ Back 10 s
+uk Назад 10 с
+
+@ Length
+uk Тривалість
+
+@ Mark in
+uk Початок фрагмента
+
+@ Mark out
+uk Кінець фрагмента
+
+@ Next level
+uk Наступний рівень
+
+@ No demos match the filter. Backspace or Esc clears it.
+uk Жодне демо не відповідає фільтру. Backspace або Esc очищає його.
+
+@ Renaming an automatic demo moves it to the saved demos.
+uk Перейменоване автоматичне демо переноситься до збережених.
+
+@ Restart
+uk Спочатку
+
+@ Sort
+uk Сортувати
+
+@ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
+uk Під час демо: A ставить паузу, хрестовина перемотує і змінює швидкість, LT і RT позначають фрагмент, а X експортує його.
+
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 uk Пробіл пауза | Ліворуч/Праворуч перемотування | Вгору/Вниз швидкість | PgUp/PgDn 10 с | I/O мітка | E експорт
 
@@ -2766,9 +2811,6 @@ uk H сховати
 
 @ Hide
 uk Сховати
-
-@ Show
-uk Показати
 
 # Demos and video recording.
 @ Demo: {}
@@ -3314,6 +3356,12 @@ uk Експорт {} у відео
 
 @ Kept demo {}
 uk Демо збережено: {}
+
+@ Not a valid demo name.
+uk Неприпустима назва демо.
+
+@ Renamed demo to {}
+uk Демо перейменовано: {}
 
 @ No auto-demo to keep.
 uk Немає автодемо для збереження.

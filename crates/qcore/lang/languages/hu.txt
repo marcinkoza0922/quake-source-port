@@ -1432,6 +1432,15 @@ hu 720p
 @ Destination
 hu Cél
 
+@ File Name
+hu Fájlnév
+
+@ Rename
+hu Átnevezés
+
+@ Rename Demo
+hu Demó átnevezése
+
 @ Export Highlighted Clip
 hu Kijelölt klip exportálása
 
@@ -1894,8 +1903,14 @@ hu Megjeleníti a lejátszósávot (idő, sebesség, idővonal) egy vezérlőbil
 hu Videoformátum; ffmpeg kell az adott kódolóval, különben a képkockák PNG-képként mentődnek
 
 # Demos and video recording.
-@ No clip highlighted: while the demo plays, drag across the timeline or press I and O
-hu Nincs kijelölt klip: demó közben húzd végig az egeret az idővonalon, vagy nyomd meg az I és O billentyűt
+@ No clip highlighted: while the demo plays, drag across the timeline, or press I and O (LT and RT on a controller)
+hu Nincs kijelölt klip: demó közben húzd végig az egeret az idővonalon, vagy nyomd meg az I és O billentyűt (LT és RT a kontrolleren)
+
+@ Name of the video file; the extension follows the video format, and a file of the same name is replaced
+hu A videofájl neve; a kiterjesztés a videoformátumot követi, az azonos nevű fájl felülíródik
+
+@ New name of the demo; if another demo has it, a number is added
+hu A demó új neve; ha egy másik demónak már ez a neve, egy szám kerül mögé
 
 @ Video size; frames are scaled from the window size (bars keep the shape), so a larger size adds no detail
 hu Videóméret; a képkockák az ablak méretéből skálázódnak (sávokkal, hogy az arány megmaradjon), így a nagyobb méret nem ad részletet
@@ -2736,6 +2751,36 @@ hu Méret: {} KB
 @ Skip 10 s
 hu 10 mp ugrás
 
+@ Back 10 s
+hu 10 mp vissza
+
+@ Length
+hu Hossz
+
+@ Mark in
+hu Kezdőpont
+
+@ Mark out
+hu Végpont
+
+@ Next level
+hu Következő pálya
+
+@ No demos match the filter. Backspace or Esc clears it.
+hu Egy demó sem felel meg a szűrőnek. A Backspace vagy az Esc törli.
+
+@ Renaming an automatic demo moves it to the saved demos.
+hu Egy automatikus demó átnevezése áthelyezi a mentett demók közé.
+
+@ Restart
+hu Előről
+
+@ Sort
+hu Rendezés
+
+@ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
+hu Demó közben: az A szüneteltet, a D-pad teker és sebességet vált, az LT és RT kijelöl egy klipet, az X pedig exportálja.
+
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 hu Szóköz szünet | Bal/Jobb tekerés | Fel/Le sebesség | PgUp/PgDn 10 mp | I/O jelölés | E export
 
@@ -2766,9 +2811,6 @@ hu H elrejtés
 
 @ Hide
 hu Elrejtés
-
-@ Show
-hu Mutatás
 
 # Demos and video recording.
 @ Demo: {}
@@ -3314,6 +3356,12 @@ hu {} exportálása videóba
 
 @ Kept demo {}
 hu Demó megtartva: {}
+
+@ Not a valid demo name.
+hu Érvénytelen demónév.
+
+@ Renamed demo to {}
+hu Demó átnevezve: {}
 
 @ No auto-demo to keep.
 hu Nincs megtartható automatikus demó.

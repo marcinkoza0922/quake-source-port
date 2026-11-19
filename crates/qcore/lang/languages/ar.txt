@@ -1432,6 +1432,15 @@ ar 720p
 @ Destination
 ar الوجهة
 
+@ File Name
+ar اسم الملف
+
+@ Rename
+ar إعادة تسمية
+
+@ Rename Demo
+ar إعادة تسمية العرض
+
 @ Export Highlighted Clip
 ar تصدير المقطع المحدد
 
@@ -1894,8 +1903,14 @@ ar يعرض شريط التشغيل (الوقت والسرعة والخط الز
 ar صيغة الفيديو؛ تحتاج ffmpeg مع ذلك المرمّز، وإلا تُحفظ الإطارات كصور PNG
 
 # Demos and video recording.
-@ No clip highlighted: while the demo plays, drag across the timeline or press I and O
-ar لا يوجد مقطع محدد: أثناء العرض اسحب على الخط الزمني أو اضغط I وO
+@ No clip highlighted: while the demo plays, drag across the timeline, or press I and O (LT and RT on a controller)
+ar لا يوجد مقطع محدد: أثناء العرض اسحب على الخط الزمني أو اضغط I وO (LT وRT في وحدة التحكم)
+
+@ Name of the video file; the extension follows the video format, and a file of the same name is replaced
+ar اسم ملف الفيديو؛ يتبع الامتداد صيغة الفيديو، ويُستبدل أي ملف بالاسم نفسه
+
+@ New name of the demo; if another demo has it, a number is added
+ar الاسم الجديد للعرض؛ إذا كان لعرض آخر الاسم نفسه يُضاف إليه رقم
 
 @ Video size; frames are scaled from the window size (bars keep the shape), so a larger size adds no detail
 ar حجم الفيديو؛ تُحجَّم الإطارات من حجم النافذة (مع أشرطة للحفاظ على الشكل)، لذا لا يضيف الحجم الأكبر تفاصيل
@@ -2736,6 +2751,36 @@ ar الحجم: {} ك.ب
 @ Skip 10 s
 ar تخطّي 10 ث
 
+@ Back 10 s
+ar رجوع 10 ث
+
+@ Length
+ar المدة
+
+@ Mark in
+ar تحديد البداية
+
+@ Mark out
+ar تحديد النهاية
+
+@ Next level
+ar المستوى التالي
+
+@ No demos match the filter. Backspace or Esc clears it.
+ar لا توجد عروض تطابق عامل التصفية. Backspace أو Esc يمسحه.
+
+@ Renaming an automatic demo moves it to the saved demos.
+ar إعادة تسمية عرض تلقائي تنقله إلى العروض المحفوظة.
+
+@ Restart
+ar من البداية
+
+@ Sort
+ar فرز
+
+@ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
+ar أثناء تشغيل عرض: A يوقف مؤقتًا، ولوحة الاتجاهات تمرّر وتغيّر السرعة، وLT وRT يحددان مقطعًا، وX يصدّره.
+
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 ar Space إيقاف | يسار/يمين تمرير | أعلى/أسفل السرعة | PgUp/PgDn 10 ث | I/O علامة | E تصدير
 
@@ -2766,9 +2811,6 @@ ar H إخفاء
 
 @ Hide
 ar إخفاء
-
-@ Show
-ar إظهار
 
 # Demos and video recording.
 @ Demo: {}
@@ -3314,6 +3356,12 @@ ar جارٍ تصدير {} إلى فيديو
 
 @ Kept demo {}
 ar تم الاحتفاظ بالعرض: {}
+
+@ Not a valid demo name.
+ar اسم عرض غير صالح.
+
+@ Renamed demo to {}
+ar أعيدت تسمية العرض إلى {}
 
 @ No auto-demo to keep.
 ar لا يوجد عرض تلقائي للاحتفاظ به.

@@ -135,6 +135,9 @@ pub(super) const HOST_CVARS: &[(&str, &str, u32)] = &[
     ("capture_gpu", "1", CVAR_ARCHIVE),
     // export dialog state (menu_export)
     ("_export_dest", "", 0),
+    ("_export_name", "", 0),
+    // Demos > Rename dialog
+    ("_demo_rename", "", 0),
     ("_export_hasclip", "0", 0),
     ("capture_quality", "0", CVAR_ARCHIVE),
     ("capture_audio", "1", CVAR_ARCHIVE),

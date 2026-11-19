@@ -1432,6 +1432,15 @@ bn 720p
 @ Destination
 bn গন্তব্য
 
+@ File Name
+bn ফাইলের নাম
+
+@ Rename
+bn নাম বদলান
+
+@ Rename Demo
+bn ডেমোর নাম বদলান
+
 @ Export Highlighted Clip
 bn চিহ্নিত ক্লিপ রপ্তানি করুন
 
@@ -1894,8 +1903,14 @@ bn প্লেব্যাক বার (সময়, গতি, টাইম�
 bn ভিডিও ফরম্যাট; সেই এনকোডারসহ ffmpeg লাগে, না হলে ফ্রেমগুলো PNG ছবি হিসেবে সংরক্ষিত হয়
 
 # Demos and video recording.
-@ No clip highlighted: while the demo plays, drag across the timeline or press I and O
-bn কোনো ক্লিপ চিহ্নিত নেই: ডেমো চলার সময় টাইমলাইনের ওপর টানুন বা I ও O চাপুন
+@ No clip highlighted: while the demo plays, drag across the timeline, or press I and O (LT and RT on a controller)
+bn কোনো ক্লিপ চিহ্নিত নেই: ডেমো চলার সময় টাইমলাইনের ওপর টানুন বা I ও O চাপুন (কন্ট্রোলারে LT ও RT)
+
+@ Name of the video file; the extension follows the video format, and a file of the same name is replaced
+bn ভিডিও ফাইলের নাম; এক্সটেনশন ভিডিও ফরম্যাট অনুযায়ী হয়, আর একই নামের ফাইল প্রতিস্থাপিত হয়
+
+@ New name of the demo; if another demo has it, a number is added
+bn ডেমোর নতুন নাম; অন্য কোনো ডেমোর এই নাম থাকলে একটি সংখ্যা যোগ হয়
 
 @ Video size; frames are scaled from the window size (bars keep the shape), so a larger size adds no detail
 bn ভিডিওর আকার; ফ্রেম উইন্ডোর আকার থেকে বড় করা হয় (আকৃতি রাখতে পাশে ফিতা দিয়ে), তাই বড় আকারে খুঁটিনাটি বাড়ে না
@@ -2736,6 +2751,36 @@ bn আকার: {} KB
 @ Skip 10 s
 bn 10 সে. এড়িয়ে যান
 
+@ Back 10 s
+bn 10 সে. পিছনে
+
+@ Length
+bn দৈর্ঘ্য
+
+@ Mark in
+bn শুরু চিহ্নিত করুন
+
+@ Mark out
+bn শেষ চিহ্নিত করুন
+
+@ Next level
+bn পরের লেভেল
+
+@ No demos match the filter. Backspace or Esc clears it.
+bn ফিল্টারের সাথে কোনো ডেমো মেলে না। Backspace বা Esc এটি মুছে দেয়।
+
+@ Renaming an automatic demo moves it to the saved demos.
+bn স্বয়ংক্রিয় ডেমোর নাম বদলালে সেটি সংরক্ষিত ডেমোতে চলে যায়।
+
+@ Restart
+bn শুরু থেকে
+
+@ Sort
+bn সাজান
+
+@ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
+bn ডেমো চলার সময়: A বিরতি দেয়, ডি-প্যাড সরায় ও গতি বদলায়, LT আর RT একটি ক্লিপ চিহ্নিত করে এবং X সেটি রপ্তানি করে।
+
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 bn Space বিরতি | বাঁ/ডান সরান | উপর/নিচ গতি | PgUp/PgDn 10 সে. | I/O চিহ্ন | E রপ্তানি
 
@@ -2766,9 +2811,6 @@ bn H লুকান
 
 @ Hide
 bn লুকান
-
-@ Show
-bn দেখান
 
 # Demos and video recording.
 @ Demo: {}
@@ -3314,6 +3356,12 @@ bn {} ভিডিওতে রপ্তানি হচ্ছে
 
 @ Kept demo {}
 bn ডেমো রাখা হয়েছে: {}
+
+@ Not a valid demo name.
+bn ডেমোর নাম বৈধ নয়।
+
+@ Renamed demo to {}
+bn ডেমোর নাম বদলে {} করা হয়েছে
 
 @ No auto-demo to keep.
 bn রাখার মতো কোনো স্বয়ংক্রিয় ডেমো নেই।

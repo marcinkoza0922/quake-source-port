@@ -1432,6 +1432,15 @@ is 720p
 @ Destination
 is Áfangastaður
 
+@ File Name
+is Skráarheiti
+
+@ Rename
+is Endurnefna
+
+@ Rename Demo
+is Endurnefna kynningu
+
 @ Export Highlighted Clip
 is Flytja út merktan bút
 
@@ -1894,8 +1903,14 @@ is Sýnir spilunarstikuna (tíma, hraða, tímalínu) eftir stjórnhnapp, alltaf
 is Myndsnið; krefst ffmpeg með þeim kóðara, annars eru rammarnir vistaðir sem PNG-myndir
 
 # Demos and video recording.
-@ No clip highlighted: while the demo plays, drag across the timeline or press I and O
-is Enginn bútur merktur: dragðu yfir tímalínuna eða ýttu á I og O meðan kynningin spilast
+@ No clip highlighted: while the demo plays, drag across the timeline, or press I and O (LT and RT on a controller)
+is Enginn bútur merktur: dragðu yfir tímalínuna eða ýttu á I og O meðan kynningin spilast (LT og RT á fjarstýringu)
+
+@ Name of the video file; the extension follows the video format, and a file of the same name is replaced
+is Heiti myndskeiðsskrárinnar; endingin fylgir myndsniðinu og skrá með sama heiti er skipt út
+
+@ New name of the demo; if another demo has it, a number is added
+is Nýtt heiti kynningarinnar; ef önnur kynning ber það þegar er númeri bætt við
 
 @ Video size; frames are scaled from the window size (bars keep the shape), so a larger size adds no detail
 is Stærð myndbands; rammar eru kvarðaðir úr stærð gluggans (með röndum svo lögunin haldist), svo stærri stærð bætir ekki við smáatriðum
@@ -2736,6 +2751,36 @@ is Stærð: {} KB
 @ Skip 10 s
 is Sleppa 10 s
 
+@ Back 10 s
+is Til baka 10 s
+
+@ Length
+is Lengd
+
+@ Mark in
+is Merkja upphaf
+
+@ Mark out
+is Merkja endi
+
+@ Next level
+is Næsta borð
+
+@ No demos match the filter. Backspace or Esc clears it.
+is Engin kynning passar við síuna. Backspace eða Esc hreinsar hana.
+
+@ Renaming an automatic demo moves it to the saved demos.
+is Sjálfvirk kynning sem er endurnefnd færist í vistaðar kynningar.
+
+@ Restart
+is Frá byrjun
+
+@ Sort
+is Raða
+
+@ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
+is Meðan kynning er spiluð: A gerir hlé, stefnuhnapparnir spóla og breyta hraða, LT og RT merkja bút og X flytur hann út.
+
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 is Bil hlé | Vinstri/Hægri spóla | Upp/Niður hraði | PgUp/PgDn 10 s | I/O merki | E flytja út
 
@@ -2766,9 +2811,6 @@ is H fela
 
 @ Hide
 is Fela
-
-@ Show
-is Sýna
 
 # Demos and video recording.
 @ Demo: {}
@@ -3314,6 +3356,12 @@ is Flyt {} út sem myndband
 
 @ Kept demo {}
 is Kynning geymd: {}
+
+@ Not a valid demo name.
+is Ógilt heiti kynningar.
+
+@ Renamed demo to {}
+is Kynning endurnefnd sem {}
 
 @ No auto-demo to keep.
 is Engin sjálfvirk kynning til að geyma.

@@ -65,7 +65,13 @@ target/release/quake-source-port -headless -autoquit 8 +sv_autosave 0 +map e1m1 
   have no name there (Water, Debris) need an alias added to that
   match first. Also `menu_main`, `menu_newgame` (the New Game pop-up),
   `menu_load`, `menu_save`, `menu_autosaves`,
-  `menu_mods`, `menu_multiplayer` and `toggleconsole`.
+  `menu_mods`, `menu_multiplayer`, `menu_demos` and `toggleconsole`.
+  Drive an open menu with `menu_keys <key>...` (key names as `bind` takes
+  them: `DOWNARROW`, `TAB`, `ENTER`, `YBUTTON`, letters) and type into a
+  text field with `menu_text <text>`, e.g.
+  `"+delay 1 menu_demos" "+delay 1.5 menu_keys e 1 m" "+delay 2 screenshot x"`.
+  Menus that change files (Demos: rename, delete) act on the real user
+  dir: point `XDG_DATA_HOME` at a scratch copy first.
 - `r_drawentities 0` hides everything except the view model, which helps
   isolate world rendering.
 

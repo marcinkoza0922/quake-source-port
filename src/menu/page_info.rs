@@ -8,6 +8,8 @@ pub(super) fn tooltip(item: Item) -> Option<&'static str> {
         Item::ResetShaderParams => return Some(qcore::t!("Puts every setting of the chosen shader back to the preset's defaults")),
         Item::ShaderParam(_) => return Some(qcore::t!("A setting of the chosen shader; arrows step it, Enter is not needed")),
         Item::Language => return Some(qcore::t!("Language of the menus, messages and the 2021 re-release's game text; System follows your computer's language")),
+        Item::Text { cvar: "_export_name", .. } => return Some(qcore::t!("Name of the video file; the extension follows the video format, and a file of the same name is replaced")),
+        Item::Text { cvar: "_demo_rename", .. } => return Some(qcore::t!("New name of the demo; if another demo has it, a number is added")),
         _ => return None,
     };
     Some(match cvar {
@@ -240,6 +242,7 @@ pub(super) fn page_items(p: Page) -> &'static [Item] {
         Page::Demos => super::demos::DEMOS,
         Page::Video => super::demos::VIDEO,
         Page::Export => super::demos::EXPORT,
+        Page::RenameDemo => super::demos::RENAME,
         Page::HitSound => HIT_SOUND,
         Page::KillSound => KILL_SOUND,
         Page::Accessibility => ACCESSIBILITY,
@@ -279,6 +282,7 @@ pub(super) fn page_name(p: Page) -> &'static str {
         Page::Autosave => "Autosave",
         Page::Video => "Video Recording",
         Page::Export => "Export Video",
+        Page::RenameDemo => "Rename Demo",
         Page::Customize => "Customize This Game",
         Page::NewGameCustomize => "New Game: Customize",
         Page::Modifiers => "Gameplay Modifiers",
@@ -323,7 +327,7 @@ pub(super) fn disabled_reason(item: Item) -> Option<&'static str> {
         Item::Choice { cvar: "r_waterwarp", .. } => {
             Some("Disabled while Enhanced Water is on: its own underwater effects replace the classic and GLQuake view warps")
         }
-        Item::Run { run: Run::ExportClip, .. } => Some("No clip highlighted: while the demo plays, drag across the timeline or press I and O"),
+        Item::Run { run: Run::ExportClip, .. } => Some("No clip highlighted: while the demo plays, drag across the timeline, or press I and O (LT and RT on a controller)"),
         Item::Choice { cvar: "r_particles", .. } => {
             Some("Disabled while Enhanced Particles is on: its particles replace the GLQuake and Classic styles")
         }

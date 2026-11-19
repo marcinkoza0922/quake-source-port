@@ -130,11 +130,15 @@ impl Menu {
             items = vec![(sel, qcore::t!("Confirm")), (back, qcore::t!("Cancel"))];
         }
         if self.screen == Screen::Demos && self.prompt.is_none() {
-            items = vec![(sel, qcore::t!("Play")), (K_XBUTTON, qcore::t!("Export Video"))];
-            if self.demos.selected().is_some_and(|d| d.auto) {
-                items.push((K_YBUTTON, qcore::t!("Keep")));
+            items = Vec::new();
+            if self.demos.selected().is_some() {
+                items.extend([(sel, qcore::t!("Play")), (K_XBUTTON, qcore::t!("Export Video")), (K_YBUTTON, qcore::t!("Rename"))]);
+                if self.demos.selected().is_some_and(|d| d.auto) {
+                    items.push((K_LTRIGGER, qcore::t!("Keep")));
+                }
+                items.push((K_BACK, qcore::t!("Delete")));
             }
-            items.extend([(K_BACK, qcore::t!("Delete")), (K_LSHOULDER, qcore::t!("Switch List")), (back, qcore::t!("Back"))]);
+            items.extend([(K_RTRIGGER, qcore::t!("Sort")), (K_LSHOULDER, qcore::t!("Switch List")), (back, qcore::t!("Back"))]);
         }
         self.boxed_hints(c, y, &items);
     }

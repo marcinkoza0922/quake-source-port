@@ -159,9 +159,12 @@ volledige versie bewaard als `<name>.qsd` (`playdemo <name>.qsd`).
 
 Hoofdmenu → Demo's toont je opgeslagen demo's en, met Opties → Demo's →
 Demo's automatisch opnemen aan, een automatische demo van elk gespeeld
-level; de oudste worden vervangen als de plaatsen vol zijn. K bewaart er
-een, E exporteert hem als video en Del verwijdert hem. Foutrapporten
-bevatten de automatische demo van het huidige level.
+level; de oudste worden vervangen als de plaatsen vol zijn. Typ om de
+lijsten te filteren en druk op Tab om de sortering te wijzigen; de
+knoppen naast de lijst spelen, exporteren, hernoemen, bewaren of
+verwijderen de gekozen demo, en een hernoemde automatische demo wordt
+bewaard. Foutrapporten bevatten de automatische demo van het huidige
+level.
 
 Tijdens een demo pauzeert Spatie, Links of Rechts ingedrukt houden spoelt
 terug of vooruit, Omhoog en Omlaag wijzigen de snelheid, PgUp en PgDn
@@ -173,6 +176,11 @@ knoppen, klik op de tijdlijn om daarheen te springen, of sleep eroverheen om
 een fragment te markeren; Exporteren vraagt naar beeldsnelheid, grootte,
 formaat en bestand, en of het gemarkeerde fragment of de hele demo wordt
 geëxporteerd.
+
+Op een controller pauzeert A, de d-pad spoelt terug en vooruit en wijzigt de
+snelheid, LB en RB springen 10 seconden en de stickknoppen gaan naar het
+begin en naar de volgende map. LT en RT markeren een fragment, B wist het, X
+exporteert, Y bewaart een automatische demo en View verbergt de bediening.
 
 `capture` start en stopt een video-opname terwijl je speelt. Beeldsnelheid,
 formaat en kwaliteit staan onder Opties → Demo's → Video-opname. Video's

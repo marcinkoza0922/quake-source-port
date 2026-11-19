@@ -1432,6 +1432,15 @@ sw 720p
 @ Destination
 sw Mahali pa kuhifadhi
 
+@ File Name
+sw Jina la faili
+
+@ Rename
+sw Badilisha jina
+
+@ Rename Demo
+sw Badilisha jina la demo
+
 @ Export Highlighted Clip
 sw Hamisha kipande kilichowekwa alama
 
@@ -1894,8 +1903,14 @@ sw Huonyesha upau wa kucheza (muda, kasi, ratiba) baada ya kitufe cha kudhibiti,
 sw Muundo wa video; unahitaji ffmpeg yenye kisimbaji hicho, la sivyo fremu huhifadhiwa kama picha za PNG
 
 # Demos and video recording.
-@ No clip highlighted: while the demo plays, drag across the timeline or press I and O
-sw Hakuna kipande kilichowekwa alama: demo ikicheza, buruta juu ya ratiba au bonyeza I na O
+@ No clip highlighted: while the demo plays, drag across the timeline, or press I and O (LT and RT on a controller)
+sw Hakuna kipande kilichowekwa alama: demo ikicheza, buruta juu ya ratiba au bonyeza I na O (LT na RT kwenye kidhibiti)
+
+@ Name of the video file; the extension follows the video format, and a file of the same name is replaced
+sw Jina la faili ya video; kiendelezi hufuata umbizo la video, na faili yenye jina hilo hilo hubadilishwa
+
+@ New name of the demo; if another demo has it, a number is added
+sw Jina jipya la demo; ikiwa demo nyingine tayari inalo, nambari huongezwa
 
 @ Video size; frames are scaled from the window size (bars keep the shape), so a larger size adds no detail
 sw Ukubwa wa video; fremu hubadilishwa ukubwa kutoka ukubwa wa dirisha (pamoja na mistari ili kudumisha umbo), hivyo ukubwa mkubwa hauongezi maelezo
@@ -2736,6 +2751,36 @@ sw Ukubwa: {} KB
 @ Skip 10 s
 sw Ruka sekunde 10
 
+@ Back 10 s
+sw Rudi sekunde 10
+
+@ Length
+sw Urefu
+
+@ Mark in
+sw Weka mwanzo
+
+@ Mark out
+sw Weka mwisho
+
+@ Next level
+sw Kiwango kinachofuata
+
+@ No demos match the filter. Backspace or Esc clears it.
+sw Hakuna demo inayolingana na kichujio. Backspace au Esc hukifuta.
+
+@ Renaming an automatic demo moves it to the saved demos.
+sw Kubadilisha jina la demo ya kiotomatiki huihamishia kwenye demo zilizohifadhiwa.
+
+@ Restart
+sw Anza upya
+
+@ Sort
+sw Panga
+
+@ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
+sw Wakati demo inacheza: A husitisha, d-pad husogeza na kubadili kasi, LT na RT huweka alama ya kipande na X hukihamisha.
+
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 sw Nafasi sitisha | Kushoto/Kulia sogeza | Juu/Chini kasi | PgUp/PgDn sek 10 | I/O alama | E hamisha
 
@@ -2766,9 +2811,6 @@ sw H ficha
 
 @ Hide
 sw Ficha
-
-@ Show
-sw Onyesha
 
 # Demos and video recording.
 @ Demo: {}
@@ -3314,6 +3356,12 @@ sw Inahamisha {} kuwa video
 
 @ Kept demo {}
 sw Demo imebakizwa: {}
+
+@ Not a valid demo name.
+sw Jina la demo si sahihi.
+
+@ Renamed demo to {}
+sw Jina la demo limebadilishwa kuwa {}
 
 @ No auto-demo to keep.
 sw Hakuna demo ya kiotomatiki ya kubakiza.

@@ -1432,6 +1432,15 @@ cs 720p
 @ Destination
 cs Cíl
 
+@ File Name
+cs Název souboru
+
+@ Rename
+cs Přejmenovat
+
+@ Rename Demo
+cs Přejmenovat demo
+
 @ Export Highlighted Clip
 cs Exportovat označený klip
 
@@ -1894,8 +1903,14 @@ cs Zobrazí lištu přehrávání (čas, rychlost, časová osa) po ovládací k
 cs Formát videa; vyžaduje ffmpeg s tímto kodérem, jinak se snímky uloží jako obrázky PNG
 
 # Demos and video recording.
-@ No clip highlighted: while the demo plays, drag across the timeline or press I and O
-cs Žádný klip není označen: během dema táhněte po časové ose nebo stiskněte I a O
+@ No clip highlighted: while the demo plays, drag across the timeline, or press I and O (LT and RT on a controller)
+cs Žádný klip není označen: během dema táhněte po časové ose nebo stiskněte I a O (LT a RT na ovladači)
+
+@ Name of the video file; the extension follows the video format, and a file of the same name is replaced
+cs Název videosouboru; přípona odpovídá formátu videa a soubor se stejným názvem bude nahrazen
+
+@ New name of the demo; if another demo has it, a number is added
+cs Nový název dema; pokud ho už má jiné demo, přidá se číslo
 
 @ Video size; frames are scaled from the window size (bars keep the shape), so a larger size adds no detail
 cs Velikost videa; snímky se škálují z velikosti okna (s pruhy pro zachování tvaru), takže větší velikost nepřidá detaily
@@ -2736,6 +2751,36 @@ cs Velikost: {} KB
 @ Skip 10 s
 cs Přeskočit 10 s
 
+@ Back 10 s
+cs Zpět 10 s
+
+@ Length
+cs Délka
+
+@ Mark in
+cs Začátek klipu
+
+@ Mark out
+cs Konec klipu
+
+@ Next level
+cs Další úroveň
+
+@ No demos match the filter. Backspace or Esc clears it.
+cs Filtru neodpovídá žádné demo. Backspace nebo Esc ho vymaže.
+
+@ Renaming an automatic demo moves it to the saved demos.
+cs Přejmenováním se automatické demo přesune mezi uložená dema.
+
+@ Restart
+cs Od začátku
+
+@ Sort
+cs Řadit
+
+@ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
+cs Během dema: A pozastaví, křížový ovladač posouvá a mění rychlost, LT a RT označí klip a X ho exportuje.
+
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 cs Mezerník pauza | Vlevo/Vpravo posun | Nahoru/Dolů rychlost | PgUp/PgDn 10 s | I/O značka | E export
 
@@ -2766,9 +2811,6 @@ cs H skrýt
 
 @ Hide
 cs Skrýt
-
-@ Show
-cs Zobrazit
 
 # Demos and video recording.
 @ Demo: {}
@@ -3314,6 +3356,12 @@ cs Export {} do videa
 
 @ Kept demo {}
 cs Demo ponecháno: {}
+
+@ Not a valid demo name.
+cs Neplatný název dema.
+
+@ Renamed demo to {}
+cs Demo přejmenováno na {}
 
 @ No auto-demo to keep.
 cs Žádné autodemo k ponechání.

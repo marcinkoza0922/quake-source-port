@@ -1432,6 +1432,15 @@ ko 720p
 @ Destination
 ko 저장 위치
 
+@ File Name
+ko 파일 이름
+
+@ Rename
+ko 이름 바꾸기
+
+@ Rename Demo
+ko 데모 이름 바꾸기
+
 @ Export Highlighted Clip
 ko 강조한 클립 내보내기
 
@@ -1894,8 +1903,14 @@ ko 조작 키를 누른 뒤, 항상, 또는 표시 안 함 중에서 재생 막�
 ko 비디오 형식입니다. 해당 인코더가 있는 ffmpeg가 필요하며, 없으면 프레임을 PNG 이미지로 저장합니다
 
 # Demos and video recording.
-@ No clip highlighted: while the demo plays, drag across the timeline or press I and O
-ko 강조한 클립이 없습니다. 데모 재생 중에 타임라인을 드래그하거나 I와 O를 누르세요
+@ No clip highlighted: while the demo plays, drag across the timeline, or press I and O (LT and RT on a controller)
+ko 강조한 클립이 없습니다. 데모 재생 중에 타임라인을 드래그하거나 I와 O를 누르세요 (컨트롤러에서는 LT와 RT)
+
+@ Name of the video file; the extension follows the video format, and a file of the same name is replaced
+ko 동영상 파일 이름입니다. 확장자는 동영상 형식을 따르며 같은 이름의 파일은 대체됩니다
+
+@ New name of the demo; if another demo has it, a number is added
+ko 데모의 새 이름입니다. 다른 데모가 이미 사용 중이면 번호가 붙습니다
 
 @ Video size; frames are scaled from the window size (bars keep the shape), so a larger size adds no detail
 ko 비디오 크기입니다. 프레임은 창 크기에서 확대·축소되므로(모양을 유지하도록 여백이 생김) 크게 해도 디테일이 늘지 않습니다
@@ -2736,6 +2751,36 @@ ko 크기: {} KB
 @ Skip 10 s
 ko 10초 건너뛰기
 
+@ Back 10 s
+ko 10초 뒤로
+
+@ Length
+ko 길이
+
+@ Mark in
+ko 시작 지점
+
+@ Mark out
+ko 끝 지점
+
+@ Next level
+ko 다음 레벨
+
+@ No demos match the filter. Backspace or Esc clears it.
+ko 필터와 일치하는 데모가 없습니다. Backspace나 Esc로 지웁니다.
+
+@ Renaming an automatic demo moves it to the saved demos.
+ko 자동 데모의 이름을 바꾸면 저장된 데모로 옮겨집니다.
+
+@ Restart
+ko 처음부터
+
+@ Sort
+ko 정렬
+
+@ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
+ko 데모 재생 중: A로 일시 정지, 방향 패드로 탐색과 속도 변경, LT와 RT로 클립 구간을 표시하고 X로 내보냅니다.
+
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 ko Space 일시 정지 | ←/→ 탐색 | ↑/↓ 속도 | PgUp/PgDn 10초 | I/O 표시 | E 내보내기
 
@@ -2766,9 +2811,6 @@ ko H 숨기기
 
 @ Hide
 ko 숨기기
-
-@ Show
-ko 표시
 
 # Demos and video recording.
 @ Demo: {}
@@ -3314,6 +3356,12 @@ ko {}을(를) 비디오로 내보내는 중
 
 @ Kept demo {}
 ko 데모 보관됨: {}
+
+@ Not a valid demo name.
+ko 올바른 데모 이름이 아닙니다.
+
+@ Renamed demo to {}
+ko 데모 이름을 {}(으)로 바꿨습니다
 
 @ No auto-demo to keep.
 ko 보관할 자동 데모가 없습니다.

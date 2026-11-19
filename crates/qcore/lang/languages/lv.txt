@@ -1432,6 +1432,15 @@ lv 720p
 @ Destination
 lv Galamērķis
 
+@ File Name
+lv Faila nosaukums
+
+@ Rename
+lv Pārdēvēt
+
+@ Rename Demo
+lv Pārdēvēt demo
+
 @ Export Highlighted Clip
 lv Eksportēt iezīmēto klipu
 
@@ -1894,8 +1903,14 @@ lv Rāda atskaņošanas joslu (laiks, ātrums, laika josla) pēc vadības tausti
 lv Video formāts; vajag ffmpeg ar šo kodētāju, citādi kadri tiek saglabāti kā PNG attēli
 
 # Demos and video recording.
-@ No clip highlighted: while the demo plays, drag across the timeline or press I and O
-lv Nav iezīmēta klipa: demo laikā velciet pa laika joslu vai nospiediet I un O
+@ No clip highlighted: while the demo plays, drag across the timeline, or press I and O (LT and RT on a controller)
+lv Nav iezīmēta klipa: demo laikā velciet pa laika joslu vai nospiediet I un O (kontrolierī LT un RT)
+
+@ Name of the video file; the extension follows the video format, and a file of the same name is replaced
+lv Video faila nosaukums; paplašinājums atbilst video formātam, un fails ar tādu pašu nosaukumu tiek aizstāts
+
+@ New name of the demo; if another demo has it, a number is added
+lv Jaunais demo nosaukums; ja tas jau ir citam demo, tiek pievienots numurs
 
 @ Video size; frames are scaled from the window size (bars keep the shape), so a larger size adds no detail
 lv Video izmērs; kadri tiek mērogoti no loga izmēra (ar joslām, lai saglabātu formu), tāpēc lielāks izmērs nepievieno detaļas
@@ -2736,6 +2751,36 @@ lv Izmērs: {} KB
 @ Skip 10 s
 lv Izlaist 10 s
 
+@ Back 10 s
+lv Atpakaļ 10 s
+
+@ Length
+lv Ilgums
+
+@ Mark in
+lv Atzīmēt sākumu
+
+@ Mark out
+lv Atzīmēt beigas
+
+@ Next level
+lv Nākamais līmenis
+
+@ No demos match the filter. Backspace or Esc clears it.
+lv Filtram neatbilst neviens demo. Backspace vai Esc to notīra.
+
+@ Renaming an automatic demo moves it to the saved demos.
+lv Pārdēvējot automātisko demo, tas tiek pārvietots uz saglabātajiem.
+
+@ Restart
+lv No sākuma
+
+@ Sort
+lv Kārtot
+
+@ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
+lv Demo laikā: A pauzē, krustveida pogas tin un maina ātrumu, LT un RT atzīmē klipu, un X to eksportē.
+
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 lv Atstarpe pauze | Pa kreisi/Pa labi tīt | Augšup/Lejup ātrums | PgUp/PgDn 10 s | I/O atzīme | E eksports
 
@@ -2766,9 +2811,6 @@ lv H paslēpt
 
 @ Hide
 lv Paslēpt
-
-@ Show
-lv Rādīt
 
 # Demos and video recording.
 @ Demo: {}
@@ -3314,6 +3356,12 @@ lv {} tiek eksportēts video
 
 @ Kept demo {}
 lv Demo paturēts: {}
+
+@ Not a valid demo name.
+lv Nederīgs demo nosaukums.
+
+@ Renamed demo to {}
+lv Demo pārdēvēts par {}
 
 @ No auto-demo to keep.
 lv Nav automātiskā demo, ko paturēt.

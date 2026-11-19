@@ -1432,6 +1432,15 @@ sk 720p
 @ Destination
 sk Cieľ
 
+@ File Name
+sk Názov súboru
+
+@ Rename
+sk Premenovať
+
+@ Rename Demo
+sk Premenovať demo
+
 @ Export Highlighted Clip
 sk Exportovať označený klip
 
@@ -1894,8 +1903,14 @@ sk Zobrazí lištu prehrávania (čas, rýchlosť, časová os) po ovládacom kl
 sk Formát videa; vyžaduje ffmpeg s týmto kodérom, inak sa snímky uložia ako obrázky PNG
 
 # Demos and video recording.
-@ No clip highlighted: while the demo plays, drag across the timeline or press I and O
-sk Žiadny klip nie je označený: počas dema ťahajte po časovej osi alebo stlačte I a O
+@ No clip highlighted: while the demo plays, drag across the timeline, or press I and O (LT and RT on a controller)
+sk Žiadny klip nie je označený: počas dema ťahajte po časovej osi alebo stlačte I a O (LT a RT na ovládači)
+
+@ Name of the video file; the extension follows the video format, and a file of the same name is replaced
+sk Názov videosúboru; prípona zodpovedá formátu videa a súbor s rovnakým názvom sa nahradí
+
+@ New name of the demo; if another demo has it, a number is added
+sk Nový názov dema; ak ho už má iné demo, pridá sa číslo
 
 @ Video size; frames are scaled from the window size (bars keep the shape), so a larger size adds no detail
 sk Veľkosť videa; snímky sa škálujú z veľkosti okna (s pásmi na zachovanie tvaru), takže väčšia veľkosť nepridá detaily
@@ -2736,6 +2751,36 @@ sk Veľkosť: {} KB
 @ Skip 10 s
 sk Preskočiť 10 s
 
+@ Back 10 s
+sk Späť 10 s
+
+@ Length
+sk Dĺžka
+
+@ Mark in
+sk Začiatok klipu
+
+@ Mark out
+sk Koniec klipu
+
+@ Next level
+sk Ďalšia úroveň
+
+@ No demos match the filter. Backspace or Esc clears it.
+sk Filtru nezodpovedá žiadne demo. Backspace alebo Esc ho vymaže.
+
+@ Renaming an automatic demo moves it to the saved demos.
+sk Premenovaním sa automatické demo presunie medzi uložené demá.
+
+@ Restart
+sk Od začiatku
+
+@ Sort
+sk Zoradiť
+
+@ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
+sk Počas dema: A pozastaví, smerový ovládač posúva a mení rýchlosť, LT a RT označia klip a X ho exportuje.
+
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 sk Medzerník pauza | Vľavo/Vpravo posun | Hore/Dole rýchlosť | PgUp/PgDn 10 s | I/O značka | E export
 
@@ -2766,9 +2811,6 @@ sk H skryť
 
 @ Hide
 sk Skryť
-
-@ Show
-sk Zobraziť
 
 # Demos and video recording.
 @ Demo: {}
@@ -3314,6 +3356,12 @@ sk Export {} do videa
 
 @ Kept demo {}
 sk Demo ponechané: {}
+
+@ Not a valid demo name.
+sk Neplatný názov dema.
+
+@ Renamed demo to {}
+sk Demo premenované na {}
 
 @ No auto-demo to keep.
 sk Žiadne autodemo na ponechanie.

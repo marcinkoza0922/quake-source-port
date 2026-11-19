@@ -123,6 +123,8 @@ pub enum Page {
     Video,
     /// The demo export dialog.
     Export,
+    /// Demos → Rename.
+    RenameDemo,
     /// Multiplayer pages (reached from Screen::Multiplayer).
     Join,
     Host,
@@ -186,9 +188,11 @@ pub struct Menu {
     sub_return: Option<(Page, Page, usize)>,
     pub mods: ModMenu,
     pub demos: demos::DemoBrowser,
-    /// Export dialog: where Back goes, and its info lines.
+    /// Export dialog: where Back goes; export and rename dialogs: info lines.
     export_back: Screen,
-    export_info: Vec<String>,
+    dialog_info: Vec<String>,
+    /// Rename dialog: the demo being renamed (user-dir relative).
+    rename_from: String,
     mp_cursor: usize,
     /// Maps offered on the Host Game page (filled by the host).
     pub net_maps: Vec<qui::mods::MapInfo>,
@@ -313,7 +317,8 @@ impl Menu {
             mods: ModMenu::default(),
             demos: Default::default(),
             export_back: Screen::None,
-            export_info: Vec::new(),
+            dialog_info: Vec::new(),
+            rename_from: String::new(),
             mp_cursor: 0,
             net_maps: Vec::new(),
             shader_presets: Vec::new(),
@@ -379,6 +384,9 @@ impl Menu {
             return;
         }
         if let Item::Text { cvar, max, .. } = self.page_item(p, self.opt_cursor) {
+            if demos::file_name_field(cvar) && !demos::file_name_char(ch) {
+                return;
+            }
             let mut v = cv.by_name(cvar).map_or(String::new(), |c| c.string.clone());
             if v.len() < max {
                 v.push(ch);

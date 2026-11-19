@@ -1432,6 +1432,15 @@ th 720p
 @ Destination
 th ปลายทาง
 
+@ File Name
+th ชื่อ​ไฟล์
+
+@ Rename
+th เปลี่ยน​ชื่อ
+
+@ Rename Demo
+th เปลี่ยน​ชื่อ​เดโม
+
 @ Export Highlighted Clip
 th ส่งออก​คลิป​ที่​ไฮไลต์
 
@@ -1894,8 +1903,14 @@ th แสดง​แถบ​เล่น (เวลา ความเร็�
 th รูปแบบ​วิดีโอ ต้อง​มี ffmpeg ที่​มี​ตัว​เข้ารหัส​นั้น ไม่​เช่นนั้น​เฟรม​จะ​ถูก​บันทึก​เป็น​ภาพ PNG
 
 # Demos and video recording.
-@ No clip highlighted: while the demo plays, drag across the timeline or press I and O
-th ยัง​ไม่ได้​ไฮไลต์​คลิป ระหว่าง​เล่น​เดโม​ให้​ลาก​บน​ไทม์ไลน์​หรือ​กด I และ O
+@ No clip highlighted: while the demo plays, drag across the timeline, or press I and O (LT and RT on a controller)
+th ยัง​ไม่ได้​ไฮไลต์​คลิป ระหว่าง​เล่น​เดโม​ให้​ลาก​บน​ไทม์ไลน์​หรือ​กด I และ O (บน​จอย​ใช้ LT และ RT)
+
+@ Name of the video file; the extension follows the video format, and a file of the same name is replaced
+th ชื่อ​ไฟล์​วิดีโอ นามสกุล​ไฟล์​เป็น​ไป​ตาม​รูปแบบ​วิดีโอ และ​ไฟล์​ที่​ชื่อ​ซ้ำ​จะ​ถูก​แทนที่
+
+@ New name of the demo; if another demo has it, a number is added
+th ชื่อ​ใหม่​ของ​เดโม หาก​มี​เดโม​อื่น​ใช้​ชื่อ​นี้​แล้ว จะ​เติม​ตัวเลข​ต่อท้าย
 
 @ Video size; frames are scaled from the window size (bars keep the shape), so a larger size adds no detail
 th ขนาด​วิดีโอ เฟรม​ถูก​ปรับ​ขนาด​จาก​ขนาด​หน้าต่าง (มี​แถบ​ขอบ​เพื่อ​คง​สัดส่วน) ขนาด​ที่​ใหญ่​กว่า​จึง​ไม่​เพิ่ม​รายละเอียด
@@ -2736,6 +2751,36 @@ th ขนาด: {} KB
 @ Skip 10 s
 th ข้าม 10 วินาที
 
+@ Back 10 s
+th ถอย​หลัง 10 วินาที
+
+@ Length
+th ความ​ยาว
+
+@ Mark in
+th มาร์ก​จุด​เริ่ม
+
+@ Mark out
+th มาร์ก​จุด​จบ
+
+@ Next level
+th ด่าน​ถัดไป
+
+@ No demos match the filter. Backspace or Esc clears it.
+th ไม่มี​เดโม​ที่​ตรง​กับ​ตัวกรอง กด Backspace หรือ Esc เพื่อ​ล้าง
+
+@ Renaming an automatic demo moves it to the saved demos.
+th การ​เปลี่ยน​ชื่อ​เดโม​อัตโนมัติ​จะ​ย้าย​ไป​ไว้​ใน​เดโม​ที่​บันทึก​ไว้
+
+@ Restart
+th เริ่ม​ใหม่
+
+@ Sort
+th เรียง
+
+@ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
+th ระหว่าง​เล่น​เดโม: A หยุด​ชั่วคราว ปุ่ม​ทิศทาง​ใช้​กรอ​และ​เปลี่ยน​ความเร็ว LT และ RT มาร์ก​คลิป และ X ส่งออก​คลิป
+
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 th Space หยุด | ซ้าย/ขวา กรอ | ขึ้น/ลง ความเร็ว | PgUp/PgDn 10 วินาที | I/O มาร์ก | E ส่งออก
 
@@ -2766,9 +2811,6 @@ th H ซ่อน
 
 @ Hide
 th ซ่อน
-
-@ Show
-th แสดง
 
 # Demos and video recording.
 @ Demo: {}
@@ -3314,6 +3356,12 @@ th กำลัง​ส่งออก {} เป็น​วิดีโอ
 
 @ Kept demo {}
 th เก็บ​เดโม​แล้ว: {}
+
+@ Not a valid demo name.
+th ชื่อ​เดโม​ไม่​ถูก​ต้อง
+
+@ Renamed demo to {}
+th เปลี่ยน​ชื่อ​เดโม​เป็น {} แล้ว
 
 @ No auto-demo to keep.
 th ไม่มี​เดโม​อัตโนมัติ​ให้​เก็บ

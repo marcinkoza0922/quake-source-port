@@ -343,8 +343,10 @@ impl Host {
         };
         let stem = sanitize(&Path::new(&req.demo).file_stem().map_or("demo".into(), |s| s.to_string_lossy().into_owned()));
         let ext = self.capture_settings().codec.extension();
-        let dest = crate::capture::unique(&self.videos_dir(), &stem, ext);
-        self.server.core.cvars.set("_export_dest", &dest.to_string_lossy());
+        let dir = self.videos_dir();
+        let name = crate::capture::unique(&dir, &stem, ext).file_stem().map_or(stem.clone(), |s| s.to_string_lossy().into_owned());
+        self.server.core.cvars.set("_export_dest", &dir.to_string_lossy());
+        self.server.core.cvars.set("_export_name", &name);
         self.server.core.cvars.set("_export_hasclip", if req.clip.is_some() { "1" } else { "0" });
         let mut info = vec![qcore::tr!("Demo: {}", stem)];
         if let Some((x, y)) = req.clip {
@@ -363,8 +365,8 @@ impl Host {
             ("clip", Some((a, b))) => (a, Some(b)),
             _ => (0.0, None),
         };
-        let typed = self.cvs("_export_dest").trim().to_string();
-        let out = (!typed.is_empty()).then(|| expand_home(&typed));
+        let ext = self.capture_settings().codec.extension();
+        let out = export_path(self.cvs("_export_dest"), self.cvs("_export_name"), ext, &self.videos_dir());
         self.start_export(req, start, end, out);
     }
 
@@ -389,6 +391,21 @@ impl Host {
     pub(super) fn wants_capture(&self) -> bool {
         self.screenshot.is_some() || self.thumb.is_some() || self.capture.as_ref().is_some_and(|c| c.rec.is_some())
     }
+}
+
+/// The export dialog's file: `dir` (else `videos`) / `name` + `ext`. Without
+/// a name the demo's own (`None`); an extension typed into it is dropped.
+fn export_path(dir: &str, name: &str, ext: &str, videos: &Path) -> Option<PathBuf> {
+    let name = name.trim();
+    let name = name.strip_suffix(ext).unwrap_or(name).trim();
+    let name: String = name.chars().filter(|&c| !"/\\:*?<>|\"".contains(c) && !c.is_control()).collect();
+    let name = name.trim_matches('.');
+    if name.is_empty() {
+        return None;
+    }
+    let dir = dir.trim();
+    let dir = if dir.is_empty() { videos.to_path_buf() } else { expand_home(dir) };
+    Some(dir.join(format!("{name}{ext}")))
 }
 
 /// `~/x` as `$HOME/x`.
@@ -431,5 +448,15 @@ mod tests {
     fn sanitize_names() {
         assert_eq!(super::sanitize("my clip/../x"), "my_clip_.._x");
         assert_eq!(super::sanitize("e1m1"), "e1m1");
+    }
+
+    #[test]
+    fn export_paths() {
+        use std::path::{Path, PathBuf};
+        let v = Path::new("/u/videos");
+        assert_eq!(super::export_path("/out", "my clip", ".mp4", v), Some(PathBuf::from("/out/my clip.mp4")));
+        assert_eq!(super::export_path("", "x.mp4", ".mp4", v), Some(PathBuf::from("/u/videos/x.mp4")));
+        assert_eq!(super::export_path("/out", "a/b", ".webm", v), Some(PathBuf::from("/out/ab.webm")));
+        assert_eq!(super::export_path("/out", "  ", ".mp4", v), None);
     }
 }

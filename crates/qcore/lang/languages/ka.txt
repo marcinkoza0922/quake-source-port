@@ -1432,6 +1432,15 @@ ka 720p
 @ Destination
 ka დანიშნულება
 
+@ File Name
+ka ფაილის სახელი
+
+@ Rename
+ka გადარქმევა
+
+@ Rename Demo
+ka დემოს გადარქმევა
+
 @ Export Highlighted Clip
 ka მონიშნული კლიპის ექსპორტი
 
@@ -1894,8 +1903,14 @@ ka აჩვენებს დაკვრის ზოლს (დრო, ს�
 ka ვიდეოს ფორმატი; საჭიროა ffmpeg ამ ენკოდერით, თორემ კადრები PNG სურათებად ინახება
 
 # Demos and video recording.
-@ No clip highlighted: while the demo plays, drag across the timeline or press I and O
-ka კლიპი არ არის მონიშნული: დემოს დროს გადაატარეთ დროის ხაზზე ან დააჭირეთ I-ს და O-ს
+@ No clip highlighted: while the demo plays, drag across the timeline, or press I and O (LT and RT on a controller)
+ka კლიპი არ არის მონიშნული: დემოს დროს გადაატარეთ დროის ხაზზე ან დააჭირეთ I-ს და O-ს (კონტროლერზე LT და RT)
+
+@ Name of the video file; the extension follows the video format, and a file of the same name is replaced
+ka ვიდეოფაილის სახელი; გაფართოება ვიდეოფორმატს მიჰყვება, ხოლო იმავე სახელის ფაილი ჩანაცვლდება
+
+@ New name of the demo; if another demo has it, a number is added
+ka დემოს ახალი სახელი; თუ ის სხვა დემოს უკვე აქვს, დაემატება ნომერი
 
 @ Video size; frames are scaled from the window size (bars keep the shape), so a larger size adds no detail
 ka ვიდეოს ზომა; კადრები ფანჯრის ზომიდან მასშტაბირდება (ფორმის შესანარჩუნებლად ზოლებით), ამიტომ დიდი ზომა დეტალს არ მატებს
@@ -2736,6 +2751,36 @@ ka ზომა: {} KB
 @ Skip 10 s
 ka 10 წმ-ის გამოტოვება
 
+@ Back 10 s
+ka 10 წმ-ით უკან
+
+@ Length
+ka ხანგრძლივობა
+
+@ Mark in
+ka დასაწყისის მონიშვნა
+
+@ Mark out
+ka დასასრულის მონიშვნა
+
+@ Next level
+ka შემდეგი დონე
+
+@ No demos match the filter. Backspace or Esc clears it.
+ka ფილტრს არცერთი დემო არ შეესაბამება. Backspace ან Esc მას გაასუფთავებს.
+
+@ Renaming an automatic demo moves it to the saved demos.
+ka ავტომატური დემოს გადარქმევა მას შენახულ დემოებში გადაიტანს.
+
+@ Restart
+ka თავიდან
+
+@ Sort
+ka დალაგება
+
+@ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
+ka დემოს დროს: A აპაუზებს, d-pad გადაახვევს და სიჩქარეს ცვლის, LT და RT ნიშნავს კლიპს, X კი მას ექსპორტს უკეთებს.
+
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 ka Space პაუზა | მარცხ./მარჯვ. გადახვევა | ზემოთ/ქვემოთ სიჩქარე | PgUp/PgDn 10 წმ | I/O ნიშნული | E ექსპორტი
 
@@ -2766,9 +2811,6 @@ ka H დამალვა
 
 @ Hide
 ka დამალვა
-
-@ Show
-ka ჩვენება
 
 # Demos and video recording.
 @ Demo: {}
@@ -3314,6 +3356,12 @@ ka {} ექსპორტირდება ვიდეოდ
 
 @ Kept demo {}
 ka დემო შენახულია: {}
+
+@ Not a valid demo name.
+ka დემოს არასწორი სახელი.
+
+@ Renamed demo to {}
+ka დემოს სახელი შეიცვალა: {}
 
 @ No auto-demo to keep.
 ka შესანახი ავტოდემო არ არის.

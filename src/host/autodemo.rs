@@ -77,7 +77,7 @@ impl Host {
         }
     }
 
-    fn keep_autodemo(&mut self, path: &Path, name: &str) {
+    fn keep_autodemo(&mut self, path: &Path, name: &str) -> Option<PathBuf> {
         match library::keep(path, &self.user_dir(), name) {
             Ok(dest) => {
                 let shown = dest.file_name().map_or_else(String::new, |n| n.to_string_lossy().into_owned());
@@ -85,10 +85,54 @@ impl Host {
                 if self.last_autodemo.as_deref() == Some(path) {
                     self.last_autodemo = None;
                 }
-                self.convert_demo(dest);
+                self.convert_demo(dest.clone());
+                Some(dest)
             }
-            Err(e) => self.con.print(&format!("demo_keep: {e}\n")),
+            Err(e) => {
+                self.con.print(&format!("demo_keep: {e}\n"));
+                None
+            }
         }
+    }
+
+    /// `_demo_rename <file> <name>` (Demos → Rename): a saved demo gets the
+    /// new name; an auto-demo is kept under it. The playing demo follows.
+    fn demo_rename(&mut self, file: &str, name: &str) {
+        let name = name.trim();
+        let name = name.strip_suffix(".dem").unwrap_or(name).trim();
+        if name.is_empty() || name.contains(['/', '\\', '"']) || name.contains("..") {
+            return self.print(&qcore::ctr!("Not a valid demo name.\n"));
+        }
+        let Some(src) = self.menu_demo_path(file) else { return };
+        let auto = src.parent().is_some_and(|p| p.ends_with(library::AUTO_DIR));
+        let dest = if auto {
+            self.keep_autodemo(&src, name)
+        } else {
+            match library::keep(&src, &self.user_dir(), name) {
+                Ok(dest) => {
+                    if dest != src {
+                        let shown = dest.file_name().map_or_else(String::new, |n| n.to_string_lossy().into_owned());
+                        self.con.print(&qcore::ctr!("Renamed demo to {}\n", shown));
+                    }
+                    Some(dest)
+                }
+                Err(e) => {
+                    self.con.print(&format!("rename: {e}\n"));
+                    None
+                }
+            }
+        };
+        let Some(dest) = dest else { return };
+        let user_dir = self.user_dir();
+        if let Some(d) = &mut self.demo
+            && user_dir.join(&d.play.name).with_extension("") == src.with_extension("")
+        {
+            let ext = Path::new(&d.play.name).extension().map_or_else(|| "dem".into(), |e| e.to_string_lossy().into_owned());
+            d.play.name = dest.with_extension(ext).file_name().map_or_else(String::new, |n| n.to_string_lossy().into_owned());
+            d.play.auto = false;
+        }
+        self.scan_demos();
+        self.menu.demos.focus(&dest);
     }
 
     /// Bug reports with `cl_autodemo` on: the level being recorded (or the
@@ -118,7 +162,8 @@ impl Host {
             d.play.auto = false;
             let n = named(&path);
             d.play.name = format!("{}.dem", n.strip_suffix(".dem").unwrap_or(&n));
-            return self.keep_autodemo(&path, &n);
+            self.keep_autodemo(&path, &n);
+            return;
         }
         if let Some(a) = &mut self.autodemo {
             let n = named(a.writer.path());
@@ -164,6 +209,7 @@ pub(super) fn register(c: &mut Commands<Host>) {
             h.scan_demos();
         }
     });
+    c.add("_demo_rename", |h, a| h.demo_rename(a.argv(1), a.argv(2)));
     c.add("_demo_delete", |h, a| {
         let Some(p) = h.menu_demo_path(a.argv(1)) else { return };
         // a converted demo and its full version go together

@@ -31,6 +31,12 @@ impl DemoFile {
         if self.auto { format!("{AUTO_DIR}/{file}") } else { file }
     }
 
+    /// The `.dem` file relative to the user dir (`autodemos/` for auto-demos).
+    pub fn rel_name(&self) -> String {
+        let file = self.path.file_name().map_or_else(String::new, |n| n.to_string_lossy().into_owned());
+        if self.auto { format!("{AUTO_DIR}/{file}") } else { file }
+    }
+
     /// The map an auto-demo's name records.
     pub fn auto_map(&self) -> Option<&str> {
         self.auto.then(|| self.name.split_once('_').map(|(_, m)| m)).flatten()
@@ -91,22 +97,35 @@ pub fn kept_name(auto_stem: &str) -> String {
     }
 }
 
-/// Moves an auto-demo into the saved demos as `name.dem` (made unique).
-pub fn keep(auto: &Path, user_dir: &Path, name: &str) -> std::io::Result<PathBuf> {
+/// Moves a demo into the saved demos as `name.dem` (made unique): keeps an
+/// auto-demo, or renames a saved one. A saved demo's full version (`.qsd`,
+/// `demo::convert`) moves with it. Renaming to its own name changes nothing.
+pub fn keep(src: &Path, user_dir: &Path, name: &str) -> std::io::Result<PathBuf> {
     let name = name.strip_suffix(".dem").unwrap_or(name);
     let mut dest = user_dir.join(format!("{name}.dem"));
+    if dest == src {
+        return Ok(dest);
+    }
     let mut i = 2;
-    while qcore::vfs::exists(&dest) {
+    while qcore::vfs::exists(&dest) || qcore::vfs::exists(&dest.with_extension(super::convert::QSD_EXT)) {
         dest = user_dir.join(format!("{name}_{i}.dem"));
         i += 1;
     }
-    match qcore::vfs::rename(auto, &dest) {
-        Ok(()) => Ok(dest),
+    move_file(src, &dest)?;
+    let qsd = src.with_extension(super::convert::QSD_EXT);
+    if qcore::vfs::exists(&qsd) {
+        move_file(&qsd, &dest.with_extension(super::convert::QSD_EXT))?;
+    }
+    Ok(dest)
+}
+
+fn move_file(src: &Path, dest: &Path) -> std::io::Result<()> {
+    match qcore::vfs::rename(src, dest) {
+        Ok(()) => Ok(()),
         // another file system: copy, then remove
         Err(_) => {
-            qcore::vfs::write(&dest, &qcore::vfs::read(auto)?)?;
-            qcore::vfs::remove_file(auto)?;
-            Ok(dest)
+            qcore::vfs::write(dest, &qcore::vfs::read(src)?)?;
+            qcore::vfs::remove_file(src)
         }
     }
 }
@@ -151,6 +170,12 @@ mod tests {
         let (saved, autos) = list(&d);
         assert_eq!(saved.len(), 3);
         assert!(autos.is_empty());
+        // renaming a saved demo moves its full version along; its own name is a no-op
+        std::fs::write(d.join("mine.qsd"), b"-1\n").unwrap();
+        let renamed = keep(&d.join("mine.dem"), &d, "Best run").unwrap();
+        assert_eq!(renamed, d.join("Best run.dem"));
+        assert!(d.join("Best run.qsd").exists() && !d.join("mine.qsd").exists() && !d.join("mine.dem").exists());
+        assert_eq!(keep(&renamed, &d, "Best run.dem").unwrap(), renamed);
         let _ = std::fs::remove_dir_all(&d);
     }
 

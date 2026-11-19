@@ -1432,6 +1432,15 @@ sq 720p
 @ Destination
 sq Destinacioni
 
+@ File Name
+sq Emri i skedarit
+
+@ Rename
+sq Riemërto
+
+@ Rename Demo
+sq Riemërto demon
+
 @ Export Highlighted Clip
 sq Eksporto klipin e theksuar
 
@@ -1894,8 +1903,14 @@ sq Shfaq shiritin e luajtjes (kohë, shpejtësi, vijë kohore) pas një tasti ko
 sq Formati i videos; kërkon ffmpeg me atë kodues, përndryshe kuadrot ruhen si imazhe PNG
 
 # Demos and video recording.
-@ No clip highlighted: while the demo plays, drag across the timeline or press I and O
-sq Asnjë klip i theksuar: gjatë demos tërhiq mbi vijën kohore ose shtyp I dhe O
+@ No clip highlighted: while the demo plays, drag across the timeline, or press I and O (LT and RT on a controller)
+sq Asnjë klip i theksuar: gjatë demos tërhiq mbi vijën kohore ose shtyp I dhe O (LT dhe RT në kontrollues)
+
+@ Name of the video file; the extension follows the video format, and a file of the same name is replaced
+sq Emri i skedarit video; prapashtesa ndjek formatin e videos dhe një skedar me të njëjtin emër zëvendësohet
+
+@ New name of the demo; if another demo has it, a number is added
+sq Emri i ri i demos; nëse e ka tashmë një demo tjetër, shtohet një numër
 
 @ Video size; frames are scaled from the window size (bars keep the shape), so a larger size adds no detail
 sq Madhësia e videos; kuadrot shkallëzohen nga madhësia e dritares (me shirita për të ruajtur formën), ndaj madhësia më e madhe nuk shton detaje
@@ -2736,6 +2751,36 @@ sq Madhësia: {} KB
 @ Skip 10 s
 sq Kapërce 10 s
 
+@ Back 10 s
+sq Mbrapa 10 s
+
+@ Length
+sq Kohëzgjatja
+
+@ Mark in
+sq Shëno fillimin
+
+@ Mark out
+sq Shëno fundin
+
+@ Next level
+sq Niveli tjetër
+
+@ No demos match the filter. Backspace or Esc clears it.
+sq Asnjë demo nuk përputhet me filtrin. Backspace ose Esc e pastron.
+
+@ Renaming an automatic demo moves it to the saved demos.
+sq Riemërtimi i një demoje automatike e zhvendos te demot e ruajtura.
+
+@ Restart
+sq Nga fillimi
+
+@ Sort
+sq Rendit
+
+@ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
+sq Gjatë një demoje: A bën pauzë, d-pad-i lëviz dhe ndryshon shpejtësinë, LT dhe RT shënojnë një klip dhe X e eksporton.
+
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 sq Hapësirë pauzë | Majtas/Djathtas lëviz | Lart/Poshtë shpejtësi | PgUp/PgDn 10 s | I/O shenjë | E eksporto
 
@@ -2766,9 +2811,6 @@ sq H fshih
 
 @ Hide
 sq Fshih
-
-@ Show
-sq Shfaq
 
 # Demos and video recording.
 @ Demo: {}
@@ -3314,6 +3356,12 @@ sq Po eksportohet {} si video
 
 @ Kept demo {}
 sq Demoja u mbajt: {}
+
+@ Not a valid demo name.
+sq Emër demoje i pavlefshëm.
+
+@ Renamed demo to {}
+sq Demoja u riemërtua në {}
 
 @ No auto-demo to keep.
 sq Nuk ka demo automatike për t'u mbajtur.

@@ -157,9 +157,11 @@ konverton një demo më të vjetër.
 
 Menyja kryesore → Demot shfaq demot e tua të ruajtura dhe, kur Opsionet →
 Demot → Regjistro demot automatikisht është ndezur, një demo automatike për
-çdo nivel që luan; më të vjetrat zëvendësohen kur vendet janë plot. K mban
-një, E e eksporton si video dhe Del e fshin. Raportet e gabimeve përfshijnë
-demon automatike të nivelit aktual.
+çdo nivel që luan; më të vjetrat zëvendësohen kur vendet janë plot.
+Shkruani për të filtruar listat dhe shtypni Tab për të ndryshuar renditjen;
+butonat pranë listës luajnë, eksportojnë, riemërtojnë, mbajnë ose fshijnë
+demon e zgjedhur, dhe riemërtimi i një demoje automatike e mban atë.
+Raportet e gabimeve përfshijnë demon automatike të nivelit aktual.
 
 Gjatë një demoje, Hapësira bën pauzë, mbajtja e Majtas ose Djathtas kthen
 mbrapsht ose shpejton përpara, Lart dhe Poshtë ndryshojnë shpejtësinë, PgUp
@@ -171,6 +173,11 @@ butonat, kliko vijën kohore për të kërcyer atje, ose tërhiq mbi të për t�
 theksuar një klip; Eksporto pyet për shpejtësinë e kuadrove, madhësinë,
 formatin dhe skedarin, dhe nëse të eksportojë klipin e theksuar apo tërë
 demon.
+
+Në kontrollues, A bën pauzë, d-pad-i kthen pas, çon përpara dhe ndryshon
+shpejtësinë, LB dhe RB kërcejnë 10 sekonda, dhe shtypja e levave shkon në
+fillim dhe në hartën tjetër. LT dhe RT shënojnë një klip, B e pastron, X
+eksporton, Y mban një demo automatike dhe View fsheh kontrollet.
 
 `capture` nis dhe ndalon regjistrimin e një videoje ndërsa luan. Shpejtësia
 e kuadrove, formati dhe cilësia janë te Opsionet → Demot → Regjistrimi i

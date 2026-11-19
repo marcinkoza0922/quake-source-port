@@ -1432,6 +1432,15 @@ gu 720p
 @ Destination
 gu ગંતવ્ય
 
+@ File Name
+gu ફાઇલનું નામ
+
+@ Rename
+gu નામ બદલો
+
+@ Rename Demo
+gu ડેમોનું નામ બદલો
+
 @ Export Highlighted Clip
 gu ચિહ્નિત ક્લિપ નિકાસ કરો
 
@@ -1894,8 +1903,14 @@ gu પ્લેબેક પટ્ટી (સમય, ઝડપ, ટાઇમલ�
 gu વીડિયો ફોર્મેટ; તે એન્કોડર સાથેનું ffmpeg જોઈએ, નહીં તો ફ્રેમ PNG છબીઓ તરીકે સચવાય છે
 
 # Demos and video recording.
-@ No clip highlighted: while the demo plays, drag across the timeline or press I and O
-gu કોઈ ક્લિપ ચિહ્નિત નથી: ડેમો ચાલતો હોય ત્યારે ટાઇમલાઇન પર ખેંચો અથવા I અને O દબાવો
+@ No clip highlighted: while the demo plays, drag across the timeline, or press I and O (LT and RT on a controller)
+gu કોઈ ક્લિપ ચિહ્નિત નથી: ડેમો ચાલતો હોય ત્યારે ટાઇમલાઇન પર ખેંચો અથવા I અને O દબાવો (કંટ્રોલર પર LT અને RT)
+
+@ Name of the video file; the extension follows the video format, and a file of the same name is replaced
+gu વિડિયો ફાઇલનું નામ; એક્સટેન્શન વિડિયો ફોર્મેટ પ્રમાણે હોય છે, અને એ જ નામની ફાઇલ બદલાઈ જાય છે
+
+@ New name of the demo; if another demo has it, a number is added
+gu ડેમોનું નવું નામ; જો બીજા ડેમોનું આ જ નામ હોય તો એક નંબર ઉમેરાય છે
 
 @ Video size; frames are scaled from the window size (bars keep the shape), so a larger size adds no detail
 gu વીડિયોનું કદ; ફ્રેમ વિન્ડોના કદ પરથી મોટી કરાય છે (આકાર જાળવવા પટ્ટીઓ સાથે), તેથી મોટું કદ વિગત ઉમેરતું નથી
@@ -2736,6 +2751,36 @@ gu કદ: {} KB
 @ Skip 10 s
 gu 10 સે. છોડો
 
+@ Back 10 s
+gu 10 સે. પાછળ
+
+@ Length
+gu લંબાઈ
+
+@ Mark in
+gu શરૂઆત ચિહ્નિત કરો
+
+@ Mark out
+gu અંત ચિહ્નિત કરો
+
+@ Next level
+gu આગલું લેવલ
+
+@ No demos match the filter. Backspace or Esc clears it.
+gu ફિલ્ટર સાથે કોઈ ડેમો મેળ ખાતો નથી. Backspace અથવા Esc તેને સાફ કરે છે.
+
+@ Renaming an automatic demo moves it to the saved demos.
+gu સ્વચાલિત ડેમોનું નામ બદલવાથી તે સાચવેલા ડેમોમાં જાય છે.
+
+@ Restart
+gu શરૂઆતથી
+
+@ Sort
+gu ક્રમ
+
+@ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
+gu ડેમો ચાલતો હોય ત્યારે: A થોભાવે છે, ડી-પેડ ખસેડે અને ઝડપ બદલે છે, LT અને RT ક્લિપ ચિહ્નિત કરે છે અને X તેની નિકાસ કરે છે.
+
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 gu Space થોભો | ડાબે/જમણે ખસેડો | ઉપર/નીચે ઝડપ | PgUp/PgDn 10 સે. | I/O નિશાન | E નિકાસ
 
@@ -2766,9 +2811,6 @@ gu H છુપાવો
 
 @ Hide
 gu છુપાવો
-
-@ Show
-gu બતાવો
 
 # Demos and video recording.
 @ Demo: {}
@@ -3314,6 +3356,12 @@ gu {} વીડિયોમાં નિકાસ થઈ રહ્યો છે
 
 @ Kept demo {}
 gu ડેમો રાખ્યો: {}
+
+@ Not a valid demo name.
+gu ડેમોનું નામ માન્ય નથી.
+
+@ Renamed demo to {}
+gu ડેમોનું નામ બદલીને {} કર્યું
 
 @ No auto-demo to keep.
 gu રાખવા માટે કોઈ ઓટો-ડેમો નથી.

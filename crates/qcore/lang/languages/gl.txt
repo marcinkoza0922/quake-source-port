@@ -1432,6 +1432,15 @@ gl 720p
 @ Destination
 gl Destino
 
+@ File Name
+gl Nome do ficheiro
+
+@ Rename
+gl Renomear
+
+@ Rename Demo
+gl Renomear demo
+
 @ Export Highlighted Clip
 gl Exportar o clip resaltado
 
@@ -1894,8 +1903,14 @@ gl Mostra a barra de reprodución (tempo, velocidade, liña de tempo) despois du
 gl Formato de vídeo; precisa ffmpeg con ese codificador, se non os fotogramas gárdanse como imaxes PNG
 
 # Demos and video recording.
-@ No clip highlighted: while the demo plays, drag across the timeline or press I and O
-gl Ningún clip resaltado: durante a demo, arrastra sobre a liña de tempo ou preme I e O
+@ No clip highlighted: while the demo plays, drag across the timeline, or press I and O (LT and RT on a controller)
+gl Ningún clip resaltado: durante a demo, arrastra sobre a liña de tempo ou preme I e O (LT e RT no mando)
+
+@ Name of the video file; the extension follows the video format, and a file of the same name is replaced
+gl Nome do ficheiro de vídeo; a extensión segue o formato de vídeo e substitúese un ficheiro co mesmo nome
+
+@ New name of the demo; if another demo has it, a number is added
+gl Novo nome da demo; se outra demo xa o ten, engádese un número
 
 @ Video size; frames are scaled from the window size (bars keep the shape), so a larger size adds no detail
 gl Tamaño do vídeo; os fotogramas escálanse desde o tamaño da xanela (con bandas para manter a forma), así que un tamaño maior non engade detalle
@@ -2736,6 +2751,36 @@ gl Tamaño: {} KB
 @ Skip 10 s
 gl Saltar 10 s
 
+@ Back 10 s
+gl Atrás 10 s
+
+@ Length
+gl Duración
+
+@ Mark in
+gl Marcar inicio
+
+@ Mark out
+gl Marcar fin
+
+@ Next level
+gl Seguinte nivel
+
+@ No demos match the filter. Backspace or Esc clears it.
+gl Ningunha demo coincide co filtro. Retroceso ou Esc bórrao.
+
+@ Renaming an automatic demo moves it to the saved demos.
+gl Renomear unha demo automática móvea ás demos gardadas.
+
+@ Restart
+gl Desde o principio
+
+@ Sort
+gl Ordenar
+
+@ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
+gl Durante unha demo: A pausa, a cruceta despraza e cambia a velocidade, LT e RT marcan un clip e X expórtao.
+
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 gl Espazo pausa | Esq./Der. desprazar | Arriba/Abaixo velocidade | RePáx/AvPáx 10 s | I/O marcar | E exportar
 
@@ -2766,9 +2811,6 @@ gl H ocultar
 
 @ Hide
 gl Ocultar
-
-@ Show
-gl Amosar
 
 # Demos and video recording.
 @ Demo: {}
@@ -3314,6 +3356,12 @@ gl Exportando {} a vídeo
 
 @ Kept demo {}
 gl Demo gardada: {}
+
+@ Not a valid demo name.
+gl Nome de demo non válido.
+
+@ Renamed demo to {}
+gl Demo renomeada a {}
 
 @ No auto-demo to keep.
 gl Non hai ningunha demo automática que gardar.

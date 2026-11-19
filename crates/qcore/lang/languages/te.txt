@@ -1432,6 +1432,15 @@ te 720p
 @ Destination
 te గమ్యం
 
+@ File Name
+te ఫైల్ పేరు
+
+@ Rename
+te పేరు మార్చు
+
+@ Rename Demo
+te డెమో పేరు మార్చు
+
 @ Export Highlighted Clip
 te గుర్తించిన క్లిప్‌ను ఎగుమతి చేయి
 
@@ -1894,8 +1903,14 @@ te ప్లేబ్యాక్ బార్‌ను (సమయం, వేగ
 te వీడియో ఫార్మాట్; ఆ ఎన్‌కోడర్‌తో ffmpeg అవసరం, లేకుంటే ఫ్రేమ్‌లు PNG చిత్రాలుగా సేవ్ అవుతాయి
 
 # Demos and video recording.
-@ No clip highlighted: while the demo plays, drag across the timeline or press I and O
-te క్లిప్ ఏదీ గుర్తించలేదు: డెమో ప్లే అవుతున్నప్పుడు టైమ్‌లైన్‌పై లాగండి లేదా I, O నొక్కండి
+@ No clip highlighted: while the demo plays, drag across the timeline, or press I and O (LT and RT on a controller)
+te క్లిప్ ఏదీ గుర్తించలేదు: డెమో ప్లే అవుతున్నప్పుడు టైమ్‌లైన్‌పై లాగండి లేదా I, O నొక్కండి (కంట్రోలర్‌పై LT మరియు RT)
+
+@ Name of the video file; the extension follows the video format, and a file of the same name is replaced
+te వీడియో ఫైల్ పేరు; ఎక్స్‌టెన్షన్ వీడియో ఫార్మాట్‌ను అనుసరిస్తుంది, అదే పేరున్న ఫైల్ భర్తీ అవుతుంది
+
+@ New name of the demo; if another demo has it, a number is added
+te డెమో కొత్త పేరు; మరో డెమోకు ఇదే పేరు ఉంటే ఒక సంఖ్య జోడించబడుతుంది
 
 @ Video size; frames are scaled from the window size (bars keep the shape), so a larger size adds no detail
 te వీడియో పరిమాణం; ఫ్రేమ్‌లు విండో పరిమాణం నుండి స్కేల్ చేయబడతాయి (ఆకారం నిలిచేలా పట్టీలతో), కాబట్టి పెద్ద పరిమాణం వివరాలను జోడించదు
@@ -2736,6 +2751,36 @@ te పరిమాణం: {} KB
 @ Skip 10 s
 te 10 సె. దాటవేయి
 
+@ Back 10 s
+te 10 సె. వెనక్కి
+
+@ Length
+te నిడివి
+
+@ Mark in
+te ప్రారంభాన్ని గుర్తించు
+
+@ Mark out
+te ముగింపును గుర్తించు
+
+@ Next level
+te తదుపరి స్థాయి
+
+@ No demos match the filter. Backspace or Esc clears it.
+te ఫిల్టర్‌కు ఏ డెమో సరిపోలలేదు. Backspace లేదా Esc దాన్ని తొలగిస్తుంది.
+
+@ Renaming an automatic demo moves it to the saved demos.
+te స్వయంచాలక డెమో పేరు మారిస్తే అది సేవ్ చేసిన డెమోలకు వెళ్తుంది.
+
+@ Restart
+te మొదటి నుంచి
+
+@ Sort
+te క్రమం
+
+@ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
+te డెమో ప్లే అవుతున్నప్పుడు: A పాజ్ చేస్తుంది, డి-ప్యాడ్ జరుపుతుంది మరియు వేగం మారుస్తుంది, LT మరియు RT ఒక క్లిప్‌ను గుర్తిస్తాయి, X దాన్ని ఎగుమతి చేస్తుంది.
+
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 te Space పాజ్ | ఎడమ/కుడి జరుపు | పైకి/కిందికి వేగం | PgUp/PgDn 10 సె. | I/O గుర్తు | E ఎగుమతి
 
@@ -2766,9 +2811,6 @@ te H దాచు
 
 @ Hide
 te దాచు
-
-@ Show
-te చూపు
 
 # Demos and video recording.
 @ Demo: {}
@@ -3314,6 +3356,12 @@ te {} వీడియోగా ఎగుమతి అవుతోంది
 
 @ Kept demo {}
 te డెమో ఉంచబడింది: {}
+
+@ Not a valid demo name.
+te డెమో పేరు చెల్లదు.
+
+@ Renamed demo to {}
+te డెమో పేరు {}గా మార్చబడింది
 
 @ No auto-demo to keep.
 te ఉంచడానికి ఆటో-డెమో లేదు.

@@ -35,8 +35,13 @@ impl Menu {
                 "misc/menu1.wav"
             });
         }
+        if let (Some(g), Screen::Demos) = (self.drag, self.screen) {
+            self.demos.drag_to(pos.1, g);
+            return None;
+        }
+        // the Demos list selects on click; hovering only lights the row
         if self.screen == Screen::Demos {
-            return self.demos.point(pos, false).then_some("misc/menu1.wav");
+            return None;
         }
         let i = self.item_at(pos)?;
         let c = self.cursor_mut()?;
@@ -118,6 +123,11 @@ impl Menu {
             if let Some(i) = self.mouse.and_then(|pos| self.item_at(pos)) {
                 self.opt_cursor = i;
             }
+            return out;
+        }
+        // the wheel scrolls the demo list without moving the selection
+        if let (K_MWHEELUP | K_MWHEELDOWN, Screen::Demos) = (key, self.screen) {
+            self.demos.wheel(key == K_MWHEELUP);
             return out;
         }
         if key == K_MOUSE1 && self.screen == Screen::Demos {
@@ -373,7 +383,9 @@ impl Menu {
                     if p == Page::Setup {
                         out.push(Action::Command(Self::setup_commands(cv)));
                     }
-                    self.screen = if p == Page::Export {
+                    self.screen = if p == Page::RenameDemo {
+                        Screen::Demos
+                    } else if p == Page::Export {
                         if self.export_back == Screen::None {
                             out.push(Action::Close);
                             out.push(Action::Command("_export_cancel\n".into()));
@@ -415,6 +427,8 @@ impl Menu {
                             cv.set(cvar, &v);
                         } else if enter && cvar == "_mp_address" {
                             self.run(Run::Connect, cv, &mut out);
+                        } else if enter && cvar == "_demo_rename" {
+                            self.run(Run::RenameDemo, cv, &mut out);
                         }
                         return out;
                     }
@@ -513,7 +527,7 @@ impl Menu {
                     None => Screen::Main,
                 };
             }
-            Screen::Demos => self.demos_key(key, &mut out),
+            Screen::Demos => self.demos_key(key, cv, &mut out),
             Screen::Quit => {
                 if left || right {
                     self.quit_cursor ^= 1;

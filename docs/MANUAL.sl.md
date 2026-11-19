@@ -156,9 +156,11 @@ pretvori starejši posnetek.
 
 Glavni meni → Posnetki prikaže shranjene posnetke in, ko je vklopljeno
 Možnosti → Posnetki → Samodejno snemaj posnetke, samodejni posnetek vsake
-odigrane ravni; najstarejši se zamenjajo, ko so mesta polna. K obdrži
-posnetek, E ga izvozi v video, Del ga izbriše. Poročila o napakah vsebujejo
-samodejni posnetek trenutne ravni.
+odigrane ravni; najstarejši se zamenjajo, ko so mesta polna. Tipkajte za
+filtriranje seznamov, Tab pa spremeni razvrščanje; gumbi ob seznamu
+predvajajo, izvozijo, preimenujejo, obdržijo ali izbrišejo izbrani
+posnetek, preimenovan samodejni posnetek pa se obdrži. Poročila o napakah
+vsebujejo samodejni posnetek trenutne ravni.
 
 Med posnetkom preslednica ustavi, držanje leve ali desne puščice previja
 nazaj ali naprej, gor in dol spreminjata hitrost, PgUp in PgDn skočita 10
@@ -169,6 +171,11 @@ prikaže trak, ki jih vrne. Kliknite gumbe, kliknite časovnico, da skočite
 tja, ali povlecite čeznjo, da označite izsek; Izvozi vpraša za hitrost
 sličic, velikost, obliko in datoteko ter ali naj izvozi označeni izsek ali
 cel posnetek.
+
+Na krmilniku A ustavi, smerni gumbi previjajo nazaj in naprej ter
+spreminjajo hitrost, LB in RB skočita 10 sekund, pritiska palic pa skočita
+na začetek in na naslednjo stopnjo. LT in RT označita izsek, B ga počisti, X
+izvozi, Y obdrži samodejni posnetek, View pa skrije kontrolnike.
 
 `capture` med igranjem začne in ustavi snemanje videa. Hitrost sličic,
 oblika in kakovost so v Možnosti → Posnetki → Snemanje videa. Video

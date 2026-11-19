@@ -1432,6 +1432,15 @@ ga 720p
 @ Destination
 ga Ceann scríbe
 
+@ File Name
+ga Ainm an chomhaid
+
+@ Rename
+ga Athainmnigh
+
+@ Rename Demo
+ga Athainmnigh an taispeántas
+
 @ Export Highlighted Clip
 ga Easpórtáil an ghearrthóg aibhsithe
 
@@ -1894,8 +1903,14 @@ ga Taispeánann sé an barra seinnte (am, luas, amlíne) tar éis eochair rialai
 ga Formáid físe; teastaíonn ffmpeg leis an ionchódóir sin, nó sábháiltear na frámaí mar íomhánna PNG
 
 # Demos and video recording.
-@ No clip highlighted: while the demo plays, drag across the timeline or press I and O
-ga Níl gearrthóg aibhsithe: le linn an taispeántais, tarraing trasna na hamlíne nó brúigh I agus O
+@ No clip highlighted: while the demo plays, drag across the timeline, or press I and O (LT and RT on a controller)
+ga Níl gearrthóg aibhsithe: le linn an taispeántais, tarraing trasna na hamlíne nó brúigh I agus O (LT agus RT ar an rialaitheoir)
+
+@ Name of the video file; the extension follows the video format, and a file of the same name is replaced
+ga Ainm an chomhaid físe; leanann an iarmhír an fhormáid físe, agus cuirtear comhad leis an ainm céanna ina áit
+
+@ New name of the demo; if another demo has it, a number is added
+ga Ainm nua an taispeántais; má tá sé ag taispeántas eile cheana, cuirtear uimhir leis
 
 @ Video size; frames are scaled from the window size (bars keep the shape), so a larger size adds no detail
 ga Méid an fhíseáin; scálaítear na frámaí ó mhéid na fuinneoige (le barraí chun an cruth a choinneáil), mar sin ní chuireann méid níos mó mionsonraí leis
@@ -2736,6 +2751,36 @@ ga Méid: {} KB
 @ Skip 10 s
 ga Scipeáil 10 s
 
+@ Back 10 s
+ga Siar 10 s
+
+@ Length
+ga Fad
+
+@ Mark in
+ga Marcáil tús
+
+@ Mark out
+ga Marcáil deireadh
+
+@ Next level
+ga An chéad leibhéal eile
+
+@ No demos match the filter. Backspace or Esc clears it.
+ga Níl taispeántas ar bith a mheaitseálann an scagaire. Glanann Backspace nó Esc é.
+
+@ Renaming an automatic demo moves it to the saved demos.
+ga Má athainmnítear taispeántas uathoibríoch, bogtar chuig na taispeántais shábháilte é.
+
+@ Restart
+ga Ón tús
+
+@ Sort
+ga Sórtáil
+
+@ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
+ga Le linn taispeántais: cuireann A ar sos é, scrollaíonn an d-pad agus athraíonn sé an luas, marcálann LT agus RT gearrthóg agus easpórtálann X í.
+
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 ga Spás sos | Clé/Deas scrollaigh | Suas/Síos luas | PgUp/PgDn 10 s | I/O marc | E easpórtáil
 
@@ -2766,9 +2811,6 @@ ga H folaigh
 
 @ Hide
 ga Folaigh
-
-@ Show
-ga Taispeáin
 
 # Demos and video recording.
 @ Demo: {}
@@ -3314,6 +3356,12 @@ ga {} á easpórtáil mar fhíseán
 
 @ Kept demo {}
 ga Coinníodh an taispeántas: {}
+
+@ Not a valid demo name.
+ga Ainm neamhbhailí taispeántais.
+
+@ Renamed demo to {}
+ga Athainmníodh an taispeántas mar {}
 
 @ No auto-demo to keep.
 ga Níl aon uath-thaispeántas le coinneáil.

@@ -1432,6 +1432,15 @@ he 720p
 @ Destination
 he יעד
 
+@ File Name
+he שם הקובץ
+
+@ Rename
+he שינוי שם
+
+@ Rename Demo
+he שינוי שם ההדגמה
+
 @ Export Highlighted Clip
 he ייצוא הקטע המסומן
 
@@ -1894,8 +1903,14 @@ he מציג את סרגל הניגון (זמן, מהירות, ציר זמן) א�
 he פורמט וידאו; נדרש ffmpeg עם המקודד הזה, אחרת הפריימים נשמרים כתמונות PNG
 
 # Demos and video recording.
-@ No clip highlighted: while the demo plays, drag across the timeline or press I and O
-he לא סומן קטע: בזמן ההדגמה גררו על ציר הזמן או לחצו I ו-O
+@ No clip highlighted: while the demo plays, drag across the timeline, or press I and O (LT and RT on a controller)
+he לא סומן קטע: בזמן ההדגמה גררו על ציר הזמן או לחצו I ו-O (LT ו-RT בבקר)
+
+@ Name of the video file; the extension follows the video format, and a file of the same name is replaced
+he שם קובץ הווידאו; הסיומת נקבעת לפי פורמט הווידאו, וקובץ באותו שם יוחלף
+
+@ New name of the demo; if another demo has it, a number is added
+he השם החדש של ההדגמה; אם להדגמה אחרת כבר יש אותו, יתווסף מספר
 
 @ Video size; frames are scaled from the window size (bars keep the shape), so a larger size adds no detail
 he גודל הווידאו; הפריימים מוגדלים מגודל החלון (עם פסים לשמירת הצורה), כך שגודל גדול יותר לא מוסיף פרטים
@@ -2736,6 +2751,36 @@ he גודל: {} KB
 @ Skip 10 s
 he דילוג 10 ש׳
 
+@ Back 10 s
+he אחורה 10 ש׳
+
+@ Length
+he משך
+
+@ Mark in
+he סימון התחלה
+
+@ Mark out
+he סימון סוף
+
+@ Next level
+he השלב הבא
+
+@ No demos match the filter. Backspace or Esc clears it.
+he אין הדגמות שמתאימות למסנן. Backspace או Esc מנקים אותו.
+
+@ Renaming an automatic demo moves it to the saved demos.
+he שינוי שם של הדגמה אוטומטית מעביר אותה להדגמות השמורות.
+
+@ Restart
+he מההתחלה
+
+@ Sort
+he מיון
+
+@ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
+he בזמן הדגמה: A משהה, לוח הכיוונים גולל ומשנה מהירות, LT ו-RT מסמנים קטע ו-X מייצא אותו.
+
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 he Space השהיה | שמאל/ימין גלילה | למעלה/למטה מהירות | PgUp/PgDn 10 ש׳ | I/O סימון | E ייצוא
 
@@ -2766,9 +2811,6 @@ he H הסתרה
 
 @ Hide
 he הסתרה
-
-@ Show
-he הצגה
 
 # Demos and video recording.
 @ Demo: {}
@@ -3314,6 +3356,12 @@ he מייצא את {} לווידאו
 
 @ Kept demo {}
 he ההדגמה נשמרה: {}
+
+@ Not a valid demo name.
+he שם הדגמה לא תקין.
+
+@ Renamed demo to {}
+he שם ההדגמה שונה ל-{}
 
 @ No auto-demo to keep.
 he אין הדגמה אוטומטית לשמירה.

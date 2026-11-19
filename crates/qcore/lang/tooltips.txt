@@ -1041,12 +1041,26 @@ ru Формат видео; нужен ffmpeg с этим кодировщико
 
 # Demos and video recording.
 
-@ No clip highlighted: while the demo plays, drag across the timeline or press I and O
-fr Aucun extrait surligné : pendant la démo, faites glisser sur la chronologie ou appuyez sur I et O
-de Kein Clip markiert: ziehe während der Demo über die Zeitleiste oder drücke I und O
-it Nessuna clip evidenziata: durante la demo, trascina sulla timeline o premi I e O
-es Ningún clip resaltado: durante la demo, arrastra sobre la línea de tiempo o pulsa I y O
-ru Фрагмент не выделен: во время демо протяните по шкале или нажмите I и O
+@ No clip highlighted: while the demo plays, drag across the timeline, or press I and O (LT and RT on a controller)
+fr Aucun extrait surligné : pendant la démo, faites glisser sur la chronologie ou appuyez sur I et O (LT et RT à la manette)
+de Kein Clip markiert: ziehe während der Demo über die Zeitleiste oder drücke I und O (LT und RT am Controller)
+it Nessuna clip evidenziata: durante la demo, trascina sulla timeline o premi I e O (LT e RT sul controller)
+es Ningún clip resaltado: durante la demo, arrastra sobre la línea de tiempo o pulsa I y O (LT y RT en el mando)
+ru Фрагмент не выделен: во время демо протяните по шкале или нажмите I и O (LT и RT на геймпаде)
+
+@ Name of the video file; the extension follows the video format, and a file of the same name is replaced
+fr Nom du fichier vidéo ; l'extension suit le format vidéo, et un fichier du même nom est remplacé
+de Name der Videodatei; die Endung folgt dem Videoformat, eine gleichnamige Datei wird ersetzt
+it Nome del file video; l'estensione segue il formato video e un file con lo stesso nome viene sostituito
+es Nombre del archivo de vídeo; la extensión sigue el formato de vídeo y se sustituye un archivo con el mismo nombre
+ru Имя видеофайла; расширение зависит от формата видео, файл с таким же именем заменяется
+
+@ New name of the demo; if another demo has it, a number is added
+fr Nouveau nom de la démo ; si une autre démo le porte déjà, un numéro est ajouté
+de Neuer Name der Demo; trägt ihn schon eine andere Demo, wird eine Nummer angehängt
+it Nuovo nome della demo; se un'altra demo lo usa già, viene aggiunto un numero
+es Nuevo nombre de la demo; si otra demo ya lo tiene, se añade un número
+ru Новое имя демо; если оно уже занято, добавляется номер
 
 @ Video size; frames are scaled from the window size (bars keep the shape), so a larger size adds no detail
 fr Taille de la vidéo ; les images sont mises à l'échelle depuis la taille de la fenêtre (avec des bandes pour garder la forme), une plus grande taille n'ajoute donc aucun détail

@@ -168,9 +168,12 @@ sine.
 Taispeánann Príomh-roghchlár → Taispeántais na taispeántais atá sábháilte
 agat agus, nuair atá Roghanna → Taispeántais → Taifead taispeántais go
 huathoibríoch ar siúl, taispeántas uathoibríoch de gach leibhéal a imríonn
-tú; cuirtear na cinn is sine as nuair a bhíonn na sliotáin lán. Coinníonn K
-ceann, easpórtálann E é mar fhíseán agus scriosann Del é. Bíonn taispeántas
-uathoibríoch an leibhéil reatha i dtuairiscí fabhtanna.
+tú; cuirtear na cinn is sine as nuair a bhíonn na sliotáin lán. Clóscríobh
+chun na liostaí a scagadh agus brúigh Tab chun an t-ord a athrú; seinneann,
+easpórtálann, athainmníonn, coinníonn nó scriosann na cnaipí in aice leis
+an liosta an taispeántas roghnaithe, agus coinnítear taispeántas
+uathoibríoch a athainmnítear. Bíonn taispeántas uathoibríoch an leibhéil
+reatha i dtuairiscí fabhtanna.
 
 Le linn taispeántais, cuireann Spás ar sos é, athchasann nó brostaíonn Clé
 nó Deas á choinneáil síos, athraíonn Suas agus Síos an luas, léimeann PgUp
@@ -183,6 +186,12 @@ cliceáil an amlíne chun léim ann, nó tarraing trasna uirthi chun gearrthóg 
 aibhsiú; fiafraíonn Easpórtáil an ráta frámaí, an mhéid, an fhormáid agus an
 comhad, agus cé acu an ghearrthóg aibhsithe nó an taispeántas ar fad atá le
 heaspórtáil.
+
+Ar rialaitheoir, cuireann A ar sos é, téann an d-pad siar agus ar aghaidh
+agus athraíonn sé an luas, léimeann LB agus RB 10 soicind, agus téann cnaipí
+na maidí go dtí an tús agus go dtí an chéad léarscáil eile. Marcálann LT
+agus RT gearrthóg, glanann B í, easpórtálann X, coinníonn Y taispeántas
+uathoibríoch agus folaíonn View na rialuithe.
 
 Tosaíonn agus stopann `capture` taifeadadh físe agus tú ag imirt. Tá ráta
 frámaí, formáid agus cáilíocht faoi Roghanna → Taispeántais → Taifeadadh

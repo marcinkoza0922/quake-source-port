@@ -1432,6 +1432,15 @@ eo 720p
 @ Destination
 eo Celo
 
+@ File Name
+eo Dosiernomo
+
+@ Rename
+eo Alinomi
+
+@ Rename Demo
+eo Alinomi demonstraĵon
+
 @ Export Highlighted Clip
 eo Eksporti la markitan eltranĉaĵon
 
@@ -1894,8 +1903,14 @@ eo Montras la ludadan breton (tempo, rapido, templinio) post regklavo, ĉiam, a�
 eo Videoformato; bezonas ffmpeg kun tiu kodilo, alie la kadroj konserviĝas kiel PNG-bildoj
 
 # Demos and video recording.
-@ No clip highlighted: while the demo plays, drag across the timeline or press I and O
-eo Neniu eltranĉaĵo markita: dum la demonstraĵo, trenu trans la templinion aŭ premu I kaj O
+@ No clip highlighted: while the demo plays, drag across the timeline, or press I and O (LT and RT on a controller)
+eo Neniu eltranĉaĵo markita: dum la demonstraĵo, trenu trans la templinion aŭ premu I kaj O (LT kaj RT ĉe la regilo)
+
+@ Name of the video file; the extension follows the video format, and a file of the same name is replaced
+eo Nomo de la videodosiero; la sufikso sekvas la videoformaton, kaj samnoma dosiero estas anstataŭigita
+
+@ New name of the demo; if another demo has it, a number is added
+eo Nova nomo de la demonstraĵo; se alia demonstraĵo jam havas ĝin, numero estas aldonita
 
 @ Video size; frames are scaled from the window size (bars keep the shape), so a larger size adds no detail
 eo Videogrando; la kadroj skaliĝas de la fenestra grando (kun strioj por konservi la formon), do pli granda grando ne aldonas detalojn
@@ -2736,6 +2751,36 @@ eo Grando: {} KB
 @ Skip 10 s
 eo Salti 10 s
 
+@ Back 10 s
+eo Malantaŭen 10 s
+
+@ Length
+eo Daŭro
+
+@ Mark in
+eo Marki komencon
+
+@ Mark out
+eo Marki finon
+
+@ Next level
+eo Sekva nivelo
+
+@ No demos match the filter. Backspace or Esc clears it.
+eo Neniu demonstraĵo kongruas kun la filtrilo. Retropaŝo aŭ Esc forigas ĝin.
+
+@ Renaming an automatic demo moves it to the saved demos.
+eo Alinomi aŭtomatan demonstraĵon movas ĝin al la konservitaj.
+
+@ Restart
+eo De la komenco
+
+@ Sort
+eo Ordigi
+
+@ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
+eo Dum demonstraĵo: A paŭzigas, la direktokruco rulumas kaj ŝanĝas la rapidon, LT kaj RT markas eltranĉaĵon kaj X eksportas ĝin.
+
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 eo Spaco paŭzo | Maldekstren/Dekstren rulumi | Supren/Malsupren rapido | PgUp/PgDn 10 s | I/O marko | E eksporti
 
@@ -2766,9 +2811,6 @@ eo H kaŝi
 
 @ Hide
 eo Kaŝi
-
-@ Show
-eo Montri
 
 # Demos and video recording.
 @ Demo: {}
@@ -3314,6 +3356,12 @@ eo Eksportante {} al video
 
 @ Kept demo {}
 eo Demonstraĵo konservita: {}
+
+@ Not a valid demo name.
+eo Nevalida nomo de demonstraĵo.
+
+@ Renamed demo to {}
+eo Demonstraĵo alinomita al {}
 
 @ No auto-demo to keep.
 eo Neniu aŭtomata demonstraĵo por konservi.

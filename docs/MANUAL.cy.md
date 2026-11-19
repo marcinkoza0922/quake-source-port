@@ -162,8 +162,10 @@ dangos, mae'r fersiwn llawn yn cael ei gadw fel `<enw>.qsd` (`playdemo
 Mae Prif ddewislen → Demos yn rhestru eich demos wedi'u cadw ac, os yw
 Opsiynau → Demos → Recordio demos yn awtomatig ymlaen, demo awtomatig o bob
 lefel rydych yn ei chwarae; mae'r hynaf yn cael eu disodli pan fydd y
-slotiau'n llawn. Mae K yn cadw un, E yn ei allforio fel fideo a Del yn ei
-ddileu. Mae adroddiadau nam yn cynnwys demo awtomatig y lefel bresennol.
+slotiau'n llawn. Teipiwch i hidlo'r rhestrau a phwyswch Tab i newid y
+drefn; mae'r botymau wrth ymyl y rhestr yn chwarae, allforio, ailenwi, cadw
+neu ddileu'r demo a ddewiswyd, ac mae ailenwi demo awtomatig yn ei gadw.
+Mae adroddiadau nam yn cynnwys demo awtomatig y lefel bresennol.
 
 Wrth i demo chwarae, mae Bwlch yn oedi, mae dal Chwith neu De yn weindio'n
 ôl neu ymlaen, mae I fyny ac I lawr yn newid y cyflymder, mae PgUp a PgDn yn
@@ -175,6 +177,12 @@ nhw'n ôl. Cliciwch y botymau, cliciwch y llinell amser i neidio yno, neu
 llusgwch ar ei thraws i amlygu clip; mae Allforio'n gofyn am gyfradd
 fframiau, maint, fformat a ffeil, ac a ddylid allforio'r clip wedi'i amlygu
 neu'r demo cyfan.
+
+Ar reolydd, mae A yn oedi, mae'r pad cyfeiriad yn mynd yn ôl ac ymlaen ac yn
+newid y cyflymder, mae LB ac RB yn neidio 10 eiliad, ac mae botymau'r ffyn
+yn mynd i'r dechrau ac i'r map nesaf. Mae LT ac RT yn marcio clip, B yn ei
+glirio, X yn allforio, Y yn cadw demo awtomatig a View yn cuddio'r
+rheolyddion.
 
 Mae `capture` yn dechrau ac yn stopio recordio fideo wrth i chi chwarae. Mae
 cyfradd fframiau, fformat ac ansawdd o dan Opsiynau → Demos → Recordio

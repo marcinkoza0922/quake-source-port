@@ -1432,6 +1432,15 @@ mt 720p
 @ Destination
 mt Destinazzjoni
 
+@ File Name
+mt Isem tal-fajl
+
+@ Rename
+mt Semmi mill-ġdid
+
+@ Rename Demo
+mt Semmi d-demo mill-ġdid
+
 @ Export Highlighted Clip
 mt Esporta l-klip immarkat
 
@@ -1894,8 +1903,14 @@ mt Juri l-bar tad-daqq (ħin, veloċità, kronoloġija) wara buttuna tal-kontrol
 mt Format tal-vidjo; jeħtieġ ffmpeg b'dak l-encoder, inkella l-frejms jiġu salvati bħala stampi PNG
 
 # Demos and video recording.
-@ No clip highlighted: while the demo plays, drag across the timeline or press I and O
-mt L-ebda klip immarkat: waqt id-demo, iddreggja fuq il-kronoloġija jew agħfas I u O
+@ No clip highlighted: while the demo plays, drag across the timeline, or press I and O (LT and RT on a controller)
+mt L-ebda klip immarkat: waqt id-demo, iddreggja fuq il-kronoloġija jew agħfas I u O (LT u RT fuq il-kontrollur)
+
+@ Name of the video file; the extension follows the video format, and a file of the same name is replaced
+mt Isem il-fajl tal-vidjo; l-estensjoni ssegwi l-format tal-vidjo, u fajl bl-istess isem jiġi sostitwit
+
+@ New name of the demo; if another demo has it, a number is added
+mt Isem ġdid tad-demo; jekk demo oħra diġà għandha dan l-isem, jiżdied numru
 
 @ Video size; frames are scaled from the window size (bars keep the shape), so a larger size adds no detail
 mt Daqs tal-vidjo; il-frejms jiġu skalati mid-daqs tat-tieqa (b'faxex biex tinżamm il-forma), għalhekk daqs akbar ma jżidx dettall
@@ -2736,6 +2751,36 @@ mt Daqs: {} KB
 @ Skip 10 s
 mt Aqbeż 10 s
 
+@ Back 10 s
+mt Lura 10 s
+
+@ Length
+mt Tul
+
+@ Mark in
+mt Immarka l-bidu
+
+@ Mark out
+mt Immarka t-tmiem
+
+@ Next level
+mt Il-livell li jmiss
+
+@ No demos match the filter. Backspace or Esc clears it.
+mt L-ebda demo ma taqbel mal-filtru. Backspace jew Esc iħassruh.
+
+@ Renaming an automatic demo moves it to the saved demos.
+mt Meta tissemma mill-ġdid, demo awtomatika titmexxa mad-demos salvati.
+
+@ Restart
+mt Mill-bidu
+
+@ Sort
+mt Ordna
+
+@ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
+mt Waqt demo: A jagħmel pawża, id-d-pad jiskorri u jibdel il-veloċità, LT u RT jimmarkaw klip u X jesportah.
+
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 mt Spazju pawża | Xellug/Lemin skorri | Fuq/Isfel veloċità | PgUp/PgDn 10 s | I/O immarka | E esporta
 
@@ -2766,9 +2811,6 @@ mt H aħbi
 
 @ Hide
 mt Aħbi
-
-@ Show
-mt Uri
 
 # Demos and video recording.
 @ Demo: {}
@@ -3314,6 +3356,12 @@ mt Qed jiġi esportat {} bħala vidjo
 
 @ Kept demo {}
 mt Demo miżmum: {}
+
+@ Not a valid demo name.
+mt Isem tad-demo mhux validu.
+
+@ Renamed demo to {}
+mt Id-demo issemmiet {}
 
 @ No auto-demo to keep.
 mt M'hemmx demo awtomatiku x'jinżamm.

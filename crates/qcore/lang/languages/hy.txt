@@ -1432,6 +1432,15 @@ hy 720p
 @ Destination
 hy Պահման վայր
 
+@ File Name
+hy Ֆայլի անուն
+
+@ Rename
+hy Վերանվանել
+
+@ Rename Demo
+hy Վերանվանել դեմոն
+
 @ Export Highlighted Clip
 hy Արտահանել նշված հատվածը
 
@@ -1894,8 +1903,14 @@ hy Ցույց է տալիս նվագարկման վահանակը (ժամանա�
 hy Տեսաձևաչափ․ անհրաժեշտ է ffmpeg այդ կոդավորիչով, հակառակ դեպքում կադրերը պահվում են որպես PNG պատկերներ
 
 # Demos and video recording.
-@ No clip highlighted: while the demo plays, drag across the timeline or press I and O
-hy Նշված հատված չկա․ դեմոյի ընթացքում քաշեք ժամանակագծի վրայով կամ սեղմեք I և O
+@ No clip highlighted: while the demo plays, drag across the timeline, or press I and O (LT and RT on a controller)
+hy Նշված հատված չկա․ դեմոյի ընթացքում քաշեք ժամանակագծի վրայով կամ սեղմեք I և O (կարգավորիչի վրա՝ LT և RT)
+
+@ Name of the video file; the extension follows the video format, and a file of the same name is replaced
+hy Տեսաֆայլի անունը. ընդլայնումը համապատասխանում է տեսաձևաչափին, իսկ նույն անունով ֆայլը փոխարինվում է
+
+@ New name of the demo; if another demo has it, a number is added
+hy Դեմոյի նոր անունը. եթե այն արդեն ունի մեկ այլ դեմո, ավելացվում է համար
 
 @ Video size; frames are scaled from the window size (bars keep the shape), so a larger size adds no detail
 hy Տեսանյութի չափ․ կադրերը մասշտաբավորվում են պատուհանի չափից (ձևը պահելու համար շերտերով), ուստի ավելի մեծ չափը մանրամասներ չի ավելացնում
@@ -2736,6 +2751,36 @@ hy Չափ՝ {} ԿԲ
 @ Skip 10 s
 hy Բաց թողնել 10 վ
 
+@ Back 10 s
+hy Հետ 10 վ
+
+@ Length
+hy Տևողություն
+
+@ Mark in
+hy Նշել սկիզբը
+
+@ Mark out
+hy Նշել վերջը
+
+@ Next level
+hy Հաջորդ մակարդակ
+
+@ No demos match the filter. Backspace or Esc clears it.
+hy Ֆիլտրին համապատասխանող դեմո չկա։ Backspace-ը կամ Esc-ը մաքրում է այն։
+
+@ Renaming an automatic demo moves it to the saved demos.
+hy Ավտոմատ դեմոյի վերանվանումը այն տեղափոխում է պահված դեմոների մեջ։
+
+@ Restart
+hy Սկզբից
+
+@ Sort
+hy Դասավորել
+
+@ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
+hy Դեմոյի ժամանակ՝ A-ն դադար է տալիս, d-pad-ը փաթաթում և փոխում է արագությունը, LT-ն ու RT-ն նշում են հատվածը, իսկ X-ը արտահանում է այն։
+
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 hy Space դադար | Ձախ/Աջ փաթաթել | Վերև/Ներքև արագություն | PgUp/PgDn 10 վ | I/O նշիչ | E արտահանել
 
@@ -2766,9 +2811,6 @@ hy H թաքցնել
 
 @ Hide
 hy Թաքցնել
-
-@ Show
-hy Ցույց տալ
 
 # Demos and video recording.
 @ Demo: {}
@@ -3314,6 +3356,12 @@ hy {}-ն արտահանվում է տեսանյութի
 
 @ Kept demo {}
 hy Դեմոն պահված է՝ {}
+
+@ Not a valid demo name.
+hy Դեմոյի անվավեր անուն։
+
+@ Renamed demo to {}
+hy Դեմոն վերանվանվեց՝ {}
 
 @ No auto-demo to keep.
 hy Պահելու ավտոդեմո չկա։

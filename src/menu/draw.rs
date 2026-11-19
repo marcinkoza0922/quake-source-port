@@ -50,7 +50,7 @@ impl Menu {
                 self.boxed_hints(c, 334.0, &[(K_DPAD_UP, "Section"), (K_RSHOULDER, "Scroll"), (K_BBUTTON, "Back")]);
             }
             Screen::Mods => self.mods.draw(c, modmenu::Page::List),
-            Screen::Demos => self.demos.draw(c),
+            Screen::Demos => self.demos.draw(c, self.mouse, self.pad_ui),
             Screen::ModMaps => self.mods.draw(c, modmenu::Page::Maps),
             Screen::ModOnline => self.mods.draw(c, modmenu::Page::Online),
             Screen::SinglePlayer => {
@@ -130,7 +130,7 @@ impl Menu {
                 }
                 if page == Page::Crosshair { crate::reticle::preview(c, cv); }
                 self.draw_custom_notes(c, cv, page, n);
-                if page == Page::Export { self.draw_export_notes(c, n); }
+                if matches!(page, Page::Export | Page::RenameDemo) { self.draw_dialog_notes(c, n); }
                 if page == Page::Join && self.servers.is_empty() && !self.searching {
                     let s = "no servers found yet";
                     c.text_center(320.0, PAGE_ROW0 + n as f32 * ROW_H + 8.0, s, TXT, MUTED);
@@ -289,9 +289,12 @@ impl Menu {
                 // fields (paths) the panel's width with the start cut off
                 let w = if max > 40 { PANEL_X + PANEL_W - VALUE_X - 4.0 } else { (max.min(20) as f32 * 7.0 + 14.0).min(PANEL_X + PANEL_W - VALUE_X - 4.0) };
                 c.fill(VALUE_X - 3.0, y - 1.0, w, BOX_H, [0.0, 0.0, 0.0, 0.5]);
+                // the export file name's extension follows the video format
+                let ext = (cvar == "_export_name").then(|| crate::capture::Codec::from_cvar(cv.value_of("capture_codec")).extension());
+                let ext_w = ext.map_or(0.0, |e| c.text_w_raw(e, TXT) + 3.0);
                 let shown: String = if max > 40 {
                     let mut t: &str = v;
-                    while c.text_w_raw(t, TXT) > w - 12.0 && !t.is_empty() {
+                    while c.text_w_raw(t, TXT) > w - 12.0 - ext_w && !t.is_empty() {
                         t = &t[t.char_indices().nth(1).map_or(t.len(), |(i, _)| i)..];
                     }
                     if t.len() < v.len() { format!("…{t}") } else { t.to_string() }
@@ -301,6 +304,9 @@ impl Menu {
                 let tw = txt(c, VALUE_X, y, &shown);
                 if blink {
                     c.fill(VALUE_X + tw + 1.0, y, 1.0, 8.0, FG);
+                }
+                if let Some(e) = ext {
+                    c.text_raw(VALUE_X + tw + 3.0, y, e, TXT, MUTED);
                 }
             }
             Item::Color { label: l, high } => {

@@ -66,6 +66,8 @@ pub(super) enum Run {
     /// Export dialog: the highlighted clip (dimmed without one), or all.
     ExportClip,
     ExportWhole,
+    /// Rename dialog: renames the demo (an auto-demo is kept).
+    RenameDemo,
 }
 
 /// A server answering the LAN search.

@@ -1432,6 +1432,15 @@ fil 720p
 @ Destination
 fil Destinasyon
 
+@ File Name
+fil Pangalan ng file
+
+@ Rename
+fil Palitan ang pangalan
+
+@ Rename Demo
+fil Palitan ang pangalan ng demo
+
 @ Export Highlighted Clip
 fil I-export ang naka-highlight na clip
 
@@ -1894,8 +1903,14 @@ fil Ipinapakita ang playback bar (oras, bilis, timeline) pagkatapos ng control k
 fil Format ng video; kailangan ng ffmpeg na may encoder na iyon, kung wala ay sine-save ang mga frame bilang mga PNG na larawan
 
 # Demos and video recording.
-@ No clip highlighted: while the demo plays, drag across the timeline or press I and O
-fil Walang naka-highlight na clip: habang may demo, i-drag sa timeline o pindutin ang I at O
+@ No clip highlighted: while the demo plays, drag across the timeline, or press I and O (LT and RT on a controller)
+fil Walang naka-highlight na clip: habang may demo, i-drag sa timeline o pindutin ang I at O (LT at RT sa controller)
+
+@ Name of the video file; the extension follows the video format, and a file of the same name is replaced
+fil Pangalan ng video file; ang extension ay sumusunod sa video format, at papalitan ang file na may parehong pangalan
+
+@ New name of the demo; if another demo has it, a number is added
+fil Bagong pangalan ng demo; kung gamit na ito ng ibang demo, dadagdagan ng numero
 
 @ Video size; frames are scaled from the window size (bars keep the shape), so a larger size adds no detail
 fil Laki ng video; ini-scale ang mga frame mula sa laki ng window (may mga bar para manatili ang hugis), kaya hindi nadaragdagan ang detalye sa mas malaking laki
@@ -2736,6 +2751,36 @@ fil Laki: {} KB
 @ Skip 10 s
 fil Laktawan ang 10 s
 
+@ Back 10 s
+fil Bumalik nang 10 s
+
+@ Length
+fil Haba
+
+@ Mark in
+fil Markahan ang simula
+
+@ Mark out
+fil Markahan ang dulo
+
+@ Next level
+fil Susunod na level
+
+@ No demos match the filter. Backspace or Esc clears it.
+fil Walang demo na tugma sa filter. Buburahin ito ng Backspace o Esc.
+
+@ Renaming an automatic demo moves it to the saved demos.
+fil Kapag pinalitan ang pangalan ng awtomatikong demo, malilipat ito sa mga naka-save na demo.
+
+@ Restart
+fil Ulitin
+
+@ Sort
+fil Ayusin
+
+@ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
+fil Habang may demo: A para i-pause, ang d-pad para mag-scrub at magbago ng bilis, LT at RT para markahan ang clip at X para i-export ito.
+
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 fil Space pause | Kaliwa/Kanan scrub | Taas/Baba bilis | PgUp/PgDn 10 s | I/O marka | E export
 
@@ -2766,9 +2811,6 @@ fil H itago
 
 @ Hide
 fil Itago
-
-@ Show
-fil Ipakita
 
 # Demos and video recording.
 @ Demo: {}
@@ -3314,6 +3356,12 @@ fil Ine-export ang {} bilang video
 
 @ Kept demo {}
 fil Itinabi ang demo: {}
+
+@ Not a valid demo name.
+fil Hindi wastong pangalan ng demo.
+
+@ Renamed demo to {}
+fil Pinalitan ang pangalan ng demo sa {}
 
 @ No auto-demo to keep.
 fil Walang auto-demo na maitatabi.

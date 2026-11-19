@@ -1432,6 +1432,15 @@ sl 720p
 @ Destination
 sl Cilj
 
+@ File Name
+sl Ime datoteke
+
+@ Rename
+sl Preimenuj
+
+@ Rename Demo
+sl Preimenuj posnetek
+
 @ Export Highlighted Clip
 sl Izvozi označeni izsek
 
@@ -1894,8 +1903,14 @@ sl Prikaže vrstico predvajanja (čas, hitrost, časovnica) po kontrolni tipki, 
 sl Oblika videa; potreben je ffmpeg s tem kodirnikom, sicer se sličice shranijo kot slike PNG
 
 # Demos and video recording.
-@ No clip highlighted: while the demo plays, drag across the timeline or press I and O
-sl Noben izsek ni označen: med posnetkom povlecite čez časovnico ali pritisnite I in O
+@ No clip highlighted: while the demo plays, drag across the timeline, or press I and O (LT and RT on a controller)
+sl Noben izsek ni označen: med posnetkom povlecite čez časovnico ali pritisnite I in O (LT in RT na krmilniku)
+
+@ Name of the video file; the extension follows the video format, and a file of the same name is replaced
+sl Ime video datoteke; končnica sledi video formatu, datoteka z enakim imenom pa se zamenja
+
+@ New name of the demo; if another demo has it, a number is added
+sl Novo ime posnetka; če ga že ima drug posnetek, se doda številka
 
 @ Video size; frames are scaled from the window size (bars keep the shape), so a larger size adds no detail
 sl Velikost videa; sličice se razširijo iz velikosti okna (s pasovi, da obdržijo obliko), zato večja velikost ne doda podrobnosti
@@ -2736,6 +2751,36 @@ sl Velikost: {} KB
 @ Skip 10 s
 sl Preskoči 10 s
 
+@ Back 10 s
+sl Nazaj 10 s
+
+@ Length
+sl Dolžina
+
+@ Mark in
+sl Označi začetek
+
+@ Mark out
+sl Označi konec
+
+@ Next level
+sl Naslednja stopnja
+
+@ No demos match the filter. Backspace or Esc clears it.
+sl Filtru ne ustreza noben posnetek. Vračalka ali Esc ga počisti.
+
+@ Renaming an automatic demo moves it to the saved demos.
+sl Preimenovanje samodejnega posnetka ga premakne med shranjene.
+
+@ Restart
+sl Od začetka
+
+@ Sort
+sl Razvrsti
+
+@ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
+sl Med posnetkom: A ustavi, smerni gumbi previjajo in spreminjajo hitrost, LT in RT označita izsek, X pa ga izvozi.
+
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 sl Preslednica premor | Levo/Desno previjanje | Gor/Dol hitrost | PgUp/PgDn 10 s | I/O oznaka | E izvoz
 
@@ -2766,9 +2811,6 @@ sl H skrij
 
 @ Hide
 sl Skrij
-
-@ Show
-sl Prikaži
 
 # Demos and video recording.
 @ Demo: {}
@@ -3314,6 +3356,12 @@ sl Izvažanje {} v video
 
 @ Kept demo {}
 sl Posnetek obdržan: {}
+
+@ Not a valid demo name.
+sl Neveljavno ime posnetka.
+
+@ Renamed demo to {}
+sl Posnetek preimenovan v {}
 
 @ No auto-demo to keep.
 sl Ni samodejnega posnetka za obdržati.

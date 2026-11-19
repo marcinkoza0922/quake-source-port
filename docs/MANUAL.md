@@ -148,9 +148,10 @@ effects other ports can't show, the full version is kept as `<name>.qsd`
 
 Main menu → Demos lists your saved demos and, with Options → Demos →
 Auto-Record Demos on, an automatic demo of every level you play; the oldest
-are replaced when the slots are full. Press K to keep one, E to export it as
-a video and Del to delete it. Bug reports include the current level's
-automatic demo.
+are replaced when the slots are full. Type to filter the lists and press Tab
+to change the sort order; the buttons beside the list play, export, rename,
+keep or delete the selected demo, and renaming an automatic demo keeps it.
+Bug reports include the current level's automatic demo.
 
 While a demo plays, Space pauses, holding Left or Right rewinds or
 fast-forwards, Up and Down change the speed, PgUp and PgDn jump 10 seconds,
@@ -161,6 +162,11 @@ that brings them back. Click the buttons, click the timeline to jump there,
 or drag across it to highlight a clip; Export asks for the frame rate, size,
 format and file, and whether to export the highlighted clip or the whole
 demo.
+
+On a controller, A pauses, the d-pad rewinds, fast-forwards and changes the
+speed, LB and RB jump 10 seconds, and the stick buttons go to the start and
+to the next map. LT and RT mark a clip, B clears it, X exports, Y keeps an
+automatic demo and View hides the controls.
 
 `capture` starts and stops recording a video while you play. Frame rate,
 format and quality are under Options → Demos → Video Recording. Videos need

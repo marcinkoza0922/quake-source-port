@@ -289,7 +289,10 @@ impl Host {
     }
 
     /// Demo control keys in game mode; true when the key was used. Held
-    /// keys (scrub, slow) also track their release in every mode.
+    /// keys (scrub, slow) also track their release in every mode. Every
+    /// control has a pad button: A pause, d-pad scrub and speed, LB/RB 10 s,
+    /// LT/RT mark in/out, B clear marks, X export, Y keep, LS start, RS next
+    /// level, View hide the bar.
     pub(super) fn demo_key(&mut self, key: i32, down: bool) -> bool {
         let realtime = self.realtime;
         let game = self.key_dest() == KeyDest::Game;
@@ -317,7 +320,7 @@ impl Host {
         }
         let k = if (b'A' as i32..=b'Z' as i32).contains(&key) { key + 32 } else { key };
         match k {
-            K_SPACE | K_YBUTTON | K_PAUSE => {
+            K_SPACE | K_ABUTTON | K_PAUSE => {
                 d.paused = !d.paused;
                 d.play.scrub = 0;
             }
@@ -326,15 +329,19 @@ impl Host {
             K_LEFTARROW | K_RIGHTARROW | K_DPAD_LEFT | K_DPAD_RIGHT | K_SHIFT | K_CTRL => held(p, key, true),
             K_PGUP | K_LSHOULDER => self.demo_jump(-JUMP),
             K_PGDN | K_RSHOULDER => self.demo_jump(JUMP),
-            K_HOME => self.demo_seek(0.0),
-            K_END => self.demo_next_map(),
+            K_HOME | K_LTHUMB => self.demo_seek(0.0),
+            K_END | K_RTHUMB => self.demo_next_map(),
+            K_LTRIGGER => self.demo_mark(0),
+            K_RTRIGGER => self.demo_mark(1),
             k if k == b'i' as i32 => self.demo_mark(0),
             k if k == b'o' as i32 => self.demo_mark(1),
-            K_BACKSPACE | K_DEL => d.play.marks = [None; 2],
+            K_BACKSPACE | K_DEL | K_BBUTTON => d.play.marks = [None; 2],
+            K_XBUTTON => self.cbuf.add_text("menu_export\n"),
             k if k == b'e' as i32 => self.cbuf.add_text("menu_export\n"),
+            K_YBUTTON => self.cbuf.add_text("demo_keep\n"),
             k if k == b'k' as i32 => self.cbuf.add_text("demo_keep\n"),
             // no `show_demo_bar` after it: hiding must hide
-            k if k == b'h' as i32 => return {
+            k if k == b'h' as i32 || k == K_BACK => return {
                 self.toggle_demo_bar();
                 true
             },

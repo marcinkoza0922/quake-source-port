@@ -163,8 +163,10 @@ vecchia.
 
 Menu principale → Demo elenca le tue demo salvate e, con Opzioni → Demo →
 Registra demo automatiche attivo, una demo automatica di ogni livello
-giocato; le più vecchie vengono sostituite quando gli slot sono pieni. Premi
-K per conservarne una, E per esportarla in video e Canc per eliminarla. Le
+giocato; le più vecchie vengono sostituite quando gli slot sono pieni.
+Digita per filtrare gli elenchi e premi Tab per cambiare l'ordine; i
+pulsanti accanto all'elenco riproducono, esportano, rinominano, conservano o
+eliminano la demo scelta, e rinominare una demo automatica la conserva. Le
 segnalazioni di bug includono la demo automatica del livello in corso.
 
 Durante una demo, Spazio mette in pausa, tenere premuto Sinistra o Destra
@@ -177,6 +179,12 @@ tornare. Fai clic sui pulsanti, fai clic sulla timeline per saltare lì, o
 trascinaci sopra per evidenziare una clip; Esporta chiede frequenza,
 dimensione, formato e file, e se esportare la clip evidenziata o tutta la
 demo.
+
+Con il controller, A mette in pausa, il d-pad riavvolge, manda avanti e
+cambia la velocità, LB e RB saltano di 10 secondi e i pulsanti delle
+levette vanno all'inizio e alla mappa successiva. LT e RT segnano una
+clip, B la cancella, X esporta, Y conserva una demo automatica e View
+nasconde i controlli.
 
 `capture` avvia e ferma la registrazione di un video mentre giochi.
 Frequenza, formato e qualità sono in Opzioni → Demo → Registrazione video. I

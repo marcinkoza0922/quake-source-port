@@ -1432,6 +1432,15 @@ be 720p
 @ Destination
 be Шлях захавання
 
+@ File Name
+be Імя файла
+
+@ Rename
+be Перайменаваць
+
+@ Rename Demo
+be Перайменаваць дэма
+
 @ Export Highlighted Clip
 be Экспарт вылучанага фрагмента
 
@@ -1894,8 +1903,14 @@ be Паказвае панэль прайгравання (час, хуткас�
 be Фармат відэа; патрэбны ffmpeg з гэтым кадавальнікам, інакш кадры захоўваюцца як выявы PNG
 
 # Demos and video recording.
-@ No clip highlighted: while the demo plays, drag across the timeline or press I and O
-be Фрагмент не вылучаны: падчас дэма працягніце па шкале або націсніце I і O
+@ No clip highlighted: while the demo plays, drag across the timeline, or press I and O (LT and RT on a controller)
+be Фрагмент не вылучаны: падчас дэма працягніце па шкале або націсніце I і O (LT і RT на геймпадзе)
+
+@ Name of the video file; the extension follows the video format, and a file of the same name is replaced
+be Імя відэафайла; пашырэнне залежыць ад фармату відэа, а файл з такім жа імем замяняецца
+
+@ New name of the demo; if another demo has it, a number is added
+be Новая назва дэма; калі яна ўжо ёсць у іншага дэма, дадаецца нумар
 
 @ Video size; frames are scaled from the window size (bars keep the shape), so a larger size adds no detail
 be Памер відэа; кадры маштабуюцца з памеру акна (з палосамі, каб захаваць прапорцыі), таму большы памер не дадае дэталяў
@@ -2736,6 +2751,36 @@ be Памер: {} КБ
 @ Skip 10 s
 be Прапусціць 10 с
 
+@ Back 10 s
+be Назад 10 с
+
+@ Length
+be Даўжыня
+
+@ Mark in
+be Пачатак фрагмента
+
+@ Mark out
+be Канец фрагмента
+
+@ Next level
+be Наступны ўзровень
+
+@ No demos match the filter. Backspace or Esc clears it.
+be Ніводнае дэма не адпавядае фільтру. Backspace або Esc ачышчае яго.
+
+@ Renaming an automatic demo moves it to the saved demos.
+be Перайменаванае аўтаматычнае дэма пераносіцца ў захаваныя.
+
+@ Restart
+be Спачатку
+
+@ Sort
+be Сартаваць
+
+@ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
+be Падчас дэма: A ставіць паўзу, крыжавіна перамотвае і мяняе хуткасць, LT і RT пазначаюць фрагмент, а X экспартуе яго.
+
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 be Прабел паўза | Улева/Управа перамотка | Уверх/Уніз хуткасць | PgUp/PgDn 10 с | I/O метка | E экспарт
 
@@ -2766,9 +2811,6 @@ be H схаваць
 
 @ Hide
 be Схаваць
-
-@ Show
-be Паказаць
 
 # Demos and video recording.
 @ Demo: {}
@@ -3314,6 +3356,12 @@ be Экспарт {} у відэа
 
 @ Kept demo {}
 be Дэма захавана: {}
+
+@ Not a valid demo name.
+be Недапушчальная назва дэма.
+
+@ Renamed demo to {}
+be Дэма перайменавана: {}
 
 @ No auto-demo to keep.
 be Няма аўтадэма для захавання.

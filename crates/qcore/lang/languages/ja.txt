@@ -1432,6 +1432,15 @@ ja 720p
 @ Destination
 ja 保存先
 
+@ File Name
+ja ファイル名
+
+@ Rename
+ja 名前を変更
+
+@ Rename Demo
+ja デモの名前を変更
+
 @ Export Highlighted Clip
 ja ハイライトしたクリップを書き出し
 
@@ -1894,8 +1903,14 @@ ja 再生バー（時間、速度、タイムライン）を操作キーの後�
 ja ビデオ形式。そのエンコーダー付きの ffmpeg が必要で、ない場合はフレームを PNG 画像として保存します
 
 # Demos and video recording.
-@ No clip highlighted: while the demo plays, drag across the timeline or press I and O
-ja クリップがハイライトされていません。デモ再生中にタイムラインをドラッグするか、I と O を押してください
+@ No clip highlighted: while the demo plays, drag across the timeline, or press I and O (LT and RT on a controller)
+ja クリップがハイライトされていません。デモ再生中にタイムラインをドラッグするか、I と O を押してください（コントローラーでは LT と RT）
+
+@ Name of the video file; the extension follows the video format, and a file of the same name is replaced
+ja 動画ファイルの名前。拡張子は動画形式に合わせて決まり、同じ名前のファイルは置き換えられます
+
+@ New name of the demo; if another demo has it, a number is added
+ja デモの新しい名前。ほかのデモが同じ名前なら番号が付きます
 
 @ Video size; frames are scaled from the window size (bars keep the shape), so a larger size adds no detail
 ja ビデオのサイズ。フレームはウィンドウのサイズから拡大縮小され（形を保つために黒帯が付きます）、大きくしても細部は増えません
@@ -2736,6 +2751,36 @@ ja サイズ：{} KB
 @ Skip 10 s
 ja 10秒スキップ
 
+@ Back 10 s
+ja 10秒戻る
+
+@ Length
+ja 長さ
+
+@ Mark in
+ja 開始点
+
+@ Mark out
+ja 終了点
+
+@ Next level
+ja 次のレベル
+
+@ No demos match the filter. Backspace or Esc clears it.
+ja フィルターに合うデモはありません。Backspace か Esc で消去します。
+
+@ Renaming an automatic demo moves it to the saved demos.
+ja 自動デモの名前を変えると保存済みデモに移動します。
+
+@ Restart
+ja 最初から
+
+@ Sort
+ja 並べ替え
+
+@ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
+ja デモ再生中：A で一時停止、十字キーでスクラブと速度変更、LT と RT でクリップを指定し、X で書き出します。
+
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 ja Space 一時停止 | ←/→ スクラブ | ↑/↓ 速度 | PgUp/PgDn 10秒 | I/O マーク | E 書き出し
 
@@ -2766,9 +2811,6 @@ ja H 隠す
 
 @ Hide
 ja 隠す
-
-@ Show
-ja 表示
 
 # Demos and video recording.
 @ Demo: {}
@@ -3314,6 +3356,12 @@ ja {}をビデオに書き出し中
 
 @ Kept demo {}
 ja デモを保存しました：{}
+
+@ Not a valid demo name.
+ja デモ名が正しくありません。
+
+@ Renamed demo to {}
+ja デモの名前を {} に変更しました
 
 @ No auto-demo to keep.
 ja 保存できる自動デモがありません。

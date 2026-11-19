@@ -168,8 +168,11 @@ können, bleibt die vollständige Fassung als `<Name>.qsd` erhalten
 Hauptmenü → Demos listet deine gespeicherten Demos und, wenn Optionen →
 Demos → Demos automatisch aufnehmen an ist, eine automatische Demo jedes
 gespielten Levels; die ältesten werden ersetzt, wenn alle Plätze belegt
-sind. K behält eine, E exportiert sie als Video und Entf löscht sie.
-Fehlerberichte enthalten die automatische Demo des aktuellen Levels.
+sind. Tippe, um die Listen zu filtern, und drücke Tab, um die Sortierung
+zu ändern; die Schaltflächen neben der Liste spielen, exportieren,
+benennen um, behalten oder löschen die gewählte Demo, und eine
+umbenannte automatische Demo wird behalten. Fehlerberichte enthalten die
+automatische Demo des aktuellen Levels.
 
 Während eine Demo läuft, pausiert die Leertaste, Halten von Links oder
 Rechts spult zurück oder vor, Hoch und Runter ändern das Tempo, Bild↑ und
@@ -181,6 +184,12 @@ sie zurückholt. Klicke auf die Schaltflächen, klicke auf die Zeitleiste, um
 dorthin zu springen, oder ziehe darüber, um einen Clip zu markieren;
 Exportieren fragt nach Bildrate, Größe, Format und Datei und ob der
 markierte Clip oder die ganze Demo exportiert wird.
+
+Am Controller pausiert A, das Steuerkreuz spult zurück und vor und ändert
+die Geschwindigkeit, LB und RB springen 10 Sekunden, und die Stick-Tasten
+gehen zum Anfang und zur nächsten Karte. LT und RT markieren einen Clip, B
+löscht ihn, X exportiert, Y behält eine automatische Demo und View blendet
+die Steuerung aus.
 
 `capture` startet und stoppt eine Videoaufnahme beim Spielen. Bildrate,
 Format und Qualität findest du unter Optionen → Demos → Videoaufnahme.

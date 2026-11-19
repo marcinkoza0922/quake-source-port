@@ -66,6 +66,7 @@ impl Menu {
                 }
             }
             Run::NewGame => self.launch_play(cv, out),
+            Run::RenameDemo => self.run_rename(cv, out),
             Run::ExportClip | Run::ExportWhole => {
                 if run == Run::ExportClip && cv.value_of("_export_hasclip") == 0.0 {
                     return;

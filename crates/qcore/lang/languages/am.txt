@@ -1432,6 +1432,15 @@ am 720p
 @ Destination
 am መድረሻ
 
+@ File Name
+am የፋይል ስም
+
+@ Rename
+am ስም ቀይር
+
+@ Rename Demo
+am የዴሞ ስም ቀይር
+
 @ Export Highlighted Clip
 am የተመረጠውን ቅንጥብ ላክ
 
@@ -1894,8 +1903,14 @@ am የማጫወቻ አሞሌውን (ጊዜ፣ ፍጥነት፣ የጊዜ መስ�
 am የቪዲዮ ቅርጸት፤ ያንን ኢንኮደር የያዘ ffmpeg ያስፈልጋል፣ አለዚያ ፍሬሞቹ እንደ PNG ምስሎች ይቀመጣሉ
 
 # Demos and video recording.
-@ No clip highlighted: while the demo plays, drag across the timeline or press I and O
-am ምንም ቅንጥብ አልተመረጠም፦ ዴሞ ሲጫወት በጊዜ መስመሩ ላይ ይጎትቱ ወይም I እና O ይጫኑ
+@ No clip highlighted: while the demo plays, drag across the timeline, or press I and O (LT and RT on a controller)
+am ምንም ቅንጥብ አልተመረጠም፦ ዴሞ ሲጫወት በጊዜ መስመሩ ላይ ይጎትቱ ወይም I እና O ይጫኑ (በመቆጣጠሪያ ላይ LT እና RT)
+
+@ Name of the video file; the extension follows the video format, and a file of the same name is replaced
+am የቪዲዮ ፋይሉ ስም፤ ቅጥያው የቪዲዮ ቅርጸቱን ይከተላል፣ ተመሳሳይ ስም ያለው ፋይልም ይተካል
+
+@ New name of the demo; if another demo has it, a number is added
+am የዴሞው አዲስ ስም፤ ሌላ ዴሞ ስሙን ቀድሞ ከያዘ ቁጥር ይታከላል
 
 @ Video size; frames are scaled from the window size (bars keep the shape), so a larger size adds no detail
 am የቪዲዮ መጠን፤ ፍሬሞቹ ከመስኮቱ መጠን ይሰፋሉ (ቅርጹን ለመጠበቅ በአሞሌዎች)፣ ስለዚህ ትልቅ መጠን ዝርዝር አይጨምርም
@@ -2736,6 +2751,36 @@ am መጠን፦ {} KB
 @ Skip 10 s
 am 10 ሰ. ዝለል
 
+@ Back 10 s
+am 10 ሰ. ወደኋላ
+
+@ Length
+am ርዝመት
+
+@ Mark in
+am መጀመሪያ ምልክት አድርግ
+
+@ Mark out
+am መጨረሻ ምልክት አድርግ
+
+@ Next level
+am ቀጣይ ደረጃ
+
+@ No demos match the filter. Backspace or Esc clears it.
+am ከማጣሪያው ጋር የሚዛመድ ዴሞ የለም። Backspace ወይም Esc ያጸዳዋል።
+
+@ Renaming an automatic demo moves it to the saved demos.
+am የራስ-ሰር ዴሞ ስም መቀየር ወደ የተቀመጡ ዴሞዎች ያዛውረዋል።
+
+@ Restart
+am ከመጀመሪያው
+
+@ Sort
+am ደርድር
+
+@ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
+am ዴሞ ሲጫወት፦ A ለአፍታ ያቆማል፣ ዲ-ፓድ ያጠነጥናል ፍጥነትም ይቀይራል፣ LT እና RT ቅንጥብ ያመለክታሉ፣ X ደግሞ ይልከዋል።
+
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 am Space አቁም | ግራ/ቀኝ አጠንጥን | ላይ/ታች ፍጥነት | PgUp/PgDn 10 ሰ. | I/O ምልክት | E ላክ
 
@@ -2766,9 +2811,6 @@ am H ደብቅ
 
 @ Hide
 am ደብቅ
-
-@ Show
-am አሳይ
 
 # Demos and video recording.
 @ Demo: {}
@@ -3314,6 +3356,12 @@ am {} ወደ ቪዲዮ እየተላከ ነው
 
 @ Kept demo {}
 am ዴሞ ተይዟል፦ {}
+
+@ Not a valid demo name.
+am ልክ ያልሆነ የዴሞ ስም።
+
+@ Renamed demo to {}
+am የዴሞው ስም ወደ {} ተቀይሯል
 
 @ No auto-demo to keep.
 am የሚያዝ ራስ-ሰር ዴሞ የለም።

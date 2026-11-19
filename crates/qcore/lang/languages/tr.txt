@@ -1432,6 +1432,15 @@ tr 720p
 @ Destination
 tr Hedef
 
+@ File Name
+tr Dosya adı
+
+@ Rename
+tr Yeniden adlandır
+
+@ Rename Demo
+tr Demoyu yeniden adlandır
+
 @ Export Highlighted Clip
 tr İşaretli klibi dışa aktar
 
@@ -1894,8 +1903,14 @@ tr Oynatma çubuğunu (süre, hız, zaman çizelgesi) bir kontrol tuşundan sonr
 tr Video biçimi; o kodlayıcıya sahip ffmpeg gerekir, yoksa kareler PNG resmi olarak kaydedilir
 
 # Demos and video recording.
-@ No clip highlighted: while the demo plays, drag across the timeline or press I and O
-tr İşaretli klip yok: demo oynarken zaman çizelgesi üzerinde sürükleyin ya da I ve O'ya basın
+@ No clip highlighted: while the demo plays, drag across the timeline, or press I and O (LT and RT on a controller)
+tr İşaretli klip yok: demo oynarken zaman çizelgesi üzerinde sürükleyin ya da I ve O'ya basın (kumandada LT ve RT)
+
+@ Name of the video file; the extension follows the video format, and a file of the same name is replaced
+tr Video dosyasının adı; uzantı video biçimine göre belirlenir ve aynı adlı dosyanın yerine yazılır
+
+@ New name of the demo; if another demo has it, a number is added
+tr Demonun yeni adı; başka bir demo bu adı kullanıyorsa sonuna numara eklenir
 
 @ Video size; frames are scaled from the window size (bars keep the shape), so a larger size adds no detail
 tr Video boyutu; kareler pencere boyutundan ölçeklenir (biçimi korumak için kenar boşluklarıyla), bu yüzden daha büyük boyut ayrıntı eklemez
@@ -2736,6 +2751,36 @@ tr Boyut: {} KB
 @ Skip 10 s
 tr 10 sn atla
 
+@ Back 10 s
+tr 10 sn geri
+
+@ Length
+tr Süre
+
+@ Mark in
+tr Başlangıcı işaretle
+
+@ Mark out
+tr Bitişi işaretle
+
+@ Next level
+tr Sonraki bölüm
+
+@ No demos match the filter. Backspace or Esc clears it.
+tr Filtreye uyan demo yok. Geri tuşu veya Esc filtreyi temizler.
+
+@ Renaming an automatic demo moves it to the saved demos.
+tr Otomatik bir demoyu yeniden adlandırmak onu kayıtlı demolara taşır.
+
+@ Restart
+tr Baştan
+
+@ Sort
+tr Sırala
+
+@ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
+tr Demo oynarken: A duraklatır, yön tuşları sarar ve hızı değiştirir, LT ve RT bir klibi işaretler, X onu dışa aktarır.
+
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 tr Boşluk duraklat | Sol/Sağ sar | Yukarı/Aşağı hız | PgUp/PgDn 10 sn | I/O işaret | E dışa aktar
 
@@ -2766,9 +2811,6 @@ tr H gizle
 
 @ Hide
 tr Gizle
-
-@ Show
-tr Göster
 
 # Demos and video recording.
 @ Demo: {}
@@ -3314,6 +3356,12 @@ tr {} videoya aktarılıyor
 
 @ Kept demo {}
 tr Demo saklandı: {}
+
+@ Not a valid demo name.
+tr Geçersiz demo adı.
+
+@ Renamed demo to {}
+tr Demonun adı {} olarak değiştirildi
 
 @ No auto-demo to keep.
 tr Saklanacak otomatik demo yok.

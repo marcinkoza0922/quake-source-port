@@ -1432,6 +1432,15 @@ cy 720p
 @ Destination
 cy Cyrchfan
 
+@ File Name
+cy Enw'r ffeil
+
+@ Rename
+cy Ailenwi
+
+@ Rename Demo
+cy Ailenwi'r demo
+
 @ Export Highlighted Clip
 cy Allforio'r clip wedi'i amlygu
 
@@ -1894,8 +1903,14 @@ cy Mae'n dangos y bar chwarae (amser, cyflymder, llinell amser) ar ôl bysell re
 cy Fformat fideo; mae angen ffmpeg gyda'r amgodiwr hwnnw, fel arall caiff y fframiau eu cadw fel delweddau PNG
 
 # Demos and video recording.
-@ No clip highlighted: while the demo plays, drag across the timeline or press I and O
-cy Dim clip wedi'i amlygu: wrth i'r demo chwarae, llusgwch ar draws y llinell amser neu pwyswch I ac O
+@ No clip highlighted: while the demo plays, drag across the timeline, or press I and O (LT and RT on a controller)
+cy Dim clip wedi'i amlygu: wrth i'r demo chwarae, llusgwch ar draws y llinell amser neu pwyswch I ac O (LT ac RT ar y rheolydd)
+
+@ Name of the video file; the extension follows the video format, and a file of the same name is replaced
+cy Enw'r ffeil fideo; mae'r estyniad yn dilyn y fformat fideo, a chaiff ffeil â'r un enw ei disodli
+
+@ New name of the demo; if another demo has it, a number is added
+cy Enw newydd y demo; os oes gan demo arall yr enw'n barod, ychwanegir rhif
 
 @ Video size; frames are scaled from the window size (bars keep the shape), so a larger size adds no detail
 cy Maint y fideo; caiff fframiau eu graddio o faint y ffenestr (gyda barrau i gadw'r siâp), felly nid yw maint mwy'n ychwanegu manylion
@@ -2736,6 +2751,36 @@ cy Maint: {} KB
 @ Skip 10 s
 cy Neidio 10 e
 
+@ Back 10 s
+cy Yn ôl 10 e
+
+@ Length
+cy Hyd
+
+@ Mark in
+cy Marcio'r dechrau
+
+@ Mark out
+cy Marcio'r diwedd
+
+@ Next level
+cy Y lefel nesaf
+
+@ No demos match the filter. Backspace or Esc clears it.
+cy Does dim demo'n cyfateb i'r hidlydd. Mae Backspace neu Esc yn ei glirio.
+
+@ Renaming an automatic demo moves it to the saved demos.
+cy Mae ailenwi demo awtomatig yn ei symud i'r demos a gadwyd.
+
+@ Restart
+cy O'r dechrau
+
+@ Sort
+cy Trefnu
+
+@ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
+cy Wrth i demo chwarae: mae A yn oedi, mae'r pad cyfeiriad yn sgrolio ac yn newid y cyflymder, mae LT ac RT yn marcio clip ac mae X yn ei allforio.
+
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 cy Bwlch saib | Chwith/De sgrolio | I fyny/I lawr cyflymder | PgUp/PgDn 10 e | I/O marc | E allforio
 
@@ -2766,9 +2811,6 @@ cy H cuddio
 
 @ Hide
 cy Cuddio
-
-@ Show
-cy Dangos
 
 # Demos and video recording.
 @ Demo: {}
@@ -3314,6 +3356,12 @@ cy Yn allforio {} fel fideo
 
 @ Kept demo {}
 cy Cadwyd y demo: {}
+
+@ Not a valid demo name.
+cy Enw demo annilys.
+
+@ Renamed demo to {}
+cy Ailenwyd y demo yn {}
 
 @ No auto-demo to keep.
 cy Does dim demo awtomatig i'w gadw.

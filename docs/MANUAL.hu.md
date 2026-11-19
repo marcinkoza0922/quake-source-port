@@ -162,8 +162,10 @@ megjeleníteni, a teljes változat `<név>.qsd` néven megmarad
 A Főmenü → Demók a mentett demóidat mutatja, és ha a Beállítások → Demók →
 Demók automatikus felvétele be van kapcsolva, minden játszott pálya
 automatikus demóját is; a legrégebbiek lecserélődnek, ha a helyek beteltek.
-A K megtart egyet, az E videóba exportálja, a Del törli. A hibajelentések
-tartalmazzák az aktuális pálya automatikus demóját.
+Gépeléssel szűrheted a listákat, a Tab a rendezést váltja; a lista melletti
+gombok lejátsszák, exportálják, átnevezik, megtartják vagy törlik a
+kiválasztott demót, és az átnevezett automatikus demó megmarad. A
+hibajelentések tartalmazzák az aktuális pálya automatikus demóját.
 
 Demó közben a Szóköz szüneteltet, a Bal vagy Jobb nyomva tartása visszateker
 vagy előreteker, a Fel és Le a sebességet állítja, a PgUp és PgDn 10
@@ -175,6 +177,12 @@ exportálja. A vezérlők a képernyőn maradnak; a H vagy az Elrejtés elrejti
 végig rajta az egeret egy klip kijelöléséhez; az Exportálás megkérdezi a
 képkockasebességet, a méretet, a formátumot és a fájlt, és hogy a kijelölt
 klipet vagy az egész demót exportálja-e.
+
+Kontrolleren az A szüneteltet, a D-pad hátra- és előretekeri, és sebességet
+vált, az LB és RB 10 másodpercet ugrik, a karok lenyomása pedig az elejére
+és a következő pályára visz. Az LT és RT kijelöl egy klipet, a B törli, az X
+exportál, az Y megtart egy automatikus demót, a View pedig elrejti a
+vezérlőket.
 
 A `capture` játék közben elindítja és leállítja a videofelvételt. A
 képkockasebesség, a formátum és a minőség a Beállítások → Demók →

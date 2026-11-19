@@ -1432,6 +1432,15 @@ hr 720p
 @ Destination
 hr Odredište
 
+@ File Name
+hr Naziv datoteke
+
+@ Rename
+hr Preimenuj
+
+@ Rename Demo
+hr Preimenuj demo
+
 @ Export Highlighted Clip
 hr Izvezi označeni isječak
 
@@ -1894,8 +1903,14 @@ hr Prikazuje traku reprodukcije (vrijeme, brzina, vremenska crta) nakon kontroln
 hr Format videa; treba ffmpeg s tim koderom, inače se sličice spremaju kao PNG slike
 
 # Demos and video recording.
-@ No clip highlighted: while the demo plays, drag across the timeline or press I and O
-hr Nijedan isječak nije označen: tijekom dema povucite po vremenskoj crti ili pritisnite I i O
+@ No clip highlighted: while the demo plays, drag across the timeline, or press I and O (LT and RT on a controller)
+hr Nijedan isječak nije označen: tijekom dema povucite po vremenskoj crti ili pritisnite I i O (LT i RT na kontroleru)
+
+@ Name of the video file; the extension follows the video format, and a file of the same name is replaced
+hr Naziv video datoteke; nastavak slijedi video format, a datoteka istog naziva bit će zamijenjena
+
+@ New name of the demo; if another demo has it, a number is added
+hr Novi naziv dema; ako ga već ima drugi demo, dodaje se broj
 
 @ Video size; frames are scaled from the window size (bars keep the shape), so a larger size adds no detail
 hr Veličina videa; sličice se skaliraju iz veličine prozora (s trakama da se zadrži oblik), pa veća veličina ne dodaje detalje
@@ -2736,6 +2751,36 @@ hr Veličina: {} KB
 @ Skip 10 s
 hr Preskoči 10 s
 
+@ Back 10 s
+hr Natrag 10 s
+
+@ Length
+hr Trajanje
+
+@ Mark in
+hr Početak isječka
+
+@ Mark out
+hr Kraj isječka
+
+@ Next level
+hr Sljedeća razina
+
+@ No demos match the filter. Backspace or Esc clears it.
+hr Nijedan demo ne odgovara filtru. Backspace ili Esc ga briše.
+
+@ Renaming an automatic demo moves it to the saved demos.
+hr Preimenovanje automatskog dema premješta ga među spremljene demoe.
+
+@ Restart
+hr Ispočetka
+
+@ Sort
+hr Poredaj
+
+@ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
+hr Tijekom dema: A pauzira, križni gumb premotava i mijenja brzinu, LT i RT označavaju isječak, a X ga izvozi.
+
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 hr Razmaknica pauza | Lijevo/Desno premotavanje | Gore/Dolje brzina | PgUp/PgDn 10 s | I/O oznaka | E izvoz
 
@@ -2766,9 +2811,6 @@ hr H sakrij
 
 @ Hide
 hr Sakrij
-
-@ Show
-hr Prikaži
 
 # Demos and video recording.
 @ Demo: {}
@@ -3314,6 +3356,12 @@ hr Izvoz {} u video
 
 @ Kept demo {}
 hr Demo zadržan: {}
+
+@ Not a valid demo name.
+hr Neispravan naziv dema.
+
+@ Renamed demo to {}
+hr Demo preimenovan u {}
 
 @ No auto-demo to keep.
 hr Nema auto-dema za zadržavanje.

@@ -1432,6 +1432,15 @@ el 720p
 @ Destination
 el Προορισμός
 
+@ File Name
+el Όνομα αρχείου
+
+@ Rename
+el Μετονομασία
+
+@ Rename Demo
+el Μετονομασία demo
+
 @ Export Highlighted Clip
 el Εξαγωγή επισημασμένου αποσπάσματος
 
@@ -1894,8 +1903,14 @@ el Δείχνει τη μπάρα αναπαραγωγής (χρόνος, ταχ
 el Μορφή βίντεο· χρειάζεται ffmpeg με αυτόν τον κωδικοποιητή, αλλιώς τα καρέ αποθηκεύονται ως εικόνες PNG
 
 # Demos and video recording.
-@ No clip highlighted: while the demo plays, drag across the timeline or press I and O
-el Κανένα επισημασμένο απόσπασμα: κατά το demo σύρετε πάνω στο χρονολόγιο ή πατήστε I και O
+@ No clip highlighted: while the demo plays, drag across the timeline, or press I and O (LT and RT on a controller)
+el Κανένα επισημασμένο απόσπασμα: κατά το demo σύρετε πάνω στο χρονολόγιο ή πατήστε I και O (LT και RT στο χειριστήριο)
+
+@ Name of the video file; the extension follows the video format, and a file of the same name is replaced
+el Όνομα του αρχείου βίντεο· η επέκταση ακολουθεί τη μορφή βίντεο και ένα αρχείο με το ίδιο όνομα αντικαθίσταται
+
+@ New name of the demo; if another demo has it, a number is added
+el Νέο όνομα του demo· αν το έχει ήδη άλλο demo, προστίθεται ένας αριθμός
 
 @ Video size; frames are scaled from the window size (bars keep the shape), so a larger size adds no detail
 el Μέγεθος βίντεο· τα καρέ κλιμακώνονται από το μέγεθος του παραθύρου (με λωρίδες για να μείνει το σχήμα), οπότε μεγαλύτερο μέγεθος δεν προσθέτει λεπτομέρεια
@@ -2736,6 +2751,36 @@ el Μέγεθος: {} KB
 @ Skip 10 s
 el Παράλειψη 10 δ
 
+@ Back 10 s
+el Πίσω 10 δ
+
+@ Length
+el Διάρκεια
+
+@ Mark in
+el Σημείο αρχής
+
+@ Mark out
+el Σημείο τέλους
+
+@ Next level
+el Επόμενη πίστα
+
+@ No demos match the filter. Backspace or Esc clears it.
+el Κανένα demo δεν ταιριάζει στο φίλτρο. Το Backspace ή το Esc το καθαρίζει.
+
+@ Renaming an automatic demo moves it to the saved demos.
+el Η μετονομασία ενός αυτόματου demo το μεταφέρει στα αποθηκευμένα.
+
+@ Restart
+el Από την αρχή
+
+@ Sort
+el Ταξινόμηση
+
+@ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
+el Κατά την αναπαραγωγή demo: το A κάνει παύση, το d-pad κυλά και αλλάζει ταχύτητα, τα LT και RT σημειώνουν ένα απόσπασμα και το X το εξάγει.
+
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 el Διάστημα παύση | Αριστερά/Δεξιά κύλιση | Πάνω/Κάτω ταχύτητα | PgUp/PgDn 10 δ | I/O σημάδι | E εξαγωγή
 
@@ -2766,9 +2811,6 @@ el H απόκρυψη
 
 @ Hide
 el Απόκρυψη
-
-@ Show
-el Εμφάνιση
 
 # Demos and video recording.
 @ Demo: {}
@@ -3314,6 +3356,12 @@ el Εξαγωγή του {} σε βίντεο
 
 @ Kept demo {}
 el Το demo κρατήθηκε: {}
+
+@ Not a valid demo name.
+el Μη έγκυρο όνομα demo.
+
+@ Renamed demo to {}
+el Το demo μετονομάστηκε σε {}
 
 @ No auto-demo to keep.
 el Δεν υπάρχει αυτόματο demo για κράτηση.

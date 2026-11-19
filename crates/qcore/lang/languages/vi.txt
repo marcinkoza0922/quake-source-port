@@ -1432,6 +1432,15 @@ vi 720p
 @ Destination
 vi Nơi lưu
 
+@ File Name
+vi Tên tệp
+
+@ Rename
+vi Đổi tên
+
+@ Rename Demo
+vi Đổi tên demo
+
 @ Export Highlighted Clip
 vi Xuất đoạn đã đánh dấu
 
@@ -1894,8 +1903,14 @@ vi Hiện thanh phát (thời gian, tốc độ, dòng thời gian) sau một ph
 vi Định dạng video; cần ffmpeg có bộ mã hóa đó, nếu không khung hình được lưu thành ảnh PNG
 
 # Demos and video recording.
-@ No clip highlighted: while the demo plays, drag across the timeline or press I and O
-vi Chưa đánh dấu đoạn nào: khi demo đang phát, kéo trên dòng thời gian hoặc nhấn I và O
+@ No clip highlighted: while the demo plays, drag across the timeline, or press I and O (LT and RT on a controller)
+vi Chưa đánh dấu đoạn nào: khi demo đang phát, kéo trên dòng thời gian hoặc nhấn I và O (LT và RT trên tay cầm)
+
+@ Name of the video file; the extension follows the video format, and a file of the same name is replaced
+vi Tên tệp video; phần mở rộng theo định dạng video, và tệp cùng tên sẽ bị thay thế
+
+@ New name of the demo; if another demo has it, a number is added
+vi Tên mới của demo; nếu demo khác đã dùng tên này, một số sẽ được thêm vào
 
 @ Video size; frames are scaled from the window size (bars keep the shape), so a larger size adds no detail
 vi Kích thước video; khung hình được co giãn từ kích thước cửa sổ (có viền để giữ tỉ lệ), nên kích thước lớn hơn không thêm chi tiết
@@ -2736,6 +2751,36 @@ vi Kích thước: {} KB
 @ Skip 10 s
 vi Bỏ qua 10 giây
 
+@ Back 10 s
+vi Lùi 10 giây
+
+@ Length
+vi Độ dài
+
+@ Mark in
+vi Đánh dấu đầu
+
+@ Mark out
+vi Đánh dấu cuối
+
+@ Next level
+vi Màn tiếp theo
+
+@ No demos match the filter. Backspace or Esc clears it.
+vi Không có demo nào khớp bộ lọc. Backspace hoặc Esc sẽ xóa nó.
+
+@ Renaming an automatic demo moves it to the saved demos.
+vi Đổi tên demo tự động sẽ chuyển nó sang các demo đã lưu.
+
+@ Restart
+vi Từ đầu
+
+@ Sort
+vi Sắp xếp
+
+@ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
+vi Khi đang phát demo: A tạm dừng, d-pad tua và đổi tốc độ, LT và RT đánh dấu đoạn cắt và X xuất nó.
+
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 vi Space tạm dừng | Trái/Phải tua | Lên/Xuống tốc độ | PgUp/PgDn 10 giây | I/O đánh dấu | E xuất
 
@@ -2766,9 +2811,6 @@ vi H ẩn
 
 @ Hide
 vi Ẩn
-
-@ Show
-vi Hiện
 
 # Demos and video recording.
 @ Demo: {}
@@ -3314,6 +3356,12 @@ vi Đang xuất {} thành video
 
 @ Kept demo {}
 vi Đã giữ demo: {}
+
+@ Not a valid demo name.
+vi Tên demo không hợp lệ.
+
+@ Renamed demo to {}
+vi Đã đổi tên demo thành {}
 
 @ No auto-demo to keep.
 vi Không có demo tự động nào để giữ.

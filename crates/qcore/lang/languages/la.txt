@@ -1432,6 +1432,15 @@ la 720p
 @ Destination
 la Destinatio
 
+@ File Name
+la Nomen fasciculi
+
+@ Rename
+la Renomina
+
+@ Rename Demo
+la Renomina demonstrationem
+
 @ Export Highlighted Clip
 la Fragmentum notatum exportare
 
@@ -1894,8 +1903,14 @@ la Taeniam ludendi (tempus, celeritatem, temporis lineam) post clavem moderandi,
 la Forma pelliculae; ffmpeg cum illo codificatore requirit, aliter imagines ut picturae PNG servantur
 
 # Demos and video recording.
-@ No clip highlighted: while the demo plays, drag across the timeline or press I and O
-la Nullum fragmentum notatum: dum demonstratio luditur, per temporis lineam trahe aut I et O preme
+@ No clip highlighted: while the demo plays, drag across the timeline, or press I and O (LT and RT on a controller)
+la Nullum fragmentum notatum: dum demonstratio luditur, per temporis lineam trahe aut I et O preme (LT et RT in moderatore)
+
+@ Name of the video file; the extension follows the video format, and a file of the same name is replaced
+la Nomen fasciculi pelliculae; extensio formam pelliculae sequitur, et fasciculus eiusdem nominis substituitur
+
+@ New name of the demo; if another demo has it, a number is added
+la Novum nomen demonstrationis; si alia demonstratio iam id habet, numerus additur
 
 @ Video size; frames are scaled from the window size (bars keep the shape), so a larger size adds no detail
 la Magnitudo pelliculae; imagines ex magnitudine fenestrae mutantur (cum fasciis ut forma servetur), itaque maior magnitudo nihil subtilitatis addit
@@ -2736,6 +2751,36 @@ la Magnitudo: {} KB
 @ Skip 10 s
 la Transili 10 s
 
+@ Back 10 s
+la Retro 10 s
+
+@ Length
+la Longitudo
+
+@ Mark in
+la Initium nota
+
+@ Mark out
+la Finem nota
+
+@ Next level
+la Gradus proximus
+
+@ No demos match the filter. Backspace or Esc clears it.
+la Nulla demonstratio colatorio congruit. Backspace aut Esc id purgat.
+
+@ Renaming an automatic demo moves it to the saved demos.
+la Demonstratio automatica renominata ad servatas transfertur.
+
+@ Restart
+la Ab initio
+
+@ Sort
+la Ordina
+
+@ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
+la Dum demonstratio luditur: A pausam facit, crux directionis volvit et celeritatem mutat, LT et RT fragmentum notant, et X id exportat.
+
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 la Spatium pausa | Sinistra/Dextra volve | Sursum/Deorsum celeritas | PgUp/PgDn 10 s | I/O nota | E exporta
 
@@ -2766,9 +2811,6 @@ la H cela
 
 @ Hide
 la Cela
-
-@ Show
-la Ostende
 
 # Demos and video recording.
 @ Demo: {}
@@ -3314,6 +3356,12 @@ la {} in pelliculam exportatur
 
 @ Kept demo {}
 la Demonstratio servata: {}
+
+@ Not a valid demo name.
+la Nomen demonstrationis non validum.
+
+@ Renamed demo to {}
+la Demonstratio renominata est {}
 
 @ No auto-demo to keep.
 la Nulla demonstratio automatica servanda.

@@ -1432,6 +1432,15 @@ mr 720p
 @ Destination
 mr गंतव्य
 
+@ File Name
+mr फाइलचे नाव
+
+@ Rename
+mr नाव बदला
+
+@ Rename Demo
+mr डेमोचे नाव बदला
+
 @ Export Highlighted Clip
 mr खूण केलेली क्लिप निर्यात करा
 
@@ -1894,8 +1903,14 @@ mr प्लेबॅक पट्टी (वेळ, गती, टाइमल�
 mr व्हिडिओ स्वरूप; त्या एन्कोडरसह ffmpeg लागते, नाहीतर फ्रेम PNG चित्रे म्हणून जतन होतात
 
 # Demos and video recording.
-@ No clip highlighted: while the demo plays, drag across the timeline or press I and O
-mr कोणतीही क्लिप खूण केलेली नाही: डेमो चालू असताना टाइमलाइनवर ओढा किंवा I आणि O दाबा
+@ No clip highlighted: while the demo plays, drag across the timeline, or press I and O (LT and RT on a controller)
+mr कोणतीही क्लिप खूण केलेली नाही: डेमो चालू असताना टाइमलाइनवर ओढा किंवा I आणि O दाबा (कंट्रोलरवर LT आणि RT)
+
+@ Name of the video file; the extension follows the video format, and a file of the same name is replaced
+mr व्हिडिओ फाइलचे नाव; एक्स्टेंशन व्हिडिओ स्वरूपानुसार ठरते आणि त्याच नावाची फाइल बदलली जाते
+
+@ New name of the demo; if another demo has it, a number is added
+mr डेमोचे नवीन नाव; दुसऱ्या डेमोचे हेच नाव असल्यास एक क्रमांक जोडला जातो
 
 @ Video size; frames are scaled from the window size (bars keep the shape), so a larger size adds no detail
 mr व्हिडिओचा आकार; फ्रेम विंडोच्या आकारावरून मोठ्या केल्या जातात (आकार टिकवण्यासाठी पट्ट्यांसह), त्यामुळे मोठा आकार तपशील वाढवत नाही
@@ -2736,6 +2751,36 @@ mr आकार: {} KB
 @ Skip 10 s
 mr 10 से. वगळा
 
+@ Back 10 s
+mr 10 से. मागे
+
+@ Length
+mr कालावधी
+
+@ Mark in
+mr सुरुवात खूण करा
+
+@ Mark out
+mr शेवट खूण करा
+
+@ Next level
+mr पुढील लेव्हल
+
+@ No demos match the filter. Backspace or Esc clears it.
+mr फिल्टरशी कोणताही डेमो जुळत नाही. Backspace किंवा Esc तो साफ करते.
+
+@ Renaming an automatic demo moves it to the saved demos.
+mr स्वयंचलित डेमोचे नाव बदलल्यास तो जतन केलेल्या डेमोमध्ये जातो.
+
+@ Restart
+mr सुरुवातीपासून
+
+@ Sort
+mr क्रम
+
+@ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
+mr डेमो चालू असताना: A थांबवते, डी-पॅड सरकवते आणि गती बदलते, LT आणि RT क्लिपची खूण करतात आणि X ती निर्यात करते.
+
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 mr Space थांबवा | डावे/उजवे सरकवा | वर/खाली गती | PgUp/PgDn 10 से. | I/O खूण | E निर्यात
 
@@ -2766,9 +2811,6 @@ mr H लपवा
 
 @ Hide
 mr लपवा
-
-@ Show
-mr दाखवा
 
 # Demos and video recording.
 @ Demo: {}
@@ -3314,6 +3356,12 @@ mr {} व्हिडिओमध्ये निर्यात होत आ�
 
 @ Kept demo {}
 mr डेमो ठेवला: {}
+
+@ Not a valid demo name.
+mr डेमोचे नाव वैध नाही.
+
+@ Renamed demo to {}
+mr डेमोचे नाव बदलून {} केले
 
 @ No auto-demo to keep.
 mr ठेवण्यासाठी स्वयं-डेमो नाही.

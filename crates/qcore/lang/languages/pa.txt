@@ -1432,6 +1432,15 @@ pa 720p
 @ Destination
 pa ਮੰਜ਼ਿਲ
 
+@ File Name
+pa ਫ਼ਾਈਲ ਦਾ ਨਾਮ
+
+@ Rename
+pa ਨਾਮ ਬਦਲੋ
+
+@ Rename Demo
+pa ਡੈਮੋ ਦਾ ਨਾਮ ਬਦਲੋ
+
 @ Export Highlighted Clip
 pa ਨਿਸ਼ਾਨਬੱਧ ਕਲਿੱਪ ਨਿਰਯਾਤ ਕਰੋ
 
@@ -1894,8 +1903,14 @@ pa ਪਲੇਬੈਕ ਪੱਟੀ (ਸਮਾਂ, ਗਤੀ, ਟਾਈਮਲਾ�
 pa ਵੀਡੀਓ ਫਾਰਮੈਟ; ਉਸ ਐਨਕੋਡਰ ਵਾਲਾ ffmpeg ਚਾਹੀਦਾ ਹੈ, ਨਹੀਂ ਤਾਂ ਫ੍ਰੇਮ PNG ਤਸਵੀਰਾਂ ਵਜੋਂ ਸੰਭਾਲੇ ਜਾਂਦੇ ਹਨ
 
 # Demos and video recording.
-@ No clip highlighted: while the demo plays, drag across the timeline or press I and O
-pa ਕੋਈ ਕਲਿੱਪ ਨਿਸ਼ਾਨਬੱਧ ਨਹੀਂ: ਡੈਮੋ ਚੱਲਦੇ ਸਮੇਂ ਟਾਈਮਲਾਈਨ 'ਤੇ ਖਿੱਚੋ ਜਾਂ I ਅਤੇ O ਦਬਾਓ
+@ No clip highlighted: while the demo plays, drag across the timeline, or press I and O (LT and RT on a controller)
+pa ਕੋਈ ਕਲਿੱਪ ਨਿਸ਼ਾਨਬੱਧ ਨਹੀਂ: ਡੈਮੋ ਚੱਲਦੇ ਸਮੇਂ ਟਾਈਮਲਾਈਨ 'ਤੇ ਖਿੱਚੋ ਜਾਂ I ਅਤੇ O ਦਬਾਓ (ਕੰਟਰੋਲਰ ਉੱਤੇ LT ਅਤੇ RT)
+
+@ Name of the video file; the extension follows the video format, and a file of the same name is replaced
+pa ਵੀਡੀਓ ਫ਼ਾਈਲ ਦਾ ਨਾਮ; ਐਕਸਟੈਂਸ਼ਨ ਵੀਡੀਓ ਫ਼ਾਰਮੈਟ ਮੁਤਾਬਕ ਹੁੰਦੀ ਹੈ, ਅਤੇ ਉਸੇ ਨਾਮ ਵਾਲੀ ਫ਼ਾਈਲ ਬਦਲ ਦਿੱਤੀ ਜਾਂਦੀ ਹੈ
+
+@ New name of the demo; if another demo has it, a number is added
+pa ਡੈਮੋ ਦਾ ਨਵਾਂ ਨਾਮ; ਜੇ ਕਿਸੇ ਹੋਰ ਡੈਮੋ ਦਾ ਇਹੀ ਨਾਮ ਹੈ ਤਾਂ ਇੱਕ ਨੰਬਰ ਜੋੜਿਆ ਜਾਂਦਾ ਹੈ
 
 @ Video size; frames are scaled from the window size (bars keep the shape), so a larger size adds no detail
 pa ਵੀਡੀਓ ਦਾ ਆਕਾਰ; ਫ੍ਰੇਮ ਵਿੰਡੋ ਦੇ ਆਕਾਰ ਤੋਂ ਵੱਡੇ ਕੀਤੇ ਜਾਂਦੇ ਹਨ (ਸ਼ਕਲ ਬਣਾਈ ਰੱਖਣ ਲਈ ਪੱਟੀਆਂ ਨਾਲ), ਇਸ ਲਈ ਵੱਡਾ ਆਕਾਰ ਵੇਰਵਾ ਨਹੀਂ ਵਧਾਉਂਦਾ
@@ -2736,6 +2751,36 @@ pa ਆਕਾਰ: {} KB
 @ Skip 10 s
 pa 10 ਸਕਿੰ. ਛੱਡੋ
 
+@ Back 10 s
+pa 10 ਸਕਿੰ. ਪਿੱਛੇ
+
+@ Length
+pa ਲੰਬਾਈ
+
+@ Mark in
+pa ਸ਼ੁਰੂਆਤ ਨਿਸ਼ਾਨਬੱਧ ਕਰੋ
+
+@ Mark out
+pa ਅੰਤ ਨਿਸ਼ਾਨਬੱਧ ਕਰੋ
+
+@ Next level
+pa ਅਗਲਾ ਲੈਵਲ
+
+@ No demos match the filter. Backspace or Esc clears it.
+pa ਫਿਲਟਰ ਨਾਲ ਕੋਈ ਡੈਮੋ ਮੇਲ ਨਹੀਂ ਖਾਂਦਾ। Backspace ਜਾਂ Esc ਇਸਨੂੰ ਸਾਫ਼ ਕਰਦਾ ਹੈ।
+
+@ Renaming an automatic demo moves it to the saved demos.
+pa ਆਪਣੇ-ਆਪ ਬਣੇ ਡੈਮੋ ਦਾ ਨਾਮ ਬਦਲਣ ਨਾਲ ਉਹ ਸੰਭਾਲੇ ਡੈਮੋ ਵਿੱਚ ਚਲਾ ਜਾਂਦਾ ਹੈ।
+
+@ Restart
+pa ਸ਼ੁਰੂ ਤੋਂ
+
+@ Sort
+pa ਕ੍ਰਮ
+
+@ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
+pa ਡੈਮੋ ਚੱਲਦੇ ਸਮੇਂ: A ਰੋਕਦਾ ਹੈ, ਡੀ-ਪੈਡ ਸਰਕਾਉਂਦਾ ਅਤੇ ਗਤੀ ਬਦਲਦਾ ਹੈ, LT ਅਤੇ RT ਕਲਿੱਪ ਨਿਸ਼ਾਨਬੱਧ ਕਰਦੇ ਹਨ ਅਤੇ X ਉਸਨੂੰ ਨਿਰਯਾਤ ਕਰਦਾ ਹੈ।
+
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 pa Space ਰੋਕੋ | ਖੱਬੇ/ਸੱਜੇ ਸਰਕਾਓ | ਉੱਪਰ/ਹੇਠਾਂ ਗਤੀ | PgUp/PgDn 10 ਸਕਿੰ. | I/O ਨਿਸ਼ਾਨ | E ਨਿਰਯਾਤ
 
@@ -2766,9 +2811,6 @@ pa H ਲੁਕਾਓ
 
 @ Hide
 pa ਲੁਕਾਓ
-
-@ Show
-pa ਦਿਖਾਓ
 
 # Demos and video recording.
 @ Demo: {}
@@ -3314,6 +3356,12 @@ pa {} ਨੂੰ ਵੀਡੀਓ ਵਿੱਚ ਨਿਰਯਾਤ ਕੀਤਾ ਜ
 
 @ Kept demo {}
 pa ਡੈਮੋ ਰੱਖਿਆ ਗਿਆ: {}
+
+@ Not a valid demo name.
+pa ਡੈਮੋ ਦਾ ਨਾਮ ਠੀਕ ਨਹੀਂ ਹੈ।
+
+@ Renamed demo to {}
+pa ਡੈਮੋ ਦਾ ਨਾਮ ਬਦਲ ਕੇ {} ਕੀਤਾ ਗਿਆ
 
 @ No auto-demo to keep.
 pa ਰੱਖਣ ਲਈ ਕੋਈ ਆਟੋ-ਡੈਮੋ ਨਹੀਂ।

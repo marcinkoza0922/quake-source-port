@@ -161,9 +161,11 @@ mai veche.
 
 Meniu principal → Demo-uri arată demo-urile salvate și, cu Opțiuni →
 Demo-uri → Înregistrare automată demo activat, un demo automat al fiecărui
-nivel jucat; cele mai vechi sunt înlocuite când locurile sunt pline. K
-păstrează unul, E îl exportă ca video, iar Del îl șterge. Rapoartele de
-erori includ demo-ul automat al nivelului curent.
+nivel jucat; cele mai vechi sunt înlocuite când locurile sunt pline.
+Tastați pentru a filtra listele și apăsați Tab pentru a schimba sortarea;
+butoanele de lângă listă redau, exportă, redenumesc, păstrează sau șterg
+demo-ul ales, iar redenumirea unui demo automat îl păstrează. Rapoartele
+de erori includ demo-ul automat al nivelului curent.
 
 În timpul unui demo, Spațiu pune pauză, ținând Stânga sau Dreapta derulezi
 înapoi sau înainte, Sus și Jos schimbă viteza, PgUp și PgDn sar 10 secunde,
@@ -174,6 +176,11 @@ bandă care le aduce înapoi. Apasă butoanele, dă clic pe cronologie ca să
 sari acolo sau trage peste ea ca să evidențiezi un clip; Exportă întreabă
 cadrele pe secundă, dimensiunea, formatul și fișierul și dacă exporți clipul
 evidențiat sau tot demo-ul.
+
+Pe controler, A pune pauză, d-pad-ul derulează înapoi și înainte și schimbă
+viteza, LB și RB sar 10 secunde, iar butoanele stick-urilor merg la început
+și la harta următoare. LT și RT marchează un clip, B îl șterge, X exportă, Y
+păstrează un demo automat, iar View ascunde comenzile.
 
 `capture` pornește și oprește înregistrarea unui video în timp ce joci.
 Cadrele pe secundă, formatul și calitatea sunt în Opțiuni → Demo-uri →

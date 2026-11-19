@@ -1432,6 +1432,15 @@ ta 720p
 @ Destination
 ta சேருமிடம்
 
+@ File Name
+ta கோப்பின் பெயர்
+
+@ Rename
+ta பெயர் மாற்று
+
+@ Rename Demo
+ta டெமோவின் பெயரை மாற்று
+
 @ Export Highlighted Clip
 ta குறித்த கிளிப்பை ஏற்றுமதி செய்
 
@@ -1894,8 +1903,14 @@ ta இயக்கப் பட்டையை (நேரம், வேகம்
 ta வீடியோ வடிவம்; அந்த குறியாக்கியுடன் ffmpeg தேவை, இல்லையெனில் சட்டகங்கள் PNG படங்களாகச் சேமிக்கப்படும்
 
 # Demos and video recording.
-@ No clip highlighted: while the demo plays, drag across the timeline or press I and O
-ta கிளிப் எதுவும் குறிக்கப்படவில்லை: டெமோ இயங்கும்போது காலவரிசையின் மேல் இழுக்கவும் அல்லது I, O அழுத்தவும்
+@ No clip highlighted: while the demo plays, drag across the timeline, or press I and O (LT and RT on a controller)
+ta கிளிப் எதுவும் குறிக்கப்படவில்லை: டெமோ இயங்கும்போது காலவரிசையின் மேல் இழுக்கவும் அல்லது I, O அழுத்தவும் (கண்ட்ரோலரில் LT மற்றும் RT)
+
+@ Name of the video file; the extension follows the video format, and a file of the same name is replaced
+ta வீடியோ கோப்பின் பெயர்; நீட்டிப்பு வீடியோ வடிவத்தைப் பின்பற்றும், அதே பெயருள்ள கோப்பு மாற்றப்படும்
+
+@ New name of the demo; if another demo has it, a number is added
+ta டெமோவின் புதிய பெயர்; வேறு டெமோவுக்கு அந்தப் பெயர் இருந்தால் ஒரு எண் சேர்க்கப்படும்
 
 @ Video size; frames are scaled from the window size (bars keep the shape), so a larger size adds no detail
 ta வீடியோ அளவு; சட்டகங்கள் சாளர அளவிலிருந்து அளவிடப்படும் (வடிவம் காக்க பட்டைகளுடன்), எனவே பெரிய அளவு விவரத்தைச் சேர்க்காது
@@ -2736,6 +2751,36 @@ ta அளவு: {} KB
 @ Skip 10 s
 ta 10 வி. தவிர்
 
+@ Back 10 s
+ta 10 வி. பின்
+
+@ Length
+ta நீளம்
+
+@ Mark in
+ta தொடக்கத்தைக் குறி
+
+@ Mark out
+ta முடிவைக் குறி
+
+@ Next level
+ta அடுத்த நிலை
+
+@ No demos match the filter. Backspace or Esc clears it.
+ta வடிகட்டியுடன் எந்த டெமோவும் பொருந்தவில்லை. Backspace அல்லது Esc அதை அழிக்கும்.
+
+@ Renaming an automatic demo moves it to the saved demos.
+ta தானியங்கி டெமோவின் பெயரை மாற்றினால் அது சேமித்த டெமோக்களுக்கு நகரும்.
+
+@ Restart
+ta தொடக்கத்திலிருந்து
+
+@ Sort
+ta வரிசைப்படுத்து
+
+@ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
+ta டெமோ இயங்கும்போது: A இடைநிறுத்தும், டி-பேட் நகர்த்தி வேகத்தை மாற்றும், LT மற்றும் RT ஒரு கிளிப்பைக் குறிக்கும், X அதை ஏற்றுமதி செய்யும்.
+
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 ta Space இடைநிறுத்து | இடது/வலது நகர்த்து | மேல்/கீழ் வேகம் | PgUp/PgDn 10 வி. | I/O குறி | E ஏற்றுமதி
 
@@ -2766,9 +2811,6 @@ ta H மறை
 
 @ Hide
 ta மறை
-
-@ Show
-ta காட்டு
 
 # Demos and video recording.
 @ Demo: {}
@@ -3314,6 +3356,12 @@ ta {} வீடியோவாக ஏற்றுமதியாகிறது
 
 @ Kept demo {}
 ta டெமோ வைக்கப்பட்டது: {}
+
+@ Not a valid demo name.
+ta டெமோ பெயர் செல்லாது.
+
+@ Renamed demo to {}
+ta டெமோவின் பெயர் {} என மாற்றப்பட்டது
 
 @ No auto-demo to keep.
 ta வைக்க தானியங்கி டெமோ இல்லை.

@@ -1432,6 +1432,15 @@ zh-CN 720p
 @ Destination
 zh-CN 保存位置
 
+@ File Name
+zh-CN 文件名
+
+@ Rename
+zh-CN 重命名
+
+@ Rename Demo
+zh-CN 重命名演示
+
 @ Export Highlighted Clip
 zh-CN 导出高亮片段
 
@@ -1894,8 +1903,14 @@ zh-CN 在按下控制键后、始终或从不显示播放栏（时间、速度�
 zh-CN 视频格式；需要带该编码器的 ffmpeg，否则帧会保存为 PNG 图片
 
 # Demos and video recording.
-@ No clip highlighted: while the demo plays, drag across the timeline or press I and O
-zh-CN 没有高亮片段：播放演示时在时间轴上拖动，或按 I 和 O
+@ No clip highlighted: while the demo plays, drag across the timeline, or press I and O (LT and RT on a controller)
+zh-CN 没有高亮片段：播放演示时在时间轴上拖动，或按 I 和 O（手柄上为 LT 和 RT）
+
+@ Name of the video file; the extension follows the video format, and a file of the same name is replaced
+zh-CN 视频文件名；扩展名随视频格式而定，同名文件会被替换
+
+@ New name of the demo; if another demo has it, a number is added
+zh-CN 演示的新名称；若已有其他演示使用该名称，会加上编号
 
 @ Video size; frames are scaled from the window size (bars keep the shape), so a larger size adds no detail
 zh-CN 视频尺寸；帧由窗口尺寸缩放而来（加黑边保持比例），所以更大的尺寸不会增加细节
@@ -2736,6 +2751,36 @@ zh-CN 大小：{} KB
 @ Skip 10 s
 zh-CN 跳过 10 秒
 
+@ Back 10 s
+zh-CN 后退 10 秒
+
+@ Length
+zh-CN 时长
+
+@ Mark in
+zh-CN 标记起点
+
+@ Mark out
+zh-CN 标记终点
+
+@ Next level
+zh-CN 下一关
+
+@ No demos match the filter. Backspace or Esc clears it.
+zh-CN 没有符合筛选的演示。Backspace 或 Esc 清除筛选。
+
+@ Renaming an automatic demo moves it to the saved demos.
+zh-CN 重命名自动演示会将其移到已保存的演示中。
+
+@ Restart
+zh-CN 从头开始
+
+@ Sort
+zh-CN 排序
+
+@ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
+zh-CN 播放演示时：A 暂停，方向键拖动和改变速度，LT 和 RT 标记片段，X 导出该片段。
+
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 zh-CN Space 暂停 | ←/→ 拖动 | ↑/↓ 速度 | PgUp/PgDn 10 秒 | I/O 标记 | E 导出
 
@@ -2766,9 +2811,6 @@ zh-CN H 隐藏
 
 @ Hide
 zh-CN 隐藏
-
-@ Show
-zh-CN 显示
 
 # Demos and video recording.
 @ Demo: {}
@@ -3314,6 +3356,12 @@ zh-CN 正在将 {} 导出为视频
 
 @ Kept demo {}
 zh-CN 已保留演示：{}
+
+@ Not a valid demo name.
+zh-CN 演示名称无效。
+
+@ Renamed demo to {}
+zh-CN 演示已重命名为 {}
 
 @ No auto-demo to keep.
 zh-CN 没有可保留的自动演示。

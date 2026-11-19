@@ -154,8 +154,10 @@ fullständiga versionen som `<namn>.qsd` (`playdemo <namn>.qsd`).
 
 Huvudmeny → Demor visar dina sparade demor och, med Alternativ → Demor →
 Spela in demor automatiskt påslaget, en automatisk demo av varje bana du
-spelar; de äldsta ersätts när platserna är fulla. K behåller en, E
-exporterar den som video och Del tar bort den. Felrapporter innehåller den
+spelar; de äldsta ersätts när platserna är fulla. Skriv för att filtrera
+listorna och tryck Tab för att byta sortering; knapparna bredvid listan
+spelar, exporterar, byter namn på, behåller eller tar bort vald demo, och
+en automatisk demo som byter namn behålls. Felrapporter innehåller den
 aktuella banans automatiska demo.
 
 Under en demo pausar Mellanslag, att hålla Vänster eller Höger spolar bakåt
@@ -167,6 +169,11 @@ att peka på nederkanten visar en remsa som tar tillbaka dem. Klicka på
 knapparna, klicka på tidslinjen för att hoppa dit, eller dra över den för
 att markera ett klipp; Exportera frågar efter bildfrekvens, storlek, format
 och fil, och om det markerade klippet eller hela demon ska exporteras.
+
+På en handkontroll pausar A, styrkorset spolar bakåt och framåt och ändrar
+hastigheten, LB och RB hoppar 10 sekunder och spakknapparna går till början
+och till nästa karta. LT och RT markerar ett klipp, B rensar det, X
+exporterar, Y behåller en automatisk demo och View döljer kontrollerna.
 
 `capture` startar och stoppar en videoinspelning medan du spelar.
 Bildfrekvens, format och kvalitet finns under Alternativ → Demor →

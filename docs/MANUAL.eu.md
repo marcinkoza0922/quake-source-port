@@ -172,8 +172,11 @@ demo zaharrago bat bihurtzen du.
 Menu nagusia → Demoak atalak gordetako demoak erakusten ditu eta, Aukerak →
 Demoak → Grabatu demoak automatikoki aktibatuta badago, jokatzen duzun maila
 bakoitzaren demo automatikoa ere bai; zaharrenak ordezten dira tokiak beteta
-daudenean. K-k bat gordetzen du, E-k bideora esportatzen du eta Del-ek
-ezabatzen du. Akats-txostenek uneko mailaren demo automatikoa dute.
+daudenean. Idatzi zerrendak iragazteko eta sakatu Tab ordena aldatzeko;
+zerrendaren ondoko botoiek hautatutako demoa erreproduzitu, esportatu,
+izenez aldatu, gorde edo ezabatzen dute, eta demo automatiko baten izena
+aldatzean gorde egiten da. Akats-txostenek uneko mailaren demo automatikoa
+dute.
 
 Demo bat erreproduzitzean, Zuriuneak pausatzen du, Ezkerra edo Eskuina
 sakatuta edukitzeak atzera edo aurrera eramaten du, Gora eta Behera abiadura
@@ -186,6 +189,12 @@ botoietan, egin klik denbora-lerroan hara jauzi egiteko, edo arrastatu haren
 gainean klip bat nabarmentzeko; Esportatu aukerak fotograma-abiadura,
 tamaina, formatua eta fitxategia galdetzen ditu, baita nabarmendutako klipa
 ala demo osoa esportatu ere.
+
+Kontrolagailuan, A-k pausatzen du, d-pad-ak atzera eta aurrera egiten du eta
+abiadura aldatzen du, LB eta RB-k 10 segundo jauzi egiten dute, eta makilen
+botoiek hasierara eta hurrengo mapara eramaten dute. LT eta RT-k klip bat
+markatzen dute, B-k garbitzen du, X-k esportatzen du, Y-k demo automatiko
+bat gordetzen du eta View-k kontrolak ezkutatzen ditu.
 
 `capture`-k jokatzen ari zaren bitartean bideo-grabazioa hasi eta gelditzen
 du. Fotograma-abiadura, formatua eta kalitatea Aukerak → Demoak →

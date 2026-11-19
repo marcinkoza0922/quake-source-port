@@ -158,9 +158,11 @@ mengonversi demo lama.
 
 Menu utama → Demo menampilkan demo tersimpan Anda dan, jika Opsi → Demo →
 Rekam demo otomatis menyala, demo otomatis dari setiap level yang Anda
-mainkan; yang tertua diganti saat slot penuh. K menyimpan satu, E
-mengekspornya ke video, dan Del menghapusnya. Laporan bug menyertakan demo
-otomatis level saat ini.
+mainkan; yang tertua diganti saat slot penuh. Ketik untuk memfilter daftar
+dan tekan Tab untuk mengganti urutan; tombol di samping daftar memutar,
+mengekspor, mengganti nama, menyimpan, atau menghapus demo yang dipilih,
+dan mengganti nama demo otomatis akan menyimpannya. Laporan bug
+menyertakan demo otomatis level saat ini.
 
 Saat demo diputar, Spasi menjeda, menahan Kiri atau Kanan memutar mundur
 atau maju cepat, Atas dan Bawah mengubah kecepatan, PgUp dan PgDn melompat
@@ -171,6 +173,11 @@ tepi bawah memunculkan strip yang mengembalikannya. Klik tombolnya, klik
 linimasa untuk melompat ke sana, atau seret di atasnya untuk menandai klip;
 Ekspor menanyakan laju bingkai, ukuran, format, dan file, serta apakah
 mengekspor klip yang ditandai atau seluruh demo.
+
+Pada kontroler, A menjeda, d-pad memundurkan, mempercepat, dan mengubah
+kecepatan, LB dan RB melompat 10 detik, dan tombol stik menuju awal dan
+peta berikutnya. LT dan RT menandai klip, B menghapusnya, X mengekspor, Y
+menyimpan demo otomatis, dan View menyembunyikan kontrol.
 
 `capture` memulai dan menghentikan perekaman video saat bermain. Laju
 bingkai, format, dan kualitas ada di Opsi → Demo → Perekaman video. Video

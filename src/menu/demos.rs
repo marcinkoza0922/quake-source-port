@@ -1,30 +1,39 @@
 //! Main menu → Demos: saved demos (`record`, kept auto-demos) and
 //! automatic ones (`cl_autodemo`), a list and an info panel. The host fills
 //! it (`_scandemos`); maps and lengths arrive from a background scan.
-//! Enter plays, E exports to video, K keeps an auto-demo, Del deletes.
+//! Typing filters both lists (fuzzy, like Map Packs) and Tab cycles the
+//! sort; the actions are buttons in the info panel (Play, Export Video,
+//! Rename, Keep, Delete), with Enter, Del and pad buttons as shortcuts.
+//! Drawing: `demos/draw.rs`; the export and rename dialogs: `demos/dialogs.rs`.
 
-use std::path::PathBuf;
+mod dialogs;
+mod draw;
+
+use std::path::{Path, PathBuf};
 use std::sync::mpsc::Receiver;
 
 use qinput::keys::*;
 
-use crate::demo::library::DemoFile;
-use crate::demo::playback::format_time;
-use qcore::cvar::Cvars;
+use crate::demo::library::{DemoFile, kept_name};
+use crate::modmenu::fuzzy_score;
 
-use super::pages::{Item, toggle};
+use super::pages::{Item, Run, toggle};
 use super::{Action, Page, Screen};
-use crate::draw::Canvas;
-use crate::menu::{BORDER, GOLD_FG, HILITE, MUTED, TXT, txt, txt_gold};
-use crate::modmenu::clip;
 
 const ROW_H: f32 = 10.0;
-const TOP: f32 = 64.0;
-const ROWS: usize = 26;
-const TAB_Y: f32 = 44.0;
+const TAB_Y: f32 = 38.0;
 const TAB: (f32, f32) = (130.0, 14.0);
+/// Filter box and sort button, over the list.
+const BAR_Y: f32 = 56.0;
+const SORT_W: f32 = 96.0;
+const TOP: f32 = 76.0;
+const ROWS: usize = 24;
 const LIST: (f32, f32) = (40.0, 264.0);
 const INFO: (f32, f32) = (312.0, 288.0);
+/// Action buttons in the info panel: a two-column grid.
+const BTN_Y: f32 = TOP + 8.0 * ROW_H;
+const BTN: (f32, f32) = (133.0, 15.0);
+const BTN_GAP: f32 = 4.0;
 pub const TABS: [&str; 2] = [qcore::t!("Saved"), qcore::t!("Automatic")];
 /// Back button, under the list.
 pub const BACK: (f32, f32) = (LIST.0, TOP + ROWS as f32 * ROW_H + 8.0);
@@ -54,36 +63,123 @@ pub(super) const VIDEO: &[Item] = &[
     Item::Text { label: "ffmpeg Program", cvar: "capture_ffmpeg", max: 60 },
 ];
 
-/// The export dialog (`menu_export`): the video settings, where to write
-/// it, and what to export.
+/// The export dialog (`menu_export`): the video settings, the folder and
+/// file name to write (the extension follows the format), and what to export.
 pub(super) const EXPORT: &[Item] = &[
     Item::Choice { label: "Frame Rate", cvar: "capture_fps", choices: VIDEO_FPS },
     Item::Choice { label: "Resolution", cvar: "capture_size", choices: VIDEO_SIZE },
     Item::Choice { label: "Video Format", cvar: "capture_codec", choices: VIDEO_CODEC },
     toggle("GPU Encoding", "capture_gpu"),
     Item::Text { label: "Destination", cvar: "_export_dest", max: 240 },
-    Item::Run { label: "Export Highlighted Clip", run: super::pages::Run::ExportClip },
-    Item::Run { label: "Export Whole Demo", run: super::pages::Run::ExportWhole },
+    Item::Text { label: "File Name", cvar: "_export_name", max: 100 },
+    Item::Run { label: "Export Highlighted Clip", run: Run::ExportClip },
+    Item::Run { label: "Export Whole Demo", run: Run::ExportWhole },
+];
+/// Rows of the export buttons.
+pub(super) const EXPORT_CLIP_ROW: usize = 6;
+
+/// The rename dialog (Demos → Rename).
+pub(super) const RENAME: &[Item] = &[Item::Text { label: "Name", cvar: "_demo_rename", max: 60 }, Item::Run { label: "Rename", run: Run::RenameDemo }];
+
+/// Text fields holding a file name: no path separators or characters
+/// file systems refuse.
+pub(super) fn file_name_field(cvar: &str) -> bool {
+    matches!(cvar, "_demo_rename" | "_export_name")
+}
+
+pub(super) fn file_name_char(ch: char) -> bool {
+    !"/\\:*?<>|".contains(ch)
+}
+
+#[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
+pub enum DemoSort {
+    #[default]
+    Newest,
+    Name,
+    Map,
+    Length,
+}
+
+impl DemoSort {
+    fn next(self) -> Self {
+        match self {
+            Self::Newest => Self::Name,
+            Self::Name => Self::Map,
+            Self::Map => Self::Length,
+            Self::Length => Self::Newest,
+        }
+    }
+
+    fn label(self) -> &'static str {
+        match self {
+            Self::Newest => qcore::t!("Newest"),
+            Self::Name => qcore::t!("Name"),
+            Self::Map => qcore::t!("Map"),
+            Self::Length => qcore::t!("Length"),
+        }
+    }
+}
+
+/// The info panel's buttons, in grid order.
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub enum DemoBtn {
+    Play,
+    Export,
+    Rename,
+    Keep,
+    Delete,
+}
+
+pub const BUTTONS: [(DemoBtn, &str); 5] = [
+    (DemoBtn::Play, qcore::t!("Play")),
+    (DemoBtn::Export, qcore::t!("Export Video")),
+    (DemoBtn::Rename, qcore::t!("Rename")),
+    (DemoBtn::Keep, qcore::t!("Keep")),
+    (DemoBtn::Delete, qcore::t!("Delete")),
 ];
 
-/// What a key asks the menu to do.
+fn button_rect(i: usize) -> (f32, f32, f32, f32) {
+    let (col, row) = ((i % 2) as f32, (i / 2) as f32);
+    (INFO.0 + 8.0 + col * (BTN.0 + 6.0), BTN_Y + row * (BTN.1 + BTN_GAP), BTN.0, BTN.1)
+}
+
+/// What a key or click asks the menu to do.
 #[derive(Debug, PartialEq)]
 pub enum DemoAction {
     None,
+    /// The cursor, tab, filter or sort changed.
+    Moved,
     Back,
     Play(String),
     Export(String),
     Keep(String),
+    /// The `.dem` (user-dir relative), the suggested name, and whether it's
+    /// an auto-demo (renaming one keeps it).
+    Rename { file: String, name: String, auto: bool },
     /// Asks first: (play name, shown name).
     Delete(String, String),
+}
+
+/// What is under the pointer.
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub enum Hit {
+    Row(usize),
+    Tab(usize),
+    Sort,
+    Button(DemoBtn),
 }
 
 #[derive(Default)]
 pub struct DemoBrowser {
     pub lists: [Vec<DemoFile>; 2],
+    /// Indices into `lists` that pass the filter, in the shown order.
+    view: [Vec<usize>; 2],
     pub tab: usize,
+    /// Positions in `view`.
     cursor: [usize; 2],
     scroll: [usize; 2],
+    filter: String,
+    sort: DemoSort,
     /// `cl_autodemo`, for the empty-list note.
     pub auto_on: bool,
     info_rx: Option<Receiver<(PathBuf, String, f64)>>,
@@ -92,14 +188,10 @@ pub struct DemoBrowser {
 impl DemoBrowser {
     /// New lists from the host; keeps the selection by file where possible.
     pub fn set(&mut self, saved: Vec<DemoFile>, auto: Vec<DemoFile>, auto_on: bool) {
-        let keep: [Option<PathBuf>; 2] = std::array::from_fn(|t| self.selected_in(t).map(|d| d.path.clone()));
+        let keep = self.selected_paths();
         self.lists = [saved, auto];
         self.auto_on = auto_on;
-        for (t, kept) in keep.iter().enumerate() {
-            let n = self.lists[t].len();
-            self.cursor[t] = kept.as_ref().and_then(|p| self.lists[t].iter().position(|d| &d.path == p)).unwrap_or(self.cursor[t]).min(n.saturating_sub(1));
-            self.clamp_scroll(t);
-        }
+        self.rebuild(Some(keep));
         // map names and lengths: one background pass over the files
         let todo: Vec<PathBuf> = self.lists.iter().flatten().filter(|d| d.duration.is_none()).map(|d| d.path.clone()).collect();
         if todo.is_empty() || cfg!(target_arch = "wasm32") {
@@ -121,22 +213,100 @@ impl DemoBrowser {
 
     pub fn poll(&mut self) {
         let Some(rx) = &self.info_rx else { return };
+        let mut any = false;
         for (p, map, secs) in rx.try_iter() {
             for d in self.lists.iter_mut().flatten().filter(|d| d.path == p) {
                 if !map.is_empty() {
                     d.map = Some(map.clone());
                 }
                 d.duration = Some(secs);
+                any = true;
+            }
+        }
+        // maps and lengths can reorder or match the filter now
+        if any && (self.sort != DemoSort::Newest || !self.filter.is_empty()) {
+            let keep = self.selected_paths();
+            self.rebuild(Some(keep));
+        }
+    }
+
+    /// Selects the demo at `path` (after a rename), on its tab.
+    pub fn focus(&mut self, path: &Path) {
+        for t in 0..2 {
+            if let Some(v) = self.view[t].iter().position(|&i| self.lists[t][i].path == path) {
+                self.tab = t;
+                self.cursor[t] = v;
+                self.clamp_scroll(t);
             }
         }
     }
 
+    fn selected_paths(&self) -> [Option<PathBuf>; 2] {
+        std::array::from_fn(|t| self.selected_in(t).map(|d| d.path.clone()))
+    }
+
+    /// Re-filters and re-sorts both lists; `keep` holds each tab's selection
+    /// by file (else the best match is selected).
+    fn rebuild(&mut self, keep: Option<[Option<PathBuf>; 2]>) {
+        let q = self.filter.trim().to_string();
+        for t in 0..2 {
+            let list = &self.lists[t];
+            let mut scored: Vec<(usize, i32)> = list
+                .iter()
+                .enumerate()
+                .filter_map(|(i, d)| {
+                    let label = label(d);
+                    let s = [Some(label.as_str()), Some(d.name.as_str()), d.map.as_deref()].into_iter().flatten().filter_map(|s| fuzzy_score(&q, s)).max()?;
+                    Some((i, s))
+                })
+                .collect();
+            scored.sort_by(|&(ia, sa), &(ib, sb)| {
+                if !q.is_empty() && sa != sb {
+                    return sb.cmp(&sa);
+                }
+                let (a, b) = (&list[ia], &list[ib]);
+                let lower = |d: &DemoFile| label(d).to_lowercase();
+                let map = |d: &DemoFile| d.map.as_deref().unwrap_or("").to_ascii_lowercase();
+                match self.sort {
+                    DemoSort::Newest => std::cmp::Ordering::Equal,
+                    DemoSort::Name => lower(a).cmp(&lower(b)),
+                    DemoSort::Map => map(a).cmp(&map(b)),
+                    // longest first; unknown lengths last
+                    DemoSort::Length => b.duration.unwrap_or(-1.0).total_cmp(&a.duration.unwrap_or(-1.0)),
+                }
+                .then(ia.cmp(&ib))
+            });
+            self.view[t] = scored.into_iter().map(|(i, _)| i).collect();
+            let kept = keep.as_ref().and_then(|k| k[t].as_ref());
+            let n = self.view[t].len();
+            self.cursor[t] = match kept {
+                Some(p) => self.view[t].iter().position(|&i| &self.lists[t][i].path == p).unwrap_or(self.cursor[t]),
+                None => 0,
+            }
+            .min(n.saturating_sub(1));
+            if kept.is_none() {
+                self.scroll[t] = 0;
+            }
+            self.scroll[t] = self.scroll[t].min(n.saturating_sub(ROWS));
+            self.clamp_scroll(t);
+        }
+    }
+
     fn selected_in(&self, tab: usize) -> Option<&DemoFile> {
-        self.lists[tab].get(self.cursor[tab])
+        self.view[tab].get(self.cursor[tab]).and_then(|&i| self.lists[tab].get(i))
     }
 
     pub fn selected(&self) -> Option<&DemoFile> {
         self.selected_in(self.tab)
+    }
+
+    /// Rows in the current tab's view.
+    fn rows(&self) -> usize {
+        self.view[self.tab].len()
+    }
+
+    fn row(&self, v: usize) -> Option<&DemoFile> {
+        self.view[self.tab].get(v).and_then(|&i| self.lists[self.tab].get(i))
     }
 
     fn clamp_scroll(&mut self, t: usize) {
@@ -155,13 +325,51 @@ impl DemoBrowser {
         }
     }
 
+    /// Whether a button can be used for the selection.
+    pub fn enabled(&self, b: DemoBtn) -> bool {
+        self.selected().is_some_and(|d| b != DemoBtn::Keep || d.auto)
+    }
+
+    /// A button's action on the selected demo.
+    pub fn action(&self, b: DemoBtn) -> DemoAction {
+        let Some(d) = self.selected().filter(|_| self.enabled(b)) else { return DemoAction::None };
+        match b {
+            DemoBtn::Play => DemoAction::Play(d.play_name()),
+            DemoBtn::Export => DemoAction::Export(d.play_name()),
+            DemoBtn::Keep => DemoAction::Keep(d.play_name()),
+            DemoBtn::Rename => DemoAction::Rename { file: d.rel_name(), name: if d.auto { kept_name(&d.name) } else { d.name.clone() }, auto: d.auto },
+            DemoBtn::Delete => DemoAction::Delete(d.play_name(), d.name.clone()),
+        }
+    }
+
+    fn set_filter(&mut self, f: impl FnOnce(&mut String) -> bool) -> DemoAction {
+        if !f(&mut self.filter) {
+            return DemoAction::None;
+        }
+        self.rebuild(None);
+        DemoAction::Moved
+    }
+
+    fn cycle_sort(&mut self) -> DemoAction {
+        self.sort = self.sort.next();
+        let keep = self.selected_paths();
+        self.rebuild(Some(keep));
+        DemoAction::Moved
+    }
+
+    fn switch_tab(&mut self, t: usize) -> DemoAction {
+        if std::mem::replace(&mut self.tab, t) == t { DemoAction::None } else { DemoAction::Moved }
+    }
+
+    /// Keys: arrows move, typing filters, Tab sorts, Left/Right switch list;
+    /// Enter plays and Del deletes; pad: X export, Y rename, LT keep, Back
+    /// delete, RT sort.
     pub fn key(&mut self, key: i32) -> DemoAction {
-        let k = if (b'A' as i32..=b'Z' as i32).contains(&key) { key + 32 } else { key };
-        let n = self.lists[self.tab].len();
+        let n = self.rows();
         let t = self.tab;
-        let step = match k {
-            K_UPARROW | K_DPAD_UP | K_MWHEELUP => -1,
-            K_DOWNARROW | K_DPAD_DOWN | K_MWHEELDOWN => 1,
+        let step = match key {
+            K_UPARROW | K_DPAD_UP => -1,
+            K_DOWNARROW | K_DPAD_DOWN => 1,
             K_PGUP => -(ROWS as i32 - 1),
             K_PGDN => ROWS as i32 - 1,
             K_HOME => -(n as i32),
@@ -169,35 +377,51 @@ impl DemoBrowser {
             _ => 0,
         };
         if step != 0 {
-            if n > 0 {
-                self.cursor[t] = if step.abs() == 1 { (self.cursor[t] as i32 + step).rem_euclid(n as i32) as usize } else { (self.cursor[t] as i32 + step).clamp(0, n as i32 - 1) as usize };
-                self.clamp_scroll(t);
+            if n == 0 {
+                return DemoAction::None;
             }
-            return DemoAction::None;
+            let old = self.cursor[t];
+            // arrows wrap, page keys stop at the ends
+            self.cursor[t] = if step.abs() == 1 { (old as i32 + step).rem_euclid(n as i32) as usize } else { (old as i32 + step).clamp(0, n as i32 - 1) as usize };
+            self.clamp_scroll(t);
+            return if self.cursor[t] == old { DemoAction::None } else { DemoAction::Moved };
         }
-        let sel = self.selected().map(|d| (d.play_name(), d.name.clone(), d.auto));
-        match k {
+        match key {
+            K_ESCAPE if !self.filter.is_empty() => self.set_filter(|f| !std::mem::take(f).is_empty()),
             K_ESCAPE | K_BBUTTON | K_MOUSE2 => DemoAction::Back,
-            K_TAB | K_LEFTARROW | K_RIGHTARROW | K_DPAD_LEFT | K_DPAD_RIGHT | K_LSHOULDER | K_RSHOULDER => {
-                self.tab ^= 1;
-                DemoAction::None
-            }
-            K_ENTER | K_KP_ENTER | K_ABUTTON => sel.map_or(DemoAction::None, |s| DemoAction::Play(s.0)),
-            K_XBUTTON => sel.map_or(DemoAction::None, |s| DemoAction::Export(s.0)),
-            k if k == b'e' as i32 => sel.map_or(DemoAction::None, |s| DemoAction::Export(s.0)),
-            K_YBUTTON => sel.filter(|s| s.2).map_or(DemoAction::None, |s| DemoAction::Keep(s.0)),
-            k if k == b'k' as i32 => sel.filter(|s| s.2).map_or(DemoAction::None, |s| DemoAction::Keep(s.0)),
-            K_DEL | K_BACKSPACE | K_BACK => sel.map_or(DemoAction::None, |s| DemoAction::Delete(s.0, s.1)),
+            K_TAB | K_RTRIGGER => self.cycle_sort(),
+            K_LEFTARROW | K_DPAD_LEFT | K_LSHOULDER => self.switch_tab(0),
+            K_RIGHTARROW | K_DPAD_RIGHT | K_RSHOULDER => self.switch_tab(1),
+            K_BACKSPACE => self.set_filter(|f| f.pop().is_some()),
+            K_ENTER | K_KP_ENTER | K_ABUTTON => self.action(DemoBtn::Play),
+            K_XBUTTON => self.action(DemoBtn::Export),
+            K_YBUTTON => self.action(DemoBtn::Rename),
+            K_LTRIGGER => self.action(DemoBtn::Keep),
+            K_DEL | K_BACK => self.action(DemoBtn::Delete),
+            0x20..=0x7e => self.set_filter(|f| {
+                f.push(key as u8 as char);
+                true
+            }),
             _ => DemoAction::None,
         }
     }
 
-    /// Row or tab under the pointer: `Ok(row)` or `Err(tab)`.
-    pub fn item_at(&self, (x, y): (f32, f32)) -> Option<Result<usize, usize>> {
+    /// What is under the pointer.
+    pub fn hit(&self, (x, y): (f32, f32)) -> Option<Hit> {
         for t in 0..2 {
             let tx = 320.0 - TAB.0 - 4.0 + t as f32 * (TAB.0 + 8.0);
             if (tx..tx + TAB.0).contains(&x) && (TAB_Y..TAB_Y + TAB.1).contains(&y) {
-                return Some(Err(t));
+                return Some(Hit::Tab(t));
+            }
+        }
+        let sx = LIST.0 + LIST.1 - SORT_W;
+        if (sx..LIST.0 + LIST.1).contains(&x) && (BAR_Y..BAR_Y + crate::modmenu::BAR_H).contains(&y) {
+            return Some(Hit::Sort);
+        }
+        for (i, &(b, _)) in BUTTONS.iter().enumerate() {
+            let r = button_rect(i);
+            if (r.0..r.0 + r.2).contains(&x) && (r.1..r.1 + r.3).contains(&y) {
+                return Some(Hit::Button(b));
             }
         }
         let (lx, lw) = LIST;
@@ -206,156 +430,55 @@ impl DemoBrowser {
         }
         let r = ((y - TOP) / ROW_H) as usize;
         let i = self.scroll[self.tab] + r;
-        (r < ROWS && i < self.lists[self.tab].len()).then_some(Ok(i))
+        (r < ROWS && i < self.rows()).then_some(Hit::Row(i))
     }
 
-    /// Pointer hover / click: select the row or switch tab; true when the
-    /// selection changed.
-    pub fn point(&mut self, pos: (f32, f32), click: bool) -> bool {
-        match self.item_at(pos) {
-            Some(Ok(i)) => std::mem::replace(&mut self.cursor[self.tab], i) != i,
-            Some(Err(t)) if click => std::mem::replace(&mut self.tab, t) != t,
-            _ => false,
+    /// Left click: a tab or the sort button switches; a row is selected, and
+    /// a click on the selected row plays it; a button acts when it can.
+    pub fn click(&mut self, pos: (f32, f32)) -> DemoAction {
+        match self.hit(pos) {
+            Some(Hit::Tab(t)) => self.switch_tab(t),
+            Some(Hit::Sort) => self.cycle_sort(),
+            Some(Hit::Row(i)) if i == self.cursor[self.tab] => self.action(DemoBtn::Play),
+            Some(Hit::Row(i)) => {
+                self.cursor[self.tab] = i;
+                DemoAction::Moved
+            }
+            Some(Hit::Button(b)) => self.action(b),
+            None => DemoAction::None,
         }
     }
 
-    pub fn draw(&self, c: &mut Canvas) {
-        c.text_center(320.0, 24.0, "Demos", 13.0, GOLD_FG);
-        for (t, label) in TABS.iter().enumerate() {
-            let x = 320.0 - TAB.0 - 4.0 + t as f32 * (TAB.0 + 8.0);
-            let on = t == self.tab;
-            c.fill(x, TAB_Y, TAB.0, TAB.1, if on { HILITE } else { [0.0, 0.0, 0.0, 0.7] });
-            c.frame(x, TAB_Y, TAB.0, TAB.1, BORDER);
-            let s = qcore::tr!("{} ({})", qcore::lang::tr(label), self.lists[t].len());
-            c.text_center(x + TAB.0 / 2.0, TAB_Y + 3.0, &s, TXT, if on { GOLD_FG } else { MUTED });
+    /// Scrollbar: (x, track top, track h, thumb y, thumb h).
+    pub fn scrollbar(&self) -> Option<(f32, f32, f32, f32, f32)> {
+        let n = self.rows();
+        if n <= ROWS {
+            return None;
         }
-        let (x, w) = LIST;
-        panel(c, x, w);
-        let list = &self.lists[self.tab];
-        if list.is_empty() {
-            let note = if self.tab == 0 {
-                qcore::t!("No saved demos yet. Record one with the console command 'record <name>', or keep an automatic demo.")
-            } else if self.auto_on {
-                qcore::t!("No automatic demos yet. Each level you play is recorded here.")
-            } else {
-                qcore::t!("Automatic demos are off. Turn on Auto-Record Demos in Options > Demos to record every level you play.")
-            };
-            paragraph(c, x + 8.0, TOP + 1.0, w - 16.0, note, MUTED);
-        }
-        for (i, d) in list.iter().enumerate().skip(self.scroll[self.tab]).take(ROWS) {
-            let y = TOP + (i - self.scroll[self.tab]) as f32 * ROW_H;
-            if i == self.cursor[self.tab] {
-                c.fill(x + 2.0, y, w - 4.0, ROW_H, HILITE);
-            }
-            let label = if d.auto { auto_label(d) } else { d.name.clone() };
-            txt(c, x + 6.0, y + 1.0, &clip(&label, ((w - 60.0) / 6.0) as usize));
-            if let Some(t) = d.duration {
-                c.text_right(x + w - 8.0, y + 1.0, &format_time(t), TXT, MUTED);
-            }
-        }
-        if list.len() > ROWS {
-            let h = ROWS as f32 * ROW_H;
-            let th = (h * ROWS as f32 / list.len() as f32).max(8.0);
-            let ty = TOP + (h - th) * self.scroll[self.tab] as f32 / (list.len() - ROWS) as f32;
-            c.fill(x + w - 4.0, TOP, 3.0, h, [1.0, 1.0, 1.0, 0.12]);
-            c.fill(x + w - 4.0, ty, 3.0, th, [0.85, 0.65, 0.3, 0.9]);
-        }
-        let (ix, iw) = INFO;
-        panel(c, ix, iw);
-        let Some(d) = self.selected() else { return };
-        let cols = ((iw - 16.0) / 6.0) as usize;
-        let mut y = TOP + 1.0;
-        txt_gold(c, ix + 8.0, y, &clip(&if d.auto { auto_label(d) } else { d.name.clone() }, cols));
-        y += ROW_H + 4.0;
-        let mut row = |c: &mut Canvas, s: String| {
-            txt(c, ix + 8.0, y, &clip(&s, cols));
-            y += ROW_H;
-        };
-        row(c, qcore::tr!("Map: {}", d.map.as_deref().unwrap_or("...")));
-        row(c, qcore::tr!("Length: {}", d.duration.map_or("...".into(), format_time)));
-        row(c, qcore::tr!("Recorded: {}", date(d.modified)));
-        row(c, qcore::tr!("Size: {} KB", d.bytes.div_ceil(1024)));
-        if d.auto {
-            row(c, qcore::tr!("Automatic: replaced when the slots are full"));
-        }
-        y += 8.0;
-        let keys: &[(&str, &str)] = if d.auto {
-            &[("Enter", "Play"), ("E", "Export Video"), ("K", "Keep"), ("Del", "Delete"), ("Tab", "Switch List")]
-        } else {
-            &[("Enter", "Play"), ("E", "Export Video"), ("Del", "Delete"), ("Tab", "Switch List")]
-        };
-        for (k, a) in keys {
-            c.text(ix + 8.0, y, k, TXT, GOLD_FG);
-            txt(c, ix + 56.0, y, a);
-            y += ROW_H;
-        }
-        y += 6.0;
-        paragraph(c, ix + 8.0, y, iw - 16.0, qcore::t!("While a demo plays: Space pauses, the arrows scrub and change speed, I and O mark a clip and E exports it."), MUTED);
+        let h = ROWS as f32 * ROW_H;
+        let th = (h * ROWS as f32 / n as f32).max(8.0);
+        let ty = TOP + (h - th) * self.scroll[self.tab] as f32 / (n - ROWS) as f32;
+        Some((LIST.0 + LIST.1 - 5.0, TOP, h, ty, th))
+    }
+
+    /// Scrollbar drag: the thumb top follows `y`. The selection stays.
+    pub fn drag_to(&mut self, y: f32, grab: f32) {
+        let Some((_, top, h, _, th)) = self.scrollbar() else { return };
+        let f = ((y - grab - top) / (h - th).max(1.0)).clamp(0.0, 1.0);
+        self.scroll[self.tab] = (f * (self.rows() - ROWS) as f32).round() as usize;
+    }
+
+    /// Wheel: scrolls the view by rows. The selection stays.
+    pub fn wheel(&mut self, up: bool) {
+        let sc = self.scroll[self.tab];
+        let sc = if up { sc.saturating_sub(3) } else { sc + 3 };
+        self.scroll[self.tab] = sc.min(self.rows().saturating_sub(ROWS));
     }
 }
 
-impl super::Menu {
-    /// Opens the export dialog; Back returns to `back` (the Demos list, or
-    /// the demo itself). `info` lines go under the rows.
-    pub fn open_export(&mut self, back: Screen, info: Vec<String>, clip: bool) {
-        self.export_back = back;
-        self.export_info = info;
-        self.opt_cursor = if clip { 5 } else { 6 };
-        self.screen = Screen::OptionsPage(Page::Export);
-    }
-
-    /// Lines under the export dialog's rows.
-    pub(super) fn draw_export_notes(&self, c: &mut Canvas, rows: usize) {
-        let mut y = super::PAGE_ROW0 + rows as f32 * super::ROW_H + 30.0;
-        for l in &self.export_info {
-            c.text_center(320.0, y, l, TXT, MUTED);
-            y += 11.0;
-        }
-    }
-
-    /// A key on the Demos screen: list keys, then the chosen action.
-    pub(super) fn demos_key(&mut self, key: i32, out: &mut Vec<Action>) {
-        match self.demos.key(key) {
-            DemoAction::None => {}
-            DemoAction::Back => {
-                self.screen = Screen::Main;
-                out.push(Action::Sound("misc/menu3.wav"));
-            }
-            DemoAction::Play(n) => {
-                out.push(Action::Sound("misc/menu2.wav"));
-                out.push(Action::Command(format!("playdemo \"{n}\"\n")));
-                out.push(Action::Close);
-                self.screen = Screen::None;
-            }
-            DemoAction::Export(n) => {
-                out.push(Action::Sound("misc/menu2.wav"));
-                out.push(Action::Command(format!("menu_export \"{n}\"\n")));
-            }
-            DemoAction::Keep(n) => {
-                out.push(Action::Sound("misc/menu2.wav"));
-                out.push(Action::Command(format!("_demo_keep_file \"{n}\"\n")));
-            }
-            DemoAction::Delete(n, shown) => {
-                self.confirm(vec![qcore::tr!("Delete {}?", shown), qcore::tr!("This can't be undone.")], qcore::t!("Delete"), format!("_demo_delete \"{n}\"\n"), false);
-            }
-        }
-    }
-
-    /// Left click: Back, a tab, or a row (which plays it).
-    pub(super) fn demos_click(&mut self, cv: &mut Cvars, server_active: bool) -> Vec<Action> {
-        let Some(pos) = self.mouse else { return Vec::new() };
-        if let Some((bx, by, bw, bh)) = self.back_button()
-            && (bx..bx + bw).contains(&pos.0)
-            && (by..by + bh).contains(&pos.1)
-        {
-            return self.key(K_ESCAPE, cv, server_active);
-        }
-        self.demos.point(pos, true);
-        if matches!(self.demos.item_at(pos), Some(Ok(_))) {
-            return self.key(K_ENTER, cv, server_active);
-        }
-        Vec::new()
-    }
+/// How a demo is listed: auto-demos by date and map.
+fn label(d: &DemoFile) -> String {
+    if d.auto { auto_label(d) } else { d.name.clone() }
 }
 
 /// `<stamp>_<map>` as "2024-01-31 12:00 e1m1".
@@ -369,59 +492,5 @@ fn auto_label(d: &DemoFile) -> String {
     }
 }
 
-fn date(secs: u64) -> String {
-    let s = crate::demo::stamp(secs);
-    format!("{}-{}-{} {}:{} UTC", &s[..4], &s[4..6], &s[6..8], &s[9..11], &s[11..13])
-}
-
-/// Translated text wrapped to `w`.
-fn paragraph(c: &mut Canvas, x: f32, y: f32, w: f32, s: &str, color: [f32; 4]) {
-    let s = qcore::lang::tr(s);
-    for (i, l) in qcore::lang::wrap(&s, w, |t| c.text_w_raw(t, TXT)).iter().enumerate() {
-        c.text_raw(x, y + i as f32 * ROW_H, l, TXT, color);
-    }
-}
-
-fn panel(c: &mut Canvas, x: f32, w: f32) {
-    let h = ROWS as f32 * ROW_H + 8.0;
-    c.fill(x, TOP - 4.0, w, h, [0.0, 0.0, 0.0, 0.8]);
-    c.frame(x, TOP - 4.0, w, h, BORDER);
-}
-
 #[cfg(test)]
-mod tests {
-    use super::*;
-
-    fn file(name: &str, auto: bool) -> DemoFile {
-        DemoFile { path: PathBuf::from(format!("/u/{name}.dem")), name: name.into(), auto, bytes: 2048, modified: 0, map: None, duration: Some(61.0) }
-    }
-
-    #[test]
-    fn keys_pick_actions() {
-        let mut b = DemoBrowser::default();
-        b.set(vec![file("a", false), file("b", false)], vec![file("20240101-120000_e1m1", true)], true);
-        assert_eq!(b.key(K_DOWNARROW), DemoAction::None);
-        assert_eq!(b.key(K_ENTER), DemoAction::Play("b.dem".into()));
-        // saved demos can't be kept
-        assert_eq!(b.key(b'k' as i32), DemoAction::None);
-        assert_eq!(b.key(K_TAB), DemoAction::None);
-        assert_eq!(b.key(b'K' as i32), DemoAction::Keep("autodemos/20240101-120000_e1m1.dem".into()));
-        assert_eq!(b.key(b'e' as i32), DemoAction::Export("autodemos/20240101-120000_e1m1.dem".into()));
-        assert_eq!(b.key(K_DEL), DemoAction::Delete("autodemos/20240101-120000_e1m1.dem".into(), "20240101-120000_e1m1".into()));
-        assert_eq!(b.key(K_ESCAPE), DemoAction::Back);
-        assert_eq!(auto_label(&b.lists[1][0]), "2024-01-01 12:00  e1m1");
-    }
-
-    #[test]
-    fn selection_survives_rescan_and_opens_on_auto_when_empty() {
-        let mut b = DemoBrowser::default();
-        b.set(vec![file("a", false), file("b", false)], vec![], false);
-        b.key(K_DOWNARROW);
-        b.set(vec![file("new", false), file("a", false), file("b", false)], vec![], false);
-        assert_eq!(b.selected().map(|d| d.name.as_str()), Some("b"));
-        let mut e = DemoBrowser::default();
-        e.set(vec![], vec![file("20240101-120000_e1m1", true)], true);
-        e.open();
-        assert_eq!(e.tab, 1);
-    }
-}
+mod tests;

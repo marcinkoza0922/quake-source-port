@@ -1432,6 +1432,15 @@ id 720p
 @ Destination
 id Tujuan
 
+@ File Name
+id Nama berkas
+
+@ Rename
+id Ganti nama
+
+@ Rename Demo
+id Ganti nama demo
+
 @ Export Highlighted Clip
 id Ekspor klip yang ditandai
 
@@ -1894,8 +1903,14 @@ id Menampilkan bilah pemutaran (waktu, kecepatan, linimasa) setelah tombol kontr
 id Format video; perlu ffmpeg dengan encoder itu, jika tidak bingkai disimpan sebagai gambar PNG
 
 # Demos and video recording.
-@ No clip highlighted: while the demo plays, drag across the timeline or press I and O
-id Tidak ada klip yang ditandai: saat demo diputar, seret di linimasa atau tekan I dan O
+@ No clip highlighted: while the demo plays, drag across the timeline, or press I and O (LT and RT on a controller)
+id Tidak ada klip yang ditandai: saat demo diputar, seret di linimasa atau tekan I dan O (LT dan RT di kontroler)
+
+@ Name of the video file; the extension follows the video format, and a file of the same name is replaced
+id Nama berkas video; ekstensinya mengikuti format video, dan berkas dengan nama yang sama akan diganti
+
+@ New name of the demo; if another demo has it, a number is added
+id Nama baru demo; jika sudah dipakai demo lain, sebuah angka ditambahkan
 
 @ Video size; frames are scaled from the window size (bars keep the shape), so a larger size adds no detail
 id Ukuran video; bingkai diskalakan dari ukuran jendela (dengan bilah agar bentuk tetap), jadi ukuran lebih besar tidak menambah detail
@@ -2736,6 +2751,36 @@ id Ukuran: {} KB
 @ Skip 10 s
 id Lewati 10 d
 
+@ Back 10 s
+id Mundur 10 d
+
+@ Length
+id Durasi
+
+@ Mark in
+id Tandai awal
+
+@ Mark out
+id Tandai akhir
+
+@ Next level
+id Level berikutnya
+
+@ No demos match the filter. Backspace or Esc clears it.
+id Tidak ada demo yang cocok dengan filter. Backspace atau Esc menghapusnya.
+
+@ Renaming an automatic demo moves it to the saved demos.
+id Mengganti nama demo otomatis memindahkannya ke demo tersimpan.
+
+@ Restart
+id Ulangi
+
+@ Sort
+id Urutkan
+
+@ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
+id Saat demo diputar: A menjeda, d-pad menggeser dan mengubah kecepatan, LT dan RT menandai klip dan X mengekspornya.
+
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 id Spasi jeda | Kiri/Kanan geser | Atas/Bawah kecepatan | PgUp/PgDn 10 d | I/O tanda | E ekspor
 
@@ -2766,9 +2811,6 @@ id H sembunyikan
 
 @ Hide
 id Sembunyikan
-
-@ Show
-id Tampilkan
 
 # Demos and video recording.
 @ Demo: {}
@@ -3314,6 +3356,12 @@ id Mengekspor {} ke video
 
 @ Kept demo {}
 id Demo disimpan: {}
+
+@ Not a valid demo name.
+id Nama demo tidak valid.
+
+@ Renamed demo to {}
+id Nama demo diganti menjadi {}
 
 @ No auto-demo to keep.
 id Tidak ada demo otomatis untuk disimpan.

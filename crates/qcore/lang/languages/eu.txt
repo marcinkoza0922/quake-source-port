@@ -1432,6 +1432,15 @@ eu 720p
 @ Destination
 eu Helmuga
 
+@ File Name
+eu Fitxategi-izena
+
+@ Rename
+eu Aldatu izena
+
+@ Rename Demo
+eu Aldatu demoaren izena
+
 @ Export Highlighted Clip
 eu Esportatu nabarmendutako klipa
 
@@ -1894,8 +1903,14 @@ eu Erreprodukzio-barra (denbora, abiadura, denbora-lerroa) kontrol-tekla baten o
 eu Bideo-formatua; kodetzaile hori duen ffmpeg behar da, bestela fotogramak PNG irudi gisa gordetzen dira
 
 # Demos and video recording.
-@ No clip highlighted: while the demo plays, drag across the timeline or press I and O
-eu Ez dago klip nabarmendurik: demoan zehar, arrastatu denbora-lerroaren gainean edo sakatu I eta O
+@ No clip highlighted: while the demo plays, drag across the timeline, or press I and O (LT and RT on a controller)
+eu Ez dago klip nabarmendurik: demoan zehar, arrastatu denbora-lerroaren gainean edo sakatu I eta O (LT eta RT kontrolagailuan)
+
+@ Name of the video file; the extension follows the video format, and a file of the same name is replaced
+eu Bideo-fitxategiaren izena; luzapena bideo-formatuaren araberakoa da, eta izen bereko fitxategia ordezten da
+
+@ New name of the demo; if another demo has it, a number is added
+eu Demoaren izen berria; beste demo batek badu jada, zenbaki bat gehitzen zaio
 
 @ Video size; frames are scaled from the window size (bars keep the shape), so a larger size adds no detail
 eu Bideoaren tamaina; fotogramak leihoaren tamainatik eskalatzen dira (forma gordetzeko bandekin), beraz tamaina handiagoak ez du xehetasunik gehitzen
@@ -2736,6 +2751,36 @@ eu Tamaina: {} KB
 @ Skip 10 s
 eu Saltatu 10 s
 
+@ Back 10 s
+eu Atzera 10 s
+
+@ Length
+eu Iraupena
+
+@ Mark in
+eu Markatu hasiera
+
+@ Mark out
+eu Markatu amaiera
+
+@ Next level
+eu Hurrengo maila
+
+@ No demos match the filter. Backspace or Esc clears it.
+eu Ez dago iragazkiarekin bat datorren demorik. Backspace edo Esc garbitzen du.
+
+@ Renaming an automatic demo moves it to the saved demos.
+eu Demo automatiko baten izena aldatzean gordetako demoetara eramaten da.
+
+@ Restart
+eu Hasieratik
+
+@ Sort
+eu Ordenatu
+
+@ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
+eu Demo bat erreproduzitzen den bitartean: A-k pausatzen du, d-pad-ak mugitu eta abiadura aldatzen du, LT eta RT-k klip bat markatzen dute eta X-k esportatzen du.
+
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 eu Zuriunea pausa | Ezker/Eskuin mugitu | Gora/Behera abiadura | PgUp/PgDn 10 s | I/O marka | E esportatu
 
@@ -2766,9 +2811,6 @@ eu H ezkutatu
 
 @ Hide
 eu Ezkutatu
-
-@ Show
-eu Erakutsi
 
 # Demos and video recording.
 @ Demo: {}
@@ -3314,6 +3356,12 @@ eu {} bideora esportatzen
 
 @ Kept demo {}
 eu Demoa gordeta: {}
+
+@ Not a valid demo name.
+eu Demo-izen baliogabea.
+
+@ Renamed demo to {}
+eu Demoaren izena aldatu da: {}
 
 @ No auto-demo to keep.
 eu Ez dago gordetzeko demo automatikorik.
