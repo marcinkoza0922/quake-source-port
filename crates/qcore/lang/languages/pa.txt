@@ -781,6 +781,9 @@ pa ਪਿੱਚ
 @ Pitch Sensitivity
 pa ਪਿੱਚ ਸੰਵੇਦਨਸ਼ੀਲਤਾ
 
+@ planar
+pa ਸਮਤਲ
+
 @ Playback Speed
 pa ਪਲੇਬੈਕ ਸਪੀਡ
 
@@ -846,6 +849,12 @@ pa ਲਾਲ
 
 @ Reduce Motion
 pa ਹਿਲਜੁਲ ਘਟਾਓ
+
+@ Reflection Strength
+pa ਪ੍ਰਤੀਬਿੰਬ ਦੀ ਤਾਕਤ
+
+@ Reflections
+pa ਪ੍ਰਤੀਬਿੰਬ
 
 @ Regen (seconds per second)
 pa ਮੁੜ-ਭਰਾਈ (ਸਕਿੰਟ ਪ੍ਰਤੀ ਸਕਿੰਟ)
@@ -1565,6 +1574,9 @@ pa ਇੱਕੋ ਸਮੇਂ ਕਿੰਨੀਆਂ ਰੌਸ਼ਨੀਆਂ ਪ�
 @ How strongly fog covers the sky when fog is on
 pa ਧੁੰਦ ਚਾਲੂ ਹੋਣ 'ਤੇ ਇਹ ਅਸਮਾਨ ਨੂੰ ਕਿੰਨਾ ਢਕਦੀ ਹੈ
 
+@ How strongly the surface reflects; strongest at shallow viewing angles
+pa ਸਤਹ ਕਿੰਨੀ ਜ਼ੋਰ ਨਾਲ ਪ੍ਰਤੀਬਿੰਬਤ ਕਰਦੀ ਹੈ; ਨੀਵੇਂ ਦ੍ਰਿਸ਼ਟੀ ਕੋਣ 'ਤੇ ਸਭ ਤੋਂ ਵੱਧ
+
 @ How the view distorts underwater: Classic ripples the whole screen like software Quake, GLQuake slowly stretches and squashes the view
 pa ਪਾਣੀ ਹੇਠਾਂ ਦ੍ਰਿਸ਼ ਕਿਵੇਂ ਵਿਗੜਦਾ ਹੈ: ਕਲਾਸਿਕ ਸੌਫ਼ਟਵੇਅਰ Quake ਵਾਂਗ ਪੂਰੀ ਸਕ੍ਰੀਨ ਲਹਿਰਾਉਂਦਾ ਹੈ, GLQuake ਹੌਲੀ-ਹੌਲੀ ਦ੍ਰਿਸ਼ ਨੂੰ ਖਿੱਚਦਾ ਅਤੇ ਦੱਬਦਾ ਹੈ
 
@@ -1831,6 +1843,9 @@ pa ਮੈਪ ਦੀ ਰੰਗੀਨ ਰੋਸ਼ਨੀ (.lit ਫ਼ਾਈਲ ਜ
 
 @ Walls, doors and monsters block the light and cast shadows
 pa ਕੰਧਾਂ, ਦਰਵਾਜ਼ੇ ਅਤੇ ਰਾਖਸ਼ ਰੌਸ਼ਨੀ ਰੋਕਦੇ ਹਨ ਅਤੇ ਪਰਛਾਵੇਂ ਪਾਉਂਦੇ ਹਨ
+
+@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level
+pa ਪਾਣੀ ਅਤੇ ਚਿੱਕੜ ਆਪਣੇ ਉੱਪਰਲੇ ਕਮਰੇ ਦਾ ਪ੍ਰਤੀਬਿੰਬ ਦਿਖਾਉਂਦੇ ਹਨ; ਸਮਤਲ ਹਰ ਨੇੜਲੇ ਪਾਣੀ ਦੇ ਪੱਧਰ ਲਈ ਦ੍ਰਿਸ਼ ਇੱਕ ਵਾਰ ਮੁੜ ਬਣਾਉਂਦਾ ਹੈ
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 pa ਪਾਣੀ ਦੀ ਧਾਰ ਦੇ ਹਿੱਸੇ, ਬੂੰਦਾਂ ਦੀ ਗਿਣਤੀ ਅਤੇ ਚਮਕੀਲੀ ਤਰਲ ਸ਼ੇਡਿੰਗ: ਘੱਟ ਸਾਦੀਆਂ ਪਾਰਦਰਸ਼ੀ ਧਾਰਾਂ ਵਰਤਦਾ ਹੈ; ਉੱਚ ਸੁਚਾਰੂ ਚਮਕੀਲੀਆਂ ਧਾਰਾਂ ਵਰਤਦਾ ਹੈ

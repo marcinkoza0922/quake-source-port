@@ -781,6 +781,9 @@ cy Traw
 @ Pitch Sensitivity
 cy Sensitifrwydd fertigol
 
+@ planar
+cy gwastad
+
 @ Playback Speed
 cy Cyflymder chwarae
 
@@ -846,6 +849,12 @@ cy Coch
 
 @ Reduce Motion
 cy Lleihau symudiad
+
+@ Reflection Strength
+cy Cryfder adlewyrchiad
+
+@ Reflections
+cy Adlewyrchiadau
 
 @ Regen (seconds per second)
 cy Adfywio (eiliadau yr eiliad)
@@ -1565,6 +1574,9 @@ cy Faint o oleuadau sy'n bwrw cysgodion ar yr un pryd, a pha mor llyfn yw eu hym
 @ How strongly fog covers the sky when fog is on
 cy Pa mor gryf mae niwl yn gorchuddio'r awyr pan fydd niwl ymlaen
 
+@ How strongly the surface reflects; strongest at shallow viewing angles
+cy Pa mor gryf mae'r arwyneb yn adlewyrchu; gryfaf ar onglau gwylio bas
+
 @ How the view distorts underwater: Classic ripples the whole screen like software Quake, GLQuake slowly stretches and squashes the view
 cy Sut mae'r olwg yn ystumio o dan y dŵr: mae Clasurol yn crychu'r sgrin gyfan fel Quake meddalwedd, mae GLQuake yn ymestyn ac yn gwasgu'r olwg yn araf
 
@@ -1831,6 +1843,9 @@ cy Defnyddio golau lliw y map (ffeil .lit neu lwmp BSPX); mae i ffwrdd yn rhoi g
 
 @ Walls, doors and monsters block the light and cast shadows
 cy Mae waliau, drysau a bwystfilod yn rhwystro'r golau ac yn bwrw cysgodion
+
+@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level
+cy Mae dŵr a llysnafedd yn adlewyrchu'r ystafell uwch eu pennau; mae gwastad yn ail-lunio'r olygfa unwaith fesul lefel dŵr gerllaw
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 cy Segmentau'r jet dŵr, nifer y diferion ac arlliwio hylif sgleiniog: mae isel yn defnyddio ffrydiau tryleu symlach; mae uchel yn defnyddio jetiau llyfn sgleiniog

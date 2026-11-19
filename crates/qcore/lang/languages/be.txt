@@ -781,6 +781,9 @@ be Вышыня тону
 @ Pitch Sensitivity
 be Адчувальнасць па вертыкалі
 
+@ planar
+be плоскія
+
 @ Playback Speed
 be Хуткасць прайгравання
 
@@ -846,6 +849,12 @@ be Чырвоны
 
 @ Reduce Motion
 be Менш руху
+
+@ Reflection Strength
+be Сіла адлюстраванняў
+
+@ Reflections
+be Адлюстраванні
 
 @ Regen (seconds per second)
 be Аднаўленне (секунд за секунду)
@@ -1565,6 +1574,9 @@ be Колькі крыніц святла адкідаюць цені аднач
 @ How strongly fog covers the sky when fog is on
 be Наколькі туман закрывае неба, калі туман уключаны
 
+@ How strongly the surface reflects; strongest at shallow viewing angles
+be Наколькі моцна адлюстроўвае паверхня; мацней за ўсё пад пакатым вуглом
+
 @ How the view distorts underwater: Classic ripples the whole screen like software Quake, GLQuake slowly stretches and squashes the view
 be Як скажаецца агляд пад вадой: класічны калыша ўвесь экран, як праграмны Quake, GLQuake павольна расцягвае і сціскае карцінку
 
@@ -1831,6 +1843,9 @@ be Выкарыстоўвае каляровае асвятленне карты
 
 @ Walls, doors and monsters block the light and cast shadows
 be Сцены, дзверы і монстры засланяюць святло і адкідаюць цені
+
+@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level
+be Вада і слізь адлюстроўваюць памяшканне над імі; плоскія перамалёўваюць сцэну адзін раз на кожны блізкі ўзровень вады
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 be Сегменты струменя, колькасць кропель і глянцавае зацяненне вадкасці: нізкая — простыя паўпразрыстыя струмені; высокая — гладкія глянцавыя

@@ -24,6 +24,8 @@ pub(super) struct Desc<'a> {
     pub(super) glow: bool,
     /// Depth only into a [`SHADOW_FORMAT`] shadow map face (no colour).
     pub(super) shadow: bool,
+    /// Mirrored view (planar reflections): front faces wind the other way.
+    pub(super) mirror: bool,
 }
 
 pub(super) fn attr(
@@ -74,7 +76,7 @@ pub(super) fn graphics(gpu: &Gpu, layout: vk::PipelineLayout, d: &Desc) -> Resul
     let rs = vk::PipelineRasterizationStateCreateInfo::default()
         .polygon_mode(vk::PolygonMode::FILL)
         .cull_mode(if d.cull { vk::CullModeFlags::BACK } else { vk::CullModeFlags::NONE })
-        .front_face(vk::FrontFace::CLOCKWISE)
+        .front_face(if d.mirror { vk::FrontFace::COUNTER_CLOCKWISE } else { vk::FrontFace::CLOCKWISE })
         .depth_bias_enable(d.depth)
         .line_width(1.0);
     let ms = vk::PipelineMultisampleStateCreateInfo::default()

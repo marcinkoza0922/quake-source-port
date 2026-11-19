@@ -10,6 +10,8 @@ use crate::modmenu::{self, ModMenu};
 use crate::sbar::PicFn;
 mod pages;
 pub use pages::*;
+mod enhancement_pages;
+use enhancement_pages::*;
 mod draw_util;
 pub use draw_util::*;
 mod osk;

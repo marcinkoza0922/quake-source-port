@@ -781,6 +781,9 @@ lt Tono aukštis
 @ Pitch Sensitivity
 lt Vertikalus jautrumas
 
+@ planar
+lt plokštuminiai
+
 @ Playback Speed
 lt Atkūrimo greitis
 
@@ -846,6 +849,12 @@ lt Raudona
 
 @ Reduce Motion
 lt Mažinti judesį
+
+@ Reflection Strength
+lt Atspindžių stiprumas
+
+@ Reflections
+lt Atspindžiai
 
 @ Regen (seconds per second)
 lt Atsistatymas (sekundžių per sekundę)
@@ -1565,6 +1574,9 @@ lt Kiek šviesų vienu metu meta šešėlius ir kokie švelnūs jų kraštai
 @ How strongly fog covers the sky when fog is on
 lt Kaip stipriai rūkas dengia dangų, kai rūkas įjungtas
 
+@ How strongly the surface reflects; strongest at shallow viewing angles
+lt Kaip stipriai paviršius atspindi; stipriausiai žiūrint nuolaidžiu kampu
+
 @ How the view distorts underwater: Classic ripples the whole screen like software Quake, GLQuake slowly stretches and squashes the view
 lt Kaip vaizdas iškraipomas po vandeniu: klasikinis banguoja visą ekraną kaip programinis Quake, GLQuake lėtai ištempia ir suspaudžia vaizdą
 
@@ -1831,6 +1843,9 @@ lt Naudoja spalvotą žemėlapio apšvietimą (.lit failas arba BSPX blokas); i�
 
 @ Walls, doors and monsters block the light and cast shadows
 lt Sienos, durys ir monstrai užstoja šviesą ir meta šešėlius
+
+@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level
+lt Vanduo ir gleivės atspindi patalpą virš jų; plokštuminiai perpiešia sceną kartą kiekvienam artimam vandens lygiui
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 lt Vandens srovės segmentai, lašų skaičius ir blizgus skysčio šešėliavimas: žema naudoja paprastesnes permatomas sroves; aukšta – glotnias blizgias sroves

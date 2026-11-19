@@ -781,6 +781,9 @@ yue 音高
 @ Pitch Sensitivity
 yue 垂直靈敏度
 
+@ planar
+yue 平面
+
 @ Playback Speed
 yue 播放速度
 
@@ -846,6 +849,12 @@ yue 紅
 
 @ Reduce Motion
 yue 減少動態效果
+
+@ Reflection Strength
+yue 反射強度
+
+@ Reflections
+yue 反射
 
 @ Regen (seconds per second)
 yue 回復（每秒秒數）
@@ -1565,6 +1574,9 @@ yue 同一時間有幾多盞燈投下陰影，同埋陰影邊緣有幾柔和
 @ How strongly fog covers the sky when fog is on
 yue 開咗霧時霧氣遮住天空嘅程度
 
+@ How strongly the surface reflects; strongest at shallow viewing angles
+yue 水面反射有幾強；斜斜咁望時最強
+
 @ How the view distorts underwater: Classic ripples the whole screen like software Quake, GLQuake slowly stretches and squashes the view
 yue 水底畫面嘅扭曲方式：經典會好似軟件版Quake咁令成個畫面波動，GLQuake就慢慢拉闊同壓扁畫面
 
@@ -1831,6 +1843,9 @@ yue 用地圖嘅彩色光照（.lit檔案或者BSPX區塊）；關閉就係原�
 
 @ Walls, doors and monsters block the light and cast shadows
 yue 牆、門同怪物會擋住光，投下陰影
+
+@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level
+yue 水同黏液會映出上面嘅空間；平面會為每個附近嘅水面再畫多一次場景
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 yue 水柱分段、水滴數量同光澤液體著色：低用較簡單嘅半透明水流；高用順滑有光澤嘅水柱

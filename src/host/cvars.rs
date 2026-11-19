@@ -334,6 +334,8 @@ pub(super) const COMPAT_CVARS: &[(&str, &str, u32)] = &[
     ("r_waterripples_amount", "1", CVAR_ARCHIVE),
     ("r_watercaustics_amount", "1", CVAR_ARCHIVE),
     ("r_water_quality", "1", CVAR_ARCHIVE),
+    ("r_water_reflections", "0", CVAR_ARCHIVE),
+    ("r_water_reflections_amount", "1", CVAR_ARCHIVE),
     ("cl_nopext", "0", CVAR_ARCHIVE),
     ("r_softparticledistance", "4", CVAR_ARCHIVE),
     ("r_bouncysparks", "1", 0),

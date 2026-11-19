@@ -781,6 +781,9 @@ ro Ton
 @ Pitch Sensitivity
 ro Sensibilitate verticală
 
+@ planar
+ro plane
+
 @ Playback Speed
 ro Viteză redare
 
@@ -846,6 +849,12 @@ ro Roșu
 
 @ Reduce Motion
 ro Reduce mișcarea
+
+@ Reflection Strength
+ro Intensitatea reflexiilor
+
+@ Reflections
+ro Reflexii
 
 @ Regen (seconds per second)
 ro Regenerare (secunde pe secundă)
@@ -1565,6 +1574,9 @@ ro Câte lumini aruncă umbre în același timp și cât de fine sunt marginile 
 @ How strongly fog covers the sky when fog is on
 ro Cât de mult acoperă ceața cerul când ceața e pornită
 
+@ How strongly the surface reflects; strongest at shallow viewing angles
+ro Cât de puternic reflectă suprafața; cel mai puternic la unghiuri de privire joase
+
 @ How the view distorts underwater: Classic ripples the whole screen like software Quake, GLQuake slowly stretches and squashes the view
 ro Cum se distorsionează privirea sub apă: Clasic unduiește tot ecranul ca Quake software, GLQuake întinde și turtește lent imaginea
 
@@ -1831,6 +1843,9 @@ ro Folosește lumina colorată a hărții (fișier .lit sau bloc BSPX); oprit of
 
 @ Walls, doors and monsters block the light and cast shadows
 ro Pereții, ușile și monștrii blochează lumina și aruncă umbre
+
+@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level
+ro Apa și mâlul reflectă încăperea de deasupra; plane redesenează scena o dată pentru fiecare nivel de apă apropiat
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 ro Segmentele jetului de apă, numărul de picături și umbrirea lucioasă a lichidului: scăzută folosește jeturi translucide mai simple; ridicată jeturi fine și lucioase

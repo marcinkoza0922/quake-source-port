@@ -115,6 +115,11 @@ pub struct Settings {
     pub water_caustics: f32,
     /// r_water_quality: enhanced water caustics, ripples & splashes quality (0 = low, 1 = high).
     pub water_quality: u32,
+    /// r_water_reflections: 0 off, 1 planar (the scene mirrored across each
+    /// nearby horizontal water/slime plane, drawn as a portal view).
+    pub water_reflections: u32,
+    /// r_water_reflections_amount: reflection strength (0..=1.5).
+    pub water_reflection_amount: f32,
     /// addon_gel_quality: gel coat & droplet shading quality (0 = low / single fetch, 1 = high).
     pub gel_quality: u32,
     /// r_shader_scope: 0 = slang preset on the 3D view only (UI drawn after
@@ -190,6 +195,8 @@ impl Default for Settings {
             ssao_radius: 32.0,
             motion_blur: 0.0,
             motion_blur_quality: 1,
+            water_reflections: 0,
+            water_reflection_amount: 1.0,
             bloom: 0.0,
             bloom_size: 1.0,
             bloom_bright: 0.0,

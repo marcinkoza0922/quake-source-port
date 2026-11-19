@@ -43,6 +43,7 @@ impl Pipelines {
             self.bloom_up,
             self.shadow_world,
             self.shadow_alias,
+            self.portal_alias_mirror,
         ];
         v.extend(self.fte);
         v.extend(self.portal.all().filter(|&p| p != vk::Pipeline::null()));
@@ -130,6 +131,7 @@ impl Pipelines {
             behind: false,
             glow: false,
             shadow: false,
+            mirror: false,
         };
         let g = |d: Desc| graphics(gpu, layout, &d);
         let fb = [bind(0, 24, false)];
@@ -177,6 +179,8 @@ impl Pipelines {
             })
         };
         let scene = build_scene(samples, supersample, glow)?;
+        // reflection views: single-sampled alias models with mirrored winding
+        self.portal_alias_mirror = g(Desc { cull: true, samples: 1, sample_shading: false, mirror: true, ..d(alias_vs, alias_fs, &ab, &aa, Blend::None, true, true) })?;
         // portal views are single-sampled and have no glow attachment
         self.portal = if samples > 1 || glow { build_scene(1, false, false)? } else { ScenePipes::null() };
         // thermal goggles: hot bodies behind walls, added on top
@@ -215,6 +219,7 @@ impl Pipelines {
                 behind: false,
                 glow: false,
                 shadow: false,
+                mirror: false,
             },
         )?;
         // post-effect passes: single-sampled, no depth attachment

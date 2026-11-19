@@ -781,6 +781,9 @@ ka ტონის სიმაღლე
 @ Pitch Sensitivity
 ka ვერტიკალური მგრძნობელობა
 
+@ planar
+ka ბრტყელი
+
 @ Playback Speed
 ka დაკვრის სიჩქარე
 
@@ -846,6 +849,12 @@ ka წითელი
 
 @ Reduce Motion
 ka მოძრაობის შემცირება
+
+@ Reflection Strength
+ka ანარეკლის სიძლიერე
+
+@ Reflections
+ka ანარეკლები
 
 @ Regen (seconds per second)
 ka აღდგენა (წამი წამში)
@@ -1565,6 +1574,9 @@ ka რამდენი სინათლე აყენებს ჩრდ�
 @ How strongly fog covers the sky when fog is on
 ka რამდენად ფარავს ნისლი ცას, როცა ნისლი ჩართულია
 
+@ How strongly the surface reflects; strongest at shallow viewing angles
+ka რამდენად ძლიერად ირეკლავს ზედაპირი; ყველაზე ძლიერად დაბალი ხედვის კუთხით
+
 @ How the view distorts underwater: Classic ripples the whole screen like software Quake, GLQuake slowly stretches and squashes the view
 ka როგორ მახინჯდება ხედი წყალქვეშ: კლასიკური მთელ ეკრანს ატალღებს პროგრამული Quake-ის მსგავსად, GLQuake ხედს ნელა წელავს და კუმშავს
 
@@ -1831,6 +1843,9 @@ ka იყენებს რუკის ფერად განათებ�
 
 @ Walls, doors and monsters block the light and cast shadows
 ka კედლები, კარები და ურჩხულები სინათლეს ფარავენ და ჩრდილს აყენებენ
+
+@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level
+ka წყალი და ლორწო ირეკლავს ოთახს მათ ზემოთ; ბრტყელი სცენას ხელახლა ხატავს ყოველი ახლო წყლის დონისთვის ერთხელ
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 ka წყლის ჭავლის სეგმენტები, წვეთების რაოდენობა და სითხის პრიალა დაჩრდილვა: დაბალი იყენებს მარტივ გამჭვირვალე ნაკადებს; მაღალი — გლუვ პრიალა ჭავლებს

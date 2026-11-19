@@ -781,6 +781,9 @@ fil Pitch
 @ Pitch Sensitivity
 fil Sensitivity ng Pitch
 
+@ planar
+fil patag
+
 @ Playback Speed
 fil Bilis ng Playback
 
@@ -846,6 +849,12 @@ fil Pula
 
 @ Reduce Motion
 fil Bawasan ang Galaw
+
+@ Reflection Strength
+fil Lakas ng Repleksyon
+
+@ Reflections
+fil Mga Repleksyon
 
 @ Regen (seconds per second)
 fil Regen (segundo kada segundo)
@@ -1565,6 +1574,9 @@ fil Ilang ilaw ang sabay na naglalabas ng anino, at gaano kakinis ang mga gilid 
 @ How strongly fog covers the sky when fog is on
 fil Gaano kakapal tinatakpan ng hamog ang langit kapag naka-on ang hamog
 
+@ How strongly the surface reflects; strongest at shallow viewing angles
+fil Gaano kalakas sumasalamin ang ibabaw; pinakamalakas sa mababang anggulo ng pagtingin
+
 @ How the view distorts underwater: Classic ripples the whole screen like software Quake, GLQuake slowly stretches and squashes the view
 fil Paano bumabaluktot ang tanaw sa ilalim ng tubig: kumakaway ang buong screen sa Klasiko gaya ng software Quake, dahan-dahang bumabanat at umiipit ang tanaw sa GLQuake
 
@@ -1831,6 +1843,9 @@ fil Ginagamit ang may kulay na ilaw ng mapa (.lit file o BSPX lump); kapag naka-
 
 @ Walls, doors and monsters block the light and cast shadows
 fil Hinaharangan ng mga pader, pinto at halimaw ang ilaw at naglalabas ng anino
+
+@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level
+fil Sinasalamin ng tubig at putik ang silid sa itaas nila; muling iginuguhit ng patag ang eksena minsan bawat malapit na antas ng tubig
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 fil Mga segment ng water jet, bilang ng patak at makintab na shading ng likido: mas simpleng translucent na agos sa mababa; makinis at makintab na jet sa mataas

@@ -781,6 +781,9 @@ uk Висота тону
 @ Pitch Sensitivity
 uk Чутливість по вертикалі
 
+@ planar
+uk площинні
+
 @ Playback Speed
 uk Швидкість відтворення
 
@@ -846,6 +849,12 @@ uk Червоний
 
 @ Reduce Motion
 uk Зменшити рух
+
+@ Reflection Strength
+uk Сила віддзеркалень
+
+@ Reflections
+uk Віддзеркалення
 
 @ Regen (seconds per second)
 uk Відновлення (секунд за секунду)
@@ -1565,6 +1574,9 @@ uk Скільки джерел світла відкидають тіні одн
 @ How strongly fog covers the sky when fog is on
 uk Наскільки туман закриває небо, коли туман увімкнено
 
+@ How strongly the surface reflects; strongest at shallow viewing angles
+uk Наскільки сильно відбиває поверхня; найсильніше під пологим кутом
+
 @ How the view distorts underwater: Classic ripples the whole screen like software Quake, GLQuake slowly stretches and squashes the view
 uk Як спотворюється огляд під водою: класичний колише весь екран, як програмний Quake, GLQuake повільно розтягує й стискає картинку
 
@@ -1831,6 +1843,9 @@ uk Використовує кольорове освітлення карти (
 
 @ Walls, doors and monsters block the light and cast shadows
 uk Стіни, двері й монстри затуляють світло й відкидають тіні
+
+@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level
+uk Вода й слиз віддзеркалюють приміщення над ними; площинні перемальовують сцену один раз для кожного близького рівня води
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 uk Сегменти струменя, кількість крапель і глянцеве затінення рідини: низька — прості напівпрозорі струмені; висока — гладкі глянцеві

@@ -781,6 +781,9 @@ pl Wysokość tonu
 @ Pitch Sensitivity
 pl Czułość pionowa
 
+@ planar
+pl płaskie
+
 @ Playback Speed
 pl Szybkość odtwarzania
 
@@ -846,6 +849,12 @@ pl Czerwony
 
 @ Reduce Motion
 pl Ogranicz ruch
+
+@ Reflection Strength
+pl Siła odbić
+
+@ Reflections
+pl Odbicia
 
 @ Regen (seconds per second)
 pl Regeneracja (sekund na sekundę)
@@ -1565,6 +1574,9 @@ pl Ile świateł jednocześnie rzuca cienie i jak miękkie są ich krawędzie
 @ How strongly fog covers the sky when fog is on
 pl Jak mocno mgła zakrywa niebo, gdy mgła jest włączona
 
+@ How strongly the surface reflects; strongest at shallow viewing angles
+pl Jak mocno odbija powierzchnia; najsilniej przy niskim kącie patrzenia
+
 @ How the view distorts underwater: Classic ripples the whole screen like software Quake, GLQuake slowly stretches and squashes the view
 pl Jak widok zniekształca się pod wodą: klasyczny faluje cały ekran jak programowy Quake, GLQuake powoli rozciąga i ściska widok
 
@@ -1831,6 +1843,9 @@ pl Używa kolorowego światła mapy (plik .lit lub blok BSPX); wyłączone daje 
 
 @ Walls, doors and monsters block the light and cast shadows
 pl Ściany, drzwi i potwory zasłaniają światło i rzucają cienie
+
+@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level
+pl Woda i szlam odbijają pomieszczenie nad sobą; płaskie rysuje scenę ponownie raz na każdy pobliski poziom wody
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 pl Segmenty strumienia, liczba kropli i połysk cieczy: niska używa prostszych przezroczystych strumieni; wysoka gładkich, lśniących strumieni

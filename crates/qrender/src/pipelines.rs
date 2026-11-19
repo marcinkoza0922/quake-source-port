@@ -101,6 +101,8 @@ pub struct Pipelines {
     pub fte: [vk::Pipeline; 17],
     /// Single-sampled pipelines for portal/teleporter destination views when MSAA is enabled.
     pub portal: ScenePipes,
+    /// Single-sampled opaque alias models for mirrored (reflection) views.
+    pub portal_alias_mirror: vk::Pipeline,
     pub ui: vk::Pipeline,
     pub post: vk::Pipeline,
     /// SSAO pass (fullscreen, scene resolution).
@@ -417,6 +419,7 @@ impl Pipelines {
             particle: null,
             fte: [null; 17],
             portal: ScenePipes::null(),
+            portal_alias_mirror: null,
             ui: null,
             post: null,
             ao: null,

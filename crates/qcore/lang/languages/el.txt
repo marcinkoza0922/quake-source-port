@@ -781,6 +781,9 @@ el Τόνος
 @ Pitch Sensitivity
 el Κάθετη ευαισθησία
 
+@ planar
+el επίπεδες
+
 @ Playback Speed
 el Ταχύτητα αναπαραγωγής
 
@@ -846,6 +849,12 @@ el Κόκκινο
 
 @ Reduce Motion
 el Μείωση κίνησης
+
+@ Reflection Strength
+el Ένταση αντανακλάσεων
+
+@ Reflections
+el Αντανακλάσεις
 
 @ Regen (seconds per second)
 el Αναγέννηση (δευτ. ανά δευτ.)
@@ -1565,6 +1574,9 @@ el Πόσα φώτα ρίχνουν σκιές ταυτόχρονα και πό�
 @ How strongly fog covers the sky when fog is on
 el Πόσο έντονα καλύπτει η ομίχλη τον ουρανό όταν είναι ενεργή
 
+@ How strongly the surface reflects; strongest at shallow viewing angles
+el Πόσο έντονα αντανακλά η επιφάνεια· εντονότερα σε χαμηλές γωνίες θέασης
+
 @ How the view distorts underwater: Classic ripples the whole screen like software Quake, GLQuake slowly stretches and squashes the view
 el Πώς παραμορφώνεται η θέα κάτω από το νερό: το Κλασικό κυματίζει όλη την οθόνη όπως το Quake λογισμικού, το GLQuake τεντώνει και συμπιέζει αργά τη θέα
 
@@ -1831,6 +1843,9 @@ el Χρησιμοποιεί τον έγχρωμο φωτισμό του χάρτ
 
 @ Walls, doors and monsters block the light and cast shadows
 el Τοίχοι, πόρτες και τέρατα εμποδίζουν το φως και ρίχνουν σκιές
+
+@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level
+el Το νερό και η λάσπη καθρεφτίζουν τον χώρο από πάνω τους· οι επίπεδες ξανασχεδιάζουν τη σκηνή μία φορά για κάθε κοντινή στάθμη νερού
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 el Τμήματα πίδακα νερού, πλήθος σταγόνων και γυαλιστερή σκίαση υγρών: η χαμηλή χρησιμοποιεί απλούστερες ημιδιάφανες ροές· η υψηλή ομαλούς γυαλιστερούς πίδακες

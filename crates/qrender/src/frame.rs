@@ -38,7 +38,7 @@ impl Renderer {
             self.create_swapchain(fr.settings.vsync)?;
         }
         self.apply_settings(&fr.settings)?;
-        self.gun_targets |= fr.gun_portals.iter().any(|g| g.live && g.exit.is_some());
+        self.gun_targets |= fr.gun_portals.iter().any(|g| g.live && g.exit.is_some()) || fr.settings.water_reflections > 0;
         if self.targets.as_ref().is_some_and(|t| t.portals.is_empty())
             && (self.gun_targets || self.world.as_ref().is_some_and(|w| !w.portals.is_empty()))
         {
@@ -238,7 +238,7 @@ impl Renderer {
             w.max(1) as f32 * (scene_w as f32 / sw.max(1) as f32),
             h.max(1) as f32 * (scene_h as f32 / sh.max(1) as f32),
         ];
-        let mut portal_draws = if fr.settings.teleport_windows || !fr.gun_portals.is_empty() {
+        let mut portal_draws = if fr.settings.teleport_windows || !fr.gun_portals.is_empty() || fr.settings.water_reflections > 0 {
             self.prepare_portals(view.as_ref(), [scene_w, scene_h], fr.gun_portals, &fr.settings, &mut dynw, time, alphas, &mut lm_vis, &mut portal_worlds)
         } else {
             Vec::new()
@@ -896,13 +896,16 @@ impl Renderer {
                     }
                     a
                 },
+                refl: [if st.water_reflections > 0 { st.water_reflection_amount.clamp(0.0, 1.5) } else { 0.0 }, 0.0, 0.0, 0.0],
             };
             for (i, portal) in pass.portal_draws.iter_mut().enumerate().filter(|(i, _)| *i < 4) {
                 ubo.portal_plane[i] = portal.portal.plane();
                 // only teleporter sheets sample their view in water.frag
                 let slot = if portal.portal.gun.is_some() { 0.0 } else { self.targets.as_ref().unwrap().portals[i].1 as f32 };
                 ubo.portal_min[i] = [portal.portal.mins[0], portal.portal.mins[1], portal.portal.mins[2], slot];
-                ubo.portal_max[i] = [portal.portal.maxs[0], portal.portal.maxs[1], portal.portal.maxs[2], 1.0];
+                // w: 1 teleporter sheet / gun portal, 2 reflection (water.frag)
+                let kind = if portal.portal.reflect { 2.0 } else { 1.0 };
+                ubo.portal_max[i] = [portal.portal.maxs[0], portal.portal.maxs[1], portal.portal.maxs[2], kind];
             }
             let portal_uv_self = self.targets.as_ref().map_or([0.0; 4], |t| {
                 let [pw, ph] = portals::portal_viewport(t, [pass.scene_w, pass.scene_h]);

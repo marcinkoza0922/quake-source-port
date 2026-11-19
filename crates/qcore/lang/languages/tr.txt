@@ -781,6 +781,9 @@ tr Perde
 @ Pitch Sensitivity
 tr Dikey Hassasiyet
 
+@ planar
+tr düzlemsel
+
 @ Playback Speed
 tr Oynatma Hızı
 
@@ -846,6 +849,12 @@ tr Kırmızı
 
 @ Reduce Motion
 tr Hareketi Azalt
+
+@ Reflection Strength
+tr Yansıma gücü
+
+@ Reflections
+tr Yansımalar
 
 @ Regen (seconds per second)
 tr Yenilenme (saniye başına sn)
@@ -1565,6 +1574,9 @@ tr Aynı anda kaç ışığın gölge düşürdüğü ve kenarlarının ne kadar
 @ How strongly fog covers the sky when fog is on
 tr Sis açıkken sisin gökyüzünü ne kadar örttüğü
 
+@ How strongly the surface reflects; strongest at shallow viewing angles
+tr Yüzeyin ne kadar güçlü yansıttığı; alçak bakış açılarında en güçlü
+
 @ How the view distorts underwater: Classic ripples the whole screen like software Quake, GLQuake slowly stretches and squashes the view
 tr Su altında görüntünün nasıl bozulacağı: Klasik, yazılımsal Quake gibi tüm ekranı dalgalandırır; GLQuake görüntüyü yavaşça gerer ve sıkıştırır
 
@@ -1831,6 +1843,9 @@ tr Haritanın renkli ışığını kullanır (.lit dosyası veya BSPX bloğu); k
 
 @ Walls, doors and monsters block the light and cast shadows
 tr Duvarlar, kapılar ve canavarlar ışığı engeller ve gölge düşürür
+
+@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level
+tr Su ve balçık üstlerindeki odayı yansıtır; düzlemsel, yakındaki her su seviyesi için sahneyi bir kez daha çizer
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 tr Su fışkırması bölümleri, damla sayısı ve parlak sıvı gölgelendirme: düşük daha basit yarı saydam akışlar, yüksek pürüzsüz parlak fışkırmalar kullanır

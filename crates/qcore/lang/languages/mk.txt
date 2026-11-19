@@ -781,6 +781,9 @@ mk Висина на тонот
 @ Pitch Sensitivity
 mk Вертикална чувствителност
 
+@ planar
+mk рамнински
+
 @ Playback Speed
 mk Брзина на репродукција
 
@@ -846,6 +849,12 @@ mk Црвена
 
 @ Reduce Motion
 mk Намали движење
+
+@ Reflection Strength
+mk Јачина на одрази
+
+@ Reflections
+mk Одрази
 
 @ Regen (seconds per second)
 mk Обнова (секунди во секунда)
@@ -1565,6 +1574,9 @@ mk Колку светла фрлаат сенки истовремено и к�
 @ How strongly fog covers the sky when fog is on
 mk Колку силно маглата го покрива небото кога е вклучена
 
+@ How strongly the surface reflects; strongest at shallow viewing angles
+mk Колку силно одразува површината; најсилно при остар агол на гледање
+
 @ How the view distorts underwater: Classic ripples the whole screen like software Quake, GLQuake slowly stretches and squashes the view
 mk Како се изобличува погледот под вода: Класичен го брановидно мрда целиот екран како софтверски Quake, GLQuake полека го растегнува и стиска погледот
 
@@ -1831,6 +1843,9 @@ mk Ја користи обоената светлина на мапата (.lit
 
 @ Walls, doors and monsters block the light and cast shadows
 mk Ѕидовите, вратите и чудовиштата го блокираат светлото и фрлаат сенки
+
+@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level
+mk Водата и лигата ја одразуваат просторијата над нив; рамнински ја исцртува сцената уште еднаш за секое блиско водно ниво
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 mk Сегменти на водениот млаз, број на капки и сјајно сенчење на течноста: ниско користи поедноставни проѕирни млазови; високо користи мазни сјајни млазови

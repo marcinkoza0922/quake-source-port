@@ -781,6 +781,9 @@ he גובה צליל
 @ Pitch Sensitivity
 he רגישות אנכית
 
+@ planar
+he מישוריות
+
 @ Playback Speed
 he מהירות הפעלה
 
@@ -846,6 +849,12 @@ he אדום
 
 @ Reduce Motion
 he הפחתת תנועה
+
+@ Reflection Strength
+he עוצמת השתקפויות
+
+@ Reflections
+he השתקפויות
 
 @ Regen (seconds per second)
 he התחדשות (שניות לשנייה)
@@ -1565,6 +1574,9 @@ he כמה אורות מטילים צללים בבת אחת, וכמה רכים ה
 @ How strongly fog covers the sky when fog is on
 he כמה חזק הערפל מכסה את השמיים כשהערפל פועל
 
+@ How strongly the surface reflects; strongest at shallow viewing angles
+he כמה חזק המשטח משקף; החזק ביותר בזוויות מבט נמוכות
+
 @ How the view distorts underwater: Classic ripples the whole screen like software Quake, GLQuake slowly stretches and squashes the view
 he איך המבט מתעוות מתחת למים: קלאסי מגלגל את כל המסך כמו Quake בתוכנה, GLQuake מותח ומכווץ את המבט לאט
 
@@ -1831,6 +1843,9 @@ he משתמש בתאורה הצבעונית של המפה (קובץ .lit או BS
 
 @ Walls, doors and monsters block the light and cast shadows
 he קירות, דלתות ומפלצות חוסמים את האור ומטילים צללים
+
+@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level
+he מים ורפש משקפים את החדר שמעליהם; מישוריות מציירת את הסצנה מחדש פעם אחת לכל מפלס מים קרוב
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 he מקטעי סילון המים, מספר הטיפות והצללת נוזל מבריקה: נמוכה משתמשת בזרמים שקופים פשוטים; גבוהה בסילונים חלקים ומבריקים

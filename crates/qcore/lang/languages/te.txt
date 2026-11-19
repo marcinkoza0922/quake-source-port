@@ -781,6 +781,9 @@ te పిచ్
 @ Pitch Sensitivity
 te పిచ్ సున్నితత్వం
 
+@ planar
+te సమతల
+
 @ Playback Speed
 te ప్లేబ్యాక్ వేగం
 
@@ -846,6 +849,12 @@ te ఎరుపు
 
 @ Reduce Motion
 te కదలిక తగ్గించు
+
+@ Reflection Strength
+te ప్రతిబింబ బలం
+
+@ Reflections
+te ప్రతిబింబాలు
 
 @ Regen (seconds per second)
 te పునరుత్పత్తి (సెకనుకు సెకన్లు)
@@ -1565,6 +1574,9 @@ te ఒకేసారి ఎన్ని కాంతులు నీడలు �
 @ How strongly fog covers the sky when fog is on
 te పొగమంచు ఆన్‌లో ఉన్నప్పుడు అది ఆకాశాన్ని ఎంత బలంగా కప్పుతుంది
 
+@ How strongly the surface reflects; strongest at shallow viewing angles
+te ఉపరితలం ఎంత బలంగా ప్రతిబింబిస్తుంది; తక్కువ వీక్షణ కోణంలో అత్యంత బలంగా
+
 @ How the view distorts underwater: Classic ripples the whole screen like software Quake, GLQuake slowly stretches and squashes the view
 te నీటి అడుగున వీక్షణ ఎలా వక్రీకరిస్తుంది: క్లాసిక్ సాఫ్ట్‌వేర్ Quake లాగా మొత్తం స్క్రీన్‌ను అలలా కదిలిస్తుంది, GLQuake వీక్షణను నెమ్మదిగా సాగదీసి నొక్కుతుంది
 
@@ -1831,6 +1843,9 @@ te మ్యాప్ రంగుల కాంతిని వాడుతు�
 
 @ Walls, doors and monsters block the light and cast shadows
 te గోడలు, తలుపులు, రాక్షసులు కాంతిని అడ్డుకుని నీడలు వేస్తాయి
+
+@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level
+te నీరు, బురద తమ పైనున్న గదిని ప్రతిబింబిస్తాయి; సమతల ప్రతి దగ్గరి నీటి మట్టానికి దృశ్యాన్ని ఒకసారి మళ్లీ గీస్తుంది
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 te నీటి జెట్ భాగాలు, బిందువుల సంఖ్య, మెరిసే ద్రవ షేడింగ్: తక్కువ సరళమైన పారదర్శక ధారలు వాడుతుంది; అధికం మృదువైన మెరిసే జెట్‌లు వాడుతుంది

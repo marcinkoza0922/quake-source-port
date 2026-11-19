@@ -396,6 +396,9 @@ impl Host {
                 v("r_motionblur_amount").clamp(0.0, 4.0)
             },
             motion_blur_quality: (v("r_motionblur_quality").round() as i32).clamp(0, 1) as u32,
+            // planar reflections (Water Settings, under the Enhanced Water master)
+            water_reflections: if v("r_enhancedwater") != 0.0 { (v("r_water_reflections").round() as i32).clamp(0, 1) as u32 } else { 0 },
+            water_reflection_amount: v("r_water_reflections_amount").clamp(0.0, 1.5),
             bloom: if v("r_bloom") != 0.0 { v("r_bloom_intensity").clamp(0.0, 4.0) } else { 0.0 },
             bloom_size: v("r_bloom_size").clamp(0.5, 2.0),
             bloom_bright: v("r_bloom_bright").clamp(0.0, 1.0),

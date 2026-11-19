@@ -781,6 +781,9 @@ et Helikõrgus
 @ Pitch Sensitivity
 et Vertikaalne tundlikkus
 
+@ planar
+et tasapinnalised
+
 @ Playback Speed
 et Taasesituse kiirus
 
@@ -846,6 +849,12 @@ et Punane
 
 @ Reduce Motion
 et Vähenda liikumist
+
+@ Reflection Strength
+et Peegelduste tugevus
+
+@ Reflections
+et Peegeldused
 
 @ Regen (seconds per second)
 et Taastumine (sekundit sekundis)
@@ -1565,6 +1574,9 @@ et Mitu tuld korraga varje heidab ja kui pehmed on nende servad
 @ How strongly fog covers the sky when fog is on
 et Kui tugevalt udu taevast katab, kui udu on sees
 
+@ How strongly the surface reflects; strongest at shallow viewing angles
+et Kui tugevalt pind peegeldab; kõige tugevamalt madala vaatenurga all
+
 @ How the view distorts underwater: Classic ripples the whole screen like software Quake, GLQuake slowly stretches and squashes the view
 et Kuidas vaade vee all moondub: klassikaline laineb tervet ekraani nagu tarkvara-Quake, GLQuake venitab ja surub vaadet aeglaselt
 
@@ -1831,6 +1843,9 @@ et Kasutab kaardi värvilist valgust (.lit-fail või BSPX-plokk); väljas annab 
 
 @ Walls, doors and monsters block the light and cast shadows
 et Seinad, uksed ja koletised varjavad valgust ja heidavad varje
+
+@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level
+et Vesi ja lima peegeldavad ruumi enda kohal; tasapinnalised joonistavad stseeni iga lähedase veetaseme kohta korra uuesti
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 et Veejoa lõigud, piiskade arv ja läikiv vedelikuvarjutus: madal kasutab lihtsamaid poolläbipaistvaid jugasid; kõrge sujuvaid läikivaid jugasid
