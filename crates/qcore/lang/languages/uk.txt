@@ -835,6 +835,12 @@ uk Лише дальній бій
 @ Reacquire While Held
 uk Перезахоплення при утриманні
 
+@ Real-time Dynamic Lights
+uk Динамічне світло в реальному часі
+
+@ Real-time Light Settings
+uk Налаштування світла в реальному часі
+
 @ Red
 uk Червоний
 
@@ -903,6 +909,12 @@ uk Бачити крізь портали
 
 @ See-through Teleporters
 uk Прозорі телепорти
+
+@ Shadow Quality
+uk Якість тіней
+
+@ Shadows
+uk Тіні
 
 @ Shirt Color
 uk Колір сорочки
@@ -1547,6 +1559,9 @@ uk Наскільки сильно вода мийки високого тиск
 @ How long a hit freezes the game, in milliseconds
 uk Скільки мілісекунд триває стоп-кадр від удару
 
+@ How many lights cast shadows at once, and how smooth their edges are
+uk Скільки джерел світла відкидають тіні одночасно і наскільки м'які їхні краї
+
 @ How strongly fog covers the sky when fog is on
 uk Наскільки туман закриває небо, коли туман увімкнено
 
@@ -1567,6 +1582,9 @@ uk Джерела світла сяють: лампи, лава, телепор�
 
 @ Lights from rockets, muzzle flashes and explosions brighten nearby walls
 uk Світло ракет, спалахів пострілів і вибухів освітлює найближчі стіни
+
+@ Lights from rockets, muzzle flashes and explosions shade walls and models per pixel and cast shadows; needs Dynamic Lights
+uk Світло ракет, пострілів і вибухів попіксельно освітлює стіни й моделі та відкидає тіні; потрібне Динамічне світло
 
 @ Liquid surfaces swell and ring out where things move through them
 uk Поверхня рідини здіймається й розходиться колами там, де крізь неї щось рухається
@@ -1810,6 +1828,9 @@ uk Використовує плавніші моделі MD5 із переви�
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 uk Використовує кольорове освітлення карти (файл .lit або блок BSPX); вимк. — оригінальне біле світло. Застосовується під час наступного завантаження карти
+
+@ Walls, doors and monsters block the light and cast shadows
+uk Стіни, двері й монстри затуляють світло й відкидають тіні
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 uk Сегменти струменя, кількість крапель і глянцеве затінення рідини: низька — прості напівпрозорі струмені; висока — гладкі глянцеві

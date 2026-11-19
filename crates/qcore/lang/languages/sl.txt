@@ -835,6 +835,12 @@ sl Samo boj na daljavo
 @ Reacquire While Held
 sl Ponovni zajem med držanjem
 
+@ Real-time Dynamic Lights
+sl Dinamične luči v realnem času
+
+@ Real-time Light Settings
+sl Nastavitve svetlobe v realnem času
+
 @ Red
 sl Rdeča
 
@@ -903,6 +909,12 @@ sl Pogled skozi portale
 
 @ See-through Teleporters
 sl Prozorni teleporterji
+
+@ Shadow Quality
+sl Kakovost senc
+
+@ Shadows
+sl Sence
 
 @ Shirt Color
 sl Barva majice
@@ -1547,6 +1559,9 @@ sl Kako močno voda visokotlačnega čistilnika potiska sovražnike
 @ How long a hit freezes the game, in milliseconds
 sl Kako dolgo zadetek zamrzne igro, v milisekundah
 
+@ How many lights cast shadows at once, and how smooth their edges are
+sl Koliko luči hkrati meče sence in kako mehki so njihovi robovi
+
 @ How strongly fog covers the sky when fog is on
 sl Kako močno megla prekrije nebo, ko je megla vklopljena
 
@@ -1567,6 +1582,9 @@ sl Viri svetlobe sijejo: svetilke, lava, teleporterji, iskre in eksplozije; Nast
 
 @ Lights from rockets, muzzle flashes and explosions brighten nearby walls
 sl Luči raket, bliskov ustja cevi in eksplozij osvetlijo bližnje stene
+
+@ Lights from rockets, muzzle flashes and explosions shade walls and models per pixel and cast shadows; needs Dynamic Lights
+sl Svetloba raket, bliskov strelov in eksplozij osvetli stene in modele po slikovnih pikah in meče sence; zahteva Dinamične luči
 
 @ Liquid surfaces swell and ring out where things move through them
 sl Površine tekočin valovijo in tvorijo kroge, kjer se kaj giblje skozi njih
@@ -1810,6 +1828,9 @@ sl Namesto klasičnih uporablja bolj gladke modele MD5 iz izdaje 2021 (in nadome
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 sl Uporablja barvno svetlobo zemljevida (datoteka .lit ali blok BSPX); izklopljeno da izvirno belo svetlobo. Velja ob naslednjem nalaganju zemljevida
+
+@ Walls, doors and monsters block the light and cast shadows
+sl Stene, vrata in pošasti zastirajo svetlobo in mečejo sence
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 sl Segmenti curka, število kapljic in sijoče senčenje tekočine: nizko uporablja preprostejše prosojne curke; visoko gladke sijoče curke

@@ -835,6 +835,12 @@ id Hanya jarak jauh
 @ Reacquire While Held
 id Kunci Ulang saat Ditahan
 
+@ Real-time Dynamic Lights
+id Cahaya Dinamis Real-time
+
+@ Real-time Light Settings
+id Pengaturan Cahaya Real-time
+
 @ Red
 id Merah
 
@@ -903,6 +909,12 @@ id Lihat Tembus Portal
 
 @ See-through Teleporters
 id Teleporter Tembus Pandang
+
+@ Shadow Quality
+id Kualitas Bayangan
+
+@ Shadows
+id Bayangan
 
 @ Shirt Color
 id Warna Baju
@@ -1547,6 +1559,9 @@ id Seberapa kuat air Powerwasher mendorong musuh
 @ How long a hit freezes the game, in milliseconds
 id Lama serangan membekukan game, dalam milidetik
 
+@ How many lights cast shadows at once, and how smooth their edges are
+id Berapa banyak cahaya yang menghasilkan bayangan sekaligus, dan seberapa halus tepinya
+
 @ How strongly fog covers the sky when fog is on
 id Seberapa tebal kabut menutupi langit saat kabut aktif
 
@@ -1567,6 +1582,9 @@ id Sumber cahaya berpendar: lampu, lava, teleporter, percikan, dan ledakan; Peng
 
 @ Lights from rockets, muzzle flashes and explosions brighten nearby walls
 id Cahaya roket, kilatan moncong senjata, dan ledakan menerangi dinding di dekatnya
+
+@ Lights from rockets, muzzle flashes and explosions shade walls and models per pixel and cast shadows; needs Dynamic Lights
+id Cahaya roket, kilatan tembakan, dan ledakan menerangi dinding dan model per piksel serta menghasilkan bayangan; perlu Cahaya Dinamis
 
 @ Liquid surfaces swell and ring out where things move through them
 id Permukaan cairan bergelombang dan beriak saat dilalui benda
@@ -1810,6 +1828,9 @@ id Memakai model MD5 yang lebih halus dari rilis ulang 2021 (dan pengganti MD3 d
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 id Memakai cahaya berwarna peta (berkas .lit atau lump BSPX); nonaktif memberi cahaya putih vanilla. Berlaku saat peta berikutnya dimuat
+
+@ Walls, doors and monsters block the light and cast shadows
+id Dinding, pintu, dan monster menghalangi cahaya dan menghasilkan bayangan
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 id Segmen semburan air, jumlah tetesan, dan shading cairan mengilap: rendah memakai aliran tembus pandang sederhana; tinggi memakai semburan halus dan mengilap

@@ -835,6 +835,12 @@ ar الهجوم البعيد فقط
 @ Reacquire While Held
 ar إعادة الالتقاط أثناء الضغط
 
+@ Real-time Dynamic Lights
+ar أضواء ديناميكية في الوقت الفعلي
+
+@ Real-time Light Settings
+ar إعدادات الإضاءة في الوقت الفعلي
+
 @ Red
 ar أحمر
 
@@ -903,6 +909,12 @@ ar الرؤية عبر البوابات
 
 @ See-through Teleporters
 ar ناقلات شفافة
+
+@ Shadow Quality
+ar جودة الظلال
+
+@ Shadows
+ar الظلال
 
 @ Shirt Color
 ar لون القميص
@@ -1547,6 +1559,9 @@ ar قوة دفع ماء غسالة الضغط للأعداء
 @ How long a hit freezes the game, in milliseconds
 ar مدة تجميد اللعبة عند الضربة، بالمللي ثانية
 
+@ How many lights cast shadows at once, and how smooth their edges are
+ar عدد الأضواء التي تُلقي ظلالًا في آن واحد ومدى نعومة حوافها
+
 @ How strongly fog covers the sky when fog is on
 ar مدى تغطية الضباب للسماء عند تفعيل الضباب
 
@@ -1567,6 +1582,9 @@ ar تتوهج مصادر الضوء: المصابيح والحمم والناق�
 
 @ Lights from rockets, muzzle flashes and explosions brighten nearby walls
 ar أضواء الصواريخ ووميض الفوهات والانفجارات تضيء الجدران القريبة
+
+@ Lights from rockets, muzzle flashes and explosions shade walls and models per pixel and cast shadows; needs Dynamic Lights
+ar تضيء أنوار الصواريخ ووميض الإطلاق والانفجارات الجدران والنماذج لكل بكسل وتُلقي ظلالًا؛ يتطلب الأضواء الديناميكية
 
 @ Liquid surfaces swell and ring out where things move through them
 ar أسطح السوائل تنتفخ وتتموج حيث تمر الأشياء عبرها
@@ -1810,6 +1828,9 @@ ar يستخدم نماذج MD5 الأنعم من إصدار 2021 المحدّث 
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 ar يستخدم الإضاءة الملونة للخريطة (ملف .lit أو كتلة BSPX)؛ عند الإيقاف يكون الضوء أبيض كالأصل. يُطبَّق عند تحميل الخريطة التالية
+
+@ Walls, doors and monsters block the light and cast shadows
+ar تحجب الجدران والأبواب والوحوش الضوء وتُلقي ظلالًا
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 ar أجزاء نفث الماء وعدد القطرات وتظليل السائل اللامع: المنخفض يستخدم تيارات شفافة أبسط؛ العالي نفثات لامعة ناعمة

@@ -835,6 +835,12 @@ mt Mill-bogħod biss
 @ Reacquire While Held
 mt Erġa' aqbad waqt li żżomm
 
+@ Real-time Dynamic Lights
+mt Dwal dinamiċi f'ħin reali
+
+@ Real-time Light Settings
+mt Settings tad-dawl f'ħin reali
+
 @ Red
 mt Aħmar
 
@@ -903,6 +909,12 @@ mt Ara minn ġol-portali
 
 @ See-through Teleporters
 mt Teleporters trasparenti
+
+@ Shadow Quality
+mt Kwalità tad-dellijiet
+
+@ Shadows
+mt Dellijiet
 
 @ Shirt Color
 mt Kulur tal-flokk
@@ -1547,6 +1559,9 @@ mt Kemm jimbotta bil-qawwa l-ilma tal-Powerwasher lill-għedewwa
 @ How long a hit freezes the game, in milliseconds
 mt Kemm iddum laqta tiffriża l-logħba, f'millisekondi
 
+@ How many lights cast shadows at once, and how smooth their edges are
+mt Kemm dwal jitfgħu dellijiet fl-istess ħin, u kemm huma rotob it-truf tagħhom
+
 @ How strongly fog covers the sky when fog is on
 mt Kemm jgħatti s-sema ċ-ċpar meta ċ-ċpar ikun mixgħul
 
@@ -1567,6 +1582,9 @@ mt Is-sorsi tad-dawl jiddu: lampi, lava, teleporters, xrar u splużjonijiet; Set
 
 @ Lights from rockets, muzzle flashes and explosions brighten nearby walls
 mt Id-dwal tar-rokits, tal-isparar u tal-isplużjonijiet jixegħlu l-ħitan fil-qrib
+
+@ Lights from rockets, muzzle flashes and explosions shade walls and models per pixel and cast shadows; needs Dynamic Lights
+mt Id-dawl tar-rokits, il-leħħiet tal-isparar u l-isplużjonijiet jixgħel il-ħitan u l-mudelli pixel b'pixel u jitfa' dellijiet; jeħtieġ Dwal dinamiċi
 
 @ Liquid surfaces swell and ring out where things move through them
 mt L-uċuħ tal-likwidi jintefħu u jagħmlu ċrieki fejn xi ħaġa tgħaddi minnhom
@@ -1810,6 +1828,9 @@ mt Juża l-mudelli MD5 aktar lixxi tal-edizzjoni mill-ġdid tal-2021 (u sostituz
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 mt Juża d-dawl ikkulurit tal-mappa (fajl .lit jew lump BSPX); mitfi jagħti d-dawl abjad oriġinali. Japplika meta tittella' l-mappa li jmiss
+
+@ Walls, doors and monsters block the light and cast shadows
+mt Il-ħitan, il-bibien u l-mostri jimblukkaw id-dawl u jitfgħu dellijiet
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 mt Segmenti tal-ġett tal-ilma, għadd ta' qtar u shading tleqq tal-likwidu: baxxa tuża ġettijiet trasluċidi aktar sempliċi; għolja tuża ġettijiet lixxi u tleqq

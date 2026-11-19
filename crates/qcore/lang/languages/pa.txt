@@ -835,6 +835,12 @@ pa ਸਿਰਫ਼ ਦੂਰੋਂ ਵਾਰ
 @ Reacquire While Held
 pa ਦਬਾਏ ਹੋਏ ਮੁੜ ਨਿਸ਼ਾਨਾ ਲਓ
 
+@ Real-time Dynamic Lights
+pa ਰੀਅਲ-ਟਾਈਮ ਡਾਇਨਾਮਿਕ ਲਾਈਟਾਂ
+
+@ Real-time Light Settings
+pa ਰੀਅਲ-ਟਾਈਮ ਰੌਸ਼ਨੀ ਸੈਟਿੰਗਾਂ
+
 @ Red
 pa ਲਾਲ
 
@@ -903,6 +909,12 @@ pa ਪੋਰਟਲਾਂ ਦੇ ਆਰ-ਪਾਰ ਦੇਖੋ
 
 @ See-through Teleporters
 pa ਆਰ-ਪਾਰ ਦਿਸਦੇ ਟੈਲੀਪੋਰਟਰ
+
+@ Shadow Quality
+pa ਪਰਛਾਵਿਆਂ ਦੀ ਗੁਣਵੱਤਾ
+
+@ Shadows
+pa ਪਰਛਾਵੇਂ
 
 @ Shirt Color
 pa ਕਮੀਜ਼ ਦਾ ਰੰਗ
@@ -1547,6 +1559,9 @@ pa ਪਾਵਰਵਾਸ਼ਰ ਦਾ ਪਾਣੀ ਦੁਸ਼ਮਣਾਂ ਨ�
 @ How long a hit freezes the game, in milliseconds
 pa ਇੱਕ ਵਾਰ ਗੇਮ ਨੂੰ ਕਿੰਨੀ ਦੇਰ ਰੋਕਦਾ ਹੈ, ਮਿਲੀਸਕਿੰਟਾਂ ਵਿੱਚ
 
+@ How many lights cast shadows at once, and how smooth their edges are
+pa ਇੱਕੋ ਸਮੇਂ ਕਿੰਨੀਆਂ ਰੌਸ਼ਨੀਆਂ ਪਰਛਾਵੇਂ ਪਾਉਂਦੀਆਂ ਹਨ ਅਤੇ ਉਨ੍ਹਾਂ ਦੇ ਕਿਨਾਰੇ ਕਿੰਨੇ ਨਰਮ ਹਨ
+
 @ How strongly fog covers the sky when fog is on
 pa ਧੁੰਦ ਚਾਲੂ ਹੋਣ 'ਤੇ ਇਹ ਅਸਮਾਨ ਨੂੰ ਕਿੰਨਾ ਢਕਦੀ ਹੈ
 
@@ -1567,6 +1582,9 @@ pa ਰੌਸ਼ਨੀ ਦੇ ਸਰੋਤ ਚਮਕਦੇ ਹਨ: ਦੀਵੇ, 
 
 @ Lights from rockets, muzzle flashes and explosions brighten nearby walls
 pa ਰਾਕਟਾਂ, ਨਾਲੀ ਦੀਆਂ ਚਮਕਾਂ ਅਤੇ ਧਮਾਕਿਆਂ ਦੀ ਰੋਸ਼ਨੀ ਨੇੜਲੀਆਂ ਕੰਧਾਂ ਨੂੰ ਰੋਸ਼ਨ ਕਰਦੀ ਹੈ
+
+@ Lights from rockets, muzzle flashes and explosions shade walls and models per pixel and cast shadows; needs Dynamic Lights
+pa ਰਾਕੇਟਾਂ, ਗੋਲੀ ਦੀ ਚਮਕ ਅਤੇ ਧਮਾਕਿਆਂ ਦੀ ਰੌਸ਼ਨੀ ਕੰਧਾਂ ਅਤੇ ਮਾਡਲਾਂ ਨੂੰ ਪ੍ਰਤੀ ਪਿਕਸਲ ਰੌਸ਼ਨ ਕਰਦੀ ਹੈ ਅਤੇ ਪਰਛਾਵੇਂ ਪਾਉਂਦੀ ਹੈ; ਡਾਇਨਾਮਿਕ ਲਾਈਟਾਂ ਲੋੜੀਂਦੀਆਂ
 
 @ Liquid surfaces swell and ring out where things move through them
 pa ਜਿੱਥੇ ਚੀਜ਼ਾਂ ਲੰਘਦੀਆਂ ਹਨ ਉੱਥੇ ਤਰਲ ਸਤ੍ਹਾਵਾਂ ਉੱਛਲਦੀਆਂ ਹਨ ਅਤੇ ਛੱਲੇ ਬਣਦੇ ਹਨ
@@ -1810,6 +1828,9 @@ pa ਕਲਾਸਿਕ ਮਾਡਲਾਂ ਦੀ ਥਾਂ 2021 ਰੀ-ਰਿਲ�
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 pa ਮੈਪ ਦੀ ਰੰਗੀਨ ਰੋਸ਼ਨੀ (.lit ਫ਼ਾਈਲ ਜਾਂ BSPX lump) ਵਰਤਦਾ ਹੈ; ਬੰਦ ਹੋਣ 'ਤੇ ਅਸਲ ਚਿੱਟੀ ਰੋਸ਼ਨੀ। ਅਗਲਾ ਮੈਪ ਲੋਡ ਹੋਣ 'ਤੇ ਲਾਗੂ ਹੁੰਦਾ ਹੈ
+
+@ Walls, doors and monsters block the light and cast shadows
+pa ਕੰਧਾਂ, ਦਰਵਾਜ਼ੇ ਅਤੇ ਰਾਖਸ਼ ਰੌਸ਼ਨੀ ਰੋਕਦੇ ਹਨ ਅਤੇ ਪਰਛਾਵੇਂ ਪਾਉਂਦੇ ਹਨ
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 pa ਪਾਣੀ ਦੀ ਧਾਰ ਦੇ ਹਿੱਸੇ, ਬੂੰਦਾਂ ਦੀ ਗਿਣਤੀ ਅਤੇ ਚਮਕੀਲੀ ਤਰਲ ਸ਼ੇਡਿੰਗ: ਘੱਟ ਸਾਦੀਆਂ ਪਾਰਦਰਸ਼ੀ ਧਾਰਾਂ ਵਰਤਦਾ ਹੈ; ਉੱਚ ਸੁਚਾਰੂ ਚਮਕੀਲੀਆਂ ਧਾਰਾਂ ਵਰਤਦਾ ਹੈ

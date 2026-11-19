@@ -11,6 +11,7 @@
 mod convert;
 pub use convert::{ExternalTexture, LevelBsp};
 mod projection;
+mod rtlight;
 pub use projection::{ViewFrustum, view_fov_tangents};
 mod shared;
 mod softemu;
@@ -55,6 +56,11 @@ mod descriptors;
 #[cfg(qvk)]
 #[path = "lib/init.rs"]
 mod init;
+#[cfg(qvk)]
+#[path = "lib/shadows.rs"]
+mod shadows;
+#[cfg(qvk)]
+use shadows::ShadowMaps;
 #[cfg(qvk)]
 #[path = "lib/timing.rs"]
 mod timing;

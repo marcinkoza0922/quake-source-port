@@ -339,6 +339,8 @@ pub(super) const ENHANCEMENTS: &[Item] = &[
     toggle("Speed Blur", "r_speedblur"),
     toggle("Bloom", "r_bloom"),
     Item::Sub { label: "Bloom Settings", page: Page::Bloom },
+    toggle("Real-time Dynamic Lights", "r_shadow_realtime_dlight"),
+    Item::Sub { label: "Real-time Light Settings", page: Page::RtLights },
     Item::Sub { label: "Screen Shader", page: Page::ScreenShader },
     toggle("Enhanced FX", "r_enhancedfx"),
     Item::Sub { label: "FX Settings", page: Page::Impacts },
@@ -386,6 +388,12 @@ pub(super) const BLOOM: &[Item] = &[
     slider("Bloom Intensity", "r_bloom_intensity", 0.25, 3.0, 0.25),
     slider("Bloom Size", "r_bloom_size", 0.5, 2.0, 0.1),
     slider("Bright Surfaces", "r_bloom_bright", 0.0, 1.0, 0.1),
+];
+
+/// Reached from Enhancements; unavailable while `r_shadow_realtime_dlight` is off.
+pub(super) const RT_LIGHTS: &[Item] = &[
+    toggle("Shadows", "r_shadow_realtime_dlight_shadows"),
+    Item::Choice { label: "Shadow Quality", cvar: "r_shadow_quality", choices: PORTAL_QUALITY },
 ];
 
 pub(super) const DEBRIS_QUALITY: &[(&str, f32)] = &[("low", 0.0), ("medium", 1.0), ("high", 2.0)];

@@ -213,6 +213,7 @@ fn main() {
         radius: 200.0,
         minlight: 0.0,
         color: [1.0, 0.6, 0.3],
+        key: 0,
     }];
     let frame = RenderFrame {
         time: 1.0,

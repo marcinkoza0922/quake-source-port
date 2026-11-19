@@ -41,6 +41,8 @@ impl Pipelines {
             self.vel_world,
             self.bloom_down,
             self.bloom_up,
+            self.shadow_world,
+            self.shadow_alias,
         ];
         v.extend(self.fte);
         v.extend(self.portal.all().filter(|&p| p != vk::Pipeline::null()));
@@ -81,6 +83,8 @@ impl Pipelines {
             vel_world_vs,
             vel_fs,
             bloom_fs,
+            shadow_world_fs,
+            shadow_alias_fs,
             glow: glow_fs,
         } = self.sh;
         let layout = self.layout;
@@ -125,6 +129,7 @@ impl Pipelines {
             topology: vk::PrimitiveTopology::TRIANGLE_LIST,
             behind: false,
             glow: false,
+            shadow: false,
         };
         let g = |d: Desc| graphics(gpu, layout, &d);
         let fb = [bind(0, 24, false)];
@@ -209,6 +214,7 @@ impl Pipelines {
                 topology: vk::PrimitiveTopology::TRIANGLE_LIST,
                 behind: false,
                 glow: false,
+                shadow: false,
             },
         )?;
         // post-effect passes: single-sampled, no depth attachment
@@ -233,6 +239,15 @@ impl Pipelines {
         )?;
         self.vel_alias = graphics(gpu, layout, &fx(vel_alias_vs, vel_fs, &ab, &aa, VEL_FORMAT, true))?;
         self.vel_world = graphics(gpu, layout, &fx(vel_world_vs, vel_fs, &wb, &wa, VEL_FORMAT, false))?;
+        // r_shadow_realtime_dlight: two-sided casters, single-sampled
+        let shadow = |vs, fs, bindings, attrs| Desc {
+            samples: 1,
+            sample_shading: false,
+            shadow: true,
+            ..d(vs, fs, bindings, attrs, Blend::None, true, true)
+        };
+        self.shadow_world = graphics(gpu, layout, &shadow(world_vs, shadow_world_fs, &wb, &wa))?;
+        self.shadow_alias = graphics(gpu, layout, &shadow(alias_vs, shadow_alias_fs, &ab, &aa))?;
         self.bloom_down = graphics(gpu, layout, &fx(post_vs, bloom_fs, &[], &[], BLOOM_FORMAT, false))?;
         self.bloom_up = graphics(gpu, layout, &Desc { blend: Blend::Factors(one, one), ..fx(post_vs, bloom_fs, &[], &[], BLOOM_FORMAT, false) })?;
         (

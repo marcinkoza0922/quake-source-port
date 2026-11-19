@@ -835,6 +835,12 @@ bn শুধু দূরপাল্লার
 @ Reacquire While Held
 bn ধরে থাকলে আবার লক্ষ্য নিন
 
+@ Real-time Dynamic Lights
+bn রিয়েল-টাইম ডাইনামিক আলো
+
+@ Real-time Light Settings
+bn রিয়েল-টাইম আলোর সেটিংস
+
 @ Red
 bn লাল
 
@@ -903,6 +909,12 @@ bn পোর্টালের ভিতর দিয়ে দেখা
 
 @ See-through Teleporters
 bn স্বচ্ছ টেলিপোর্টার
+
+@ Shadow Quality
+bn ছায়ার মান
+
+@ Shadows
+bn ছায়া
 
 @ Shirt Color
 bn শার্টের রং
@@ -1547,6 +1559,9 @@ bn পাওয়ারওয়াশারের জল শত্রুকে
 @ How long a hit freezes the game, in milliseconds
 bn একটি আঘাত গেম কতক্ষণ থামায়, মিলিসেকেন্ডে
 
+@ How many lights cast shadows at once, and how smooth their edges are
+bn একসাথে কতগুলো আলো ছায়া ফেলে এবং তাদের প্রান্ত কতটা মসৃণ
+
 @ How strongly fog covers the sky when fog is on
 bn কুয়াশা চালু থাকলে আকাশ কতটা কুয়াশায় ঢাকে
 
@@ -1567,6 +1582,9 @@ bn আলোর উৎস জ্বলজ্বল করে: বাতি, ল�
 
 @ Lights from rockets, muzzle flashes and explosions brighten nearby walls
 bn রকেট, নলের ঝলক ও বিস্ফোরণের আলো কাছের দেয়াল আলোকিত করে
+
+@ Lights from rockets, muzzle flashes and explosions shade walls and models per pixel and cast shadows; needs Dynamic Lights
+bn রকেট, গুলির ঝলক ও বিস্ফোরণের আলো দেয়াল ও মডেলকে প্রতি পিক্সেলে আলোকিত করে এবং ছায়া ফেলে; ডাইনামিক আলো প্রয়োজন
 
 @ Liquid surfaces swell and ring out where things move through them
 bn তরলের মধ্য দিয়ে কিছু চললে পৃষ্ঠ ফুলে ওঠে ও বৃত্ত ছড়ায়
@@ -1810,6 +1828,9 @@ bn ক্লাসিকের বদলে 2021 রি-রিলিজের �
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 bn ম্যাপের রঙিন আলো (.lit ফাইল বা BSPX লাম্প) ব্যবহার করে; বন্ধ থাকলে মূল সাদা আলো। পরের ম্যাপ লোডে প্রযোজ্য
+
+@ Walls, doors and monsters block the light and cast shadows
+bn দেয়াল, দরজা ও দানব আলো আটকায় এবং ছায়া ফেলে
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 bn জলধারার অংশ, ফোঁটার সংখ্যা ও চকচকে তরল শেডিং: নিম্ন সরল স্বচ্ছ ধারা ব্যবহার করে; উচ্চ মসৃণ চকচকে ধারা ব্যবহার করে

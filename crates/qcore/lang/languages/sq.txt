@@ -835,6 +835,12 @@ sq Vetëm nga larg
 @ Reacquire While Held
 sq Rikap duke mbajtur
 
+@ Real-time Dynamic Lights
+sq Drita dinamike në kohë reale
+
+@ Real-time Light Settings
+sq Cilësimet e dritës në kohë reale
+
 @ Red
 sq E kuqe
 
@@ -903,6 +909,12 @@ sq Shiko përmes portaleve
 
 @ See-through Teleporters
 sq Teleportues të tejdukshëm
+
+@ Shadow Quality
+sq Cilësia e hijeve
+
+@ Shadows
+sq Hije
 
 @ Shirt Color
 sq Ngjyra e bluzës
@@ -1547,6 +1559,9 @@ sq Sa fort i shtyn armiqtë uji i Pastruesit me presion
 @ How long a hit freezes the game, in milliseconds
 sq Sa gjatë e ngrin lojën një goditje, në milisekonda
 
+@ How many lights cast shadows at once, and how smooth their edges are
+sq Sa drita hedhin hije njëkohësisht dhe sa të buta janë skajet e tyre
+
 @ How strongly fog covers the sky when fog is on
 sq Sa fort e mbulon mjegulla qiellin kur mjegulla është aktive
 
@@ -1567,6 +1582,9 @@ sq Burimet e dritës shkëlqejnë: llamba, lavë, teleportues, shkëndija dhe sh
 
 @ Lights from rockets, muzzle flashes and explosions brighten nearby walls
 sq Dritat e raketave, flakëve të grykës dhe shpërthimeve ndriçojnë muret pranë
+
+@ Lights from rockets, muzzle flashes and explosions shade walls and models per pixel and cast shadows; needs Dynamic Lights
+sq Drita e raketave, shkrepjeve të armëve dhe shpërthimeve ndriçon muret dhe modelet për çdo piksel dhe hedh hije; kërkon Dritat dinamike
 
 @ Liquid surfaces swell and ring out where things move through them
 sq Sipërfaqet e lëngjeve valëzohen dhe krijojnë rrathë ku diçka lëviz përmes tyre
@@ -1810,6 +1828,9 @@ sq Përdor modelet MD5 më të lëmuara të ribotimit të 2021 (dhe zëvendësim
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 sq Përdor dritën me ngjyra të hartës (skedar .lit ose bllok BSPX); joaktiv jep dritën e bardhë origjinale. Zbatohet në ngarkimin e hartës tjetër
+
+@ Walls, doors and monsters block the light and cast shadows
+sq Muret, dyert dhe përbindëshat bllokojnë dritën dhe hedhin hije
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 sq Segmentet e rrymës, numri i pikave dhe hijezimi i shndritshëm i lëngut: e ulët përdor rryma më të thjeshta të tejdukshme; e lartë rryma të lëmuara e të shndritshme

@@ -85,6 +85,9 @@ pub(super) struct Lists {
     pub(super) draw_u: Vec<DrawU>,
     pub(super) frame_u: Vec<FrameU>,
     pub(super) views: Vec<ViewDraw>,
+    /// Opaque brush and alias entity draws of the first view, as shadow
+    /// casters for real-time dynamic lights: (draw, bounding sphere, entity key).
+    pub(super) casters: Vec<(Cmd, [f32; 4], u32)>,
 }
 
 impl Lists {

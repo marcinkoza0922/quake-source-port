@@ -835,6 +835,12 @@ zh-CN 仅限远程
 @ Reacquire While Held
 zh-CN 按住时重新锁定
 
+@ Real-time Dynamic Lights
+zh-CN 实时动态光源
+
+@ Real-time Light Settings
+zh-CN 实时光源设置
+
 @ Red
 zh-CN 红色
 
@@ -903,6 +909,12 @@ zh-CN 透过传送门观看
 
 @ See-through Teleporters
 zh-CN 透视传送点
+
+@ Shadow Quality
+zh-CN 阴影质量
+
+@ Shadows
+zh-CN 阴影
 
 @ Shirt Color
 zh-CN 上衣颜色
@@ -1547,6 +1559,9 @@ zh-CN 高压水枪的水流推动敌人的力度
 @ How long a hit freezes the game, in milliseconds
 zh-CN 命中时冻结游戏的时长（毫秒）
 
+@ How many lights cast shadows at once, and how smooth their edges are
+zh-CN 同时投下阴影的光源数量，以及阴影边缘的柔和程度
+
 @ How strongly fog covers the sky when fog is on
 zh-CN 开启雾时，雾对天空的覆盖程度
 
@@ -1567,6 +1582,9 @@ zh-CN 光源会发光：灯、熔岩、传送门、火花和爆炸；在泛光�
 
 @ Lights from rockets, muzzle flashes and explosions brighten nearby walls
 zh-CN 火箭、枪口火光和爆炸的光线会照亮附近的墙壁
+
+@ Lights from rockets, muzzle flashes and explosions shade walls and models per pixel and cast shadows; needs Dynamic Lights
+zh-CN 火箭、枪口火光和爆炸的光逐像素照亮墙壁和模型并投下阴影；需要开启动态光源
 
 @ Liquid surfaces swell and ring out where things move through them
 zh-CN 物体穿过液体表面时会产生涌动和涟漪
@@ -1810,6 +1828,9 @@ zh-CN 使用 2021 重制版更平滑的 MD5 模型（以及模组提供的 MD3 �
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 zh-CN 使用地图的彩色光照（.lit 文件或 BSPX 数据块）；关闭则为原版白光。下次载入地图时生效
+
+@ Walls, doors and monsters block the light and cast shadows
+zh-CN 墙壁、门和怪物会挡住光线并投下阴影
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 zh-CN 水柱分段、水滴数量和液体光泽着色：低使用简单的半透明水流；高使用平滑有光泽的水柱

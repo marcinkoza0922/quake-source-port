@@ -96,6 +96,14 @@ pub struct Settings {
     pub bloom_bright: f32,
     /// r_bloom_quality: 0 = low (chain from quarter resolution), 1 = high (half).
     pub bloom_quality: u32,
+    /// r_shadow_realtime_dlight: dynamic lights are lit per pixel on the
+    /// world and models instead of being added to the lightmaps.
+    pub rt_dlights: bool,
+    /// r_shadow_realtime_dlight_shadows: the most important ones cast shadows.
+    pub dlight_shadows: bool,
+    /// r_shadow_quality: 0 low (2 shadowed lights, 256² faces), 1 medium
+    /// (4, 512²), 2 high (8, 512², softer filtering).
+    pub shadow_quality: u32,
     /// Peripheral radial blur independent of camera velocity.
     pub edge_blur: f32,
     /// r_waterripples: ripple rings and gentle swell on liquid surfaces
@@ -186,6 +194,9 @@ impl Default for Settings {
             bloom_size: 1.0,
             bloom_bright: 0.0,
             bloom_quality: 1,
+            rt_dlights: false,
+            dlight_shadows: true,
+            shadow_quality: 1,
             edge_blur: 0.0,
             water_ripples: 0.0,
             water_splashes: false,

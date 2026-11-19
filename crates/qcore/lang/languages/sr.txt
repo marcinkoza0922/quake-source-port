@@ -835,6 +835,12 @@ sr Само борба из даљине
 @ Reacquire While Held
 sr Поновни захват док држиш
 
+@ Real-time Dynamic Lights
+sr Динамична светла у реалном времену
+
+@ Real-time Light Settings
+sr Подешавања светла у реалном времену
+
 @ Red
 sr Црвена
 
@@ -903,6 +909,12 @@ sr Поглед кроз портале
 
 @ See-through Teleporters
 sr Провидни телепортери
+
+@ Shadow Quality
+sr Квалитет сенки
+
+@ Shadows
+sr Сенке
 
 @ Shirt Color
 sr Боја мајице
@@ -1547,6 +1559,9 @@ sr Колико снажно вода перача под притиском г�
 @ How long a hit freezes the game, in milliseconds
 sr Колико дуго погодак замрзава игру, у милисекундама
 
+@ How many lights cast shadows at once, and how smooth their edges are
+sr Колико светала истовремено баца сенке и колико су им ивице меке
+
 @ How strongly fog covers the sky when fog is on
 sr Колико јако магла прекрива небо кад је магла укључена
 
@@ -1567,6 +1582,9 @@ sr Извори светлости сијају: лампе, лава, теле�
 
 @ Lights from rockets, muzzle flashes and explosions brighten nearby walls
 sr Светло ракета, бљескова цеви и експлозија осветљава оближње зидове
+
+@ Lights from rockets, muzzle flashes and explosions shade walls and models per pixel and cast shadows; needs Dynamic Lights
+sr Светло ракета, бљескова пуцња и експлозија осветљава зидове и моделе по пикселу и баца сенке; захтева Динамична светла
 
 @ Liquid surfaces swell and ring out where things move through them
 sr Површине течности се таласају и стварају кругове где се нешто кроз њих креће
@@ -1810,6 +1828,9 @@ sr Користи глаткије MD5 моделе из реиздања из 2
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 sr Користи обојено светло мапе (.lit фајл или BSPX блок); искључено даје оригинално бело светло. Примењује се при следећем учитавању мапе
+
+@ Walls, doors and monsters block the light and cast shadows
+sr Зидови, врата и чудовишта заклањају светло и бацају сенке
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 sr Сегменти млаза, број капљица и сјајно сенчење течности: ниско користи једноставније провидне млазеве; високо глатке сјајне млазеве

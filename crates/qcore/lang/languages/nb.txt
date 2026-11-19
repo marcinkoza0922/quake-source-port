@@ -835,6 +835,12 @@ nb Kun avstand
 @ Reacquire While Held
 nb Lås på nytt mens holdt
 
+@ Real-time Dynamic Lights
+nb Dynamiske lys i sanntid
+
+@ Real-time Light Settings
+nb Innstillinger for sanntidslys
+
 @ Red
 nb Rød
 
@@ -903,6 +909,12 @@ nb Se gjennom portaler
 
 @ See-through Teleporters
 nb Gjennomsiktige teleportere
+
+@ Shadow Quality
+nb Skyggekvalitet
+
+@ Shadows
+nb Skygger
 
 @ Shirt Color
 nb Skjortefarge
@@ -1547,6 +1559,9 @@ nb Hvor hardt vannet fra høytrykksspyleren dytter fiender
 @ How long a hit freezes the game, in milliseconds
 nb Hvor lenge et treff fryser spillet, i millisekunder
 
+@ How many lights cast shadows at once, and how smooth their edges are
+nb Hvor mange lys som kaster skygger samtidig, og hvor myke kantene deres er
+
 @ How strongly fog covers the sky when fog is on
 nb Hvor kraftig tåken dekker himmelen når tåke er på
 
@@ -1567,6 +1582,9 @@ nb Lyskilder gløder: lamper, lava, teleportere, gnister og eksplosjoner; Bloom-
 
 @ Lights from rockets, muzzle flashes and explosions brighten nearby walls
 nb Lys fra raketter, munningsflammer og eksplosjoner lyser opp nære vegger
+
+@ Lights from rockets, muzzle flashes and explosions shade walls and models per pixel and cast shadows; needs Dynamic Lights
+nb Lys fra raketter, munningsflammer og eksplosjoner lyser opp vegger og modeller per piksel og kaster skygger; krever Dynamiske lys
 
 @ Liquid surfaces swell and ring out where things move through them
 nb Væskeoverflater hever seg og ringer ut der noe beveger seg gjennom dem
@@ -1810,6 +1828,9 @@ nb Bruker de jevnere MD5-modellene fra 2021-utgaven (og MD3-erstatninger fra mod
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 nb Bruker banens fargede lys (.lit-fil eller BSPX-lump); av gir vanlig hvitt lys. Trer i kraft ved neste banelasting
+
+@ Walls, doors and monsters block the light and cast shadows
+nb Vegger, dører og monstre stenger for lyset og kaster skygger
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 nb Vannstrålesegmenter, antall dråper og blank væskeskyggelegging: lav bruker enklere gjennomskinnelige stråler; høy bruker jevne, blanke stråler

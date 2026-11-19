@@ -282,6 +282,10 @@ pub struct DLight {
     pub minlight: f32,
     /// 1,1,1 for classic white lights.
     pub color: Vec3,
+    /// Entity that emits the light (the client's dlight key: a rocket, a
+    /// player's muzzle flash), 0 = none. With real-time dynamic lights that
+    /// entity casts no shadow from its own light.
+    pub key: u32,
 }
 
 #[derive(Clone, Copy, Debug, Default, PartialEq)]

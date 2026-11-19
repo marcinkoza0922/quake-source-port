@@ -3,6 +3,7 @@ layout(location = 0) in vec2 i_st;
 layout(location = 1) in vec3 i_shade;
 layout(location = 2) in vec3 i_wpos;
 layout(location = 3) noperspective in vec2 i_st_affine;
+layout(location = 4) in vec3 i_nrm; // world space (r_shadow_realtime_dlight)
 layout(push_constant) uniform P {
     mat4 model; vec4 light; vec4 shadevec; uvec4 poses; uvec4 texs;
 } pc;
@@ -37,7 +38,12 @@ void main() {
         if (top > 0u) rgb += ramp(pc.poses.z, top - 1u) - ramp(1u, top - 1u);
         if (bot > 0u) rgb += ramp(pc.poses.w, bot - 1u) - ramp(6u, bot - 1u);
     }
-    rgb *= i_shade * 2.0;
+    vec3 shade = i_shade * 2.0;
+    // r_shadow_realtime_dlight: per pixel instead of R_SetupAliasLighting's
+    // added light (lightcolor / 200 x 2: 128 / 100 lightmap units)
+    if (light_count.x > 0u && (pc.texs.w & 2u) == 0u && (fr.softf.x & 16u) == 0u)
+        shade += dyn_lights(i_wpos, normalize(i_nrm)) * 1.28;
+    rgb *= shade;
     vec3 fb = pc.texs.y != NO_TEX ? stex(pc.texs.y, st, affine).rgb : vec3(0.0);
     rgb += fb;
     rgb = apply_fog(clamp(rgb, 0.0, 1.0), i_wpos);

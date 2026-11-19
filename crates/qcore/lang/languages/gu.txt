@@ -835,6 +835,12 @@ gu ફક્ત દૂરથી
 @ Reacquire While Held
 gu પકડી રાખતાં ફરી પકડો
 
+@ Real-time Dynamic Lights
+gu રીઅલ-ટાઇમ ડાયનેમિક લાઇટ્સ
+
+@ Real-time Light Settings
+gu રીઅલ-ટાઇમ પ્રકાશ સેટિંગ્સ
+
 @ Red
 gu લાલ
 
@@ -903,6 +909,12 @@ gu પોર્ટલમાંથી જુઓ
 
 @ See-through Teleporters
 gu પારદર્શક ટેલિપોર્ટર
+
+@ Shadow Quality
+gu પડછાયાની ગુણવત્તા
+
+@ Shadows
+gu પડછાયા
 
 @ Shirt Color
 gu શર્ટનો રંગ
@@ -1547,6 +1559,9 @@ gu પાવરવૉશરનું પાણી દુશ્મનોને �
 @ How long a hit freezes the game, in milliseconds
 gu પ્રહાર ગેમને કેટલો સમય ફ્રીઝ કરે છે, મિલિસેકન્ડમાં
 
+@ How many lights cast shadows at once, and how smooth their edges are
+gu એકસાથે કેટલા પ્રકાશ પડછાયા પાડે છે અને તેમની કિનારીઓ કેટલી સુંવાળી છે
+
 @ How strongly fog covers the sky when fog is on
 gu ધુમ્મસ ચાલુ હોય ત્યારે તે આકાશને કેટલું ઢાંકે છે
 
@@ -1567,6 +1582,9 @@ gu પ્રકાશ સ્રોતો ઝળહળે છે: દીવા, �
 
 @ Lights from rockets, muzzle flashes and explosions brighten nearby walls
 gu રૉકેટ, નાળચાની ઝબક અને વિસ્ફોટનો પ્રકાશ નજીકની દીવાલોને પ્રકાશિત કરે છે
+
+@ Lights from rockets, muzzle flashes and explosions shade walls and models per pixel and cast shadows; needs Dynamic Lights
+gu રોકેટ, ગોળીબારના ઝબકારા અને વિસ્ફોટોનો પ્રકાશ દીવાલો અને મોડેલોને પ્રતિ પિક્સેલ પ્રકાશિત કરે છે અને પડછાયા પાડે છે; ડાયનેમિક લાઇટ્સ જરૂરી
 
 @ Liquid surfaces swell and ring out where things move through them
 gu પ્રવાહીની સપાટીઓ જ્યાંથી કંઈ પસાર થાય ત્યાં ઊછળે છે અને વર્તુળો ફેલાવે છે
@@ -1810,6 +1828,9 @@ gu ક્લાસિક મૉડેલ્સને બદલે 2021 રી-�
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 gu મેપનો રંગીન પ્રકાશ (.lit ફાઇલ કે BSPX લમ્પ) વાપરે છે; બંધ હોય તો મૂળ સફેદ પ્રકાશ. આગલો મેપ લોડ થાય ત્યારે લાગુ થાય છે
+
+@ Walls, doors and monsters block the light and cast shadows
+gu દીવાલો, દરવાજા અને રાક્ષસો પ્રકાશ રોકે છે અને પડછાયા પાડે છે
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 gu પાણીના જેટના ભાગો, ટીપાંની સંખ્યા અને ચળકતું પ્રવાહી શેડિંગ: નીચું સાદા અર્ધપારદર્શક પ્રવાહ વાપરે છે; ઊંચું સરળ ચળકતા જેટ વાપરે છે

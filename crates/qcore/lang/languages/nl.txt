@@ -835,6 +835,12 @@ nl Alleen afstand
 @ Reacquire While Held
 nl Nieuw doel bij vasthouden
 
+@ Real-time Dynamic Lights
+nl Dynamische lichten in realtime
+
+@ Real-time Light Settings
+nl Instellingen realtimelicht
+
 @ Red
 nl Rood
 
@@ -903,6 +909,12 @@ nl Door portalen kijken
 
 @ See-through Teleporters
 nl Doorzichtige teleporters
+
+@ Shadow Quality
+nl Schaduwkwaliteit
+
+@ Shadows
+nl Schaduwen
 
 @ Shirt Color
 nl Shirtkleur
@@ -1547,6 +1559,9 @@ nl Hoe hard het water van de hogedrukspuit vijanden wegduwt
 @ How long a hit freezes the game, in milliseconds
 nl Hoe lang een treffer het spel bevriest, in milliseconden
 
+@ How many lights cast shadows at once, and how smooth their edges are
+nl Hoeveel lichten tegelijk schaduwen werpen en hoe zacht hun randen zijn
+
 @ How strongly fog covers the sky when fog is on
 nl Hoe sterk mist de hemel bedekt als mist aan staat
 
@@ -1567,6 +1582,9 @@ nl Lichtbronnen gloeien: lampen, lava, teleporters, vonken en explosies; Bloomin
 
 @ Lights from rockets, muzzle flashes and explosions brighten nearby walls
 nl Licht van raketten, mondingsvuur en explosies verlicht muren in de buurt
+
+@ Lights from rockets, muzzle flashes and explosions shade walls and models per pixel and cast shadows; needs Dynamic Lights
+nl Licht van raketten, mondingsvuur en explosies belicht muren en modellen per pixel en werpt schaduwen; vereist Dynamische lichten
 
 @ Liquid surfaces swell and ring out where things move through them
 nl Vloeistofoppervlakken golven en vormen kringen waar iets doorheen beweegt
@@ -1810,6 +1828,9 @@ nl Gebruikt de vloeiendere MD5-modellen van de heruitgave uit 2021 (en MD3-verva
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 nl Gebruikt het gekleurde licht van de map (.lit-bestand of BSPX-lump); uit geeft het originele witte licht. Geldt vanaf het laden van de volgende map
+
+@ Walls, doors and monsters block the light and cast shadows
+nl Muren, deuren en monsters houden het licht tegen en werpen schaduwen
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 nl Waterstraalsegmenten, aantal druppels en glanzende vloeistofshading: laag gebruikt eenvoudigere doorschijnende stralen; hoog vloeiende glanzende stralen

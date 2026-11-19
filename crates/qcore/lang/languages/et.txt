@@ -835,6 +835,12 @@ et Ainult kaugrünnak
 @ Reacquire While Held
 et Hoides haara uuesti
 
+@ Real-time Dynamic Lights
+et Reaalajas dünaamilised tuled
+
+@ Real-time Light Settings
+et Reaalajas valguse seaded
+
 @ Red
 et Punane
 
@@ -903,6 +909,12 @@ et Vaata läbi portaalide
 
 @ See-through Teleporters
 et Läbipaistvad teleportid
+
+@ Shadow Quality
+et Varjude kvaliteet
+
+@ Shadows
+et Varjud
 
 @ Shirt Color
 et Särgi värv
@@ -1547,6 +1559,9 @@ et Kui tugevalt survepesuri vesi vaenlasi lükkab
 @ How long a hit freezes the game, in milliseconds
 et Kui kaua tabamus mängu külmutab, millisekundites
 
+@ How many lights cast shadows at once, and how smooth their edges are
+et Mitu tuld korraga varje heidab ja kui pehmed on nende servad
+
 @ How strongly fog covers the sky when fog is on
 et Kui tugevalt udu taevast katab, kui udu on sees
 
@@ -1567,6 +1582,9 @@ et Valgusallikad helendavad: lambid, laava, teleportid, sädemed ja plahvatused;
 
 @ Lights from rockets, muzzle flashes and explosions brighten nearby walls
 et Rakettide, suutulede ja plahvatuste valgus valgustab lähedal olevaid seinu
+
+@ Lights from rockets, muzzle flashes and explosions shade walls and models per pixel and cast shadows; needs Dynamic Lights
+et Rakettide, lasuvälkude ja plahvatuste valgus valgustab seinu ja mudeleid pikslipõhiselt ning heidab varje; vajab Dünaamilisi tulesid
 
 @ Liquid surfaces swell and ring out where things move through them
 et Vedelike pinnad lainetavad ja moodustavad rõngaid, kus miski neist läbi liigub
@@ -1810,6 +1828,9 @@ et Kasutab klassikaliste asemel 2021. aasta uusväljaande sujuvamaid MD5-mudelei
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 et Kasutab kaardi värvilist valgust (.lit-fail või BSPX-plokk); väljas annab algse valge valguse. Rakendub järgmise kaardi laadimisel
+
+@ Walls, doors and monsters block the light and cast shadows
+et Seinad, uksed ja koletised varjavad valgust ja heidavad varje
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 et Veejoa lõigud, piiskade arv ja läikiv vedelikuvarjutus: madal kasutab lihtsamaid poolläbipaistvaid jugasid; kõrge sujuvaid läikivaid jugasid

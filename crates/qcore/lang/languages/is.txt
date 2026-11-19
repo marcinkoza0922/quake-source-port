@@ -835,6 +835,12 @@ is Aðeins af færi
 @ Reacquire While Held
 is Endurmiða meðan haldið
 
+@ Real-time Dynamic Lights
+is Kvik ljós í rauntíma
+
+@ Real-time Light Settings
+is Stillingar rauntímaljóss
+
 @ Red
 is Rauður
 
@@ -903,6 +909,12 @@ is Sjá í gegnum gáttir
 
 @ See-through Teleporters
 is Gegnsæir fjarflytjarar
+
+@ Shadow Quality
+is Gæði skugga
+
+@ Shadows
+is Skuggar
 
 @ Shirt Color
 is Skyrtulitur
@@ -1547,6 +1559,9 @@ is Hversu fast vatnið úr háþrýstidælunni ýtir óvinum
 @ How long a hit freezes the game, in milliseconds
 is Hversu lengi högg frystir leikinn, í millisekúndum
 
+@ How many lights cast shadows at once, and how smooth their edges are
+is Hve mörg ljós varpa skuggum í einu og hve mjúkar brúnir þeirra eru
+
 @ How strongly fog covers the sky when fog is on
 is Hversu mikið þokan hylur himininn þegar þoka er á
 
@@ -1567,6 +1582,9 @@ is Ljósgjafar ljóma: lampar, hraun, fjarflutningshlið, neistar og sprengingar
 
 @ Lights from rockets, muzzle flashes and explosions brighten nearby walls
 is Ljós frá eldflaugum, hlaupblossum og sprengingum lýsa upp nálæga veggi
+
+@ Lights from rockets, muzzle flashes and explosions shade walls and models per pixel and cast shadows; needs Dynamic Lights
+is Ljós frá eldflaugum, skotblossum og sprengingum lýsir veggi og líkön á hvern díl og varpar skuggum; þarf Kvik ljós
 
 @ Liquid surfaces swell and ring out where things move through them
 is Vökvayfirborð bylgjast og mynda hringi þar sem eitthvað fer í gegnum þau
@@ -1810,6 +1828,9 @@ is Notar mýkri MD5-líkön endurútgáfunnar frá 2021 (og MD3-staðgengla úr 
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 is Notar litaða lýsingu borðsins (.lit-skrá eða BSPX-hluta); af gefur upprunalegt hvítt ljós. Tekur gildi við næstu hleðslu borðs
+
+@ Walls, doors and monsters block the light and cast shadows
+is Veggir, dyr og skrímsli skyggja á ljósið og varpa skuggum
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 is Bunuhlutar, fjöldi dropa og gljáandi vökvaskygging: lágt notar einfaldari hálfgegnsæjar bunur; hátt notar mjúkar, gljáandi bunur

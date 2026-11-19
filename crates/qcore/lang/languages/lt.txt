@@ -835,6 +835,12 @@ lt Tik tolima kova
 @ Reacquire While Held
 lt Iš naujo fiksuoti laikant
 
+@ Real-time Dynamic Lights
+lt Dinaminės šviesos realiuoju laiku
+
+@ Real-time Light Settings
+lt Šviesos realiuoju laiku nustatymai
+
 @ Red
 lt Raudona
 
@@ -903,6 +909,12 @@ lt Matyti pro portalus
 
 @ See-through Teleporters
 lt Permatomi teleportai
+
+@ Shadow Quality
+lt Šešėlių kokybė
+
+@ Shadows
+lt Šešėliai
 
 @ Shirt Color
 lt Marškinių spalva
@@ -1547,6 +1559,9 @@ lt Kaip stipriai plovimo aparato vanduo stumia priešus
 @ How long a hit freezes the game, in milliseconds
 lt Kiek milisekundžių smūgis sustingdo žaidimą
 
+@ How many lights cast shadows at once, and how smooth their edges are
+lt Kiek šviesų vienu metu meta šešėlius ir kokie švelnūs jų kraštai
+
 @ How strongly fog covers the sky when fog is on
 lt Kaip stipriai rūkas dengia dangų, kai rūkas įjungtas
 
@@ -1567,6 +1582,9 @@ lt Šviesos šaltiniai švyti: lempos, lava, teleportai, kibirkštys ir sprogima
 
 @ Lights from rockets, muzzle flashes and explosions brighten nearby walls
 lt Raketų, šūvių blyksnių ir sprogimų šviesa apšviečia netoliese esančias sienas
+
+@ Lights from rockets, muzzle flashes and explosions shade walls and models per pixel and cast shadows; needs Dynamic Lights
+lt Raketų, šūvių blyksnių ir sprogimų šviesa apšviečia sienas ir modelius kiekviename pikselyje ir meta šešėlius; reikia Dinaminių šviesų
 
 @ Liquid surfaces swell and ring out where things move through them
 lt Skysčių paviršiai banguoja ir raibuliuoja ten, kur kas nors juda
@@ -1810,6 +1828,9 @@ lt Naudoja glotnesnius 2021 m. pakartotinio leidimo MD5 modelius (ir MD3 pakaita
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 lt Naudoja spalvotą žemėlapio apšvietimą (.lit failas arba BSPX blokas); išjungus – originali balta šviesa. Galioja įkėlus kitą žemėlapį
+
+@ Walls, doors and monsters block the light and cast shadows
+lt Sienos, durys ir monstrai užstoja šviesą ir meta šešėlius
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 lt Vandens srovės segmentai, lašų skaičius ir blizgus skysčio šešėliavimas: žema naudoja paprastesnes permatomas sroves; aukšta – glotnias blizgias sroves

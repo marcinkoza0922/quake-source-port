@@ -835,6 +835,12 @@ ja 遠距離のみ
 @ Reacquire While Held
 ja 長押し中に再捕捉
 
+@ Real-time Dynamic Lights
+ja リアルタイム動的ライト
+
+@ Real-time Light Settings
+ja リアルタイムライト設定
+
 @ Red
 ja 赤
 
@@ -903,6 +909,12 @@ ja ポータル越しに見る
 
 @ See-through Teleporters
 ja 透けるテレポーター
+
+@ Shadow Quality
+ja 影の品質
+
+@ Shadows
+ja 影
 
 @ Shirt Color
 ja シャツの色
@@ -1547,6 +1559,9 @@ ja 高圧洗浄機の水が敵を押す強さ
 @ How long a hit freezes the game, in milliseconds
 ja 命中時にゲームが停止する時間（ミリ秒）
 
+@ How many lights cast shadows at once, and how smooth their edges are
+ja 同時に影を落とすライトの数と、影の縁の滑らかさ
+
 @ How strongly fog covers the sky when fog is on
 ja フォグがオンのとき空を覆うフォグの濃さ
 
@@ -1567,6 +1582,9 @@ ja 光源が輝く：ランプ、溶岩、テレポーター、火花、爆発�
 
 @ Lights from rockets, muzzle flashes and explosions brighten nearby walls
 ja ロケット、マズルフラッシュ、爆発の光が近くの壁を照らします
+
+@ Lights from rockets, muzzle flashes and explosions shade walls and models per pixel and cast shadows; needs Dynamic Lights
+ja ロケット、マズルフラッシュ、爆発の光が壁やモデルをピクセル単位で照らし、影を落とします。動的ライトが必要です
 
 @ Liquid surfaces swell and ring out where things move through them
 ja 物が通過した液体の表面がうねり、波紋が広がります
@@ -1810,6 +1828,9 @@ ja クラシックなモデルの代わりに2021年リマスター版の滑ら�
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 ja マップの色付きライト（.litファイルまたはBSPXランプ）を使います。オフでオリジナルの白い光になります。次のマップ読み込みから適用されます
+
+@ Walls, doors and monsters block the light and cast shadows
+ja 壁、ドア、モンスターが光を遮り、影を落とします
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 ja 水流のセグメント数、飛沫の数、液体の光沢表現。低は簡素な半透明の水流、高は滑らかで光沢のある水流になります

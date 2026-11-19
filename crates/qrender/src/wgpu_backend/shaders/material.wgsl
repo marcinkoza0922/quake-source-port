@@ -147,6 +147,13 @@ fn world_frag(i: WorldOut) -> Frag {
     if (du.params.x > 0.5 && c.a < 0.666) { discard; }
     var light = lmc;
     if (du.params.z > 0.5 || (fr.softf.x & 16u) != 0u) { light = vec3<f32>(1.0); }
+    else if (rt.count.x > 0u) {
+        // r_shadow_realtime_dlight: dynamic lights per pixel (the lightmaps
+        // then leave them out), on the face normal turned toward the eye
+        var n = normalize(nf);
+        if (dot(n, fr.eye.xyz - i.wpos) < 0.0) { n = -n; }
+        light = min(light + dyn_lights(i.wpos, n), vec3<f32>(2.0));
+    }
     if (dither >= 2u) { // 64 light levels, like the colormap
         light = floor(light * (63.0 / 2.0) + 0.5) * (2.0 / 63.0);
     }
@@ -244,6 +251,7 @@ struct AliasIn {
     @location(0) pos: vec3<f32>,
     @location(1) st: vec2<f32>,
     @location(2) shade: vec3<f32>,
+    @location(3) nrm: vec3<f32>,
 };
 struct AliasOut {
     @builtin(position) clip: vec4<f32>,
@@ -252,6 +260,8 @@ struct AliasOut {
     @location(2) wpos: vec3<f32>,
     // r_softemu_mdl_warp: software-renderer affine texture mapping
     @location(3) @interpolate(linear) st_affine: vec2<f32>,
+    // world-space normal (per-pixel dynamic lights)
+    @location(4) nrm: vec3<f32>,
 };
 @vertex fn vs_alias(v: AliasIn) -> AliasOut {
     var o: AliasOut;
@@ -260,6 +270,7 @@ struct AliasOut {
     o.st_affine = v.st;
     o.shade = v.shade;
     o.wpos = v.pos;
+    o.nrm = v.nrm;
     return o;
 }
 fn ramp(row: u32, k: u32) -> vec3<f32> {
@@ -296,7 +307,14 @@ fn alias_frag(i: AliasOut) -> Frag {
         if (top > 0u) { rgb += ramp(du.ix.x, top - 1u) - ramp(1u, top - 1u); }
         if (bot > 0u) { rgb += ramp(du.ix.y, bot - 1u) - ramp(6u, bot - 1u); }
     }
-    rgb = rgb * i.shade * 2.0 + fb.rgb * du.params.y;
+    var shade = i.shade * 2.0;
+    // r_shadow_realtime_dlight: per pixel instead of R_SetupAliasLighting's
+    // added light (lightcolor / 200 x 2: 128 / 100 lightmap units); the
+    // CPU-posed shade is (1,1,1) for fullbright models (params.w unused)
+    if (rt.count.x > 0u && (fr.softf.x & 16u) == 0u && du.extra.w < 0.5) {
+        shade += dyn_lights(i.wpos, normalize(i.nrm)) * 1.28;
+    }
+    rgb = rgb * shade + fb.rgb * du.params.y;
     rgb = apply_fog(clamp(rgb, vec3<f32>(0.0), vec3<f32>(1.0)), i.wpos);
     if (mode != 0u) {
         if (fr.fog.w > 0.0) {
@@ -368,4 +386,17 @@ fn poly_frag(i: PolyOut) -> Frag {
         return Frag(poly_fog(c, i.wpos), vec4<f32>(0.0, 0.0, 0.0, c.a));
     }
     return Frag(poly_fog(c, i.wpos), vec4<f32>(poly_glow(c.rgb, du.ix.x) * fog_factor(i.wpos), c.a));
+}
+
+// ---- r_shadow_realtime_dlight: cube shadow map faces (depth only) ----
+// Fence holes (du.params.x) let the light through.
+@fragment fn fs_shadow_world(i: WorldOut) {
+    if (du.params.x > 0.5) {
+        let size = select(vec2<f32>(textureDimensions(t0)), du.extra.xy, du.extra.x > 0.0);
+        if (textureSampleLevel(t0, s0, i.st / size, 0.0).a < 0.666) { discard; }
+    }
+}
+// Alpha-tested skins (du.params.x) with holes.
+@fragment fn fs_shadow_alias(i: AliasOut) {
+    if (du.params.x > 0.5 && textureSampleLevel(t0, s0, i.st, 0.0).a < 0.666) { discard; }
 }

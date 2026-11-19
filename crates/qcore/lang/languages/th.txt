@@ -835,6 +835,12 @@ th ระยะ​ไกล​เท่านั้น
 @ Reacquire While Held
 th หา​เป้า​ใหม่​ขณะ​กด​ค้าง
 
+@ Real-time Dynamic Lights
+th แสง​ไดนามิก​แบบ​เรียลไทม์
+
+@ Real-time Light Settings
+th การ​ตั้ง​ค่า​แสง​แบบ​เรียลไทม์
+
 @ Red
 th แดง
 
@@ -903,6 +909,12 @@ th มอง​ทะลุ​พอร์ทัล
 
 @ See-through Teleporters
 th ประตู​วาร์ป​มอง​ทะลุ​ได้
+
+@ Shadow Quality
+th คุณภาพ​เงา
+
+@ Shadows
+th เงา
 
 @ Shirt Color
 th สี​เสื้อ
@@ -1547,6 +1559,9 @@ th แรง​ที่​น้ำ​จาก Powerwasher ผลัก​ศ�
 @ How long a hit freezes the game, in milliseconds
 th ระยะ​เวลา​ที่​การ​โจมตี​ทำให้​เกม​หยุด เป็น​มิลลิวินาที
 
+@ How many lights cast shadows at once, and how smooth their edges are
+th จำนวน​แสง​ที่​ทอด​เงา​พร้อม​กัน และ​ขอบ​เงา​นุ่ม​แค่​ไหน
+
 @ How strongly fog covers the sky when fog is on
 th หมอก​ปก​คลุม​ท้องฟ้า​มาก​แค่​ไหน​เมื่อ​เปิด​หมอก
 
@@ -1567,6 +1582,9 @@ th แหล่ง​กำเนิด​แสง​เรือง​แส�
 
 @ Lights from rockets, muzzle flashes and explosions brighten nearby walls
 th แสง​จาก​จรวด แสง​ปาก​กระบอก​ปืน​และ​ระเบิด​ทำให้​ผนัง​ใกล้​เคียง​สว่าง
+
+@ Lights from rockets, muzzle flashes and explosions shade walls and models per pixel and cast shadows; needs Dynamic Lights
+th แสง​จาก​จรวด แสง​ปืน และ​การ​ระเบิด​ส่อง​ผนัง​และ​โมเดล​ราย​พิกเซล​และ​ทอด​เงา ต้อง​เปิด​แสง​ไดนามิก
 
 @ Liquid surfaces swell and ring out where things move through them
 th ผิว​ของ​เหลว​กระเพื่อม​และ​เป็น​วง​ตรง​ที่​มี​สิ่ง​เคลื่อน​ผ่าน
@@ -1810,6 +1828,9 @@ th ใช้​โมเดล MD5 ที่​ลื่น​กว่า​จ
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 th ใช้​แสง​สี​ของ​แผนที่ (ไฟล์ .lit หรือ BSPX lump); ปิด​จะ​ได้​แสง​ขาว​ดั้งเดิม มี​ผล​เมื่อ​โหลด​แผนที่​ครั้ง​ถัด​ไป
+
+@ Walls, doors and monsters block the light and cast shadows
+th ผนัง ประตู และ​มอนสเตอร์​บัง​แสง​และ​ทอด​เงา
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 th ส่วน​ลำ​น้ำ จำนวน​หยด​และ​การ​แรเงา​ของ​เหลว​มัน​วาว: ต่ำ​ใช้​สาย​น้ำ​โปร่ง​แสง​ที่​ง่าย​กว่า; สูง​ใช้​ลำ​น้ำ​เรียบ​มัน​วาว

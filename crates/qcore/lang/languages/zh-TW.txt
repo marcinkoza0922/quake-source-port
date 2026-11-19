@@ -835,6 +835,12 @@ zh-TW 僅限遠程
 @ Reacquire While Held
 zh-TW 按住時重新鎖定
 
+@ Real-time Dynamic Lights
+zh-TW 即時動態光源
+
+@ Real-time Light Settings
+zh-TW 即時光源設定
+
 @ Red
 zh-TW 紅
 
@@ -903,6 +909,12 @@ zh-TW 透視傳送門
 
 @ See-through Teleporters
 zh-TW 可透視的傳送點
+
+@ Shadow Quality
+zh-TW 陰影品質
+
+@ Shadows
+zh-TW 陰影
 
 @ Shirt Color
 zh-TW 上衣顏色
@@ -1547,6 +1559,9 @@ zh-TW 高壓清洗機的水柱推動敵人的力道
 @ How long a hit freezes the game, in milliseconds
 zh-TW 命中時遊戲凍結的時間（毫秒）
 
+@ How many lights cast shadows at once, and how smooth their edges are
+zh-TW 同時投下陰影的光源數量，以及陰影邊緣的柔和程度
+
 @ How strongly fog covers the sky when fog is on
 zh-TW 開啟霧時霧氣覆蓋天空的程度
 
@@ -1567,6 +1582,9 @@ zh-TW 光源會發光：燈、熔岩、傳送門、火花與爆炸；在泛光�
 
 @ Lights from rockets, muzzle flashes and explosions brighten nearby walls
 zh-TW 火箭彈、槍口火光與爆炸的光線會照亮附近牆面
+
+@ Lights from rockets, muzzle flashes and explosions shade walls and models per pixel and cast shadows; needs Dynamic Lights
+zh-TW 火箭、槍口火光與爆炸的光逐像素照亮牆壁與模型並投下陰影；需要開啟動態光源
 
 @ Liquid surfaces swell and ring out where things move through them
 zh-TW 物體穿過液體表面時會產生起伏與漣漪
@@ -1810,6 +1828,9 @@ zh-TW 使用2021年重製版較平滑的MD5模型（以及模組的MD3替換模�
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 zh-TW 使用地圖的彩色光照（.lit檔案或BSPX區塊）；關閉則為原版白光。下次載入地圖時生效
+
+@ Walls, doors and monsters block the light and cast shadows
+zh-TW 牆壁、門與怪物會擋住光線並投下陰影
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 zh-TW 水柱分段、水滴數量與光澤液體著色：低使用較簡單的半透明水流；高使用平滑有光澤的水柱

@@ -835,6 +835,12 @@ km តែ​វាយ​ពី​ចម្ងាយ
 @ Reacquire While Held
 km ចាប់​គោលដៅ​ថ្មី​ពេល​សង្កត់
 
+@ Real-time Dynamic Lights
+km ពន្លឺ​ឌីណាមិក​ពេល​ជាក់ស្ដែង
+
+@ Real-time Light Settings
+km ការ​កំណត់​ពន្លឺ​ពេល​ជាក់ស្ដែង
+
 @ Red
 km ក្រហម
 
@@ -903,6 +909,12 @@ km មើល​ឆ្លង​ផតថល
 
 @ See-through Teleporters
 km ច្រក​ផ្លាស់​ទី​មើល​ឆ្លង​បាន
+
+@ Shadow Quality
+km គុណភាព​ស្រមោល
+
+@ Shadows
+km ស្រមោល
 
 @ Shirt Color
 km ពណ៌​អាវ
@@ -1547,6 +1559,9 @@ km កម្លាំង​ដែល​ទឹក​របស់​ម៉ាស�
 @ How long a hit freezes the game, in milliseconds
 km រយៈ​ពេល​ដែល​ការ​វាយ​ធ្វើ​ឱ្យ​ហ្គេម​កក គិត​ជា​មិល្លី​វិនាទី
 
+@ How many lights cast shadows at once, and how smooth their edges are
+km ចំនួន​ពន្លឺ​ដែល​បង្កើត​ស្រមោល​ក្នុង​ពេល​តែ​មួយ និង​ភាព​រលោង​នៃ​គែម​របស់​វា
+
 @ How strongly fog covers the sky when fog is on
 km កម្រិត​ដែល​អ័ព្ទ​គ្រប​មេឃ​ពេល​អ័ព្ទ​បើក
 
@@ -1567,6 +1582,9 @@ km ប្រភព​ពន្លឺ​ភ្លឺ​ចាំង៖ ចង្�
 
 @ Lights from rockets, muzzle flashes and explosions brighten nearby walls
 km ពន្លឺ​ពី​រ៉ុក្កែត ពន្លឺ​មាត់​កាំភ្លើង និង​ការ​ផ្ទុះ​ធ្វើ​ឱ្យ​ជញ្ជាំង​ក្បែរ​នោះ​ភ្លឺ
+
+@ Lights from rockets, muzzle flashes and explosions shade walls and models per pixel and cast shadows; needs Dynamic Lights
+km ពន្លឺ​គ្រាប់​រ៉ុក្កែត ពន្លឺ​បាញ់ និង​ការ​ផ្ទុះ​បំភ្លឺ​ជញ្ជាំង និង​ម៉ូដែល​តាម​ភីកសែល ហើយ​បង្កើត​ស្រមោល ត្រូវ​ការ​ពន្លឺ​ឌីណាមិក
 
 @ Liquid surfaces swell and ring out where things move through them
 km ផ្ទៃ​វត្ថុ​រាវ​ហើម​និង​រលក​ជា​រង្វង់​កន្លែង​ដែល​វត្ថុ​ផ្លាស់​ទី​កាត់
@@ -1810,6 +1828,9 @@ km ប្រើ​ម៉ូដែល MD5 រលូន​ជាង​របស់
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 km ប្រើ​ពន្លឺ​ពណ៌​របស់​ផែនទី (ឯកសារ .lit ឬ BSPX lump); បិទ​ផ្ដល់​ពន្លឺ​ស​ដើម។ មាន​ប្រសិទ្ធភាព​នៅ​ពេល​ផ្ទុក​ផែនទី​បន្ទាប់
+
+@ Walls, doors and monsters block the light and cast shadows
+km ជញ្ជាំង ទ្វារ និង​បិសាច​បាំង​ពន្លឺ ហើយ​បង្កើត​ស្រមោល
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 km ផ្នែក​ទឹក​បាញ់ ចំនួន​ដំណក់ និង​ការ​ដាក់​ស្រមោល​វត្ថុ​រាវ​ភ្លឺ​រលោង: ទាប​ប្រើ​ខ្សែ​ទឹក​ថ្លា​សាមញ្ញ​ជាង; ខ្ពស់​ប្រើ​ទឹក​បាញ់​រលូន​ភ្លឺ​រលោង

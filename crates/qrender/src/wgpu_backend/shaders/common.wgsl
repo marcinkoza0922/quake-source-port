@@ -38,6 +38,72 @@ struct WaterU {
 @group(0) @binding(5) var caustic_t: texture_2d<f32>;
 @group(0) @binding(6) var caustic_s: sampler;
 @group(2) @binding(0) var<uniform> du: DrawU;
+// r_shadow_realtime_dlight (rtlight.rs, wgpu_backend/shadows.rs): dynamic
+// lights lit per pixel; vp[layer] renders/reads cube face layer % 6 of
+// light layer / 6 in shadow_t.
+struct RtLight {
+    pos_radius: vec4<f32>,     // origin, radius
+    color_minlight: vec4<f32>, // colour, minlight
+    info: vec4<i32>,           // x first shadow layer (-1: unshadowed)
+};
+struct Lights {
+    count: vec4<u32>,          // x lights, y shadow filter (0..2), z face size
+    lights: array<RtLight, 32>,
+    vp: array<mat4x4<f32>, 48>,
+};
+@group(0) @binding(7) var<uniform> rt: Lights;
+@group(0) @binding(8) var shadow_t: texture_depth_2d_array;
+@group(0) @binding(9) var shadow_s: sampler_comparison;
+
+// Fraction of light `i` reaching `p` (common.glsl light_visibility).
+fn light_visibility(i: u32, p: vec3<f32>, n: vec3<f32>, tl: vec3<f32>) -> f32 {
+    let base = rt.lights[i].info.x;
+    if (base < 0) { return 1.0; }
+    let size = f32(rt.count.z);
+    let q = p + n * (0.5 + 3.0 * length(tl) / size);
+    let d = q - rt.lights[i].pos_radius.xyz;
+    let a = abs(d);
+    var face = select(5, 4, d.z >= 0.0);
+    if (a.x >= a.y && a.x >= a.z) { face = select(1, 0, d.x >= 0.0); }
+    else if (a.y >= a.z) { face = select(3, 2, d.y >= 0.0); }
+    let layer = base + face;
+    let c = rt.vp[layer] * vec4<f32>(q, 1.0);
+    let ndc = c.xyz / c.w;
+    let ts = 1.0 / size;
+    // NDC y is up, texture v down (wgpu clip space)
+    let uv = clamp(vec2<f32>(ndc.x * 0.5 + 0.5, 0.5 - ndc.y * 0.5), vec2<f32>(ts), vec2<f32>(1.0 - ts));
+    let filt = rt.count.y;
+    if (filt == 0u) { return textureSampleCompareLevel(shadow_t, shadow_s, uv, layer, ndc.z); }
+    var s = 0.0;
+    if (filt == 1u) {
+        for (var k = 0; k < 4; k++) {
+            let o = vec2<f32>(f32(k & 1), f32(k >> 1u)) - 0.5;
+            s += textureSampleCompareLevel(shadow_t, shadow_s, uv + o * ts, layer, ndc.z);
+        }
+        return s * 0.25;
+    }
+    for (var y = -1; y <= 1; y++) {
+        for (var x = -1; x <= 1; x++) {
+            s += textureSampleCompareLevel(shadow_t, shadow_s, uv + vec2<f32>(f32(x), f32(y)) * ts * 1.25, layer, ndc.z);
+        }
+    }
+    return s / 9.0;
+}
+// Per-pixel dynamic light in lightmap units (common.glsl dyn_lights).
+fn dyn_lights(p: vec3<f32>, n: vec3<f32>) -> vec3<f32> {
+    var sum = vec3<f32>(0.0);
+    for (var i = 0u; i < rt.count.x; i++) {
+        let tl = rt.lights[i].pos_radius.xyz - p;
+        let dist = length(tl);
+        let a = rt.lights[i].pos_radius.w - dist;
+        if (a <= rt.lights[i].color_minlight.w) { continue; }
+        let ndl = dot(n, tl) / max(dist, 1e-3);
+        let facing = (0.7 + 0.3 * max(ndl, 0.0)) * smoothstep(-0.1, 0.1, ndl);
+        if (facing <= 0.0) { continue; }
+        sum += rt.lights[i].color_minlight.rgb * (a / 128.0 * facing * light_visibility(i, p, n, tl));
+    }
+    return sum;
+}
 
 // Fraction of a surface's own colour left after fog (1 = no fog).
 fn fog_factor(wpos: vec3<f32>) -> f32 {

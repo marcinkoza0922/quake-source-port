@@ -22,6 +22,7 @@ use crate::menu::{Action, Menu, Screen};
 use crate::platform::HostEvent;
 use crate::view::{ViewCvars, ViewState};
 mod commands;
+mod render_commands;
 mod compat_cmds;
 mod quaddicted_cli;
 mod bugreport;
@@ -108,6 +109,8 @@ pub struct Host {
     hitfx: crate::hitfx::HitFx,
     tracers: crate::tracers::Tracers,
     bboxes: crate::bboxes::BBoxes,
+    /// `r_testlight`: fixed dynamic lights for checking real-time lighting.
+    test_lights: Vec<qrender::DLight>,
     /// scr_showspeed: (peak this interval, shown value, interval start).
     speed: (f32, f32, f64),
     pub realtime: f64,
@@ -268,6 +271,7 @@ impl Host {
             hitfx: crate::hitfx::HitFx::default(),
             tracers: Default::default(),
             bboxes: Default::default(),
+            test_lights: Vec::new(),
             speed: (0.0, -1.0, 0.0),
             realtime: 0.0,
             accum: 0.0,

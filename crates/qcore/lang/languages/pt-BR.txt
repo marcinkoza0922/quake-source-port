@@ -835,6 +835,12 @@ pt-BR Só à distância
 @ Reacquire While Held
 pt-BR Retravar ao segurar
 
+@ Real-time Dynamic Lights
+pt-BR Luzes dinâmicas em tempo real
+
+@ Real-time Light Settings
+pt-BR Configurações de luz em tempo real
+
 @ Red
 pt-BR Vermelho
 
@@ -903,6 +909,12 @@ pt-BR Ver através dos portais
 
 @ See-through Teleporters
 pt-BR Teletransportes transparentes
+
+@ Shadow Quality
+pt-BR Qualidade das sombras
+
+@ Shadows
+pt-BR Sombras
 
 @ Shirt Color
 pt-BR Cor da camisa
@@ -1547,6 +1559,9 @@ pt-BR Com que força a água do Lava-jato empurra os inimigos
 @ How long a hit freezes the game, in milliseconds
 pt-BR Quanto tempo um golpe congela o jogo, em milissegundos
 
+@ How many lights cast shadows at once, and how smooth their edges are
+pt-BR Quantas luzes projetam sombras ao mesmo tempo e quão suaves são as bordas
+
 @ How strongly fog covers the sky when fog is on
 pt-BR Quanto a neblina cobre o céu quando está ativada
 
@@ -1567,6 +1582,9 @@ pt-BR Fontes de luz brilham: lâmpadas, lava, teletransportadores, faíscas e ex
 
 @ Lights from rockets, muzzle flashes and explosions brighten nearby walls
 pt-BR Luzes de foguetes, clarões de disparo e explosões iluminam paredes próximas
+
+@ Lights from rockets, muzzle flashes and explosions shade walls and models per pixel and cast shadows; needs Dynamic Lights
+pt-BR A luz de foguetes, disparos e explosões ilumina paredes e modelos por pixel e projeta sombras; requer Luzes dinâmicas
 
 @ Liquid surfaces swell and ring out where things move through them
 pt-BR Superfícies líquidas se agitam e formam anéis onde algo as atravessa
@@ -1810,6 +1828,9 @@ pt-BR Usa os modelos MD5 mais suaves do relançamento de 2021 (e substitutos MD3
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 pt-BR Usa a luz colorida do mapa (arquivo .lit ou lump BSPX); desativado dá a luz branca original. Aplica-se ao carregar o próximo mapa
+
+@ Walls, doors and monsters block the light and cast shadows
+pt-BR Paredes, portas e monstros bloqueiam a luz e projetam sombras
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 pt-BR Segmentos do jato de água, quantidade de gotas e sombreamento brilhante do líquido: baixa usa jatos translúcidos mais simples; alta usa jatos suaves e brilhantes

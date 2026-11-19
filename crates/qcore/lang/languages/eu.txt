@@ -835,6 +835,12 @@ eu Urrutiko erasoak soilik
 @ Reacquire While Held
 eu Berriz finkatu eustean
 
+@ Real-time Dynamic Lights
+eu Denbora errealeko argi dinamikoak
+
+@ Real-time Light Settings
+eu Denbora errealeko argiaren ezarpenak
+
 @ Red
 eu Gorria
 
@@ -903,6 +909,12 @@ eu Ikusi atarien bidez
 
 @ See-through Teleporters
 eu Teleportagailu gardenak
+
+@ Shadow Quality
+eu Itzalen kalitatea
+
+@ Shadows
+eu Itzalak
 
 @ Shirt Color
 eu Alkandoraren kolorea
@@ -1547,6 +1559,9 @@ eu Presio-garbigailuaren urak etsaiak zein indartsu bultzatzen dituen
 @ How long a hit freezes the game, in milliseconds
 eu Kolpe batek jokoa zenbat denboraz izozten duen, milisegundotan
 
+@ How many lights cast shadows at once, and how smooth their edges are
+eu Zenbat argik sortzen dituzten itzalak aldi berean, eta haien ertzak zenbat leunak diren
+
 @ How strongly fog covers the sky when fog is on
 eu Lainoak zerua zenbat estaltzen duen lainoa aktibatuta dagoenean
 
@@ -1567,6 +1582,9 @@ eu Argi-iturriek distira egiten dute: lanparak, laba, teleportagailuak, txinpart
 
 @ Lights from rockets, muzzle flashes and explosions brighten nearby walls
 eu Suzirien, tiro-distiren eta leherketen argiek inguruko hormak argitzen dituzte
+
+@ Lights from rockets, muzzle flashes and explosions shade walls and models per pixel and cast shadows; needs Dynamic Lights
+eu Suzirien, tiro-distiren eta leherketen argiak hormak eta ereduak pixelka argitzen ditu eta itzalak sortzen ditu; Argi dinamikoak behar ditu
 
 @ Liquid surfaces swell and ring out where things move through them
 eu Gainazal likidoak uhindu eta eraztunak sortzen dituzte zerbait haietatik pasatzen den lekuan
@@ -1810,6 +1828,9 @@ eu 2021eko berrargitalpenaren MD5 eredu leunagoak (eta moden MD3 ordezkoak) erab
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 eu Maparen argi koloreduna erabiltzen du (.lit fitxategia edo BSPX blokea); desaktibatuta jatorrizko argi zuria ematen du. Hurrengo mapa kargatzean aplikatzen da
+
+@ Walls, doors and monsters block the light and cast shadows
+eu Hormek, ateek eta munstroek argia blokeatzen dute eta itzalak sortzen dituzte
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 eu Zorrotada-segmentuak, tanta kopurua eta likido distiratsuaren itzaldura: baxuak zorrotada zeharrargitsu sinpleagoak erabiltzen ditu; altuak zorrotada leun eta distiratsuak

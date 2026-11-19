@@ -835,6 +835,12 @@ hr Samo dalekometno
 @ Reacquire While Held
 hr Ponovni zahvat pri držanju
 
+@ Real-time Dynamic Lights
+hr Dinamična svjetla u stvarnom vremenu
+
+@ Real-time Light Settings
+hr Postavke svjetla u stvarnom vremenu
+
 @ Red
 hr Crvena
 
@@ -903,6 +909,12 @@ hr Pogled kroz portale
 
 @ See-through Teleporters
 hr Prozirni teleporteri
+
+@ Shadow Quality
+hr Kvaliteta sjena
+
+@ Shadows
+hr Sjene
 
 @ Shirt Color
 hr Boja majice
@@ -1547,6 +1559,9 @@ hr Koliko snažno voda visokotlačnog perača gura neprijatelje
 @ How long a hit freezes the game, in milliseconds
 hr Koliko dugo pogodak zamrzava igru, u milisekundama
 
+@ How many lights cast shadows at once, and how smooth their edges are
+hr Koliko svjetala istodobno baca sjene i koliko su im rubovi mekani
+
 @ How strongly fog covers the sky when fog is on
 hr Koliko jako magla prekriva nebo kad je magla uključena
 
@@ -1567,6 +1582,9 @@ hr Izvori svjetla sjaje: svjetiljke, lava, teleporteri, iskre i eksplozije; Post
 
 @ Lights from rockets, muzzle flashes and explosions brighten nearby walls
 hr Svjetlo raketa, bljeskova cijevi i eksplozija osvjetljava obližnje zidove
+
+@ Lights from rockets, muzzle flashes and explosions shade walls and models per pixel and cast shadows; needs Dynamic Lights
+hr Svjetlo raketa, bljeskova pucnjeva i eksplozija osvjetljava zidove i modele po pikselu i baca sjene; zahtijeva Dinamična svjetla
 
 @ Liquid surfaces swell and ring out where things move through them
 hr Površine tekućina se valjaju i stvaraju krugove gdje se nešto kroz njih kreće
@@ -1810,6 +1828,9 @@ hr Koristi glađe MD5 modele iz reizdanja iz 2021. (i MD3 zamjene iz modova) umj
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 hr Koristi obojeno svjetlo mape (.lit datoteka ili BSPX blok); isključeno daje izvorno bijelo svjetlo. Primjenjuje se pri sljedećem učitavanju mape
+
+@ Walls, doors and monsters block the light and cast shadows
+hr Zidovi, vrata i čudovišta blokiraju svjetlo i bacaju sjene
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 hr Segmenti mlaza, broj kapljica i sjajno sjenčanje tekućine: nisko koristi jednostavnije prozirne mlazove; visoko glatke sjajne mlazove

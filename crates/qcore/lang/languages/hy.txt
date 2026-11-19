@@ -835,6 +835,12 @@ hy Միայն հեռահար
 @ Reacquire While Held
 hy Վերագրավել պահելիս
 
+@ Real-time Dynamic Lights
+hy Իրական ժամանակի դինամիկ լույսեր
+
+@ Real-time Light Settings
+hy Իրական ժամանակի լույսի կարգավորումներ
+
 @ Red
 hy Կարմիր
 
@@ -903,6 +909,12 @@ hy Տեսնել պորտալների միջով
 
 @ See-through Teleporters
 hy Թափանցիկ տելեպորտներ
+
+@ Shadow Quality
+hy Ստվերների որակ
+
+@ Shadows
+hy Ստվերներ
 
 @ Shirt Color
 hy Վերնաշապիկի գույն
@@ -1547,6 +1559,9 @@ hy Որքան ուժեղ է Հիդրոլվացիչի ջուրը հրում թշ�
 @ How long a hit freezes the game, in milliseconds
 hy Որքան է հարվածը սառեցնում խաղը, միլիվայրկյաններով
 
+@ How many lights cast shadows at once, and how smooth their edges are
+hy Քանի լույս է միաժամանակ ստվեր գցում, և որքան փափուկ են դրանց եզրերը
+
 @ How strongly fog covers the sky when fog is on
 hy Որքան ուժեղ է մառախուղը ծածկում երկինքը, երբ մառախուղը միացված է
 
@@ -1567,6 +1582,9 @@ hy Լույսի աղբյուրները փայլում են՝ լամպեր, լա�
 
 @ Lights from rockets, muzzle flashes and explosions brighten nearby walls
 hy Հրթիռների, փողաբռնկումների և պայթյունների լույսերը լուսավորում են մոտակա պատերը
+
+@ Lights from rockets, muzzle flashes and explosions shade walls and models per pixel and cast shadows; needs Dynamic Lights
+hy Հրթիռների, կրակոցների բռնկումների և պայթյունների լույսը պիքսել առ պիքսել լուսավորում է պատերն ու մոդելները և ստվեր գցում. պահանջում է Դինամիկ լույսեր
 
 @ Liquid surfaces swell and ring out where things move through them
 hy Հեղուկի մակերևույթներն ալեկոծվում են և շրջանակներ տալիս այնտեղ, որտեղով ինչ-որ բան է անցնում
@@ -1810,6 +1828,9 @@ hy Դասական մոդելների փոխարեն օգտագործում է 20
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 hy Օգտագործում է քարտեզի գունավոր լույսը (.lit ֆայլ կամ BSPX բլոկ), անջատվածը տալիս է սովորական սպիտակ լույս։ Կիրառվում է հաջորդ քարտեզը բեռնելիս
+
+@ Walls, doors and monsters block the light and cast shadows
+hy Պատերը, դռներն ու հրեշները փակում են լույսը և ստվեր գցում
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 hy Ջրաշիթի հատվածները, կաթիլների քանակը և հեղուկի փայլուն ստվերավորումը: ցածրն օգտագործում է ավելի պարզ կիսաթափանցիկ հոսքեր, բարձրը՝ հարթ փայլուն շիթեր

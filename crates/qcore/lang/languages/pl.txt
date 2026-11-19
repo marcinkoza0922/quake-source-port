@@ -835,6 +835,12 @@ pl Tylko walka dystansowa
 @ Reacquire While Held
 pl Ponowne namierzanie przy trzymaniu
 
+@ Real-time Dynamic Lights
+pl Dynamiczne światła w czasie rzeczywistym
+
+@ Real-time Light Settings
+pl Ustawienia światła w czasie rzeczywistym
+
 @ Red
 pl Czerwony
 
@@ -903,6 +909,12 @@ pl Widok przez portale
 
 @ See-through Teleporters
 pl Przezroczyste teleportery
+
+@ Shadow Quality
+pl Jakość cieni
+
+@ Shadows
+pl Cienie
 
 @ Shirt Color
 pl Kolor koszuli
@@ -1547,6 +1559,9 @@ pl Jak mocno woda z myjki ciśnieniowej odpycha wrogów
 @ How long a hit freezes the game, in milliseconds
 pl Jak długo trafienie zamraża grę, w milisekundach
 
+@ How many lights cast shadows at once, and how smooth their edges are
+pl Ile świateł jednocześnie rzuca cienie i jak miękkie są ich krawędzie
+
 @ How strongly fog covers the sky when fog is on
 pl Jak mocno mgła zakrywa niebo, gdy mgła jest włączona
 
@@ -1567,6 +1582,9 @@ pl Źródła światła świecą: lampy, lawa, teleporty, iskry i eksplozje; Usta
 
 @ Lights from rockets, muzzle flashes and explosions brighten nearby walls
 pl Światło rakiet, błysków z lufy i wybuchów rozjaśnia pobliskie ściany
+
+@ Lights from rockets, muzzle flashes and explosions shade walls and models per pixel and cast shadows; needs Dynamic Lights
+pl Światło rakiet, błysków wystrzałów i eksplozji oświetla ściany i modele z dokładnością do piksela i rzuca cienie; wymaga Dynamicznych świateł
 
 @ Liquid surfaces swell and ring out where things move through them
 pl Powierzchnie cieczy falują i tworzą kręgi tam, gdzie coś przez nie przechodzi
@@ -1810,6 +1828,9 @@ pl Używa gładszych modeli MD5 z wydania z 2021 roku (i zamienników MD3 z mod�
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 pl Używa kolorowego światła mapy (plik .lit lub blok BSPX); wyłączone daje oryginalne białe światło. Działa od następnego wczytania mapy
+
+@ Walls, doors and monsters block the light and cast shadows
+pl Ściany, drzwi i potwory zasłaniają światło i rzucają cienie
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 pl Segmenty strumienia, liczba kropli i połysk cieczy: niska używa prostszych przezroczystych strumieni; wysoka gładkich, lśniących strumieni

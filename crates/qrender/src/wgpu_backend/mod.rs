@@ -19,6 +19,7 @@ mod pipes;
 mod post;
 mod scene;
 mod scene_pipes;
+mod shadows;
 mod ssao;
 mod textures;
 mod timing;
@@ -111,6 +112,8 @@ pub struct Renderer {
     /// Bloom quality while r_bloom is on, and its pipelines once first used.
     bloom: Option<u32>,
     bloom_pipes: Option<bloom::BloomPipes>,
+    /// Real-time dynamic lights: shadow maps, light uniform, pipelines.
+    shadows: Option<shadows::ShadowRes>,
     /// Ripples, caustics and splashes (r_enhancedwater).
     water: water::Water,
     /// Entity transforms of the last frame (motion blur).
@@ -272,6 +275,7 @@ impl Renderer {
             mblur: None,
             bloom: None,
             bloom_pipes: None,
+            shadows: None,
             motion: Default::default(),
             capture_req: false,
             capture: None,

@@ -311,7 +311,7 @@ pub fn dlights(cl: &ClientState, out: &mut Vec<DLight>) {
         if d.die < cl.time || d.radius <= 0.0 {
             continue;
         }
-        out.push(DLight { origin: d.origin, radius: d.radius, minlight: d.minlight, color: d.color });
+        out.push(DLight { origin: d.origin, radius: d.radius, minlight: d.minlight, color: d.color, key: d.key.max(0) as u32 });
     }
 }
 

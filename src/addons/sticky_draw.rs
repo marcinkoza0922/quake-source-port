@@ -50,7 +50,7 @@ pub fn bombs(cl: &qclient::ClientState, lv: &mut crate::assets::Level, fs: &qcor
         let spin = (b % 360) as f32;
         ents.push(RenderEntity { model: id, origin, angles: [0.0, spin, 0.0], skin: on as u32, ..Default::default() });
         if on {
-            dls.push(DLight { origin, radius: 48.0, minlight: 0.0, color: [1.0, 0.25, 0.15] });
+            dls.push(DLight { origin, radius: 48.0, minlight: 0.0, color: [1.0, 0.25, 0.15], key: 0 });
         }
     }
 }
