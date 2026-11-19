@@ -1682,6 +1682,60 @@ hu Szörnyek
 @ World & Pickups
 hu Világ és tárgyak
 
+@ 3D wireframe
+hu 3D drótváz
+
+@ Automap
+hu Autotérkép
+
+@ Automap Settings
+hu Autotérkép beállításai
+
+@ Better weapon
+hu Jobb fegyver
+
+@ Center overlay
+hu Középső átfedés
+
+@ Corner minimap
+hu Sarok minitérkép
+
+@ Display
+hu Megjelenítés
+
+@ Explored only
+hu Csak felderített
+
+@ Full map
+hu Teljes térkép
+
+@ Never
+hu Soha
+
+@ Reveal
+hu Felfedés
+
+@ Rotate with Player
+hu Forgatás a játékossal
+
+@ Show Markers
+hu Jelölők mutatása
+
+@ Top-down
+hu Felülnézet
+
+@ View Mode
+hu Nézetmód
+
+@ Weapon Auto-Switch
+hu Automatikus fegyverváltás
+
+@ Weapon Priority
+hu Fegyverprioritás
+
+@ Zoom
+hu Nagyítás
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2255,6 +2309,42 @@ hu Szörnyek riasztásainak, támadásainak, fájdalmának és halálának hange
 
 @ Volume of doors, lifts, switches, item pickups and other world effects
 hu Ajtók, liftek, kapcsolók, tárgyfelvételek és egyéb világeffektek hangereje
+
+@ 3D wireframe tilts the map in perspective to show verticality; Top-down draws a flat overhead view
+hu A 3D drótváz perspektivikusan megdönti a térképet a szintkülönbségekhez; a Felülnézet sík felülnézeti képet rajzol
+
+@ Arrange weapon priority order for Better weapon auto-switching
+hu Fegyverek prioritási sorrendje a Jobb fegyver automatikus váltáshoz
+
+@ Configure the 3D wireframe automap view, display, reveal mode, zoom and markers
+hu A 3D drótvázas autotérkép nézetének, megjelenítésének, felfedésének, nagyításának és jelölőinek beállítása
+
+@ Corner minimap frames the map in the top-right; Center overlay floats a transparent wireframe over the view
+hu A Sarok minitérkép a jobb felső sarokban jelenik meg; a Középső átfedés átlátszó drótvázat vetít a kép fölé
+
+@ Disabled while Weapon Auto-Switch is set to Never
+hu Letiltva, amíg az Automatikus fegyverváltás Soha értékre van állítva
+
+@ Explored only reveals rooms as you visit them; Full map shows the entire level geometry
+hu A Csak felderített csak a bejárt termeket fedi fel; a Teljes térkép az egész pálya geometriáját mutatja
+
+@ Highlights exits, keys, teleporters, locked doors and your recent trail on the automap
+hu Kiemeli az autotérképen a kijáratokat, kulcsokat, teleportokat, zárt ajtókat és a legutóbbi útvonaladat
+
+@ Opacity of the automap lines and panel
+hu Az autotérkép vonalainak és paneljének átlátszatlansága
+
+@ Rotates the automap so your facing direction points up; off keeps North at the top
+hu Elforgatja az autotérképet, hogy a nézési irány felfelé mutasson; kikapcsolva észak marad felül
+
+@ Shows a live 3D wireframe or top-down automap while playing; press M for the interactive full-screen map (single player and co-op only)
+hu Élő 3D drótvázas vagy felülnézeti autotérképet mutat játék közben; az M billentyűvel nyitható a teljes képernyős interaktív térkép (csak egyjátékos és kooperatív módban)
+
+@ When picking up a weapon: Never keeps your current weapon; Better weapon switches only if it ranks higher in Weapon Priority
+hu Fegyver felvételekor: a Soha megtartja a jelenlegi fegyvert; a Jobb fegyver csak akkor vált, ha az előrébb van a Fegyverprioritásban
+
+@ Zoom level of the automap view
+hu Az autotérkép nézetének nagyítási szintje
 
 # ==== ui.txt ====
 
@@ -3185,6 +3275,60 @@ hu Adatok másolása
 
 @ Switch Only
 hu Csak váltás
+
+@ Above
+hu Felette
+
+@ Below
+hu Alatta
+
+@ Close
+hu Bezárás
+
+@ Current floor
+hu Jelenlegi szint
+
+@ Drag weapons to reorder, or press Enter and use arrow keys
+hu Húzd a fegyvereket az átrendezéshez, vagy nyomj Entert és használd a nyilakat
+
+@ Drag: Orbit  |  WASD: Pan  |  Q/E: Floor  |  Wheel: Zoom  |  Tab: 3D/2D  |  F: Reveal  |  R: Reset  |  M/Esc: Close
+hu Húzás: Forgatás  |  WASD: Eltolás  |  Q/E: Szint  |  Görgő: Nagyítás  |  Tab: 3D/2D  |  F: Felfedés  |  R: Alaphelyzet  |  M/Esc: Bezárás
+
+@ Exit
+hu Kijárat
+
+@ Highest priority at top
+hu Legmagasabb prioritás felül
+
+@ Move
+hu Mozgatás
+
+@ Orbit
+hu Forgatás
+
+@ Pan
+hu Eltolás
+
+@ Place
+hu Elhelyezés
+
+@ Press A to pick up a weapon, then move it up or down
+hu Nyomd meg az A gombot egy fegyver kiválasztásához, majd mozgasd fel vagy le
+
+@ Reorder
+hu Átrendezés
+
+@ Reset
+hu Alaphelyzet
+
+@ Use D-Pad or stick to move, A to place, B to cancel
+hu Használd a D-Padot vagy a kart a mozgatáshoz, A az elhelyezéshez, B a mégsemhez
+
+@ Use Up and Down arrows to move, Enter to place, Esc to cancel
+hu Használd a Fel/Le nyilakat a mozgatáshoz, Enter az elhelyezéshez, Esc a mégsemhez
+
+@ View
+hu Nézet
 
 # ==== hud.txt ====
 

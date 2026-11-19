@@ -1682,6 +1682,60 @@ sq Përbindëshat
 @ World & Pickups
 sq Bota dhe objektet
 
+@ 3D wireframe
+sq Rrjetë 3D
+
+@ Automap
+sq Autoharta
+
+@ Automap Settings
+sq Cilësimet e autohartës
+
+@ Better weapon
+sq Armë më e mirë
+
+@ Center overlay
+sq Mbivendosje në qendër
+
+@ Corner minimap
+sq Miniharta në kënd
+
+@ Display
+sq Shfaqja
+
+@ Explored only
+sq Vetëm e eksploruara
+
+@ Full map
+sq Harta e plotë
+
+@ Never
+sq Kurrë
+
+@ Reveal
+sq Zbulimi
+
+@ Rotate with Player
+sq Rrotullo me lojtarin
+
+@ Show Markers
+sq Shfaq shënjuesit
+
+@ Top-down
+sq Nga lart
+
+@ View Mode
+sq Mënyra e pamjes
+
+@ Weapon Auto-Switch
+sq Ndërrim automatik i armës
+
+@ Weapon Priority
+sq Prioriteti i armëve
+
+@ Zoom
+sq Zmadhimi
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2255,6 +2309,42 @@ sq Volumi i sinjaleve, sulmeve, dhimbjes dhe vdekjes së përbindëshave
 
 @ Volume of doors, lifts, switches, item pickups and other world effects
 sq Volumi i dyerve, ashensorëve, çelësave, marrjes së objekteve dhe efekteve të tjera të botës
+
+@ 3D wireframe tilts the map in perspective to show verticality; Top-down draws a flat overhead view
+sq Rrjeta 3D e anon hartën në perspektivë për të treguar lartësinë; Nga lart vizaton një pamje të sheshtë nga sipër
+
+@ Arrange weapon priority order for Better weapon auto-switching
+sq Rendit prioritetin e armëve për ndërrimin automatik te Armë më e mirë
+
+@ Configure the 3D wireframe automap view, display, reveal mode, zoom and markers
+sq Konfiguro pamjen, shfaqjen, mënyrën e zbulimit, zmadhimin dhe shënjuesit e autohartës 3D
+
+@ Corner minimap frames the map in the top-right; Center overlay floats a transparent wireframe over the view
+sq Miniharta në kënd e vendos hartën lart djathtas; Mbivendosja në qendër vendos një rrjetë të tejdukshme mbi pamjen
+
+@ Disabled while Weapon Auto-Switch is set to Never
+sq Çaktivizuar kur Ndërrim automatik i armës është vendosur në Kurrë
+
+@ Explored only reveals rooms as you visit them; Full map shows the entire level geometry
+sq Vetëm e eksploruara zbulon dhomat ndërsa i vizitoni; Harta e plotë tregon gjithë gjeometrinë e nivelit
+
+@ Highlights exits, keys, teleporters, locked doors and your recent trail on the automap
+sq Thekson daljet, çelësat, teleportuesit, dyert e kyçura dhe gjurmën tuaj të fundit në autohartë
+
+@ Opacity of the automap lines and panel
+sq Opaciteti i vijave dhe panelit të autohartës
+
+@ Rotates the automap so your facing direction points up; off keeps North at the top
+sq Rrotullon autohartën që drejtimi i shikimit tuaj të tregojë lart; joaktiv e mban Veriun lart
+
+@ Shows a live 3D wireframe or top-down automap while playing; press M for the interactive full-screen map (single player and co-op only)
+sq Shfaq një autohartë të gjallë me rrjetë 3D ose nga lart gjatë lojës; shtyp M për hartën interaktive në ekran të plotë (vetëm për një lojtar dhe bashkëpunim)
+
+@ When picking up a weapon: Never keeps your current weapon; Better weapon switches only if it ranks higher in Weapon Priority
+sq Kur merr një armë: Kurrë mban armën aktuale; Armë më e mirë ndërron vetëm nëse renditet më lart te Prioriteti i armëve
+
+@ Zoom level of the automap view
+sq Niveli i zmadhimit të pamjes së autohartës
 
 # ==== ui.txt ====
 
@@ -3185,6 +3275,60 @@ sq Kopjo të dhënat
 
 @ Switch Only
 sq Vetëm ndërro
+
+@ Above
+sq Sipër
+
+@ Below
+sq Poshtë
+
+@ Close
+sq Mbyll
+
+@ Current floor
+sq Kati aktual
+
+@ Drag weapons to reorder, or press Enter and use arrow keys
+sq Tërhiq armët për t'i rirenditur, ose shtyp Enter dhe përdor tastet e shigjetave
+
+@ Drag: Orbit  |  WASD: Pan  |  Q/E: Floor  |  Wheel: Zoom  |  Tab: 3D/2D  |  F: Reveal  |  R: Reset  |  M/Esc: Close
+sq Tërhiq: Rrotullo  |  WASD: Lëviz  |  Q/E: Kati  |  Rrota: Zmadho  |  Tab: 3D/2D  |  F: Zbulo  |  R: Rivendos  |  M/Esc: Mbyll
+
+@ Exit
+sq Dalja
+
+@ Highest priority at top
+sq Prioriteti më i lartë lart
+
+@ Move
+sq Lëviz
+
+@ Orbit
+sq Rrotullo
+
+@ Pan
+sq Zhvendos
+
+@ Place
+sq Vendos
+
+@ Press A to pick up a weapon, then move it up or down
+sq Shtyp A për të kapur një armë, pastaj lëvize lart ose poshtë
+
+@ Reorder
+sq Rirendit
+
+@ Reset
+sq Rivendos
+
+@ Use D-Pad or stick to move, A to place, B to cancel
+sq Përdor D-Pad ose levën për të lëvizur, A për të vendosur, B për të anuluar
+
+@ Use Up and Down arrows to move, Enter to place, Esc to cancel
+sq Përdor shigjetat Lart dhe Poshtë për të lëvizur, Enter për të vendosur, Esc për të anuluar
+
+@ View
+sq Pamja
 
 # ==== hud.txt ====
 

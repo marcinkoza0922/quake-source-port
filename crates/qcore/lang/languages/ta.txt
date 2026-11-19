@@ -1682,6 +1682,60 @@ ta அரக்கர்கள்
 @ World & Pickups
 ta உலகம் & பொருட்கள்
 
+@ 3D wireframe
+ta 3D வயர்ஃபிரேம்
+
+@ Automap
+ta ஆட்டோமேப்
+
+@ Automap Settings
+ta ஆட்டோமேப் அமைப்புகள்
+
+@ Better weapon
+ta சிறந்த ஆயுதம்
+
+@ Center overlay
+ta மைய மேலடுக்கு
+
+@ Corner minimap
+ta மூலை மினிமேப்
+
+@ Display
+ta காட்சிப்படுத்தல்
+
+@ Explored only
+ta ஆராய்ந்தவை மட்டும்
+
+@ Full map
+ta முழு மேப்
+
+@ Never
+ta எப்போதுமில்லை
+
+@ Reveal
+ta வெளிப்பாடு
+
+@ Rotate with Player
+ta வீரருடன் சுழற்று
+
+@ Show Markers
+ta குறிகளைக் காட்டு
+
+@ Top-down
+ta மேலிருந்து பார்வை
+
+@ View Mode
+ta பார்வை முறை
+
+@ Weapon Auto-Switch
+ta ஆயுதம் தானியங்கி மாற்றம்
+
+@ Weapon Priority
+ta ஆயுத முன்னுரிமை
+
+@ Zoom
+ta பெரிதாக்கம்
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2255,6 +2309,42 @@ ta அரக்கர்களின் எச்சரிக்கை, தா�
 
 @ Volume of doors, lifts, switches, item pickups and other world effects
 ta கதவுகள், மின்தூக்கிகள், பொத்தான்கள், பொருள் எடுத்தல் மற்றும் பிற உலக ஒலிகளின் அளவு
+
+@ 3D wireframe tilts the map in perspective to show verticality; Top-down draws a flat overhead view
+ta 3D வயர்ஃபிரேம் உயரத்தைக் காட்ட மேப்பை சாய்க்கிறது; மேலிருந்து பார்வை தட்டையான மேல்நோக்கு வரைபடத்தைக் காட்டும்
+
+@ Arrange weapon priority order for Better weapon auto-switching
+ta சிறந்த ஆயுதத்திற்குத் தானாக மாறுவதற்கான ஆயுத முன்னுரிமை வரிசையை அமைக்கவும்
+
+@ Configure the 3D wireframe automap view, display, reveal mode, zoom and markers
+ta 3D வயர்ஃபிரேம் ஆட்டோமேப் பார்வை, காட்சிப்படுத்தல், வெளிப்பாடு முறை, பெரிதாக்கம் மற்றும் குறிகளை அமைக்கவும்
+
+@ Corner minimap frames the map in the top-right; Center overlay floats a transparent wireframe over the view
+ta மூலை மினிமேப் மேப்பை மேல்-வலது மூலையில் காட்டும்; மைய மேலடுக்கு பார்வையின் மேல் ஒளிபுகும் வயர்ஃபிரேமைக் காட்டும்
+
+@ Disabled while Weapon Auto-Switch is set to Never
+ta ஆயுதம் தானியங்கி மாற்றம் 'எப்போதுமில்லை' என இருக்கும்போது முடக்கப்பட்டிருக்கும்
+
+@ Explored only reveals rooms as you visit them; Full map shows the entire level geometry
+ta ஆராய்ந்தவை மட்டும் நீங்கள் செல்லும் அறைகளைக் காட்டும்; முழு மேப் நிலையின் முழு அமைப்பையும் காட்டும்
+
+@ Highlights exits, keys, teleporters, locked doors and your recent trail on the automap
+ta ஆட்டோமேப்பில் வெளியேறும் வழிகள், சாவிகள், டெலிபோர்ட்டர்கள், பூட்டிய கதவுகள் மற்றும் உங்கள் சமீபத்திய பாதையை முன்னிலைப்படுத்தும்
+
+@ Opacity of the automap lines and panel
+ta ஆட்டோமேப் கோடுகள் மற்றும் பலகத்தின் ஒளிபுகாமை
+
+@ Rotates the automap so your facing direction points up; off keeps North at the top
+ta நீங்கள் பார்க்கும் திசை மேல்நோக்கி இருக்குமாறு ஆட்டோமேப்பைச் சுழற்றும்; ஆஃப் செய்தால் வடக்கு மேலே இருக்கும்
+
+@ Shows a live 3D wireframe or top-down automap while playing; press M for the interactive full-screen map (single player and co-op only)
+ta விளையாடும்போது நேரடி 3D வயர்ஃபிரேம் அல்லது மேலிருந்து ஆட்டோமேப்பைக் காட்டும்; முழுத்திரை ஊடாடும் மேப்பிற்கு M அழுத்தவும் (தனி ஆட்டம் மற்றும் கூட்டுறவு மட்டும்)
+
+@ When picking up a weapon: Never keeps your current weapon; Better weapon switches only if it ranks higher in Weapon Priority
+ta ஆயுதம் எடுக்கும்போது: எப்போதுமில்லை தற்போதைய ஆயுதத்தை வைத்திருக்கும்; சிறந்த ஆயுதம் ஆயுத முன்னுரிமையில் உயர்ந்திருந்தால் மட்டுமே மாற்றும்
+
+@ Zoom level of the automap view
+ta ஆட்டோமேப் பார்வையின் பெரிதாக்க அளவு
 
 # ==== ui.txt ====
 
@@ -3185,6 +3275,60 @@ ta தரவை நகலெடு
 
 @ Switch Only
 ta மாற்று மட்டும்
+
+@ Above
+ta மேலே
+
+@ Below
+ta கீழே
+
+@ Close
+ta மூடு
+
+@ Current floor
+ta தற்போதைய தளம்
+
+@ Drag weapons to reorder, or press Enter and use arrow keys
+ta வரிசை மாற்ற ஆயுதங்களை இழுக்கவும், அல்லது Enter அழுத்தி அம்புக்குறி விசைகளைப் பயன்படுத்தவும்
+
+@ Drag: Orbit  |  WASD: Pan  |  Q/E: Floor  |  Wheel: Zoom  |  Tab: 3D/2D  |  F: Reveal  |  R: Reset  |  M/Esc: Close
+ta இழு: சுழற்று  |  WASD: நகர்த்து  |  Q/E: தளம்  |  சக்கரம்: பெரிதாக்கு  |  Tab: 3D/2D  |  F: காட்டு  |  R: மீட்டமை  |  M/Esc: மூடு
+
+@ Exit
+ta வெளியேறு
+
+@ Highest priority at top
+ta அதிக முன்னுரிமை மேலே
+
+@ Move
+ta நகர்த்து
+
+@ Orbit
+ta சுழற்று
+
+@ Pan
+ta நகர்த்து
+
+@ Place
+ta வை
+
+@ Press A to pick up a weapon, then move it up or down
+ta ஆயுதத்தை எடுக்க A அழுத்தி, பின்னர் மேலே அல்லது கீழே நகர்த்தவும்
+
+@ Reorder
+ta வரிசை மாற்று
+
+@ Reset
+ta மீட்டமை
+
+@ Use D-Pad or stick to move, A to place, B to cancel
+ta நகர்த்த டி-பேட் அல்லது ஸ்டிக், வைக்க A, ரத்துசெய்ய B பயன்படுத்தவும்
+
+@ Use Up and Down arrows to move, Enter to place, Esc to cancel
+ta நகர்த்த மேல் மற்றும் கீழ் அம்புக்குறிகள், வைக்க Enter, ரத்துசெய்ய Esc பயன்படுத்தவும்
+
+@ View
+ta பார்வை
 
 # ==== hud.txt ====
 

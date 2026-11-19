@@ -11,6 +11,10 @@ impl Menu {
             Screen::Options => (PANEL_X, ROW0 + self.hub_rows() as f32 * ROW_H + 12.0),
             Screen::OptionsPage(Page::Addons) => (20.0, 266.0),
             Screen::OptionsPage(Page::NewGameAddons) => (24.0, 294.0),
+            Screen::OptionsPage(Page::WeaponPriority) => {
+                if self.wp.is_grabbed() { return None; }
+                weapon_priority::WP_BACK
+            }
             Screen::OptionsPage(p) => {
                 let bottom = PAGE_ROW0 + self.page_vis(p) as f32 * ROW_H;
                 // Leave room for contextual help, the player-colour preview
@@ -53,7 +57,7 @@ impl Menu {
         let item = self.page_item(page, self.opt_cursor);
         let reason = if self.game_locked(item, cv) {
             Some(qcore::t!("Fixed for this game: it was started without Customize"))
-        } else if self.item_disabled(item, cv) {
+        } else if self.item_disabled(item, cv) || matches!(item, Item::Sub { page, .. } if sub_disabled(page, cv)) {
             disabled_reason(item)
         } else {
             None

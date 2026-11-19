@@ -1682,6 +1682,60 @@ cs Příšery
 @ World & Pickups
 cs Svět a předměty
 
+@ 3D wireframe
+cs 3D drátový model
+
+@ Automap
+cs Automapa
+
+@ Automap Settings
+cs Nastavení automapy
+
+@ Better weapon
+cs Lepší zbraň
+
+@ Center overlay
+cs Překrytí uprostřed
+
+@ Corner minimap
+cs Minimapa v rohu
+
+@ Display
+cs Zobrazení
+
+@ Explored only
+cs Jen prozkoumané
+
+@ Full map
+cs Celá mapa
+
+@ Never
+cs Nikdy
+
+@ Reveal
+cs Odhalení
+
+@ Rotate with Player
+cs Otáčet s hráčem
+
+@ Show Markers
+cs Zobrazit značky
+
+@ Top-down
+cs Pohled shora
+
+@ View Mode
+cs Režim pohledu
+
+@ Weapon Auto-Switch
+cs Auto-přepnutí zbraně
+
+@ Weapon Priority
+cs Priorita zbraní
+
+@ Zoom
+cs Přiblížení
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2255,6 +2309,42 @@ cs Hlasitost varování, útoků, bolesti a smrti příšer
 
 @ Volume of doors, lifts, switches, item pickups and other world effects
 cs Hlasitost dveří, výtahů, spínačů, sbírání předmětů a dalších efektů světa
+
+@ 3D wireframe tilts the map in perspective to show verticality; Top-down draws a flat overhead view
+cs 3D drátový model naklání mapu v perspektivě pro zobrazení výšky; Pohled shora kreslí plochý půdorys
+
+@ Arrange weapon priority order for Better weapon auto-switching
+cs Seřadí priority zbraní pro automatické přepnutí na lepší zbraň
+
+@ Configure the 3D wireframe automap view, display, reveal mode, zoom and markers
+cs Nastaví pohled 3D drátové automapy, zobrazení, odhalení, přiblížení a značky
+
+@ Corner minimap frames the map in the top-right; Center overlay floats a transparent wireframe over the view
+cs Minimapa v rohu zobrazí mapu vpravo nahoře; Překrytí uprostřed vykreslí průhledný drátový model přes obraz
+
+@ Disabled while Weapon Auto-Switch is set to Never
+cs Vypnuto, pokud je Auto-přepnutí zbraně nastaveno na Nikdy
+
+@ Explored only reveals rooms as you visit them; Full map shows the entire level geometry
+cs Jen prozkoumané odhaluje místnosti při průchodu; Celá mapa zobrazuje celou geometrii úrovně
+
+@ Highlights exits, keys, teleporters, locked doors and your recent trail on the automap
+cs Zvýrazňuje na automapě východy, klíče, teleporty, zamčené dveře a vaši nedávnou trasu
+
+@ Opacity of the automap lines and panel
+cs Krytí čar a panelu automapy
+
+@ Rotates the automap so your facing direction points up; off keeps North at the top
+cs Otáčí automapu tak, aby váš směr pohledu mířil nahoru; vypnutí ponechá sever nahoře
+
+@ Shows a live 3D wireframe or top-down automap while playing; press M for the interactive full-screen map (single player and co-op only)
+cs Zobrazuje při hraní živou 3D drátovou nebo horní automapu; stiskněte M pro interaktivní mapu na celou obrazovku (jen hra jednoho hráče a kooperace)
+
+@ When picking up a weapon: Never keeps your current weapon; Better weapon switches only if it ranks higher in Weapon Priority
+cs Při sebrání zbraně: Nikdy ponechá aktuální zbraň; Lepší zbraň přepne jen tehdy, má-li vyšší pořadí v Prioritě zbraní
+
+@ Zoom level of the automap view
+cs Úroveň přiblížení automapy
 
 # ==== ui.txt ====
 
@@ -3185,6 +3275,60 @@ cs Zkopírovat data
 
 @ Switch Only
 cs Jen přepnout
+
+@ Above
+cs Nad
+
+@ Below
+cs Pod
+
+@ Close
+cs Zavřít
+
+@ Current floor
+cs Aktuální patro
+
+@ Drag weapons to reorder, or press Enter and use arrow keys
+cs Přetažením změňte pořadí zbraní, nebo stiskněte Enter a použijte šipky
+
+@ Drag: Orbit  |  WASD: Pan  |  Q/E: Floor  |  Wheel: Zoom  |  Tab: 3D/2D  |  F: Reveal  |  R: Reset  |  M/Esc: Close
+cs Tažení: Otáčet  |  WASD: Posun  |  Q/E: Patro  |  Kolečko: Zoom  |  Tab: 3D/2D  |  F: Odhalit  |  R: Obnovit  |  M/Esc: Zavřít
+
+@ Exit
+cs Východ
+
+@ Highest priority at top
+cs Nejvyšší priorita nahoře
+
+@ Move
+cs Posunout
+
+@ Orbit
+cs Otáčet
+
+@ Pan
+cs Posun
+
+@ Place
+cs Umístit
+
+@ Press A to pick up a weapon, then move it up or down
+cs Stiskněte A pro výběr zbraně a pak ji přesuňte nahoru nebo dolů
+
+@ Reorder
+cs Seřadit
+
+@ Reset
+cs Obnovit
+
+@ Use D-Pad or stick to move, A to place, B to cancel
+cs Směrový kříž nebo páčka: přesunout, A: umístit, B: zrušit
+
+@ Use Up and Down arrows to move, Enter to place, Esc to cancel
+cs Šipky nahoru/dolů: přesunout, Enter: umístit, Esc: zrušit
+
+@ View
+cs Pohled
 
 # ==== hud.txt ====
 

@@ -1682,6 +1682,60 @@ yue 怪物
 @ World & Pickups
 yue 世界同物品
 
+@ 3D wireframe
+yue 3D線框
+
+@ Automap
+yue 自動地圖
+
+@ Automap Settings
+yue 自動地圖設定
+
+@ Better weapon
+yue 更強武器
+
+@ Center overlay
+yue 置中疊加
+
+@ Corner minimap
+yue 角落小地圖
+
+@ Display
+yue 顯示位置
+
+@ Explored only
+yue 只顯示已探索
+
+@ Full map
+yue 完整地圖
+
+@ Never
+yue 永不
+
+@ Reveal
+yue 顯示範圍
+
+@ Rotate with Player
+yue 跟住玩家旋轉
+
+@ Show Markers
+yue 顯示標記
+
+@ Top-down
+yue 俯視圖
+
+@ View Mode
+yue 檢視模式
+
+@ Weapon Auto-Switch
+yue 自動換武器
+
+@ Weapon Priority
+yue 武器優先次序
+
+@ Zoom
+yue 縮放
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2255,6 +2309,42 @@ yue 怪物發現、攻擊、受傷同死亡聲嘅音量
 
 @ Volume of doors, lifts, switches, item pickups and other world effects
 yue 門、升降機、開關、執嘢同其他世界音效嘅音量
+
+@ 3D wireframe tilts the map in perspective to show verticality; Top-down draws a flat overhead view
+yue 3D線框會以透視角度斜擺地圖嚟顯示高低落差；俯視圖就會畫平面嘅由上往下畫面
+
+@ Arrange weapon priority order for Better weapon auto-switching
+yue 排好「更強武器」自動換武器所用嘅武器優先次序
+
+@ Configure the 3D wireframe automap view, display, reveal mode, zoom and markers
+yue 設定3D線框自動地圖嘅檢視模式、顯示位置、顯示範圍、縮放同埋標記
+
+@ Corner minimap frames the map in the top-right; Center overlay floats a transparent wireframe over the view
+yue 角落小地圖會將地圖擺喺右上角；置中疊加會喺畫面上方浮現半透明線框
+
+@ Disabled while Weapon Auto-Switch is set to Never
+yue 當自動換武器設為「永不」嗰陣會停用
+
+@ Explored only reveals rooms as you visit them; Full map shows the entire level geometry
+yue 只顯示已探索會喺你行過房間嗰陣先顯露；完整地圖會顯示成個關卡嘅幾何結構
+
+@ Highlights exits, keys, teleporters, locked doors and your recent trail on the automap
+yue 喺自動地圖上醒目標示出口、鎖匙、傳送點、上鎖嘅門同埋你最近嘅行蹤
+
+@ Opacity of the automap lines and panel
+yue 自動地圖線條同面板嘅不透明度
+
+@ Rotates the automap so your facing direction points up; off keeps North at the top
+yue 旋轉自動地圖令你面向嘅方向指住正上方；熄咗就會保持北方喺上面
+
+@ Shows a live 3D wireframe or top-down automap while playing; press M for the interactive full-screen map (single player and co-op only)
+yue 玩緊嗰陣即時顯示3D線框或者俯視自動地圖；撳 M 可以開互動式全螢幕地圖（只限單人遊戲同合作模式）
+
+@ When picking up a weapon: Never keeps your current weapon; Better weapon switches only if it ranks higher in Weapon Priority
+yue 執到武器嗰陣：「永不」會留返依家用緊嘅武器；「更強武器」只有喺嗰件武器喺武器優先次序排得更高先會換
+
+@ Zoom level of the automap view
+yue 自動地圖檢視嘅縮放級別
 
 # ==== ui.txt ====
 
@@ -3185,6 +3275,60 @@ yue 複製資料
 
 @ Switch Only
 yue 淨係切換
+
+@ Above
+yue 上層
+
+@ Below
+yue 下層
+
+@ Close
+yue 關閉
+
+@ Current floor
+yue 目前樓層
+
+@ Drag weapons to reorder, or press Enter and use arrow keys
+yue 拖曳武器嚟重新排序，或者撳 Enter 再用方向掣
+
+@ Drag: Orbit  |  WASD: Pan  |  Q/E: Floor  |  Wheel: Zoom  |  Tab: 3D/2D  |  F: Reveal  |  R: Reset  |  M/Esc: Close
+yue 拖曳：旋轉  |  WASD：平移  |  Q/E：樓層  |  滾輪：縮放  |  Tab：3D/2D  |  F：顯露  |  R：重設  |  M/Esc：關閉
+
+@ Exit
+yue 出口
+
+@ Highest priority at top
+yue 最高優先次序喺最頂
+
+@ Move
+yue 移動
+
+@ Orbit
+yue 旋轉
+
+@ Pan
+yue 平移
+
+@ Place
+yue 擺放
+
+@ Press A to pick up a weapon, then move it up or down
+yue 撳 A 揀起件武器，然後向上或者向下移動
+
+@ Reorder
+yue 重新排序
+
+@ Reset
+yue 重設
+
+@ Use D-Pad or stick to move, A to place, B to cancel
+yue 用十字掣或者搖桿移動，A 擺放，B 取消
+
+@ Use Up and Down arrows to move, Enter to place, Esc to cancel
+yue 用上下方向掣移動，Enter 擺放，Esc 取消
+
+@ View
+yue 檢視
 
 # ==== hud.txt ====
 

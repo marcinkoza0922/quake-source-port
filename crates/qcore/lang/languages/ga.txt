@@ -1682,6 +1682,60 @@ ga Arrachtaigh
 @ World & Pickups
 ga Domhan & Míreanna
 
+@ 3D wireframe
+ga Sreangfhráma 3D
+
+@ Automap
+ga Uathléarscáil
+
+@ Automap Settings
+ga Socruithe Uathléarscáile
+
+@ Better weapon
+ga Arm níos fearr
+
+@ Center overlay
+ga Forleagan láir
+
+@ Corner minimap
+ga Mionléarscáil chúinne
+
+@ Display
+ga Taispeáint
+
+@ Explored only
+ga Taiscéalta amháin
+
+@ Full map
+ga Léarscáil iomlán
+
+@ Never
+ga Riamh
+
+@ Reveal
+ga Nochtadh
+
+@ Rotate with Player
+ga Rothlaigh leis an Imreoir
+
+@ Show Markers
+ga Taispeáin Marcálaithe
+
+@ Top-down
+ga Ón mbarr anuas
+
+@ View Mode
+ga Mód Amhairc
+
+@ Weapon Auto-Switch
+ga Uathathrú Airm
+
+@ Weapon Priority
+ga Tosaíocht Arm
+
+@ Zoom
+ga Zúmáil
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2255,6 +2309,42 @@ ga Toirt foláireamh, ionsaithe, pian agus bás na n-arrachtach
 
 @ Volume of doors, lifts, switches, item pickups and other world effects
 ga Toirt doirse, ardaitheoirí, lasca, bailiú míreanna agus éifeachtaí eile an domhain
+
+@ 3D wireframe tilts the map in perspective to show verticality; Top-down draws a flat overhead view
+ga Claonann Sreangfhráma 3D an léarscáil i bpeirspictíocht chun ingearacht a thaispeáint; tarraingíonn Ón mbarr anuas amharc cothrom ó thuas
+
+@ Arrange weapon priority order for Better weapon auto-switching
+ga Socraigh ord tosaíochta na n-arm don uathathrú chuig Arm níos fearr
+
+@ Configure the 3D wireframe automap view, display, reveal mode, zoom and markers
+ga Cumraigh amharc, taispeáint, mód nochta, zúmáil agus marcálaithe na huathléarscáile sreangfhráma 3D
+
+@ Corner minimap frames the map in the top-right; Center overlay floats a transparent wireframe over the view
+ga Cuireann Mionléarscáil chúinne an léarscáil i bhfráma ag barr ar dheis; snámhann Forleagan láir sreangfhráma trédhearcach os cionn an amhairc
+
+@ Disabled while Weapon Auto-Switch is set to Never
+ga Díchumasaithe fad atá Uathathrú Airm socraithe ar Riamh
+
+@ Explored only reveals rooms as you visit them; Full map shows the entire level geometry
+ga Ní nochtann Taiscéalta amháin seomraí ach nuair a thugann tú cuairt orthu; taispeánann Léarscáil iomlán céimseata iomlán an leibhéil
+
+@ Highlights exits, keys, teleporters, locked doors and your recent trail on the automap
+ga Aibhsíonn sé bealaí amach, eochracha, teileapórtálaithe, doirse faoi ghlas agus do rian le déanaí ar an uathléarscáil
+
+@ Opacity of the automap lines and panel
+ga Teimhneacht línte agus phainéal na huathléarscáile
+
+@ Rotates the automap so your facing direction points up; off keeps North at the top
+ga Rothlaíonn sé an uathléarscáil ionas go mbeidh do threo amhairc dírithe suas; coinníonn as an Tuaisceart ag an mbarr
+
+@ Shows a live 3D wireframe or top-down automap while playing; press M for the interactive full-screen map (single player and co-op only)
+ga Taispeánann sé uathléarscáil bheo sreangfhráma 3D nó ón mbarr anuas agus tú ag imirt; brúigh M don léarscáil idirghníomhach lánscáileáin (aonimreoir agus comhoibriú amháin)
+
+@ When picking up a weapon: Never keeps your current weapon; Better weapon switches only if it ranks higher in Weapon Priority
+ga Agus arm á phiocadh suas: coinníonn Riamh d'arm reatha; ní athraíonn Arm níos fearr ach má tá rangú níos airde aige i dTosaíocht Arm
+
+@ Zoom level of the automap view
+ga Leibhéal zúmála amhairc na huathléarscáile
 
 # ==== ui.txt ====
 
@@ -3185,6 +3275,60 @@ ga Cóipeáil Sonraí
 
 @ Switch Only
 ga Athraigh Amháin
+
+@ Above
+ga Thuas
+
+@ Below
+ga Thíos
+
+@ Close
+ga Dún
+
+@ Current floor
+ga Urlár reatha
+
+@ Drag weapons to reorder, or press Enter and use arrow keys
+ga Tarraing airm chun iad a athordú, nó brúigh Enter agus úsáid na heochracha saighde
+
+@ Drag: Orbit  |  WASD: Pan  |  Q/E: Floor  |  Wheel: Zoom  |  Tab: 3D/2D  |  F: Reveal  |  R: Reset  |  M/Esc: Close
+ga Tarraing: Rothlaigh  |  WASD: Bog  |  Q/E: Urlár  |  Roth: Zúmáil  |  Tab: 3D/2D  |  F: Nocht  |  R: Athshocraigh  |  M/Esc: Dún
+
+@ Exit
+ga Bealach amach
+
+@ Highest priority at top
+ga An tosaíocht is airde ag an mbarr
+
+@ Move
+ga Bog
+
+@ Orbit
+ga Rothlaigh
+
+@ Pan
+ga Bogadh
+
+@ Place
+ga Cuir
+
+@ Press A to pick up a weapon, then move it up or down
+ga Brúigh A chun arm a thógáil, ansin bog suas nó síos é
+
+@ Reorder
+ga Athordaigh
+
+@ Reset
+ga Athshocraigh
+
+@ Use D-Pad or stick to move, A to place, B to cancel
+ga Úsáid D-Pad nó maide chun bogadh, A chun cur, B chun cealú
+
+@ Use Up and Down arrows to move, Enter to place, Esc to cancel
+ga Úsáid na saigheada Suas agus Síos chun bogadh, Enter chun cur, Esc chun cealú
+
+@ View
+ga Amharc
 
 # ==== hud.txt ====
 

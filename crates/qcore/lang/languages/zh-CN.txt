@@ -1682,6 +1682,60 @@ zh-CN 怪物
 @ World & Pickups
 zh-CN 世界与物品
 
+@ 3D wireframe
+zh-CN 3D 线框
+
+@ Automap
+zh-CN 自动地图
+
+@ Automap Settings
+zh-CN 自动地图设置
+
+@ Better weapon
+zh-CN 更强武器
+
+@ Center overlay
+zh-CN 居中叠加
+
+@ Corner minimap
+zh-CN 角落小地图
+
+@ Display
+zh-CN 显示位置
+
+@ Explored only
+zh-CN 仅已探索
+
+@ Full map
+zh-CN 完整地图
+
+@ Never
+zh-CN 从不
+
+@ Reveal
+zh-CN 显示范围
+
+@ Rotate with Player
+zh-CN 随玩家旋转
+
+@ Show Markers
+zh-CN 显示标记
+
+@ Top-down
+zh-CN 俯视图
+
+@ View Mode
+zh-CN 视图模式
+
+@ Weapon Auto-Switch
+zh-CN 武器自动切换
+
+@ Weapon Priority
+zh-CN 武器优先级
+
+@ Zoom
+zh-CN 缩放
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2255,6 +2309,42 @@ zh-CN 怪物警觉、攻击、受伤和死亡音效的音量
 
 @ Volume of doors, lifts, switches, item pickups and other world effects
 zh-CN 门、升降梯、开关、物品拾取及其他世界音效的音量
+
+@ 3D wireframe tilts the map in perspective to show verticality; Top-down draws a flat overhead view
+zh-CN 3D 线框以透视角度倾斜地图以展示高低落差；俯视图绘制平面俯瞰图
+
+@ Arrange weapon priority order for Better weapon auto-switching
+zh-CN 排列用于“更强武器”自动切换的武器优先级顺序
+
+@ Configure the 3D wireframe automap view, display, reveal mode, zoom and markers
+zh-CN 配置 3D 线框自动地图的视图、显示位置、显示范围、缩放和标记
+
+@ Corner minimap frames the map in the top-right; Center overlay floats a transparent wireframe over the view
+zh-CN 角落小地图将地图固定在右上角；居中叠加则在画面上方浮动透明线框
+
+@ Disabled while Weapon Auto-Switch is set to Never
+zh-CN 当武器自动切换设为“从不”时禁用
+
+@ Explored only reveals rooms as you visit them; Full map shows the entire level geometry
+zh-CN 仅已探索会在你经过房间时逐步显示；完整地图显示整个关卡的几何结构
+
+@ Highlights exits, keys, teleporters, locked doors and your recent trail on the automap
+zh-CN 在自动地图上高亮显示出口、钥匙、传送点、上锁的门以及你近期的轨迹
+
+@ Opacity of the automap lines and panel
+zh-CN 自动地图线条和面板的不透明度
+
+@ Rotates the automap so your facing direction points up; off keeps North at the top
+zh-CN 旋转自动地图使你的朝向指向正上方；关闭则保持北方在上方
+
+@ Shows a live 3D wireframe or top-down automap while playing; press M for the interactive full-screen map (single player and co-op only)
+zh-CN 游玩时实时显示 3D 线框或俯视自动地图；按 M 打开可交互全屏地图（仅限单人游戏与合作模式）
+
+@ When picking up a weapon: Never keeps your current weapon; Better weapon switches only if it ranks higher in Weapon Priority
+zh-CN 拾取武器时：“从不”保持当前武器；“更强武器”仅在该武器在武器优先级中排名更高时切换
+
+@ Zoom level of the automap view
+zh-CN 自动地图视图的缩放级别
 
 # ==== ui.txt ====
 
@@ -3185,6 +3275,60 @@ zh-CN 复制数据
 
 @ Switch Only
 zh-CN 仅切换
+
+@ Above
+zh-CN 上层
+
+@ Below
+zh-CN 下层
+
+@ Close
+zh-CN 关闭
+
+@ Current floor
+zh-CN 当前楼层
+
+@ Drag weapons to reorder, or press Enter and use arrow keys
+zh-CN 拖动武器以调整顺序，或按 Enter 后使用方向键
+
+@ Drag: Orbit  |  WASD: Pan  |  Q/E: Floor  |  Wheel: Zoom  |  Tab: 3D/2D  |  F: Reveal  |  R: Reset  |  M/Esc: Close
+zh-CN 拖动：旋转  |  WASD：平移  |  Q/E：楼层  |  滚轮：缩放  |  Tab：3D/2D  |  F：揭示  |  R：重置  |  M/Esc：关闭
+
+@ Exit
+zh-CN 出口
+
+@ Highest priority at top
+zh-CN 最高优先级在顶部
+
+@ Move
+zh-CN 移动
+
+@ Orbit
+zh-CN 旋转
+
+@ Pan
+zh-CN 平移
+
+@ Place
+zh-CN 放置
+
+@ Press A to pick up a weapon, then move it up or down
+zh-CN 按 A 拿起武器，然后向上或向下移动
+
+@ Reorder
+zh-CN 调整顺序
+
+@ Reset
+zh-CN 重置
+
+@ Use D-Pad or stick to move, A to place, B to cancel
+zh-CN 使用方向键或摇杆移动，A 放置，B 取消
+
+@ Use Up and Down arrows to move, Enter to place, Esc to cancel
+zh-CN 使用上下方向键移动，Enter 放置，Esc 取消
+
+@ View
+zh-CN 视图
 
 # ==== hud.txt ====
 

@@ -1682,6 +1682,60 @@ lt Monstrai
 @ World & Pickups
 lt Pasaulis ir daiktai
 
+@ 3D wireframe
+lt 3D karkasas
+
+@ Automap
+lt Autožemėlapis
+
+@ Automap Settings
+lt Autožemėlapio nustatymai
+
+@ Better weapon
+lt Geresnis ginklas
+
+@ Center overlay
+lt Perdanga centre
+
+@ Corner minimap
+lt Mini žemėlapis kampe
+
+@ Display
+lt Rodymas
+
+@ Explored only
+lt Tik ištyrinėta
+
+@ Full map
+lt Visas žemėlapis
+
+@ Never
+lt Niekada
+
+@ Reveal
+lt Atidengimas
+
+@ Rotate with Player
+lt Sukti su žaidėju
+
+@ Show Markers
+lt Rodyti žymeklius
+
+@ Top-down
+lt Iš viršaus
+
+@ View Mode
+lt Rodymo režimas
+
+@ Weapon Auto-Switch
+lt Automatinis ginklo keitimas
+
+@ Weapon Priority
+lt Ginklų prioritetas
+
+@ Zoom
+lt Mastelis
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2255,6 +2309,42 @@ lt Monstrų pavojaus, puolimo, skausmo ir mirties garsų garsumas
 
 @ Volume of doors, lifts, switches, item pickups and other world effects
 lt Durų, liftų, jungiklių, daiktų paėmimo ir kitų pasaulio efektų garsumas
+
+@ 3D wireframe tilts the map in perspective to show verticality; Top-down draws a flat overhead view
+lt 3D karkasas pakreipia žemėlapį perspektyvoje aukščiams parodyti; Iš viršaus piešia plokščią vaizdą iš viršaus
+
+@ Arrange weapon priority order for Better weapon auto-switching
+lt Surikiuokite ginklų prioriteto tvarką automatiniam perjungimui į Geresnį ginklą
+
+@ Configure the 3D wireframe automap view, display, reveal mode, zoom and markers
+lt Konfigūruokite 3D karkaso autožemėlapio vaizdą, rodymą, atidengimo režimą, mastelį ir žymeklius
+
+@ Corner minimap frames the map in the top-right; Center overlay floats a transparent wireframe over the view
+lt Mini žemėlapis kampe įrėmina žemėlapį viršuje dešinėje; Perdanga centre rodo permatomą karkasą virš vaizdo
+
+@ Disabled while Weapon Auto-Switch is set to Never
+lt Išjungta, kai Automatinis ginklo keitimas nustatytas į Niekada
+
+@ Explored only reveals rooms as you visit them; Full map shows the entire level geometry
+lt Tik ištyrinėta atidengia kambarius juos aplankius; Visas žemėlapis rodo visą lygio geometriją
+
+@ Highlights exits, keys, teleporters, locked doors and your recent trail on the automap
+lt Autožemėlapyje paryškina išėjimus, raktus, teleportus, užrakintas duris ir jūsų pastarąjį pėdsaką
+
+@ Opacity of the automap lines and panel
+lt Autožemėlapio linijų ir skydelio neskaidrumas
+
+@ Rotates the automap so your facing direction points up; off keeps North at the top
+lt Suka autožemėlapį, kad jūsų žvilgsnio kryptis būtų į viršų; išjungus viršuje lieka šiaurė
+
+@ Shows a live 3D wireframe or top-down automap while playing; press M for the interactive full-screen map (single player and co-op only)
+lt Žaidžiant rodo gyvą 3D karkaso arba iš viršaus autožemėlapį; paspauskite M interaktyviam viso ekrano žemėlapiui (tik vienam žaidėjui ir kooperatiniam režimui)
+
+@ When picking up a weapon: Never keeps your current weapon; Better weapon switches only if it ranks higher in Weapon Priority
+lt Paėmus ginklą: Niekada palieka dabartinį ginklą; Geresnis ginklas perjungia tik tada, jei jis aukščiau sąraše Ginklų prioritetas
+
+@ Zoom level of the automap view
+lt Autožemėlapio vaizdo priartinimo lygis
 
 # ==== ui.txt ====
 
@@ -3185,6 +3275,60 @@ lt Kopijuoti duomenis
 
 @ Switch Only
 lt Tik perjungti
+
+@ Above
+lt Aukščiau
+
+@ Below
+lt Žemiau
+
+@ Close
+lt Uždaryti
+
+@ Current floor
+lt Dabartinis aukštas
+
+@ Drag weapons to reorder, or press Enter and use arrow keys
+lt Vilkite ginklus tvarkai pakeisti arba paspauskite Enter ir naudokite rodyklių klavišus
+
+@ Drag: Orbit  |  WASD: Pan  |  Q/E: Floor  |  Wheel: Zoom  |  Tab: 3D/2D  |  F: Reveal  |  R: Reset  |  M/Esc: Close
+lt Vilkti: Sukti  |  WASD: Slinkti  |  Q/E: Aukštas  |  Ratukas: Mastelis  |  Tab: 3D/2D  |  F: Atidengti  |  R: Atstatyti  |  M/Esc: Uždaryti
+
+@ Exit
+lt Išėjimas
+
+@ Highest priority at top
+lt Aukščiausias prioritetas viršuje
+
+@ Move
+lt Perkelti
+
+@ Orbit
+lt Sukti
+
+@ Pan
+lt Slinkti
+
+@ Place
+lt Padėti
+
+@ Press A to pick up a weapon, then move it up or down
+lt Paspauskite A, kad paimtumėte ginklą, tada perkelkite jį aukštyn arba žemyn
+
+@ Reorder
+lt Keisti tvarką
+
+@ Reset
+lt Atstatyti
+
+@ Use D-Pad or stick to move, A to place, B to cancel
+lt Naudokite D-Pad arba svirtelę perkelti, A – padėti, B – atšaukti
+
+@ Use Up and Down arrows to move, Enter to place, Esc to cancel
+lt Naudokite rodykles aukštyn ir žemyn perkelti, Enter – padėti, Esc – atšaukti
+
+@ View
+lt Vaizdas
 
 # ==== hud.txt ====
 

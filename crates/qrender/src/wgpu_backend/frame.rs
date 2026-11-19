@@ -106,6 +106,29 @@ fn ui_quads(r: &Renderer, fr: &RenderFrame) -> (Vec<UiV>, Vec<(u32, u32, u32)>) 
                     quad(x, y, w, h, [x / pw, y / ph, (x + w) / pw, (y + h) / ph], [1.0; 4], p.slot);
                 }
             }
+            Draw2D::Line { x0, y0, x1, y1, width, color } => {
+                let (dx, dy) = (x1 - x0, y1 - y0);
+                let len = (dx * dx + dy * dy).sqrt();
+                if len >= 0.01 {
+                    let hw = width.max(0.5) * 0.5;
+                    let (nx, ny) = (-dy / len * hw, dx / len * hw);
+                    let c = color.map(|c| (c.clamp(0.0, 1.0) * 255.0 + 0.5) as u8);
+                    let p = |px: f32, py: f32| UiV { pos: [px, py], uv: [0.0, 0.0], color: c };
+                    let first = v.len() as u32;
+                    v.extend_from_slice(&[
+                        p(x0 - nx, y0 - ny),
+                        p(x0 + nx, y0 + ny),
+                        p(x1 + nx, y1 + ny),
+                        p(x0 - nx, y0 - ny),
+                        p(x1 + nx, y1 + ny),
+                        p(x1 - nx, y1 - ny),
+                    ]);
+                    match batches.last_mut() {
+                        Some(b) if b.0 == NO_TEX => b.2 += 6,
+                        _ => batches.push((NO_TEX, first, 6)),
+                    }
+                }
+            }
         }
     }
     (v, batches)

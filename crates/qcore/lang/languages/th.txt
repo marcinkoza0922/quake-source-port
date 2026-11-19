@@ -1682,6 +1682,60 @@ th มอนสเตอร์
 @ World & Pickups
 th ฉาก​และ​ไอเทม
 
+@ 3D wireframe
+th โครง​ลวด 3D
+
+@ Automap
+th แผนที่​อัตโนมัติ
+
+@ Automap Settings
+th ตั้งค่า​แผนที่​อัตโนมัติ
+
+@ Better weapon
+th อาวุธ​ที่​ดี​กว่า
+
+@ Center overlay
+th ซ้อน​ทับ​กลาง​จอ
+
+@ Corner minimap
+th แผนที่​ย่อ​มุม​จอ
+
+@ Display
+th การ​แสดงผล
+
+@ Explored only
+th เฉพาะ​ที่​สำรวจ
+
+@ Full map
+th ทั้ง​แผนที่
+
+@ Never
+th ไม่​เปลี่ยน
+
+@ Reveal
+th การ​เปิดเผย
+
+@ Rotate with Player
+th หมุน​ตาม​ผู้​เล่น
+
+@ Show Markers
+th แสดง​เครื่องหมาย
+
+@ Top-down
+th มุม​มอง​ด้าน​บน
+
+@ View Mode
+th โหมด​มุม​มอง
+
+@ Weapon Auto-Switch
+th สลับ​อาวุธ​อัตโนมัติ
+
+@ Weapon Priority
+th ลำดับ​อาวุธ
+
+@ Zoom
+th ซูม
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2255,6 +2309,42 @@ th ระดับ​เสียง​เตือน โจมตี เจ็
 
 @ Volume of doors, lifts, switches, item pickups and other world effects
 th ระดับ​เสียง​ประตู ลิฟต์ สวิตช์ การ​เก็บ​ไอเทม และ​เอฟเฟกต์​ฉาก​อื่น
+
+@ 3D wireframe tilts the map in perspective to show verticality; Top-down draws a flat overhead view
+th โครง​ลวด 3D จะ​เอียง​แผนที่​แบบ​มี​มิติ​เพื่อ​แสดง​ความ​สูง ส่วน​มุม​มอง​ด้าน​บน​จะ​วาด​แบบ​แบน​จาก​ด้าน​บน
+
+@ Arrange weapon priority order for Better weapon auto-switching
+th จัด​ลำดับ​ความ​สำคัญ​ของ​อาวุธ​สำหรับ​การ​สลับ​เป็น​อาวุธ​ที่​ดี​กว่า​อัตโนมัติ
+
+@ Configure the 3D wireframe automap view, display, reveal mode, zoom and markers
+th ตั้งค่า​มุม​มอง การ​แสดงผล การ​เปิดเผย การ​ซูม และ​เครื่องหมาย​ของ​แผนที่​อัตโนมัติ​แบบ​โครง​ลวด 3D
+
+@ Corner minimap frames the map in the top-right; Center overlay floats a transparent wireframe over the view
+th แผนที่​ย่อ​มุม​จอ​จัด​กรอบ​ไว้​มุม​ขวา​บน ส่วน​ซ้อน​ทับ​กลาง​จอ​จะ​ลอย​โครง​ลวด​โปร่งใส​เหนือ​ภาพ
+
+@ Disabled while Weapon Auto-Switch is set to Never
+th ปิด​ใช้​งาน​เมื่อ​ตั้ง​สลับ​อาวุธ​อัตโนมัติ​เป็น​ไม่​เปลี่ยน
+
+@ Explored only reveals rooms as you visit them; Full map shows the entire level geometry
+th เฉพาะ​ที่​สำรวจ​จะ​เปิด​ห้อง​เมื่อ​คุณ​เดิน​ผ่าน ส่วน​ทั้ง​แผนที่​จะ​แสดง​โครง​สร้าง​ทั้ง​ด่าน
+
+@ Highlights exits, keys, teleporters, locked doors and your recent trail on the automap
+th เน้น​ทาง​ออก กุญแจ ประตู​วาร์ป ประตู​ล็อก และ​เส้นทาง​ล่าสุด​ของ​คุณ​บน​แผนที่​อัตโนมัติ
+
+@ Opacity of the automap lines and panel
+th ความ​ทึบ​ของ​เส้น​และ​แผง​แผนที่​อัตโนมัติ
+
+@ Rotates the automap so your facing direction points up; off keeps North at the top
+th หมุน​แผนที่​อัตโนมัติ​ให้​ทิศ​ที่​หัน​อยู่​ชี้​ขึ้น หาก​ปิด​จะ​ให้​ทิศ​เหนือ​อยู่​ด้าน​บน
+
+@ Shows a live 3D wireframe or top-down automap while playing; press M for the interactive full-screen map (single player and co-op only)
+th แสดง​แผนที่​อัตโนมัติ​แบบ​โครง​ลวด 3D หรือ​ด้าน​บน​ขณะ​เล่น กด M เพื่อ​เปิด​แผนที่​เต็ม​จอ (เล่น​คน​เดียว​และ​ร่วม​มือ​เท่านั้น)
+
+@ When picking up a weapon: Never keeps your current weapon; Better weapon switches only if it ranks higher in Weapon Priority
+th เมื่อ​เก็บ​อาวุธ: ไม่​เปลี่ยน​จะ​ถือ​อาวุธ​เดิม อาวุธ​ที่​ดี​กว่า​จะ​เปลี่ยน​ต่อ​เมื่อ​อยู่​ลำดับ​สูง​กว่า​ใน​ลำดับ​อาวุธ
+
+@ Zoom level of the automap view
+th ระดับ​การ​ซูม​ของ​มุม​มอง​แผนที่​อัตโนมัติ
 
 # ==== ui.txt ====
 
@@ -3185,6 +3275,60 @@ th คัดลอก​ข้อมูล
 
 @ Switch Only
 th เปลี่ยน​เท่านั้น
+
+@ Above
+th ด้าน​บน
+
+@ Below
+th ด้าน​ล่าง
+
+@ Close
+th ปิด
+
+@ Current floor
+th ชั้น​ปัจจุบัน
+
+@ Drag weapons to reorder, or press Enter and use arrow keys
+th ลาก​อาวุธ​เพื่อ​เรียง​ใหม่ หรือ​กด Enter แล้ว​ใช้​ปุ่ม​ลูกศร
+
+@ Drag: Orbit  |  WASD: Pan  |  Q/E: Floor  |  Wheel: Zoom  |  Tab: 3D/2D  |  F: Reveal  |  R: Reset  |  M/Esc: Close
+th ลาก: หมุน  |  WASD: เลื่อน  |  Q/E: ชั้น  |  ลูกกลิ้ง: ซูม  |  Tab: 3D/2D  |  F: เปิดเผย  |  R: รีเซ็ต  |  M/Esc: ปิด
+
+@ Exit
+th ทาง​ออก
+
+@ Highest priority at top
+th ลำดับ​สูง​สุด​อยู่​ด้าน​บน
+
+@ Move
+th ย้าย
+
+@ Orbit
+th หมุน
+
+@ Pan
+th เลื่อน
+
+@ Place
+th วาง
+
+@ Press A to pick up a weapon, then move it up or down
+th กด A เพื่อ​หยิบ​อาวุธ แล้ว​เลื่อน​ขึ้น​หรือ​ลง
+
+@ Reorder
+th เรียง​ลำดับ
+
+@ Reset
+th รีเซ็ต
+
+@ Use D-Pad or stick to move, A to place, B to cancel
+th ใช้ D-Pad หรือ​ก้าน​โยก​เพื่อ​ย้าย กด A เพื่อ​วาง กด B เพื่อ​ยกเลิก
+
+@ Use Up and Down arrows to move, Enter to place, Esc to cancel
+th ใช้​ลูกศร​ขึ้น​และ​ลง​เพื่อ​ย้าย กด Enter เพื่อ​วาง กด Esc เพื่อ​ยกเลิก
+
+@ View
+th มุม​มอง
 
 # ==== hud.txt ====
 

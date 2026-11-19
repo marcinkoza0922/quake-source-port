@@ -1682,6 +1682,60 @@ gu રાક્ષસો
 @ World & Pickups
 gu દુનિયા અને વસ્તુઓ
 
+@ 3D wireframe
+gu 3D વાયરફ્રેમ
+
+@ Automap
+gu ઑટોમેપ
+
+@ Automap Settings
+gu ઑટોમેપ સેટિંગ્સ
+
+@ Better weapon
+gu વધુ સારું હથિયાર
+
+@ Center overlay
+gu મધ્ય ઓવરલે
+
+@ Corner minimap
+gu ખૂણાનો મિનિમેપ
+
+@ Display
+gu ડિસ્પ્લે
+
+@ Explored only
+gu ફક્ત શોધેલું
+
+@ Full map
+gu સંપૂર્ણ મેપ
+
+@ Never
+gu ક્યારેય નહીં
+
+@ Reveal
+gu દર્શાવવું
+
+@ Rotate with Player
+gu ખેલાડી સાથે ફેરવો
+
+@ Show Markers
+gu માર્કર્સ બતાવો
+
+@ Top-down
+gu ઉપરથી દૃશ્ય
+
+@ View Mode
+gu દૃશ્ય મોડ
+
+@ Weapon Auto-Switch
+gu હથિયાર ઑટો-સ્વિચ
+
+@ Weapon Priority
+gu હથિયાર પ્રાથમિકતા
+
+@ Zoom
+gu ઝૂમ
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2255,6 +2309,42 @@ gu રાક્ષસોની ચેતવણી, હુમલા, પીડા
 
 @ Volume of doors, lifts, switches, item pickups and other world effects
 gu દરવાજા, લિફ્ટ, સ્વિચ, વસ્તુઓ ઉપાડવા અને અન્ય વિશ્વ અસરોનું વોલ્યુમ
+
+@ 3D wireframe tilts the map in perspective to show verticality; Top-down draws a flat overhead view
+gu 3D વાયરફ્રેમ ઊંચાઈ બતાવવા મેપને પરિપ્રેક્ષ્યમાં નમાવે છે; ઉપરથી દૃશ્ય સપાટ ઉપલું દૃશ્ય દોરે છે
+
+@ Arrange weapon priority order for Better weapon auto-switching
+gu વધુ સારું હથિયાર ઑટો-સ્વિચ માટે હથિયાર પ્રાથમિકતા ક્રમ ગોઠવો
+
+@ Configure the 3D wireframe automap view, display, reveal mode, zoom and markers
+gu 3D વાયરફ્રેમ ઑટોમેપ દૃશ્ય, ડિસ્પ્લે, દર્શાવવાનો મોડ, ઝૂમ અને માર્કર્સ ગોઠવો
+
+@ Corner minimap frames the map in the top-right; Center overlay floats a transparent wireframe over the view
+gu ખૂણાનો મિનિમેપ મેપને ઉપર-જમણે રાખે છે; મધ્ય ઓવરલે દૃશ્ય પર પારદર્શક વાયરફ્રેમ દર્શાવે છે
+
+@ Disabled while Weapon Auto-Switch is set to Never
+gu જ્યારે હથિયાર ઑટો-સ્વિચ 'ક્યારેય નહીં' પર હોય ત્યારે બંધ રહે છે
+
+@ Explored only reveals rooms as you visit them; Full map shows the entire level geometry
+gu ફક્ત શોધેલું તમે જાઓ તેમ ઓરડા બતાવે છે; સંપૂર્ણ મેપ આખા સ્તરની રચના બતાવે છે
+
+@ Highlights exits, keys, teleporters, locked doors and your recent trail on the automap
+gu ઑટોમેપ પર બહાર નીકળવાના રસ્તા, ચાવીઓ, ટેલિપોર્ટર, બંધ દરવાજા અને તમારો તાજેતરનો માર્ગ હાઇલાઇટ કરે છે
+
+@ Opacity of the automap lines and panel
+gu ઑટોમેપ રેખાઓ અને પેનલની અપારદર્શકતા
+
+@ Rotates the automap so your facing direction points up; off keeps North at the top
+gu તમારી જોવાની દિશા ઉપર રહે તે રીતે ઑટોમેપ ફેરવે છે; બંધ રાખવાથી ઉત્તર ઉપર રહે છે
+
+@ Shows a live 3D wireframe or top-down automap while playing; press M for the interactive full-screen map (single player and co-op only)
+gu રમતી વખતે લાઇવ 3D વાયરફ્રેમ અથવા ઉપરથી ઑટોમેપ બતાવે છે; પૂર્ણ-સ્ક્રીન ઇન્ટરેક્ટિવ મેપ માટે M દબાવો (ફક્ત સિંગલ પ્લેયર અને કો-ઓપ)
+
+@ When picking up a weapon: Never keeps your current weapon; Better weapon switches only if it ranks higher in Weapon Priority
+gu હથિયાર ઉપાડતી વખતે: 'ક્યારેય નહીં' હાલનું હથિયાર રાખે છે; 'વધુ સારું હથિયાર' ફક્ત હથિયાર પ્રાથમિકતામાં ઊંચો ક્રમ હોય તો જ બદલે છે
+
+@ Zoom level of the automap view
+gu ઑટોમેપ દૃશ્યનું ઝૂમ સ્તર
 
 # ==== ui.txt ====
 
@@ -3185,6 +3275,60 @@ gu ડેટા કૉપિ કરો
 
 @ Switch Only
 gu ફક્ત બદલો
+
+@ Above
+gu ઉપર
+
+@ Below
+gu નીચે
+
+@ Close
+gu બંધ કરો
+
+@ Current floor
+gu વર્તમાન માળ
+
+@ Drag weapons to reorder, or press Enter and use arrow keys
+gu ક્રમ બદલવા હથિયારો ખેંચો, અથવા Enter દબાવી તીર કી વાપરો
+
+@ Drag: Orbit  |  WASD: Pan  |  Q/E: Floor  |  Wheel: Zoom  |  Tab: 3D/2D  |  F: Reveal  |  R: Reset  |  M/Esc: Close
+gu ખેંચો: ફેરવો  |  WASD: ખસેડો  |  Q/E: માળ  |  વ્હીલ: ઝૂમ  |  Tab: 3D/2D  |  F: બતાવો  |  R: રીસેટ  |  M/Esc: બંધ
+
+@ Exit
+gu બહાર નીકળો
+
+@ Highest priority at top
+gu સૌથી વધુ પ્રાથમિકતા ઉપર
+
+@ Move
+gu ખસેડો
+
+@ Orbit
+gu ફેરવો
+
+@ Pan
+gu ખસેડો
+
+@ Place
+gu મૂકો
+
+@ Press A to pick up a weapon, then move it up or down
+gu હથિયાર ઉપાડવા A દબાવો, પછી તેને ઉપર કે નીચે ખસેડો
+
+@ Reorder
+gu ક્રમ બદલો
+
+@ Reset
+gu રીસેટ
+
+@ Use D-Pad or stick to move, A to place, B to cancel
+gu ખસેડવા ડી-પેડ અથવા સ્ટિક, મૂકવા A, રદ કરવા B વાપરો
+
+@ Use Up and Down arrows to move, Enter to place, Esc to cancel
+gu ખસેડવા ઉપર અને નીચે તીર, મૂકવા Enter, રદ કરવા Esc વાપરો
+
+@ View
+gu દૃશ્ય
 
 # ==== hud.txt ====
 

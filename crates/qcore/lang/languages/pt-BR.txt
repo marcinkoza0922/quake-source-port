@@ -1682,6 +1682,60 @@ pt-BR Monstros
 @ World & Pickups
 pt-BR Mundo e itens
 
+@ 3D wireframe
+pt-BR Estrutura 3D
+
+@ Automap
+pt-BR Automapa
+
+@ Automap Settings
+pt-BR Configurações do automapa
+
+@ Better weapon
+pt-BR Arma melhor
+
+@ Center overlay
+pt-BR Sobreposição central
+
+@ Corner minimap
+pt-BR Minimapa no canto
+
+@ Display
+pt-BR Exibição
+
+@ Explored only
+pt-BR Somente explorado
+
+@ Full map
+pt-BR Mapa completo
+
+@ Never
+pt-BR Nunca
+
+@ Reveal
+pt-BR Revelação
+
+@ Rotate with Player
+pt-BR Girar com o jogador
+
+@ Show Markers
+pt-BR Mostrar marcadores
+
+@ Top-down
+pt-BR De cima
+
+@ View Mode
+pt-BR Modo de visão
+
+@ Weapon Auto-Switch
+pt-BR Troca automática de arma
+
+@ Weapon Priority
+pt-BR Prioridade das armas
+
+@ Zoom
+pt-BR Zoom
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2255,6 +2309,42 @@ pt-BR Volume de alertas, ataques, dor e morte de monstros
 
 @ Volume of doors, lifts, switches, item pickups and other world effects
 pt-BR Volume de portas, elevadores, botões, coleta de itens e outros efeitos do mundo
+
+@ 3D wireframe tilts the map in perspective to show verticality; Top-down draws a flat overhead view
+pt-BR Estrutura 3D inclina o mapa em perspectiva para mostrar altura; De cima desenha uma vista plana superior
+
+@ Arrange weapon priority order for Better weapon auto-switching
+pt-BR Define a ordem de prioridade das armas para a troca automática para Arma melhor
+
+@ Configure the 3D wireframe automap view, display, reveal mode, zoom and markers
+pt-BR Configura a visão em estrutura 3D do automapa, exibição, revelação, zoom e marcadores
+
+@ Corner minimap frames the map in the top-right; Center overlay floats a transparent wireframe over the view
+pt-BR Minimapa no canto enquadra o mapa no canto superior direito; Sobreposição central exibe uma estrutura transparente sobre a tela
+
+@ Disabled while Weapon Auto-Switch is set to Never
+pt-BR Desativado enquanto Troca automática de arma estiver em Nunca
+
+@ Explored only reveals rooms as you visit them; Full map shows the entire level geometry
+pt-BR Somente explorado revela as salas conforme você as visita; Mapa completo mostra toda a geometria da fase
+
+@ Highlights exits, keys, teleporters, locked doors and your recent trail on the automap
+pt-BR Destaca saídas, chaves, teleportes, portas trancadas e seu rastro recente no automapa
+
+@ Opacity of the automap lines and panel
+pt-BR Opacidade das linhas e do painel do automapa
+
+@ Rotates the automap so your facing direction points up; off keeps North at the top
+pt-BR Gira o automapa para que a direção do olhar aponte para cima; desativado mantém o norte em cima
+
+@ Shows a live 3D wireframe or top-down automap while playing; press M for the interactive full-screen map (single player and co-op only)
+pt-BR Mostra um automapa em estrutura 3D ou de cima enquanto joga; pressione M para o mapa interativo em tela cheia (apenas um jogador e cooperativo)
+
+@ When picking up a weapon: Never keeps your current weapon; Better weapon switches only if it ranks higher in Weapon Priority
+pt-BR Ao pegar uma arma: Nunca mantém a arma atual; Arma melhor só troca se estiver acima na Prioridade das armas
+
+@ Zoom level of the automap view
+pt-BR Nível de zoom da visão do automapa
 
 # ==== ui.txt ====
 
@@ -3185,6 +3275,60 @@ pt-BR Copiar dados
 
 @ Switch Only
 pt-BR Apenas trocar
+
+@ Above
+pt-BR Acima
+
+@ Below
+pt-BR Abaixo
+
+@ Close
+pt-BR Fechar
+
+@ Current floor
+pt-BR Andar atual
+
+@ Drag weapons to reorder, or press Enter and use arrow keys
+pt-BR Arraste as armas para reordenar, ou pressione Enter e use as setas
+
+@ Drag: Orbit  |  WASD: Pan  |  Q/E: Floor  |  Wheel: Zoom  |  Tab: 3D/2D  |  F: Reveal  |  R: Reset  |  M/Esc: Close
+pt-BR Arrastar: Orbitar  |  WASD: Mover  |  Q/E: Andar  |  Roda: Zoom  |  Tab: 3D/2D  |  F: Revelar  |  R: Restaurar  |  M/Esc: Fechar
+
+@ Exit
+pt-BR Saída
+
+@ Highest priority at top
+pt-BR Maior prioridade no topo
+
+@ Move
+pt-BR Mover
+
+@ Orbit
+pt-BR Orbitar
+
+@ Pan
+pt-BR Mover
+
+@ Place
+pt-BR Posicionar
+
+@ Press A to pick up a weapon, then move it up or down
+pt-BR Pressione A para pegar uma arma e mova para cima ou para baixo
+
+@ Reorder
+pt-BR Reordenar
+
+@ Reset
+pt-BR Restaurar
+
+@ Use D-Pad or stick to move, A to place, B to cancel
+pt-BR Use o D-Pad ou analógico para mover, A para posicionar, B para cancelar
+
+@ Use Up and Down arrows to move, Enter to place, Esc to cancel
+pt-BR Use as setas Cima e Baixo para mover, Enter para posicionar, Esc para cancelar
+
+@ View
+pt-BR Visão
 
 # ==== hud.txt ====
 

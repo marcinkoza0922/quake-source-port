@@ -1682,6 +1682,60 @@ fa هیولاها
 @ World & Pickups
 fa دنیا و آیتم‌ها
 
+@ 3D wireframe
+fa نمای سیمی سه‌بعدی
+
+@ Automap
+fa نقشه خودکار
+
+@ Automap Settings
+fa تنظیمات نقشه خودکار
+
+@ Better weapon
+fa سلاح بهتر
+
+@ Center overlay
+fa هم‌پوشانی مرکزی
+
+@ Corner minimap
+fa نقشه کوچک گوشه
+
+@ Display
+fa نمایش
+
+@ Explored only
+fa فقط کاوش‌شده
+
+@ Full map
+fa نقشه کامل
+
+@ Never
+fa هرگز
+
+@ Reveal
+fa آشکارسازی
+
+@ Rotate with Player
+fa چرخش با بازیکن
+
+@ Show Markers
+fa نمایش نشانگرها
+
+@ Top-down
+fa نمای از بالا
+
+@ View Mode
+fa حالت نمایش
+
+@ Weapon Auto-Switch
+fa تعویض خودکار سلاح
+
+@ Weapon Priority
+fa اولویت سلاح‌ها
+
+@ Zoom
+fa بزرگ‌نمایی
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2255,6 +2309,42 @@ fa بلندی صدای هشدار، حمله، درد و مرگ هیولاها
 
 @ Volume of doors, lifts, switches, item pickups and other world effects
 fa بلندی صدای درها، آسانسورها، کلیدها، برداشتن آیتم‌ها و دیگر جلوه‌های دنیا
+
+@ 3D wireframe tilts the map in perspective to show verticality; Top-down draws a flat overhead view
+fa نمای سیمی سه‌بعدی نقشه را با پرسپکتیو کج می‌کند تا ارتفاع دیده شود؛ نمای از بالا دید مسطح رسم می‌کند
+
+@ Arrange weapon priority order for Better weapon auto-switching
+fa ترتیب اولویت سلاح‌ها را برای تعویض خودکار به سلاح بهتر تنظیم کنید
+
+@ Configure the 3D wireframe automap view, display, reveal mode, zoom and markers
+fa حالت نمایش، آشکارسازی، بزرگ‌نمایی و نشانگرهای نقشه خودکار سه‌بعدی را تنظیم کنید
+
+@ Corner minimap frames the map in the top-right; Center overlay floats a transparent wireframe over the view
+fa نقشه کوچک گوشه نقشه را در بالا-راست قاب می‌گیرد؛ هم‌پوشانی مرکزی نمای سیمی شفاف روی صفحه می‌اندازد
+
+@ Disabled while Weapon Auto-Switch is set to Never
+fa وقتی تعویض خودکار سلاح روی هرگز باشد غیرفعال است
+
+@ Explored only reveals rooms as you visit them; Full map shows the entire level geometry
+fa فقط کاوش‌شده اتاق‌ها را هنگام بازدید نمایان می‌کند؛ نقشه کامل کل هندسه مرحله را نشان می‌دهد
+
+@ Highlights exits, keys, teleporters, locked doors and your recent trail on the automap
+fa خروجی‌ها، کلیدها، تله‌پورت‌ها، درهای قفل و مسیر اخیر شما را روی نقشه خودکار برجسته می‌کند
+
+@ Opacity of the automap lines and panel
+fa کدری خطوط و پنل نقشه خودکار
+
+@ Rotates the automap so your facing direction points up; off keeps North at the top
+fa نقشه خودکار را می‌چرخاند تا جهت نگاه شما به بالا باشد؛ خاموش شمال را در بالا نگه می‌دارد
+
+@ Shows a live 3D wireframe or top-down automap while playing; press M for the interactive full-screen map (single player and co-op only)
+fa هنگام بازی نقشه خودکار سیمی سه‌بعدی یا از بالا را نشان می‌دهد؛ برای نقشه تعاملی تمام‌صفحه M را بزنید (فقط تک‌نفره و همکاری)
+
+@ When picking up a weapon: Never keeps your current weapon; Better weapon switches only if it ranks higher in Weapon Priority
+fa هنگام برداشتن سلاح: هرگز سلاح فعلی را نگه می‌دارد؛ سلاح بهتر فقط اگر در اولویت سلاح‌ها رتبه بالاتری داشته باشد تعویض می‌کند
+
+@ Zoom level of the automap view
+fa میزان بزرگ‌نمایی نمای نقشه خودکار
 
 # ==== ui.txt ====
 
@@ -3185,6 +3275,60 @@ fa کپی داده‌ها
 
 @ Switch Only
 fa فقط تغییر
+
+@ Above
+fa بالا
+
+@ Below
+fa پایین
+
+@ Close
+fa بستن
+
+@ Current floor
+fa طبقه فعلی
+
+@ Drag weapons to reorder, or press Enter and use arrow keys
+fa سلاح‌ها را برای تغییر ترتیب بکشید، یا Enter بزنید و از کلیدهای جهت استفاده کنید
+
+@ Drag: Orbit  |  WASD: Pan  |  Q/E: Floor  |  Wheel: Zoom  |  Tab: 3D/2D  |  F: Reveal  |  R: Reset  |  M/Esc: Close
+fa کشیدن: چرخش  |  WASD: جابه‌جایی  |  Q/E: طبقه  |  اسکرول: بزرگ‌نمایی  |  Tab: 3D/2D  |  F: آشکارسازی  |  R: بازنشانی  |  M/Esc: بستن
+
+@ Exit
+fa خروج
+
+@ Highest priority at top
+fa بالاترین اولویت در بالا
+
+@ Move
+fa جابه‌جایی
+
+@ Orbit
+fa چرخش
+
+@ Pan
+fa حرکت صفحه
+
+@ Place
+fa قرار دادن
+
+@ Press A to pick up a weapon, then move it up or down
+fa برای انتخاب سلاح A را بزنید، سپس آن را بالا یا پایین ببرید
+
+@ Reorder
+fa مرتب‌سازی
+
+@ Reset
+fa بازنشانی
+
+@ Use D-Pad or stick to move, A to place, B to cancel
+fa از دکمه‌های جهت یا آنالوگ برای حرکت، A برای قرار دادن و B برای لغو استفاده کنید
+
+@ Use Up and Down arrows to move, Enter to place, Esc to cancel
+fa از کلیدهای بالا و پایین برای حرکت، Enter برای قرار دادن و Esc برای لغو استفاده کنید
+
+@ View
+fa نمایش
 
 # ==== hud.txt ====
 

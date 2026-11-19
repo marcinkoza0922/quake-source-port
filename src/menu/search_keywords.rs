@@ -49,6 +49,8 @@ pub(super) fn page_keywords(p: Page) -> &'static str {
         Page::Gyro => "motion flick stick controller",
         Page::Touch => "touchscreen mobile phone tablet",
         Page::Autosave => "checkpoint",
+        Page::WeaponPriority => "weapon switch autoswitch priority order rocket lightning",
+        Page::Automap => "automap minimap map wireframe 3d radar compass",
         Page::AutoAim => "aim assist lock-on lockon",
         Page::GrenadeArc => "trajectory aim",
         Page::Crosshair => "reticle aim hitmarker",
@@ -75,6 +77,7 @@ fn bind_keywords(cmd: &str) -> &'static str {
         "+speed" => "sprint walk",
         "+lookup" | "+lookdown" | "centerview" => "camera aim",
         "+showscores" => "scores stats",
+        "automap" => "map minimap wireframe 3d",
         "+lockon" => "aim assist autoaim",
         _ => "",
     }
@@ -89,6 +92,9 @@ fn cvar_keywords(cvar: &str) -> &'static str {
         "cl_bob" => "head bob motion sickness",
         "v_gunkick" => "recoil",
         "cl_alwaysrun" => "sprint walk",
+        "cl_autoswitch" => "weapon switch pickup priority rocket thunderbolt",
+        "cl_automap" | "cl_automap_view" | "cl_automap_display" | "cl_automap_rotate"
+        | "cl_automap_reveal" | "cl_automap_zoom" | "cl_automap_alpha" | "cl_automap_markers" => "map minimap wireframe 3d radar",
         "cl_deathaction" => "die respawn",
         "sv_autosave" => "checkpoint",
         "sv_autosave_key" => "checkpoint key silver gold",

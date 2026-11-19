@@ -1682,6 +1682,60 @@ bg Чудовища
 @ World & Pickups
 bg Свят и предмети
 
+@ 3D wireframe
+bg 3D телена мрежа
+
+@ Automap
+bg Автокарта
+
+@ Automap Settings
+bg Настройки на автокартата
+
+@ Better weapon
+bg По-добро оръжие
+
+@ Center overlay
+bg Централно наслагване
+
+@ Corner minimap
+bg Миникарта в ъгъла
+
+@ Display
+bg Показване
+
+@ Explored only
+bg Само изследваното
+
+@ Full map
+bg Цяла карта
+
+@ Never
+bg Никога
+
+@ Reveal
+bg Разкриване
+
+@ Rotate with Player
+bg Завъртане с играча
+
+@ Show Markers
+bg Покажи маркери
+
+@ Top-down
+bg Изглед отгоре
+
+@ View Mode
+bg Режим на изглед
+
+@ Weapon Auto-Switch
+bg Автосмяна на оръжие
+
+@ Weapon Priority
+bg Приоритет на оръжията
+
+@ Zoom
+bg Мащаб
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2255,6 +2309,42 @@ bg Сила на предупреждения, атаки, болка и смъ�
 
 @ Volume of doors, lifts, switches, item pickups and other world effects
 bg Сила на врати, асансьори, превключватели, предмети и други световни ефекти
+
+@ 3D wireframe tilts the map in perspective to show verticality; Top-down draws a flat overhead view
+bg 3D телена мрежа накланя картата в перспектива за показване на височините; Изглед отгоре чертае плосък план
+
+@ Arrange weapon priority order for Better weapon auto-switching
+bg Подрежда приоритета на оръжията за автосмяна към По-добро оръжие
+
+@ Configure the 3D wireframe automap view, display, reveal mode, zoom and markers
+bg Настройва изгледа на 3D телената автокарта, показването, разкриването, мащаба и маркерите
+
+@ Corner minimap frames the map in the top-right; Center overlay floats a transparent wireframe over the view
+bg Миникарта в ъгъла поставя картата горе вдясно; Централно наслагване показва прозрачна телена мрежа върху изгледа
+
+@ Disabled while Weapon Auto-Switch is set to Never
+bg Изключено, докато Автосмяна на оръжие е зададено на Никога
+
+@ Explored only reveals rooms as you visit them; Full map shows the entire level geometry
+bg Само изследваното разкрива стаите при посещение; Цяла карта показва цялата геометрия на нивото
+
+@ Highlights exits, keys, teleporters, locked doors and your recent trail on the automap
+bg Откроява на автокартата изходите, ключовете, телепортите, заключените врати и скорошната ви следа
+
+@ Opacity of the automap lines and panel
+bg Непрозрачност на линиите и панела на автокартата
+
+@ Rotates the automap so your facing direction points up; off keeps North at the top
+bg Завърта автокартата така, че посоката ви да сочи нагоре; изключено държи север отгоре
+
+@ Shows a live 3D wireframe or top-down automap while playing; press M for the interactive full-screen map (single player and co-op only)
+bg Показва 3D телена или горна автокарта по време на игра; натиснете M за интерактивна карта на цял екран (само за един играч и кооп)
+
+@ When picking up a weapon: Never keeps your current weapon; Better weapon switches only if it ranks higher in Weapon Priority
+bg При вдигане на оръжие: Никога запазва текущото оръжие; По-добро оръжие превключва само ако е по-високо в Приоритет на оръжията
+
+@ Zoom level of the automap view
+bg Ниво на приближение на автокартата
 
 # ==== ui.txt ====
 
@@ -3185,6 +3275,60 @@ bg Копирай данни
 
 @ Switch Only
 bg Само смени
+
+@ Above
+bg Над
+
+@ Below
+bg Под
+
+@ Close
+bg Затвори
+
+@ Current floor
+bg Текущ етаж
+
+@ Drag weapons to reorder, or press Enter and use arrow keys
+bg Плъзнете оръжията за преподреждане или натиснете Enter и стрелките
+
+@ Drag: Orbit  |  WASD: Pan  |  Q/E: Floor  |  Wheel: Zoom  |  Tab: 3D/2D  |  F: Reveal  |  R: Reset  |  M/Esc: Close
+bg Влачене: Въртене  |  WASD: Преместване  |  Q/E: Етаж  |  Колелце: Мащаб  |  Tab: 3D/2D  |  F: Разкрий  |  R: Нулирай  |  M/Esc: Затвори
+
+@ Exit
+bg Изход
+
+@ Highest priority at top
+bg Най-висок приоритет отгоре
+
+@ Move
+bg Премести
+
+@ Orbit
+bg Въртене
+
+@ Pan
+bg Преместване
+
+@ Place
+bg Постави
+
+@ Press A to pick up a weapon, then move it up or down
+bg Натиснете A, за да изберете оръжие, после го преместете нагоре или надолу
+
+@ Reorder
+bg Подреди
+
+@ Reset
+bg Нулирай
+
+@ Use D-Pad or stick to move, A to place, B to cancel
+bg Кръстачка или стик за преместване, A за поставяне, B за отказ
+
+@ Use Up and Down arrows to move, Enter to place, Esc to cancel
+bg Стрелки нагоре и надолу за преместване, Enter за поставяне, Esc за отказ
+
+@ View
+bg Изглед
 
 # ==== hud.txt ====
 

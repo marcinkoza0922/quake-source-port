@@ -1682,6 +1682,60 @@ km បិសាច
 @ World & Pickups
 km ពិភព​ និង​វត្ថុ
 
+@ 3D wireframe
+km គ្រោង​ខ្សែ 3D
+
+@ Automap
+km ផែនទី​ស្វ័យប្រវត្តិ
+
+@ Automap Settings
+km ការ​កំណត់​ផែនទី
+
+@ Better weapon
+km អាវុធ​ល្អ​ជាង
+
+@ Center overlay
+km បង្ហាញ​ត្រួត​កណ្ដាល
+
+@ Corner minimap
+km ផែនទី​តូច​នៅ​ជ្រុង
+
+@ Display
+km ការ​បង្ហាញ
+
+@ Explored only
+km តែ​កន្លែង​រុករក​រួច
+
+@ Full map
+km ផែនទី​ពេញ
+
+@ Never
+km មិន​ប្ដូរ​ឡើយ
+
+@ Reveal
+km ការ​បើក​បង្ហាញ
+
+@ Rotate with Player
+km បង្វិល​តាម​អ្នក​លេង
+
+@ Show Markers
+km បង្ហាញ​សញ្ញា​សម្គាល់
+
+@ Top-down
+km មើល​ពី​លើ
+
+@ View Mode
+km របៀប​មើល
+
+@ Weapon Auto-Switch
+km ប្ដូរ​អាវុធ​ស្វ័យប្រវត្តិ
+
+@ Weapon Priority
+km អាទិភាព​អាវុធ
+
+@ Zoom
+km ពង្រីក
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2255,6 +2309,42 @@ km កម្រិត​សំឡេង​ព្រមាន វាយ​ប្�
 
 @ Volume of doors, lifts, switches, item pickups and other world effects
 km កម្រិត​សំឡេង​ទ្វារ ជណ្តើរ​យន្ត កុងតាក់ រើស​វត្ថុ និង​ផល​ពិភព​ផ្សេងៗ
+
+@ 3D wireframe tilts the map in perspective to show verticality; Top-down draws a flat overhead view
+km គ្រោង​ខ្សែ 3D ផ្អៀង​ផែនទី​ដើម្បី​បង្ហាញ​កម្ពស់; មើល​ពី​លើ​គូរ​ទិដ្ឋភាព​រាប​ស្មើ​ពី​លើ
+
+@ Arrange weapon priority order for Better weapon auto-switching
+km រៀបចំ​លំដាប់​អាទិភាព​អាវុធ​សម្រាប់​ការ​ប្ដូរ​អាវុធ​ល្អ​ជាង​ដោយ​ស្វ័យប្រវត្តិ
+
+@ Configure the 3D wireframe automap view, display, reveal mode, zoom and markers
+km កំណត់​ទិដ្ឋភាព ការ​បង្ហាញ ការ​បើក​បង្ហាញ ការ​ពង្រីក និង​សញ្ញា​សម្គាល់​របស់​ផែនទី​គ្រោង​ខ្សែ 3D
+
+@ Corner minimap frames the map in the top-right; Center overlay floats a transparent wireframe over the view
+km ផែនទី​តូច​នៅ​ជ្រុង​ដាក់​ផែនទី​នៅ​ខាង​លើ​ស្ដាំ; បង្ហាញ​ត្រួត​កណ្ដាល​បង្ហាញ​គ្រោង​ខ្សែ​ថ្លា​លើ​ទិដ្ឋភាព
+
+@ Disabled while Weapon Auto-Switch is set to Never
+km ត្រូវ​បាន​បិទ​នៅ​ពេល​ប្ដូរ​អាវុធ​ស្វ័យប្រវត្តិ​ត្រូវ​បាន​កំណត់​ជា មិន​ប្ដូរ​ឡើយ
+
+@ Explored only reveals rooms as you visit them; Full map shows the entire level geometry
+km តែ​កន្លែង​រុករក​រួច​បង្ហាញ​បន្ទប់​ពេល​អ្នក​ចូល​ទៅ; ផែនទី​ពេញ​បង្ហាញ​រចនាសម្ព័ន្ធ​វគ្គ​ទាំង​មូល
+
+@ Highlights exits, keys, teleporters, locked doors and your recent trail on the automap
+km បន្លិច​ច្រក​ចេញ កូន​សោ ច្រក​ផ្លាស់​ទី ទ្វារ​ចាក់​សោ និង​ដាន​ថ្មីៗ​របស់​អ្នក​លើ​ផែនទី
+
+@ Opacity of the automap lines and panel
+km ភាព​ស្រអាប់​នៃ​បន្ទាត់ និង​ផ្ទាំង​ផែនទី​ស្វ័យប្រវត្តិ
+
+@ Rotates the automap so your facing direction points up; off keeps North at the top
+km បង្វិល​ផែនទី​ដើម្បី​ឲ្យ​ទិស​មុខ​របស់​អ្នក​ចង្អុល​ឡើង​លើ; បិទ​រក្សា​ទិស​ជើង​នៅ​ខាង​លើ
+
+@ Shows a live 3D wireframe or top-down automap while playing; press M for the interactive full-screen map (single player and co-op only)
+km បង្ហាញ​ផែនទី​គ្រោង​ខ្សែ 3D ឬ​មើល​ពី​លើ​ពេល​កំពុង​លេង; ចុច M សម្រាប់​ផែនទី​ពេញ​អេក្រង់ (តែ​អ្នក​លេង​ម្នាក់ និង​សហការ​ប៉ុណ្ណោះ)
+
+@ When picking up a weapon: Never keeps your current weapon; Better weapon switches only if it ranks higher in Weapon Priority
+km ពេល​រើស​អាវុធ: មិន​ប្ដូរ​ឡើយ​រក្សា​អាវុធ​បច្ចុប្បន្ន; អាវុធ​ល្អ​ជាង​ប្ដូរ​តែ​ពេល​វា​មាន​ចំណាត់​ថ្នាក់​ខ្ពស់​ជាង​ក្នុង​អាទិភាព​អាវុធ
+
+@ Zoom level of the automap view
+km កម្រិត​ពង្រីក​នៃ​ទិដ្ឋភាព​ផែនទី​ស្វ័យប្រវត្តិ
 
 # ==== ui.txt ====
 
@@ -3185,6 +3275,60 @@ km ចម្លង​ទិន្នន័យ
 
 @ Switch Only
 km ប្ដូរ​តែប៉ុណ្ណោះ
+
+@ Above
+km ខាង​លើ
+
+@ Below
+km ខាង​ក្រោម
+
+@ Close
+km បិទ
+
+@ Current floor
+km ជាន់​បច្ចុប្បន្ន
+
+@ Drag weapons to reorder, or press Enter and use arrow keys
+km អូស​អាវុធ​ដើម្បី​រៀប​លំដាប់​ឡើង​វិញ ឬ​ចុច Enter រួច​ប្រើ​គ្រាប់ចុច​ព្រួញ
+
+@ Drag: Orbit  |  WASD: Pan  |  Q/E: Floor  |  Wheel: Zoom  |  Tab: 3D/2D  |  F: Reveal  |  R: Reset  |  M/Esc: Close
+km អូស: បង្វិល  |  WASD: រំកិល  |  Q/E: ជាន់  |  កង់: ពង្រីក  |  Tab: 3D/2D  |  F: បើក​បង្ហាញ  |  R: កំណត់​ឡើង​វិញ  |  M/Esc: បិទ
+
+@ Exit
+km ច្រក​ចេញ
+
+@ Highest priority at top
+km អាទិភាព​ខ្ពស់​បំផុត​នៅ​ខាង​លើ
+
+@ Move
+km រំកិល
+
+@ Orbit
+km បង្វិល
+
+@ Pan
+km រំកិល​ផ្ទាំង
+
+@ Place
+km ដាក់
+
+@ Press A to pick up a weapon, then move it up or down
+km ចុច A ដើម្បី​លើក​អាវុធ រួច​រំកិល​វា​ឡើង​ឬ​ចុះ
+
+@ Reorder
+km រៀប​លំដាប់
+
+@ Reset
+km កំណត់​ឡើង​វិញ
+
+@ Use D-Pad or stick to move, A to place, B to cancel
+km ប្រើ D-Pad ឬ​ប៊ូតុង​បញ្ជា​ដើម្បី​រំកិល, A ដើម្បី​ដាក់, B ដើម្បី​បោះ​បង់
+
+@ Use Up and Down arrows to move, Enter to place, Esc to cancel
+km ប្រើ​ព្រួញ​ឡើង​និង​ចុះ​ដើម្បី​រំកិល, Enter ដើម្បី​ដាក់, Esc ដើម្បី​បោះ​បង់
+
+@ View
+km ទិដ្ឋភាព
 
 # ==== hud.txt ====
 

@@ -333,6 +333,15 @@ pub enum Draw2D {
         pic: PicId,
         scale: f32,
     },
+    /// Solid screen-space line segment of thickness `width` pixels.
+    Line {
+        x0: f32,
+        y0: f32,
+        x1: f32,
+        y1: f32,
+        width: f32,
+        color: [f32; 4],
+    },
 }
 
 /// Everything needed to draw one frame.

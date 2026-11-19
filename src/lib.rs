@@ -10,6 +10,7 @@
 mod addons;
 mod assets;
 mod audio;
+mod automap;
 mod autosave;
 mod captions;
 mod console;

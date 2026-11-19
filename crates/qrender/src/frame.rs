@@ -828,6 +828,24 @@ impl Renderer {
                         quad(&mut ui, x, y, w, h, uv, [1.0; 4], p.slot);
                     }
                 }
+                Draw2D::Line { x0, y0, x1, y1, width, color } => {
+                    let (dx, dy) = (x1 - x0, y1 - y0);
+                    let len = (dx * dx + dy * dy).sqrt();
+                    if len >= 0.01 {
+                        let hw = width.max(0.5) * 0.5;
+                        let (nx, ny) = (-dy / len * hw, dx / len * hw);
+                        let c = pack_color(color);
+                        let v = |px: f32, py: f32| UiVert { pos: [px, py], uv: [0.0, 0.0], color: c, tex: NO_TEX };
+                        ui.extend_from_slice(&[
+                            v(x0 - nx, y0 - ny),
+                            v(x0 + nx, y0 + ny),
+                            v(x1 + nx, y1 + ny),
+                            v(x0 - nx, y0 - ny),
+                            v(x1 + nx, y1 + ny),
+                            v(x1 - nx, y1 - ny),
+                        ]);
+                    }
+                }
             }
         }
         let ui_ofs = if ui.is_empty() {

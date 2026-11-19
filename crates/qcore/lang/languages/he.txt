@@ -1682,6 +1682,60 @@ he מפלצות
 @ World & Pickups
 he עולם ופריטים
 
+@ 3D wireframe
+he תיל תלת-ממדי
+
+@ Automap
+he מפה אוטומטית
+
+@ Automap Settings
+he הגדרות מפה אוטומטית
+
+@ Better weapon
+he נשק טוב יותר
+
+@ Center overlay
+he שכבת-על במרכז
+
+@ Corner minimap
+he מיני-מפה בפינה
+
+@ Display
+he תצוגה
+
+@ Explored only
+he נחקר בלבד
+
+@ Full map
+he מפה מלאה
+
+@ Never
+he לעולם לא
+
+@ Reveal
+he חשיפה
+
+@ Rotate with Player
+he סובב עם השחקן
+
+@ Show Markers
+he הצג סמנים
+
+@ Top-down
+he מבט-על
+
+@ View Mode
+he מצב תצוגה
+
+@ Weapon Auto-Switch
+he החלפת נשק אוטומטית
+
+@ Weapon Priority
+he עדיפות נשקים
+
+@ Zoom
+he תקריב
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2255,6 +2309,42 @@ he עוצמת התראות, התקפות, כאב ומוות של מפלצות
 
 @ Volume of doors, lifts, switches, item pickups and other world effects
 he עוצמת דלתות, מעליות, מתגים, איסוף פריטים ואפקטים אחרים בעולם
+
+@ 3D wireframe tilts the map in perspective to show verticality; Top-down draws a flat overhead view
+he תיל תלת-ממדי מטה את המפה בפרספקטיבה להצגת גובה; מבט-על מצייר מבט שטוח מלמעלה
+
+@ Arrange weapon priority order for Better weapon auto-switching
+he סדר את עדיפות הנשקים עבור החלפה אוטומטית לנשק טוב יותר
+
+@ Configure the 3D wireframe automap view, display, reveal mode, zoom and markers
+he הגדר את מצב התצוגה, החשיפה, התקריב והסמנים של המפה האוטומטית התלת-ממדית
+
+@ Corner minimap frames the map in the top-right; Center overlay floats a transparent wireframe over the view
+he מיני-מפה בפינה ממסגרת את המפה למעלה מימין; שכבת-על במרכז מציגה רשת תיל שקופה מעל התצוגה
+
+@ Disabled while Weapon Auto-Switch is set to Never
+he מושבת כאשר החלפת נשק אוטומטית מוגדרת ללעולם לא
+
+@ Explored only reveals rooms as you visit them; Full map shows the entire level geometry
+he נחקר בלבד חושף חדרים בעת הביקור; מפה מלאה מציגה את כל גאומטריית השלב
+
+@ Highlights exits, keys, teleporters, locked doors and your recent trail on the automap
+he מדגיש יציאות, מפתחות, טלפורטרים, דלתות נעולות ואת המסלול האחרון שלך במפה האוטומטית
+
+@ Opacity of the automap lines and panel
+he אטימות הקווים והלוח של המפה האוטומטית
+
+@ Rotates the automap so your facing direction points up; off keeps North at the top
+he מסובב את המפה האוטומטית כך שכיוון המבט שלך פונה למעלה; כבוי שומר את הצפון למעלה
+
+@ Shows a live 3D wireframe or top-down automap while playing; press M for the interactive full-screen map (single player and co-op only)
+he מציג מפה אוטומטית חיה בתיל תלת-ממדי או מבט-על בזמן משחק; לחץ M למפה אינטראקטיבית במסך מלא (משחק יחיד ושיתופי בלבד)
+
+@ When picking up a weapon: Never keeps your current weapon; Better weapon switches only if it ranks higher in Weapon Priority
+he בעת איסוף נשק: לעולם לא שומר על הנשק הנוכחי; נשק טוב יותר מחליף רק אם דירוגו גבוה יותר בעדיפות הנשקים
+
+@ Zoom level of the automap view
+he רמת התקריב של תצוגת המפה האוטומטית
 
 # ==== ui.txt ====
 
@@ -3185,6 +3275,60 @@ he העתק נתונים
 
 @ Switch Only
 he החלף בלבד
+
+@ Above
+he מעל
+
+@ Below
+he מתחת
+
+@ Close
+he סגור
+
+@ Current floor
+he קומה נוכחית
+
+@ Drag weapons to reorder, or press Enter and use arrow keys
+he גרור נשקים לשינוי הסדר, או לחץ Enter והשתמש במקשי החצים
+
+@ Drag: Orbit  |  WASD: Pan  |  Q/E: Floor  |  Wheel: Zoom  |  Tab: 3D/2D  |  F: Reveal  |  R: Reset  |  M/Esc: Close
+he גרירה: סיבוב  |  WASD: הזזה  |  Q/E: קומה  |  גלגלת: תקריב  |  Tab: 3D/2D  |  F: חשיפה  |  R: איפוס  |  M/Esc: סגור
+
+@ Exit
+he יציאה
+
+@ Highest priority at top
+he העדיפות הגבוהה ביותר למעלה
+
+@ Move
+he הזזה
+
+@ Orbit
+he סיבוב
+
+@ Pan
+he הסטה
+
+@ Place
+he מיקום
+
+@ Press A to pick up a weapon, then move it up or down
+he לחץ A כדי לבחור נשק, ואז הזז אותו למעלה או למטה
+
+@ Reorder
+he שינוי סדר
+
+@ Reset
+he איפוס
+
+@ Use D-Pad or stick to move, A to place, B to cancel
+he השתמש בלוח הכיוונים או בסטיק להזזה, A למיקום, B לביטול
+
+@ Use Up and Down arrows to move, Enter to place, Esc to cancel
+he השתמש בחצי למעלה ולמטה להזזה, Enter למיקום, Esc לביטול
+
+@ View
+he תצוגה
 
 # ==== hud.txt ====
 

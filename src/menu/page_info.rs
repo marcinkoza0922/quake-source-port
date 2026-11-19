@@ -12,6 +12,8 @@ pub(super) fn tooltip(item: Item) -> Option<&'static str> {
         Item::Soundtrack => return Some(qcore::t!("Music pack to play for level tracks: Default uses the active mod, or pick another installed Quake soundtrack or custom folder in <user data>/music")),
         Item::Text { cvar: "_export_name", .. } => return Some(qcore::t!("Name of the video file; the extension follows the video format, and a file of the same name is replaced")),
         Item::Run { run: Run::EditHud, .. } => return Some(qcore::t!("Move, resize, add and remove HUD elements: health, ammo, weapons, timers, messages and more")),
+        Item::Sub { page: Page::WeaponPriority, .. } => return Some(qcore::t!("Arrange weapon priority order for Better weapon auto-switching")),
+        Item::Sub { page: Page::Automap, .. } => return Some(qcore::t!("Configure the 3D wireframe automap view, display, reveal mode, zoom and markers")),
         Item::Text { cvar: "_demo_rename", .. } => return Some(qcore::t!("New name of the demo; if another demo has it, a number is added")),
         _ => return None,
     };
@@ -28,6 +30,15 @@ pub(super) fn tooltip(item: Item) -> Option<&'static str> {
         "capture_gpu" => "Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes",
         "capture_audio" => "Records game sound and music into the video",
         "con_translate" => "Also translates the engine's console messages; off keeps them in English",
+        "cl_autoswitch" => "When picking up a weapon: Never keeps your current weapon; Better weapon switches only if it ranks higher in Weapon Priority",
+        "cl_automap" => "Shows a live 3D wireframe or top-down automap while playing; press M for the interactive full-screen map (single player and co-op only)",
+        "cl_automap_view" => "3D wireframe tilts the map in perspective to show verticality; Top-down draws a flat overhead view",
+        "cl_automap_display" => "Corner minimap frames the map in the top-right; Center overlay floats a transparent wireframe over the view",
+        "cl_automap_rotate" => "Rotates the automap so your facing direction points up; off keeps North at the top",
+        "cl_automap_reveal" => "Explored only reveals rooms as you visit them; Full map shows the entire level geometry",
+        "cl_automap_zoom" => "Zoom level of the automap view",
+        "cl_automap_alpha" => "Opacity of the automap lines and panel",
+        "cl_automap_markers" => "Highlights exits, keys, teleporters, locked doors and your recent trail on the automap",
         "sv_autosave_key" => "Autosaves when you pick up a key",
         "gyro_enable" => "Turn the controller's motion sensor into a look input; needs a pad with a gyroscope",
         "joy_flick" => "2D aiming turns the view continuously with the right stick; flick stick snaps the view to where you push the stick, then turning the stick rotates it",
@@ -274,6 +285,8 @@ pub(super) fn page_items(p: Page) -> &'static [Item] {
         Page::Gyro => GYRO,
         Page::Touch => TOUCH,
         Page::Autosave => AUTOSAVE,
+        Page::WeaponPriority => &[],
+        Page::Automap => AUTOMAP,
         Page::AutoAim => AUTOAIM,
         Page::GrenadeArc => GRENADE_ARC,
         Page::Join => JOIN,
@@ -296,6 +309,8 @@ pub(super) fn page_name(p: Page) -> &'static str {
         Page::Gyro => "Gyro & Flick Stick",
         Page::Touch => "Touchscreen",
         Page::Autosave => "Autosave",
+        Page::WeaponPriority => "Weapon Priority",
+        Page::Automap => "Automap Settings",
         Page::Video => "Video Recording",
         Page::Export => "Export Video",
         Page::RenameDemo => "Rename Demo",
@@ -347,6 +362,9 @@ pub(super) fn disabled_reason(item: Item) -> Option<&'static str> {
         Item::Choice { cvar: "r_particles", .. } => {
             Some("Disabled while Enhanced Particles is on: its particles replace the GLQuake and Classic styles")
         }
+        Item::Sub { page: Page::WeaponPriority, .. } => {
+            Some("Disabled while Weapon Auto-Switch is set to Never")
+        }
         _ => None,
     }
 }
@@ -356,6 +374,8 @@ pub(super) fn sub_disabled(page: Page, cv: &Cvars) -> bool {
     (page == Page::AutoAim && cv.value_of("assist_autoaim") == 0.0)
         || (page == Page::GrenadeArc && cv.value_of("assist_grenadearc") == 0.0)
         || (page == Page::Autosave && cv.value_of("sv_autosave") == 0.0)
+        || (page == Page::WeaponPriority && cv.value_of("cl_autoswitch") == 0.0)
+        || (page == Page::Automap && cv.value_of("cl_automap") == 0.0)
         || (page == Page::Water && cv.value_of("r_enhancedwater") == 0.0)
         || (page == Page::Bloom && cv.value_of("r_bloom") == 0.0)
         || (page == Page::RtLights && cv.value_of("r_shadow_realtime_dlight") == 0.0)

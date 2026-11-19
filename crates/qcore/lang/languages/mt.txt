@@ -1682,6 +1682,60 @@ mt Mostri
 @ World & Pickups
 mt Dinja u Oġġetti
 
+@ 3D wireframe
+mt Wireframe 3D
+
+@ Automap
+mt Awto-mappa
+
+@ Automap Settings
+mt Issettjar tal-awto-mappa
+
+@ Better weapon
+mt Arma aħjar
+
+@ Center overlay
+mt Sovrappożizzjoni fiċ-ċentru
+
+@ Corner minimap
+mt Minimappa fil-kantuniera
+
+@ Display
+mt Wiri
+
+@ Explored only
+mt Esplorat biss
+
+@ Full map
+mt Mappa sħiħa
+
+@ Never
+mt Qatt
+
+@ Reveal
+mt Kixif
+
+@ Rotate with Player
+mt Dawwar mal-Plejer
+
+@ Show Markers
+mt Uri l-Markaturi
+
+@ Top-down
+mt Minn fuq
+
+@ View Mode
+mt Modalità tal-Wiri
+
+@ Weapon Auto-Switch
+mt Bidla Awtomatika tal-Arma
+
+@ Weapon Priority
+mt Prijorità tal-Armi
+
+@ Zoom
+mt Zoom
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2255,6 +2309,42 @@ mt Volum tat-twissijiet, attakki, uġigħ u mewt tal-mostri
 
 @ Volume of doors, lifts, switches, item pickups and other world effects
 mt Volum tal-bibien, liftijiet, swiċċijiet, ġbir ta' oġġetti u effetti oħra tad-dinja
+
+@ 3D wireframe tilts the map in perspective to show verticality; Top-down draws a flat overhead view
+mt Wireframe 3D timmilja l-mappa f'perspettiva biex turi l-għoli; Minn fuq tpinġi veduta ċatta minn fuq
+
+@ Arrange weapon priority order for Better weapon auto-switching
+mt Irranġa l-ordni tal-prijorità tal-armi għall-bidla awtomatika ta' Arma aħjar
+
+@ Configure the 3D wireframe automap view, display, reveal mode, zoom and markers
+mt Ikkonfigura l-veduta, il-wiri, il-modalità tal-kixif, iż-zoom u l-markaturi tal-awto-mappa 3D
+
+@ Corner minimap frames the map in the top-right; Center overlay floats a transparent wireframe over the view
+mt Minimappa fil-kantuniera tpoġġi l-mappa f'qafas fin-naħa ta' fuq tal-lemin; Sovrappożizzjoni fiċ-ċentru tpoġġi wireframe trasparenti fuq il-veduta
+
+@ Disabled while Weapon Auto-Switch is set to Never
+mt Diżattivat waqt li Bidla Awtomatika tal-Arma tkun issettjata fuq Qatt
+
+@ Explored only reveals rooms as you visit them; Full map shows the entire level geometry
+mt Esplorat biss jikxef il-kmamar hekk kif iżżurhom; Mappa sħiħa turi l-ġeometrija kollha tal-livell
+
+@ Highlights exits, keys, teleporters, locked doors and your recent trail on the automap
+mt Jenfasizza l-ħruġ, iċ-ċwievet, it-teleporters, il-bibien imsakkra u t-traċċa riċenti tiegħek fuq l-awto-mappa
+
+@ Opacity of the automap lines and panel
+mt Opaċità tal-linji u tal-pannell tal-awto-mappa
+
+@ Rotates the automap so your facing direction points up; off keeps North at the top
+mt Iddawwar l-awto-mappa sabiex id-direzzjoni li qed tħares lejha tipponta 'l fuq; mitfi jżomm it-Tramuntana fuq nett
+
+@ Shows a live 3D wireframe or top-down automap while playing; press M for the interactive full-screen map (single player and co-op only)
+mt Turi awto-mappa ħajja b'wireframe 3D jew minn fuq waqt il-logħob; agħfas M għall-mappa interattiva fuq l-iskrin kollu (single-player u co-op biss)
+
+@ When picking up a weapon: Never keeps your current weapon; Better weapon switches only if it ranks higher in Weapon Priority
+mt Meta tiġbor arma: Qatt iżżomm l-arma attwali tiegħek; Arma aħjar taqleb biss jekk tkun ogħla fil-Prijorità tal-Armi
+
+@ Zoom level of the automap view
+mt Livell ta' zoom tal-veduta tal-awto-mappa
 
 # ==== ui.txt ====
 
@@ -3185,6 +3275,60 @@ mt Ikkopja d-Dejta
 
 @ Switch Only
 mt Ibdel Biss
+
+@ Above
+mt 'Il fuq
+
+@ Below
+mt 'Il isfel
+
+@ Close
+mt Agħlaq
+
+@ Current floor
+mt Sular attwali
+
+@ Drag weapons to reorder, or press Enter and use arrow keys
+mt Iġbed l-armi biex terġa' tordnahom, jew agħfas Enter u uża t-tasti tal-vleġeġ
+
+@ Drag: Orbit  |  WASD: Pan  |  Q/E: Floor  |  Wheel: Zoom  |  Tab: 3D/2D  |  F: Reveal  |  R: Reset  |  M/Esc: Close
+mt Iġbed: Dawwar  |  WASD: Mexxi  |  Q/E: Sular  |  Rotella: Zoom  |  Tab: 3D/2D  |  F: Ikxef  |  R: Irrisettja  |  M/Esc: Agħlaq
+
+@ Exit
+mt Ħruġ
+
+@ Highest priority at top
+mt L-ogħla prijorità fuq nett
+
+@ Move
+mt Mexxi
+
+@ Orbit
+mt Dawwar
+
+@ Pan
+mt Mexxi
+
+@ Place
+mt Poġġi
+
+@ Press A to pick up a weapon, then move it up or down
+mt Agħfas A biex taqbad arma, imbagħad mexxiha 'l fuq jew 'l isfel
+
+@ Reorder
+mt Irranġa mill-ġdid
+
+@ Reset
+mt Irrisettja
+
+@ Use D-Pad or stick to move, A to place, B to cancel
+mt Uża D-Pad jew stick biex tmexxi, A biex tpoġġi, B biex tikkanċella
+
+@ Use Up and Down arrows to move, Enter to place, Esc to cancel
+mt Uża l-vleġeġ 'il fuq u 'l isfel biex tmexxi, Enter biex tpoġġi, Esc biex tikkanċella
+
+@ View
+mt Veduta
 
 # ==== hud.txt ====
 

@@ -1682,6 +1682,60 @@ eu Munstroak
 @ World & Pickups
 eu Mundua eta objektuak
 
+@ 3D wireframe
+eu 3D alanbre-sarea
+
+@ Automap
+eu Automapa
+
+@ Automap Settings
+eu Automaparen ezarpenak
+
+@ Better weapon
+eu Arma hobea
+
+@ Center overlay
+eu Erdiko gainjartzea
+
+@ Corner minimap
+eu Izkinako minimapa
+
+@ Display
+eu Bistaratzea
+
+@ Explored only
+eu Arakatutakoa soilik
+
+@ Full map
+eu Mapa osoa
+
+@ Never
+eu Inoiz ez
+
+@ Reveal
+eu Azaleratzea
+
+@ Rotate with Player
+eu Biratu jokalariarekin
+
+@ Show Markers
+eu Erakutsi markatzaileak
+
+@ Top-down
+eu Goitik behera
+
+@ View Mode
+eu Ikuspegi modua
+
+@ Weapon Auto-Switch
+eu Armen aldaketa automatikoa
+
+@ Weapon Priority
+eu Armen lehentasuna
+
+@ Zoom
+eu Zooma
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2255,6 +2309,42 @@ eu Munstroen abisuen, erasoen, minaren eta heriotzaren bolumena
 
 @ Volume of doors, lifts, switches, item pickups and other world effects
 eu Ateen, igogailuen, etengailuen, objektuak hartzearen eta munduko beste efektuen bolumena
+
+@ 3D wireframe tilts the map in perspective to show verticality; Top-down draws a flat overhead view
+eu 3D alanbre-sareak mapa perspektiban okertzen du altuera erakusteko; Goitik beherak goitik ikusitako plano laua marrazten du
+
+@ Arrange weapon priority order for Better weapon auto-switching
+eu Antolatu armen lehentasun-ordena Arma hobea aldaketa automatikorako
+
+@ Configure the 3D wireframe automap view, display, reveal mode, zoom and markers
+eu Konfiguratu 3D alanbre-sareko automaparen ikuspegia, bistaratzea, azaleratze-modua, zooma eta markatzaileak
+
+@ Corner minimap frames the map in the top-right; Center overlay floats a transparent wireframe over the view
+eu Izkinako minimapak mapa goiko eskuinean kokatzen du; Erdiko gainjartzeak alanbre-sare gardena jartzen du ikuspegiaren gainean
+
+@ Disabled while Weapon Auto-Switch is set to Never
+eu Desgaituta Armen aldaketa automatikoa Inoiz ez aukeran dagoen bitartean
+
+@ Explored only reveals rooms as you visit them; Full map shows the entire level geometry
+eu Arakatutakoa soilik aukerak gelak bisitatu ahala erakusten ditu; Mapa osoak mailaren geometria osoa erakusten du
+
+@ Highlights exits, keys, teleporters, locked doors and your recent trail on the automap
+eu Irteerak, giltzak, teleportagailuak, ate itxiak eta zure azken arrastoa nabarmentzen ditu automapan
+
+@ Opacity of the automap lines and panel
+eu Automaparen lerroen eta panelaren opakutasuna
+
+@ Rotates the automap so your facing direction points up; off keeps North at the top
+eu Automapa biratzen du begira zauden norabidea gora begira geratzeko; desaktibatuta iparraldea goian mantentzen da
+
+@ Shows a live 3D wireframe or top-down automap while playing; press M for the interactive full-screen map (single player and co-op only)
+eu Jolastu bitartean 3D alanbre-sareko edo goitik beherako zuzeneko automapa erakusten du; sakatu M pantaila osoko mapa interaktiborako (jokalari bakarra eta koop. soilik)
+
+@ When picking up a weapon: Never keeps your current weapon; Better weapon switches only if it ranks higher in Weapon Priority
+eu Arma bat jasotzean: Inoiz ez aukerak uneko arma mantentzen du; Arma hobea aukerak Armen lehentasunean gorago badago bakarrik aldatzen du
+
+@ Zoom level of the automap view
+eu Automaparen ikuspegiaren zoom-maila
 
 # ==== ui.txt ====
 
@@ -3185,6 +3275,60 @@ eu Kopiatu datuak
 
 @ Switch Only
 eu Aldatu bakarrik
+
+@ Above
+eu Goian
+
+@ Below
+eu Behean
+
+@ Close
+eu Itxi
+
+@ Current floor
+eu Uneko solairua
+
+@ Drag weapons to reorder, or press Enter and use arrow keys
+eu Arrastatu armak berrantolatzeko, edo sakatu Enter eta erabili gezi-teklak
+
+@ Drag: Orbit  |  WASD: Pan  |  Q/E: Floor  |  Wheel: Zoom  |  Tab: 3D/2D  |  F: Reveal  |  R: Reset  |  M/Esc: Close
+eu Arrastatu: Biratu  |  WASD: Mugitu  |  Q/E: Solairua  |  Gurpila: Zooma  |  Tab: 3D/2D  |  F: Azaleratu  |  R: Berrezarri  |  M/Esc: Itxi
+
+@ Exit
+eu Irteera
+
+@ Highest priority at top
+eu Lehentasun handiena goian
+
+@ Move
+eu Mugitu
+
+@ Orbit
+eu Biratu
+
+@ Pan
+eu Mugitu
+
+@ Place
+eu Kokatu
+
+@ Press A to pick up a weapon, then move it up or down
+eu Sakatu A arma bat hartzeko, eta mugitu gora edo behera
+
+@ Reorder
+eu Berrantolatu
+
+@ Reset
+eu Berrezarri
+
+@ Use D-Pad or stick to move, A to place, B to cancel
+eu Erabili D-Pad edo palanka mugitzeko, A kokatzeko, B uzteko
+
+@ Use Up and Down arrows to move, Enter to place, Esc to cancel
+eu Erabili Gora eta Behera geziak mugitzeko, Enter kokatzeko, Esc uzteko
+
+@ View
+eu Ikuspegia
 
 # ==== hud.txt ====
 

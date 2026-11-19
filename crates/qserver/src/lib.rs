@@ -11,6 +11,7 @@
 
 pub mod addons;
 pub mod modifiers;
+pub mod weaponswitch;
 mod client;
 mod commands;
 pub mod delta;

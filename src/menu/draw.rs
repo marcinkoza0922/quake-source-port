@@ -97,6 +97,9 @@ impl Menu {
             Screen::OptionsPage(page) if matches!(page, Page::Addons | Page::NewGameAddons) => {
                 self.draw_addon_browser(c, pic, cv, realtime, page);
             }
+            Screen::OptionsPage(Page::WeaponPriority) => {
+                self.draw_weapon_priority(c, pic, cv);
+            }
             Screen::OptionsPage(page) => {
                 let p = pic("gfx/qplaque.lmp");
                 c.pic(PANEL_X - 40.0, 16.0, p);
@@ -198,7 +201,7 @@ impl Menu {
         if let Some(o) = self.osk {
             self.draw_osk(c, o);
         }
-        if !matches!(self.screen, Screen::OptionsPage(Page::Addons | Page::NewGameAddons)) {
+        if !matches!(self.screen, Screen::OptionsPage(Page::Addons | Page::NewGameAddons | Page::WeaponPriority)) {
             self.draw_tooltip(c, cv);
             self.draw_hints(c);
         }

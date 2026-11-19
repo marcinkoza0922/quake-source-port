@@ -1682,6 +1682,60 @@ ro Monștri
 @ World & Pickups
 ro Lume și obiecte
 
+@ 3D wireframe
+ro Contur 3D
+
+@ Automap
+ro Autohartă
+
+@ Automap Settings
+ro Setări autohartă
+
+@ Better weapon
+ro Armă mai bună
+
+@ Center overlay
+ro Suprapunere centrală
+
+@ Corner minimap
+ro Minihartă în colț
+
+@ Display
+ro Afișare
+
+@ Explored only
+ro Doar explorat
+
+@ Full map
+ro Hartă completă
+
+@ Never
+ro Niciodată
+
+@ Reveal
+ro Dezvăluire
+
+@ Rotate with Player
+ro Rotește cu jucătorul
+
+@ Show Markers
+ro Afișează marcatori
+
+@ Top-down
+ro Vedere de sus
+
+@ View Mode
+ro Mod de vizualizare
+
+@ Weapon Auto-Switch
+ro Schimbare automată armă
+
+@ Weapon Priority
+ro Prioritate arme
+
+@ Zoom
+ro Zoom
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2255,6 +2309,42 @@ ro Volumul alertelor, atacurilor, durerii și morții monștrilor
 
 @ Volume of doors, lifts, switches, item pickups and other world effects
 ro Volumul ușilor, lifturilor, comutatoarelor, obiectelor culese și altor efecte ale lumii
+
+@ 3D wireframe tilts the map in perspective to show verticality; Top-down draws a flat overhead view
+ro Contur 3D înclină harta în perspectivă pentru a arăta înălțimea; Vedere de sus desenează un plan plat
+
+@ Arrange weapon priority order for Better weapon auto-switching
+ro Ordonează prioritatea armelor pentru schimbarea automată la o Armă mai bună
+
+@ Configure the 3D wireframe automap view, display, reveal mode, zoom and markers
+ro Configurează vederea 3D, afișarea, modul de dezvăluire, zoomul și marcatorii autohărții
+
+@ Corner minimap frames the map in the top-right; Center overlay floats a transparent wireframe over the view
+ro Minihartă în colț încadrează harta dreapta-sus; Suprapunere centrală afișează un contur transparent peste imagine
+
+@ Disabled while Weapon Auto-Switch is set to Never
+ro Dezactivat cât timp Schimbare automată armă este setată la Niciodată
+
+@ Explored only reveals rooms as you visit them; Full map shows the entire level geometry
+ro Doar explorat dezvăluie camerele pe măsură ce le vizitezi; Hartă completă arată toată geometria nivelului
+
+@ Highlights exits, keys, teleporters, locked doors and your recent trail on the automap
+ro Evidențiază pe autohartă ieșirile, cheile, teleportoarele, ușile încuiate și traseul recent
+
+@ Opacity of the automap lines and panel
+ro Opacitatea liniilor și a panoului autohărții
+
+@ Rotates the automap so your facing direction points up; off keeps North at the top
+ro Rotește autoharta astfel încât direcția privirii să fie în sus; oprit păstrează nordul sus
+
+@ Shows a live 3D wireframe or top-down automap while playing; press M for the interactive full-screen map (single player and co-op only)
+ro Afișează o autohartă 3D sau de sus în timpul jocului; apasă M pentru harta interactivă pe tot ecranul (doar single-player și cooperativ)
+
+@ When picking up a weapon: Never keeps your current weapon; Better weapon switches only if it ranks higher in Weapon Priority
+ro La ridicarea unei arme: Niciodată păstrează arma curentă; Armă mai bună schimbă doar dacă are rang mai mare în Prioritate arme
+
+@ Zoom level of the automap view
+ro Nivelul de zoom al autohărții
 
 # ==== ui.txt ====
 
@@ -3185,6 +3275,60 @@ ro Copiază datele
 
 @ Switch Only
 ro Doar schimbă
+
+@ Above
+ro Deasupra
+
+@ Below
+ro Dedesubt
+
+@ Close
+ro Închide
+
+@ Current floor
+ro Nivelul curent
+
+@ Drag weapons to reorder, or press Enter and use arrow keys
+ro Trage armele pentru a le reordona sau apasă Enter și folosește săgețile
+
+@ Drag: Orbit  |  WASD: Pan  |  Q/E: Floor  |  Wheel: Zoom  |  Tab: 3D/2D  |  F: Reveal  |  R: Reset  |  M/Esc: Close
+ro Trage: Orbită  |  WASD: Mută  |  Q/E: Etaj  |  Rotiță: Zoom  |  Tab: 3D/2D  |  F: Dezvăluie  |  R: Resetează  |  M/Esc: Închide
+
+@ Exit
+ro Ieșire
+
+@ Highest priority at top
+ro Cea mai mare prioritate sus
+
+@ Move
+ro Mută
+
+@ Orbit
+ro Orbită
+
+@ Pan
+ro Mută
+
+@ Place
+ro Plasează
+
+@ Press A to pick up a weapon, then move it up or down
+ro Apasă A pentru a lua o armă, apoi mut-o în sus sau în jos
+
+@ Reorder
+ro Reordonează
+
+@ Reset
+ro Resetează
+
+@ Use D-Pad or stick to move, A to place, B to cancel
+ro Folosește D-Pad sau stickul pentru a muta, A pentru a plasa, B pentru a anula
+
+@ Use Up and Down arrows to move, Enter to place, Esc to cancel
+ro Folosește săgețile Sus și Jos pentru a muta, Enter pentru a plasa, Esc pentru a anula
+
+@ View
+ro Vedere
 
 # ==== hud.txt ====
 

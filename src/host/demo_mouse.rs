@@ -39,8 +39,8 @@ impl Host {
     /// Relative mouse only in game mode without a demo cursor; applied when
     /// it changes (called every frame and on key-destination changes).
     pub(super) fn sync_mouse_grab(&mut self) {
-        // the cursor is free over a user demo and on the export screen
-        let free = self.demo_cursor() || self.exporting();
+        // the cursor is free over a user demo, on the export screen and on the fullscreen automap
+        let free = self.demo_cursor() || self.exporting() || self.automap.fullscreen;
         let want = self.key_dest() == KeyDest::Game && !free;
         if self.mouse_relative != Some(want) {
             self.mouse_relative = Some(want);

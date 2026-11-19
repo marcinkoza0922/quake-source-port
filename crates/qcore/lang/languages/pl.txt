@@ -1682,6 +1682,60 @@ pl Potwory
 @ World & Pickups
 pl Świat i przedmioty
 
+@ 3D wireframe
+pl Szkielet 3D
+
+@ Automap
+pl Automapa
+
+@ Automap Settings
+pl Ustawienia automapy
+
+@ Better weapon
+pl Lepsza broń
+
+@ Center overlay
+pl Nakładka na środku
+
+@ Corner minimap
+pl Minimapa w rogu
+
+@ Display
+pl Wyświetlanie
+
+@ Explored only
+pl Tylko odkryte
+
+@ Full map
+pl Cała mapa
+
+@ Never
+pl Nigdy
+
+@ Reveal
+pl Odkrywanie
+
+@ Rotate with Player
+pl Obracaj z graczem
+
+@ Show Markers
+pl Pokaż znaczniki
+
+@ Top-down
+pl Widok z góry
+
+@ View Mode
+pl Tryb widoku
+
+@ Weapon Auto-Switch
+pl Auto-zmiana broni
+
+@ Weapon Priority
+pl Priorytet broni
+
+@ Zoom
+pl Powiększenie
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2255,6 +2309,42 @@ pl Głośność okrzyków, ataków, bólu i śmierci potworów
 
 @ Volume of doors, lifts, switches, item pickups and other world effects
 pl Głośność drzwi, wind, przełączników, podnoszenia przedmiotów i innych efektów świata
+
+@ 3D wireframe tilts the map in perspective to show verticality; Top-down draws a flat overhead view
+pl Szkielet 3D pochyla mapę w perspektywie, pokazując wysokość; Widok z góry rysuje płaski rzut z góry
+
+@ Arrange weapon priority order for Better weapon auto-switching
+pl Ustal kolejność priorytetów broni dla automatycznego przełączania na lepszą broń
+
+@ Configure the 3D wireframe automap view, display, reveal mode, zoom and markers
+pl Konfiguruj widok szkieletowej automapy 3D, wyświetlanie, odkrywanie, powiększenie i znaczniki
+
+@ Corner minimap frames the map in the top-right; Center overlay floats a transparent wireframe over the view
+pl Minimapa w rogu umieszcza mapę w prawym górnym rogu; Nakładka na środku wyświetla półprzezroczysty szkielet na środku ekranu
+
+@ Disabled while Weapon Auto-Switch is set to Never
+pl Wyłączone, gdy Auto-zmiana broni jest ustawiona na Nigdy
+
+@ Explored only reveals rooms as you visit them; Full map shows the entire level geometry
+pl Tylko odkryte odsłania pomieszczenia podczas zwiedzania; Cała mapa pokazuje całą geometrię poziomu
+
+@ Highlights exits, keys, teleporters, locked doors and your recent trail on the automap
+pl Wyróżnia na automapie wyjścia, klucze, teleportery, zamknięte drzwi i ostatnią ścieżkę
+
+@ Opacity of the automap lines and panel
+pl Krycie linii i panelu automapy
+
+@ Rotates the automap so your facing direction points up; off keeps North at the top
+pl Obraca automapę tak, by kierunek patrzenia wskazywał górę; wyłączenie utrzymuje północ u góry
+
+@ Shows a live 3D wireframe or top-down automap while playing; press M for the interactive full-screen map (single player and co-op only)
+pl Pokazuje podczas gry szkieletową automapę 3D lub widok z góry; naciśnij M, aby otworzyć interaktywną mapę pełnoekranową (tylko gra jednoosobowa i kooperacja)
+
+@ When picking up a weapon: Never keeps your current weapon; Better weapon switches only if it ranks higher in Weapon Priority
+pl Po podniesieniu broni: Nigdy zachowuje obecną broń; Lepsza broń przełącza tylko wtedy, gdy ma wyższy Priorytet broni
+
+@ Zoom level of the automap view
+pl Poziom powiększenia widoku automapy
 
 # ==== ui.txt ====
 
@@ -3185,6 +3275,60 @@ pl Kopiuj dane
 
 @ Switch Only
 pl Tylko zmień
+
+@ Above
+pl Powyżej
+
+@ Below
+pl Poniżej
+
+@ Close
+pl Zamknij
+
+@ Current floor
+pl Bieżący poziom
+
+@ Drag weapons to reorder, or press Enter and use arrow keys
+pl Przeciągnij broń, by zmienić kolejność, lub naciśnij Enter i użyj strzałek
+
+@ Drag: Orbit  |  WASD: Pan  |  Q/E: Floor  |  Wheel: Zoom  |  Tab: 3D/2D  |  F: Reveal  |  R: Reset  |  M/Esc: Close
+pl Przeciągnij: Obrót  |  WASD: Przesuń  |  Q/E: Poziom  |  Kółko: Powiększ  |  Tab: 3D/2D  |  F: Odkryj  |  R: Resetuj  |  M/Esc: Zamknij
+
+@ Exit
+pl Wyjście
+
+@ Highest priority at top
+pl Najwyższy priorytet na górze
+
+@ Move
+pl Przesuń
+
+@ Orbit
+pl Obrót
+
+@ Pan
+pl Przesuń
+
+@ Place
+pl Umieść
+
+@ Press A to pick up a weapon, then move it up or down
+pl Naciśnij A, aby wybrać broń, a potem przesuń ją w górę lub w dół
+
+@ Reorder
+pl Kolejność
+
+@ Reset
+pl Resetuj
+
+@ Use D-Pad or stick to move, A to place, B to cancel
+pl Krzyżak lub gałka: przesuń, A: umieść, B: anuluj
+
+@ Use Up and Down arrows to move, Enter to place, Esc to cancel
+pl Strzałki góra/dół: przesuń, Enter: umieść, Esc: anuluj
+
+@ View
+pl Widok
 
 # ==== hud.txt ====
 

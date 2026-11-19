@@ -2145,3 +2145,129 @@ it Solo cambia
 es Solo cambiar
 ru Только сменить
 
+
+@ Above
+fr Au-dessus
+de Darüber
+it Sopra
+es Arriba
+ru Выше
+
+@ Below
+fr En dessous
+de Darunter
+it Sotto
+es Abajo
+ru Ниже
+
+@ Close
+fr Fermer
+de Schließen
+it Chiudi
+es Cerrar
+ru Закрыть
+
+@ Current floor
+fr Étage actuel
+de Aktuelle Ebene
+it Piano attuale
+es Nivel actual
+ru Текущий уровень
+
+@ Drag weapons to reorder, or press Enter and use arrow keys
+fr Glissez les armes pour réordonner, ou appuyez sur Entrée puis les flèches
+de Waffen zum Sortieren ziehen, oder Enter drücken und Pfeiltasten nutzen
+it Trascina le armi per riordinarle, oppure premi Invio e usa le frecce
+es Arrastra las armas para reordenar, o pulsa Intro y usa las flechas
+ru Перетащите оружие мышью или нажмите Enter и используйте стрелки
+
+@ Drag: Orbit  |  WASD: Pan  |  Q/E: Floor  |  Wheel: Zoom  |  Tab: 3D/2D  |  F: Reveal  |  R: Reset  |  M/Esc: Close
+fr Glisser : Orbite  |  WASD : Déplacer  |  Q/E : Étage  |  Molette : Zoom  |  Tab : 3D/2D  |  F : Révéler  |  R : Réinit.  |  M/Échap : Fermer
+de Ziehen: Drehen  |  WASD: Schwenken  |  Q/E: Ebene  |  Rad: Zoom  |  Tab: 3D/2D  |  F: Aufdecken  |  R: Reset  |  M/Esc: Schließen
+it Trascina: Orbita  |  WASD: Sposta  |  Q/E: Piano  |  Rotella: Zoom  |  Tab: 3D/2D  |  F: Rivela  |  R: Ripristina  |  M/Esc: Chiudi
+es Arrastrar: Orbitar  |  WASD: Mover  |  Q/E: Nivel  |  Rueda: Zoom  |  Tab: 3D/2D  |  F: Revelar  |  R: Restablecer  |  M/Esc: Cerrar
+ru Мышь: Вращать  |  WASD: Сдвиг  |  Q/E: Уровень  |  Колесо: Масштаб  |  Tab: 3D/2D  |  F: Открыть  |  R: Сброс  |  M/Esc: Закрыть
+
+@ Exit
+fr Sortie
+de Ausgang
+it Uscita
+es Salida
+ru Выход
+
+@ Highest priority at top
+fr Priorité la plus haute en haut
+de Höchste Priorität oben
+it Priorità massima in alto
+es Mayor prioridad arriba
+ru Наивысший приоритет сверху
+
+@ Move
+fr Déplacer
+de Bewegen
+it Sposta
+es Mover
+ru Переместить
+
+@ Orbit
+fr Orbite
+de Drehen
+it Orbita
+es Orbitar
+ru Вращать
+
+@ Pan
+fr Déplacer
+de Schwenken
+it Sposta
+es Mover
+ru Сдвиг
+
+@ Place
+fr Placer
+de Ablegen
+it Posiziona
+es Colocar
+ru Поместить
+
+@ Press A to pick up a weapon, then move it up or down
+fr Appuyez sur A pour saisir une arme, puis déplacez-la vers le haut ou le bas
+de Drücke A zum Aufnehmen einer Waffe, dann bewege sie hoch oder runter
+it Premi A per prendere un'arma, poi spostala su o giù
+es Pulsa A para tomar un arma y muévela arriba o abajo
+ru Нажмите A, чтобы выбрать оружие, затем переместите его вверх или вниз
+
+@ Reorder
+fr Réordonner
+de Sortieren
+it Riordina
+es Reordenar
+ru Порядок
+
+@ Reset
+fr Réinitialiser
+de Zurücksetzen
+it Ripristina
+es Restablecer
+ru Сброс
+
+@ Use D-Pad or stick to move, A to place, B to cancel
+fr Utilisez la croix ou le stick pour déplacer, A pour placer, B pour annuler
+de Steuerkreuz oder Stick zum Bewegen, A zum Ablegen, B zum Abbrechen
+it Usa croce o levetta per spostare, A per posizionare, B per annullare
+es Usa la cruceta o palanca para mover, A para colocar, B para cancelar
+ru Крестовина или стик — переместить, A — закрепить, B — отмена
+
+@ Use Up and Down arrows to move, Enter to place, Esc to cancel
+fr Utilisez Haut et Bas pour déplacer, Entrée pour placer, Échap pour annuler
+de Pfeil hoch/runter zum Bewegen, Enter zum Ablegen, Esc zum Abbrechen
+it Usa le frecce Su e Giù per spostare, Invio per posizionare, Esc per annullare
+es Usa las flechas Arriba y Abajo para mover, Intro para colocar, Esc para cancelar
+ru Стрелки вверх/вниз — переместить, Enter — закрепить, Esc — отмена
+
+@ View
+fr Vue
+de Ansicht
+it Vista
+es Vista
+ru Вид

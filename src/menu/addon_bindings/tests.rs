@@ -2,9 +2,12 @@ use super::*;
 
 fn column(canvas: &Canvas, left: f32, right: f32, top: f32) -> String {
     let draws: Vec<_> = canvas.list.iter().filter(|d| {
-        let (qrender::Draw2D::Pic { x, y, .. } | qrender::Draw2D::Char { x, y, .. }
-            | qrender::Draw2D::Fill { x, y, .. } | qrender::Draw2D::Tile { x, y, .. }) = d;
-        (left..right).contains(x) && (top..top + 16.0).contains(y)
+        let (x, y) = match d {
+            qrender::Draw2D::Pic { x, y, .. } | qrender::Draw2D::Char { x, y, .. }
+            | qrender::Draw2D::Fill { x, y, .. } | qrender::Draw2D::Tile { x, y, .. } => (*x, *y),
+            qrender::Draw2D::Line { x0, y0, .. } => (*x0, *y0),
+        };
+        (left..right).contains(&x) && (top..top + 16.0).contains(&y)
     }).collect();
     format!("{draws:?}")
 }
@@ -20,7 +23,7 @@ fn binding_capture_flashes_only_the_active_device_on_both_screens() {
             menu.bindings[K_MOUSE1 as usize] = Some("+attack".into());
             menu.bindings[K_RTRIGGER as usize] = Some("+attack".into());
             let (columns, top) = if page == Page::Controls {
-                ([(VALUE_X, BIND_PAD_X - 4.0), (BIND_PAD_X, PANEL_X + PANEL_W - 2.0)], PAGE_ROW0)
+                ([(VALUE_X, BIND_PAD_X - 4.0), (BIND_PAD_X, PANEL_X + PANEL_W - 6.0)], PAGE_ROW0)
             } else {
                 for _ in 0..3 { menu.key(K_TAB, &mut cv, false); }
                 ([(425.0, 515.0), (525.0, 615.0)], 282.0)

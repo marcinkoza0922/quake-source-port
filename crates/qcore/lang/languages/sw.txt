@@ -1682,6 +1682,60 @@ sw Wanyama Wakali
 @ World & Pickups
 sw Ulimwengu na Vitu
 
+@ 3D wireframe
+sw Waya ya 3D
+
+@ Automap
+sw Ramani ya Kiotomatiki
+
+@ Automap Settings
+sw Mipangilio ya Ramani
+
+@ Better weapon
+sw Silaha bora
+
+@ Center overlay
+sw Kufunika katikati
+
+@ Corner minimap
+sw Ramani ndogo pembeni
+
+@ Display
+sw Mwonekano
+
+@ Explored only
+sw Zilizochunguzwa pekee
+
+@ Full map
+sw Ramani kamili
+
+@ Never
+sw Kamwe
+
+@ Reveal
+sw Ufichuaji
+
+@ Rotate with Player
+sw Zungusha na Mchezaji
+
+@ Show Markers
+sw Onyesha Alama
+
+@ Top-down
+sw Mtazamo wa juu
+
+@ View Mode
+sw Hali ya Mwonekano
+
+@ Weapon Auto-Switch
+sw Kubadili Silaha Kiotomatiki
+
+@ Weapon Priority
+sw Kipaumbele cha Silaha
+
+@ Zoom
+sw Kuza
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2255,6 +2309,42 @@ sw Sauti ya tahadhari, mashambulizi, maumivu na kifo cha wanyama wakali
 
 @ Volume of doors, lifts, switches, item pickups and other world effects
 sw Sauti ya milango, lifti, swichi, kuchukua vitu na athari nyingine za ulimwengu
+
+@ 3D wireframe tilts the map in perspective to show verticality; Top-down draws a flat overhead view
+sw Waya ya 3D huinamisha ramani kuonyesha urefu; Mtazamo wa juu huchora ramani bapa kutoka juu
+
+@ Arrange weapon priority order for Better weapon auto-switching
+sw Panga mpangilio wa kipaumbele cha silaha kwa kubadili kwenda Silaha bora kiotomatiki
+
+@ Configure the 3D wireframe automap view, display, reveal mode, zoom and markers
+sw Sanidi mwonekano wa ramani ya waya ya 3D, uonyeshaji, ufichuaji, ukuzaji na alama
+
+@ Corner minimap frames the map in the top-right; Center overlay floats a transparent wireframe over the view
+sw Ramani ndogo pembeni huweka ramani juu kulia; Kufunika katikati huweka waya angavu juu ya mwonekano
+
+@ Disabled while Weapon Auto-Switch is set to Never
+sw Huzimwa wakati Kubadili Silaha Kiotomatiki kumewekwa kuwa Kamwe
+
+@ Explored only reveals rooms as you visit them; Full map shows the entire level geometry
+sw Zilizochunguzwa pekee hufichua vyumba unavyovitembelea; Ramani kamili huonyesha umbo lote la kiwango
+
+@ Highlights exits, keys, teleporters, locked doors and your recent trail on the automap
+sw Huangazia njia za kutokea, funguo, teleporta, milango iliyofungwa na njia yako ya hivi karibuni kwenye ramani
+
+@ Opacity of the automap lines and panel
+sw Uangavu wa mistari na paneli ya ramani ya kiotomatiki
+
+@ Rotates the automap so your facing direction points up; off keeps North at the top
+sw Huzungusha ramani ili mwelekeo unaotazama uelekee juu; ikizimwa Kaskazini hubaki juu
+
+@ Shows a live 3D wireframe or top-down automap while playing; press M for the interactive full-screen map (single player and co-op only)
+sw Huonyesha ramani hai ya waya ya 3D au ya kutoka juu unapocheza; bonyeza M kwa ramani shirikishi ya skrini nzima (mchezaji mmoja na ushirikiano pekee)
+
+@ When picking up a weapon: Never keeps your current weapon; Better weapon switches only if it ranks higher in Weapon Priority
+sw Unapookota silaha: Kamwe hubakiza silaha yako ya sasa; Silaha bora hubadilisha tu ikiwa ina daraja la juu zaidi kwenye Kipaumbele cha Silaha
+
+@ Zoom level of the automap view
+sw Kiwango cha ukuzaji wa mwonekano wa ramani
 
 # ==== ui.txt ====
 
@@ -3185,6 +3275,60 @@ sw Nakili Data
 
 @ Switch Only
 sw Badilisha Tu
+
+@ Above
+sw Juu
+
+@ Below
+sw Chini
+
+@ Close
+sw Funga
+
+@ Current floor
+sw Ghorofa ya sasa
+
+@ Drag weapons to reorder, or press Enter and use arrow keys
+sw Buruta silaha kupanga upya, au bonyeza Enter na utumie vitufe vya mishale
+
+@ Drag: Orbit  |  WASD: Pan  |  Q/E: Floor  |  Wheel: Zoom  |  Tab: 3D/2D  |  F: Reveal  |  R: Reset  |  M/Esc: Close
+sw Buruta: Zungusha  |  WASD: Sogeza  |  Q/E: Ghorofa  |  Gurudumu: Kuza  |  Tab: 3D/2D  |  F: Fichua  |  R: Rejesha  |  M/Esc: Funga
+
+@ Exit
+sw Toka
+
+@ Highest priority at top
+sw Kipaumbele cha juu zaidi juu
+
+@ Move
+sw Sogeza
+
+@ Orbit
+sw Zungusha
+
+@ Pan
+sw Sogeza
+
+@ Place
+sw Weka
+
+@ Press A to pick up a weapon, then move it up or down
+sw Bonyeza A kuchukua silaha, kisha isogeze juu au chini
+
+@ Reorder
+sw Panga upya
+
+@ Reset
+sw Rejesha
+
+@ Use D-Pad or stick to move, A to place, B to cancel
+sw Tumia D-Pad au kijiti kusogeza, A kuweka, B kughairi
+
+@ Use Up and Down arrows to move, Enter to place, Esc to cancel
+sw Tumia mishale ya Juu na Chini kusogeza, Enter kuweka, Esc kughairi
+
+@ View
+sw Mwonekano
 
 # ==== hud.txt ====
 

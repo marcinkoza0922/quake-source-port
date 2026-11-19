@@ -1682,6 +1682,60 @@ hy Հրեշներ
 @ World & Pickups
 hy Աշխարհ և առարկաներ
 
+@ 3D wireframe
+hy 3D կարկաս
+
+@ Automap
+hy Ինքնաքարտեզ
+
+@ Automap Settings
+hy Ինքնաքարտեզի կարգավորումներ
+
+@ Better weapon
+hy Ավելի լավ զենք
+
+@ Center overlay
+hy Կենտրոնական ծածկույթ
+
+@ Corner minimap
+hy Անկյունային մինի քարտեզ
+
+@ Display
+hy Ցուցադրում
+
+@ Explored only
+hy Միայն ուսումնասիրվածը
+
+@ Full map
+hy Ամբողջ քարտեզը
+
+@ Never
+hy Երբեք
+
+@ Reveal
+hy Բացահայտում
+
+@ Rotate with Player
+hy Պտտել խաղացողի հետ
+
+@ Show Markers
+hy Ցույց տալ նշիչները
+
+@ Top-down
+hy Վերևից տեսք
+
+@ View Mode
+hy Տեսքի ռեժիմ
+
+@ Weapon Auto-Switch
+hy Զենքի ինքնափոխում
+
+@ Weapon Priority
+hy Զենքերի առաջնահերթություն
+
+@ Zoom
+hy Խոշորացում
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2255,6 +2309,42 @@ hy Հրեշների ազդանշանների, հարձակումների, ցավ
 
 @ Volume of doors, lifts, switches, item pickups and other world effects
 hy Դռների, վերելակների, անջատիչների, առարկաների և աշխարհի այլ էֆեկտների ուժգնությունը
+
+@ 3D wireframe tilts the map in perspective to show verticality; Top-down draws a flat overhead view
+hy 3D կարկասը թեքում է քարտեզը հեռանկարում՝ ուղղահայացությունը ցույց տալու համար, իսկ Վերևից տեսքը գծում է հարթ վերին տեսք
+
+@ Arrange weapon priority order for Better weapon auto-switching
+hy Դասավորեք զենքերի առաջնահերթության կարգը՝ Ավելի լավ զենք ինքնափոխման համար
+
+@ Configure the 3D wireframe automap view, display, reveal mode, zoom and markers
+hy Կարգավորեք 3D կարկասային ինքնաքարտեզի տեսքը, ցուցադրումը, բացահայտման ռեժիմը, խոշորացումը և նշիչները
+
+@ Corner minimap frames the map in the top-right; Center overlay floats a transparent wireframe over the view
+hy Անկյունային մինի քարտեզը տեղադրում է քարտեզը վերևի աջ անկյունում, իսկ Կենտրոնական ծածկույթը թափանցիկ կարկաս է գծում տեսքի վրա
+
+@ Disabled while Weapon Auto-Switch is set to Never
+hy Անջատված է, քանի դեռ Զենքի ինքնափոխումը դրված է Երբեք
+
+@ Explored only reveals rooms as you visit them; Full map shows the entire level geometry
+hy Միայն ուսումնասիրվածը բացում է սենյակները դրանց այցելելիս, իսկ Ամբողջ քարտեզը ցույց է տալիս մակարդակի ամբողջ երկրաչափությունը
+
+@ Highlights exits, keys, teleporters, locked doors and your recent trail on the automap
+hy Ինքնաքարտեզում ընդգծում է ելքերը, բանալիները, տելեպորտները, փակ դռները և ձեր վերջին հետագիծը
+
+@ Opacity of the automap lines and panel
+hy Ինքնաքարտեզի գծերի և վահանակի անթափանցությունը
+
+@ Rotates the automap so your facing direction points up; off keeps North at the top
+hy Պտտում է ինքնաքարտեզը, որպեսզի ձեր հայացքի ուղղությունը լինի վերևում, անջատված վիճակում Հյուսիսը մնում է վերևում
+
+@ Shows a live 3D wireframe or top-down automap while playing; press M for the interactive full-screen map (single player and co-op only)
+hy Խաղի ընթացքում ցույց է տալիս կենդանի 3D կարկասային կամ վերևից ինքնաքարտեզ, սեղմեք M՝ ինտերակտիվ լիաէկրան քարտեզի համար (միայն միանձնյա և համատեղ խաղում)
+
+@ When picking up a weapon: Never keeps your current weapon; Better weapon switches only if it ranks higher in Weapon Priority
+hy Զենք վերցնելիս՝ Երբեքը պահում է ընթացիկ զենքը, Ավելի լավ զենքը փոխում է միայն եթե այն ավելի բարձր է Զենքերի առաջնահերթության մեջ
+
+@ Zoom level of the automap view
+hy Ինքնաքարտեզի տեսքի խոշորացման մակարդակը
 
 # ==== ui.txt ====
 
@@ -3185,6 +3275,60 @@ hy Պատճենել տվյալները
 
 @ Switch Only
 hy Միայն փոխել
+
+@ Above
+hy Վերևում
+
+@ Below
+hy Ներքևում
+
+@ Close
+hy Փակել
+
+@ Current floor
+hy Ընթացիկ հարկ
+
+@ Drag weapons to reorder, or press Enter and use arrow keys
+hy Քաշեք զենքերը դասավորելու համար կամ սեղմեք Enter և օգտագործեք սլաքների ստեղները
+
+@ Drag: Orbit  |  WASD: Pan  |  Q/E: Floor  |  Wheel: Zoom  |  Tab: 3D/2D  |  F: Reveal  |  R: Reset  |  M/Esc: Close
+hy Քաշել՝ Պտտել  |  WASD՝ Շարժել  |  Q/E՝ Հարկ  |  Անիվ՝ Խոշորացում  |  Tab՝ 3D/2D  |  F՝ Բացել  |  R՝ Վերականգնել  |  M/Esc՝ Փակել
+
+@ Exit
+hy Ելք
+
+@ Highest priority at top
+hy Ամենաբարձր առաջնահերթությունը վերևում է
+
+@ Move
+hy Շարժել
+
+@ Orbit
+hy Պտտել
+
+@ Pan
+hy Տեղաշարժել
+
+@ Place
+hy Տեղադրել
+
+@ Press A to pick up a weapon, then move it up or down
+hy Սեղմեք A՝ զենքը վերցնելու համար, ապա տեղափոխեք վերև կամ ներքև
+
+@ Reorder
+hy Վերադասավորել
+
+@ Reset
+hy Վերականգնել
+
+@ Use D-Pad or stick to move, A to place, B to cancel
+hy Օգտագործեք D-Pad կամ լծակ՝ շարժելու, A՝ տեղադրելու, B՝ չեղարկելու համար
+
+@ Use Up and Down arrows to move, Enter to place, Esc to cancel
+hy Օգտագործեք Վերև և Ներքև սլաքները՝ շարժելու, Enter՝ տեղադրելու, Esc՝ չեղարկելու համար
+
+@ View
+hy Տեսք
 
 # ==== hud.txt ====
 

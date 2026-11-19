@@ -1682,6 +1682,60 @@ ka მონსტრები
 @ World & Pickups
 ka სამყარო და ნივთები
 
+@ 3D wireframe
+ka 3D კარკასი
+
+@ Automap
+ka ავტორუკა
+
+@ Automap Settings
+ka ავტორუკის პარამეტრები
+
+@ Better weapon
+ka უკეთესი იარაღი
+
+@ Center overlay
+ka ცენტრალური გადაფარვა
+
+@ Corner minimap
+ka კუთხის მინირუკა
+
+@ Display
+ka ჩვენება
+
+@ Explored only
+ka მხოლოდ შესწავლილი
+
+@ Full map
+ka სრული რუკა
+
+@ Never
+ka არასოდეს
+
+@ Reveal
+ka გამოჩენა
+
+@ Rotate with Player
+ka მოთამაშესთან მობრუნება
+
+@ Show Markers
+ka მარკერების ჩვენება
+
+@ Top-down
+ka ზემოდან ხედი
+
+@ View Mode
+ka ხედის რეჟიმი
+
+@ Weapon Auto-Switch
+ka იარაღის ავტოშეცვლა
+
+@ Weapon Priority
+ka იარაღის პრიორიტეტი
+
+@ Zoom
+ka მასშტაბი
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2255,6 +2309,42 @@ ka მონსტრების განგაშის, შეტევი�
 
 @ Volume of doors, lifts, switches, item pickups and other world effects
 ka კარების, ლიფტების, გადამრთველების, ნივთების აღებისა და სხვა სამყაროს ეფექტების ხმა
+
+@ 3D wireframe tilts the map in perspective to show verticality; Top-down draws a flat overhead view
+ka 3D კარკასი რუკას პერსპექტივაში ხრის სიმაღლის საჩვენებლად; ზემოდან ხედი ხატავს ბრტყელ ზედა ხედს
+
+@ Arrange weapon priority order for Better weapon auto-switching
+ka დაალაგეთ იარაღის პრიორიტეტის რიგი უკეთეს იარაღზე ავტოშეცვლისთვის
+
+@ Configure the 3D wireframe automap view, display, reveal mode, zoom and markers
+ka მოარგეთ 3D კარკასული ავტორუკის ხედი, ჩვენება, გამოჩენის რეჟიმი, მასშტაბი და მარკერები
+
+@ Corner minimap frames the map in the top-right; Center overlay floats a transparent wireframe over the view
+ka კუთხის მინირუკა ათავსებს რუკას ზედა მარჯვენა კუთხეში; ცენტრალური გადაფარვა გამჭვირვალე კარკასს აჩვენებს ხედის თავზე
+
+@ Disabled while Weapon Auto-Switch is set to Never
+ka გამორთულია, სანამ იარაღის ავტოშეცვლა დაყენებულია მნიშვნელობაზე არასოდეს
+
+@ Explored only reveals rooms as you visit them; Full map shows the entire level geometry
+ka მხოლოდ შესწავლილი ხსნის ოთახებს მათი მონახულებისას; სრული რუკა აჩვენებს დონის მთელ გეომეტრიას
+
+@ Highlights exits, keys, teleporters, locked doors and your recent trail on the automap
+ka ავტორუკაზე გამოყოფს გასასვლელებს, გასაღებებს, ტელეპორტებს, ჩაკეტილ კარებს და თქვენს ბოლო კვალს
+
+@ Opacity of the automap lines and panel
+ka ავტორუკის ხაზებისა და პანელის გაუმჭვირვალობა
+
+@ Rotates the automap so your facing direction points up; off keeps North at the top
+ka აბრუნებს ავტორუკას ისე, რომ თქვენი მზერის მიმართულება ზემოთ იყოს; გამორთული ჩრდილოეთს ზემოთ ტოვებს
+
+@ Shows a live 3D wireframe or top-down automap while playing; press M for the interactive full-screen map (single player and co-op only)
+ka თამაშისას აჩვენებს ცოცხალ 3D კარკასულ ან ზემოდან ავტორუკას; დააჭირეთ M-ს ინტერაქტიული სრულეკრანიანი რუკისთვის (მხოლოდ ერთმოთამაშიან და კოოპ. რეჟიმში)
+
+@ When picking up a weapon: Never keeps your current weapon; Better weapon switches only if it ranks higher in Weapon Priority
+ka იარაღის აღებისას: არასოდეს ტოვებს მიმდინარე იარაღს; უკეთესი იარაღი ცვლის მხოლოდ მაშინ, თუ ის უფრო მაღლა დგას იარაღის პრიორიტეტში
+
+@ Zoom level of the automap view
+ka ავტორუკის ხედის მასშტაბირების დონე
 
 # ==== ui.txt ====
 
@@ -3185,6 +3275,60 @@ ka მონაცემთა კოპირება
 
 @ Switch Only
 ka მხოლოდ შეცვლა
+
+@ Above
+ka ზემოთ
+
+@ Below
+ka ქვემოთ
+
+@ Close
+ka დახურვა
+
+@ Current floor
+ka მიმდინარე სართული
+
+@ Drag weapons to reorder, or press Enter and use arrow keys
+ka გადაათრიეთ იარაღი რიგის შესაცვლელად, ან დააჭირეთ Enter-ს და გამოიყენეთ ისრის ღილაკები
+
+@ Drag: Orbit  |  WASD: Pan  |  Q/E: Floor  |  Wheel: Zoom  |  Tab: 3D/2D  |  F: Reveal  |  R: Reset  |  M/Esc: Close
+ka გადათრევა: ბრუნვა  |  WASD: გადაადგილება  |  Q/E: სართული  |  ბორბალი: მასშტაბი  |  Tab: 3D/2D  |  F: გამოჩენა  |  R: განულება  |  M/Esc: დახურვა
+
+@ Exit
+ka გასასვლელი
+
+@ Highest priority at top
+ka უმაღლესი პრიორიტეტი ზემოთ
+
+@ Move
+ka გადაადგილება
+
+@ Orbit
+ka ბრუნვა
+
+@ Pan
+ka გაწევა
+
+@ Place
+ka დაყენება
+
+@ Press A to pick up a weapon, then move it up or down
+ka დააჭირეთ A-ს იარაღის ასაღებად, შემდეგ გადაადგილეთ ზემოთ ან ქვემოთ
+
+@ Reorder
+ka დალაგება
+
+@ Reset
+ka განულება
+
+@ Use D-Pad or stick to move, A to place, B to cancel
+ka გამოიყენეთ D-Pad ან სტიკი გადასაადგილებლად, A დასაყენებლად, B გასაუქმებლად
+
+@ Use Up and Down arrows to move, Enter to place, Esc to cancel
+ka გამოიყენეთ ზემოთ და ქვემოთ ისრები გადასაადგილებლად, Enter დასაყენებლად, Esc გასაუქმებლად
+
+@ View
+ka ხედი
 
 # ==== hud.txt ====
 

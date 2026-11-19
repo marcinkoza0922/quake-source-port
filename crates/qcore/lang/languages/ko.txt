@@ -1682,6 +1682,60 @@ ko 몬스터
 @ World & Pickups
 ko 월드 및 아이템
 
+@ 3D wireframe
+ko 3D 와이어프레임
+
+@ Automap
+ko 오토맵
+
+@ Automap Settings
+ko 오토맵 설정
+
+@ Better weapon
+ko 더 좋은 무기
+
+@ Center overlay
+ko 중앙 오버레이
+
+@ Corner minimap
+ko 모서리 미니맵
+
+@ Display
+ko 표시 방식
+
+@ Explored only
+ko 탐험한 구역만
+
+@ Full map
+ko 전체 맵
+
+@ Never
+ko 사용 안 함
+
+@ Reveal
+ko 공개 범위
+
+@ Rotate with Player
+ko 플레이어와 함께 회전
+
+@ Show Markers
+ko 마커 표시
+
+@ Top-down
+ko 탑다운
+
+@ View Mode
+ko 보기 모드
+
+@ Weapon Auto-Switch
+ko 무기 자동 전환
+
+@ Weapon Priority
+ko 무기 우선순위
+
+@ Zoom
+ko 확대/축소
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2255,6 +2309,42 @@ ko 몬스터 경계, 공격, 피격 및 사망 소리의 볼륨
 
 @ Volume of doors, lifts, switches, item pickups and other world effects
 ko 문, 리프트, 스위치, 아이템 획득 및 기타 월드 효과음 볼륨
+
+@ 3D wireframe tilts the map in perspective to show verticality; Top-down draws a flat overhead view
+ko 3D 와이어프레임은 높이감을 보여주기 위해 원근감 있게 기울여 표시하고, 탑다운은 위에서 내려다본 평면도를 그립니다
+
+@ Arrange weapon priority order for Better weapon auto-switching
+ko '더 좋은 무기' 자동 전환에 사용할 무기 우선순위 순서를 정합니다
+
+@ Configure the 3D wireframe automap view, display, reveal mode, zoom and markers
+ko 3D 와이어프레임 오토맵의 보기, 표시 방식, 공개 범위, 확대/축소 및 마커를 설정합니다
+
+@ Corner minimap frames the map in the top-right; Center overlay floats a transparent wireframe over the view
+ko 모서리 미니맵은 오른쪽 위에 맵을 배치하고, 중앙 오버레이는 화면 위에 반투명 와이어프레임을 띄웁니다
+
+@ Disabled while Weapon Auto-Switch is set to Never
+ko 무기 자동 전환이 '사용 안 함'일 때는 비활성화됩니다
+
+@ Explored only reveals rooms as you visit them; Full map shows the entire level geometry
+ko 탐험한 구역만은 방문한 방만 보여주고, 전체 맵은 레벨 전체 구조를 표시합니다
+
+@ Highlights exits, keys, teleporters, locked doors and your recent trail on the automap
+ko 오토맵에서 출구, 열쇠, 텔레포터, 잠긴 문, 최근 이동 경로를 강조 표시합니다
+
+@ Opacity of the automap lines and panel
+ko 오토맵 선과 패널의 불투명도
+
+@ Rotates the automap so your facing direction points up; off keeps North at the top
+ko 바라보는 방향이 위쪽을 향하도록 오토맵을 회전합니다. 끄면 북쪽이 위에 고정됩니다
+
+@ Shows a live 3D wireframe or top-down automap while playing; press M for the interactive full-screen map (single player and co-op only)
+ko 플레이 중 실시간 3D 와이어프레임 또는 탑다운 오토맵을 표시합니다. M 키를 누르면 대화형 전체 화면 맵이 열립니다 (싱글 플레이 및 협동 전용)
+
+@ When picking up a weapon: Never keeps your current weapon; Better weapon switches only if it ranks higher in Weapon Priority
+ko 무기를 주웠을 때: '사용 안 함'은 현재 무기를 유지하고, '더 좋은 무기'는 무기 우선순위가 더 높을 때만 바꿉니다
+
+@ Zoom level of the automap view
+ko 오토맵 보기의 확대 배율
 
 # ==== ui.txt ====
 
@@ -3185,6 +3275,60 @@ ko 데이터 복사
 
 @ Switch Only
 ko 변경만 하기
+
+@ Above
+ko 위층
+
+@ Below
+ko 아래층
+
+@ Close
+ko 닫기
+
+@ Current floor
+ko 현재 층
+
+@ Drag weapons to reorder, or press Enter and use arrow keys
+ko 무기를 드래그해 순서를 바꾸거나 Enter를 누른 뒤 화살표 키를 사용하세요
+
+@ Drag: Orbit  |  WASD: Pan  |  Q/E: Floor  |  Wheel: Zoom  |  Tab: 3D/2D  |  F: Reveal  |  R: Reset  |  M/Esc: Close
+ko 드래그: 회전  |  WASD: 이동  |  Q/E: 층  |  휠: 확대/축소  |  Tab: 3D/2D  |  F: 공개  |  R: 초기화  |  M/Esc: 닫기
+
+@ Exit
+ko 출구
+
+@ Highest priority at top
+ko 가장 높은 우선순위가 맨 위
+
+@ Move
+ko 이동
+
+@ Orbit
+ko 회전
+
+@ Pan
+ko 화면 이동
+
+@ Place
+ko 배치
+
+@ Press A to pick up a weapon, then move it up or down
+ko A를 눌러 무기를 집은 뒤 위나 아래로 옮기세요
+
+@ Reorder
+ko 순서 변경
+
+@ Reset
+ko 초기화
+
+@ Use D-Pad or stick to move, A to place, B to cancel
+ko 방향 패드나 스틱으로 이동, A로 배치, B로 취소
+
+@ Use Up and Down arrows to move, Enter to place, Esc to cancel
+ko 위/아래 화살표로 이동, Enter로 배치, Esc로 취소
+
+@ View
+ko 보기
 
 # ==== hud.txt ====
 
