@@ -1697,8 +1697,8 @@ ms Senjata lebih baik
 @ Center overlay
 ms Tindihan tengah
 
-@ Corner minimap
-ms Peta mini bucu
+@ Framed panel
+ms Panel berbingkai
 
 @ Display
 ms Paparan
@@ -2289,11 +2289,11 @@ ms Audio ruang binaural 3D untuk fon kepala dengan masa telinga, bayang kepala d
 @ Muffles and quiets sounds coming from behind solid walls and closed doors
 ms Meredam dan memperlahankan bunyi dari sebalik dinding pepejal dan pintu tertutup
 
-@ Plays synthesized player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
-ms Memainkan bunyi langkah dan pendaratan sintetik mengikut lantai batu, logam, kayu, tanah dan cecair
+@ Plays player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
+ms Memainkan bunyi tapak kaki dan pendaratan pemain mengikut lantai batu, logam, kayu, tanah dan cecair
 
-@ Volume of synthesized player footsteps and landings
-ms Kelantangan bunyi langkah kaki dan pendaratan sintetik pemain
+@ Volume of player footsteps and landings
+ms Kelantangan tapak kaki dan pendaratan pemain
 
 @ Seconds to smoothly fade between music tracks; 0 cuts immediately
 ms Saat untuk peralihan lancar antara trek muzik; 0 bertukar serta-merta
@@ -2319,8 +2319,8 @@ ms Susun urutan keutamaan senjata untuk penukaran automatik ke Senjata lebih bai
 @ Configure the 3D wireframe automap view, display, reveal mode, zoom and markers
 ms Tetapkan paparan peta auto rangka dawai 3D, lokasi paparan, mod dedahan, zum dan penanda
 
-@ Corner minimap frames the map in the top-right; Center overlay floats a transparent wireframe over the view
-ms Peta mini bucu membingkai peta di kanan atas; Tindihan tengah memaparkan rangka dawai lutsinar di atas paparan
+@ Framed panel centers the map in a dark box on the statistics screen; Center overlay floats a transparent wireframe over the view
+ms Panel berbingkai memusatkan peta dalam kotak gelap pada skrin statistik; tindanan tengah memaparkan rangka dawai lut sinar di atas paparan
 
 @ Disabled while Weapon Auto-Switch is set to Never
 ms Dinyahdayakan semasa Tukar Senjata Auto ditetapkan kepada Jangan sekali
@@ -2337,8 +2337,11 @@ ms Kelegapan garisan dan panel peta auto
 @ Rotates the automap so your facing direction points up; off keeps North at the top
 ms Memutar peta auto supaya arah pandangan anda menghadap ke atas; matikan untuk mengekalkan utara di atas
 
-@ Shows a live 3D wireframe or top-down automap while playing; press M for the interactive full-screen map (single player and co-op only)
-ms Memaparkan peta auto rangka dawai 3D atau pandangan atas semasa bermain; tekan M untuk peta skrin penuh interaktif (pemain tunggal dan koperatif sahaja)
+@ Shows a 3D wireframe or top-down automap on the statistics screen (Tab/Select); add Automap in Edit HUD to keep it on screen, or press M for the full-screen map (single player and co-op only)
+ms Memaparkan autopeta rangka dawai 3D atau pandangan atas pada skrin statistik (Tab/Select); tambah Autopeta dalam Edit HUD untuk paparan kekal, atau tekan M untuk peta skrin penuh (pemain tunggal dan koperasi sahaja)
+
+@ Shows a live 3D wireframe or top-down automap on the HUD at all times (single player and co-op only)
+ms Memaparkan autopeta rangka dawai 3D atau pandangan atas secara langsung pada HUD sepanjang masa (pemain tunggal dan koperasi sahaja)
 
 @ When picking up a weapon: Never keeps your current weapon; Better weapon switches only if it ranks higher in Weapon Priority
 ms Apabila mengambil senjata: Jangan sekali mengekalkan senjata semasa; Senjata lebih baik hanya bertukar jika kedudukannya lebih tinggi dalam Keutamaan Senjata

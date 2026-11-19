@@ -1697,8 +1697,8 @@ bn উন্নত অস্ত্র
 @ Center overlay
 bn মাঝের ওভারলে
 
-@ Corner minimap
-bn কোণের মিনিম্যাপ
+@ Framed panel
+bn ফ্রেমযুক্ত প্যানেল
 
 @ Display
 bn প্রদর্শন
@@ -2289,11 +2289,11 @@ bn হেডফোনের জন্য কানের সময়, মাথ
 @ Muffles and quiets sounds coming from behind solid walls and closed doors
 bn শক্ত দেয়াল ও বন্ধ দরজার পেছন থেকে আসা শব্দ চাপা ও মৃদু করে
 
-@ Plays synthesized player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
-bn পাথর, ধাতু, কাঠ, মাটি ও তরল মেঝে অনুযায়ী তৈরি পায়ের শব্দ ও নামার ধ্বনি বাজায়
+@ Plays player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
+bn পাথর, ধাতু, কাঠ, মাটি ও তরল মেঝে অনুযায়ী খেলোয়াড়ের পায়ের শব্দ ও নামার আওয়াজ বাজায়
 
-@ Volume of synthesized player footsteps and landings
-bn খেলোয়াড়ের তৈরি পায়ের শব্দ ও নামার ভলিউম
+@ Volume of player footsteps and landings
+bn খেলোয়াড়ের পায়ের শব্দ ও নামার ভলিউম
 
 @ Seconds to smoothly fade between music tracks; 0 cuts immediately
 bn সঙ্গীত ট্র্যাকের মধ্যে মসৃণ পরিবর্তনের সেকেন্ড; 0 সাথে সাথে বদলায়
@@ -2319,8 +2319,8 @@ bn উন্নত অস্ত্র অটো-সুইচের জন্য 
 @ Configure the 3D wireframe automap view, display, reveal mode, zoom and markers
 bn 3D ওয়্যারফ্রেম অটোম্যাপের দৃশ্য, প্রদর্শন, প্রকাশ মোড, জুম ও মার্কার কনফিগার করুন
 
-@ Corner minimap frames the map in the top-right; Center overlay floats a transparent wireframe over the view
-bn কোণের মিনিম্যাপ ম্যাপকে উপরে-ডানে রাখে; মাঝের ওভারলে দৃশ্যের ওপর স্বচ্ছ ওয়্যারফ্রেম ভাসায়
+@ Framed panel centers the map in a dark box on the statistics screen; Center overlay floats a transparent wireframe over the view
+bn ফ্রেমযুক্ত প্যানেল পরিসংখ্যান স্ক্রিনে একটি গাঢ় বাক্সে মানচিত্রটি কেন্দ্রে রাখে; কেন্দ্র ওভারলে দৃশ্যের উপর স্বচ্ছ ওয়্যারফ্রেম দেখায়
 
 @ Disabled while Weapon Auto-Switch is set to Never
 bn অস্ত্র অটো-সুইচ 'কখনোই নয়' সেট থাকলে নিষ্ক্রিয় থাকে
@@ -2337,8 +2337,11 @@ bn অটোম্যাপের রেখা ও প্যানেলের �
 @ Rotates the automap so your facing direction points up; off keeps North at the top
 bn আপনার দেখার দিক উপরে রাখতে অটোম্যাপ ঘোরায়; বন্ধ থাকলে উত্তর দিক উপরে থাকে
 
-@ Shows a live 3D wireframe or top-down automap while playing; press M for the interactive full-screen map (single player and co-op only)
-bn খেলার সময় লাইভ 3D ওয়্যারফ্রেম বা উপর থেকে অটোম্যাপ দেখায়; ইন্টারঅ্যাক্টিভ পূর্ণ-স্ক্রিন ম্যাপের জন্য M চাপুন (শুধু একক খেলা ও কো-অপ)
+@ Shows a 3D wireframe or top-down automap on the statistics screen (Tab/Select); add Automap in Edit HUD to keep it on screen, or press M for the full-screen map (single player and co-op only)
+bn পরিসংখ্যান স্ক্রিনে (Tab/Select) 3D ওয়্যারফ্রেম বা ওপর থেকে অটোম্যাপ দেখায়; সবসময় দেখাতে Edit HUD-এ অটোম্যাপ যোগ করুন, অথবা ফুল-স্ক্রিন মানচিত্রের জন্য M চাপুন (শুধু একক ও কো-অপ)
+
+@ Shows a live 3D wireframe or top-down automap on the HUD at all times (single player and co-op only)
+bn সবসময় HUD-এ লাইভ 3D ওয়্যারফ্রেম বা ওপর থেকে অটোম্যাপ দেখায় (শুধু একক ও কো-অপ)
 
 @ When picking up a weapon: Never keeps your current weapon; Better weapon switches only if it ranks higher in Weapon Priority
 bn অস্ত্র নেওয়ার সময়: 'কখনোই নয়' বর্তমান অস্ত্র রাখে; 'উন্নত অস্ত্র' কেবল অস্ত্রের অগ্রাধিকারে ওপরে থাকলে বদলায়

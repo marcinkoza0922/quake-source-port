@@ -1697,8 +1697,8 @@ hi बेहतर हथियार
 @ Center overlay
 hi मध्य ओवरले
 
-@ Corner minimap
-hi कोने में मिनीमैप
+@ Framed panel
+hi फ़्रेम किया गया पैनल
 
 @ Display
 hi प्रदर्शन
@@ -2289,11 +2289,11 @@ hi हेडफ़ोन के लिए कान के समय, सिर 
 @ Muffles and quiets sounds coming from behind solid walls and closed doors
 hi ठोस दीवारों और बंद दरवाज़ों के पीछे से आने वाली ध्वनियों को दबा और धीमा करता है
 
-@ Plays synthesized player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
-hi पत्थर, धातु, लकड़ी, मिट्टी और तरल फर्श के अनुसार संश्लेषित कदम और उतरने की ध्वनि बजाता है
+@ Plays player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
+hi पत्थर, धातु, लकड़ी, मिट्टी और तरल सतह के अनुसार खिलाड़ी के कदमों और उतरने की ध्वनि बजाता है
 
-@ Volume of synthesized player footsteps and landings
-hi खिलाड़ी के संश्लेषित कदमों और उतरने का वॉल्यूम
+@ Volume of player footsteps and landings
+hi खिलाड़ी के कदमों और उतरने की आवाज़ का स्तर
 
 @ Seconds to smoothly fade between music tracks; 0 cuts immediately
 hi संगीत ट्रैकों के बीच सहज बदलाव के सेकंड; 0 तुरंत बदलता है
@@ -2319,8 +2319,8 @@ hi बेहतर हथियार ऑटो-स्विच के लिए
 @ Configure the 3D wireframe automap view, display, reveal mode, zoom and markers
 hi 3D वायरफ़्रेम ऑटोमैप दृश्य, प्रदर्शन, प्रकटन मोड, ज़ूम और मार्कर कॉन्फ़िगर करें
 
-@ Corner minimap frames the map in the top-right; Center overlay floats a transparent wireframe over the view
-hi कोने में मिनीमैप मैप को ऊपर-दाएँ रखता है; मध्य ओवरले दृश्य के ऊपर पारदर्शी वायरफ़्रेम दिखाता है
+@ Framed panel centers the map in a dark box on the statistics screen; Center overlay floats a transparent wireframe over the view
+hi फ़्रेम किया गया पैनल आँकड़ा स्क्रीन पर नक्शे को गहरे बॉक्स में केंद्रित रखता है; सेंटर ओवरले दृश्य के ऊपर पारदर्शी वायरफ़्रेम दिखाता है
 
 @ Disabled while Weapon Auto-Switch is set to Never
 hi जब हथियार ऑटो-स्विच 'कभी नहीं' पर सेट हो तो अक्षम रहता है
@@ -2337,8 +2337,11 @@ hi ऑटोमैप रेखाओं और पैनल की अपार
 @ Rotates the automap so your facing direction points up; off keeps North at the top
 hi ऑटोमैप को घुमाता है ताकि आपकी देखने की दिशा ऊपर रहे; बंद रहने पर उत्तर ऊपर रहता है
 
-@ Shows a live 3D wireframe or top-down automap while playing; press M for the interactive full-screen map (single player and co-op only)
-hi खेलते समय लाइव 3D वायरफ़्रेम या ऊपर से ऑटोमैप दिखाता है; इंटरैक्टिव फ़ुल-स्क्रीन मैप के लिए M दबाएँ (केवल सिंगल प्लेयर और को-ऑप)
+@ Shows a 3D wireframe or top-down automap on the statistics screen (Tab/Select); add Automap in Edit HUD to keep it on screen, or press M for the full-screen map (single player and co-op only)
+hi आँकड़ा स्क्रीन (Tab/Select) पर 3D वायरफ़्रेम या टॉप-डाउन ऑटोमैप दिखाता है; इसे हमेशा स्क्रीन पर रखने के लिए Edit HUD में ऑटोमैप जोड़ें, या फ़ुल-स्क्रीन मानचित्र के लिए M दबाएँ (केवल सिंगल प्लेयर और को-ऑप)
+
+@ Shows a live 3D wireframe or top-down automap on the HUD at all times (single player and co-op only)
+hi HUD पर हमेशा लाइव 3D वायरफ़्रेम या टॉप-डाउन ऑटोमैप दिखाता है (केवल सिंगल प्लेयर और को-ऑप)
 
 @ When picking up a weapon: Never keeps your current weapon; Better weapon switches only if it ranks higher in Weapon Priority
 hi हथियार उठाने पर: 'कभी नहीं' वर्तमान हथियार रखता है; 'बेहतर हथियार' तभी बदलता है जब हथियार प्राथमिकता में उसका स्थान ऊपर हो

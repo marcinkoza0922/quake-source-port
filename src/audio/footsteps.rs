@@ -1,6 +1,6 @@
 //! Optional client-side surface-aware footsteps (`s_footsteps`, `s_footsteps_volume`).
 //! Detects grounded movement and landings per local player (including split-screen),
-//! classifies the floor texture via `hitfx::classify`, and plays synthesized cues.
+//! classifies the floor texture via `hitfx::classify`, and plays CC0 recorded cues.
 
 use std::sync::Arc;
 
@@ -219,12 +219,22 @@ fn detect_floor(world: &BspWorld<'_>, origin: Vec3) -> Option<FootstepSurface> {
         return None;
     }
 
-    let start = Vec3::new(origin.x, origin.y, origin.z - FEET_OFFSET + 8.0);
-    let end = Vec3::new(origin.x, origin.y, origin.z - FEET_OFFSET - 5.0);
-    let tr = world.trace_line(start, end);
-    if tr.frac >= 1.0 || tr.normal.z < 0.7 {
-        return None;
+    let mut best: Option<qpart::Trace> = None;
+    for (dx, dy) in [(0.0, 0.0), (10.0, 10.0), (-10.0, 10.0), (10.0, -10.0), (-10.0, -10.0)] {
+        let start = Vec3::new(origin.x + dx, origin.y + dy, origin.z - FEET_OFFSET + 8.0);
+        let end = Vec3::new(origin.x + dx, origin.y + dy, origin.z - FEET_OFFSET - 5.0);
+        let tr = world.trace_line(start, end);
+        if tr.frac < 1.0 && tr.normal.z >= 0.7 {
+            if dx == 0.0 && dy == 0.0 {
+                best = Some(tr);
+                break;
+            }
+            if best.is_none_or(|b| tr.frac < b.frac) {
+                best = Some(tr);
+            }
+        }
     }
+    let tr = best?;
     let mat = crate::impacts::surfaces::texture_at(world, &tr)
         .map_or(Material::Stone, |t| crate::hitfx::classify(&t.name));
     Some(match mat {
@@ -236,4 +246,47 @@ fn detect_floor(world: &BspWorld<'_>, origin: Vec3) -> Option<FootstepSurface> {
         Material::Lava => FootstepSurface::Lava,
         Material::Stone | Material::None => FootstepSurface::Stone,
     })
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn classifies_quake_metallic_and_dirt_floor_textures() {
+        for name in [
+            "sfloor4_2", "sfloor4_5", "sfloor1_1", "ecop1_1", "cop1_1", "wizmet1_2", "wmet4_8",
+            "met5_1", "metflor1_2", "metflr1_1", "twall2_6", "tech04_1", "+0basebtn", "+0floorsw",
+        ] {
+            assert_eq!(crate::hitfx::classify(name), Material::Metal, "{name}");
+        }
+        for name in ["ground1_2", "ground1_6", "wgrnd1_6"] {
+            assert_eq!(crate::hitfx::classify(name), Material::Dirt, "{name}");
+        }
+        for name in ["wizwood1_5", "woodflr1_4", "crate0_top", "door03_2"] {
+            assert_eq!(crate::hitfx::classify(name), Material::Wood, "{name}");
+        }
+        for name in ["uwall1_2", "city4_7", "rock4_1", "azfloor1_1", "wbrick1_5"] {
+            assert_eq!(crate::hitfx::classify(name), Material::Stone, "{name}");
+        }
+    }
+
+    #[test]
+    fn detects_metal_floor_at_e1m1_spawn() {
+        let dir = std::env::var_os("QUAKE_BASEDIR")
+            .map(std::path::PathBuf::from)
+            .unwrap_or_else(|| std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("vkQuake directory with maps"));
+        if !dir.join("id1").is_dir() {
+            return;
+        }
+        let mut fs = qcore::fs::Fs::new(&dir);
+        fs.add_game_dir("id1");
+        let bytes = fs.open("maps/e1m1.bsp").expect("e1m1.bsp");
+        let bsp = qformats::Bsp::parse(&bytes).expect("parse e1m1");
+        let cm = qworld::CollisionModel::from_bsp(&bsp);
+        let world = BspWorld { bsp: &bsp, cm: &cm, ents: &[] };
+        // E1M1 info_player_start is at (480, -352, 88), standing on the sfloor4_2 riveted metal floor.
+        let surf = detect_floor(&world, Vec3::new(480.0, -352.0, 88.0));
+        assert_eq!(surf, Some(FootstepSurface::Metal));
+    }
 }

@@ -1697,8 +1697,8 @@ mk Подобро оружје
 @ Center overlay
 mk Преклоп во центар
 
-@ Corner minimap
-mk Минимапа во агол
+@ Framed panel
+mk Панел во рамка
 
 @ Display
 mk Приказ
@@ -2289,11 +2289,11 @@ mk Бинаурален 3D звук за слушалки со задоцнув�
 @ Muffles and quiets sounds coming from behind solid walls and closed doors
 mk Ги пригушува и стишува звуците зад цврсти ѕидови и затворени врати
 
-@ Plays synthesized player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
-mk Пушта синтетизирани чекори и приземјувања за камен, метал, дрво, земја и течности
+@ Plays player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
+mk Репродуцира чекори и доскоци на играчот усогласени со камен, метал, дрво, земја и течни подлоги
 
-@ Volume of synthesized player footsteps and landings
-mk Јачина на синтетизираните чекори и приземјувања на играчот
+@ Volume of player footsteps and landings
+mk Јачина на звук за чекори и доскоци на играчот
 
 @ Seconds to smoothly fade between music tracks; 0 cuts immediately
 mk Секунди за мазно претопување меѓу музички нумери; 0 менува веднаш
@@ -2319,8 +2319,8 @@ mk Подредете го приоритетот на оружјата за а�
 @ Configure the 3D wireframe automap view, display, reveal mode, zoom and markers
 mk Поставете го приказот, изгледот, режимот на откривање, зумот и маркерите на 3D жичената автомапа
 
-@ Corner minimap frames the map in the top-right; Center overlay floats a transparent wireframe over the view
-mk Минимапа во агол ја врамува мапата горе десно; Преклоп во центар поставува проѕирен жичен модел преку погледот
+@ Framed panel centers the map in a dark box on the statistics screen; Center overlay floats a transparent wireframe over the view
+mk Панелот во рамка ја центрира мапата во темна кутија на екранот со статистика; централното преклопување прикажува проѕирна жичена мрежа врз погледот
 
 @ Disabled while Weapon Auto-Switch is set to Never
 mk Оневозможено додека Автоматска промена на оружје е поставено на Никогаш
@@ -2337,8 +2337,11 @@ mk Непроѕирност на линиите и панелот на авто�
 @ Rotates the automap so your facing direction points up; off keeps North at the top
 mk Ја ротира автомапата така што насоката на гледање покажува нагоре; исклучено го држи северот горе
 
-@ Shows a live 3D wireframe or top-down automap while playing; press M for the interactive full-screen map (single player and co-op only)
-mk Прикажува жива 3D жичена или автомапа одозгора додека играте; притиснете M за интерактивна мапа на цел екран (само за еден играч и кооп)
+@ Shows a 3D wireframe or top-down automap on the statistics screen (Tab/Select); add Automap in Edit HUD to keep it on screen, or press M for the full-screen map (single player and co-op only)
+mk Прикажува 3D жичена или горна автомапа на екранот со статистика (Tab/Select); додадете Автомапа во уредникот на HUD за постојан приказ или притиснете M за мапа на цел екран (само еден играч и кооп)
+
+@ Shows a live 3D wireframe or top-down automap on the HUD at all times (single player and co-op only)
+mk Постојано прикажува 3D жичена или горна автомапа во живо на HUD (само еден играч и кооп)
 
 @ When picking up a weapon: Never keeps your current weapon; Better weapon switches only if it ranks higher in Weapon Priority
 mk При земање оружје: Никогаш го задржува тековното оружје; Подобро оружје менува само ако е повисоко во Приоритет на оружја

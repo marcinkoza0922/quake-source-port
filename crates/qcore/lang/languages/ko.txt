@@ -1697,8 +1697,8 @@ ko 더 좋은 무기
 @ Center overlay
 ko 중앙 오버레이
 
-@ Corner minimap
-ko 모서리 미니맵
+@ Framed panel
+ko 프레임 패널
 
 @ Display
 ko 표시 방식
@@ -2289,11 +2289,11 @@ ko 귀 시간차, 머리 그림자, 앞/뒤/높이 단서를 제공하는 헤드
 @ Muffles and quiets sounds coming from behind solid walls and closed doors
 ko 단단한 벽과 닫힌 문 너머에서 들리는 소리를 먹먹하고 작게 만듭니다
 
-@ Plays synthesized player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
-ko 돌, 금속, 나무, 흙, 액체 바닥에 맞춘 합성 발소리와 착지음을 재생합니다
+@ Plays player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
+ko 돌, 금속, 나무, 흙, 액체 바닥에 맞는 플레이어 발소리와 착지음을 재생합니다
 
-@ Volume of synthesized player footsteps and landings
-ko 합성된 플레이어 발소리 및 착지음 볼륨
+@ Volume of player footsteps and landings
+ko 플레이어 발소리와 착지음 볼륨
 
 @ Seconds to smoothly fade between music tracks; 0 cuts immediately
 ko 음악 트랙 사이를 부드럽게 페이드하는 시간(초); 0은 즉시 전환
@@ -2319,8 +2319,8 @@ ko '더 좋은 무기' 자동 전환에 사용할 무기 우선순위 순서를 
 @ Configure the 3D wireframe automap view, display, reveal mode, zoom and markers
 ko 3D 와이어프레임 오토맵의 보기, 표시 방식, 공개 범위, 확대/축소 및 마커를 설정합니다
 
-@ Corner minimap frames the map in the top-right; Center overlay floats a transparent wireframe over the view
-ko 모서리 미니맵은 오른쪽 위에 맵을 배치하고, 중앙 오버레이는 화면 위에 반투명 와이어프레임을 띄웁니다
+@ Framed panel centers the map in a dark box on the statistics screen; Center overlay floats a transparent wireframe over the view
+ko 프레임 패널은 통계 화면 중앙의 어두운 상자에 지도를 표시하며, 중앙 오버레이는 화면 위에 반투명 와이어프레임을 띄웁니다
 
 @ Disabled while Weapon Auto-Switch is set to Never
 ko 무기 자동 전환이 '사용 안 함'일 때는 비활성화됩니다
@@ -2337,8 +2337,11 @@ ko 오토맵 선과 패널의 불투명도
 @ Rotates the automap so your facing direction points up; off keeps North at the top
 ko 바라보는 방향이 위쪽을 향하도록 오토맵을 회전합니다. 끄면 북쪽이 위에 고정됩니다
 
-@ Shows a live 3D wireframe or top-down automap while playing; press M for the interactive full-screen map (single player and co-op only)
-ko 플레이 중 실시간 3D 와이어프레임 또는 탑다운 오토맵을 표시합니다. M 키를 누르면 대화형 전체 화면 맵이 열립니다 (싱글 플레이 및 협동 전용)
+@ Shows a 3D wireframe or top-down automap on the statistics screen (Tab/Select); add Automap in Edit HUD to keep it on screen, or press M for the full-screen map (single player and co-op only)
+ko 통계 화면(Tab/Select)에서 3D 와이어프레임 또는 탑다운 자동 지도를 표시합니다. 항상 표시하려면 HUD 편집에서 자동 지도를 추가하고, M 키로 전체 화면 지도를 엽니다(싱글 플레이 및 협동 전용)
+
+@ Shows a live 3D wireframe or top-down automap on the HUD at all times (single player and co-op only)
+ko HUD에 실시간 3D 와이어프레임 또는 탑다운 자동 지도를 항상 표시합니다(싱글 플레이 및 협동 전용)
 
 @ When picking up a weapon: Never keeps your current weapon; Better weapon switches only if it ranks higher in Weapon Priority
 ko 무기를 주웠을 때: '사용 안 함'은 현재 무기를 유지하고, '더 좋은 무기'는 무기 우선순위가 더 높을 때만 바꿉니다

@@ -1697,8 +1697,8 @@ fil Mas magandang armas
 @ Center overlay
 fil Overlay sa gitna
 
-@ Corner minimap
-fil Minimap sa sulok
+@ Framed panel
+fil Naka-frame na panel
 
 @ Display
 fil Pagpapakita
@@ -2289,11 +2289,11 @@ fil 3D binaural spatialization para sa headphones na may oras ng tainga, anino n
 @ Muffles and quiets sounds coming from behind solid walls and closed doors
 fil Pinapahina at pinapalamig ang mga tunog sa likod ng matibay na pader at nakasarang pinto
 
-@ Plays synthesized player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
-fil Nagpapatugtog ng sintetikong hakbang at paglapag para sa bato, metal, kahoy, lupa at likido
+@ Plays player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
+fil Nagpapatugtog ng mga yabag at paglapag ng manlalaro na tugma sa bato, metal, kahoy, lupa at likidong sahig
 
-@ Volume of synthesized player footsteps and landings
-fil Lakas ng sintetikong hakbang at paglapag ng manlalaro
+@ Volume of player footsteps and landings
+fil Lakas ng tunog ng mga yabag at paglapag ng manlalaro
 
 @ Seconds to smoothly fade between music tracks; 0 cuts immediately
 fil Segundo ng maayos na paglipat sa pagitan ng mga tugtog; 0 ang agarang palit
@@ -2319,8 +2319,8 @@ fil Ayusin ang pagkakasunod-sunod ng prayoridad ng armas para sa awtomatikong pa
 @ Configure the 3D wireframe automap view, display, reveal mode, zoom and markers
 fil I-configure ang tanaw ng 3D wireframe automap, pagpapakita, mode ng pagpapakita ng mapa, zoom at mga pananda
 
-@ Corner minimap frames the map in the top-right; Center overlay floats a transparent wireframe over the view
-fil Inilalagay ng Minimap sa sulok ang mapa sa kanang itaas; nagpapalutang ang Overlay sa gitna ng malinaw na wireframe sa ibabaw ng tanaw
+@ Framed panel centers the map in a dark box on the statistics screen; Center overlay floats a transparent wireframe over the view
+fil Inilalagay ng naka-frame na panel ang mapa sa gitna sa madilim na kahon sa screen ng estadistika; ang gitnang overlay ay nagpapakita ng malinaw na wireframe sa ibabaw ng tanawin
 
 @ Disabled while Weapon Auto-Switch is set to Never
 fil Naka-disable habang nakatakda sa Huwag kailanman ang Auto-Palit ng Armas
@@ -2337,8 +2337,11 @@ fil Opacity ng mga linya at panel ng automap
 @ Rotates the automap so your facing direction points up; off keeps North at the top
 fil Iniikot ang automap upang nakaturo pataas ang direksyon ng tingin mo; pinananatiling nasa itaas ang hilaga kapag naka-off
 
-@ Shows a live 3D wireframe or top-down automap while playing; press M for the interactive full-screen map (single player and co-op only)
-fil Nagpapakita ng live na 3D wireframe o tanaw mula itaas na automap habang naglalaro; pindutin ang M para sa interaktibong full-screen na mapa (single player at co-op lang)
+@ Shows a 3D wireframe or top-down automap on the statistics screen (Tab/Select); add Automap in Edit HUD to keep it on screen, or press M for the full-screen map (single player and co-op only)
+fil Nagpapakita ng 3D wireframe o top-down na automap sa screen ng estadistika (Tab/Select); magdagdag ng Automap sa Edit HUD upang manatili ito sa screen, o pindutin ang M para sa full-screen na mapa (single player at co-op lamang)
+
+@ Shows a live 3D wireframe or top-down automap on the HUD at all times (single player and co-op only)
+fil Nagpapakita ng live na 3D wireframe o top-down na automap sa HUD sa lahat ng oras (single player at co-op lamang)
 
 @ When picking up a weapon: Never keeps your current weapon; Better weapon switches only if it ranks higher in Weapon Priority
 fil Kapag dumampot ng armas: pinananatili ng Huwag kailanman ang kasalukuyan mong armas; lilipat lang ang Mas magandang armas kung mas mataas ito sa Prayoridad ng Armas

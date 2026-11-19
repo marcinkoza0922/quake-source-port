@@ -1697,8 +1697,8 @@ he נשק טוב יותר
 @ Center overlay
 he שכבת-על במרכז
 
-@ Corner minimap
-he מיני-מפה בפינה
+@ Framed panel
+he חלונית ממוסגרת
 
 @ Display
 he תצוגה
@@ -2289,11 +2289,11 @@ he מיקום שמע תלת-ממדי לאוזניות עם הפרשי זמן ב�
 @ Muffles and quiets sounds coming from behind solid walls and closed doors
 he מעמעם ומנמיך צלילים המגיעים מאחורי קירות מוצקים ודלתות סגורות
 
-@ Plays synthesized player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
-he משמיע צעדי שחקן ונחיתות מסונתזים המתאימים לאבן, מתכת, עץ, עפר ונוזלים
+@ Plays player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
+he משמיע צעדים ונחיתות של השחקן בהתאם למשטחי אבן, מתכת, עץ, עפר ונוזלים
 
-@ Volume of synthesized player footsteps and landings
-he עוצמת הצעדים והנחיתות המסונתזים של השחקן
+@ Volume of player footsteps and landings
+he עוצמת הקול של צעדי השחקן והנחיתות
 
 @ Seconds to smoothly fade between music tracks; 0 cuts immediately
 he שניות למעבר חלק בין רצועות מוזיקה; 0 מחליף מיד
@@ -2319,8 +2319,8 @@ he סדר את עדיפות הנשקים עבור החלפה אוטומטית ל
 @ Configure the 3D wireframe automap view, display, reveal mode, zoom and markers
 he הגדר את מצב התצוגה, החשיפה, התקריב והסמנים של המפה האוטומטית התלת-ממדית
 
-@ Corner minimap frames the map in the top-right; Center overlay floats a transparent wireframe over the view
-he מיני-מפה בפינה ממסגרת את המפה למעלה מימין; שכבת-על במרכז מציגה רשת תיל שקופה מעל התצוגה
+@ Framed panel centers the map in a dark box on the statistics screen; Center overlay floats a transparent wireframe over the view
+he חלונית ממוסגרת ממרכזת את המפה בתיבה כהה במסך הסטטיסטיקה; שכבת מרכז מציגה תיל שקוף מעל התצוגה
 
 @ Disabled while Weapon Auto-Switch is set to Never
 he מושבת כאשר החלפת נשק אוטומטית מוגדרת ללעולם לא
@@ -2337,8 +2337,11 @@ he אטימות הקווים והלוח של המפה האוטומטית
 @ Rotates the automap so your facing direction points up; off keeps North at the top
 he מסובב את המפה האוטומטית כך שכיוון המבט שלך פונה למעלה; כבוי שומר את הצפון למעלה
 
-@ Shows a live 3D wireframe or top-down automap while playing; press M for the interactive full-screen map (single player and co-op only)
-he מציג מפה אוטומטית חיה בתיל תלת-ממדי או מבט-על בזמן משחק; לחץ M למפה אינטראקטיבית במסך מלא (משחק יחיד ושיתופי בלבד)
+@ Shows a 3D wireframe or top-down automap on the statistics screen (Tab/Select); add Automap in Edit HUD to keep it on screen, or press M for the full-screen map (single player and co-op only)
+he מציג מפה אוטומטית תלת-ממדית או עילית במסך הסטטיסטיקה (Tab/Select); הוסף מפה בעורך ה-HUD כדי להציג אותה תמיד, או לחץ M למפה במסך מלא (שחקן יחיד ושיתוף פעולה בלבד)
+
+@ Shows a live 3D wireframe or top-down automap on the HUD at all times (single player and co-op only)
+he מציג מפה אוטומטית חיה בתלת-ממד או במבט על ב-HUD בכל עת (שחקן יחיד ושיתוף פעולה בלבד)
 
 @ When picking up a weapon: Never keeps your current weapon; Better weapon switches only if it ranks higher in Weapon Priority
 he בעת איסוף נשק: לעולם לא שומר על הנשק הנוכחי; נשק טוב יותר מחליף רק אם דירוגו גבוה יותר בעדיפות הנשקים

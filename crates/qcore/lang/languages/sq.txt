@@ -1697,8 +1697,8 @@ sq Armë më e mirë
 @ Center overlay
 sq Mbivendosje në qendër
 
-@ Corner minimap
-sq Miniharta në kënd
+@ Framed panel
+sq Panel me kornizë
 
 @ Display
 sq Shfaqja
@@ -2289,11 +2289,11 @@ sq Hapësirësim binaural 3D për kufje me vonesë veshësh, hije koke dhe orien
 @ Muffles and quiets sounds coming from behind solid walls and closed doors
 sq Mbyt dhe ul zërat që vijnë pas mureve të plota dhe dyerve të mbyllura
 
-@ Plays synthesized player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
-sq Luan hapa dhe ulje të sintetizuara sipas dyshemesë prej guri, metali, druri, dheu dhe lëngu
+@ Plays player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
+sq Luan hapat dhe uljet e lojtarit sipas dyshemeve prej guri, metali, druri, dheu dhe lëngjesh
 
-@ Volume of synthesized player footsteps and landings
-sq Volumi i hapave dhe uljeve të sintetizuara të lojtarit
+@ Volume of player footsteps and landings
+sq Volumi i hapave dhe uljeve të lojtarit
 
 @ Seconds to smoothly fade between music tracks; 0 cuts immediately
 sq Sekonda për kalim të butë mes këngëve; 0 ndërron menjëherë
@@ -2319,8 +2319,8 @@ sq Rendit prioritetin e armëve për ndërrimin automatik te Armë më e mirë
 @ Configure the 3D wireframe automap view, display, reveal mode, zoom and markers
 sq Konfiguro pamjen, shfaqjen, mënyrën e zbulimit, zmadhimin dhe shënjuesit e autohartës 3D
 
-@ Corner minimap frames the map in the top-right; Center overlay floats a transparent wireframe over the view
-sq Miniharta në kënd e vendos hartën lart djathtas; Mbivendosja në qendër vendos një rrjetë të tejdukshme mbi pamjen
+@ Framed panel centers the map in a dark box on the statistics screen; Center overlay floats a transparent wireframe over the view
+sq Paneli me kornizë e vendos hartën në qendër në një kuti të errët në ekranin e statistikave; mbivendosja qendrore shfaq një rrjetë transparente mbi pamjen
 
 @ Disabled while Weapon Auto-Switch is set to Never
 sq Çaktivizuar kur Ndërrim automatik i armës është vendosur në Kurrë
@@ -2337,8 +2337,11 @@ sq Opaciteti i vijave dhe panelit të autohartës
 @ Rotates the automap so your facing direction points up; off keeps North at the top
 sq Rrotullon autohartën që drejtimi i shikimit tuaj të tregojë lart; joaktiv e mban Veriun lart
 
-@ Shows a live 3D wireframe or top-down automap while playing; press M for the interactive full-screen map (single player and co-op only)
-sq Shfaq një autohartë të gjallë me rrjetë 3D ose nga lart gjatë lojës; shtyp M për hartën interaktive në ekran të plotë (vetëm për një lojtar dhe bashkëpunim)
+@ Shows a 3D wireframe or top-down automap on the statistics screen (Tab/Select); add Automap in Edit HUD to keep it on screen, or press M for the full-screen map (single player and co-op only)
+sq Shfaq autohartë 3D ose nga lart në ekranin e statistikave (Tab/Select); shtoni Autohartën te Ndrysho HUD për ta mbajtur në ekran ose shtypni M për hartën me ekran të plotë (vetëm një lojtar dhe bashkëpunim)
+
+@ Shows a live 3D wireframe or top-down automap on the HUD at all times (single player and co-op only)
+sq Shfaq vazhdimisht një autohartë të drejtpërdrejtë 3D ose nga lart në HUD (vetëm një lojtar dhe bashkëpunim)
 
 @ When picking up a weapon: Never keeps your current weapon; Better weapon switches only if it ranks higher in Weapon Priority
 sq Kur merr një armë: Kurrë mban armën aktuale; Armë më e mirë ndërron vetëm nëse renditet më lart te Prioriteti i armëve

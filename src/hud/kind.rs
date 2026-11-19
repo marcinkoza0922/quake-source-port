@@ -33,6 +33,7 @@ pub enum Kind {
     Ram,
     Gpu,
     Vram,
+    Automap,
     Center,
     Notify,
     Captions,
@@ -136,6 +137,15 @@ const COUNT_OPTS: &[Opt] = &[opt("Show As", Field::A, Values::Choice(COUNT))];
 const CENTER_OPTS: &[Opt] = &[opt("Center Message Time", Field::Cvar("scr_centertime"), Values::Range(1.0, 10.0, 1.0))];
 const NOTIFY_OPTS: &[Opt] = &[opt("Notify Message Time", Field::Cvar("con_notifytime"), Values::Range(1.0, 10.0, 1.0))];
 const CAPTION_OPTS: &[Opt] = &[opt("Sound Captions", Field::Cvar("cl_captions"), Values::Choice(ON_OFF))];
+const AUTOMAP_VIEW: &[(&str, f32)] = &[("3D wireframe", 0.0), ("Top-down", 1.0)];
+const AUTOMAP_REVEAL: &[(&str, f32)] = &[("Explored only", 0.0), ("Full map", 1.0)];
+const AUTOMAP_OPTS: &[Opt] = &[
+    opt("View Mode", Field::Cvar("cl_automap_view"), Values::Choice(AUTOMAP_VIEW)),
+    opt("Rotate with Player", Field::Cvar("cl_automap_rotate"), Values::Choice(ON_OFF)),
+    opt("Reveal", Field::Cvar("cl_automap_reveal"), Values::Choice(AUTOMAP_REVEAL)),
+    opt("Zoom", Field::Cvar("cl_automap_zoom"), Values::Range(0.5, 3.0, 0.25)),
+    opt("Show Markers", Field::Cvar("cl_automap_markers"), Values::Choice(ON_OFF)),
+];
 
 /// Menu categories of the Add Element tree; the messages are always there.
 pub const CATEGORIES: &[(&str, &[Kind])] = &[
@@ -145,15 +155,16 @@ pub const CATEGORIES: &[(&str, &[Kind])] = &[
     ("Classic", &[Kind::StatusBar]),
     ("Time & Stats", &[Kind::Clock, Kind::Timer, Kind::Pb, Kind::Kills, Kind::Secrets]),
     ("Performance Metrics", &[Kind::Fps, Kind::FrameTime, Kind::Cpu, Kind::Ram, Kind::Gpu, Kind::Vram]),
+    ("Automap", &[Kind::Automap]),
 ];
 
 impl Kind {
-    pub const ALL: [Kind; 32] = [
+    pub const ALL: [Kind; 33] = [
         Kind::Health, Kind::Armor, Kind::Face, Kind::HealthBar, Kind::ArmorBar, Kind::Ammo, Kind::AmmoBar,
         Kind::AmmoList, Kind::Shells, Kind::Nails, Kind::Rockets, Kind::Cells, Kind::Weapons, Kind::Items,
         Kind::Keys, Kind::Powerups, Kind::Sigils, Kind::StatusBar, Kind::Clock, Kind::Timer, Kind::Pb,
         Kind::Kills, Kind::Secrets, Kind::Fps, Kind::FrameTime, Kind::Cpu, Kind::Ram, Kind::Gpu, Kind::Vram,
-        Kind::Center, Kind::Notify, Kind::Captions,
+        Kind::Automap, Kind::Center, Kind::Notify, Kind::Captions,
     ];
     /// Always in the layout: they can be moved but not removed.
     pub const PERMANENT: [Kind; 3] = [Kind::Center, Kind::Notify, Kind::Captions];
@@ -190,6 +201,7 @@ impl Kind {
             Ram => "ram",
             Gpu => "gpu",
             Vram => "vram",
+            Automap => "automap",
             Center => "center",
             Notify => "notify",
             Captions => "captions",
@@ -233,6 +245,7 @@ impl Kind {
             Ram => "Memory Usage",
             Gpu => "GPU Time",
             Vram => "Video Memory",
+            Automap => "Automap",
             Center => "Center Message",
             Notify => "Notify Messages",
             Captions => "Sound Captions",
@@ -247,7 +260,7 @@ impl Kind {
     /// death, drawn per player in split screen, may fade (immersive).
     pub fn is_player(self) -> bool {
         use Kind::*;
-        !matches!(self, Clock | Timer | Pb | Kills | Secrets | Fps | FrameTime | Cpu | Ram | Gpu | Vram | Center | Notify | Captions)
+        !matches!(self, Clock | Timer | Pb | Kills | Secrets | Fps | FrameTime | Cpu | Ram | Gpu | Vram | Automap | Center | Notify | Captions)
     }
 
     pub fn is_metric(self) -> bool {
@@ -273,7 +286,7 @@ impl Kind {
         use Kind::*;
         if self.is_number() {
             &[Font::Big, Font::Quake, Font::Modern]
-        } else if matches!(self, Face | Weapons | Items | Keys | Powerups | Sigils | StatusBar) || self.is_message() {
+        } else if matches!(self, Face | Weapons | Items | Keys | Powerups | Sigils | StatusBar | Automap) || self.is_message() {
             &[]
         } else {
             &[Font::Quake, Font::Modern]
@@ -312,7 +325,7 @@ impl Kind {
     }
 
     pub fn has_background(self) -> bool {
-        !self.fonts().is_empty() && !self.is_number() || matches!(self, Kind::Center | Kind::Notify)
+        !self.fonts().is_empty() && !self.is_number() || matches!(self, Kind::Center | Kind::Notify | Kind::Automap)
     }
 
     pub fn opts(self) -> &'static [Opt] {
@@ -327,6 +340,7 @@ impl Kind {
             Timer => TIMER_OPTS,
             Pb => PB_OPTS,
             Kills | Secrets => COUNT_OPTS,
+            Automap => AUTOMAP_OPTS,
             Center => CENTER_OPTS,
             Notify => NOTIFY_OPTS,
             Captions => CAPTION_OPTS,
@@ -347,6 +361,7 @@ impl Kind {
             Kind::Ram => "Memory the game uses",
             Kind::Gpu => "Graphics card time per frame in milliseconds",
             Kind::Vram => "Video memory in use and what the driver allows, where it reports it",
+            Kind::Automap => "Shows a live 3D wireframe or top-down automap on the HUD at all times (single player and co-op only)",
             Kind::Captions => "Shows text for important sounds: doors, alerted enemies, secrets, pickups",
             _ => return None,
         })

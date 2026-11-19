@@ -2,8 +2,9 @@
 //!
 //! Builds a clean architectural wireframe from the loaded BSP world model
 //! (removing coplanar BSP split seams and sky ceilings), tracks explored PVS
-//! areas as the player moves, and renders either a live HUD corner minimap /
-//! center overlay or a full-screen interactive 3D orbitable wireframe map.
+//! areas as the player moves, and renders on the statistics screen (Tab/Select),
+//! as an optional always-on HUD editor widget, or as a full-screen interactive
+//! 3D orbitable wireframe map (`M`).
 
 use qcore::cvar::Cvars;
 use qcore::math::Vec3;
@@ -15,6 +16,7 @@ use crate::glyphs::Glyphs;
 pub mod draw;
 pub mod input;
 pub mod mesh;
+mod widget;
 
 pub use draw::HeaderInfo;
 use draw::Settings;
@@ -150,7 +152,7 @@ impl Automap {
         self.cam_pitch = 38.0;
     }
 
-    /// Renders either the interactive fullscreen map or the live HUD automap.
+    /// Renders either the interactive fullscreen map or the statistics-screen automap.
     #[allow(clippy::too_many_arguments)]
     pub fn draw(
         &self,
@@ -158,6 +160,7 @@ impl Automap {
         cv: &Cvars,
         player_pos: Vec3,
         player_yaw: f32,
+        top_reserve: f32,
         reserve_bottom: f32,
         header: HeaderInfo<'_>,
         pad_ui: bool,
@@ -185,7 +188,23 @@ impl Automap {
                 glyphs,
             );
         } else {
-            draw::draw_hud(c, mesh, &self.explored, &self.trail, player_pos, player_yaw, set, reserve_bottom);
+            draw::draw_scores(c, mesh, &self.explored, &self.trail, player_pos, player_yaw, set, top_reserve, reserve_bottom);
+        }
+    }
+
+    /// Renders the live automap inside a HUD editor widget box `(0..w, 0..h)`.
+    pub fn draw_widget(&self, c: &mut Canvas, size: (f32, f32), player_pos: Vec3, player_yaw: f32, set: Settings, framed: bool) {
+        if let Some(mesh) = &self.mesh {
+            widget::draw_widget(c, mesh, &self.explored, &self.trail, size, player_pos, player_yaw, set, framed);
+        }
+    }
+
+    /// Renders the HUD editor preview (real level if loaded, else sample wireframe).
+    pub fn draw_widget_preview(&self, c: &mut Canvas, size: (f32, f32), player_pos: Vec3, player_yaw: f32, set: Settings, framed: bool) {
+        if let Some(mesh) = &self.mesh {
+            widget::draw_widget(c, mesh, &self.explored, &self.trail, size, player_pos, player_yaw, set, framed);
+        } else {
+            widget::draw_sample_widget(c, size, set, framed);
         }
     }
 }
@@ -336,5 +355,31 @@ mod tests {
         assert!(am.fs_top_down);
         am.key(qinput::keys::K_ESCAPE, true, Vec3::ZERO, 0.0);
         assert!(!am.fullscreen);
+    }
+
+    #[test]
+    fn scores_and_widget_draw_without_overlapping_top_scorebar() {
+        let bsp = synthetic_room_bsp();
+        let mut am = Automap::default();
+        am.sync_level("test", Some(&bsp));
+        am.track_player(Some(&bsp), Vec3::new(0.0, 0.0, 16.0));
+        let set = Settings { enabled: true, ..Settings::default() };
+
+        // Statistics-screen framed panel stays below the 24px top scorebar (top_reserve = 30).
+        let mut c = Canvas::new(1280, 720);
+        draw::draw_scores(&mut c, am.mesh.as_ref().unwrap(), &am.explored, &am.trail, Vec3::ZERO, 0.0, set, 30.0, 0.0);
+        assert!(!c.list.is_empty());
+        let min_y = c.list.iter().filter_map(|d| match *d {
+            qrender::Draw2D::Fill { y, .. } => Some(y / c.scale),
+            qrender::Draw2D::Line { y0, y1, .. } => Some(y0.min(y1) / c.scale),
+            _ => None,
+        }).fold(f32::INFINITY, f32::min);
+        assert!(min_y >= 29.0, "statistics automap overlapped top scorebar: min_y={min_y}");
+
+        // HUD editor preview works even when no map is loaded.
+        let empty = Automap::default();
+        let mut c2 = Canvas::new(1280, 720);
+        empty.draw_widget_preview(&mut c2, (120.0, 88.0), Vec3::ZERO, 0.0, set, true);
+        assert!(c2.list.iter().any(|d| matches!(d, qrender::Draw2D::Line { .. })));
     }
 }

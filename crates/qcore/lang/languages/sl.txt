@@ -1697,8 +1697,8 @@ sl Boljše orožje
 @ Center overlay
 sl Sredinsko prekrivanje
 
-@ Corner minimap
-sl Kotni minizemljevid
+@ Framed panel
+sl Okvirjena plošča
 
 @ Display
 sl Prikaz
@@ -2289,11 +2289,11 @@ sl Binavralni 3D prostorski zvok za slušalke z zakasnitvijo ušes, senco glave 
 @ Muffles and quiets sounds coming from behind solid walls and closed doors
 sl Zaduši in utiša zvoke za polnimi stenami in zaprtimi vrati
 
-@ Plays synthesized player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
-sl Predvaja sintetizirane korake in pristanke za kamen, kovino, les, zemljo in tekočine
+@ Plays player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
+sl Predvaja korake in pristanke igralca glede na kamnito, kovinsko, leseno, zemljato in tekočo podlago
 
-@ Volume of synthesized player footsteps and landings
-sl Glasnost sintetiziranih korakov in pristankov igralca
+@ Volume of player footsteps and landings
+sl Glasnost korakov in pristankov igralca
 
 @ Seconds to smoothly fade between music tracks; 0 cuts immediately
 sl Sekunde za gladko prelivanje med skladbami; 0 preklopi takoj
@@ -2319,8 +2319,8 @@ sl Razvrstite prednostni vrstni red orožij za samodejno menjavo na Boljše oro�
 @ Configure the 3D wireframe automap view, display, reveal mode, zoom and markers
 sl Nastavite pogled, prikaz, način razkritja, povečavo in oznake 3D žičnega samodejnega zemljevida
 
-@ Corner minimap frames the map in the top-right; Center overlay floats a transparent wireframe over the view
-sl Kotni minizemljevid uokviri zemljevid zgoraj desno; Sredinsko prekrivanje prikaže prosojen žični model čez pogled
+@ Framed panel centers the map in a dark box on the statistics screen; Center overlay floats a transparent wireframe over the view
+sl Okvirjena plošča centrira zemljevid v temnem okviru na zaslonu statistike; sredinski sloj prikaže prosojno žično mrežo čez pogled
 
 @ Disabled while Weapon Auto-Switch is set to Never
 sl Onemogočeno, dokler je Samodejna menjava orožja nastavljena na Nikoli
@@ -2337,8 +2337,11 @@ sl Prekrivnost črt in plošče samodejnega zemljevida
 @ Rotates the automap so your facing direction points up; off keeps North at the top
 sl Zasuka samodejni zemljevid tako, da smer vašega pogleda kaže navzgor; izklopljeno ohrani sever na vrhu
 
-@ Shows a live 3D wireframe or top-down automap while playing; press M for the interactive full-screen map (single player and co-op only)
-sl Med igranjem prikazuje živi 3D žični ali zgornji samodejni zemljevid; pritisnite M za interaktivni celozaslonski zemljevid (samo en igralec in sodelovalno)
+@ Shows a 3D wireframe or top-down automap on the statistics screen (Tab/Select); add Automap in Edit HUD to keep it on screen, or press M for the full-screen map (single player and co-op only)
+sl Prikaže 3D žični ali zgornji samodejni zemljevid na zaslonu statistike (Tab/Select); za stalen prikaz ga dodajte v urejevalniku HUD ali pritisnite M za celozaslonski zemljevid (samo en igralec in sodelovanje)
+
+@ Shows a live 3D wireframe or top-down automap on the HUD at all times (single player and co-op only)
+sl Stalno prikazuje 3D žični ali zgornji samodejni zemljevid v živo na HUD (samo en igralec in sodelovanje)
 
 @ When picking up a weapon: Never keeps your current weapon; Better weapon switches only if it ranks higher in Weapon Priority
 sl Ob pobiranju orožja: Nikoli obdrži trenutno orožje; Boljše orožje preklopi le, če je višje uvrščeno v Prednosti orožij

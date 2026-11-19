@@ -1697,8 +1697,8 @@ pl Lepsza broń
 @ Center overlay
 pl Nakładka na środku
 
-@ Corner minimap
-pl Minimapa w rogu
+@ Framed panel
+pl Panel w ramce
 
 @ Display
 pl Wyświetlanie
@@ -2289,11 +2289,11 @@ pl Przestrzenny dźwięk binauralny 3D dla słuchawek z opóźnieniem uszu, cien
 @ Muffles and quiets sounds coming from behind solid walls and closed doors
 pl Tłumi i ścisza dźwięki dochodzące zza pełnych ścian i zamkniętych drzwi
 
-@ Plays synthesized player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
-pl Odtwarza syntetyzowane kroki i lądowania dopasowane do kamienia, metalu, drewna, ziemi i cieczy
+@ Plays player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
+pl Odtwarza kroki i lądowania gracza dopasowane do kamienia, metalu, drewna, ziemi i cieczy
 
-@ Volume of synthesized player footsteps and landings
-pl Głośność syntetyzowanych kroków i lądowań gracza
+@ Volume of player footsteps and landings
+pl Głośność kroków i lądowań gracza
 
 @ Seconds to smoothly fade between music tracks; 0 cuts immediately
 pl Sekundy płynnego przejścia między utworami muzycznymi; 0 przełącza natychmiast
@@ -2319,8 +2319,8 @@ pl Ustal kolejność priorytetów broni dla automatycznego przełączania na lep
 @ Configure the 3D wireframe automap view, display, reveal mode, zoom and markers
 pl Konfiguruj widok szkieletowej automapy 3D, wyświetlanie, odkrywanie, powiększenie i znaczniki
 
-@ Corner minimap frames the map in the top-right; Center overlay floats a transparent wireframe over the view
-pl Minimapa w rogu umieszcza mapę w prawym górnym rogu; Nakładka na środku wyświetla półprzezroczysty szkielet na środku ekranu
+@ Framed panel centers the map in a dark box on the statistics screen; Center overlay floats a transparent wireframe over the view
+pl Panel w ramce wyśrodkowuje mapę w ciemnym oknie na ekranie statystyk; Nakładka na środku wyświetla półprzezroczysty szkielet na widoku
 
 @ Disabled while Weapon Auto-Switch is set to Never
 pl Wyłączone, gdy Auto-zmiana broni jest ustawiona na Nigdy
@@ -2337,8 +2337,11 @@ pl Krycie linii i panelu automapy
 @ Rotates the automap so your facing direction points up; off keeps North at the top
 pl Obraca automapę tak, by kierunek patrzenia wskazywał górę; wyłączenie utrzymuje północ u góry
 
-@ Shows a live 3D wireframe or top-down automap while playing; press M for the interactive full-screen map (single player and co-op only)
-pl Pokazuje podczas gry szkieletową automapę 3D lub widok z góry; naciśnij M, aby otworzyć interaktywną mapę pełnoekranową (tylko gra jednoosobowa i kooperacja)
+@ Shows a 3D wireframe or top-down automap on the statistics screen (Tab/Select); add Automap in Edit HUD to keep it on screen, or press M for the full-screen map (single player and co-op only)
+pl Pokazuje szkieletową automapę 3D lub widok z góry na ekranie statystyk (Tab/Select); dodaj Automapę w Edytorze HUD, aby była widoczna stale, lub naciśnij M dla mapy pełnoekranowej (tylko gra jednoosobowa i kooperacja)
+
+@ Shows a live 3D wireframe or top-down automap on the HUD at all times (single player and co-op only)
+pl Stale pokazuje na żywo szkieletową automapę 3D lub widok z góry na HUD (tylko gra jednoosobowa i kooperacja)
 
 @ When picking up a weapon: Never keeps your current weapon; Better weapon switches only if it ranks higher in Weapon Priority
 pl Po podniesieniu broni: Nigdy zachowuje obecną broń; Lepsza broń przełącza tylko wtedy, gdy ma wyższy Priorytet broni

@@ -1697,8 +1697,8 @@ el Καλύτερο όπλο
 @ Center overlay
 el Κεντρική επικάλυψη
 
-@ Corner minimap
-el Μίνι χάρτης γωνίας
+@ Framed panel
+el Πλαίσιο χάρτη
 
 @ Display
 el Εμφάνιση
@@ -2289,11 +2289,11 @@ el Αμφιωτικός τρισδιάστατος ήχος για ακουστ�
 @ Muffles and quiets sounds coming from behind solid walls and closed doors
 el Πνίγει και χαμηλώνει ήχους που έρχονται πίσω από συμπαγείς τοίχους και κλειστές πόρτες
 
-@ Plays synthesized player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
-el Αναπαράγει συνθετικά βήματα και προσγειώσεις για πέτρα, μέταλλο, ξύλο, χώμα και υγρά
+@ Plays player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
+el Αναπαράγει βήματα και προσγειώσεις παίκτη ανάλογα με δάπεδα από πέτρα, μέταλλο, ξύλο, χώμα και υγρά
 
-@ Volume of synthesized player footsteps and landings
-el Ένταση των συνθετικών βημάτων και προσγειώσεων του παίκτη
+@ Volume of player footsteps and landings
+el Ένταση ήχου βημάτων και προσγειώσεων παίκτη
 
 @ Seconds to smoothly fade between music tracks; 0 cuts immediately
 el Δευτερόλεπτα ομαλής μετάβασης μεταξύ μουσικών κομματιών· το 0 κόβει αμέσως
@@ -2319,8 +2319,8 @@ el Ορίζει τη σειρά προτεραιότητας όπλων για �
 @ Configure the 3D wireframe automap view, display, reveal mode, zoom and markers
 el Ρυθμίζει την προβολή, την εμφάνιση, την αποκάλυψη, το ζουμ και τους δείκτες του τρισδιάστατου αυτόματου χάρτη
 
-@ Corner minimap frames the map in the top-right; Center overlay floats a transparent wireframe over the view
-el Ο Μίνι χάρτης γωνίας τοποθετεί τον χάρτη επάνω δεξιά· η Κεντρική επικάλυψη εμφανίζει διαφανές πλέγμα πάνω από την εικόνα
+@ Framed panel centers the map in a dark box on the statistics screen; Center overlay floats a transparent wireframe over the view
+el Το πλαίσιο κεντράρει τον χάρτη σε σκούρο κουτί στην οθόνη στατιστικών· η κεντρική επικάλυψη προβάλλει διαφανές συρμάτινο πλέγμα πάνω από την προβολή
 
 @ Disabled while Weapon Auto-Switch is set to Never
 el Απενεργοποιημένο όσο η Αυτόματη αλλαγή όπλου είναι ρυθμισμένη στο Ποτέ
@@ -2337,8 +2337,11 @@ el Αδιαφάνεια των γραμμών και του πλαισίου τ�
 @ Rotates the automap so your facing direction points up; off keeps North at the top
 el Περιστρέφει τον αυτόματο χάρτη ώστε η κατεύθυνση βλέμματος να δείχνει επάνω· απενεργοποιημένο κρατά τον Βορρά επάνω
 
-@ Shows a live 3D wireframe or top-down automap while playing; press M for the interactive full-screen map (single player and co-op only)
-el Εμφανίζει ζωντανό τρισδιάστατο συρμάτινο ή κάτοψης χάρτη στο παιχνίδι· πατήστε M για διαδραστικό χάρτη πλήρους οθόνης (μόνο μονό και συνεργατικό)
+@ Shows a 3D wireframe or top-down automap on the statistics screen (Tab/Select); add Automap in Edit HUD to keep it on screen, or press M for the full-screen map (single player and co-op only)
+el Εμφανίζει 3D συρμάτινο ή κάτοψη αυτόματο χάρτη στην οθόνη στατιστικών (Tab/Select)· προσθέστε τον Αυτόματο χάρτη στην Επεξεργασία HUD για μόνιμη προβολή ή πατήστε M για χάρτη πλήρους οθόνης (μόνο σόλο και συνεργατικό)
+
+@ Shows a live 3D wireframe or top-down automap on the HUD at all times (single player and co-op only)
+el Εμφανίζει μόνιμα ζωντανό 3D συρμάτινο ή κάτοψη αυτόματο χάρτη στο HUD (μόνο σόλο και συνεργατικό)
 
 @ When picking up a weapon: Never keeps your current weapon; Better weapon switches only if it ranks higher in Weapon Priority
 el Κατά τη συλλογή όπλου: Ποτέ διατηρεί το τρέχον όπλο· Καλύτερο όπλο αλλάζει μόνο αν έχει υψηλότερη θέση στην Προτεραιότητα όπλων

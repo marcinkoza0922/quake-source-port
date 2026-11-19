@@ -1697,8 +1697,8 @@ eu Arma hobea
 @ Center overlay
 eu Erdiko gainjartzea
 
-@ Corner minimap
-eu Izkinako minimapa
+@ Framed panel
+eu Markodun panela
 
 @ Display
 eu Bistaratzea
@@ -2289,11 +2289,11 @@ eu Entzungailuetarako 3D espazializazio binaurala belarri-atzerapenarekin, buru-
 @ Muffles and quiets sounds coming from behind solid walls and closed doors
 eu Horma solidoen eta ate itxien atzetik datozen soinuak moteltzen eta jaisten ditu
 
-@ Plays synthesized player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
-eu Harri, metal, egur, lur eta likido zoruetara egokitutako pauso eta lurreratze sintetizatuak jotzen ditu
+@ Plays player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
+eu Jokalariaren pausoak eta lurreratzeak erreproduzitzen ditu harri, metal, egur, lur eta likido zoruetara egokituta
 
-@ Volume of synthesized player footsteps and landings
-eu Jokalariaren pauso eta lurreratze sintetizatuen bolumena
+@ Volume of player footsteps and landings
+eu Jokalariaren pausoen eta lurreratzeen bolumena
 
 @ Seconds to smoothly fade between music tracks; 0 cuts immediately
 eu Musika-pisten artean leunki igarotzeko segundoak; 0k berehala aldatzen du
@@ -2319,8 +2319,8 @@ eu Antolatu armen lehentasun-ordena Arma hobea aldaketa automatikorako
 @ Configure the 3D wireframe automap view, display, reveal mode, zoom and markers
 eu Konfiguratu 3D alanbre-sareko automaparen ikuspegia, bistaratzea, azaleratze-modua, zooma eta markatzaileak
 
-@ Corner minimap frames the map in the top-right; Center overlay floats a transparent wireframe over the view
-eu Izkinako minimapak mapa goiko eskuinean kokatzen du; Erdiko gainjartzeak alanbre-sare gardena jartzen du ikuspegiaren gainean
+@ Framed panel centers the map in a dark box on the statistics screen; Center overlay floats a transparent wireframe over the view
+eu Markodun panelak mapa lauki ilun batean zentratzen du estatistiken pantailan; erdiko gainjartzeak hari-egitura gardena erakusten du ikuspegiaren gainean
 
 @ Disabled while Weapon Auto-Switch is set to Never
 eu Desgaituta Armen aldaketa automatikoa Inoiz ez aukeran dagoen bitartean
@@ -2337,8 +2337,11 @@ eu Automaparen lerroen eta panelaren opakutasuna
 @ Rotates the automap so your facing direction points up; off keeps North at the top
 eu Automapa biratzen du begira zauden norabidea gora begira geratzeko; desaktibatuta iparraldea goian mantentzen da
 
-@ Shows a live 3D wireframe or top-down automap while playing; press M for the interactive full-screen map (single player and co-op only)
-eu Jolastu bitartean 3D alanbre-sareko edo goitik beherako zuzeneko automapa erakusten du; sakatu M pantaila osoko mapa interaktiborako (jokalari bakarra eta koop. soilik)
+@ Shows a 3D wireframe or top-down automap on the statistics screen (Tab/Select); add Automap in Edit HUD to keep it on screen, or press M for the full-screen map (single player and co-op only)
+eu 3D hari-egiturako edo goitik beherako automapa erakusten du estatistiken pantailan (Tab/Select); gehitu Automapa HUD editorean beti ikusteko, edo sakatu M pantaila osoko maparako (jokalari bakarra eta kooperatiboa bakarrik)
+
+@ Shows a live 3D wireframe or top-down automap on the HUD at all times (single player and co-op only)
+eu Zuzeneko 3D hari-egiturako edo goitik beherako automapa erakusten du beti HUD-ean (jokalari bakarra eta kooperatiboa bakarrik)
 
 @ When picking up a weapon: Never keeps your current weapon; Better weapon switches only if it ranks higher in Weapon Priority
 eu Arma bat jasotzean: Inoiz ez aukerak uneko arma mantentzen du; Arma hobea aukerak Armen lehentasunean gorago badago bakarrik aldatzen du

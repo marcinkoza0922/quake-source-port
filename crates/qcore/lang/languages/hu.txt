@@ -1697,8 +1697,8 @@ hu Jobb fegyver
 @ Center overlay
 hu Középső átfedés
 
-@ Corner minimap
-hu Sarok minitérkép
+@ Framed panel
+hu Keretezett panel
 
 @ Display
 hu Megjelenítés
@@ -2289,11 +2289,11 @@ hu Binaurális 3D térhangzás fejhallgatóhoz fülkésleltetéssel, fejárnyék
 @ Muffles and quiets sounds coming from behind solid walls and closed doors
 hu Tompítja és halkítja a tömör falak és zárt ajtók mögül érkező hangokat
 
-@ Plays synthesized player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
-hu Szintetizált lépéseket és talajra érkezést játszik le kő, fém, fa, föld és folyadék felületekhez
+@ Plays player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
+hu Kő-, fém-, fa-, föld- és folyadékfelületekhez illeszkedő lépés- és leérkezési hangokat játszik le
 
-@ Volume of synthesized player footsteps and landings
-hu A szintetizált játékoslépések és érkezések hangereje
+@ Volume of player footsteps and landings
+hu A játékos lépéseinek és leérkezéseinek hangereje
 
 @ Seconds to smoothly fade between music tracks; 0 cuts immediately
 hu Másodperc a zeneszámok közötti sima áttűnéshez; a 0 azonnal vált
@@ -2319,8 +2319,8 @@ hu Fegyverek prioritási sorrendje a Jobb fegyver automatikus váltáshoz
 @ Configure the 3D wireframe automap view, display, reveal mode, zoom and markers
 hu A 3D drótvázas autotérkép nézetének, megjelenítésének, felfedésének, nagyításának és jelölőinek beállítása
 
-@ Corner minimap frames the map in the top-right; Center overlay floats a transparent wireframe over the view
-hu A Sarok minitérkép a jobb felső sarokban jelenik meg; a Középső átfedés átlátszó drótvázat vetít a kép fölé
+@ Framed panel centers the map in a dark box on the statistics screen; Center overlay floats a transparent wireframe over the view
+hu A keretezett panel a statisztikai képernyő közepén, sötét keretben jeleníti meg a térképet; a középső átfedés áttetsző drótvázat vetít a kép fölé
 
 @ Disabled while Weapon Auto-Switch is set to Never
 hu Letiltva, amíg az Automatikus fegyverváltás Soha értékre van állítva
@@ -2337,8 +2337,11 @@ hu Az autotérkép vonalainak és paneljének átlátszatlansága
 @ Rotates the automap so your facing direction points up; off keeps North at the top
 hu Elforgatja az autotérképet, hogy a nézési irány felfelé mutasson; kikapcsolva észak marad felül
 
-@ Shows a live 3D wireframe or top-down automap while playing; press M for the interactive full-screen map (single player and co-op only)
-hu Élő 3D drótvázas vagy felülnézeti autotérképet mutat játék közben; az M billentyűvel nyitható a teljes képernyős interaktív térkép (csak egyjátékos és kooperatív módban)
+@ Shows a 3D wireframe or top-down automap on the statistics screen (Tab/Select); add Automap in Edit HUD to keep it on screen, or press M for the full-screen map (single player and co-op only)
+hu 3D drótvázas vagy felülnézeti térképet mutat a statisztikai képernyőn (Tab/Select); folyamatos megjelenítéshez add hozzá a HUD szerkesztőben, vagy nyomd meg az M gombot a teljes képernyős térképhez (csak egyjátékos és kooperatív)
+
+@ Shows a live 3D wireframe or top-down automap on the HUD at all times (single player and co-op only)
+hu Folyamatosan élő 3D drótvázas vagy felülnézeti térképet jelenít meg a HUD-on (csak egyjátékos és kooperatív)
 
 @ When picking up a weapon: Never keeps your current weapon; Better weapon switches only if it ranks higher in Weapon Priority
 hu Fegyver felvételekor: a Soha megtartja a jelenlegi fegyvert; a Jobb fegyver csak akkor vált, ha az előrébb van a Fegyverprioritásban

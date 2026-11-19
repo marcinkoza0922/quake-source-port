@@ -1697,8 +1697,8 @@ pt-BR Arma melhor
 @ Center overlay
 pt-BR Sobreposição central
 
-@ Corner minimap
-pt-BR Minimapa no canto
+@ Framed panel
+pt-BR Painel com moldura
 
 @ Display
 pt-BR Exibição
@@ -2289,11 +2289,11 @@ pt-BR Espacialização binaural 3D para fones com atraso entre ouvidos, sombra d
 @ Muffles and quiets sounds coming from behind solid walls and closed doors
 pt-BR Abafa e reduz sons vindos de trás de paredes sólidas e portas fechadas
 
-@ Plays synthesized player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
-pt-BR Toca passos e aterrissagens sintetizados para pisos de pedra, metal, madeira, terra e líquidos
+@ Plays player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
+pt-BR Reproduz passos e aterrissagens do jogador de acordo com pisos de pedra, metal, madeira, terra e líquidos
 
-@ Volume of synthesized player footsteps and landings
-pt-BR Volume dos passos e aterrissagens sintetizados do jogador
+@ Volume of player footsteps and landings
+pt-BR Volume dos passos e aterrissagens do jogador
 
 @ Seconds to smoothly fade between music tracks; 0 cuts immediately
 pt-BR Segundos para transição suave entre faixas musicais; 0 troca na hora
@@ -2319,8 +2319,8 @@ pt-BR Define a ordem de prioridade das armas para a troca automática para Arma 
 @ Configure the 3D wireframe automap view, display, reveal mode, zoom and markers
 pt-BR Configura a visão em estrutura 3D do automapa, exibição, revelação, zoom e marcadores
 
-@ Corner minimap frames the map in the top-right; Center overlay floats a transparent wireframe over the view
-pt-BR Minimapa no canto enquadra o mapa no canto superior direito; Sobreposição central exibe uma estrutura transparente sobre a tela
+@ Framed panel centers the map in a dark box on the statistics screen; Center overlay floats a transparent wireframe over the view
+pt-BR O painel com moldura centraliza o mapa em uma caixa escura na tela de estatísticas; a sobreposição central exibe uma malha transparente sobre a visão
 
 @ Disabled while Weapon Auto-Switch is set to Never
 pt-BR Desativado enquanto Troca automática de arma estiver em Nunca
@@ -2337,8 +2337,11 @@ pt-BR Opacidade das linhas e do painel do automapa
 @ Rotates the automap so your facing direction points up; off keeps North at the top
 pt-BR Gira o automapa para que a direção do olhar aponte para cima; desativado mantém o norte em cima
 
-@ Shows a live 3D wireframe or top-down automap while playing; press M for the interactive full-screen map (single player and co-op only)
-pt-BR Mostra um automapa em estrutura 3D ou de cima enquanto joga; pressione M para o mapa interativo em tela cheia (apenas um jogador e cooperativo)
+@ Shows a 3D wireframe or top-down automap on the statistics screen (Tab/Select); add Automap in Edit HUD to keep it on screen, or press M for the full-screen map (single player and co-op only)
+pt-BR Mostra um automapa 3D ou de cima na tela de estatísticas (Tab/Select); adicione Automapa em Editar HUD para mantê-lo na tela ou pressione M para o mapa em tela cheia (apenas um jogador e cooperativo)
+
+@ Shows a live 3D wireframe or top-down automap on the HUD at all times (single player and co-op only)
+pt-BR Mostra o automapa 3D ou de cima ao vivo no HUD o tempo todo (apenas um jogador e cooperativo)
 
 @ When picking up a weapon: Never keeps your current weapon; Better weapon switches only if it ranks higher in Weapon Priority
 pt-BR Ao pegar uma arma: Nunca mantém a arma atual; Arma melhor só troca se estiver acima na Prioridade das armas

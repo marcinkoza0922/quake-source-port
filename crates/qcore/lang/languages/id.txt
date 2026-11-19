@@ -1697,8 +1697,8 @@ id Senjata lebih baik
 @ Center overlay
 id Lapisan tengah
 
-@ Corner minimap
-id Peta mini sudut
+@ Framed panel
+id Panel berbingkai
 
 @ Display
 id Tampilan
@@ -2289,11 +2289,11 @@ id Spasialisasi binaural 3D untuk headphone dengan jeda telinga, bayangan kepala
 @ Muffles and quiets sounds coming from behind solid walls and closed doors
 id Meredam dan mengecilkan suara dari balik dinding padat dan pintu tertutup
 
-@ Plays synthesized player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
-id Memutar suara langkah dan pendaratan sintesis sesuai lantai batu, logam, kayu, tanah, dan cairan
+@ Plays player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
+id Memutar suara langkah kaki dan pendaratan pemain yang sesuai dengan lantai batu, logam, kayu, tanah, dan cairan
 
-@ Volume of synthesized player footsteps and landings
-id Volume suara langkah kaki dan pendaratan sintesis pemain
+@ Volume of player footsteps and landings
+id Volume langkah kaki dan pendaratan pemain
 
 @ Seconds to smoothly fade between music tracks; 0 cuts immediately
 id Detik untuk transisi halus antar trek musik; 0 langsung berpindah
@@ -2319,8 +2319,8 @@ id Atur urutan prioritas senjata untuk penggantian otomatis ke Senjata lebih bai
 @ Configure the 3D wireframe automap view, display, reveal mode, zoom and markers
 id Atur tampilan peta otomatis rangka kawat 3D, letak, mode penyingkapan, perbesaran, dan penanda
 
-@ Corner minimap frames the map in the top-right; Center overlay floats a transparent wireframe over the view
-id Peta mini sudut membingkai peta di kanan atas; Lapisan tengah menampilkan rangka kawat transparan di atas tampilan
+@ Framed panel centers the map in a dark box on the statistics screen; Center overlay floats a transparent wireframe over the view
+id Panel berbingkai memusatkan peta dalam kotak gelap di layar statistik; hamparan tengah menampilkan wireframe transparan di atas pandangan
 
 @ Disabled while Weapon Auto-Switch is set to Never
 id Dinonaktifkan saat Ganti Senjata Otomatis disetel ke Tidak pernah
@@ -2337,8 +2337,11 @@ id Opasitas garis dan panel peta otomatis
 @ Rotates the automap so your facing direction points up; off keeps North at the top
 id Memutar peta otomatis agar arah hadap Anda menghadap ke atas; nonaktif menjaga arah utara tetap di atas
 
-@ Shows a live 3D wireframe or top-down automap while playing; press M for the interactive full-screen map (single player and co-op only)
-id Menampilkan peta otomatis rangka kawat 3D atau tampak atas saat bermain; tekan M untuk peta layar penuh interaktif (hanya pemain tunggal dan co-op)
+@ Shows a 3D wireframe or top-down automap on the statistics screen (Tab/Select); add Automap in Edit HUD to keep it on screen, or press M for the full-screen map (single player and co-op only)
+id Menampilkan peta otomatis wireframe 3D atau tampilan atas di layar statistik (Tab/Select); tambahkan Automap di Edit HUD agar selalu tampil, atau tekan M untuk peta layar penuh (khusus pemain tunggal dan ko-op)
+
+@ Shows a live 3D wireframe or top-down automap on the HUD at all times (single player and co-op only)
+id Menampilkan peta otomatis wireframe 3D atau tampilan atas secara langsung di HUD setiap saat (khusus pemain tunggal dan ko-op)
 
 @ When picking up a weapon: Never keeps your current weapon; Better weapon switches only if it ranks higher in Weapon Priority
 id Saat mengambil senjata: Tidak pernah mempertahankan senjata saat ini; Senjata lebih baik hanya beralih jika peringkatnya lebih tinggi di Prioritas Senjata

@@ -218,7 +218,7 @@ pub(super) const fn toggle(label: &'static str, cvar: &'static str) -> Item {
 
 pub(super) const WEAPON_SWITCH: &[(&str, f32)] = &[("Never", 0.0), ("Better weapon", 1.0)];
 pub(super) const AUTOMAP_VIEW: &[(&str, f32)] = &[("3D wireframe", 0.0), ("Top-down", 1.0)];
-pub(super) const AUTOMAP_DISPLAY: &[(&str, f32)] = &[("Corner minimap", 0.0), ("Center overlay", 1.0)];
+pub(super) const AUTOMAP_DISPLAY: &[(&str, f32)] = &[("Framed panel", 0.0), ("Center overlay", 1.0)];
 pub(super) const AUTOMAP_REVEAL: &[(&str, f32)] = &[("Explored only", 0.0), ("Full map", 1.0)];
 
 pub(super) const GAMEPLAY: &[Item] = &[

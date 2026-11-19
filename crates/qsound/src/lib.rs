@@ -1,7 +1,7 @@
 //! qsound — sound cache, channels, spatialization, mixer and music streaming.
 //! Port of ironwail snd_dma.c / snd_mix.c / snd_mem.c / bgmusic.c, extended with
 //! optional 3D binaural (HRTF) spatialization, occlusion, environmental reverb,
-//! procedural footsteps, per-category volume mixing and music crossfading.
+//! surface-aware footsteps, per-category volume mixing and music crossfading.
 //! No device code: the platform audio callback calls [`Mixer::paint`]; the game
 //! thread drives [`SoundSystem`], which sends commands through a short-lock queue.
 

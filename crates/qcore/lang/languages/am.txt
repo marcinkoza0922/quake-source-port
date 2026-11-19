@@ -1697,8 +1697,8 @@ am የተሻለ መሳሪያ
 @ Center overlay
 am መካከለኛ ተደራቢ
 
-@ Corner minimap
-am የማዕዘን ንዑስ ካርታ
+@ Framed panel
+am ክፈፍ ያለው ፓነል
 
 @ Display
 am አቀራረብ
@@ -2289,11 +2289,11 @@ am ለጆሮ ማዳመጫዎች በጆሮ ጊዜ ልዩነት፣ በራስ ጥ�
 @ Muffles and quiets sounds coming from behind solid walls and closed doors
 am ከጠንካራ ግድግዳዎች እና ከተዘጉ በሮች ጀርባ የሚመጡ ድምፆችን ያፍናል እና ይቀንሳል
 
-@ Plays synthesized player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
-am ለድንጋይ፣ ብረት፣ እንጨት፣ አፈር እና ፈሳሽ ወለሎች የተሰሩ የኮቴ እና የማረፍ ድምፆችን ያጫውታል
+@ Plays player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
+am ከድንጋይ፣ ብረት፣ እንጨት፣ አፈር እና ፈሳሽ ወለሎች ጋር የሚስማሙ የእግር ድምጾች እና የማረፊያ ድምጾችን ያጫውታል
 
-@ Volume of synthesized player footsteps and landings
-am የተጫዋቹ የተሰሩ የኮቴ እና የማረፍ ድምፆች መጠን
+@ Volume of player footsteps and landings
+am የተጫዋች እግር ድምጾች እና ማረፊያዎች መጠን
 
 @ Seconds to smoothly fade between music tracks; 0 cuts immediately
 am በሙዚቃ ትራኮች መካከል በለስላሳ ለመሸጋገር ሰከንዶች፤ 0 ወዲያውኑ ይቀይራል
@@ -2319,8 +2319,8 @@ am ለተሻለ መሳሪያ ራስ-ሰር ቅየራ የመሳሪያዎችን �
 @ Configure the 3D wireframe automap view, display, reveal mode, zoom and markers
 am የ3D ሽቦ-ፍሬም ራስ-ሰር ካርታ እይታን፣ አቀራረብን፣ የመግለጥ ሁነታን፣ ማጉያን እና ምልክቶችን ያዋቅሩ
 
-@ Corner minimap frames the map in the top-right; Center overlay floats a transparent wireframe over the view
-am የማዕዘን ንዑስ ካርታ ካርታውን ከላይ በቀኝ ያስቀምጣል፤ መካከለኛ ተደራቢ ግልጽ ሽቦ-ፍሬም በእይታው ላይ ያሳያል
+@ Framed panel centers the map in a dark box on the statistics screen; Center overlay floats a transparent wireframe over the view
+am ክፈፍ ያለው ፓነል ካርታውን በስታቲስቲክስ ማያ ላይ በጥቁር ሳጥን ውስጥ ያማክላል፤ መካከለኛ ተደራቢ ግልጽ ሽቦ-ክፈፍ በእይታው ላይ ያሳያል
 
 @ Disabled while Weapon Auto-Switch is set to Never
 am የመሳሪያ ራስ-ሰር ቅየራ ወደ በጭራሽ ሲቀናበር ይቦዝናል
@@ -2337,8 +2337,11 @@ am የራስ-ሰር ካርታ መስመሮች እና ፓነል ግልጽነት
 @ Rotates the automap so your facing direction points up; off keeps North at the top
 am የሚያዩበት አቅጣጫ ወደ ላይ እንዲሆን ራስ-ሰር ካርታውን ያዞራል፤ ሲጠፋ ሰሜን ከላይ ይቆያል
 
-@ Shows a live 3D wireframe or top-down automap while playing; press M for the interactive full-screen map (single player and co-op only)
-am ሲጫወቱ ቀጥታ 3D ሽቦ-ፍሬም ወይም ከላይ ራስ-ሰር ካርታ ያሳያል፤ ለሙሉ ማያ ገጽ በይነተገናኝ ካርታ M ይጫኑ (ለአንድ ተጫዋች እና ትብብር ብቻ)
+@ Shows a 3D wireframe or top-down automap on the statistics screen (Tab/Select); add Automap in Edit HUD to keep it on screen, or press M for the full-screen map (single player and co-op only)
+am በስታቲስቲክስ ማያ ላይ (Tab/Select) 3D ሽቦ-ክፈፍ ወይም ከላይ ወደ ታች ካርታ ያሳያል፤ ሁልጊዜ እንዲታይ በHUD አርታኢ ውስጥ Automap ያክሉ ወይም ለሙሉ ማያ ካርታ M ይጫኑ (ነጠላ ተጫዋች እና ትብብር ብቻ)
+
+@ Shows a live 3D wireframe or top-down automap on the HUD at all times (single player and co-op only)
+am ሁልጊዜ በHUD ላይ ቀጥታ 3D ሽቦ-ክፈፍ ወይም ከላይ ወደ ታች ካርታ ያሳያል (ነጠላ ተጫዋች እና ትብብር ብቻ)
 
 @ When picking up a weapon: Never keeps your current weapon; Better weapon switches only if it ranks higher in Weapon Priority
 am መሳሪያ ሲያነሱ፦ በጭራሽ የአሁኑን መሳሪያዎን ያቆያል፤ የተሻለ መሳሪያ በመሳሪያ ቅድሚያ ከፍ ካለ ብቻ ይቀይራል

@@ -1697,8 +1697,8 @@ ga Arm níos fearr
 @ Center overlay
 ga Forleagan láir
 
-@ Corner minimap
-ga Mionléarscáil chúinne
+@ Framed panel
+ga Painéal frámaithe
 
 @ Display
 ga Taispeáint
@@ -2289,11 +2289,11 @@ ga Spású dé-chluasach 3D do chluasáin le moill chluaise, scáth cinn agus le
 @ Muffles and quiets sounds coming from behind solid walls and closed doors
 ga Maolaíonn agus laghdaíonn fuaimeanna a thagann taobh thiar de bhallaí soladacha agus doirse dúnta
 
-@ Plays synthesized player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
-ga Seinneann coiscéimeanna agus tuirlingtí sintéiseacha do chloch, miotal, adhmad, cré agus leachtanna
+@ Plays player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
+ga Seinneann sé coiscéimeanna agus tuirlingtí an imreora de réir urlár cloiche, miotail, adhmaid, cré agus leachta
 
-@ Volume of synthesized player footsteps and landings
-ga Toirt choiscéimeanna agus tuirlingtí sintéiseacha an imreora
+@ Volume of player footsteps and landings
+ga Airde fuaime choiscéimeanna agus tuirlingtí an imreora
 
 @ Seconds to smoothly fade between music tracks; 0 cuts immediately
 ga Soicind chun aistriú go réidh idir rianta ceoil; athraíonn 0 láithreach
@@ -2319,8 +2319,8 @@ ga Socraigh ord tosaíochta na n-arm don uathathrú chuig Arm níos fearr
 @ Configure the 3D wireframe automap view, display, reveal mode, zoom and markers
 ga Cumraigh amharc, taispeáint, mód nochta, zúmáil agus marcálaithe na huathléarscáile sreangfhráma 3D
 
-@ Corner minimap frames the map in the top-right; Center overlay floats a transparent wireframe over the view
-ga Cuireann Mionléarscáil chúinne an léarscáil i bhfráma ag barr ar dheis; snámhann Forleagan láir sreangfhráma trédhearcach os cionn an amhairc
+@ Framed panel centers the map in a dark box on the statistics screen; Center overlay floats a transparent wireframe over the view
+ga Láraíonn an painéal frámaithe an léarscáil i mbosca dorcha ar scáileán na staitisticí; taispeánann forleagan láir fráma sreinge trédhearcach thar an radharc
 
 @ Disabled while Weapon Auto-Switch is set to Never
 ga Díchumasaithe fad atá Uathathrú Airm socraithe ar Riamh
@@ -2337,8 +2337,11 @@ ga Teimhneacht línte agus phainéal na huathléarscáile
 @ Rotates the automap so your facing direction points up; off keeps North at the top
 ga Rothlaíonn sé an uathléarscáil ionas go mbeidh do threo amhairc dírithe suas; coinníonn as an Tuaisceart ag an mbarr
 
-@ Shows a live 3D wireframe or top-down automap while playing; press M for the interactive full-screen map (single player and co-op only)
-ga Taispeánann sé uathléarscáil bheo sreangfhráma 3D nó ón mbarr anuas agus tú ag imirt; brúigh M don léarscáil idirghníomhach lánscáileáin (aonimreoir agus comhoibriú amháin)
+@ Shows a 3D wireframe or top-down automap on the statistics screen (Tab/Select); add Automap in Edit HUD to keep it on screen, or press M for the full-screen map (single player and co-op only)
+ga Taispeánann uathléarscáil 3D nó ó thuas ar scáileán na staitisticí (Tab/Select); cuir Uathléarscáil leis in Eagarthóir HUD chun í a choinneáil ar an scáileán, nó brúigh M don léarscáil lánscáileáin (imreoir aonair agus comhoibriú amháin)
+
+@ Shows a live 3D wireframe or top-down automap on the HUD at all times (single player and co-op only)
+ga Taispeánann uathléarscáil bheo 3D nó ó thuas ar an HUD i gcónaí (imreoir aonair agus comhoibriú amháin)
 
 @ When picking up a weapon: Never keeps your current weapon; Better weapon switches only if it ranks higher in Weapon Priority
 ga Agus arm á phiocadh suas: coinníonn Riamh d'arm reatha; ní athraíonn Arm níos fearr ach má tá rangú níos airde aige i dTosaíocht Arm

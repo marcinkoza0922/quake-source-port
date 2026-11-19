@@ -1697,8 +1697,8 @@ km អាវុធ​ល្អ​ជាង
 @ Center overlay
 km បង្ហាញ​ត្រួត​កណ្ដាល
 
-@ Corner minimap
-km ផែនទី​តូច​នៅ​ជ្រុង
+@ Framed panel
+km ផ្ទាំង​មាន​ស៊ុម
 
 @ Display
 km ការ​បង្ហាញ
@@ -2289,11 +2289,11 @@ km សំឡេង​ 3D សម្រាប់​កាស​មាន​គម�
 @ Muffles and quiets sounds coming from behind solid walls and closed doors
 km ធ្វើ​ឱ្យ​សំឡេង​ពី​ក្រោយ​ជញ្ជាំង​រឹង​ និង​ទ្វារ​បិទ​អាប់​ និង​ខ្សោយ​ចុះ
 
-@ Plays synthesized player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
-km ចាក់​សំឡេង​ជំហាន​ និង​ការ​ចុះ​ដី​សំយោគ​តាម​ផ្ទៃ​ថ្ម ដែក ឈើ ដី និង​វត្ថុ​រាវ
+@ Plays player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
+km ចាក់​សំឡេង​ជំហាន​ និង​ការ​ចុះ​ដី​តាម​ផ្ទៃ​ថ្ម ដែក ឈើ ដី និង​វត្ថុ​រាវ
 
-@ Volume of synthesized player footsteps and landings
-km កម្រិត​សំឡេង​ជំហាន​ និង​ការ​ចុះ​ដី​សំយោគ​របស់​អ្នក​លេង
+@ Volume of player footsteps and landings
+km កម្រិត​សំឡេង​ជំហាន​ និង​ការ​ចុះ​ដី​របស់​អ្នក​លេង
 
 @ Seconds to smoothly fade between music tracks; 0 cuts immediately
 km វិនាទី​សម្រាប់​ប្តូរ​ភ្លេង​រលូន​រវាង​បទ; 0 ប្តូរ​ភ្លាមៗ
@@ -2319,8 +2319,8 @@ km រៀបចំ​លំដាប់​អាទិភាព​អាវុ�
 @ Configure the 3D wireframe automap view, display, reveal mode, zoom and markers
 km កំណត់​ទិដ្ឋភាព ការ​បង្ហាញ ការ​បើក​បង្ហាញ ការ​ពង្រីក និង​សញ្ញា​សម្គាល់​របស់​ផែនទី​គ្រោង​ខ្សែ 3D
 
-@ Corner minimap frames the map in the top-right; Center overlay floats a transparent wireframe over the view
-km ផែនទី​តូច​នៅ​ជ្រុង​ដាក់​ផែនទី​នៅ​ខាង​លើ​ស្ដាំ; បង្ហាញ​ត្រួត​កណ្ដាល​បង្ហាញ​គ្រោង​ខ្សែ​ថ្លា​លើ​ទិដ្ឋភាព
+@ Framed panel centers the map in a dark box on the statistics screen; Center overlay floats a transparent wireframe over the view
+km ផ្ទាំង​មាន​ស៊ុម​ដាក់​ផែនទី​នៅ​កណ្ដាល​ក្នុង​ប្រអប់​ងងឹត​លើ​អេក្រង់​ស្ថិតិ; បង្ហាញ​ត្រួត​កណ្ដាល​បង្ហាញ​គ្រោង​ខ្សែ​ថ្លា​លើ​ទិដ្ឋភាព
 
 @ Disabled while Weapon Auto-Switch is set to Never
 km ត្រូវ​បាន​បិទ​នៅ​ពេល​ប្ដូរ​អាវុធ​ស្វ័យប្រវត្តិ​ត្រូវ​បាន​កំណត់​ជា មិន​ប្ដូរ​ឡើយ
@@ -2337,8 +2337,11 @@ km ភាព​ស្រអាប់​នៃ​បន្ទាត់ និង�
 @ Rotates the automap so your facing direction points up; off keeps North at the top
 km បង្វិល​ផែនទី​ដើម្បី​ឲ្យ​ទិស​មុខ​របស់​អ្នក​ចង្អុល​ឡើង​លើ; បិទ​រក្សា​ទិស​ជើង​នៅ​ខាង​លើ
 
-@ Shows a live 3D wireframe or top-down automap while playing; press M for the interactive full-screen map (single player and co-op only)
-km បង្ហាញ​ផែនទី​គ្រោង​ខ្សែ 3D ឬ​មើល​ពី​លើ​ពេល​កំពុង​លេង; ចុច M សម្រាប់​ផែនទី​ពេញ​អេក្រង់ (តែ​អ្នក​លេង​ម្នាក់ និង​សហការ​ប៉ុណ្ណោះ)
+@ Shows a 3D wireframe or top-down automap on the statistics screen (Tab/Select); add Automap in Edit HUD to keep it on screen, or press M for the full-screen map (single player and co-op only)
+km បង្ហាញ​ផែនទី​គ្រោង​ខ្សែ 3D ឬ​មើល​ពី​លើ​លើ​អេក្រង់​ស្ថិតិ (Tab/Select); បន្ថែម​ផែនទី​ក្នុង​កម្មវិធី​កែ HUD ដើម្បី​បង្ហាញ​ជាប់ ឬ​ចុច M សម្រាប់​ផែនទី​ពេញ​អេក្រង់ (តែ​អ្នក​លេង​ម្នាក់ និង​សហការ​ប៉ុណ្ណោះ)
+
+@ Shows a live 3D wireframe or top-down automap on the HUD at all times (single player and co-op only)
+km បង្ហាញ​ផែនទី​គ្រោង​ខ្សែ 3D ឬ​មើល​ពី​លើ​លើ HUD គ្រប់​ពេល (តែ​អ្នក​លេង​ម្នាក់ និង​សហការ​ប៉ុណ្ណោះ)
 
 @ When picking up a weapon: Never keeps your current weapon; Better weapon switches only if it ranks higher in Weapon Priority
 km ពេល​រើស​អាវុធ: មិន​ប្ដូរ​ឡើយ​រក្សា​អាវុធ​បច្ចុប្បន្ន; អាវុធ​ល្អ​ជាង​ប្ដូរ​តែ​ពេល​វា​មាន​ចំណាត់​ថ្នាក់​ខ្ពស់​ជាង​ក្នុង​អាទិភាព​អាវុធ

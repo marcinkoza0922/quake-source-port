@@ -1697,8 +1697,8 @@ zh-TW 更強武器
 @ Center overlay
 zh-TW 置中疊加
 
-@ Corner minimap
-zh-TW 角落小地圖
+@ Framed panel
+zh-TW 帶框面板
 
 @ Display
 zh-TW 顯示位置
@@ -2289,11 +2289,11 @@ zh-TW 專為耳機設計的3D雙耳空間音效，含雙耳時間差、頭部聲
 @ Muffles and quiets sounds coming from behind solid walls and closed doors
 zh-TW 讓來自實心牆壁與關閉門後的聲音變悶且變小
 
-@ Plays synthesized player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
-zh-TW 依石頭、金屬、木頭、泥土與液體地面播放合成腳步聲與落地聲
+@ Plays player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
+zh-TW 依據石頭、金屬、木頭、泥土與液體地面播放玩家腳步聲與落地聲
 
-@ Volume of synthesized player footsteps and landings
-zh-TW 合成玩家腳步聲與落地聲的音量
+@ Volume of player footsteps and landings
+zh-TW 玩家腳步聲與落地聲的音量
 
 @ Seconds to smoothly fade between music tracks; 0 cuts immediately
 zh-TW 音樂曲目間平滑淡入淡出的秒數；0 為立即切換
@@ -2319,8 +2319,8 @@ zh-TW 排列用於「更強武器」自動切換的武器優先順序
 @ Configure the 3D wireframe automap view, display, reveal mode, zoom and markers
 zh-TW 設定3D線框自動地圖的檢視模式、顯示位置、顯示範圍、縮放與標記
 
-@ Corner minimap frames the map in the top-right; Center overlay floats a transparent wireframe over the view
-zh-TW 角落小地圖將地圖框在右上角；置中疊加則在畫面上方浮現半透明線框
+@ Framed panel centers the map in a dark box on the statistics screen; Center overlay floats a transparent wireframe over the view
+zh-TW 帶框面板在統計畫面中央以深色方框顯示地圖；置中疊加會在畫面上方浮現半透明線框
 
 @ Disabled while Weapon Auto-Switch is set to Never
 zh-TW 當武器自動切換設為「從不」時停用
@@ -2337,8 +2337,11 @@ zh-TW 自動地圖線條與面板的不透明度
 @ Rotates the automap so your facing direction points up; off keeps North at the top
 zh-TW 旋轉自動地圖使你的面向指向正上方；關閉則保持北方在上方
 
-@ Shows a live 3D wireframe or top-down automap while playing; press M for the interactive full-screen map (single player and co-op only)
-zh-TW 遊玩時即時顯示3D線框或俯視自動地圖；按 M 開啟互動式全螢幕地圖（僅限單人遊戲與合作模式）
+@ Shows a 3D wireframe or top-down automap on the statistics screen (Tab/Select); add Automap in Edit HUD to keep it on screen, or press M for the full-screen map (single player and co-op only)
+zh-TW 在統計畫面（Tab/Select）顯示 3D 線框或俯視自動地圖；若要常駐顯示，請在編輯 HUD 中新增自動地圖，或按 M 開啟全螢幕地圖（僅限單人與合作模式）
+
+@ Shows a live 3D wireframe or top-down automap on the HUD at all times (single player and co-op only)
+zh-TW 在 HUD 上始終即時顯示 3D 線框或俯視自動地圖（僅限單人與合作模式）
 
 @ When picking up a weapon: Never keeps your current weapon; Better weapon switches only if it ranks higher in Weapon Priority
 zh-TW 拾取武器時：「從不」保留目前武器；「更強武器」僅在該武器於武器優先順序中排名較高時才切換

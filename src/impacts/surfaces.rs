@@ -69,7 +69,8 @@ pub(crate) fn texture_at<'b>(world: &BspWorld<'b>, tr: &qpart::Trace) -> Option<
         let Some(pl) = world.bsp.planes.get(f.plane as usize) else {
             continue;
         };
-        if (p.dot(Vec3::from(pl.normal)) - pl.dist).abs() > 0.15 {
+        let fn_ = if f.side != 0 { -Vec3::from(pl.normal) } else { Vec3::from(pl.normal) };
+        if fn_.dot(n) < 0.5 || (p.dot(Vec3::from(pl.normal)) - pl.dist).abs() > 0.15 {
             continue;
         }
         let mut poly = Vec::new();

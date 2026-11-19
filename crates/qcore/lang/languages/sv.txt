@@ -1697,8 +1697,8 @@ sv Bättre vapen
 @ Center overlay
 sv Centrerat överlägg
 
-@ Corner minimap
-sv Hörnminikarta
+@ Framed panel
+sv Inramad panel
 
 @ Display
 sv Visning
@@ -2289,11 +2289,11 @@ sv Binaural 3D-ljudbild för hörlurar med öronfördröjning, huvudskugga och f
 @ Muffles and quiets sounds coming from behind solid walls and closed doors
 sv Dämpar och sänker ljud bakom solida väggar och stängda dörrar
 
-@ Plays synthesized player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
-sv Spelar syntetiserade fotsteg och landningar anpassade till sten, metall, trä, jord och vätska
+@ Plays player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
+sv Spelar upp spelarens fotsteg och landningar anpassade för sten-, metall-, trä-, jord- och vätskegolv
 
-@ Volume of synthesized player footsteps and landings
-sv Volym för syntetiserade fotsteg och landningar
+@ Volume of player footsteps and landings
+sv Volym för spelarens fotsteg och landningar
 
 @ Seconds to smoothly fade between music tracks; 0 cuts immediately
 sv Sekunder för mjuk övertoning mellan musikspår; 0 byter direkt
@@ -2319,8 +2319,8 @@ sv Ordna vapenprioritet för automatiskt byte till Bättre vapen
 @ Configure the 3D wireframe automap view, display, reveal mode, zoom and markers
 sv Anpassa 3D-trådramskartans vy, visning, avslöjandeläge, zoom och markörer
 
-@ Corner minimap frames the map in the top-right; Center overlay floats a transparent wireframe over the view
-sv Hörnminikarta ramar in kartan uppe till höger; Centrerat överlägg lägger en genomskinlig trådram över vyn
+@ Framed panel centers the map in a dark box on the statistics screen; Center overlay floats a transparent wireframe over the view
+sv Inramad panel centrerar kartan i en mörk ruta på statistikskärmen; centeröverlägg svävar en genomskinlig trådram över vyn
 
 @ Disabled while Weapon Auto-Switch is set to Never
 sv Inaktiverad medan Automatiskt vapenbyte är inställt på Aldrig
@@ -2337,8 +2337,11 @@ sv Opacitet för autokartans linjer och panel
 @ Rotates the automap so your facing direction points up; off keeps North at the top
 sv Roterar autokartan så att din blickriktning pekar uppåt; av behåller norr överst
 
-@ Shows a live 3D wireframe or top-down automap while playing; press M for the interactive full-screen map (single player and co-op only)
-sv Visar en aktiv 3D-trådrams- eller ovanifrånskarta under spel; tryck M för interaktiv helskärmskarta (endast enspelare och samarbete)
+@ Shows a 3D wireframe or top-down automap on the statistics screen (Tab/Select); add Automap in Edit HUD to keep it on screen, or press M for the full-screen map (single player and co-op only)
+sv Visar en 3D-trådrams- eller uppifrån-autokarta på statistikskärmen (Tab/Select); lägg till Autokarta i Redigera HUD för att visa den hela tiden, eller tryck M för helskärmskarta (endast enspelare och co-op)
+
+@ Shows a live 3D wireframe or top-down automap on the HUD at all times (single player and co-op only)
+sv Visar alltid en levande 3D-trådrams- eller uppifrån-autokarta på HUD:en (endast enspelare och co-op)
 
 @ When picking up a weapon: Never keeps your current weapon; Better weapon switches only if it ranks higher in Weapon Priority
 sv När du plockar upp ett vapen: Aldrig behåller ditt nuvarande vapen; Bättre vapen byter bara om det rankas högre i Vapenprioritet

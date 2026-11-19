@@ -1697,8 +1697,8 @@ mr चांगले शस्त्र
 @ Center overlay
 mr मध्य ओव्हरले
 
-@ Corner minimap
-mr कोपऱ्यातील मिनीमॅप
+@ Framed panel
+mr फ्रेम केलेले पॅनेल
 
 @ Display
 mr प्रदर्शन
@@ -2289,11 +2289,11 @@ mr हेडफोन्ससाठी कानांचा वेळ, डो�
 @ Muffles and quiets sounds coming from behind solid walls and closed doors
 mr भक्कम भिंती आणि बंद दरवाजांमागून येणारे आवाज दाबतो व कमी करतो
 
-@ Plays synthesized player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
-mr दगड, धातू, लाकूड, माती आणि द्रव जमिनीनुसार कृत्रिम पावले व उतरण्याचे आवाज वाजवतो
+@ Plays player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
+mr दगड, धातू, लाकूड, माती आणि द्रव पृष्ठभागानुसार खेळाडूच्या पावलांचे व उतरण्याचे आवाज वाजवते
 
-@ Volume of synthesized player footsteps and landings
-mr खेळाडूच्या कृत्रिम पावलांचा व उतरण्याचा आवाज स्तर
+@ Volume of player footsteps and landings
+mr खेळाडूच्या पावलांचा व उतरण्याचा आवाज
 
 @ Seconds to smoothly fade between music tracks; 0 cuts immediately
 mr संगीत ट्रॅक्समध्ये सहज संक्रमणाचे सेकंद; 0 लगेच बदलतो
@@ -2319,8 +2319,8 @@ mr चांगले शस्त्र ऑटो-स्विचसाठी �
 @ Configure the 3D wireframe automap view, display, reveal mode, zoom and markers
 mr 3D वायरफ्रेम ऑटोमॅप दृश्य, प्रदर्शन, उघडण्याचा मोड, झूम आणि मार्कर्स सेट करा
 
-@ Corner minimap frames the map in the top-right; Center overlay floats a transparent wireframe over the view
-mr कोपऱ्यातील मिनीमॅप मॅप वर-उजवीकडे ठेवतो; मध्य ओव्हरले दृश्यावर पारदर्शक वायरफ्रेम दाखवतो
+@ Framed panel centers the map in a dark box on the statistics screen; Center overlay floats a transparent wireframe over the view
+mr फ्रेम केलेले पॅनेल आकडेवारी स्क्रीनवर नकाशा गडद चौकटीत मध्यभागी ठेवते; मध्य ओव्हरले दृश्यावर पारदर्शक वायरफ्रेम दाखवते
 
 @ Disabled while Weapon Auto-Switch is set to Never
 mr शस्त्र ऑटो-स्विच 'कधीही नाही' वर असताना अक्षम राहते
@@ -2337,8 +2337,11 @@ mr ऑटोमॅप रेषा आणि पॅनेलची अपार�
 @ Rotates the automap so your facing direction points up; off keeps North at the top
 mr तुमची पाहण्याची दिशा वर राहील अशा प्रकारे ऑटोमॅप फिरवतो; बंद असताना उत्तर वर राहते
 
-@ Shows a live 3D wireframe or top-down automap while playing; press M for the interactive full-screen map (single player and co-op only)
-mr खेळताना थेट 3D वायरफ्रेम किंवा वरचा ऑटोमॅप दाखवतो; पूर्ण-स्क्रीन संवादात्मक मॅपसाठी M दाबा (फक्त सिंगल प्लेयर आणि को-ऑप)
+@ Shows a 3D wireframe or top-down automap on the statistics screen (Tab/Select); add Automap in Edit HUD to keep it on screen, or press M for the full-screen map (single player and co-op only)
+mr आकडेवारी स्क्रीनवर (Tab/Select) 3D वायरफ्रेम किंवा वरून दिसणारा ऑटोमॅप दाखवते; तो सतत स्क्रीनवर ठेवण्यासाठी Edit HUD मध्ये ऑटोमॅप जोडा, किंवा पूर्ण-स्क्रीन नकाशासाठी M दाबा (फक्त सिंगल प्लेयर आणि को-ऑप)
+
+@ Shows a live 3D wireframe or top-down automap on the HUD at all times (single player and co-op only)
+mr HUD वर नेहमी थेट 3D वायरफ्रेम किंवा वरून दिसणारा ऑटोमॅप दाखवते (फक्त सिंगल प्लेयर आणि को-ऑप)
 
 @ When picking up a weapon: Never keeps your current weapon; Better weapon switches only if it ranks higher in Weapon Priority
 mr शस्त्र उचलताना: 'कधीही नाही' सध्याचे शस्त्र ठेवते; 'चांगले शस्त्र' फक्त शस्त्र प्राधान्यात वर असल्यास बदलते

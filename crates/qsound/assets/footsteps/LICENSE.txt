@@ -1,0 +1,30 @@
+All footstep and landing audio files in this directory are released under
+Creative Commons Zero (CC0 1.0 Universal / Public Domain Dedication):
+https://creativecommons.org/publicdomain/zero/1.0/
+
+Sources:
+- stone_*.ogg, dirt_*.ogg:
+  "Fantozzi's Footsteps (Grass/Sand & Stone)" by Fantozzi (packaged by qubodup)
+  https://opengameart.org/content/fantozzis-footsteps-grasssand-stone
+  License: CC0 1.0
+
+- metal_*.ogg:
+  "Metal Footsteps" by SoftDistortionFX
+  https://freesound.org/people/SoftDistortionFX/sounds/398937/
+  License: CC0 1.0
+
+- wood_*.ogg:
+  "50 RPG Sound Effects (RPG Audio)" by Kenney (kenney.nl)
+  https://opengameart.org/content/50-rpg-sound-effects
+  License: CC0 1.0
+
+- water_*.ogg, slime_*.ogg:
+  "40 CC0 water / splash / slime SFX" by rubberduck
+  https://opengameart.org/content/40-cc0-water-splash-slime-sfx
+  License: CC0 1.0
+
+- lava_*.ogg:
+  Composite of CC0 slime cues by rubberduck (above) and
+  "Fire Crackling" by AntumDeluge
+  https://opengameart.org/content/fire-crackling
+  License: CC0 1.0

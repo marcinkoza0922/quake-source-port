@@ -1697,8 +1697,8 @@ zh-CN 更强武器
 @ Center overlay
 zh-CN 居中叠加
 
-@ Corner minimap
-zh-CN 角落小地图
+@ Framed panel
+zh-CN 带框面板
 
 @ Display
 zh-CN 显示位置
@@ -2289,11 +2289,11 @@ zh-CN 面向耳机的3D双耳空间音效，具备双耳时间差、头部声影
 @ Muffles and quiets sounds coming from behind solid walls and closed doors
 zh-CN 使来自实体墙壁和关闭门后的声音变闷并变小
 
-@ Plays synthesized player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
-zh-CN 根据石头、金属、木头、泥土与液体地面播放合成脚步声和落地声
+@ Plays player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
+zh-CN 根据石头、金属、木头、泥土和液体地面播放玩家脚步声与落地声
 
-@ Volume of synthesized player footsteps and landings
-zh-CN 合成玩家脚步声和落地声的音量
+@ Volume of player footsteps and landings
+zh-CN 玩家脚步声和落地声的音量
 
 @ Seconds to smoothly fade between music tracks; 0 cuts immediately
 zh-CN 音乐曲目之间平滑淡入淡出的秒数；0 为立即切换
@@ -2319,8 +2319,8 @@ zh-CN 排列用于“更强武器”自动切换的武器优先级顺序
 @ Configure the 3D wireframe automap view, display, reveal mode, zoom and markers
 zh-CN 配置 3D 线框自动地图的视图、显示位置、显示范围、缩放和标记
 
-@ Corner minimap frames the map in the top-right; Center overlay floats a transparent wireframe over the view
-zh-CN 角落小地图将地图固定在右上角；居中叠加则在画面上方浮动透明线框
+@ Framed panel centers the map in a dark box on the statistics screen; Center overlay floats a transparent wireframe over the view
+zh-CN 带框面板在统计画面中央以深色方框显示地图；居中叠加会在画面上方浮现半透明线框
 
 @ Disabled while Weapon Auto-Switch is set to Never
 zh-CN 当武器自动切换设为“从不”时禁用
@@ -2337,8 +2337,11 @@ zh-CN 自动地图线条和面板的不透明度
 @ Rotates the automap so your facing direction points up; off keeps North at the top
 zh-CN 旋转自动地图使你的朝向指向正上方；关闭则保持北方在上方
 
-@ Shows a live 3D wireframe or top-down automap while playing; press M for the interactive full-screen map (single player and co-op only)
-zh-CN 游玩时实时显示 3D 线框或俯视自动地图；按 M 打开可交互全屏地图（仅限单人游戏与合作模式）
+@ Shows a 3D wireframe or top-down automap on the statistics screen (Tab/Select); add Automap in Edit HUD to keep it on screen, or press M for the full-screen map (single player and co-op only)
+zh-CN 在统计画面（Tab/Select）显示 3D 线框或俯视自动地图；若要常驻显示，请在编辑 HUD 中添加自动地图，或按 M 打开全屏地图（仅单人和合作模式）
+
+@ Shows a live 3D wireframe or top-down automap on the HUD at all times (single player and co-op only)
+zh-CN 在 HUD 上始终实时显示 3D 线框或俯视自动地图（仅单人和合作模式）
 
 @ When picking up a weapon: Never keeps your current weapon; Better weapon switches only if it ranks higher in Weapon Priority
 zh-CN 拾取武器时：“从不”保持当前武器；“更强武器”仅在该武器在武器优先级中排名更高时切换

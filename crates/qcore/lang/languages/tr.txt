@@ -1697,8 +1697,8 @@ tr Daha iyi silah
 @ Center overlay
 tr Orta kaplama
 
-@ Corner minimap
-tr Köşe mini haritası
+@ Framed panel
+tr Çerçeveli panel
 
 @ Display
 tr Görünüm
@@ -2289,11 +2289,11 @@ tr Kulaklıklar için kulak zamanlaması, baş gölgesi ve ön/arka/yükseklik i
 @ Muffles and quiets sounds coming from behind solid walls and closed doors
 tr Kalın duvarların ve kapalı kapıların arkasından gelen sesleri boğuklaştırır ve kısar
 
-@ Plays synthesized player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
-tr Taş, metal, ahşap, toprak ve sıvı zeminlere uygun sentezlenmiş adım ve iniş sesleri çalar
+@ Plays player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
+tr Taş, metal, ahşap, toprak ve sıvı zeminlere uygun oyuncu ayak sesleri ve iniş sesleri çalar
 
-@ Volume of synthesized player footsteps and landings
-tr Sentezlenmiş oyuncu adım ve iniş seslerinin düzeyi
+@ Volume of player footsteps and landings
+tr Oyuncu ayak sesleri ve iniş ses düzeyi
 
 @ Seconds to smoothly fade between music tracks; 0 cuts immediately
 tr Müzik parçaları arasında yumuşak geçiş süresi (saniye); 0 anında değiştirir
@@ -2319,8 +2319,8 @@ tr Daha iyi silah otomatik geçişi için silah öncelik sırasını düzenler
 @ Configure the 3D wireframe automap view, display, reveal mode, zoom and markers
 tr 3D tel kafes oto-haritanın görünümünü, yerleşimini, açma modunu, yakınlaştırmasını ve işaretlerini ayarlar
 
-@ Corner minimap frames the map in the top-right; Center overlay floats a transparent wireframe over the view
-tr Köşe mini haritası haritayı sağ üste yerleştirir; Orta kaplama görüntünün üzerine yarı saydam bir tel kafes çizer
+@ Framed panel centers the map in a dark box on the statistics screen; Center overlay floats a transparent wireframe over the view
+tr Çerçeveli panel istatistik ekranında haritayı koyu bir kutuda ortalar; Orta katman görüntünün üzerinde saydam bir tel kafes gösterir
 
 @ Disabled while Weapon Auto-Switch is set to Never
 tr Otomatik Silah Değiştirme Asla ayarlıyken devre dışıdır
@@ -2337,8 +2337,11 @@ tr Oto-harita çizgilerinin ve panelinin opaklığı
 @ Rotates the automap so your facing direction points up; off keeps North at the top
 tr Oto-haritayı baktığın yön yukarı gelecek şekilde döndürür; kapalıyken kuzey üstte kalır
 
-@ Shows a live 3D wireframe or top-down automap while playing; press M for the interactive full-screen map (single player and co-op only)
-tr Oynarken canlı 3D tel kafes veya üstten oto-harita gösterir; etkileşimli tam ekran harita için M'ye bas (yalnızca tek oyunculu ve ortak oyun)
+@ Shows a 3D wireframe or top-down automap on the statistics screen (Tab/Select); add Automap in Edit HUD to keep it on screen, or press M for the full-screen map (single player and co-op only)
+tr İstatistik ekranında (Tab/Select) 3D tel kafes veya kuşbakışı otoharita gösterir; ekranda sürekli kalması için HUD Düzenle'den Otoharita ekleyin veya tam ekran harita için M'ye basın (yalnızca tek oyuncu ve eşli)
+
+@ Shows a live 3D wireframe or top-down automap on the HUD at all times (single player and co-op only)
+tr HUD üzerinde her zaman canlı 3D tel kafes veya kuşbakışı otoharita gösterir (yalnızca tek oyuncu ve eşli)
 
 @ When picking up a weapon: Never keeps your current weapon; Better weapon switches only if it ranks higher in Weapon Priority
 tr Silah alırken: Asla mevcut silahını korur; Daha iyi silah yalnızca Silah Önceliği listesinde daha üstteyse değiştirir

@@ -1697,8 +1697,8 @@ gl Mellor arma
 @ Center overlay
 gl Superposición central
 
-@ Corner minimap
-gl Minimapa na esquina
+@ Framed panel
+gl Panel enmarcado
 
 @ Display
 gl Visualización
@@ -2289,11 +2289,11 @@ gl Espacialización binaural 3D para auriculares con atraso entre oídos, sombra
 @ Muffles and quiets sounds coming from behind solid walls and closed doors
 gl Abafa e baixa os sons que chegan detrás de muros sólidos e portas pechadas
 
-@ Plays synthesized player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
-gl Reproduce pasos e aterraxes sintetizados adaptados a pedra, metal, madeira, terra e líquidos
+@ Plays player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
+gl Reproduce pasos e aterraxes do xogador adaptados a chans de pedra, metal, madeira, terra e líquidos
 
-@ Volume of synthesized player footsteps and landings
-gl Volume dos pasos e aterraxes sintetizados do xogador
+@ Volume of player footsteps and landings
+gl Volume dos pasos e aterraxes do xogador
 
 @ Seconds to smoothly fade between music tracks; 0 cuts immediately
 gl Segundos para fundir suavemente entre pistas musicais; 0 cambia ao instante
@@ -2319,8 +2319,8 @@ gl Ordena a prioridade das armas para o cambio automático a Mellor arma
 @ Configure the 3D wireframe automap view, display, reveal mode, zoom and markers
 gl Configura a vista, visualización, modo de revelación, zoom e marcadores do automapa de arame 3D
 
-@ Corner minimap frames the map in the top-right; Center overlay floats a transparent wireframe over the view
-gl Minimapa na esquina encadra o mapa arriba á dereita; Superposición central mostra un arame transparente sobre a vista
+@ Framed panel centers the map in a dark box on the statistics screen; Center overlay floats a transparent wireframe over the view
+gl O panel enmarcado centra o mapa nun recadro escuro na pantalla de estatísticas; a superposición central mostra un aramado transparente sobre a vista
 
 @ Disabled while Weapon Auto-Switch is set to Never
 gl Desactivado mentres Cambio automático de arma estea en Nunca
@@ -2337,8 +2337,11 @@ gl Opacidade das liñas e do panel do automapa
 @ Rotates the automap so your facing direction points up; off keeps North at the top
 gl Rota o automapa para que a túa dirección apunte cara arriba; desactivado mantén o norte arriba
 
-@ Shows a live 3D wireframe or top-down automap while playing; press M for the interactive full-screen map (single player and co-op only)
-gl Amosa un automapa en vivo de arame 3D ou vista cenital ao xogar; preme M para o mapa interactivo a pantalla completa (só un xogador e cooperativo)
+@ Shows a 3D wireframe or top-down automap on the statistics screen (Tab/Select); add Automap in Edit HUD to keep it on screen, or press M for the full-screen map (single player and co-op only)
+gl Mostra un automapa 3D ou cenital na pantalla de estatísticas (Tab/Select); engade Automapa en Editar HUD para mantelo en pantalla ou preme M para o mapa a pantalla completa (só un xogador e cooperativo)
+
+@ Shows a live 3D wireframe or top-down automap on the HUD at all times (single player and co-op only)
+gl Mostra sempre un automapa 3D ou cenital en directo no HUD (só un xogador e cooperativo)
 
 @ When picking up a weapon: Never keeps your current weapon; Better weapon switches only if it ranks higher in Weapon Priority
 gl Ao recoller unha arma: Nunca mantén a arma actual; Mellor arma cambia só se ten maior rango en Prioridade de armas

@@ -220,3 +220,41 @@ fn controller_navigates_moves_and_configures_elements() {
 
     assert!(ed.key(K_START, &mut cv).exit);
 }
+
+#[test]
+fn add_automap_element_from_tree_and_edit_options() {
+    let (mut ed, mut cv) = setup();
+    for &(name, default) in &[
+        ("cl_automap_view", "0"),
+        ("cl_automap_rotate", "1"),
+        ("cl_automap_reveal", "0"),
+        ("cl_automap_zoom", "1"),
+        ("cl_automap_markers", "1"),
+    ] {
+        cv.register(name, default, 0);
+    }
+    let n = kinds(&cv).len();
+    ed.key(K_INS, &mut cv);
+    // Navigate to the "Automap" category (7th category, index 6).
+    for _ in 0..6 {
+        ed.key(K_DOWNARROW, &mut cv);
+    }
+    ed.key(K_RIGHTARROW, &mut cv);
+    ed.key(K_DOWNARROW, &mut cv);
+    ed.key(K_ENTER, &mut cv);
+    assert!(ed.popup.is_none());
+    let l = layout(&cv);
+    assert_eq!(l.elems.len(), n + 1);
+    let am = l.elems.last().unwrap();
+    assert_eq!(am.kind, Kind::Automap);
+    assert_eq!(am.anchor, Anchor::TopRight);
+    assert!(am.bg);
+
+    // Background toggles cleanly and View Mode updates cl_automap_view.
+    ed.cursor_to(Row::Prop(Prop::Background), &l);
+    ed.key(K_RIGHTARROW, &mut cv);
+    assert!(!layout(&cv).elems.last().unwrap().bg);
+    ed.cursor_to(Row::Prop(Prop::Opt(0)), &l);
+    ed.key(K_RIGHTARROW, &mut cv);
+    assert_eq!(cv.value_of("cl_automap_view"), 1.0);
+}

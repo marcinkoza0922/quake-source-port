@@ -37,11 +37,21 @@ pub(crate) fn classify(name: &str) -> Material {
     if crate::impacts::surfaces::wood(&n) {
         return Material::Wood;
     }
-    if has(&["metal", "tech", "comp", "plat", "pipe", "grate", "rivet", "steel", "iron", "copper", "bronze",
-        "silver", "gold", "button", "light", "slip", "mtl", "chain", "vent", "door", "key", "+0exit", "exit"]) {
+    let base = if n.starts_with('+') && n.len() > 2 { &n[2..] } else { n.as_str() };
+    let metal_prefix = ["cop", "ecop", "met1", "met2", "met3", "met4", "met5", "met6", "met7", "met8", "met9", "met_", "m5_"]
+        .iter()
+        .any(|p| base.starts_with(p));
+    if metal_prefix
+        || has(&[
+            "metal", "wizmet", "wmet", "metflor", "metflr", "metalt", "sfloor", "tech", "twall",
+            "comp", "plat", "pipe", "grate", "rivet", "steel", "iron", "copper", "bronze",
+            "silver", "gold", "button", "basebtn", "floorsw", "swtch", "switch", "light", "slip",
+            "mtl", "chain", "vent", "door", "key", "+0exit", "exit",
+        ])
+    {
         return Material::Metal;
     }
-    if has(&["ground", "dirt", "grass", "mud", "sand", "earth", "moss", "soil", "rubble"]) {
+    if has(&["ground", "grnd", "dirt", "grass", "mud", "sand", "earth", "moss", "soil", "rubble"]) {
         return Material::Dirt;
     }
     Material::Stone

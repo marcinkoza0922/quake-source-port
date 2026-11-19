@@ -1697,8 +1697,8 @@ be Лепшая зброя
 @ Center overlay
 be Накладанне па цэнтры
 
-@ Corner minimap
-be Мінікарта ў куце
+@ Framed panel
+be Панэль у рамцы
 
 @ Display
 be Адлюстраванне
@@ -2289,11 +2289,11 @@ be Бінаўральная 3D-лакалізацыя для навушніка�
 @ Muffles and quiets sounds coming from behind solid walls and closed doors
 be Прыглушае і аслабляе гукі з-за суцэльных сцен і зачыненых дзвярэй
 
-@ Plays synthesized player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
-be Прайгравае сінтэзаваныя крокі і прызямленні для каменю, металу, дрэва, зямлі і вадкасцей
+@ Plays player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
+be Прайгравае крокі і прызямленні гульца для каменю, металу, дрэва, зямлі і вадкасцяў
 
-@ Volume of synthesized player footsteps and landings
-be Гучнасць сінтэзаваных крокаў і прызямленняў гульца
+@ Volume of player footsteps and landings
+be Гучнасць крокаў і прызямленняў гульца
 
 @ Seconds to smoothly fade between music tracks; 0 cuts immediately
 be Секунды плаўнага пераходу паміж музычнымі трэкамі; 0 пераключае імгненна
@@ -2319,8 +2319,8 @@ be Наладзьце парадак прыярытэту зброі для аў
 @ Configure the 3D wireframe automap view, display, reveal mode, zoom and markers
 be Наладзьце выгляд, адлюстраванне, рэжым адкрыцця, маштаб і маркеры 3D-каркаснай аўтакарты
 
-@ Corner minimap frames the map in the top-right; Center overlay floats a transparent wireframe over the view
-be Мінікарта ў куце размяшчае карту справа зверху; Накладанне па цэнтры паказвае празрысты каркас паверх выгляду
+@ Framed panel centers the map in a dark box on the statistics screen; Center overlay floats a transparent wireframe over the view
+be Панэль у рамцы размяшчае карту па цэнтры ў цёмным акне на экране статыстыкі; накладанне па цэнтры паказвае празрысты каркас паверх агляду
 
 @ Disabled while Weapon Auto-Switch is set to Never
 be Адключана, пакуль Аўтазамена зброі ўсталявана на Ніколі
@@ -2337,8 +2337,11 @@ be Непразрыстасць ліній і панэлі аўтакарты
 @ Rotates the automap so your facing direction points up; off keeps North at the top
 be Паварочвае аўтакарту так, каб кірунак вашага погляду быў уверх; выключана — поўнач застаецца зверху
 
-@ Shows a live 3D wireframe or top-down automap while playing; press M for the interactive full-screen map (single player and co-op only)
-be Паказвае жывую 3D-каркасную або верхнюю аўтакарту падчас гульні; націсніце M для інтэрактыўнай поўнаэкраннай карты (толькі адзіночная гульня і кааператыў)
+@ Shows a 3D wireframe or top-down automap on the statistics screen (Tab/Select); add Automap in Edit HUD to keep it on screen, or press M for the full-screen map (single player and co-op only)
+be Паказвае 3D-каркасную або верхнюю аўтакарту на экране статыстыкі (Tab/Select); дадайце Аўтакарту ў рэдактары HUD для пастаяннага паказу або націсніце M для поўнаэкраннай карты (толькі адзіночная і кааператыў)
+
+@ Shows a live 3D wireframe or top-down automap on the HUD at all times (single player and co-op only)
+be Пастаянна паказвае 3D-каркасную або верхнюю аўтакарту на HUD (толькі адзіночная і кааператыў)
 
 @ When picking up a weapon: Never keeps your current weapon; Better weapon switches only if it ranks higher in Weapon Priority
 be Пры падборы зброі: Ніколі пакідае бягучую зброю; Лепшая зброя пераключаецца толькі тады, калі яна стаіць вышэй у Прыярытэце зброі

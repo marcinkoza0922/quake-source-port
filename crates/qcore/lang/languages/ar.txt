@@ -1697,8 +1697,8 @@ ar سلاح أفضل
 @ Center overlay
 ar تراكب مركزي
 
-@ Corner minimap
-ar خريطة مصغرة بالزاوية
+@ Framed panel
+ar لوحة مؤطرة
 
 @ Display
 ar العرض
@@ -2289,11 +2289,11 @@ ar توزيع صوتي ثلاثي الأبعاد لسماعات الرأس مع 
 @ Muffles and quiets sounds coming from behind solid walls and closed doors
 ar يكتم ويخفض الأصوات القادمة من خلف الجدران الصلبة والأبواب المغلقة
 
-@ Plays synthesized player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
-ar يشغّل أصوات خطوات وهبوط مصنّعة تناسب الحجر والمعدن والخشب والتراب والسوائل
+@ Plays player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
+ar يشغّل أصوات خطوات وهبوط اللاعب بما يتناسب مع الأرضيات الحجرية والمعدنية والخشبية والترابية والسائلة
 
-@ Volume of synthesized player footsteps and landings
-ar مستوى صوت خطوات اللاعب وهبوطه المصنّعة
+@ Volume of player footsteps and landings
+ar مستوى صوت خطوات وهبوط اللاعب
 
 @ Seconds to smoothly fade between music tracks; 0 cuts immediately
 ar ثواني التلاشي السلس بين المقطوعات الموسيقية؛ 0 يبدّل فورًا
@@ -2319,8 +2319,8 @@ ar رتّب أولوية الأسلحة للتبديل التلقائي إلى �
 @ Configure the 3D wireframe automap view, display, reveal mode, zoom and markers
 ar اضبط وضع العرض والشكل والكشف والتكبير والعلامات للخريطة التلقائية ثلاثية الأبعاد
 
-@ Corner minimap frames the map in the top-right; Center overlay floats a transparent wireframe over the view
-ar الخريطة المصغرة بالزاوية تضع الخريطة أعلى اليمين؛ التراكب المركزي يعرض شبكة شفافة فوق المشهد
+@ Framed panel centers the map in a dark box on the statistics screen; Center overlay floats a transparent wireframe over the view
+ar اللوحة المؤطرة تتوسط الخريطة داخل صندوق داكن في شاشة الإحصاءات؛ التراكب الأوسط يعرض شبكة سلكية شفافة فوق العرض
 
 @ Disabled while Weapon Auto-Switch is set to Never
 ar معطّل عندما يكون التبديل التلقائي للسلاح مضبوطًا على أبدًا
@@ -2337,8 +2337,11 @@ ar عتامة خطوط ولوحة الخريطة التلقائية
 @ Rotates the automap so your facing direction points up; off keeps North at the top
 ar يدوّر الخريطة التلقائية ليشير اتجاه نظرك للأعلى؛ عند الإيقاف يبقى الشمال للأعلى
 
-@ Shows a live 3D wireframe or top-down automap while playing; press M for the interactive full-screen map (single player and co-op only)
-ar يعرض خريطة تلقائية شبكية ثلاثية الأبعاد أو علوية أثناء اللعب؛ اضغط M للخريطة التفاعلية بملء الشاشة (فردي وتعاوني فقط)
+@ Shows a 3D wireframe or top-down automap on the statistics screen (Tab/Select); add Automap in Edit HUD to keep it on screen, or press M for the full-screen map (single player and co-op only)
+ar يعرض خريطة تلقائية ثلاثية الأبعاد أو علوية في شاشة الإحصاءات (Tab/Select)؛ أضف الخريطة في محرر الواجهة لإبقائها ظاهرة، أو اضغط M للخريطة بملء الشاشة (للفردي والتعاوني فقط)
+
+@ Shows a live 3D wireframe or top-down automap on the HUD at all times (single player and co-op only)
+ar يعرض خريطة تلقائية ثلاثية الأبعاد أو علوية مباشرة على الواجهة طوال الوقت (للفردي والتعاوني فقط)
 
 @ When picking up a weapon: Never keeps your current weapon; Better weapon switches only if it ranks higher in Weapon Priority
 ar عند التقاط سلاح: أبدًا يُبقي سلاحك الحالي؛ سلاح أفضل يبدّل فقط إذا كان أعلى رتبة في أولوية الأسلحة

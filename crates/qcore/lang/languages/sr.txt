@@ -1697,8 +1697,8 @@ sr Боље оружје
 @ Center overlay
 sr Преклапање у средини
 
-@ Corner minimap
-sr Минимапа у углу
+@ Framed panel
+sr Уоквирени панел
 
 @ Display
 sr Приказ
@@ -2289,11 +2289,11 @@ sr Бинаурални 3D звук за слушалице са кашњење�
 @ Muffles and quiets sounds coming from behind solid walls and closed doors
 sr Пригушује и утишава звуке иза чврстих зидова и затворених врата
 
-@ Plays synthesized player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
-sr Пушта синтетизоване кораке и доскоке играча за камен, метал, дрво, земљу и течности
+@ Plays player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
+sr Репродукује кораке и доскоке играча усклађене са каменим, металним, дрвеним, земљаним и течним подлогама
 
-@ Volume of synthesized player footsteps and landings
-sr Јачина синтетизованих корака и доскока играча
+@ Volume of player footsteps and landings
+sr Јачина звука корака и доскока играча
 
 @ Seconds to smoothly fade between music tracks; 0 cuts immediately
 sr Секунде глатког претапања између музичких нумера; 0 пребацује одмах
@@ -2319,8 +2319,8 @@ sr Уреди редослед приоритета оружја за аутом
 @ Configure the 3D wireframe automap view, display, reveal mode, zoom and markers
 sr Подеси поглед, приказ, режим откривања, зум и маркере 3D жичане аутомапе
 
-@ Corner minimap frames the map in the top-right; Center overlay floats a transparent wireframe over the view
-sr Минимапа у углу смешта мапу горе десно; Преклапање у средини приказује прозиран жичани приказ преко погледа
+@ Framed panel centers the map in a dark box on the statistics screen; Center overlay floats a transparent wireframe over the view
+sr Уоквирени панел центрира мапу у тамном оквиру на екрану статистике; средишњи преклоп приказује провидну жичану мрежу преко погледа
 
 @ Disabled while Weapon Auto-Switch is set to Never
 sr Онемогућено док је Аутоматска промена оружја подешена на Никада
@@ -2337,8 +2337,11 @@ sr Непрозирност линија и панела аутомапе
 @ Rotates the automap so your facing direction points up; off keeps North at the top
 sr Ротира аутомапу тако да ваш правац погледа буде нагоре; искључено држи север на врху
 
-@ Shows a live 3D wireframe or top-down automap while playing; press M for the interactive full-screen map (single player and co-op only)
-sr Приказује живу 3D жичану или аутомапу одозго током игре; притисните M за интерактивну мапу преко целог екрана (само један играч и кооперација)
+@ Shows a 3D wireframe or top-down automap on the statistics screen (Tab/Select); add Automap in Edit HUD to keep it on screen, or press M for the full-screen map (single player and co-op only)
+sr Приказује 3D жичану или горњу аутомапу на екрану статистике (Tab/Select); додајте Аутомапу у уређивачу HUD-а за сталан приказ или притисните M за мапу преко целог екрана (само један играч и кооп)
+
+@ Shows a live 3D wireframe or top-down automap on the HUD at all times (single player and co-op only)
+sr Стално приказује 3D жичану или горњу аутомапу уживо на HUD-у (само један играч и кооп)
 
 @ When picking up a weapon: Never keeps your current weapon; Better weapon switches only if it ranks higher in Weapon Priority
 sr При подизању оружја: Никада задржава тренутно оружје; Боље оружје мења само ако је више рангирано у Приоритету оружја

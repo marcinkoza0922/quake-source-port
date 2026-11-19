@@ -1697,8 +1697,8 @@ mt Arma aħjar
 @ Center overlay
 mt Sovrappożizzjoni fiċ-ċentru
 
-@ Corner minimap
-mt Minimappa fil-kantuniera
+@ Framed panel
+mt Pannell b'qafas
 
 @ Display
 mt Wiri
@@ -2289,11 +2289,11 @@ mt Spazjalizzazzjoni binawrali 3D għall-headphones b'ħin tal-widnejn, dell tar
 @ Muffles and quiets sounds coming from behind solid walls and closed doors
 mt Itaffi u jbaxxi ħsejjes ġejjin minn wara ħitan sodi u bibien magħluqa
 
-@ Plays synthesized player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
-mt Iddoqq passi u nżul sintetizzati skont art tal-ġebel, metall, injam, ħamrija u likwidi
+@ Plays player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
+mt Idoqq il-passi u l-inżul tal-plejer skont uċuħ tal-ġebel, metall, injam, ħamrija u likwidu
 
-@ Volume of synthesized player footsteps and landings
-mt Volum tal-passi u l-inżul sintetizzati tal-plejer
+@ Volume of player footsteps and landings
+mt Volum tal-passi u l-inżul tal-plejer
 
 @ Seconds to smoothly fade between music tracks; 0 cuts immediately
 mt Sekondi biex il-mużika tgħaddi bil-mod bejn binarji; 0 tibdel mill-ewwel
@@ -2319,8 +2319,8 @@ mt Irranġa l-ordni tal-prijorità tal-armi għall-bidla awtomatika ta' Arma aħ
 @ Configure the 3D wireframe automap view, display, reveal mode, zoom and markers
 mt Ikkonfigura l-veduta, il-wiri, il-modalità tal-kixif, iż-zoom u l-markaturi tal-awto-mappa 3D
 
-@ Corner minimap frames the map in the top-right; Center overlay floats a transparent wireframe over the view
-mt Minimappa fil-kantuniera tpoġġi l-mappa f'qafas fin-naħa ta' fuq tal-lemin; Sovrappożizzjoni fiċ-ċentru tpoġġi wireframe trasparenti fuq il-veduta
+@ Framed panel centers the map in a dark box on the statistics screen; Center overlay floats a transparent wireframe over the view
+mt Il-pannell b'qafas iċċentra l-mappa f'kaxxa skura fuq l-iskrin tal-istatistika; is-saff tan-nofs juri wireframe trasparenti fuq il-veduta
 
 @ Disabled while Weapon Auto-Switch is set to Never
 mt Diżattivat waqt li Bidla Awtomatika tal-Arma tkun issettjata fuq Qatt
@@ -2337,8 +2337,11 @@ mt Opaċità tal-linji u tal-pannell tal-awto-mappa
 @ Rotates the automap so your facing direction points up; off keeps North at the top
 mt Iddawwar l-awto-mappa sabiex id-direzzjoni li qed tħares lejha tipponta 'l fuq; mitfi jżomm it-Tramuntana fuq nett
 
-@ Shows a live 3D wireframe or top-down automap while playing; press M for the interactive full-screen map (single player and co-op only)
-mt Turi awto-mappa ħajja b'wireframe 3D jew minn fuq waqt il-logħob; agħfas M għall-mappa interattiva fuq l-iskrin kollu (single-player u co-op biss)
+@ Shows a 3D wireframe or top-down automap on the statistics screen (Tab/Select); add Automap in Edit HUD to keep it on screen, or press M for the full-screen map (single player and co-op only)
+mt Juri awtomappa 3D wireframe jew minn fuq fuq l-iskrin tal-istatistika (Tab/Select); żid Awtomappa f'Editja l-HUD biex tibqa' tidher, jew agħfas M għall-mappa fuq l-iskrin kollu (plejer wieħed u ko-op biss)
+
+@ Shows a live 3D wireframe or top-down automap on the HUD at all times (single player and co-op only)
+mt Juri awtomappa ħajja 3D wireframe jew minn fuq fuq il-HUD il-ħin kollu (plejer wieħed u ko-op biss)
 
 @ When picking up a weapon: Never keeps your current weapon; Better weapon switches only if it ranks higher in Weapon Priority
 mt Meta tiġbor arma: Qatt iżżomm l-arma attwali tiegħek; Arma aħjar taqleb biss jekk tkun ogħla fil-Prijorità tal-Armi

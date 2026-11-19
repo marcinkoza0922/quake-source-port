@@ -1697,8 +1697,8 @@ th อาวุธ​ที่​ดี​กว่า
 @ Center overlay
 th ซ้อน​ทับ​กลาง​จอ
 
-@ Corner minimap
-th แผนที่​ย่อ​มุม​จอ
+@ Framed panel
+th แผง​มี​กรอบ
 
 @ Display
 th การ​แสดงผล
@@ -2289,11 +2289,11 @@ th เสียง​สาม​มิติ​สำหรับ​หูฟ�
 @ Muffles and quiets sounds coming from behind solid walls and closed doors
 th ทำ​ให้​เสียง​จาก​หลัง​กำแพง​ทึบ​และ​ประตู​ที่​ปิด​อู้อี้​และ​เบา​ลง
 
-@ Plays synthesized player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
-th เล่น​เสียง​ฝีเท้า​และ​การ​ลง​พื้น​สังเคราะห์​ตาม​พื้น​หิน โลหะ ไม้ ดิน และ​ของเหลว
+@ Plays player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
+th เล่น​เสียง​ฝีเท้า​และ​การ​ลง​พื้น​ตาม​พื้น​หิน โลหะ ไม้ ดิน และ​ของเหลว
 
-@ Volume of synthesized player footsteps and landings
-th ระดับ​เสียง​ฝีเท้า​และ​การ​ลง​พื้น​สังเคราะห์​ของ​ผู้เล่น
+@ Volume of player footsteps and landings
+th ระดับ​เสียง​ฝีเท้า​และ​การ​ลง​พื้น​ของ​ผู้เล่น
 
 @ Seconds to smoothly fade between music tracks; 0 cuts immediately
 th จำนวน​วินาที​สำหรับ​เฟด​เปลี่ยน​เพลง​อย่าง​นุ่มนวล; 0 เปลี่ยน​ทันที
@@ -2319,8 +2319,8 @@ th จัด​ลำดับ​ความ​สำคัญ​ของ​�
 @ Configure the 3D wireframe automap view, display, reveal mode, zoom and markers
 th ตั้งค่า​มุม​มอง การ​แสดงผล การ​เปิดเผย การ​ซูม และ​เครื่องหมาย​ของ​แผนที่​อัตโนมัติ​แบบ​โครง​ลวด 3D
 
-@ Corner minimap frames the map in the top-right; Center overlay floats a transparent wireframe over the view
-th แผนที่​ย่อ​มุม​จอ​จัด​กรอบ​ไว้​มุม​ขวา​บน ส่วน​ซ้อน​ทับ​กลาง​จอ​จะ​ลอย​โครง​ลวด​โปร่งใส​เหนือ​ภาพ
+@ Framed panel centers the map in a dark box on the statistics screen; Center overlay floats a transparent wireframe over the view
+th แผง​มี​กรอบ​จัด​แผนที่​ไว้​กลาง​หน้า​จอ​สถิติ​ใน​กรอบ​มืด ส่วน​ซ้อน​ทับ​กลาง​จอ​จะ​ลอย​โครง​ลวด​โปร่งใส​เหนือ​ภาพ
 
 @ Disabled while Weapon Auto-Switch is set to Never
 th ปิด​ใช้​งาน​เมื่อ​ตั้ง​สลับ​อาวุธ​อัตโนมัติ​เป็น​ไม่​เปลี่ยน
@@ -2337,8 +2337,11 @@ th ความ​ทึบ​ของ​เส้น​และ​แผง�
 @ Rotates the automap so your facing direction points up; off keeps North at the top
 th หมุน​แผนที่​อัตโนมัติ​ให้​ทิศ​ที่​หัน​อยู่​ชี้​ขึ้น หาก​ปิด​จะ​ให้​ทิศ​เหนือ​อยู่​ด้าน​บน
 
-@ Shows a live 3D wireframe or top-down automap while playing; press M for the interactive full-screen map (single player and co-op only)
-th แสดง​แผนที่​อัตโนมัติ​แบบ​โครง​ลวด 3D หรือ​ด้าน​บน​ขณะ​เล่น กด M เพื่อ​เปิด​แผนที่​เต็ม​จอ (เล่น​คน​เดียว​และ​ร่วม​มือ​เท่านั้น)
+@ Shows a 3D wireframe or top-down automap on the statistics screen (Tab/Select); add Automap in Edit HUD to keep it on screen, or press M for the full-screen map (single player and co-op only)
+th แสดง​แผนที่​อัตโนมัติ​แบบ​โครง​ลวด 3D หรือ​ด้าน​บน​บน​หน้า​จอ​สถิติ (Tab/Select) เพิ่ม​แผนที่​ใน​แก้ไข HUD เพื่อ​แสดง​ตลอด​เวลา หรือ​กด M สำหรับ​แผนที่​เต็ม​จอ (เล่น​คน​เดียว​และ​ร่วม​มือ​เท่านั้น)
+
+@ Shows a live 3D wireframe or top-down automap on the HUD at all times (single player and co-op only)
+th แสดง​แผนที่​อัตโนมัติ​แบบ​โครง​ลวด 3D หรือ​ด้าน​บน​บน HUD ตลอด​เวลา (เล่น​คน​เดียว​และ​ร่วม​มือ​เท่านั้น)
 
 @ When picking up a weapon: Never keeps your current weapon; Better weapon switches only if it ranks higher in Weapon Priority
 th เมื่อ​เก็บ​อาวุธ: ไม่​เปลี่ยน​จะ​ถือ​อาวุธ​เดิม อาวุธ​ที่​ดี​กว่า​จะ​เปลี่ยน​ต่อ​เมื่อ​อยู่​ลำดับ​สูง​กว่า​ใน​ลำดับ​อาวุธ

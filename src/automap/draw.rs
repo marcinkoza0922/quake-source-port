@@ -63,8 +63,8 @@ pub struct Projector {
 }
 
 const NEAR_Z: f32 = 24.0;
-const BORDER: [f32; 4] = [0.75, 0.58, 0.30, 0.85];
-const GOLD: [f32; 4] = [0.98, 0.80, 0.35, 1.0];
+pub(super) const BORDER: [f32; 4] = [0.75, 0.58, 0.30, 0.85];
+pub(super) const GOLD: [f32; 4] = [0.98, 0.80, 0.35, 1.0];
 const FG: [f32; 4] = [0.92, 0.90, 0.85, 1.0];
 const MUTED: [f32; 4] = [0.68, 0.66, 0.60, 0.95];
 
@@ -211,7 +211,7 @@ fn edge_color(edge: &MapEdge, focus: Vec3, max_dist: f32, base_alpha: f32) -> Op
 }
 
 #[allow(clippy::too_many_arguments)]
-fn draw_wireframe(
+pub(super) fn draw_wireframe(
     c: &mut Canvas,
     mesh: &MapMesh,
     explored: &[bool],
@@ -294,7 +294,7 @@ fn draw_wireframe(
     }
 }
 
-fn draw_compass(c: &mut Canvas, cx: f32, cy: f32, r: f32, yaw_deg: f32, alpha: f32) {
+pub(super) fn draw_compass(c: &mut Canvas, cx: f32, cy: f32, r: f32, yaw_deg: f32, alpha: f32) {
     // World north is +Y (yaw = 90°). Screen offset for world north relative to camera yaw:
     let a = (90.0 - yaw_deg).to_radians();
     let tip = (r - 4.0).max(3.0);
@@ -306,9 +306,9 @@ fn draw_compass(c: &mut Canvas, cx: f32, cy: f32, r: f32, yaw_deg: f32, alpha: f
     c.text_raw(lx - 2.5, ly - 3.5, "N", 6.5, [1.0, 0.78, 0.38, alpha]);
 }
 
-/// Draws the live HUD automap (corner minimap or center overlay).
+/// Draws the automap on the statistics screen (while holding Tab / Select).
 #[allow(clippy::too_many_arguments)]
-pub fn draw_hud(
+pub fn draw_scores(
     c: &mut Canvas,
     mesh: &MapMesh,
     explored: &[bool],
@@ -316,30 +316,32 @@ pub fn draw_hud(
     player_pos: Vec3,
     player_yaw: f32,
     set: Settings,
+    top_reserve: f32,
     reserve_bottom: f32,
 ) {
     if !set.enabled || mesh.edges.is_empty() {
         return;
     }
     let vw = c.vw();
-    let vh = (c.vh() - reserve_bottom).max(60.0);
+    let y0 = top_reserve;
+    let avail_h = (c.vh() - reserve_bottom - y0 - 8.0).max(60.0);
     let yaw = if set.rotate { player_yaw } else { 90.0 };
     let line_w = (c.scale * 0.45).clamp(1.0, 2.0);
 
     if set.overlay {
         let w = (vw * 0.72).min(460.0);
-        let h = (vh * 0.72).min(280.0);
-        let rect = [(vw - w) * 0.5, (vh - h) * 0.5, w, h];
+        let h = (avail_h * 0.88).min(260.0);
+        let rect = [(vw - w) * 0.5, y0 + (avail_h - h) * 0.5, w, h];
         let proj = Projector::new(rect, player_pos, yaw, 38.0, set.zoom, set.top_down);
-        draw_wireframe(c, mesh, explored, &proj, set.reveal, set.alpha * 0.85, line_w, set.markers, false, trail, player_pos, player_yaw);
+        draw_wireframe(c, mesh, explored, &proj, set.reveal, set.alpha * 0.9, line_w, set.markers, false, trail, player_pos, player_yaw);
         return;
     }
 
-    // Corner minimap (top-right).
-    let w = (vw * 0.28).clamp(112.0, 172.0);
-    let h = (w * 0.72).min(vh * 0.45);
-    let x = vw - w - 8.0;
-    let y = 8.0;
+    // Framed centered panel on the statistics screen.
+    let w = (vw * 0.68).clamp(160.0, 340.0);
+    let h = (avail_h * 0.84).clamp(96.0, 180.0);
+    let x = (vw - w) * 0.5;
+    let y = y0 + (avail_h - h) * 0.5;
     let rect = [x + 2.0, y + 2.0, w - 4.0, h - 4.0];
     c.round_box(x, y, w, h, 3.0, [0.03, 0.04, 0.06, set.alpha * 0.78], Some([BORDER[0], BORDER[1], BORDER[2], set.alpha * 0.75]));
     let proj = Projector::new(rect, player_pos, yaw, 38.0, set.zoom, set.top_down);
@@ -347,6 +349,10 @@ pub fn draw_hud(
     draw_compass(c, x + w - 13.0, y + 13.0, 8.0, yaw, set.alpha);
     let mode_tag = if set.top_down { "2D" } else { "3D" };
     c.text_raw(x + 4.0, y + 3.0, mode_tag, 6.0, [GOLD[0], GOLD[1], GOLD[2], set.alpha * 0.9]);
+    let pct = if set.reveal { 100 } else { mesh.explored_percent(explored) };
+    let pct_str = format!("{pct}%");
+    let pw = c.text_w_raw(&pct_str, 6.0);
+    c.text_raw(x + w - pw - 4.0, y + h - 8.5, &pct_str, 6.0, [MUTED[0], MUTED[1], MUTED[2], set.alpha * 0.9]);
 }
 
 /// Draws the interactive full-screen 3D wireframe map.

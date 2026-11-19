@@ -1697,8 +1697,8 @@ ja より強い武器
 @ Center overlay
 ja 中央オーバーレイ
 
-@ Corner minimap
-ja 右上ミニマップ
+@ Framed panel
+ja 枠付きパネル
 
 @ Display
 ja 表示位置
@@ -2289,11 +2289,11 @@ ja ヘッドホン向けの3D立体音響（両耳時間差・頭部影・前後
 @ Muffles and quiets sounds coming from behind solid walls and closed doors
 ja 壁や閉じた扉の向こう側の音をこもらせて小さくします
 
-@ Plays synthesized player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
-ja 石・金属・木・土・液体の床に合わせた合成足音と着地音を鳴らします
+@ Plays player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
+ja 石・金属・木・土・液体の床に合わせた足音と着地音を鳴らします
 
-@ Volume of synthesized player footsteps and landings
-ja 合成されたプレイヤーの足音と着地音の音量
+@ Volume of player footsteps and landings
+ja プレイヤーの足音と着地音の音量
 
 @ Seconds to smoothly fade between music tracks; 0 cuts immediately
 ja 曲の切り替え時に滑らかにフェードする秒数（0で即切り替え）
@@ -2319,8 +2319,8 @@ ja 「より強い武器」への自動切り替えで使う武器の優先順�
 @ Configure the 3D wireframe automap view, display, reveal mode, zoom and markers
 ja 3Dワイヤーフレーム・オートマップの表示モード、位置、表示範囲、ズーム、マーカーを設定します
 
-@ Corner minimap frames the map in the top-right; Center overlay floats a transparent wireframe over the view
-ja 右上ミニマップは画面右上に枠表示し、中央オーバーレイは画面中央に半透明のワイヤーフレームを重ねます
+@ Framed panel centers the map in a dark box on the statistics screen; Center overlay floats a transparent wireframe over the view
+ja 枠付きパネルは統計画面の中央に暗い枠でマップを表示し、中央オーバーレイは画面上に半透明のワイヤーフレームを重ねます
 
 @ Disabled while Weapon Auto-Switch is set to Never
 ja 武器の自動切り替えが「切り替えない」のときは無効です
@@ -2337,8 +2337,11 @@ ja オートマップの線とパネルの不透明度
 @ Rotates the automap so your facing direction points up; off keeps North at the top
 ja 向いている方向が上になるようにオートマップを回転します。オフでは北が上になります
 
-@ Shows a live 3D wireframe or top-down automap while playing; press M for the interactive full-screen map (single player and co-op only)
-ja プレイ中に3Dワイヤーフレームまたはトップダウンのオートマップを表示します。Mキーで操作可能な全画面マップを開きます（シングルプレイ・協力プレイのみ）
+@ Shows a 3D wireframe or top-down automap on the statistics screen (Tab/Select); add Automap in Edit HUD to keep it on screen, or press M for the full-screen map (single player and co-op only)
+ja 統計画面（Tab/Select）で3Dワイヤーフレームまたはトップダウンのオートマップを表示します。常時表示するにはHUD編集でオートマップを追加し、Mキーで全画面マップを開きます（シングルプレイ・協力プレイのみ）
+
+@ Shows a live 3D wireframe or top-down automap on the HUD at all times (single player and co-op only)
+ja HUD上に3Dワイヤーフレームまたはトップダウンのオートマップを常時表示します（シングルプレイ・協力プレイのみ）
 
 @ When picking up a weapon: Never keeps your current weapon; Better weapon switches only if it ranks higher in Weapon Priority
 ja 武器を拾ったとき：「切り替えない」は現在の武器を保ち、「より強い武器」は武器の優先順位が上なら切り替えます
