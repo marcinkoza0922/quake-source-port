@@ -835,6 +835,12 @@ ko 원거리만
 @ Reacquire While Held
 ko 누르는 동안 재포착
 
+@ Real-time Dynamic Lights
+ko 실시간 동적 조명
+
+@ Real-time Light Settings
+ko 실시간 조명 설정
+
 @ Red
 ko 빨강
 
@@ -903,6 +909,12 @@ ko 포털 너머 보기
 
 @ See-through Teleporters
 ko 텔레포터 너머 보기
+
+@ Shadow Quality
+ko 그림자 품질
+
+@ Shadows
+ko 그림자
 
 @ Shirt Color
 ko 셔츠 색상
@@ -1547,6 +1559,9 @@ ko 고압 세척기의 물줄기가 적을 밀어내는 세기
 @ How long a hit freezes the game, in milliseconds
 ko 공격 시 게임이 멈추는 시간 (밀리초)
 
+@ How many lights cast shadows at once, and how smooth their edges are
+ko 동시에 그림자를 드리우는 조명의 수와 그림자 가장자리의 부드러움
+
 @ How strongly fog covers the sky when fog is on
 ko 안개가 켜져 있을 때 안개가 하늘을 덮는 정도
 
@@ -1567,6 +1582,9 @@ ko 광원이 빛납니다: 램프, 용암, 텔레포터, 불꽃, 폭발. 블룸 
 
 @ Lights from rockets, muzzle flashes and explosions brighten nearby walls
 ko 로켓, 총구 화염, 폭발의 빛이 주변 벽을 밝힙니다
+
+@ Lights from rockets, muzzle flashes and explosions shade walls and models per pixel and cast shadows; needs Dynamic Lights
+ko 로켓, 총구 화염, 폭발의 빛이 벽과 모델을 픽셀 단위로 비추고 그림자를 드리웁니다. 동적 조명이 필요합니다
 
 @ Liquid surfaces swell and ring out where things move through them
 ko 물체가 지나가는 곳에서 액체 표면이 출렁이고 물결이 퍼집니다
@@ -1810,6 +1828,9 @@ ko 클래식 모델 대신 2021 리마스터의 더 매끄러운 MD5 모델(및 
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 ko 맵의 컬러 조명(.lit 파일 또는 BSPX 럼프)을 씁니다. 끄면 원작의 흰 조명이 됩니다. 다음 맵을 불러올 때 적용됩니다
+
+@ Walls, doors and monsters block the light and cast shadows
+ko 벽, 문, 몬스터가 빛을 가리고 그림자를 드리웁니다
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 ko 물줄기 분할 수, 물방울 수, 광택 액체 셰이딩입니다. 낮음은 단순한 반투명 물줄기를, 높음은 매끄럽고 광택 있는 물줄기를 씁니다

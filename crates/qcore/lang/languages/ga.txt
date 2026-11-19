@@ -835,6 +835,12 @@ ga Fadraon amháin
 @ Reacquire While Held
 ga Athaimsigh Agus É Coinnithe
 
+@ Real-time Dynamic Lights
+ga Soilse dinimiciúla fíor-ama
+
+@ Real-time Light Settings
+ga Socruithe solais fíor-ama
+
 @ Red
 ga Dearg
 
@@ -903,6 +909,12 @@ ga Féach Trí Thairseacha
 
 @ See-through Teleporters
 ga Teileapórtálaithe Tréshoilseacha
+
+@ Shadow Quality
+ga Cáilíocht scáthanna
+
+@ Shadows
+ga Scáthanna
 
 @ Shirt Color
 ga Dath na Léine
@@ -1547,6 +1559,9 @@ ga Cé chomh láidir a bhrúnn uisce an Ghlantóra Ardbhrú naimhde
 @ How long a hit freezes the game, in milliseconds
 ga Cé chomh fada a reonn buille an cluiche, i milleasoicindí
 
+@ How many lights cast shadows at once, and how smooth their edges are
+ga Cé mhéad solas a chaitheann scáthanna ag an am céanna, agus cé chomh mín is atá a n-imill
+
 @ How strongly fog covers the sky when fog is on
 ga Cé chomh láidir a chlúdaíonn an ceo an spéir nuair atá ceo air
 
@@ -1567,6 +1582,9 @@ ga Lonraíonn foinsí solais: lampaí, laibhe, teileapórtálaithe, spréacha ag
 
 @ Lights from rockets, muzzle flashes and explosions brighten nearby walls
 ga Soilsíonn solas ó roicéid, ó splancanna béil agus ó phléascanna na ballaí in aice láimhe
+
+@ Lights from rockets, muzzle flashes and explosions shade walls and models per pixel and cast shadows; needs Dynamic Lights
+ga Lasann solas roicéad, splancanna gunna agus pléascanna ballaí agus samhlacha de réir picteilíní agus caitheann siad scáthanna; teastaíonn Soilse dinimiciúla
 
 @ Liquid surfaces swell and ring out where things move through them
 ga Ataíonn dromchlaí leachtacha agus déantar fáinní orthu san áit a ghluaiseann rudaí tríothu
@@ -1810,6 +1828,9 @@ ga Úsáideann sé samhlacha MD5 níos míne an atheisiúna 2021 (agus samhlacha
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 ga Úsáideann sé solas daite na léarscáile (comhad .lit nó cnap BSPX); má tá sé as, faightear an solas bán bunaidh. Cuirtear i bhfeidhm é ag an gcéad lódáil léarscáile eile
+
+@ Walls, doors and monsters block the light and cast shadows
+ga Cuireann ballaí, doirse agus arrachtaigh bac ar an solas agus caitheann siad scáthanna
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 ga Míreanna scaird uisce, líon na mbraonta agus scáthú snasta leachta: úsáideann íseal sruthanna tréshoilseacha níos simplí; úsáideann ard scairdeanna míne snasta

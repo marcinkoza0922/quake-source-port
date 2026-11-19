@@ -835,6 +835,12 @@ cs Jen na dálku
 @ Reacquire While Held
 cs Znovu zaměřit při držení
 
+@ Real-time Dynamic Lights
+cs Dynamická světla v reálném čase
+
+@ Real-time Light Settings
+cs Nastavení světel v reálném čase
+
 @ Red
 cs Červená
 
@@ -903,6 +909,12 @@ cs Vidět skrz portály
 
 @ See-through Teleporters
 cs Průhledné teleporty
+
+@ Shadow Quality
+cs Kvalita stínů
+
+@ Shadows
+cs Stíny
 
 @ Shirt Color
 cs Barva trička
@@ -1547,6 +1559,9 @@ cs Jak silně voda z tlakového čističe odtlačuje nepřátele
 @ How long a hit freezes the game, in milliseconds
 cs Jak dlouho zásah zmrazí hru, v milisekundách
 
+@ How many lights cast shadows at once, and how smooth their edges are
+cs Kolik světel vrhá stíny současně a jak měkké jsou jejich okraje
+
 @ How strongly fog covers the sky when fog is on
 cs Jak silně mlha zakrývá oblohu, když je mlha zapnutá
 
@@ -1567,6 +1582,9 @@ cs Zdroje světla září: lampy, láva, teleporty, jiskry a exploze; Nastavení
 
 @ Lights from rockets, muzzle flashes and explosions brighten nearby walls
 cs Světla raket, záblesků výstřelů a výbuchů osvětlí blízké stěny
+
+@ Lights from rockets, muzzle flashes and explosions shade walls and models per pixel and cast shadows; needs Dynamic Lights
+cs Světla raket, výstřelů a explozí osvětlují stěny a modely po pixelech a vrhají stíny; vyžaduje Dynamická světla
 
 @ Liquid surfaces swell and ring out where things move through them
 cs Hladiny kapalin se vzdouvají a vytvářejí kruhy tam, kudy něco prochází
@@ -1810,6 +1828,9 @@ cs Použije hladší modely MD5 z remasteru z roku 2021 (a náhrady MD3 z modů)
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 cs Použije barevné světlo mapy (soubor .lit nebo blok BSPX); vypnuto dává původní bílé světlo. Projeví se při příštím načtení mapy
+
+@ Walls, doors and monsters block the light and cast shadows
+cs Stěny, dveře a monstra zastiňují světlo a vrhají stíny
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 cs Segmenty proudu, počet kapek a lesklé stínování kapaliny: nízká používá jednodušší průsvitné proudy; vysoká hladké lesklé proudy

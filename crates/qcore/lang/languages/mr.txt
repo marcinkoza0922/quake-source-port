@@ -835,6 +835,12 @@ mr फक्त दूरचे
 @ Reacquire While Held
 mr धरून असताना पुन्हा लक्ष्य
 
+@ Real-time Dynamic Lights
+mr रिअल-टाइम डायनॅमिक दिवे
+
+@ Real-time Light Settings
+mr रिअल-टाइम प्रकाश सेटिंग्ज
+
 @ Red
 mr लाल
 
@@ -903,6 +909,12 @@ mr पोर्टलमधून पलीकडे पाहा
 
 @ See-through Teleporters
 mr पारदर्शक टेलिपोर्टर्स
+
+@ Shadow Quality
+mr सावल्यांची गुणवत्ता
+
+@ Shadows
+mr सावल्या
 
 @ Shirt Color
 mr शर्टचा रंग
@@ -1547,6 +1559,9 @@ mr पॉवरवॉशरचे पाणी शत्रूंना कि�
 @ How long a hit freezes the game, in milliseconds
 mr फटका गेम किती वेळ गोठवतो, मिलिसेकंदांमध्ये
 
+@ How many lights cast shadows at once, and how smooth their edges are
+mr एकाच वेळी किती दिवे सावली टाकतात आणि त्यांच्या कडा किती गुळगुळीत आहेत
+
 @ How strongly fog covers the sky when fog is on
 mr धुके चालू असताना ते आकाश किती दाट झाकते
 
@@ -1567,6 +1582,9 @@ mr प्रकाश स्रोत चमकतात: दिवे, ला�
 
 @ Lights from rockets, muzzle flashes and explosions brighten nearby walls
 mr रॉकेट्स, नळीतील चमक आणि स्फोटांचा प्रकाश जवळच्या भिंती उजळवतो
+
+@ Lights from rockets, muzzle flashes and explosions shade walls and models per pixel and cast shadows; needs Dynamic Lights
+mr रॉकेट, गोळीबाराच्या झोत आणि स्फोटांचा प्रकाश भिंती आणि मॉडेल्सना प्रति पिक्सेल उजळवतो आणि सावली टाकतो; डायनॅमिक दिवे आवश्यक
 
 @ Liquid surfaces swell and ring out where things move through them
 mr वस्तू जिथून जातात तिथे द्रव पृष्ठभाग फुगतात आणि वलये उमटतात
@@ -1810,6 +1828,9 @@ mr क्लासिक मॉडेल्सऐवजी 2021 री-रिल
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 mr मॅपचा रंगीत प्रकाश वापरते (.lit फाइल किंवा BSPX lump); बंद केल्यास मूळ पांढरा प्रकाश. पुढच्या मॅप लोडवर लागू होते
+
+@ Walls, doors and monsters block the light and cast shadows
+mr भिंती, दारे आणि राक्षस प्रकाश अडवतात आणि सावली टाकतात
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 mr पाण्याच्या फवाऱ्याचे भाग, थेंबांची संख्या आणि चकचकीत द्रव शेडिंग: कमी सोप्या अर्धपारदर्शक धारा वापरते; उच्च गुळगुळीत चकचकीत फवारे वापरते

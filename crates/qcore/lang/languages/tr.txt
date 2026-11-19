@@ -835,6 +835,12 @@ tr Yalnızca uzak menzil
 @ Reacquire While Held
 tr Basılıyken Yeniden Kilitlen
 
+@ Real-time Dynamic Lights
+tr Gerçek zamanlı dinamik ışıklar
+
+@ Real-time Light Settings
+tr Gerçek zamanlı ışık ayarları
+
 @ Red
 tr Kırmızı
 
@@ -903,6 +909,12 @@ tr Portallardan Görme
 
 @ See-through Teleporters
 tr Saydam Işınlayıcılar
+
+@ Shadow Quality
+tr Gölge kalitesi
+
+@ Shadows
+tr Gölgeler
 
 @ Shirt Color
 tr Gömlek Rengi
@@ -1547,6 +1559,9 @@ tr Basınçlı Yıkayıcı suyunun düşmanları ne kadar güçlü ittiği
 @ How long a hit freezes the game, in milliseconds
 tr Bir vuruşun oyunu ne kadar dondurduğu (milisaniye)
 
+@ How many lights cast shadows at once, and how smooth their edges are
+tr Aynı anda kaç ışığın gölge düşürdüğü ve kenarlarının ne kadar yumuşak olduğu
+
 @ How strongly fog covers the sky when fog is on
 tr Sis açıkken sisin gökyüzünü ne kadar örttüğü
 
@@ -1567,6 +1582,9 @@ tr Işık kaynakları parlar: lambalar, lav, ışınlayıcılar, kıvılcımlar 
 
 @ Lights from rockets, muzzle flashes and explosions brighten nearby walls
 tr Roketlerin, namlu alevlerinin ve patlamaların ışığı yakındaki duvarları aydınlatır
+
+@ Lights from rockets, muzzle flashes and explosions shade walls and models per pixel and cast shadows; needs Dynamic Lights
+tr Roketlerin, namlu alevlerinin ve patlamaların ışığı duvarları ve modelleri piksel başına aydınlatır ve gölge düşürür; Dinamik ışıklar gerekir
 
 @ Liquid surfaces swell and ring out where things move through them
 tr Sıvı yüzeyleri, içinden bir şey geçtiğinde kabarır ve halkalar oluşturur
@@ -1810,6 +1828,9 @@ tr Klasik modeller yerine 2021 yeniden sürümünün daha pürüzsüz MD5 modell
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 tr Haritanın renkli ışığını kullanır (.lit dosyası veya BSPX bloğu); kapalıyken orijinal beyaz ışık. Sonraki harita yüklemesinde uygulanır
+
+@ Walls, doors and monsters block the light and cast shadows
+tr Duvarlar, kapılar ve canavarlar ışığı engeller ve gölge düşürür
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 tr Su fışkırması bölümleri, damla sayısı ve parlak sıvı gölgelendirme: düşük daha basit yarı saydam akışlar, yüksek pürüzsüz parlak fışkırmalar kullanır

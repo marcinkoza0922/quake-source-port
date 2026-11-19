@@ -23,6 +23,12 @@ void main() {
     if (dither != 0u) // snap to the software renderer's surface-cache texels
         lm.xy = (floor(lm.xy * lmsize) + 0.5) / lmsize;
     vec3 light = (m.z & 0x20u) != 0u || fullbright ? vec3(1.0) : texture(lightmap, lm).rgb;
+    // r_shadow_realtime_dlight: dynamic lights per pixel (the lightmaps then
+    // leave them out), on the face's normal turned toward the eye
+    vec3 nf = normalize(cross(dFdx(i_wpos), dFdy(i_wpos)));
+    if (dot(nf, fr.eye.xyz - i_wpos) < 0.0) nf = -nf;
+    if (light_count.x > 0u && (m.z & 0x20u) == 0u && !fullbright)
+        light = min(light + dyn_lights(i_wpos, nf), vec3(2.0));
     if (dither >= 2u) // 64 light levels, like the colormap
         light = floor(light * (63.0 / 2.0) + 0.5) * (2.0 / 63.0);
     vec3 rgb = c.rgb * light;

@@ -835,6 +835,12 @@ fa فقط دوربرد
 @ Reacquire While Held
 fa هدف‌گیری دوباره هنگام نگه‌داشتن
 
+@ Real-time Dynamic Lights
+fa نورهای پویای بی‌درنگ
+
+@ Real-time Light Settings
+fa تنظیمات نور بی‌درنگ
+
 @ Red
 fa قرمز
 
@@ -903,6 +909,12 @@ fa دیدن از میان پورتال‌ها
 
 @ See-through Teleporters
 fa تله‌پورت‌های شفاف
+
+@ Shadow Quality
+fa کیفیت سایه‌ها
+
+@ Shadows
+fa سایه‌ها
 
 @ Shirt Color
 fa رنگ پیراهن
@@ -1547,6 +1559,9 @@ fa میزان هل‌دادن دشمنان با آب کارواش
 @ How long a hit freezes the game, in milliseconds
 fa مدت انجماد بازی با هر ضربه، به میلی‌ثانیه
 
+@ How many lights cast shadows at once, and how smooth their edges are
+fa چند نور هم‌زمان سایه می‌اندازند و لبه‌هایشان چقدر نرم است
+
 @ How strongly fog covers the sky when fog is on
 fa میزان پوشش آسمان با مه وقتی مه روشن است
 
@@ -1567,6 +1582,9 @@ fa منابع نور می‌درخشند: چراغ‌ها، گدازه، تله�
 
 @ Lights from rockets, muzzle flashes and explosions brighten nearby walls
 fa نور موشک‌ها، شعله‌ی دهانه‌ی سلاح و انفجارها دیوارهای نزدیک را روشن می‌کند
+
+@ Lights from rockets, muzzle flashes and explosions shade walls and models per pixel and cast shadows; needs Dynamic Lights
+fa نور موشک‌ها، شعلهٔ شلیک و انفجارها دیوارها و مدل‌ها را پیکسل‌به‌پیکسل روشن می‌کند و سایه می‌اندازد؛ به نورهای پویا نیاز دارد
 
 @ Liquid surfaces swell and ring out where things move through them
 fa سطح مایعات جایی که چیزی از آن می‌گذرد برآمده می‌شود و حلقه می‌زند
@@ -1810,6 +1828,9 @@ fa به جای مدل‌های کلاسیک، مدل‌های MD5 نرم‌تر 
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 fa نور رنگی نقشه را به کار می‌برد (فایل .lit یا بخش BSPX)؛ خاموش نور سفید اصلی می‌دهد. در بارگذاری نقشه‌ی بعدی اعمال می‌شود
+
+@ Walls, doors and monsters block the light and cast shadows
+fa دیوارها، درها و هیولاها جلوی نور را می‌گیرند و سایه می‌اندازند
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 fa بخش‌های فواره‌ی آب، تعداد قطره‌ها و سایه‌زنی براق مایع: کم جریان‌های نیمه‌شفاف ساده‌تر؛ زیاد فواره‌های نرم و براق

@@ -835,6 +835,12 @@ ro Doar la distanță
 @ Reacquire While Held
 ro Refixare la menținere
 
+@ Real-time Dynamic Lights
+ro Lumini dinamice în timp real
+
+@ Real-time Light Settings
+ro Setări lumină în timp real
+
 @ Red
 ro Roșu
 
@@ -903,6 +909,12 @@ ro Vezi prin portaluri
 
 @ See-through Teleporters
 ro Teleportoare transparente
+
+@ Shadow Quality
+ro Calitatea umbrelor
+
+@ Shadows
+ro Umbre
 
 @ Shirt Color
 ro Culoare tricou
@@ -1547,6 +1559,9 @@ ro Cât de tare împinge inamicii apa spălătorului cu presiune
 @ How long a hit freezes the game, in milliseconds
 ro Cât timp îngheață jocul o lovitură, în milisecunde
 
+@ How many lights cast shadows at once, and how smooth their edges are
+ro Câte lumini aruncă umbre în același timp și cât de fine sunt marginile lor
+
 @ How strongly fog covers the sky when fog is on
 ro Cât de mult acoperă ceața cerul când ceața e pornită
 
@@ -1567,6 +1582,9 @@ ro Sursele de lumină strălucesc: lămpi, lavă, teleportoare, scântei și exp
 
 @ Lights from rockets, muzzle flashes and explosions brighten nearby walls
 ro Luminile rachetelor, flăcările de la gura țevii și exploziile luminează pereții din apropiere
+
+@ Lights from rockets, muzzle flashes and explosions shade walls and models per pixel and cast shadows; needs Dynamic Lights
+ro Lumina rachetelor, a focurilor de armă și a exploziilor luminează pereții și modelele pe pixel și aruncă umbre; necesită Lumini dinamice
 
 @ Liquid surfaces swell and ring out where things move through them
 ro Suprafețele lichide se unduiesc și fac cercuri acolo unde ceva trece prin ele
@@ -1810,6 +1828,9 @@ ro Folosește modelele MD5 mai fine din reeditarea din 2021 (și înlocuirile MD
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 ro Folosește lumina colorată a hărții (fișier .lit sau bloc BSPX); oprit oferă lumina albă originală. Se aplică la următoarea încărcare a hărții
+
+@ Walls, doors and monsters block the light and cast shadows
+ro Pereții, ușile și monștrii blochează lumina și aruncă umbre
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 ro Segmentele jetului de apă, numărul de picături și umbrirea lucioasă a lichidului: scăzută folosește jeturi translucide mai simple; ridicată jeturi fine și lucioase

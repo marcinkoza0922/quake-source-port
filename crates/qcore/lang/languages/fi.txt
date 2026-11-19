@@ -835,6 +835,12 @@ fi Vain kaukotaistelu
 @ Reacquire While Held
 fi Hae uudelleen pidettäessä
 
+@ Real-time Dynamic Lights
+fi Reaaliaikaiset dynaamiset valot
+
+@ Real-time Light Settings
+fi Reaaliaikaisen valon asetukset
+
 @ Red
 fi Punainen
 
@@ -903,6 +909,12 @@ fi Näe portaalien läpi
 
 @ See-through Teleporters
 fi Läpinäkyvät teleportit
+
+@ Shadow Quality
+fi Varjojen laatu
+
+@ Shadows
+fi Varjot
 
 @ Shirt Color
 fi Paidan väri
@@ -1547,6 +1559,9 @@ fi Kuinka voimakkaasti painepesurin vesi työntää vihollisia
 @ How long a hit freezes the game, in milliseconds
 fi Kuinka pitkään osuma jäädyttää pelin, millisekunteina
 
+@ How many lights cast shadows at once, and how smooth their edges are
+fi Kuinka moni valo luo varjoja yhtä aikaa ja kuinka pehmeät niiden reunat ovat
+
 @ How strongly fog covers the sky when fog is on
 fi Kuinka voimakkaasti sumu peittää taivaan, kun sumu on päällä
 
@@ -1567,6 +1582,9 @@ fi Valonlähteet hehkuvat: lamput, laava, teleportit, kipinät ja räjähdykset;
 
 @ Lights from rockets, muzzle flashes and explosions brighten nearby walls
 fi Rakettien, suuliekkien ja räjähdysten valo kirkastaa lähiseiniä
+
+@ Lights from rockets, muzzle flashes and explosions shade walls and models per pixel and cast shadows; needs Dynamic Lights
+fi Rakettien, suuliekkien ja räjähdysten valo valaisee seiniä ja malleja pikselitasolla ja luo varjoja; vaatii Dynaamiset valot
 
 @ Liquid surfaces swell and ring out where things move through them
 fi Nestepinnat aaltoilevat ja renkaat leviävät, kun jokin liikkuu niiden läpi
@@ -1810,6 +1828,9 @@ fi Käyttää vuoden 2021 uusintajulkaisun pehmeämpiä MD5-malleja (ja modien M
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 fi Käyttää kentän värillistä valoa (.lit-tiedosto tai BSPX-lohko); pois antaa alkuperäisen valkoisen valon. Tulee voimaan seuraavan kentän latauksessa
+
+@ Walls, doors and monsters block the light and cast shadows
+fi Seinät, ovet ja hirviöt estävät valon ja luovat varjoja
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 fi Vesisuihkun segmentit, pisaroiden määrä ja kiiltävä nesteen varjostus: matala käyttää yksinkertaisempia läpikuultavia virtoja; korkea pehmeitä kiiltäviä suihkuja

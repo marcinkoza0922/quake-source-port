@@ -835,6 +835,12 @@ ms Jarak jauh sahaja
 @ Reacquire While Held
 ms Kunci Semula Semasa Ditahan
 
+@ Real-time Dynamic Lights
+ms Cahaya Dinamik Masa Nyata
+
+@ Real-time Light Settings
+ms Tetapan Cahaya Masa Nyata
+
 @ Red
 ms Merah
 
@@ -903,6 +909,12 @@ ms Lihat Menembusi Portal
 
 @ See-through Teleporters
 ms Teleporter Lut Sinar
+
+@ Shadow Quality
+ms Kualiti Bayang-bayang
+
+@ Shadows
+ms Bayang-bayang
 
 @ Shirt Color
 ms Warna Baju
@@ -1547,6 +1559,9 @@ ms Sekuat mana air Pencuci Tekanan menolak musuh
 @ How long a hit freezes the game, in milliseconds
 ms Berapa lama serangan membekukan permainan, dalam milisaat
 
+@ How many lights cast shadows at once, and how smooth their edges are
+ms Berapa banyak cahaya yang menghasilkan bayang-bayang serentak, dan sehalus mana tepinya
+
 @ How strongly fog covers the sky when fog is on
 ms Sekuat mana kabus menutupi langit apabila kabus hidup
 
@@ -1567,6 +1582,9 @@ ms Sumber cahaya bersinar: lampu, lava, teleporter, percikan dan letupan; Tetapa
 
 @ Lights from rockets, muzzle flashes and explosions brighten nearby walls
 ms Cahaya daripada roket, kilatan muncung dan letupan menerangi dinding berdekatan
+
+@ Lights from rockets, muzzle flashes and explosions shade walls and models per pixel and cast shadows; needs Dynamic Lights
+ms Cahaya roket, kilatan tembakan dan letupan menerangi dinding dan model setiap piksel serta menghasilkan bayang-bayang; memerlukan Cahaya Dinamik
 
 @ Liquid surfaces swell and ring out where things move through them
 ms Permukaan cecair beralun dan membentuk gelang di tempat sesuatu melaluinya
@@ -1810,6 +1828,9 @@ ms Menggunakan model MD5 yang lebih licin daripada keluaran semula 2021 (dan pen
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 ms Menggunakan cahaya berwarna peta (fail .lit atau lump BSPX); mati memberi cahaya putih asal. Berkuat kuasa pada pemuatan peta seterusnya
+
+@ Walls, doors and monsters block the light and cast shadows
+ms Dinding, pintu dan raksasa menghalang cahaya dan menghasilkan bayang-bayang
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 ms Segmen pancutan air, bilangan titisan dan pelorekan cecair berkilat: rendah guna aliran lut cahaya yang lebih ringkas; tinggi guna pancutan berkilat yang licin

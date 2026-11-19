@@ -35,6 +35,19 @@ layout(set = 0, binding = 6) uniform sampler2D scene_depth;
 layout(set = 0, binding = 7) uniform sampler2DMS scene_depth_ms;
 layout(set = 0, binding = 8) uniform sampler2DMS scene_color_ms;
 layout(set = 0, binding = 9) readonly buffer DynVerts { uint dyn_verts[]; };
+// r_shadow_realtime_dlight (frame/dlights.rs): dynamic lights lit per pixel.
+// shadow_vp[layer] renders/reads cube face `layer % 6` of light `layer / 6`.
+struct RtLight {
+    vec4 pos_radius;     // origin, radius
+    vec4 color_minlight; // colour, minlight
+    ivec4 info;          // x first shadow layer (-1: unshadowed)
+};
+layout(set = 0, binding = 10, std430) readonly buffer Lights {
+    uvec4 light_count;   // x lights, y shadow filter (0 low, 1 medium, 2 high), z face size
+    RtLight lights[32];
+    mat4 shadow_vp[48];
+};
+layout(set = 0, binding = 11) uniform sampler2DArrayShadow shadow_maps;
 
 const uint NO_TEX = 0xffffffffu;
 
@@ -71,6 +84,61 @@ vec3 effect_glow(vec3 c) {
 }
 
 vec4 unpack_rgba(uint c) { return unpackUnorm4x8(c); }
+
+// Fraction of light `i` reaching `p` (normal `n`, `tl` = light - p): its
+// cube shadow map, filtered by quality. A ray-traced test can replace this.
+float light_visibility(int i, vec3 p, vec3 n, vec3 tl) {
+    int base = lights[i].info.x;
+    if (base < 0) return 1.0;
+    float size = float(light_count.z);
+    // normal offset of ~1.5 shadow texels against acne (texel = 2 d / size)
+    vec3 q = p + n * (0.5 + 3.0 * length(tl) / size);
+    vec3 d = q - lights[i].pos_radius.xyz;
+    vec3 a = abs(d);
+    int face = a.x >= a.y && a.x >= a.z ? (d.x >= 0.0 ? 0 : 1)
+             : a.y >= a.z ? (d.y >= 0.0 ? 2 : 3) : (d.z >= 0.0 ? 4 : 5);
+    int layer = base + face;
+    vec4 c = shadow_vp[layer] * vec4(q, 1.0);
+    vec3 ndc = c.xyz / c.w;
+    float ts = 1.0 / size;
+    vec2 uv = clamp(ndc.xy * 0.5 + 0.5, vec2(ts), vec2(1.0 - ts));
+    vec4 tc = vec4(uv, float(layer), ndc.z);
+    uint q8 = light_count.y;
+    if (q8 == 0u) return texture(shadow_maps, tc);
+    float s = 0.0;
+    if (q8 == 1u) {
+        for (int k = 0; k < 4; k++) {
+            vec2 o = vec2(k & 1, k >> 1) - 0.5;
+            s += texture(shadow_maps, vec4(uv + o * ts, tc.zw));
+        }
+        return s * 0.25;
+    }
+    for (int y = -1; y <= 1; y++)
+        for (int x = -1; x <= 1; x++)
+            s += texture(shadow_maps, vec4(uv + vec2(x, y) * ts * 1.25, tc.zw));
+    return s / 9.0;
+}
+
+// Per-pixel dynamic light at `p` with normal `n`, in lightmap units (1 =
+// normal light): Quake's (radius - distance) / 128 above minlight, mostly
+// independent of facing as in the lightmap version, fading out behind.
+vec3 dyn_lights(vec3 p, vec3 n) {
+    vec3 sum = vec3(0.0);
+    for (uint i = 0u; i < light_count.x; i++) {
+        vec3 tl = lights[i].pos_radius.xyz - p;
+        float dist = length(tl);
+        float a = lights[i].pos_radius.w - dist;
+        if (a <= lights[i].color_minlight.w) continue;
+        float ndl = dot(n, tl) / max(dist, 1e-3);
+        // Quake's lightmap distance (radius minus plane and in-plane distance)
+        // is longer than this one; a mild facing term evens it out on floors
+        float facing = (0.7 + 0.3 * max(ndl, 0.0)) * smoothstep(-0.1, 0.1, ndl);
+        if (facing <= 0.0) continue;
+        float vis = light_visibility(int(i), p, n, tl);
+        sum += lights[i].color_minlight.rgb * (a / 128.0 * facing * vis);
+    }
+    return sum;
+}
 
 // Add-on goggles (fr.softf.z: 1 night vision, 2 thermal). In thermal mode
 // scene shaders write a grey "heat" level that post.frag maps to colours.

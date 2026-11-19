@@ -372,6 +372,13 @@ it Quanto a lungo un colpo blocca il gioco, in millisecondi
 es Cuánto tiempo congela el juego un golpe, en milisegundos
 ru Сколько миллисекунд длится стоп-кадр от удара
 
+@ How many lights cast shadows at once, and how smooth their edges are
+fr Nombre de lumières projetant des ombres à la fois, et douceur de leurs bords
+de Wie viele Lichter gleichzeitig Schatten werfen und wie weich deren Kanten sind
+it Quante luci proiettano ombre insieme e quanto sono morbidi i loro bordi
+es Cuántas luces proyectan sombras a la vez y lo suaves que son sus bordes
+ru Сколько источников света отбрасывают тени одновременно и насколько мягки их края
+
 @ How strongly fog covers the sky when fog is on
 fr Intensité du brouillard sur le ciel quand le brouillard est actif
 de Wie stark der Nebel den Himmel verdeckt, wenn Nebel an ist
@@ -420,6 +427,13 @@ de Licht von Raketen, Mündungsfeuer und Explosionen erhellt nahe Wände
 it Le luci di razzi, vampate e esplosioni illuminano le pareti vicine
 es Las luces de cohetes, fogonazos y explosiones iluminan las paredes cercanas
 ru Свет ракет, вспышек выстрелов и взрывов освещает ближайшие стены
+
+@ Lights from rockets, muzzle flashes and explosions shade walls and models per pixel and cast shadows; needs Dynamic Lights
+fr Les lumières des roquettes, tirs et explosions éclairent murs et modèles au pixel près et projettent des ombres ; nécessite Lumières dynamiques
+de Licht von Raketen, Mündungsfeuer und Explosionen beleuchtet Wände und Modelle pixelgenau und wirft Schatten; benötigt Dynamische Lichter
+it Le luci di razzi, spari ed esplosioni illuminano pareti e modelli per pixel e proiettano ombre; richiede Luci dinamiche
+es Las luces de cohetes, disparos y explosiones iluminan paredes y modelos por píxel y proyectan sombras; requiere Luces dinámicas
+ru Свет ракет, выстрелов и взрывов попиксельно освещает стены и модели и отбрасывает тени; нужен Динамический свет
 
 @ Liquid surfaces swell and ring out where things move through them
 fr Les surfaces liquides ondulent et forment des cercles là où quelque chose les traverse
@@ -987,6 +1001,13 @@ de Nutzt das farbige Licht der Karte (.lit-Datei oder BSPX-Block); aus ergibt da
 it Usa la luce colorata della mappa (file .lit o blocco BSPX); disattivato dà la luce bianca originale. Si applica al prossimo caricamento della mappa
 es Usa la luz de color del mapa (archivo .lit o bloque BSPX); desactivado da la luz blanca original. Se aplica al cargar el siguiente mapa
 ru Использует цветное освещение карты (файл .lit или блок BSPX); выкл. — исходный белый свет. Применяется при следующей загрузке карты
+
+@ Walls, doors and monsters block the light and cast shadows
+fr Les murs, portes et monstres bloquent la lumière et projettent des ombres
+de Wände, Türen und Monster halten das Licht auf und werfen Schatten
+it Pareti, porte e mostri bloccano la luce e proiettano ombre
+es Paredes, puertas y monstruos bloquean la luz y proyectan sombras
+ru Стены, двери и монстры загораживают свет и отбрасывают тени
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 fr Segments du jet, nombre de gouttes et rendu brillant du liquide : faible utilise des jets translucides plus simples ; élevée des jets lisses et brillants

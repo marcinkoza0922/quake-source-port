@@ -5,6 +5,7 @@
 use super::pipes::UNIFORM_STRIDE;
 use super::scene::{Lists, Pipe, Src};
 use super::bloom::BloomPass;
+use super::shadows::ShadowPass;
 use super::ssao::AoView;
 use super::timing::{self, writes};
 use super::{NO_TEX, Renderer, Targets};
@@ -21,7 +22,8 @@ pub(super) enum Part {
 }
 
 impl Renderer {
-    pub(super) fn encode(&mut self, l: &Lists, post_du: &[u32], ao_views: &[AoView], bloom: &[BloomPass], ui_du: u32, ui_batches: &[(u32, u32, u32)]) -> Result<()> {
+    #[allow(clippy::too_many_arguments)]
+    pub(super) fn encode(&mut self, l: &Lists, post_du: &[u32], ao_views: &[AoView], bloom: &[BloomPass], shadows: &[ShadowPass], ui_du: u32, ui_batches: &[(u32, u32, u32)]) -> Result<()> {
         let frame_tex = match &self.surface {
             Some((s, cfg)) => match s.get_current_texture() {
                 wgpu::CurrentSurfaceTexture::Success(t) | wgpu::CurrentSurfaceTexture::Suboptimal(t) => Some(t),
@@ -45,6 +47,7 @@ impl Renderer {
         };
         let mut enc = self.dev.create_command_encoder(&Default::default());
         if !l.views.is_empty() {
+            self.encode_shadows(&mut enc, l, shadows);
             let soft = l.views.iter().any(|v| !v.soft.is_empty());
             if ao_views.is_empty() {
                 self.scene_pass(&mut enc, t, l, Part::All, !soft);

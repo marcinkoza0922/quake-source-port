@@ -835,6 +835,12 @@ hi केवल दूरी वाले
 @ Reacquire While Held
 hi दबाए रखते हुए फिर से लॉक करें
 
+@ Real-time Dynamic Lights
+hi रीयल-टाइम डायनेमिक लाइटें
+
+@ Real-time Light Settings
+hi रीयल-टाइम प्रकाश सेटिंग्स
+
 @ Red
 hi लाल
 
@@ -903,6 +909,12 @@ hi पोर्टल के पार देखें
 
 @ See-through Teleporters
 hi पारदर्शी टेलीपोर्टर
+
+@ Shadow Quality
+hi छाया गुणवत्ता
+
+@ Shadows
+hi छायाएँ
 
 @ Shirt Color
 hi शर्ट का रंग
@@ -1547,6 +1559,9 @@ hi पावरवॉशर का पानी दुश्मनों को 
 @ How long a hit freezes the game, in milliseconds
 hi एक प्रहार गेम को कितनी देर फ़्रीज़ करता है, मिलीसेकंड में
 
+@ How many lights cast shadows at once, and how smooth their edges are
+hi एक साथ कितनी रोशनियाँ छाया डालती हैं और उनके किनारे कितने चिकने हैं
+
 @ How strongly fog covers the sky when fog is on
 hi कोहरा चालू होने पर वह आसमान को कितना ढकता है
 
@@ -1567,6 +1582,9 @@ hi प्रकाश स्रोत चमकते हैं: दीये, �
 
 @ Lights from rockets, muzzle flashes and explosions brighten nearby walls
 hi रॉकेट, नाल की चमक और विस्फोटों की रोशनी पास की दीवारों को रोशन करती है
+
+@ Lights from rockets, muzzle flashes and explosions shade walls and models per pixel and cast shadows; needs Dynamic Lights
+hi रॉकेट, गोली की चमक और विस्फोटों की रोशनी दीवारों और मॉडलों को प्रति पिक्सेल रोशन करती है और छाया डालती है; डायनेमिक लाइटें आवश्यक
 
 @ Liquid surfaces swell and ring out where things move through them
 hi जहाँ चीज़ें तरल से गुज़रती हैं वहाँ सतह उभरती है और लहरें फैलती हैं
@@ -1810,6 +1828,9 @@ hi क्लासिक मॉडलों की जगह 2021 री-रि�
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 hi मैप की रंगीन रोशनी (.lit फ़ाइल या BSPX लंप) इस्तेमाल करता है; बंद पर मूल सफ़ेद रोशनी। अगला मैप लोड होने पर लागू
+
+@ Walls, doors and monsters block the light and cast shadows
+hi दीवारें, दरवाज़े और राक्षस रोशनी रोकते हैं और छाया डालते हैं
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 hi पानी की धार के खंड, बूँदों की संख्या और चमकदार तरल शेडिंग: निम्न सरल पारभासी धाराएँ इस्तेमाल करता है; उच्च स्मूद चमकदार धारें

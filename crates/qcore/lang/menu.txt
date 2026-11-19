@@ -1940,6 +1940,20 @@ it Riaggancia tenendo premuto
 es Volver a fijar al mantener
 ru Перезахват при удержании
 
+@ Real-time Dynamic Lights
+fr Lumières dynamiques en temps réel
+de Dynamische Echtzeit-Lichter
+it Luci dinamiche in tempo reale
+es Luces dinámicas en tiempo real
+ru Динамический свет в реальном времени
+
+@ Real-time Light Settings
+fr Réglages de l'éclairage en temps réel
+de Echtzeit-Licht-Einstellungen
+it Impostazioni luci in tempo reale
+es Ajustes de luz en tiempo real
+ru Настройки света в реальном времени
+
 @ Red
 fr Rouge
 de Rot
@@ -2100,6 +2114,20 @@ de Durchsichtige Teleporter
 it Teletrasporti trasparenti
 es Teletransportadores transparentes
 ru Прозрачные телепорты
+
+@ Shadow Quality
+fr Qualité des ombres
+de Schattenqualität
+it Qualità ombre
+es Calidad de sombras
+ru Качество теней
+
+@ Shadows
+fr Ombres
+de Schatten
+it Ombre
+es Sombras
+ru Тени
 
 @ Shirt Color
 fr Couleur du haut

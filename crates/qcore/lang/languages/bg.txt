@@ -835,6 +835,12 @@ bg Само далечен бой
 @ Reacquire While Held
 bg Повторен захват при задържане
 
+@ Real-time Dynamic Lights
+bg Динамични светлини в реално време
+
+@ Real-time Light Settings
+bg Настройки на светлината в реално време
+
 @ Red
 bg Червен
 
@@ -903,6 +909,12 @@ bg Поглед през портали
 
 @ See-through Teleporters
 bg Прозрачни телепорти
+
+@ Shadow Quality
+bg Качество на сенките
+
+@ Shadows
+bg Сенки
 
 @ Shirt Color
 bg Цвят на ризата
@@ -1547,6 +1559,9 @@ bg Колко силно водата на водоструйката отблъ
 @ How long a hit freezes the game, in milliseconds
 bg Колко дълго един удар замразява играта, в милисекунди
 
+@ How many lights cast shadows at once, and how smooth their edges are
+bg Колко светлини хвърлят сенки едновременно и колко меки са краищата им
+
 @ How strongly fog covers the sky when fog is on
 bg Колко силно мъглата покрива небето, когато е включена
 
@@ -1567,6 +1582,9 @@ bg Светлинните източници сияят: лампи, лава, �
 
 @ Lights from rockets, muzzle flashes and explosions brighten nearby walls
 bg Светлината от ракети, изстрели и експлозии осветява близките стени
+
+@ Lights from rockets, muzzle flashes and explosions shade walls and models per pixel and cast shadows; needs Dynamic Lights
+bg Светлината от ракети, изстрели и експлозии осветява стени и модели по пиксели и хвърля сенки; изисква Динамични светлини
 
 @ Liquid surfaces swell and ring out where things move through them
 bg Повърхността на течностите се надига и образува кръгове там, където нещо минава през нея
@@ -1810,6 +1828,9 @@ bg Използва по-гладките MD5 модели от преиздав
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 bg Използва цветното осветление на картата (.lit файл или BSPX блок); изкл. дава оригиналната бяла светлина. Важи от следващото зареждане на карта
+
+@ Walls, doors and monsters block the light and cast shadows
+bg Стени, врати и чудовища спират светлината и хвърлят сенки
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 bg Сегменти на струята, брой капки и лъскаво осветяване на течността: ниско ползва по-прости полупрозрачни струи; високо – гладки лъскави струи

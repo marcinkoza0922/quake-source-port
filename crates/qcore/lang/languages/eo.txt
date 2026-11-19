@@ -835,6 +835,12 @@ eo Nur distancaj atakoj
 @ Reacquire While Held
 eo Rekapti dum tenado
 
+@ Real-time Dynamic Lights
+eo Realtempaj dinamikaj lumoj
+
+@ Real-time Light Settings
+eo Agordoj de realtempa lumo
+
 @ Red
 eo Ruĝa
 
@@ -903,6 +909,12 @@ eo Vidi tra portaloj
 
 @ See-through Teleporters
 eo Travideblaj teleportiloj
+
+@ Shadow Quality
+eo Kvalito de ombroj
+
+@ Shadows
+eo Ombroj
 
 @ Shirt Color
 eo Koloro de ĉemizo
@@ -1547,6 +1559,9 @@ eo Kiom forte la akvo de la Premlavilo puŝas malamikojn
 @ How long a hit freezes the game, in milliseconds
 eo Kiom longe trafo frostigas la ludon, en milisekundoj
 
+@ How many lights cast shadows at once, and how smooth their edges are
+eo Kiom da lumoj samtempe ĵetas ombrojn, kaj kiel glataj estas iliaj randoj
+
 @ How strongly fog covers the sky when fog is on
 eo Kiom forte nebulo kovras la ĉielon kiam nebulo estas ŝaltita
 
@@ -1567,6 +1582,9 @@ eo Lumfontoj brilas: lampoj, lafo, teleportiloj, fajreroj kaj eksplodoj; Agordoj
 
 @ Lights from rockets, muzzle flashes and explosions brighten nearby walls
 eo Lumoj de raketoj, pafbriloj kaj eksplodoj heligas proksimajn murojn
+
+@ Lights from rockets, muzzle flashes and explosions shade walls and models per pixel and cast shadows; needs Dynamic Lights
+eo Lumo de raketoj, pafbriloj kaj eksplodoj lumigas murojn kaj modelojn po rastrumero kaj ĵetas ombrojn; bezonas Dinamikajn lumojn
 
 @ Liquid surfaces swell and ring out where things move through them
 eo Likvaj surfacoj ŝveliĝas kaj ondetas kie io moviĝas tra ili
@@ -1810,6 +1828,9 @@ eo Uzas la pli glatajn MD5-modelojn de la reeldono de 2021 (kaj MD3-anstataŭaĵ
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 eo Uzas la koloran lumon de la mapo (dosiero .lit aŭ BSPX-ero); malŝaltite donas la originalan blankan lumon. Efektiviĝas ĉe la sekva ŝargo de mapo
+
+@ Walls, doors and monsters block the light and cast shadows
+eo Muroj, pordoj kaj monstroj baras la lumon kaj ĵetas ombrojn
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 eo Segmentoj de akvoŝpruco, nombro de gutoj kaj brila likva ombrigo: malalta uzas pli simplajn duontravideblajn fluojn; alta uzas glatajn brilajn ŝprucojn

@@ -835,6 +835,12 @@ vi Chỉ đánh xa
 @ Reacquire While Held
 vi Bắt lại mục tiêu khi giữ
 
+@ Real-time Dynamic Lights
+vi Ánh sáng động thời gian thực
+
+@ Real-time Light Settings
+vi Cài đặt ánh sáng thời gian thực
+
 @ Red
 vi Đỏ
 
@@ -903,6 +909,12 @@ vi Nhìn xuyên cổng
 
 @ See-through Teleporters
 vi Máy dịch chuyển nhìn xuyên
+
+@ Shadow Quality
+vi Chất lượng bóng đổ
+
+@ Shadows
+vi Bóng đổ
 
 @ Shirt Color
 vi Màu áo
@@ -1547,6 +1559,9 @@ vi Nước của Máy xịt rửa đẩy kẻ địch mạnh đến đâu
 @ How long a hit freezes the game, in milliseconds
 vi Một đòn đánh đóng băng trò chơi bao lâu, tính bằng mili giây
 
+@ How many lights cast shadows at once, and how smooth their edges are
+vi Số đèn đổ bóng cùng lúc và độ mềm của mép bóng
+
 @ How strongly fog covers the sky when fog is on
 vi Mức sương mù che bầu trời khi bật sương mù
 
@@ -1567,6 +1582,9 @@ vi Nguồn sáng tỏa sáng: đèn, dung nham, dịch chuyển, tia lửa và v
 
 @ Lights from rockets, muzzle flashes and explosions brighten nearby walls
 vi Ánh sáng từ tên lửa, lửa đầu nòng và vụ nổ chiếu sáng tường gần đó
+
+@ Lights from rockets, muzzle flashes and explosions shade walls and models per pixel and cast shadows; needs Dynamic Lights
+vi Ánh sáng từ tên lửa, chớp lửa đầu nòng và vụ nổ chiếu lên tường và mô hình theo từng điểm ảnh và đổ bóng; cần Ánh sáng động
 
 @ Liquid surfaces swell and ring out where things move through them
 vi Mặt chất lỏng dâng sóng và tạo vòng gợn ở nơi vật thể đi qua
@@ -1810,6 +1828,9 @@ vi Dùng mô hình MD5 mượt hơn của bản phát hành lại 2021 (và mô 
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 vi Dùng ánh sáng màu của bản đồ (tệp .lit hoặc khối BSPX); tắt thì dùng ánh sáng trắng gốc. Áp dụng khi tải bản đồ tiếp theo
+
+@ Walls, doors and monsters block the light and cast shadows
+vi Tường, cửa và quái vật chắn ánh sáng và đổ bóng
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 vi Số đoạn tia nước, số giọt và đổ bóng chất lỏng bóng loáng: thấp dùng dòng nước trong mờ đơn giản hơn; cao dùng tia nước mượt và bóng

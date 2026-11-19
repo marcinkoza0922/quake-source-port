@@ -295,6 +295,10 @@ pub(super) const COMPAT_CVARS: &[(&str, &str, u32)] = &[
     ("r_bloom_size", "1", CVAR_ARCHIVE),
     ("r_bloom_bright", "0", CVAR_ARCHIVE),
     ("r_bloom_quality", "1", CVAR_ARCHIVE),
+    // real-time dynamic lights (DarkPlaces' names): per pixel, with shadows
+    ("r_shadow_realtime_dlight", "0", CVAR_ARCHIVE),
+    ("r_shadow_realtime_dlight_shadows", "1", CVAR_ARCHIVE),
+    ("r_shadow_quality", "1", CVAR_ARCHIVE),
     ("r_enhancedwater", "0", CVAR_ARCHIVE),
     ("r_teleportwindows", "0", CVAR_ARCHIVE),
     ("r_portal_quality", "1", CVAR_ARCHIVE),

@@ -835,6 +835,12 @@ lv Tikai tālcīņa
 @ Reacquire While Held
 lv Atkārtoti uztvert, turot
 
+@ Real-time Dynamic Lights
+lv Reāllaika dinamiskās gaismas
+
+@ Real-time Light Settings
+lv Reāllaika gaismas iestatījumi
+
 @ Red
 lv Sarkana
 
@@ -903,6 +909,12 @@ lv Redzēt cauri portāliem
 
 @ See-through Teleporters
 lv Caurredzami teleporti
+
+@ Shadow Quality
+lv Ēnu kvalitāte
+
+@ Shadows
+lv Ēnas
 
 @ Shirt Color
 lv Krekla krāsa
@@ -1547,6 +1559,9 @@ lv Cik stipri augstspiediena mazgātāja ūdens atgrūž ienaidniekus
 @ How long a hit freezes the game, in milliseconds
 lv Cik ilgi trāpījums sasaldē spēli, milisekundēs
 
+@ How many lights cast shadows at once, and how smooth their edges are
+lv Cik gaismas vienlaikus met ēnas un cik maigas ir to malas
+
 @ How strongly fog covers the sky when fog is on
 lv Cik stipri migla pārklāj debesis, kad migla ir ieslēgta
 
@@ -1567,6 +1582,9 @@ lv Gaismas avoti mirdz: lampas, lava, teleporti, dzirksteles un sprādzieni; Mir
 
 @ Lights from rockets, muzzle flashes and explosions brighten nearby walls
 lv Raķešu, šāvienu uzliesmojumu un sprādzienu gaisma izgaismo tuvējās sienas
+
+@ Lights from rockets, muzzle flashes and explosions shade walls and models per pixel and cast shadows; needs Dynamic Lights
+lv Raķešu, šāvienu uzliesmojumu un sprādzienu gaisma izgaismo sienas un modeļus katrā pikselī un met ēnas; nepieciešamas Dinamiskās gaismas
 
 @ Liquid surfaces swell and ring out where things move through them
 lv Šķidrumu virsmas viļņojas un veido apļus, kur kaut kas tām iet cauri
@@ -1810,6 +1828,9 @@ lv Izmanto 2021. gada atkārtotā izdevuma gludākos MD5 modeļus (un MD3 aizst�
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 lv Izmanto kartes krāsaino gaismu (.lit fails vai BSPX bloks); izslēgts dod oriģinālo balto gaismu. Stājas spēkā nākamajā kartes ielādē
+
+@ Walls, doors and monsters block the light and cast shadows
+lv Sienas, durvis un briesmoņi aizsedz gaismu un met ēnas
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 lv Strūklas segmenti, pilienu skaits un spīdīga šķidruma ēnošana: zems izmanto vienkāršākas caurspīdīgas strūklas; augsts gludas, spīdīgas strūklas

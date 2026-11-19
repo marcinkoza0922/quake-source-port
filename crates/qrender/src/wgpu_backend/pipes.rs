@@ -59,6 +59,8 @@ pub(super) struct AliasV {
     pub(super) pos: [f32; 3],
     pub(super) st: [f32; 2],
     pub(super) shade: [f32; 3],
+    /// World-space normal (per-pixel dynamic lights).
+    pub(super) nrm: [f32; 3],
 }
 
 /// 2D vertex in output pixels.
@@ -77,9 +79,9 @@ pub(super) struct Pipes {
     pub(super) draw_bgl: wgpu::BindGroupLayout,
     /// Post pass inputs: scene, motion velocity, sampler, palette, softemu LUT.
     pub(super) post_bgl: wgpu::BindGroupLayout,
-    scene_layout: wgpu::PipelineLayout,
+    pub(super) scene_layout: wgpu::PipelineLayout,
     sky_layout: wgpu::PipelineLayout,
-    scene_module: wgpu::ShaderModule,
+    pub(super) scene_module: wgpu::ShaderModule,
     sky_module: wgpu::ShaderModule,
     /// Scene pipelines for the current MSAA sample count.
     pub(super) scene: ScenePipes,
@@ -210,8 +212,8 @@ pub(super) fn pipeline_with(dev: &wgpu::Device, d: Desc, compare: wgpu::CompareF
 
 pub(super) const WORLD_ATTRS: [wgpu::VertexAttribute; 4] =
     wgpu::vertex_attr_array![0 => Float32x3, 1 => Float32x2, 2 => Float32x3, 3 => Float32x2];
-pub(super) const ALIAS_ATTRS: [wgpu::VertexAttribute; 3] =
-    wgpu::vertex_attr_array![0 => Float32x3, 1 => Float32x2, 2 => Float32x3];
+pub(super) const ALIAS_ATTRS: [wgpu::VertexAttribute; 4] =
+    wgpu::vertex_attr_array![0 => Float32x3, 1 => Float32x2, 2 => Float32x3, 3 => Float32x3];
 pub(super) const POLY_ATTRS: [wgpu::VertexAttribute; 3] =
     wgpu::vertex_attr_array![0 => Float32x3, 1 => Float32x2, 2 => Unorm8x4];
 const UI_ATTRS: [wgpu::VertexAttribute; 3] =
@@ -249,6 +251,33 @@ impl Pipes {
             },
             tex_entry(5, D::D2),
             sampler_entry(6),
+            // r_shadow_realtime_dlight: light list, shadow maps, compare sampler
+            wgpu::BindGroupLayoutEntry {
+                binding: 7,
+                visibility: wgpu::ShaderStages::FRAGMENT,
+                ty: wgpu::BindingType::Buffer {
+                    ty: wgpu::BufferBindingType::Uniform,
+                    has_dynamic_offset: false,
+                    min_binding_size: wgpu::BufferSize::new(std::mem::size_of::<crate::rtlight::LightsGpu>() as u64),
+                },
+                count: None,
+            },
+            wgpu::BindGroupLayoutEntry {
+                binding: 8,
+                visibility: wgpu::ShaderStages::FRAGMENT,
+                ty: wgpu::BindingType::Texture {
+                    sample_type: wgpu::TextureSampleType::Depth,
+                    view_dimension: D::D2Array,
+                    multisampled: false,
+                },
+                count: None,
+            },
+            wgpu::BindGroupLayoutEntry {
+                binding: 9,
+                visibility: wgpu::ShaderStages::FRAGMENT,
+                ty: wgpu::BindingType::Sampler(wgpu::SamplerBindingType::Comparison),
+                count: None,
+            },
         ]);
         let mat_bgl = bgl(&[tex_entry(0, D::D2), tex_entry(1, D::D2), tex_entry(2, D::D2), sampler_entry(3)]);
         let sky_bgl = bgl(&[

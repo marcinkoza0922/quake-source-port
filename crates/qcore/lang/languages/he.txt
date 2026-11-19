@@ -835,6 +835,12 @@ he טווח רחוק בלבד
 @ Reacquire While Held
 he נעילה מחדש בהחזקה
 
+@ Real-time Dynamic Lights
+he אורות דינמיים בזמן אמת
+
+@ Real-time Light Settings
+he הגדרות אור בזמן אמת
+
 @ Red
 he אדום
 
@@ -903,6 +909,12 @@ he ראייה דרך פורטלים
 
 @ See-through Teleporters
 he טלפורטרים שקופים
+
+@ Shadow Quality
+he איכות צללים
+
+@ Shadows
+he צללים
 
 @ Shirt Color
 he צבע חולצה
@@ -1547,6 +1559,9 @@ he כמה חזק המים של מכונת השטיפה דוחפים אויבים
 @ How long a hit freezes the game, in milliseconds
 he כמה זמן פגיעה מקפיאה את המשחק, באלפיות שנייה
 
+@ How many lights cast shadows at once, and how smooth their edges are
+he כמה אורות מטילים צללים בבת אחת, וכמה רכים הקצוות שלהם
+
 @ How strongly fog covers the sky when fog is on
 he כמה חזק הערפל מכסה את השמיים כשהערפל פועל
 
@@ -1567,6 +1582,9 @@ he מקורות אור זוהרים: מנורות, לבה, טלפורטים, נ�
 
 @ Lights from rockets, muzzle flashes and explosions brighten nearby walls
 he אורות של טילים, הבזקי ירי ופיצוצים מאירים קירות סמוכים
+
+@ Lights from rockets, muzzle flashes and explosions shade walls and models per pixel and cast shadows; needs Dynamic Lights
+he אור של רקטות, הבזקי ירי ופיצוצים מאיר קירות ומודלים לפי פיקסל ומטיל צללים; דורש אורות דינמיים
 
 @ Liquid surfaces swell and ring out where things move through them
 he פני נוזלים גועשים ויוצרים טבעות במקום שבו משהו עובר בהם
@@ -1810,6 +1828,9 @@ he משתמש במודלי MD5 החלקים יותר של המהדורה המח�
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 he משתמש בתאורה הצבעונית של המפה (קובץ .lit או BSPX lump); כבוי נותן אור לבן מקורי. חל בטעינת המפה הבאה
+
+@ Walls, doors and monsters block the light and cast shadows
+he קירות, דלתות ומפלצות חוסמים את האור ומטילים צללים
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 he מקטעי סילון המים, מספר הטיפות והצללת נוזל מבריקה: נמוכה משתמשת בזרמים שקופים פשוטים; גבוהה בסילונים חלקים ומבריקים

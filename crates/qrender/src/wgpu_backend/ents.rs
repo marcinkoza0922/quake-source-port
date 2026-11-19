@@ -80,6 +80,15 @@ impl Renderer {
         let model = affine(rot, e.origin);
         let first = b.opaque.len();
         world_cmds(wr, &surfs, e.frame != 0, fr.time, alphas, alpha, model, dist, lists, b);
+        if lists.views.is_empty() && alpha >= 1.0 {
+            // shadow casters (first view): the submodel's bounding sphere
+            let mid = [0, 1, 2].map(|i| 0.5 * (sub_.mins[i] + sub_.maxs[i]));
+            let half = [0, 1, 2].map(|i| 0.5 * (sub_.maxs[i] - sub_.mins[i]));
+            let c = xform(&model, mid);
+            let sphere = [c[0], c[1], c[2], dot(half, half).sqrt()];
+            let casters: Vec<_> = b.opaque[first..].iter().map(|c| (*c, sphere, e.key)).collect();
+            lists.casters.extend(casters);
+        }
         if let Some(prev) = self.motion.prev_transform(e) {
             let du = lists.draw(DrawU { model, pad: vel_pad(&prev), ..Default::default() });
             b.vel.extend(b.opaque[first..].iter().map(|c| Cmd { du, ..*c }));
@@ -95,7 +104,8 @@ impl Renderer {
                     .or_else(|| w.light_point([e.origin[0], e.origin[1], e.origin[2] + am.maxs_z * 0.5], styles))
             })
             .unwrap_or([128.0; 3]);
-        if fr.settings.dynamic {
+        // real-time dynamic lights shade models per pixel instead
+        if fr.settings.dynamic && !fr.settings.rt_dlights {
             for dl in fr.dlights {
                 let d = sub(e.origin, dl.origin);
                 let add = dl.radius - dot(d, d).sqrt();
@@ -195,6 +205,8 @@ fn alias_cmds(
     let base = lists.alias_v.len() as u32;
     let stride = if am.md3 { 2 } else { 1 };
     let dyn_verts = dynp.map(|_| fr.dyn_verts);
+    // normals: the model matrix is R·S, its inverse transpose R·S⁻¹ = M·S⁻²
+    let sc = dynp.map_or(am.scale, |d| d.scale).map(|s| if s != 0.0 { 1.0 / (s * s) } else { 1.0 });
     for s in &am.surfaces {
         for j in s.first_vert..s.first_vert + s.vert_count {
             let v = am.verts[j as usize];
@@ -209,7 +221,13 @@ fn alias_cmds(
             let (pb, nb) = decode(am, dyn_verts, ib);
             let p: V3 = std::array::from_fn(|k| pa[k] + (pb[k] - pa[k]) * blend);
             let sh = shadedot(na, sv) + (shadedot(nb, sv) - shadedot(na, sv)) * blend;
-            lists.alias_v.push(AliasV { pos: xform(&model, p), st: v.st, shade: if e.fullbright { [1.0; 3] } else { light.map(|c| c * sh) } });
+            let n: V3 = std::array::from_fn(|k| (na[k] + (nb[k] - na[k]) * blend) * sc[k]);
+            lists.alias_v.push(AliasV {
+                pos: xform(&model, p),
+                st: v.st,
+                shade: if e.fullbright { [1.0; 3] } else { light.map(|c| c * sh) },
+                nrm: norm(xform_dir(&model, n)),
+            });
         }
     }
     let alpha = e.alpha.clamp(0.0, 1.0);
@@ -237,6 +255,8 @@ fn alias_cmds(
                 f32::from(e.heat.min(crate::HEAT_FIRE)),
             ],
             ix: [u32::from(top.min(13)), u32::from(bot.min(13)), 0, 0],
+            // w: fullbright model, no per-pixel dynamic lights
+            extra: [0.0, 0.0, 0.0, f32::from(e.fullbright)],
             ..Default::default()
         };
         let du = lists.draw(draw);
@@ -265,6 +285,10 @@ fn alias_cmds(
         } else {
             if let Some(du) = vel_du {
                 b.vel.push(Cmd { du, ..cmd });
+            }
+            if lists.views.is_empty() {
+                // shadow caster of real-time dynamic lights (first view)
+                lists.casters.push((cmd, [e.origin[0], e.origin[1], e.origin[2], radius], e.key));
             }
             b.opaque.push(cmd);
         }

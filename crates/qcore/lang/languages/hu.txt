@@ -835,6 +835,12 @@ hu Csak távolsági
 @ Reacquire While Held
 hu Újrabefogás nyomva tartva
 
+@ Real-time Dynamic Lights
+hu Valós idejű dinamikus fények
+
+@ Real-time Light Settings
+hu Valós idejű fény beállításai
+
 @ Red
 hu Piros
 
@@ -903,6 +909,12 @@ hu Átlátás a portálokon
 
 @ See-through Teleporters
 hu Átlátszó teleporterek
+
+@ Shadow Quality
+hu Árnyékminőség
+
+@ Shadows
+hu Árnyékok
 
 @ Shirt Color
 hu Ing színe
@@ -1547,6 +1559,9 @@ hu Milyen erősen löki a nagynyomású mosó vize az ellenségeket
 @ How long a hit freezes the game, in milliseconds
 hu Mennyi ideig állítja meg egy találat a játékot, milliszekundumban
 
+@ How many lights cast shadows at once, and how smooth their edges are
+hu Hány fény vet egyszerre árnyékot, és mennyire lágyak a széleik
+
 @ How strongly fog covers the sky when fog is on
 hu Milyen erősen takarja a köd az égboltot, ha a köd be van kapcsolva
 
@@ -1567,6 +1582,9 @@ hu A fényforrások ragyognak: lámpák, láva, teleportok, szikrák és robban�
 
 @ Lights from rockets, muzzle flashes and explosions brighten nearby walls
 hu A rakéták, torkolattüzek és robbanások fényei megvilágítják a közeli falakat
+
+@ Lights from rockets, muzzle flashes and explosions shade walls and models per pixel and cast shadows; needs Dynamic Lights
+hu A rakéták, torkolattüzek és robbanások fénye pixelenként világítja meg a falakat és modelleket, és árnyékot vet; a Dinamikus fények szükségesek
 
 @ Liquid surfaces swell and ring out where things move through them
 hu A folyadékfelszín hullámzik és gyűrűzik, ahol valami áthalad rajta
@@ -1810,6 +1828,9 @@ hu A 2021-es újrakiadás simább MD5 modelljeit (és a modok MD3 cseréit) hasz
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 hu A pálya színes fényét használja (.lit fájl vagy BSPX lump); kikapcsolva az eredeti fehér fény marad. A következő pályabetöltéskor lép életbe
+
+@ Walls, doors and monsters block the light and cast shadows
+hu A falak, ajtók és szörnyek elzárják a fényt és árnyékot vetnek
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 hu Vízsugárszakaszok, cseppek száma és fényes folyadékárnyalás: az alacsony egyszerűbb áttetsző sugarakat, a magas sima, fényes sugarakat ad

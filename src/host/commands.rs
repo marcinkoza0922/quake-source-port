@@ -116,17 +116,7 @@ pub(super) fn register_commands(c: &mut Commands<Host>) {
         h.print(&qcore::ctr!("{} commands\n", l.len()));
     });
     c.add("quit", |h, _| h.quit = true);
-    c.add("r_visibility", |h, a| {
-        let message = h.r.debug_visibility(&a.all()[1..]);
-        h.print(&message);
-        if a.argv(1) == "isolate"
-            && let Some(entity) = h.cl.entities.get(h.cl.viewentity)
-        {
-            let mut eye = entity.origin;
-            eye[2] += h.cl.viewheight;
-            h.print(&format!("Client eye {eye:?}, angles {:?}\n", h.cl.viewangles));
-        }
-    });
+    super::render_commands::register(c);
     c.add("screenshot", |h, a| h.screenshot = Some(a.argv(1).to_string()));
     c.add("toggleconsole", |h, _| h.toggle_console());
     c.add("togglemenu", |h, _| {
@@ -168,6 +158,7 @@ pub(super) fn register_commands(c: &mut Commands<Host>) {
             "enhancements" => Some(Page::Enhancements),
             "water" => Some(Page::Water),
             "bloom" => Some(Page::Bloom),
+            "rtlights" => Some(Page::RtLights),
             "impacts" => Some(Page::Impacts),
             "blood" => Some(Page::Blood),
             "debris" => Some(Page::Debris),
@@ -227,10 +218,6 @@ pub(super) fn register_commands(c: &mut Commands<Host>) {
     }
     c.add("cfg_unbindall", |_, _| {});
     c.add("fog", cmd_fog);
-    c.add("r_partinfo", |h, _| {
-        let s = h.fte.info(&h.cl);
-        h.con.print(&s);
-    });
     // Exercise the real impact path against the surface under the crosshair.
     c.add("impact_test", |h, a| {
         let kind = match a.argv(1) {

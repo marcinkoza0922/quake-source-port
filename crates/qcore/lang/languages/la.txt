@@ -835,6 +835,12 @@ la Eminus tantum
 @ Reacquire While Held
 la Tenendo iterum capere
 
+@ Real-time Dynamic Lights
+la Lumina dynamica tempore reali
+
+@ Real-time Light Settings
+la Optiones luminis temporis realis
+
 @ Red
 la Ruber
 
@@ -903,6 +909,12 @@ la Per portas videre
 
 @ See-through Teleporters
 la Teleportatores perspicui
+
+@ Shadow Quality
+la Qualitas umbrarum
+
+@ Shadows
+la Umbrae
 
 @ Shirt Color
 la Color tunicae
@@ -1547,6 +1559,9 @@ la Quam fortiter aqua Lavatoris pressorii hostes impellat
 @ How long a hit freezes the game, in milliseconds
 la Quamdiu ictus lusum congelet, in millisecundis
 
+@ How many lights cast shadows at once, and how smooth their edges are
+la Quot lumina simul umbras iaciant, et quam molles sint earum orae
+
 @ How strongly fog covers the sky when fog is on
 la Quam valde nebula caelum tegat cum nebula activa est
 
@@ -1567,6 +1582,9 @@ la Fontes lucis fulgent: lucernae, lava, teleportatores, scintillae, displosione
 
 @ Lights from rockets, muzzle flashes and explosions brighten nearby walls
 la Lumina rochetarum, fulgurum ictuum et explosionum parietes propinquos illustrant
+
+@ Lights from rockets, muzzle flashes and explosions shade walls and models per pixel and cast shadows; needs Dynamic Lights
+la Lux missilium, fulgorum ictuum et displosionum parietes et figuras per singula puncta illustrat et umbras iacit; Lumina dynamica requirit
 
 @ Liquid surfaces swell and ring out where things move through them
 la Superficies liquidae tument et circulos faciunt ubi res per eas moventur
@@ -1810,6 +1828,9 @@ la Exemplaria MD5 leniora editionis anni 2021 (et substituta MD3 ex modis) pro c
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 la Lumen coloratum tabulae adhibet (plica .lit vel frustum BSPX); inactivum lumen album originale praebet. Valet cum tabula proxima oneratur
+
+@ Walls, doors and monsters block the light and cast shadows
+la Parietes, ostia et monstra lucem impediunt et umbras iaciunt
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 la Segmenta iacti, numerus guttarum et umbratio nitida liquoris: humilis rivos translucidos simpliciores adhibet; alta iactus lenes et nitidos

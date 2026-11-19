@@ -835,6 +835,12 @@ ka მხოლოდ შორი ბრძოლა
 @ Reacquire While Held
 ka ხელახალი ჩამიზნება დაჭერისას
 
+@ Real-time Dynamic Lights
+ka რეალური დროის დინამიკური სინათლე
+
+@ Real-time Light Settings
+ka რეალური დროის სინათლის პარამეტრები
+
 @ Red
 ka წითელი
 
@@ -903,6 +909,12 @@ ka პორტალებში დანახვა
 
 @ See-through Teleporters
 ka გამჭვირვალე ტელეპორტები
+
+@ Shadow Quality
+ka ჩრდილების ხარისხი
+
+@ Shadows
+ka ჩრდილები
 
 @ Shirt Color
 ka პერანგის ფერი
@@ -1547,6 +1559,9 @@ ka რამდენად ძლიერად აწვება სარ�
 @ How long a hit freezes the game, in milliseconds
 ka რამდენ ხანს ყინავს დარტყმა თამაშს, მილიწამებში
 
+@ How many lights cast shadows at once, and how smooth their edges are
+ka რამდენი სინათლე აყენებს ჩრდილს ერთდროულად და რამდენად რბილია მათი კიდეები
+
 @ How strongly fog covers the sky when fog is on
 ka რამდენად ფარავს ნისლი ცას, როცა ნისლი ჩართულია
 
@@ -1567,6 +1582,9 @@ ka სინათლის წყაროები ანათებენ: �
 
 @ Lights from rockets, muzzle flashes and explosions brighten nearby walls
 ka რაკეტების, გასროლის ალისა და აფეთქებების სინათლე ახლომდებარე კედლებს ანათებს
+
+@ Lights from rockets, muzzle flashes and explosions shade walls and models per pixel and cast shadows; needs Dynamic Lights
+ka რაკეტების, გასროლის ელვარებისა და აფეთქებების სინათლე პიქსელობრივად ანათებს კედლებსა და მოდელებს და ჩრდილს აყენებს; საჭიროა დინამიკური სინათლე
 
 @ Liquid surfaces swell and ring out where things move through them
 ka სითხის ზედაპირები ტალღდება და რგოლებს ქმნის იქ, სადაც მასში რამე მოძრაობს
@@ -1810,6 +1828,9 @@ ka იყენებს 2021 წლის ხელახალი გამო
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 ka იყენებს რუკის ფერად განათებას (.lit ფაილი ან BSPX ბლოკი); გამორთვისას ორიგინალური თეთრი სინათლეა. მოქმედებს შემდეგი რუკის ჩატვირთვისას
+
+@ Walls, doors and monsters block the light and cast shadows
+ka კედლები, კარები და ურჩხულები სინათლეს ფარავენ და ჩრდილს აყენებენ
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 ka წყლის ჭავლის სეგმენტები, წვეთების რაოდენობა და სითხის პრიალა დაჩრდილვა: დაბალი იყენებს მარტივ გამჭვირვალე ნაკადებს; მაღალი — გლუვ პრიალა ჭავლებს

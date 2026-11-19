@@ -835,6 +835,12 @@ ta தொலைவுத் தாக்கு மட்டும்
 @ Reacquire While Held
 ta பிடிக்கும்போது மீண்டும் பிடி
 
+@ Real-time Dynamic Lights
+ta நிகழ்நேர இயங்கு விளக்குகள்
+
+@ Real-time Light Settings
+ta நிகழ்நேர ஒளி அமைப்புகள்
+
 @ Red
 ta சிவப்பு
 
@@ -903,6 +909,12 @@ ta போர்டல்கள் வழியே பார்
 
 @ See-through Teleporters
 ta ஊடுருவிப் பார்க்கும் டெலிபோர்ட்டர்கள்
+
+@ Shadow Quality
+ta நிழல் தரம்
+
+@ Shadows
+ta நிழல்கள்
 
 @ Shirt Color
 ta சட்டை நிறம்
@@ -1547,6 +1559,9 @@ ta பவர்வாஷரின் நீர் எதிரிகளை எ�
 @ How long a hit freezes the game, in milliseconds
 ta ஒரு தாக்குதல் ஆட்டத்தை எவ்வளவு நேரம் உறையவைக்கும், மில்லிவினாடிகளில்
 
+@ How many lights cast shadows at once, and how smooth their edges are
+ta ஒரே நேரத்தில் எத்தனை விளக்குகள் நிழல் விழச் செய்கின்றன, அவற்றின் விளிம்புகள் எவ்வளவு மென்மையானவை
+
 @ How strongly fog covers the sky when fog is on
 ta மூடுபனி ஆன் ஆக இருக்கும்போது அது வானை எவ்வளவு மூடும்
 
@@ -1567,6 +1582,9 @@ ta ஒளி மூலங்கள் ஒளிர்கின்றன: வி�
 
 @ Lights from rockets, muzzle flashes and explosions brighten nearby walls
 ta ராக்கெட்டுகள், துப்பாக்கி மின்னல்கள், வெடிப்புகளின் ஒளி அருகிலுள்ள சுவர்களை ஒளிரச்செய்யும்
+
+@ Lights from rockets, muzzle flashes and explosions shade walls and models per pixel and cast shadows; needs Dynamic Lights
+ta ராக்கெட்டுகள், சுடும் ஒளி, வெடிப்புகளின் ஒளி சுவர்களையும் மாதிரிகளையும் ஒவ்வொரு பிக்சலிலும் ஒளிர்வித்து நிழல் விழச் செய்கிறது; இயங்கு விளக்குகள் தேவை
 
 @ Liquid surfaces swell and ring out where things move through them
 ta பொருட்கள் கடக்கும் இடங்களில் திரவப் பரப்புகள் உப்பி வளையங்களாக அலையும்
@@ -1810,6 +1828,9 @@ ta பழைய மாடல்களுக்குப் பதிலாக 20
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 ta மேப்பின் வண்ண ஒளியைப் (.lit கோப்பு அல்லது BSPX lump) பயன்படுத்தும்; ஆஃப் எனில் அசல் வெள்ளை ஒளி. அடுத்த மேப் ஏற்றத்தில் பொருந்தும்
+
+@ Walls, doors and monsters block the light and cast shadows
+ta சுவர்கள், கதவுகள், அரக்கர்கள் ஒளியைத் தடுத்து நிழல் விழச் செய்கின்றன
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 ta நீர்த்தாரைப் பகுதிகள், துளி எண்ணிக்கை, பளபளப்பான திரவ நிழலிடல்: குறைவு எளிய ஒளி ஊடுருவும் தாரைகள்; உயர் மென்மையான பளபளப்பான தாரைகள்

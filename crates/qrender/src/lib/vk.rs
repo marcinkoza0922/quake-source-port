@@ -3,7 +3,10 @@ const DYN_SIZE: u64 = 48 << 20;
 const OFS_LMDYN: u64 = 2048;
 const OFS_VIS: u64 = 8192;
 const MAX_VIS: u64 = 1 << 17;
-const OFS_BUMP: u64 = OFS_VIS + MAX_VIS * 4;
+/// Real-time dynamic light list (common.glsl `Lights`, frame/dlights.rs).
+const OFS_LIGHTS: u64 = OFS_VIS + MAX_VIS * 4;
+const LIGHTS_BYTES: u64 = 8192;
+const OFS_BUMP: u64 = OFS_LIGHTS + LIGHTS_BYTES;
 const NO_TEX: u32 = u32::MAX;
 
 /// The renderer. Not `Send`: keep it on the render thread.
@@ -43,6 +46,10 @@ pub struct Renderer {
     motion_blur_quality: u32,
     /// Bloom quality in effect (`None` = bloom off: no glow attachment or chain).
     bloom: Option<u32>,
+    /// Cube shadow maps of real-time dynamic lights (always present; a
+    /// placeholder while off) and their depth-compare sampler.
+    shadow_maps: Option<ShadowMaps>,
+    sampler_shadow: vk::Sampler,
     /// Last frame's entity transforms by `RenderEntity::key` (motion blur), plus reused scratch map.
     prev_xforms: std::collections::HashMap<u32, ([f32; 3], [f32; 3])>,
     cur_xforms: std::collections::HashMap<u32, ([f32; 3], [f32; 3])>,
@@ -252,6 +259,7 @@ impl Renderer {
         self.drop_shader();
         self.free_level();
         self.destroy_targets();
+        self.destroy_shadow_maps();
         if let Some((b, _, _)) = self.capture.take() {
             self.gpu.free_buffer(b);
         }
@@ -293,6 +301,7 @@ impl Renderer {
             dev.destroy_sampler(self.sampler_clamp, None);
             dev.destroy_sampler(self.sampler_linear, None);
             dev.destroy_sampler(self.sampler_linear_repeat, None);
+            dev.destroy_sampler(self.sampler_shadow, None);
             if self.sampler_world != self.sampler_repeat {
                 dev.destroy_sampler(self.sampler_world, None);
             }

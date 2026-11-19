@@ -58,6 +58,10 @@ impl Renderer {
             self.bloom = bloom;
             self.destroy_targets();
         }
+        let (lights, size) = crate::rtlight::shadow_budget(st);
+        if self.shadow_maps.as_ref().is_none_or(|s| (s.lights, s.size) != (lights, size)) {
+            self.create_shadow_maps(lights, size)?;
+        }
         let motion_blur_quality = st.motion_blur_quality.min(1);
         if motion_blur_quality != self.motion_blur_quality {
             self.motion_blur_quality = motion_blur_quality;

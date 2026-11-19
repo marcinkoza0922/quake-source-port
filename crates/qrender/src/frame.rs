@@ -17,6 +17,7 @@ mod world_draw;
 use world_draw::*;
 mod lightmaps;
 mod bloom;
+mod dlights;
 pub(super) use lightmaps::LightmapRequests;
 
 type Mat4 = [f32; 16];
@@ -334,6 +335,12 @@ impl Renderer {
                             &mut lm_vis,
                         );
                         wd.zfix = true;
+                        {
+                            let mid = [0, 1, 2].map(|i| 0.5 * (sub_.mins[i] + sub_.maxs[i]));
+                            let half = [0, 1, 2].map(|i| 0.5 * (sub_.maxs[i] - sub_.mins[i]));
+                            let c = add(e.origin, rotate3(&rot, mid));
+                            wd.bounds = [c[0], c[1], c[2], dot(half, half).sqrt()];
+                        }
                         if alpha < 1.0 {
                             trans.push((dist, Trans::World(world_draws.len())));
                         } else if !e.portal_only {
@@ -404,7 +411,8 @@ impl Renderer {
                         if st.fullbright {
                             lc = [100.0; 3]; // ironwail: lightcolor 0.5 (x200)
                         }
-                        if st.dynamic && !st.fullbright {
+                        // real-time dynamic lights shade models per pixel instead
+                        if st.dynamic && !st.fullbright && !st.rt_dlights {
                             for dl in fr.dlights {
                                 let d = sub(e.origin, dl.origin);
                                 let add = dl.radius - dot(d, d).sqrt();
@@ -496,6 +504,7 @@ impl Renderer {
                                 main_visible,
                                 viewmodel: e.viewmodel,
                                 portal_only: e.portal_only,
+                                key: e.key,
                             });
                         }
                     }
@@ -799,6 +808,13 @@ impl Renderer {
             dynw.push(&ui, 16)
         };
 
+        // r_shadow_realtime_dlight: per-pixel lights and their shadow casters
+        let rt_sel = {
+            let shadows = if st.dlight_shadows { self.shadow_maps.as_ref().map_or(0, |s| s.lights) } else { 0 };
+            dlights::select(fr.dlights, &passes, st, shadows)
+        };
+        let mut shadow_lights = self.build_shadow_lights(&rt_sel, &mut dynw, time, alphas);
+
         // UBO per view (view 0 at offset 0) + lightmap dynamic data
         for (vi, pass) in passes.iter_mut().enumerate() {
             let Some(vs) = &pass.view else { continue };
@@ -916,11 +932,21 @@ impl Renderer {
                 dynw.write_at(portal.ubo as u64, &[pu]);
             }
             if vi == 0 {
+                // shadow map faces: the first view's uniforms with the face's matrix
+                for sl in shadow_lights.iter_mut() {
+                    for (f, ofs) in sl.ubo.iter_mut().enumerate() {
+                        let mut fu = ubo;
+                        fu.viewproj = sl.vp[f];
+                        *ofs = dynw.push(&[fu], 256).unwrap_or(0) as u32;
+                    }
+                }
                 dynw.write_at(0, &[ubo]);
             } else {
                 pass.ubo = dynw.push(&[ubo], 256).unwrap_or(0) as u32;
             }
         }
+        let shadow_size = self.shadow_maps.as_ref().map_or(16, |s| s.size);
+        dynw.write_at(OFS_LIGHTS, &[crate::rtlight::lights_gpu(&rt_sel, st.shadow_quality, shadow_size)]);
         let mut lm_cpu_range = None;
         if passes.iter().any(|p| p.view.is_some()) {
             let mut lmd = LmDyn {
@@ -929,7 +955,8 @@ impl Renderer {
                 pad: [0; 3],
                 dl: [[0.0; 8]; 64],
             };
-            if st.dynamic {
+            // real-time dynamic lights are lit per pixel, not in the lightmaps
+            if st.dynamic && !st.rt_dlights {
                 for (i, d) in fr.dlights.iter().take(64).enumerate() {
                     lmd.dl[i] = [
                         d.origin[0],
@@ -1159,6 +1186,9 @@ impl Renderer {
                     vk::ImageLayout::GENERAL,
                     vk::ImageLayout::GENERAL,
                 );
+            }
+            if pi == 0 {
+                self.record_shadows(cmd, set[0], dynbuf, &shadow_lights, world_draws, alias_draws);
             }
             ts(2);
             let crng = gpu::range(vk::ImageAspectFlags::COLOR, 1, 1);

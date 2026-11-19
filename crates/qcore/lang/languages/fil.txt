@@ -835,6 +835,12 @@ fil Malayuan lang
 @ Reacquire While Held
 fil Muling Mag-target Habang Hawak
 
+@ Real-time Dynamic Lights
+fil Real-time na Dynamic na Ilaw
+
+@ Real-time Light Settings
+fil Mga Setting ng Real-time na Ilaw
+
 @ Red
 fil Pula
 
@@ -903,6 +909,12 @@ fil Tumingin sa Loob ng Portal
 
 @ See-through Teleporters
 fil Nakikitang Teleporter
+
+@ Shadow Quality
+fil Kalidad ng Anino
+
+@ Shadows
+fil Mga Anino
 
 @ Shirt Color
 fil Kulay ng Damit
@@ -1547,6 +1559,9 @@ fil Gaano kalakas itinutulak ng tubig ng Powerwasher ang mga kalaban
 @ How long a hit freezes the game, in milliseconds
 fil Gaano katagal humihinto ang laro sa isang tama, sa millisecond
 
+@ How many lights cast shadows at once, and how smooth their edges are
+fil Ilang ilaw ang sabay na naglalabas ng anino, at gaano kakinis ang mga gilid nito
+
 @ How strongly fog covers the sky when fog is on
 fil Gaano kakapal tinatakpan ng hamog ang langit kapag naka-on ang hamog
 
@@ -1567,6 +1582,9 @@ fil Kumikinang ang mga pinagmumulan ng liwanag: lampara, lava, teleporter, kisla
 
 @ Lights from rockets, muzzle flashes and explosions brighten nearby walls
 fil Pinaliliwanag ng ilaw ng rocket, putok ng baril at pagsabog ang kalapit na pader
+
+@ Lights from rockets, muzzle flashes and explosions shade walls and models per pixel and cast shadows; needs Dynamic Lights
+fil Iniilawan ng ilaw ng rocket, kislap ng baril at pagsabog ang mga pader at modelo bawat pixel at naglalabas ng anino; kailangan ang Dynamic na Ilaw
 
 @ Liquid surfaces swell and ring out where things move through them
 fil Umaalon at bumibilog ang ibabaw ng likido kung saan may dumaraan
@@ -1810,6 +1828,9 @@ fil Ginagamit ang mas makinis na MD5 model ng 2021 re-release (at MD3 na kapalit
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 fil Ginagamit ang may kulay na ilaw ng mapa (.lit file o BSPX lump); kapag naka-off, puting ilaw gaya ng orihinal. Ilalapat sa susunod na pag-load ng mapa
+
+@ Walls, doors and monsters block the light and cast shadows
+fil Hinaharangan ng mga pader, pinto at halimaw ang ilaw at naglalabas ng anino
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 fil Mga segment ng water jet, bilang ng patak at makintab na shading ng likido: mas simpleng translucent na agos sa mababa; makinis at makintab na jet sa mataas

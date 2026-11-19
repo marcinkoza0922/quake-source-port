@@ -111,6 +111,9 @@ pub(super) fn tooltip(item: Item) -> Option<&'static str> {
         "r_blood_gibs" => "Moving gibs leave blood on surfaces they touch",
         "r_debris_movers" => "Debris lands on and is carried or shoved by doors, lifts and platforms",
         "r_debris_force" => "How hard shots and explosions push debris around",
+        "r_shadow_realtime_dlight" => "Lights from rockets, muzzle flashes and explosions shade walls and models per pixel and cast shadows; needs Dynamic Lights",
+        "r_shadow_realtime_dlight_shadows" => "Walls, doors and monsters block the light and cast shadows",
+        "r_shadow_quality" => "How many lights cast shadows at once, and how smooth their edges are",
         "r_bloom" => "Light sources glow: lamps, lava, teleporters, sparks and explosions; Bloom Settings tunes it",
         "r_bloom_quality" => "Resolution of the glow: low is cheaper and softer",
         "r_bloom_intensity" => "How bright the glow is",
@@ -241,6 +244,7 @@ pub(super) fn page_items(p: Page) -> &'static [Item] {
         Page::Messages => MESSAGES,
         Page::Water => WATER,
         Page::Bloom => BLOOM,
+        Page::RtLights => RT_LIGHTS,
         Page::Debris => DEBRIS,
         Page::Blood => BLOOD,
         Page::ScreenShader => SCREEN_SHADER,
@@ -279,6 +283,7 @@ pub(super) fn page_name(p: Page) -> &'static str {
         Page::Messages => "Messages & Captions",
         Page::Water => "Water Settings",
         Page::Bloom => "Bloom Settings",
+        Page::RtLights => "Real-time Light Settings",
         Page::Impacts => "FX Settings",
         Page::Debris => "Debris Settings",
         Page::Blood => "Blood Splatter Settings",
@@ -330,6 +335,7 @@ pub(super) fn sub_disabled(page: Page, cv: &Cvars) -> bool {
         || (page == Page::HudLayout && cv.value_of("scr_hudstyle") == 0.0)
         || (page == Page::Water && cv.value_of("r_enhancedwater") == 0.0)
         || (page == Page::Bloom && cv.value_of("r_bloom") == 0.0)
+        || (page == Page::RtLights && cv.value_of("r_shadow_realtime_dlight") == 0.0)
         || (page == Page::Impacts && cv.value_of("r_enhancedfx") == 0.0)
         || (page == Page::Blood && cv.value_of("r_blood") == 0.0)
         || (page == Page::Debris && cv.value_of("r_debris") == 0.0)

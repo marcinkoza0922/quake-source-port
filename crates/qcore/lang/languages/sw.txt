@@ -835,6 +835,12 @@ sw Mbali pekee
 @ Reacquire While Held
 sw Lenga Upya Ukishikilia
 
+@ Real-time Dynamic Lights
+sw Taa zinazobadilika za wakati halisi
+
+@ Real-time Light Settings
+sw Mipangilio ya mwanga wa wakati halisi
+
 @ Red
 sw Nyekundu
 
@@ -903,6 +909,12 @@ sw Ona Kupitia Malango
 
 @ See-through Teleporters
 sw Teleporta za Kuona Kupitia
+
+@ Shadow Quality
+sw Ubora wa vivuli
+
+@ Shadows
+sw Vivuli
 
 @ Shirt Color
 sw Rangi ya Shati
@@ -1547,6 +1559,9 @@ sw Nguvu ya maji ya Powerwasher kusukuma maadui
 @ How long a hit freezes the game, in milliseconds
 sw Muda ambao pigo hugandisha mchezo, kwa milisekunde
 
+@ How many lights cast shadows at once, and how smooth their edges are
+sw Taa ngapi hutupa vivuli kwa wakati mmoja, na kingo zake ni laini kiasi gani
+
 @ How strongly fog covers the sky when fog is on
 sw Kiasi ukungu unafunika anga ukungu ukiwa umewashwa
 
@@ -1567,6 +1582,9 @@ sw Vyanzo vya mwanga vinang'aa: taa, lava, visafirishaji, cheche na milipuko; Mi
 
 @ Lights from rockets, muzzle flashes and explosions brighten nearby walls
 sw Mwanga wa roketi, mimweko ya mdomo wa bunduki na milipuko hung'arisha kuta zilizo karibu
+
+@ Lights from rockets, muzzle flashes and explosions shade walls and models per pixel and cast shadows; needs Dynamic Lights
+sw Mwanga wa roketi, mwako wa risasi na milipuko huangaza kuta na miundo kwa kila pikseli na hutupa vivuli; inahitaji Taa zinazobadilika
 
 @ Liquid surfaces swell and ring out where things move through them
 sw Nyuso za vimiminika hufura na kutoa pete vitu vinapopita ndani yake
@@ -1810,6 +1828,9 @@ sw Hutumia modeli laini za MD5 za toleo jipya la 2021 (na mbadala za MD3 kutoka 
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 sw Hutumia mwanga wa rangi wa ramani (faili .lit au BSPX lump); ukizima, mwanga ni mweupe wa asili. Hutumika ramani inayofuata ikipakiwa
+
+@ Walls, doors and monsters block the light and cast shadows
+sw Kuta, milango na majitu huzuia mwanga na kutupa vivuli
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 sw Vipande vya mkondo wa maji, idadi ya matone na kivuli cha kung'aa cha vimiminika: chini hutumia mikondo rahisi angavu; juu hutumia mikondo laini inayong'aa
