@@ -2952,9 +2952,6 @@ nb Slutt på demoen
 @ Export Video
 nb Eksporter video
 
-@ Fast forward
-nb Spol fremover
-
 @ Fast forward {}x
 nb Fremover {}x
 
@@ -2979,9 +2976,6 @@ nb Ingen automatiske demoer ennå. Hvert brett du spiller, tas opp her.
 @ No saved demos yet. Record one with the console command 'record <name>', or keep an automatic demo.
 nb Ingen lagrede demoer ennå. Ta opp en med konsollkommandoen 'record <name>', eller behold en automatisk demo.
 
-@ Pause
-nb Pause
-
 @ Paused
 nb Pauset
 
@@ -2994,41 +2988,20 @@ nb Quake - eksporterer video {} %
 @ Recorded: {}
 nb Tatt opp: {}
 
-@ Rewind
-nb Spol tilbake
-
 @ Rewind {}x
 nb Tilbake {}x
 
 @ Size: {} KB
 nb Størrelse: {} KB
 
-@ Skip 10 s
-nb Hopp 10 s
-
-@ Back 10 s
-nb Tilbake 10 s
-
 @ Length
 nb Lengde
-
-@ Mark in
-nb Merk start
-
-@ Mark out
-nb Merk slutt
-
-@ Next level
-nb Neste brett
 
 @ No demos match the filter. Backspace or Esc clears it.
 nb Ingen demoer passer filteret. Tilbake eller Esc tømmer det.
 
 @ Renaming an automatic demo moves it to the saved demos.
 nb En automatisk demo som får nytt navn, flyttes til de lagrede demoene.
-
-@ Restart
-nb Start på nytt
 
 @ Sort
 nb Sorter
@@ -3038,9 +3011,6 @@ nb Under en demo: A pauser, styrekorset spoler og endrer hastighet, LT og RT mer
 
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 nb Mellomrom pause | Venstre/Høyre spol | Opp/Ned hastighet | PgUp/PgDn 10 s | I/O merk | E eksporter
-
-@ Speed
-nb Hastighet
 
 @ Switch List
 nb Bytt liste

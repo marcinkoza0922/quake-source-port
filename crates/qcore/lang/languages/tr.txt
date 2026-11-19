@@ -2952,9 +2952,6 @@ tr Demonun sonu
 @ Export Video
 tr Video olarak dışa aktar
 
-@ Fast forward
-tr İleri sar
-
 @ Fast forward {}x
 tr İleri {}x
 
@@ -2979,9 +2976,6 @@ tr Henüz otomatik demo yok. Oynadığınız her bölüm buraya kaydedilir.
 @ No saved demos yet. Record one with the console command 'record <name>', or keep an automatic demo.
 tr Henüz kayıtlı demo yok. 'record <name>' konsol komutuyla bir tane kaydedin ya da otomatik bir demoyu saklayın.
 
-@ Pause
-tr Duraklat
-
 @ Paused
 tr Duraklatıldı
 
@@ -2994,41 +2988,20 @@ tr Quake - video dışa aktarılıyor %{}
 @ Recorded: {}
 tr Kaydedildi: {}
 
-@ Rewind
-tr Geri sar
-
 @ Rewind {}x
 tr Geri {}x
 
 @ Size: {} KB
 tr Boyut: {} KB
 
-@ Skip 10 s
-tr 10 sn atla
-
-@ Back 10 s
-tr 10 sn geri
-
 @ Length
 tr Süre
-
-@ Mark in
-tr Başlangıcı işaretle
-
-@ Mark out
-tr Bitişi işaretle
-
-@ Next level
-tr Sonraki bölüm
 
 @ No demos match the filter. Backspace or Esc clears it.
 tr Filtreye uyan demo yok. Geri tuşu veya Esc filtreyi temizler.
 
 @ Renaming an automatic demo moves it to the saved demos.
 tr Otomatik bir demoyu yeniden adlandırmak onu kayıtlı demolara taşır.
-
-@ Restart
-tr Baştan
 
 @ Sort
 tr Sırala
@@ -3038,9 +3011,6 @@ tr Demo oynarken: A duraklatır, yön tuşları sarar ve hızı değiştirir, LT
 
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 tr Boşluk duraklat | Sol/Sağ sar | Yukarı/Aşağı hız | PgUp/PgDn 10 sn | I/O işaret | E dışa aktar
-
-@ Speed
-tr Hız
 
 @ Switch List
 tr Listeyi değiştir

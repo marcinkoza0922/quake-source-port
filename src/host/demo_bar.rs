@@ -13,14 +13,33 @@ use crate::demo::playback::format_time;
 use crate::menu::{BORDER, GOLD_FG, MUTED, TXT};
 use qinput::keys::*;
 
-/// Panel height and the gap under it (virtual units).
+/// Panel height (normal, and extra height in controller mode for button glyphs)
+/// and the gap under it (virtual units).
 const H: f32 = 46.0;
+const PAD_EXTRA: f32 = 11.0;
 const MARGIN: f32 = 6.0;
 const BTN_H: f32 = 13.0;
+const GLYPH_H: f32 = crate::glyphs::H;
 const ICON_W: f32 = 16.0;
 /// Widest text button; narrower when the panel is.
 const TEXT_W: f32 = 46.0;
 const MIN_TEXT_W: f32 = 30.0;
+
+fn panel_h(pad: bool) -> f32 {
+    if pad { H + PAD_EXTRA } else { H }
+}
+
+fn btn_h(pad: bool) -> f32 {
+    if pad { BTN_H + PAD_EXTRA } else { BTN_H }
+}
+
+fn right_buttons(auto: bool) -> &'static [Btn] {
+    if auto {
+        &[Btn::Hide, Btn::Keep, Btn::Export, Btn::ClearMarks]
+    } else {
+        &[Btn::Hide, Btn::Export, Btn::ClearMarks]
+    }
+}
 
 /// x, y, w, h in virtual units.
 pub(super) type Rect = (f32, f32, f32, f32);
@@ -48,6 +67,39 @@ pub(super) enum Btn {
     Hide,
 }
 
+impl Btn {
+    /// Gamepad button that triggers this control (matches `Host::demo_key`).
+    pub(super) fn pad_key(self) -> i32 {
+        match self {
+            Btn::Start => K_LTHUMB,
+            Btn::Back10 => K_LSHOULDER,
+            Btn::Rewind => K_DPAD_LEFT,
+            Btn::PlayPause => K_ABUTTON,
+            Btn::Forward => K_DPAD_RIGHT,
+            Btn::Fwd10 => K_RSHOULDER,
+            Btn::NextMap => K_RTHUMB,
+            Btn::Slower => K_DPAD_DOWN,
+            Btn::Faster => K_DPAD_UP,
+            Btn::MarkIn => K_LTRIGGER,
+            Btn::MarkOut => K_RTRIGGER,
+            Btn::ClearMarks => K_BBUTTON,
+            Btn::Export => K_XBUTTON,
+            Btn::Keep => K_YBUTTON,
+            Btn::Hide => K_BACK,
+        }
+    }
+
+    fn text_label(self) -> &'static str {
+        match self {
+            Btn::ClearMarks => qcore::t!("Clear"),
+            Btn::Export => qcore::t!("Export"),
+            Btn::Keep => qcore::t!("Keep"),
+            Btn::Hide => qcore::t!("Hide"),
+            _ => "",
+        }
+    }
+}
+
 /// Where everything sits for a canvas of `vw`×`vh`; drawing and the mouse
 /// share it.
 pub(super) struct Layout {
@@ -58,8 +110,10 @@ pub(super) struct Layout {
     pub buttons: Vec<(Btn, Rect)>,
 }
 
-pub(super) fn layout(vw: f32, vh: f32, auto: bool) -> Layout {
-    let panel = (8.0, (vh - H - MARGIN).floor(), (vw - 16.0).max(1.0), H);
+pub(super) fn layout(vw: f32, vh: f32, auto: bool, pad: bool) -> Layout {
+    let ph = panel_h(pad);
+    let bh = btn_h(pad);
+    let panel = (8.0, (vh - ph - MARGIN).floor(), (vw - 16.0).max(1.0), ph);
     let (x, y, w, _) = panel;
     let track = (x + 8.0, y + 17.0, w - 16.0, 4.0);
     let hit = (track.0 - 2.0, y + 12.0, track.2 + 4.0, 14.0);
@@ -67,26 +121,26 @@ pub(super) fn layout(vw: f32, vh: f32, auto: bool) -> Layout {
     let mut buttons = Vec::new();
     let mut bx = x + 8.0;
     for b in [Btn::Start, Btn::Back10, Btn::Rewind, Btn::PlayPause, Btn::Forward, Btn::Fwd10, Btn::NextMap] {
-        buttons.push((b, (bx, by, ICON_W, BTN_H)));
+        buttons.push((b, (bx, by, ICON_W, bh)));
         bx += ICON_W + 2.0;
     }
     bx += 6.0;
-    buttons.push((Btn::Slower, (bx, by, 14.0, BTN_H)));
-    buttons.push((Btn::Faster, (bx + 34.0, by, 14.0, BTN_H)));
+    buttons.push((Btn::Slower, (bx, by, 14.0, bh)));
+    buttons.push((Btn::Faster, (bx + 34.0, by, 14.0, bh)));
     bx += 54.0;
-    buttons.push((Btn::MarkIn, (bx, by, ICON_W, BTN_H)));
-    buttons.push((Btn::MarkOut, (bx + ICON_W + 2.0, by, ICON_W, BTN_H)));
+    buttons.push((Btn::MarkIn, (bx, by, ICON_W, bh)));
+    buttons.push((Btn::MarkOut, (bx + ICON_W + 2.0, by, ICON_W, bh)));
     let icons_end = bx + 2.0 * ICON_W + 8.0;
     // text buttons from the right edge, sharing what's left; the last ones
     // are dropped when even the narrowest wouldn't fit
-    let right: &[Btn] = if auto { &[Btn::Hide, Btn::Keep, Btn::Export, Btn::ClearMarks] } else { &[Btn::Hide, Btn::Export, Btn::ClearMarks] };
+    let right = right_buttons(auto);
     let room = x + w - 8.0 - icons_end;
     let n = right.len().min(((room + 2.0) / (MIN_TEXT_W + 2.0)) as usize);
     let tw = if n > 0 { ((room + 2.0) / n as f32 - 2.0).min(TEXT_W) } else { 0.0 };
     let mut rx = x + w - 8.0;
     for &b in &right[..n] {
         rx -= tw;
-        buttons.push((b, (rx, by, tw, BTN_H)));
+        buttons.push((b, (rx, by, tw, bh)));
         rx -= 2.0;
     }
     Layout { panel, track, hit, buttons }
@@ -129,8 +183,8 @@ pub(super) fn draw_peek(c: &mut Canvas, p: &Peek) {
 }
 
 /// How far the HUD moves up while the bar shows.
-pub(super) fn lift() -> f32 {
-    H + MARGIN + 2.0
+pub(super) fn lift(pad: bool) -> f32 {
+    panel_h(pad) + MARGIN + 2.0
 }
 
 impl Host {
@@ -195,6 +249,12 @@ impl Host {
             (Some(idx), Some(t)) => Some(Timeline { now: t, len: idx.duration.max(0.001), maps: idx.boundaries().collect(), marks }),
             _ => None,
         };
+        let scrub = match d.play.scrub {
+            s if s < 0 => Some(Btn::Rewind),
+            s if s > 0 => Some(Btn::Forward),
+            _ => None,
+        };
+        let held = self.demo_ui.held.or(scrub);
         Some(Bar {
             state,
             map,
@@ -203,8 +263,8 @@ impl Host {
             playing: speed > 0.0 && !d.paused,
             speed: trim(d.play.base_speed),
             pointer: self.demo_ui.pos,
-            held: self.demo_ui.held,
-            pad: self.menu.pad_ui,
+            held,
+            pad: self.pad_ui(),
         })
     }
 }
@@ -225,7 +285,7 @@ pub(super) struct Bar {
     speed: String,
     pointer: Option<(f32, f32)>,
     held: Option<Btn>,
-    pad: bool,
+    pub(super) pad: bool,
 }
 
 const HOVER: [f32; 4] = [0.6, 0.38, 0.12, 0.55];
@@ -235,7 +295,7 @@ const ICON: [f32; 4] = [0.92, 0.88, 0.80, 1.0];
 pub(super) fn draw(c: &mut Canvas, bar: &Bar, glyphs: &crate::glyphs::Glyphs) {
     c.reset_origin();
     let (vw, vh) = (c.vw(), c.vh());
-    let l = layout(vw, vh, bar.auto);
+    let l = layout(vw, vh, bar.auto, bar.pad);
     let (x, y, w, h) = l.panel;
     c.round_box(x, y, w, h, 3.0, [0.0, 0.0, 0.0, 0.72], Some(BORDER));
     c.text(x + 8.0, y + 3.0, &bar.state, TXT, GOLD_FG);
@@ -249,51 +309,45 @@ pub(super) fn draw(c: &mut Canvas, bar: &Bar, glyphs: &crate::glyphs::Glyphs) {
     for &(b, r) in &l.buttons {
         let hover = bar.pointer.is_some_and(|p| inside(r, p));
         c.fill(r.0, r.1, r.2, r.3, if hover || bar.held == Some(b) { HOVER } else { BTN_BG });
-        draw_button(c, b, r, bar);
+        draw_button(c, b, (r.0, r.1, r.2, BTN_H), bar);
+        if bar.pad {
+            let key = b.pad_key();
+            let gw = crate::glyphs::width(c, key, glyphs.family, GLYPH_H);
+            glyphs.key_h(c, r.0 + (r.2 - gw) / 2.0, r.1 + BTN_H - 0.5, key, GLYPH_H);
+        }
     }
     if let Some(&(_, s)) = l.buttons.iter().find(|(b, _)| *b == Btn::Slower) {
         let sp = format!("{}x", bar.speed);
         let sw = c.text_w_raw(&sp, 8.0);
         c.text_raw(s.0 + 24.0 - sw / 2.0, s.1 + 2.0, &sp, 8.0, crate::menu::FG);
     }
-    // key help above the panel: pad glyphs, or keyboard keys while the
-    // pointer is over the bar
+    // key help above the panel: keyboard keys while the pointer is over the
+    // bar, or on narrow screens any controller buttons dropped from the bar
     let hy = y - 12.0;
     if bar.pad {
-        // every control on a pad button, in as many rows as the width needs
-        let mut items = vec![
-            (K_ABUTTON, if bar.playing { qcore::t!("Pause") } else { qcore::t!("Play") }),
-            (K_DPAD_LEFT, qcore::t!("Rewind")),
-            (K_DPAD_RIGHT, qcore::t!("Fast forward")),
-            (K_DPAD_UP, qcore::t!("Speed")),
-            (K_LSHOULDER, qcore::t!("Back 10 s")),
-            (K_RSHOULDER, qcore::t!("Skip 10 s")),
-            (K_LTHUMB, qcore::t!("Restart")),
-            (K_RTHUMB, qcore::t!("Next level")),
-            (K_LTRIGGER, qcore::t!("Mark in")),
-            (K_RTRIGGER, qcore::t!("Mark out")),
-            (K_BBUTTON, qcore::t!("Clear")),
-            (K_XBUTTON, qcore::t!("Export Video")),
-        ];
-        if bar.auto {
-            items.push((K_YBUTTON, qcore::t!("Keep")));
-        }
-        items.push((K_BACK, qcore::t!("Hide")));
-        let mut rows: Vec<Vec<(i32, &str)>> = vec![Vec::new()];
-        for it in items {
-            let row = rows.last_mut().unwrap();
-            row.push(it);
-            if row.len() > 1 && glyphs.hints(c, 0.0, 0.0, row, false) > w - 16.0 {
-                row.pop();
-                rows.push(vec![it]);
+        let items: Vec<(i32, &str)> = right_buttons(bar.auto)
+            .iter()
+            .rev()
+            .filter(|b| !l.buttons.iter().any(|(placed, _)| placed == *b))
+            .map(|&b| (b.pad_key(), b.text_label()))
+            .collect();
+        if !items.is_empty() {
+            let mut rows: Vec<Vec<(i32, &str)>> = vec![Vec::new()];
+            for it in items {
+                let row = rows.last_mut().unwrap();
+                row.push(it);
+                if row.len() > 1 && glyphs.hints(c, 0.0, 0.0, row, false) > w - 16.0 {
+                    row.pop();
+                    rows.push(vec![it]);
+                }
             }
-        }
-        let pitch = crate::glyphs::HINT_H + 4.0;
-        for (i, row) in rows.iter().enumerate() {
-            let ry = hy - 4.0 - (rows.len() - 1 - i) as f32 * pitch;
-            let rw = glyphs.hints(c, 0.0, ry, row, false);
-            c.fill(vw / 2.0 - rw / 2.0 - 4.0, ry - 2.0, rw + 8.0, pitch, [0.0, 0.0, 0.0, 0.6]);
-            glyphs.hints_centered(c, vw / 2.0, ry, row);
+            let pitch = crate::glyphs::HINT_H + 4.0;
+            for (i, row) in rows.iter().enumerate() {
+                let ry = hy - 4.0 - (rows.len() - 1 - i) as f32 * pitch;
+                let rw = glyphs.hints(c, 0.0, ry, row, false);
+                c.fill(vw / 2.0 - rw / 2.0 - 4.0, ry - 2.0, rw + 8.0, pitch, [0.0, 0.0, 0.0, 0.6]);
+                glyphs.hints_centered(c, vw / 2.0, ry, row);
+            }
         }
     } else if bar.pointer.is_some_and(|p| inside(l.panel, p)) {
         let mut keys = qcore::lang::tr(qcore::t!("Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export")).into_owned();
@@ -418,33 +472,4 @@ fn trim(v: f32) -> String {
 }
 
 #[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn speeds_print_short() {
-        assert_eq!(trim(2.0), "2");
-        assert_eq!(trim(0.25), "0.25");
-        assert_eq!(trim(1.5), "1.5");
-    }
-
-    #[test]
-    fn layout_keeps_buttons_apart_and_on_the_panel() {
-        for (vw, vh) in [(320.0, 240.0), (426.0, 240.0), (640.0, 360.0)] {
-            let l = layout(vw, vh, true);
-            assert!(l.panel.1 + l.panel.3 <= vh);
-            for (i, &(_, a)) in l.buttons.iter().enumerate() {
-                assert!(a.0 >= l.panel.0 && a.0 + a.2 <= l.panel.0 + l.panel.2, "{vw}");
-                for &(_, b) in &l.buttons[i + 1..] {
-                    assert!(a.0 + a.2 <= b.0 || b.0 + b.2 <= a.0, "overlap at {vw}");
-                }
-            }
-            // the transport buttons always fit
-            assert!(l.buttons.iter().any(|(b, _)| *b == Btn::Faster));
-        }
-        // wide screens get every text button
-        assert_eq!(layout(640.0, 360.0, true).buttons.len(), 15);
-        assert_eq!(layout(426.0, 240.0, true).buttons.len(), 15);
-        assert!(inside((0.0, 0.0, 2.0, 2.0), (1.0, 1.0)) && !inside((0.0, 0.0, 2.0, 2.0), (2.0, 1.0)));
-    }
-}
+mod tests;

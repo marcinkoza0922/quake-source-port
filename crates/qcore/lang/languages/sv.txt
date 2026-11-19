@@ -2952,9 +2952,6 @@ sv Slut på demon
 @ Export Video
 sv Exportera video
 
-@ Fast forward
-sv Snabbspola framåt
-
 @ Fast forward {}x
 sv Framåt {}x
 
@@ -2979,9 +2976,6 @@ sv Inga automatiska demor än. Varje bana du spelar spelas in här.
 @ No saved demos yet. Record one with the console command 'record <name>', or keep an automatic demo.
 sv Inga sparade demor än. Spela in en med konsolkommandot 'record <name>' eller behåll en automatisk demo.
 
-@ Pause
-sv Paus
-
 @ Paused
 sv Pausad
 
@@ -2994,41 +2988,20 @@ sv Quake - exporterar video {} %
 @ Recorded: {}
 sv Inspelad: {}
 
-@ Rewind
-sv Spola tillbaka
-
 @ Rewind {}x
 sv Bakåt {}x
 
 @ Size: {} KB
 sv Storlek: {} kB
 
-@ Skip 10 s
-sv Hoppa 10 s
-
-@ Back 10 s
-sv Bakåt 10 s
-
 @ Length
 sv Längd
-
-@ Mark in
-sv Markera början
-
-@ Mark out
-sv Markera slut
-
-@ Next level
-sv Nästa bana
 
 @ No demos match the filter. Backspace or Esc clears it.
 sv Ingen demo matchar filtret. Backsteg eller Esc rensar det.
 
 @ Renaming an automatic demo moves it to the saved demos.
 sv En automatisk demo som byter namn flyttas till de sparade demona.
-
-@ Restart
-sv Börja om
 
 @ Sort
 sv Sortera
@@ -3038,9 +3011,6 @@ sv Under en demo: A pausar, styrkorset spolar och ändrar hastighet, LT och RT m
 
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 sv Mellanslag paus | Vänster/Höger spola | Upp/Ned hastighet | PgUp/PgDn 10 s | I/O markera | E exportera
-
-@ Speed
-sv Hastighet
 
 @ Switch List
 sv Byt lista

@@ -2952,9 +2952,6 @@ ko 데모 끝
 @ Export Video
 ko 비디오로 내보내기
 
-@ Fast forward
-ko 빨리 감기
-
 @ Fast forward {}x
 ko 빨리 감기 {}x
 
@@ -2979,9 +2976,6 @@ ko 아직 자동 데모가 없습니다. 플레이하는 모든 레벨이 여기
 @ No saved demos yet. Record one with the console command 'record <name>', or keep an automatic demo.
 ko 아직 저장한 데모가 없습니다. 콘솔 명령 'record <name>'으로 녹화하거나 자동 데모를 보관하세요.
 
-@ Pause
-ko 일시 정지
-
 @ Paused
 ko 일시 정지됨
 
@@ -2994,41 +2988,20 @@ ko Quake - 비디오 내보내는 중 {}%
 @ Recorded: {}
 ko 녹화: {}
 
-@ Rewind
-ko 되감기
-
 @ Rewind {}x
 ko 되감기 {}x
 
 @ Size: {} KB
 ko 크기: {} KB
 
-@ Skip 10 s
-ko 10초 건너뛰기
-
-@ Back 10 s
-ko 10초 뒤로
-
 @ Length
 ko 길이
-
-@ Mark in
-ko 시작 지점
-
-@ Mark out
-ko 끝 지점
-
-@ Next level
-ko 다음 레벨
 
 @ No demos match the filter. Backspace or Esc clears it.
 ko 필터와 일치하는 데모가 없습니다. Backspace나 Esc로 지웁니다.
 
 @ Renaming an automatic demo moves it to the saved demos.
 ko 자동 데모의 이름을 바꾸면 저장된 데모로 옮겨집니다.
-
-@ Restart
-ko 처음부터
 
 @ Sort
 ko 정렬
@@ -3038,9 +3011,6 @@ ko 데모 재생 중: A로 일시 정지, 방향 패드로 탐색과 속도 변�
 
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 ko Space 일시 정지 | ←/→ 탐색 | ↑/↓ 속도 | PgUp/PgDn 10초 | I/O 표시 | E 내보내기
-
-@ Speed
-ko 속도
 
 @ Switch List
 ko 목록 전환

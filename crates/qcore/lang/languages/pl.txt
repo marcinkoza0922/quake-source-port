@@ -2952,9 +2952,6 @@ pl Koniec dema
 @ Export Video
 pl Eksportuj wideo
 
-@ Fast forward
-pl Przewijanie do przodu
-
 @ Fast forward {}x
 pl Do przodu {}x
 
@@ -2979,9 +2976,6 @@ pl Nie ma jeszcze automatycznych dem. Każdy rozegrany poziom jest nagrywany tut
 @ No saved demos yet. Record one with the console command 'record <name>', or keep an automatic demo.
 pl Nie ma jeszcze zapisanych dem. Nagraj jedno poleceniem konsoli 'record <name>' albo zachowaj demo automatyczne.
 
-@ Pause
-pl Pauza
-
 @ Paused
 pl Wstrzymano
 
@@ -2994,41 +2988,20 @@ pl Quake - eksport wideo {}%
 @ Recorded: {}
 pl Nagrano: {}
 
-@ Rewind
-pl Przewijanie do tyłu
-
 @ Rewind {}x
 pl Do tyłu {}x
 
 @ Size: {} KB
 pl Rozmiar: {} KB
 
-@ Skip 10 s
-pl Pomiń 10 s
-
-@ Back 10 s
-pl Cofnij 10 s
-
 @ Length
 pl Długość
-
-@ Mark in
-pl Początek fragmentu
-
-@ Mark out
-pl Koniec fragmentu
-
-@ Next level
-pl Następny poziom
 
 @ No demos match the filter. Backspace or Esc clears it.
 pl Żadne demo nie pasuje do filtra. Backspace lub Esc go czyści.
 
 @ Renaming an automatic demo moves it to the saved demos.
 pl Zmiana nazwy automatycznego dema przenosi je do zapisanych dem.
-
-@ Restart
-pl Od początku
 
 @ Sort
 pl Sortuj
@@ -3038,9 +3011,6 @@ pl Podczas dema: A wstrzymuje, krzyżak przewija i zmienia prędkość, LT i RT 
 
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 pl Spacja pauza | Lewo/Prawo przewijanie | Góra/Dół prędkość | PgUp/PgDn 10 s | I/O znacznik | E eksport
-
-@ Speed
-pl Prędkość
 
 @ Switch List
 pl Zmień listę

@@ -2952,9 +2952,6 @@ he סוף ההדגמה
 @ Export Video
 he ייצוא לווידאו
 
-@ Fast forward
-he הרצה קדימה
-
 @ Fast forward {}x
 he קדימה {}x
 
@@ -2979,9 +2976,6 @@ he עדיין אין הדגמות אוטומטיות. כל שלב שאתם מש�
 @ No saved demos yet. Record one with the console command 'record <name>', or keep an automatic demo.
 he עדיין אין הדגמות שמורות. הקליטו אחת בפקודת המסוף 'record <name>', או שמרו הדגמה אוטומטית.
 
-@ Pause
-he השהיה
-
 @ Paused
 he מושהה
 
@@ -2994,41 +2988,20 @@ he Quake - מייצא וידאו {}%
 @ Recorded: {}
 he הוקלטה: {}
 
-@ Rewind
-he הרצה אחורה
-
 @ Rewind {}x
 he אחורה {}x
 
 @ Size: {} KB
 he גודל: {} KB
 
-@ Skip 10 s
-he דילוג 10 ש׳
-
-@ Back 10 s
-he אחורה 10 ש׳
-
 @ Length
 he משך
-
-@ Mark in
-he סימון התחלה
-
-@ Mark out
-he סימון סוף
-
-@ Next level
-he השלב הבא
 
 @ No demos match the filter. Backspace or Esc clears it.
 he אין הדגמות שמתאימות למסנן. Backspace או Esc מנקים אותו.
 
 @ Renaming an automatic demo moves it to the saved demos.
 he שינוי שם של הדגמה אוטומטית מעביר אותה להדגמות השמורות.
-
-@ Restart
-he מההתחלה
 
 @ Sort
 he מיון
@@ -3038,9 +3011,6 @@ he בזמן הדגמה: A משהה, לוח הכיוונים גולל ומשנה 
 
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 he Space השהיה | שמאל/ימין גלילה | למעלה/למטה מהירות | PgUp/PgDn 10 ש׳ | I/O סימון | E ייצוא
-
-@ Speed
-he מהירות
 
 @ Switch List
 he החלפת רשימה

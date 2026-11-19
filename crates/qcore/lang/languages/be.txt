@@ -2952,9 +2952,6 @@ be Канец дэма
 @ Export Video
 be Экспарт відэа
 
-@ Fast forward
-be Перамотка наперад
-
 @ Fast forward {}x
 be Наперад {}x
 
@@ -2979,9 +2976,6 @@ be Аўтаматычных дэма пакуль няма. Тут запісв�
 @ No saved demos yet. Record one with the console command 'record <name>', or keep an automatic demo.
 be Захаваных дэма пакуль няма. Запішыце дэма кансольнай камандай 'record <name>' або захавайце аўтаматычнае.
 
-@ Pause
-be Паўза
-
 @ Paused
 be Паўза
 
@@ -2994,41 +2988,20 @@ be Quake - экспарт відэа {}%
 @ Recorded: {}
 be Запісана: {}
 
-@ Rewind
-be Перамотка назад
-
 @ Rewind {}x
 be Назад {}x
 
 @ Size: {} KB
 be Памер: {} КБ
 
-@ Skip 10 s
-be Прапусціць 10 с
-
-@ Back 10 s
-be Назад 10 с
-
 @ Length
 be Даўжыня
-
-@ Mark in
-be Пачатак фрагмента
-
-@ Mark out
-be Канец фрагмента
-
-@ Next level
-be Наступны ўзровень
 
 @ No demos match the filter. Backspace or Esc clears it.
 be Ніводнае дэма не адпавядае фільтру. Backspace або Esc ачышчае яго.
 
 @ Renaming an automatic demo moves it to the saved demos.
 be Перайменаванае аўтаматычнае дэма пераносіцца ў захаваныя.
-
-@ Restart
-be Спачатку
 
 @ Sort
 be Сартаваць
@@ -3038,9 +3011,6 @@ be Падчас дэма: A ставіць паўзу, крыжавіна пер
 
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 be Прабел паўза | Улева/Управа перамотка | Уверх/Уніз хуткасць | PgUp/PgDn 10 с | I/O метка | E экспарт
-
-@ Speed
-be Хуткасць
 
 @ Switch List
 be Змяніць спіс

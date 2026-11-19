@@ -2952,9 +2952,6 @@ cs Konec dema
 @ Export Video
 cs Exportovat video
 
-@ Fast forward
-cs Rychle vpřed
-
 @ Fast forward {}x
 cs Vpřed {}x
 
@@ -2979,9 +2976,6 @@ cs Zatím žádná automatická dema. Každý odehraný level se nahrává sem.
 @ No saved demos yet. Record one with the console command 'record <name>', or keep an automatic demo.
 cs Zatím žádná uložená dema. Nahrajte jedno příkazem konzole 'record <name>' nebo si ponechte automatické demo.
 
-@ Pause
-cs Pauza
-
 @ Paused
 cs Pozastaveno
 
@@ -2994,41 +2988,20 @@ cs Quake - export videa {} %
 @ Recorded: {}
 cs Nahráno: {}
 
-@ Rewind
-cs Přetočit zpět
-
 @ Rewind {}x
 cs Zpět {}x
 
 @ Size: {} KB
 cs Velikost: {} KB
 
-@ Skip 10 s
-cs Přeskočit 10 s
-
-@ Back 10 s
-cs Zpět 10 s
-
 @ Length
 cs Délka
-
-@ Mark in
-cs Začátek klipu
-
-@ Mark out
-cs Konec klipu
-
-@ Next level
-cs Další úroveň
 
 @ No demos match the filter. Backspace or Esc clears it.
 cs Filtru neodpovídá žádné demo. Backspace nebo Esc ho vymaže.
 
 @ Renaming an automatic demo moves it to the saved demos.
 cs Přejmenováním se automatické demo přesune mezi uložená dema.
-
-@ Restart
-cs Od začátku
 
 @ Sort
 cs Řadit
@@ -3038,9 +3011,6 @@ cs Během dema: A pozastaví, křížový ovladač posouvá a mění rychlost, L
 
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 cs Mezerník pauza | Vlevo/Vpravo posun | Nahoru/Dolů rychlost | PgUp/PgDn 10 s | I/O značka | E export
-
-@ Speed
-cs Rychlost
 
 @ Switch List
 cs Přepnout seznam

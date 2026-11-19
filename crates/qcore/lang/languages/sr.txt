@@ -2952,9 +2952,6 @@ sr Крај демоа
 @ Export Video
 sr Извези видео
 
-@ Fast forward
-sr Брзо напред
-
 @ Fast forward {}x
 sr Напред {}x
 
@@ -2979,9 +2976,6 @@ sr Још нема аутоматских демоа. Овде се снима �
 @ No saved demos yet. Record one with the console command 'record <name>', or keep an automatic demo.
 sr Још нема сачуваних демоа. Снимите један командом конзоле 'record <name>' или задржите аутоматски демо.
 
-@ Pause
-sr Пауза
-
 @ Paused
 sr Паузирано
 
@@ -2994,41 +2988,20 @@ sr Quake - извоз видеа {}%
 @ Recorded: {}
 sr Снимљено: {}
 
-@ Rewind
-sr Премотај уназад
-
 @ Rewind {}x
 sr Назад {}x
 
 @ Size: {} KB
 sr Величина: {} KB
 
-@ Skip 10 s
-sr Прескочи 10 с
-
-@ Back 10 s
-sr Назад 10 с
-
 @ Length
 sr Трајање
-
-@ Mark in
-sr Почетак исечка
-
-@ Mark out
-sr Крај исечка
-
-@ Next level
-sr Следећи ниво
 
 @ No demos match the filter. Backspace or Esc clears it.
 sr Ниједан демо не одговара филтеру. Backspace или Esc га брише.
 
 @ Renaming an automatic demo moves it to the saved demos.
 sr Преименовање аутоматског демоа премешта га међу сачуване.
-
-@ Restart
-sr Испочетка
 
 @ Sort
 sr Поређај
@@ -3038,9 +3011,6 @@ sr Током демоа: A паузира, D-pad премотава и мења
 
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 sr Размак пауза | Лево/Десно премотавање | Горе/Доле брзина | PgUp/PgDn 10 с | I/O ознака | E извоз
-
-@ Speed
-sr Брзина
 
 @ Switch List
 sr Промени списак

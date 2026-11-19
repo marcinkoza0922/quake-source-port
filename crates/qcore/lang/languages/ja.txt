@@ -2952,9 +2952,6 @@ ja デモの終わり
 @ Export Video
 ja ビデオに書き出し
 
-@ Fast forward
-ja 早送り
-
 @ Fast forward {}x
 ja 早送り {}x
 
@@ -2979,9 +2976,6 @@ ja 自動デモはまだありません。プレイしたレベルはすべて�
 @ No saved demos yet. Record one with the console command 'record <name>', or keep an automatic demo.
 ja 保存したデモはまだありません。コンソールコマンド 'record <name>' で録画するか、自動デモを保存してください。
 
-@ Pause
-ja 一時停止
-
 @ Paused
 ja 一時停止中
 
@@ -2994,41 +2988,20 @@ ja Quake - ビデオを書き出し中 {}%
 @ Recorded: {}
 ja 録画日時：{}
 
-@ Rewind
-ja 巻き戻し
-
 @ Rewind {}x
 ja 巻き戻し {}x
 
 @ Size: {} KB
 ja サイズ：{} KB
 
-@ Skip 10 s
-ja 10秒スキップ
-
-@ Back 10 s
-ja 10秒戻る
-
 @ Length
 ja 長さ
-
-@ Mark in
-ja 開始点
-
-@ Mark out
-ja 終了点
-
-@ Next level
-ja 次のレベル
 
 @ No demos match the filter. Backspace or Esc clears it.
 ja フィルターに合うデモはありません。Backspace か Esc で消去します。
 
 @ Renaming an automatic demo moves it to the saved demos.
 ja 自動デモの名前を変えると保存済みデモに移動します。
-
-@ Restart
-ja 最初から
 
 @ Sort
 ja 並べ替え
@@ -3038,9 +3011,6 @@ ja デモ再生中：A で一時停止、十字キーでスクラブと速度変
 
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 ja Space 一時停止 | ←/→ スクラブ | ↑/↓ 速度 | PgUp/PgDn 10秒 | I/O マーク | E 書き出し
-
-@ Speed
-ja 速度
 
 @ Switch List
 ja リストを切り替え

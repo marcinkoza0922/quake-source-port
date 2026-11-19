@@ -2952,9 +2952,6 @@ am የዴሞው መጨረሻ
 @ Export Video
 am እንደ ቪዲዮ ላክ
 
-@ Fast forward
-am በፍጥነት ወደፊት
-
 @ Fast forward {}x
 am ወደፊት {}x
 
@@ -2979,9 +2976,6 @@ am እስካሁን ራስ-ሰር ዴሞዎች የሉም። የሚጫወቱት �
 @ No saved demos yet. Record one with the console command 'record <name>', or keep an automatic demo.
 am እስካሁን የተቀመጡ ዴሞዎች የሉም። በኮንሶል ትዕዛዝ 'record <name>' አንዱን ይቅረጹ፣ ወይም ራስ-ሰር ዴሞ ይያዙ።
 
-@ Pause
-am ለአፍታ አቁም
-
 @ Paused
 am ለአፍታ ቆሟል
 
@@ -2994,41 +2988,20 @@ am Quake - ቪዲዮ እየተላከ ነው {}%
 @ Recorded: {}
 am የተቀረጸው፦ {}
 
-@ Rewind
-am ወደ ኋላ አጠንጥን
-
 @ Rewind {}x
 am ወደ ኋላ {}x
 
 @ Size: {} KB
 am መጠን፦ {} KB
 
-@ Skip 10 s
-am 10 ሰ. ዝለል
-
-@ Back 10 s
-am 10 ሰ. ወደኋላ
-
 @ Length
 am ርዝመት
-
-@ Mark in
-am መጀመሪያ ምልክት አድርግ
-
-@ Mark out
-am መጨረሻ ምልክት አድርግ
-
-@ Next level
-am ቀጣይ ደረጃ
 
 @ No demos match the filter. Backspace or Esc clears it.
 am ከማጣሪያው ጋር የሚዛመድ ዴሞ የለም። Backspace ወይም Esc ያጸዳዋል።
 
 @ Renaming an automatic demo moves it to the saved demos.
 am የራስ-ሰር ዴሞ ስም መቀየር ወደ የተቀመጡ ዴሞዎች ያዛውረዋል።
-
-@ Restart
-am ከመጀመሪያው
 
 @ Sort
 am ደርድር
@@ -3038,9 +3011,6 @@ am ዴሞ ሲጫወት፦ A ለአፍታ ያቆማል፣ ዲ-ፓድ ያጠነጥ
 
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 am Space አቁም | ግራ/ቀኝ አጠንጥን | ላይ/ታች ፍጥነት | PgUp/PgDn 10 ሰ. | I/O ምልክት | E ላክ
-
-@ Speed
-am ፍጥነት
 
 @ Switch List
 am ዝርዝር ቀይር

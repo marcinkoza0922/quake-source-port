@@ -2952,9 +2952,6 @@ hy Դեմոյի ավարտ
 @ Export Video
 hy Արտահանել տեսանյութ
 
-@ Fast forward
-hy Արագ առաջ
-
 @ Fast forward {}x
 hy Առաջ {}x
 
@@ -2979,9 +2976,6 @@ hy Ավտոմատ դեմոներ դեռ չկան։ Ձեր խաղացած յու�
 @ No saved demos yet. Record one with the console command 'record <name>', or keep an automatic demo.
 hy Պահված դեմոներ դեռ չկան։ Գրանցեք մեկը վահանակի 'record <name>' հրամանով կամ պահեք ավտոմատ դեմո։
 
-@ Pause
-hy Դադար
-
 @ Paused
 hy Դադարեցված
 
@@ -2994,41 +2988,20 @@ hy Quake - տեսանյութի արտահանում {}%
 @ Recorded: {}
 hy Գրանցված՝ {}
 
-@ Rewind
-hy Հետ փաթաթել
-
 @ Rewind {}x
 hy Հետ {}x
 
 @ Size: {} KB
 hy Չափ՝ {} ԿԲ
 
-@ Skip 10 s
-hy Բաց թողնել 10 վ
-
-@ Back 10 s
-hy Հետ 10 վ
-
 @ Length
 hy Տևողություն
-
-@ Mark in
-hy Նշել սկիզբը
-
-@ Mark out
-hy Նշել վերջը
-
-@ Next level
-hy Հաջորդ մակարդակ
 
 @ No demos match the filter. Backspace or Esc clears it.
 hy Ֆիլտրին համապատասխանող դեմո չկա։ Backspace-ը կամ Esc-ը մաքրում է այն։
 
 @ Renaming an automatic demo moves it to the saved demos.
 hy Ավտոմատ դեմոյի վերանվանումը այն տեղափոխում է պահված դեմոների մեջ։
-
-@ Restart
-hy Սկզբից
 
 @ Sort
 hy Դասավորել
@@ -3038,9 +3011,6 @@ hy Դեմոյի ժամանակ՝ A-ն դադար է տալիս, d-pad-ը փաթ�
 
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 hy Space դադար | Ձախ/Աջ փաթաթել | Վերև/Ներքև արագություն | PgUp/PgDn 10 վ | I/O նշիչ | E արտահանել
-
-@ Speed
-hy Արագություն
 
 @ Switch List
 hy Փոխել ցանկը

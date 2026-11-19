@@ -2952,9 +2952,6 @@ zh-TW 示範結束
 @ Export Video
 zh-TW 匯出影片
 
-@ Fast forward
-zh-TW 快轉
-
 @ Fast forward {}x
 zh-TW 快轉 {}x
 
@@ -2979,9 +2976,6 @@ zh-TW 還沒有自動示範。你玩的每一關都會錄製在這裡。
 @ No saved demos yet. Record one with the console command 'record <name>', or keep an automatic demo.
 zh-TW 還沒有儲存的示範。用主控台指令 'record <name>' 錄製一個，或保留一個自動示範。
 
-@ Pause
-zh-TW 暫停
-
 @ Paused
 zh-TW 已暫停
 
@@ -2994,41 +2988,20 @@ zh-TW Quake - 正在匯出影片 {}%
 @ Recorded: {}
 zh-TW 錄製於：{}
 
-@ Rewind
-zh-TW 倒轉
-
 @ Rewind {}x
 zh-TW 倒轉 {}x
 
 @ Size: {} KB
 zh-TW 大小：{} KB
 
-@ Skip 10 s
-zh-TW 跳過 10 秒
-
-@ Back 10 s
-zh-TW 倒退 10 秒
-
 @ Length
 zh-TW 長度
-
-@ Mark in
-zh-TW 標記起點
-
-@ Mark out
-zh-TW 標記終點
-
-@ Next level
-zh-TW 下一關
 
 @ No demos match the filter. Backspace or Esc clears it.
 zh-TW 沒有符合篩選的示範。Backspace 或 Esc 清除篩選。
 
 @ Renaming an automatic demo moves it to the saved demos.
 zh-TW 重新命名自動示範會將其移到已儲存的示範中。
-
-@ Restart
-zh-TW 從頭開始
 
 @ Sort
 zh-TW 排序
@@ -3038,9 +3011,6 @@ zh-TW 播放示範時：A 暫停，方向鍵拖曳和改變速度，LT 和 RT �
 
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 zh-TW Space 暫停 | ←/→ 拖曳 | ↑/↓ 速度 | PgUp/PgDn 10 秒 | I/O 標記 | E 匯出
-
-@ Speed
-zh-TW 速度
 
 @ Switch List
 zh-TW 切換清單

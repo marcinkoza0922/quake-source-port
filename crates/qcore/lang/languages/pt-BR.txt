@@ -2952,9 +2952,6 @@ pt-BR Fim da demo
 @ Export Video
 pt-BR Exportar vídeo
 
-@ Fast forward
-pt-BR Avançar
-
 @ Fast forward {}x
 pt-BR Avançar {}x
 
@@ -2979,9 +2976,6 @@ pt-BR Ainda não há demos automáticas. Cada fase que você jogar é gravada aq
 @ No saved demos yet. Record one with the console command 'record <name>', or keep an automatic demo.
 pt-BR Ainda não há demos salvas. Grave uma com o comando de console 'record <name>' ou guarde uma demo automática.
 
-@ Pause
-pt-BR Pausa
-
 @ Paused
 pt-BR Pausado
 
@@ -2994,41 +2988,20 @@ pt-BR Quake - exportando vídeo {}%
 @ Recorded: {}
 pt-BR Gravada: {}
 
-@ Rewind
-pt-BR Retroceder
-
 @ Rewind {}x
 pt-BR Voltar {}x
 
 @ Size: {} KB
 pt-BR Tamanho: {} KB
 
-@ Skip 10 s
-pt-BR Pular 10 s
-
-@ Back 10 s
-pt-BR Voltar 10 s
-
 @ Length
 pt-BR Duração
-
-@ Mark in
-pt-BR Marcar início
-
-@ Mark out
-pt-BR Marcar fim
-
-@ Next level
-pt-BR Próxima fase
 
 @ No demos match the filter. Backspace or Esc clears it.
 pt-BR Nenhuma demo corresponde ao filtro. Backspace ou Esc o limpa.
 
 @ Renaming an automatic demo moves it to the saved demos.
 pt-BR Renomear uma demo automática a move para as demos guardadas.
-
-@ Restart
-pt-BR Recomeçar
 
 @ Sort
 pt-BR Ordenar
@@ -3038,9 +3011,6 @@ pt-BR Durante uma demo: A pausa, o direcional percorre e muda a velocidade, LT e
 
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 pt-BR Espaço pausa | Esq./Dir. percorrer | Cima/Baixo velocidade | PgUp/PgDn 10 s | I/O marcar | E exportar
-
-@ Speed
-pt-BR Velocidade
 
 @ Switch List
 pt-BR Trocar lista

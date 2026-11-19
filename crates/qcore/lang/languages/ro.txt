@@ -2952,9 +2952,6 @@ ro Sfârșitul demo-ului
 @ Export Video
 ro Exportă video
 
-@ Fast forward
-ro Derulare înainte
-
 @ Fast forward {}x
 ro Înainte {}x
 
@@ -2979,9 +2976,6 @@ ro Încă nu există demo-uri automate. Fiecare nivel jucat se înregistrează a
 @ No saved demos yet. Record one with the console command 'record <name>', or keep an automatic demo.
 ro Încă nu există demo-uri salvate. Înregistrează unul cu comanda de consolă 'record <name>' sau păstrează un demo automat.
 
-@ Pause
-ro Pauză
-
 @ Paused
 ro În pauză
 
@@ -2994,41 +2988,20 @@ ro Quake - export video {}%
 @ Recorded: {}
 ro Înregistrat: {}
 
-@ Rewind
-ro Derulare înapoi
-
 @ Rewind {}x
 ro Înapoi {}x
 
 @ Size: {} KB
 ro Dimensiune: {} KB
 
-@ Skip 10 s
-ro Sari 10 s
-
-@ Back 10 s
-ro Înapoi 10 s
-
 @ Length
 ro Durată
-
-@ Mark in
-ro Marchează început
-
-@ Mark out
-ro Marchează sfârșit
-
-@ Next level
-ro Nivelul următor
 
 @ No demos match the filter. Backspace or Esc clears it.
 ro Niciun demo nu se potrivește filtrului. Backspace sau Esc îl șterge.
 
 @ Renaming an automatic demo moves it to the saved demos.
 ro Redenumirea unui demo automat îl mută la demo-urile salvate.
-
-@ Restart
-ro De la început
 
 @ Sort
 ro Sortează
@@ -3038,9 +3011,6 @@ ro În timpul unui demo: A pune pauză, d-pad-ul derulează și schimbă viteza,
 
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 ro Spațiu pauză | Stânga/Dreapta derulare | Sus/Jos viteză | PgUp/PgDn 10 s | I/O marcaj | E export
-
-@ Speed
-ro Viteză
 
 @ Switch List
 ro Schimbă lista

@@ -2952,9 +2952,6 @@ pt Fim da demo
 @ Export Video
 pt Exportar vídeo
 
-@ Fast forward
-pt Avanço rápido
-
 @ Fast forward {}x
 pt Avançar {}x
 
@@ -2979,9 +2976,6 @@ pt Ainda não há demos automáticas. Cada nível que jogar é gravado aqui.
 @ No saved demos yet. Record one with the console command 'record <name>', or keep an automatic demo.
 pt Ainda não há demos guardadas. Grave uma com o comando de consola 'record <name>' ou guarde uma demo automática.
 
-@ Pause
-pt Pausa
-
 @ Paused
 pt Em pausa
 
@@ -2994,41 +2988,20 @@ pt Quake - a exportar vídeo {}%
 @ Recorded: {}
 pt Gravada: {}
 
-@ Rewind
-pt Rebobinar
-
 @ Rewind {}x
 pt Recuar {}x
 
 @ Size: {} KB
 pt Tamanho: {} KB
 
-@ Skip 10 s
-pt Saltar 10 s
-
-@ Back 10 s
-pt Recuar 10 s
-
 @ Length
 pt Duração
-
-@ Mark in
-pt Marcar início
-
-@ Mark out
-pt Marcar fim
-
-@ Next level
-pt Nível seguinte
 
 @ No demos match the filter. Backspace or Esc clears it.
 pt Nenhuma demo corresponde ao filtro. Retrocesso ou Esc limpa-o.
 
 @ Renaming an automatic demo moves it to the saved demos.
 pt Mudar o nome de uma demo automática move-a para as demos guardadas.
-
-@ Restart
-pt Recomeçar
 
 @ Sort
 pt Ordenar
@@ -3038,9 +3011,6 @@ pt Durante uma demo: A pausa, o d-pad percorre e muda a velocidade, LT e RT marc
 
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 pt Espaço pausa | Esq./Dir. percorrer | Cima/Baixo velocidade | PgUp/PgDn 10 s | I/O marcar | E exportar
-
-@ Speed
-pt Velocidade
 
 @ Switch List
 pt Mudar de lista

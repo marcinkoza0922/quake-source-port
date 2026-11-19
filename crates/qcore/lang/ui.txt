@@ -1828,13 +1828,6 @@ it Esporta video
 es Exportar vídeo
 ru Экспорт видео
 
-@ Fast forward
-fr Avance rapide
-de Vorspulen
-it Avanti veloce
-es Avance rápido
-ru Перемотка вперёд
-
 @ Fast forward {}x
 fr Avance rapide {}x
 de Vorspulen {}x
@@ -1891,13 +1884,6 @@ it Ancora nessuna demo salvata. Registrane una con il comando di console 'record
 es Aún no hay demos guardadas. Graba una con el comando de consola 'record <name>' o conserva una demo automática.
 ru Сохранённых демо пока нет. Запишите демо консольной командой 'record <name>' или сохраните автоматическое.
 
-@ Pause
-fr Pause
-de Pause
-it Pausa
-es Pausa
-ru Пауза
-
 @ Paused
 fr En pause
 de Pausiert
@@ -1926,13 +1912,6 @@ it Registrata: {}
 es Grabada: {}
 ru Записано: {}
 
-@ Rewind
-fr Rembobiner
-de Zurückspulen
-it Riavvolgi
-es Rebobinar
-ru Перемотка назад
-
 @ Rewind {}x
 fr Retour {}x
 de Zurück {}x
@@ -1947,47 +1926,12 @@ it Dimensione: {} KB
 es Tamaño: {} KB
 ru Размер: {} КБ
 
-@ Skip 10 s
-fr Sauter 10 s
-de 10 s springen
-it Salta 10 s
-es Saltar 10 s
-ru Пропустить 10 с
-
-@ Back 10 s
-fr Reculer de 10 s
-de 10 s zurück
-it Indietro 10 s
-es Atrás 10 s
-ru Назад 10 с
-
 @ Length
 fr Durée
 de Länge
 it Durata
 es Duración
 ru Длительность
-
-@ Mark in
-fr Marquer le début
-de Anfang markieren
-it Segna inizio
-es Marcar inicio
-ru Начало фрагмента
-
-@ Mark out
-fr Marquer la fin
-de Ende markieren
-it Segna fine
-es Marcar fin
-ru Конец фрагмента
-
-@ Next level
-fr Niveau suivant
-de Nächstes Level
-it Livello successivo
-es Siguiente nivel
-ru Следующий уровень
 
 @ No demos match the filter. Backspace or Esc clears it.
 fr Aucune démo ne correspond au filtre. Retour arrière ou Échap l'efface.
@@ -2002,13 +1946,6 @@ de Eine automatische Demo umzubenennen verschiebt sie zu den gespeicherten Demos
 it Rinominare una demo automatica la sposta tra le demo salvate.
 es Renombrar una demo automática la mueve a las demos guardadas.
 ru Переименованное автоматическое демо переносится в сохранённые.
-
-@ Restart
-fr Recommencer
-de Neustart
-it Ricomincia
-es Reiniciar
-ru Сначала
 
 @ Sort
 fr Trier
@@ -2030,13 +1967,6 @@ de Leertaste Pause | Links/Rechts spulen | Hoch/Runter Tempo | Bild↑/Bild↓ 1
 it Spazio pausa | Sinistra/Destra scorri | Su/Giù velocità | PagSu/PagGiù 10 s | I/O segna | E esporta
 es Espacio pausa | Izq./Der. desplazar | Arriba/Abajo velocidad | RePág/AvPág 10 s | I/O marcar | E exportar
 ru Пробел пауза | Влево/Вправо перемотка | Вверх/Вниз скорость | PgUp/PgDn 10 с | I/O метка | E экспорт
-
-@ Speed
-fr Vitesse
-de Tempo
-it Velocità
-es Velocidad
-ru Скорость
 
 @ Switch List
 fr Changer de liste

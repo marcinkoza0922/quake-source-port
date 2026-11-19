@@ -2952,9 +2952,6 @@ sw Mwisho wa demo
 @ Export Video
 sw Hamisha video
 
-@ Fast forward
-sw Songa mbele haraka
-
 @ Fast forward {}x
 sw Mbele {}x
 
@@ -2979,9 +2976,6 @@ sw Bado hakuna demo za kiotomatiki. Kila kiwango unachocheza hurekodiwa hapa.
 @ No saved demos yet. Record one with the console command 'record <name>', or keep an automatic demo.
 sw Bado hakuna demo zilizohifadhiwa. Rekodi moja kwa amri ya konsoli 'record <name>', au bakiza demo ya kiotomatiki.
 
-@ Pause
-sw Sitisha
-
 @ Paused
 sw Imesitishwa
 
@@ -2994,41 +2988,20 @@ sw Quake - inahamisha video {}%
 @ Recorded: {}
 sw Imerekodiwa: {}
 
-@ Rewind
-sw Rudisha nyuma
-
 @ Rewind {}x
 sw Nyuma {}x
 
 @ Size: {} KB
 sw Ukubwa: {} KB
 
-@ Skip 10 s
-sw Ruka sekunde 10
-
-@ Back 10 s
-sw Rudi sekunde 10
-
 @ Length
 sw Urefu
-
-@ Mark in
-sw Weka mwanzo
-
-@ Mark out
-sw Weka mwisho
-
-@ Next level
-sw Kiwango kinachofuata
 
 @ No demos match the filter. Backspace or Esc clears it.
 sw Hakuna demo inayolingana na kichujio. Backspace au Esc hukifuta.
 
 @ Renaming an automatic demo moves it to the saved demos.
 sw Kubadilisha jina la demo ya kiotomatiki huihamishia kwenye demo zilizohifadhiwa.
-
-@ Restart
-sw Anza upya
 
 @ Sort
 sw Panga
@@ -3038,9 +3011,6 @@ sw Wakati demo inacheza: A husitisha, d-pad husogeza na kubadili kasi, LT na RT 
 
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 sw Nafasi sitisha | Kushoto/Kulia sogeza | Juu/Chini kasi | PgUp/PgDn sek 10 | I/O alama | E hamisha
-
-@ Speed
-sw Kasi
 
 @ Switch List
 sw Badili orodha

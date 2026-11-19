@@ -2952,9 +2952,6 @@ mt Tmiem id-demo
 @ Export Video
 mt Esporta vidjo
 
-@ Fast forward
-mt Għaġġel 'il quddiem
-
 @ Fast forward {}x
 mt 'Il quddiem {}x
 
@@ -2979,9 +2976,6 @@ mt Għad m'hemmx demos awtomatiċi. Kull livell li tilgħab jiġi rrekordjat haw
 @ No saved demos yet. Record one with the console command 'record <name>', or keep an automatic demo.
 mt Għad m'hemmx demos salvati. Irrekordja wieħed bil-kmand tal-console 'record <name>', jew żomm demo awtomatiku.
 
-@ Pause
-mt Pawża
-
 @ Paused
 mt Fil-pawża
 
@@ -2994,41 +2988,20 @@ mt Quake - qed jiġi esportat vidjo {}%
 @ Recorded: {}
 mt Irrekordjat: {}
 
-@ Rewind
-mt Irrewindja
-
 @ Rewind {}x
 mt Lura {}x
 
 @ Size: {} KB
 mt Daqs: {} KB
 
-@ Skip 10 s
-mt Aqbeż 10 s
-
-@ Back 10 s
-mt Lura 10 s
-
 @ Length
 mt Tul
-
-@ Mark in
-mt Immarka l-bidu
-
-@ Mark out
-mt Immarka t-tmiem
-
-@ Next level
-mt Il-livell li jmiss
 
 @ No demos match the filter. Backspace or Esc clears it.
 mt L-ebda demo ma taqbel mal-filtru. Backspace jew Esc iħassruh.
 
 @ Renaming an automatic demo moves it to the saved demos.
 mt Meta tissemma mill-ġdid, demo awtomatika titmexxa mad-demos salvati.
-
-@ Restart
-mt Mill-bidu
 
 @ Sort
 mt Ordna
@@ -3038,9 +3011,6 @@ mt Waqt demo: A jagħmel pawża, id-d-pad jiskorri u jibdel il-veloċità, LT u 
 
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 mt Spazju pawża | Xellug/Lemin skorri | Fuq/Isfel veloċità | PgUp/PgDn 10 s | I/O immarka | E esporta
-
-@ Speed
-mt Veloċità
 
 @ Switch List
 mt Ibdel il-lista

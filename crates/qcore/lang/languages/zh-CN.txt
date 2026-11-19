@@ -2952,9 +2952,6 @@ zh-CN 演示结束
 @ Export Video
 zh-CN 导出视频
 
-@ Fast forward
-zh-CN 快进
-
 @ Fast forward {}x
 zh-CN 快进 {}x
 
@@ -2979,9 +2976,6 @@ zh-CN 还没有自动演示。你玩的每一关都会录制在这里。
 @ No saved demos yet. Record one with the console command 'record <name>', or keep an automatic demo.
 zh-CN 还没有保存的演示。用控制台命令 'record <name>' 录制一个，或保留一个自动演示。
 
-@ Pause
-zh-CN 暂停
-
 @ Paused
 zh-CN 已暂停
 
@@ -2994,41 +2988,20 @@ zh-CN Quake - 正在导出视频 {}%
 @ Recorded: {}
 zh-CN 录制于：{}
 
-@ Rewind
-zh-CN 倒带
-
 @ Rewind {}x
 zh-CN 倒带 {}x
 
 @ Size: {} KB
 zh-CN 大小：{} KB
 
-@ Skip 10 s
-zh-CN 跳过 10 秒
-
-@ Back 10 s
-zh-CN 后退 10 秒
-
 @ Length
 zh-CN 时长
-
-@ Mark in
-zh-CN 标记起点
-
-@ Mark out
-zh-CN 标记终点
-
-@ Next level
-zh-CN 下一关
 
 @ No demos match the filter. Backspace or Esc clears it.
 zh-CN 没有符合筛选的演示。Backspace 或 Esc 清除筛选。
 
 @ Renaming an automatic demo moves it to the saved demos.
 zh-CN 重命名自动演示会将其移到已保存的演示中。
-
-@ Restart
-zh-CN 从头开始
 
 @ Sort
 zh-CN 排序
@@ -3038,9 +3011,6 @@ zh-CN 播放演示时：A 暂停，方向键拖动和改变速度，LT 和 RT �
 
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 zh-CN Space 暂停 | ←/→ 拖动 | ↑/↓ 速度 | PgUp/PgDn 10 秒 | I/O 标记 | E 导出
-
-@ Speed
-zh-CN 速度
 
 @ Switch List
 zh-CN 切换列表

@@ -2952,9 +2952,6 @@ fil Katapusan ng demo
 @ Export Video
 fil I-export bilang video
 
-@ Fast forward
-fil Fast forward
-
 @ Fast forward {}x
 fil Fast forward {}x
 
@@ -2979,9 +2976,6 @@ fil Wala pang awtomatikong demo. Dito nire-record ang bawat level na nilalaro mo
 @ No saved demos yet. Record one with the console command 'record <name>', or keep an automatic demo.
 fil Wala pang naka-save na demo. Mag-record gamit ang console command na 'record <name>', o magtabi ng awtomatikong demo.
 
-@ Pause
-fil I-pause
-
 @ Paused
 fil Naka-pause
 
@@ -2994,41 +2988,20 @@ fil Quake - ine-export ang video {}%
 @ Recorded: {}
 fil Na-record: {}
 
-@ Rewind
-fil I-rewind
-
 @ Rewind {}x
 fil Pabalik {}x
 
 @ Size: {} KB
 fil Laki: {} KB
 
-@ Skip 10 s
-fil Laktawan ang 10 s
-
-@ Back 10 s
-fil Bumalik nang 10 s
-
 @ Length
 fil Haba
-
-@ Mark in
-fil Markahan ang simula
-
-@ Mark out
-fil Markahan ang dulo
-
-@ Next level
-fil Susunod na level
 
 @ No demos match the filter. Backspace or Esc clears it.
 fil Walang demo na tugma sa filter. Buburahin ito ng Backspace o Esc.
 
 @ Renaming an automatic demo moves it to the saved demos.
 fil Kapag pinalitan ang pangalan ng awtomatikong demo, malilipat ito sa mga naka-save na demo.
-
-@ Restart
-fil Ulitin
 
 @ Sort
 fil Ayusin
@@ -3038,9 +3011,6 @@ fil Habang may demo: A para i-pause, ang d-pad para mag-scrub at magbago ng bili
 
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 fil Space pause | Kaliwa/Kanan scrub | Taas/Baba bilis | PgUp/PgDn 10 s | I/O marka | E export
-
-@ Speed
-fil Bilis
 
 @ Switch List
 fil Palitan ang listahan

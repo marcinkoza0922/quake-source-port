@@ -2952,9 +2952,6 @@ fa پایان دمو
 @ Export Video
 fa خروجی ویدیو
 
-@ Fast forward
-fa جلو بردن سریع
-
 @ Fast forward {}x
 fa جلو {}x
 
@@ -2979,9 +2976,6 @@ fa هنوز دموی خودکاری نیست. هر مرحله‌ای که باز
 @ No saved demos yet. Record one with the console command 'record <name>', or keep an automatic demo.
 fa هنوز دموی ذخیره‌شده‌ای نیست. با فرمان کنسول 'record <name>' یکی ضبط کنید، یا یک دموی خودکار را نگه دارید.
 
-@ Pause
-fa مکث
-
 @ Paused
 fa متوقف
 
@@ -2994,41 +2988,20 @@ fa Quake - در حال خروجی گرفتن ویدیو {}٪
 @ Recorded: {}
 fa ضبط‌شده: {}
 
-@ Rewind
-fa برگرداندن
-
 @ Rewind {}x
 fa عقب {}x
 
 @ Size: {} KB
 fa اندازه: {} KB
 
-@ Skip 10 s
-fa پرش ۱۰ ثانیه
-
-@ Back 10 s
-fa عقب ۱۰ ثانیه
-
 @ Length
 fa مدت
-
-@ Mark in
-fa علامت شروع
-
-@ Mark out
-fa علامت پایان
-
-@ Next level
-fa مرحلهٔ بعد
 
 @ No demos match the filter. Backspace or Esc clears it.
 fa هیچ دمویی با فیلتر جور نیست. Backspace یا Esc آن را پاک می‌کند.
 
 @ Renaming an automatic demo moves it to the saved demos.
 fa تغییر نام دموی خودکار آن را به دموهای ذخیره‌شده منتقل می‌کند.
-
-@ Restart
-fa از اول
 
 @ Sort
 fa مرتب‌سازی
@@ -3038,9 +3011,6 @@ fa هنگام پخش دمو: A مکث می‌کند، دکمه‌های جهت �
 
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 fa Space مکث | چپ/راست جابه‌جایی | بالا/پایین سرعت | PgUp/PgDn ۱۰ ث | I/O نشانه | E خروجی
-
-@ Speed
-fa سرعت
 
 @ Switch List
 fa تعویض فهرست

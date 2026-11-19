@@ -2952,9 +2952,6 @@ ms Tamat demo
 @ Export Video
 ms Eksport video
 
-@ Fast forward
-ms Mara laju
-
 @ Fast forward {}x
 ms Mara {}x
 
@@ -2979,9 +2976,6 @@ ms Belum ada demo automatik. Setiap peringkat yang anda main dirakam di sini.
 @ No saved demos yet. Record one with the console command 'record <name>', or keep an automatic demo.
 ms Belum ada demo tersimpan. Rakam satu dengan arahan konsol 'record <name>', atau simpan demo automatik.
 
-@ Pause
-ms Jeda
-
 @ Paused
 ms Dijeda
 
@@ -2994,41 +2988,20 @@ ms Quake - mengeksport video {}%
 @ Recorded: {}
 ms Dirakam: {}
 
-@ Rewind
-ms Undur
-
 @ Rewind {}x
 ms Undur {}x
 
 @ Size: {} KB
 ms Saiz: {} KB
 
-@ Skip 10 s
-ms Langkau 10 s
-
-@ Back 10 s
-ms Undur 10 s
-
 @ Length
 ms Tempoh
-
-@ Mark in
-ms Tanda mula
-
-@ Mark out
-ms Tanda akhir
-
-@ Next level
-ms Tahap seterusnya
 
 @ No demos match the filter. Backspace or Esc clears it.
 ms Tiada demo sepadan dengan penapis. Backspace atau Esc mengosongkannya.
 
 @ Renaming an automatic demo moves it to the saved demos.
 ms Menamakan semula demo automatik memindahkannya ke demo yang disimpan.
-
-@ Restart
-ms Mula semula
 
 @ Sort
 ms Isih
@@ -3038,9 +3011,6 @@ ms Semasa demo dimainkan: A menjeda, d-pad menganjak dan menukar kelajuan, LT da
 
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 ms Ruang jeda | Kiri/Kanan anjak | Atas/Bawah kelajuan | PgUp/PgDn 10 s | I/O tanda | E eksport
-
-@ Speed
-ms Kelajuan
 
 @ Switch List
 ms Tukar senarai
